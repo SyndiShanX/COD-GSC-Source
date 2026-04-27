@@ -14,9 +14,6 @@
 
 ap_ch_main() {
   flag_init("game_type_challenge");
-
-  //CHALLENGES
-  //add_start( "challenge_tarmac_ggs",	::start_challenge_ggs, 	"[challenge 1] -> Airport Tarmac: Play as riotshield police" );
 }
 
 start_challenge_ggs() {

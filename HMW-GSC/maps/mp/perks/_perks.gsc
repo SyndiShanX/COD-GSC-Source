@@ -11,9 +11,6 @@ init() {
   precacheShader("h2_blastshield");
   precacheShader("ballistic_overlay");
 
-  //precacheItem( "onemanarmy_mp" );
-  //precacheItem( "flare_mp" );
-
   precacheModel("weapon_scavenger_grenadebag");
   precacheModel("weapon_light_stick_tactical_bombsquad");
 
@@ -314,12 +311,7 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   if(meansofdeath == "")
     return damage;
 
-  //if( isDefined( victim.inlaststand ) && victim.inlaststand )
-  //return 0;
-
   damageAdd = 0;
-
-  //print( "pre damage: " + damage );
 
   if(isPrimaryDamage(meansofdeath)) {
     assert(isDefined(attacker));
@@ -340,7 +332,7 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
       damageAdd += damage * level.explosiveDamageMod;
     else if(isDefined(victim.blastShielded))
       damageAdd -= damage * (level.blastShieldMod * -1);
-    else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) // is this needed?
+    else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod())
       damageAdd *= level.juggernautmod;
 
     if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose"))
@@ -377,8 +369,6 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
     }
   }
 
-  //print( "post damage: " + int( damage + damageAdd ) );	
-
   return int(damage + damageAdd);
 }
 
@@ -387,11 +377,11 @@ initperkdvars() {
     level.juggernatudefmod = 0.08;
     level.regenhealthmod = 0.25;
 
-    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
-    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
+    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100;
+    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100;
     level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
     level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
-    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
+    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100;
 
     cac_selector() {}
 
@@ -429,8 +419,7 @@ initperkdvars() {
       }
     }
 
-    get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
-    {
+    get_specialtydata(var_0, var_1, var_2) {
       var_3 = perktablelookupgroup(var_0);
       var_4 = perktablelookupcount(var_0);
 

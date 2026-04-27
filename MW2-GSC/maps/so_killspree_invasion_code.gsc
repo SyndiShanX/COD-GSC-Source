@@ -10,7 +10,6 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// --------------------------------------------------------------------------------- fire_off_exploder(current) {
 while(1) {
   exploder(current.script_prefab_exploder);
   if(!isDefined(current.target)) {
@@ -23,14 +22,10 @@ while(1) {
   current = next;
 }
 }
-
-// --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, flag_start, dialog_wait) {
 if(isDefined(flag_start)) {
   flag_init(flag_start);
   flag_wait(flag_start);
 }
-
-// Prevent smoke from happening too frequently
 if(isDefined(level.smoke_throttle)) {
   if(!isDefined(level.smoke_wave_time))
     level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
@@ -44,8 +39,6 @@ if(isDefined(level.smoke_throttle)) {
 
 magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
 array_thread(magic_smoke_grenades, ::smoke_wave_play);
-
-// Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
 if(isDefined(dialog_wait))
   thread dialog_smoke_wave_alert(dialog_wait);
 }
@@ -60,11 +53,8 @@ dialog_smoke_wave_alert(dialog_wait) {
 
   wait dialog_wait;
 
-  //Hunter Two-One, Overlord. Advise switching to thermal optics, over.
   radio_dialogue("so_def_inv_thermaloptics");
 }
-
-// --------------------------------------------------------------------------------- btr80_level_init() {
 if(isDefined(level.btr_init)) {
   return;
 }
@@ -93,7 +83,7 @@ for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
     case "player_inside_nates":
     case "player_in_burgertown":
     case "player_in_diner":
-      // Do nothing, keep in the list.
+
       break;
     default:
       level.btr80_building_checks[i] = undefined;
@@ -143,19 +133,17 @@ btr80_watch_for_player() {
     if(!btr80_can_see_player(player)) {
       continue;
     }
-    self notify("new_target"); // Clears ambient target shooting
+    self notify("new_target");
     self.turret_busy = true;
     self ent_flag_set("spotted_player");
-    player.btr80_attacker_id = self.unique_id; // Claim this player for myself.
+    player.btr80_attacker_id = self.unique_id;
     self Vehicle_SetSpeed(0, 10);
 
-    //saw player, now miss for 2 bursts
     btr80_miss_player(player);
     wait(randomfloatrange(0.8, 2.4));
     btr80_miss_player(player);
     wait(randomfloatrange(0.8, 2.4));
 
-    //if player is still exposed then hit him
     while(btr80_can_see_player(player)) {
       btr80_fire_at_player(player);
       wait(randomfloatrange(0.5, 1.5));
@@ -178,7 +166,7 @@ btr80_fire_at_player(player) {
   burstsize = randomintrange(3, 5);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32)); //randomvec was 50
+    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -187,7 +175,6 @@ btr80_fire_at_player(player) {
 btr80_miss_player(player) {
   self endon("death");
 
-  //point in front of player
   forward = anglesToForward(player.angles);
   forwardfar = vector_multiply(forward, 100);
   miss_vec = forwardfar + randomvector(50);
@@ -372,7 +359,7 @@ dialog_btr80_spotted_you_action() {
   if(!btr80_can_see_player(spotted_player)) {
     return;
   }
-  // Prevent btr80 dialog from happening too frequently
+
   if(isDefined(level.btr80_alert_throttle)) {
     if(!isDefined(level.btr80_alert_time))
       level.btr80_alert_time = gettime() - level.btr80_alert_throttle - 1;
@@ -384,12 +371,8 @@ dialog_btr80_spotted_you_action() {
     level.btr80_alert_time = gettime();
   }
 
-  //Enemy BTR has a visual on you, Hunter Two-One, advise seeking cover, over.
-  //Hunter Two-One, be advised enemy BTR is targetting you, over.
   radio_dialogue("so_def_inv_bmpspottedyou");
 }
-
-// --------------------------------------------------------------------------------- hunter_enemies_level_init() {
 if(isDefined(level.hunters_init)) {
   return;
 }
@@ -487,8 +470,6 @@ hunter_enemy_maintain_closest_goal() {
     closest_goal = getclosest(closest_player.origin, level.hunter_goals);
     if(!isDefined(self.current_goal) || (self.current_goal != closest_goal)) {
       waittillframeend;
-      //waittillframeend because you may be in the part of the frame that is before
-      //the script has received the "death" notify but after the AI has died.
 
       self.current_goal = closest_goal;
       self setgoalpos(self.current_goal.origin);
@@ -497,8 +478,6 @@ hunter_enemy_maintain_closest_goal() {
     wait 1.0;
   }
 }
-
-// This should be updated to be more like the one in so_defense_invasion
 hunter_enemies_refill(refill_at, min_fill, max_fill) {
   level endon("special_op_terminated");
 
@@ -510,7 +489,7 @@ hunter_enemies_refill(refill_at, min_fill, max_fill) {
     max_fill = min_fill + 1;
 
   used_smoke = false;
-  last_spawn = "gas"; // Level starts off with them coming from the gas station.
+  last_spawn = "gas";
   while(true) {
     if(!isDefined(level.hunters_active) || (level.hunters_active <= refill_at)) {
       spawn_options = [];
@@ -521,14 +500,12 @@ hunter_enemies_refill(refill_at, min_fill, max_fill) {
       if(!flag("so_player_near_taco"))
         spawn_options[spawn_options.size] = "taco";
 
-      // No "good" options, so just pick a random one.
       if(spawn_options.size <= 0) {
         spawn_options[spawn_options.size] = "bank";
         spawn_options[spawn_options.size] = "gas";
         spawn_options[spawn_options.size] = "taco";
       }
 
-      // Only try for a new option of we have more than one.
       i = 0;
       if(spawn_options.size > 1) {
         i = randomint(spawn_options.size);
@@ -566,7 +543,6 @@ hunter_enemies_refill(refill_at, min_fill, max_fill) {
       level waittill("hunter_group_spawn_complete");
     }
 
-    // Give it a moment before checking again.
     wait 1;
   }
 }
@@ -674,16 +650,14 @@ hunter_register_death_score(my_id, attacker, point_value, my_noteworthy, my_birt
   if(isDefined(self.vehicle_attacker) && attacker_is_p2(self.vehicle_attacker)) {
     thread pulse_kill_counter_hud(0, point_value);
   } else {
-    // Only needed for enemies spawning from the trucks. They aren't getting their killer
-    // passed on correctly and haven't been able to track down where they are getting killed from.
     if(!isDefined(my_noteworthy) || (my_noteworthy != "truck_group_enemies")) {
       return;
     }
-    // Only fudge for 25 seconds after spawning.
+
     if(!isDefined(my_birthtime) || (my_birthtime + 25000 <= gettime())) {
       return;
     }
-    // Grant it to whoever did at least 40 damage and got the most out of the two players.
+
     if((level.hunter_damage_p1[my_id] > 40) || (level.hunter_damage_p2[my_id] > 40)) {
       if(level.hunter_damage_p1[my_id] > level.hunter_damage_p2[my_id])
         thread pulse_kill_counter_hud(point_value, 0);
@@ -694,7 +668,6 @@ hunter_register_death_score(my_id, attacker, point_value, my_noteworthy, my_birt
 }
 
 dialog_hunter_enemies(enemy_tag, wait_time) {
-  // Prevent hunter spawn dialogs from happening too frequently
   if(isDefined(level.hunter_dialog_throttle)) {
     if(!isDefined(level.hunter_dialog_time))
       level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
@@ -719,29 +692,24 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
   if(!isDefined(level.dialog))
     level.dialog = [];
 
-  //Hunter Two-One this is Overlord Actual, we're seeing enemy reinforcements to your north, over.	
   level.dialog["bank_enemies"][0] = "inv_hqr_enemynorth";
-  //Be advised Hunter Two-One, you got enemy infantry by that bank to the north, over.	
+
   level.dialog["bank_enemies"][1] = "inv_hqr_banktonorth";
-  //Hunter Two-One, be advised, enemy foot-mobiles approaching north of your location, over.	
+
   level.dialog["bank_enemies"][2] = "inv_hqr_footmobiles";
 
-  //Hunter Two-One, Hunter Four has a visual on hostiles near the Nova gas station, over.	
   level.dialog["gas_station_enemies"][0] = "inv_hqr_novagasstation";
-  //Hunter Two-One, relay from Goliath Two, enemy reinforcements approaching from the west, over.	
+
   level.dialog["gas_station_enemies"][1] = "inv_hqr_enemywest";
-  //Hunter Two-One, tangos approaching near the diner to the west, over.	
+
   level.dialog["gas_station_enemies"][2] = "inv_hqr_dinerwest";
 
-  //Hunter Two-One, Overlord. Enemy foot-mobiles approaching you from the southeast, over.	
   level.dialog["taco_enemies"][0] = "inv_hqr_southeast";
-  //Hunter Two-One, Goliath One has a visual on hostiles coming from the southeast, over.	
+
   level.dialog["taco_enemies"][1] = "inv_hqr_visualse";
-  //Hunter Two-One, be advised, enemy foot-mobiles have been sighted near the taco joint, over.	
+
   level.dialog["taco_enemies"][2] = "inv_hqr_tacojoint";
 }
-
-// --------------------------------------------------------------------------------- hud_create_kill_counter() {
 level endon("special_op_failed");
 
 yline = 2;
@@ -866,8 +834,6 @@ hud_create_p2_counter() {
   hudelem thread so_remove_hud_item();
   hudelem_score thread so_remove_hud_item();
 }
-
-// CTW - Egads this is terrible.
 pulse_kill_counter_hud(points_p1, points_p2) {
   level endon("special_op_terminated");
 
@@ -887,7 +853,6 @@ pulse_kill_counter_hud(points_p1, points_p2) {
   level.points_p1 += points_p1;
   level.points_p2 += points_p2;
 
-  // Allow pulse requests to queue up, but if we've already got one active, then just add and get out.
   level.pulse_requests[level.pulse_requests.size] = points;
   level.pulse_requests_p1[level.pulse_requests_p1.size] = points_p1;
   level.pulse_requests_p2[level.pulse_requests_p2.size] = points_p2;
@@ -898,7 +863,6 @@ pulse_kill_counter_hud(points_p1, points_p2) {
     level.player playSound("arcademode_2x");
     level.points_counter_display -= level.pulse_requests[0];
 
-    // Don't do the VO except on the big updates.
     if(level.points_counter_display > 5999)
       thread so_dialog_counter_update(level.points_counter_display, level.points_max, level.hunter_kill_value);
 
@@ -960,8 +924,6 @@ pulse_purge_request() {
   level.pulse_requests_p1[level.pulse_requests_p1.size - 1] = undefined;
   level.pulse_requests_p2[level.pulse_requests_p2.size - 1] = undefined;
 }
-
-// This is not a good way to do this at all, but is good enough for a quick review.
 hud_create_kill_splash(points) {
   level endon("special_op_terminated");
 
@@ -998,7 +960,6 @@ hud_create_kill_splash(points) {
     self.points_combo_unused += combo_bonus;
   }
 
-  //	self.hud_kill_splash_points.label = hud_convert_to_points( self.hud_kill_splash_total );
   self.hud_kill_splash_points SetValue(self.hud_kill_splash_total);
   self.hud_kill_splash_points.alpha = 1;
 
@@ -1006,22 +967,16 @@ hud_create_kill_splash(points) {
   self.hud_kill_splash_msg.alpha = 1;
 
   if(isDefined(self.hud_kill_combo_total)) {
-    //		self.hud_kill_combo.label = "Combo x" + self.hud_kill_combo_total + "!"; // &SO_KILLSPREE_INVASION_SPLASH_COMBO
     self.hud_kill_combo SetValue(self.hud_kill_combo_total);
     self.hud_kill_combo.alpha = 1;
     self.hud_kill_combo.fontScale = 1.0 + (0.1 * self.hud_kill_combo_total);
     if(self.highest_combo < self.hud_kill_combo_total)
       self.highest_combo = self.hud_kill_combo_total;
 
-    //		self.hud_kill_combo_points.label = "Bonus: " + hud_convert_to_points( self.hud_combo_bonus );// &SO_KILLSPREE_INVASION_SPLASH_BONUS
-    self.hud_kill_combo_points SetValue(self.hud_combo_bonus); // &SO_KILLSPREE_INVASION_SPLASH_BONUS
+    self.hud_kill_combo_points SetValue(self.hud_combo_bonus);
     self.hud_kill_combo_points.alpha = 1;
   }
 
-  //	level waittill( "pulse_queue_processed" );
-
-  //	wait level.combo_time_window - 0.25;
-  // When reloading, give the player a little bit of extra time.
   timer = level.combo_time_window - 0.25;
   while(timer > 0) {
     wait 0.05;
@@ -1096,23 +1051,6 @@ hud_splash_kill_style(points, current_msg) {
 
 hud_convert_to_points(value) {
   return value;
-  /*	thousands = 0;
-  	if( value >= 1000 )
-  		thousands = int( value / 1000 );
-  	hundreds = value - ( thousands * 1000 );
-  	
-  	label = "";
-  	if( thousands > 0 )
-  	{
-  		label += thousands + ",";
-  		if( hundreds < 100 )
-  			label += "0";
-  		if( hundreds < 10 )
-  			label += "0";
-  	}
-  	label += hundreds;
-  	
-  	return label;*/
 }
 
 hud_create_kill_splash_default(player, message) {
@@ -1135,10 +1073,8 @@ hud_create_kill_splash_default(player, message) {
 
   return hudelem;
 }
-
-// --------------------------------------------------------------------------------- door_diner_open() {
 diner_back_door = getent("diner_back_door", "targetname");
-diner_back_door rotateyaw(85, .3); //counter clockwise
+diner_back_door rotateyaw(85, .3);
 diner_back_door playSound("diner_backdoor_slams_open");
 diner_back_door connectpaths();
 }
@@ -1156,5 +1092,3 @@ door_bt_locker_open() {
   BT_locker_door rotateyaw(-172, .1, 0, 0);
   BT_locker_door connectpaths();
 }
-
-// ---------------------------------------------------------------------------------

@@ -30,7 +30,7 @@ init_damage_feedback() {
   self.hud_damagefeedback.alpha = 0;
   self.hud_damagefeedback.archived = true;
   self.hud_damagefeedback setShader("damage_feedback", 24, 24 * 2);
-  self.hud_damagefeedback.y = 12; // aligns it to the center of the crosshair.
+  self.hud_damagefeedback.y = 12;
 }
 
 monitorDamage() {
@@ -65,9 +65,8 @@ updateDamageFeedback(attacked) {
     return;
   self playlocalsound("SP_hit_alert");
 
-  fadeTime = 1; //fade out crosshair damage indicator over this time
+  fadeTime = 1;
 
-  //If in slomo, fade out damage indicator faster (the value entered for the slomo time fraction
   if(isDefined(level.slowmo.speed_slow))
     fadeTime = level.slowmo.speed_slow;
 

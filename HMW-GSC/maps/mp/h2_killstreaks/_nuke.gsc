@@ -20,15 +20,13 @@ h2_nukeCountdown() {
 }
 
 init() {
-  //precacheItem( "nuke_mp" );
-  //precacheLocationSelector( "map_nuke_selector" );
   precacheShader("dpad_killstreak_nuke");
 
   level._effect["nuke_player"] = loadfx("fx/explosions/nuke_explosion");
   level._effect["nuke_flash"] = loadfx("fx/explosions/nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("fx/explosions/nuke_smoke_fill");
 
-  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE"; // is Manticore right now from AW
+  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE";
 
   level.killstreakFuncs["nuke_mp"] = ::tryUseNuke;
 
@@ -117,7 +115,6 @@ doNuke(allowCancel) {
   if(level.cancelMode && allowCancel)
     level thread cancelNukeOnDeath(self);
 
-  // leaks if lots of nukes are called due to endon above.
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
@@ -221,7 +218,6 @@ nukeSlowMo() {
       earthquake(0.6, 10, player.origin, 1000);
   }
 
-  //SetSlowMotion( <startTimescale>, <endTimescale>, <deltaTime> )
   setSlowMotion(1.0, 0.25, 0.5);
   level waittill("nuke_death");
   setSlowMotion(0.25, 1, 2.0);
@@ -274,12 +270,6 @@ nukeEarthquake() {
   level endon("nuke_cancelled");
 
   level waittill("nuke_death");
-
-  // TODO: need to get a different position to call this on
-  //earthquake( 0.6, 10, nukepos, 100000 );
-
-  //foreach( player in level.players )
-  //player PlayRumbleOnEntity( "damage_heavy" );
 }
 
 waitForNukeCancel() {

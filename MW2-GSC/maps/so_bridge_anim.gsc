@@ -16,7 +16,6 @@ main() {
 
 #using_animtree("generic_human");
 anim_human() {
-  // RAPPEL
   level.scr_anim["generic"]["fastrope_fall"] = % fastrope_fall;
   level.scr_anim["generic"]["bridge_rappel_L"] = % bridge_rappel_L;
   level.scr_anim["generic"]["bridge_rappel_R"] = % bridge_rappel_R;

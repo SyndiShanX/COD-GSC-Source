@@ -5,15 +5,6 @@
 
 #include maps\_utility;
 
-/*
-path_editmode = ""; //toggles value, edit or view default to view.
-path_select_next = ""; // selects next psourceposition;
-path_select_prev = ""; // selects prev psourceposition
-path_setview = "";// sets the view of the currently selected position.
-path_help ""; //prints to console some help text
-path_dump ""; //dumps view list to the console to be cut and pasted into script somewhere
-*/
-
 init() {
   flag_init("path_Notviewing");
   flag_init("path_refresh");
@@ -64,9 +55,8 @@ main() {
   level.path_viewindex = undefined;
   thread path_viewmode();
 
-  // this handles all of the dvar settings
   while(1) {
-    path_enable(); // pauses if not enabled.
+    path_enable();
     path_editmode_update();
     path_select_next();
     path_select_prev();
@@ -82,7 +72,7 @@ main() {
 
 path_enable() {
   if(getDvar("path_enable") != "1") {
-    flag_set("path_refresh"); // makes everything stop drawing.
+    flag_set("path_refresh");
     level.pathmod.alpha = 0;
   }
   path_waittill_enable();
@@ -308,15 +298,14 @@ path_setid() {
   if(getDvar("path_setid") == "")
     return;
   level.path_selectid = path_createid(getDvar("path_setid"));
-  level.path_selectindex = 0; // set current selection to first whenever it's changed
+  level.path_selectindex = 0;
 }
 
 path_setview() {
   if(getDvar("path_setview") == "")
     return;
   view = path_getcurrentview();
-  //add trigger stuff here
-  //check for trigger
+
   path_setvieworgang(view);
   setDvar("path_setview", "");
   flag_set("path_refresh");
@@ -339,7 +328,7 @@ path_dump() {
   println(" ");
   println(" ");
   println("--------******--------");
-  //	println (" photo source dump(paste these to your level script before maps\_load::main() ) ");
+
   println(" path dump");
   println("--------******--------");
   println(" ");
@@ -350,15 +339,14 @@ path_dump() {
     for(i = 0; i < level.path_views[ident].size; i++)
       println(level.path_views[ident][i].origin + "," + level.path_views[ident][i].angles);
   }
-  // todo: [level.path_selectid] list
-  //	println ("thread maps\\\_photosource::photosource_init();");
+
   for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
     for(i = 0; i < level.path_views[ident].size; i++) {
       println("maps\\\_createpath::path_create(\"" + level.path_views[ident][i].origin + "," + level.path_views[ident][i].angles + ");");
     }
   }
-  //	println ("thread maps\\\_photosource::photosource_main();");
+
   println(" ");
   println(" ");
   println(" ");
@@ -434,7 +422,6 @@ path_image_update() {
 }
 
 path_getcurrentview() {
-  //add trigger stuff here
   view = undefined;
   if(isDefined(level.path_views[level.path_selectid]) && isDefined(level.path_views[level.path_selectid][level.path_selectindex]))
     view = level.path_views[level.path_selectindex][level.path_selectid];
@@ -478,8 +465,6 @@ path_createid(ident) {
   level.paths_selectid_list[level.paths_selectid_list.size] = ident;
   return ident;
 }
-
-//use this in level file to initialize all the stuff.
 path_create(position, angle, ident) {
   if(!isDefined(ident))
     ident = "default";

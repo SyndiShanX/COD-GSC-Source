@@ -14,9 +14,6 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    //@NOTE: Should we make sure they're really unlocked before setting them? Catch cheaters...
-    //			e.g. isItemUnlocked( iconHandle )
-
     iconHandle = player maps\mp\gametypes\_persistence::statGet("cardIcon");
     player SetCardIcon(iconHandle);
 

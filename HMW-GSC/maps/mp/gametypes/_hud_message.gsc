@@ -389,7 +389,6 @@ deathstreaksplashnotify(perk) {
     if(getDvarInt("scr_lua_splashes")) {
       index = int(tablelookup("mp/statsTable.csv", 4, perk, 0));
       if(index >= 0) {
-        //print( "deathstreaksplashnotify:", perk, " (", index, ")" );
         self setClientOmnvar("ui_splash_deathstreak_time", getTime());
         self setClientOmnvar("ui_splash_deathstreak_idx", index);
       }
@@ -421,7 +420,6 @@ stucksplashnotify(isVictim) {
   if(getDvarInt("scr_lua_splashes")) {
     index = int(tablelookuprownum("mp/splashTable.csv", 0, ref));
     if(index >= 0) {
-      //print( "stucksplashnotify:", " (", ref, ")" );
       self setClientOmnvar("ui_splash_stuck_time", getTime());
       self setClientOmnvar("ui_splash_stuck_idx", index);
     }
@@ -451,7 +449,6 @@ challengesplashnotify(challengeRef, originalState, newState) {
       ref = tablelookup("mp/allChallengesTable.csv", 0, challengeRef, 28);
 
       if(ref != "") {
-        //print( "challengesplashnotify:", challengeRef );
         intRef = int(ref);
         self luinotifyevent(&"challenge_splash", 3, intRef, state, target);
         self _meth_8579(&"challenge_splash", 3, intRef, state, target);
@@ -474,7 +471,6 @@ challengesplashnotify(challengeRef, originalState, newState) {
 
 medalsplashnotify(splashRef) {
   if(getdvarint("scr_lua_splashes")) {
-    //print( "medalsplashnotify:", splashRef );
     index = tablelookuprownum("mp/splashTable.csv", 0, splashRef);
 
     if(index >= 0) {
@@ -492,7 +488,6 @@ splashnotify(splash, optionalNumber, optionalKillstreakSlot) {
     return;
   }
   if(getdvarint("scr_lua_splashes")) {
-    //print( "splashnotify:", splash );
     var_3 = tablelookuprownum("mp/splashTable.csv", 0, splash);
 
     if(var_3 >= 0) {
@@ -541,7 +536,7 @@ rankupsplashnotify(var_0, var_1, var_2) {
   }
   if(getdvarint("scr_lua_splashes")) {
     var_3 = tablelookuprownum("mp/splashTable.csv", 0, var_0);
-    //print( "rankupsplashnotify:", var_0 );
+
     if(var_3 >= 0) {
       self luinotifyevent(&"rankup_splash", 3, var_3, var_1, var_2);
       self _meth_8579(&"rankup_splash", 3, var_3, var_1, var_2);
@@ -575,7 +570,6 @@ playerCardSplashNotify(splashRef, player, optionalNumber) {
   if(getDvarInt("scr_lua_splashes")) {
     index = tablelookuprownum("mp/splashTable.csv", 0, splashRef);
     if(index >= 0) {
-      //print( "playerCardSplashNotify:", splashRef );
       self setClientOmnvar("ui_splash_playercard_time", getTime());
       self setClientOmnvar("ui_splash_playercard_clientnum", player getEntityNumber());
       self setClientOmnvar("ui_splash_playercard_idx", index);
@@ -759,7 +753,7 @@ actionNotifyMessage(actionData) {
     self notify("actionNotifyMessage" + slot);
     self endon("actionNotifyMessage" + slot);
 
-    wait(duration + 0.5); // wait the duration but put a buffer in between each splash
+    wait(duration + 0.5);
 
     self.doingSplash[slot] = undefined;
   }

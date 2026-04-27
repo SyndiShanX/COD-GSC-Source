@@ -3,14 +3,6 @@
  * Script: aitype\enemy_airborne_riotshield.gsc
 ********************************************************/
 
-/*QUAKED actor_enemy_airborne_riotshield (1.0 0.25 0.0) (-16 -16 0) (16 16 72) SPAWNER FORCESPAWN UNDELETABLE PERFECTENEMYINFO DONTSHAREENEMYINFO
-defaultmdl="body_riot_op_airborne""count" -- max AI to ever spawn from this spawner
-SPAWNER -- makes this a spawner instead of a guy
-FORCESPAWN -- will try to delete an AI if spawning fails from too many AI
-UNDELETABLE -- this AI (or AI spawned from here) cannot be deleted to make room for FORCESPAWN guys
-PERFECTENEMYINFO -- this AI when spawned will get a snapshot of perfect info about all enemies
-DONTSHAREENEMYINFO -- do not get shared info about enemies at spawn time from teammates
-*/
 main() {
   self.animTree = "";
   self.additionalAssets = "riotshield.csv";
@@ -53,6 +45,3 @@ precache() {
     precacheItem("riotshield");
     precacheItem("usp");
     precacheItem("fraggrenade");
-
-    //---------------- maps\_riotshield::init_riotshield();
-    //---------------- }

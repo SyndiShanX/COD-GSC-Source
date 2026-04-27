@@ -6,10 +6,9 @@
 #include maps\_ambient;
 
 main() {
-  // Set the underlying ambient track
   level.ambient_track["favela_escape_ext0"] = "ambient_favela_escape_ext0";
 
-  ambientDelay("favela_escape_ext0", 7.0, 20.0); // Trackname, min and max delay between ambient events
+  ambientDelay("favela_escape_ext0", 7.0, 20.0);
   ambientEvent("favela_escape_ext0", "elm_windgust1", 3.0);
   ambientEvent("favela_escape_ext0", "elm_windgust2", 3.0);
   ambientEvent("favela_escape_ext0", "elm_windgust3", 3.0);

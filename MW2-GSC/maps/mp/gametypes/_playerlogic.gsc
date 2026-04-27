@@ -11,20 +11,17 @@ TimeUntilWavespawn(minimumWait) {
   if(!self.hasSpawned)
     return 0;
 
-  // the time we'll spawn if we only wait the minimum wait.
   earliestSpawnTime = gettime() + minimumWait * 1000;
 
   lastWaveTime = level.lastWave[self.pers["team"]];
   waveDelay = level.waveDelay[self.pers["team"]] * 1000;
 
-  // the number of waves that will have passed since the last wave happened, when the minimum wait is over.
   numWavesPassedEarliestSpawnTime = (earliestSpawnTime - lastWaveTime) / waveDelay;
-  // rounded up
+
   numWaves = ceil(numWavesPassedEarliestSpawnTime);
 
   timeOfSpawn = lastWaveTime + numWaves * waveDelay;
 
-  // don't push our spawn out because we watched killcam
   if(isDefined(self.respawnTimerStartTime)) {
     timeAlreadyPassed = (gettime() - self.respawnTimerStartTime) / 1000.0;
 
@@ -32,7 +29,6 @@ TimeUntilWavespawn(minimumWait) {
       return 0;
   }
 
-  // avoid spawning everyone on the same frame
   if(isDefined(self.waveSpawnIndex))
     timeOfSpawn += 50 * self.waveSpawnIndex;
 
@@ -71,7 +67,6 @@ TimeUntilspawn(includeTeamkillDelay) {
         respawnDelay = 0;
     }
 
-    // Spawning with tactical insertion
     if(isDefined(self.setSpawnPoint))
       respawnDelay += level.tiSpawnDelay;
   }
@@ -95,7 +90,6 @@ mayspawn() {
     if(!self.pers["lives"] && gameHasStarted()) {
       return false;
     } else if(gameHasStarted()) {
-      // disallow spawning for late comers
       if(!level.inGracePeriod && !self.hasSpawned)
         return false;
     }
@@ -167,7 +161,6 @@ waitAndSpawnClient() {
     self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
   }
 
-  // for missiles, helicopters, ac130, etc...
   if(self isUsingRemote()) {
     self waittill("stopped_using_remote");
   }
@@ -182,7 +175,6 @@ waitAndSpawnClient() {
   self thread predictAboutToSpawnPlayerOverTime(timeUntilSpawn);
 
   if(timeUntilSpawn > 0) {
-    // spawn player into spectator on death during respawn delay, if he switches teams during this time, he will respawn next round
     setLowerMessage("spawn_info", game["strings"]["waiting_to_spawn"], timeUntilSpawn);
 
     if(!spawnedAsSpectator)
@@ -204,8 +196,6 @@ waitAndSpawnClient() {
 
     self waitRespawnButton();
   }
-
-  // do not wait after this point
 
   self.waitingToSpawn = false;
 
@@ -233,7 +223,7 @@ removeSpawnMessageShortly(delay) {
   self endon("disconnect");
   level endon("game_ended");
 
-  waittillframeend; // so we don't endon the end_respawn from spawning as a spectator
+  waittillframeend;
 
   self endon("end_respawn");
 
@@ -256,7 +246,6 @@ lastStandRespawnPlayer() {
 
   self notify("revive");
 
-  // should only be defined if level.diehardmode
   if(isDefined(self.standardmaxHealth))
     self.maxHealth = self.standardMaxHealth;
 
@@ -265,7 +254,7 @@ lastStandRespawnPlayer() {
 
   if(game["state"] == "postgame") {
     assert(!level.intermission);
-    // We're in the victory screen, but before intermission
+
     self maps\mp\gametypes\_gamelogic::freezePlayerForRoundEnd();
   }
 }
@@ -292,9 +281,9 @@ predictAboutToSpawnPlayerOverTime(preduration) {
   self notify("predicting_about_to_spawn_player");
   self endon("predicting_about_to_spawn_player");
 
-  if(preduration <= 0)
-    return; // no point predicting if no time will pass. (if time until spawn is unknown, use 0.1)
-
+  if(preduration <= 0) {
+    return;
+  }
   if(preduration > 1.0)
     wait preduration - 1.0;
 
@@ -304,7 +293,7 @@ predictAboutToSpawnPlayerOverTime(preduration) {
   self.predictedSpawnPointTime = gettime();
 
   for(i = 0; i < 30; i++) {
-    wait .4; // this time is carefully selected: we want it as long as possible, but we want the loop to iterate about .1 to .3 seconds before people spawn for our final check
+    wait .4;
 
     prevPredictedSpawnPoint = self.predictedSpawnPoint;
     self predictAboutToSpawnPlayer();
@@ -318,8 +307,6 @@ predictAboutToSpawnPlayerOverTime(preduration) {
 
 predictAboutToSpawnPlayer() {
   assert(!isReallyAlive(self));
-
-  // test predicting spawnpoints to see if we can eliminate streaming pops
 
   if(self TimeUntilspawn(true) > 1.0) {
     spawnpointname = "mp_global_intermission";
@@ -552,13 +539,11 @@ spawnPlayer() {
   self setDepthOfField(0, 0, 512, 512, 4, 0);
   self setClientDvar("cg_fov", "65");
 
-  // Don't do this stuff for TI spawn points	
   if(isDefined(spawnPoint)) {
     self maps\mp\gametypes\_spawnlogic::finalizeSpawnpointChoice(spawnpoint);
     spawnOrigin = getSpawnOrigin(spawnpoint);
     spawnAngles = spawnpoint.angles;
   } else {
-    // the only useful part of finalizeSpawnpointChoice() when using tactical insertion
     self.lastSpawnTime = getTime();
   }
 
@@ -567,7 +552,6 @@ spawnPlayer() {
   self spawn(spawnOrigin, spawnAngles);
   [[level.onSpawnPlayer]]();
 
-  // Don't do this stuff for TI spawn points	
   if(isDefined(spawnPoint))
     self checkPredictedSpawnpointCorrectness(spawnPoint.origin);
 
@@ -611,10 +595,6 @@ spawnPlayer() {
 
   prof_end("spawnPlayer_postUTS");
 
-  //self logstring( "S " + self.origin[0] + " " + self.origin[1] + " " + self.origin[2] );
-
-  // give "connected" handlers a chance to start
-  // many of these start onPlayerSpawned handlers which rely on the "spawned_player"// notify which can happen on the same frame as the "connected" notify
   waittillframeend;
 
   self notify("spawned_player");
@@ -622,7 +602,7 @@ spawnPlayer() {
 
   if(game["state"] == "postgame") {
     assert(!level.intermission);
-    // We're in the victory screen, but before intermission
+
     self maps\mp\gametypes\_gamelogic::freezePlayerForRoundEnd();
   }
 }
@@ -663,17 +643,12 @@ spawnSpectator(origin, angles) {
   self notify("end_respawn");
   in_spawnSpectator(origin, angles);
 }
-
-// spawnSpectator clone without notifies for spawning between respawn delays
 respawn_asSpectator(origin, angles) {
   in_spawnSpectator(origin, angles);
 }
-
-// spawnSpectator helper
 in_spawnSpectator(origin, angles) {
   self setSpawnVariables();
 
-  // don't clear lower message if not actually a spectator, // because it probably has important information like when we'll spawn
   if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator" && !level.gameEnded)
     self clearLowerMessage("spawn_info");
 
@@ -817,7 +792,6 @@ spawnEndOfGame() {
 
   spawnPoint setModel("tag_origin");
 
-  //self playerLinkTo( spawnPoint, "tag_origin", (0,0,0), spawnPoint.angles );
   self playerLinkTo(spawnPoint);
 
   self PlayerHide();
@@ -827,7 +801,6 @@ spawnEndOfGame() {
 }
 
 setSpawnVariables() {
-  // Stop shellshock and rumble
   self StopShellshock();
   self StopRumble("damage_heavy");
 }
@@ -847,9 +820,6 @@ Callback_PlayerDisconnect() {
 
   if(!level.teamBased)
     game["roundsWon"][self.guid] = undefined;
-
-  //if( !level.gameEnded )
-  //	self logXPGains();
 
   if(level.splitscreen) {
     players = level.players;
@@ -954,7 +924,6 @@ Callback_PlayerConnect() {
   if(self isHost())
     level.player = self;
 
-  // only print that we connected if we haven't connected in a previous round
   if(!level.splitscreen && !isDefined(self.pers["score"]))
     iPrintLn(&"MP_CONNECTED", self);
 
@@ -987,7 +956,7 @@ Callback_PlayerConnect() {
       self.sessionteam = maps\mp\gametypes\_menus::getTeamAssignment();
 
     assert(getdvarint("scr_runlevelandquit") == 1 || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
-    //assert( (level.teamBased && self.sessionteam == self.team) || (!level.teamBased && self.sessionteam == "none") );
+
     setMatchData("players", self.clientid, "team", self.sessionteam);
   }
 
@@ -1033,8 +1002,6 @@ Callback_PlayerConnect() {
 
   self thread maps\mp\_flashgrenades::monitorFlash();
 
-  // give any threads waiting on the "connected" notify a chance to process before we are added to level.players
-  // this should ensure that all . variables on the player are correctly initialized by this point
   waittillframeend;
 
   foreach(player in level.players)
@@ -1045,7 +1012,6 @@ Callback_PlayerConnect() {
   if(level.teambased)
     self updateScores();
 
-  // When joining a game in progress, if the game is at the post game state (scoreboard) the connecting player should spawn into intermission
   if(game["state"] == "postgame") {
     self.connectedPostGame = true;
 
@@ -1068,7 +1034,6 @@ Callback_PlayerConnect() {
     self.team = undefined;
   }
 
-  // only give a loss on the first connect
   if(firstConnect)
     maps\mp\gametypes\_gamelogic::updateLossStats(self);
 
@@ -1077,7 +1042,6 @@ Callback_PlayerConnect() {
   if(isDefined(level.hostMigrationTimer))
     self thread maps\mp\gametypes\_hostmigration::hostMigrationTimerThink();
 
-  // first connect only
   if(!isDefined(self.pers["team"])) {
     if(matchMakingGame()) {
       self thread spawnSpectator();
@@ -1125,8 +1089,7 @@ Callback_PlayerMigrated() {
   }
 }
 
-AddLevelsToExperience(experience, levels) // lets you add "1500 experience + 1.5 levels" and returns the result in experience
-{
+AddLevelsToExperience(experience, levels) {
   rank = maps\mp\gametypes\_rank::getRankForXp(experience);
 
   minXP = maps\mp\gametypes\_rank::getRankInfoMinXp(rank);
@@ -1169,7 +1132,7 @@ setRestXPGoal() {
 
   experience = self getPlayerData("experience");
 
-  minRestXPTime = getDvarFloat("scr_restxp_minRestTime"); // hours
+  minRestXPTime = getDvarFloat("scr_restxp_minRestTime");
   restXPGainRate = getDvarFloat("scr_restxp_levelsPerDay") / 24.0;
   restXPCap = GetRestXPCap(experience);
 
@@ -1354,7 +1317,6 @@ removeFromLivesCount() {
   assert(isPlayer(self));
   level.livesCount[self.team]--;
 
-  // defensive, but we need to allow players to die/respawn when they're the only player in an offline game
   level.livesCount[self.team] = int(max(0, level.livesCount[self.team]));
 }
 
@@ -1362,6 +1324,5 @@ removeAllFromLivesCount() {
   assert(isPlayer(self));
   level.livesCount[self.team] -= self.pers["lives"];
 
-  // defensive, but we need to allow players to die/respawn when they're the only player in an offline game
   level.livesCount[self.team] = int(max(0, level.livesCount[self.team]));
 }

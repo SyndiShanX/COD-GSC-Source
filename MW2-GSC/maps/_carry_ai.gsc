@@ -20,10 +20,7 @@ anims() {
 
   level.scr_anim["generic"]["wounded_walk_loop"][0] = % wounded_carry_fastwalk_wounded_relative;
   level.scr_anim["generic"]["carrier_walk_loop"] = % wounded_carry_fastwalk_carrier;
-  /*
-  level.scr_anim[ "generic" ][ "wounded_walk_loop" ][ 0 ]			= %wounded_carry_sprint_wounded;
-  level.scr_anim[ "generic" ][ "carrier_walk_loop" ]		 		= %wounded_carry_sprint_carrier;
-  */
+
   level.scr_anim["generic"]["putdown_wounded"] = % wounded_carry_putdown_closet_wounded;
   level.scr_anim["generic"]["putdown_carrier"] = % wounded_carry_putdown_closet_carrier;
 }
@@ -35,7 +32,6 @@ setWounded(eNode) {
 
   self animscripts\shared::DropAIWeapon();
 
-  // make the president go into his wounded idle
   self.woundedNode = eNode;
   self.woundedNode thread anim_generic_loop(self, "wounded_idle", "stop_wounded_idle");
   self.allowdeath = true;
@@ -53,8 +49,7 @@ move_president_to_node_nopickup(wounded, eNode) {
 
 goto_and_pickup_wounded(wounded, eNode) {
   # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  // don't use this, internal only
-  // use move_president_to_node()
+
   # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   assert(isDefined(self));
@@ -66,10 +61,8 @@ goto_and_pickup_wounded(wounded, eNode) {
   assert(isDefined(eNode));
   assert(isDefined(wounded.woundedNode));
 
-  // get the carrier to the president
   wounded.woundedNode anim_generic_reach(self, "pickup_carrier");
 
-  // carrier picks up the president, they both play the pickup anim
   wounded notify("stop_wounded_idle");
   wounded.woundedNode notify("stop_wounded_idle");
   wounded.allowdeath = true;
@@ -86,15 +79,13 @@ link_wounded(wounded) {
 
   wounded linkto(self, "tag_origin");
 
-  // wait for carrier to get a path and start move script
   wait 0.05;
   wounded thread anim_generic_loop(wounded, "wounded_walk_loop", "stop_carried_loop");
 }
 
 carry_to_and_putdown_wounded(wounded, eNode) {
   # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  // don't use this, internal only
-  // use move_president_to_node()
+
   # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
   assert(isDefined(self));
@@ -107,13 +98,10 @@ carry_to_and_putdown_wounded(wounded, eNode) {
 
   wounded.being_carried = true;
 
-  // once the carrier arrives set his walk anim to the carry walk
   self thread set_generic_run_anim("carrier_walk_loop", true);
 
   wounded notify("stop_wounded_idle");
   wounded.woundedNode notify("stop_wounded_idle");
-
-  // president gets linked to the carrier and plays a loop anim
 
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   self animmode("none");
@@ -148,10 +136,8 @@ carry_to_and_putdown_wounded(wounded, eNode) {
     eNode = goal;
   }
 
-  // carrier walks to the new node for putdown anim
   eNode anim_generic_reach(self, "putdown_carrier");
 
-  // carrier arrives, put down the president. They both play putdown anim
   wounded.woundedNode = eNode;
   wounded notify("stop_carried_loop");
   wounded unlink();
@@ -168,7 +154,7 @@ carry_to_and_putdown_wounded(wounded, eNode) {
   self.allowpain = true;
   self.disableBulletWhizbyReaction = false;
   self.ignoreall = false;
-  //self.ignoreme = false;
+
   self.grenadeawareness = 1;
   self setFlashbangImmunity(false);
   self.dontMelee = undefined;

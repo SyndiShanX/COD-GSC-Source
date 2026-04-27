@@ -32,20 +32,16 @@ generic_human() {
   level.scr_anim["generic"]["casual_killer_flinch"] = % casual_killer_flinch;
   level.scr_anim["generic"]["casual_killer_weapon_swap"] = % casual_killer_walk_F_weapon_swap;
 
-  // SIGNALS
   level.scr_anim["generic"]["stand_exposed_wave_move_out"] = % stand_exposed_wave_move_out;
   level.scr_anim["generic"]["stand_exposed_wave_halt_v2"] = % stand_exposed_wave_halt_v2;
   level.scr_anim["generic"]["CornerStndR_alert_signal_move_out"] = % CornerStndR_alert_signal_move_out;
   level.scr_anim["generic"]["CornerStndR_alert_signal_stopstay_down"] = % CornerStndR_alert_signal_stopstay_down;
   level.scr_anim["generic"]["CornerStndR_alert_signal_enemy_spotted"] = % CornerStndR_alert_signal_enemy_spotted;
 
-  // ELEVATOR SCENE
   level.scr_anim["shotgun"]["elevator_scene"] = % airport_elevator_sequence_guy1;
   level.scr_anim["makarov"]["elevator_scene"] = % airport_elevator_sequence_guy2;
   level.scr_anim["saw"]["elevator_scene"] = % airport_elevator_sequence_guy3;
   level.scr_anim["m4"]["elevator_scene"] = % airport_elevator_sequence_guy4;
-  //addNotetrack_dialogue( "shotgun", "airport_at1_nosurv_ps", "elevator_scene", "airport_at1_nosurv" );
-  //addNotetrack_dialogue( "makarov", "airport_mkv_noruss_ps", "elevator_scene", "airport_mkv_noruss" );
 
   level.scr_anim["generic"]["makarov_elevator_reload"] = % stand_2_melee_1;
   level.scr_anim["generic"]["m4_elevator_reload"] = % exposed_reloadb;
@@ -55,7 +51,6 @@ generic_human() {
   level.scr_anim["generic"]["m4_elevator_idle"][0] = % corner_standL_alert_idle;
   level.scr_anim["generic"]["shotgun_elevator_idle"][0] = % corner_standR_alert_idle;
 
-  //LOBBY SCENE
   level.scr_anim["generic"]["civilian_texting_standing"][0] = % civilian_texting_standing;
   level.scr_anim["generic"]["civilian_atm"][0] = % civilian_atm;
   level.scr_anim["generic"]["civilian_stand_idle"][0] = % civilian_stand_idle;
@@ -108,11 +103,9 @@ generic_human() {
   level.scr_anim["generic"]["stairs_up_weights"][0] = 3;
   level.scr_anim["generic"]["stairs_up_weights"][1] = 1;
 
-  //RIOTSHIELD BEHAVIOR
   level.scr_anim["generic"]["riotshield_run"] = % riotshield_run_F;
   level.scr_anim["generic"]["riotshield_sprint"] = % riotshield_sprint;
 
-  //CASUAL KILLER
   level.scr_anim["generic"]["casual_killer_jog_A"] = % casual_killer_jog_A;
   level.scr_anim["generic"]["casual_killer_jog_B"] = % casual_killer_jog_B;
 
@@ -122,21 +115,15 @@ generic_human() {
   level.scr_anim["generic"]["casual_killer_walk_R"] = % casual_killer_walk_R;
   level.scr_anim["generic"]["casual_killer_walk_L"] = % casual_killer_walk_L;
 
-  //casual_killer_walk_shoot_F_aimdown
-  //casual_killer_walk_shoot_L_aimdown
-  //casual_killer_walk_shoot_R_aimdown
-
-  //CASUAL DYNAMIC RUN SPEED	
   level.scr_anim["generic"]["DRS_sprint"] = undefined;
   level.scr_anim["generic"]["DRS_sprint"][0] = % casual_killer_jog_B;
   level.scr_anim["generic"]["DRS_sprint"][1] = % casual_killer_jog_A;
   level.scr_anim["generic"]["DRS_run"] = undefined;
   level.scr_anim["generic"]["DRS_combat_jog"] = undefined;
-  level.scr_anim["generic"]["DRS_run_2_stop"] = % patrol_bored_walk_2_bored; // run_2_stand_F_6;
+  level.scr_anim["generic"]["DRS_run_2_stop"] = % patrol_bored_walk_2_bored;
   level.scr_anim["generic"]["DRS_stop_idle"][0] = % patrol_bored_idle;
   level.scr_anim["generic"]["signal_go"] = undefined;
 
-  //SECURITY GUARD DESK
   level.scr_anim["generic"]["airport_security_guard_2"] = % airport_security_guard_2;
   addNotetrack_customFunction("generic", "bodyshot", ::kill_guy, "airport_security_guard_2");
   level.scr_anim["generic"]["airport_security_guard_3"] = % airport_security_guard_3;
@@ -144,7 +131,6 @@ generic_human() {
   level.scr_anim["generic"]["airport_security_guard_4"] = % airport_security_guard_4;
   addNotetrack_customFunction("generic", "headshot", ::kill_guy, "airport_security_guard_4");
 
-  //DEAD BODIES
   level.scr_anim["generic"]["corner_standR_death_grenade_explode"] = % corner_standR_death_grenade_explode;
   level.scr_anim["generic"]["dying_crawl_death_v3"] = % dying_crawl_death_v3;
   level.scr_anim["generic"]["run_death_facedown"] = % run_death_facedown;
@@ -152,7 +138,6 @@ generic_human() {
   level.scr_anim["generic"]["coverstand_death_right"] = % coverstand_death_right;
   level.scr_anim["generic"]["covercrouch_death_3"] = % covercrouch_death_3;
 
-  //BACK LOBBY							
   level.scr_anim["generic"]["civ_run_array"][0] = % civilian_run_hunched_A;
   level.scr_anim["generic"]["civ_run_array"][1] = % civilian_run_hunched_C;
   level.scr_anim["generic"]["civ_run_array"][2] = % civilian_run_hunched_flinch;
@@ -187,13 +172,12 @@ generic_human() {
   level.scr_anim["generic"]["melee_f_awin_attack"] = % melee_f_awin_attack;
   level.scr_anim["generic"]["melee_f_awin_defend"] = % melee_f_awin_defend;
   addNotetrack_customFunction("generic", "sync", ::allowdeath_off, "melee_f_awin_defend");
-  //	addNotetrack_customFunction( "generic", "bodyfall large", :: allowdeath_on, "melee_f_awin_defend" );
+
   addNotetrack_customFunction("generic", "bodyfall large", ::allowdeath_off_wait, "melee_f_awin_defend");
 
   level.scr_anim["generic"]["cliffhanger_Price_intro_idle"][0] = % cliffhanger_Price_intro_idle;
   level.scr_anim["generic"]["crawl_death_front"] = % crawl_death_front;
 
-  //STAIRS
   level.scr_anim["generic"]["run_react_180"] = % run_reaction_180;
   level.scr_anim["generic"]["run_turn_180"] = % run_turn_180;
   level.scr_anim["generic"]["airport_civ_fear_drop_5"] = % airport_civ_fear_drop_5;
@@ -212,7 +196,6 @@ generic_human() {
   level.scr_anim["generic"]["unarmed_cowerstand_react_2_crouch"] = % unarmed_cowerstand_react_2_crouch;
   level.scr_anim["generic"]["airport_civ_cower_piller_idle"][0] = % airport_civ_cower_piller_idle;
 
-  //UPPERDECK
   level.scr_anim["generic"]["DC_Burning_bunker_stumble"] = % DC_Burning_bunker_stumble;
   level.scr_anim["generic"]["DC_Burning_bunker_sit_idle"][0] = % DC_Burning_bunker_sit_idle;
   level.scr_anim["generic"]["DC_Burning_bunker_react"] = % DC_Burning_bunker_react;
@@ -249,7 +232,6 @@ generic_human() {
   level.scr_anim["crawl_death_2"]["death"][1] = % civilian_crawl_2_death_B;
   level.scr_anim["crawl_death_2"]["blood_fx_rate"] = .25;
 
-  //MASSACRE
   level.scr_anim["generic"]["corner_standR_alert_idle"][0] = % corner_standR_alert_idle;
   level.scr_anim["generic"]["corner_standR_trans_IN_2"] = % corner_standR_trans_IN_2;
   level.scr_anim["generic"]["corner_standR_trans_IN_1"] = % corner_standR_trans_IN_1;
@@ -329,13 +311,11 @@ generic_human() {
   level.scr_anim["generic"]["CornerCrR_alert_idle"][0] = % CornerCrR_alert_idle;
   level.scr_anim["generic"]["CornerCrR_alert_first_frame"] = % CornerCrR_alert_idle;
 
-  //GATE
   level.scr_anim["generic"]["civilian_run_hunched_turnR90_slide"] = % civilian_run_hunched_turnR90_slide;
   level.scr_anim["generic"]["airport_civilian_run_turnR_90"] = % airport_civilian_run_turnR_90;
   level.scr_anim["generic"]["civilian_run_hunched_A"] = % civilian_run_hunched_A;
   level.scr_anim["generic"]["civilian_run_hunched_C"] = % civilian_run_hunched_C;
 
-  //BASEMENT
   level.scr_anim["generic"]["doorkick_basement"] = % doorkick_2_cqbwalk;
   addNotetrack_customFunction("generic", "kick", ::doorkick_basement, "doorkick_basement");
 
@@ -345,8 +325,6 @@ generic_human() {
   addNotetrack_customFunction("generic", "kick", ::doorkick_escape, "doorkick_escape");
   level.scr_anim["generic"]["bog_a_start_briefing"] = % bog_a_start_briefing;
   level.scr_anim["generic"]["bog_b_guard_react"] = % bog_b_guard_react;
-
-  //TARMAC
 
   level.scr_anim["generic"]["pistol_sprint"] = % pistol_sprint;
   level.scr_anim["generic"]["pistol_walk_left"] = % pistol_walk_left;
@@ -377,7 +355,6 @@ generic_human() {
 
   level.scr_anim["generic"]["traverse_stepup_52"] = % traverse_stepup_52;
 
-  //ENDING
   level.scr_anim["generic"]["patrol_bored_walk_2_bored"] = % patrol_bored_walk_2_bored;
   level.scr_anim["generic"]["patrol_bored_2_walk"] = % patrol_bored_2_walk;
   level.scr_anim["generic"]["patrol_bored_idle"][0] = % patrol_bored_idle;
@@ -386,7 +363,7 @@ generic_human() {
   level.scr_anim["van_mate"]["end_ride_in"][0] = % airport_ending_start_soldierB;
   level.scr_anim["comrad"]["end_get_in"] = % airport_ending_climbin_soldierA;
   level.scr_anim["van_mate"]["end_get_in"] = % airport_ending_climbin_soldierB;
-  //addNotetrack_dialogue( "van_mate", "dialog", "end_get_in", "airport_vt_madeit" );
+
   addNotetrack_flag("van_mate", "dialog", "end_get_in_the_van", "end_get_in");
   level.scr_anim["makarov"]["end_get_in"] = % airport_ending_climbin_makarov;
   addNotetrack_customFunction("makarov", "lookat on", ::lookat_on, "end_get_in");
@@ -415,7 +392,7 @@ generic_human() {
   addNotetrack_attach("makarov", "pistol_pickup", getWeaponModel("beretta"), "TAG_INHAND", "end_player_shot");
 
   level.scr_anim["van_mate"]["end_player_shot"] = % airport_ending_mid_soldierB;
-  //addNotetrack_dialogue( "van_mate", "dialog", "end_player_shot", "airport_vt_beenough" );
+
   level.scr_anim["makarov"]["end_drive_away"] = % airport_ending_end_makarov;
   addNotetrack_customFunction("makarov", "lookat off", ::lookat_off, "end_drive_away");
 
@@ -460,69 +437,60 @@ props() {
 
 #using_animtree("generic_human");
 linebook() {
-  //Leave no survivors comrades -	
   level.scr_sound["makarov"]["airport_mkv_snamibog"] = "airport_mkv_snamibog";
-  //Remember - no Russian.
+
   level.scr_sound["makarov"]["airport_mkv_noruss"] = "airport_mkv_noruss";
-  //30 seconds. Go.
+
   level.scr_radio["airport_mkv_30secs"] = "airport_mkv_30secs";
-  //go
+
   level.scr_radio["airport_mkv_go"] = "airport_mkv_go";
-  //Up the stairs. Go.			
+
   level.scr_radio["airport_mkv_upstairs"] = "airport_mkv_upstairs";
 
-  //AUTOKILL DIALOGUE
-  //You're cleared to engage, my friend. 		
   level.scr_radio["airport_mkv_clearedeng"] = "airport_mkv_clearedeng";
-  //Team, engage all civilian targets. Leave no survivors.	
+
   level.scr_radio["airport_mkv_nosurvivors"] = "airport_mkv_nosurvivors";
-  //Stick to the plan. Maximum casualties, no exceptions.	
+
   level.scr_radio["airport_mkv_noexceptions"] = "airport_mkv_noexceptions";
 
-  //Let's go, move up!	
   level.scr_radio["airport_mkv_letsmoveup"] = "airport_mkv_letsmoveup";
-  //Let's go!	
+
   level.scr_radio["airport_mkv_letsgo2"] = "airport_mkv_letsgo2";
-  //Keep moving!	
+
   level.scr_radio["airport_mkv_keepmoving"] = "airport_mkv_keepmoving";
 
-  //Shoot them all. These sheep are hardly Russians. Consider this a final test of your loyalty to me.	
   level.scr_radio["airport_mkv_thesesheep"] = "airport_mkv_thesesheep";
-  //You've served me well this far. Don't give me a reason to doubt you. 	
+
   level.scr_radio["airport_mkv_doubtyou"] = "airport_mkv_doubtyou";
-  //Open fire that's an order.	
+
   level.scr_radio["airport_mkv_openfire"] = "airport_mkv_openfire";
 
-  //Nice. Zakhaev would be proud.	
   level.scr_radio["airport_mkv_nice"] = "airport_mkv_nice";
-  //Well done. I knew you wouldn't let me down.	
+
   level.scr_radio["airport_mkv_welldone"] = "airport_mkv_welldone";
 
-  //You traitor.	
   level.scr_radio["airport_mkv_youtraitor"] = "airport_mkv_youtraitor";
-  //I have no patience for cowards.	
+
   level.scr_radio["airport_mkv_cowards"] = "airport_mkv_cowards";
-  //Check your fire!	
+
   level.scr_radio["airport_mkv_checkfire"] = "airport_mkv_checkfire";
 
-  //UPPERDECK
-  //Get down!! Get down!!!!
   level.scr_sound["male_civ_1"]["stairs_line"] = "airport_rmc2_getdown";
-  //They have guns!!! Run!!!
+
   level.scr_sound["male_civ_2"]["stairs_line"] = "airport_rmc2_theyhaveguns";
-  //Dima!! Take your sister and hide!! Go!!!
+
   level.scr_sound["male_civ_3"]["stairs_line"] = "airport_rmc1_takeyoursister";
-  //Don't wait for me! Just run as far as you can!!!!
+
   level.scr_sound["male_civ_4"]["stairs_line"] = "airport_rmc2_dontwait";
-  //Run away!!! Run away!!!!
+
   level.scr_sound["male_civ_5"]["stairs_line"] = "airport_rmc1_runaway";
-  //Get out of here!!! Go! Go!!!
+
   level.scr_sound["male_civ_6"]["stairs_line"] = "airport_rmc2_getoutofhere";
-  //Hurry up!!! They're getting closer!!!
+
   level.scr_sound["female_civ_1"]["stairs_line"] = "airport_rfc1_hurryup";
-  //Take the stairs!!!
+
   level.scr_sound["female_civ_2"]["stairs_line"] = "airport_rfc2_takethestairs";
-  //scream
+
   level.scr_sound["male_civ_1"]["scream1"] = "airport_rmc1_scream1";
   level.scr_sound["male_civ_1"]["scream2"] = "airport_rmc1_scream2";
   level.scr_sound["male_civ_1"]["scream3"] = "airport_rmc1_scream3";
@@ -543,7 +511,6 @@ linebook() {
   level.scr_sound["female_civ_2"]["scream3"] = "airport_rfc2_scream3";
   level.scr_sound["female_civ_2"]["scream4"] = "airport_rfc2_scream4";
 
-  //Aaaaaa, my leg, my leg!!! Somebody help me!!!!
   level.scr_sound["generic"]["airport_rmc2_myleg"] = "airport_rmc2_myleg";
   level.scr_sound["generic"]["airport_rmc2_scream2"] = "airport_rmc2_scream2";
   level.scr_sound["generic"]["airport_rmc1_mykatia"] = "airport_rmc1_mykatia";
@@ -553,24 +520,22 @@ linebook() {
 
   level.scr_sound["makarov"]["airport_mkv_takebookstore"] = "airport_mkv_takebookstore";
 
-  //MASSACRE
   level.scr_sound["generic"]["airport_rac_freeze"] = "airport_rac_freeze";
   level.scr_sound["generic"]["airport_rac_movemove"] = "airport_rac_movemove";
   level.scr_sound["generic"]["airport_rac_handsup"] = "airport_rac_handsup";
 
-  //Take care of it!	
   level.scr_radio["airport_mkv_careofit"] = "airport_mkv_careofit";
-  //Movement at the elevators!	
+
   level.scr_radio["airport_mkv_elevators"] = "airport_mkv_elevators";
-  //Fire in the hole!	
+
   level.scr_radio["airport_mkv_fireinhole"] = "airport_mkv_fireinhole";
-  //I got a runner!	
+
   level.scr_radio["airport_mkv_runner"] = "airport_mkv_runner";
-  //Frag out!	
+
   level.scr_radio["airport_mkv_fragout"] = "airport_mkv_fragout";
-  //Security detail up ahead!	
+
   level.scr_radio["airport_at1_security"] = "airport_at1_security";
-  //Frag out!	
+
   level.scr_radio["airport_at1_fragout"] = "airport_at1_fragout";
 
   level.scr_sound["makarov"]["airport_mkv_forzakhaev"] = "airport_mkv_forzakhaev";
@@ -585,164 +550,137 @@ linebook() {
   level.scr_sound["makarov"]["airport_mkv_haventweall"] = "airport_mkv_haventweall";
   level.scr_sound["makarov"]["airport_mkv_haventweall2"] = "airport_mkv_haventweall2";
 
-  //TARMAC
-  //Go! Go! Go!
   level.scr_sound["makarov"]["airport_mkv_gogogo"] = "airport_mkv_gogogo";
-  //Movement - 2nd floor windows. 			
+
   level.scr_radio["airport_mkv_2ndfloor"] = "airport_mkv_2ndfloor";
-  //I see 'em.			
+
   level.scr_radio["airport_at1_isee"] = "airport_at1_isee";
-  //F.S.B. - Take 'em out.		
+
   level.scr_radio["airport_mkv_fsb"] = "airport_mkv_fsb";
 
-  //We got more F.S.B.		
   level.scr_radio["airport_at1_gotmorefsb"] = "airport_at1_gotmorefsb";
-  //Take care of it.		
+
   level.scr_radio["airport_mkv_takecare"] = "airport_mkv_takecare";
-  //Roger.		
+
   level.scr_radio["airport_at1_roger"] = "airport_at1_roger";
 
-  //F.S.B. F.S.B!!!		
   level.scr_sound["generic"]["airport_fsb1_fsbfsb"] = "airport_fsb1_fsbfsb";
-  //Move in! Go go go!!		
+
   level.scr_sound["generic"]["airport_fsb1_moveingo"] = "airport_fsb1_moveingo";
-  //F.S.B.!!!! 		
+
   level.scr_sound["generic"]["airport_fsb2_fsb"] = "airport_fsb2_fsb";
-  //They're wearing heavy body armor, aim for the head!!
+
   level.scr_sound["generic"]["airport_fsb2_aimforhead"] = "airport_fsb2_aimforhead";
-  //F.S.B., F.S.B.!!!
+
   level.scr_sound["generic"]["airport_fsb2_fsbfsb"] = "airport_fsb2_fsbfsb";
-  //Open fire!!!		
+
   level.scr_sound["generic"]["airport_fsb3_openfire"] = "airport_fsb3_openfire";
-  //They're wearing too much body armor! Aim for their heads!!!		
+
   level.scr_sound["generic"]["airport_fsb3_aimforheads"] = "airport_fsb3_aimforheads";
 
-  //RADIO VOICE
-  //Team Six, we're sending the armored truck to Terminal Two, Gate Seventeen. 		
   level.scr_sound["generic"]["airport_fsbr_sendingtruck"] = "airport_fsbr_sendingtruck";
   level.scr_sound["generic"]["airport_fsbr_servicetunnels"] = "airport_fsbr_servicetunnels";
 
-  //BCS
-  //Man down!			
   level.scr_sound["m4"]["man_down"] = "airport_vkt_mandown";
-  //He's dead! Leave him! Go! Go!			
+
   level.scr_sound["makarov"]["man_down"] = "airport_mkv_hesdead";
 
-  //Check your fire!			
   level.scr_sound["makarov"]["check_fire1"] = "airport_mkv_checkyourfire";
-  //Watch your fire!			
+
   level.scr_sound["makarov"]["check_fire2"] = "airport_mkv_watchyourfire";
-  //Check your fire!			
+
   level.scr_sound["m4"]["check_fire1"] = "airport_vkt_checkfire";
-  //Watch your fire!			
+
   level.scr_sound["m4"]["check_fire2"] = "airport_vkt_watchfire";
 
-  //Grenade!			
   level.scr_sound["makarov"]["grenade1"] = "airport_mkv_grenade";
-  //Grenade!			
+
   level.scr_sound["m4"]["grenade1"] = "airport_vkt_grenade";
-  //Incoming!			
+
   level.scr_sound["makarov"]["grenade2"] = "airport_mkv_incoming";
-  //Look out!			
+
   level.scr_sound["m4"]["grenade2"] = "airport_vkt_lookout";
 
-  //Stay clear of the jet engine!			
   level.scr_sound["makarov"]["engine_warn"] = "airport_mkv_clearofjetengine";
-  //Move! That jet engine's gonna blow!			
+
   level.scr_sound["m4"]["engine_warn"] = "airport_vkt_gonnablow";
 
-  //Ready!			
   level.scr_sound["m4"]["ready1"] = "airport_vkt_ready";
-  //Ready!!			
+
   level.scr_sound["m4"]["ready2"] = "airport_vkt_ready2";
-  //Ready!					
+
   level.scr_sound["makarov"]["ready1"] = "airport_mkv_ready1";
-  //Ready!!	
+
   level.scr_sound["makarov"]["ready2"] = "airport_mkv_ready2";
 
-  //Go!			
   level.scr_sound["m4"]["go1"] = "airport_vkt_go";
-  //Move!			
+
   level.scr_sound["m4"]["go2"] = "airport_vkt_move";
-  //Go go go!!			
+
   level.scr_sound["m4"]["go3"] = "airport_vkt_gogogo";
 
-  //Go! Go!			
   level.scr_sound["makarov"]["go1"] = "airport_mkv_gogo";
-  //Go!!			
+
   level.scr_sound["makarov"]["go2"] = "airport_mkv_go1";
-  //Move!			
+
   level.scr_sound["makarov"]["go3"] = "airport_mkv_move";
-  //Go!			
+
   level.scr_sound["makarov"]["go4"] = "airport_mkv_go2";
 
-  //Moving!!			
   level.scr_sound["m4"]["moving1"] = "airport_vkt_moving";
-  //Moving! Cover me!			
+
   level.scr_sound["m4"]["moving2"] = "airport_vkt_movingcover";
-  //Moving up!!			
+
   level.scr_sound["m4"]["moving3"] = "airport_vkt_movingup";
-  //Moving!			
+
   level.scr_sound["makarov"]["moving1"] = "airport_mkv_moving1";
-  //Moving!!			
+
   level.scr_sound["makarov"]["moving2"] = "airport_mkv_moving2";
-  //Comin' through!!			
+
   level.scr_sound["makarov"]["moving3"] = "airport_mkv_cominthru";
 
-  //More by the luggage cart!			
   level.scr_sound["makarov"]["enemy_luggage"] = "airport_mkv_luggagecart";
-  //Behind that luggage cart!			
+
   level.scr_sound["m4"]["enemy_luggage"] = "airport_vkt_luggagecart";
-  //Behind the landing gear!			
+
   level.scr_sound["makarov"]["enemy_landinggear"] = "airport_mkv_landinggear";
-  //Over by the landing gear!			
+
   level.scr_sound["m4"]["enemy_landinggear"] = "airport_vkt_landinggear";
-  //More under the plane!			
+
   level.scr_sound["makarov"]["enemy_underplane"] = "airport_mkv_underplane";
-  //Behind the bus!! 			
+
   level.scr_sound["m4"]["enemy_bus"] = "airport_vkt_behindbus";
 
-  //Contact! 2nd floor windows!			
   level.scr_sound["makarov"]["contact_2nd_floor"] = "airport_mkv_2ndflrwndws";
-  //Copy that! 2nd floor windows!!			
+
   level.scr_sound["m4"]["contact_2nd_floor"] = "airport_vkt_copy2ndflr";
-  //FSB van!! Left side!!			
+
   level.scr_sound["makarov"]["van_left"] = "airport_mkv_fsbvan";
 
-  //goal_changed
-
-  //Shoot the jet engine!!			
-  //	level.scr_sound[ "victor" ][ "engine_shoot" ] 			= "airport_vkt_shootjetengine";
-  //Behind us! 2nd floor!			
   level.scr_sound["makarov"]["airport_mkv_behindus"] = "airport_mkv_behindus";
-  //Go! Go! Go!			
-  //	level.scr_sound[ "makarov" ][ "go1" ] 				= "airport_mkv_gogogo";
 
   level.scr_radio["airport_at1_scream"] = "airport_at1_scream";
 
-  //ESCAPE
-  //This way let's go.
   level.scr_radio["airport_mkv_thisway"] = "airport_mkv_thisway";
-  //Hallway clear.
+
   level.scr_radio["airport_mkv_hallway"] = "airport_mkv_hallway";
   level.scr_sound["makarov"]["airport_mkv_hallway"] = "airport_mkv_hallway";
-  //Hold your fire.
+
   level.scr_radio["airport_mkv_holdfire"] = "airport_mkv_holdfire";
   level.scr_sound["makarov"]["airport_mkv_holdfire"] = "airport_mkv_holdfire";
   level.scr_face["makarov"]["airport_mkv_holdfire"] = % airport_mkv_holdfire;
   level.scr_anim["makarov"]["stand_exposed_wave_halt_v2"] = % stand_exposed_wave_halt_v2;
 
-  //Van Terrorist	Good, you made it! Get in.	
   level.scr_sound["van_mate"]["airport_vt_madeit"] = "airport_vt_madeit";
-  //Van Terrorist	Come on, let's go.	
+
   level.scr_sound["van_mate"]["airport_vt_comeon"] = "airport_vt_comeon";
-  //Van Terrorist	What are you waiting for? Get in.	
+
   level.scr_sound["van_mate"]["airport_vt_waitingfor"] = "airport_vt_waitingfor";
-  //Van Terrorist	Will it be enough to blame the Americans?	
+
   level.scr_sound["van_mate"]["airport_vt_beenough"] = "airport_vt_beenough";
-  //That was no message…	
+
   level.scr_sound["makarov"]["airport_mkv_nomessage"] = "airport_mkv_nomessage";
-  //This is a message.
+
   level.scr_sound["makarov"]["airport_mkv_thiswill"] = "airport_mkv_thiswill";
 
   level.scr_radio["airport_mkv_allofrussia"] = "airport_mkv_allofrussia";
@@ -883,9 +821,7 @@ nadethrow(guy) {
   guy.grenadeWeapon = oldGrenadeWeapon;
 
   wait .1;
-  //make the glass break
-  //model = spawn( "script_model", dmg );
-  //model setModel( "weapon_us_smoke_grenade" );
+
   radiusdamage(dmg, 64, 5000, 5000);
 }
 
@@ -951,7 +887,6 @@ smoke_throw(guy) {
 lobby_people_data() {
   data = [];
 
-  //kristin walks up with roller and pushes me out of the way
   data["intro_lobby_anim_group_1"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_1"][0]["anime"] = "airport_civ_in_line_6_A";
   data["intro_lobby_anim_group_1"][0]["delay"] = 0;
@@ -970,7 +905,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_1"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_1"][2]["deathtime"] = 0;
 
-  //all three die - i fall into allen
   data["intro_lobby_anim_group_2"][0]["model"] = "civilian_female_suit";
   data["intro_lobby_anim_group_2"][0]["anime"] = "airport_civ_in_line_9_A";
   data["intro_lobby_anim_group_2"][0]["delay"] = 0;
@@ -991,7 +925,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_2"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_2"][2]["deathtime"] = 0;
 
-  //pile up backwards
   data["intro_lobby_anim_group_3"][0]["model"] = "civilian_female_suit";
   data["intro_lobby_anim_group_3"][0]["anime"] = "airport_civ_in_line_10_A";
   data["intro_lobby_anim_group_3"][0]["delay"] = 1;
@@ -1011,7 +944,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_3"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_3"][2]["deathtime"] = 0;
 
-  //pile up forwards - kristin steps over me
   data["intro_lobby_anim_group_4"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_4"][0]["anime"] = "airport_civ_in_line_12_A";
   data["intro_lobby_anim_group_4"][0]["delay"] = 1;
@@ -1031,7 +963,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_4"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_4"][2]["deathtime"] = 0;
 
-  //pile up forwards - no kristin - pushing dying guy out of way
   data["intro_lobby_anim_group_5"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_5"][0]["anime"] = "airport_civ_in_line_12_A";
   data["intro_lobby_anim_group_5"][0]["delay"] = 0;
@@ -1044,7 +975,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_5"][1]["deathanim"] = undefined;
   data["intro_lobby_anim_group_5"][1]["deathtime"] = 0;
 
-  //pile up backward - near metal detector
   data["intro_lobby_anim_group_6"][0]["model"] = "civilian_female_suit_low_LOD";
   data["intro_lobby_anim_group_6"][0]["anime"] = "airport_civ_in_line_10_A";
   data["intro_lobby_anim_group_6"][0]["delay"] = 2;
@@ -1063,7 +993,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_6"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_6"][2]["deathtime"] = 0;
 
-  //pile up forwards - no kristin - near metal detector
   data["intro_lobby_anim_group_7"][0]["model"] = "civilian_male_suit_low_LOD";
   data["intro_lobby_anim_group_7"][0]["anime"] = "airport_civ_in_line_12_A";
   data["intro_lobby_anim_group_7"][0]["delay"] = 2;
@@ -1078,7 +1007,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_7"][1]["deathtime"] = 0;
   data["intro_lobby_anim_group_7"][1]["deleteme"] = 1;
 
-  //pile up forwards 2 - no kristin - near metal detector 2
   data["intro_lobby_anim_group_8"][0]["model"] = "civilian_male_suit_low_LOD";
   data["intro_lobby_anim_group_8"][0]["anime"] = "airport_civ_in_line_12_A";
   data["intro_lobby_anim_group_8"][0]["delay"] = 2;
@@ -1092,7 +1020,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_8"][1]["deathanim"] = undefined;
   data["intro_lobby_anim_group_8"][1]["deathtime"] = 0;
 
-  //2 instantly die, middle
   data["intro_lobby_anim_group_9"][0]["model"] = "civilian_female_suit";
   data["intro_lobby_anim_group_9"][0]["anime"] = "airport_civ_in_line_9_A";
   data["intro_lobby_anim_group_9"][0]["delay"] = 0;
@@ -1105,7 +1032,6 @@ lobby_people_data() {
   data["intro_lobby_anim_group_9"][1]["deathanim"] = undefined;
   data["intro_lobby_anim_group_9"][1]["deathtime"] = 0;
 
-  //push, run, die at close metal detector
   data["intro_lobby_anim_group_10"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_10"][0]["anime"] = "airport_civ_in_line_6_A";
   data["intro_lobby_anim_group_10"][0]["delay"] = 1;
@@ -1119,14 +1045,12 @@ lobby_people_data() {
   data["intro_lobby_anim_group_10"][1]["deathanim"] = undefined;
   data["intro_lobby_anim_group_10"][1]["deathtime"] = 0;
 
-  //die instantly near close detector
   data["intro_lobby_anim_group_11"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_11"][0]["anime"] = "airport_civ_in_line_9_B";
   data["intro_lobby_anim_group_11"][0]["delay"] = 0;
   data["intro_lobby_anim_group_11"][0]["deathanim"] = undefined;
   data["intro_lobby_anim_group_11"][0]["deathtime"] = 0;
 
-  //hit the deck, get up, run and die at close detector
   data["intro_lobby_anim_group_12"][0]["model"] = "civilian_female_suit";
   data["intro_lobby_anim_group_12"][0]["anime"] = "airport_civ_in_line_13_A";
   data["intro_lobby_anim_group_12"][0]["delay"] = 0;
@@ -1145,14 +1069,12 @@ lobby_people_data() {
   data["intro_lobby_anim_group_12"][2]["deathanim"] = undefined;
   data["intro_lobby_anim_group_12"][2]["deathtime"] = 0;
 
-  //die instantly at entrance
   data["intro_lobby_anim_group_13"][0]["model"] = "civilian_female_suit";
   data["intro_lobby_anim_group_13"][0]["anime"] = "airport_civ_in_line_15_A";
   data["intro_lobby_anim_group_13"][0]["delay"] = 0;
   data["intro_lobby_anim_group_13"][0]["deathanim"] = undefined;
   data["intro_lobby_anim_group_13"][0]["deathtime"] = 0;
 
-  //die instantly at entrance
   data["intro_lobby_anim_group_14"][0]["model"] = "civilian_male_suit";
   data["intro_lobby_anim_group_14"][0]["anime"] = "airport_civ_in_line_15_C";
   data["intro_lobby_anim_group_14"][0]["delay"] = 0;

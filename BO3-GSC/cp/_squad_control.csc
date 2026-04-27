@@ -9,30 +9,16 @@
 #using scripts\shared\visionset_mgr_shared;
 #namespace squad_control;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function ent_material_callback() {
-  // Unsupported VM revision (1B).
-}
+function ent_material_callback() {}
 
-function ent_camo_material_callback() {
-  // Unsupported VM revision (1B).
-}
+function ent_camo_material_callback() {}
 
-function squad_indicator_callback() {
-  // Unsupported VM revision (1B).
-}
+function squad_indicator_callback() {}
 
-function draw_squad_indicator() {
-  // Unsupported VM revision (1B).
-}
+function draw_squad_indicator() {}
 
-function delete_squad_indicator() {
-  // Unsupported VM revision (1B).
-}
+function delete_squad_indicator() {}

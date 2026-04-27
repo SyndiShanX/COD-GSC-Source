@@ -16,10 +16,9 @@ main() {
   foreach(trigger in no_prone_water)
   trigger.script_specialops = 1;
 
-  // settings for this challenge
   level.pmc_gametype = "mode_elimination";
   level.pmc_enemies = 40;
-  level.pmc_low_enemy_count = 5; // Used for pulsing the hud
+  level.pmc_low_enemy_count = 5;
 
   so_delete_all_spawntriggers();
   so_delete_all_triggers();

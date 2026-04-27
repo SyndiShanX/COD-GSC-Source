@@ -8,15 +8,6 @@
 #include maps\_anim;
 #include maps\_stealth_utility;
 
-/************************************************************************************************************/
-
-/*											SYSTEM UTILITIES												*/
-/************************************************************************************************************/
-
-//called by _stealth_accuracy_friendly
-//called by _stealth_behavior_enemy
-//called by _stealth_behavior_friendly
-//called by _stealth_color_friendly
 ai_message_handler_spotted(function, plugin_override) {
   self endon("death");
 
@@ -59,11 +50,6 @@ ai_message_handler_spotted(function, plugin_override) {
       break;
   }
 }
-
-//called by _stealth_accuracy_friendly
-//called by _stealth_behavior_enemy
-//called by _stealth_behavior_friendly
-//called by _stealth_color_friendly
 ai_message_handler_hidden(function, plugin_override) {
   self endon("death");
 
@@ -107,27 +93,13 @@ ai_message_handler_hidden(function, plugin_override) {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: ai_create_behavior_function( <name>, <key>, <function> )""Summary: sets up a behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions array.""Module: Entity""MandatoryArg: <name>: the general category, for example, 'threat', 'animation', or 'event' (among others).""MandatoryArg: <key>: the specific subcategory, for example, 'heard_scream' or 'reset' (among others).""MandatoryArg: <function>: the function to run when the stealth script looks for this behavior function.""Example: ai_create_behavior_function( "threat", "reset", ::cliffhanger_enemy_alert_level_reset );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 ai_create_behavior_function(name, key, function) {
   self._stealth.behavior.ai_functions[name][key] = function;
 }
-
-// used internally by the stealth system
 ai_get_behavior_function(name, key) {
   return self._stealth.behavior.ai_functions[name][key];
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: ai_set_goback_override_function( <function> )""Summary: sets up an "event" behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions[ "event" ] array.This function will be called between the AI forgetting about the threat, and the AI heading back to where he was patrolling previously.""Module: Entity""MandatoryArg: <function>: the function to run when the AI forgets about an event, before he heads back to his previous patrol spot.""Example: ai_create_event_goback_override_function( ::cliffhanger_enemy_alert_level_reset );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 ai_set_goback_override_function(function) {
   self._stealth.behavior.goback_startFunc = function;
 }
@@ -318,11 +290,6 @@ group_wait_group_spawned(group_name) {
     level._stealth.group waittill(group_name);
 }
 
-/************************************************************************************************************/
-
-/*											BEHAVIOR UTILITIES												*/
-/************************************************************************************************************/
-
 ai_stealth_pause_handler() {
   self endon("death");
   self endon("pain_death");
@@ -363,7 +330,6 @@ enemy_go_back() {
   if(isDefined(spot) && self.type != "dog" && !isDefined(self.customMoveTransition))
     self.customMoveTransition = maps\_patrol::patrol_resume_move_start_func;
 
-  // stop before moving
   if(isDefined(self.customMoveTransition) && isDefined(self.pathGoalPos)) {
     self setgoalpos(self.origin);
     wait 0.05;
@@ -374,7 +340,6 @@ enemy_go_back() {
       self.target = self.last_patrol_goal.targetname;
     }
 
-    //these guys on the ridge in cliffhanger get alerted and jump down a one way traverse. this gives them a pathable patrol path to go back to.
     if(isDefined(self.stealth_first_alert_new_patrol_path)) {
       self.target = self.stealth_first_alert_new_patrol_path.targetname;
       self.stealth_first_alert_new_patrol_path = undefined;
@@ -399,7 +364,6 @@ enemy_go_back() {
     self.goalradius = 40;
   }
 
-  //make sure the AI has been given a new goal before clearing this flag
   waittillframeend;
   self ent_flag_clear("_stealth_override_goalpos");
 
@@ -414,8 +378,6 @@ enemy_go_back_clear_lastspot(origin) {
   self waittill_true_goal(origin);
   self._stealth.behavior.last_spot = undefined;
 }
-
-// caches result of search
 enemy_get_nearby_pathnodes(origin, radius, min_radius) {
   if(!isDefined(min_radius))
     min_radius = 0;
@@ -431,13 +393,8 @@ enemy_get_nearby_pathnodes(origin, radius, min_radius) {
 
   return level._stealth.node_search.nodes_array;
 }
-
-// this is called by some functions like finding a corpse or
-// hearing an explosion that go into alert - but dont want to put into alert
-// state because alert state shares it's behavior with a guy simply
-// thinkgin he saw something twice
 enemy_reaction_state_alert() {
-  self.fovcosine = .01; // 90 degrees to either side...180 cone...default view cone
+  self.fovcosine = .01;
   self.ignoreall = false;
   self.dieQuietly = false;
   self clear_run_anim();
@@ -449,7 +406,7 @@ enemy_alert_level_forget(enemy, delay) {
   enemy endon("death");
 
   if(!isDefined(delay))
-    delay = 60; //after 60 seconds - forget about it
+    delay = 60;
 
   wait delay;
 
@@ -476,7 +433,6 @@ enemy_stop_current_behavior() {
 }
 
 enemy_find_original_goal() {
-  //if we already have an original goal - stick to it
   if(isDefined(self._stealth.behavior.last_spot)) {
     return;
   }
@@ -506,7 +462,6 @@ enemy_runto_and_lookaround(node, position) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
   level endon(spotted_flag);
 
-  //this is for guys who are already DOING this, and need to do it again
   self notify("stop_loop");
 
   self ent_flag_set("_stealth_override_goalpos");
@@ -548,11 +503,6 @@ enemy_find_free_pathnode_near(origin, radius, min_radius) {
   return node;
 }
 
-/************************************************************************************************************/
-
-/*												ANNOUCEMENTS												*/
-/************************************************************************************************************/
-
 enemy_announce_wtf() {
   if(self.type == "dog")
     return;
@@ -562,8 +512,6 @@ enemy_announce_wtf() {
   alias = "stealth_" + self.npcID + "_anexplosion";
   self playSound(alias);
 }
-
-// Who's there?
 enemy_announce_huh() {
   if(self.type == "dog")
     return;
@@ -573,8 +521,6 @@ enemy_announce_huh() {
   alias = "stealth_" + self.npcID + "_huh";
   self playSound(alias);
 }
-
-// Didn't find anything, going back to patrol
 enemy_announce_hmph() {
   if(self.type == "dog")
     return;
@@ -587,7 +533,7 @@ enemy_announce_hmph() {
 
 enemy_announce_attack() {
   self endon("death");
-  self endon("pain_death"); // don't actually want to be able to still call out to buddies - it kinda sucks to take him down and still lose
+  self endon("pain_death");
 
   if(self.type == "dog") {
     return;
@@ -600,11 +546,8 @@ enemy_announce_attack() {
 
 enemy_announce_spotted(pos) {
   self endon("death");
-  self endon("pain_death"); // don't actually want to be able to still call out to buddies - it kinda sucks to take him down and still lose
+  self endon("pain_death");
 
-  // this makes sure that if we're not spotted because we killed
-  // this guy before he could set the flag - we dont' bring
-  // everyone over for no reason.
   self stealth_group_spotted_flag_wait();
 
   if(self.type == "dog") {
@@ -665,11 +608,6 @@ enemy_announce_corpse() {
   self playSound(alias);
 }
 
-/************************************************************************************************************/
-
-/*										ANNOUCEMENT UTILITIES												*/
-/************************************************************************************************************/
-
 enemy_announce_snd(type) {
   if(type == "spotted") {
     if(level._stealth.behavior.sound[type][self.script_stealthgroup])
@@ -693,22 +631,15 @@ enemy_announce_snd_reset(type) {
   level._stealth.behavior.sound[type] = false;
 }
 
-/************************************************************************************************************/
-
-/*											ANIMATION SYSTEM												*/
-/************************************************************************************************************/
-
 enemy_animation_wrapper(type) {
   self endon("death");
   self endon("pain_death");
 
-  // ALWAYS RUN THIS UNLESS YOU'RE SURE YOU KNOW WHAT YOU"RE DOING
   if(self enemy_animation_pre_anim(type)) {
     return;
   }
   self enemy_animation_do_anim(type);
 
-  // ALWAYS RUN THIS UNLESS YOU'RE SURE YOU KNOW WHAT YOU"RE DOING
   self enemy_animation_post_anim(type);
 }
 
@@ -718,7 +649,6 @@ enemy_animation_do_anim(type) {
     return;
   }
 
-  // do default behavior	
   function = self._stealth.behavior.ai_functions["animation"][type];
 
   self[[function]](type);
@@ -732,11 +662,8 @@ enemy_animation_custom(type) {
 
   self ent_flag_set("_stealth_behavior_reaction_anim");
 
-  // wouldn't normally do this - but since this is specific to stealth script
-  // i figured it would be ok to set allowdeath.
   self.allowdeath = true;
 
-  // cut the loop
   node notify(ender);
 
   if(isDefined(self.anim_props)) {
@@ -744,29 +671,21 @@ enemy_animation_custom(type) {
     node thread anim_single(self.anim_props, anime);
   }
   if(type != "doFlashBanged") {
-    // this is the reaction
     if(isDefined(tag) || isDefined(self.has_delta))
       node anim_generic(self, anime, tag);
     else
       node anim_generic_custom_animmode(self, "gravity", anime);
   }
-  // once you the the reaction once - you dont wanna ever do it again...especially not off this node
+
   self ai_clear_custom_animation_reaction();
 }
 
 enemy_animation_pre_anim(type) {
   self notify("enemy_awareness_reaction", type);
 
-  // this means that something really bad happened...a first reaction
-  // to the player being spotted or something equally bad like a bullet
-  // whizby
   if(self ent_flag("_stealth_behavior_first_reaction") || self ent_flag("_stealth_behavior_reaction_anim_in_progress"))
     return true;
 
-  // this function doesn't stop behavior if _stealth_behavior_reaction_anim
-  // is set - because stoping behavior means ending current animations
-  // and since reacting is an animation - we want to set the flag
-  // AFTER we've stopped the current ones
   self enemy_stop_current_behavior();
 
   if(issubstr(type, "warning"))
@@ -777,13 +696,12 @@ enemy_animation_pre_anim(type) {
     case "heard_corpse":
     case "saw_corpse":
     case "found_corpse":
-      // all the cases above this dont break - so they all will do the same thing when they get to this line
+
       self ent_flag_set("_stealth_behavior_reaction_anim");
       break;
     case "reset":
     case "warning":
-      // all the cases above this dont break - so they all will do the same thing when they get to this line
-      // which is absolutely nothing
+
       break;
     default:
       if(!self ent_flag_exist("_stealth_behavior_asleep") || !self ent_flag("_stealth_behavior_asleep") || self stealth_group_spotted_flag()) {
@@ -818,11 +736,6 @@ enemy_animation_post_anim(type) {
   self ent_flag_clear("_stealth_behavior_reaction_anim_in_progress");
 }
 
-/************************************************************************************************************/
-
-/*											ANIMATION UTILITIES												*/
-/************************************************************************************************************/
-
 ai_clear_custom_animation_reaction() {
   self._stealth.behavior.event.custom_animation = undefined;
 
@@ -830,7 +743,6 @@ ai_clear_custom_animation_reaction() {
 }
 
 ai_clear_custom_animation_reaction_and_idle(waitanimend) {
-  // could have been cleared by something else
   if(!isDefined(self._stealth.behavior.event.custom_animation)) {
     return;
   }
@@ -867,11 +779,6 @@ ai_animate_props_on_death(node, anime, tag, ender) {
   }
   node thread anim_single(prop, anime);
 }
-
-/************************************************************************************************************/
-
-/*												EVENT AWARENESS												*/
-/************************************************************************************************************/
 
 event_awareness_main(dialogue_array, ender_array) {
   level notify("event_awareness_handler");
@@ -921,9 +828,6 @@ event_awareness_enders(ender_array) {
         level notify("default_event_awareness_enders");
     }
 
-    //don't want to put into the same loop as above because we dont
-    //want to add_wait and then kill this function without every calling
-    //do_wait...cause that would cause some nasty bugs
     foreach(string in ender_array)
     add_wait(::waittill_msg, string);
   }
@@ -934,11 +838,6 @@ event_awareness_enders(ender_array) {
   add_func(::send_notify, "default_event_awareness_enders");
   thread do_wait_any();
 }
-
-/************************************************************************************************************/
-
-/*										GLOBAL SCRIPT CALL BACKS											*/
-/************************************************************************************************************/
 
 _autosave_stealthcheck() {
   if(!stealth_is_everything_normal())

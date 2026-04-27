@@ -58,15 +58,12 @@ main() {
   self animMode(self._animmode);
   self clearAnim(self.root_anim, clear_time);
 
-  //	self setAnim(%body, 1, 0 );	// The %body node should always have weight 1.
   self OrientMode("face angle", angles[1]);
 
   anim_string = "custom_animmode";
   self setflaggedanimrestart(anim_string, animationName, 1, blend_time, 1);
   self._tag_entity thread maps\_anim::start_notetrack_wait(self, anim_string, anime, self._animname);
   self._tag_entity thread maps\_anim::animscriptDoNoteTracksThread(self, anim_string, anime);
-
-  //thread maps\_debug::drawArrowForever( self._tag_entity.origin, self._tag_entity.angles );
 
   tag_entity = self._tag_entity;
   self._tag_entity = undefined;

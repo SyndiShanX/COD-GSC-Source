@@ -8,21 +8,14 @@
 #include maps\_anim;
 
 hiding_door_spawner() {
-  // place a hiding_door_guy prefab and then place a spawner next to it with script_noteworthy "hiding_door_spawner".
-  // Spawn the guy however you like (trigger or script)
-  // Target the spawner to a trigger, this trigger will make the guy open the door.
-  // Alternatively put a script_flag_wait on the spawner. The guy will wait for the flag to be set before opening the door.
-  // If you put neither, a trigger_radius will be spawned, using the radius of the spawner if a radius is set
-
   door_orgs = getEntArray("hiding_door_guy_org", "targetname");
   assertex(door_orgs.size, "Hiding door guy with export " + self.export+" couldn't find a hiding_door_org!");
 
   door_org = getclosest(self.origin, door_orgs);
   assertex(distance(door_org.origin, self.origin) < 256, "Hiding door guy with export " + self.export+" was not placed within 256 units of a hiding_door_org");
 
-  door_org.targetname = undefined; // so future searches won't grab this one
+  door_org.targetname = undefined;
 
-  //get door models (and script_brushmodel doors, if applicable)
   door_models = getEntArray(door_org.target, "targetname");
   door_model = undefined;
   brushmodel_door = undefined;
@@ -32,13 +25,9 @@ hiding_door_spawner() {
     badplaceBrush = door_org get_linked_ent();
   }
 
-  //if there is only one ent, it must be the script_model door
   if(door_models.size == 1) {
     door_model = door_models[0];
-  }
-
-  //if targeting more than one ent, the LD wants to substitute a custom script_brushmodel door
-  else {
+  } else {
     foreach(ent in door_models) {
       if(ent.code_classname == "script_brushmodel") {
         brushmodel_door = ent;
@@ -65,7 +54,7 @@ hiding_door_spawner() {
     level._hiding_door_pushplayer_clips[level._hiding_door_pushplayer_clips.size] = pushPlayerClip;
   }
 
-  door_model delete(); // we spawn our own door, the one in the prefab is just to aid placement
+  door_model delete();
 
   door = spawn_anim_model("hiding_door");
   door_org thread anim_first_frame_solo(door, "fire_3");
@@ -91,7 +80,6 @@ hiding_door_spawner() {
     if(isDefined(self.radius))
       radius = self.radius;
 
-    // no trigger mechanism specified, so add a radius trigger
     trigger = spawn("trigger_radius", door_org.origin, 0, radius, 48);
   }
 
@@ -112,7 +100,7 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
 
   self set_deathanim("death_2");
   self.allowdeath = true;
-  self.health = 50000; // buffer health, he "dies" in one hit
+  self.health = 50000;
 
   guy_and_door = [];
   guy_and_door[guy_and_door.size] = door;
@@ -122,7 +110,6 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
   thread hiding_door_death(door, door_org, self, door_clip, badplaceBrush);
 
   if(starts_open) {
-    // wait for trigger before closing the door
     door_org thread anim_loop(guy_and_door, "idle");
   } else {
     door_org thread anim_first_frame(guy_and_door, "fire_3");
@@ -143,28 +130,21 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
   counter = 0;
   timesFired = 0;
   for(;;) {
-    //----------------- // GET ENEMY AND ENEMY DIRECTION
-    //----------------- enemy = level.player;
     if(isDefined(self.enemy))
       enemy = self.enemy;
     assert(isDefined(enemy));
     direction = hiding_door_get_enemy_direction(door.angles, self.origin, enemy.origin);
 
-    //----------------- // ABORT CONDITIONS
-    //----------------- // Abort door behavior if the player comes up behind the AI
     if(self player_entered_backdoor(direction)) {
       if(self quit_door_behavior())
         return;
     }
 
-    // Abort door behavior after peeking a couple times if the player can see him from behind
     if(counter >= 2) {
       if(self quit_door_behavior(true))
         return;
     }
 
-    //----------------- // DETERMINE SCENE BASED ON ENEMY DIRECTION
-    //----------------- scene = undefined;
     if(direction == "left" || direction == "front") {
       scene = "fire_3";
     } else if(direction == "right") {
@@ -172,7 +152,6 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
       if(cointoss())
         scene = "fire_2";
     } else {
-      // player or enemy is behind him so just open and close the door and peek
       door_org anim_single(guy_and_door, "open");
       door_org anim_single(guy_and_door, "close");
       counter++;
@@ -180,34 +159,26 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
     }
     assert(isDefined(scene));
 
-    //----------------- // CHARGE CONDITION + CHANCE
-    //----------------- if(self hiding_door_guy_should_charge(direction, enemy, timesFired)) {
     scene = "jump";
     if(coinToss()) {
       if(self mayMoveToPoint(animscripts\utility::getAnimEndPos(level.scr_anim[self.animname]["kick"])))
         scene = "kick";
     }
 
-    // connect paths on the door and handle player clip
     thread hiding_door_death_door_connections(door_clip, badplaceBrush);
     door_org notify("push_player");
 
-    // stop the thread that waits for him to break out of door behavior to open the door since this anim opens it for us
     self notify("charge");
 
-    // guy charges out
     self.allowdeath = true;
     self.health = 100;
     self clear_deathanim();
     door_org anim_single(guy_and_door, scene);
 
-    // now he goes to exposed combat
     self quit_door_behavior();
     return;
   }
 
-  //----------------- // THROW A GRENADE?
-  //----------------- // randomly do grenade throw if the AI has grenade ammo. More likely if hte AI has more grenades
   if(self hiding_door_guy_should_throw_grenade(direction, timesFired)) {
     self.grenadeammo--;
     scene = "grenade";
@@ -216,16 +187,9 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
   counter = 0;
   timesFired++;
 
-  //----------------- // DO ANIM
-  //----------------- door_org thread anim_single(guy_and_door, scene);
-
-  // delay the settime by a frame or it wont work
-  // this is so we can skip the slow creep part of the animation
   delaythread(0.05, ::anim_set_time, guy_and_door, scene, 0.3);
   door_org waittill(scene);
 
-  //----------------- // IDLE FOR A MOMENT
-  //----------------- door_org thread anim_first_frame(guy_and_door, "open");
   wait(randomfloatrange(0.2, 1.0));
   door_org notify("stop_loop");
 }
@@ -325,10 +289,8 @@ hiding_door_get_enemy_direction(viewerAngles, viewerOrigin, targetOrigin) {
 hiding_door_guy_cleanup(door_org, guy, door, door_clip, badplaceBrush) {
   guy endon("charge");
 
-  // if the guy gets deleted before the sequence happens this thread will catch that and clean up any problems that could arise
   guy waittill_either("death", "quit_door_behavior");
 
-  // stop the looping animations because the guy is removed now
   door_org notify("stop_loop");
 
   thread hiding_door_death_door_connections(door_clip, badplaceBrush);
@@ -347,7 +309,6 @@ hiding_door_guy_pushplayer(pushPlayerClip) {
 }
 
 hiding_door_guy_grenade_throw(guy) {
-  // called from a notetrack
   startOrigin = guy getTagOrigin("J_Wrist_RI");
   strength = (distance(level.player.origin, guy.origin) * 2.0);
   if(strength < 300)
@@ -378,7 +339,6 @@ hiding_door_death(door, door_org, guy, door_clip, badplaceBrush) {
     if(isDefined(attacker)) {
       guy Kill((0, 0, 0), attacker);
     } else {
-      //guy.a.nodeath = true;
       guy kill((0, 0, 0));
     }
   }

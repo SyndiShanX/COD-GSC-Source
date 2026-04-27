@@ -154,7 +154,7 @@ onPlayerConnect() {
       player setPlayerData("experience", 145499);
 
     player.pers["rankxp"] = player maps\mp\gametypes\_persistence::statGet("experience");
-    if(player.pers["rankxp"] < 0) // paranoid defensive
+    if(player.pers["rankxp"] < 0)
       player.pers["rankxp"] = 0;
 
     rankId = player getRankForXp(player getRankXP());
@@ -183,15 +183,12 @@ onPlayerConnect() {
       player.pers["summary"]["match"] = 0;
       player.pers["summary"]["misc"] = 0;
 
-      // resetting game summary dvars
       player setClientDvar("player_summary_xp", "0");
       player setClientDvar("player_summary_score", "0");
       player setClientDvar("player_summary_challenge", "0");
       player setClientDvar("player_summary_match", "0");
       player setClientDvar("player_summary_misc", "0");
     }
-
-    // resetting summary vars
 
     player setClientDvar("ui_opensummary", 0);
 
@@ -313,7 +310,6 @@ giveRankXP(type, value) {
   }
 
   if(!gotRestXP) {
-    // if we didn't get rest XP for this type, we push the rest XP goal ahead so we didn't waste it
     if(self getPlayerData("restXPGoal") > self getRankXP())
       self setPlayerData("restXPGoal", self getPlayerData("restXPGoal") + value);
   }
@@ -326,7 +322,6 @@ giveRankXP(type, value) {
   if(self rankingEnabled() && updateRank(oldxp))
     self thread updateRankAnnounceHUD();
 
-  // Set the XP stat after any unlocks, so that if the final stat set gets lost the unlocks won't be gone for good.
   self syncXPStat();
 
   if(!level.hardcoreMode) {
@@ -370,7 +365,7 @@ giveRankXP(type, value) {
       break;
 
     default:
-      self.pers["summary"]["misc"] += value; //keeps track of ungrouped match xp reward
+      self.pers["summary"]["misc"] += value;
       self.pers["summary"]["match"] += value;
       self.pers["summary"]["xp"] += value;
       break;
@@ -386,7 +381,6 @@ updateRank(oldxp) {
   rankId = self.pers["rank"];
   self.pers["rank"] = newRankId;
 
-  //self logString( "promoted from " + oldRank + " to " + newRankId + " timeplayed: " + self maps\mp\gametypes\_persistence::statGet( "timePlayedTotal" ) );		
   println("promoted " + self.name + " from rank " + oldRank + " to " + newRankId + ". Experience went from " + oldxp + " to " + self getRankXP() + ".");
 
   self setRank(newRankId);
@@ -404,8 +398,7 @@ updateRankAnnounceHUD() {
   if(!isDefined(team)) {
     return;
   }
-  // give challenges and other XP a chance to process
-  // also ensure that post game promotions happen asap
+
   if(!levelFlag("game_over"))
     level waittill_notify_or_timeout("game_over", 0.25);
 
@@ -553,17 +546,13 @@ getRestXPAward(baseXP) {
   if(!getdvarint("scr_restxp_enable"))
     return 0;
 
-  restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale"); // as a fraction of base xp
+  restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale");
 
   wantGiveRestXP = int(baseXP * restXPAwardRate);
   mayGiveRestXP = self getPlayerData("restXPGoal") - self getRankXP();
 
   if(mayGiveRestXP <= 0)
     return 0;
-
-  // we don't care about giving more rest XP than we have; we just want it to always be X2
-  //if( wantGiveRestXP > mayGiveRestXP )
-  //	return mayGiveRestXP;
 
   return wantGiveRestXP;
 }
@@ -572,7 +561,7 @@ isLastRestXPAward(baseXP) {
   if(!getdvarint("scr_restxp_enable"))
     return false;
 
-  restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale"); // as a fraction of base xp
+  restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale");
 
   wantGiveRestXP = int(baseXP * restXPAwardRate);
   mayGiveRestXP = self getPlayerData("restXPGoal") - self getRankXP();

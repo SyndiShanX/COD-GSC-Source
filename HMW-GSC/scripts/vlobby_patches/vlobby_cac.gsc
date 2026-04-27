@@ -1,8 +1,6 @@
 vl_main() {
-  // add "bad" check?
   replacefunc(maps\mp\_vl_cac::playercacprocesslui, ::playercacprocesslui_stub);
 
-  // use attachkits instead of furtnitekits
   replacefunc(maps\mp\_vl_cac::parseweaponhighlightedvalue, ::parseweaponhighlightedvalue_stub);
   replacefunc(maps\mp\_vl_cac::handleweaponhighlighted, ::handleweaponhighlighted_stub);
   replacefunc(maps\mp\_vl_cac::buildweaponnamecac, ::buildweaponnamecac_stub);
@@ -13,8 +11,6 @@ vl_main() {
   replacefunc(maps\mp\_vl_cac::spawngenericprop3avatar, ::spawngenericprop3avatar_stub);
   replacefunc(maps\mp\_vl_cac::showloadingweaponavatar, ::showloadingweaponavatar_stub);
 
-  // patches to stock maps GSC that are only needed for vlobby
-  // maps/mp/gametypes doesn't load on our custom scripts, so we need these still to be patching
   replacefunc(maps\mp\gametypes\_weapons::watchweaponchange, ::watchweaponchange_stub);
   replacefunc(maps\mp\gametypes\_weapons::init, ::weapons_init_stub);
   replacefunc(maps\mp\gametypes\_weapons::updatemovespeedscale, ::updatemovespeedscale_stub);
@@ -203,7 +199,7 @@ watchweaponchange_stub() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  level endon("game_ended"); // just in case
+  level endon("game_ended");
 
   thread maps\mp\gametypes\_weapons::watchstartweaponchange();
   self.lastdroppableweapon = self.currentweaponatspawn;
@@ -385,7 +381,7 @@ parseweaponhighlightedvalue_stub(var_0, var_1) {
     case "3":
     case "4":
       return tablelookup("mp/perktable.csv", 0, var_1, 1);
-    case "5": // was furniturekits
+    case "5":
     case "6":
       return tablelookup("mp/attachkits.csv", 0, var_1, 1);
     case "7":
@@ -551,9 +547,6 @@ playercacprocesslui_stub(var_0, var_1) {
         if(maps\mp\_vl_cao::iscollectionsmenuactive())
           maps\mp\_vl_cao::turncollectionsmodeoff();
 
-        //maps\mp\_vl_avatar::hide_avatars();
-        //maps\mp\_vl_cac::handlecacweapmodechange( 0 );
-
         var_6 = "weapons_lobby";
         if(maps\mp\_vl_cao::iscollectionsmenuactive())
           var_6 = "weapons_collection";
@@ -682,7 +675,7 @@ buildweaponnamecac_stub(var_0, var_1, var_2, var_3, var_4, var_5) {
 spawngenericprop3avatar_stub() {
   var_0 = spawn("script_model", (0.0, 0.0, 0.0));
   var_0 setModel("genericprop_x3");
-  // var_0 scriptmodelplayanim( "h1_lobby_turnaround_ranger_akimbo_align" );
+
   return var_0;
 }
 

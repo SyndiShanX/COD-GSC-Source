@@ -5,38 +5,20 @@
 #using scripts\shared\util_shared;
 #namespace stealth_debug;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function enabled() {
-  // Unsupported VM revision (1B).
-}
+function enabled() {}
 
-function init_debug() {
-  // Unsupported VM revision (1B).
-}
+function init_debug() {}
 
-function function_70b08fc4() {
-  // Unsupported VM revision (1B).
-}
+function function_70b08fc4() {}
 
-function draw_awareness_thread() {
-  // Unsupported VM revision (1B).
-}
+function draw_awareness_thread() {}
 
-function draw_detect_cone_thread() {
-  // Unsupported VM revision (1B).
-}
+function draw_detect_cone_thread() {}
 
-function draw_detect_cone() {
-  // Unsupported VM revision (1B).
-}
+function draw_detect_cone() {}
 
-function rising_text() {
-  // Unsupported VM revision (1B).
-}
+function rising_text() {}
 
-function debug_text() {
-  // Unsupported VM revision (1B).
-}
+function debug_text() {}

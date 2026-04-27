@@ -81,8 +81,6 @@ main() {
   flag_init("foley_leaves_panic_room");
   flag_init("disable_stryker_dialog");
 
-  //-------------------------------- // Friendlies and Friendly Respawn
-  //-------------------------------- level.foley = getent("foley", "script_noteworthy");
   assert(isAlive(level.foley));
   level.foley.animname = "foley";
   level.foley magic_bullet_shield();
@@ -104,8 +102,6 @@ main() {
   set_empty_promotion_order("b");
   array_thread(friends, ::replace_on_death);
 
-  //-------------------------------- // spawners with script_parameters get processed on spawn
-  //-------------------------------- all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
     if(!isDefined(spawner.script_parameters))
@@ -114,9 +110,6 @@ main() {
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
 
-  //-------------------------------- // Spawn Stryker vehicle
-  //-------------------------------- level.stryker = spawn_vehicle_from_targetname_and_drive("stryker");
-  //level.stryker.veh_pathtype = "follow";
   level.stryker.vehicle_stays_alive = true;
   level.stryker vehPhys_DisableCrashing();
   level.stryker.damageIsFromPlayer = true;
@@ -141,8 +134,6 @@ main() {
 
   set_cull_dist(9000);
 
-  //-------------------------------- // Array / Spawn threads
-  //-------------------------------- array_spawn_function_noteworthy("drop_plane", ::drop_plane);
   run_thread_on_targetname("sentry_activate", ::sentry_activate_trigger);
   run_thread_on_targetname("vehicle_path_disconnector", ::vehicle_path_disconnector);
   run_thread_on_targetname("delete_ai_trigger", ::delete_ai_trigger);
@@ -156,8 +147,6 @@ main() {
   add_hint_string("use_laser", &"ARCADIA_LASER_HINT", ::should_stop_laser_hint);
   add_hint_string("use_laser_golf", &"ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
 
-  //-------------------------------- // Level threads
-  //-------------------------------- thread civilian_car();
   thread checkpoint_cleared_dialog();
   thread checkpoint_cleared_dialog_ac130();
   thread laser_targeting_device(level.player);
@@ -183,8 +172,6 @@ main() {
   thread set_culldist_first_bridge();
   thread undo_culldist_mansion();
 
-  //-------------------------------- // Make friendlies less accurate so the AI will fight longer without player interaction
-  //-------------------------------- wait 0.05;
   friendlies = getaiarray("allies");
   foreach(friend in friendlies)
   friend.baseaccuracy = 0.4;
@@ -214,7 +201,6 @@ undo_culldist_mansion() {
 }
 
 activate_second_half_destructibles() {
-  //flag_wait( "past_checkpoint" );
   wait 1;
   volume = getent("volume_second_half", "targetname");
   volume activate_destructibles_in_volume();
@@ -403,7 +389,6 @@ startCrash() {
 
   wait 0.05;
 
-  // delete stryker when the player goes through the house
   level notify("golf_course_mansion");
   level.stryker connectPaths();
   level.stryker delete();
@@ -421,7 +406,6 @@ startCrash() {
 
   thread objective_brookmere_road();
 
-  //exploder( "tanker_explosion_tall" );
   thread sun_blocker();
 }
 
@@ -481,32 +465,24 @@ brookmere_road_dialog() {
   battlechatter_off("allies");
   flavorbursts_off("allies");
 
-  // Overlord, Hunter Two-One-Actual. Triple-A has been neutralized. We're heading to 4677 Brookmere Road, over.
   level.foley thread anim_single_solo(level.foley, "arcadia_fly_headingto4677");
   wait 7.5;
 
-  // Interrogative - what exactly are we looking for, over?
   level.foley thread anim_single_solo(level.foley, "arcadia_fly_lookingfor");
   wait 3;
 
-  // Sergeant Foley, this is General Shepherd.
   radio_dialogue("arcadia_shp_genshep");
 
-  // Your objective is to extract a high value individual from a 'panic room' on the second floor of that house.
   radio_dialogue("arcadia_shp_panicroom");
 
-  // Yes sir!
   level.foley thread anim_single_solo(level.foley, "arcadia_fly_yessir");
   wait 1;
 
-  // He'll be expecting you. Challenge is "Icepick", countersign is "Phoenix".
   radio_dialogue("arcadia_shp_phoenix");
 
-  // Get him outta there and report back to Overlord. Shepherd out.
   radio_dialogue("arcadia_shp_reportback");
   wait 0.5;
 
-  // All right, you heard the man - 4677 Brookmere Road. Move!
   level.foley thread anim_single_solo(level.foley, "arcadia_fly_heardtheman");
   wait 2.0;
 
@@ -514,11 +490,6 @@ brookmere_road_dialog() {
 }
 
 second_street_friendlies() {
-  // once coming up to the second street before the bridge we change all the friendlies
-  // to GREEN color group so they all stick together.
-  // Also, 2 friendlies get set to 1 health and are told to no longer respawn on death.
-  // This leaves us with 4 friendlies instead of 6 for the new area
-
   flag_wait("first_bridge");
 
   friendlies = getaiarray("allies");
@@ -534,43 +505,36 @@ second_street_friendlies() {
 dialog_enemies_yellow_house() {
   flag_wait("enemies_yellow_house");
 
-  // We got hostiles in the yellow house!
   level.foley thread dialogue_queue("arcadia_fly_yellowhouse");
 }
 
 dialog_enemies_grey_house() {
   flag_wait("enemies_grey_house");
 
-  // Enemies in the grey house!!!
   level.dunn thread dialogue_queue("arcadia_cpd_greyhouse");
 
   wait 1;
 
-  // Squad, we got hostiles that grey house! Take 'em out!!
   level.foley thread dialogue_queue("arcadia_fly_greyhouse");
 }
 
 dialog_enemies_pink_house() {
   flag_wait("enemies_pink_house");
 
-  // Squad, put suppressing fire on that house!!
   level.foley thread dialogue_queue("arcadia_fly_suppressingfire");
 
   wait 8;
 
-  // Squad, concentrate your fire on that house!!
   level.foley thread dialogue_queue("arcadia_fly_suppressingfire");
 }
 
 dialog_enemies_apartments() {
   flag_wait("enemies_apartments");
 
-  // Enemy foot-mobiles by the apartments!
   level.dunn thread dialogue_queue("arcadia_cpd_apartments");
 
   wait 1;
 
-  // Roger that, enemy foot-mobiles by the apartments, take 'em ouuut!!
   level.foley thread dialogue_queue("arcadia_fly_apartments");
 }
 
@@ -579,44 +543,36 @@ get_off_streets_dialog() {
 
   wait 5;
 
-  // Hunter Two-One, this is Hunter Two-One Actual. Our evac choppers are taking heavy losses from ground fire!
   level.foley thread dialogue_queue("arcadia_fly_heavylosses");
 
   wait 1;
 
-  // We gotta destroy those triple-A positions so they can get the rest of the civvies outta here! Let's go!
   level.foley thread dialogue_queue("arcadia_fly_destroytriplea");
 
   battlechatter_on("allies");
 
   wait 10;
 
-  // Get off the streets!!
   level.foley thread dialogue_queue("arcadia_fly_getoffstreets");
 
   wait 10;
 
-  // Get off the streets, use the houses for cover!!
   level.foley thread dialogue_queue("arcadia_fly_offstreets");
 
   wait 15;
 
-  // Get outta the street!!
   level.foley thread dialogue_queue("arcadia_fly_outtastreets");
 
   wait 15;
 
-  // Flank 'em through the houses!! Go go go!!
   level.foley thread dialogue_queue("arcadia_fly_flankthruhouses");
 
   wait 20;
 
-  // Squad, move up through these houses, let's go, let's go!!
   level.foley thread dialogue_queue("arcadia_fly_movethruhouses");
 }
 
 move_up_dialog() {
-  // wait for the trigger to get hit that tells the friendlies to move up
   self waittill("trigger");
 
   guy = undefined;
@@ -625,22 +581,22 @@ move_up_dialog() {
   rand = randomint(4);
   switch (rand) {
     case 0:
-      // Everyone move up!
+
       guy = level.foley;
       anime = "arcadia_fly_everyoneup";
       break;
     case 1:
-      // Move up!
+
       guy = level.foley;
       anime = "arcadia_fly_moveup";
       break;
     case 2:
-      // Move up!!!
+
       guy = level.dunn;
       anime = "arcadia_cpd_moveup";
       break;
     case 3:
-      // Let's go, let's go!!
+
       guy = level.dunn;
       anime = "arcadia_cpd_letsgo";
       break;
@@ -658,22 +614,18 @@ stryker_rpg_dialog() {
   flag_wait("stryker_rpg_danger_dialog_1");
   wait 8;
 
-  // Squad! Protect the Stryker! Watch for foot-mobiles with RPGs!
   level.foley thread dialogue_queue("arcadia_fly_protectstryker");
 
   flag_wait("stryker_rpg_danger_dialog_2");
   wait 8;
 
-  // Squad! They're targeting the Stryker! Watch for RPGs!
   level.foley thread dialogue_queue("arcadia_fly_watchforrpgs");
 
   flag_wait("stryker_rpg_danger_dialog_3");
   wait 8;
 
-  // Hunter Two-One Actual, this is Badger One! Our anti-missile system cannot handle the volume of RPG fire, we need your team to thin 'em out, how copy, over?
   thread radio_dialogue("arcadia_str_rpgfire");
 
-  // Solid copy Badger One, we're on it! Out!
   level.foley thread dialogue_queue("arcadia_fly_wereonit");
 }
 
@@ -703,16 +655,12 @@ checkpoint_cleared_dialog_ac130() {
   marine1 endon("death");
   marine2 endon("death");
 
-  // Look look! That's an AC-130 man.
   marine1 anim_generic(marine1, "arcadia_ar1_lookac130");
 
-  // That's why they don't fly during the day soldier.
   marine2 anim_generic(marine2, "arcadia_ar2_dontfly");
 
-  // Damn…sucks to be them…
   marine1 anim_generic(marine1, "arcadia_ar1_suckstobethem");
 
-  // Huah.
   marine2 anim_generic(marine2, "arcadia_ar2_huah");
 }
 
@@ -723,25 +671,18 @@ checkpoint_cleared_dialog() {
   flavorbursts_off("allies");
   flag_set("disable_stryker_dialog");
 
-  // Hunter Two-One-Actual, Overlord. Gimme a sitrep over.
   radio_dialogue("arcadia_hqr_sitrep");
 
-  // We're just past the enemy blockade at Checkpoint Lima. Now proceeding into Arcadia, over.
   level.foley dialogue_queue("arcadia_fly_intoarcadia");
 
-  // Roger that. I have new orders for you. This comes down from the top, over.
   radio_dialogue("arcadia_hqr_neworders");
 
-  // Solid copy Overlord, send it.
   level.foley dialogue_queue("arcadia_fly_solidcopy");
 
-  // Your team is to divert to 4677 Brookmere Road after you have eliminated the triple-A.
   radio_dialogue("arcadia_hqr_divertto4677");
 
-  // Solid copy Overlord. Divert to 4677 Brookmere Road once the guns are destroyed. Got it.
   level.foley dialogue_queue("arcadia_fly_divertto4677");
 
-  // Check back with me when you've completed your main objective. Overlord out.
   radio_dialogue("arcadia_hqr_checkback");
 
   battlechatter_on("allies");
@@ -817,7 +758,6 @@ fridge_guy_spots_player(guy_and_fridge) {
 foley_dunn_get_to_ending() {
   flag_wait("heros_become_red");
 
-  // move foley and dunn to red
   level.foley thread set_force_color("r");
   level.foley.animplaybackrate = 1.2;
   level.foley allowedStances("stand");
@@ -830,7 +770,6 @@ foley_dunn_get_to_ending() {
 level_ending_sequence() {
   thread level_ending_sequence_dialog();
 
-  // Wait for player to be approaching the end
   flag_wait("ending_prep");
 
   battlechatter_off("allies");
@@ -851,7 +790,6 @@ level_ending_sequence() {
   node_dunn = getent("ending_node_dunn", "targetname");
   node_dunn_guard = getnode("node_dunn_guard", "targetname");
 
-  // put HVI and dead enemy in position
   thread ending_sequence_deadguy("hvi_spawner", "ending_node_hvi", "panicroom_hvi", "ending_pose");
   thread ending_sequence_deadguy("ending_enemy_spawner", "ending_node_dunn", "panicroom_enemy", "ending_pose");
 
@@ -873,10 +811,8 @@ level_ending_sequence() {
   level.dunn.goalradius = 16;
   level.dunn setGoalNode(hallnode_dunn);
 
-  // Wait for player to enter panic room
   flag_wait("start_ending");
 
-  // Foley goes and stands in the panic room
   level.foley.goalradius = 16;
   level.foley setGoalNode(node_foley);
   level.foley cqb_walk("on");
@@ -888,19 +824,15 @@ level_ending_sequence() {
   level.foley waittill("goal");
   flag_set("foley_in_panic_room");
 
-  // wait for player to pick up briefcase before doing final anims
   flag_wait("picked_up_briefcase");
 
-  // Objective is complete
   objective_state(2, "done");
   flag_set("examine_tats");
 
-  // Dunn examines tats
   thread ending_sequence_dunn(node_dunn);
 
   flag_wait("foley_leaves_panic_room");
 
-  // Foley walks out to see the tattoo guy
   level.foley thread maps\_patrol::patrol("ending_node_foley3");
 
   flag_wait("end_dialog_done");
@@ -935,19 +867,6 @@ ending_sequence_deadguy(spawner_targetname, node_targetname, animName, anime) {
 
   guy.animname = animName;
   node thread anim_first_frame_solo(guy, anime);
-
-  //flag_wait( "player_approaching_house" );
-  //wait 0.05;
-
-  //guy.team = "neutral";
-  //guy.no_friendly_fire_penalty = true;
-  //guy.allowdeath = false;
-  //guy.a.nodeath = true;
-  //guy.noragdoll = true;
-  //guy gun_remove();
-  //guy magic_bullet_shield();
-  //guy.noDrop = true;
-  //guy kill();
 }
 
 ending_sequence_deadguy_create(spawner) {
@@ -976,32 +895,27 @@ ending_sequence_deadguy_create(spawner) {
 level_ending_sequence_dialog() {
   flag_wait("icepick_callout");
 
-  // Icepick.
   level.foley dialogue_queue("arcadia_fly_icepick1");
 
   wait 1.5;
 
   flag_wait("player_upstairs");
 
-  // Icepick!
   level.foley dialogue_queue("arcadia_fly_icepick2");
 
   wait 1.0;
 
-  // Something's not right here…Check the panic room - move!
   level.foley dialogue_queue("arcadia_fly_notright");
   thread music_play("arcadia_panicroom");
 
   flag_wait("start_ending");
 
-  // Hmph. No sign of forced entry…
   level.foley anim_single_solo(level.foley, "arcadia_fly_nosign");
 
   flag_wait("foley_in_panic_room");
 
   wait 1;
 
-  // Ramirez, get that briefcase...what's left of it.
   level.foley anim_single_solo(level.foley, "arcadia_fly_getthatbriefcase");
   flag_set("player_can_pick_up_briefcase");
 
@@ -1010,25 +924,18 @@ level_ending_sequence_dialog() {
 
   wait 5.5;
 
-  // Sarge, check out these tats. Not your average paratrooper, huah?
-  //played from anim
-
-  // Huah. Get a couple photos for G-2 and check the bodies for intel.
   level.foley setLookAtEntity(level.dunn);
   level.foley anim_single_solo(level.foley, "arcadia_fly_photosforg2");
 
-  // Huah.
   level.dunn dialogue_queue("arcadia_cpd_huah");
   level.foley setLookAtEntity();
 
-  // Shepherd's not gonna like this.
   level.foley anim_single_solo(level.foley, "arcadia_fly_notgoingtolike");
 
   wait 1.5;
 
   thread delayThread(1.5, ::flag_set, "end_dialog_done");
 
-  // Overlord, the HVI is dead.
   level.foley anim_single_solo(level.foley, "arcadia_fly_overlordhvi");
 }
 

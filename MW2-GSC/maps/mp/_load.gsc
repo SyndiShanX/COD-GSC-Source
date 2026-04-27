@@ -21,7 +21,6 @@ main() {
   initLevelFlags();
 
   level.generic_index = 0;
-  // flag_struct is used as a placeholder when a flag is set without an entity
 
   level.flag_struct = spawnStruct();
   level.flag_struct assign_unique_id();
@@ -43,7 +42,6 @@ main() {
   level.func["scriptModelPlayAnim"] = ::scriptModelPlayAnim;
   level.func["scriptModelClearAnim"] = ::scriptModelClearAnim;
 
-  // dodge this stuff for createfx tool.
   if(!level.createFX_enabled) {
     thread maps\mp\_minefields::minefields();
     thread maps\mp\_radiation::radiation();
@@ -90,7 +88,6 @@ main() {
 
   thread maps\mp\_global_fx::main();
 
-  // Do various things on triggers
   for(p = 0; p < 6; p++) {
     switch (p) {
       case 0:
@@ -138,13 +135,11 @@ main() {
 
   thread maps\mp\_animatedmodels::main();
 
-  // auto-sentry
   level.func["damagefeedback"] = maps\mp\gametypes\_damagefeedback::updateDamageFeedback;
   level.func["setTeamHeadIcon"] = maps\mp\_entityheadicons::setTeamHeadIcon;
   level.laserOn_func = ::laserOn;
   level.laserOff_func = ::laserOff;
 
-  // defaults
   setDvar("sm_sunShadowScale", 1);
   setDvar("r_specularcolorscale", 2.5);
   setDvar("r_diffusecolorscale", 1);
@@ -169,7 +164,6 @@ exploder_load(trigger) {
 }
 
 setupExploders() {
-  // Hide exploder models.
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
   for(i = 0; i < smodels.size; i++)
@@ -185,13 +179,9 @@ setupExploders() {
       else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
-        //if( isDefined( ents[ i ].script_disconnectpaths ) )
-        //ents[ i ] connectpaths();
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] hide();
         ents[i] notsolid();
-        //if( isDefined( ents[ i ].spawnflags ) && ( ents[ i ].spawnflags & 1 ) )
-        //ents[ i ] connectpaths();
       }
     }
   }
@@ -254,7 +244,7 @@ setupExploders() {
     ent.v["target"] = exploder.target;
     ent.v["ender"] = exploder.script_ender;
     ent.v["type"] = "exploder";
-    // 		ent.v[ "worldfx" ] = true;
+
     if(!isDefined(exploder.script_fxid))
       ent.v["fxid"] = "No FX";
     else
@@ -268,11 +258,8 @@ setupExploders() {
     if(isDefined(exploder.target)) {
       org = getent(ent.v["target"], "targetname").origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
-      // 			forward = anglesToForward( angles );
-      // 			up = anglestoup( angles );
     }
 
-    // this basically determines if its a brush / model exploder or not
     if(exploder.classname == "script_brushmodel" || isDefined(exploder.model)) {
       ent.model = exploder;
       ent.model.disconnect_paths = exploder.script_disconnectpaths;

@@ -10,10 +10,6 @@
 #include maps\_utility;
 #using_animtree("generic_human");
 
-// ===========================================================
-// AI vs Player melee
-// ===========================================================
-
 sqr8 = 8 * 8;
 sqr16 = 16 * 16;
 sqr32 = 32 * 32;
@@ -22,15 +18,15 @@ sqr64 = 64 * 64;
 
 MELEE_RANGE = 64;
 MELEE_RANGE_SQ = sqr64;
-MELEE_ACTOR_BOUNDS_RADIUS = 32; // a little bigger than twice the radius of an actor's bounding box
-MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON = (MELEE_ACTOR_BOUNDS_RADIUS - 0.1); // used for asserts
+MELEE_ACTOR_BOUNDS_RADIUS = 32;
+MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON = (MELEE_ACTOR_BOUNDS_RADIUS - 0.1);
 
 CHARGE_RANGE_SQ = 160 * 160;
 CHARGE_RANGE_SQ_VS_PLAYER = 200 * 200;
 
-FAILED_INIT_NEXT_MELEE_TIME = 150; // basic isValid() falure
-FAILED_CHARGE_NEXT_MELEE_TIME = 1500; // charge failures (both standard/aiVSai)
-FAILED_STANDARD_NEXT_MELEE_TIME = 2500; // standard melee failure
+FAILED_INIT_NEXT_MELEE_TIME = 150;
+FAILED_CHARGE_NEXT_MELEE_TIME = 1500;
+FAILED_STANDARD_NEXT_MELEE_TIME = 2500;
 
 NOTETRACK_SYNC = "sync";
 NOTETRACK_UNSYNC = "unsync";
@@ -64,7 +60,6 @@ Melee_StealthCheck() {
 }
 
 Melee_TryExecuting() {
-  // Must have a valid enemy before we try anything
   if(!isDefined(self.enemy))
     return false;
 
@@ -85,8 +80,6 @@ Melee_TryExecuting() {
 
   self animcustom(::Melee_MainLoop, ::Melee_EndScript);
 }
-
-// Setup internal melee structure for sanity/cache tracking
 Melee_ResetAction() {
   assert(isDefined(self.melee));
   assert(isDefined(self.enemy.melee));
@@ -95,8 +88,6 @@ Melee_ResetAction() {
   self.melee.initiated = false;
   self.melee.inProgress = false;
 }
-
-// After succesfully checking for melee, initialize our move
 Melee_ChooseAction() {
   if(!Melee_isValid())
     return false;
@@ -116,7 +107,6 @@ Melee_ChooseAction() {
     return true;
   }
 
-  // Don't try again for a while since we can't start
   self.melee.func = undefined;
   self.nextMeleeCheckTime = gettime() + FAILED_INIT_NEXT_MELEE_TIME;
   self.nextMeleeCheckTarget = self.melee.target;
@@ -131,52 +121,36 @@ Melee_UpdateAndValidateStartPos() {
 
   ignoreActors = true;
 
-  // If the target is too close from the start pos, move the start pos in a way that our traces will succeed.
   distFromTarget2d = distance2d(self.melee.startPos, self.melee.target.origin);
   if(distFromTarget2d < MELEE_ACTOR_BOUNDS_RADIUS) {
-    // Calculate the direction from the target to the start pos, and push that start pos a bit
     dirToStartPos2d = vectorNormalize((self.melee.startPos[0] - self.melee.target.origin[0], self.melee.startPos[1] - self.melee.target.origin[1], 0));
     self.melee.startPos += dirToStartPos2d * (MELEE_ACTOR_BOUNDS_RADIUS - distFromTarget2d);
     assertex(distance2d(self.melee.startPos, self.melee.target.origin) >= (MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON), "Invalid distance to target: " + distance2d(self.melee.startPos, self.melee.target.origin) + ", should be more than " + (MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON));
     ignoreActors = false;
   }
 
-  // Height-based checks
   floorPos = self getDropToFloorPosition(self.melee.startPos);
   if(!isDefined(floorPos))
     return false;
 
-  // Point is so far from the ground that we can't reach it, fail
   if(abs(self.melee.startPos[2] - floorPos[2]) > (MELEE_RANGE * 0.80))
     return false;
 
-  // Point is on another floor / platform, can't get that high
   if(abs(self.origin[2] - floorPos[2]) > (MELEE_RANGE * 0.80))
     return false;
 
-  // If the point is fine, update its value
   self.melee.startPos = floorPos;
   assertex(distance2d(self.melee.startPos, self.melee.target.origin) >= (MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON), "Invalid distance to target: " + distance2d(self.melee.startPos, self.melee.target.origin) + ", should be more than " + (MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON));
 
-  // Now check whether movement is possible to that point	
-
-  // First check to see if we can reach our start pos
   if(!self mayMoveToPoint(self.melee.startPos, true, ignoreActors))
     return false;
 
-  // Compute a point that's just outside of the target's bounds. Do a first trace to that point which doesn't
-  // ignore actors, and then a second trace which does
-
-  // if we're going around a corner, the two traces will pick a point to form a 90 angle.
-  // otherwise we pick a point right outside of the target's box
   if(isDefined(self.melee.startToTargetCornerAngles)) {
-    // first find the corner based on the angles
     targetToStartPos = self.melee.startPos - self.melee.target.origin;
     cornerDir = anglesToForward(self.melee.startToTargetCornerAngles);
     cornerDirLen = vectorDot(cornerDir, targetToStartPos);
     mayMoveTargetOrigin = self.melee.startPos - (cornerDir * cornerDirLen);
 
-    // push it out a bit if it's too close to the target
     cornerToTarget = self.melee.target.origin - mayMoveTargetOrigin;
     cornerToTargetLen = distance2d(self.melee.target.origin, mayMoveTargetOrigin);
     if(cornerToTargetLen < MELEE_ACTOR_BOUNDS_RADIUS)
@@ -196,10 +170,7 @@ Melee_UpdateAndValidateStartPos() {
 
   return true;
 }
-
-// Checks for various self / target conditions. Does not check for pathing issues.
 Melee_isValid() {
-  // Must have a target still
   if(!isDefined(self.melee.target))
     return false;
 
@@ -208,7 +179,6 @@ Melee_isValid() {
   if(isDefined(target.dontMelee))
     return false;
 
-  // Distance check should usually fail
   enemyDistanceSq = distanceSquared(self.origin, target.origin);
 
   if(isDefined(self.meleeChargeDistSq))
@@ -218,65 +188,44 @@ Melee_isValid() {
   else
     chargeDistSq = CHARGE_RANGE_SQ;
 
-  // Enemy isn't even close enough to initiate
   if(!self.melee.initiated && (enemyDistanceSq > chargeDistSq))
     return false;
 
-  //
-  // Self Checks
-  //
-
-  // Don't charge if we're about to die
   if(!isAlive(self))
     return false;
 
-  // Don't melee on the first frame ...
   if(isDefined(self.a.noFirstFrameMelee) && (self.a.scriptStartTime >= gettime() + 50))
     return false;
 
-  // Prevent doing checks too often on the same target
   if(isDefined(self.nextMeleeCheckTime) && isDefined(self.nextMeleeCheckTarget) && (gettime() < self.nextMeleeCheckTime) && (self.nextMeleeCheckTarget == target))
     return false;
 
-  // Can't melee if we're not standing or crouching
   if(isDefined(self.a.onback) || (self.a.pose == "prone"))
     return false;
 
-  // can't melee while sidearm is out. need animations for this.
-  // we rely on main loop to put away sidearm if necessary.
   if(usingSidearm())
     return false;
 
-  // don't melee charge with a grenade in range, unless you have a shield
   if(isDefined(self.grenade) && (self.frontShieldAngleCos == 1))
     return false;
-
-  //
-  // Enemy checks
-  //
 
   if(!isAlive(target))
     return false;
 
-  // no melee on enemies that are flagged as such	
   if(isDefined(target.dontAttackMe) || (isDefined(target.ignoreMe) && target.ignoreMe))
     return false;
 
-  // no meleeing virtual targets
   if(!isAI(target) && !isPlayer(target))
     return false;
 
   if(isAI(target)) {
-    // special state, can't allow meleeing
     if(target isInScriptedState())
       return false;
 
-    // crawling/dying
     if(target doingLongDeath() || target.delayedDeath)
       return false;
   }
 
-  // Check if our enemy is in a proper pose to get melee'd
   if(isPlayer(target))
     enemyPose = target getStance();
   else
@@ -285,19 +234,12 @@ Melee_isValid() {
   if((enemyPose != "stand") && (enemyPose != "crouch"))
     return false;
 
-  // Disable melee completely when both targets are invulnerable
   if(isDefined(self.magic_bullet_shield) && isDefined(target.magic_bullet_shield))
     return false;
 
-  // don't melee charge with a grenade in range of the enemy
   if(isDefined(target.grenade))
     return false;
 
-  //
-  //	Position Checks
-  //
-
-  // Have extra tolerance when already in progress, since some animations twist the origin quite a bit ( for example standard melee )
   if(self.melee.inProgress)
     yawThreshold = 110;
   else
@@ -307,15 +249,12 @@ Melee_isValid() {
   if(abs(yawToEnemy) > yawThreshold)
     return false;
 
-  // Enemy is already close enough to melee.
   if(enemyDistanceSq <= MELEE_RANGE_SQ)
     return true;
 
-  // if we already started, but no longer in melee range, fail/abort
   if(self.melee.inProgress)
     return false;
 
-  // we can't melee from our position and need to charge, but failed a charge recently on the same target ; fail
   if(isDefined(self.nextMeleeChargeTime) && isDefined(self.nextMeleeChargeTarget) && (gettime() < self.nextMeleeChargeTime) && (self.nextMeleeChargeTarget == target))
     return false;
 
@@ -347,7 +286,6 @@ Melee_MainLoop() {
 
     [[self.melee.func]]();
 
-    // No more melee actions available, or no new ones, finish
     if(!isDefined(self.melee.func) || (prevFunc == self.melee.func)) {
       break;
     }
@@ -367,7 +305,6 @@ Melee_Standard_CheckTimeConstraints() {
   assert(isDefined(self.melee));
   assert(isDefined(self.melee.target));
 
-  // out of range and too early to do a standard melee
   targetDistSq = distanceSquared(self.melee.target.origin, self.origin);
   if((targetDistSq > MELEE_RANGE_SQ) && isDefined(self.nextMeleeStandardChargeTime) && isDefined(self.nextMeleeStandardChargeTarget) && (getTime() < self.nextMeleeStandardChargeTime) && (self.nextMeleeStandardChargeTarget == self.melee.target))
     return false;
@@ -414,9 +351,7 @@ Melee_Standard_Main() {
   while(true) {
     assert(isDefined(self.melee.target));
 
-    // first, charge forward if we need to; get into place to play the melee animation
     if(!Melee_Standard_GetInPosition()) {
-      // if we couldn't get in place to melee, don't try to charge for a little while and abort
       self.nextMeleeChargeTime = getTime() + FAILED_CHARGE_NEXT_MELEE_TIME;
       self.nextMeleeChargeTarget = self.melee.target;
       break;
@@ -434,9 +369,7 @@ Melee_Standard_Main() {
     self setflaggedanimknoballrestart("meleeanim", %melee_1, %body, 1, .2, 1);
     self.melee.inProgress = true;
 
-    // If the attack loop returns false, we need to stop this melee
     if(!Melee_Standard_PlayAttackLoop()) {
-      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again.
       Melee_Standard_DelayStandardCharge(self.melee.target);
       break;
     }
@@ -454,12 +387,9 @@ Melee_Standard_PlayAttackLoop() {
     }
 
     if(note == "stop") {
-      // check if it's worth continuing with another melee.
-      // and see if we could so something better , or continue with our attacks	
       if(!Melee_ChooseAction())
         return false;
 
-      // Return whether the action we choose is the same as this one, in which case we'll simply continue.
       assert(isDefined(self.melee.func));
       if(self.melee.func != ::Melee_Standard_Main)
         return true;
@@ -475,8 +405,6 @@ Melee_Standard_PlayAttackLoop() {
     }
   }
 }
-
-// this will update our target position based on our target
 Melee_Standard_UpdateAndValidateTarget() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
@@ -493,14 +421,10 @@ Melee_Standard_UpdateAndValidateTarget() {
   return Melee_UpdateAndValidateStartPos();
 }
 
-distance2dSquared(a, b) // should be moved to code
-{
+distance2dSquared(a, b) {
   diff = (a[0] - b[0], a[1] - b[1], 0);
   return lengthSquared(diff);
 }
-
-// this function makes the guy run towards his enemy, and start raising his gun if he's close enough to melee.
-// it will return false if he gives up, or true if he's ready to start a melee animation.
 Melee_Standard_GetInPosition() {
   if(!Melee_Standard_UpdateAndValidateTarget())
     return false;
@@ -508,7 +432,6 @@ Melee_Standard_GetInPosition() {
   enemyDistanceSq = distance2dSquared(self.origin, self.melee.target.origin);
 
   if(enemyDistanceSq <= MELEE_RANGE_SQ) {
-    // just play a melee-from-standing transition
     self SetFlaggedAnimKnobAll("readyanim", %stand_2_melee_1, %body, 1, .3, 1);
     self animscripts\shared::DoNoteTracks("readyanim");
     return true;
@@ -558,7 +481,6 @@ Melee_Standard_GetInPosition() {
         raisingGun = true;
       }
     } else {
-      // if we *are* raising our gun, don't stop unless we're hopelessly out of range, // or if we hit the end of the raise gun animation and didn't melee yet
       withinRangeNow = enemyDistanceSq <= shouldRaiseGunDistSq;
       if(time - raiseGunStartTime >= raiseGunFinishDuration || (!willBeWithinRangeWhenGunIsRaised && !withinRangeNow)) {
         Melee_StartMovement();
@@ -568,28 +490,22 @@ Melee_Standard_GetInPosition() {
     }
     self animscripts\shared::DoNoteTracksForTime(sampleTime, "chargeanim");
 
-    // now that we moved a bit, see if our target moved before we check for valid melee
-    // it's possible something happened in the meantime that makes meleeing impossible.
     if(!Melee_Standard_UpdateAndValidateTarget()) {
       Melee_StopMovement();
       return false;
     }
 
     enemyDistanceSq = distance2dSquared(self.origin, self.melee.target.origin);
-    enemyVel = vector_multiply(self.melee.target.origin - prevEnemyPos, 1 / (gettime() - time)); // units / msec
+    enemyVel = vector_multiply(self.melee.target.origin - prevEnemyPos, 1 / (gettime() - time));
     prevEnemyPos = self.melee.target.origin;
 
-    // figure out where the player will be when we hit them if we (a) start meleeing now, or (b) start raising our gun now
     predictedEnemyPosAfterRaiseGun = self.melee.target.origin + vector_multiply(enemyVel, raiseGunPredictDuration);
     predictedEnemyDistSqAfterRaiseGun = distance2dSquared(self.origin, predictedEnemyPosAfterRaiseGun);
 
-    // if we're done raising our gun, and starting a melee now will hit the guy, our preparation is finished
-    // when fighting non-players, don't wait for the gun raise to finish, or we'll walk through them
     if(raisingGun && (enemyDistanceSq <= shouldMeleeDistSq) && (gettime() - raiseGunStartTime >= raiseGunFinishDuration || !isPlayer(self.melee.target))) {
       break;
     }
 
-    // don't keep charging if we've been doing this for too long.
     if(!raisingGun && (gettime() >= self.melee.giveUpTime)) {
       Melee_StopMovement();
       return false;
@@ -612,18 +528,12 @@ Melee_PlayChargeSound() {
   }
 }
 
-// ===========================================================
-// AI vs AI synced melee
-// ===========================================================
-
 Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Flip(angleDiff) {
   flipAngleThreshold = 90;
 
-  // Have extra tolerance when already in progress, since some animations twist the origin quite a bit ( for example standard melee )
   if(self.melee.inProgress)
     flipAngleThreshold += 50;
 
-  // facing each other
   if(abs(angleDiff) < flipAngleThreshold)
     return false;
 
@@ -644,21 +554,17 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Flip(angleDiff) {
 Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Wrestle(angleDiff) {
   wrestleAngleThreshold = 100;
 
-  // Have extra tolerance when already in progress, since some animations twist the origin quite a bit ( for example standard melee )
   if(self.melee.inProgress)
     wrestleAngleThreshold += 50;
 
-  // facing each other
   if(abs(angleDiff) < wrestleAngleThreshold)
     return false;
 
   target = self.melee.target;
 
-  // Attacker must be able to win	
   if(isDefined(target.magic_bullet_shield))
     return false;
 
-  // DEBUGGING CASES FOR TEST MAP
   if(isDefined(target.meleeAlwaysWin)) {
     assert(!isDefined(self.magic_bullet_shield));
     return false;
@@ -673,17 +579,14 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Wrestle(angleDiff) {
 }
 
 Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Behind(angleDiff) {
-  // from behind right
   if((-90 > angleDiff) || (angleDiff > 0))
     return false;
 
   target = self.melee.target;
 
-  // Attacker must be able to win
   if(isDefined(target.magic_bullet_shield))
     return false;
 
-  // DEBUGGING CASES FOR TEST MAP
   if(isDefined(target.meleeAlwaysWin)) {
     assert(!isDefined(self.magic_bullet_shield));
     return false;
@@ -697,14 +600,12 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Behind(angleDiff) {
 }
 
 Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_BuildExposedList() {
-  // If this AI is forced to play a specific melee, do so!
   if(isDefined(self.meleeForcedExposedFlip)) {
-    assert(!isDefined(self.meleeForcedExposedWrestle)); //can't force both
+    assert(!isDefined(self.meleeForcedExposedWrestle));
     exposedMelees[0] = ::Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Flip;
   } else if(isDefined(self.meleeForcedExposedWrestle)) {
     exposedMelees[0] = ::Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Wrestle;
   } else {
-    // Randomize whether flip or wrestle gets tested first. Behind always tested last.
     flipIndex = randomInt(2);
     wrestleIndex = 1 - flipIndex;
     behindIndex = 2;
@@ -721,29 +622,24 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition() {
   assert(isDefined(self));
   assert(isDefined(self.melee.target));
 
-  // Choose which sequence to play based on angles
   target = self.melee.target;
   angleToEnemy = vectortoangles(target.origin - self.origin);
   angleDiff = AngleClamp180(target.angles[1] - angleToEnemy[1]);
 
   exposedMelees = Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_BuildExposedList();
   for(i = 0; i < exposedMelees.size; i++) {
-    // Test each melee move in order
     if([[exposedMelees[i]]](angleDiff)) {
       assert(isDefined(self.melee.animName));
       assert(isDefined(target.melee.animName));
 
-      // Calculate the position based on the chosen animation. The angles are set so that the attacker faces the enemy before linking
       self.melee.startAngles = (0, angleToEnemy[1], 0);
       self.melee.startPos = getStartOrigin(target.origin, target.angles, self.melee.animName);
 
-      // Succeed if it's on a proper floor/height, we can move in position and we we have a LOS to the target
       if(Melee_UpdateAndValidateStartPos())
         return true;
     }
   }
 
-  // No moves possible
   return false;
 }
 
@@ -753,7 +649,6 @@ Melee_Decide_Winner() {
 
   target = self.melee.target;
 
-  // DEBUGGING CASES FOR TEST MAP
   if(isDefined(self.meleeAlwaysWin)) {
     assert(!isDefined(target.magic_bullet_shield));
     self.melee.winner = true;
@@ -764,7 +659,6 @@ Melee_Decide_Winner() {
     return;
   }
 
-  // Figure out who wins
   if(isDefined(self.magic_bullet_shield)) {
     assert(!isDefined(target.magic_bullet_shield));
     self.melee.winner = true;
@@ -794,8 +688,7 @@ Melee_AIvsAI_SpecialCover_ChooseAnimationAndPosition() {
       self.melee.surviveAnimName = % cornerSdL_melee_winD_attacker_survive;
       target.melee.animName = % cornerSdL_melee_winD_defender;
     }
-  } else // Right
-  {
+  } else {
     assert(target.covernode.type == "Cover Right");
     if(self.melee.winner) {
       self.melee.animName = % cornerSdR_melee_winA_attacker;
@@ -806,13 +699,11 @@ Melee_AIvsAI_SpecialCover_ChooseAnimationAndPosition() {
     }
   }
 
-  // The start position is based on the cover node of the target		
   self.melee.startPos = getStartOrigin(target.covernode.origin, target.covernode.angles, self.melee.animName);
   self.melee.startAngles = (target.covernode.angles[0], AngleClamp180(target.covernode.angles[1] + 180), target.covernode.angles[2]);
 
   target.melee.faceYaw = getNodeForwardYaw(target.covernode);
 
-  // Make sure we can move to the selected point ( no re-try for now )
   self.melee.startToTargetCornerAngles = target.covernode.angles;
   if(!Melee_UpdateAndValidateStartPos()) {
     self.melee.startToTargetCornerAngles = undefined;
@@ -830,15 +721,12 @@ Melee_AIvsAI_SpecialCover_CanExecute() {
   if(!isDefined(cover))
     return false;
 
-  // Make sure the enemy is hiding or leaning out and not currently exposing
   if((distanceSquared(cover.origin, self.melee.target.origin) > 16) && isDefined(self.melee.target.a.coverMode) && ((self.melee.target.a.coverMode != "hide") && (self.melee.target.a.coverMode != "lean")))
     return false;
 
-  // Must be within a some arc in front of the cover
   coverToSelfAngles = vectortoangles(self.origin - cover.origin);
   angleDiff = AngleClamp180(cover.angles[1] - coverToSelfAngles[1]);
 
-  // Only do it for left/right covers for now
   if(cover.type == "Cover Left") {
     if((angleDiff >= -50) && (angleDiff <= 0))
       return true;
@@ -856,17 +744,14 @@ Melee_AIvsAI_ChooseAction() {
 
   target = self.melee.target;
 
-  // We can only do AI vs AI between human AIs
   if(!isAI(target) || (target.type != "human"))
     return false;
 
-  // Can't do AIvsAI in stairs
   assert(isDefined(self.stairsState));
   assert(isDefined(target.stairsState));
   if((self.stairsState != "none") || (target.stairsState != "none"))
     return false;
 
-  // At least one of the two needs not to have bullet shield to be in melee to begin with
   assert(!isDefined(self.magic_bullet_shield) || !isDefined(self.melee.target.magic_bullet_shield));
 
   if(isDefined(self.specialMeleeChooseAction)) {
@@ -875,9 +760,7 @@ Melee_AIvsAI_ChooseAction() {
     self.melee.precisePositioning = true;
   } else if(isDefined(target.specialMeleeChooseAction)) {
     return false;
-  }
-  // If we can execute a special cover sequence, do so, otherwise revert to standard	
-  else if(Melee_AIvsAI_SpecialCover_CanExecute() && Melee_AIvsAI_SpecialCover_ChooseAnimationAndPosition()) {
+  } else if(Melee_AIvsAI_SpecialCover_CanExecute() && Melee_AIvsAI_SpecialCover_ChooseAnimationAndPosition()) {
     self.melee.precisePositioning = true;
   } else {
     if(!Melee_AIvsAI_Exposed_ChooseAnimationAndPosition())
@@ -885,19 +768,15 @@ Melee_AIvsAI_ChooseAction() {
     self.melee.precisePositioning = false;
   }
 
-  // Save the current facing yaw if none of the behaviors requested something specific.
   if(!isDefined(target.melee.faceYaw))
     target.melee.faceYaw = target.angles[1];
 
-  // And the offset from the target to the start pos so that we can do validity checks
   self.melee.startPosOffset = (self.melee.startPos - target.origin);
 
-  // If we get here, we can get to our position and an action has been chosen
   return true;
 }
 
 Melee_AIvsAI_ScheduleNoteTrackLink(target) {
-  // Set us up to get sync'd when we get the note track ( not immediately as regular melees )		
   self.melee.syncNoteTrackEnt = target;
   target.melee.syncNoteTrackEnt = undefined;
 }
@@ -906,7 +785,6 @@ Melee_AIvsAI_TargetLink(target) {
   assert(isDefined(self));
   assert(isDefined(target));
 
-  // If the target is no longer meleeing, don't attach (should only be valid if surviving)
   if(!isDefined(target.melee)) {
     assert(isDefined(self.melee.survive));
     return;
@@ -914,11 +792,10 @@ Melee_AIvsAI_TargetLink(target) {
 
   self Melee_PlayChargeSound();
 
-  // Only attach to our target if he's still alive
   if(!isAlive(target)) {
     return;
   }
-  // Sync up - this var needs to stay outside the melee struct because code uses it!
+
   self.syncedMeleeTarget = target;
   target.syncedMeleeTarget = self;
 
@@ -928,9 +805,7 @@ Melee_AIvsAI_TargetLink(target) {
 }
 
 Melee_AIvsAI_Main() {
-  // charge to correct position
   if(!Melee_AIvsAI_GetInPosition()) {
-    // if we couldn't get in place to melee, don't try to charge for a little while and abort		
     self.nextMeleeChargeTime = gettime() + FAILED_CHARGE_NEXT_MELEE_TIME;
     self.nextMeleeChargeTarget = self.melee.target;
     return;
@@ -938,12 +813,8 @@ Melee_AIvsAI_Main() {
 
   target = self.melee.target;
 
-  // make sure both are still alive - get in position should have aborted otherwise
   assert(isAlive(self) && isAlive(target));
 
-  // setup linking/syncing
-
-  // catch any leftover sync issues
   assert(!isDefined(self.syncedMeleeTarget));
   assert(!isDefined(target.syncedMeleeTarget));
 
@@ -951,7 +822,6 @@ Melee_AIvsAI_Main() {
   assert(animHasNotetrack(self.melee.animName, NOTETRACK_SYNC));
   self Melee_AIvsAI_ScheduleNoteTrackLink(target);
 
-  // Setup who gets to live
   if(self.melee.winner) {
     self.melee.death = undefined;
     target.melee.death = true;
@@ -960,7 +830,6 @@ Melee_AIvsAI_Main() {
     self.melee.death = true;
   }
 
-  // link up the two in case someone ends the script early
   self.melee.partner = target;
   target.melee.partner = self;
 
@@ -973,23 +842,18 @@ Melee_AIvsAI_Main() {
     target.lastWeapon = target.primaryWeapon;
   }
 
-  //save weapons
   self.melee.weapon = self.weapon;
   self.melee.weaponSlot = self getCurrentWeaponSlotName();
   target.melee.weapon = target.weapon;
   target.melee.weaponSlot = target getCurrentWeaponSlotName();
 
-  // mark melee as in progress for the initiater
   self.melee.inProgress = true;
 
-  // Run animation on our target
   target animcustom(::Melee_AIvsAI_Execute, ::Melee_EndScript);
   target thread Melee_AIvsAI_AnimCustomInterruptionMonitor(self);
 
-  // release the target now that it started, we're no longer allowed to mess with it
   self.melee.target = undefined;
 
-  // We're already in a custom, call directly
   self Melee_AIvsAI_Execute();
 }
 
@@ -999,7 +863,6 @@ Melee_AIvsAI_AnimCustomInterruptionMonitor(attacker) {
   self endon("end_melee");
   self endon("melee_aivsai_execute");
 
-  // Wait for a couple of frames. If the execution hasn't started then, fail.
   wait 0.1;
 
   if(isDefined(attacker))
@@ -1013,20 +876,16 @@ Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTi
   assert(isDefined(self.melee));
   assert(isDefined(initialTargetOrigin));
 
-  // Took too long
   if(isDefined(giveUpTime) && (giveUpTime <= getTime()))
     return false;
 
-  // Check if we can still melee while charging
   if(!Melee_isValid())
     return false;
 
   target = self.melee.target;
 
-  // If target moves too much , fail
   positionDelta = distanceSquared(target.origin, initialTargetOrigin);
 
-  // Less tolerant to movement when the target should be in cover
   assert(isDefined(self.melee.precisePositioning));
   if(self.melee.precisePositioning)
     positionThreshold = sqr16;
@@ -1036,9 +895,6 @@ Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTi
   if(positionDelta > positionThreshold)
     return false;
 
-  // Make sure the target hasn't moved in a way that would make us unable to do the melee		
-  // Update our starting position
-  // Make sure target is not out of reach
   self.melee.startPos = target.origin + self.melee.startPosOffset;
   if(!Melee_UpdateAndValidateStartPos())
     return false;
@@ -1053,12 +909,10 @@ Melee_AIvsAI_GetInPosition_IsSuccessful(initialTargetOrigin) {
   assert(isDefined(self.melee.target));
   assert(isDefined(initialTargetOrigin));
 
-  // at the start pos
   dist2dToStartPos = distanceSquared((self.origin[0], self.origin[1], 0), (self.melee.startPos[0], self.melee.startPos[1], 0));
   if((dist2dToStartPos < sqr8) && (abs(self.melee.startPos[2] - self.origin[2]) < MELEE_RANGE))
     return true;
 
-  // in between enemy and start pos
   dist2dFromStartPosToTargetSq = distanceSquared((initialTargetOrigin[0], initialTargetOrigin[1], 0), (self.melee.startPos[0], self.melee.startPos[1], 0));
   dist2dToTargetSq = distanceSquared((self.origin[0], self.origin[1], 0), (self.melee.target.origin[0], self.melee.target.origin[1], 0));
   if((dist2dFromStartPosToTargetSq > dist2dToTargetSq) && (abs(self.melee.target.origin[2] - self.origin[2]) < MELEE_RANGE))
@@ -1073,7 +927,6 @@ Melee_AIvsAI_GetInPosition_Finalize(initialTargetOrigin) {
   assert(isDefined(self.melee.precisePositioning));
   assert(isDefined(initialTargetOrigin));
 
-  // stop the animation and such
   Melee_StopMovement();
 
   if(self.melee.precisePositioning) {
@@ -1087,7 +940,6 @@ Melee_AIvsAI_GetInPosition_Finalize(initialTargetOrigin) {
     wait 0.05;
   }
 
-  // Teleport might have made the sequence invalid, make sure it's still right as we exit
   return Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin);
 }
 
@@ -1095,7 +947,6 @@ Melee_AIvsAI_GetInPosition() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
 
-  // Check if we can still melee while charging
   if(!Melee_isValid())
     return false;
 
@@ -1118,7 +969,6 @@ Melee_AIvsAI_GetInPosition() {
     if(Melee_AIvsAI_GetInPosition_IsSuccessful(initialTargetOrigin))
       return Melee_AIvsAI_GetInPosition_Finalize(initialTargetOrigin);
 
-    // play run forward anim
     self orientMode("face point", self.melee.startPos);
     wait .05;
   }
@@ -1140,53 +990,41 @@ Melee_AIvsAI_Execute() {
   self.a.special = "none";
   self.specialDeathFunc = undefined;
 
-  // Check whether something makes us drop our weapon. If we get revived we'll need to restore it
   self thread Melee_DroppedWeaponMonitorThread();
 
-  // Check for our partner ending melee early, for getting saved etc
   self thread Melee_PartnerEndedMeleeMonitorThread();
 
-  // If we have faceYaw specified, use them, otherwise stay oriented as we were
   if(isDefined(self.melee.faceYaw))
     self orientMode("face angle", self.melee.faceYaw);
   else
     self orientMode("face current");
 
-  // only have standing melees for now, set these with notetracks
   self.a.pose = "stand";
   self clearanim(%body, 0.2);
 
-  // Disable some interruptions if we're going to die, we don't want to break out of melee
   if(isDefined(self.melee.death))
     self Melee_DisableInterruptions();
 
-  // Start the base animation, and loop over the note tracks until one of them tell us to stop	
   self setFlaggedAnimKnobAllRestart("meleeAnim", self.melee.animName, %body, 1, 0.2);
   endNote = self animscripts\shared::DoNoteTracks("meleeAnim", ::Melee_HandleNoteTracks);
 
-  // If the survival animation stopped us, play it now
   if((endNote == NOTETRACK_DEATH) && isDefined(self.melee.survive)) {
-    // If we dropped our weapon but we got saved, restore it immediately
     Melee_DroppedWeaponRestore();
 
     self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveAnimName, %body, 1, 0.2);
     endNote = self animscripts\shared::DoNoteTracks("meleeAnim", ::Melee_HandleNoteTracks);
   }
 
-  // If we're marked for death, make sure we die before exiting
   if(isDefined(self.melee) && isDefined(self.melee.death))
     self kill();
 
-  // note sure what this does:
   self.keepClaimedNode = false;
 }
 
 Melee_DisableInterruptions() {
-  //save the states so we can restore them
   self.melee.wasAllowingPain = self.allowPain;
   self.melee.wasFlashbangImmune = self.flashBangImmunity;
 
-  //disable what makes sense
   self disable_pain();
   self setFlashbangImmunity(true);
 }
@@ -1201,18 +1039,16 @@ Melee_DroppedWeaponRestore() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
 
-  // Give back the weapon we had initially, if we had one, and we dropped it
   if(self.weapon != "none" && self.lastWeapon != "none") {
     return;
   }
-  // If we did not have one to begin with, not much we can do
+
   if(!isDefined(self.melee.weapon) || (self.melee.weapon == "none")) {
     return;
   }
-  // Immediately swap the weapon. Can't animate when ending the script, and we don't want to when playing the revive
+
   self forceUseWeapon(self.melee.weapon, self.melee.weaponSlot);
 
-  // if we dropped the item, destroy it
   if(isDefined(self.melee.droppedWeaponEnt)) {
     self.melee.droppedWeaponEnt delete();
     self.melee.droppedWeaponEnt = undefined;
@@ -1226,7 +1062,6 @@ Melee_DroppedWeaponMonitorThread() {
 
   self waittill("weapon_dropped", droppedWeapon);
 
-  // the weapon drop might fail if in solid and such. droppedWeapon would be 'removed entity' in that case.
   if(isDefined(droppedWeapon)) {
     assert(isDefined(self.melee));
     self.melee.droppedWeaponEnt = droppedWeapon;
@@ -1237,11 +1072,9 @@ Melee_PartnerEndedMeleeMonitorThread_ShouldAnimSurvive() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
 
-  // Doesn't have a survival animation set
   if(!isDefined(self.melee.surviveAnimName))
     return false;
 
-  // Too early if before they interact
   if(!isDefined(self.melee.surviveAnimAllowed))
     return false;
 
@@ -1256,14 +1089,11 @@ Melee_PartnerEndedMeleeMonitorThread() {
   self waittill("partner_end_melee");
 
   if(isDefined(self.melee.death)) {
-    // partner ended the melee, and we're supposed to die. end the script
     if(isDefined(self.melee.animatedDeath) || isDefined(self.melee.interruptDeath)) {
       self kill();
     } else {
-      // don't die!
       self.melee.death = undefined;
 
-      // partner ended before we decided we'd die, we should revive now
       if(Melee_PartnerEndedMeleeMonitorThread_ShouldAnimSurvive()) {
         assert(animHasNotetrack(self.melee.animName, NOTETRACK_DEATH));
         self.melee.survive = true;
@@ -1272,7 +1102,6 @@ Melee_PartnerEndedMeleeMonitorThread() {
       }
     }
   } else {
-    // if we're not doing the last part of the animation, end immediately
     if(!isDefined(self.melee.unsyncHappened))
       self notify("end_melee");
   }
@@ -1285,7 +1114,7 @@ Melee_Unlink() {
   if(!isDefined(self.melee.linked)) {
     return;
   }
-  // Unlink our sync'd target first, because our own unlink will clear this information
+
   if(isDefined(self.syncedMeleeTarget))
     self.syncedMeleeTarget Melee_UnlinkInternal();
 
@@ -1315,7 +1144,6 @@ Melee_HandleNoteTracks_Unsync() {
 
   self Melee_Unlink();
 
-  // let the AIs know that the unsync happened, which changes the interruption behavior
   self.melee.unsyncHappened = true;
   if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee))
     self.melee.partner.melee.unsyncHappened = true;
@@ -1338,7 +1166,6 @@ Melee_HandleNoteTracks_Death(interruptAnimation) {
   assert(isDefined(self.melee));
   assert(isDefined(self.melee.death));
 
-  // set whether we should die immediately if melee were to end, or finish playing the animation
   if(isDefined(interruptAnimation) && interruptAnimation)
     self.melee.interruptDeath = true;
   else
@@ -1360,20 +1187,15 @@ Melee_HandleNoteTracks(note) {
   } else if(note == NOTETRACK_UNSYNC) {
     self Melee_HandleNoteTracks_Unsync();
 
-    // After the targets unsync, the final 'death' sequence is usually played, and we want to handle the pre-corpse sequence ourself.
-    // We could add a seperate note track too, if this turns out not to be precise enough.
     if(Melee_HandleNoteTracks_ShouldDieAfterUnsync())
       Melee_HandleNoteTracks_Death();
   } else if(note == NOTETRACK_INTERACT) {
-    // From this point on, it's okay to get revived by the animation
     self.melee.surviveAnimAllowed = true;
   } else if(note == NOTETRACK_DEATH) {
-    // Check if we got saved. If we did, play the alternate ending
     if(isDefined(self.melee.survive)) {
       assert(!isDefined(self.melee.death));
       assert(isDefined(self.melee.surviveAnimName));
 
-      // Interrupt the waiting loop so that we may start a new one with the survival animation
       return note;
     }
 
@@ -1381,7 +1203,7 @@ Melee_HandleNoteTracks(note) {
     Melee_HandleNoteTracks_Death();
 
     if(isDefined(self.melee.animatedDeath))
-      return note; // abort DoNoteTracks so we do our death immediately.
+      return note;
   } else if(note == NOTETRACK_ATTACHKNIFE) {
     self attach(KNIFE_ATTACK_MODEL, KNIFE_ATTACK_TAG, true);
     self.melee.hasKnife = true;
@@ -1391,11 +1213,9 @@ Melee_HandleNoteTracks(note) {
   } else if(note == NOTETRACK_STAB) {
     assert(isDefined(self.melee.hasKnife));
 
-    // Play the knife effect
     self playSound(KNIFE_ATTACK_SOUND);
     playFXOnTag(level._effect[KNIFE_ATTACK_FX_NAME], self, KNIFE_ATTACK_FX_TAG);
 
-    // make sure the target dies after being stabbed if he's still doing the melee
     if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee))
       self.melee.partner Melee_HandleNoteTracks_Death(true);
   }
@@ -1404,7 +1224,7 @@ Melee_HandleNoteTracks(note) {
 Melee_DeathHandler_Regular() {
   self endon("end_melee");
   self animscripts\shared::DropAllAIWeapons();
-  return false; //play regular death
+  return false;
 }
 
 Melee_DeathHandler_Delayed() {
@@ -1413,7 +1233,7 @@ Melee_DeathHandler_Delayed() {
   self animscripts\shared::DropAllAIWeapons();
   self startRagdoll();
 
-  return true; //skip regular death
+  return true;
 }
 
 Melee_EndScript_CheckDeath() {
@@ -1435,11 +1255,10 @@ Melee_EndScript_CheckPositionAndMovement() {
   if(!isAlive(self)) {
     return;
   }
-  // make sure we're not marked as moving anymore
+
   if(isDefined(self.melee.playingMovementAnim))
     Melee_StopMovement();
 
-  // Adjust Ground Position
   newOrigin = self getDropToFloorPosition();
   if(isDefined(newOrigin))
     self forceTeleport(newOrigin, self.angles);
@@ -1451,11 +1270,9 @@ Melee_EndScript_CheckWeapon() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
 
-  // melee ended with the knife equipped, remove it
   if(isDefined(self.melee.hasKnife))
     self detach(KNIFE_ATTACK_MODEL, KNIFE_ATTACK_TAG, true);
 
-  // If we dropped our weapon but we didn't die, restore it
   if(isAlive(self))
     Melee_DroppedWeaponRestore();
 }
@@ -1463,8 +1280,6 @@ Melee_EndScript_CheckWeapon() {
 Melee_EndScript_CheckStateChanges() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
-
-  // Restore interruption-based state changes
 
   if(isDefined(self.melee.wasAllowingPain)) {
     if(self.melee.wasAllowingPain)
@@ -1487,7 +1302,6 @@ Melee_EndScript() {
   self Melee_EndScript_CheckWeapon();
   self Melee_EndScript_CheckStateChanges();
 
-  // End the melee prematurely for the other sync'd ent when someone dies/script ends
   if(isDefined(self.melee.partner))
     self.melee.partner notify("partner_end_melee");
 
@@ -1498,11 +1312,9 @@ Melee_AcquireMutex(target) {
   assert(isDefined(self));
   assert(isDefined(target));
 
-  // Can't acquire when soemone is targeting us for a melee
   if(isDefined(self.melee))
     return false;
 
-  // Can't acquire enemy mutex if he's already in a melee process
   if(isDefined(target.melee))
     return false;
 

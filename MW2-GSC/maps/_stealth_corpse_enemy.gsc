@@ -17,11 +17,6 @@ stealth_corpse_enemy_main() {
   self thread enemy_Corpse_Loop();
 }
 
-/************************************************************************************************************/
-
-/*												BEHAVIOR LOOPS												*/
-/************************************************************************************************************/
-
 enemy_Corpse_Loop() {
   self endon("death");
   self endon("pain_death");
@@ -88,9 +83,6 @@ enemy_saw_corpse_logic() {
 
     self enemy_corpse_saw_wrapper();
 
-    // the only reason we failed - and didn't end this function
-    // is if we had an alert change so wait to go back to normal
-    // and then resume looking for the corpse
     self waittill("normal");
   }
 }
@@ -98,17 +90,15 @@ enemy_saw_corpse_logic() {
 enemy_corpse_saw_wrapper() {
   self enemy_find_original_goal();
 
-  // if he maybe saw an enemy - that's more important
   self endon("enemy_alert_level_change");
 
   self thread enemy_announce_huh();
 
-  //self enemy_stop_current_behavior();
   self ent_flag_set("_stealth_running_to_corpse");
   self ent_flag_set("_stealth_override_goalpos");
 
   funcs = self._stealth.behavior.ai_functions["corpse"];
-  self[[funcs["saw"]]](); // ::enemy_corpse_saw_behavior()
+  self[[funcs["saw"]]]();
 }
 
 enemy_corpse_found_wrapper() {
@@ -125,17 +115,16 @@ enemy_corpse_found_wrapper() {
   self thread enemy_corpse_reset_wrapper();
 
   funcs = self._stealth.behavior.ai_functions["corpse"];
-  self[[funcs["found"]]](); // ::enemy_corpse_found_behavior()
+  self[[funcs["found"]]]();
 }
 
 enemy_corpse_reset_wrapper() {
   spotted_flag = self group_get_flagname("_stealth_spotted");
 
-  //if an event happens - we want to forget about this
   self endon("death");
   self endon("_stealth_enemy_alert_level_change");
   level endon(spotted_flag);
-  //in this frame we'll receive this notify from our own event...so wait a frame so we dont end on it
+
   waittillframeend;
   self endon("enemy_awareness_reaction");
 
@@ -144,13 +133,8 @@ enemy_corpse_reset_wrapper() {
   self ent_flag_set("_stealth_normal");
 
   funcs = self._stealth.behavior.ai_functions["corpse"];
-  self thread[[funcs["reset"]]](); // ::enemy_corpse_reset_behavior()
+  self thread[[funcs["reset"]]]();
 }
-
-/************************************************************************************************************/
-
-/*												DEFAULT BEHAVIOR											*/
-/************************************************************************************************************/
 
 enemy_corpse_saw_behavior() {
   self.disableArrivals = false;
@@ -164,7 +148,7 @@ enemy_corpse_saw_behavior() {
     self.script_nobark = 1;
   }
 
-  self.goalradius = 80; // the animation of finding the corpse
+  self.goalradius = 80;
   self setgoalpos(self._stealth.logic.corpse.origin);
 }
 
@@ -173,8 +157,6 @@ enemy_corpse_found_behavior() {
     self setgoalpos(self.origin);
     return;
   }
-
-  //self enemy_stop_current_behavior();
 
   node = enemy_find_free_pathnode_near(level._stealth.logic.corpse.last_pos, 512, 40);
 
@@ -191,20 +173,13 @@ enemy_corpse_reset_behavior() {
   self maps\_stealth_threat_enemy::enemy_alert_level_change("reset");
 }
 
-/************************************************************************************************************/
-
-/*													LOGIC													*/
-/************************************************************************************************************/
-
 player_can_see_corpse(corpse_location) {
   player = get_closest_player(corpse_location);
   d = distance(player.origin, corpse_location);
 
-  //if very close line of sight doesnt matter
   if(d < 150)
     return true;
 
-  //if very far from nearest player line of sight doesnt matter
   if(d > level._stealth.logic.corpse.player_distsqrd)
     return false;
 
@@ -247,50 +222,39 @@ enemy_corpse_logic() {
         else
           dist = level._stealth.logic.corpse.found_dog_distsqrd;
 
-        //are we so close that we actually found one?
         if(distsqrd < dist) {
           found = true;
           break;
         }
 
-        //that's the only check for finding a guy - now lets see if we just see anyone
-        //and make sure not to make any duplicates...we don't want to notify seeing the
-        //same corpse multiple times
-
-        //have we already seen this guy?
         if(isDefined(self._stealth.logic.corpse.corpse_entity)) {
           if(self._stealth.logic.corpse.corpse_entity == corpse) {
             continue;
           }
-          //ok so it's a new guy - is this one closer than the one we already have?
+
           distsqrd2 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
           if(distsqrd2 <= distsqrd)
             continue;
         }
 
-        //are we close enough to check?
         if(distsqrd > level._stealth.logic.corpse.sight_distsqrd) {
           continue;
         }
-        //ok how about close enough to automatically see one?
+
         if(distsqrd < level._stealth.logic.corpse.detect_distsqrd) {
-          //do we have clear line of sight to the corpse
           if(self cansee(corpse)) {
             saw = true;
             break;
           }
         }
 
-        //if not do we happen to look at him at this distance?
         angles = self gettagangles("tag_eye");
         origin = self getEye();
 
         sight = anglesToForward(angles);
         vec_to_corpse = vectornormalize(corpse.origin - origin);
 
-        //are we looking towards a corpse
         if(vectordot(sight, vec_to_corpse) > .55) {
-          //do we have clear line of sight to the corpse
           if(self cansee(corpse)) {
             saw = true;
             break;
@@ -304,7 +268,6 @@ enemy_corpse_logic() {
         else
           self notify("_stealth_found_corpse");
 
-        //if he found it then we can clear his seeing one
         self ent_flag_clear("_stealth_saw_corpse");
 
         self thread enemy_corpse_found(corpse);
@@ -323,7 +286,7 @@ enemy_corpse_logic() {
         self notify("awareness_corpse", "saw_corpse", corpse);
       }
 
-      wait .5; // was .05
+      wait .5;
     }
 
     self remove_corpse_loop_while_stealth_broken();
@@ -370,7 +333,6 @@ enemy_corpse_found_loop() {
   while(1) {
     level waittill(_flag);
 
-    //make sure the flag's not notifying because it's getting cleared
     if(!self stealth_group_corpse_flag()) {
       continue;
     }
@@ -386,16 +348,11 @@ enemy_corpse_alert_level() {
   else
     enemy = random(level.players);
 
-  //we want the ai to detect an enemy without actually causing the behavior to happen
-  //so we can't use the regular alert function, because that causes a notify
-
   if(!isDefined(enemy._stealth.logic.spotted_list[self.unique_id]))
     enemy._stealth.logic.spotted_list[self.unique_id] = 0;
 
-  //basically take up their alert level each time they see a corpse...but not enough
-  //to start attacking the player	
   if(enemy._stealth.logic.spotted_list[self.unique_id] < self._stealth.logic.alert_level.max_warnings) {
-    enemy._stealth.logic.spotted_list[self.unique_id]++; // this takes it to 1
+    enemy._stealth.logic.spotted_list[self.unique_id]++;
     self thread enemy_alert_level_forget(enemy);
   }
 }
@@ -407,7 +364,6 @@ enemy_corpse_found(corpse) {
   corpse setCorpseRemoveTimer(level._stealth.logic.corpse.reset_time);
   corpse.found = true;
 
-  //give a chance
   if(self.type == "dog" && self ent_flag_exist("_stealth_behavior_reaction_anim_in_progress")) {
     wait .1;
     self ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
@@ -437,11 +393,6 @@ enemy_corpse_clear() {
 
   thread group_flag_clear("_stealth_found_corpse", group);
 }
-
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
 
 enemy_init() {
   self._stealth.logic.corpse = spawnStruct();

@@ -295,30 +295,27 @@ init() {
   level.weaponTweaks = [];
   level.hardpointTweaks = [];
   level.hudTweaks = [];
-  // commented out tweaks have not yet been implemented
 
   if(level.console) {
-    registerTweakable("game", "graceperiod", "scr_game_graceperiod", 15); //*
+    registerTweakable("game", "graceperiod", "scr_game_graceperiod", 15);
   } else {
-    registerTweakable("game", "playerwaittime", "scr_game_playerwaittime", 15); //*
-    registerTweakable("game", "matchstarttime", "scr_game_matchstarttime", 5); //*
+    registerTweakable("game", "playerwaittime", "scr_game_playerwaittime", 15);
+    registerTweakable("game", "matchstarttime", "scr_game_matchstarttime", 5);
   }
-  registerTweakable("game", "onlyheadshots", "scr_game_onlyheadshots", 0); //*
-  registerTweakable("game", "allowkillcam", "scr_game_allowkillcam", 1); //*
-  registerTweakable("game", "spectatetype", "scr_game_spectatetype", 2); //*
+  registerTweakable("game", "onlyheadshots", "scr_game_onlyheadshots", 0);
+  registerTweakable("game", "allowkillcam", "scr_game_allowkillcam", 1);
+  registerTweakable("game", "spectatetype", "scr_game_spectatetype", 2);
 
-  registerTweakable("game", "deathpointloss", "scr_game_deathpointloss", 0); //*
-  registerTweakable("game", "suicidepointloss", "scr_game_suicidepointloss", 0); //*
-  registerTweakable("team", "teamkillpointloss", "scr_team_teamkillpointloss", 0); //*
+  registerTweakable("game", "deathpointloss", "scr_game_deathpointloss", 0);
+  registerTweakable("game", "suicidepointloss", "scr_game_suicidepointloss", 0);
+  registerTweakable("team", "teamkillpointloss", "scr_team_teamkillpointloss", 0);
 
-  //	registerTweakable( "team", 			"respawntime", 			"scr_team_respawntime", 			0 );
   registerTweakable("team", "fftype", "scr_team_fftype", 0);
   registerTweakable("team", "teamkillspawndelay", "scr_team_teamkillspawndelay", 0);
 
-  //	registerTweakable( "player", 		"respawndelay", 		"scr_player_respawndelay", 			0 ); //*
-  registerTweakable("player", "maxhealth", "scr_player_maxhealth", 100); //*
-  registerTweakable("player", "healthregentime", "scr_player_healthregentime", 5); //*
-  registerTweakable("player", "forcerespawn", "scr_player_forcerespawn", 1); //*
+  registerTweakable("player", "maxhealth", "scr_player_maxhealth", 100);
+  registerTweakable("player", "healthregentime", "scr_player_healthregentime", 5);
+  registerTweakable("player", "forcerespawn", "scr_player_forcerespawn", 1);
 
   registerTweakable("weapon", "allowfrag", "scr_weapon_allowfrags", 1);
   registerTweakable("weapon", "allowsmoke", "scr_weapon_allowsmoke", 1);
@@ -333,6 +330,6 @@ init() {
   registerTweakable("hardpoint", "allowsupply", "scr_hardpoint_allowsupply", 1);
   registerTweakable("hardpoint", "allowhelicopter", "scr_hardpoint_allowhelicopter", 1);
 
-  registerTweakable("hud", "showobjicons", "ui_hud_showobjicons", 1); //*
+  registerTweakable("hud", "showobjicons", "ui_hud_showobjicons", 1);
   makeDVarServerInfo("ui_hud_showobjicons", 1);
 }

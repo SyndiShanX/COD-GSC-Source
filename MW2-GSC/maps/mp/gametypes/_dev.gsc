@@ -570,20 +570,10 @@ xKillsY(attackerName, victimName) {
     if(!isAlive(attacker) || !isAlive(victim)) {
       return;
     }
-    victim thread[[level.callbackPlayerDamage]](attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
-      attacker, // eAttacker The entity that is attacking.
-      500, // iDamage Integer specifying the amount of damage done
-      0, // iDFlags Integer specifying flags that are to be applied to the damage
-      "MOD_RIFLE_BULLET", // sMeansOfDeath Integer specifying the method of death
-      "scar_mp", // sWeapon The weapon number of the weapon used to inflict the damage
-      (0, 0, 0), // vPoint The point the damage is from?
-      (0, 0, 0), // vDir The direction of the damage
-      "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage);
+    victim thread[[level.callbackPlayerDamage]](attacker, attacker, 500, 0, "MOD_RIFLE_BULLET", "scar_mp", (0, 0, 0), (0, 0, 0), "none", 0
     }
 
     updateMinimapSetting() {
-      // use 0 for no required map aspect ratio.
       requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
       if(!isDefined(level.minimapheight)) {
@@ -635,7 +625,6 @@ xKillsY(attackerName, victimName) {
               if(disttoside < 0)
                 disttoside = 0 - disttoside;
 
-              // extend map bounds to meet the required aspect ratio
               if(requiredMapAspectRatio > 0) {
                 mapAspectRatio = disttoside / disttotop;
                 if(mapAspectRatio < requiredMapAspectRatio) {
@@ -655,7 +644,7 @@ xKillsY(attackerName, victimName) {
 
               if(level.console) {
                 aspectratioguess = 16.0 / 9.0;
-                // .8 would be .75 but it needs to be bigger because of safe area
+
                 angleside = 2 * atan(disttoside * .8 / minimapheight);
                 angletop = 2 * atan(disttotop * aspectratioguess * .8 / minimapheight);
               } else {
@@ -683,8 +672,8 @@ xKillsY(attackerName, victimName) {
               player setclientdvar("cg_drawfps", "0");
               player setclientdvar("fx_enable", "0");
               player setclientdvar("r_fog", "0");
-              player setclientdvar("r_highLodDist", "0"); // (turns of lods)
-              player setclientdvar("r_znear", znear); // (reduces z-fighting)
+              player setclientdvar("r_highLodDist", "0");
+              player setclientdvar("r_znear", znear);
               player setclientdvar("r_lodscale", "0");
               player setclientdvar("cg_drawversion", "0");
               player setclientdvar("sm_enable", "1");
@@ -693,7 +682,6 @@ xKillsY(attackerName, victimName) {
               player setclientdvar("cg_fov", angle);
               player setclientdvar("cg_fovmin", "1");
 
-              // hide 3D icons
               if(isDefined(level.objPoints)) {
                 for(i = 0; i < level.objPointNames.size; i++) {
                   if(isDefined(level.objPoints[level.objPointNames[i]]))
@@ -733,14 +721,6 @@ xKillsY(attackerName, victimName) {
 
       diaglen = length(mincorner - maxcorner);
 
-      /*diagonal = maxcorner - mincorner;
-      side = vecscale(north, vectordot(diagonal, north));
-      	
-      origcorner0 = mincorner;
-      origcorner1 = mincorner + side;
-      origcorner2 = maxcorner;
-      origcorner3 = maxcorner - side;*/
-
       mincorneroffset = (mincorner - viewpos);
       mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
       mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
@@ -766,11 +746,6 @@ xKillsY(attackerName, victimName) {
         line(corner2, corner3, (0, 1, 0));
         line(corner3, corner0, (0, 1, 0));
 
-        /*line(origcorner0, origcorner1, (1,0,0));
-        line(origcorner1, origcorner2, (1,0,0));
-        line(origcorner2, origcorner3, (1,0,0));
-        line(origcorner3, origcorner0, (1,0,0));*/
-
         print3d(toppos, "This Side Up", (1, 1, 1), 1, textscale);
 
         wait .05;
@@ -786,9 +761,6 @@ xKillsY(attackerName, victimName) {
         }
         wait 1;
       }
-
-      //	for( index = 1; index < 24; index++ )
-      //		kick( index );
 
       testclients = getdvarInt("scr_testclients");
       setDevDvar("scr_testclients", 0);
@@ -821,7 +793,6 @@ xKillsY(attackerName, victimName) {
       wait 0.5;
 
       while(1) {
-        //class = level.classMap[randomInt( level.classMap.size )];
         class = "class" + randomInt(5);
 
         self notify("menuresponse", "changeclass", class);

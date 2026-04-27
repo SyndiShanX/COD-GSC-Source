@@ -11,8 +11,6 @@
 #include maps\char_museum;
 #using_animtree("generic_human");
 
-/*------------------------------------------------------------------------------------------------------------------------------------*/
-
 ai_default_setup(array) {
   self set_allowdeath(true);
 
@@ -372,7 +370,7 @@ camera_move(targetname, speed, acc, dec) {
   level.camera vehicle_setspeedimmediate(0, 1000, 1000);
 
   if(!isDefined(speed))
-    speed = 30; // units per second.
+    speed = 30;
 
   dist = distance(level.camera.origin, old_camera.origin);
   time = dist / speed;
@@ -422,8 +420,6 @@ do_anim(name) {
   foreach(ent in level.anim_ai[name])
   ent ent_flag_set("do_anim");
 }
-
-//--------------------------------------------------------------------------------------------------- delete_civ_on_goal() {
 self endon("death");
 
 self waittill("reached_path_end");
@@ -434,7 +430,7 @@ self delete();
 civ_talkers() {
   self endon("death");
 
-  wait .1; //let initiliazing functions run
+  wait .1;
 
   node = self;
   if(isDefined(self.target)) {
@@ -516,7 +512,7 @@ spawn_museum_dudes() {
 
   level.guys = [];
 
-  wait(0.05); // let the guys delete to make room
+  wait(0.05);
 
   if(level.activeRoom == "none") {
     return;
@@ -525,8 +521,6 @@ spawn_museum_dudes() {
   ASSERT(newspawners.size);
 
   if(level.level_mode == "free") {
-    //ClearAllCorpses();
-
     switch (self.script_noteworthy) {
       case "room1":
         museum_room1_anim_go();
@@ -583,12 +577,9 @@ museum_ai_think() {
     self disable_pain();
     self ClearEnemy();
     self PushPlayer(true);
-  } else {
-    //		self thread death_thread();
-  }
-  // make the guy go back to idle even if he freaked out on the first frame
+  } else {}
+
   self.alertlevel = "noncombat";
-  //	self.alertlevelInt = 2;
 
   if(isDefined(self.type) && self.type == "civilian") {
     return;
@@ -618,9 +609,7 @@ sign_departure_status() {
   level.departure_status_array = array;
 
   statuses = [];
-  //	statuses[ statuses.size ] = "arriving";
-  //	statuses[ statuses.size ] = "ontime";
-  //	statuses[ statuses.size ] = "boarding";
+
   statuses[statuses.size] = "delayed";
 
   array = array_randomize(level.departure_status_array);
@@ -717,13 +706,12 @@ sign_departure_status_flip_to(state) {
     bottomtab = self.tabs[bottomname];
     newtab = self.tabs[newname];
 
-    //move top to bottom position
     toptab RotatePitch(180, time);
     newtab.angles = self.status["angles"]["top"];
-    //bring new to top position
+
     wait .05;
     newtab Show();
-    //bring bottom to wait position
+
     wait(time - .1);
     bottomtab Hide();
     bottomtab.angles = self.status["angles"]["waiting"];
@@ -971,7 +959,7 @@ panic_ai_attack() {
   self enable_pain();
   self PushPlayer(false);
   self.goalradius = 4000;
-  //self setgoalentity( level.player );
+
   self.fixednode = false;
 
   level.panic_guys++;
@@ -997,6 +985,6 @@ panic_set_attack() {
 }
 
 c4_packs_think() {
-  wait(randomfloatrange(0, .6)); //so they don't all blink simultaneously
+  wait(randomfloatrange(0, .6));
   playFXOnTag(getfx("c4_blink"), self, "tag_fx");
 }

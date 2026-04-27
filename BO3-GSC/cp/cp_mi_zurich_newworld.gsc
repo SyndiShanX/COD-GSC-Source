@@ -31,54 +31,28 @@
 #using scripts\shared\vehicle_shared;
 #namespace newworld;
 
-function setup_rex_starts() {
-  // Unsupported VM revision (1B).
-}
+function setup_rex_starts() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_fx() {
-  // Unsupported VM revision (1B).
-}
+function init_fx() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function init_flags() {
-  // Unsupported VM revision (1B).
-}
+function init_flags() {}
 
-function level_threads() {
-  // Unsupported VM revision (1B).
-}
+function level_threads() {}
 
-function on_player_spawn() {
-  // Unsupported VM revision (1B).
-}
+function on_player_spawn() {}
 
-function on_player_connect() {
-  // Unsupported VM revision (1B).
-}
+function on_player_connect() {}
 
-function setup_skiptos() {
-  // Unsupported VM revision (1B).
-}
+function setup_skiptos() {}
 
-function civilian_spawn_function() {
-  // Unsupported VM revision (1B).
-}
+function civilian_spawn_function() {}
 
-function function_3840d81a() {
-  // Unsupported VM revision (1B).
-}
+function function_3840d81a() {}
 
-function civilian_touch_death() {
-  // Unsupported VM revision (1B).
-}
+function civilian_touch_death() {}
 
-function civilian_cleanup_death() {
-  // Unsupported VM revision (1B).
-}
+function civilian_cleanup_death() {}

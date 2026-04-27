@@ -84,14 +84,14 @@ clear_rapids_junk() {
 
 create_ent_for_going_over_edge() {
   ent = spawn_tag_origin();
-  //	ent thread boatline();
+
   level.over_edge_ent = ent;
 
   trigger = getentwithflag("full_brake_until_waterfall_end");
   struct = getstruct(trigger.target, "targetname");
   targ = getstruct(struct.target, "targetname");
   dist = distance(struct.origin, targ.origin);
-  speed = 175; //111
+  speed = 175;
   time = dist / speed;
 
   ent.origin = struct.origin;
@@ -116,7 +116,7 @@ fail_of_too_long_without_progress() {
     return;
   level endon("player_brakes_on_waterfall");
   wait 15;
-  // taking too long
+
   bread_crumb_fail();
 }
 
@@ -125,32 +125,11 @@ rapids_scene() {
 
   flag_wait_or_timeout("player_on_final_ride", 5);
   if(!flag("player_on_final_ride")) {
-    // taking too long
     bread_crumb_fail();
     return;
   }
 
-  /*
-  trigger = getentwithflag( "player_on_final_ride" );
-  struct = getstruct( trigger.target, "targetname" );
-  targ = getstruct( struct.target, "targetname" );
-  angles = vectortoangles( targ.origin - struct.origin );
-  forward = anglesToForward( angles );
-  	
-  player_angles = boat.angles;
-  player_angles = set_y( (0,0,0), boat.angles[1] );
-  player_forward = anglesToForward( player_angles );
-  	
-  if( vectordot( player_forward, forward ) < 0.3 )
-  {
-  	// going backwards or some bs
-  	bread_crumb_fail();
-  	return;
-  }
-  */
-  //	fov = getdvarint( "cg_fov" );
   if(!level.player WorldPointInReticle_Circle(level.enemy_boat.origin, 65, 1000)) {
-    // going backwards or some bs
     bread_crumb_fail();
     return;
   }
@@ -168,7 +147,6 @@ rapids_scene() {
   rumble_ent.intensity = .025;
   level.rumbler_ent = rumble_ent;
 
-  //level.players_boat.veh_pathtype = "constrained";
   level.players_boat endon("death");
   level notify("new_river_current");
 
@@ -213,57 +191,32 @@ rapids_scene() {
   was_driving = false;
 
   for(;;) {
-    //line( boat.origin, level.test_boat.origin );
-
     input = level.player GetNormalizedMovement()[1];
     goal_offset += input * input_multiplier;
     goal_offset = clamp(goal_offset, goal_offset_range * -1, goal_offset_range);
-    //println( input + " " + goal_offset );
-
-    //targ = get_player_targ();
-    //next_targ = targ.next_node;
 
     targ = get_player_targ();
     progress = get_player_progress();
     touching_edge = flag("boat_hits_right_side") || flag("boat_hits_left_side");
     if(touching_edge) {
       goal_offset *= 0.85;
-      //println( goal_offset );
     }
 
     used_offset = goal_offset;
     if(abs(used_offset) < 200) {
-      // give it some sway
       sway = sin(gettime() * 0.10) * 80;
       used_offset += sway;
       used_offset = clamp(used_offset, -200, 200);
-      //println( used_offset );
     }
 
     goal = get_position_from_spline_unlimited(targ, progress + lookahead, used_offset);
     goal = set_z(goal, boat.origin[2]);
-
-    //old_goal = goal;
-    //// blend from the original goal to the goal over time
-    //original_goal = boat.origin + player_forward * lookahead;
-    //time_passed = gettime() - start_time;
-    //time_passed = clamp( time_passed, 0, goal_blend_time );
-    //goal = graph_position( time_passed, 0, original_goal, goal_blend_time, goal );
-    //
-    //if( time_passed == goal_blend_time )
-    //{
-    //	assertex( goal == old_goal, "Got wrong goal" );
-    //}
-
-    //Line( boat.origin, goal, (1,0,0) );
 
     speed = 35;
 
     if(flag("test_boat_is_on_spline")) {
       test_ent = level.test_boat;
       if(flag("full_brake_until_waterfall_end")) {
-        // get the dif from a spawned entity that is more representative of the scene
-        // since the boat anim has insanity imbedded in it.
         test_ent = level.over_edge_ent;
       }
 
@@ -283,7 +236,6 @@ rapids_scene() {
       }
     }
 
-    //println( "speed " + speed + ", brakes " + boat.veh_brake );
     time_passed = gettime() - start_time;
     if(time_passed > 1000 || touching_edge) {
       boat vehicleDriveTo(goal, speed);
@@ -300,13 +252,12 @@ rapids_scene() {
 
   level.players_boat thread vehicle_paths(players_boat_end_path);
   level.players_boat StartPath(players_boat_end_path);
-  //	level.players_boat delayCall( .2, ::resumespeed, 20 );
+
   level.players_boat delayCall(.2, ::Vehicle_SetSpeed, 35, 15, 15);
   level.players_boat Vehicle_TurnEngineOff();
 
   jolt_time = .3;
   jolt_count = 0;
-  //	level.player ShellShock( "af_chase_boatdrive_end", 60 );
 
   childthread rumbly_rocks_bumps();
 
@@ -321,25 +272,25 @@ rapids_scene() {
     if(player_steadies_boat()) {
       flag_set("steady_boat_participating");
       level.player thread stop_loop_sound_on_entity("zodiac_waterfall_idle");
-      //			level.player thread play_sound_on_entity( "zodiac_player_rampup" );
+
       level.player thread play_loop_sound_on_entity("zodiac_waterfall_sustain");
-      //			level.player StopRumble( "tank_rumble" );
+
       level.players_boat.driftdir = 1;
       flag_clear("rocky_bumps");
       rumble_ent.intensity = .225;
-      //			level.player stopshellshock();
+
       while(player_steadies_boat())
         wait .05;
       rumble_ent.intensity = .0001;
       flag_set("rocky_bumps");
-      //			level.player ShellShock( "af_chase_boatdrive_end", 60 );
+
       level.player thread stop_loop_sound_on_entity("zodiac_waterfall_sustain");
       level.player thread play_loop_sound_on_entity("zodiac_waterfall_idle");
       jolt_count = 0;
     } else {
       level.players_boat.driftdir = -1;
       flag_clear("steady_boat_participating");
-      //			level.player PlayRumbleOnEntity( "tank_rumble" );
+
       jolt_count += .05;
     }
 
@@ -368,9 +319,6 @@ price_snipes_from_boat() {
   level.price linkto(level.players_boat, "tag_guy2", (0, 0, 0), (0, 0, 0));
 
   thread price_does_steady_boat_anims_and_sound();
-
-  //	if( !flag( "steady_shot" ) )
-  //		return player_fail_at_waterfall();
 
   flag_wait("price_steady_shoot");
   thread fail_if_not_going_over_falls();
@@ -489,7 +437,6 @@ water_fall_edge() {
   flag_set("boat_freeze");
 
   AmbientStop();
-  //	set_ambient( "af_chase_caves" );
 
   SetBlur(6, 1.5);
   level.player PlayRumbleOnEntity("damage_heavy");
@@ -500,7 +447,7 @@ water_fall_edge() {
   level.player SetWaterSheeting(3, 3);
 
   if(isDefined(level.price.function_stack))
-    level.price function_stack_clear(); // mo said too. keep his function stack from continuing after he's dead.
+    level.price function_stack_clear();
 
   level.price stop_magic_bullet_shield();
   level.players_boat notify("end_aim");
@@ -513,7 +460,6 @@ water_fall_edge() {
 
   wait 1;
   if(!flag("killed_pickup_heli")) {
-    // Shepherd escaped on the Helicopter.
     setDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_SHOOT_DOWN");
     missionFailedWrapper();
     return;
@@ -532,31 +478,13 @@ water_fall_edge() {
   nextmission();
 
   wait 7;
-  /*	
-  	set_ambient( "af_chase_ext" );
-  	level.player Unlink();
-  	level.player PlayerSetGroundReferenceEnt( undefined );
-  	level.player teleport_player( on_foot_destination );
-
-  	flag_set( "player_gets_up_after_waterfall" );
-  	flag_wait( "end_heli_crashed" );
-
-  	level.player EnableWeapons();
-
-  	flag_set( "water_cliff_jump_splash_sequence" );
-
-  	black_overlay delayCall( .05, ::Destroy );// leave it for a frame, then knife fight takes over with new overlays.
-  	
-
-  	flag_set( "fell_off_waterfall" );
-  */
 }
 
 send_player_to_blend_boat() {
   zodiac_blend_target = GetEnt("zodiac_blend_target", "targetname");
   level.players_boat MakeUsable();
   level.player PlayerLinkToBlend(zodiac_blend_target, "tag_player", .05, 0, 0);
-  //	player_dismount();
+
   level.player PlayerLinkToBlend(zodiac_blend_target, "tag_player", .05, 0, 0);
   level.players_boat MakeUnusable();
   level.player_linkent = zodiac_blend_target;
@@ -567,7 +495,7 @@ pickup_heli_kill() {
   self thread play_sound_on_entity("scn_afchase_pavelow_downed");
   self Vehicle_TurnEngineOff();
   self.script_crashtypeoverride = "none";
-  self.crashing = true; // halts vehicles script from freeing the vehicle.
+  self.crashing = true;
   self godoff();
   self notify("death");
 
@@ -577,7 +505,7 @@ pickup_heli_kill() {
   self notify("stop_crash_loop_sound");
   self notify("crash_done");
   self notify("nodeath_thread");
-  wait .1; // let the sound thread stop..
+  wait .1;
 
   self Delete();
 }
@@ -637,7 +565,6 @@ enemy_pickup_boat_spot() {
   dummy = level.enemy_boat vehicle_to_dummy();
   level.enemy_boat Vehicle_SetSpeedImmediate(500, 500, 500);
   level.enemy_boat vehicleDriveTo((25648, 26920, -10168), 500);
-  //level.enemy_boat notsolid();
 
   heli_linker = spawn("script_origin", enemy_heli.origin);
   heli_linker linkto(enemy_heli, "tag_body", (0, 0, 0), (0, 0, 0));
@@ -663,8 +590,6 @@ enemy_pickup_boat_spot() {
 
   anim_scene thread anim_single_solo(enemy_heli, "sniper_waterfall");
   anim_scene anim_single_solo(boat, "sniper_waterfall");
-  //boat anim_single_solo( boat, "waterfall_over" );	
-
 }
 
 movetotag(ent, tag, time) {
@@ -705,7 +630,6 @@ miniguns_on_pickup_heli() {
   turret setModel("vehicle_little_bird_minigun_right");
   turret LinkTo(heli, "tag_gunner_right", (33, 0, 0), (60, 76, 0));
 
-  //		turret.isvehicleattached = true;// lets mgturret know not to mess with this turret
   turret.ownerVehicle = self;
   turret SetLeftArc(85);
   turret SetRightArc(85);
@@ -721,8 +645,6 @@ miniguns_on_pickup_heli() {
   turret SetConvergenceTime(1);
   turret.accuracy = 0;
 
-  //		turret SetTargetEntity( level.players_boat, ( -256, 0, 0));
-
   level.end_heli_turret = turret;
 
   turret thread minigun_path();
@@ -734,8 +656,6 @@ miniguns_on_pickup_heli() {
 minigun_path() {
   minigun_path = getstruct("minigun_path", "targetname");
   target_ent = spawn("script_origin", minigun_path.origin);
-  //	target_ent setModel( "body_desert_tf141_zodiac" );
-  //	target_ent NotSolid();
 
   minigun_splasher = getent("minigun_splasher", "targetname");
   minigun_splasher thread minigun_splasher_think();
@@ -754,7 +674,7 @@ minigun_path() {
     target_ent waittill("movedone");
   }
   target_ent MoveTo(level.player.origin, 2.5, 0, 0);
-  //	target_ent waittill( "movedone" );
+
   self SetTargetEntity(level.player);
   self SetAISpread(.4);
   self SetConvergenceTime(3);
@@ -767,7 +687,7 @@ player_in_sight_of_boarding_trigger() {
   level.price.scripted_boat_pose = "left";
 
   thread rapids_scene();
-  level notify("quit_bread_crumb"); // kills failure from falling behind script.
+  level notify("quit_bread_crumb");
   remove_extra_autosave_check("boat_check_trailing");
   remove_extra_autosave_check("boat_check_player_speeding_along");
 }
@@ -781,16 +701,14 @@ trigger_just_before_boatride_end() {
 trigger_pavelow_pilot_dialogue() {
   self waittill("trigger");
   level notify("price_stops_talking_about_helicopters");
-  // Avatar One, gimme a sitrep, over!
-  radio_dialogue("afchase_shp_sitrep");
-  // I have Warhorse 5-1 standing by. Pave Low's downriver sir.		
-  radio_dialogue("afchase_uav_downriver");
-  // Copy that! Warhorse 5-1, be advised, we're comin' in hot!		
-  radio_dialogue("afchase_shp_comininhot");
-  // Roger - dropping the hatch - keep it above 30 knots and watch the vertical clearance.		
-  radio_dialogue("afchase_plp_above30knots");
 
-  //	level.player thread play_sound_on_entity( "afchase_plp_above30knots" );
+  radio_dialogue("afchase_shp_sitrep");
+
+  radio_dialogue("afchase_uav_downriver");
+
+  radio_dialogue("afchase_shp_comininhot");
+
+  radio_dialogue("afchase_plp_above30knots");
 }
 
 slow_enemy_zodiac_for_player() {
@@ -827,14 +745,14 @@ match_position_of_animated_boat(animated_boat) {
   fall_back_speed = 6;
   players_boat = level.players_boat;
   players_boat endon("death");
-  wait .1; // animation is not in place yet
+  wait .1;
   last_animated_boat_spot = animated_boat GetTagOrigin("tag_body");
   ahead = 2;
   speed_to_go = 45;
   while(1) {
     wait .05;
-    origin = animated_boat GetTagOrigin("tag_body"); // cause I don't trust tag_origin
-    angles = animated_boat GetTagAngles("tag_body"); // cause I don't trust tag_origin
+    origin = animated_boat GetTagOrigin("tag_body");
+    angles = animated_boat GetTagAngles("tag_body");
     speed_of_animatedboat = Distance(last_animated_boat_spot, origin) * 20 / 17.6;
 
     level.speed_of_animatedboat = speed_of_animatedboat;

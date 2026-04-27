@@ -10,7 +10,6 @@
 main() {
   level._effect["uav_explosion"] = LoadFX("explosions/vehicle_explosion_hummer_nodoors");
 
-  //walking through water
   level._effect["water_stop"] = LoadFX("misc/parabolic_water_stand");
   level._effect["water_movement"] = LoadFX("misc/parabolic_water_movement");
 
@@ -23,18 +22,9 @@ main() {
 
   level._effect["ceiling_dust"] = LoadFX("dust/ceiling_dust_default");
 
-  //deleted by z for optimization
-  //level._effect[ "horizon_explosion" ]				 			 = LoadFX( "explosions/default_explosion" );
-  //level._effect[ "horizon_explosion_distant" ]			 		 = LoadFX( "explosions/default_explosion" );
-  //level._effect[ "horizon_explosion_more_distant" ]				 = LoadFX( "explosions/default_explosion" );
-
-  //intro
   level._effect["humvee_explosion"] = LoadFX("explosions/small_vehicle_explosion");
   level._effect["pillar_explosion_brick"] = LoadFX("explosions/pillar_explosion_brick_invasion");
 
-  // nates_restaurant prefab exploder id's 138-151
-  // just replace below with LoadFX( "misc/no_effect" ) to empty out the effect and do it yourself in createfx
-  // we'll cleanup the entities when you're done making it pretty.
   level._effect["nates_roof_balcony_blaster"] = LoadFX("explosions/default_explosion");
   level._effect["nates_roof_balcony_blaster_bricks"] = LoadFX("explosions/brick_chunk");
   level._effect["nates_roof_balcony_blaster_sparks_b"] = LoadFX("explosions/sparks_b");
@@ -45,14 +35,12 @@ main() {
   level._effect["nates_roof_awning_flareup"] = LoadFX("explosions/fuel_med_explosion");
   level._effect["nates_roof_pipe_fire"] = LoadFX("impacts/pipe_fire");
 
-  //this plays on super explosion
   level._effect["nates_super_explosion_smoke"] = LoadFX("smoke/thin_black_smoke_L");
   level._effect["nates_super_explosion"] = LoadFX("explosions/nates_super_explosion");
   level._effect["nates_sign_explode"] = LoadFX("explosions/nates_sign_explode");
 
   level._effect["falling_debris_player"] = LoadFX("misc/falling_debris_player");
 
-  // fire fx
   level._effect["fire_tree"] = LoadFX("fire/fire_tree");
   level._effect["fire_tree_slow"] = LoadFX("fire/fire_tree_slow");
   level._effect["fire_falling_runner"] = LoadFX("fire/fire_falling_runner");
@@ -66,7 +54,6 @@ main() {
 
   level._effect["firelp_small_streak_pm1_h"] = loadfx("fire/firelp_small_streak_pm1_h");
 
-  //ambient	
   level._effect["bird_seagull_flock_large"] = LoadFX("misc/bird_seagull_flock_large");
   level._effect["insect_trail_runner_icbm"] = LoadFX("misc/insect_trail_runner_icbm");
   level._effect["leaves_fall_gentlewind"] = LoadFX("misc/leaves_fall_gentlewind");
@@ -74,7 +61,7 @@ main() {
   level._effect["moth_runner"] = LoadFX("misc/moth_runner");
 
   level._effect["ground_smoke_1200x1200"] = LoadFX("smoke/ground_smoke1200x1200");
-  //	level._effect[ "battlefield_smokebank_S" ]						= LoadFX( "smoke/battlefield_smokebank_S" );
+
   level._effect["fog_ground_200"] = LoadFX("smoke/fog_ground_200");
   level._effect["grn_smk_ling"] = LoadFX("smoke/grn_smk_ling");
   level._effect["hallway_smoke_light"] = LoadFX("smoke/hallway_smoke_light");
@@ -88,16 +75,9 @@ main() {
   treadfx_override();
   footstep_effects();
 
-  //testing in different map that doesn't have soundaliases
   if(getDvar("mapname") == "invasion" || getDvar("mapname") == "so_chopper_invasion")
     maps\createfx\invasion_fx::main();
 
-  //glass breaks when you shoot exploders
-  //glassarray = getEntArray( "glass", "targetname" );
-  //glassarray = array_combine( glassarray, getEntArray( "glass", "script_noteworthy" ) );
-  //array_thread( getEntArray( "window_blaster", "script_noteworthy" ), ::window_blaster, glassarray );
-
-  //deleting child exploders when 333 goes off.
   thread super_nates_exploder();
 
   thread glasstest();
@@ -108,14 +88,13 @@ main() {
     light SetLightIntensity(0);
 
   flag_init("super_exploder_exploded");
-  //	thread test_exploders();
+
   level.remote_missile_hide_stuff_func = ::hide_start_exploders;
   level.remote_missile_show_stuff_func = ::show_start_exploders;
-  //	thread debug_brushmodels();
 }
 
 hide_destructibles_for_uav() {
-  if(self.origin[1] > 0) // zero in Y direction is a convenient line to draw for this function. otherwise I would do istouching on a volume
+  if(self.origin[1] > 0)
     self hide();
 }
 
@@ -131,8 +110,6 @@ glasstest() {
   foreach(glass in array) {
     origin = GetGlassOrigin(glass);
     thread sayhi(origin, glass);
-    //dir = level.player.origin - origin;
-    //DestroyGlass( glass, dir );
   }
 }
 
@@ -155,15 +132,10 @@ window_blaster(glassarray) {
     script_exploder = self.script_prefab_exploder;
   glass_inradius = [];
   glass_inradius = get_array_of_closest(self.origin, glassarray, undefined, undefined, self.radius);
-  //	nearest_three_windows = get_array_of_closest( self.origin , glass_inradius , undefined , 3, self.radius );
-  //	foreach( window in nearest_three_windows )	
-  //		glass_inradius = array_remove( glass_inradius , window );
 
   level waittill("exploding_" + script_exploder);
   foreach(glass in glass_inradius)
   glass notify("damage", 150, undefined, undefined, undefined, "bullet");
-  //	foreach( glass in nearest_three_windows )
-  //		glass notify ( "damage" );
 }
 
 super_nates_exploder() {
@@ -173,8 +145,6 @@ super_nates_exploder() {
   }
   for(i = 139; i < 152; i++)
     delete_exploder(i);
-
-  //array_thread( getEntArray( "nates_glass", "script_noteworthy" ), ::delete_glass );
 
   destroyGlass = GetGlassArray("nates_glass_destroy");
   deleteGlass = GetGlassArray("nates_glass_delete");
@@ -201,7 +171,7 @@ delete_glass() {
 
 traffic_light_blinky() {
   self endon("death");
-  // use scrolling texture and save some resources here.
+
   while(1) {
     self setModel("com_traffic_red_light_2x");
     wait .75;
@@ -217,12 +187,8 @@ tree_fire_light() {
   light SetLightColor((0.909804, 0.482353, 0.200000));
   light SetLightIntensity(3);
 
-  //make it waver intensity
-  //	light thread maps\_lights::burning_trash_fire();
   light thread maps\_lights::strobeLight(2, 4, .5, "leaving_gas_station");
-  //	light thread drawOriginForever();
 
-  //these numbers less than half of maxmove, and maxturn values
   ang_range = (6, 6, 6);
   org_range = (44, 44, 0);
   flare_offset = (50, 32, 64);
@@ -231,32 +197,11 @@ tree_fire_light() {
   original_origin = light.origin;
   original_angles = light.angles;
 
-  /*
-  	// wiggle it, just a little bit. careful not to violate the range!
-  	while( 1 )
-  	{
-  		delay = RandomFloatRange( 0.4, 0.7 );
-  		if( RandomInt( 50 ) > 25)
-  			dir *= -1;
-  		//start down and move upish
-  		light moveto( original_origin + ( 0, 0, -64 ), .1 ) ;
-  		wait .1;
-  		light MoveTo( original_origin + ( dir * org_range ) + flare_offset, delay );
-  		if( RandomInt( 50 ) > 25 )
-  			dir *= -1;
-  		light RotateTo( original_angles + ( dir * ang_range ), delay );
-  		wait delay-.05;
-  	}
-  */
-
   random_x = 6;
   random_y = 6;
   random_z = -44;
   min_delay = .5;
   max_delay = .6;
-
-  //original_origin = ( 2424, 943, 2748 ); //close to the tree center
-  //light SetLightFovRange( <fov_outer>, <fov_inner> );
 
   while(!flag("leaving_gas_station")) {
     delay = RandomFloatRange(min_delay, max_delay);
@@ -265,67 +210,13 @@ tree_fire_light() {
     x = (random_x * (randomfloatrange(.1, 1)));
     y = (random_y * (randomfloatrange(.1, 1)));
     z = (random_z * (randomfloatrange(.3, .7)));
-    //new_angle = original_angles + ( amount * ang_range );
-    //light RotateTo( new_angle, delay );
-    //println( new_angle );
+
     new_position = original_origin + (x, y, z);
     light moveto(new_position, delay);
     wait delay;
   }
   light SetLightIntensity(0);
 }
-
-//tree_fire_light_new()
-//{
-//
-//	light = GetEnt( "tree_fire_light", "targetname" );
-//	if( !isDefined( light ) )
-//		return;
-//	light SetLightColor( ( 0.909804, 0.482353, 0.200000 ) );
-//	light SetLightIntensity( 3 );
-//
-//	//make it waver intensity
-//	light thread maps\_lights::burning_trash_fire();
-////	light thread maps\_lights::strobeLight( 1, 3, .5 );
-//	light thread drawOriginForever();
-//	
-//	//these numbers less than half of maxmove, and maxturn values
-//	ang_range = ( 2, 2, 2);
-//	org_range = ( 0, 64, 0 );
-//	flare_offset = ( -64, 0, 128);
-//	dir = 1;
-//	
-//	// 64 is maxmove
-//	original_origin = light.origin+(64,0,-64); // has a range, we're going to move it from the bottom most of that range upward..
-//	original_angles = light.angles;
-//	
-//	// wiggle it, just a little bit. careful not to violate the range!
-//	while( 1 )
-//	{
-//		delay = RandomFloatRange( 0.3, 0.5 );
-//		dir = randomfloat(1);
-//		if( RandomInt( 50 ) > 25)
-//			dir *= -1;
-//		//start down and move upish.slight delay to reduce popping.
-//		light moveto( original_origin , .5 ) ;
-//		wait .5;
-//		light MoveTo( original_origin + ( dir * org_range ) + flare_offset, delay );
-//		if( RandomInt( 50 ) > 25 )
-//			dir *= -1;
-////		light RotateTo( original_angles + ( dir * ang_range ), delay );
-//		wait delay-.05;
-//	}
-//
-//	random_x = 32;
-//	random_y = 32;
-//	random_z = -44;
-//	min_delay = .5;
-//	max_delay = .6;
-//	
-//	//original_origin = ( 2424, 943, 2748 ); //close to the tree center
-//	//light SetLightFovRange( <fov_outer>, <fov_inner> );
-//
-//}
 
 hide_start_exploders() {
   thread hide_start_exploders_thread();
@@ -334,7 +225,7 @@ hide_start_exploders() {
 hide_start_exploders_thread() {
   level endon("show_start_exploders_thread");
 
-  wait 1.05; // copy wait from _remotemissile for animation. +0.05
+  wait 1.05;
   hide_exploder_models("12");
   hide_exploder_models("13");
   hide_exploder_models("10");
@@ -385,7 +276,7 @@ show_start_exploders_thread() {
 }
 
 show_destructibles_for_uav() {
-  if(self.origin[1] > 0) // zero in Y direction is a convenient line to draw for this function. otherwise I would do istouching on a volume
+  if(self.origin[1] > 0)
     self show();
 }
 
@@ -418,7 +309,6 @@ debug_brushmodels() {
 }
 
 footstep_effects() {
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("water", loadfx("impacts/footstep_water"));

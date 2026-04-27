@@ -7,6 +7,4 @@
 #using scripts\shared\util_shared;
 #namespace cp_sh_singapore;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}

@@ -44,7 +44,6 @@ onSpectatingClient() {
   for(;;) {
     self waittill("spectating_cycle");
 
-    // show the card for the player we're viewing. Could be undefined if the cyling failed
     spectatedPlayer = self GetSpectatingPlayer();
     if(isDefined(spectatedPlayer)) {
       self SetCardDisplaySlot(spectatedPlayer, 6);
@@ -82,14 +81,14 @@ setSpectatePermissions() {
   spectateType = maps\mp\gametypes\_tweakables::getTweakableValue("game", "spectatetype");
 
   switch (spectateType) {
-    case 0: // disabled
+    case 0:
       self allowSpectateTeam("allies", false);
       self allowSpectateTeam("axis", false);
       self allowSpectateTeam("freelook", false);
       self allowSpectateTeam("none", false);
 
       break;
-    case 1: // team/player only
+    case 1:
       if(!level.teamBased) {
         self allowSpectateTeam("allies", true);
         self allowSpectateTeam("axis", true);
@@ -107,7 +106,7 @@ setSpectatePermissions() {
         self allowSpectateTeam("none", false);
       }
       break;
-    case 2: // free
+    case 2:
       self allowSpectateTeam("allies", true);
       self allowSpectateTeam("axis", true);
       self allowSpectateTeam("freelook", true);

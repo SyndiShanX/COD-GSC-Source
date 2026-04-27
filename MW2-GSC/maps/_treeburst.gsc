@@ -23,16 +23,10 @@ treeburst() {
   break_vector = anglesToForward(break_angles);
   break_vector = vector_multiply(break_vector, 100);
 
-  // yellow - break vector
-  //	thread drawline(self.origin, (self.origin + break_vector), (1, 1, 0), 1);
-
   start = (self.origin + break_vector) + (0, 0, 512);
   end = start + (0, 0, -1024);
 
   trace = bulletTrace(start, end, false, self);
-
-  // orange - drop to position trace
-  //	thread drawline(start, trace["position"], (1, .5, 0), 1);
 
   dist_vector = ((self.origin + break_vector) - trace["position"]);
   dist = dist_vector[2];
@@ -44,7 +38,6 @@ treeburst() {
   lastcount = count;
 
   while(travelled < dist) {
-    //velocity = velocity + 385.8267717;
     velocity = velocity + 340;
 
     lasttravelled = travelled;
@@ -61,11 +54,11 @@ treeburst() {
   time = lastcount + (remainder / velocity);
 
   self moveGravity(break_vector, time);
-  //	self moveTo(trace["position"], time, (time / 2), 0);
+
   self waittill("movedone");
 
   vec = vectorNormalize(break_vector);
-  //vec = vector_multiply(vec, 150);
+
   vec = vector_multiply(vec, 320);
 
   start = (self.origin + vec) + (0, 0, 512);
@@ -73,12 +66,6 @@ treeburst() {
   trace = bulletTrace(start, end, false, self);
 
   ground = trace["position"];
-
-  // blue - rotate to position trace
-  //	thread drawline(start, ground, (0, 0, 1), 1);
-
-  // red - vector showing rotated position
-  //	thread drawline(self.origin, ground, (1, 0, 0), 1);
 
   treeup_vector = anglesToUp(self.angles);
   treeup_angles = vectortoangles(treeup_vector);
@@ -94,8 +81,6 @@ treeburst() {
   treeorg rotateTo(rest_angles, 1.15, .5, 0);
   treeorg waittill("rotatedone");
 
-  //	treeorg rotatepitch(90,1.1,.05,.2);
-  //	treeorg waittill("rotatedone");
   treeorg rotatepitch(-2.5, .21, .05, .15);
   treeorg waittill("rotatedone");
   treeorg rotatepitch(2.5, .26, .15, .1);

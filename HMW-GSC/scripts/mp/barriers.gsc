@@ -1,13 +1,12 @@
 init() {
   level.barrier_maps = [];
 
-  //add_barrier_map_entry("boneyard", ::boneyard_barriers);
   add_barrier_map_entry("cliffhanger", ::cliffhanger_barriers);
   add_barrier_map_entry("contingency", ::contingency_barriers);
   add_barrier_map_entry("dc_whitehouse", ::dc_whitehouse_barriers);
   add_barrier_map_entry("gulag", ::gulag_barriers);
   add_barrier_map_entry("oilrig", ::oilrig_barriers);
-  //add_barrier_map_entry("mp_pipeline", ::mp_pipeline_barriers);
+
   add_barrier_map_entry("mp_terminal", ::mp_terminal_barriers);
 
   setup_barriers();

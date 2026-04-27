@@ -6,7 +6,6 @@
 #include maps\_utility;
 
 main(vehicletype) {
-  //this sets default tread and tire fx for vehicles - they can be overwritten in level scripts
   if(!isDefined(vehicletype))
     return;
   level.vehicle_treads[vehicletype] = true;
@@ -35,7 +34,7 @@ main(vehicletype) {
       setvehiclefx(vehicletype, "slush", "treadfx/heli_snow_default");
       setvehiclefx(vehicletype, "ice", "treadfx/heli_snow_default");
       break;
-    default: // if the vehicle isn't in this list it will use these effects
+    default:
       setallvehiclefx(vehicletype, "treadfx/tread_dust_default");
       setvehiclefx(vehicletype, "water");
       setvehiclefx(vehicletype, "concrete");

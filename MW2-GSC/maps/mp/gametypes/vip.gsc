@@ -6,21 +6,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	VIP
-	Objective: 	Escort the VIP to safety, or eliminate the VIP beofore he reaches extraction
-	Map ends:	When one team eliminates the enemy team, or the flag is reached
-	Respawning:	Beginning of next round
-
-	Level requirementss
-	------------------ Spawnpoints:
-			classname		mp_tdm_spawn
-		
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -114,7 +99,6 @@ onStartGameType() {
 
   allowed[0] = "vip";
   allowed[1] = "sd";
-  //maps\mp\gametypes\_rank::registerScoreInfo( "capture", 200 );
 
   maps\mp\gametypes\_gameobjects::main(allowed);
 
@@ -282,13 +266,11 @@ setupVip(vipPlayer) {
   vipPlayer _setPerk("specialty_finalstand");
 
   vipPlayer iPrintlnBold("You Are the VIP");
-  //TO DO: add defend icon on the VIP
 }
 
 extractionZone() {
   extractionZone = getEntArray("extraction_vip", "targetname");
 
-  // check to see if zone is available.
   if(!isDefined(extractionZone)) {
     println("WARNING: no extraction zone specified");
 
@@ -360,7 +342,6 @@ handleTimer(player) {
   setGameEndTime(int(getTime() + (level.extractionTime * 1000)));
   wait level.extractionTime;
 
-  //call the sentry airdrops
   level thread vip_endGame(game["defenders"], &"MP_DEFENDED_VIP");
 }
 
@@ -368,9 +349,7 @@ onEndUse(team, player, success) {
   println("End Use");
 }
 
-onCantUse(player) {
-  //	player iPrintLnBold(&"MP_CANT_PLANT_WITHOUT_BOMB" );
-}
+onCantUse(player) {}
 
 spawnFxDelay(fxid, pos, forward, right, delay) {
   wait delay;

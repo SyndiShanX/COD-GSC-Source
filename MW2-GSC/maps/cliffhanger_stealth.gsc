@@ -10,27 +10,7 @@
 #include maps\_stealth_shared_utilities;
 #include maps\cliffhanger_code;
 
-/************************************************************************************************************/
-
-/*												INITIALIZATIONS												*/
-/************************************************************************************************************/
-
-//stealth_price_accuracy_control()
-//{
-//	level endon( "price_starts_moving" );
-//	self.baseaccuracy = 5000000;
-//	
-//	flag_wait( "near_camp_entrance" );
-//	
-//	self.baseaccuracy = .5;
-//	
-//	flag_wait( "at_hanger_entrance" );
-//	
-//	self.baseaccuracy = 1;
-//}
-
 init_cliffhanger_cold_patrol_anims() {
-  // make sure we alternate instead of doing a random selection
   if(!isDefined(level.lastColdPatrolAnimSetAssigned)) {
     level.lastColdPatrolAnimSetAssigned = "none";
   }
@@ -98,17 +78,14 @@ stealth_cliffhanger_clifftop() {
       self stealth_plugin_corpse();
       self stealth_plugin_event_all();
       self.baseaccuracy = 1;
-      self.fovcosine = .76; // for the 2nd group -z
+      self.fovcosine = .76;
       self.fovcosinebusy = .1;
-      //self thread dialog_price_kill();
 
       self init_cliffhanger_cold_patrol_anims();
       break;
 
     case "allies":
-      //self stealth_plugin_aicolor();
-      //self stealth_plugin_accuracy();
-      //self stealth_plugin_smart_stance();
+
   }
 }
 
@@ -126,7 +103,7 @@ stealth_cliffhanger() {
       self ent_flag_init("not_first_attack");
       self thread maps\_stealth_shared_utilities::enemy_event_debug_print("player_found");
       self thread maps\_stealth_shared_utilities::enemy_event_debug_print("not_first_attack");
-      self stealth_plugin_threat(); //call first
+      self stealth_plugin_threat();
 
       custom_array = [];
 
@@ -138,21 +115,14 @@ stealth_cliffhanger() {
       }
       self stealth_threat_behavior_custom(custom_array);
 
-      //goal radius etc for attack
-      //overridding this: enemy_alert_level_attack( enemy )
-      //modify this to make sure you can see the player
       b_array = [];
       b_array["attack"] = ::cliffhanger_enemy_attack_behavior;
       self stealth_threat_behavior_replace(b_array, undefined);
 
-      //time till attack once stealth is broken
-      //overriding this: enemy_animation_attack( type )
       new_array = [];
       new_array["attack"] = ::cliffhanger_enemy_animation_attack;
       self stealth_threat_behavior_replace(undefined, new_array);
 
-      //how long till rest of group is notified
-      //modify this to wait for ent_flag from attack_behavior
       self stealth_pre_spotted_function_custom(::cliffhanger_prespotted_func_with_flag_wait);
 
       self stealth_enable_seek_player_on_spotted();
@@ -164,7 +134,7 @@ stealth_cliffhanger() {
 
       self.grenadeAmmo = 0;
       self.baseaccuracy = 1;
-      self.fovcosine = .5; // cos60
+      self.fovcosine = .5;
       self.fovcosinebusy = .1;
       self thread dialog_player_kill();
       self thread dialog_price_kill();
@@ -174,11 +144,8 @@ stealth_cliffhanger() {
       break;
 
     case "allies":
-      //self stealth_plugin_aicolor();
-      //self stealth_plugin_accuracy();
 
-      //self allowedstances( "crouch" );
-      self.grenadeawareness = 0; //dont chase grenades
+      self.grenadeawareness = 0;
       self thread stealth_plugin_smart_stance();
       self._stealth.behavior.no_prone = true;
       self._stealth.behavior.wait_resume_path = 4;
@@ -198,7 +165,6 @@ cliffhanger_enemy_goback_startfunc() {
   self endon("restart_attack_behavior");
   self endon("_stealth_enemy_alert_level_change");
 
-  // report back to base that we didn't find anybody
   if(self can_report_to_base()) {
     level.reportingToBase = true;
     level thread reset_reportingToBase(self);
@@ -210,23 +176,16 @@ cliffhanger_enemy_goback_startfunc() {
     self.customMoveTransition = maps\_patrol::turn_180_move_start_func;
   }
 
-  // set patrol cold walking anims back
   self init_cliffhanger_cold_patrol_anims();
   self maps\_patrol::set_patrol_run_anim_array();
 }
-
-// check to see if an enemy who has given up searching for the player
-//can do the "report back to base" anim
 can_report_to_base() {
-  // don't do it if someone is already doing it
   if(isDefined(level.reportingToBase))
     return false;
 
-  // don't do it if we're not standing
   if(!isDefined(self.a.stance) || self.a.stance != "stand")
     return false;
 
-  // don't do it if we don't have enough room in front of us
   delta = GetMoveDelta(level.scr_anim["generic"]["patrol_radio_in_clear"], 0, 1);
   endPoint = self LocalToWorldCoords(delta);
   if(!self MayMoveToPoint(endPoint))
@@ -240,8 +199,6 @@ reset_reportingToBase(ai) {
 
   wait time;
 
-  //ai waittill_any( "death", "pain_death", "_stealth_enemy_alert_level_change", "_stealth_attack", "restart_attack_behavior" );
-
   level.reportingToBase = undefined;
 }
 
@@ -252,38 +209,22 @@ friendly_init_cliffhanger() {
   spawn_failed(level.price);
   assert(isDefined(level.price));
 
-  //add overrides for bcs and color nodes
-
   level.price.ref_node = spawn("script_origin", level.price.origin);
-  //level.price.fixednode = false;
-  level.price.animname = "price";
 
-  //level.price thread disable_ai_color();
-  //	level.price stealth_plugin_aicolor();
-  //	array = [];
-  //	array[ "hidden" ] = ::do_nothing;
-  //	array[ "spotted" ] = ::do_nothing;
-  //	level.price stealth_color_state_custom( array );
+  level.price.animname = "price";
 
   level.price enable_ai_color();
   level.price.pathRandomPercent = 0;
 
   level.price thread magic_bullet_shield();
-  //level.price thread price_bullet_sheild(); //disables bullet shield if player is too far
-  //level.price thread price_handle_death();//mission fail if price dies
+
   level.price make_hero();
   level.price.allowdeath = false;
   level.price thread ShootEnemyWrapper_price();
 
   thread battlechatter_off("allies");
 
-  //level.price thread stealth_price_accuracy_control();
-
   level.price.baseaccuracy = 5000000;
-
-  //all stuff from scoutsniper that might be a good idea
-  //	level.price thread price_death();
-  //	level.price setthreatbiasgroup( "price" );
 }
 
 cliffhanger_friendly_state_hidden() {
@@ -292,39 +233,20 @@ cliffhanger_friendly_state_hidden() {
   self.grenadeammo = 0;
 
   self.forceSideArm = undefined;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
-  //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
-  //so we don't all of a sudden alert another stealth group by shooting at them
-  //self.dontEverShoot 	= true;
+
   self.ignoreme = true;
-  //self enable_ai_color();
 }
 
 cliffhanger_friendly_state_spotted() {
   if(flag("price_go_to_climb_ridge"))
     self.dontEverShoot = true;
-  //self thread set_battlechatter( true );
 
   self.grenadeammo = 0;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
-  //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
-  //so we don't all of a sudden alert another stealth group by shooting at them	
-  //self.dontEverShoot 	= false;//self.ignoreall 	 = false;
+
   if(!flag("said_lets_split_up"))
     self.ignoreme = false;
 
-  //self.disablearrivals 	 = true;
-  //self.disableexits 	 = true;
-
   self pushplayer(false);
-  //self disable_cqbwalk();
-
-  //self thread maps\_stealth_behavior_friendly::friendly_spotted_getup_from_prone();		
-  //self allowedstances( "prone", "crouch", "stand" );
-  //self anim_stopanimscripted();
-
-  //self disable_ai_color();
-  //self setgoalpos( self.origin );
 }
 
 check_near_enemy() {
@@ -374,7 +296,6 @@ cliffhanger_enemy_attack_behavior(enemy) {
 
   self set_cliffhanger_alert_cold_patrol_anims();
 
-  //que up the yell
   if(!self ent_flag("not_first_attack"))
     self thread maps\_stealth_shared_utilities::enemy_announce_spotted(self.origin);
 
@@ -387,7 +308,6 @@ cliffhanger_enemy_attack_behavior(enemy) {
   if(!self stealth_group_spotted_flag()) {
     self thread cliffhanger_enemy_attack_behavior_looking_for_player();
 
-    //give the player a chance to hide
     wait_reaction_time();
 
     if(!self ent_flag("not_first_attack")) {
@@ -406,23 +326,12 @@ cliffhanger_enemy_attack_behavior(enemy) {
 }
 
 wait_reaction_time() {
-  //200 = 0, 700 = .5
   d = distance(self.origin, (get_closest_player(self.origin)).origin);
   t = (d - 200) / 1000;
   t = clamp(t, 0, 0.5);
   wait t;
   println("---------reaction time: " + t);
 }
-
-/*
-low sight dist
-self orientmode( "face motion" );
-patrol to here
-reaction time
-wait till "enemy visible"= cansee
-regular combat
-
-*/
 
 cliffhanger_enemy_attack_behavior_looking_for_player() {
   self endon("player_found");
@@ -432,10 +341,8 @@ cliffhanger_enemy_attack_behavior_looking_for_player() {
   self endon("_stealth_enemy_alert_level_change");
   level endon("_stealth_spotted");
 
-  //dont shoot until you can see him
   self.dontevershoot = true;
 
-  //cqb halfway to enemy
   self enable_cqbwalk();
   self.disablearrivals = false;
   self.disableexits = false;
@@ -466,7 +373,6 @@ cliffhanger_enemy_attack_behavior_looking_for_player() {
   self.goalradius = distance * .5;
   self waittill("goal");
 
-  //switch to a walk
   if(!flag("_stealth_spotted") && (!isDefined(self.enemy) || !self cansee(self.enemy))) {
     self set_cliffhanger_search_walk();
 
@@ -487,14 +393,11 @@ cliffhanger_enemy_attack_behavior_sees_player() {
   self endon("death");
   self endon("_stealth_enemy_alert_level_change");
 
-  //there is a .5 second delay in enemy_runto_and_lookaround...
-  //this notify makes sure that script dies here so that the
-  //looping anim doesn't start after we stop current behavior below
   self notify("enemy_runto_and_lookaround");
   self maps\_stealth_shared_utilities::enemy_stop_current_behavior();
 
   self.dontevershoot = undefined;
-  self.aggressivemode = true; //dont linger at cover when you cant see your enemy
+  self.aggressivemode = true;
   prev_pos = undefined;
 
   while(!flag("script_attack_override")) {
@@ -552,7 +455,6 @@ flag_when_you_can_see_the_player(flag_name) {
 }
 
 cliffhanger_enemy_animation_attack(type) {
-  // no animation, just attack
   self thread maps\_stealth_shared_utilities::enemy_announce_attack();
 }
 
@@ -571,11 +473,11 @@ stealth_settings() {
 
   ai_event["ai_eventDistDeath"] = [];
   ai_event["ai_eventDistDeath"]["spotted"] = 512;
-  ai_event["ai_eventDistDeath"]["hidden"] = 512; // used to be 256
+  ai_event["ai_eventDistDeath"]["hidden"] = 512;
 
   ai_event["ai_eventDistPain"] = [];
   ai_event["ai_eventDistPain"]["spotted"] = 256;
-  ai_event["ai_eventDistPain"]["hidden"] = 256; // used to be 256
+  ai_event["ai_eventDistPain"]["hidden"] = 256;
 
   ai_event["ai_eventDistBullet"] = [];
   ai_event["ai_eventDistBullet"]["spotted"] = 96;
@@ -653,12 +555,10 @@ sight_ranges_blizzard() {
   alert_duration[2] = 1;
   alert_duration[3] = 0.75;
 
-  // easy and normal have 2 alert levels so the above times are effectively doubled
   stealth_alert_level_duration(alert_duration[level.gameskill]);
 }
 
 clifftop_prespotted_func() {
-  //thread debug_timer();
   self.battlechatter = false;
   wait 5;
   self.battlechatter = true;
@@ -686,8 +586,6 @@ cliffhanger_prespotted_func_with_flag_wait() {
   self.battlechatter = true;
 }
 
-////////////////////////////////////////////////////
-
 price_stealth_kills_guy(targetguy2) {
   level.price.fixednode = false;
   level.price disable_ai_color();
@@ -698,7 +596,6 @@ price_stealth_kills_guy(targetguy2) {
   self.health = 1;
   self waittill("death");
 
-  //alert second guy and tell price to kill him
   if(isalive(targetguy2)) {
     targetguy2.favoriteenemy = level.player;
     wait .2;
@@ -711,10 +608,6 @@ price_stealth_kills_guy(targetguy2) {
   wait 2;
   level.price.fixednode = true;
   level.price enable_ai_color();
-
-  //level.price Shoot();
-  //aim_spot = self getEye();
-  //MagicBullet( level.price.weapon, level.price gettagorigin( "tag_flash" ), aim_spot );
 }
 
 wait_for_player_interupt(msg) {
@@ -724,8 +617,6 @@ wait_for_player_interupt(msg) {
   level endon(msg);
   level.player waittill("weapon_fired");
 }
-
-///////////////////////////////////////////////////////////////////////////////////
 
 start_truck_patrol() {
   array_thread(getEntArray("truck_guys", "script_noteworthy"), ::add_spawn_function, ::base_truck_guys_think);
@@ -755,12 +646,9 @@ start_truck_patrol() {
 }
 
 truck_headlights() {
-  //level.truck_patrol maps\_vehicle::lights_on( "headlights" );
   playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
   playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
-  //level.truck_patrol maps\_vehicle::lights_on( "brakelights" );
 
-  //taillights
   playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
   playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
 
@@ -780,18 +668,10 @@ delete_truck_headlights() {
 base_truck_think() {
   self endon("death");
 
-  //level.truck_patrol thread handle_end_of_path();
-  //array_thread( level.players, ::base_truck_see, self );
-
   level.truck_patrol thread unload_and_attack_if_stealth_broken_and_close();
-  //level.truck_patrol thread break_stealth_if_player_spotted();
-  //level.truck_patrol thread break_stealth_if_damage_taken();//handled by wizz bys
 
   flag_wait("truck_guys_alerted");
 
-  //self.runtovehicleoverride = ::truck_guy_runtovehicle;
-
-  //guys = self.attachedguys;
   guys = get_living_ai_array("truck_guys", "script_noteworthy");
 
   if(guys.size == 0) {
@@ -802,7 +682,6 @@ base_truck_think() {
   screamer = random(guys);
   screamer maps\_stealth_shared_utilities::enemy_announce_wtf();
 
-  //wait .5;
   self waittill("safe_to_unload");
 
   self Vehicle_SetSpeed(0, 15);
@@ -810,28 +689,7 @@ base_truck_think() {
   self maps\_vehicle::vehicle_unload();
 
   flag_set("jeep_stopped");
-
-  //self waittill( "unloaded" );
 }
-
-/*
-handle_end_of_path()
-{
-	while( 1 )
-	{
-		self waittillmatch( "noteworthy", "end_of_path" );
-		path = getent( self.target, "targetname" );
-		self maps\_vehicle::vehicle_paths( path );
-	}
-}
-*/
-
-//break_stealth_if_damage_taken()
-//{
-//	self waittill( "damage" );
-//	
-//	flag_set( "truck_guys_alerted" );
-//}
 
 unload_and_attack_if_stealth_broken_and_close() {
   self endon("truck_guys_alerted");
@@ -846,25 +704,6 @@ unload_and_attack_if_stealth_broken_and_close() {
   }
   flag_set("truck_guys_alerted");
 }
-
-//base_truck_see( truck )
-//{
-//	truck endon( "death" );
-//	self endon( "death" );
-//
-//	while( 1 )
-//	{
-//		dist = self.maxVisibleDist * .75;
-//		dist = dist * dist;
-//
-//		if( distancesquared( self.origin, truck.origin ) <= dist )
-//			break;
-//
-//		wait .1;
-//	}
-//
-//	flag_set( "truck_guys_alerted" );
-//}
 
 base_truck_guys_attacked_again() {
   self endon("death");
@@ -882,9 +721,6 @@ base_truck_guys_attacked_again() {
 
 base_truck_guys_think() {
   self endon("death");
-
-  //if( flag( "_stealth_spotted" ) || self ent_flag( "_stealth_attack" ) )
-  //	return;
 
   level endon("_stealth_spotted");
   self endon("_stealth_attack");
@@ -932,7 +768,7 @@ truck_guys_base_search_behavior(node) {
   self setgoalnode(node);
   self.goalradius = distance * .5;
 
-  wait 0.05; // because stealth system keeps clearing run anim on every enemy_animation_wrapper
+  wait 0.05;
   self set_generic_run_anim("_stealth_patrol_cqb");
   self waittill("goal");
 
@@ -1044,8 +880,6 @@ truck_alert_level_attack(enemy) {
   self cliffhanger_enemy_attack_behavior();
 }
 
-////////////////////////////////////////////////////
-
 spawn_beehive() {
   level endon("done_with_stealth_camp");
 
@@ -1070,10 +904,9 @@ spawn_beehive() {
       hives = 0;
 
     println(" beehives : " + hives);
-    //sort from closest to furtherest
+
     spawner_triggers = get_array_of_closest(getAveragePlayerOrigin(), spawner_triggers);
 
-    //skip the closest 2
     for(i = 2; i < (2 + hives); i++) {
       spawner_triggers[i] notify("trigger");
     }
@@ -1119,12 +952,8 @@ beehive_enemies() {
     wait 4;
   }
 }
-
-////////////////////////////////////////////////////
 MIN_NON_ALERT_TEAMMATE_DIST_SQ = 300 * 300;
 MIN_ALERT_TEAMMATE_DIST_SQ = 1000 * 1000;
-
-// price should snipe if AI is not alert or there are no teammates nearby it.
 price_should_snipe_me() {
   teammates = getAIArray(self.team);
   foreach(ai in teammates) {

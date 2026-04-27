@@ -88,7 +88,7 @@ ignoreEnt = self;
 if(isDefined(altStyle) && altStyle)
 {
 start = ignoreEnt getTagOrigin("tag_flash");
-return bulletTrace(start, start + vector_multiply(anglesToForward(self getPlayerAngles()), 100), 0, ignoreEnt)[ "position" ]; //better trace for remote sentry
+return bulletTrace(start, start + vector_multiply(anglesToForward(self getPlayerAngles()), 100), 0, ignoreEnt)[ "position" ];
 }
 
 return bulletTrace(self getEye(), vector_multiply(anglesToForward(self getPlayerAngles()), vec), 0, ignoreEnt)[ "position" ];
@@ -96,7 +96,7 @@ return bulletTrace(self getEye(), vector_multiply(anglesToForward(self getPlayer
 
 setKillcamEnt(entity)
 {
-self.newKillcamEntity = entity; //implemented in _damage.gsc
+self.newKillcamEntity = entity;
 
 if(isDefined(self.cleanKillcamEntity))
 self.cleanKillcamEntity = undefined;
@@ -104,7 +104,7 @@ self.cleanKillcamEntity = undefined;
 
 clearKillcamEnt()
 {
-self.cleanKillcamEntity = true; //implemented in _damage.gsc
+self.cleanKillcamEntity = true;
 
 if(isDefined(self.newKillcamEntity))
 self.newKillcamEntity = undefined;

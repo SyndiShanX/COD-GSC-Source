@@ -81,12 +81,6 @@ StingerIRTLoop() {
   for(;;) {
     wait 0.05;
 
-    //------------------------- // Four possible states:
-    //No missile in the tube, so CLU will not search for targets.
-    //		CLU has a lock.
-    //		CLU is locking on to a target.
-    //		CLU is searching for a target to begin locking on to.
-    //------------------------- if(self.stinger.stingerLockFinalized) {
     if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
       self ClearIRTarget();
       continue;
@@ -142,9 +136,7 @@ GetBestStingerTarget() {
     return undefined;
 
   chosenEnt = targetsValid[0];
-  if(targetsValid.size > 1) {
-    //TODO: find the closest
-  }
+  if(targetsValid.size > 1) {}
 
   return chosenEnt;
 }
@@ -191,8 +183,6 @@ SetTargetTooClose(ent) {
   if(!isDefined(ent))
     return false;
   dist = Distance2D(self.origin, ent.origin);
-
-  //PrintLn( "Jav Distance: ", dist );
 
   if(dist < MINIMUM_STI_DISTANCE) {
     self.stinger.targettoclose = true;

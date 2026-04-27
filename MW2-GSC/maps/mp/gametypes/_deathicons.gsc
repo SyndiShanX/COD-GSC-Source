@@ -18,14 +18,11 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    player.selfDeathIcons = []; // icons that other people see which point to this player when he's dead
+    player.selfDeathIcons = [];
   }
 }
 
-updateDeathIconsEnabled() {
-  //if(!self.enableDeathIcons)
-  //	self removeOtherDeathIcons();
-}
+updateDeathIconsEnabled() {}
 
 addDeathIcon(entity, dyingplayer, team, timeout) {
   if(!level.teambased) {

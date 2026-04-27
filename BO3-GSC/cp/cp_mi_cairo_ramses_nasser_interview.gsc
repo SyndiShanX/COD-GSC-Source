@@ -25,86 +25,44 @@
 #using scripts\shared\vehicle_shared;
 #namespace cp_mi_cairo_ramses_nasser_interview;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function precache() {
-  // Unsupported VM revision (1B).
-}
+function precache() {}
 
-function init_heroes() {
-  // Unsupported VM revision (1B).
-}
+function init_heroes() {}
 
-function pre_skipto_anims() {
-  // Unsupported VM revision (1B).
-}
+function pre_skipto_anims() {}
 
-function function_1bcd464b() {
-  // Unsupported VM revision (1B).
-}
+function function_1bcd464b() {}
 
-function function_bf7cc686() {
-  // Unsupported VM revision (1B).
-}
+function function_bf7cc686() {}
 
-function function_830dd1fa() {
-  // Unsupported VM revision (1B).
-}
+function function_830dd1fa() {}
 
-function function_7995f971() {
-  // Unsupported VM revision (1B).
-}
+function function_7995f971() {}
 
-function function_f568f95f() {
-  // Unsupported VM revision (1B).
-}
+function function_f568f95f() {}
 
-function function_370a5671() {
-  // Unsupported VM revision (1B).
-}
+function function_370a5671() {}
 
-function function_57bc36e6() {
-  // Unsupported VM revision (1B).
-}
+function function_57bc36e6() {}
 
-function function_66a8939() {
-  // Unsupported VM revision (1B).
-}
+function function_66a8939() {}
 
-function function_7452fdb5() {
-  // Unsupported VM revision (1B).
-}
+function function_7452fdb5() {}
 
-function function_6a80eecf() {
-  // Unsupported VM revision (1B).
-}
+function function_6a80eecf() {}
 
-function function_e4a01869() {
-  // Unsupported VM revision (1B).
-}
+function function_e4a01869() {}
 
-function function_b760b954() {
-  // Unsupported VM revision (1B).
-}
+function function_b760b954() {}
 
-function function_4f753dd2() {
-  // Unsupported VM revision (1B).
-}
+function function_4f753dd2() {}
 
-function function_7648e769() {
-  // Unsupported VM revision (1B).
-}
+function function_7648e769() {}
 
-function function_c4bcf67b() {
-  // Unsupported VM revision (1B).
-}
+function function_c4bcf67b() {}
 
-function function_c99967dc() {
-  // Unsupported VM revision (1B).
-}
+function function_c99967dc() {}
 
-function cleanup_introduce_anims() {
-  // Unsupported VM revision (1B).
-}
+function cleanup_introduce_anims() {}

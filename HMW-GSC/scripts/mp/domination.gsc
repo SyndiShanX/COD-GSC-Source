@@ -1,11 +1,11 @@
 main() {
-  replaceFunc(maps\mp\gametypes\dom::updatescoreboarddom, ::updatescoreboarddom_stub); // cheap entrypoint
+  replaceFunc(maps\mp\gametypes\dom::updatescoreboarddom, ::updatescoreboarddom_stub);
 }
 
 updatescoreboarddom_stub() {
   level endon("game_ended");
 
-  halfTime = 0; //getMatchRulesData( "domData", "halfTime" );
+  halfTime = 0;
   setDynamicDvar("scr_dom_halftime", halfTime);
   level.halftimeonscorelimit = halfTime;
   maps\mp\_utility::registerhalftimedvar("dom", halfTime);

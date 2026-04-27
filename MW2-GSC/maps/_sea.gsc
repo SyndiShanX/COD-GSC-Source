@@ -47,11 +47,6 @@ sea_animate() {
 sea_logic() {
   wait .05;
 
-  /*
-  level.lite_settings = getmapsundirection();
-  level.new_lite_settings = level.lite_settings;
-  */
-
   string = getDvar("r_lightTweakSunDirection");
   token = strtok(string, " ");
   level.lite_settings = (int(token[0]), int(token[1]), int(token[2]));
@@ -276,8 +271,8 @@ sea_bob() {
 
   wait .05;
   while(1) {
-    rotationy = 0; // randomfloatrange( 1, 1.75 );
-    rotationp = 0; // randomfloatrange( .4, .75 ) * level._sea_scale;
+    rotationy = 0;
+    rotationp = 0;
     rotationr = randomfloatrange(2, 4) * level._sea_scale;
     self.time = randomfloatrange(3, 4);
     self.rotation = (rotationp, rotationy, rotationr);
@@ -426,7 +421,6 @@ sea_waves_setup() {
       waves["left"][waves["left"].size] = nodes[i];
   }
 
-  //now that we have our positions...lets grab our actual exploders
   array = level._waves_exploders;
   for(i = 0; i < array.size; i++)
     array[i].origin = array[i].v["origin"];
@@ -456,7 +450,7 @@ sea_litebob() {
 
     oldang = level.new_lite_settings;
     level.new_lite_settings = combineangles(ang, level.lite_settings);
-    //level.new_lite_settings = level.lite_settings + ang;
+
     newang = level.new_lite_settings;
 
     old = anglesToForward(oldang);

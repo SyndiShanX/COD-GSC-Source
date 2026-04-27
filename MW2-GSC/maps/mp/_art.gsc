@@ -3,8 +3,6 @@
  * Script: maps\mp\_art.gsc
 ********************************************************/
 
-// This function should take care of grain and glow settings for each map, plus anything else that artists
-// need to be able to tweak without bothering level designers.
 #include common_scripts\utility;
 #include common_scripts\_artCommon;
 
@@ -36,11 +34,9 @@ tweakart() {
   if(!isDefined(level.tweakfile))
     level.tweakfile = false;
 
-  // not in DEVGUI
   SetDevDvar("scr_fog_fraction", "1.0");
   SetDevDvar("scr_art_dump", "0");
 
-  // update the devgui variables to current settings
   SetDevDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
   SetDevDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
   SetDevDvar("scr_dof_farStart", level.dofDefault["farStart"]);
@@ -48,7 +44,6 @@ tweakart() {
   SetDevDvar("scr_dof_nearBlur", level.dofDefault["nearBlur"]);
   SetDevDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
 
-  // not in DEVGUI
   level.fogfraction = 1.0;
 
   file = undefined;
@@ -59,7 +54,7 @@ tweakart() {
       AssertEx(GetDvarInt("scr_art_dump", 0) == 0, "Must Enable Art Tweaks to export _art file.");
       wait .05;
       if(!GetDvarInt("scr_art_tweak", 0) == 0)
-        common_scripts\_artCommon::setfogsliders(); // sets the sliders to whatever the current fog value is
+        common_scripts\_artCommon::setfogsliders();
     }
 
     if(GetDvarInt("scr_art_tweak_message")) {
@@ -67,19 +62,14 @@ tweakart() {
       IPrintLnBold("ART TWEAK ENABLED");
     }
 
-    //translate the slider values to script variables
     common_scripts\_artCommon::translateFogSlidersToScript();
 
-    //		dofvarupdate();
-
-    // catch all those cases where a slider can be pushed to a place of conflict
     fovslidercheck();
 
-    dump = dumpsettings(); // dumps and returns true if the dump dvar is set
+    dump = dumpsettings();
 
     common_scripts\_artCommon::updateFogFromScript();
 
-    //		level.player setDefaultDepthOfField();
     if(dump) {
       IPrintLnBold("Art settings dumped success!");
       SetdevDvar("scr_art_dump", "0");
@@ -89,7 +79,6 @@ tweakart() {
 }
 
 fovslidercheck() {
-  // catch all those cases where a slider can be pushed to a place of conflict
   if(level.dofDefault["nearStart"] >= level.dofDefault["nearEnd"]) {
     level.dofDefault["nearStart"] = level.dofDefault["nearEnd"] - 1;
     SetDevDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);

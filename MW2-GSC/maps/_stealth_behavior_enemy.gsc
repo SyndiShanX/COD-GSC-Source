@@ -22,11 +22,6 @@ stealth_behavior_enemy_main() {
   self thread enemy_Animation_Loop();
 }
 
-/************************************************************************************************************/
-
-/*												ENEMY LOGIC													*/
-/************************************************************************************************************/
-
 enemy_Animation_Loop() {
   self endon("death");
   self endon("pain_death");
@@ -38,15 +33,15 @@ enemy_Animation_Loop() {
     if(!self ent_flag("_stealth_enabled")) {
       continue;
     }
-    //put inside the loop so we can check every time
-    wrapper_func = self._stealth.behavior.ai_functions["animation"]["wrapper"]; // enemy_animation_wrapper
+
+    wrapper_func = self._stealth.behavior.ai_functions["animation"]["wrapper"];
 
     self thread[[wrapper_func]](type);
   }
 }
 
 enemy_state_hidden() {
-  self.fovcosine = .5; // 60 degrees to either side...120 cone...2 / 3 of the default
+  self.fovcosine = .5;
   self.fovcosinebusy = .1;
   self.favoriteenemy = undefined;
   self.dontattackme = true;
@@ -61,7 +56,7 @@ enemy_state_hidden() {
 }
 
 enemy_state_spotted(internal) {
-  self.fovcosine = .01; // 90 degrees to either side...180 cone...default view cone
+  self.fovcosine = .01;
   self.ignoreall = false;
   self.dontattackme = undefined;
   self.dontevershoot = undefined;
@@ -90,11 +85,6 @@ enemy_state_spotted(internal) {
     self getEnemyInfo(enemy);
 }
 
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
-
 enemy_init() {
   assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::enemy_init() on this AI first");
 
@@ -106,13 +96,10 @@ enemy_init() {
   self ent_flag_init("_stealth_behavior_first_reaction");
   self ent_flag_init("_stealth_behavior_reaction_anim_in_progress");
 
-  // this is our behavior struct inside of _stealth...everything we do will go in here.
   self._stealth.behavior = spawnStruct();
 
-  // to prevent AI doing melee right away
   self.a.noFirstFrameMelee = true;
 
-  // AI FUNCTIONS
   self._stealth.behavior.ai_functions = [];
 
   self enemy_default_state_behavior();
@@ -144,7 +131,6 @@ enemy_dog_init() {
   self.ignoreall = true;
   self.allowdeath = true;
 
-  // we do this because we assume dogs are sleeping...
   self thread anim_generic_custom_animmode_loop(self, "gravity", "_stealth_dog_sleeping");
   self ent_flag_set("_stealth_behavior_asleep");
 }

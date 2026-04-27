@@ -17,14 +17,3 @@ main(model, type) {
 }
 
 init_local() {}
-
-/*QUAKED script_vehicle_submarine_nuclear (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_submarine_nuclear::main( "vehicle_submarine_nuclear" );
-
-and these lines in your CSV:
-#include,vehicle_submarine_nuclear_submarine_nuclear
-
-defaultmdl="vehicle_submarine_nuclear"default:"vehicletype" "submarine_nuclear"default:"script_team" "allies"
-*/

@@ -14,7 +14,6 @@ main(model, type) {
 
   precachemodel("projectile_bm21_missile");
 
-  //	build_deathfx( effect, 								tag, 					sound, 								bEffectLooping, 	delay, 			bSoundlooping, waitDelay, stayontag, notifyString )
   build_deathfx("explosions/small_vehicle_explosion", "tag_fx_tank", "explo_metal_rand", undefined, undefined, undefined, 0);
   build_deathfx("fire/firelp_med_pm", "tag_deathfx", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("fire/firelp_med_pm", "tag_fx_cab", undefined, undefined, undefined, undefined, 0);
@@ -45,9 +44,6 @@ main(model, type) {
 }
 
 init_local() {
-  //	maps\_vehicle::lights_on( "headlights" );
-  //	maps\_vehicle::lights_on( "brakelights" );
-
   self.missileModel = "projectile_bm21_missile";
   self.missileTags = [];
   self.missileTags[0] = "tag_missile1";
@@ -76,28 +72,6 @@ init_local() {
   self.missileTags[23] = "tag_missile24";
   self.missileTags[24] = "tag_missile25";
   self.missileTags[25] = "tag_missile26";
-  //	self.missileTags[ 26 ] = "tag_missile27";
-  //	self.missileTags[ 27 ] = "tag_missile28";
-  //	self.missileTags[ 28 ] = "tag_missile29";
-  //	self.missileTags[ 29 ] = "tag_missile30";
-  //	self.missileTags[ 30 ] = "tag_missile31";
-  //	self.missileTags[ 31 ] = "tag_missile32";
-  //	self.missileTags[ 32 ] = "tag_missile33";
-  //	self.missileTags[ 33 ] = "tag_missile34";
-  //	self.missileTags[ 34 ] = "tag_missile35";
-  //	self.missileTags[ 35 ] = "tag_missile36";
 
   thread maps\_vehicle_missile::main();
 }
-
-/*QUAKED script_vehicle_bm21_mobile (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bm21::main( "vehicle_bm21_mobile" );
-
-and these lines in your CSV:
-#include,vehicle_bm21_mobile_bm21
-sound,vehicle_bm21,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bm21_mobile"default:"vehicletype" "bm21"default:"script_team" "allies"
-*/

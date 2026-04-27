@@ -7,9 +7,6 @@
 #include common_scripts\utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*QUAKED mp_airdrop_point (1.0 0.5 0.0) (-36 -12 0) (36 12 20)
-An airdrop can land here.*/
-
 init() {
   precacheVehicle("littlebird_mp");
   precacheModel("com_plasticcase_friendly");
@@ -83,7 +80,6 @@ init() {
 
   level.crateTypes = [];
 
-  //			Drop Type			Type						Weight		Function					
   addCrateType("airdrop", "ammo", getDvarInt("scr_airdrop_ammo", 17), ::ammoCrateThink);
   addCrateType("airdrop", "uav", getDvarInt("scr_airdrop_uav", 17), ::killstreakCrateThink);
   addCrateType("airdrop", "counter_uav", getDvarInt("scr_airdrop_counter_uav", 15), ::killstreakCrateThink);
@@ -118,7 +114,6 @@ init() {
 
   addCrateType("nuke_drop", "nuke", 100, ::nukeCrateThink);
 
-  // generate the max weighted value
   foreach(dropType, crateTypes in level.crateTypes) {
     level.crateMaxVal[dropType] = 0;
     foreach(crateType, crateWeight in level.crateTypes[dropType]) {
@@ -181,10 +176,6 @@ getCrateTypeForDropType(dropType) {
   }
 }
 
-/**********************************************************
- *		 Helper/Debug functions
-***********************************************************/
-
 drawLine(start, end, timeSlice) {
   drawTime = int(timeSlice * 20);
   for(time = 0; time < drawTime; time++) {
@@ -192,10 +183,6 @@ drawLine(start, end, timeSlice) {
     wait(0.05);
   }
 }
-
-/**********************************************************
- *		 Usage functions
-***********************************************************/
 
 tryUseAirdropPredatorMissile(lifeId, kID) {
   return (self tryUseAirdrop(lifeId, kID, "airdrop_predator_missile"));
@@ -263,10 +250,6 @@ watchDisconnect() {
   return;
 }
 
-/**********************************************************
- *		 Marker functions
-***********************************************************/
-
 beginAirdropViaMarker(lifeId, kID, dropType) {
   self endon("death");
   self endon("grenade_fire");
@@ -284,7 +267,7 @@ beginAirdropViaMarker(lifeId, kID, dropType) {
   else
     airdropMarkerWeapon = undefined;
 
-  while(isAirdropMarker(currentWeapon) /*|| currentWeapon == "none"*/ ) {
+  while(isAirdropMarker(currentWeapon)) {
     self waittill("weapon_change", currentWeapon);
 
     if(isAirdropMarker(currentWeapon))
@@ -382,10 +365,6 @@ airDropMarkerActivate(dropType) {
   else
     level doC130FlyBy(owner, position, randomFloat(360), dropType);
 }
-
-/**********************************************************
- *		 crate functions
-***********************************************************/
 
 initAirDropCrate() {
   self.inUse = false;
@@ -618,8 +597,6 @@ physicsWaiter(dropType, crateType) {
     self delete();
   }
 }
-
-//deletes if crate wasnt used after 90 seconds
 dropTimeOut(dropCrate, owner) {
   level endon("game_ended");
   dropCrate endon("death");
@@ -670,8 +647,7 @@ getFlyHeightOffset(dropSite) {
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(!isDefined(heightEnt)) //old system
-  {
+  if(!isDefined(heightEnt)) {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
 
     if(isDefined(level.airstrikeHeightScale)) {
@@ -687,10 +663,6 @@ getFlyHeightOffset(dropSite) {
     return heightEnt.origin[2];
   }
 }
-
-/**********************************************************
- *		 Helicopter Functions
-***********************************************************/
 
 doFlyBy(owner, dropSite, dropYaw, dropType, heightAdjustment) {
   flyHeight = self getFlyHeightOffset(dropSite);
@@ -781,7 +753,6 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
   for(;;) {
     dist = distance2D(c130.origin, dropSite);
 
-    // handle missing our target
     if(dist < minDist)
       minDist = dist;
     else if(dist > minDist) {
@@ -794,7 +765,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
       earthquake(0.15, 1.5, dropSite, 1500);
       if(!boomPlayed) {
         c130 playSound("veh_ac130_sonic_boom");
-        //c130 thread stopLoopAfter( 0.5 );
+
         boomPlayed = true;
       }
     }
@@ -853,13 +824,11 @@ dropNuke(dropSite, owner, dropType) {
   forward = anglesToForward(direction);
   c130 moveTo(pathEnd, flyTime, 0, 0);
 
-  // TODO: fix this... it's bad.if we miss our distance (which could happen if plane speed is changed in the future) we stick in this thread forever
   boomPlayed = false;
   minDist = distance2D(c130.origin, dropSite);
   for(;;) {
     dist = distance2D(c130.origin, dropSite);
 
-    // handle missing our target
     if(dist < minDist)
       minDist = dist;
     else if(dist > minDist) {
@@ -872,7 +841,7 @@ dropNuke(dropSite, owner, dropType) {
       earthquake(0.15, 1.5, dropSite, 1500);
       if(!boomPlayed) {
         c130 playSound("veh_ac130_sonic_boom");
-        //c130 thread stopLoopAfter( 0.5 );
+
         boomPlayed = true;
       }
     }
@@ -911,8 +880,6 @@ playloopOnEnt(alias) {
   soundOrg stoploopsound(alias);
   soundOrg delete();
 }
-
-// spawn C130 at a start node and monitors it
 c130Setup(owner, pathStart, pathGoal) {
   forward = vectorToAngles(pathGoal - pathStart);
   c130 = spawnplane(owner, "script_model", pathStart, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
@@ -921,15 +888,13 @@ c130Setup(owner, pathStart, pathGoal) {
   if(!isDefined(c130)) {
     return;
   }
-  //chopper playLoopSound( "littlebird_move" );
+
   c130.owner = owner;
   c130.team = owner.team;
   level.c130 = c130;
 
   return c130;
 }
-
-// spawn helicopter at a start node and monitors it
 heliSetup(owner, pathStart, pathGoal) {
   forward = vectorToAngles(pathGoal - pathStart);
   chopper = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
@@ -937,7 +902,6 @@ heliSetup(owner, pathStart, pathGoal) {
   if(!isDefined(chopper)) {
     return;
   }
-  //chopper playLoopSound( "littlebird_move" );
 
   chopper.health = 500;
   chopper setCanDamage(true);
@@ -993,13 +957,10 @@ heliDestroyed() {
 
   lbExplode();
 }
-
-// crash explosion
 lbExplode() {
   forward = (self.origin + (0, 0, 1)) - self.origin;
   playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, forward);
 
-  // play heli explosion sound
   self playSound("cobra_helicopter_crash");
   self notify("explode");
 
@@ -1009,7 +970,6 @@ lbExplode() {
 lbSpin(speed) {
   self endon("explode");
 
-  // tail explosion that caused the spinning
   playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   playFXOnTag(level.chopper_fx["fire"]["trail"]["medium"], self, "tail_rotor_jnt");
 
@@ -1031,10 +991,6 @@ trimActiveBirdList() {
   }
 }
 
-/**********************************************************
- *		 crate trigger functions
-***********************************************************/
-
 nukeCaptureThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
@@ -1052,9 +1008,6 @@ nukeCaptureThink() {
 crateOtherCaptureThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
-
-    //if( !player isOnGround() )
-    //	continue;
 
     if(isDefined(self.owner) && player == self.owner) {
       continue;
@@ -1075,9 +1028,6 @@ crateOtherCaptureThink() {
 crateOwnerCaptureThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
-
-    //if( !player isOnGround() )
-    //	continue;
 
     if(isDefined(self.owner) && player != self.owner) {
       continue;
@@ -1116,7 +1066,7 @@ killstreakCrateThink(dropType) {
         }
       } else {
         self.owner thread maps\mp\gametypes\_rank::giveRankXP("killstreak_giveaway", maps\mp\killstreaks\_killstreaks::getStreakCost(self.crateType) * 50);
-        //self.owner maps\mp\gametypes\_hud_message::playerCardSplashNotify( "giveaway_airdrop", player );
+
         self.owner thread maps\mp\gametypes\_hud_message::SplashNotifyDelayed("sharepackage", maps\mp\killstreaks\_killstreaks::getStreakCost(self.crateType) * 50);
       }
     }
@@ -1245,10 +1195,6 @@ refillAmmo() {
     self giveMaxAmmo(weaponName);
   }
 }
-
-/**********************************************************
- *		 Capture crate functions
-***********************************************************/
 
 useHoldThink(player, useTime) {
   player playerLinkTo(self);

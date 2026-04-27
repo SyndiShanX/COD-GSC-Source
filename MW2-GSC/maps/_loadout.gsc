@@ -16,7 +16,7 @@ init_loadout() {
 SetDefaultActionSlot() {
   self SetActionSlot(1, "");
   self SetActionSlot(2, "");
-  self SetActionSlot(3, "altMode"); // toggles between attached grenade launcher
+  self SetActionSlot(3, "altMode");
   self SetActionSlot(4, "");
 }
 
@@ -24,8 +24,6 @@ init_player() {
   self SetDefaultActionSlot();
   self takeAllweapons();
 }
-
-// checks if character switched in coop mode, if so returns true, call once.
 char_switcher() {
   level.coop_player1 = level.player;
   level.coop_player2 = level.player2;
@@ -59,7 +57,6 @@ give_loadout(character_selected) {
 
   level.character_selected = character_selected;
 
-  // used to precach weapons for alternate character loadouts, will be replaced by later code efficent support.
   possible_precache_items = [];
 
   level.player SetDefaultActionSlot();
@@ -89,11 +86,6 @@ give_loadout(character_selected) {
     return;
   }
 
-  //	if( string_starts_with( level.script, "co_" ) )
-  //	{
-  //		precacheModel( "weapon_parabolic_knife" );
-  //	}
-
   if(level.script == "background") {
     level.player takeallweapons();
     return;
@@ -111,10 +103,6 @@ give_loadout(character_selected) {
     level.player giveWeapon(level.starting_rifle);
     level.player giveWeapon("fraggrenade");
 
-    //order matters
-    //level.player SetOffhandSecondaryClass( "other" );
-    //level.player giveWeapon( "semtex_grenade" );
-
     level.player setOffhandSecondaryClass("flash");
     level.player giveWeapon("flash_grenade");
 
@@ -126,24 +114,14 @@ give_loadout(character_selected) {
 
   if(level.script == "invasion") {
     level.player giveWeapon("beretta");
-    //level.player giveWeapon( "scar_h" );
-    //level.player giveWeapon( "scar_h_reflex" );
+
     level.player giveWeapon("scar_h_reflex_shotgun");
 
     level.player giveWeapon("fraggrenade");
 
-    //order matters
-    //level.player SetOffhandSecondaryClass( "other" );
-    //level.player giveWeapon( "semtex_grenade" );
-
     level.player giveWeapon("smoke_grenade_american");
     level.player setOffhandSecondaryClass("smoke");
 
-    //level.player giveWeapon( "flash_grenade" );
-    //level.player setOffhandSecondaryClass( "flash" );
-
-    //level.player switchToWeapon( "scar_h" );
-    //level.player switchToWeapon( "scar_h_reflex" );
     level.player switchToWeapon("scar_h_reflex_shotgun");
     level.player setViewmodel("viewmodel_base_viewhands");
     level.campaign = "american";
@@ -152,7 +130,7 @@ give_loadout(character_selected) {
 
   if(level.script == "arcadia") {
     level.player giveWeapon("beretta");
-    //level.player giveWeapon( "scar_h" );
+
     level.player giveWeapon("scar_h_reflex");
     level.player giveWeapon("fraggrenade");
 
@@ -166,7 +144,6 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "airport") {
-    //level.player giveWeapon( "usp" );
     level.player giveWeapon("m4_grenadier");
     level.player giveWeapon("m240");
     level.player giveWeapon("fraggrenade");
@@ -179,7 +156,6 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "cliffhanger") {
-    //see player_weapon_init in cliffhanger_code
     level.player setViewmodel("viewhands_arctic");
     level.campaign = "british";
     return;
@@ -287,17 +263,15 @@ give_loadout(character_selected) {
     level.player giveWeapon("fraggrenade");
     level.player giveWeapon("flash_grenade");
     level.player setOffhandSecondaryClass("flash");
-    //level.player SetActionSlot( 1, "nightvision" );
+
     level.player setViewmodel("viewhands_us_army_dmg");
     level.player switchToWeapon("m4m203_eotech");
     level.campaign = "american";
     return;
   }
   if(level.script == "dc_whitehouse") {
-    // if started from previous level and weapons were saved, carry them over
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("dcemp");
 
-    // if started cold from level select menu, give a loadout
     if(!bWeaponsCarriedOver) {
       level.player giveWeapon("m4_grenadier");
       level.player giveWeapon("Beretta");
@@ -316,8 +290,7 @@ give_loadout(character_selected) {
   if(level.script == "roadkill") {
     weapon = "m14_scoped";
     weapon = "m4m203_acog";
-    //weapon = "javelin";
-    // "m79"//level.player giveWeapon( weapon );
+
     level.player giveWeapon("beretta");
     level.player giveWeapon("m4m203_eotech");
     level.player giveWeapon("fraggrenade");
@@ -379,13 +352,12 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "af_chase" || level.script == "af_end" || level.script == "ending") {
-    // if started from previous level and weapons were saved, carry them over
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("af_caves");
 
     if(!bWeaponsCarriedOver) {
       level.player giveWeapon("uzi");
       level.player giveWeapon("rpd");
-      //		level.player giveWeapon( "uzi_fast_reload", 0, true );
+
       level.player setOffhandSecondaryClass("flash");
       level.player giveWeapon("fraggrenade");
       level.player giveWeapon("flash_grenade");
@@ -397,10 +369,8 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "co_suburban_america") {
-    // this is too be replaced again by some kind of string table. I just couldn't stand the way it was setup and I think this will translate well to stringtable format.
     switch_char = char_switcher();
 
-    // co player 1 loadout
     so_player_num(0);
 
     so_player_giveWeapon("m4m203_silencer_reflex");
@@ -413,7 +383,6 @@ give_loadout(character_selected) {
     so_player_set_setViewmodel("viewhands_sas_woodland");
     so_player_SetModelFunc(::so_body_player_woodland, ::so_body_player_woodland_precache);
 
-    // co player 2 loadout
     so_player_num(1);
 
     so_player_giveWeapon("m14_scoped_silencer_woodland");
@@ -433,13 +402,11 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "co_overgrown") {
-    // everybody does it different!! I'm making a new way.
     switch_char = char_switcher();
 
     if(!character_selected)
       precacheModel("weapon_parabolic_knife");
 
-    // co player 1 loadout
     so_player_num(0);
 
     so_player_giveWeapon("m4m203_silencer_reflex");
@@ -452,7 +419,6 @@ give_loadout(character_selected) {
     so_player_set_setViewmodel("viewhands_sas_woodland");
     so_player_SetModelFunc(::so_body_player_woodland, ::so_body_player_woodland_precache);
 
-    // co player 2 loadout
     so_player_num(1);
 
     so_player_giveWeapon("m14_scoped_silencer_woodland");
@@ -471,44 +437,6 @@ give_loadout(character_selected) {
     return;
   }
 
-  /*
-  	if( level.script == "co_hunted" )
-  	{
-  		if( is_coop() )
-  		{
-  			// there is a wait at character selection, can not precache after a wait
-  			if( !character_selected )
-  				precacheModel( "weapon_parabolic_knife" );
-
-  			assert( isDefined( level.players ) );
-  			assert( level.players.size >= 2 );
-  			for( i = 0 ; i < level.players.size ; i++ )
-  			{
-  				level.players[ i ] SetModelFunc( ::so_body_player_ranger );
-  				level.players[ i ] giveWeapon( "Beretta" );
-  				level.players[ i ] giveWeapon( "m4_grenadier" );
-  				level.players[ i ] giveWeapon( "fraggrenade" );
-  				level.players[ i ] giveWeapon( "flash_grenade" );
-  				level.players[ i ] setOffhandSecondaryClass( "flash" );
-  				level.players[ i ] giveWeapon( "laser_targeting_device" );
-  				level.players[ i ] SetActionSlot( 4, "weapon", "laser_targeting_device" );
-  				level.players[ i ] switchToWeapon( "m4_grenadier" );
-  				level.players[ i ] setViewmodel( "viewmodel_base_viewhands" );
-  			}
-  		}
-  		else
-  		{
-  			level.player giveWeapon( "Beretta" );
-  			level.player giveWeapon( "m4_grenadier" );
-  			level.player giveWeapon( "fraggrenade" );
-  			level.player giveWeapon( "flash_grenade" );
-  			level.player setOffhandSecondaryClass( "flash" );
-  			level.player switchToWeapon( "m4_grenadier" );
-  			level.player setViewmodel( "viewmodel_base_viewhands" );
-  		}
-  		return;
-  	}
-  */
   if(level.script == "co_crossfire") {
     foreach(playerIndex, player in level.players) {
       so_player_num(playerIndex);
@@ -620,11 +548,9 @@ give_loadout(character_selected) {
   if(level.script == "co_killhouse") {
     switch_char = char_switcher();
 
-    // used to precach weapons for alternate character loadouts, will be replaced by later code efficent support.
     possible_precache_items[possible_precache_items.size] = "mp5_silencer";
     possible_precache_items[possible_precache_items.size] = "claymore";
 
-    // first character
     if(isDefined(level.coop_player1)) {
       if(is_coop())
         level.coop_player1 SetModelFunc(::so_body_player_woodland);
@@ -639,7 +565,6 @@ give_loadout(character_selected) {
       level.coop_player1 setViewmodel("viewhands_black_kit");
     }
 
-    // second character
     if(isDefined(level.coop_player2)) {
       if(is_coop())
         level.coop_player2 SetModelFunc(::so_body_player_woodland);
@@ -665,7 +590,6 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "co_blackout") {
-    // used to precach weapons for alternate character loadouts, this will be replaced by later code efficent support.
     possible_precache_items[possible_precache_items.size] = "m14_scoped_silencer_woodland";
 
     foreach(playerIndex, player in level.players) {
@@ -735,7 +659,6 @@ give_loadout(character_selected) {
     switch_char = char_switcher();
 
     foreach(playerIndex, player in level.players) {
-      // co player 1 loadout
       so_player_num(playerIndex);
 
       so_player_giveWeapon("Beretta");
@@ -827,30 +750,16 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "gulag") {
-    //level.player giveWeapon( "glock" );
-    //level.player giveWeapon( "barrett" );
-    //level.player giveWeapon( "ump45" );
-    //level.player giveWeapon( "fraggrenade" );
-    //level.player giveWeapon( "flash_grenade" );
-    //level.player setOffhandSecondaryClass( "flash" );
-    //level.player setViewmodel( "viewhands_black_kit" );
-    //level.player switchToWeapon( "barrett" );
-    //level.player switchToWeapon( "ump45" );
-    //level.player giveWeapon( "claymore" );
-    //level.player SetActionSlot( 4, "weapon", "claymore" );
-
     level.campaign = "seal";
     return;
   }
 
   if(level.script == "favela_escape") {
-    //level.favela_escape_main_weapon = "m4m203_acog";
     level.favela_escape_main_weapon = "ump45_acog";
     set_legit_weapons_for_favela_escape();
-    // if started from previous level and weapons were saved, carry them over
+
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("favela");
 
-    // if started cold from level select menu, give a loadout
     if(!bWeaponsCarriedOver) {
       level.player GiveWeapon(level.favela_escape_main_weapon);
       level.player GiveWeapon("glock");
@@ -1115,10 +1024,9 @@ give_loadout(character_selected) {
   if(level.script == "sniperescape") {
     level.sniperescape_main_weapon = "m14_scoped_woodland";
     set_legit_weapons_for_sniper_escape();
-    // if started from previous level and weapons were saved, carry them over
+
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("scoutsniper");
 
-    // if started cold from level select menu, give a loadout
     if(!bWeaponsCarriedOver) {
       level.player giveWeapon(level.sniperescape_main_weapon);
       level.player giveWeapon("usp_silencer");
@@ -1127,7 +1035,6 @@ give_loadout(character_selected) {
       force_player_to_use_legit_sniper_escape_weapon();
     }
 
-    // set these regardless of starting from level select menu OR previous level
     level.campaign = "british";
     level.initclaymoreammo = 6;
 
@@ -1207,10 +1114,8 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "launchfacility_a") {
-    // if started from previous level and weapons were saved, carry them over
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("icbm");
 
-    // if started cold from level select menu, give a loadout
     if(!bWeaponsCarriedOver) {
       level.player giveWeapon("usp_silencer");
       level.player giveWeapon("m4m203_silencer_reflex");
@@ -1223,7 +1128,6 @@ give_loadout(character_selected) {
       }
     }
 
-    // set these regardless of starting from level select menu OR previous level
     level.campaign = "british";
     level.initclaymoreammo = 6;
     level.player giveWeapon("claymore");
@@ -1254,10 +1158,8 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "launchfacility_b") {
-    // if started from previous level and weapons were saved, carry them over
     bWeaponsCarriedOver = RestorePlayerWeaponStatePersistent("launchfacility_a");
 
-    // if started cold from level select menu, give a loadout
     if(!bWeaponsCarriedOver) {
       level.player giveWeapon("usp_silencer");
       level.player giveWeapon("m4m203_silencer_reflex");
@@ -1270,7 +1172,6 @@ give_loadout(character_selected) {
       }
     }
 
-    // set these regardless of starting from level select menu OR previous level
     level.campaign = "british";
     level.player giveWeapon("claymore");
     level.player SetActionSlot(4, "weapon", "claymore");
@@ -1499,18 +1400,17 @@ give_loadout(character_selected) {
   }
 
   if(issubstr(level.script, "firingrange")) {
-    return; // no weapons on firing range
+    return;
   }
 
   if(level.script == "co_strike") {
-    return; // no weapons on firing range
+    return;
   }
 
   if(level.script == "overwatch") {
-    return; // no weapons
+    return;
   }
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // level.script is not a single player level. give default weapons.
   println("loadout.gsc: No level listing in _loadout.gsc, giving default guns");
   level.testmap = true;
 
@@ -1518,7 +1418,6 @@ give_loadout(character_selected) {
 }
 
 give_loadout_specialops(character_selected) {
-  // Ensures the Beretta is ready in case the players don't have a pistol when they go down
   foreach(player in level.players) {
     player giveWeapon("beretta");
     player takeWeapon("beretta");
@@ -1564,8 +1463,7 @@ give_loadout_specialops(character_selected) {
       so_player_num(i);
 
       so_player_giveWeapon("fraggrenade");
-      //			so_player_giveWeapon( "flash_grenade" );
-      //			so_player_set_setOffhandSecondaryClass( "flash" );
+
       so_player_giveWeapon("usp_silencer");
       so_player_giveWeapon("cheytac_silencer");
       so_player_set_switchToWeapon("cheytac_silencer");
@@ -1574,7 +1472,6 @@ give_loadout_specialops(character_selected) {
 
     so_players_give_loadout();
 
-    // Has to be done separately due to order requirements.
     foreach(player in level.players) {
       player giveWeapon("claymore");
       player setActionSlot(4, "weapon", "claymore");
@@ -1602,7 +1499,6 @@ give_loadout_specialops(character_selected) {
 
     so_players_give_loadout();
 
-    // Has to be done separately due to order requirements.
     foreach(player in level.players) {
       player SetOffhandSecondaryClass("other");
       player giveWeapon("semtex_grenade");
@@ -1736,7 +1632,6 @@ give_loadout_specialops(character_selected) {
 
     so_players_give_loadout();
 
-    // Has to be done separately due to order requirements.
     foreach(player in level.players) {
       player SetOffhandSecondaryClass("other");
       player giveWeapon("semtex_grenade");
@@ -1760,7 +1655,6 @@ give_loadout_specialops(character_selected) {
 
     so_players_give_loadout();
 
-    // Has to be done separately due to order requirements.
     foreach(player in level.players) {
       player giveWeapon("claymore");
       player setActionSlot(4, "weapon", "claymore");
@@ -1784,7 +1678,6 @@ give_loadout_specialops(character_selected) {
     level.so_campaign = "woodland";
     switch_char = char_switcher();
 
-    // there is a wait at character selection, can not precache after a wait
     if(!character_selected)
       precacheModel("weapon_parabolic_knife");
 
@@ -1796,11 +1689,11 @@ give_loadout_specialops(character_selected) {
       so_player_giveWeapon("scar_h_reflex");
       so_player_giveWeapon("beretta");
       so_player_giveWeapon("fraggrenade");
-      //			so_player_giveWeapon( "laser_targeting_device" );
+
       so_player_giveWeapon("flash_grenade");
       so_player_set_setOffhandSecondaryClass("flash");
       so_player_set_switchToWeapon("scar_h_reflex");
-      //			so_player_setactionslot( 4, "weapon", "laser_targeting_device" );
+
       so_player_setup_body(i);
     }
 
@@ -1832,13 +1725,13 @@ give_loadout_specialops(character_selected) {
     foreach(player in level.players) {
       switch (level.gameskill) {
         case 2:
-          player SetWeaponAmmoStock("flash_grenade", 2); //flash count = 2
-          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4); //m203 count = 5 ( one is in the clip ) {
+          player SetWeaponAmmoStock("flash_grenade", 2);
+          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4);
           break;
       }
       case 3:
-        player SetWeaponAmmoStock("flash_grenade", 1); //flash count = 1
-      player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1); //m203 count = 2 ( one is in the clip ) {
+        player SetWeaponAmmoStock("flash_grenade", 1);
+      player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1);
       break;
     }
   }
@@ -1916,37 +1809,9 @@ if(level.script == "so_defuse_favela_escape") {
 
   return;
 }
-/*
-	if( level.script == "so_defense_dcemp" )
-	{
-		level.so_campaign = "ranger";
 
-		switch_char = char_switcher();
-
-		for( i = 0; i < level.players.size; i++ )
-		{
-			so_player_num( i );
-			so_player_giveWeapon( "m4m203_eotech" );
-			so_player_giveWeapon( "Beretta" );
-			so_player_giveWeapon( "fraggrenade" );
-			so_player_giveWeapon( "flash_grenade" );
-			so_player_set_setOffhandSecondaryClass( "flash" );
-			so_player_set_switchToWeapon( "m4m203_eotech" );
-			so_player_setup_body( i );
-		}
-
-		so_players_give_loadout();
-		
-		return;
-	}
-*/
 if(level.script == "so_timed_so_quicky") {
-  //		level.so_campaign = "ranger";
-  //		level.so_campaign = "seal";
-  //		level.so_campaign = "arctic";
   level.so_campaign = "woodland";
-  //		level.so_campaign = "desert";
-  //		level.so_campaign = "ghillie";
 
   give_default_loadout();
 
@@ -2134,15 +1999,11 @@ if(level.script == "so_snowrace2_cliffhanger") {
   give_default_loadout();
   return;
 }
-
-// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
 level.testmap = true;
 level.so_campaign = "ranger";
 
 give_default_loadout();
 }
-
-// To precache possible weapons for alternate character loadout
 possible_precache(possible_precache_items) {
   foreach(item in possible_precache_items)
   PreCacheItem(item);
@@ -2183,23 +2044,6 @@ give_default_loadout_coop(num) {
   so_player_setup_body(num);
 }
 
-///////////////////////////////////////////////
-// SavePlayerWeaponStatePersistent
-//
-// Saves the player's weapons and ammo state persistently( in the game variable )
-// so that it can be restored in a different map.
-// You can use strings for the slot:
-//
-// SavePlayerWeaponStatePersistent( "russianCampaign" );
-//
-// Or you can just use numbers:
-//
-// SavePlayerWeaponStatePersistent( 0 );
-// SavePlayerWeaponStatePersistent( 1 ); etc.
-//
-// In a different map, you can restore using RestorePlayerWeaponStatePersistent( slot );
-// Make sure that you always persist the data between map changes.
-
 SavePlayerWeaponStatePersistent(slot) {
   level.player endon("death");
   if(level.player.health == 0)
@@ -2216,10 +2060,6 @@ SavePlayerWeaponStatePersistent(slot) {
   weapList = array_combine(level.player GetWeaponsListPrimaries(), level.player GetWeaponsListOffhands());
   for(weapIdx = 0; weapIdx < weapList.size; weapIdx++) {
     game["weaponstates"][slot]["list"][weapIdx]["name"] = weapList[weapIdx];
-
-    // below is only used if we want to NOT give max ammo
-    // game[ "weaponstates" ][ slot ][ "list" ][ weapIdx ][ "clip" ] = level.player GetWeaponAmmoClip( weapList[ weapIdx ] );
-    // game[ "weaponstates" ][ slot ][ "list" ][ weapIdx ][ "stock" ] = level.player GetWeaponAmmoStock( weapList[ weapIdx ] );
   }
 }
 
@@ -2235,22 +2075,16 @@ RestorePlayerWeaponStatePersistent(slot) {
     weapName = game["weaponstates"][slot]["list"][weapIdx]["name"];
 
     if(isDefined(level.legit_weapons)) {
-      // weapon doesn't exist in this level
       if(!isDefined(level.legit_weapons[weapName]))
         continue;
     }
 
-    // don't carry over C4 or claymores
     if(weapName == "c4")
       continue;
     if(weapName == "claymore")
       continue;
     level.player GiveWeapon(weapName);
     level.player GiveMaxAmmo(weapName);
-
-    // below is only used if we want to NOT give max ammo
-    // level.player SetWeaponAmmoClip( weapName, game[ "weaponstates" ][ slot ][ "list" ][ weapIdx ][ "clip" ] );
-    // level.player SetWeaponAmmoStock( weapName, game[ "weaponstates" ][ slot ][ "list" ][ weapIdx ][ "stock" ] );
   }
 
   if(isDefined(level.legit_weapons)) {
@@ -2407,7 +2241,6 @@ max_ammo_on_legit_sniper_escape_weapon() {
 force_player_to_use_legit_sniper_escape_weapon() {
   heldweapons = level.player GetWeaponsListAll();
 
-  // take away weapons mo has in scoutsniper that we dont have in sniperescape
   held_weapons = [];
   count = 0;
 
@@ -2426,45 +2259,34 @@ force_player_to_use_legit_sniper_escape_weapon() {
     return;
   }
   if(count == 0) {
-    // need to fill in a slot
     level.player giveweapon("ak47");
     level.player switchtoWeapon("ak47");
   }
 
-  // does player have a sniper rifle?
   if(!isDefined(held_weapons[level.sniperescape_main_weapon]) && !isDefined(held_weapons["dragunov"])) {
     level.player giveweapon(level.sniperescape_main_weapon);
     level.player switchtoWeapon(level.sniperescape_main_weapon);
   }
 }
 
-//======================prototype=======================
-// coop character selection script:
-
 coop_gamesetup_menu() {
   assert(is_coop());
 
-  // update difficulty:
   maps\_gameskill::setGlobalDifficulty();
 
   foreach(idx, player in level.players)
   player maps\_gameskill::setDifficulty();
 
-  // character selection:
   level.character_switched = false;
   flag_init("character_selected");
 
-  char_select_levels = ""; // "co_blackout co_suburban_america co_overgrown
+  char_select_levels = "";
   levels_array = [];
   levels_array = strTok(char_select_levels, " ");
 
   foreach(level_string in levels_array) {
     if(level_string == level.script) {
-      // non-switched
       flag_set("character_selected");
-
-      //precacheMenu( "coop_characterselect" );
-      //character_select_menu();
     }
   }
 
@@ -2479,185 +2301,11 @@ coop_gamesetup_menu() {
       if(isDefined(pilot_num) && pilot_num != "0")
         level.character_switched = true;
 
-      //reset
-      //setdvar ( "ui_ac130_pilot_num", "" );
-
       flag_set("character_selected");
-
-      //precacheMenu( "coop_characterselect" );
-      //character_select_menu();
     }
   }
 }
 
-/*
-character_select_menu()
-{
-	setup_character_menu();
-
-	// close previous menus and open character selection
-	level.response_queue = [];
-
-	setblur( 2, .1 );
-	foreach ( idx, player in level.players )
-	{
-		player closepopupMenu();
-		player freezecontrols( true );
-		player openpopupMenu( "coop_characterselect" );
-
-		flag_init( "player" + idx + "_ready" );
-
-		thread waittill_each_ready( player, "player" + idx + "_ready" );
-		add_wait( ::flag_wait, "player" + idx + "_ready" );
-	}
-
-	do_wait();
- 	setblur( 0, .2 );
-
- 	foreach ( player in level.players )
- 	{
-		player closepopupMenu();
-		player freezecontrols( false );
-	}
-
- 	// responses
- 	assert( isDefined( level.response_queue[ 0 ] ) );
- 	first_player = level.response_queue[ 0 ][ "player" ];
- 	first_player_response = level.response_queue[ 0 ][ "response" ];
-
- 	//assert( isDefined( level.response_queue[ 1 ] ) );
- 	//second_player = level.response_queue[ 1 ][ "player" ];
- 	//second_player_response = level.response_queue[ 1 ][ "response" ];
-
-	// coop two player situation:
-	if( first_player == level.player )
-	{
-		if( first_player_response == "char2" )
-		{
-			level.character_switched = true;
-			maps\_loadout::give_loadout( true );
-		}
-	}
-	else
-	{
-		if( first_player_response == "char1" )
-		{
-			level.character_switched = true;
-			maps\_loadout::give_loadout( true );
-		}
-	}
-
-	flag_set( "character_selected" );
-	//autosave_now( true );
-}
-*/
-
-/*
-waittill_each_ready( player, ready_flag )
-{
-	response = " ";
-	while( response != "char1" && response != "char2" )
-	{
-		player waittill( "menuresponse", menu, response );
-
-		index = level.response_queue.size;
-		level.response_queue[ index ] = [];
-		level.response_queue[ index ][ "player" ] = player;
-		level.response_queue[ index ][ "response" ] = response;
-
-		break;
-	}
-	flag_set( ready_flag );
-}
-*/
-/*
-// temp - prototype, will be using string tables in the future
-setup_character_menu()
-{
-	if( level.script == "co_ac130" || level.script == "co_hunted" )
-	{
-		setDvar( "ui_character1_name", "AC130" );
-		setDvar( "ui_character1_image", "level_character_ac130" );
-		setDvar( "ui_character1_primary", "ui_transparent" );
-		setDvar( "ui_character1_inv", "ui_transparent" );
-		setDvar( "ui_character1_inv_counter", "" );
-
-		setDvar( "ui_character2_name", "James" );
-		setDvar( "ui_character2_image", "level_character_james" );
-		setDvar( "ui_character2_primary", "weapon_m4carbine" );
-		setDvar( "ui_character2_inv", "weapon_attachment_m203" );
-		setDvar( "ui_character2_inv_counter", "x10" );
-		return;
-	}
-	else if( level.script == "co_blackout" )
-	{
-		setDvar( "ui_character1_name", "Price" );
-		setDvar( "ui_character1_image", "level_character_price" );
-		setDvar( "ui_character1_primary", "weapon_m4carbine" );
-		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setDvar( "ui_character1_inv_counter", "x10" );
-
-		setDvar( "ui_character2_name", "Gaz" );
-		setDvar( "ui_character2_image", "level_character_gaz" );
-		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setDvar( "ui_character2_inv", "ui_transparent" );
-		setDvar( "ui_character2_inv_counter", "" );
-		return;
-	}
-	else if( level.script == "co_overgrown" )
-	{
-		setDvar( "ui_character1_name", "Price" );
-		setDvar( "ui_character1_image", "level_character_price" );
-		setDvar( "ui_character1_primary", "weapon_m4carbine" );
-		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setDvar( "ui_character1_inv_counter", "x10" );
-
-		setDvar( "ui_character2_name", "Gaz" );
-		setDvar( "ui_character2_image", "level_character_gaz" );
-		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setDvar( "ui_character2_inv", "weapon_claymore" );
-		setDvar( "ui_character2_inv_counter", "x10" );
-		return;
-	}
-	else if( level.script == "co_suburban_america" )
-	{
-		setDvar( "ui_character1_name", "Price" );
-		setDvar( "ui_character1_image", "level_character_price" );
-		setDvar( "ui_character1_primary", "weapon_m4carbine" );
-		setDvar( "ui_character1_inv", "weapon_attachment_m203" );
-		setDvar( "ui_character1_inv_counter", "x10" );
-
-		setDvar( "ui_character2_name", "Gaz" );
-		setDvar( "ui_character2_image", "level_character_gaz" );
-		setDvar( "ui_character2_primary", "weapon_m14_scoped" );
-		setDvar( "ui_character2_inv", "weapon_claymore" );
-		setDvar( "ui_character2_inv_counter", "x10" );
-		return;
-	}
-
-	// Default
-	setDvar( "ui_character1_name", "Price" );
-	setDvar( "ui_character1_image", "level_character_price" );
-	setDvar( "ui_character1_primary", "weapon_m4carbine" );
-	setDvar( "ui_character1_inv", "weapon_attachment_m203" );
-	setDvar( "ui_character1_inv_counter", "x10" );
-
-	setDvar( "ui_character2_name", "Gaz" );
-	setDvar( "ui_character2_image", "level_character_gaz" );
-	setDvar( "ui_character2_primary", "weapon_m14_scoped" );
-	setDvar( "ui_character2_inv", "weapon_claymore" );
-	setDvar( "ui_character2_inv_counter", "x10" );
-}
-
-*/
-//==========================================
-
-/*
-=============
-///ScriptDocBegin
-"Name: coop_gamesetup_ac130()""Summary: Opens difficulty menus for both co-op players and returns selected AC130 pilot (player entity). Must call precacheMenu("coop_setup"); precacheMenu("coop_setup2"); in level script.""Module: gameskill""Example: 	ac130_pilot = coop_gamesetup_ac130();""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 coop_gamesetup_ac130() {
   assertex(isDefined(level.specops_character_selector), "Failed to select character");
 
@@ -2667,28 +2315,13 @@ coop_gamesetup_ac130() {
   if(level.specops_character_selector == "so_char_client")
     return level.players[1];
 
-  // failed to select	
   return level.players[0];
-
-  /*		
-  	if( cointoss() )
-  		return level.player2;
-  	else
-  		return level.player;
-  		*/
-  /*
-  	if( isDefined( level.character_switched ) && level.character_switched )
-  		return level.player2;
-
-  	return level.player;
-  */
 }
 
 so_player_num(num) {
   level.so_player_num = num;
   level.so_player_add_player_giveWeapon[num] = [];
 
-  // level vars if this becomes more commmonly used should put the init somewhere above the loadout section.	
   if(!isDefined(level.so_player_set_maxammo))
     level.so_player_set_maxammo = [];
   if(!isDefined(level.so_player_set_setViewmodel))
@@ -2858,7 +2491,6 @@ UpdateModel(modelFunc) {
       }
     }
 
-    // Figure out what, if anything, to put in the left hand.
     knife_model = self GetPlayerKnifeModel();
     if(isDefined(knife_model)) {
       self attach(knife_model, "tag_inhand", true);
@@ -2868,8 +2500,6 @@ UpdateModel(modelFunc) {
         self attach(weapon_model, "tag_weapon_left", true);
     }
 
-    // Need to swap this to do all weapons that are visible when stowing is supported.
-    // Note: Dual Wielded weapons don't properly hide the extra hand.
     weapon = self GetCurrentWeapon();
     weapon_model = self GetPlayerWeaponModel();
     if(isDefined(weapon_model)) {

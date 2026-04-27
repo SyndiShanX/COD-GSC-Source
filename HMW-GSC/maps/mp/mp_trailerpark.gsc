@@ -6,9 +6,6 @@ main() {
   maps\mp\mp_trailerpark_fx::main();
   common_scripts\_destructible::init();
 
-  //maps\mp\_destructible_dlc2::main(); // call before _load
-  //maps\mp\_destructible_dlc::main(); // call before _load
-
   maps\mp\_compass::setupMiniMap("compass_map_mp_trailerpark");
 
   maps\mp\_load::main();
@@ -16,7 +13,7 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_trailerpark");
 
   setDvar("r_lightGridEnableTweaks", 1);
-  //	setDvar( "r_specularcolorscale", "1.7" );
+
   setDvar("r_lightGridIntensity", 1.33);
 
   setDvar("r_tessellation", 0);

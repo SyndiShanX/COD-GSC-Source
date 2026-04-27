@@ -21,6 +21,4 @@
 #using scripts\shared\util_shared;
 #namespace namespace_90072e58;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}

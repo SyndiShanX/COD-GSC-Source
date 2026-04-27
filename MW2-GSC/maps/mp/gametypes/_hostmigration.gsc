@@ -39,9 +39,6 @@ hostMigrationWait() {
   level endon("game_ended");
   level endon("nuke_death");
 
-  // start with a 20 second wait.
-  // once we get enough players, or the first 15 seconds pass, switch to a 5 second timer.
-
   thread maps\mp\gametypes\_gamelogic::matchStartTimer("waiting_for_players", 20.0);
   hostMigrationWaitForPlayers();
 

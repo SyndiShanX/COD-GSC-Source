@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 114
   ent = createOneshotEffect("rain_heavy_mist");
   ent.v["origin"] = (27.2079, -1156.02, 583.278);
   ent.v["angles"] = (270, 0, 0);

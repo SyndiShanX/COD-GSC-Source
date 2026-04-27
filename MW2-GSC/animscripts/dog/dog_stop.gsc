@@ -43,7 +43,7 @@ isFacingEnemy(toleranceCosAngle) {
 }
 
 randomAttackIdle() {
-  if(isFacingEnemy(-0.5)) // cos120
+  if(isFacingEnemy(-0.5))
     self orientmode("face current");
   else
     self orientmode("face enemy");
@@ -51,7 +51,6 @@ randomAttackIdle() {
   self clearanim(%german_shepherd_attackidle_knob, 0.1);
 
   if(should_growl()) {
-    // just growl
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_growl, 1, 0.2, 1);
     return;
   }

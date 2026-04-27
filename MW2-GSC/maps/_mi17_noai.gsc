@@ -7,12 +7,11 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 main(model, type, no_death) {
-  //SNDFILE=vehicle_mi17
   build_template("mi17_noai", model, type);
   build_localinit(::init_local);
-  build_deathmodel("vehicle_mi17_woodland"); // RADNAME = _noai
-  build_deathmodel("vehicle_mi17_woodland_fly"); // RADNAME = _noai
-  build_deathmodel("vehicle_mi17_woodland_fly_cheap"); // RADNAME = _noai
+  build_deathmodel("vehicle_mi17_woodland");
+  build_deathmodel("vehicle_mi17_woodland_fly");
+  build_deathmodel("vehicle_mi17_woodland_fly_cheap");
 
   if(!isDefined(no_death)) {
     mi17_death_fx = [];
@@ -48,45 +47,10 @@ main(model, type, no_death) {
 }
 
 init_local() {
-  //	self.originheightoffset = 116;//TODO-FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground")); // TODO - FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  self.fastropeoffset = 710; // TODO - FIXME: this is ugly. If only there were a getanimendorigin() command
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
+  self.fastropeoffset = 710;
+  self.script_badplace = false;
 
   maps\_vehicle::lights_on("running");
   maps\_vehicle::lights_on("interior");
 }
-
-/*QUAKED script_vehicle_mi17_woodland_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17_noai::main( "vehicle_mi17_woodland" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_mi17_noai
-sound,vehicle_mi17,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi17_woodland_fly_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17_noai::main( "vehicle_mi17_woodland_fly" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_fly_mi17_noai
-sound,vehicle_mi17,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland_fly"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi17_woodland_fly_cheap_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17_noai::main( "vehicle_mi17_woodland_fly_cheap" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_fly_cheap_mi17_noai
-sound,vehicle_mi17,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland_fly_cheap"default:"vehicletype" "mi17_noai"default:"script_team" "axis"
-*/

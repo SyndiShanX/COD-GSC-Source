@@ -18,7 +18,6 @@ main() {
   level._effect["blood"] = loadfx("impacts/sniper_escape_blood");
   level._effect["blood_dashboard_splatter"] = loadfx("impacts/blood_dashboard_splatter_boneyard");
 
-  //Ambient FX
   level._effect["dust_wind_fast"] = loadfx("dust/dust_wind_fast");
   level._effect["dust_wind_fast_light"] = LoadFX("dust/dust_wind_fast_light");
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");
@@ -33,11 +32,9 @@ main() {
 }
 
 footstep_effects() {
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("grass", loadfx("impacts/footstep_dust"));
 
-  //Small footstep fx
   animscripts\utility::setFootstepEffectSmall("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("grass", loadfx("impacts/footstep_dust"));
 }
@@ -58,14 +55,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("suburban", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "suburban", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("suburban", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "suburban", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("suburban", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "ceramic", driving_tread_fx);
@@ -75,7 +72,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("suburban", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "suburban", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("suburban_minigun", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "bark", driving_tread_fx);
@@ -90,14 +86,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("suburban_minigun", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "suburban_minigun", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("suburban_minigun", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "suburban_minigun", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("suburban_minigun", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "ceramic", driving_tread_fx);
@@ -107,7 +103,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("suburban_minigun", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("suburban_minigun", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "suburban_minigun", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("truck_physics", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "bark", driving_tread_fx);
@@ -122,14 +117,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("truck_physics", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "truck_physics", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("truck_physics", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "truck_physics", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("truck_physics", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "ceramic", driving_tread_fx);
@@ -139,7 +134,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("truck_physics", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("truck_physics", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "truck_physics", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("uaz_physics", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "bark", driving_tread_fx);
@@ -154,14 +148,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("uaz_physics", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "uaz_physics", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("uaz_physics", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "uaz_physics", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("uaz_physics", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "ceramic", driving_tread_fx);
@@ -171,7 +165,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("uaz_physics", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("uaz_physics", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "uaz_physics", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("hummer_physics", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "bark", driving_tread_fx);
@@ -186,14 +179,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("hummer_physics", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "hummer_physics", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("hummer_physics", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "hummer_physics", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("hummer_physics", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "ceramic", driving_tread_fx);
@@ -203,7 +196,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("hummer_physics", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_physics", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "hummer_physics", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("hummer_minigun", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "bark", driving_tread_fx);
@@ -218,14 +210,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("hummer_minigun", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "hummer_minigun", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("hummer_minigun", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "hummer_minigun", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("hummer_minigun", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "ceramic", driving_tread_fx);
@@ -235,7 +227,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("hummer_minigun", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("hummer_minigun", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "hummer_minigun", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("btr80_physics", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "bark", driving_tread_fx);
@@ -250,14 +241,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("btr80_physics", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "btr80_physics", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("btr80_physics", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "btr80_physics", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("btr80_physics", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "ceramic", driving_tread_fx);
@@ -267,5 +258,4 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("btr80_physics", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "btr80_physics", "none", driving_tread_fx );
 }

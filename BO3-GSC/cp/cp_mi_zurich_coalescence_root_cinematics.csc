@@ -4,14 +4,8 @@
 #using scripts\shared\util_shared;
 #namespace root_cinematics;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function function_85138237() {
-  // Unsupported VM revision (1B).
-}
+function function_85138237() {}

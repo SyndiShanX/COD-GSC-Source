@@ -39,10 +39,6 @@ setghilliemodels_stub(env) {
   */
 }
 
-////////////////////////////////
-// TF141//
-////////////////////////////////
-
 tf141_assault_precache() {
   precachemodel("body_h2_tf141_assault");
   precachemodel("head_h2_tf141_assault");
@@ -78,10 +74,6 @@ tf141_lmg_main() {
   self.voice = "american";
   self setclothtype("vestlight");
 }
-
-////////////////////////////////
-// OPFOR//
-////////////////////////////////
 
 opfor_assault_precache() {
   precachemodel("body_h2_opforce_assault");
@@ -119,10 +111,6 @@ opfor_lmg_main() {
   self setclothtype("vestlight");
 }
 
-////////////////////////////////
-//SPETSNAZ//
-////////////////////////////////
-
 spetsnaz_assault_precache() {
   precachemodel("body_h2_airborne_assault");
   precachemodel("head_h2_airborne_assault");
@@ -158,10 +146,6 @@ spetsnaz_lmg_main() {
   self.voice = "russian";
   self setclothtype("vestlight");
 }
-
-////////////////////////////////
-//RANGERS //
-////////////////////////////////
 
 rangers_assault_precache() {
   precachemodel("body_h2_us_army_ar");
@@ -199,10 +183,6 @@ rangers_lmg_main() {
   self setclothtype("vestlight");
 }
 
-////////////////////////////////
-// SEALS//
-////////////////////////////////
-
 seals_assault_precache() {
   precachemodel("body_h2_seal_assault");
   precachemodel("head_h2_seal_assault");
@@ -238,10 +218,6 @@ seals_lmg_main() {
   self.voice = "american";
   self setclothtype("vestlight");
 }
-
-////////////////////////////////
-//MILITIA //
-////////////////////////////////
 
 militia_assault_precache() {
   precachemodel("body_h2_militia_assault");
@@ -376,11 +352,6 @@ playercostume_stub(weapon, team, environment) {
 
   self setcostumemodels(self.costume, weapon, team, environment);
 
-  // if( maps\mp\_utility::invirtuallobby() || level.virtuallobbyactive)
-  // {
-  // return 1;
-  // }
-
   self thread apply_iw4_costumes();
 
   return 1;
@@ -392,7 +363,6 @@ apply_iw4_costumes() {
 
   self waittill("player_model_set");
 
-  // returning here is fine if its not valid, because the function seems to call again with a valid primaryweapon on the same player
   if(!isDefined(self.primaryweapon)) {
     return;
   }
@@ -446,8 +416,7 @@ apply_iw4_costumes() {
       [[game[self.team + "_model"]["LMG"]]]();
       break;
     default:
-      // print ("[WARNING] weaponClass '" + weaponClass + "' does not match any valid types.");
-      //self iprintln ("^3[WARNING] weaponClass '" + weaponClass + "' does not match any valid types.");
+
       self randomBotCostume();
       break;
   }

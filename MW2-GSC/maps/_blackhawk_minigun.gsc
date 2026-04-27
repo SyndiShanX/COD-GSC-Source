@@ -10,12 +10,8 @@
 #include maps\_anim;
 #using_animtree("vehicles");
 main(model, type, no_death) {
-  //precachemodel( "fastrope_arms" );
-
   build_template("blackhawk_minigun", model, type);
   build_localinit(::init_local);
-
-  //build_deathmodel( "vehicle_blackhawk_minigun_hero" );
 
   build_drive(%bh_rotors, undefined, 0);
 
@@ -57,19 +53,15 @@ main(model, type, no_death) {
 }
 
 init_local() {
-  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground")); // TODO - FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  //self.originheightoffset = 256;
-  self.fastropeoffset = 762; // TODO - FIXME: this is ugly. If only there were a getanimendorigin() command
+  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
 
-  self.script_badplace = false; // All helicopters dont need to create bad places
-  //maps\_vehicle::lights_on( "running" );
-  //maps\_vehicle::lights_on( "interior" );
+  self.fastropeoffset = 762;
+
+  self.script_badplace = false;
 }
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
-  //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-
   for(i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
 
@@ -77,55 +69,9 @@ set_vehicle_anims(positions) {
 }
 
 /using_animtree( "fastrope" );
-//setplayer_anims( positions )
-//{
-//	positions[ 3 ].player_idle = %bh_player_idle;
-//	positions[ 3 ].player_getout_sound = "fastrope_start_plr";
-//	positions[ 3 ].player_getout_sound_loop = "fastrope_loop_plr";
-//	positions[ 3 ].player_getout_sound_end = "fastrope_end_plr";
-//
-//	positions[ 3 ].player_getout = %bh_player_drop;
-//	//positions[ 3 ].player_getout = %bh_2_drop;
-//	positions[ 3 ].player_animtree = #animtree;
-//
-//
-//	positions[ 2 ].player_idle = %bh_player_idle;
-//	positions[ 2 ].player_getout_sound = "fastrope_start_plr";
-//	positions[ 2 ].player_getout_sound_loop = "fastrope_loop_plr";
-//	positions[ 2 ].player_getout_sound_end = "fastrope_end_plr";
-//
-//	positions[ 2 ].player_getout = %bh_player_drop;
-//	positions[ 2 ].player_animtree = #animtree;
-//
-//	positions[ 6 ].player_idle = %bh_player_idle;
-//	positions[ 6 ].player_getout_sound = "fastrope_start_plr";
-//	positions[ 6 ].player_getout_sound_loop = "fastrope_loop_plr";
-//	positions[ 6 ].player_getout_sound_end = "fastrope_end_plr";
-//
-//	positions[ 6 ].player_getout = %bh_player_drop;
-//	//positions[ 6 ].player_getout = %bh_player_drop_P1;
-//	//positions[ 6 ].player_getout = %bh_player_drop_P2;
-//	positions[ 6 ].player_animtree = #animtree;
-//
-//	return positions;
-//}
 
 /
 using_animtree("generic_human");
-//
-//set_coop_player_anims( positions )
-//{
-//	//positions[ 3 ].player_getout = %bh_player_drop;
-//	positions[ 3 ].player_getout = %bh_2_drop;
-//	positions[ 3 ].player_animtree = #animtree;
-//
-//	//positions[ 6 ].player_getout = %bh_player_drop;
-//	positions[ 6 ].player_getout = %bh_8_drop;
-//	positions[ 6 ].player_animtree = #animtree;
-//
-//	return positions;
-//}
-
 #using_animtree("generic_human");
 
 setanims() {
@@ -136,7 +82,6 @@ setanims() {
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;
 
-  // 1, 2, 4, 5, 8,6
   positions[2].idle = % bh_1_idle;
   positions[3].idle = % bh_2_idle;
   positions[4].idle = % bh_4_idle;
@@ -153,7 +98,6 @@ setanims() {
   positions[6].sittag = "tag_detach";
   positions[7].sittag = "tag_detach";
 
-  // 1, 2, 4, 5, 8,6
   positions[2].getout = % bh_1_drop;
   positions[3].getout = % bh_2_drop;
   positions[4].getout = % bh_4_drop;
@@ -190,13 +134,6 @@ setanims() {
   positions[6].rappel_kill_achievement = 1;
   positions[7].rappel_kill_achievement = 1;
 
-  //	positions[ 2 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 3 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 4 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 5 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 6 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 7 ].getoutsnd = "fastrope_loop_npc";
-
   positions[2].getoutloopsnd = "fastrope_loop_npc";
   positions[3].getoutloopsnd = "fastrope_loop_npc";
   positions[4].getoutloopsnd = "fastrope_loop_npc";
@@ -204,20 +141,15 @@ setanims() {
   positions[6].getoutloopsnd = "fastrope_loop_npc";
   positions[7].getoutloopsnd = "fastrope_loop_npc";
 
-  // 1, 2, 4, 5, 6, & 8
-  positions[2].fastroperig = "TAG_FastRope_RI"; // 1 %bh_1_drop
-  positions[3].fastroperig = "TAG_FastRope_RI"; // 2 %bh_2_drop
-  positions[4].fastroperig = "TAG_FastRope_LE"; // 4 %bh_4_drop
-  positions[5].fastroperig = "TAG_FastRope_LE"; // 5 %bh_5_drop
-  positions[6].fastroperig = "TAG_FastRope_RI"; // 8 %bh_8_drop
-  positions[7].fastroperig = "TAG_FastRope_LE"; // 6 %bh_6_drop
+  positions[2].fastroperig = "TAG_FastRope_RI";
+  positions[3].fastroperig = "TAG_FastRope_RI";
+  positions[4].fastroperig = "TAG_FastRope_LE";
+  positions[5].fastroperig = "TAG_FastRope_LE";
+  positions[6].fastroperig = "TAG_FastRope_RI";
+  positions[7].fastroperig = "TAG_FastRope_LE";
 
   return positions;
-  //return setplayer_anims( positions );
-  //return set_coop_player_anims( positions );
 }
-
-//WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
   unload_groups["left"] = [];
@@ -267,69 +199,6 @@ set_attached_models() {
   return array;
 }
 
-//use this function to fastrope the player out of the heli from the gunner position
-
-//blackhawk_minigun_player_fastrope_think()
-//{
-//	animfudgetime = 0;
-//	position = 3;
-//	AssertMessage = "In order for the player to fastrope out of the heli at " + self.origin + ", it must have at least one vehicle rider in script_startingposition '" + position + "' with script_drone set to '1' and 'drone_delete_on_unload' set to '1'";
-//	self endon( "death" );
-//	/*----------------------- //	FIND THE RIDER THE PLAYER WILL POSESS
-//	-------------------------*/
-//	dummy = undefined;
-//	assertex( isDefined( self.riders ), AssertMessage );
-//	foreach ( AI in self.riders )
-//	{
-//		if( AI.vehicle_position == position )
-//		{
-//			dummy = AI;
-//			dummy.drone_delete_on_unload = true;
-//			dummy.playerpiggyback = true;
-//			break;
-//		}
-//	}
-//	assertex( isDefined( dummy ), AssertMessage );
-//	assertex( !isai( dummy ), AssertMessage );
-//	animpos = maps\_vehicle_aianim::anim_pos( self, position );
-//
-//	/*----------------------- //	HIDE THE DUMMY RIDER
-//	-------------------------*/
-//	dummy notsolid();
-//	dummy notify( "newanim" );
-//	dummy detachall();
-//	dummy setModel( "fastrope_arms" );
-//	dummy useanimtree( animpos.player_animtree );
-//	dummy hide();
-//	thread maps\_vehicle_aianim::guy_idle( dummy, position );
-//	wait .1;
-//
-//	animtime = getanimlength( animpos.getout );
-//	animtime -= animfudgetime;
-//
-//	/*----------------------- //	LERP PLAYER VIEW TO DUMMY FASTROPING
-//	-------------------------*/
-//	self waittill( "unloading" );
-//	self player_dismount_blackhawk_gun();
-//	level.player PlayerLinkToBlend( dummy, "tag_player", 1, 0, 0 );
-//	//dummy lerp_player_view_to_tag( level.player, "tag_player", 1, 1, 30, 30, 30, 30 );
-//	
-//								//( <linkto entity>, <tag>, <viewpercentag fraction>, <right arc>, <left arc>, <top arc>, <bottom arc>, <use tag angles> )
-//	//level.player playerlinktodelta( dummy, "tag_player", 0.35, 60, 28, 30, 30, false );
-//	
-//	//dummy show();
-//
-//	wait animtime;
-//
-//	level.player unlink();
-//	thread hud_hide( false );
-//	level.player enableweapons();
-// 	level.player allowprone( true );
-// 	level.player allowcrouch( true );
-// 	
-// 	self notify( "player_fastroped_out" );
-//}
-
 player_mount_blackhawk_gun(nolerp, player, hide_hud) {
   if(!isDefined(player)) {
     player = level.player;
@@ -337,7 +206,6 @@ player_mount_blackhawk_gun(nolerp, player, hide_hud) {
 
   self.minigunUser = player;
 
-  //self ==> the vehicle being used by the player
   if(!isDefined(hide_hud))
     hide_hud = true;
   thread hud_hide(hide_hud);
@@ -345,7 +213,7 @@ player_mount_blackhawk_gun(nolerp, player, hide_hud) {
   player allowcrouch(false);
   if(!isDefined(nolerp)) {
     player disableWeapons();
-    //lerp_player_view_to_tag( player, tag, lerptime, fraction, right_arc, left_arc, top_arc, bottom_arc )
+
     self lerp_player_view_to_tag(player, "tag_player", 1, 1, 30, 30, 30, 30);
   }
 
@@ -354,26 +222,12 @@ player_mount_blackhawk_gun(nolerp, player, hide_hud) {
   player setplayerangles(tagAngles + (0, 0, 0));
   flag_set("player_on_minigun");
   self thread maps\_minigun::minigun_think();
-  //thread maps\_minigun::minigun_hints_on();
 }
 
 player_dismount_blackhawk_gun() {
-  //self ==> the vehicle being used by the player
   self useby(self.minigunUser);
   self.minigunUser unlink();
   level notify("player_off_blackhawk_gun");
-  //level.player playerlinktodelta( self, "tag_player", 1, 50, 50, 30, 45 );
-  //wait( .05 );
-  //self turret_reset();
-  //thread maps\_minigun::minigun_hints_off();
-  //self lerp_player_view_to_tag( "tag_turret_exit", 1, 0.9, 25, 25, 45, 0 );
-  // level.player unlink();
-  //level.player enableWeapons();
-
-  //level.player DisableInvulnerability();
-  //level.player allowprone( true );
-  //level.player allowcrouch( true );
-  //flag_set( "player_off_minigun" );
 }
 
 hud_hide(state) {

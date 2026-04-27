@@ -7,10 +7,6 @@
 #include maps\_utility;
 #using_animtree("script_model");
 main() {
-  //level.scr_anim[ "chair" ][ "chair_react" ]					= %parabolic_guard_sleeper_react_chair;
-  //level.scr_animtree[ "chair" ] 								= #animtree;	
-  //level.scr_model[ "chair" ] 									= "com_folding_chair";
-
   level.scr_animtree["hiding_door"] = #animtree;
   level.scr_model["hiding_door"] = "com_door_01_handleleft";
 

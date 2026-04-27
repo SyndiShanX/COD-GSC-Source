@@ -17,10 +17,6 @@ main() {
 }
 
 dialogue() {
-  //	level.scr_sound[ "animname" ][ "yyy" ]			 = "yyy";
-  //	level.scr_radio[ "yyy" ] = "yyy";
-
-  // Price
   level.scr_radio["byard_pri_wipeoutus"] = "byard_pri_wipeoutus";
   level.scr_radio["byard_pri_backupplan"] = "byard_pri_backupplan";
   level.scr_radio["byard_pri_lzishot"] = "byard_pri_lzishot";
@@ -63,12 +59,10 @@ dialogue() {
   level.scr_sound["price"]["byard_pri_aimforramp"] = "byard_pri_aimforramp";
   level.scr_sound["price"]["byard_pri_weareleaving"] = "byard_pri_weareleaving";
 
-  // Makarov
   level.scr_radio["byard_mkv_neitherwillyou"] = "byard_mkv_neitherwillyou";
   level.scr_radio["byard_mkv_cutsbothways"] = "byard_mkv_cutsbothways";
   level.scr_radio["byard_mkv_hotelbravo"] = "byard_mkv_hotelbravo";
 
-  // Nikolai
   level.scr_radio["byard_nkl_ontheway"] = "byard_nkl_ontheway";
   level.scr_radio["byard_nkl_sandstorms"] = "byard_nkl_sandstorms";
   level.scr_radio["byard_nkl_unsafetoland"] = "byard_nkl_unsafetoland";
@@ -107,15 +101,6 @@ suburban_overrides() {
 }
 
 suburban_shared_overrides(positions) {
-  /*
-  UAZ_Lguy_fire_side_v1
-  UAZ_Lguy_fire_side_v2
-  UAZ_Lguy_idle_hide
-
-  UAZ_Rguy_scan_side_v1
-  UAZ_Rguy_idle
-  */
-
   positions[1].hide_attack_left[0] = % UAZ_Rguy_scan_side_v1;
   positions[1].hide_attack_left[1] = % UAZ_Rguy_scan_side_v1;
   positions[1].hide_attack_left_occurrence[0] = 500;
@@ -139,17 +124,15 @@ uaz_overrides() {
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
-  positions[2].sittag = "tag_guy0"; // RR
-  positions[3].sittag = "tag_guy1"; // RR
-  positions[4].sittag = "tag_guy2"; // RR
-  positions[5].sittag = "tag_guy3"; // RR
+  positions[2].sittag = "tag_guy0";
+  positions[3].sittag = "tag_guy1";
+  positions[4].sittag = "tag_guy2";
+  positions[5].sittag = "tag_guy3";
 
   positions[0].idle = % UAZ_driver_idle;
-  //	positions[ 1 ].idle = %UAZ_Rguy_idle;
 
   positions[0].getout = % uaz_driver_exit_into_stand;
   positions[2].getout = % uaz_driver_exit_into_run;
-  //	positions[ 3 ].getout = %uaz_passenger_exit_into_run;
 
   positions[0].getin = % uaz_driver_enter_from_huntedrun;
 
@@ -158,10 +141,6 @@ uaz_overrides() {
   positions[2].idle[1] = % UAZ_Lguy_idle_react;
   positions[2].idleoccurrence[0] = 1000;
   positions[2].idleoccurrence[1] = 100;
-
-  //	positions[ 3 ].idle = %UAZ_Rguy_idle;
-  //	positions[ 4 ].idle = undefined;
-  //	positions[ 5 ].idle = undefined;
 
   positions[2].hidetoback = % UAZ_Lguy_trans_hide2back;
   positions[2].back_attack = % UAZ_Lguy_fire_back;
@@ -184,16 +163,6 @@ uaz_overrides() {
   positions[2].hide_attack_back_occurrence[0] = 500;
   positions[2].hide_attack_back_occurrence[1] = 500;
   positions[2].react = % UAZ_Lguy_idle_react;
-
-  //	positions[ 1 ].hide_attack_back[ 0 ] = %UAZ_Rguy_fire_back_v2;
-  //	positions[ 1 ].hide_attack_back[ 1 ] = %UAZ_Rguy_fire_back_v1;
-  //	positions[ 1 ].hide_attack_back_occurrence[ 0 ] = 500;
-  //	positions[ 1 ].hide_attack_back_occurrence[ 1 ] = 500;
-
-  //	positions[ 1 ].hide_attack_left[ 0 ] = %UAZ_Lguy_fire_side_v1;
-  //	positions[ 1 ].hide_attack_left[ 1 ] = %UAZ_Lguy_fire_side_v2;
-  //	positions[ 1 ].hide_attack_left_occurrence[ 0 ] = 500;
-  //	positions[ 1 ].hide_attack_left_occurrence[ 1 ] = 500;
 
   positions[0].duck_once = % UAZ_driver_duck;
   positions[0].turn_right = % UAZ_driver_turnright;
@@ -233,8 +202,7 @@ truck_vehicle_overrides(positions) {
 
   positions[0].vehicle_getinanim = % door_pickup_driver_climb_in;
   positions[1].vehicle_getinanim = % door_pickup_passenger_climb_in;
-  //positions[ 2 ].vehicle_getinanim = %door_pickup_driver_climb_in;
-  //positions[ 3 ].vehicle_getinanim = %door_pickup_passenger_climb_in;
+
   return positions;
 }
 

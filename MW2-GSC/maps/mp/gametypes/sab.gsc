@@ -7,30 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	Sabotage
-	
-	// ...etc...
-*/
-
-/*QUAKED mp_sab_spawn_axis (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_sab_spawn_axis_planted (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_sab_spawn_allies (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_sab_spawn_allies_planted (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_sab_spawn_axis_start (1.0 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_sab_spawn_allies_start (0.0 1.0 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -39,7 +15,6 @@ main() {
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
 
-  //level.objectiveBased = true;
   level.teamBased = true;
 
   registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -215,7 +190,6 @@ onSpawnPlayer() {
 printOTHint() {
   self endon("disconnect");
 
-  // give the "Overtime!" message time to show
   wait(0.25);
 
   self thread maps\mp\gametypes\_hud_message::SplashNotify("sudden_death");
@@ -308,7 +282,6 @@ scoreThread() {
 
   bombEnt = level.sabBomb.trigger;
 
-  // failsafe for bad bomb placement
   if(threatDistance > bombEnt distanceToSite("allies") || threatDistance > bombEnt distanceToSite("axis"))
     threatDistance = bombEnt distanceToSite(bombEnt getClosestSite()) - 128;
 
@@ -369,7 +342,6 @@ createBombZone(team, trigger) {
 }
 
 onBeginUse(player) {
-  // planted the bomb
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"]))
     player.isPlanting = true;
   else
@@ -410,12 +382,9 @@ onPickup(player) {
   }
   player.isBombCarrier = true;
 
-  // recovered the bomb before abandonment timer elapsed
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
-    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"], team);
   } else {
-    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"]);
   }
 
@@ -457,7 +426,6 @@ abandonmentThink(delay) {
   else
     otherTeam = "allies";
 
-  //	printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", otherTeam, &"MP_THE_ENEMY" );
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
 
   self maps\mp\gametypes\_gameobjects::setOwnerTeam("neutral");
@@ -474,7 +442,7 @@ abandonmentThink(delay) {
 onUse(player) {
   team = player.pers["team"];
   otherTeam = level.otherTeam[team];
-  // planted the bomb
+
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"])) {
     player notify("bomb_planted");
 
@@ -491,7 +459,6 @@ onUse(player) {
     player thread maps\mp\_matchdata::logGameEvent("plant", player.origin);
     player.bombPlantedTime = getTime();
 
-    //if( !inOvertime() )
     level thread bombPlanted(self, player.pers["team"]);
 
     level.bombOwner = player;
@@ -503,8 +470,7 @@ onUse(player) {
     self.useWeapon = "briefcase_bomb_defuse_mp";
 
     self setUpForDefusing();
-  } else // defused the bomb
-  {
+  } else {
     player notify("bomb_defused");
 
     leaderDialog("bomb_defused");
@@ -548,7 +514,6 @@ bombPlanted(destroyedObj, team) {
   level.scoreLimitOverride = true;
   setDvar("ui_bomb_timer", 1);
 
-  // communicate timer information to menus
   setGameEndTime(int(getTime() + (level.bombTimer * 1000)));
 
   destroyedObj.visuals[0] thread maps\mp\gametypes\_gamelogic::playTickingSound();
@@ -632,7 +597,6 @@ giveLastOnTeamWarning() {
   level thread teamPlayerCardSplash("callout_lastteammemberalive", self, self.pers["team"]);
   level thread teamPlayerCardSplash("callout_lastenemyalive", self, otherTeam);
   level notify("last_alive", self);
-  //self maps\mp\gametypes\_missions::lastManSD();
 }
 
 onTimeLimit() {
@@ -659,62 +623,6 @@ overtimeThread(time) {
   wait(5.0);
   level.disableSpawning = true;
 }
-
-/*
-overtimeThread()
-{
-	level.inOvertime = getTime();
-	level notify ( "overtime" );
-
-	thread bombDistanceThread();
-
-	foreach ( player in level.players )
-		player thread maps\mp\gametypes\_hud_message::SplashNotify( "sab_overtime" );
-
-	maps\mp\gametypes\_gamelogic::pauseTimer();
-	level.bombPlanted = true;
-	level.timeLimitOverride = true;
-	setDvar( "ui_bomb_timer", 1 );
-
-	// communicate timer information to menus
-	setGameEndTime( int( getTime() + (level.bombTimer * 1000) ) );
-	
-	maps\mp\gametypes\_hostmigration::waitLongDurationWithGameEndTimeUpdate( level.bombTimer );
-	
-	setDvar( "ui_bomb_timer", 0 );
-
-	if( isDefined( level.sabBomb.carrier ) )
-	{
-		explosionEnt = level.sabBomb.carrier;
-	}
-	else
-	{
-		explosionEnt = level.sabBomb.visuals[0];
-	}
-
-	level.bombExploded = true;	
-	
-	if( isDefined( level.bombowner ) )
-		explosionEnt radiusDamage( explosionEnt.origin, 512, 200, 20, level.bombowner );
-	else
-		explosionEnt radiusDamage( explosionEnt.origin, 512, 200, 20 );
-	
-	rot = randomfloat(360);
-	explosionEffect = spawnFx( level._effect["bombexplosion"], explosionEnt.origin + (0,0,50), (0,0,1), (cos(rot),sin(rot),0) );
-	triggerFx( explosionEffect );
-	
-	thread playSoundinSpace( "exp_suitcase_bomb_main", explosionEnt.origin );
-	
-	setGameEndTime( 0 );
-
-	team = getOtherTeam( level.dangerTeam );
-
-	wait 3;
-	
-	//maps\mp\gametypes\_gamescore::giveTeamScoreForObjective( team, 1 );
-	maps\mp\gametypes\_gamelogic::endGame( team, game["strings"]["target_destroyed"] );
-}
-*/
 
 bombDistanceThread() {
   level endon("game_ended");

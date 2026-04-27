@@ -43,8 +43,7 @@ main(model, type) {
 }
 
 init_local() {
-  //self.delete_on_death = true;
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.script_badplace = false;
 }
 
 set_vehicle_anims(positions) {
@@ -82,60 +81,4 @@ setanims() {
   positions[1].idleoccurrence[3] = 100;
 
   return positions;
-
-  // add generic helicopter pilot anims
-  // - helicopter_pilot1_idle
-  // - helicopter_pilot1_twitch_clickpannel
-  // - helicopter_pilot1_twitch_lookback
-  // - helicopter_pilot1_twitch_lookoutside
-  // - helicopter_pilot2_idle
-  // - helicopter_pilot2_twitch_clickpannel
-  // - helicopter_pilot2_twitch_lookoutside
-  // - helicopter_pilot2_twitch_radio
-  // - adjust mi17 / mi24 / mi28 / cobra tag for new anims	
 }
-
-/*QUAKED script_vehicle_cobra_helicopter (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra::main( "vehicle_cobra_helicopter" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter"default:"vehicletype" "cobra"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_cobra_helicopter_fly (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra::main( "vehicle_cobra_helicopter_fly" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_fly_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter_fly"default:"vehicletype" "cobra"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_cobra_helicopter_fly_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra::main( "vehicle_cobra_helicopter_fly_low" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_fly_low_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter_fly_low"default:"vehicletype" "cobra"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_cobra_helicopter_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra::main( "vehicle_cobra_helicopter_low" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_low_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter_low"default:"vehicletype" "cobra"default:"script_team" "allies"
-*/

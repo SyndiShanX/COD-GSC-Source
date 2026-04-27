@@ -1,29 +1,22 @@
 #include scripts\utility;
 
 main() {
-  // disable hud while in remote killstreak
   replacefunc(maps\mp\_utility::setusingremote, ::setusingremote_stub);
   replacefunc(maps\mp\_utility::playerremotekillstreakshowhud, ::playerremotekillstreakshowhud_stub);
 
-  // scavenger notify
   replacefunc(maps\mp\_utility::_setperk, ::_setperk_stub);
   replacefunc(maps\mp\_utility::_unsetperk, ::_unsetperk_stub);
   replacefunc(maps\mp\_utility::_clearperks, ::_clearperks_stub);
 
-  // use h2 killstreak util functions
   replacefunc(maps\mp\_utility::iskillstreakweapon, ::iskillstreakweapon_stub);
 
-  // use h2 prefix
   replacefunc(maps\mp\_utility::getbaseweaponname, ::getbaseweaponname_stub);
   replacefunc(maps\mp\_utility::isattachmentsniperscopedefaulttokenized, ::isattachmentsniperscopedefaulttokenized_stub);
 
-  // extra checks for emped
   replacefunc(maps\mp\_utility::isemped, ::isemped_stub);
 
-  // use splash table to get killstreak names
   replacefunc(maps\mp\_utility::getkillstreakname, ::getkillstreakname_stub);
 
-  // vision set stuff to support H2 maps
   replacefunc(maps\mp\_utility::get_players_watching, ::get_players_watching_stub);
   replacefunc(maps\mp\_utility::set_visionset_for_watching_players, ::set_visionset_for_watching_players_stub);
   replacefunc(maps\mp\_utility::reset_visionset_on_spawn, ::reset_visionset_on_spawn_stub);
@@ -129,7 +122,6 @@ getbaseweaponname_stub(var_0) {
   weapon_name_token = maps\mp\_utility::getweaponnametokens(var_0);
   var_2 = "";
 
-  // patching to add other game prefixes
   weap_game_prefixes = strtok("iw5,iw6,iw9,s1,h1,h2", ",");
   foreach(token in weap_game_prefixes) {
     if(weapon_name_token[0] == token) {

@@ -46,7 +46,7 @@ flares_think(vehicle) {
       if(!isDefined(eMissile)) {
         continue;
       }
-      //sometimes dont drop flares
+
       if(randomint(3) == 0) {
         continue;
       }
@@ -106,7 +106,6 @@ flares_redirect_missiles(vehicle, flareTime) {
   if(!isDefined(flareTime))
     flareTime = 5.0;
 
-  // create a script_origin at the flares location and move it down with gravity
   vec = flares_get_vehicle_velocity(vehicle);
   flare = spawn("script_origin", vehicle getTagOrigin("tag_flare"));
   flare movegravity(vec, flareTime);
@@ -114,18 +113,16 @@ flares_redirect_missiles(vehicle, flareTime) {
   if(!isDefined(vehicle.incomming_Missiles)) {
     return;
   }
-  // redirect all incomming missiles to the new flares
+
   for(i = 0; i < vehicle.incomming_Missiles.size; i++)
     vehicle.incomming_Missiles[i] Missile_SetTargetEnt(flare);
 
-  // wait for flares to burn out	
   wait flareTime;
 
   if(!isDefined(vehicle.script_targetoffset_z))
     vehicle.script_targetoffset_z = 0;
   offset = (0, 0, vehicle.script_targetoffset_z);
 
-  // when the flares burn out redirect missiles to the main target again ( if missile is still alive )
   if(!isDefined(vehicle.incomming_Missiles))
     return;
   for(i = 0; i < vehicle.incomming_Missiles.size; i++)
@@ -163,13 +160,11 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
   if(!isDefined(randomizeTargetArray))
     randomizeTargetArray = false;
 
-  // look for a vehicle target
   eTargets = [];
   eClosestValidTarget = undefined;
 
   enemyTeam = common_scripts\utility::get_enemy_team(self.script_team);
   possibleTargets = [];
-  //prof_begin( "cobrapilot_ai" );
 
   if(getVehicleTargets) {
     assert(isDefined(level.vehicles[enemyTeam]));
@@ -199,20 +194,17 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
 
   forwardvec = anglesToForward(self.angles);
   for(i = 0; i < possibleTargets.size; i++) {
-    // threatbias - if this is an ignored group then dont consider this target
     if((isSentient(possibleTargets[i])) && (isSentient(self)) && (self getThreatBiasGroup() != "")) {
       bias = getThreatBias(possibleTargets[i] getThreatBiasGroup(), self getThreatBiasGroup());
       if(bias <= -1000000)
         continue;
     }
 
-    // check if the target is within range
     if(isDefined(fRadius) && (fRadius > 0)) {
       if(distance(self.origin, possibleTargets[i].origin) > fRadius)
         continue;
     }
 
-    // check if the target is within fov
     if(isDefined(iFOVcos)) {
       normalvec = vectorNormalize(possibleTargets[i].origin - (self.origin));
       vecdot = vectordot(forwardvec, normalvec);
@@ -220,7 +212,6 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
         continue;
     }
 
-    // check if a sight trace passes
     if(doSightTrace) {
       sightTracePassed = false;
       if(isAi(possibleTargets[i]))
@@ -235,22 +226,15 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
     eTargets[eTargets.size] = possibleTargets[i];
   }
 
-  //prof_end( "cobrapilot_ai" );
-
   self notify("gunner_new_target");
 
-  // return if no targets were found
   if(eTargets.size == 0)
     return eClosestValidTarget;
 
-  // if only one target was found return it
   if(eTargets.size == 1)
     return eTargets[0];
 
-  // return the closest of the targets
-  //prof_begin( "cobrapilot_ai" );
   theTarget = getClosest(self.origin, eTargets);
-  //prof_end( "cobrapilot_ai" );
 
   return theTarget;
 }
@@ -277,7 +261,6 @@ shootEnemyTarget_Bullets(eTarget) {
       iprintln("randomShots = " + randomShots);
 
     for(i = 0; i < randomShots; i++) {
-      // if the vehicle firing the bullets is the players vehicle we have to switch to the 20mm gun
       if(isDefined(self.playercontrolled)) {
         if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0))
           self setVehWeapon(level.GunnerWeapon);
@@ -286,7 +269,6 @@ shootEnemyTarget_Bullets(eTarget) {
       self thread shootEnemyTarget_Bullets_DebugLine(self, "tag_turret", eTarget, eTargetOffset, (1, 1, 0), 0.05);
       self fireWeapon("tag_flash");
 
-      // then switch it back to the players selection after the shots are fired
       if(isDefined(self.playercontrolled))
         self setVehWeapon(level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]);
 
@@ -337,16 +319,6 @@ attachMissiles(weapon1, weapon2, weapon3, weapon4) {
     weapon[2] = weapon3;
   if(isDefined(weapon4))
     weapon[3] = weapon4;
-
-  /*
-  for( i = 0 ; i < weapon.size ; i++ )
-  {
-  	for( k = 0 ; k < level.cobra_weapon_tags[weapon[i]].size ; k++ )
-  	{
-  		self attach( level.cobra_missile_models[weapon[i]], level.cobra_weapon_tags[weapon[i]][k] );
-  	}
-  }
-  */
 
   for(i = 0; i < weapon.size; i++) {
     for(k = 0; k < level.cobra_weapon_tags[weapon[i]].size; k++) {

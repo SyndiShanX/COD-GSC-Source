@@ -27,7 +27,6 @@ friendly_bubbles_cleanup() {
 }
 
 player_scuba() {
-  //if coop splitscreen, only play scuba sound for player1 to avoid sound overlap
   if(!isSplitscreen())
     self thread player_scuba_breathe_sound();
   else {
@@ -70,7 +69,7 @@ player_scuba_bubbles() {
   playerFxOrg linkto(self, "", (15, 0, 54), (0, 0, 0));
   playerFxOrg hide();
   self thread scuba_fx_cleanup(playerFxOrg);
-  //playerFxOrg thread debug_org();
+
   while(true) {
     wait(1.8);
     self thread player_bubbles_fx(playerFxOrg);
@@ -101,21 +100,17 @@ player_bubbles_fx(playerFxOrg) {
 underwater_hud_enable(bool) {
   wait 0.05;
   if(bool == true) {
-    //setsaveddvar( "ui_hidemap", 1 );
     SetSavedDvar("hud_showStance", "0");
     SetSavedDvar("compass", "0");
-    //setDvar( "old_compass", "0" );
+
     SetSavedDvar("ammoCounterHide", "1");
     setsaveddvar("g_friendlyNameDist", 0);
-    //SetSavedDvar( "hud_showTextNoAmmo", "0" );
   } else {
-    //setsaveddvar( "ui_hidemap", 0 );
     setSavedDvar("hud_drawhud", "1");
     SetSavedDvar("hud_showStance", "1");
     SetSavedDvar("compass", "1");
-    //setDvar( "old_compass", "1" );
+
     SetSavedDvar("ammoCounterHide", "0");
     setsaveddvar("g_friendlyNameDist", 15000);
-    //SetSavedDvar( "hud_showTextNoAmmo", "1" );
   }
 }

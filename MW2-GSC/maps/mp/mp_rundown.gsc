@@ -11,7 +11,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_rundown");
 
-  //setExpFog( 1695, 5200, 0.8, 0.8, 0.8, 0.2, 0 );
   ambientPlay("ambient_mp_rural");
   VisionSetNaked("mp_rundown");
 
@@ -20,7 +19,7 @@ main() {
 
   setDvar("r_specularcolorscale", "1.67");
   setDvar("compassmaxrange", "3000");
-  setDvar("sm_sunShadowScale", "0.5"); // optimization
+  setDvar("sm_sunShadowScale", "0.5");
 
   setDvar("r_lightGridEnableTweaks", 1);
   setDvar("r_lightGridIntensity", 1.16);

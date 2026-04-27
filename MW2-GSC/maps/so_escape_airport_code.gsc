@@ -56,9 +56,6 @@ enemy_seek_player(goalradius, delay) {
   level endon("special_op_terminated");
   self endon("death");
 
-  // accuracy tweak
-  //	self.baseaccuracy *= level.seeker_accuracy_nerf;
-
   if(isDefined(delay))
     wait delay;
 
@@ -67,7 +64,7 @@ enemy_seek_player(goalradius, delay) {
 
   enemy_update_target(get_closest_player_healthy(self.origin));
   self.goalradius = goalradius;
-  self.goalheight = 256; // Force them to stay on the same level as the player.
+  self.goalheight = 256;
 
   if(is_coop())
     thread enemy_evaluate_goal();
@@ -80,7 +77,6 @@ enemy_evaluate_goal() {
   while(1) {
     wait 0.5;
 
-    // If our guy is down, automatically go after the other player.
     if(self.current_goal_player isplayerdown()) {
       enemy_update_target(get_other_player(self.current_goal_player));
       continue;
@@ -88,12 +84,11 @@ enemy_evaluate_goal() {
 
     wait 5;
 
-    // See if someone else is closer now...
     closest_player = get_closest_player_healthy(self.origin);
     if(closest_player == self.current_goal_player) {
       continue;
     }
-    // Only update if they are far enough apart to matter.			
+
     player_dist = distance(closest_player.origin, self.current_goal_player.origin);
     if(player_dist < 256) {
       continue;
@@ -122,7 +117,6 @@ enemy_move_to_struct(trig, seek_goal_radius, stay, duration) {
   if(isDefined(trig))
     trigger_name = trig + "_movein_trig";
 
-  // wait till player hits move in trigger or takes damage
   thread enemy_move_to_struct_detect_damage(seek_goal_radius, stay, duration, trigger_name);
 
   if(isDefined(trigger_name))
@@ -133,7 +127,7 @@ enemy_move_to_struct(trig, seek_goal_radius, stay, duration) {
 
 enemy_move_to_struct_detect_damage(seek_goal_radius, stay, duration, trigger_name) {
   level endon("special_op_terminated");
-  //	self endon( "death" );
+
   self endon("woken_up");
 
   self waittill_any("damage", "death");
@@ -154,9 +148,8 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
     node = getstruct(self.target, "targetname");
 
   goal_type = undefined;
-  //only nodes and structs dont have classnames - ents do
+
   if(!isDefined(node.classname)) {
-    //only structs don't have types, nodes do
     if(!isDefined(node.type))
       goal_type = "struct";
     else
@@ -165,7 +158,6 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
     goal_type = "origin";
   }
 
-  //calling this because i DO want the radius to explode	
   require_player_dist = 300;
   self thread maps\_spawner::go_to_node(node, goal_type, undefined, require_player_dist);
 
@@ -196,7 +188,6 @@ enemy_prone_to_stand(trig, seek_goal_radius, stay, duration) {
   if(isDefined(trig))
     trigger_name = trig + "_movein_trig";
 
-  // wait till player hits move in trigger or takes damage
   thread enemy_prone_to_stand_detect_damage(seek_goal_radius, stay, duration, trigger_name);
   if(isDefined(trigger_name))
     trigger_wait(trigger_name, "targetname");
@@ -206,7 +197,7 @@ enemy_prone_to_stand(trig, seek_goal_radius, stay, duration) {
 
 enemy_prone_to_stand_detect_damage(seek_goal_radius, stay, duration, trigger_name) {
   level endon("special_op_terminated");
-  //	self endon( "death" );
+
   self endon("woken_up");
 
   self waittill_any("damage", "death");
@@ -327,7 +318,6 @@ crash_elevator() {
   magicgrenademanual("fraggrenade", struct.origin, (0, 0, 0), 0.05);
 
   wait .5;
-  //elevator.e[ "housing" ][ "mainframe" ][ 0 ] playSound( "elavator_rumble" );
 
   velF = (0, 0, 1000);
   velR = (0, 0, -1000);
@@ -350,7 +340,7 @@ crash_elevator() {
   wait 1;
   elevator.e["housing"]["mainframe"][0] playSound("elevator_crash");
   exploder(2);
-  //temp
+
   left_door delete();
   right_door delete();
   wait .5;

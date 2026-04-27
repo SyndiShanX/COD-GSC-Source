@@ -7,26 +7,14 @@
 #using scripts\shared\util_shared;
 #namespace stealth_behavior;
 
-function on_investigate() {
-  // Unsupported VM revision (1B).
-}
+function on_investigate() {}
 
-function get_random_investigation_point() {
-  // Unsupported VM revision (1B).
-}
+function get_random_investigation_point() {}
 
-function investigate_stop() {
-  // Unsupported VM revision (1B).
-}
+function investigate_stop() {}
 
-function investigate_thread() {
-  // Unsupported VM revision (1B).
-}
+function investigate_thread() {}
 
-function function_628d42af() {
-  // Unsupported VM revision (1B).
-}
+function function_628d42af() {}
 
-function function_edba2e78() {
-  // Unsupported VM revision (1B).
-}
+function function_edba2e78() {}

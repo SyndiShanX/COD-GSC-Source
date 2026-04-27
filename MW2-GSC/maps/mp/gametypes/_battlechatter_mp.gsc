@@ -42,7 +42,6 @@ onPlayerSpawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    // help players be stealthy in splitscreen by not announcing their intentions
     if(level.splitscreen) {
       continue;
     }
@@ -121,7 +120,7 @@ doSound(soundAlias) {
   team = self.pers["team"];
   level addSpeaker(self, team);
   self playSoundToTeam(soundAlias, team, self);
-  self thread timeHack(soundAlias); // workaround because soundalias notify isn't happening
+  self thread timeHack(soundAlias);
   self waittill_any(soundAlias, "death", "disconnect");
   level removeSpeaker(self, team);
 }
@@ -140,7 +139,6 @@ isSpeakerInRange(player) {
 
   distSq = 1000 * 1000;
 
-  // to prevent player switch to spectator after throwing a granade causing damage to someone and result in attacker.pers["team"] = "spectator"if(isDefined(player) && isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
   for(index = 0; index < level.speakers[player.pers["team"]].size; index++) {
     teammate = level.speakers[player.pers["team"]][index];
     if(teammate == player)
@@ -157,8 +155,6 @@ return false;
 addSpeaker(player, team) {
   level.speakers[team][level.speakers[team].size] = player;
 }
-
-// this is lazy... fix up later by tracking ID's and doing array slot swapping
 removeSpeaker(player, team) {
   newSpeakers = [];
   for(index = 0; index < level.speakers[team].size; index++) {

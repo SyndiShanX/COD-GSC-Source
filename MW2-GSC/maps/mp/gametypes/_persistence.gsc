@@ -32,32 +32,13 @@ initBufferedStats() {
   self.bufferedChildStats["round"]["timePlayed"] = self getPlayerData("round", "timePlayed");
 }
 
-// ==========================================
-// Script persistent data functions
-// These are made for convenience, so persistent data can be tracked by strings.
-// They make use of code functions which are prototyped below.
-
-/*
-=============
-statGet
-
-Returns the value of the named stat
-=============
-*/
 statGet(dataName) {
-  assert(!isDefined(self.bufferedStats[dataName])); // should use statGetBuffered consistently with statSetBuffered
+  assert(!isDefined(self.bufferedStats[dataName]));
   return self GetPlayerData(dataName);
 }
 
-/*
-=============
-statSet
-
-Sets the value of the named stat
-=============
-*/
 statSet(dataName, value) {
-  assert(!isDefined(self.bufferedStats[dataName])); // should use statGetBuffered consistently with statSetBuffered
+  assert(!isDefined(self.bufferedStats[dataName]));
 
   if(!self rankingEnabled()) {
     return;
@@ -65,15 +46,8 @@ statSet(dataName, value) {
   self SetPlayerData(dataName, value);
 }
 
-/*
-=============
-statAdd
-
-Adds the passed value to the value of the named stat
-=============
-*/
 statAdd(dataName, value) {
-  assert(!isDefined(self.bufferedStats[dataName])); // should use statGetBuffered consistently with statSetBuffered
+  assert(!isDefined(self.bufferedStats[dataName]));
 
   if(!self rankingEnabled()) {
     return;
@@ -128,26 +102,12 @@ statAddChildBuffered(parent, child, value) {
   statSetChildBuffered(parent, child, curValue + value);
 }
 
-/*
-=============
-statGetBuffered
-
-Returns the value of the named stat
-=============
-*/
 statGetBuffered(dataName) {
   assert(isDefined(self.bufferedStats[dataName]));
 
   return self.bufferedStats[dataName];
 }
 
-/*
-=============
-statSet
-
-Sets the value of the named stat
-=============
-*/
 statSetBuffered(dataName, value) {
   assert(isDefined(self.bufferedStats[dataName]));
 
@@ -157,13 +117,6 @@ statSetBuffered(dataName, value) {
   self.bufferedStats[dataName] = value;
 }
 
-/*
-=============
-statAdd
-
-Adds the passed value to the value of the named stat
-=============
-*/
 statAddBuffered(dataName, value) {
   assert(isDefined(self.bufferedStats[dataName]));
 
@@ -175,7 +128,6 @@ statAddBuffered(dataName, value) {
 }
 
 updateBufferedStats() {
-  // give the first player time to connect
   wait(0.15);
 
   nextToUpdate = 0;

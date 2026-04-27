@@ -385,7 +385,6 @@ setUseBarScore(team) {
     if(!isDefined(self.touchlist[team][player.guid])) {
       continue;
     }
-    //player thread maps\mp\gametypes\_rank::giveRankXP( "challenge",50 );
 
     player.useBar updateBar(teamScore / 100, 0);
   }

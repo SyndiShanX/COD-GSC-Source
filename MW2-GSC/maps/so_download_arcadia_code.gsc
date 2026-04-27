@@ -10,10 +10,7 @@
 #include maps\_specialops_code;
 #include maps\so_download_arcadia;
 
-// make sure this is the same as in arcadia_code.gsc
 STRYKER_SUPPRESSION_RADIUS = 1500 * 1500;
-
-// ----------------------- // --- DOWNLOAD STUFF --- // ----------------------- so_download_objective_init(objIdx, objStr) {
 level.downloadObjectiveStr = objStr;
 level.downloadObjectiveIdx = objIdx;
 level.downloadsComplete = 0;
@@ -23,11 +20,7 @@ level.downloads = getStructArray("download", "targetname");
 foreach(index, download in level.downloads) {
   download.objPos = index;
 }
-
-// first one sets the objective
 Objective_Add(level.downloadObjectiveIdx, "current", objStr, level.downloads[0].origin);
-
-// the rest are added as additional positions
 for(i = 1; i < level.downloads.size; i++) {
   download = level.downloads[i];
   Objective_AdditionalPosition(level.downloadObjectiveIdx, download.objPos, download.origin);
@@ -36,8 +29,6 @@ for(i = 1; i < level.downloads.size; i++) {
 array_thread(level.players, ::ent_flag_init, "download_hint_on");
 array_thread(level.downloads, ::download_obj_setup);
 }
-
-// sets up each DSM group and starts it thinking
 download_obj_setup() {
   computer = spawn("script_model", self.origin);
   computer setModel("com_laptop_rugged_open");
@@ -57,8 +48,6 @@ download_obj_setup() {
   self.computer = computer;
   self.dsm = dsm;
   self.dsm_obj = dsm_obj;
-
-  //	self.chargeTarget = spawn( "script_origin", self.origin );// for AIs to target
 
   self.trig = GetEnt(self.target, "targetname");
   self.trig download_trig_sethintstring();
@@ -85,16 +74,13 @@ download_obj_think() {
   while(1) {
     self.trig waittill("trigger");
 
-    // swap the models
     self.dsm_obj Hide();
     self.dsm Show();
 
     self.trig download_trig_clearhintstring();
 
-    // downloads can be interrupted by enemies
     success = self download_files();
 
-    // if we downloaded successfully then break out
     if(success) {
       self.dsm Hide();
       break;
@@ -105,22 +91,17 @@ download_obj_think() {
     }
   }
 
-  // this one's done
   level.downloadsComplete++;
   self.download_complete = true;
 
   thread download_obj_dialogue();
 
-  // if we got them all, complete the objective
   if(level.downloadsComplete >= level.downloads.size) {
     Objective_Complete(level.downloadObjectiveIdx);
     flag_set("all_downloads_finished");
-  }
-  // otherwise remove this position from the objective
-  else {
+  } else {
     Objective_AdditionalPosition(level.downloadObjectiveIdx, self.objPos, (0, 0, 0));
 
-    // give "objective updated" message and ping locations
     Objective_String(level.downloadObjectiveIdx, level.downloadObjectiveStr);
     Objective_Ring(level.downloadObjectiveIdx);
   }
@@ -130,19 +111,13 @@ download_obj_dialogue() {
   downloadsLeft = level.downloads.size - level.downloadsComplete;
 
   if(downloadsLeft == 2) {
-    // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."so_radio_dialogue("so_dwnld_hqr_gofindthem");
     return;
   } else if(downloadsLeft == 1) {
-    // "Stay frosty, Hunter Two-One, there's one laptop left."so_radio_dialogue("so_dwnld_hqr_onelaptop");
     return;
   } else if(downloadsLeft == 0) {
-    // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."so_radio_dialogue("so_dwnld_hqr_pullingyouout");
-
     bugWaitTime = 30;
 
     aliases = [];
-    // "Hunter Two-One, get back to the Stryker for extraction!"aliases[0] = "so_dwnld_hqr_extraction";
-    // "Hunter Two-One, return to the Stryker to complete your mission!"aliases[1] = "so_dwnld_hqr_completemission";
 
     level endon("stryker_extraction_done");
 
@@ -172,8 +147,6 @@ download_files() {
 
   if(!flag("first_download_started")) {
     flag_set("first_download_started");
-
-    // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."thread so_radio_dialogue("so_dwnld_hqr_wirelesslydisrupt");
   }
 
   self.downloading = true;
@@ -184,23 +157,19 @@ download_files() {
   startTime = GetTime();
   endTime = GetTime() + milliseconds(downloadTime);
 
-  // only spawn the defenders once, in case the download gets interrupted
   if(!isDefined(self.defenders_spawned)) {
     self.defenders_spawned = true;
     self.waveDead = false;
     self thread download_files_enemies_attack(downloadTime);
   }
 
-  self delaythread(0.1, ::download_files_wave_death); // delay so we can start waiting for the notify before it fires
+  self delaythread(0.1, ::download_files_wave_death);
   self thread download_files_catch_interrupt();
 
   self ent_flag_clear("download_stopped");
 
-  // This function returns the 'new' timeLeft from within it since it has a lengthy intro
   downloadTime = download_files_hud_countdown(downloadTime);
 
-  // If the wave is dead and the player triggered the download, then it'll do a SUPER fast download
-  // so we need to wait for the time instead of the interrupt.
   if(self.waveDead) {
     wait(downloadTime);
   } else {
@@ -212,7 +181,6 @@ download_files() {
 
   self.downloadTimeElapsed += seconds(GetTime() - startTime);
 
-  // if we killed all the enemies or used all the time, it was successful
   if(self.waveDead || GetTime() >= endTime) {
     success = true;
   }
@@ -233,10 +201,6 @@ download_interrupt_dialogue() {
   wait(1);
 
   lines = [];
-
-  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."lines[0] = "so_dwnld_hqr_restartmanually";
-
-  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"lines[1] = "so_dwnld_hqr_getbackrestart";
 
   if(!isDefined(level.interruptLineIndex) || (level.interruptLineIndex >= lines.size)) {
     level.interruptLineIndex = 0;
@@ -288,16 +252,15 @@ download_files_hud_countdown(timeLeft) {
     level.hud_download_count++;
     self.hudelem_y = y;
 
-    // SETUP
     hudelem = get_countdown_hud(x, self.hudelem_y);
     hudelem.alignX = "right";
     hudelem SetPulseFX(30, 900000, 700);
-    hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+    hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME";
     wait 0.65;
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_INIT"; // Initiliazing
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_INIT";
 
     dsm_wait(hudelem_status, 2.5);
 
@@ -305,7 +268,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_CONNECTING"; // Connecting
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_CONNECTING";
 
     dsm_wait(hudelem_status, 0.9);
 
@@ -313,7 +276,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOGIN"; // Bypassing Login
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOGIN";
 
     dsm_wait(hudelem_status, 3.75);
 
@@ -321,7 +284,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOCATE"; // Locating Files
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOCATE";
 
     dsm_wait(hudelem_status, 1.5);
 
@@ -331,13 +294,11 @@ download_files_hud_countdown(timeLeft) {
     self.firstDownload = false;
   }
 
-  // START COUNTDOWN
-  // old -205
   x = -250;
   x_offset = x + 170;
   hudelem = get_countdown_hud(x, self.hudelem_y, undefined, true);
   hudelem SetPulseFX(30, 900000, 700);
-  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_PROGRESS"; // Files copied:
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_PROGRESS";
 
   hudelem_status = get_download_state_hud(x_offset, self.hudelem_y, undefined, true);
   hudelem_status.alignX = "right";
@@ -355,7 +316,6 @@ download_files_hud_countdown(timeLeft) {
 
   timeLeft -= seconds(GetTime() - functionStartTime);
 
-  // If area is clear, SUPER fast download
   if(self.waveDead && timeLeft > 3) {
     timeLeft = 3;
   }
@@ -366,10 +326,9 @@ download_files_hud_countdown(timeLeft) {
 }
 
 download_files_update(hudelem, hudelem_status, hudelem_status_total, timeLeft) {
-  // POLISH: it would be cool if some files were faster/slower to download
   endtime = GetTime() + milliseconds(timeLeft);
   filesLeft = self.totalfiles - self.filesDone;
-  incrementTime = 0.05; // timeLeft / filesLeft
+  incrementTime = 0.05;
   file_inc = incrementTime / (timeLeft / filesLeft);
 
   while(GetTime() < endtime && !self ent_flag("download_stopped")) {
@@ -394,14 +353,13 @@ download_files_hud_countdown_abort() {
   }
   hudelem = get_countdown_hud(x, self.hudelem_y);
   hudelem.alignx = "right";
-  //hudelem.label = "";
-  //hudelem SetText( "ERROR: DOWNLOAD INTERRUPTED!" );
-  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME";
   hudelem.fontScale = 1.4;
   hudelem set_hud_red();
 
   hudelem_status = get_countdown_hud(x, self.hudelem_y);
-  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_INTERRUPTED"; // DOWNLOAD INTERRUPTED
+  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_INTERRUPTED";
   hudelem_status.fontScale = 1.4;
   hudelem_status set_hud_red();
 
@@ -420,12 +378,12 @@ download_files_hud_finish() {
   }
   hudelem = get_countdown_hud(x, self.hudelem_y);
   hudelem.alignx = "right";
-  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME";
   hudelem.fontScale = 1.4;
   hudelem set_hud_blue();
 
   hudelem_status = get_countdown_hud(x, self.hudelem_y);
-  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_COMPLETE"; // DOWNLOAD COMPLETE
+  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_COMPLETE";
   hudelem_status.fontScale = 1.4;
   hudelem_status set_hud_blue();
 
@@ -479,19 +437,16 @@ download_enemies_attack_dialogue() {
 
   switch (self.script_parameters) {
     case "download_1_charger":
-      // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"alias = "so_dwnld_stk_tenfootmobiles";
+
       break;
 
     case "download_2_charger":
-      // "We've got activity to the west, they're coming from the light brown mansion!"alias = "so_dwnld_stk_brownmansion";
+
       break;
 
     case "download_3_charger":
-      // "Hostiles spotted across the street, they're moving to your position!"alias = "so_dwnld_stk_acrossstreet";
 
       waitTime = 10;
-
-      // "Hunter Two-One, you got movement right outside your location!"alias2 = "so_dwnld_stk_gotmovement";
 
       break;
   }
@@ -536,12 +491,12 @@ download_files_spawn_chargers() {
 download_files_spawn_charger(download) {
   self script_delay();
 
-  wait(RandomFloat(8)); // we don't want all of a group of guys rolling exactly together
+  wait(RandomFloat(8));
 
   guy = self spawn_ai();
 
   if(spawn_failed(guy)) {
-    download.totalDefenders--; // don't count him toward wave completion if he couldn't spawn
+    download.totalDefenders--;
     return;
   }
 
@@ -560,38 +515,8 @@ defender_charge_dsm(download) {
 ai_delayed_seek_think(download, goal_ent) {
   self endon("death");
 
-  //	player1_max_seekers = 0;
-  //	player2_max_seekers = 0;
-  //
-  //	foreach ( player in level.players )
-  //	{
-  //		num = 3;
-  //		switch ( player.gameskill )
-  //		{
-  //			case 0:
-  //			case 1:
-  //				num = 3;
-  //				break;				
-  //			case 2:
-  //			case 3:
-  //				num = 5;
-  //				break;
-  //		}
-  //
-  //		if( player == level.player )
-  //		{
-  //			player1_max_seekers = num;
-  //		}
-  //		else
-  //		{
-  //			player2_max_seekers = num;
-  //		}
-  //	}
-
   player1_max_seekers = 3;
   player2_max_seekers = 3;
-
-  //	secondaries = getEntArray( primary.target, "targetname" );
 
   while(IsAlive(self)) {
     if(self.goalradius > 200) {
@@ -644,13 +569,11 @@ ai_delayed_seek_think(download, goal_ent) {
         if(isDefined(goal_player)) {
           self.seeking_player = goal_player;
 
-          // Let's seek out the player
           self SetGoalEntity(goal_player);
           self.goalradius = 1000;
         }
       }
 
-      // The AI still does not have a proper goal, then increase their goalradius
       if(!isDefined(self.seek_player)) {
         self.goalradius = 1000;
       }
@@ -689,13 +612,9 @@ ai_near_download(guy) {
 
   return false;
 }
-
-// ---------------- // --- STRYKER --- // ---------------- stryker_think() {
 stryker = maps\_vehicle::spawn_vehicle_from_targetname("stryker");
 ASSERT(isDefined(stryker));
 level.stryker = stryker;
-
-// hack so we don't get sound asserts
 org = spawn("script_origin", stryker.origin);
 org LinkTo(stryker);
 org.animname = "foley";
@@ -716,7 +635,6 @@ stryker maps\_vehicle::godon();
 stryker setVehicleLookAtText("Honey Badger", &"");
 
 foreach(player in level.players) {
-  // Workaround for setting the C4 actionslot, setting player.remotemissile_actionslot swaps the actionslot
   player.remotemissile_actionslot = 4;
   level thread maps\arcadia_code::laser_targeting_device(player);
 }
@@ -728,8 +646,6 @@ stryker thread stryker_so_download_arcadia_laser_reminder_dialogue();
 
 stryker thread stryker_greenlight_enemies_in_suppression_zone();
 stryker thread stryker_disable_laser_reminder_thread();
-
-// first move: go to the end of the covered bridge when player moves out of the way
 waittill_both_players_touch_targetname("trig_bridge_end");
 stryker StartPath();
 firstMoveNode = GetVehicleNode("vnode_bridge", "script_noteworthy");
@@ -748,10 +664,8 @@ stryker_so_download_arcadia_laser_reminder_dialogue() {
 
   self thread stryker_laser_reminder_dialog_prethink();
 
-  // "All Hunter units, Badger One will not engage targets without your explicit authorization."so_radio_dialogue("so_dwnld_stk_explicitauth");
-
   self thread so_laser_hint_print();
-  //	self thread maps\arcadia_code::laser_hint_print();
+
   self thread maps\arcadia_code::stryker_dialog();
 
   if(flag("used_laser")) {
@@ -767,15 +681,11 @@ stryker_so_download_arcadia_laser_reminder_dialogue() {
     wait(5);
   }
 
-  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."so_radio_dialogue("so_dwnld_stk_designated");
-
   wait(45);
 
   while(flag("no_living_enemies")) {
     wait(5);
   }
-
-  // "Hunter Two-One, we can't fire on enemies without your authorization!"so_radio_dialogue("so_dwnld_stk_cantfire");
 }
 
 so_laser_hint_print() {
@@ -864,7 +774,6 @@ stryker_greenlight_enemies_in_suppression_zone() {
       }
 
       if(DistanceSquared(guy.origin, self.targetSearchOrigin) <= STRYKER_SUPPRESSION_RADIUS) {
-        // he's in the suppression area
         if(guy GetThreatBiasGroup() == "stryker_ignoreme") {
           guy SetThreatBiasGroup("axis");
           self thread stryker_enemy_reset_to_ignore(guy);
@@ -940,7 +849,6 @@ stryker_move_with_players() {
         }
 
         if(GetTime() >= endTime) {
-          // success
           activeTrigIndex = index;
           break;
         }
@@ -963,7 +871,6 @@ stryker_move_with_players() {
 stryker_move_to_node(node, doDialogue) {
   goalradius = 96;
 
-  // move forward or backward?
   if(node.origin[0] < self.origin[0]) {
     self.veh_pathdir = "reverse";
     self.veh_transmission = "reverse";
@@ -980,7 +887,6 @@ stryker_move_to_node(node, doDialogue) {
 
   self maps\_vehicle::vehicle_setspeed_wrapper(10, 5, "stryker_rolling");
 
-  //waittill at node
   while(Distance(self.origin, node.origin) > goalradius) {
     wait(0.05);
   }
@@ -994,9 +900,6 @@ stryker_move_to_node(node, doDialogue) {
 
 stryker_extraction() {
   flag_wait("all_downloads_finished");
-
-  //array_thread( level.players, ::laser_targeting_device_remove );
-  //	level.stryker thread maps\arcadia_stryker::stryker_setmode_ai();
 
   node = GetVehicleNode("vnode_house1", "script_noteworthy");
   level.stryker thread stryker_move_to_node(node);
@@ -1013,7 +916,6 @@ stryker_extraction() {
 
   flag_set("stryker_extraction_done");
 
-  // Stop the Stryker dialogue
   level notify("golf_course_mansion");
 
   fade_challenge_out();
@@ -1022,7 +924,6 @@ stryker_extraction() {
 stryker_extraction_enemies() {
   org = level.players[0].origin;
 
-  // get the average origin if there's more than one player	
   if(level.players.size > 1) {
     for(i = 1; i < level.players.size; i++) {
       org += level.players[i].origin;
@@ -1061,8 +962,6 @@ stryker_extraction_spawn_enemy() {
   guy SetThreatBiasGroup("axis");
   guy SetGoalPos(level.stryker.origin);
 }
-
-// ------------------------ // --- LASER TARGETING --- // ------------------------ // Handles the usability of the laser weapon
 player_laser_targeting_think() {
   is_laser_disabled = false;
 
@@ -1086,20 +985,12 @@ player_laser_targeting_think() {
 }
 
 should_laser_disabled() {
-  //	if( self GetCurrentWeapon() == "claymore" )
-  //	{
-  //		return true;
-  //	}
-
   if(!self ent_flag_exist("coop_downed")) {
     return false;
   }
 
-  // Disable the player if downed part2.
   return self ent_flag("coop_downed") && isDefined(self.down_part2_proc_ran);
 }
-
-// self = a player
 laser_targeting_device_remove() {
   self notify("remove_laser_targeting_device");
 
@@ -1114,8 +1005,6 @@ laser_targeting_device_remove() {
   self allowFire(true);
   self.laserForceOn = false;
 }
-
-// ----------------- // --- AI STUFF --- // ----------------- so_download_arcadia_enemy_setup() {
 level.enemies = [];
 
 allspawners = GetSpawnerTeamArray("axis");
@@ -1139,10 +1028,6 @@ foreach(spawner in allspawners) {
 array_thread(outsideGuys, ::add_spawn_function, ::so_download_arcadia_outside_enemy_spawnfunc);
 
 level.enemyspawners = allspawners;
-
-// DEPRECATED
-//trigs = getEntArray( "enemy_spawn", "targetname" );
-//array_thread( trigs, ::so_download_arcadia_enemy_spawn_manager );
 }
 
 so_download_arcadia_enemy_spawnfunc() {
@@ -1176,8 +1061,6 @@ so_download_arcadia_outside_enemy_spawnfunc() {
     self SetGoalVolumeAuto(retreatVol);
   }
 }
-
-// ------------------- // --- MISC UTILS --- // ------------------- all_players_closeto(ent, dist) {
 foundOne = false;
 foreach(player in level.players) {
   if(Distance(player.origin, ent.origin) > dist) {
@@ -1205,9 +1088,6 @@ waittill_both_players_touch_targetname(tn) {
     }
   }
 }
-
-// TODO refactor to use the _utility version
-// kinda rough method to test if an AI is in view of the player - only checks three points (low, mid, high)
 any_player_can_see_ai(ai) {
   feetOrigin = ai.origin;
   if(any_player_can_see_origin(feetOrigin))
@@ -1228,12 +1108,10 @@ any_player_can_see_origin(origin) {
   foreach(player in level.players) {
     player.canSeeOrigin = true;
 
-    // FOV check
     if(!level.player animscripts\battlechatter::pointInFov(origin)) {
       player.canSeeOrigin = false;
     }
 
-    // sight trace check
     if(!SightTracePassed(player getEye(), origin, true, player)) {
       player.canSeeOrigin = false;
     }

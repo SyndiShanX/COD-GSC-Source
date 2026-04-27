@@ -21,26 +21,14 @@
 #using scripts\shared\util_shared;
 #namespace cp_mi_sing_sgen_uw_battle;
 
-function skipto_underwater_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_underwater_init() {}
 
-function skipto_underwater_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_underwater_done() {}
 
-function function_dbfa8dae() {
-  // Unsupported VM revision (1B).
-}
+function function_dbfa8dae() {}
 
-function function_b980dc78() {
-  // Unsupported VM revision (1B).
-}
+function function_b980dc78() {}
 
-function drowning_54i() {
-  // Unsupported VM revision (1B).
-}
+function drowning_54i() {}
 
-function function_77b723a3() {
-  // Unsupported VM revision (1B).
-}
+function function_77b723a3() {}

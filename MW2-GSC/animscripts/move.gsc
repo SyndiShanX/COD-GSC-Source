@@ -53,8 +53,6 @@ main() {
 
   MoveMainLoop(true);
 }
-
-// called by code on ending this script
 end_script() {
   if(isDefined(self.oldGrenadeWeapon)) {
     self.grenadeWeapon = self.oldGrenadeWeapon;
@@ -122,14 +120,13 @@ wasPreviouslyInCover() {
 
 moveStartBattleChatter(wasInCover) {
   if(self.moveMode == "run") {
-    // SRS 10/30/08: removed a bunch of unnecessary logic here
     self animscripts\battleChatter_ai::evaluateMoveEvent(wasInCover);
   }
 }
 
 MoveMainLoop(doWalkCheck) {
   MoveMainLoopInternal(doWalkCheck);
-  self notify("abort_reload"); // in case a reload was going and MoveMainLoopInternal hit an endon
+  self notify("abort_reload");
 }
 
 ChangeMoveMode(moveMode) {
@@ -156,13 +153,12 @@ MoveMainLoopInternal(doWalkCheck) {
   self endon("move_interrupt");
 
   prevLoopTime = self getAnimTime(%walk_and_run_loops);
-  self.a.runLoopCount = randomint(10000); // integer that is incremented each time we complete a run loop
+  self.a.runLoopCount = randomint(10000);
 
   self.prevMoveMode = "none";
 
   self.moveLoopCleanupFunc = undefined;
 
-  // if initial destination is closer than 64 walk to it.
   for(;;) {
     loopTime = self getAnimTime(%walk_and_run_loops);
     if(loopTime < prevLoopTime)
@@ -177,14 +173,12 @@ MoveMainLoopInternal(doWalkCheck) {
       self.moveLoopCleanupFunc = undefined;
     }
 
-    self notify("abort_reload"); // in case a reload was going and MoveMainLoopProcess hit an endon
+    self notify("abort_reload");
   }
 }
 
 MoveMainLoopProcess(moveMode) {
   self endon("move_loop_restart");
-
-  //prof_begin("MoveMainLoop");
 
   self animscripts\face::SetIdleFaceDelayed(anim.alertface);
 
@@ -202,7 +196,6 @@ MoveMainLoopProcess(moveMode) {
   }
 
   self.requestReactToBullet = undefined;
-  //prof_end("MoveMainLoop");
 }
 
 MayShootWhileMoving() {
@@ -219,7 +212,7 @@ MayShootWhileMoving() {
   }
 
   if(isDefined(self.dontShootWhileMoving)) {
-    assert(self.dontShootWhileMoving); // true or undefined
+    assert(self.dontShootWhileMoving);
     return false;
   }
 
@@ -229,7 +222,6 @@ MayShootWhileMoving() {
 shootWhileMoving() {
   self endon("killanimscript");
 
-  // it's possible for this to be called by CQB while it's already running from run.gsc, // even though run.gsc will kill it on the next frame. We can't let it run twice at once.
   self notify("doing_shootWhileMoving");
   self endon("doing_shootWhileMoving");
 
@@ -265,7 +257,7 @@ shootWhileMoving() {
     }
 
     self shootUntilShootBehaviorChange();
-    // can't clear %exposed_modern because there are transition animations within it that we might play when going to prone
+
     self clearAnim(%exposed_aiming, 0.2);
   }
 }
@@ -273,7 +265,6 @@ shootWhileMoving() {
 startThreadsToRunWhileMoving() {
   self endon("killanimscript");
 
-  // wait a frame so MoveMainLoop can start. Otherwise one of the following threads could unsuccesfully try to interrupt movement before it starts
   wait 0.05;
 
   self thread bulletWhizbyCheck_whileMoving();
@@ -290,7 +281,6 @@ stairsCheck() {
   while(1) {
     wait .05;
     if(self.prevStairsState != self.stairsState) {
-      // don't interrupt path change animation if getting off stairs to flat ground
       if(!isDefined(self.ignorePathChange) || self.stairsState != "none")
         self notify("move_loop_restart");
     }
@@ -319,14 +309,10 @@ pathChangeCheck() {
   self endon("killanimscript");
   self endon("move_interrupt");
 
-  self.ignorePathChange = true; // this will be turned on / off in other threads at appropriate times
+  self.ignorePathChange = true;
 
   while(1) {
-    // no other thread should end on "path_changed"self waittill("path_changed", doingReacquire, newDir);
-
-    // no need to check for doingReacquire since faceMotion should be a good check
-
-    assert(!isDefined(self.ignorePathChange) || self.ignorePathChange); // should be true or undefined
+    assert(!isDefined(self.ignorePathChange) || self.ignorePathChange);
 
     if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
       continue;
@@ -371,13 +357,8 @@ pathChange_getTurnAnim(angleDiff) {
     animArray = anim.runTurnAnims;
 
   if(angleDiff < -30) {
-    if(angleDiff > -60) // bias for 45 turns
-    {
+    if(angleDiff > -60) {
       turnAnim = animArray["L45"];
-
-      // awkward pivot turn after doing animation
-      //if( angleDiff < -45 )
-      //	secondTurnAnim = animArray[ "L90" ];
     } else if(angleDiff > -112.5) {
       turnAnim = animArray["L90"];
       if(angleDiff > -90)
@@ -397,10 +378,6 @@ pathChange_getTurnAnim(angleDiff) {
   } else if(angleDiff > 30) {
     if(angleDiff < 60) {
       turnAnim = animArray["R45"];
-
-      // awkward pivot turn after doing animation
-      //if( angleDiff > 45 )
-      //	secondTurnAnim = animArray[ "R90" ];
     } else if(angleDiff < 112.5) {
       turnAnim = animArray["R90"];
       if(angleDiff < 90)
@@ -448,7 +425,6 @@ pathChange_canDoTurnAnim(turnAnim) {
   animscripts\utility::drawDebugLine(self.origin, codeMovePoint, (1, 1, 0), 20);
   animscripts\utility::drawDebugLine(self.origin, self.pathgoalpos, (0, 1, 0), 20);
 
-  //if( distanceSquared( self.origin, codeMovePoint ) > distanceSquared( self.origin, self.pathgoalpos ) )
   if(isDefined(self.arrivalStartDist) && (squared(self.arrivalStartDist) > distanceSquared(self.pathgoalpos, codeMovePoint)))
     return false;
 
@@ -469,9 +445,9 @@ pathChange_doTurnAnim() {
 
   turnAnim = self.turnAnim;
 
-  if(gettime() > self.turnTime + 50)
-    return; // too late
-
+  if(gettime() > self.turnTime + 50) {
+    return;
+  }
   self animMode("zonly_physics", false);
   self clearanim(%body, 0.1);
 
@@ -487,19 +463,18 @@ pathChange_doTurnAnim() {
   self OrientMode("face current");
 
   assert(animHasNotetrack(turnAnim, "code_move"));
-  self animscripts\shared::DoNoteTracks("turnAnim"); // until "code_move"self.ignorePathChange = undefined;
-  self OrientMode("face motion"); // want to face motion, don't do l / r / b anims
+  self animscripts\shared::DoNoteTracks("turnAnim");
+  self OrientMode("face motion");
   self animmode("none", false);
 
-  //assert( animHasNotetrack( turnAnim, "finish" ) );
   self animscripts\shared::DoNoteTracks("turnAnim");
 }
 
 pathChange_doMoveTransition() {
   self.moveLoopOverrideFunc = undefined;
-  if(gettime() > self.turnTime + 50)
-    return; // too late
-
+  if(gettime() > self.turnTime + 50) {
+    return;
+  }
   self.moveLoopCleanupFunc = ::pathChange_cleanupTurnAnim;
 
   animscripts\cover_arrival::startMoveTransition();
@@ -525,7 +500,7 @@ dodgeMoveLoopOverride() {
   self orientMode("face default");
 
   if(animHasNotetrack(self.currentDodgeAnim, "code_move"))
-    self animscripts\shared::DoNoteTracks("dodgeAnim"); // return on code_move
+    self animscripts\shared::DoNoteTracks("dodgeAnim");
 
   self clearanim(%civilian_dodge, 0.2);
 
@@ -570,8 +545,6 @@ animDodgeObstacle() {
   self endon("move_interrupt");
 
   while(1) {
-    // no other thread should end on "path_changed"self waittill("path_need_dodge", dodgeEnt, dodgeEntPos);
-
     if(self animscripts\utility::IsInCombat()) {
       self.noDodgeMove = false;
       return;
@@ -589,11 +562,9 @@ animDodgeObstacle() {
     dirToDodgeEnt = vectorNormalize(dodgeEntPos - self.origin);
 
     if((self.lookAheadDir[0] * dirToDodgeEnt[1]) - (dirToDodgeEnt[0] * self.lookAheadDir[1]) > 0) {
-      // right first
       if(!tryDodgeWithAnim(self.dodgeRightAnim, self.dodgeRightAnimOffset))
         tryDodgeWithAnim(self.dodgeLeftAnim, self.dodgeLeftAnimOffset);
     } else {
-      // left first
       if(!tryDodgeWithAnim(self.dodgeLeftAnim, self.dodgeLeftAnimOffset))
         tryDodgeWithAnim(self.dodgeRightAnim, self.dodgeRightAnimOffset);
     }
@@ -606,8 +577,7 @@ animDodgeObstacle() {
 }
 
 setDodgeAnims(leftAnim, rightAnim) {
-  self.noDodgeMove = true; // don't let code path around obstacle to dodge
-  //self pushplayer( true );
+  self.noDodgeMove = true;
 
   self.dodgeLeftAnim = leftAnim;
   self.dodgeRightAnim = rightAnim;
@@ -624,7 +594,7 @@ setDodgeAnims(leftAnim, rightAnim) {
 
   self.dodgeRightAnimOffset = getMoveDelta(rightAnim, 0, time);
 
-  self.interval = 80; // good value for civilian dodge animations
+  self.interval = 80;
 }
 
 clearDodgeAnims() {
@@ -639,9 +609,8 @@ meleeAttackCheck_whileMoving() {
   self endon("killanimscript");
 
   while(1) {
-    // Try to melee our enemy if it's another AI
     if(isDefined(self.enemy) && (isAI(self.enemy) || isDefined(self.meleePlayerWhileMoving))) {
-      if(abs(self GetMotionAngle()) <= 135) // only when moving forward or sideways
+      if(abs(self GetMotionAngle()) <= 135)
         animscripts\melee::Melee_TryExecuting();
     }
 
@@ -666,7 +635,7 @@ bulletWhizbyCheck_whileMoving() {
     }
     if(!isDefined(self.enemy) && !self.ignoreAll && isDefined(shooter.team) && isEnemyTeam(self.team, shooter.team)) {
       self.whizbyEnemy = shooter;
-      self animcustom(animscripts\reactions::bulletWhizbyReaction); // this will end move script
+      self animcustom(animscripts\reactions::bulletWhizbyReaction);
       continue;
     }
 
@@ -726,7 +695,6 @@ setup_shuffle_anim_array(shuffleLeft, startNode, endNode) {
       anim_array["shuffle_end"] = % coverstand_shuffleR_2_hide;
     }
   } else {
-    //assert( endNode.type == "Cover Crouch" || endNode.type == "Cover Crouch Window" );
     if(shuffleLeft) {
       anim_array["shuffle_start"] = get_shuffle_to_corner_start_anim(shuffleLeft, startNode);
       anim_array["shuffle"] = % covercrouch_shuffleL;
@@ -817,7 +785,6 @@ moveCoverToCover() {
   shuffleAnim = animarray("shuffle");
   endAnim = animarray("shuffle_end");
 
-  //assertEx( animhasnotetrack( startAnim, "finish" ), "animation doesn't have finish notetrack " + startAnim );
   if(animhasnotetrack(startAnim, "finish"))
     startEndTime = getNotetrackTimes(startAnim, "finish")[0];
   else
@@ -837,7 +804,7 @@ moveCoverToCover() {
     self clearAnim(startAnim, 0.2);
     remainingDist -= startDist;
 
-    blendTime = 0.2; // reset blend for looping move
+    blendTime = 0.2;
   } else {
     self OrientMode("face angle", node.angles[1]);
   }
@@ -855,7 +822,6 @@ moveCoverToCover() {
   self setflaggedanim("shuffle", shuffleAnim, 1, blendTime);
   self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
 
-  // account for loopTime not being exact since loop animation delta isn't uniform over time
   for(i = 0; i < 2; i++) {
     remainingDist = distance(self.origin, node.origin);
     if(playEnd)
@@ -865,7 +831,7 @@ moveCoverToCover() {
       break;
     }
 
-    playTime = loopTime * (remainingDist / shuffleDist) * 0.9; // don't overshoot
+    playTime = loopTime * (remainingDist / shuffleDist) * 0.9;
     playTime = floor(playTime * serverFPS) * serverSPF;
 
     if(playTime < 0.05) {
@@ -884,8 +850,6 @@ moveCoverToCover() {
     self clearAnim(shuffleAnim, blendTime);
     self setflaggedanim("shuffle_end", endAnim, 1, blendTime);
     self animscripts\shared::DoNoteTracks("shuffle_end");
-
-    // clear animation in moveCoverToCoverFinish if needed
   }
 
   self safeTeleport(node.origin);
@@ -902,7 +866,7 @@ moveCoverToCoverFinish() {
     self animmode("none", false);
     self orientmode("face default");
   } else {
-    wait 0.2; // don't clear animation, wait for cover script to take over
+    wait 0.2;
 
     self clearanim(%cover_shuffle, 0.2);
   }

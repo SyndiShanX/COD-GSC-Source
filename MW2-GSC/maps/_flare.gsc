@@ -18,12 +18,10 @@ main(model, type) {
   build_template("flare", model, type);
   build_localinit(::init_local);
 
-  //health, optional_min, optional_max
   build_life(9999);
 }
 
 init_local() {}
-// below is the script for the in game flare effect
 
 merge_suncolor(delay, timer, rgb1, rgb2) {
   wait(delay);
@@ -44,18 +42,11 @@ merge_suncolor(delay, timer, rgb1, rgb2) {
 }
 
 merge_sunsingledvar(dvar, delay, timer, l1, l2) {
-  //	level notify( dvar + "new_lightmerge" );
-  //	level endon( dvar + "new_lightmerge" );
-
   setsaveddvar(dvar, l1);
   wait(delay);
   timer = timer * 20;
   suncolor = [];
 
-  /*
-  0	i
-  1	timer*20
-  */
   for(i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
@@ -85,10 +76,10 @@ merge_sunbrightness(delay, timer, l1, l2) {
 
 combine_sunlight_and_brightness() {
   level endon("stop_combining_sunlight_and_brightness");
-  wait(0.05); // wait for the direction to start lerping
+  wait(0.05);
   for(;;) {
     brightness = level.sun_brightness;
-    // add some flicker
+
     if(brightness > 1)
       brightness += randomfloat(0.2);
 
@@ -105,7 +96,6 @@ flare_path() {
 }
 
 flare_initial_fx() {
-  // initial effect
   model = spawn("script_model", (0, 0, 0));
   model setModel("tag_origin");
   model linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -116,11 +106,9 @@ flare_initial_fx() {
 
 flare_explodes() {
   flag_set("flare_start_setting_sundir");
-  // flare explodes
-  // the amount of time for the ent to traverse the arc
+
   level.sun_brightness = 1;
-  // merge our various sun values over time
-  // first merge in the sun color/light settings
+
   level.red_suncolor = (0.8, 0.4, 0.4);
   level.original_suncolor = getMapSunLight();
   level.sun_color = level.original_suncolor;
@@ -136,19 +124,15 @@ flare_explodes() {
   playFXOnTag(level._effect["flare_runner"], model2, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
 
-  //	wait( 1 );
   model2 delete();
 }
 
 flare_burns_out() {
-  // flare begins to phyzl out
   model3 = spawn("script_model", (0, 0, 0));
   model3 setModel("tag_origin");
   model3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
-  //wait( 0.3 );
 
-  // brightness goes down then up
   thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.25);
   thread merge_sunbrightness(0, 1, 3, 0);
   thread merge_suncolor(0, 1, level.red_suncolor, level.original_suncolor);
@@ -162,7 +146,6 @@ flare_burns_out() {
   level notify("stop_combining_sunlight_and_brightness");
   waittillframeend;
 
-  // make sure it gets set to the price final direction settings, or the lightmaps will be broken
   resetSunLight();
 
   flag_set("flare_complete");
@@ -197,7 +180,6 @@ flare_from_targetname(targetname) {
   flare thread flare_path();
   flare thread flare_fx();
 
-  // get the final point that our relative sun needs to point towards to make it equal the maps sun dir
   sundir = getMapSunDirection();
   angles = sundir;
   vec = vector_multiply(angles, -100);
@@ -220,7 +202,7 @@ flare_from_targetname(targetname) {
   }
 
   flag_wait("flare_complete");
-  waittillframeend; // otherwise other things waiting on flare complete wont continue
+  waittillframeend;
   flag_clear("flare_complete");
   flag_clear("flare_stop_setting_sundir");
   flag_clear("flare_start_setting_sundir");

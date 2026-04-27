@@ -13,15 +13,13 @@ main() {
 }
 
 advancedTraverse2(traverseAnim, normalHeight) {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
   self endon("killanimscript");
   self traverseMode("nogravity");
-  self traverseMode("noclip"); // So he doesn't get stuck if the wall is a little too high
+  self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -35,7 +33,7 @@ advancedTraverse2(traverseAnim, normalHeight) {
   if(!animhasnotetrack(traverseAnim, "gravity on")) {
     timer = 1.23;
     timerOffset = 0.2;
-    //		wait (timer - timerOffset);
+
     wait 5.0;
     self traverseMode("gravity");
     wait(timerOffset);

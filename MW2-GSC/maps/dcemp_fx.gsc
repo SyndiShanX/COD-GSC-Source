@@ -13,7 +13,6 @@ main() {
   level._effect["groundflare"] = loadfx("misc/dcemp_groundflare");
   level._effect["killshot"] = loadfx("impacts/flesh_hit_body_fatal_exit");
 
-  //manually precaching fx because of masking of destrucibles
   level._effect["nouse"] = loadfx("props/news_stand_paper_spill");
   level._effect["nouse"] = loadfx("props/news_stand_explosion");
   level._effect["nouse"] = loadfx("props/news_stand_paper_spill_shatter");
@@ -27,7 +26,6 @@ main() {
   level._effect["nouse"] = loadfx("misc/light_blowout_swinging_runner");
   level.breakables_fx["tv_explode"] = LoadFX("explosions/tv_explosion");
 
-  //ISS
   level._effect["dcemp_sun"] = loadfx("misc/dcemp_sun");
   level._effect["dcemp_icbm_trail"] = loadfx("misc/dcemp_icbm_trail");
   level._effect["space_nuke"] = loadfx("explosions/space_nuke");
@@ -37,12 +35,10 @@ main() {
   level._effect["space_explosion_small"] = loadfx("explosions/space_explosion_small");
   level._effect["dcemp_water_nuke_glow"] = loadfx("misc/dcemp_water_nuke_glow");
 
-  //DCBURNING FX
   level._effect["dlight_blue"] = loadfx("misc/dlight_blue");
-  level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit"); // big spray
+  level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit");
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
 
-  //MinSpec Spotlight
   if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
   else
@@ -53,7 +49,6 @@ main() {
   level._effect["spotlight_lightning"] = loadfx("misc/spotlight_lightning");
   level._effect["space_helmet_spot_light"] = loadfx("misc/space_helmet_spot_light");
 
-  //EMP
   level._effect["transformer_spark_runner"] = loadfx("explosions/transformer_spark_runner");
   level._effect["dcemp_glass_74x44"] = loadfx("props/dcemp_glass_74x44");
   level._effect["bodyfall_dust_high"] = loadfx("impacts/bodyfall_dust_high");
@@ -64,11 +59,9 @@ main() {
   level._effect["space_emp_crashsite"] = loadfx("explosions/space_emp_crashsite");
   level._effect["space_nuke_crashsite"] = loadfx("explosions/space_nuke_crashsite");
 
-  //STREET
   level._effect["helicopter_explosion"] = loadfx("explosions/helicopter_explosion_dcemp");
   level._effect["small_vehicle_explosion"] = loadfx("explosions/small_vehicle_explosion");
 
-  //CRASH SCENE FX
   level._effect["window_fire_large"] = loadfx("fire/window_fire_large");
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
@@ -89,16 +82,12 @@ main() {
   level._effect["fire_falling_runner_point"] = loadfx("fire/fire_falling_runner_point_infrequent");
   level._effect["fire_tree_embers"] = loadfx("fire/fire_tree_embers");
 
-  //CRASH MOMENT FX
-  //	level._effect[ "suitcase_explosion" ]						= loadfx( "explosions/suitcase_explosion" );
   level._effect["jet_crash"] = loadfx("explosions/jet_crash_dcemp");
 
-  //MEETUP
   level._effect["bird_pm"] = loadfx("misc/bird_pm");
   level._effect["leaves_a"] = loadfx("misc/leaves_a");
   level._effect["fire_embers_directional"] = loadfx("fire/fire_embers_directional");
 
-  //OFFICE	
   level._effect["waterfall_drainage_short"] = loadfx("water/waterfall_drainage_short_physics_dcemp");
   level._effect["waterfall_drainage_splash"] = loadfx("water/waterfall_drainage_splash_dcemp");
   level._effect["falling_water_trickle"] = loadfx("water/falling_water_trickle");
@@ -119,35 +108,21 @@ main() {
   level._effect["rain_splash_lite_64x64"] = loadfx("weather/rain_splash_lite_64x64");
   level._effect["rain_splash_lite_128x128"] = loadfx("weather/rain_splash_lite_128x128");
 
-  //WHITEHOUSE
   level._effect["fire_tree_slow_longrange"] = loadfx("fire/fire_tree_slow_longrange");
   level._effect["green_flare"] = loadfx("misc/flare_ambient_green");
   level._effect["player_flare"] = loadfx("impacts/small_metalhit");
   level._effect["carpetbomb"] = loadfx("explosions/helicopter_explosion");
 
-  //CHANDELIER
   level._effect["wire_spark"] = loadfx("explosions/transformer_spark_runner");
 
-  //LIGHTING
   level._effect["lightning"] = loadfx("weather/lightning");
   level._effect["lightning_bolt"] = loadfx("weather/lightning_bolt");
   level._effect["lightning_bolt_lrg"] = loadfx("weather/lightning_bolt_lrg");
-  addLightningExploder(10); // these exploders make lightning flashes in the sky
+  addLightningExploder(10);
   addLightningExploder(11);
   addLightningExploder(12);
-  level.nextLightning = gettime() + 1; // 10000 + randomfloat( 4000 );// sets when the first lightning of the level will go off
+  level.nextLightning = gettime() + 1;
 
-  //footstep fx
-  /*	animscripts\utility::setFootstepEffect( "mud", 			loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "grass", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "dirt", 			loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "concrete", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "rock", 			loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "asphalt", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "wood", 			loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "metal", 		loadfx( "impacts/footstep_water_dark" ) );
-  */
-  // Rain
   level._effect["rain_10"] = loadfx("weather/rain_heavy_mist");
   level._effect["rain_9"] = loadfx("weather/rain_9_lite");
   level._effect["rain_8"] = loadfx("weather/rain_8_lite");
@@ -160,7 +135,7 @@ main() {
   level._effect["rain_1"] = loadfx("weather/rain_1_lite");
   level._effect["rain_0"] = loadfx("misc/blank");
 
-  thread rainInit("none"); // "none" "light" or "hard"thread playerWeather(); // make the actual rain effect generate around the player
+  thread rainInit("none");
 
   thread footstep_fx();
 }
@@ -172,7 +147,6 @@ footstep_fx() {
 
   flag_wait("parking_player_jumped_down");
 
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("mud", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffect("grass", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_water_dark"));
@@ -182,7 +156,6 @@ footstep_fx() {
   animscripts\utility::setFootstepEffect("wood", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffect("metal", loadfx("impacts/footstep_water_dark"));
 
-  //Small footstep fx
   animscripts\utility::setFootstepEffectSmall("mud", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffectSmall("grass", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffectSmall("dirt", loadfx("impacts/footstep_water_dark"));
@@ -192,28 +165,6 @@ footstep_fx() {
   animscripts\utility::setFootstepEffectSmall("wood", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffectSmall("metal", loadfx("impacts/footstep_water_dark"));
 
-  //Other notetrack fx
-  /*
-  setNotetrackEffect( <notetrack>, <tag>, <surface>, <loadfx>, <sound_prefix>, <sound_suffix> )
-  	<notetrack>: name of the notetrack to do the fx/sound on
-  	<tag>: name of the tag on the AI to use when playing fx
-  	<surface>: the fx will only play when the AI is on this surface. Specify "all" to make it work for all surfaces.
-  	<loadfx>: load the fx to play here
-  	<sound_prefix>: when this notetrack hits a sound can be played. This is the prefix of the sound alias to play ( gets followed by surface type )
-  	<sound_suffix>: suffix of sound alias to play, follows the surface type. Example: prefix of "bodyfall_" and suffix of "_large" will play sound alias "bodyfall_dirt_large" when the notetrack happens on dirt.
-  */
-  /*	
-  animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"dirt",		loadfx ( "impacts/bodyfall_dust_small_runner" ), "bodyfall_", "_small" );
-  animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"concrete",	loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
-  animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"asphalt",	loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
-  animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"rock",		loadfx ( "impacts/bodyfall_default_small_runner" ), "bodyfall_", "_small" );
-  	
-  animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"dirt",		loadfx ( "impacts/bodyfall_dust_large_runner" ), "bodyfall_", "_large" );
-  animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"concrete",	loadfx ( "impacts/bodyfall_default_large_runner" ), "bodyfall_", "_large" );
-  animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"asphalt",	loadfx ( "impacts/bodyfall_default_large_runner" ), "bodyfall_", "_large" );
-  animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"rock",		loadfx ( "impacts/bodyfall_default_large_runner" ), "bodyfall_", "_large" );
-  animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"mud",		loadfx ( "impacts/bodyfall_mud_large_runner" ), "bodyfall_", "_large" );
-  */
   animscripts\utility::setNotetrackEffect("knee fx left", "J_Knee_LE", "dirt", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setNotetrackEffect("knee fx left", "J_Knee_LE", "concrete", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setNotetrackEffect("knee fx left", "J_Knee_LE", "asphalt", loadfx("impacts/footstep_water_dark"));

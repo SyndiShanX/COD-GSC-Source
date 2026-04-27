@@ -21,46 +21,24 @@
 #using scripts\shared\vehicle_shared;
 #namespace cp_mi_sing_blackstation_cross_debris;
 
-function objective_cross_debris_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_cross_debris_init() {}
 
-function objective_cross_debris_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_cross_debris_done() {}
 
-function function_b0ed4f4f() {
-  // Unsupported VM revision (1B).
-}
+function function_b0ed4f4f() {}
 
-function function_52065393() {
-  // Unsupported VM revision (1B).
-}
+function function_52065393() {}
 
-function cross_debris_waypoints() {
-  // Unsupported VM revision (1B).
-}
+function cross_debris_waypoints() {}
 
-function cross_debris_dialog() {
-  // Unsupported VM revision (1B).
-}
+function cross_debris_dialog() {}
 
-function hendricks_behavior() {
-  // Unsupported VM revision (1B).
-}
+function hendricks_behavior() {}
 
-function function_8bcb3a1b() {
-  // Unsupported VM revision (1B).
-}
+function function_8bcb3a1b() {}
 
-function atrium_destruction() {
-  // Unsupported VM revision (1B).
-}
+function atrium_destruction() {}
 
-function building_collapse() {
-  // Unsupported VM revision (1B).
-}
+function building_collapse() {}
 
-function function_beaf4ba6() {
-  // Unsupported VM revision (1B).
-}
+function function_beaf4ba6() {}

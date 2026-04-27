@@ -3,25 +3,13 @@
  * Script: animscripts\battlechatter_ai.gsc
 ********************************************************/
 
-/****************************************************************************
-
- battleChatter_ai.gsc
-		
-*****************************************************************************/
-
 #include common_scripts\utility;
 #include maps\_utility;
 #include animscripts\utility;
 #include animscripts\battlechatter;
 
-/****************************************************************************
- initialization
-*****************************************************************************/
-
 addToSystem(squadName) {
   self endon("death");
-
-  //prof_begin("addToSystem");
 
   if(!bcsEnabled()) {
     return;
@@ -31,7 +19,6 @@ addToSystem(squadName) {
   }
   assert(isDefined(self.squad));
 
-  // initialize battlechatter data for this AI's squad if it hasn't been already
   if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
     self.squad init_squadBattleChatter();
 
@@ -52,7 +39,6 @@ addToSystem(squadName) {
     return;
   }
 
-  // don't want civilians doing battlechatter
   if(self.team == "neutral") {
     self.enemyClass = undefined;
     self.battlechatter = false;
@@ -67,12 +53,9 @@ addToSystem(squadName) {
       self.voice = "american";
   }
 
-  // SRS 1/31/09: turning off multilingual voices to avoid a bunch of errors that don't really
-  //make sense right now since we're not sure if we even want multilingual functionality anymore
   if(self.voice == "multilingual") {
     ASSERTMSG("Actor with classname '" + self.code_classname + "' has their character asset marked as 'multilingual' in the character GDT. This is no longer supported, please change it!");
-    //sLanguage = get_random_nationality();
-    //self.countryID = anim.countryIDs[ sLanguage ];
+
     sLanguage = "russian";
     self.countryID = anim.countryIDs[sLanguage];
     self.voice = sLanguage;
@@ -93,18 +76,7 @@ addToSystem(squadName) {
       self.npcID = "cpd";
     } else if(IsSubStr(friendname, "foley")) {
       self.npcID = "mcy";
-    }
-    /* DEPRECATED
-    if( IsSubStr( friendname, "grigsby" ) || IsSubStr( friendname, "griggs" ) )
-    {
-    	self.npcID = "grg";
-    }
-    else if( IsSubStr( friendname, "gaz" ) )
-    {
-    	self.npcID = "gaz";
-    }
-    */
-    else {
+    } else {
       self setNPCID();
     }
   } else {
@@ -115,27 +87,7 @@ addToSystem(squadName) {
 
   self init_aiBattleChatter();
   self thread aiThreadThreader();
-
-  //prof_end("addToSystem");
 }
-
-/* SRS 1/31/09: DEPRECATED
-get_random_nationality()
-{
-	//used for multilingual PMC enemies
-	//determine what language the multilingual PMC will speak
-	sMultiLang = "";
-	iRand = RandomIntrange( 1, 4 );
-	if( iRand == 1 )
-		sMultiLang = "german";
-	else if( iRand == 2 )
-		sMultiLang = "italian";
-	else
-		sMultiLang = "spanish";
-
-	return sMultiLang;
-}
-*/
 
 forceEnglish() {
   if(!getDvarInt("bcs_forceEnglish", 0))
@@ -163,8 +115,6 @@ forceEnglish() {
   }
   return false;
 }
-
-// semi hackish way to make large numbers of ai spawning take less time
 aiThreadThreader() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -200,7 +150,6 @@ isAlliedCountryID(id) {
 }
 
 setNPCID() {
-  //prof_begin("setNPCID");
   assert(!isDefined(self.npcID));
 
   usedIDs = anim.usedIDs[self.voice];
@@ -216,12 +165,9 @@ setNPCID() {
 
   self thread npcIDTracker(lowestID);
   self.npcID = usedIDs[lowestID].npcID;
-  //prof_end("setNPCID");
 }
 
 npcIDTracker(lowestID) {
-  //	self endon ("removed from battleChatter");
-
   anim.usedIDs[self.voice][lowestID].count++;
   self waittill("death");
   if(!bcsEnabled()) {
@@ -236,7 +182,6 @@ aiHostileBurstLoop() {
 
   while(1) {
     if(Distance(self.origin, level.player.origin) < 1024) {
-      // don't burst unless there's at least one other guy to hear you
       if(isDefined(self.squad.memberCount) && self.squad.memberCount > 1) {
         self addReactionEvent("taunt", "hostileburst");
       }
@@ -251,9 +196,7 @@ aiBattleChatterLoop() {
   self endon("removed from battleChatter");
 
   while(true) {
-    //prof_begin( "aiBattleChatterLoop" );
     self playBattleChatter();
-    //prof_end( "aiBattleChatterLoop" );
 
     wait(0.3 + randomfloat(0.2));
   }
@@ -296,7 +239,6 @@ removeFromSystem(squadName) {
 }
 
 init_aiBattleChatter() {
-  //prof_begin("init_aiBattleChatter");
   self.chatQueue = [];
   self.chatQueue["threat"] = spawnStruct();
   self.chatQueue["threat"].expireTime = 0;
@@ -328,23 +270,17 @@ init_aiBattleChatter() {
   self.isSpeaking = false;
   self.bcs_minPriority = 0.0;
 
-  /*-------- ALLOWED THREAT CALLOUTS -------- Here we set up the types of threat callouts that this AI is allowed to use.
-   - these should always match the values that index the anim.threatCallouts[] array, which is set up in battlechatter::init_battleChatter()
-  ------------------------------------------*/
   self.allowedCallouts = [];
 
-  // global
   self addAllowedThreatCallout("rpg");
   self addAllowedThreatCallout("exposed");
 
-  // shadow company doesn't do these kinds of callouts
   if(self.voice != "shadowcompany") {
     self addAllowedThreatCallout("ai_contact_clock");
     self addAllowedThreatCallout("ai_target_clock");
     self addAllowedThreatCallout("ai_cardinal");
   }
 
-  // allies only
   if(self.team == "allies") {
     self addAllowedThreatCallout("ai_yourclock");
     self addAllowedThreatCallout("player_yourclock");
@@ -371,7 +307,6 @@ init_aiBattleChatter() {
     self.flavorbursts = false;
   }
 
-  // doesn't impact friendlyfire warnings normally played when battlechatter is on, //just whether it plays when battlechatter is otherwise turned off
   if(level.friendlyfire_warnings) {
     self set_friendlyfire_warnings(true);
   } else {
@@ -379,14 +314,8 @@ init_aiBattleChatter() {
   }
 
   self.chatInitialized = true;
-  //prof_end("init_aiBattleChatter");
 }
 
-/****************************************************************************
- ai event queue
-*****************************************************************************/
-
-// adds a threat callout to this AIs queue
 addThreatEvent(eventType, threat, priority) {
   self endon("death");
   self endon("removed from battleChatter");
@@ -397,7 +326,6 @@ addThreatEvent(eventType, threat, priority) {
     return;
   }
 
-  // check if the threat has already been called out by someone in our squad
   if(threatWasAlreadyCalledOut(threat) && !isPlayer(threat)) {
     return;
   }
@@ -408,14 +336,6 @@ addThreatEvent(eventType, threat, priority) {
     case "infantry":
       chatEvent.threat = threat;
       break;
-      /*
-      case "emplacement":
-      	chatEvent.threat = threat;
-      	break;
-      case "vehicle":
-      	chatEvent.threat = threat;
-      	break;
-      */
   }
 
   if(isDefined(threat.squad)) {
@@ -425,11 +345,6 @@ addThreatEvent(eventType, threat, priority) {
   self.chatQueue["threat"] = undefined;
   self.chatQueue["threat"] = chatEvent;
 }
-
-// adds a response to this AIs queue
-// reportAlias = in the case of a report/echo situation, this is the alias
-//that the reporter used, and will have a specifically corresponding "echo" alias
-// location = for QA situations, so we have the location trigger object
 addResponseEvent(eventType, modifier, respondTo, priority, reportAlias, location) {
   self endon("death");
   self endon("removed from battleChatter");
@@ -442,7 +357,6 @@ addResponseEvent_internal(eventType, modifier, respondTo, priority, reportAlias,
   self endon("removed from battleChatter");
   self endon("responseEvent_failsafe");
 
-  // wait until respondTo is done talking
   self thread responseEvent_failSafe(respondTo);
   message = respondTo waittill_any_return("death", "done speaking", "cancel speaking");
 
@@ -459,7 +373,6 @@ addResponseEvent_internal(eventType, modifier, respondTo, priority, reportAlias,
   }
 
   if(!isPlayer(respondTo)) {
-    // make sure that we don't respond in the same voice
     if(self isUsingSameVoice(respondTo)) {
       return;
     }
@@ -492,8 +405,6 @@ responseEvent_failSafe(respondTo) {
   wait(25);
   self notify("responseEvent_failsafe");
 }
-
-// adds a informative callout to this AIs queue
 addInformEvent(eventType, modifier, informTo, priority) {
   self endon("death");
   self endon("removed from battleChatter");
@@ -516,18 +427,10 @@ addInformEvent(eventType, modifier, informTo, priority) {
   self.chatQueue["inform"] = undefined;
   self.chatQueue["inform"] = chatEvent;
 }
-
-// adds a response to this AIs queue
 addReactionEvent(eventType, modifier, reactTo, priority) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  /*
-  if( !self canSay( "reaction", eventType, priority, modifier ) )
-  {
-  	return;
-  }
-  */
   if(!isDefined(self.chatQueue)) {
     return;
   }
@@ -539,8 +442,6 @@ addReactionEvent(eventType, modifier, reactTo, priority) {
   self.chatQueue["reaction"] = undefined;
   self.chatQueue["reaction"] = chatEvent;
 }
-
-// adds an order to this AIs queue
 addOrderEvent(eventType, modifier, orderTo, priority) {
   self endon("death");
   self endon("removed from battleChatter");
@@ -561,10 +462,6 @@ addOrderEvent(eventType, modifier, orderTo, priority) {
   self.chatQueue["order"] = undefined;
   self.chatQueue["order"] = chatEvent;
 }
-
-/****************************************************************************
- ai trackers/waiters
-*****************************************************************************/
 
 squadOfficerWaiter() {
   anim endon("battlechatter disabled");
@@ -610,10 +507,8 @@ getThreats(potentialThreats) {
     threats[threats.size] = potentialThreats[i];
   }
 
-  // sort by distance from the player
   threats = get_array_of_closest(level.player.origin, threats);
 
-  // deliver guys in locational triggers first
   haveLocs = [];
   noLocs = [];
   foreach(threat in threats) {
@@ -625,7 +520,6 @@ getThreats(potentialThreats) {
     }
   }
 
-  // array_combine adds the first argument to the returned array first
   threats = array_combine(haveLocs, noLocs);
 
   return (threats);
@@ -651,8 +545,6 @@ squadThreatWaiter() {
 
   while(1) {
     wait(RandomFloatRange(0.25, 0.75));
-
-    //prof_begin("squadThreatWaiter");
 
     if(self.team == "allies") {
       validEnemies = getThreats(GetAIArray("axis", "team3"));
@@ -700,7 +592,6 @@ squadThreatWaiter() {
             continue;
           }
 
-          // we want enemies that the player can see to get called out even if other team members can't see them
           if(!player_can_see_ai(enemy)) {
             continue;
           }
@@ -716,40 +607,32 @@ squadThreatWaiter() {
 
       wait(0.05);
     }
-    //prof_end("squadThreatWaiter");
   }
 }
 
 aiDeathFriendly() {
   attacker = self.attacker;
 
-  // reaction event
   array_thread(self.squad.members, ::aiDeathEventThread);
 
-  // if the guy who killed him is a regular AI, call him out if we can
   if(IsAlive(attacker) && IsSentient(attacker) && isDefined(attacker.squad) && attacker.battleChatter) {
-    // reset this guy's calledOut status since he's dangerous again
     if(isDefined(attacker.calledOut[attacker.squad.squadName])) {
       attacker.calledOut[attacker.squad.squadName] = undefined;
     }
 
-    // only infantry do this
     if(!isDefined(attacker.enemyClass)) {
       return;
     }
 
-    // only if the attacker is in a location we can talk about
     if(!attacker is_in_callable_location()) {
       return;
     }
 
     foreach(member in self.squad.members) {
-      // make sure we've seen someone lately
       if(GetTime() > (member.lastEnemySightTime + 2000)) {
         continue;
       }
 
-      // re-add this attacker as a threat
       member addThreatEvent(attacker.enemyClass, attacker);
     }
   }
@@ -774,13 +657,11 @@ aiDeathEnemy() {
     return;
   }
 
-  // only SEALs get to do killfirms
   if(!isDefined(attacker.countryID) || attacker.countryID != "NS") {
     return;
   }
 
   if(!isPlayer(attacker)) {
-    // attacker says "got one" or something similar
     attacker thread aiKillEventThread();
   }
 }
@@ -825,7 +706,7 @@ aiGrenadeDangerWaiter() {
     if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
       continue;
     }
-    if(distance(grenade.origin, level.player.origin) < 512) // grenade radius is 220
+    if(distance(grenade.origin, level.player.origin) < 512)
       self addInformEvent("incoming", "grenade");
   }
 }
@@ -840,7 +721,7 @@ aiDisplaceWaiter() {
     if(getDvar("bcs_enable", "on") == "off") {
       continue;
     }
-    // no acknowledgement if you just took pain, looks dumb
+
     if(GetTime() < self.a.painTime + 4000) {
       continue;
     }
@@ -863,7 +744,6 @@ evaluateMoveEvent(wasInCover) {
 
   dist = Distance(self.origin, self.node.origin);
 
-  // it looks silly to have an order for a short distance
   if(dist < 512) {
     return;
   }
@@ -876,28 +756,22 @@ evaluateMoveEvent(wasInCover) {
     return;
   }
 
-  // figure out who to talk to
   responder = self getResponder(24, 1024, "response");
 
   if(self.team != "axis" && self.team != "team3") {
     if(!isDefined(responder)) {
       responder = level.player;
-    }
-    // if we do have a responder, sometimes we want to pick the player anyway, for variety
-    else {
+    } else {
       if(RandomInt(100) < anim.eventChance["moveEvent"]["ordertoplayer"]) {
         responder = level.player;
       }
     }
   }
 
-  // if we're in combat...
   if(self.combatTime > 0.0) {
     if(RandomInt(100) < anim.eventChance["moveEvent"]["coverme"]) {
       self addOrderEvent("action", "coverme", responder);
-    }
-    // sometimes we do a different kind of order
-    else {
+    } else {
       self addOrderEvent("move", "combat", responder);
     }
   } else {
@@ -908,7 +782,6 @@ evaluateMoveEvent(wasInCover) {
 }
 
 nationalityOkForMoveOrder() {
-  // secretservice do not talk about move events
   if(self.countryID == "SS") {
     return false;
   }
@@ -917,7 +790,6 @@ nationalityOkForMoveOrder() {
 }
 
 nationalityOkForMoveOrderNoncombat() {
-  // only Marines do noncombat move orders
   if(self.countryID == "US") {
     return true;
   }
@@ -943,8 +815,6 @@ aiFollowOrderWaiter() {
     }
   }
 }
-
-// waits/reacts to the player shooting near the friendlies
 player_friendlyfire_waiter() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -972,8 +842,6 @@ player_friendlyfire_waiter() {
 player_friendlyfire_addReactionEvent() {
   self addReactionEvent("friendlyfire", undefined, level.player, 1.0);
 }
-
-// player damaging friendly should always get noticed
 player_friendlyfire_waiter_damage() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -1031,8 +899,6 @@ evaluateReloadEvent() {
 
   self addInformEvent("reloading", "generic");
 }
-
-// doesn't do anything atm, it's a good hook for melee events though
 evaluateMeleeEvent() {
   self endon("death");
   self endon("removed from battleChatter");
@@ -1043,9 +909,6 @@ evaluateMeleeEvent() {
   if(!isDefined(self.enemy))
     return (false);
 
-  //	self addReactionEvent("taunt", "generic", self.enemy);
-
-  //	return (true);
   return (false);
 }
 
@@ -1059,8 +922,6 @@ evaluateFiringEvent() {
   if(!isDefined(self.enemy)) {
     return;
   }
-  //	if(distance(self.origin, self.enemy.origin) > 384)
-  //		self addReactionEvent("taunt", "generic", self.enemy, 0.4);
 }
 
 evaluateSuppressionEvent() {
@@ -1086,20 +947,7 @@ evaluateAttackEvent(type) {
 
   ASSERTEX(isDefined(type), "Grenade type [self.grenadeWeapon] thrown is undefined!");
 
-  // just do frag callouts for all kinds of grenades
   self addInformEvent("attack", "grenade");
-
-  /*
-  switch( type )
-  {
-  case "flash_grenade":
-  	self addInformEvent( "attack", "flash" );
-  	break;
-  default:
-  	self addInformEvent( "attack", "grenade" );
-  	return;
-  }
-  */
 }
 
 addSituationalOrder() {
@@ -1126,7 +974,6 @@ addSituationalCombatOrder() {
       self addOrderEvent("displace", "generic");
     }
   } else if(squad.squadStates["combat"].isActive) {
-    // secretservice don't do suppress orders
     if(self.countryID != "SS") {
       responder = self getResponder(24, 1024, "response");
       self addOrderEvent("action", "suppress", responder);
@@ -1134,15 +981,9 @@ addSituationalCombatOrder() {
   }
 }
 
-/****************************************************************************
- custom battlechatter event functions
-*****************************************************************************/
-
 custom_battlechatter_init_valid_phrases() {
-  // when this list changes, update the documentation in
-  //_utility::custom_battlechatter to reflect it!
   phrases = [];
-  phrases[phrases.size] = "order_move_combat"; // "Move move move!"phrases[phrases.size] = "order_move_noncombat"; // "Move out."phrases[phrases.size] = "order_action_coverme"; // "Covering fire!"phrases[phrases.size] = "inform_reloading"; // "Reloading!"level.customBCS_validPhrases = phrases;
+  phrases[phrases.size] = "order_move_combat";
 }
 
 custom_battlechatter_validate_phrase(string) {
@@ -1209,7 +1050,7 @@ custom_battlechatter_internal(string) {
       break;
 
     default:
-      // we validated this already, so we shouldn't ever get here
+
       ASSERTMSG(phraseInvalidStr);
       return false;
   }

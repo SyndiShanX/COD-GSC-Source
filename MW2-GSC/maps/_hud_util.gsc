@@ -176,13 +176,6 @@ updateBar(barFrac) {
   self.bar setShader(self.bar.shader, barWidth, self.height - (self.padding * 2));
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: createFontString( <font>, <fontScale> )""Summary: Creates a hud element for font purposes""Module: Hud""MandatoryArg: <font>: Apparently this is always set to default.""MandatoryArg: <fontScale>: The scale you want.""Example: level.hintElem = createFontString( "default", 2.0 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
-
 createFontString(font, fontScale) {
   fontElem = newHudElem();
   fontElem.elemType = "font";
@@ -199,13 +192,6 @@ createFontString(font, fontScale) {
 
   return fontElem;
 }
-
-/*
-=============
-///ScriptDocBegin
-"Name: createClientFontString( <font>, <fontScale> )""Summary: Creates a client hud element for font purposes""Module: Hud""MandatoryArg: <font>: Apparently this is always set to default.""MandatoryArg: <fontScale>: The scale you want.""Example: level.hintElem = level.player createClientFontString( "default", 2.0 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 
 createClientFontString(font, fontScale) {
   assert(isPlayer(self));
@@ -399,12 +385,6 @@ setFlashFrac(flashFrac) {
   self.bar.flashFrac = flashFrac;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: fade_over_time( <target_alpha> , <fade_time> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 fade_over_time(target_alpha, fade_time) {
   self fadeOverTime(fade_time);
   self.alpha = target_alpha;
@@ -469,11 +449,6 @@ updateChildren() {
   }
 }
 
-/*
-	thread stance_carry_icon_enable( bool );
-	Diasables all stance icons and replaces with an icon of
-	a person carrying another person on his back. True/false
-*/
 stance_carry_icon_enable(bool) {
   if(isDefined(bool) && bool == false) {
     stance_carry_icon_disable();
@@ -511,12 +486,6 @@ stance_carry_icon_disable() {
   SetSavedDvar("hud_showStance", "1");
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: create_mantle( <create_mantle> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 create_mantle() {
   if(level.console) {
     text = createFontString("default", 1.8);
@@ -549,7 +518,7 @@ get_countdown_hud(x, y, player, forceXPos) {
     forceXPos = false;
   xPos = undefined;
   if(!level.Console)
-    xPos = -250; //override x-position if this is PC or the timer will get cut off
+    xPos = -250;
   else if(!isDefined(x))
     xPos = -225;
   else
@@ -591,7 +560,7 @@ get_download_state_hud(x, y, player, forceXPos) {
 
   xPos = undefined;
   if(!level.Console)
-    xPos = -250; //override x-position if this is PC or the timer will get cut off
+    xPos = -250;
   else if(!isDefined(x))
     xPos = -170;
   else
@@ -627,12 +596,6 @@ get_download_state_hud(x, y, player, forceXPos) {
   return hudelem;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: create_client_overlay( <shader_name>, <start_alpha>, <player> )""Summary: Creates a full screen client hud overlay. Must also use code command precacheShader( <shader_name> ) to precache the element used (black, white, etc).""Module: Hud""MandatoryArg: <shader_name>: Name of the shader precached that you want to have displayed.""MandatoryArg: <start_alpha>: Beginning alpha value for the element.""OptionalArg: <player>: Pointer to the player for which the overlay will be displayed. If left blank, overlay will be displayed for all players.""Example: black_overlay = create_client_overlay( "black", 0, level.player );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 create_client_overlay(shader_name, start_alpha, player) {
   if(isDefined(player))
     overlay = newClientHudElem(player);
@@ -651,12 +614,6 @@ create_client_overlay(shader_name, start_alpha, player) {
   return overlay;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: create_client_overlay_custom_size( <shader_name>, <start_alpha>, <x>, <y> )""Summary: Creates a full screen client hud overlay. Must also use code command precacheShader( <shader_name> ) to precache the element used (black, white, etc).""Module: Hud""MandatoryArg: <shader_name>: Name of the shader precached that you want to have displayed.""MandatoryArg: <start_alpha>: Beginning alpha value for the element.""MandatoryArg: <x>: Width.""MandatoryArg: <y>: Height.""CallOn: A player""Example: black_overlay = create_client_overlay_custom_size( "black", 0, 100, 50 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 create_client_overlay_custom_size(shader_name, start_alpha, x, y) {
   player = get_player_from_self();
   overlay = newClientHudElem(player);

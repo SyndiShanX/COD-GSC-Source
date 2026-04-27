@@ -6,9 +6,6 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
- // Rallypoints should be destroyed on leaving your team/getting killed
-// Compass icons need to be looked at
-// Doesn't seem to be setting angle on spawn so that you are facing your rallypoint
 
 main() {
   if(getDvar("mapname") == "mp_background") {
@@ -383,7 +380,6 @@ onBeginUse(player) {
 
     if(level.multibomb) {
       for(i = 0; i < self.otherBombZones.size; i++) {
-        //self.otherBombZones[i] maps\mp\gametypes\_gameobjects::disableObject();
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::allowUse("none");
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::setVisibleTeam("friendly");
       }
@@ -407,7 +403,6 @@ onEndUse(team, player, result) {
   } else {
     if(level.multibomb && !result) {
       for(i = 0; i < self.otherBombZones.size; i++) {
-        //self.otherBombZones[i] maps\mp\gametypes\_gameobjects::enableObject();
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::allowUse("enemy");
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::setVisibleTeam("any");
       }
@@ -420,12 +415,10 @@ onCantUse(player) {
 }
 
 onUsePlantObject(player) {
-  // planted the bomb
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"])) {
     level thread bombPlanted(self, player);
     player logString("bomb planted: " + self.label);
 
-    // disable all bomb zones except this one
     for(index = 0; index < level.bombZones.size; index++) {
       if(level.bombZones[index] == self) {
         continue;
@@ -435,9 +428,6 @@ onUsePlantObject(player) {
 
     player playSound("mp_bomb_plant");
     player notify("bomb_planted");
-
-    //if( !level.hardcoreMode )
-    //	iPrintLn(&"MP_EXPLOSIVES_PLANTED_BY", player );
 
     leaderDialog("bomb_planted");
 
@@ -458,11 +448,8 @@ onUseDefuseObject(player) {
   player logString("bomb defused: " + self.label);
   level thread bombDefused();
 
-  // disable this bomb zone
   self maps\mp\gametypes\_gameobjects::disableObject();
 
-  //if( !level.hardcoreMode )
-  //	iPrintLn(&"MP_EXPLOSIVES_DEFUSED_BY", player );
   leaderDialog("bomb_defused");
 
   level thread teamPlayerCardSplash("callout_bombdefused", player);
@@ -540,7 +527,6 @@ bombPlanted(destroyedObj, player) {
 
   label = destroyedObj maps\mp\gametypes\_gameobjects::getLabel();
 
-  // create a new object to defuse with.
   trigger = destroyedObj.bombDefuseTrig;
   trigger.origin = level.sdBombModel.origin;
   visuals = [];

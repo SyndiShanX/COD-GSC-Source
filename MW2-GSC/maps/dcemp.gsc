@@ -17,7 +17,6 @@ CONST_FOLEY_LINE_TIME = .5;
 main() {
   flags();
 
-  //STARTS
   default_start(::start_intro);
   add_start("intro", ::start_intro, "[intro] -> play end of dc burning", ::intro_main);
   add_start("iss", ::start_iss, "[iss] -> see the emp up close and personal", ::iss_main);
@@ -30,8 +29,6 @@ main() {
   add_start("parking", ::start_parking, "[parking] -> traverse the parking deck", ::parking_main);
   add_start("plaza", ::start_plaza, "[plaza] -> continue through the plaza", ::plaza_main);
   add_start("tunnels", maps\dcemp_endpart::start_tunnels, "[tunnels] -> traverse the tunnels", maps\dcemp_endpart::tunnels_main);
-  //	add_start( "whitehouse2", 	maps\dcemp_endpart::start_whitehouse, "[whitehouse] -> fight through the whitehouse", maps\dcemp_endpart::whitehouse_main );
-  //	add_start( "flare", 		maps\dcemp_endpart::start_flare, "[flare] -> pop the flare", maps\dcemp_endpart::flare_main );
 
   global_inits();
   thread dcemp_music();
@@ -137,17 +134,11 @@ flags() {
 }
 
 createfx_setup() {
-  // this array will be filled with code commands that SP or MP may use but doesn't exist in the other.
   if(!isDefined(level.func))
     level.func = [];
   level.func["create_triggerfx"] = ::dcemp_create_triggerfx;
 
-  //ROBOT -> change fx groups here
   if(getDvar("createfx") == "on") {
-    //	flag_set( "intro_fx" );
-    //	flag_set( "iss_fx" );
-    //		robot_iss_stuff();
-
     flag_set("rain_fx");
     flag_set("end_fx");
   }
@@ -211,7 +202,6 @@ global_inits() {
     precachemodel(name + i);
   }
 
-  //manually precaching models because of masking of destrucibles
   precacheModel("prop_photocopier_destroyed");
   precacheModel("prop_photocopier_destroyed_top");
   precacheModel("prop_photocopier_destroyed_right_shelf");
@@ -251,7 +241,6 @@ global_inits() {
   precacheshellshock("default");
   precacheshellshock("nosound");
 
-  //precachemodel( "com_firehydrant" );
   precachemodel("com_firehydrant_dest");
   precachemodel("com_firehydrant_dam");
   precachemodel("com_firehydrant_cap");
@@ -261,11 +250,10 @@ global_inits() {
 
   level.default_goalheight = 128;
 
-  // whitehouse precaches
   precachemodel("rappelrope100_ri");
   precachemodel("mil_emergency_flare");
   PreCacheTurret("heli_spotlight");
-  precachemodel("cod3mg42"); // should be a spotlight model but can't find one that works as a turret.
+  precachemodel("cod3mg42");
   PrecacheItem("rpg_straight");
   precachemodel("com_door_01_handleleft2");
 
@@ -278,11 +266,8 @@ global_inits() {
   precachestring(&"DCEMP_OBJ_FOLLOW_SGT_FOLEY");
   precachestring(&"DCEMP_OBJ_WHISKEY_HOTEL");
 
-  //	maps\_slowmo_breach::slowmo_breach_init();
-
   setup_sun();
 
-  //--------------->	setup corner
   corner_hide_damage();
 
   array_thread(getEntArray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
@@ -298,11 +283,6 @@ global_inits() {
 
   level.objnum = 0;
 }
-
-/************************************************************************************************************/
-
-/*													INTRO													*/
-/************************************************************************************************************/
 
 intro_main() {
   flag_set("player_crash_done");
@@ -333,18 +313,12 @@ intro_crash_vehicle_setup() {
   delaythread(0, ::spawn_vehicles_from_targetname_and_drive, "helis_crash_distant");
 }
 
-/************************************************************************************************************/
-
-/*													INTRO													*/
-/************************************************************************************************************/
-
 iss_main() {
   flag_wait("emp_entity_cleanup_done");
 
   thread maps\_utility::set_vision_set("dcemp_iss", 0);
   thread maps\_utility::vision_set_fog_changes("dcemp_iss", 0);
 
-  //thread maps\_ambient::ambientEventStart( "dcemp_iss" );
   level.player disableweapons();
   level.player freezecontrols(true);
   level.emp_player_angles = level.player getplayerangles();
@@ -366,8 +340,6 @@ iss_main() {
 
   flag_wait("iss_organize_ents");
 
-  //setsaveddvar( "cg_fovscale", .85 );
-  //setsaveddvar( "sm_sunsampleSizeNear", 1.25 );
   setsaveddvar("sm_sunsampleSizeNear", .6);
   setsaveddvar("sm_sunShadowCenter", (52400, -30050, -38000));
 
@@ -440,7 +412,7 @@ iss_nag_dialogue() {
 
   while(1) {
     if(!isDefined(level.player iss_wait_player_see_icbm(.5)))
-      //Sat1, rotate your view a little further to the right will ya?
+
       thread radio_dialogue("dcemp_iss_rotateview");
 
     if(isDefined(level.player iss_wait_player_see_icbm(13))) {
@@ -451,11 +423,11 @@ iss_nag_dialogue() {
 
 iss_dialogue() {
   flag_wait("iss_start_dialogue");
-  //Come in Sat1, this is ISS Control. Houston's requesting a feed from your helmet cam, over.
+
   radio_dialogue("dcemp_iss_requestfeed");
 
   wait 1;
-  //Uh, they want you to look over towards the dark side of the earth.It should be cresting the horizon about 15 degrees east of the starboard PV arrays.
+
   radio_dialogue("dcemp_iss_theywantyou");
 
   flag_wait("iss_see_icbm");
@@ -470,31 +442,24 @@ iss_dialogue() {
   radio_dialogue_stop();
 
   wait .5;
-  //There it is, we're getting your feed Sat1.Come in Houston, are you getting this?
+
   radio_dialogue("dcemp_iss_thereitis");
 
   flag_wait("iss_copythat");
-  //Copy that ISS, video feed from Sat1 is clear.	
+
   radio_dialogue("dcemp_hsc_copythat");
   wait 1;
-  //Sat1, keep tracking the bogey. We're looking into it, standby.
+
   radio_dialogue("dcemp_hsc_keeptracking");
 
   wait 1.5;
 
-  //Houston, we're not scheduled for any satellite launches today are we?
   radio_dialogue("dcemp_iss_notscheduled");
   wait 2.5;
 
-  //ISS, Houston. Standby. We may have a problem here.
   thread radio_dialogue("dcemp_hsc_standby");
 
   flag_wait("iss_anyword");
-  //Houston, this is ISS Control, uh... any word on the- thread radio_dialogue("dcemp_iss_anyword");
-
-  //	flag_wait( "iss_space_nuke" );
-  //	wait .5;
-  //	radio_dialogue_stop();
 }
 
 iss_nuke_scene() {
@@ -648,12 +613,9 @@ iss_player_sounds() {
   thread iss_player_sounds_loop();
 
   flag_wait("iss_nag_dialogue");
-
-  //level.player play_sound_on_entity( "scn_dcemp_iss_helmet_breathe_fast" );
 }
 
 iss_player_sounds_loop() {
-  //while( !flag( "iss_nag_dialogue" ) )
   while(!flag("iss_space_nuke")) {
     level.player play_sound_on_entity("scn_dcemp_iss_helmet_breathe_slow");
 
@@ -661,15 +623,8 @@ iss_player_sounds_loop() {
   }
 }
 
-/************************************************************************************************************/
-
-/*													EMP														*/
-/************************************************************************************************************/
-
 emp_main() {
   flag_wait("iss_done");
-
-  //level.player shellshock( "nosound", 2 );
 
   script2model_del_iss();
   fx_iss_pause();
@@ -703,7 +658,6 @@ emp_main() {
 emp_empaftermath() {
   level.player freezecontrols(true);
 
-  //setsaveddvar( "cg_fovscale", 1 );
   setsaveddvar("sm_sunsampleSizeNear", 0.25);
   setsaveddvar("sm_sunShadowCenter", (0, 0, 0));
 
@@ -727,7 +681,6 @@ emp_empaftermath() {
 
   if(isDefined(level.emp_player_angles)) {
     level.player SetPlayerAngles(level.emp_player_angles);
-    //level.player.playerrig.angles = level.player.angles;
   } else
     level.player SetPlayerAngles(level.player.playerrig.angles);
 
@@ -746,7 +699,6 @@ emp_empaftermath() {
     setculldist(23000);
   }
 
-  //fade back
   flag_set("emp_back_from_whiteout");
   level.white_overlay fadeOverTime(4);
   level.white_overlay.alpha = 0;
@@ -754,12 +706,10 @@ emp_empaftermath() {
 
 emp_dialogue() {
   flag_wait("emp_heli_crash");
-  //	wait 0;
-  //	level.dunn thread dialogue_queue( "dcemp_cpd_whoa" );	
 
   flag_wait("emp_jet_crash");
   wait 2.5;
-  //What the hell's goin' on?
+
   level.dunn dialogue_queue("dcemp_cpd_whatsgoinon");
 }
 
@@ -922,11 +872,6 @@ emp_free_player() {
   SetSavedDvar("compass", "1");
 }
 
-/************************************************************************************************************/
-
-/*													STREET													*/
-/************************************************************************************************************/
-
 street_main() {
   flag_wait("street_main");
   flag_clear("allow_ammo_pickups");
@@ -938,7 +883,6 @@ street_main() {
   delaythread(3, ::vision_set_sunset);
   delaythread(1, ::activate_trigger, "meetup_allies", "target");
 
-  //introduction	
   array_thread(level.team, ::set_ignoreme, true);
   array_thread(level.team, ::set_ignoreall, true);
   array_thread(level.team, ::disable_arrivals);
@@ -953,20 +897,16 @@ street_main() {
 
   flag_set("dc_emp_afternath");
 
-  //start the fallin shit
   newtime = CONST_DUNN_LINE_TIME + CONST_FOLEY_LINE_TIME + 1;
   thread flag_set_delayed("street_crash_btr_first", 2.5 + newtime);
   delaythread(2.5 + newtime, ::street_heli_player_kill);
   level.fallguy delaythread(10 + newtime, ::spawn_ai);
 
-  //What the hell's goin' on?
-  //level.dunn thread dialogue_queue( "dcemp_cpd_whatsgoinon" );
   wait CONST_DUNN_LINE_TIME;
   level.foley notify("stop_loop");
   level.foley thread anim_generic(level.foley, "corner_standR_look_2_alert");
-  //Seek shelter!!! Get off the street now!!!			
+
   level.foley thread dialogue_queue("dcemp_fly_seekshelter");
-  //flag_set( "dc_emp_afternath" );
 
   objective_add(level.objnum, "active", &"DCEMP_OBJ_CRASH_SITE");
   objective_state(level.objnum, "done");
@@ -1030,7 +970,6 @@ street_gohide_marine1() {
   wait length * .72 - .05;
   self anim_stopanimscripted();
 
-  //What the hell is goin' on!!!
   self delaythread(.5, ::dialogue_queue, "dcemp_ar1_whatsgoinon");
 
   link = spawn("script_origin", self.origin);
@@ -1087,7 +1026,6 @@ street_gohide_marine1() {
 street_gohide_dunn() {
   self anim_stopanimscripted();
 
-  //This is not goood!	
   self delaythread(2.25 + CONST_FOLEY_LINE_TIME, ::dialogue_queue, "dcemp_cpd_notgood");
 
   self enable_heat_behavior();
@@ -1096,7 +1034,7 @@ street_gohide_dunn() {
   node = getstruct("street_marine1_anim0", "targetname");
 
   node anim_generic_reach(self, "run_reaction_L_quick");
-  //Whoa!!!
+
   self delaythread(0, ::dialogue_queue, "dcemp_cpd_whoa");
   node anim_generic_run(self, "run_reaction_L_quick");
 
@@ -1108,9 +1046,9 @@ street_gohide_dunn() {
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_reaction_R_quick");
-  //Holy shiiiiiit!!!	
+
   self delaythread(0.0, ::dialogue_queue, "dcemp_cpd_holy");
-  //self delaythread( 1.0, ::dialogue_queue, "dcemp_cpd_EMP" );
+
   node anim_generic_run(self, "run_reaction_R_quick");
 
   node = getstruct(node.target, "targetname");
@@ -1130,10 +1068,9 @@ street_gohide_dunn() {
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee_03");
-  //self playSound( "generic_pain_american_" + randomintrange( 1,9 ) );
-  //Whoa!!!
+
   level.foley delaythread(.5, ::dialogue_queue, "dcemp_fly_justkeepmovin");
-  //Look out!!!
+
   length = getanimlength(getanim_generic("run_pain_fallonknee_03"));
   self delaythread(length - .5, ::dialogue_queue, "dcemp_cpd_lookout");
   node anim_generic_run(self, "run_pain_fallonknee_03");
@@ -1185,7 +1122,6 @@ street_gohide_foley() {
   length = getanimlength(getanim_generic("exposed_idle_reactB"));
   self playSound("generic_pain_american_" + randomintrange(1, 9));
 
-  //Don't stop!! Keep moving!!			
   self delaythread(length - 1.0, ::dialogue_queue, "dcemp_fly_dontstop");
 
   wait length - .75;
@@ -1197,7 +1133,6 @@ street_gohide_foley() {
   self playSound("generic_pain_american_" + randomintrange(1, 9));
   node anim_generic_run(self, "run_pain_fallonknee");
 
-  ////Go go go!!!			
   self delaythread(0, ::dialogue_queue, "dcemp_fly_gogogo");
 
   node = getstruct(node.target, "targetname");
@@ -1224,7 +1159,6 @@ street_gohide_foley() {
   wait length - .75;
   self anim_stopanimscripted();
 
-  //Go!! Go!!
   self delaythread(0.5, ::dialogue_queue, "dcemp_fly_gogo");
 
   self disable_heat_behavior();
@@ -1262,7 +1196,6 @@ street_setup_stuff() {
   clip connectpaths();
   clip notsolid();
 
-  //spawn btr
   add_wait(::flag_wait, "emp_entity_cleanup_done");
   add_func(::activate_trigger_with_targetname, "street_btr_spawner");
   thread do_wait();
@@ -1301,11 +1234,6 @@ init_meetup_allies() {
   self walkdist_zero();
 }
 
-/************************************************************************************************************/
-
-/*													CORNER													*/
-/************************************************************************************************************/
-
 #using_animtree("generic_human");
 corner_main() {
   flag_wait("corner_main");
@@ -1321,11 +1249,11 @@ corner_main() {
   thread corner_dead_check();
 
   level.player blend_movespeedscale(.77);
-  //What the hell was that?!			
+
   level.team["marine1"] dialogue_queue("dcemp_ar1_whatwasthat");
-  //Stay here.	
+
   level.foley add_wait(::dialogue_queue, "dcemp_fly_stayhere");
-  //You're goin' out there? Are you nuts?			
+
   level.dunn add_func(::delaythread, 0.5, ::dialogue_queue, "dcemp_cpd_younuts");
   thread do_wait();
 
@@ -1365,19 +1293,18 @@ corner_main() {
 corner_dialogue() {
   wait 4.5;
   marine1 = level.team["marine1"];
-  ////What happened here?	
+
   marine1 dialogue_queue("dcemp_ar1_thisisweird");
   wait .5;
-  //It’s so…quiet.	
+
   level.dunn dialogue_queue("dcemp_cpd_soquiet");
-  //Hey! What the…? My red dot's not working.	
+
   level.dunn dialogue_queue("dcemp_cpd_heywhatthe");
-  //Mine's down too, this is weird, bro.			
+
   marine1 dialogue_queue("dcemp_ar1_minedowntoo");
 
   wait .5;
 
-  //Looks like optics are down…comms too.There's not even a street light for blocks.
   level.foley thread dialogue_queue("dcemp_fly_empblast");
 }
 
@@ -1405,7 +1332,6 @@ corner_foley_go() {
 
   self setgoalpos(self.origin);
 
-  //It's over! Come on, we still have a war to fight.			
   self setlookatentity(level.team["marine1"]);
   self delaycall(3, ::setlookatentity);
   self thread dialogue_queue("dcemp_fly_wartofight");
@@ -1447,7 +1373,7 @@ corner_foley_go() {
 
   node notify("stop_loop");
   node anim_single(guys, "hunted_woundedhostage_check");
-  //dammit
+
   self thread dialogue_queue("dcemp_fly_dammit");
   self notify("corner_at_plane");
 
@@ -1568,7 +1494,6 @@ corner_dunn_go() {
 
   self.alertlevel = "noncombat";
 
-  //Whoa...check it out, man.		
   self thread dialogue_queue("dcemp_cpd_checkitout");
 
   node = getstruct(node.target, "targetname");
@@ -1632,11 +1557,6 @@ corner_plane_crash() {
   corner_show_damage();
 }
 
-/************************************************************************************************************/
-
-/*													MEETUP													*/
-/************************************************************************************************************/
-
 meetup_main() {
   getent("meetup_runner", "targetname") add_spawn_function(::meetup_runner);
 
@@ -1659,13 +1579,12 @@ meetup_main() {
 
   thread autosave_by_name("meetup_main");
 
-  //Huah. We gotta regroup with whoever's left out there. Corporal Dunn, take point. 			
   level.foley setlookatentity(level.team["marine1"]);
   level.foley delaycall(2, ::setlookatentity);
   level.foley delaycall(2.75, ::setlookatentity, level.dunn);
   level.foley delaycall(5.5, ::setlookatentity);
   level.foley dialogue_queue("dcemp_fly_regroup");
-  //Huah.		
+
   level.dunn thread dialogue_queue("dcemp_cpd_huah2");
 
   array_thread(level.team, ::set_ignoreme, true);
@@ -1687,28 +1606,24 @@ meetup_main() {
   level.dunn enable_dontevershoot();
   level.dunn set_ignoreall(false);
 
-  //"Star"!	
   level.dunn dialogue_queue("dcemp_cpd_star");
   flag_set("meetup_challenge_done");
 
   array_thread(level.team, ::clear_run_anim);
 
   wait 1.25;
-  //"Star", or we will fire on you!	
+
   level.dunn dialogue_queue("dcemp_cpd_willfire");
 
   thread meetup_runner_threads();
   flag_set("meetup_runner_safe");
 
-  //wait .65;
-
-  //I don't remember the damn countersign all right? I'm just a runner! Don't shoot!		
   level.runner dialogue_queue("dcemp_ar3_dontshoot");
 
   SetSavedDvar("cg_crosshairEnemyColor", "1");
 
   wait .5;
-  //The proper response is "Texas", soldier. What'dya got?	
+
   level.foley dialogue_queue("dcemp_fly_properresponse");
 
   flag_wait("lobby_main");
@@ -1879,7 +1794,6 @@ meetup_runner() {
   guys = [];
   guys[guys.size] = self;
   guys[guys.size] = level.dunn;
-  //	node anim_single_run( guys, "DCemp_run_sequence" );
 
   node anim_generic_gravity_run(self, "DCemp_run_sequence_runner");
 
@@ -1921,11 +1835,6 @@ meetup_runner() {
   self delete();
 }
 
-/************************************************************************************************************/
-
-/*													LOBBY													*/
-/************************************************************************************************************/
-
 lobby_main() {
   thread handle_sunlight();
   thread vision_set_lobby();
@@ -1948,7 +1857,6 @@ lobby_main() {
 
   thread autosave_by_name("lobby_main");
 
-  //You heard the man, lets go.	
   level.foley delaythread(.5, ::dialogue_queue, "dcemp_fly_heardtheman");
 
   level.foley thread anim_generic_gravity(level.foley, "exposed_tracking_turn180L");
@@ -1969,20 +1877,20 @@ lobby_ambush() {
   level.dunn add_wait(::waittill_msg, "reached_path_end");
   add_wait(::flag_wait, "meetup_movein");
   do_wait();
-  //Dunn, you're up.		
+
   level.foley thread dialogue_queue("dcemp_fly_dunnyoureup");
 
   wait 1.5;
-  //Huah.		
+
   level.dunn thread dialogue_queue("dcemp_cpd_huah2");
 
   flag_set("lobby_check");
   flag_wait("lobby_clear");
 
   wait 1;
-  //I got our six.	
+
   level.team["marine2"] dialogue_queue("dcemp_ar2_gotoursix");
-  //Copy that. 		
+
   level.foley thread dialogue_queue("dcemp_fly_copythat");
 
   flag_wait("lobby_robo_death");
@@ -2061,14 +1969,11 @@ lobby_go_dunn(node) {
   wait 2.3;
   self anim_stopanimscripted();
 
-  //node anim_generic_reach( self, "combatwalk_F_spin" );
-
   node thread anim_generic_run(self, "combatwalk_F_spin");
   length = getanimlength(getanim_generic("combatwalk_F_spin"));
 
   wait length - 1.5;
 
-  //Clear.		
   self thread dialogue_queue("dcemp_cpd_clear");
 
   thread flag_set_delayed("lobby_clear", 1);
@@ -2086,7 +1991,6 @@ lobby_go_dunn(node) {
 
   flag_wait("lobby_robo_death");
 
-  //Son of a....
   self delaythread(.5, ::dialogue_queue, "dcemp_cpd_sonofa");
 
   self set_ignoreme(false);
@@ -2188,7 +2092,6 @@ lobby_go_foley(node) {
 
   flag_wait("lobby_robo_death");
 
-  //Contaaact!!!		
   self delaythread(1.5, ::dialogue_queue, "dcemp_fly_contact");
   self anim_generic_gravity(self, "exposed_idle_reactB");
 
@@ -2361,11 +2264,6 @@ lobby_go_extra(node) {
   self setgoalnode(node);
 }
 
-/************************************************************************************************************/
-
-/*													OFFICE													*/
-/************************************************************************************************************/
-
 office_main() {
   thread handle_color_advance("office_ally_color_", 2, 6);
   array_thread(getEntArray("office_enemies_wave1", "script_noteworthy"), ::add_spawn_function, ::office_enemies_wave1);
@@ -2382,7 +2280,6 @@ office_main() {
 
   flag_wait("office_main");
 
-  //wave 1
   activate_trigger("office_enemies_wave1", "target");
 
   flag_wait("lobby_robo_death");
@@ -2392,58 +2289,46 @@ office_main() {
   delaythread(1.5, ::autosave_by_name, "office_main");
 
   thread battlechatter_on();
-  //thread office_bcs_fix();
 
-  //wait for certain number to die or player to run way too far
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   add_wait(::waittill_dead_or_dying, enemies, 2);
   add_wait(::trigger_wait, "office_enemies_wave1_runner", "target");
   add_abort(::flag_wait, "office_ally_color_4");
   do_wait();
 
-  //turn off intro fx and turn on rain fx
   fx_intro_pause();
   flag_set("rain_fx");
 
-  //wave 2
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   spawners = getEntArray("office_enemies_wave2", "targetname");
   for(i = 0; i < enemies.size; i++)
     spawners[i] delete();
 
-  //blue retreat 1	
   array_thread(enemies, ::set_force_color, "blue");
   activate_trigger_with_targetname("office_enemy_color_1");
   activate_trigger("office_enemies_wave2", "target");
 
-  //make 1 friendly killable( 3 have bs )
   level.team["marine1"] stop_magic_bullet_shield();
   wait .1;
 
-  //grab guys and...
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   enemies = array_combine(enemies, get_living_ai_array("office_enemies_wave2", "script_noteworthy"));
 
-  //...do the next two retreats
-  //retreat 1
   add_wait(::waittill_dead_or_dying, enemies, 4);
   add_func(::activate_trigger_with_targetname, "office_enemy_color_2");
   thread do_wait();
 
-  //retreat 2
   add_wait(::waittill_dead_or_dying, enemies, 8);
   add_func(::delaythread, .2, ::activate_trigger_with_targetname, "office_enemy_color_3");
   add_func(::kill_random_teammate);
   thread do_wait();
 
-  //wait for player to be near office 2	
   flag_wait("office_predict_wave3");
-  //sun shadow optimization
+
   setsaveddvar("sm_sunShadowScale", 0.5);
 
   thread autosave_by_name("office2");
 
-  //wave 3
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   enemies = array_combine(enemies, get_living_ai_array("office_enemies_wave2", "script_noteworthy"));
   spawners = getEntArray("office_enemies_wave3", "targetname");
@@ -2513,11 +2398,6 @@ office_kill_enemies() {
 
   flag_set("parking_main");
 }
-
-/************************************************************************************************************/
-
-/*													PARKING													*/
-/************************************************************************************************************/
 
 parking_main() {
   array_thread(getEntArray("parking_btr_guys", "targetname"), ::add_spawn_function, ::parking_btr_guys);
@@ -2619,7 +2499,6 @@ parking_dialogue2() {
 
   wait 1.5;
 
-  //Smoke 'em.			
   level.foley dialogue_queue("dcemp_fly_smokeem");
 
   flag_set("parking_open_fire");
@@ -2768,7 +2647,6 @@ parking_go_marine1(node) {
 
   flag_wait("parking_player_near_btr");
 
-  //Got a visual on three tangos.	
   self thread dialogue_queue("dcemp_ar2_gotavisual");
 
   self.a.movement = "stop";
@@ -2782,13 +2660,9 @@ parking_go_marine1(node) {
 
   self waittill("goal");
 
-  //Clear shot.	
   self delaythread(1, ::dialogue_queue, "dcemp_ar2_clearshot");
 
   self ent_flag_set("parking_start_at_node2");
-
-  //	self anim_generic_run( self, "CornerCrR_alert_2_lean" );
-  //	self animcustom( ::CornerCrR_aim );
 }
 
 parking_go_foley(node) {
@@ -2821,7 +2695,6 @@ parking_go_foley(node) {
   flag_wait("parking_moveout2");
   self disable_cqbwalk();
 
-  //Keep Quiet…			
   self delaythread(2, ::dialogue_queue, "dcemp_fly_keepquiet");
 
   node = getnode("parking_moveup2_foley", "targetname");
@@ -2838,7 +2711,6 @@ parking_go_foley(node) {
 
   flag_wait("parking_moveout3");
 
-  //Stay low, move into position.			
   self thread dialogue_queue("dcemp_fly_moveintopos");
 
   self.a.movement = "stop";
@@ -2867,7 +2739,6 @@ parking_go_dunn(node) {
 
   node = getstruct(node.target, "targetname");
 
-  //Dunn. Check for vitals, we'll cover you.			
   level.foley thread dialogue_queue("dcemp_fly_checkvitals");
 
   node anim_reach_solo(self, "hunted_woundedhostage_check");
@@ -2881,7 +2752,6 @@ parking_go_dunn(node) {
   node notify("stop_loop");
   node anim_single(guys, "hunted_woundedhostage_check");
 
-  //He's a gonner.			
   self thread dialogue_queue("dcemp_cpd_gonner");
 
   node anim_generic_run(self, "hunted_woundedhostage_check_soldier_end");
@@ -3015,8 +2885,6 @@ parking_btr_guys_dialogue() {
 }
 
 parking_btr_guys() {
-  //self endon( "death" );
-
   node = getstruct(self.target, "targetname");
 
   self.a.nodeath = true;
@@ -3025,7 +2893,7 @@ parking_btr_guys() {
   self thread magic_bullet_shield();
 
   self addAIEventListener("grenade danger");
-  //self addAIEventListener( "gunshot" );
+
   self addAIEventListener("bulletwhizby");
 
   self add_wait(::waittill_msg, "death");
@@ -3101,11 +2969,6 @@ parking_btr_guys() {
   self kill();
 }
 
-/************************************************************************************************************/
-
-/*													PLAZA													*/
-/************************************************************************************************************/
-
 plaza_main() {
   array_thread(getEntArray("plaza_enemies", "targetname"), ::add_spawn_function, ::plaza_enemies);
 
@@ -3140,12 +3003,11 @@ plaza_main() {
 }
 
 plaza_main2() {
-  //Move up.	
   level.foley dialogue_queue("dcemp_fly_moveup");
   wait 1;
-  //What about the guys inside?			
+
   level.dunn dialogue_queue("dcemp_cpd_whatabout");
-  //What about 'em?
+
   level.foley dialogue_queue("dcemp_fly_whataboutem");
 
   flag_wait_either("plaza_to_street", "plaza_show_enemies");
@@ -3180,7 +3042,6 @@ plaza_main2() {
 
   plaza_dialogue2();
 
-  //Contaaact!!!	
   level.dunn thread dialogue_queue("dcemp_cpd_conact");
 
   thread flag_set_delayed("_weather_lightning_enabled", 3);
@@ -3197,18 +3058,15 @@ plaza_main2() {
   activate_trigger_with_targetname("plaza_enemy_color_1");
   activate_trigger_with_targetname("plaza_ally_color_1");
 
-  //team stuff
   array_thread(level.team, ::disable_dontevershoot);
   array_thread(level.team, ::disable_cqbwalk);
   array_thread(level.team, ::walkdist_reset);
   array_thread(level.team, ::pathrandompercent_reset);
   array_call(level.team, ::allowedstances, "prone", "crouch", "stand");
 
-  //enemy stuff
   thread array_spawn(getEntArray("plaza_backup", "targetname"), true);
   array_thread(getaiarray("axis"), ::set_force_color, "blue");
 
-  //more team stuff
   flag_wait("plaza_flare_thrown");
   array_thread(level.team, ::set_pushplayer, false);
   array_thread(level.team, ::set_force_color, "red");
@@ -3219,7 +3077,6 @@ plaza_main2() {
 
   thread plaza_kill_enemies();
 
-  //wait for the fight to be over
   flag_wait("parking_plaza_guys_dead");
 
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
@@ -3269,7 +3126,7 @@ plaza_kill_enemies() {
   if(flag("parking_plaza_guys_dead")) {
     return;
   }
-  //this means the player ran back to join the fight
+
   if(flag("parking_high_spec")) {
     return;
   }
@@ -3505,7 +3362,6 @@ plaza_moveup_foley() {
 plaza_moveup_foley_trans_out() {
   flag_wait_either("plaza_prepare_throw", "plaza_open_fire");
 
-  //"Star"!!!
   add_wait(::_wait, 2.0);
   self add_func(::dialogue_queue, "dcemp_fly_staaar");
   add_abort(::flag_wait, "plaza_open_fire");
@@ -3539,11 +3395,11 @@ plaza_dialogue() {
   level endon("plaza_open_fire");
 
   wait 1;
-  //I don't know what's worse, man- dodging falling helicopters or freezing my ass out here in this monsoon.		
+
   level.dunn dialogue_queue("dcemp_cpd_freezingmonsoon");
-  //Huah.		
+
   level.team["marine1"] dialogue_queue("dcemp_ar2_huah");
-  //Quiet - I think I see something.		
+
   level.foley dialogue_queue("dcemp_fly_quietseesomething");
 }
 
@@ -3557,21 +3413,19 @@ plaza_dialogue2() {
 
   wait .5;
 
-  //Hold your fire.	
   level.foley dialogue_queue("dcemp_fly_holdyourfire");
   wait 1;
-  //Are they friendly	
+
   level.dunn dialogue_queue("dcemp_cpd_aretheyfriendly");
   wait .5;
-  //I don't know…Star!	
+
   level.foley dialogue_queue("dcemp_fly_dontknowstar");
   wait 1;
-  //Cover me.	
+
   level.foley thread dialogue_queue("dcemp_fly_coverme");
 
   flag_set("plaza_prepare_throw");
 
-  //Say Texas, dammit…just say it.
   add_wait(::_wait, 3.5);
   level.dunn add_func(::dialogue_queue, "dcemp_cpd_saytexas");
   add_abort(::flag_wait, "plaza_open_fire");
@@ -3679,7 +3533,6 @@ plaza_moveout_foley() {
     self ent_flag_set("plaza_moveout_exit");
     flag_wait("plaza_moveout_exit");
 
-    //Watch for movement.		
     self thread dialogue_queue("dcemp_fly_watchmovement");
 
     self anim_generic_gravity_run(self, "corner_standR_trans_OUT_6");
@@ -3720,11 +3573,6 @@ plaza_moveout_foley() {
   flag_set("tunnels_main");
 }
 
-/************************************************************************************************************/
-
-/*												START POINTS												*/
-/************************************************************************************************************/
-
 start_intro() {
   script2model_intro();
   flag_set("intro_fx");
@@ -3735,7 +3583,6 @@ start_intro() {
 }
 
 start_iss() {
-  //CRASHSITE STUFF	--> TOP
   movement_grid = maps\dc_crashsite::crash_site_player_and_heli_setup();
 
   ePlayer_rig = spawn_anim_model("player_rig");
@@ -3753,7 +3600,6 @@ start_iss() {
 
   wait .05;
   level.player unlink();
-  //CRASHSITE STUFF	--> BOTTOM
 
   thread flag_set_delayed("emp_entity_cleanup_done", .05);
 }
@@ -3764,7 +3610,6 @@ start_emp() {
   thread vision_set_intro(0);
   thread intro_crash_vehicle_setup();
 
-  //node = getstruct( "emp_start_crash_heli_spot_node", "targetname" );
   heli = getent("heli_crash_site_spotlight", "targetname");
   heli.target = "emp_start_crash_heli_spot_node";
 
@@ -3778,7 +3623,6 @@ start_emp() {
   array_thread(btr80s_end, ::mgOff);
   array_thread(btr80s_end, maps\dc_crashsite::btr80s_end_think);
 
-  //CRASHSITE STUFF	--> TOP
   movement_grid = maps\dc_crashsite::crash_site_player_and_heli_setup();
 
   ePlayer_rig = spawn_anim_model("player_rig");
@@ -3792,7 +3636,6 @@ start_emp() {
   level.player PlayerLinkToDelta(ePlayer_rig, "tag_player", 1, 0, 0, 0, 0, true);
 
   thread maps\dc_crashsite::player_crash_movement(movement_grid["top_left"], movement_grid["bot_right"], ePlayer_rig);
-  //CRASHSITE STUFF	--> BOTTOM
 
   street_setup_stuff();
 
@@ -4085,7 +3928,7 @@ start_parking() {
   objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
-  //sun shadow optimization
+
   setsaveddvar("sm_sunShadowScale", 0.5);
 }
 
@@ -4130,7 +3973,7 @@ start_plaza() {
   objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
-  //sun shadow optimization
+
   setsaveddvar("sm_sunShadowScale", 0.5);
 }
 
@@ -4178,8 +4021,7 @@ dcemp_music() {
       println(" *** MUSIC: dc_emp_missile *** ");
 
       flag_wait("dc_emp_missile_hit");
-      //	thread music_stop( 1.0 );
-      //	level.player thread playlocalsoundwrapper( "dc_emp_missile_hit_sfx" );
+
       thread music_play("dc_emp_missile_hit");
 
       println(" *** MUSIC: dc_emp_missile_hit *** ");

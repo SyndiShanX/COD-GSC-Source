@@ -21,74 +21,38 @@
 #using scripts\shared\vehicles\_quadtank;
 #namespace cp_mi_zurich_coalescence;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function setup_skiptos() {
-  // Unsupported VM revision (1B).
-}
+function setup_skiptos() {}
 
-function force_streamer() {
-  // Unsupported VM revision (1B).
-}
+function force_streamer() {}
 
-function function_ba3ef194() {
-  // Unsupported VM revision (1B).
-}
+function function_ba3ef194() {}
 
-function function_12bc9caf() {
-  // Unsupported VM revision (1B).
-}
+function function_12bc9caf() {}
 
-function function_bcde9a83() {
-  // Unsupported VM revision (1B).
-}
+function function_bcde9a83() {}
 
-function function_ffeb5fe9() {
-  // Unsupported VM revision (1B).
-}
+function function_ffeb5fe9() {}
 
-function function_87d2cd22() {
-  // Unsupported VM revision (1B).
-}
+function function_87d2cd22() {}
 
-function function_be3b9c8() {
-  // Unsupported VM revision (1B).
-}
+function function_be3b9c8() {}
 
-function function_94a8aac7() {
-  // Unsupported VM revision (1B).
-}
+function function_94a8aac7() {}
 
-function function_cb32c615() {
-  // Unsupported VM revision (1B).
-}
+function function_cb32c615() {}
 
-function function_9d9bb681() {
-  // Unsupported VM revision (1B).
-}
+function function_9d9bb681() {}
 
-function theater_fxanim_swap() {
-  // Unsupported VM revision (1B).
-}
+function theater_fxanim_swap() {}
 
-function function_e3c5be62() {
-  // Unsupported VM revision (1B).
-}
+function function_e3c5be62() {}
 
-function function_5cd74265() {
-  // Unsupported VM revision (1B).
-}
+function function_5cd74265() {}
 
-function function_923c5fd7() {
-  // Unsupported VM revision (1B).
-}
+function function_923c5fd7() {}
 
-function function_5080f69e() {
-  // Unsupported VM revision (1B).
-}
+function function_5080f69e() {}

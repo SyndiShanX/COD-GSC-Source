@@ -29,7 +29,6 @@ main() {
 
   flag_init("individual_timers");
 
-  // This makes it so that all players have individual timers. When one player finishes the other timers keep running.
   flag_set("individual_timers");
 
   array_thread(level.players, ::ent_flag_init, "finish_line");
@@ -44,7 +43,6 @@ main() {
   thread enemies();
 
   if(is_coop()) {
-    // don't print "challenge success" because a player can not finish the race, or lose, and that isn't a success
     level.suppress_challenge_success_print = true;
   }
 
@@ -81,32 +79,25 @@ finishline() {
   trigger = getent("finishline", "targetname");
   assert(isDefined(trigger));
 
-  // wait for all players to cross the finish line
   for(;;) {
     trigger waittill("trigger", player);
     assert(isPlayer(player));
 
-    // a player crossed the finish line
     if(isDefined(player.crossed_finish_line))
       continue;
     player.crossed_finish_line = true;
 
     player.finish_time = getTime();
 
-    // stop the players timer
     player ent_flag_set("finish_line");
 
-    // freeze player
     thread freeze_snowmobile(player);
 
-    // player finish race so gets some stars now
     player.award_no_stars = undefined;
 
-    // this player is the winner
     if(!isDefined(level.raceWinner)) {
       level.raceWinner = player;
       if(is_coop()) {
-        //assert( isDefined( player.playername ) );
         thread print_winners();
       }
     }
@@ -116,7 +107,6 @@ finishline() {
       break;
     }
 
-    // print message on screen that we're waiting for other players
     player thread finishline_waiting_for_players_message();
   }
 
@@ -138,7 +128,6 @@ race_finished(was_success) {
     waittillframeend;
     flag_set("so_snowrace_complete");
   } else {
-    // make sure both player times exist because some might not have finished the race
     foreach(player in level.players) {
       if(!isDefined(player))
         continue;
@@ -198,21 +187,7 @@ stop_vehicle() {
 
 enemies() {
   level.enemy_snowmobiles_max = 12;
-  /*
-  skill = getDifficulty();
-  switch( skill )
-  {
-  	case "easy":
-  	case "medium":
-  		return;
-  	case "hard":
-  		level.enemy_snowmobiles_max = 6;
-  		break;
-  	case "fu":
-  		level.enemy_snowmobiles_max = 12;
-  		break;
-  }
-  */
+
   level.track_player_positions = true;
   level.DODGE_DISTANCE = 500;
   level.POS_LOOKAHEAD_DIST = 200;
@@ -300,7 +275,6 @@ spawn_enemy_bike_snowrace() {
   player_sees_me_spawn = within_fov_allplayers(spawn_pos);
 
   if(player_sees_me_spawn) {
-    // player could see us so try spawning in front of the player and drive backwards
     spawn_array = get_spawn_position(player_targ, player_progress + 1000);
     spawn_pos = spawn_array["spawn_pos"];
     my_direction = "backward";
@@ -310,7 +284,6 @@ spawn_enemy_bike_snowrace() {
     }
   }
 
-  // found a safe spawn pos
   spawn_pos = drop_to_ground(spawn_pos);
 
   snowmobile_spawner = getent("snowmobile_spawner", "targetname");
@@ -319,12 +292,7 @@ spawn_enemy_bike_snowrace() {
 
   snowmobile_spawner.origin = spawn_pos;
 
-  //snowmobile_spawner.angles = vectortoangles( snowmobile_path_node.next_node.midpoint - snowmobile_path_node.midpoint );
   snowmobile_spawner.angles = vectortoangles(targ.next_node.midpoint - targ.midpoint);
-  /*
-  if( isalive( level.player ) && isDefined( level.player.vehicle ) )
-  	snowmobile_spawner.angles = level.player.vehicle.angles;
-  */
 
   ai_spawners = snowmobile_spawner get_vehicle_ai_spawners();
   foreach(spawner in ai_spawners) {
@@ -337,7 +305,7 @@ spawn_enemy_bike_snowrace() {
 
   bike thread crash_detection();
   bike.left_spline_path_time = gettime() - 3000;
-  waittillframeend; // for bike.riders to get defined
+  waittillframeend;
   if(!isalive(bike)) {
     return;
   }
@@ -383,10 +351,8 @@ time_expires(time) {
   self.ran_out_of_time = true;
   level notify("time_ran_out");
 
-  // stop the players timer
   self ent_flag_set("finish_line");
 
-  // freeze player
   thread freeze_snowmobile(self);
 
   race_finished(false);

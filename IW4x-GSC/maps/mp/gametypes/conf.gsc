@@ -122,7 +122,6 @@ spawnDogTags(victim, attacker) {
 
     level.dogtags[victim.guid] = maps\mp\gametypes\_gameobjects::createUseObject("any", trigger, visuals, (0, 0, 16));
 
-    //	we don't need these
     _objective_delete(level.dogtags[victim.guid].objIDAllies);
     _objective_delete(level.dogtags[victim.guid].objIDAxis);
     maps\mp\gametypes\_objpoints::deleteObjPoint(level.dogtags[victim.guid].objPoints["allies"]);
@@ -153,11 +152,9 @@ spawnDogTags(victim, attacker) {
   level.dogtags[victim.guid].visuals[1] thread showToTeam(level.dogtags[victim.guid], victim.pers["team"]);
 
   level.dogtags[victim.guid].attacker = attacker;
-  //level.dogtags[victim.guid] thread timeOut( victim );
 
   objective_position(level.dogtags[victim.guid].objId, pos);
   objective_state(level.dogtags[victim.guid].objId, "active");
-  //objective_player( level.dogtags[victim.guid].objId, attacker getEntityNumber() );		
 
   playSoundAtPos(pos, "mp_killconfirm_tags_drop");
 
@@ -190,7 +187,6 @@ showToTeam(gameObject, team) {
 }
 
 onUse(player) {
-  //	friendly pickup
   if(player.pers["team"] == self.victimTeam) {
     self.trigger playSound("mp_killconfirm_tags_deny");
 
@@ -202,18 +198,14 @@ onUse(player) {
       splash = &"SPLASHES_KILL_DENIED";
     }
 
-    //	tell the attacker their kill was denied
     if(isDefined(self.attacker))
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
-  }
-  //	enemy pickup
-  else {
+  } else {
     self.trigger playSound("mp_killconfirm_tags_pickup");
 
     event = "kill_confirmed";
     splash = &"SPLASHES_KILL_CONFIRMED";
 
-    //	if not us, tell the attacker their kill was confirmed
     if(self.attacker != player)
       self.attacker onPickup(event, splash);
 
@@ -224,7 +216,6 @@ onUse(player) {
 
   player onPickup(event, splash);
 
-  //	do all this at the end now so the location doesn't change before playing the sound on the entity
   self resetTags();
 }
 
@@ -310,28 +301,22 @@ clearOnVictimDisconnect(victim) {
   victim waittill("disconnect");
 
   if(isDefined(level.dogtags[guid])) {
-    //	block further use
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-    //	tell the attacker their kill was denied
     if(isDefined(level.dogtags[guid].attacker))
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
 
-    //	play vanish effect, reset, and wait for reset to process
     playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
     wait(0.05);
 
-    //	sanity check before removal
     if(isDefined(level.dogtags[guid])) {
-      //	delete objective and visuals
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
       for(i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
       level.dogtags[guid] notify("deleted");
 
-      //	remove from list
       level.dogtags[guid] = undefined;
     }
   }

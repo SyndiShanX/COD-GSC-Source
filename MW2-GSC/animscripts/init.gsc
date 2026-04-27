@@ -3,26 +3,6 @@
  * Script: animscripts\init.gsc
 ********************************************************/
 
-// Notes about scripts
-//=====================
-//
-// Anim variables
-// -------------- // Anim variables keep track of what the character is doing with respect to his
-// animations.They know if he's standing, crouching, kneeling, walking, running, etc, // so that he can play appropriate transitions to get to the animation he wants.
-// anim_movement - "stop", "walk", "run"// anim_pose - "stand", "crouch", "prone", some others for pain poses.
-// I'm putting functions to do the basic animations to change these variables in
-// SetPoseMovement.gsc, //
-// Error Reporting
-// --------------- // To report a script error condition (similar to assert(0)), I assign a non-existent variable to
-// the variable homemade_errorI use the name of the non-existent variable to try to explain the
-// error.For example:
-// 		homemade_error = Unexpected_anim_pose_value + self.a.pose;
-// I also have a kind of assert, called as follows:
-//		[[anim.assertEX(condition, message_string);
-// If condition evaluates to 0, the assert fires, prints message_string and stops the server. Since
-// I don't have stack traces of any kind, the message string needs to say from where the assert was
-// called.
-
 #include animscripts\Utility;
 #include maps\_utility;
 #include animscripts\Combat_utility;
@@ -43,25 +23,19 @@ initWeapon(weapon) {
 isWeaponInitialized(weapon) {
   return isDefined(self.weaponInfo[weapon]);
 }
-
-// Persistent global aiming limits / tolerances
 setGlobalAimSettings() {
   anim.coverCrouchLeanPitch = 55;
 
-  // Used by 'Explosed' combat (combat scirpt)
   anim.aimYawDiffFarTolerance = 10;
   anim.aimYawDiffCloseDistSQ = 64 * 64;
   anim.aimYawDiffCloseTolerance = 45;
   anim.aimPitchDiffTolerance = 20;
 
-  // Used by LastStand (pain script)
   anim.painYawDiffFarTolerance = 25;
   anim.painYawDiffCloseDistSQ = anim.aimYawDiffCloseDistSQ;
   anim.painYawDiffCloseTolerance = anim.aimYawDiffCloseTolerance;
   anim.painPitchDiffTolerance = 30;
 
-  // Absolute maximum trackLoop angles after which the weights are reset to 0
-  // These must be greater than the maximum possible aiming limit for all stances
   anim.maxAngleCheckYawDelta = 65;
   anim.maxAngleCheckPitchDelta = 65;
 }
@@ -93,7 +67,6 @@ main() {
   self initWeapon(self.secondaryweapon);
   self initWeapon(self.sidearm);
 
-  // this will cause us to think we're using our sidearm when we're not. the aitype should not allow this.
   assertex(self.primaryweapon != self.sidearm || self.primaryweapon == "none", "AI \"" + self.classname + "\" with export " + self.export+" has both a sidearm and primaryweapon of \"" + self.primaryweapon + "\".");
   assertex(self.secondaryweapon != self.sidearm || self.secondaryweapon == "none" || !self everUsesSecondaryWeapon(), "AI \"" + self.classname + "\" with export " + self.export+" has both a sidearm and secondaryweapon of \"" + self.primaryweapon + "\".");
 
@@ -119,19 +92,15 @@ main() {
   if(hasRocketLauncher)
     self thread animscripts\shared::rpgPlayerRepulsor();
 
-  // TODO: proper ammo tracking
   self.a.rockets = 3;
   self.a.rocketVisible = true;
 
-  //	SetWeaponDist();
-
-  // Set initial states for poses
   self.a.pose = "stand";
   self.a.grenadeThrowPose = "stand";
   self.a.movement = "stop";
   self.a.state = "stop";
   self.a.special = "none";
-  self.a.gunHand = "none"; // Initialize so that PutGunInHand works properly.
+  self.a.gunHand = "none";
   self.a.PrevPutGunInHandTime = -1;
   self.dropWeapon = true;
   self.minExposedGrenadeDist = 750;
@@ -152,14 +121,12 @@ main() {
   self.a.reactToBulletChance = 0.8;
 
   if(self.team != "allies") {
-    // only select allies have IR laser and beacon
     self.has_no_ir = true;
   }
 
   self.a.postScriptFunc = undefined;
   self.a.stance = "stand";
   self.choosePoseFunc = animscripts\utility::choosePose;
-  //self.a.state = "idle";
 
   self._animActive = 0;
   self._lastAnimTime = 0;
@@ -183,7 +150,6 @@ main() {
 
   self.a.nextStandingHitDying = false;
 
-  // Makes AI able to throw grenades at other AI.
   if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
 
@@ -193,27 +159,25 @@ main() {
 
   thread animscripts\utility::UpdateDebugInfo();
 
-  self animscripts\weaponList::RefillClip(); // Start with a full clip.
+  self animscripts\weaponList::RefillClip();
 
-  // state tracking
-  self.lastEnemySightTime = 0; // last time we saw our current enemy
-  self.combatTime = 0; // how long we've been in / out of combat
+  self.lastEnemySightTime = 0;
+  self.combatTime = 0;
 
-  self.suppressed = false; // if we're currently suppressed
-  self.suppressedTime = 0; // how long we've been in / out of suppression
+  self.suppressed = false;
+  self.suppressedTime = 0;
 
   if(self.team == "allies")
     self.suppressionThreshold = 0.5;
   else
     self.suppressionThreshold = 0.0;
 
-  // Random range makes the grenades less accurate and do less damage, but also makes it difficult to throw back.
   if(self.team == "allies")
     self.randomGrenadeRange = 0;
   else
     self.randomGrenadeRange = 256;
 
-  self.ammoCheatInterval = 8000; // if out of ammo and it's been this long since last time, do an instant reload
+  self.ammoCheatInterval = 8000;
   self.ammoCheatTime = 0;
   animscripts\animset::set_animset_run_n_gun();
 
@@ -310,11 +274,8 @@ setNameAndRank_andAddToSquad() {
 
   self maps\_names::get_name();
 
-  // needs to run after the name has been set since bcs changes self.voice from "multilingual"//to something more specific
-  self thread animscripts\squadManager::addToSquad(); // slooooow
+  self thread animscripts\squadManager::addToSquad();
 }
-
-// Debug thread to see when stances are being allowed
 PollAllowedStancesThread() {
   for(;;) {
     if(self isStanceAllowed("stand")) {
@@ -343,7 +304,7 @@ PollAllowedStancesThread() {
     offset = (0, 0, -10);
     for(i = 0; i < line.size; i++) {
       textPos = (aboveHead[0] + (offset[0] * i), aboveHead[1] + (offset[1] * i), aboveHead[2] + (offset[2] * i));
-      print3d(textPos, line[i], color[i], 1, 0.75); // origin, text, RGB, alpha, scale
+      print3d(textPos, line[i], color[i], 1, 0.75);
     }
     wait 0.05;
   }
@@ -384,7 +345,6 @@ enemyNotify() {
 }
 
 initWindowTraverse() {
-  // used to blend the traverse window_down smoothly at the end
   level.window_down_height[0] = -36.8552;
   level.window_down_height[1] = -27.0095;
   level.window_down_height[2] = -15.5981;
@@ -400,14 +360,13 @@ initWindowTraverse() {
 }
 
 firstInit() {
-  // Initialization that should happen once per level
-  if(isDefined(anim.NotFirstTime)) // Use this to trigger the first init
+  if(isDefined(anim.NotFirstTime))
     return;
   anim.NotFirstTime = true;
 
   animscripts\animset::init_anim_sets();
 
-  anim.useFacialAnims = false; // remove me when facial anims are fixed
+  anim.useFacialAnims = false;
 
   maps\_load::init_level_players();
 
@@ -449,7 +408,6 @@ firstInit() {
 
   anim.shootEnemyWrapper_func = ::shootEnemyWrapper_shootNotify;
 
-  // scripted mode uses a special function. Faster to use a function pointer based on script than use an if statement in a popular loop.
   anim.fire_notetrack_functions["scripted"] = animscripts\shared::fire_straight;
   anim.fire_notetrack_functions["cover_right"] = animscripts\shared::shootNotetrack;
   anim.fire_notetrack_functions["cover_left"] = animscripts\shared::shootNotetrack;
@@ -457,7 +415,6 @@ firstInit() {
   anim.fire_notetrack_functions["cover_stand"] = animscripts\shared::shootNotetrack;
   anim.fire_notetrack_functions["move"] = animscripts\shared::shootNotetrack;
 
-  // string based array for notetracks
   animscripts\shared::registerNoteTracks();
 
   setDvarIfUninitialized("debug_delta", "off");
@@ -471,13 +428,12 @@ firstInit() {
   animscripts\SetPoseMovement::InitPoseMovementFunctions();
   animscripts\face::InitLevelFace();
 
-  // probabilities of burst fire shots
   anim.burstFireNumShots = array(1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 5);
   anim.fastBurstFireNumShots = array(2, 3, 3, 3, 4, 4, 4, 5, 5);
   anim.semiFireNumShots = array(1, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5);
 
-  anim.badPlaces = []; // queue for animscript badplaces
-  anim.badPlaceInt = 0; // assigns unique names to animscript badplaces since we cant save a badplace as an entity
+  anim.badPlaces = [];
+  anim.badPlaceInt = 0;
 
   anim.player = getEntArray("player", "classname")[0];
 
@@ -557,7 +513,6 @@ initGrenades() {
 }
 
 initAdvanceToEnemy() {
-  // use team ID for now. Should be done per group of AI or something more specific
   level.lastAdvanceToEnemyTime = [];
   level.lastAdvanceToEnemyTime["axis"] = 0;
   level.lastAdvanceToEnemyTime["allies"] = 0;
@@ -584,8 +539,8 @@ initAdvanceToEnemy() {
   level.advanceToEnemyGroup["team3"] = 0;
   level.advanceToEnemyGroup["neutral"] = 0;
 
-  level.advanceToEnemyInterval = 30000; // how often AI will try to run directly to their enemy if the enemy is not visible
-  level.advanceToEnemyGroupMax = 3; // group size for AI running to their enemy
+  level.advanceToEnemyInterval = 30000;
+  level.advanceToEnemyGroupMax = 3;
 }
 
 AITurnNotifies() {
@@ -614,7 +569,7 @@ AITurnNotifies() {
 setNextPlayerGrenadeTime() {
   assert(isPlayer(self));
   waittillframeend;
-  // might not be defined if maps\_load::main() wasn't called
+
   if(isDefined(self.gs.playerGrenadeRangeTime)) {
     maxTime = int(self.gs.playerGrenadeRangeTime * 0.7);
     if(maxTime < 1)
@@ -641,10 +596,8 @@ beginGrenadeTracking() {
 }
 
 setupRandomTable() {
-  // 60 is chosen because it is divisible by 1,2,3,4,5, and 6, // and it's also high enough to get some good randomness over different seed values
   anim.randomIntTableSize = 60;
 
-  // anim.randomIntTable is a permutation of integers 0 through anim.randomIntTableSize - 1
   anim.randomIntTable = [];
   for(i = 0; i < anim.randomIntTableSize; i++)
     anim.randomIntTable[i] = i;
@@ -660,8 +613,6 @@ setupRandomTable() {
 onDeath() {
   self waittill("death");
   if(!isDefined(self)) {
-    // we were deleted and we're not running the death script.
-    // still safe to access our variables as a removed entity though:
     if(isDefined(self.a.usingTurret))
       self.a.usingTurret delete();
   }

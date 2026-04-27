@@ -9,24 +9,13 @@
 #include maps\so_escape_airport_code;
 #include maps\airport_code;
 
-/*------------------- tweakables -------------------*/
-
 CONST_regular_obj = &"SO_ESCAPE_AIRPORT_OBJ_REGULAR";
 CONST_hardened_obj = &"SO_ESCAPE_AIRPORT_OBJ_HARDENED";
 CONST_veteran_obj = &"SO_ESCAPE_AIRPORT_OBJ_VETERAN";
 
-/*------------------- tweakables -------------------*/
-
 main() {
   level.so_compass_zoom = "close";
   level.friendlyfire_warnings = true;
-
-  // Special Op mode deleting all original spawn triggers, vehicles and spawners
-  //	::type_script_model_civilian
-  //	::type_spawners
-  //	::type_vehicle
-  //	::type_spawn_trigger
-  //	::type_trigger
 
   so_delete_all_by_type(::type_spawn_trigger, ::type_vehicle, ::type_spawners, ::type_script_model_civilian);
 
@@ -51,14 +40,12 @@ main() {
 }
 
 disable_elevators() {
-  // Connect the top floor paths for the elevator that doesn't crash.
   elevator = level.elevators[0];
   left_door = elevator common_scripts\_elevator::get_outer_leftdoor(1);
   right_door = elevator common_scripts\_elevator::get_outer_rightdoor(1);
   left_door ConnectPaths();
   right_door ConnectPaths();
 
-  // Just remove the triggers in the elevator
   housings = getEntArray("elevator_housing", "targetname");
 
   foreach(housing in housings) {
@@ -107,14 +94,12 @@ start_so_escape() {
 
 #using_animtree("generic_human");
 so_escape_airport_init() {
-  // Will create an _anim file if we get more.
   level.scr_anim["generic"]["pronehide_dive"] = % hunted_dive_2_pronehide_v1;
 
   flag_init("escaped_terminal");
   flag_init("start_terminal");
   flag_init("challenge_success");
 
-  /*dummy*/
   flag_init("escaped_trigger");
 
   thread shoot_out_glass();
@@ -131,28 +116,21 @@ so_escape_airport_init() {
   thread crash_elevator();
   array_thread(getEntArray("glass_delete", "targetname"), ::delete_glass);
 
-  // enemy_move_to_struct( move trigger, seek_goalradius, stay, duration of stay before seeking )
-
-  // First round of guys to the right of the entrance. Should pull player away from obvious escalator target.
   array_spawn_function_noteworthy("enemy_waiting_area_intro", ::enemy_move_to_struct, "enemy_waiting_area_intro", 384);
   level.enemy_remove_trigs["enemy_waiting_area_intro"] = 0;
 
-  // Surround the player now that they've gone into the exposed area
   array_spawn_function_noteworthy("enemy_waiting_area_above", ::enemy_move_to_struct, "enemy_waiting_area_above", 384, true, randomintrange(20, 30));
   array_spawn_function_noteworthy("enemy_waiting_area_above", ::enemy_ignore_cover);
   level.enemy_remove_trigs["enemy_waiting_area_above"] = 0;
 
-  // Urban ghillie up into view.
   array_spawn_function_noteworthy("enemy_dining_area_prone", ::enemy_prone_to_stand, "enemy_dining_area_riot", 512);
   array_spawn_function_noteworthy("enemy_dining_area_riot", ::enemy_move_to_struct, "enemy_dining_area_riot", 512, true, randomintrange(10, 15));
   level.enemy_remove_trigs["enemy_dining_area_prone"] = 0;
 
-  // Hitting hard with shield guys now
   array_spawn_function_noteworthy("enemy_store_area_prone", ::enemy_prone_to_stand, "enemy_store_area_start", 512);
   array_spawn_function_noteworthy("enemy_store_area_start", ::enemy_move_to_struct, "enemy_store_area_start", 512, true, randomintrange(10, 15));
   level.enemy_remove_trigs["enemy_store_area_start"] = 0;
 
-  // Hitting hard with shield guys now
   array_spawn_function_noteworthy("enemy_security_area_top", ::enemy_move_to_struct, "enemy_security_area_final", 1024);
   array_spawn_function_noteworthy("enemy_security_area_bottom", ::enemy_move_to_struct, "enemy_security_area_final", 1024, true, randomintrange(30, 45));
   array_spawn_function_noteworthy("enemy_security_area_final", ::enemy_move_to_struct, "enemy_security_area_final", 1024, true, randomintrange(45, 135));
@@ -162,16 +140,16 @@ so_escape_airport_init() {
 
   assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_setup_regular();
-      break; // Regular
+      break;
     case 2:
       so_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_setup_veteran();
-      break; // Veteran
+      break;
   }
 
   thread objective_breadcrumb();

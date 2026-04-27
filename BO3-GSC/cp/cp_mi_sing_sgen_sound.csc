@@ -4,86 +4,44 @@
 #using scripts\shared\trigger_shared;
 #namespace cp_mi_sing_sgen_sound;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function decon_light() {
-  // Unsupported VM revision (1B).
-}
+function decon_light() {}
 
-function force_underwater_context() {
-  // Unsupported VM revision (1B).
-}
+function force_underwater_context() {}
 
-function release_underwater_context() {
-  // Unsupported VM revision (1B).
-}
+function release_underwater_context() {}
 
-function sndmusicrampers() {
-  // Unsupported VM revision (1B).
-}
+function sndmusicrampers() {}
 
-function sndrobothall() {
-  // Unsupported VM revision (1B).
-}
+function sndrobothall() {}
 
-function sndrobothallend() {
-  // Unsupported VM revision (1B).
-}
+function sndrobothallend() {}
 
-function sndramperthink() {
-  // Unsupported VM revision (1B).
-}
+function sndramperthink() {}
 
-function function_860d167b() {
-  // Unsupported VM revision (1B).
-}
+function function_860d167b() {}
 
-function sndscares() {
-  // Unsupported VM revision (1B).
-}
+function sndscares() {}
 
-function sndscaretrig() {
-  // Unsupported VM revision (1B).
-}
+function sndscaretrig() {}
 
-function sndjumpland() {
-  // Unsupported VM revision (1B).
-}
+function sndjumpland() {}
 
-function sndjumplandtrig() {
-  // Unsupported VM revision (1B).
-}
+function sndjumplandtrig() {}
 
-function sndjumplandtrigplaySound() {
-  // Unsupported VM revision (1B).
-}
+function sndjumplandtrigplaySound() {}
 
-function function_4e5472a7() {
-  // Unsupported VM revision (1B).
-}
+function function_4e5472a7() {}
 
-function function_45100b4d() {
-  // Unsupported VM revision (1B).
-}
+function function_45100b4d() {}
 
-function battle_cry() {
-  // Unsupported VM revision (1B).
-}
+function battle_cry() {}
 
-function function_6c080ebb() {
-  // Unsupported VM revision (1B).
-}
+function function_6c080ebb() {}
 
-function function_9d912a9d() {
-  // Unsupported VM revision (1B).
-}
+function function_9d912a9d() {}
 
-function function_698dfbe4() {
-  // Unsupported VM revision (1B).
-}
+function function_698dfbe4() {}
 
-function function_66507a64() {
-  // Unsupported VM revision (1B).
-}
+function function_66507a64() {}

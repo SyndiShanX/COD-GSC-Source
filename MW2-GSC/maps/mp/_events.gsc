@@ -81,10 +81,7 @@ onPlayerConnect() {
   }
 }
 
-damagedPlayer(victim, damage, weapon) {
-  //	self giveAdrenaline( "damage" );
-  //	victim giveAdrenaline( "damaged" );
-}
+damagedPlayer(victim, damage, weapon) {}
 
 killedPlayer(killId, victim, weapon, meansOfDeath) {
   victimGuid = victim.guid;
@@ -99,7 +96,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
   level.numKills++;
 
-  // a player is either damaged, or killed; never both
   self.damagedPlayers[victimGuid] = undefined;
 
   self giveAdrenaline("kill");
@@ -108,9 +104,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
   if(!isKillstreakWeapon(weapon)) {
     if(weapon == "none")
       return false;
-
-    //if( isSubStr( weapon, "ranger" ) && isDefined( self.bothBarrels ) )This wont work because this is called before weapons self.bothbarrels would be set
-    //	self.modifiers["bothbarrels"] = true;
 
     if(isDefined(self.pers["copyCatLoadout"]) && isDefined(self.pers["copyCatLoadout"]["owner"])) {
       if(victim == self.pers["copyCatLoadout"]["owner"])
@@ -130,7 +123,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
       weaponClass = getWeaponClass(weapon);
 
-      if(getTime() == victim.attackerData[self.guid].firstTimeDamaged && meansOfDeath != "MOD_MELEE" && ( /*weaponClass == "weapon_shotgun" ||*/ weaponClass == "weapon_sniper")) {
+      if(getTime() == victim.attackerData[self.guid].firstTimeDamaged && meansOfDeath != "MOD_MELEE" && (weaponClass == "weapon_sniper")) {
         self.modifiers["oneshotkill"] = true;
         self thread maps\mp\gametypes\_hud_message::SplashNotifyDelayed("one_shot_kill");
       }
@@ -183,11 +176,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     if(isAlive(self) && !self isUsingRemote() && (meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_HEAD_SHOT") && distance(attackerPosition, victim.origin) > 1536 && !isKillstreakWeapon(weapon) && !isDefined(self.assistedSuicide))
       self thread longshot(killId);
 
-    //if( isAlive( self ) && self.health < 20 && isDefined( self.attackers ) && self.attackers.size == 1 && self.attackers[0] == victim )
-    //	victim thread consolation( killId );
-
     if(isDefined(victim.killstreaks[victim.pers["cur_kill_streak"] + 1])) {
-      // playercard splash for the killstreak stopped
       self buzzKill(killId, victim);
     }
 
@@ -205,7 +194,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
   self.killedPlayers[victimGuid]++;
 
-  //this sets player stat for routine customer award
   if(self.killedPlayers[victimGuid] > self.greatestUniquePlayerKills)
     self setPlayerStat("killedsameplayer", self.killedPlayers[victimGuid]);
 
@@ -274,8 +262,6 @@ checkMatchDataKills(killId, victim, weapon, meansOfDeath) {
       break;
   }
 }
-
-// Need to make sure these only apply to kills of an enemy, not friendlies or yourself
 checkMatchDataWeaponKills(victim, weapon, meansOfDeath, weaponType) {
   attacker = self;
   kill_ref = undefined;
@@ -337,12 +323,9 @@ checkMatchDataWeaponKills(victim, weapon, meansOfDeath, weaponType) {
     attacker incPlayerStat("hipfirekills", 1);
   }
 }
-
-// Need to make sure these only apply to kills of an enemy, not friendlies or yourself
 checkMatchDataEquipmentKills(victim, weapon, meansOfDeath) {
   attacker = self;
 
-  // equipment kills
   switch (weapon) {
     case "frag_grenade_mp":
       attacker incPlayerStat("fragkills", 1);
@@ -391,14 +374,7 @@ camperCheck() {
   self.lastCampKillTime = getTime();
 }
 
-consolation(killId) {
-  /*
-  value = int( maps\mp\gametypes\_rank::getScoreInfoValue( "kill" ) * 0.25 );
-
-  self thread maps\mp\gametypes\_hud_message::SplashNotifyDelayed( "consolation", value );
-  self thread maps\mp\gametypes\_rank::giveRankXP( "consolation", value );
-  */
-}
+consolation(killId) {}
 
 longshot(killId) {
   self.modifiers["longshot"] = true;
@@ -500,10 +476,8 @@ multiKill(killId, killCount) {
 
   self thread maps\mp\_matchdata::logMultiKill(killId, killCount);
 
-  // update player multikill record
   self setPlayerStatIfGreater("multikill", killCount);
 
-  // update player multikill count
   self incPlayerStat("mostmultikills", 1);
 }
 

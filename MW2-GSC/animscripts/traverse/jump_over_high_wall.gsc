@@ -3,13 +3,9 @@
  * Script: animscripts\traverse\jump_over_high_wall.gsc
 ********************************************************/
 
-// Jump_over_high_wall.gsc
-// Makes the character dive over a high wall.Designed for getting bad guys into levels - it looks bad from the back.
-
 #using_animtree("generic_human");
 
 main() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -17,7 +13,6 @@ main() {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

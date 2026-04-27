@@ -21,66 +21,34 @@
 #using scripts\shared\vehicle_shared;
 #namespace cp_mi_sing_sgen_water_ride;
 
-function skipto_underwater_rail_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_underwater_rail_init() {}
 
-function skipto_underwater_rail_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_underwater_rail_done() {}
 
-function hendricks_blow_wall() {
-  // Unsupported VM revision (1B).
-}
+function hendricks_blow_wall() {}
 
-function vo() {
-  // Unsupported VM revision (1B).
-}
+function vo() {}
 
-function player_rail_sequence_init() {
-  // Unsupported VM revision (1B).
-}
+function player_rail_sequence_init() {}
 
-function player_rail_sequence_start() {
-  // Unsupported VM revision (1B).
-}
+function player_rail_sequence_start() {}
 
-function setup_debris() {
-  // Unsupported VM revision (1B).
-}
+function setup_debris() {}
 
-function debris_impact() {
-  // Unsupported VM revision (1B).
-}
+function debris_impact() {}
 
-function static_hurt() {
-  // Unsupported VM revision (1B).
-}
+function static_hurt() {}
 
-function play_current_fx() {
-  // Unsupported VM revision (1B).
-}
+function play_current_fx() {}
 
-function handle_split_off() {
-  // Unsupported VM revision (1B).
-}
+function handle_split_off() {}
 
-function player_rail_sequence() {
-  // Unsupported VM revision (1B).
-}
+function player_rail_sequence() {}
 
-function function_4f28280b() {
-  // Unsupported VM revision (1B).
-}
+function function_4f28280b() {}
 
-function player_rail_control() {
-  // Unsupported VM revision (1B).
-}
+function player_rail_control() {}
 
-function handle_impact() {
-  // Unsupported VM revision (1B).
-}
+function handle_impact() {}
 
-function init_rail_bot() {
-  // Unsupported VM revision (1B).
-}
+function init_rail_bot() {}

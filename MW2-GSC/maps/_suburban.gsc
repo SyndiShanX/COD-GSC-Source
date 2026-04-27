@@ -7,31 +7,18 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 
-/*QUAKED script_vehicle_suburban (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_suburban::main( "vehicle_suburban" );
-
-and these lines in your CSV:
-#include,vehicle_suburban_suburban
-sound,vehicle_suburban,vehicle_standard,all_sp
-
-defaultmdl="vehicle_suburban"default:"vehicletype" "suburban"default:"script_team" "allies"*/
-
-//
-
 main(model, type) {
   build_template("suburban", model, type);
   build_localinit(::init_local);
-  build_deathmodel("vehicle_suburban", "vehicle_suburban_destroyed"); // "suburban_destroy" when finished
-  build_deathmodel("vehicle_suburban_minigun_viewmodel", "vehicle_suburban_minigun_viewmodel"); // "suburban_destroy" when finished
+  build_deathmodel("vehicle_suburban", "vehicle_suburban_destroyed");
+  build_deathmodel("vehicle_suburban_minigun_viewmodel", "vehicle_suburban_minigun_viewmodel");
 
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_suburban", "TAG_DEATH_FX", "explo_metal_rand");
 
   build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   build_treadfx();
-  //build_life( 100 );
+
   build_life(999, 500, 1500);
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
@@ -44,16 +31,6 @@ init_local() {}
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
-  /*	positions[ 0 ].vehicle_getoutanim = %uaz_driver_exit_into_run_door;
-  	positions[ 1 ].vehicle_getoutanim = %uaz_rear_driver_exit_into_run_door;
-  	positions[ 2 ].vehicle_getoutanim = %uaz_passenger_exit_into_run_door;
-  	positions[ 3 ].vehicle_getoutanim = %uaz_passenger2_exit_into_run_door;
-
-  	positions[ 0 ].vehicle_getinanim = %uaz_driver_enter_from_huntedrun_door;
-  	positions[ 1 ].vehicle_getinanim = %uaz_rear_driver_enter_from_huntedrun_door;
-  	positions[ 2 ].vehicle_getinanim = %uaz_passenger_enter_from_huntedrun_door;
-  	positions[ 3 ].vehicle_getinanim = %uaz_passenger2_enter_from_huntedrun_door;
-  */
   positions[0].vehicle_getoutanim = % suburban_dismount_frontL_door;
   positions[1].vehicle_getoutanim = % suburban_dismount_frontR_door;
   positions[2].vehicle_getoutanim = % suburban_dismount_backL_door;
@@ -86,10 +63,9 @@ setanims() {
   positions[1].getout = % suburban_dismount_frontR;
   positions[2].getout = % suburban_dismount_backL;
   positions[3].getout = % suburban_dismount_backR;
-  positions[5].getout = % suburban_dismount_backL; // cuts through the vehicle
-  positions[4].getout = % suburban_dismount_backR; // cuts through the vehicle
+  positions[5].getout = % suburban_dismount_backL;
+  positions[4].getout = % suburban_dismount_backR;
 
-  // old get in anims
   positions[0].getin = % humvee_driver_climb_in;
   positions[1].getin = % humvee_passenger_in_L;
   positions[2].getin = % humvee_passenger_in_R;
@@ -98,31 +74,6 @@ setanims() {
   positions[5].getin = % humvee_passenger_in_R;
 
   return positions;
-
-  /*	OLD ANIMS
-
-  	positions[ 0 ].idle[ 0 ] = %humvee_driver_twitch_1;
-  	positions[ 0 ].idle[ 1 ] = %humvee_driver_climb_idle;
-  	positions[ 0 ].idleoccurrence[ 0 ] = 100;
-  	positions[ 0 ].idleoccurrence[ 1 ] = 1000;
-
-  	positions[ 1 ].idle[ 0 ] = %humvee_passenger_twitch_1_R;
-  	positions[ 1 ].idle[ 1 ] = %humvee_passenger_idle_L;
-  	positions[ 1 ].idleoccurrence[ 0 ] = 100;
-  	positions[ 1 ].idleoccurrence[ 1 ] = 1000;
-
-  	positions[ 2 ].idle = %humvee_passenger_idle_R;
-  	positions[ 3 ].idle = %humvee_passenger_idle_R;
-  	positions[ 4 ].idle = %humvee_passenger_idle_R;
-  	positions[ 5 ].idle = %humvee_passenger_idle_R;
-
-  	positions[ 0 ].getout = %humvee_driver_climb_out;
-  	positions[ 1 ].getout = %humvee_passenger_out_R;
-  	positions[ 2 ].getout = %humvee_passenger_out_R;
-  	positions[ 3 ].getout = %humvee_passenger_out_L;
-  	positions[ 4 ].getout = %humvee_passenger_out_L;
-  	positions[ 5 ].getout = %humvee_passenger_out_R;
-  */
 }
 
 unload_groups() {

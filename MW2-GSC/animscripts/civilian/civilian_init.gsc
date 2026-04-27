@@ -35,8 +35,6 @@ civilian_init() {
     level.scr_anim["default_civilian"]["run_hunched_combat"][0] = % civilian_run_hunched_A;
     level.scr_anim["default_civilian"]["run_hunched_combat"][1] = % civilian_run_hunched_C;
     level.scr_anim["default_civilian"]["run_hunched_combat"][2] = % civilian_run_hunched_flinch;
-    //%civilian_run_hunched_B;
-    //%civilian_run_hunched_dodge;
 
     level.scr_anim["default_civilian"]["run_noncombat"][0] = % civilian_walk_cool;
 
@@ -44,8 +42,6 @@ civilian_init() {
     weights[0] = 3;
     weights[1] = 3;
     weights[2] = 1;
-    //weights[ 3 ] = 1;
-    //weights[ 4 ] = 1;
 
     level.scr_anim["default_civilian"]["run_hunched_weights"] = get_cumulative_weights(weights);
 
@@ -55,21 +51,15 @@ civilian_init() {
     level.scr_anim["default_civilian"]["run_weights"] = get_cumulative_weights(weights);
 
     level.scr_anim["default_civilian"]["idle_noncombat"][0] = % unarmed_cowerstand_idle;
-    //level.scr_anim[ "default_civilian" ][ "idle_noncombat" ][ 1 ] 	= %unarmed_cowerstand_pointidle;
 
     level.scr_anim["default_civilian"]["idle_combat"][0] = % casual_crouch_v2_idle;
     level.scr_anim["default_civilian"]["idle_combat"][1] = % unarmed_cowercrouch_idle_duck;
-
-    // this animations look bad
-    //level.scr_anim[ "default_civilian" ][ "idle_combat" ][ 0 ] 	= %unarmed_crouch_idle1;
-    //level.scr_anim[ "default_civilian" ][ "idle_combat" ][ 1 ] 	= %unarmed_crouch_twitch1;
 
     anim.civilianFlashedArray[0] = % unarmed_cowerstand_react;
     anim.civilianFlashedArray[1] = % unarmed_cowercrouch_react_A;
     anim.civilianFlashedArray[2] = % unarmed_cowercrouch_react_B;
   }
 
-  // set the civilians animname to use defaults, or specific group if specified in radiant
   animName = undefined;
   if(isDefined(self.civilian_walk_animation)) {
     self.animname = self.civilian_walk_animation;
@@ -84,7 +74,6 @@ civilian_init() {
 
   self thread checkCombatState();
 
-  // Make sure all required anims exist for this civilian, or set some defaults if they weren't specified
   assert(isDefined(level.scr_anim[self.animname]["run_noncombat"]));
 
   self.dropWeapon = false;
@@ -137,7 +126,6 @@ initCivilianProps() {
 startNonCombat() {
   self.turnRate = 0.2;
 
-  // dodge animations
   if(isDefined(self.civilian_walk_animation)) {
     dodgeLeft = % civilian_briefcase_walk_dodge_L;
     dodgeRight = % civilian_briefcase_walk_dodge_R;
@@ -151,7 +139,6 @@ startNonCombat() {
     self animscripts\move::setDodgeAnims(dodgeLeft, dodgeRight);
   }
 
-  // move turn animations
   if(isDefined(level.scr_anim[self.animname]["turn_left_90"])) {
     assert(isDefined(level.scr_anim[self.animname]["turn_right_90"]));
     self.pathTurnAnimOverrideFunc = animscripts\civilian\civilian_move::civilian_nonCombatMoveTurn;
@@ -226,6 +213,6 @@ checkCombatState() {
 
     wasInCombat = isInCombat;
 
-    wait 0.05; // TEMP make this an alert level change wait when code is in.
+    wait 0.05;
   }
 }

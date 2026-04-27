@@ -30,29 +30,25 @@ init() {
   level.scavenger_altmode = true;
   level.scavenger_secondary = true;
 
-  // 0 is not valid
   level.maxPerPlayerExplosives = max(getIntProperty("scr_maxPerPlayerExplosives", 2), 1);
   level.riotShieldXPBullets = getIntProperty("scr_riotShieldXPBullets", 15);
 
   switch (getIntProperty("perk_scavengerMode", 0)) {
-    case 1: // disable altmode
+    case 1:
       level.scavenger_altmode = false;
       break;
 
-    case 2: // disable secondary
+    case 2:
       level.scavenger_secondary = false;
       break;
 
-    case 3: // disable altmode and secondary
+    case 3:
       level.scavenger_altmode = false;
       level.scavenger_secondary = false;
       break;
   }
 
   attachmentList = getAttachmentList();
-
-  // assigns weapons with stat numbers from 0-149
-  // attachments are now shown here, they are per weapon settings instead
 
   max_weapon_num = 149;
 
@@ -73,10 +69,8 @@ init() {
       printLn("weapon,mp/" + weapon_name + "_mp");
     }
 
-    // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
     attachmentNames = [];
     for(innerLoopCount = 0; innerLoopCount < 10; innerLoopCount++) {
-      // generating attachment combinations
       attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
 
       if(attachmentName == "") {
@@ -86,7 +80,6 @@ init() {
       attachmentNames[attachmentName] = true;
     }
 
-    // generate an alphabetized attachment list
     attachments = [];
     foreach(attachmentName in attachmentList) {
       if(!isDefined(attachmentNames[attachmentName])) {
@@ -147,11 +140,8 @@ init() {
   level.claymoreDetectionGracePeriod = .75;
   level.claymoreDetonateRadius = 192;
 
-  // this should move to _stinger.gsc
   level.stingerFXid = loadfx("explosions/aerial_explosion_large");
 
-  // generating weapon type arrays which classifies the weapon as primary (back stow), pistol, or inventory (side pack stow)
-  // using mp/statstable.csv's weapon grouping data ( numbering 0 - 149 )
   level.primary_weapon_array = [];
   level.side_arm_array = [];
   level.grenade_array = [];
@@ -200,8 +190,6 @@ init() {
   level.c4explodethisframe = false;
 
   array_thread(getEntArray("misc_turret", "classname"), ::turret_monitorUse);
-
-  //	thread dumpIt();
 }
 
 dumpIt() {
@@ -218,14 +206,6 @@ dumpIt() {
       continue;
     }
     if(getDvar("scr_dump_weapon_challenges") != "") {
-      /*
-      sharpshooter
-      marksman
-      veteran
-      expert
-      master
-      */
-
       weaponLStringName = tableLookup("mp/statsTable.csv", 0, weaponId, 3);
       weaponRealName = tableLookupIString("mp/statsTable.csv", 0, weaponId, 3);
 
@@ -235,23 +215,6 @@ dumpIt() {
       weaponGroup = tableLookup("mp/statsTable.csv", 0, weaponId, 2);
 
       weaponGroupSuffix = getSubStr(weaponGroup, prefix.size, weaponGroup.size);
-
-      /*
-      iprintln( "REFERENCE TITLE_" + weaponCapsName + "_SHARPSHOOTER" );
-      iprintln( "LANG_ENGLISH", weaponRealName, ": Sharpshooter" );
-      iprintln( "" );
-      iprintln( "REFERENCE TITLE_" + weaponCapsName + "_MARKSMAN" );
-      iprintln( "LANG_ENGLISH", weaponRealName, ": Marksman" );
-      iprintln( "" );
-      iprintln( "REFERENCE TITLE_" + weaponCapsName + "_VETERAN" );
-      iprintln( "LANG_ENGLISH", weaponRealName, ": Veteran" );
-      iprintln( "" );
-      iprintln( "REFERENCE TITLE_" + weaponCapsName + "_EXPERT" );
-      iprintln( "LANG_ENGLISH", weaponRealName, ": Expert" );
-      iprintln( "" );
-      iprintln( "REFERENCE TITLE_" + weaponCapsName + "_Master" );
-      iprintln( "LANG_ENGLISH", weaponRealName, ": Master" );
-      */
 
       iprintln("cardtitle_" + weapon_name + "_sharpshooter,PLAYERCARDS_TITLE_" + weaponCapsName + "_SHARPSHOOTER,cardtitle_" + weaponGroupSuffix + "_sharpshooter,1,1,1");
       iprintln("cardtitle_" + weapon_name + "_marksman,PLAYERCARDS_TITLE_" + weaponCapsName + "_MARKSMAN,cardtitle_" + weaponGroupSuffix + "_marksman,1,1,1");
@@ -291,9 +254,9 @@ createBombSquadModel(modelName, tagName, teamName, owner) {
   bombSquadModel hide();
   wait(0.05);
 
-  if(!isDefined(self)) //grenade model may not be around if picked up
+  if(!isDefined(self)) {
     return;
-
+  }
   bombSquadModel thread bombSquadVisibilityUpdater(teamName, owner);
   bombSquadModel setModel(modelName);
   bombSquadModel linkTo(self, tagName, (0, 0, 0), (0, 0, 0));
@@ -364,7 +327,7 @@ onPlayerSpawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    self.currentWeaponAtSpawn = self getCurrentWeapon(); // optimization so these threads we start don't have to call it.
+    self.currentWeaponAtSpawn = self getCurrentWeapon();
 
     self.empEndTime = 0;
     self.concussionEndTime = 0;
@@ -678,7 +641,6 @@ watchPickup() {
     if(isDefined(droppedItem)) {
       break;
     }
-    // otherwise, player merely acquired ammo and didn't pick this up
   }
 
   if(getDvar("scr_dropdebug") == "1")
@@ -686,7 +648,6 @@ watchPickup() {
 
   assert(isDefined(player.tookWeaponFrom));
 
-  // make sure the owner information on the dropped item is preserved
   droppedWeaponName = droppedItem getItemWeaponName();
   if(isDefined(player.tookWeaponFrom[droppedWeaponName])) {
     droppedItem.owner = player.tookWeaponFrom[droppedWeaponName];
@@ -695,7 +656,6 @@ watchPickup() {
   }
   droppedItem thread watchPickup();
 
-  // take owner information from self and put it onto player
   if(isDefined(self.ownersattacker) && self.ownersattacker == player) {
     player.tookWeaponFrom[weapname] = self.owner;
   } else {
@@ -722,7 +682,6 @@ handleScavengerBagPickup(scrPlayer) {
 
   assert(isDefined(scrPlayer));
 
-  // Wait for the pickup to happen
   self waittill("scavenger", destPlayer);
   assert(isDefined(destPlayer));
 
@@ -855,7 +814,7 @@ checkHit(weaponName, victim) {
   if(!maps\mp\gametypes\_weapons::isPrimaryWeapon(weaponName) && !maps\mp\gametypes\_weapons::isSideArm(weaponName)) {
     return;
   }
-  // sometimes the "weapon_fired" notify happens after we hit the guy...
+
   waittillframeend;
 
   if(isDefined(self.hitsThisMag[weaponName]))
@@ -864,7 +823,6 @@ checkHit(weaponName, victim) {
   if(!isDefined(self.lastHitTime[weaponName]))
     self.lastHitTime[weaponName] = 0;
 
-  // already hit with this weapon on this frame
   if(self.lastHitTime[weaponName] == getTime()) {
     return;
   }
@@ -883,13 +841,11 @@ checkHit(weaponName, victim) {
 attackerCanDamageItem(attacker, itemOwner) {
   return friendlyFireCheck(itemOwner, attacker);
 }
-
-// returns true if damage should be done to the item given its owner and the attacker
 friendlyFireCheck(owner, attacker, forcedFriendlyFireRule) {
-  if(!isDefined(owner)) // owner has disconnected? allow it
+  if(!isDefined(owner))
     return true;
 
-  if(!level.teamBased) // not a team based mode? allow it
+  if(!level.teamBased)
     return true;
 
   attackerTeam = attacker.team;
@@ -898,19 +854,19 @@ friendlyFireCheck(owner, attacker, forcedFriendlyFireRule) {
   if(isDefined(forcedFriendlyFireRule))
     friendlyFireRule = forcedFriendlyFireRule;
 
-  if(friendlyFireRule != 0) // friendly fire is on? allow it
+  if(friendlyFireRule != 0)
     return true;
 
-  if(attacker == owner) // owner may attack his own items
+  if(attacker == owner)
     return true;
 
-  if(!isDefined(attackerTeam)) // attacker not on a team? allow it
+  if(!isDefined(attackerTeam))
     return true;
 
-  if(attackerTeam != owner.team) // attacker not on the same team as the owner? allow it
+  if(attackerTeam != owner.team)
     return true;
 
-  return false; // disallow it
+  return false;
 }
 
 watchGrenadeUsage() {
@@ -921,7 +877,6 @@ watchGrenadeUsage() {
   self.gotPullbackNotify = false;
 
   if(getIntProperty("scr_deleteexplosivesonspawn", 1) == 1) {
-    // delete c4 from previous spawn
     if(isDefined(self.c4array)) {
       for(i = 0; i < self.c4array.size; i++) {
         if(isDefined(self.c4array[i]))
@@ -929,7 +884,7 @@ watchGrenadeUsage() {
       }
     }
     self.c4array = [];
-    // delete claymores from previous spawn
+
     if(isDefined(self.claymorearray)) {
       for(i = 0; i < self.claymorearray.size; i++) {
         if(isDefined(self.claymorearray[i]))
@@ -1100,7 +1055,7 @@ watchForThrowbacks() {
     if(!isSubStr(weapname, "frag_") && !isSubStr(weapname, "semtex_")) {
       continue;
     }
-    // no grenade_pullback notify! we must have picked it up off the ground.
+
     grenade.threwBack = true;
     self thread incPlayerStat("throwbacks", 1);
 
@@ -1112,8 +1067,6 @@ watchForThrowbacks() {
 watchC4() {
   self endon("spawned_player");
   self endon("disconnect");
-
-  //maxc4 = 2;
 
   while(1) {
     self waittill("grenade_fire", c4, weapname);
@@ -1140,7 +1093,6 @@ watchC4() {
       c4 thread c4Damage();
       c4 thread c4EMPDamage();
       c4 thread c4EMPKillstreakWait();
-      //c4 thread c4DetectionTrigger( self.pers[ "team" ] );
     }
   }
 }
@@ -1210,7 +1162,7 @@ watchClaymores() {
       claymore thread c4EMPDamage();
       claymore thread c4EMPKillstreakWait();
       claymore thread claymoreDetonation();
-      //claymore thread claymoreDetectionTrigger_wait( self.pers[ "team" ] );
+
       claymore thread setClaymoreTeamHeadIcon(self.pers["team"]);
 
       if(getdvarint("scr_claymoredebug")) {
@@ -1448,13 +1400,13 @@ c4Damage() {
     if(!isPlayer(attacker)) {
       continue;
     }
-    // don't allow people to destroy C4 on their team if FF is off
+
     if(!friendlyFireCheck(self.owner, attacker)) {
       continue;
     }
-    if(damage < 5) // ignore concussion grenades
+    if(damage < 5) {
       continue;
-
+    }
     break;
   }
 
@@ -1479,19 +1431,16 @@ c4Damage() {
   self.wasDamaged = true;
 
   if(level.teamBased) {
-    // "destroyed_explosive" notify, for challenges
     if(isDefined(attacker) && isDefined(attacker.pers["team"]) && isDefined(self.owner) && isDefined(self.owner.pers["team"])) {
       if(attacker.pers["team"] != self.owner.pers["team"])
         attacker notify("destroyed_explosive");
     }
   } else {
-    // checking isDefined attacker is defensive but it's too late in the project to risk issues by not having it
     if(isDefined(self.owner) && isDefined(attacker) && attacker != self.owner)
       attacker notify("destroyed_explosive");
   }
 
   self detonate(attacker);
-  // won't get here; got death notify.
 }
 
 resetC4ExplodeThisFrame() {
@@ -1637,12 +1586,6 @@ showHeadIcon(trigger) {
   self.bombSquadIcons[useId].alpha = 0;
   self.bombSquadIds[triggerDetectId] = undefined;
 }
-
-// these functions are used with scripted weapons (like c4, claymores, artillery)
-// returns an array of objects representing damageable entities (including players) within a given sphere.
-// each object has the property damageCenter, which represents its center (the location from which it can be damaged).
-// each object also has the property entity, which contains the entity that it represents.
-// to damage it, call damageEnt() on it.
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
 
@@ -1654,7 +1597,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 
   radiusSq = radius * radius;
 
-  // players
   players = level.players;
   for(i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
@@ -1667,7 +1609,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
     }
   }
 
-  // grenades
   grenades = getEntArray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
     entpos = get_damageable_grenade_pos(grenades[i]);
@@ -1705,7 +1646,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
     }
   }
 
-  //sentries
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries) {
     entpos = sentry.origin + (0, 0, 32);
@@ -1730,9 +1670,6 @@ getEMPDamageEnts(pos, radius, doLOS, startRadius) {
 
   grenades = getEntArray("grenade", "classname");
   foreach(grenade in grenades) {
-    //if( !isDefined( grenade.weaponName ) )
-    //	continue;
-
     entpos = grenade.origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, grenade)))
@@ -1741,9 +1678,6 @@ getEMPDamageEnts(pos, radius, doLOS, startRadius) {
 
   turrets = getEntArray("misc_turret", "classname");
   foreach(turret in turrets) {
-    //if( !isDefined( turret.weaponName ) )
-    //	continue;
-
     entpos = turret.origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, turret)))
@@ -1781,30 +1715,12 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
 
   return (trace["fraction"] == 1);
 }
-
-// eInflictor = the entity that causes the damage (e.g. a claymore)
-// eAttacker = the player that is attacking
-// iDamage = the amount of damage to do
-// sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
-// sWeapon = string specifying the weapon used (e.g. "claymore_mp")
-// damagepos = the position damage is coming from
-// damagedir = the direction damage is moving in
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
     if(self.isPlayer) {
       self.damageOrigin = damagepos;
-      self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
-        eAttacker, // eAttacker The entity that is attacking.
-        iDamage, // iDamage Integer specifying the amount of damage done
-        0, // iDFlags Integer specifying flags that are to be applied to the damage
-        sMeansOfDeath, // sMeansOfDeath Integer specifying the method of death
-        sWeapon, // sWeapon The weapon number of the weapon used to inflict the damage
-        damagepos, // vPoint The point the damage is from?
-        damagedir, // vDir The direction of the damage
-        "none", // sHitLoc The location of the hit
-        0 // psOffsetTime The time offset for the damage);
+      self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0
       }
       else {
-        // destructable walls and such can only be damaged in certain ways.
         if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp") || sWeapon == "stealth_bomb_mp") {
           return;
         }
@@ -1832,7 +1748,7 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
 
       switch (sWeapon) {
         case "concussion_grenade_mp":
-          // should match weapon settings in gdt
+
           radius = 512;
           scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
 
@@ -1848,19 +1764,16 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
           break;
 
         case "weapon_cobra_mk19_mp":
-          // mk19 is too powerful with shellshock slowdown
+
           break;
 
         default:
-          // shellshock will only be done if meansofdeath is an appropriate type and if there is enough damage.
+
           maps\mp\gametypes\_shellshock::shellshockOnDamage(meansOfDeath, damage);
           break;
       }
     }
 
-    // weapon stowing logic ===================================================================
-
-    // weapon class boolean helpers
     isPrimaryWeapon(weapName) {
       if(weapName == "none")
         return false;
@@ -1921,7 +1834,6 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
       return (weaponClass(weapName) == "pistol");
     }
 
-    // This needs for than this.. this would qualify c4 as a grenade
     isGrenade(weapName) {
       weapClass = weaponClass(weapName);
       weapType = weaponInventoryType(weapName);
@@ -1944,7 +1856,6 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
     stowPriorityWeapon() {
       assert(isDefined(level.stow_priority_model_array));
 
-      // returns the first large projectil the player owns in case player owns more than one
       foreach(weapon_name, priority_weapon in level.stow_priority_model_array) {
         weaponName = getBaseWeaponName(weapon_name);
         weaponList = self getWeaponsListAll();
@@ -1961,7 +1872,6 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
       return "";
     }
 
-    // thread loop life = player's life
     updateStowedWeapon() {
       self endon("spawned");
       self endon("killed_player");
@@ -2006,16 +1916,12 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
     detach_back_weapon() {
       detach_success = self detachIfAttached(self.tag_stowed_back, "tag_stowed_back");
 
-      // test for bug
-      //assertex( detach_success, "Detaching: " + self.tag_stowed_back + " from tag: tag_stowed_back failed." );
       self.tag_stowed_back = undefined;
     }
 
     detach_hip_weapon() {
       detach_success = self detachIfAttached(self.tag_stowed_hip, "tag_stowed_hip");
 
-      // test for bug
-      //assertex( detach_success, "Detaching: " + detach_model + " from tag: tag_stowed_hip failed." );
       self.tag_stowed_hip = undefined;
     }
 
@@ -2052,7 +1958,7 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
           if(WeaponType(weaponName) == "riotshield") {
             continue;
           }
-          // Don't stow the current on our back when we're using the alt
+
           if(currentIsAlt && weaponAltWeaponName(weaponName) == currentWeapon) {
             continue;
           }
@@ -2182,13 +2088,6 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
     }
 
     updateMoveSpeedScale(weaponType) {
-      /*
-      if( self _hasPerk( "specialty_lightweight" ) )
-      	self.moveSpeedScaler = 1.10;
-      else
-      	self.moveSpeedScaler = 1;
-      */
-
       if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary")
         weaponType = self.primaryWeapon;
       else
@@ -2257,10 +2156,9 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
         weaponInfo.variants = [];
 
         weaponInfo.variants[0] = assetName;
-        // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
+
         attachmentNames = [];
         for(innerLoopCount = 0; innerLoopCount < 6; innerLoopCount++) {
-          // generating attachment combinations
           attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
 
           if(filterPerks) {
@@ -2279,7 +2177,6 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
           attachmentNames[attachmentName] = true;
         }
 
-        // generate an alphabetized attachment list
         attachments = [];
         foreach(attachmentName in attachmentList) {
           if(!isDefined(attachmentNames[attachmentName])) {

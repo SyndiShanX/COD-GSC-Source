@@ -23,7 +23,6 @@ endlog_run_anims() {
   level.scr_anim["generic"]["panic_run"] = % unarmed_panickedrun_loop_V2;
   level.scr_anim["generic"]["panic_stumble"] = % unarmed_panickedrun_stumble;
   level.scr_anim["generic"]["run_root"] = % combatrun_forward;
-  //level.scr_anim[ "generic" ][ "stumble_knee" ] = %run_nopain_fallonknee;
 
   level.scr_anim["generic"]["reaction_180"] = % run_reaction_180;
   level.scr_anim["generic"]["run_180"] = % run_turn_180;
@@ -50,7 +49,6 @@ endlog_run_anims() {
   level.scr_anim["old_soap"]["price_rescue"] = % gulag_rescueB_soldier1_reshoot;
 
   level.scr_anim["price"]["price_rescue_intro"] = % gulag_rescueB_Price_intro;
-  //	level.scr_anim[ "price" ][ "price_rescue_intro_loop" ][0] 	= %gulag_rescueB_Price_idle;
 
   addNotetrack_customFunction("price", "bang", ::rescue_exploder, "price_rescue");
 
@@ -80,7 +78,7 @@ endlog_run_anims() {
   level.scr_anim["soap"]["evac"] = % gulag_end_evac_soap;
   addNotetrack_dialogue("price", "dialog", "evac", "gulag_pri_doitfast");
 
-  level.scr_anim["generic"]["gundrop_death"] = % death_explosion_stand_B_v1; //death_explosion_run_B_v1;
+  level.scr_anim["generic"]["gundrop_death"] = % death_explosion_stand_B_v1;
 
   addNotetrack_customFunction("soap", "fire", ::soap_fires_flare, "evac");
 
@@ -111,8 +109,6 @@ soap_fires_flare(soap) {
 }
 
 got_player_notetrack(soap) {
-  //	flag_set( "player_uses_rig" );
-  //waittillframeend;
   soap.got_player_notetrack = true;
   trigger = getentwithflag("player_uses_rig");
   trigger trigger_off();
@@ -148,8 +144,6 @@ endlog_player_animations() {
   level.scr_anim["player_rig"]["price_breach"] = % gulag_rescueA_player;
   level.scr_anim["player_rig"]["price_rescue"] = % gulag_rescueB_player_reshootB;
 
-  //	level.scr_anim[ "player_rig" ][ "price_rescue_intro" ] 			= %gulag_rescueB_player_intro;
-  //	level.scr_anim[ "player_rig" ][ "price_rescue_intro_loop" ][0] 	= %gulag_rescueB_player_idle;
   addNotetrack_customFunction("player_rig", "black", ::black_screen);
 }
 

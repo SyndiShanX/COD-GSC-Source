@@ -5,16 +5,9 @@
 
 #include common_scripts\utility;
 
-//////////////////////////////////////////////////////////////////////////////
-//									CONSTANTS								//
-//////////////////////////////////////////////////////////////////////////////
 level_limit_pipe_fx = 8;
 max_fires_from_entity = 4;
 level_pipe_fx_chance = 33;
-
-//////////////////////////////////////////////////////////////////////////////
-//									LOGIC									//
-//////////////////////////////////////////////////////////////////////////////
 main() {
   level._pipe_fx_time = 25;
   pipes = getEntArray("pipe_shootable", "targetname");
@@ -26,13 +19,13 @@ main() {
   pipes thread precacheFX();
   pipes thread methodsInit();
 
-  waittillframeend; // insure that structs are initialized
+  waittillframeend;
   array_thread(pipes, ::pipesetup);
 }
 
 pipesetup() {
   self setCanDamage(true);
-  self setCanRadiusDamage(false); // optimization
+  self setCanRadiusDamage(false);
   self.pipe_fx_array = [];
 
   node = undefined;
@@ -55,7 +48,7 @@ pipesetup() {
 }
 
 pipe_wait_loop() {
-  P = (0, 0, 0); // just to initialize P as a vector
+  P = (0, 0, 0);
 
   hasTakenDamage = false;
   remaining = max_fires_from_entity;
@@ -63,7 +56,6 @@ pipe_wait_loop() {
   while(1) {
     self waittill("damage", damage, other, direction_vec, P, type);
 
-    // random so we don't get so many fx, but the very first time is guarenteed
     if(hasTakenDamage) {
       if(randomint(100) <= level_pipe_fx_chance)
         continue;
@@ -102,7 +94,6 @@ pipe_logic(direction_vec, P, type, damageOwner) {
       return false;
   }
 
-  //calculate the vector derived from the center line of our pipe and the point of damage
   vec = VectorFromLineToPoint(self.A, self.B, P);
   self thread pipefx(P, vec, damageOwner);
   return true;
@@ -110,7 +101,7 @@ pipe_logic(direction_vec, P, type, damageOwner) {
 
 pipefx(P, vec, damageOwner) {
   time = level._pipes.fx_time[self.script_noteworthy];
-  intervals = Int(level._pipe_fx_time / time); // loops for 25 seconds
+  intervals = Int(level._pipe_fx_time / time);
   hitsnd = level._pipes._sound[self.script_noteworthy + "_hit"];
   loopsnd = level._pipes._sound[self.script_noteworthy + "_loop"];
   endsnd = level._pipes._sound[self.script_noteworthy + "_end"];
@@ -126,12 +117,10 @@ pipefx(P, vec, damageOwner) {
   if(isSP() || self.script_noteworthy != "steam")
     self thread pipe_damage(P, vec, damageOwner, snd);
 
-  //do it once without checking for newer fx being played ( we're the newest )
   playFX(level._pipes._effect[self.script_noteworthy], P, vec);
   wait time;
   intervals--;
 
-  //now check	for other fx and rest of intervals
   while(level._pipes.num_pipe_fx <= level_limit_pipe_fx && intervals > 0) {
     playFX(level._pipes._effect[self.script_noteworthy], P, vec);
     wait time;
@@ -156,12 +145,9 @@ pipe_damage(P, vec, damageOwner, fx) {
   dmg = level._pipes._dmg[self.script_noteworthy];
 
   while(1) {
-    // do not pass damage owner if they have disconnected before the barrels explode.. the barrels?
     if(!isDefined(self.damageOwner)) {
-      // MOD_TRIGGER_HURT so they dont do dirt on the player's screen
       self RadiusDamage(origin, 36, dmg, dmg * 0.75, undefined, "MOD_TRIGGER_HURT");
     } else {
-      // MOD_TRIGGER_HURT so they dont do dirt on the player's screen
       self RadiusDamage(origin, 36, dmg, dmg * 0.75, damageOwner, "MOD_TRIGGER_HURT");
     }
 
@@ -178,10 +164,6 @@ allow_pipe_damage() {
 
   return (level.pipesDamage);
 }
-
-//////////////////////////////////////////////////////////////////////////////
-//							CALCULATIONS / SETUP							//
-//////////////////////////////////////////////////////////////////////////////
 
 methodsInit() {
   level._pipes._pipe_methods = [];

@@ -14,7 +14,6 @@ main(model, type) {
   build_deathmodel("vehicle_mi24p_hind_woodland");
   build_deathmodel("vehicle_mi24p_hind_woodland_opened_door");
 
-  // this doesn't happen very much but it's a nicer cleaner format than the case statement.
   hind_death_fx = [];
   hind_death_fx["vehicle_mi24p_hind_desert"] = "explosions/helicopter_explosion_hind_desert";
   hind_death_fx["vehicle_mi24p_hind_woodland"] = "explosions/helicopter_explosion_hind_woodland";
@@ -63,18 +62,15 @@ main(model, type) {
 }
 
 init_local() {
-  self.originheightoffset = 144; // TODO - FIXME: this is ugly.
-  //	self.fastropeoffset = 760; //blackhawk
-  self.fastropeoffset = 792; // TODO - FIXME: this is ugly.
-  //self.delete_on_death = true;
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.originheightoffset = 144;
+
+  self.fastropeoffset = 792;
+
+  self.script_badplace = false;
   maps\_vehicle::lights_on("running");
-  //maps\_vehicle::lights_on( "interior" );
 }
 
 set_vehicle_anims(positions) {
-  //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-
   for(i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
 
@@ -123,7 +119,6 @@ setanims() {
   positions[0].bHasGunWhileRiding = false;
   positions[1].bHasGunWhileRiding = false;
 
-  // 1, 2, 4, 5, 8,6
   positions[2].idle = % bh_1_idle;
   positions[3].idle = % bh_2_idle;
   positions[4].idle = % bh_4_idle;
@@ -131,7 +126,6 @@ setanims() {
   positions[6].idle = % bh_8_idle;
   positions[7].idle = % bh_6_idle;
   positions[8].idle = % bh_7_idle;
-  //	positions[ 9 ].idle = %bh_2_idle;
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -142,23 +136,7 @@ setanims() {
   positions[6].sittag = "tag_detach";
   positions[7].sittag = "tag_detach";
   positions[8].sittag = "tag_detach";
-  //	positions[ 9 ].sittag = "tag_detach";
 
-  //	positions[ 0 ].getout = %bh_Pilot_idle;
-  //	positions[ 1 ].getout = %bh_coPilot_idle;
-
-  /*
-  	positions[ 2 ].getout = %bh_1_begining;
-  	positions[ 3 ].getout = %bh_2_begining;
-  	positions[ 4 ].getout = %bh_3_begining;
-  	positions[ 5 ].getout = %bh_4_begining;
-  	positions[ 6 ].getout = %bh_5_begining;
-  	positions[ 7 ].getout = %bh_6_begining;
-  	positions[ 8 ].getout = %bh_7_begining;
-  	positions[ 9 ].getout = %bh_2_begining;
-  */
-
-  // 1, 2, 4, 5, 8,6
   positions[2].getout = % bh_1_drop;
   positions[3].getout = % bh_2_drop;
   positions[4].getout = % bh_4_drop;
@@ -166,7 +144,6 @@ setanims() {
   positions[6].getout = % bh_8_drop;
   positions[7].getout = % bh_6_drop;
   positions[8].getout = % bh_7_drop;
-  //	positions[ 9 ].getout = %bh_7_drop;
 
   positions[2].getoutstance = "crouch";
   positions[3].getoutstance = "crouch";
@@ -201,28 +178,6 @@ setanims() {
   positions[7].rappel_kill_achievement = 1;
   positions[8].rappel_kill_achievement = 1;
 
-  //	positions[ 2 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 3 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 4 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 5 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 6 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 7 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 8 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 9 ].getoutsnd = "fastrope_loop_npc";
-
-  //	positions[ 0 ].getoutloop = %bh_Pilot_idle;
-  //	positions[ 1 ].getoutloop = %bh_coPilot_idle;
-
-  /*
-  	positions[ 2 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 3 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 4 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 5 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 6 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 7 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 8 ].getoutloop = %bh_fastrope_loop;
-  	positions[ 9 ].getoutloop = %bh_fastrope_loop;
-  */
   positions[2].getoutloopsnd = "fastrope_loop_npc";
   positions[3].getoutloopsnd = "fastrope_loop_npc";
   positions[4].getoutloopsnd = "fastrope_loop_npc";
@@ -230,38 +185,17 @@ setanims() {
   positions[6].getoutloopsnd = "fastrope_loop_npc";
   positions[7].getoutloopsnd = "fastrope_loop_npc";
   positions[8].getoutloopsnd = "fastrope_loop_npc";
-  //	positions[ 9 ].getoutloopsnd = "fastrope_loop_npc";
 
-  //	positions[ 0 ].getoutland = %bh_Pilot_idle;
-  //	positions[ 1 ].getoutland = %bh_coPilot_idle;
-  /*
-  	positions[ 2 ].getoutland = %bh_fastrope_land;
-  	positions[ 3 ].getoutland = %bh_fastrope_land;
-  	positions[ 4 ].getoutland = %bh_fastrope_land;
-  	positions[ 5 ].getoutland = %bh_fastrope_land;
-  	positions[ 6 ].getoutland = %bh_fastrope_land;
-  	positions[ 7 ].getoutland = %bh_fastrope_land;
-  	positions[ 8 ].getoutland = %bh_fastrope_land;
-  	positions[ 9 ].getoutland = %bh_fastrope_land;
-  */
+  positions[2].fastroperig = "TAG_FastRope_RI";
+  positions[3].fastroperig = "TAG_FastRope_RI";
+  positions[4].fastroperig = "TAG_FastRope_LE";
+  positions[5].fastroperig = "TAG_FastRope_LE";
+  positions[6].fastroperig = "TAG_FastRope_RI";
+  positions[7].fastroperig = "TAG_FastRope_LE";
+  positions[8].fastroperig = "TAG_FastRope_RI";
 
-  //	positions[ 0 ].fastroperig = "TAG_FastRope_LE";
-  //	positions[ 1 ].fastroperig = "TAG_FastRope_LE";
-
-  // 1, 2, 4, 5, 6, & 8
-
-  positions[2].fastroperig = "TAG_FastRope_RI"; // 1
-  positions[3].fastroperig = "TAG_FastRope_RI"; // 2
-  positions[4].fastroperig = "TAG_FastRope_LE"; // 4
-  positions[5].fastroperig = "TAG_FastRope_LE"; // 5
-  positions[6].fastroperig = "TAG_FastRope_RI"; // 8
-  positions[7].fastroperig = "TAG_FastRope_LE"; // 6
-  positions[8].fastroperig = "TAG_FastRope_RI"; // 7
-  //	positions[ 9 ].fastroperig = "TAG_FastRope_RI";
   return setplayer_anims(positions);
 }
-
-//WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
   unload_groups["left"] = [];
@@ -312,70 +246,3 @@ set_attached_models() {
 
   return array;
 }
-
-/*QUAKED script_vehicle_mi24p_hind_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_desert" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_desert_hind
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_hind_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_desert" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_desert_hind
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_hind_chernobyl (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_chernobyl" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_chernobyl
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_chernobyl"default:"vehicletype" "hind"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi24p_hind_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_woodland" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_woodland_hind
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_hind_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_woodland" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_woodland_hind
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi24p_hind_woodland_opened_door (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hind::main( "vehicle_mi24p_hind_woodland_opened_door" );
-
-and these lines in your CSV:
-#include,vehicle_mi24p_hind_woodland_opened_door_hind
-sound,vehicle_hind,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi24p_hind_woodland_opened_door"default:"vehicletype" "hind"default:"script_team" "axis"
-*/

@@ -7,50 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	Domination
-	Objective: 	Capture all the flags by touching them
-	Map ends:	When one team captures all the flags, or time limit is reached
-	Respawning:	No wait / Near teammates
-
-	Level requirements
-	------------------ Spawnpoints:
-			classname		mp_tdm_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of owned flags, teammates and
-			enemies at the time of spawn. Players generally spawn behind their teammates relative to the direction of enemies.
-			Optionally, give a spawnpoint a script_linkto to specify which flag it "belongs" to (see Flag Descriptors).
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-
-		Flags:
-			classname trigger_radius
-			targetnameflag_primary or flag_secondary
-			Flags that need to be captured to win. Primary flags take time to capture; secondary flags are instant.
-		
-		Flag Descriptors:
-			classname script_origin
-			targetnameflag_descriptor
-			Place one flag descriptor close to each flag. Use the script_linkname and script_linkto properties to say which flags
-			it can be considered "adjacent" to in the level. For instance, if players have a primary path from flag1 to flag2, and
-			from flag2 to flag3, flag2 would have a flag_descriptor with these properties:
-			script_linkname flag2
-			script_linkto flag1 flag3
-			
-			Set scr_domdebug to 1 to see flag connections and what spawnpoints are considered connected to each flag.
-*/
-
-/*QUAKED mp_dom_spawn (0.5 0.5 1.0) (-16 -16 0) (16 16 72)
-Players spawn near their flags at one of these positions.*/
-
-/*QUAKED mp_dom_spawn_axis_start (1.0 0.0 1.0) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_dom_spawn_allies_start (0.0 1.0 1.0) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -154,7 +110,7 @@ onStartGameType() {
   level.flagBaseFXid["axis"] = loadfx(maps\mp\gametypes\_teams::getTeamFlagFX("axis"));
 
   allowed[0] = "dom";
-  //	allowed[1] = "hardpoint";
+
   maps\mp\gametypes\_gameobjects::main(allowed);
 
   maps\mp\gametypes\_rank::registerScoreInfo("kill", 50);
@@ -190,22 +146,17 @@ getSpawnPoint() {
     }
 
     if(flagsOwned == level.flags.size) {
-      // own all flags! pretend we don't own the last one we got, so enemies can spawn there
       enemyBestSpawnFlag = level.bestSpawnFlag[getOtherTeam(self.pers["team"])];
 
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, getSpawnsBoundingFlag(enemyBestSpawnFlag));
     } else if(flagsOwned > 0) {
-      // spawn near any flag we own that's nearish something we can capture
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, getBoundaryFlagSpawns(myTeam));
     } else {
-      // own no flags!
       bestFlag = undefined;
       if(enemyFlagsOwned > 0 && enemyFlagsOwned < level.flags.size) {
-        // there should be an unowned one to use
         bestFlag = getUnownedFlagNearestStart(myTeam);
       }
       if(!isDefined(bestFlag)) {
-        // pretend we still own the last one we lost
         bestFlag = level.bestSpawnFlag[self.pers["team"]];
       }
       level.bestSpawnFlag[self.pers["team"]] = bestFlag;
@@ -220,8 +171,6 @@ getSpawnPoint() {
     else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
   }
-
-  //spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam( level.spawn_all );
 
   assert(isDefined(spawnpoint));
 
@@ -298,7 +247,6 @@ domFlags() {
 
     domFlag.baseeffectpos = trace["position"];
 
-    // legacy spawn code support
     level.flags[index].useObj = domFlag;
     level.flags[index].adjflags = [];
     level.flags[index].nearbyspawns = [];
@@ -308,7 +256,6 @@ domFlags() {
     level.domFlags[level.domFlags.size] = domFlag;
   }
 
-  // level.bestSpawnFlag is used as a last resort when the enemy holds all flags.
   level.bestSpawnFlag = [];
   level.bestSpawnFlag["allies"] = getUnownedFlagNearestStart("allies", undefined);
   level.bestSpawnFlag["axis"] = getUnownedFlagNearestStart("axis", level.bestSpawnFlag["allies"]);
@@ -347,7 +294,7 @@ domDebug() {
       if(getDvar("scr_domdebug") != "1") {
         break;
       }
-      // show flag connections and each flag's spawnpoints
+
       for(i = 0; i < level.flags.size; i++) {
         for(j = 0; j < level.flags[i].adjflags.size; j++) {
           line(level.flags[i].origin, level.flags[i].adjflags[j].origin, (1, 1, 1));
@@ -435,8 +382,6 @@ onUse(player) {
   oldTeam = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
   label = self maps\mp\gametypes\_gameobjects::getLabel();
 
-  //player logString( "flag captured: " + self.label );
-
   self.captureTime = getTime();
 
   self maps\mp\gametypes\_gameobjects::setOwnerTeam(team);
@@ -458,8 +403,6 @@ onUse(player) {
     statusDialog("enemy_has" + self.label, otherTeam, true);
   } else {
     thread printAndSoundOnEveryone(team, oldTeam, undefined, undefined, "mp_war_objective_taken", "mp_war_objective_lost", player);
-
-    //		thread delayedLeaderDialogBothTeams( "obj_lost", oldTeam, "obj_taken", team );
 
     if(getTeamFlagCount(team) == level.flags.size) {
       statusDialog("secure_all", team);
@@ -534,7 +477,6 @@ updateDomScores() {
       }
     }
 
-    // end the game if people aren't playing
     if((((getTimePassed() / 1000) > 120 && domFlags.size < 2) || ((getTimePassed() / 1000) > 300 && domFlags.size < 3)) && matchMakingGame()) {
       thread maps\mp\gametypes\_gamelogic::endGame("none", game["strings"]["time_limit_reached"]);
       return;
@@ -553,7 +495,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   awardedDefend = false;
 
   foreach(trigger in self.touchTriggers) {
-    // TODO: way to check for dom specific triggers
     if(!isDefined(trigger.useObj)) {
       continue;
     }
@@ -581,7 +522,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   }
 
   foreach(trigger in attacker.touchTriggers) {
-    // TODO: way to check for dom specific triggers
     if(!isDefined(trigger.useObj)) {
       continue;
     }
@@ -633,7 +573,6 @@ getFlagTeam() {
 }
 
 getBoundaryFlags() {
-  // get all flags which are adjacent to flags that aren't owned by the same team
   bflags = [];
   for(i = 0; i < level.flags.size; i++) {
     for(j = 0; j < level.flags[i].adjflags.size; j++) {
@@ -687,21 +626,16 @@ getSpawnsBoundingFlag(avoidflag) {
 
   return spawns;
 }
-
-// gets an array of all spawnpoints which are near flags that are
-// owned by the given team, or that are adjacent to flags owned by the given team.
 getOwnedAndBoundingFlagSpawns(team) {
   spawns = [];
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      // add spawns near this flag
       for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
     } else {
       for(j = 0; j < level.flags[i].adjflags.size; j++) {
         if(level.flags[i].adjflags[j] getFlagTeam() == team) {
-          // add spawns near this flag
           for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
             spawns[spawns.size] = level.flags[i].nearbyspawns[s];
           break;
@@ -712,15 +646,11 @@ getOwnedAndBoundingFlagSpawns(team) {
 
   return spawns;
 }
-
-// gets an array of all spawnpoints which are near flags that are
-// owned by the given team
 getOwnedFlagSpawns(team) {
   spawns = [];
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getFlagTeam() == team) {
-      // add spawns near this flag
       for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
     }
@@ -733,7 +663,6 @@ flagSetup() {
   maperrors = [];
   descriptorsByLinkname = [];
 
-  // (find each flag_descriptor object)
   descriptors = getEntArray("flag_descriptor", "targetname");
 
   flags = level.flags;
@@ -763,7 +692,6 @@ flagSetup() {
   }
 
   if(maperrors.size == 0) {
-    // find adjacent flags
     for(i = 0; i < flags.size; i++) {
       if(isDefined(flags[i].descriptor.script_linkto))
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
@@ -785,7 +713,6 @@ flagSetup() {
     }
   }
 
-  // assign each spawnpoint to nearest flag
   spawnpoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_dom_spawn");
   for(i = 0; i < spawnpoints.size; i++) {
     if(isDefined(spawnpoints[i].script_linkto)) {

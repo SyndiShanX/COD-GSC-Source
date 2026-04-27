@@ -23,7 +23,6 @@ main() {
   thread maps\oilrig::above_water_art_and_ambient_setup();
   thread maps\oilrig::killtrigger_ocean_on();
 
-  // use different spotlight in splitscreen.
   if(issplitscreen())
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
 }
@@ -31,48 +30,38 @@ main() {
 start_map() {
   level endon("special_op_terminated");
 
-  /*----------------------- INITIALIZATION
-  -------------------------*/
   level.hostagemanhandle = false;
   thread fade_challenge_in();
   thread enable_challenge_timer("breaching_on", "barracks_cleared");
   thread music_to_first_breach();
   thread music_to_top_deck();
-  //	thread music_end();
+
   thread breach_flags();
   thread maps\oilrig::c4_barrels();
   assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       gameskill_Regular();
-      break; // Regular
+      break;
     case 2:
       gameskill_hardened();
-      break; // Hardened
+      break;
     case 3:
       gameskill_veteran();
-      break; // Veteran
+      break;
   }
   thread obj_main();
 
   maps\_compass::setupMiniMap("compass_map_oilrig_lvl_1");
   array_thread(getEntArray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
 
-  /*----------------------- FIRST BREACH
-  -------------------------*/
   array_call(level.players, ::SetMoveSpeedScale, 1);
   level.playerspeed = undefined;
 
-  //"Sub Command: Civilian hostages hostages at your position, watch your fire."delaythread(2, ::radio_dialogue, "oilrig_sbc_civilhostages");
-
   battlechatter_on("axis");
 
-  /*----------------------- OPEN GATE, SOUND ALARMS
-  -------------------------*/
   flag_wait("upper_room_cleared");
-
-  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."delaythread(2, ::radio_dialogue, "oilrig_sbc_gettolz");
 
   level.hostageNodes = getnodearray("node_hostage_scaffolding", "targetname");
   volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
@@ -86,18 +75,12 @@ start_map() {
 
   flag_wait("player_at_deck1_midpoint");
 
-  /*----------------------- DECK 2 RAPPELERS
-  -------------------------*/
   aSpawners = getEntArray("hostiles_rappel_deck2", "targetname");
   flag_wait("rappel_dudes_failsafe");
   aHostiles = maps\oilrig::spawn_group_staggered(aSpawners);
 
-  /*----------------------- DECK 2 HELICOPTER
-  -------------------------*/
   heli_enters_and_attacks();
 
-  /*----------------------- DECK 3
-  -------------------------*/
   flag_wait("player_at_stairs_to_top_deck");
   thread maps\oilrig::deck3_firefight();
 
@@ -105,31 +88,23 @@ start_map() {
   thread dialogue_thermal_hint();
 
   flag_wait("player_approaching_topdeck_building");
-  //***Sub Command			Hotel Six, be advised, hostages have been confirmed at your location along with possible explosives, over.
+
   radio_dialogue("oilrig_sbc_hostconfirmed");
 
-  /*----------------------- FINAL BREACH
-  -------------------------*/
   flag_wait("top_deck_room_breached");
 
-  /*----------------------- LEVEL END
-  -------------------------*/
   flag_wait("barracks_cleared");
 
   wait(2);
-  //***Sub Command Good job, Hotel Six. Marine reinforcements are inserting now to dismantle the SAM sites. Get your team ready for phase two of the operation. Out.	
-  //	radio_dialogue( "oilrig_sbc_phase2" );
 
-  //	thread dialogue_end_chatter();
   thread fade_challenge_out();
 }
 
 dialogue_thermal_hint() {
   wait 2;
 
-  //Cpt. MacTavish	All teams be advised: these guys are a step up - they're using thermal optics to see through the smoke.
   dialogue_array[0] = "oilrig_use_thermal_00";
-  //Cpt. MacTavish	If you've got thermal sights, now would be a good time! 	oilrig_nsl_pickoff	tense, aggressive, under fire, a bit sarcastic	
+
   dialogue_array[1] = "oilrig_find_thermal_00";
 
   iRand = randomint(dialogue_array.size);
@@ -167,7 +142,6 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
   level endon("deck_2_heli_is_finished_intimidating");
   level endon("player_shoots_or_aims_rocket_at_intimidating_heli");
   for(;;) {
-    // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
     if(!isDefined(attacker) || !isPlayer(attacker))
@@ -180,31 +154,20 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
 }
 
 dialogue_end_chatter() {
-  //***Marine HQ			Hunter Two-Two, this is Punisher Actual. GOPLAT secure. All EOD teams are cleared for landing.
   radio_dialogue("oilrig_rmv_goplat");
 
-  //***Marine 1			Roger Punisher, Hunter Two-Two copies all.		military monotone, background flavor dialogue	
   radio_dialogue("oilrig_gm1_copies");
 
-  //***F-15 Pilot			Punisher this is Phoenix One-One, flight of two F-15s en route to grid 257221 for SEAD mission, requesting sitrep over
   radio_dialogue("oilrig_f15_twof15s");
 
-  //***Marine HQ			Phoenix One-One, Punisher. Blue sky, I repeat blue sky. Come to heading two-four-zero and continue on course to target area. Good hunting. Over.
   radio_dialogue("oilrig_rmv_bluesky");
 
-  //***F-15 Pilot			Phoenix One-One copies. Out.
   radio_dialogue("oilrig_f15_copies");
 
-  //***Marine HQ			Punisher to all flights in vicinity of grid 255202, local airspace is secure. I repeat, local airspace is secure. Proceed on course to target area along Route November Two.
   radio_dialogue("oilrig_rmv_localairspace");
 
-  //***Marine 1			Punisher this Hunter Actual. Hunter Two-Two is moving to secure the SAM site at the southwest corner of main deck. Hunter Two-Three is proceeding towards the derrick building to disarm the explosives.
   radio_dialogue("oilrig_gm1_hunteractual");
 
-  //***Marine HQ			Punisher copies all. We have eyes on two-two. They are arriving at the southwest SAM site… standby… standby…Site is secure, repeat site is secure.
-  //radio_dialogue( "oilrig_rmv_standby" );
-
-  //***Marine HQ			Punisher Actual to all strike teams - all SAM sites neutralized, repeat, all SAM sites have been neutralized. Blue sky in effect.
   radio_dialogue("oilrig_rmv_samsitesneut");
 }
 
@@ -319,15 +282,13 @@ obj_main() {
 
   assign_script_breachgroup_to_ents(obj_positions);
 
-  // find out which breaches should be added to the objective positions
   breach_indices = get_breach_indices_from_ents(obj_positions);
 
-  // add positions for these breaches
   objective_breach(objective_number, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 
   flag_wait("upper_room_breached");
   objective_clearAdditionalPositions(objective_number);
-  Objective_SetPointerTextOverride(objective_number); // clear the breached text
+  Objective_SetPointerTextOverride(objective_number);
 
   flag_wait("upper_room_cleared");
   obj_position = getent("obj_explosives_locate_01", "targetname");
@@ -346,10 +307,8 @@ obj_main() {
   obj_positions = getEntArray("obj_breach3", "targetname");
   assign_script_breachgroup_to_ents(obj_positions);
 
-  // find out which breaches should be added to the objective positions
   breach_indices = get_breach_indices_from_ents(obj_positions);
 
-  // add positions for these breaches
   objective_breach(objective_number, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 
   flag_wait("top_deck_room_breached");

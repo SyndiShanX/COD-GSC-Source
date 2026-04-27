@@ -19,8 +19,8 @@ VEH_SPEED_MAX = 120;
 VEH_SLOWDOWN_AMOUNT = 8;
 VEH_SLOWDOWN_AMOUNT_MIN = VEH_SLOWDOWN_AMOUNT * 5;
 
-SPEED_BALANCE_DIST_MIN = 500; // no cheating when within this range
-SPEED_BALANCE_DIST_MAX = 5000; // full cheat when you are this far behind
+SPEED_BALANCE_DIST_MIN = 500;
+SPEED_BALANCE_DIST_MAX = 5000;
 SPEED_BALANCE_INTERVAL = 0.1;
 SPEED_BALANCE_MAX_HELP = VEH_SPEED_MAX - VEH_SPEED_NORMAL;
 
@@ -34,17 +34,14 @@ init_snow_race(skipDialog) {
   flag_init("race_started");
   flag_init("finish_line");
 
-  // disable revive so we can shoot each other during the race without killing each other
   if(is_coop()) {
     level.vehicle_crash_func = ::player_snowmobile_downed;
     flag_clear("coop_revive");
     flag_clear("player_can_die_on_snowmobile");
   } else {
-    // force unsetting this value if we're in SP
     skipDialog = undefined;
   }
 
-  // HOLD HERE TILL PLAYERS READY IN ONLINE COOP
   so_wait_for_players_ready();
 
   players_on_snowmobiles();
@@ -68,7 +65,7 @@ init_snow_race(skipDialog) {
   assert(isDefined(level.objective_desc));
   objective_add(1, "current", level.objective_desc, finish_line_origin.origin);
   objective_setpointertextoverride(1, &"SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
-  //Objective_OnEntity( 1, finish_line_origin );
+
   thread objective_location_update(finish_line_origin);
   array_thread(getEntArray("move_objective", "targetname"), ::move_objective, finish_line_origin);
 }
@@ -81,9 +78,6 @@ move_objective(finish_line_origin) {
   self waittill("trigger");
 
   finish_line_origin moveTo(originEnt.origin, 10, 1.0, 1.0);
-
-  //thread move_objective_overtime( finish_line_origin, originEnt.origin );
-  //Objective_Position( 1, originEnt.origin );
 }
 
 objective_location_update(finish_line_origin) {
@@ -139,7 +133,6 @@ global_init() {
   setsaveddvar("ui_hidemap", "1");
   setsaveddvar("sm_sunSampleSizeNear", 3);
   setsaveddvar("physVeh_StepsPerFrame", 4);
-  //maps\_compass::setupMiniMap( "compass_map_cliffhanger" );
 
   thread blizzard_level_transition_snowmobile(1);
 }
@@ -190,7 +183,6 @@ slow_player_on_damage() {
 }
 
 slow_down_vehicle() {
-  // slow vehicle by a percentage, and cap it so we don't crawl to a stop
   self.damage_slowdown += VEH_SLOWDOWN_AMOUNT;
   if(self.damage_slowdown > VEH_SLOWDOWN_AMOUNT_MIN)
     self.damage_slowdown = VEH_SLOWDOWN_AMOUNT_MIN;
@@ -251,11 +243,10 @@ start_race_boost() {
 
   wait 0.2;
 
-  // gassed it too soon
   if(self.vehicle.veh_throttle > 0) {
     return;
   }
-  // window of opportunity
+
   while(self.vehicle.veh_throttle == 0) {
     wait 0.05;
     BOOST_WINDOW -= 0.05;
@@ -263,7 +254,6 @@ start_race_boost() {
       return;
   }
 
-  // player gets a boost
   assert(isDefined(self.vehicle));
   self.vehicle thread give_vehicle_boost(50);
 
@@ -312,11 +302,10 @@ stop_magic_bullet_shield_if_shielded() {
 }
 
 speed_balance() {
-  // no speed balancing for only one player
   if(!is_coop()) {
     return;
   }
-  // assuming only 2 players ever
+
   assert(isDefined(level.player));
   assert(isDefined(level.player.snowmobile));
   assert(isDefined(level.player2));
@@ -342,7 +331,6 @@ speed_balance() {
     }
     gap = abs(player1_dist - player2_dist);
 
-    // players go normal speed by default
     playerWinning.snowmobile.veh_topspeed = VEH_SPEED_NORMAL - playerWinning.snowmobile.damage_slowdown;
     playerLosing.snowmobile.veh_topspeed = VEH_SPEED_NORMAL - playerLosing.snowmobile.damage_slowdown;
 
@@ -351,7 +339,6 @@ speed_balance() {
       continue;
     }
 
-    // get a percentage how far behind the player is between min and max
     distanceFraction = abs((gap - SPEED_BALANCE_DIST_MIN) / (SPEED_BALANCE_DIST_MIN - SPEED_BALANCE_DIST_MAX));
     distanceFraction = cap_value(distanceFraction, 0.0, 1.0);
 
@@ -387,7 +374,6 @@ race_music() {
     foreach(player in level.players) {
       player PlayLocalSound(alias);
       if(issplitscreen()) {
-        // only need to play it on one player then
         break;
       }
     }
@@ -433,9 +419,6 @@ put_player_back_on_snowmobile(vehicle) {
 
   if(isDefined(level.track_player_positions))
     self thread track_player_progress(self.snowmobile.origin);
-
-  //self thread maps\_snowmobile_drive::drive_crash_detection( vehicle );
-  //self player_mount_vehicle( vehicle );
 }
 
 player_reset_position_tracking() {
@@ -449,14 +432,13 @@ player_reset_position_tracking() {
     if(!isDefined(vehicle)) {
       continue;
     }
-    // enemy AI vehicles can also hit this trigger so make sure it's not one of them
+
     if(!isDefined(vehicle.player)) {
       continue;
     }
     vehicle.resetPos = ent.origin;
     vehicle.resetAng = ent.angles;
 
-    // offset player 2 so if both players die they don't respawn inside each other
     if(vehicle.player == level.player) {
       continue;
     }
@@ -485,7 +467,6 @@ init_slope_trees() {
     slope_tree_clip[index] = undefined;
   }
 
-  // delete the excess clip
   foreach(clip in slope_tree_clip) {
     clip Delete();
   }
@@ -494,20 +475,17 @@ init_slope_trees() {
 }
 
 slope_tree_think() {
-  //foliage_tree_pine_snow_lg_b
   yaw = randomint(360);
   self.angles = (0, yaw, 0);
   range = 64;
   offset = randomint(range * 2) - range;
 
-  //Line( self.origin, self.origin + ( offset, 0, 0 ), (1,0,0), 1, 0, 5000 );
   self.origin += (offset, 0, 0);
   trace = bulletTrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), false, undefined);
   self.origin = trace["position"] + (0, 0, -8);
-  // self hide();
+
   self.clip hide();
   self.clip.origin = self.origin;
-  //Line( self.origin, self.clip.origin + ( offset, 0, 0 ), (0,1,0), 1, 0, 5000 );
 
   ent = common_scripts\_createfx::createLoopSound();
   ent.v["origin"] = self.origin;
@@ -516,7 +494,6 @@ slope_tree_think() {
 }
 
 get_current_stars(starsThisPlaythrough) {
-  // run on player
   levelIndex = level.specOpsSettings maps\_endmission::getLevelIndex(level.script);
 
   stars = int((self GetLocalPlayerProfileData("missionSOHighestDifficulty"))[levelIndex]);
@@ -532,7 +509,7 @@ custom_eog_summary() {
     if(!isDefined(player)) {
       continue;
     }
-    // Replace "Mission Success" with race winner if it applies
+
     if(is_coop() && isDefined(level.raceWinner)) {
       if(player == level.raceWinner)
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
@@ -543,7 +520,6 @@ custom_eog_summary() {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
     }
 
-    // Replace time for individual times. If player didn't finish print DNF
     finishedRace = isDefined(player.finish_time);
     if(isDefined(player.dnf))
       finishedRace = false;

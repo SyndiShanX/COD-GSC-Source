@@ -21,38 +21,20 @@
 #using scripts\shared\visionset_mgr_shared;
 #namespace zurich_server_room;
 
-function skipto_main() {
-  // Unsupported VM revision (1B).
-}
+function skipto_main() {}
 
-function function_7a462130() {
-  // Unsupported VM revision (1B).
-}
+function function_7a462130() {}
 
-function function_4d2c0fc8() {
-  // Unsupported VM revision (1B).
-}
+function function_4d2c0fc8() {}
 
-function function_46f876ee() {
-  // Unsupported VM revision (1B).
-}
+function function_46f876ee() {}
 
-function function_adc1f7a2() {
-  // Unsupported VM revision (1B).
-}
+function function_adc1f7a2() {}
 
-function skipto_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_done() {}
 
-function function_f62d8d36() {
-  // Unsupported VM revision (1B).
-}
+function function_f62d8d36() {}
 
-function function_69ee2ece() {
-  // Unsupported VM revision (1B).
-}
+function function_69ee2ece() {}
 
-function function_ef7b97bd() {
-  // Unsupported VM revision (1B).
-}
+function function_ef7b97bd() {}

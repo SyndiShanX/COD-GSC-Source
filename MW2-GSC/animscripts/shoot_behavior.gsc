@@ -8,30 +8,17 @@
 #include animscripts\utility;
 #include animscripts\shared;
 
-// Ideally, this will be the only thread *anywhere* that decides what/where to shoot at
-// and how to shoot at it.
-
-// This thread keeps three variables updated, and notifies "shoot_behavior_change" when any of them have changed.
-// They are:
-//shootEnt - an entity. aim/shoot at this if it's defined.
-//shootPos - a vector. aim/shoot towards this if shootEnt isn't defined. if not defined, stop shooting entirely and return to cover if possible.
-//		Whenever shootEnt is defined, shootPos will be defined as its getShootAtPos().
-//shootStyle - how to shoot.
-//"full" (unload on the target), //"burst" (occasional groups of shots), //"semi" (occasianal single shots), //"single" (occasional single shots), //"none" (don't shoot, just aim).
-// This thread will also notify "return_to_cover" and set self.shouldReturnToCover = true if it's a good idea to do so.
-// Notify "stop_deciding_how_to_shoot" to end this thread if no longer trying to shoot.
-
 decideWhatAndHowToShoot(objective) {
   self endon("killanimscript");
-  self notify("stop_deciding_how_to_shoot"); // just in case...
+  self notify("stop_deciding_how_to_shoot");
   self endon("stop_deciding_how_to_shoot");
   self endon("death");
 
-  assert(isDefined(objective)); // just use "normal" if you don't know what to use
+  assert(isDefined(objective));
 
   maps\_gameskill::resetMissTime();
   self.shootObjective = objective;
-  // self.shootObjective is always "normal", "suppress", or "ambush"self.shootEnt = undefined;
+
   self.shootPos = undefined;
   self.shootStyle = "none";
   self.fastBurst = false;
@@ -43,9 +30,6 @@ decideWhatAndHowToShoot(objective) {
   atCover = isDefined(self.coverNode) && self.coverNode.type != "Cover Prone" && self.coverNode.type != "Conceal Prone";
 
   if(atCover) {
-    // it's not safe to do some things until the next frame, // such as canSuppressEnemy(), which may change the state of
-    // self.goodShootPos, which will screw up cover_behavior::main
-    // when this is called but then stopped immediately.
     wait .05;
   }
 
@@ -61,7 +45,6 @@ decideWhatAndHowToShoot(objective) {
   if(self isSniper())
     self resetSniperAim();
 
-  // only watch for incoming fire if it will be beneficial for us to return to cover when shot at.
   if(atCover && (!self.a.atConcealmentNode || !self canSeeEnemy()))
     thread watchForIncomingFire();
   thread runOnShootBehaviorEnd();
@@ -82,7 +65,7 @@ decideWhatAndHowToShoot(objective) {
     }
 
     assert(self.shootObjective == "normal" || self.shootObjective == "suppress" || self.shootObjective == "ambush");
-    assert(!isDefined(self.shootEnt) || isDefined(self.shootPos)); // shootPos must be shootEnt's shootAtPos if shootEnt is defined, for convenience elsewhere
+    assert(!isDefined(self.shootEnt) || isDefined(self.shootPos));
 
     result = undefined;
     if(self.weapon == "none")
@@ -103,7 +86,6 @@ decideWhatAndHowToShoot(objective) {
     prevShootPos = self.shootPos;
     prevShootStyle = self.shootStyle;
 
-    // (trying to prevent many AI from doing lots of work on the same frame)
     if(!isDefined(result))
       WaitABit();
   }
@@ -122,7 +104,6 @@ WaitABit() {
 
     self endon("do_slow_things");
 
-    // (want to keep self.shootPos up to date)
     wait .05;
     while(isDefined(self.shootEnt)) {
       self.shootPos = self.shootEnt getShootAtPos();
@@ -152,7 +133,6 @@ shouldShootEnemyEnt() {
   if(!self canSeeEnemy())
     return false;
 
-  // When not in cover, check if we can shoot at our current enemy as well
   if(!isDefined(self.coverNode) && !self canShootEnemy())
     return false;
 
@@ -161,7 +141,6 @@ shouldShootEnemyEnt() {
 
 rifleShootObjectiveNormal() {
   if(!shouldShootEnemyEnt()) {
-    // enemy disappeared!
     if(self isSniper())
       self resetSniperAim();
 
@@ -255,7 +234,7 @@ getAmbushShootPos() {
 
   newShootPos = self getEye() + anglesToForward(likelyEnemyDir) * dist;
 
-  if(!isDefined(self.shootPos) || distanceSquared(newShootPos, self.shootPos) > 5 * 5) // avoid frequent "shoot_behavior_change" notifies
+  if(!isDefined(self.shootPos) || distanceSquared(newShootPos, self.shootPos) > 5 * 5)
     self.shootPos = newShootPos;
 }
 
@@ -263,8 +242,7 @@ rifleShoot() {
   if(self.shootObjective == "normal") {
     rifleShootObjectiveNormal();
   } else {
-    if(shouldShootEnemyEnt()) // later, maybe we can be more realistic than just shooting at the enemy the instant he becomes visible
-    {
+    if(shouldShootEnemyEnt()) {
       self.shootObjective = "normal";
       self.ambushEndTime = undefined;
       return "retry";
@@ -306,7 +284,7 @@ rpgShoot() {
   self.shootStyle = "single";
 
   distSqToShootPos = lengthsquared(self.origin - self.shootPos);
-  // too close for RPG
+
   if(distSqToShootPos < squared(512)) {
     self notify("return_to_cover");
     self.shouldReturnToCover = true;
@@ -317,7 +295,6 @@ rpgShoot() {
 pistolShoot() {
   if(self.shootObjective == "normal") {
     if(!shouldShootEnemyEnt()) {
-      // enemy disappeared!
       if(!isDefined(self.enemy)) {
         haveNothingToShoot();
         return;
@@ -332,8 +309,7 @@ pistolShoot() {
       self.shootStyle = "single";
     }
   } else {
-    if(shouldShootEnemyEnt()) // later, maybe we can be more realistic than just shooting at the enemy the instant he becomes visible
-    {
+    if(shouldShootEnemyEnt()) {
       self.shootObjective = "normal";
       self.ambushEndTime = undefined;
       return "retry";
@@ -345,7 +321,6 @@ pistolShoot() {
     self.shootStyle = "none";
     self.shootPos = getEnemySightPos();
 
-    // stop ambushing after a while
     if(!isDefined(self.ambushEndTime))
       self.ambushEndTime = gettime() + randomintrange(4000, 8000);
 
@@ -359,7 +334,6 @@ pistolShoot() {
 
 markEnemyPosInvisible() {
   if(isDefined(self.enemy) && !self.changingCoverPos && self.script != "combat") {
-    // make sure they're not just hiding
     if(isAI(self.enemy) && isDefined(self.enemy.script) && (self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch")) {
       if(isDefined(self.enemy.a.coverMode) && self.enemy.a.coverMode == "hide")
         return;
@@ -395,13 +369,10 @@ readyToReturnToCover() {
     return true;
 
   if(gettime() < self.coverPosEstablishedTime + 800) {
-    // don't return to cover until we had time to fire a couple shots;
-    // better to look daring than indecisive
     return false;
   }
 
   if(isPlayer(self.enemy) && self.enemy.health < self.enemy.maxHealth * .5) {
-    // give ourselves some time to take them down
     if(gettime() < self.coverPosEstablishedTime + 3000)
       return false;
   }
@@ -412,7 +383,7 @@ readyToReturnToCover() {
 runOnShootBehaviorEnd() {
   self endon("death");
 
-  self waittill_any("killanimscript", "stop_deciding_how_to_shoot" /*, "return_to_cover"*/ );
+  self waittill_any("killanimscript", "stop_deciding_how_to_shoot");
 
   self.a.laserOn = false;
   self animscripts\shared::updateLaserStatus();
@@ -448,7 +419,7 @@ haveNothingToShoot() {
 }
 
 shouldBeAJerk() {
-  return level.gameskill == 3 && isPlayer(self.enemy); // && self shouldDoSemiForVariety();
+  return level.gameskill == 3 && isPlayer(self.enemy);
 }
 
 fullAutoRangeSq = 250 * 250;
@@ -507,8 +478,8 @@ setShootStyleForSuppression() {
 
   distanceSq = distanceSquared(self getShootAtPos(), self.shootPos);
 
-  assert(!self isSniper()); // snipers shouldn't be suppressing!
-  assert(!isShotgun(self.weapon)); // shotgun users shouldn't be suppressing!
+  assert(!self isSniper());
+  assert(!isShotgun(self.weapon));
 
   if(weaponIsSemiAuto(self.weapon)) {
     if(distanceSq < singleShotRangeSq)
@@ -541,8 +512,6 @@ shouldDoSemiForVariety() {
   if(self.team != "allies")
     return false;
 
-  // true randomness isn't safe, because that will cause frequent shoot_behavior_change notifies.
-  // fake the randomness in a way that won't change frequently.
   changeFrequency = safemod(int(self.origin[1]), 10000) + 2000;
   fakeTimeValue = int(self.origin[0]) + gettime();
 
@@ -573,8 +542,6 @@ sniper_glint_behavior() {
   if(!isAlive(self.enemy)) {
     return;
   }
-  //if( !isPlayer( self.enemy ) )
-  //	return;
 
   fx = getfx("sniper_glint");
 

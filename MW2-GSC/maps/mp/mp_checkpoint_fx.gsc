@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
 

@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 107
   ent = createOneshotEffect("dust_ceiling_ash_large");
   ent.v["origin"] = (-494.259, 1864.84, 370.932);
   ent.v["angles"] = (270, 0, 0);

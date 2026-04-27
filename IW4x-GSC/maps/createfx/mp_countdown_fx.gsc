@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 107
   ent = createOneshotEffect("smoke_missile_launched");
   ent.v["origin"] = (577.799, 1040.57, -522);
   ent.v["angles"] = (270, 0, 0);

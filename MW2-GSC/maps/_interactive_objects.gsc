@@ -7,8 +7,6 @@
 #include common_scripts\utility;
 
 main() {
-  // -- -- -- -- -- -- -- -- -- // EFECTS DEFINITIONS
-  // -- -- -- -- -- -- -- -- -- flag_init("no_ai_tv_damage");
   qBarrels = false;
 
   barrels = getEntArray("explodable_barrel", "targetname");
@@ -96,19 +94,12 @@ main() {
     level.breakables_fx["security_camera_explode"] = loadfx("props/securitycamera_explosion");
   }
 
-  // -- -- -- -- -- -- -- -- -- // -- -- -- -- -- -- -- -- -- // -- -- -- -- -- -- -- -- - // SOUND DEFINITIONS
-  // -- -- -- -- -- -- -- -- - level.barrelExpSound = "barrel_mtl_explode";
-  // -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- - // MISC SETTINGS
-  // -- -- -- -- -- -- - maxBrokenPieces = 25;
   level.breakables_peicesCollide["orange vase"] = true;
   level.breakables_peicesCollide["green vase"] = true;
   level.breakables_peicesCollide["bottle"] = true;
-  //* * * * * * * * * * * * * IF YOU PUT THIS BACK IN - SEARCH FOR "PLATE WAIT" AND PUT THAT BACK IN TOO * * * * * * * * * * * * *
-  // 	level.breakables_peicesCollide[ "plate" ] = true;
-  //* * * * * * * * * * * * * IF YOU PUT THIS BACK IN - SEARCH FOR "PLATE WAIT" AND PUT THAT BACK IN TOO * * * * * * * * * * * * *
 
   level.barrelHealth = 150;
-  // -- -- -- -- -- -- - // -- -- -- -- -- -- - level.precachemodeltype = [];
+
   level.barrelExplodingThisFrame = false;
   level.breakables_clip = [];
   level.breakables_clip = getEntArray("vase_break_remove", "targetname");
@@ -166,8 +157,6 @@ security_camera_logic() {
 
   self setModel(damagemodel);
 
-  // nice to play a sound here to acompany the effect
-
   playFXOnTag(level.breakables_fx["security_camera_explode"], self, "tag_deathfx");
 }
 
@@ -216,7 +205,6 @@ tv_off() {
   while(1) {
     wait .2;
     self.usetrig waittill("trigger");
-    // it would be nice to play a sound here
 
     self notify("off");
 
@@ -272,7 +260,6 @@ glass_logic() {
   cracked = undefined;
   glasshealth = 0;
 
-  // setup	
   if(isDefined(self.target)) {
     cracked = getent(self.target, "targetname");
     assertex(isDefined(cracked), "Destructible glass at origin( " + self.origin + " ) has a target but the cracked version doesn't exist");
@@ -305,8 +292,7 @@ glass_logic() {
     glasshealth = 99;
     cracked linkto(self);
     cracked hide();
-    // Set the contents to 0 to make it non - solid.
-    // Note "notSolid()" won't work since it forgets the contents.
+
     crackedContents = cracked setContents(0);
   }
 
@@ -317,7 +303,6 @@ glass_logic() {
   else
     glasshealth = 250;
 
-  // break	
   self setCanDamage(true);
   while(glasshealth > 0) {
     self waittill("damage", damage, attacker, direction_vec, point, damageType);
@@ -325,7 +310,7 @@ glass_logic() {
     if(!isDefined(direction_vec))
       direction_vec = (0, 0, 1);
     if(!isDefined(damageType))
-      damage = 100000; // scripted calls to break the glass
+      damage = 100000;
     else if(damageType == "MOD_GRENADE_SPLASH")
       damage = damage * 1.75;
     else if(damageType == "MOD_IMPACT")
@@ -345,7 +330,6 @@ glass_logic() {
 
     glasshealth = (200) - prevdamage;
 
-    // Set the contents back so that it's solid
     cracked setContents(crackedContents);
 
     while(glasshealth > 0) {
@@ -354,7 +338,7 @@ glass_logic() {
       if(!isDefined(direction_vec))
         direction_vec = (0, 0, 1);
       if(!isDefined(damageType))
-        damage = 100000; // scripted calls to break the glass
+        damage = 100000;
       else if(damageType == "MOD_GRENADE_SPLASH")
         damage = damage * 1.75;
       else if(damageType == "MOD_IMPACT") {
@@ -490,24 +474,13 @@ oil_spill_burn_section(P) {
   count = 0;
   time = 0;
   playFX(level.breakables_fx["oilspill"]["burn"], P);
-  /*
-  while( time < 5 )
-  {
-  	attacker = undefined;
-  	if( isDefined( self.damageOwner ) )
-  		attacker = self.damageOwner;
-  	
-  	self radiusdamage( P, 32, 5, 1, attacker );
-  	time += 1;
-  	wait 1;
-  }*/
 }
 
 explodable_barrel_think() {
-  if(self.classname != "script_model")
+  if(self.classname != "script_model") {
     return;
-  // if( ( self.model != "com_barrel_benzin" ) && ( self.model != "com_barrel_benzin_snow" ) )
-  // 	return;
+  }
+
   if(!isDefined(level.precachemodeltype["com_barrel_benzin"])) {
     level.precachemodeltype["com_barrel_benzin"] = true;
     precacheModel("com_barrel_piece");
@@ -549,7 +522,6 @@ explodable_barrel_burn() {
   offset1 = (0, 0, 0);
   offset2 = vector_multiply(up, 44);
 
-  // if this isn't true, bad place will turn on and off on the barrel
   assert(BAD_PLACE_DURATION > MAX_COUNT * WAIT_TIME);
 
   if(dot < .5) {
@@ -574,7 +546,7 @@ explodable_barrel_burn() {
     wait WAIT_TIME;
 
     if(!isDefined(self))
-      return; // support deleting explodable barrels.
+      return;
   }
   self thread explodable_barrel_explode();
 }
@@ -611,7 +583,6 @@ explodable_barrel_explode() {
   blastRadius = 250;
   if(isDefined(self.radius))
     blastRadius = self.radius;
-  // radiusDamage( self.origin + ( 0, 0, 56 ), blastRadius, maxDamage, minDamage );
 
   attacker = undefined;
 
@@ -929,17 +900,15 @@ breakable_logic(type) {
   if(isDefined(fx))
     playFX(fx, self.origin);
 
-  // certain types should destroy objects sitting on top of them
   if(hasDependant) {
     others = getEntArray("breakable", "targetname");
     for(i = 0; i < others.size; i++) {
       other = others[i];
-      // see if it's within 40 units from this box on X or Y
+
       diffX = abs(self.origin[0] - other.origin[0]);
       diffY = abs(self.origin[1] - other.origin[1]);
 
       if((diffX <= 20) && (diffY <= 20)) {
-        // see if it's above the box( would probably be resting on it )
         diffZ = (self.origin[2] - other.origin[2]);
         if(diffZ <= 0)
           other notify("damage", amount, ent);
@@ -1014,7 +983,6 @@ xenon_enable_auto_aim(wait_message) {
 }
 
 breakable_clip() {
-  // targeted brushmodels take priority over proximity based breakables - nate
   if(isDefined(self.target)) {
     targ = getent(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
@@ -1022,7 +990,7 @@ breakable_clip() {
       return;
     }
   }
-  // setup it's removable clip part
+
   if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0))
     self.remove = getClosestEnt(self.origin, level.breakables_clip);
   if(isDefined(self.remove))
@@ -1203,7 +1171,6 @@ pieces_move(origin) {
   org = spawn("script_origin", self.origin);
   self linkto(org);
   end = self.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) + 5);
-  // end = self.origin + ( randomfloat( 50 ) - 25, randomfloat( 50 ) - 25, randomfloat( 50 ) + 25 );
 
   vec = undefined;
   if(isDefined(self.type) && self.type == "bottle_top") {
@@ -1246,11 +1213,6 @@ pieces_move(origin) {
 pieces_collision(height) {
   self endon("death");
 
-  //* * * * * * * * * * * * * IF YOU PUT THIS BACK IN - SEARCH FOR "PLATE WAIT" AND PUT THAT BACK IN TOO * * * * * * * * * * * * * 	
-  // 	if( isDefined( self.type ) && self.type == "plate" )
-  // 		wait .35;
-  // 	else
-  //* * * * * * * * * * * * * IF YOU PUT THIS BACK IN - SEARCH FOR "PLATE WAIT" AND PUT THAT BACK IN TOO * * * * * * * * * * * * *
   wait .1;
   trace = bulletTrace(self.origin, self.origin - (0, 0, 50000), false, undefined);
   vec = trace["position"];
@@ -1268,8 +1230,6 @@ pieces_collision(height) {
 
 addpiece(rt, fw, up, xs, ys, zs, wholepiece, angles, model) {
   scale = 1;
-  // 	if( isDefined( wholepiece.modelscale ) )
-  // 		scale = wholepiece.modelscale;
 
   x = rt;
   y = fw;
@@ -1294,8 +1254,7 @@ getFurthestEnt(org, array) {
   }
   dist = distance(array[0] getorigin(), org);
   ent = array[0];
-  // 	dist = 256;
-  // 	ent = undefined;
+
   for(i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
     if(newdist < dist)
@@ -1310,8 +1269,7 @@ getClosestEnt(org, array) {
   if(array.size < 1) {
     return;
   }
-  // 	dist = distance( array[ 0 ] getorigin(), org );
-  // 	ent = array[ 0 ];
+
   dist = 256;
   ent = undefined;
   for(i = 0; i < array.size; i++) {
@@ -1328,8 +1286,7 @@ getClosestAccurantEnt(org, array) {
   if(array.size < 1) {
     return;
   }
-  // 	dist = distance( array[ 0 ] getorigin(), org );
-  // 	ent = array[ 0 ];
+
   dist = 8;
   ent = undefined;
   for(i = 0; i < array.size; i++) {
@@ -1346,8 +1303,7 @@ getClosestAimEnt(org, array) {
   if(array.size < 1) {
     return;
   }
-  // 	dist = distance( array[ 0 ] getorigin(), org );
-  // 	ent = array[ 0 ];
+
   dist = 1000000;
   ent = undefined;
   for(i = 0; i < array.size; i++) {

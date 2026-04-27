@@ -7,39 +7,6 @@
 #include maps\_vehicle_aianim;
 #using_animtree("vehicles");
 
-/*QUAKED script_vehicle_littlebird_armed (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-valid ai groups are:
-"first_guys" - left and right side guys that need to be on first
-"left" - all left guys
-"right" - all right guys
-"passengers" - everybody that can unload
-"default"put this in your GSC:
-maps\_littlebird::main( "vehicle_little_bird_armed" );
-
-and these lines in your CSV:
-#include,vehicle_littlebird_armed
-sound,vehicle_littlebird,vehicle_standard,all_sp
-#include,_attack_heli
-
-defaultmdl="vehicle_little_bird_armed"default:"vehicletype" "littlebird"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_littlebird_bench (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-valid ai groups are:
-"first_guys" - left and right side guys that need to be on first
-"left" - all left guys
-"right" - all right guys
-"passengers" - everybody that can unload
-"default"put this in your GSC:
-maps\_littlebird::main( "vehicle_little_bird_bench" );
-
-and these lines in your CSV:
-#include,vehicle_littlebird_bench
-sound,vehicle_littlebird,vehicle_standard,all_sp
-
-defaultmdl="vehicle_little_bird_bench"default:"vehicletype" "littlebird"default:"script_team" "axis"*/
-
 armed(model) {
   return model == "vehicle_little_bird_armed";
 }
@@ -55,13 +22,11 @@ main(model, type) {
   build_deathmodel("vehicle_little_bird_bench");
   build_drive(%mi28_rotors, undefined, 0, 3.0);
 
-  //Bullet damage Crash and Burn, spins out of control and explodes when it reaches destination
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);
   build_deathfx("fire/fire_smoke_trail_L", "tag_engine", "littlebird_helicopter_dying_loop", true, 0.05, true, 0.5, true);
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 2.5, true);
   build_deathfx("explosions/helicopter_explosion_little_bird", undefined, "littlebird_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");
 
-  //Death by Rocket effects, explodes immediatly
   build_rocket_deathfx("explosions/aerial_explosion_littlebird", "tag_deathfx", "littlebird_helicopter_crash", undefined, undefined, undefined, undefined, true, undefined, 0);
 
   build_deathquake(0.8, 1.6, 2048);
@@ -70,7 +35,7 @@ main(model, type) {
   build_team("axis");
   build_mainturret();
   build_unload_groups(::unload_groups);
-  build_aianims(::setanims, ::set_vehicle_anims); //hi this is text
+  build_aianims(::setanims, ::set_vehicle_anims);
 
   randomStartDelay = randomfloatrange(0, 1);
   build_light(model, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_white_blink", "running", randomStartDelay);
@@ -95,16 +60,15 @@ use_old_turret() {
 
 init_local() {
   self endon("death");
-  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground")); // TODO - FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  //self.delete_on_death = true;
-  self.script_badplace = false; // All helicopters dont need to create bad places
-  self.dontDisconnectPaths = true; //so it can land. pathing through heli's generally not a problem
+  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
 
-  // set ent flag prep_unload before the unload node.
+  self.script_badplace = false;
+  self.dontDisconnectPaths = true;
+
   self thread littlebird_landing();
   thread maps\_vehicle::lights_on("running");
 
-  waittillframeend; // wait for turrets to get setup	
+  waittillframeend;
 
   if(!use_old_turret()) {
     foreach(turret in self.mgturret) {
@@ -178,13 +142,13 @@ setanims() {
   positions[3].idle[1] = % little_bird_aim_idle_guy3;
   positions[4].idle[1] = % little_bird_aim_idle_guy2;
   positions[5].idle[1] = % little_bird_aim_idle_guy1;
-  //	positions[ 6 ].idle[ 1 ] = %little_bird_aim_idle_guy3;
+
   positions[7].idle[1] = % little_bird_aim_idle_guy2;
   positions[2].idleoccurrence[1] = 200;
   positions[3].idleoccurrence[1] = 266;
   positions[4].idleoccurrence[1] = 156;
   positions[5].idleoccurrence[1] = 277;
-  //	positions[ 6 ].idleoccurrence[ 1 ] = 246;
+
   positions[7].idleoccurrence[1] = 288;
 
   positions[2].idle_alert = % little_bird_alert_idle_guy1;

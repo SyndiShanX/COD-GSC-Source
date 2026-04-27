@@ -59,8 +59,6 @@ givePlayerScore(event, player, victim, overrideCheckPlayerScoreLimitSoon, overri
   if(!level.teambased)
     thread sendUpdatedDMScores();
 
-  //	player score and team score aren't always the same values towards winning the match
-  //	checkScoreLimit() checks team score correctly, checkPlayerScoreLimitSoon() uses player score
   if(!overrideCheckPlayerScoreLimitSoon)
     player maps\mp\gametypes\_gamelogic::checkPlayerScoreLimitSoon();
 
@@ -77,8 +75,6 @@ onPlayerScore(event, player, victim) {
 
   player.pers["score"] += score * level.objectivePointsMod;
 }
-
-// Seems to only be used for reducing a player's score due to suicide
 _setPlayerScore(player, score) {
   if(score == player.pers["score"]) {
     return;
@@ -165,8 +161,6 @@ updateTeamScore(team) {
     teamScore = game["roundsWon"][team];
 
   setTeamScore(team, teamScore);
-
-  //thread sendUpdatedTeamScores();
 }
 
 _getTeamScore(team) {
@@ -240,7 +234,7 @@ updatePlacement() {
   for(i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    //		for( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
+
     for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
       placementAll[j + 1] = placementAll[j];
     placementAll[j + 1] = player;
@@ -266,8 +260,6 @@ getBetterPlayer(playerA, playerB) {
 
   if(playerB.deaths < playerA.deaths)
     return playerB;
-
-  // TODO: more metrics for getting the better player
 
   if(cointoss())
     return playerA;
@@ -297,9 +289,6 @@ updateTeamPlacement() {
 }
 
 initialDMScoreUpdate() {
-  // the first time we call updateDMScores on a player, we have to send them the whole scoreboard.
-  // by calling updateDMScores on each player one at a time, // we can avoid having to send the entire scoreboard to every single player
-  // the first time someone kills someone else.
   wait .2;
   numSent = 0;
   while(1) {
@@ -323,7 +312,7 @@ initialDMScoreUpdate() {
     }
 
     if(!didAny)
-      wait 3; // let more players connect
+      wait 3;
   }
 }
 
@@ -331,7 +320,7 @@ processAssist(killedplayer) {
   self endon("disconnect");
   killedplayer endon("disconnect");
 
-  wait .05; // don't ever run on the same frame as the playerkilled callback.
+  wait .05;
   WaitTillSlowProcessAllowed();
 
   if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
@@ -355,7 +344,7 @@ processShieldAssist(killedPlayer) {
   self endon("disconnect");
   killedPlayer endon("disconnect");
 
-  wait .05; // don't ever run on the same frame as the playerkilled callback.
+  wait .05;
   WaitTillSlowProcessAllowed();
 
   if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {

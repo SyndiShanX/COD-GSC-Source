@@ -15,34 +15,18 @@
 #using scripts\shared\vehicles\_hunter;
 #namespace namespace_1254c007;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function function_9f32fed2() {
-  // Unsupported VM revision (1B).
-}
+function function_9f32fed2() {}
 
-function function_4b099a44() {
-  // Unsupported VM revision (1B).
-}
+function function_4b099a44() {}
 
-function function_febb5e1e() {
-  // Unsupported VM revision (1B).
-}
+function function_febb5e1e() {}
 
-function function_8f28e703() {
-  // Unsupported VM revision (1B).
-}
+function function_8f28e703() {}
 
-function function_bf52f93f() {
-  // Unsupported VM revision (1B).
-}
+function function_bf52f93f() {}

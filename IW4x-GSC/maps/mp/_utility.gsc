@@ -14,7 +14,6 @@ exploder_sound() {
 }
 
 delayThread(timer, func, param1, param2, param3, param4, param5) {
-  // to thread it off
   thread delayThread_proc(func, timer, param1, param2, param3, param4, param5);
 }
 
@@ -61,8 +60,6 @@ getPlant() {
 
   trace = bulletTrace(traceorigins[0], (traceorigins[0] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    //println("^6Using traceorigins[0], tracefraction is", trace["fraction"]);
-
     temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
@@ -71,8 +68,6 @@ getPlant() {
 
   trace = bulletTrace(traceorigins[1], (traceorigins[1] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    //println("^6Using traceorigins[1], tracefraction is", trace["fraction"]);
-
     temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
@@ -89,17 +84,9 @@ getPlant() {
   for(i = 0; i < traceorigins.size; i++) {
     trace = bulletTrace(traceorigins[i], (traceorigins[i] + (0, 0, -1000)), false, undefined);
 
-    //ent[i] = spawn("script_model",(traceorigins[i]+(0, 0, -2)));
-    //ent[i].angles = (0, 180, 180);
-    //ent[i] setModel("105");
-
-    //println("^6trace ", i ," fraction is ", trace["fraction"]);
-
     if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
       besttraceposition = trace["position"];
-
-      //println("^6besttracefraction set to ", besttracefraction, " which is traceorigin[", i, "]");
     }
   }
 
@@ -124,20 +111,12 @@ orientToNormal(normal) {
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
 
-  //println("^6hor_normal is ", hor_normal);
-  //println("^6hor_length is ", hor_length);
-  //println("^6hor_dir is ", hor_dir);
-  //println("^6neg_height is ", neg_height);
-  //println("^6tangent is ", tangent);
-  //println("^6plant_angle is ", plant_angle);
-
   return plant_angle;
 }
 
 deletePlacedEntity(entity) {
   entities = getEntArray(entity, "classname");
   for(i = 0; i < entities.size; i++) {
-    //println("DELETED: ", entities[i].classname);
     entities[i] delete();
   }
 }
@@ -241,7 +220,6 @@ setLowerMessage(name, text, time, priority) {
 
   self addLowerMessage(name, text, time, priority);
   self updateLowerMessage();
-  //self notify( "lower_message_set" );
 }
 
 updateLowerMessage() {
@@ -331,7 +309,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
 
   shouldDoEnemySounds = false;
   if(isDefined(soundEnemy)) {
-    assert(shouldDoSounds); // can't have an enemy sound without a friendly sound
+    assert(shouldDoSounds);
     shouldDoEnemySounds = true;
   }
 
@@ -560,13 +538,7 @@ updatePersRatioBuffered(ratio, num, denom) {
 
   self maps\mp\gametypes\_persistence::statSetBuffered(ratio, int((numValue * 1000) / denomValue));
 }
-
-// to be used with things that are slow.
-// unfortunately, it can only be used with things that aren't time critical.
 WaitTillSlowProcessAllowed(allowLoop) {
-  // wait only a few frames if necessary
-  // if we wait too long, we might get too many threads at once and run out of variables
-  // i'm trying to avoid using a loop because i don't want any extra variables
   if(level.lastSlowProcessFrame == gettime()) {
     if(isDefined(allowLoop) && allowLoop) {
       while(level.lastSlowProcessFrame == getTime())
@@ -701,7 +673,6 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
     return;
   }
   if(isDefined(group)) {
-    // ignore the message if one from the same group is already playing
     if(self.leaderDialogGroup == group) {
       if(groupOverride) {
         self stopLocalSound(self.leaderDialogActive);
@@ -716,7 +687,6 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
     self.leaderDialogGroups[group] = dialog;
     dialog = group;
 
-    // exit because the "group" dialog call is already in the queue
     if(hadGroupDialog)
       return;
   }
@@ -971,8 +941,6 @@ get_damageable_player_pos(player) {
 get_damageable_grenade_pos(grenade) {
   return grenade.origin;
 }
-
-// this should be a code function.
 getDvarVec(dvarName) {
   dvarString = getDvar(dvarName);
 
@@ -1053,10 +1021,7 @@ restoreData() {
   self setOffhandSecondaryClass(saveData.offhandClass);
 
   foreach(weapon in saveData.weapons) {
-    //if( weapon.name == self.loadoutPrimary + "_mp" )
     self _giveWeapon(weapon.name, int(tableLookup("mp/camoTable.csv", 1, self.loadoutPrimaryCamo, 0)));
-    //else
-    //self _giveWeapon( weapon.name );
 
     self setWeaponAmmoClip(weapon.name, weapon.clipAmmoR, "right");
     if(isSubStr(weapon.name, "akimbo"))
@@ -1074,7 +1039,6 @@ restoreData() {
     if(weapon == "none")
       weapon = self getLastWeapon();
 
-    // Can remove this when "spawn" isn't used after final stand
     self setSpawnWeapon(weapon);
     self switchToWeapon(weapon);
   }
@@ -1274,8 +1238,7 @@ getTimeLimit() {
       return timeLimit;
     else
       return 1;
-  } else if(isDefined(level.dd) && level.dd && isDefined(level.bombexploded) && level.bombexploded > 0) //to handle extra time added by dd bombs
-  {
+  } else if(isDefined(level.dd) && level.dd && isDefined(level.bombexploded) && level.bombexploded > 0) {
     return (getWatchedDvar("timelimit") + (level.bombexploded * level.ddTimeToAdd));
   } else {
     return getWatchedDvar("timelimit");
@@ -1365,9 +1328,6 @@ freezeControlsWrapper(frozen) {
 }
 
 clearUsingRemote() {
-  //if( !isWeaponEnabled() )
-  //	self disableWeapons();
-
   if(isDefined(self.carryIcon))
     self.carryIcon.alpha = 1;
 
@@ -1466,8 +1426,6 @@ _clearPerks() {
   self.perks = [];
   self clearPerks();
 }
-
-// Quick Sort - pass it an array it will come back sorted
 quickSort(array) {
   return quickSortMid(array, 0, array.size - 1);
 }
@@ -1530,13 +1488,9 @@ rankingEnabled() {
   assert(isPlayer(self));
   return (level.rankedMatch && !self.usingOnlineDataOffline);
 }
-
-// only true for private match
 privateMatch() {
   return (level.onlineGame && getDvarInt("xblive_privatematch"));
 }
-
-// only true for playlist based LIVE and PSN games
 matchMakingGame() {
   return (level.onlineGame && !getDvarInt("xblive_privatematch"));
 }
@@ -1551,10 +1505,6 @@ endSceneOnDeath(object) {
 }
 
 getGametypeNumLives() {
-  //commented out to allow diehardhard rules to support mulitiple life gametypes
-  //if( level.dieHardMode && !getWatchedDvar( "numlives" ) )
-  //	return 1;
-  //else
   return getWatchedDvar("numlives");
 }
 
@@ -1631,7 +1581,6 @@ statusMenu(duration) {
 
   self closepopupMenu("status_update");
 
-  // debounce
   wait(10.0);
 
   self.statusMenu = false;
@@ -1655,18 +1604,18 @@ isKillstreakWeapon(weapon) {
     case "airdrop_sentry_marker_mp":
     case "airdrop_mega_marker_mp":
     case "airdrop_marker_mp":
-    case "cobra_player_minigun_mp": // Chopper Gunner
-    case "artillery_mp": // Precision Airstrike
-    case "stealth_bomb_mp": // Stealth Bomber
-    case "pavelow_minigun_mp": // Pave Low
-    case "sentry_minigun_mp": // Sentry Gun
-    case "harrier_20mm_mp": // Harrier Strike
-    case "ac130_105mm_mp": // AC130
-    case "ac130_40mm_mp": // AC130
-    case "ac130_25mm_mp": // AC130
-    case "remotemissile_projectile_mp": // Hellfire
-    case "cobra_20mm_mp": // Attack Helicopter
-    case "nuke_mp": // Nuke			
+    case "cobra_player_minigun_mp":
+    case "artillery_mp":
+    case "stealth_bomb_mp":
+    case "pavelow_minigun_mp":
+    case "sentry_minigun_mp":
+    case "harrier_20mm_mp":
+    case "ac130_105mm_mp":
+    case "ac130_40mm_mp":
+    case "ac130_25mm_mp":
+    case "remotemissile_projectile_mp":
+    case "cobra_20mm_mp":
+    case "nuke_mp":
       return true;
     default:
       return false;
@@ -1678,7 +1627,6 @@ getWeaponClass(weapon) {
 
   weaponClass = tablelookup("mp/statstable.csv", 4, tokens[0], 2);
 
-  // handle special case weapons like grenades, airdrop markers, etc...
   if(weaponClass == "") {
     weaponName = strip_suffix(weapon, "_mp");
     weaponClass = tablelookup("mp/statstable.csv", 4, weaponName, 2);
@@ -1690,7 +1638,7 @@ getWeaponClass(weapon) {
     weaponClass = "killstreak";
   else if(isDeathStreakWeapon(weapon))
     weaponClass = "deathstreak";
-  else if(weapon == "none") //airdrop crates
+  else if(weapon == "none")
     weaponClass = "other";
   else if(weaponClass == "")
     weaponClass = "other";
@@ -1812,18 +1760,11 @@ _updateTeamUsable(team) {
     level waittill("joined_team");
   }
 }
-
-// More general version of makeTeamUsable() which handles FFA
 makeEnemyUsable(owner) {
   self makeUsable();
   self thread _updateEnemyUsable(owner);
 }
-
-// Only used for Tactical Insertion for now
-// If used for other things, handle owner disappearing or changing team
 _updateEnemyUsable(owner) {
-  // check what happens if the owner leaves
-
   self endon("death");
 
   team = owner.team;
@@ -1889,18 +1830,13 @@ gameFlagWait(flagName) {
   while(!gameFlag(flagName))
     level waittill(flagName);
 }
-
-// including grenade launcher, grenade, RPG, C4, claymore
 isExplosiveDamage(meansofdeath) {
   explosivedamage = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_PROJECTILE MOD_PROJECTILE_SPLASH MOD_EXPLOSIVE mod_explosive";
   if(isSubstr(explosivedamage, meansofdeath))
     return true;
   return false;
 }
-
-// if primary weapon damage
 isPrimaryDamage(meansofdeath) {
-  // including pistols as well since sometimes they share ammo
   if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_EXPLOSIVE_BULLET")
     return true;
   return false;

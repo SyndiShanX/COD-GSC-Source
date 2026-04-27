@@ -174,8 +174,8 @@ updateBar(barFrac, rateOfChange) {
     updateBarScale(barFrac, rateOfChange);
 }
 
-updateBarScale(barFrac, rateOfChange) // rateOfChange is optional and is in "(entire bar lengths) per second"{
-barWidth = int(self.width * barFrac + 0.5); // (+ 0.5 rounds)
+updateBarScale(barFrac, rateOfChange)
+barWidth = int(self.width * barFrac + 0.5);
 
 if(!barWidth)
   barWidth = 1;
@@ -184,14 +184,10 @@ self.bar.frac = barFrac;
 self.bar setShader(self.bar.shader, barWidth, self.height);
 
 assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
-
-//if barWidth is bigger than self.width then we are drawing more than 100% if(isDefined(rateOfChange) && barWidth < self.width) {
 if(rateOfChange > 0) {
-  //printLn( "scaling from: " + barWidth + " to " + self.width + " at " + ((1 - barFrac) / rateOfChange) );
   assertex(((1 - barFrac) / rateOfChange) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
   self.bar scaleOverTime((1 - barFrac) / rateOfChange, self.width, self.height);
 } else if(rateOfChange < 0) {
-  //printLn( "scaling from: " + barWidth + " to " + 0 + " at " + (barFrac / (-1 * rateOfChange)) );
   assertex((barFrac / (-1 * rateOfChange)) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
   self.bar scaleOverTime(barFrac / (-1 * rateOfChange), 1, self.height);
 }
@@ -346,7 +342,6 @@ createServerBar(color, width, height, flashFrac, team, selected) {
   barElem.hidden = false;
   if(isDefined(flashFrac)) {
     barElem.flashFrac = flashFrac;
-    //		barElem thread flashThread();
   }
 
   if(isDefined(team))
@@ -384,7 +379,6 @@ createBar(color, width, height, flashFrac) {
   barElem.hidden = false;
   if(isDefined(flashFrac)) {
     barElem.flashFrac = flashFrac;
-    //		barElem thread flashThread();
   }
 
   barElemBG = newClientHudElem(self);
@@ -569,7 +563,6 @@ transitionReset() {
     self.fontScale = self.baseFontScale;
     self.label = &"";
   } else if(self.elemType == "icon") {
-    //self scaleOverTime( 0.001, self.width, self.height );
     self setShader(self.shader, self.width, self.height);
   }
   self.alpha = 0;

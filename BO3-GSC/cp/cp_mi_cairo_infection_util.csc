@@ -7,94 +7,48 @@
 #using scripts\shared\util_shared;
 #namespace infection_util;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function init_fx() {
-  // Unsupported VM revision (1B).
-}
+function init_fx() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function callback_time_snow_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_time_snow_fx() {}
 
-function callback_time_dmg_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_time_dmg_fx() {}
 
-function callback_reverse_time_explosion_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_reverse_time_explosion_fx() {}
 
-function callback_exploding_death_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_exploding_death_fx() {}
 
-function callback_sarah_light() {
-  // Unsupported VM revision (1B).
-}
+function callback_sarah_light() {}
 
-function function_cdbbde70() {
-  // Unsupported VM revision (1B).
-}
+function function_cdbbde70() {}
 
-function function_206d5db6() {
-  // Unsupported VM revision (1B).
-}
+function function_206d5db6() {}
 
-function callback_fx_snow_players() {
-  // Unsupported VM revision (1B).
-}
+function callback_fx_snow_players() {}
 
-function fx_clear() {
-  // Unsupported VM revision (1B).
-}
+function fx_clear() {}
 
-function fx_delete_type() {
-  // Unsupported VM revision (1B).
-}
+function fx_delete_type() {}
 
-function fx_play_on_tag() {
-  // Unsupported VM revision (1B).
-}
+function fx_play_on_tag() {}
 
-function fx_play() {
-  // Unsupported VM revision (1B).
-}
+function fx_play() {}
 
-function callback_ally_spawn_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_ally_spawn_fx() {}
 
-function callback_stop_post_fx() {
-  // Unsupported VM revision (1B).
-}
+function callback_stop_post_fx() {}
 
-function postfx_dni_interrupt() {
-  // Unsupported VM revision (1B).
-}
+function postfx_dni_interrupt() {}
 
-function postfx_futz() {
-  // Unsupported VM revision (1B).
-}
+function postfx_futz() {}
 
-function ent_camo_material_callback() {
-  // Unsupported VM revision (1B).
-}
+function ent_camo_material_callback() {}
 
-function function_207ed741() {
-  // Unsupported VM revision (1B).
-}
+function function_207ed741() {}
 
-function function_5ae9b898() {
-  // Unsupported VM revision (1B).
-}
+function function_5ae9b898() {}

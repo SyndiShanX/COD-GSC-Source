@@ -11,7 +11,6 @@
 #using_animtree("generic_human");
 
 main() {
-  //STARTS
   default_start(::start_tunnels);
   add_start("tunnels", ::start_tunnels, "[tunnels] -> make you way to WH", ::tunnels_main);
   add_start("oval_office", ::start_oval_office, "[oval_office] -> Will only work for testing anims");
@@ -37,7 +36,7 @@ global_inits() {
   precachemodel("mil_emergency_flare");
   precachemodel("furniture_chandelier1_off");
   PreCacheTurret("heli_spotlight");
-  precachemodel("cod3mg42"); // should be a spotlight model but can't find one that works as a turret.
+  precachemodel("cod3mg42");
   PrecacheItem("rpg_straight");
   precachemodel("com_door_01_handleleft2");
   precachemodel("mil_sandbag_plastic_white_single_flat");
@@ -62,10 +61,8 @@ global_inits() {
 
   add_global_spawn_function("allies", ::set_color_goal_func);
 
-  // jets fly by sound.
   array_thread(getvehiclenodearray("plane_sound", "script_noteworthy"), maps\_mig29::plane_sound_node);
 
-  // threat bias groups for approach whitehouse enemies. so that I can make them not shoot me in the back.
   createthreatbiasgroup("ignore_player");
   createthreatbiasgroup("player");
   SetIgnoreMeGroup("player", "ignore_player");
@@ -79,13 +76,13 @@ global_inits() {
 }
 
 music() {
-  music_loop("dc_whitehouse_tunneldrone", 140); //2:20
+  music_loop("dc_whitehouse_tunneldrone", 140);
 
   flag_wait("music_cue");
-  music_loop("dc_whitehouse_attack", 328, 1); // 5:28
+  music_loop("dc_whitehouse_attack", 328, 1);
 
   flag_wait("whitehouse_entrance_clear");
-  music_loop("dc_whitehouse_attack_int", 328, 7); // 5:28
+  music_loop("dc_whitehouse_attack_int", 328, 7);
 
   flag_wait("whitehouse_2min");
   music_play("dc_whitehouse_endrun", 5);
@@ -172,10 +169,9 @@ tunnels_main() {
 
 tunnels_dialogues() {
   flag_wait("whitehouse_ambience");
-  // Sounds like the party's already started.
+
   level.dunn dialogue_queue("dcemp_cpd_partystarted");
 
-  // Roger that. Stay frosty.
   level.foley dialogue_queue("dcemp_fly_rogerstayfrosty");
 }
 
@@ -259,7 +255,6 @@ whitehouse_main() {
 
   flag_wait("whitehouse_spotlight");
   thread maps\_weather::rainnone(20);
-  //thread maps\_ambient::set_ambience_blend_over_time( 20, "dcemp_dry", "dcemp_light_rain" );
 
   level thread whitehouse_drone_slaughter();
 
@@ -287,7 +282,6 @@ whitehouse_spotlight_main() {
 }
 
 whitehouse_spotlight_dunn() {
-  // todo: add dialogue
   flag_wait("whitehouse_entrance_moveup");
   wait 8;
 
@@ -404,7 +398,7 @@ oval_office() {
 
 oval_office_dialogue() {
   flag_wait("oval_office_foley_dialogue");
-  // Dunn, get the door!
+
   level.foley dialogue_queue("dcwhite_fly_dunngetdoor");
 
   wait 2.5;
@@ -438,7 +432,6 @@ oval_office_window() {
 }
 
 oval_office_door() {
-  // align door since it seems to get moved in the compile. - BUG?
   animent = getent("oval_office_door_animent", "targetname");
   door = getent("oval_office_door", "targetname");
 
@@ -458,16 +451,14 @@ oval_office_door() {
 whitehouse_dialogue() {
   level thread whitehouse_nag();
 
-  // Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank!
   level.marshall dialogue_queue("dcemp_cml_moremen");
 
   flag_wait("whitehouse_briefing_end");
   flag_wait("whitehouse_entrance_init");
   wait 4;
 
-  //We need to punch through right here!
   level.foley dialogue_queue("dcemp_fly_punchthrough");
-  //Take out those machine guns!
+
   level.foley dialogue_queue("dcemp_fly_machineguns");
 
   level thread westwing_dialogue();
@@ -475,27 +466,25 @@ whitehouse_dialogue() {
 
 westwing_dialogue() {
   flag_wait("whitehouse_entrance_clear");
-  //Ramirez, let's go!
+
   level.foley dialogue_queue("dcemp_fly_ramirezgo");
 
   flag_wait("whitehouse_2min");
 
-  //Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em!
   level.foley dialogue_queue("dcemp_fly_flattenthecity");
 
-  //We got less than two minutes, let's go!
   level.foley dialogue_queue("dcemp_fly_lessthantwomins");
 
   flag_wait("whitehouse_90sec");
-  // 90 seconds! We got to push through.
+
   level.foley dialogue_queue("dcemp_fly_90seconds");
 
   flag_wait("whitehouse_1min");
-  // One minute! Go go go!
+
   level.foley dialogue_queue("dcemp_fly_60seconds");
 
   flag_wait("whitehouse_30sec");
-  // 30 seconds! We gotta get to the roof now!! Go! Go!
+
   level.foley dialogue_queue("dcemp_fly_30seconds");
 }
 
@@ -504,7 +493,7 @@ whitehouse_radio_broadcast(soundalias) {
   flag_set("broadcast");
 
   radio_array = SortByDistance(level.radio_array, level.player.origin);
-  play_count = 3; // 3
+  play_count = 3;
 
   current_radios = [];
 
@@ -512,7 +501,6 @@ whitehouse_radio_broadcast(soundalias) {
 
   radio = undefined;
   for(i = 0; i < radio_array.size; i++) {
-    // distance above or below player
     dist = abs(level.player getEye()[2] - radio_array[i].origin[2]);
     if(dist > 150) {
       continue;
@@ -530,7 +518,6 @@ whitehouse_radio_broadcast(soundalias) {
 
   level.radios = current_radios;
 
-  // sometimes no good radio is found.
   foreach(radio in current_radios) {
     radio add_wait(::waittill_msg, "sounddone");
   }
@@ -547,23 +534,23 @@ whitehouse_radio_loop() {
     flag_clear("broadcast_end");
 
     flag_waitopen("broadcast_pause");
-    // This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect.
+
     whitehouse_radio_broadcast("dcemp_fp1_hammerdown");
 
     flag_waitopen("broadcast_pause");
-    // If you can receive this transmission, you are in a hardened high-value structure.
+
     whitehouse_radio_broadcast("dcemp_fp1_highvalue");
 
     flag_waitopen("broadcast_pause");
-    // Deploy green flares on the roof of this structure to indicate you are still combat effective.
+
     whitehouse_radio_broadcast("dcemp_fp1_greenflares");
 
     flag_waitopen("broadcast_pause");
-    // We will abort our mission on direct visual contact with this countersign.
+
     whitehouse_radio_broadcast("dcemp_fp1_willabort");
 
     flag_set("broadcast_end");
-    wait 0.05; // lets other threads react to flags
+    wait 0.05;
   }
 }
 
@@ -625,7 +612,6 @@ whitehouse_radio() {
     time_left = 120 - ((level.countdown_index - 1) * 30);
     level.hammerdown_time = gettime() + (time_left * 1000);
 
-    // set countdown flags
     flag_set(countdown_flag[level.countdown_index - 1]);
 
     if(level.countdown_index == 4) {
@@ -640,38 +626,22 @@ whitehouse_radio() {
     flag_clear("countdown");
   }
 
-  // 30 seconds to go ...
-
-  // jest will spawn at this point.
   flag_set("whitehouse_hammerdown_jets");
 
   flag_wait("whitehouse_path_office_2");
 
-  //(garble)...target package Whiskey Hotel Zero-One has been authorized....roger...passing IP Buick...standby…
   level thread whitehouse_radio_broadcast("dcemp_fp1_beenauthorized");
 
   flag_wait("whitehouse_hammerdown_jets_fly");
   wait 7;
 
-  // Countersign detected at the Whiskey Hotel! Abort abort!!
   whitehouse_radio_broadcast("dcemp_fp1_abortabort");
-  //We got a countersign! Abort mission!
-  whitehouse_radio_broadcast("dcemp_fp2_abortmission"); //
+
+  whitehouse_radio_broadcast("dcemp_fp2_abortmission");
   wait 4;
   delaythread(1.5, ::flag_set, "whitehouse_wrapup");
-  //Aborting weapons release! Rolling out!
+
   whitehouse_radio_broadcast("dcemp_fp3_rollingout");
-
-  //Roger, weapons on safe! Aborting mission!
-  //	whitehouse_radio_broadcast( "dcemp_fp4_abortingmission" );
-
-  // Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one.
-  //	whitehouse_radio_broadcast( "dcemp_fp1_closeone" );
-  //We're sending word back to HQ, stay alive down there. Cujo 5-1 out.
-  //	whitehouse_radio_broadcast( "dcemp_fp1_wordtohq" );
-
-  //Cujo 5-1 to friendly ground units - that was a close one. Stay alive down there. Cujo 5-1 out.
-  //	whitehouse_radio_broadcast( "dcemp_fp1_closeone2" );
 }
 
 whitehouse_hammerdown_jets() {
@@ -683,11 +653,10 @@ whitehouse_hammerdown_jets() {
 }
 
 whitehouse_hammerdown() {
-  // if the player makes it to the ramp don't fail, unless already hammered.
   level endon("whitehouse_path_roof");
 
   flag_wait("whitehouse_30sec");
-  // 30 seconds to go from this point.
+
   wait 30;
 
   level thread whitehouse_hammerdown_kill();
@@ -738,15 +707,12 @@ whitehouse_nag() {
   while(true) {
     wait 30;
 
-    //Work your way to the left!!
     level.foley dialogue_queue("dcemp_fly_workyourwayleft");
     wait 15;
 
-    //Ramirez, let's go!
     level.foley dialogue_queue("dcemp_fly_ramirezgo");
     wait 20;
 
-    //Move up! We gotta take the left flank!
     level.foley dialogue_queue("dcemp_fly_takeleftflank");
     wait 15;
   }
@@ -820,7 +786,6 @@ oval_office_foley() {
   flag_wait("oval_office_scene");
 
   if(distance(level.player.origin, level.foley.origin) > 500) {
-    // teleport foley closer.
     teleport_ent = getstruct("oval_office_foley_teleport", "targetname");
     level.foley ForceTeleport(teleport_ent.origin, teleport_ent.angles);
   }
@@ -836,7 +801,6 @@ oval_office_foley() {
   if(!flag("oval_office_foley_react")) {
     flag_set("oval_office_foley_inplace");
 
-    // wait for dunn to hit his spot
     flag_wait("oval_office_foley_react");
     animent notify("stop_loop");
     animent anim_single_solo_run(self, "dcemp_wh_radio_1_exit");
@@ -857,7 +821,6 @@ whitehouse_foley() {
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
 
-  // kick open kitchen door
   animent = getent("whitehouse_kitchen_kick", "targetname");
   animent anim_generic_reach(level.foley, "doorburst_wave");
   animent thread anim_generic_gravity(level.foley, "doorburst_wave");
@@ -873,19 +836,16 @@ whitehouse_foley() {
   self.ignoreme = false;
   self.ignoreall = false;
 
-  // trying to not make him stop in the kitchen
   self set_ignoreSuppression(true);
-  self set_fixednode_false(); // this one seemed to do it
+  self set_fixednode_false();
 
   flag_wait("whitehouse_path_elevator");
 
-  // reset stuff trying to not make him stop in the kitchen
   self set_ignoreSuppression(false);
   self set_fixednode_true();
 }
 
 roof_foley() {
-  // let the guy idle at guard nodes.
   flag_wait("whitehouse_hammerdown_jets_safe");
   self.neverenablecqb = true;
   self disable_cqbwalk();
@@ -921,7 +881,6 @@ oval_office_dunn() {
   self.neverenablecqb = undefined;
   self enable_cqbwalk();
 
-  // teleport to window
   struct = getstruct("oval_office_dune_start", "targetname");
   self ForceTeleport(struct.origin, struct.angles);
 
@@ -935,7 +894,7 @@ oval_office_dunn() {
 
   guys = [];
   guys[0] = self;
-  guys[1] = level.painting; // will be used once the correct painting is used.
+  guys[1] = level.painting;
 
   animent anim_single(guys, "dcemp_wh_radio", undefined);
 
@@ -946,7 +905,6 @@ oval_office_dunn() {
 oval_office_clear_axis(animent) {
   axis = SortByDistance(getaiarray("axis"), animent.origin);
 
-  // kill three closest enemies.
   for(i = 0; i < axis.size && i < 3; i++) {
     axis[i] kill(level.dunn.origin);
   }
@@ -955,7 +913,6 @@ oval_office_clear_axis(animent) {
 oval_office_painting() {
   animent = getent("oval_office_animent", "targetname");
 
-  // spawn and first fream painting
   level.painting = spawn_anim_model("painting", animent.origin);
 
   animent anim_first_frame_solo(level.painting, "dcemp_wh_radio");
@@ -975,7 +932,6 @@ whitehouse_dunn() {
 }
 
 roof_dunn() {
-  // let the guy idle at guard nodes.
   flag_wait("whitehouse_hammerdown_jets_safe");
   self.neverenablecqb = true;
   self disable_cqbwalk();
@@ -1036,7 +992,6 @@ whitehouse_interior() {
 
   flag_wait("whitehouse_path_elevator");
 
-  // if enough time is left auto save here.
   time_left = (level.hammerdown_time - gettime()) / 1000;
   if(time_left > 70)
     autosave_by_name("whitehouse_parlor");
@@ -1133,7 +1088,6 @@ whitehouse_flare() {
 
   flag_wait("whitehouse_flare_run");
 
-  // start flares on faraway roofs.
   exploder("roof_flares");
 }
 
@@ -1143,7 +1097,6 @@ flare_dialogue() {
   flag_wait("whitehouse_flare_run");
   wait 1.5;
 
-  //Get to the roof! Move!
   level.foley dialogue_queue("dcemp_fly_gettoroof");
 
   flag_wait("whitehouse_hammerdown_jets_fly");
@@ -1151,24 +1104,20 @@ flare_dialogue() {
 
   flag_set("player_flare");
 
-  // Use your flares!!
   level.foley dialogue_queue("dcemp_fly_useyourflares");
 
   flag_wait("whitehouse_wrapup");
-  //	wait 1;
 
-  //So when are we goin' to Moscow?
   level.flare_guy dialogue_queue("dcemp_ar1_moscow");
-  //Not soon enough, man. But I know we're gonna burn it down when we get there.
+
   level.dunn SetLookAtEntity(level.flare_guy);
   level.dunn dialogue_queue("dcwhite_cpd_burnitdown");
 
-  //Huah.
   level.flare_guy dialogue_queue("dcwhite_ar1_huah");
   level.dunn SetLookAtEntity();
 
   flag_set("whitehouse_completed");
-  //When the time's right, Corporal. When the time's right.
+
   level.foley dialogue_queue("dcemp_fly_timeisright");
 }
 
@@ -1188,7 +1137,6 @@ whitehouse_flare_guy() {
 
   level.flare_guy = self;
 
-  // actiavates breach above player when guy spawns.
   flag_set("whitehouse_flare_breach");
 
   self notify("stop_going_to_node");
@@ -1197,14 +1145,12 @@ whitehouse_flare_guy() {
   self.ignoreme = true;
   self.animname = "flare_guy";
 
-  // switch to up hill run cycle
   self set_run_anim("whitehouse_ending_runuphill");
 
   wait 0.1;
 
   animent = getent("ramp_flare_animent", "targetname");
 
-  // should be doing idle anim until player trigger
   animent thread anim_loop_solo(self, "dcemp_flare_reshoot_start_idle");
 
   flag_wait("whitehouse_path_office");
@@ -1222,22 +1168,18 @@ whitehouse_flare_guy() {
   wait 4;
 
   if(!flag("whitehouse_flare_run") || !flag("player_looking_at_flareguy")) {
-    // stop flare guy if player isn't looking.
     self anim_stopanimscripted();
 
     animent anim_first_frame_solo(self, "dcemp_flare_reshoot_start_short");
 
     flag_wait("player_looking_at_flareguy");
 
-    // stop the sight trace thread
     level notify("flare_spotted");
 
     animent anim_single_solo_run(self, "dcemp_flare_reshoot_start_short");
   } else {
-    // stop the sight trace thread
     level notify("flare_spotted");
 
-    // waittill endof animation
     animent waittill("dcemp_flare_reshoot_start");
   }
 
@@ -1249,16 +1191,13 @@ whitehouse_flare_guy() {
     flag_wait("whitehouse_path_roof");
   }
 
-  // start jets flying, timed with the animation by hand.
-  flag_set("whitehouse_hammerdown_jets_fly"); // tweak jet path to match animation
-  flag_set("whitehouse_hammerdown_jets_safe"); // might have to be set through notetrack or some such.
+  flag_set("whitehouse_hammerdown_jets_fly");
+  flag_set("whitehouse_hammerdown_jets_safe");
   flag_set("music_cue_endrun_ending");
 
-  // play end anim
   self playSound("scn_dcwhite_npc_flare_end");
   animent anim_single_solo(self, "dcemp_flare_reshoot_end");
 
-  // idle til end of time.
   self anim_loop_solo(self, "dcemp_flare_idle");
 }
 

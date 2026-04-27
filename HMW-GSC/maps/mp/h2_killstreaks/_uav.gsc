@@ -31,8 +31,8 @@ init() {
   precacheModel("vehicle_uav_static_mp");
   precacheModel("tag_origin");
 
-  level.radarViewTime = 30; // time radar remains active
-  level.uavBlockTime = 30; // this only seems to be used for the FFA version.
+  level.radarViewTime = 30;
+  level.uavBlockTime = 30;
 
   assert(level.radarViewTime > 7);
   assert(level.uavBlockTime > 7);
@@ -40,7 +40,7 @@ init() {
   level.uav_fx["explode"] = loadfx("fx/explosions/aerial_explosion");
 
   level.killStreakFuncs["radar_mp"] = ::tryUseUAV;
-  //level.killStreakFuncs["double_uav"] = ::tryUseDoubleUAV;
+
   level.killStreakFuncs["counter_radar_mp"] = ::tryUseCounterUAV;
 
   minimapOrigins = getEntArray("minimap_corner", "targetname");
@@ -148,9 +148,6 @@ launchUAV(owner, team, duration, isCounter) {
     destPoint = UAVModel.origin + vector_multiply(anglesToForward(UAVModel.angles), 20000);
     UAVModel moveTo(destPoint, 60);
 
-    // this fails for some reason, undefined isn't int??
-    //playFXOnTag( level._effect[ "ac130_engineeffect" ] , UAVModel, "tag_origin", 0 );
-
     UAVModel waittill_notify_or_timeout_hostmigration_pause("death", 3);
 
     UAVModel moveTo(destPoint, 4, 4, 0.0);
@@ -201,9 +198,9 @@ damageTracker(isCounterUAV) {
   level endon("game_ended");
   self endon("death");
 
-  self.health = 999999; // keep it from dying anywhere in code
+  self.health = 999999;
   self.maxhealth = 700;
-  self.damageTaken = 0; // how much damage has it taken
+  self.damageTaken = 0;
   self setCanDamage(true);
 
   for(;;) {
@@ -357,8 +354,6 @@ blockPlayerUAV() {
   wait(level.uavBlockTime);
 
   self h2_jamPlayerRadar(false);
-
-  //self iPrintLn(&"MP_WAR_COUNTER_RADAR_EXPIRED" );
 }
 
 updateTeamUAVType() {
@@ -387,8 +382,6 @@ usePlayerUAV(doubleUAV, useTime) {
   wait(useTime);
 
   self.hasRadar = false;
-
-  //self iPrintLn(&"MP_WAR_RADAR_EXPIRED" );
 }
 
 setTeamRadarWrapper(team, value) {
@@ -418,7 +411,6 @@ stingerProximityDetonate(targetEnt, player) {
   lastCenter = targetEnt GetPointInBounds(0, 0, 0);
 
   for(;;) {
-    // UAV already destroyed
     if(!isDefined(targetEnt))
       center = lastCenter;
     else
@@ -438,7 +430,6 @@ stingerProximityDetonate(targetEnt, player) {
       radiusDamage(self.origin, 1536, 600, 600, player);
       playFX(level.stingerFXid, self.origin);
 
-      //self playSound( "remotemissile_explode" );
       self hide();
 
       self notify("deleted");
@@ -546,10 +537,7 @@ removeActiveUAV() {
   if(level.teamBased) {
     level.activeUAVs[self.team]--;
 
-    if(!level.activeUAVs[self.team]) {
-      //printOnTeam(&"MP_WAR_RADAR_EXPIRED", self.team );
-      //printOnTeam(&"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
-    }
+    if(!level.activeUAVs[self.team]) {}
   } else if(isDefined(self.owner)) {
     level.activeUAVs[self.owner.guid]--;
   }
@@ -559,10 +547,7 @@ removeActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]--;
 
-    if(!level.activeCounterUAVs[self.team]) {
-      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
-      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
-    }
+    if(!level.activeCounterUAVs[self.team]) {}
   } else if(isDefined(self.owner)) {
     level.activeCounterUAVs[self.owner.guid]--;
   }

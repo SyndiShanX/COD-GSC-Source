@@ -14,11 +14,9 @@ main(model, type) {
 
   build_deathmodel("vehicle_f15");
 
-  //special for f15/////
   level._effect["engineeffect"] = loadfx("fire/jet_afterburner");
   level._effect["afterburner"] = loadfx("fire/jet_afterburner_ignite");
   level._effect["contrail"] = loadfx("smoke/jet_contrail");
-  ////////////////////////
 
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand", undefined, undefined, undefined, undefined, undefined, undefined, 0);
   build_life(999, 500, 1500);
@@ -83,9 +81,6 @@ playEngineEffects() {
 }
 
 playAfterBurner() {
-  //After Burners are pretty much like turbo boost. They don't use them all the time except when
-  //bursts of speed are needed. Needs a cool sound when they're triggered. Currently, they are set
-  //to be on all the time, but it would be cool to see them engauge as they fly away.
   self endon("death");
   self endon("stop_afterburners");
 
@@ -104,9 +99,6 @@ playAfterBurner() {
 }
 
 playConTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
-  //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
   tag1 = add_contrail("tag_engine_right", 1);
   tag2 = add_contrail("tag_engine_left", -1);
   contrail = getfx("contrail");
@@ -123,13 +115,9 @@ playConTrail() {
     stopFXOnTag(contrail, tag1, "tag_origin");
     stopFXOnTag(contrail, tag2, "tag_origin");
   }
-
-  //	playFXOnTag( level._effect[ "contrail" ], self, "tag_engine_right" );
-  //	playFXOnTag( level._effect[ "contrail" ], self, "tag_engine_left" );
 }
 
 add_contrail(fx_tag_name, offset) {
-  // translate the posts into the proper positions for the effect
   fx_tag = spawn_tag_origin();
   fx_tag.origin = self getTagOrigin(fx_tag_name);
   fx_tag.angles = self getTagAngles(fx_tag_name);
@@ -174,11 +162,11 @@ playerisinfront(other) {
 plane_sound_node() {
   self waittill("trigger", other);
   other endon("death");
-  self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
+  self thread plane_sound_node();
   other thread play_loop_sound_on_entity("veh_f15_dist_loop");
   while(playerisinfront(other))
     wait .05;
-  wait .5; // little delay for the boom
+  wait .5;
   other thread play_sound_in_space("veh_f15_sonic_boom");
   other waittill("reached_end_node");
   other stop_sound("veh_f15_dist_loop");
@@ -190,14 +178,12 @@ plane_bomb_node() {
   level._effect["plane_bomb_explosion2"] = loadfx("explosions/tanker_explosion");
   self waittill("trigger", other);
   other endon("death");
-  self thread plane_bomb_node(); // spawn new thread for next plane that passes through this pathnode
+  self thread plane_bomb_node();
 
-  // get array of targets
   aBomb_targets = getEntArray(self.script_linkTo, "script_linkname");
   assertEx(isDefined(aBomb_targets), "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
   assertEx(aBomb_targets.size > 1, "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
 
-  //sort array of targets from nearest to furthest to determine order of bombing
   aBomb_targets = get_array_of_closest(self.origin, aBomb_targets, undefined, aBomb_targets.size);
   iExplosionNumber = 0;
 
@@ -207,30 +193,24 @@ plane_bomb_node() {
     if(iExplosionNumber == 3)
       iExplosionNumber = 1;
     aBomb_targets[i] thread play_sound_on_entity("airstrike_explosion");
-    //aBomb_targets[i] thread play_sound_on_entity( "rocket_explode_sand" );
+
     playFX(level._effect["plane_bomb_explosion" + iExplosionNumber], aBomb_targets[i].origin);
     wait randomfloatrange(.3, 1.2);
   }
 }
 
 plane_bomb_cluster() {
-  /*----------------------- WAIT FOR PLANE TO HIT NODE
-  -------------------------*/
   self waittill("trigger", other);
   other endon("death");
   plane = other;
-  plane thread plane_bomb_cluster(); // spawn new thread for next plane that passes through this pathnode
+  plane thread plane_bomb_cluster();
 
-  /*----------------------- SPAWN A BOMB MODEL
-  -------------------------*/
   bomb = spawn("script_model", plane.origin - (0, 0, 100));
   bomb.angles = plane.angles;
   bomb setModel("projectile_cbu97_clusterbomb");
 
-  /*----------------------- LAUNCH FROM PLANE UNTIL CLOSE TO GROUND
-  -------------------------*/
   vecForward = vector_multiply(anglesToForward(plane.angles), 2);
-  vecUp = vector_multiply(anglestoup(plane.angles), -0.2); // invert the up angles
+  vecUp = vector_multiply(anglestoup(plane.angles), -0.2);
   vec = [];
   for(i = 0; i < 3; i++)
     vec[i] = (vecForward[i] + vecUp[i]) / 2;
@@ -248,8 +228,6 @@ plane_bomb_cluster() {
   bomb delete();
   bomb = newBomb;
 
-  /*----------------------- PLAY FX ON INVISIBLE BOMB
-  -------------------------*/
   bombOrigin = bomb.origin;
   bombAngles = bomb.angles;
   playFXOnTag(level.airstrikefx, bomb, "tag_origin");
@@ -267,7 +245,7 @@ plane_bomb_cluster() {
 
     traceHit = trace["position"];
 
-    radiusDamage(traceHit + (0, 0, 16), 512, 400, 30); // targetpos, radius, maxdamage, mindamage
+    radiusDamage(traceHit + (0, 0, 16), 512, 400, 30);
 
     if(i % 3 == 0) {
       thread play_sound_in_space("airstrike_explosion", traceHit);
@@ -284,15 +262,3 @@ plane_bomb_cluster() {
 stop_sound(alias) {
   self notify("stop sound" + alias);
 }
-
-/*QUAKED script_vehicle_f15 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_f15::main( "vehicle_f15" );
-
-and these lines in your CSV:
-#include,vehicle_f15
-sound,vehicle_f15,vehicle_standard,all_sp
-
-defaultmdl="vehicle_f15"default:"vehicletype" "f15"default:"script_team" "allies"
-*/

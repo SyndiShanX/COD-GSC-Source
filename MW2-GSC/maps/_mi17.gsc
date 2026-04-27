@@ -7,14 +7,13 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 main(model, type, no_death) {
-  //SNDFILE=vehicle_mi17
   vehicle_type = "mi17";
   if(isDefined(type) && type == "mi17_bulletdamage")
     vehicle_type = "mi17_bulletdamage";
 
-  maps\_mi17_noai::main(model, vehicle_type, no_death); // set the stuff in _noai
+  maps\_mi17_noai::main(model, vehicle_type, no_death);
 
-  build_drive(%mi17_heli_rotors, undefined, 0); // repeated for building anim csv's
+  build_drive(%mi17_heli_rotors, undefined, 0);
 
   build_deathmodel("vehicle_mi17_woodland");
   build_deathmodel("vehicle_mi17_woodland_fly");
@@ -27,22 +26,19 @@ main(model, type, no_death) {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_attach_models(::set_attached_models);
   build_unload_groups(::Unload_Groups);
-  // Other settings in _mi17_noai.gsc
+
   build_compassicon("helicopter", false);
 }
 
 init_local() {
-  //	self.originheightoffset = 116;//TODO-FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground")); // TODO - FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  self.fastropeoffset = 710; // TODO - FIXME: this is ugly. If only there were a getanimendorigin() command
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
+  self.fastropeoffset = 710;
+  self.script_badplace = false;
 
   maps\_vehicle::lights_on("running");
 }
 
 set_vehicle_anims(positions) {
-  //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-
   for(i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % mi17_heli_idle;
 
@@ -60,8 +56,6 @@ setanims() {
   for(i = 0; i < 10; i++)
     positions[i] = spawnStruct();
 
-  //	positions[ 0 ].idle = %mi17_pilot_idle;
-
   positions[1].idle = % mi17_1_idle;
   positions[2].idle = % mi17_2_idle;
   positions[3].idle = % mi17_3_idle;
@@ -70,8 +64,6 @@ setanims() {
   positions[6].idle = % mi17_6_idle;
   positions[7].idle = % mi17_7_idle;
   positions[8].idle = % mi17_8_idle;
-
-  //	positions[ 9 ].idle = %mi17_copilot_idle;
 
   positions[0].idle[0] = % helicopter_pilot1_idle;
   positions[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;
@@ -148,15 +140,6 @@ setanims() {
   positions[7].rappel_kill_achievement = 1;
   positions[8].rappel_kill_achievement = 1;
 
-  //	positions[ 1 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 2 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 3 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 4 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 5 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 6 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 7 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 8 ].getoutsnd = "fastrope_loop_npc";
-
   positions[1].getoutloopsnd = "fastrope_loop_npc";
   positions[2].getoutloopsnd = "fastrope_loop_npc";
   positions[3].getoutloopsnd = "fastrope_loop_npc";
@@ -229,40 +212,3 @@ set_attached_models() {
 
   return array;
 }
-
-/*QUAKED script_vehicle_mi17_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17::main( "vehicle_mi17_woodland" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_mi17
-sound,vehicle_mi17,vehicle_standard,all_sp
-sound,item_fastrope,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland"default:"vehicletype" "mi17"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi17_woodland_fly (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17::main( "vehicle_mi17_woodland_fly" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_fly_mi17
-sound,vehicle_mi17,vehicle_standard,all_sp
-sound,item_fastrope,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland_fly"default:"vehicletype" "mi17"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_mi17_woodland_fly_cheap (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mi17::main( "vehicle_mi17_woodland_fly_cheap" );
-
-and these lines in your CSV:
-#include,vehicle_mi17_woodland_fly_cheap_mi17
-sound,vehicle_mi17,vehicle_standard,all_sp
-sound,item_fastrope,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mi17_woodland_fly_cheap"default:"vehicletype" "mi17"default:"script_team" "axis"
-*/

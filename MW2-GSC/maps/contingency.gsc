@@ -14,12 +14,11 @@
 
 main() {
   level.price_destroys_btr = false;
-  setsaveddvar("sm_sunShadowScale", 0.5); // optimization
+  setsaveddvar("sm_sunShadowScale", 0.5);
   setsaveddvar("r_lightGridEnableTweaks", 1);
   setsaveddvar("r_lightGridIntensity", 1.24);
   setsaveddvar("r_lightGridContrast", 0);
 
-  //level.ai_dont_glow_in_thermal = true;
   level.min_btr_fighting_range = 400;
   level.explosion_dist_sense = 1500;
   level.default_goalradius = 7200;
@@ -31,14 +30,13 @@ main() {
   PreCacheItem("remote_missile_snow");
   level.remote_missile_snow = true;
 
-  level.bcs_maxTalkingDistFromPlayer = 5000; // default = 1500
+  level.bcs_maxTalkingDistFromPlayer = 5000;
 
   level.visionThermalDefault = "contingency_thermal_inverted";
   level.VISION_UAV = "contingency_thermal_inverted";
   level.cosine["60"] = cos(60);
   level.cosine["70"] = cos(70);
 
-  //thermal fx overrides
   SetThermalBodyMaterial("thermalbody_snowlevel");
   level.friendly_thermal_Reflector_Effect = loadfx("misc/thermal_tapereflect");
 
@@ -49,18 +47,14 @@ main() {
 
   default_start(::start_start);
   add_start("start", ::start_start, "Start");
-  //add_start( "bridge", ::start_bridge, "Bridge" );
+
   add_start("slide", ::start_slide, "Slide");
   add_start("woods", ::start_woods, "Woods");
   add_start("midwoods", ::start_midwoods, "mid woods");
   add_start("ridge", ::start_ridge, "ridge");
-  //add_start( "village", ::start_village, "village" );
+
   add_start("base", ::start_base, "Base");
   add_start("defend_sub", ::start_defend_sub, "defend_sub");
-
-  //add_start( "sub", ::start_sub, "Submarine" );
-  //add_start( "exit_sub", ::start_exit_sub, "Exit Submarine" );
-  //add_start( "sub_gas_mask", ::start_sub_gas_mask, "Sub w/ gas mask" );
 
   maps\contingency_precache::main();
   maps\createart\contingency_fog::main();
@@ -107,13 +101,10 @@ main() {
   maps\_load::main();
   maps\_load::set_player_viewhand_model("viewhands_player_arctic_wind");
   thread maps\contingency_amb::main();
-  //maps\_blizzard::blizzard_main();
+
   maps\createart\contingency_art::main();
-  //maps\_utility::set_vision_set( "contingency", 0 );
-  //snow_fx();
 
   maps\_remotemissile::init();
-  //	maps\_remotemissile::init_radio_dialogue();
 
   maps\_compass::setupMiniMap("compass_map_contingency");
 
@@ -125,13 +116,11 @@ main() {
   createThreatBiasGroup("player");
   createThreatBiasGroup("end_patrol");
   level.player setthreatbiasgroup("player");
-  //Make first group ignored by second group
+
   SetIgnoreMeGroup("price", "dogs");
-  //ignoreEachOther( "left_rooftop_enemies", "players_group" );
-  //Set threat bias of first group against second group
+
   setthreatbias("player", "bridge_stealth_guys", 1000);
   setthreatbias("player", "truck_guys", 1000);
-  //setthreatbias( "end_patrol", "price", 1000 );
 
   precacheItem("at4_straight");
   precacheItem("rpg_straight");
@@ -173,12 +162,6 @@ main() {
   flag_init("player_turned_key");
   flag_init("player_in_uaz");
 
-  //flag_init( "dialog_woods_first_patrol" );
-  //flag_init( "dialog_woods_first_dog_patrol" );
-  //flag_init( "dialog_woods_second_dog_patrol" );
-  //flag_init( "dialog_woods_first_stationary" );
-  //flag_init( "dialog_woods_blocking_stationary" );
-
   flag_init("time_to_use_UAV");
   flag_init("both_gauntlets_destroyed");
   flag_init("time_to_race_to_submarine");
@@ -201,7 +184,6 @@ main() {
   stealth_settings();
   thread stealth_music_control();
 
-  //thread dialog_theyre_looking_for_you();
   thread dialog_we_are_spotted();
   thread dialog_stealth_recovery();
   thread dialog_price_kill();
@@ -209,7 +191,6 @@ main() {
   thread dialog_player_kill_master();
   thread dialog_enemy_saw_corpse();
 
-  // Remote Missile
   level.player.remotemissile_actionslot = 4;
   level.player thread maps\_remotemissile::RemoteMissileDetonatorNotify();
 
@@ -221,10 +202,6 @@ main() {
   foreach(trigger in destroyable_trees)
   trigger thread setup_destroyable_tree();
 
-  //tree_destruction_chain = getstruct( "tree_destruction_chain", "targetname" );
-  //thread destroy_chain( tree_destruction_chain );
-
-  //thread spawn_bridge_trucks();
   truck_patrol_vehicles = getEntArray("truck_patrol", "targetname");
   array_thread(truck_patrol_vehicles, ::add_spawn_function, ::setup_bridge_trucks);
   truck_guys = getEntArray("truck_guys", "script_noteworthy");
@@ -270,24 +247,10 @@ main() {
   price_spawner add_spawn_function(::setup_price);
   price_spawner add_spawn_function(::set_threatbias_group, "price");
 
-  //base_truck_guys = getEntArray( "base_truck_guys", "script_noteworthy" );
-  //array_thread( base_truck_guys, ::add_spawn_function, ::setup_remote_missile_target_rider );
-  //defend_sub_vehicle_guys = getEntArray( "defend_sub_vehicle_guys", "script_noteworthy" );
-  //array_thread( defend_sub_vehicle_guys, ::add_spawn_function, ::setup_remote_missile_target_rider );
-  //base_starting_guys_truckriders = getEntArray( "base_starting_guys_truckriders", "targetname" );
-  //array_thread( base_starting_guys_truckriders, ::add_spawn_function, ::setup_remote_missile_target_rider );
-
-  //defend_sub_final_guys = getEntArray( "defend_sub_final_guys", "targetname" );
-  //array_thread( defend_sub_final_guys, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
-  //base_defenders = getEntArray( "base_defenders", "script_noteworthy" );
-  //array_thread( base_defenders, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
-  //base_starting_guys = getEntArray( "base_starting_guys", "targetname" );
-  //array_thread( base_starting_guys, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
-
   add_global_spawn_function("axis", ::setup_remote_missile_target_guy);
 
   add_global_spawn_function("axis", ::setup_count_predator_infantry_kills);
-  //add_global_spawn_function( "axis", ::tons_of_health );
+
   thread dialog_handle_predator_infantry_kills();
 
   flag_init("base_troop_transport2_spawned");
@@ -296,9 +259,6 @@ main() {
 
   village_truck_guys = getEntArray("village_truck_guys", "script_noteworthy");
   array_thread(village_truck_guys, ::add_spawn_function, ::village_truck_guys_setup);
-
-  //end_patrol = getEntArray( "end_patrol", "targetname" );
-  //array_thread( end_patrol, ::add_spawn_function, ::set_threatbias_group, "end_patrol" );
 
   sub_ladder = getent("sub_ladder", "targetname");
   sub_ladder.realOrigin = sub_ladder.origin;
@@ -332,7 +292,6 @@ start_base() {
   friendlies2 = getEntArray("rasta_and_bricktop", "targetname");
   friendlies = array_combine(friendlies, friendlies2);
 
-  //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getStructArray("base_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -344,7 +303,7 @@ start_base() {
 
   level.price.colornode_func = ::dialog_moving_to_new_position_in_village;
   level.price forceUseWeapon("aug_scope", "primary");
-  //disable_stealth_system();
+
   thread spawn_second_uav();
   flag_set("player_on_ridge");
   flag_set("leaving_village");
@@ -360,7 +319,6 @@ start_defend_sub() {
   friendlies2 = getEntArray("rasta_and_bricktop", "targetname");
   friendlies = array_combine(friendlies, friendlies2);
 
-  //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getStructArray("defend_sub_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -402,8 +360,6 @@ start_defend_sub() {
   flag_set("leaving_village");
   flag_set("base_alerted");
 
-  //flag_set( "price_splits_off" );
-
   thread base_arrival_music();
 
   thread handle_defend_sub();
@@ -411,7 +367,7 @@ start_defend_sub() {
 
 dialog_i_cant_see_roach() {
   wait 4;
-  //Price, I can barely see Roach's chute on my satellite feed.Too much interference. Do you see him, over?
+
   thread radio_dialogue("cont_cmt_barelysee");
 }
 
@@ -422,20 +378,9 @@ handle_start() {
 
   price_spawner = getent("price", "script_noteworthy");
   price_spawner spawn_ai();
-  //price_intro_talk_pos = getnode( "price_intro_talk_pos", "script_noteworthy" );
-  //level.price setgoalnode( price_intro_talk_pos );
-  //level.price.goalradius = 64;
 
   thread cargo_choppers();
   thread price_intro_anim();
-
-  //wait .2;
-
-  //thread dialog_intro();
-
-  //flag_wait_either ( "price_goes_to_road", "said_follow_me" );
-
-  //level.price SetLookAtEntity();// clears it
 
   thread dialog_lets_follow_quietly();
 
@@ -455,9 +400,6 @@ handle_start() {
 
   thread dialog_first_patrol_spotted();
 
-  //flag_wait( "cross_bridge_patrol_dead" );//guy and dog that look over the bridge
-  //flag_wait( "rightside_patrol_dead" );
-
   flag_wait("start_truck_patrol");
 
   if(!flag("cross_bridge_patrol_dead") && !flag("first_stragglers_dead") && !flag("rightside_patrol_dead"))
@@ -469,14 +411,9 @@ handle_start() {
 
   wait 1;
 
-  //level.price thread disable_cqbwalk();
-  //level.price thread hide_from_bridge_convoy();
-
   thread dialog_convoy_coming();
 
   flag_wait_any("last_truck_left", "player_is_crossing_bridge", "all_bridge_guys_dead");
-
-  //thread autosave_stealth();
 
   level.price notify("stop_smart_path_following");
   price_rdy_vs_stragglers = getnode("price_rdy_vs_stragglers", "targetname");
@@ -496,7 +433,7 @@ start_slide() {
   level.player setPlayerAngles(start.angles);
 
   friendlies = getEntArray("start_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("slide_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -507,12 +444,6 @@ start_slide() {
   wait .1;
 
   level.price enable_cqbwalk();
-  //price_pre_slide_node = getnode( "price_pre_slide", "targetname" );
-  //price_pre_slide_node = getnode( "price_fire_loc", "targetname" );
-  //level.price setgoalnode( price_pre_slide_node );
-  //level.price.goalradius = 64;
-
-  //flag_set( "start_btr_slide" );
 
   thread handle_slide();
 }
@@ -524,16 +455,9 @@ handle_slide() {
 
   level.price notify("stop_smart_path_following");
 
-  //if( !price_destroys_btr )
-  //{
   price_pre_slide_node = getnode("price_fire_loc", "targetname");
 
   price_pre_slide_node thread Price_Caution_Stop();
-
-  //level.price setgoalnode( price_pre_slide_node );
-  //level.price.goalradius = 64;
-  //	wait 2.5;
-  //}
 
   flag_wait("start_btr_slide");
   autosave_stealth();
@@ -542,8 +466,6 @@ handle_slide() {
 
   level.price notify("stop_adjust_movement_speed");
 
-  //second btr is the one with the script to kill the player.
-  //if( price_destroys_btr )
   thread setup_tree_destroyer();
 
   level.btr_slider = spawn_vehicle_from_targetname("btr_slider");
@@ -552,55 +474,19 @@ handle_slide() {
 
   level.btr_slider thread fake_treads();
 
-  //thread debug_timer();
-  //level.btr_slider = spawn_anim_model( "contingency_btr_slide" );
-
-  //wait 1;
-
   level.btr_slider.animname = "contingency_btr_slide";
 
   btr81_slide_node = getstruct("btr81_slide_node", "targetname");
-  //thread draw_line_for_time ( btr81_slide_node.origin, btr81_slide_node.origin + (0,0,32), 0, 1, 1, 999);
 
   btr81_slide_node thread anim_single_solo(level.btr_slider, "contingency_btr_slide");
   level.btr_slider playSound("scn_con_bmp_skid");
 
-  //thread dialog_btr_incoming();
-  //thread debug_timer();
-
-  //if( price_destroys_btr )
-  //{
-  //	price_fire_loc = getent( "price_fire_loc_new", "targetname" );
-  //	level.price notify( "stop_smart_path_following" );
-  //	
-  //	
-  //	wait 1.3;
-  //	
-  //	level.price thread disable_cqbwalk();
-  //	level.price pushplayer( true );
-  //	
-  //	
-  //	fire_pos_ent = price_fire_loc;
-  //	thing = level.btr_slider;
-  //	thing_offset = (0,0,0);
-  //	level.price destroy_thing_with_at4( fire_pos_ent, thing, thing_offset, true );
-  //}
-  //else
-  //{
-  //thread end_btr_slide();
   wait_to_hide = 2.8;
   wait wait_to_hide;
 
   level notify("run_to_woods");
   level.price anim_stopanimscripted();
   level.price thread dialogue_queue("cont_pri_incoming");
-
-  //level.price disable_cqbwalk();
-  //price_quick_hide_loc = getnode( "price_into_the_woods_path", "targetname" );
-  //level.price setgoalnode( price_quick_hide_loc );
-
-  //wait (5.45 - wait_to_hide);
-  //}
 
   thread stealth_ai_ignore_tree_explosions();
 
@@ -609,9 +495,9 @@ handle_slide() {
   thread end_of_tree_explosions();
 
   level.price pushplayer(true);
-  //this is price running fast into the woods
+
   level.price thread disable_cqbwalk();
-  //level.price set_generic_run_anim( "sprint", true );
+
   level.price.sprint = true;
   level.price.moveplaybackrate = .9;
   level.price thread faster_price_if_player_close();
@@ -627,7 +513,7 @@ start_woods() {
   level.player setPlayerAngles(start.angles);
 
   friendlies = getEntArray("start_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("woods_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -651,7 +537,7 @@ start_midwoods() {
   level.player setPlayerAngles(start.angles);
 
   friendlies = getEntArray("start_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("midwoods_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -684,31 +570,18 @@ handle_woods() {
   thread dialog_russians_looking_for_you();
 
   level.price notify("_utility::follow_path");
-  level.price notify("stop_going_to_node"); // kills the last call to go_to_node
+  level.price notify("stop_going_to_node");
 
   level.price.moveplaybackrate = 1;
-  //level.price clear_run_anim();
-  level.price pushplayer(true); //so he doesnt stop when the player is in front
+
+  level.price pushplayer(true);
   sight_ranges_foggy_woods();
   level.price_maxsightdistsqrd_woods = 40 * 40;
-  level.price.maxsightdistsqrd = level.price_maxsightdistsqrd_woods; //keeps him from being jumpy at cover nodes
+  level.price.maxsightdistsqrd = level.price_maxsightdistsqrd_woods;
 
-  //aiarray = GetAIArray( "axis" );
-  //foreach( ai in aiarray )
-  //	ai delete();
-
-  //Slow down. They cant follow us this far.	
-  //iprintlnbold( "Slow down. Their vehicles cant follow us this far." );
-  //level.price thread radio_dialogue( "cont_pri_slowdown" );
   level.price thread dialogue_queue("cont_pri_slowdown");
 
   autosave_stealth();
-
-  //level.price stealth_fog_smart_stance();
-
-  //woods_guys = getEntArray( "woods_guys", "targetname" );
-  //foreach( guy in woods_guys )
-  //	guy spawn_ai();
 
   level.price.sprint = undefined;
   level.price thread enable_cqbwalk();
@@ -727,13 +600,6 @@ handle_midwoods() {
   thread dialog_woods_first_stationary();
   thread dialog_woods_blocking_stationary();
 
-  //level.price thread price_move_speed_think();
-  //level.price enable_stealth_smart_stance();
-  //level.price enable_dynamic_run_speed();
-  //enable_dynamic_run_speed( pushdist, sprintdist, stopdist, jogdist, group, dontChangeMovePlaybackRate )
-
-  //level.price thread follow_path( woods_stealth_path_start );
-
   thread handle_ridge();
 }
 
@@ -743,7 +609,7 @@ start_ridge() {
   level.player setPlayerAngles(start.angles);
 
   friendlies = getEntArray("start_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("ridge_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
@@ -757,13 +623,7 @@ start_ridge() {
 }
 
 first_uav_sequence() {
-  //because of stealth clean up
-  //rasta and bricktop could destroy the gauntlets beofre the UAV shows
   if((isalive(level.gauntlet_east)) && (isalive(level.gauntlet_west))) {
-    //ambient_villagers = getEntArray( "ambient_villagers", "targetname" );
-    //foreach( guy in ambient_villagers )
-    //	guy spawn_ai();
-
     flag_set("first_uav_spawned");
     thread dialog_approaching_ridge();
 
@@ -809,13 +669,9 @@ first_uav_sequence() {
     level.player SetActionSlot(4, "weapon", "remote_missile_detonator");
 
     if(!flag("player_slid_down")) {
-      //This ridge is perfect.	
       level.price dialogue_queue("cont_pri_ridgeisperfect");
-      //radio_dialogue( "cont_pri_ridgeisperfect" );
 
-      //Roach take control of the UAV.	
       level.price dialogue_queue("cont_pri_controluav");
-      //radio_dialogue( "cont_pri_controluav" );
 
       level.player thread display_hint("hint_predator_drone");
     }
@@ -837,21 +693,16 @@ first_uav_sequence() {
 
     gauntlet_west = getent("gauntlet_west", "targetname");
     stinger_source = spawn("script_origin", gauntlet_west.origin + (0, 0, 220));
-    //thread maps\_debug::drawArrowForever ( stinger_source, gauntlet_west.angles );
 
     fire_stinger_at_uav(stinger_source);
 
-    //waht happened?
     dialog_gauntlet_surprise_reaction();
   }
 
   if(!flag("going_down_ridge")) {
-    //Roach - let's go.	
     level.price thread dialogue_queue("cont_pri_roachletsgo");
-    //thread radio_dialogue( "cont_pri_roachletsgo" );
   }
 
-  //price moves
   flag_set("going_down_ridge");
 }
 
@@ -863,15 +714,12 @@ handle_ridge() {
   array_thread(bricktop_spawners, ::add_spawn_function, ::setup_bricktop_village);
 
   thread price_slides_down_the_ridge();
-  //thread village_spawners();
 
   level.price thread enable_cqbwalk();
 
   flag_wait("approaching_ridge");
 
   level notify("stop_snow");
-
-  //thread village_enemies();
 
   level.gauntlet_east = spawn_vehicle_from_targetname("gauntlet_east");
   level.gauntlet_west = spawn_vehicle_from_targetname("gauntlet_west");
@@ -905,15 +753,10 @@ handle_ridge() {
   foreach(guy in first_villagers)
   guy spawn_ai();
 
-  //must kill stealth before base
-  //flag_wait_either( "first_villagers_dead", "start_village_fight" );
-
   disable_stealth_system();
   flag_clear("_stealth_spotted");
 
   thread spawn_ghosts_team();
-
-  //thread spawn_village_trucks_at_right_time();
 
   if(isalive(level.gauntlet_east))
     level.gauntlet_east waittill("death");
@@ -921,14 +764,12 @@ handle_ridge() {
   if(isalive(level.gauntlet_west))
     level.gauntlet_west waittill("death");
 
-  //change obj:
   flag_set("both_gauntlets_destroyed");
 
   add_wait(::flag_wait, "second_uav_in_position");
   add_func(::spawn_second_uav);
   thread do_wait();
 
-  //timeout the dialog if the player doesnt get close to the guys
   add_wait(::_wait, 30);
   add_func(::flag_set, "start_village_fight");
   thread do_wait();
@@ -944,24 +785,16 @@ handle_ridge() {
   wait 1;
 
   level.price thread turn_off_stealth_settings();
-  //level.price.colornode_func = ::dialog_moving_to_new_position_in_village;
 
   village_defenders = getEntArray("village_defenders", "targetname");
   foreach(guy in village_defenders)
   guy spawn_ai();
-
-  //add_wait( ::flag_wait, "second_uav_in_position" );
-  //add_func( ::display_hint, "hint_predator_drone" );
-  //thread do_wait();
-
-  //level.player thread display_hint( "hint_predator_drone" );	
 
   flag_wait("leaving_village");
   thread handle_base();
 }
 
 handle_base() {
-  // MikeD: Disable radio in _remotemissile until the dialog for the base is complete.
   level.uav_radio_disabled = true;
 
   level.price thread dead_vehicle_blocking_path();
@@ -988,16 +821,13 @@ handle_base() {
 
   thread base_autosave_logic();
   level notify("stop_snow");
-  //stealth + color node system
+
   thread setup_friendlies_for_base();
 
-  //get rid of village enemies
   retreat_pos = getstruct("village_enemies_retreat_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(mf in enemies)
   mf thread village_enemies_setup_retreat(retreat_pos);
-
-  //spawn stuff thats unaware:
 
   sight_ranges_foggy_woods();
 
@@ -1053,8 +883,6 @@ handle_base() {
     level.base_heli = thread maps\_attack_heli::begin_attack_heli_behavior(level.base_heli);
   }
 
-  //flag_wait( "player_is_halfway_to_sub" );
-
   thread handle_defend_sub();
 }
 
@@ -1071,7 +899,6 @@ handle_defend_sub() {
   flag_clear("respawn_friendlies");
   autosave_by_name("defend");
 
-  //obj_guard_house
   thread setup_vehicle_gate("gate1");
   thread setup_vehicle_gate("gate2");
 
@@ -1103,15 +930,7 @@ handle_defend_sub() {
 
   flag_wait("price_inside_sub");
 
-  //All right, I'm inside the sub! Cover me, I need a few minutes!	
   radio_dialogue("cont_pri_insidesub");
-
-  //Alert! The use of nuclear weapons has been authorized.	
-
-  //Launch codes verified authentic. Launch codes accepted. 	
-  //Set condition one-SQ. Nuclear missile launch authorized.	
-  //Now spinning up missiles 1 through 4 and 8 through 12 for strategic missile launch…	
-  //Target package 572 has been authorized. Standing by for target confirmation and launch order.	
 
   flag_wait_or_timeout("defend_sub_vehicle_guys_dead", 50);
   flag_wait("player_on_guardhouse");
@@ -1122,12 +941,11 @@ handle_defend_sub() {
   guy thread enemies_flee(flee_pos);
 
   stinger_source = getent("defend_sub_stinger_source", "targetname");
-  //thread maps\_debug::drawArrowForever ( stinger_source, gauntlet_west.angles );
+
   fire_stinger_at_uav(stinger_source);
 
   thread breakforsub_music();
   println("^3z:thread breakforsub_music(); ");
-  //thread debug_timer();
 
   wait 1;
 
@@ -1140,7 +958,6 @@ handle_defend_sub() {
   wait 5;
   activate_trigger_with_targetname("contacts_south");
 
-  //Contact to the south, on the dock next to the sub!	
   level.rasta dialogue_queue("cont_gst_nexttosub");
 
   flag_set("close_sub_hatch");
@@ -1157,9 +974,6 @@ handle_defend_sub() {
   flee_pos = getstruct("contacts_south_flee_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
-    //if( !isDefined( guy.targetname ) )
-    //	continue;
-    //if( guy.targetname == "defend_sub_final_guys" )
     guy thread enemies_flee(flee_pos);
   }
 
@@ -1167,437 +981,32 @@ handle_defend_sub() {
   foreach(guy in ai)
   guy.dontevershoot = true;
 
-  //Price, are you there? The silo doors are opening on the sub, I repeat, the silo doors are opening on the sub!	
   level.rasta dialogue_queue("cont_gst_youthere");
 
   wait 2.4;
 
-  //Price, come in!! They're opening the silo doors on the sub!!! Hurry!!!	
   level.rasta dialogue_queue("cont_gst_comein");
 
   wait 2;
 
-  //Price, do you copy??? The silo doors are open, I repeat, the silo doors are open!!	
   level.rasta dialogue_queue("cont_gst_doyoucopy");
 
   wait 1;
 
-  //Good.	
   radio_dialogue("cont_pri_good2");
 
   thread launch_nuke();
 
-  //What…? Wait...wait, Price - no!!!	
   level.rasta dialogue_queue("cont_gst_whatwait");
 
   wait 2;
 
-  //We have a nuclear missile launch, missile in the air missile in the air!! Code black code black!!	
   level.rasta dialogue_queue("cont_gst_codeblack");
 
-  //Price what have you done???	
-  //level.rasta dialogue_queue( "cont_gst_whathaveyoudone" );
   wait 1;
 
-  //flee_pos = getstruct( "dock_enemies_flee", "targetname" ).origin;
-  //enemies = getaiarray("axis" );
-  //foreach( guy in enemies )
-  //	guy thread enemies_flee( flee_pos );
-
-  //wait 15;
-
-  //iprintlnbold( "Next Mission" );
   nextmission();
 }
-
-//debug_timer()
-//{
-//	time = 0;
-//	while( 1 )
-//	{
-//		println( "time " + time );
-//		time++;
-//		wait 1;
-//	}	
-//}
-
-//
-//
-//start_sub()
-//{
-//	start = getstruct( "sub_start_player", "targetname" );
-//	level.player setOrigin( start.origin );
-//	level.player setPlayerAngles( start.angles );
-//	
-//	friendlies = getEntArray( "start_friendly", "targetname" );
-//	friendlies2 = getEntArray( "rasta_and_bricktop", "targetname" );
-//	friendlies = array_combine( friendlies, friendlies2 );
-//	
-//	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getStructArray("sub_start_friendly", "targetname" );
-//	
-//	for( i = 0 ; i < friendlies.size ; i++ )
-//	{
-//		friendlies[ i ].origin = friendly_starts[ i ].origin;
-//		friendlies[ i ].angles = friendly_starts[ i ].angles;
-//		friendlies[ i ] spawn_ai();
-//	}
-//	flag_set( "stop_stealth_music" );
-//	music_stop();
-//	
-//	level.player takeallweapons();
-//	level.player giveWeapon( "aa12" );
-//	level.player giveWeapon( "m240_heartbeat_reflex_arctic" );
-//	level.player switchToWeapon( "m240_heartbeat_reflex_arctic" );
-//
-//	level.player giveWeapon( "fraggrenade" );
-//	level.player setOffhandSecondaryClass( "flash" );
-//	level.player giveWeapon( "flash_grenade" );
-//		
-//	
-//	wait .1;	
-//	
-//	level.rasta set_force_color( "g" );
-//	level.rasta enable_ai_color();
-//	level.bricktop set_force_color( "g" );
-//	level.bricktop enable_ai_color();
-//	level.price set_force_color( "g" );
-//	level.price enable_ai_color();
-//	
-//	level.price forceUseWeapon( "aug_scope", "primary" );
-//	
-//	disable_stealth_system();
-//	
-//	friendlies = getaiarray("allies" );
-//		foreach( g in friendlies )
-//			g thread turn_off_stealth_settings();
-//			
-//	thread spawn_second_uav();
-//	flag_set( "player_on_ridge" );
-//	flag_set( "leaving_village" );
-//	
-//	thread handle_sub();
-//}
-//
-//start_sub_gas_mask()
-//{
-//	start_sub();
-//	
-//	wait 2;
-//	
-//	thread put_on_player_gas_mask();
-//}
-//
-//
-//handle_sub()
-//{
-//	level notify( "stop_snow" );
-//	thread start_tear_gas_fx();
-//	thread start_tear_gas_guys();
-//	thread sub_ladder();
-//	flag_wait( "friendlies_or_player_at_sub" );
-//	
-//	flee_pos = getstruct( "sub_obj_enemies_flee", "targetname" ).origin;
-//	enemies = getaiarray("axis" );
-//	foreach( guy in enemies )
-//		guy thread enemies_flee( flee_pos );
-//	
-//	
-//	level.price.colornode_func = undefined;
-//	thread dialog_at_sub();
-//	
-//	flag_wait( "obj_sub_entrance" );//player at sub
-//	
-//	
-//	level.price disable_ai_color();
-//	price_on_sub = getnode( "price_on_sub", "targetname" );
-//	level.price setgoalnode( price_on_sub );
-//	
-//	flag_wait( "player_on_sub" );
-//	
-//	//Roach! Get your mask on!	
-//	level.price dialogue_queue( "cont_pri_getmaskon" );
-//	thread put_on_player_gas_mask();
-//	
-//	if( !flag( "player_dropping_into_sub" ) )
-//	{
-//		//Down the hatch, lets go!	
-//		level.price thread dialogue_queue( "cont_pri_downthehatch" );
-//	}
-//
-//	flag_wait( "player_dropping_into_sub" );
-//	
-//	if( isalive( level.rasta ) )
-//		level.rasta kill();
-//	if( isalive( level.bricktop ) )
-//		level.bricktop kill();
-//	level.price set_battlechatter( false );
-//	
-//	killTimer();
-//	
-//	
-//	flag_wait( "player_is_clear_of_ladder" );
-//	
-//	price_drop_pos = getent( "price_drop_pos", "targetname" );
-//	
-//	price_drop_kill_pos = getent( "price_drop_kill_pos", "targetname" );
-//	level.price setgoalpos( price_drop_kill_pos.origin );
-//	
-//	price_drop_bottom_pos = getent( "price_drop_bottom_pos", "targetname" );
-//	
-//	level.price forceteleport( price_drop_bottom_pos.origin, price_drop_bottom_pos.angles );
-//	
-//	level.price.goalradius = 64;
-//	level.price.baseaccuracy = 500000;
-//	//level.price.shootstyleoverride = "single";
-//	level.price.a.specialShootBehavior = ::single_shots;
-//	
-//	flag_wait( "tear_gas_guys_dead" );
-//	
-//	thread spawn_sub_enemies();
-//	
-//	price_key_pos = getent( "price_key_pos", "targetname" );
-//	level.price setgoalpos( price_key_pos.origin );
-//	level.price.goalradius = 64;
-//	level.price.ignoreall = true;
-//	level.price.ignoreme = true;
-//	
-//	//Roach! I need a few minutes! Cover me!	
-//	level.price dialogue_queue( "cont_pri_needfewminutes" );
-//	
-//	//Alert! The use of nuclear weapons has been authorized.	
-//	
-//	//Price! I'm on my way to the east gate with our transport, over!	
-//	radio_dialogue( "cont_cmt_eastgate" );
-//	
-//	//Copy that Soap! 	
-//	level.price dialogue_queue( "cont_pri_copythatsoap" );
-//	
-//	//Launch codes verified authentic. Launch codes accepted. 	
-//	//Set condition one-SQ. Nuclear missile launch authorized.	
-//	//Now spinning up missiles 1 through 4 and 8 through 12 for strategic missile launch…	
-//	//Target package 572 has been authorized. Standing by for target confirmation and launch order.	
-//	
-//	//Roach! I'm almost done! Hold your ground!!	
-//	level.price dialogue_queue( "cont_pri_almostdone" );
-//	
-//	//Price! How much longer do you need to sink the sub? We're almost at the gate!	
-//	radio_dialogue( "cont_cmt_muchlonger" );
-//	
-//	//Soap, I'm not sinking the sub - I'm launching the nukes.	
-//	level.price dialogue_queue( "cont_pri_notsinking" );
-//	
-//	//The bloody hell you are!!!!	
-//	radio_dialogue( "cont_cmt_bloodyhell" );
-//	
-//	thread activate_players_key();
-//	
-//	//There's no time to explain! Roach! Turn that key over there! Hurry! They've scrambled MiGs to take us out!
-//	level.price dialogue_queue( "cont_pri_notime" );	
-//	
-//	level notify( "stop_sub_enemies" );
-//	thread dialog_turn_key_nags();
-//	
-//	flag_wait( "player_turned_key" );
-//	thread handle_exit_sub();
-//	
-//	//Missiles are ready for launch. Ten…Nine…Eight…Seven…Six...Five…Four…Three…Two…One…ignition on missiles 1 through 4 and 8 through 12 for strategic missile launch.	
-//}	
-//
-//
-//start_exit_sub()
-//{
-//	start = getstruct( "exit_sub_start_player", "targetname" );
-//	level.player setOrigin( start.origin );
-//	level.player setPlayerAngles( start.angles );
-//	
-//	friendlies = getEntArray( "start_friendly", "targetname" );
-//	//friendlies2 = getEntArray( "rasta_and_bricktop", "targetname" );
-//	//friendlies = array_combine( friendlies, friendlies2 );
-//	
-//	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getStructArray("exit_sub_start_friendly", "targetname" );
-//	
-//	for( i = 0 ; i < friendlies.size ; i++ )
-//	{
-//		friendlies[ i ].origin = friendly_starts[ i ].origin;
-//		friendlies[ i ].angles = friendly_starts[ i ].angles;
-//		friendlies[ i ] spawn_ai();
-//	}
-//	flag_set( "stop_stealth_music" );
-//	music_stop();
-//	
-//	level.player takeallweapons();
-//	level.player giveWeapon( "aa12" );
-//	level.player giveWeapon( "m240_heartbeat_reflex_arctic" );
-//	level.player switchToWeapon( "m240_heartbeat_reflex_arctic" );
-//
-//	level.player giveWeapon( "fraggrenade" );
-//	level.player setOffhandSecondaryClass( "flash" );
-//	level.player giveWeapon( "flash_grenade" );
-//		
-//	
-//	wait .1;
-//	
-//	//level.rasta set_force_color( "g" );
-//	//level.rasta enable_ai_color();
-//	//level.bricktop set_force_color( "g" );
-//	//level.bricktop enable_ai_color();
-//	//level.price set_force_color( "g" );
-//	//level.price enable_ai_color();
-//	
-//	level.price forceUseWeapon( "aug_scope", "primary" );
-//	
-//	disable_stealth_system();
-//	
-//	friendlies = getaiarray("allies" );
-//		foreach( g in friendlies )
-//			g thread turn_off_stealth_settings();
-//			
-//	thread spawn_second_uav();
-//	flag_set( "player_on_ridge" );
-//	flag_set( "leaving_village" );
-//	
-//	thread handle_exit_sub();
-//}
-//
-//handle_exit_sub()
-//{
-//	level notify( "stop_snow" );
-//	level.soap_truck = spawn_vehicle_from_targetname( "soap_truck" );
-//	level.soap_truck.dontunloadonend = true;
-//	
-//	
-//	price_wait_for_truck_node = getnode( "price_wait_for_truck_node", "targetname" );
-//	level.price setgoalnode( price_wait_for_truck_node );
-//	
-//	//We're done here! Let's go!	
-//	level.price thread dialogue_queue( "cont_pri_donehereletsgo" );
-//	
-//	
-//	flag_wait( "player_on_sub" );
-//	
-//	flee_pos = getstruct( "exit_sub_start_player", "targetname" ).origin;
-//	enemies = getaiarray("axis" );
-//	foreach( guy in enemies )
-//		guy thread enemies_flee( flee_pos );
-//	
-//	thread gopath( level.soap_truck );
-//	
-//	level.uaz = level.soap_truck;
-//	level.uaz thread uaz_control();
-//	
-//	//Roach! Get to the truck! Move! Move!!	
-//	level.price thread dialogue_queue( "cont_pri_gettotruck" );
-//	
-//	flag_wait( "soap_truck_arrived" );
-//	
-//	friendlies = [];
-//	friendlies[ friendlies.size ] = level.price;
-//	level.soap_truck thread vehicle_load_ai( friendlies );
-//	
-//	
-//	flag_wait( "player_in_uaz" );
-//	
-//	soap_truck_reverse_path = getvehiclenode( "soap_truck_reverse_path", "targetname" );
-//	soap_truck_exit_path = getvehiclenode( "soap_truck_exit_path", "targetname" );
-//	
-//	
-//	
-//	level.soap_truck StartPath( soap_truck_reverse_path );
-//	//soap_truck thread maps\_vehicle::vehicle_paths( soap_truck_reverse_path );
-//	//soap_truck.veh_pathdir = "reverse";
-//	//soap_truck.veh_transmission = "reverse";
-//	
-//	wait 6;
-//	
-//	thread launch_nuke();
-//	
-//	//flag_wait( "soap_truck_finished_reverse" );
-//	
-//	//Sometimes you can't end a war with a bullet, Soap.	
-//	level.price dialogue_queue( "cont_pri_endawar" );
-//	
-//	wait 2;
-//	
-//	level.soap_truck StartPath( soap_truck_exit_path );
-//	//soap_truck thread maps\_vehicle::vehicle_paths( soap_truck_exit_path );
-//	//soap_truck.veh_pathdir = "forward";
-//	//soap_truck.veh_transmission = "forward";
-//	
-//	
-//	
-//	//level waittill( "forever" );
-//	
-//	
-//	//iprintlnbold( "end of scripting" );
-//	
-//	wait 4;
-//	
-//	nextmission();
-//}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-////***********************************************************************************************************************
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 base_arrival_music() {
   flag_set("stop_stealth_music");
@@ -1617,8 +1026,7 @@ breakforsub_music() {
   flag_set("stop_stealth_music");
   level notify("stop_base_arrival_music");
   music_stop(1);
-  //wait .1;
-  //MusicPlayWrapper( "contingency_breakforsub" );
+
   level.player playSound("contingency_breakforsub");
 }
 
@@ -1643,7 +1051,6 @@ dialog_roach_change_guns() {
   wait 4;
   weap = level.player getcurrentweapon();
   if((weap == level.starting_sidearm) || (weap == level.starting_rifle)) {
-    //Roach, they know we're here. You might want to grab a different weapon.	
     level.price dialogue_queue("cont_pri_grabweapon");
   }
 }
@@ -1663,10 +1070,8 @@ spawn_ghosts_team() {
 }
 
 dialog_second_uav_in_position() {
-  //Soap - Rasta and Bricktop are here. 	
   level.price dialogue_queue("cont_pri_rastaandbricktop");
 
-  //Roger that. The second UAV is almost in position.	
   radio_dialogue("cont_cmt_2nduav");
 
   flag_set("said_second_uav_in_position");
@@ -1690,10 +1095,9 @@ faster_price_if_player_close() {
     } else {
       vec2 = VectorNormalize((level.player.origin - level.price.origin));
       vec = anglesToForward(level.price.angles);
-      vecdot = vectordot(vec, vec2); //dot of my angle vs player position
+      vecdot = vectordot(vec, vec2);
 
-      //vecdot > 0 means in 180 in front
-      if(vecdot > 0) // player is in front of me
+      if(vecdot > 0)
         level.price.moveplaybackrate = 1;
       else
         level.price.moveplaybackrate = .9;
@@ -1702,27 +1106,26 @@ faster_price_if_player_close() {
 }
 
 dialog_price_splits_off() {
-  //I'm going for the sub!	
   level.price dialogue_queue("cont_pri_goingforsub");
-  //Cover me from that guardhouse by the west gate!	
+
   level.price dialogue_queue("cont_pri_coverme");
-  //Roger that!	
+
   level.rasta dialogue_queue("cont_gst_rogerthat");
-  //Roach, we have to get to that guardhouse by the west gate to cover Price! Follow me!	
+
   level.rasta dialogue_queue("cont_gst_guardhouse");
 
   while(!flag("player_on_guardhouse")) {
     wait 20;
-    if(flag("player_on_guardhouse"))
+    if(flag("player_on_guardhouse")) {
       return;
-    //Cover me from that guardhouse by the west gate!	
+    }
     level.price dialogue_queue("cont_pri_coverme");
 
     wait 20;
 
-    if(flag("player_on_guardhouse"))
+    if(flag("player_on_guardhouse")) {
       return;
-    //Roach, we have to get to that guardhouse by the west gate to cover Price! Follow me!	
+    }
     level.rasta dialogue_queue("cont_gst_guardhouse");
   }
 }
@@ -1739,7 +1142,6 @@ setup_defend_sub_vehicles() {
   level.defend_sub_truck3 thread dialog_destroyed_vehicle("cont_cmt_goodkilltruck");
   wait 3;
 
-  //Incoming! Two trucks to the east!	
   level.rasta thread dialogue_queue("cont_gst_twotruckseast");
 
   wait 15;
@@ -1752,21 +1154,9 @@ setup_defend_sub_vehicles() {
   level.defend_sub_jeep1 thread friendlies_shoot_at_truck_until_its_unloads();
   level.defend_sub_jeep1 thread dialog_destroyed_vehicle("cont_cmt_goodkilltruck");
 
-  //level.defend_sub_btr1 = spawn_vehicle_from_targetname_and_drive( "defend_sub_btr1" );
-  //level.defend_sub_btr1 thread friendlies_shoot_at_truck_until_its_unloads();
-  //level.defend_sub_btr1 thread vehicle_lights_on( "spotlight spotlight_turret" );
   wait 3;
 
-  //More vehicles to the east! Use the Hellfires!	
   level.rasta thread dialogue_queue("cont_gst_morevehicleseast");
-
-  //wait 8;
-  //if( isalive( level.defend_sub_btr1 ) )
-  //{
-  //	end_if_cant_see = false;
-  //	no_misses = false;
-  //	level.defend_sub_btr1 thread bmp_turret_attack_player( end_if_cant_see, no_misses );
-  //}
 }
 
 setup_vehicle_gate(stringname) {
@@ -1873,21 +1263,14 @@ dialog_looking_for_us() {
 
   wait 6;
 
-  //Looks like they're searching for us.	
   radio_dialogue("cont_pri_searchingforus");
 }
 
 launch_nuke() {
-  //level.player playSound( "scn_icbm_missile_launch" );
-  //icbm_missile01 thread play_loop_sound_on_entity( "scn_icbm_missile2_loop" );
-
   icbm_missile01 = getent("icbm_missile01", "targetname");
   missile01_start = getent("missile01_start", "targetname");
   missile01_end = getent("missile01_end", "targetname");
 
-  //playFX( getfx("icbm_launch") , icbm_missile01.origin );
-
-  //Earthquake( <scale>, <duration>, <source>, <radius> )
   earthquake(0.3, 12, icbm_missile01.origin, 8000);
 
   level.player PlayRumbleLoopOnEntity("tank_rumble");
@@ -1896,12 +1279,11 @@ launch_nuke() {
   icbm_missile01 playSound("scn_con_icbm_ignition");
 
   icbm_missile01 linkto(missile01_start);
-  //point, time, accel time, decel time
+
   missile01_start moveto(missile01_end.origin, 50, 10, 0);
-  // icbm_missile thread maps\_utility::playSoundOnTag( "parachute_land_player" );
+
   playFXOnTag(level._effect["smoke_geotrail_icbm"], icbm_missile01, "TAG_NOZZLE");
   exploder("icbm_launch");
-  //playFXOnTag( level._effect[ "smoke_geotrail_icbm" ], icbm_missile01, "tag_origin" );
 
   wait 1;
 
@@ -1939,10 +1321,8 @@ uaz_control() {
 
   self waittill("boneyard_uaz_mount");
 
-  //	self thread player_rig_adjust_height();
-
   level.player.rig hide();
-  //enablePlayerWeapons( true );
+
   level.player LerpViewAngleClamp(0.5, 0.5, 0, 180, 180, 75, 35);
 
   flag_set("player_in_uaz");
@@ -1950,7 +1330,7 @@ uaz_control() {
 
 spawn_sub_enemies() {
   level endon("stop_sub_enemies");
-  sub_enemies = getEntArray("sub_enemies", "targetname"); //6 total
+  sub_enemies = getEntArray("sub_enemies", "targetname");
   while(1) {
     desired = 1 + randomint(3);
     while(desired > 0) {
@@ -1983,13 +1363,12 @@ activate_players_key() {
   players_key glow();
 
   players_key setCursorHint("HINT_NOICON");
-  // Press and hold ^3&& 1^7 to pick up the turret.
+
   players_key setHintString(&"CONTINGENCY_TURN_KEY");
   players_key makeUsable();
 
   players_key waittill("trigger", player);
 
-  //predator_drone_control playSound( "scn_invasion_controlrig_pickup" );
   flag_set("player_turned_key");
   players_key stopGlow();
   players_key makeUnusable();
@@ -2000,11 +1379,9 @@ dialog_turn_key_nags() {
   first_line = true;
   while(!flag("player_turned_key")) {
     if(first_line) {
-      //Roach! We're running out of time! Turn the key!!!	
       level.price dialogue_queue("cont_pri_runningout");
       first_line = false;
     } else {
-      //Roach! Trust me! Turn - your - key!!!	
       level.price dialogue_queue("cont_pri_trustme");
       first_line = true;
     }
@@ -2030,7 +1407,7 @@ start_tear_gas_fx() {
 
 setup_tear_gas_guy(anim_name, anode) {
   self.health = 1;
-  //self gun_remove();
+
   self.allowdeath = true;
   self.ragdoll_immediate = true;
   anode thread anim_generic(self, anim_name);
@@ -2046,20 +1423,11 @@ debug_timer() {
 }
 
 put_on_player_gas_mask() {
-  //thread debug_timer();
-  //orig_nightVisionFadeInOutTime = getDvar( "nightVisionFadeInOutTime" );
-  //orig_nightVisionPowerOnTime = getDvar( "nightVisionPowerOnTime" );
-  //SetSavedDvar( "nightVisionPowerOnTime", 0.5 );
-  //SetSavedDvar( "nightVisionFadeInOutTime", 0.5 );
-  //SetSavedDvar( "overrideNVGModelWithKnife", 1 );
-  //SetSavedDvar( "nightVisionDisableEffects", 1 );
-
   level.player disableweapons();
-  //level.player takeallweapons();
+
   level.player giveweapon("facemask");
   level.player switchtoWeapon("facemask");
 
-  //wait( 0.01 );// give the knife override a frame to catch up
   level.player ForceViewmodelAnimation("facemask", "nvg_down");
   wait(2.0);
   level.player thread play_loop_sound_on_tag("gas_mask_breath");
@@ -2067,11 +1435,6 @@ put_on_player_gas_mask() {
   wait(2.5);
   level.player takeweapon("facemask");
   level.player enableweapons();
-  //level.player playLoopSound( "gas_mask_breath" );
-  //SetSavedDvar( "nightVisionDisableEffects", 0 );
-  //SetSavedDvar( "overrideNVGModelWithKnife", 0 );
-  //SetSavedDvar( "nightVisionPowerOnTime", orig_nightVisionPowerOnTime );
-  //SetSavedDvar( "nightVisionFadeInOutTime", orig_nightVisionFadeInOutTime );
 }
 
 nag_player_to_destroy_btr() {
@@ -2079,33 +1442,16 @@ nag_player_to_destroy_btr() {
   while(1) {
     flag_wait("nag_player_to_destroy_btr");
 
-    //Destroy that armored vehicle!	
     level.price dialogue_queue("cont_pri_armoredvehicle");
 
     wait 10;
   }
 }
 
-//spawn_village_trucks_at_right_time()
-//{
-//	while( level.village_defenders_dead < 6 )
-//		wait 1;
-//		
-//	level.village_troop_transport = spawn_vehicle_from_targetname_and_drive( "village_troop_transport" );
-//	level.village_troop_transport thread friendlies_shoot_at_truck_until_its_unloads();
-//	level.village_troop_transport thread maps\_remotemissile::setup_remote_missile_target();
-//	
-//	wait 1;
-//	
-//	level.village_troop_transport2 = spawn_vehicle_from_targetname_and_drive( "village_troop_transport2" );
-//	level.village_troop_transport2 thread maps\_remotemissile::setup_remote_missile_target();
-//	level.village_troop_transport2 thread friendlies_shoot_at_truck_until_its_unloads();
-//}
-
 unload_base_truck() {
   level.base_truck1 endon("death");
   level.base_truck1 Vehicle_SetSpeed(0, 15);
-  //wait .1;
+
   level.base_truck1 maps\_vehicle::vehicle_unload();
 
   wait 1;
@@ -2135,15 +1481,15 @@ turn_off_stealth_settings() {
 
 base_alarm_sound() {
   dialog = [];
-  //The base is under attack! I repeat, the base is under attack! Alert! Alert! They may be trying to reach the Kamarov!	
+
   dialog[dialog.size] = "cont_bpa_underattack";
-  //Terminate enemy forces with extreme prejudice! Do not allow them to sink the Kamarov!
+
   dialog[dialog.size] = "cont_bpa_prejudice";
-  //2nd Platoon, reinforce submarine pens two, five, and seven! Establish blocking positions to the east and west of the mess hall to stop the intruders!	
+
   dialog[dialog.size] = "cont_bpa_2ndplatoon";
-  //Alert! Enemy forces have penetrated the perimeter and are making their way towards the submarines!
+
   dialog[dialog.size] = "cont_bpa_alert";
-  //All submarine maintenance crews, get to your battlestation and prepare to dive immediately! I repeat, all submarine maintenance crews, get to your battlestations and prepare to dive immediately!	
+
   dialog[dialog.size] = "cont_bpa_battlestations";
   current = 0;
 
@@ -2188,7 +1534,7 @@ dialog_destroyed_vehicle(dialog) {
   self endon("unloaded");
   self waittill("death");
 
-  wait .05; //so that old_veh_num is accurate
+  wait .05;
 
   if(!isDefined(level.vehicles_killed))
     level.vehicles_killed = 1;
@@ -2237,7 +1583,6 @@ dialog_handle_predator_infantry_kills() {
     if(isDefined(level.uav_killstats["ai"]))
       kills = level.uav_killstats["ai"];
 
-    //wait a bit before saying the line
     wait 1.2;
 
     if(flag("saying_base_on_alert")) {
@@ -2249,11 +1594,9 @@ dialog_handle_predator_infantry_kills() {
     }
     if(veh_kills > 1) {
       if(said_good_effect) {
-        //Good hit. Multiple vehicles destroyed.	
         radio_dialogue("cont_cmt_goodhitvehicles");
         said_good_effect = false;
       } else {
-        //Good effect on target. Multiple enemy vehicles KIA.	
         radio_dialogue("cont_cmt_goodeffectkia");
         said_good_effect = true;
       }
@@ -2287,8 +1630,6 @@ dialog_handle_predator_infantry_kills() {
 }
 
 setup_base_vehicles() {
-  //	self.free_on_death = true;
-
   self endon("death");
   self thread vehicle_death_paths();
   self thread unload_when_stuck();
@@ -2308,7 +1649,6 @@ dead_vehicle_blocking_path() {
   count = 0;
   last_bad_path_time = -10000;
   while(1) {
-    // bad_path nofies are every 0.5 seconds
     self waittill("bad_path");
 
     if(GetTime() - last_bad_path_time < 5000) {
@@ -2318,9 +1658,7 @@ dead_vehicle_blocking_path() {
       last_bad_path_time = GetTime();
     }
 
-    // We sat here too long with a bad path, see if there are any dead script vehicles blocking us
-    if(count >= 9) // 9 to be safe, since bad_paths are notified every 0.5 seconds... Meaning 10 notifies every 5 seconds.
-    {
+    if(count >= 9) {
       count = 0;
       foreach(vehicle in level.dead_vehicles) {
         if(isDefined(vehicle) && !IsAlive(vehicle) && DistanceSquared(vehicle.origin, self.origin) < 300 * 300) {
@@ -2347,7 +1685,6 @@ dead_vehicle_enable_paths_thread() {
 vehicle_death_paths() {
   self endon("delete");
 
-  // Notify from _vehicle::vehicle_kill, after the phys vehicle is blown up and disconnectpaths
   self waittill("kill_badplace_forever");
 
   level.dead_vehicles[level.dead_vehicles.size] = self;
@@ -2364,10 +1701,8 @@ vehicle_death_paths() {
     if(DistanceSquared(self.origin, death_origin) > min_dist) {
       death_origin = self.origin;
 
-      // Connect the paths before we get to far away from the death_origin
       self ConnectPaths();
 
-      // Don't disconnectpaths until we're done moving.
       while(1) {
         if(isDefined(self.dead_vehicle_enable_paths)) {
           wait(0.5);
@@ -2386,7 +1721,6 @@ vehicle_death_paths() {
         death_origin = self.origin;
       }
 
-      // Now disconnectpaths after we have settled
       self DisconnectPaths();
     }
 
@@ -2420,15 +1754,6 @@ unload_when_close_to_player() {
 }
 
 setup_base_idling_vehicles() {
-  //Direct hit on the enemy helo. Nice shot Roach.	
-  //level.scr_radio[ "cont_cmt_directhitshelo" ]					 = "cont_cmt_directhitshelo";
-  //Good effect on target. BTR destroyed.	
-  //level.scr_radio[ "cont_cmt_btrdestroyed" ]					 = "cont_cmt_btrdestroyed";
-  //Direct hit on that jeep.	
-  //level.scr_radio[ "cont_cmt_directhitjeep" ]					 = "cont_cmt_directhitjeep";
-  //Good kill. Truck destroyed.	
-  //level.scr_radio[ "cont_cmt_goodkilltruck" ]					 = "cont_cmt_goodkilltruck";
-
   level.base_heli = spawn_vehicle_from_targetname("base_heli");
   level.base_heli.helicopter_predator_target_shader = true;
   level.base_heli.enableRocketDeath = true;
@@ -2440,12 +1765,10 @@ setup_base_idling_vehicles() {
   level.base_btr2 thread maps\_remotemissile::setup_remote_missile_target();
   level.base_btr2 thread vehicle_lights_on("spotlight spotlight_turret");
   level.base_btr2 thread dialog_destroyed_vehicle("cont_cmt_btrdestroyed");
-  //	level.base_btr2.free_on_death = true;
 
   level.base_truck1 = spawn_vehicle_from_targetname("base_truck1");
   level.base_truck1 thread maps\_remotemissile::setup_remote_missile_target();
   level.base_truck1 thread dialog_destroyed_vehicle("cont_cmt_directhitjeep");
-  //	level.base_truck1.free_on_death = true;
 
   thread vehicles_move_when_player_can_see_them();
 }
@@ -2550,7 +1873,7 @@ smart_barney(end_flag, end_goal, end_volume) {
   self thread friendly_adjust_movement_speed();
   self.goalheight = 200;
   self.goalradius = 300;
-  //level.taco setgoalentity( level.player );
+
   self.fixednode = false;
 
   while(!flag(end_flag)) {
@@ -2559,15 +1882,7 @@ smart_barney(end_flag, end_goal, end_volume) {
     forward = vector_multiply(vec, 400);
     goal = forward + player;
     self setgoalpos(goal);
-    //println(" player " + level.player.origin + " goal " + forward );
 
-    //if( !isDefined( self.favoriteenemy ) )
-    //{
-    //	goal_enemies = end_volume get_ai_touching_volume( "axis" );
-    //	if( goal_enemies.size )
-    //		self.favoriteenemy = goal_enemies[0];
-    //}
-    //check for nearby BMPs
     wait .5;
   }
   self notify("stop_adjust_movement_speed");
@@ -2600,30 +1915,15 @@ price_changes_weapons() {
   }
 
   level.price forceUseWeapon("aug_scope", "primary");
-  //level.price forceUseWeapon( "ak47_arctic_acog", "primary" );
 }
 
 village_enemies() {}
 
 friendlies_shoot_at_truck_until_its_unloads() {
-  //self endon( "death" );
   self MakeEntitySentient("axis");
   self waittill_either("unloaded", "death");
   self.ignoreme = true;
 }
-
-//kill_all_enemies_when_going_down_ridge()
-//{
-//	flag_wait ( "going_down_ridge" );
-//	
-//	if( !flag( "_stealth_spotted" ) )
-//	{
-//		enemies = getaiarray("axis" );
-//		foreach( mf in enemies )
-//			mf delete();
-//	}
-//	disable_stealth_system();
-//}
 
 handle_stealth_spotted() {
   level endon("price_starts_moving");
@@ -2640,7 +1940,7 @@ price_intro_anim() {
   flag_set("price_starts_moving");
 
   level.price notify("_utility::follow_path");
-  level.price notify("stop_going_to_node"); // kills the last call to go_to_node
+  level.price notify("stop_going_to_node");
   level.price disable_ai_color();
   level.price thread enable_cqbwalk();
   price_smart_path_to_road = getnode("price_smart_path_to_road", "targetname");
@@ -2652,13 +1952,9 @@ price_slides_down_the_ridge() {
   wait 3;
   flag_wait("going_down_ridge");
 
-  //level.price allowedstances( "stand" );
-
   buddy_slide_node = getent("ridge_price_overlook_org", "targetname");
-  //buddy_slide_node = getstruct( "buddy_slide_node", "targetname" );
-  //buddy_slide_node anim_reach_solo( level.price, "slide" );
+
   buddy_slide_node anim_single_solo(level.price, "slide");
-  //level.price allowedstances( "stand", "crouch", "prone" );
 
   level.price thread disable_cqbwalk();
   if(!flag("everyone_set_green"))
@@ -2690,7 +1986,6 @@ fire_stinger(stinger_source) {
   end = forwardfar + level.uav.origin;
 
   if(isDefined(level.player.is_controlling_UAV)) {
-    //muzzlflash
     playFX(getfx("thermal_missle_flash_inverted"), stinger_source);
     newMissile = MagicBullet("zippy_rockets_inverted", stinger_source, end);
   } else {
@@ -2705,7 +2000,6 @@ fire_stinger(stinger_source) {
 
 setup_dont_leave_hint() {
   while(1) {
-    //player_returning_to_map
     flag_wait("player_leaving_map");
 
     display_hint_timeout("hint_dont_leave_price", 5);
@@ -2817,21 +2111,12 @@ UAVRigAiming() {
   level endon("uav_destroyed");
   level.uav endon("death");
   for(;;) {
-    //if( isDefined( level.uavTargetEnt ) )
-    //{
-    //	targetPos = level.uavTargetEnt.origin;
-    //}
-    //else
     if(flag("leaving_village")) {
       closest_focus = getclosest(level.player.origin, focus_points);
       targetPos = closest_focus.origin;
     } else {
       targetPos = village_focus_point.origin;
     }
-    //else if( isDefined( level.uavTargetPos ) )
-    //	targetPos = level.uavTargetPos;
-    //else
-    //	targetpos = ( -17052.6, -4000.98, 696.409 );
 
     angles = VectorToAngles(targetPos - level.uav.origin);
 
@@ -2901,51 +2186,30 @@ dialog_approaching_ridge() {
     return;
   level endon("someone_became_alert");
 
-  //Soap, what's the status of our air support?
   level.price dialogue_queue("cont_pri_airsupport");
-  //radio_dialogue( "cont_pri_airsupport" );
+
   wait 1;
 
-  //The UAV is almost in position.	
   radio_dialogue("cont_cmt_almostinpos");
 
-  //Roger that. 	
   level.price dialogue_queue("cont_pri_rogerthat");
-  //radio_dialogue( "cont_pri_rogerthat" );
 }
 
 dialog_gauntlet_surprise_reaction() {
-  // Diable the _remotemissile dialogue until this sequence is done
   level.uav_radio_disabled = true;
 
   wait 2;
-  //Bollocks!	
-  level.price dialogue_queue("cont_pri_bollocks");
-  //radio_dialogue( "cont_pri_bollocks" );	
 
-  //What just happened?	
+  level.price dialogue_queue("cont_pri_bollocks");
+
   radio_dialogue("cont_cmt_whathappened");
 
-  //There's a mobile SAM site in the village. It just took out our UAV.	
   level.price dialogue_queue("cont_pri_mobilesaminvillage");
-  //radio_dialogue( "cont_pri_mobilesaminvillage" );
 
-  //Soap, we need another UAV, sharpish!	
   level.price dialogue_queue("cont_pri_uavsharpish");
-  //radio_dialogue( "cont_pri_uavsharpish" );
 
-  // Re-enable the _remotemissile dialogue until this sequence is done	
   level.uav_radio_disabled = undefined;
 }
-
-//dialog_rasta_destroys_gauntlets()
-//{
-//	//Stand back!	
-//	dialogue_queue( "cont_rst_standback" );
-//	
-//	//Get back!	
-//	dialogue_queue( "cont_rst_getback" );
-//}	
 
 dialog_rasta_and_bricktop() {
   if(flag("start_village_fight"))
@@ -2958,13 +2222,9 @@ dialog_rasta_and_bricktop() {
   level.price waittill_entity_in_range(level.rasta, 300);
   level.price waittill_entity_in_range(level.player, 600);
 
-  //Nice work on that SAM site.	
   level.price dialogue_queue("cont_pri_nicework");
 
-  //Thanks, but we better get moving - those explosions are gonna attract a lot of attention.	
   level.rasta dialogue_queue("cont_rst_getmoving");
-
-  //wait 1;
 }
 
 village_truck_guys_setup() {
@@ -2987,7 +2247,7 @@ price_smart_path_following(first_node) {
     volume = undefined;
 
     links = getEntArray(next_node.script_linkto, "script_linkname");
-    //get the flag trigger linked to the next_node
+
     foreach(link in links) {
       if(link.classname == "trigger_multiple_flag_set")
         trigger = link;
@@ -2999,18 +2259,15 @@ price_smart_path_following(first_node) {
     assert(isDefined(trigger.script_flag));
     assert(isDefined(volume));
 
-    // a flag trigger the player passes through
     flag_wait(trigger.script_flag);
 
-    // the volume linked to the flag trigger
     volume waittill_volume_dead();
 
-    level notify(next_node.targetname); //so we can react to price deciding to move
+    level notify(next_node.targetname);
 
     if(flag("_stealth_spotted"))
       flag_waitopen("_stealth_spotted");
 
-    // volume is clear, trigger is hit, go to the node
     self setgoalnode(next_node);
     self.smart_path_following_node = next_node;
 
@@ -3018,7 +2275,6 @@ price_smart_path_following(first_node) {
       break;
     }
 
-    //get the next node
     next_node = getnode(next_node.target, "targetname");
   }
 }
@@ -3063,7 +2319,6 @@ friendly_adjust_movement_speed() {
     wait randomfloatrange(.5, 1.5);
 
     while(friendly_should_speed_up()) {
-      //iPrintLnBold( "friendlies speeding up" );
       self.moveplaybackrate = 2.5;
       wait 0.05;
     }
@@ -3080,7 +2335,6 @@ friendly_should_speed_up() {
     return false;
   }
 
-  // check if AI is visible in player's FOV
   if(within_fov(level.player.origin, level.player getPlayerAngles(), self.origin, level.cosine["70"])) {
     prof_end("friendly_movement_rate_math");
     return false;
@@ -3094,7 +2348,6 @@ friendly_should_speed_up() {
 monitor_player_returns_to_btrs() {
   level endon("player_slid_down");
   flag_wait("returning_to_btrs");
-  //level.player waittill_entity_in_range( level.btr_slider, 2200 );
 
   level.btr_tree_destroyer setturrettargetent(level.player);
 
@@ -3125,20 +2378,17 @@ monitor_distance_player_vs_price() {
 
     vec2 = VectorNormalize((level.player.origin - level.price.origin));
 
-    //vec_goal = VectorNormalize( ( level.price.goalpos - level.price.origin ) );//angle of where I'm supposed to go
-    //vecdot = vectordot( vec_goal, vec2 );//dot my my goal dir vs player position
-
     vec = anglesToForward(level.price.angles);
-    vecdot = vectordot(vec, vec2); //dot of my angle vs player position
+    vecdot = vectordot(vec, vec2);
 
-    //vecdot > 0 means in 180 in front
-    if(vecdot < 0) // player is behind my goal dir
+    if(vecdot < 0) {
       break;
+    }
 
     wait .1;
   }
 
-  level notify("shoot_at_player"); //stops the scripted tree destruction
+  level notify("shoot_at_player");
 
   self setturrettargetent(level.player);
 
@@ -3160,7 +2410,7 @@ monitor_distance_player_vs_price() {
 }
 
 end_of_tree_explosions() {
-  level endon("shoot_at_player"); //stops the scripted tree destruction
+  level endon("shoot_at_player");
   flag_wait("end_of_tree_explosions");
   wait 2;
 
@@ -3216,11 +2466,6 @@ random_tree_impact_sounds(destroyable_trees) {
 }
 
 setup_destroyable_tree() {
-  //level._effect[ "tree_snow_dump_fast" ]		 = loadfx( "snow/tree_snow_dump_fast" );
-  //level._effect[ "tree_snow_dump_fast_small" ]		 = loadfx( "snow/tree_snow_dump_fast_small" );
-  //level._effect[ "tree_snow_fallen" ]		 = loadfx( "snow/tree_snow_fallen" );
-  //level._effect[ "tree_snow_fallen_small" ]		 = loadfx( "snow/tree_snow_fallen_small" );
-
   level endon("shoot_at_player");
 
   small_tree = false;
@@ -3244,7 +2489,7 @@ setup_destroyable_tree() {
   }
   assert(isDefined(destroyed_top));
   destroyed_top.goalangles = destroyed_top.angles;
-  //destroyed_top.angles = (0, tree_base.angles[1], 0);
+
   destroyed_top.angles = tree_base.angles;
   destroyed_top hide();
 
@@ -3259,8 +2504,6 @@ setup_destroyable_tree() {
   }
 
   self waittill("trigger");
-  //while( !isDefined( level.price ) )
-  //	wait 1;
 
   if(isalive(level.btr_slider)) {
     level.btr_slider setturrettargetvec(destroyed_top.origin);
@@ -3285,14 +2528,6 @@ setup_destroyable_tree() {
   }
 
   destroyed_top show();
-  //drop_time = randomfloatrange( .6, 1.4 );
-
-  //if( isDefined( destroyed_top.script_duration ) )
-  //	drop_time = destroyed_top.script_duration;
-  //else
-  //{
-  //	drop_time = 1;
-  //}
 
   pre_hit_fx_time = .25;
 
@@ -3301,10 +2536,9 @@ setup_destroyable_tree() {
   }
 
   drop_time = 2;
-  //drop_time = drop_time * 2;
+
   accel_time = drop_time;
-  //destroyed_top rotatepitch( 90, drop_time, accel_time, 0);
-  //destroyed_top thread maps\_debug::drawOrgForever();
+
   destroyed_top RotateTo(destroyed_top.goalangles, drop_time, accel_time, 0);
 
   wait(drop_time - pre_hit_fx_time);
@@ -3314,16 +2548,13 @@ setup_destroyable_tree() {
     up = AnglesToUp(destroyed_top.angles);
 
     if(small_tree) {
-      //destroyed_top thread maps\_debug::drawOrgForever();
       playFX(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
     } else {
-      //destroyed_top thread maps\_debug::drawOrgForever();
       playFX(getfx("tree_snow_fallen_heavy"), destroyed_top.origin, up, forward);
     }
   }
   wait pre_hit_fx_time;
 
-  //tree has stopped falling
   if(hits_ground) {
     if(level.player istouching(clip_brush))
       level.player kill();
@@ -3341,16 +2572,12 @@ setup_destroyable_tree() {
     up = AnglesToUp(destroyed_top.angles);
 
     if(small_tree) {
-      //destroyed_top thread maps\_debug::drawOrgForever();
       playFX(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
     } else {
-      //destroyed_top thread maps\_debug::drawOrgForever();
       playFX(getfx("tree_snow_fallen"), destroyed_top.origin, up, forward);
     }
   }
 
-  //if( !isDefined( destroyed_top.script_duration ) )
-  //{
   shake_time = .2;
 
   destroyed_top movez(4, shake_time, 0, shake_time);
@@ -3364,22 +2591,6 @@ setup_destroyable_tree() {
 
   destroyed_top movez(-1, shake_time, 0, shake_time);
   wait shake_time;
-  //}
-
-  /*
-  shake_time = .2;
-  destroyed_top rotatepitch( 3, shake_time, shake_time, 0);
-  	
-  wait shake_time;
-  	
-  destroyed_top rotatepitch( -2, shake_time, shake_time, 0);
-  	
-  wait shake_time;
-  	
-  destroyed_top rotatepitch( 1, shake_time, shake_time, 0);
-  	
-  wait shake_time;
-  */
 }
 
 dialog_enemy_saw_corpse() {
@@ -3395,11 +2606,9 @@ dialog_enemy_saw_corpse() {
   }
 
   if(first_line) {
-    //Looks like they found a body.	
     radio_dialogue("cont_pri_foundabody");
     first_line = false;
   } else {
-    //They found a body.	
     radio_dialogue("cont_pri_foundabody2");
     first_line = true;
   }
@@ -3409,25 +2618,7 @@ dialog_enemy_saw_corpse() {
   level endon("_stealth_spotted");
   wait 10;
 
-  //kill at same time
   radio_dialogue("cont_pri_sametime");
-
-  /*
-  	wait 3;
-  	
-  	level.price.ignoreall = false;
-  	level.price.dontevershoot = undefined;
-  	level.price.baseaccuracy = 5000000;
-  	
-  	
-  	ai = GetAIspeciesArray( "axis", "all" );
-  	foreach ( actor in ai )
-  	{
-  		actor.no_price_kill_callout = true;
-  		actor.dontattackme = undefined;
-  		//level.price.favoriteenemy = actor;
-  	}
-  */
 }
 
 dialog_player_kill() {
@@ -3452,19 +2643,16 @@ dialog_player_kill() {
 dialog_player_kill_master() {
   dialog = [];
 
-  //Good.	
   dialog[dialog.size] = "cont_pri_good";
-  //beautiful
+
   dialog[dialog.size] = "cont_pri_beautiful";
-  //Not bad, but I've seen better.	
-  //dialog[ dialog.size ] = "cont_pri_seenbetter";
-  //Nicely done.	
+
   dialog[dialog.size] = "cont_pri_nicelydone";
-  //Well done.	
+
   dialog[dialog.size] = "cont_pri_welldone";
-  //Good work.	
+
   dialog[dialog.size] = "cont_pri_goodwork";
-  //Impressive.	
+
   dialog[dialog.size] = "cont_pri_impressive";
 
   line = 0;
@@ -3483,17 +2671,16 @@ dialog_price_kill() {
   current_line = 0;
   dialog = [];
 
-  //Got one.	
   dialog[dialog.size] = "cont_pri_gotone";
-  //He's down. 	
+
   dialog[dialog.size] = "cont_pri_hesdown2";
-  //Tango down.	
+
   dialog[dialog.size] = "cont_pri_tangodown";
-  //Good night.	
+
   dialog[dialog.size] = "cont_pri_goodnight";
-  //Target eliminated.	
+
   dialog[dialog.size] = "cont_pri_targeteliminated";
-  //Target down.	
+
   dialog[dialog.size] = "cont_pri_targetdown";
 
   while(1) {
@@ -3515,7 +2702,7 @@ dialog_price_kill() {
     level.good_kill_dialog_time = gettime();
 
     dialog_line = dialog[current_line];
-    radio_dialogue(dialog_line); //dont cut off the other line but clear the que
+    radio_dialogue(dialog_line);
     current_line++;
     if(current_line >= dialog.size)
       current_line = 0;
@@ -3527,9 +2714,8 @@ dialog_price_kill_dog() {
 
   dialog_dog = [];
 
-  //Nap time.	
   dialog_dog[dialog_dog.size] = "cont_pri_naptime";
-  //Down boy.	
+
   dialog_dog[dialog_dog.size] = "cont_pri_downboy";
 
   while(1) {
@@ -3551,7 +2737,7 @@ dialog_price_kill_dog() {
     level.good_kill_dialog_time = gettime();
 
     dialog_line = dialog_dog[current_line];
-    radio_dialogue(dialog_line); //dont cut off the other line but clear the que
+    radio_dialogue(dialog_line);
     current_line++;
     if(current_line >= dialog_dog.size)
       current_line = 0;
@@ -3595,13 +2781,12 @@ dialog_stealth_recovery() {
   level endon("player_on_ridge");
   failure = [];
 
-  //Don't give away our position, Roach. This is only going to get harder.	
   failure[failure.size] = "cont_pri_giveawayposition";
-  //Roach, we can't afford to keep giving away our position like that. Maintain a low profile!	
+
   failure[failure.size] = "cont_pri_lowprofile";
-  //What the hell was that? You trying to get us killed?	
+
   failure[failure.size] = "cont_pri_getuskilled";
-  //Does the word stealth mean anything to you?	
+
   failure[failure.size] = "cont_pri_thewordstealth";
 
   line = 0;
@@ -3622,11 +2807,10 @@ dialog_stealth_recovery() {
 dialog_we_are_spotted() {
   failure = [];
 
-  //We're spotted! Go loud! Take them out! 	
   failure[failure.size] = "cont_pri_goloud";
-  //They're on to us! Open fire!	
+
   failure[failure.size] = "cont_pri_ontous";
-  //We're spotted! Take them out!	
+
   failure[failure.size] = "cont_pri_werespotted";
 
   failure = array_randomize(failure);
@@ -3635,7 +2819,7 @@ dialog_we_are_spotted() {
   while(1) {
     flag_wait("_stealth_spotted");
 
-    radio_dialogue_stop(); //kills current line
+    radio_dialogue_stop();
     radio_dialogue(failure[line]);
     line++;
     if(line >= failure.size)
@@ -3644,13 +2828,12 @@ dialog_we_are_spotted() {
     wait 1;
     flag_waitopen("_stealth_spotted");
     wait 1;
-    //dialog_check_path_clear();
   }
 }
 
 dialog_first_patrol_spotted() {
   level.price thread disable_cqbwalk();
-  level.price SetLookAtEntity(); // clears it
+  level.price SetLookAtEntity();
   if(flag("someone_became_alert"))
     return;
   level endon("someone_became_alert");
@@ -3658,34 +2841,25 @@ dialog_first_patrol_spotted() {
     return;
   level endon("saying_patience");
   flag_set("saying_contact");
-  //Contact.Enemy patrol 30 meters to our front.	
+
   radio_dialogue("cont_pri_30metersfront");
 
   wait 2;
 
-  //Five men, automatic rifles, frag grenades. One German Shepherd.	
   radio_dialogue("cont_pri_fivemen");
 
   wait .1;
 
-  //Dogs... I hate dogs.		
   radio_dialogue("cont_cmt_hatedogs");
 
   wait .4;
 
-  //These Russian dogs are like pussycats compared to the ones in Pripyat.	
   radio_dialogue("cont_pri_russiandogs");
 
-  //wait .3;
-  //Its good to have you back, old man.	
   radio_dialogue("cont_cmt_haveyouback");
 
-  //wait .3;
-  //Roger that. 	
   radio_dialogue("cont_pri_rogerthat2");
   flag_clear("saying_contact");
-
-  //wait 3;
 
   level.price thread enable_cqbwalk();
 }
@@ -3698,17 +2872,13 @@ dialog_russians_have_sams() {
   if(flag("someone_became_alert"))
     return;
   level endon("someone_became_alert");
-  //Soap, our intel was off. The Russians have mobile SAMs.	
+
   level.price dialogue_queue("cont_pri_intelwasoff");
 
-  //Roger that.	
   radio_dialogue("cont_cmt_rogerthat");
 
-  //Have you found us some transport?	
   level.price dialogue_queue("cont_pri_foundtransport");
-  //radio_dialogue( "cont_pri_foundtransport" );
 
-  //I'm working on it. Out.	
   radio_dialogue("cont_cmt_workingonit");
 }
 
@@ -3722,7 +2892,7 @@ dialog_lets_follow_quietly() {
   if(flag("said_convoy_coming")) {
     return;
   }
-  //Let's follow them quietly, and pick off any stragglers.	
+
   radio_dialogue("cont_pri_pickoffstragglers");
 }
 
@@ -3739,17 +2909,15 @@ hide_and_kill_everyone() {
 
   level endon("_stealth_spotted");
   flag_wait("price_in_position_remaining_group");
-  //wait_till_every_thing_stealth_normal_for( 1 );
-  thread price_is_ready_vs_everyone();
-  //level endon( "someone_became_alert" );
 
-  //I'm ready. Lets take them all out at once.	
+  thread price_is_ready_vs_everyone();
+
   radio_dialogue("cont_pri_imready");
 
   if(flag("cross_bridge_patrol_dead") || flag("rightside_patrol_dead")) {
     return;
   }
-  //You handle the two on the left.	
+
   radio_dialogue("cont_pri_twoonleft");
 }
 
@@ -3761,8 +2929,6 @@ spawn_with_delays() {
 }
 
 hide_and_kill_first_stragglers() {
-  //level.price.dontevershoot = undefined;
-  //thread price_takes_next_path_when_they_are_dead();
   if(flag("_stealth_spotted"))
     return;
   level endon("_stealth_spotted");
@@ -3772,12 +2938,11 @@ hide_and_kill_first_stragglers() {
   flag_set("saying_patience");
   level notify("saying_patience");
   level.price thread enable_cqbwalk();
-  //Patience…don't do anything stupid.	
+
   radio_dialogue("cont_pri_patience");
   wait .5;
 
   if(!flag("start_truck_patrol")) {
-    //We'll have to take 'em out at the same time.	
     radio_dialogue("cont_pri_sametime");
   }
 
@@ -3802,9 +2967,6 @@ hide_and_kill_first_stragglers() {
   wait 1;
   flag_wait("they_have_split_up");
 
-  //Now's your chance. Take one of 'em out. 	
-  //radio_dialogue( "cont_pri_yourchance" );
-  //iprintlnbold( "Two of them have stopped for a smoke. Take one and I'll take out the other." );
   radio_dialogue("cont_pri_forasmoke");
 }
 
@@ -3818,25 +2980,16 @@ price_is_ready_vs_everyone() {
   level.price.ignoreall = false;
   level.player waittill("weapon_fired");
 
-  wait .2; //give enemy chance to die and price chance to pick other target
+  wait .2;
 
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
-
-  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
-  //foreach ( actor in ai )
-  //{
-  //	self.dontattackme = undefined;
-  //	level.price.favoriteenemy = self;
-  //	level.price.baseaccuracy = 5000000;
-  //	self.health = 1;
-  //}
 
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
     actor.no_price_kill_callout = true;
     actor.dontattackme = undefined;
-    //level.price.favoriteenemy = actor;
+
     actor.health = 1;
   }
 
@@ -3849,19 +3002,10 @@ price_is_ready_vs_first_stragglers() {
   level.price.ignoreall = false;
   level.player waittill("weapon_fired");
 
-  wait .2; //give enemy chance to die and price chance to pick other target
+  wait .2;
 
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
-
-  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
-  //foreach ( actor in ai )
-  //{
-  //	self.dontattackme = undefined;
-  //	level.price.favoriteenemy = self;
-  //	level.price.baseaccuracy = 5000000;
-  //	self.health = 1;
-  //}
 
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
@@ -3893,22 +3037,12 @@ price_helps_kill_group(script_deathflag) {
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
 
-  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
-  //foreach ( actor in ai )
-  //{
-  //	self.dontattackme = undefined;
-  //	level.price.favoriteenemy = self;
-  //	level.price.baseaccuracy = 5000000;
-  //	self.health = 1;
-  //}
-
   ai = GetAIspeciesArray("axis", "all");
   while(!flag(script_deathflag)) {
     foreach(actor in ai) {
       if(!isalive(actor))
         continue;
       if((isDefined(actor.script_deathflag)) && (actor.script_deathflag == script_deathflag)) {
-        //actor.no_price_kill_callout = true;
         actor.dontattackme = undefined;
         actor.threatbias = 5000;
         if(!isalive(level.price.enemy))
@@ -3918,17 +3052,6 @@ price_helps_kill_group(script_deathflag) {
     }
     wait .1;
   }
-  //foreach ( actor in ai )
-  //{
-  //	if( ( isDefined( actor.script_deathflag ) ) && ( actor.script_deathflag == script_deathflag ) )
-  //	{
-  //		actor.no_price_kill_callout = true;
-  //		actor.dontattackme = undefined;
-  //		level.price.favoriteenemy = actor;
-  //		actor.health = 1;
-  //	}
-  //}
-  //flag_wait( script_deathflag );
 
   woods_reset_price_to_stealth();
 }
@@ -3943,46 +3066,8 @@ woods_reset_price_to_stealth() {
   level.price.maxsightdistsqrd = level.price_maxsightdistsqrd_woods;
 }
 
-//price_takes_next_path_when_they_are_dead()
-//{
-//	flag_wait( "first_stragglers_dead" );
-//	
-//	//clean up
-//	if( !flag( "_stealth_spotted" ) )
-//	{
-//		level.price.dontevershoot = true;
-//		ai = GetAIspeciesArray( "axis", "all" );
-//		foreach ( actor in ai )
-//			self.ignoreme = false;
-//	}
-//	level.price.baseaccuracy = 1;
-//	
-//	if( flag( "price_is_hiding" ) )
-//		return;
-//		
-//	price_path_side_of_road = getent( "price_path_side_of_road", "targetname" );
-//	level.price thread follow_path( price_path_side_of_road );
-//}
-
 hide_from_bridge_convoy() {
-  //if( flag( "price_is_hiding" ) )
-  //	return;
-
   thread price_takes_next_path_if_stealth_is_broken();
-  //flag_set( "price_is_hiding" );
-  //level.price notify( "stop_going_to_node" );
-  //level.price disable_dynamic_run_speed();
-  //level.price disable_stealth_smart_stance();
-
-  //level.price notify( "stop_dynamic_run_speed" );
-
-  //level.price notify( "stop_going_to_node" );//end follow_path
-
-  //level.priceenable_ai_color();
-  //level.priceset_force_color( "y" );
-
-  //price_hides_from_convoy = getnode( "price_hides_from_convoy", "targetname" );
-  //level.price setgoalnode( price_hides_from_convoy );
 
   level.price.ignoreall = true;
 
@@ -3994,12 +3079,7 @@ hide_from_bridge_convoy() {
 
   wait_till_every_thing_stealth_normal_for(1);
 
-  //Looks like they saw your parachute. 	
   radio_dialogue("cont_pri_yourparachute");
-
-  //hide_from_right_side_of_bridge_patrol();
-
-  //hide_from_cross_bridge_patrol();
 
   flag_set("convoy_hide_section_complete");
   autosave_stealth();
@@ -4010,21 +3090,9 @@ hide_from_bridge_convoy() {
   level.price thread enable_cqbwalk();
   price_goes_halfway_across_bridge = getnode("price_goes_halfway_across_bridge", "targetname");
   level.price thread price_smart_path_following(price_goes_halfway_across_bridge);
-
-  //level.price thread price_move_speed_think();
-  //level.price enable_stealth_smart_stance();
-  //level.price enable_dynamic_run_speed();
-
-  //path_start_cross_bridge = getent( "path_start_cross_bridge", "targetname" );
-  //level.price thread follow_path( path_start_cross_bridge );
-  //level.price.ignoreall = false;
 }
 
 dialog_lets_keep_moving() {
-  //level endon( "someone_became_alert" );
-  //level waittill( "price_goes_halfway_across_bridge" );
-
-  //Let's keep moving. 	
   thread radio_dialogue("cont_pri_keepmoving");
 }
 
@@ -4035,111 +3103,23 @@ price_takes_next_path_if_stealth_is_broken() {
   flag_waitopen("_stealth_spotted");
   wait 2;
 
-  //Let's keep moving. 	
-  //thread radio_dialogue( "cont_pri_keepmoving" );
-
-  //level.price thread price_move_speed_think();
-  //level.price enable_stealth_smart_stance();
-  //level.price enable_dynamic_run_speed();
-
   level.price thread enable_cqbwalk();
   price_goes_halfway_across_bridge = getnode("price_goes_halfway_across_bridge", "targetname");
   level.price thread price_smart_path_following(price_goes_halfway_across_bridge);
-
-  //path_start_cross_bridge = getent( "path_start_cross_bridge", "targetname" );
-  //level.price thread follow_path( path_start_cross_bridge );
-  //level.price.ignoreall = false;
 }
 
 dialog_wait_for_me_to_get_into_position() {
-  //Wait for me to get into position.	
   radio_dialogue("cont_pri_waitposition");
 }
-
-//hide_from_right_side_of_bridge_patrol()
-//{
-//	if( flag( "rightside_patrol_dead" ) )
-//		return; //skips the autosave
-//	wait_till_every_thing_stealth_normal_for( 2 );
-//	
-//	//iprintlnbold( "Take out the two in the woods on the otherside of the bridge" );
-//	if( !flag( "rightside_patrol_dead" ) )
-//		radio_dialogue( "cont_pri_twoinwoods" );
-//	
-//	flag_wait( "rightside_patrol_dead" );
-//	
-//	autosave_stealth();
-//}
-//
-//hide_from_cross_bridge_patrol()
-//{
-//	if( flag( "cross_bridge_patrol_dead" ) )
-//		return; //skips the autosave
-//	wait 2;
-//	wait_till_every_thing_stealth_normal_for( 2 );
-//	
-//	if( !flag( "cross_bridge_patrol_dead" ) )
-//	{
-//		ai = GetAIspeciesArray( "axis", "all" );
-//		foreach ( actor in ai )
-//		{
-//			if( ( isDefined( actor.script_noteworthy ) ) && ( actor.script_noteworthy == "cross_bridge_patrol" ) )
-//				actor SetThreatBiasGroup( "bridge_guys" );
-//		}
-//		SetThreatBiasAgainstAll( "bridge_guys", 2000 );
-//		
-//		price_targets_bridge_patrol = getnode( "price_targets_bridge_patrol", "targetname" );
-//		level.price setgoalnode( price_targets_bridge_patrol );
-//		
-//		thread dialog_wait_for_me_to_get_into_position();
-//		//level.price.ignoreall = false;
-//		
-//		//thread price_ignores_truck_guys_momentarily();
-//		
-//		flag_wait( "price_in_position_vs_bridge" );
-//		
-//		thread price_is_ready_vs_bridge_patrol();
-//		
-//		wait 2;
-//		
-//		//iprintlnbold( "I'm ready. Lets take them all out at once." );
-//		radio_dialogue( "cont_pri_imready" );
-//	}
-//	
-//	flag_wait( "cross_bridge_patrol_dead" );
-//	
-//	autosave_stealth();
-//}
-
-//price_ignores_truck_guys_momentarily()
-//{
-//	//Make first group ignored by second group
-//	SetIgnoreMeGroup( "truck_guys", "price" );
-//	level.price.ignoreall = false;
-//		
-//	flag_wait_either( "cross_bridge_patrol_dead", "_stealth_spotted" );
-//	
-//	//SetThreatBias( "truck_guys", "price", 0 );
-//	SetThreatBias( "price", "truck_guys", 0 );
-//}
 
 price_is_ready_vs_bridge_patrol() {
   level.player waittill("weapon_fired");
 
-  wait .2; //give enemy chance to die and price chance to pick other target
+  wait .2;
 
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
   level.price.ignoreall = false;
-
-  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
-  //foreach ( actor in ai )
-  //{
-  //	self.dontattackme = undefined;
-  //	level.price.favoriteenemy = self;
-  //	level.price.baseaccuracy = 5000000;
-  //	self.health = 1;
-  //}
 
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
@@ -4156,13 +3136,10 @@ dialog_woods_first_patrol() {
   level.player endon("weapon_fired");
   flag_wait("dialog_woods_first_patrol");
 
-  //wait 6;
-
   if(flag("someone_became_alert")) {
     return;
   }
-  //iprintlnbold( "let them pass" );
-  //Let them pass.	
+
   level.price radio_dialogue("cont_pri_letpass");
 }
 
@@ -4173,7 +3150,7 @@ dialog_woods_first_dog_patrol() {
     return;
   }
   autosave_stealth();
-  //Dog patrol.	
+
   level.price radio_dialogue("cont_pri_dogpatrol");
 }
 
@@ -4188,16 +3165,14 @@ dialog_woods_first_stationary() {
   }
   autosave_stealth();
   level endon("someone_became_alert");
-  //Three man patrol dead ahead.	
+
   level.price radio_dialogue("cont_pri_3manpatrol");
 
   weap = level.player getcurrentweapon();
   if((weap != level.starting_sidearm) && (weap != level.starting_rifle)) {
-    //Firing an unsuppressed weapon is going to alert a lot of enemies, Roach.	
     level.price radio_dialogue("cont_pri_alertenemies");
   }
 
-  //Take them out or leave them be. It's your call.	
   level.price radio_dialogue("cont_pri_yourcall");
 
   level.dont_brag_when_following_your_own_orders_time = gettime();
@@ -4215,19 +3190,10 @@ price_is_ready_vs_blocking_stationary() {
   level.player waittill("weapon_fired");
   level.price.maxsightdistsqrd = 8000 * 8000;
 
-  wait .2; //give enemy chance to die and price chance to pick other target
+  wait .2;
 
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
-
-  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
-  //foreach ( actor in ai )
-  //{
-  //	self.dontattackme = undefined;
-  //	level.price.favoriteenemy = self;
-  //	level.price.baseaccuracy = 5000000;
-  //	self.health = 1;
-  //}
 
   ai = GetAIspeciesArray("axis", "all");
   while(!flag("blocking_stationary_dead")) {
@@ -4239,9 +3205,9 @@ price_is_ready_vs_blocking_stationary() {
       if(actor.script_noteworthy == "blocking_group_left_two") {
         if(!isalive(level.price.enemy))
           level.price.favoriteenemy = actor;
-        //actor.no_price_kill_callout = true;
+
         actor.dontattackme = undefined;
-        //level.price.favoriteenemy = actor;
+
         actor.health = 1;
       }
     }
@@ -4252,32 +3218,14 @@ price_is_ready_vs_blocking_stationary() {
       if(!isDefined(actor.script_noteworthy))
         continue;
       if(actor.script_noteworthy == "two_on_right") {
-        //actor.no_price_kill_callout = true;
         actor.dontattackme = undefined;
-        //level.price.favoriteenemy = actor;
+
         actor.health = 1;
       }
     }
     wait .1;
   }
   woods_reset_price_to_stealth();
-
-  //ai = GetAIspeciesArray( "axis", "all" );
-  //foreach ( actor in ai )
-  //{
-  //	if( isDefined( actor.script_noteworthy ) )
-  //	{
-  //		if( ( actor.script_noteworthy == "two_on_right" ) || ( actor.script_noteworthy == "blocking_group_right_two" ) )
-  //		{
-  //			if( actor.script_noteworthy == "two_on_right" )
-  //				actor.threatbias = 2000;
-  //			actor.no_price_kill_callout = true;
-  //			actor.dontattackme = undefined;
-  //			//level.price.favoriteenemy = actor;
-  //			actor.health = 1;
-  //		}
-  //	}
-  //}
 }
 
 dialog_woods_blocking_stationary() {
@@ -4294,21 +3242,13 @@ dialog_woods_blocking_stationary() {
 
   thread price_is_ready_vs_blocking_stationary();
 
-  //Large patrol at 12 o'clock.	
   level.price radio_dialogue("cont_pri_largepatrol12");
 
-  //We can't slip by them. Get ready to take them out quickly.	
   level.price radio_dialogue("cont_pri_cantslipby");
 
   level.price radio_dialogue("cont_pri_twoonright");
 
-  //level.price thread add_dialogue_line( "Price", "Take the two on the right." );
-  //iprintlnbold( "You handle the two on the left" );
-  //level.price radio_dialogue( "cont_pri_twoonleft" );
-
   level.dont_brag_when_following_your_own_orders_time = gettime();
-
-  //two_on_right
 }
 
 dialog_woods_second_dog_patrol() {
@@ -4324,10 +3264,9 @@ dialog_woods_second_dog_patrol() {
     if(isalive(guy))
       guy.threatbias = 10000;
   }
-  //We got another dog patrol.
+
   level.price radio_dialogue("cont_pri_anotherdogpatrol");
 
-  //iprintlnbold( "Take them out or try to slip past. Your call." );
   level.price radio_dialogue("cont_pri_slippast");
 }
 
@@ -4337,16 +3276,11 @@ dialog_convoy_coming() {
 
   flag_set("said_convoy_coming");
   level notify("said_convoy_coming");
-  //Convoy coming, get out of sight.	
-  //level.price dialogue_queue( "cont_pri_convoycoming" );
-  level.price radio_dialogue("cont_pri_convoycoming");
 
-  //wait 13;
+  level.price radio_dialogue("cont_pri_convoycoming");
 
   wait 2;
 
-  //Let them pass.	
-  //level.price dialogue_queue( "cont_pri_letthempass" );
   level.price radio_dialogue("cont_pri_letthempass");
 }
 
@@ -4354,11 +3288,10 @@ dialog_theyre_looking_for_you() {
   current_line = 0;
   dialog = [];
 
-  //Quick! Hide in the woods! You alerted one of them!	
   dialog[dialog.size] = "cont_pri_hideinwoods";
-  //Get into the woods! Hide!	
+
   dialog[dialog.size] = "cont_pri_getintowoods";
-  //They're alerted! Hide in the woods! Move!	
+
   dialog[dialog.size] = "cont_pri_theyrealerted";
 
   while(1) {
@@ -4366,7 +3299,7 @@ dialog_theyre_looking_for_you() {
 
     dialog_line = dialog[current_line];
     radio_dialogue_clear_stack();
-    radio_dialogue(dialog_line); //dont cut off the other line but clear the que
+    radio_dialogue(dialog_line);
     if(current_line >= dialog.size)
       current_line = 0;
   }
@@ -4399,7 +3332,7 @@ monitor_someone_became_alert() {
   flag_set("someone_became_alert");
   thread monitor_waittill_stealth_normal();
 
-  wait 1; //gives player a chance to kill the guy before warning dialog
+  wait 1;
 
   if(flag("_stealth_spotted")) {
     return;
@@ -4425,15 +3358,11 @@ wait_till_every_thing_stealth_normal_for(time) {
 }
 
 dialog_into_the_woods() {
-  //FOLLOW ME!	
   level.price dialogue_queue("cont_pri_followme");
-  //level.price radio_dialogue( "cont_pri_followme" );
 
   wait 2;
 
-  //INTO THE WOODS! LETS GO! LETS GO!	
   level.price dialogue_queue("cont_pri_intothewoods");
-  //level.price radio_dialogue( "cont_pri_intothewoods" );
 }
 
 dialog_sub_spotted() {
@@ -4442,10 +3371,9 @@ dialog_sub_spotted() {
   wait 1;
 
   flag_wait("obj_base_entrance");
-  //There's the submarine! Right below that crane!	
+
   level.price dialogue_queue("cont_pri_belowcrane");
 
-  //Roach, soften up their defenses with the Hellfires!	
   level.price dialogue_queue("cont_pri_softendefenses");
 
   autosave_by_name("base");
@@ -4454,26 +3382,20 @@ dialog_sub_spotted() {
 
   level.player thread display_hint_timeout("hint_predator_drone", 6);
 
-  //Watch for the blinking strobes. That’s us.	
   level.price dialogue_queue("cont_pri_strobes");
 }
 
 dialog_base_on_alert() {
   flag_set("saying_base_on_alert");
 
-  //That got their attention!	
   radio_dialogue("cont_cmt_gotattention");
 
-  //The whole base has gone on alert!	
   radio_dialogue("cont_cmt_baseonalert");
 
-  //You'd better hurry. You've only got a couple of minutes before that submarine dives.	
   radio_dialogue("cont_cmt_betterhurry");
 
-  // MikeD: Restore uav radio in _remotemissile, and let the player know if the the uav is 'reloading'
   level.uav_radio_disabled = undefined;
 
-  //We're moving!	
   level.price dialogue_queue("cont_pri_weremoving");
 
   flag_clear("saying_base_on_alert");
@@ -4481,11 +3403,10 @@ dialog_base_on_alert() {
 
 dialog_progress_through_base() {
   flag_wait("player_is_halfway_to_sub");
-  //You're halfway there!	
+
   radio_dialogue("cont_cmt_halwaythere");
 
   if(isalive(level.base_heli)) {
-    //Take out that helicopter!	
     level.price dialogue_queue("cont_pri_takeoutheli");
     level.base_heli MakeEntitySentient("axis");
   }
@@ -4494,7 +3415,6 @@ dialog_progress_through_base() {
 
   wait 2;
 
-  //Use a Hellfire on that truck!	
   level.price dialogue_queue("cont_pri_usehellfire");
 }
 
@@ -4502,11 +3422,11 @@ dialog_time_nags(total_time) {
   time_past = 0;
 
   dialog = [];
-  //We've got to hurry! That sub isn't going to wait for us!	
+
   dialog[dialog.size] = "cont_pri_subwontwait";
-  //Go go go! 	
+
   dialog[dialog.size] = "cont_pri_gogogo";
-  //Get to the sub! Hurry!	
+
   dialog[dialog.size] = "cont_pri_gettosub";
   dialog = array_randomize(dialog);
   current = 0;
@@ -4517,19 +3437,16 @@ dialog_time_nags(total_time) {
     time_remaining = total_time - time_past;
 
     if(time_remaining == 90) {
-      //90 seconds!	
       radio_dialogue("cont_cmt_90secs");
       continue;
     }
 
     if(time_remaining == 60) {
-      //60 seconds!	
       radio_dialogue("cont_cmt_60secs");
       continue;
     }
 
     if(time_remaining == 30) {
-      //30 seconds! Move!	
       radio_dialogue("cont_cmt_30secs");
       continue;
     }
@@ -4546,19 +3463,17 @@ dialog_time_nags(total_time) {
 }
 
 dialog_at_sub() {
-  //Soap, we've reached the sub!	
   level.price dialogue_queue("cont_pri_reachedsub");
 
-  //Roger that!	
   radio_dialogue("cont_cmt_rogerthat2");
 }
 
 kill_btr_slider(newMissile) {
   fire_time = gettime();
   newMissile waittill("death");
-  if(gettime() > fire_time + 2000)
-    return; //we missed
-
+  if(gettime() > fire_time + 2000) {
+    return;
+  }
   self setModel("vehicle_btr80_snow_d");
   playFX(getfx("btr_explosion"), self.origin);
   stopFXOnTag(getfx("btr_spotlight"), self, "TAG_FRONT_LIGHT_RIGHT");
@@ -4570,60 +3485,31 @@ dialog_intro() {
 
   level.price SetLookAtEntity(level.player);
 
-  //wait 5;
-
-  //Price, I can barely see Roach's chute on my satellite feed.Too much interference. Do you see him, over?
   radio_dialogue("cont_cmt_barelysee");
 
-  level.price SetLookAtEntity(); // clears it
+  level.price SetLookAtEntity();
 
-  //Soap, I found Roach. He appears to be intact.	
-  //level.price dialogue_queue( "cont_pri_foundroach" );
   level.price radio_dialogue("cont_pri_foundroach");
 
-  //We're going to head northwest to the sub base, over.	
-  //level.price dialogue_queue( "cont_pri_headnw" );
   level.price radio_dialogue("cont_pri_headnw");
 
   wait 1;
 
-  //Copy that. I've located Rasta and Alpha, they landed pretty far to the east, over.	
   radio_dialogue("cont_cmt_fareast");
 
-  //Tell them to proceed with the mission, we'll regroup if possible. 	
-  //level.price dialogue_queue( "cont_pri_proceed" );
   level.price radio_dialogue("cont_pri_proceed");
-
-  //wait 1;
-  //
-  ////Have you found us some transport, over?	
-  //level.price radio_dialogue( "cont_pri_foundtransport" );
-  //
-  ////I'm working on it. Out.	
-  //radio_dialogue( "cont_cmt_workingonit" );
-
-  //level.price SetLookAtEntity( level.player );
 
   wait 1;
 
   flag_set("said_follow_me");
 
-  //Roach, follow me and stay out of sight.	
   radio_dialogue("cont_pri_outofsight");
-
-  //level.price SetLookAtEntity();// clears it
 }
 
 stealth_music_control() {
-  //DEFINE_BASE_MUSIC_TIME 		 = 143.5;
-  //DEFINE_ESCAPE_MUSIC_TIME 	 = 136;
-  //DEFINE_SPOTTED_MUSIC_TIME 	 = 117;
-
   if(flag("stop_stealth_music"))
     return;
   level endon("stop_stealth_music");
-
-  //flag_wait( "first_two_guys_in_sight" );
 
   while(1) {
     thread stealth_music_hidden_loop();
@@ -4643,8 +3529,7 @@ stealth_music_control() {
 
 stealth_music_hidden_loop() {
   music_TIME = musicLength("contingency_stealth");
-  //music_TIME 		 		 = 528;
-  //level endon( "player_in_hanger" );
+
   level endon("_stealth_spotted");
 
   if(flag("stop_stealth_music"))
@@ -4662,8 +3547,7 @@ stealth_music_hidden_loop() {
 
 stealth_music_busted_loop() {
   music_TIME = musicLength("contingency_stealth_busted");
-  //music_TIME 		 = 154;
-  //level endon( "player_in_hanger" );
+
   level endon("_stealth_spotted");
   if(flag("stop_stealth_music"))
     return;
@@ -4693,7 +3577,6 @@ cargo_choppers2() {
   current_spawner = 0;
   num_of_groups = 1;
   while(num_of_groups > 0) {
-    //group = randomintrange( 2, 4 );
     group = cargo_heli_spawners.size;
 
     while(group > 0) {
@@ -4705,8 +3588,6 @@ cargo_choppers2() {
       group--;
     }
     num_of_groups--;
-    //flag_wait( "second_heli_group" );
-    //wait( randomintrange( 15, 24 ) );
   }
 }
 
@@ -4722,7 +3603,6 @@ cargo_choppers() {
   current_spawner = 0;
   num_of_groups = 1;
   while(num_of_groups > 0) {
-    //group = randomintrange( 2, 4 );
     group = cargo_heli_spawners.size;
 
     while(group > 0) {
@@ -4734,15 +3614,13 @@ cargo_choppers() {
       group--;
     }
     num_of_groups--;
-    //flag_wait( "second_heli_group" );
-    //wait( randomintrange( 15, 24 ) );
   }
 }
 
 spawn_cargo_chopper(cargo_heli_spawner) {
   cargo_heli = vehicle_spawn(cargo_heli_spawner);
-  //cargo_heli = spawn_vehicle_from_targetname( "cargo_heli" );
-  wait .1; //vehicle spawns in one place and then moves on the first frame
+
+  wait .1;
   cargo_item_spawners = cargo_heli_spawner.cargo_item_spawners;
   new_cargo = [];
   for(i = 0; i < cargo_item_spawners.size; i++) {
@@ -4774,23 +3652,16 @@ destroy_thing_with_at4(fire_pos_ent, thing, thing_offset, missile_func) {
 
   fire_pos_ent thread anim_custom_animmode(guys, "gravity", "at4_fire");
 
-  //price_fire_loc anim_reach_solo( level.price, "at4_fire" );
-  //price_fire_loc thread anim_single_solo( level.price, "at4_fire" );
-
-  self waittill("attach rocket"); //notetrack
+  self waittill("attach rocket");
 
   self place_weapon_on("at4", "chest");
-  //self detach( "weapon_AT4", "TAG_STOWED_BACK" );
-  //self attach( "weapon_AT4", tag );
 
-  self waittill("fire rocket"); //notetrack
+  self waittill("fire rocket");
 
   gun = self gettagorigin(tag);
   newMissile = MagicBullet("at4_straight", gun, (thing.origin + thing_offset));
-  //if( isDefined( missile_func ) )
-  //	level.btr_slider thread kill_btr_slider( newMissile );
 
-  self waittill("drop rocket"); //notetrack
+  self waittill("drop rocket");
 
   org_hand = self gettagorigin(tag);
   angles_hand = self gettagangles(tag);
@@ -4813,26 +3684,13 @@ setup_village_defenders() {
 setup_bricktop() {
   level.bricktop = self;
   self.animname = "bricktop";
-  //self thread magic_bullet_shield();
-
-  //flag_wait( "base_alerted" );
-
-  //self thread stop_magic_bullet_shield();
-  //self thread replace_on_death();
 }
 
 setup_base_redshirt() {
   self thread replace_on_death();
 }
 
-setup_village_redshirt() {
-  //self thread magic_bullet_shield();
-
-  //flag_wait( "base_alerted" );
-
-  //self thread stop_magic_bullet_shield();
-  //self thread replace_on_death();
-}
+setup_village_redshirt() {}
 
 setup_bricktop_village() {
   self thread magic_bullet_shield();
@@ -4847,7 +3705,6 @@ setup_bricktop_village() {
 
     self waittill("finished_anim_reach");
 
-    //Stand back!	
     level.rasta dialogue_queue("cont_rst_standback");
 
     fire_pos_ent waittill("at4_fire");
@@ -4875,7 +3732,6 @@ setup_rasta_village() {
 
     self waittill("finished_anim_reach");
 
-    //Get back!	
     level.rasta dialogue_queue("cont_rst_getback");
 
     fire_pos_ent waittill("at4_fire");
@@ -4884,73 +3740,8 @@ setup_rasta_village() {
   self set_force_color("g");
   self enable_ai_color();
 
-  //Check your fire! Check your fire! Friendlies coming in at your 12!	
   level.rasta dialogue_queue("cont_rst_checkfire");
 }
-/*	
-	self.goalradius = 32;
-	start = getent( "rasta_start", "targetname" );
-	
-	self setgoalpos ( start.origin );
-	self waittill( "goal" );
-	
-	first_grenade_target = getent( start.target, "targetname" );
-	target_org = first_grenade_target.origin;
-	org = self gettagorigin( "TAG_INHAND" );
-	
-	vec = VectorNormalize( target_org - org );
-	forward = vector_multiply( vec, 30 );
-	pos = forward + org;
-	
-	self.grenadeawareness = 0;
-	//draw_line_for_time( <org1> , <org2> , <r> , <g> , <b> , <timer> )
-	//thread draw_line_for_time( pos , target_org , 1 , 0, 0 , 3 );
-	grenade = MagicGrenade( "semtex_grenade", pos, target_org );
-	grenade thread maps\_detonategrenades::semtex_sticky_handle( self );
-	
-	//Stand back!	
-	thread dialogue_queue( "cont_rst_standback" );
-	
-	wait 1;
-	
-	second_grenade_throw_position = getent( first_grenade_target.target, "targetname" );
-	
-	self setgoalpos ( second_grenade_throw_position.origin );
-	self waittill( "goal" );
-	
-	second_grenade_target = getent( second_grenade_throw_position.target, "targetname" );
-	target_org = second_grenade_target.origin;
-	org = self gettagorigin( "TAG_INHAND" );
-	
-	vec = VectorNormalize( target_org - org );
-	forward = vector_multiply( vec, 30 );
-	pos = forward + org;
-	
-	//draw_line_for_time( <org1> , <org2> , <r> , <g> , <b> , <timer> )
-	//thread draw_line_for_time( pos , target_org , 1 , 0, 0 , 3 );
-	grenade = MagicGrenade( "semtex_grenade", pos, target_org );
-	grenade thread maps\_detonategrenades::semtex_sticky_handle( self );
-	//Get back!	
-	thread dialogue_queue( "cont_rst_getback" );
-	
-	
-	self.grenadeawareness = 1;
-	
-	//wait 1;
-	//
-	//done_with_throwing_position = getent( second_grenade_target.target, "targetname" );
-	//
-	//self setgoalpos ( done_with_throwing_position.origin );
-	//self waittill( "goal" );
-	//
-	//if( isalive( level.gauntlet_east ) )
-	//	level.gauntlet_east waittill( "death" );
-	//	
-	//if( isalive( level.gauntlet_west ) )
-	//	level.gauntlet_west waittill( "death" );
-	//	
-	self.goalradius = 2000;
-*/
 
 setup_price() {
   level.price = self;
@@ -4958,30 +3749,14 @@ setup_price() {
 
   if(level.price_destroys_btr)
     level.price place_weapon_on("at4", "back");
-  //level.price thread disable_ai_color();
-  //	level.price stealth_plugin_aicolor();
-  //	array = [];
-  //	array[ "hidden" ] = ::do_nothing;
-  //	array[ "spotted" ] = ::do_nothing;
-  //	level.price stealth_color_state_custom( array );
 
   level.price enable_ai_color();
   level.price.pathRandomPercent = 0;
 
   level.price thread magic_bullet_shield();
-  //level.price thread price_bullet_sheild(); //disables bullet shield if player is too far
-  //level.price thread price_handle_death();//mission fail if price dies
+
   level.price make_hero();
   level.price.allowdeath = false;
-  //level.price.dontshootwhilemoving = true;//tried it and it looks bad.
-
-  //level.price thread stealth_price_accuracy_control();
-
-  //level.price.baseaccuracy = 5000000;
-
-  //all stuff from scoutsniper that might be a good idea
-  //	level.price thread price_death();
-  //	level.price setthreatbiasgroup( "price" );
 
   self thread animscripts\utility::PersonalColdBreath();
 }
@@ -5002,11 +3777,11 @@ stealth_settings() {
 
   ai_event["ai_eventDistDeath"] = [];
   ai_event["ai_eventDistDeath"]["spotted"] = 512;
-  ai_event["ai_eventDistDeath"]["hidden"] = 512; // used to be 256
+  ai_event["ai_eventDistDeath"]["hidden"] = 512;
 
   ai_event["ai_eventDistPain"] = [];
   ai_event["ai_eventDistPain"]["spotted"] = 256;
-  ai_event["ai_eventDistPain"]["hidden"] = 256; // used to be 256
+  ai_event["ai_eventDistPain"]["hidden"] = 256;
 
   ai_event["ai_eventDistBullet"] = [];
   ai_event["ai_eventDistBullet"]["spotted"] = 96;
@@ -5081,12 +3856,11 @@ sight_ranges_foggy_woods() {
   alert_duration[2] = 1;
   alert_duration[3] = 0.75;
 
-  // easy and normal have 2 alert levels so the above times are effectively doubled
   stealth_alert_level_duration(alert_duration[level.gameskill]);
 }
 
 woods_prespotted_func() {
-  wait 3; //default is 2.25
+  wait 3;
 }
 
 stealth_woods() {
@@ -5095,7 +3869,6 @@ stealth_woods() {
   if(isPlayer(self)) {
     return;
   }
-  //threat_array[ "warning1" ] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
 
   switch (self.team) {
     case "axis":
@@ -5108,10 +3881,9 @@ stealth_woods() {
       self.pathrandompercent = 0;
       self stealth_plugin_threat();
       self stealth_pre_spotted_function_custom(::woods_prespotted_func);
-      //self stealth_threat_behavior_custom( threat_array );
 
       threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
-      threat_array["attack"] = ::small_goal_attack_behavior; //default
+      threat_array["attack"] = ::small_goal_attack_behavior;
       self stealth_threat_behavior_custom(threat_array);
 
       self stealth_enable_seek_player_on_spotted();
@@ -5135,9 +3907,7 @@ stealth_woods() {
         self.alertlevel = "alert";
         self.disablearrivals = undefined;
         self.disableexits = undefined;
-        //if( isDefined( self.script_pet ) )
-        //	self.moveplaybackrate = .4;
-        //else
+
         self.moveplaybackrate = .8;
         thread scan_when_idle();
       }
@@ -5145,7 +3915,7 @@ stealth_woods() {
       break;
 
     case "allies":
-      //use the bridge area settings!
+
   }
 }
 
@@ -5170,28 +3940,26 @@ stealth_bridge_area() {
         self thread dogs_have_small_fovs_when_stopped();
         self set_threatbias_group("dogs");
       }
-      //self thread flashlight_when_alerted();
+
       if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "truck_guys"))
         self set_threatbias_group("truck_guys");
       else
         self set_threatbias_group("bridge_stealth_guys");
 
       self stealth_plugin_threat();
-      //self stealth_pre_spotted_function_custom( ::clifftop_prespotted_func );
 
       self.pathrandompercent = 0;
       threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
-      threat_array["attack"] = ::small_goal_attack_behavior; //default
+      threat_array["attack"] = ::small_goal_attack_behavior;
       self stealth_threat_behavior_custom(threat_array);
       self stealth_enable_seek_player_on_spotted();
       self stealth_plugin_corpse();
       self stealth_plugin_event_all();
       self.baseaccuracy = 3;
-      self.fovcosine = .86; // for the 2nd group -z
+      self.fovcosine = .86;
       self.fovcosinebusy = .1;
-      //self thread dialog_price_kill();
 
-      self thread monitor_stealth_kills(); //price and player kill dialog
+      self thread monitor_stealth_kills();
       self thread monitor_someone_became_alert();
 
       if((isDefined(self.script_type)) && (self.script_type == "cold_patrol"))
@@ -5199,20 +3967,6 @@ stealth_bridge_area() {
       break;
 
     case "allies":
-      //self.grenadeawareness = 0;//dont chase grenades
-      //self._stealth.behavior.no_prone = true;
-      //self._stealth.behavior.wait_resume_path = 4;
-      //self._stealth_move_detection_cap = 0;
-
-      //dynamic_run_speed settings:
-      //self.drs_pushdist = 250;
-      //self.drs_sprintdist = 0;//was 60
-      //self.drs_stopdist = 400;
-
-      //self thread stealth_plugin_smart_stance();
-      //self thread stealth_no_fog_smart_stance();
-
-      //self.dynamic_run_response_time = 1;
 
       array = [];
       array["hidden"] = ::stealth_friendly_state_hidden;
@@ -5229,45 +3983,24 @@ stealth_base() {
   }
   switch (self.team) {
     case "axis":
-      //self thread flashlight_when_alerted();
 
       self stealth_plugin_threat();
-      //self stealth_pre_spotted_function_custom( ::clifftop_prespotted_func );
 
       self.pathrandompercent = 0;
-      //threat_array[ "warning1" ] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
-      threat_array["attack"] = ::large_goal_ambush_attack_behavior; //default
-      self stealth_threat_behavior_custom(threat_array);
-      //self stealth_enable_seek_player_on_spotted();
-      //self stealth_plugin_corpse();
-      self stealth_plugin_event_all();
-      //self.baseaccuracy = 3;
-      self.fovcosine = .76; // for the 2nd group -z
-      self.fovcosinebusy = .1;
-      //self thread dialog_price_kill();
 
-      //self thread monitor_stealth_kills();//price and player kill dialog
-      //self thread monitor_someone_became_alert();
+      threat_array["attack"] = ::large_goal_ambush_attack_behavior;
+      self stealth_threat_behavior_custom(threat_array);
+
+      self stealth_plugin_event_all();
+
+      self.fovcosine = .76;
+      self.fovcosinebusy = .1;
 
       if((isDefined(self.script_type)) && (self.script_type == "cold_patrol"))
         self init_cold_patrol_anims();
       break;
 
     case "allies":
-      //self.grenadeawareness = 0;//dont chase grenades
-      //self._stealth.behavior.no_prone = true;
-      //self._stealth.behavior.wait_resume_path = 4;
-      //self._stealth_move_detection_cap = 0;
-
-      //dynamic_run_speed settings:
-      //self.drs_pushdist = 250;
-      //self.drs_sprintdist = 0;//was 60
-      //self.drs_stopdist = 400;
-
-      //self thread stealth_plugin_smart_stance();
-      //self thread stealth_no_fog_smart_stance();
-
-      //self.dynamic_run_response_time = 1;
 
       array = [];
       array["hidden"] = ::stealth_friendly_state_hidden;
@@ -5275,309 +4008,6 @@ stealth_base() {
       stealth_basic_states_custom(array);
   }
 }
-
-///////////////////////////////////////////
-//price_move_speed_think()
-//{
-//	self notify( "start_dynamic_run_speed" );
-//
-//	self endon( "death" );
-//	self endon( "stop_dynamic_run_speed" );
-//	self endon( "start_dynamic_run_speed" );
-//
-//	if( !isDefined( self.ent_flag[ "dynamic_run_speed_stopped" ] ) )
-//	{
-//		self ent_flag_init( "dynamic_run_speed_stopped" );
-//		self ent_flag_init( "dynamic_run_speed_stopping" );
-//	}
-//	else
-//	{
-//		self ent_flag_clear( "dynamic_run_speed_stopping" );
-//		self ent_flag_clear( "dynamic_run_speed_stopped" );
-//	}
-//	
-//	self thread price_move_speed_handle_cleanup();
-//
-//	self.run_speed_state = "";
-//
-//	fardist_min = 500 * 500;
-//	fardist_max = 600 * 600;
-//	stopdist_min = 250 * 250;
-//	stopdist_max = 400 * 400;
-//	ai_slow_dist = 1400 * 1400;
-//	ai_stop_dist_min = 850 * 850;
-//	ai_stop_dist_max = 950 * 950;//tweaking these breaks hide and kill stragglers
-//	
-//	responsiveness_ai = .2;
-//	//responsiveness_player_loc = 4;
-//	//player_loc_count = responsiveness_player_loc / responsiveness_ai;
-//	//ticks = 0;
-//
-//
-//	while( 1 )
-//	{
-//		closest_dist = self GetClosestEnemySqDist();
-//		if( !isDefined( closest_dist ) )
-//			closest_dist = 99999999;
-//		//enemies = GetAISpeciesArray( "axis", "all" );
-////
-//		//if( enemies.size == 0 )
-//		//	closest_dist = 99999999;
-//		//else
-//		//	closest_dist = distance ( level.player.origin, ( getClosest( level.player.origin, enemies ) ).origin );
-//
-//		if( ( closest_dist < ai_stop_dist_min ) )
-//		{
-//			
-//			println( "price_dynamic: enemy close. stopping (min). " + closest_dist/closest_dist );
-//			
-//			price_dynamic_run_set( "stop" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		if( ( closest_dist < ai_stop_dist_max ) && ( self.run_speed_state == "stop" ) )
-//		{
-//			println( "price_dynamic: enemy close. stopping (max). " + closest_dist/closest_dist );
-//			price_dynamic_run_set( "stop" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		//how far is the player from price
-//		dist = DistanceSquared( self.origin, level.player.origin );
-//		
-//		/*
-//		angles1 = vectortoangles( self.goalpos - self.origin );
-//		forward1 = anglesToForward( angles1 );
-//		
-//		angles2 = vectortoangles( level.player.origin - self.origin );
-//		forward2 = anglesToForward( angles2 );
-//		
-//		vectordor( forward1, forward2 );
-//		*/
-//				
-//		//normal = VectorNormalize( end_origin - start_origin );
-//		//forward = anglesToForward( start_angles );
-//		//dot = VectorDot( forward, normal );
-//			
-//		//vec = anglesToForward( self.angles );
-//		vec_goal = VectorNormalize( ( self.goalpos - self.origin ) );//angle of where I'm supposed to go
-//		vec2 = VectorNormalize( ( level.player.origin - self.origin ) );
-//		//vecdot = vectordot( vec, vec2 );//dot of my angle vs player position
-//		vecdot = vectordot( vec_goal, vec2 );//dot my my goal dir vs player position
-//		//level.g = vecdot;
-//		
-//		if( ( dist > stopdist_max ) && ( vecdot < 0 ) )//vecdot > 0 means in 180 in front
-//		{
-//			println( "price_dynamic: price too far in front (max). stopping. " + vecdot );
-//			price_dynamic_run_set( "stop" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		if( ( dist > stopdist_min ) && ( self.run_speed_state == "stop" ) && ( vecdot < 0 ) )
-//		{
-//			println( "price_dynamic: price too far in front (min). stopping. " + vecdot );
-//			price_dynamic_run_set( "stop" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		if( ( closest_dist < ai_slow_dist ) )
-//		{
-//			
-//			println( "price_dynamic: enemy close. crouch. " + closest_dist/closest_dist );
-//			
-//			price_dynamic_run_set( "crouch" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		
-//		if( ( vecdot > - .25 ) && ( dist > fardist_max ) )
-//		{
-//			println( "price_dynamic: player in front (max). running. " );
-//			price_dynamic_run_set( "run" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		if( ( vecdot > - .25 ) && ( dist > fardist_min ) && ( self.run_speed_state == "run" ) )
-//		{
-//			println( "price_dynamic: player in front (min). running. " );
-//			price_dynamic_run_set( "run" );
-//			wait responsiveness_ai;
-//			continue;
-//		}
-//		
-//		//otherwise cqb
-//		println( "price_dynamic: cqb " );
-//		price_dynamic_run_set( "cqb" );
-//		wait responsiveness_ai;
-//	}
-//}
-//
-//
-//
-//price_dynamic_run_set( speed )
-//{
-//	if( self.run_speed_state == speed )
-//		return;
-//	self notify( "dynamic_run_speed_changing" );
-//	self.run_speed_state = speed;
-//
-//	switch( speed )
-//	{
-//		case "cqb":
-//			self.pathenemyfightdist = 192;
-//			self.pathenemylookahead = 192;
-//			self enable_cqbwalk();
-//			self allowedstances( "stand", "crouch", "prone" );
-//			
-//			self notify( "stop_loop" );
-//			self anim_stopanimscripted();
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//		case "run":
-//			self.pathenemyfightdist = 192;
-//			self.pathenemylookahead = 192;
-//			self disable_cqbwalk();
-//			self allowedstances( "stand", "crouch", "prone" );
-//			
-//			self notify( "stop_loop" );
-//			self anim_stopanimscripted();
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//		case "stop":
-//			self thread price_dynamic_run_stop();
-//			break;
-//		case "crouch":
-//			self.pathenemyfightdist = 192;
-//			self.pathenemylookahead = 192;
-//			self allowedstances( "crouch" );
-//			self disable_cqbwalk();
-//			
-//			self notify( "stop_loop" );
-//			self anim_stopanimscripted();
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//	}
-//}
-//
-//
-//price_move_speed_handle_cleanup()
-//{
-//	self endon( "start_dynamic_run_speed" );
-//	self endon( "death" );
-//
-//	self price_dynamic_run_speed_cleanup_wait();
-//
-//	self disable_cqbwalk();
-//	self allowedstances( "stand", "crouch", "prone" );
-//	self.pathenemyfightdist = 192;
-//	self.pathenemylookahead = 192;
-//	self notify( "stop_loop" );
-//	self anim_stopanimscripted();
-//	self ent_flag_clear( "dynamic_run_speed_stopping" );
-//	self ent_flag_clear( "dynamic_run_speed_stopped" );
-//}
-//
-//price_dynamic_run_speed_cleanup_wait()
-//{
-//	level endon( "_stealth_spotted" );
-//	self waittill( "stop_dynamic_run_speed" );
-//}
-
-//price_dynamic_run_stop()
-//{
-//	self notify( "stop_going_to_node" );
-//	wait 1;
-//	
-//	self.oldgoal = self.goalpos;
-//	self.oldradius = self.goalradius;
-//
-//	self setgoalpos( self.origin );
-//	self.goalradius = 90;
-//	
-//	self waittill( "dynamic_run_speed_changing" );
-//	
-//	self.goalradius = self.oldradius;
-//	if( isDefined( self.last_set_goalent ) )
-//	{
-//		self thread follow_path( self.last_set_goalent );
-//	}
-//	else
-//	{
-//		self setgoalpos( self.oldradius );
-//	}
-//}
-
-//price_dynamic_run_set( speed )
-//{
-//	if( self.run_speed_state == speed )
-//		return;
-//
-//	self.run_speed_state = speed;
-//
-//	switch( speed )
-//	{
-//		case "cqb":
-//			self.moveplaybackrate = 1;
-//
-//			self enable_cqbwalk();
-//			self allowedstances( "stand", "crouch", "prone" );
-//
-//			self notify( "stop_loop" );
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//		case "run":
-//
-//			self disable_cqbwalk();
-//			if( isDefined( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
-//			{
-//				if( IsArray( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
-//					self set_generic_run_anim_array("DRS_run" );
-//				else
-//					self set_generic_run_anim( "DRS_run" );
-//			}
-//			else
-//				self clear_run_anim();
-//			//self AllowedStances( "stand", "crouch", "prone" );
-//
-//			self notify( "stop_loop" );
-//			self anim_stopanimscripted();
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//		case "stop":
-//			self thread price_dynamic_move_speed_stop();
-//			break;
-//		case "crouch":
-//			self.moveplaybackrate = 1;
-//
-//			self clear_run_anim();
-//			self allowedstances( "crouch" );
-//
-//			self disable_cqbwalk();
-//			self notify( "stop_loop" );
-//			self ent_flag_clear( "dynamic_run_speed_stopped" );
-//			break;
-//	}
-//}
-
-//stop_dynamic_price_speed()
-//{
-//	self endon( "start_dynamic_run_speed" );
-//	self endon( "death" );
-//
-//	self.moveplaybackrate = 1;
-//	self clear_run_anim();
-//	self allowedstances( "stand", "crouch", "prone" );
-//
-//	self notify( "stop_loop" );
-//	self ent_flag_clear( "dynamic_run_speed_stopping" );
-//	self ent_flag_clear( "dynamic_run_speed_stopped" );
-//}
 
 price_dynamic_run_stop() {
   self endon("death");
@@ -5592,29 +4022,18 @@ price_dynamic_run_stop() {
   self ent_flag_set("dynamic_run_speed_stopping");
   self ent_flag_set("dynamic_run_speed_stopped");
 
-  //->turned this off because I think checking the current movement would fix whatever this was trying to
-  //if( self ent_flag_exist( "_stealth_stance_handler" ) )
-  //	self ent_flag_waitopen( "_stealth_stance_handler" );
-
   stop = "DRS_run_2_stop";
   self maps\_anim::anim_generic_custom_animmode(self, "gravity", stop);
-  self ent_flag_clear("dynamic_run_speed_stopping"); // this flag gets cleared if we endon
+  self ent_flag_clear("dynamic_run_speed_stopping");
 
-  //moved this line below clearing the stopping flag so we make sure that clears before this function has a chance to end.
   if(!self ent_flag("dynamic_run_speed_stopped"))
     return;
   self endon("dynamic_run_speed_stopped");
 
-  //if he's already playing a looping animation - we can assume its part of level logic and
-  //it makes sense not to play a stopping animation or play dialogue to tell you to catch up
   if(isDefined(self.loops) && self.loops > 0) {
     return;
   }
   while(self ent_flag("dynamic_run_speed_stopped")) {
-    //->turned this off because I think checking the current movement would fix whatever this was trying to
-    //if( self ent_flag_exist( "_stealth_stance_handler" ) )
-    //	self ent_flag_waitopen( "_stealth_stance_handler" );
-
     idle = "DRS_stop_idle";
     self thread maps\_anim::anim_generic_loop(self, idle);
 
@@ -5649,7 +4068,7 @@ dogs_have_small_fovs_when_stopped() {
     self.fovcosine = .99;
     self notify("end_patrol");
 
-    self waittill("_stealth_normal"); //be came alert
+    self waittill("_stealth_normal");
     self.fovcosine = .76;
   }
 }
@@ -5695,18 +4114,9 @@ setup_base_starting_guys() {
 
   self.ignoreme = false;
   self.maxsightdistsqrd = 8000 * 8000;
-  //	if( isDefined( self._stealth ) )
-  //	{
-  //		self ent_flag_clear( "_stealth_normal" );
-  //		self stealth_ai_clear_custom_idle_and_react();
-  //	}
-
-  //	self stopanimscripted();
-  //	self notify( "killanimscripts" );
 
   self.favoriteenemy = level.player;
-  //self.ignoreme = false;
-  //self notify( "end_patrol" );
+
   wait 1;
 
   self.favoriteenemy = undefined;
@@ -5721,66 +4131,15 @@ setup_base_starting_guys() {
 
 large_goal_ambush_attack_behavior() {}
 
-//stealth_no_fog_smart_stance()
-//{
-//	self._stealth.behavior.No_Prone = true;
-//	
-//	// i do this because the player doesn't look as bad sneaking up on the enemies
-//	// friendlies however don't look as good getting so close
-//	looking_away = [];
-//	looking_away[ "stand" ] 	 = 0;
-//	looking_away[ "crouch" ] 	 = -800;
-//	looking_away[ "prone" ] 	 = -800;//was -800
-//	
-//	neutral = [];
-//	neutral[ "stand" ] 			 = 200;
-//	neutral[ "crouch" ] 		 = 0;
-//	neutral[ "prone" ] 			 = 0;
-//	
-//	looking_towards = [];
-//	looking_towards[ "stand" ] 	 = 200;
-//	looking_towards[ "crouch" ]= 0;
-//	looking_towards[ "prone" ] 	 = 0;
-//	
-//	
-//	stealth_friendly_stance_handler_distances_set( looking_away, neutral, looking_towards );
-//}
-//
-//stealth_fog_smart_stance()
-//{
-//	self._stealth.behavior.No_Prone = true;
-//	
-//	// i do this because the player doesn't look as bad sneaking up on the enemies
-//	// friendlies however don't look as good getting so close
-//	looking_away = [];
-//	looking_away[ "stand" ] 	 = -700;
-//	looking_away[ "crouch" ] 	 = -700;
-//	looking_away[ "prone" ] 	 = -700;
-//	
-//	neutral = [];
-//	neutral[ "stand" ] 			 = -500;
-//	neutral[ "crouch" ] 		 = -700;
-//	neutral[ "prone" ] 			 = -700;
-//	
-//	looking_towards = [];
-//	looking_towards[ "stand" ] 	 = -100;
-//	looking_towards[ "crouch" ]= -200;
-//	looking_towards[ "prone" ] 	 = -200;
-//	
-//	stealth_friendly_stance_handler_distances_set( looking_away, neutral, looking_towards );
-//}
-
 stealth_friendly_state_hidden() {
   flag_clear("price_is_hiding");
   self.no_pistol_switch = true;
 
-  //dont aim at dudes in the woods
   if((!flag("player_on_ridge")) && flag("safe_from_btrs"))
     self.maxsightdistsqrd = level.price_maxsightdistsqrd_woods;
 
   self.ignoreCloseFoliage = true;
 
-  //dont run to color nodes before village
   if(!flag("approaching_ridge")) {
     self disable_ai_color();
 
@@ -5792,7 +4151,7 @@ stealth_friendly_state_hidden() {
 
   self pushplayer(true);
   self.fixednode = true;
-  //self set_force_color( "r" );
+
   self thread set_battlechatter(false);
   self set_friendlyfire_warnings(false);
   self.dontEverShoot = true;
@@ -5800,12 +4159,9 @@ stealth_friendly_state_hidden() {
   self.grenadeammo = 0;
 
   self.forceSideArm = undefined;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
-  //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
-  //so we don't all of a sudden alert another stealth group by shooting at them
-  //self.dontEverShoot 	= true;
+
   self.ignoreme = true;
-  //self enable_ai_color();
+
   self.ignoresuppression = true;
   setsaveddvar("ai_friendlyfireblockduration", 0);
   setsaveddvar("ai_friendlysuppression", 0);
@@ -5818,44 +4174,28 @@ stealth_friendly_state_spotted() {
   self.fixednode = true;
   self.ignoreCloseFoliage = true;
 
-  //dont run to color nodes if in the woods
   if((!flag("approaching_ridge")) && !flag("safe_from_btrs")) {
     self enable_ai_color();
     self set_force_color("y");
   }
 
-  self thread set_battlechatter(false); //BCS sounds bad in combat right now
+  self thread set_battlechatter(false);
   self set_friendlyfire_warnings(true);
   self.dontEverShoot = undefined;
-  //self thread set_battlechatter( true );
 
   self.maxsightdistsqrd = 8000 * 8000;
   self.grenadeammo = 0;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
-  //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
-  //so we don't all of a sudden alert another stealth group by shooting at them	
-  //self.dontEverShoot 	= false;//self.ignoreall 	 = false;
+
   self.ignoreme = false;
 
-  //self.disablearrivals 	 = true;
-  //self.disableeXits 	 = true;
-
   self pushplayer(false);
-  //self disable_cqbwalk();
 
-  //self thread maps\_stealth_behavior_friendly::friendly_spotted_getup_from_prone();		
-  //self allowedstances( "prone", "crouch", "stand" );
-  //self anim_stopanimscripted();
-
-  //self disable_ai_color();
-  //self setgoalpos( self.origin );
   self.ignoresuppression = false;
   setsaveddvar("ai_friendlyfireblockduration", 2000);
   setsaveddvar("ai_friendlysuppression", 1);
 }
 
 init_cold_patrol_anims() {
-  // make sure we alternate instead of doing a random selection
   if(!isDefined(level.lastColdPatrolAnimSetAssigned)) {
     level.lastColdPatrolAnimSetAssigned = "none";
   }
@@ -5905,9 +4245,6 @@ setup_bridge_trucks() {
   screamer = random(guys);
   screamer maps\_stealth_shared_utilities::enemy_announce_wtf();
 
-  //wait .5;
-  //self waittill( "safe_to_unload" );
-
   self Vehicle_SetSpeed(0, 15);
   wait 1;
   self maps\_vehicle::vehicle_unload();
@@ -5918,9 +4255,6 @@ setup_bridge_trucks() {
 base_truck_guys_think() {
   self endon("death");
 
-  //if( flag( "_stealth_spotted" ) || self ent_flag( "_stealth_attack" ) )
-  //	return;
-
   level endon("_stealth_spotted");
   self endon("_stealth_attack");
 
@@ -5930,15 +4264,9 @@ base_truck_guys_think() {
 
   self maps\_stealth_shared_utilities::ai_create_behavior_function("animation", "wrapper", ::truck_animation_wrapper);
 
-  //corpse_array = [];
-  //corpse_array[ "saw" ] 	 = ::truck_guys_reaction_behavior;
-  //corpse_array[ "found" ] = ::truck_guys_reaction_behavior;
-  //self stealth_corpse_behavior_custom( corpse_array );
-
   alert_array = [];
-  //alert_array[ "warning1" ] = ::truck_guys_reaction_behavior;
-  //alert_array[ "warning2" ] = ::truck_guys_reaction_behavior;
-  alert_array["attack"] = ::truck_alert_level_attack; //default
+
+  alert_array["attack"] = ::truck_alert_level_attack;
   self stealth_threat_behavior_custom(alert_array);
 
   awareness_array = [];
@@ -5983,7 +4311,7 @@ truck_guys_base_search_behavior(node) {
   self setgoalnode(node);
   self.goalradius = distance * .5;
 
-  wait 0.05; // because stealth system keeps clearing run anim on every enemy_animation_wrapper
+  wait 0.05;
   self set_generic_run_anim("_stealth_patrol_cqb");
   self waittill("goal");
 
@@ -6001,7 +4329,7 @@ truck_guys_think_jumpout() {
   while(1) {
     self waittill("jumpedout");
     self._stealth.behavior.last_spot = self.origin;
-    //self enemy_set_original_goal( self.origin );
+
     self.got_off_truck_origin = self.origin;
     self ent_flag_set("jumped_out");
 
@@ -6094,9 +4422,6 @@ truck_alert_level_attack(enemy) {
   self ent_flag_wait("jumped_out");
 
   self small_goal_attack_behavior();
-  //self maps\_stealth_threat_enemy::enemy_close_in_on_target();
-
-  //self cliffhanger_enemy_attack_behavior();
 }
 
 setObjectiveWaypoint(objName, text) {
@@ -6163,14 +4488,6 @@ setObjectiveLocationMoving(objName, objEnt, offset) {
   objective = level.objectives[objName];
 
   Objective_OnEntity(objective.id, objEnt, offset);
-
-  //while( objective.state != "done" )
-  //{
-  //	if( !isDefined( objEnt ) )
-  //		break;
-  //	objective_position( objective.id, objEnt.origin + (0,0,64) );
-  //	wait .05;
-  //}
 }
 
 setObjectiveRemaining(objName, objString, objRemaining) {
@@ -6184,17 +4501,6 @@ setObjectiveRemaining(objName, objString, objRemaining) {
     objective_string(objective.id, objString, objRemaining);
 }
 
-//default_start( ::start_start );
-//add_start( "start", ::start_start, "Start" );
-////add_start( "bridge", ::start_bridge, "Bridge" );
-//add_start( "slide", ::start_slide, "Slide" );
-//add_start( "woods", ::start_woods, "Woods" );
-//add_start( "ridge", ::start_ridge, "ridge" );
-//add_start( "village", ::start_village, "village" );
-//add_start( "base", ::start_base, "Base" );
-//add_start( "dock", ::start_dock, "Dock" );
-//add_start( "sub", ::start_sub, "Submarine" );
-
 objective_main() {
   switch (level.start_point) {
     case "default":
@@ -6205,14 +4511,12 @@ objective_main() {
     case "midwoods":
     case "ridge":
     case "village":
-      //objective_enter_base();
+
     case "base":
       objective_price();
       objective_get_to_sub();
     case "defend_sub":
       objective_defend_sub();
-      //case "exit_sub":
-      //	objective_exit_sub();
   }
 }
 
@@ -6227,27 +4531,14 @@ objective_price() {
   setObjectiveState("obj_price", "current");
   thread setObjectiveLocationMoving("obj_price", level.price, (0, 0, 70));
 
-  //flag_wait( "time_to_use_UAV" );
   if(level.gameSkill > 1) {
     flag_wait("base_alerted");
   } else {
     flag_wait("price_splits_off");
   }
-  //flag_wait( "both_gauntlets_destroyed" );
 
   setObjectiveState("obj_price", "done");
 }
-
-//objective_enter_base()
-//{
-//	obj_base_entrance = getent( "obj_base_entrance", "targetname" );
-//	registerObjective( "obj_enter", &"CONTINGENCY_OBJ_ENTER_BASE", obj_base_entrance.origin );
-//	setObjectiveState( "obj_enter", "current" );
-//	
-//	flag_wait( "obj_base_entrance" );
-//	
-//	setObjectiveState( "obj_enter", "done" );
-//}
 
 objective_get_to_sub() {
   if(level.gameSkill <= 1) {
@@ -6267,55 +4558,17 @@ objective_get_to_sub() {
 }
 
 objective_defend_sub() {
-  //obj_sub_entrance = getent( "obj_sub_entrance", "targetname" );
-  //registerObjective( "obj_sub", &"CONTINGENCY_OBJ_ENTER_SUB", obj_sub_entrance.origin );
-  //setObjectiveState( "obj_sub", "current" );
-
   flag_wait("price_splits_off");
 
   origin = getstruct("obj_guard_house", "targetname").origin;
   registerObjective("obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
   setObjectiveState("obj_sub", "current");
   setObjectiveWaypoint("obj_sub", &"CONTINGENCY_OBJ_DEFEND");
-  //setObjectiveString( "obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB" );
-  //setObjectiveLocation( "obj_sub", origin + (0,0,48) );
 
   flag_wait("close_sub_hatch");
 
   setObjectiveState("obj_sub", "done");
 }
-
-//	flag_wait( "obj_sub_entrance" );
-//	
-//	origin = getstruct( "control_sub_obj_pos", "targetname" ).origin;
-//	setObjectiveString( "obj_sub", &"CONTINGENCY_OBJ_CONTROL_SUB" );
-//	setObjectiveLocation( "obj_sub", origin );
-//	
-//	flag_wait( "player_key_rdy" );
-//	
-//	origin = getent( "players_key", "targetname" ).origin;
-//	setObjectiveString( "obj_sub", &"CONTINGENCY_OBJ_TURN_KEY" );
-//	setObjectiveLocation( "obj_sub", origin );
-//
-//	flag_wait( "player_turned_key" );
-//	
-//	setObjectiveState( "obj_sub", "done" );
-//}
-//
-//
-//
-//objective_exit_sub()
-//{	
-//	while( !isDefined( level.soap_truck ) )
-//		wait .1;
-//	registerObjective( "obj_exit", &"CONTINGENCY_OBJ_EXIT_SUB", level.soap_truck.origin );
-//	setObjectiveState( "obj_exit", "current" );
-//	thread setObjectiveLocationMoving( "obj_exit", level.soap_truck );
-//	
-//	flag_wait( "player_in_uaz" );
-//	
-//	setObjectiveState( "obj_exit", "done" );
-//}
 
 base_autosave_logic() {
   save = true;
@@ -6371,18 +4624,16 @@ timer_start() {
   dialogue_line = undefined;
   level.timer_allowed_time = undefined;
   switch (level.gameSkill) {
-    case 0: // easy
-      //iSeconds = 240;
-      //break;
+    case 0:
+
       return;
-    case 1: // regular
-      //iSeconds = 240;
-      //break;
+    case 1:
+
       return;
-    case 2: // hardened
+    case 2:
       level.timer_allowed_time = 180;
       break;
-    case 3: // veteran
+    case 3:
       level.timer_allowed_time = 120;
       break;
   }
@@ -6400,28 +4651,23 @@ timer_logic(iSeconds, sLabel, bUseTick) {
   }
   if(!isDefined(bUseTick))
     bUseTick = false;
-  // destroy any previous timer just in case
+
   killTimer();
   level endon("kill_timer");
 
-  /*----------------------- TIMER SETUP
-  -------------------------*/
   level.hudTimerIndex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(-250);
-  level.timer SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.timer SetPulseFX(30, 900000, 700);
   level.timer.label = sLabel;
   level.timer settenthstimer(iSeconds);
   level.start_time = gettime();
 
-  /*----------------------- TIMER EXPIRED
-  -------------------------*/
   if(bUseTick == true)
     thread timer_tick();
   wait(iSeconds);
 
-  //flag_set( "timer_expired" );
   level.timer destroy();
-  // Mission failed. The objective was not completed in time.
+
   level thread mission_failed_out_of_time(&"CONTINGENCY_SUB_TIMER_EXPIRED");
 }
 
@@ -6446,8 +4692,7 @@ mission_failed_out_of_time(deadquote) {
   level endon("kill_timer");
   level notify("mission failed");
   level.player freezeControls(true);
-  //level.player thread player_death_effect();
-  //level.player thread play_sound_on_entity( "airplane_final_explosion" );
+
   musicstop(1);
   setDvar("ui_deadquote", deadquote);
   maps\_utility::missionFailedWrapper();
@@ -6481,36 +4726,17 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
   if(!isDefined(no_misses))
     no_misses = false;
 
-  //self thread debug_bmp_hit_player();
   self endon("stop_shooting");
   self endon("death");
   while(1) {
-    //choose our target based on distance and visibility
     player = get_closest_player(self.origin);
-    /*
-    if( ! can_see_player( player ) )
-    {
-    	dif_player = get_different_player( player );
-    	if( can_see_player( dif_player ) )
-    		player = dif_player;
-    }
-    */
+
     wait(randomfloatrange(0.8, 1.3));
 
-    // don't try to shoot a player with an RPG or Stinger
-    //if( player usingAntiAirWeapon() )
-    //	continue;
-
-    //dont try to shoot a player who is hiding a safe volume
-    //if( player is_hidden_from_heli( self ) )
-    //	continue;
-
-    //wait for player to be visible
     while(!can_see_player(player))
-      wait(randomfloatrange(0.2, 0.6)); //was .8 1.3
+      wait(randomfloatrange(0.2, 0.6));
 
     if(!no_misses) {
-      //saw player, now miss for 2 bursts
       miss_player(player);
       wait(randomfloatrange(0.8, 2.4));
 
@@ -6518,26 +4744,20 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
       wait(randomfloatrange(0.8, 2.4));
     }
 
-    //if player is still exposed then hit him
     while(can_see_player(player)) {
       fire_at_player(player);
       wait(randomfloatrange(2, 3));
     }
-    //player is hidden, now will suppress/hit him for 1 burst if he tries to peek out
-    //fire_at_player( player );
-    //wait( randomfloatrange( .3, 1 ) );
 
     if(end_if_cant_see) {
       if(!can_see_player(player)) {
         self clearturrettarget();
         self.turret_busy = false;
-        //self ent_flag_clear( "spotted_player" );
-        //flag_clear ("bmp_has_spotted_player" );
+
         self notify("stop_shooting");
       }
     }
 
-    //fire_at_player( player );
   }
 }
 
@@ -6546,35 +4766,29 @@ can_see_player(player) {
     return false;
 
   tag_flash_loc = self getTagOrigin("tag_flash");
-  //BulletTracePassed( <start>, <end>, <hit characters>, <ignore entity> );
+
   player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
     if(isDefined(level.debug))
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
     return true;
   } else {
-    //println( "---trace failed" );
     return false;
   }
 }
 
 fire_at_player(player) {
   burstsize = randomintrange(3, 5);
-  //println(" **HITTING PLAYER, burst: " + burstsize );
+
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32)); //randomvec was 50
+    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
 }
 
 miss_player(player) {
-  //println(" missing player" );
-  //miss_vec = randomvector( 100 );
-  //miss_vec = randomvectorrange( 40, 100 );
-
-  //point in front of player
   forward = anglesToForward(level.player.angles);
   forwardfar = vector_multiply(forward, 100);
   miss_vec = forwardfar + randomvector(50);
@@ -6583,9 +4797,7 @@ miss_player(player) {
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
-    //println( " offset: " + offset );
-    //thread draw_line_for_time( self.origin+(0,0,128), player.origin+offset, 0, 0, 1, 2 );
-    //thread draw_line_for_time( player.origin+offset+(0,0,4), player.origin+offset, 0, 0, 1, 2 );
+
     self setturrettargetent(player, offset);
     self fireweapon();
     wait fireTime;

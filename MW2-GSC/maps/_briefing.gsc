@@ -3,10 +3,6 @@
  * Script: maps\_briefing.gsc
 ********************************************************/
 
-/*
-MISSION BRIEFING
-*/
-
 main() {
   setsaveddvar("hud_drawhud", 0);
 
@@ -16,7 +12,7 @@ main() {
 
   player = getEntArray("player", "classname")[0];
   setsaveddvar("g_speed", 0);
-  player setViewmodel("viewmodel_hands_cloth"); // hack
+  player setViewmodel("viewmodel_hands_cloth");
 
   precacheShader("black");
 
@@ -29,11 +25,9 @@ main() {
   }
 
   if(movieDefined) {
-    // movie
     wait 0.05;
     player gotothelevel(false);
   } else {
-    // Press &&BUTTON_SELECTCHOICE" to Skip."precacheString(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
     for(i = 0; i < level.slide.size; i++)
       if(isDefined(level.slide[i]["image"]))
         precacheshader(level.slide[i]["image"]);
@@ -43,9 +37,6 @@ main() {
     player gotothelevel(false);
   }
 }
-
-// Does the initial startup for a mission briefing
-// iFadeTime Is the length of time it will take to transition between images. Defaults to 500 (milliseconds) Set to 0 for instant change
 start(fFadeTime) {
   level.briefing_running = true;
   level.briefing_ending = false;
@@ -71,7 +62,6 @@ start(fFadeTime) {
   self endon("briefingskip");
   self thread skipCheck();
 
-  // Make the screen black
   level.blackscreen = newHudElem();
   level.blackscreen.sort = -1;
   level.blackscreen.alignX = "left";
@@ -85,7 +75,6 @@ start(fFadeTime) {
   level.blackscreen.alpha = 1;
   level.blackscreen setShader("black", 640, 480);
 
-  // Fire to skip text
   level.FiretoSkip = newHudElem();
   level.FiretoSkip.sort = 1;
   level.FiretoSkip.alignX = "center";
@@ -96,12 +85,11 @@ start(fFadeTime) {
   level.FiretoSkip.horzAlign = "center";
   level.FiretoSkip.vertAlign = "fullscreen";
   level.FiretoSkip.foreground = true;
-  // Press &&BUTTON_SELECTCHOICE" to Skip."level.FiretoSkip settext(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
+
   level.FiretoSkip.alpha = 0.0;
 
   thread fadeInFireToSkip();
 
-  //Image A
   level.imageA = newHudElem();
   level.imageA.alignX = "center";
   level.imageA.alignY = "middle";
@@ -113,7 +101,6 @@ start(fFadeTime) {
   level.imageA setShader("black", 640, 360);
   level.imageA.foreground = true;
 
-  //Image B
   level.imageB = newHudElem();
   level.imageB.alignX = "center";
   level.imageB.alignY = "middle";
@@ -132,7 +119,7 @@ start(fFadeTime) {
   for(i = 0; i < level.slide.size; i++) {
     soundplaying = false;
     if(isDefined(level.slide[i]["image"])) {
-      if(level.script[0] != "m") // movie_ maps don't play the sound
+      if(level.script[0] != "m")
         self soundplay("slide_advance");
       wait .5;
       self thread image(level.slide[i]["image"]);
@@ -158,20 +145,14 @@ fadeInFireToSkip() {
   level.FiretoSkip fadeOverTime(level.briefing_fadeOutTime);
   level.FiretoSkip.alpha = 1.0;
 }
-
-// fades fire to skip after 7 seconds
 fadeFireToSkip() {
   wait 7;
   level.FiretoSkip fadeOverTime(level.briefing_fadeOutTime);
   level.FiretoSkip.alpha = 0.0;
 }
-
-// waits till the briefing is done
 waitTillBriefingDone() {
   self waittill("briefingend");
 }
-
-// This ends the briefing if the player says he wants to
 skipCheck() {
   self endon("briefingend");
 
@@ -182,8 +163,6 @@ skipCheck() {
   maps\_utility::set_console_status();
 
   for(;;) {
-    // we want to check if the "A" button has been pressed on xenon
-    // instead of FIRE.
     if(level.console) {
       if(player buttonPressed("BUTTON_A")) {
         self notify("briefingskip");
@@ -232,7 +211,6 @@ imageFadeOut(elem) {
 }
 
 endThread() {
-  // Check for the briefing already being ended
   if(!level.briefing_running)
     return;
   if(level.briefing_ending) {
@@ -241,17 +219,14 @@ endThread() {
   self notify("briefingend");
   level.briefing_ending = true;
 
-  // Make sure the briefing audio is ended on for slideshows
   if(level.script[0] != "m") {
     self playSound("stop_voice");
   }
 
-  // Fade the screen in
   thread imageFadeOut("A");
   thread imageFadeOut("B");
 
   wait(1.5);
-  //	self freezeControls(false);
 
   level.briefing_ending = false;
 }
@@ -278,7 +253,7 @@ soundplay_flag(dialog, msg) {
 
 dothebriefing() {
   self start(0.5);
-  if(level.script[0] != "m") // movie_ maps don't play the sound
+  if(level.script[0] != "m")
     self soundplay("slide_advance");
   wait(0.5);
   end();

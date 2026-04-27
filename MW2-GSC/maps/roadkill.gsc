@@ -31,12 +31,12 @@ main() {
 
   set_default_start("riverbank");
   add_start("riverbank", ::start_riverbank, "riverbank", ::roadkill_riverbank);
-  //	add_start( "move_out", ::start_move_out, "riverbank", ::roadkill_riverbank );
+
   add_start("convoy", ::start_convoy, "convoy", ::roadkill_convoy);
   add_start("ride", ::start_ride, "ride", ::roadkill_ride);
   add_start("ambush", ::start_crazy_ride, "ambush", ::roadkill_crazy_ride);
   add_start("ride_later", ::start_crazy_ride_later, "ride_later", ::roadkill_crazy_ride_later);
-  //	add_start( "ride_end", ::start_ride_end, "ride_end", ::roadkill_ride_end );
+
   add_start("dismount", ::start_dismount, "dismount", ::roadkill_convoy_dismounts);
   add_start("school", ::start_roadkill_school_fight, "school", ::roadkill_school_fight);
   add_start("endfight", ::start_roadkill_endfight, "end", ::roadkill_the_end);
@@ -81,10 +81,9 @@ main() {
   precachestring(&"SCRIPT_WAYPOINT_TARGETS");
 
   level.roadkill_feedline_delay = ::introlines_delay;
-  //thread rpg_flies_by_view();
 
   level.crazy_ride_convoy = [];
-  level.crazy_ride_convoy["detour"] = spawnStruct(); // for start points
+  level.crazy_ride_convoy["detour"] = spawnStruct();
   level.crazy_ride_convoy["max"] = 4;
   level.convoy_dialogue_guy = [];
   level.school_baddies = [];
@@ -93,14 +92,12 @@ main() {
   trapper_clip ConnectPaths();
   trapper_clip Delete();
 
-  // Press ^3[{weapnext}]^7 to switch to the Javelin
   PreCacheString(&"SCRIPT_LEARN_JAVELIN");
   maps\_empty::main("tag_origin");
 
   maps\_load::main();
   maps\_javelin::init();
 
-  // civ failure
   add_global_spawn_function("neutral", ::fail_for_civ_kill);
 
   flag_init("riverbank_baddies_retreat");
@@ -156,9 +153,8 @@ main() {
 
   maps\_potted_plant::potted_plant_init();
 
-  // Press ^3[{weapnext}]^7 to switch to the Javelin
   add_hint_string("learn_javelin", &"SCRIPT_LEARN_JAVELIN", ::player_learned_javelin);
-  // Press ^3[{+smoke}]^7 to throw a flash bang.
+
   add_hint_string("learn_flash", &"SCRIPT_PLATFORM_HINT_FLASH", ::player_learned_flash);
 
   add_hint_string("learn_m203", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::player_learned_m203);
@@ -185,13 +181,6 @@ main() {
   run_thread_on_targetname("damage_targ_trigger", ::damage_targ_trigger_think);
   run_thread_on_targetname("wave_right_trigger", ::wave_right_trigger);
 
-  //	array_spawn_function_noteworthy( "player_humvee", ::player_humvee );
-  //	array_spawn_function_noteworthy( "rear_vehicle", ::rear_vehicle );
-  //	array_spawn_function_noteworthy( "front_vehicle", ::front_vehicle );
-  //	array_spawn_function_noteworthy( "near_vehicle", ::near_vehicle );
-
-  //	array_spawn_function_targetname( "intro_convoy", ::intro_convoy );
-  //xx
   array_spawn_function_targetname("riverbank_tank", ::riverbank_tank);
   array_spawn_function_noteworthy("retreat_spawner", ::retreat_spawner);
   level.forced_bcs_callouts = 0;
@@ -200,23 +189,17 @@ main() {
   array_spawn_function_noteworthy("convoy_gunner", ::convoy_gunner_think);
   array_spawn_function_noteworthy("dismount_macey", ::dismount_foley);
   array_spawn_function_noteworthy("dismount_dunn", ::dismount_dunn);
-  //array_spawn_function_noteworthy( "ignore_and_delete", ::ignore_and_delete );
 
   array_spawn_function_noteworthy("school_unreachable_spawner", ::school_unreachable_spawner);
 
-  //thread street_walk_scene();
   thread wobbly_fans();
 
-  //array_spawn_function_noteworthy( "hargrove", ::hargrove_spawner );
   array_spawn_function_targetname("foley_spawner", ::foley_spawner);
   array_spawn_function_noteworthy("dunn_spawner", ::dunn_spawner);
   array_spawn_function_noteworthy("shepherd_spawner", ::shepherd_spawner);
 
   level.ambushed_hummers = [];
   array_spawn_function_targetname("ambushed_hummer", ::ambushed_hummer);
-
-  //array_spawn_function_noteworthy( "near_turret_guy", ::turret_guy_in_near_humvee );
-  //array_spawn_function_noteworthy( "intro_rundown_friendly_spawner", ::intro_rundown_friendly_spawner );
 
   level.more_street_spawners = getEntArray("more_street_spawner", "script_noteworthy");
   level.school_ambush_spawners = getEntArray("school_ambush", "targetname");
@@ -261,7 +244,6 @@ main() {
   CreateThreatBiasGroup("bridge_attackers");
   CreateThreatBiasGroup("just_player");
 
-  // player uses just_player until dismount
   level.player SetThreatBiasGroup("just_player");
 
   SetIgnoreMeGroup("ally_with_player", "axis_school_unreachable");
@@ -274,8 +256,8 @@ main() {
   thread roadkill_objective_thread();
   thread roadkill_music();
 
-  waittillframeend; // needs to happen after init
-  level.player.bcNameID = undefined; // player isn't roach
+  waittillframeend;
+  level.player.bcNameID = undefined;
 
   thread lights();
 }
@@ -286,7 +268,7 @@ roadkill_intro_common() {
   thread blend_sm_sunsamplesizenear();
 
   thread intro_runner_path_breaker();
-  //thread intro_shepherd();
+
   bridge_layer_clipbrush = GetEnt("bridge_layer_clipbrush", "targetname");
   bridge_layer_clipbrush DisconnectPaths();
 
@@ -295,11 +277,8 @@ roadkill_intro_common() {
 
   array_spawn_function_noteworthy("enemy_riverbank_rpg_spawner", ::enemy_riverbank_rpg_spawner);
 
-  // no spawn funcs on drones so rewrite this for our drone
-  //array_spawn_function_noteworthy( "humvee_rider_spawner", ::humvee_rider_spawner );
   thread humvee_rider_spawner();
 
-  //array_spawn_function_targetname( "idle_commander", ::idle_commander );
   array_spawn_function_targetname("foley_spawner", ::idle_commander);
 
   array_spawn_function_noteworthy("stryker", ::stryker_think);
@@ -320,11 +299,9 @@ roadkill_intro_common() {
   level.allied_riverbank_ai = [];
   array_spawn_function_targetname("riverbank_spawner", ::allied_riverbank_spawner);
 
-  //xx
   thread roadkill_bridge_layer();
   thread binoc_scene();
 
-  // these guys spawn once the bridge is halfway done, then try to shoot it
   array_spawn_function_targetname("enemy_bridge_spawner", ::enemy_bridge_spawner);
 
   if(is_default_start()) {
@@ -334,18 +311,13 @@ roadkill_intro_common() {
     run_thread_on_targetname("riverbank_mg", ::riverbank_mg);
   }
 
-  //	run_thread_on_targetname( "cover_scene", ::cover_scene );
-
   array_spawn_function_targetname("enemy_riverbank_spawner", ::riverbank_guy_dies_on_retreat);
   array_spawn_targetname("enemy_riverbank_spawner");
-
-  //spawn_vehicle_from_targetname( "riverbank_stryker" );
 
   array_spawn_function_noteworthy("player_personal_convoy", ::player_personal_convoy);
 
   add_global_spawn_function("allies", ::set_dontshootwhilemoving, true);
 
-  //xx
   spawn_vehicles_from_targetname("riverbank_tank");
 
   run_thread_on_targetname("mortar_org", ::roadkill_mortars);
@@ -356,7 +328,6 @@ roadkill_intro_common() {
   if(is_default_start())
     array_spawn_targetname("stair_block_guy");
 
-  // wall on the front of a building breaks off during exploder
   run_thread_on_targetname("broken_wall", ::broken_wall);
 }
 
@@ -364,15 +335,10 @@ start_riverbank() {
   SetSavedDvar("g_friendlyNameDist", 0);
   noself_delayCall(3, ::setsaveddvar, "g_friendlyNameDist", 15000);
   roadkill_intro_common();
-  //xx
 
   if(getdvarint("newintro")) {
     level.player ShellShock("default", 5.8);
-    //struct = getstruct( "player_intro_struct", "targetname" );
-    //level.player SetOrigin( struct.origin );
-    //level.player SetPlayerAngles( struct.angles );
-    //level.player setstance( "prone" );
-    //	level.player freezecontrols( true );
+
     level.player disableweapons();
 
     black_overlay = create_client_overlay("black", 0, level.player);
@@ -381,41 +347,13 @@ start_riverbank() {
     black_overlay FadeOverTime(2);
     black_overlay.alpha = 0;
     level waittill("get_on_the_line");
-    //		level.player freezecontrols( false );
+
     level.player enableweapons();
-    //level.player setstance( "stand" );
   }
 }
 
 start_move_out() {
   thread roadkill_intro_common();
-  //xx
-
-  /*
-  level.player SwitchToWeapon( "javelin" );
-  	
-  level endon( "bmps_destroyed" );
-  count = 0;
-  for( ;; )
-  {
-  	bmps = getEntArray( "script_vehicle_bmp_woodland", "classname" );
-  	foreach ( bmp in bmps )
-  	{
-  		if( IsAlive( bmp ) )
-  		{
-  			bmp Vehicle_SetSpeed( 80, 80, 80 );
-  			if( isDefined( bmp.javelin_targettable ) )
-  			{
-  				bmp godoff();
-  				RadiusDamage( bmp.origin, 150, bmp.health + 500, bmp.health + 500 );
-  				count++;
-  				flag_set( "missile_fire_" + count );
-  			}
-  		}
-  	}
-  	wait( 1 );
-  }
-  */
 }
 
 roadkill_riverbank() {
@@ -427,7 +365,6 @@ roadkill_riverbank() {
 
   thread riverside_house_manager(enemy_riverhouse_spawners);
   thread riverside_flood_manager(enemy_riverside_spawners);
-  //array_thread( enemy_riverhouse_spawners, ::riverside_flood_think, 10, 15 );
 
   delayThread(5, ::spawn_vehicles_from_targetname_and_drive, "littlebird_attacks");
   delayThread(10, ::spawn_vehicles_from_targetname_and_drive, "littlebird_attacks_2");
@@ -442,32 +379,23 @@ start_convoy() {
 }
 
 roadkill_convoy() {
-  //	add_wait( ::flag_wait, "missile_fire_3" );
-  //	add_func( ::axis_flee_riverbank );
-  //	thread do_wait();
-
   blocker = GetEnt("friendly_video_blocker", "targetname");
   blocker Solid();
   blocker ConnectPaths();
   blocker NotSolid();
 
   level.runnings_to_convoy_count = 0;
-  //	level.player.attackeraccuracy = 0;
-  //	level.player.IgnoreRandomBulletDamage = true;
 
-  //	run_thread_on_targetname( "intro_orders", ::intro_orders );
   thread player_fights_bmps();
 
   array_spawn_function_targetname("riverbank_bmp", ::riverbank_tank);
   thread riverbank_bmp();
 
   thread detect_if_player_tries_to_cross_bridge();
-  //array_spawn_function_targetname( "ride_vehicle_starts_spawned", ::ride_vehicle_starts_moving );
-  //spawn_vehicles_from_targetname( "ride_vehicle_starts_spawned" );
 
   array_spawn_function_targetname("lead_vehicle_spawner", ::common_ride_vehicle_init);
   array_spawn_function_targetname("ride_vehicle_starts_spawned", ::common_ride_vehicle_init);
-  //xx
+
   spawn_vehicles_from_targetname_and_drive("ride_vehicle_starts_spawned");
 
   level.npc_ride_vehicles = [];
@@ -475,20 +403,9 @@ roadkill_convoy() {
   guy_gets_in_vehicle = GetEnt("guy_gets_in_vehicle", "targetname");
   guy_gets_in_vehicle thread trigger_guy_gets_in_vehicle();
 
-  //xx
-  //	wait( 1 );
-
-  //pre_bridge_vehicle_brush = GetEnt( "pre_bridge_vehicle_brush", "targetname" );
-  //pre_bridge_vehicle_brush ConnectPaths();
-  //pre_bridge_vehicle_brush Delete();
-
   stairs_blocker = GetEnt("stairs_blocker", "targetname");
   stairs_blocker ConnectPaths();
   stairs_blocker Delete();
-
-  //post_bridge_vehicle_brush = GetEnt( "post_bridge_vehicle_brush", "targetname" );
-  //post_bridge_vehicle_brush ConnectPaths();
-  //post_bridge_vehicle_brush NotSolid();
 
   friendly_midroad_blocker = GetEnt("friendly_midroad_blocker", "targetname");
   friendly_midroad_blocker ConnectPaths();
@@ -509,12 +426,10 @@ roadkill_convoy() {
   array_spawn_function_targetname("player_ride_vehicle", ::player_ride_vehicle);
   array_spawn_function_targetname("ride_vehicle_starts_moving", ::ride_vehicle_starts_moving);
 
-  // xx
   if(!is_default_start())
     wait(0.1);
   spawn_vehicle_from_targetname("player_ride_vehicle");
   spawn_vehicles_from_targetname("ride_vehicle_starts_moving");
-  //	wait( 0.05 ); // for the start points
 
   thread riverbank_player_learns_m203();
 
@@ -554,13 +469,6 @@ roadkill_convoy() {
 
   battlechatter_off("allies");
 
-  //	array_spawn_function_targetname( "airstrike_blocker_spawner", ::airstrike_spawner );
-  //	array_spawn_targetname( "airstrike_blocker_spawner" );
-
-  //	array_spawn_function_targetname( "airstrike_spawner", ::airstrike_spawner );
-  //	airstrike_spawners = getEntArray( "airstrike_spawner", "targetname" );
-  //	array_thread( airstrike_spawners, ::spawn_ai );
-
   flag_wait("player_climbs_stairs");
 
   battlechatter_off("axis");
@@ -570,7 +478,6 @@ roadkill_convoy() {
 
   flag_set("convoy_moment");
 
-  //run_thread_on_targetname( "cover_scene", ::cover_scene );
   ai = GetAIArray("axis");
   foreach(guy in ai) {
     time = RandomFloat(2);
@@ -585,7 +492,7 @@ roadkill_convoy() {
 
   delayThread(0, ::spawn_vehicles_from_targetname_and_drive, "apache_show_building_spawner");
 
-  SetSavedDvar("sm_sunSampleSizeNear", "0.6"); // a little more shadow for the start
+  SetSavedDvar("sm_sunSampleSizeNear", "0.6");
 
   ClearAllCorpses();
   autosave_by_name("player_gets_in");
@@ -596,9 +503,6 @@ roadkill_convoy() {
       guy stop_magic_bullet_shield();
     guy.ignoreall = false;
   }
-
-  //	level.player.attackeraccuracy = 1;
-  //	level.player.IgnoreRandomBulletDamage = false;
 
   array_spawn_function_targetname("extra_bmp", ::extra_bmp_blows_up);
   spawn_vehicles_from_targetname_and_drive("extra_bmp");
@@ -617,22 +521,10 @@ roadkill_convoy() {
 
   run_thread_on_targetname("film_org", ::guys_film_explosion);
 
-  //	post_bridge_vehicle_brush Solid();
-  //	post_bridge_vehicle_brush DisconnectPaths();
-
-  //	wait( 0.5 );
-  //	player_got_in_spawners = getEntArray( "player_got_in_spawner", "targetname" );
-  //	array_spawn_function( player_got_in_spawners , ::magic_bullet_shield );
-  //	array_thread( player_got_in_spawners, ::spawn_ai );
-
   thread street_walk_scene();
 
-  //	wait( 7 );
-
-  //flag_set( "time_to_pull_out" );
   flag_wait("convoy_oscar_mike_after_explosion");
 
-  //	wait( 4 );
   delayThread(2.2, ::flag_set, "lead_vehicle_rolls_out");
   waits = [];
   waits[1] = 0.7;
@@ -642,10 +534,7 @@ roadkill_convoy() {
   waits[5] = 0.4;
   waits[6] = 0;
 
-  //delaythread( 1.4, ::exploder, "town_bombed" );
-
   for(i = 1; i <= 6; i++) {
-    // convoy_crosses_bridge1
     if(flag_exist("convoy_crosses_bridge" + i))
       flag_set("convoy_crosses_bridge" + i);
     wait(waits[i]);
@@ -664,8 +553,6 @@ start_ride_common(from_start_point) {
 
   set_custom_gameskill_func(::roadkill_gameskill_ride_settings);
 
-  //setsaveddvar( "player_radiusdamagemultiplier", "0.1" );
-
   handle_start_points_for_detour_humvee();
   destroyed_humvee_models = getEntArray("destroyed_humvee_model", "targetname");
   array_thread(destroyed_humvee_models, ::hide_notsolid);
@@ -681,11 +568,8 @@ start_ride_common(from_start_point) {
 
   level.convoy_gunners = [];
 
-  // ai
   array_spawn_function_noteworthy("run_away_die", ::run_away_die);
 
-  // vehicles
-  //	array_spawn_function_noteworthy( "lead_vehicle", ::lead_vehicle_func );
   array_spawn_function_noteworthy("start_player_crazy_ride", ::player_turret_humvee);
   array_spawn_function_targetname("ride_vehicle_spawner", ::player_personal_convoy);
   array_spawn_function_noteworthy("traffic_jam_truck", ::traffic_jam_truck);
@@ -697,11 +581,8 @@ start_ride_common(from_start_point) {
 
   thread trapper_killer_trigger();
 
-  //array_spawn_function_noteworthy( "ambusher_spawner", ::ambusher_spawner );
-  // driver that tries to block
   array_spawn_function_noteworthy("blocker_driver", ::blocker_driver);
 
-  // guy that ends the ride
   array_spawn_function_noteworthy("ride_killer", ::ride_killer);
 
   if(from_start_point)
@@ -709,10 +590,6 @@ start_ride_common(from_start_point) {
 
   add_global_spawn_function("axis", ::no_grenades);
 
-  //ambushed_hummers = getEntArray( "ambushed_hummer", "targetname" );
-  //array_thread( ambushed_hummers, ::hide_notsolid );
-
-  // spread the vehicles out a bit on the ride
   thread ride_adjust_convoy_speed_trigger();
 
   thread ride_scenes();
@@ -735,60 +612,49 @@ roadkill_ride() {
   autosave_by_name("roadkill_town_dialogue");
 
   thread player_vehicle_catches_up();
-  waittillframeend; // wait for the ride vehicles to get defined
+  waittillframeend;
 
   if(level.start_point != "ride") {
     start_time = gettime();
 
-    wait(0.6); // 2.5
+    wait(0.6);
 
-    // Hunter two breaking away.	
     thread radio_dialogue_generic("roadkill_fly_breakingaway");
-    wait(2.1); // 2.5
+    wait(2.1);
 
-    // Copy Hunter Two.	
     thread radio_dialogue_generic("roadkill_hqr_copyhunter2");
 
     wait_for_buffer_time_to_pass(start_time, 6.5);
 
-    // All Hunter Two victors, keep an eye out for civvies, we’re not cleared to engage unless they fire first.	
     thread radio_dialogue_generic("roadkill_fly_eyeoutforciv");
     wait(6.5);
 
-    // Scan the rooftops for hostiles. Stay frosty.	
     thread radio_dialogue_generic("roadkill_fly_scanrooftops");
     wait(4.8);
     wait_for_buffer_time_to_pass(start_time, 17.8);
   }
 
-  // You see anything?	
   thread driver_line("roadkill_cpd_seeanything");
   wait(2.2);
 
-  // I got nothin'. This place is dead.	
   thread dunn_line("roadkill_cpd_placeisdead");
   wait(2.3);
 
-  // Huah.	
   thread driver_line("roadkill_ar3_huah");
   wait(2.5);
 
-  // Overlord, Hunter Two-One. We're passing tunnel Harvey, cross street Elizabeth.	
   thread radio_dialogue_generic("roadkill_fly_crossstreeteliz");
   wait(4.5);
 
-  // Roger that, Hunter Two-One, proceed with caution.	
   thread radio_dialogue_generic("roadkill_hqr_caution");
   wait(4.0);
 
   flag_wait("civie_dialogue");
   wait(2.9);
 
-  // Stay frosty guys, this is the Wild West.	
   thread dunn_line("roadkill_cpd_wildwest");
   wait(2.6);
 
-  // Roger that.	
   thread driver_line("roadkill_ar3_rogerthat");
 
   flag_wait("start_runner");
@@ -802,62 +668,25 @@ roadkill_ride() {
 
   thread gaz_balcony_guys();
 
-  // Watch the alleys.	
   delayThread(6.0, ::radio_dialogue_generic, "roadkill_fly_watchalleys");
-  // Covering.	
+
   delayThread(8.0, ::radio_dialogue_generic, "roadkill_ar3_covering");
 
   wait(13.7);
 
-  // Three foot-mobiles, balcony 12 o'clock. Probable militia.	
   thread radio_dialogue_generic("roadkill_ar1_probablemilitia");
   wait(3.5);
-  // Are they armed?	
+
   thread radio_dialogue_generic("roadkill_fly_aretheyarmed");
   wait(2.2);
 
-  // Negative, they're just watching us. 	
   thread radio_dialogue_generic("roadkill_ar1_watchingus");
   wait(5.1);
 
-  // Bet they're scouting us.	
   thread dunn_line("roadkill_cpd_scoutingus");
   wait(2.0);
 
-  // Doesn’t mean we can shoot 'em.	
   thread driver_line("roadkill_fly_doesntmean");
-
-  /*
-  wait( 24.5 );
-  // Hold off, it’s a civilian.	
-  add_func( ::foley_line, "roadkill_fly_holdoff" );
-  	
-  // Bet he’s scouting us.	
-  add_func( ::dunn_line, "roadkill_cpd_scoutingus" );
-  	
-  // Doesn’t mean you can shoot him.	
-  add_func( ::foley_line, "roadkill_fly_doesntmean" );
-  	
-  do_funcs();
-
-  // Wonder what's got him all worked up?	
-  add_wait( ::flag_wait, "worked_up" );
-  add_func( ::dunn_line, "roadkill_cpd_allworkedup" );
-  thread do_wait();
-  */
-
-  /*	
-  // Watch your sector!	
-  foley_line( "roadkill_fly_watchsector" );
-  wait( 4 );
-  // You see anything?	
-  dunn_line( "roadkill_cpd_seeanything" );
-  wait( 6 );
-  // Stay frosty!	
-  foley_line( "roadkill_fly_stayfrosty" );
-  */
-
-  //	array_spawn_function_noteworthy( "rooftop_drone", ::rooftop_drone );
 }
 
 start_crazy_ride() {
@@ -885,22 +714,17 @@ roadkill_crazy_ride() {
     guy safe_delete();
   }
 
-  // dont want the player getting hit after the enemies retreat
   level.player.ignoreme = false;
   level.player.IgnoreRandomBulletDamage = false;
 
   array_thread(level.school_ambush_spawners, ::spawn_ai);
   flag_wait("ambush");
-  //SetHalfResParticles( true );
+
   battlechatter_on("axis");
   add_global_spawn_function("axis", ::die_after_awhile);
 
   level.old_physics_force = GetDvarFloat("physveh_explodeforce", 0);
   SetSavedDvar("physveh_explodeforce", 0);
-
-  //array_spawn_targetname( "school_ambush_lower_floor" );
-
-  //	delayThread( 2, ::array_spawn_targetname, "school_ambush_outside_spawner" );
 
   wait(3);
 
@@ -911,91 +735,57 @@ crazy_ride_dialogue() {
   flag_wait("shot_rings_out");
 
   wait(1);
-  // Can you see 'em? Can you see 'em?	
+
   thread passenger_line("roadkill_ar2_seeem");
   wait(1.5);
 
-  // I don't see jack! 	
   thread dunn_line("roadkill_cpd_dontseejack");
   wait(1.5);
 
-  // All Hunter victors, this is Sergeant Foley. Prepare to engage, we're taking sniper fire from multiple directions.	
   thread radio_dialogue_generic("roadkill_fly_prepeng");
   wait(3.8);
 
-  // Prepare to engage!! We're goin' in!!!	
   thread dunn_line("roadkill_cpd_goinin");
   wait(1.8);
 
-  // This is it!!! Spin 'em up!!	
   thread driver_line("roadkill_ar1_spinemup");
   wait(1.5);
   flag_set("humvees_spin_up");
 
-  // Watch twelve and six! 	
   thread ahead_line("roadkill_ar3_12and6");
   wait(0.5);
 
-  // We got a ton of contacts front and back!	
   thread way_ahead_line("roadkill_ar4_tonacontacts");
   wait(1.5);
 
-  //	// Watch for movement! 	
-  //	thread dunn_line( "roadkill_cpd_watchmvmnt" );
-
-  // Taking fire, multiple contacts at long range!	
   thread way_ahead_line("roadkill_ar5_longrange");
   wait(1.0);
 
-  // Goin' forward!!	
   thread ahead_line("roadkill_ar2_goinforward");
   wait(2.0);
 
   battlechatter_on("axis");
 
-  // There they are!!!! Right there!	
-  //thread radio_dialogue_generic( "roadkill_ar1_rightthere" );
-  //	wait( 4.5 );
-
-  // Shut that thing off!	
-  //thread dunn_line( "roadkill_cpd_shutitoff" );
-  //	wait( 3.8 );
-
-  // There they are, light 'em up!!	
   thread dunn_line("roadkill_cpd_lightemup");
 
-  // Here they come!	
   delaythread(0.5, ::arab_line, "roadkill_AB2_heretheycome");
 
-  // Use your RPGs! Target the humvees!	
   delaythread(2.5, ::arab_line, "roadkill_AB2_rpgshumvees");
 
   flag_wait("ambush");
   wait(5.0);
-  // There's too many of 'em! Back up back up!!!	
+
   thread dunn_line("roadkill_cpd_backup");
 
   wait(2);
-  // Get us outta here! Drive!	
+
   thread dunn_line("roadkill_cpd_outtahere");
 
-  // Hassan! Move across the street for a better vantage point!	
   delaythread(3.5, ::arab_line, "roadkill_AB2_hassanmove");
 
-  // Die you American dogs!	
   delaythread(6.5, ::arab_line, "roadkill_AB2_diedogs");
 
-  // Move move move!!	
   delaythread(8.5, ::arab_line, "roadkill_AB2_movex3");
-
-  // Hunter 2-1, this is Hunter 2-3, our humvee got shot up and we're cut off from you, over!	
-  //	radio_line( "roadkill_ar2_shotup" );
-
-  // Solid copy Hunter 2-3! Hang tight! We'll make our way back to you, over!	
-  //	foley_line( "roadkill_fly_hangtight" );
-
-  // Hunter 2-3 solid copy!	
-  //	radio_line( "roadkill_ar2_solidcopy" );
 }
 
 start_crazy_ride_later() {
@@ -1006,7 +796,6 @@ start_crazy_ride_later() {
 roadkill_crazy_ride_later() {
   thread ride_later_dialogue();
 
-  // makes the player and technical brake
   player_brake_trigger = GetEnt("player_brake_trigger", "targetname");
   player_brake_trigger thread player_pushes_truck_down_alley();
 
@@ -1018,18 +807,12 @@ roadkill_crazy_ride_later() {
 
   level.player EnableDeathShield(false);
 
-  wait(0.05); // wait for level.lead_vehicle to get set.
+  wait(0.05);
   thread convoy_gunners_pick_targets();
 
   thread enemy_ai_accuracy_effected_by_player_humvee();
 
   flag_wait("lead_vehicle_speeds_up");
-
-  //lead_vehicle Vehicle_SetSpeed( 26, 1, 1 );
-
-  //	player_vehicle thread radius_damage_in_front();
-
-  //	flag_wait( "traffic_jam" );
 
   level.old_physics_force = GetDvarFloat("physveh_explodeforce", 0);
   SetSavedDvar("physveh_explodeforce", 0);
@@ -1037,17 +820,6 @@ roadkill_crazy_ride_later() {
   flag_wait("resume_the_path");
   SetPlayerIgnoreRadiusDamage(true);
 
-  //	player_vehicle ResumeSpeed( 5 );			
-  //	player_vehicle Vehicle_SetSpeed( 10, 2, 2 );
-
-  //	technical Vehicle_SetSpeedImmediate( 5, 1, 1 );
-  //	technical delayThread( 0.01, ::set_brakes, 0 );
-  //	technical delayCall( 0.01, ::vehicle_setspeedimmediate, 8, 1, 1 );
-
-  //	player_vehicle.veh_brake = 0.0;
-
-  //wait( 1.2 );
-  //wait( 0.6 );
   delayThread(0.25, ::force_player_vehicle_speed, 12);
   delayThread(0.2, ::player_impact_earthquake);
   delayThread(0.2, ::traffic_truck_pushed);
@@ -1095,11 +867,10 @@ roadkill_crazy_ride_later() {
   rear_vehicle = level.crazy_ride_convoy[2];
 
   flag_wait("player_vehicle_wipes_out");
-  //SetHalfResParticles( false );
+
   player_vehicleVehicle_SetSpeed(14, 2, 2);
   rear_vehicle Vehicle_SetSpeed(14, 2, 2);
 
-  //	wait( 0.5 );
   last_building_spawners = getEntArray("last_building_spawner", "targetname");
   array_spawn(last_building_spawners);
 
@@ -1108,7 +879,6 @@ roadkill_crazy_ride_later() {
   attract_ent = GetEnt(missile_target.target, "targetname");
   attractor = Missile_CreateAttractorEnt(attract_ent, 50000, 50000, level.ride_killer);
 
-  // recover and dont get hurt while you get out
   set_player_attacker_accuracy(0.0);
   level.player.IgnoreRandomBulletDamage = true;
   thread player_gets_max_health_for_dismount();
@@ -1174,12 +944,11 @@ roadkill_crazy_ride_later() {
 
   thread player_becomes_normal_gameskill();
 
-  //ignoresuppression
   org = level.player.origin;
-  //	level.player FreezeControls( true );
+
   level.player Unlink();
-  //	level.player_turret UseBy( level.player );
-  level.player_turret Delete(); // 	UseBy( level.player );
+
+  level.player_turret Delete();
   level.player SetOrigin(org);
   level notify("ride_ends");
   level.player maps\_gameskill::update_player_attacker_accuracy();
@@ -1190,7 +959,6 @@ roadkill_crazy_ride_later() {
       guy stop_magic_bullet_shield();
   }
 
-  // I banish ye to vehicle hell
   vehicles = [];
   vehicles[0] = lead_vehicle;
   vehicles[1] = player_vehicle;
@@ -1207,28 +975,21 @@ roadkill_crazy_ride_later() {
 ride_later_dialogue() {
   flag_wait("lead_vehicle_speeds_up");
   start_time = GetTime();
-  // Slow down, we're getting strung out!	
-  //	wait( 2.5 );
+
   thread foley_line("roadkill_fly_strungout");
-  //	wait_for_buffer_time_to_pass( start_time, 4.2 );
 
   flag_wait("we're cut off");
-  // We're cut off!	
-  dunn_line("roadkill_cpd_cutoff");
 
-  //wait_for_buffer_time_to_pass( start_time, 7.2 );
+  dunn_line("roadkill_cpd_cutoff");
 
   flag_wait("push_through");
 
-  // Push through!	
   foley_line("roadkill_fly_pushthrough");
 }
 
 ride_end_dialogue() {
   flag_wait("player_vehicle_wipes_out");
-  //wait( 1 );
 
-  // Heads up!	
   foley_line("roadkill_fly_headsup");
 }
 
@@ -1260,10 +1021,9 @@ roadkill_convoy_dismounts() {
   thread dismount_dialogue_and_friendly_progression_logic();
 
   array_spawn_function(level.school_ambush_spawners, ::join_school_threatbias_group_and_damage_func);
-  //	array_spawn_function_noteworthy( "school_spawner", ::join_school_threatbias_group );
+
   array_spawn_function_noteworthy("school_spawner", ::enable_danger_react, 5000);
   array_spawn_function_noteworthy("school_spawner", ::school_spawner_think);
-  //thread school_spawner_flee_node();
 
   run_thread_on_targetname("barbwire_ride_cutoff", ::show_helper_model);
   activate_trigger_with_targetname("friendlies_flee_ambush_trigger");
@@ -1279,7 +1039,6 @@ roadkill_convoy_dismounts() {
     model Show();
   }
 
-  //(-6404 8583 362) : 270 345
   player_slide_crash = getstruct("player_slide_crash", "targetname");
 
   slideModel = spawn_tag_origin();
@@ -1293,12 +1052,11 @@ roadkill_convoy_dismounts() {
   wait(movetime);
   slideModel Delete();
   level.player SetOrigin(player_slide_crash.origin);
-  //	level.player SetPlayerAngles( player_slide_crash.angles );
+
   level.player SetStance("prone");
   level.player AllowCrouch(true);
   level.player AllowProne(true);
 
-  // temporary thing to delete far away axis to save me a recompile
   ai = GetAIArray("axis");
   get_array_of_closest(level.player.origin, ai);
   for(i = ai.size - 1; i >= 0 && i >= ai.size - 4; i--) {
@@ -1316,19 +1074,13 @@ roadkill_convoy_dismounts() {
   flag_set("player_knocked_down");
   battlechatter_on("allies");
 
-  // rooftop enemies show up
-  //thread modify_dismount_spawner_threatbias();
   array_spawn_function_targetname("dismount_enemy_spawner", ::dismount_enemy_spawner);
   array_spawn_targetname("dismount_enemy_spawner");
-
-  //	autosave_by_name( "dismount" );
 
   exploder("crashed_humvees");
 
   remove_global_spawn_function("axis", ::die_after_awhile);
   remove_global_spawn_function("axis", ::set_ignoreSuppression);
-
-  //	level.player thread EndSliding();
 
   wait(0.5);
   timer = 5;
@@ -1355,23 +1107,11 @@ roadkill_convoy_dismounts() {
   level.player delayCall(4, ::EnableDeathShield, false);
   level.player EnableWeapons();
 
-  //	lead_vehicle Vehicle_SetSpeedImmediate( 32, 2, 2 );
-
-  //	player_wipe_out_path = GetVehicleNode( "player_wipe_out_path", "targetname" );
-  //	player_vehicle StartPath( player_wipe_out_path );
-
-  set_promotion_order("g", "c"); // if a green guy dies, cyan becomes green
+  set_promotion_order("g", "c");
 
   flag_set("player_is_dismounted");
 
-  //thread grenade_barrage_if_you_delay();
-
-  // player needs full health.
-  //	maps\_gameskill::updateAllDifficulty();
-
   flag_wait("player_enters_ambush_house");
-
-  //thread staircase_grenade();
 
   level.ambush_allies_outside_vehicle = 0;
   ambush_ally_spawners = getEntArray("ambush_ally_spawner", "targetname");
@@ -1383,26 +1123,17 @@ roadkill_convoy_dismounts() {
   array_spawn_function_noteworthy("slowbie", ::ambush_house_slowbie);
   array_spawn_function(ambush_house_spawners, ::ambush_house_spawner_think);
 
-  //array_thread( ambush_house_spawners, ::spawn_ai );
-
   add_wait(::flag_wait, "player_looks_at_staircase");
   add_wait(::flag_wait, "player_progresses_in_ambush_house");
   add_func(::array_spawn_targetname, "ambush_house_spawner");
   thread do_wait_any();
 
-  /*	
-  flag_wait( "ambush_house_enemies_came_down_stairs" );
-
-  volume = GetEnt( "ambush_house_lower_volume", "targetname" );
-  volume waittill_volume_dead_or_dying();
-  */
   add_wait(::flag_wait, "sweep_dismount_building");
   add_wait(::flag_wait, "player_progresses_in_ambush_house");
   do_wait_any();
 
   activate_trigger_with_targetname("ambush_house_friendlies_progress_downstairs");
 
-  //flag_wait( "staircase_grenade" );
   flag_wait("dismount_friendlies_go_for_staircase");
 
   activate_trigger_with_targetname("ambush_house_friendlies_reach_staircase");
@@ -1415,17 +1146,15 @@ roadkill_convoy_dismounts() {
   add_wait(::flag_wait, "foley_flashbang");
   add_func(::learn_flash);
   thread do_wait();
-  //	thread learn_flash( start_time );
 
   flag_wait("ambush_house_player_goes_upstairs");
   thread detect_room_was_flashed();
 
   level.enemy_playground_enemies = [];
-  // spawn the badguys in front of the school
+
   array_spawn_function_noteworthy("enemy_playground_spawner", ::enemy_playground_spawner);
   array_spawn_noteworthy("enemy_playground_spawner");
 
-  // the school attacks!
   foreach(spawner in level.school_ambush_spawners) {
     spawner.count = 1;
     spawner.script_accuracy = 1;
@@ -1440,24 +1169,8 @@ roadkill_convoy_dismounts() {
 
   activate_trigger_with_targetname("ambush_house_friendlies_upstairs_trigger");
 
-  //flag_wait_either( "ambush_house_player_goes_last_room", "room_was_flashed" );
   flag_wait_or_timeout("ambush_house_player_goes_last_room", 12);
 
-  /*	
-  if( !flag( "player_leaves_ambush_house" ) )
-  {
-  	volume = GetEnt( "ambush_house_last_room", "targetname" );
-  	volume add_wait( ::waittill_volume_dead_or_dying );
-  	add_wait( ::flag_wait, "player_leaves_ambush_house" );
-  	do_wait_any();
-  }
-
-  if( !flag( "player_leaves_ambush_house" ) )
-  {
-  	activate_trigger_with_targetname( "ambush_house_friendlies_last_room_trigger" );
-  	wait( 3 );
-  }
-  */
   activate_trigger_with_targetname("ambush_house_friendlies_last_room_trigger");
   level.foley set_force_color("b");
   level.dunn set_force_color("p");
@@ -1467,12 +1180,11 @@ roadkill_convoy_dismounts() {
   activate_trigger_with_targetname("ambush_house_friendlies_leave_trigger");
 
   flag_wait("player_leaves_ambush_house");
-  //	level.player SetThreatBiasGroup( "allies" );
 }
 
 dismount_dialogue_and_friendly_progression_logic() {
   wait(4);
-  // We need to get off the street!	
+
   thread foley_line("roadkill_fly_getoffstreet");
   flag_wait("player_is_dismounted");
   wait(0.5);
@@ -1480,25 +1192,19 @@ dismount_dialogue_and_friendly_progression_logic() {
   flag_wait("player_enters_ambush_house");
   wait(3.0);
 
-  // Is everybody ok?	
   foley_line("roadkill_fly_everybodyok");
   wait(0.5);
   dunn_line("roadkill_cpd_huah");
 
   thread play_sound_in_space("scn_roadkill_interior_scuffle1", level.dunn.origin + (0, 0, 120));
 
-  //other_two_guys_say_huah();
   wait(0.45);
 
-  // They're movin' around upstairs!		
   dunn_line("roadkill_cpd_movinaroundup");
 
-  // Get the hell away from those windows and secure the top floor! Move! Move!		
   foley_line("roadkill_fly_securetopfloor");
 
   flag_set("sweep_dismount_building");
-
-  //flag_wait( "ambush_house_player_goes_last_room" );
 
   flag_wait("eyes_on_school");
   if(!flag("lets_go_trigger")) {
@@ -1520,13 +1226,11 @@ dismount_dialogue_and_friendly_progression_logic() {
 
   wait_for_chance_to_charge_school();
 
-  // should be no more cyan guys now
   guys = get_force_color_guys("allies", "c");
   AssertEx(!guys.size, "Found cyan guys!");
 
   delayThread(1.1, ::flag_set, "friendlies_run_to_school");
 
-  // Follow me let's go!	
   thread foley_line("roadkill_fly_followme");
 
   flag_wait("friendlies_run_to_school");
@@ -1549,7 +1253,7 @@ start_roadkill_school_fight() {
   array_spawn_noteworthy("dismount_macey");
   array_spawn_noteworthy("dismount_dunn");
 
-  waittillframeend; // wait till they spawn
+  waittillframeend;
 
   struct = getstruct("school_start_foley", "targetname");
   level.foley teleport_ent(struct);
@@ -1578,19 +1282,16 @@ roadkill_school_fight() {
 
   flag_wait("roadkill_school_2");
 
-  // Watch it! Some of 'em just went in that classroom on the right!	
   dunn_line("roadkill_cpd_classonright");
   wait(2);
 
-  // Hunter 2-3, Hunter 2-1, we're in the school. Heavy resistance.	
   add_func(::foley_line, "roadkill_fly_intheschool");
-  // Copy that Hunter 2-1.	
+
   add_func(::shepherd_line, "roadkill_shp_copythat21");
   thread do_funcs();
 
   flag_wait("roadkill_school_3");
 
-  // clear out the ally threatbias group
   SetThreatBias("axis_school", "ally_with_player", 0);
   SetThreatBias("ally_with_player", "axis_school", 0);
 
@@ -1623,10 +1324,8 @@ school_enemies_retreat_dialogue() {
 
   wait(2);
 
-  // Hunter 2-1 this is Shepherd, thanks for the assist! This town's almost ours - let's finish the job, huah?	
   shepherd_line("roadkill_shp_thanksforassist");
 
-  // Huah. Roger that 2-3. Rangers lead the way sir!	
   foley_line("roadkill_fly_allthewaysir");
 }
 
@@ -1641,25 +1340,16 @@ roadkill_ending_run_dialogue() {
   volume waittill_volume_dead_or_dying();
   wait(1);
 
-  // All the way! We'll see you on the flipside Hunter 2-1, Shepherd out.	
-  //	shepherd_line( "roadkill_shp_alltheway" );
-
-  // Hunter 2-1 Actual to Goliath.	
   foley_line("roadkill_fly_togoliath");
 
-  // Hunter 2-1 Actual this is Goliath, send traffic.	
   radio_line("roadkill_ar3_sendtraffic");
 
-  // Copy Goliath, the school is secure and hostiles are withdrawing from the area. We're just moppin' up now.	
   foley_line("roadkill_fly_schoolsecure");
 
-  // Copy that Hunter 2-1 Actual, proceed with caution to the rally point. EPWs may still be in the area. Over.	
   radio_line("roadkill_ar3_rallypoint");
 
-  // Roger that Goliath, thanks for the tip. Hunter 2-1 Actual out.	
   foley_line("roadkill_fly_thanksfortip");
 
-  // Squad, watch for enemy stragglers! Let's get to that rally point!	
   foley_line("roadkill_fly_watchstragglers");
   flag_set("final_objective");
 }
@@ -1694,7 +1384,6 @@ start_roadkill_endfight() {
 
   thread friendlies_traverse_school();
 
-  //Line( start, end, color, alpha, depthTest, duration );
   waittillframeend;
   level.foley set_force_color("b");
   level.dunn set_force_color("p");
@@ -1715,8 +1404,6 @@ roadkill_the_end() {
 
   flag_wait("roadkill_school_20");
 
-  //link_heli_to_landing();
-
   level.heli_guy_left = [];
   level.heli_guy_right = [];
 
@@ -1732,7 +1419,6 @@ roadkill_the_end() {
   flag_wait("pistol_runner_died");
   activate_trigger_with_targetname("final_friendly_trigger");
 
-  // Clear! That's the last of 'em!	
   if(IsAlive(level.pistol_killer))
     level.pistol_killer thread generic_dialogue_queue("roadkill_fly_lastofem");
 
@@ -1748,7 +1434,6 @@ roadkill_the_end() {
   spawner = GetEnt("stryker_blocker_spawner", "targetname");
   spawner spawn_vehicle();
 
-  //thread roadkill_ending_chatter();
   thread ending_fadeout_nextmission();
   flag_wait("the_end");
   ai = get_force_color_guys("allies", "c");
@@ -1759,53 +1444,40 @@ roadkill_the_end() {
     guy Delete();
   }
 
-  //jet_time = 2;
-  //delayThread( jet_time, ::spawn_vehicle_from_targetname_and_drive, "ending_f15_flyby" );
-  //delayThread( jet_time + 3.1, ::exploder, "end_bomb" );
-
   axis = GetAIArray("axis");
   foreach(guy in axis) {
     guy Kill();
   }
   array_spawn_function_targetname("friendly_ending_runner_spawner", ::friendly_ending_runner_spawner);
   array_spawn_targetname("friendly_ending_runner_spawner");
-
-  //iprintlnbold( "End of scripted level" );
 }
 
 roadkill_ending_chatter() {
-  // We're oscar mike!	
   thread random_ai_line("roadkill_ar2_oscarmike2");
   wait(1.2);
 
-  // Stow your gear and move out!	
   thread random_ai_line("roadkill_ar3_stowyourgear");
   wait(0.7);
 
   flag_wait("the_end");
 
-  // I want that Mark 19 up and running in five mikes!	
   thread random_ai_line("roadkill_ar4_upandrunning");
   wait(2.1);
 
-  // Anybody got a spare MRE?	
   thread random_ai_line("roadkill_ar1_sparemre");
   wait(0.3);
 
-  // Battalion is oscar mike!!!	
   thread random_ai_line("roadkill_ar4_oscarmike");
   wait(0.4);
 
-  // Mount up!	
   thread random_ai_line("roadkill_fly_mountup");
   wait(1.2);
 
-  // We're moving out now!	
   thread random_ai_line("roadkill_fly_movingout");
 }
 
 roadkill_startpoint_catchup_thread() {
-  waittillframeend; // let the actual start functions run before this one
+  waittillframeend;
   start = level.start_point;
 
   if(start == "intro") {
@@ -1823,9 +1495,6 @@ roadkill_startpoint_catchup_thread() {
   flag_set("player_enters_riverbank");
   flag_set("bridge_baddies_retreat");
 
-  //	player_stair_blocker = GetEnt( "player_stair_blocker", "targetname" );
-  //	player_stair_blocker Delete();
-
   battlechatter_off("allies");
 
   if(start == "convoy") {
@@ -1841,7 +1510,6 @@ roadkill_startpoint_catchup_thread() {
     return;
   }
   flag_set("fight_back");
-  //	flag_set( "ambush_spawner_angry" );
 
   if(start == "ambush") {
     return;
@@ -1933,7 +1601,7 @@ roadkill_music() {
     case "school":
     case "endfight":
 
-      thread MusicLoop("roadkill_armored_and_combat"); // 8 minutes 24 seconds
+      thread MusicLoop("roadkill_armored_and_combat");
     case "end":
       flag_wait("start_shepherd_end");
       level notify("stop_music");

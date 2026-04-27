@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["insects_carcass_runner"] = loadfx("misc/insects_carcass_runner");
 
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");

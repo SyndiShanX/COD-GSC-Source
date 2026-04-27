@@ -688,7 +688,6 @@ getPartAndStateIndex(var_0, var_1) {
 
       if(tolower(var_6) == tolower(var_1)) {
         var_3 = var_5;
-        //break; // OP_EvalLocalVariableObjectCached?
       }
     }
   }

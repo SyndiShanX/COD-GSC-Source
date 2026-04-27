@@ -10,6 +10,4 @@
 #using scripts\shared\vehicles\_quadtank;
 #namespace cp_sh_cairo;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}

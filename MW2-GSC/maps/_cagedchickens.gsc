@@ -8,8 +8,6 @@
 #include maps\_anim;
 
 initChickens() {
-  // wait until the end of the frame so that maps can init their cages
-  // in their _anim instead of only above _load
   waittillframeend;
 
   cages = getEntArray("caged_chicken", "targetname");

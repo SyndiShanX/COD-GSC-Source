@@ -46,16 +46,12 @@ defuse_setup() {
 
   clean_up_setup();
 
-  // 5 minutes in all.
   level.challenge_time_limit = 300;
 
   flag_init("defuse_update_score");
 
   array_spawn_function_targetname("civilian", ::civilian);
-  //	add_global_spawn_function( "axis", ::ai_on_death );
-  //	array_thread ( level.players, ::player_defuse_kill_clear );
 
-  // delete some spawners if not coop
   if(!is_coop()) {
     spawners = getEntArray("coop_only", "script_noteworthy");
     array_call(spawners, ::delete);
@@ -83,7 +79,6 @@ defuse_objectives() {
 
   level.defuse_count = 0;
 
-  // each index corresponds to a script_index key on the bomb in radiant.
   level.objective_arr = [];
   level.objective_arr[0] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_MARKET";
   level.objective_arr[1] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_APARTMENT";
@@ -99,7 +94,7 @@ defuse_objectives() {
   }
 
   while(level.defuse_count != 0) {
-    obj_id = flag_wait("defuse_update_score"); // obj_id passed from ::briefcase_defuse( ... )
+    obj_id = flag_wait("defuse_update_score");
     flag_clear("defuse_update_score");
 
     if(isDefined(obj_id))
@@ -110,7 +105,6 @@ defuse_objectives() {
 }
 
 obj_switch_text(dist, obj_id) {
-  // stop switching text once the bomb is defused
   self endon("briefcase_bomb_defused");
 
   while(true) {
@@ -255,7 +249,7 @@ clean_up_spawnfunc() {
     if(self.script_group != script_group) {
       continue;
     }
-    // to avoid multiple traces on the same frame
+
     wait randomfloat(.3);
 
     can_be_seen = false;
@@ -365,14 +359,11 @@ player_defuse_kill_clear() {
 }
 
 briefcase_defuse(briefcase) {
-  // link player
   self playerLinkTo(briefcase);
   self PlayerLinkedOffsetEnable();
 
-  // get current weapon?
   lastWeapon = self getCurrentWeapon();
 
-  // give briefcase weapon
   self giveWeapon("briefcase_bomb_defuse_sp");
   self setWeaponAmmoStock("briefcase_bomb_defuse_sp", 0);
   self setWeaponAmmoClip("briefcase_bomb_defuse_sp", 0);
@@ -388,11 +379,9 @@ briefcase_defuse(briefcase) {
   self waittill_either("coop_downed", "weapon_change");
 
   if(!self ent_flag_exist("coop_downed") || !self ent_flag("coop_downed")) {
-    // Add 3D Person Briefcase
     self attach_briefcase_model();
 
     if(!self ent_flag_exist("coop_downed") || !self ent_flag("coop_downed")) {
-      // display usebar
       if(self defuse_use_bar(4.5, briefcase)) {
         briefcase ent_flag_set("briefcase_bomb_defused");
         level.defuse_count--;
@@ -400,7 +389,6 @@ briefcase_defuse(briefcase) {
       }
     }
 
-    // remove 3d person briefcase
     self detach_briefcase_model();
   }
 
@@ -409,17 +397,15 @@ briefcase_defuse(briefcase) {
   primary_weapons = self GetWeaponsListPrimaries();
   assert(primary_weapons.size > 0);
 
-  // defensive, I don't know that I'll always save a valid primary weapon.
   if(!is_in_array(self GetWeaponsListPrimaries(), lastWeapon)) {
     lastWeapon = primary_weapons[0];
   }
 
-  // switch back to lastWeapon
   self switchToWeapon(lastWeapon);
   self unlink();
   self waittill("weapon_change");
 
-  wait .5; // buffer time between tries.
+  wait .5;
 
   self AllowMelee(true);
   self EnableOffhandWeapons();
@@ -443,7 +429,7 @@ defuse_use_bar(fill_time, briefcase) {
   bar = self createClientProgressBar(self, 57);
 
   text = self createClientFontString("default", 1.2);
-  text setPoint("CENTER", undefined, 0, 45); // old 20
+  text setPoint("CENTER", undefined, 0, 45);
   text settext(&"SO_DEFUSE_FAVELA_ESCAPE_DEFUSING");
 
   while(self use_active()) {

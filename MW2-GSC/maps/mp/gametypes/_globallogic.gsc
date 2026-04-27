@@ -37,7 +37,6 @@ init() {
 
   level.tiSpawnDelay = getDvarInt("scr_tispawndelay");
 
-  // hack to allow maps with no scripts to run correctly
   if(!isDefined(level.tweakablesInitialized))
     maps\mp\gametypes\_tweakables::init();
 
@@ -197,7 +196,6 @@ testShock() {
 }
 
 onXPEvent(event) {
-  //self thread maps\mp\_loot::giveMoney( event, 10 );
   self thread maps\mp\gametypes\_rank::giveRankXP(event);
 }
 

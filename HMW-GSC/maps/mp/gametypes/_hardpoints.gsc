@@ -18,8 +18,7 @@ h2_setCustomKillstreaks() {
     self.customKillstreaks[2] = h2_getStreakNameFromIndex(index_2, 2);
   }
 
-  for(i = 1; i < self.customKillstreaks.size; i++) //order the killstreaks by their cost
-  {
+  for(i = 1; i < self.customKillstreaks.size; i++) {
     streakName = self.customKillstreaks[i];
     streakCost = level.hardpointitems[streakName];
 
@@ -99,7 +98,6 @@ init() {
   level.hardpointitems["ac130_mp"] = getdvarint("scr_killstreak_kills_ac130", 11);
   level.hardpointitems["emp_mp"] = getdvarint("scr_killstreak_kills_emp", 15);
   level.hardpointitems["nuke_mp"] = getdvarint("scr_killstreak_kills_nuke", 25);
-  //level.hardpointitems["dogs_mp"] = 10;
 
   level.killstreakwieldweapons["artillery_mp"] = "airstrike_mp";
   level.killstreakwieldweapons["cobra_ffar_mp"] = "helicopter_mp";
@@ -125,9 +123,6 @@ init() {
       level.maxkillstreakforaward = streakCost;
 
     level.h2_isKillstreakActivator[streakName] = true;
-
-    // lots of errors come from this, are we sure its needed? killstreaks work in game just fine for me still
-    //precacheItem( streakName );
 
     precacheShader(getkillstreakcrateicon(streakName));
 
@@ -322,7 +317,7 @@ givehardpoint(streakName, streakCost) {
   if(!isDefined(level.hardpointitems[streakName]) || !level.hardpointitems[streakName]) {
     return;
   }
-  // shuffle existing killstreaks up a notch
+
   for(i = self.pers["killstreaks"].size; i >= 0; i--)
     self.pers["killstreaks"][i + 1] = self.pers["killstreaks"][i];
 
@@ -424,7 +419,6 @@ hardpointitemwaiter() {
       self thread shuffleKillStreaksFILO(streakName);
     }
 
-    //no force switching weapon for ridable killstreaks
     if(!isRideKillstreak(streakName) || !result) {
       if(isAnimateKillstreak(streakName)) {
         common_scripts\utility::_disableweaponswitch();
@@ -444,9 +438,6 @@ hardpointitemwaiter() {
         self switchToWeapon(firstPrimary);
     }
 
-    // give time to switch to the near weapon; when the weapon is none (such as during a "disableWeapon()" period
-    // re-enabling the weapon immediately does a "weapon_change" to the killstreak weapon we just used.In the case that
-    // we have two of that killstreak, it immediately uses the second one
     if(self getCurrentWeapon() == "none") {
       while(self getCurrentWeapon() == "none")
         wait(0.05);
@@ -504,8 +495,6 @@ killstreakearned(var_0) {
       thread maps\mp\gametypes\_missions::genericchallenge("wargasm");
   }
 }
-
-//this overwrites killstreak at index 0 and decrements all other killstreaks (FCLS style)
 shuffleKillStreaksFILO(streakName) {
   self setActionSlot(4, "");
 

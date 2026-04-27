@@ -11,8 +11,6 @@
 #include maps\_slowmo_breach;
 #include maps\af_caves_code;
 #using_animtree("generic_human");
-
-// got two tangos down below, do it!
 DO_IT_TIME = 4;
 
 main() {
@@ -49,10 +47,6 @@ main() {
 
   maps\af_caves_fx::main();
   maps\af_caves_precache::main();
-
-  //JK - Fog and vision are now set in af_caves_fog.gsc
-  //VisionSetNaked( "af_caves_outdoors", 0 );
-  //setExpFog( 3764.17, 19391, 0.661137, 0.554261, 0.454014, 0.7, 0 );
 
   level.goodFriendlyDistanceFromPlayerSquared = 250 * 250;
   level.cosine["70"] = cos(70);
@@ -97,7 +91,6 @@ main() {
 
   add_hint_string("begin_descent", &"AF_CAVES_DESCEND", ::should_stop_descend_hint);
 
-  // Press^3 [{+actionslot 1}] ^7to use Night Vision Goggles.
   add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
   add_hint_string("rappel_melee", &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::should_not_do_melee_rappel_hint);
 
@@ -105,16 +98,8 @@ main() {
 
   createthreatbiasgroup("player");
   createthreatbiasgroup("price");
-  //createthreatbiasgroup( "dogs" );
-  //createthreatbiasgroup( "airstrip_tower_enemy" );
-
-  //setignoremegroup( "price", "airstrip_tower_enemy" );// airstrip_tower_enemy will ignore price
-  //setignoremegroup( "airstrip_tower_enemy", "price" );// price will ignore airstrip_tower_enemy
 
   level.player setthreatbiasgroup("player");
-
-  //airstrip_tower_enemy = getEntArray( "tower_gunners", "script_noteworthy" );
-  //array_thread( airstrip_tower_enemy, ::add_spawn_function, ::set_threatbiasgroup, "airstrip_tower_enemy" );
 
   road_dogs = getEntArray("enemy_road_patrollers_dogs", "script_noteworthy");
   array_thread(road_dogs, ::add_spawn_function, ::road_dog_think);
@@ -122,16 +107,13 @@ main() {
   road_patrollers = getEntArray("enemy_road_patrollers", "targetname");
   array_thread(road_patrollers, ::add_spawn_function, ::road_patroller_spawnfunc);
 
-  // spawn and setup Price
   price_spawner = getent("price_spawner", "targetname");
   price_spawner add_spawn_function(::price_spawn);
   price_spawner add_spawn_function(::set_threatbiasgroup, "price");
   price_spawner spawn_ai();
 
-  // price won't stop in front of the player's gun until later
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
 
-  //	Misc
   array_thread(getEntArray("clip_nosight", "targetname"), ::clip_nosight_logic);
 
   player_rope = getent("player_rope", "targetname");
@@ -171,13 +153,11 @@ steamroom_gate_setup() {
 }
 
 af_caves_firsthalf_init_flags() {
-  // global
   flag_init("scripted_dialogue");
   flag_init("stealth_kill_dialogue_running");
   flag_init("unsuppressed_weapon_warning_played");
   flag_init("player_falling_kill_in_progress");
 
-  //intro
   flag_init("intro_dialogue_start");
   flag_init("intro_fade_in");
   flag_init("intro_faded_in");
@@ -191,7 +171,6 @@ af_caves_firsthalf_init_flags() {
   flag_init("intro_price_sent_to_post_getup_node");
   flag_init("intro_price_reached_post_getup_node");
 
-  // road patrol
   flag_init("price_at_hillside");
   flag_init("price_hillside_dialogue_done");
   flag_init("road_enemy_wiretap_dialogue_done");
@@ -210,7 +189,6 @@ af_caves_firsthalf_init_flags() {
   flag_init("road_patrol_humans_cleared");
   flag_init("road_patrol_cleared");
 
-  // rappel
   flag_init("descending");
   flag_init("rappel_threads");
   flag_init("price_at_rappel");
@@ -226,7 +204,6 @@ af_caves_firsthalf_init_flags() {
   flag_init("rappel_end");
   flag_init("end_of_rappel_scene");
 
-  // barracks
   flag_init("barracks_price_ready_to_dodge_biggroup");
   flag_init("barracks_biggroup_passingby");
   flag_init("barracks_biggroup_gone");
@@ -239,7 +216,6 @@ af_caves_firsthalf_init_flags() {
   flag_init("destroy_tv");
   flag_init("barracks_follow_price");
 
-  // steam room
   flag_init("steamroom_start");
   flag_init("steamroom_knifekill_setup_done");
   flag_init("steamroom_price_knifekill_sequencestart");
@@ -260,8 +236,6 @@ af_caves_firsthalf_init_flags() {
   flag_init("steamroom_ambush_finish_dialogue_ended");
   flag_init("steamroom_done");
 }
-
-//	****** Starts****** //
 start_default() {
   level.player stealth_default();
   thread player_unsuppressed_weapon_warning();
@@ -273,13 +247,11 @@ start_road() {
   level.player stealth_default();
   thread player_unsuppressed_weapon_warning();
 
-  // warp player and price
   playerstruct = GetStruct("road_player", "targetname");
   pricestruct = GetStruct("road_price", "targetname");
   level.player teleport_to_node(playerstruct);
   level.price teleport_to_node(pricestruct);
 
-  // stuff that would have been done already
   thread half_particles_setup();
   thread intro_music();
 
@@ -349,8 +321,7 @@ start_barracks() {
   thread autosave_by_name("cave_entrance");
 }
 
-start_steamroom() //Starts at the bottom of the stairs just before the steamroom area.
-{
+start_steamroom() {
   flag_set("barracks_follow_price");
   thread objective_follow_price_again();
 
@@ -369,11 +340,6 @@ start_steamroom() //Starts at the bottom of the stairs just before the steamroom
 
   level.price AllowedStances("stand", "crouch", "prone");
   level.price forceUseWeapon("scar_h_thermal_silencer", "primary");
-
-  //level.price enable_ai_color();
-  //level.price set_force_color( "r" );
-
-  //thread turn_off_stealth();
 
   flag_set("steamroom_start");
 
@@ -402,8 +368,8 @@ start_ledge() {
   level.price allowedstances("stand", "crouch", "prone");
   level.price forceUseWeapon("scar_h_thermal_silencer", "primary");
 
-  wait(0.1); // SRS hacky, let stealth set up on price so we can turn it off in the event thread
-  flag_set("steamroom_done"); // SRS triggered at the end of the steamroom scripting, normally
+  wait(0.1);
+  flag_set("steamroom_done");
   flag_set("steamroom_ambush_finish_dialogue_ended");
 
   wait .5;
@@ -442,7 +408,6 @@ start_control_room() {
   level.price forceUseWeapon("m4_grenadier", "primary");
   level.price set_ignoreme(false);
 
-  //	thread kill_sentry_minigun();
   thread turn_off_stealth();
 
   thread maps\af_caves_backhalf::AA_breach_init();
@@ -451,7 +416,7 @@ start_control_room() {
   flag_set("player_right_near_breach");
 
   wait(0.05);
-  level.price enable_ai_color(); // SRS override stealth defaults
+  level.price enable_ai_color();
   level.price AllowedStances("stand", "crouch", "prone");
 }
 
@@ -477,10 +442,6 @@ start_airstrip() {
   wait(1);
   thread maps\af_caves_backhalf::AA_airstrip_init();
 }
-
-//****** OBJECTIVES****** //
-
-//****** 1st Objective, Follow Cpt. Price****** //
 objective_follow_price() {
   objective_number = 0;
   obj_position = level.price.origin;
@@ -496,8 +457,6 @@ objective_follow_price() {
 
   thread objective_rappel();
 }
-
-//****** 2nd Objective, Rappel****** //
 objective_rappel() {
   objective_number = 1;
 
@@ -509,8 +468,6 @@ objective_rappel() {
   wait 1;
   objective_state(objective_number, "done");
 }
-
-//****** 3rd Objective, Follow Cpt. Price****** //
 objective_follow_price_again() {
   flag_wait("barracks_follow_price");
 
@@ -531,18 +488,6 @@ objective_follow_price_again() {
   flag_wait("obj_ledge_traverse_given");
 
   Objective_State(0, "done");
-
-  /*
-  objective_number = 2;
-  obj_position = level.price.origin;
-
-  objective_add( objective_number, "active", &"AF_CAVES_FOLLOW_PRICE", obj_position );
-  objective_current( objective_number );
-  Objective_OnEntity( objective_number, level.price, (0, 0, 70) );
-
-  wait .5;
-  objective_state( objective_number, "done" );
-  */
 }
 
 objective_regroup_on_price() {
@@ -557,8 +502,6 @@ objective_regroup_on_price() {
 
   objective_state(objective_number, "done");
 }
-
-// ------------- // --- INTRO --- // ------------- intro_setup() {
 thread half_particles_setup();
 
 thread intro_player();
@@ -566,8 +509,6 @@ thread intro_catch_player_running_ahead();
 thread intro_music();
 thread intro_dialogue();
 thread intro_price_rise_out_of_sand();
-
-// level progression
 thread road_setup();
 }
 
@@ -584,8 +525,8 @@ intro_player() {
   level.player SetStance("prone");
   level.player DisableWeapons();
 
-  wait(0.2); // this is so the player drops to the ground before we freezecontrols
-  level.player FreezeControls(true); // just during black screen
+  wait(0.2);
+  level.player FreezeControls(true);
 
   level.player.levelStartPos = level.player.origin;
 
@@ -601,7 +542,6 @@ intro_player() {
 }
 
 intro_player_catch_movement() {
-  // waittill after the player moves
   distsqrd = 15 * 15;
   while(DistanceSquared(level.player.origin, level.player.levelStartPos) < distsqrd) {
     wait(0.05);
@@ -613,13 +553,7 @@ intro_player_catch_movement() {
 intro_dialogue() {
   flag_wait("intro_dialogue_start");
 
-  // "I'll wait for you at the exfil point. Three hours."radio_dialogue("afcaves_nkl_waitforyou");
-
-  // "Don't bother. This was a one-way flight, mate."radio_dialogue("afcaves_pri_dontbother");
-
   thread intro_sandstorm_and_fadein_flag();
-
-  // "Then good luck, my friend."radio_dialogue("afcaves_nkl_goodluck");
 
   flag_set("price_rise_up");
 
@@ -630,9 +564,7 @@ intro_dialogue() {
   wait(9.5);
   flag_set("introscreen_feed_lines_done");
 
-  if(!flag("intro_player_moved")) {
-    // "Move out."radio_dialogue("afcaves_pri_moveout");
-  }
+  if(!flag("intro_player_moved")) {}
 }
 
 intro_follow_objective() {
@@ -643,7 +575,7 @@ intro_follow_objective() {
 
 intro_sandstorm_and_fadein_flag() {
   thread maps\af_caves_fx::introSandStorm();
-  wait(0.25); // need to start the sandstorm before the blackscreen fades up
+  wait(0.25);
   flag_set("intro_fade_in");
 }
 
@@ -656,14 +588,12 @@ intro_price_rise_out_of_sand() {
   price_and_tarp[0] = level.price;
   price_and_tarp[1] = tarp;
 
-  // he waits to get up
   anim_ent anim_first_frame(price_and_tarp, "rise_up");
 
   flag_wait("price_rise_up");
 
   delaythread(4, ::flag_set, "player_intro_unlock");
 
-  // now he gets up
   anim_ent anim_single(price_and_tarp, "rise_up");
 
   level.price.moveplaybackrate = 1.2;
@@ -678,14 +608,10 @@ intro_price_rise_out_of_sand() {
   }
   flag_set("intro_price_reached_post_getup_node");
 }
-
-// ------------------- // --- ROAD PATROL --- // ------------------- road_setup() {
 level.price PushPlayer(true);
 price_be_stealthy();
 
 road_stealth_settings();
-
-// deactivate trigger at bottom of hill so price doesn't prematurely move up to its corresponding color node when stealth is broken
 colortrig = GetEnt("trig_script_color_allies_r5", "targetname");
 colortrig trigger_off();
 
@@ -693,8 +619,6 @@ thread road_price_to_hillside();
 
 thread road_ambient_action();
 thread road_autosave();
-
-//thread road_price_hillside_nag();
 thread road_price_hillside_dialogue();
 thread road_enemy_wiretap_dialogue();
 
@@ -710,17 +634,13 @@ thread road_group2_moveout();
 thread road_group1_countdown_kill();
 
 thread road_moveup_to_kill_group2();
-
-// level progression
 thread road_clear();
 }
 
 road_stealth_settings() {
-  // whizby type stuff
   ai_event = [];
   ai_event["ai_eventDistBullet"]["hidden"] = 256;
 
-  // distance within which two AIs can instantly tell each other about new enemies
   ai_event["ai_eventDistNewEnemy"]["spotted"] = 750;
   ai_event["ai_eventDistNewEnemy"]["hidden"] = 512;
 
@@ -770,7 +690,7 @@ road_patroller_spawnfunc() {
 
   self.a.disableLongDeath = true;
 
-  arr["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2; // escalate to searching immediately
+  arr["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
   arr["attack"] = ::small_goal_attack_behavior;
   self stealth_threat_behavior_replace(arr);
 }
@@ -798,32 +718,6 @@ road_patroller_event_override_func(type) {
   self.favoriteenemy = level.player;
   wait(1);
 }
-
-/* fix for flashbanged guys sometimes doing the "radio back into base" animation - shut down by leads as NWF, keeping in case we need the fix later after all
-road_patroller_event_override_func( type )
-{
-	self endon( "death" );
-	
-	self.favoriteenemy = level.player;
-	wait( 1 );
-	
-	// if he's flashed, we need to wait until after he's recovered so he has a chance to see the player
-	while( 1 )
-	{
-		if( self IsFlashed() )
-		{
-			wait( 0.25 );
-		}
-		
-		wait( 0.5 );
-		
-		if( !self IsFlashed() )
-		{
-			break;
-		}
-	}	
-}
-*/
 
 small_goal_attack_behavior() {
   self.pathrandompercent = 200;
@@ -863,7 +757,6 @@ road_dog_attack_func() {
 
   self clear_run_anim();
 
-  // delay before attacking
   wait(5);
   self.goalradius = 6800;
   self SetGoalEntity(level.player);
@@ -873,7 +766,7 @@ road_human_prespotted_func_easier() {
   self endon("death");
   level endon("_stealth_spotted");
 
-  wait(4); // default is 2.25
+  wait(4);
 }
 
 road_human_prespotted_func_harder() {
@@ -887,7 +780,6 @@ road_dog_prespotted_func() {
   self endon("death");
   level endon("_stealth_spotted");
 
-  // delay before telling other guys you noticed something
   wait(5);
 }
 
@@ -924,24 +816,6 @@ intro_price_to_hillside_abort_notify(sNotifyString) {
   flag_set("price_abort_intro_stop");
 }
 
-/*
-road_price_hillside_nag()
-{
-	level endon( "player_at_overlook" );
-	
-	wait 30;
-	
-	while( !flag( "player_at_overlook" ) )
-	{
-		wait( randomintrange( 25, 35 ) );
-		if( flag( "player_at_overlook" ) )
-			break;
-			
-		//Price: "Soap, over here."radio_dialogue( "pri_overhere" );
-	}
-}
-*/
-
 road_price_hillside_dialogue() {
   level endon("player_moving_to_road");
   level endon("_stealth_spotted");
@@ -952,30 +826,16 @@ road_price_hillside_dialogue() {
   level endon("hillside_dialogue_stop");
 
   flag_wait("price_goto_hillside");
-  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"radio_dialogue("pri_thermalspike");
 
-  //flag_wait( "price_at_hillside" );
   flag_wait("player_at_overlook");
 
-  // "Hold up."radio_dialogue("pri_holdup");
-
-  // "Enemy patrol."radio_dialogue("pri_enemypatrol");
-
-  // "Hold your fire."radio_dialogue("afcaves_pri_holdyourfire");
-
-  // Looks like Makarov's intel was solid. This is it.
   radio_dialogue("afcaves_pri_intelwassolid");
 
-  // half the guys start moving down the road
   flag_set("road_group2_startmoving");
 
   wait(3.5);
 
-  // "Good, they're splitting up. Let them separate."radio_dialogue("afcaves_pri_splittingup");
-
   wait(1.5);
-
-  // "This decryption code better be worth the price we paid..."radio_dialogue("afcaves_pri_decryptioncode");
 
   flag_set("price_hillside_dialogue_done");
 }
@@ -996,28 +856,16 @@ road_enemy_wiretap_dialogue() {
   flag_wait("price_hillside_dialogue_done");
 
   wiretap_dialogue_wait();
-  // "...(go) ahead Alpha?"radio_dialogue("afcaves_schq_goahead");
 
   wiretap_dialogue_wait();
-  // "Riverbed all clear, over."radio_dialogue("afcaves_sc1_riverbedclear");
 
   wiretap_dialogue_wait();
-  // "Bravo?"radio_dialogue("afcaves_schq_bravo");
-
-  //wiretap_dialogue_wait();
-  // "Catwalk all clear... visibility 100%, over."//radio_dialogue( "afcaves_sc2_catwalkclear" );/
 
   wiretap_dialogue_wait();
-  // "Sandstorm. Not much to see right now, over."radio_dialogue("afcaves_sc3_sandstorm");
 
   wiretap_dialogue_wait();
-  // "Zulu?"radio_dialogue("afcaves_schq_zulu");
 
   wiretap_dialogue_wait();
-  // "...uh, we're starting our patrol east along the canyon, north side access road, over."radio_dialogue("afcaves_sc1_startingpatrol");
-
-  //wiretap_dialogue_wait();
-  // "Copy that, Disciple Four.Finish your sweep and get back inside. Zulu team report's a heavy sandstorm on the way. Oxide out."//radio_dialogue( "afcaves_schq_finishsweep" );
 
   flag_set("road_enemy_wiretap_dialogue_done");
 }
@@ -1032,7 +880,6 @@ wiretap_dialogue_wait() {
     flag_waitopen("_stealth_event");
 
     if(GetTime() > startTime) {
-      // let everything cool out for a moment
       wait(5);
     } else {
       break;
@@ -1116,8 +963,6 @@ road_stealthbreak_price_dialogue() {
   level endon("road_patrol_humans_cleared");
 
   lines = [];
-  // "They're onto us - go loud."lines[0] = "afcaves_pri_ontousgoloud";
-  // "We're compromised - go loud."lines[1] = "afcaves_pri_compromisedgoloud";
 
   while(!flag("road_patrol_cleared")) {
     flag_wait("_stealth_spotted");
@@ -1136,7 +981,7 @@ road_price_stealthbreak_think() {
   flag_wait("price_at_hillside");
   flag_wait("road_player_broke_stealth");
 
-  battlechatter_off("allies"); // don't start chattering right now
+  battlechatter_off("allies");
 
   wait(0.5);
 
@@ -1194,7 +1039,6 @@ road_group2_moveout_aithink(group2) {
   level thread road_group2_walkaway_wait(group2);
 
   if(!self is_dog()) {
-    // dog handler should go immediately
     if(!isDefined(self.script_pet)) {
       wait(RandomFloatRange(2, 3.5));
       self notify("end_patrol");
@@ -1205,11 +1049,8 @@ road_group2_moveout_aithink(group2) {
     }
     self thread maps\_patrol::patrol(self.script_noteworthy);
 
-    // walk faster
     thread road_group2_moveout_adjust_movespeed();
-  }
-  // dog #2 needs to start later so he doesn't run into his master when trying to heel during the 180 turn
-  else if(self.script_pet == 2) {
+  } else if(self.script_pet == 2) {
     self.script_pet = -1;
     handler = undefined;
     foreach(guy in group2) {
@@ -1220,7 +1061,6 @@ road_group2_moveout_aithink(group2) {
     }
 
     if(!isDefined(handler)) {
-      // player killed handler - dog will bark
       return;
     }
 
@@ -1233,7 +1073,6 @@ road_group2_moveout_aithink(group2) {
     handler maps\_patrol::linkPet();
   }
 
-  // wait to hit the trigger twice before registering that we're coming back
   trig = GetEnt("trig_road_group2_nearendpath", "targetname");
   numReqHits = 2;
   numHits = 0;
@@ -1255,7 +1094,6 @@ road_group2_moveout_aithink(group2) {
 
   self thread road_group2_ai_alert_when_find_bodies();
 
-  // getting close to where they can see the bodies
   trigger_wait_targetname("trig_road_group2_midpath");
   if(!flag("road_group2_lastchance")) {
     flag_set("road_group2_lastchance");
@@ -1303,8 +1141,6 @@ road_group2_walkaway_wait(group2) {
 
   flag_set("road_group2_walked_away");
 }
-
-// handles coop shooting the first group of guys on the road patrol
 road_group1_countdown_kill() {
   level thread road_group1_countdown_kill_spottedflag();
   level thread road_group1_countdown_kill_alldead_flag();
@@ -1333,11 +1169,9 @@ road_group1_countdown_kill() {
       dog = guy;
       continue;
     } else {
-      // player only gets extra time on normal and easy
       if(level.gameskill < 2) {
         guy stealth_pre_spotted_function_custom(::road_human_prespotted_func_easier);
       } else {
-        // increasing a bit for all difficulties since Price was having trouble reliably shooting both targets within the default prespotted time (2.25 seconds)
         guy stealth_pre_spotted_function_custom(::road_human_prespotted_func_harder);
       }
     }
@@ -1366,7 +1200,6 @@ road_group1_countdown_kill() {
     playerTimedOut = true;
   }
 
-  // trade target groups if the player shot the "wrong" guy
   if(isDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
     temp = priceVictims;
     priceVictims = playerVictims;
@@ -1393,7 +1226,6 @@ road_group1_countdown_kill() {
   }
 
   if(IsAlive(dog)) {
-    // give player a chance to get the dog
     wait(1.5);
   }
 
@@ -1407,29 +1239,12 @@ road_group1_countdown_kill() {
     }
   }
 
-  flag_wait("road_patrol_group1"); // deathflag
+  flag_wait("road_patrol_group1");
 
-  // wait so Price has non-superhuman reaction time
   wait(1);
 
-  // congratulate the player if stealth wasn't broken
   if(!flag("road_player_broke_stealth")) {
-    // player didn't shoot when Price said to
-    if(playerTimedOut) {
-      // "We have to work together, Soap - stick to the plan next time."radio_dialogue("afcaves_pri_sticktoplan");
-    }
-    // player kinda messed up and shot a different guy than Price said
-    else if(!level.playerShotCorrectVictim) {
-      // "Close enough."radio_dialogue("afcaves_pri_closeenough");
-    }
-    // player got his, plus the dog
-    else if(playerKilledDog) {
-      // "Just like old times."radio_dialogue("afcaves_pri_justlikeoldtimes");
-    }
-    // player just got his, price got the dog
-    else {
-      // "Dog neutralized, I count five tangos down."radio_dialogue("afcaves_pri_dogneutralized");
-    }
+    if(playerTimedOut) {} else if(!level.playerShotCorrectVictim) {} else if(playerKilledDog) {} else {}
 
     flag_set("road_group1_killed_without_stealthbreak");
   }
@@ -1463,23 +1278,9 @@ road_group1_countdown_kill_dialogue() {
 
   flag_set("stealth_kill_dialogue_running");
 
-  // "Focus on the group on the right, directly beneath us. Let's take them out first."radio_dialogue("afcaves_pri_grouponright");
-
-  // "I'll take the two on the left."radio_dialogue("afcaves_pri_twoonleft");
-
-  // "On my mark."radio_dialogue("afcaves_pri_onmymark");
-
-  // "Three..."radio_dialogue("afcaves_pri_three");
-
-  // "Two..."radio_dialogue("afcaves_pri_two");
-
-  // "One..."radio_dialogue("afcaves_pri_one");
-
-  // "Mark."radio_dialogue("afcaves_pri_mark");
-
   flag_clear("stealth_kill_dialogue_running");
 
-  wait(1); // delay to let the player shoot before we chastize him for not shooting
+  wait(1);
   level notify("countdown_kill_dialogue_done");
 }
 
@@ -1514,16 +1315,12 @@ road_price_group2_warnings() {
   level endon("road_group2_alerted");
 
   flag_wait("road_group2_lastchance");
-  // "Soap, they're about to find the bodies! We need to take them out!"radio_dialogue("afcaves_pri_findthebodies");
 }
 
 road_moveup_to_kill_group2() {
-  // Price only moves up when the first group is dead
   flag_wait("road_patrol_group1");
 
-  // if we didn't skip the countdown...
   if(!flag("road_group1_countdown_kill_aborted")) {
-    // wait for it to finish, or for it to abort
     if(!flag("group1_countdown_kill_done")) {
       flag_wait_any("group1_countdown_kill_done", "road_group1_countdown_kill_aborted");
     }
@@ -1533,15 +1330,12 @@ road_moveup_to_kill_group2() {
     wait(0.05);
   }
 
-  // make sure everyone in group2 isn't dead already or that they weren't alerted
   if(!flag("road_patrol_group2") && !flag("road_group2_alerted")) {
     thread road_price_group2_warnings();
 
-    wait(0.5); // human reaction time
+    wait(0.5);
 
-    if(!flag("road_patrol_group2") && !flag("road_group2_alerted")) {
-      // "All right, we've got to take out the other group before they come back. Move."thread radio_dialogue("afcaves_pri_beforecomeback");
-    }
+    if(!flag("road_patrol_group2") && !flag("road_group2_alerted")) {}
   }
 
   level.price thread force_weapon_when_player_not_looking("scar_h_thermal_silencer");
@@ -1552,7 +1346,6 @@ road_moveup_to_kill_group2() {
 
   thread road_remove_hillside_clip();
 
-  // activate trigger now that price can move up
   colortrig = GetEnt("trig_script_color_allies_r5", "targetname");
   colortrig trigger_on();
   colortrig notify("trigger");
@@ -1561,44 +1354,34 @@ road_moveup_to_kill_group2() {
   level.price.goalradius = 24;
   anim_ent anim_reach_solo(level.price, "price_slide");
 
-  //if( !flag( "road_group2_alerted" ) )
-  //{
   anim_ent anim_single_solo(level.price, "price_slide");
-  //}
 
   if(!flag("road_group2_alerted")) {
     level.price disable_ai_color();
     level.price.goalradius = 256;
   }
 
-  // first spot on road to move to
   node1 = GetNode("node_price_roadspot_1", "targetname");
   level.price SetGoalNode(node1);
   level.price waittill("goal");
 
   if(!flag("player_slid_downhill") && !flag("road_patrol_group2")) {
-    // nag player to come down the hill
     thread road_moveup_to_kill_group2_nag_player();
   }
 
-  // make sure player is down on the road
   flag_wait("player_slid_downhill");
 
   level.price AllowedStances("stand", "crouch", "prone");
 
-  if(!flag("road_group2_alerted")) {
-    // "Quickly, let's move up and take the others."thread radio_dialogue("afcaves_pri_taketheothers");
-  }
+  if(!flag("road_group2_alerted")) {}
 
   level.price disable_ai_color();
   level.price.goalradius = 64;
 
-  // next spot on road
   node2 = GetNode("node_price_roadspot_2", "targetname");
   level.price SetGoalNode(node2);
   level.price waittill("goal");
 
-  // price can be seen by enemies now
   level.price set_ignoreme(false);
 
   flag_set("price_done_moving_to_road");
@@ -1615,9 +1398,9 @@ road_moveup_to_kill_group2_nag_player() {
   level endon("road_patrol_group2");
 
   lines = [];
-  // Soap! Down here, let's go!
+
   lines[lines.size] = "afcaves_pri_downhere";
-  // Move up! The other group's coming back!
+
   lines[lines.size] = "afcaves_pri_groupsback";
 
   while(!flag("player_slid_downhill")) {
@@ -1638,7 +1421,7 @@ road_remove_hillside_clip() {
     level.removed_hillside_clip = true;
   }
 
-  clip = GetEnt("price_hillside_clip", "targetname"); // so price doesn't fall down the cliff if the dogs attack him
+  clip = GetEnt("price_hillside_clip", "targetname");
   clip ConnectPaths();
   clip NotSolid();
 }
@@ -1648,7 +1431,6 @@ road_group2_coop_kill() {
 
   group2 = get_ai_group_ai("road_patrol_enemies_group2");
 
-  // figure out who's actually there (should be everybody)
   alive = [];
   foreach(ai in group2) {
     if(IsAlive(ai)) {
@@ -1657,11 +1439,8 @@ road_group2_coop_kill() {
   }
   ASSERT(alive.size == 3);
 
-  // "I'm in position - take the shot."thread radio_dialogue("afcaves_pri_taketheshot");
-
   thread road_group2_price_shoot_with_player(group2);
 
-  // wait for guys to turn around
   msg = "";
   if(!flag("road_group2_coming_back")) {
     msg = level waittill_any_return("player_shot_someone_in_group1", "road_group2_coming_back");
@@ -1670,33 +1449,21 @@ road_group2_coop_kill() {
   if(msg == "road_group2_coming_back" || flag("road_group2_coming_back")) {
     level notify("price_shoot_abort");
 
-    // send Price back up the road a bit	
     thread road_group2_price_reposition();
   } else {
-    // otherwise we're done since the player engaged these guys
     return;
   }
 
   msg = level waittill_any_return("price_repositioned", "road_group2_alerted");
 
   if(msg == "price_repositioned") {
-    // "I'm in position, ready to shoot."thread radio_dialogue("afcaves_pri_readytoshoot");
-
-    // wait to shoot again
     thread road_group2_price_shoot_with_player(group2);
   } else {
-    // player engaged enemies or they were alerted somehow
     return;
   }
-
-  //flag_wait( "road_group2_lastchance" );
-
-  // "Soap, they're about to find the bodies! We need to take them out!"//radio_dialogue( "afcaves_pri_findthebodies" );
 }
 
 road_group2_price_reposition() {
-  // "Soap, they're coming back -I'm repositioning to get out of sight."thread radio_dialogue("afcaves_pri_repositioning");
-
   level.price.goalradius = 96;
 
   node = GetNode("node_price_roadspot_1", "targetname");
@@ -1709,7 +1476,6 @@ road_group2_price_reposition() {
 road_group2_price_shoot_with_player(group2) {
   level endon("price_shoot_abort");
 
-  // sort humans into the first slot
   arr = [];
   foreach(guy in group2) {
     if(IsAlive(guy) && !guy is_dog()) {
@@ -1725,14 +1491,12 @@ road_group2_price_shoot_with_player(group2) {
 
   group2 = arr;
 
-  // wait for the player to shoot
   array_thread(group2, ::road_group2_coop_kill_trackdamage);
   level waittill("player_shot_someone_in_group2", victim);
 
   price_be_lethal();
   level.price ClearEnemy();
 
-  // Price shoots with the player
   while(!all_dead(group2)) {
     foreach(ai in group2) {
       if(!IsAlive(ai)) {
@@ -1763,7 +1527,6 @@ road_group2_coop_kill_trackdamage() {
 road_clear() {
   level endon("road_uav_inbound");
 
-  // deathflags
   flag_wait("road_patrol_group1");
   flag_wait("road_patrol_group2");
 
@@ -1771,31 +1534,20 @@ road_clear() {
 
   price_be_stealthy();
 
-  wait(1.25); // human reaction time
+  wait(1.25);
 
-  if(!flag("road_player_broke_stealth") || (flag("road_player_broke_stealth") && flag("road_group1_killed_without_stealthbreak"))) {
-    // "We don't have much time before they find the bodies. Let's keep moving."thread radio_dialogue("afcaves_pri_muchtime");
-  } else {
-    // don't chastize for group2 stealthbreak because that encounter is pretty easy if player breaks stealth
-    if(!flag("road_group1_killed_without_stealthbreak")) {
-      // "Soap, these aren't your average muppets. No more mistakes, let's go."radio_dialogue("afcaves_pri_nomistakes");
-    }
+  if(!flag("road_player_broke_stealth") || (flag("road_player_broke_stealth") && flag("road_group1_killed_without_stealthbreak"))) {} else {
+    if(!flag("road_group1_killed_without_stealthbreak")) {}
   }
 
   flag_wait("price_done_moving_to_road");
-
-  //thread road_price_sees_thermalspike();
 
   flag_set("rappel_threads");
 }
 
 road_price_sees_thermalspike() {
-  flag_wait("price_dialogue_thermalspike"); // flag triggered by price or player which ever hits it first
-
-  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"radio_dialogue("pri_thermalspike");
+  flag_wait("price_dialogue_thermalspike");
 }
-
-// --------------------- // --- AUSSIE RAPPEL --- // --------------------- rappel_setup() {
 flag_wait("rappel_threads");
 
 thread rappel_guard_weapons();
@@ -1817,8 +1569,7 @@ rappel_zodiacs() {
   zodiacs = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("veh_rappel_zodiac");
 }
 
-rappel_guard_weapons() //
-{
+rappel_guard_weapons() {
   guards_guns = getEntArray("guard_weapons", "targetname");
   foreach(gun in guards_guns) {
     gun makeunusable();
@@ -1848,7 +1599,7 @@ rappel_player_rappel_setup() {
   wait(0.5);
 
   rappel_trigger = getent("player_rappel_trigger", "targetname");
-  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT"); // Press and hold^3 && 1 ^7to rappel
+  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT");
 
   for(;;) {
     rappel_trigger waittill("trigger");
@@ -1865,9 +1616,6 @@ rappel_player_rappel_setup() {
 
 rappel_effects() {
   flag_wait("rappel_end");
-
-  // done in guard react now
-  //exploder( "rappel_disturbance" );
 }
 
 rappel_prices_rappel_start() {
@@ -1883,8 +1631,6 @@ rappel_prices_rappel_start() {
   if(!flag("player_hooking_up"))
     level.price.anim_ent thread anim_loop_solo(level.price, "pri_rappel_idle");
 }
-
-// a notetrack in the pri_rappel_setup animation calls this
 price_rope_hookup(guy) {
   level.price_rope = spawn_anim_model("rope_price", level.price.anim_ent.origin);
   level.price.anim_ent thread anim_single_solo(level.price_rope, "rope_hookup");
@@ -1901,7 +1647,6 @@ rappel_price_rappel(anim_ent) {
   level.price set_ignoreme(true);
   level.price set_ignoreme(true);
 
-  // price is hooked up, now switch to the other rope model.	
   level.price_rope Delete();
   level.price_rope = spawn_anim_model("rappel_rope_price", level.price.anim_ent.origin);
 
@@ -1930,8 +1675,8 @@ rappel_kill_enemy_hint() {
   level.player enableweapons();
 
   cone = 8;
-  // lerp view back to 0 fov
-  level.player LerpViewAngleClamp(0.5, 0.2, 0.2, cone, cone, cone, cone); //( 0.5, 0.2, 0.2, 0, 0, 0, 0 )
+
+  level.player LerpViewAngleClamp(0.5, 0.2, 0.2, cone, cone, cone, cone);
 
   wait(DO_IT_TIME);
 
@@ -1946,8 +1691,7 @@ rappel_guards_think() {
   self set_ignoreme(true);
 }
 
-rappel_guard2_patrol() // this is the guard below the price
-{
+rappel_guard2_patrol() {
   level endon("player_killing_guard");
 
   anim_ent = getent("flick_animent", "targetname");
@@ -1959,8 +1703,7 @@ rappel_guard2_patrol() // this is the guard below the price
   anim_ent thread anim_loop_solo(self, "guardB_idle", "stop_guardB_idle");
 }
 
-rappel_guard2_death() // this is the guard below the price
-{
+rappel_guard2_death() {
   anim_ent = getent("rappel_animent", "targetname");
   self.animname = "guard_2";
 
@@ -1976,8 +1719,7 @@ rappel_guard2_death() // this is the guard below the price
   self kill();
 }
 
-rappel_guard2_kill_player() // this is the guard below the price
-{
+rappel_guard2_kill_player() {
   level endon("player_killing_guard");
 
   anim_ent = getent("flick_animent", "targetname");
@@ -1990,8 +1732,7 @@ rappel_guard2_kill_player() // this is the guard below the price
   anim_ent thread anim_single_solo(self, "guardB_react");
 }
 
-rappel_guard1_kill_player() // this is the guard below the player
-{
+rappel_guard1_kill_player() {
   level endon("player_killing_guard");
 
   anim_ent = getent("players_rappel_guard", "targetname");
@@ -2051,24 +1792,13 @@ rappel_dialogue() {
 
   flavorbursts_off("axis");
 
-  //Price: "Here we go - hook up here."radio_dialogue("pri_hookup");
-
-  // "Disciple Four, Oxide. What's your status, over?"thread radio_dialogue("afcaves_schq_d4whatsyourstatus");
-
   flag_wait("player_hooking_up");
-
-  // "Disciple Four, Oxide, do you copy, over?"thread radio_dialogue("afcaves_schq_d4doyoucopy");
 
   wait 5.5;
   thread autosave_by_name("rappeling");
 
-  //Price: "Go."radio_dialogue_overlap("pri_go");
-
-  // "Hey, I'm not gettin' anything from Disciple Four at the north ridge road. Could be a bad transmitter."thread radio_dialogue("afcaves_schq_badtransmitter");
-
   level.price thread play_sound_on_entity("scn_afcaves_rappel_start_npc");
   wait 5.3;
-  //Price: "Got two tangos down below."radio_dialogue("pri_2inthechest");
 
   flag_wait("rappel_end");
 
@@ -2079,9 +1809,7 @@ rappel_dialogue() {
     }
   }
 
-  if(!flag("player_killing_guard")) {
-    //Price: "Do it."radio_dialogue("pri_doit");
-  }
+  if(!flag("player_killing_guard")) {}
 }
 
 rappel_price_hookup_nag() {
@@ -2094,21 +1822,15 @@ rappel_price_hookup_nag() {
       break;
     }
 
-    //* Price: "Soap, hook up."radio_dialogue("pri_soaphookup");
-
     wait(randomintrange(20, 30));
     if(flag("player_hooking_up")) {
       break;
     }
 
-    //* Price: "Soap, what's the problem? Hook up to the railing."radio_dialogue("pri_whatstheproblem");
-
     wait(randomintrange(20, 30));
     if(flag("player_hooking_up")) {
       break;
     }
-
-    //* Price: "Soap, hook up, let's go."radio_dialogue("pri_hookupletsgo");
   }
 }
 
@@ -2135,11 +1857,8 @@ rappel_price_setup_at_cave() {
   level.price set_ignoreall(true);
   level.price set_ignoreme(true);
   level.price.dontshootwhilemoving = undefined;
-  level.price.baseAccuracy = 25; // I want him to take out a some enemies, but not all of them.
+  level.price.baseAccuracy = 25;
 }
-
-// ------------------------- // --- CAVE 1 (BARRACKS) --- // ------------------------- barracks_setup() {
-// SPAWNFUNCS
 first_patroller = GetEnt("backdoor_barracks_patroller_guy1", "targetname");
 first_patroller thread add_spawn_function(::barracks_firstpatroller_spawnfunc);
 first_patroller thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
@@ -2168,10 +1887,6 @@ array_thread(nearleftguys, ::add_spawn_function, ::barracks_stealthsettings_spaw
 
 stairguys = getEntArray("barracks_stairguys", "targetname");
 array_thread(stairguys, ::add_spawn_function, ::barracks_stairguys_spawnfunc);
-//array_thread( stairguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc );
-// END SPAWNFUNCS
-
-// wait for rappel to end before starting these threads
 flag_wait("end_of_rappel_scene");
 
 flavorbursts_on("axis");
@@ -2213,12 +1928,10 @@ barracks_stealthsettings_spawnfunc() {
 
   self.a.disableLongDeath = true;
 
-  arr["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2; // escalate to searching immediately
+  arr["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
   arr["attack"] = ::small_goal_attack_behavior;
   self stealth_threat_behavior_replace(arr);
 }
-
-// guys wait less time before telling others about where the player is
 barracks_prespotted_func() {
   wait(0.5);
 }
@@ -2230,14 +1943,12 @@ barracks_enemy_event_override_func(type) {
 }
 
 barracks_nearleftguy_spawnfunc() {
-  // player is sprinting the level
   if(!flag("barracks_biggroup_gone")) {
     wait(0.1);
     self notify("end_patrol");
     self.baseaccuracy = 500;
     self playerseek();
   } else {
-    // need to detect the player shooting one of them to make it look like they're visible by the center group
     self thread barracks_nearleftguy_alertondeath();
   }
 }
@@ -2282,7 +1993,6 @@ barracks_firstpatroller_spawnfunc() {
 
   level.barracks_firstpatroller = self;
 
-  // catch player trying to skirt around to the left of where this guy pauses
   self thread barracks_firstpatroller_catch_player_sneaking_left();
 }
 
@@ -2346,7 +2056,6 @@ barracks_action() {
 
   thread barracks_rightside_warning();
 
-  //Price: "Let's go."thread radio_dialogue("pri_letsgo");
   flag_set("barracks_follow_price");
 
   thread autosave_stealth();
@@ -2358,16 +2067,13 @@ barracks_action() {
   flag_wait("backdoor_hallway_midpoint");
 
   barracks_backdoor_stealth_settings();
-  SetSavedDvar("aim_aimAssistRangeScale", "0"); // no aim assist right here so we don't auto track the big group
+  SetSavedDvar("aim_aimAssistRangeScale", "0");
 
   thread barracks_price_biggroup_dodgeflag_set();
   thread price_goto_node("price_easynow_node");
 
-  // first guy walking by
   thread activate_trigger_with_targetname("spawn_patroller_guy1");
-  // "Tango up ahead. Do not engage."thread radio_dialogue("afcaves_pri_tangoupahead");
 
-  // wait for the first patroller to get to his idle spot, or die, before spawning the other group
   flag_wait_any("backdoor_firstpatroller_idlespot_reached", "backdoor_firstpatroller_deathflag");
 
   if(!flag("backdoor_firstpatroller_deathflag")) {
@@ -2376,20 +2082,14 @@ barracks_action() {
   }
 
   if(flag("backdoor_firstpatroller_deathflag")) {
-    // human reaction time
     wait(1);
   }
-
-  // "Patrol coming our way - go left, quickly!"thread radio_dialogue("afcaves_pri_patrolcoming");
 
   thread price_goto_node("node_barracks_price_biggroup_spotted");
 
   if(flag("backdoor_firstpatroller_deathflag")) {
-    // add spawnfunc to have them look for the player if he killed the first guard
     biggroupSpawners = getEntArray("barracks_biggroup", "targetname");
     array_thread(biggroupSpawners, ::add_spawn_function, ::alert_heard_scream);
-
-    // "The guards know something's not right. Get out of sight and stay quiet."thread radio_dialogue("afcaves_pri_guardsknow");
   }
 
   thread activate_trigger_with_targetname("trig_barracks_biggroup_spawn");
@@ -2398,33 +2098,27 @@ barracks_action() {
   level.price.moveplaybackrate = 1;
   level.price cqb_walk("off");
   level.price.neverEnableCQB = true;
-  //level.price AllowedStances( "crouch" );
 
-  level.price waittill_any_timeout(7.5, "goal"); // timeout in case Price gets hung up on something... this has never actually happened in my testing though
+  level.price waittill_any_timeout(7.5, "goal");
 
-  wait(3.5); // let them start passing
+  wait(3.5);
 
   flag_set("barracks_biggroup_passingby");
 
   if(!flag("backdoor_firstpatroller_deathflag")) {
-    // "Let them pass."radio_dialogue("afcaves_pri_letthempass");
     thread barracks_biggroup_wiretap_dialogue();
   }
 
-  // wait till all guys have passed
   thread barracks_biggroup_waittill_gone();
   flag_wait("barracks_biggroup_gone");
 
   barracks_waittill_stealth_normal();
 
-  // take out the smoking guy if he's still around
   firstPatrollerWasAround = false;
   if(!flag("backdoor_firstpatroller_deathflag") && !flag("backdoor_firstpatroller_left_idle_area")) {
     firstPatrollerWasAround = true;
 
     level.barracks_firstpatroller.health = 5;
-
-    // "Take out the guard having a smoke, or wait for him to move along."thread radio_dialogue("afcaves_pri_havingasmoke");
   }
 
   msg = flag_wait_any_return("backdoor_firstpatroller_deathflag", "backdoor_firstpatroller_left_idle_area");
@@ -2433,17 +2127,14 @@ barracks_action() {
   barracks_waittill_stealth_normal();
 
   if(firstPatrollerWasAround && msg == "backdoor_firstpatroller_deathflag") {
-    // "Good night."radio_dialogue_stop();
     wait(0.35);
     thread radio_dialogue("pri_goodnight");
-    wait(1); // non superhuman reaction time before moving
+    wait(1);
   }
 
   thread autosave_stealth();
 
   SetSavedDvar("aim_aimAssistRangeScale", "1");
-
-  //Price: "Let's go."thread radio_dialogue("pri_letsgo");
 
   thread barracks_nearleft_dialogue();
 
@@ -2452,33 +2143,25 @@ barracks_action() {
   level.price.neverEnableCQB = false;
   level.price AllowedStances("prone", "crouch", "stand");
 
-  // move up to the broken wall
   if(!flag("player_near_price_shuffle_start") && !flag("player_near_price_at_broken_wall")) {
     thread price_goto_node("price_smoker_node");
     flag_wait_any("player_near_price_shuffle_start", "player_near_price_at_broken_wall");
   }
 
-  // move to the broken covercrouch wall right next to the center area
   thread price_goto_node("node_price_shuffle_start");
   level.price waittill("goal");
 
   flag_wait("player_near_price_shuffle_start");
 
-  if(Distance(level.player.origin, level.price.origin) <= 256) {
-    // "Easy now."delaythread(0.5, ::radio_dialogue, "afcaves_pri_easynow");
-  }
+  if(Distance(level.player.origin, level.price.origin) <= 256) {}
 
-  // make sure the player hasn't run way ahead, otherwise the flag has already been set and
-  //won't kill the scripted shuffle in time
   if(!flag("barracks_player_near_stair_shooting_spot")) {
-    // scripted shuffle!price shuffles down the wall to the left
     node = GetNode("node_price_barracks_near_center_2", "targetname");
     level.price.scripted_shuffleNode = node;
     level.price AnimCustom(::scripted_covercrouch_shuffle_left);
     level.price waittill("scripted_shuffle_done");
   }
 
-  // move to the left of the barracks area
   thread barracks_nearleft_patrollers_watchsix();
 
   thread price_goto_node("price_going_left_node");
@@ -2490,14 +2173,12 @@ barracks_action() {
     price_wait_for_player(240, node);
   }
 
-  // move up near the end of the left path
   thread price_goto_node("node_barracks_price_countdown_kill");
 
   flag_wait("barracks_player_near_stair_shooting_spot");
 
   thread autosave_stealth();
 
-  // guys come down the stairs for a coop kill
   thread barracks_stair_guys_coop_kill();
   flag_wait_any("barracks_stairguys_countdown_kill_done", "barracks_stairguys_countdown_kill_aborted");
 
@@ -2511,7 +2192,6 @@ barracks_action() {
     price_wait_for_player(240, node);
   }
 
-  // level progression
   flag_set("steamroom_start");
 }
 
@@ -2520,10 +2200,8 @@ barracks_firstpatroller_catch_player_sneaking_left() {
   level endon("_stealth_spotted");
   level endon("barracks_firstpatroller_catch_player_abort");
 
-  // wait for flag trigger - player is trying to sneak around the left side
   flag_wait("player_near_price_shuffle_start");
 
-  // alert if alive
   if(IsAlive(self)) {
     self.health = 150;
     self.favoriteenemy = level.player;
@@ -2531,14 +2209,12 @@ barracks_firstpatroller_catch_player_sneaking_left() {
 }
 
 alert_heard_scream() {
-  wait(0.1); // let stealth initialize
+  wait(0.1);
   self notify("heard_scream", level.player.origin);
 }
 
 barracks_waittill_stealth_normal() {
   if(!stealth_is_everything_normal()) {
-    // "The guards know something's not right. Get out of sight and stay quiet."thread radio_dialogue("afcaves_pri_guardsknow");
-
     while(!stealth_is_everything_normal()) {
       wait(0.05);
     }
@@ -2550,8 +2226,6 @@ barracks_nearleft_dialogue() {
   level endon("_stealth_spotted");
 
   flag_wait("price_dialogue_stayleft");
-
-  // "Two tangos in this corridor - hold your fire and stay to the left."radio_dialogue("afcaves_pri_incorridor");
 
   thread barracks_wiretap_dialogue();
 }
@@ -2578,7 +2252,6 @@ barracks_rightside_warning() {
       continue;
     }
 
-    // "Soap, that area's full of hostiles. We should keep to the left to avoid being spotted."radio_dialogue("afcaves_pri_avoidbeingspotted");
     break;
   }
 }
@@ -2608,11 +2281,10 @@ barracks_backdoor_stealth_settings() {
   stealth_detect_ranges_set(hidden);
 
   corpseDists = [];
-  corpseDists["player_dist"] = 725; // if the player is farther than this away from a corpse, and level.corpse_behavior_doesnt_require_player_sight isn't set, the AI won't see the corpse
-  corpseDists["sight_dist"] = 400; // how far away AIs will spot a corpse
+  corpseDists["player_dist"] = 725;
+  corpseDists["sight_dist"] = 400;
   stealth_corpse_ranges_custom(corpseDists);
 
-  // reset from the road event where we needed this set
   level.corpse_behavior_doesnt_require_player_sight = undefined;
 }
 
@@ -2626,23 +2298,17 @@ barracks_nearleft_patrollers_watchsix() {
   level endon("steamroom_start");
   level endon("barracks_player_near_stair_shooting_spot");
 
-  // the first flag gets set when the patrollers hit a node on their patrol path, //the second flag gets set whenever the player is touching a trigger
   flag_wait_all("barracks_nearleft_patroller_comingback", "barracks_player_farleft_back_area");
-
-  // "Tangos on our six."radio_dialogue("afcaves_pri_tangosonsix");
 }
 
 barracks_wiretap_dialogue() {
   flavorbursts_off("axis");
 
   if(!flag("nearleft_guys_turnaround")) {
-    // "Disciple Five, Oxide. Gimme a sitrep over."radio_dialogue("afcaves_schq_sitrep");
     wait(2);
   }
 
-  if(!flag("nearleft_guys_turnaround")) {
-    // "Disciple Five, Oxide. Gimme a sitrep over. [second time]"radio_dialogue("afcaves_schq_sitrepover");
-  }
+  if(!flag("nearleft_guys_turnaround")) {}
 
   flag_wait("barracks_stairguys_countdown_kill_done");
 
@@ -2651,7 +2317,6 @@ barracks_wiretap_dialogue() {
 
 barracks_stair_guys_coop_kill() {
   if(Distance2D(level.player.origin, level.price.origin) > 670) {
-    // we need to warp price up behind the player cause he's too far behind
     level.price notify("stop_going_to_node");
     level.price thread waittill_goal_stealthspotted_interrupt();
 
@@ -2669,7 +2334,6 @@ barracks_stair_guys_coop_kill() {
 
   flag_set("barracks_stairguys_spawned");
 
-  // figure out the guy the player is supposed to kill
   playerVictim = undefined;
   priceVictim = undefined;
   foreach(guy in guys) {
@@ -2683,7 +2347,7 @@ barracks_stair_guys_coop_kill() {
   }
   ASSERT(isDefined(playerVictim), isDefined(priceVictim));
 
-  level endon("_stealth_spotted"); // end if we're not stealthy anymore
+  level endon("_stealth_spotted");
   thread barracks_stairguys_countdown_kill_spottedflag();
 
   level.playerShotCorrectVictim = undefined;
@@ -2698,7 +2362,6 @@ barracks_stair_guys_coop_kill() {
     playerTimedOut = true;
   }
 
-  // trade target groups if the player shot the "wrong" guy
   if(isDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
     temp = priceVictim;
     priceVictim = playerVictim;
@@ -2716,31 +2379,19 @@ barracks_stair_guys_coop_kill() {
 
   flag_wait("barracks_stairguys_deathflag");
 
-  // wait so Price has non-superhuman reaction time
   wait(1);
 
   sayMove = false;
-  // congratulate the player if stealth wasn't broken
-  if(!flag("barracks_stairguys_countdown_kill_aborted")) {
-    // player killed them both
-    if(level.player.stealthkills == 2) {
-      // "Impressive."radio_dialogue("afcaves_pri_impressive");
-    }
-    // player kinda messed up and shot a different guy than Price said
-    else if(!level.playerShotCorrectVictim) {
-      // "Close enough."radio_dialogue("afcaves_pri_closeenough");
 
+  if(!flag("barracks_stairguys_countdown_kill_aborted")) {
+    if(level.player.stealthkills == 2) {} else if(!level.playerShotCorrectVictim) {
       sayMove = true;
     }
   } else {
     sayMove = true;
   }
 
-  if(sayMove) {
-    // "Move."thread radio_dialogue("afcaves_pri_move2");
-  } else {
-    // "Clear. Go."thread radio_dialogue("afcaves_pri_cleargo");
-  }
+  if(sayMove) {} else {}
 
   price_be_stealthy();
 
@@ -2789,19 +2440,7 @@ barracks_stair_guys_coop_kill_countdown_dialogue() {
   level endon("player_shot_someone_on_stairs");
   level endon("barracks_stairguys_countdown_aborted");
 
-  // "Soap, we've got two tangos with taclights coming down the stairs under that red light, dead ahead. We've got to take 'em out before they find us."radio_dialogue("afcaves_pri_tangoswithtaclights");
-
-  // "I'll take the one on the right. On my mark."radio_dialogue("afcaves_pri_takeoneright");
-
-  // "Three..."radio_dialogue("afcaves_pri_three");
-
-  // "Two..."radio_dialogue("afcaves_pri_two");
-
-  // "One..."radio_dialogue("afcaves_pri_one");
-
-  // "Mark."radio_dialogue("afcaves_pri_mark");
-
-  wait(0.5); // lets the player shoot before we set the flag
+  wait(0.5);
   flag_set("barracks_stairguys_countdown_dialogue_done");
 }
 
@@ -2833,23 +2472,12 @@ barracks_biggroup_wiretap_dialogue() {
 
   flavorbursts_off("axis");
 
-  // "Butcher Seven, Oxide. We've lost contact with Disciple Four uh...probably just the sandstorm that's rollin' in or a bad transmitter. Send a team to check it out, over."//radio_dialogue( "afcaves_schq_sendateam" );
-
-  // "Butcher Seven, Oxide. We've lost contact with Disciple Four."radio_dialogue("afcaves_schq_lostcontact2");
-
-  // "Probably just the sandstorm that's rollin' in or a bad transmitter."radio_dialogue("afcaves_schq_badtransmitter2");
-
-  // "Send a team to check it out, over."radio_dialogue("afcaves_schq_sendateam2");
-
-  // "Roger that Oxide, I'll send Vinson and Lambert. Butcher Seven out."radio_dialogue("afcaves_sc2_sendvinson");
-
   flavorbursts_on("axis");
 }
 
 barracks_biggroup_waittill_gone() {
   areatrig = GetEnt("trig_barracks_biggroup_pathstart_area", "targetname");
 
-  // the guys spawn in staggered so we have to account for them not all being there at the start
   aigroup = "barracks_biggroup";
   guys = [];
   while(!guys.size) {
@@ -2885,10 +2513,8 @@ barracks_stealthbreak_action() {
 
   flag_set("barracks_stealth_broken");
 
-  // reset things that may have been set during stealth
   SetSavedDvar("aim_aimAssistRangeScale", "1");
 
-  // clean up triggers we don't want anymore, and kill their spawners
   delete_and_kill_targeted_spawners_by_targetname_safe("trig_barracks_centergroup_walker_spawn");
   delete_and_kill_targeted_spawners_by_targetname_safe("trig_barracks_nearleft_guys_spawn");
   delete_and_kill_targeted_spawners_by_targetname_safe("spawn_patroller_guy1");
@@ -2898,12 +2524,10 @@ barracks_stealthbreak_action() {
   level.price.maxsightdistsqrd = level.price_weaponsfree_sightDistSqrd;
   level.price.baseaccuracy = 50;
 
-  wait(2); // give player and price a chance to react
+  wait(2);
 
-  // spawn enemies to defend steamroom entrance (or delete the spawners, if we're too close)
   thread barracks_stealthbreak_steamroom_defenders();
 
-  // alert everyone
   axis = GetAiArray("axis");
   closest = get_array_of_closest(level.player.origin, axis);
   foreach(guy in axis) {
@@ -2916,25 +2540,19 @@ barracks_stealthbreak_action() {
 
   thread barracks_stealthbreak_abandoned_price_watcher();
 
-  // enemies search out player after some time passes
   thread barracks_stealthbreak_delayed_playerseek();
 
   thread barracks_stealthbreak_enemies_cleanup();
 
-  // wait for guys to die off
   flag_wait_all("backdoor_firstpatroller_deathflag", "barracks_centergroup_deathflag", "barracks_nearleft_guys_deathflag");
 
   if(!flag("player_at_stairs_before_steamroom")) {
-    // price move up to near the steamroom stairs
     thread price_goto_node("node_barracks_stealthbreak_price_nearexit");
   }
 
-  // wait for door guards to die
   flag_wait("barracks_steamroom_defenders_deathflag");
 
   flag_set("barracks_stealthbreak_survived");
-
-  // "Keep moving."radio_dialogue("pri_keepmoving");
 
   spot = GetEnt("steamroom_price", "targetname");
   level.price notify("price_goto_node");
@@ -2942,7 +2560,6 @@ barracks_stealthbreak_action() {
 
   thread autosave_by_name("barracks_stealthbreak_survived");
 
-  // alternate level progression
   flag_set("steamroom_start");
 }
 
@@ -2973,29 +2590,23 @@ barracks_stealthbreak_abandoned_price_watcher() {
       continue;
     }
 
-    // wait until warning time
     while(level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < warnTime) {
       wait(0.05);
     }
 
-    // check if we can still do the warning
     if(!level.player IsTouching(trig) || flag("barracks_stealthbreak_survived")) {
       wait(0.05);
       continue;
     }
 
     if(!playerWarned) {
-      // warn player
-      // "Soap, where are you? Get back here!"radio_dialogue("afcaves_pri_getbackhere");
       playerWarned = true;
     }
 
-    // wait until ending time
     while(level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < failTime) {
       wait(0.05);
     }
 
-    // check if we can still fail the player
     if(!level.player IsTouching(trig) || flag("barracks_stealthbreak_survived")) {
       wait(0.05);
       continue;
@@ -3013,8 +2624,8 @@ barracks_stealthbreak_delayed_playerseek() {
   wait(20);
 
   axis = GetAiArray("axis");
-  array_thread(axis, ::be_aggressive); // don't use cover, use flashbangs a bit more
-  array_thread(axis, ::playerseek); // go find the player
+  array_thread(axis, ::be_aggressive);
+  array_thread(axis, ::playerseek);
 }
 
 barracks_stealthbreak_enemies_cleanup() {
@@ -3061,7 +2672,6 @@ barracks_kill_when_player_not_looking() {
 
   minDistSqrd = 256 * 256;
 
-  //while( within_fov( level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine[ "45" ] ) )
   while(players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
     if(!flag("steamroom_entrance")) {
       wait(RandomFloatRange(0.5, 2));
@@ -3083,12 +2693,8 @@ barracks_stealthbreak_dialogue() {
   level.player endon("death");
 
   broken = [];
-  // "They're onto us - go loud."broken[0] = "afcaves_pri_ontousgoloud";
-  // "We're compromised - go loud."broken[1] = "afcaves_pri_compromisedgoloud";
 
   recover = [];
-  // "We got lucky that time."recover[0] = "afcaves_pri_gotlucky";
-  // "That was close."recover[1] = "afcaves_pri_thatwasclose";
 
   while(!flag("steamroom_start")) {
     flag_wait("_stealth_spotted");
@@ -3108,9 +2714,6 @@ barracks_stealthbreak_dialogue() {
 
 barracks_stealthbreak_enemy_dialogue() {
   lines = [];
-  // "I see him, he's over here!"lines[0] = "afcaves_sc1_iseehim";
-  // "Intruder spotted!"lines[1] = "afcaves_sc1_spotted";
-  // "Hostile at my location!"lines[2] = "afcaves_sc1_hostilemyloc";
 
   radio_dialogue_stop();
 
@@ -3119,7 +2722,7 @@ barracks_stealthbreak_enemy_dialogue() {
   foreach(guy in axis) {
     if(IsAlive(guy) && isDefined(guy._stealth)) {
       guy thread radio_dialogue(random(lines));
-      wait(0.05); // let the dialogue get into the queue before anything after this returns
+      wait(0.05);
       break;
     }
   }
@@ -3159,7 +2762,6 @@ barracks_chess_players() {
 
   array_thread(guys, ::barracks_chess_player_notify_when_broken, "chess_players_broken");
   array_thread(guys, ::set_allowdeath, true);
-  //array_thread( guys, ::set_ignoreall, true );
 
   node = GetEnt("chess_ent", "targetname");
   node2 = spawn("script_origin", node.origin);
@@ -3219,11 +2821,7 @@ barracks_enemy_cleanup() {
 
   thread AI_delete_when_out_of_sight(guys, 256);
 }
-
-// ----------------- // --- STEAMROOM --- // ----------------- steamroom_setup() {
 thread steamroom_before_player_gets_there_setup();
-
-// wait for level progression
 flag_wait("steamroom_start");
 
 if(!flag("barracks_stealth_broken") && !flag("player_pre_steamroom_stairs")) {
@@ -3236,7 +2834,6 @@ thread steamroom_action();
 }
 
 steamroom_before_player_gets_there_setup() {
-  // wait for player to get close
   flag_wait("player_at_stairs_before_steamroom");
   exploder("steamroom_steamclouds");
   thread steamroom_lighting_setup();
@@ -3259,18 +2856,6 @@ steamroom_gate_swap() {
       continue;
     }
 
-    /*
-    if( DistanceSquared( level.player.origin, level.steamroom_gate_closed.origin ) < distSqrd )
-    {
-    	continue;
-    }
-    		
-    if( within_fov( level.player.origin, level.player GetPlayerAngles(), level.steamroom_gate_closed.origin, level.cosine[ "45" ] ) )
-    {
-    	continue;
-    }
-    */
-
     break;
   }
 
@@ -3288,7 +2873,6 @@ steamroom_price_setup() {
   level.price disable_ai_color();
   price_be_stealthy();
 
-  //flag_wait( "player_at_stairs_before_steamroom" );
   flag_wait("steamroom_door_blown");
   level.price cqb_walk("off");
   level.price.neverEnableCQB = true;
@@ -3308,14 +2892,12 @@ steamroom_action() {
   flag_wait("steamroom_price_moveup_2");
 
   thread autosave_by_name("barracks_doorbreach");
-  steamroom_price_teleport(); // teleport him forward if he's still in the barracks
+  steamroom_price_teleport();
   thread steamroom_blow_door();
 
-  //thread vision_set_fog_changes( "af_caves_indoors_steamroom_dark", 2.25 );
   thread vision_set_fog_changes("af_caves_indoors_steamroom", 2.25);
   delaythread(2, ::steamroom_price_start_ambush);
 
-  // wait for ambush
   flag_wait_any("steamroom_ambush_started", "steamroom_player_spotted");
 
   if(!flag("steamroom_ambush_started")) {
@@ -3327,15 +2909,12 @@ steamroom_action() {
   thread steamroom_patrollers_protect_door();
   thread steamroom_enemies_cleanup();
 
-  // wait for guys to die off
   flag_wait_all("steamroom_patrollers_deathflag", "steamroom_patrollers_group2_deathflag");
 
   if(!flag("player_clear_steamroom")) {
-    // price move up to near the door
     thread price_goto_node("node_steamroom_price_near_door");
   }
 
-  // wait for door guards to die
   flag_wait("steamroom_patrollers_doorguard_deathflag");
 
   thread steamroom_ambush_finish_dialogue();
@@ -3346,7 +2925,6 @@ steamroom_action() {
     price_goto_node_and_wait_for_player("node_steamroom_price_exit_bodyup", 320);
   }
 
-  // level progression
   flag_set("steamroom_done");
 }
 
@@ -3411,7 +2989,6 @@ steamroom_kill_when_player_not_looking() {
 
   minDistSqrd = 256 * 256;
 
-  //while( within_fov( level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine[ "45" ] ) )
   while(players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
     if(!flag("steamroom_exit")) {
       wait(RandomFloatRange(0.5, 2));
@@ -3489,8 +3066,6 @@ steamroom_price_teleport() {
   level.price notify("scripted_teleport");
   level.price ForceTeleport(pos, angles);
 }
-
-// --- KNIFE KILL SEQUENCE -- steamroom_knifekill_setup() {
 animref = GetEnt("steamroom_price_stealthkill_animref", "targetname");
 
 spawner = GetEnt(animref.target, "targetname");
@@ -3520,8 +3095,6 @@ steamroom_price_knifekill() {
     return;
   }
 
-  // "Top of the staircase - he's mine."thread radio_dialogue("afcaves_pri_topofstairs");
-
   guard.ignoreall = false;
   guard.allowDeath = true;
   guard.health = 5;
@@ -3534,7 +3107,6 @@ steamroom_price_knifekill() {
   guardIdleAnime = "steamroom_knifekill_guard_idle";
   guardReactAnime = "steamroom_knifekill_guard_reaction";
 
-  // guard interruptible idle
   guard thread steamroom_price_knifekill_guard_handlephone(guardReactAnime);
   guard AnimMode("gravity");
   animref thread anim_generic_loop(guard, guardIdleAnime);
@@ -3572,8 +3144,7 @@ steamroom_price_knifekill() {
     price.anim_start_at_groundpos = undefined;
   } else {
     if(IsAlive(guard)) {
-      // price stop where you are until things calm down
-      price notify("new_anim_reach"); // cancel anim_reach movement
+      price notify("new_anim_reach");
       price SetGoalPos(price.origin);
       price thread steamroom_price_knifekill_aborted_movement();
 
@@ -3609,13 +3180,11 @@ steamroom_price_knifekill_foley() {
   flag_wait_any("steamroom_price_knifekill_abort", "steamroom_price_knifekill_walkup_abort", "steamroom_price_knifekill_done");
 
   ent StopSounds();
-  wait(0.05); // or else the sound won't stop
+  wait(0.05);
   ent Delete();
 }
 
-steamroom_price_knifekill_aborted_dialogue() {
-  // "Never mind, then."thread radio_dialogue("afcaves_pri_nevermind");
-}
+steamroom_price_knifekill_aborted_dialogue() {}
 
 steamroom_price_knifekill_guard_handle_death_during_walkup(animref) {
   level endon("steamroom_price_knifekill_committed");
@@ -3640,7 +3209,7 @@ steamroom_price_knifekill_aborted_movement() {
   level.price endon("scripted_teleport");
 
   wait(5);
-  // move up to the doorway
+
   level.price SetGoalPos(groundpos((5207, 9566, -3499)));
 }
 
@@ -3667,7 +3236,7 @@ steamroom_price_knifekill_guard_handlephone(guardReactAnime) {
 
   if(msg == "steamroom_price_knifekill_abort") {
     animTime = GetAnimLength(getanim_generic(guardReactAnime));
-    waitTime = animTime * 0.04; // 4% of the way through
+    waitTime = animTime * 0.04;
     wait(waitTime);
   } else {
     self waittillmatch("single anim", "end_reaction");
@@ -3752,8 +3321,7 @@ steamroom_price_knifekill_catch_player_movement_nearby() {
 
     speed = get_player_speed();
 
-    if(speed > 200) // sprinting or doing weird stuff
-    {
+    if(speed > 200) {
       self notify("playerclose");
     }
   }
@@ -3774,7 +3342,7 @@ player_jump_watcher() {
 
   while(1) {
     level.player waittill("playerjump");
-    wait(0.1); // jumps don't happen immediately
+    wait(0.1);
 
     if(!level.player IsOnGround()) {
       flag_set(jumpflag);
@@ -3796,8 +3364,8 @@ player_jump_watcher_ender() {
 
 get_player_speed() {
   vel = level.player GetVelocity();
-  // figure out the length of the vector to get the speed (distance from world center = length)
-  speed = Distance((vel[0], vel[1], 0), (0, 0, 0)); // don't care about Z velocity
+
+  speed = Distance((vel[0], vel[1], 0), (0, 0, 0));
 
   return speed;
 }
@@ -3848,38 +3416,21 @@ steamroom_price_knifekill_bloodfx(stabWaitTime) {
   wait(stabWaitTime);
   playFX(bloodfx, level.price GetTagOrigin(fxTag));
 }
-// --- END KNIFE KILL SEQUENCE -- steamroom_dialogue() {
-// "Disciple Six, we've lost all contact with Disciple Five. Check it out over."radio_dialogue("afcaves_schq_lostcontact");
 
-if(!flag("steamroom_entrance")) {
-  // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."radio_dialogue("afcaves_sc3_oncatwalk");
-}
+if(!flag("steamroom_entrance")) {}
 
 flag_wait("steamroom_entrance");
 
-// "Oxide, Disciple Six at the steam room. No sign of Five, over."//radio_dialogue( "afcaves_sc3_atsteamroom" );
-
-// "Sounds like we're gonna meet 'em head on, Soap."//radio_dialogue( "afcaves_pri_meetemheadon" );
-
-if(!flag("steamroom_price_moveup_1")) {
-  // "Disciple Six, go dark, breach and clear."radio_dialogue("afcaves_schq_godark");
-
-  // "Here we go - get ready."thread radio_dialogue("afcaves_pri_getready");
-}
+if(!flag("steamroom_price_moveup_1")) {}
 
 flag_set("steamroom_going_dark");
 
-if(!flag("steamroom_price_moveup_2")) {
-  // "Door charge planted. Ready to breach."radio_dialogue("afcaves_sc3_chargeplanted");
-}
+if(!flag("steamroom_price_moveup_2")) {}
 }
 
 steamroom_blow_door() {
   flag_set("steamroom_door_preblow");
 
-  // "Hit it."radio_dialogue("afcaves_scl_hitit");
-
-  // "Breaching, breaching!"thread radio_dialogue("afcaves_sc3_breaching");
   wait(0.8);
 
   exploder(200);
@@ -3908,26 +3459,15 @@ steamroom_blow_door() {
 }
 
 steamroom_ambush_finish_dialogue() {
-  if(!flag("steamroom_exit")) {
-    // "Move."radio_dialogue("afcaves_pri_move2");
-  }
+  if(!flag("steamroom_exit")) {}
+
+  if(!flag("steamroom_exit")) {}
 
   if(!flag("steamroom_exit")) {
-    // "Disciple Nine, your rear guard just flatlined!"radio_dialogue("afcaves_schq_flatlined");
+    wait(2.75);
   }
 
-  if(!flag("steamroom_exit")) {
-    // "Not possible. We just cleared that area. (snort) Nobody's that good Oxi-"thread radio_dialogue("afcaves_sc3_notpossible");
-
-    wait(2.75); // the next line needs to cut this one off a bit to sound right
-
-    // "It's Price."radio_dialogue_overlap("afcaves_shp_itsprice");
-  }
-
-  // don't play if we're close to where we have to give the next objective
-  if(flag("player_awayfrom_steamroom_exit")) {
-    // "Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out."radio_dialogue("afcaves_shp_burntherest");
-  }
+  if(flag("player_awayfrom_steamroom_exit")) {}
 
   flag_set("steamroom_ambush_finish_dialogue_ended");
 }
@@ -3936,35 +3476,6 @@ steamroom_price_start_ambush() {
   level endon("steamroom_ambush_started");
 
   wait(8);
-
-  /*
-  vol = GetEnt( "goalvolume_steamroom_patrollers", "targetname" );
-  numGuysNeeded = 7;
-  	
-  guys = get_ai_group_ai( "steamroom_patrollers" );
-  while( guys.size && !all_dead( guys ) )
-  {
-  	numFound = 0;
-  	foreach( guy in guys )
-  	{
-  		if( vol IsTouching( guy ) )
-  		{
-  			numFound++;
-  		}
-  	}
-  	
-  	if( numFound >= numGuysNeeded )
-  	{
-  		break;
-  	}
-  	
-  	wait( 0.1 );
-  	
-  	guys = get_ai_group_ai( "steamroom_patrollers" );
-  }
-  */
-
-  // "Go loud! Open fire!"thread radio_dialogue("afcaves_pri_goloud");
 
   flag_set("steamroom_ambush_started");
 }
@@ -4001,7 +3512,6 @@ steamroom_patrollers() {
 
   flag_wait_any("steamroom_ambush_started", "steamroom_patrollers_deathflag");
 
-  // spot the player if one of the patrollers dies
   if(!flag("steamroom_ambush_started")) {
     flag_set("steamroom_player_spotted");
   }
@@ -4025,26 +3535,12 @@ steamroom_patroller_group2_wait() {
 
 steamroom_patrollers_pre_ambush_dialogue() {
   level endon("steamroom_ambush_started");
-
-  // "Move in."radio_dialogue("scl_movein");
-
-  // "Foxtrot element, sweep left."radio_dialogue("afcaves_scl_foxtrotelement");
-
-  // "Search pattern Echo Charlie. Go."radio_dialogue("afcaves_scl_patternecho");
-
-  // "Door area clear."radio_dialogue("afcaves_sc3_areaclear");
-
-  // "Check your corners."radio_dialogue("afcaves_scl_checkcorners");
 }
 
 steamroom_patrollers_post_ambush_dialogue() {
   level endon("steamroom_patrollers_group2_deathflag");
 
-  // "They're here! Open fire!"radio_dialogue("afcaves_scl_theyrehere");
-
   wait(5);
-
-  // "Stay frosty, hunt them down!"radio_dialogue("afcaves_scl_huntthemdown");
 }
 
 steamroom_patroller_think() {
@@ -4071,8 +3567,6 @@ steamroom_patroller_think() {
     self thread maps\_patrol::patrol(self.target);
     wait(0.1);
     self thread patroller_do_cqbwalk();
-    //self.script_idlereach = true;
-    //self thread maps\_idle::idle();
 
     flag_wait("steamroom_ambush_started");
 
@@ -4083,8 +3577,6 @@ steamroom_patroller_think() {
     self.maxsightdistsqrd = og_sightdist;
   }
 
-  //self be_aggressive();
-
   flag_wait("steamroom_patrollers_protect_door");
   self delaythread(0.1, ::playerseek);
 }
@@ -4092,7 +3584,7 @@ steamroom_patroller_think() {
 steamroom_patroller_baseaccuracy() {
   switch (level.gameskill) {
     case 0:
-      self.baseaccuracy = 0.9; // hard to see in here, frustrating for a noob
+      self.baseaccuracy = 0.9;
       break;
     case 1:
       self.baseaccuracy = 1.1;
@@ -4127,7 +3619,6 @@ steamroom_patroller_deathwait() {
 }
 
 steamroom_lighting_setup() {
-  //group 1
   lights_out_grp1 = getEntArray("lights_off_grp1", "targetname");
   array_thread(lights_out_grp1, ::_setLightIntensity, 1.5);
 
@@ -4137,7 +3628,6 @@ steamroom_lighting_setup() {
   light_models_on_grp1 = getEntArray("security_lights_on_grp1", "targetname");
   array_thread(light_models_on_grp1, ::steamroom_light_glow_fx);
 
-  //group 2
   lights_out_grp2 = getEntArray("lights_off_grp2", "targetname");
   array_thread(lights_out_grp2, ::_setLightIntensity, 1.7);
 
@@ -4147,7 +3637,6 @@ steamroom_lighting_setup() {
   light_models_on_grp2 = getEntArray("security_lights_on_grp2", "targetname");
   array_thread(light_models_on_grp2, ::steamroom_light_glow_fx);
 
-  //group 3
   lights_out_grp3 = getEntArray("lights_off_grp3", "targetname");
   array_thread(lights_out_grp3, ::_setLightIntensity, 1.7);
 
@@ -4157,7 +3646,6 @@ steamroom_lighting_setup() {
   light_models_on_grp3 = getEntArray("security_lights_on_grp3", "targetname");
   array_thread(light_models_on_grp3, ::steamroom_light_glow_fx);
 
-  //group 4
   lights_out_grp4 = getEntArray("lights_off_grp4", "targetname");
   array_thread(lights_out_grp4, ::_setLightIntensity, 1.5);
 
@@ -4215,7 +3703,6 @@ steamroom_lights_go_out() {
 
   thread vision_set_fog_changes("af_caves_outdoors", 2.25);
 
-  //group 1
   lights_out_grp1 = getEntArray("lights_off_grp1", "targetname");
   array_thread(lights_out_grp1, ::_setLightIntensity, 0);
 
@@ -4229,7 +3716,6 @@ steamroom_lights_go_out() {
 
   level.player playSound("scn_blackout_breaker_box");
 
-  //group 2
   lights_out_grp2 = getEntArray("lights_off_grp2", "targetname");
   array_thread(lights_out_grp2, ::_setLightIntensity, 0);
 
@@ -4242,7 +3728,6 @@ steamroom_lights_go_out() {
   wait .75;
   level.player playSound("scn_blackout_breaker_box");
 
-  //group 3
   lights_out_grp3 = getEntArray("lights_off_grp3", "targetname");
   array_thread(lights_out_grp3, ::_setLightIntensity, 0);
 
@@ -4255,7 +3740,6 @@ steamroom_lights_go_out() {
   wait .75;
   level.player playSound("scn_blackout_breaker_box");
 
-  //group 4
   lights_out_grp4 = getEntArray("lights_off_grp4", "targetname");
   array_thread(lights_out_grp4, ::_setLightIntensity, 0);
 

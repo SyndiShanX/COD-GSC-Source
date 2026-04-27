@@ -107,7 +107,6 @@ onStartGameType() {
   allowed[2] = "airdrop_pallet";
   allowed[3] = "gtnw";
   allowed[4] = "gtnw_zone";
-  //maps\mp\gametypes\_rank::registerScoreInfo( "capture", 200 );
 
   maps\mp\gametypes\_gameobjects::main(allowed);
 
@@ -271,17 +270,14 @@ setupVip(vipPlayer) {
   vipPlayer giveWeapon("riotshield_mp");
   vipPlayer switchToWeapon("riotshield_mp");
 
-  // specialty_armorvest is missing from MW2
   vipPlayer _setPerk("specialty_finalstand");
 
   vipPlayer iPrintlnBold("You Are the VIP");
-  //TO DO: add defend icon on the VIP
 }
 
 extractionZone() {
   extractionZones = getEntArray("extraction_vip", "targetname");
 
-  // check to see if zone is available.
   if(!extractionZones.size) {
     println("WARNING: no extraction zone specified");
 
@@ -357,7 +353,6 @@ handleTimer(player) {
   setGameEndTime(int(getTime() + (level.extractionTime * 1000)));
   wait level.extractionTime;
 
-  //call the sentry airdrops
   level thread vip_endGame(game["defenders"], &"MP_DEFENDED_VIP");
 }
 
@@ -365,9 +360,7 @@ onEndUse(team, player, success) {
   println("End Use");
 }
 
-onCantUse(player) {
-  //	player iPrintLnBold(&"MP_CANT_PLANT_WITHOUT_BOMB" );
-}
+onCantUse(player) {}
 
 spawnFxDelay(fxid, pos, forward, right, delay) {
   wait delay;

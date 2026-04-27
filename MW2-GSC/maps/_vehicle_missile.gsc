@@ -29,7 +29,6 @@ turret_think() {
     return;
   assert(isDefined(self.script_team));
 
-  // if the turret has a radius then use that radius instead of a default value
   self.attackRadius = 30000;
   if(isDefined(self.radius))
     self.attackRadius = self.radius;
@@ -58,35 +57,32 @@ turret_think() {
   for(;;) {
     wait(2 + randomfloat(1));
 
-    // get a target
     eTarget = undefined;
     eTarget = maps\_helicopter_globals::getEnemyTarget(self.attackRadius, undefined, false, true);
 
     if(!isDefined(eTarget)) {
       continue;
     }
-    // offset where the missile should aim
+
     aimOrigin = eTarget.origin;
     if(isDefined(eTarget.script_targetoffset_z))
       aimOrigin += (0, 0, eTarget.script_targetoffset_z);
 
-    // aim the turret at the target
     self setTurretTargetVec(aimOrigin);
     level thread turret_rotate_timeout(self, 5.0);
     self waittill("turret_rotate_stopped");
     self clearTurretTarget();
 
-    // once the turret it aimed make sure the target is still within attacking range
     if(distance(self.origin, eTarget.origin) > self.attackRadius) {
       continue;
     }
-    // make sure a sight trace can still pass so the missile doens't launch into a wall or something
+
     sightTracePassed = false;
     sightTracePassed = sighttracepassed(self.origin, eTarget.origin + (0, 0, 150), false, self);
     if(!sightTracePassed) {
       continue;
     }
-    // fire the missile and wait a while
+
     if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
       self notify("shoot_target", eTarget);
       self waittill("missile_fired", eMissile);
@@ -131,7 +127,6 @@ fireMissile() {
     assert(isDefined(targetEnt));
     assert(isDefined(self.missileTags[self.missileLaunchNextTag]));
 
-    // fire the missile
     eMissile = undefined;
 
     if(!isDefined(targetEnt.script_targetoffset_z))
@@ -149,17 +144,13 @@ fireMissile() {
     targetEnt.incomming_Missiles = array_add(targetEnt.incomming_Missiles, eMissile);
     thread maps\_helicopter_globals::missile_deathWait(eMissile, targetEnt);
 
-    // detach the missile from the model
     self detach(self.missileModel, self.missileTags[self.missileLaunchNextTag]);
 
-    //update tag and ammo info
     self.missileLaunchNextTag++;
     self.missileAmmo--;
 
-    // send a notify to the target that it has a missile heading it's way
     targetEnt notify("incomming_missile", eMissile);
 
-    // reload if we need to ( this makes it reload right after the last shot is fired )
     self tryReload();
 
     wait 0.05;

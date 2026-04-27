@@ -53,7 +53,7 @@ add_sit_load_ak_notetracks(animname) {
 }
 
 attach_clip(guy) {
-  guy notify("new_prop_rotation"); // runs a thread to cleanup the cigar if the anim is cut off, this starts the thread over again
+  guy notify("new_prop_rotation");
 
   clip = spawn("script_model", (0, 0, 0));
   clip linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
@@ -74,7 +74,7 @@ add_cellphone_notetracks(animname) {
 }
 
 attach_phone(guy) {
-  guy notify("new_phone_rotation"); // runs a thread to cleanup the cigar if the anim is cut off, this starts the thread over again
+  guy notify("new_phone_rotation");
 
   phone = spawn("script_model", (0, 0, 0));
   phone linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
@@ -90,7 +90,7 @@ detach_phone(guy) {
 }
 
 attach_cig(guy) {
-  guy notify("new_cigar_rotation"); // runs a thread to cleanup the cigar if the anim is cut off, this starts the thread over again
+  guy notify("new_cigar_rotation");
 
   cigar = spawn("script_model", (0, 0, 0));
   cigar linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
@@ -107,29 +107,29 @@ detach_cig(guy) {
 }
 
 prop_delete(prop, guy) {
-  guy notify("new_prop_rotation" + prop.model); // kill the old prop
+  guy notify("new_prop_rotation" + prop.model);
   guy endon("new_prop_rotation" + prop.model);
   prop endon("death");
 
-  guy add_endon("new_prop_rotation" + prop.model); // adds this endon to any of the waits, so we dont get thread leak
-  prop add_endon("death"); // adds this endon to any of the waits, so we dont get thread leak
+  guy add_endon("new_prop_rotation" + prop.model);
+  prop add_endon("death");
   self add_wait(::waittill_msg, "stop_loop");
   guy add_wait(::waittill_msg, "death");
-  do_wait_any(); // waits for any of the above to occur
+  do_wait_any();
 
   prop delete();
 }
 
 prop_delete_cig(prop, guy) {
-  guy notify("new_prop_rotation" + prop.model); // kill the old prop
+  guy notify("new_prop_rotation" + prop.model);
   guy endon("new_prop_rotation" + prop.model);
   prop endon("death");
 
-  guy add_endon("new_prop_rotation" + prop.model); // adds this endon to any of the waits, so we dont get thread leak
-  prop add_endon("death"); // adds this endon to any of the waits, so we dont get thread leak
+  guy add_endon("new_prop_rotation" + prop.model);
+  prop add_endon("death");
   self add_wait(::waittill_msg, "stop_loop");
   guy add_wait(::waittill_msg, "death");
-  do_wait_any(); // waits for any of the above to occur
+  do_wait_any();
 
   prop thread prop_cig_throw();
 }

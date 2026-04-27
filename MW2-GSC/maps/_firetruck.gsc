@@ -39,15 +39,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_firetruck (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_firetruck::main( "vehicle_firetruck" );
-
-and these lines in your CSV:
-#include,vehicle_firetruck
-sound,vehicle_firetruck,vehicle_standard,all_sp
-
-defaultmdl="vehicle_firetruck"default:"vehicletype" "firetruck"
-*/

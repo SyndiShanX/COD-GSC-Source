@@ -6,15 +6,12 @@
 #include maps\_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
-
-// self = the guy using the turret
 main() {
   turret = self getTurret();
 
   self.desired_anim_pose = "stand";
   animscripts\utility::UpdateAnimPose();
 
-  // .primaryTurretAnim is used by code so don't change this variable name
   self.primaryTurretAnim = % humveeGunner_aim;
 
   self.additiveTurretRotateLeft = % humvee_turret_aim_6_add;

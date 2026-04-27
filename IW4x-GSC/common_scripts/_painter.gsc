@@ -62,7 +62,7 @@ default_undefined() {
 setup_painter_group(group) {
   density = 100000001;
   group_copy = group;
-  // figure out default radius and density for the group
+
   bTreeOrient = undefined;
   bFacade = undefined;
   radius = undefined;
@@ -155,7 +155,7 @@ painter_initvars(painter_spmp) {
   level.spam_model_circlescale_lasttime = 0;
   level.spam_model_circlescale_accumtime = 0;
   level.paintadd = ::add_spammodel;
-  //	level.geteyeoffset = (0,0,24);
+
   level.timeLimitOverride = true;
   thread hack_start(painter_spmp);
   thread hud_init();
@@ -166,10 +166,6 @@ hack_start(painter_spmp) {
     painter_spmp = "painter";
 
   precachemenu(painter_spmp);
-
-  //who knows what the mp scripts are doing I took a dive deep into them and discovered many hud elements being controled through code and not through a menu that can be easily disabled
-  // here I simply automate some things to get the user up and running.
-  // get the player going.I don't handle people dieing in this tool since they are in ufo mode anyway.
 
   flag_init("user_alive");
   while(!isDefined(get_player()))
@@ -183,7 +179,7 @@ hack_start(painter_spmp) {
   menu = "changeclass_offline";
   response = "offline_class1_mp, 0";
   level.painter_player notify("menuresponse", menu, response);
-  level.painter_player openpopupmenu(painter_spmp); // painter.menu execs some console commands( ufo mode ).. sneaky hacks.
+  level.painter_player openpopupmenu(painter_spmp);
   wait .05;
   level.painter_player closepopupmenu();
   flag_set("user_alive");
@@ -215,7 +211,6 @@ hud_init() {
   flag_init("user_hud_active");
   flag_wait("user_alive");
 
-  //shorter list for mp cause it's got too many g_configstring somesuch. There is probably better check than substr on the mapname. I don't think this will bite me though, knock on wood.
   listsize = 7;
   if(is_mp())
     listsize = 7;
@@ -267,7 +262,6 @@ hud_init() {
   crossHair _settext(".");
   level.crosshair = crossHair;
 
-  // setup "crosshair"crossHair = _newhudelem();
   crossHair.location = 0;
   crossHair.alignX = "center";
   crossHair.alignY = "bottom";
@@ -303,7 +297,6 @@ hint_buttons_main() {
   controler_hud_update_text("helplbrb", "^8Remove ^7 / Place");
   controler_hud_update_text("helpdpl", "^8zOffset Clear ^7 / Set");
   controler_hud_update_text("helpdpu", "^8Rotation Clear ^7 / Set");
-  //	controler_hud_update_text( "helpF", text );
 }
 
 hint_buttons_zoffset() {
@@ -350,7 +343,6 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.spam_group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- -- level.spam_group_hudelems[div - i] _settext(".");
       continue;
     }
     level.spam_group_hudelems[div - i] _settext(keys[index + i]);
@@ -465,7 +457,7 @@ playerInit() {
       if(level.painter_player buttonPressed("BUTTON_LSHLDR"))
         spam_model_erase(trace);
       if(level.painter_player buttonPressed("BUTTON_RSHLDR"))
-        thread spam_model_place(trace); // threaded for delay
+        thread spam_model_place(trace);
     }
     level notify("clear_previews");
     wait .05;
@@ -614,7 +606,6 @@ spam_model_circlescale(trace, dir) {
 }
 
 spam_model_densityscale(trace, dir) {
-  // ghetto hack here.density scale used for distance on floating model types
   inc = 2;
   scale = level.spam_density_scale;
   scale += dir * inc;
@@ -633,13 +624,13 @@ spam_model_densityscale(trace, dir) {
 draw_placement_circle(trace, coloroverride) {
   if(!isDefined(coloroverride))
     coloroverride = (0, 1, 0);
-  if(trace["fraction"] == 1)
+  if(trace["fraction"] == 1) {
     return;
-  // 	angles = vectortoangles( anglestoup( vectortoangles( trace[ "normal" ] ) ) );
+  }
   angles = vectortoangles(trace["normal"]);
   origin = trace["position"];
   radius = level.spam_model_radius;
-  // 	plot_circle( origin, radius, angles, color, circleres );
+
   plot_circle(origin, radius, angles, coloroverride, 40, level.spam_model_radius);
 
   if(level.spam_models_isCustomrotation)
@@ -656,7 +647,6 @@ player_view_trace() {
 
 Orienttoplayeryrot() {
   self addyaw(level.painter_player getplayerangles()[1] - flat_angle(self.angles)[1]);
-  // 	self.angles = ( x, y, z );
 }
 
 getcurrent_groupstruct() {
@@ -732,7 +722,7 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
   startpos += (yvect * incdistance);
 
   modelpos = startpos;
-  // special for when circle is too small for current density to place anything.Just place one in the center..
+
   if(incs == 0 || level.bPosedstyle) {
     if(!bForcedSpam)
       if(is_too_dense(traceorg))
@@ -757,9 +747,9 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
       modelpos = startpos;
       modelpos += (xvect * x * incdistance);
       modelpos += (yvect * y * incdistance);
-      if(distance(modelpos, traceorg) > radius)
+      if(distance(modelpos, traceorg) > radius) {
         continue;
-      //		if( !bForcedSpam )
+      }
       countourtrace = contour_point(modelpos, angles, level.spam_model_radius);
 
       if(countourtrace["fraction"] == 1)
@@ -776,7 +766,6 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
 }
 
 is_too_dense(testorg) {
-  // going backwards will be faster
   for(i = level.spamed_models.size - 1; i >= 0; i--)
     if(distance(level.spamed_models[i].orgorg, testorg) < (level.spam_density_scale - 1))
       return true;
@@ -861,7 +850,7 @@ dump_models() {
     fileprint_launcher_start_file();
     fileprint_map_start();
     for(i = 0; i < level.spamed_models.size; i++) {
-      origin = fileprint_radiant_vec(level.spamed_models[i].origin); // convert these vectors to mapfile keypair format
+      origin = fileprint_radiant_vec(level.spamed_models[i].origin);
       angles = fileprint_radiant_vec(level.spamed_models[i].angles);
 
       fileprint_map_entity_start();

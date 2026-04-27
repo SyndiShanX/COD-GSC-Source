@@ -33,414 +33,208 @@
 #using scripts\shared\vehicles\_siegebot;
 #namespace zurich_plaza_battle;
 
-function skipto_main() {
-  // Unsupported VM revision (1B).
-}
-
-function skipto_done() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5ea42950() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e204c270() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2df89aaf() {
-  // Unsupported VM revision (1B).
-}
-
-function on_player_spawned() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2e5e657b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d32cd515() {
-  // Unsupported VM revision (1B).
-}
-
-function on_actor_damage() {
-  // Unsupported VM revision (1B).
-}
-
-function on_actor_killed() {
-  // Unsupported VM revision (1B).
-}
-
-function on_vehicle_killed() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2f458d44() {
-  // Unsupported VM revision (1B).
-}
-
-function function_65cbc694() {
-  // Unsupported VM revision (1B).
-}
-
-function on_ai_spawned() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4e20543d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_bca2e7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d297683e() {
-  // Unsupported VM revision (1B).
-}
-
-function siegebot_callback_damage() {
-  // Unsupported VM revision (1B).
-}
-
-function function_51e389ee() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3dc6a02c() {
-  // Unsupported VM revision (1B).
-}
-
-function function_87ebab3e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_da51418e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7c1c218() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5e886797() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d9c927f6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e0828083() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c635bfa2() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9b61634f() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d0b419ee() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c89b08c9() {
-  // Unsupported VM revision (1B).
-}
-
-function function_29fa5d37() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2b6c19a4() {
-  // Unsupported VM revision (1B).
-}
-
-function function_adfa2b54() {
-  // Unsupported VM revision (1B).
-}
-
-function function_1dbc4cbb() {
-  // Unsupported VM revision (1B).
-}
-
-function function_91ec82e3() {
-  // Unsupported VM revision (1B).
-}
-
-function function_155239af() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9683c997() {
-  // Unsupported VM revision (1B).
-}
-
-function function_558d9f8d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_8fdd138() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9200bc02() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f474e246() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4ac5ac5a() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
-
-function function_fbbb5f09() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4a1261ef() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5268b119() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9590c294() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e87739b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4ef26b6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_55a7a759() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9c800460() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a30a9296() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c2827ec9() {
-  // Unsupported VM revision (1B).
-}
-
-function function_781f3832() {
-  // Unsupported VM revision (1B).
-}
-
-function function_68a21f36() {
-  // Unsupported VM revision (1B).
-}
-
-function function_808ee2d6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b727abb6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7e5ba0bd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3363e7dd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a6915d3f() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e111315c() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f058728a() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9d42d43b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_17645f9b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_aee0aa5d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a9380c64() {
-  // Unsupported VM revision (1B).
-}
-
-function function_68fbe95d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_695f38a7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2686975a() {
-  // Unsupported VM revision (1B).
-}
-
-function function_68cf1dc0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d42cc4b0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_58e04ffd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5aba74b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e15e7133() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7d540ef1() {
-  // Unsupported VM revision (1B).
-}
-
-function javelin_think() {
-  // Unsupported VM revision (1B).
-}
-
-function function_336b6c3e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_71b5892a() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e1159e2b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_303a9547() {
-  // Unsupported VM revision (1B).
-}
-
-function function_8f5c1780() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d645af75() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7f39a78b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6c61fe9e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_934d33a5() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6a38397a() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d769b9ad() {
-  // Unsupported VM revision (1B).
-}
-
-function wasp_think() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d1db5654() {
-  // Unsupported VM revision (1B).
-}
-
-function function_69458aa0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_baaaa286() {
-  // Unsupported VM revision (1B).
-}
-
-function function_424191b5() {
-  // Unsupported VM revision (1B).
-}
-
-function function_cb30d060() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f8f7624b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5a1e5a49() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5c638800() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c4b462a7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_bc249f36() {
-  // Unsupported VM revision (1B).
-}
-
-function blast_doors_close() {
-  // Unsupported VM revision (1B).
-}
-
-function function_509fb0c4() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a2b45d70() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6744b8e3() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c58f2dba() {
-  // Unsupported VM revision (1B).
-}
+function skipto_main() {}
+
+function skipto_done() {}
+
+function function_5ea42950() {}
+
+function function_e204c270() {}
+
+function function_2df89aaf() {}
+
+function on_player_spawned() {}
+
+function function_2e5e657b() {}
+
+function function_d32cd515() {}
+
+function on_actor_damage() {}
+
+function on_actor_killed() {}
+
+function on_vehicle_killed() {}
+
+function function_2f458d44() {}
+
+function function_65cbc694() {}
+
+function on_ai_spawned() {}
+
+function function_4e20543d() {}
+
+function function_bca2e7() {}
+
+function function_d297683e() {}
+
+function siegebot_callback_damage() {}
+
+function function_51e389ee() {}
+
+function function_3dc6a02c() {}
+
+function function_87ebab3e() {}
+
+function function_da51418e() {}
+
+function function_7c1c218() {}
+
+function function_5e886797() {}
+
+function function_d9c927f6() {}
+
+function function_e0828083() {}
+
+function function_c635bfa2() {}
+
+function function_9b61634f() {}
+
+function function_d0b419ee() {}
+
+function function_c89b08c9() {}
+
+function function_29fa5d37() {}
+
+function function_2b6c19a4() {}
+
+function function_adfa2b54() {}
+
+function function_1dbc4cbb() {}
+
+function function_91ec82e3() {}
+
+function function_155239af() {}
+
+function function_9683c997() {}
+
+function function_558d9f8d() {}
+
+function function_8fdd138() {}
+
+function function_9200bc02() {}
+
+function function_f474e246() {}
+
+function function_4ac5ac5a() {}
+
+function vtol_spawnfunc() {}
+
+function function_fbbb5f09() {}
+
+function function_4a1261ef() {}
+
+function function_5268b119() {}
+
+function function_9590c294() {}
+
+function function_e87739b() {}
+
+function function_4ef26b6() {}
+
+function function_55a7a759() {}
+
+function function_9c800460() {}
+
+function function_a30a9296() {}
+
+function function_c2827ec9() {}
+
+function function_781f3832() {}
+
+function function_68a21f36() {}
+
+function function_808ee2d6() {}
+
+function function_b727abb6() {}
+
+function function_7e5ba0bd() {}
+
+function function_3363e7dd() {}
+
+function function_a6915d3f() {}
+
+function function_e111315c() {}
+
+function function_f058728a() {}
+
+function function_9d42d43b() {}
+
+function function_17645f9b() {}
+
+function function_aee0aa5d() {}
+
+function function_a9380c64() {}
+
+function function_68fbe95d() {}
+
+function function_695f38a7() {}
+
+function function_2686975a() {}
+
+function function_68cf1dc0() {}
+
+function function_d42cc4b0() {}
+
+function function_58e04ffd() {}
+
+function function_5aba74b() {}
+
+function function_e15e7133() {}
+
+function function_7d540ef1() {}
+
+function javelin_think() {}
+
+function function_336b6c3e() {}
+
+function function_71b5892a() {}
+
+function function_e1159e2b() {}
+
+function function_303a9547() {}
+
+function function_8f5c1780() {}
+
+function function_d645af75() {}
+
+function function_7f39a78b() {}
+
+function function_6c61fe9e() {}
+
+function function_934d33a5() {}
+
+function function_6a38397a() {}
+
+function function_d769b9ad() {}
+
+function wasp_think() {}
+
+function function_d1db5654() {}
+
+function function_69458aa0() {}
+
+function function_baaaa286() {}
+
+function function_424191b5() {}
+
+function function_cb30d060() {}
+
+function function_f8f7624b() {}
+
+function function_5a1e5a49() {}
+
+function function_5c638800() {}
+
+function function_c4b462a7() {}
+
+function function_bc249f36() {}
+
+function blast_doors_close() {}
+
+function function_509fb0c4() {}
+
+function function_a2b45d70() {}
+
+function function_6744b8e3() {}
+
+function function_c58f2dba() {}

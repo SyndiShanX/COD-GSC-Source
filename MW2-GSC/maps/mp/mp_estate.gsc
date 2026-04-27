@@ -23,7 +23,7 @@ main() {
   setDvar("r_lightGridContrast", 0);
 
   if(level.ps3)
-    setDvar("sm_sunShadowScale", "0.5"); // ps3 optimization
+    setDvar("sm_sunShadowScale", "0.5");
   else
-    setDvar("sm_sunShadowScale", "0.7"); // optimization
+    setDvar("sm_sunShadowScale", "0.7");
 }

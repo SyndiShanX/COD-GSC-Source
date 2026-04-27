@@ -1,11 +1,8 @@
 main() {
-  // use map vision from start &don't wait for players
   replacefunc(maps\mp\gametypes\_gamelogic::matchstarttimerwaitforplayers, ::matchstarttimerwaitforplayers_stub);
 
-  // use new freeze when game ends
   replacefunc(maps\mp\gametypes\_gamelogic::freezeplayerforroundend, ::freezeplayerforroundend_stub);
 
-  // MW2 objective text rendering
   replacefunc(maps\mp\gametypes\_gamelogic::prematchperiod, ::prematchperiod_stub);
 }
 
@@ -13,19 +10,14 @@ matchstarttimerwaitforplayers_stub() {
   setomnvar("ui_match_countdown_title", 6);
   setomnvar("ui_match_countdown_toggle", 0);
 
-  //setomnvar("ui_cg_world_blur", 1);
-
   visionsetnaked("", 0);
-  visionsetpostapply("", 0); // no mpIntro, sets to map vision
-
-  //waitforplayers(level.prematchperiod); // TODO: do we need? hmmm
+  visionsetpostapply("", 0);
 
   if(maps\mp\_utility::getmapname() != "trainer" && level.prematchperiodend > 0 && !isDefined(level.hostmigrationtimer))
     maps\mp\gametypes\_gamelogic::matchstarttimer(level.prematchperiodend);
   else
     setomnvar("ui_match_countdown_title", 0);
 
-  // after match start timer, unblock changes to speed scale
   foreach(player in level.players) {
     player thread toggle_custom_freeze(false);
   }
@@ -40,7 +32,6 @@ freezeplayerforroundend_stub(delay) {
 
   wait(0.5);
 
-  //self thread maps\mp\_utility::freezecontrolswrapper(1);
   self thread toggle_custom_freeze(true);
 }
 
@@ -62,9 +53,8 @@ spawned() {
   self waittill("spawned_player");
 
   visionsetpostapply("", 0);
-  self force_play_weap_anim(19, 19); // first raise
+  self force_play_weap_anim(19, 19);
 
-  // handle freezing the player and limit what they can do
   if(!isDefined(level.prematch_done_time) || (gettime() < level.prematch_done_time)) {
     self thread toggle_custom_freeze(true);
   }
@@ -86,13 +76,11 @@ monitor_class_changes_for_stock() {
 }
 
 toggle_custom_freeze(should_freeze) {
-  // stop bots from knifing in prematch on bad spawns
   if(isBot(self)) {
     self freezeControls(should_freeze);
     return;
   }
 
-  // unfreeze
   self freezecontrols(false);
 
   if(should_freeze == true) {
@@ -105,9 +93,9 @@ toggle_custom_freeze(should_freeze) {
   self allowlean(true);
   self allowads(!should_freeze);
   self allowmelee(!should_freeze);
-  self allowcrouch(true); // allow no matter what
+  self allowcrouch(true);
   self allowsprint(!should_freeze);
-  self allowprone(true); // ^
+  self allowprone(true);
   self allowjump(!should_freeze);
 
   if(should_freeze) {
@@ -116,7 +104,6 @@ toggle_custom_freeze(should_freeze) {
     self notify("stop_monitoring_class_stock");
   }
 
-  // nothing but 0 will work if blocked
   new_scale = (should_freeze ? 0.0 : 1.0);
   self setmovespeedscale(new_scale);
 }

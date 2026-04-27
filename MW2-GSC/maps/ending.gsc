@@ -9,23 +9,6 @@
 #include maps\_vehicle;
 
 main() {
-  /*
-  // for launcher
-  add_start( "wakeup", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  add_start( "wakefast", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  add_start( "turnbuckle", 			::start_turnbuckle, "", 							::fight_turnbuckle );
-  add_start( "gloat", 				::start_shepherd_gloats, "", 						::shepherd_gloats );
-  add_start( "gun_drop", 	 			::start_gun_drop, "", 								::gun_drop );
-  add_start( "crawl", 				::start_gun_crawl, "", 								::gun_crawl );
-  add_start( "gun_kick", 				::start_gun_kick, "", 								::gun_kick );
-  add_start( "wounded", 				::start_wounded_show, "Watch Price/Shep fight", 	::wounded_show );
-  add_start( "pullout", 				::start_knife_pullout, "", 	 						::knife_pullout );
-  add_start( "kill", 					::start_knife_kill, "", 	 						::knife_kill );
-  add_start( "price_wakeup", 			::start_price_wakeup, "", 							::price_wakeup );
-  add_start( "walkoff", 				::start_walkoff, "", 								::walkoff );
-  */
-
-  //	PreCacheItem( "cheytac" );
   precachestring(&"AF_CHASE_PURSUE");
   precachestring(&"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
   precachestring(&"AF_CHASE_MISSION_FAILED_KEEP_UP");
@@ -92,7 +75,6 @@ main() {
 
   PreCacheShader("overlay_hunted_black");
   precacheItem("ending_knife");
-  //	precacheItem( "ending_knife_silent" );
 
   precacheShader("hud_icon_commando_knife");
   precacheShader("reticle_center_throwingknife");
@@ -144,7 +126,7 @@ ending_music() {
     case "gloat":
       flag_wait("af_chase_final_fight");
     case "gun_drop":
-      musicplaywrapper("af_chase_final_fight"); // becomes ~1 second desynced but I don't care.
+      musicplaywrapper("af_chase_final_fight");
     case "crawl":
     case "gun_kick":
     case "wounded":

@@ -3,11 +3,8 @@
  * Script: maps\createart\cliffhanger_art.gsc
 ********************************************************/
 
-// _createart generated.modify at your own risk. Changing values should be fine.
 main() {
   level.tweakfile = true;
-
-  //* depth of field section *
 
   level.dofDefault["nearStart"] = 0;
   level.dofDefault["nearEnd"] = 1;
@@ -18,8 +15,6 @@ main() {
   players = getEntArray("player", "classname");
   for(i = 0; i < players.size; i++)
     players[i] maps\_art::setdefaultdepthoffield();
-
-  //* Fog section *
 
   setdevdvar("scr_fog_disable", "0");
 

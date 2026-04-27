@@ -3,24 +3,19 @@
  * Script: maps\_friendlyfire.gsc
 ********************************************************/
 
-// 200 participation points are given to the player for killing an enemy
-// 800 participation points are taken from the player for killing a friendly
-// friendly damage removes points based on amount of damage done and distance
-// a max of 1000 points is allowed
-// the player will fail the mission when level.friendlyfire["min_participation"] is reached
 #include maps\_utility;
 
 main() {
-  level.friendlyfire["min_participation"] = -200; // when the player hit this number of participation points the mission is failed
-  level.friendlyfire["max_participation"] = 1000; // the player will stop gaining participation points once this amount is earned
-  level.friendlyfire["enemy_kill_points"] = 250; // this many participation points are earned for killing an enemy
-  level.friendlyfire["friend_kill_points"] = -650; // participation point penalty for killing a friendly
-  level.friendlyfire["point_loss_interval"] = 1.25; // amount of time a point lasts
+  level.friendlyfire["min_participation"] = -200;
+  level.friendlyfire["max_participation"] = 1000;
+  level.friendlyfire["enemy_kill_points"] = 250;
+  level.friendlyfire["friend_kill_points"] = -650;
+  level.friendlyfire["point_loss_interval"] = 1.25;
 
   level.player.participation = 0;
 
   level.friendlyFireDisabled = 0;
-  level.friendlyFireDisabledForDestructible = 0; // don't ever set this, it's used internally only and shouldn't be set by your script
+  level.friendlyFireDisabledForDestructible = 0;
   SetDvarIfUninitialized("friendlyfire_dev_disabled", "0");
 
   common_scripts\utility::flag_init("friendly_fire_warning");
@@ -50,8 +45,6 @@ debug_friendlyfire() {
     wait 0.25;
   }
 }
-
-// every entity that influences friedly fire should run this thread (ai of both teams, vehicles of both teams)
 friendly_fire_think(entity) {
   if(!isDefined(entity))
     return;
@@ -61,10 +54,9 @@ friendly_fire_think(entity) {
   if(isDefined(level.no_friendly_fire_penalty)) {
     return;
   }
-  // if the mission is failed from another entity running this function then end this one
+
   level endon("mission failed");
 
-  // wait until this entity dies
   level thread notifyDamage(entity);
   level thread notifyDamageNotDone(entity);
   level thread notifyDeath(entity);
@@ -81,11 +73,11 @@ friendly_fire_think(entity) {
     if(!isDefined(entity)) {
       return;
     }
-    // if we dont know who the attacker is we can't do much, so ignore it. This is seldom to happen, but not impossible
+
     if(!isDefined(attacker)) {
       continue;
     }
-    // check to see if the death was caused by the player or the players turret
+
     bPlayersDamage = false;
 
     if(!isDefined(weaponName))
@@ -94,11 +86,9 @@ friendly_fire_think(entity) {
     if(isPlayer(attacker)) {
       bPlayersDamage = true;
 
-      // player shot a red barrel or something similar and it blew up and damaged/killed this guy so just ignore it
       if(isDefined(weaponName) && (weaponName == "none"))
         bPlayersDamage = false;
 
-      // code doesn't give the correct weaponname on damage and death notifies when on a turret, so we have to workaround it here
       if(attacker isUsingTurret())
         bPlayersDamage = true;
     } else
@@ -108,7 +98,6 @@ friendly_fire_think(entity) {
         bPlayersDamage = true;
     }
 
-    // if the player didn't cause the damage then disregard
     if(!bPlayersDamage) {
       continue;
     }
@@ -125,7 +114,6 @@ friendly_fire_think(entity) {
 
     killed = damage == -1;
 
-    // if an enemy was killed then incriment the players participation score
     if(!same_team && !civilianKilled) {
       if(killed) {
         level.player.participation += level.friendlyfire["enemy_kill_points"];
@@ -135,27 +123,24 @@ friendly_fire_think(entity) {
       continue;
     }
 
-    //player killed/damaged a friendly
     if(isDefined(entity.no_friendly_fire_penalty)) {
       continue;
     }
     if((method == "MOD_PROJECTILE_SPLASH") && (isDefined(level.no_friendly_fire_splash_damage))) {
       continue;
     }
-    // don't cause friendly fire from claymores because it's probably the AI's fault not the players
+
     if(isDefined(weaponName) && (weaponName == "claymore")) {
       continue;
     }
     if(killed) {
       level.player.participation += level.friendlyfire["friend_kill_points"];
     } else {
-      // friendly was damaged - figure out how many participation points to remove
       level.player.participation -= damage;
     }
 
     participation_point_cap();
 
-    // dont fail the mission if death was caused by a grenade that was cooking durring an autosave
     if(check_grenade(entity, method) && savecommit_afterGrenade()) {
       if(killed)
         return;
@@ -163,7 +148,6 @@ friendly_fire_think(entity) {
         continue;
     }
 
-    // fail the mission if the players participation has reached the minimum
     friendly_fire_checkPoints(civilianKilled);
   }
 }
@@ -188,14 +172,12 @@ check_grenade(entity, method) {
   if(!isDefined(entity))
     return false;
 
-  // check if the entity was killed by a grenade
   wasGrenade = false;
   if((isDefined(entity.damageweapon)) && (entity.damageweapon == "none"))
     wasGrenade = true;
   if((isDefined(method)) && (method == "MOD_GRENADE_SPLASH"))
     wasGrenade = true;
 
-  // if the entity was not killed by a grenade then exit
   return wasGrenade;
 }
 
@@ -267,25 +249,22 @@ missionfail(civilianKilled) {
     return;
   }
   if(civilianKilled)
-    // You shot a civilian. Watch your fire!
-    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED"); // You shot a civilian. Watch your fire!
-  else if(isDefined(level.custom_friendly_fire_message))
-    setDvar("ui_deadquote", level.custom_friendly_fire_message); // friendly fire will not be tolerated
-  else if(level.campaign == "british")
-    // Friendly fire will not be tolerated!
-    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH"); // Friendly fire will not be tolerated!
-  else if(level.campaign == "russian")
-    // You are a traitor to the motherland!
-    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN"); // You are a traitor to the motherland!
-  else
-    // Friendly fire will not be tolerated!
-    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // Friendly fire will not be tolerated!
 
-  // shader if specified
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED");
+  else if(isDefined(level.custom_friendly_fire_message))
+    setDvar("ui_deadquote", level.custom_friendly_fire_message);
+  else if(level.campaign == "british")
+
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+  else if(level.campaign == "russian")
+
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+  else
+
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+
   if(isDefined(level.custom_friendly_fire_shader))
     thread maps\_load::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);
-
-  //logString( "failed mission: Friendly fire" );
 
   maps\_utility::missionFailedWrapper();
 }
@@ -311,13 +290,4 @@ notifyDeath(entity) {
   entity notify("friendlyfire_notify", -1, attacker, undefined, undefined, method, weaponName);
 }
 
-detectFriendlyFireOnEntity(entity) {
-  /*
-  if( !isDefined( entity ) )
-  	return;
-  AssertEx( isDefined( entity.team ), "You must set .team to allies or axis for an entity calling detectFriendlyFire()" );
-  	
-  entity setCanDamage( true );
-  level thread friendly_fire_think( entity );
-  */
-}
+detectFriendlyFireOnEntity(entity) {}

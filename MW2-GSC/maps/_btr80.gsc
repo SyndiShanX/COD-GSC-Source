@@ -51,7 +51,7 @@ main(model, type) {
 
   build_aianims(::setanims, ::set_vehicle_anims);
 
-  build_frontarmor(.33); // regens this much of the damage from attacks to the front
+  build_frontarmor(.33);
 
   build_bulletshield(true);
 
@@ -61,7 +61,6 @@ main(model, type) {
 init_local() {
   maps\_utility::ent_flag_init("no_riders_until_unload");
   maps\_vehicle::lights_on("running");
-  //self thread test_brake_lights();
 }
 
 test_brake_lights() {
@@ -75,9 +74,6 @@ test_brake_lights() {
 }
 
 set_vehicle_anims(positions) {
-  // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-  // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
-
   positions[0].vehicle_getoutanim = % BTR80_doorsL_open;
   positions[1].vehicle_getoutanim = % BTR80_doorsR_open;
   positions[2].vehicle_getoutanim = % BTR80_doorsL_open;
@@ -102,10 +98,10 @@ setanims() {
   positions[2].idle = % BTR80_crew_idle;
   positions[3].idle = % BTR80_crew_idle;
 
-  positions[0].getout = % BTR80_exit_1; // left
-  positions[1].getout = % BTR80_exit_2; // right
-  positions[2].getout = % BTR80_exit_3; // left
-  positions[3].getout = % BTR80_exit_4; // rigth
+  positions[0].getout = % BTR80_exit_1;
+  positions[1].getout = % BTR80_exit_2;
+  positions[2].getout = % BTR80_exit_3;
+  positions[3].getout = % BTR80_exit_4;
 
   positions[0].getin = % humvee_driver_climb_in;
   positions[1].getin = % humvee_passenger_in_L;
@@ -114,82 +110,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_btr80 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-Valid Light Groups:
-running - taillights and tacticle headlight
-brake - brighter taillight
-spotlight - lower spotlight
-spotlight_turret - spotlight on turret
-
-Example Light Group Usage:
-on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"on vehicle node: "script_vehicle_lights_off" "spotlight"in script: vehicle lights_on( "spotlight" );
-in script: vehicle lights_off( "spotlight" );
-
-put this in your GSC:
-maps\_btr80::main( "vehicle_btr80" );
-
-and these lines in your CSV:
-#include,vehicle_btr80
-sound,vehicle_btr80,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_btr80"default:"vehicletype" "btr80"default:"script_team" "axis"default:"script_vehicle_lights_on" "spotlight running"*/
-
-/*QUAKED script_vehicle_btr80_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-Valid Light Groups:
-running - taillights and tacticle headlight
-brake - brighter taillight
-spotlight - lower spotlight
-spotlight_turret - spotlight on turret
-
-Example Light Group Usage:
-on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"on vehicle node: "script_vehicle_lights_off" "spotlight"in script: vehicle lights_on( "spotlight" );
-in script: vehicle lights_off( "spotlight" );
-
-put this in your GSC:
-maps\_btr80::main( "vehicle_btr80_low" );
-
-and these lines in your CSV:
-#include,vehicle_btr80_low
-sound,vehicle_btr80,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_btr80_low"default:"vehicletype" "btr80"default:"script_team" "axis"default:"script_vehicle_lights_on" "spotlight running"*/
-
-/*QUAKED script_vehicle_btr80_snow (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_btr80::main( "vehicle_btr80_snow" );
-
-and these lines in your CSV:
-#include,vehicle_btr80_snow
-sound,vehicle_btr80,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_btr80_snow"default:"vehicletype" "btr80"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_btr80_snow_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_btr80::main( "vehicle_btr80_snow", "btr80_physics");
-
-and these lines in your CSV:
-#include,vehicle_btr80_snow
-sound,vehicle_btr80,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_btr80_snow"default:"vehicletype" "btr80_physics"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_btr80_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_btr80::main( "vehicle_btr80", "btr80_physics" );
-
-and these lines in your CSV:
-#include,vehicle_btr80
-sound,vehicle_btr80,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_btr80"default:"vehicletype" "btr80_physics"default:"script_team" "axis"
-*/

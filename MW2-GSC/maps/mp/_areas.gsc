@@ -6,23 +6,6 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-/*QUAKED trigger_multiple_area (0.12 0.23 1.0)
-defaulttexture="trigger""script_area" - A localized string that names the area. e.g. "MP_FLOWER_SHOP"Defines an area that the player is in.*/
-
-/*QUAKED trigger_multiple_softlanding (0.12 0.23 1.0)
-defaulttexture="trigger""script_type" - "car", "boxes", "trash"Defines a soft landing area.*/
-
-/*QUAKED script_vehicle_snowmobile_player_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile_player::main( "vehicle_snowmobile" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile_player
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player_mp"*/
-
 init() {
   level.softLandingTriggers = getEntArray("trigger_multiple_softlanding", "classname");
 
@@ -33,14 +16,6 @@ init() {
       continue;
     }
     foreach(destructible in destructibles) {
-      /*
-      if( !trigger isTouching( destructible ) )
-      {
-      	println( distance( trigger.origin, destructible.origin ) );
-      	continue;
-      }
-      */
-
       if(distance(trigger.origin, destructible.origin) > 64.0) {
         continue;
       }
@@ -49,9 +24,6 @@ init() {
       trigger.destructible = destructible;
     }
   }
-
-  //foreach ( trigger in level.softLandingTriggers )
-  //	trigger thread common_scripts\_dynamic_world::triggerTouchThink( ::playerEnterSoftLanding, ::playerLeaveSoftLanding );
 
   thread onPlayerConnect();
 }
@@ -80,16 +52,8 @@ softLandingWaiter() {
   for(;;) {
     self waittill("soft_landing", trigger, damage);
 
-    //if( damage < 10 )
-    //	continue;
-
     if(!isDefined(trigger.destructible)) {
       continue;
     }
-    //magicBullet( "mp5_mp", self.origin, self.origin + (0,0,-100), self );
-
-    //self waittill( "damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags );
-
-    //traceData = bulletTrace( self.origin, self.origin + (0,0,-100), true, self );
   }
 }

@@ -2,7 +2,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 331
   ent = createLoopSound();
   ent.v["origin"] = (1416.37, -151.436, -30.6883);
   ent.v["angles"] = (270, 0, 0);

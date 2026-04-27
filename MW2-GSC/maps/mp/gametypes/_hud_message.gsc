@@ -167,12 +167,6 @@ notifyMessage(notifyData) {
     self thread showNotifyMessage(notifyData);
     return;
   }
-  /*
-  	else if( notifyData.type == "rank" && self.doingSplash[ slot ].type != "challenge" && self.doingSplash[ slot ].type != "killstreak" )
-  	{
-  		self thread showNotifyMessage( notifyData );
-  		return;
-  	}*/
 
   self.splashQueue[slot][self.splashQueue[slot].size] = notifyData;
 }
@@ -305,7 +299,6 @@ showNotifyMessage(notifyData) {
       self.notifyIcon fadeOverTime(0.15);
       self.notifyIcon.alpha = 1;
 
-      //if( !isDefined( notifyData.overlayOffsetY ) )
       notifyData.overlayOffsetY = 0;
 
       self.notifyOverlay setParent(self.notifyIcon);
@@ -370,27 +363,14 @@ killstreakSplashNotify(streakName, streakVal, appendString) {
   self thread actionNotify(actionData);
 }
 
-defconSplashNotify(defconLevel, forceNotify) {
-  /*
-  actionData = spawnStruct();
-  	
-  actionData.name = "defcon_" + defconLevel;
-  actionData.sound = tableLookup( "mp/splashTable.csv", 0, actionData.name, 9 );
-  actionData.slot = 0;
-  actionData.forceNotify = forceNotify;
-
-  self thread actionNotify( actionData );
-  */
-}
+defconSplashNotify(defconLevel, forceNotify) {}
 
 challengeSplashNotify(challengeRef) {
   self endon("disconnect");
   waittillframeend;
 
-  // this is used to ensure the client receives the new challenge state before the splash is shown.
   wait(0.05);
 
-  //subtracting one from state becase state was incremented after completing challenge
   challengeState = (self getPlayerData("challengeState", challengeRef) - 1);
   challengeTarget = int(tableLookup("mp/allChallengesTable.csv", 0, challengeRef, 6 + ((challengeState - 1) * 2)));
 
@@ -412,8 +392,7 @@ challengeSplashNotify(challengeRef) {
 
 splashNotify(text, optionalNumber) {
   self endon("disconnect");
-  // wait until any challenges have been processed
-  //self waittill( "playerKilledChallengesProcessed" );
+
   wait .05;
 
   actionData = spawnStruct();
@@ -492,7 +471,6 @@ actionNotify(actionData) {
     return;
   }
 
-  // push to front of queue
   if(actionData.type == "challenge" || actionData.type == "killstreak") {
     if(actionData.type == "killstreak")
       self removeTypeFromQueue("killstreak", slot);
@@ -524,7 +502,6 @@ actionNotifyMessage(actionData) {
   slot = actionData.slot;
 
   if(level.gameEnded) {
-    // added to prevent potential stack overflow
     wait(0);
 
     if(isDefined(actionData.type) && actionData.type == "rank") {
@@ -543,7 +520,6 @@ actionNotifyMessage(actionData) {
 
   assertEx(tableLookup("mp/splashTable.csv", 0, actionData.name, 0) != "", "ERROR: unknown splash - " + actionData.name);
 
-  // defensive ship hack for missing table entries
   if(tableLookup("mp/splashTable.csv", 0, actionData.name, 0) != "") {
     if(isDefined(actionData.playerCardPlayer))
       self SetCardDisplaySlot(actionData.playerCardPlayer, 5);
@@ -578,8 +554,6 @@ actionNotifyMessage(actionData) {
   if(self.splashQueue[slot].size)
     self thread dispatchNotify(slot);
 }
-
-// waits for waitTime, plus any time required to let flashbangs go away.
 waitRequireVisibility(waitTime) {
   interval = .05;
 
@@ -748,14 +722,12 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   if(!isDefined(team) || (team != "allies" && team != "axis"))
     team = "allies";
 
-  // wait for notifies to finish
   while(self isDoingSplash())
     wait 0.05;
 
   self endon("reset_outcome");
 
   if(level.splitscreen) {
-    // These are mostly fullscreen values divided by 1.5
     titleSize = 1;
     titleOffset = -76;
     textSize = 0.667;
@@ -934,7 +906,6 @@ outcomeNotify(winner, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
 
-  // wait for notifies to finish
   while(self isDoingSplash())
     wait 0.05;
 

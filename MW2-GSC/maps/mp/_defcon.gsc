@@ -7,8 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-//	if( game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]] )
-
 ICONSIZE = 20;
 
 init() {
@@ -95,12 +93,10 @@ updateDefcon(newDefcon, changingPlayer, streakCount) {
   oldDefcon = game["defcon"];
   game["defcon"] = newDefcon;
 
-  //	level.killStreakMod = level.defconStreakAdd[newDefcon];
   level.objectivePointsMod = level.defconPointMod[newDefcon];
 
   setDvar("scr_defcon", game["defcon"]);
 
-  //isdefined used for variable init
   if(isDefined(changingPlayer))
     changingPlayer notify("changed_defcon");
 

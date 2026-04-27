@@ -34,8 +34,6 @@ get_vehicle_type_count(wave_num, type) {
 
   return count;
 }
-
-// UAV Section ---------------------------------------------- //
 uav_pickup_setup() {
   uav_pickup = GetEnt("uav_controller", "targetname");
   AssertEx(isDefined(uav_pickup), "Missing UAV controller pickup objective model in level.");
@@ -49,13 +47,12 @@ uav_pickup_setup() {
   wait(1);
 
   while(1) {
-    //level waittill( "new_wave_started" );
     wait(2);
     uav_pickup Show();
 
     uav_pickup MakeUsable();
     uav_pickup SetCursorHint("HINT_NOICON");
-    // Hold && 1 to pick up
+
     uav_pickup SetHintString(&"SO_ROOFTOP_CONTINGENCY_DRONE_PICKUP");
     uav_pickup waittill("trigger", player);
 
@@ -68,7 +65,6 @@ uav_pickup_setup() {
 
     player maps\_remotemissile::give_remotemissile_weapon(level.remote_detonator_weapon);
 
-    // If wave 2 has not started yet, disable the uav.
     if(level.gameskill > 1 && !flag("wave_2_started") || !flag("wave_1_started")) {
       level.so_uav_player maps\_remotemissile::disable_uav(false, true);
     }
@@ -77,7 +73,6 @@ uav_pickup_setup() {
     uav_pickup Hide();
 
     if(!isDefined(player.already_displayed_hint)) {
-      // If the wave 2 hasn't already started, then hold on displaying hint until it actually does.
       if(level.gameskill > 1 && !flag("wave_2_started")) {
         flag_wait("wave_2_started");
       } else if(!flag("wave_1_started")) {
@@ -98,7 +93,7 @@ uav_pickup_setup() {
     }
 
     flag_waitopen("uav_in_use");
-    wait level.uav_spawn_delay; // delay between uav spawns
+    wait level.uav_spawn_delay;
   }
 }
 
@@ -128,10 +123,8 @@ wait_to_pickup_uav() {
   }
 
   if(wait_to_pickup) {
-    // Just wait for the first wave to be wiped out
     flag_wait("wave_wiped_out");
   } else {
-    // Wait for the first round to start
     flag_wait("start_countdown");
   }
 }
@@ -150,7 +143,6 @@ uav() {
 }
 
 dialog_uav() {
-  //The UAV is almost in position.	
   radio_dialogue("cont_cmt_almostinpos");
 }
 
@@ -176,15 +168,10 @@ uav_rig_aiming() {
     wait(0.05);
   }
 }
-
-// Vehicles ----------------------------------------------- setup_base_vehicles() {
 self endon("death");
 
 self thread maps\_remotemissile::setup_remote_missile_target();
-
-//	self thread update_badplace();
 self thread unload_when_stuck();
-//	self thread custom_connectpaths_ondeath();
 self thread vehicle_death_paths();
 self waittill("unloaded");
 
@@ -199,7 +186,6 @@ level.remote_missile_targets = array_remove(level.remote_missile_targets, self);
 vehicle_death_paths() {
   self endon("delete");
 
-  // Notify from _vehicle::vehicle_kill, after the phys vehicle is blown up and disconnectpaths
   self waittill("kill_badplace_forever");
 
   min_dist = 50 * 50;
@@ -209,10 +195,8 @@ vehicle_death_paths() {
     if(DistanceSquared(self.origin, death_origin) > min_dist) {
       death_origin = self.origin;
 
-      // Connect the paths before we get to far away from the death_origin
       self ConnectPaths();
 
-      // Don't disconnectpaths until we're done moving.
       while(1) {
         wait(0.05);
         if(!isDefined(self)) {
@@ -226,52 +210,12 @@ vehicle_death_paths() {
         death_origin = self.origin;
       }
 
-      // Now disconnectpaths after we have settled
       self DisconnectPaths();
     }
 
     wait(0.05);
   }
 }
-
-// We need this to reconnect the paths after _vehicle::vehicle_kill disconnects them.
-//custom_connectpaths_ondeath()
-//{
-//	self waittill( "kill_badplace_forever" );
-//
-//	wait( 0.1 );
-//	self ConnectPaths();
-//}
-//
-//update_badplace()
-//{
-//	self endon( "delete" );
-//
-//	duration = 0.5;
-//
-//	radius = 100;
-//	if( self.vehicletype == "bm21_troops" )
-//	{
-//		radius = 176;
-//	}
-//	else if( self.vehicletype == "uaz_physics" )
-//	{
-//		radius = 90;
-//	}
-//
-//	height = 300;
-//
-//	while( 1 )
-//	{
-//		speed = self Vehicle_GetSpeed();
-//		if( !IsAlive( self ) || speed < 0.2 )
-//		{
-//			BadPlace_Cylinder( self.unique_id + "cyl_bp", duration, self.origin, radius, height, "axis", "team3", "allies" );
-//		}
-//		
-//		wait( duration + 0.05 );
-//	}
-//}
 
 unload_when_stuck() {
   self endon("unloaded");
@@ -304,14 +248,7 @@ spawn_vehicle_and_go(struct) {
 
   vehicle = spawner spawn_vehicle();
 
-  // So the corpse of the vehicle cannot be moved
-  //	vehicle.free_on_death = true;
-
-  //	vehicle thread vehicle_becomes_crashable();
-  //	vehicle.dontDisconnectPaths = true;
-
   vehicle StartPath();
-  //	vehicle thread force_unload( spawner.target + "_end" );
 
   so_debug_print("vehicle[" + spawner.targetname + "] spawned");
   vehicle waittill("unloading");
@@ -319,24 +256,9 @@ spawn_vehicle_and_go(struct) {
   vehicle waittill("unloaded");
   so_debug_print("vehicle[" + spawner.targetname + "] unloading complete");
 }
-
-//force_unload( end_name )
-//{
-////	end_node = get_last_ent_in_chain( sEntityType );
-//
-//	end_node = GetVehicleNode( end_name, "targetname" );
-//	end_node waittill( "trigger" );
-//
-//	self Vehicle_SetSpeed( 0, 15 );
-//	wait 1;
-//	self maps\_vehicle::vehicle_unload();
-//}
-
-// HUD ---------------------------------------------------- hud_wave_num() {
 while(1) {
   level waittill("new_wave_started");
 
-  // Little delay so the "Wave Starting in..." can be removed
   wait(1);
 
   hud_count = undefined;
@@ -366,20 +288,15 @@ while(1) {
 }
 
 hud_hostile_count() {
-  // Hostiles:
   hudelem_title = so_create_hud_item(2, so_hud_ypos(), &"SO_ROOFTOP_CONTINGENCY_HOSTILES", self);
   hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   flag_wait("waves_start");
 
-  /*	thread info_hud_handle_fade( hudelem_title, "stop_fading_count" );
-  	thread info_hud_handle_fade( hudelem_count, "stop_fading_count" );*/
-
   max_count = level.hostile_count;
 
   while(!flag("challenge_success") || !flag("special_op_terminated")) {
-    // Be sure to only play the dialog once.
     if(self == level.player) {
       thread so_dialog_counter_update(level.hostile_count, max_count);
     }
@@ -402,7 +319,7 @@ hud_hostile_count() {
 
     while(!flag("challenge_success") && (curr_count == level.hostile_count)) {
       wait(0.05);
-      // This indicates a new wave has started...
+
       if(level.hostile_count > curr_count) {
         max_count = level.hostile_count;
         level.so_progress_goal_status = "none";
@@ -429,25 +346,20 @@ hud_new_wave() {
     return;
   }
 
-  // Next Wave in:
   wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_STARTS";
   wave_delay = 0.75;
   if(current_wave == get_wave_count()) {
-    // Final Wave in:
     wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FINAL_STARTS";
   } else {
     if(current_wave == 2) {
-      // Second Wave in:
       wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_SECOND_STARTS";
     }
 
     if(current_wave == 3) {
-      // Third Wave in:
       wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_THIRD_STARTS";
     }
 
     if(current_wave == 4) {
-      // Fourth Wave in:
       wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FOURTH_STARTS";
     }
   }
@@ -455,20 +367,7 @@ hud_new_wave() {
   thread enable_countdown_timer(level.wave_delay, false, wave_msg, wave_delay);
   wait 2;
   hud_wave_splash(current_wave, level.wave_delay - 2);
-
-  /*
-  	hudelem = so_create_hud_item( 0, so_hud_ypos(), wave_msg );
-  	hudelem SetPulseFX( 50, level.wave_delay * 1000, 500 );
-
-  	hudelem_time = so_create_hud_item( 0, so_hud_ypos(), "" );
-  	hudelem_time.alignX = "left";
-  	hudelem_time SetTenthsTimer( level.wave_delay );
-  	hudelem_time SetPulseFX( 50, level.wave_delay * 1000, 500 );
-
-  	wait( level.wave_delay );*/
 }
-
-// Returns structs...
 hud_get_wave_list(wave_num) {
   list = [];
 
@@ -481,52 +380,21 @@ hud_get_wave_list(wave_num) {
     list[0].text = &"SPECIAL_OPS_INTERMISSION_WAVEFINAL";
   }
 
-  //	switch( wave_num )
-  //	{
-  //		case 1:
-  //			// - Wave 1 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE1";
-  //			break;
-  //
-  //		case 2:
-  //			// - Wave 2 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE2";
-  //			break;
-  //
-  //		case 3:
-  //			// - Wave 3 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE3";
-  //			break;
-  //
-  //		case 4:
-  //			// - Wave 4 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE4";
-  //			break;
-  //
-  //		case 5:
-  //			// - Wave 5 - //			list[ 0 ].text = &"SO_ROOFTOP_CONTINGENCY_WAVE5";
-  //			break;
-  //
-  //		default:
-  //			AssertMsg( "Wrong wave_num passed in" );
-  //			break;
-  //	}
-
   list[1] = spawnStruct();
-  // && 1 Hostiles
+
   list[1].text = &"SO_ROOFTOP_CONTINGENCY_HOSTILES_COUNT";
   list[1].count = get_wave_ai_count(wave_num);
 
   index = 2;
 
-  // Figure out vehicles
   uaz_count = get_vehicle_type_count(wave_num, "uaz");
 
-  // Add each UAZ to the total hostiles
   list[1].count += (uaz_count * 4);
 
   if(uaz_count > 0) {
     if(uaz_count == 1) {
-      // && 1 UAZ Vehicle
       str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT_SINGLE";
     } else {
-      // && 1 UAZ Vehicles
       str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT";
     }
 
@@ -538,15 +406,12 @@ hud_get_wave_list(wave_num) {
 
   bm21_count = get_vehicle_type_count(wave_num, "bm21");
 
-  // Add each BM21 to the total hostiles
   list[1].count += (bm21_count * 6);
 
   if(bm21_count > 0) {
     if(bm21_count == 1) {
-      // && 1 BM21 Troop Carrier
       str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT_SINGLE";
     } else {
-      // && 1 BM21 Troop Carriers
       str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT";
     }
 
@@ -587,8 +452,6 @@ hud_wave_splash(wave_num, timer) {
     hudelem Destroy();
   }
 }
-
-// DEBUG --------------------------------------------------- so_debug_print(msg, delay) {
 message = "> " + msg;
 
 if(isDefined(delay)) {
@@ -608,82 +471,3 @@ distance2d_squared(pos1, pos2) {
 
   return DistanceSquared(pos1, pos2);
 }
-
-//player_input()
-//{
-//	while( 1 )
-//	{
-//		eye_pos = level.player getEye();
-//		forward = anglesToForward( level.player GetPlayerAngles() );
-//		forward_pos = eye_pos + vector_multiply( forward, 2000 );
-//		trace = bulletTrace( eye_pos, forward_pos, false, undefined );
-//		pos = trace[ "position" ];
-//		draw_circle( pos, 32 );
-//
-//		if( level.player useButtonPressed() )
-//		{
-//			missile = MagicBullet( "remote_missile_snow", pos + ( 0, 0, 200 ), pos, level.player );
-//			thread do_physics_impact_on_explosion( level.player );
-//			wait( 0.5 );
-//		}
-//
-//		wait( 0.05 );
-//	}
-//}
-//
-//do_physics_impact_on_explosion( player )
-//{
-//	player waittill( "projectile_impact", weaponName, position, radius );
-//
-//	level.uavTargetPos = position;
-//
-//	physicsSphereRadius = 1000;
-//	physicsSphereForce = 6.0;
-////	Earthquake( .3, 1.4, position, 8000 );
-//
-//	wait 0.1;
-//	PhysicsExplosionSphere( position, physicsSphereRadius, physicsSphereRadius / 2, physicsSphereForce );
-//}
-//
-//
-//draw_circle( center, radius )
-//{
-//	circle_sides = 16;
-//
-//	angleFrac = 360 / circle_sides;
-//
-//	// Z circle
-//	circlepoints = [];
-//	for( i = 0; i < circle_sides; i++ )
-//	{
-//		angle = ( angleFrac * i );
-//		xAdd = Cos( angle ) * radius;
-//		yAdd = Sin( angle ) * radius;
-//		x = center[ 0 ] + xAdd;
-//		y = center[ 1 ] + yAdd;
-//		z = center[ 2 ];
-//		circlepoints[ circlepoints.size ] = ( x, y, z );
-//	}
-//
-//	thread draw_circlepoints( circlepoints );
-//}
-//
-//draw_circlepoints( circlepoints )
-//{
-//	color = ( 0.8, 0, 0 );
-//
-//	for( i = 0; i < circlepoints.size; i++ )
-//	{
-//		start = circlepoints[ i ];
-//		if( i + 1 >= circlepoints.size )
-//		{
-//			end = circlepoints[ 0 ];
-//		}
-//		else
-//		{
-//			end = circlepoints[ i + 1 ];
-//		}
-//
-//		line( start, end, color );
-//	}
-//}

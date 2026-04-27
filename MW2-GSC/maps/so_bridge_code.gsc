@@ -8,8 +8,6 @@
 #include maps\_vehicle;
 #include maps\_anim;
 
-// --------------------------------------------------------------------------------- //	Rapelling AI
-// --------------------------------------------------------------------------------- player_seek_stages() {
 self endon("death");
 
 stages[0] = 2000;
@@ -93,7 +91,6 @@ prevent_fall_overbridge() {
       self.allowdeath = self.origin[0] < x;
     }
 
-    // Catch if killed during allowdeath is false
     if(self.allowdeath && self.health == 1) {
       self Kill();
       return;
@@ -102,8 +99,6 @@ prevent_fall_overbridge() {
     wait(0.05);
   }
 }
-
-// This will prevent the AI from dying while clipping through the hand rail on the bridge
 prevent_fall_overrail() {
   level endon("special_op_terminated");
   self endon("death");
@@ -119,15 +114,13 @@ prevent_fall_overrail() {
   self notify("overrail");
 
   self.allowdeath = false;
-  //	self thread debug_draw_on_ent( "CANNOT" );
+
   wait(0.35);
   self.allowdeath = true;
 
   if(self.health == 1) {
     self Kill();
   }
-
-  //	self thread debug_draw_on_ent( "can" );
 }
 
 debug_draw_on_ent(msg) {
@@ -162,10 +155,6 @@ ai_rappel_over_ground_death_anim(guy) {
   guy notify("over_solid_ground");
   guy clear_deathanim();
 }
-
-// --------------------------------------------------------------------------------- //	Scripted Destructions
-// --------------------------------------------------------------------------------- missile_taxi_moves() {
-// Remove the script_noteworthy from the ad sign on the taxi
 ents = getEntArray("taxi_ad_clip", "targetname");
 foreach(ent in ents) {
   if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "missile_taxi") {
@@ -225,9 +214,6 @@ missile_taxi_get_exploded() {
 
   self notify("taxi_moving");
 }
-
-// --------------------------------------------------------------------------------- //	Attack Helicopter
-// --------------------------------------------------------------------------------- attack_heli() {
 trigger_wait("attack_heli", "targetname");
 attack_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
 thread maps\_attack_heli::begin_attack_heli_behavior(attack_heli);
@@ -236,9 +222,6 @@ wait 2;
 radio_dialogue("so_bridge_hqr_enemy_helo");
 }
 
-// --------------------------------------------------------------------------------- //	Bridge Collapsing
-// --------------------------------------------------------------------------------- BRIDGE_COLLAPSE_SPEED = 1.0;
-
 collapsed_section_shakes() {
   trigger = GetEnt("collapsed_bridge_effects", "targetname");
   targets = getEntArray(trigger.target, "targetname");
@@ -246,7 +229,6 @@ collapsed_section_shakes() {
   trigger waittill("trigger");
 
   foreach(eTarget in targets) {
-    //playFX( <effect id >, <position of effect>, <forward vector>, <up vector> )
     playFX(getfx("dust_ceiling_fall"), eTarget.origin);
   }
 }
@@ -260,7 +242,7 @@ bridge_collapse_prep() {
   thread road_piece_4();
   thread road_piece_5();
   thread road_piece_6();
-  // thread road_piece_7();
+
   thread road_piece_8();
   thread bridge_collapse_van();
   thread bridge_collapse_suv();
@@ -277,16 +259,8 @@ bridge_collapse_prep() {
 
   thread view_tilt();
 
-  //bridge_collapse_smashed_car_1
-
-  //	if( getDvar( "test_bridge_collapse" ) == "1" )
-  //	{	
-  //		level thread notify_delay( "bridge_collapse", 10 );
-  //	}
-
   level waittill("bridge_collapse");
 
-  // start sound, needs 2 seconds to play before bridge comes down
   bridge_collapse_sound = GetEnt("bridge_collapse_sound", "targetname");
   Assert(isDefined(bridge_collapse_sound));
   bridge_collapse_sound thread play_sound_on_entity("scn_bridge_collapse");
@@ -295,15 +269,12 @@ bridge_collapse_prep() {
     SetSavedDvar("player_sprintSpeedScale", level.default_sprint);
   }
 
-  // bridge begins to fall
   level notify("bridge_collapse_start");
   level thread notify_delay("bridge_sway_start", 0.5);
 
   exploder(1);
 
-  //setblur( 1.0, 0.5 );
   wait 6 * BRIDGE_COLLAPSE_SPEED;
-  //setblur( 0, 0.5 );
 
   if(isDefined(level.player_sprint_scale)) {
     SetSavedDvar("player_sprintSpeedScale", level.player_sprint_scale);
@@ -314,7 +285,6 @@ bridge_collapse_earthquake() {
   ent = GetEnt("bridge_collapse_sound", "targetname");
   ent PlayRumbleOnEntity("so_bridge_collapse");
 
-  // start earthquake now, bridge is tilting and cars are sliding
   time = 1;
   Earthquake(0.7, time, ent.origin, 5000);
   wait(time * 0.7);
@@ -333,32 +303,13 @@ bridge_collapse_earthquake() {
 }
 
 reveal_details() {
-  // bridge destroyed details that dont move, they just spawn in after the collapse and are hidden by the smoke
   bridge_collapse_details = getEntArray("bridge_collapse_detail", "targetname");
   thread array_call(bridge_collapse_details, ::Hide);
 
-  // these destroyed bridge details spawn in also but need to slide into position because they are less hidden by the smoke
-  /*
-  bridge_collapse_detail_slide_origin = GetEnt( "bridge_collapse_detail_slide_origin", "targetname" ).origin;
-  bridge_collapse_detail_slide = getEntArray( "bridge_collapse_detail_slide", "targetname" );
-  	
-  foreach( part in bridge_collapse_detail_slide )
-  {
-  	part.finalOrigin = part.origin;
-  	part.origin = ( part.origin[ 0 ], bridge_collapse_detail_slide_origin[ 1 ], bridge_collapse_detail_slide_origin[ 2 ] );
-  	part Hide();
-  }
-  */
   level waittill("bridge_collapse_start");
 
   wait 1;
-  /*
-  foreach( part in bridge_collapse_detail_slide )
-  {
-  	part Show();
-  	part thread reveal_details_slide();
-  }
-  */
+
   wait 1.5;
 
   thread array_call(bridge_collapse_details, ::Show);
@@ -645,8 +596,6 @@ bridge_collapse_truck_1() {
   part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.0 * BRIDGE_COLLAPSE_SPEED;
-
-  //	part thread part_rummble( part.landingSpotOrg, part.landingSpotAng );
 }
 
 bridge_collapse_truck_2() {
@@ -683,7 +632,7 @@ bridge_collapse_sedan_1() {
   part.landingSpotAng = part.angles;
 
   part.origin += (-50, 180, 150);
-  part.angles = (0, 330, 0); // 26 330 13
+  part.angles = (0, 330, 0);
 
   part setModel("vehicle_coupe_gold");
 
@@ -703,8 +652,6 @@ bridge_collapse_sedan_1() {
 }
 
 part_rummble(finalOrg, finalAng) {
-  // makes a part move around a bit after crashing down to make it seem less mechanical
-
   MAX_RUMBLE_ORG_OFFSET = 5;
   MAX_RUMBLE_ANG_OFFSET = 1;
 
@@ -712,7 +659,7 @@ part_rummble(finalOrg, finalAng) {
 
   for(i = 0; i < numMoves; i++) {
     moveTime = RandomFloatRange(0.05, 0.2) * BRIDGE_COLLAPSE_SPEED;
-    //accel_decel = RandomFloatRange( 0.0, moveTime / 2 );
+
     accel_decel = 0 * BRIDGE_COLLAPSE_SPEED;
 
     offsetAng = (RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2));
@@ -740,7 +687,6 @@ view_tilt() {
   Assert(isDefined(direction_ent));
   gravity_vec = VectorNormalize(direction_ent.origin - view_angle_controller_entity.origin);
 
-  //	level waittill( "bridge_collapse_start" );
   level waittill("bridge_sway_start");
 
   SetSavedDvar("phys_gravityChangeWakeupRadius", 1600);
@@ -789,7 +735,6 @@ car_slide(carName, startName) {
     break;
   }
 
-  // Link Clip
   clip = GetEnt(carName + "_clip", "script_noteworthy");
   clip.origin = car.origin;
   clip.angles = car.angles;
@@ -809,7 +754,6 @@ car_slide(carName, startName) {
   car.finalOrg = car.origin;
   car.origin = start.origin;
 
-  //	level waittill( "bridge_collapse_start" );
   level waittill("bridge_sway_start");
 
   wait 1;

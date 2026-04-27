@@ -102,7 +102,6 @@ randomvectorrange(num_min, num_max) {
 }
 
 angle_dif(oldangle, newangle) {
-  // returns the difference between two yaws
   if(oldangle == newangle)
     return 0;
 
@@ -442,7 +441,7 @@ flag_init(message) {
     assertEx(!isDefined(level.flag[message]), "Attempt to reinitialize existing message: " + message);
 
   level.flag[message] = false;
-  // lock check
+
   if(!isDefined(level.trigger_flags)) {
     init_trigger_flags();
     level.trigger_flags[message] = [];
@@ -471,14 +470,13 @@ issuffix(msg, suffix) {
 
 flag_set(message, setter) {
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
-  //lock check
 
   level.flag[message] = true;
   set_trigger_flag_permissions(message);
   if(isDefined(setter)) {
-    level notify(message, setter); // notify needs to be very last thing called
+    level notify(message, setter);
   } else {
-    level notify(message); // notify needs to be very last thing called
+    level notify(message);
   }
 }
 
@@ -493,8 +491,6 @@ flag_wait(msg, entity) {
     other = undefined;
     level waittill(msg, other);
 
-    // if we're waiting for the flag on a specific entity then we have to check
-    // to see if the flag is set on that specific entity
     if(isDefined(entity) && flag(msg, entity)) {
       break;
     }
@@ -505,15 +501,14 @@ flag_wait(msg, entity) {
 
 flag_clear(message) {
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
-  // lock implementation tbd
-  //do this check so we don't unneccessarily send a notify
+
   if(!flag(message)) {
     return;
   }
   level.flag[message] = false;
 
   set_trigger_flag_permissions(message);
-  level notify(message); // the notify needs to be the very last thing called in this function
+  level notify(message);
 }
 
 flag_waitopen(msg) {
@@ -662,13 +657,10 @@ trigger_off_proc() {
 }
 
 set_trigger_flag_permissions(msg) {
-  // turns triggers on or off depending on if they have the proper flags set, based on their shift-g menu settings
-
-  // this can be init before _load has run, thanks to AI.
   if(!isDefined(level.trigger_flags)) {
     return;
   }
-  // cheaper to do the upkeep at this time rather than with endons and waittills on the individual triggers	
+
   level.trigger_flags[msg] = remove_undefined_from_array(level.trigger_flags[msg]);
   array_thread(level.trigger_flags[msg], ::update_trigger_based_on_flags);
 }
@@ -679,7 +671,6 @@ update_trigger_based_on_flags() {
     true_on = false;
     tokens = create_flags_and_return_tokens(self.script_flag_true);
 
-    // stay off unless all the flags are false
     foreach(token in tokens) {
       if(flag(token)) {
         true_on = true;
@@ -692,7 +683,6 @@ update_trigger_based_on_flags() {
   if(isDefined(self.script_flag_false)) {
     tokens = create_flags_and_return_tokens(self.script_flag_false);
 
-    // stay off unless all the flags are false
     foreach(token in tokens) {
       if(flag(token)) {
         false_on = false;
@@ -707,7 +697,6 @@ update_trigger_based_on_flags() {
 create_flags_and_return_tokens(flags) {
   tokens = strtok(flags, " ");
 
-  // create the flag if level script does not
   for(i = 0; i < tokens.size; i++) {
     if(!isDefined(level.flag[tokens[i]])) {
       flag_init(tokens[i]);
@@ -794,7 +783,6 @@ fileprint_start(file) {
 }
 
 fileprint_map_start() {
-  // for the entity count
   level.fileprint_mapentcount = 0;
   fileprint_map_header(true);
 }
@@ -1074,7 +1062,7 @@ flag_wait_or_timeout(flagname, timer) {
       break;
     }
 
-    timeRemaining = timerMS - (GetTime() - start_time); // figure out how long we waited already, if at all
+    timeRemaining = timerMS - (GetTime() - start_time);
     timeRemainingSecs = timeRemaining / 1000;
     wait_for_flag_or_time_elapses(flagname, timeRemainingSecs);
   }
@@ -1101,7 +1089,6 @@ wait_for_flag_or_time_elapses(flagname, timer) {
 }
 
 delayCall(timer, func, param1, param2, param3, param4) {
-  // to thread it off
   thread delayCall_proc(func, timer, param1, param2, param3, param4);
 }
 
@@ -1126,7 +1113,6 @@ delayCall_proc(func, timer, param1, param2, param3, param4) {
 }
 
 noself_delayCall(timer, func, param1, param2, param3, param4) {
-  // to thread it off
   thread noself_delayCall_proc(func, timer, param1, param2, param3, param4);
 }
 
@@ -1148,7 +1134,7 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
 }
 
 isSP() {
-  return false; // this code is only loaded in MP, so obviously this is MP
+  return false;
 }
 
 string_starts_with(string, start) {
@@ -1320,7 +1306,6 @@ draw_arrow(start, end, color) {
 cap_value(value, minValue, maxValue) {
   assert(isDefined(value));
 
-  // handle a min value larger than a max value
   if(minValue > maxValue)
     return cap_value(value, maxValue, minValue);
 
@@ -1349,7 +1334,6 @@ print_csv_asset(asset, type) {
   if(isDefined(level.csv_lines[fileline]))
     return;
   level.csv_lines[fileline] = true;
-  //	fileprint_chk( level.fileprint, fileline );
 }
 
 fileprint_csv_start(file) {
@@ -1474,7 +1458,6 @@ isOffhandWeaponEnabled() {
 }
 
 random(array) {
-  // process the array so it'll work with any string index arrays and arrays with missing entries.
   newarray = [];
   foreach(index, value in array) {
     newarray[newarray.size] = value;
@@ -1530,8 +1513,7 @@ if(bIsPerforceEnabled)
 else
   fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
 
-  // wait for launcher to tell us that it's done writing the file
-  TimeOut = gettime() + 4000; // give launcher 4 seconds to print the file.
+  TimeOut = gettime() + 4000;
 while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getDvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
   wait .05;
 
@@ -1608,14 +1590,11 @@ waitframe() {
 }
 
 brush_delete() {
-  // 		if( ent.v[ "exploder_type" ] != "normal" && !isDefined( ent.v[ "fxid" ] ) && !isDefined( ent.v[ "soundalias" ] ) )
-  // 		if( !isDefined( ent.script_fxid ) )
-
   num = self.v["exploder"];
   if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
   else
-    wait(.05); // so it disappears after the replacement appears
+    wait(.05);
 
   if(!isDefined(self.model)) {
     return;
@@ -1643,7 +1622,7 @@ brush_delete() {
   if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
     self.v["exploder"] = undefined;
 
-  waittillframeend; // so it hides stuff after it shows the new stuff
+  waittillframeend;
   self.model Delete();
 }
 
@@ -1681,16 +1660,13 @@ brush_throw() {
       target = ent get_target_ent();
 
     if(!isDefined(target)) {
-      contact_point = startorg; // no spin just push it.
+      contact_point = startorg;
       throw_vec = ent.origin;
     } else {
       contact_point = ent.origin;
       throw_vec = vector_multiply(target.origin - ent.origin, self.v["physics"]);
     }
 
-    // 		model = spawn( "script_model", startorg );
-    // 		model.angles = startang;
-    // 		model PhysicsLaunchClient( model.origin, temp_vec );
     self.model PhysicsLaunchClient(contact_point, throw_vec);
     return;
   } else {
@@ -1714,7 +1690,6 @@ brush_throw() {
   self.v["exploder"] = undefined;
   wait(6);
   self.model Delete();
-  // 	self Delete();
 }
 
 get_target_ent(target) {
@@ -1753,7 +1728,7 @@ brush_show() {
   self.model Show();
   self.model Solid();
 
-  self.brush_shown = true; // used for hiding an exploder.
+  self.brush_shown = true;
 
   if(isSP() && (self.model.spawnflags & 1)) {
     if(!isDefined(self.model.disconnect_paths))
@@ -1793,7 +1768,7 @@ exploder_delay() {
     self.v["delay"] = 0;
 
   min_delay = self.v["delay"];
-  max_delay = self.v["delay"] + 0.001; // cant randomfloatrange on the same #
+  max_delay = self.v["delay"] + 0.001;
   if(isDefined(self.v["delay_min"]))
     min_delay = self.v["delay_min"];
 
@@ -1819,7 +1794,7 @@ exploder_damage() {
   origin = self.v["origin"];
 
   wait(delay);
-  // Range, max damage, min damage
+
   RadiusDamage(origin, radius, damage, damage);
 }
 
@@ -1827,7 +1802,7 @@ effect_loopsound() {
   if(isDefined(self.loopsound_ent)) {
     self.loopsound_ent Delete();
   }
-  // save off this info in case we delete the effect
+
   origin = self.v["origin"];
   alias = self.v["loopsound"];
   self exploder_delay();
@@ -1851,7 +1826,6 @@ sound_effect() {
 }
 
 effect_soundalias() {
-  // save off this info in case we delete the effect
   origin = self.v["origin"];
   alias = self.v["soundalias"];
   self exploder_delay();
@@ -1889,7 +1863,6 @@ cannon_effect() {
   }
   self exploder_delay();
 
-  //	playFX( level._effect[ self.v[ "fxid" ] ], self.v[ "origin" ], self.v[ "forward" ], self.v[ "up" ] );
   if(isDefined(self.looper))
     self.looper Delete();
 
@@ -1929,9 +1902,6 @@ fire_effect() {
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
 
   playFX(level._effect[firefx], self.v["origin"], forward, up);
-
-  // 	loopfx( 				fxId, 	fxPos, 	waittime, 	fxPos2, 	fxStart, 	fxStop, 	timeout )
-  // 	maps\_fx::loopfx( 	firefx, 	origin, 	delay, 		org, 	undefined, 	ender, 	timeout );
 }
 
 loop_fx_sound(alias, origin, ender, timeout) {
@@ -1948,7 +1918,6 @@ loop_fx_sound(alias, origin, ender, timeout) {
   }
 
   wait(timeout);
-  // 	org Delete();
 }
 
 loop_sound_delete(ender, ent) {
@@ -1958,8 +1927,6 @@ loop_sound_delete(ender, ent) {
 }
 
 exploder_before_load(num) {
-  // gotta wait twice because the createfx_init function waits once then inits all exploders. This guarentees
-  // that if an exploder is run on the first frame, it happens after the fx are init.
   waittillframeend;
   waittillframeend;
   activate_exploder(num);
@@ -1974,7 +1941,6 @@ activate_exploder(num) {
 
   prof_begin("activate_exploder");
 
-  //here's a hook so you can know when a certain number of an exploder is going off
   level notify("exploding_" + num);
 
   for(i = 0; i < level.createFXent.size; i++) {
@@ -1985,7 +1951,7 @@ activate_exploder(num) {
     if(ent.v["type"] != "exploder") {
       continue;
     }
-    // make the exploder actually removed the array instead?
+
     if(!isDefined(ent.v["exploder"])) {
       continue;
     }
@@ -2004,7 +1970,6 @@ createLoopEffect(fxid) {
 }
 
 createOneshotEffect(fxid) {
-  // uses triggerfx
   ent = common_scripts\_createfx::createEffect("oneshotfx", fxid);
   ent.v["delay"] = -15;
   return ent;
@@ -2178,9 +2143,7 @@ play_loop_sound_on_entity(alias, offset) {
     org LinkTo(self);
   }
 
-  // 	org endon( "death" );
   org playLoopSound(alias);
-  // 	PrintLn( "playing loop sound ", alias, " on entity at origin ", self.origin, " at ORIGIN ", org.origin );
 
   self waittill("stop sound" + alias);
   org StopLoopSound(alias);
@@ -2192,7 +2155,6 @@ stop_loop_sound_on_entity(alias) {
 }
 
 delete_on_death(ent) {
-  //self ==> the entity you want to wait to die before deleting the ent
   ent endon("death");
   self waittill("death");
   if(isDefined(ent))

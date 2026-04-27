@@ -13,11 +13,7 @@
 #include maps\gulag_code;
 #include maps\_specialops;
 
-// --------------------------------------------------------------------------------- //	NEED TO PURGE AND CLEAN MAIN
-// --------------------------------------------------------------------------------- main() {
 level.so_compass_zoom = "close";
-
-//	breakpoint;
 gulag_destructible_volumes = getEntArray("gulag_destructible_volume", "targetname");
 mask_destructibles_in_volumes(gulag_destructible_volumes);
 mask_interactives_in_volumes(gulag_destructible_volumes);
@@ -27,18 +23,6 @@ create_dvar("f15", 1);
 SetSavedDvar("g_friendlyNameDist", 0);
 
 maps\createfx\gulag_audio::main();
-//VisionSetNight( "gulag_nvg", 1.5 );
-
-// The Gulag
-//	PreCacheString(&"GULAG_INTROSCREEN_LINE_1" );
-// Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs
-//	PreCacheString(&"GULAG_INTROSCREEN_LINE_2" );
-// P03 'Roach' Silvers
-//	PreCacheString(&"GULAG_INTROSCREEN_LINE_3" );
-// SEAL Team Six, U.S.N.
-//	PreCacheString(&"GULAG_INTROSCREEN_LINE_4" );
-
-//	level.start_point = "unload";
 set_default_start("so_showers");
 add_start("so_showers", ::start_so_showers_timed, "Special Op: Showers");
 
@@ -52,16 +36,6 @@ top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
 array_thread(top_hall_chunks, ::self_delete);
 
 level.disable_interactive_tv_use_triggers = true;
-
-/*
-start = create_start( "intro" );
-start.main = ::gulag_flyin;
-start.text = "Intro";
-	
-start = create_start( "approach" );
-start.main = ::gulag_approach;
-start.text = "Approach";
-*/
 
 level.custom_no_game_setupFunc = ::gulag_no_game_start_setupFunc;
 level.slowmo_viewhands = "viewhands_player_udt";
@@ -94,7 +68,6 @@ flag_init("player_heli_uses_modified_yaw");
 flag_init("intro_helis_spawned");
 flag_init("player_lands");
 flag_init("overlook_cleared_with_safe_time");
-//flag_init( "cell_door1" );
 flag_init("cell_door2");
 flag_init("cell_door3");
 flag_init("cell_door4");
@@ -115,13 +88,12 @@ flag_init("stop_rotating_around_gulag");
 flag_init("player_goes_in_for_landing");
 flag_init("enable_endlog_fx");
 flag_init("escape_the_gulag");
-//	flag_set( "player_goes_in_for_landing" );
 flag_init("gulag_perimeter");
 flag_init("pre_boats_attack");
 flag_init("clear_dof");
 flag_init("player_heli_backs_up");
 flag_init("stop_shooting_right_side");
-flag_set("player_can_rappel"); // didnt need
+flag_set("player_can_rappel");
 
 flag_init("gulag_shower_music_done");
 
@@ -153,7 +125,6 @@ PreCacheModel("com_emergencylightcase_blue");
 PreCacheModel("gulag_price_ak47");
 PreCacheModel("com_emergencylightcase_orange");
 PreCacheModel("com_emergencylightcase_blue_off");
-//	PreCacheModel( "rappelrope100_le_obj" );
 PreCacheModel("com_drop_rope_obj");
 PreCacheModel("com_blackhawk_spotlight_on_mg_setup");
 PreCacheModel("com_blackhawk_spotlight_on_mg_setup_3x");
@@ -202,13 +173,11 @@ SetIgnoreMeGroup("team3", "axis");
 SetIgnoreMeGroup("axis", "team3");
 
 array_spawn_function_noteworthy("overlook_spawner", ::overlook_spawner_think);
-//array_spawn_function_noteworthy( "hallway_runner_spawner", ::hallway_runner_spawner_think );
 array_spawn_function_targetname("bhd_spawner", ::bhd_heli_think);
 array_spawn_function_noteworthy("breach_death_spawner", ::die_on_ragdoll);
 array_spawn_function_noteworthy("riot_shield_spawner", ::riot_shield_guy);
 array_spawn_function_noteworthy("flee_armory_spawner", ::flee_armory_think);
 array_spawn_function_noteworthy("tarp_spawner", ::tarp_spawner_think);
-//	array_spawn_function_noteworthy( "doomed_just_doomed", ::doomed_just_doomed_think );
 array_spawn_function_noteworthy("close_fighter_spawner", ::close_fighter_think);
 array_spawn_function_noteworthy("bathroom_balcony_spawner", ::bathroom_balcony_spawner);
 array_spawn_function_noteworthy("riot_escort_spawner", ::riot_escort_spawner);
@@ -229,15 +198,12 @@ thread landing_blocker_think();
 level.ending_flee_guys = 0;
 level.ending_flee_max = 0;
 level.slamraam_missile = "slamraam_missile_guided";
-
-// makes the friendlies go the right way
 ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
 ai_field_blocker ConnectPaths();
 ai_field_blocker NotSolid();
 }
 
 fill_weapon_pickups() {
-  // Fill up all of the weapons in the level
   weapons = getEntArray("so_weapons", "targetname");
 
   foreach(weapon in weapons) {
@@ -256,33 +222,25 @@ fill_weapon_pickups() {
   }
 }
 
-// --------------------------------------------------------------------------------- //	SPECIAL OPS SPECIFIC
-// --------------------------------------------------------------------------------- start_so_showers_timed() {
-//	if( !isDefined( anim.bcs_locations ) )
-//		anim.bcs_locations = [];
-
 fill_weapon_pickups();
 level thread breach_hint_model();
 
 flag_set("enable_interior_fx");
-//	flag_set( "disable_exterior_fx" );
 
 thread maps\_utility::set_ambient("gulag_hall_int0");
 
 switch (level.gameSkill) {
-  case 0: // Easy
+  case 0:
   case 1:
     so_showers_timed_setup_Regular();
-    break; // Regular
+    break;
   case 2:
     so_showers_timed_setup_hardened();
-    break; // Hardened
+    break;
   case 3:
     so_showers_timed_setup_veteran();
-    break; // Veteran
+    break;
 }
-
-// Prevent player from leaving the valid play space.
 thread enable_escape_warning();
 thread enable_escape_failure();
 
@@ -335,13 +293,10 @@ so_showers_update_objective() {
   objective_position(1, objective_marker.origin);
   Objective_SetPointerTextOverride(1, "");
 }
-
-// This does not appear to be call from anywhere
 so_showers_timed_setup_get_spawners(randomize) {
   if(!isDefined(randomize))
     randomize = true;
 
-  // Access all the enemy spawners used in the bathroom
   level.bathroom_initial = getEntArray("bathroom_initial_spawner", "script_noteworthy");
   level.bathroom_balcony = getEntArray("bathroom_balcony_spawner", "script_noteworthy");
   level.bathroom_reinforcements = getEntArray("bathroom_reinforcements_spawner", "script_noteworthy");
@@ -356,7 +311,6 @@ so_showers_timed_setup_get_spawners(randomize) {
     array_randomize(level.riot_escort);
   }
 
-  // Purge the riot_shield guys not actually used in the bathroom.
   for(i = 0; i < level.riot_shield.size; i++) {
     if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG")
       level.riot_shield[i] = undefined;
@@ -396,9 +350,6 @@ challenge_only_think() {
 
   self delete();
 }
-
-// --------------------------------------------------------------------------------- //	NEED TO PURGE AND CLEAN EVERYTHING BELOW
-// --------------------------------------------------------------------------------- // sets McCord up with stuff he needs to test the map
 gulag_no_game_start_setupFunc() {
   maps\_loadout::init_loadout();
 

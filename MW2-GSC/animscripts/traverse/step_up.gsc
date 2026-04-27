@@ -4,10 +4,6 @@
 ********************************************************/
 
 #include animscripts\traverse\shared;
-
-// step_up.gsc
-// Makes the character step up onto a ledge.Currently the ledge is assumed to be 36 units.
-
 #using_animtree("generic_human");
 
 main() {
@@ -18,7 +14,6 @@ main() {
 }
 
 step_up_human() {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
@@ -26,7 +21,6 @@ step_up_human() {
   self.a.movement = "walk";
   self traverseMode("nogravity");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);

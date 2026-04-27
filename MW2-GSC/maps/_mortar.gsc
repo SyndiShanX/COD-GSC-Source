@@ -6,22 +6,9 @@
 #include common_scripts\utility;
 #include maps\_utility;
 
-main() {
-  /*
-  mortars = getentarray ("mortar","targetname");
-  for(i=0;i<mortars.size;i++)
-  	mortars[i] thread burnville_style_mortar();
-
-  if( !(isdefined (level.mortar) ) )
-  	error ("level.mortar not defined. define in level script");
-  	
-  thread generic_style_init();
-  */
-}
+main() {}
 
 hurtgen_style() {
-  // One mortar within x distance goes off every x seconds but not within x units of the player
-
   mortars = getEntArray("mortar", "targetname");
   lastmortar = -1;
 
@@ -37,11 +24,10 @@ hurtgen_style() {
     wait(1 + (randomfloat(2)));
 
     r = randomint(mortars.size);
-    //println ("mortar size: ", mortars.size);
-    //println ("r: ", r);
+
     for(i = 0; i < mortars.size; i++) {
       c = (i + r) % mortars.size;
-      //println ("current number: ", c);
+
       d = distance(level.player getorigin(), mortars[c].origin);
       d2 = undefined;
       if(isDefined(level.foley))
@@ -53,7 +39,7 @@ hurtgen_style() {
         lastmortar = c;
         if(d < 500)
           maps\_shellshock::main(4);
-        //					level.player shellshock("default", 4);
+
         break;
       }
     }
@@ -61,11 +47,6 @@ hurtgen_style() {
 }
 
 railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDamageMin, fQuakepower, iQuaketime, iQuakeradius, targetsUsed, seedtime) {
-  // One mortar within iMaxRange distance goes off every (random + random) seconds but not within iMinRange units of the player
-  // Terminate on demand by setting level.iStopBarrage != 0, operates indefinitely by default
-  // Pass optional custom radius damage settings to activate_mortar()
-  // Also pass optional custom earthquake settings to mortar_boom() via activate_mortar() if you want more shaking
-
   if(!isDefined(fRandomtime))
     fRandomtime = 7;
   if(!isDefined(iMaxRange))
@@ -76,15 +57,14 @@ railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDam
   if(!isDefined(level.iStopBarrage))
     level.iStopBarrage = 0;
 
-  if(!isDefined(targetsUsed)) // this allows railyard_style to get called again and not setup any terrain related stuff
+  if(!isDefined(targetsUsed))
     targetsUsed = 0;
 
   mortars = getEntArray("mortar", "targetname");
   lastmortar = -1;
 
   for(i = 0; i < mortars.size; i++) {
-    if(isDefined(mortars[i].target) && (targetsUsed == 0)) // no target necessary, mortar will just play effect and sound
-    {
+    if(isDefined(mortars[i].target) && (targetsUsed == 0)) {
       mortars[i] setup_mortar_terrain();
     }
   }
@@ -105,11 +85,10 @@ railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDam
       }
 
       r = randomint(mortars.size);
-      //println ("mortar size: ", mortars.size);
-      //println ("r: ", r);
+
       for(i = 0; i < mortars.size; i++) {
         c = (i + r) % mortars.size;
-        //println ("current number: ", c);
+
         d = distance(level.player getorigin(), mortars[c].origin);
         if((d < iMaxRange) && (d > iMinRange) && (c != lastmortar)) {
           mortars[c] activate_mortar(iBlastRadius, iDamageMax, iDamageMin, fQuakepower, iQuaketime, iQuakeradius, false);
@@ -120,7 +99,6 @@ railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDam
     }
   }
 
-  //println("MORTAR BARRAGE TERMINATED");
 }
 
 script_mortargroup_style() {
@@ -143,12 +121,10 @@ script_mortargroup_style() {
       level.mortars[models[i].script_mortargroup]
         [level.mortars[models[i].script_mortargroup].size] = mortar;
       models[i] delete();
-
-      //			mortars[mortars.size] = models[i];
     }
   for(i = 0; i < mortars.size; i++) {
     mortars[i] hide();
-    //		mortars[i] setup_mortar_terrain(); 		// this was commented out going to run it and find out just why
+
     mortars[i].has_terrain = false;
   }
   if(!(isDefined(level.mortar)))
@@ -247,7 +223,7 @@ script_mortargroup_mortarzone() {
       lastblast = [];
     lastblast[lastblast.size] = level.mortars[self.script_mortargroup][pick];
     level.mortars[self.script_mortargroup][pick] thread script_mortargroup_domortar();
-    //		self.groupedmortars = array_remove(self.groupedmortars,self.groupedmortars[pick]);
+
     if(timed && gettime() > timer) {
       if(isDefined(self.target)) {
         target = getent(self.target, "targetname");
@@ -292,9 +268,6 @@ script_mortargroup_mortar_group() {
 }
 
 trigger_targeted() {
-  //While the player is touching a trigger named "mortartrigger" a targeted script_origin mortar with a defined
-  //script_mortargroup value will go off every x seconds regardless of the players distance to the mortar.
-
   level.mortartrigger = getEntArray("mortartrigger", "targetname");
   level.mortars = getEntArray("script_origin", "classname");
 
@@ -332,10 +305,6 @@ trigger_targeted_mortars(num) {
 }
 
 bunker_style_mortar() {
-  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"//	mortar group is turned on/off in script or with triggers with targetname "mortar_on" or "mortar_off"//	mortar locations will all go simultaneously when an artillery round hits if within FOV of the player (dust falling from ceiling)
-  //	each mortar location has script_fxid so it can play a set fx
-  //	mortars will go forever until that group of mortars is notified to stop
-
   mortar_bunker_array = [];
   ents = undefined;
   groupNum = [];
@@ -362,7 +331,6 @@ bunker_style_mortar() {
     }
 
     if(index == -1) {
-      // new group
       mortar_bunker_array[mortar_bunker_array.size] = [];
       groupNum[groupNum.size] = groupNumber;
       index = mortar_bunker_array.size - 1;
@@ -409,7 +377,7 @@ bunker_style_mortar_activate(mortar_bunker_array, min, max, groupNum, structs) {
       play_sound_in_space("mortar_incoming_bunker", sound_org.origin);
     }
     sound_org = getclosest(level.player.origin, structs);
-    //thread play_sound_in_space( "mortar_explosion_bunker", sound_org.origin );
+
     thread play_sound_in_space("exp_artillery_underground", sound_org.origin);
     array_thread(mortar_bunker_array, ::bunker_style_mortar_explode);
     if(!isDefined(level.mortarNoQuake)) {
@@ -428,13 +396,11 @@ bunker_style_mortar_explode(min, max) {
   if(!isDefined(self)) {
     return;
   }
-  /*----------------------- ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN PLAYER FOV
-  -------------------------*/
+
   if((isDefined(level.mortarWithinFOV)) && (self mortar_within_player_fov(level.mortarWithinFOV) == false)) {
     return;
   }
-  /*----------------------- ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN RADIUS
-  -------------------------*/
+
   if(isDefined(level.mortar_min_dist))
     min_dist = level.mortar_min_dist;
   else
@@ -445,32 +411,21 @@ bunker_style_mortar_explode(min, max) {
   if(distSquared > min_dist_squared) {
     return;
   }
-  /*----------------------- IF IT'S A TRIGGER RADIUS, DO DAMAGE TO BUST UP DESTRUCTIBLES
-  -------------------------*/
-  //trigger radius are put around destructibles that you want damaged if the player is looking at it
+
   if((isDefined(self.classname)) && (self.classname == "trigger_radius")) {
     if((!level.player istouching(self)) && (distance(level.player.origin, self.origin) < level.mortarDamageTriggerDist)) {
       RadiusDamage(self.origin, self.radius, 500, 500);
       self delete();
       return;
     }
-  }
-  /*----------------------- OTHERWISE, PLAY CEILING DUST
-  -------------------------*/
-  else {
+  } else {
     playFX(level._effect["mortar"][self.script_fxid], self.origin);
-    if(distSquared < 262144) //only play sound when within 512
+    if(distSquared < 262144)
       thread play_sound_in_space("emt_single_ceiling_debris", self.origin);
   }
 }
 
 bog_style_mortar() {
-  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"//	mortar group is turned on/off in script
-  //	mortar locations will start going off randomly and wont go off within x units of the player
-  //	each mortar location has script_fxid so it can play a set fx ( this allows having mortars on land and water in the same group )
-  //	mortars will go forever until that group of mortars is notified to stop
-  //	each mortar has a cooldown time of x seconds before it can be used again
-
   groups = [];
   groupNum = [];
   structs = getStructArray("mortar", "targetname");
@@ -491,7 +446,6 @@ bog_style_mortar() {
     }
 
     if(index == -1) {
-      // new group
       groups[groups.size] = [];
       groupNum[groupNum.size] = groupNumber;
       index = groups.size - 1;
@@ -536,7 +490,6 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
   else
     min_dist = 300;
 
-  //trigger used to check if friendlies is too close (if level.mortarExcluders is defined)
   mortarDistanceTrigger = spawn("trigger_radius", (0, 0, 0), 0, min_dist, 256);
   thread bog_style_mortar_cleanup(mortarDistanceTrigger, groupNum);
 
@@ -544,26 +497,25 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
     for(;;) {
       wait 0.05;
       rand = randomint(mortars.size);
-      if(isDefined(mortars[rand].cooldown))
+      if(isDefined(mortars[rand].cooldown)) {
         continue;
-      //don't trigger mortar if player too close
+      }
       d = distance(level.player.origin, mortars[rand].origin);
       if(d < min_dist) {
         continue;
       }
-      //don't trigger mortar in case we have friendlies we do not want to be hit by mortars
+
       if((isDefined(level.mortarExcluders)) && (level.mortarExcluders.size > 0)) {
-        mortarDistanceTrigger.origin = mortars[rand].origin; //trigger_radius used to determine if level.mortarExcluders are too close to detonate
+        mortarDistanceTrigger.origin = mortars[rand].origin;
         if(mortars_too_close(level.mortarExcluders, mortarDistanceTrigger))
           continue;
       }
 
-      // in case we need to see mortars in the distance
       if(!isDefined(level.noMaxMortarDist) && (d > 1000))
         continue;
-      if((isDefined(level.mortar_max_dist)) && (d > level.mortar_max_dist))
+      if((isDefined(level.mortar_max_dist)) && (d > level.mortar_max_dist)) {
         continue;
-      //if we need to check player FOV
+      }
       if((isDefined(level.mortarWithinFOV)) && (mortars[rand] mortar_within_player_fov(level.mortarWithinFOV) == false))
         continue;
       break;
@@ -578,7 +530,7 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
 
 bog_style_mortar_cleanup(mortarDistanceTrigger, groupNum) {
   level waittill("stop_mortars " + groupNum);
-  mortarDistanceTrigger delete(); //delete the trigger_radius used to determine if level.mortarExcluders are too close to detonate
+  mortarDistanceTrigger delete();
 }
 
 mortars_too_close(mortarExcluders, mortarDistanceTrigger) {
@@ -618,7 +570,6 @@ bog_style_mortar_explode(instant, customExploSound) {
   else
     self thread play_sound_in_space(level.scr_sound["mortar"][self.script_fxid]);
 
-  //dont play an effect if it's behind the player - trying to save on particle effects
   setplayerignoreradiusdamage(true);
   radiusDamage(self.origin, level.mortarDamageRadius, 150, 50);
   setplayerignoreradiusdamage(false);
@@ -629,7 +580,6 @@ bog_style_mortar_explode(instant, customExploSound) {
   }
 
   if(getdvarint("bog_camerashake") > 0) {
-    //if player is trying to snipe dont do view shake
     if((level.player getCurrentWeapon() == "dragunov") && (level.player playerADS() > 0.8))
       return;
     earthquake(0.25, 0.75, self.origin, 1250);
@@ -671,7 +621,7 @@ bunker_style_mortar_on(groupNum) {
 }
 
 bunker_style_mortar_off(groupNum) {
-  level waittill("mortar_hit"); //don't interrupt in the middle of an incoming sound before it hits
+  level waittill("mortar_hit");
   level notify("stop_mortars " + groupNum);
 }
 
@@ -691,7 +641,6 @@ bunker_style_mortar_trigger(value) {
 }
 
 burnville_style_mortar() {
-  // Mortar waits for player to come within x units. Then explodes every x seconds if player is x range away
   level endon("stop falling mortars");
   setup_mortar_terrain();
 
@@ -748,12 +697,6 @@ setup_mortar_terrain() {
 }
 
 activate_mortar(range, max_damage, min_damage, fQuakepower, iQuaketime, iQuakeradius, bIsstruct) {
-  //	if(bIsstruct)
-  //	{
-  //		if(distance(self.origin,level.player.origin) < 1000)
-  //			incoming_sound( undefined, bIsstruct );
-  //	}
-  //	else
   incoming_sound(undefined, bIsstruct);
 
   level notify("mortar");
@@ -799,7 +742,6 @@ mortar_boom(origin, fPower, iTime, iRadius, effect, bIsstruct) {
 
   earthquake(fPower, iTime, origin, iRadius);
 
-  // Special Burnville Shell shocking
   if(level.script != "burnville")
     return;
   if(isDefined(level.playerMortar))
@@ -812,20 +754,6 @@ mortar_boom(origin, fPower, iTime, iRadius, effect, bIsstruct) {
   level.playerMortar = true;
   level notify("shell shock player", iTime * 4);
   maps\_shellshock::main(iTime * 4);
-  //	level.player shellshock("default", iTime*4);
-
-  //	earthquake(0.15, 2, origin, 1050);
-  /*
-  earthquake(float scale, float duration, vector source, float radius)
-
-  Example:
-  	scale = 0.15;
-  	duration = 1;
-  	source = (866, 2240, 0);
-  	radius = 600;
-
-  	earthquake(scale, duration, source, radius);
-  */
 }
 
 mortar_sound(bIsstruct) {
@@ -907,21 +835,10 @@ generic_style_setquake(strExplosion, fQuakePower, iQuakeTime, iQuakeRadius) {
   level._explosion_iQuakeTime[strExplosion] = iQuakeTime;
   level._explosion_iQuakeRadius[strExplosion] = iQuakeRadius;
 }
-
-// REQUIRED: level._effect[strExplosion] 		= loadfx(...);
-// REQUIRED: level._effectType[strExplosion]	= strType ("mortar", "bomb" or "artillery")
-
-// Allows for multiple sets of explosions in a single level
-// One explosion within iMaxRange distance goes off every (random + random) seconds but not within iMinRange units of the player
-// Starts on notify specified by level.explosion_start[strExplosion]
-// Terminates on notify specified by level.explosion_stop[strExplosion]
-// Terminate on demand by setting level.bStopBarrage[strExplosion] == true, operates indefinitely by default
 generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMaxRange, bTargetsUsed) {
-  //// Safety checks
   assertex((isDefined(strExplosion) && (strExplosion != "")), "strExplosion not passed. pass in level script");
   assertex((isDefined(level._effect) && isDefined(level._effect[strExplosion])), "level._effect[strMortars] not defined. define in level script");
 
-  //// Initialize Defaults
   iLastExplosion = -1;
   iMaxRangeLocal = iMaxRange;
   iMinRangeLocal = iMinRange;
@@ -937,34 +854,28 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
   if(!isDefined(fBarrageDelay))
     fBarrageDelay = 0;
 
-  if(!isDefined(bTargetsUsed)) // this allows generic_style to get called again and not setup any terrain related stuff
+  if(!isDefined(bTargetsUsed))
     bTargetsUsed = false;
 
   if(isDefined(level.explosion_stopNotify) && isDefined(level.explosion_stopNotify[strExplosion]))
     level endon(level.explosion_stopNotify[strExplosion]);
 
-  // for backwards compatibility
   if(!isDefined(level.bStopBarrage) || !isDefined(level.bStopBarrage[strExplosion]))
     level.bStopBarrage[strExplosion] = false;
 
-  //// Explosion Points
   aeExplosions = getEntArray(strExplosion, "targetname");
 
-  //// Terrain Setup
   for(i = 0; i < aeExplosions.size; i++) {
-    if(isDefined(aeExplosions[i].target) && (!bTargetsUsed)) // no target necessary, mortar will just play effect and sound
+    if(isDefined(aeExplosions[i].target) && (!bTargetsUsed))
       aeExplosions[i] setup_mortar_terrain();
   }
 
-  //// Start Wait
   if(isDefined(level.explosion_startNotify) && isDefined(level.explosion_startNotify[strExplosion]))
     level waittill(level.explosion_startNotify[strExplosion]);
 
-  //// Main Loop
   while(true) {
     while(!level.bStopBarrage[strExplosion]) {
       for(j = 0; j < iBarrageSize; j++) {
-        // putting this here allows for updates during barrage
         if(!isDefined(iMaxRange))
           iMaxRangeLocal = level._explosion_iMaxRange[strExplosion];
         if(!isDefined(iMinRange))
@@ -975,7 +886,7 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
           iCur = (i + iRand) % aeExplosions.size;
           fDist = distance(level.player getorigin(), aeExplosions[iCur].origin);
           if((fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal) && (iCur != iLastExplosion))
-          //				if( (fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal))
+
           {
             aeExplosions[iCur].iMinRange = iMinRangeLocal;
             aeExplosions[iCur] explosion_activate(strExplosion);
@@ -999,7 +910,6 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
 }
 
 explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePower, iQuakeTime, iQuakeRadius) {
-  //// Initialize Defaults
   generic_style_setdamage(strExplosion, 256, 25, 400);
   generic_style_setquake(strExplosion, 0.15, 2, 850);
 
@@ -1017,7 +927,6 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
   if(!isDefined(iQuakeRadius))
     iQuakeRadius = level._explosion_iQuakeRadius[strExplosion];
 
-  //// Incoming Sound
   explosion_incoming(strExplosion);
 
   level notify("explosion", strExplosion);
@@ -1026,7 +935,6 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
   fPreDist = undefined;
   eLocation = self;
   if(isDefined(self.iMinRange) && distance(level.player.origin, self.origin) < self.iMinRange) {
-    // get closest location outside iMinRange
     aeExplosions = getEntArray(strExplosion, "targetname");
     for(iCur = 0; iCur < aeExplosions.size; iCur++) {
       fDist = distance(level.player getorigin(), aeExplosions[iCur].origin);
@@ -1045,7 +953,6 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
   if(bDoDamage)
     radiusDamage(eLocation.origin, iBlastRadius, iDamageMax, iDamageMin);
 
-  //// Process Terrain
   if((isDefined(eLocation.has_terrain) && eLocation.has_terrain == true) && (isDefined(eLocation.terrain))) {
     for(i = 0; i < eLocation.terrain.size; i++) {
       if(isDefined(eLocation.terrain[i]))
@@ -1057,7 +964,6 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
     eLocation.hidden_terrain show();
   eLocation.has_terrain = false;
 
-  //// Explosion Effects
   eLocation explosion_boom(strExplosion, fQuakePower, iQuakeTime, iQuakeRadius);
 }
 

@@ -3,9 +3,6 @@
  * Script: character\mp_character_delta_elite_shotgun_a.gsc
 ************************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_delta_elite_shotgun_a");
   codescripts\character::attachhead("alias_delta_elite_heads_longsleeves", xmodelalias\alias_delta_elite_heads_longsleeves::main());

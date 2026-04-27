@@ -17,10 +17,8 @@ SOTABLE_COL_UNLOCK = 5;
 main() {
   missionSettings = [];
 
-  // levels and missions are listed in order
-  missionIndex = 0; // only one missionindex( vignettes in CoD2, no longer exist but I'm going to use this script anyway because it's got good stuff in it. - Nate
+  missionIndex = 0;
 
-  //				addLevel( levelName, 		keepWeapons,achievement, 					skipsSuccess, 	veteran_achievement )
   missionSettings = createMission("THE_PRICE_OF_WAR");
   missionSettings addLevel("trainer", false, "BACK_IN_THE_SADDLE", true, "FIRST_DAY_OF_SCHOOL");
   missionSettings addLevel("roadkill", false, "DANGER_CLOSE", true, "FIRST_DAY_OF_SCHOOL");
@@ -42,10 +40,6 @@ main() {
   missionSettings addLevel("af_chase", true, undefined, true, "OFF_THE_GRID");
   missionSettings addLevel("ending", false, "FOR_THE_RECORD", true, "OFF_THE_GRID");
 
-  //
-
-  // need to add SO maps differently, need to save script vars
-  //-------- /*
   TO DO:
     *
     /
@@ -60,35 +54,34 @@ main() {
 
   if(is_specialop()) {
     specOpsSettings = createMission("SPECIAL_OPS");
-    //addSpecOpLevel( levelName, achievement, veteran_achievement )
-    specOpsSettings addSpecOpLevel("so_showers_gulag", false, false); // offset: 0
-    specOpsSettings addSpecOpLevel("so_killspree_invasion", false, false); // offset: 1
-    specOpsSettings addSpecOpLevel("so_ac130_co_hunted", false, false); // offset: 2
-    specOpsSettings addSpecOpLevel("so_killspree_favela", false, false); // offset: 3
-    specOpsSettings addSpecOpLevel("so_assault_oilrig", false, false); // offset: 4
-    specOpsSettings addSpecOpLevel("so_defense_invasion", false, false); // offset: 5
-    specOpsSettings addSpecOpLevel("so_escape_airport", false, false); // offset: 6
-    specOpsSettings addSpecOpLevel("so_forest_contingency", false, false); // offset: 7
-    specOpsSettings addSpecOpLevel("so_download_arcadia", false, false); // offset: 8
-    specOpsSettings addSpecOpLevel("so_demo_so_bridge", false, false); // offset: 9
-    specOpsSettings addSpecOpLevel("so_crossing_so_bridge", false, false); // offset: 10
-    specOpsSettings addSpecOpLevel("so_snowrace1_cliffhanger", false, false); // offset: 11
-    specOpsSettings addSpecOpLevel("so_snowrace2_cliffhanger", false, false); // offset: 12
-    specOpsSettings addSpecOpLevel("so_rooftop_contingency", false, false); // offset: 13
-    specOpsSettings addSpecOpLevel("so_sabotage_cliffhanger", false, false); // offset: 14
-    specOpsSettings addSpecOpLevel("so_defuse_favela_escape", false, false); // offset: 15
-    specOpsSettings addSpecOpLevel("so_takeover_estate", false, false); // offset: 16
-    specOpsSettings addSpecOpLevel("so_takeover_oilrig", false, false); // offset: 17
-    specOpsSettings addSpecOpLevel("so_intel_boneyard", false, false); // offset: 18
-    specOpsSettings addSpecOpLevel("so_juggernauts_favela", false, false); // offset: 19
-    specOpsSettings addSpecOpLevel("so_hidden_so_ghillies", false, false); // offset: 20
-    specOpsSettings addSpecOpLevel("so_chopper_invasion", false, false); // offset: 21
-    specOpsSettings addSpecOpLevel("so_killspree_trainer", false, false); // offset: 22
+
+    specOpsSettings addSpecOpLevel("so_showers_gulag", false, false);
+    specOpsSettings addSpecOpLevel("so_killspree_invasion", false, false);
+    specOpsSettings addSpecOpLevel("so_ac130_co_hunted", false, false);
+    specOpsSettings addSpecOpLevel("so_killspree_favela", false, false);
+    specOpsSettings addSpecOpLevel("so_assault_oilrig", false, false);
+    specOpsSettings addSpecOpLevel("so_defense_invasion", false, false);
+    specOpsSettings addSpecOpLevel("so_escape_airport", false, false);
+    specOpsSettings addSpecOpLevel("so_forest_contingency", false, false);
+    specOpsSettings addSpecOpLevel("so_download_arcadia", false, false);
+    specOpsSettings addSpecOpLevel("so_demo_so_bridge", false, false);
+    specOpsSettings addSpecOpLevel("so_crossing_so_bridge", false, false);
+    specOpsSettings addSpecOpLevel("so_snowrace1_cliffhanger", false, false);
+    specOpsSettings addSpecOpLevel("so_snowrace2_cliffhanger", false, false);
+    specOpsSettings addSpecOpLevel("so_rooftop_contingency", false, false);
+    specOpsSettings addSpecOpLevel("so_sabotage_cliffhanger", false, false);
+    specOpsSettings addSpecOpLevel("so_defuse_favela_escape", false, false);
+    specOpsSettings addSpecOpLevel("so_takeover_estate", false, false);
+    specOpsSettings addSpecOpLevel("so_takeover_oilrig", false, false);
+    specOpsSettings addSpecOpLevel("so_intel_boneyard", false, false);
+    specOpsSettings addSpecOpLevel("so_juggernauts_favela", false, false);
+    specOpsSettings addSpecOpLevel("so_hidden_so_ghillies", false, false);
+    specOpsSettings addSpecOpLevel("so_chopper_invasion", false, false);
+    specOpsSettings addSpecOpLevel("so_killspree_trainer", false, false);
 
     level.specOpsSettings = specOpsSettings;
   }
 
-  //-------- /*
   missionSettings addLevel("cargoship", false, "MAKE_THE_JUMP", true, "THE_PACKAGE");
   missionSettings addLevel("coup", false, undefined, true);
   missionSettings addLevel("blackout", false, "COMPLETE_BLACKOUT", true, "THE_RESCUE");
@@ -108,8 +101,9 @@ main() {
   missionSettings addLevel("launchfacility_a", true, undefined, true, "THE_ULTIMATUM");
   missionSettings addLevel("launchfacility_b", true, undefined, true, "THE_ULTIMATUM");
   missionSettings addLevel("jeepride", false, "WIN_THE_WAR", true, "THE_FOURTH_HORSEMAN");
-  missionSettings addLevel("airplane", false, undefined, undefined, "MILE_HIGH_CLUB");
-  */
+  missionSettings addLevel("airplane", false, undefined, undefined, "MILE_HIGH_CLUB"); **
+  **
+  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** /
 
   level.missionSettings = missionSettings;
 
@@ -120,7 +114,7 @@ setupSoGroup(so_ref) {
   level.specOpsGroups[so_ref] = spawnStruct();
   level.specOpsGroups[so_ref].ref = so_ref;
   level.specOpsGroups[so_ref].num = int(tablelookup("sp/specopstable.csv", SOTABLE_COL_REF, so_ref, SOTABLE_COL_INDEX)) - 1000;
-  //level.specOpsGroups[ so_ref ].string_name = tablelookup( "sp/specopstable.csv", SOTABLE_COL_REF, so_ref, SOTABLE_COL_NAME );
+
   level.specOpsGroups[so_ref].unlock = int(tablelookup("sp/specopstable.csv", SOTABLE_COL_REF, so_ref, SOTABLE_COL_UNLOCK));
 }
 
@@ -130,7 +124,6 @@ _nextmission(endgame) {
     return;
   }
 
-  //are we watching credits?
   if(level.script == "ending" && level.level_mode != "credits_1") {
     setsaveddvar("ui_nextMission", "0");
     missionSuccess("trainer");
@@ -161,7 +154,6 @@ _nextmission(endgame) {
   maps\_gameskill::auto_adust_zone_complete("aa_main_" + level.script);
 
   if(!isDefined(levelIndex)) {
-    // run the same mission again if the nextmission is not defiend.
     MissionSuccess(level.script);
     return;
   }
@@ -170,11 +162,10 @@ _nextmission(endgame) {
     maps\_utility::level_end_save();
 
   if(level.script != "af_chase" || endgame) {
-    // update mission difficulty and highest completed profile values
     level.missionSettings setLevelCompleted(levelIndex);
 
     if((level.player GetLocalPlayerProfileData("highestMission")) < levelindex + 1 && (level.script == "ending") && getdvarint("mis_cheat") == 0) {
-      setDvar("ui_sp_unlock", "0"); // set reset value to 0
+      setDvar("ui_sp_unlock", "0");
       setDvar("ui_sp_unlock", "1");
     }
 
@@ -189,7 +180,6 @@ _nextmission(endgame) {
       setDvar("ui_debug_setlevel", "");
     }
 
-    // Debug prints
     if(completion_percentage < level.player GetLocalPlayerProfileData("percentCompleteSP"))
       PrintLn(">> SP DEBUG: 					[ WARNING! NEW:" + completion_percentage + "% < OLD:" + level.player GetLocalPlayerProfileData("percentCompleteSP") + "% ]\n");
 
@@ -222,7 +212,7 @@ _nextmission(endgame) {
 
   if(level.script == "airplane" || level.script == "ending") {
     setsaveddvar("ui_nextMission", "0");
-    //setDvar( "ui_victoryquote", "@VICTORYQUOTE_IW_THANKS_FOR_PLAYING" );
+
     missionSuccess("trainer");
     return;
   } else {
@@ -254,9 +244,6 @@ _nextmission(endgame) {
     changelevel(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
   else
     missionSuccess(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
-
-  // DEMO BUILD
-  // */
 }
 
 updateSpPercent() {
@@ -271,18 +258,7 @@ updateSpPercent() {
 }
 
 getTotalpercentCompleteSP() {
-  /*
-  SP STATS:
-  	
-  Game Progression	60%	-50
-  Hardened Progress	60% 	-25
-  Veteran Progress	60%	-10
-  Intel Items		21/45 -15
-  -------------------------------- Total			x%		-100
-  Play Time			##:##:##
-  */
-
-  stat_progression = max(getStat_easy(), getStat_regular()); // easy is always higher than regular anyways...
+  stat_progression = max(getStat_easy(), getStat_regular());
   stat_progression_ratio = 0.5 / 1;
 
   PrintLn(">> SP STAT REGULAR: " + stat_progression + "%" + "(" + stat_progression_ratio * 100 + "%)");
@@ -316,8 +292,6 @@ getTotalpercentCompleteSP() {
 
   return total_progress;
 }
-
-// recruit and regular difficulty
 getStat_progression(difficulty) {
   assert(isDefined(level.missionSettings));
   assert(isDefined(level.script));
@@ -327,53 +301,41 @@ getStat_progression(difficulty) {
   levels = 0;
   notplayed = [];
   skipped = false;
-  // level.missionSettings.levels.size - 1 : the minus one is to remove the credits level
+
   for(i = 0; i < level.missionSettings.levels.size - 1; i++) {
     if(int(difficulty_string[i]) >= difficulty)
       levels++;
   }
 
   completion = (levels / (level.missionsettings.levels.size - 1)) * 100;
-  return completion; // 0->100
+  return completion;
 }
 
 getStat_easy() {
   easy = 1;
-  return getStat_progression(easy); // 0->100	
+  return getStat_progression(easy);
 }
 
 getStat_regular() {
   regular = 2;
-  return getStat_progression(regular); // 0->100	
+  return getStat_progression(regular);
 }
 
 getStat_hardened() {
   hardened = 3;
-  return getStat_progression(hardened); // 0->100
+  return getStat_progression(hardened);
 }
 
 getStat_veteran() {
   veteran = 4;
-  return getStat_progression(veteran); // 0->100
+  return getStat_progression(veteran);
 }
 
 getStat_intel() {
   total_intel_items = 45;
   intel_percentage = ((level.player GetLocalPlayerProfileData("cheatPoints")) / total_intel_items) * 100;
-  return intel_percentage; // 0->100
+  return intel_percentage;
 }
-
-//allMissionsCompleted( difficulty )
-//{
-//	difficulty += 10;
-//	for( index = 0; index < level.missionSettings.size; index++ )
-//	{
-//		missionDvar = getMissionDvarString( index );
-//		if( getdvarInt( missionDvar ) < difficulty )
-//			return( false );
-//	}
-//	return( true );
-//}
 
 getLevelCompleted(levelIndex) {
   return int((level.player GetLocalPlayerProfileData("missionHighestDifficulty"))[levelIndex]);
@@ -405,7 +367,6 @@ setSoLevelCompleted(levelIndex) {
     if(specOpsString.size == 0)
       specOpsString = emptyMissionDifficultyStr;
 
-    // if profile has no zeros for unplayed levels, we need to populate it with zeros
     while(levelOffset >= specOpsString.size)
       specOpsString += "0";
 
@@ -475,7 +436,6 @@ is_first_difficulty_star(specOpsString) {
       stars += max(0, int(specOpsString[i]) - 1);
   }
 
-  // returns false if the current level does not require difficulty selection
   if(int(tablelookup("sp/specOpsTable.csv", 1, level.script, 14)) == 0)
     return false;
 
@@ -497,7 +457,6 @@ setLevelCompleted(levelIndex) {
     }
   }
 
-  // levels completed after skipping levels in order will not get its progress recorded, becuase player was hacking or doing devmap
   finalString = "";
   skip = false;
   highest = 0;
@@ -516,8 +475,6 @@ setLevelCompleted(levelIndex) {
 }
 
 _setHighestMissionIfNotCheating(mission) {
-  //if( maps\_cheat::is_cheating() || flag( "has_cheated" ) )
-  //	return;
   if(getDvar("mis_cheat") == "1") {
     return;
   }
@@ -549,7 +506,6 @@ getLowestSkill() {
   missionString = (level.player GetLocalPlayerProfileData("missionHighestDifficulty"));
   lowestSkill = 4;
 
-  //hack here.excluding the last level, airplane. normally wouldn't have the -1 on the size.
   for(index = 0; index < self.levels.size - 1; index++) {
     if(int(missionString[index]) < lowestSkill)
       lowestSkill = int(missionString[index]);
@@ -561,7 +517,7 @@ createMission(HardenedAward) {
   mission = spawnStruct();
   mission.levels = [];
   mission.prereqs = [];
-  // 	mission.slideShow = slideShow;
+
   mission.HardenedAward = HardenedAward;
   return (mission);
 }
@@ -641,9 +597,6 @@ hasAchievement(levelIndex) {
 }
 
 check_other_hasLevelVeteranAchievement(levelIndex) {
-  //check for other levels that have the same Hardened achievement.
-  //If they have it and other level has been completed at a hardened level check passes.
-
   for(i = 0; i < self.levels.size; i++) {
     if(i == levelIndex)
       continue;
@@ -739,15 +692,10 @@ coop_eog_summary() {
   thread maps\_ambient::use_eq_settings("specialop_fadeout", level.eq_mix_track);
   thread maps\_ambient::blend_to_eq_track(level.eq_mix_track, 10);
 
-  //---------------------------------------------- // Set all stat dvars so menu can display stats
-  //---------------------------------------------- foreach(player in level.players) {
-  // Names
   setDvar("player_" + playerNum + "_name", player.playername);
 
-  // Kills
   setDvar("player_" + playerNum + "_kills", player.stats["kills"]);
 
-  // Difficulty
   difficultyIndex = difficulty.size;
   difficulty[difficultyIndex] = player get_player_gameskill();
 
@@ -756,10 +704,7 @@ coop_eog_summary() {
 
   playerNum++;
 }
-
-// Time
 if(!isDefined(level.challenge_start_time)) {
-  // If the mission never started, force it to a time of 0.
   level.challenge_start_time = 0;
   level.challenge_end_time = 0;
 }
@@ -769,8 +714,6 @@ assertex(isDefined(level.challenge_end_time), "Special Ops missions need to ensu
 
 seconds = (level.challenge_end_time - level.challenge_start_time) * 0.001;
 setDvar("elapsed_mission_time", convert_to_time_string(seconds, true));
-
-// callback that sets custom data for eog summary
 if(isDefined(level.eog_summary_callback)) {
   setDvar("ui_eog_success_heading_player1", "");
   setDvar("ui_eog_success_heading_player2", "");
@@ -782,13 +725,9 @@ if(isDefined(level.custom_eog_summary) && level.custom_eog_summary)
   setDvar("ui_eog_custom", 1);
 else
   setDvar("ui_eog_custom", 0);
-
-//---------------------------------------------- // Open summary menus on all players
-//---------------------------------------------- // opens up end-of-game summary menu for player gameplay performance
 if(is_coop()) {
   reset_eog_popup_dvars();
-  // setup eog popups that shows stars earned, unlocks, and new best time
-  // player 1
+
   if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
     setDvar("ui_first_star_player1", level.player.eog_firststar);
 
@@ -804,7 +743,6 @@ if(is_coop()) {
   if(isDefined(level.player.eog_noreward) && level.player.eog_noreward)
     setDvar("ui_eog_player1_noreward", level.player.eog_noreward);
 
-  // player 2
   if(isDefined(level.player2.eog_firststar) && level.player2.eog_firststar)
     setDvar("ui_first_star_player2", level.player2.eog_firststar);
 
@@ -826,7 +764,6 @@ if(is_coop()) {
 } else {
   reset_eog_popup_dvars();
 
-  // setup eog popups that shows stars earned, unlocks, and new best time
   if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
     setDvar("ui_first_star_player1", level.player.eog_firststar);
 
@@ -845,25 +782,20 @@ if(is_coop()) {
 }
 
 create_custom_eog_defaults() {
-  // Don't use any defaults.
   if(isDefined(level.custom_eog_no_defaults) && level.custom_eog_no_defaults) {
     return;
   }
   foreach(player in level.players) {
-    // Time
     if(!isDefined(level.custom_eog_no_time) || !level.custom_eog_no_time)
       player use_custom_eog_default_time();
 
-    // Difficulty
     if(!isDefined(level.custom_eog_no_skill) || !level.custom_eog_no_skill)
       player use_custom_eog_default_difficulty();
 
-    // Kills
     if(!isDefined(level.custom_eog_no_kills) || !level.custom_eog_no_kills)
       player use_custom_eog_default_kills();
 
     if(is_coop_online()) {
-      // Partner's stats
       if(!isDefined(level.custom_eog_no_partner) || !level.custom_eog_no_partner) {
         other_player = get_other_player(player);
         player use_custom_eog_default_difficulty(other_player);

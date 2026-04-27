@@ -5,63 +5,18 @@
 
 #include common_scripts\utility;
 
-/*QUAKED trigger_multiple_dyn_metal_detector (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_multiple_dyn_creaky_board (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_multiple_dyn_photo_copier (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_multiple_dyn_copier_no_light (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_radius_dyn_motion_light (0.12 0.23 1.0) (-16 -16 -16) (16 16 16)
-Comments to be added.*/
-
-/*QUAKED trigger_radius_dyn_motion_dlight (0.12 0.23 1.0) (-16 -16 -16) (16 16 16)
-Comments to be added.*/
-
-/*QUAKED trigger_multiple_dog_bark (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-Comments to be added.*/
-
-/*QUAKED trigger_radius_bird_startle (0.12 0.23 1.0) (-16 -16 -16) (16 16 16)
-Comments to be added.*/
-
-/*QUAKED trigger_multiple_dyn_motion_light (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_multiple_dyn_door (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Comments to be added.*/
-
-/*QUAKED trigger_multiple_freefall (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Player free falling with animation and screaming of doom.*/
-
-// Crouch Speed 5.7-6.0
-// Run Speed 8.7-9.2
-// Sprint Speed 13.0-14.0
-
-// ========================= Constants ==========================
-
-// Vending Machine
 CONST_vending_machine_health = 400;
-CONST_soda_pop_time = 0.1; // seconds
-CONST_soda_count = 12; // number of soda per machine
-CONST_soda_launch_force = 1000; // soda shoot out force
-CONST_soda_random_factor = 0.15; // in percentage 0.2 = 20%CONST_soda_splash_dmg_scaler = 3; // splash damage multiplier
-
-// Metal Detector
-CONST_alarm_tolerance = 0; // number of alarm sounds before silenced, 0 disables silencing
-CONST_alarm_interval = 7; // alarm interval time in seconds
-CONST_alarm_interval_sp = 2; // alarm interval time in seconds for single player
-
-// Civilian Jet
-CONST_jet_speed = 2000; // jet while landing is 130 - 160mph( 2292inch / sec - 2820inch / sec ), emergency landing is 110mph
-CONST_jet_extend = 20000; // units, each jet and flyto origin will extend from each other by
+CONST_soda_pop_time = 0.1;
+CONST_soda_count = 12;
+CONST_soda_launch_force = 1000;
+CONST_soda_random_factor = 0.15;
+CONST_alarm_tolerance = 0;
+CONST_alarm_interval = 7;
+CONST_alarm_interval_sp = 2;
+CONST_jet_speed = 2000;
+CONST_jet_extend = 20000;
 
 init() {
-  //rotate fan blades in mp_highrise
   array_thread(getEntArray("com_wall_fan_blade_rotate", "targetname"), ::fan_blade_rotate, "slow");
   array_thread(getEntArray("com_wall_fan_blade_rotate_fast", "targetname"), ::fan_blade_rotate, "fast");
 
@@ -76,7 +31,6 @@ init() {
   trigger_classes["trigger_radius_bird_startle"] = ::bird_startle;
   trigger_classes["trigger_multiple_dyn_motion_light"] = ::motion_light;
   trigger_classes["trigger_multiple_dyn_door"] = ::trigger_door;
-  //trigger_classes[ "trigger_multiple_freefall" ] = ::freefall;
 
   player_init();
 
@@ -113,20 +67,9 @@ player_init() {
 }
 
 ai_init() {
-  /*if( !isDefined( level.registeredAI ) )
-  	level.registeredAI = [];
-  	
-  level.registeredAI[ level.registeredAI.size ] = self;
-  */
-
-  // self is AI
   self.touchTriggers = [];
   self thread movementTracker();
 }
-
-// ================================================================================ //
-// 									Civilian Jet 									//
-// ================================================================================ //
 
 civilian_jet_flyby() {
   level endon("game_ended");
@@ -147,7 +90,6 @@ civilian_jet_flyby() {
 }
 
 jet_init() {
-  // move jet plane and flyto origin out of the map and hide on level load
   self.jet_parts = getEntArray(self.target, "targetname");
   self.jet_flyto = getent("civilian_jet_flyto", "targetname");
   self.engine_fxs = getEntArray("engine_fx", "targetname");
@@ -158,20 +100,17 @@ jet_init() {
   self.jet_flash_fx_green = loadfx("misc/aircraft_light_wingtip_green");
   self.jet_flash_fx_blink = loadfx("misc/aircraft_light_red_blink");
 
-  level.civilianJetFlyBy = undefined; // priority with air supremacies
+  level.civilianJetFlyBy = undefined;
 
   assertex(isDefined(self.jet_parts), "Missing cilivian jet model");
   assertex(isDefined(self.jet_flyto), "Missing cilivian jet flyto script_origin: civilian_jet_flyto");
   assertex(isDefined(self.engine_fxs), "Missing cilivian jet engine fxs script_origins: engine_fx");
   assertex(isDefined(self.flash_fxs), "Missing cilivian jet signal light script_origins: flash_fxs");
 
-  // extending vector to place jet and flyto origin outside sky box
   negative_vec = Vector_multiply(VectorNormalize(self.origin - self.jet_flyto.origin), CONST_jet_extend);
 
-  // extend flyto origin
   self.jet_flyto.origin -= negative_vec;
 
-  // extend jet
   self.origin += negative_vec;
   foreach(part in self.jet_parts) {
     part.origin += negative_vec;
@@ -179,14 +118,12 @@ jet_init() {
     part hide();
   }
 
-  // extend jet's engine fx origins
   foreach(engine_fx in self.engine_fxs)
   engine_fx.origin += negative_vec;
 
   foreach(flash_fx in self.flash_fxs)
   flash_fx.origin += negative_vec;
 
-  // -------------- flight time and vector calculation ------------- jet_origin = self.origin; // origin is the nose of the jet
   jet_flyto_pos = self.jet_flyto.origin;
   self.jet_fly_vec = jet_flyto_pos - jet_origin;
 
@@ -213,18 +150,15 @@ jet_timer() {
   if(getDvar("jet_flyby_timer") != "")
     level.civilianJetFlyBy_timer = 5 + getdvarint("jet_flyby_timer");
   else
-    level.civilianJetFlyBy_timer = (0.25 + randomFloatRange(0.3, 0.7)) * 60 * timeLimit; // seconds into the match when jet flys by
+    level.civilianJetFlyBy_timer = (0.25 + randomFloatRange(0.3, 0.7)) * 60 * timeLimit;
 
   wait level.civilianJetFlyBy_timer;
 
-  // wait till all the airborne kill streaks are done
   while(isDefined(level.airstrikeInProgress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remoteMissileInProgress))
     wait 0.05;
 
-  // start flyby
   self notify("start_flyby");
 
-  // blocks out all airborne kill streaks
   level.civilianJetFlyBy = true;
   self waittill("flyby_done");
   level.civilianJetFlyBy = undefined;
@@ -246,7 +180,6 @@ getWatchedDvar(dvarString) {
 }
 
 jet_flyby() {
-  // show plane
   foreach(part in self.jet_parts)
   part show();
 
@@ -273,11 +206,9 @@ jet_flyby() {
 
   wait 0.05;
 
-  // play engine fx on fx ents
   foreach(engine_fx_ent in engine_fx_array)
   playFXOnTag(self.jet_engine_fx, engine_fx_ent, "tag_origin");
 
-  // play flash fx on fx ents
   foreach(flash_fx_ent in flash_fx_array) {
     if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "blink")
       playFXOnTag(self.jet_flash_fx_blink, flash_fx_ent, "tag_origin");
@@ -287,11 +218,9 @@ jet_flyby() {
       playFXOnTag(self.jet_flash_fx_green, flash_fx_ent, "tag_origin");
   }
 
-  // move plane
   foreach(part in self.jet_parts)
   part moveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
 
-  // move fx ents
   foreach(engine_fx_ent in engine_fx_array)
   engine_fx_ent moveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
   foreach(flash_fx_ent in flash_fx_array)
@@ -299,7 +228,6 @@ jet_flyby() {
 
   wait(self.jet_flight_time + 1);
 
-  // delete fxs
   foreach(engine_fx_ent in engine_fx_array)
   engine_fx_ent delete();
   foreach(flash_fx_ent in flash_fx_array)
@@ -356,9 +284,9 @@ playsound_loop_on_ent(alias, offset) {
     org.angles = self.angles;
     org linkto(self);
   }
-  //	org endon ("death");
+
   org playLoopSound(alias);
-  //	println ("playing loop sound ", alias," on entity at origin ", self.origin, " at ORIGIN ", org.origin);
+
   self waittill("stop sound" + alias);
   org stoploopsound(alias);
   org delete();
@@ -394,15 +322,10 @@ targetisclose(other, target) {
     return false;
 }
 
-// ================================================================================ //
-// 									Vending Machine									//
-// ================================================================================ //
-
 vending_machine() {
   level endon("game_ended");
   self endon("death");
 
-  // self is use trigger
   self SetCursorHint("HINT_ACTIVATE");
 
   self.vm_normal = getent(self.target, "targetname");
@@ -419,8 +342,6 @@ vending_machine() {
   if(isDefined(self.vm_launch_to.target))
     self.vm_fx_loc = getent(self.vm_launch_to.target, "targetname");
 
-  //assertex( isDefined( self.vm_launch_to ), "launch-to can script_origin is missing target to the fx location script_origin" );
-
   self.vm_normal setCanDamage(true);
 
   self.vm_normal_model = self.vm_normal.model;
@@ -432,16 +353,14 @@ vending_machine() {
   self.vm_soda_stop_pos = vm_soda_stop.origin;
   self.vm_soda_stop_angle = vm_soda_stop.angles;
 
-  // precache damage model
   precacheModel(self.vm_damaged_model);
 
-  // ride the no longer needed models
   vm_soda_start delete();
   vm_soda_stop delete();
 
   self.soda_array = [];
   self.soda_count = CONST_soda_count;
-  self.soda_slot = undefined; // the soda can thats resting in the slot
+  self.soda_slot = undefined;
   self.hp = CONST_vending_machine_health;
 
   self thread vending_machine_damage_monitor(self.vm_normal);
@@ -449,13 +368,12 @@ vending_machine() {
 
   while(1) {
     self waittill("trigger", player);
-    //level.players[0] iprintln( "used" );
 
     self playSound("vending_machine_button_press");
     if(!self.soda_count) {
       continue;
     }
-    // drop a can, and shoot out the previous one if in slot
+
     if(isDefined(self.soda_slot))
       self soda_can_eject();
     soda_can_drop(spawn_soda());
@@ -474,16 +392,15 @@ vending_machine_damage_monitor(vending_machine) {
 
     if(isDefined(type)) {
       if(isSubStr(exp_dmg, ToLower(type)))
-        damage *= CONST_soda_splash_dmg_scaler; // multiply explosive dmg
+        damage *= CONST_soda_splash_dmg_scaler;
 
       self.hp -= damage;
       if(self.hp > 0) {
         continue;
       }
-      // vending machine is now dead, button usage is disabled
+
       self notify("death");
 
-      // disable use trigger
       self.origin += (0, 0, 10000);
 
       if(!isDefined(self.vm_fx_loc))
@@ -493,11 +410,9 @@ vending_machine_damage_monitor(vending_machine) {
 
       playFX(sparks_fx, playfx_loc);
 
-      // when vending machine is explosively damaged, shoots out soda cans
       self.vm_normal setModel(self.vm_damaged_model);
 
       while(self.soda_count > 0) {
-        // drop a can, and shoot out the previous one if in slot
         if(isDefined(self.soda_slot))
           self soda_can_eject();
         soda_can_drop(spawn_soda());
@@ -520,7 +435,7 @@ spawn_soda() {
 
 soda_can_drop(soda) {
   soda MoveTo(self.vm_soda_stop_pos, CONST_soda_pop_time);
-  soda playSound("vending_machine_soda_drop"); // soda can drop sound
+  soda playSound("vending_machine_soda_drop");
   wait CONST_soda_pop_time;
 
   self.soda_slot = soda;
@@ -533,7 +448,7 @@ soda_can_eject() {
   if(isDefined(self.soda_slot.ejected) && self.soda_slot.ejected == true) {
     return;
   }
-  // physics launch
+
   force_max = CONST_soda_launch_force * (1 + CONST_soda_random_factor);
   force_min = force_max * 0.75 * (1 + CONST_soda_random_factor);
 
@@ -544,10 +459,6 @@ soda_can_eject() {
   self.soda_slot PhysicsLaunchClient(self.vm_launch_from.origin, launch_force_vec);
   self.soda_slot.ejected = true;
 }
-
-// ================================================================================ //
-// 									Free Fall										//
-// ================================================================================ //
 
 freefall() {
   level endon("game_ended");
@@ -569,13 +480,7 @@ freefall() {
   }
 }
 
-// ================================================================================ //
-// 									Metal Detector 									//
-// ================================================================================ //
-
 metal_detector() {
-  // self is trigger: trigger_multiple_dyn_metal_detector
-
   level endon("game_ended");
   assertex(isDefined(self.target), "trigger_multiple_dyn_metal_detector is missing target damage trigger used for detecting entities other than players");
 
@@ -625,8 +530,6 @@ metal_detector() {
   light_pos1 = (detector_1.origin[0], detector_1.origin[1], bound_z_max);
   light_pos2 = (detector_2.origin[0], detector_2.origin[1], bound_z_max);
 
-  //light_pos1 = ( bound_x_min,bound_y_min, bound_z_max );
-  //light_pos2 = ( bound_x_max,bound_y_max, bound_z_max );	
   md_light = loadfx("props/metal_detector_light");
 
   while(1) {
@@ -645,7 +548,6 @@ playsound_and_light(sound, light, light_pos1, light_pos2) {
     if(!self.alarm_annoyance)
       self playSound(sound);
 
-    // 1000ms red light fx
     playFX(light, light_pos1);
     playFX(light, light_pos2);
 
@@ -666,7 +568,7 @@ annoyance_tracker() {
   else
     self.alarm_annoyance = 1;
 
-  current_time = gettime(); // ms
+  current_time = gettime();
 
   alarm_timeout = CONST_alarm_interval;
   if(isSP())
@@ -769,9 +671,6 @@ metal_detector_touch_monitor() {
 }
 
 alarm_validate_damage(damageType) {
-  //disallowed_dmg = "mod_pistol_bullet mod_rifle_bullet bullet mod_crush mod_grenade_splash mod_projectile_splash splash unknown";
-  //disallowed_dmg_array = strtok( disallowed_damage, " " );	
-
   allowed_dmg = "mod_melee melee mod_grenade mod_projectile mod_explosive mod_impact";
   allowed_dmg_array = strtok(allowed_dmg, " ");
 
@@ -781,8 +680,6 @@ alarm_validate_damage(damageType) {
   }
   return false;
 }
-
-// ================================================================================ //
 
 creaky_board() {
   level endon("game_ended");
@@ -1056,8 +953,6 @@ use_toggle() {
 bird_startle() {}
 
 photo_copier_init(trigger) {
-  // self is trigger
-
   self.copier = get_photo_copier(trigger);
   assertex(self.copier.classname == "script_model", "Photocopier at " + trigger.origin + " doesn't target a photo copier");
 
@@ -1080,7 +975,6 @@ photo_copier_init(trigger) {
 
 get_photo_copier(trigger) {
   if(!isDefined(trigger.target)) {
-    //cant target directly to a destructible toy, so we are grabing the nearest one, since primary light requires them to be far anyway
     toys = getEntArray("destructible_toy", "targetname");
     copier = toys[0];
     foreach(toy in toys) {
@@ -1110,8 +1004,8 @@ photo_copier() {
   level endon("game_ended");
   photo_copier_init(self);
 
-  self.copier endon("FX_State_Change0"); // this is when copier breaks
-  self thread photo_copier_stop(); // monitor copier for quick stop
+  self.copier endon("FX_State_Change0");
+  self thread photo_copier_stop();
 
   for(;;) {
     waittill_copier_copies();
@@ -1132,7 +1026,7 @@ photo_copier_no_light() {
 
   self.copier = get_photo_copier(self);
   assertex(self.copier.classname == "script_model", "Photocopier at " + self.origin + " doesn't target or contain a photo copier");
-  self.copier endon("FX_State_Change0"); // this is when copier breaks
+  self.copier endon("FX_State_Change0");
 
   for(;;) {
     waittill_copier_copies();
@@ -1140,10 +1034,8 @@ photo_copier_no_light() {
     wait(3);
   }
 }
-
-// reset light and copy bar position, interruptes previous copy in progress
 reset_copier(trigger) {
-  trigger.copy_bar moveto(trigger.start_pos, 0.2); // reset position
+  trigger.copy_bar moveto(trigger.start_pos, 0.2);
   trigger.light setlightintensity(0);
 }
 
@@ -1158,7 +1050,7 @@ photo_copier_copy_bar_goes() {
   copy_bar moveto(self.end_pos, 1.6);
   wait(1.8);
   copy_bar moveto(self.start_pos, 1.6);
-  wait(1.6); // wait( 13.35 );
+  wait(1.6);
 
   light = self.light;
   timer = 0.2;
@@ -1193,8 +1085,6 @@ photo_copier_light_on() {
 
   photo_light_flicker(light);
 }
-
-// stopping light and bar move on death
 photo_copier_stop() {
   self.copier waittill("FX_State_Change0");
   self.copier endon("death");
@@ -1203,7 +1093,6 @@ photo_copier_stop() {
 }
 
 photo_light_flicker(light) {
-  // flicker
   light setlightintensity(1);
   wait(0.05);
   light setlightintensity(0);
@@ -1236,7 +1125,7 @@ fan_blade_rotate(type) {
   wait randomfloatrange(0, 1);
 
   fan_angles = self.angles;
-  fan_vec = Vector_multiply(AnglesToRight(self.angles), 100); // assures normalized vector is length of "1"fan_vec = VectorNormalize(fan_vec);
+  fan_vec = Vector_multiply(AnglesToRight(self.angles), 100);
 
   while(true) {
     dot_x = abs(vectorDot(fan_vec, (1, 0, 0)));
@@ -1280,9 +1169,9 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
     self endon("death");
 
   if(!isSP())
-    touchName = self.guid; // generate GUID
+    touchName = self.guid;
   else
-    touchName = "player" + gettime(); // generate GUID
+    touchName = "player" + gettime();
 
   trigger.touchList[touchName] = self;
   if(isDefined(trigger.moveTracker))
@@ -1299,7 +1188,6 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
   while(isAlive(self) && self isTouching(trigger) && (isSP() || !level.gameEnded))
     wait(0.05);
 
-  // disconnected player will skip this code
   if(isDefined(self)) {
     self.touchTriggers[trigger.entNum] = undefined;
     if(isDefined(trigger.moveTracker))

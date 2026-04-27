@@ -91,17 +91,13 @@ riotshield_approach_type() {
 }
 
 riotshield_approach_conditions(node) {
-  // to allow approach while facing enemy and crouch walking
   return true;
 }
 
 init_riotshield_AI() {
-  //shieldModel = getWeaponModel( self.secondaryWeapon );
-  //self attach( shieldModel, "tag_weapon_left" );
-
   animscripts\shared::placeWeaponOn(self.secondaryWeapon, "left", false);
 
-  self.subclass = "riotshield"; // incase guy didn't spawn as a "riotshield" ai
+  self.subclass = "riotshield";
 
   self.approachTypeFunc = ::riotshield_approach_type;
   self.approachConditionCheckFunc = ::riotshield_approach_conditions;
@@ -124,7 +120,6 @@ init_riotshield_AI() {
   self.meleePlayerWhileMoving = true;
   self.useMuzzleSideOffset = true;
 
-  // fall over after getting hit this many times on the shield all within 0.3 seconds of each other
   if(level.gameSkill < 1)
     self.shieldBulletBlockLimit = randomintrange(4, 8);
   else
@@ -166,7 +161,6 @@ riotshield_charge() {
   if(!Melee_Standard_UpdateAndValidateTarget())
     return false;
 
-  // get from animation
   delta = getMoveDelta(%riotshield_bashA_attack, 0, 1);
   rangeSq = lengthSquared(delta);
 
@@ -181,8 +175,6 @@ riotshield_charge() {
   while(1) {
     assert(isDefined(self.melee.target));
 
-    // now that we moved a bit, see if our target moved before we check for valid melee
-    // it's possible something happened in the meantime that makes meleeing impossible.
     if(!Melee_Standard_UpdateAndValidateTarget())
       return false;
 
@@ -197,12 +189,10 @@ riotshield_charge() {
 
     enemyDistanceSq = distanceSquared(self.origin, self.melee.target.origin);
 
-    // if we're done raising our gun, and starting a melee now will hit the guy, our preparation is finished
     if(enemyDistanceSq < rangeSq) {
       break;
     }
 
-    // don't keep charging if we've been doing this for too long.
     if(gettime() >= self.melee.giveUpTime)
       return false;
   }
@@ -217,7 +207,6 @@ riotshield_melee_standard() {
 
   while(true) {
     if(!riotshield_charge()) {
-      // if we couldn't get in place to melee, don't try to charge for a little while and abort
       self.nextMeleeChargeTime = getTime() + 1500;
       self.nextMeleeChargeTarget = self.melee.target;
       break;
@@ -232,9 +221,7 @@ riotshield_melee_standard() {
 
     self.melee.inProgress = true;
 
-    // If the attack loop returns false, we need to stop this melee
     if(!animscripts\melee::Melee_Standard_PlayAttackLoop()) {
-      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again.
       animscripts\melee::Melee_Standard_DelayStandardCharge(self.melee.target);
       break;
     }
@@ -253,12 +240,10 @@ riotshield_melee_AIvsAI() {
 
   animscripts\melee::Melee_Decide_Winner();
 
-  // Choose which sequence to play based on angles
   angleToEnemy = vectortoangles(target.origin - self.origin);
   angleDiff = AngleClamp180(target.angles[1] - angleToEnemy[1]);
 
-  if(abs(angleDiff) > 100) // facing each other
-  {
+  if(abs(angleDiff) > 100) {
     if(self.melee.winner) {
       if(self.subclass == "riotshield") {
         self.melee.animName = % riotshield_bashA_attack;
@@ -289,7 +274,6 @@ riotshield_melee_AIvsAI() {
   self.lockOrientation = false;
   target.lockOrientation = false;
 
-  // Make sure we can move to the selected point ( no re-try for now )
   return Melee_UpdateAndValidateStartPos();
 }
 
@@ -338,7 +322,6 @@ riotshield_endMoveTransition() {
 }
 
 riotshield_startCombat() {
-  //assertex( self.combatmode == "no_cover", "riotshield AI combat mode should be 'no_cover'" );
   riotshield_endMoveTransition();
   self.pushable = false;
   self thread riotshield_bullet_hit_shield();
@@ -358,7 +341,7 @@ riotshield_bullet_hit_shield() {
 
     self.shieldBulletBlockTime = time;
     if(self.shieldBulletBlockCount > self.shieldBulletBlockLimit)
-      self doDamage(1, (0, 0, 0)); // do minimal damage to fall down
+      self doDamage(1, (0, 0, 0));
 
     if(cointoss())
       reactAnim = % riotshield_reactA;
@@ -444,7 +427,6 @@ riotshield_flashbang() {
 }
 
 riotshield_pain() {
-  // all the pain animations are in crouch
   self.a.pose = "crouch";
 
   if(usingSideArm())
@@ -504,7 +486,6 @@ riotshield_death() {
 }
 
 init_riotshield_animsets() {
-  // move animations
   animset = [];
   animset["sprint"] = % riotshield_sprint;
   animset["prone"] = % prone_crawl;
@@ -537,7 +518,6 @@ init_riotshield_animsets() {
   self.a.pose = "crouch";
   self allowedStances("crouch");
 
-  // combat animations
   animset = anim.animsets.defaultStand;
 
   animset["add_aim_up"] = % riotshield_crouch_aim_8;
@@ -550,7 +530,6 @@ init_riotshield_animsets() {
   animset["fire"] = % riotshield_crouch_fire_auto;
   animset["single"] = array(%riotshield_crouch_fire_single);
 
-  // remove this burst, semi nonsense soon
   animset["burst2"] = % riotshield_crouch_fire_burst;
   animset["burst3"] = % riotshield_crouch_fire_burst;
   animset["burst4"] = % riotshield_crouch_fire_burst;
@@ -590,7 +569,6 @@ init_riotshield_animsets() {
   self.permanentCustomMoveTransition = true;
 
   set_exception("exposed", ::riotshield_startCombat);
-  //set_exception( "stop_immediate", ::riotshield_endMoveTransition );
 }
 
 riotshield_choose_pose(preferredPose) {
@@ -639,7 +617,6 @@ riotshield_fastwalk_off() {
 null_func() {}
 
 riotshield_init_flee() {
-  // hack to restart move script
   if(self.script == "move")
     self animcustom(::null_func);
 
@@ -647,7 +624,6 @@ riotshield_init_flee() {
 }
 
 riotshield_flee_and_drop_shield() {
-  // restore this incase flee gets interrupted
   self.customMoveTransition = ::riotshield_startMoveTransition;
 
   self animmode("zonly_physics", false);
@@ -660,7 +636,7 @@ riotshield_flee_and_drop_shield() {
 
   rate = randomFloatRange(0.85, 1.1);
   self SetFlaggedAnimKnobAll("fleeanim", fleeAnim, %root, 1, .1, rate);
-  self animscripts\shared::DoNoteTracks("fleeanim"); // return on code_move
+  self animscripts\shared::DoNoteTracks("fleeanim");
 
   self.maxFaceEnemyDist = 32;
   self.lockOrientation = false;

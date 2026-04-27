@@ -9,14 +9,10 @@
 #include common_scripts\utility;
 #using_animtree("generic_human");
 
-// TODO:
-// - figure out why aiming range is incorrect (aiming arc seems a bit off)
-
 main() {
   self endon("killanimscript");
   animscripts\utility::initialize("cover_prone");
 
-  // TODO: run cover crouch or exposed crouch
   if(weaponClass(self.weapon) == "rocketlauncher") {
     animscripts\combat::main();
     return;
@@ -29,8 +25,6 @@ main() {
     self animscripts\cover_wall::useStationaryTurret();
   }
 
-  // if we're too close to our enemy, stand up
-  // (285 happens to be the same distance at which we leave cover and go into exposed if our enemy approaches)
   if(isDefined(self.enemy) && lengthSquared(self.origin - self.enemy.origin) < squared(512)) {
     self thread animscripts\combat::main();
     return;
@@ -53,7 +47,6 @@ main() {
   setupProneAim(0.2);
   self setAnim(%prone_aim_5, 1, 0.1);
 
-  // face the direction of our covernode
   self OrientMode("face angle", self.coverNode.angles[1]);
   self animmode("zonly_physics");
 
@@ -87,18 +80,12 @@ proneCombatMainLoop() {
 
   self thread trackShootEntOrPos();
 
-  //	self thread ReacquireWhenNecessary();
-
   self thread animscripts\shoot_behavior::decideWhatAndHowToShoot("normal");
-
-  //	self resetGiveUpOnEnemyTime();
 
   desynched = (gettime() > 2500);
 
-  //prof_begin("prone_combat");
-
   for(;;) {
-    self animscripts\utility::IsInCombat(); // reset our in - combat state
+    self animscripts\utility::IsInCombat();
 
     self UpdateProneWrapper(0.05);
 
@@ -117,11 +104,8 @@ proneCombatMainLoop() {
       continue;
     }
 
-    assert(isDefined(self.shootPos)); // we can use self.shootPos after this point.
-    //		self resetGiveUpOnEnemyTime();
+    assert(isDefined(self.shootPos));
 
-    // if we're too close to our enemy, stand up
-    // (285 happens to be the same distance at which we leave cover and go into exposed if our enemy approaches)
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
 
     if(self.a.pose != "crouch" && self isStanceAllowed("crouch") && distSqToShootPos < squared(400)) {
@@ -132,9 +116,9 @@ proneCombatMainLoop() {
       }
     }
 
-    if(considerThrowGrenade()) // TODO: make considerThrowGrenade work with shootPos rather than only self.enemy
+    if(considerThrowGrenade()) {
       continue;
-
+    }
     if(self proneReload(0)) {
       continue;
     }
@@ -144,11 +128,8 @@ proneCombatMainLoop() {
       continue;
     }
 
-    // idleThread() is running, so just waiting a bit will cause us to idle
     wait(0.05);
   }
-
-  //prof_end("prone_combat");
 }
 
 proneReload(threshold) {
@@ -170,7 +151,7 @@ setup_cover_prone() {
 
   anim_array["single"] = array(%prone_fire_1);
 
-  anim_array["burst2"] = % prone_fire_burst; // ( will be limited to 2 shots )
+  anim_array["burst2"] = % prone_fire_burst;
   anim_array["burst3"] = % prone_fire_burst;
   anim_array["burst4"] = % prone_fire_burst;
   anim_array["burst5"] = % prone_fire_burst;
@@ -209,10 +190,10 @@ tryThrowingGrenade(throwAt, safe) {
   else
     theanim = animArrayPickRandom("grenade_exposed");
 
-  self animMode("zonly_physics"); // Unlatch the feet
+  self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
-  armOffset = (32, 20, 64); // needs fixing!
+  armOffset = (32, 20, 64);
   threwGrenade = TryGrenade(throwAt, theanim);
 
   self.keepClaimedNodeIfValid = false;
@@ -236,7 +217,7 @@ shouldFireWhileChangingPose() {
     return false;
 
   if(isDefined(self.node) && distanceSquared(self.origin, self.node.origin) < 16 * 16)
-    return false; // we're on a node and can't use an animation with a delta
+    return false;
   if(isDefined(self.enemy) && self canSee(self.enemy) && !isDefined(self.grenade) && self getAimYawToShootEntOrPos() < 20)
     return animscripts\move::MayShootWhileMoving();
   return false;
@@ -256,7 +237,6 @@ prone_transitionTo(newPose) {
     transAnim = animArray(self.a.pose + "_2_" + newPose);
 
   if(newPose == "prone") {
-    // this is crucial. if it doesn't have this notetrack, we won't call enterProneWrapper!
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
   }
 
@@ -285,7 +265,6 @@ setupProneAim(transTime) {
 proneTo(newPose, rate) {
   assert(self.a.pose == "prone");
 
-  //	self OrientMode( "face angle", self.angles[1] );
   self clearanim(%root, .3);
 
   transAnim = undefined;
@@ -319,5 +298,4 @@ proneTo(newPose, rate) {
   self clearAnim(transAnim, 0.1);
 
   assert(self.a.pose == newPose);
-  //	self.a.pose = newPose; // failsafe
 }

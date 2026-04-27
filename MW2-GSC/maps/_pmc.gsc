@@ -8,18 +8,6 @@
 #include maps\_hud_util;
 #include maps\_specialops;
 
-/*QUAKED info_player_start_pmc (0.8 0.7 0.2) (-16 -16 0) (16 16 72)
-Players spawn at these locations in PMC games.*/
-
-/*QUAKED info_player_start_pmcDefend (0.8 0.2 0.2) (-16 -16 0) (16 16 72)
-Players spawn at these locations in defend PMC games, place near info_volumes with "defend_obj" targetnames.*/
-
-/*QUAKED info_volume_pmcDefend (0.12 0.23 1.0) ?
-defaulttexture="volume"Obj is to keep enemies out of this volume, place near defend player_starts and around pmc objective prefabs.*/
-
-/*QUAKED script_model_pickup_claymore (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="weapon_claymore"default:"model" "weapon_claymore"*/
-
 DEFEND_ENEMY_BUILDUP_COUNT_FRACTION = 0.9;
 MIN_SPAWN_DISTANCE = 1024;
 DEFAULT_ENEMY_GOAL_RADIUS_MIN = 512;
@@ -31,7 +19,7 @@ ENEMY_GOAL_RADIUS_SEEK_PLAYER_MIN = 1200;
 ENEMY_GOAL_RADIUS_SEEK_PLAYER_MAX = 1600;
 SEEK_PLAYERS_ENEMY_COUNT = 6;
 TIME_REMAINING_FLASH_WAYPOINT = 2 * 60;
-AI_INSIDE_TRANSPORT_CHOPPER = 6; // This shouldn't be changed, it's only for info, it doesn't actually change the number that go into the chopper
+AI_INSIDE_TRANSPORT_CHOPPER = 6;
 MAX_ENEMIES_ALIVE_ELIMINATION = 25;
 DEFEND_SETUP_TIME = 180;
 DEFEND_TIME = 5 * 60;
@@ -59,8 +47,6 @@ main() {
   if(!isDefined(level.pmc_alljuggernauts))
     level.pmc_alljuggernauts = false;
 
-  //------------------------------------------------------------- common_scripts\_sentry::main();
-
   if(!is_specialop())
     maps\_specialops_code::pick_starting_location_pmc();
   initialize_gametype();
@@ -70,44 +56,43 @@ main() {
 
 initialize_gametype() {
   juggernaut_setup();
-  //-------------------------------- // Precache
-  //-------------------------------- // Enemies Alive: && 1
+
   precacheString(&"PMC_DEBUG_ENEMY_COUNT");
-  // Vehicles Alive: && 1
+
   precacheString(&"PMC_DEBUG_VEHICLE_COUNT");
-  // Enemy Spawners: && 1
+
   precacheString(&"PMC_DEBUG_SPAWNER_COUNT");
-  // Enemies remaining: && 1
+
   precacheString(&"PMC_ENEMIES_REMAINING");
-  // Time Remaining: && 1
+
   precacheString(&"PMC_TIME_REMAINING");
-  // Kill all enemies in the level.
+
   precacheString(&"PMC_OBJECTIVE_KILL_ENEMIES");
-  // Kill all enemies in the level [ && 1 Remaining ].
+
   precacheString(&"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING");
-  // Enter the abort codes into the laptop before time runs out.
+
   precacheString(&"PMC_OBJECTIVE_ABORT_CODES");
-  // Mission failed. The objective was not completed in time.
+
   precacheString(&"PMC_OBJECTIVE_FAILED");
-  // Spectating
+
   precacheString(&"PMC_SPECTATING");
-  // Reach the extraction zone before time runs out.
+
   precacheString(&"PMC_OBJECTIVE_EXTRACT");
-  // Press and hold && 1 to use the laptop.
+
   precacheString(&"PMC_HINT_USELAPTOP");
-  // Set up a defensive position before enemy attack.
+
   precacheString(&"PMC_OBJECTIVE_SETUP_DEFENSES");
-  // Time until attack: && 1
+
   precacheString(&"PMC_TIME_UNTIL_ATTACK");
-  // Survive until time runs out.
+
   precacheString(&"PMC_OBJECTIVE_DEFEND");
-  // Press and hold && 1 on the laptop to skip set up time.
+
   precacheString(&"PMC_START_ATTACK_USE_HINT");
-  // Approach the laptop to skip set up time.
+
   precacheString(&"PMC_START_ATTACK_HINT");
-  // HQ Damage
+
   precacheString(&"PMC_HQ_DAMAGE");
-  // Retrieving Intel...
+
   precacheString(&"PMC_HQ_RECOVERING_INTEL");
 
   precacheModel("com_laptop_2_open_obj");
@@ -117,14 +102,11 @@ initialize_gametype() {
   precacheShader("waypoint_extraction");
   precacheShader("waypoint_defend");
 
-  //-------------------------------- // Set up some tweak values
-  //-------------------------------- setDvarIfUninitialized("pmc_debug", "0");
   setDvarIfUninitialized("pmc_debug_forcechopper", "0");
 
   level.pmc = spawnStruct();
   level.pmc.hud = spawnStruct();
   level.pmc.sound = [];
-  //	level.pmc.music = [];
 
   level.pmc.defendSetupTime = DEFEND_SETUP_TIME;
   level.pmc.defendTime = DEFEND_TIME;
@@ -136,8 +118,7 @@ initialize_gametype() {
 
   level.pmc.enemy_goal_radius_min = DEFAULT_ENEMY_GOAL_RADIUS_MIN;
   level.pmc.enemy_goal_radius_max = DEFAULT_ENEMY_GOAL_RADIUS_MAX;
-  //	level.pmc.music[ "exfiltrate" ] 		 = "pmc_music_extract";
-  //	level.pmc.music[ "mission_complete" ] 	 = "pmc_victory_music";
+
   level.pmc.sound["exfiltrate"] = "pmc_exfiltrate_area";
   level.pmc.sound["obj_win"] = "pmc_outta_here";
   level.pmc.sound["obj_fail"] = "pmc_mission_failed";
@@ -149,10 +130,7 @@ initialize_gametype() {
   level.pmc.sound["minutes_30sec"][0] = "pmc_time_almost_up";
   level.pmc.sound["minutes_30sec"][1] = "pmc_running_out_of_time";
   level.pmc.sound["timer_tick"] = "pmc_timer_tick";
-  //	level.pmc.sound[ "juggernaut_attack" ] 	 = "pmc_juggernaut";
 
-  //-------------------------------- // Variables and Init
-  //-------------------------------- flag_init("enemies_seek_players");
   flag_init("objective_complete");
   flag_init("extraction_complete");
   flag_init("defend_started");
@@ -167,18 +145,16 @@ initialize_gametype() {
   flag_init("pacing_stage_2");
   flag_init("pacing_stage_3");
 
-  // delete the stuff that is only for hostage mode for now.
   run_thread_on_noteworthy("hostage_only", ::self_delete);
 
-  // Make slowmo breach spawners run the PMC logic
   run_thread_on_noteworthy("pmc_spawner", ::add_spawn_function, ::room_breach_spawned);
 
   level.pmc.helicopter_exists = false;
   level.pmc.helicopter_queuing = false;
   level.pmc.helicopter_transport_last = undefined;
-  level.pmc.helicopter_transport_min_time = 90 * 1000; // seconds * 1000
+  level.pmc.helicopter_transport_min_time = 90 * 1000;
   level.pmc.helicopter_attack_last = undefined;
-  level.pmc.helicopter_attack_min_time = 90 * 1000; // seconds * 1000
+  level.pmc.helicopter_attack_min_time = 90 * 1000;
 
   level.pmc.enemy_vehicles_alive = 0;
 
@@ -200,21 +176,15 @@ start_pmc_gametype() {
 
   if(!is_specialop()) {
     maps\_autosave::_autosave_game_now_nochecks();
-    wait 0.05; // wait for the autosave to happen before opening the menu or you get stuck in unusable menu when the save loads
+    wait 0.05;
   }
 
-  //if( !isDefendMatch() )
-  //	array_thread( level.sentry_pickups, ::delete_sentry_pickup );
-
-  //get an array of pre-placed enemy sentry guns
   level.sentry_enemies = getEntArray("sentry_gun", "targetname");
   level.sentry_enemies = array_combine(level.sentry_enemies, getEntArray("sentry_minigun", "targetname"));
 
   if(isDefendMatch())
     array_thread(level.sentry_enemies, common_scripts\_sentry::delete_sentry_turret);
 
-  //---------------------------------------- // Set gametype specific function pointers
-  //---------------------------------------- level.pmc.enemy_spawn_position_func = ::pick_enemy_spawn_positions;
   level.pmc.populate_enemies_func = ::populate_enemies;
   level.pmc.get_spawnlist_func = ::get_spawnlist;
   level.pmc.set_goal_func = ::enemy_set_goal_when_player_spotted;
@@ -226,15 +196,13 @@ start_pmc_gametype() {
     level.pmc.set_goal_func = ::enemy_seek_objective_in_stages;
     level.pmc.limitRespawns = false;
   } else
-    thread staged_pacing_system(); // obj and elimination, not defend
+    thread staged_pacing_system();
 
   assert(isDefined(level.pmc.enemy_spawn_position_func));
   assert(isDefined(level.pmc.populate_enemies_func));
   assert(isDefined(level.pmc.get_spawnlist_func));
   assert(isDefined(level.pmc.set_goal_func));
 
-  //---------------------------------------- // Get all enemy spawners in level
-  //---------------------------------------- // Get all enemy spawners in the level for possible spawning
   level.pmc.enemy_spawners_full_list = getEntArray("pmc_spawner", "targetname");
   assertEx(level.pmc.enemy_spawners_full_list.size >= level.pmc_enemies, "There aren't enough enemy spawners in the level.");
 
@@ -249,8 +217,6 @@ start_pmc_gametype() {
   assertEx(level.pmc.enemy_spawners.size >= level.pmc.enemies_kills_to_win, "There aren't enough enemy spawners in the level to hunt down " + level.pmc.enemies_kills_to_win + " enemies.");
   level.pmc.enemies_remaining = level.pmc.enemies_kills_to_win;
 
-  //---------------------------------------- // Get us started!
-  //---------------------------------------- level.pmc._populating_enemies = false;
   level.pmc._re_populating_enemies = false;
   gametype_setup();
   setup_objective_entities();
@@ -258,22 +224,18 @@ start_pmc_gametype() {
 
   thread[[level.pmc.populate_enemies_func]]();
 
-  //---------------------------------------- // Debug threads for testing
-  //---------------------------------------- if(getDvar("pmc_debug") == "1") {
   thread debug_show_enemy_spawners_count();
   thread debug_show_enemies_alive_count();
   thread debug_show_vehicles_alive_count();
 }
 
 if(!is_specialop()) {
-  // Wait till frame end so that the flags can get initialized in other scripts before getting set below
   wait 0.05;
   flag_set("disable_autosaves");
 }
 }
 
 set_gametype_vars() {
-  // make sure the gametype is valid
   switch (level.pmc_gametype) {
     case "mode_elimination":
       debug_print("Gametype: Elimination");
@@ -306,7 +268,6 @@ pick_enemy_spawn_positions() {
   color_blue = (0, 0, 1);
   color_green = (0, 1, 0);
 
-  // get min and max x and y values for all possible spawners
   x_min = level.pmc.enemy_spawners_full_list[0].origin[0];
   x_max = level.pmc.enemy_spawners_full_list[0].origin[0];
   y_min = level.pmc.enemy_spawners_full_list[0].origin[1];
@@ -328,11 +289,8 @@ pick_enemy_spawn_positions() {
   y_min -= 250;
   y_max += 250;
 
-  // Occassional wait to prevent false infinite loop since this can't always be done on the first frame
-  // It is however, always done while the player has a black screen overlay and isn't in gameplay
   wait 0.05;
 
-  // Draw the bounds of the area
   if(getDvar("pmc_debug") == "1") {
     topLeft = (x_min - 50, y_max + 50, 0);
     topRight = (x_max + 50, y_max + 50, 0);
@@ -344,10 +302,8 @@ pick_enemy_spawn_positions() {
     thread draw_line(bottomLeft, topLeft, 1, 0, 0);
   }
 
-  // Set the number of divisions we will make to the area
   number_of_divisions = 5;
 
-  // Find how tall and wide each grid space will be with the given number of divisions
   width_x = abs(x_max - x_min);
   width_y = abs(y_max - y_min);
   division_spacing_x = width_x / number_of_divisions;
@@ -357,7 +313,6 @@ pick_enemy_spawn_positions() {
   level.pmc.enemy_goal_radius_min = int(averageQuadRadius * 0.8);
   level.pmc.enemy_goal_radius_max = int(averageQuadRadius * 1.2);
 
-  // Create a struct for each grid square so we can store info on each one
   numQuads = number_of_divisions * number_of_divisions;
   level.quads = [];
   curent_division_x = 0;
@@ -381,8 +336,6 @@ pick_enemy_spawn_positions() {
     }
   }
 
-  // see which quads don't have any spawners in them at all
-  // so they aren't used in spawn logic
   foreach(spawner in level.pmc.enemy_spawners_full_list) {
     if(distance(getAveragePlayerOrigin(), spawner.origin) <= MIN_SPAWN_DISTANCE)
       continue;
@@ -390,11 +343,8 @@ pick_enemy_spawn_positions() {
     level.quads[quadIndex].containsSpawners = true;
   }
 
-  // Occassional wait to prevent false infinite loop since this can't always be done on the first frame
-  // It is however, always done while the player has a black screen overlay and isn't in gameplay
   wait 0.05;
 
-  // print the quad bounds and number on each quad
   if(getDvar("pmc_debug") == "1") {
     foreach(quad in level.quads) {
       topLeft = (quad.min_x, quad.max_y, 0);
@@ -421,12 +371,10 @@ pick_enemy_spawn_positions() {
 
   randomized = undefined;
 
-  // if most of the spawners in the map will be used then just throw all of them into the pool
   if(level.pmc.enemies_kills_to_win >= (level.pmc.enemy_spawners_full_list.size / 1.2)) {
     spawnsToUse = level.pmc.enemy_spawners_full_list;
     debug_print("Using all spawners placed in the map as possible enemy locations because we're using almost all of the spawners!");
   } else {
-    // We now know which quads contain possible spawners so lets put one spawner in each quad to start, then two once all quads are used, then three, etc
     randomized = array_randomize(level.pmc.enemy_spawners_full_list);
     spawnsToUse = [];
     allowedSpawnersPerQuad = 1;
@@ -441,18 +389,15 @@ pick_enemy_spawn_positions() {
         assert(level.quads[quadIndex].containsSpawners);
         assert(isDefined(level.quads[quadIndex].enemiesInQuad));
 
-        // If this quad has already been used once we don't use it again
         if(level.quads[quadIndex].enemiesInQuad >= allowedSpawnersPerQuad) {
           continue;
         }
-        // This spawner is in a quad that hasn't been used yet so we can use it
+
         level.quads[quadIndex].enemiesInQuad++;
 
-        // Add this spawner to the spawnsToUse array, and take it out of the future potential spawner list
         spawnsToUse[spawnsToUse.size] = spawner;
         randomized = array_remove(randomized, spawner);
 
-        // If we've reached the number of enemies to kill then move on
         if(spawnsToUse.size >= level.pmc.enemies_kills_to_win) {
           break;
         }
@@ -460,8 +405,6 @@ pick_enemy_spawn_positions() {
         loopCount++;
         if(loopCount > 50) {
           loopCount = 0;
-          // Occassional wait to prevent false infinite loop since this can't always be done on the first frame
-          // It is however, always done while the player has a black screen overlay and isn't in gameplay
 
           wait 0.05;
         }
@@ -511,8 +454,6 @@ populate_enemies() {
   if(is_specialop())
     flag_wait("mission_start");
 
-  //--------------------------------------------------------------------- // Spawns all of the best located AI until the max alive AI count is reached
-  //--------------------------------------------------------------------- if(level.pmc._populating_enemies)
   return;
   level.pmc._populating_enemies = true;
 
@@ -529,7 +470,6 @@ populate_enemies() {
   if(level.pmc.limitRespawns)
     assert(aliveEnemies.size + level.pmc.enemy_vehicles_alive <= level.pmc.enemies_remaining);
 
-  // Make sure we don't already have enough AI alive to beat the level
   if(level.pmc.limitRespawns) {
     if(aliveEnemies.size + level.pmc.enemy_vehicles_alive >= level.pmc.enemies_remaining) {
       level.pmc._populating_enemies = false;
@@ -537,13 +477,11 @@ populate_enemies() {
     }
   }
 
-  // Make sure we don't already have the most AI alive that we can have
   if(aliveEnemies.size + level.pmc.enemy_vehicles_alive >= level.pmc.max_ai_alive) {
     level.pmc._populating_enemies = false;
     return;
   }
 
-  // See how many AI we have room to spawn
   numberToSpawn = level.pmc.max_ai_alive - (aliveEnemies.size + level.pmc.enemy_vehicles_alive);
   freeAISlots = getFreeAICount();
   if(numberToSpawn > freeAISlots)
@@ -558,15 +496,12 @@ populate_enemies() {
     }
   }
 
-  // Again, make sure that the new amount of AI we're about to spawn, plus the alive AI, doesn't
-  // exceed the number of AI remaining to win. Cap numberToSpawn if required.
   if(level.pmc.limitRespawns) {
     if(aliveEnemies.size + level.pmc.enemy_vehicles_alive + numberToSpawn > level.pmc.enemies_remaining)
       numberToSpawn = level.pmc.enemies_remaining - (aliveEnemies.size + level.pmc.enemy_vehicles_alive);
     assert(numberToSpawn > 0);
   }
 
-  // Make sure that we don't spawn AI on the ground if a chopper is in queue, because it's waiting to fill up
   if(level.pmc.helicopter_queuing) {
     if(numberToSpawn >= AI_INSIDE_TRANSPORT_CHOPPER)
       level notify("spawn_chopper");
@@ -577,7 +512,6 @@ populate_enemies() {
 
   spawnList = [[level.pmc.get_spawnlist_func]]();
 
-  // Spawn the spawnList
   spawn_more_enemies(spawnList, numberToSpawn);
 
   prof_end("populate_enemies");
@@ -586,16 +520,13 @@ populate_enemies() {
 }
 
 get_spawnlist() {
-  // Get array of enemy spawners in order of closest to farthest
   return get_array_of_closest(getAveragePlayerOrigin(), level.pmc.enemy_spawners, undefined, undefined, undefined, MIN_SPAWN_DISTANCE);
 }
 
 get_spawnlist_defend() {
-  // Get array of enemy spawners in order of farthest to closest
   all_spawners = get_array_of_closest(getAveragePlayerOrigin(), level.pmc.enemy_spawners_full_list, undefined, undefined, undefined, MIN_SPAWN_DISTANCE);
   all_spawners = array_reverse(all_spawners);
 
-  //use the farthest second half
   spawners = [];
   for(i = 0; i < int(all_spawners.size / 2); i++) {
     spawners[spawners.size] = all_spawners[i];
@@ -640,7 +571,6 @@ spawn_juggernaut(reg_spawner) {
 
   level.juggernaut_next_spawner++;
   if(level.juggernaut_next_spawner >= level.jug_spawners.size) {
-    // wait a frame so we don't try to use the same spawner twice in one frame
     wait 0.05;
     level.juggernaut_next_spawner = 0;
   }
@@ -674,11 +604,9 @@ init_enemy_combat_mode(spawnerIndex) {
 spawn_more_enemies(spawnList, numberToSpawn) {
   debug_print("Trying to spawn " + numberToSpawn + " enemies");
 
-  // Try spawning from spawners that haven't been used yet if possible.
   numberSpawnedCorrectly = 0;
   numberSpawnedCorrectly = spawn_more_enemies_from_array(spawnList, numberToSpawn);
 
-  // Try spawning remaining ( if any ) from any spawners, instead of just ones that haven't been used yet.
   numberSpawnedIncorrectly = 0;
   if(numberSpawnedCorrectly < numberToSpawn)
     numberSpawnedIncorrectly = spawn_more_enemies_from_array(level.pmc.enemy_spawners_full_list, numberToSpawn - numberSpawnedCorrectly, false);
@@ -736,7 +664,6 @@ spawn_more_enemies_from_array(spawnList, numberToSpawn, removeSpawnedFromArray) 
   }
 
   if(removeSpawnedFromArray) {
-    // remove the guys that spawned from the spawner list so they don't get spawned twice
     enemy_spawner_count_before = level.pmc.enemy_spawners.size;
     level.pmc.enemy_spawners = array_exclude(level.pmc.enemy_spawners, spawnersUsed);
     assert(level.pmc.enemy_spawners.size == enemy_spawner_count_before - spawnersUsed.size);
@@ -760,7 +687,7 @@ enemy_set_goal_when_player_spotted() {
   if(!isAlive(self)) {
     return;
   }
-  //small goal, but aware of player moves them to spots where they could see him, but keeps them spread out
+
   self.goalradius = 450;
   self set_goal_height();
 
@@ -790,7 +717,6 @@ juggernaut_set_goal_when_player_spotted_loop() {
 
   self.useChokePoints = false;
 
-  //small goal at the player so they can close in aggressively
   while(1) {
     self.goalradius = 32;
     self set_goal_height();
@@ -804,7 +730,7 @@ juggernaut_set_goal_when_player_spotted_loop() {
 
 enemy_set_goal_when_player_spotted_loop() {
   self endon("death");
-  //large goal at the player so they can close in intelligently
+
   while(1) {
     if(self.doingAmbush)
       self.goalradius = 2048;
@@ -842,7 +768,7 @@ enemy_seek_player_wait() {
 
 enemy_seek_player(modScale) {
   self endon("death");
-  self.accuracy = 50; // final enemies are more deadly
+  self.accuracy = 50;
   self.combatMode = "cover";
   while(1) {
     self.goalradius = randomintrange(1200, 1600);
@@ -914,20 +840,17 @@ enemy_died(attacker) {
 
   assert(level.pmc.enemies_remaining >= 0);
 
-  level notify("enemy_died"); // needed for pacing
+  level notify("enemy_died");
   level notify("update_enemies_remaining_count");
   thread re_populate_enemies();
 
-  // Check if we should send the remaining few enemies out towards the AI
   if(level.pmc.enemies_remaining <= SEEK_PLAYERS_ENEMY_COUNT)
     flag_set("enemies_seek_players");
 
-  // Check to see if the mission has been completed
   if((level.pmc.limitRespawns) && (level.pmc.enemies_remaining == 0)) {
     if(isObjectiveMatch())
       flag_wait("objective_complete");
 
-    //		wait 3.0;
     if(isDefined(level.pmc.objective_enemies_index))
       objective_state(level.pmc.objective_enemies_index, "done");
 
@@ -966,11 +889,9 @@ setup_objective_entities() {
   }
 
   if(isDefendMatch()) {
-    //find closest volume
     defend_volumes = getEntArray("info_volume_pmcDefend", "classname");
     defend_volume = getClosest(getAveragePlayerOrigin(), defend_volumes);
 
-    //find the obj closest to that volume
     obj_index = get_closest_index(defend_volume.origin, objectiveEnt);
     defend_obj = objectiveLocations[obj_index];
 
@@ -980,7 +901,6 @@ setup_objective_entities() {
     thread set_up_defend_location(defend_obj, defend_volume);
   }
 
-  // If we're in an objective match, set the objective variable to a random location
   if(isObjectiveMatch()) {
     randomLocation = randomint(objectiveLocations.size);
     level.pmc.objective = objectiveLocations[randomLocation];
@@ -992,7 +912,6 @@ setup_objective_entities() {
     objectiveLocations = array_remove(objectiveLocations, objectiveLocations[randomLocation]);
   }
 
-  // Delete unused objective location entities
   foreach(location in objectiveLocations)
   location.trigger delete();
 }
@@ -1029,7 +948,7 @@ defend_setup_time_hint() {
   wait 15;
 
   hint_defend_setup = spawnStruct();
-  // Approach the laptop to skip set up time.
+
   hint_defend_setup.string = &"PMC_START_ATTACK_HINT";
   hint_defend_setup.timeout = 5;
   foreach(player in level.players)
@@ -1041,7 +960,6 @@ defend_setup_time_hint() {
 }
 
 defend_setup_time_trigger() {
-  // Press and hold && 1 on the laptop to skip set up time.
   self setHintString(&"PMC_START_ATTACK_USE_HINT");
   self waittill("trigger");
   flag_set("pmc_defend_setup_time_finished");
@@ -1055,8 +973,6 @@ defend_think(fill_time) {
   bar = undefined;
 
   while(1) {
-    //reset and check enemies in volume each frame
-    //also pull nearby enemies into volume
     self.enemy_count = 0;
     enemies = getaiarray("axis");
     foreach(enemy in enemies) {
@@ -1067,7 +983,6 @@ defend_think(fill_time) {
       }
     }
 
-    //enemies are in volume, add and update bar
     if(self.enemy_count > 0) {
       enemy_time = enemy_time + (self.enemy_count * .05);
       if(enemy_time > 0) {
@@ -1076,7 +991,7 @@ defend_think(fill_time) {
           bar setPoint("CENTER", undefined, 0, 75);
           bar.text = createFontString("objective", 1.4);
           bar.text setPoint("CENTER", undefined, 0, 63);
-          // HQ Damage
+
           bar.text setText(&"PMC_HQ_DAMAGE");
           bar.text.sort = -1;
 
@@ -1086,8 +1001,7 @@ defend_think(fill_time) {
           bar updateBar(enemy_time / totalTime);
         }
       }
-    } else // no enemies in volume, if players are, empty the bar
-    {
+    } else {
       foreach(player in level.players)
       if(player istouching(self))
         enemy_time = enemy_time - .1;
@@ -1105,7 +1019,6 @@ defend_think(fill_time) {
       bar_doesnt_exist = true;
     }
     if(enemy_time >= fill_time) {
-      // Keep enemies away from the objective!
       setDvar("ui_deadquote", &"PMC_DEFEND_FAILED");
       maps\_utility::missionFailedWrapper();
     }
@@ -1114,40 +1027,17 @@ defend_think(fill_time) {
 }
 
 show_remaining_enemy_count() {
-  /*
-  	"default""bigfixed""smallfixed""objective""big""small""hudbig""hudsmall"*/
-
-  /*	level.pmc.hud.remainingEnemyCountHudElem = newHudElem();
-  	level.pmc.hud.remainingEnemyCountHudElem.x = -10;
-  	level.pmc.hud.remainingEnemyCountHudElem.y = -100;
-  	level.pmc.hud.remainingEnemyCountHudElem.font = "hudsmall";
-  	level.pmc.hud.remainingEnemyCountHudElem.fontscale = 1.0;
-  	level.pmc.hud.remainingEnemyCountHudElem.alignX = "right";
-  	level.pmc.hud.remainingEnemyCountHudElem.alignY = "bottom";
-  	level.pmc.hud.remainingEnemyCountHudElem.horzAlign = "right";
-  	level.pmc.hud.remainingEnemyCountHudElem.vertAlign = "bottom";
-  	// Enemies remaining: && 1
-  	level.pmc.hud.remainingEnemyCountHudElem.label = &"PMC_ENEMIES_REMAINING";
-  	level.pmc.hud.remainingEnemyCountHudElem.alpha = 1;*/
-
   self.remainingEnemyCountHudelem = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_HOSTILES", self);
   self.remainingEnemyCountHudelemNum = so_create_hud_item(2, so_hud_ypos(), "", self);
   self.remainingEnemyCountHudelemNum.alignX = "left";
 
-  /*	self thread info_hud_handle_fade( self.remainingEnemyCountHudelem, "mission_complete" );
-  	self thread info_hud_handle_fade( self.remainingEnemyCountHudelemNum, "mission_complete" );*/
-
   for(;;) {
-    //thread enemy_remaining_count_blimp();
-
-    // Update the number of enemies remaining on the HUD
     self.remainingEnemyCountHudElemNum setValue(level.pmc.enemies_remaining);
     if(isDefined(level.pmc.enemies_kills_to_win) && (level.pmc.enemies_kills_to_win > 0))
       thread so_dialog_counter_update(level.pmc.enemies_remaining, level.pmc_enemies);
 
-    // Kill all enemies in the level [ && 1 Remaining ].
     if(isDefined(level.pmc.objective_enemies_index))
-      // Kill all enemies in the level [ && 1 Remaining ].
+
       objective_String_NoMessage(level.pmc.objective_enemies_index, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 
     if(level.pmc.enemies_remaining <= 0) {
@@ -1203,7 +1093,6 @@ player_use_objective_think() {
   while(!isDefined(level.pmc.objective))
     wait 0.05;
 
-  // Press and hold && 1 to use the laptop.
   level.pmc.objective.trigger trigger_on();
   level.pmc.objective.laptop show();
   level.pmc.objective.trigger.active = true;
@@ -1225,7 +1114,7 @@ player_use_objective_think() {
     self.objective_bar = self createClientProgressBar(self, 60);
     self.objective_bar_text = self createClientFontString("default", 1.2);
     self.objective_bar_text setPoint("CENTER", undefined, 0, 45);
-    self.objective_bar_text settext(&"PMC_HQ_RECOVERING_INTEL"); // Retrieving Intel...
+    self.objective_bar_text settext(&"PMC_HQ_RECOVERING_INTEL");
 
     while((self useButtonPressed()) && (!flag("objective_complete"))) {
       self.objective_bar updateBar(buttonTime / totalTime);
@@ -1251,7 +1140,6 @@ player_use_objective_think() {
     }
   }
 
-  // Remove progress bars from all players that might have been using the objective at the same time
   foreach(player in level.players) {
     player notify("remove_laptop_pickup_hud");
     if(isDefined(player.objective_bar)) {
@@ -1290,23 +1178,17 @@ wait_objective_complete() {
 
   extraction_info = get_extraction_location();
 
-  // Objective was completed, now get to the extraction zone
   objective_state(1, "done");
 
-  // Reach the extraction zone before time runs out.
   objective_add(2, "current", &"PMC_OBJECTIVE_EXTRACT", extraction_info.script_origin.origin);
   if(!flag("exfiltrate_music_playing")) {
     flag_set("exfiltrate_music_playing");
-    //		thread musicPlayWrapper( level.pmc.music[ "exfiltrate" ] );
   }
   thread play_local_sound("exfiltrate");
   playFX(getfx("extraction_smoke"), extraction_info.script_origin.origin);
 
-  // Wait until all alive players are in the extraction zone
-  // Wait for all players to be inside extraction zone
   maps\_specialops_code::wait_all_players_are_touching(extraction_info.trigger);
 
-  // Complete the objective
   objective_state(2, "done");
 
   flag_set("extraction_complete");
@@ -1317,12 +1199,10 @@ wait_objective_complete() {
 get_extraction_location() {
   extraction_info = spawnStruct();
 
-  // Get all available extraction locations in the map
   extraction_origins = getEntArray("extraction", "targetname");
   averageOrigin = getAveragePlayerOrigin();
   extraction_origins = get_array_of_closest(averageOrigin, extraction_origins);
 
-  // Choose the far extraction point from where the players are
   extraction_info.script_origin = extraction_origins[extraction_origins.size - 1];
   assert(isDefined(extraction_info.script_origin));
 
@@ -1348,9 +1228,9 @@ objective_add_enemies(objNum) {
   if(!isDefined(objNum))
     objNum = 1;
   level.pmc.objective_enemies_index = objNum;
-  // Kill all enemies in the level.
+
   objective_add(objNum, "current", &"PMC_OBJECTIVE_KILL_ENEMIES", (0, 0, 0));
-  // Kill all enemies in the level [ && 1 Remaining ].
+
   objective_String_NoMessage(objNum, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 }
 
@@ -1359,11 +1239,9 @@ objective_add_laptop(objNum) {
     objNum = 1;
   assert(isDefined(level.pmc.objective.trigger.origin));
 
-  //wait for trigger to get turned on since it effects it's origin
   while(!isDefined(level.pmc.objective.trigger.active))
     wait 0.05;
 
-  // Retrieve enemy intel.
   objective_add(objNum, "current", &"PMC_OBJECTIVE_ABORT_CODES", level.pmc.objective.trigger.origin);
 }
 
@@ -1371,17 +1249,15 @@ objective_add_defend() {
   assert(isDefined(level.pmc.defendSetupTime));
   assert(isDefined(level.pmc.defendTime));
 
-  // Set up a defensive position before enemy attack.
   objective_add(1, "current", &"PMC_OBJECTIVE_SETUP_DEFENSES", (0, 0, 0));
   thread show_defend_timer();
 
   flag_wait("pmc_defend_setup_time_finished");
-  //wait level.pmc.defendSetupTime;
 
   flag_set("defend_started");
 
   objective_state(1, "done");
-  // Survive until time runs out.
+
   objective_add(2, "current", &"PMC_OBJECTIVE_DEFEND", (0, 0, 0));
 
   wait level.pmc.defendTime;
@@ -1400,13 +1276,12 @@ show_defend_timer() {
   level.pmc.hud.defendTimer.horzAlign = "left";
   level.pmc.hud.defendTimer.vertAlign = "middle";
   level.pmc.hud.defendTimer.alpha = 1;
-  // Time until attack: && 1
+
   level.pmc.hud.defendTimer.label = &"PMC_TIME_UNTIL_ATTACK";
   level.pmc.hud.defendTimer setTimer(level.pmc.defendSetupTime);
 
   flag_wait("pmc_defend_setup_time_finished");
 
-  // Time Remaining: && 1
   level.pmc.hud.defendTimer.label = &"PMC_TIME_REMAINING";
   level.pmc.hud.defendTimer setTimer(level.pmc.defendTime);
 }
@@ -1436,8 +1311,6 @@ play_local_sound(alias, loopTime, stop_loop_notify) {
 }
 
 mission_complete() {
-  //	thread musicPlayWrapper( level.pmc.music[ "mission_complete" ] );
-  //	wait 1.5;
   flag_set("mission_complete");
 }
 
@@ -1460,7 +1333,7 @@ debug_show_enemy_spawners_count() {
   level.pmc.hud.enemySpawnerCountHudElem.alignY = "bottom";
   level.pmc.hud.enemySpawnerCountHudElem.horzAlign = "left";
   level.pmc.hud.enemySpawnerCountHudElem.vertAlign = "bottom";
-  // Enemy Spawners: && 1
+
   level.pmc.hud.enemySpawnerCountHudElem.label = &"PMC_DEBUG_SPAWNER_COUNT";
   level.pmc.hud.enemySpawnerCountHudElem.alpha = 1;
 
@@ -1481,7 +1354,7 @@ debug_show_enemies_alive_count() {
   level.pmc.hud.enemyCountHudElem.alignY = "bottom";
   level.pmc.hud.enemyCountHudElem.horzAlign = "left";
   level.pmc.hud.enemyCountHudElem.vertAlign = "bottom";
-  // Enemies Alive: && 1
+
   level.pmc.hud.enemyCountHudElem.label = &"PMC_DEBUG_ENEMY_COUNT";
   level.pmc.hud.enemyCountHudElem.alpha = 1;
 
@@ -1503,7 +1376,7 @@ debug_show_vehicles_alive_count() {
   level.pmc.hud.enemyVehicleCountHudElem.alignY = "bottom";
   level.pmc.hud.enemyVehicleCountHudElem.horzAlign = "left";
   level.pmc.hud.enemyVehicleCountHudElem.vertAlign = "bottom";
-  // Vehicles Alive: && 1
+
   level.pmc.hud.enemyVehicleCountHudElem.label = &"PMC_DEBUG_VEHICLE_COUNT";
   level.pmc.hud.enemyVehicleCountHudElem.alpha = 1;
 
@@ -1512,51 +1385,13 @@ debug_show_vehicles_alive_count() {
     wait 0.05;
   }
 }
-/*
-set_up_preplaced_enemy_sentry_turrets( turrets )
-{
-	if( turrets.size == 0 )
-		return;
 
-	//sort from closest to furtherest
-	turrets = get_array_of_closest( getAveragePlayerOrigin(), turrets );
-
-	//remove the closest 2
-	turrets[ 0 ] thread common_scripts\_sentry::delete_sentry_turret();
-	turrets = array_remove( turrets, turrets[ 0 ] );
-
-	if( turrets.size == 0 )
-		return;
-
-	turrets[ 0 ] thread common_scripts\_sentry::delete_sentry_turret();
-	turrets = array_remove( turrets, turrets[ 0 ] );
-
-	num_to_keep = 3;
-
-	if( turrets.size <= num_to_keep )
-		return;
-
-	turrets = array_randomize( turrets );
-
-	for( i = 0 ; i < turrets.size ; i++ )
-	{
-		if( i >= num_to_keep )
-		{
-			turrets[ i ] thread common_scripts\_sentry::delete_sentry_turret();
-		}
-	}
-}
-*/
 room_breach_spawned() {
-  // This thread gets ran when a room breach enemy gets spawned via the room breaching global script
   delete_unseen_enemy();
   self thread enemy_death_wait();
 }
 
 delete_unseen_enemy() {
-  // Deletes 1 far away not-visible enemy in the map
-
-  // Get array of enemy spawners in order of farthest to closest
   ai = get_array_of_closest(getAveragePlayerOrigin(), getaiarray("axis"));
   ai = array_reverse(ai);
 
@@ -1589,39 +1424,21 @@ staged_pacing_system() {
   while(1) {
     level waittill("enemy_died");
 
-    //stage 1 one enemy killed, less than 1/3 of enemies killed
-    //attack heli chance
     if(level.pmc.enemies_remaining >= two_thirds) {
-      //50% chance through this entire period
       println("pacingstage 1");
       force_odds = one_third * 2;
-    }
-
-    //Stage 2 1/3 to 2/3rds of enemies killed
-    //transport heli or attack heli
-    //transport isnt forced, just allowed
-    //one juggernaut at a time
-    else if(level.pmc.enemies_remaining >= one_third) {
+    } else if(level.pmc.enemies_remaining >= one_third) {
       flag_set("pacing_stage_2");
       println("pacingstage 2");
       thread send_in_one_juggernaut(one_third);
-      //create_one_heli( if_none_already );
-    }
-
-    //Stage 3 more than 2/3rds of enemies killed
-    //two juggernauts at a time
-    //second heli
-    else {
+    } else {
       flag_set("pacing_stage_3");
       println("pacingstage 3");
-      //create_one_heli();
+
       thread send_in_multiple_juggernauts();
     }
   }
 
-  //Stage 4 less than 7 enemies left
-  //beef up remaining and send in
-  //done elsewhere
 }
 
 count_dead_juggernauts() {
@@ -1636,7 +1453,6 @@ juggernaut_hunt_immediately_behavior() {
 
   self.useChokePoints = false;
 
-  //small goal at the player so they can close in aggressively
   while(1) {
     self.goalradius = 32;
     self set_goal_height();
@@ -1652,9 +1468,6 @@ juggernaut_hunt_immediately_behavior() {
 }
 
 send_in_one_juggernaut(one_third) {
-  //this doesnt actually spawn or force the juggernaut
-  //it just alters the checks in should_spawn_juggernaut()
-  //and removes a guy to make room
   living = level.pmc.juggernauts_spawned - level.pmc.juggernauts_killed;
   allowed_for_this_stage = (level.pmc.max_juggernauts / 2);
 
@@ -1700,7 +1513,6 @@ should_spawn_juggernaut() {
   if(!level.juggernaut_mode)
     return false;
 
-  // spawn a juggernaut at the start of the game instead of waiting until the end if this is set.
   if(!level.pmc.spawned_juggernaut_at_game_start) {
     assert(level.pmc.spawned_juggernaut_at_game_start_counter > 0);
     chance = randomint(level.pmc.spawned_juggernaut_at_game_start_counter);

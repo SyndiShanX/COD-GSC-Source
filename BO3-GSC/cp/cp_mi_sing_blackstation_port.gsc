@@ -43,466 +43,234 @@
 #using scripts\shared\weapons_shared;
 #namespace cp_mi_sing_blackstation_port;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
-
-function anchor_intro() {
-  // Unsupported VM revision (1B).
-}
-
-function anchor_intro_done() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_done() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_assault() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_assault_done() {
-  // Unsupported VM revision (1B).
-}
-
-function storm_surge() {
-  // Unsupported VM revision (1B).
-}
-
-function storm_surge_done() {
-  // Unsupported VM revision (1B).
-}
-
-function hendricks_anchor_warning() {
-  // Unsupported VM revision (1B).
-}
-
-function say_wind_warning() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b7f1a1f6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e60704dd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e774fcfd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_21f63154() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e3f6a644() {
-  // Unsupported VM revision (1B).
-}
-
-function function_925a5c0b() {
-  // Unsupported VM revision (1B).
-}
-
-function kane_missiles() {
-  // Unsupported VM revision (1B).
-}
-
-function function_eabab8e4() {
-  // Unsupported VM revision (1B).
-}
-
-function function_84be5124() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b0f369dc() {
-  // Unsupported VM revision (1B).
-}
-
-function lightning_port_assault() {
-  // Unsupported VM revision (1B).
-}
-
-function function_17c457d7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ee4f2519() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_retreat() {
-  // Unsupported VM revision (1B).
-}
-
-function surge_debris_portstart() {
-  // Unsupported VM revision (1B).
-}
-
-function surge_debris_restaurant() {
-  // Unsupported VM revision (1B).
-}
-
-function surge_debris_portbuilding() {
-  // Unsupported VM revision (1B).
-}
-
-function port_covernode_handler() {
-  // Unsupported VM revision (1B).
-}
-
-function function_41eafef6() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_enemies() {
-  // Unsupported VM revision (1B).
-}
-
-function swept_away_guys() {
-  // Unsupported VM revision (1B).
-}
-
-function function_83fc27b8() {
-  // Unsupported VM revision (1B).
-}
-
-function port_enemy_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6a0ccfd() {
-  // Unsupported VM revision (1B).
-}
-
-function port_enter() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_truck() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_interior() {
-  // Unsupported VM revision (1B).
-}
-
-function port_interior_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3e1b1aaa() {
-  // Unsupported VM revision (1B).
-}
-
-function cargo_ship_rocker() {
-  // Unsupported VM revision (1B).
-}
-
-function prep_barge() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b3d8d3f5() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f8ff4031() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_face_tanker() {
-  // Unsupported VM revision (1B).
-}
-
-function pier_events() {
-  // Unsupported VM revision (1B).
-}
-
-function pre_breach() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2a6c042b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d091f076() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d1996775() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5edd0266() {
-  // Unsupported VM revision (1B).
-}
-
-function function_42df2efb() {
-  // Unsupported VM revision (1B).
-}
-
-function enable_breach_triggers() {
-  // Unsupported VM revision (1B).
-}
-
-function watch_for_player_stack() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ad89287b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b5455e18() {
-  // Unsupported VM revision (1B).
-}
-
-function function_13dde3bd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_173b4bfe() {
-  // Unsupported VM revision (1B).
-}
-
-function function_307c2864() {
-  // Unsupported VM revision (1B).
-}
-
-function player_breach_watcher() {
-  // Unsupported VM revision (1B).
-}
-
-function breach_nag() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_breach() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a3eced7() {
-  // Unsupported VM revision (1B).
-}
-
-function hendricks_enter_wheelhouse() {
-  // Unsupported VM revision (1B).
-}
-
-function create_concussion_wave() {
-  // Unsupported VM revision (1B).
-}
-
-function function_797ee2de() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b53bbcfb() {
-  // Unsupported VM revision (1B).
-}
-
-function enter_wheelhouse() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_doors() {
-  // Unsupported VM revision (1B).
-}
-
-function wheelhouse_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
-
-function breach_slow_time() {
-  // Unsupported VM revision (1B).
-}
-
-function reset_timescale() {
-  // Unsupported VM revision (1B).
-}
-
-function port_assault_vo() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_assault_vo() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c5a827ee() {
-  // Unsupported VM revision (1B).
-}
-
-function truck_wave() {
-  // Unsupported VM revision (1B).
-}
-
-function setup_port_technical() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b8500bb1() {
-  // Unsupported VM revision (1B).
-}
-
-function wheelhouse_node_handler() {
-  // Unsupported VM revision (1B).
-}
-
-function lightning_barge() {
-  // Unsupported VM revision (1B).
-}
-
-function lightning_barge_clear() {
-  // Unsupported VM revision (1B).
-}
-
-function spawn_pier_guards() {
-  // Unsupported VM revision (1B).
-}
-
-function pier_guard_smash() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7a7390dd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d4e6feff() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_cqb_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
-
-function pier_guard_behavior() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_ai() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a27055f8() {
-  // Unsupported VM revision (1B).
-}
-
-function truck_pier() {
-  // Unsupported VM revision (1B).
-}
-
-function truck_gunner_death() {
-  // Unsupported VM revision (1B).
-}
-
-function truck_cargo_blocker() {
-  // Unsupported VM revision (1B).
-}
-
-function truck_wave_hit() {
-  // Unsupported VM revision (1B).
-}
-
-function ignore_truck_riders() {
-  // Unsupported VM revision (1B).
-}
-
-function pier_guard_wave() {
-  // Unsupported VM revision (1B).
-}
-
-function pier_wave_create() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b73344f6() {
-  // Unsupported VM revision (1B).
-}
-
-function tanker_movement() {
-  // Unsupported VM revision (1B).
-}
-
-function tanker_smash() {
-  // Unsupported VM revision (1B).
-}
-
-function hendricks_boatride() {
-  // Unsupported VM revision (1B).
-}
-
-function player_tanker_anchor() {
-  // Unsupported VM revision (1B).
-}
-
-function function_948e3399() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f60d2cfb() {
-  // Unsupported VM revision (1B).
-}
-
-function tanker_ride_done() {
-  // Unsupported VM revision (1B).
-}
-
-function function_423548cd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_fcb18964() {
-  // Unsupported VM revision (1B).
-}
-
-function function_622eb918() {
-  // Unsupported VM revision (1B).
-}
-
-function function_18898abd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_236c19c3() {
-  // Unsupported VM revision (1B).
-}
-
-function barge_wave() {
-  // Unsupported VM revision (1B).
-}
-
-function debris_toilet_launch() {
-  // Unsupported VM revision (1B).
-}
-
-function function_13e164f4() {
-  // Unsupported VM revision (1B).
-}
-
-function function_22a0015b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_109329ae() {
-  // Unsupported VM revision (1B).
-}
-
-function function_94ff5bc0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3b4b0a17() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
+
+function anchor_intro() {}
+
+function anchor_intro_done() {}
+
+function port_assault() {}
+
+function port_assault_done() {}
+
+function barge_assault() {}
+
+function barge_assault_done() {}
+
+function storm_surge() {}
+
+function storm_surge_done() {}
+
+function hendricks_anchor_warning() {}
+
+function say_wind_warning() {}
+
+function function_b7f1a1f6() {}
+
+function function_e60704dd() {}
+
+function function_e774fcfd() {}
+
+function function_21f63154() {}
+
+function function_e3f6a644() {}
+
+function function_925a5c0b() {}
+
+function kane_missiles() {}
+
+function function_eabab8e4() {}
+
+function function_84be5124() {}
+
+function function_b0f369dc() {}
+
+function lightning_port_assault() {}
+
+function function_17c457d7() {}
+
+function function_ee4f2519() {}
+
+function port_assault_retreat() {}
+
+function surge_debris_portstart() {}
+
+function surge_debris_restaurant() {}
+
+function surge_debris_portbuilding() {}
+
+function port_covernode_handler() {}
+
+function function_41eafef6() {}
+
+function port_assault_enemies() {}
+
+function swept_away_guys() {}
+
+function function_83fc27b8() {}
+
+function port_enemy_spawnfunc() {}
+
+function function_6a0ccfd() {}
+
+function port_enter() {}
+
+function port_assault_truck() {}
+
+function port_assault_interior() {}
+
+function port_interior_spawnfunc() {}
+
+function function_3e1b1aaa() {}
+
+function cargo_ship_rocker() {}
+
+function prep_barge() {}
+
+function function_b3d8d3f5() {}
+
+function function_f8ff4031() {}
+
+function barge_face_tanker() {}
+
+function pier_events() {}
+
+function pre_breach() {}
+
+function function_2a6c042b() {}
+
+function function_d091f076() {}
+
+function function_d1996775() {}
+
+function function_5edd0266() {}
+
+function function_42df2efb() {}
+
+function enable_breach_triggers() {}
+
+function watch_for_player_stack() {}
+
+function function_ad89287b() {}
+
+function function_b5455e18() {}
+
+function function_13dde3bd() {}
+
+function function_173b4bfe() {}
+
+function function_307c2864() {}
+
+function player_breach_watcher() {}
+
+function breach_nag() {}
+
+function barge_breach() {}
+
+function function_a3eced7() {}
+
+function hendricks_enter_wheelhouse() {}
+
+function create_concussion_wave() {}
+
+function function_797ee2de() {}
+
+function function_b53bbcfb() {}
+
+function enter_wheelhouse() {}
+
+function barge_doors() {}
+
+function wheelhouse_spawnfunc() {}
+
+function breach_slow_time() {}
+
+function reset_timescale() {}
+
+function port_assault_vo() {}
+
+function barge_assault_vo() {}
+
+function function_c5a827ee() {}
+
+function truck_wave() {}
+
+function setup_port_technical() {}
+
+function function_b8500bb1() {}
+
+function wheelhouse_node_handler() {}
+
+function lightning_barge() {}
+
+function lightning_barge_clear() {}
+
+function spawn_pier_guards() {}
+
+function pier_guard_smash() {}
+
+function function_7a7390dd() {}
+
+function function_d4e6feff() {}
+
+function barge_cqb_spawnfunc() {}
+
+function pier_guard_behavior() {}
+
+function barge_ai() {}
+
+function function_a27055f8() {}
+
+function truck_pier() {}
+
+function truck_gunner_death() {}
+
+function truck_cargo_blocker() {}
+
+function truck_wave_hit() {}
+
+function ignore_truck_riders() {}
+
+function pier_guard_wave() {}
+
+function pier_wave_create() {}
+
+function function_b73344f6() {}
+
+function tanker_movement() {}
+
+function tanker_smash() {}
+
+function hendricks_boatride() {}
+
+function player_tanker_anchor() {}
+
+function function_948e3399() {}
+
+function function_f60d2cfb() {}
+
+function tanker_ride_done() {}
+
+function function_423548cd() {}
+
+function function_fcb18964() {}
+
+function function_622eb918() {}
+
+function function_18898abd() {}
+
+function function_236c19c3() {}
+
+function barge_wave() {}
+
+function debris_toilet_launch() {}
+
+function function_13e164f4() {}
+
+function function_22a0015b() {}
+
+function function_109329ae() {}
+
+function function_94ff5bc0() {}
+
+function function_3b4b0a17() {}

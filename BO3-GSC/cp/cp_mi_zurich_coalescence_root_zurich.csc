@@ -6,38 +6,20 @@
 #using scripts\shared\util_shared;
 #namespace root_zurich;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function function_920535b4() {
-  // Unsupported VM revision (1B).
-}
+function function_920535b4() {}
 
-function function_e76c15a0() {
-  // Unsupported VM revision (1B).
-}
+function function_e76c15a0() {}
 
-function function_abbe84dc() {
-  // Unsupported VM revision (1B).
-}
+function function_abbe84dc() {}
 
-function function_ad59adbe() {
-  // Unsupported VM revision (1B).
-}
+function function_ad59adbe() {}
 
-function function_bf3a782e() {
-  // Unsupported VM revision (1B).
-}
+function function_bf3a782e() {}
 
-function function_2a49d204() {
-  // Unsupported VM revision (1B).
-}
+function function_2a49d204() {}
 
-function function_5e9c8d21() {
-  // Unsupported VM revision (1B).
-}
+function function_5e9c8d21() {}

@@ -19,23 +19,21 @@ main() {
 }
 
 getDescription() {
-  // autosave
   return (&"AUTOSAVE_AUTOSAVE");
 }
 
 getnames(num) {
   if(num == 0)
-    // Begin Game Autosave
+
     savedescription = &"AUTOSAVE_GAME";
   else
-    // No Name Specified
+
     savedescription = &"AUTOSAVE_NOGAME";
 
   return savedescription;
 }
 
 beginningOfLevelSave() {
-  // Wait for introscreen to finish
   level waittill("finished final intro screen fadein");
 
   if(level.MissionFailed) {
@@ -51,8 +49,6 @@ beginningOfLevelSave() {
 
   imagename = "levelshots / autosave / autosave_" + level.script + "start";
 
-  // "levelstart" is recognized by the saveGame command as a special save game
-  // Start
   SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
   setDvar("ui_grenade_death", "0");
   PrintLn("Saving level start saved game");
@@ -113,9 +109,6 @@ autoSaveNameThink(trigger) {
 
 trigger_autosave_immediate(trigger) {
   trigger waittill("trigger");
-  // Start
-  // 	saveId = SaveGameNoCommit( 1, &"AUTOSAVE_LEVELSTART", "autosave_image" );
-  // 	CommitSave( saveId );
 }
 
 AutoSavePrint(msg, msg2) {
@@ -144,7 +137,7 @@ autosave_timeout(timeout) {
 
 _autosave_game_now_nochecks() {
   imagename = "levelshots / autosave / autosave_" + level.script + "start";
-  // Start
+
   SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
 }
 
@@ -172,7 +165,7 @@ _autosave_game_now(suppress_print) {
   else
     saveId = SaveGameNoCommit(filename, descriptionString);
 
-  wait(0.05); // code request
+  wait(0.05);
   if(IsSaveRecentlyLoaded()) {
     level.lastAutoSaveTime = GetTime();
     return false;
@@ -198,7 +191,6 @@ _autosave_game_now(suppress_print) {
     return false;
   }
 
-  // are we still healthy 2 seconds later? k save then
   if(try_to_autosave_now()) {
     if(!isDefined(suppress_print))
       thread maps\_arcademode::arcademode_checkpoint_print();
@@ -280,7 +272,7 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
         break;
       }
 
-      wait(0.05); // code request
+      wait(0.05);
       if(IsSaveRecentlyLoaded()) {
         level.lastAutoSaveTime = GetTime();
         break;
@@ -370,39 +362,32 @@ autoSaveCheck(doPickyChecks, doStealthChecks) {
       return false;
   }
 
-  // health check	
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(!player autoSaveHealthCheck())
       return false;
 
-    // ammo check
     if(doPickyChecks && !player autoSaveAmmoCheck())
       return false;
   }
 
-  // ai / tank threat check
   if(level.autosave_threat_check_enabled) {
     if(!autoSaveThreatCheck(doPickyChecks))
       return false;
   }
 
-  // player state check
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(!player autoSavePlayerCheck(doPickyChecks))
       return false;
   }
 
-  // safe save check for level specific gameplay conditions
   if(isDefined(level.savehere) && !level.savehere)
     return false;
 
-  // safe save check for level specific gameplay conditions
   if(isDefined(level.canSave) && !level.canSave)
     return false;
 
-  // save was unsuccessful for internal reasons, such as lack of memory
   if(!issavesuccessful()) {
     AutoSavePrint("autosave failed: save call was unsuccessful");
     return false;
@@ -517,14 +502,12 @@ autoSaveThreatCheck(doPickyChecks) {
       continue;
     }
 
-    // is trying to melee the player
     if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && isPlayer(enemy.melee.target)) {
       AutoSavePrint("autosave failed: AI meleeing player");
       return (false);
     }
 
     if(enemy.finalAccuracy < 0.021 && enemy.finalAccuracy > -1) {
-      // enemy lacks the accuracy to be a threat
       continue;
     }
 
@@ -534,11 +517,9 @@ autoSaveThreatCheck(doPickyChecks) {
       return false;
 
     if(proximity_threat == "none") {
-      // enemy isn't close enough to be a threat
       continue;
     }
 
-    // recently shot at the player
     if(enemy.a.lastShootTime > GetTime() - 500) {
       if(doPickyChecks || enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
         AutoSavePrint("autosave failed: AI firing on player");
@@ -561,8 +542,7 @@ autoSaveThreatCheck(doPickyChecks) {
       continue;
     }
     foreach(player in level.players) {
-      if(Distance(vehicle.origin, player.origin) < 400) // grenade radius is 220
-      {
+      if(Distance(vehicle.origin, player.origin) < 400) {
         AutoSavePrint("autosave failed: burning car too close to player");
         return (false);
       }
@@ -573,7 +553,6 @@ autoSaveThreatCheck(doPickyChecks) {
 }
 
 enemy_is_a_threat() {
-  // AI must have a reasonable chance of hitting the player
   if(self.finalAccuracy >= 0.021)
     return true;
 

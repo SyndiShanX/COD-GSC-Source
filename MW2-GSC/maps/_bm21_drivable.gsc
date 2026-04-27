@@ -7,18 +7,11 @@
 #include maps\_vehicle_aianim;
 #using_animtree("vehicles");
 main(model, type) {
-  //SNDFILE=vehicle_bm21
   build_template("bm21_drivable", model, type);
   build_localinit(::init_local);
 
-  //	build_deathmodel( "vehicle_bm21_mobile", "vehicle_bm21_mobile_dstry" );// RADNAME = _troops
-  //	build_deathmodel( "vehicle_bm21_mobile_cover", "vehicle_bm21_mobile_cover_dstry" );// RADNAME = _troops
-  build_deathmodel("vehicle_bm21_mobile_bed", "vehicle_bm21_mobile_bed_dstry"); // RADNAME = _troops
-  //	build_deathmodel( "vehicle_bm21_mobile_cover_no_bench", "vehicle_bm21_mobile_cover_dstry" );// RADNAME = _troops
+  build_deathmodel("vehicle_bm21_mobile_bed", "vehicle_bm21_mobile_bed_dstry");
 
-  //build_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );
-
-  // 	build_deathfx( effect, 								tag, 					sound, 								bEffectLooping, 	delay, 			bSoundlooping, waitDelay, stayontag, notifyString )
   build_deathfx("explosions/large_vehicle_explosion", undefined, "car_explode", undefined, undefined, undefined, 0);
   build_deathfx("fire/firelp_med_pm", "tag_fx_tire_right_r", undefined, undefined, undefined, true, 0);
   build_deathfx("fire/firelp_med_pm", "tag_fx_cab", "fire_metal_medium", undefined, undefined, true, 0);
@@ -51,10 +44,7 @@ main(model, type) {
   build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
 }
 
-init_local() {
-  // 	maps\_vehicle::lights_on( "headlights" );
-  // 	maps\_vehicle::lights_on( "brakelights" );
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   positions[0].vehicle_getoutanim = % bm21_driver_climbout_door;
@@ -79,14 +69,6 @@ set_vehicle_anims(positions) {
   positions[8].vehicle_getoutsoundtag = "back_board";
   positions[9].vehicle_getoutsoundtag = "back_board";
 
-  //	positions[ 3 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 4 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 5 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 6 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 7 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 8 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-  //	positions[ 9 ].vehicle_getoutanim = %bm21_guy_climbout_truckdoor;
-
   positions[0].vehicle_getoutanim_clear = true;
   positions[1].vehicle_getoutanim_clear = true;
   positions[2].vehicle_getoutanim_clear = false;
@@ -110,14 +92,14 @@ setanims() {
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
-  positions[2].sittag = "tag_detach"; // RR
-  positions[3].sittag = "tag_detach"; // RR
-  positions[4].sittag = "tag_detach"; // RR
-  positions[5].sittag = "tag_detach"; // RR
-  positions[6].sittag = "tag_detach"; // RL
-  positions[7].sittag = "tag_detach"; // RL
-  positions[8].sittag = "tag_detach"; // RL
-  positions[9].sittag = "tag_detach"; // RL
+  positions[2].sittag = "tag_detach";
+  positions[3].sittag = "tag_detach";
+  positions[4].sittag = "tag_detach";
+  positions[5].sittag = "tag_detach";
+  positions[6].sittag = "tag_detach";
+  positions[7].sittag = "tag_detach";
+  positions[8].sittag = "tag_detach";
+  positions[9].sittag = "tag_detach";
 
   positions[0].idle = % bm21_driver_idle;
   positions[1].idle = % bm21_passenger_idle;
@@ -192,15 +174,3 @@ unload_groups() {
 
   return unload_groups;
 }
-
-/*QUAKED script_vehicle_bm21_drivable (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bm21_drivable::main( "vehicle_bm21_mobile_bed" );
-
-and these lines in your CSV:
-#include,vehicle_bm21_drivable
-sound,vehicle_bm21,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bm21_mobile_bed"default:"vehicletype" "bm21_drivable"default:"script_team" "axis"
-*/

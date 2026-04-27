@@ -90,13 +90,13 @@ updateFogFromScript() {
     else
       SetExpFog(level.fognearplane, level.fogexphalfplane, level.fogcolor[0], level.fogcolor[1], level.fogcolor[2], level.fogmaxopacity, 0);
   } else {
-    SetExpFog(100000000000, 100000000001, 0, 0, 0, 0, 0); // couldn't find discreet fog disabling other than to never set it in the first place
+    SetExpFog(100000000000, 100000000001, 0, 0, 0, 0, 0);
   }
 }
 
 artfxprintlnFog() {
   fileprint_launcher("");
-  fileprint_launcher("\t//* Fog section * ");
+  fileprint_launcher("\t//******************************************************** Fog section * ");
   fileprint_launcher("");
 
   fileprint_launcher("\tsetDevDvar( \"scr_fog_disable\"" + ", " + "\"" + GetDvarInt("scr_fog_disable") + "\"" + " );");

@@ -60,7 +60,6 @@ price_catches_player(price) {
 }
 
 big_jump_grab_fx(price) {
-  //iprintlnbold( "Exploder 4" );
   exploder(4);
 }
 
@@ -68,7 +67,7 @@ ledge_scoot_fx_left(price) {
   if(flag("reached_top")) {
     return;
   }
-  //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_LE", 5 );
+
   playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_LE");
 }
 
@@ -76,7 +75,7 @@ ledge_scoot_fx_right(price) {
   if(flag("reached_top")) {
     return;
   }
-  //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_RI", 5 );
+
   playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_RI");
 }
 
@@ -94,14 +93,12 @@ pick_warning(warning) {
 pick_left_hit(price) {
   pick_warning("left_in");
 
-  // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
   price traceFX_on_tag("ice_pick", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
 }
 
 pick_left_fx(price) {
-  // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
   price traceFX_on_tag("ice_pick", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
@@ -110,7 +107,6 @@ pick_left_fx(price) {
 pick_right_hit(price) {
   pick_warning("right_in");
 
-  // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_weapon_left");
   price traceFX_on_tag("ice_pick", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
   price anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
@@ -119,7 +115,6 @@ pick_right_hit(price) {
 pick_left_out(price) {
   pick_warning("left_out");
 
-  // temporarily detach the other one so we can get the right tag
   price Detach("weapon_ice_picker", "tag_inhand");
   price traceFX_on_tag("ice_pick_out", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
@@ -127,7 +122,7 @@ pick_left_out(price) {
 
 pick_right_out(price) {
   pick_warning("right_out");
-  // temporarily detach the other one so we can get the right tag
+
   price Detach("weapon_ice_picker", "tag_weapon_left");
   price traceFX_on_tag("ice_pick_out", "TAG_ICE_PICKER_FX", CONST_traceFX_dist);
   price anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
@@ -235,8 +230,6 @@ player_animations() {
   level.scr_anim["player_rig"]["controller_left"] = % slide_left;
   level.scr_anim["player_rig"]["controller_right"] = % slide_right;
 
-  //addNotetrack_customFunction( "player_rig", "detach_pick_fall", maps\_climb::detach_pick_2, "big_jump" );
-  //addNotetrack_customFunction( "player_rig", "detach_pick", maps\_climb::detach_pick, "big_jump" );
   addNotetrack_customFunction("player_rig", "start_gaz", maps\_climb::gaz_catches_player);
   addNotetrack_customFunction("player_rig", "stab", ::right_stab_fx, "big_jump");
 

@@ -7,15 +7,13 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-TURRET_HEAT_MAX = 114; // Dont touch
-
-// Tweaks
-TURRET_HEAT_RATE = 1.0; // Rate that the gun overheats( high number means faster overheat )
-TURRET_COOL_RATE = 1.0; // Rate that the gun cools down( higher number means it cools off faster )
-OVERHEAT_TIME = 2.0; // Time to flash the overheat meter
-OVERHEAT_FLASH_TIME = 0.2; // When the gun first overheats the status bar blinks at this rate
-OVERHEAT_FLASH_TIME_INCREMENT = 0.1; // Each time the status bar blinks it increments by this much each blink( causes it to blink slower as the overheat period runs out )
-GUN_USAGE_DELAY_AFTER_OVERHEAT = 2.0; // Once you have overheated the gun waits this amount of time before turning on again
+TURRET_HEAT_MAX = 114;
+TURRET_HEAT_RATE = 1.0;
+TURRET_COOL_RATE = 1.0;
+OVERHEAT_TIME = 2.0;
+OVERHEAT_FLASH_TIME = 0.2;
+OVERHEAT_FLASH_TIME_INCREMENT = 0.1;
+GUN_USAGE_DELAY_AFTER_OVERHEAT = 2.0;
 
 init_overheat() {
   precacheShader("hud_temperature_gauge");
@@ -56,13 +54,9 @@ overheat_disable() {
 }
 
 status_meter_update(vehicle) {
-  // Notify doesn't work the way Ned is doing his vehicle ride so this hacked with attackButtonPressed() for now
-
   self endon("disable_overheat");
 
   for(;;) {
-    //iprintln( self.overheat.turret_heat_status );
-
     if(self.overheat.turret_heat_status >= TURRET_HEAT_MAX) {
       wait 0.05;
       continue;
@@ -88,8 +82,6 @@ update_overheat_meter() {
 }
 
 create_hud() {
-  //Draw the temperature gauge and filler bar components
-
   self endon("disable_overheat");
 
   coopOffset = 0;
@@ -110,7 +102,6 @@ create_hud() {
     self.overheat.overheat_bg.sort = 4;
   }
 
-  //status bar
   if(!isDefined(self.overheat.overheat_status)) {
     self.overheat.overheat_status = newClientHudElem(self);
     self.overheat.overheat_status.alignX = "right";
@@ -135,8 +126,6 @@ overheated(vehicle) {
   if(self.overheat.overheated)
     return;
   self.overheat.overheated = true;
-
-  // Gun has overheated
 
   level.savehere = false;
   self thread play_sound_on_entity("smokegrenade_explode_default");
@@ -165,13 +154,10 @@ overheated(vehicle) {
   }
   self.overheat.overheat_status.alpha = 1.0;
 
-  // Start cooldown again
   self.overheat.turret_heat_status -= TURRET_COOL_RATE;
 
-  // wait for it to cool down a bit
   wait GUN_USAGE_DELAY_AFTER_OVERHEAT;
 
-  // Make gun usable
   if(isDefined(vehicle.mgturret))
     vehicle.mgturret[0] turretFireEnable();
 
@@ -182,7 +168,6 @@ overheated(vehicle) {
 overheat_setColor(value, fadeTime) {
   self endon("disable_overheat");
 
-  //define what colors to use
   color_cold = [];
   color_cold[0] = 1.0;
   color_cold[1] = 0.9;
@@ -196,13 +181,11 @@ overheat_setColor(value, fadeTime) {
   color_hot[1] = 0.16;
   color_hot[2] = 0.0;
 
-  //default color
   CurrentColor = [];
   CurrentColor[0] = color_cold[0];
   CurrentColor[1] = color_cold[1];
   CurrentColor[2] = color_cold[2];
 
-  //define where the non blend points are
   cold = 0;
   warm = (TURRET_HEAT_MAX / 2);
   hot = TURRET_HEAT_MAX;

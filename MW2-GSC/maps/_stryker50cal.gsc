@@ -18,7 +18,7 @@ main(model, type) {
   build_team("allies");
   build_mainturret();
   build_compassicon("tank");
-  build_frontarmor(.33); // regens this much of the damage from attacks to the front
+  build_frontarmor(.33);
   build_rumble("stryker_rumble", 0.15, 4.5, 900, 1, 1);
 }
 
@@ -33,15 +33,3 @@ setanims() {
   positions[0].getout_delete = true;
   return positions;
 }
-
-/*QUAKED script_vehicle_stryker50cal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker50cal::main( "vehicle_stryker_config2" );
-
-and these lines in your CSV:
-#include,vehicle_stryker50cal
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker_config2"default:"vehicletype" "stryker50cal"default:"script_team" "allies"
-*/

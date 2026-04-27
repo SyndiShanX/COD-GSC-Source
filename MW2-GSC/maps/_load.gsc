@@ -22,20 +22,13 @@ main() {
 
   set_early_level();
 
-  //*****************************************			STEALTH SYSTEM CALLBACKS		*****************************************/
-
-  //->since stealth is so integrated into many global scripts, these call backs refer to an empty function...if they are actually
-  //called, that means the designer called a stealth function without initilizing the stealth system first.This is done so stealth
-  //scripts dont have to be loaded globally into every level
   level.global_callbacks = [];
 
   level.global_callbacks["_autosave_stealthcheck"] = ::global_empty_callback;
   level.global_callbacks["_patrol_endon_spotted_flag"] = ::global_empty_callback;
   level.global_callbacks["_spawner_stealth_default"] = ::global_empty_callback;
-  //this one's for _idle...its peppered with stealth stuff so it got quarentined too.
-  level.global_callbacks["_idle_call_idle_func"] = ::global_empty_callback;
 
-  //*****************************************			STEALTH SYSTEM CALLBACKS		*****************************************/
+  level.global_callbacks["_idle_call_idle_func"] = ::global_empty_callback;
 
   weapon_list_debug();
 
@@ -45,7 +38,7 @@ main() {
 
   VisionSetPain("near_death");
 
-  level.func["damagefeedback"] = maps\_damagefeedback::updateDamageFeedback; // for player shooting sentry guns
+  level.func["damagefeedback"] = maps\_damagefeedback::updateDamageFeedback;
   array_thread(getEntArray("script_model_pickup_claymore", "classname"), ::claymore_pickup_think_global);
   array_thread(getEntArray("ammo_cache", "targetname"), ::ammo_cache_think_global);
 
@@ -66,8 +59,7 @@ main() {
   if(getDvar("scr_RequiredMapAspectratio") == "")
     setDvar("scr_RequiredMapAspectratio", "1");
 
-  //if( getDvar( "ac130_player_num" ) == "" )
-  setDvar("ac130_player_num", -1); // reset ac130 player number for proper display of HUD
+  setDvar("ac130_player_num", -1);
 
   clear_custom_eog_summary();
   setDvar("ui_remotemissile_playernum", 0);
@@ -76,12 +68,10 @@ main() {
   CreatePrintChannel("script_debug");
 
   if(!isDefined(anim.notetracks)) {
-    // string based array for notetracks
     anim.notetracks = [];
     animscripts\shared::registerNoteTracks();
   }
 
-  // default start for killing script.
   add_start("no_game", ::start_nogame);
 
   level._loadStarted = true;
@@ -100,24 +90,8 @@ main() {
 
   maps\_specialops::specialops_remove_unused();
 
-  // set solo_play dvar correctly upon returning from a friend's game in which you were invited while playing solo play mode previously
   if(is_specialop() && (IsSplitScreen() || (getDvar("coop") == "1")))
     setDvar("solo_play", "");
-
-  /*
-  no_game_levels = [];
-  no_game_levels[ "contingency" ] = true;
-
-  if( isDefined( no_game_levels[ level.script ] ) )
-  {
-  	setDvar( "start", "no_game" );
-  }
-  else
-  {
-  	if( getDvar( "start" ) == "no_game" )
-  		setDvar( "start", "" );
-  }
-  */
 
   level.dirtEffectMenu["center"] = "dirt_effect_center";
   level.dirtEffectMenu["left"] = "dirt_effect_left";
@@ -133,23 +107,20 @@ main() {
   level.is_legacy_map = set_legacy_map();
 
   level.ai_number = 0;
-  // flag_struct is used as a placeholder when a flag is set without an entity
 
   if(!isDefined(level.flag)) {
     init_flags();
   } else {
-    // flags initialized before this should be checked for stat tracking
     flags = GetArrayKeys(level.flag);
     array_levelthread(flags, ::check_flag_for_stat_tracking);
   }
 
-  // disabled, prototyping PMC/COOP money
   if(getDvar("xp_enable", "0") == "")
     setDvar("xp_enable", "0");
 
   if(string_starts_with(level.script, "co_")) {
     setDvar("money_enable", "1");
-    setDvar("in_game_reward", "0"); // this includes getting reward from kills and objectives
+    setDvar("in_game_reward", "0");
   } else if(string_starts_with(level.script, "pmc_")) {
     setDvar("money_enable", "1");
     setDvar("in_game_reward", "1");
@@ -167,7 +138,7 @@ main() {
     maps\_coop::main();
 
   if(IsSplitScreen()) {
-    SetSavedDvar("cg_fovScale", "0.75"); // 65 - > 40 fov// 0.54
+    SetSavedDvar("cg_fovScale", "0.75");
   } else {
     SetSavedDvar("cg_fovScale", "1");
   }
@@ -197,7 +168,6 @@ main() {
 
   level.dronestruct = [];
 
-  // remove delete_on_load structs
   foreach(index, struct in level.struct) {
     if(!isDefined(struct.targetname))
       continue;
@@ -207,11 +177,9 @@ main() {
 
   struct_class_init();
 
-  // can be turned on and off to control friendly_respawn_trigger
   flag_init("respawn_friendlies");
   flag_init("player_flashed");
 
-  //function pointers so I can share _destructible script with SP and MP where code commands don't exist in MP
   level.arcadeMode_kill_func = ::arcadeMode_kill;
   level.connectPathsFunction = ::connectPaths;
   level.disconnectPathsFunction = ::disconnectPaths;
@@ -243,14 +211,12 @@ main() {
     player.dirt_on_screen["bottom_b"] = 0;
     player.dirt_on_screen["left"] = 0;
     player.dirt_on_screen["right"] = 0;
-    player thread watchWeaponChange(); // for thermal
+    player thread watchWeaponChange();
   }
 
   level.last_mission_sound_time = -5000;
   level.hero_list = [];
   thread precache_script_models();
-
-  // 	level.ai_array = [];
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
@@ -258,14 +224,6 @@ main() {
     player thread maps\_utility::shock_ondeath();
   }
 
-  // 	level.player thread ai_eq();
-  // 	level.player thread maps\_spawner::setup_ai_eq_triggers();
-  // 	level.eq_trigger_num = 0;
-  // 	level.eq_trigger_table = [];
-  // 	level.touched_eq_function[ true ] = ::player_touched_eq_trigger;
-  // 	level.touched_eq_function[ false ] = ::ai_touched_eq_trigger;
-
-  //un-developer commented. I was precaching this model in _vehicle anyway.
   PreCacheModel("fx");
 
   PreCacheModel("tag_origin");
@@ -278,19 +236,18 @@ main() {
   PreCacheRumble("grenade_rumble");
   PreCacheRumble("artillery_rumble");
 
-  // You are Hurt. Get to Cover!
   PreCacheString(&"GAME_GET_TO_COVER");
-  // You were killed by a grenade.\nWatch out for the grenade danger indicator.
+
   PreCacheString(&"SCRIPT_GRENADE_DEATH");
-  // You died holding a grenade for too long.
+
   PreCacheString(&"SCRIPT_GRENADE_SUICIDE_LINE1");
-  // Holding ^3[{+frag}]^7 allows you to cook off live grenades.
+
   PreCacheString(&"SCRIPT_GRENADE_SUICIDE_LINE2");
-  // You were killed by an exploding vehicle.\nVehicles on fire are likely to explode.
+
   PreCacheString(&"SCRIPT_EXPLODING_VEHICLE_DEATH");
-  // You were killed by an explosion.\nSome burning objects can explode.
+
   PreCacheString(&"SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
-  // You were killed by an exploding barrel.\nRed barrels will explode when shot.
+
   PreCacheString(&"SCRIPT_EXPLODING_BARREL_DEATH");
   PreCacheShader("hud_grenadeicon");
   PreCacheShader("hud_grenadepointer");
@@ -330,7 +287,6 @@ main() {
 
   thread setup_simple_primary_lights();
 
-  // -------------------------------------------------------------------------------- // ---- PAST THIS POINT THE SCRIPTS DONT RUN WHEN GENERATING REFLECTION PROBES ---- // -------------------------------------------------------------------------------- if(getDvar("r_reflectionProbeGenerate") == "1") {
   level.stop_load = true;
   maps\_global_fx::main();
   level waittill("eternity");
@@ -348,7 +304,6 @@ thread handle_getviewangle();
 thread maps\_debug::mainDebug();
 
 if(!isDefined(level.trigger_flags)) {
-  // may have been defined by AI spawning
   init_trigger_flags();
 }
 
@@ -356,15 +311,11 @@ level.killspawn_groups = [];
 init_script_triggers();
 
 SetSavedDvar("ufoHitsTriggers", "0");
-
-//don't go past here on no_game start
 if(level.start_point == "no_game") {
-  // we want ufo/noclip to hit triggers in no_game
   SetSavedDvar("ufoHitsTriggers", "1");
 
   level.stop_load = true;
-  // SRS 11/25/08: LDs can run a custom setup function for their levels to get back some
-  //selected script calls (loadout, vision, etc).be careful, this function is not threaded!
+
   if(isDefined(level.custom_no_game_setupFunc)) {
     level[[level.custom_no_game_setupFunc]]();
   }
@@ -387,8 +338,6 @@ if(!isDefined(level.animSounds))
   thread maps\_debug::init_animSounds();
 maps\_anim::init();
 maps\_ambient::init();
-
-// lagacy... necessary?
 anim.useFacialAnims = false;
 
 if(!isDefined(level.MissionFailed))
@@ -401,29 +350,18 @@ thread common_scripts\_elevator::init();
 thread common_scripts\_pipes::main();
 
 SetObjectiveTextColors();
-
-// global effects for objects
 maps\_global_fx::main();
 common_scripts\_dynamic_world::init();
 
-//thread devhelp();// disabled due to localization errors
-
-SetSavedDvar("ui_campaign", level.campaign); // level.campaign is set in maps\_loadout::init_loadout
+SetSavedDvar("ui_campaign", level.campaign);
 
 thread maps\_introscreen::main();
 thread maps\_quotes::main();
-//	thread maps\_minefields::main();
 thread maps\_shutter::main();
-// 	thread maps\_breach::main();
-//	thread maps\_inventory::main();
-// 	thread maps\_photosource::main();
 thread maps\_endmission::main();
 thread maps\_damagefeedback::init();
 thread maps\_escalator::init();
 maps\_friendlyfire::main();
-
-// For _anim to track what animations have been used. Uncomment this locally if you need it.
-// 	thread usedAnimations();
 
 array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
 array_levelthread(getEntArray("delete_on_load", "targetname"), ::deleteEnt);
@@ -458,11 +396,7 @@ for(i = 0; i < level.players.size; i++) {
 }
 
 thread player_special_death_hint();
-
-// this has to come before _spawner moves the turrets around
 thread massNodeInitFunctions();
-
-// Various newvillers globalized scripts
 flag_init("spawning_friendlies");
 flag_init("friendly_wave_spawn_enabled");
 flag_clear("spawning_friendlies");
@@ -477,12 +411,8 @@ level.spawn_funcs["neutral"] = [];
 thread maps\_spawner::goalVolumes();
 thread maps\_spawner::friendlyChains();
 thread maps\_spawner::friendlychain_onDeath();
-
-// 	array_thread( getEntArray( "ally_spawn", "targetname" ), maps\_spawner::squadThink );
 array_thread(getEntArray("friendly_spawn", "targetname"), maps\_spawner::friendlySpawnWave);
 array_thread(getEntArray("flood_and_secure", "targetname"), maps\_spawner::flood_and_secure);
-
-// Do various things on triggers
 array_thread(getEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
 
 array_thread(getEntArray("window_poster", "targetname"), ::window_destroy);
@@ -495,17 +425,11 @@ if(!isDefined(level.trigger_hint_string)) {
 level.shared_portable_turrets = [];
 level.spawn_groups = [];
 maps\_spawner::main();
-
-// for cobrapilot extended visible distance and potentially others, stretch that horizon! - nate
-// origin of prefab is copied manually by LD to brushmodel contained in the prefab, no real way to automate this AFAIK
 array_thread(getEntArray("background_block", "targetname"), ::background_block);
 
 maps\_hud::init();
-// maps\_hud_weapons::init();
 
 thread load_friendlies();
-
-// 	level.player thread stun_test();
 
 thread maps\_animatedmodels::main();
 thread maps\_cagedchickens::initChickens();
@@ -516,8 +440,6 @@ thread filmy();
 
 if(is_specialop())
   maps\_specialops::specialops_init();
-
-// set has-played-SP when player plays the frist level in the game for the first time.
 assert(isDefined(level.missionsettings) && isDefined(level.missionsettings.levels));
 assert(isDefined(level.script));
 
@@ -526,149 +448,6 @@ if(level.script == level.missionsettings.levels[0].name && !(level.player getLoc
   UpdateGamerProfile();
 }
 }
-
-/*QUAKED trigger_multiple_spawn (1.0 0.5 0.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="spawner_trigger"Spawns whatever is targetted. Currently supports AI.*/
-
-/*QUAKED trigger_multiple_spawn_reinforcement (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="spawner_trigger"Spawns whatever is targetted. When the targeted AI dies a reinforcement spawner will be spawned if the spawner targets another spawner. Currently supports AI.*/
-
-/*QUAKED trigger_use_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
-
-/*QUAKED trigger_use_flag_clear (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
-
-/*QUAKED trigger_damage_doradius_damage (0.12 0.23 1.0) ? PISTOL_NO RIFLE_NO PROJ_NO EXPLOSION_NO SPLASH_NO MELEE_NO
-defaulttexture="trigger"Wait for trigger then do lots of damage at target spot. */
-
-/*QUAKED trigger_multiple_doradius_damage (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN
-defaulttexture="trigger"Wait for trigger then do lots of damage at target spot. */
-
-/*QUAKED trigger_damage_player_flag_set (0.12 0.23 1.0) ? PISTOL_NO RIFLE_NO PROJ_NO EXPLOSION_NO SPLASH_NO MELEE_NO
-defaulttexture="flag"Sets the script_flag when player does damage to the trigger. */
-
-/*QUAKED trigger_multiple_nobloodpool (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN
-defaulttexture="trigger_nobloodpool"When triggered the touching character will no longer spawn blood pools on death. When the character leaves the trigger the blood pool will be re-enabled after a short delay. */
-
-/*QUAKED trigger_multiple_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
-
-/*QUAKED trigger_multiple_flag_clear (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Clears the script_flag when triggered.*/
-
-/*QUAKED trigger_multiple_flag_set_touching (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Sets the script_flag when touched and then clears the flag when no longer touched.*/
-
-/*QUAKED trigger_multiple_flag_lookat (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. If there is no script_flag then any triggers targetted by the trigger_multiple_lookat get triggered. Change SCRIPT_DOT to change required dot product*/
-
-/*QUAKED trigger_multiple_flag_looking (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. Change SCRIPT_DOT to change required dot product.
-
-When the player looks away from the script origin, the script_flag is cleared.
-
-If there is no script_flag then any triggers targetted by the trigger_multiple_lookat get triggered.
-*/
-
-/*QUAKED trigger_multiple_no_prone (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL? ? ? TOUCH_ONCE
-defaulttexture="trigger_no_prone"*/
-
-/*QUAKED trigger_multiple_no_crouch_or_prone (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL? ? ? TOUCH_ONCE
-defaulttexture="trigger_no_crouch_or_prone"*/
-
-/*QUAKED trigger_multiple_autosave (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="autosave"Autosaves when the trigger is hit.
-*/
-
-/*QUAKED trigger_multiple_physics ( 0.0 0.63 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"Activate a physics jolt at a specified origin.
-Use script_parameters to set amount of jolt.
-*/
-
-/*QUAKED trigger_multiple_visionset (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger_environment"Changes vision set to script_visionset. Script_delay specifies how long to spend on the transition.
-If it can find a fogset with the same name, it will change that as well.
-*/
-
-/*QUAKED trigger_multiple_slide (1.0 0.23 1.0) ?
-defaulttexture="trigger"Forces the player to slide.
-*/
-
-/*QUAKED script_origin_mini (1.0 0.0 0.0) (-2 -2 -2) (2 2 2)*/
-
-/*QUAKED script_origin_small (1.0 0.0 0.0) (-4 -4 -4) (4 4 4)*/
-
-/*QUAKED script_struct_mini (0.9 0.3 0.0) (-1 -1 -1) (1 1 1)*/
-
-/*QUAKED script_struct_small (0.9 0.3 0.0) (-2 -2 -2) (2 2 2)*/
-
-/*QUAKED trigger_multiple_fog (1.0 0.23 1.0) ?
-defaulttexture="trigger"Fog transition trigger.
-script_fogset_start="example_start_fog"script_fogset_end="example_end_fog""example_start_fog" is made from maps\_utility::create_fog("example_start_fog")
-
-Trigger must target a script_origin to define the entry side, this script_origin can target another optional script_origin to define exit side.
-*/
-
-/*QUAKED trigger_multiple_ambient (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="ambient".ambient determines the ambience for the trigger. Can be two values, like "interior exterior" and it will blend between them.
-For blending, needs a targetted origin to determine blend direction.
-
-Current sets are:
-ac130
-alley
-bunker
-city
-container
-exterior
-exterior1
-exterior2
-exterior3
-exterior4
-exterior5
-forrest
-hangar
-interior
-interior_metal
-interior_stone
-interior_vehicle
-interior_wood
-mountains
-pipe
-shanty
-snow_base
-snow_cliff
-tunnel
-underpass
-
-*/
-
-/*QUAKED trigger_radius_glass_break (0 0.25 0.5) (-16 -16 -16) (16 16 16) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE
-Target to a func_glass. When an entity touching this trigger sends a level notify of "glass_break", the func_glass targeted by this trigger will break.
-*/
-
-/*QUAKED trigger_multiple_glass_break (0 0.25 0.5) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE
-defaulttexture="trigger"Target to a func_glass. When an entity touching this trigger sends a level notify of "glass_break", the func_glass targeted by this trigger will break.
-*/
-
-/*QUAKED trigger_multiple_friendly_respawn (0 1 0.25) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"Target a script origin. Replacement friendlies will spawn from the origin.
-*/
-
-/*QUAKED trigger_multiple_friendly_stop_respawn (0.25 1 0.25) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"Stops friendly respawning.
-*/
-
-/*QUAKED trigger_multiple_friendly (0 1.0 0.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"Assign color codes to this trigger to control friendlies.
-*/
-
-/*QUAKED trigger_multiple_compass (0.2 0.9 0.7) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"Activates the compass map set in its script_parameters.
-*/
-
-/*QUAKED trigger_multiple_specialops_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"Sets the script_flag after being triggered by all player in a specialops map. The last entity that triggered it is passed with the level notify and to the flag_wait.*/
 
 get_load_trigger_classes() {
   trigger_classes = [];
@@ -693,7 +472,6 @@ get_load_trigger_classes() {
 
   trigger_classes["trigger_multiple_slide"] = ::trigger_slide;
   trigger_classes["trigger_multiple_fog"] = ::trigger_fog;
-  //trigger_classes[ "trigger_multiple_ambient" ] = ::trigger_ambient; // runs from global .ambient check
 
   trigger_classes["trigger_damage_doradius_damage"] = ::trigger_damage_do_radius_damage;
   trigger_classes["trigger_multiple_doradius_damage"] = ::trigger_multiple_do_radius_damage;
@@ -744,7 +522,7 @@ get_load_trigger_funcs() {
   trigger_funcs["flag_unset"] = ::flag_unset_trigger;
   trigger_funcs["flag_clear"] = ::flag_unset_trigger;
   trigger_funcs["objective_event"] = maps\_spawner::objective_event_init;
-  // 	trigger_funcs[ "eq_trigger" ] = ::eq_trigger;
+
   trigger_funcs["friendly_respawn_trigger"] = ::trigger_multiple_friendly_respawn;
   trigger_funcs["friendly_respawn_clear"] = ::friendly_respawn_clear;
   trigger_funcs["radio_trigger"] = ::radio_trigger;
@@ -770,7 +548,6 @@ get_load_trigger_funcs() {
 }
 
 init_script_triggers() {
-  // run logic on these triggers from radiant
   trigger_classes = get_load_trigger_classes();
   trigger_funcs = get_load_trigger_funcs();
 
@@ -779,9 +556,6 @@ init_script_triggers() {
     array_levelthread(triggers, function);
   }
 
-  // old style targetname triggering
-
-  // trigger_multiple and trigger_radius can have the trigger_spawn flag set
   trigger_multiple = getEntArray("trigger_multiple", "classname");
   trigger_radius = getEntArray("trigger_radius", "classname");
   triggers = array_merge(trigger_multiple, trigger_radius);
@@ -878,7 +652,6 @@ init_script_triggers() {
         level thread maps\_spawner::random_killspawner(triggers[i]);
 
       if(isDefined(triggers[i].targetname)) {
-        // do targetname specific functions
         targetname = triggers[i].targetname;
         if(isDefined(trigger_funcs[targetname])) {
           level thread[[trigger_funcs[targetname]]](triggers[i]);
@@ -901,9 +674,6 @@ set_early_level() {
   level.early_level["cliffhanger"] = true;
   level.early_level["airport"] = true;
   level.early_level["favela"] = true;
-  //	level.early_level[ "invasion" ] = true;
-  //	level.early_level[ "favela_escape" ] = true;
-  //	level.early_level[ "arcadia" ] = true;
 }
 
 trigger_slide(trigger) {
@@ -958,18 +728,17 @@ weapon_ammo() {
 
       weaponName = GetSubStr(weap.classname, 7);
 
-      // if we're maxing everything out, do that and earlyout
       if(isDefined(weap.script_ammo_max)) {
         clip = WeaponClipSize(weaponName);
         reserve = WeaponMaxAmmo(weaponName);
 
-        weap ItemWeaponSetAmmo(clip, reserve, clip, 0); // primary mode
+        weap ItemWeaponSetAmmo(clip, reserve, clip, 0);
 
         altWeaponName = WeaponAltWeaponName(weaponName);
         if(altWeaponName != "none") {
           altclip = WeaponClipSize(altWeaponName);
           altreserve = WeaponMaxAmmo(altWeaponName);
-          weap ItemWeaponSetAmmo(altclip, altreserve, altclip, 1); // altmode
+          weap ItemWeaponSetAmmo(altclip, altreserve, altclip, 1);
         }
 
         continue;
@@ -1091,10 +860,7 @@ shock_onpain() {
     oldhealth = level.player.health;
     level.player waittill("damage");
     if(getDvar("blurpain") == "on") {
-      // 			PrintLn( "health dif was ", oldhealth - level.player.health );
-      if(oldhealth - level.player.health < 129) {
-        // level.player ShellShock( "pain", 0.4 );
-      } else {
+      if(oldhealth - level.player.health < 129) {} else {
         level.player ShellShock("default", 5);
       }
     }
@@ -1167,7 +933,6 @@ setup_individual_exploder(ent) {
 setupExploders() {
   level.exploders = [];
 
-  // Hide exploder models.
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
   for(i = 0; i < smodels.size; i++)
@@ -1245,7 +1010,7 @@ setupExploders() {
     ent.v["ender"] = exploder.script_ender;
     ent.v["physics"] = exploder.script_physics;
     ent.v["type"] = "exploder";
-    // 		ent.v[ "worldfx" ] = true;
+
     if(!isDefined(exploder.script_fxid))
       ent.v["fxid"] = "No FX";
     else
@@ -1268,11 +1033,9 @@ setupExploders() {
           ent.v["angles"] = VectorToAngles(org - ent.v["origin"]);
         }
       }
-      // 			forward = anglesToForward( angles );
-      // 			up = AnglesToUp( angles );
+
     }
 
-    // this basically determines if its a brush / model exploder or not
     if(exploder.code_classname == "script_brushmodel" || isDefined(exploder.model)) {
       ent.model = exploder;
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
@@ -1288,8 +1051,6 @@ setupExploders() {
 }
 
 setup_flag_exploders() {
-  // createfx has to do 2 waittillframeends so we have to do 3 to make sure this comes after
-  // createfx is all done setting up. Who will raise the gambit to 4?
   waittillframeend;
   waittillframeend;
   waittillframeend;
@@ -1410,8 +1171,6 @@ player_throwgrenade_timer() {
 }
 
 player_special_death_hint() {
-  // Special Ops requires a different style of tracking and custom language in the hints.
-  // Safer to branch cleanly and track separately from SP.
   if(is_specialop()) {
     return;
   }
@@ -1426,17 +1185,15 @@ player_special_death_hint() {
     return;
   }
   if(level.gameskill >= 2) {
-    // less death hinting on hard / fu
     if(!map_is_early_in_the_game())
       return;
   }
 
   if(cause == "MOD_SUICIDE") {
     if((level.player.lastgrenadetime - GetTime()) > 3.5 * 1000)
-      return; // magic number copied from fraggrenade asset.
+      return;
     level notify("new_quote_string");
-    // You died holding a grenade for too long.
-    // Holding ^3[{+frag}]^7 allows you to cook off live grenades.
+
     thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
@@ -1461,7 +1218,7 @@ player_special_death_hint() {
     }
 
     level notify("new_quote_string");
-    // Would putting the content of the string here be so hard?
+
     setDvar("ui_deadquote", "@SCRIPT_GRENADE_DEATH");
     thread grenade_death_indicator_hudelement();
     return;
@@ -1477,7 +1234,6 @@ vehicle_death(attacker) {
 
   level notify("new_quote_string");
 
-  // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
   setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
   thread special_death_indicator_hudelement("hud_burningcaricon", 96, 96);
 
@@ -1494,11 +1250,9 @@ destructible_death(attacker) {
   level notify("new_quote_string");
 
   if(IsSubStr(attacker.destructible_type, "vehicle")) {
-    // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
     setDvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
     thread special_death_indicator_hudelement("hud_burningcaricon", 96, 96);
   } else {
-    // You were killed by an explosion.\nSome burning objects can explode.
     setDvar("ui_deadquote", "@SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
     thread special_death_indicator_hudelement("hud_destructibledeathicon", 96, 96);
   }
@@ -1507,32 +1261,22 @@ destructible_death(attacker) {
 }
 
 exploding_barrel_death_af_chase(attacker) {
-  // paranoid.. can't imagine how this would break the game but just in case.
-  // just reordering things so the that we get the exploding barrel death message before the vehilce one.
-  // see bugzilla 110565
-  // next game maybe just put this before the vehicle death.
   if(level.script != "af_chase")
     return false;
   return exploding_barrel_death(attacker);
 }
 
 exploding_barrel_death(attacker) {
-  // check if the death was caused by a barrel
-  // have to check time and location against the last explosion because the attacker isn't the
-  // barrel because the ent that damaged the barrel is passed through as the attacker instead
   if(isDefined(level.lastExplodingBarrel)) {
-    // killed the same frame a barrel exploded
     if(GetTime() != level.lastExplodingBarrel["time"])
       return false;
 
-    // within the blast radius of the barrel that exploded
     d = Distance(self.origin, level.lastExplodingBarrel["origin"]);
     if(d > level.lastExplodingBarrel["radius"])
       return false;
 
-    // must have been killed by that barrel
     level notify("new_quote_string");
-    // You were killed by an exploding barrel. Red barrels will explode when shot.
+
     setDvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
     thread special_death_indicator_hudelement("hud_burningbarrelicon", 64, 64);
     return true;
@@ -1664,8 +1408,7 @@ deprecatedTraverseThink() {
 
 pianoDamageThink() {
   org = self GetOrigin();
-  //
-  // 	self SetHintString(&"SCRIPT_PLATFORM_PIANO" );
+
   note[0] = "large";
   note[1] = "small";
   for(;;) {
@@ -1677,7 +1420,7 @@ pianoDamageThink() {
 pianoThink() {
   org = self GetOrigin();
   note = "piano_" + self.script_noteworthy;
-  //
+
   self SetHintString(&"SCRIPT_PLATFORM_PIANO");
   for(;;) {
     self waittill("trigger");
@@ -1688,7 +1431,6 @@ pianoThink() {
 bcTrigger(trigger) {
   realTrigger = undefined;
 
-  // see if this targets an auxiliary trigger for advanced usage
   if(isDefined(trigger.target)) {
     targetEnts = getEntArray(trigger.target, "targetname");
 
@@ -1697,7 +1439,6 @@ bcTrigger(trigger) {
     }
   }
 
-  // if we target an auxiliary trigger, that one kicks off the custom battlechatter event
   if(isDefined(realTrigger)) {
     realTrigger waittill("trigger", other);
   } else {
@@ -1706,22 +1447,17 @@ bcTrigger(trigger) {
 
   soldier = undefined;
 
-  // for advanced usage: target an auxiliary trigger that kicks off the battlechatter event, but only
-  //if the player is touching the trigger that targets it.
   if(isDefined(realTrigger)) {
-    // enemy touched trigger, have a friendly tell the player about it
     if((other.team != level.player.team) && level.player IsTouching(trigger)) {
       soldier = level.player animscripts\battlechatter::getClosestFriendlySpeaker("custom");
-    }
-    // friendly touched auxiliary trigger, have the enemy AI chatter about it
-    else if(other.team == level.player.team) {
+    } else if(other.team == level.player.team) {
       enemyTeam = "axis";
       if(level.player.team == "axis") {
         enemyTeam = "allies";
       }
 
       soldiers = animscripts\battlechatter::getSpeakers("custom", enemyTeam);
-      // for some reason, get_array_of_farthest returns the closest at index 0
+
       soldiers = get_array_of_farthest(level.player.origin, soldiers);
 
       foreach(guy in soldiers) {
@@ -1734,9 +1470,7 @@ bcTrigger(trigger) {
         }
       }
     }
-  }
-  // otherwise we're just using one trigger
-  else if(isPlayer(other)) {
+  } else if(isPlayer(other)) {
     soldier = other animscripts\battlechatter::getClosestFriendlySpeaker("custom");
   } else {
     soldier = other;
@@ -1752,7 +1486,6 @@ bcTrigger(trigger) {
 
   success = soldier custom_battlechatter(trigger.script_bctrigger);
 
-  // if the chatter didn't play successfully, rethread the function on the trigger
   if(!success) {
     level delayThread(0.25, ::bcTrigger, trigger);
   } else {
@@ -1780,11 +1513,10 @@ waterThink() {
   level.depth_allow_stand = 50;
 
   wasInWater = false;
-  //prof_begin( "water_stance_controller" );
 
   for(;;) {
     wait 0.05;
-    // restore all defaults
+
     if(!level.player.inWater && wasInWater) {
       wasInWater = false;
       level.player AllowProne(true);
@@ -1793,7 +1525,6 @@ waterThink() {
       thread waterThink_rampSpeed(level.default_run_speed);
     }
 
-    // wait until in water
     self waittill("trigger");
     level.player.inWater = true;
     wasInWater = true;
@@ -1805,14 +1536,12 @@ waterThink() {
         break;
       }
 
-      // slow the players movement based on how deep it is
       newSpeed = Int(level.default_run_speed - abs(d * 5));
       if(newSpeed < 50)
         newSpeed = 50;
       Assert(newSpeed <= 190);
       thread waterThink_rampSpeed(newSpeed);
 
-      // controll the allowed stances in this water height
       if(abs(d) > level.depth_allow_crouch)
         level.player AllowCrouch(false);
       else
@@ -1828,8 +1557,6 @@ waterThink() {
     level.player.inWater = false;
     wait 0.05;
   }
-
-  //prof_end( "water_stance_controller" );
 }
 
 waterThink_rampSpeed(newSpeed) {
@@ -1867,18 +1594,7 @@ massNodeInitFunctions() {
   thread maps\_colors::init_color_grouping(nodes);
 }
 
-/*
- * * * * * * * * * *
-
-TRIGGER_UNLOCK
-
- * * * * * * * * * *
- */
-
 trigger_unlock(trigger) {
-  // trigger unlocks unlock another trigger. When that trigger is hit, all unlocked triggers relock
-  // trigger_unlocks with the same script_noteworthy relock the same triggers
-
   noteworthy = "not_set";
   if(isDefined(trigger.script_noteworthy))
     noteworthy = trigger.script_noteworthy;
@@ -1921,17 +1637,9 @@ report_trigger(ent, noteworthy) {
   ent notify("trigger");
 }
 
-/*
- * * * * * * * * * *
-
-TRIGGER_LOOKAT
-
- * * * * * * * * * *
- */
-
 get_trigger_targs() {
   triggers = [];
-  target_origin = undefined; // was self.origin
+  target_origin = undefined;
   if(isDefined(self.target)) {
     targets = getEntArray(self.target, "targetname");
     orgs = [];
@@ -1969,12 +1677,10 @@ get_trigger_targs() {
 }
 
 trigger_lookat(trigger) {
-  // ends when the flag is hit
   trigger_lookat_think(trigger, true);
 }
 
 trigger_looking(trigger) {
-  // flag is only set while the thing is being looked at
   trigger_lookat_think(trigger, false);
 }
 
@@ -2027,8 +1733,6 @@ trigger_lookat_think(trigger, endOnFlag) {
     do_sighttrace = !issubstr("no_sight", trigger.script_parameters);
   }
 
-  //	touching_trigger = [];
-
   for(;;) {
     if(has_flag)
       flag_clear(flagName);
@@ -2050,14 +1754,8 @@ trigger_lookat_think(trigger, endOnFlag) {
       player_angles = other GetPlayerAngles();
       player_forward = anglesToForward(player_angles);
 
-      // 		angles = VectorToAngles( target_origin - other.origin );
-      // 	forward = anglesToForward( angles );
-      // 		draw_arrow( level.player.origin, level.player.origin + vector_multiply( forward, 150 ), ( 1, 0.5, 0 ) );
-      // 		draw_arrow( level.player.origin, level.player.origin + vector_multiply( player_forward, 150 ), ( 0, 0.5, 1 ) );
-
       dot = VectorDot(player_forward, normal);
       if(dot >= success_dot) {
-        // notify targetted triggers as well
         array_thread(triggers, ::send_notify, "trigger");
 
         if(has_flag)
@@ -2079,17 +1777,9 @@ trigger_lookat_think(trigger, endOnFlag) {
   }
 }
 
-/*
-* * * * * * * * * *
-
-TRIGGER_CANSEE
-
-* * * * * * * * * *
-*/
-
 trigger_cansee(trigger) {
   triggers = [];
-  target_origin = undefined; // was trigger.origin
+  target_origin = undefined;
 
   array = trigger get_trigger_targs();
   triggers = array["triggers"];
@@ -2136,7 +1826,6 @@ trigger_cansee(trigger) {
       if(has_flag)
         flag_set(flagName);
 
-      // notify targetted triggers as well
       array_thread(triggers, ::send_notify, "trigger");
       wait(0.5);
     }
@@ -2157,7 +1846,7 @@ indicate_start(start) {
   hudelem.alignY = "middle";
   hudelem.x = 10;
   hudelem.y = 400;
-  //	hudelem.label = "Loading from start: " + start;
+
   hudelem SetText(start);
   hudelem.alpha = 0;
   hudelem.fontScale = 3;
@@ -2174,9 +1863,9 @@ indicate_start(start) {
 handle_starts() {
   create_dvar("start", "");
 
-  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0")
-    return; // shortcut for generating clipmodels gah.
-
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
+    return;
+  }
   if(!isDefined(level.start_functions))
     level.start_functions = [];
 
@@ -2186,13 +1875,11 @@ handle_starts() {
 
   start = ToLower(getDvar("start"));
 
-  // find the start that matches the one the dvar is set to, and execute it
   dvars = get_start_dvars();
 
   if(isDefined(level.start_point))
     start = level.start_point;
 
-  // first try to find the start based on the dvar
   start_index = 0;
   for(i = 0; i < dvars.size; i++) {
     if(start == dvars[i]) {
@@ -2202,7 +1889,6 @@ handle_starts() {
     }
   }
 
-  // then try based on the override
   if(isDefined(level.default_start_override) && !isDefined(level.start_point)) {
     foreach(index, dvar in dvars) {
       if(level.default_start_override == dvar) {
@@ -2214,7 +1900,6 @@ handle_starts() {
   }
 
   if(!isDefined(level.start_point)) {
-    // was a start set with default_start()?
     if(isDefined(level.default_start))
       level.start_point = "default";
     else
@@ -2224,7 +1909,7 @@ handle_starts() {
       level.start_point = "default";
   }
 
-  waittillframeend; // starts happen at the end of the first frame, so threads in the mission have a chance to run and init stuff
+  waittillframeend;
   thread start_menu();
 
   if(level.start_point == "default") {
@@ -2246,10 +1931,10 @@ handle_starts() {
     setDvar("start", string);
   }
 
-  waittillframeend; // let the frame finish for all ai init type stuff that goes on in start points
+  waittillframeend;
 
   previously_run_logic_functions = [];
-  // run each logic function in order
+
   for(i = start_index; i < level.start_functions.size; i++) {
     start_array = level.start_functions[i];
     if(!isDefined(start_array["logic_func"])) {
@@ -2318,11 +2003,8 @@ start_menu() {
 }
 
 start_nogame() {
-  //empty.. this start for when you want to play without playing. for viewing geo maybe?
   array_call(GetAIArray(), ::Delete);
   array_call(GetSpawnerArray(), ::Delete);
-  //array_call( getEntArray( "trigger_multiple", "code_classname" ), ::Delete );
-  //array_call( getEntArray( "trigger_radius", "code_classname" ), ::Delete );
 }
 
 get_start_dvars() {
@@ -2343,7 +2025,7 @@ display_starts() {
   dvars[dvars.size] = "cancel";
 
   dvars = array_reverse(dvars);
-  // Available Starts:
+
   title = create_start("Available Starts:", -1);
   title.color = (1, 1, 1);
   elems = [];
@@ -2411,7 +2093,6 @@ display_starts() {
 
       setDvar("start", dvars[selected]);
       level.player OpenPopupMenu("start");
-      //			ChangeLevel( level.script, false );
     }
     wait(0.05);
   }
@@ -2475,7 +2156,6 @@ devhelp() {
   for(i = 0; i < helptext.size; i++) {
     newStrArray = [];
     for(p = 0; p < 5; p++) {
-      // setup instructional text
       newStr = NewHudElem();
       newStr.alignX = "left";
       newStr.location = 0;
@@ -2530,7 +2210,6 @@ flag_set_player_trigger(trigger) {
 }
 
 trigger_nobloodpool(trigger) {
-  // Issue: If a guy dies and animates into the trigger, he will still spawn a blood pool.
   for(;;) {
     trigger waittill("trigger", other);
     if(!isalive(other)) {
@@ -2542,7 +2221,6 @@ trigger_nobloodpool(trigger) {
 }
 
 set_wait_then_clear_skipBloodPool() {
-  // Issue: If a guy dies during this timer even though he has left the trigger area, he will not spawn a pool. Deemed acceptable.
   self notify("notify_wait_then_clear_skipBloodPool");
   self endon("notify_wait_then_clear_skipBloodPool");
   self endon("death");
@@ -2588,7 +2266,6 @@ flag_set_trigger_specialops(trigger) {
 }
 
 flag_set_trigger_specialops_clear(flag) {
-  // sets self.player_touched_arr when the flag is set or cleared from script.
   while(true) {
     level waittill(flag);
     if(flag(flag)) {
@@ -2677,35 +2354,7 @@ eq_trigger(trigger) {
       ai[i][[level.set_eq_func[false]]]();
     }
   }
-  /*
-  	num = level.eq_trigger_num;
-  	trigger.eq_num = num;
-  	level.eq_trigger_num ++ ;
-  	waittillframeend;// let the ai get their eq_num table created
-  	waittillframeend;// let the ai get their eq_num table created
-  	level.eq_trigger_table[ num ] = [];
-  	if( isDefined( trigger.script_linkTo ) )
-  	{
-  		tokens = StrTok( trigger.script_linkto, " " );
-  		for( i = 0; i < tokens.size; i ++ )
-  		{
-  			target_trigger = GetEnt( tokens[ i ], "script_linkname" );
-  			// add the trigger num to the list of triggers this trigger hears
-  			level.eq_trigger_table[ num ][ level.eq_trigger_table[ num ].size ] = target_trigger.eq_num;
-  		}
-  	}
 
-  	for( ;; )
-  	{
-  		trigger waittill( "trigger", other );
-
-  		// are we already registered with this trigger?
-  		if( other.eq_table[ num ] )
-  			continue;
-
-  		other thread [[ level.touched_eq_function[ other.is_the_player ] ]]( num, trigger );
-  	}
-  	 */
 }
 
 player_ignores_triggers() {
@@ -2716,7 +2365,6 @@ player_ignores_triggers() {
 }
 
 get_trigger_eq_nums(num) {
-  // tally up the triggers this trigger hears into, including itself
   nums = [];
   nums[0] = num;
   for(i = 0; i < level.eq_trigger_table[num].size; i++) {
@@ -2739,7 +2387,7 @@ player_touched_eq_trigger(num, trigger) {
   ai = GetAIArray();
   for(i = 0; i < ai.size; i++) {
     guy = ai[i];
-    // is the ai in this trigger with us?
+
     for(r = 0; r < nums.size; r++) {
       if(guy.eq_table[nums[r]]) {
         guy EQOff();
@@ -2761,9 +2409,8 @@ player_touched_eq_trigger(num, trigger) {
     guy = ai[i];
 
     was_in_our_trigger = false;
-    // is the ai in the trigger we just left?
+
     for(r = 0; r < nums.size; r++) {
-      // was the guy in a trigger we could hear into?
       if(guy.eq_table[nums[r]]) {
         was_in_our_trigger = true;
       }
@@ -2772,7 +2419,6 @@ player_touched_eq_trigger(num, trigger) {
     if(!was_in_our_trigger) {
       continue;
     }
-    // check to see if the guy is in any of the triggers we're still in
 
     touching = GetArrayKeys(self.eq_touching);
     shares_trigger = false;
@@ -2784,7 +2430,6 @@ player_touched_eq_trigger(num, trigger) {
       break;
     }
 
-    // if he's not in a trigger with us, turn his eq back on
     if(!shares_trigger)
       guy EQOn();
   }
@@ -2799,7 +2444,6 @@ ai_touched_eq_trigger(num, trigger) {
     self.eq_touching[nums[r]] = true;
   }
 
-  // are we in the same trigger as the player?
   for(r = 0; r < nums.size; r++) {
     if(level.player.eq_table[nums[r]]) {
       self EQOff();
@@ -2807,7 +2451,6 @@ ai_touched_eq_trigger(num, trigger) {
     }
   }
 
-  // so other AI can touch the trigger
   self.ignoretriggers = true;
   wait(1);
   self.ignoretriggers = false;
@@ -2822,9 +2465,7 @@ ai_touched_eq_trigger(num, trigger) {
 
   touching = GetArrayKeys(self.eq_touching);
   for(i = 0; i < touching.size; i++) {
-    // is the player in a trigger that we're still in?
     if(level.player.eq_table[touching[i]]) {
-      // then don't turn eq back on
       return;
     }
   }
@@ -2872,52 +2513,16 @@ add_tokens_to_trigger_flags(tokens) {
 }
 
 script_flag_false_trigger(trigger) {
-  // all of these flags must be false for the trigger to be enabled
   tokens = create_flags_and_return_tokens(trigger.script_flag_false);
   trigger add_tokens_to_trigger_flags(tokens);
   trigger update_trigger_based_on_flags();
 }
 
 script_flag_true_trigger(trigger) {
-  // all of these flags must be false for the trigger to be enabled
   tokens = create_flags_and_return_tokens(trigger.script_flag_true);
   trigger add_tokens_to_trigger_flags(tokens);
   trigger update_trigger_based_on_flags();
 }
-
-/*
-	for( ;; )
-	{
-		trigger trigger_on();
-		wait_for_flag( tokens );
-
-		trigger trigger_off();
-		wait_for_flag( tokens );
-		for( i = 0; i < tokens.size; i ++ )
-		{
-			flag_wait( tokens[ i ] );
-		}
-	}
-	 */
-
-/*
-script_flag_true_trigger( trigger )
-{
-	// any of these flags have to be true for the trigger to be enabled
-	tokens = create_flags_and_return_tokens( trigger.script_flag_true );
-
-	for( ;; )
-	{
-		trigger trigger_off();
-		wait_for_flag( tokens );
-		trigger trigger_on();
-		for( i = 0; i < tokens.size; i ++ )
-		{
-			flag_waitopen( tokens[ i ] );
-		}
-	}
-}
- */
 
 wait_for_flag(tokens) {
   for(i = 0; i < tokens.size; i++) {
@@ -2935,7 +2540,6 @@ trigger_multiple_physics(trigger) {
   orgs = getEntArray(trigger.target, "targetname");
 
   foreach(org in orgs) {
-    // save ents by moving script origins to structs
     struct = spawnStruct();
     struct.origin = org.origin;
     struct.script_parameters = org.script_parameters;
@@ -2961,7 +2565,6 @@ trigger_multiple_physics(trigger) {
     if(!isDefined(vel))
       vel = 0.25;
 
-    // convert string to float
     setDvar("tempdvar", vel);
     vel = GetDvarFloat("tempdvar");
 
@@ -3027,10 +2630,10 @@ do_radius_damage_from_target() {
 trigger_damage_do_radius_damage(trigger) {
   for(;;) {
     trigger waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
-    if(!isalive(attacker))
+    if(!isalive(attacker)) {
       continue;
-    //		if( attacker != level.player )
-    //			continue;
+    }
+
     if(Distance(attacker.origin, trigger.origin) > 940)
       continue;
     break;
@@ -3072,7 +2675,7 @@ touched_trigger_runs_func(trigger, set_func) {
   self endon("death");
   self.ignoreme = true;
   [[set_func]](true);
-  // so others can touch the trigger
+
   self.ignoretriggers = true;
   wait(1);
   self.ignoretriggers = false;
@@ -3091,14 +2694,14 @@ trigger_turns_off(trigger) {
   if(!isDefined(trigger.script_linkTo)) {
     return;
   }
-  // also turn off all triggers this trigger links to
+
   tokens = StrTok(trigger.script_linkto, " ");
   for(i = 0; i < tokens.size; i++)
     array_thread(getEntArray(tokens[i], "script_linkname"), ::trigger_off);
 }
 
 set_player_viewhand_model(viewhandModel) {
-  Assert(!isDefined(level.player_viewhand_model)); // only set this once per level
+  Assert(!isDefined(level.player_viewhand_model));
   AssertEx(IsSubStr(viewhandModel, "player"), "Must set with viewhands_player_*");
   level.player_viewhand_model = viewhandModel;
   PreCacheModel(level.player_viewhand_model);
@@ -3110,7 +2713,7 @@ trigger_hint(trigger) {
   if(!isDefined(level.displayed_hints)) {
     level.displayed_hints = [];
   }
-  // give level script a chance to set the hint string and optional boolean functions on this hint
+
   waittillframeend;
 
   hint = trigger.script_hint;
@@ -3200,11 +2803,8 @@ found_toucher() {
       return true;
     }
 
-    // spread the touches out over time
     wait(0.1);
   }
-
-  // couldnt find any touchers so do a single frame complete check just to make sure
 
   ai = GetAIArray("bad_guys");
   for(i = 0; i < ai.size; i++) {
@@ -3221,7 +2821,6 @@ trigger_delete_on_touch(trigger) {
   for(;;) {
     trigger waittill("trigger", other);
     if(isDefined(other)) {
-      // might've been removed before we got it
       other Delete();
     }
   }
@@ -3246,42 +2845,7 @@ flag_set_touching(trigger) {
   }
 }
 
-/*
-rpg_aim_assist()
-{
-	level.player endon( "death" );
-	for( ;; )
-	{
-		level.player waittill( "weapon_fired" );
-		currentweapon = level.player GetCurrentWeapon();
-		if( ( currentweapon == "rpg" ) || ( currentweapon == "rpg_player" ) )
-			thread rpg_aim_assist_attractor();
-	}
-}
-
-rpg_aim_assist_attractor()
-{
-	prof_begin( "rpg_aim_assist" );
-
-	// Trace to where the player is looking
-	start = level.player getEye();
-	direction = level.player GetPlayerAngles();
-	coord = bulletTrace( start, start + vector_multiply( anglesToForward( direction ), 15000 ), true, level.player )[ "position" ];
-
-	thread draw_line_for_time( level.player.origin, coord, 1, 0, 0, 10000 );
-
-	prof_end( "rpg_aim_assist" );
-
-	attractor = Missile_CreateAttractorOrigin( coord, 10000, 3000 );
-	wait 3.0;
-	Missile_DeleteAttractor( attractor );
-}
-*/
-
 SetObjectiveTextColors() {
-  // The darker the base color, the more-readable the text is against a stark-white backdrop.
-  // However; this sacrifices the "white-hot"ness of the text against darker backdrops.
-
   MY_TEXTBRIGHTNESS_DEFAULT = "1.0 1.0 1.0";
   MY_TEXTBRIGHTNESS_90 = "0.9 0.9 0.9";
   MY_TEXTBRIGHTNESS_85 = "0.85 0.85 0.85";
@@ -3295,7 +2859,6 @@ SetObjectiveTextColors() {
 }
 
 ammo_pickup(sWeaponType) {
-  // possible weapons that the player could have that get this type of ammo
   validWeapons = [];
   if(sWeaponType == "grenade_launcher") {
     validWeapons[validWeapons.size] = "m203_m4";
@@ -3408,7 +2971,7 @@ ammo_pickup(sWeaponType) {
     if(!isPlayer(triggerer)) {
       continue;
     }
-    // check if the player is carrying one of the valid grenade launcher weapons
+
     weaponToGetAmmo = undefined;
     emptyActionSlotAmmo = undefined;
     weapons = triggerer GetWeaponsListAll();
@@ -3419,35 +2982,31 @@ ammo_pickup(sWeaponType) {
       }
     }
 
-    //check if weapon if C4 or claymore and the player has zero of them
     if((!isDefined(weaponToGetAmmo)) && (sWeaponType == "claymore")) {
       emptyActionSlotAmmo = true;
       weaponToGetAmmo = "claymore";
       break;
     }
 
-    //check if weapon if C4 or claymore and the player has zero of them
     if((!isDefined(weaponToGetAmmo)) && (sWeaponType == "c4")) {
       emptyActionSlotAmmo = true;
       weaponToGetAmmo = "c4";
       break;
     }
 
-    // no grenade launcher found
     if(!isDefined(weaponToGetAmmo)) {
       continue;
     }
-    // grenade launcher found - check if the player has max ammo already
+
     if(triggerer GetFractionMaxAmmo(weaponToGetAmmo) >= 1) {
       continue;
     }
-    // player picks up the ammo
+
     break;
   }
 
-  // give player one more ammo, play pickup sound, and delete the ammo and trigger
   if(isDefined(emptyActionSlotAmmo))
-    triggerer GiveWeapon(weaponToGetAmmo); // this will only be for C4 and claymores if the player is totally out of them
+    triggerer GiveWeapon(weaponToGetAmmo);
   else {
     rounds = 1;
     if(sWeaponType == "556" || sWeaponType == "762") {
@@ -3463,7 +3022,6 @@ ammo_pickup(sWeaponType) {
   triggerer PlayLocalSound("grenade_pickup");
   trig Delete();
 
-  // usable items might not exist anymore at this point since they are deleted in code on player touch
   if(isDefined(self)) {
     self Delete();
   }
@@ -3485,7 +3043,6 @@ get_script_linkto_targets() {
 }
 
 delete_link_chain(trigger) {
-  // deletes all entities that it script_linkto's, and all entities that entity script linktos, etc.
   trigger waittill("trigger");
 
   targets = trigger get_script_linkto_targets();
@@ -3498,9 +3055,6 @@ delete_links_then_self() {
   self Delete();
 }
 
-/*
-	A depth trigger that sets fog
-*/
 trigger_fog(trigger) {
   waittillframeend;
 
@@ -3593,17 +3147,12 @@ trigger_fog(trigger) {
   end = undefined;
 
   if(isDefined(ent.target)) {
-    // if the origin targets a second origin, use it as the end point
     target_ent = GetEnt(ent.target, "targetname");
     end = target_ent.origin;
   } else {
-    // otherwise double the difference between the target origin and start to get the endpoint
     end = start + vector_multiply(trigger.origin - start, 2);
   }
 
-  //	thread linedraw( start, end, (1,0.5,1) );
-  //	thread print3ddraw( start, "start", (1,0.5,1) );
-  //	thread print3ddraw( end, "end", (1,0.5,1) );
   dist = Distance(start, end);
 
   for(;;) {
@@ -3613,7 +3162,6 @@ trigger_fog(trigger) {
     progress = 0;
     while(other IsTouching(trigger)) {
       progress = maps\_ambient::get_progress(start, end, dist, other.origin);
-      //			PrintLn( "progress " + progress );
 
       if(progress < 0)
         progress = 0;
@@ -3625,7 +3173,6 @@ trigger_fog(trigger) {
       wait(0.05);
     }
 
-    // when you leave the trigger set it to whichever point it was closest too
     if(progress > 0.5)
       progress = 1;
     else
@@ -3837,12 +3384,11 @@ arcademode_save() {
   }
   wait 2.5;
   imagename = "levelshots / autosave / autosave_" + level.script + "start";
-  // string not found for AUTOSAVE_LEVELSTART
+
   SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
 }
 
 player_death_detection() {
-  // a dvar starts high then degrades over time whenever the player dies, // checked from maps\_utility::player_died_recently()
   setDvar("player_died_recently", "0");
   thread player_died_recently_degrades();
 
@@ -3902,7 +3448,7 @@ set_legacy_map() {
 }
 
 trigger_spawngroup(trigger) {
-  waittillframeend; // so level.spawn_groups is defined
+  waittillframeend;
 
   AssertEx(isDefined(trigger.script_spawngroup), "spawngroup Trigger at " + trigger.origin + " has no script_spawngroup");
   spawngroup = trigger.script_spawngroup;
@@ -3934,7 +3480,6 @@ init_level_players() {
 kill_all_players_trigger() {
   self waittill("trigger", player);
 
-  // disable co-op revive
   if(flag_exist("coop_revive"))
     flag_clear("coop_revive");
 
@@ -3949,11 +3494,11 @@ kill_all_players_trigger() {
 
 trigger_vehicle_spline_spawn(trigger) {
   trigger waittill("trigger");
-  //wait( 3 );
+
   spawners = getEntArray(trigger.target, "targetname");
   foreach(spawner in spawners) {
     spawner thread maps\_vehicle::spawn_vehicle_and_attach_to_spline_path(70);
-    wait(0.05); // slow start it up so spread it out
+    wait(0.05);
   }
 }
 
@@ -3963,7 +3508,7 @@ trigger_vehicle_spawn(trigger) {
   spawners = getEntArray(trigger.target, "targetname");
   foreach(spawner in spawners) {
     spawner thread maps\_vehicle::spawn_vehicle_and_gopath();
-    wait(0.05); // slow start it up so spread it out
+    wait(0.05);
   }
 }
 
@@ -3992,9 +3537,7 @@ trigger_glass_break(trigger) {
   while(1) {
     level waittill("glass_break", other);
 
-    // the ent that sent the notify needs to be touching the trigger_glass_break
     if(other IsTouching(trigger)) {
-      // try to figure out the direction of movement
       ref1 = other.origin;
       wait(0.05);
       ref2 = other.origin;
@@ -4047,7 +3590,6 @@ vehicle_spawns_targets_and_rides() {
     spawners[spawners.size] = target;
   }
 
-  // make the closest spawner the driver
   spawners = get_array_of_closest(self.origin, spawners);
 
   foreach(index, spawner in spawners) {
@@ -4075,7 +3617,6 @@ watchWeaponChange() {
     level.friendly_thermal_Reflector_Effect = LoadFX("misc/thermal_tapereflect_inverted");
   self endon("death");
 
-  //if( IsSubStr( self GetCurrentWeapon(), "_thermal" ) )
   weap = self GetCurrentWeapon();
   if(weap_has_thermal(weap))
     self thread thermal_tracker();
@@ -4194,8 +3735,6 @@ loop_friendly_thermal_Reflector_Effect(player_id, onlyForThisPlayer) {
       PlayFXOnTagForClients(level.friendly_thermal_Reflector_Effect, self, "J_Spine4", onlyForThisPlayer);
     else
       playFXOnTag(level.friendly_thermal_Reflector_Effect, self, "J_Spine4");
-
-    //"tag_reflector_arm_ri"wait(0.2);
   }
 }
 
@@ -4203,11 +3742,10 @@ claymore_pickup_think_global() {
   PreCacheItem("claymore");
   self endon("deleted");
   self SetCursorHint("HINT_NOICON");
-  // Press and hold && 1 to pickup claymore
+
   self SetHintString(&"WEAPON_CLAYMORE_PICKUP");
   self MakeUsable();
 
-  // if nothing no ammo count is set assume max ammo.
   ammo_count = WeaponMaxAmmo("claymore") + WeaponClipSize("claymore");
 
   if(isDefined(self.script_ammo_clip)) {
@@ -4259,7 +3797,7 @@ claymore_pickup_think_global() {
 
   if(isDefined(self.target)) {
     targets = getEntArray(self.target, "targetname");
-    //give_ammo_count = targets.size + 1;
+
     foreach(t in targets)
     t Delete();
   }
@@ -4269,11 +3807,11 @@ claymore_pickup_think_global() {
 }
 
 ammo_cache_think_global() {
-  self.use_trigger = spawn("script_model", self.origin + (0, 0, 28)); // offset can't be higher than prone height of 30
+  self.use_trigger = spawn("script_model", self.origin + (0, 0, 28));
   self.use_trigger setModel("tag_origin");
   self.use_trigger makeUsable();
   self.use_trigger SetCursorHint("HINT_NOICON");
-  // Press and hold && 1 to refill your ammo
+
   self.use_trigger setHintString(&"WEAPON_CACHE_USE_HINT");
 
   self thread ammo_icon_think();
@@ -4371,9 +3909,6 @@ handle_getviewpos() {
     playerviewpos = level.player.origin + (0, 0, level.player GetPlayerViewHeight());
     playerviewangle = level.player GetPlayerAngles();
     launcher_write_clipboard(playerviewpos[0] + ", " + playerviewpos[1] + ", " + playerviewpos[2]);
-
-    //this part doesn't do anything for radiant. gonna have to make it work sometime.
-    // + " " + playerviewangle[0] + " " + playerviewangle[1]
   }
 }
 
@@ -4396,9 +3931,6 @@ handle_getviewangle() {
     SetDevDvar("launcher_viewangle", "0");
     playerviewangle = level.player GetPlayerAngles();
     launcher_write_clipboard(playerviewangle[0] + ", " + playerviewangle[1] + ", " + playerviewangle[2]);
-
-    //this part doesn't do anything for radiant. gonna have to make it work sometime.
-    // + " " + playerviewangle[0] + " " + playerviewangle[1]
   }
 }
 
@@ -4407,8 +3939,6 @@ window_destroy() {
 
   glassID = GetGlass(self.target);
 
-  // this can happen with myMapEnts
-  //assertex( isDefined( glassID ), "couldn't find glass for ent with targetname \"window_poster\" at "+ self GetOrigin() );
   if(!isDefined(glassID)) {
     PrintLn("Warning: Couldn't find glass with targetname \"" + self.target + "\" for ent with targetname \"window_poster\" at " + self.origin);
     return;

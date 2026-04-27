@@ -6,27 +6,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	Deathmatch
-	Objective: 	Score points by eliminating other players
-	Map ends:	When one player reaches the score limit, or time limit is reached
-	Respawning:	No wait / Away from other players
-
-	Level requirements
-	------------------ Spawnpoints:
-			classname		mp_dm_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of enemies at the time of spawn.
-			Players generally spawn away from enemies.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-*/
-
-/*QUAKED mp_dm_spawn (1.0 0.5 0.0) (-16 -16 0) (16 16 72)
-Players spawn away from enemies at one of these positions.*/
-
 main() {
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();

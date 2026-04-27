@@ -14,7 +14,7 @@ whitehouse_spotlight() {
   level endon("kill_spotlight");
   spotlight_origin = getstruct("whitehouse_spotlight", "targetname");
 
-  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"spotlight.angles = spotlight_origin.angles;
+  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight");
   spotlight setModel("cod3mg42");
   spotlight SetTurretTeam("axis");
   spotlight setmode("manual");
@@ -47,7 +47,7 @@ whitehouse_spotlight_pathing(target_struct) {
 
   while(true) {
     if(isDefined(target_struct.script_speed)) {
-      time = target_struct.script_speed / 1000; // hacky use of speed to set the convergence time.
+      time = target_struct.script_speed / 1000;
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
     }
@@ -198,7 +198,7 @@ manual_mg_path(start_target, noloop) {
 
   while(true) {
     if(isDefined(self.current_target.script_speed)) {
-      time = self.current_target.script_speed / 1000; // hacky use of speed to set the convergence time.
+      time = self.current_target.script_speed / 1000;
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
     }
@@ -209,8 +209,6 @@ manual_mg_path(start_target, noloop) {
     self settargetentity(target_ent);
 
     self turret_on_target(self.current_target);
-    //		self waittill( "turret_on_target" );
-    //		wait 0.5;
 
     if(isDefined(self.current_target.target))
       self.current_target = getstruct(self.current_target.target, "targetname");
@@ -323,14 +321,12 @@ sandbag_group(sandbag_array) {
   group_struct.hit_count = 0;
   array_thread(sandbag_array, ::sandbag_damage, group_struct);
 
-  // vector hardcoded since that works for me in DCemp.
   vector = anglesToForward((345, 180, 0));
   force = vector * 3000;
 
   while(sandbag_array.size) {
     group_struct waittill("damage", damaged_ent, damage);
 
-    // lets all damaged bags report in.
     waittillframeend;
 
     if(damage > 500) {
@@ -390,7 +386,6 @@ sandbag_damage(group_struct) {
 }
 
 whitehouse_cleanup_approach() {
-  // kill east side enemies and friendly mg guys
   allied_mg = get_ai_group_ai("allied_mg");
   foreach(ai in allied_mg)
   ai kill();
@@ -404,18 +399,15 @@ whitehouse_cleanup_approach() {
 
   flag_wait("whitehouse_breached");
 
-  // stop enemy MGs
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
 
   for(i = 0; i < mg_array.size; i++)
     mg_array[i] thread manual_mg_stop(i + 1);
 
-  // kill remaining exterior enemies
   axis_arr = getaiarray("axis");
   array_call(axis_arr, ::kill);
 
-  // delete exterior allies
   ai_arr = getaiarray("allies");
   foreach(ai in ai_arr) {
     if(ai is_hero()) {
@@ -429,7 +421,6 @@ whitehouse_mg_setup() {
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   array_thread(mg_array, ::manual_mg_init, true);
 
-  // trigger that activates the turret to fire infront of the player.
   turret = getent("threat_mg", "targetname");
   trigger_array = getEntArray("mg_threat_trigger", "targetname");
   array_thread(trigger_array, ::manual_mg_threat_trigger, turret);
@@ -557,9 +548,6 @@ door_open_kick() {
 }
 
 waittill_player_damage(damage_limit) {
-  //	lets not wait for death anymore
-  //	self endon( "death" );
-
   if(!isDefined(damage_limit))
     damage_limit = 0;
 
@@ -599,8 +587,6 @@ random_delayed_kill(delay) {
 }
 
 hero_dynamic_speed() {
-  // not used at this point
-
   self endon("death");
   self endon("stop_dynamic_speed");
 
@@ -619,7 +605,6 @@ chandelier_setup() {
 }
 
 chandelier() {
-  // get all parts
   parts = getEntArray(self.target, "targetname");
 
   self.wire = parts[0];
@@ -638,12 +623,10 @@ chandelier() {
   self.swing_origin = spawn("script_origin", ceiling);
   self.swing = false;
 
-  // connect all parts
   self linkto(self.swing_origin);
   self.wire linkto(self.swing_origin);
   self thread chandelier_link_light();
 
-  // turn light on
   self.light SetLightIntensity(1.5);
 
   self thread chandelier_react();
@@ -681,7 +664,6 @@ chandelier_swing(damage, direction_vec) {
   weight_vector = vectornormalize((direction_vec[0] * -1, direction_vec[1], 0));
   rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-  // first fast rotation from explosion
   self.swing_origin rotateto(rotation, swing_speed, 0, swing_speed);
   self.swing_origin waittill("rotatedone");
 
@@ -704,15 +686,15 @@ chandelier_flicker() {
   self endon("chandelier_fall");
   self endon("chandelier_swing");
 
-  wait .5; // total wait ~5.4 sec.
+  wait .5;
 
   for(i = 0; i < 14; i++) {
     self.light SetLightIntensity(0);
     self setModel("furniture_chandelier1_off");
-    wait randomfloatrange(0.05, 0.2); // ~0.125
+    wait randomfloatrange(0.05, 0.2);
     self.light SetLightIntensity(randomfloatrange(0.5, 1.5));
     self setModel("furniture_chandelier1");
-    wait randomfloatrange(0.15, 0.3); // ~0.225
+    wait randomfloatrange(0.15, 0.3);
   }
   self.light SetLightIntensity(1.5);
 }
@@ -817,7 +799,6 @@ tunnels_teleport() {
 
   flag_set("end_fx");
 
-  // teleport player
   start_ent = getent(trigger.target, "targetname");
   target_ent = getent(start_ent.target, "targetname");
 
@@ -834,7 +815,6 @@ tunnels_teleport() {
 
   SetNorthYaw(0.0);
 
-  // teleport ai
   volume = getent("tunnels_teleport_volume", "targetname");
   dest_arr = getStructArray("tunnels_teleport_struct", "targetname");
   index = 0;
@@ -848,14 +828,6 @@ tunnels_teleport() {
     destination_origin = target_ent.origin + origin_offset;
     destination_angles = target_ent.angles + ai_angles_offset;
 
-    /*
-    		if( !goal_in_volume( destination_origin, volume ) )
-    		{
-    			destination_origin = dest_arr[ index ].origin;
-    			destination_angles = dest_arr[ index ].angles;
-    			index++;
-    		}
-    */
     ai ForceTeleport(destination_origin, destination_angles);
   }
 

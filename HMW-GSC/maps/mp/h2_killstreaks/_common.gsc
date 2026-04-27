@@ -149,8 +149,6 @@ clearRideIntro(delay) {
   if(isDefined(delay))
     wait(delay);
 
-  //self freezeControlsWrapper( false );
-
   if(!isDefined(level.nukeVisionInProgress))
     self _visionsetnakedforplayer("", 0);
 }

@@ -8,8 +8,6 @@
 #include animscripts\utility;
 #using_animtree("generic_human");
 
-// (Note that animations called right are used with left corner nodes, and vice versa.)
-
 main() {
   self.animArrayFuncs = [];
   self.animArrayFuncs["hiding"]["stand"] = ::set_animarray_standing_left;
@@ -26,17 +24,13 @@ end_script() {
   animscripts\cover_behavior::end_script("left");
 }
 
-set_animarray_standing_left() /* void */ {
+set_animarray_standing_left() {
   array = [];
 
   array["alert_idle"] = % corner_standL_alert_idle;
   array["alert_idle_twitch"] = array(%corner_standL_alert_twitch01, %corner_standL_alert_twitch02, %corner_standL_alert_twitch03, %corner_standL_alert_twitch04, %corner_standL_alert_twitch05, %corner_standL_alert_twitch06, %corner_standL_alert_twitch07);
   array["alert_idle_flinch"] = array(%corner_standL_flinch);
 
-  //array["alert_to_C"] = %corner_standL_trans_alert_2_C;
-  //array["B_to_C"] = %corner_standL_trans_B_2_C;
-  //array["C_to_alert"] = %corner_standL_trans_C_2_alert;
-  //array["C_to_B"] = %corner_standL_trans_C_2_B;
   array["alert_to_A"] = array(%corner_standL_trans_alert_2_A);
   array["alert_to_B"] = array(%corner_standL_trans_alert_2_B_v2);
   array["A_to_alert"] = array(%corner_standL_trans_A_2_alert_v2);
@@ -48,7 +42,7 @@ set_animarray_standing_left() /* void */ {
   array["lean_to_alert"] = array(%CornerStndL_lean_2_alert);
   array["alert_to_lean"] = array(%CornerStndL_alert_2_lean);
   array["look"] = % corner_standL_look;
-  array["reload"] = array(%corner_standL_reload_v1); // , %corner_standL_reload_v2 );
+  array["reload"] = array(%corner_standL_reload_v1);
   array["grenade_exposed"] = % corner_standL_grenade_A;
   array["grenade_safe"] = % corner_standL_grenade_B;
 
@@ -70,11 +64,10 @@ set_animarray_standing_left() /* void */ {
   array["lean_idle"] = array(%CornerStndL_lean_idle);
 
   array["lean_single"] = % CornerStndL_lean_fire;
-  //array["lean_burst"] = %CornerStndL_lean_autoburst;
+
   array["lean_fire"] = % CornerStndL_lean_auto;
 
   if(isDefined(anim.ramboAnims)) {
-    //array[ "rambo" ] = array(%corner_standL_rambo_set, %corner_standL_rambo_jam );
     array["rambo90"] = anim.ramboAnims.coverleft90;
     array["rambo45"] = anim.ramboAnims.coverleft45;
     array["grenade_rambo"] = anim.ramboAnims.coverleftgrenade;
@@ -91,10 +84,6 @@ set_animarray_crouching_left() {
   array["alert_idle_twitch"] = array();
   array["alert_idle_flinch"] = array();
 
-  //array["alert_to_C"] = %CornerCrL_trans_alert_2_C;
-  //array["B_to_C"] = %CornerCrL_trans_B_2_C;
-  //array["C_to_alert"] = %CornerCrL_trans_C_2_alert;
-  //array["C_to_B"] = %CornerCrL_trans_C_2_B;
   array["alert_to_A"] = array(%CornerCrL_trans_alert_2_A);
   array["alert_to_B"] = array(%CornerCrL_trans_alert_2_B);
   array["A_to_alert"] = array(%CornerCrL_trans_A_2_alert);
@@ -119,10 +108,6 @@ set_animarray_crouching_left() {
   array["rambo90"] = array();
   array["rambo45"] = array();
 
-  //array["alert_to_look"] = %CornerCrL_alert_idle; // TODO
-  //array["look_to_alert"] = %CornerCrL_alert_idle; // TODO
-  //array["look_to_alert_fast"] = %CornerCrL_alert_idle; // TODO
-  //array["look_idle"] = %CornerCrL_alert_idle; // TODO
   array["stance_change"] = % CornerCrL_alert_2_stand;
 
   array["lean_aim_down"] = % CornerCrL_lean_aim_2;

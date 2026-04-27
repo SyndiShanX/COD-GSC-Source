@@ -307,22 +307,24 @@ deltarotate(delta, yaw) {
 }
 
 storereportbestsplittime(arrayname, covertype, index, bestsplit, bestdelta) {
-  switch (arrayname) {
-    case "coverTransSplit":
-      if(anim.covertranssplit[covertype][index] != bestsplit)
-        assertmsg("bestsplit needs to updated - anim." + arrayname + "[" + covertype + "]" + "[" + index + "]" + " = " + bestsplit + "; // delta of " + bestdelta);
+	switch (arrayname) {
+		case "coverTransSplit":
+			if(anim.covertranssplit[covertype][index] != bestsplit) {
+				assertmsg("bestsplit needs to updated - anim." + arrayname + "[" + covertype + "]" + "[" + index + "]" + " = " + bestsplit + ";
+			}
 
-      anim.covertranssplit[covertype][index] = bestsplit;
-      break;
-    case "coverTransPistolSplit":
-      if(anim.covertranspistolsplit[covertype][index] != bestsplit)
-        assertmsg("bestsplit needs to updated - anim." + arrayname + "[" + covertype + "]" + "[" + index + "]" + " = " + bestsplit + "; // delta of " + bestdelta);
-
-      anim.covertranspistolsplit[covertype][index] = bestsplit;
-      break;
-    default:
-      assertmsg("Unsupported split array" + arrayname);
-  }
+			anim.covertranssplit[covertype][index] = bestsplit;
+			break;
+		case "coverTransPistolSplit":
+			if(anim.covertranspistolsplit[covertype][index] != bestsplit) {
+				assertmsg("bestsplit needs to updated - anim." + arrayname + "[" + covertype + "]" + "[" + index + "]" + " = " + bestsplit + ";
+			}
+			
+			anim.covertranspistolsplit[covertype][index] = bestsplit;
+			break;
+		default:
+			assertmsg("Unsupported split array" + arrayname);
+	}
 }
 
 precache_grenade_offsets() {

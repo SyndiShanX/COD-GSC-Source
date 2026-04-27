@@ -16,11 +16,6 @@ stealth_event_enemy_main() {
   self._stealth.plugins.event = true;
 }
 
-/************************************************************************************************************/
-
-/*													LOGIC													*/
-/************************************************************************************************************/
-
 enemy_event_Loop() {
   self endon("death");
   self endon("pain_death");
@@ -34,8 +29,7 @@ enemy_event_Loop() {
     if(self stealth_group_spotted_flag()) {
       continue;
     }
-    //put this in the loop so that it can check for the function
-    //every time...that way we can change the functions on the fly
+
     func = self._stealth.behavior.ai_functions["event"];
 
     if(!isDefined(func[type]))
@@ -44,19 +38,13 @@ enemy_event_Loop() {
   }
 }
 
-/************************************************************************************************************/
-
-/*											EVENT REACTIONS													*/
-/************************************************************************************************************/
-
 enemy_event_reaction_wrapper(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
 
-  self endon("_stealth_enemy_alert_level_change"); //we'll end on a new threat, but threat will also end on a new event
+  self endon("_stealth_enemy_alert_level_change");
   level endon(spotted_flag);
-  self endon("death"); //since we wait a frame - there's the possibility of us dying in that frame
+  self endon("death");
 
-  //in this frame we'll receive this notify from our own event...so wait a frame so we dont end on it
   waittillframeend;
   self endon("enemy_awareness_reaction");
 
@@ -76,7 +64,7 @@ enemy_event_reaction_heard_scream(type) {
   wait 0.05;
   ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
 
-  node = self enemy_find_free_pathnode_near(origin, 300, 40); // 1
+  node = self enemy_find_free_pathnode_near(origin, 300, 40);
 
   self enemy_investigate_position(node);
 }
@@ -84,7 +72,6 @@ enemy_event_reaction_heard_scream(type) {
 enemy_event_reaction_flashbang(type) {
   origin = self._stealth.logic.event.awareness_param[type];
 
-  // hack to get around code bug
   if(self isFlashed() && self.script == "<custom>") {
     wait 0.05;
     self SetFlashBanged(true);
@@ -94,7 +81,7 @@ enemy_event_reaction_flashbang(type) {
   if(self.script == "flashed")
     self waittill("stop_flashbang_effect");
 
-  node = self enemy_find_free_pathnode_near(origin, 300, 40); // 2
+  node = self enemy_find_free_pathnode_near(origin, 300, 40);
 
   if(isDefined(node)) {
     self thread enemy_announce_wtf();
@@ -110,7 +97,7 @@ enemy_event_reaction_explosion(type) {
   wait 0.05;
   ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
 
-  node = self enemy_find_free_pathnode_near(origin, 300, 40); // 3
+  node = self enemy_find_free_pathnode_near(origin, 300, 40);
 
   self thread enemy_announce_wtf();
   self enemy_investigate_position(node);
@@ -135,11 +122,6 @@ enemy_investigate_position(node, position) {
     wait randomfloatrange(1, 4);
 }
 
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
-
 stealth_event_mod_all() {
   self stealth_event_mod("heard_scream");
   self stealth_event_mod("doFlashBanged");
@@ -155,22 +137,19 @@ stealth_event_mod(type, behavior_function, animation_function, event_listener) {
   if(!isDefined(animation_function))
     animation_function = animation[type];
   if(!isDefined(event_listener))
-    event_listener = stealth_event_listener_defaults(type); // SET TO FALSE IF NO DEFAULT EXISTS
+    event_listener = stealth_event_listener_defaults(type);
 
   assertex(isDefined(behavior_function), "tried to set a stealth event of " + type + " to which there is no default behavior for");
   assertex(isDefined(animation_function), "tried to set a stealth event of " + type + " to which there is no default animation for");
 
-  //SET THE PARAMETERS
   self ai_create_behavior_function("event", type, behavior_function);
   self ai_create_behavior_function("animation", type, animation_function);
-  //MAKES SURE WE GET THE NOTIFY
+
   self thread maps\_stealth_visibility_enemy::enemy_event_awareness(type);
 
-  //IS THIS A CODE DRIVEN EVENT THAT NEEDS TO BE LISTENED FOR
   if(event_listener)
     self addAIEventListener(type);
 
-  //special case settings
   switch (type) {
     case "explode":
       self.ignoreExplosionEvents = true;

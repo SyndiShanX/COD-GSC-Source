@@ -41,7 +41,6 @@ main() {
 
   level._effect["anaconda_muzzle_flash"] = loadFX("muzzleflashes/pistolflash");
 
-  //ambient fx
   level._effect["moth_runner"] = loadfx("misc/moth_runner");
   level._effect["insect_trail_runner_icbm"] = loadfx("misc/insect_trail_runner_icbm");
   level._effect["leaves_ground_gentlewind_dust"] = loadfx("misc/leaves_ground_gentlewind_dust");

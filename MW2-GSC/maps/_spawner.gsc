@@ -7,28 +7,9 @@
 #include common_scripts\utility;
 #include maps\_anim;
 
-// .script_delete	a group of guys, only one of which spawns
-// .script_playerseek	spawn and run to the player
-// .script_patroller	follow your targeted patrol
-// .script_delayed_playerseek	spawn and run to the player with decreasing goal radius
-// .script_followmin
-// .script_followmax
-// .script_radius
-// .script_friendname
-// .script_startinghealth
-// .script_accuracy
-// .script_grenades
-// .script_sightrange
-// .script_ignoreme
-
 main() {
   precachemodel("grenade_bag");
-  // 	precachemodel( "com_trashbag" );
-  //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  // connect auto AI spawners
-  //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-  // create default threatbiasgroups;
   createthreatbiasgroup("allies");
   createthreatbiasgroup("axis");
   createthreatbiasgroup("team3");
@@ -44,49 +25,13 @@ main() {
     player setthreatbiasgroup("allies");
   }
 
-  // temp disabled, prototyping money
   if(getDvar("xp_enable", "0") == "1")
     thread maps\_rank::init();
 
   if(getDvar("money_enable", "0") == "1")
     thread maps\_money::init();
 
-  // for combat mode testing
   setDvarIfUninitialized("scr_force_ai_combat_mode", "0");
-
-  /*
-  	spawners = getSpawnerArray();
-  	for( i = 0; i < spawners.size; i++ )
-  	{
-  		spawner = spawners[ i ];
-  		if( !isDefined( spawner.targetname ) )
-  			continue;
-  			
-  		triggers = getEntArray( spawner.targetname, "target" );
-  		for( j = 0; j < triggers.size; j++ )
-  		{
-  			trigger = triggers[ j ];
-  			
-  			if( ( isDefined( trigger.targetname ) ) && ( trigger.targetname == "flood_spawner" ) )
-  				continue;
-  			
-  			switch( trigger.classname )
-  			{
-  			case "trigger_multiple":
-  			case "trigger_once":
-  			case "trigger_use":
-  			case "trigger_damage":
-  			case "trigger_radius":
-  			case "trigger_lookat":
-  				if( spawner.count )
-  					trigger thread doAutospawn( spawner );
-  				break;
-  			}
-  		}
-  	}
-  */
-
-  //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
   level._nextcoverprint = 0;
   level._ai_group = [];
@@ -120,7 +65,7 @@ main() {
 
   if(!isDefined(level.default_goalheight))
     level.default_goalheight = 512;
-  level.portable_mg_gun_tag = "J_Shoulder_RI"; // need to get J_gun back to make it work properly
+  level.portable_mg_gun_tag = "J_Shoulder_RI";
   level.mg42_hide_distance = 1024;
 
   if(!isDefined(level.maxFriendlies))
@@ -154,12 +99,7 @@ main() {
   level.ai_classname_in_level_keys = undefined;
 
   run_thread_on_noteworthy("hiding_door_spawner", maps\_hiding_door::hiding_door_spawner);
-
-  // check to see if the designer has placed at least the minimal number of script_char_groups
-  //	check_script_char_group_ratio( spawners );
 }
-
-// check to see if the designer has placed at least the minimal number of script_char_groups
 check_script_char_group_ratio(spawners) {
   if(spawners.size <= 16) {
     return;
@@ -202,8 +142,6 @@ spawn_guys_until_death_or_no_count() {
       self waittill("spawned");
     }
 
-    // give the other waittill( "spawned" ) a chance to hit and increment the deathspawn
-    // on the ai or vehicle
     waittillframeend;
 
     if(!self.count)
@@ -231,7 +169,7 @@ vehicle_deathflag() {
   deathflag = self.script_deathflag;
 
   if(!isDefined(level.deathflags) || !isDefined(level.deathflags[self.script_deathflag])) {
-    waittillframeend; // if its the first frame then process deathflags hasn't happened yet
+    waittillframeend;
     if(!isDefined(self))
       return;
   }
@@ -247,19 +185,15 @@ vehicle_deathflag() {
 spawner_deathflag() {
   level.deathflags[self.script_deathflag] = [];
 
-  // wait for the process_deathflags script to run and setup the arrays
   waittillframeend;
 
   if(!isDefined(self) || self.count == 0) {
-    // the spawner was removed on the first frame
     return;
   }
 
-  // give each spawner a unique id
   self.spawner_number = level.spawner_number;
   level.spawner_number++;
 
-  // keep an array of spawner entities that have this deathflag
   level.deathflags[self.script_deathflag]["spawners"][self.spawner_number] = self;
   deathflag = self.script_deathflag;
   id = self.spawner_number;
@@ -274,19 +208,15 @@ spawner_deathflag() {
 vehicle_spawner_deathflag() {
   level.deathflags[self.script_deathflag] = [];
 
-  // wait for the process_deathflags script to run and setup the arrays
   waittillframeend;
 
   if(!isDefined(self)) {
-    // the spawner was removed on the first frame
     return;
   }
 
-  // give each spawner a unique id
   self.spawner_number = level.spawner_number;
   level.spawner_number++;
 
-  // keep an array of spawner entities that have this deathflag
   level.deathflags[self.script_deathflag]["vehicle_spawners"][self.spawner_number] = self;
   deathflag = self.script_deathflag;
   id = self.spawner_number;
@@ -302,9 +232,6 @@ update_deathflag(deathflag) {
   level notify("updating_deathflag_" + deathflag);
   level endon("updating_deathflag_" + deathflag);
 
-  // notify and endon and waittill so we only do this a max of once per frame
-  // even if multiple spawners or ai are killed in the same frame
-  // also gives ai a chance to spawn and be added to the ai deathflag array
   waittillframeend;
 
   foreach(index, array in level.deathflags[deathflag]) {
@@ -312,17 +239,6 @@ update_deathflag(deathflag) {
       return;
   }
 
-  /*
-  	spawnerKeys = getarraykeys( level.deathflags[ deathflag ][ "spawners" ] );
-  	if( spawnerKeys.size > 0 )
-  		return;
-
-  	aiKeys = getarraykeys( level.deathflags[ deathflag ][ "ai" ] );
-  	if( aiKeys.size > 0 )
-  		return;
-  */
-
-  // all the spawners and ai are gone
   flag_set(deathflag);
 }
 
@@ -367,10 +283,10 @@ doAutospawn(spawner) {
     if(!spawner.count)
       return;
     if(self.target != spawner.targetname)
-      return; // manually disconnected
-    if(isDefined(spawner.triggerUnlocked))
-      return; // manually disconnected
-
+      return;
+    if(isDefined(spawner.triggerUnlocked)) {
+      return;
+    }
     guy = spawner spawn_ai();
 
     if(spawn_failed(guy))
@@ -382,7 +298,6 @@ doAutospawn(spawner) {
 
 trigger_spawner(trigger) {
   assertEx(isDefined(trigger.target), "Triggers with flag TRIGGER_SPAWN at " + trigger.origin + " must target at least one spawner.");
-  //trigger endon( "death" );
 
   random_killspawner = trigger.random_killspawner;
   target = trigger.target;
@@ -392,7 +307,7 @@ trigger_spawner(trigger) {
   trigger script_delay();
 
   if(isDefined(random_killspawner))
-    waittillframeend; // let our random killspawner fire before spawning guys
+    waittillframeend;
 
   spawners = getEntArray(target, "targetname");
   foreach(spawner in spawners) {
@@ -419,7 +334,6 @@ trigger_spawner_spawns_guys() {
   if(!issubstr(self.classname, "actor"))
     return undefined;
 
-  // catch for stealth
   dontShareEnemyInfo = (isDefined(self.script_stealth) && flag("_stealth_enabled") && !flag("_stealth_spotted"));
 
   if(isDefined(self.script_forcespawn))
@@ -459,7 +373,6 @@ trigger_spawner_reinforcement(trigger) {
 
   trigger script_delay();
 
-  // get array again because some might have been killspawned
   spawners = getEntArray(target, "targetname");
   foreach(spawner in spawners) {
     spawner thread trigger_reinforcement_spawn_guys();
@@ -467,22 +380,17 @@ trigger_spawner_reinforcement(trigger) {
 }
 
 trigger_reinforcement_spawn_guys() {
-  // get the reinforcement spawner
   reinforcement = self trigger_reinforcement_get_reinforcement_spawner();
 
-  // spawn the first guy
   guy = self trigger_spawner_spawns_guys();
 
-  // if the guy failed to spawn then try to spawn the reinforcement
   if(!isDefined(guy)) {
-    // delete failed spawner
     self delete();
 
     if(isDefined(reinforcement)) {
       guy = reinforcement trigger_spawner_spawns_guys();
       reinforcement delete();
 
-      // reinforcement guy failed to spawn too
       if(!isDefined(guy))
         return;
     } else
@@ -494,7 +402,6 @@ trigger_reinforcement_spawn_guys() {
   }
   guy waittill("death");
 
-  // could have been killspawned
   if(!isDefined(reinforcement)) {
     return;
   }
@@ -518,14 +425,13 @@ trigger_reinforcement_spawn_guys() {
 
     if(!player_saw_kill(spawned, attacker)) {
       println("^3player didn't see kill, respawning the reinforcement");
-      // could have been killspawned
+
       if(!isDefined(reinforcement)) {
         break;
       }
       reinforcement.count++;
     }
 
-    // soldier was deleted, not killed
     if(!isDefined(spawned)) {
       continue;
     }
@@ -613,7 +519,7 @@ kill_trigger(trigger) {
   if((isDefined(trigger.targetname)) && (trigger.targetname != "flood_spawner")) {
     return;
   }
-  // temporary
+
   if(level.script == "sniperescape") {
     return;
   }
@@ -623,30 +529,15 @@ kill_trigger(trigger) {
 random_killspawner(trigger) {
   trigger endon("death");
   random_killspawner = trigger.script_random_killspawner;
-  waittillframeend; // wait for spawners to setup spawn_groups so we can verify ours exists
+  waittillframeend;
 
   if(!isDefined(level.killspawn_groups[random_killspawner])) {
     return;
   }
-  //	assertex( isDefined( level.killspawn_groups[ random_killspawner ] ), "Trigger at " + trigger.origin + " has random_killspawner " + random_killspawner + ". There are no spawners with that random_killspawner value." );
 
   trigger waittill("trigger");
 
   cull_spawners_from_killspawner(random_killspawner);
-
-  /*
-  triggered_spawners = [];
-  spawners = getspawnerarray();
-  for( i = 0 ; i < spawners.size ; i++ )
-  {
-  	if( ( isDefined( spawners[ i ].script_random_killspawner ) ) && ( random_killspawner == spawners[ i ].script_random_killspawner ) )
-  	{
-  		triggered_spawners = add_to_array(triggered_spawners, spawners[ i ] );
-  	}
-  }
-  	
-  cull_spawners_leaving_one_set( triggered_spawners );
-  */
 }
 
 cull_spawners_from_killspawner(random_killspawner) {
@@ -661,9 +552,6 @@ cull_spawners_from_killspawner(random_killspawner) {
   save_key = random(keys);
   spawn_groups[save_key] = undefined;
 
-  // spawn_groups has several arrays of spawners in it
-  // the array we randomly want to keep has been removed
-  // so go through each array and delete all the spawners that remain.
   foreach(key, spawners in spawn_groups) {
     foreach(index, spawner in spawners) {
       if(isDefined(spawner))
@@ -688,8 +576,6 @@ kill_spawner(trigger) {
 
   trigger waittill("trigger");
 
-  // wait twice so random killspawners can first kill selective spawners
-  // then the trigger could spawn guys, then the spawners will be deleted
   waittillframeend;
   waittillframeend;
 
@@ -730,21 +616,8 @@ kill_spawnerNum(number) {
   }
 }
 
-trigger_spawn(trigger) {
-  /*
-  	if( isDefined( trigger.target ) )
-  	{
-  		spawners = getEntArray( trigger.target, "targetname" );
-  		for( i = 0;i < spawners.size;i++ )
-  		if( ( spawners[ i ].team == "axis" ) || ( spawners[ i ].team == "allies" ) || ( spawners[ i ].team == "team3" ) )
-  			level thread spawn_prethink( spawners[ i ] );
-  	}
-  */
-}
-
-// spawn maximum 16 grenades per team
+trigger_spawn(trigger) {}
 spawn_grenade(origin, team) {
-  // delete oldest grenade
   if(!isDefined(level.grenade_cache) || !isDefined(level.grenade_cache[team])) {
     level.grenade_cache_index[team] = 0;
     level.grenade_cache[team] = [];
@@ -765,7 +638,7 @@ spawn_grenade(origin, team) {
 
 waittillDeathOrPainDeath() {
   self endon("death");
-  self waittill("pain_death"); // pain that ends in death
+  self waittill("pain_death");
 }
 
 drop_gear() {
@@ -778,29 +651,6 @@ drop_gear() {
   if(isDefined(self.noDrop)) {
     return;
   }
-  /*
-  if( level.tire_explosion )
-  {
-  	org = self.origin;
-  	eye = self getEye();
-
-  	// try to fix the delete ai during think error
-  	waittillframeend;
-
-  	for( i = 0; i < 15; i++ )
-  	{
-  		thread random_tire( org, eye );
-  	}
-
-  	if( isDefined( self ) )
-  	{
-  		//self hide();
-  		self animscripts\shared::DropAllAIWeapons();
-  		self delete();
-  	}
-  	return;
-  }
-  */
 
   self.ignoreForFixedNodeSafeCheck = true;
 
@@ -843,9 +693,7 @@ spawn_grenade_bag(org, angles, team) {
   grenade setModel("grenade_bag");
   grenade.angles = angles;
 
-  // grenade ammo determined by weapon settings
-
-  grenade hide(); // looks bad when it pops out of nowhere
+  grenade hide();
   wait(0.7);
   if(!isDefined(grenade))
     return;
@@ -864,7 +712,6 @@ spawn_prethink() {
   level.ai_classname_in_level[self.classname] = true;
 
   if(getDvar("noai", "off") != "off") {
-    // NO AI in the level plz
     self set_count(0);
     return;
   }
@@ -874,14 +721,12 @@ spawn_prethink() {
   if(isDefined(self.script_difficulty)) {
     switch (self.script_difficulty) {
       case "easy":
-        if(level.gameSkill > 1) // if on hard or veteran
-        {
+        if(level.gameSkill > 1) {
           self set_count(0);
         }
         break;
       case "hard":
-        if(level.gameSkill < 2) // if on easy or regular
-        {
+        if(level.gameSkill < 2) {
           self set_count(0);
         }
         break;
@@ -920,7 +765,6 @@ spawn_prethink() {
   }
 
   if(isDefined(self.script_deathflag)) {
-    // sets this flag when all the spawners or ai with this flag are gone
     thread spawner_deathflag();
   }
 
@@ -936,13 +780,6 @@ spawn_prethink() {
     self add_random_killspawner_to_spawngroup();
   }
 
-  /*
-  // all guns are setup by default now
-  // portable mg42 guys
-  if( issubstr( self.classname, "mgportable" ) || issubstr( self.classname, "30cal" ) )
-  	thread mg42setup_gun();
-  */
-
   if(!isDefined(self.spawn_functions)) {
     self.spawn_functions = [];
   }
@@ -956,7 +793,7 @@ spawn_prethink() {
     if(!isalive(spawn)) {
       continue;
     }
-    if(isDefined(level.spawnerCallbackThread)) // this looks like pre - spawnfunc functionality, should be depricated
+    if(isDefined(level.spawnerCallbackThread))
       self thread[[level.spawnerCallbackThread]](spawn);
 
     if(isDefined(self.script_delete)) {
@@ -968,7 +805,6 @@ spawn_prethink() {
 
     spawn.spawn_funcs = self.spawn_functions;
 
-    // stored temporarily so spawn functions can use it if they want it
     spawn.spawner = self;
 
     if(isDefined(self.targetname))
@@ -977,10 +813,6 @@ spawn_prethink() {
       spawn thread spawn_think();
   }
 }
-
-// Wrapper for spawn_think
-// should change this so run_spawn_functions() can also work on drones
-// currently assumes AI
 spawn_think(targetname) {
   assert(self != level);
   level.ai_classname_in_level[self.classname] = true;
@@ -1004,22 +836,18 @@ spawn_think(targetname) {
 }
 
 shouldnt_spawn_because_of_script_difficulty() {
-  //set .script_difficulty = "hard" to make AI not spawn in normal or easy
-
   if(!isDefined(self.script_difficulty))
     return false;
   should_delete = false;
 
   switch (self.script_difficulty) {
     case "easy":
-      if(level.gameSkill > 1) // if on hard or veteran
-      {
+      if(level.gameSkill > 1) {
         should_delete = true;
       }
       break;
     case "hard":
-      if(level.gameSkill < 2) // if on easy or regular
-      {
+      if(level.gameSkill < 2) {
         should_delete = true;
       }
       break;
@@ -1032,15 +860,6 @@ run_spawn_functions() {
     self.spawner = undefined;
     return;
   }
-
-  /*
-  if( isDefined( self.script_vehicleride ) )
-  {
-  	// guys that ride in a vehicle down run their spawn funcs until they land.
-  	self endon( "death" );
-  	self waittill( "jumpedout" );
-  }
-  */
 
   for(i = 0; i < self.spawn_funcs.size; i++) {
     func = self.spawn_funcs[i];
@@ -1063,7 +882,6 @@ run_spawn_functions() {
   }
 
   if(isDefined(self.team)) {
-    // vehicles have no self team
     for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
       func = level.spawn_funcs[self.team][i];
       if(isDefined(func["param5"]))
@@ -1088,11 +906,9 @@ run_spawn_functions() {
   self.saved_spawn_functions = self.spawn_funcs;
 
   self.spawn_funcs = undefined;
-  // if you want to use the .spawner as reference then you need to yank it
-  // at the top of the spawn function, for var space sake.
+
   self.spawner = undefined;
 
-  // keep them around in developer mode, for debugging
   self.spawn_funcs = self.saved_spawn_functions;
   self.saved_spawn_functions = undefined;
 }
@@ -1104,8 +920,6 @@ specops_think() {
 
   self add_damage_function(::specops_dmg);
 }
-
-// Keeps track of who last did damage to the given AI, and awards that person with the kill
 specops_dmg(dmg, attacker, dir, point, type, model_name, tag_name) {
   if(!isDefined(self)) {
     return;
@@ -1116,8 +930,6 @@ specops_dmg(dmg, attacker, dir, point, type, model_name, tag_name) {
     self.last_dmg_type = type;
   }
 }
-
-// the functions that run on death for the ai
 deathFunctions() {
   self waittill("death", attacker, cause);
   level notify("ai_killed", self);
@@ -1128,7 +940,6 @@ deathFunctions() {
 
   if(isDefined(attacker)) {
     if(self.team == "axis" || self.team == "team3") {
-      // If the attacker is a vehicle, and the player is the owner, make the player the attacker
       if(attacker.code_classname == "script_vehicle") {
         owner = attacker GetVehicleOwner();
         if(isDefined(owner)) {
@@ -1169,7 +980,6 @@ deathFunctions() {
 }
 
 AI_damage_think() {
-  // don't end on death
   self.damage_functions = [];
 
   for(;;) {
@@ -1190,7 +1000,6 @@ AI_damage_think() {
 
 living_ai_prethink() {
   if(isDefined(self.script_deathflag)) {
-    // later this is turned into the real ddeathflag array
     level.deathflags[self.script_deathflag] = true;
   }
 
@@ -1200,7 +1009,6 @@ living_ai_prethink() {
 }
 
 crawl_through_targets_to_init_flags() {
-  // need to initialize flags on the path chain if need be
   array = get_node_funcs_based_on_target();
   if(isDefined(array)) {
     targets = array["destination"];
@@ -1214,21 +1022,17 @@ crawl_through_targets_to_init_flags() {
 spawn_team_allies() {
   self.useChokePoints = false;
 
-  // Set the followmin for friendlies
   if(isDefined(self.script_followmin))
     self.followmin = self.script_followmin;
 
-  // Set the followmax for friendlies
   if(isDefined(self.script_followmax))
     self.followmax = self.script_followmax;
 }
 
 spawn_team_axis() {
-  // xp
   if(getDvar("xp_enable", "0") == "1")
     self thread maps\_rank::AI_xp_init();
 
-  // money
   if(getDvar("money_enable", "0") == "1")
     self thread maps\_money::AI_money_init();
 
@@ -1241,7 +1045,6 @@ spawn_team_axis() {
     self.combatMode = self.script_combatmode;
   }
 
-  // for combat mode testing
   if(getDvar("scr_force_ai_combat_mode") == "ambush")
     self.combatMode = "ambush";
   else if(getDvar("scr_force_ai_combat_mode") == "ambush_nodes_only")
@@ -1262,20 +1065,19 @@ subclass_elite() {
     self.baseaccuracy = 5;
   self.aggressivemode = true;
 
-  //give flashbanks if they have appropriate weapons
   if(self has_shotgun()) {
     flashAmmo = undefined;
     switch (level.gameSkill) {
-      case 0: // easy
+      case 0:
         flashAmmo = 0;
         break;
-      case 1: // regular
+      case 1:
         flashAmmo = 2;
         break;
-      case 2: // hardened
+      case 2:
         flashAmmo = 3;
         break;
-      case 3: // veteran
+      case 3:
         flashAmmo = 4;
         break;
     }
@@ -1318,9 +1120,6 @@ bullet_resistance(damage, attacker, direction_vec, point, type, modelName, tagNa
 }
 
 spawn_think_game_skill_related() {
-  //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors.
-  //Set it to a value between 0 and 1; 0 for never, 1 for always if possible.
-  //add script override check here if needed.
   maps\_gameskill::default_door_node_flashbang_frequency();
 
   maps\_gameskill::grenadeAwareness();
@@ -1329,7 +1128,7 @@ spawn_think_game_skill_related() {
 ai_lasers() {
   if(!isalive(self))
     return;
-  if(self.health <= 1) // dying soon
+  if(self.health <= 1)
     return;
   self LaserForceOn();
   self waittill("death");
@@ -1381,10 +1180,9 @@ spawn_think_script_inits() {
   if(isDefined(self.script_faceenemydist)) {
     self.maxFaceEnemyDist = self.script_faceenemydist;
   } else {
-    self.maxFaceEnemyDist = 512; // the code default!
+    self.maxFaceEnemyDist = 512;
   }
 
-  // send all forcecolor through a centralized function
   if(isDefined(self.script_forceColor)) {
     set_force_color(self.script_forceColor);
   }
@@ -1402,18 +1200,13 @@ spawn_think_script_inits() {
   self.provideCoveringFire = self.team == "allies" && self.fixedNode;
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "mgpair") {
-    // mgpair guys get angry when their fellow buddy dies
     thread maps\_mg_penetration::create_mg_team();
   }
 
-  //if script_moveoverride is on an AI - then dont set his goalvolume, because most likely he doesn't have a goal inside the volume
-  //if script_stealth is set then don't give him a goalvolume, because we assume we want him to FIGHT in the goal volume when stealth is broken, not at spawn.
   if(isDefined(self.script_goalvolume) && !((isDefined(self.script_moveoverride) && self.script_moveoverride == 1) || isDefined(self.script_stealth))) {
-    // wait until frame end so that the AI's goal has a chance to get set
     thread set_goal_volume();
   }
 
-  // create threatbiasgroups
   if(isDefined(self.script_threatbiasgroup))
     self setthreatbiasgroup(self.script_threatbiasgroup);
   else if(self.team == "neutral")
@@ -1449,7 +1242,6 @@ spawn_think_script_inits() {
     self.maxSightDistSqrd = self.script_sightrange;
   }
 
-  // sets the favorite enemy of a spawner
   if(isDefined(self.script_favoriteenemy)) {
     if(self.script_favoriteenemy == "player") {
       self.favoriteenemy = level.player;
@@ -1465,7 +1257,6 @@ spawn_think_script_inits() {
     self.pathenemylookahead = self.script_maxdist;
   }
 
-  // disable long death like dying pistol behavior
   if(isDefined(self.script_longdeath)) {
     assertex(!self.script_longdeath, "Long death is enabled by default so don't set script_longdeath to true, check ai with export " + self.export);
     self.a.disableLongDeath = true;
@@ -1482,12 +1273,10 @@ spawn_think_script_inits() {
     self.grenadeAmmo = self.script_flashbangs;
   }
 
-  // Puts AI in pacifist mode
   if(isDefined(self.script_pacifist)) {
     self.pacifist = true;
   }
 
-  // Set the health for special cases
   if(isDefined(self.script_startinghealth)) {
     self.health = self.script_startinghealth;
   }
@@ -1509,27 +1298,21 @@ spawn_think_debug_checks() {
   if(self.type == "human")
     assertEx(self.pathEnemyLookAhead == 0 && self.pathEnemyFightDist == 0, "Tried to change pathenemyFightDist or pathenemyLookAhead on an AI before running spawn_failed on guy with export " + self.export);
 }
-
-// Actually do the spawn_think
 spawn_think_action(targetname) {
-  // handle default ai flags for ent_flag * functions
   self thread AI_damage_think();
   self thread tanksquish();
   self thread death_achievements();
   self thread specops_think();
 
-  //dont call this if you dont want AI guy to glow when the player uses thermal vision. Ai only glow when player is in thermal.
   if(!isDefined(level.ai_dont_glow_in_thermal))
     self ThermalDrawEnable();
 
-  // ai get their values from spawners and theres no need to have this value on ai
   self.spawner_number = undefined;
 
   if(!isDefined(self.unique_id)) {
     set_ai_number();
   }
 
-  // functions called on death
   if(!isDefined(self.deathFuncs)) {
     self.deathFuncs = [];
   }
@@ -1539,9 +1322,6 @@ spawn_think_action(targetname) {
   level thread maps\_friendlyfire::friendly_fire_think(self);
 
   self.walkdist = 16;
-
-  // which eq triggers am I touching?
-  //thread setup_ai_eq_triggers();
 
   spawn_think_debug_checks();
 
@@ -1553,7 +1333,6 @@ spawn_think_action(targetname) {
 
   [[level.team_specific_spawn_functions[self.team]]]();
 
-  // special function for this AI's subclass, juggernaut, etc
   assertex(isDefined(level.subclass_spawn_functions[self.subclass]), "subclass spawn function not defined for '" + self.subclass + "'");
   thread[[level.subclass_spawn_functions[self.subclass]]]();
 
@@ -1563,17 +1342,11 @@ spawn_think_action(targetname) {
 
   set_goal_height_from_settings();
 
-  //
-  // lots of returns from this point on. spawn_think_action may early out at any point.
-  //
-
-  // The AI will spawn and attack the player
   if(isDefined(self.script_playerseek)) {
     self setgoalentity(level.player);
     return;
   }
 
-  // the AI will be linked into the stealth system
   if(isDefined(self.script_stealth)) {
     if(isDefined(self.script_stealth_function)) {
       assertex(isDefined(level.stealth_default_func[self.script_stealth_function]), "spawner at " + self.origin + " has .script_stealth_function set to key of '" + self.script_stealth_function + "' but there is no reference for that key. Use stealth_set_default_stealth_function( key, func ) to set the key to a proper stealth function");
@@ -1592,13 +1365,11 @@ spawn_think_action(targetname) {
     self thread[[level.global_callbacks["_idle_call_idle_func"]]]();
   }
 
-  // The AI will spawn and follow a patrol
   if(isDefined(self.script_patroller) && !isDefined(self.script_moveoverride)) {
     self thread maps\_patrol::patrol();
     return;
   }
 
-  // The AI will spawn and use his .radius as a goalradius, and his goalradius will get smaller over time.
   if(isDefined(self.script_delayed_playerseek)) {
     if(!isDefined(self.script_radius))
       self.goalradius = 800;
@@ -1608,8 +1379,7 @@ spawn_think_action(targetname) {
     return;
   }
 
-  if(isDefined(self.used_an_mg42)) // This AI was called upon to use an MG42 so he's not going to run to his node.
-  {
+  if(isDefined(self.used_an_mg42)) {
     return;
   }
 
@@ -1622,20 +1392,14 @@ spawn_think_action(targetname) {
   assertEx(self.goalradius == 4, "Changed the goalradius on guy with export " + self.export+" without waiting for spawn_failed. Note that this change will NOT show up by putting a breakpoint on the actors goalradius field because breakpoints don't properly handle the first frame an actor exists.");
   set_goal_from_settings();
 
-  // The AI will run to a target node and use the node's .radius as his goalradius.
-  // If script_seekgoal is set, then he will run to his node with a goalradius of 0, then set his goal radius
-  //to the node's radius.
   if(isDefined(self.target))
     self thread go_to_node();
 }
-
-// this is called during init (spawn_think_action) and reset (scrub_guy)
 init_reset_AI() {
   self eqoff();
 
   set_default_pathenemy_settings();
 
-  // Gives AI grenades
   if(isDefined(self.script_grenades)) {
     self.grenadeAmmo = self.script_grenades;
   } else {
@@ -1648,8 +1412,6 @@ init_reset_AI() {
   if(!is_specialop())
     self.neverSprintForVariation = true;
 }
-
-// reset this guy to default spec
 scrub_guy() {
   if(self.team == "neutral")
     self setthreatbiasgroup("civilian");
@@ -1658,7 +1420,6 @@ scrub_guy() {
 
   init_reset_AI();
 
-  // Set the accuracy for the spawner
   self.baseAccuracy = 1;
   maps\_gameskill::grenadeAwareness();
   self clear_force_color();
@@ -1671,7 +1432,7 @@ scrub_guy() {
   self.pacifistWait = 20;
   self.IgnoreRandomBulletDamage = false;
   self.pushable = true;
-  // 	self.favoriteenemy = undefined;
+
   self.accuracystationarymod = 1;
   self.allowdeath = false;
   self.anglelerprate = 540;
@@ -1697,7 +1458,6 @@ scrub_guy() {
   self.pushable = true;
   animscripts\init::set_anim_playback_rate();
 
-  // allies use fixednode by default
   self.fixednode = self.team == "allies";
 }
 
@@ -1790,13 +1550,13 @@ go_to_struct(node, optional_arrived_at_node_func) {
 }
 
 go_to_node(node, goal_type, optional_arrived_at_node_func, require_player_dist) {
-  if(isDefined(self.used_an_mg42)) // This AI was called upon to use an MG42 so he's not going to run to his node.
+  if(isDefined(self.used_an_mg42)) {
     return;
-
+  }
   array = get_node_funcs_based_on_target(node, goal_type);
   if(!isDefined(array)) {
     self notify("reached_path_end");
-    // no goal type
+
     return;
   }
 
@@ -1821,7 +1581,6 @@ get_least_used_from_array(array) {
 
   array = level.go_to_node_arrays[targetname];
 
-  // return the node at the front of the array and move it to the back of the array.
   first = array[0];
   newarray = [];
   for(i = 0; i < array.size - 1; i++) {
@@ -1834,13 +1593,12 @@ get_least_used_from_array(array) {
 }
 
 go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arrived_at_node_func, require_player_dist) {
-  self notify("stop_going_to_node"); // kills the last call to go_to_node
-  // AI is moving to a goal node
+  self notify("stop_going_to_node");
+
   self endon("stop_going_to_node");
   self endon("death");
 
   for(;;) {
-    // node should always be an array at this point, so lets get just 1 out of the array
     node = get_least_used_from_array(node);
 
     player_wait_dist = require_player_dist;
@@ -1863,7 +1621,6 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 
     [[set_goal_func_quits]](node);
 
-    //actually see if we're at our goal..._stealth might be tricking us
     if(self ent_flag_exist("_stealth_override_goalpos")) {
       while(1) {
         self waittill("goal");
@@ -1935,26 +1692,21 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 }
 
 go_to_node_wait_for_player(node, get_target_func, dist) {
-  //are any of the players closer to the node than we are?
   foreach(player in level.players) {
     if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin))
       return true;
   }
 
-  //are any of the player ahead of us based on our forward angle?
   vec = anglesToForward(self.angles);
   if(isDefined(node.target)) {
     temp = [[get_target_func]](node.target);
 
-    //if we only have one node then we can get the forward from that one to us
     if(temp.size == 1)
       vec = vectornormalize(temp[0].origin - node.origin);
-    //otherwise since we dont know which one we're taking yet the next best thing to do is to take the forward of the node we're on
+
     else if(isDefined(node.angles))
       vec = anglesToForward(node.angles);
-  }
-  //also if there is no target since we're at the end of the chain, the next best thing to do is to take the forward of the node we're on
-  else if(isDefined(node.angles))
+  } else if(isDefined(node.angles))
     vec = anglesToForward(node.angles);
 
   vec2 = [];
@@ -1962,23 +1714,17 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     vec2[vec2.size] = vectornormalize((player.origin - self.origin));
   }
 
-  //i just created a vector which is in the direction i want to
-  //go, lets see if the player is closer to our goal than we are			
   foreach(value in vec2) {
     if(vectordot(vec, value) > 0)
       return true;
   }
 
-  //ok so that just checked if he was a mile away but more towards the target
-  //than us...but we dont want him to be right on top of us before we start moving
-  //so lets also do a distance check to see if he's close behind
   dist2rd = dist * dist;
   foreach(player in level.players) {
     if(distancesquared(player.origin, self.origin) < dist2rd)
       return true;
   }
 
-  //ok guess he's not here yet	
   return false;
 }
 
@@ -1993,8 +1739,8 @@ go_to_node_set_goal_ent(ent) {
 }
 
 go_to_node_set_goal_pos(ent) {
-  self set_goal_ent(ent); //this change by Mo should allow stealth and dynamic run speed to use structs for follow_path. reverted because of GI build
-  //self set_goal_pos( ent.origin );
+  self set_goal_ent(ent);
+
   self notify("go_to_node_new_goal");
 }
 
@@ -2068,9 +1814,6 @@ crawl_target_and_init_flags(ent, get_func) {
 }
 
 get_node_funcs_based_on_target(node, goal_type) {
-  // figure out if its a node or script origin and set the goal_type index based on that.
-
-  // true is for script_origins, false is for nodes
   get_target_func["entity"] = ::get_target_ents;
   get_target_func["node"] = ::get_target_nodes;
   get_target_func["struct"] = ::get_target_structs;
@@ -2079,7 +1822,6 @@ get_node_funcs_based_on_target(node, goal_type) {
   set_goal_func_quits["struct"] = ::go_to_node_set_goal_pos;
   set_goal_func_quits["node"] = ::go_to_node_set_goal_node;
 
-  // if you pass a node, we'll assume you actually passed a node. We can make it find out if its a script origin later if we need that functionality.
   if(!isDefined(goal_type))
     goal_type = "node";
 
@@ -2087,7 +1829,6 @@ get_node_funcs_based_on_target(node, goal_type) {
   if(isDefined(node)) {
     array["destination"][0] = node;
   } else {
-    // if you dont pass a node then we need to figure out what type of target it is
     node = getEntArray(self.target, "targetname");
 
     if(node.size > 0) {
@@ -2099,7 +1840,6 @@ get_node_funcs_based_on_target(node, goal_type) {
       if(!node.size) {
         node = getStructArray(self.target, "targetname");
         if(!node.size) {
-          // Targetting neither
           return;
         }
         goal_type = "struct";
@@ -2122,23 +1862,18 @@ set_goal_height_from_settings() {
 }
 
 set_goal_from_settings(node) {
-  // sets goal radius
-
   if(isDefined(self.script_radius)) {
-    // use the override from radiant
     self.goalradius = self.script_radius;
     return;
   }
 
   if(isDefined(self.script_forcegoal)) {
     if(isDefined(node) && isDefined(node.radius)) {
-      // use the node's radius
       self.goalradius = node.radius;
       return;
     }
   }
 
-  // otherwise use the script default
   if(!isDefined(self getGoalVolume())) {
     if(self.type == "civilian")
       self.goalradius = 128;
@@ -2174,20 +1909,14 @@ manualTarget(targets) {
     wait(2 + randomfloat(1));
   }
 }
-
-// this is called from two places w / generally identical code... maybe larger scale cleanup is called for.
 use_a_turret(turret) {
   if(self isBadGuy() && self.health == 150) {
-    self.health = 100; // mg42 operators aren't going to do long death
+    self.health = 100;
     self.a.disableLongDeath = true;
   }
 
-  // 	thread maps\_mg_penetration::gunner_think( turret );
+  self useturret(turret);
 
-  self useturret(turret); // dude should be near the mg42
-  // 	turret setmode( "auto_ai" );// auto, auto_ai, manual
-  // 	turret settargetentity( level.player );
-  // 	turret setmode( "manual" );// auto, auto_ai, manual
   if((isDefined(turret.target)) && (turret.target != turret.targetname)) {
     ents = getEntArray(turret.target, "targetname");
     targets = [];
@@ -2207,10 +1936,8 @@ use_a_turret(turret) {
       if(targets.size == 1) {
         turret.manual_target = targets[0];
         turret settargetentity(targets[0]);
-        // 				turret setmode( "manual_ai" );// auto, auto_ai, manual
+
         self thread maps\_mgturret::manual_think(turret);
-        // 				if( isDefined( self.script_mg42auto ) )
-        // 					println( "AI at origin ", self.origin, " has script_mg42auto" );
       } else {
         turret thread maps\_mgturret::mg42_suppressionFire(targets);
       }
@@ -2234,7 +1961,7 @@ fallback_spawner_think(num, node) {
       firstspawn = false;
     }
 
-    waitframe(); // Wait until he does all his usual spawned logic so he will run to his node
+    waitframe();
     if(maps\_utility::spawn_failed(spawn)) {
       level notify(("fallbacker_died" + num));
       level.current_fallbackers[num]--;
@@ -2243,8 +1970,6 @@ fallback_spawner_think(num, node) {
 
     spawn thread fallback_ai_think(num, node, "is spawner");
   }
-
-  // 	level notify( ( "fallbacker_died" + num ) );
 }
 
 fallback_ai_think_death(ai, num) {
@@ -2266,12 +1991,6 @@ fallback_ai_think(num, node, spawner) {
 
   if((isDefined(node)) && (level.fallback_initiated[num])) {
     self thread fallback_ai(num, node);
-    /*
-    self notify( "stop_going_to_node" );
-    self setgoalnode( node );
-    if( isDefined( node.radius ) )
-    	self.goalradius = node.radius;
-    */
   }
 
   level thread fallback_ai_think_death(self, num);
@@ -2280,7 +1999,6 @@ fallback_ai_think(num, node, spawner) {
 fallback_death(ai, num) {
   ai waittill("death");
   level notify(("fallback_reached_goal" + num));
-  // 	ai notify( "fallback_notify" );
 }
 
 fallback_goal() {
@@ -2464,16 +2182,12 @@ fallback_wait(num, group) {
   if(getDvar("fallback", "0") == "1")
     println("^a Waiting for AI to die, fall backers for group ", num, " is ", level.current_fallbackers[num]);
 
-  // 	total_fallbackers = 0;
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
     if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) || ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group)))
       ai[i] thread fallback_ai_think(num);
   }
   ai = undefined;
-
-  // 	if( !total_fallbackers )
-  // 		return;
 
   max_fallbackers = level.current_fallbackers[num];
 
@@ -2489,16 +2203,13 @@ fallback_wait(num, group) {
   level notify(("fallbacker_trigger" + num));
 }
 
-fallback_think(trigger) // for fallback trigger
-{
+fallback_think(trigger) {
   if((!isDefined(level.fallback)) || (!isDefined(level.fallback[trigger.script_fallback])))
     level thread newfallback_overmind(trigger.script_fallback, trigger.script_fallback_group);
 
   trigger waittill("trigger");
   level notify(("fallbacker_trigger" + trigger.script_fallback));
-  // 	level notify( ( "fallback" + trigger.script_fallback ) );
 
-  // Maybe throw in a thing to kill triggers with the same fallback? God my hands are cold.
   kill_trigger(trigger);
 }
 
@@ -2512,7 +2223,6 @@ arrive(node) {
 }
 
 fallback_coverprint() {
-  // 	self endon( "death" );
   self endon("fallback");
   self endon("fallback_clear_goal");
   self endon("fallback_clear_death");
@@ -2525,7 +2235,6 @@ fallback_coverprint() {
 }
 
 fallback_print() {
-  // 	self endon( "death" );
   self endon("fallback_clear_goal");
   self endon("fallback_clear_death");
   while(1) {
@@ -2537,7 +2246,6 @@ fallback_print() {
 }
 
 fallback() {
-  // 	self endon( "death" );
   dest = getnode(self.target, "targetname");
   self.coverpoint = dest;
 
@@ -2600,8 +2308,6 @@ specialCheck(name) {
 }
 
 friendly_wave(trigger) {
-  // 	thread specialCheck( trigger.target );
-
   if(!isDefined(level.friendly_wave_active))
     thread friendly_wave_masterthread();
 
@@ -2655,12 +2361,9 @@ friendlydeath_thread() {
 
 friendly_wave_masterthread() {
   level.friendly_wave_active = true;
-  // level.totalfriends = 0;
+
   triggers = getEntArray("friendly_wave", "targetname");
   array_thread(triggers, ::set_spawncount, 0);
-
-  // friends = getaiarray("allies" );
-  // array_thread( friends, ::friendlydeath_thread );
 
   if(!isDefined(level.maxfriendlies))
     level.maxfriendlies = 7;
@@ -2692,7 +2395,6 @@ friendly_wave_masterthread() {
 
         spawn[num] set_count(1);
 
-        //catch for stealth
         dontShareEnemyInfo = (isDefined(spawn[num].script_stealth) && flag("_stealth_enabled") && !flag("_stealth_spotted"));
 
         if(isDefined(spawn[num].script_forcespawn))
@@ -2737,14 +2439,13 @@ friendly_mgTurret(trigger) {
     error("No mg42 for friendly_mg42 trigger's node, origin: " + node.origin);
 
   mg42 = getent(node.target, "targetname");
-  mg42 setmode("auto_ai"); // auto, auto_ai, manual
+  mg42 setmode("auto_ai");
   mg42 cleartargetentity();
 
   in_use = false;
   while(1) {
-    // 		println( "^a mg42 waiting for trigger" );
     trigger waittill("trigger", other);
-    // 		println( "^a MG42 TRIGGERED" );
+
     if(!isAI(other)) {
       continue;
     }
@@ -2780,14 +2481,14 @@ friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
   self setcursorhint("HINT_NOICON");
-  // Hold && 1 to commandeer the MG42
+
   self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   println("^a was used by player, stop using turret");
   self.useable = false;
   self setHintString("");
   self stopuseturret();
-  self notify("stopped_use_turret"); // special hook for decoytown guys - nate
+  self notify("stopped_use_turret");
   mg42 notify("friendly_finished_using_mg42");
 }
 
@@ -2796,18 +2497,15 @@ friendly_mg42_useable(mg42, node) {
     return false;
 
   if((isDefined(self.turret_use_time)) && (gettime() < self.turret_use_time)) {
-    // 		println( "^a Used gun too recently" );
     return false;
   }
 
   if(distance(level.player.origin, node.origin) < 100) {
-    // 		println( "^a player too close" );
     return false;
   }
 
   if(isDefined(self.chainnode))
     if(distance(level.player.origin, self.chainnode.origin) > 1100) {
-      // 		println( "^a too far from chain node" );
       return false;
     }
   return true;
@@ -2817,8 +2515,6 @@ friendly_mg42_endtrigger(mg42, guy) {
   mg42 endon("friendly_finished_using_mg42");
   self waittill("trigger");
   println("^a Told friendly to leave the MG42 now");
-  // 	guy stopuseturret();
-  // 	badplace_cylinder( undefined, 3, level.player.origin, 150, 150, "allies" );
 
   mg42 notify("friendly_finished_using_mg42");
 }
@@ -2840,9 +2536,9 @@ noFour() {
 friendly_mg42_think(mg42, node) {
   self endon("death");
   mg42 endon("friendly_finished_using_mg42");
-  // 	self endon( "death" );
+
   level thread friendly_mg42_death_notify(self, mg42);
-  // 	println( self.name + "^a is using an mg42" );
+
   self.oldradius = self.goalradius;
   self.goalradius = 28;
   self thread noFour();
@@ -2855,11 +2551,8 @@ friendly_mg42_think(mg42, node) {
   if(self.goalradius < 32)
     self.goalradius = 400;
 
-  // 	println( "^3 my goal radius is ", self.goalradius );
   self.ignoresuppression = false;
 
-  // Temporary fix waiting on new code command to see who the player is following.
-  // 	self setgoalentity( level.player );
   self.goalradius = self.oldradius;
 
   if(distance(level.player.origin, node.origin) < 32) {
@@ -2867,11 +2560,10 @@ friendly_mg42_think(mg42, node) {
     return;
   }
 
-  self.friendly_mg42 = mg42; // For making him stop using the mg42 from another script
+  self.friendly_mg42 = mg42;
   self thread friendly_mg42_wait_for_use(mg42);
   self thread friendly_mg42_cleanup(mg42);
-  self useturret(mg42); // dude should be near the mg42
-  // 	println( "^a Told AI to use mg42" );
+  self useturret(mg42);
 
   if(isDefined(mg42.target)) {
     stoptrigger = getent(mg42.target, "targetname");
@@ -2881,13 +2573,14 @@ friendly_mg42_think(mg42, node) {
 
   while(1) {
     if(distance(self.origin, node.origin) < 32)
-      self useturret(mg42); // dude should be near the mg42
+      self useturret(mg42);
     else
-      break; // a friendly is too far from mg42, stop using turret
+      break;
 
     if(isDefined(self.chainnode)) {
-      if(distance(self.origin, self.chainnode.origin) > 1100)
-        break; // friendly node is too far, stop using turret
+      if(distance(self.origin, self.chainnode.origin) > 1100) {
+        break;
+      }
     }
 
     wait(1);
@@ -2907,7 +2600,7 @@ friendly_mg42_doneUsingTurret() {
   turret = self.friendly_mg42;
   self.friendly_mg42 = undefined;
   self stopuseturret();
-  self notify("stopped_use_turret"); // special hook for decoytown guys - nate
+  self notify("stopped_use_turret");
   self.useable = false;
   self.goalradius = self.oldradius;
   if(!isDefined(turret)) {
@@ -2948,7 +2641,6 @@ tanksquish() {
 
 tanksquish_damage_check(amt, who, force, b, c, d, e) {
   if(!isDefined(self)) {
-    // deleted?
     return;
   }
 
@@ -2969,11 +2661,7 @@ tanksquish_damage_check(amt, who, force, b, c, d, e) {
     return;
   }
   self remove_damage_function(::tanksquish_damage_check);
-
-  //		self playSound( "human_crunch" );
 }
-
-// Makes a panzer guy run to a spot and shoot a specific spot
 panzer_target(ai, node, pos, targetEnt, targetEnt_offsetVec) {
   ai endon("death");
   ai.panzer_node = node;
@@ -2995,16 +2683,13 @@ panzer_target(ai, node, pos, targetEnt, targetEnt_offsetVec) {
   ai.panzer_ent = undefined;
   ai.panzer_pos = undefined;
   ai.panzer_delay = undefined;
-  // 	ai.exception_exposed = animscripts\combat::exception_exposed_panzer_guy;
-  // 	ai.exception_stop = animscripts\combat::exception_exposed_panzer_guy;
-  // 	ai waittill( "panzer mission complete" );
 }
 
 #using_animtree("generic_human");
 showStart(origin, angles, anime) {
   org = getstartorigin(origin, angles, anime);
   for(;;) {
-    print3d(org, "x", (0.0, 0.7, 1.0), 1, 0.25); // origin, text, RGB, alpha, scale
+    print3d(org, "x", (0.0, 0.7, 1.0), 1, 0.25);
     wait(0.05);
   }
 }
@@ -3022,26 +2707,12 @@ spawnWaypointFriendlies() {
   spawn.friendlyWaypoint = true;
 }
 
-// Newvillers global stuff:
-
 waittillDeathOrLeaveSquad() {
   self endon("death");
   self waittill("leaveSquad");
 }
 
 friendlySpawnWave() {
-  /*
-  	Triggers a spawn point for incoming friendlies.
-  	
-  	trigger targetname friendly_spawn
-  	Targets a trigger or triggers. The targetted trigger targets a script origin.
-  	Touching the friendly_spawn trigger enables the targetted trigger.
-  	Touching the enabled trigger causes friendlies to spawn from the targetted script origin.
-  	Touching the original trigger again stops the friendlies from spawning.
-  	The script origin may target an additional trigger that halts spawning.
-  	Make friendly spawn spot sparkle
-  */
-
   triggers = getEntArray(self.target, "targetname");
   for(i = 0; i < triggers.size; i++) {
     if(triggers[i] getentnum() == 526)
@@ -3051,16 +2722,13 @@ friendlySpawnWave() {
   array_thread(getEntArray(self.target, "targetname"), ::friendlySpawnWave_triggerThink, self);
   for(;;) {
     self waittill("trigger", other);
-    // If we're the current friendly spawn spot then stop friendly spawning because
-    // the player is backtracking
+
     if(activeFriendlyspawn() && getFriendlySpawnTrigger() == self)
       unsetFriendlyspawn();
 
     self waittill("friendly_wave_start", startPoint);
     setFriendlyspawn(startPoint, self);
 
-    // If the startpoint targets a trigger, that trigger can
-    // disable the startpoint too
     if(!isDefined(startPoint.target))
       continue;
     trigger = getent(startPoint.target, "targetname");
@@ -3069,21 +2737,6 @@ friendlySpawnWave() {
 }
 
 flood_and_secure(instantRespawn) {
-  /*
-  	Spawns AI that run to a spot then get a big goal radius. They stop spawning when auto delete kicks in, then start
-  	again when they are retriggered or the player gets close.
-  	
-  	trigger targetname flood_and_secure
-  	ai spawn and run to goal with small goalradius then get large goalradius
-  	spawner starts with a notify from any flood_and_secure trigger that triggers it
-  	spawner stops when an AI from it is deleted to make space for a new AI or when count is depleted
-  	spawners with count of 1 only make 1 guy.
-  	Spawners with count of more than 1 only deplete in count when the player kills the AI.
-  	spawner can target another spawner. When first spawner's ai dies from death( not deletion ), second spawner activates.
-  	script_noteworth "instant_respawn" on the trigger will disable the wave respawning
-  */
-
-  // Instantrespawn disables wave respawning or waiting for time to pass before respawning
   if(!isDefined(instantRespawn))
     instantRespawn = false;
 
@@ -3118,19 +2771,15 @@ flood_and_secure(instantRespawn) {
         playerTriggered = true;
       else
       if(!isDefined(other.isSquad) || !other.isSquad) {
-        // Non squad AI are not allowed to spawn enemies
         continue;
       }
     }
 
-    // Reacquire spawners in case one has died / been deleted and moved up to another
-    // because spawners can target other spawners that are used when the first spawner dies.
     spawners = getEntArray(self.target, "targetname");
 
     if(isDefined(spawners[0])) {
       if(isDefined(spawners[0].script_randomspawn)) {
         cull_spawners_from_killspawner(spawners[0].script_randomspawn);
-        //cull_spawners_leaving_one_set( spawners );
       }
     }
 
@@ -3162,43 +2811,15 @@ cull_spawners_leaving_one_set(spawners) {
     if(spawners[i].script_randomspawn != num_that_lives)
       spawners[i] delete();
   }
-
-  /*
-  highest_num = 0;
-  for( i = 0;i < spawners.size;i++ )
-  {
-  	if( spawners[ i ].script_randomspawn > highest_num )
-  		highest_num = spawners[ i ].script_randomspawn;
-  }
-  	
-  selection = randomint( highest_num + 1 );
-  for( i = 0;i < spawners.size;i++ )
-  {
-  	if( spawners[ i ].script_randomspawn != selection )
-  		spawners[ i ] delete();
-  }
-  */
 }
 
 flood_and_secure_spawner(instantRespawn) {
   if(isDefined(self.secureStarted)) {
-    // Multiple triggers can trigger a flood and secure spawner, but they need to run
-    // their logic just once so we exit out if its already running.
     return;
   }
 
   self.secureStarted = true;
-  self.triggerUnlocked = true; // So we don't run auto targetting behavior
-
-  /*
-  mg42 = issubstr( self.classname, "mgportable" ) || issubstr( self.classname, "30cal" );
-  if( !mg42 )
-  {
-  	// So we don't go script error'ing or whatnot off auto spawn logic
-  	// Unless we're an mg42 guy that has to set an mg42 up.
-  	self.script_moveoverride = true;
-  }
-  */
+  self.triggerUnlocked = true;
 
   target = self.target;
   targetname = self.targetname;
@@ -3208,7 +2829,6 @@ flood_and_secure_spawner(instantRespawn) {
     assert(isDefined(target));
   }
 
-  // follow up spawners
   spawners = [];
   if(isDefined(target)) {
     possibleSpawners = getEntArray(target, "targetname");
@@ -3228,7 +2848,7 @@ flood_and_secure_spawner(instantRespawn) {
   if(!isDefined(target)) {
     return;
   }
-  // follow up spawners
+
   possibleSpawners = getEntArray(target, "targetname");
   if(!possibleSpawners.size) {
     return;
@@ -3245,14 +2865,10 @@ flood_and_secure_spawner(instantRespawn) {
         newTarget = possibleSpawners[i].target;
     }
 
-    // The guy might already be targetting a different destination
-    // But if not, he goes to the node his parent went to.
     possibleSpawners[i].target = newTarget;
 
     possibleSpawners[i] thread flood_and_secure_spawner(instantRespawn);
 
-    // Pass playertriggered flag as true because at this point the player must have been involved because one shots dont
-    // spawn without the player triggering and multishot guys require player kills or presense to move along
     possibleSpawners[i].playerTriggered = true;
     possibleSpawners[i] notify("flood_begin");
   }
@@ -3262,10 +2878,10 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
   assert(isDefined(instantRespawn));
   self endon("death");
   count = self.count;
-  // oneShot = ( count == 1 );
+
   if(!oneShot)
     oneshot = (isDefined(self.script_noteworthy) && self.script_noteworthy == "delete");
-  self set_count(2); // running out of count counts as a dead spawner to script_deathchain
+  self set_count(2);
 
   if(isDefined(self.script_delay))
     delay = self.script_delay;
@@ -3277,13 +2893,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
     if(self.playerTriggered) {
       break;
     }
-    /* 			
-    		// Lets let AI spawn oneshots!
-    		// Oneshots require player triggering to activate
-    		if( oneShot )
-    			continue;
-    */
-    // guys that have a delay require triggering from the player 	
+
     if(delay)
       continue;
     break;
@@ -3308,13 +2918,12 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
     if(spawn_failed(spawn)) {
       playerKill = false;
       if(delay < 2)
-        wait(2); // debounce
+        wait(2);
       continue;
     } else {
       thread addToWaveSpawner(spawn);
       spawn thread flood_and_secure_spawn(self);
 
-      // Set the accuracy for the spawner
       if(isDefined(self.script_accuracy))
         spawn.baseAccuracy = self.script_accuracy;
 
@@ -3322,22 +2931,14 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
       ent notify("got_ai");
       self waittill("spawn_died", deleted, playerKill);
       if(delay > 2)
-        delay = randomint(4) + 2; // first delay can be long, after that its always a set amount.
+        delay = randomint(4) + 2;
       else
         delay = 0.5 + randomfloat(0.5);
     }
 
     if(deleted) {
-      // Deletion indicates that we've hit the max AI limit and this is the oldest / farthest AI
-      // so we need to stop this spawner until it gets triggered again or the player gets close
-
       waittillRestartOrDistance(dist);
     } else {
-      /*
-      // Only player kills count towards the count unless the spawner only has a count of 1
-      // or NOT
-      if( playerKill || oneShot )
-      */
       if(playerWasNearby(playerKill || oneShot, ent.ai))
         count--;
 
@@ -3370,29 +2971,12 @@ addToWaveSpawner(spawn) {
   }
 
   level.spawnerWave[name].count++;
-  /*
 
-  if( level.debug_corevillers )
-  	thread debugWaveCount( level.spawnerWave[ name ] );
-
-  */
   waittillDeletedOrDeath(spawn);
   level.spawnerWave[name].count--;
   if(!isDefined(self))
     level.spawnerWave[name].total--;
 
-  /*
-
-  if( isDefined( self ) )
-  {
-  	if( level.debug_corevillers )
-  		self notify( "debug_stop" );
-  }
-
-  */
-
-  // 	if( !level.spawnerWave[ name ].count )
-  // Spawn the next wave if 68% of the AI from the wave are dead.
   if(level.spawnerWave[name].total) {
     if(level.spawnerWave[name].count / level.spawnerWave[name].total < 0.32)
       level.spawnerWave[name] notify("waveReady");
@@ -3434,7 +3018,7 @@ playerWasNearby(playerKill, ai) {
 waittillRestartOrDistance(dist) {
   self endon("flood_begin");
 
-  dist = dist * 0.75; // require the player to get a bit closer to force restart the spawner
+  dist = dist * 0.75;
 
   while(distance(level.player.origin, self.origin) > dist)
     wait(1);
@@ -3446,8 +3030,7 @@ flood_and_secure_spawn(spawner) {
   self waittill("death", other);
 
   playerKill = isalive(other) && isPlayer(other);
-  if(!playerkill && isDefined(other) && other.classname == "worldspawn") // OR THE WORLDSPAWN???
-  {
+  if(!playerkill && isDefined(other) && other.classname == "worldspawn") {
     playerKill = true;
   }
 
@@ -3462,9 +3045,6 @@ flood_and_secure_spawn_goal() {
   self endon("death");
   node = getnode(self.target, "targetname");
   self setgoalnode(node);
-
-  // 	if( isDefined( self.script_deathChain ) )
-  // 		self setgoalvolume( level.deathchain_goalVolume[ self.script_deathChain ] );
 
   if(isDefined(level.fightdist)) {
     self.pathenemyfightdist = level.fightdist;
@@ -3497,9 +3077,6 @@ flood_and_secure_spawn_goal() {
 
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "delete") {
-      // 			self delete();
-      // Do damage instead of delete so he counts as "killed" and we dont have to write
-      // stuff to let the spawner know to stop trying to spawn him.
       self kill();
       return;
     }
@@ -3543,18 +3120,9 @@ furniturePushSound() {
 }
 
 friendlychain() {
-  /*
-  	Selectively enable and disable friendly chains with triggers
-
-  	trigger targetname friendlychain
-  	Targets a trigger. When the player hits the friendly chain trigger it enables the targetted trigger.
-  	When the player hits the enabled trigger, it activates the friendly chain of nodes that it targets.
-  	If the enabled trigger links to a "friendy_spawn" trigger, it enables that friendly_spawn trigger.
-  */
   waittillframeend;
   triggers = getEntArray(self.target, "targetname");
   if(!triggers.size) {
-    // trigger targets chain directly, has no direction
     node = getnode(self.target, "targetname");
     assert(isDefined(node));
     assert(isDefined(node.script_noteworthy));
@@ -3586,7 +3154,7 @@ friendlychain() {
 
   for(;;) {
     self waittill("trigger");
-    // 		if( level.currentObjective != self.script_noteworthy2 )
+
     while(level.player istouching(self))
       wait(0.05);
 
@@ -3610,7 +3178,7 @@ objectiveIsAllowed() {
   active = true;
   if(isDefined(self.script_objective_active)) {
     active = false;
-    // objective must be active for this trigger to hit
+
     for(i = 0; i < level.active_objective.size; i++) {
       if(!issubstr(self.script_objective_active, level.active_objective[i]))
         continue;
@@ -3625,7 +3193,6 @@ objectiveIsAllowed() {
   if(!isDefined(self.script_objective_inactive))
     return (active);
 
-  // trigger only hits if this objective is inactive
   inactive = 0;
   for(i = 0; i < level.inactive_objective.size; i++) {
     if(!issubstr(self.script_objective_inactive, level.inactive_objective[i]))
@@ -3696,21 +3263,10 @@ deathChainSpawnerLogic() {
 }
 
 friendlychain_onDeath() {
-  /*
-  	Enables a friendly chain when certain AI are cleared
-  	
-  	trigger targetname friendly_chain_on_death
-  	trigger is script_deathchain grouped with spawners
-  	When the spawners have depleted and all their ai are dead:
-  		the triggers become active.
-  	When triggered they set the friendly chain to the chain they target
-  	The triggers deactivate when a "friendlychain" targetnamed trigger is hit.
-  */
   triggers = getEntArray("friendly_chain_on_death", "targetname");
   spawners = getspawnerarray();
   level.deathSpawner = [];
 
-  // for debugging deathspawners
   level.deathSpawnerEnts = [];
 
   for(i = 0; i < spawners.size; i++) {
@@ -3725,7 +3281,6 @@ friendlychain_onDeath() {
     }
 
     spawners[i] thread deathChainSpawnerLogic();
-    // 		level.deathSpawner[ num ]++;
   }
 
   for(i = 0; i < triggers.size; i++) {
@@ -3748,15 +3303,15 @@ friendlyChain_onDeathThink() {
     self waittill("trigger");
     setNewPlayerChain(node, true);
     iprintlnbold("Area secured, move up!");
-    wait(5); // debounce
+    wait(5);
   }
 }
 
 setNewPlayerChain(node, rejoin) {
   level.player set_friendly_chain_wrapper(node);
-  level notify("new_escort_trigger"); // stops escorting guy from getting back on escort chain
+  level notify("new_escort_trigger");
   level notify("new_escort_debug");
-  level notify("start_chain", rejoin); // get the SMG guy back on the friendly chain
+  level notify("start_chain", rejoin);
 }
 
 friendlyChains() {
@@ -3778,7 +3333,7 @@ unsetFriendlyspawn() {
   if(activeFriendlyspawn()) {
     return;
   }
-  // If we've stepped back through all the spawners then turn off spawning
+
   flag_Clear("spawning_friendlies");
 }
 
@@ -3822,7 +3377,6 @@ spawnWaveStopTrigger(startTrigger) {
 
 friendlySpawnWave_triggerThink(startTrigger) {
   org = getent(self.target, "targetname");
-  // 	thread linedraw();
 
   for(;;) {
     self waittill("trigger");
@@ -3850,7 +3404,6 @@ goalVolumes() {
 }
 
 debugPrint(msg, endonmsg, color) {
-  // 	if( !level.debug_corevillers )
   if(1) {
     return;
   }
@@ -3943,7 +3496,6 @@ aigroup_soldierthink(tracker) {
 }
 
 camper_trigger_think(trigger) {
-  // wait( 0.05 );
   tokens = strtok(trigger.script_linkto, " ");
   spawners = [];
   nodes = [];
@@ -3978,7 +3530,6 @@ camper_trigger_think(trigger) {
       continue;
     }
     if(isDefined(spawner.script_spawn_here)) {
-      // these guys spawn where they're placed
       continue;
     }
 
@@ -4006,7 +3557,6 @@ move_when_enemy_hides(nodes) {
   waitingForEnemyToDisappear = false;
 
   while(1) {
-    // it is important that we check whether our enemy is defined before doing a cansee check on him.
     if(!isalive(self.enemy)) {
       self waittill("enemy");
       waitingForEnemyToDisappear = false;
@@ -4015,7 +3565,6 @@ move_when_enemy_hides(nodes) {
 
     if(isPlayer(self.enemy)) {
       if(self.enemy ent_flag("player_has_red_flashing_overlay") || flag("player_flashed")) {
-        // player is wounded, chase him with a suicide charge. One must fall!
         self.fixednode = 0;
         for(;;) {
           self.goalradius = 180;
@@ -4034,14 +3583,12 @@ move_when_enemy_hides(nodes) {
       waitingForEnemyToDisappear = false;
     } else {
       if(self cansee(self.enemy)) {
-        // enemy is seen, wait until you cant see him
         waitingForEnemyToDisappear = true;
       }
       wait .05;
       continue;
     }
 
-    // you cant see him, 2 / 3rds of the time move to a different node
     if(randomint(3) > 0) {
       node = find_unclaimed_node(nodes);
       if(isDefined(node)) {
@@ -4058,8 +3605,6 @@ claim_a_node(claimed_node, old_claimed_node) {
   claimed_node.claimed = true;
   if(isDefined(old_claimed_node))
     old_claimed_node.claimed = false;
-
-  // 	self OrientMode( "face angle", claimed_node.angles[ 1 ] );
 }
 
 find_unclaimed_node(nodes) {
@@ -4072,8 +3617,6 @@ find_unclaimed_node(nodes) {
   return undefined;
 }
 
-// flood_spawner
-
 flood_trigger_think(trigger) {
   assertEX(isDefined(trigger.target), "flood_spawner at " + trigger.origin + " without target");
 
@@ -4083,7 +3626,7 @@ flood_trigger_think(trigger) {
   array_thread(floodSpawners, ::flood_spawner_init);
 
   trigger waittill("trigger");
-  // reget the target array since targets may have been deletes, etc... between initialization and triggering
+
   floodSpawners = getEntArray(trigger.target, "targetname");
 
   array_thread(floodSpawners, ::flood_spawner_think, trigger);
@@ -4106,7 +3649,6 @@ two_stage_spawner_think(trigger) {
   assertEx(issubstr(trigger_target.classname, "trigger"), "Triggers with targetname two_stage_spawner must target a trigger");
   assertEx(isDefined(trigger_target.target), "The second trigger of a two_stage_spawner must target at least one spawner");
 
-  // wait until _spawner has initialized before adding spawn functions
   waittillframeend;
 
   spawners = getEntArray(trigger_target.target, "targetname");
@@ -4136,9 +3678,6 @@ flood_spawner_think(trigger) {
   self notify("stop current floodspawner");
   self endon("stop current floodspawner");
 
-  // pyramid spawner is a spawner that targets another spawner or spawners
-  // First the targetted spawners spawn, then when they die, the reinforcement spawns from
-  // the spawner this initial spawner
   if(is_pyramid_spawner()) {
     pyramid_spawn(trigger);
     return;
@@ -4178,7 +3717,6 @@ flood_spawner_think(trigger) {
       }
     }
 
-    // soldier was deleted, not killed
     if(!isDefined(soldier)) {
       continue;
     }
@@ -4202,7 +3740,6 @@ player_saw_kill(guy, attacker) {
     }
 
     if(distance(attacker.origin, level.player.origin) < 200) {
-      // player was near the guy that killed the ai?
       return true;
     }
   } else {
@@ -4212,18 +3749,15 @@ player_saw_kill(guy, attacker) {
       }
 
       if(distance(attacker.origin, level.player.origin) < 200) {
-        // player was near the guy that killed the ai?
         return true;
       }
     }
   }
 
   if(distance(guy.origin, level.player.origin) < 200) {
-    // player was near the guy that got killed?
     return true;
   }
 
-  // did the player see the guy die?
   return bulletTracePassed(level.player getEye(), guy getEye(), false, undefined);
 }
 
@@ -4254,15 +3788,11 @@ pyramid_spawn(trigger) {
       wait(0.5);
   }
 
-  // first spawn all the guys we target. They decrement our count tho, so we spawn them in a random order in case
-  // our count is just 1( default )
-
   spawners = getEntArray(self.target, "targetname");
 
   for(i = 0; i < spawners.size; i++)
     assertEx(issubstr(spawners[i].classname, "actor"), "Pyramid spawner targets non AI!");
 
-  // the spawners have to report their death to the head of the pyramid so it can kill itself when they're all gone
   self.spawners = 0;
   array_thread(spawners, ::pyramid_spawner_reports_death, self);
 
@@ -4276,12 +3806,10 @@ pyramid_spawn(trigger) {
       offset = 0;
     spawner = spawners[offset];
 
-    // the count is local to self, not to the spawners that are targetted
     spawner set_count(1);
 
     soldier = spawner spawn_ai();
     if(spawn_failed(soldier)) {
-      // 			assertEx( 0, "Initial spawning from spawner at " + self.origin + " failed." );
       wait(2);
       continue;
     }
@@ -4303,7 +3831,6 @@ pyramid_spawn(trigger) {
 
     offset = randomint(spawners.size);
     for(i = 0; i < spawners.size; i++) {
-      // cleanup in case any spawners were deleted
       spawners = array_removeUndefined(spawners);
 
       if(!spawners.size) {
@@ -4318,11 +3845,10 @@ pyramid_spawn(trigger) {
 
       spawner = spawners[offset];
 
-      // find a spawner that has lost its AI
       if(isalive(spawner.spawn)) {
         continue;
       }
-      // spawn from self now, we're reinforcement			
+
       if(isDefined(spawner.target)) {
         self.target = spawner.target;
       } else {
@@ -4360,8 +3886,7 @@ expand_goalradius(trigger) {
   if(isDefined(self.script_forcegoal)) {
     return;
   }
-  // triggers with a script_radius of - 1 dont override the goalradius
-  // triggers with a script_radius of anything else set the goalradius to that size
+
   radius = level.default_goalradius;
   if(isDefined(trigger)) {
     if(isDefined(trigger.script_radius)) {
@@ -4374,7 +3899,7 @@ expand_goalradius(trigger) {
   if(isDefined(self.script_forcegoal)) {
     return;
   }
-  // expands the goalradius of the ai after they reach there initial goal.
+
   self endon("death");
   self waittill("goal");
   self.goalradius = radius;
@@ -4399,71 +3924,6 @@ traceShow(org) {
     wait(0.05);
   }
 }
-
-/*drophealth()
-{
-	// wait until regular scripts have a change to set self.script_nohealth on the guy from script, after spawn_failed.
-	waittillframeend;
-	waittillframeend;
-
-	if( !isalive( self ) )
-		return;
-	
-	if( isDefined( self.script_nohealth ) )
-		return;
-	
-	self waittill( "death" );
-	
-	if( !isDefined( self ) )
-		return;
-		
-	// drop health disabled once again
-	if( 1 )
-		return;
-		
-
-	// has enough time passed since the last health drop?
-	if( gettime() < level.next_health_drop_time )
-		return;
-		
-	// have enough guys died?
-	level.guys_to_die_before_next_health_drop -- ;
-	if( level.guys_to_die_before_next_health_drop > 0 )
-		return;
-	
-	level.guys_to_die_before_next_health_drop = randomintrange( 2, 5 );
-	level.next_health_drop_time = gettime() + 3500;// probably make this a _gameskill thing later
-	
-	trace = bulletTrace( self.origin + ( 0, 0, 50 ), self.origin + ( 0, 0, -220 ), true, self );
-	health = spawn( "script_model", self.origin + ( 0, 0, 10 ) );
-	health.origin = trace[ "position" ];
-// 	health setModel( "com_trashbag" );
-	
-	trigger = spawn( "trigger_radius", self.origin + ( 0, 0, 10 ), 0, 10, 32 );
-	trigger.radius = 10;
-
-	trigger drop_health_trigger_think();	
-	
-	trigger delete();
-	health delete();
-	
-
-// 	health = spawn( "item_health", self.origin + ( 0, 0, 10 ) );
-// 	health.angles = ( 0, randomint( 360 ), 0 );
-
-	/*
-	if( isDefined( level._health_queue ) )
-	{
-		if( isDefined( level._health_queue[ level._health_queue_num ] ) )
-			level._health_queue[ level._health_queue_num ] delete();
-	}
-
-	level._health_queue[ level._health_queue_num ] = health;
- 	level._health_queue_num++;
- 	if( level._health_queue_num > level._health_queue_max )
-	 	level._health_queue_num = 0;
-	*/
-//}
 
 show_bad_path() {
   if(getdebugdvar("debug_badpath_count") == "")
@@ -4498,7 +3958,7 @@ show_bad_path() {
 
 random_spawn(trigger) {
   trigger waittill("trigger");
-  // get a random target and all the links to that target and spawn them
+
   spawners = getEntArray(trigger.target, "targetname");
   if(!spawners.size)
     return;
@@ -4506,7 +3966,7 @@ random_spawn(trigger) {
 
   spawners = [];
   spawners[spawners.size] = spawner;
-  // grab the other spawners linked to the parent spawner
+
   if(isDefined(spawner.script_linkto)) {
     links = strTok(spawner.script_linkto, " ");
     for(i = 0; i < links.size; i++) {
@@ -4514,7 +3974,7 @@ random_spawn(trigger) {
     }
   }
 
-  waittillframeend; // _load needs to finish entirely before we can add spawn functions to spawners
+  waittillframeend;
   array_thread(spawners, ::add_spawn_function, ::blowout_goalradius_on_pathend);
   array_thread(spawners, ::spawn_ai);
 }
@@ -4548,7 +4008,7 @@ objective_event_init(trigger) {
 
 setup_ai_eq_triggers() {
   self endon("death");
-  // ai placed in the level run their spawn func before the triggers are initialized
+
   waittillframeend;
 
   self.is_the_player = isPlayer(self);
@@ -4629,15 +4089,13 @@ death_achievements() {
   self waittill("death", attacker, type, weapon);
 
   if(!isDefined(self))
-    return; // deleted
+    return;
   if(!self isBadGuy())
     return;
   if(!isDefined(attacker)) {
     return;
   }
-  //	thread achieve_ten_plus_hellfire( attacker );->moved to _REMOVEMISSLE
 
-  //dont want these to include long death because it's not as obvious
   thread achieve_2_birds_1_stone(attacker, type);
   thread achieve_driveby(attacker);
   thread achieve_harder_they_fall(attacker);
@@ -4647,7 +4105,6 @@ death_achievements() {
   thread achieve_stealth_knife(attacker, type);
   thread achieve_threesome(attacker, type, weapon);
 
-  //long deaths
   if(isDefined(self.last_dmg_type))
     type = self.last_dmg_type;
 
@@ -4659,9 +4116,9 @@ death_achievements() {
 death_achievements_rappel_hack() {
   self waittill("rope_death", attacker);
 
-  if(!isDefined(self))
-    return; // deleted
-
+  if(!isDefined(self)) {
+    return;
+  }
   thread achieve_harder_they_fall(attacker);
 }
 
@@ -4889,10 +4346,8 @@ achieve_slowmo_breach_kills(attacker) {
   else
     attacker.achieve_slowmo_breach_kills++;
 
-  //wait a second to make sure the player didn't fire off a 5th shot in a reasonable amount of time
   wait .1;
 
-  //killed a hostage
   if(!isDefined(attacker.achieve_slowmo_breach_kills)) {
     return;
   }

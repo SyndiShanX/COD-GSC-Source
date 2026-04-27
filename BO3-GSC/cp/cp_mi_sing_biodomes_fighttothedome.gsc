@@ -27,62 +27,32 @@
 #using scripts\shared\vehicles\_hunter;
 #namespace cp_mi_sing_biodomes_fighttothedome;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function objective_fighttothedome_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_fighttothedome_init() {}
 
-function end_fade_out() {
-  // Unsupported VM revision (1B).
-}
+function end_fade_out() {}
 
-function function_e6379a2() {
-  // Unsupported VM revision (1B).
-}
+function function_e6379a2() {}
 
-function function_76c56ee1() {
-  // Unsupported VM revision (1B).
-}
+function function_76c56ee1() {}
 
-function function_868ce0d5() {
-  // Unsupported VM revision (1B).
-}
+function function_868ce0d5() {}
 
-function function_646d5121() {
-  // Unsupported VM revision (1B).
-}
+function function_646d5121() {}
 
-function function_df8adf84() {
-  // Unsupported VM revision (1B).
-}
+function function_df8adf84() {}
 
-function function_f68b9e51() {
-  // Unsupported VM revision (1B).
-}
+function function_f68b9e51() {}
 
-function function_2ed72358() {
-  // Unsupported VM revision (1B).
-}
+function function_2ed72358() {}
 
-function function_c4de5eee() {
-  // Unsupported VM revision (1B).
-}
+function function_c4de5eee() {}
 
-function check_for_death() {
-  // Unsupported VM revision (1B).
-}
+function check_for_death() {}
 
-function function_daf71f6() {
-  // Unsupported VM revision (1B).
-}
+function function_daf71f6() {}
 
-function objective_fighttothedome_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_fighttothedome_done() {}
 
-function function_3d342090() {
-  // Unsupported VM revision (1B).
-}
+function function_3d342090() {}

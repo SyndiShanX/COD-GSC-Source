@@ -33,8 +33,6 @@ patrol(start_target) {
 
   self set_patrol_run_anim_array();
 
-  // 1st boolean, true is for origins, false is for nodes
-  // 2nd boolean, true is for targetname linking, false is for linkto
   get_goal_func["ent"][true] = ::get_target_ents;
   get_goal_func["ent"][false] = ::get_linked_ents;
   get_goal_func["node"][true] = ::get_target_nodes;
@@ -97,8 +95,6 @@ patrol(start_target) {
   nextgoal = currentgoal;
   for(;;) {
     while(isDefined(nextgoal.patrol_claimed)) {
-      // self animscripted( "scripted_animdone", self.origin, self.angles, getGenericAnim( "pause" ) );
-      // self waittill( "scripted_animdone" );
       wait 0.05;
     }
 
@@ -108,14 +104,11 @@ patrol(start_target) {
 
     assertex(!isDefined(currentgoal.patrol_claimed), "Goal was already claimed");
     currentgoal.patrol_claimed = true;
-    // self thread showclaimed( currentgoal );
 
-    //this is for stealth code...so we can send him back to his patrol node if need be
     self.last_patrol_goal = currentgoal;
 
     [[set_goal_func[goal_type]]](currentgoal);
-    //check for both defined and size - because ents dont have radius defined by
-    //default - but nodes do - and that radius is 0 by default.
+
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
       self.goalradius = currentgoal.radius;
     else
@@ -125,7 +118,6 @@ patrol(start_target) {
 
     currentgoal notify("trigger", self);
 
-    //HANDLE SCRIPT_FLAG_SET and friends - z
     if(isDefined(currentgoal.script_flag_set)) {
       flag_set(currentgoal.script_flag_set);
     }
@@ -158,13 +150,10 @@ patrol(start_target) {
     animType = currentgoal.script_animation;
 
     if(isDefined(animType)) {
-      // come to a stop
       self patrol_do_stop_transition_anim(animType, reactionAnimThread);
 
-      //for pets
       self.patrol_script_animation = 1;
 
-      // now pick the anim to use and do it
       anime = patrol_idle_anim_table[animType];
       if(isDefined(anime)) {
         if(animType == "pause") {
@@ -177,7 +166,6 @@ patrol(start_target) {
 
         self anim_generic_custom_animmode(self, "gravity", anime, undefined, reactionAnimThread);
 
-        // if we should keep moving, and we're not going to spin around, start walking forward again
         if(currentgoals.size && animType != "turn180") {
           self patrol_do_start_transition_anim(animType, reactionAnimThread);
         }
@@ -187,7 +175,6 @@ patrol(start_target) {
     }
 
     if(!currentgoals.size) {
-      // see if we have a custom end idle to do, but don't do it if we already did an idle on this node (can't guarantee a good-looking blend)
       if(isDefined(self.patrol_end_idle) && !isDefined(animType)) {
         self patrol_do_stop_transition_anim("path_end_idle", reactionAnimThread);
 
@@ -263,7 +250,6 @@ turn_180_move_start_func() {
 
   vec1 = anglesToForward(self.angles);
 
-  // if the goal is behind him - do a 180 anim
   if(vectordot(vec1, vec2) < -0.5) {
     self animmode("zonly_physics", false);
     self orientmode("face current");
@@ -275,7 +261,7 @@ turn_180_move_start_func() {
     self SetFlaggedAnimKnobAllRestart("move", turnAnim, %root, 1);
 
     if(animHasNotetrack(turnAnim, "code_move")) {
-      self animscripts\shared::DoNoteTracks("move"); // return on code_move
+      self animscripts\shared::DoNoteTracks("move");
       self OrientMode("face motion");
       self animmode("none", false);
     }
@@ -408,10 +394,6 @@ showclaimed(goal) {
   }
 }
 
-//////////////////////////////////////////////////////////??//////////////////
-/*									PETS									*/
-//////////////////////////////////////////////////////////??//////////////////
-
 linkPet() {
   if(isDefined(self.patrol_pet)) {
     self.patrol_pet thread pet_patrol();
@@ -421,7 +403,7 @@ linkPet() {
   if(!isDefined(self.script_pet)) {
     return;
   }
-  waittillframeend; // make sure everyone is spawned;
+  waittillframeend;
 
   pets = getaispeciesarray(self.team, "dog");
   pet = undefined;
@@ -462,11 +444,9 @@ pet_patrol() {
 
   self.goalradius = 4;
   self.allowdeath = true;
-  //	self.script_patroller = 1;		
 
   positions = pet_patrol_create_positions();
 
-  //find out where the dog is spawned...left or right
   forward = vectornormalize(self.origin - self.patrol_master.origin);
   right = anglestoright(self.patrol_master.angles);
 
@@ -474,7 +454,7 @@ pet_patrol() {
   if(vectordot(forward, right) > 0)
     curr_pos = "right";
 
-  wait 1; // wait for everyone to actually start moving
+  wait 1;
 
   self thread pet_patrol_handle_move_state();
   self thread pet_patrol_handle_movespeed();
@@ -484,8 +464,6 @@ pet_patrol() {
   while(1) {
     if(isDefined(self.patrol_master) && !isDefined(self.patrol_master.patrol_script_animation)) {
       positions = pet_patrol_init_positions(positions);
-
-      //pet_debug_positions( positions );
 
       if(curr_pos == "null") {
         curr_pos = "back";
@@ -546,20 +524,17 @@ pet_patrol_create_positions() {
 }
 
 pet_patrol_init_positions(positions) {
-  //dont want to use angles because of animations when in idle
   angles = vectortoangles(self.patrol_master.last_patrol_goal.origin - self.patrol_master.origin);
 
-  //calculate the goal pos
   origin = self.patrol_master.origin;
   right = anglestoright(angles);
   forward = anglesToForward(angles);
 
-  //don't do positions.size because the array will constantly grow.
-  positions["right"].origin = origin + vector_multiply(right, 40) + vector_multiply(forward, 30); // right
-  positions["left"].origin = origin + vector_multiply(right, -40) + vector_multiply(forward, 30); // left
-  positions["back_right"].origin = origin + vector_multiply(right, 32) + vector_multiply(forward, -16); // back right
-  positions["back_left"].origin = origin + vector_multiply(right, -32) + vector_multiply(forward, -16); // back left
-  positions["back"].origin = origin + vector_multiply(forward, -48); // back
+  positions["right"].origin = origin + vector_multiply(right, 40) + vector_multiply(forward, 30);
+  positions["left"].origin = origin + vector_multiply(right, -40) + vector_multiply(forward, 30);
+  positions["back_right"].origin = origin + vector_multiply(right, 32) + vector_multiply(forward, -16);
+  positions["back_left"].origin = origin + vector_multiply(right, -32) + vector_multiply(forward, -16);
+  positions["back"].origin = origin + vector_multiply(forward, -48);
   positions["null"].origin = self.origin;
 
   keys = getarraykeys(positions);
@@ -621,21 +596,16 @@ pet_patrol_handle_move_state(walkdist) {
   self.patrol_master endon("death");
 
   if(isDefined(self.patrol_master.script_noteworthy) && (self.patrol_master.script_noteworthy == "cqb_patrol")) {
-    //always walk
     self set_dog_walk_anim();
     return;
   }
 
   if(!isDefined(walkdist))
-    walkdist = 200; //was 200
+    walkdist = 200;
 
-  //min_walkdist = 30;
-
-  //move_state = "walk";
   self set_dog_walk_anim();
 
   while(1) {
-    //wait first so we have a self.patrol_goal_pos;
     wait .1;
 
     origin = self.patrol_goal_pos;
@@ -643,7 +613,6 @@ pet_patrol_handle_move_state(walkdist) {
     dist = distancesquared(self.origin, self.patrol_goal_pos);
 
     if(dist > squared(walkdist)) {
-      //we want to run
       if(self.a.movement == "run") {
         continue;
       }
@@ -651,7 +620,6 @@ pet_patrol_handle_move_state(walkdist) {
       self clear_run_anim();
       self.script_nobark = 1;
     } else if(self.a.movement != "walk") {
-      //we want to walk
       self notify("stopped_while_patrolling");
       self anim_generic_custom_animmode(self, "gravity", "patrol_dog_stop");
       self set_dog_walk_anim();
@@ -675,8 +643,6 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
       origin = self.patrol_goal_pos;
       dist = distancesquared(self.origin, self.patrol_goal_pos);
 
-      //println( self.a.movement + " speed: " + self.moveplaybackrate );
-
       if(dist < squared(16)) {
         if(self.moveplaybackrate > .4)
           self.moveplaybackrate -= .05;
@@ -697,21 +663,17 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
   toofar2rd = toofar * toofar;
 
   while(1) {
-    //wait first so we have a self.patrol_goal_pos;
     wait .05;
 
     origin = self.patrol_goal_pos;
 
     dist = distancesquared(self.origin, self.patrol_goal_pos);
 
-    //println( self.a.movement + " speed: " + self.moveplaybackrate );
-    //running?
     if(self.a.movement != "walk") {
       self.moveplaybackrate = 1;
       continue;
     }
 
-    //too close?
     if(dist < tooclose2rd) {
       if(self.moveplaybackrate > .4)
         self.moveplaybackrate -= .05;

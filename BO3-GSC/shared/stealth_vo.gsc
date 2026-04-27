@@ -10,78 +10,40 @@
 #using scripts\shared\util_shared;
 #namespace stealth_vo;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function stop() {
-  // Unsupported VM revision (1B).
-}
+function stop() {}
 
-function enabled() {
-  // Unsupported VM revision (1B).
-}
+function enabled() {}
 
-function get_stealth_mode() {
-  // Unsupported VM revision (1B).
-}
+function get_stealth_mode() {}
 
-function set_stealth_mode() {
-  // Unsupported VM revision (1B).
-}
+function set_stealth_mode() {}
 
-function set_stealth_mode_internal_thread() {
-  // Unsupported VM revision (1B).
-}
+function set_stealth_mode_internal_thread() {}
 
-function on_voice_event() {
-  // Unsupported VM revision (1B).
-}
+function on_voice_event() {}
 
-function get_line() {
-  // Unsupported VM revision (1B).
-}
+function get_line() {}
 
-function init_level_defaults() {
-  // Unsupported VM revision (1B).
-}
+function init_level_defaults() {}
 
-function ambient_player_thread() {
-  // Unsupported VM revision (1B).
-}
+function ambient_player_thread() {}
 
-function alias_clear() {
-  // Unsupported VM revision (1B).
-}
+function alias_clear() {}
 
-function alias_register() {
-  // Unsupported VM revision (1B).
-}
+function alias_register() {}
 
-function struct_alias_register() {
-  // Unsupported VM revision (1B).
-}
+function struct_alias_register() {}
 
-function function_5714528b() {
-  // Unsupported VM revision (1B).
-}
+function function_5714528b() {}
 
-function function_866c6270() {
-  // Unsupported VM revision (1B).
-}
+function function_866c6270() {}
 
-function function_e3ae87b3() {
-  // Unsupported VM revision (1B).
-}
+function function_e3ae87b3() {}
 
-function function_584c6d3a() {
-  // Unsupported VM revision (1B).
-}
+function function_584c6d3a() {}
 
-function function_500f3ab6() {
-  // Unsupported VM revision (1B).
-}
+function function_500f3ab6() {}
 
-function function_4970c8b8() {
-  // Unsupported VM revision (1B).
-}
+function function_4970c8b8() {}

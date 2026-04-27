@@ -10,7 +10,6 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// --------------------------------------------------------------------------------- fire_off_exploder(current) {
 while(1) {
   exploder(current.script_prefab_exploder);
   if(!isDefined(current.target)) {
@@ -23,9 +22,6 @@ while(1) {
   current = next;
 }
 }
-
-// --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, dialog_wait) {
-// Prevent smoke from happening too frequently
 if(isDefined(level.smoke_throttle)) {
   if(!isDefined(level.smoke_wave_time))
     level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
@@ -39,8 +35,6 @@ if(isDefined(level.smoke_throttle)) {
 
 magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
 array_thread(magic_smoke_grenades, ::smoke_wave_play);
-
-// Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
 if(isDefined(dialog_wait))
   thread dialog_smoke_wave_alert(dialog_wait);
 }
@@ -55,14 +49,10 @@ dialog_smoke_wave_alert(dialog_wait) {
 
   wait dialog_wait;
 
-  // Record the time and go go go.
   level.smoke_wave_time = gettime();
 
-  //Hunter Two-One, Overlord. Advise switching to thermal optics, over.
   radio_dialogue("so_def_inv_thermaloptics");
 }
-
-// --------------------------------------------------------------------------------- btr80_level_init() {
 if(isDefined(level.btr80_init)) {
   return;
 }
@@ -95,7 +85,7 @@ for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
     case "player_inside_nates":
     case "player_in_burgertown":
     case "player_in_diner":
-      // Do nothing, keep in the list.
+
       break;
     default:
       level.btr80_building_checks[i] = undefined;
@@ -140,19 +130,17 @@ btr80_watch_for_player() {
     if(!btr80_can_see_player(player)) {
       continue;
     }
-    self notify("new_target"); // Clears ambient target shooting
+    self notify("new_target");
     self.turret_busy = true;
     self ent_flag_set("spotted_player");
-    player.btr80_attacker_id = self.unique_id; // Claim this player for myself.
+    player.btr80_attacker_id = self.unique_id;
     self Vehicle_SetSpeed(0, 10);
 
-    //saw player, now miss for 2 bursts
     btr80_miss_player(player);
     wait(randomfloatrange(0.8, 2.4));
     btr80_miss_player(player);
     wait(randomfloatrange(0.8, 2.4));
 
-    //if player is still exposed then hit him
     while(btr80_can_see_player(player)) {
       btr80_fire_at_player(player);
       wait(randomfloatrange(0.5, 1.5));
@@ -176,7 +164,7 @@ btr80_fire_at_player(player) {
   burstsize = randomintrange(3, 5);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32)); //randomvec was 50
+    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -185,7 +173,6 @@ btr80_fire_at_player(player) {
 btr80_miss_player(player) {
   self endon("death");
 
-  //point in front of player
   forward = anglesToForward(player.angles);
   forwardfar = vector_multiply(forward, 100);
   miss_vec = forwardfar + randomvector(50);
@@ -358,7 +345,7 @@ dialog_btr80_spotted_you_action() {
   if(!btr80_can_see_player(spotted_player)) {
     return;
   }
-  // Prevent btr80 dialog from happening too frequently
+
   if(isDefined(level.btr80_alert_throttle)) {
     if(!isDefined(level.btr80_alert_time))
       level.btr80_alert_time = gettime() - level.btr80_alert_throttle - 1;
@@ -370,13 +357,8 @@ dialog_btr80_spotted_you_action() {
     level.btr80_alert_time = gettime();
   }
 
-  //Enemy BTR has a visual on you, Hunter Two-One, advise seeking cover, over.
-  //Hunter Two-One, be advised enemy BTR is targetting you, over.
   radio_dialogue("so_def_inv_bmpspottedyou");
 }
-
-// --------------------------------------------------------------------------------- hunter_enemies_level_init() {
-// Always re-init this as it can get overwritten at the end of a wave.
 set_group_advance_to_enemy_parameters(30000, 2);
 
 if(isDefined(level.hunters_init)) {
@@ -424,7 +406,6 @@ create_hunter_enemy_group(enemy_tag, enemy_count) {
     }
   }
 
-  // Only say something if we spawned at least 10 guys.
   if(enemies_spawned >= 10)
     thread dialog_hunter_enemies(enemy_tag, 2.5);
 
@@ -465,7 +446,6 @@ hunter_enemy_maintain_closest_goal() {
   self.goalradius = 2048;
   self.goalheight = 768;
 
-  // Figure out at what time we'll get bored.
   boredom_time_base = 30000;
   boredom_time_fuzz = 90000;
   boredom_time = gettime() + boredom_time_base + randomint(boredom_time_fuzz);
@@ -477,14 +457,11 @@ hunter_enemy_maintain_closest_goal() {
       closest_goal = getclosest(closest_player.origin, level.hunter_goals);
       if(!isDefined(self.current_goal) || (self.current_goal != closest_goal)) {
         waittillframeend;
-        //waittillframeend because you may be in the part of the frame that is before
-        //the script has received the "death" notify but after the AI has died.
 
         self.current_goal = closest_goal;
         self setgoalpos(self.current_goal.origin);
       }
     } else {
-      // Bored... so get more aggressive.
       self.hunter_is_bored = true;
       self.aggressivemode = true;
       self setgoalentity(getclosest(self.origin, level.players));
@@ -492,7 +469,6 @@ hunter_enemy_maintain_closest_goal() {
       self setEngagementMaxDist(640, 1024);
 
       while(true) {
-        // While still refilling the population, don't get ultra aggressive.
         if(isDefined(level.hunter_refill_active)) {
           wait 1;
           continue;
@@ -503,7 +479,6 @@ hunter_enemy_maintain_closest_goal() {
           continue;
         }
 
-        // We are now *really* bored. Shrink engagement distance a lot.
         self.goalradius = 512;
         self.goalheight = 256;
         self setEngagementMinDist(0, 0);
@@ -511,11 +486,10 @@ hunter_enemy_maintain_closest_goal() {
         self.combatmode = "no_cover";
         self set_ignoreSuppression(true);
         if(!isDefined(level.hunters_all_in_active)) {
-          // Only need to set this once.
           level.hunters_all_in_active = true;
           set_group_advance_to_enemy_parameters(2000, level.hunters_all_in);
         }
-        // Nothing left to do but die.
+
         return;
       }
     }
@@ -525,7 +499,6 @@ hunter_enemy_maintain_closest_goal() {
 }
 
 hunter_check_become_bored(bored_time) {
-  // No more than level.hunters_all_in count can be bored at a time.
   bored_guys = 0;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
@@ -535,19 +508,15 @@ hunter_check_become_bored(bored_time) {
   if(bored_guys >= level.hunters_all_in)
     return false;
 
-  // If our timer expires, then go go go.
   if(gettime() >= bored_time)
     return true;
 
-  // Once the population gets small enough, make EVERYONE bored and charge the player.
   if(!isDefined(level.hunter_refill_active) && (level.hunters_active <= level.hunters_all_in))
     return true;
 
-  // If there is already a random hunter, then no.
   if(isDefined(level.bored_hunter))
     return false;
 
-  // No bored hunter available, so it's us now!
   level.bored_hunter = self.unique_id;
   return true;
 }
@@ -568,9 +537,6 @@ hunter_enemies_refill(refill_at, min_fill, max_fill, refill_max) {
   if(!isDefined(max_fill) || (max_fill <= min_fill))
     max_fill = min_fill + 1;
 
-  // This includes any currently active hunters in the level so we can maintain a LEVEl max which is the intent.
-  // Namely if a truck was spawned, this will be aware of them.
-  // If the truck is spawned after this thread is started then it will not be aware of them.
   if(isDefined(refill_max)) {
     if(isDefined(level.hunters_active) && (level.hunters_active > 0))
       refill_max -= level.hunters_active;
@@ -607,7 +573,6 @@ hunter_enemies_refill(refill_at, min_fill, max_fill, refill_max) {
       }
     }
 
-    // Give it a moment before checking again.
     if(isDefined(level.hunter_refill_active) && level.hunter_refill_active)
       wait 1;
   }
@@ -640,7 +605,6 @@ hunter_enemies_get_spawn_option(last_spawn) {
   if(!flag("so_player_near_burgertown"))
     spawn_options[spawn_options.size] = "burger";
 
-  // No "good" options, so just pick a random one.
   if(spawn_options.size <= 0) {
     spawn_options[spawn_options.size] = "bank";
     spawn_options[spawn_options.size] = "gas";
@@ -648,7 +612,6 @@ hunter_enemies_get_spawn_option(last_spawn) {
     spawn_options[spawn_options.size] = "burger";
   }
 
-  // Only try for a new option if we have more than one.
   i = 0;
   if(spawn_options.size > 1) {
     i = randomint(spawn_options.size);
@@ -766,7 +729,6 @@ hunter_check_wave_complete() {
 }
 
 dialog_hunter_enemies(enemy_tag, wait_time) {
-  // Prevent hunter spawn dialogs from happening too frequently
   if(isDefined(level.hunter_dialog_throttle)) {
     if(!isDefined(level.hunter_dialog_time))
       level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
@@ -791,53 +753,45 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
   if(!isDefined(level.dialog))
     level.dialog = [];
 
-  //Hunter Two-One this is Overlord Actual, we're seeing enemy reinforcements to your north, over.	
   level.dialog["bank_enemies"][0] = "inv_hqr_enemynorth";
-  //Be advised Hunter Two-One, you got enemy infantry by that bank to the north, over.	
+
   level.dialog["bank_enemies"][1] = "inv_hqr_banktonorth";
-  //Hunter Two-One, be advised, enemy foot-mobiles approaching north of your location, over.	
+
   level.dialog["bank_enemies"][2] = "inv_hqr_footmobiles";
 
-  //Hunter Two-One, Hunter Four has a visual on hostiles near the Nova gas station, over.	
   level.dialog["gas_station_enemies"][0] = "inv_hqr_novagasstation";
-  //Hunter Two-One, relay from Goliath Two, enemy reinforcements approaching from the west, over.	
+
   level.dialog["gas_station_enemies"][1] = "inv_hqr_enemywest";
-  //Hunter Two-One, tangos approaching near the diner to the west, over.	
+
   level.dialog["gas_station_enemies"][2] = "inv_hqr_dinerwest";
 
-  //Hunter Two-One, Overlord. Enemy foot-mobiles approaching you from the southeast, over.	
   level.dialog["taco_enemies"][0] = "inv_hqr_southeast";
-  //Hunter Two-One, Goliath One has a visual on hostiles coming from the southeast, over.	
+
   level.dialog["taco_enemies"][1] = "inv_hqr_visualse";
-  //Hunter Two-One, be advised, enemy foot-mobiles have been sighted near the taco joint, over.	
+
   level.dialog["taco_enemies"][2] = "inv_hqr_tacojoint";
 
-  //Be advised Hunter Two-One, you have enemy foot mobiles by the Burger Town to the south, over.
   level.dialog["burger_town_enemies"][0] = "so_def_inv_mobilesouth";
   level.scr_radio["so_def_inv_mobilesouth"] = "so_def_inv_mobilesouth";
-  //Hunter Two-One, Overlord, be advised potential attackers from the south, over.
+
   level.dialog["burger_town_enemies"][1] = "so_def_inv_attacksouth";
   level.scr_radio["so_def_inv_attacksouth"] = "so_def_inv_attacksouth";
-  //Hunter Two-One, Hunter Four has a identified a large hostile group near the Burger Town, over.
+
   level.dialog["burger_town_enemies"][2] = "so_def_inv_hostilesouth";
   level.scr_radio["so_def_inv_hostilesouth"] = "so_def_inv_hostilesouth";
 
-  //Hunter Two-One, enemy predator drone has spotted you, advise taking cover, over.
   level.dialog["drone_spotted"][0] = "so_def_inv_dronespotted";
   level.scr_radio["so_def_inv_dronespotted"] = "so_def_inv_dronespotted";
-  //Hunter Two-One, be advised enemy drone has noticed you, over.
+
   level.dialog["drone_spotted"][1] = "so_def_inv_dronenotice";
   level.scr_radio["so_def_inv_dronenotice"] = "so_def_inv_dronenotice";
 
-  //Hunter Two-One, enemy drone is targetting you, seek cover, over.
   level.dialog["drone_shooting"][0] = "so_def_inv_dronetarget";
   level.scr_radio["so_def_inv_dronetarget"] = "so_def_inv_dronetarget";
-  //Enemy drone is firing directly on your position Hunter Two-One, over.
+
   level.dialog["drone_shooting"][1] = "so_def_inv_dronedirect";
   level.scr_radio["so_def_inv_dronedirect"] = "so_def_inv_dronedirect";
 }
-
-// --------------------------------------------------------------------------------- attack_heli_init() {
 if(isDefined(level.attack_heli_init)) {
   return;
 }
@@ -890,17 +844,14 @@ attack_heli_register_death() {
 }
 
 dialog_attack_heli() {
-  //Hunter Two-One, relay from Goliath One: you got an enemy helicopter loaded for bear, approaching your area, over.	
   radio_dialogue("inv_hqr_relaygol1");
 }
 
 dialog_shot_down_heli() {
   wait 3;
-  //Nice one, over.
+
   radio_dialogue("so_def_inv_niceone");
 }
-
-// --------------------------------------------------------------------------------- // Updated to be generic and not depend on specific exact stingers.
 dialog_get_stinger() {
   assertex(isDefined(level.stingers) && (level.stingers.size > 0), "dialog_get_stinger() requires at least one stinger to function correctly.");
   level endon("special_op_terminated");
@@ -911,13 +862,11 @@ dialog_get_stinger() {
   diner_dialog_current = 0;
 
   while(1) {
-    // Have to wait until we have a stinger available.
     if(!isDefined(level.stingers)) {
       wait 1;
       continue;
     }
 
-    // Don't bother if there isn't anyone useful to shoot.
     if(!stinger_enemy_available()) {
       wait 1;
       continue;
@@ -926,7 +875,6 @@ dialog_get_stinger() {
     p1_has_stinger = stinger_player_has(level.player);
     p2_has_stinger = stinger_player_has(level.player2);
 
-    // If either player has a stinger, no need to play dialog.
     if(p1_has_stinger || p2_has_stinger) {
       wait 3;
       continue;
@@ -938,7 +886,6 @@ dialog_get_stinger() {
       continue;
     }
 
-    // When in co-op, find the player closest to a stinger and alert them of that one.
     if(is_coop()) {
       p1_distance = distance(level.player.origin, alert_stinger.origin);
 
@@ -977,7 +924,6 @@ stringer_dialog_throttle_reset() {
 }
 
 stinger_player_has(player) {
-  // If no player, then they definitely don't have a stinger.
   if(!isDefined(player))
     return false;
 
@@ -994,7 +940,6 @@ stinger_enemy_available() {
   if(level.stinger_missile_throttle > gettime())
     return false;
 
-  // If the player has killed one within the last 30 seconds don't remind.
   death_remind_delay = 30000;
 
   if(isDefined(level.attack_heli_count) && (level.attack_heli_count > 0)) {
@@ -1013,20 +958,14 @@ stinger_enemy_available() {
 dialog_fill_diner_stinger() {
   level.diner_dialog = [];
 
-  //Be advised Hunter Two One, AT4 rockets located in the diner to the west, over.
-  //Hunter Two-One, intel indicates a stockpile of AT4 rockets to the west, over.
   level.diner_dialog[level.diner_dialog.size] = "so_def_inv_stingerdiner";
 }
 
 dialog_fill_nates_stinger() {
   level.nates_dialog = [];
 
-  //This is Overlord Actual, AT4 rockets at the supply drop on the roof of Nate's restaurant, over.
-  //Hunter Two-One, check the roof of Nate's restaurant for AT4 rockets, over.
   level.nates_dialog[level.nates_dialog.size] = "so_def_inv_stingernates";
 }
-
-// --------------------------------------------------------------------------------- stinger_maintain_spawn(stinger_id) {
 level endon("special_op_terminated");
 
 level.stingers[stinger_id] = getent(stinger_id, "script_noteworthy");
@@ -1038,42 +977,9 @@ stinger_origin = stinger.origin;
 stinger_angles = stinger.angles;
 
 garbage_dump = getstruct("stinger_garbage_dump", "script_noteworthy");
-
-// Remove the existing stinger and turn it into an AT4.
 stinger Delete();
 stinger = stinger_respawn(stinger_id, stinger_origin, stinger_angles);
 level.stingers[stinger_id] = stinger;
-
-/*	while( 1 )
-	{
-		stinger waittill( "trigger", player, old_weapon );
-		
-		// If players are grabbing them, never need to remind them.
-		stringer_dialog_throttle_reset();
-		
-		stinger = undefined;
-		level.stingers[ stinger_id ] = undefined;
-		
-		while( !isDefined( stinger ) )
-		{
-			wait 5;
-			close_players = get_within_range( stinger_origin, level.players, 256 );
-			if( close_players.size > 0 )
-				continue;
-
-			close_players = get_within_range( stinger_origin, level.players, 1024 );
-			if( close_players.size > 0 )
-			{
-				if( stinger_player_can_see( stinger_origin ) )
-					continue;
-			}
-
-			stinger = stinger_respawn( stinger_id, stinger_origin, stinger_angles );
-			level.stingers[ stinger_id ] = stinger;
-			if( isDefined( old_weapon ) )
-				old_weapon.origin = garbage_dump.origin;
-		}
-	}*/
 }
 
 stinger_player_can_see(stinger_origin) {
@@ -1093,8 +999,6 @@ stinger_respawn(stinger_id, origin, angles) {
 
   return stinger;
 }
-
-// --------------------------------------------------------------------------------- semtex_maintain_availability() {
 semtex = getEntArray("weapon_semtex_grenade", "classname");
 array_thread(semtex, ::semtex_maintain_self);
 }
@@ -1109,7 +1013,6 @@ semtex_maintain_self() {
   while(1) {
     semtex waittill("trigger", player, old_weapon);
 
-    // Wait for players to leave proximity, then respawn.
     while(semtex_player_is_close(semtex_origin))
       wait 1;
 
@@ -1123,8 +1026,6 @@ semtex_player_is_close(semtex_origin) {
   close_players = get_within_range(semtex_origin, level.players, 1024);
   return close_players.size > 0;
 }
-
-// --------------------------------------------------------------------------------- hellfire_attack_start() {
 if(isDefined(level.hellfire_active)) {
   return;
 }
@@ -1207,26 +1108,21 @@ hellfire_monitor_player(player) {
   level endon("hellfire_attack_pause");
 
   while(1) {
-    // Wait for a while before going after the player.
     wait RandomIntRange(level.hellfire_time_search["min"], level.hellfire_time_search["max"]);
     while(!hellfire_check_player_available(player))
       wait 1;
 
-    // Spotted! Give the player a moment to run...
     hud_warning = hud_display_uav_spotted(player, self.unique_id);
     dialog_hellfire_warn_player("drone_spotted");
 
     wait 2;
 
-    // Threaten our player...
     hellfire_threaten_player(player);
     wait RandomIntRange(level.hellfire_time_breather["min"], level.hellfire_time_breather["max"]);
 
-    // Threaten them again...
     hellfire_threaten_player(player);
     wait RandomIntRange(level.hellfire_time_breather["min"], level.hellfire_time_breather["max"]);
 
-    // If player is still visible, attack them directly until no longer visible or dead
     if(hellfire_check_player_available(player)) {
       hud_display_uav_targetting(hud_warning);
       dialog_hellfire_warn_player("drone_shooting");
@@ -1236,14 +1132,12 @@ hellfire_monitor_player(player) {
       }
     }
 
-    // Once player is hidden, give them one more scare and then move on.
     hellfire_attack_player(player);
     level notify("hellfire_attack_notarget_" + self.unique_id);
   }
 }
 
 dialog_hellfire_warn_player(alias) {
-  // Don't let these happen in too quick of succession
   if(isDefined(level.hellfire_warn_time)) {
     if(level.hellfire_warn_time + 10000 > gettime())
       return;
@@ -1259,7 +1153,6 @@ hellfire_check_player_available(player) {
   if(!isDefined(player))
     return false;
 
-  // Fully incapped players no longer targetted.
   if(is_coop() && is_player_down_and_out(player))
     return false;
 
@@ -1281,7 +1174,7 @@ hellfire_attack_player(player, num_shots) {
     attack_range_y = RandomIntRange(-600, 600);
     attack_range_z = 0;
     attack_spot = player.origin;
-    // On the first attack, always ensure it goes directly at the player.
+
     if(i > 0)
       attack_spot += (attack_range_x, attack_range_y, attack_range_z);
     hellfire_fire_missile(attack_spot);
@@ -1296,11 +1189,11 @@ hellfire_threaten_player(player, max_shots) {
   level endon("hellfire_attack_pause");
 
   targets = getStructArray("so_hellfire_target", "script_noteworthy");
-  targets = get_within_range(player.origin, targets, 1800); // Close enough to feel scary
-  targets = get_outside_range(player.origin, targets, 600); // Outside explosion radius
+  targets = get_within_range(player.origin, targets, 1800);
+  targets = get_outside_range(player.origin, targets, 600);
   if(is_coop()) {
     other_player = get_other_player(player);
-    targets = get_outside_range(other_player.origin, targets, 600); // Outside explosion radius
+    targets = get_outside_range(other_player.origin, targets, 600);
   }
 
   if(!isDefined(max_shots))
@@ -1355,13 +1248,9 @@ hellfire_set_time_breather(time_min, time_max) {
   level.hellfire_time_breather["min"] = time_min;
   level.hellfire_time_breather["max"] = time_max;
 }
-
-// --------------------------------------------------------------------------------- hud_display_wavecount(wave_num) {
-// Little delay so the "Wave Starting in..." can be removed
 wait(1);
 
 foreach(player in level.players) {
-  // For now, it looks like there are waves on all difficulties.
   if(wave_num < 5) {
     player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", player);
     player.hud_wave_count = so_create_hud_item(0, so_hud_ypos(), undefined, player);
@@ -1502,10 +1391,8 @@ hud_display_enemies_pulse_vehicle(hudelem_title, hudelem_count, enemy_total) {
   hudelem_title thread so_hud_pulse_default();
   hudelem_count thread so_hud_pulse_default();
 }
-
-// --------------------------------------------------------------------------------- door_diner_open() {
 diner_back_door = getent("diner_back_door", "targetname");
-diner_back_door rotateyaw(85, .3); //counter clockwise
+diner_back_door rotateyaw(85, .3);
 diner_back_door playSound("diner_backdoor_slams_open");
 diner_back_door connectpaths();
 }
@@ -1523,21 +1410,14 @@ door_bt_locker_open() {
   BT_locker_door rotateyaw(-172, .1, 0, 0);
   BT_locker_door connectpaths();
 }
-
-// --------------------------------------------------------------------------------- so_defense_convert_enemies() {
-// Convert some additional enemies over to available Gas Station enemies
 convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
 convert_enemies = array_merge(convert_enemies, getEntArray("diner_enemy_counter_attack", "targetname"));
 for(i = 0; i < convert_enemies.size; i++)
   convert_enemies[i].targetname = "gas_station_enemies";
-
-// Convert some additional enemies over to available Burger Town enemies
 convert_enemies = getEntArray("burger_town_nates_attackers", "targetname");
 convert_enemies = array_merge(convert_enemies, getEntArray("burger_town_enemy_defenders", "targetname"));
 for(i = 0; i < convert_enemies.size; i++)
   convert_enemies[i].targetname = "burger_town_enemies";
-
-// Make sure we only have the guys inside the burger joint.	
 convert_enemies = getEntArray("burger_town_enemies", "targetname");
 burger_town_include = getent("so_burger_town_enemy_include", "script_noteworthy");
 for(i = convert_enemies.size - 1; i >= 0; i--) {
@@ -1547,7 +1427,6 @@ for(i = convert_enemies.size - 1; i >= 0; i--) {
 }
 
 so_defense_set_enemy_spawner_flags() {
-  // Clear out some flags on enemies being used in the level.
   convert_enemies = getEntArray("gas_station_enemies", "targetname");
   convert_enemies = array_merge(convert_enemies, getEntArray("bank_enemies", "targetname"));
   convert_enemies = array_merge(convert_enemies, getEntArray("taco_enemies", "targetname"));
@@ -1606,5 +1485,3 @@ hud_get_wave_list(title_text) {
 
   return list;
 }
-
-// ---------------------------------------------------------------------------------

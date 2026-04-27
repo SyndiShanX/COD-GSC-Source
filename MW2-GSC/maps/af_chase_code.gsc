@@ -22,24 +22,17 @@ trigger_multiple_speed_think() {
   }
 }
 
-//hmmmmmmmm
-
-/*QUAKED trigger_multiple_speed (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"Set the player vehicle maxspeed with script_speed.*/
-
 ZODIAC_TREADFX_MOVETIME = .2;
 ZODIAC_TREADFX_MOVETIMEFRACTION = 1 / (ZODIAC_TREADFX_MOVETIME + .05);
 ZODIAC_TREADFX_HEIGHTOFFSET = (0, 0, 16);
 
 zodiac_treadfx_chaser(chaseobj) {
-  // self here is the invisible boat for playing leveled wake fx.
   playFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
   self NotSolid();
   self Hide();
   self endon("death");
   chaseobj endon("death");
 
-  // needs to be it's own thread so can cleanup after the thing dies.
   thread zodiac_treadfx_chaser_death(chaseobj);
 
   chaseobj ent_flag_init("in_air");
@@ -48,10 +41,9 @@ zodiac_treadfx_chaser(chaseobj) {
   childthread zodiac_treadfx_toggle(chaseobj);
 
   while(IsAlive(chaseobj)) {
-    //		self DontInterpolate();
     self MoveTo(chaseobj GetTagOrigin("tag_origin") + ZODIAC_TREADFX_HEIGHTOFFSET + (chaseobj Vehicle_GetVelocity() / ZODIAC_TREADFX_MOVETIMEFRACTION), ZODIAC_TREADFX_MOVETIME);
     self RotateTo((0, chaseobj.angles[1], 0), ZODIAC_TREADFX_MOVETIME);
-    wait ZODIAC_TREADFX_MOVETIME + .05; // + .05 to get rid of silly jiggle at the end when issueing back to back moveto's. Code bug I believe.
+    wait ZODIAC_TREADFX_MOVETIME + .05;
     waittillframeend;
   }
   self Delete();
@@ -107,7 +99,6 @@ vehicle_dump() {
   predumpvehicles = getEntArray("script_vehicle", "code_classname");
   vehicles = [];
 
-  // dumping can jump a frame in which the information could be altered, this stores the necessary info real quick
   foreach(vehicle in predumpvehicles) {
     if(IsSpawner(vehicle))
       continue;
@@ -115,7 +106,7 @@ vehicle_dump() {
     struct.classname = vehicle.classname;
     struct.origin = vehicle.origin;
     struct.angles = vehicle.angles;
-    //		struct.spawner_id = vehicle.spawner_id;
+
     struct.speedbeforepause = vehicle Vehicle_GetSpeed();
     struct.script_VehicleSpawngroup = vehicle.script_vehiclespawngroup;
     struct.script_VehicleStartMove = vehicle.script_vehiclestartmove;
@@ -130,7 +121,7 @@ vehicle_dump() {
   fileprint_map_start();
 
   foreach(i, vehicle in vehicles) {
-    origin = fileprint_radiant_vec(vehicle.origin); // convert these vectors to mapfile keypair format
+    origin = fileprint_radiant_vec(vehicle.origin);
     angles = fileprint_radiant_vec(vehicle.angles);
 
     fileprint_map_entity_start();
@@ -194,7 +185,6 @@ zodiac_physics() {
   self childthread listen_jolt();
   self childthread listen_bounce();
   self childthread listen_turn_spray();
-  //	self thread listen_collision();
 }
 
 zodiac_fx(fxName) {
@@ -205,10 +195,9 @@ zodiac_fx(fxName) {
 
   if(isDefined(level._effect[fxName]))
     playFXOnTag(level._effect[fxName], self, tag);
-  //iprintlnbold( fxName );
+
   if(isDefined(level.zodiac_fx_sound[fxname]))
     thread play_sound_on_entity(level.zodiac_fx_sound[fxname]);
-  //println( fxName );
 }
 
 listen_leftground() {
@@ -226,7 +215,7 @@ listen_leftground() {
 
 listen_landed() {
   self endon("death");
-  wait 2; // no ignore the land that happens when they spawn above the water.
+  wait 2;
   flag_wait("player_on_boat");
   for(;;) {
     self waittill("veh_landed");
@@ -258,7 +247,6 @@ trigger_set_water_sheating_time(bump_small, bump_big) {
 }
 
 set_water_sheating_time(bump_small, bump_big) {
-  // duplicated in af_chase_knife_fight_code
   level.water_sheating_time["bump"] = level.water_sheating_time[bump_small];
   level.water_sheating_time["bump_big"] = level.water_sheating_time[bump_big];
 }
@@ -305,17 +293,10 @@ listen_bounce() {
   for(;;) {
     self waittill("veh_boatbounce", force);
 
-    //		if( self == level.players_boat )
-    //			IPrintLnBold( force );
-
     if(force < 50.0) {
-      //playFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_LF" );
-      //playFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_RF" );
       zodiac_fx("zodiac_bounce_small_left");
       zodiac_fx("zodiac_bounce_small_right");
     } else {
-      //playFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_LF" );
-      //playFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_RF" );
       zodiac_fx("zodiac_bounce_large_left");
       zodiac_fx("zodiac_bounce_large_right");
     }
@@ -350,7 +331,6 @@ listen_collision() {
 
     foreach(rider in self.riders) {
       if(IsAlive(rider) && !isDefined(rider.magic_bullet_shield)) {
-        //				rider.specialDeathFunc = animscripts\snowmobile::snowmobile_collide_death;
         rider Kill();
       }
     }
@@ -369,7 +349,6 @@ watchVelocity() {
 }
 
 autosave_boat_chase() {
-  // I should just replace these with real autosave triggers.
   self waittill("trigger");
 
   if(isDefined(self.targetname))
@@ -426,7 +405,6 @@ bread_crumb_chase() {
     count++;
   }
 
-  //	skipped = false;
   foreach(crumb in test_array) {
     vec = anglesToForward(crumb.angles);
     vec2 = VectorNormalize((level.player.origin - crumb.origin));
@@ -452,7 +430,6 @@ bread_crumb_fail() {
     return;
   }
 
-  // Shepherd got away.
   level notify("stop_deadquote_for_gettingout_of_bounds");
   setDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
   if(level.start_point != "test_boat_current")
@@ -495,18 +472,16 @@ is_main_enemy_boat() {
 }
 
 zodiac_boat_ai(boat) {
-  // kill _vehicle_anim stuff. not completely just gets them out of idle loop
   if(!isai(self))
     return;
   self notify("newanim");
 
-  //make them crouch
   self.desired_anim_pose = "crouch";
   self AllowedStances("crouch");
   self thread animscripts\utility::UpdateAnimPose();
   self AllowedStances("crouch");
 
-  self.baseaccuracy = 0; // don't get accurate untill they are in range.
+  self.baseaccuracy = 0;
   self.accuracystationarymod = .5;
 }
 
@@ -530,7 +505,7 @@ heli_attack_player_idle() {
     turret.accuracy = .5;
   }
 
-  if(!flag("rapids_trigger")) // don't care about this particular dialog after the rapids.
+  if(!flag("rapids_trigger"))
     level notify("dialog_helicopter_ahead");
 
   heli SetLookAtEnt(level.player);
@@ -538,7 +513,7 @@ heli_attack_player_idle() {
   while(in_front(level.players_boat, heli))
     wait .05;
 
-  if(!flag("rapids_trigger")) // don't care about this particular dialog after the rapids.
+  if(!flag("rapids_trigger"))
     level notify("dialog_helicopter_six");
 
   foreach(turret in heli.mgturret) {
@@ -547,7 +522,7 @@ heli_attack_player_idle() {
     turret.accuracy = 0;
   }
 
-  wait 3; // let it try to converge then turn it off.
+  wait 3;
 
   heli thread mgoff();
 }
@@ -578,7 +553,7 @@ rumble_with_throttle() {
     rumble_ent.intensity = (throttle * rumble_fraction * throttle_level_fraction);
 
     if(full_throttled_time > throttle_leveling_time || self Vehicle_GetSpeed() > 43) {
-      full_throttled_time = throttle_leveling_time; // probably not necessary. just keeping the number from going really high.
+      full_throttled_time = throttle_leveling_time;
       rumble_ent.intensity = 0;
     }
 
@@ -601,7 +576,6 @@ kill_ai_in_volume() {
   if(guy IsTouching(volume) && !guy is_hero())
     guy Delete();
 
-  //hack.. shortcutting adding another volume. want to delete these fx forever.
   tester = spawn("script_origin", (0, 0, 0));
 
   inc = 0;
@@ -647,7 +621,6 @@ kill_destructibles_and_barrels_in_volume() {
     }
   }
 
-  //dupping script for speed.
   shootable_stuff = getEntArray("explodable_barrel", "targetname");
   foreach(thing in shootable_stuff) {
     thing delete_shootable_stuff_in_volume(volume);
@@ -664,12 +637,11 @@ delete_shootable_stuff_in_volume(volume) {
   if(!self IsTouching(volume)) {
     return;
   }
-  self notify("delete_destructible"); // kill the effects looping first.
+  self notify("delete_destructible");
   self Delete();
 }
 
 disable_origin_offset() {
-  // I need this for more precise hovering with the ramp in the water.
   self.originheightoffset = undefined;
 }
 
@@ -690,7 +662,7 @@ destructible_damage_count_in_radius(count, radius, origin) {
   destructible_toys = get_array_of_closest(origin, getEntArray("destructible_toy", "targetname"), undefined, count, radius, 0);
   foreach(toy in destructible_toys) {
     wait RandomFloatRange(.1, .4);
-    //		toy thread common_scripts\_destructible::force_explosion();
+
     thread destroy_fast(toy);
   }
 }
@@ -739,7 +711,7 @@ raise_attacker_accuracy_while_in_range() {
 
   foreach(rider in self.riders) {
     rider.baseaccuracy = 6;
-    //		rider.baseaccuracy = 10;
+
     rider.suppressionwait = 1000;
   }
 
@@ -748,7 +720,6 @@ raise_attacker_accuracy_while_in_range() {
 
   foreach(rider in self.riders) {
     rider.baseaccuracy = 0;
-    //		rider.ignoreSuppression = false;
   }
 }
 
@@ -758,8 +729,8 @@ boat_in_range_in_front(boat) {
   if(DistanceSquared(boat.origin, level.players_boat.origin) > SQRT_BOATS_IN_RANGE)
     return false;
   dot = get_dot(level.players_boat.origin, level.players_boat.angles, boat.origin);
-  //	if( dot < 0 && DistanceSquared( boat.origin, level.players_boat.origin ) > SQRT_BOATS_IN_RANGE_BEHIND )
-  if(dot < 0.642787) // ~50
+
+  if(dot < 0.642787)
     return false;
   return true;
 }
@@ -809,8 +780,6 @@ conveyerbelt_player_speed_mod() {
   forward = anglesToForward((0, level.VehPhys_SetConveyorBelt_yaw, 0));
   dot = VectorDot(forward, normal);
 
-  //	speed = level.players_boat Vehicle_GetSpeed();
-
   if(flag("enemy_heli_takes_off"))
     mod = 1;
   if(speed > CONVEYERBELT_PLAYER_MAX_SPEED)
@@ -821,7 +790,7 @@ conveyerbelt_player_speed_mod() {
     players_dif = speed - CONVEYERBELT_PLAYER_MIN_SPEED;
     mod = 1 - (players_dif / dif);
   }
-  level.conveyerbelt_player_speed_mod = level.VehPhys_SetConveyorBelt_speed * mod; // for debugging
+  level.conveyerbelt_player_speed_mod = level.VehPhys_SetConveyorBelt_speed * mod;
 
   level.conveyerbelt_player_speed_mod *= level.VehPhys_SetConveyorBelt_speed_fraction;
 
@@ -906,8 +875,6 @@ river_current(noteworthy) {
   while(1) {
     dot = get_dot(next_node.origin, next_angle, level.players_boat.origin);
     if(dot < 0) {
-      //			draw_arrow( current_node.origin , next_node.origin, (0,1,0) );
-
       dot = get_dot(current_node.origin, flat_angle(VectorToAngles(next_node.origin - current_node.origin)), level.players_boat.origin);
       if(dot > 0) {
         wait .05;
@@ -915,7 +882,7 @@ river_current(noteworthy) {
       } else {
         current_node = getstruct(current_node.targetname, "target");
         if(!isDefined(current_node)) {
-          current_node = getstruct(next_node.targetname, "target"); // reset to the first node..
+          current_node = getstruct(next_node.targetname, "target");
           level.players_boat thread conveyerbelt_speed(flat_angle[1], 0, CONVEYER_RATE);
         }
       }
@@ -936,7 +903,7 @@ river_current(noteworthy) {
     next_node = getstruct(current_node.target, "targetname");
     if(!isDefined(next_node)) {
       next_node = current_node;
-      current_node = getstruct(next_node.targetname, "target"); // keep cycling the last section in this case.
+      current_node = getstruct(next_node.targetname, "target");
       wait .05;
       continue;
     }
@@ -988,16 +955,14 @@ get_next_angle(current_node, currentangles) {
 
 enable_bread_crumb_chase() {
   s = spawnStruct();
-  s.checkdepth = 3; // how far up the chain do I crawl to see if we're caught up.
-  s.fail_time = 10; // how far behind the player is allowed to trail..
+  s.checkdepth = 3;
+  s.fail_time = 10;
 
   level endon("quit_bread_crumb");
 
   level.breadcrumb_settings = s;
 
   level.breadcrumb = [];
-
-  //	thread bread_crumb_button();
 
   while(1) {
     bread_crumb_chase();
@@ -1050,7 +1015,7 @@ test_m203() {
       playFXOnTag(effect, level.price, "tag_flash");
       shootpos = level.price.enemy GetShootAtPos() + (0, 0, 150);
       if(Distance(level.price.origin, level.price.enemy.origin) > 1700)
-        shootpos += (0, 0, 150); // I'm just guessing here.magical numbers make grenads go farther..
+        shootpos += (0, 0, 150);
       MagicBullet("m203", start, shootpos);
       wait 2.5;
     }
@@ -1068,7 +1033,7 @@ test_m203_again() {
       playFXOnTag(effect, level.price, "tag_flash");
       shootpos = level.price.enemy GetShootAtPos() + (0, 0, 190);
       if(Distance(level.price.origin, level.price.enemy.origin) > 1700)
-        shootpos += (0, 0, 120); // I'm just guessing here.magical numbers make grenads go farther..
+        shootpos += (0, 0, 120);
       MagicBullet("m203", start, shootpos);
       wait 2.5;
     }
@@ -1076,10 +1041,8 @@ test_m203_again() {
   }
 }
 
-FOV_M203 = 0.965925; // Cos( 15 )
+FOV_M203 = 0.965925;
 DIST_M203_SQRD = 650 * 650;
-
-//good_spot_for_grenade_launcher
 
 has_good_enemy_for_grenade_launcher(start, angles) {
   if(!isDefined(self.enemy))
@@ -1138,8 +1101,6 @@ delete_when_not_in_view() {
     wait .05;
   self Delete();
 }
-
-//movewithrate( dest, destang, moverate, endrate, gravity, accelfraction, decelfraction )
 movewithrate(dest, moverate, accelfraction, decelfraction) {
   self notify("newmove");
   self endon("newmove");
@@ -1149,7 +1110,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
   if(!isDefined(decelfraction))
     decelfraction = 0;
   self.movefinished = false;
-  // moverate = units / persecond
+
   if(!isDefined(moverate))
     moverate = 200;
 
@@ -1166,7 +1127,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
     decel = movetime * decelfraction;
 
   self MoveTo(dest, movetime, accel, decel);
-  //	self RotateTo( destang, movetime, accel, decel );
+
   wait movetime;
 
   if(!isDefined(self))
@@ -1189,9 +1150,9 @@ price_anim_single_on_boat(anim_scene, relink) {
   level.price LinkTo(level.players_boat, "tag_guy2");
   level.players_boat anim_generic_queue(level.price, anim_scene, "tag_guy2");
 
-  if(!relink)
-    return; // assuming a looped anim call follows
-
+  if(!relink) {
+    return;
+  }
   price_link_and_think();
 
   flag_clear("price_anim_on_boat");
@@ -1228,7 +1189,6 @@ boatrider_think(vehicle) {
   self thread boatrider_targets();
   self.fullAutoRangeSq = 2000 * 2000;
 
-  // make Price know about all enemies (helps enemy selection when moving fast)
   self.highlyAwareRadius = 2048;
 
   self AnimCustom(maps\_zodiac_ai::think);
@@ -1239,7 +1199,7 @@ boatrider_targets() {
   level.price endon("death");
   while(1) {
     wait .05;
-    end = level.price maps\_zodiac_drive::drive_magic_bullet_get_end(level.players_boat, level.player getEye(), true); // piggyback this functionality. Price finds the same targets interesting.
+    end = level.price maps\_zodiac_drive::drive_magic_bullet_get_end(level.players_boat, level.player getEye(), true);
 
     if(!isDefined(end.obj)) {
       level.price ClearEntityTarget();
@@ -1281,7 +1241,7 @@ player_lerplink_fov(opts) {
   dest_fov = opts.dest_fov;
 
   level.player FreezeControls(true);
-  // this is ghetto hack..
+
   Assert(time > 0.0);
   timeincs = time * 20;
   current_fov = base_fov;
@@ -1307,7 +1267,7 @@ trigger_thread_the_needle() {
   forward = VectorNormalize(level.players_boat Vehicle_GetVelocity());
   dot = VectorDot(forward, normal);
 
-  if(dot > 0.984807) // cos 10
+  if(dot > 0.984807)
     level.price radio_dialogue("afchase_pri_threadtheneedle", 1);
 }
 
@@ -1315,23 +1275,13 @@ _objective_onentity(id, ent) {
   Objective_OnEntity(id, ent, (0, 0, 80));
   ent waittill("death");
   Objective_Position(id, (0, 0, 0));
-
-  /*
-  ent endon( "death" );
-  while( 1 )
-  {
-  	eye_pos = level.player getEye();
-  	Objective_Position( id, (ent.origin[0],ent.origin[1],eye_pos[2]) );
-  	wait .05;
-  }
-  */
 }
 
 crashable_whizby_boats() {
   self.veh_pathtype = "follow";
   self VehPhys_EnableCrashing();
   while(1) {
-    self waittill("veh_jolt"); // veh_collision wasn't working, just make it crash when it jolts around the player that should do.
+    self waittill("veh_jolt");
     if(Distance(self.origin, level.player.origin) < 512) {
       break;
     }
@@ -1359,7 +1309,7 @@ ignoreall_till_not_touch(guy) {
   prevteam = guy.team;
   guy endon("death");
   guy.ignoreall = true;
-  while(guy IsTouching(self)) // teehee
+  while(guy IsTouching(self))
     wait .05;
   guy.ignoreall = false;
 }
@@ -1427,7 +1377,7 @@ get_boat_rider(num) {
   level.boatrider[num] magic_bullet_shield();
   level.boatrider[num] disable_pain();
   level.boatrider[num].ignoreSuppression = true;
-  level.boatrider[num] set_battlechatter(false); // got enough chatter on the boat.
+  level.boatrider[num] set_battlechatter(false);
   return level.boatrider[num];
 }
 
@@ -1439,7 +1389,7 @@ set_price_auto_switch_pose() {
 ZODIAC_DIALOGUE_RANGE = 3000 * 3000;
 zodiac_enemy_setup() {
   self.dontunloadonend = true;
-  //	self thread zodiac_monitor_player_trailing_time();
+
   foreach(rider in self.riders) {
     rider thread zodiac_boat_ai(self);
   }
@@ -1451,9 +1401,6 @@ zodiac_enemy_setup() {
   while(1) {
     start_origin = level.players_boat.origin;
     end_origin = self.origin;
-    //		normal = VectorNormalize( end_origin - start_origin );
-    //		forward = AnglesToRight( level.players_boat.angles );
-    //		dot = VectorDot( forward, normal );
 
     if(DistanceSquared(self.origin, level.players_boat.origin) > ZODIAC_DIALOGUE_RANGE) {
       wait .05;
@@ -1501,7 +1448,7 @@ handle_fire_missiles() {
   while(1) {
     dofire = true;
     predictorg = fire_volley_of_missiles_predict(level.players_boat Vehicle_GetVelocity());
-    //		draw_arrow( self.origin, predictorg, (1,0,0) );
+
     if(!within_fov_2d(self.origin, self.angles, predictorg, 0.984807753))
       dofire = false;
     if(Distance(self.origin, predictorg) < 2000)
@@ -1521,7 +1468,7 @@ handle_fire_missiles() {
 }
 
 fire_volley_of_missiles_predict(velocity) {
-  return level.players_boat.origin + (velocity * 1.50); // guessing
+  return level.players_boat.origin + (velocity * 1.50);
 }
 
 dialog_fire_volley_of_missiles_at_player(base_origin) {
@@ -1565,7 +1512,6 @@ fire_volley_of_missiles_at_player() {
 
   dialog_fire_volley_of_missiles_at_player(base_origin);
 
-  //	base_origin += ( 0, 0, 24 );
   shot_origin = base_origin;
 
   shotorgs = [];
@@ -1573,14 +1519,10 @@ fire_volley_of_missiles_at_player() {
   linkorg = spawn("script_origin", level.players_boat.origin);
   linkorg thread linkorg(level.players_boat);
 
-  //	if( isDefined( level.players_boat ) )
-  //		thread draw_line_from_ent_to_ent_until_notify( linkorg , level.players_boat , 0 , 1 , 0 , linkorg , "balls" );
-
   for(i = 0; i < number_of_shots; i++) {
     shotorgs[i] = spawn("script_origin", shot_origin);
     shotorgs[i] LinkTo(linkorg);
     shot_origin += velocity * .1;
-    //			thread draw_line_from_ent_to_ent_until_notify( linkorg , shotorgs[i] , 1 , 0 , 1 , linkorg , "balls" );
   }
 
   tags = [];
@@ -1598,7 +1540,7 @@ fire_volley_of_missiles_at_player() {
     missile Missile_SetFlightmodeDirect();
     missile Missile_SetTargetEnt(shotorgs[i]);
     missile thread kill_rpg_shot_behind_player();
-    //		missile delayCall( 2.51, ::Missile_ClearTarget );
+
     wait RandomFloatRange(0.2, 0.3);
   }
   linkorg notify("balls");
@@ -1615,7 +1557,7 @@ linkorg(linkent) {
   offset = self.origin - linkent.origin;
   while(1) {
     self MoveTo(linkent.origin + offset, .05, 0, 0);
-    //		self.origin = linkent.origin + offset;
+
     wait .05;
   }
 }
@@ -1673,7 +1615,6 @@ flip_when_player_dies() {
 
   wait .1;
 
-  //	level.player PlayerLinkWeaponViewToDelta( linkobj, "tag_player", 1.0 );
   level.player PlayerLinkToDelta(offset_obj, "tag_player", 1.0, 0, 0, 0, 0);
   level.player PlayerSetGroundReferenceEnt(offset_obj);
 
@@ -1688,12 +1629,7 @@ flip_when_player_dies() {
     rider Kill();
   }
 
-  //	if( self Vehicle_GetSpeed() > 50 )
-  //		self VehPhys_Crash( true );
-  //	else if( self Vehicle_GetSpeed() > 30 )
   self delayCall(.75, ::VehPhys_Crash);
-
-  //	wait 0.75;
 
   oldorg = self.origin;
   wait .1;
@@ -1701,7 +1637,7 @@ flip_when_player_dies() {
 
   offset_vec = oldorg - self.origin;
   offset_launchpoint = (0, 0, 0);
-  //for spin
+
   offset_launchpoint = (offset_vec[0] * 100, offset_vec[1] * 100, 0);
 
   linkobj PhysicsLaunchServer(linkobj.origin + offset_launchpoint, 8 * boatvelocity + (0, 0, 500));
@@ -1715,14 +1651,13 @@ flip_when_player_dies() {
 }
 
 node_can_reach_spot_infront_of_player(basenode) {
-  //might check basenode moveability
   nodearray = GetNodesInRadius(level.player.origin, 800, 500, 1000, "path");
   forward = anglesToForward(level.player.angles);
   foreach(node in nodearray) {
     normal = VectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
     if(dot > Cos(15)) {
-      level.node_to_reach = node; // in a spawn function
+      level.node_to_reach = node;
       return true;
     }
   }
@@ -1735,7 +1670,7 @@ find_good_node_for_price_to_spawn_at() {
   foreach(node in nodearray) {
     normal = VectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
-    //should spawn on the periphery
+
     if(dot < Cos(45) && dot > 0 && node_can_reach_spot_infront_of_player(node))
       return node;
   }
@@ -1744,9 +1679,9 @@ find_good_node_for_price_to_spawn_at() {
 lower_accuracy_behind_player() {
   self endon("death");
   originalbaseaccuracy = self.baseaccuracy;
-  wait .1; // just in case I'm first.
+  wait .1;
   if(!isDefined(level.players_boat))
-    return; // craziness keeps goiing.
+    return;
   level.players_boat endon("death");
 
   if(isDefined(self.ridingVehicle) && IsSubStr(self.ridingvehicle.classname, "zodiac"))
@@ -1765,17 +1700,6 @@ lower_accuracy_behind_player() {
   }
 }
 
-/*
-point_end( shepherd )
-{
-	Shepherd notify( "point_end" );
-	controller = Shepherd getanim( "ending_additive_controller" );
-	Shepherd ClearAnim( controller, 0.2 );
-	shepherd SetLookAtEntity( level.player );
-	//( position, turn acceleration );
-}
-*/
-
 setup_boat_for_drive() {
   self Vehicle_TurnEngineOff();
   self maps\_vehicle::godon();
@@ -1790,8 +1714,6 @@ setup_boat_for_drive() {
 
   level.dofDefault["nearStart"] = 10;
   level.dofDefault["nearEnd"] = 20;
-
-  //	thread missile_repulser();
 
   level.price.orgmodel = level.price.model;
 
@@ -1867,7 +1789,6 @@ change_target_ent_on_vehicle_spawner(heli_targetname, boat_destination_node) {
   destnode = GetEnt(boat_destination_node, "targetname");
   boat.target = destnode.targetname;
 
-  //this stuff should probably be in another function
   boat.origin = destnode.origin;
   boat.angles = destnode.angles;
   boat.speed = destnode.speed;
@@ -1887,7 +1808,6 @@ enemy_chase_boat() {
     rider thread magic_bullet_shield();
   }
 
-  //	self.veh_pathtype = "follow";
   while(1) {
     wait .25;
     enemy_chase_boat_breadcrumb();
@@ -1919,32 +1839,26 @@ rpg_bridge_guy_target() {
   self SetEntityTarget(target_ent);
   self.favoriteenemy = target_ent;
   self.ignoreall = true;
-  self.rpg_setup_time = GetTime() + RandomIntRange(1000, 2000); // "reaction time so they don't instantly shoot when you round a corner.
+  self.rpg_setup_time = GetTime() + RandomIntRange(1000, 2000);
 
   random_vec = flat_origin(randomvectorrange(-64, 64));
   firing_range = 3000;
   while(IsAlive(self)) {
     velocity_offset = level.players_boat Vehicle_GetVelocity() * 1.4;
 
-    //		target_ent.origin = level.players_boat.origin +( level.players_boat Vehicle_GetVelocity() * 1.89 );
-
     forward_origin = level.players_boat.origin + velocity_offset;
     forward_origin = set_z(forward_origin, level.players_boat.origin[2] + 24);
 
-    //		Line( forward_origin, level.players_boat.origin, (0,1,0) );
-
-    //when the player is headed towards something use the spline direction to influence the shot. otherwise fire away in the direct forward path.
     if(!BulletTracePassed(level.player getEye() + (0, 0, 16), forward_origin, false, self)) {
       offset = Distance((0, 0, 0), velocity_offset);
       target_ent.origin = get_position_from_spline_unlimited(level.player.targ, level.player.progress + offset - level.POS_LOOKAHEAD_DIST, level.player.offset);
       target_ent.origin = set_z(target_ent.origin, level.players_boat.origin[2] + 24);
-      //			Line( target_ent.origin, level.players_boat.origin, (0,0,1) );
+
       target_ent.origin = (target_ent.origin + forward_origin) / 2;
     } else {
       target_ent.origin = forward_origin;
     }
 
-    //		Line( target_ent.origin, level.players_boat.origin, (1,0,0) );
     self OrientMode("face point", target_ent.origin);
 
     bullettraced_to_player = false;
@@ -1955,7 +1869,7 @@ rpg_bridge_guy_target() {
     }
 
     if(!ent_flag("first_player_sighting"))
-      self.rpg_setup_time = GetTime() + RandomIntRange(1000, 2000); // "reaction time so they don't instantly shoot when you round a corner.
+      self.rpg_setup_time = GetTime() + RandomIntRange(1000, 2000);
 
     if(GetTime() > self.rpg_setup_time)
       if(bullettraced_to_player)
@@ -1969,15 +1883,12 @@ rpg_bridge_guy_target() {
   }
 
   ammo = "rpg_straight_af_chase";
-  //	if( cointoss() )
-  //		ammo = "rpg";
 
-  if(isDefined(self) && isDefined(self GetTagOrigin("tag_flash"))) // Tried isalive . debugger is broken today = ( .
-  {
+  if(isDefined(self) && isDefined(self GetTagOrigin("tag_flash"))) {
     rpg_shot = MagicBullet(ammo, self GetTagOrigin("tag_flash"), target_ent.origin + random_vec);
     rpg_shot thread kill_rpg_shot_behind_player();
   }
-  level.next_rpg_firetime = GetTime() + RandomIntRange(300, 500); // stagger time between multiple guys
+  level.next_rpg_firetime = GetTime() + RandomIntRange(300, 500);
   target_ent Delete();
 }
 
@@ -2050,7 +1961,7 @@ dialog_boat_battlechatter() {
 
   picked = undefined;
 
-  wait 1; // let enemy boat get defined..
+  wait 1;
 
   if(GetDvarInt("scr_zodiac_test")) {
     return;
@@ -2110,7 +2021,7 @@ dialog_boat_nag() {
   while(1) {
     if(bread_crumb_get_player_trailing_fraction() > .5 && next_nag < GetTime() && !level.price ent_flag("transitioning_positions")) {
       picked = random(unused_dialog);
-      //			level.price thread radio_dialogue( picked );
+
       side = level.price.a.boat_pose;
       Assert(isDefined(side) && (side == "left" || side == "right"));
 
@@ -2146,10 +2057,9 @@ dialog_cave() {
 }
 
 dialog_start() {
-  //	thread add_dialogue_line( "Price", "They're just around the corner, come on." );
   level.price thread generic_dialogue_queue("afchase_pri_aroundcorner");
   wait 4;
-  //	thread add_dialogue_line( "Price", "We need to get on that boat. " );
+
   level.price thread generic_dialogue_queue("afchase_pri_getonboat");
 
   wait 2;
@@ -2170,7 +2080,7 @@ dialog_boat_direction_nag() {
 
   picked = undefined;
 
-  wait 1; // let enemy boat get defined..
+  wait 1;
 
   if(GetDvarInt("scr_zodiac_test")) {
     return;
@@ -2208,21 +2118,20 @@ dialog_boat_direction_nag() {
 
 animate_price_into_boat() {
   level endon("stop_animate_price_into_boat");
-  waittillframeend; // let players boat get spawned and defined
+  waittillframeend;
   pathnode = GetNode(self.target, "targetname");
   node = spawn("script_origin", pathnode.origin);
   node.angles = pathnode.angles + (0, -90, 0);
   level.price ent_flag_init("price_animated_into_boat");
 
-  //make the scene stick to boat should player start to drive
-  node delayCall(2, ::linkto, level.players_boat); // give it time to settle before linking
+  node delayCall(2, ::linkto, level.players_boat);
 
   thread teleport_price_on_mount(node);
   node anim_generic_reach(level.price, "price_into_boat");
   level notify("end_teleport_price_on_mount");
   level.price LinkTo(node);
 
-  level.price delayThread(1.5, ::ent_flag_set, "price_animated_into_boat"); // I timed this as a good cutoff point for when the player jumps in first.
+  level.price delayThread(1.5, ::ent_flag_set, "price_animated_into_boat");
   level.players_boat delayCall(1, ::JoltBody, level.price.origin, .15);
   level.players_boat delayThread(1, ::play_sound_in_space, "water_boat_splash_small", level.players_boat.origin);
 
@@ -2260,7 +2169,7 @@ trigger_boat_mount() {
   level.player PlayerLinkToBlend(level.players_boat, "tag_player", .35, .2, .1);
   wait .35;
   level.player FreezeControls(false);
-  //	level.price ent_flag_wait( "price_animated_into_boat" );
+
   level.players_boat MakeUsable();
   level.players_boat UseBy(level.player);
   level.player.drivingVehicle = level.players_boat;
@@ -2297,21 +2206,6 @@ rope_splashers() {
     wait .1;
 
   self Kill();
-
-  //this might be cool if I could do client ragdoll..
-
-  //self waittill ( "death" );
-  //self endon ("death");
-  //
-  //ent = spawnStruct();
-  //ent endon( "complete" );
-  //ent delayThread( 5, ::send_notify, "complete" );
-
-  //while( self.origin[2] > 48 )
-  //	wait .05;
-  //
-  //playFX( getfx("body_falls_from_ropes_splash") , set_z( self.origin,48 ) );
-  // StartRagdoll();
 }
 
 trigger_set_max_zodiacs(value) {
@@ -2324,12 +2218,12 @@ trigger_rapids() {
   self waittill("trigger");
   flag_set("rapids_trigger");
   thread maps\_utility::set_ambient("af_chase_rapids");
-  level.player.nooffset = true; // makes enemy boats spawn exactly behind the player.
+  level.player.nooffset = true;
 
   level.enemy_snowmobiles_max = 1;
 
   flag_set("rapids_head_bobbing");
-  //	price_anim_single_on_boat( "rapids_in", false );
+
   level.price generic_dialogue_queue("afchase_pri_rapidsahead");
   thread price_anim_loop_on_boat("rapids_loop", "end_the_rapids_loop");
 
@@ -2343,7 +2237,6 @@ trigger_rapids() {
   wait 1;
   set_price_auto_switch_pose();
 
-  // they get really bogged in so reduce them after a bit.
   wait 9;
   level.enemy_snowmobiles_max = 1;
 }
@@ -2369,28 +2262,16 @@ trigger_open_area() {
       if(GetTime() > nagtime) {
         nagtime = GetTime() + RandomFloatRange(20000, 22000);
 
-        //Price: Stay clear of open areas as much as possible!
         level.price thread generic_dialogue_queue("afchase_pri_openareas");
       }
-      flag_set("player_in_open"); // done every frame to support overlap.
+      flag_set("player_in_open");
       level notify("new_quote_string");
-      // Stay clear of open areas as much as possible!
+
       setDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
       wait .05;
     }
   }
 }
-
-/*
-setDeadQuote()
-{
-	level endon( "mine death" );
-
-	// kill any deadquotes already running
-	level notify( "new_quote_string" );
-	level endon( "new_quote_string" );
-
-*/
 
 sentry_technical_think() {
   wait .5;
@@ -2437,7 +2318,7 @@ boatsquish_damage_check(amt, who, force, b, c, d, e) {
     return;
   }
   if(abs(self.origin[2] - level.players_boat.origin[2]) > 64) {
-    self Delete(); // these guys are gettinghit by the players tall boat collision.. just delete them so they don't fly over.
+    self Delete();
   }
 
   self thread boat_squish_ragdoll_or_bust();
@@ -2446,8 +2327,6 @@ boatsquish_damage_check(amt, who, force, b, c, d, e) {
     return;
   }
   self remove_damage_function(::boatsquish_damage_check);
-
-  //		self playSound( "human_crunch" );
 }
 
 boat_squish_ragdoll_or_bust() {

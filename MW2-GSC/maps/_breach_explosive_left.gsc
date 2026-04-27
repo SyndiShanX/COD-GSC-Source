@@ -5,11 +5,9 @@
 
 #using_animtree("generic_human");
 main() {
-  /*----------------------- EXPLOSIVE BREACH (LEFT SIDE)
-  -------------------------*/
-  level.maxDetpackDamage = 100; // max damage done by breach detpacks
-  level.minDetpackDamage = 50; // max damage done by breach detpacks
-  level.detpackStunRadius = 250; // how close enemies have to be to detpack to be stunned
+  level.maxDetpackDamage = 100;
+  level.minDetpackDamage = 50;
+  level.detpackStunRadius = 250;
   level.door_objmodel = "com_door_breach_left_obj";
   level.stunnedAnimNumber = 1;
 

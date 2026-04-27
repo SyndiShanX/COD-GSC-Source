@@ -6,8 +6,6 @@
 #include common_scripts\utility;
 #using_animtree("animated_props");
 main() {
-  // wait until the end of the frame so that maps can init their trees
-  // in their _anim instead of only above _load
   waittillframeend;
 
   init_wind_if_uninitialized();
@@ -16,17 +14,14 @@ main() {
   level.anim_prop_models_animtree = #animtree;
 
   if(!isDefined(level.anim_prop_models))
-    level.anim_prop_models = []; // this is what the LD puts in their map
+    level.anim_prop_models = [];
 
   animated_models = getEntArray("animated_model", "targetname");
   array_thread(animated_models, ::model_init);
 
-  // one or more of the models initialized by model_init() was not setup by the map
-  // so print this helpful note so the designer can see how to add it ot their level
   if(level.init_animatedmodels_dump)
     AssertMsg("anims not cached for animated prop model, Repackage Zones and Rebuild Precache Script in Launcher:");
 
-  // Handle blended tree anims differently
   foreach(model in animated_models) {
     keys = GetArrayKeys(level.anim_prop_models[model.model]);
     scriptedWind = false;
@@ -57,8 +52,6 @@ model_init() {
   if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
 }
-
-// TODO: instead of purely random, do round-robin animation selection to get an even spread
 animateModel() {
   self UseAnimTree(#animtree);
   keys = GetArrayKeys(level.anim_prop_models[self.model]);

@@ -25,8 +25,6 @@ main(painter_spmp) {
   level.scr_anim["generic"]["node_cover_right"][3] = % corner_standR_look_idle;
   level.scr_anim["generic"]["node_cover_right"][4] = % corner_standR_look_2_alert;
 
-  //	level.scr_anim[ "generic" ][ "node_pathnode" ][0]	= %CornerCrL_reloadA;
-
   level.scr_anim["generic"]["node_cover_crouch"][0] = % covercrouch_hide_idle;
   level.scr_anim["generic"]["node_cover_crouch"][1] = % covercrouch_twitch_1;
   level.scr_anim["generic"]["node_cover_crouch"][2] = % covercrouch_hide_2_aim;
@@ -73,7 +71,6 @@ main(painter_spmp) {
   level.node_offset["node_concealment_stand"] = (0, 0, 0);
   level.noder_node_delete = false;
 
-  //make a drone spawn work in this _load halting function..
   level.dronestruct = [];
   spawners = getspawnerarray();
   level.dummyguy_index_max = 0;
@@ -94,7 +91,7 @@ main(painter_spmp) {
     }
   }
   level.dummyguy_index = 0;
-  init(); // _anim
+  init();
 
   ents = getEntArray();
   foreach(ent in ents) {
@@ -138,13 +135,12 @@ main(painter_spmp) {
   while(1) {
     wait .05;
     level.player_view_trace = player_view_trace();
-    //draw_placement_circle();
-    place_node_place(true); // preview placement
+
+    place_node_place(true);
   }
 }
 
 hack_start() {
-  //copied from _painter probably doesn't need all of this		
   flag_init("user_alive");
   while(!isDefined(get_mp_player()))
     wait .05;
@@ -263,7 +259,7 @@ hud_init() {
 
     hudelems[i].x = 0;
     hudelems[i].y = org;
-    // .
+
     hudelems[i] _settext(".");
 
     if(i == div)
@@ -286,7 +282,7 @@ hud_init() {
   crossHair.alpha = 1;
   crossHair.x = 320;
   crossHair.y = 244;
-  // .
+
   crossHair _settext(".");
   level.crosshair = crossHair;
 
@@ -313,7 +309,7 @@ hud_init() {
   selection_lock_indicator.alpha = 1;
   selection_lock_indicator.x = 320;
   selection_lock_indicator.y = 300;
-  // .
+
   selection_lock_indicator _settext("");
   level.selection_lock_indicator = selection_lock_indicator;
 
@@ -327,7 +323,7 @@ hud_init() {
   node_animation_preview_indicator.alpha = 1;
   node_animation_preview_indicator.x = 320;
   node_animation_preview_indicator.y = 300;
-  // .
+
   node_animation_preview_indicator _settext("");
   level.node_animation_preview_indicator = node_animation_preview_indicator;
 
@@ -386,7 +382,6 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index - i < 0) {
-      //-- -- level.group_hudelems[div + i] _settext("-- --");
       continue;
     }
     level.group_hudelems[div + i] _settext(gettext_nonode(keys[index - i]));
@@ -394,7 +389,6 @@ setcurrentgroup(group) {
 
   for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- -- level.group_hudelems[div - i] _settext("-- --");
       continue;
     }
     level.group_hudelems[div - i] _settext(gettext_nonode(keys[index + i]));
@@ -431,14 +425,13 @@ setgroup_down() {
 }
 
 add_node_type(type, wall_snap_direction, grid_size) {
-  //may farther complicate with corner nodes using different
   if(!isDefined(wall_snap_direction))
     wall_snap_direction = 0;
 
   if(!isDefined(grid_size))
     grid_size = 0;
 
-  precachemodel(type); // assumes model is same name as type
+  precachemodel(type);
   if(!isDefined(level.place_node_group[type])) {
     struct = spawnStruct();
     struct.wall_snap_direction = wall_snap_direction;
@@ -537,8 +530,6 @@ find_corner_snap(dest_point, angles) {
   }
   start_dest = dest_point;
   org_start_dest = start_dest;
-
-  // to the direction
 
   sidevecinc = 32;
 
@@ -694,7 +685,7 @@ place_node_erase() {
     node.has_dummy_guy.is_hidden = true;
   }
   node delete();
-  level.noder_node_delete = true; // tells thread that's got all the nodes to get all the nodes again.
+  level.noder_node_delete = true;
   hud_update_placed_model_count();
 }
 
@@ -709,7 +700,7 @@ dump_nodes() {
   fileprint_map_start();
 
   for(i = 0; i < level.placed_nodes.size; i++) {
-    origin = fileprint_radiant_vec(level.placed_nodes[i].origin); // convert these vectors to mapfile keypair format
+    origin = fileprint_radiant_vec(level.placed_nodes[i].origin);
     angles = fileprint_radiant_vec(level.placed_nodes[i].angles);
 
     fileprint_map_entity_start();
@@ -804,11 +795,9 @@ draw_grid(origin, bpreview) {
     for(y = gridlines * -1; y < gridlines + 1; y++) {
       if(x != gridlines) {
         Line(origin + (x * level.node_grid, y * level.node_grid, 0), origin + ((x + 1) * level.node_grid, y * level.node_grid, 0), gridcolor, true);
-        //				groundpos_line( offsetorigin + ( x * level.node_grid, y * level.node_grid, 0 ), offsetorigin + ( ( x + 1 ) * level.node_grid, y * level.node_grid, 0 ), gridcolor, true );
       }
       if(y != gridlines) {
         Line(origin + (x * level.node_grid, y * level.node_grid, 0), origin + (x * level.node_grid, (y + 1) * level.node_grid, 0), gridcolor, true);
-        //				groundpos_line( offsetorigin + ( x * level.node_grid, y * level.node_grid, 0 ), offsetorigin + ( x * level.node_grid, ( y + 1 ) * level.node_grid, 0 ), gridcolor, true );
       }
     }
   }
@@ -830,7 +819,7 @@ node_is_invalid(origin) {
     if(dist < 32) {
       count++;
       if(dist < 0.05)
-        count = 6; // invalid if on top of eachother.
+        count = 6;
       if(dist < shorterdist)
         selector_node = node;
     }
@@ -957,7 +946,7 @@ set_button_funcs_main() {
   add_button_func(::setgroup_down, false, "DPAD_UP");
   add_button_func(::setgroup_up, false, "DPAD_DOWN");
   add_button_func(::grid_toggle, false, "BUTTON_A");
-  //	add_button_func( ::toggle_select_lock, false, "BUTTON_B" );
+
   add_button_func(::toggle_animation_preview, false, "BUTTON_B");
 }
 
@@ -978,7 +967,7 @@ set_button_funcs_quickselect() {
   add_button_func(::select_node_cover_prone, false, "BUTTON_Y");
   add_button_func(::select_node_concealment_stand, false, "DPAD_UP");
   add_button_func(::select_node_concealment_prone, false, "DPAD_DOWN");
-  //	add_button_func( ::select_node_concealment_prone, false, "DPAD_LEFT" );
+
   add_button_func(::select_node_concealment_crouch, false, "DPAD_RGIHT");
   add_button_func(::select_node_cover_stand, false, "BUTTON_A");
   add_button_func(::select_node_cover_crouch, false, "BUTTON_B");
@@ -1144,10 +1133,7 @@ manage_nearnodes() {
   level.nearnodes_time = 0;
   wait .05;
 
-  //ledgibilty be damned. trying not to use a bazillion script calls to speed this up.
-
   while(1) {
-    //faster than array_combine
     all_nodes = nodes;
     foreach(node in level.placed_nodes) {
       assert(isDefined(node));
@@ -1167,11 +1153,8 @@ manage_nearnodes() {
       }
 
       if(count > maxcount) {
-        // level.placed_nodes size change means the all_nodes array needs to be rebuilt and this loop needs to start over.
-
         near_nodes = [];
 
-        //clear out the old near nodes that are no longer valid (.05 time wait may invalidate) since there generally so few this is a quick check)
         foreach(obj in level.near_nodes)
         if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj.origin[0], obj.origin[1], 0)) <= 65536)
           near_nodes[near_nodes.size] = obj;
@@ -1182,14 +1165,12 @@ manage_nearnodes() {
         if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj2.origin[0], obj2.origin[1], 0)) <= 65536)
           newArray[newArray.size] = obj2;
 
-        // there are usually few to merge. not worried about this array_merge call.
         level.near_nodes = array_merge(newArray, near_nodes);
 
         array = [];
         count = 0;
         wait .05;
-        waittillframeend; // sometimes this gets tangled with the placed_nodes size assures reset happens after that thing.
-
+        waittillframeend;
       }
 
       if(level.noder_node_delete) {

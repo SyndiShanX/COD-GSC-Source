@@ -18,9 +18,9 @@ init() {
 }
 
 shellshockOnDamage(cause, damage) {
-  if(self maps\mp\_flashgrenades::isFlashbanged())
-    return; // don't interrupt flashbang shellshock
-
+  if(self maps\mp\_flashgrenades::isFlashbanged()) {
+    return;
+  }
   if(self _hasPerk("specialty_blastshield")) {
     return;
   }

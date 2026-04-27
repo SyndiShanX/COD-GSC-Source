@@ -1,6 +1,4 @@
 main() {
-  //ambient fx
-
   level._effect["sand_spray_detail_oriented_runner_mp_dome"] = loadfx("dust/sand_spray_detail_oriented_runner_mp_dome");
 
   level._effect["room_dust_100"] = loadfx("dust/room_dust_100_blend");

@@ -22,7 +22,7 @@ event1() {
 }
 
 event2() {
-  maps\_status::scripter_task("Event 2 – Fire Support", 5, 100);
+  maps\_status::scripter_task("Event 2 - Fire Support", 5, 100);
   maps\_status::scripter_subtask("Objectives", 1, 100);
   maps\_status::scripter_subtask("Gameplay", 1, 100);
   maps\_status::scripter_subtask("IGC Camera", 1, 100);
@@ -31,7 +31,7 @@ event2() {
 }
 
 event3() {
-  maps\_status::scripter_task("Event 3 – The Raid", 5, 100);
+  maps\_status::scripter_task("Event 3 - The Raid", 5, 100);
   maps\_status::scripter_subtask("Objectives", 1, 100);
   maps\_status::scripter_subtask("Gameplay", 1, 100);
   maps\_status::scripter_subtask("Animation", 1, 100);

@@ -3,14 +3,6 @@
  * Script: aitype\civilian_arab_b_male.gsc
 ********************************************************/
 
-/*QUAKED actor_civilian_arab_b_male (0.5 0.5 0.5) (-16 -16 0) (16 16 72) SPAWNER FORCESPAWN UNDELETABLE PERFECTENEMYINFO DONTSHAREENEMYINFO
-defaultmdl="character_arab_civilian_lowres_b""count" -- max AI to ever spawn from this spawner
-SPAWNER -- makes this a spawner instead of a guy
-FORCESPAWN -- will try to delete an AI if spawning fails from too many AI
-UNDELETABLE -- this AI (or AI spawned from here) cannot be deleted to make room for FORCESPAWN guys
-PERFECTENEMYINFO -- this AI when spawned will get a snapshot of perfect info about all enemies
-DONTSHAREENEMYINFO -- do not get shared info about enemies at spawn time from teammates
-*/
 main() {
   self.animTree = "";
   self.additionalAssets = "";

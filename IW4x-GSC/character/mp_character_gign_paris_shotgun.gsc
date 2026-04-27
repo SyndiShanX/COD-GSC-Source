@@ -3,9 +3,6 @@
  * Script: character\mp_character_gign_paris_shotgun.gsc
 *********************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_gign_paris_shotgun");
   self attach("head_gign_b", "", 1);

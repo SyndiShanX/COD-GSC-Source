@@ -60,18 +60,14 @@ main(model, type, no_death) {
 }
 
 init_local() {
-  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground")); // TODO - FIXME: this is ugly. Derive from distance between tag_origin and tag_base or whatever that tag was.
-  self.fastropeoffset = 762; // TODO - FIXME: this is ugly. If only there were a getanimendorigin() command
+  self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
+  self.fastropeoffset = 762;
 
-  self.script_badplace = false; // All helicopters dont need to create bad places
-  //maps\_vehicle::lights_on( "running" );
-  //maps\_vehicle::lights_on( "interior" );
+  self.script_badplace = false;
 }
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
-  //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-
   for(i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
 
@@ -87,7 +83,7 @@ setplayer_anims(positions) {
   positions[3].player_getout_sound_end = "fastrope_end_plr";
 
   positions[3].player_getout = % bh_player_drop;
-  //positions[ 3 ].player_getout = %bh_2_drop;
+
   positions[3].player_animtree = #animtree;
 
   positions[2].player_idle = % bh_player_idle;
@@ -104,7 +100,7 @@ setplayer_anims(positions) {
   positions[6].player_getout_sound_end = "fastrope_end_plr";
 
   positions[6].player_getout = % bh_player_drop;
-  //positions[ 6 ].player_getout = %bh_8_drop;
+
   positions[6].player_animtree = #animtree;
 
   return positions;
@@ -113,11 +109,9 @@ setplayer_anims(positions) {
 #using_animtree("generic_human");
 
 set_coop_player_anims(positions) {
-  //positions[ 3 ].player_getout = %bh_player_drop;
   positions[3].player_getout = % bh_2_drop;
   positions[3].player_animtree = #animtree;
 
-  //positions[ 6 ].player_getout = %bh_player_drop;
   positions[6].player_getout = % bh_8_drop;
   positions[6].player_animtree = #animtree;
 
@@ -134,7 +128,6 @@ setanims() {
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;
 
-  // 1, 2, 4, 5, 8,6
   positions[2].idle = % bh_1_idle;
   positions[3].idle = % bh_2_idle;
   positions[4].idle = % bh_4_idle;
@@ -151,7 +144,6 @@ setanims() {
   positions[6].sittag = "tag_detach";
   positions[7].sittag = "tag_detach";
 
-  // 1, 2, 4, 5, 8,6
   positions[2].getout = % bh_1_drop;
   positions[3].getout = % bh_2_drop;
   positions[4].getout = % bh_4_drop;
@@ -188,13 +180,6 @@ setanims() {
   positions[6].rappel_kill_achievement = 1;
   positions[7].rappel_kill_achievement = 1;
 
-  //	positions[ 2 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 3 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 4 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 5 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 6 ].getoutsnd = "fastrope_loop_npc";
-  //	positions[ 7 ].getoutsnd = "fastrope_loop_npc";
-
   positions[2].getoutloopsnd = "fastrope_loop_npc";
   positions[3].getoutloopsnd = "fastrope_loop_npc";
   positions[4].getoutloopsnd = "fastrope_loop_npc";
@@ -202,19 +187,16 @@ setanims() {
   positions[6].getoutloopsnd = "fastrope_loop_npc";
   positions[7].getoutloopsnd = "fastrope_loop_npc";
 
-  // 1, 2, 4, 5, 6, & 8
-  positions[2].fastroperig = "TAG_FastRope_RI"; // 1 %bh_1_drop
-  positions[3].fastroperig = "TAG_FastRope_RI"; // 2 %bh_2_drop
-  positions[4].fastroperig = "TAG_FastRope_LE"; // 4 %bh_4_drop
-  positions[5].fastroperig = "TAG_FastRope_LE"; // 5 %bh_5_drop
-  positions[6].fastroperig = "TAG_FastRope_RI"; // 8 %bh_8_drop
-  positions[7].fastroperig = "TAG_FastRope_LE"; // 6 %bh_6_drop
+  positions[2].fastroperig = "TAG_FastRope_RI";
+  positions[3].fastroperig = "TAG_FastRope_RI";
+  positions[4].fastroperig = "TAG_FastRope_LE";
+  positions[5].fastroperig = "TAG_FastRope_LE";
+  positions[6].fastroperig = "TAG_FastRope_RI";
+  positions[7].fastroperig = "TAG_FastRope_LE";
 
   return setplayer_anims(positions);
   return set_coop_player_anims(positions);
 }
-
-//WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
   unload_groups["left"] = [];
@@ -263,58 +245,3 @@ set_attached_models() {
 
   return array;
 }
-
-/*QUAKED script_vehicle_blackhawk (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_blackhawk::main( "vehicle_blackhawk" );
-
-and these lines in your CSV:
-#include,vehicle_blackhawk_blackhawk
-sound,vehicle_blackhawk,vehicle_standard,all_sp
-
-defaultmdl="vehicle_blackhawk"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_blackhawk_hero_sas_night (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_blackhawk::main( "vehicle_blackhawk_hero_sas_night" );
-
-and these lines in your CSV:
-#include,vehicle_blackhawk_hero_sas_night_blackhawk
-sound,vehicle_blackhawk,vehicle_standard,all_sp
-
-defaultmdl="vehicle_blackhawk_hero_sas_night"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_blackhawk_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_blackhawk::main( "vehicle_blackhawk_low" );
-
-and these lines in your CSV:
-#include,vehicle_blackhawk_low_blackhawk
-sound,vehicle_blackhawk,vehicle_standard,all_sp
-
-defaultmdl="vehicle_blackhawk_low"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_blackhawk_low_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_blackhawk::main( "vehicle_blackhawk_low_thermal" );
-
-and these lines in your CSV:
-#include,vehicle_blackhawk_low_thermal_blackhawk
-sound,vehicle_blackhawk,vehicle_standard,all_sp
-
-defaultmdl="vehicle_blackhawk_low_thermal"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_blackhawk_minigun_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_blackhawk_minigun::main( "vehicle_blackhawk_minigun_low" );
-
-and these lines in your CSV:
-#include,vehicle_blackhawk_minigun_low_blackhawk_minigun
-
-defaultmdl="vehicle_blackhawk_minigun_low"default:"vehicletype" "blackhawk_minigun"default:"script_team" "allies"
-*/

@@ -10,11 +10,9 @@ main() {
 setDeadQuote() {
   level endon("mine death");
 
-  // kill any deadquotes already running
   level notify("new_quote_string");
   level endon("new_quote_string");
 
-  // player can be dead if the player died at the same point that setDeadQuote was called from another script
   if(isalive(level.player))
     level.player waittill("death");
 
@@ -22,7 +20,6 @@ setDeadQuote() {
     deadQuoteSize = (Int(TableLookup("sp/deathQuoteTable.csv", 1, "size", 0)));
     deadQuoteIndex = randomInt(deadQuoteSize);
 
-    // This is used for testing
     if(getDvar("cycle_deathquotes") != "") {
       if(getDvar("ui_deadquote_index") == "")
         setDvar("ui_deadquote_index", "0");
@@ -55,7 +52,6 @@ setDeadQuote_so() {
 
   i = randomInt(deadquotes.size);
 
-  // Only works in local games. Online the dvars are unreliable so don't bother with them.
   if(!maps\_utility::is_coop_online()) {
     keep_searching = (deadquotes.size > 1);
     original_i = i;
@@ -76,7 +72,6 @@ setDeadQuote_so() {
     setDvar("ui_deadquote_v1", deadquotes[i]);
   }
 
-  // A few deadquotes have icons attached to them.
   switch (deadquotes[i]) {
     case "@DEADQUOTE_SO_ICON_PARTNER":
       maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_partner");
@@ -130,7 +125,6 @@ so_buildDeadQuote() {
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_GRENADES_ROLL";
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_STAR_RANKINGS";
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_ICON_OBJ";
-  //	deadquotes[ deadquotes.size ]= "@DEADQUOTE_SO_ICON_OBJ_OFFSCREEN";
 
   if(isDefined(self.so_infohud_toggle_state) && self.so_infohud_toggle_state != "none") {
     deadquotes[deadquotes.size] = "@DEADQUOTE_SO_TOGGLE_TIMER";
@@ -155,6 +149,5 @@ should_use_custom_deadquotes() {
 
   assertex(isDefined(level.so_deadquotes_chance), "level.so_deadquotes had contents, but level.so_deadquote_chance was undefined.");
 
-  // Set level.so_deadquotes_chance to 1.0 to guarantee the contents will be used.
   return (level.so_deadquotes_chance >= randomfloat(1.0));
 }

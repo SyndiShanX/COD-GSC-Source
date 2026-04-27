@@ -1,8 +1,6 @@
 main() {
-  // register custom streaks for bots
   replacefunc(maps\mp\bots\_bots_ks::bot_killstreak_setup, ::bot_killstreak_setup_stub);
 
-  // use killstreaks persistent variable instead of hardPointItem
   replacefunc(maps\mp\bots\_bots_ks::bot_think_killstreak, ::bot_think_killstreak_stub);
   replacefunc(maps\mp\bots\_bots_util::bot_in_combat, ::bot_in_combat_stub);
 }
@@ -29,7 +27,6 @@ bot_killstreak_setup_stub() {
     bot_register_killstreak_func("airstrike_mp", ::bot_killstreak_choose_loc_enemies, maps\mp\bots\_bots_ks::bot_can_use_airstrike);
     bot_register_killstreak_func("helicopter_mp", maps\mp\bots\_bots_ks::bot_killstreak_simple_use, maps\mp\bots\_bots_ks::bot_can_use_helicopter);
 
-    // h2m changes
     bot_register_killstreak_func("counter_radar_mp", maps\mp\bots\_bots_ks::bot_killstreak_simple_use, ::bot_killstreak_do_use);
     bot_register_killstreak_func("sentry_mp", maps\mp\bots\_bots_ks::bot_killstreak_simple_use, ::bot_killstreak_do_use);
     bot_register_killstreak_func("harrier_airstrike_mp", ::bot_killstreak_choose_loc_enemies, maps\mp\bots\_bots_ks::bot_can_use_airstrike);
@@ -56,7 +53,6 @@ bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.killstreak_botparm))
     level.killstreak_botparm = [];
 
-  // add isdefined check here
   if(isDefined(var_3))
     level.killstreak_botparm[var_0] = var_3;
 
@@ -82,7 +78,6 @@ bot_think_killstreak_stub() {
     if(maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
       var_0 = self.pers["killstreaks"];
 
-      // TODO: is this bandaid fix okay? this is technically CptPrice changes here that im patching
       if(isDefined(var_0) && var_0.size > 1) {
         var_0 = var_0[0].streakName;
 
@@ -153,8 +148,6 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   wait 1.0;
   self botsetflag("disable_movement", 0);
 }
-
-// custom streaks
 bot_can_use_ac130(var_0) {
   return (isDefined(level.ac130inuse) && !level.ac130inuse);
 }
@@ -162,8 +155,6 @@ bot_can_use_ac130(var_0) {
 bot_killstreak_do_use(var_0) {
   return 1;
 }
-
-// bot ks funcs
 h2_set_bot_ks() {
   switch (randomInt(4)) {
     case 0:
@@ -279,7 +270,7 @@ _setPlayerAngles(Angle) {
   originalAngle = Angle;
 
   PStepAngle = 180 / Steps;
-  NStepAngle = PStepAngle - (PStepAngle * 2); //Try tweaking the 180 into 360
+  NStepAngle = PStepAngle - (PStepAngle * 2);
   myAngle = self getPlayerAngles();
   myAngle = NormalizeAngles(myAngle);
   Angle = NormalizeAngles(Angle);

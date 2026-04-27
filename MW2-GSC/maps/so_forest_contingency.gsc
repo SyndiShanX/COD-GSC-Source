@@ -14,14 +14,10 @@
 CONST_regular_obj = &"SO_FOREST_CONTINGENCY_OBJ_REGULAR";
 CONST_hardened_obj = &"SO_FOREST_CONTINGENCY_OBJ_HARDENED";
 CONST_veteran_obj = &"SO_FOREST_CONTINGENCY_OBJ_VETERAN";
-
-//	penalty seconds per kill
 CONST_kill_penalty = 10;
-//	Time multiplier when out of stealth.
 CONST_stealth_multiplier = 3;
 
 main() {
-  // optimization
   setsaveddvar("sm_sunShadowScale", 0.5);
   setsaveddvar("r_lightGridEnableTweaks", 1);
   setsaveddvar("r_lightGridIntensity", 1.5);
@@ -29,14 +25,6 @@ main() {
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
 
-  //	level.custom_eog_no_time = true;
-  //	level.custom_eog_no_skill = true;
-  //	level.custom_eog_no_kills = true;
-
-  // custom eog summary added timebonus for enemies NOT killed.
-  //	level.eog_summary_callback = ::custom_eog_summary;
-
-  // delete certain non special ops entities
   so_delete_all_by_type(::type_vehicle);
   thread remove_dead_trees();
   thread remove_extra_vehicles();
@@ -45,7 +33,7 @@ main() {
   add_start("so_forest", ::start_so_forest);
 
   flag_init("forest_success");
-  //	flag_init( "forest_success_time_updated" );
+
   flag_init("escaped_trigger");
   flag_init("stop_stealth_music");
   flag_init("someone_became_alert");
@@ -53,9 +41,7 @@ main() {
   flag_init("enemy_killed");
 
   thread stealth_achievement();
-  //	thread stealth_achievement_end();
 
-  // init stuff
   maps\contingency_precache::main();
   maps\createart\contingency_fog::main();
   maps\contingency_fx::main();
@@ -78,10 +64,8 @@ main() {
   animscripts\dog\dog_init::initDogAnimations();
   maps\_patrol_anims::main();
 
-  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_radio["so_for_cont_pri_attractattn"] = "so_for_cont_pri_attractattn";
 
-  // original contingency threat bias setup
   threat_bias_code();
 
   maps\_stealth::main();
@@ -140,10 +124,6 @@ so_setup_regular() {
   level.challenge_objective = CONST_regular_obj;
   level.new_enemy_accuracy = 1;
 
-  // noteworthy: two_on_right - remove.
-  // noteworthy: cqb_patrol - remove two with targetname first_patrol_cqb.
-  // noteworthy: regular_remove - remove
-
   spawner_array = getEntArray("two_on_right", "script_noteworthy");
   spawner_array = array_combine(spawner_array, getEntArray("regular_remove", "script_noteworthy"));
 
@@ -162,41 +142,6 @@ so_setup_regular() {
   foreach(spawner in spawner_array) {
     spawner.count = 0;
   }
-
-  /*	spawners = getspawnerarray();
-  	first_third = false;
-  	second_third = true;
-  	third_third = false;
-
-  	foreach( spawner in spawners )
-  	{
-  		if( isDefined( spawner.script_pet ) )
-  			continue;
-  		if( first_third )
-  		{
-  			spawner.count = 0;
-  			first_third = false;
-  			second_third = true;
-  			third_third = false;
-  			continue;
-  		}
-  		if( second_third )
-  		{
-  //			spawner.count = 0;
-  			first_third = false;
-  			second_third = false;
-  			third_third = true;
-  			continue;
-  		}
-  		if( third_third )
-  		{
-  			first_third = false;
-  			second_third = false;
-  			third_third = false;
-  			continue;
-  		}
-  	}
-  */
 }
 
 so_setup_hardened() {
@@ -216,16 +161,16 @@ so_forest_init() {
 
   assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_setup_Regular();
-      break; // Regular
+      break;
     case 2:
       so_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_setup_veteran();
-      break; // Veteran
+      break;
   }
 
   escape_trig = getent("escaped_trigger", "script_noteworthy");
@@ -242,8 +187,6 @@ so_forest_init() {
   thread enable_escape_warning();
   thread enable_escape_failure();
 
-  //	thread penalty_timer();
-  //	level.challenge_time_force_on = true;
   thread enable_challenge_timer("so_forest_contingency_start", "forest_success");
   thread enable_triggered_complete("escaped_trigger", "forest_success", "all");
 
@@ -257,17 +200,12 @@ enemy_nerf() {
 start_so_forest() {
   so_forest_init();
 
-  // ----- modified original contingency functions ----- maps\contingency::sight_ranges_foggy_woods();
   thread maps\contingency::dialog_russians_looking_for_you();
   thread woods_first_patrol_cqb();
   thread woods_second_dog_patrol();
 
   thread fade_challenge_in();
 }
-
-// ==================================================================================
-// ======================= modified functions from contingency ======================
-// ==================================================================================
 
 stealth_settings() {
   stealth_set_default_stealth_function("woods", ::stealth_woods);
@@ -283,11 +221,11 @@ stealth_settings() {
 
   ai_event["ai_eventDistDeath"] = [];
   ai_event["ai_eventDistDeath"]["spotted"] = 512;
-  ai_event["ai_eventDistDeath"]["hidden"] = 512; // used to be 256
+  ai_event["ai_eventDistDeath"]["hidden"] = 512;
 
   ai_event["ai_eventDistPain"] = [];
   ai_event["ai_eventDistPain"]["spotted"] = 256;
-  ai_event["ai_eventDistPain"]["hidden"] = 256; // used to be 256
+  ai_event["ai_eventDistPain"]["hidden"] = 256;
 
   ai_event["ai_eventDistBullet"] = [];
   ai_event["ai_eventDistBullet"]["spotted"] = 96;
@@ -398,7 +336,7 @@ stealth_woods() {
       self stealth_pre_spotted_function_custom(::woods_prespotted_func);
 
       threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
-      threat_array["attack"] = ::small_goal_attack_behavior; //default
+      threat_array["attack"] = ::small_goal_attack_behavior;
       self stealth_threat_behavior_custom(threat_array);
 
       self stealth_enable_seek_player_on_spotted();
@@ -415,7 +353,7 @@ stealth_woods() {
       break;
 
     case "allies":
-      //use the bridge area settings!
+
   }
 }
 
@@ -447,13 +385,13 @@ woods_prespotted_func() {
   level endon("special_op_terminated");
 
   switch (level.gameskill) {
-    default: // regular
+    default:
       wait 4;
       break;
-    case 2: // hardened
+    case 2:
       wait 3;
       break;
-    case 3: // veteran
+    case 3:
       wait 2;
       break;
   }
@@ -496,17 +434,9 @@ dialog_player_kill() {
 stealth_music_control() {
   level endon("special_op_terminated");
 
-  //DEFINE_BASE_MUSIC_TIME 		 = 143.5;
-  //DEFINE_ESCAPE_MUSIC_TIME 	 = 136;
-  //DEFINE_SPOTTED_MUSIC_TIME 	 = 117;
-
   if(flag("stop_stealth_music"))
     return;
   level endon("stop_stealth_music");
-
-  //flag_wait( "first_two_guys_in_sight" );
-
-  //thread test_stealth_spotted();
 
   while(1) {
     thread stealth_music_hidden_loop();
@@ -524,62 +454,12 @@ stealth_music_control() {
   }
 }
 
-/*
-test_stealth_spotted()
-{
-	while( 1 )
-	{
-		level waittill( "_stealth_spotted" );
-		if( flag( "_stealth_spotted" ) )
-			iprintln( "SPOTTED!" );
-		else
-			iprintln( "HIDDEN!" );	
-	}
-}
-*/
-
 stealth_music_hidden_loop() {
   music_loop("so_forest_contingency_stealth_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-
-  	cliffhanger_stealth_music_TIME = 528;
-  	//level endon( "player_in_hanger" );
-  	level endon( "_stealth_spotted" );
-  	
-  	if( flag( "stop_stealth_music" ) )
-  		return;
-  	level endon ( "stop_stealth_music" );
-  	
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_forest_contingency_stealth_music" );
-  		
-  		wait cliffhanger_stealth_music_TIME;
-  		
-  		wait 10;
-  	}*/
 }
 
 stealth_music_busted_loop() {
   music_loop("so_forest_contingency_busted_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-
-  	cliffhanger_stealth_busted_music_TIME = 154;
-  	//level endon( "player_in_hanger" );
-  	level endon( "_stealth_spotted" );
-  	if( flag( "stop_stealth_music" ) )
-  		return;
-  	level endon ( "stop_stealth_music" );
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_forest_contingency_busted_music" );
-  		
-  		wait cliffhanger_stealth_busted_music_TIME;
-  		
-  		wait 3;
-  	}*/
 }
 
 dialog_we_are_spotted_wrapper() {
@@ -615,8 +495,6 @@ dialog_unsilenced_weapons() {
     }
 
     if(state) {
-      //			println( "picked up a new weapon" );
-      //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
       thread radio_dialogue("so_for_cont_pri_attractattn");
       break;
     }

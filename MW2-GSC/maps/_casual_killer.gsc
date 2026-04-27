@@ -7,12 +7,6 @@
 #include animscripts\utility;
 #include common_scripts\utility;
 
-/*
-=============
-///ScriptDocBegin
-"Name: enable_casual_killer( <enable_casual_killer> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 enable_casual_killer() {
   if(isDefined(self.casual_killer)) {
     return;
@@ -43,12 +37,6 @@ enable_casual_killer() {
   self init_casual_killer_animsets();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: disable_casual_killer( <disable_casual_killer> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 disable_casual_killer() {
   if(!isDefined(self.casual_killer)) {
     return;
@@ -87,7 +75,6 @@ disable_casual_killer() {
 
 #using_animtree("generic_human");
 init_casual_killer_animsets() {
-  // move animations
   animset = [];
   animset["sprint"] = % casual_killer_jog_A;
   animset["straight"] = % casual_killer_walk_F;
@@ -107,7 +94,6 @@ init_casual_killer_animsets() {
 
   self.customMoveAnimSet["run"] = animset;
   self.customMoveAnimSet["walk"] = animset;
-  //self.customMoveAnimSet[ "cqb" ] = animset;
 
   self.customIdleAnimSet = [];
   self.customIdleAnimSet["stand"] = % casual_killer_stand_aim5;
@@ -116,7 +102,6 @@ init_casual_killer_animsets() {
   self.a.pose = "stand";
   self allowedStances("stand");
 
-  // combat animations
   animset = anim.animsets.defaultStand;
 
   animset["add_aim_up"] = % casual_killer_stand_aim8;
@@ -129,7 +114,6 @@ init_casual_killer_animsets() {
   animset["fire"] = % casual_killer_stand_auto;
   animset["single"] = array(%casual_killer_stand_auto);
 
-  // remove this burst, semi nonsense soon
   animset["burst2"] = % casual_killer_stand_auto;
   animset["burst3"] = % casual_killer_stand_auto;
   animset["burst4"] = % casual_killer_stand_auto;
@@ -149,11 +133,9 @@ init_casual_killer_animsets() {
 
   animscripts\init_move_transitions::init_move_transition_arrays();
 
-  //exits
   self.customMoveTransition = ::casual_killer_startMoveTransition;
   self.permanentCustomMoveTransition = true;
 
-  //arrivals
   anim.coverTrans["casual_killer"] = [];
   anim.coverTrans["casual_killer"][1] = % casual_killer_walk_stop;
   anim.coverTrans["casual_killer"][2] = % casual_killer_walk_stop;
@@ -245,7 +227,7 @@ casual_killer_startMoveTransition() {
   self animmode("none", false);
 
   if(animHasNotetrack(startAnim, "code_move"))
-    self animscripts\shared::DoNoteTracks("startmove"); // return on code_move
+    self animscripts\shared::DoNoteTracks("startmove");
 }
 
 casual_killer_is_jogging() {

@@ -21,12 +21,10 @@ main() {
   level.friendly_baseaccuracy = 0.5;
   level.respawn_friendlies_force_vision_check = true;
 
-  // so burning vehicles don't block friendly progression up the skinny streets
   level.destructible_badplace_radius_multiplier = 0.75;
-  //level.destructible_explosion_radius_multiplier		= 0.85;
-  level.destructible_health_drain_amount_multiplier = 1.75; // burn faster
 
-  // don't track choppers on the minimap since we're doing a lot of fakery
+  level.destructible_health_drain_amount_multiplier = 1.75;
+
   SetSavedDvar("compassHideVehicles", "1");
 
   weapons = [];
@@ -44,7 +42,7 @@ main() {
 
   level.cosine["45"] = cos(45);
 
-  maps\createart\favela_escape_art::main(); // Redundant now, since all this currently does is fog, and we moved that to favela_escape_fog. Keeping it in case the artists are expecting it to be there at some point.
+  maps\createart\favela_escape_art::main();
   maps\createart\favela_escape_fog::main();
   maps\createfx\favela_escape_fx::main();
   maps\favela_escape_precache::main();
@@ -153,8 +151,6 @@ precache_scripted_assets() {
 init_level_flags() {
   flag_init("friends_setup");
 
-  //flag_init( "scripted_dialogue" );
-
   flag_init("introscreen_start_dialogue");
 
   flag_init("radiotower_runpath_dialogue_done");
@@ -226,7 +222,6 @@ move_stuff_at_levelstart() {
     clip ConnectPaths();
   }
 
-  // create a badplace for one of the street alleys so friendlies don't choose a path through there
   Badplace_Cylinder("street_uphill_alley", -1, (-388, 524, 1016), 90, 128, "allies");
 }
 
@@ -235,16 +230,11 @@ setup_friends() {
 
   foreach(guy in friends) {
     if(isDefined(guy.targetname)) {
-      // MacTavish
       if(guy.targetname == "sarge") {
-        //guy thread magic_bullet_shield();
         guy.animname = "sarge";
         guy.isHero = true;
         level.sarge = guy;
-      }
-      // Ghost
-      else if(guy.targetname == "hero1") {
-        //guy thread magic_bullet_shield();
+      } else if(guy.targetname == "hero1") {
         guy.animname = "hero1";
         guy.isHero = true;
 
@@ -253,10 +243,9 @@ setup_friends() {
     }
 
     if(isDefined(guy.isHero)) {
-      // heroes are invincible
       guy thread magic_bullet_shield();
     } else {
-      guy thread replace_on_death(); // only have to do this for first spawned guys, others will do it automatically in color respawn system
+      guy thread replace_on_death();
     }
 
     guy scr_accuracy(level.friendly_baseaccuracy);
@@ -266,7 +255,6 @@ setup_friends() {
     guy friend_add();
   }
 
-  // run on everyone else who spawns
   add_global_spawn_function("allies", ::scr_usechokepoints, true);
 
   flag_set("friends_setup");
@@ -315,7 +303,7 @@ setup_vehicles() {
 favela_escape_objectives() {
   flag_wait("radiotower_start");
 
-  obj1_set = false; // hack to make Soap-less start points work with objectives
+  obj1_set = false;
   if(isDefined(level.sarge)) {
     Objective_Add(1, "current", &"FAVELA_ESCAPE_OBJ_FOLLOW_SOAP");
     Objective_OnEntity(1, level.sarge);
@@ -328,13 +316,13 @@ favela_escape_objectives() {
   if(obj1_set) {
     Objective_String(1, &"FAVELA_ESCAPE_OBJ_FLEE_RADIOTOWER");
     Objective_Position(1, (-3154, -1875, 1096));
-    Objective_SetPointerTextOverride(1, ""); // reset to default
+    Objective_SetPointerTextOverride(1, "");
   }
 
   flag_wait("market_evac_chopper_incoming");
   Objective_Complete(1);
   Objective_Add(2, "current", &"FAVELA_ESCAPE_OBJ_MARKET_ESCAPE", (-3937, -1051, 1241));
-  // start point hack
+
   if(isDefined(level.chopper)) {
     Objective_OnEntity(2, level.chopper);
   }
@@ -342,7 +330,7 @@ favela_escape_objectives() {
   thread market_evac_chopper_obj_update_pos(2);
 
   flag_wait("solorun_objective_display");
-  //flag_wait( "solorun_start" );
+
   Objective_Complete(2);
   Objective_Add(3, "current", &"FAVELA_ESCAPE_OBJ_GET_BACK_TO_ROOF", (-5924, -870, 816));
 
@@ -360,7 +348,6 @@ favela_escape_objectives() {
 }
 
 solorun_houses_obj_turnoff_compass() {
-  // turn off compass while running through buildings
   trigger_wait("solorun_houses_obj_update_0", "script_noteworthy");
   SetSavedDvar("compass", 0);
 
@@ -372,9 +359,7 @@ market_evac_chopper_obj_update_pos(objID) {
   level endon("solorun_start");
 
   flag_wait("market_evac_chopper_leaves_scene");
-  //Objective_Position( objID, ( -5897, -948, 1216 ) );
 
-  //flag_wait( "market_evac_follow_sarge_climb" );
   Objective_State(1, "active");
   Objective_Current(1);
   Objective_OnEntity(1, level.sarge);
@@ -408,9 +393,6 @@ solorun_houses_obj_update_pos(objID) {
   trigger_wait("solorun_houses_obj_update_0", "script_noteworthy");
   Objective_Position(objID, (-4756, -384, 808));
 
-  //trigger_wait( "solorun_houses_obj_update_1", "script_noteworthy" );
-  //Objective_Position( objID, ( -4756, -384, 808 ) );
-
   trigger_wait("solorun_houses_obj_update_2", "script_noteworthy");
   Objective_Position(objID, (-4760, 880, 804));
 
@@ -432,10 +414,7 @@ solorun_roof_obj_update_pos(objID) {
 
   trigger_wait_targetname("trig_end_glass_break");
   Objective_OnEntity(objID, level.chopperladder, (0, 0, -85));
-  //Objective_SetPointerTextOverride( objID, &"FAVELA_ESCAPE_OBJ_JUMP_MARKER" );
 }
-
-// -------------------------- // -- STARTS -- // -------------------------- build_starts() {
 default_start(::start_radiotower);
 
 add_start("intro", ::start_radiotower, "map start");
@@ -459,32 +438,6 @@ start_favela_escape_test() {
 
   level.player teleport_to_origin((4892, 292, 1134), (0, 180, 0));
   thread radiotower_enemy_vehicles();
-
-  /* market evac
-  delaythread( 0.05, ::market_evac_playermantle_helper, 1148 );
-  trigger_off( "sbmodel_market_evac_playerblock", "targetname" );
-  level.player teleport_to_origin( ( -3128, -2888, 1064 ), ( 0, 90, 0 ) );
-  chopper = spawn_chopper( 6, false );
-  	
-  path2start = GetStruct( "struct_market_evac_chopper_path2", "targetname" );
-  path2nextnode = GetStruct( path2start.target, "targetname" );
-  	
-  chopper thread market_evac_chopper_bugout_path( path2start );
-  */
-
-  /*
-  level.player teleport_to_origin( ( -6226, -874, 788 ), ( 0, 300, 0 ) );
-  thread bigjump_angrymob();
-  */
-
-  /*
-  spawner = GetEnt( "spawner_vista2_endhouse", "script_noteworthy" );
-  guy = spawner spawn_ai();
-  remove_all_flood_spawners();
-  thread vista2_endhouse_jumpthru();
-  level.player teleport_to_origin( ( -972, 1740, 1124 ), ( 0, 180, 0 ) );
-  level.hero1 teleport_to_origin( ( -796, 1716, 1124 ), ( 0, 180, 0 ) );
-  */
 }
 
 start_radiotower() {
@@ -544,7 +497,6 @@ start_market() {
   thread friendly_colors("market");
   thread market();
 
-  // let enemies spawn and run to nodes
   trigger_off("market_advance_1", "targetname");
   wait(10);
   trigger_on("market_advance_1", "targetname");
@@ -561,12 +513,11 @@ start_market_evac() {
 
   level.sarge set_force_color("b");
   level.hero1 set_force_color("b");
-  //redshirt set_force_color( "p" );
+
   redshirt disable_replace_on_death();
   redshirt notify("death");
   redshirt Delete();
 
-  // fake chopper spawn
   flag_set("market_advance_4");
   thread market_fake_choppers();
 
@@ -673,7 +624,6 @@ start_roofrun_player_jump() {
 
   flag_wait("player_recovery_done");
 
-  // level progression
   thread solorun();
 }
 
@@ -728,8 +678,6 @@ start_solorun_chopper() {
 
   thread solorun("chopperjump");
 }
-
-// ------------------ // --- RADIOTOWER --- // ------------------ radiotower() {
 thread intro_rojas_crucified();
 thread favesc_combat_music();
 thread radiotower_crowd_walla();
@@ -745,8 +693,6 @@ thread radiotower_stop_roof_respawners();
 flag_set("radiotower_start");
 
 battlechatter_off("allies");
-
-// make all redshirts invincible for a while
 array_thread(get_nonhero_friends(), ::magic_bullet_shield);
 
 thread radiotower_runpath_dialogue();
@@ -762,23 +708,15 @@ level.sarge SetGoalNode(sarge_postintro_walkspot);
 
 hero1_postintro_walkspot = GetNode("node_hero1_post_intro_goal", "targetname");
 level.hero1 SetGoalNode(hero1_postintro_walkspot);
-
-// after player moves forward, trigger color chain
 trigger_wait_targetname("trig_intro_playerturnedcorner");
 trigger_activate_targetname("trig_script_color_allies_b0");
-
-// player gets to end of little path
 trigger_wait_targetname("trig_radiotower_brushpath_end");
-
-// nonheroes are mortal again
 array_thread(get_nonhero_friends(), ::stop_magic_bullet_shield_safe);
 
 thread radiotower_enemy_vehicles_prethink();
 delaythread(0.75, ::radiotower_escape_dialogue);
 
 thread radiotower_enemies_retreat();
-
-// level progression
 trigger_wait_targetname("trig_radiotower_exit");
 flag_set("radiotower_exit");
 thread autosave_by_name("street_start");
@@ -797,7 +735,6 @@ intro_rojas_crucified() {
   ASSERT(isDefined(animref) && isDefined(spawner));
 
   spawner.script_drone = undefined;
-  //spawner.script_drone_override = true;
 
   rojas = spawner spawn_ai(true);
   ASSERT(isDefined(rojas));
@@ -845,14 +782,9 @@ intro_rojas_crucified() {
   rojas.a.nodeath = true;
   rojas.takedamage = false;
 
-  //rojas.anim_mode = "nophysics";//zonly_physics, nophysics, none gravity
-  // rojas animmode( "nophysics" );
   rojas delaycall(0.1, ::Kill);
 
-  //	animref thread anim_generic( rojas, deathAnime );
   animref thread anim_custom_animmode_solo(rojas, "nophysics", deathAnime);
-  // wait 0.05;
-  // rojas animmode( "nophysics" );
 }
 
 intro_rojas_crucified_cleanup(rojas, animref, restraints) {
@@ -874,8 +806,6 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
   animref Delete();
   restraints Delete();
 }
-
-// --------------- // --- STREETS --- // --------------- street(startPoint) {
 thread friendly_colors(startPoint);
 
 thread street_dialogue();
@@ -892,8 +822,6 @@ thread vista2_technical_prethink();
 thread vista2_endhouse_jumpthru();
 thread vista2_firsthalf_enemies_retreat();
 thread vista2_leftbalcony_enemies_magicgrenade();
-
-// level progression
 thread market();
 }
 
@@ -908,7 +836,6 @@ friendly_colors(startPoint) {
   market_numTrigs = 6;
 
   if(!isDefined(startPoint)) {
-    // MAIN LOGIC
     thread color_flags_advance(street_trigPrefix, street_numTrigs);
     flag_wait(street_trigPrefix + "_" + street_numTrigs);
 
@@ -918,9 +845,7 @@ friendly_colors(startPoint) {
     thread color_flags_advance(market_trigPrefix, market_numTrigs);
     flag_wait(market_trigPrefix + "_" + market_numTrigs);
   } else {
-    // SPECIAL CASE ALTERNATE LOGIC FOR START POINTS
     if(startPoint == "vista2") {
-      // start from the third trigger in the uphill chain
       thread color_flags_advance(uphill_trigPrefix, uphill_numTrigs, 3);
       flag_wait(uphill_trigPrefix + "_" + uphill_numTrigs);
 
@@ -928,7 +853,6 @@ friendly_colors(startPoint) {
       flag_wait(market_trigPrefix + "_" + market_numTrigs);
     }
     if(startPoint == "market") {
-      // start from the last trigger in the uphill chain
       thread color_flags_advance(uphill_trigPrefix, uphill_numTrigs, 6);
       flag_wait(uphill_trigPrefix + "_" + uphill_numTrigs);
 
@@ -937,12 +861,8 @@ friendly_colors(startPoint) {
     }
   }
 }
-
-// -------------- // --- MARKET --- // -------------- market() {
 thread market_dialogue();
 thread market_fake_choppers();
-
-// allies using chokepoints in the market causes bad behavior
 array_thread(level.friends, ::scr_usechokepoints, false);
 remove_global_spawn_function("allies", ::scr_usechokepoints);
 
@@ -950,8 +870,6 @@ thread market_hero1_change_color();
 thread market_kill_extra_redshirts();
 
 thread market_door1();
-
-// level progression
 thread market_evac();
 }
 
@@ -962,7 +880,7 @@ market_fake_choppers() {
   wait(1);
   fakechopper Delete();
 
-  flag_wait("market_chopper_leaving_scene"); // a vehiclenode on the chopper path sets this script_flag
+  flag_wait("market_chopper_leaving_scene");
   wait(5);
 
   fakechopper = maps\_vehicle::spawn_vehicle_from_targetname("vehicle_market_fake_chopper_2");
@@ -978,7 +896,6 @@ market_evac() {
 
   level notify("color_flags_advance_stop");
 
-  // warp friendlies forward if the player has slammed through this area
   warpSpots = getStructArray("struct_market_evac_friendly_warp", "targetname");
   ASSERT(warpSpots.size >= level.friends.size);
 
@@ -986,11 +903,9 @@ market_evac() {
     guy thread market_evac_friend_teleport(warpSpots[idx]);
   }
 
-  // spawn an invincible redshirt if one's not alive right now
   nonheroes = get_nonhero_friends();
   redshirt = undefined;
   if(!nonhero_is_valid(nonheroes)) {
-    // if guys are here now it means they're meleeing, so throw them away and spawn the new guy
     if(nonheroes.size) {
       foreach(guy in nonheroes) {
         guy friend_remove();
@@ -1001,7 +916,6 @@ market_evac() {
       }
     }
 
-    // if we don't have any more redshirts, spawn an emergency guy
     spawner = GetEnt("market_evac_redshirt_spawner", "targetname");
 
     guy = spawner spawn_ai();
@@ -1013,12 +927,10 @@ market_evac() {
     redshirt = nonheroes[0];
   }
 
-  // stop color replacements
   maps\_colors::kill_color_replacements();
 
   redshirt magic_bullet_shield_safe();
 
-  // redshirt becomes a pink guy
   redshirt set_force_color("p");
 
   player_speed_percent(85, 1);
@@ -1029,15 +941,11 @@ market_evac() {
   level thread market_evac_chopper();
   level thread market_evac_enemy_foreshadowing();
 
-  // "There's Nikolai's Pave Low! Let's go!"level.sarge delaythread(2, ::dialogue, "favesc_cmt_therespavelow");
-
   thread market_evac_friends();
 
   flag_wait("market_evac_chopper_incoming");
   autosave_by_name("market_evac_chopper_incoming");
 
-  // keep the redshirt alive, because it looks a lot better when he runs to his climb spot
-  //with the rest of the squad
   nonheroes = get_nonhero_friends();
   foreach(guy in nonheroes) {
     guy magic_bullet_shield_safe();
@@ -1054,7 +962,6 @@ market_evac() {
 
   flag_wait("market_evac_enemies_depleted");
 
-  // level progression
   thread market_evac_escape();
 }
 
@@ -1064,7 +971,6 @@ market_evac_friend_teleport(warpSpot) {
   }
 
   if(self != level.sarge && self != level.hero1) {
-    // a meleeing nonhero is going to be replaced later so we don't have to teleport him
     if(isDefined(self.melee)) {
       return;
     }
@@ -1094,7 +1000,6 @@ nonhero_is_valid(nonheroes) {
 market_evac_friends() {
   flag_wait("market_evac_friendlies_go_outside");
 
-  // head outside heat style to predefined nodes
   array_thread(level.friends, ::market_evac_friend_outside_setup);
 
   sargeNode = GetNode("node_sarge_soccerfield_cover", "targetname");
@@ -1125,17 +1030,14 @@ market_evac_friend_runexactpath(startnode) {
 
   nodes = get_targeted_line_array(startnode);
 
-  // first node in the chain is specially handled
   nodes = array_remove(nodes, startnode);
 
   self SetGoalNode(startnode);
 
-  // wait til we want to start moving forward
   flag_wait("market_evac_enemies_depleted");
 
-  // always move while shooting
   self thread scr_disable_dontshootwhilemoving();
-  // SUPER accurate - normal scale is 0 to 1 but there are lots of other factors too
+
   self thread scr_accuracy(5.0);
 
   foreach(node in nodes) {
@@ -1152,14 +1054,10 @@ market_evac_escape() {
   array_thread(level.friends, ::scr_moveplaybackrate, 1);
   player_speed_percent(90, 1);
 
-  //trigger_activate_targetname_safe( "trig_script_color_allies_b30" );
-
   thread market_evac_remove_helperclip();
 
-  // "Come on! We've got to get to the rooftops, this way!"level.sarge thread dialogue("favesc_cmt_gettorooftops");
   delaythread(15, ::market_evac_bugplayer);
 
-  //let player get close before friendlies climb
   flag_wait("market_evac_friendlies_start_climbing");
 
   zTest = 1148;
@@ -1169,7 +1067,6 @@ market_evac_escape() {
 
   flag_wait("market_evac_player_on_roof");
 
-  // level progression	
   thread roofrun();
 }
 
@@ -1190,7 +1087,7 @@ market_evac_friendlies_climb() {
 
   array_thread(level.friends, ::ignore_everything);
   array_thread(level.friends, ::set_temp_goalradius, 32);
-  array_thread(level.friends, ::scr_walkDistFacingMotion, 16); // per jiesang
+  array_thread(level.friends, ::scr_walkDistFacingMotion, 16);
 
   hero1Node = GetNode("node_roofrun_hero1_waitforplayer", "targetname");
   redshirtNode = GetNode("node_roofrun_redshirt_waitforplayer", "targetname");
@@ -1203,17 +1100,14 @@ market_evac_friendlies_climb() {
   redshirt threadmarket_evac_friendly_climb(animref, animeR, redshirtNode);
   level.sarge thread market_evac_sarge_climb(animref, animeM, animeM_idle, animeM_idle_2_run);
 
-  // wait for all friendlies to climb up
   while(level.friendliesClimbing < level.friends.size) {
     wait(0.05);
   }
 
-  // remove player blocking clip
   trigger_off("sbmodel_market_evac_playerblock", "targetname");
 }
 
 market_evac_friendly_climb(animref, anime, node) {
-  // wait to finish the exact path running through the soccer field
   self ent_flag_wait("climbing_ok");
 
   animref anim_generic_reach(self, anime);
@@ -1227,7 +1121,6 @@ market_evac_friendly_climb(animref, anime, node) {
 }
 
 market_evac_sarge_climb(animref, anime, anime_idle, anime_idle_2_run) {
-  // wait to finish the exact path running through the soccer field
   self ent_flag_wait("climbing_ok");
 
   flag_set("market_evac_follow_sarge_climb");
@@ -1267,8 +1160,6 @@ market_evac_sarge_should_idle() {
 
   return true;
 }
-
-// ---------------- // --- ROOF RUN --- // ---------------- roofrun() {
 autosave_by_name("roofrun_start");
 
 level.runnersDone = 0;
@@ -1280,8 +1171,6 @@ flag_wait("roofrun_player_at_start_loc");
 
 thread roofrun_chopper_cargodoor_open();
 delaythread(3, ::roofrun_walla);
-
-// TODO I think this stuff needs adjustment based on distance
 player_speed_percent(90, 1);
 setSavedDvar("player_sprintUnlimited", "1");
 array_thread(level.friends, ::scr_animplaybackrate, 1.135);
@@ -1301,13 +1190,9 @@ foreach(index, guy in level.friends) {
 
 thread roofrun_dialogue();
 
-//thread roofrun_modulate_playerspeed( level.sarge );
-
 thread roofrun_player_bigjump();
 
 flag_wait("player_recovery_done");
-
-// level progression
 thread solorun();
 }
 
@@ -1330,8 +1215,6 @@ roofrun_chopper_cargodoor_open() {
   chopper playSound("pavelow_door_open");
   chopper anim_single_solo(chopper, "cargodoor_open");
 }
-
-// ---------------- // --- SOLO RUN --- // ---------------- solorun(start) {
 flag_set("solorun_start");
 
 waitBeforeJump = undefined;
@@ -1343,8 +1226,6 @@ if(!isDefined(start)) {
 player_speed_percent(100, 0.1);
 player_sprint_multiplier_blend(1.5, 0.1);
 setSavedDvar("player_sprintUnlimited", "1");
-
-// sprinty hands
 level.player GiveWeapon("freerunner");
 level.player SwitchToWeapon("freerunner");
 
@@ -1409,8 +1290,6 @@ wait(8);
 
 fadeTime = 4;
 blackTime = 4;
-
-// fade to black
 black_overlay = create_client_overlay("black", 0, level.player);
 black_overlay FadeOverTime(fadeTime);
 black_overlay.alpha = 1;
@@ -1429,8 +1308,6 @@ solorun_balcony_save() {
     maps\_autosave::_autosave_game_now();
   }
 }
-
-// mostly copied from _autosave::autoSaveThreatCheck(), with some omissions
 solorun_balcony_save_aicheck() {
   volume = GetEnt("vol_solorun_ai_behind_player_near_balcony", "targetname");
 
@@ -1445,49 +1322,20 @@ solorun_balcony_save_aicheck() {
       continue;
     }
 
-    // is trying to melee the player
     if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && isPlayer(enemy.melee.target)) {
       maps\_autosave::AutoSavePrint("autosave failed: AI meleeing player");
       return (false);
     }
 
     if(enemy.finalAccuracy < 0.021 && enemy.finalAccuracy > -1) {
-      // enemy lacks the accuracy to be a threat
       continue;
     }
 
-    // level specific!he's in the room behind the player
     if(volume IsTouching(enemy)) {
       maps\_autosave::AutoSavePrint("autosave failed: AI are in a volume close behind the player");
       return false;
     }
 
-    /* we want CanSee checks here, this area is too squirrelly for distance checks to work well
-    proximity_threat = false;
-    foreach ( player in level.players )
-    {
-    	dist = Distance( enemy.origin, player.origin );
-    	
-    	if( dist < 360 )
-    	{
-    		maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
-    		return false;
-    	}
-    	else
-    	if( dist < 1000 )
-    	{
-    		proximity_threat = true;
-    	}
-    }
-    		
-    if( !proximity_threat )
-    {
-    	// enemy isn't close enough to be a threat
-    	continue;
-    }
-    */
-
-    // recently shot at the player
     if(enemy.a.lastShootTime > GetTime() - 500) {
       if(enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
         maps\_autosave::AutoSavePrint("autosave failed: AI firing on player");

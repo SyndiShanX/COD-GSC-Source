@@ -3,34 +3,6 @@
  * Script: maps\_c4.gsc
 ********************************************************/
 
-/*
-	Radiant:
-		Create as many trigger_use with targetname "generic_use_trigger" as you might need. 8x8x8 units or so.
-		Make sure to place them where the player can't get to them, they will be moved to the correct loctaion in script.
-		They will be reused so you only have to do as many as you might have C4 objectivs active at the same time.
-	
-	Script:
-		maps\_c4::main(); // Add in you main() function.
-		<entity> maps\_c4::c4_location( tag, origin_offset, angles_offset, org );
-
-		org => optional parameter if you want to plant on an origin instead of a tag
-
-		<entity>.multiple_c4 = true;
-		Set .multiple_c4 on the entity if more then one C4 in required before the detonator is given to the player.
-		This must be set before <entity> maps\_c4::c4_location( ... ); is called.
-
-	Example:
-		technical = maps\_vehicle::waittill_vehiclespawn( "technical" );
-		technical maps\_c4::c4_location( "tag_origin", (76, 15, 55.5), (11, 0, 1.5) );
-		technical waittill( "c4_detonation" );
-		technical notify( "death" ); // this does the explosion and model swap for a vehicle. Other entities might need other ways to do the model swap.
-
-	If the target gets destroyed by something elese then the C4:
-		<entity> notify( "clear_c4" ); // this will remove the c4 without detonation.
-
-	You can have more then one c4_location on any one entity. Once one is triggered the others will be deleted.
-
-*/
 #include maps\_utility;
 #include common_scripts\utility;
 
@@ -42,7 +14,6 @@ main() {
 }
 
 c4_location(tag, origin_offset, angles_offset, org) {
-  //self ---> the entity the c4 is placed on
   tag_origin = undefined;
 
   if(!isDefined(origin_offset))
@@ -66,7 +37,7 @@ c4_location(tag, origin_offset, angles_offset, org) {
     c4_model.angles = self.angles;
 
   c4_model.trigger = get_use_trigger();
-  // Press and hold && 1 to plant the explosives.
+
   c4_model.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
 
   if(isDefined(tag)) {
@@ -92,8 +63,6 @@ playC4Effects() {
 }
 
 handle_use(c4_target) {
-  //self ==> the c4 model
-  //c4_target ==> the entity the c4 is placed on
   c4_target endon("clear_c4");
 
   if(!isDefined(c4_target.multiple_c4))
@@ -158,13 +127,11 @@ handle_detonation(c4_target, player) {
 
   c4_target notify("c4_detonation");
 
-  soundPlayer waittill("sound_done"); // not working?
+  soundPlayer waittill("sound_done");
   soundPlayer delete();
 }
 
 handle_clear_c4(c4_target) {
-  //self ==> the c4 model
-  //c4_target ==> the entity the c4 is placed on
   c4_target endon("c4_detonation");
 
   c4_target waittill("clear_c4");
@@ -213,7 +180,6 @@ switch_to_detonator() {
   if(!isDefined(self.old_weapon))
     self.old_weapon = self getcurrentweapon();
 
-  // if the player doesn't have the C4 weapon give it to him.
   weapons = self GetWeaponsListAll();
   for(i = 0; i < weapons.size; i++) {
     if(weapons[i] != "c4")

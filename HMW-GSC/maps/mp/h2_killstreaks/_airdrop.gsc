@@ -41,7 +41,6 @@ h2_setHeadIcon(showTo, icon, offset, width, height) {
 
   if(!isPlayer(showTo) && showTo == "none") {
     foreach(key, headIcon in self.entityHeadIcons) {
-      // TODO: remove and fix properly after ship
       if(isDefined(headIcon))
         headIcon destroy();
 
@@ -60,7 +59,7 @@ h2_setHeadIcon(showTo, icon, offset, width, height) {
     if(icon == "") {
       return;
     }
-    // remove from team or we'd have two icons
+
     if(isDefined(self.entityHeadIcons[showTo.team])) {
       self.entityHeadIcons[showTo.team] destroy();
       self.entityHeadIcons[showTo.team] = undefined;
@@ -123,7 +122,6 @@ init() {
   precacheModel("vehicle_little_bird_armed");
   precacheModel("vehicle_ac130_low_mp");
   precacheModel("wpn_h1_grenade_smoke_vm");
-  //precacheModel( "sentry_minigun_folded" );
 
   precacheModel(h2_getTeamCrateModel("allies"));
   precacheModel(h2_getTeamCrateModel("axis"));
@@ -192,8 +190,6 @@ init() {
 
   level.killStreakFuncs["airdrop_marker_mp"] = ::tryUseAirdrop;
 
-  //level.killStreakFuncs["airdrop_predator_missile"] = ::tryUseAirdropPredatorMissile;
-  //level.killStreakFuncs["airdrop_sentry_minigun"] = ::tryUseAirdropSentryMinigun;
   level.killStreakFuncs["airdrop_mega_marker_mp"] = ::tryUseMegaAirdrop;
 
   level.littleBirds = 0;
@@ -201,7 +197,6 @@ init() {
 
   level.crateTypes = [];
 
-  //			Drop Type			Type						Weight		Function					
   addCrateType("airdrop_marker_mp", "ammo", getDvarInt("scr_airdrop_ammo", 17), ::ammoCrateThink);
   addCrateType("airdrop_marker_mp", "radar_mp", getDvarInt("scr_airdrop_uav", 17), ::killstreakCrateThink);
   addCrateType("airdrop_marker_mp", "counter_radar_mp", getDvarInt("scr_airdrop_counter_uav", 15), ::killstreakCrateThink);
@@ -232,11 +227,6 @@ init() {
   addCrateType("airdrop_mega_marker_mp", "emp_mp", getDvarInt("scr_airdrop_mega_emp", 0), ::killstreakCrateThink);
   addCrateType("airdrop_mega_marker_mp", "nuke_mp", getDvarInt("scr_airdrop_mega_nuke", 0), ::killstreakCrateThink);
 
-  //addCrateType( "airdrop_sentry_minigun",	"sentry", 			0,			::killstreakCrateThink );
-
-  //addCrateType( "nuke_drop",		"nuke", 					100,		::nukeCrateThink );
-
-  // generate the max weighted value
   foreach(dropType, crateTypes in level.crateTypes) {
     level.crateMaxVal[dropType] = 0;
     foreach(crateType, crateWeight in level.crateTypes[dropType]) {
@@ -284,16 +274,11 @@ getRandomCrateType(dropType) {
 
 getCrateTypeForDropType(dropType) {
   switch (dropType) {
-    //case "airdrop_sentry_minigun":
-    //	return "sentry";
-    //case "airdrop_predator_missile":
-    //	return "predator_missile";
     case "airdrop_marker_mp":
       return getRandomCrateType("airdrop_marker_mp");
     case "airdrop_mega_marker_mp":
       return getRandomCrateType("airdrop_mega_marker_mp");
-      //case "nuke_drop":
-      //	return "nuke";
+
     default:
       return getRandomCrateType("airdrop_marker_mp");
   }
@@ -710,8 +695,6 @@ physicsWaiter(dropType, crateType) {
   }	
   */
 }
-
-//deletes if crate wasnt used after 90 seconds
 dropTimeOut(dropCrate, owner) {
   dropCrate endon("death");
 
@@ -761,8 +744,7 @@ getFlyHeightOffset(dropSite) {
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(!isDefined(heightEnt)) //old system
-  {
+  if(!isDefined(heightEnt)) {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
 
     if(isDefined(level.airstrikeHeightScale)) {
@@ -874,7 +856,6 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
   for(;;) {
     dist = distance2D(c130.origin, dropSite);
 
-    // handle missing our target
     if(dist < minDist)
       minDist = dist;
     else if(dist > minDist) {
@@ -887,7 +868,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
       earthquake(0.15, 1.5, dropSite, 1500);
       if(!boomPlayed) {
         c130 playSound("veh_ac130_sonic_boom");
-        //c130 thread stopLoopAfter( 0.5 );
+
         boomPlayed = true;
       }
     }
@@ -948,13 +929,11 @@ dropNuke(dropSite, owner, dropType) {
   forward = anglesToForward(direction);
   c130 moveTo(pathEnd, flyTime, 0, 0);
 
-  // TODO: fix this... it's bad.if we miss our distance (which could happen if plane speed is changed in the future) we stick in this thread forever
   boomPlayed = false;
   minDist = distance2D(c130.origin, dropSite);
   for(;;) {
     dist = distance2D(c130.origin, dropSite);
 
-    // handle missing our target
     if(dist < minDist)
       minDist = dist;
     else if(dist > minDist) {
@@ -967,7 +946,7 @@ dropNuke(dropSite, owner, dropType) {
       earthquake(0.15, 1.5, dropSite, 1500);
       if(!boomPlayed) {
         c130 playSound("veh_ac130_sonic_boom");
-        //c130 thread stopLoopAfter( 0.5 );
+
         boomPlayed = true;
       }
     }
@@ -1006,8 +985,6 @@ playloopOnEnt(alias) {
   soundOrg stoploopsound(alias);
   soundOrg delete();
 }
-
-// spawn C130 at a start node and monitors it
 c130Setup(owner, pathStart, pathGoal) {
   forward = vectorToAngles(pathGoal - pathStart);
   c130 = spawnplane(owner, "script_model", pathStart, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
@@ -1016,15 +993,13 @@ c130Setup(owner, pathStart, pathGoal) {
   if(!isDefined(c130)) {
     return;
   }
-  //chopper playLoopSound( "littlebird_move" );
+
   c130.owner = owner;
   c130.team = owner.team;
   level.c130 = c130;
 
   return c130;
 }
-
-// spawn helicopter at a start node and monitors it
 heliSetup(owner, pathStart, pathGoal) {
   forward = vectorToAngles(pathGoal - pathStart);
   chopper = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
@@ -1088,13 +1063,10 @@ heliDestroyed() {
 
   lbExplode();
 }
-
-// crash explosion
 lbExplode() {
   forward = (self.origin + (0, 0, 1)) - self.origin;
   playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, forward);
 
-  // play heli explosion sound
   self playSound("cobra_helicopter_crash");
   self notify("explode");
 
@@ -1104,7 +1076,6 @@ lbExplode() {
 lbSpin(speed) {
   self endon("explode");
 
-  // tail explosion that caused the spinning
   playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   playFXOnTag(level.chopper_fx["fire"]["trail"]["medium"], self, "tail_rotor_jnt");
 
@@ -1152,9 +1123,6 @@ crateOtherCaptureThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
 
-    //if( !player isOnGround() )
-    //	continue;
-
     if(isDefined(self.owner) && player == self.owner) {
       continue;
     }
@@ -1174,9 +1142,6 @@ crateOtherCaptureThink() {
 crateOwnerCaptureThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
-
-    //if( !player isOnGround() )
-    //	continue;
 
     if(isDefined(self.owner) && player != self.owner) {
       continue;

@@ -53,7 +53,7 @@ leadshowstuff_path(position, arrowtime) {
     if(!isDefined(targ))
       return;
     realarrowtime = distance(lasttarg.origin, targ.origin) / 1000;
-    //		if(distance(level.player.origin,targ.origin) < 5000)
+
     draw_arrow_time(lasttarg.origin, targ.origin, (0, 0, 1), realarrowtime);
     wait realarrowtime;
     lasttarg = targ;

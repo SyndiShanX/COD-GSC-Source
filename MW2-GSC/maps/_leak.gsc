@@ -47,7 +47,7 @@ leak_barrel_setup() {
   self.org = self.A + vector_multiply(self.up, 22);
   self.A = self.A + vector_multiply(self.up, 1.5);
   self.B = self.A + vector_multiply(self.up, 41.4);
-  self.volume = (3.1416 * (14 * 14) * 42); // pi * ( r squared ) * height
+  self.volume = (3.1416 * (14 * 14) * 42);
   self.curvol = self.volume;
 
   dot = vectordot(self.up, worldup);
@@ -137,7 +137,6 @@ leak_calc_splash(P, type) {
   vec = vectornormalize(vectorFromLineToPoint(self.A, self.B, P));
   P = pointOnSegmentNearestToPoint(self.A, self.B, P);
   return (P + vector_multiply(vec, 4));
-  //return P;
 }
 
 leak_calc_nofx(P, type) {
@@ -155,8 +154,6 @@ precacheFX() {
     }
     level._effect["leak_interactive_leak"][self[i].script_noteworthy] = loadfx("impacts/barrel_leak");
     level._effect["leak_interactive_drain"][self[i].script_noteworthy] = loadfx("impacts/barrel_drain");
-    //level._sound["leak_interactive"][self[i].script_noteworthy] 		= "mtl_steam_pipe_hit";
-    //level.pipe_fx_time[self[i].script_noteworthy]			= 5;
 
     break;
   }

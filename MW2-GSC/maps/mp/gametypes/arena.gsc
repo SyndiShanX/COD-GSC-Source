@@ -6,33 +6,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	Arena
-	Objective: 	Eliminate the enemy team
-	Map ends:	When one team eliminates the enemy team, or the flag is reached
-	Respawning:	Beginning of next round
-
-	Level requirementss
-	------------------ Spawnpoints:
-			classname		mp_tdm_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of teammates and enemies
-			at the time of spawn. Players generally spawn behind their teammates relative to the direction of enemies.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-*/
-
-/*QUAKED mp_tdm_spawn (0.0 0.0 1.0) (-16 -16 0) (16 16 72)
-Players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_tdm_spawn_axis_start (0.5 0.0 1.0) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_tdm_spawn_allies_start (0.0 0.5 1.0) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -272,7 +245,6 @@ arenaFlag() {
   primaryFlags = getEntArray("flag_primary", "targetname");
   secondaryFlags = getEntArray("flag_secondary", "targetname");
 
-  // check to see if arena flag is present otherwise throw a warning and use the dom Flag.
   if(!isDefined(arenaFlag[0])) {
     println("WARNING: no arena flags specified attempting to use Dom flag_b");
 
@@ -313,7 +285,6 @@ arenaFlag() {
   arenaFlag.onEndUse = ::onEndUse;
   arenaFlag.isArena = true;
 
-  //play sound to show flag is now available for capture
   iPrintLnBold("Arena flag spawned");
 
   level.arenaFlag playSound("flag_spawned");
@@ -375,8 +346,6 @@ onUse(player) {
   team = player.pers["team"];
   oldTeam = self maps\mp\gametypes\_gameobjects::getOwnerTeam();
   label = self maps\mp\gametypes\_gameobjects::getLabel();
-
-  //player logString( "flag captured: " + self.label );
 
   self.captureTime = getTime();
 

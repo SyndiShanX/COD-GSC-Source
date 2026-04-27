@@ -3,9 +3,6 @@
  * Script: character\mp_character_opforce_urban_lmg.gsc
 ********************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_russian_military_lmg_a");
   self attach("head_russian_military_b", "", 1);

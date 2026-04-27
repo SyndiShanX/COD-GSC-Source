@@ -56,14 +56,11 @@ create_fx_menu() {
     if(button_is_clicked("m"))
       increment_list_offset();
 
-    // change selected entities
     menu_change_selected_fx();
 
-    // if there's a selected ent then display the info on the last one to be selected
     if(entities_are_selected()) {
       last_selected_ent = get_last_selected_entity();
 
-      // only update hudelems when we have new info
       if(!isDefined(level.last_displayed_ent) || last_selected_ent != level.last_displayed_ent) {
         display_fx_info(last_selected_ent);
         level.last_displayed_ent = last_selected_ent;
@@ -85,7 +82,6 @@ create_fx_menu() {
     display_fx_add_options(get_last_selected_entity());
     if(button_is_clicked("m")) {
       increment_list_offset();
-      //			draw_effects_list();		
     }
   }
 }
@@ -144,7 +140,7 @@ menu_fx_creation() {
 finish_creating_entity(ent) {
   ent.v["angles"] = vectortoangles((ent.v["origin"] + (0, 0, 100)) - ent.v["origin"]);
   assert(isDefined(ent));
-  ent post_entity_creation_function(); // for createfx dev purposes
+  ent post_entity_creation_function();
   clear_entity_selection();
   select_last_entity();
   move_selection_to_cursor();
@@ -154,8 +150,7 @@ finish_creating_entity(ent) {
 
 menu_init() {
   level.createFX_options = [];
-  // each option has a type, a name its stored under, a description, a default, and a mask it uses to determine
-  // which types of fx can have this option
+
   addOption("string", "fxid", "The FX", "nil", "fx");
   addOption("float", "delay", "Repeat rate/start delay", 0.5, "fx");
   addOption("float", "fire_range", "Fire damage range", 0, "fx");
@@ -186,7 +181,6 @@ menu_init() {
   level.effect_list_offset = 0;
   level.effect_list_offset_max = 10;
 
-  // creates mask groups. For example if the above says its mask is "fx", then all the types under "fx" can use the option
   level.createfxMasks = [];
   level.createfxMasks["all"] = [];
   level.createfxMasks["all"]["exploder"] = true;
@@ -264,7 +258,7 @@ prepare_option_for_change(option, drawnCount) {
   level.createfx_inputlocked = true;
   set_option_index(option["name"]);
   setDvar("fx", "nil");
-  // change color of text to look selected
+
   level.createFxHudElements[drawnCount + 3][0].color = (1, 1, 0);
 }
 
@@ -292,7 +286,7 @@ apply_option_to_selected_fx(option, setting) {
       ent.v[option["name"]] = setting;
   }
 
-  level.last_displayed_ent = undefined; // needed to force a redraw of the last display ent
+  level.last_displayed_ent = undefined;
   update_selected_entities();
   clear_settable_fx();
 }
@@ -333,7 +327,6 @@ get_option(name) {
 }
 
 display_fx_info(ent) {
-  // are we doing the create fx menu right now?
   if(!menu("none")) {
     return;
   }
@@ -344,7 +337,6 @@ display_fx_info(ent) {
   set_fx_hudElement("Angles: " + ent.v["angles"]);
 
   if(entities_are_selected()) {
-    // if entities are selected then we make the entity stats modifiable
     count = 0;
     drawnCount = 0;
     more = false;
@@ -384,7 +376,6 @@ display_fx_info(ent) {
 }
 
 display_fx_add_options(ent) {
-  // are we doing the create fx menu right now?
   assert(menu("add_options"));
   assert(entities_are_selected());
 
@@ -394,7 +385,6 @@ display_fx_add_options(ent) {
   set_fx_hudElement("Origin: " + ent.v["origin"]);
   set_fx_hudElement("Angles: " + ent.v["angles"]);
 
-  // if entities are selected then we make the entity stats modifiable
   count = 0;
   drawnCount = 0;
   more = false;
@@ -407,7 +397,7 @@ display_fx_add_options(ent) {
     if(isDefined(ent.v[option["name"]])) {
       continue;
     }
-    // does this type of effect get this kind of option?
+
     if(!mask(option["mask"], ent.v["type"])) {
       continue;
     }
@@ -423,9 +413,9 @@ display_fx_add_options(ent) {
       button_to_check = 0;
     if(button_is_clicked(button_to_check + "")) {
       add_option_to_selected_entities(option);
-      //			prepare_option_for_change( option, drawnCount );
+
       menuNone();
-      level.last_displayed_ent = undefined; // needed to force a redraw of the last display ent
+      level.last_displayed_ent = undefined;
       return;
     }
 
@@ -481,7 +471,4 @@ draw_effects_list() {
 
 increment_list_offset() {
   level.effect_list_offset += level.effect_list_offset_max;
-  //	keys = getarraykeys(level._effect);
-  //	if(level.effect_list_offset >= keys.size)
-  //		level.effect_list_offset = 0;
 }

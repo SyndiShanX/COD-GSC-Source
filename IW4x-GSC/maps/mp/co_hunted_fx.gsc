@@ -7,8 +7,6 @@
 #include maps\mp\_utility;
 
 main() {
-  //level._effect["firelp_vhc_lrg_pm_farview"]		= loadfx ("fire/firelp_vhc_lrg_pm_farview");
-  //level._effect["lighthaze"]						= loadfx ("misc/lighthaze");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -35,15 +33,12 @@ main() {
   level._effect["insects_light_hunted"] = loadfx("misc/insects_light_hunted");
   level._effect["insects_light_hunted_a"] = loadfx("misc/insects_light_hunted_a");
   level._effect["hunted_vl_white_eql"] = loadfx("misc/hunted_vl_white_eql");
-  //	level._effect["hunted_vl_white_eql_flare"]		= loadfx ("misc/hunted_vl_white_eql_flare");
+
   level._effect["hunted_vl_white_eql_a"] = loadfx("misc/hunted_vl_white_eql_a");
-  //	level._effect["grenadeexp_fuel"]				= loadfx ("explosions/grenadeexp_fuel");
-  //	level._effect["hunted_fel"]						= loadfx ("misc/hunted_fel");	
+
   level._effect["greenhouse_fog_spot_lit"] = loadfx("smoke/greenhouse_fog_spot_lit");
   level._effect["waterfall_hunted"] = loadfx("misc/waterfall_hunted");
   level._effect["stream_hunted"] = loadfx("misc/stream_hunted");
-
-  //footstep fx
 
   setFootstepEffect("asphalt", loadfx("impacts/footstep_dust_dark"));
   setFootstepEffect("brick", loadfx("impacts/footstep_dust_dark"));
@@ -60,7 +55,6 @@ main() {
   setFootstepEffect("water", loadfx("impacts/footstep_water_dark"));
   setFootstepEffect("wood", loadfx("impacts/footstep_dust_dark"));
 
-  //Rain Fx :D
   level._effect["rain_mp_storm"] = loadfx("weather/rain_mp_storm");
   level._effect["rain_noise_splashes"] = loadfx("weather/rain_noise_splashes");
   level._effect["rain_splash_lite_128x128"] = loadfx("weather/rain_splash_lite_128x128");

@@ -3,104 +3,54 @@
 #using scripts\shared\music_shared;
 #namespace cp_mi_zurich_newworld_sound;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function function_9c5a4eb0() {
-  // Unsupported VM revision (1B).
-}
+function function_9c5a4eb0() {}
 
-function function_9c09862a() {
-  // Unsupported VM revision (1B).
-}
+function function_9c09862a() {}
 
-function function_3c510972() {
-  // Unsupported VM revision (1B).
-}
+function function_3c510972() {}
 
 #namespace namespace_e38c3c58;
 
-function function_973b77f9() {
-  // Unsupported VM revision (1B).
-}
+function function_973b77f9() {}
 
-function function_d942ea3b() {
-  // Unsupported VM revision (1B).
-}
+function function_d942ea3b() {}
 
-function function_71fee4f3() {
-  // Unsupported VM revision (1B).
-}
+function function_71fee4f3() {}
 
-function function_68f4508b() {
-  // Unsupported VM revision (1B).
-}
+function function_68f4508b() {}
 
-function function_d4def1a6() {
-  // Unsupported VM revision (1B).
-}
+function function_d4def1a6() {}
 
-function function_964ce03c() {
-  // Unsupported VM revision (1B).
-}
+function function_964ce03c() {}
 
-function function_fa2e45b8() {
-  // Unsupported VM revision (1B).
-}
+function function_fa2e45b8() {}
 
-function function_606b7b8() {
-  // Unsupported VM revision (1B).
-}
+function function_606b7b8() {}
 
-function function_f4a6634b() {
-  // Unsupported VM revision (1B).
-}
+function function_f4a6634b() {}
 
-function function_92eefdb3() {
-  // Unsupported VM revision (1B).
-}
+function function_92eefdb3() {}
 
-function function_d8182956() {
-  // Unsupported VM revision (1B).
-}
+function function_d8182956() {}
 
-function function_ccafa212() {
-  // Unsupported VM revision (1B).
-}
+function function_ccafa212() {}
 
-function function_bb8ce831() {
-  // Unsupported VM revision (1B).
-}
+function function_bb8ce831() {}
 
-function function_57c68b7b() {
-  // Unsupported VM revision (1B).
-}
+function function_57c68b7b() {}
 
-function function_a99be221() {
-  // Unsupported VM revision (1B).
-}
+function function_a99be221() {}
 
-function function_922297e3() {
-  // Unsupported VM revision (1B).
-}
+function function_922297e3() {}
 
-function function_9c65cf9a() {
-  // Unsupported VM revision (1B).
-}
+function function_9c65cf9a() {}
 
-function function_a693b757() {
-  // Unsupported VM revision (1B).
-}
+function function_a693b757() {}
 
-function function_57a2519c() {
-  // Unsupported VM revision (1B).
-}
+function function_57a2519c() {}
 
-function function_5a7ad30() {
-  // Unsupported VM revision (1B).
-}
+function function_5a7ad30() {}
 
-function function_c132cd41() {
-  // Unsupported VM revision (1B).
-}
+function function_c132cd41() {}

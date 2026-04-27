@@ -8,48 +8,44 @@
 #include common_scripts\utility;
 
 main() {
-  // :
   precachestring(&"SCRIPT_COLON");
-  // TIME REMAINING:
+
   precachestring(&"SCRIPT_TIME_REMAINING");
-  // TOTAL SCORE:
+
   precachestring(&"SCRIPT_TOTAL_SCORE");
-  // EXTRA LIFE X
+
   precachestring(&"SCRIPT_EXTRA_LIFE");
-  // CHECKPOINT!
+
   precachestring(&"SCRIPT_CHECKPOINT");
-  // MISSION SCORE:
+
   precachestring(&"SCRIPT_MISSION_SCORE");
-  // ZERO DEATHS BONUS x2
+
   precachestring(&"SCRIPT_ZERO_DEATHS");
-  // + precachestring(&"SCRIPT_PLUS");
-  // TIME UP
+
   precachestring(&"SCRIPT_TIME_UP");
-  // 1UP
+
   precachestring(&"SCRIPT_1UP");
-  // GAME OVER
+
   precachestring(&"SCRIPT_GAME_OVER");
-  // DIFFICULTY BONUS x1.5
+
   precachestring(&"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF");
-  // DIFFICULTY BONUS x3
+
   precachestring(&"SCRIPT_DIFFICULTY_BONUS_THREE");
-  // DIFFICULTY BONUS x4
+
   precachestring(&"SCRIPT_DIFFICULTY_BONUS_FOUR");
-  // MISSION COMPLETE
+
   precachestring(&"SCRIPT_MISSION_COMPLETE");
-  // NEW HIGH SCORE!
+
   precachestring(&"SCRIPT_NEW_HIGH_SCORE");
-  // STREAK BONUS LOST
+
   precachestring(&"SCRIPT_STREAK_BONUS_LOST");
-  // -STREAK COMPLETE- precachestring(&"SCRIPT_STREAK_COMPLETE");
-  // x
+
   precachestring(&"SCRIPT_X");
   precacheShader("arcademode_life");
 
   level.color_cool_green = (0.8, 2.0, 0.8);
   level.color_cool_green_glow = (0.3, 0.6, 0.3);
 
-  // the colors used for the kill streak guys
   arcadeMode_init_kill_streak_colors();
 
   level.arcadeMode_checkpoint_dvars = [];
@@ -64,7 +60,7 @@ main() {
   setDvar("arcademode_lives_changed", 0);
 
   level.arcadeMode_kill_streak_current_multiplier = 1;
-  level.arcadeMode_kill_streak_multiplier_count = 3; // gotta kill these number of guys to get the multiplier
+  level.arcadeMode_kill_streak_multiplier_count = 3;
   arcadeMode_reset_kill_streak();
 
   for(i = 0; i < level.arcadeMode_checkpoint_max; i++) {
@@ -78,7 +74,7 @@ main() {
   flag_init("arcademode_complete");
   flag_init("arcademode_ending_complete");
 
-  waittillframeend; // so level.script is set
+  waittillframeend;
   level.global_kill_func = ::player_kill;
   level.global_damage_func_ads = ::player_damage_ads;
   level.global_damage_func = ::player_damage;
@@ -107,26 +103,16 @@ main() {
   setDvar("arcademode_died", 0);
   setDvar("arcademode_score", 0);
 
-  /*
-  if( getDvar( "arcademode_full" ) == "1" && level.script != "cargoship" )
-  {
-  	// continuing from previous level so grab combined score
-  	level.arcadeMode_combined_score = getdvarint( "arcademode_combined_score" );
-  }
-  */
-
   if(getDvar("arcademode_combined_score") == "" || (getDvar("arcademode_full") == "1" && level.script == "cargoship")) {
     setDvar("arcademode_combined_score", 0);
   }
-
-  //	set_next_extra_life( 0 );
 
   timer = arcademode_get_level_time();
   timer *= 60;
   level.arcdeMode_startTime = gettime();
   level.arcadeMode_time = timer;
-  level.arcadeMode_killBase = 50; // base points for a kill
-  level.arcadeMode_damageBase = 5; // base points for damage
+  level.arcadeMode_killBase = 50;
+  level.arcadeMode_damageBase = 5;
 
   level.arcadeMode_multiKills = [];
   mods = getarraykeys(level.arcadeMode_weaponMultiplier);
@@ -139,16 +125,14 @@ main() {
   thread arcademode_update_score();
   thread arcademode_update_timer();
   thread arcadeMode_death_detection();
-  //	thread arcademode_update_streak_progress();
 
-  arcademode_redraw_lives(lives); // lives
+  arcademode_redraw_lives(lives);
 
   for(;;) {
     wait(0.05);
 
     waittillframeend;
     waittillframeend;
-    // calc all the multi-kills for this frame
 
     mods = getarraykeys(level.arcadeMode_multiKills);
     array_levelthread(mods, ::arcadeMode_add_points_for_mod);
@@ -157,7 +141,6 @@ main() {
 }
 
 arcademode_complete() {
-  // for use with outside scripts because flag "arcademode_complete" may not be initialized
   if(getDvar("arcademode") != "1")
     return false;
   return flag("arcademode_complete");
@@ -166,7 +149,6 @@ arcademode_complete() {
 arcademode_get_level_time() {
   time_remaining = 20;
 
-  // set level specific timers in minutes here
   timer = [];
   timer["cargoship"] = 11;
   timer["armada"] = 15;
@@ -185,56 +167,11 @@ arcademode_get_level_time() {
   timer["launchfacility_b"] = 14;
   timer["jeepride"] = 9;
   timer["airplane"] = 4;
-  /*
-  timer[ "icbm" ] = 				18;
-  timer[ "cargoship" ] = 			13;
-  timer[ "blackout" ] = 			4;
-  timer[ "village_defend" ] = 	3;
-  timer[ "airplane" ] = 			4;
-  timer[ "hunted" ] = 			5;
-  timer[ "ambush" ] = 			3;
-  timer[ "bog_b" ] =				2;
-  timer[ "village_assault" ] =	5;
-  */
 
   difficultyTimerScale = 1;
 
-  /*
-  if( getDvar( "arcademode_full" ) == "1" )
-  {
-  	// a little more time for airplane on full mode playthrough
-  	newtimer = timer["airplane"];
-  	if( level.gameskill == 2 )
-  	{
-  		newtimer = 15;
-  	}
-  	if( level.gameskill == 3 )
-  	{
-  		newtimer = 25;
-  	}
-  	difficultyTimerScale *= newtimer / timer["airplane"];
-  	timer[ "airplane" ] = newtimer;
-  }
-  */
-
   if(isDefined(timer[level.script]))
     time_remaining = timer[level.script];
-
-  /*
-  if( getDvar( "arcademode_full" ) == "1" )
-  {
-  	if( level.gameskill == 2 )
-  	{
-  		time_remaining *= 2.0;
-  		difficultyTimerScale *= 2.0;
-  	}
-  	if( level.gameskill == 3 )
-  	{
-  		time_remaining *= 2.5;
-  		difficultyTimerScale *= 2.5;
-  	}
-  }
-  */
 
   level.arcademode_difficultyTimerScale = difficultyTimerScale;
 
@@ -265,14 +202,13 @@ arcadeMode_death_detection() {
 
   if(lives < 0) {
     wait 1.5;
-    // GAME OVER
+
     level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
     thread arcademode_ends();
     return;
   }
 
   if(isalive(level.player)) {
-    // the mission failed so need to actually fail the mission.
     missionfailed();
   }
 }
@@ -296,7 +232,6 @@ arcademode_update_timer() {
   hud_time.glowColor = (0.3, 0.6, 0.3);
   hud_time.glowAlpha = 1;
 
-  //	hud_time SetPulseFX( 30, 100000, 700 );//something, decay start, decay duration
   hud_time.hidewheninmenu = true;
   level.arcadeMode_hud_timer = hud_time;
   level endon("arcadeMode_remove_timer");
@@ -304,7 +239,7 @@ arcademode_update_timer() {
   timer = level.arcadeMode_time;
   hud_time settimer(timer - .1);
   wait(timer);
-  // TIME UP
+
   level.arcadeMode_failureString = &"SCRIPT_TIME_UP";
   thread arcadeMode_ends();
 }
@@ -323,14 +258,12 @@ arcademode_update_lives() {
     if(change != 0) {
       lives = getdvarint("arcademode_lives");
       if(lives < 0) {
-        // GAME OVER
         level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
         thread arcadeMode_ends();
         return;
       }
 
       if(change == -1) {
-        // lost a life so kill streak
         level notify("lost_streak");
         level.arcademode_kill_streak_ends = gettime();
         thread arcademode_add_kill_streak_time(0);
@@ -419,7 +352,7 @@ arcademode_redraw_lives(lives) {
 arcademode_update_streak_progress() {
   for(;;) {
     level waittill_either("arcademode_decrement_kill_streak", "arcademode_new_kill");
-    waittillframeend; // for the new hud elem to be added to the array
+    waittillframeend;
     arcademode_redraw_streak_progress();
   }
 }
@@ -437,11 +370,9 @@ arcademode_redraw_streak_progress() {
   for(;;) {
     color = level.arcadeMode_kill_streak_current_multiplier + count;
     if(color >= level.arcadeMode_streak_color.size) {
-      // go crazy would start here instead of this
       color = level.arcadeMode_streak_color.size - 1;
     }
 
-    // sets the color of all the kill progression icons
     for(i = level.arcadeMode_kill_streak_current_count + count * level.arcadeMode_kill_streak_multiplier_count; i < level.arcadeMode_kill_streak_current_count + (count + 1) * level.arcadeMode_kill_streak_multiplier_count; i++) {
       if(i >= level.arcadeMode_kills_hud.size) {
         return;
@@ -460,7 +391,6 @@ arcademode_add_kill(num, x, y, offset, scale, sort) {
   hud_kill.foreground = true;
   hud_kill.x = x + num * offset;
   if(level.arcadeMode_kills_hud.size == 0) {
-    // store the location of the rightermost kill hud elem for reference later
     level.arcademode_kill_zero_x_location = hud_kill.x;
   }
 
@@ -487,10 +417,8 @@ arcademode_add_kill(num, x, y, offset, scale, sort) {
 
   for(;;) {
     if(hud_kill.x == level.arcademode_kill_zero_x_location) {
-      // all the way on the right
       decay_time = 4;
       if(level.arcadeMode_kills_hud.size == 1) {
-        // some bonus time to grab the second kill
         wait(3);
       }
       hud_kill fadeovertime(decay_time);
@@ -511,11 +439,10 @@ arcademode_add_kill(num, x, y, offset, scale, sort) {
     }
     level waittill("arcademode_decrement_kill_streak");
 
-    wait(0.05); // cause moveovertime is dumb
+    wait(0.05);
     hud_kill moveovertime(0.5);
     hud_kill.x -= offset;
     if(leftermost) {
-      // slides in from the left
       hud_kill fadeovertime(0.5);
       hud_kill.alpha = 1;
       leftermost = false;
@@ -536,10 +463,10 @@ get_streak_hud(x, y, width, height) {
 
   streak_hud.color = level.color_cool_green;
   streak_hud.sort = level.arcadeMode_hud_sort - 1;
-  //	streak_hud.alpha = 0.8;
+
   streak_hud.alpha = 0;
   streak_hud.glowColor = level.color_cool_green_glow;
-  //	streak_hud.glowAlpha = 1;
+
   streak_hud.glowAlpha = 0;
   streak_hud.hidewheninmenu = true;
   streak_hud setShader("white", width, height);
@@ -584,7 +511,7 @@ arcademode_add_kill_streak_time(timer) {
     streak_hud = get_streak_hud(0, 0, width, height);
     streak_hud_shadow = get_streak_hud(3, 3, width, height);
     streak_hud_shadow.sort = streak_hud_shadow.sort - 1;
-    //		streak_hud_shadow.alpha = 0.3;
+
     streak_hud_shadow.alpha = 0.0;
     streak_hud_shadow.color = (0, 0, 0);
   } else {
@@ -613,7 +540,6 @@ arcademode_add_kill_streak_time(timer) {
     time_remaining = width;
 
     if(isDefined(level.arcademode_hud_streak)) {
-      // the 2x, 3x, etc fades out as it runs out
       level.arcademode_hud_streak fadeovertime(1);
       level.arcademode_hud_streak.alpha = (time_remaining - 1) / 5;
     }
@@ -633,10 +559,8 @@ arcademode_add_kill_streak_time(timer) {
     if(width == 1) {
       break;
     }
-    //		streak_hud ScaleOverTime( drawTimer, 1, height );
-    //		streak_hud_shadow ScaleOverTime( drawTimer, 1, height );
   }
-  //	wait( drawTimer );	
+
   thread arcadeMode_reset_kill_streak();
 }
 
@@ -655,19 +579,17 @@ arcademode_add_kill_streak() {
     level.arcadeMode_kill_streak_current_multiplier++;
 
     if(level.arcadeMode_kill_streak_current_multiplier >= level.arcadeMode_streak_color.size) {
-      // go crazy would start here instead of this
       level.arcadeMode_kill_streak_current_multiplier = level.arcadeMode_streak_color.size;
       thread arcadeMode_multiplier_maxed();
     }
 
     if(old_mult != level.arcadeMode_kill_streak_current_multiplier) {
       level notify("arcademode_new_kill_streak");
-      // arcademode_2x arcademode_3x arcademode_4x arcademode_5x arcademode_6x arcademode_7x arcademode_8x
+
       level.player playSound("arcademode_" + level.arcadeMode_kill_streak_current_multiplier + "x");
       thread arcademode_draw_multiplier();
     }
 
-    // reset the # of kills to get the next streak bonus
     level.arcadeMode_kill_streak_current_count = level.arcadeMode_kill_streak_multiplier_count;
   }
   level notify("arcademode_new_kill");
@@ -675,7 +597,7 @@ arcademode_add_kill_streak() {
   for(;;) {
     if(level.arcadeMode_kills_hud.size < 10) {
       arcademode_add_kill_streak_time(5);
-      //			thread arcademode_add_kill( level.arcadeMode_kills_hud.size, 	-46, 10, 	-26, 32, level.arcadeMode_hud_sort );
+
       return;
     }
     level waittill("arcademode_decrement_kill_streak");
@@ -683,7 +605,7 @@ arcademode_add_kill_streak() {
 }
 
 streak_timer_color_pulse() {
-  waittillframeend; // gotta wait until the hud is definitely defined, in case you go from 0x to 8x in one frame.
+  waittillframeend;
   waittillframeend;
   level.arcadeMode_streak_hud endon("death");
   for(;;) {
@@ -695,7 +617,7 @@ streak_timer_color_pulse() {
 }
 
 arcadeMode_multiplier_maxed() {
-  waittillframeend; // so that the 8x hud stuff gets drawn
+  waittillframeend;
   if(flag("arcadeMode_multiplier_maxed"))
     return;
   flag_set("arcadeMode_multiplier_maxed");
@@ -722,53 +644,6 @@ arcadeMode_multiplier_maxed() {
   }
 }
 
-/*
-arcademode_update_kills()
-{
-	level.player endon( "death" );
-	
-	level.arcadeMode_lives_hud = [];
-	for( i = 0; i < level.arcadeMode_maxlives; i++ )	
-	{
-		arcademode_add_kill( i, 16, -8, -18, 64, level.arcadeMode_hud_sort );
-	}
-
-	for( ;; )
-	{
-		arcademode_redraw_kills( lives );
-		
-		wait( 0.05 );
-	}
-}
-
-arcademode_redraw_kills()
-{
-	kills = level.arcademode_kills.size;
-	if( kills > 10 )
-		kills = 10;
-		
-	for( i = 0; i < kills; i++ )	
-	{
-		// turn them on up to a certain point
-		level.arcadeMode_kills_hud[ i ].alpha = 1;
-		level.arcadeMode_kills_hud[ i ].glowAlpha = 1;
-		level.arcadeMode_kills_hud[ i ].color = level.color_cool_green;
-	}
-	
-	for( i = kills; i < level.arcadeMode_maxlives; i++ )	
-	{
-		// turn the rest off
-		if( i < 0 )
-			continue;
-		if( i >= 10 )
-			continue;
-			
-		level.arcadeMode_kills_hud[ i ].alpha = 0;
-		level.arcadeMode_kills_hud[ i ].glowAlpha = 0;
-	}
-}
-*/
-
 get_hud_score() {
   hud_score = newHudElem();
   hud_score.foreground = true;
@@ -779,7 +654,6 @@ get_hud_score() {
   hud_score.horzAlign = "right";
   hud_score.vertAlign = "top";
   hud_score.score = 0;
-  //	hud_score setText( "16750" );
 
   hud_score.font = "objective";
   hud_score.fontScale = 5;
@@ -800,18 +674,6 @@ arcademode_update_score() {
     level.arcademode_hud_scores[level.arcademode_hud_scores.size] = get_hud_score();
     level.arcademode_hud_scores[level.arcademode_hud_scores.size - 1].x = i * -30;
   }
-
-  //	hud_score = get_hud_score();
-  //	level.arcadeMode_hud_score = hud_score;
-  //	level.arcadeMode_hud_score setValue( 0 );
-
-  /*
-  hud_combined_score = get_hud_score();
-  hud_combined_score.fontScale = 2;
-  hud_combined_score.y = 120;
-  hud_combined_score.x = -3;
-  hud_combined_score setvalue( getdvarint( "arcademode_combined_score" ) );
-  */
 
   if(getdvarint("arcademode_full"))
     score = getdvarint("arcademode_combined_score");
@@ -836,7 +698,6 @@ UpdateScoreElemsOnce() {
     hud_update_score("arcadeMode_combined_score");
   else
     hud_update_score("arcademode_score");
-  //hud_update_score( hud_combined_score, "arcademode_combined_score" );
 }
 
 hud_update_score(score_dvar) {
@@ -850,7 +711,7 @@ hud_update_score(score_dvar) {
   if(level.arcadeMode_ramping_score >= score) {
     return;
   }
-  // score grew, so increase the displayed score
+
   difference = score - level.arcadeMode_ramping_score;
   boost = difference * 0.2 + 1;
   if(difference <= 15)
@@ -881,7 +742,6 @@ hud_draw_score(score) {
 }
 
 hud_draw_score_for_elements(score, elements) {
-  // level.arcademode_hud_scores
   digits = get_digits_from_score(score);
 
   for(i = 0; i < digits.size; i++) {
@@ -923,17 +783,6 @@ arcademode_add_life(num, x, y, offset, scale, sort) {
 }
 
 arcadeMode_define_damage_multipliers() {
-  // multiplier for killing multiple guys with one attack
-  /*
-  damage_multipliers[ "MOD_MELEE" ] = 20;
-  damage_multipliers[ "MOD_PISTOL_BULLET" ] = 20;
-  damage_multipliers[ "MOD_RIFLE_BULLET" ] = 10;
-  damage_multipliers[ "MOD_PROJECTILE" ] = 2;
-  damage_multipliers[ "MOD_PROJECTILE_SPLASH" ] = 2;
-  damage_multipliers[ "MOD_EXPLOSIVE" ] = 2;
-  damage_multipliers[ "MOD_GRENADE" ] = 2;
-  damage_multipliers[ "MOD_GRENADE_SPLASH" ] = 2;
-  */
   damage_multipliers = [];
   damage_multipliers["melee"] = 1;
   damage_multipliers["pistol"] = 1;
@@ -996,35 +845,23 @@ arcadeMode_define_damage_multipliers() {
   level.arcadeMode_skillMultiplier = skill_multiplier;
 
   extra_lives_range = [];
-  /*
-  // required points per extra life
-  extra_lives_range[ 0 ] = 9000; // 3000;
-  extra_lives_range[ 1 ] = 9000; // 3000;
-  extra_lives_range[ 2 ] = 7000; // 2000;
-  extra_lives_range[ 3 ] = 6000; // 1600;
-  */
 
-  // instead lets do kills required per life
-  extra_lives_range[0] = 40; // 3000;
-  extra_lives_range[1] = 30; // 3000;
-  extra_lives_range[2] = 25; // 2000;
-  extra_lives_range[3] = 20; // 1600;
+  extra_lives_range[0] = 40;
+  extra_lives_range[1] = 30;
+  extra_lives_range[2] = 25;
+  extra_lives_range[3] = 20;
 
   level.arcademode_kills_until_next_extra_life = 10;
 
   level.arcadeMode_extra_lives_range = extra_lives_range;
 
-  // free points towards your first extra life
   extra_lives_base = [];
   for(i = 0; i < 4; i++)
     extra_lives_base[i] = extra_lives_range[i] * 0.15;
   level.arcadeMode_extra_lives_base = extra_lives_base;
 }
 
-set_next_extra_life(extra_lives) {
-  //	setDvar( "arcademode_next_extra_life", ( extra_lives + 1 ) * level.arcadeMode_extra_lives_range[ level.gameskill ] - level.arcadeMode_extra_lives_base[ level.gameskill ] );
-  //	level.arcademode_next_extra_life = ( extra_lives + 1 ) * level.arcadeMode_extra_lives_range[ level.gameskill ] - level.arcadeMode_extra_lives_base[ level.gameskill ];
-}
+set_next_extra_life(extra_lives) {}
 
 new_ending_hud(align, fade_in_time, x_off, y_off) {
   hud_score = newHudElem();
@@ -1054,13 +891,11 @@ new_ending_hud(align, fade_in_time, x_off, y_off) {
 }
 
 extra_lives_display(num) {
-  //	level.player thread play_sound_in_space( "arcademode_extralife", level.player getEye() );
-
   for(i = 0; i < 5; i++) {
     thread extra_lives_sizzle();
   }
   extra_lives = new_ending_hud("center", 0.2, 0, -100);
-  // EXTRA LIFE X
+
   extra_lives.label = (&"SCRIPT_EXTRA_LIFE");
   extra_lives setvalue(num);
   extra_lives SetPulseFX(5, 3000, 1000);
@@ -1079,7 +914,7 @@ extra_lives_sizzle() {
   extra_lives = new_ending_hud("center", 0.2, 0, -100);
   extra_lives.alpha = randomfloatrange(0.1, 0.45);
   extra_lives.sort -= 1;
-  // EXTRA LIFE X
+
   extra_lives settext(&"SCRIPT_EXTRA_LIFE");
   extra_lives delaythread(3, ::fade_out, 1);
   extra_lives endon("death");
@@ -1135,9 +970,6 @@ arcadeMode_add_points(origin, kill, type, value) {
     thread arcademode_add_point_towards_extra_life();
 
     color = level.arcadeMode_killColors[type];
-
-    //		if( gettime() > level.arcadeMode_last_multi_kill_sound )
-    //			level.player thread play_sound_in_space( "arcademode_kill", level.player getEye() );
   }
 
   level.player pointPulse(value);
@@ -1148,15 +980,12 @@ arcademode_add_point_towards_extra_life() {
   if(level.arcademode_kills_until_next_extra_life > 0) {
     return;
   }
-  //	if( score > level.arcademode_next_extra_life ) // getdvarint( "arcademode_next_extra_life" ) )
 
   level.arcademode_rewarded_lives++;
 
-  //		thread extra_lives_display();
   lives = getdvarint("arcademode_lives");
   lives++;
   if(lives >= level.arcadeMode_maxlives) {
-    // lives are capped at 10
     lives = level.arcadeMode_maxlives;
   } else {
     setDvar("arcademode_lives", lives);
@@ -1164,7 +993,6 @@ arcademode_add_point_towards_extra_life() {
   }
 
   level.arcademode_kills_until_next_extra_life = level.arcadeMode_extra_lives_range[level.gameskill];
-  //	set_next_extra_life( level.arcademode_extra_lives );
 }
 
 arcademode_set_origin_in_radius() {
@@ -1222,7 +1050,7 @@ pointPulse(amount) {
   hud_pointpulse.color = (0.5, 0.5, 0.5);
   hud_pointpulse.sort = 4;
 
-  arcadeMode_kill_streak_current_multiplier = level.arcadeMode_kill_streak_current_multiplier; // store to local cause of the wait below
+  arcadeMode_kill_streak_current_multiplier = level.arcadeMode_kill_streak_current_multiplier;
 
   level.player.pointPulseCount++;
   level.player.pointPulseIndex++;
@@ -1230,19 +1058,16 @@ pointPulse(amount) {
   wait(0.05);
 
   if(amount <= 0) {
-    // string not found for
     hud_pointpulse.label = &"";
     hud_pointpulse.color = (1, 0, 0);
     hud_pointpulse.glowColor = (0, 0, 0);
     hud_pointpulse.glowAlpha = 0;
   } else {
-    // + hud_pointpulse.label = &"SCRIPT_PLUS";
     hud_pointpulse.color = (1, 1, 1);
     hud_pointpulse.glowColor = level.color_cool_green_glow;
     hud_pointpulse.glowAlpha = 1;
   }
 
-  //	hud_pointpulse setValue( amount );
   hud_pointpulse setvalue(amount);
 
   hud_pointpulse.alpha = 1;
@@ -1272,8 +1097,6 @@ pointPulse(amount) {
 }
 
 set_circular_origin() {
-  // get an origin in a circle around the crosshair
-
   base = 50;
   for(;;) {
     x = randomint(base);
@@ -1292,34 +1115,16 @@ set_circular_origin() {
 }
 
 arcadeMode_add_points_for_mod(mod) {
-  // mod = method of death
   for(i = 0; i < level.arcadeMode_multiKills[mod].size; i++) {
     arcadeMode_add_points_for_individual_kill(level.arcadeMode_multiKills[mod][i], mod, level.arcadeMode_multiKills[mod].size);
   }
 }
 
 arcadeMode_add_points_for_individual_kill(mod_array, mod, kills) {
-  // no location bonus for melee
   if(mod_array["type"] != "melee")
     base_points = level.arcadeMode_killBase + level.arcadeMode_locationKillBonus[mod_array["damage_location"]] + level.arcadeMode_weaponBonus[mod_array["type"]];
   else
     base_points = level.arcadeMode_killBase + level.arcadeMode_weaponBonus[mod_array["type"]];
-
-  /*
-  if( kills > 1 )
-  {
-  	// multi kills get a bonus depending on weapon
-  	thread arcadeMode_add_points( mod_array[ "origin" ], true, mod, base_points + base_points * kills * level.arcadeMode_weaponMultiplier[ mod_array[ "type" ] ] );
-  	
-  	if( gettime() > level.arcadeMode_last_multi_kill_sound )
-  	{
-  		level.arcadeMode_last_multi_kill_sound = gettime();
-  		level.player thread play_sound_in_space( "arcademode_multikill", level.player getEye() );
-  	}
-
-  	return;
-  }
-  */
 
   thread arcadeMode_add_points(mod_array["origin"], true, mod, base_points);
 }
@@ -1330,7 +1135,6 @@ player_kill(type, location, point) {
 
   death_type = level.arcadeMode_deathtypes[type];
   if(!isDefined(death_type)) {
-    // no location bonus for melee
     base_points = level.arcadeMode_killBase;
     thread arcadeMode_add_points(point, true, "melee", base_points);
     return;
@@ -1355,12 +1159,10 @@ player_damage_ads(type, location, point) {
 
 end_mission() {
   setsaveddvar("ui_nextMission", "0");
-  //setDvar( "ui_victoryquote", "@VICTORYQUOTE_IW_THANKS_FOR_PLAYING" );
 
-  // hacky way of getting the player not dead so missionsuccess() works
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    player.maxhealth = 0; // allows us to set .health even though it's already <= 0
+    player.maxhealth = 0;
     player.health = 1;
   }
 
@@ -1398,14 +1200,12 @@ arcadeMode_ends() {
   slowmo_end();
 
   if(level.arcadeMode_success) {
-    // get your lives if you complete the level, in case there is no checkpoint at the end of the level
     if(arcademode_convert_extra_lives())
       wait(2);
   }
 
   stop_time = 0;
   if(isDefined(level.arcademode_stoptime)) {
-    // the amount of time that the timer was stopped, at the end of the level
     stop_time = gettime() - level.arcademode_stoptime;
     stop_time *= 0.001;
   }
@@ -1440,7 +1240,7 @@ arcadeMode_ends() {
   hud_end_reason = new_ending_hud("center", fade_in_time, 0, endReasonYpos);
   if(level.arcadeMode_success) {
     hud_end_reason.color = (1.0, 1.0, 1.0);
-    // MISSION COMPLETE
+
     hud_end_reason settext(&"SCRIPT_MISSION_COMPLETE");
   } else {
     hud_end_reason.color = (1.0, 0.4, 0.2);
@@ -1466,25 +1266,22 @@ arcadeMode_ends() {
   if(lives > rewarded_lives)
     lives = rewarded_lives;
 
-  arcademode_redraw_lives(lives); // lives
+  arcademode_redraw_lives(lives);
 
   combined_score = 0;
   hud_total_score = undefined;
   if(getDvar("arcademode_full") == "1") {
     hud_total_score = new_ending_hud("left", fade_in_time, 20, totalScoreYpos);
-    // TOTAL SCORE:
+
     hud_total_score settext(&"SCRIPT_TOTAL_SCORE");
 
     create_total_score_hud(offset, totalScoreYpos);
     combined_score = getdvarint("arcademode_combined_score");
     set_total_score_hud(combined_score);
-
-    //		hud_total_score_points = new_ending_hud( "right", fade_in_time, -150 + offset, totalScoreYpos );
-    //		hud_total_score_points setvalue( combined_score );
   }
 
   hud_mission_score = new_ending_hud("left", fade_in_time, 20, missionScoreYpos);
-  // MISSION SCORE:
+
   hud_mission_score settext(&"SCRIPT_MISSION_SCORE");
 
   for(i = 0; i < level.arcademode_hud_digits; i++) {
@@ -1500,9 +1297,6 @@ arcadeMode_ends() {
 
   hud_draw_score(0);
 
-  //	hud_score = new_ending_hud( "right", fade_in_time, -150 + offset, missionScoreYpos );
-  //	hud_score setvalue( 0 );
-
   minutes = 0;
   seconds = 0;
 
@@ -1513,14 +1307,14 @@ arcadeMode_ends() {
   seconds = timer;
 
   hud_time_remaining = new_ending_hud("left", fade_in_time, 20, timerYpos);
-  // TIME REMAINING:
+
   hud_time_remaining settext(&"SCRIPT_TIME_REMAINING");
 
   level.arcademode_hud_timer_minutes_tens = new_ending_hud("right", fade_in_time, -265 + offset, timerYpos);
   level.arcademode_hud_timer_minutes_ones = new_ending_hud("right", fade_in_time, -235 + offset, timerYpos);
 
   hud_timer_colon = new_ending_hud("right", fade_in_time, -215 + offset, timerYpos - 5);
-  // :
+
   hud_timer_colon settext(&"SCRIPT_COLON");
 
   level.arcademode_hud_timer_seconds_tens = new_ending_hud("right", fade_in_time, -180 + offset, timerYpos);
@@ -1550,18 +1344,6 @@ arcadeMode_ends() {
 
     hud_draw_score(score);
 
-    /*
-    if( getDvar( "arcademode_full" ) == "1" )
-    {
-    	combined_score += boost;
-    	if( combined_score > base_score + final_score )
-    	{
-    		combined_score = base_score + final_score;
-    	}
-    	hud_total_score_points setvalue( combined_score );
-    }
-    */
-
     if(score == final_score) {
       break;
     }
@@ -1586,7 +1368,7 @@ arcadeMode_ends() {
     time_bonus_iterations = ceil(total_seconds / 15);
 
     base_time_bonus = ceil(total_seconds * points_per_second);
-    // if we gave the player extra time for this difficulty, compensate by giving them less of a bonus for remaining time.
+
     final_time_bonus = ceil(base_time_bonus / level.arcademode_difficultyTimerScale);
 
     start_score = score;
@@ -1605,10 +1387,8 @@ arcadeMode_ends() {
       if(getDvar("arcademode_full") == "1") {
         combined_score = int(start_combined_score * (1 - bonus_fraction) + finish_combined_score * bonus_fraction);
         set_total_score_hud(combined_score);
-        //				hud_total_score_points setvalue( combined_score );
       }
 
-      //			hud_score setvalue( score );
       hud_draw_score(score);
 
       remaining_seconds = int(total_seconds * (1 - bonus_fraction));
@@ -1648,7 +1428,6 @@ arcadeMode_ends() {
         break;
       }
 
-      // life bonus, to discourage dying exploits			
       life_bonus = 1000;
       life_bonus *= mult;
 
@@ -1656,14 +1435,13 @@ arcadeMode_ends() {
       if(getDvar("arcademode_full") == "1") {
         combined_score += boost;
         set_total_score_hud(combined_score);
-        //				hud_total_score_points setvalue( combined_score );
       }
 
       score += boost;
       level.player thread play_sound_in_space("mortar_explosion", level.player getEye());
 
       hud_draw_score(int(score));
-      //			hud_score setvalue( int( score ) );
+
       arcademode_redraw_lives(lives);
 
       wait(0.6);
@@ -1673,14 +1451,12 @@ arcadeMode_ends() {
 
     if(getdvarint("arcademode_died") != 1 && level.gameskill >= 2) {
       boost = int(score);
-      // ZERO DEATHS BONUS x2
+
       arcademode_end_boost(score, combined_score, boost, &"SCRIPT_ZERO_DEATHS", "bullet_ap_bark", scoreBoostYpos, fade_in_time);
       score += boost;
       combined_score += boost;
     }
   } else {
-    // hide time remaining and lives; we don't reward players for them if they lost
-
     level.arcademode_hud_timer_seconds_ones SetPulseFX(0, 0, 1000);
     level.arcademode_hud_timer_seconds_tens SetPulseFX(0, 0, 1000);
     level.arcademode_hud_timer_minutes_ones SetPulseFX(0, 0, 1000);
@@ -1696,14 +1472,12 @@ arcadeMode_ends() {
   skillmult = level.arcadeMode_skillMultiplier[level.gameskill];
   if(skillmult > 1) {
     if(skillmult == 1.5) {
-      // DIFFICULTY BONUS x1.5
       string = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
     } else if(skillmult == 3) {
-      // DIFFICULTY BONUS x3
       string = &"SCRIPT_DIFFICULTY_BONUS_THREE";
     } else {
       assert(skillmult == 4);
-      // DIFFICULTY BONUS x4
+
       string = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
     }
     boost = int(ceil(score * skillmult) - score);
@@ -1714,12 +1488,8 @@ arcadeMode_ends() {
 
   gotNewHighScore = false;
 
-  // update profile with new record
   if(getDvar("arcademode_full") == "1") {
     dvar = "s18";
-
-    // we update the full score after each level and when they lose.
-    // this is good because if they lose power or something in the middle of the game, // at least they keep what they had up to that point.
 
     oldVal = getdvarint(dvar);
     if(combined_score > oldVal) {
@@ -1781,7 +1551,6 @@ arcadeMode_ends() {
     index = levelScoreIndices[level.script];
     assertEx(index >= 0 && index < 18, index);
     if(isDefined(index)) {
-      // "s0", "s1", etc. this comment included for good search results
       dvar = "s" + index;
 
       oldVal = getdvarint(dvar);
@@ -1795,17 +1564,14 @@ arcadeMode_ends() {
     }
   }
 
-  // SCORE MUST NOT CHANGE AFTER THIS POINT
-  // we've already saved it
-
   if(gotNewHighScore) {
-    if(!level.arcadeMode_success) // otherwise, UpdateGamerProfile() will be called from _endmission::_nextmission()
+    if(!level.arcadeMode_success)
       UpdateGamerProfile();
 
     wait(1);
 
     hud_newhighscore = new_ending_hud("center", fade_in_time, 0, scoreBoostYPos);
-    // NEW HIGH SCORE!
+
     hud_newhighscore settext(&"SCRIPT_NEW_HIGH_SCORE");
     hud_newhighscore.alpha = 1;
     hud_newhighscore fadeovertime(0.05);
@@ -1883,14 +1649,13 @@ arcademode_end_boost(score, combined_score, boost, string, sound, ypos, fade_in_
     if(score > final_score)
       score = final_score;
 
-    //		hud_score setvalue( score );
     hud_draw_score(score);
 
     if(getDvar("arcademode_full") == "1") {
       combined_score += boost;
       if(combined_score > final_combined_score)
         combined_score = final_combined_score;
-      //			hud_total_score_points setvalue( combined_score );
+
       set_total_score_hud(combined_score);
     }
 
@@ -1924,7 +1689,6 @@ black_background(fade_time) {
   overlay.horzAlign = "fullscreen";
   overlay.vertAlign = "fullscreen";
 
-  //	overlay.foreground = true;
   overlay.sort = level.arcadeMode_hud_sort + 5;
   overlay.alpha = 0;
 
@@ -1968,7 +1732,7 @@ ending_set_time(minutes, seconds) {
 draw_checkpoint(start_offset, movetime, mult) {
   start_offset *= mult;
   checkpoint = new_ending_hud("center", 0.1, start_offset, 90);
-  // CHECKPOINT!
+
   checkpoint settext(&"SCRIPT_CHECKPOINT");
   checkpoint MoveOverTime(movetime);
   checkpoint.x = 0;
@@ -1993,20 +1757,19 @@ arcadeMode_init_kill_streak_colors() {
   level.arcadeMode_streak_color = [];
   level.arcadeMode_streak_glow = [];
 
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = level.color_cool_green; // 1
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.8, 0.8, 2.0); // 2
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 0.8, 0.0); // 4
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.5, 2.0, 2.0); // 3
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 0.5, 2.0); // 6
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.3, 0.3, 2.0); // 7
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 0.5); // 5
-  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0); // 8
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = level.color_cool_green;
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.8, 0.8, 2.0);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 0.8, 0.0);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.5, 2.0, 2.0);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 0.5, 2.0);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (0.3, 0.3, 2.0);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 0.5);
+  level.arcadeMode_streak_color[level.arcadeMode_streak_color.size] = (2.0, 2.0, 2.0);
 
   for(i = 0; i < level.arcadeMode_streak_color.size; i++) {
     level.arcadeMode_streak_glow[i] = (level.arcadeMode_streak_color[i][0] * 0.35, level.arcadeMode_streak_color[i][1] * 0.35, level.arcadeMode_streak_color[i][2] * 0.35);
   }
 
-  // this one has a custom glow color so might as well use it
   level.arcadeMode_streak_color[0] = level.color_cool_green_glow;
 }
 
@@ -2023,10 +1786,9 @@ arcadeMode_killstreak_complete_display() {
 
   if(level.arcadeMode_kill_streak_current_multiplier >= 8) {
     level.player thread play_sound_in_space("arcademode_kill_streak_won", level.player getEye());
-    // -STREAK COMPLETE- kill_streak settext(&"SCRIPT_STREAK_COMPLETE");
   } else {
     level.player thread play_sound_in_space("arcademode_kill_streak_lost", level.player getEye());
-    // STREAK BONUS LOST
+
     kill_streak settext(&"SCRIPT_STREAK_BONUS_LOST");
   }
 
@@ -2068,19 +1830,17 @@ get_hud_multi() {
   hud_mult.vertAlign = "top";
   hud_mult thread arcademode_draw_multiplier_kill();
   hud_mult.x = 0;
-  hud_mult.y = 126; // - 178;
+  hud_mult.y = 126;
   hud_mult.font = "objective";
   hud_mult.fontscale = 0.1;
   hud_mult.archived = false;
   hud_mult.foreground = true;
-  //	hud_mult.color = level.color_cool_green;
-  //	hud_mult.glowColor = level.color_cool_green_glow;
+
   hud_mult.color = level.arcadeMode_streak_color[level.arcadeMode_kill_streak_current_multiplier - 1];
   hud_mult.glowColor = level.arcadeMode_streak_glow[level.arcadeMode_kill_streak_current_multiplier - 1];
 
   hud_mult.sort = level.arcadeMode_hud_sort;
 
-  // x
   hud_mult.label = &"SCRIPT_X";
   hud_mult setvalue(level.arcadeMode_kill_streak_current_multiplier);
   hud_mult changeFontScaleOverTime(0.5);

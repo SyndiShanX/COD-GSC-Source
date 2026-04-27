@@ -9,18 +9,6 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 player_viewhands_minigun(turret) {
-  /*
-  viewhands = spawn_anim_model( "suburban_hands", turret getTagOrigin( "tag_player" ) );
-  viewhands.angles = turret getTagAngles( "tag_player" );
-  viewhands linkto( turret, "tag_player" );
-  	
-  viewhands setAnim( viewhands getanim( "idle_L" ), 1, 0, 1 );
-  viewhands setAnim( viewhands getanim( "idle_R" ), 1, 0, 1 );
-  	
-  viewhands thread player_viewhands_minigun_hand( "LEFT" );
-  viewhands thread player_viewhands_minigun_hand( "RIGHT" );
-  */
-
   turret useAnimTree(#animtree);
   turret.animname = "suburban_hands";
   turret attach("viewhands_player_us_army", "tag_player");
@@ -41,9 +29,6 @@ anim_minigun_hands() {
   level.scr_anim["suburban_hands"]["idle2fire_R"] = % player_suburban_minigun_idle2fire_R;
   level.scr_anim["suburban_hands"]["fire2idle_L"] = % player_suburban_minigun_fire2idle_L;
   level.scr_anim["suburban_hands"]["fire2idle_R"] = % player_suburban_minigun_fire2idle_R;
-
-  //
-  //
 }
 
 player_viewhands_minigun_hand(hand) {

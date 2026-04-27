@@ -31,16 +31,9 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-  // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 3;
 
   setDvar("compassmaxrange", "2100");
-  //thread Elevator( "elev1" );
-  //thread Elevator( "elev2" );
-  //thread Elevator( "elev3" );	
-  //thread Elevator( "elev4" );
-
-  //thread SetupRappel();
 
   setDvar("r_primaryLightUseTweaks", 1);
   setDvar("r_primaryLightTweakDiffuseStrength", 2.45);
@@ -66,7 +59,7 @@ Elevator(elevatorID) {
   elevFloors[0] = getent(elevatorID + "_floor1", "targetname").origin;
   elevFloors[1] = getent(elevatorID + "_floor2", "targetname").origin;
 
-  moveSpeed = 192; // units / second
+  moveSpeed = 192;
 
   waitTime = 2.0;
 
@@ -88,8 +81,6 @@ Elevator(elevatorID) {
 }
 
 SetupRappel() {
-  // Press and hold ^3[{+activate}]^7 to rappel
-  //precacheString(&"MP_PRESS_TO_RAPPEL" );
   trigs = getEntArray("rappeltrigger", "targetname");
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
@@ -106,9 +97,6 @@ SetupRappel() {
 }
 
 RappelThink() {
-  // Press and hold ^3[{+activate}]^7 to rappel
-  //self setHintString(&"MP_PRESS_TO_RAPPEL" );
-
   while(1) {
     self waittill("trigger", player);
     if(!isPlayer(player)) {
@@ -129,9 +117,9 @@ Rappel(trig) {
   rappelPoint = self.origin + vectordot(toRappelPoint, trig.dir) * trig.dir;
   rappelPoint = (rappelPoint[0], rappelPoint[1], trig.rappelPoint[2]);
 
-  upTime = .5; // sec
-  overTime = .75; // sec
-  downSpeed = 512; // units / sec
+  upTime = .5;
+  overTime = .75;
+  downSpeed = 512;
 
   upPoint = self.origin;
   upPoint = (upPoint[0], upPoint[1], rappelPoint[2]);

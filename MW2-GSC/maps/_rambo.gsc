@@ -43,20 +43,13 @@ SetRamboGrenadeOffsets() {
   addGrenadeThrowAnimOffset(%favela_chaotic_crouchcover_grenadefirea, (4.53614, -10.4574, 59.7186));
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: enable_militia_behavior()""Summary: Enables militia behavior""Module: AI""CallOn: An AI""Example: guy enable_militia_behavior();""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 enable_militia_behavior() {
   if(self.type == "dog") {
     return;
   }
   self.neverEnableCQB = true;
-  self.maxfaceenemydist = 256; //default 512
+  self.maxfaceenemydist = 256;
 
-  // don't enable rambo type behaviour on long range, rpg, or shotgun types
   if(animscripts\combat_utility::isLongRangeAI())
     return;
   if(isShotgun(self.weapon)) {
@@ -70,17 +63,10 @@ enable_militia_behavior() {
   self.neverSprintForVariation = undefined;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: disable_militia_behavior()""Summary: Disables militia behavior""Module: AI""CallOn: An AI""Example: guy disable_militia_behavior();""SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 disable_militia_behavior() {
   self.favor_blindfire = undefined;
   self.ramboChance = undefined;
   self.neverEnableCQB = false;
-  self.maxfaceenemydist = 512; //default 512
+  self.maxfaceenemydist = 512;
   self.ramboAccuracyMult = undefined;
 }

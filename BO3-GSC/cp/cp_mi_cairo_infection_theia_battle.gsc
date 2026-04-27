@@ -33,306 +33,154 @@
 #using scripts\shared\vehicleriders_shared;
 #namespace sarah_battle;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
-
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
-
-function setup_scenes() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_model_init() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_light_cleanup() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d147e0e1() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_javelin_warning() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_spike_launcher() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_battle_state_init() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_sarah_movement_watcher() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_sarah_health_watcher() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_death_failsafe() {
-  // Unsupported VM revision (1B).
-}
-
-function wait_for_sarah_death() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_sarah_battle() {
-  // Unsupported VM revision (1B).
-}
-
-function vo_sarah_interface_init() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b38700c3() {
-  // Unsupported VM revision (1B).
-}
-
-function interface_1st_dni() {
-  // Unsupported VM revision (1B).
-}
-
-function function_45d8cfab() {
-  // Unsupported VM revision (1B).
-}
-
-function function_56c9a7f3() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_arrival_init() {
-  // Unsupported VM revision (1B).
-}
-
-function function_8b952c00() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3cb73539() {
-  // Unsupported VM revision (1B).
-}
-
-function function_69d9e05d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4dd97558() {
-  // Unsupported VM revision (1B).
-}
-
-function function_1bb0323c() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c087a5cf() {
-  // Unsupported VM revision (1B).
-}
-
-function function_99e62b85() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_battle_init() {
-  // Unsupported VM revision (1B).
-}
-
-function spawn_sarah_boss() {
-  // Unsupported VM revision (1B).
-}
-
-function update_player_threat_bias() {
-  // Unsupported VM revision (1B).
-}
-
-function on_player_spawn() {
-  // Unsupported VM revision (1B).
-}
-
-function player_hijack_monitor() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_spike_launcher_watcher() {
-  // Unsupported VM revision (1B).
-}
-
-function building_destruction_init() {
-  // Unsupported VM revision (1B).
-}
-
-function building_destruction_watcher() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_arrival_building() {
-  // Unsupported VM revision (1B).
-}
-
-function rocket_launcher_init() {
-  // Unsupported VM revision (1B).
-}
-
-function magic_bullet_rpg() {
-  // Unsupported VM revision (1B).
-}
-
-function crashed_vtol_explosion() {
-  // Unsupported VM revision (1B).
-}
-
-function friendly_ai_controller() {
-  // Unsupported VM revision (1B).
-}
-
-function function_278b6566() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ed2505ff() {
-  // Unsupported VM revision (1B).
-}
-
-function friendly_callback_damage() {
-  // Unsupported VM revision (1B).
-}
-
-function function_acea9315() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6c7a52c3() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b3d20adf() {
-  // Unsupported VM revision (1B).
-}
-
-function function_cc12870c() {
-  // Unsupported VM revision (1B).
-}
-
-function hero_check_distance() {
-  // Unsupported VM revision (1B).
-}
-
-function find_good_coverpos() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5acf54bf() {
-  // Unsupported VM revision (1B).
-}
-
-function technical_vehicle_spawn() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_bash_technical() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_truck_bash_2() {
-  // Unsupported VM revision (1B).
-}
-
-function player_callback_damage() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_battle_end_init() {
-  // Unsupported VM revision (1B).
-}
-
-function open_lui_menu() {
-  // Unsupported VM revision (1B).
-}
-
-function close_lui_menu() {
-  // Unsupported VM revision (1B).
-}
-
-function vtol_arrival_done() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_battle_done() {
-  // Unsupported VM revision (1B).
-}
-
-function sarah_battle_end_done() {
-  // Unsupported VM revision (1B).
-}
-
-function clean_up() {
-  // Unsupported VM revision (1B).
-}
-
-function function_cf47c514() {
-  // Unsupported VM revision (1B).
-}
-
-function monitor_seigebot_sarah_end() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ed02c344() {
-  // Unsupported VM revision (1B).
-}
-
-function function_271fa79e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3b4ccd2e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_795efef() {
-  // Unsupported VM revision (1B).
-}
-
-function monitor_sarah_battle() {
-  // Unsupported VM revision (1B).
-}
-
-function function_76887c27() {
-  // Unsupported VM revision (1B).
-}
-
-function function_68861104() {
-  // Unsupported VM revision (1B).
-}
-
-function send_friendlies_remaining() {
-  // Unsupported VM revision (1B).
-}
-
-function send_to_sarah() {
-  // Unsupported VM revision (1B).
-}
-
-function function_48e3f00e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3c458698() {
-  // Unsupported VM revision (1B).
-}
-
-function function_8f97d54e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6712dcb2() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
+
+function init_clientfields() {}
+
+function setup_scenes() {}
+
+function vtol_model_init() {}
+
+function vtol_light_cleanup() {}
+
+function function_d147e0e1() {}
+
+function vo_javelin_warning() {}
+
+function vo_spike_launcher() {}
+
+function sarah_battle_state_init() {}
+
+function vo_sarah_movement_watcher() {}
+
+function vo_sarah_health_watcher() {}
+
+function sarah_death_failsafe() {}
+
+function wait_for_sarah_death() {}
+
+function vo_sarah_battle() {}
+
+function vo_sarah_interface_init() {}
+
+function function_b38700c3() {}
+
+function interface_1st_dni() {}
+
+function function_45d8cfab() {}
+
+function function_56c9a7f3() {}
+
+function vtol_arrival_init() {}
+
+function function_8b952c00() {}
+
+function function_3cb73539() {}
+
+function function_69d9e05d() {}
+
+function function_4dd97558() {}
+
+function function_1bb0323c() {}
+
+function function_c087a5cf() {}
+
+function function_99e62b85() {}
+
+function sarah_battle_init() {}
+
+function spawn_sarah_boss() {}
+
+function update_player_threat_bias() {}
+
+function on_player_spawn() {}
+
+function player_hijack_monitor() {}
+
+function sarah_spike_launcher_watcher() {}
+
+function building_destruction_init() {}
+
+function building_destruction_watcher() {}
+
+function vtol_arrival_building() {}
+
+function rocket_launcher_init() {}
+
+function magic_bullet_rpg() {}
+
+function crashed_vtol_explosion() {}
+
+function friendly_ai_controller() {}
+
+function function_278b6566() {}
+
+function function_ed2505ff() {}
+
+function friendly_callback_damage() {}
+
+function function_acea9315() {}
+
+function function_6c7a52c3() {}
+
+function function_b3d20adf() {}
+
+function function_cc12870c() {}
+
+function hero_check_distance() {}
+
+function find_good_coverpos() {}
+
+function function_5acf54bf() {}
+
+function technical_vehicle_spawn() {}
+
+function sarah_bash_technical() {}
+
+function sarah_truck_bash_2() {}
+
+function player_callback_damage() {}
+
+function sarah_battle_end_init() {}
+
+function open_lui_menu() {}
+
+function close_lui_menu() {}
+
+function vtol_arrival_done() {}
+
+function sarah_battle_done() {}
+
+function sarah_battle_end_done() {}
+
+function clean_up() {}
+
+function function_cf47c514() {}
+
+function monitor_seigebot_sarah_end() {}
+
+function function_ed02c344() {}
+
+function function_271fa79e() {}
+
+function function_3b4ccd2e() {}
+
+function function_795efef() {}
+
+function monitor_sarah_battle() {}
+
+function function_76887c27() {}
+
+function function_68861104() {}
+
+function send_friendlies_remaining() {}
+
+function send_to_sarah() {}
+
+function function_48e3f00e() {}
+
+function function_3c458698() {}
+
+function function_8f97d54e() {}
+
+function function_6712dcb2() {}

@@ -4,8 +4,6 @@
 ********************************************************/
 
 init() {
-  // level.destructableFX = loadfx("breakables/exp_wall_cinderblock_96");
-
   ents = getEntArray("destructable", "targetname");
 
   if(getDvar("scr_destructables") == "0") {

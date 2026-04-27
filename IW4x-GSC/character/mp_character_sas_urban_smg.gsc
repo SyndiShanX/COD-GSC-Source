@@ -3,9 +3,6 @@
  * Script: character\mp_character_sas_urban_smg.gsc
 ****************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_sas_urban_smg");
   codescripts\character::attachhead("alias_sas_heads", xmodelalias\alias_sas_heads::main());

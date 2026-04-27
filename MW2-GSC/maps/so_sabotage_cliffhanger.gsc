@@ -9,18 +9,12 @@
 #include maps\_specialops;
 #include maps\so_sabotage_cliffhanger_code;
 
-// --------------------------------------------------------------------------------- //	Tweakables
-// --------------------------------------------------------------------------------- CONST_regular_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
 CONST_hardened_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
 CONST_veteran_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
 
-CONST_regular_accuracy = 2; // accuracy modifier
-CONST_hardened_accuracy = 2; // accuracy modifier
-CONST_veteran_accuracy = 1.75; // accuracy modifier
-
-// --------------------------------------------------------------------------------- //	Init
-// --------------------------------------------------------------------------------- main() {
-// optimization
+CONST_regular_accuracy = 2;
+CONST_hardened_accuracy = 2;
+CONST_veteran_accuracy = 1.75;
 setsaveddvar("sm_sunShadowScale", 0.5);
 setsaveddvar("r_lightGridEnableTweaks", 1);
 setsaveddvar("r_lightGridIntensity", 1.5);
@@ -32,14 +26,8 @@ PreCacheItem("c4");
 level.strings["hint_c4_plant"] = &"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
 
 level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
-
-// from precache script
 maps\cliffhanger_precache::main();
-
-// Special Op mode deleting all original spawn triggers, vehicles and spawners
 so_delete_all_by_type(::type_spawn_trigger, ::type_vehicle_special, ::type_spawners_special);
-
-// delete chad's new snowmobiles
 voltron_array = getEntArray("script_vehicle_snowmobile_coop_alt", "classname");
 voltron_array = array_combine(voltron_array, getEntArray("script_vehicle_snowmobile_coop", "classname"));
 foreach(sm in voltron_array)
@@ -52,8 +40,6 @@ default_start(::start_so_sabotage);
 add_start("sabotage", ::start_so_sabotage);
 
 flags_init();
-
-// init stuff
 maps\cliffhanger_fx::main();
 
 maps\cliffhanger_anim::generic_human();
@@ -80,23 +66,20 @@ stealth_settings();
 
 maps\_compass::setupMiniMap("compass_map_cliffhanger");
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Initializations
-// --------------------------------------------------------------------------------- start_so_sabotage() {
 spawn_funcs();
 
 assert(isDefined(level.gameskill));
 switch (level.gameSkill) {
-  case 0: // Easy
+  case 0:
   case 1:
     so_setup_Regular();
-    break; // Regular
+    break;
   case 2:
     so_setup_hardened();
-    break; // Hardened
+    break;
   case 3:
     so_setup_veteran();
-    break; // Veteran
+    break;
 }
 level.challenge_objective_escape = &"SO_SABOTAGE_CLIFFHANGER_OBJ_ESCAPE";
 
@@ -107,7 +90,7 @@ deadquotes[deadquotes.size] = "@DEADQUOTE_SO_STEALTH_USE_SILENCERS";
 deadquotes[deadquotes.size] = "@SO_SABOTAGE_CLIFFHANGER_AA12_HELP";
 so_include_deadquote_array(deadquotes);
 
-thread set_flags(); // set off flags to trigger original cliffhanger stuff
+thread set_flags();
 thread setup_explosives();
 thread explosives_planted_monitor();
 thread blizzard_control();

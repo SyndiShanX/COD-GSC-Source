@@ -5,14 +5,6 @@
 
 #include common_scripts\utility;
 
-/*###################################################
-		CREATES BREAKABLE WOOD
-		1) Each trigger_damage has a targetname of "wood_splinter"2) Each trigger_damage targets the script_brushmodel of the pieces of wood to break
-		3) Each piece of wood to break targets the script_brushmodels of the broken pieces that will show when it's broken
-		4) Give the trigger_damage a 'script_noteworthy' to wait for a notify to be given before the wood can break
-			example: 'script_noteworthy' of 'wood_time' will wait for 'level notify ("wood_time");' before pieces are breakable
-		5) Exec this script at the start of your level - "maps\_wood::main();"###################################################*/
-
 main() {
   maps\_utility::precache("woodgib_medium");
   maps\_utility::precache("woodgib_big");
@@ -105,8 +97,6 @@ splinter(org) {
 go(org) {
   temp_vec = vectornormalize(self.origin - org);
   temp_vec = vector_multiply(temp_vec, 250 + randomint(100));
-  //	println ("start ", self.origin , " end ", org, " vector ", temp_vec, " player origin ", level.player getorigin());
-  //	x = -80 - (randomint(40));
 
   x = temp_vec[0];
   y = temp_vec[1];
@@ -141,7 +131,6 @@ small_gibs(org, startorg) {
     y = temp_vec[1];
     z = 120 + randomint(200);
     splinter[i] moveGravity((x, y, z), 12);
-    //		splinter[i] rotateroll(1500 + randomfloat (2500), 5,0,0);
 
     if(x > 0)
       splinter[i] rotateroll((1500 + randomfloat(2500)) * -1, 5, 0, 0);

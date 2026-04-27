@@ -136,7 +136,7 @@ AI_stun(fAmount) {
 start_teleport(eNode) {
   self forceTeleport(eNode.origin, eNode.angles);
   self setgoalpos(self.origin);
-  //self setgoalradius (eNode.radius);
+
   self setgoalnode(eNode);
 }
 
@@ -175,7 +175,6 @@ vehicle_go_to_end_and_delete(sPath, sVehicleType) {
 }
 
 truck_headlights_on() {
-  //self ==> the truck entity
   playFXOnTag(level._effect["headlight_truck"], self, "tag_headlight_left");
   playFXOnTag(level._effect["headlight_truck"], self, "tag_headlight_right");
 }
@@ -236,7 +235,6 @@ print3Dthread(sMessage, org, fSize, zOffset) {
 }
 
 smoke_detect() {
-  //"self" = the room volume you are checking
   self endon("smoke_has_been_thrown");
   self.smokethrown = false;
   while(self.smokethrown == false) {
@@ -252,10 +250,6 @@ smoke_detect() {
     }
   }
 }
-
-/****************************************************************************
-DIALOGUE FUNCTIONS
-****************************************************************************/
 
 dialogue_execute(sLineToExecute) {
   self endon("death");
@@ -273,7 +267,6 @@ trigArrayWait(sTrig) {
     for(i = 0; i < aTriggers.size; i++)
       aTriggers[i] thread trigArrayWait2(aTriggers);
 
-    //wait for the first one to get notified
     aTriggers[0] waittill("trigger");
   }
 }
@@ -281,7 +274,6 @@ trigArrayWait(sTrig) {
 trigArrayWait2(aTrigArray) {
   self waittill("trigger");
 
-  //turn off all of the other triggers
   for(i = 0; i < aTrigArray.size; i++) {
     aTrigArray[i] notify("trigger");
     aTrigArray[i] trigger_off();
@@ -305,21 +297,14 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
     array_thread(aTriggers, ::trigger_off);
 }
 
-triggerActivate(sTriggerName) // Activate a trigger, then delete it
-{
+triggerActivate(sTriggerName) {
   eTrig = getent(sTriggerName, "targetname");
   assert(isDefined(eTrig));
   eTrig notify("trigger", level.player);
   eTrig trigger_off();
 }
 
-/****************************************************************************
-AI HOUSEKEEPING FUNCTIONS
-****************************************************************************/
-
-AA_AI_functions() {
-  //empty function
-}
+AA_AI_functions() {}
 
 look_at_position(eEnt) {
   yaw = VectorToAngles(self.origin - eEnt.origin);
@@ -494,8 +479,6 @@ getAIarrayTouchingVolume(sTeamName, sVolumeName, eVolume) {
 
   return aGuysTouchingVolume;
 }
-
-// delete all ai touching a given volume - specify 'all' 'axis' 'allies' or 'neutral'
 npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
   if(!isDefined(aExclude)) {
     aExclude = [];
@@ -516,7 +499,6 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
 
   assertEx(isDefined(ai), "Need to specify 'all' 'axis' 'allies' or 'neutral' for this function");
 
-  //If an array was passed of dudes to exclude, remove them from the array
   if(isDefined(aExclude)) {
     for(i = 0; i < aExclude.size; i++) {
       if(is_in_array(ai, aExclude[i]))
@@ -526,9 +508,8 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
 
   for(i = 0; i < ai.size; i++) {
     if(ai[i] isTouching(volume)) {
-      //regardless of what we do, turn off magic bullet shield
       ai[i] invulnerable(false);
-      //decide weather to kill or delete
+
       if(boolKill == true)
         ai[i] kill((0, 0, 0));
       else
@@ -536,34 +517,23 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
     }
   }
 
-  //	//Delete alll the hostages
-  //	if( (sNPCtype == "all") || (sNPCtype == "neutral") )
-  //	{
-  //		aHostages = getEntArray("actor_civilian", "classname");
-  //		for(i=0;i<aHostages.size;i++)
-  //		{
-  //			if(aHostages[i] isTouching(volume))
-  //				aHostages[i] delete();
-  //		}
-  //	}
 }
 
 getDudeFromArray(aSpawnArray, sScript_Noteworthy) {
   dude = undefined;
-  //loop through the array and find the guy with that script_noteworthy	
+
   for(i = 0; i < aSpawnArray.size; i++) {
     if(isDefined(aSpawnArray[i].script_noteworthy) && aSpawnArray[i].script_noteworthy == sScript_Noteworthy)
       dude = aSpawnArray[i];
   }
 
   assertEX(isDefined(dude), sScript_Noteworthy + " does not exist in this array");
-  //Return a reference to the guy
+
   return dude;
 }
 
 getDudesFromArray(aSpawnArray, sScript_Noteworthy) {
   aDudes = [];
-  //loop through the array and find the guy with that script_noteworthy	
 
   if(isDefined(sScript_Noteworthy)) {
     for(i = 0; i < aSpawnArray.size; i++) {
@@ -694,25 +664,11 @@ goToVolume(sVolumeName) {
   self.goalradius = goalNode.radius;
 }
 
-/****************************************************************************
-UTILITY FUNCTIONS: SPAWNING
-****************************************************************************/
+AA_spawning_functions() {}
 
-AA_spawning_functions() {
-  //empty
-}
-
-/****************************************************************************
-DOOR FUNCTIONS
-****************************************************************************/
-
-AA_door_functions() {
-  //empty
-}
+AA_door_functions() {}
 
 door_open(sType, bPlaySound, bPlayDefaultFx) {
-  /*----------------------- VARIABLE SETUP
-  -------------------------*/
   if(!isDefined(bPlaySound))
     bPlaySound = true;
   if(!isDefined(bPlayDefaultFx))
@@ -729,8 +685,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
     eExploder = getent(blocker.script_linkto, "script_linkname");
     assertex(isDefined(eExploder), "A script_model door blocker needs to script_linkTo an exploder to play particles when opened. Targetname:" + self.targetname);
   }
-  /*----------------------- OPEN DOOR, CONNECT PATHS, PLAY FX
-  -------------------------*/
+
   switch (sType) {
     case "explosive":
       self thread door_fall_over();
@@ -739,23 +694,21 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
       earthquake(0.4, 1, self.origin, 1000);
       radiusdamage(self.origin, 56, level.maxDetpackDamage, level.minDetpackDamage);
       break;
-    case "kicked": // Rotate away from kick
+    case "kicked":
       self rotateyaw(-175, 0.5);
       self door_connectpaths(bPlayDefaultFx);
       break;
     case "kicked_down":
       self thread door_fall_over();
       self door_connectpaths(bPlayDefaultFx);
-      //if(bPlayDefaultFx)
-      //playFX(level._effect["door_kicked_dust01"], eExploder.origin, anglesToForward(eExploder.angles));
+
       break;
     default:
       self rotateyaw(-175, 0.5);
       self door_connectpaths();
       break;
   }
-  /*----------------------- PLAY EXPLODER IN CASE FX ARTISTS WANT TO ADD
-  -------------------------*/
+
   iExploderNum = eExploder.script_exploder;
   assertEx((isDefined(iExploderNum)), "There is no exploder number in the key 'script_exploder'");
   exploder(iExploderNum);

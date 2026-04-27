@@ -3,63 +3,6 @@
  * Script: maps\_breach.gsc
 ********************************************************/
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-_breach global script
-
-NOTE: Load \test\breach.d3dbsp to test all supported breaches
-
- -- -- -- -- -- -- -- -- -- -- -- -- -- Currently supported breaches( sBreachType )
- -- -- -- -- -- -- -- -- -- -- -- -- -- "explosive_breach_left""shotgunhinges_breach_left":
-"flash_breach_no_door_right":
-
- -- -- -- -- -- -- -- -- -- -- -- -- -- How to use
- -- -- -- -- -- -- -- -- -- -- -- -- -- 1 )Add any of the following above _load:::main();
-
-	maps\_breach_explosive_left::main();
-	maps\_breach_flash_right::main();
-	maps\_breach_hinges_left::main();
-	
-	
-	 * * * * AND * * * * *
-	
-	maps\_breach::main();
-
-2 ) ROOM VOLUME: Create an info_volume that encompasses the room being assaulted.
-				( used to stun enemies during explosive breaches, determine where AI throws flash grenades, and to detect when the room is cleared )
-
-3 ) DOOR: 		Have the room volume script_linkTo a door( script_model or script_brushmodel ) with an origin that
-				points in towards the interior of the room( all stacking / breaching anims play on this origin ).
-				see model com_door_01_handleleft for an example.
-				
-				If you use a script_brushmodel, you will need to manually target it to a script_origin on the
-				lower right corner of the door frame that points in towards the interior of the room.
-				
-4 ) NO DOOR: 	If the breach does not require a door( like for flashbang only breaches ), you need to have the
-				room volume script_linkTo a script_origin on the edge of the door frame pointing in towards the room.
-				
-5 ) BLOCKER: 	The model door needs to target a script_brushmodel blocker( not necessary if you use
-				a script_brushmodel door instead )
-
-5 ) EXPLODER: 	All doors must script_linkTo a script_origin in the center of the door with a 'script_exploder' key
-				of any number. Used to play default fx and will later by used by fx artists for additional
-				smoke or custom effects in the room
-				
- -- -- -- -- -- -- -- -- -- -- -- -- -- Function arguments
- -- -- -- -- -- -- -- -- -- -- -- -- -- < volume > thread breach_think( aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultFx, bShoot );
-
- < volume > 	 = The room volume being breached
-aBreachers	 = The array of friendlies performing the breach( can not be more than 2 )
-sBreachType	 = which breach to perform. See / test / breach to see currently supported breaches
-sHintString	 = Pass a hintstrig to display if you trigger the breach with a "use" trigger
-bSpawnHostiles = true / false value if you want to spawn hostiles inside right before the breach is started
-bPlayDefaultFx = defaults to true. Set to false and add effects to the exploder instead if you like
-bShoot = some breaches have the AI firing randomly as they storm into a room while they are still playing the scripted anim. True by default
-
- -- -- -- -- -- -- -- -- -- -- -- -- -- PROPERTIES
- -- -- -- -- -- -- -- -- -- -- -- -- -- .firstBreacher - to have a specific guy be the first to a breach. If undefined, will choose whichever AI is closest to the door at the time the breach script is called
-
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-
 #include common_scripts\utility;
 #include maps\_utility;
 #include maps\_anim;
@@ -73,22 +16,13 @@ main() {
   flag_init("begin_the_breach");
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-BREACH CORE FUNCTIONS
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-
 breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultFx, bShoot) {
-  // self == > the room volume being breached
   self endon("breach_abort");
 
-  // Changing core function called when any scripted sequence calls a fire notetrack
-  // used to determine whether "fire" notetracks should be obeyed or not	
   if(isDefined(bShoot) && (bShoot == false)) {
     anim.fire_notetrack_functions["scripted"] = ::breach_fire_straight;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - VARIABLE SETUP
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self.flashthrown = false;
   self.closestAI = undefined;
   self.animEnt = undefined;
@@ -176,14 +110,10 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     assertEx((isDefined(self.grenadeDest)), "script_origin 'flashthrow_" + sRoomName + "' needs to target another script_origin where you want the flashbang to be thrown to");
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - CLEANUP AND FX
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self thread breach_abort(aBreachers);
   self thread breach_cleanup(aBreachers);
   self thread breach_play_fx(sBreachType, bPlayDefaultFx);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - DECIDE WHO WILL TAKE UP FIRST POSITION
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   iFirstBreachers = 0;
   for(i = 0; i < aBreachers.size; i++) {
     if(isDefined(aBreachers[i].firstBreacher)) {
@@ -196,8 +126,6 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   else
     self.closestAI = getClosest(self.animEnt.origin, aBreachers);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - SEND EACH AI TO IDLE
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if(aBreachers.size == 1)
     self.singleBreacher = true;
   for(i = 0; i < aBreachers.size; i++)
@@ -206,8 +134,6 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   while(self.breachers < aBreachers.size)
     wait(0.05);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - AI IS READY TO BREACH
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self notify("ready_to_breach");
   self.readyToBreach = true;
   if(isDefined(self.breachtrigger)) {
@@ -220,21 +146,15 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   flag_set("begin_the_breach");
   self.aboutToBeBreached = true;
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - SPAWN HOSTILES RIGHT AS ROOM IS BEING BREACHED( IF SPECIFIED IN ARGUMENT )
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
-
   if(isDefined(bSpawnHostiles) && (bSpawnHostiles == true)) {
     spawners = getEntArray("hostiles_" + sRoomName, "targetname");
     assertEx((isDefined(spawners)), "Could not find spawners with targetname of hostiles_" + sRoomName + " for room volume " + self.targetname);
-    // wait for the AI to start breaching the room before spawning hostiles
+
     self waittill("spawn_hostiles");
     spawnBreachHostiles(spawners);
     self.hostilesSpawned = true;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - GET ARRAY OF ALL HOSTILES TOUCHING THE ROOM VOLUME
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
-  // badplace to get AI out of the way of the door
   if(isDefined(self.badplace))
     badplace_cylinder(self.sBadplaceName, -1, self.badplace.origin, self.badplace.radius, 200, "bad_guys");
 
@@ -247,14 +167,11 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   if(aHostiles.size > 0)
     array_thread(aHostiles, ::breach_enemies_stunned, self);
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - WAIT FOR ALL THE AI TO BE IN THE ROOM
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   while(!self.AIareInTheRoom)
     wait(0.05);
 
   self notify("breach_complete");
-  /* -- -- -- -- -- -- -- -- -- -- -- - WAIT FOR ROOM TO BE CLEARED
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
+
   if(!aHostiles.size) {
     return;
   }
@@ -277,19 +194,16 @@ breach_dont_fire() {
 }
 
 breacher_think(eVolume, sBreachType, bShoot) {
-  // self == > the AI doing the breaching
   self.breaching = true;
   self.breachDoNotFire = undefined;
   if(!isDefined(bShoot))
     bShoot = true;
-  // self disable_ai_color();
-  // self breach_set_animname( "generic" );// dont need to make people animname generic anymore
+
   self pushplayer(true);
   self thread give_infinite_ammo();
 
   eVolume endon("breach_abort");
-  /* -- -- -- -- -- -- -- -- -- -- -- - VARIABLE SETUP
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
+
   self.ender = "stop_idle_" + self getentitynumber();
   AInumber = undefined;
   sAnimStart = undefined;
@@ -302,8 +216,6 @@ breacher_think(eVolume, sBreachType, bShoot) {
   else
     AInumber = "02";
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - SPECIAL CASE: SINGLE EXPLOSIVVE GUY NEEDS TO BE NUMBER TWO IN THE STACK
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if((eVolume.singleBreacher == true) && (sBreachType == "explosive_breach_left"))
     AInumber = "02";
 
@@ -339,8 +251,6 @@ breacher_think(eVolume, sBreachType, bShoot) {
       break;
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - AI TO BREACH IDLE
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self breach_set_goaladius(64);
 
   if(!isDefined(self.usebreachapproach) || self.usebreachapproach) {
@@ -358,14 +268,11 @@ breacher_think(eVolume, sBreachType, bShoot) {
   self.scriptedarrivalent = undefined;
   eVolume waittill("execute_the_breach");
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - AI FLASHES THE ROOM
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   if((!eVolume.flashthrown) && (isDefined(sAnimFlash))) {
     eVolume.animEnt notify(self.ender);
     eVolume.animEnt thread anim_generic(self, sAnimFlash);
     wait(1);
 
-    // magic grenade from second guy
     if((AInumber == "02") || (eVolume.singleBreacher == true)) {
       sHandTag = "J_Mid_LE_1";
       self attach("projectile_m84_flashbang_grenade", sHandTag);
@@ -387,19 +294,13 @@ breacher_think(eVolume, sBreachType, bShoot) {
     wait(.1);
   }
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - PLAY BREACH ANIMS ON BOTH AI
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   eVolume.animEnt notify(self.ender);
 
   if(bShoot == false)
     self.breachDoNotFire = true;
   eVolume.animEnt thread anim_generic(self, sAnimBreach);
-  // eVolume.animEnt anim_generic( self, sAnimBreach );	
-  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: EXPLOSIVE BREACH
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
+
   if(sBreachType == "explosive_breach_left") {
-    /* -- -- -- -- -- -- -- -- -- -- -- - BLOW THE DOOR
-     -- -- -- -- -- -- -- -- -- -- -- -- -*/
     if(AInumber == "02") {
       self thread detcord_logic(eVolume);
       self waittillmatch("single anim", "pull fuse");
@@ -412,29 +313,15 @@ breacher_think(eVolume, sBreachType, bShoot) {
       eVolume.eDoor thread door_open("explosive", eVolume);
       eVolume notify("play_breach_fx");
     }
-  }
-
-  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: SHOTGUN BREACH A
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
-  else if(sBreachType == "shotgunhinges_breach_left") {
-    /* -- -- -- -- -- -- -- -- -- -- -- - SHOOT THE DOOR
-     -- -- -- -- -- -- -- -- -- -- -- -- -*/
+  } else if(sBreachType == "shotgunhinges_breach_left") {
     if(AInumber == "01") {
       eVolume notify("spawn_hostiles");
       self waittillmatch("single anim", "kick");
       eVolume.eDoor thread door_open("shotgun", eVolume);
       eVolume notify("play_breach_fx");
     }
-  }
+  } else if(sBreachType == "flash_breach_no_door_right") {}
 
-  /* -- -- -- -- -- -- -- -- -- -- -- - CONDITIONAL: SHACK BREACH
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
-  else if(sBreachType == "flash_breach_no_door_right") {
-    // Nothing conditional to do for this breach yet
-  }
-
-  /* -- -- -- -- -- -- -- -- -- -- -- - AI FINISHES ENTERING
-   -- -- -- -- -- -- -- -- -- -- -- -- -*/
   self waittillmatch("single anim", "end");
   self notify("breach_complete");
   if(bShoot == false)
@@ -444,7 +331,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
     self thread[[level.friendly_breach_thread]](eVolume);
 
   eVolume.AIareInTheRoom = true;
-  // self setgoalvolume( eVolume );
+
   self pushplayer(false);
   self breach_reset_animname();
 
@@ -455,23 +342,19 @@ breacher_think(eVolume, sBreachType, bShoot) {
 }
 
 breach_fire_straight() {
-  // Changing core function called when any scripted sequence calls a fire notetrack
   if(isDefined(self.breachDoNotFire))
     return;
   animscripts\shared::fire_straight();
 }
 
 detcord_logic(eVolume) {
-  // self == > the AI placing the detcord
   self thread sound_effect_play(eVolume);
   self waittillmatch("single anim", "attach prop right");
   sHandTag = "TAG_INHAND";
-  // spawn detcord model and attach to guy's hand
 
-  // attach detcord to AI hand
   self attach("weapon_detcord", sHandTag);
   self waittillmatch("single anim", "detach prop right");
-  // spawn detcord model and delete other one
+
   org_hand = self gettagorigin(sHandTag);
   angles_hand = self gettagangles(sHandTag);
   self detach("weapon_detcord", sHandTag);
@@ -479,7 +362,6 @@ detcord_logic(eVolume) {
   model_detcord setModel("weapon_detcord");
   model_detcord.angles = angles_hand;
 
-  // delete once door is breached
   eVolume waittill("detpack_detonated");
   radiusdamage(model_detcord.origin, 64, 50, 25);
   model_detcord delete();
@@ -491,43 +373,29 @@ sound_effect_play(eVolume) {
 }
 
 breach_enemies_stunned(eRoomVolume) {
-  // self == > the room volume being breached
   self endon("death");
   eRoomVolume endon("breach_aborted");
 
   eRoomVolume waittill("detpack_detonated");
   if(distance(self.origin, eRoomVolume.animEnt.origin) <= level.detpackStunRadius) {
-    // self flashBangStart( 0.25 );
     level.stunnedAnimNumber++;
     if(level.stunnedAnimNumber > 2)
       level.stunnedAnimNumber = 1;
     sStunnedAnim = "exposed_flashbang_v" + level.stunnedAnimNumber;
-    // self breach_set_animname( "generic" );// dont need to make people animname generic anymore
+
     self.allowdeath = true;
     self anim_generic_custom_animmode(self, "gravity", sStunnedAnim);
-    //self anim_generic( self, sStunnedAnim );
+
     self breach_reset_animname();
   }
 }
 
 breach_trigger_think(eRoomVolume) {
-  // self == > the trigger
   eRoomVolume endon("execute_the_breach");
   eRoomVolume endon("breach_aborted");
 
   self thread breach_trigger_cleanup(eRoomVolume);
-  // self trigger_on();// wtf is this for?
-  //	if( ( self.classname == "trigger_use" ) || ( self.classname == "trigger_use_touch" ) )
-  //	{
-  //		self setHintString( eRoomVolume.triggerHintString );
-  //		if( isDefined( eRoomVolume.eDoor ) )
-  //		{
-  //			// spawn a flashing objective on door frame
-  //			eRoomVolume.eBreachmodel = spawn( "script_model", eRoomVolume.eDoor.origin );
-  //			eRoomVolume.eBreachmodel.angles = eRoomVolume.eDoor.angles;
-  //			eRoomVolume.eBreachmodel setModel( level.door_objmodel );
-  //		}
-  //	}
+
   self waittill("trigger");
   eRoomVolume notify("execute_the_breach");
 }
@@ -539,7 +407,6 @@ breach_trigger_cleanup(eRoomVolume) {
     eRoomVolume.eBreachmodel delete();
 }
 breach_abort(aBreachers) {
-  // self == > the room volume being breached
   self endon("breach_complete");
   self waittill("breach_abort");
 
@@ -548,7 +415,6 @@ breach_abort(aBreachers) {
 }
 
 breach_cleanup(aBreachers) {
-  // self == > the room volume being breached
   while(!self.cleared)
     wait(0.05);
   if(isDefined(self.badplace))
@@ -572,7 +438,6 @@ breach_AI_reset(eVolume) {
 }
 
 breach_play_fx(sBreachType, bPlayDefaultFx) {
-  // self == > the room volume being breached
   self endon("breach_aborted");
   self endon("breach_complete");
 
@@ -591,17 +456,13 @@ breach_play_fx(sBreachType, bPlayDefaultFx) {
         playFX(level._effect["_breach_doorbreach_kick"], self.eExploderOrigin.origin, anglesToForward(self.eExploderOrigin.angles));
       break;
     case "flash_breach_no_door_right":
-      // no effects since there is no door
+
       break;
     default:
       assertmsg(sBreachType + " is not a valid breachType");
       break;
   }
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-BREACH UTILITY FUNCTIONS
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
 spawnHostile(eEntToSpawn) {
   spawnedGuy = eEntToSpawn dospawn();
@@ -617,10 +478,9 @@ spawnBreachHostiles(arrayToSpawn) {
     guy = spawnHostile(arrayToSpawn[i]);
     spawnedGuys[spawnedGuys.size] = guy;
   }
-  // check to ensure all the guys were spawned
+
   assertEx((arrayToSpawn.size == spawnedGuys.size), "Not all guys were spawned successfully from spawnBreachHostiles");
 
-  // Return an array containing all the spawned guys
   return spawnedGuys;
 }
 

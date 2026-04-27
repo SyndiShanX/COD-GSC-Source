@@ -19,11 +19,9 @@ main(model, type) {
 
   build_treadfx();
 
-  //special for mig29/////
   level._effect["engineeffect"] = loadfx("fire/jet_afterburner");
   level._effect["afterburner"] = loadfx("fire/jet_afterburner_ignite");
   level._effect["contrail"] = loadfx("smoke/jet_contrail");
-  ////////////////////////
 
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   build_life(999, 500, 1500);
@@ -47,7 +45,6 @@ init_local() {
 
   if(self.model != "vehicle_av8b_harrier_jet") {
     maps\_vehicle::lights_on("running");
-    //maps\_vehicle::lights_on( "landing" );
   }
 
   thread landing_gear_up();
@@ -94,18 +91,11 @@ playEngineEffects() {
 }
 
 playAfterBurner() {
-  //After Burners are pretty much like turbo boost. They don't use them all the time except when
-  //bursts of speed are needed. Needs a cool sound when they're triggered. Currently, they are set
-  //to be on all the time, but it would be cool to see them engauge as they fly away.
-
   playFXOnTag(level._effect["afterburner"], self, "tag_engine_right");
   playFXOnTag(level._effect["afterburner"], self, "tag_engine_left");
 }
 
 playConTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
-  //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
   playFXOnTag(level._effect["contrail"], self, "tag_right_wingtip");
   playFXOnTag(level._effect["contrail"], self, "tag_left_wingtip");
 }
@@ -143,11 +133,11 @@ plane_sound_node(loop, sonic_boom) {
 plane_sound_players(loop, sonic_boom) {
   self waittill("trigger", other);
   other endon("death");
-  self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
+  self thread plane_sound_node();
   other thread play_loop_sound_on_entity(loop);
   while(playerisinfront(other))
     wait .05;
-  wait .5; // little delay for the boom
+  wait .5;
   other thread play_sound_in_space(sonic_boom);
   other waittill("reached_end_node");
   other stop_sound(loop);
@@ -159,14 +149,12 @@ plane_bomb_node() {
   level._effect["plane_bomb_explosion2"] = loadfx("explosions/tanker_explosion");
   self waittill("trigger", other);
   other endon("death");
-  self thread plane_bomb_node(); // spawn new thread for next plane that passes through this pathnode
+  self thread plane_bomb_node();
 
-  // get array of targets
   aBomb_targets = getEntArray(self.script_linkTo, "script_linkname");
   assertEx(isDefined(aBomb_targets), "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
   assertEx(aBomb_targets.size > 1, "Plane bomb node at " + self.origin + " needs to script_linkTo at least one script_origin to use as a bomb target");
 
-  //sort array of targets from nearest to furthest to determine order of bombing
   aBomb_targets = get_array_of_closest(self.origin, aBomb_targets, undefined, aBomb_targets.size);
   iExplosionNumber = 0;
 
@@ -176,30 +164,24 @@ plane_bomb_node() {
     if(iExplosionNumber == 3)
       iExplosionNumber = 1;
     aBomb_targets[i] thread play_sound_on_entity("airstrike_explosion");
-    //aBomb_targets[i] thread play_sound_on_entity( "rocket_explode_sand" );
+
     playFX(level._effect["plane_bomb_explosion" + iExplosionNumber], aBomb_targets[i].origin);
     wait randomfloatrange(.3, 1.2);
   }
 }
 
 plane_bomb_cluster() {
-  /*----------------------- WAIT FOR PLANE TO HIT NODE
-  -------------------------*/
   self waittill("trigger", other);
   other endon("death");
   plane = other;
-  plane thread plane_bomb_cluster(); // spawn new thread for next plane that passes through this pathnode
+  plane thread plane_bomb_cluster();
 
-  /*----------------------- SPAWN A BOMB MODEL
-  -------------------------*/
   bomb = spawn("script_model", plane.origin - (0, 0, 100));
   bomb.angles = plane.angles;
   bomb setModel("projectile_cbu97_clusterbomb");
 
-  /*----------------------- LAUNCH FROM PLANE UNTIL CLOSE TO GROUND
-  -------------------------*/
   vecForward = vector_multiply(anglesToForward(plane.angles), 2);
-  vecUp = vector_multiply(anglestoup(plane.angles), -0.2); // invert the up angles
+  vecUp = vector_multiply(anglestoup(plane.angles), -0.2);
   vec = [];
   for(i = 0; i < 3; i++)
     vec[i] = (vecForward[i] + vecUp[i]) / 2;
@@ -217,8 +199,6 @@ plane_bomb_cluster() {
   bomb delete();
   bomb = newBomb;
 
-  /*----------------------- PLAY FX ON INVISIBLE BOMB
-  -------------------------*/
   bombOrigin = bomb.origin;
   bombAngles = bomb.angles;
   playFXOnTag(level.airstrikefx, bomb, "tag_origin");
@@ -236,7 +216,7 @@ plane_bomb_cluster() {
 
     traceHit = trace["position"];
 
-    radiusDamage(traceHit + (0, 0, 16), 512, 400, 30); // targetpos, radius, maxdamage, mindamage
+    radiusDamage(traceHit + (0, 0, 16), 512, 400, 30);
 
     if(i % 3 == 0) {
       thread play_sound_in_space("airstrike_explosion", traceHit);
@@ -253,53 +233,3 @@ plane_bomb_cluster() {
 stop_sound(alias) {
   self notify("stop sound" + alias);
 }
-
-/*QUAKED script_vehicle_mig29 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mig29::main( "vehicle_mig29" );
-
-and these lines in your CSV:
-#include,vehicle_mig29_mig29
-sound,vehicle_mig29,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mig29"default:"vehicletype" "mig29"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_mig29_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mig29::main( "vehicle_mig29_low" );
-
-and these lines in your CSV:
-#include,vehicle_mig29_low
-sound,vehicle_mig29,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mig29_low"default:"vehicletype" "mig29"default:"script_team" "allies"*/
-
-// DISABLED av8b
-// this one is missing tags and junk.
-
-/*DISABLED script_vehicle_av8b_harrier_jet (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mig29::main( "vehicle_av8b_harrier_jet" );
-
-and these lines in your CSV:
-#include,vehicle_av8b_harrier_jet_mig29
-sound,vehicle_mig29,vehicle_standard,all_sp
-
-defaultmdl="vehicle_av8b_harrier_jet"default:"vehicletype" "mig29"default:"script_team" "allies"*/
-
-// DISABLED desert version.. this one missing a bunch of junk too.
-
-/*DISABLED script_vehicle_mig29_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_mig29::main( "vehicle_mig29_desert" );
-
-and these lines in your CSV:
-#include,vehicle_mig29_desert_mig29
-sound,vehicle_mig29,vehicle_standard,all_sp
-
-defaultmdl="vehicle_mig29_desert"default:"vehicletype" "mig29"default:"script_team" "allies"
-*/

@@ -54,15 +54,3 @@ playEngineEffects() {
     stopFXOnTag(engineeffects, self, "tag_engine_right_2");
   }
 }
-
-/*QUAKED script_vehicle_antonov (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_antonov::main( "vehicle_antonov_fly" );
-
-and these lines in your CSV:
-#include,vehicle_antonov
-sound,vehicle_antonov,vehicle_standard,all_sp
-
-defaultmdl="vehicle_antonov_fly"default:"vehicletype" "antonov"default:"script_team" "allies"
-*/

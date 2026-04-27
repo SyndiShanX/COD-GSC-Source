@@ -34,8 +34,6 @@ setup_door_anims() {
   level.scr_anim["hiding_door"]["death_1"] = % doorpeek_deathA_door;
   level.scr_anim["hiding_door"]["death_2"] = % doorpeek_deathB_door;
 
-  //	level.scr_anim[ "hiding_door" ][ "fire_1" ]					= %doorpeek_fireA_door;
-  //	level.scr_anim[ "hiding_door" ][ "fire_2" ]					= %doorpeek_fireB_door;
   level.scr_anim["hiding_door"]["fire_3"] = % doorpeek_fireC_door;
 
   level.scr_anim["hiding_door"]["grenade"] = % doorpeek_grenade_door;
@@ -111,8 +109,6 @@ setup_guy_door_anims() {
   level.scr_anim["hiding_door_guy"]["death_1"] = % doorpeek_deathA;
   level.scr_anim["hiding_door_guy"]["death_2"] = % doorpeek_deathB;
 
-  //	level.scr_anim[ "hiding_door_guy" ][ "fire_1" ]					= %doorpeek_fireA;
-  //	level.scr_anim[ "hiding_door_guy" ][ "fire_2" ]					= %doorpeek_fireB;
   level.scr_anim["hiding_door_guy"]["fire_3"] = % doorpeek_fireC;
 
   level.scr_anim["hiding_door_guy"]["grenade"] = % doorpeek_grenade;
@@ -172,12 +168,6 @@ window_notetracks() {
 }
 
 hiding_door_spawner() {
-  // place a hiding_door_guy prefab and then place a spawner next to it with script_noteworthy "hiding_door_spawner".
-  // Spawn the guy however you like (trigger or script)
-  // Target the spawner to a trigger, this trigger will make the guy open the door.
-  // Alternatively put a script_flag_wait on the spawner. The guy will wait for the flag to be set before opening the door.
-  // If you put neither, a trigger_radius will be spawned, using the radius of the spawner if a radius is set
-
   door_orgs = getEntArray("hiding_door_guy_org", "targetname");
   assert(door_orgs.size, "Hiding door guy with export " + self.export+" couldn't find a hiding_door_org!");
 
@@ -189,7 +179,7 @@ hiding_door_spawner() {
     door_org.hiding_place_type = door_org.script_parameters;
   }
 
-  door_org.targetname = undefined; // so future searches won't grab this one
+  door_org.targetname = undefined;
   door_model = getent(door_org.target, "targetname");
 
   door_clip = getent(door_model.target, "targetname");
@@ -203,7 +193,7 @@ hiding_door_spawner() {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
   }
 
-  door_model delete(); // we spawn our own door, the one in the prefab is just to aid placement
+  door_model delete();
 
   door = spawn_anim_model("hiding_" + door_org.hiding_place_type);
 
@@ -228,12 +218,9 @@ hiding_door_spawner() {
     for(i = 0; i < trigger_array.size; i++) {
       trigger = trigger_array[i];
 
-      // make sure it's actually a trigger
       if(!issubstr(trigger.classname, "trigger")) {
         continue;
-      }
-      // if it's got a leave noteworhty, use it to tell AI to stop hiding
-      else if(isDefined(trigger.script_noteworthy) && trigger.script_noteworthy == "leave") {
+      } else if(isDefined(trigger.script_noteworthy) && trigger.script_noteworthy == "leave") {
         leave_trigger = trigger;
       } else {
         start_trigger = trigger;
@@ -246,11 +233,9 @@ hiding_door_spawner() {
     if(isDefined(self.radius))
       radius = self.radius;
 
-    // no trigger mechanism specified, so add a radius trigger
     start_trigger = spawn("trigger_radius", door_org.origin, 0, radius, 48);
   }
 
-  // to fit under add_spawn_function's argument limit
   triggers = spawnStruct();
   triggers.start_trigger = start_trigger;
   triggers.leave_trigger = leave_trigger;
@@ -277,7 +262,6 @@ hiding_door_guy(door_org, triggers, door, door_clip) {
   start_trigger = triggers.start_trigger;
   leave_trigger = triggers.leave_trigger;
 
-  // store for later use
   self.hiding_door = spawnStruct();
   self.hiding_door.door_org = door_org;
   self.hiding_door.door = door;
@@ -292,7 +276,6 @@ hiding_door_guy(door_org, triggers, door, door_clip) {
 
   starts_open = isDefined(self.script_hidingdoor_starts_open) && self.script_hidingdoor_starts_open;
   if(starts_open) {
-    // wait for trigger before closing the door
     door_org thread anim_loop_aligned(guy_and_door, "idle");
   } else {
     door_org thread anim_first_frame(guy_and_door, "fire_3");
@@ -302,7 +285,6 @@ hiding_door_guy(door_org, triggers, door, door_clip) {
     self thread hiding_door_leave_door();
   }
 
-  // wait for trigger or the flag to start the behavior
   if(isDefined(start_trigger)) {
     start_trigger waittill("trigger");
   } else {
@@ -311,13 +293,11 @@ hiding_door_guy(door_org, triggers, door, door_clip) {
 
   self SetGoalPos(self.origin);
 
-  // slam the door closed
   if(starts_open) {
     door_org notify("stop_loop");
     door_org anim_single_aligned(guy_and_door, "close");
   }
 
-  // start a behavior
   if(isDefined(self.script_hidingdoor_action)) {
     scene = self.script_hidingdoor_action;
     assert(scene == "kick" || scene == "jump");
@@ -335,7 +315,7 @@ hiding_door_blindfire_loop(guy_and_door) {
   assert(isDefined(self.hiding_door));
   assert(isDefined(self.hiding_door.door_org));
 
-  grenadeThrowWaitTime = 5000; // wait 5 seconds
+  grenadeThrowWaitTime = 5000;
   lastGrenadeThrowTime = grenadeThrowWaitTime * -1;
 
   for(;;) {
@@ -343,23 +323,20 @@ hiding_door_blindfire_loop(guy_and_door) {
 
     if(GetTime() > lastGrenadeThrowTime + grenadeThrowWaitTime && randomint(100) < 25 * self.grenadeammo) {
       self.grenadeammo--;
-      scene = get_anim_name("grenade"); // once the grenade throw has the notetrack we'll change this
+      scene = get_anim_name("grenade");
 
       lastGrenadeThrowTime = GetTime();
     }
 
     self.hiding_door.door_org thread anim_single_aligned(guy_and_door, scene);
 
-    // delay the settime by a frame or it wont work
     if(self.hiding_door.door_org.hiding_place_type == "door") {
       delay_thread(0.05, ::anim_set_time, guy_and_door, scene, 0.4);
     }
 
     self.hiding_door.door_org waittill(scene);
 
-    // go exposed
     if(scene == "hide_2_aim") {
-      // give full clip
       self.bulletsInClip = weaponClipSize(self.weapon);
 
       wait(3);
@@ -368,7 +345,6 @@ hiding_door_blindfire_loop(guy_and_door) {
       self.hiding_door.door_org waittill("aim_2_hide");
     }
 
-    // loop the start frame of the fire anim while we wait
     self.hiding_door.door_org thread anim_single_aligned(guy_and_door, "fire_3");
 
     wait_time = randomfloatrange(1.5, 2.5);
@@ -412,10 +388,8 @@ hiding_door_guy_cleanup() {
 
   self endon("stop_hiding");
 
-  // if the guy gets deleted before the sequence happens this thread will catch that and clean up any problems that could arise
   self waittill("death");
 
-  // stop the looping animations because the guy is removed now
   self.hiding_door.door_org notify("stop_loop");
 
   thread hiding_door_death_door_connections(self.hiding_door.door_clip);
@@ -435,7 +409,6 @@ hiding_door_guy_pushplayer(pushPlayerClip) {
 }
 
 hiding_door_guy_grenade_throw(guy) {
-  // called from a notetrack
   startOrigin = guy getTagOrigin("J_Wrist_RI");
   player = get_closest_player(guy.origin);
   strength = (distance(player.origin, guy.origin) * 2.0);
@@ -472,7 +445,6 @@ hiding_door_death() {
   death_anim = get_anim_name("death");
   self set_deathanim(death_anim);
 
-  // must delay this by a frame. don't know exactly why, but it's something to do with this being called from code.
   self.hiding_door.door_org delay_thread(0.05, ::anim_single_aligned, guys, death_anim);
 
   wait(0.5);

@@ -27,234 +27,118 @@
 #using scripts\shared\util_shared;
 #namespace lotus_start_riot;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function plan_b_main() {
-  // Unsupported VM revision (1B).
-}
+function plan_b_main() {}
 
-function function_1320bd25() {
-  // Unsupported VM revision (1B).
-}
+function function_1320bd25() {}
 
-function plan_b_done() {
-  // Unsupported VM revision (1B).
-}
+function plan_b_done() {}
 
-function function_35dc675a() {
-  // Unsupported VM revision (1B).
-}
+function function_35dc675a() {}
 
-function function_5fb7ec5() {
-  // Unsupported VM revision (1B).
-}
+function function_5fb7ec5() {}
 
-function function_8ded8093() {
-  // Unsupported VM revision (1B).
-}
+function function_8ded8093() {}
 
-function start_the_riots_done() {
-  // Unsupported VM revision (1B).
-}
+function start_the_riots_done() {}
 
-function general_hakim_main() {
-  // Unsupported VM revision (1B).
-}
+function general_hakim_main() {}
 
-function function_cb65e794() {
-  // Unsupported VM revision (1B).
-}
+function function_cb65e794() {}
 
-function function_fd777f22() {
-  // Unsupported VM revision (1B).
-}
+function function_fd777f22() {}
 
-function function_9fe3e84() {
-  // Unsupported VM revision (1B).
-}
+function function_9fe3e84() {}
 
-function function_9030e073() {
-  // Unsupported VM revision (1B).
-}
+function function_9030e073() {}
 
-function general_hakim_done() {
-  // Unsupported VM revision (1B).
-}
+function general_hakim_done() {}
 
-function function_6bf216f3() {
-  // Unsupported VM revision (1B).
-}
+function function_6bf216f3() {}
 
-function riot_ambient_scenes() {
-  // Unsupported VM revision (1B).
-}
+function riot_ambient_scenes() {}
 
-function function_c1943fd() {
-  // Unsupported VM revision (1B).
-}
+function function_c1943fd() {}
 
-function function_50b42010() {
-  // Unsupported VM revision (1B).
-}
+function function_50b42010() {}
 
-function function_c06f06a5() {
-  // Unsupported VM revision (1B).
-}
+function function_c06f06a5() {}
 
-function function_693d9b17() {
-  // Unsupported VM revision (1B).
-}
+function function_693d9b17() {}
 
-function function_9ff47248() {
-  // Unsupported VM revision (1B).
-}
+function function_9ff47248() {}
 
-function function_da13419c() {
-  // Unsupported VM revision (1B).
-}
+function function_da13419c() {}
 
-function function_b73b584a() {
-  // Unsupported VM revision (1B).
-}
+function function_b73b584a() {}
 
-function function_f4561e7c() {
-  // Unsupported VM revision (1B).
-}
+function function_f4561e7c() {}
 
-function function_b7323de8() {
-  // Unsupported VM revision (1B).
-}
+function function_b7323de8() {}
 
-function function_51922beb() {
-  // Unsupported VM revision (1B).
-}
+function function_51922beb() {}
 
-function function_adfe9569() {
-  // Unsupported VM revision (1B).
-}
+function function_adfe9569() {}
 
-function function_ace07855() {
-  // Unsupported VM revision (1B).
-}
+function function_ace07855() {}
 
-function function_17d17b52() {
-  // Unsupported VM revision (1B).
-}
+function function_17d17b52() {}
 
-function function_cd0fea70() {
-  // Unsupported VM revision (1B).
-}
+function function_cd0fea70() {}
 
-function function_ef4d5e6c() {
-  // Unsupported VM revision (1B).
-}
+function function_ef4d5e6c() {}
 
-function function_90a05c64() {
-  // Unsupported VM revision (1B).
-}
+function function_90a05c64() {}
 
-function function_198186d() {
-  // Unsupported VM revision (1B).
-}
+function function_198186d() {}
 
-function function_2e3bc362() {
-  // Unsupported VM revision (1B).
-}
+function function_2e3bc362() {}
 
-function function_9f2861ce() {
-  // Unsupported VM revision (1B).
-}
+function function_9f2861ce() {}
 
-function function_e85196be() {
-  // Unsupported VM revision (1B).
-}
+function function_e85196be() {}
 
-function function_2e629842() {
-  // Unsupported VM revision (1B).
-}
+function function_2e629842() {}
 
-function function_306be92b() {
-  // Unsupported VM revision (1B).
-}
+function function_306be92b() {}
 
-function function_a5b8cd1e() {
-  // Unsupported VM revision (1B).
-}
+function function_a5b8cd1e() {}
 
-function function_d6a7c0f4() {
-  // Unsupported VM revision (1B).
-}
+function function_d6a7c0f4() {}
 
-function function_c0caa0cf() {
-  // Unsupported VM revision (1B).
-}
+function function_c0caa0cf() {}
 
-function function_80bcd913() {
-  // Unsupported VM revision (1B).
-}
+function function_80bcd913() {}
 
-function function_caba12d2() {
-  // Unsupported VM revision (1B).
-}
+function function_caba12d2() {}
 
-function function_461f82a0() {
-  // Unsupported VM revision (1B).
-}
+function function_461f82a0() {}
 
-function function_cf0c15cc() {
-  // Unsupported VM revision (1B).
-}
+function function_cf0c15cc() {}
 
-function function_e2d5189a() {
-  // Unsupported VM revision (1B).
-}
+function function_e2d5189a() {}
 
-function function_f7410faa() {
-  // Unsupported VM revision (1B).
-}
+function function_f7410faa() {}
 
-function function_11c401c8() {
-  // Unsupported VM revision (1B).
-}
+function function_11c401c8() {}
 
-function function_c5116fb2() {
-  // Unsupported VM revision (1B).
-}
+function function_c5116fb2() {}
 
-function function_8a3bdac() {
-  // Unsupported VM revision (1B).
-}
+function function_8a3bdac() {}
 
-function function_4410b0a7() {
-  // Unsupported VM revision (1B).
-}
+function function_4410b0a7() {}
 
-function heroes_ignoreall() {
-  // Unsupported VM revision (1B).
-}
+function heroes_ignoreall() {}
 
-function function_47dcfae8() {
-  // Unsupported VM revision (1B).
-}
+function function_47dcfae8() {}
 
-function open_security_door() {
-  // Unsupported VM revision (1B).
-}
+function open_security_door() {}
 
-function kill_at_goal() {
-  // Unsupported VM revision (1B).
-}
+function kill_at_goal() {}
 
-function riot_fx() {
-  // Unsupported VM revision (1B).
-}
+function riot_fx() {}
 
-function function_8a2e81c3() {
-  // Unsupported VM revision (1B).
-}
+function function_8a2e81c3() {}
 
-function breach_door_opened() {
-  // Unsupported VM revision (1B).
-}
+function breach_door_opened() {}

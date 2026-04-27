@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["dust_wind_fast"] = loadfx("dust/dust_wind_fast");
   level._effect["dust_wind_slow"] = loadfx("dust/dust_wind_slow_yel_loop");
   level._effect["dust_spiral_runner"] = loadfx("dust/dust_spiral_runner");

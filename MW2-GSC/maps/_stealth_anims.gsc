@@ -10,7 +10,6 @@ main() {
 
 #using_animtree("generic_human");
 humans() {
-  // every stealth level has this anim and it's required by stealth behavior
   level.scr_anim["generic"]["patrol_turn180"] = % patrol_bored_2_walk_180turn;
 
   level.scr_anim["generic"]["_stealth_patrol_jog"] = % patrol_jog;
@@ -31,20 +30,15 @@ humans() {
 
   level.scr_anim["generic"]["_stealth_behavior_saw_corpse"] = % exposed_idle_twitch_v4;
 
-  //1 is the animation that looks the best at the closest range (fast reaction )...and slower
-  //reactions get added down the line		
   level.scr_anim["generic"]["_stealth_behavior_generic1"] = % patrol_bored_react_look_advance;
   level.scr_anim["generic"]["_stealth_behavior_generic2"] = % patrol_bored_react_look_retreat;
   level.scr_anim["generic"]["_stealth_behavior_generic3"] = % patrol_bored_react_walkstop;
   level.scr_anim["generic"]["_stealth_behavior_generic4"] = % patrol_bored_react_walkstop_short;
 
-  //find a body FROM a walk jog or run
-  //level.scr_anim[ "generic" ][ "_stealth_find_walk" ]				= %patrol_boredwalk_find;
   level.scr_anim["generic"]["_stealth_find_jog"] = % patrol_boredjog_find;
-  //level.scr_anim[ "generic" ][ "_stealth_find_run" ]				= %patrol_boredrun_find;
+
   level.scr_anim["generic"]["_stealth_find_stand"] = % patrol_bored_react_look_v2;
 
-  //FRIENDLY STUFF
   level.scr_anim["generic"]["_stealth_prone_idle"][0] = % prone_aim_idle;
   level.scr_anim["generic"]["_stealth_prone_stop"] = % prone_crawl_2_prone;
   level.scr_anim["generic"]["_stealth_prone_start"] = % prone_2_prone_crawl;

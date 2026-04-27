@@ -7,8 +7,6 @@
 #include maps\_vehicle;
 
 main(model, type) {
-  //SNDFILE=vehicle_hummer
-
   if(!isDefined(type))
     type = "humvee50cal";
   maps\_humvee::main(model, type);
@@ -22,14 +20,11 @@ setanims(type) {
   positions[4] = spawnStruct();
 
   positions[4].sittag = "tag_guy_turret";
-  //	positions[ 4 ].idle = %humvee_turret_idle;
 
   positions[4].getout = % humvee_driver_climb_out;
   positions[4].getin = % humvee_driver_climb_in;
 
-  //	positions[ 4 ].turret_fire = %humvee_turret_fire;
-
-  positions[4].mgturret = 0; // which of the turrets is this guy going to use
+  positions[4].mgturret = 0;
 
   return positions;
 }

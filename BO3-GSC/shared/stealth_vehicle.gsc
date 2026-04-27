@@ -9,34 +9,18 @@
 #using scripts\shared\util_shared;
 #namespace stealth_vehicle;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function stop() {
-  // Unsupported VM revision (1B).
-}
+function stop() {}
 
-function reset() {
-  // Unsupported VM revision (1B).
-}
+function reset() {}
 
-function enabled() {
-  // Unsupported VM revision (1B).
-}
+function enabled() {}
 
-function function_1664d989() {
-  // Unsupported VM revision (1B).
-}
+function function_1664d989() {}
 
-function function_c5738439() {
-  // Unsupported VM revision (1B).
-}
+function function_c5738439() {}
 
-function function_6fceb02e() {
-  // Unsupported VM revision (1B).
-}
+function function_6fceb02e() {}
 
-function wake_up() {
-  // Unsupported VM revision (1B).
-}
+function wake_up() {}

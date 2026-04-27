@@ -23,13 +23,11 @@ main() {
 
   level._effect["bhd_dirt"] = LoadFX("impacts/bhd_dirt");
 
-  //shadow company dazed xombies on fire/smoking (wip)
   level._effect["body_smoke_01"] = loadfx("smoke/grenade_smoke");
   level._effect["body_smoke_02"] = loadfx("smoke/steam_manhole");
   level._effect["body_smoke_03"] = loadfx("smoke/cargo_steam");
   level._effect["body_fire_01"] = loadfx("fire/burninng_soldier_torso");
 
-  //destruction of airstrip area....called via exploder 100
   level._effect["firelp_small_pm_nolight"] = loadfx("fire/firelp_small_pm_nolight");
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
@@ -43,30 +41,24 @@ main() {
   level._effect["tower_explosion"] = loadfx("explosions/tower_explosion_af_caves");
   level._effect["helicopter_explosion"] = loadfx("explosions/helicopter_explosion_little_bird_af_caves");
 
-  //cave self-destruct
   level._effect["player_death_explosion"] = loadfx("explosions/player_death_explosion");
   level._effect["player_cave_escape"] = loadfx("explosions/player_cave_escape");
   level._effect["control_room_explosion"] = loadfx("explosions/control_room_explosion");
   level._effect["fireball"] = loadfx("fire/fireball_af_caves");
 
-  // steamroom red light next to door
   level._effect["dlight_red"] = LoadFX("misc/dlight_red");
   level._effect["redlight_glow"] = LoadFX("misc/tower_light_red_steady_sort");
   level._effect["light_glow_white_bulb"] = LoadFX("misc/light_glow_white_bulb");
 
   level._effect["knife_stab"] = LoadFX("impacts/flesh_hit_knife");
 
-  //smoke firefight
   level._effect["smokescreen"] = loadfx("smoke/smoke_screen");
 
-  //Zodiacs
   level._effect["zodiac_wake_geotrail_oilrig"] = loadfx("treadfx/zodiac_wake_geotrail_oilrig");
 
-  //control room breach
   level._effect["light_c4_blink_nodlight"] = loadfx("misc/light_c4_blink_nodlight");
   level._effect["c4_light_blink_dlight"] = loadfx("misc/light_c4_blink");
 
-  //ambient fx	
   level._effect["sand_storm_intro"] = loadfx("weather/sand_storm_intro");
   level._effect["sand_storm_light"] = loadfx("weather/sand_storm_light");
   level._effect["sand_storm_distant_oriented"] = LoadFX("weather/sand_storm_distant_oriented");
@@ -80,11 +72,9 @@ main() {
   level._effect["steam_vent_large_wind"] = loadfx("smoke/steam_vent_large_wind");
   level._effect["thermal_draft_afcaves"] = loadfx("smoke/thermal_draft_afcaves");
 
-  //	level._effect[ "waterfall_drainage_short" ] 			= loadfx( "water/waterfall_drainage_short_physics" );
   level._effect["waterfall_drainage_splash"] = loadfx("water/waterfall_drainage_splash");
-  //	level._effect[ "waterfall_splash_large" ] 				= loadfx( "water/waterfall_splash_large" );
+
   level._effect["waterfall_splash_large_drops"] = loadfx("water/waterfall_splash_large_drops");
-  //	level._effect[ "falling_water_trickle" ]	 			= loadfx( "water/falling_water_trickle" );
 
   level._effect["light_shaft_ground_dust_small"] = loadfx("dust/light_shaft_ground_dust_small");
   level._effect["light_shaft_ground_dust_large"] = loadfx("dust/light_shaft_ground_dust_large");
@@ -92,7 +82,6 @@ main() {
   level._effect["light_shaft_ground_dust_large_yel"] = loadfx("dust/light_shaft_ground_dust_large_yel");
   level._effect["light_shaft_motes_afcaves"] = loadfx("dust/light_shaft_motes_afcaves");
 
-  //Scripted fx
   level._effect["flashlight"] = loadfx("misc/flashlight");
   level._effect["pistol_muzzleflash"] = loadfx("muzzleflashes/pistolflash");
   level._effect["player_death_explosion"] = loadfx("explosions/player_death_explosion");
@@ -128,7 +117,6 @@ main() {
   level._effect["heli_aerial_explosion"] = loadfx("explosions/aerial_explosion");
   level._effect["heli_aerial_explosion_large"] = loadfx("explosions/aerial_explosion_large");
 
-  // steam room
   level._effect["steam_room_100"] = LoadFX("smoke/steam_room_100");
   level._effect["steam_room_100_nocull"] = LoadFX("smoke/steam_room_100_nocull");
   level._effect["steam_room_100_nocull_red"] = LoadFX("smoke/steam_room_100_nocull_red");
@@ -137,10 +125,9 @@ main() {
   level._effect["steam_room_fill"] = LoadFX("smoke/steam_room_fill");
   level._effect["steam_room_add_large"] = LoadFX("smoke/steam_room_add_large");
   level._effect["steam_room_add_small"] = LoadFX("smoke/steam_room_add_small");
-  //	level._effect[ "ground_smoke1200x1200" ]				= LoadFX( "smoke/ground_smoke1200x1200" );
+
   level._effect["pipe_steam_looping"] = LoadFX("impacts/pipe_steam_looping");
 
-  // steam room
   level._effect["steam_room_100_dark"] = LoadFX("smoke/steam_room_100_dark");
   level._effect["steam_room_100_nocull_dark"] = LoadFX("smoke/steam_room_100_nocull_dark");
   level._effect["steam_room_ceiling_dark"] = LoadFX("smoke/steam_room_ceiling_dark");
@@ -156,10 +143,8 @@ main() {
 
   level._effect["pipe_steam_dark"] = LoadFX("impacts/pipe_steam_dark");
 
-  //enable this line for correct vision in createfx BESURE TO DISABLE
   thread maps\_utility::vision_set_fog_changes("af_caves_indoors_steamroom", 0);
 
-  // enable this line to see the lights on in the steam room
   thread maps\af_caves::steamroom_lighting_setup();
 
   add_earthquake("backdoor_barracks", 0.2, .75, 1024);

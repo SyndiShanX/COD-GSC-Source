@@ -19,10 +19,10 @@ train_setup() {
   precacheItem("train_mp");
 
   delay_until_first_train = 2;
-  Units_per_second = 1200; // train speed
+  Units_per_second = 1200;
   train_cars = 24;
   distance_between_cars = 368;
-  eq_radius = 900; // 	radius of earthquakes broadcast from the train tracks
+  eq_radius = 900;
 
   min_time_between_trains = 100;
   max_time_between_trains = 200;
@@ -48,15 +48,11 @@ train_setup() {
     wheel.offset = self.origin - wheel.origin;
   }
 
-  //****************
-  // Set up the other cars
-  //****************	
   forward = anglesToForward(self.angles);
   forward *= distance_between_cars;
   car_separation_vec = forward;
   cars = [];
-  for(i = 0; i < train_cars - 1; i++) // - 1 car self is the lead car
-  {
+  for(i = 0; i < train_cars - 1; i++) {
     car = spawn("script_model", self.origin - car_separation_vec);
     car.angles = self.angles;
     car setModel(self.model);
@@ -74,9 +70,6 @@ train_setup() {
     }
   }
 
-  //****************
-  // The start and end points for the train, set from script origins
-  //****************	
   start = getent(self.target, "targetname");
   start.origin = (start.origin[0], start.origin[1], self.origin[2]);
 
@@ -92,13 +85,9 @@ train_setup() {
   track_time = track_dist / Units_per_second;
   full_train_time = train_cars * distance_between_cars / Units_per_second;
 
-  //****************
-  // set up the earthquakes that play to make the train tracks rattle
-  //****************	
   distance_between_eq_orgs = eq_radius * 0.5;
   eq_count = track_dist / distance_between_eq_orgs;
 
-  // the amount of time it takes for all the EQs to start before the train moves in
   delay_between_eqs = track_time / eq_count;
   travel_time_segment = track_time / eq_count;
   min_time_between_trains -= track_time;
@@ -125,7 +114,6 @@ train_setup() {
     wait(0.05);
     self.origin = start.origin;
 
-    // First there is a lead in of small EQs to shake the platform
     timer = gettime();
     for(i = 0; i < eq_count; i++) {
       thread train_eq(eq_points[i], eq_radius, track_time, full_train_time);
@@ -136,7 +124,6 @@ train_setup() {
     thread train_kills_players(train_cars, distance_between_cars);
     thread train_spawns_dust();
 
-    // Now the train goes by
     self moveto(end.origin + car_separation_vec, travel_time);
     train_play_sounds(train_car_sound_interval);
 
@@ -147,7 +134,7 @@ train_setup() {
 
     flag_set("train_running");
     self notify("train_stops_killing_players");
-    // Wait until the next train
+
     wait(randomfloatrange(min_time_between_trains, max_time_between_trains));
   }
 }
@@ -164,7 +151,6 @@ train_play_sounds(max) {
   self thread train_play_sound_delayed("veh_train_eng_close1_loop");
   self thread train_play_sound_delayed("veh_train_eng_close2_loop");
 
-  // dont play sounds on every car
   count = 0;
   for(i = 0; i < self.cars.size; i++) {
     count++;
@@ -199,7 +185,6 @@ train_stop_sounds(max) {
 }
 
 hide_trains() {
-  // Hide the train while it warps to position
   self hide();
   foreach(wheel in self.wheels) {
     wheel hide();
@@ -213,7 +198,6 @@ hide_trains() {
 }
 
 show_trains() {
-  // show the train while it warps to position
   self show();
   foreach(wheel in self.wheels) {
     wheel show();
@@ -234,16 +218,7 @@ train_spawns_dust() {
   self endon("train_stops_killing_players");
 
   for(;;) {
-    /*
-    for( i = 0; i < 10; i ++ )
-    {
-    	x = randomfloatrange( self.min_x, self.max_x );
-    	y = randomfloatrange( self.min_y, self.max_y );
-    	playFX( level._effect[ "train_dust" ], ( x, y, self.origin[ 2 ] - 30 ) );
-    }
-    */
-
-    count = randomintrange(1, 3); // which means 1 to 2 fx per frame
+    count = randomintrange(1, 3);
     for(i = 0; i < count; i++) {
       x = randomfloatrange(self.min_x - range, self.max_x + range);
       y = randomfloatrange(self.min_y - range, self.max_y + range);
@@ -254,8 +229,6 @@ train_spawns_dust() {
 }
 
 train_kills_players(train_cars, distance_between_cars) {
-    // find the extents of the train, presuming it is going straight n/s/e/w and then test vs player origins to see
-    // if they should be run over
     train_width = 68;
     self endon("train_stops_killing_players");
 
@@ -295,16 +268,10 @@ train_kills_players(train_cars, distance_between_cars) {
       max_y -= dif[1];
       min_y -= dif[1];
 
-      // store it for the dust fx
       self.min_x = min_x;
       self.max_x = max_x;
       self.min_y = min_y;
       self.max_y = max_y;
-
-      //print3d( ( max_x, max_y, self.origin[ 2 ] ), " * " );
-      //print3d( ( min_x, max_y, self.origin[ 2 ] ), " * " );
-      //print3d( ( max_x, min_y, self.origin[ 2 ] ), " * " );
-      //print3d( ( min_x, min_y, self.origin[ 2 ] ), " * " );
 
       hit_ents = [];
 
@@ -337,13 +304,7 @@ train_kills_players(train_cars, distance_between_cars) {
         ent.damageOwner = self;
         ent.eInflictor = self;
 
-        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
-          ent.damageOwner, // eAttacker = the player that is attacking
-          ent.damage, // iDamage = the amount of damage to do
-          "MOD_PROJECTILE_SPLASH", // sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
-          "train_mp", // sWeapon = string specifying the weapon used (e.g. "claymore_mp")
-          ent.pos, // damagepos = the position damage is coming from
-          vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in);
+        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "train_mp", ent.pos, vectornormalize(ent.damageCenter - ent.pos)
         }
 
         wait(0.05);
@@ -374,13 +335,9 @@ train_kills_players(train_cars, distance_between_cars) {
       train_eq_lerp_for_time(origin, 0.0, 0.09, eq_radius, track_time, 0.5);
       train_eq_for_time(origin, 0.17, eq_radius, full_train_time, 0.5);
       train_eq_lerp_for_time(origin, 0.09, 0, eq_radius, track_time, 0.5);
-      //level notify( "stop_train_debug" + origin );
     }
 
     train_eq_for_time(origin, eq, eq_radius, eq_time, eq_time_slice) {
-      // earthquake makes the quake taper off over time so we
-      // are going to do a lot of earthquakes to simulate a steady quake
-      //thread print3d_eq( origin, eq );
       steps = int(eq_time / eq_time_slice);
       for(i = 0; i < steps; i++) {
         Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
@@ -393,9 +350,6 @@ train_kills_players(train_cars, distance_between_cars) {
     }
 
     train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
-      // earthquake makes the quake taper off over time so we
-      // are going to do a lot of earthquakes to simulate a steady quake
-      //thread print3d_eq( origin, eq );
       steps = int(eq_time / eq_time_slice);
       for(i = 0; i < steps; i++) {
         progress = i / steps;

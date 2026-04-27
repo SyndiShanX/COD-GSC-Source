@@ -14,11 +14,9 @@ main(model, type) {
 
   build_deathmodel("vehicle_av8b_harrier_jet");
 
-  //special for harrier/////
   level._effect["engineeffect"] = loadfx("fire/jet_afterburner_harrier");
   level._effect["afterburner"] = loadfx("fire/jet_afterburner_ignite");
   level._effect["contrail"] = loadfx("smoke/jet_contrail");
-  ////////////////////////
 
   build_deathfx("explosions/aerial_explosion_harrier", "tag_deathfx", "explo_metal_rand", undefined, undefined, undefined, undefined, undefined, undefined, 0);
   build_life(999, 500, 1500);
@@ -89,11 +87,11 @@ playerisinfront(other) {
 plane_sound_node() {
   self waittill("trigger", other);
   other endon("death");
-  self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
+  self thread plane_sound_node();
   other thread play_loop_sound_on_entity("veh_mig29_dist_loop");
   while(playerisinfront(other))
     wait .05;
-  wait .5; // little delay for the boom
+  wait .5;
   other thread play_sound_in_space("veh_mig29_sonic_boom");
   other waittill("reached_end_node");
   other stop_sound("veh_mig29_dist_loop");
@@ -103,15 +101,3 @@ plane_sound_node() {
 stop_sound(alias) {
   self notify("stop sound" + alias);
 }
-
-/*QUAKED script_vehicle_harrier (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_harrier::main( "vehicle_av8b_harrier_jet" );
-
-and these lines in your CSV:
-#include,vehicle_harrier
-sound,vehicle_harrier,vehicle_standard,all_sp
-
-defaultmdl="vehicle_av8b_harrier_jet"default:"vehicletype" "harrier"default:"script_team" "allies"
-*/

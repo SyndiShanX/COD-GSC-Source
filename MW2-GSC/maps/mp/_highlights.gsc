@@ -8,8 +8,7 @@
 
 giveHighlight(ref, value) {
   highlightCount = getClientMatchData("highlightCount");
-  if(highlightCount < 18) // must match MaxHighlights in clientmatchdata definition
-  {
+  if(highlightCount < 18) {
     setClientMatchData("highlights", highlightCount, "award", ref);
     setClientMatchData("highlights", highlightCount, "clientId", self.clientMatchDataId);
     setClientMatchData("highlights", highlightCount, "value", value);

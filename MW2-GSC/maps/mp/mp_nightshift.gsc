@@ -23,7 +23,6 @@ main() {
   setDvar("r_lightGridIntensity", 1.2);
   setDvar("r_lightGridContrast", 1);
 
-  // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 1.5;
 
   level._effect["explosive_fx"] = loadfx("explosions/tanker_explosion");
@@ -50,9 +49,8 @@ hallwayPlunger() {
     explosionEffect = spawnFx(level._effect["explosive_fx"], explosive.origin + (0, 0, 0), (0, 0, 1), (cos(rot), sin(rot), 0));
     triggerFx(explosionEffect);
 
-    //playFX( level._effect["explosive_fx"], explosive.origin, explosive.angles );
     radiusDamage(explosive.origin, 384, 200, 30);
-    //explosive playSound( "detpack_explo_default" );
+
     thread playSoundinSpace("exp_suitcase_bomb_main", explosive.origin);
     explosive delete();
   }

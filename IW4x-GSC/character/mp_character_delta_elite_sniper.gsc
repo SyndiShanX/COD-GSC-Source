@@ -3,9 +3,6 @@
  * Script: character\mp_character_delta_elite_sniper.gsc
 *********************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_ally_delta_sniper");
   self attach("head_ally_delta_sniper", "", 1);

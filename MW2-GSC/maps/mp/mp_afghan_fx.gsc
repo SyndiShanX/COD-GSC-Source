@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["dust_cloud_mp_afghan"] = loadfx("dust/dust_cloud_mp_afghan");
   level._effect["sand_spray_detail_oriented_runner"] = loadfx("dust/sand_spray_detail_oriented_runner");
   level._effect["sand_spray_cliff_oriented_runner"] = loadfx("dust/sand_spray_cliff_oriented_runner");

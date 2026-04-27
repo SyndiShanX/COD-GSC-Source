@@ -11,7 +11,7 @@ main() {
   level.scr_anim["generic"]["sit_load_ak_idle"][0] = % sitting_guard_loadAK_idle;
   level.scr_anim["generic"]["sit_load_ak_react"] = % sitting_guard_loadAK_react1;
   addNotetrack_customFunction("generic", "detach clip left", ::load_ak_deathanim, "sit_load_ak_react");
-  //level.scr_anim[ "generic" ][ "phone_react" ]				= %sitting_guard_loadAK_react2;
+
   script_models();
 }
 

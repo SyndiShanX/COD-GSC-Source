@@ -20,8 +20,6 @@ main() {
 
   level.dead_body_count = 1;
 
-  // 6 corpses are retained after savegame load, so make sure
-  // we have room to simulate all corpses plus our deadbody counts
   maxSim = getdvarint("ragdoll_max_simulating") - 6;
 
   if(maxSim > 0)
@@ -32,10 +30,8 @@ main() {
   struct = spawnStruct();
   struct.bodies = [];
 
-  // triggers can spawn bodies
   run_thread_on_targetname("trigger_body", ::trigger_body, struct);
 
-  // spawn preplaced bodies with no trigger
   run_thread_on_targetname("dead_body", ::spawn_dead_body, struct);
 }
 

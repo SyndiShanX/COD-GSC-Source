@@ -7,26 +7,6 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 
-/*QUAKED script_vehicle_motorcycle_01 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_motorcycle::main( "vehicle_motorcycle_01" );
-
-and these lines in your CSV:
-#include,vehicle_motorcycle
-
-defaultmdl="vehicle_motorcycle_01"default:"vehicletype" "motorcycle"*/
-
-/*QUAKED script_vehicle_motorcycle_02 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_motorcycle::main( "vehicle_motorcycle_02" );
-
-and these lines in your CSV:
-#include,vehicle_motorcycle
-
-defaultmdl="vehicle_motorcycle_02"default:"vehicletype" "motorcycle"*/
-
 main(model, type) {
   build_template("motorcycle", model, type);
   build_localinit(::init_local);
@@ -34,7 +14,6 @@ main(model, type) {
   build_deathmodel("vehicle_motorcycle_02", "vehicle_motorcycle_02");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
 
-  //build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10 );
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("axis");

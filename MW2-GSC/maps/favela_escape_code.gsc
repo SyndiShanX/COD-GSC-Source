@@ -9,8 +9,6 @@
 #include maps\_hud_util;
 #include maps\favela_escape_anim;
 #using_animtree("generic_human");
-
-// these can be triggered from any trigger, usually makes sense with a spawn trigger though
 triggered_hostile_bursts_setup() {
   triggered_hostile_burst_setup_lines();
 
@@ -49,48 +47,6 @@ triggered_hostile_bursts_setup() {
 triggered_hostile_burst_setup_lines() {
   lines = [];
 
-  // "You're going to pay for what you did to my brother, soldier! You hear me?"lines[lines.size] = "favesc_pe1_youhearme";
-
-  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"lines[lines.size] = "favesc_pe2_callthetruck";
-
-  // "We're going to kill you slowly for what you've done here. Do you hear me?"lines[lines.size] = "favesc_pe3_killslowly";
-
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
-
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
-
-  // "Heitor, set up the machine gun in the alley over on the next street, in case they go that way!!!"lines[lines.size] = "favesc_pe3_mginalley";
-
-  // "Go after them!! Hurry!! Run them down!!"lines[lines.size] = "favesc_pe3_afterthem";
-
-  // "Block the exits from this area! Don't let them escape!!"lines[lines.size] = "favesc_pe3_blockexits";
-
-  // "Kill them!!! Kill them all!!! They deserve nothing less!!!"lines[lines.size] = "favesc_pe4_killthemall";
-
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
-
-  // "Chase them!! Chase them!!!"lines[lines.size] = "favesc_pe4_chasethem";
-
-  // "Hunt them down like animals!!!"lines[lines.size] = "favesc_pe4_huntthem";
-
-  // "I'm going to cut you apart, limb by limb!!!"lines[lines.size] = "favesc_pe2_limbbylimb";
-
-  // "People like you killed my family!! Never again!!!"lines[lines.size] = "favesc_pe4_neveragain";
-
-  // "The police have no honor, now they send mercenaries to oppress us!!!"lines[lines.size] = "favesc_pe1_nohonor";
-
-  // "Don't just throw the grenades! Wait at least two seconds before you throw them!"lines[lines.size] = "favesc_pe2_wait2seconds";
-
-  // "If you capture them, keep them alive so we can use the machete!!!"lines[lines.size] = "favesc_pe1_keepthemalive";
-
-  // "We need more bandages for the wounded!"lines[lines.size] = "favesc_pe2_morebandages";
-
-  // "I will avenge my brother!!"lines[lines.size] = "favesc_pe1_avengemybrother";
-
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
-
-  // "You're all going to die up here for all the blood you've spilled!!!"lines[lines.size] = "favesc_pe1_goingtodie";
-
   lines = array_randomize(lines);
 
   level.triggeredHostileBursts = lines;
@@ -102,7 +58,7 @@ triggered_hostile_burst(org) {
   self waittill("trigger");
 
   if(!self script_delay()) {
-    wait(RandomFloatRange(0.5, 1.25)); // let the enemies spawn
+    wait(RandomFloatRange(0.5, 1.25));
   }
 
   burst = undefined;
@@ -125,8 +81,6 @@ triggered_hostile_burst(org) {
 
   level thread play_sound_in_space(burst, org.origin);
 }
-
-// ------------- // --- MUSIC --- // ------------- favesc_combat_music() {
 thread favesc_combat_music_stop();
 
 alias = "favelaescape_combat";
@@ -163,8 +117,6 @@ favesc_finalrun_music() {
   music_stop(10);
   level.player play_sound_on_entity("favelaescape_ending");
 }
-
-// -------------- // --- WALLAS --- // -------------- /* megaphone processed aliases:
 favesc_pgm_killthemall
 favesc_pgm_wellfindyou
 favesc_pgm_nohonor
@@ -213,33 +165,13 @@ bigjump_recovery_leftside_walla() {
   delaythread(10, ::play_sound_in_space, "favesc_pgm_huntthem", org);
   play_sound_in_space("wlla_favela_escape_fallen_left", org);
 }
-
-// ------------------ // --- RADIOTOWER --- // ------------------ radiotower_runpath_dialogue() {
 waitflag = "runpath_dialogue_continue";
 flag_init(waitflag);
 thread radiotower_runpath_dialogue_triggerwait(waitflag);
 
 flag_wait("introscreen_start_dialogue");
 
-// "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"level.hero1 dialogue("favesc_gst_closingin");
-
-// "We're gonna have to fight our way to the LZ! Let's go!"level.sarge dialogue("favesc_cmt_fightourway");
-
-// "What about Rojas?"level.hero1 dialogue("favesc_gst_whataboutrojas");
-
-// "Victim of a hostile takeover?"level.sarge dialogue("favesc_cmt_takeover");
-
-// "Works for me."level.hero1 dialogue("favesc_gst_worksforme");
-
 flag_wait(waitflag);
-
-// "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"level.sarge dialogue("favesc_cmt_surrounded");
-
-// "Ok my friend, I am on the way!"radio_dialogue("favesc_nkl_ontheway");
-
-// "Everyone get ready! Lock and load! "level.sarge dialogue("favesc_cmt_lockandload");
-
-// "Let's do this!!"level.hero1 dialogue("favesc_gst_letsdothis");
 
 flag_set("radiotower_runpath_dialogue_done");
 }
@@ -248,12 +180,9 @@ radiotower_runpath_dialogue_triggerwait(flagname) {
   trigger_wait_targetname("trig_intro_playerturnedcorner");
   flag_set(flagname);
 }
-
-// to avoid the feeling of endlessly picking off guys, stop the floodspawners early if we kill enough of them
 radiotower_stop_roof_respawners() {
   killsBeforeShutdown = 5;
 
-  // this spawnfunc will track their deaths
   roofspawners = getEntArray("spawner_radiotower_wave1", "targetname");
   array_thread(roofspawners, ::add_spawn_function, ::radiotower_roofguy_spawnfunc);
 
@@ -296,7 +225,6 @@ radiotower_runup_scout() {
   guy endon("death");
   guy.allowdeath = true;
 
-  // "Here they come!"guy thread play_sound_on_entity("favesc_pe1_heretheycome");
   spawner anim_generic(guy, anime);
 
   guy.goalradius = 64;
@@ -318,7 +246,6 @@ radiotower_runup_friendlies_ignore() {
 
   trigger_wait_targetname("trig_radiotower_brushpath_start");
 
-  // lets them look surprised
   wait(2.25);
   array_thread(level.friends, ::scr_ignoreall, false);
 }
@@ -332,7 +259,7 @@ radiotower_doorkick_1() {
   trigger_wait_targetname("trig_radiotower_doorkick_1");
 
   tracer = GetStruct("struct_radiotower_doorkick_1_sighttracer", "targetname");
-  // timer, dot (fov = 80)
+
   tracer waittill_player_lookat_for_time(1, 0.7);
 
   spawners = getEntArray("spawner_radiotower_doorkick_1", "targetname");
@@ -341,22 +268,17 @@ radiotower_doorkick_1() {
 
   thread door_kick_housespawn(spawners, door, kickRef);
 
-  if(flag("radiotower_runpath_dialogue_done")) {
-    // "Militia comin' out of the shack on the left!"level.hero1 delaythread(1, ::dialogue, "favesc_gst_shackonleft");
-  }
+  if(flag("radiotower_runpath_dialogue_done")) {}
 
-  // makes sure that dudes will go out the kicked door
   wait(5);
   backdoorBlocker = GetEnt("sbmodel_radiotower_doorkick_1_backdoor_blocker", "targetname");
   backdoorBlocker Delete();
 }
 
 radiotower_curtainpull_1() {
-  // spawn the curtain model early in this case
   node = GetEnt("radiotower_curtainpull1_animref", "targetname");
   curtain_pulldown_spawnmodel(node);
 
-  // for our special waitfunc to use later
   node.traceSpot = GetStruct("radiotower_curtainpull1_sighttracer", "targetname");
 
   spawner = GetEnt("spawner_radiotower_curtainpull_1", "targetname");
@@ -374,7 +296,6 @@ distant_curtainpull_waitfunc(guy, node) {
 
   tracer = node.traceSpot;
 
-  // default dot = 0.92
   tracer waittill_player_lookat(0.95, 1.25);
 }
 
@@ -439,13 +360,11 @@ radiotower_enemy_vehicles() {
   technical = arr[0];
   technical thread play_sound_on_entity("scn_favela_escape_truck_runup");
 
-  // open up exploder gates
   exploder(110);
   exploder(120);
 
   technical thread radiotower_technical_setup();
 
-  // make a badplace where the truck does a donut
   technical thread radiotower_enemy_vehicles_badplaces();
 
   gate_node = GetVehicleNode("node_technical_bust_gate", "script_noteworthy");
@@ -498,7 +417,7 @@ radiotower_enemy_vehicle_2() {
 }
 
 radiotower_technical_setup() {
-  waittillframeend; // let the technical spawn
+  waittillframeend;
 
   self ent_flag_init("reached_end_node");
   self ent_flag_init("stopped");
@@ -506,7 +425,6 @@ radiotower_technical_setup() {
   self thread technical_waittill_end_node();
   self thread technical_waittill_stopped();
 
-  // find the gunner
   gunner = self vehicle_get_gunner();
   ASSERT(isDefined(gunner));
 
@@ -586,7 +504,6 @@ vehicle_rider_reset_health(vehicle, gunner) {
   vehicle ent_flag_wait("godoff");
   self.allowdeath = true;
 
-  // hack to fix gunner pain anims snapping them back to the turret
   if(isDefined(gunner) && self == gunner) {
     self.health = 1;
   } else {
@@ -643,15 +560,11 @@ waitfor_some_speed() {
 technical_turret_think(vehicle, gunner) {
   self endon("death");
 
-  // this isn't getting called on all the technicals
-  //self thread turret_disable_til_node( vehicle, gunner );
   gunner thread gunner_scripted_death();
 
-  // gunner has to die, and vehicle has to stop
   gunner waittill("death");
   vehicle ent_flag_wait_either("reached_end_node", "stopped");
 
-  // now the gun is usable by the player
   self MakeUsable();
 }
 
@@ -680,21 +593,13 @@ radiotower_escape_dialogue() {
   thread radiotower_enemy_callout_rooftop();
   thread radiotower_enemy_callout_walljumpers_left();
 
-  // "Tangos at ground level dead ahead!!"level.hero1 dialogue("favesc_gst_deadahead");
-
-  // "We've gotta get to the helicopter - head through the gate to the market! Move!"level.sarge dialogue("favesc_cmt_thrugate");
-
   battlechatter_on("allies");
 
   flag_wait("radiotower_escape_technical_1_arrival");
 
   battlechatter_off("allies");
 
-  // "Technical comin' in from the south!!"level.hero1 dialogue("favesc_gst_technical");
-
   flag_wait("radiotower_escape_technical_2_arrival");
-
-  // "We got another technical! Take it out!!!"level.sarge dialogue("favesc_cmt_technical");
 
   battlechatter_on("allies");
 }
@@ -703,44 +608,24 @@ radiotower_enemy_callout_rooftop() {
   level endon("radiotower_exit");
 
   trigger_wait("trig_radiotower_rooftop_spawn", "script_noteworthy");
-
-  /*
-  startTime = GetTime();
-  	
-  flag_waitopen( "scripted_dialogue" );
-  	
-  if( seconds( GetTime() - startTime ) < 0.5 )
-  {
-  	wait( 2 );
-  }
-  */
-
-  // "Contaaact!!! Foot-mobiles on the rooftops, closing in fast from the south!!!"level.hero1 dialogue("favesc_gst_onrooftops");
 }
 
 radiotower_enemy_callout_walljumpers_left() {
   level endon("radiotower_exit");
 
   trigger_wait_targetname("trig_radiotower_walljumper_spawn");
-
-  //flag_waitopen( "scripted_dialogue" );
-
-  // "Tangos moving in low from the southeast!"level.sarge dialogue("favesc_cmt_lowfromse");
 }
 
 radiotower_enemies_retreat() {
-  // don't retreat until after the second vehicle shows up
   flag_wait("radiotower_escape_technical_2_arrival");
 
   while(get_alive_enemies().size >= 6) {
     wait(0.1);
   }
 
-  // turn off triggers in case player comes back through here for some reason
   spawntrigs = getEntArray("trig_radiotower_cleanup_at_exit", "script_noteworthy");
   array_thread(spawntrigs, ::trigger_off);
 
-  // activate killspawner
   trigger_activate_targetname_safe("trig_killspawner_7");
 
   allenemies = get_alive_enemies();
@@ -758,73 +643,50 @@ radiotower_enemies_retreat() {
 
   flag_set("radiotower_enemies_retreat");
 
-  // roof enemies die
   level thread kill_group_over_time(roofenemies, 10);
 
   level notify("kill_technical_gunners");
 
-  // try resetting goalpos to avoid the "cannot set goal volume when a goal entity is set" SRE
-  //(this happens to guys who are playerseeking)
   foreach(guy in enemies) {
     guy SetGoalPos(guy.origin);
   }
   wait(0.05);
 
-  // guys retreat
   retreatVolume = GetEnt("goalvolume_52", "targetname");
   enemies = array_removeundefined(enemies);
   enemies = array_removedead(enemies);
   thread array_call(enemies, ::SetGoalVolumeAuto, retreatVolume);
 
-  // "Head through that gate!!! Keep pushing to the evac point!!!"level.sarge dialogue("favesc_cmt_thruthatgate");
-
-  // "Go! Go! Go!"level.hero1 dialogue("favesc_gst_gogogo");
-
   flag_set("radiotower_escape_moveup");
 
-  // turn off triggers that can send friendlies back after we force them forward
   trigs = getEntArray("trig_radiotower_escape_removeAtExit", "targetname");
   array_thread(trigs, ::trigger_off);
 
-  // put soap on the right color chain, if the player didn't hit that trigger already
   trigger_activate_targetname_safe("trig_radiotower_forcecolor_change_1");
 
-  // move friendlies up if the player hasn't already
   trig = GetEnt("trig_script_color_allies_b5", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
 }
-
-// --------------- // --- STREETS --- // --------------- street_dialogue() {
 thread street_dialogue_playerabove();
 thread street_dialogue_leftalley();
 
 flag_wait("vista1_dialogue_start");
 
-// "Let's go, let's go!We've gotta push through these streets to the market!"level.sarge dialogue("favesc_cmt_pushthrustreets");
-
 flag_wait("multipath_dialogue_start");
 
-// "Watch for flanking routes!"level.sarge dialogue("favesc_cmt_flankingroutes");
-
 flag_wait("almostatmarket_dialogue_start");
-
-// "Keep moving!! We're almost at the market!"level.sarge dialogue("favesc_cmt_almostatmarket");
 }
 
 street_dialogue_playerabove() {
   level endon("playerabove_dialogue_cancel");
 
   flag_wait("playerabove_dialogue_start");
-
-  // "Roach! Lay down some fire on the intersection!"level.sarge dialogue("favesc_cmt_laydownfire");
 }
 
 street_dialogue_leftalley() {
   flag_wait("leftalley_dialogue_start");
-
-  // "Heads up! Alley on the left!"level.sarge thread dialogue("favesc_cmt_alleyonleft");
 }
 
 vista1_door1_kick() {
@@ -855,13 +717,10 @@ vista1_wavingguy() {
 
   animref anim_generic_first_frame(guy, anime);
 
-  // remove this guy if we don't ever get to him for some reason
   guy thread vista1_wavingguy_cleanup();
 
-  // wait for anime
   trigger_wait_targetname("trig_vista1_wavingguy");
 
-  // spawn his buddies
   thread trigger_activate_targetname("trig_vista1_wavingguy_spawngroup");
 
   guy stop_magic_bullet_shield();
@@ -869,12 +728,8 @@ vista1_wavingguy() {
 
   guy notify("wavingguy_activated");
 
-  // "Attaaaack!"guy thread play_sound_on_entity("favesc_pe1_attack");
-
-  // he waves them on
   animref anim_generic(guy, anime);
 
-  // when done, waver fights
   if(IsAlive(guy)) {
     guy.ignoreme = false;
     guy.ignoreall = false;
@@ -901,8 +756,6 @@ street_roof1_doorkick() {
 
   thread door_kick_housespawn(spawners, door, kickRef);
 }
-
-// helps clear out the intersection faster if the player is moving ahead
 street_mid_intersection_clearout() {
   flag_wait("uphill_advance_3");
 
@@ -925,7 +778,7 @@ street_mid_intersection_clearout_volume() {
   clearoutWaitTime = milliseconds(5);
 
   while(1) {
-    wait(RandomFloatRange(0.5, 1)); // don't grab the aiarray at the same time for each volume
+    wait(RandomFloatRange(0.5, 1));
 
     ais = self get_ai_touching_volume("axis", "human");
 
@@ -950,7 +803,6 @@ street_mid_intersection_clearout_volume() {
       guy.volume_clearout = GetTime();
       guy.health = 1;
       guy.attackeraccuracy = 1;
-      //guy thread set_ignoreSuppression( true );
     }
   }
 }
@@ -991,11 +843,9 @@ vista2_endhouse_jumpthru() {
   }
 
   if(!guys.size) {
-    // he's dead already
     return;
   }
 
-  // we're only set up to handle one guy in the building right now
   ASSERT(guys.size == 1);
 
   houseguy = guys[0];
@@ -1034,14 +884,13 @@ vista2_endhouse_jumpthru() {
     houseguy ForceTeleport(org, ang);
 
     nader SetEntityTarget(nadetarget);
-    //nader delaycall( 0.5, ::Shoot, 1000, nadetarget.origin );
+
     wait(1);
     nader Shoot(1.0, nadetarget.origin);
 
     houseguy delaythread(1.5, ::stop_magic_bullet_shield);
     houseguy delaythread(2, ::set_allowdeath, true);
     animref thread anim_generic(houseguy, anime);
-    //animref anim_generic_gravity( houseguy, anime );
 
     wait(GetAnimLength(animation));
   }
@@ -1082,16 +931,12 @@ vista2_leftbalcony_enemies_magicgrenade() {
     MagicGrenade("fraggrenade", spot, groundpos(spot), RandomFloat(0.25));
   }
 }
-
-// -------------- // --- MARKET --- // -------------- market_dialogue() {
 thread market_dialogue_chaoticaboves();
 thread market_dialogue_rightshack();
 
 flag_wait("market_dialogue_start");
 
 wait(2);
-
-// "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"level.sarge dialogue("favesc_cmt_splitup");
 
 flag_set("market_introdialogue_done");
 }
@@ -1100,8 +945,6 @@ market_dialogue_chaoticaboves() {
   trigger_wait_targetname("trig_market_chaoticaboves_1");
 
   flag_wait("market_introdialogue_done");
-
-  // "Contacts above us at 11 o'clock, firing blind!"level.hero1 dialogue("favesc_gst_firingblind");
 }
 
 market_dialogue_rightshack() {
@@ -1112,18 +955,13 @@ market_dialogue_rightshack() {
   } else {
     wait(2);
   }
-
-  // "Tango coming out of the shack on the right!!!"level.sarge dialogue("favesc_cmt_shackonright");
 }
 
 market_kill_extra_redshirts() {
   trigger_wait_targetname("trig_market_door1");
 
-  // the hidden reinforcement thread can potentially spawn a new guy later if we're waiting for
-  //the player to not be looking at the spawner, so shut that thread down
   level notify("kill_hidden_reinforcement_waiting");
 
-  // only want one after this point
   redshirts = get_nonhero_friends();
 
   singleguy = redshirts[0];
@@ -1138,7 +976,6 @@ market_kill_extra_redshirts() {
     array_thread(redshirts, ::scr_set_health, 1);
     array_thread(redshirts, ::bloody_death_after_min_delay, 10, 10);
 
-    // in case the player runs fast ahead, failsafe so these guys don't try to move up on the color chains that don't have enough nodes to accomodate them
     trigger_wait_targetname("trig_market_redshirts_remove_failsafe");
     redshirts = array_removedead(redshirts);
     array_thread(redshirts, ::disable_ai_color);
@@ -1147,7 +984,7 @@ market_kill_extra_redshirts() {
 
 market_hero1_change_color() {
   trigger_wait_targetname("trig_market_redshirts_remove_failsafe");
-  // ghost becomes a blue guy
+
   level.hero1 set_force_color("b");
 }
 
@@ -1161,26 +998,13 @@ market_door1() {
 
   door_kick_housespawn(door1_spawners, door1, door1_animRef, door1_physicsRef);
 }
-
-// ------------------ // --- MARKET EVAC--- // ------------------ market_evac_dialogue() {
 flag_wait("market_evac_insidepath_start");
 
 battlechatter_off("allies");
 
-// "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"level.sarge dialogue("favesc_cmt_immediatedustoff");
-
-// "That may not be fast enough! I see more militia closing in on the market!"radio_dialogue("favesc_nkl_notfastenough");
-
-// "Pick up the pace! Let's go!"level.sarge dialogue("favesc_cmt_pickuppace");
-
 flag_wait("market_evac_chopper_incoming");
 
-// "It's too hot! We will not survive this landing!"radio_dialogue("favesc_nkl_toohot");
-
 delaythread(2, ::favesc_waveoff_music);
-// "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"level.sarge dialogue("favesc_cmt_waveoff");
-
-// "Very well, I will meet you there! Good luck!"radio_dialogue("favesc_nkl_meetyouthere");
 }
 
 spawn_chopper(spawngroup, followPath) {
@@ -1210,15 +1034,12 @@ market_evac_chopper() {
 
   flag_set("market_chopper_spawned");
 
-  //chopper SetYawSpeed( 45, 20, 45, 0 );
   chopper SetMaxPitchRoll(30, 40);
 
-  // wait for player to get near the soccer field entrance
   flag_wait("market_evac_player_near_soccerfield");
 
   level.chopper Delete();
 
-  // new chopper path
   chopper = spawn_chopper(6, false);
   level.chopper = chopper;
 
@@ -1227,8 +1048,6 @@ market_evac_chopper() {
   path2start = GetStruct("struct_market_evac_chopper_path2", "targetname");
   chopper thread market_evac_chopper_bugout_path(path2start);
 }
-
-// jiesang magic
 market_evac_chopper_bugout_path(start) {
   self thread play_sound_on_entity("scn_favela_escape_heli_land");
 
@@ -1253,8 +1072,6 @@ market_evac_chopper_bugout_path(start) {
   wait(1);
 
   flag_set("market_evac_chopper_bugout");
-
-  //self waittill( "goal_yaw" );
 
   self setVehGoalPos(spot3.origin);
   self Vehicle_SetSpeed(60, 10);
@@ -1284,13 +1101,6 @@ market_evac_enemy_foreshadowing() {
   killflag = "market_evac_ambush_start";
 
   lines = [];
-  // "You're going to pay for what you did to my brother, soldier! You hear me?"lines[lines.size] = "favesc_pe1_youhearme";
-  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"lines[lines.size] = "favesc_pe2_callthetruck";
-  // "We're going to kill you slowly for what you've done here. Do you hear me?"lines[lines.size] = "favesc_pe3_killslowly";
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
-  // "They have a helicopter!! Bring more rockets!!! We can shoot it down!!"lines[lines.size] = "favesc_pe2_morerockets";
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
-  // "If you capture them, keep them alive so we can use the machete!!!"lines[lines.size] = "favesc_pe1_keepthemalive";
 
   firstWaitMax = 3.5;
   lineWaitMin = 8;
@@ -1379,7 +1189,6 @@ fakefire_smallarms_spot(flagname) {
       vec = vector_multiply(forward, 12);
       end = start + vec;
 
-      // make sure we're not going to hit sarge or the player
       trace = bulletTrace(spot.origin, end, true);
       traceEnt = trace["entity"];
 
@@ -1407,7 +1216,6 @@ fakefire_smallarms_spot(flagname) {
 market_evac_fakefire_rpgs() {
   allSpots = getStructArray("market_evac_ambush_rpg_firespot", "targetname");
 
-  // the ones with script_start set should go first
   fireSpots = [];
   foreach(spot in allSpots) {
     if(isDefined(spot.script_start)) {
@@ -1415,12 +1223,9 @@ market_evac_fakefire_rpgs() {
     }
   }
 
-  // bubble sort by script_start so the highest ones go first
   lastIndex = fireSpots.size - 1;
-  for(i = 0; i < lastIndex; i++) // sort needs to add one to compare so the max is size-1
-  {
-    for(j = 0; j < lastIndex - i; j++) // don't look past the number of previous sorts, since they will be lowest
-    {
+  for(i = 0; i < lastIndex; i++) {
+    for(j = 0; j < lastIndex - i; j++) {
       if(fireSpots[j + 1].script_start < fireSpots[j].script_start) {
         temp = fireSpots[j];
         fireSpots[j] = fireSpots[j + 1];
@@ -1429,7 +1234,6 @@ market_evac_fakefire_rpgs() {
     }
   }
 
-  // the rest get randomized and added separately
   allSpots = array_remove_array(allSpots, fireSpots);
   allSpots = array_randomize(allSpots);
   foreach(spot in allSpots) {
@@ -1437,13 +1241,6 @@ market_evac_fakefire_rpgs() {
   }
 
   foreach(spot in fireSpots) {
-    /*
-    if( player_can_see( spot.origin ) )
-    {
-    	continue;
-    }
-    */
-
     target = GetStruct(spot.target, "targetname");
     MagicBullet("rpg_straight", spot.origin, target.origin);
 
@@ -1470,8 +1267,6 @@ market_evac_fakefire_rpgs() {
     }
   }
 }
-
-// this is to remove the clip that helps AIs get up on buildings in the roof run area during the market evac event
 market_evac_remove_helperclip() {
   clips = level.market_evac_helperClips;
   foreach(clip in clips) {
@@ -1486,11 +1281,6 @@ market_evac_enemies() {
 
   wait(1.5);
   trigger_activate_targetname("trig_market_evac_spawn1");
-
-  /*
-  spawners_rpgs = getEntArray( "spawner_market_evac_ambush_rpg", "targetname" );
-  rpgers = spawn_group( spawners_rpgs );
-  */
 
   flag_init("housespawners_done");
 
@@ -1542,7 +1332,6 @@ market_evac_get_active_enemies() {
 market_evac_enemy_spawnfunc() {
   self endon("death");
 
-  // make these guys less accurate so the event is easier
   self.baseaccuracy = self.baseaccuracy * 0.35;
 
   if(isDefined(level.chopper)) {
@@ -1577,9 +1366,6 @@ market_evac_bugplayer() {
   level endon(stopflag);
 
   lines = [];
-  // "Roach! Get up here on the rooftops, let's go!"lines[lines.size] = "favesc_cmt_getuphere";
-  // "Roach! Get over here and climb up to the rooftops!"lines[lines.size] = "favesc_cmt_climbup";
-  // "Roach! You can climb up over here!"lines[lines.size] = "favesc_cmt_climbuphere";
 
   while(!flag(stopflag) && isDefined(level.sarge)) {
     lines = array_randomize(lines);
@@ -1620,7 +1406,6 @@ market_evac_playermantle_helper(zTest) {
         level.player ForceMantle();
         SetSavedDvar("hud_forceMantleHint", 0);
 
-        // wait for mantle to be done
         while(!level.player IsOnGround()) {
           wait(0.05);
         }
@@ -1651,37 +1436,16 @@ player_left_trigger_notify(trig) {
   self notify("left_trigger");
 }
 
-// ---------------- // --- ROOF RUN --- // ---------------- roofrun_dialogue() {
-// "Let's go, let's go!!"level.sarge dialogue("favesc_cmt_letsgoletsgo");
-
-// "My friend, from up here, it looks like the whole village is trying to kill you!"radio_dialogue("favesc_nkl_wholevillage");
-
-// "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"level.sarge dialogue("favesc_cmt_pickusup");
-
-// DEPRECATED - not enough time to use this one
-// "Ok, I will pick you up soon, keep going!"//radio_dialogue( "favesc_nkl_keepgoing" );
-
-// "We're running out of rooftop!!!"level.hero1 dialogue("favesc_gst_runoutofroof");
-// (add after this line so the scr_sound doesn't stomp on the scripted dialogue if the timing works out that way)
-// "Unghh!"level.scr_sound["freerunner"]["favela_escape_bigjump_ghost"] = "favesc_gst_jumpsfx";
-
-// "We can make it! Go go go!"level.sarge dialogue("favesc_cmt_makeitgogo");
-// "Uraaa!"level.scr_sound["freerunner"]["favela_escape_bigjump_soap"] = "favesc_cmt_jumpsfx";
-
 if(!flag("player_jump_watcher_stop") && !flag("player_fell_normally")) {
   thread roofrun_nag_dialogue();
 }
 }
 
 roofrun_nag_dialogue() {
-  // end when jumping or falling off the roof
   level endon("player_fell_normally");
   level endon("player_jump_watcher_stop");
 
   nags = [];
-  // "C'mon Roach, we're almost at the chopper!"nags[0] = "favesc_cmt_gettochopper";
-  // "Roach, what's the holdup, let's go!"nags[1] = "favesc_cmt_whatsholdup";
-  // "We've got to get out of here, Roach, come on!"nags[2] = "favesc_cmt_getoutta";
 
   nagIdx = 0;
   minWait = 10000;
@@ -1693,8 +1457,8 @@ roofrun_nag_dialogue() {
     timeForNewLine = false;
 
     vel = level.player GetVelocity();
-    // figure out the length of the vector to get the speed (distance from world center = length)
-    speed = Distance((vel[0], vel[1], 0), (0, 0, 0)); // don't care about Z velocity
+
+    speed = Distance((vel[0], vel[1], 0), (0, 0, 0));
 
     if(speed < 125) {
       lowSpeed = true;
@@ -1736,7 +1500,6 @@ roofrun_player_bigjump() {
   jumpForward = anglesToForward(edgeref.angles);
   thread player_jump_watcher();
 
-  // takes care of a player who missed the cool animated jump and just fell
   thread player_normalfall_watcher();
   level endon("player_fell_normally");
 
@@ -1745,8 +1508,7 @@ roofrun_player_bigjump() {
 
     while(level.player IsTouching(jumpstart_trig)) {
       flag_wait("player_jumping");
-      if(player_leaps(jumpstart_trig, jumpForward, 0.915, true)) // 0.925
-      {
+      if(player_leaps(jumpstart_trig, jumpForward, 0.915, true)) {
         breakout = true;
         break;
       }
@@ -1774,40 +1536,32 @@ roofrun_player_bigjump() {
   jump_scene = "jump";
   anime_jump = level.scr_anim[animname][jump_scene];
 
-  // figure out our start point
-  // move the edge reference to the player location, this math only works because we are moving it in a cardinal direction
   startpoint = (edgeref.origin[0], player.origin[1], edgeref.origin[2]);
   startangles = edgeref.angles;
   animstartorigin = GetStartOrigin(startpoint, startangles, anime_jump);
   animstartangles = GetStartAngles(startpoint, startangles, anime_jump);
 
-  // spawn our animref spot
   animref = spawn("script_origin", startpoint);
   animref.angles = startangles;
 
-  // spawn &set up the rig
   player_rig = spawn_anim_model(animname, animstartorigin);
   player_rig.angles = animstartangles;
   player_rig Hide();
 
-  // don't show the rig until after the player has blended into the animation
   thread bigjump_player_blend_to_anim(player_rig);
   player_rig delaycall(1.0, ::Show);
 
-  // set up the part that falls away
   thread bigjump_roof_anim(player_rig, groundref);
 
   animref thread anim_single_solo(player_rig, jump_scene);
   thread roofrun_player_bigjump_rumble();
 
-  // soap tries to catch player
   player_rig waittillmatch("single anim", "start_soap");
 
   level.player FreezeControls(true);
 
   level.sarge thread scr_animplaybackrate(1);
 
-  // if Soap isn't ahead of the player, don't include him in the animation
   if(flag("roofrun_sarge_bigjumped")) {
     thread bigjump_slowmo_controls();
 
@@ -1820,7 +1574,6 @@ roofrun_player_bigjump() {
     animref thread anim_single_solo(level.sarge, "favela_escape_bigjump_soap_reach");
   }
 
-  // level progression
   thread roofrun_player_recovery(player_rig, groundref);
 
   if(flag("roofrun_sarge_bigjumped")) {
@@ -1851,13 +1604,13 @@ roofrun_player_bigjump_rumble() {
 bigjump_slowmo_controls() {
   wait(0.5);
   slowmo_start();
-  slowmo_setspeed_slow(0.3); // 0.1 console
-  slowmo_setlerptime_in(0.15); // 0.25 console
+  slowmo_setspeed_slow(0.3);
+  slowmo_setlerptime_in(0.15);
   slowmo_lerp_in();
 
-  wait(0.6); // 0.7 console
+  wait(0.6);
 
-  slowmo_setlerptime_out(0.15); // 0.2 console
+  slowmo_setlerptime_out(0.15);
   slowmo_lerp_out();
   slowmo_end();
 }
@@ -1871,18 +1624,14 @@ player_normalfall_watcher() {
 
   flag_set("player_fell_normally");
 
-  // alternate level progression
   thread roofrun_player_recovery();
 }
 
 roofrun_player_recovery(player_rig, groundref) {
-  // either we got here after the animated jump...
   if(isDefined(player_rig)) {
     player_rig waittillmatch("single anim", "blackout");
-  }
-  // ...or we fell
-  else {
-    level.player EnableInvulnerability(); // don't die from the fall
+  } else {
+    level.player EnableInvulnerability();
 
     while(!level.player IsOnGround()) {
       wait(0.05);
@@ -1895,7 +1644,6 @@ roofrun_player_recovery(player_rig, groundref) {
     level.player DisableInvulnerability();
   }
 
-  // rumble for hitting the ground
   level.player PlayRumbleLoopOnEntity("artillery_rumble");
   level.player delaycall(1, ::StopRumble, "artillery_rumble");
 
@@ -1930,14 +1678,12 @@ roofrun_player_recovery(player_rig, groundref) {
   animstartorigin = GetStartOrigin(groundref.origin, groundref.angles, recover_animation);
   animstartangles = GetStartAngles(groundref.origin, groundref.angles, recover_animation);
 
-  // if the player fell, we need to set up the rig for the first time
   if(!isDefined(player_rig)) {
     player_rig = spawn_anim_model("player_bigjump", animstartorigin);
     player_rig.angles = animstartangles;
     level.player PlayerLinkToBlend(player_rig, "tag_player", 0.05);
   }
 
-  // stop friends from looping anims before deleting them
   foreach(guy in level.friends) {
     guy notify("stop_loop");
 
@@ -1947,7 +1693,6 @@ roofrun_player_recovery(player_rig, groundref) {
   }
   delaythread(0.05, ::delete_all_friends);
 
-  // delete chopper
   chopper = get_vehicle("veh_chopper_roofrun", "targetname");
   if(isDefined(chopper)) {
     chopper Delete();
@@ -1971,7 +1716,6 @@ roofrun_player_recovery(player_rig, groundref) {
 
   delaythread((animtime - 2), ::bigjump_save);
 
-  // wait for recovery anim end
   player_rig waittillmatch("single anim", "end");
   level.player allowcrouch(true);
   level.player AllowProne(true);
@@ -1999,29 +1743,25 @@ recovery_fov_change() {
   setsaveddvar("cg_fov", 30);
   wait(5);
   lerp_fov_overtime(2, 40);
-  //setsaveddvar( "cg_fov", 40 );
+
   wait(2.2);
-  //wait( 9.2 );
+
   lerp_fov_overtime(2, 65);
 }
 
 bigjump_save() {
-  // we can force save since we are in a known state of goodness and safeness
   SaveGame("bigjump_recovery", &"AUTOSAVE_AUTOSAVE");
 }
 
 roofrun_modulate_playerspeed(targetEnt) {
-  // these are the distance ranges from the targetEnt that will trigger speed changes
   distMin = 175;
   distMax = 300;
   distCatchup = 425;
 
-  // allowed run speed range
   runSpeedMin = 80;
   runSpeedMax = 90;
   runSpeedCatchup = 95;
 
-  // allowed sprint multiplier range
   sprintMultMin = 1.2;
   sprintMultMax = 1.4;
   sprintMultCatchup = 1.5;
@@ -2036,35 +1776,19 @@ roofrun_modulate_playerspeed(targetEnt) {
 
     println(distFromTarget);
 
-    /* do damage if the player is too far back
-    if( distFromTarget > playerFailDist )
-    {
-    	forward = anglesToForward( level.player GetPlayerAngles() );
-    	backward = vector_multiply( forward, -1 );
-    	dmgOrigin = level.player.origin + ( 0, 0, 50 );
-    	dmgOrigin += vector_multiply( backward, 5000 );
-    	
-    	level.player DoDamage( playerFailDmg, dmgOrigin );
-    }
-    */
-
-    // init to something
     targetRunSpeed = runSpeedMax;
     targetSprintMult = sprintMultMax;
 
-    // if past max distance, give a speed boost above established maximums
     if(distFromTarget > distCatchup) {
       targetRunSpeed = runSpeedCatchup;
       targetSprintMult = sprintMultCatchup;
       println("CATCHUP");
-    }
-    // otherwise scale speed based on how far away the player is
-    else {
+    } else {
       fraction = get_fraction(distFromTarget, distMin, distMax);
 
-      runRange = runSpeedMax - runSpeedMin; // figure out the range of values that we will use to modify the max value
-      runRangeFrac = runRange * (1 - fraction); // figure out where in the range the fraction puts us
-      targetRunSpeed = runSpeedMax - runRangeFrac; // modify the max speed by the fractional range value
+      runRange = runSpeedMax - runSpeedMin;
+      runRangeFrac = runRange * (1 - fraction);
+      targetRunSpeed = runSpeedMax - runRangeFrac;
 
       sprintRange = sprintMultMax - sprintMultMin;
       sprintRangeFrac = sprintRange * (1 - fraction);
@@ -2145,19 +1869,15 @@ roofrun_sarge(skipToBigJump) {
 
     self roofrun_friendly_setup();
 
-    // wait for player if necessary
     struct = GetStruct("roofrun_sarge_waitforplayer", "targetname");
     self SetGoalPos(struct.origin);
     self waittill("goal");
   } else {
-    // we've already teleported him, just set him up
     self roofrun_friendly_setup();
   }
 
-  // a trigger sets this flag
   flag_wait("player_near_bigjump");
 
-  // big jump
   animref = GetStruct("roofrun_bigjump3", "targetname");
   temp = spawn("script_origin", animref.origin);
   temp.angles = animref.angles;
@@ -2208,7 +1928,6 @@ roofrun_hero1(skipToBigJump) {
 
   self roofrun_friendly_setup();
 
-  // big jump
   animref = GetStruct("roofrun_bigjump1", "targetname");
   anime = "favela_escape_bigjump_ghost";
   if(!skipToBigJump) {
@@ -2250,8 +1969,6 @@ roofrun_redshirt(skipToBigJump) {
 
   self roofrun_friendly_setup();
 
-  // (he automatically runs across the little bridge to reach to the big jump)
-  // big jump
   animref = GetStruct("roofrun_bigjump2", "targetname");
   anime = "favela_escape_bigjump_faust";
   if(!skipToBigJump) {
@@ -2266,8 +1983,6 @@ roofrun_redshirt(skipToBigJump) {
 
   level.runnersDone++;
 }
-
-// self = the guy running and pushing the sheet out of the way
 sheet_roofrun_animate(animref, og_sheet, anime) {
   sheet = spawn_anim_model("laundry", og_sheet.origin);
   sheet.angles = og_sheet.angles;
@@ -2371,7 +2086,6 @@ player_leaps(trig, jump_forward, goodDot, checkIsOnGround) {
     return false;
   }
 
-  // gotta jump straight
   player_angles = level.player GetPlayerAngles();
   player_angles = (0, player_angles[1], 0);
   player_forward = anglesToForward(player_angles);
@@ -2381,13 +2095,12 @@ player_leaps(trig, jump_forward, goodDot, checkIsOnGround) {
   }
 
   vel = level.player GetVelocity();
-  // figure out the length of the vector to get the speed (distance from world center = length)
-  velocity = Distance((vel[0], vel[1], 0), (0, 0, 0)); // don't care about Z velocity
+
+  velocity = Distance((vel[0], vel[1], 0), (0, 0, 0));
   if(velocity < 162) {
     return false;
   }
 
-  //level.player setVelocity( ( vel[ 0 ] * 1.5, vel[ 1 ] * 1.5, vel[ 2 ] ) );
   return true;
 }
 
@@ -2408,7 +2121,7 @@ bigjump_roof_anim(player_rig, animref) {
 
 bigjump_roof_setup() {
   ents = getEntArray("roof_fall", "targetname");
-  // find the sbmodel
+
   sbmodel = undefined;
 
   foreach(ent in ents) {
@@ -2422,7 +2135,6 @@ bigjump_roof_setup() {
 
   ents = array_remove(ents, sbmodel);
 
-  // link everything else to the sbmodel
   foreach(ent in ents) {
     ent LinkTo(sbmodel);
   }
@@ -2432,7 +2144,7 @@ bigjump_roof_setup() {
 
 bigjump_player_blend_to_anim(player_rig) {
   wait(0.3);
-  //	Print3d( level.player.origin, "x", (1,1,1), 1, 2, 500 );
+
   level.player PlayerLinkToBlend(player_rig, "tag_player", 0.6, 0.2, 0.4);
 }
 
@@ -2442,8 +2154,6 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
 
   level.player Shellshock(shockfile, shocktime + 1.5);
 
-  //blurHigh = 0.6;
-  //blurLow = 0.2;
   blurHigh = 4.5;
   blurLow = 2;
   blurTransTime = 0.5;
@@ -2457,36 +2167,9 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
   }
 
   SetBlur(0, .5);
-
-  /*----------------------- LOOK AT HANDS, BG BLURS
-  ------------------------- dof_see_hands = [];
-  dof_see_hands[ "nearStart" ] = 0;
-  dof_see_hands[ "nearEnd" ] = 0;
-  dof_see_hands[ "nearBlur" ] = 6;
-  dof_see_hands[ "farStart" ] = 30;
-  dof_see_hands[ "farEnd" ] = 70;
-  dof_see_hands[ "farBlur" ] = 2.5;
-  thread blend_dof( dof_start, dof_see_hands, 3 );
-  SetBlur( 0, 3 );
-  	
-
-  flag_wait( "notetrack_player_lowerhands" );
-  /*----------------------- DROP HANDS, BG COMES INTO FOCUS
-  ------------------------- dof_see_dudes = [];
-  dof_see_dudes[ "nearStart" ] = 4.7;
-  dof_see_dudes[ "nearEnd" ] = 56;
-  dof_see_dudes[ "nearBlur" ] = 6;
-  dof_see_dudes[ "farStart" ] = 1000;
-  dof_see_dudes[ "farEnd" ] = 7000;
-  dof_see_dudes[ "farBlur" ] = 0;
-  //thread blend_dof( dof_see_hands, dof_see_dudes, 5 );
-  thread blend_dof( dof_see_hands, dof_start, 6 );
-  */
 }
 
 bigjump_heartbeat(waitTime) {
-  //wait( waitTime );
-
   beatTime = 1.5;
 
   endTime = GetTime() + milliseconds(waitTime);
@@ -2508,7 +2191,6 @@ bigjump_heartbeat(waitTime) {
   while(!flag("player_recovery_done")) {
     alias = "breathing_hurt";
 
-    // just do a regular heartbeat on odd numbered beats
     if(tracker % 2 != 0) {
       alias = "breathing_heartbeat";
     }
@@ -2525,15 +2207,9 @@ bigjump_heartbeat(waitTime) {
 bigjump_dialogue(waitTime) {
   wait(5.5);
 
-  // "Roach!!! Roach!!! Wake up!!!"radio_dialogue("favesc_cmt_wakeup");
-
   wait(0.5);
 
-  // "Roach! We can see them from the chopper! They're coming for you, dozens of 'em!!!"radio_dialogue("favesc_gst_comingforyou");
-
   wait(0.5);
-
-  // "Roach! There's too many of them! Get the hell out of there and find a way to the rooftops! Move!"thread radio_dialogue("favesc_cmt_toomany");
 }
 
 bigjump_angrymob(waitTime) {
@@ -2541,15 +2217,8 @@ bigjump_angrymob(waitTime) {
     wait(waitTime);
   }
 
-  // wallas
   thread bigjump_recovery_rightside_walla();
   thread bigjump_recovery_leftside_walla();
-
-  // -- ground mob on right -- thread bigjump_angrymob_right_ground();
-
-  // -- rooftop guys on left -- delaythread(3.5, ::bigjump_angrymob_left_roof);
-
-  // -- ground mob on left -- delaythread(7.75, ::bigjump_angrymob_left_ground);
 }
 
 bigjump_angrymob_left_roof() {
@@ -2657,14 +2326,7 @@ angrymob_animdone_think(anime, animref) {
 
   flag_wait("solorun_mob_start_shooting");
 
-  /*
-  if( isDefined( animref ) )
-  {
-  	animref anim_stopanimscripted();
-  }
-  */
   self notify("stop_animmode");
-  //self anim_stopanimscripted();
 
   if(isDefined(self.angrymob_newrunanim)) {
     self clear_run_anim();
@@ -2672,8 +2334,6 @@ angrymob_animdone_think(anime, animref) {
 
   self.ignoreall = false;
 }
-
-// ---------------- // --- SOLO RUN --- // ---------------- solorun_chaser_spawnfunc() {
 if(!isDefined(level.chasers)) {
   level.chasers = [];
 }
@@ -2698,7 +2358,6 @@ dont_shoot_player_in_back() {
   self endon("death");
   level.player endon("death");
 
-  // don't fire at the player while he's not looking
   while(1) {
     playerangles = level.player GetPlayerAngles();
     player_forward = anglesToForward(playerangles);
@@ -2708,14 +2367,11 @@ dont_shoot_player_in_back() {
 
     dot = vectordot(player_forward, forward_to_self);
 
-    // in view of the player
     if(dot > 0.75 || flag("solorun_player_progression_stalled")) {
       if(isDefined(self.dontEverShoot)) {
         self.dontEverShoot = undefined;
       }
-    }
-    // not in view
-    else {
+    } else {
       if(!isDefined(self.dontEverShoot)) {
         self.dontEverShoot = true;
       }
@@ -2755,13 +2411,11 @@ solorun_timer_prethink() {
 
 solorun_timer_extend_when_close(timerTime, timerLoc) {
   if(level.gameskill == 3) {
-    // player gets no help on veteran
     return;
   }
 
   flag_wait("trig_solorun_player_on_slide");
 
-  // if timer is less than 10 seconds, reset to 10 seconds
   extraTime = 10.5;
   elapsedTime = seconds(GetTime() - level.start_time);
   if(timerTime - elapsedTime < extraTime) {
@@ -2777,25 +2431,23 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   }
   if(!isDefined(bUseTick))
     bUseTick = false;
-  // destroy any previous timer just in case
+
   killTimer();
   level endon("kill_timer");
 
-  // -- timer setup --	
   level.hudTimerIndex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(-250);
-  level.timer SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.timer SetPulseFX(30, 900000, 700);
   level.timer.label = sLabel;
   level.timer settenthstimer(iSeconds);
   level.start_time = gettime();
 
-  // -- timer expired -- if(bUseTick == true)
   thread timer_tick();
   wait(iSeconds);
 
   flag_set("timer_expired");
   level.timer destroy();
-  // Mission failed. The objective was not completed in time.
+
   level thread solorun_timer_expired();
 }
 
@@ -2831,8 +2483,6 @@ killTimer() {
 
 solorun_start_playerfail(timeout) {
   level endon("solorun_player_off_balcony");
-
-  // "Run for it!!! Get to the rooftops!!"thread radio_dialogue("favesc_cmt_runforit");
 
   xTest = -6074;
   zTest = 900;
@@ -2924,7 +2574,6 @@ solorun_civilian_doorshut() {
 
   guy SetGoalPos(guy.origin);
 
-  // idle at end
   guy thread anim_loop_solo(guy, "run_and_slam_endidle", "stop_loop");
 
   flag_wait("solorun_player_at_balcony");
@@ -2962,14 +2611,12 @@ solorun_player_difficulty_adjustment() {
   safeZoneTrig = GetEnt("trig_solorun_start_playersafezone", "targetname");
 
   while(1) {
-    // first make sure he's not running around outside the solorun start area
     if(flag("solorun_player_outside_first_house") && !level.player IsTouching(safeZoneTrig) && !earlySuperHardSettings) {
       earlySuperHardSettings = true;
 
       level.player.noPlayerInvul = true;
       set_custom_gameskill_func(::solorun_superhard_gameskill_settings);
     } else if((!flag("solorun_player_outside_first_house") || level.player IsTouching(safeZoneTrig)) && earlySuperHardSettings) {
-      // this resets settings that don't get set to new values when the player is away from the starting area
       earlySuperHardSettings = false;
 
       level.player.noPlayerInvul = undefined;
@@ -2977,9 +2624,8 @@ solorun_player_difficulty_adjustment() {
     }
 
     vel = level.player GetVelocity();
-    velocity = Distance((vel[0], vel[1], 0), (0, 0, 0)); // don't care about Z velocity
+    velocity = Distance((vel[0], vel[1], 0), (0, 0, 0));
 
-    // easier when player is moving
     if(velocity >= movingVelocity && !easySettings) {
       easySettings = true;
 
@@ -3059,21 +2705,18 @@ solorun_reset_gameskill_settings() {
 }
 
 solorun_fastmoving_gameskill_settings() {
-  // the amount of health you have in this difficulty
-  level.difficultySettings["playerDifficultyHealth"]["easy"] = 900; // 475
-  level.difficultySettings["playerDifficultyHealth"]["normal"] = 550; // 275
-  level.difficultySettings["playerDifficultyHealth"]["hardened"] = 330; // 165
-  level.difficultySettings["playerDifficultyHealth"]["veteran"] = 230; // 115
+  level.difficultySettings["playerDifficultyHealth"]["easy"] = 900;
+  level.difficultySettings["playerDifficultyHealth"]["normal"] = 550;
+  level.difficultySettings["playerDifficultyHealth"]["hardened"] = 330;
+  level.difficultySettings["playerDifficultyHealth"]["veteran"] = 230;
 
-  // If you go to red flashing, the amount of time before your health regens
-  level.difficultySettings["longRegenTime"]["easy"] = 1000; // 5000
-  level.difficultySettings["longRegenTime"]["normal"] = 1000; // 5000
-  level.difficultySettings["longRegenTime"]["hardened"] = 1000; // 3200
-  level.difficultySettings["longRegenTime"]["veteran"] = 1000; // 3200
+  level.difficultySettings["longRegenTime"]["easy"] = 1000;
+  level.difficultySettings["longRegenTime"]["normal"] = 1000;
+  level.difficultySettings["longRegenTime"]["hardened"] = 1000;
+  level.difficultySettings["longRegenTime"]["veteran"] = 1000;
 }
 
 solorun_slowmoving_gameskill_settings() {
-  // defaults
   level.difficultySettings["playerDifficultyHealth"]["easy"] = 475;
   level.difficultySettings["playerDifficultyHealth"]["normal"] = 275;
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = 165;
@@ -3087,8 +2730,6 @@ solorun_slowmoving_gameskill_settings() {
 
 solorun_playerhurt_replacehint() {
   wait(1);
-
-  // "You are Hurt, Run For Your Life!"level.strings["take_cover"].text = &"FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
 }
 
 solorun_player_progression_tracker() {
@@ -3142,7 +2783,6 @@ solorun_player_progression_hilo_watcher() {
     }
 
     if(level.solorun_progression_hilo < 1) {
-      // going backwards
       if(!flag(flagstr)) {
         flag_set(flagstr);
       }
@@ -3157,7 +2797,6 @@ solorun_player_progression_hilo_watcher() {
 }
 
 solorun_sprint_tracker() {
-  // no hints on veteran
   if(level.gameskill > 2) {
     return;
   }
@@ -3166,33 +2805,27 @@ solorun_sprint_tracker() {
   flag_init(flagstr);
   level thread set_flag_on_sprint(flagstr);
 
-  //level.player ent_flag_wait( "player_has_red_flashing_overlay" );
-
   while(level.player.health > (level.player.maxhealth * 0.9) && !flag(flagstr)) {
     wait(0.1);
   }
 
   if(!flag(flagstr)) {
-    // hint
     level thread sprint_hint(flagstr);
   }
 }
 
 sprint_hint(flagstr) {
-  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."if(!level.console) {
+  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT";
   change = false;
 
-  // we want the sprint command to be the one that gets displayed on PC
   if(is_command_bound("+sprint")) {
     change = true;
-  }
-  // if neither are bound, show the PC-specific hint
-  else if(!is_command_bound("+breath_sprint")) {
+  } else if(!is_command_bound("+breath_sprint")) {
     change = true;
   }
 
   if(change) {
-    hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."}
+    hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC";
   }
 
   fontsize = 1.6;
@@ -3210,8 +2843,6 @@ sprint_hint(flagstr) {
   hintElem FadeOverTime(fadeTime);
   hintElem.alpha = 1;
 
-  //endTime = GetTime() + 5000;
-  //while( !flag( flagstr ) && GetTime() < endTime && level.player.health > 0 )
   while(!flag(flagstr) && level.player.health > 0) {
     wait(0.05);
   }
@@ -3239,8 +2870,6 @@ player_bullet_whizbys() {
   trigs = getEntArray("trig_solorun_squibs", "targetname");
   array_thread(trigs, ::player_bullet_whizby_trig);
 }
-
-// to cover having "bursts" of squibs, play bullet sounds randomly in the background
 player_bullet_whizby_sounds() {
   level endon("solorun_player_at_balcony");
 
@@ -3303,21 +2932,16 @@ player_bullet_whizby_trig() {
   shotWaitMin = 0.07;
   shotWaitMax = 0.1;
 
-  // either target a bunch of spots (for random squibs), //or just one spot that targets a line of spots (for ordered squibs)
   squibs = getStructArray(self.target, "targetname");
   if(squibs.size == 1) {
     squibs = get_targeted_line_array(squibs[0]);
   }
-  // for now, they're all random since I think that's looking better and less scripty
-  //else
-  //{
+
   squibs = array_randomize(squibs);
-  //}
 
   squibs[0] script_delay();
 
   foreach(squib in squibs) {
-    // aim in the direction the squib is pointing
     ASSERT(isDefined(squib.angles));
     forward = anglesToForward(squib.angles);
     forwardscaled = vector_multiply(forward, 1024);
@@ -3443,7 +3067,6 @@ solorun_rooftop_squibs() {
       endZ = startZ;
       endPos = groundpos((endX, endY, endZ));
 
-      // make sure we're not going to hit the player
       trace = bulletTrace(startPos, endPos, true);
       traceEnt = trace["entity"];
 
@@ -3525,23 +3148,12 @@ solorun_dialogue(bugplayer) {
   }
 
   flag_wait(balconyflag);
-  // "Roach! I see you! Jump down to the rooftops and meet us south of your position! Go!"radio_dialogue("favesc_cmt_meetussouth");
-
-  // "Gas is very low! I must leave in thirty seconds, ok?"radio_dialogue("favesc_nkl_verylow");
 
   flag_set("solorun_timer_start");
 
-  // "Roach! We're running on fumes here! You got thirty seconds! Run!"radio_dialogue("favesc_cmt_onfumes");
-
-  // DEPRECATED maybe do this one if you're in the trigger for a while?
-  //flag_wait( "solorun_dialogue_3" );
-  // "Head to the right!"//radio_dialogue( "favesc_cmt_headtoright" );
-
   flag_wait("solorun_dialogue_4");
-  // "Left!!! Turn left and jump down!"radio_dialogue("favesc_cmt_leftturnleft");
 
   flag_wait("solorun_dialogue_5");
-  // "Come on!!!!"radio_dialogue("favesc_cmt_comeon");
 }
 
 solorun_dialogue_bugplayer_inside(ender) {
@@ -3549,12 +3161,8 @@ solorun_dialogue_bugplayer_inside(ender) {
   level.player endon("death");
 
   wait(5);
-  //flag_wait( "solorun_dialogue_1" );
-  // "Roach, we're circling the area but I can't see you! You've got to get to the rooftops!"radio_dialogue("favesc_cmt_circlingarea");
 
   wait(15);
-  //flag_wait( "solorun_dialogue_2" );
-  // "Roach, we're running low on fuel! Where the hell are you?!"radio_dialogue("favesc_cmt_lowonfuel");
 }
 
 solorun_chopperjump_killtrig() {
@@ -3595,7 +3203,6 @@ solorun_chopperjump(waitBeforeJump) {
   fly_out_scene = "chopperjump_flyaway";
   anime_jump = level.scr_anim[animname_player][jump_scene];
 
-  // spawn props
   player_rig = spawn_anim_model(animname_player, animref.origin);
   player_rig Hide();
 
@@ -3624,13 +3231,10 @@ solorun_chopperjump(waitBeforeJump) {
   player_and_ladder[0] = player_rig;
   player_and_ladder[1] = ladder;
 
-  // otherwise sunshadows pop in and out as world geo goes in and out of the view
   EnableForcedSunShadows();
 
-  // flying in anim
   thread solorun_chopperjump_chopper_fly_in_and_idle(animref, chopper, ladder, sarge, fly_in_scene, propsTag, loop_scene, doorguyTag);
 
-  // catch the jump
   jumpstart_vol = GetEnt("trig_player_chopperjump", "script_noteworthy");
   jumpForward = anglesToForward((0, 90, 0));
   thread player_jump_watcher();
@@ -3672,9 +3276,8 @@ solorun_chopperjump(waitBeforeJump) {
   level.player AllowCrouch(false);
   level.player AllowProne(false);
 
-  // jump anim
   chopper thread anim_single(player_and_ladder, jump_scene, propsTag);
-  // don't show the rig until after the player has blended into the animation
+
   thread chopperjump_player_blend_to_anim(player_rig);
   player_rig delaycall(0.9, ::Show);
   delaythread(1, ::solorun_chopperjump_rumble);
@@ -3712,10 +3315,9 @@ player_leaps_to_chopper(volume, ladder, altLookSpots, checkIsOnGround) {
     return false;
   }
 
-  // need to be looking at the ladder or at one of our alternate look spots while jumping for it
   lookingGood = true;
 
-  refPoint = ladder.origin + (0, 0, -85); // uses the same offset as the objective indicator
+  refPoint = ladder.origin + (0, 0, -85);
   fov = GetDvarInt("cg_fov");
   if(!level.player WorldPointInReticle_Circle(refPoint, fov, 120)) {
     lookingGood = false;
@@ -3724,8 +3326,6 @@ player_leaps_to_chopper(volume, ladder, altLookSpots, checkIsOnGround) {
   if(!lookingGood) {
     foundOne = false;
     foreach(spot in altLookSpots) {
-      //print3d( spot.origin, "*", ( 1, 1, 1 ), 1, 1, 60 );
-
       if(level.player WorldPointInReticle_Circle(spot.origin, fov, 165)) {
         foundOne = true;
         break;
@@ -3742,8 +3342,8 @@ player_leaps_to_chopper(volume, ladder, altLookSpots, checkIsOnGround) {
   }
 
   vel = level.player GetVelocity();
-  // figure out the length of the vector to get the speed (distance from world center = length)
-  velocity = Distance((vel[0], vel[1], 0), (0, 0, 0)); // don't care about Z velocity
+
+  velocity = Distance((vel[0], vel[1], 0), (0, 0, 0));
   if(velocity < 145) {
     return false;
   }
@@ -3756,7 +3356,6 @@ solorun_chopperjump_chopper_fly_in_and_idle(animref, chopper, ladder, sarge, fly
   chopper thread anim_single_solo(sarge, fly_in_scene, doorguyTag);
   chopper anim_single_solo(ladder, fly_in_scene, propsTag);
 
-  // idle anim
   if(!flag("chopperjump_player_jump")) {
     packets = [];
     packet_chopper = [];
@@ -3810,7 +3409,7 @@ player_jump_watcher() {
 
   while(1) {
     level.player waittill("playerjump");
-    wait(0.1); // jumps don't happen immediately
+    wait(0.1);
 
     if(!level.player IsOnGround()) {
       flag_set(jumpflag);
@@ -3827,30 +3426,20 @@ player_jump_watcher() {
 
 chopperjump_player_blend_to_anim(player_rig) {
   wait(0.3);
-  level.player notify("stop_sliding"); // defensive. deleting the slide trigger when we catch the jump should work, but just in case it starts in some super edge case, I don't want StopSlide() to ever try to unlink him
+  level.player notify("stop_sliding");
   level.player PlayerLinkToBlend(player_rig, "tag_player", 0.6, 0.2, 0.4);
 }
 
 chopperjump_dialogue() {
   trigger_wait_targetname("chopperjump_dialogue_jumpforit");
 
-  // "Jump for it!!!"level.sarge thread dialogue_queue("favesc_cmt_jump");
-
   flag_wait("chopperjump_player_jump");
   wait(2);
 
-  // "Nikolai! We got him! Get us outta here!"radio_dialogue("favesc_cmt_gothim");
-
   wait(1);
 
-  // "Where to, Captain?"radio_dialogue("favesc_nkl_whereto");
-
   wait(0.4);
-
-  // "Just get us to the sub..."radio_dialogue("favesc_cmt_tothesub");
 }
-
-// ----------------- // -- AI STUFF -- // ----------------- get_single_redshirt() {
 guys = get_nonhero_friends();
 ASSERT(guys.size == 1);
 redshirt = guys[0];
@@ -3954,7 +3543,6 @@ spawn_group(aSpawners, doSafe, doStaggered) {
   }
 
   if(doSafe) {
-    //check to ensure all the guys were spawned
     ASSERTEX((aSpawners.size == spawnedGuys.size), "Not all guys were spawned successfully from array_spawn");
   }
 
@@ -3990,14 +3578,11 @@ bloody_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
   playFX(getfx("headshot"), point, forward, up);
   playFX(getfx("bodyshot"), point, backward, up);
 }
-
-// ---- door kicker guys ---- // spawns AIs in a house and has one of them kick the door open
 door_kick_housespawn(spawners, door, animRef, physicsRef) {
   spawners = array_randomize(spawners);
 
   kickerSpawner = undefined;
 
-  // if one of them has script_parameters set to "kicker" then he should kick the door
   foreach(spawner in spawners) {
     if(isDefined(spawner.script_parameters) && spawner.script_parameters == "kicker") {
       kickerSpawner = spawner;
@@ -4013,7 +3598,6 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
   kicker = kickerSpawner spawn_ai(true);
   kicker magic_bullet_shield();
 
-  // spawn the other guys after the kicker has started his anim
   if(spawners.size) {
     delaythread(0.15, ::spawn_group, spawners);
   }
@@ -4044,7 +3628,6 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
   thread play_sound_in_space("door_wood_double_kick", door.origin);
   door thread sbmodel_rotate(0.25, true);
 
-  // optionally push some stuff out of the way when the door opens
   if(isDefined(physicsRef)) {
     PhysicsExplosionCylinder(physicsRef.origin, physicsRef.radius, (physicsRef.radius / 2), 1.0);
   }
@@ -4074,13 +3657,9 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
     }
   }
 }
-
-// ---- chaotic above shooter guys ---- chaotic_above_shooter() {
 self endon("death");
 
 animref = GetStruct(self.target, "targetname");
-
-// favela_chaotic_above_through, favela_chaotic_above_through_uzi, favela_chaotic_above_through_back
 anime = "favela_chaotic_above_through";
 if(isDefined(animref.script_noteworthy)) {
   anime = animref.script_noteworthy;
@@ -4091,8 +3670,6 @@ animref anim_generic_reach(self, anime);
 self.allowdeath = true;
 animref anim_generic(self, anime);
 }
-
-// ---- window smash guys ---- window_smash_stop_inside() {
 self endon("death");
 
 self window_smash("window_smash_stop_inside");
@@ -4117,8 +3694,6 @@ window_smash(smashAnime) {
   animref anim_generic_reach(self, smashAnime);
   animref anim_generic(self, smashAnime);
 }
-
-// ---- curtain pulldown guys ---- curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
 if(!isDefined(bWaitForPlayer))
   bWaitForPlayer = false;
 
@@ -4166,8 +3741,6 @@ guy.goalradius = 1000;
 guy setGoalPos(guy.origin);
 guy.usechokepoints = true;
 }
-
-// broke out into a separate function so we can spawn the model early
 curtain_pulldown_spawnmodel(node) {
   if(isDefined(node.curtain)) {
     return node.curtain;
@@ -4235,7 +3808,6 @@ dialogue_print(line, timeout) {
 }
 
 playsound_from_random_spot(soundalias, moveSpots) {
-  // in case we're just passing a single spot
   if(!IsArray(moveSpots)) {
     newArr = [];
     newArr[0] = moveSpots;
@@ -4424,7 +3996,7 @@ be_less_scared() {
   self.ignoreexplosionevents = true;
   self.ignorerandombulletdamage = true;
   self.ignoresuppression = true;
-  //self.fixednode = false;
+
   self.disableBulletWhizbyReaction = true;
   self disable_pain();
 
@@ -4507,14 +4079,10 @@ remove_nonhero_friends(exceptThisMany) {
 
   battlechatter_on("allies");
 }
-
-// color reinforcement system startup thread
 favela_escape_friendly_startup_thread() {
   self scr_accuracy(level.friendly_baseaccuracy);
   self friend_add();
 }
-
-// adds a guy to level.friends
 friend_add() {
   if(!isDefined(level.friends)) {
     level.friends = [];
@@ -4525,8 +4093,6 @@ friend_add() {
   level.friends = array_add(level.friends, self);
   self thread remove_from_friends_on_death();
 }
-
-// removes a guy from level.friends
 friend_remove() {
   ASSERT(isDefined(level.friends));
   level.friends = array_remove(level.friends, self);
@@ -4539,7 +4105,6 @@ remove_from_friends_on_death() {
 
 delete_all_friends() {
   if(isDefined(level.scripted_dialogue_struct)) {
-    // clear the dialogue function stack so it's not waiting to run a function that depends on one of these guys being alive
     level.scripted_dialogue_struct function_stack_clear();
   }
 
@@ -4622,8 +4187,6 @@ bloody_death_after_min_delay(mindelay, randomdelay) {
   wait(mindelay);
   self bloody_death(randomdelay);
 }
-
-// fake death
 bloody_death(delay) {
   self endon("death");
 
@@ -4653,7 +4216,7 @@ bloody_death(delay) {
 
   for(i = 0; i < 3 + RandomInt(5); i++) {
     random = RandomIntRange(0, tags.size);
-    //vec = self GetTagOrigin( tags[random] );
+
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
   }
@@ -4668,48 +4231,36 @@ bloody_death_fx(tag, fxName) {
 
   playFXOnTag(fxName, self, tag);
 }
-
-// ------------------------------- // -- FRIENDLY COLOR MANAGEMENT -- // ------------------------------- // kind of a fancy version of the linear friendly color management technique, in that it
-//supports multiple colorCode/volume combos per trigger
-// - the basic concept is that we don't want friendlies to move forward until
-// a volume associated with their colorCode is clear of enemies
 color_flags_advance(baseName, numTotalFlags, startFlagNum) {
   thread color_flags_advance_cleanup();
   level endon("color_flags_advance_stop");
 
   team = "allies";
 
-  // maybe we want to start from the middle of the chain, like for a start point
   if(!isDefined(startFlagNum)) {
     startFlagNum = 1;
   }
 
   for(i = startFlagNum; i <= numTotalFlags; i++) {
-    // final name looks like "[baseName]_1" or whatever
     name = baseName + "_" + i;
     flagtrig = GetEnt(name, "targetname");
     colortrig = GetEnt(flagtrig.target, "targetname");
 
     flag_wait(name);
 
-    // get all the color codes on this trigger
     array = colortrig maps\_colors::get_colorcodes_from_trigger(colortrig.script_color_allies, team);
     colorCodes = array["colorCodes"];
     colorCodesByColorIndex = array["colorCodesByColorIndex"];
     colors = array["colors"];
 
-    // figure out the test volume for each color code
-    // note: only works for one volume per color code! I think this is how the color system works anyway, only one volume is supported afaik.
     infos = [];
     foreach(colorCode in colorCodes) {
       volume = level.arrays_of_colorCoded_volumes[team][colorCode];
       if(isDefined(volume)) {
-        // can only support one volume per colorCode at the moment
         ASSERTEX(!color_flags_dupe_info(infos, colorCode), "More than one volume found for colorCode " + colorCode + ", currently we only support one volume per colorCode.");
 
         info = spawnStruct();
 
-        // set up arrays for us to manually pass to activate_color_trigger_internal
         info.colorCodes[0] = colorCode;
         color = GetSubStr(colorCode, 0, 1);
         info.colors[0] = color;
@@ -4736,21 +4287,15 @@ color_flags_advance_queue_manager(color) {
   level endon("color_flags_advance_stop");
 
   while(1) {
-    // if we have any volumes of this color to wait for, do them in order
     if(level.color_flags_advance_queue[color].size) {
-      // process the first volume in the stack, if the stack has any entries
       volume = level.color_flags_advance_queue[color][0];
       volume color_flag_volume_advance_wait();
-    }
-    // otherwise, wait for an update and try again
-    else {
+    } else {
       level waittill("color_flag_advance_queue_updated");
     }
   }
 
 }
-
-// self = the info spawnstruct to add
 color_flags_advance_queue_add() {
   color = self.colors[0];
 
@@ -4758,7 +4303,6 @@ color_flags_advance_queue_add() {
     level.color_flags_advance_queue = [];
   }
 
-  // see if we need to set up the key for this color
   keys = GetArrayKeys(level.color_flags_advance_queue);
   foundOne = false;
   foreach(key in keys) {
@@ -4768,21 +4312,16 @@ color_flags_advance_queue_add() {
     }
   }
 
-  // set it up if necessary
   if(!foundOne) {
     level.color_flags_advance_queue[color] = [];
 
-    // kick off a queue manager for this color
     thread color_flags_advance_queue_manager(color);
   }
 
-  // add the volume to the end of the array
   level.color_flags_advance_queue[color][level.color_flags_advance_queue[color].size] = self;
 
   level notify("color_flag_advance_queue_updated");
 }
-
-// self = the info spawnstruct to remove
 color_flags_advance_queue_remove() {
   color = self.colors[0];
 
@@ -4790,8 +4329,6 @@ color_flags_advance_queue_remove() {
 
   level.color_flags_advance_queue[color] = array_remove(level.color_flags_advance_queue[color], self);
 }
-
-// self = the info spawnstruct
 color_flag_volume_advance_wait() {
   level endon("color_flags_advance_stop");
 
@@ -4815,8 +4352,6 @@ color_flags_dupe_info(infos, colorCode) {
 
   return false;
 }
-
-// ---------------------- // --- AIRLINER STUFF --- // ---------------------- airliner_flyby_trigs() {
 ASSERT(isDefined(level.airliner));
 airliner_hide();
 
@@ -4828,7 +4363,6 @@ array_thread(trigs, ::airliner_flyby, lockflag);
 }
 
 airliner_setup() {
-  // gets all the ents in the prefab
   ents = getEntArray("sbmodel_airliner_flyby", "targetname");
   level.airlinerParts = ents;
 
@@ -4839,7 +4373,6 @@ airliner_setup() {
   lights_wingtip_right = [];
   engine_exhausts = [];
 
-  // find the script_origins and sort them
   foreach(ent in ents) {
     if(ent.code_classname == "script_origin") {
       ASSERT(isDefined(ent.script_noteworthy));
@@ -4875,7 +4408,6 @@ airliner_setup() {
   ASSERT(isDefined(org));
   otherents = array_remove(ents, org);
 
-  // turn on lights &exhaust
   light_wingtip_left = airliner_fx(light_wingtip_left, "airliner_wingtip_left");
   light_belly = airliner_fx(light_belly, "airliner_belly");
   light_tail = airliner_fx(light_tail, "airliner_tail");
@@ -4888,7 +4420,6 @@ airliner_setup() {
   otherents = array_combine(otherents, lights_wingtip_right);
   otherents = array_combine(otherents, engine_exhausts);
 
-  // link everything to the main script_origin
   foreach(ent in otherents) {
     ent LinkTo(org);
   }
@@ -4957,7 +4488,6 @@ airliner_flyby(lockflag) {
   flag_waitopen(lockflag);
   flag_set(lockflag);
 
-  // move jet to path origin and unhide
   level.airliner.origin = pathStart.origin;
 
   if(isDefined(pathStart.angles)) {
@@ -4966,18 +4496,16 @@ airliner_flyby(lockflag) {
     level.airliner.angles = level.airliner.og_angles;
   }
 
-  wait(0.05); // if we don't wait a bit while moving the plane, we'll see it move through the world
+  wait(0.05);
   airliner_show();
 
   level.airliner thread airliner_flyby_audio(pathStart.origin, pathEnd.origin, self);
 
-  // move along path
   dist = Distance(pathStart.origin, pathEnd.origin);
   time = dist / speed;
   level.airliner MoveTo(pathEnd.origin, time);
   level.airliner waittill("movedone");
 
-  // hide at path end
   airliner_hide();
 
   flag_clear(lockflag);
@@ -4991,8 +4519,8 @@ airliner_flyby_audio(start, end, trig) {
     return;
   }
 
-  loop = "veh_airliner_dist_loop"; // main looping sound
-  boom = "veh_airliner_boom_low"; // layers on top when the plane goes near the player
+  loop = "veh_airliner_dist_loop";
+  boom = "veh_airliner_boom_low";
 
   boomspot = PointOnSegmentNearestToPoint(start, end, level.player.origin);
   boomDistSqd = 350 * 350;
@@ -5003,7 +4531,7 @@ airliner_flyby_audio(start, end, trig) {
     wait(0.05);
   }
 
-  wait(0.5); // delay before the "boom"self thread play_sound_in_space(boom);
+  wait(0.5);
   self waittill("movedone");
   self stop_sound(loop);
 }
@@ -5011,8 +4539,6 @@ airliner_flyby_audio(start, end, trig) {
 stop_sound(alias) {
   self notify("stop sound" + alias);
 }
-
-// ----------------- // -- UTIL STUFF -- // ----------------- sbmodel_rotate(rotateTime, makeNotSolid) {
 if(!isDefined(makeNotSolid)) {
   makeNotSolid = false;
 }
@@ -5084,23 +4610,20 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
 
   targetOrigin = lineStart.origin;
 
-  // get info about the direction of the line
   vec = VectorNormalize(lineEnd.origin - lineStart.origin);
   angles = VectorToAngles(vec);
   forward = anglesToForward(angles);
 
-  // how random our squib placement will be
   offsetMin = -25;
   offsetMax = 25;
 
-  axis = GetAiArray("axis"); // if lineTime is super long this could be unreliable
+  axis = GetAiArray("axis");
   killradius = 64;
 
   startTime = GetTime();
 
   for(i = 0; i < numSquibs; i++) {
     truePos = groundpos(targetOrigin);
-    //Print3D( truePos, "*", ( 1, 1, 1 ), 0.8, 0.5, 90 );
 
     offsetX = RandomFloatRange(offsetMin, offsetMax);
     offsetY = RandomFloatRange(offsetMin, offsetMax);
@@ -5121,7 +4644,6 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
 
     wait(fireInterval);
 
-    // move the target origin up
     targetOrigin += vector_multiply(forward, movementPerSquib);
   }
 }
@@ -5151,8 +4673,6 @@ delete_after_touch() {
     self Delete();
   }
 }
-
-// spins the minigun up to the full rate needed to fire
 minigun_spinup() {
   if(self GetBarrelSpinRate() == 1) {
     return;
@@ -5174,8 +4694,6 @@ keep_objective_on_entity(objective_number, ent) {
     wait 0.05;
   }
 }
-
-// makes sure self is in the trigger for a certain amount of time before continuing
 trigger_wait_fuse(trig, fuseTime) {
   self endon("death");
 
@@ -5202,8 +4720,6 @@ trigger_wait_fuse(trig, fuseTime) {
     wait(0.05);
   }
 }
-
-// like trigger_wait_targetname, except it works for multiple triggers named with the same targetname
 trigger_wait_targetname_multiple(trigTN) {
   trigs = getEntArray(trigTN, "targetname");
   if(!trigs.size) {
@@ -5229,10 +4745,6 @@ trigger_wait_multiple_think(trigTN) {
   self waittill("trigger", other);
   level notify(trigTN, other);
 }
-
-// gets a trigger by targetname and triggers it, not doing anything if the trigger is undefined.
-// - use for artificially activating triggers that the player might have already activated
-// normally, like killspawners, etc.
 trigger_activate_targetname_safe(trigTN) {
   trig = GetEnt(trigTN, "targetname");
   if(isDefined(trig)) {
@@ -5246,8 +4758,6 @@ trigger_activate_targetname(trigTN) {
 
   trig notify("trigger");
 }
-
-// waits until flag is set, then threads the function
 flag_wait_thread(flag, process) {
   flag_wait(flag);
   self thread[[process]]();
@@ -5318,11 +4828,7 @@ player_dots() {
     wait(0.05);
   }
 }
-
-// bootleg client-side flashlight. originally this was for testing hunted lights but
-//ended up being interesting enough to keep around for later
 player_fake_flashlight() {
-  // for testing hunted light off the player
   SetSavedDvar("r_spotlightStartRadius", 36);
   SetSavedDvar("r_spotlightEndRadius", 325);
   SetSavedDvar("r_spotlightBrightness", 0.9);

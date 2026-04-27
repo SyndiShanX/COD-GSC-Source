@@ -8,8 +8,6 @@
 #using_animtree("vehicles");
 
 main(model, type) {
-  //SNDFILE=vehicle_hummer
-
   build_template("humvee", model, type);
   build_localinit(::init_local);
 
@@ -17,9 +15,9 @@ main(model, type) {
   build_deathmodel("vehicle_hummer_no_doors", "vehicle_hummer_destroyed");
   build_deathmodel("vehicle_hummer_viewmodel", "vehicle_hummer_opentop_destroyed");
   build_deathmodel("vehicle_hummer_opentop", "vehicle_hummer_opentop_destroyed");
-  build_deathmodel("vehicle_humvee_camo"); //old humvee
-  build_deathmodel("vehicle_humvee_camo_50cal_doors"); //old humvee
-  build_deathmodel("vehicle_humvee_camo_50cal_nodoors"); //old humvee
+  build_deathmodel("vehicle_humvee_camo");
+  build_deathmodel("vehicle_humvee_camo_50cal_doors");
+  build_deathmodel("vehicle_humvee_camo_50cal_nodoors");
 
   hummer_death_fx = [];
   hummer_death_fx["vehicle_hummer"] = "explosions/vehicle_explosion_hummer";
@@ -56,9 +54,6 @@ init_local() {
     anims["rot_l"] = % humvee_antenna_L_rotate_360;
     anims["rot_r"] = % humvee_antenna_R_rotate_360;
     thread humvee_antenna_animates(anims);
-
-    //thread maps\_debug::drawTagForever( "tag_antenna" );
-    //thread maps\_debug::drawTagForever( "tag_antenna2" );
   }
 
   if(!issubstr(self.model, "opentop"))
@@ -176,87 +171,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_hummer (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer" );
-
-and these lines in your CSV:
-#include,vehicle_hummer
-sound,vehicle_car_exp,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer"default:"vehicletype" "humvee"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_nodoors (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer_no_doors" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_nodoors
-sound,vehicle_car_exp,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer_no_doors"default:"vehicletype" "humvee"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_opentop (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer_opentop" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_opentop
-sound,vehicle_hummer,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer_opentop"default:"vehicletype" "humvee"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_viewmodel (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer_viewmodel" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_viewmodel
-sound,vehicle_car_exp,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer_viewmodel"default:"vehicletype" "humvee"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_viewmodel_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer_viewmodel", "hummer_physics" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_viewmodel
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer_viewmodel"default:"vehicletype" "hummer_physics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_opentop_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer_opentop", "hummer_opentop_physics" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_opentop
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer_opentop"default:"vehicletype" "hummer_opentop_physics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_humvee::main( "vehicle_hummer", "hummer_physics" );
-
-and these lines in your CSV:
-#include,vehicle_hummer
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_physics"default:"script_team" "allies"
-*/

@@ -30,126 +30,64 @@
 #using scripts\shared\util_shared;
 #namespace vengeance_safehouse;
 
-function function_26524bc8() {
-  // Unsupported VM revision (1B).
-}
+function function_26524bc8() {}
 
-function function_683ab16e() {
-  // Unsupported VM revision (1B).
-}
+function function_683ab16e() {}
 
-function function_429957e0() {
-  // Unsupported VM revision (1B).
-}
+function function_429957e0() {}
 
-function function_d5d199aa() {
-  // Unsupported VM revision (1B).
-}
+function function_d5d199aa() {}
 
-function function_52dabe42() {
-  // Unsupported VM revision (1B).
-}
+function function_52dabe42() {}
 
-function function_8fbe8f97() {
-  // Unsupported VM revision (1B).
-}
+function function_8fbe8f97() {}
 
-function function_4e237f5c() {
-  // Unsupported VM revision (1B).
-}
+function function_4e237f5c() {}
 
-function function_29dad6e8() {
-  // Unsupported VM revision (1B).
-}
+function function_29dad6e8() {}
 
-function function_6bc33c8e() {
-  // Unsupported VM revision (1B).
-}
+function function_6bc33c8e() {}
 
-function safehouse_int_main() {
-  // Unsupported VM revision (1B).
-}
+function safehouse_int_main() {}
 
-function safehouse_int_vo() {
-  // Unsupported VM revision (1B).
-}
+function safehouse_int_vo() {}
 
-function safehouse_int_enemies() {
-  // Unsupported VM revision (1B).
-}
+function safehouse_int_enemies() {}
 
-function function_be8594ba() {
-  // Unsupported VM revision (1B).
-}
+function function_be8594ba() {}
 
-function function_2196c10e() {
-  // Unsupported VM revision (1B).
-}
+function function_2196c10e() {}
 
-function function_8d0196a7() {
-  // Unsupported VM revision (1B).
-}
+function function_8d0196a7() {}
 
-function function_15d46e2e() {
-  // Unsupported VM revision (1B).
-}
+function function_15d46e2e() {}
 
-function function_c6fb453d() {
-  // Unsupported VM revision (1B).
-}
+function function_c6fb453d() {}
 
-function function_422af9d() {
-  // Unsupported VM revision (1B).
-}
+function function_422af9d() {}
 
-function function_c50ccfbd() {
-  // Unsupported VM revision (1B).
-}
+function function_c50ccfbd() {}
 
-function function_d39f39b7() {
-  // Unsupported VM revision (1B).
-}
+function function_d39f39b7() {}
 
-function function_2d58165a() {
-  // Unsupported VM revision (1B).
-}
+function function_2d58165a() {}
 
-function function_7d2a7231() {
-  // Unsupported VM revision (1B).
-}
+function function_7d2a7231() {}
 
-function backdraft() {
-  // Unsupported VM revision (1B).
-}
+function backdraft() {}
 
-function function_fb60b7ca() {
-  // Unsupported VM revision (1B).
-}
+function function_fb60b7ca() {}
 
-function skipto_panic_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_panic_init() {}
 
-function skipto_panic_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_panic_done() {}
 
-function panic_main() {
-  // Unsupported VM revision (1B).
-}
+function panic_main() {}
 
-function function_69ff4ffa() {
-  // Unsupported VM revision (1B).
-}
+function function_69ff4ffa() {}
 
-function function_63cf4f49() {
-  // Unsupported VM revision (1B).
-}
+function function_63cf4f49() {}
 
-function function_58c9be50() {
-  // Unsupported VM revision (1B).
-}
+function function_58c9be50() {}
 
-function function_87298438() {
-  // Unsupported VM revision (1B).
-}
+function function_87298438() {}

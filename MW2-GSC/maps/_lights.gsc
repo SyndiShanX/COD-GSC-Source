@@ -9,8 +9,6 @@
 is_light_entity(ent) {
   return ent.classname == "light_spot" || ent.classname == "light_omni" || ent.classname == "light";
 }
-
-// This function never returns.
 flickerLight(color0, color1, minDelay, maxDelay) {
   toColor = color0;
   delay = 0.0;
@@ -34,7 +32,6 @@ flickerLight(color0, color1, minDelay, maxDelay) {
 }
 
 generic_pulsing() {
-  //ChrisC wants the lights off when probes are done
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
@@ -49,7 +46,6 @@ generic_pulsing() {
   increment_off = (on - off) / (transition_off / .05);
 
   for(;;) {
-    //ramp down
     time = 0;
     while((time < transition_off)) {
       curr -= increment_off;
@@ -59,10 +55,8 @@ generic_pulsing() {
       wait(.05);
     }
 
-    //off wait time
     wait(1);
 
-    //ramp up
     time = 0;
     while(time < transition_on) {
       curr += increment_on;
@@ -72,13 +66,11 @@ generic_pulsing() {
       wait(.05);
     }
 
-    //on wait time
     wait(.5);
   }
 }
 
 generic_double_strobe() {
-  //ChrisC wants the lights off when probes are done
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
@@ -105,12 +97,10 @@ generic_double_strobe() {
         linked_models = true;
       }
     }
-    //if(! isdefined ( lit_model ) )
-    //	assertmsg( "primary light has lit model but not unlit model ( " + lit_model.origin + " ) " );
+
   }
 
   for(;;) {
-    //off wait time
     self setLightIntensity(off);
     if(linked_models) {
       lit_model hide();
@@ -118,7 +108,6 @@ generic_double_strobe() {
     }
     wait(.8);
 
-    //first flash
     self setLightIntensity(on);
     if(linked_models) {
       lit_model show();
@@ -126,7 +115,6 @@ generic_double_strobe() {
     }
     wait(.1);
 
-    //pause
     self setLightIntensity(off);
     if(linked_models) {
       lit_model hide();
@@ -134,7 +122,6 @@ generic_double_strobe() {
     }
     wait(.12);
 
-    //second flash
     self setLightIntensity(on);
     if(linked_models) {
       lit_model show();
@@ -145,18 +132,15 @@ generic_double_strobe() {
 }
 
 getclosests_flickering_model(origin) {
-  //stuff in prefabs bleh. non of this script_noteworthy or linkto stuff works there. so doing closest thing with the light_flicker_model targetname
   array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
   if(isDefined(model))
     return_array[0] = model;
-  return return_array; // I'm losing my mind
-
+  return return_array;
 }
 
 generic_flickering() {
-  //ChrisC wants the lights off when probes are done
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setLightIntensity(0);
     return;
@@ -172,8 +156,6 @@ generic_flickering() {
   self.linked_prefab_ents = undefined;
   self.linked_things = [];
 
-  //prefabs need to support targetnames and script_linkTos to so that lights can be set up
-  //by simply linking them to a prefab containing the on/off models instead of jumping through hoops (currently bugged)
   if(isDefined(self.script_LinkTo)) {
     self.linked_prefab_ents = self get_linked_ents();
     assertex(self.linked_prefab_ents.size == 2, "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab that contains both on and off light models");
@@ -196,8 +178,6 @@ generic_flickering() {
     self.linked_models = true;
   }
 
-  //----------old way of getting linked lights and models....still supported--------------//
-
   if(isDefined(self.script_noteworthy))
     self.linked_things = getEntArray(self.script_noteworthy, "targetname");
 
@@ -215,10 +195,6 @@ generic_flickering() {
       self.linked_models = true;
     }
   }
-  //if(! isdefined ( self.lit_model ) )
-  //	assertmsg( "primary light has lit model but not unlit model ( " + self.lit_model.origin + " ) " );
-
-  //----------old way of getting linked lights and models....still supported--------------//
 
   self thread generic_flicker();
 }
@@ -235,7 +211,6 @@ generic_flicker() {
   curr = on;
   num = 0;
 
-  //Make the light flicker
   while(isDefined(self)) {
     num = randomintrange(1, 10);
     while(num) {
@@ -319,8 +294,6 @@ burning_trash_fire() {
     old_intensity = intensity;
   }
 }
-
-// This function never returns.
 strobeLight(intensity0, intensity1, period, kill_flag) {
   frequency = 360 / period;
   time = 0;
@@ -338,8 +311,6 @@ strobeLight(intensity0, intensity1, period, kill_flag) {
     }
   }
 }
-
-// This function is non - blocking.It will probably need to be moved to code if scripted lights are needed in multiplayer.
 changeLightColorTo(targetColor, totalTime, accelTime, decelTime) {
   if(!isDefined(accelTime))
     accelTime = 0;
@@ -347,27 +318,7 @@ changeLightColorTo(targetColor, totalTime, accelTime, decelTime) {
     decelTime = 0;
   self thread changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime);
 }
-
-// Don't call directly; use 'changeLightColorTo' instead
 changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
-  // Interpolation goes from 0 to 1 over totalTime, with const acceleration and deceleration given by their respective times.
-  // The descriptive equations are:
-  // midTime = totalTime - accelTime - decelTime
-  // fracAccel = 0.5 * accelRate * accelTime^2
-  // fracConst = velConst * midTime
-  // fracDecel = velConst * decelTime - 0.5 * decelRate * decelTime^2
-  // fracAccel + fracConst + fracDecel = 1
-  // velConst = accelRate * accelTime
-  // velConst = decelRate * decelTime
-  // The unknowns are fracAccel, fracConst, fracDecel, accelRate, decelRate, and velConst.We have six equations and six unknowns.
-  // So, these can be solved to give the following:
-  // accelRate = 2 / ( accelTime * ( totalTime + midTime ) )
-  // decelRate = 2 / ( decelTime * ( totalTime + midTime ) )
-  // velConst = 2 / ( totalTime + midTime )
-  // fracAccel = accelTime / ( totalTime + midTime )
-  // fracDecel = decelTime / ( totalTime + midTime )
-  // fracConst = 2 * midTime / ( totalTime + midTime )
-
   startColor = self getLightColor();
   timeFactor = 1 / (totalTime * 2 - (accelTime + decelTime));
   time = 0;

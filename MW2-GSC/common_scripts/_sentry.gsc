@@ -8,35 +8,12 @@
 /include maps\_hud_util;
 #using_animtree("sentry_gun");
 
-/*QUAKED script_model_pickup_sentry_gun (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="sentry_gun_folded"default:"model" "sentry_gun_folded"*/
-
-/*QUAKED script_model_pickup_sentry_minigun (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="sentry_minigun_folded"default:"model" "sentry_minigun_folded"*/
-
-/*
-code support:
--physics on turrets
-
-todo:
--make hint print while in placement mode
--hit max number of turrets at 32, but I could limit the number allowed
--get behind turret and change team
-*/
-
-/*
-	Constants
-*/
-
-// default
 sentry_updateTime = 0.05;
-shielded_sentry_health = 350; // direct hit from an RPG
+shielded_sentry_health = 350;
 shielded_sentry_bullet_armor = 2000;
-minigun_sentry_health = 190; // frag grenade does 200 inner damage
+minigun_sentry_health = 190;
 minigun_sentry_bullet_armor = 1200;
 minigun_sentry_bullet_armor_enemy = 0;
-
-// mp
 shielded_sentry_bullet_armor_mp = 300;
 minigun_sentry_bullet_armor_mp = 300;
 
@@ -65,8 +42,6 @@ main() {
     precacheTurret("sentry_minigun_mp");
   }
 
-  // LANG_ENGLISH		Press and hold ^3&& 1^7 to move the turret."precacheString(&"SENTRY_MOVE");
-  // Press and hold ^3&& 1^7 to pick up the turret.
   precacheString(&"SENTRY_PICKUP");
   precacheString(&"SENTRY_PLACE");
   precacheString(&"SENTRY_CANNOT_PLACE");
@@ -84,14 +59,13 @@ main() {
   sentry_minigun_default_settings("sentry_minigun");
 
   if(isSP()) {
-    // sentry overheat override settings
-    level.sentry_overheating_speed = 1; // 1 heat points per second
-    level.sentry_cooling_speed = 1; // 1 heat points cooling per second
+    level.sentry_overheating_speed = 1;
+    level.sentry_cooling_speed = 1;
 
     if(!isDefined(level.sentry_fire_time))
-      level.sentry_fire_time = 8; // seconds of continous fire ( aka heat points )
+      level.sentry_fire_time = 8;
     if(!isDefined(level.sentry_cooldown_time))
-      level.sentry_cooldown_time = 4; // seconds of continous fire ( aka heat points )
+      level.sentry_cooldown_time = 4;
   }
 
   level.sentryTurretSettings["easy"]["convergencePitchTime"] = 2.5;
@@ -100,7 +74,6 @@ main() {
   level.sentryTurretSettings["easy"]["aiSpread"] = 2.0;
   level.sentryTurretSettings["easy"]["playerSpread"] = 0.5;
 
-  // for pre-placed guns
   guns = getEntArray("sentry_gun", "targetname");
   mini_guns = getEntArray("sentry_minigun", "targetname");
   foreach(gun in guns) {
@@ -171,7 +144,7 @@ sentry_pickup_init(sentryType) {
   self.sentryType = sentryType;
 
   self setCursorHint("HINT_NOICON");
-  // Press and hold ^3&& 1^7 to pick up the turret.
+
   self setHintString(&"SENTRY_PICKUP");
   self makeUsable();
 
@@ -202,7 +175,7 @@ sentry_init(team, sentryType, owner) {
   self makeTurretInoperable();
   self SentryPowerOn();
   self setCanDamage(true);
-  self setDefaultDropPitch(-89.0); // setting this mainly prevents Turret_RestoreDefaultDropPitch() from running
+  self setDefaultDropPitch(-89.0);
 
   if(isSP() || level.teambased)
     self setTurretTeam(team);
@@ -211,12 +184,10 @@ sentry_init(team, sentryType, owner) {
   self.isSentryGun = true;
   self.kill_reward_money = 350;
   self.kill_melee_reward_money = 400;
-  self.sentry_battery_timer = 60; // sec
+  self.sentry_battery_timer = 60;
 
-  //bullet armor acts as an extra pool of health for bullet damage.
-  //once its removed bullet damage affects the sentry like other kinds of damage.
   if(isSP()) {
-    if(self.weaponinfo == "sentry_gun") // sentry_minigun and sentry_minigun_enemy get the same settings
+    if(self.weaponinfo == "sentry_gun")
       self.bullet_armor = shielded_sentry_bullet_armor;
     else {
       self.bullet_armor = minigun_sentry_bullet_armor;
@@ -268,7 +239,6 @@ sentry_init(team, sentryType, owner) {
 sentry_death_wait() {
   self endon("deleted");
 
-  //self waittill_player_or_sentry_death();
   self waittill("death", attacker, cause);
 
   if(isDefined(level.stat_track_kill_func) && isDefined(attacker))
@@ -374,9 +344,8 @@ sentry_player_use_wait() {
     if(isDefined(player.placingSentry)) {
       continue;
     }
-    // only owner of sentry can move sentry in MP
+
     if(!isSP()) {
-      // Checked through code now; Assert left for reference.
       assert(isDefined(self.owner));
       assert(player == self.owner);
     }
@@ -394,14 +363,14 @@ sentry_player_use_wait() {
   if(!isSP())
     self sentry_team_hide_icon();
 
-  self SentryPowerOff(); // makes the turret non - operational while being moved
+  self SentryPowerOff();
   player.placingSentry = self;
   self setSentryCarried(true);
   self.ignoreMe = true;
   self setCanDamage(false);
 
   player _disableWeapon();
-  //player _disableUsability();
+
   self makeSentryNotSolid();
   self sentry_badplace_delete();
   player thread move_sentry_wait(self);
@@ -433,10 +402,8 @@ move_sentry_wait(sentry) {
   assert(isDefined(sentry));
 
   for(;;) {
-    //debounce
     self waitActivateButton(false);
 
-    // wait for button press
     self waitActivateButton(true);
 
     updateSentryPosition(sentry);
@@ -461,11 +428,7 @@ place_sentry(sentry) {
 
   if(!maps\_utility::is_coop() || !maps\_utility::is_player_down_and_out(self)) {
     self _enableWeapon();
-    //self _enableUsability();
   } else {
-    // Manually decrease the disabledWeapon count because we didn't actually call _enableWeapon()
-    // This is necessary because co-op revive needs to prevent the enable from happening, but sentries need to
-    // still keep count as if they did get re-enabled so that the next time you place a turret it works.
     self.disabledWeapon--;
   }
 
@@ -486,7 +449,6 @@ place_sentry(sentry) {
   sentry SentryPowerOn();
   thread play_sound_in_space("sentry_gun_plant", sentry.origin);
 
-  //debounce	
   self waitActivateButton(false);
   sentry thread sentry_player_use_wait();
 }
@@ -510,13 +472,6 @@ sentry_enemy_wait() {
     }
   }
 }
-
-// Sentry overheat behavoir for SP ====================================================
-// Note: 	To enable for mp, take out the isSP() check in main() function for overheat override variables.
-//				However, there might be some unseen behavoiral conflicts with battery timer, currently SP only - Julian
-
-// Note 2:Turrets now have a code ersion of doing this, we probably don't want to mix and match both, so this should be
-//			cleaned up / removed after MW2
 sentry_overheat_monitor() {
   self endon("death");
 
@@ -603,8 +558,6 @@ sentry_overheat_reactivate() {
   self.overheated = false;
 }
 
-// END of sentry overheat behavoir for SP =================================================
-
 sentry_burst_fire_start() {
   self endon("death");
   level endon("game_ended");
@@ -670,7 +623,6 @@ sentry_steam() {
   timeToSteam = 6 * 1000;
   startTime = getTime();
 
-  // temp sound fx
   if(isDefined(self))
     self playSound("sentry_steam");
 
@@ -701,7 +653,6 @@ fire_anim_start() {
   }
   self.allow_fire = false;
 
-  //ramp up the animation from 0.1 speed to 1.0 speed over time
   if(!isDefined(self.momentum))
     self.momentum = 0;
 
@@ -867,7 +818,7 @@ spawn_and_place_sentry(sentryType) {
     return;
   }
   self _disableWeapon();
-  //self _disableUsability();
+
   self notify("placingSentry");
 
   assert(isDefined(level.sentry_settings[sentryType]));
@@ -889,7 +840,7 @@ spawn_and_place_sentry(sentryType) {
   sentry_gun sentryPowerOff();
   sentry_gun setCanDamage(false);
   sentry_gun sentry_set_owner(self);
-  sentry_gun setDefaultDropPitch(-89.0); // setting this mainly prevents Turret_RestoreDefaultDropPitch() from running
+  sentry_gun setDefaultDropPitch(-89.0);
 
   self.placingSentry = sentry_gun;
   sentry_gun setSentryCarried(true);
@@ -899,19 +850,14 @@ spawn_and_place_sentry(sentryType) {
   if(!isSP())
     sentry_gun addToTurretList();
 
-  // wait to delete the sentry when cancelled
   self thread sentry_placement_cancel_monitor(sentry_gun);
 
-  // wait to delete the sentry on end of level
   self thread sentry_placement_endOfLevel_cancel_monitor(sentry_gun);
 
-  // wait until the player plants the sentry
   self thread sentry_placement_initial_wait(sentry_gun);
 
-  // keep the indicator model positioned with traces forever until the thread is ended
   self thread updateSentryPositionThread(sentry_gun);
 
-  // wait until the turret placement has been finished or canceled
   if(!isSP())
     self waittill_any("sentry_placement_finished", "sentry_placement_canceled", "death");
   else
@@ -921,11 +867,7 @@ spawn_and_place_sentry(sentryType) {
 
   if(!maps\_utility::is_coop() || !maps\_utility::is_player_down_and_out(self)) {
     self _enableWeapon();
-    //self _enableUsability();
   } else {
-    // Manually decrease the disabledWeapon count because we didn't actually call _enableWeapon()
-    // This is necessary because co-op revive needs to prevent the enable from happening, but sentries need to
-    // still keep count as if they did get re-enabled so that the next time you place a turret it works.
     self.disabledWeapon--;
   }
 
@@ -958,7 +900,7 @@ sentry_placement_endOfLevel_cancel_monitor(sentry_gun) {
   if(!isDefined(sentry_gun)) {
     return;
   }
-  //sentry_gun notify( "deleted" );
+
   if(!self.canPlaceEntity) {
     sentry_gun notify("deleted");
 
@@ -975,7 +917,6 @@ sentry_restock_wait() {
   self endon("disconnect");
   self endon("restock_reset");
 
-  // Cancel/restock on death or when toggling the killstreak
   self notifyOnPlayerCommand("cancel sentry", "+actionslot 4");
   self waittill_any("death", "cancel sentry");
   assert(isDefined(self.last_sentry));
@@ -990,20 +931,17 @@ sentry_placement_initial_wait(sentry_gun) {
 
   if(!isSP()) {
     self endon("disconnect");
-    //self endon( "death" );
+
     sentry_gun thread sentry_reset_on_owner_death();
     self thread sentry_restock_wait();
   }
 
-  //debounce from picking up the gun
   while(self useButtonPressed())
     wait 0.05;
 
   for(;;) {
-    // couldn't place entity so wait until the buttons are unpressed before trying again
     self waitActivateButton(false);
 
-    // wait until the button is pressed
     self waitActivateButton(true);
 
     updateSentryPosition(sentry_gun);
@@ -1012,7 +950,7 @@ sentry_placement_initial_wait(sentry_gun) {
     }
   }
 
-  if(!isSP()) //&& isAlive( self ) )
+  if(!isSP())
     self notify("restock_reset");
 
   if(!isSP()) {
@@ -1027,7 +965,7 @@ sentry_placement_initial_wait(sentry_gun) {
   sentry_gun thread sentry_init(self.team, sentry_gun.sentryType, self);
 
   self notify("sentry_placement_finished", sentry_gun);
-  waittillframeend; // wait so self.placingSentry can get cleared before notifying script that we can give the player another turret
+  waittillframeend;
 
   if(!isSP())
     sentry_gun thread sentry_die_on_batteryout();
@@ -1071,7 +1009,6 @@ sentry_placement_hint_show(hint_valid) {
   assert(isDefined(self));
   assert(isDefined(hint_valid));
 
-  // return if not changed
   if(isDefined(self.forced_hint) && (self.forced_hint == hint_valid)) {
     return;
   }
@@ -1086,7 +1023,6 @@ sentry_placement_hint_show(hint_valid) {
 sentry_placement_hint_hide() {
   assert(isDefined(self));
 
-  // return if hidden already
   if(!isDefined(self.forced_hint)) {
     return;
   }
@@ -1095,7 +1031,6 @@ sentry_placement_hint_hide() {
 }
 
 folded_sentry_use_wait(sentryType) {
-  // spawn another copy of the model so that it's not translucent
   self.obj_overlay = spawn("script_model", self.origin);
   self.obj_overlay.angles = self.angles;
   self.obj_overlay setModel(level.sentry_settings[sentryType].pickupModelObj);
@@ -1122,7 +1057,6 @@ folded_sentry_use_wait(sentryType) {
   self.obj_overlay delete();
   self delete();
 
-  // put the player into placement mode
   player thread spawn_and_place_sentry(sentryType);
 }
 
@@ -1148,17 +1082,11 @@ sentry_health_monitor() {
     if(isDefined(attacker) && isPlayer(attacker)) {
       if(!isSP())
         attacker[[level.func["damagefeedback"]]]("false");
-      /* no more hit indicator in SP, commenting this out and replacing with the line above for MP only
-      if( isSP() )
-      	attacker [[ level.func[ "damagefeedback" ] ]]( self );
-      else
-      	attacker [[ level.func[ "damagefeedback" ] ]]( "false" );
-      */
+
       self thread sentry_allowFire(false, 2.0);
     }
 
     if(self sentry_hit_bullet_armor(type)) {
-      //damage was to bullet armor, restore health and decrement bullet armor.
       self.health = self.currenthealth;
       self.bullet_armor -= amount;
     } else
@@ -1233,15 +1161,7 @@ SentryPowerOff() {
   self setMode(sentry_mode_name_off);
   self.battery_usage = false;
 }
-
-// =============================================================================
-// MP functions:
-// =============================================================================
-
-// MP sentry team and head icons
 sentry_team_setup(sentry_gun) {
-  // self == player
-
   assert(isDefined(sentry_gun));
   assert(isDefined(sentry_gun.sentryType));
 
@@ -1260,14 +1180,10 @@ sentry_team_show_icon() {
 
   self[[level.func["setTeamHeadIcon"]]](self.pers["team"], sentry_headicon_offset);
 }
-
-// MP clear team and head icons
 sentry_team_hide_icon() {
   assert(isDefined(level.func["setTeamHeadIcon"]));
   self[[level.func["setTeamHeadIcon"]]]("none", (0, 0, 0));
 }
-
-// resets sentry placement mode when owner carrying sentry dies
 sentry_place_mode_reset() {
   if(!isDefined(self.owner)) {
     return;
@@ -1275,7 +1191,7 @@ sentry_place_mode_reset() {
   if(isDefined(self.owner.placingSentry) && (self.owner.placingSentry == self)) {
     self.owner notify("sentry_placement_canceled");
     self.owner _enableWeapon();
-    //self.owner _enableUsability();
+
     self.owner.placingSentry = undefined;
     self setSentryCarried(false);
     self setCanDamage(true);
@@ -1287,11 +1203,10 @@ sentry_set_owner(owner) {
   assert(isDefined(owner));
   assert(isPlayer(owner));
 
-  // don't need to set it twice. will happen for non-static sentries
   if(isDefined(self.owner) && self.owner == owner) {
     return;
   }
-  owner.debug_sentry = self; // for debug
+  owner.debug_sentry = self;
   self.owner = owner;
   self SetSentryOwner(owner);
   self SetTurretMinimapVisible(true);
@@ -1304,14 +1219,11 @@ sentry_destroy_on_owner_leave(owner) {
   owner waittill_any("disconnect", "joined_team", "joined_spectators");
   self notify("death");
 }
-
-// battery monitor, batter only used while sentry is on
 sentry_die_on_batteryout() {
   level endon("game_ended");
   self endon("death");
   self endon("deleted");
 
-  // only one instance
   self notify("battery_count_started");
   self endon("battery_count_started");
 
@@ -1331,7 +1243,6 @@ removeDeadSentry() {
 }
 
 sentry_reset_on_owner_death() {
-  // self is sentry
   assert(isDefined(self));
   self endon("death");
   self endon("deleted");
@@ -1351,7 +1262,6 @@ sentry_reset_on_owner_death() {
 sentry_attacker_can_get_xp(sentry) {
   assert(isDefined(sentry.owner));
 
-  // defensive much?
   if(!isDefined(self))
     return false;
 
@@ -1379,7 +1289,6 @@ sentry_attacker_can_get_xp(sentry) {
 sentry_attacker_is_friendly(sentry) {
   assert(isDefined(sentry.owner));
 
-  // defensive much?
   if(!isDefined(self))
     return false;
 
@@ -1405,8 +1314,6 @@ sentry_emp_damage_wait() {
   for(;;) {
     self waittill("emp_damage", attacker, duration);
 
-    // TODO: friendly fire check here
-
     self thread sentry_burst_fire_stop();
 
     if(isDefined(level.laserOff_func))
@@ -1428,7 +1335,6 @@ sentry_emp_wait() {
   for(;;) {
     level waittill("emp_update");
 
-    // TODO: make this work in FFA
     if(level.teamEMPed[self.team]) {
       self thread sentry_burst_fire_stop();
 

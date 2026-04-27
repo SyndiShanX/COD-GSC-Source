@@ -9,14 +9,11 @@
 
 main() {
   if(getdvarint("sm_enable")) {
-    // Hunted Spotlight
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model");
   } else {
-    // MinSpec Spotlight
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large_dcburning");
   }
 
-  //CRASH SCENE FX
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
@@ -27,14 +24,12 @@ main() {
   level._effect["firelp_small_pm_nolight"] = loadfx("fire/firelp_small_pm_nolight");
   level._effect["firelp_small_pm_a_nolight"] = loadfx("fire/firelp_small_pm_a_nolight");
 
-  //Tunnel	
   level._effect["waterfall_drainage_short"] = loadfx("water/waterfall_drainage_short_dcemp");
   level._effect["waterfall_drainage_splash"] = loadfx("water/waterfall_drainage_splash_dcemp");
   level._effect["falling_water_trickle"] = loadfx("water/falling_water_trickle");
   level._effect["rain_noise_splashes"] = loadfx("weather/rain_noise_splashes");
   level._effect["cgo_ship_puddle_large"] = loadfx("distortion/cgo_ship_puddle_large");
 
-  //WHITEHOUSE
   level._effect["transformer_spark_runner"] = loadfx("explosions/transformer_spark_runner");
 
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
@@ -62,32 +57,18 @@ main() {
   level._effect["breach_wall_concrete_whitehouse"] = loadfx("explosions/breach_wall_concrete_whitehouse");
   level._effect["falling_brick_runner_whitehouse"] = loadfx("misc/falling_brick_runner_whitehouse");
 
-  //CHANDELIER
   level._effect["wire_spark"] = loadfx("explosions/transformer_spark_runner");
 
-  //SPOTLIGHT
   level._effect["spotlight_spark"] = loadfx("explosions/transformer_spark_runner");
 
-  //LIGHTING
   level._effect["lightning"] = loadfx("weather/lightning");
   level._effect["lightning_bolt"] = loadfx("weather/lightning_bolt");
   level._effect["lightning_bolt_lrg"] = loadfx("weather/lightning_bolt_lrg");
-  addLightningExploder(10); // these exploders make lightning flashes in the sky
+  addLightningExploder(10);
   addLightningExploder(11);
   addLightningExploder(12);
-  level.nextLightning = gettime() + 1; // 10000 + randomfloat( 4000 );// sets when the first lightning of the level will go off
+  level.nextLightning = gettime() + 1;
 
-  //footstep fx
-  /*	animscripts\utility::setFootstepEffect( "mud", 			loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "grass", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "dirt", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "concrete", 	loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "rock", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "asphalt", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "wood", 		loadfx( "impacts/footstep_water_dark" ) );
-  	animscripts\utility::setFootstepEffect( "metal", 		loadfx( "impacts/footstep_water_dark" ) );
-  */
-  // Rain
   level._effect["rain_10"] = loadfx("weather/rain_heavy_mist");
   level._effect["rain_9"] = loadfx("weather/rain_9_lite");
   level._effect["rain_8"] = loadfx("weather/rain_8_lite");
@@ -100,10 +81,7 @@ main() {
   level._effect["rain_1"] = loadfx("weather/rain_1_lite");
   level._effect["rain_0"] = loadfx("misc/blank");
 
-  thread rainInit("none"); // "none" "light" or "hard"thread playerWeather(); // make the actual rain effect generate around the player
-
-  //enable this line for correct vision in createfx BESURE TO DISABLE
-  //thread maps\_utility::vision_set_fog_changes( "dc_whitehouse_roof", 0 );
+  thread rainInit("none");
 }
 
 lightning_flash(dir) {
@@ -125,12 +103,10 @@ lightning_flash(dir) {
         wait(0.05);
 
         setSunLight(1, 1, 1.2);
-        //parking_lightning( 1.2 );
 
         wait(0.05);
 
         setSunLight(2, 2, 2.5);
-        //parking_lightning( 2.25 );
 
         break;
 
@@ -138,17 +114,14 @@ lightning_flash(dir) {
         wait(0.05);
 
         setSunLight(1, 1, 1.2);
-        //parking_lightning( 1.2 );	
 
         wait(0.05);
 
         setSunLight(2, 2, 2.5);
-        //parking_lightning( 2.25 );
 
         wait(0.05);
 
         setSunLight(3, 3, 3.7);
-        //parking_lightning( 3 );
       }
       break;
 
@@ -156,22 +129,18 @@ lightning_flash(dir) {
         wait(0.05);
 
         setSunLight(1, 1, 1.2);
-        //parking_lightning( 1.2 );	
 
         wait(0.05);
 
         setSunLight(2, 2, 2.5);
-        //parking_lightning( 2.25 );
 
         wait(0.05);
 
         setSunLight(3, 3, 3.7);
-        //parking_lightning( 3 );
 
         wait(0.05);
 
         setSunLight(2, 2, 2.5);
-        //parking_lightning( 2.25 );
       }
       break;
     }

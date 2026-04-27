@@ -12,7 +12,6 @@
 main() {
   level.so_compass_zoom = "far";
 
-  // settings for this challenge
   level.pmc_gametype = "mode_objective";
   level.pmc_enemies = 50;
 
@@ -33,7 +32,7 @@ main() {
   level thread enable_escape_failure();
 
   maps\boneyard_amb::main();
-  maps\_pmc::main(); // this doesn't return directly?
+  maps\_pmc::main();
 
   maps\_compass::setupMiniMap("compass_map_boneyard");
 

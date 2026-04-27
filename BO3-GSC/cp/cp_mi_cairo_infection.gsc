@@ -19,38 +19,20 @@
 #using scripts\shared\util_shared;
 #namespace cp_mi_cairo_infection;
 
-function setup_rex_starts() {
-  // Unsupported VM revision (1B).
-}
+function setup_rex_starts() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function on_player_spawned() {
-  // Unsupported VM revision (1B).
-}
+function on_player_spawned() {}
 
-function function_4fbaf6d6() {
-  // Unsupported VM revision (1B).
-}
+function function_4fbaf6d6() {}
 
-function reset_snow_fx_respawn() {
-  // Unsupported VM revision (1B).
-}
+function reset_snow_fx_respawn() {}
 
-function skipto_setup() {
-  // Unsupported VM revision (1B).
-}
+function skipto_setup() {}
 
-function skipto_infection_2() {
-  // Unsupported VM revision (1B).
-}
+function skipto_infection_2() {}
 
-function skipto_infection_3() {
-  // Unsupported VM revision (1B).
-}
+function skipto_infection_3() {}

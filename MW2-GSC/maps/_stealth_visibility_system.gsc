@@ -16,11 +16,6 @@ stealth_visibility_system_main() {
   array_thread(getEntArray("stealth_clipbrush", "targetname"), ::system_handle_clipbrush);
 }
 
-/************************************************************************************************************/
-
-/*												SYSTEM LOGIC												*/
-/************************************************************************************************************/
-
 system_message_loop() {
   flag = "_stealth_spotted";
 
@@ -43,26 +38,19 @@ system_message_loop() {
     }
     system_event_change("hidden");
 
-    //make sure everything gets a notify and does what it needs to do
-    //before possibly being reset within the same frame back to spotted
     waittillframeend;
   }
 }
-
-//this function basically sets the ai event distance handlers based on the global awareness of ai...
 system_event_change(name) {
   level._stealth.logic.detection_level = name;
 
   foreach(key, event in level._stealth.logic.ai_event) {
     setsaveddvar(key, event[name]);
 
-    // Set ai_busyEvent* dvars too for now
-    busyEventDvarName = "ai_busyEvent" + getsubstr(key, 8); // strlen( "ai_event" ) = 8
+    busyEventDvarName = "ai_busyEvent" + getsubstr(key, 8);
     setsaveddvar(busyEventDvarName, event[name]);
   }
 }
-
-//if system specific settings need to be made for this state...they go there
 system_state_spotted() {
   while(flag("_stealth_spotted")) {
     flag_wait("_stealth_enabled");
@@ -70,14 +58,13 @@ system_state_spotted() {
     array = level._stealth.group.groups;
 
     foreach(group_name, group in array) {
-      //is this group spotted?
       _flag = group_get_flagname_from_group("_stealth_spotted", group_name);
       if(!flag(_flag)) {
         continue;
       }
       thread system_state_try_clear_flag(group_name);
     }
-    //the most the last function will take is 1 second to complete...so lets wait a little longer
+
     flag_waitopen_or_timeout("_stealth_spotted", 1.25);
   }
 }
@@ -85,17 +72,17 @@ system_state_spotted() {
 system_state_try_clear_flag(group_name) {
   clear = system_state_check_no_enemy(group_name);
 
-  if(!clear)
+  if(!clear) {
     return;
-  //basically if everyone lost their enemy...then we're back to hidden
-  //there might be guys still looking so give them 1 second and check again
+  }
+
   wait 1;
 
   clear = system_state_check_no_enemy(group_name);
 
-  if(!clear)
+  if(!clear) {
     return;
-  //so if we got here, then we passed the second test, if that's the case, then clear the flag
+  }
   group_flag_clear("_stealth_spotted", group_name);
 }
 
@@ -112,11 +99,6 @@ system_state_check_no_enemy(group_name) {
   return true;
 }
 
-/************************************************************************************************************/
-
-/*												PLAYER LOGIC												*/
-/************************************************************************************************************/
-
 system_save_processes() {
   flag_init("_stealth_player_nade");
   level._stealth.logic.player_nades = 0;
@@ -126,9 +108,6 @@ system_save_processes() {
 
 player_grenade_check() {
   while(1) {
-    //this one hit's as soon as the button is pressed - that's why we want
-    //to set the flag here and not after the grenade has left the hand
-    //with "grenade fire"self waittill("grenade_pullback");
     flag_set("_stealth_player_nade");
 
     self waittill("grenade_fire", grenade);
@@ -141,8 +120,6 @@ player_grenade_check_dieout(grenade) {
   grenade waittill_notify_or_timeout("death", 10);
   level._stealth.logic.player_nades--;
 
-  //give stealth a chance to notify of any issues because of the grenade before we clear the flag
-  //so that the system checking for saving the game can verify those notifies first
   waittillframeend;
 
   if(!level._stealth.logic.player_nades)
@@ -155,7 +132,7 @@ system_init_shadows() {
 }
 
 stealth_shadow_volumes() {
-  self endon("death"); // it can be deleted
+  self endon("death");
 
   while(1) {
     self waittill("trigger", other);
@@ -180,11 +157,6 @@ stealth_shadow_ai_in_volume(volume) {
 
   self ent_flag_clear("_stealth_in_shadow");
 }
-
-/************************************************************************************************************/
-
-/*											CLIP BRUSH LOGIC												*/
-/************************************************************************************************************/
 
 system_handle_clipbrush() {
   self endon("death");
@@ -220,11 +192,6 @@ system_handle_clipbrush() {
   self delete();
 }
 
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
-
 system_init() {
   flag_init("_stealth_spotted");
   flag_init("_stealth_event");
@@ -233,24 +200,18 @@ system_init() {
 
   thread stealth_flag_debug_print("_stealth_spotted");
 
-  //under stealth we have a logic struct and a behavior struct...the behavior struct is created and
-  //handled in the _stealth_behavior system OR in the designers own script
   level._stealth = spawnStruct();
   level._stealth.logic = spawnStruct();
   level._stealth.group = spawnStruct();
   level._stealth.group.flags = [];
   level._stealth.group.groups = [];
 
-  //friendly and player detection initilization
   level._stealth.logic.detection_level = "hidden";
   level._stealth.logic.detect_range = [];
   level._stealth.logic.detect_range["hidden"] = [];
   level._stealth.logic.detect_range["spotted"] = [];
   system_default_detect_ranges();
 
-  //these are event handlers...they're already running in the game normally, but with these numbers we can
-  //tweak how well they AI can detect these events...for stealth gameplay we bring the numbers for
-  //footsteps, death of a teammate, etc, etc rediculously lower than normal COD gameplay
   level._stealth.logic.ai_event = [];
 
   level._stealth.logic.ai_event["ai_eventDistDeath"] = [];
@@ -273,23 +234,12 @@ system_init() {
   stealth_alert_level_duration(0.5);
 }
 
-/************************************************************************************************************/
-
-/*												UTILITIES													*/
-/************************************************************************************************************/
-
 system_default_detect_ranges() {
-  //these values represent the BASE huristic for max visible distance base meaning
-  //when the character is completely still and not turning or moving
-  //HIDDEN is self explanatory
   hidden = [];
   hidden["prone"] = 70;
   hidden["crouch"] = 600;
   hidden["stand"] = 1024;
 
-  //SPOTTED is when they are completely aware and go into NORMAL COD AI mode...however, the
-  //distance they can see you is still limited by these numbers because of the assumption that
-  //you're wearing a ghillie suit in woodsy areas
   spotted = [];
   spotted["prone"] = 512;
   spotted["crouch"] = 5000;
@@ -299,18 +249,12 @@ system_default_detect_ranges() {
 }
 
 system_set_detect_ranges(hidden, spotted) {
-  //these values represent the BASE huristic for max visible distance base meaning
-  //when the character is completely still and not turning or moving
-
-  //HIDDEN is self explanatory
   if(isDefined(hidden)) {
     level._stealth.logic.detect_range["hidden"]["prone"] = hidden["prone"];
     level._stealth.logic.detect_range["hidden"]["crouch"] = hidden["crouch"];
     level._stealth.logic.detect_range["hidden"]["stand"] = hidden["stand"];
   }
-  //SPOTTED is when they are completely aware and go into NORMAL COD AI mode...however, the
-  //distance they can see you is still limited by these numbers because of the assumption that
-  //you're wearing a ghillie suit in woodsy areas
+
   if(isDefined(spotted)) {
     level._stealth.logic.detect_range["spotted"]["prone"] = spotted["prone"];
     level._stealth.logic.detect_range["spotted"]["crouch"] = spotted["crouch"];
@@ -330,37 +274,34 @@ system_default_event_distances() {
   ai_event["ai_eventDistGunShotTeam"] = [];
   ai_event["ai_eventDistNewEnemy"] = [];
 
-  ai_event["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath"); // 1024
-  ai_event["ai_eventDistDeath"]["hidden"] = 512; // used to be 256
+  ai_event["ai_eventDistDeath"]["spotted"] = getDvar("ai_eventDistDeath");
+  ai_event["ai_eventDistDeath"]["hidden"] = 512;
 
-  ai_event["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain"); // 512
-  ai_event["ai_eventDistPain"]["hidden"] = 256; // used to be 256
+  ai_event["ai_eventDistPain"]["spotted"] = getDvar("ai_eventDistPain");
+  ai_event["ai_eventDistPain"]["hidden"] = 256;
 
   ai_event["ai_eventDistExplosion"]["spotted"] = 4000;
   ai_event["ai_eventDistExplosion"]["hidden"] = 4000;
 
-  ai_event["ai_eventDistBullet"]["spotted"] = 96; // getDvar( "ai_eventDistBullet" );// 96
+  ai_event["ai_eventDistBullet"]["spotted"] = 96;
   ai_event["ai_eventDistBullet"]["hidden"] = 64;
 
-  ai_event["ai_eventDistFootstep"]["spotted"] = 350; // getDvar( "ai_eventDistFootstep" );// 512
+  ai_event["ai_eventDistFootstep"]["spotted"] = 350;
   ai_event["ai_eventDistFootstep"]["hidden"] = 64;
 
-  ai_event["ai_eventDistFootstepWalk"]["spotted"] = 256; // getDvar( "ai_eventDistFootstepWalk" );// 256
+  ai_event["ai_eventDistFootstepWalk"]["spotted"] = 256;
   ai_event["ai_eventDistFootstepWalk"]["hidden"] = 32;
 
-  ai_event["ai_eventDistFootstepSprint"]["spotted"] = 400; // getDvar( "ai_eventDistFootstepSprint" );// 400
+  ai_event["ai_eventDistFootstepSprint"]["spotted"] = 400;
   ai_event["ai_eventDistFootstepSprint"]["hidden"] = 400;
 
   ai_event["ai_eventDistGunShot"]["spotted"] = 2048;
   ai_event["ai_eventDistGunShot"]["hidden"] = 2048;
 
-  //added these ones when I added stealth groups...
-  //want to make it harder for 2 groups to hear eachother's gunshots
-  ai_event["ai_eventDistGunShotTeam"]["spotted"] = 750; // 2048
+  ai_event["ai_eventDistGunShotTeam"]["spotted"] = 750;
   ai_event["ai_eventDistGunShotTeam"]["hidden"] = 750;
 
-  //want to make it harder for 2 groups to give eachother info
-  ai_event["ai_eventDistNewEnemy"]["spotted"] = 750; // 1024
+  ai_event["ai_eventDistNewEnemy"]["spotted"] = 750;
   ai_event["ai_eventDistNewEnemy"]["hidden"] = 750;
 
   system_set_event_distances(ai_event);

@@ -3,17 +3,6 @@
  * Script: maps\_documents.gsc
 ********************************************************/
 
-/*
-	- each trigger_use has the same target name
-	trigger_use must have origin brush or it will be usable even if activate_notify is set
-	also needs that so the use icon goes away after use
-	- each trigger_use targets the script_model of the documents
-	- add script call, example script call:
-	thread maps\_documents::main(1, "Capture the enemy documents", "documents_triggers");
-	The "objective_number" parameter is the number of this objective, the "array_targetname" parameter is the target name of the trigger_use(s)
-	The "activate_notify" parameter is the notify the bombs wait for before becoming usable
-*/
-
 main(objective_number, objective_text, array_targetname, activate_notify) {
   documents = getEntArray(array_targetname, "targetname");
   println(array_targetname, " documents.size: ", documents.size);
@@ -26,7 +15,6 @@ main(objective_number, objective_text, array_targetname, activate_notify) {
 
   if(documents.size != 0) {
     remaining_documents = documents.size;
-    //obj_text = (objective_text1 + remaining_documents + objective_text2);
 
     closest = get_closest_document(documents);
     if(isDefined(closest)) {
@@ -73,9 +61,6 @@ get_closest_document(array) {
 }
 
 document_think(activate_notify, array_targetname) {
-  //	println ("waittill trigger");
-
-  // Press && 1 to pick up the documents.
   self setHintString(&"SCRIPT_PLATFORM_HINTSTR_DOCUMENTS");
 
   if(isDefined(activate_notify)) {
@@ -89,12 +74,12 @@ document_think(activate_notify, array_targetname) {
   }
   self waittill("trigger");
   println("triggered");
-  //self.document playsound ("paper_pickup");
+
   level thread play_sound_in_space("paper_pickup", self.document.origin);
 
   self.used = 1;
   self.document hide();
   level notify(array_targetname + " gotten");
-  //	self playsound ("explo_plant_rand");
+
   self maps\_utility::trigger_off();
 }

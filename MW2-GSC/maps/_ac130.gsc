@@ -8,12 +8,7 @@
 #using_animtree("ac130");
 
 init(player) {
-  // init all context sensative dialog
   maps\_ac130_snd::main();
-
-  // co-op: player not used anymore
-  //assert( isDefined( player ) );
-  //assert( player.classname == "player" );
 
   setDvarIfUninitialized("ac130_enabled", "1");
   setDvarIfUninitialized("ac130_post_effects_enabled", "1");
@@ -26,9 +21,6 @@ init(player) {
   setDvarIfUninitialized("ac130_target_markers", "0");
   setDvarIfUninitialized("ac130_thermal_enabled", "1");
 
-  //0 - player can freely engage targets before being authorized
-  //1 - player fails the mission for engage targets before being authorized
-  //2 - player gets red X over crosshairs when trying to fire before being authorized
   setDvarIfUninitialized("ac130_pre_engagement_mode", "2");
   setDvarIfUninitialized("ac130_alternate_controls", "0");
   setDvarIfUninitialized("ac130_ragdoll_deaths", "1");
@@ -44,45 +36,41 @@ init(player) {
   precacheShader("ac130_friendly_fire_icon");
   precacheShader("black");
 
-  // \n0 A-GMANNARO
   precacheString(&"AC130_HUD_TOP_BAR");
-  // RAY\nFF 30\nLIR\n\nBORE
+
   precacheString(&"AC130_HUD_LEFT_BLOCK");
-  // N\nT\n\nS\nF\n\nQ\nZ\n\nT\nG\nT
+
   precacheString(&"AC130_HUD_RIGHT_BLOCK");
   precacheString(&"AC130_HUD_RIGHT_BLOCK_SHORT");
-  // L1514RDY
-  precacheString(&"AC130_HUD_BOTTOM_BLOCK");
-  // WHOT
-  precacheString(&"AC130_HUD_THERMAL_WHOT");
-  // BHOT
-  precacheString(&"AC130_HUD_THERMAL_BHOT");
-  // 105 mm
-  precacheString(&"AC130_HUD_WEAPON_105MM");
-  // 40 mm
-  precacheString(&"AC130_HUD_WEAPON_40MM");
-  // 25 mm
-  precacheString(&"AC130_HUD_WEAPON_25MM");
-  // && 1 AGL
-  precacheString(&"AC130_HUD_AGL");
-  // Press ^3[{weapnext}]^7 to cycle through weapons.
-  precachestring(&"AC130_HINT_CYCLE_WEAPONS");
-  // Friendlies: && 1
-  precachestring(&"AC130_DEBUG_FRIENDLY_COUNT");
-  // Too many friendlies have been KIA. Mission failed.
-  precachestring(&"AC130_FRIENDLIES_DEAD");
-  // Friendly fire will not be tolerated!\nWatch for blinking IR strobes on friendly units!
-  precachestring(&"AC130_FRIENDLY_FIRE");
-  // Provide AC-130 air support for friendly SAS ground units.
 
-  // Pull [{+speed}] to control zoom andpull [{+attack}] to fire.
+  precacheString(&"AC130_HUD_BOTTOM_BLOCK");
+
+  precacheString(&"AC130_HUD_THERMAL_WHOT");
+
+  precacheString(&"AC130_HUD_THERMAL_BHOT");
+
+  precacheString(&"AC130_HUD_WEAPON_105MM");
+
+  precacheString(&"AC130_HUD_WEAPON_40MM");
+
+  precacheString(&"AC130_HUD_WEAPON_25MM");
+
+  precacheString(&"AC130_HUD_AGL");
+
+  precachestring(&"AC130_HINT_CYCLE_WEAPONS");
+
+  precachestring(&"AC130_DEBUG_FRIENDLY_COUNT");
+
+  precachestring(&"AC130_FRIENDLIES_DEAD");
+
+  precachestring(&"AC130_FRIENDLY_FIRE");
+
   precachestring(&"SCRIPT_PLATFORM_AC130_HINT_ZOOM_AND_FIRE");
-  // Press [{+usereload}] to toggle thermal vision\nbetween white hot and black hot.
+
   precachestring(&"SCRIPT_PLATFORM_AC130_HINT_TOGGLE_THERMAL");
 
-  // Provide AC-130 air support for friendly ground units.
   precachestring(&"CO_AC130_OBJECTIVE_COOP_AC130_GUNNER");
-  // Regroup with any survivors from Bravo Team at the crash site.
+
   precachestring(&"CO_AC130_OBJECTIVE_COOP_GROUND_PLAYER");
 
   precacheShader("popmenu_bg");
@@ -104,12 +92,8 @@ init(player) {
 
   level._effect["cloud"] = loadfx("misc/ac130_cloud");
 
-  //if( is_coop() )
   level._effect["beacon"] = loadfx("misc/ir_beacon_coop");
-  //else
-  //level._effect[ "beacon" ] = loadfx( "misc/ir_beacon" );
 
-  // ac130 muzzleflash effects for player on ground to see
   level._effect["coop_muzzleflash_105mm"] = loadfx("muzzleflashes/ac130_105mm");
   level._effect["coop_muzzleflash_40mm"] = loadfx("muzzleflashes/ac130_40mm");
 
@@ -190,7 +174,6 @@ init(player) {
 
   level.enemiesKilledByPlayer = 0;
 
-  //flag_init( "ir_beakons_on" );
   flag_init("allow_context_sensative_dialog");
   flag_init("clear_to_engage");
   flag_init("player_changed_weapons");
@@ -199,12 +182,9 @@ init(player) {
   level.ac130 setModel("c130_zoomrig");
   level.ac130.angles = (0, level.player.angles[1], 0);
 
-  // preaching done
-  // first wait command called below
-  // no more coop ac130 - just assume level.player is the gunner
   if(!isDefined(player)) {
     flag_wait("character_selected");
-    level.ac130player = maps\_loadout::coop_gamesetup_ac130(); // coop_gamesetup();
+    level.ac130player = maps\_loadout::coop_gamesetup_ac130();
   } else {
     level.ac130player = player;
   }
@@ -244,7 +224,7 @@ init(player) {
   }
 
   setsaveddvar("scr_dof_enable", "0");
-  // reset ac130 position after character switch
+
   level.ac130.origin = level.ac130player getOrigin();
   level.ac130 hide();
 
@@ -318,7 +298,7 @@ overlay() {
     level.HUDItem["hud_text_top"].horzAlign = "left";
     level.HUDItem["hud_text_top"].vertAlign = "top";
     level.HUDItem["hud_text_top"].fontScale = level.ac130_fontscale;
-    // \n0 A-GMANNARO
+
     level.HUDItem["hud_text_top"] settext(&"AC130_HUD_TOP_BAR");
     level.HUDItem["hud_text_top"].alpha = 1.0;
 
@@ -330,7 +310,7 @@ overlay() {
     level.HUDItem["hud_text_left"].horzAlign = "left";
     level.HUDItem["hud_text_left"].vertAlign = "top";
     level.HUDItem["hud_text_left"].fontScale = level.ac130_fontscale;
-    // RAY\nFF 30\nLIR\n\nBORE
+
     level.HUDItem["hud_text_left"] settext(&"AC130_HUD_LEFT_BLOCK");
     level.HUDItem["hud_text_left"].alpha = 1.0;
 
@@ -343,7 +323,6 @@ overlay() {
     level.HUDItem["hud_text_right"].vertAlign = "top";
     level.HUDItem["hud_text_right"].fontScale = level.ac130_fontscale;
 
-    // N\nT\n\nS\nF\n\nQ\nZ\n\nT\nG\nT
     if(IsSplitscreen()) {
       level.HUDItem["hud_text_right"] settext(&"AC130_HUD_RIGHT_BLOCK_SHORT");
     } else {
@@ -360,7 +339,7 @@ overlay() {
     level.HUDItem["hud_text_bottom"].horzAlign = "center";
     level.HUDItem["hud_text_bottom"].vertAlign = "bottom";
     level.HUDItem["hud_text_bottom"].fontScale = level.ac130_fontscale;
-    // L1514RDY
+
     level.HUDItem["hud_text_bottom"] settext(&"AC130_HUD_BOTTOM_BLOCK");
     level.HUDItem["hud_text_bottom"].alpha = 1.0;
   }
@@ -374,7 +353,7 @@ overlay() {
     level.HUDItem["thermal_mode"].horzAlign = "right";
     level.HUDItem["thermal_mode"].vertAlign = "top";
     level.HUDItem["thermal_mode"].fontScale = level.ac130_fontscale;
-    // WHOT
+
     level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_WHOT");
     level.HUDItem["thermal_mode"].alpha = 1.0;
   }
@@ -388,7 +367,7 @@ overlay() {
     level.HUDItem["weapon_text"][0].horzAlign = "left";
     level.HUDItem["weapon_text"][0].vertAlign = "bottom";
     level.HUDItem["weapon_text"][0].fontScale = level.ac130_fontscale;
-    // 105 mm
+
     level.HUDItem["weapon_text"][0] settext(&"AC130_HUD_WEAPON_105MM");
     level.HUDItem["weapon_text"][0].alpha = 1.0;
 
@@ -400,7 +379,7 @@ overlay() {
     level.HUDItem["weapon_text"][1].horzAlign = "left";
     level.HUDItem["weapon_text"][1].vertAlign = "bottom";
     level.HUDItem["weapon_text"][1].fontScale = level.ac130_fontscale;
-    // 40 mm
+
     level.HUDItem["weapon_text"][1] settext(&"AC130_HUD_WEAPON_40MM");
     level.HUDItem["weapon_text"][1].alpha = 1.0;
 
@@ -412,7 +391,7 @@ overlay() {
     level.HUDItem["weapon_text"][2].horzAlign = "left";
     level.HUDItem["weapon_text"][2].vertAlign = "bottom";
     level.HUDItem["weapon_text"][2].fontScale = level.ac130_fontscale;
-    // 25 mm
+
     level.HUDItem["weapon_text"][2] settext(&"AC130_HUD_WEAPON_25MM");
     level.HUDItem["weapon_text"][2].alpha = 1.0;
   }
@@ -444,7 +423,6 @@ overlay() {
   else
     setsaveddvar("g_friendlynamedist", 2000);
 
-  // sets dvar for ac130 player number for menu to hide the correct HUD components
   setDvar("ac130_player_num", 1);
   if(level.ac130player == level.player)
     setDvar("ac130_player_num", 0);
@@ -545,7 +523,7 @@ overlay_coords() {
   level.HUDItem["coordinate_agl"].horzAlign = "right";
   level.HUDItem["coordinate_agl"].vertAlign = "top";
   level.HUDItem["coordinate_agl"].fontScale = level.ac130_fontscale;
-  // && 1 AGL
+
   level.HUDItem["coordinate_agl"].label = (&"AC130_HUD_AGL");
   level.HUDItem["coordinate_agl"].alpha = 1.0;
 
@@ -652,13 +630,10 @@ movePlaneToPoint(coordinate, rotationWait) {
   if(rotationWait) {
     thread rotatePlane("off");
 
-    // find how many more degrees the plane should turn before facing the right direction
     angDiff = getFlyingAC130AnglesToPoint(coordinate) - getRealAC130Angles();
     if(angDiff < 0)
       angDiff = 360 - abs(angDiff);
-    //iprintln( "angle differance: " + angDiff );
 
-    // if the plane isn't close enough to the desired angles then rotate it until the plane is facing it's flying direction
     planeCanFly = false;
     angleTollerance = 20;
     if((angDiff > 0) && (angDiff <= angleTollerance))
@@ -666,8 +641,6 @@ movePlaneToPoint(coordinate, rotationWait) {
     if((angDiff > 360 - angleTollerance) && (angDiff < 360))
       planeCanFly = true;
     if(!planeCanFly) {
-      //iprintln( "waiting for plane to rotate " + angDiff + " degrees" );
-      //assert( angDiff - 20 > 0 );
       rotateTime = (level.ac130_Speed["rotate"] / 360) * angDiff;
       decelTime = 0;
       if(rotateTime > 3.0)
@@ -728,7 +701,7 @@ changeWeapons() {
   level.ac130_weapon[0].overlay = "ac130_overlay_105mm";
   level.ac130_weapon[0].fov = "55";
   level.ac130_weapon[0].name = "105mm";
-  // 105 mm
+
   level.ac130_weapon[0].string = (&"AC130_HUD_WEAPON_105MM");
   level.ac130_weapon[0].hudelem_y = -20;
 
@@ -736,7 +709,7 @@ changeWeapons() {
   level.ac130_weapon[1].overlay = "ac130_overlay_40mm";
   level.ac130_weapon[1].fov = "25";
   level.ac130_weapon[1].name = "40mm";
-  // 40 mm
+
   level.ac130_weapon[1].string = (&"AC130_HUD_WEAPON_40MM");
   level.ac130_weapon[1].hudelem_y = -40;
 
@@ -744,7 +717,7 @@ changeWeapons() {
   level.ac130_weapon[2].overlay = "ac130_overlay_25mm";
   level.ac130_weapon[2].fov = "10";
   level.ac130_weapon[2].name = "25mm";
-  // 25 mm
+
   level.ac130_weapon[2].string = (&"AC130_HUD_WEAPON_25MM");
   level.ac130_weapon[2].hudelem_y = -60;
 
@@ -773,7 +746,6 @@ changeWeapons() {
   for(;;) {
     level.ac130player waittill("switch weapons");
 
-    // no weapon changes allowed during cinematic
     if(isDefined(level.doing_cinematic)) {
       wait 0.05;
       continue;
@@ -792,8 +764,6 @@ changeWeapons() {
     thread blink_hud_elem(currentWeapon);
 
     if(getDvar("ac130_alternate_controls", "0") == "0") {
-      //setsaveddvar( "cg_fov", level.ac130_weapon[currentWeapon].fov );
-
       targetFOV = int(level.ac130_weapon[currentWeapon].fov);
       fovFraction = targetFOV / level.initialFOV;
       fovFraction = cap_value(fovFraction, 0.2, 2.0);
@@ -897,7 +867,6 @@ weaponReload(weapon) {
 }
 
 weaponFiredCoOpTracer(weaponName) {
-  // Only play muzzle effects for 105mm and 40mm
   muzzleFX = undefined;
   if(issubstr(tolower(weaponName), "105"))
     muzzleFX = level._effect["coop_muzzleflash_105mm"];
@@ -907,12 +876,11 @@ weaponFiredCoOpTracer(weaponName) {
   if(!isDefined(muzzleFX)) {
     return;
   }
-  // Trace to where the player is looking
+
   direction = level.ac130player getPlayerAngles();
   direction_vec = anglesToForward(direction);
   eye = level.ac130player getEye();
 
-  // Play muzzleflash effect
   playFX(muzzleFX, eye, direction_vec);
 }
 
@@ -930,7 +898,6 @@ thermalVision() {
   for(;;) {
     level.ac130player waittill("switch thermal");
 
-    // no thermal changes allowed during cinematic
     if(isDefined(level.doing_cinematic)) {
       wait 0.05;
       continue;
@@ -939,13 +906,13 @@ thermalVision() {
     if(inverted == "0") {
       level.ac130player visionSetThermalForPlayer("missilecam", 0.62);
       if(isDefined(level.HUDItem["thermal_mode"]))
-        // BHOT
+
         level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_BHOT");
       inverted = "1";
     } else {
       level.ac130player visionSetThermalForPlayer("ac130", 0.51);
       if(isDefined(level.HUDItem["thermal_mode"]))
-        // WHOT
+
         level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_WHOT");
       inverted = "0";
     }
@@ -963,7 +930,6 @@ setAmmo() {
 
   weaponList = level.ac130player GetWeaponsListPrimaries();
   for(i = 0; i < weaponList.size; i++) {
-    // only add the ammo if the gun is reloaded
     if(level.weaponReadyToFire[weaponList[i]])
       level.ac130player SetWeaponAmmoClip(weaponList[i], ammoCount);
   }
@@ -1004,7 +970,6 @@ nofireCrossHair() {
 
   for(;;) {
     while(level.ac130player attackButtonPressed()) {
-      // no red x allowed during cinematic
       if(isDefined(level.doing_cinematic)) {
         wait 0.05;
         break;
@@ -1035,14 +1000,13 @@ fire_screenShake() {
       }
       thread gun_fired_and_ready_105mm();
 
-      //earthquake(<scale>,<duration>,<source>,<radius>)
       earthquake(0.2, 1, level.ac130player.origin, 1000);
     } else
     if(level.currentWeapon == "40mm") {
       if((getDvar("ac130_pre_engagement_mode", "2") == "2") && (!flag("clear_to_engage"))) {
         continue;
       }
-      //earthquake(<scale>,<duration>,<source>,<radius>)
+
       earthquake(0.1, 0.5, level.ac130player.origin, 1000);
     }
 
@@ -1082,7 +1046,6 @@ gun_fired_and_ready_105mm() {
 }
 
 getFriendlysCenter() {
-  //returns vector which is the center mass of all friendlies
   averageVec = undefined;
   friendlies = getaiarray("allies");
   if(!isDefined(friendlies))
@@ -1127,7 +1090,7 @@ shotFiredFriendlyProximity(weaponName, position) {
   trigger_origin = position - (0, 0, 50);
   trigger_radius = level.weaponFriendlyCloseDistance[weaponName];
   trigger_height = 300;
-  trigger_spawnflags = 2; // AI_ALLIES AND THE PLAYER // keept the ai if it ever get used with friendlies again.
+  trigger_spawnflags = 2;
   trigger_lifetime = 1.0;
 
   prof_begin("ac130_friendly_proximity_check");
@@ -1146,7 +1109,6 @@ shotFiredFriendlyProximity_trigger(trigger, trigger_lifetime) {
   level thread shotFiredFriendlyProximity_trigger_timeout(trigger, trigger_lifetime);
   trigger waittill("trigger");
 
-  // don't play warning dialog if one played within the last 5 seconds.
   prof_begin("ac130_friendly_proximity_check");
   if((isDefined(level.lastFriendlyProximityWarningPlayed)) && (gettime() - level.lastFriendlyProximityWarningPlayed < 7000)) {
     prof_end("ac130_friendly_proximity_check");
@@ -1166,7 +1128,6 @@ shotFiredFriendlyProximity_trigger_timeout(trigger, trigger_lifetime) {
 }
 
 shotFiredBadPlace(center, weapon) {
-  // no new badplace if more then 20
   if(level.badplaceCount >= level.badplaceMax) {
     return;
   }
@@ -1229,64 +1190,6 @@ add_beacon_effect() {
   }
 }
 
-/*
-breakable()
-{
-	self setCanDamage( true );
-	for(;;)
-	{
-		self waittill ( "damage", damage, attacker );
-		if( ( isPlayer( attacker ) ) &( damage >= 1000 ) )
-			break;
-	}
-	self delete();
-}
-*/
-/*
-tree_fall()
-{
-	self setCanDamage( true );
-	for(;;)
-	{
-		self waittill( "damage", damage, attacker, direction_vec, point );
-		if( !isPlayer( attacker ) )
-			continue;
-		if( randomint( 2 ) == 0 )
-			continue;
-		break;
-	}
-	
-	tree = self;
-	
-	treeorg = spawn( "script_origin", tree.origin );
-	treeorg.origin = tree.origin;
-	
-	org = point;
-	pos1 = (org[0],org[1],0);
-	org = tree.origin;
-	pos2 = (org[0],org[1],0);
-	treeorg.angles = vectortoangles( pos1 - pos2 );
-	
- 	treeang = tree.angles;
-	ang = treeorg.angles;
-	org = point;
-	pos1 = (org[0],org[1],0);
-	org = tree.origin;
-	pos2 = (org[0],org[1],0);
-	treeorg.angles = vectortoangles( pos1 - pos2 );
-	tree linkto( treeorg );
-	
-	treeorg rotatepitch( -90, 1.1, .05, .2 );
-	treeorg waittill( "rotatedone" );
-	treeorg rotatepitch( 5, .21, .05, .15 );
-	treeorg waittill( "rotatedone" );
-	treeorg rotatepitch( -5, .26, .15, .1 );
-	treeorg waittill( "rotatedone" );
-	tree unlink();
-	treeorg delete();
-}
-*/
-
 spawn_callback_thread(guy) {
   if(isDefined(level.LevelSpecificSpawnerCallbackThread))
     thread[[level.LevelSpecificSpawnerCallbackThread]](guy);
@@ -1345,7 +1248,6 @@ enemy_killed_thread(guy) {
       guy.skipDeathAnim = undefined;
   }
 
-  // context kill dialog
   thread context_Sensative_Dialog_Kill(guy, attacker);
 }
 
@@ -1471,9 +1373,6 @@ context_Sensative_Dialog_Kill_Thread() {
     soundAlias1 = "kill";
     soundAlias2 = undefined;
 
-    //		if( level.enemiesKilledInTimeWindow >= 5 )
-    //			maps\_utility::giveachievement_wrapper( "STRAIGHT_FLUSH" );
-
     if(level.enemiesKilledInTimeWindow >= 3)
       soundAlias2 = "large_group";
     else if(level.enemiesKilledInTimeWindow == 2)
@@ -1564,7 +1463,6 @@ context_Sensative_Dialog_Filler() {
     if((isDefined(level.radio_in_use)) && (level.radio_in_use == true))
       level waittill("radio_not_in_use");
 
-    // if 3 seconds has passed and nothing has been transmitted then play a sound
     currentTime = getTime();
     if((currentTime - level.lastRadioTransmission) >= 3000) {
       level.lastRadioTransmission = currentTime;
@@ -1593,10 +1491,7 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 
   randGroup = randomint(level.scr_sound[name1][name2].size);
 
-  // if randGroup has already played
   if(level.scr_sound[name1][name2][randGroup].played == true) {
-    //loop through all groups and use the next one that hasn't played yet
-
     for(i = 0; i < level.scr_sound[name1][name2].size; i++) {
       randGroup++;
       if(randGroup >= level.scr_sound[name1][name2].size)
@@ -1607,7 +1502,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
       break;
     }
 
-    // all groups have been played, reset all groups to false and pick a new random one
     if(!isDefined(validGroupNum)) {
       for(i = 0; i < level.scr_sound[name1][name2].size; i++)
         level.scr_sound[name1][name2][i].played = false;
@@ -1628,8 +1522,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 }
 
 context_Sensative_Dialog_Timedout(name1, name2, groupNum) {
-  // dont play this sound if it has a timeout specified and the timeout has not expired
-
   if(!isDefined(level.context_sensative_dialog_timeouts))
     return false;
 
@@ -1677,7 +1569,7 @@ playSoundOverRadio(soundAlias, force_transmit_on_turn, timeout) {
   if(soundPlayed) {
     return;
   }
-  // Dont make the sound wait to be played if force transmit wasn't set to true
+
   if(!force_transmit_on_turn) {
     return;
   }
@@ -1743,7 +1635,7 @@ debug_friendly_count() {
     level.friendlyCountHudElem.alignY = "bottom";
     level.friendlyCountHudElem.horzAlign = "left";
     level.friendlyCountHudElem.vertAlign = "bottom";
-    // Friendlies: && 1
+
     level.friendlyCountHudElem.label = &"AC130_DEBUG_FRIENDLY_COUNT";
     level.friendlyCountHudElem.alpha = 1;
   }

@@ -10,15 +10,14 @@
 #include maps\_hud_util;
 #include maps\_specialops;
 
-CONST_specop_difficulty = 50; // % of enemies seeking player's location, increased difficulty for spec op mission
-CONST_laser_hint_timeout = 25; // seconds
+CONST_specop_difficulty = 50;
+CONST_laser_hint_timeout = 25;
 
 main() {
   level.so_compass_zoom = "far";
 
   set_custom_gameskill_func(maps\_gameskill::solo_player_in_coop_gameskill_settings);
 
-  // special ops character selection using dvar "start"level.specops_character_selector = "";
   if(IsSplitScreen() || (getDvar("coop") == "1")) {
     level.specops_character_selector = getDvar("coop_start");
   }
@@ -36,7 +35,6 @@ main() {
   battlechatter_off("allies");
   battlechatter_off("axis");
 
-  // lets the ac130 specific friendly fire warnings play uninterrupted .
   friendlyfire_warnings_off();
 
   precacheLevelStuff();
@@ -55,37 +53,37 @@ main() {
   precacheShader("waypoint_checkpoint_neutral_c");
   precacheShader("waypoint_checkpoint_neutral_d");
   precacheShader("waypoint_checkpoint_neutral_e");
-  // Checkpoint A:
+
   precachestring(&"CO_HUNTED_TIME_TILL_CHECKPOINT_A");
-  // Checkpoint B:
+
   precachestring(&"CO_HUNTED_TIME_TILL_CHECKPOINT_B");
-  // Checkpoint C:
+
   precachestring(&"CO_HUNTED_TIME_TILL_CHECKPOINT_C");
-  // Checkpoint D:
+
   precachestring(&"CO_HUNTED_TIME_TILL_CHECKPOINT_D");
-  // Reach targe in:
+
   precachestring(&"SO_AC130_HUNTED_SPECOP_TIMER");
-  // Cross the bridge in:
+
   precachestring(&"CO_HUNTED_TIME_TILL_EXPLOSION");
-  // Mission failed. Enemy destroyed the bridge.
+
   precachestring(&"CO_HUNTED_TIMER_EXPIRED");
-  // Mission failed. You ran out of time.
+
   precachestring(&"SO_AC130_CO_HUNTED_TIMER_EXPIRED_SPECOP");
-  // Cross the bridge to safety before it is destroyed.
+
   precachestring(&"CO_HUNTED_OBJ_CROSS_BRIDGE");
-  // Reach the checkpoint at the barn.
+
   precachestring(&"CO_HUNTED_OBJ_REACH_BARN");
-  // Checkpoint A time expired.
+
   precachestring(&"CO_HUNTED_MISSED_CHECKPOINT_A");
-  // Checkpoint B time expired.
+
   precachestring(&"CO_HUNTED_MISSED_CHECKPOINT_B");
-  // Checkpoint C time expired.
+
   precachestring(&"CO_HUNTED_MISSED_CHECKPOINT_C");
-  // Checkpoint D time expired.
+
   precachestring(&"CO_HUNTED_MISSED_CHECKPOINT_D");
-  // Press ^3[{weapnext}]^7 to cycle through weapons.
+
   precachestring(&"AC130_HINT_CYCLE_WEAPONS");
-  // Press ^3[{+actionslot 4}]^7 to use toggle laser targeting device.
+
   precachestring(&"CO_HUNTED_HINT_LASER");
 
   maps\_truck::main("vehicle_pickup_roobars");
@@ -93,8 +91,6 @@ main() {
   level.weaponClipModels[0] = "weapon_ak47_clip";
   level.weaponClipModels[1] = "weapon_m16_clip";
 
-  // player 1 is ac130 gunner in coop games
-  //level.ac130gunner = level.player;
   maps\co_hunted_fx::main();
   maps\co_hunted_precache::main();
   maps\_load::main();
@@ -102,10 +98,8 @@ main() {
 
   array_thread(getEntArray("noprone", "targetname"), ::noprone);
 
-  // Press ^3[{weapnext}]^7 to cycle through weapons.
   add_hint_string("ac130_changed_weapons", &"AC130_HINT_CYCLE_WEAPONS", ::ShouldBreakAC130HintPrint);
 
-  // Press ^3[{+actionslot 4}]^7 to use toggle laser targeting device.
   add_hint_string("laser_hint", &"CO_HUNTED_HINT_LASER", ::ShouldBreakLaserHintPrint);
 }
 
@@ -130,7 +124,7 @@ gameplay_logic(gametype) {
 
   level.ac130_flood_respawn = true;
   maps\_nightvision::main(level.players);
-  maps\_ac130::init(); // pops up the menu and sets who level.ac130gunner is
+  maps\_ac130::init();
   thread maps\co_hunted_amb::main();
 
   if(level.player == level.ac130gunner)
@@ -144,7 +138,6 @@ gameplay_logic(gametype) {
   level thread laser_targeting_device(level.ground_player);
   level.ground_player thread display_hint("laser_hint");
 
-  // this removes the green arrow pointing to the ac130.
   level.ground_player.noFriendlyHudIcon = true;
 
   level.ground_player set_vision_set_player("hunted", 0);
@@ -164,7 +157,6 @@ gameplay_logic(gametype) {
 
   music_loop("so_ac130_co_hunted_music", 167);
 
-  // Start
   saveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   thread open_all_doors();
@@ -180,7 +172,6 @@ gameplay_logic(gametype) {
   thread move_enemies_to_closest_goal_radius(gametype);
   thread initial_ac130_move();
 }
-//	****** Starts****** //
 start_ac130() {
   thread gameplay_logic("default");
 }
@@ -190,7 +181,6 @@ start_specop() {
 
   flag_wait("leaving_crash_site");
 
-  // These enable the dialogue for the AC130 to begin
   flag_set("clear_to_engage");
   flag_set("allow_context_sensative_dialog");
 }
@@ -219,7 +209,7 @@ move_enemies_to_closest_goal_radius(gametype) {
 
   while(1) {
     closest_goal = getclosest(level.ground_player.origin, goals);
-    //only goal enemies to one of the players and assume they stay together
+
     if(level.current_goal != closest_goal) {
       level.current_goal = closest_goal;
 
@@ -245,8 +235,6 @@ create_hunter_enemy() {
 
 move_hunters_to_new_goal(closest_goal) {
   waittillframeend;
-  //waittillframeend because you may be in the part of the frame that is before
-  //the script has received the "death" notify but after the AI has died.
 
   foreach(enemy in level.hunter_enemies)
   enemy setgoalpos(closest_goal.origin);
@@ -254,7 +242,7 @@ move_hunters_to_new_goal(closest_goal) {
 
 move_deadlier_hunters_to_new_goal(closest_goal) {
   waittillframeend;
-  //Sent half the enemies to player, and the other half to set goal, foreach(enemy in level.hunter_enemies) {
+
   if(RandomInt(100) < CONST_specop_difficulty)
     enemy setgoalpos(closest_goal.origin);
   else
@@ -267,8 +255,7 @@ ShouldBreakAC130HintPrint() {
 }
 
 hint_timeout() {
-  //self is ground player
-  self.hint_timeout = CONST_laser_hint_timeout; // seconds
+  self.hint_timeout = CONST_laser_hint_timeout;
   while(self.hint_timeout > -1) {
     self.hint_timeout--;
     wait 1;
@@ -288,8 +275,6 @@ ac130_change_weapon_hint() {
   wait 12;
   if(!flag("player_changed_weapons"))
     level.ac130gunner thread display_hint("ac130_changed_weapons");
-  // Press ^3[{weapnext}]^7 to cycle through weapons.
-  //hintPrint_coop(&"AC130_HINT_CYCLE_WEAPONS" );
 }
 
 hintPrint_coop(string) {
@@ -359,14 +344,12 @@ enemy_monitor() {
   level.enemy_force[5].type = "one_use_vehicle";
   level.enemy_force[5].drove = false;
 
-  //respawns
   level.enemy_force[6] = spawnStruct();
   level.enemy_force[6].name = "farmers_house_spawners";
   level.enemy_force[6].type = "spawners";
 
   level.enemy_force = array_randomize(level.enemy_force);
 
-  // make sure farmers_house guys always spawn in first.
   farmers_house_struct = spawnStruct();
   farmers_house_struct.name = "farmers_house_spawners";
   farmers_house_struct.type = "spawners";
@@ -399,7 +382,6 @@ enemy_monitor() {
 
   level.enemy_force = array_randomize(level.enemy_force);
 
-  // make sure cellar guys always spawn in first.
   cellar_struct = spawnStruct();
   cellar_struct.name = "cellar_house_spawners";
   cellar_struct.type = "spawners";
@@ -523,7 +505,7 @@ spawn_enemy_group() {
   for(i = 0; i < enemy_spawners.size; i++)
     guy = enemy_spawners[i] spawn_ai();
 
-  wait 1; // make sure the spawning is done before checking to see how many are spawned
+  wait 1;
 }
 
 enemy_monitor_loop() {
@@ -549,25 +531,23 @@ timer_start(gametype) {
   iSeconds = undefined;
 
   switch (level.gameSkill) {
-    case 0: // easy
-    case 1: // regular
-      level.challenge_time_limit = 210; //3:30 min
+    case 0:
+    case 1:
+      level.challenge_time_limit = 210;
       break;
-    case 2: // hardened
-      level.challenge_time_limit = 300; //5:00 min
+    case 2:
+      level.challenge_time_limit = 300;
       break;
-    case 3: // veteran
-      level.challenge_time_limit = 420; //7:00 min
+    case 3:
+      level.challenge_time_limit = 420;
       break;
   }
   assert(isDefined(level.challenge_time_limit));
 
-  // Causes the player monitor to short circuit and not allow them to toggle them on and off.
   foreach(player in level.players)
   player.so_infohud_toggle_state = "none";
   enable_challenge_timer("leaving_crash_site", "specop_challenge_completed");
 
-  // Offset the time so it doesn't interfere with the ac130 hud
   level.ac130player.hud_so_timer_msg.x -= 50;
   level.ac130player.hud_so_timer_time.x -= 50;
 
@@ -628,11 +608,11 @@ objective(gametype) {
 
 threeD_objective_hint(shader, destroyer_msg) {
   self.icon = NewHudElem();
-  //self.icon SetShader( "waypoint_targetneutral", 1, 1 );
+
   self.icon SetShader(shader, 1, 1);
   self.icon.alpha = .5;
   self.icon.color = (1, 1, 1);
-  //comm_center.icon SetTargetEnt( comm_center );
+
   origin = self getOrigin();
   self.icon.x = origin[0];
   self.icon.y = origin[1];

@@ -13,8 +13,6 @@
 main() {
   set_custom_gameskill_func(maps\_gameskill::solo_player_in_coop_gameskill_settings);
 
-  // special ops character selection using dvar "start"level.specops_character_selector = "";
-
   so_player_selection();
 
   so_chopper_invasion_init_flags();
@@ -38,7 +36,6 @@ main() {
 
   thread build_chopper();
 
-  // juggernauts shouldn't try to playerseek to the player in the chopper
   CreateThreatBiasGroup("juggernauts");
   CreateThreatBiasGroup("chopperplayer");
   SetIgnoreMeGroup("chopperplayer", "juggernauts");
@@ -60,8 +57,6 @@ main() {
 
   so_chopper_invasion_spawner_functions();
 
-  //thread maps\_debug::debug_character_count();
-
   thread so_level_cleanup();
 }
 
@@ -77,8 +72,6 @@ precache_strings() {
   quotes[quotes.size] = &"SO_CHOPPER_INVASION_DEADQUOTE_HINT2";
   so_include_deadquote_array(quotes);
 }
-
-// Removes FX
 so_fx_handler() {
   array = [];
   array[array.size] = "bird_seagull_flock_large";
@@ -115,33 +108,20 @@ custom_flag_trigger() {
 
   return isDefined(array[self.classname]);
 }
-
-// Clean up the level
 so_level_cleanup() {
-  // Remove the Predator Control Unit
   ent = GetEnt("predator_drone_control", "targetname");
   ent Delete();
 
-  // Wait a bit so initFX() can do it's thing
   wait(0.1);
 
-  // Remove the exploders on nate's bar
   thread do_exploder_custom(getent("north_side_low", "targetname"), "just_swap");
   thread do_exploder_custom(getent("north_side_high", "targetname"), "just_swap");
   thread do_exploder_custom(getent("west_side", "targetname"), "just_swap");
 
-  // Remove ladder clips that are there to help the player in SP.
   ladder = getent("nates_kitchen_ladder_clip", "targetname");
   ladder Delete();
   ladder = getent("bt_ktichen_ladder_clip", "targetname");
   ladder Delete();
-
-  // Tree on street
-  //	exploder_stripped( 4, "no_sound" );
-  //	maps\invasion_anim::script_models();
-  //	thread maps\invasion_anim::animate_burning_tree();
-  //	thread maps\invasion_fx::tree_fire_light();
-  //	level thread smoke_mover();
 }
 
 init_fx() {
@@ -152,28 +132,6 @@ so_player_selection() {
   if(IsSplitScreen() || getDvar("coop") == "1") {
     level.specops_character_selector = getDvar("coop_start");
   }
-
-  //
-  //	// Map Restart support. Restores the start dvar on map_restart since it gets reused.
-  //	if( getDvar( "start_backup" ) != "" )
-  //	{
-  //		setDvar( "start", getDvar( "start_backup" ) );
-  //	}
-  //
-  //	start_dvar = getDvar( "start" );
-  //
-  //	if( start_dvar == "test_chopper" )
-  //	{
-  //		level.specops_character_selector = start_dvar;
-  //		setDvar( "start_backup", level.specops_character_selector );
-  //	}
-  //
-  //	if( getDvar( "debug_follow" ) == "" )
-  //	{
-  //		setDvar( "debug_follow", "0" );
-  //	}
-  //
-
 }
 
 delete_turrets() {
@@ -209,10 +167,8 @@ so_chopper_invasion_precache() {
 }
 
 start_so_chopper_invasion() {
-  // Don't unlink the players when mission is over. _specialops_code::specialops_mission_over_setup()
   flag_set("special_op_no_unlink");
 
-  // Removes the ability to bleed out
   flag_clear("coop_revive");
 
   thread enable_escape_warning();
@@ -221,7 +177,6 @@ start_so_chopper_invasion() {
   chopper_init();
   truck_init();
 
-  // get level ready for play
   music_loop("so_chopper_invasion_music", 140);
 
   array_call(level.players, ::FreezeControls, true);
@@ -229,7 +184,6 @@ start_so_chopper_invasion() {
   wait(2);
   array_call(level.players, ::FreezeControls, false);
 
-  // Time limit
   switch (level.gameskill) {
     case 2:
       level.challenge_time_limit = 420;
@@ -266,7 +220,6 @@ so_chopper_invasion_moments() {
 so_init_players() {
   AssertEx(isDefined(level.specops_character_selector), "Failed to select character");
 
-  // test_chopper is intended to be used when in SP and testing only the CHOPPER
   if(level.specops_character_selector == "test_chopper") {
     level.chopperplayer = level.player;
     level.groundplayer = spawn("script_model", (0, 0, 0));
@@ -285,7 +238,6 @@ so_init_players() {
 
   level.chopper thread chopper_playermount(level.chopperplayer);
 
-  // Don't show shells if in splitscreen
   if(!IsSplitscreen()) {
     level.chopperplayer thread chopper_minigun_shells();
   }
@@ -296,14 +248,14 @@ so_init_players() {
 
   foreach(player in level.players) {
     if(level.specops_character_selector != "test_chopper") {
-      player.coop.bleedout_time_default = 1.1; // guy on ground is an insta - kill
+      player.coop.bleedout_time_default = 1.1;
     }
   }
 }
 
 so_chopper_invasion_objectives() {
   ref = getstruct("so_end_of_level", "targetname");
-  // Link up with your partner at the extraction point.
+
   Objective_Add(0, "current", &"SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
 }
 
@@ -326,14 +278,11 @@ chopper_init() {
 
   start = getstruct("chopper_start", "targetname");
 
-  // NEW CHOPPER
   if(1) {
-    // remove the old
     chopper_spawner = GetEnt("chopper", "targetname");
     chopper_spawner.vehicletype = "blackhawk_minigun_so";
     chopper_spawner Delete();
 
-    // Spawn in the new	
     chopper = SpawnVehicle("vehicle_blackhawk_minigun_hero", "chopper", "blackhawk_minigun_so", start.origin, start.angles);
     chopper.vehicletype = "blackhawk_minigun_so";
 
@@ -343,7 +292,6 @@ chopper_init() {
     chopper Vehicle_Teleport(start.origin, start.angles);
   }
 
-  //	chopper Vehicle_Teleport( start.origin, start.angles );
   chopper.start = start;
 
   chopper maps\_vehicle::godon();
@@ -378,7 +326,6 @@ chopper_driveby_trigger() {
   level.chopper thread chopper_fake_hover(struct.origin, 50);
 
   flag_set("so_driveby_done");
-  //	level.chopper chopper_set_range_points( 14, 1 );
 }
 
 chopper_start_driveby() {
@@ -392,7 +339,6 @@ chopper_driveby_hover() {
 
   self chopper_default_pitch_roll();
   self SetHoverParams(10, 2, 1);
-  //	wait( 10 );
 
   level thread chopper_driveby_rpg_guys();
   level waittill("so_rpgs_shot");
@@ -450,10 +396,6 @@ parkinglot_chopper() {
     level.chopper ent_flag_clear("manual_control");
   }
 
-  //	pos = chopper_get_pathpoint( level.chopper.chopper_pathpoint[ "index" ] );
-  //	angles = VectorToAngles( pos - level.chopper.origin );
-  //	level.chopper SetGoalYaw( angles[ 1 ] );
-
   level.chopper thread chopper_gun_face_entity(level.groundplayer, false, 2);
 
   wait(3);
@@ -465,7 +407,6 @@ parkinglot_trucks() {
   flag_wait("so_parkinglot_trucks");
   level thread parkinglot_chopper();
 
-  // Remove all of the AI that are really far away
   ais = GetAiArray("axis");
   killed_guys = [];
   foreach(ai in ais) {
@@ -477,7 +418,6 @@ parkinglot_trucks() {
 
   wait(2);
 
-  // Make sure they are removed
   foreach(ai in killed_guys) {
     if(isDefined(ai)) {
       ai Delete();
@@ -493,7 +433,7 @@ parkinglot_trucks() {
   spawn_truck("so_parklinglot_truck2");
 
   wait(0.5);
-  // Guys behind Taco Togo
+
   thread array_spawn(getEntArray("so_post_gas_station_guys", "targetname"));
 
   wait(3.5);
@@ -519,7 +459,6 @@ end() {
   level.chopper SetMaxPitchRoll(20, 20);
   level.chopper SetHoverParams(20, 2, 3);
 
-  // Figure out which point is closer along so_chopper_end_path, then follow it
   point = getstruct("so_chopper_end_path", "targetname");
   dist = DistanceSquared(level.chopper.origin, point.origin);
   closest = point;
@@ -539,11 +478,9 @@ end() {
     point = new_point;
   }
 
-  // Now get the next on on the chain and make that the goal
   if(isDefined(closest.script_noteworthy) && closest.script_noteworthy == "so_end_lookat") {
     point = getstruct(closest.targetname, "targetname");
-  } else // The last point on the chain got selected
-  {
+  } else {
     point = getstruct(closest.target, "targetname");
   }
 
@@ -556,11 +493,9 @@ end() {
 }
 
 end_spawners() {
-  //	trigger_wait_targetname( "so_roof" );
   flag_wait("so_roof");
   level thread maps\_spawner::flood_spawner_scripted(getEntArray("so_end_spawners", "targetname"));
 
-  // Wait for the guys_in_buildings to spawn in, then set their goals.
   wait(0.1);
 
   structs = getStructArray("so_end_ai_points", "script_noteworthy");
@@ -586,7 +521,6 @@ end_reminder() {
 }
 
 end_go_to_diner() {
-  // Tell everyone to go into the nate's diner
   ais = GetAiArray("axis");
   foreach(ai in ais) {
     if(!isDefined(ai)) {
@@ -636,17 +570,12 @@ end_lookat() {
   level.chopper chopper_default_pitch_roll();
   Objective_String(0, &"SO_CHOPPER_INVASION_OBJ_FINAL");
   Objective_OnEntity(0, level.chopper);
-
-  // This is done when put on the path
-  //	self ClearLookAtEnt();
-  //	self thread chopper_gun_face_entity( getstruct( "chopper_end_lookat", "targetname" ) );
 }
 
 end_pickup() {
   level thread end_reminder();
   level thread end_ai_monitor();
 
-  //	trigger_wait_targetname( "so_roof2" );
   struct = getstruct("so_end_pickup", "script_noteworthy");
   level.chopper thread chopper_fake_hover(struct.origin, 10, true);
 
@@ -672,55 +601,6 @@ end_pickup() {
   temp_tag = spawn("script_model", (0, 0, 0));
   temp_tag setModel("tag_origin");
 
-  //	// Fake Jump
-  //	tag_org = self GetTagOrigin( "tag_player" );
-  //	tag_angles = self GetTagAngles( "tag_origin" );
-  //	forward = anglesToForward( tag_angles );
-  //	tag_org = tag_org + vector_multiply( forward, 40 );
-  //
-  //	angles = VectorToAngles( tag_org - level.groundplayer.origin );
-  //	forward = anglesToForward( angles );
-  //	dist = Distance( tag_org, level.groundplayer.origin );
-  //	step_dist = dist / 5;
-  //	z = [];
-  //	z[ 0 ] = 2656;
-  //	z[ 1 ] = 2658;
-  //	z[ 2 ] = 2660;
-  //	z[ 3 ] = 2658;
-  //
-  //	speed = 230;
-  //	prev_vec = level.groundplayer.origin;
-  //
-  //	temp_tag.origin = level.groundplayer.origin;
-  //	level.groundplayer PlayerLinkTo( temp_tag, "tag_origin", 1 );
-  //	time = Distance( level.groundplayer.origin, tag_org ) / speed;
-  //	temp_tag RotateTo( self GetTagAngles( "tag_player" ) + ( 0, -90, 0 ), time );
-  //
-  //	for( i = 0; i < 4; i++ )
-  //	{
-  //		vec = level.groundplayer.origin + vector_multiply( forward, step_dist );
-  //		vec = ( vec[ 0 ], vec[ 1 ], z[ i ] );
-  //		time = Distance( prev_vec, vec ) / speed;
-  //		prev_vec = vec;
-  //
-  //		temp_tag MoveTo( vec, time );
-  //		wait( time - 0.05 );
-  //	}
-  //
-  //	tag_org = self GetTagOrigin( "tag_player" );
-  //	tag_angles = self GetTagAngles( "tag_origin" );
-  //	forward = anglesToForward( tag_angles );
-  //
-  //	tag_org = tag_org + vector_multiply( forward, 40 );
-  //	time = Distance( tag_org, level.groundplayer.origin ) / speed;
-  //
-  //	temp_tag MoveTo( tag_org, time );
-  //	wait( time );
-  //	temp_tag LinkTo( self );
-
-  // End Jump
-
-  //	temp_tag lerp_player_view_to_tag( level.groundplayer, "tag_origin", time, 1, 45, 45, 30, 30 );
   tag_org = self GetTagOrigin("tag_player");
   tag_angles = self GetTagAngles("tag_origin");
   forward = anglesToForward(tag_angles);

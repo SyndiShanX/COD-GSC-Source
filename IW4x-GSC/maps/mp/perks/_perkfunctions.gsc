@@ -31,9 +31,7 @@ perkUseDeathTracker() {
   self._usePerkEnabled = undefined;
 }
 
-setRearView() {
-  //self thread perkUseTracker( "specialty_rearview", ::toggleRearView );
-}
+setRearView() {}
 
 unsetRearView() {
   self notify("end_perkUseTracker");
@@ -86,8 +84,7 @@ endGameDeath(duration) {
   self endon("stopEndGame");
 
   wait(duration + 1);
-  //self visionSetNakedForPlayer("end_game2", 1 );
-  //wait(1);
+
   self _suicide();
 }
 
@@ -102,11 +99,10 @@ setCombatHigh() {
     self.moveSpeedScaler = 1.25;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
   }
-  //self visionSetNakedForPlayer( "end_game", 1 );
 
   if(level.splitscreen) {
     yOffset = 56;
-    iconSize = 21; // 32/1.5
+    iconSize = 21;
   } else {
     yOffset = 112;
     iconSize = 32;
@@ -227,9 +223,6 @@ trackSiegeEnable() {
   for(;;) {
     self waittill("gambit_on");
 
-    //self setStance( "crouch" );
-    //self thread stanceStateListener();
-    //self thread jumpStateListener();
     self.moveSpeedScaler = 0;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
     class = weaponClass(self getCurrentWeapon());
@@ -288,8 +281,7 @@ jumpStateListener() {
 
 unsetSiege() {
   self.moveSpeedScaler = 1;
-  //if siege is not cut add check to see if
-  //using lightweight and siege for movespeed scaler
+
   self resetSpreadOverride();
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
   self player_recoilScaleOff();
@@ -482,8 +474,6 @@ oneManArmyWeaponChangeTracker() {
     if(newWeapon != "onemanarmy_mp") {
       continue;
     }
-    //if( self isUsingRemote() )
-    //	continue;
 
     self thread selectOneManArmyClass();
   }
@@ -586,8 +576,6 @@ giveOneManArmyClass(className) {
 
   self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], className, false);
 
-  // handle the fact that detachAll in giveLoadout removed the CTF flag from our back
-  // it would probably be better to handle this in _detachAll itself, but this is a safety fix
   if(isDefined(self.carryFlag))
     self attach(self.carryFlag, "J_spine4", true);
 
@@ -646,9 +634,7 @@ toggleBlastShield(isEnabled) {
   }
 }
 
-setFreefall() {
-  //eventually set a listener to do a roll when falling damage is taken
-}
+setFreefall() {}
 
 unsetFreefall() {}
 
@@ -706,7 +692,6 @@ monitorTIUse() {
     if(weapName != "flare_mp") {
       continue;
     }
-    //lightstick delete();
 
     if(isDefined(self.setSpawnPoint))
       self deleteTI(self.setSpawnPoint);
@@ -762,10 +747,8 @@ GlowStickSetupAndWaitForDeath(owner) {
 GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   self endon("death");
 
-  // PlayFXOnTag fails if run on the same frame the parent entity was created
   wait(0.05);
 
-  //playFXOnTag( showEffect, self, "TAG_FX" );
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
   TriggerFx(fxEnt);
@@ -802,7 +785,7 @@ GlowStickDamageListener(owner) {
   self endon("death");
 
   self setCanDamage(true);
-  // use large health to work around teamkilling issue
+
   self.health = 5000;
 
   for(;;) {
@@ -816,7 +799,7 @@ GlowStickDamageListener(owner) {
     if(self.health < (5000 - 20)) {
       if(isDefined(owner) && attacker != owner) {
         attacker notify("destroyed_insertion", owner);
-        attacker notify("destroyed_explosive"); // count towards SitRep Pro challenge
+        attacker notify("destroyed_explosive");
         owner thread leaderDialogOnPlayer("ti_destroyed");
       }
 
@@ -888,9 +871,7 @@ GlowStickEnemyUseListener(owner) {
     self.enemyTrigger waittill("trigger", player);
 
     player notify("destroyed_insertion", owner);
-    player notify("destroyed_explosive"); // count towards SitRep Pro challenge
-
-    //playFX( level.spawnGlowSplat, self.origin);		
+    player notify("destroyed_explosive");
 
     if(isDefined(owner) && player != owner)
       owner thread leaderDialogOnPlayer("ti_destroyed");

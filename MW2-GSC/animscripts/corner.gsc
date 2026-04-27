@@ -70,8 +70,7 @@ set_corner_anim_array() {
   }
 }
 
-shouldChangeStanceForFun() // and for variety
-{
+shouldChangeStanceForFun() {
   if(!isDefined(self.enemy))
     return false;
 
@@ -118,7 +117,7 @@ mainLoopStart() {
     } else {
       stanceChangeAnim = animarray("stance_change");
       GoToCover(stanceChangeAnim, .3, getAnimLength(stanceChangeAnim));
-      set_anim_array(desiredStance); // ( sets anim_pose to stance )
+      set_anim_array(desiredStance);
     }
     assert(self.a.pose == desiredStance);
     self.haveGoneToCover = true;
@@ -133,8 +132,6 @@ printYaws() {
     wait(0.05);
   }
 }
-
-// used within canSeeEnemyFromExposed() (in utility.gsc)
 canSeePointFromExposedAtCorner(point, node) {
   yaw = node GetYawToOrigin(point);
   if((yaw > 60) || (yaw < -60))
@@ -164,7 +161,7 @@ shootPosOutsideLegalYawRange() {
       return yaw > 0 - self.ABangleCutoff;
     } else {
       assert(self.a.cornerMode == "lean");
-      return yaw < -50 || yaw > 8; // TODO
+      return yaw < -50 || yaw > 8;
     }
   } else {
     assert(self.cornerDirection == "right");
@@ -174,12 +171,10 @@ shootPosOutsideLegalYawRange() {
       return yaw < self.ABangleCutoff;
     } else {
       assert(self.a.cornerMode == "lean");
-      return yaw > 50 || yaw < -8; // TODO
+      return yaw > 50 || yaw < -8;
     }
   }
 }
-
-// getCornerMode will return "none" if no corner modes are acceptable.
 getCornerMode(node, point) {
   noStepOut = false;
   yaw = 0;
@@ -189,7 +184,6 @@ getCornerMode(node, point) {
 
   modes = [];
 
-  // don't want to get cover peekouts for crouch while standing
   if(isDefined(node) && self.a.pose == "crouch" && (yaw > self.leftAimLimit && self.rightAimLimit > yaw))
     modes = node GetValidCoverPeekOuts();
 
@@ -223,9 +217,6 @@ getCornerMode(node, point) {
 
   return getRandomCoverMode(modes);
 }
-
-// getBestStepOutPos never returns "none".
-// it returns the best stepoutpos that we can get to from our current one.
 getBestStepOutPos() {
   yaw = 0;
   if(canSuppressEnemy())
@@ -271,8 +262,6 @@ changeStepOutPos() {
   if(positionToSwitchTo == self.a.cornerMode)
     return false;
 
-  // can't switch between lean/over and other stepoutposes
-  // so if this assert fails then getBestStepOutPos gave us a bad return value
   assert(self.a.cornerMode != "lean" && positionToSwitchTo != "lean");
   assert(self.a.cornerMode != "over" && positionToSwitchTo != "over");
 
@@ -291,7 +280,6 @@ changeStepOutPos() {
 
   self endAimIdleThread();
 
-  // turn off aiming while we move.
   self StopAiming(.3);
 
   prev_anim_pose = self.a.pose;
@@ -319,7 +307,7 @@ changeStepOutPos() {
 
   assert(self.a.pose == "stand" || self.a.pose == "crouch");
   if(self.a.pose != prev_anim_pose)
-    set_anim_array(self.a.pose); // don't call this if we don't have to, because we don't want to reset %exposed_aiming
+    set_anim_array(self.a.pose);
 
   self thread ChangeAiming(undefined, true, .3);
 
@@ -373,16 +361,15 @@ StopAiming(transtime) {
   assert(self.cornerAiming);
   self.cornerAiming = false;
 
-  // turn off shooting
   self clearAnim(%add_fire, transtime);
-  // and turn off aiming
+
   animscripts\shared::setAnimAimWeight(0, transtime);
 }
 
 SetAimingParams(spot, fullbody, transTime) {
   assert(isDefined(fullbody));
 
-  self.spot = spot; // undefined is ok
+  self.spot = spot;
 
   self setanimlimited(%exposed_modern, 1, transTime);
   self setanimlimited(%exposed_aiming, 1, transTime);
@@ -423,19 +410,14 @@ SetAimingParams(spot, fullbody, transTime) {
     self setAnimKnobLimited(animArray("add_turn_aim_right"), 1, transTime);
   }
 }
-
-// These should be adjusted in animation data
 stepOutAndHideSpeed() {
   if(self.a.cornerMode == "over")
     return 1;
 
-  //if( self.a.cornerMode == "B" )
-  //	return 1;
-
   return randomFasterAnimSpeed();
 }
 
-stepOut() /* bool */ {
+stepOut() {
   self.a.cornerMode = "alert";
 
   if(self.goalRadius < 64)
@@ -453,7 +435,7 @@ stepOut() /* bool */ {
   thisNodePose = self.a.pose;
   set_anim_array(thisNodePose);
 
-  self setDefaultAimLimits(); // do exposed animations once stepped out
+  self setDefaultAimLimits();
 
   newCornerMode = "none";
   if(hasEnemySightPos())
@@ -503,7 +485,6 @@ stepOut() /* bool */ {
 
   hasStartAim = animHasNotetrack(switchanim, "start_aim");
   if(hasStartAim) {
-    // Store our final step out angle so that we may use it when doing track loop aiming
     self.stepOutYaw = self.angles[1] + getAngleDelta(switchanim, 0, 1);
 
     self waittillmatch("stepout", "start_aim");
@@ -525,7 +506,6 @@ stepOut() /* bool */ {
   if(hasStartAim) {
     self waittillmatch("stepout", "end");
 
-    // Clear the forced yaw after the animation is fully played
     self.stepOutYaw = undefined;
   }
 
@@ -544,20 +524,19 @@ stepOut() /* bool */ {
 stepOutAndShootEnemy() {
   self.keepClaimedNodeIfValid = true;
 
-  // do rambo behavior sometimes on rambo AI guys. Normal AI never do rambo
   if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
     if(rambo())
       return true;
   }
 
-  if(!StepOut()) // may not be room to step out
+  if(!StepOut())
     return false;
 
   shootAsTold();
 
   if(isDefined(self.shootPos)) {
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
-    // too close for RPG or out of ammo
+
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand")
         animscripts\shared::throwDownWeapon(%RPG_stand_throw);
@@ -591,8 +570,7 @@ rambo() {
   yaw = self.coverNode GetYawToOrigin(getEnemySightPos());
   if(self.cornerDirection == "left")
     yaw = 0 - yaw;
-  if(yaw > 30) // this cutoff works better visually than 22.5
-  {
+  if(yaw > 30) {
     angle = 45;
     if(self.cornerDirection == "left")
       ramboAimOffset = 45;
@@ -604,18 +582,10 @@ rambo() {
   if(!animArrayAnyExist(animType))
     return false;
 
-  // commented out so we see rambo a lot, might want to adjust this later
-  //if( !haventRamboedWithinTime( 2 ) )
-  //	return false;
-
-  // move check
   ramboAnim = animArrayPickRandom(animType);
   midpoint = getPredictedPathMidpoint(48);
   if(!self mayMoveToPoint(midpoint))
     return false;
-  // no point doing this check, since the animation will end at the cover node.
-  //if( !self mayMoveFromPointToPoint( midpoint, getAnimEndPos( ramboAnim ) ) )
-  //	return false;
 
   self.coverPosEstablishedTime = gettime();
 
@@ -655,7 +625,7 @@ shootAsTold() {
 
       if(!isDefined(self.shootPos)) {
         assert(!isDefined(self.shootEnt));
-        // give shoot_behavior a chance to iterate
+
         self waittill("do_slow_things");
         waittillframeend;
         if(isDefined(self.shootPos))
@@ -669,17 +639,14 @@ shootAsTold() {
 
       if(shootPosOutsideLegalYawRange()) {
         if(!changeStepOutPos()) {
-          // if we failed because there's no better step out pos, give up
           if(getBestStepOutPos() == self.a.cornerMode) {
             break;
           }
 
-          // couldn't change position, shoot for a short bit and we'll try again
           shootUntilShootBehaviorChangeForTime(.2);
           continue;
         }
 
-        // if they're moving back and forth too fast for us to respond intelligently to them, // give up on firing at them for the moment
         if(shootPosOutsideLegalYawRange()) {
           break;
         }
@@ -696,9 +663,6 @@ shootAsTold() {
       break;
     }
 
-    // couldn't return to cover. keep shooting and try again
-
-    // (change step out pos if necessary and possible)
     if(shootPosOutsideLegalYawRange() && changeStepOutPos()) {
       continue;
     }
@@ -732,7 +696,7 @@ shootUntilShootBehaviorChange_corner(runAngleRangeThread) {
   self endon("return_to_cover");
 
   if(runAngleRangeThread)
-    self thread angleRangeThread(); // gives stopShooting notify when shootPosOutsideLegalYawRange returns true
+    self thread angleRangeThread();
   self thread aimIdleThread();
 
   shootUntilShootBehaviorChange();
@@ -751,7 +715,7 @@ angleRangeThread() {
     wait(0.1);
   }
 
-  self notify("stopShooting"); // For changing shooting pose to compensate for player moving
+  self notify("stopShooting");
 }
 
 showstate() {
@@ -783,9 +747,8 @@ returnToCover() {
 
   endFireAndAnimIdleThread();
 
-  // Go back into hiding.
   suppressed = issuppressedWrapper();
-  self notify("take_cover_at_corner"); // Stop doing the adjust - stance transition thread
+  self notify("take_cover_at_corner");
 
   self.changingCoverPos = true;
   self notify("done_changing_cover_pos");
@@ -875,7 +838,7 @@ tryThrowingGrenade(throwAt, safe) {
   }
   assert(isDefined(theanim));
 
-  self animMode("zonly_physics"); // Unlatch the feet
+  self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
   threwGrenade = TryGrenade(throwAt, theanim);
@@ -892,10 +855,9 @@ lookForEnemy(lookTime) {
   if(!isDefined(self.a.array["alert_to_look"]))
     return false;
 
-  self animMode("zonly_physics"); // Unlatch the feet
+  self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
-  // look out from alert
   if(!peekOut())
     return false;
 
@@ -910,7 +872,7 @@ lookForEnemy(lookTime) {
   self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, .1, 1.0);
   animscripts\shared::DoNoteTracks("looking_end");
 
-  self animMode("zonly_physics"); // Unlatch the feet
+  self animMode("zonly_physics");
 
   self.keepClaimedNodeIfValid = false;
 
@@ -931,8 +893,6 @@ isPeekOutPosClear() {
 
   lookAtPos = eyePos + anglesToForward(self.coverNode.angles) * PEEKOUT_OFFSET;
 
-  // thread debugLine( eyePos, lookAtPos, ( 1, 0, 0 ), 1.5 );
-
   return sightTracePassed(eyePos, lookAtPos, true, self);
 }
 
@@ -950,17 +910,8 @@ peekOut() {
 
   peekanim = animArray("alert_to_look");
 
-  // assuming no delta, so no maymovetopoint check
-  //if( !self mayMoveToPoint( getAnimEndPos( peekanim ) ) )
-  //	return false;
-
-  // not safe to stop peeking in the middle because it will screw up our deltas
-  //self thread _peekStop();
-  //self endon ("stopPeeking");
-
   self setflaggedanimknobAll("looking_start", peekanim, %body, 1, .2, 1);
   animscripts\shared::DoNoteTracks("looking_start");
-  //self notify ("stopPeekCheckThread");
 
   return true;
 }
@@ -970,18 +921,7 @@ canStopPeeking() {
 }
 
 fastlook() {
-  // corner fast look animations aren't set up right.
   return false;
-
-  /*
-  if( !isDefined( self.a.array["look"] ) )
-  	return false;
-  	
-  self setFlaggedAnimKnobAllRestart( "look", animArray( "look" ), %body, 1, .1 );
-  self animscripts\shared::DoNoteTracks( "look" );
-  	
-  return true;
-  */
 }
 
 cornerReload() {
@@ -1080,10 +1020,9 @@ transitionToStance(stance) {
     return;
   }
 
-  //	self ExitProneWrapper(0.5);
   self setFlaggedAnimKnobAllRestart("changeStance", animarray("stance_change"), %body);
 
-  set_anim_array(stance); // ( sets anim_pose to stance )
+  set_anim_array(stance);
 
   self animscripts\shared::DoNoteTracks("changeStance");
   assert(self.a.pose == stance);
@@ -1141,7 +1080,6 @@ set_standing_animarray_aiming() {
   self.a.array["straight_level"] = % exposed_aim_5;
 
   if(self.a.cornerMode == "lean") {
-    // use the lean animations set up in cover_left and cover_right.gsc
     leanfire = self.a.array["lean_fire"];
     leanSemiFire = self.a.array["lean_single"];
     self.a.array["fire"] = leanfire;
@@ -1169,7 +1107,7 @@ set_standing_animarray_aiming() {
     else
       self.a.array["single"] = array(%exposed_shoot_semi1);
 
-    self.a.array["burst2"] = % exposed_shoot_burst3; // ( will be limited to 2 shots )
+    self.a.array["burst2"] = % exposed_shoot_burst3;
     self.a.array["burst3"] = % exposed_shoot_burst3;
     self.a.array["burst4"] = % exposed_shoot_burst4;
     self.a.array["burst5"] = % exposed_shoot_burst5;
@@ -1195,7 +1133,7 @@ set_crouching_animarray_aiming() {
     anim_array["semi4"] = % exposed_shoot_semi4;
     anim_array["semi5"] = % exposed_shoot_semi5;
 
-    anim_array["burst2"] = % exposed_shoot_burst3; // ( will be limited to 2 shots )
+    anim_array["burst2"] = % exposed_shoot_burst3;
     anim_array["burst3"] = % exposed_shoot_burst3;
     anim_array["burst4"] = % exposed_shoot_burst4;
     anim_array["burst5"] = % exposed_shoot_burst5;
@@ -1211,7 +1149,6 @@ set_crouching_animarray_aiming() {
   }
 
   if(self.a.cornerMode == "lean") {
-    // use the lean animations set up in cover_left and cover_right.gsc
     leanfire = self.a.array["lean_fire"];
     leanSemiFire = self.a.array["lean_single"];
     self.a.array["fire"] = leanfire;
@@ -1239,7 +1176,7 @@ set_crouching_animarray_aiming() {
     else
       self.a.array["single"] = array(%exposed_crouch_shoot_semi1);
 
-    self.a.array["burst2"] = % exposed_crouch_shoot_burst3; // ( will be limited to 2 shots )
+    self.a.array["burst2"] = % exposed_crouch_shoot_burst3;
     self.a.array["burst3"] = % exposed_crouch_shoot_burst3;
     self.a.array["burst4"] = % exposed_crouch_shoot_burst4;
     self.a.array["burst5"] = % exposed_crouch_shoot_burst5;

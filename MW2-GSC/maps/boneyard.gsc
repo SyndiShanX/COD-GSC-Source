@@ -55,7 +55,6 @@ main() {
   thread maps\boneyard_amb::main();
   maps\_compass::setupMiniMap("compass_map_boneyard");
 
-  // setup stuff
   flags_setup();
   threatbiasgroups_setup();
   threewayfight_setup();
@@ -65,22 +64,19 @@ main() {
   vehicle_event_node_setup();
   vehicle_aianimthread_setup();
   launch_object_setup();
-  //	killer_bird_setup();
+
   vehicle_sweetener_setup();
   ride_rumble_setup();
 
-  // consines used for fov checks.
   level.cosine["20"] = cos(20);
   level.cosine["60"] = cos(60);
 
   thread objectives();
 
-  // used for switching colors on ai
   level.base_colors = [];
   level.base_colors["axis"] = "r";
   level.base_colors["team3"] = "p";
 
-  // gameplay threads
   thread road();
   thread flyby();
   thread higround();
@@ -88,16 +84,11 @@ main() {
 
   thread music_thread();
 
-  // it sounds like they are friendlies because some of the battlechatter is over the radio.
-  //	battlechatter_off( "team3" );
-
-  // enemies need to be closer to tell each other about an enemy
   setsaveddvar("ai_eventDistNewEnemy", 512);
 
-  // makes you less likely to just walk up to enemies.
-  setsaveddvar("ai_eventDistFootstepSprint", 640); //400
-  setsaveddvar("ai_eventDistFootstep", 480); //256
-  setsaveddvar("ai_eventDistFootstepWalk", 320); //128
+  setsaveddvar("ai_eventDistFootstepSprint", 640);
+  setsaveddvar("ai_eventDistFootstep", 480);
+  setsaveddvar("ai_eventDistFootstepWalk", 320);
 }
 
 flags_setup() {
@@ -120,63 +111,6 @@ flags_setup() {
   flag_init("ride_minigun_gunner_dead");
   flag_init("player_loses_control_of_uaz");
   flag_init("uaz_nag");
-
-  /*************************
-  ***	FLAGS FROM RADIANT ***
-  **************************
-
-  	blow_tanker_first
-  	blow_tanker_second
-  	blow_wing
-  	boneyard_mission_completed
-  	btr80_at_end
-  	btr80_destroy
-  	c130_hatch_open
-  	c130_takeoff
-  	c130_takeoff_missed
-  	flyby_c130
-  	flyby_minigun_move
-  	flyby_rockets
-  	friendly_stay_ahead
-  	frontal_suburban_move
-  	higround_1
-  	higround_2
-  	higround_ascend
-  	hummer_destroy
-  	hunt_btr80
-  	intro_btr80_attack
-  	intro_btr80_attack_kill
-  	intro_btr80_destroy
-  	intro_btr80_pre_attack
-  	intro_littlebird_strafe
-  	intro_rockets_2
-  	keep_moving
-  	littlebird_react
-  	littlebird_stage1_wait
-  	music_boneyard_planechase
-  	no_align
-  	obj_ride
-  	ride_shadows
-  	ride_driver_death
-  	road
-  	road_rocket_guys
-  	road_rocket_guys
-  	runway_save
-  	runway_suburban_rightside
-  	scene_a_wave2
-  	stop_road_rockets
-  	switch_color
-  	uaz_drive
-  	uaz_driver_dialogue
-  	uaz_driver_mount
-  	uaz_mount_end
-  	uaz_player_control
-  	wait_for_player
-  	where_is_nikolai
-  	wing_fall
-
-  *************************/
-
 }
 
 threatbiasgroups_setup() {
@@ -185,14 +119,13 @@ threatbiasgroups_setup() {
   CreateThreatBiasGroup("enemy_dog");
   CreateThreatBiasGroup("lowthreat");
 
-  SetThreatBias("allies", "aware_of_player", 0); //aware_of_player are using the base threat level.
-  SetThreatBias("allies", "axis", -1000); // axis find the player to be less of a threat. // used 1000 before
-  SetThreatBias("allies", "team3", -1000); // team3 find the player to be less of a threat. // used 1000 before
-  SetThreatBias("allies", "enemy_dog", -3000); // dogs find the player to be less of a threat.
-  SetIgnoreMeGroup("allies", "ignore_player"); // ignore_player ignores the player
-  SetThreatBias("lowthreat", "axis", -2000); // axis find the target less of a threat.
-  SetThreatBias("lowthreat", "team3", -2000); // team3 find the target less of a threat.
-
+  SetThreatBias("allies", "aware_of_player", 0);
+  SetThreatBias("allies", "axis", -1000);
+  SetThreatBias("allies", "team3", -1000);
+  SetThreatBias("allies", "enemy_dog", -3000);
+  SetIgnoreMeGroup("allies", "ignore_player");
+  SetThreatBias("lowthreat", "axis", -2000);
+  SetThreatBias("lowthreat", "team3", -2000);
 }
 
 start_points_setup() {
@@ -212,11 +145,10 @@ objectives() {
 
   objective_number = 0;
 
-  // each case is a start point;
   switch (level.start_point) {
     default:
     case "intro":
-      // this will have to change when I go backwards and do the sniper clearing.
+
       flag_wait("obj_rallypoint");
       objective_number = 0;
       end_position = getent("rallypoint", "targetname");
@@ -233,7 +165,7 @@ objectives() {
       obj_position = getent("rallypoint", "targetname");
       objective_add(objective_number, "current", &"BONEYARD_OBJ_RIDE", obj_position.origin);
       Objective_SetPointerTextOverride(objective_number, &"BONEYARD_OBJ_RIDE_ICON");
-      //		flag_wait( "uaz_drive" );
+
       Objective_OnEntity(objective_number, level.uaz, (-48, -32, 16));
 
     case "ride_c130":
@@ -322,7 +254,7 @@ intro() {
   flag_wait("pullup_weapon");
   wait 0.2;
 
-  level.player.surprisedByMeDistSq = squared(5000); //what is this for? - Roger
+  level.player.surprisedByMeDistSq = squared(5000);
 
   starttime = gettime();
   flag_wait_or_timeout("player_left_fuselage", 15);
@@ -344,7 +276,6 @@ intro() {
 }
 
 intro_introscreen() {
-  //	flag_wait_either( "intro_btr80_dead", "objective_lerp" );
   flag_wait("obj_rallypoint");
   wait 1;
   maps\_introscreen::boneyard_intro();
@@ -362,7 +293,6 @@ intro_dialogue() {
 
   flag_set("music_boneyard_intro");
 
-  // Soap! Shepherd's trying to wipe out *us* and Makarov at the same time! Head for rally point Bravo to the north! Trust no one!
   radio_dialogue("byard_pri_wipeoutus");
 
   flag_set("obj_rallypoint");
@@ -370,21 +300,19 @@ intro_dialogue() {
   flag_wait_either("intro_btr80_dead", "objective_lerp");
   wait 8;
 
-  // I'm gonna call in the backup plan! Head for the rally point while I coordinate with Nikolai!
   radio_dialogue("byard_pri_backupplan");
   wait 1;
 
-  // Nikolai! This is Price! Now would be a good time!!! The LZ is hot, I repeat the LZ is hot!!!
   radio_dialogue("byard_pri_lzishot");
-  // Ok, Captain Price, I am on the way! Try to get the situation under control BEFORE I get there, ok?
+
   radio_dialogue("byard_nkl_ontheway");
-  // Right, whatever you say Nikolai! Just get here sharpish!
+
   radio_dialogue("byard_pri_sharpish");
 
   flag_wait("let_them_fight");
-  // Soap, let Makarov and Shepherd's men kill each other off as much as you can!
+
   radio_dialogue("byard_pri_radiotraffic");
-  // We can use their radios to listen in on their radio traffic! I'm going to try to contact Makarov!
+
   radio_dialogue("byard_pri_contactmakarov");
 
   wait 2;
@@ -395,41 +323,41 @@ intro_dialogue() {
 
   flag_waitopen("makarov_dialogue");
   flag_wait("keep_moving");
-  // Soap! Don't get pinned down out there! Keep heading north for the runway area!
+
   radio_dialogue("byard_pri_headnorth");
 
   flag_wait("road");
-  // Nikolai, where the hell are you?
+
   radio_dialogue("byard_pri_whereareyou");
-  // Sand storms around Kandahar, Captain Price. I have to fly around them. I'm not getting paid enough to crash my plane.
+
   radio_dialogue("byard_nkl_sandstorms");
 }
 
 makarov_dialogue() {
   flag_set("makarov_dialogue");
   wait 2;
-  // Makarov, this is Price! Shepherd's a war hero now! He's got your operations playbook and he's got a blank check!
+
   radio_dialogue("byard_pri_warhero");
   wait 1.5;
-  // Give me what you've got on Shepherd, and I'll take care of the rest!
+
   radio_dialogue("byard_pri_takecareofrest");
   wait 1.5;
-  // I know you can hear me on this channel Makarov!
+
   radio_dialogue("byard_pri_onthischannel");
   wait 0.5;
-  // You and I both know you won't last a week!
+
   radio_dialogue("byard_pri_lastaweek");
-  // And neither will you!
+
   wait 1;
   radio_dialogue("byard_mkv_neitherwillyou");
   wait 0.25;
-  // Makarov...you ever hear the old saying...the enemy of my enemy is my friend?
+
   radio_dialogue("byard_pri_myfriend");
-  // Price, one day you're going to find that cuts both ways!
+
   radio_dialogue("byard_mkv_cutsbothways");
-  // Shepherd is using Site Hotel Bravo. You know where it is! I'll see you in hell!
+
   radio_dialogue("byard_mkv_hotelbravo");
-  // Looking forward to it!
+
   radio_dialogue("byard_pri_myregards");
 
   wait 3;
@@ -501,16 +429,14 @@ intro_littlebird_strafe() {
   level.intro_heli = self;
 
   flag_wait("intro_littlebird_strafe");
-  // make turret fire.
+
   array_thread(self.mgturret, ::road_target, self);
 }
 
 vehicle_sweetener_setup() {
-  // ents for helicopters
   array = getEntArray("vehicle_sweetener", "script_noteworthy");
   array_thread(array, ::vehicle_sweetener);
 
-  // nodes for other vehicles
   array = getvehiclenodearray("vehicle_sweetener", "script_noteworthy");
   array_thread(array, ::vehicle_sweetener);
 }
@@ -530,10 +456,6 @@ road_target(heli) {
 
   target_ent = spawn("script_origin", target_origin);
 
-  /*
-  	target_ent = spawn( "script_model", target_origin );
-  	target_ent setModel( "fx" );
-  */
   target_ent linkto(self);
 
   old_mode = self getmode();
@@ -554,8 +476,6 @@ scene_a_suburban() {
 
   turret = self.mgturret[0];
   turret waittill("turret_ready");
-
-  //	turret SetMode( "auto_ai" );
 
   mg_guy = turret getturretowner();
   assert(isDefined(mg_guy));
@@ -625,7 +545,7 @@ littlebird_init(no_repulsor) {
     self thread toggle_repulsor();
 
   self.fake_target = spawn("script_model", (0, 0, 0));
-  //	self.fake_target setModel( "fx" );
+
   self.fake_target linkto(self, "tag_origin", (100, 0, 150), (0, 0, 0));
   self thread fake_target_delete(self.fake_target);
 
@@ -690,13 +610,11 @@ flyby_littlebird() {
   flag_wait("flyby_c130");
 
   if(!littlebird_alive()) {
-    // if dead respawn
     path_ent = getent("littlebird_flyby_start", "targetname");
     heli_spawner = getent("littlebird", "targetname");
     level.heli = heli_spawner move_spawn_and_go(path_ent);
   }
 
-  // level.heli might be overritten by the higround heli if the player moves fast.
   heli = level.heli;
 
   heli maps\_vehicle::godon();
@@ -746,7 +664,6 @@ road() {
 
   level waittill("waittill_stack", msg, trigger);
 
-  // tmp fix
   dist = 1000;
   while(true) {
     wait 0.5;
@@ -763,12 +680,12 @@ road() {
 
   exploder("road_exploder");
 
-  level waittill_stack_clear(); // clear stack
+  level waittill_stack_clear();
 }
 
 road_hummer() {
   turret = self.mgturret[0];
-  turret waittill("turret_ready"); // could this break it?
+  turret waittill("turret_ready");
   mg_guy = turret getturretowner();
 
   if(littlebird_alive())
@@ -784,7 +701,6 @@ road_hummer() {
 road_crash() {
   flag_wait("hummer_destroy");
 
-  // pickup trucks blow up and switch model after in 1 second instead of the default 2.
   level.vttype = "truck_physics";
   level.vtmodel = "vehicle_pickup_roobars";
   typemodel = level.vttype + level.vtmodel;
@@ -800,7 +716,7 @@ road_crash() {
 }
 
 road_rocket_guys() {
-  level endon("stop_road_rockets"); // called by a flag_set in radiant.
+  level endon("stop_road_rockets");
 
   spawner_arr = getEntArray("road_rocket_guys", "targetname");
   while(true) {
@@ -862,7 +778,6 @@ start_flyby() {
 flyby() {
   level thread flyby_dialogue();
 
-  // fewer enemies
   level.ai_cap["axis"] = 10;
   level.ai_cap["team3"] = 10;
 
@@ -872,8 +787,6 @@ flyby() {
   level thread flyby_littlebird();
 
   flag_wait("flyby_c130");
-
-  //	SetCullDist( 12000 );
 
   flag_set("music_boneyard_flyby");
   activate_trigger_with_targetname("flyby_area_trigger");
@@ -888,14 +801,12 @@ flyby() {
 }
 
 flyby_advance() {
-  // this should happen after the drop dow
   flag_wait("flyby_vision_change");
 
   axis = get_ai_group_ai("flyby_axis");
   team3 = get_ai_group_ai("flyby_team3");
 
   if(axis.size < 5 && team3.size < 5) {
-    // move enemies and start the suv going.
     activate_trigger_with_noteworthy("flyby_advance_color_trigger");
     flag_set("flyby_minigun_move");
   }
@@ -908,19 +819,15 @@ flyby_dialogue() {
 
   flag_waitopen("makarov_dialogue");
 
-  // Price, I am approaching the boneyard. I see you do not have situation under control.
-  // Very unsafe to land. It looks like when I was in Afghanistan with the Soviets!
   radio_dialogue("byard_nkl_unsafetoland");
-  // Nikolai! Shut up and just land the bloody plane! We're on our way!
+
   radio_dialogue("byard_pri_landtheplane");
 
-  // This is such bullshit! I'm not getting paid nearly enough for these missions!
-  // These flares are expensive!! FUCK!!!
   radio_dialogue("byard_nkl_paidenough");
 
   flag_wait("flyby_minigun_move");
   wait 7;
-  // Soap! Hurry! We've got to get to Nikolai's plane! Keep moving north!
+
   radio_dialogue("byard_pri_gettoplane");
 }
 
@@ -928,7 +835,7 @@ flyby_suburban() {
   self endon("death");
   level.flyby_suburban = self;
 
-  flag_wait("flyby_suburban_go"); // wait till the minigun vehicle has passed.
+  flag_wait("flyby_suburban_go");
 
   path_start = getvehiclenode("flyby_retreat_path", "targetname");
   self new_vehicle_path(path_start);
@@ -959,7 +866,6 @@ start_higround() {
   vehicle = btr80_spawner move_spawn_and_go(vnode);
   flag_set("flyby_suburban_go");
 
-  // debug shit
   ent = getent("higround_heli_path", "script_noteworthy");
   thread mark_heli_path(ent);
 
@@ -983,11 +889,10 @@ higround() {
   level thread higround_dialogue();
 
   flag_wait("flyby_suburban_go");
-  SetThreatBias("allies", "team3", 0); // team3 find the player to be normal threat for when they are crossing the road.
+  SetThreatBias("allies", "team3", 0);
 
   level thread higround_second_save();
 
-  // start the ride once living higround guys are 4 or less and the btr80 died or reached it's final destination.
   level thread higround_ride_force_start(4);
 }
 
@@ -1014,7 +919,6 @@ higround_guy() {
 }
 
 higround_second_save() {
-  // save halfway through the higround when atleast 30 seconds has passed.
   level endon("ride_uaz_arriving");
 
   flag_wait("higround_ascend");
@@ -1034,14 +938,12 @@ higround_dialogue() {
 
   flag_waitopen("makarov_dialogue");
 
-  // Soap! I'm going to get some transport! Make your way north towards the runway!
   radio_dialogue("byard_pri_gettransport");
 
   starttime = gettime();
   flag_wait("higround_1");
   wait_for_buffer_time_to_pass(starttime, 15);
 
-  // Soap! I've found some transport! Keep moving north! I'll meet you en route!
   radio_dialogue("byard_pri_foudntransport");
 }
 
@@ -1063,7 +965,6 @@ higround_littlebird() {
   if(!flag("btr80_at_end")) {
     flag_clear("no_align");
 
-    // this will fire but miss.
     self higround_littlebird_failed_attack();
     self notify("stop_hunt");
     self ClearLookAtEnt();
@@ -1082,12 +983,11 @@ higround_littlebird() {
     self delaythread(4, maps\_vehicle::godoff);
   }
 
-  self notify("stop_hunt"); // stops the first hunt
+  self notify("stop_hunt");
   self thread higround_littlebird_hunt_btr80("hunt_btr80_final");
   self higround_littlebird_aligned();
-  self notify("stop_hunt"); // stops the hunt just above.
+  self notify("stop_hunt");
 
-  // might kill the btr80 or it might not.
   if(cointoss()) {
     target_arr = [];
     target_arr[0] = level.btr80;
@@ -1147,8 +1047,6 @@ higround_btr80() {
   vehicle_set_health(500);
   self main_turret_init();
 
-  //	self thread makesentient( self.script_team );
-
   flag_wait("flyby_suburban_go");
 
   if(isalive(level.flyby_suburban)) {
@@ -1165,7 +1063,7 @@ higround_btr80() {
 
   self thread main_turret_think();
 
-  SetThreatBias("allies", "team3", 1000); // team3 find the player to be less of a threat again.
+  SetThreatBias("allies", "team3", 1000);
 
   self higround_btr80_target_littlebird();
 
@@ -1185,7 +1083,6 @@ higround_btr80_target_littlebird() {
     }
     level.heli endon("death");
 
-    // addes the heli as a target.
     if(self.main_turret_enemies.size == 0)
       self.main_turret_enemies = array_add(self.main_turret_enemies, level.heli);
     else
@@ -1208,7 +1105,6 @@ higround_minigun_suburban() {
   self endon("death");
 
   level.minigun_suburban = self;
-  //	self.dontUnloadOnEnd = true;
 
   turret = self.mgturret[0];
   turret waittill("turret_ready");
@@ -1264,7 +1160,6 @@ ride() {
 
   flag_wait("ride_enemy_vehicles_spawn");
 
-  // pickup trucks blow up and switch model after in 1 second instead of the default 2.
   level.vttype = "truck_physics";
   level.vtmodel = "vehicle_pickup_roobars";
   typemodel = level.vttype + level.vtmodel;
@@ -1276,10 +1171,8 @@ ride() {
   maps\_vehicle::build_deathfx("fire/firelp_small_pm_a", "tag_engine_left", "smallfire", undefined, undefined, true, 1.01, true);
   level.vehicle_deathmodel_delay[level.vtmodel] = 1;
 
-  // spawn vehicles
   activate_trigger_with_targetname("ride_initiate");
 
-  // add ammo to current weapons for the ride.
   weaponlist = level.player GetWeaponsListPrimaries();
 
   foreach(weapon in weaponlist) {
@@ -1298,7 +1191,7 @@ ride() {
   autosave_by_name("ride2");
 
   flag_wait("c130_hatch_open");
-  autosave_now(); // should always be safe
+  autosave_now();
 
   flag_wait("ride_driver_death");
   flag_set("uaz_driver_dialogue");
@@ -1315,7 +1208,6 @@ ride() {
 suburban_ride_deathfx() {
   flag_wait("ride_uaz_arriving");
 
-  // change sound to scn_boneyard_sub_explode
   level.vttype = "suburban";
   level.vtmodel = "vehicle_suburban";
   typemodel = level.vttype + level.vtmodel;
@@ -1335,13 +1227,13 @@ suburban_ride_deathfx() {
 
 ride_zfar() {
   flag_wait("uaz_mounted");
-  wait 0.5; //8
+  wait 0.5;
   SetCullDist(10000);
-  wait 11; //20
+  wait 11;
   SetCullDist(13000);
-  wait 7; //27
+  wait 7;
   SetCullDist(15500);
-  wait 20; //47
+  wait 20;
   SetCullDist(20000);
 }
 
@@ -1352,19 +1244,16 @@ ride_dialogue() {
   level thread ride_uaz_nag();
 
   if(!flag("uaz_driver_mount")) {
-    // Captain Price, I'm taking off in one minute! You better hurry if you want a ride out of here!
     radio_dialogue("byard_nkl_oneminute");
-    // Soap! We don't have much time! Nikolai's not going to wait around for us! Hurry!
+
     radio_dialogue("byard_pri_muchtime");
   }
 
   flag_wait("uaz_driver_mount");
   if(!flag("uaz_mounted")) {
     if(flag("uaz_nag")) {
-      // Soap! Get in the jeep!
       level.price dialogue_queue("byard_pri_getinjeep");
     } else {
-      // Soap! We are leaving!!! Get in the jeep!
       level.price dialogue_queue("byard_pri_weareleaving");
     }
   }
@@ -1375,14 +1264,14 @@ ride_dialogue() {
   wait 0.8;
   flag_set("uaz_driver_dead");
   wait 1;
-  // Soap! Rook is down! Take the wheel!!!
+
   level.price dialogue_queue("byard_pri_takewheel");
 
   level.price endon("death");
 
   flag_wait("uaz_player_in_control");
   wait 3;
-  // Aim for the ramp!!!
+
   level.price dialogue_queue("byard_pri_aimforramp");
 }
 
@@ -1391,11 +1280,11 @@ ride_uaz_nag() {
   level endon("uaz_driver_mount");
 
   wait 20;
-  // Soap! Get in the jeep!
+
   level.price dialogue_queue("byard_pri_getinjeep");
 
   wait 30;
-  // Soap! We are leaving!!! Get in the jeep!
+
   level.price dialogue_queue("byard_pri_weareleaving");
   flag_set("uaz_nag");
 }
@@ -1420,7 +1309,6 @@ ride_vehicle() {
   self VehPhys_DisableCrashing();
   array_thread(self.riders, ::ride_rider);
 
-  // vehicles damage and death gets handles by level script.
   self maps\_vehicle::godon();
 }
 
@@ -1433,10 +1321,6 @@ ride_runway_suburban() {
 }
 
 ride_rider() {
-  // little less easy to kill when on harder difficulties.
-  // if this is "bad" we need some way to reinforce the riders.
-  // don't do minigun guys since they get their health raised elsewhere.
-
   difficulty = level.gameskill;
   if(difficulty == 0)
     difficulty = 1;
@@ -1464,11 +1348,9 @@ ride_minigunner() {
   while(true) {
     self.ignoreall = false;
     wait 0.65;
-    //		wait randomfloatrange( 0.25, 0.75 );
 
     self.ignoreall = true;
     wait 1.75;
-    //		wait randomfloatrange( 1.5, 2 );
   }
 }
 
@@ -1478,7 +1360,6 @@ ride_c130() {
 
   flag_wait("uaz_mounted");
 
-  // allow saves.
   flag_set("can_save");
   autosave_by_name("ride");
 
@@ -1496,7 +1377,6 @@ ride_c130() {
   flag_wait("uaz_driver_dead");
   c130_ent thread add_player_tractor_beam();
 
-  // failsafe in case some other vehicle drivs into the trigger.
   while(true) {
     level.c130.ramp_trigger waittill("trigger", vehicle);
     if(vehicle == level.uaz) {
@@ -1567,7 +1447,6 @@ ride_littlebird() {
 
   flag_wait("littlebird_stage1");
   if(!littlebird_alive()) {
-    // if dead respawn
     path_ent = getent("littlebird_ride_respawn", "targetname");
     heli_spawner = getent("littlebird", "targetname");
     level.heli = heli_spawner move_spawn_and_go(path_ent);
@@ -1616,7 +1495,6 @@ ride_track_health() {
   wait 1;
 
   level.player kill();
-  //	missionfailedwrapper();
 }
 
 ride_uaz() {
@@ -1637,8 +1515,6 @@ ride_uaz() {
 
   self.dontunloadonend = true;
 
-  // hack to get AI to fire when the vehicle is stationary
-  // needs to be fixed so that unload doesn't force people into idle.
   flag_wait("wait_for_player");
   self Maps\_vehicle::vehicle_ai_event("hide_attack_forward");
 
@@ -1694,7 +1570,6 @@ ride_uaz_player_crash() {
   wait 1;
 
   level.player kill();
-  //	missionfailedwrapper();
 }
 
 ride_uaz_player_force_crash() {
@@ -1732,7 +1607,6 @@ ride_uaz_driver() {
 
   flag_wait("uaz_driver_mount");
 
-  // stop any save at this point.
   flag_clear("can_save");
 
   flag_wait("ride_littlebird_dodge");
@@ -1761,7 +1635,6 @@ ride_uaz_driver_death() {
   self notify("newanim");
   self anim_stopanimscripted();
 
-  // remove rook from riders array so that he never starts a new idle anim.
   level.uaz.riders = array_remove(level.uaz.riders, self);
 
   org = level.uaz GetTagOrigin("tag_driver");

@@ -28,7 +28,7 @@ should_precache(name) {
     case "specialty_grenadepulldeath_mp":
     case "specialty_blastshield_mp":
     case "specialty_tacticalinsertion_mp":
-      // these also error?
+
     case "stinger_mp":
     case "javelin_mp":
       return false;
@@ -426,7 +426,7 @@ watchweaponchange() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  level endon("game_ended"); // just in case
+  level endon("game_ended");
 
   thread maps\mp\gametypes\_weapons::watchstartweaponchange();
   self.lastdroppableweapon = self.currentweaponatspawn;
@@ -853,7 +853,7 @@ handlescavengerbagpickup() {
   if(destPlayer maps\mp\_utility::_hasPerk("specialty_tacticalinsertion") && destPlayer getAmmoCount("flare_mp") < 1)
     destPlayer maps\mp\_utility::_setPerk("specialty_tacticalinsertion", 0);
 
-  offhandWeapons = destPlayer getWeaponsListAll(); //getweaponslistoffhand() doesn't function as it should
+  offhandWeapons = destPlayer getWeaponsListAll();
 
   foreach(offhand in offhandWeapons) {
     if(!maps\mp\gametypes\_class::isvalidoffhand(offhand) && !maps\mp\gametypes\_class::isvalidequipment(offhand)) {
@@ -935,8 +935,6 @@ dropscavengerfordeath(var_0) {
   if(var_0 == self) {
     return;
   }
-  //if( level.iszombiegame )
-  //return;
 
   scavenger_bag = spawn("script_model", self.origin);
   scavenger_bag.angles = self.angles;
@@ -1798,7 +1796,7 @@ watchclaymores() {
       var_0 thread c4empdamage();
       var_0 thread c4empkillstreakwait();
       var_0 thread claymoredetonation();
-      //var_0 thread setmineteamheadicon( self.pers["team"] );
+
       var_0 thread equipmentWatchUse(self);
       self.changingweapon = undefined;
     }
@@ -2178,7 +2176,7 @@ c4damage(var_0) {
         case "h1_flashgrenade_mp":
           continue;
         default:
-          break; // i think?
+          break;
       }
     }
 

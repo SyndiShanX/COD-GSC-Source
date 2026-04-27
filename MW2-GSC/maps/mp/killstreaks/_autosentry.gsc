@@ -46,10 +46,6 @@ init() {
   level._effect["sentry_smoke_mp"] = loadfx("smoke/car_damage_blacksmoke");
 }
 
-/* ============================
-	Killstreak Functions
- ============================ */
-
 tryUseAutoSentry(lifeId) {
   result = self giveSentry("sentry_minigun");
   if(result)
@@ -73,16 +69,11 @@ giveSentry(sentryType) {
 
   self setCarryingSentry(sentryGun, true);
 
-  // if we failed to place the sentry, it will have been deleted at this point
   if(isDefined(sentryGun))
     return true;
   else
     return false;
 }
-
-/* ============================
-	Player Functions
- ============================ */
 
 setCarryingSentry(sentryGun, allowCancel) {
   self endon("death");
@@ -119,10 +110,6 @@ setCarryingSentry(sentryGun, allowCancel) {
   }
 }
 
-/* ============================
-	Sentry Functions
- ============================ */
-
 createSentryForPlayer(sentryType, owner) {
   assertEx(isDefined(owner), "createSentryForPlayer() called without owner specified");
 
@@ -144,10 +131,9 @@ sentry_initSentry(sentryType, owner) {
   self makeTurretInoperable();
 
   self setTurretModeChangeWait(true);
-  //	self setConvergenceTime( .25, "pitch" );
-  //	self setConvergenceTime( .25, "yaw" );
+
   self sentry_setInactive();
-  self setDefaultDropPitch(-89.0); // setting this mainly prevents Turret_RestoreDefaultDropPitch() from running
+  self setDefaultDropPitch(-89.0);
 
   self sentry_setOwner(owner);
   self thread sentry_handleOwner();
@@ -159,12 +145,7 @@ sentry_initSentry(sentryType, owner) {
   self thread sentry_beepSounds();
 }
 
-/* ============================
-	Sentry Handlers
- ============================ */
-
 sentry_handleDamage() {
-  // use a health buffer to prevent the turret from dying to friendly fire
   healthBuffer = 20000;
   self.health += healthbuffer;
 
@@ -176,7 +157,6 @@ sentry_handleDamage() {
       continue;
     }
 
-    // 7x damage for explosives - GRENADES
     if(isExplosiveDamage(type))
       self.health -= (amount * 1);
 
@@ -217,7 +197,7 @@ sentry_handleDeath() {
   self waittill("death");
 
   self removeFromTurretList(entNum);
-  // this handles cases of deletion
+
   if(!isDefined(self)) {
     return;
   }
@@ -231,7 +211,6 @@ sentry_handleDeath() {
   self playSound("sentry_explode");
   playFXOnTag(getFx("sentry_explode_mp"), self, "tag_aim");
 
-  // don't try to delete ourselves if we're deleted by other means
   self endon("death");
 
   wait(1.5);
@@ -273,10 +252,6 @@ sentry_handleOwner() {
 
   self notify("death");
 }
-
-/* ============================
-	Sentry Utility Functions
- ============================ */
 
 sentry_setOwner(owner) {
   assertEx(isDefined(owner), "sentry_setOwner() called without owner specified");
@@ -350,7 +325,7 @@ updateSentryPlacement(sentryGun) {
   sentryGun endon("death");
 
   sentryGun.canBePlaced = true;
-  lastCanPlaceSentry = -1; // force initial update
+  lastCanPlaceSentry = -1;
 
   for(;;) {
     placement = self canPlayerPlaceSentry();
@@ -457,10 +432,6 @@ addToTurretList(entNum) {
 removeFromTurretList(entNum) {
   level.turrets[entNum] = undefined;
 }
-
-/* ============================
-	Sentry Logic Functions
- ============================ */
 
 sentry_attackTargets() {
   self endon("death");

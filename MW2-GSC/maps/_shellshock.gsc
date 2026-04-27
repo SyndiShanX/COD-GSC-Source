@@ -50,7 +50,7 @@ internalMain(duration, nMaxDamageBase, nRanDamageBase, nMinDamageBase, nExposed,
     level.player allowProne(true);
 
     wait 0.15;
-    level.player viewkick(127, level.player.origin); // Amount should be in the range 0 - 127, and is normalized "damage".No damage is done.
+    level.player viewkick(127, level.player.origin);
     level.player shellshock(strShocktype, duration);
 
     if(!isDefined(nExposed)) {

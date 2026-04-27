@@ -16,11 +16,9 @@ main(model, type) {
 
   build_treadfx();
 
-  //special for mig29/////
   level._effect["engineeffect"] = loadfx("fire/jet_afterburner");
   level._effect["afterburner"] = loadfx("fire/jet_afterburner_ignite");
   level._effect["contrail"] = loadfx("smoke/jet_contrail");
-  ////////////////////////
 
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   build_life(999, 500, 1500);
@@ -67,30 +65,11 @@ playEngineEffects() {
 }
 
 playAfterBurner() {
-  //After Burners are pretty much like turbo boost. They don't use them all the time except when
-  //bursts of speed are needed. Needs a cool sound when they're triggered. Currently, they are set
-  //to be on all the time, but it would be cool to see them engauge as they fly away.
-
   playFXOnTag(level._effect["afterburner"], self, "tag_engine_right");
   playFXOnTag(level._effect["afterburner"], self, "tag_engine_left");
 }
 
 playConTrail() {
-  //This is a geoTrail effect that loops forever. It has to be enabled and disabled while playing as
-  //one effect. It can't be played in a wait loop like other effects because a geo trail is one
-  //continuous effect. ConTrails should only be played during high "G" or high speed maneuvers.
   playFXOnTag(level._effect["contrail"], self, "tag_right_wingtip");
   playFXOnTag(level._effect["contrail"], self, "tag_left_wingtip");
 }
-
-/*QUAKED script_vehicle_b2 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_b2::main( "vehicle_b2_bomber" );
-
-and these lines in your CSV:
-#include,vehicle_b2
-sound,vehicle_b2,vehicle_standard,all_sp
-
-defaultmdl="vehicle_b2_bomber"default:"vehicletype" "b2"default:"script_team" "allies"
-*/

@@ -13,13 +13,6 @@ clear_animation(blend_time) {
 }
 
 enemy_animation_attack(type) {
-  //->took out this assert because in rare cases, an enemy is so far away or in such complex geo
-  //like af_caves that we can actually lose our enemy in the short time it takes to between getting
-  //the "attack" logic and hitting this function....we can just assume, that this guy can do a long animation
-  //assert( isDefined( self.enemy ) );
-
-  //arbitrary number to say the enemy is far away - if we have one we'll get a real number
-  //if we don't, then we can assume he's far away
   dist = 600;
 
   if(isDefined(self.enemy))
@@ -41,11 +34,7 @@ enemy_animation_attack(type) {
   self notify("stop_animmode");
 }
 
-enemy_animation_nothing(type) {
-  // these dont actually do anything, however their existance
-  // allows for custom reaction animations to be played even
-  // at this alert stage
-}
+enemy_animation_nothing(type) {}
 
 enemy_animation_generic(type) {
   self.allowdeath = true;
@@ -77,7 +66,6 @@ dog_animation_generic(type) {
 
   anime = undefined;
 
-  // check if dog is in melee sequence with player
   if(isDefined(self.meleeingPlayer)) {
     player = self.meleeingPlayer;
     if(isDefined(player.player_view) && isDefined(player.player_view.dog) && self == player.player_view.dog)

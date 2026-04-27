@@ -9,10 +9,7 @@
 #using_animtree("generic_human");
 
 main() {
-  //	assert( !usingSidearm() );
   self endon("killanimscript");
-
-  //	[[ self.exception[ "cover_stand" ] ]]();
 
   animscripts\utility::initialize("cover_stand");
 

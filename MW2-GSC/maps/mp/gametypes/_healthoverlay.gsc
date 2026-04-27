@@ -96,17 +96,16 @@ playerHealthRegen() {
       lastSoundTime_Recover += timePassed;
     }
 
-    if(self.health == self.maxhealth || (level.dieHardMode && isDefined(self.healthClamped) && self.health >= self.healthClamped)) // runs every frame
-    {
+    if(self.health == self.maxhealth || (level.dieHardMode && isDefined(self.healthClamped) && self.health >= self.healthClamped)) {
       oldHealth = self.maxhealth;
       veryHurt = false;
       self.atBrinkOfDeath = false;
       continue;
     }
 
-    if(self.health <= 0) // player dead
+    if(self.health <= 0) {
       return;
-
+    }
     curTime = getTime();
 
     ratio = self.health / self.maxHealth;
@@ -154,7 +153,6 @@ playerHealthRegen() {
       }
 
       if(newHealth <= 0) {
-        // Player is dead
         return;
       }
 
@@ -163,7 +161,6 @@ playerHealthRegen() {
       continue;
     }
 
-    // first time damaged
     oldHealth = self.health;
     hurtTime = curTime;
     self.breathingStopTime = hurtTime + 6000;
@@ -185,7 +182,7 @@ playerBreathingSound(healthcap) {
     if(self.health <= 0) {
       return;
     }
-    // Player still has a lot of health so no breathing sound
+
     if(self.health >= healthcap) {
       continue;
     }

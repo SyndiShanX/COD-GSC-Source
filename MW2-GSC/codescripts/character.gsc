@@ -23,7 +23,6 @@ attachHead(headAlias, headArray) {
 
   index = (level.character_head_index[headAlias] + 1) % headArray.size;
 
-  // the designer can overwrite the character
   if(isDefined(self.script_char_index)) {
     index = self.script_char_index % headArray.size;
   }
@@ -94,22 +93,6 @@ precache(info) {
     precacheModel(attachInfo[i]["model"]);
 }
 
-/*
-sample save / precache / load usage( precache is only required if there are any waits in the level script before load ):
-
-save:
-	info = foley codescripts\character::save();
-	game[ "foley" ] = info;
-	changelevel( "burnville", 0, true );
-
-precache:
-	codescripts\character::precache( game[ "foley" ] );
-
-load:
-	foley codescripts\character::load( game[ "foley" ] );
-
-*/
-
 get_random_character(amount) {
   self_info = strtok(self.classname, "_");
   if(!common_scripts\utility::isSP()) {
@@ -121,32 +104,27 @@ get_random_character(amount) {
 
     return index;
   } else if(self_info.size <= 2) {
-    // some custom guy that doesn't use standard naming convention
     return randomint(amount);
   }
 
-  group = "auto"; // by default the type is an auto-selected character
+  group = "auto";
   index = undefined;
-  prefix = self_info[2]; // merc, marine, etc
+  prefix = self_info[2];
 
-  // the designer can overwrite the character
   if(isDefined(self.script_char_index)) {
     index = self.script_char_index;
   }
 
-  // the designer can hint that this guy is a member of a group of like - spawned guys, so he should use a different index
   if(isDefined(self.script_char_group)) {
     type = "grouped";
     group = "group_" + self.script_char_group;
   }
 
   if(!isDefined(level.character_index_cache)) {
-    // separately store script grouped guys and auto guys so that they dont influence each other
     level.character_index_cache = [];
   }
 
   if(!isDefined(level.character_index_cache[prefix])) {
-    // separately store script grouped guys and auto guys so that they dont influence each other
     level.character_index_cache[prefix] = [];
   }
 
@@ -158,7 +136,6 @@ get_random_character(amount) {
     index = get_least_used_index(prefix, group);
 
     if(!isDefined(index)) {
-      // fail safe
       index = randomint(5000);
     }
   }
@@ -183,12 +160,10 @@ get_least_used_index(prefix, group) {
     }
 
     if(level.character_index_cache[prefix][group][i] < lowest_use) {
-      // if its the new lowest, start over on the array
       lowest_indices = [];
       lowest_use = level.character_index_cache[prefix][group][i];
     }
 
-    // the equal amounts end up in the array
     lowest_indices[lowest_indices.size] = i;
   }
   assertex(lowest_indices.size, "Tried to spawn a character but the lowest indices didn't exist");

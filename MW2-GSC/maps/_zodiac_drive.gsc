@@ -8,8 +8,8 @@
 #include maps\_anim;
 #include maps\_vehicle;
 
-UPDATE_TIME = 0.05; // Time between player input checks.
-BLEND_TIME = 0.5; // Blend time for lean animations.
+UPDATE_TIME = 0.05;
+BLEND_TIME = 0.5;
 CONST_MPHCONVERSION = 17.6;
 
 SHOOT_BLEND_TIME = 0.1;
@@ -32,7 +32,6 @@ zodiac_preLoad(playerHandModel) {
   flag_init("player_shot_on_zodiac");
   flag_set("player_can_die_on_zodiac");
 
-  // set player hand model
   if(!isDefined(playerHandModel))
     level.zodiac_playerHandModel = "viewhands_player_udt";
   else
@@ -40,18 +39,15 @@ zodiac_preLoad(playerHandModel) {
 
   level.zodiac_playerZodiacModel = "vehicle_zodiac_viewmodel";
 
-  // set gun
   level.zodiac_gunModel = "viewmodel_miniUZI";
 
   level.zodiac_gun = "uzi";
 
-  // precahe models and itmes
   PreCacheModel(level.zodiac_playerHandModel);
   PreCacheModel(level.zodiac_playerZodiacModel);
   PreCacheModel(level.zodiac_gunModel);
   PreCacheItem(level.zodiac_gun);
 
-  // load gun effects
   level.zodiac_gunFlashFx = LoadFX("muzzleflashes/uzi_flash_view");
   level.zodiac_gunShellFx = LoadFX("shellejects/pistol_view");
 
@@ -60,9 +56,8 @@ zodiac_preLoad(playerHandModel) {
 
   zodiac_anims();
 
-  // Hold ^3[{+speed_throw}]^7 to shoot.
   add_hint_string("zodiac_attack", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_zodiac_attack_hint);
-  // Hold ^3[{+attack}]^7 to drive.
+
   add_hint_string("zodiac_drive", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_zodiac_drive_hint);
 
   add_hint_string("zodiac_reverse", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_zodiac_reverse_hint);
@@ -105,7 +100,6 @@ drive_vehicle() {
 
   player drive_switch_to_1st_person(vehicle);
   vehicle waittill_either("vehicle_dismount", "death");
-  //	player drive_switch_to_3rd_person( vehicle );
 
   player.vehicle = undefined;
 }
@@ -169,7 +163,6 @@ drive_target_enemy(vehicle) {
     yawSettings = baseYawSettings["player"];
     if(checking == "price") {
       if(!isDefined(currentguy.a.boat_pose)) {
-        // Price hasn't started his boat AI anim script yet
         checking = "player";
         wait .05;
         continue;
@@ -185,7 +178,7 @@ drive_target_enemy(vehicle) {
           check_dist = check_dist_for_hargroves_boat[checking];
         check_dist = check_dist_for_enemy_boat[checking];
       } else
-        check_dist = check_dist_for_stationary_guys[checking]; // helps make death animations more visible for those guys that are stationary.
+        check_dist = check_dist_for_stationary_guys[checking];
 
       dist = distancesquared(his_org, my_org);
       if(dist > check_dist) {
@@ -202,12 +195,11 @@ drive_target_enemy(vehicle) {
         continue;
       }
       if(checking == "price") {
-        // price should always shoot the guys in close proximity (if he can aim at them)
         if(dist < CLOSE_GUY_DIST) {
           enemy = guy;
           break;
         }
-        // don't change price's enemy if the old one is still good
+
         if(isDefined(currentguy.zodiac_enemy) && guy == currentguy.zodiac_enemy && yaw >= yawSettings.retainEnemyMin && yaw <= yawSettings.retainEnemyMax) {
           enemy = guy;
           break;
@@ -223,8 +215,6 @@ drive_target_enemy(vehicle) {
 
     currentguy.zodiac_enemy = enemy;
 
-    //if( checking == "price" && isDefined( currentguy.zodiac_enemy ) )
-    //	thread draw_line_from_ent_to_ent_for_time( currentguy.zodiac_enemy, currentguy, 1 , 1 , 1 , .2 );
     wait(0.1);
 
     if(checking == "price")
@@ -250,7 +240,7 @@ drive_crash_detection(vehicle) {
 }
 
 waittill_vehicle_crashes() {
-  level endon("player_crashes"); // from triggers in the map
+  level endon("player_crashes");
   self waittill("veh_collision");
 }
 
@@ -263,8 +253,6 @@ drive_crash_slide(vehicle, velocity) {
     self kill_wrapper();
 
   wait(1.0);
-
-  //self EndSliding();
 }
 
 drive_camera(vehicle) {
@@ -342,7 +330,6 @@ drive_firstperson_anims(vehicle) {
 }
 
 shootable_stuff_assist_damage(obj) {
-  // don't assist destruction of these objects.
   dont_assist_destructible_destruction_here = getStructArray("dont_assist_destructible_destruction_here", "targetname");
   foreach(spot in dont_assist_destructible_destruction_here) {
     Assert(isDefined(spot.radius));
@@ -360,7 +347,7 @@ shootable_stuff_assist_damage(obj) {
   }
 }
 
-SHOOTABLE_STUFF_COS = 0.965925; // Cos( 15 )
+SHOOTABLE_STUFF_COS = 0.965925;
 drive_magic_bullet_get_end(vehicle, start, noshot) {
   end = spawnStruct();
 
@@ -372,7 +359,6 @@ drive_magic_bullet_get_end(vehicle, start, noshot) {
 
   shootable_stuff = array_combine(getEntArray("destructible_toy", "targetname"), getEntArray("explodable_barrel", "targetname"));
 
-  //try to shoot stuff ahead when there aren't any snowmbobile_enemy's..
   foreach(obj in shootable_stuff) {
     if(Distance(level.player.origin, obj.origin) > 2300) {
       continue;
@@ -390,7 +376,6 @@ drive_magic_bullet_get_end(vehicle, start, noshot) {
     return end;
   }
 
-  //target the last remaining boat drivers
   shootable_boat_drivers = get_shootable_boatdrivers();
 
   foreach(obj in shootable_boat_drivers) {
@@ -450,7 +435,7 @@ get_shootable_boatdrivers() {
   return boatdrivers;
 }
 
-FOV_FOR_WIPEOUT = 0.5; // Cos( 60 );
+FOV_FOR_WIPEOUT = 0.5;
 
 wipeout_when_not_in_fov() {
   self notify("wipeout_when_not_in_fov");
@@ -497,7 +482,6 @@ drive_magic_bullet(vehicle) {
     driver_death(end.obj);
     return;
   }
-  //		end.obj common_scripts\_destructible::force_explosion();
 }
 
 driver_death(guy) {
@@ -517,7 +501,6 @@ drive_blend_anims_with_steering(vehicle, animflag, endNotify, leftAnim, centerAn
   for(;;) {
     steerValue = vehicle Vehicle_GetSteering() * -1.0;
 
-    // never set a weight to zero so that all the anims continue to play
     if(steerValue >= 0.0) {
       leftWeight = 0.001;
       centerWeight = -0.999 * steerValue + 1.0;
@@ -537,15 +520,12 @@ drive_blend_anims_with_steering(vehicle, animflag, endNotify, leftAnim, centerAn
 }
 
 drive_shooting_update_anims(vehicle) {
-  // start pull out anim
   vehicle SetAnimKnobLimited(vehicle getanim("gun_pullout_root"), 1.0, 0.0, 1.0);
   self childthread drive_blend_anims_with_steering(vehicle, "pullout_anim", "pullout_done", "gun_pullout_L", "gun_pullout", "gun_pullout_R");
 
-  // attach the gun
   vehicle waittillmatch("pullout_anim", "attach_gun");
   vehicle Attach(level.zodiac_gunModel, "tag_weapon_left");
 
-  //"viewmodel_miniUZI"vehicle HidePart("TAG_ACOG_2", level.zodiac_gunModel);
   vehicle HidePart("TAG_RAIL", level.zodiac_gunModel);
   vehicle HidePart("TAG_RED_DOT", level.zodiac_gunModel);
   vehicle HidePart("TAG_EOTECH", level.zodiac_gunModel);
@@ -561,10 +541,8 @@ drive_shooting_update_anims(vehicle) {
   vehicle waittillmatch("pullout_anim", "end");
   vehicle notify("pullout_done");
 
-  // start gun anim
   vehicle SetAnim(vehicle getanim("uzi"), 1.0, 0.0, 1.0);
 
-  // start idle
   vehicle SetAnimKnobLimited(vehicle getanim("gun_idle"), 1.0, 0.0, 1.0);
 
   vehicle.zodiacShootTimer = SHOOT_ARM_UP_DELAY;
@@ -578,7 +556,7 @@ drive_shooting_update_anims(vehicle) {
 
     if(shootButtonPressed && (vehicle.zodiacAmmoCount > 0)) {
       flag_set("player_shot_on_zodiac");
-      // play gun fire anims
+
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);
 
       if(vehicle.zodiacAmmoCount == 1)
@@ -586,7 +564,6 @@ drive_shooting_update_anims(vehicle) {
       else
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_fire"), 1.0, 0.0, 1.0);
 
-      // fire bullet
       self drive_magic_bullet(vehicle);
 
       wait(SHOOT_FIRE_TIME);
@@ -594,7 +571,6 @@ drive_shooting_update_anims(vehicle) {
       vehicle.zodiacAmmoCount -= 1;
       vehicle.zodiacShootTimer = SHOOT_ARM_UP_DELAY;
     } else if(vehicle.zodiacAmmoCount <= 0) {
-      // play reload anims
       vehicle SetFlaggedAnimKnobLimitedRestart("reload_anim", vehicle getanim("gun_reload"), 1.0, 0.0, 1.0);
       vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_reload"), 1.0, 0.0, 1.0);
 
@@ -603,7 +579,6 @@ drive_shooting_update_anims(vehicle) {
       vehicle.zodiacAmmoCount = SHOOT_AMMO_COUNT;
       vehicle.zodiacShootTimer = SHOOT_ARM_UP_DELAY;
     } else {
-      // play idle
       vehicle SetAnimKnobLimited(vehicle getanim("gun_idle"), 1.0, 0.0, 1.0);
       vehicle.zodiacShootTimer -= UPDATE_TIME;
     }
@@ -611,11 +586,9 @@ drive_shooting_update_anims(vehicle) {
     wait UPDATE_TIME;
   }
 
-  // start put away anim
   vehicle SetAnimKnobLimited(vehicle getanim("gun_putaway_root"), 1.0, 0.0, 1.0);
   self childthread drive_blend_anims_with_steering(vehicle, "putaway_anim", "putaway_done", "gun_putaway_L", "gun_putaway", "gun_putaway_R");
 
-  // detach the gun
   vehicle waittillmatch("putaway_anim", "detach_gun");
   if(isDefined(vehicle.gun_attached)) {
     vehicle Detach(level.zodiac_gunModel, "tag_weapon_left");
@@ -651,7 +624,6 @@ drive_shooting_anims(vehicle) {
 }
 
 is_shoot_button_pressed() {
-  // pc
   return self attackButtonPressed();
 }
 

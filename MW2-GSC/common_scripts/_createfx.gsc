@@ -79,7 +79,7 @@ createfx_common() {
     hack_start("painter");
 
   flag_init("createfx_saving");
-  // Effects placing tool
+
   if(!isDefined(level.createFX))
     level.createFX = [];
   level.createfx_loopcounter = 0;
@@ -94,7 +94,7 @@ createfx_common() {
 }
 
 createFxLogic() {
-  waittillframeend; // let _load run first
+  waittillframeend;
 
   menu_init();
 
@@ -108,8 +108,7 @@ createFxLogic() {
 
   level.createFxHudElements = [];
   level.createFx_hudElements = 30;
-  // all this offset stuff lets us duplicate the text which puts an outline around
-  // it and makes it more legible
+
   strOffsetX = [];
   strOffsetY = [];
   strOffsetX[0] = 0;
@@ -125,7 +124,6 @@ createFxLogic() {
 
   SetDevDvar("fx", "nil");
 
-  // setup "crosshair"crossHair = newHudElem();
   crossHair.location = 0;
   crossHair.alignX = "center";
   crossHair.alignY = "middle";
@@ -137,7 +135,6 @@ createFxLogic() {
   crossHair.y = 233;
   crossHair setText(".");
 
-  // setup the free text marker to allow some permanent strings
   level.clearTextMarker = newHudElem();
   level.clearTextMarker.alpha = 0;
   level.clearTextMarker setText("marker");
@@ -165,7 +162,6 @@ createFxLogic() {
 
   newStrArray = [];
   for(p = 0; p < 5; p++) {
-    // setup instructional text
     newStr = newHudElem();
     newStr.alignX = "center";
     newStr.location = 0;
@@ -183,7 +179,6 @@ createFxLogic() {
 
   level.createFX_centerPrint = newStrArray;
 
-  // gets cumulatively added to to create digital accelleration
   level.selectedMove_up = 0;
   level.selectedMove_forward = 0;
   level.selectedMove_right = 0;
@@ -235,15 +230,13 @@ createFxLogic() {
   setMenu("none");
   level.createfx_selecting = false;
 
-  // black background for text
   black = newHudElem();
   black.x = -120;
   black.y = 200;
-  //			black[i].alignX = "center";
-  //			black[i].alignY = "middle";
+
   black.foreground = 0;
   black setShader("black", 250, 160);
-  black.alpha = 0; // 0.6;
+  black.alpha = 0;
 
   level.createfx_inputlocked = false;
 
@@ -259,7 +252,6 @@ createFxLogic() {
   for(;;) {
     changedSelectedEnts = false;
 
-    // calculate the "cursor"right = anglestoright(level.player getplayerangles());
     forward = anglesToForward(level.player getplayerangles());
     up = anglestoup(level.player getplayerangles());
     dot = 0.85;
@@ -267,12 +259,6 @@ createFxLogic() {
     placeEnt_vector = vector_multiply(forward, 750);
     level.createfxCursor = bulletTrace(level.player getEye(), level.player getEye() + placeEnt_vector, false, undefined);
     highlightedEnt = undefined;
-
-    //************************************************************
-    //
-    // 				General input
-    //
-    //************************************************************
 
     level.buttonClick = [];
     level.button_is_kb = [];
@@ -286,7 +272,6 @@ createFxLogic() {
     if(button_is_clicked("shift", "BUTTON_X"))
       axisMode = !axisMode;
 
-    //changing to allow devgui item
     if(button_is_clicked("F5"))
       SetDevDvar("scr_createfx_dump", 1);
 
@@ -347,11 +332,6 @@ createFxLogic() {
     if(isDefined(level.selected_fx_option_index))
       menu_fx_option_set();
 
-    //************************************************************
-    //
-    // 				Highlighted Entity Handling
-    //
-    //************************************************************
     for(i = 0; i < level.createFXent.size; i++) {
       ent = level.createFXent[i];
 
@@ -368,22 +348,13 @@ createFxLogic() {
     if(isDefined(highLightedEnt)) {
       if(isDefined(lastHighlightedEnt)) {
         if(lastHighlightedEnt != highlightedEnt) {
-          // a highlighted ent is no longer highlighted so scale down the text size
-          //					lastHighlightedEnt.text = ".";
-          //					lastHighlightedEnt.textsize = 2;
           if(!ent_is_selected(lastHighlightedEnt))
             lastHighlightedEnt thread entity_highlight_disable();
 
-          // an ent became highlighted for the first time so scale up the text size on the new ent
-          //					highlightedEnt.text = HighlightedEnt.v["fxid"];
-          //					highlightedEnt.textsize = 1;
           if(!ent_is_selected(highlightedEnt))
             highlightedEnt thread entity_highlight_enable();
         }
       } else {
-        // an ent became highlighted for the first time so scale up the text size on the new ent
-        //				HighlightedEnt.text = HighlightedEnt.v["fxid"];
-        //				HighlightedEnt.textsize = 1;
         if(!ent_is_selected(highlightedEnt))
           highlightedEnt thread entity_highlight_enable();
       }
@@ -391,14 +362,7 @@ createFxLogic() {
 
     manipulate_createfx_ents(highlightedEnt, leftClick, leftHeld, ctrlHeld, colors, right);
 
-    //************************************************************
-    //
-    // 				Rotation and Movement
-    //
-    //************************************************************
-
     if(axisMode && level.selected_fx_ents.size > 0) {
-      // draw axis and do rotation if shift is held
       thread[[level.func_process_fx_rotater]]();
       if(button_is_clicked("enter", "p"))
         reset_axis_of_selected_ents();
@@ -412,24 +376,13 @@ createFxLogic() {
       if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0 || level.selectedRotate_roll != 0)
         changedSelectedEnts = true;
       wait(0.05);
-      /*
-      			for( i=0; i < level.selected_fx_ents.size; i++)
-      			{
-      				ent = level.selected_fx_ents[i];
-      				ent.angles = ent.angles + (level.selectedRotate_pitch, level.selectedRotate_yaw, 0);
-      				ent set_forward_and_up_vectors();
-      			}
-      			
-      			if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0)
-      				changedSelectedEnts = true;
-      */
     } else {
       selectedMove_vector = get_selected_move_vector();
       for(i = 0; i < level.selected_fx_ents.size; i++) {
         ent = level.selected_fx_ents[i];
-        if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+        if(isDefined(ent.model)) {
           continue;
-
+        }
         ent.v["origin"] = ent.v["origin"] + selectedMove_vector;
       }
 
@@ -446,7 +399,6 @@ createFxLogic() {
 
     lastHighlightedEnt = highlightedEnt;
 
-    // if the last selected entity changes then reset the options offset
     if(last_selected_entity_has_changed(lastSelectEntity)) {
       level.effect_list_offset = 0;
       clear_settable_fx();
@@ -461,7 +413,6 @@ createFxLogic() {
 }
 
 copy_angles_of_selected_ents() {
-  // so it stops rotating them over time
   level notify("new_ent_selection");
 
   for(i = 0; i < level.selected_fx_ents.size; i++) {
@@ -474,7 +425,6 @@ copy_angles_of_selected_ents() {
 }
 
 reset_axis_of_selected_ents() {
-  // so it stops rotating them over time
   level notify("new_ent_selection");
 
   for(i = 0; i < level.selected_fx_ents.size; i++) {
@@ -567,9 +517,9 @@ rotate_over_time(org, rotater) {
 
     for(i = 0; i < level.selected_fx_ents.size; i++) {
       ent = level.selected_fx_ents[i];
-      if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+      if(isDefined(ent.model)) {
         continue;
-
+      }
       ent.v["origin"] = rotater[i].origin;
       ent.v["angles"] = rotater[i].angles;
     }
@@ -637,9 +587,9 @@ move_selection_to_cursor() {
   difference = center - origin;
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+    if(isDefined(ent.model)) {
       continue;
-
+    }
     ent.v["origin"] -= difference;
   }
 }
@@ -655,12 +605,6 @@ insert_effect() {
   set_fx_hudElement("4. Exploder");
   set_fx_hudElement("(c) Cancel");
   set_fx_hudElement("(x) Exit");
-  /*
-  set_fx_hudElement("Pick an effect:");
-  set_fx_hudElement("In the console, type");
-  set_fx_hudElement("/fx name");
-  set_fx_hudElement("Where name is the name of the sound alias");
-  */
 }
 
 show_help() {
@@ -758,7 +702,7 @@ paste_ents() {
   move_selection_to_cursor();
   update_selected_entities();
   level.stored_ents = [];
-  copy_ents(); // roundabout way to put new entities in the copy queue
+  copy_ents();
 }
 
 add_and_select_entity(ent) {
@@ -799,15 +743,10 @@ print_fx_options(ent, tab, file, autosave) {
       continue;
     }
     if(option["type"] == "string") {
-      //			if( !autosave )
-      //				println( "	ent.v[ \"" + option[ "name" ] + "\" ] = \"" + ent.v[ option[ "name" ] ] + "\";" );
       cfxprintln(file, tab + "ent.v[ \"" + option["name"] + "\" ] = \"" + ent.v[option["name"]] + "\";");
       continue;
     }
 
-    // int or float
-    //		if( !autosave )
-    //			println( "	ent.v[ \"" + option[ "name" ] + "\" ] = " + ent.v[ option[ "name" ] ] + ";" );
     cfxprintln(file, tab + "ent.v[ \"" + option["name"] + "\" ] = " + ent.v[option["name"]] + ";");
   }
 }
@@ -833,7 +772,6 @@ entity_highlight_enable() {
   self endon("highlight change");
 
   for(;;) {
-    //		self.textalpha = sin(gettime()) * 0.5 + 0.5;
     self.textalpha = self.textalpha + 0.05;
     self.textalpha = self.textalpha * 1.25;
     if(self.textalpha > 1) {
@@ -866,7 +804,7 @@ manipulate_createfx_ents(highlightedEnt, leftClick, leftHeld, ctrlHeld, colors, 
 
       if(leftClick) {
         entWasSelected = index_is_selected(i);
-        level.createfx_selecting = !entWasSelected; // used for drag select / deselect
+        level.createfx_selecting = !entWasSelected;
         if(!ctrlHeld) {
           selectedSize = level.selected_fx_ents.size;
           clear_entity_selection();
@@ -911,7 +849,7 @@ manipulate_createfx_ents(highlightedEnt, leftClick, leftHeld, ctrlHeld, colors, 
 clear_settable_fx() {
   level.createfx_inputlocked = false;
   SetDevDvar("fx", "nil");
-  // in case we were modifying an option
+
   level.selected_fx_option_index = undefined;
   reset_fx_hud_colors();
 }
@@ -974,7 +912,6 @@ deselect_entity(index, ent) {
   if(!ent_is_highlighted(ent))
     ent thread entity_highlight_disable();
 
-  // remove the entity from the array of selected entities
   newArray = [];
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(level.selected_fx_ents[i] != ent)
@@ -1007,7 +944,6 @@ clear_entity_selection() {
 draw_axis() {
   range = 25 * GetDvarFloat("createfx_scaleid");
 
-  //	range = 25;
   forward = anglesToForward(self.v["angles"]);
   forward = vector_multiply(forward, range);
   right = anglestoright(self.v["angles"]);
@@ -1059,8 +995,6 @@ buttonPressed_internal(button) {
   if(!isDefined(button))
     return false;
 
-  // keyboard buttons can be locked so you can type in the fx info on the keyboard without
-  // accidentally activating features
   if(kb_locked(button))
     return false;
 
@@ -1116,7 +1050,6 @@ get_selected_move_vector() {
   } else
     level.selectedMove_up = 0;
 
-  //	vector = (level.selectedMove_right, level.selectedMove_forward, level.selectedMove_up);
   vector = (0, 0, 0);
   vector += vector_multiply(forward, level.selectedMove_forward);
   vector += vector_multiply(right, level.selectedMove_right);
@@ -1156,7 +1089,7 @@ process_button_held_and_clicked() {
   add_kb_button("m");
   add_kb_button("p");
   add_kb_button("x");
-  add_button("del"); // DEL is allowed to be pressed while in select mode
+  add_button("del");
   add_kb_button("end");
   add_kb_button("tab");
   add_kb_button("ins");
@@ -1195,7 +1128,6 @@ add_button(name) {
     if(level.player buttonPressed(name)) {
       level.buttonIsHeld[name] = true;
       level.buttonClick[name] = true;
-      //			println("Button: " + name);
     }
   } else {
     if(!level.player buttonPressed(name)) {
@@ -1291,7 +1223,7 @@ hack_start(painter_spmp) {
     return;
   }
   wait .05;
-  level.player openpopupmenu(painter_spmp); // painter.menu execs some console commands( ufo mode ).. sneaky hacks.
+  level.player openpopupmenu(painter_spmp);
   level.player closepopupmenu(painter_spmp);
 }
 
@@ -1368,17 +1300,14 @@ restart_fx_looper() {
 
   self set_forward_and_up_vectors();
   if(self.v["type"] == "loopfx") {
-    // new entities from copy/paste wont have a looper
     self create_looper();
   }
 
   if(self.v["type"] == "oneshotfx") {
-    // new entities from copy/paste wont have a looper
     self create_triggerfx();
   }
 
   if(self.v["type"] == "soundfx") {
-    // new entities from copy/paste wont have a looper
     self create_loopsound();
   }
 }
@@ -1407,8 +1336,6 @@ process_fx_rotater() {
       rotater[i] linkto(org);
     }
 
-    //	println ("pitch " + level.selectedRotate_pitch + " yaw " + level.selectedRotate_yaw);
-
     rotate_over_time(org, rotater);
 
     org delete();
@@ -1435,9 +1362,6 @@ process_fx_rotater() {
 }
 
 generate_fx_log(autosave) {
-  // first lets fix all the really small numbers so they dont cause errors because the game will print out
-  // 4.2343-7e or whatever but cant accept it back in from script
-
   flag_waitopen("createfx_saving");
   flag_set("createfx_saving");
   autosave = isDefined(autosave);
@@ -1451,8 +1375,6 @@ generate_fx_log(autosave) {
   if(autosave)
     filename = "createfx/backup.gsc";
 
-  //	file = openfile( filename, "write" );
-  //	assertex( file != -1, "File not writeable (maybe you should check it out): " + filename );
   file = -1;
 
   cfxprintlnStart();
@@ -1488,24 +1410,19 @@ generate_fx_log(autosave) {
   for(i = 0; i < level.createFXent.size; i++) {
     if(file != -1 && level.createfx_loopcounter > 32) {
       level.createfx_loopcounter = 0;
-      wait .05; // loop protection fails on writing the file
+      wait .05;
     }
     level.createfx_loopcounter++;
 
     e = level.createFXent[i];
     assertEX(isDefined(e.v["type"]), "effect at origin " + e.v["origin"] + " has no type");
 
-    // don't post .map effects in the script.
-    //		if(e.v["worldfx"])
-    //			continue;
-
-    // when scr_map_exploder_dump is set just output the exploders from radiant.could output two scripts but keeping it simple.
     if(GetDvarInt("scr_map_exploder_dump")) {
       if(!isDefined(e.model))
         continue;
-    } else if(isDefined(e.model))
-      continue; // entities with models are from radiant and don't get reported
-
+    } else if(isDefined(e.model)) {
+      continue;
+    }
     if(e.v["type"] == "loopfx")
       cfxprintln(file, tab + "ent = createLoopEffect( \"" + e.v["fxid"] + "\" );");
     if(e.v["type"] == "oneshotfx")
@@ -1526,9 +1443,5 @@ generate_fx_log(autosave) {
   cfxprintln(file, " ");
   cfxprintlnEnd(file, autosave, radiant_exploder_add_string);
 
-  //	saved = closefile( file );
-  //	assertex( saved == 1, "File not saved (see above message?): " + filename );
   flag_clear("createfx_saving");
-
-  //	println( "CreateFX entities placed: " + level.createFxEnt.size );
 }

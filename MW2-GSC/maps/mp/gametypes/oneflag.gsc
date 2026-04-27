@@ -7,22 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	One Flag CTF
-*/
-
-/*QUAKED mp_ctf_spawn_axis (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_ctf_spawn_allies (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_ctf_spawn_axis_start (1.0 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_ctf_spawn_allies_start (0.0 1.0 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
@@ -67,7 +51,7 @@ onPrecacheGameType() {
   precacheString(&"MP_ENEMY_FLAG_TAKEN_BY");
   precacheString(&"MP_FLAG_CAPTURED_BY");
   precacheString(&"MP_ENEMY_FLAG_CAPTURED_BY");
-  //precacheString(&"MP_FLAG_RETURNED_BY");
+
   precacheString(&"MP_FLAG_RETURNED");
   precacheString(&"MP_ENEMY_FLAG_RETURNED");
   precacheString(&"MP_YOUR_FLAG_RETURNING_IN");
@@ -244,8 +228,6 @@ createTeamFlag(team) {
   teamFlag.onPickupFailed = ::onPickup;
   teamFlag.onDrop = ::onDrop;
   teamFlag.onReset = ::onReset;
-  //teamFlag.onBeginUse = ::onBeginUse;	
-  //teamFlag.onEndUse = ::onEndUse;
 
   teamFlag.oldRadius = trigger.radius;
 
@@ -343,7 +325,6 @@ onPickup(player) {
 
     level.capZones[team] maps\mp\gametypes\_gameobjects::setVisibleTeam("any");
 
-    //self maps\mp\gametypes\_gameobjects::setVisibleTeam( "enemy" );
     self maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_defend");
     self maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_kill");
     self maps\mp\gametypes\_gameobjects::set2DIcon("friendly", level.iconTarget2D);
@@ -431,8 +412,6 @@ onUse(player) {
   player notify("objective", "captured");
   player thread maps\mp\_matchdata::logGameEvent("capture", player.origin);
 
-  // round win here, no reset necessary
-
   printAndSoundOnEveryone(team, otherteam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
 
   thread flagCaptured(team, &"MP_DOM_NEUTRAL_FLAG_CAPTURED");
@@ -455,13 +434,11 @@ onTimeLimit() {
   if(level.flagCaptured) {
     return;
   }
-  // TODO: change to "Flag Defended" or some such
+
   maps\mp\gametypes\_gamelogic::endGame(game["defenders"], game["strings"]["time_limit_reached"]);
 }
 
-onCantUse(player) {
-  //	player iPrintLnBold(&"MP_CANT_PLANT_WITHOUT_BOMB" );
-}
+onCantUse(player) {}
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {

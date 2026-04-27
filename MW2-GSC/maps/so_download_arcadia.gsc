@@ -12,13 +12,12 @@
 #include maps\so_download_arcadia_code;
 
 main() {
-  // ------------- TWEAKABLES ------------- level.DOWNLOAD_TIME = 60; // how long it takes to download the files at each spot
-  level.DOWNLOAD_INTERRUPT_RADIUS = 256; // how close to the download an enemy has to be to "interrupt" it
-  level.NEARBY_CHARGE_RADIUS = 1000; // radius around the download from which we'll pull existing enemies to charge the download spot
-  level.NUM_ENEMIES_LEFT_TOLERANCE = 0; // how many guys we will tolerate still being alive in a wave before it's done
+  level.DOWNLOAD_INTERRUPT_RADIUS = 256;
+  level.NEARBY_CHARGE_RADIUS = 1000;
+  level.NUM_ENEMIES_LEFT_TOLERANCE = 0;
   level.NUM_FILES_MIN = 900;
   level.NUM_FILES_MAX = 2400;
-  // -------------------------------------- level.friendlyfire_warnings = true;
+
   so_download_arcadia_init_flags();
 
   so_download_arcadia_precache();
@@ -63,10 +62,6 @@ main() {
 
   thread so_fake_choppers();
   thread so_mansion_pool();
-
-  //thread maps\_debug::debug_character_count();
-
-  //	so_disable_player_laser_init();
 }
 
 precache_strings() {
@@ -85,7 +80,6 @@ precache_strings() {
   PrecacheString(&"SO_DOWNLOAD_ARCADIA_DOWNLOAD_COMPLETE");
   PrecacheString(&"SO_DOWNLOAD_ARCADIA_DOWNLOAD_INTERRUPTED");
 
-  // Hints
   PrecacheString(&"SO_DOWNLOAD_ARCADIA_DEADQUOTE_HINT1");
   PrecacheString(&"SO_DOWNLOAD_ARCADIA_DEADQUOTE_HINT2");
   PrecacheString(&"SO_DOWNLOAD_ARCADIA_DEADQUOTE_HINT3");
@@ -100,7 +94,7 @@ so_download_arcadia_init_flags() {
 
   flag_init("used_laser");
   flag_init("laser_hint_print");
-  flag_set("laser_hint_print"); // Don't do the SP version of the laser hint
+  flag_set("laser_hint_print");
 
   flag_init("golf_course_vehicles");
   flag_init("golf_course_mansion");
@@ -109,57 +103,11 @@ so_download_arcadia_init_flags() {
 
   flag_init("no_living_enemies");
 
-  // Arcadia flag
   flag_init("disable_stryker_dialog");
   flag_init("disable_stryker_laser");
   flag_init("golf_course_vehicles");
   flag_init("golf_course_vehicles_stop");
 }
-
-//so_disable_player_laser_init()
-//{
-//	triggers = getEntArray( "so_disable_player_stryker", "targetname" );
-//	array_thread( triggers, ::so_disable_player_laser_think );
-//}
-
-//so_disable_player_laser_think()
-//{
-//	while( 1 )
-//	{
-//		self waittill( "trigger", other );
-//
-//		touched = true;
-//		while( touched )
-//		{
-//			touched = false;
-//
-//			foreach ( player in level.players )
-//			{
-//				if( player IsTouching( self ) )
-//				{
-//					touched = true;
-//					player ent_flag_set( "disable_stryker_laser" );
-//				}
-//				else
-//				{
-//					player ent_flag_clear( "disable_stryker_laser" );
-//				}
-//			}
-//
-//			if( !touched )
-//			{
-//				break;
-//			}
-//
-//			wait( 0.5 );
-//		}
-//
-//		foreach ( player in level.players )
-//		{
-//			player ent_flag_clear( "disable_stryker_laser" );
-//		}
-//	}
-//}
 
 so_download_arcadia_precache() {
   PrecacheItem("m79");
@@ -294,80 +242,13 @@ so_fake_chopper_tilt() {
 }
 
 so_download_arcadia_intro_dialogue() {
-  //	doExtraDialogue = false;
-  //	
-  //	dvar = GetDvarInt( "so_download_arcadia_introdialogue", -1 );
-  //	if( dvar <= 0 )
-  //	{
-  //		doExtraDialogue = true;
-  //		setDvar( "so_download_arcadia_introdialogue", 5 );
-  //	}
-  //	else
-  //	{
-  //		dvar--;
-  //		setDvar( "so_download_arcadia_introdialogue", dvar );
-  //	}
-  //	
-  //	if( doExtraDialogue )
-  //	{
-  //		// Hunter Two-One-Actual, Overlord. Gimme a sitrep over.
-  //		so_radio_dialogue( "arcadia_hqr_sitrep" );
-  //		
-  //		// We're just past the enemy blockade at heckpoint Lima. Now proceeding into Arcadia, over.
-  //		level.foley so_character_dialogue( "arcadia_fly_intoarcadia" );
-  //		
-  //		// Roger that. I have new orders for you. This comes down from the top, over.
-  //		so_radio_dialogue( "arcadia_hqr_neworders" );
-  //		
-  //		// Solid copy Overlord, send it.
-  //		level.foley so_character_dialogue( "arcadia_fly_solidcopy" );
-  //	}
-
   wait(1);
-
-  // "There are several ruggedized laptops in your AO that contain high-value information."so_radio_dialogue("so_dwnld_hqr_laptops");
-
-  // "Download the data from each of the laptops, then return to the Stryker for extraction."so_radio_dialogue("so_dwnld_hqr_downloaddata");
 
   flag_set("intro_dialogue_done");
   music_loop("so_download_arcadia_music", 328);
 }
 
-so_download_arcadia_anims() {
-  // "There are several ruggedized laptops in your AO that contain high-value information."level.scr_radio["so_dwnld_hqr_laptops"] = "so_dwnld_hqr_laptops";
-
-  // "Download the data from each of the laptops, then return to the Stryker for extraction."level.scr_radio["so_dwnld_hqr_downloaddata"] = "so_dwnld_hqr_downloaddata";
-
-  // "All Hunter units, Badger One will not engage targets without your explicit authorization."level.scr_radio["so_dwnld_stk_explicitauth"] = "so_dwnld_stk_explicitauth";
-
-  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."level.scr_radio["so_dwnld_stk_designated"] = "so_dwnld_stk_designated";
-
-  // "Hunter Two-One, we can't fire on enemies without your authorization!"level.scr_radio["so_dwnld_stk_cantfire"] = "so_dwnld_stk_cantfire";
-
-  // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"level.scr_radio["so_dwnld_stk_tenfootmobiles"] = "so_dwnld_stk_tenfootmobiles";
-
-  // "We've got activity to the west, they're coming from the light brown mansion!"level.scr_radio["so_dwnld_stk_brownmansion"] = "so_dwnld_stk_brownmansion";
-
-  // "Hostiles spotted across the street, they're moving to your position!"level.scr_radio["so_dwnld_stk_acrossstreet"] = "so_dwnld_stk_acrossstreet";
-
-  // "Hunter Two-One, you got movement right outside your location!"level.scr_radio["so_dwnld_stk_gotmovement"] = "so_dwnld_stk_gotmovement";
-
-  // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."level.scr_radio["so_dwnld_hqr_wirelesslydisrupt"] = "so_dwnld_hqr_wirelesslydisrupt";
-
-  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."level.scr_radio["so_dwnld_hqr_restartmanually"] = "so_dwnld_hqr_restartmanually";
-
-  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"level.scr_radio["so_dwnld_hqr_getbackrestart"] = "so_dwnld_hqr_getbackrestart";
-
-  // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."level.scr_radio["so_dwnld_hqr_gofindthem"] = "so_dwnld_hqr_gofindthem";
-
-  // "Stay frosty, Hunter Two-One, there's one laptop left."level.scr_radio["so_dwnld_hqr_onelaptop"] = "so_dwnld_hqr_onelaptop";
-
-  // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."level.scr_radio["so_dwnld_hqr_pullingyouout"] = "so_dwnld_hqr_pullingyouout";
-
-  // "Hunter Two-One, get back to the Stryker for extraction!"level.scr_radio["so_dwnld_hqr_extraction"] = "so_dwnld_hqr_extraction";
-
-  // "Hunter Two-One, return to the Stryker to complete your mission!"level.scr_radio["so_dwnld_hqr_completemission"] = "so_dwnld_hqr_completemission";
-}
+so_download_arcadia_anims() {}
 
 so_mansion_pool() {
   foreach(player in level.players) {

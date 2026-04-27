@@ -10,7 +10,7 @@
 main(model, type) {
   build_template("snowmobile_player", model, type);
   build_localinit(::init_local);
-  build_deathmodel("vehicle_snowmobile", "vehicle_snowmobile_static"); // RADNAME = _player
+  build_deathmodel("vehicle_snowmobile", "vehicle_snowmobile_static");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   build_treadfx();
   build_life(999, 500, 1500);
@@ -38,26 +38,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_snowmobile_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile_player::main( "vehicle_snowmobile" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile_player
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_snowmobile_player_alt (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile_player::main( "vehicle_snowmobile_alt" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile_player
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_player"default:"script_team" "allies"
-*/

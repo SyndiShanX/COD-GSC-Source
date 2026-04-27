@@ -122,7 +122,7 @@ getRespawnDelay() {
       return undefined;
 
     timeRemaining = (level.hqDestroyTime - gettime()) / 1000;
-    timeRemaining += level.extraDelay + 1.0; // extra second for slowed spawning
+    timeRemaining += level.extraDelay + 1.0;
 
     if(level.spawnDelay >= level.hqAutoDestroyTime)
       setLowerMessage("hq_respawn", &"MP_WAITING_FOR_HQ", undefined, 10);
@@ -169,7 +169,6 @@ onStartGameType() {
 
   setClientNameMode("auto_change");
 
-  // TODO: HQ spawnpoints
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", "mp_tdm_spawn");
@@ -257,7 +256,6 @@ HQMainLoop() {
     radio = PickRadioTospawn();
     radio makeRadioActive();
 
-    //iPrintLn(&"MP_HQ_REVEALED" );
     playSoundOnPlayers("mp_suitcase_pickup");
     leaderDialog("hq_located");
 
@@ -279,12 +277,12 @@ HQMainLoop() {
 
       timerDisplay["allies"].label = hqSpawningInStr;
       timerDisplay["allies"] setTimer(level.hqSpawnTime);
-      //if( !level.splitscreen )
+
       timerDisplay["allies"].alpha = 1;
 
       timerDisplay["axis"].label = hqSpawningInStr;
       timerDisplay["axis"] setTimer(level.hqSpawnTime);
-      //if( !level.splitscreen )
+
       timerDisplay["axis"].alpha = 1;
 
       wait level.hqSpawnTime;
@@ -354,11 +352,11 @@ HQMainLoop() {
 
       if(level.hqAutoDestroyTime) {
         timerDisplay[ownerTeam].label = hqDestroyedInFriendlyStr;
-        //if( !level.splitscreen )
+
         timerDisplay[ownerTeam].alpha = 1;
 
         timerDisplay[otherTeam].label = hqDestroyedInEnemyStr;
-        //if( !level.splitscreen )
+
         timerDisplay[otherTeam].alpha = 1;
       }
 
@@ -494,7 +492,6 @@ onRadioDestroy(player) {
   if(team == "axis")
     otherTeam = "allies";
 
-  //player logString( "radio destroyed" );
   player thread[[level.onXPEvent]]("capture");
   maps\mp\gametypes\_gamescore::givePlayerScore("capture", player);
   player incPlayerStat("hqsdestroyed", 1);
@@ -588,8 +585,7 @@ getSpawnPoint() {
     hqOwningTeam = level.radioObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
     if(self.pers["team"] == hqOwningTeam)
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radioObject.nearSpawns);
-    //else if( level.spawnDelay >= level.hqAutoDestroyTime && gettime() > level.hqRevealTime + 10000 )
-    //	spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam( level.spawn_all, level.radioObject.outerSpawns );
+
     else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radioObject.outerSpawns);
   }
@@ -639,10 +635,6 @@ SetupRadios() {
         maperrors[maperrors.size] = "Radio at " + radio.origin + " is not inside any \"radiotrigger\" trigger";
         continue;
       }
-
-      // possible fallback (has been tested)
-      //radio.trig = spawn( "trigger_radius", radio.origin, 0, 128, 128 );
-      //errored = false;
     }
 
     assert(!errored);
@@ -659,14 +651,6 @@ SetupRadios() {
 
     radio.visuals = visuals;
     radio maps\mp\gametypes\_gameobjects::setModelVisibility(false);
-    /*
-    radio.gameObject = maps\mp\gametypes\_gameobjects::createUseObject( "neutral", radio.trig, visuals, (radio.origin - radio.trigorigin) + level.iconoffset );
-    radio.gameObject maps\mp\gametypes\_gameobjects::disableObject();
-    radio.gameObject maps\mp\gametypes\_gameobjects::setModelVisibility( false );
-    radio.trig.useObj = radio.gameObject;
-    		
-    radio setUpNearbySpawns();
-    */
   }
 
   if(maperrors.size > 0) {
@@ -712,7 +696,6 @@ setUpNearbySpawns() {
     spawns[i].distsq = distanceSquared(spawns[i].origin, self.origin);
   }
 
-  // sort by distsq
   for(i = 1; i < spawns.size; i++) {
     thespawn = spawns[i];
     for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--)
@@ -729,7 +712,7 @@ setUpNearbySpawns() {
       first[first.size] = spawns[i];
 
     if(i > thirdSize || spawns[i].distsq > 1000 * 1000) {
-      if(outer.size < 10 || spawns[i].distsq < 1500 * 1500) // don't include too many far-away spawnpoints
+      if(outer.size < 10 || spawns[i].distsq < 1500 * 1500)
         outer[outer.size] = spawns[i];
     }
   }
@@ -758,7 +741,7 @@ PickRadioTospawn() {
 
   if(!validAllies.size || !validAxis.size) {
     radio = level.radios[randomint(level.radios.size)];
-    while(isDefined(level.prevradio) && radio == level.prevradio) // so lazy
+    while(isDefined(level.prevradio) && radio == level.prevradio)
       radio = level.radios[randomint(level.radios.size)];
 
     level.prevradio2 = level.prevradio;
@@ -804,7 +787,6 @@ PickRadioTospawn() {
   for(i = 0; i < level.radios.size; i++) {
     radio = level.radios[i];
 
-    // (purposefully using distance instead of distanceSquared)
     cost = abs(distance(radio.origin, avgpos["allies"]) - distance(radio.origin, avgpos["axis"]));
 
     if(isDefined(level.prevradio) && radio == level.prevradio) {
@@ -836,7 +818,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   }
   if(self.touchTriggers.size) {
     foreach(trigger in self.touchTriggers) {
-      // TODO: way to check for koth specific triggers
       if(!isDefined(trigger.useObj)) {
         continue;
       }
@@ -863,7 +844,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 
   if(attacker.touchTriggers.size) {
     foreach(trigger in attacker.touchTriggers) {
-      // TODO: way to check for koth specific triggers
       if(!isDefined(trigger.useObj)) {
         continue;
       }
@@ -920,8 +900,6 @@ kothDebug() {
         wait .05;
         continue;
       }
-
-      // show nearest HQ and its "assault" spawnpoints
 
       bestdistsq = 99999999999;
       bestradio = level.radios[0];

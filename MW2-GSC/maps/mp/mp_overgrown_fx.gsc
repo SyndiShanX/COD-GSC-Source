@@ -10,12 +10,7 @@ main() {
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
-  //	level._effect[ "leaves_ground_gentlewind" ]	 	= loadfx( "misc/leaves_ground_gentlewind" );	
-  //	level._effect[ "leaves_fall_gentlewind" ]	 	= loadfx( "misc/leaves_fall_gentlewind" );
-  // 	level._effect[ "insects_carcass_runner" ]	 	= loadfx( "misc/insects_carcass_runner" );
-  // 	level._effect[ "fog_daytime" ]					 = loadfx( "weather/fog_daytime" );
 
-  //ambient runners
   level._effect["mp_overgrown_insects01"] = loadfx("ambient_runners/mp_overgrown_insects01");
   level._effect["mp_overgrown_insects02"] = loadfx("ambient_runners/mp_overgrown_insects02");
   level._effect["mp_overgrown_insects03"] = loadfx("ambient_runners/mp_overgrown_insects03");

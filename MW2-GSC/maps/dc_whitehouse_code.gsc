@@ -18,7 +18,7 @@ whitehouse_spotlight_create(str_targetname, health) {
 
   spotlight_origin = getstruct(damage_ent.target, "targetname");
 
-  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"spotlight.angles = spotlight_origin.angles;
+  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight");
   spotlight setModel("cod3mg42");
   spotlight SetTurretTeam("axis");
   spotlight setmode("manual");
@@ -45,7 +45,6 @@ whitehouse_spotlight() {
   self thread whitehouse_spotlight_damage();
 
   self thread whitehouse_spotlight_pathing(target_struct);
-  //	self thread whitehouse_spotlight_targeting();
 }
 
 whitehouse_spotlight_pathing(target_struct) {
@@ -55,7 +54,7 @@ whitehouse_spotlight_pathing(target_struct) {
 
   while(true) {
     if(isDefined(target_struct.script_speed)) {
-      time = target_struct.script_speed / 1000; // hacky use of speed to set the convergence time.
+      time = target_struct.script_speed / 1000;
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
     }
@@ -129,7 +128,7 @@ manual_mg_init(delay) {
 
   self thread manual_mg_drone();
 
-  self setmode("auto_nonai"); //"manual", "manual_ai", "auto_nonai", "auto_ai", "sentry"self setturretteam("axis");
+  self setmode("auto_nonai");
   self setbottomarc(35);
   self setleftarc(90);
   self setrightarc(90);
@@ -189,7 +188,7 @@ manual_mg_path(start_target, noloop) {
 
   while(true) {
     if(isDefined(self.current_target.script_speed)) {
-      time = self.current_target.script_speed / 1000; // hacky use of speed to set the convergence time.
+      time = self.current_target.script_speed / 1000;
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
     }
@@ -296,7 +295,6 @@ sandbag_group_setup(str_targetname) {
     group_array[group_id][index] = sandbag;
   }
 
-  // used to calculate the vector to throw the bags for these groups.
   force_struct = getstruct(str_targetname, "script_noteworthy");
 
   foreach(group in group_array) {
@@ -323,15 +321,13 @@ sandbag_group(sandbag_array, force_struct) {
   group_struct.hit_count = 0;
   array_thread(sandbag_array, ::sandbag_damage, group_struct);
 
-  // vector hardcoded since that works for me in DCemp.
   vector = anglesToForward(force_struct.angles);
-  //	vector = anglesToForward( (345, 180, 0) );
+
   force = vector * 3000;
 
   while(sandbag_array.size) {
     group_struct waittill("damage", damaged_ent, damage);
 
-    // lets all damaged bags report in.
     waittillframeend;
 
     if(damage > 500) {
@@ -391,19 +387,17 @@ sandbag_damage(group_struct) {
 }
 
 whitehouse_cleanup_approach() {
-  // kill east side enemies and friendly mg guys
   allied_mg = get_ai_group_ai("allied_mg");
   foreach(ai in allied_mg)
   ai kill();
 
   enemies = get_ai_group_ai("whitehouse_approach_enemies");
   array_thread(enemies, ::random_delayed_kill, 10, 15);
-  // make enemies ignore the player.
+
   array_call(enemies, ::setthreatbiasgroup, "ignore_player");
 
   flag_wait("whitehouse_entrance_init");
 
-  // stop enemy MGs
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
 
@@ -417,13 +411,11 @@ whitehouse_cleanup_approach() {
 
   flag_wait("whitehouse_breached");
 
-  // kill remaining exterior enemies
   axis_arr = getaiarray("axis");
   array_call(axis_arr, ::kill);
 
   flag_wait("whitehouse_path_kitchen");
 
-  // delete exterior allies
   ai_arr = getaiarray("allies");
   foreach(ai in ai_arr) {
     if(ai is_hero()) {
@@ -434,12 +426,11 @@ whitehouse_cleanup_approach() {
 }
 
 whitehouse_mg_setup() {
-  level.live_mg_count = (level.gameskill - 1); // 2 live mg's on Veteran and one on Hardened.
+  level.live_mg_count = (level.gameskill - 1);
 
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   array_thread(mg_array, ::manual_mg_init, true);
 
-  // trigger that activates the turret to fire infront of the player.
   turret = getent("threat_mg", "targetname");
   trigger_array = getEntArray("mg_threat_trigger", "targetname");
   array_thread(trigger_array, ::manual_mg_threat_trigger, turret);
@@ -452,11 +443,11 @@ westwing_mg_setup() {
   convergance_time = 1.5;
 
   switch (level.gameskill) {
-    case 0: // recruit
+    case 0:
       ai_spread = 5;
       convergance_time = 2;
       break;
-    case 1: // regular
+    case 1:
       ai_spread = 4;
       convergance_time = 2;
       break;
@@ -554,11 +545,9 @@ fake_flare(delay, tag, origin_offset, angles_offset) {
 flare_fx_start(guy) {
   guy endon("death");
 
-  // don't do flares if player is not looking
   if(!flag("player_looking_at_flareguy"))
     return false;
 
-  // start middle anim when player is looking.
   guy playSound("scn_dcwhite_npc_flare_start");
 
   flare = spawn("script_model", (0, 0, 0));
@@ -595,8 +584,6 @@ play_flare_fx(guy) {
 flare_weapon() {
   self endon("remove_flare");
 
-  //	thread flag_set_delayed( "remove_flare_hint", 3 );
-
   self.old_weapon = self getcurrentprimaryweapon();
   level.player AllowFire(false);
   level.player GiveWeapon("flare");
@@ -608,9 +595,6 @@ flare_weapon() {
   display_hint("how_to_pop_flare");
   level.player AllowFire(true);
 
-  //	wait 2;
-  //	self ForceViewmodelAnimation( "flare", "fire" );
-
   self waittill("weapon_fired");
 
   flag_set("player_flare_popped");
@@ -620,7 +604,6 @@ flare_weapon() {
   level.player EnableWeaponSwitch();
   level.player EnableOffhandWeapons();
 
-  // switch back to old weapon or the first primary if old weapon is invalid.
   self.old_weapon = self can_switch_to_weapon(self.old_weapon);
   level.player switchtoweapon(self.old_weapon);
 }
@@ -712,7 +695,6 @@ random_delayed_kill(min_delay, max_delay, check_sight) {
   while(true) {
     wait randomfloatrange(min_delay, max_delay);
 
-    // don't kill if guy can see player.
     if(isDefined(check_sight) && self CanSee(level.player)) {
       continue;
     }
@@ -733,7 +715,6 @@ chandelier_setup() {
 }
 
 chandelier() {
-  // get all parts
   parts = getEntArray(self.target, "targetname");
 
   self.wire = parts[0];
@@ -752,12 +733,10 @@ chandelier() {
   self.swing_origin = spawn("script_origin", ceiling);
   self.swing = false;
 
-  // connect all parts
   self linkto(self.swing_origin);
   self.wire linkto(self.swing_origin);
   self thread chandelier_link_light();
 
-  // turn light on
   self.light SetLightIntensity(1.5);
 
   self thread chandelier_react();
@@ -795,7 +774,6 @@ chandelier_swing(damage, direction_vec) {
   weight_vector = vectornormalize((direction_vec[0] * -1, direction_vec[1], 0));
   rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-  // first fast rotation from explosion
   self.swing_origin rotateto(rotation, swing_speed, 0, swing_speed);
   self.swing_origin waittill("rotatedone");
 
@@ -818,15 +796,15 @@ chandelier_flicker() {
   self endon("chandelier_fall");
   self endon("chandelier_swing");
 
-  wait .5; // total wait ~5.4 sec.
+  wait .5;
 
   for(i = 0; i < 14; i++) {
     self.light SetLightIntensity(0);
     self setModel("furniture_chandelier1_off");
-    wait randomfloatrange(0.05, 0.2); // ~0.125
+    wait randomfloatrange(0.05, 0.2);
     self.light SetLightIntensity(randomfloatrange(0.5, 1.5));
     self setModel("furniture_chandelier1");
-    wait randomfloatrange(0.15, 0.3); // ~0.225
+    wait randomfloatrange(0.15, 0.3);
   }
   self.light SetLightIntensity(1.5);
 }
@@ -917,68 +895,6 @@ simple_drone_init() {
   self setCanDamage(true);
 }
 
-/*
-tunnels_teleport()
-{
-	trigger = getent( "tunnels_teleport_trigger", "targetname" );
-	trigger waittill( "trigger" );
-
-	flag_set( "tunnels_teleport" );
-
-//	fx_rain_pause();
-//	fx_rain_pause2();
-
-	while( !level.player IsOnGround() )
-		wait 0.05;
-	
-	flag_set( "end_fx" );
-	
-	// teleport player
-	start_ent = getent( trigger.target, "targetname" );
-	target_ent = getent( start_ent.target, "targetname" );
-
-	angles_rotation = target_ent.angles - start_ent.angles;
-	origin_offset = level.player.origin - start_ent.origin;
-	origin_offset = rotate_vector( origin_offset, angles_rotation );
-	player_angles_offset = level.player getplayerangles() - start_ent.angles;
-
-	destination_origin = target_ent.origin + origin_offset;
-	destination_angles = target_ent.angles + player_angles_offset;
-
-	level.player SetOrigin( destination_origin );
-	level.player setplayerangles( destination_angles );
-
-	SetNorthYaw( 0.0 );
-
-	// teleport ai
-	volume = getent( "tunnels_teleport_volume", "targetname" );
-	dest_arr = getStructArray("tunnels_teleport_struct", "targetname" );
-	index = 0;
-
-	angles_rotation = target_ent.angles - start_ent.angles;
-	foreach( ai in level.team )
-	{
-		origin_offset = ai.origin - start_ent.origin;
-		origin_offset = rotate_vector( origin_offset, angles_rotation );
-		ai_angles_offset = ai.angles - start_ent.angles;
-
-		destination_origin = target_ent.origin + origin_offset;
-		destination_angles = target_ent.angles + ai_angles_offset;
-
-//		if( !goal_in_volume( destination_origin, volume ) )
-//		{
-//			destination_origin = dest_arr[ index ].origin;
-//			destination_angles = dest_arr[ index ].angles;
-//			index++;
-//		}
-
-		ai ForceTeleport( destination_origin, destination_angles );
-	}
-
-	flag_set( "tunnels_teleport_done" );
-}
-*/
-
 goal_in_volume(origin, volume) {
   ent = spawn("script_model", origin);
   state = ent IsTouching(volume);
@@ -1005,11 +921,6 @@ force_flash() {
   self waittill("trigger");
   thread maps\_weather::lightningFlash(maps\dc_whitehouse_fx::lightning_normal, maps\dc_whitehouse_fx::lightning_flash);
 }
-
-/***************************/
-
-/***** new since split*****/
-/***************************/
 
 spawn_team() {
   spawner_arr = getEntArray("team", "targetname");
@@ -1103,7 +1014,7 @@ dcwh_teleport_team(team, nodes) {
   index = 0;
   foreach(actor in team) {
     actor thread dcwh_teleport_actor(nodes[index]);
-    //actor thread dcwh_teleport_actor( nodes[ index ] );
+
     index++;
   }
 }
@@ -1158,23 +1069,3 @@ flickerlight_flares() {
     wait .05;
   }
 }
-
-/*
-step_obj( obj_id, ent )
-{
-	level endon( "whitehouse_radio" );
-
-	while( isDefined( ent.target ) )
-	{
-		trigger = spawn( "trigger_radius", ent.origin, 0, ent.radius, 72 );
-		trigger waittill( "trigger" );
-		trigger delete();
-
-		if( isDefined( self.script_flag_wait ) )
-			flag_wait( self.script_flag_wait );
-
-		ent = getstruct( ent.target, "targetname" );
-		objective_Position( obj_id, ent.origin );
-	}
-}
-*/

@@ -8,7 +8,7 @@
 #include maps\_hud_util;
 
 init() {
-  anim.so = spawnStruct(); // holds all of our SO-specific bc stuff
+  anim.so = spawnStruct();
 
   anim.so.eventTypes = [];
   anim.so.eventTypes["check_fire"] = "threat_friendly_fire";
@@ -25,7 +25,6 @@ init() {
   anim.so.eventTypes["sentry_out"] = "inform_place_sentry";
   anim.so.eventTypes["area_secure"] = "inform_area_secure";
 
-  // Supported, but not currently used anywhere.
   anim.so.eventTypes["kill_generic"] = "inform_kill_generic";
   anim.so.eventTypes["kill_infantry"] = "inform_kill_infantry";
   anim.so.eventTypes["affirmative"] = "inform_roger";
@@ -74,7 +73,7 @@ init() {
   anim.so.noReloadCalloutWeapons[anim.so.noReloadCalloutWeapons.size] = "rpg";
   anim.so.noReloadCalloutWeapons[anim.so.noReloadCalloutWeapons.size] = "rpg_player";
 
-  anim.so.bcMaxDistSqd = 800 * 800; // units
+  anim.so.bcMaxDistSqd = 800 * 800;
 
   anim.so.bcPrintFailPrefix = "^3***** BCS FAILURE: ";
 
@@ -231,9 +230,7 @@ mark_dropzone_tracking() {
   }
 }
 
-glowstick_tracking() {
-  // Currently glowsticks aren't used or supported.
-}
+glowstick_tracking() {}
 
 reload_tracking() {
   level endon("special_op_terminated");
@@ -247,7 +244,6 @@ reload_tracking() {
       continue;
     }
 
-    // sounds dumb for a player to chatter about reloading when he's downed
     if(self is_downed()) {
       continue;
     }
@@ -360,19 +356,15 @@ friendlyfire_whizby_is_valid(shooter, whizByOrigin) {
     return false;
   }
 
-  // downed guys don't notice friendlyfire whizbys
   if(self is_downed()) {
     return false;
   }
 
-  // hack - the whizby notify for a player gives us an origin, not a distance like it does when an AI calls it
   if(abs(whizByOrigin[2] - self.origin[2] > 128)) {
-    // throw away whizbys that are way too high or low
     return false;
   }
   whizByDist = Distance2D(self.origin, whizByOrigin);
 
-  // make distance checks consistent with SP
   if(!animscripts\battlechatter_ai::friendlyfire_whizby_distances_valid(shooter, whizbyDist)) {
     return false;
   }
@@ -390,8 +382,6 @@ play_revive_nag() {
 
   self play_so_chatter(type);
 }
-
-// depending on where we are in the bleedout sequence, we play lines with different intensity
 get_nag_event_type() {
   type = "downed";
 

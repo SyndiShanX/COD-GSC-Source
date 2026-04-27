@@ -15,21 +15,7 @@ init() {
   level.killcam = maps\mp\gametypes\_tweakables::getTweakableValue("game", "allowkillcam");
 }
 
-killcam(attackerNum, // entity number of the attacker
-  killcamentityindex, // entity number of the entity to view (grenade, airstrike, etc)
-  killcamentitystarttime, // time at which the killcamentity came into being
-  sWeapon, // killing weapon
-  predelay, // time between player death and beginning of killcam
-  offsetTime, // something to do with how far back in time the killer was seeing the world when he made the kill; latency related, sorta
-  timeUntilRespawn, // will the player be allowed to respawn after the killcam?
-  maxtime, // time remaining until map ends; the killcam will never last longer than this. undefined = no limit
-  attacker, // entity object of attacker
-  victim // entity object of the victim
-) {
-  // monitors killcam and hides HUD elements during killcam session
-  //if( !level.splitscreen )
-  //	self thread killcam_HUD_off();
-
+killcam(attackerNum, killcamentityindex, killcamentitystarttime, sWeapon, predelay, offsetTime, timeUntilRespawn, maxtime, attacker, victim) {
   self endon("disconnect");
   self endon("spawned");
   level endon("game_ended");
@@ -37,7 +23,7 @@ killcam(attackerNum, // entity number of the attacker
   if(attackerNum < 0) {
     return;
   }
-  // length from killcam start to killcam end
+
   if(getDvar("scr_killcam_time") == "") {
     if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp")
       camtime = (gettime() - killcamentitystarttime) / 1000 - predelay - .1;
@@ -47,10 +33,10 @@ killcam(attackerNum, // entity number of the attacker
       camtime = 8;
     else if(issubstr(sWeapon, "remotemissile_"))
       camtime = 5;
-    else if(!timeUntilRespawn || timeUntilRespawn > 5.0) // if we're not going to respawn, we can take more time to watch what happened
+    else if(!timeUntilRespawn || timeUntilRespawn > 5.0)
       camtime = 5.0;
     else if(sWeapon == "frag_grenade_mp" || sWeapon == "frag_grenade_short_mp" || sWeapon == "semtex_mp")
-      camtime = 4.25; // show long enough to see grenade thrown
+      camtime = 4.25;
     else
       camtime = 2.5;
   } else
@@ -63,7 +49,6 @@ killcam(attackerNum, // entity number of the attacker
       camtime = .05;
   }
 
-  // time after player death that killcam continues for
   if(getDvar("scr_killcam_posttime") == "")
     postdelay = 2;
   else {
@@ -74,24 +59,17 @@ killcam(attackerNum, // entity number of the attacker
 
   killcamlength = camtime + postdelay;
 
-  // don't let the killcam last past the end of the round.
   if(isDefined(maxtime) && killcamlength > maxtime) {
-    // first trim postdelay down to a minimum of 1 second.
-    // if that doesn't make it short enough, trim camtime down to a minimum of 1 second.
-    // if that's still not short enough, cancel the killcam.
     if(maxtime < 2) {
       return;
     }
     if(maxtime - camtime >= 1) {
-      // reduce postdelay so killcam ends at end of match
       postdelay = maxtime - camtime;
     } else {
-      // distribute remaining time over postdelay and camtime
       postdelay = 1;
       camtime = maxtime - 1;
     }
 
-    // recalc killcamlength
     killcamlength = camtime + postdelay;
   }
 
@@ -109,21 +87,18 @@ killcam(attackerNum, // entity number of the attacker
   self.killcamlength = killcamlength;
   self.psoffsettime = offsetTime;
 
-  // ignore spectate permissions
   self allowSpectateTeam("allies", true);
   self allowSpectateTeam("axis", true);
   self allowSpectateTeam("freelook", true);
   self allowSpectateTeam("none", true);
 
-  if(isDefined(attacker) && level.showingFinalKillcam) // attacker may have disconnected
-  {
+  if(isDefined(attacker) && level.showingFinalKillcam) {
     self openMenu("killedby_card_display");
     self SetCardDisplaySlot(attacker, 7);
   }
 
   self thread endedKillcamCleanup();
 
-  // wait till the next server frame to allow code a chance to update archivetime if it needs trimming
   wait 0.05;
 
   assertex(self.archivetime <= killcamoffset + 0.0001, "archivetime: " + self.archivetime + ", killcamoffset: " + killcamoffset);
@@ -134,8 +109,7 @@ killcam(attackerNum, // entity number of the attacker
   killcamlength = camtime + postdelay;
   self.killcamlength = killcamlength;
 
-  if(camtime <= 0) // if we're not looking back in time far enough to even see the death, cancel
-  {
+  if(camtime <= 0) {
     println("Cancelling killcam because we don't even have enough recorded to show the death.");
 
     self.sessionstate = "dead";
@@ -213,7 +187,7 @@ doFinalKillCamFX(camTime) {
     wait(camTime - 1.0);
   }
 
-  setSlowMotion(1.0, 0.25, intoSlowMoTime); // start timescale, end timescale, lerp duration
+  setSlowMotion(1.0, 0.25, intoSlowMoTime);
   wait(intoSlowMoTime + .5);
   setSlowMotion(0.25, 1, 1.0);
 
@@ -239,7 +213,7 @@ setKillCamEntity(killcamentityindex, killcamoffset, starttime) {
 
   if(starttime > killcamtime) {
     wait .05;
-    // code may have trimmed archivetime after the first frame if we couldn't go back in time as far as requested.
+
     killcamoffset = self.archivetime;
     killcamtime = (gettime() - killcamoffset * 1000);
 
@@ -343,9 +317,6 @@ endKillcamIfNothingToShow() {
   self endon("killcam_ended");
 
   while(1) {
-    // code may trim our archivetime to zero if there is nothing "recorded" to show.
-    // this can happen when the person we're watching in our killcam goes into killcam himself.
-    // in this case, end the killcam.
     if(self.archivetime <= 0) {
       break;
     }
@@ -392,7 +363,7 @@ killcamCleanup(clearState) {
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 
-  self notify("killcam_ended"); // do this last, in case this function was called from a thread ending on it
+  self notify("killcam_ended");
 
   if(!clearState) {
     return;
@@ -404,7 +375,6 @@ killcamCleanup(clearState) {
 cancelKillCamOnUse() {
   self.cancelKillcam = false;
   self thread cancelKillCamOnUse_specificButton(::cancelKillCamUseButton, ::cancelKillCamCallback);
-  //self thread cancelKillCamOnUse_specificButton( ::cancelKillCamSafeSpawnButton, ::cancelKillCamSafeSpawnCallback );
 }
 
 cancelKillCamUseButton() {
@@ -465,14 +435,14 @@ initKCElements() {
     self.kc_skiptext.alignY = "top";
     self.kc_skiptext.horzAlign = "center_adjustable";
     self.kc_skiptext.vertAlign = "top_adjustable";
-    self.kc_skiptext.sort = 1; // force to draw after the bars
+    self.kc_skiptext.sort = 1;
     self.kc_skiptext.font = "default";
     self.kc_skiptext.foreground = true;
     self.kc_skiptext.hideWhenInMenu = true;
 
     if(level.splitscreen) {
       self.kc_skiptext.y = 20;
-      self.kc_skiptext.fontscale = 1.2; // 1.8/1.5
+      self.kc_skiptext.fontscale = 1.2;
     } else {
       self.kc_skiptext.y = 32;
       self.kc_skiptext.fontscale = 1.8;
@@ -487,7 +457,7 @@ initKCElements() {
     self.kc_othertext.alignY = "top";
     self.kc_othertext.horzAlign = "center";
     self.kc_othertext.vertAlign = "middle";
-    self.kc_othertext.sort = 10; // force to draw after the bars
+    self.kc_othertext.sort = 10;
     self.kc_othertext.font = "small";
     self.kc_othertext.foreground = true;
     self.kc_othertext.hideWhenInMenu = true;
@@ -510,7 +480,7 @@ initKCElements() {
     self.kc_icon.alignY = "top";
     self.kc_icon.horzAlign = "center";
     self.kc_icon.vertAlign = "middle";
-    self.kc_icon.sort = 1; // force to draw after the bars
+    self.kc_icon.sort = 1;
     self.kc_icon.foreground = true;
     self.kc_icon.hideWhenInMenu = true;
   }
@@ -525,7 +495,7 @@ initKCElements() {
       self.kc_timer.horzAlign = "center_safearea";
       self.kc_timer.vertAlign = "top_adjustable";
       self.kc_timer.y = 42;
-      self.kc_timer.sort = 1; // force to draw after the bars
+      self.kc_timer.sort = 1;
       self.kc_timer.font = "hudbig";
       self.kc_timer.foreground = true;
       self.kc_timer.color = (0.85, 0.85, 0.85);

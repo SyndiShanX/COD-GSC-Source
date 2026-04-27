@@ -5,7 +5,6 @@ main() {
   maps\createart\mp_compact_art::main();
   maps\mp\mp_compact_fx::main();
 
-  //maps\mp\_destructible_dlc::main(); // call before _load
   maps\mp\_load::main();
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_compact");
@@ -25,10 +24,6 @@ main() {
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-
-  //doMagnet();
-
-  //level thread crusherControl();
 
   setDvar("r_primaryLightUseTweaks", 1);
   setDvar("r_primaryLightTweakDiffuseStrength", 2.71);
@@ -66,7 +61,6 @@ doMagnet() {
 }
 
 crusherControl() {
-  //button = getEnt( "button01", "targetname" );
   crusher = getEnt("crusher01", "targetname");
 
   crushTop = getEnt("crushtop01", "targetname");
@@ -75,15 +69,10 @@ crusherControl() {
   upOrigin = crusher getOrigin();
   downOrigin = upOrigin + (0, 0, -128);
 
-  //button.origin = button.origin + (0,0,20);
-
   crushTop thread triggerLinkThread(crusher);
   crushTop thread crushEmThread();
   playerDetector thread triggerLinkThread(crusher);
   playerDetector thread playerDetectorThread();
-
-  //precacheString(&"MP_PRESS_TO_RAPPEL" );
-  //button setHintString(&"MP_PRESS_TO_RAPPEL" );
 
   for(;;) {
     /*
@@ -93,7 +82,6 @@ crusherControl() {
     button makeUnusable();
     */
 
-    // move down
     crusher playSound("elev_run_start");
     crusher playLoopSound("elev_run_loop");
 
@@ -112,10 +100,8 @@ crusherControl() {
 
     wait 2;
 
-    // wait until a player gets on
     playerDetector waittill("trigger", player);
 
-    // move up
     crusher playSound("elev_run_start");
     crusher playLoopSound("elev_run_loop");
 
@@ -127,7 +113,6 @@ crusherControl() {
 
     wait 2;
 
-    // wait until no players are on
     while(gettime() - playerDetector.triggertime <= 2000)
       wait .05;
   }

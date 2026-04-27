@@ -11,7 +11,7 @@ ENDING_MOVE_SPEED = 0.45;
 main() {
   precacheshellshock("slowview");
   precacheshellshock("aftermath");
-  //precacheshellshock( "aftermath_fall" );
+
   precacheShader("overlay_hunted_black");
   precacheShader("overlay_hunted_white");
 
@@ -31,10 +31,8 @@ main() {
 }
 
 aftermath_style_walking() {
-  //	level.player childthread player_heartbeat();
-
-  waittillframeend; // so flag can get set
-  waittillframeend; // for main init
+  waittillframeend;
+  waittillframeend;
   if(flag("stop_aftermath_player"))
     return;
   level endon("stop_aftermath_player");
@@ -42,16 +40,12 @@ aftermath_style_walking() {
   level.ground_ref_ent = spawn("script_model", (0, 0, 0));
   level.player playerSetGroundReferenceEnt(level.ground_ref_ent);
 
-  //	level childthread slowview();
-
   set_vision_set("aftermath_walking", 0);
 
   if(flag("aftermath_dont_do_wakeup")) {
     return;
   }
   player_wakeup();
-
-  //	level.player childthread player_jump_punishment();
 }
 
 slowview() {
@@ -60,7 +54,6 @@ slowview() {
     if(isDefined(wait_time))
       wait(wait_time);
     childthread restart_slowview();
-    //level.player shellshock( "slowview", 15 );
   }
 }
 
@@ -71,12 +64,9 @@ restart_slowview() {
 }
 
 player_heartbeat() {
-  //	flag_clear( "stop_heart" );
-
   level notify("stop_heart");
   level endon("stop_heart");
 
-  //	wait 3;
   while(true) {
     if(!flag("fall")) {
       if(isDefined(level.heartbeat_blood_func)) {
@@ -105,8 +95,7 @@ player_wakeup() {
   level.player play_sound_on_entity("sprint_gasp");
   flag_wait("start_doing_aftermath_walk");
   thread swivel();
-  //	childthread recover();
-  //level.player playerSetGroundReferenceEnt( undefined );
+
   level.player play_sound_on_entity("breathing_hurt_start");
   level.player thread play_sound_on_entity("breathing_better");
   level.player childthread player_random_blur();
@@ -128,14 +117,13 @@ adjust_angles_to_player(stumble_angles) {
 
 limp() {
   thread limp_thread();
-  //	thread limp_old();
 }
 
 adjust_swivel_over_time(ent) {
   level endon("stop_drunk_walk");
   next_switch = 1;
 
-  original_range = 7; // 25;
+  original_range = 7;
 
   for(;;) {
     range = original_range * level.unsteady_scale;
@@ -202,13 +190,9 @@ swivel() {
   for(;;) {
     new_angles = level.player getplayerangles()[1];
     dif = new_angles - last_angles;
-    //angles = level.player getplayerangles();
-    //yaw = angles[1];
-    //yaw += ent.origin[0];
+
     yaw = ent.origin[0] + dif;
     last_angles = new_angles;
-
-    //		roll = roll_ent.origin[0];
 
     player_speed = distance((0, 0, 0), level.player getvelocity());
 
@@ -228,22 +212,18 @@ swivel() {
         too_close = isalive(closest) && distance(level.player.origin, closest.origin) < 400;
 
         if(!too_close) {
-          assert(stuntime * 1000 < stun_interval); // avoiding overlap of allowcrouch delay calls. could get messy.
+          assert(stuntime * 1000 < stun_interval);
           childthread swivel_stunplayer(stuntime);
           level.player StunPlayer(stuntime);
-          //					level.player thread play_sound_on_entity( "breathing_hurt" );
         }
       }
 
-      //			if( randomint( 100 ) > 1 )
-      //				Earthquake( 0.1, 1, level.player.origin, 9000 );
     }
 
-    pitch = sin(pitch_sin) * 4 * level.unsteady_scale; // 12;
+    pitch = sin(pitch_sin) * 4 * level.unsteady_scale;
 
     if(!flag("player_limping"))
       level.ground_ref_ent rotateto((pitch * 0.15, yaw * -1, pitch * 0.85), time, time * 0.5, time * 0.5);
-    //			level.ground_ref_ent rotateto( ( roll, yaw, roll ), time, time * 0.5, time * 0.5 );
 
     wait 0.05;
   }
@@ -288,7 +268,6 @@ adjust_roll_ent(roll_ent) {
   for(;;) {
     player_speed = distance((0, 0, 0), level.player getvelocity());
 
-    //limp_yaw_ent			
     fast_enough = player_speed > 80;
 
     player_angles = level.player getplayerangles();
@@ -325,7 +304,6 @@ adjust_roll_ent(roll_ent) {
       }
       ent delete();
       return;
-      //continue;
     }
 
     cap = randomintrange(70, 125);
@@ -368,7 +346,7 @@ limp_thread() {
     level.player PlayRumbleOnEntity("damage_light");
     level.player blend_movespeedscale(0.25, 0.3);
     level.player delaythread(stun_time * 0.5, ::blend_movespeedscale, ENDING_MOVE_SPEED, stun_time);
-    //		level.player thread play_sound_on_entity( "breathing_hurt" );
+
     flag_clear("force_limp");
     wait stun_time;
     break;
@@ -464,58 +442,8 @@ player_jump_punishment() {
     }
     level notify("stop_stumble");
     wait 0.2;
-    //		if( !flag( "force_limp" ) )
-    //			level.player fall();
   }
 }
-
-/*
-fall()
-{
-	level endon( "stop_stumble" );
-
-	flag_set( "fall" );
-
-	level.player setstance( "prone" );
-
-	level.player thread play_sound_on_entity( "bodyfall_gravel_large" );
-
-	level.ground_ref_ent childthread stumble( ( 20, 10, 30 ), .2, 1.5, true );
-
-	wait .2;
-	set_vision_set( "aftermath_pain", 0 );
-
-	level.player PlayRumbleOnEntity( "grenade_rumble" );
-
-	level.player allowstand( false );
-	level.player allowcrouch( false );
-	level.player viewkick( 127, level.player.origin );
-	level.player shellshock( "aftermath_fall", 3 );
-	level notify( "slowview", 3.5 );
-	
-
-//	level.player PlayRumbleloopOnEntity( "damage_heavy" );
-
-	wait 1.5;
-	flag_set( "fall" );
-
-	childthread recover();
-
-	level.player play_sound_in_space( "sprint_gasp" );
-	level.player play_sound_in_space( "breathing_hurt_start" );
-	level.player play_sound_in_space( "breathing_better" );
-
-	set_vision_set( "aftermath_walking", 5 );
-
-	level.player play_sound_on_entity( "breathing_better" );
-
-	flag_clear( "fall" );
-
-	level.player allowstand( true );
-	level.player allowcrouch( true );
-	level notify( "recovered" );
-}
-*/
 
 stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   level endon("stop_stumble");
@@ -527,9 +455,6 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
 
   level.ground_ref_ent rotateto(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
   level.ground_ref_ent waittill("rotatedone");
-
-  //	if( level.player getstance() == "stand" )
-  //		level.player PlayRumbleOnEntity( "damage_light" );
 
   base_angles = (randomfloat(4) - 4, randomfloat(5), 0);
   base_angles = adjust_angles_to_player(base_angles);

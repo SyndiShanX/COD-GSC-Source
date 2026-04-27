@@ -18,8 +18,6 @@ init() {
   precacheModel("viewmodel_riot_shield_mp");
   precacheString(&"MPUI_CHANGING_KIT");
 
-  //level.spawnGlowSplat = loadfx( "misc/flare_ambient_destroy" );
-
   level.spawnGlowModel["enemy"] = "mil_emergency_flare_mp";
   level.spawnGlowModel["friendly"] = "mil_emergency_flare_mp";
   level.spawnGlow["enemy"] = loadfx("misc/flare_ambient");
@@ -37,7 +35,6 @@ init() {
 
   level._effect["ricochet"] = loadfx("impacts/large_metalhit_1");
 
-  // perks that currently only exist in script: these will error if passed to "setPerk", etc... CASE SENSITIVE! must be lower
   level.scriptPerks = [];
   level.perkSetFuncs = [];
   level.perkUnsetFuncs = [];
@@ -276,7 +273,6 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
       damageAdd += damage * level.dangerCloseMod;
   } else if(meansOfDeath == "MOD_FALLING") {
     if(victim _hasPerk("specialty_falldamage")) {
-      //eventually set a msg to do a roll
       damageAdd = 0;
       damage = 0;
     }
@@ -314,14 +310,12 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
 }
 
 initPerkDvars() {
-    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
-    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
+    level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100;
+    level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100;
     level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
     level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
-    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
+    level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100;
 
-    // CAC: Selector function, calls the individual cac features according to player's class settings
-    // Info: Called every time player spawns during loadout stage
     cac_selector() {
       perks = self.specialty;
     }

@@ -1,18 +1,15 @@
 main() {
-  // h1-mod patches
   replacefunc(maps\mp\gametypes\_class::isvalidprimary, ::isvalidprimary);
   replacefunc(maps\mp\gametypes\_class::isvalidsecondary, ::isvalidsecondary);
   replacefunc(maps\mp\gametypes\_class::isvalidweapon, ::isvalidweapon);
   replacefunc(maps\mp\gametypes\_class::buildweaponname, ::buildweaponname);
 
-  // h2m patches
   replacefunc(maps\mp\gametypes\_class::isvalidmeleeweapon, ::isvalidmeleeweapon);
   replacefunc(maps\mp\gametypes\_class::isvalidattachment, ::isvalidattachment);
   replacefunc(maps\mp\gametypes\_class::isvalidequipment, ::isvalidequipment);
   replacefunc(maps\mp\gametypes\_class::giveoffhand, ::giveoffhand);
   replacefunc(maps\mp\gametypes\_class::takeoffhand, ::takeoffhand);
 
-  // use attachkits instead of furnitekits
   replacefunc(maps\mp\_utility::getmatchrulesspecialclass, ::getmatchrulesspecialclass);
   replacefunc(maps\mp\gametypes\_class::cac_getweaponfurniturekit, ::cac_getweaponfurniturekit);
   replacefunc(maps\mp\gametypes\_class::furniturekitnametoid, ::furniturekitnametoid);
@@ -84,7 +81,6 @@ applyloadout() {
   var_2 = var_0.secondaryname;
 
   if(var_2 != "none") {
-    // Liam - 21/02/2024 onemanarmy implementation
     can_give_secondary = true;
 
     if(isDefined(var_0.perks) && var_0.perks.size > 0) {
@@ -222,7 +218,6 @@ applyloadout() {
 
   loadoutDeathStreak = var_0.deathstreak;
 
-  // only give the deathstreak for the initial spawn for this life.
   if(isDefined(loadoutDeathStreak) && loadoutDeathStreak != "specialty_null" && gettime() == self.spawnTime) {
     if(loadoutDeathStreak == "specialty_copycat")
       deathVal = 3;
@@ -1033,7 +1028,7 @@ isvalidsecondary(var_0, var_1, var_2) {
     case "h2_sickle":
       return 1;
     default:
-      //maps\mp\gametypes\_class::foundinfraction(va("%s is not valid secondary", var_0));
+
       return 0;
   }
 

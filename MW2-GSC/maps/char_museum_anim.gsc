@@ -195,7 +195,6 @@ civilian_walk_loops() {
 }
 
 civilian_stand_loops() {
-  // STAND LOOPS
   level.scr_anim["generic"]["civilian_stand_idle"][0] = % civilian_stand_idle;
   level.scr_anim["generic"]["civilian_smoking_A"][0] = % civilian_smoking_A;
   level.scr_anim["generic"]["civilian_smoking_B"][0] = % civilian_smoking_B;
@@ -229,7 +228,6 @@ dog_anims() {
 
 #using_animtree("script_model");
 model_anims() {
-  //gun anims
   level.scr_anim["pit_gun"]["training_pit_sitting_welcome_gun"] = % training_pit_sitting_welcome_gun;
   level.scr_anim["pit_gun"]["training_pit_sitting_idle_gun"] = % training_pit_sitting_idle_gun;
   level.scr_anim["pit_gun"]["training_pit_stand_idle_gun"] = % training_pit_stand_idle_gun;

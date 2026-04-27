@@ -33,370 +33,186 @@
 #using scripts\shared\visionset_mgr_shared;
 #namespace vengeance_util;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c7e2a7f7() {
-  // Unsupported VM revision (1B).
-}
-
-function init_hero() {
-  // Unsupported VM revision (1B).
-}
-
-function player_count() {
-  // Unsupported VM revision (1B).
-}
-
-function setup_patroller() {
-  // Unsupported VM revision (1B).
-}
-
-function skipto_baseline() {
-  // Unsupported VM revision (1B).
-}
-
-function enable_nodes() {
-  // Unsupported VM revision (1B).
-}
-
-function magic_bullet_shield_till_notify() {
-  // Unsupported VM revision (1B).
-}
-
-function stop_magic_bullet_shield_on_player_damage() {
-  // Unsupported VM revision (1B).
-}
-
-function fire_fx() {
-  // Unsupported VM revision (1B).
-}
-
-function set_civilian_on_fire() {
-  // Unsupported VM revision (1B).
-}
-
-function function_3f34106b() {
-  // Unsupported VM revision (1B).
-}
-
-function function_936cf9d0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ef909043() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6bd25628() {
-  // Unsupported VM revision (1B).
-}
-
-function refill_ammo() {
-  // Unsupported VM revision (1B).
-}
-
-function stealth_combat_toggle_trigger_and_objective() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7c486b8c() {
-  // Unsupported VM revision (1B).
-}
-
-function function_1095f52e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_1ed65aa() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7122594d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_57b69bd6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_394ba9b5() {
-  // Unsupported VM revision (1B).
-}
-
-function function_d468b73d() {
-  // Unsupported VM revision (1B).
-}
-
-function function_8ffbd7bf() {
-  // Unsupported VM revision (1B).
-}
-
-function function_75790dfc() {
-  // Unsupported VM revision (1B).
-}
-
-function function_120671d3() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6a382ad5() {
-  // Unsupported VM revision (1B).
-}
-
-function hunter_scanner_init() {
-  // Unsupported VM revision (1B).
-}
-
-function function_45f7a75b() {
-  // Unsupported VM revision (1B).
-}
-
-function hunter_scanner_settargetentity() {
-  // Unsupported VM revision (1B).
-}
-
-function hunter_scanner_clearlooktarget() {
-  // Unsupported VM revision (1B).
-}
-
-function hunter_scanner_settargetposition() {
-  // Unsupported VM revision (1B).
-}
-
-function is_point_in_view() {
-  // Unsupported VM revision (1B).
-}
-
-function is_valid_target() {
-  // Unsupported VM revision (1B).
-}
-
-function get_enemies_in_view() {
-  // Unsupported VM revision (1B).
-}
-
-function getenemyarray() {
-  // Unsupported VM revision (1B).
-}
-
-function hunter_frontscanning() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ab876b5a() {
-  // Unsupported VM revision (1B).
-}
-
-function function_cc6f3598() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5dbf4126() {
-  // Unsupported VM revision (1B).
-}
-
-function function_6bdeeb80() {
-  // Unsupported VM revision (1B).
-}
-
-function function_76bdbf62() {
-  // Unsupported VM revision (1B).
-}
-
-function delete_ai_at_path_end() {
-  // Unsupported VM revision (1B).
-}
-
-function delete_ai() {
-  // Unsupported VM revision (1B).
-}
-
-function delete_ai_when_out_of_sight() {
-  // Unsupported VM revision (1B).
-}
-
-function players_within_distance() {
-  // Unsupported VM revision (1B).
-}
-
-function any_player_looking_at() {
-  // Unsupported VM revision (1B).
-}
-
-function function_80840124() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ee78c834() {
-  // Unsupported VM revision (1B).
-}
-
-function function_12a1b6a0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_51caee84() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b9785164() {
-  // Unsupported VM revision (1B).
-}
-
-function give_hero_weapon() {
-  // Unsupported VM revision (1B).
-}
-
-function take_hero_weapon() {
-  // Unsupported VM revision (1B).
-}
-
-function function_bce5a9e() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a7507be6() {
-  // Unsupported VM revision (1B).
-}
-
-function function_749b8ef8() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f4c1160() {
-  // Unsupported VM revision (1B).
-}
-
-function function_7a768ec() {
-  // Unsupported VM revision (1B).
-}
-
-function function_bf611bcc() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c7ca0bfb() {
-  // Unsupported VM revision (1B).
-}
-
-function function_80d50798() {
-  // Unsupported VM revision (1B).
-}
-
-function function_2821bb42() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5a886ae0() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e6399870() {
-  // Unsupported VM revision (1B).
-}
-
-function function_b88d5e7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_9856bfc7() {
-  // Unsupported VM revision (1B).
-}
-
-function function_c7b05b81() {
-  // Unsupported VM revision (1B).
-}
-
-function function_18538df() {
-  // Unsupported VM revision (1B).
-}
-
-function function_25ce4365() {
-  // Unsupported VM revision (1B).
-}
-
-function function_85c2c12() {
-  // Unsupported VM revision (1B).
-}
-
-function delayed_delete() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f9c94344() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e3420328() {
-  // Unsupported VM revision (1B).
-}
-
-function function_65a61b78() {
-  // Unsupported VM revision (1B).
-}
-
-function function_638bf7ab() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a084a58f() {
-  // Unsupported VM revision (1B).
-}
-
-function co_op_teleport_on_igc_end() {
-  // Unsupported VM revision (1B).
-}
-
-function teleport_co_op_players_on_scene_done() {
-  // Unsupported VM revision (1B).
-}
-
-function wait_for_scene_done() {
-  // Unsupported VM revision (1B).
-}
-
-function function_4e8207e9() {
-  // Unsupported VM revision (1B).
-}
-
-function function_1c347e72() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ba7c52d5() {
-  // Unsupported VM revision (1B).
-}
-
-function function_a72c2dda() {
-  // Unsupported VM revision (1B).
-}
-
-function function_f832e2fa() {
-  // Unsupported VM revision (1B).
-}
-
-function function_5fbec645() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ee75acde() {
-  // Unsupported VM revision (1B).
-}
-
-function private function_6ac438() {
-  // Unsupported VM revision (1B).
-}
-
-function private function_cb760154() {
-  // Unsupported VM revision (1B).
-}
-
-function function_e00864bd() {
-  // Unsupported VM revision (1B).
-}
-
-function function_ffaf4723() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
+
+function function_c7e2a7f7() {}
+
+function init_hero() {}
+
+function player_count() {}
+
+function setup_patroller() {}
+
+function skipto_baseline() {}
+
+function enable_nodes() {}
+
+function magic_bullet_shield_till_notify() {}
+
+function stop_magic_bullet_shield_on_player_damage() {}
+
+function fire_fx() {}
+
+function set_civilian_on_fire() {}
+
+function function_3f34106b() {}
+
+function function_936cf9d0() {}
+
+function function_ef909043() {}
+
+function function_6bd25628() {}
+
+function refill_ammo() {}
+
+function stealth_combat_toggle_trigger_and_objective() {}
+
+function function_7c486b8c() {}
+
+function function_1095f52e() {}
+
+function function_1ed65aa() {}
+
+function function_7122594d() {}
+
+function function_57b69bd6() {}
+
+function function_394ba9b5() {}
+
+function function_d468b73d() {}
+
+function function_8ffbd7bf() {}
+
+function function_75790dfc() {}
+
+function function_120671d3() {}
+
+function function_6a382ad5() {}
+
+function hunter_scanner_init() {}
+
+function function_45f7a75b() {}
+
+function hunter_scanner_settargetentity() {}
+
+function hunter_scanner_clearlooktarget() {}
+
+function hunter_scanner_settargetposition() {}
+
+function is_point_in_view() {}
+
+function is_valid_target() {}
+
+function get_enemies_in_view() {}
+
+function getenemyarray() {}
+
+function hunter_frontscanning() {}
+
+function function_ab876b5a() {}
+
+function function_cc6f3598() {}
+
+function function_5dbf4126() {}
+
+function function_6bdeeb80() {}
+
+function function_76bdbf62() {}
+
+function delete_ai_at_path_end() {}
+
+function delete_ai() {}
+
+function delete_ai_when_out_of_sight() {}
+
+function players_within_distance() {}
+
+function any_player_looking_at() {}
+
+function function_80840124() {}
+
+function function_ee78c834() {}
+
+function function_12a1b6a0() {}
+
+function function_51caee84() {}
+
+function function_b9785164() {}
+
+function give_hero_weapon() {}
+
+function take_hero_weapon() {}
+
+function function_bce5a9e() {}
+
+function function_a7507be6() {}
+
+function function_749b8ef8() {}
+
+function function_f4c1160() {}
+
+function function_7a768ec() {}
+
+function function_bf611bcc() {}
+
+function function_c7ca0bfb() {}
+
+function function_80d50798() {}
+
+function function_2821bb42() {}
+
+function function_5a886ae0() {}
+
+function function_e6399870() {}
+
+function function_b88d5e7() {}
+
+function function_9856bfc7() {}
+
+function function_c7b05b81() {}
+
+function function_18538df() {}
+
+function function_25ce4365() {}
+
+function function_85c2c12() {}
+
+function delayed_delete() {}
+
+function function_f9c94344() {}
+
+function function_e3420328() {}
+
+function function_65a61b78() {}
+
+function function_638bf7ab() {}
+
+function function_a084a58f() {}
+
+function co_op_teleport_on_igc_end() {}
+
+function teleport_co_op_players_on_scene_done() {}
+
+function wait_for_scene_done() {}
+
+function function_4e8207e9() {}
+
+function function_1c347e72() {}
+
+function function_ba7c52d5() {}
+
+function function_a72c2dda() {}
+
+function function_f832e2fa() {}
+
+function function_5fbec645() {}
+
+function function_ee75acde() {}
+
+function private function_6ac438() {}
+
+function private function_cb760154() {}
+
+function function_e00864bd() {}
+
+function function_ffaf4723() {}

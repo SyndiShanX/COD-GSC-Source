@@ -7,7 +7,6 @@
 #include common_scripts\utility;
 
 PlayerJavelinAds() {
-  //self --> the player
   if(self playerads() < 1.0)
     return false;
 
@@ -19,19 +18,14 @@ PlayerJavelinAds() {
 }
 
 InsideJavelinReticleNoLock(target) {
-  //self --> the player
-  //TODO: sighttrace
   return target_isinrect(target, self, 25, 60, 30);
 }
 
 InsideJavelinReticleLocked(target) {
-  //self --> the player
-  //TODO: sighttrace
   return target_isinrect(target, self, 25, 90, 45);
 }
 
 ClearCLUTarget() {
-  //self --> the player
   self notify("javelin_clu_cleartarget");
   self notify("stop_lockon_sound");
   level.javelinLockStartTime = 0;
@@ -46,7 +40,6 @@ ClearCLUTarget() {
 }
 
 GetBestJavelinTarget() {
-  //self --> the player
   targetsAll = target_getArray();
   targetsValid = [];
 
@@ -61,15 +54,12 @@ GetBestJavelinTarget() {
     return undefined;
 
   chosenEnt = targetsValid[0];
-  if(targetsValid.size > 1) {
-    //TODO: find the closest
-  }
+  if(targetsValid.size > 1) {}
 
   return chosenEnt;
 }
 
 IsStillValidTarget(ent) {
-  //self --> the player
   if(!isDefined(ent))
     return false;
   if(!target_isTarget(ent))
@@ -81,14 +71,11 @@ IsStillValidTarget(ent) {
 }
 
 SetTargetTooClose(ent) {
-  //self --> the player
   MINIMUM_JAV_DISTANCE = 1000;
 
   if(!isDefined(ent))
     return false;
   dist = Distance2D(self.origin, ent.origin);
-
-  //PrintLn( "Jav Distance: ", dist );
 
   if(dist < MINIMUM_JAV_DISTANCE)
     self WeaponLockTargetTooClose(true);
@@ -97,7 +84,6 @@ SetTargetTooClose(ent) {
 }
 
 SetNoClearance() {
-  //self --> the player
   ORIGINOFFSET_UP = 60;
   ORIGINOFFSET_RIGHT = 10;
   DISTANCE = 400;
@@ -145,7 +131,6 @@ SetNoClearance() {
 }
 
 JavelinCLULoop() {
-  //self --> the player
   self endon("death");
   self endon("javelin_clu_off");
 
@@ -154,12 +139,6 @@ JavelinCLULoop() {
   for(;;) {
     wait 0.05;
 
-    //------------------------- // Four possible states:
-    //No missile in the tube, so CLU will not search for targets.
-    //		CLU has a lock.
-    //		CLU is locking on to a target.
-    //		CLU is searching for a target to begin locking on to.
-    //------------------------- clipAmmo = self GetCurrentWeaponClipAmmo();
     if(!clipAmmo) {
       self ClearCLUTarget();
       continue;
@@ -172,7 +151,7 @@ JavelinCLULoop() {
       }
       self SetTargetTooClose(level.javelinTarget);
       self SetNoClearance();
-      //print3D( level.javelinTarget.origin, "* LOCKED!", (.2, 1, .3), 1, 5 );
+
       continue;
     }
 
@@ -181,8 +160,6 @@ JavelinCLULoop() {
         self ClearCLUTarget();
         continue;
       }
-
-      //print3D( level.javelinTarget.origin, "* locking...!", (.2, 1, .3), 1, 5 );
 
       timePassed = getTime() - level.javelinLockStartTime;
       if(timePassed < LOCK_LENGTH) {
@@ -211,7 +188,6 @@ JavelinCLULoop() {
 }
 
 JavelinToggleLoop() {
-  //self --> the player
   self endon("death");
 
   for(;;) {
@@ -245,29 +221,9 @@ init() {
   SetSavedDvar("vehHudTargetScreenEdgeClampBufferBottom", 134);
 
   array_thread(level.players, ::JavelinToggleLoop);
-  //array_thread( level.players,::JavelinFiredNotify );
-  //thread TraceConstantTest();
 }
-
-/*
-JavelinFiredNotify()
-{
-	assert( self.classname == "player" );
-	
-	while( true )
-	{
-		self waittill( "weapon_fired" );
-
-		weap = self getCurrentWeapon();
-		IPrintLn( weap );
-		if( weap != "javelin" )
-			continue;
-	}
-}
-*/
 
 LoopLocalSeekSound(alias, interval) {
-  //self --> the player
   self endon("stop_lockon_sound");
 
   for(;;) {

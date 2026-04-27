@@ -11,8 +11,6 @@
 #include maps\so_demo_so_bridge_code;
 #include maps\_specialops;
 
-// --------------------------------------------------------------------------------- //	Init
-// --------------------------------------------------------------------------------- main() {
 default_start(::start_so_demoman);
 add_start("so_demoman", ::start_so_demoman, "Demolition Man");
 
@@ -44,9 +42,6 @@ maps\_compass::setupMiniMap("compass_map_so_bridge");
 
 thread maps\so_bridge_amb::main();
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Initializations
-// --------------------------------------------------------------------------------- start_so_demoman() {
 so_demoman_init();
 
 thread music_loop("so_demo_so_bridge_music", 344);
@@ -85,16 +80,16 @@ so_demoman_init() {
   level.eog_summary_callback = ::custom_eog_summary;
 
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_demoman_setup_regular();
-      break; // Regular
+      break;
     case 2:
       so_demoman_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_demoman_setup_veteran();
-      break; // Veteran
+      break;
   }
 
   enemy_list = getEntArray("player_seek_stages", "script_noteworthy");
@@ -149,11 +144,6 @@ so_demoman_setup_hardened() {
 so_demoman_setup_veteran() {
   objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
 }
-
-// --------------------------------------------------------------------------------- //	Enable/Disable events
-// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- custom_eog_summary() {
-// Give the players some slight fudge at the start of the map. Planting C4 on the cars before the timer starts
-// still winds up with about half a second of "normal" time before IA is engaged making it impossible to get 100%.
 level.normal_time = max(level.normal_time - 1.0, 0.0);
 total_time = level.normal_time + level.infinite_time;
 
@@ -176,7 +166,6 @@ if(total_damage > 0) {
   p1_percent = int((level.player.vehicle_damage / total_damage) * 100);
   p2_percent = int((level.player2.vehicle_damage / total_damage) * 100);
 
-  // If we don't get 100% total, go ahead and give the person with the lower percent a tiny moral boost.
   if(p1_percent + p2_percent < 100) {
     if(p1_percent < p2_percent)
       p1_percent++;
@@ -193,8 +182,6 @@ if(is_coop_online()) {
   level.player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_STAT_PARTNER", p2_percent + "%");
 }
 }
-
-// --------------------------------------------------------------------------------- enable_uav_resources() {
 array_thread(getvehiclenodearray("uav_sound", "script_noteworthy"), maps\_ucav::plane_sound_node);
 array_thread(getvehiclenodearray("fire_missile", "script_noteworthy"), maps\_ucav::fire_missile_node);
 }
@@ -206,18 +193,12 @@ enable_ambient_uavs() {
   thread delayThread(8, ::spawn_vehicle_from_targetname_and_drive, "ucav_flyover_02");
   thread delayThread(20, ::spawn_vehicle_from_targetname_and_drive, "ucav_flyover_03");
 }
-
-// --------------------------------------------------------------------------------- enable_rappel_bridge() {
 flag_set("so_rappel_bridge");
 array_spawn_function_noteworthy("rappel_bridge", ::ai_rappel_think);
 }
-
-// --------------------------------------------------------------------------------- enable_rappel_bridge_seek() {
 flag_set("so_rappel_bridge_seek");
 array_spawn_function_noteworthy("rappel_bridge_seek", ::ai_rappel_think, true);
 }
-
-// --------------------------------------------------------------------------------- enable_bridge_collapse() {
 flag_set("so_bridge_collapse");
 
 precacheModel("vehicle_coupe_gold");
@@ -232,8 +213,6 @@ if(getDvar("test_bridge_collapse") == "1") {
 }
 
 trigger waittill("trigger");
-
-// Reduce speed until collapse is done, view_tilt resets this
 foreach(player in level.players) {
   player AllowSprint(false);
   player blend_movespeedscale(0.7, 2);
@@ -260,27 +239,15 @@ while(1) {
   }
 }
 }
-
-// --------------------------------------------------------------------------------- enable_missile_attack_taxi() {
 flag_set("so_missile_attack_taxi");
 thread missile_taxi_moves();
 }
-
-// --------------------------------------------------------------------------------- enable_attack_heli() {
 flag_set("so_attack_heli");
 thread attack_heli();
 }
-
-// --------------------------------------------------------------------------------- enable_troop_flood() {
 flag_set("so_flood_spawner");
 }
-
-// --------------------------------------------------------------------------------- enable_rappel_heli_close() {
 flag_set("so_rappel_heli_close");
 }
-
-// --------------------------------------------------------------------------------- enable_rappel_heli_far() {
 flag_set("so_rappel_heli_far");
 }
-
-// ---------------------------------------------------------------------------------

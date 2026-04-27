@@ -7,15 +7,9 @@
 #include animscripts\combat_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
-
-// Every script calls initAnimTree to ensure a clean, fresh, known animtree state.
-// clearanim should never be called directly, and this should never occur other than
-// at the start of an animscript
-// This function now also does any initialization for the scripts that needs to happen
-// at the beginning of every main script.
 initAnimTree(animscript) {
   self clearAnim(%body, 0.3);
-  self setAnim(%body, 1, 0); // The %body node should always have weight 1.
+  self setAnim(%body, 1, 0);
 
   if(animscript != "pain" && animscript != "death")
     self.a.special = "none";
@@ -32,9 +26,6 @@ initAnimTree(animscript) {
 
   assertEX(isDefined(animscript), "Animscript not specified in initAnimTree");
 }
-
-// UpdateAnimPose does housekeeping at the start of every script's main function.It does stuff like making prone
-// calculations are only being done if the character is actually prone.
 UpdateAnimPose() {
   assertEX(self.a.movement == "stop" || self.a.movement == "walk" || self.a.movement == "run", "UpdateAnimPose " + self.a.pose + " " + self.a.movement);
 
@@ -55,8 +46,6 @@ UpdateAnimPose() {
 initialize(animscript) {
   if(isDefined(self.longDeathStarting)) {
     if(animscript != "pain" && animscript != "death") {
-      // we probably just came out of an animcustom.
-      // just die, it's not safe to do anything else
       self kill(self.origin);
     }
     if(animscript != "pain") {
@@ -65,12 +54,9 @@ initialize(animscript) {
     }
   }
   if(isDefined(self.a.mayOnlyDie) && animscript != "death") {
-    // we probably just came out of an animcustom.
-    // just die, it's not safe to do anything else
     self kill(self.origin);
   }
 
-  // scripts can define this to allow cleanup before moving on
   if(isDefined(self.a.postScriptFunc)) {
     scriptFunc = self.a.postScriptFunc;
     self.a.postScriptFunc = undefined;
@@ -78,10 +64,8 @@ initialize(animscript) {
     [[scriptFunc]](animscript);
   }
 
-  // TODO: proper handing when animations exist
   if(animscript != "combat" && animscript != "pain" && animscript != "death" && usingSidearm()) {
     self animscripts\combat::switchToLastWeapon(%pistol_stand_switch, true);
-    //self animscripts\shared::placeWeaponOn( self.primaryweapon, "right" );
   }
 
   if(animscript != "combat" && animscript != "move" && animscript != "pain")
@@ -94,8 +78,6 @@ initialize(animscript) {
     self dropGrenade();
   }
   self.isHoldingGrenade = undefined;
-
-  //thread checkGrenadeInHand( animscript );
 
   self animscripts\squadmanager::aiUpdateAnimState(animscript);
 
@@ -116,10 +98,8 @@ initialize(animscript) {
 }
 
 checkGrenadeInHand(animscript) {
-  // ensure no grenade left in hand
   self endon("killanimscript");
 
-  // pain and death animscripts don't execute script between notifying killanimscript and starting the next animscript, // so the grenade cleanup thread might still be waiting to run.
   if(animscript == "pain" || animscript == "death") {
     wait .05;
     waittillframeend;
@@ -165,9 +145,6 @@ printDisplaceInfo() {
     wait(0.05);
   }
 }
-
-// Returns whether or not the character should be acting like he's under fire or expecting an enemy to appear
-// any second.
 IsInCombat() {
   if(self.alertLevelInt > 1)
     return true;
@@ -191,8 +168,6 @@ GetEnemyEyePos() {
   } else if((isDefined(self.a.lastEnemyTime)) && (isDefined(self.a.lastEnemyPos)) && (self.a.lastEnemyTime + 3000 < gettime())) {
     return self.a.lastEnemyPos;
   } else {
-    // Return a point in front of you.Note that the distance to this point is significant, because
-    // this function is used to determine an appropriate attack stance. 16 feet( 196 units ) seems good...
     targetPos = self getShootAtPos();
     targetPos = targetPos + (196 * self.lookforward[0], 196 * self.lookforward[1], 196 * self.lookforward[2]);
     return targetPos;
@@ -246,7 +221,6 @@ GetYawToSpot(spot) {
   yaw = AngleClamp180(yaw);
   return yaw;
 }
-// warning! returns (my yaw - yaw to enemy) instead of (yaw to enemy - my yaw)
 GetYawToEnemy() {
   pos = undefined;
   if(isDefined(self.enemy)) {
@@ -270,8 +244,6 @@ GetYaw2d(org) {
   angles = VectorToAngles((org[0], org[1], 0) - (self.origin[0], self.origin[1], 0));
   return angles[1];
 }
-
-// 0 if I'm facing my enemy, 90 if I'm side on, 180 if I'm facing away.
 AbsYawToEnemy() {
   assert(isDefined(self.enemy));
   yaw = self.angles[1] - GetYaw(self.enemy.origin);
@@ -280,8 +252,6 @@ AbsYawToEnemy() {
     yaw = -1 * yaw;
   return yaw;
 }
-
-// 0 if I'm facing my enemy, 90 if I'm side on, 180 if I'm facing away.
 AbsYawToEnemy2d() {
   assert(isDefined(self.enemy));
   yaw = self.angles[1] - GetYaw2d(self.enemy.origin);
@@ -290,8 +260,6 @@ AbsYawToEnemy2d() {
     yaw = -1 * yaw;
   return yaw;
 }
-
-// 0 if I'm facing my enemy, 90 if I'm side on, 180 if I'm facing away.
 AbsYawToOrigin(org) {
   yaw = self.angles[1] - GetYaw(org);
   yaw = AngleClamp180(yaw);
@@ -342,7 +310,6 @@ choosePose(preferredPose) {
     preferredPose = self.a.pose;
   }
 
-  // Find out if we should be standing, crouched or prone
   switch (preferredPose) {
     case "stand":
       if(self isStanceAllowedWrapper("stand")) {
@@ -408,10 +375,9 @@ GetNodeType() {
 GetNodeDirection() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
-    // thread [[ anim.println ]]( "GetNodeDirection found node, returned: " + myNode.angles[ 1 ] );
     return myNode.angles[1];
   }
-  // thread [[ anim.println ]]( "GetNodeDirection didn't find node, returned: " + self.desiredAngle );
+
   return self.desiredAngle;
 }
 
@@ -434,9 +400,6 @@ isDebugOn() {
 }
 
 drawDebugLineInternal(fromPoint, toPoint, color, durationFrames) {
-  // println( "Drawing line, color " + color[ 0 ] + ", " + color[ 1 ] + ", " + color[ 2 ] );
-  // player = getEntArray( "player", "classname" )[0];
-  // println( "Point1 : " + fromPoint + ", Point2: " + toPoint + ", player: " + player.origin );
   for(i = 0; i < durationFrames; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
@@ -513,7 +476,6 @@ drawDebugInfoThread() {
 }
 
 drawDebugInfo() {
-  // What do we want to print?
   line[0] = self getEntityNumber() + " " + self.script;
   line[1] = self.a.pose + " " + self.a.movement;
   if(self thread DebugIsInCombat())
@@ -523,25 +485,17 @@ drawDebugInfo() {
   line[3] = self.a.lastDebugPrint1;
 
   belowFeet = self.origin + (0, 0, -8);
-  // aboveHead = self getShootAtPos() + ( 0, 0, 8 );
+
   offset = (0, 0, -10);
   for(i = 0; i < line.size; i++) {
     if(isDefined(line[i])) {
       textPos = (belowFeet[0] + (offset[0] * i), belowFeet[1] + (offset[1] * i), belowFeet[2] + (offset[2] * i));
-      print3d(textPos, line[i], (.2, .2, 1), 1, 0.75); // origin, text, RGB, alpha, scale
+      print3d(textPos, line[i], (.2, .2, 1), 1, 0.75);
     }
   }
 }
 
 safemod(a, b) {
-  /*
-  	Here are some modulus results from in - game:
-  	10 % 3 = 1
-  	10 % - 3 = 1
-  	 - 10 % 3 = -1
-  	 - 10 % - 3 = -1
-  	however, we never want a negative result.
-  	 */
   result = int(a) % b;
   result += b;
   return result % b;
@@ -550,21 +504,6 @@ safemod(a, b) {
 AbsAngleClamp180(angle) {
   return abs(AngleClamp180(angle));
 }
-
-// Returns an array of 4 weights( 2 of which are guaranteed to be 0 ), which should be applied to forward, // right, back and left animations to get the angle specified.
-//front
-/// -- -- | -- -- \
-// / 180 \
-/// \| / \
-// / - 135| 135\
-// | \| /|
-// left| - 90 -- -- + -- -- 90 - |right
-// | /| \|
-// \- 45| 45 /
-//\/ | \/
-// \0/
-//\-- -- | -- -- /
-// back
 
 QuadrantAnimWeights(yaw) {
   forwardWeight = cos(yaw);
@@ -576,7 +515,7 @@ QuadrantAnimWeights(yaw) {
   result["left"] = 0;
 
   if(isDefined(self.alwaysRunForward)) {
-    assert(self.alwaysRunForward); // always set alwaysRunForward to either true or undefined.
+    assert(self.alwaysRunForward);
 
     result["front"] = 1;
     return result;
@@ -590,9 +529,6 @@ QuadrantAnimWeights(yaw) {
     else
       result["front"] = 1;
   } else {
-    // if moving backwards, don't blend.
-    // it looks horrible because the feet cycle in the opposite direction.
-    // either way, feet slide, but this looks better.
     backWeight = -1 * forwardWeight;
     if(leftWeight > backWeight)
       result["left"] = 1;
@@ -619,8 +555,6 @@ getQuadrant(angle) {
   }
   return quadrant;
 }
-
-// Checks to see if the input is equal to any of up to ten other inputs.
 IsInSet(input, set) {
   for(i = set.size - 1; i >= 0; i--) {
     if(input == set[i])
@@ -631,11 +565,10 @@ IsInSet(input, set) {
 
 playAnim(animation) {
   if(isDefined(animation)) {
-    // self thread drawString( animation );	// Doesn't work for animations, only strings.
     println("NOW PLAYING: ", animation);
     self setFlaggedAnimKnobAllRestart("playAnim", animation, %root, 1, .1, 1);
     timeToWait = getanimlength(animation);
-    timeToWait = (3 * timeToWait) + 1; // So looping animations play through 3 times.
+    timeToWait = (3 * timeToWait) + 1;
     self thread NotifyAfterTime("time is up", "time is up", timeToWait);
     self waittill("time is up");
     self notify("enddrawstring");
@@ -648,8 +581,6 @@ NotifyAfterTime(notifyString, killmestring, time) {
   wait time;
   self notify(notifyString);
 }
-
-// Utility function, made for MilestoneAnims(), which displays a string until killed.
 drawString(stringtodraw) {
   self endon("killanimscript");
   self endon("enddrawstring");
@@ -685,7 +616,7 @@ showLastEnemySightPos(string) {
     if(!isDefined(self.lastEnemySightPos)) {
       continue;
     }
-    print3d(self.lastEnemySightPos, string, color, 1, 2.15); // origin, text, RGB, alpha, scale
+    print3d(self.lastEnemySightPos, string, color, 1, 2.15);
   }
 }
 
@@ -699,7 +630,7 @@ printDebugTextProc(string, org, printTime, color) {
   timer = printTime * 20;
   for(i = 0; i < timer; i += 1) {
     wait(0.05);
-    print3d(org, string, color, 1, 1); // origin, text, RGB, alpha, scale
+    print3d(org, string, color, 1, 1);
   }
 }
 
@@ -735,7 +666,6 @@ util_evaluateKnownEnemyLocation() {
   myEyeOffset = (self getShootAtPos() - myGunPos);
 
   if((isDefined(self.ignoreSightPos)) && (isDefined(self.ignoreOrigin))) {
-    // Ignore the current last sight pos if you've previously invalidated it from this position
     if(distance(self.origin, self.ignoreOrigin) < 25)
       return false;
   }
@@ -770,7 +700,7 @@ debugPosInternal(org, string, size) {
 
   while(1) {
     wait(0.05);
-    print3d(org, string, color, 1, size); // origin, text, RGB, alpha, scale
+    print3d(org, string, color, 1, size);
   }
 }
 
@@ -810,7 +740,7 @@ printShootProc() {
   timer = printTime * 20;
   for(i = 0; i < timer; i += 1) {
     wait(0.05);
-    print3d(self.origin + (0, 0, 70), "Shoot", (1, 0, 0), 1, 1); // origin, text, RGB, alpha, scale
+    print3d(self.origin + (0, 0, 70), "Shoot", (1, 0, 0), 1, 1);
   }
 }
 
@@ -821,8 +751,6 @@ printShoot() {
 
 showDebugProc(fromPoint, toPoint, color, printTime) {
   self endon("death");
-  // 	self notify( "stop debugline " + self.export );
-  // 	self endon( "stop debugline " + self.export );
 
   timer = printTime * 20;
   for(i = 0; i < timer; i += 1) {
@@ -842,7 +770,6 @@ shootEnemyWrapper() {
 shootEnemyWrapper_normal() {
   self.a.lastShootTime = gettime();
 
-  // set accuracy at time of shoot rather than in a separate thread that is vulnerable to timing issues
   maps\_gameskill::set_accuracy_based_on_situation();
 
   self notify("shooting");
@@ -879,7 +806,6 @@ throwGun() {
   weapon.angles = self getTagAngles("tag_weapon_right");
   weapon linkto(org);
 
-  // 	org rotateVelocity( ( 100, 0, 0 ), 12 );
   lastOrigin = org.origin;
   while((isDefined(weapon)) && (isDefined(weapon.origin))) {
     start = lastOrigin;
@@ -900,13 +826,7 @@ throwGun() {
     lastOrigin = org.origin;
     wait(0.05);
   }
-  /*
-  	if( isDefined( trace[ "entity" ] ) )
-  	{
-  		if( isSentient( trace[ "entity" ] ) )
-  			trace[ "entity" ] DoDamage( 300, weapon.origin );
-  	}
-  	 */
+
   if((isDefined(weapon)) && (isDefined(weapon.origin)))
     weapon unlink();
   org delete();
@@ -914,7 +834,6 @@ throwGun() {
 
 setEnv(env) {
   anim.idleAnimTransition["stand"]["in"] = % casual_stand_idle_trans_in;
-  // anim.idleAnimTransition [ "stand" ][ "out" ] = %casual_stand_idle_trans_out;
 
   anim.idleAnimArray["stand"][0][0] = % casual_stand_idle;
   anim.idleAnimArray["stand"][0][1] = % casual_stand_idle_twitch;
@@ -938,20 +857,12 @@ setEnv(env) {
   anim.idleAnimWeights["stand_cqb"][0][1] = 1;
 
   anim.idleAnimTransition["crouch"]["in"] = % casual_crouch_idle_in;
-  // anim.idleAnimTransition [ "crouch" ][ "out" ] = %casual_crouch_idle_out;
 
   anim.idleAnimArray["crouch"][0][0] = % casual_crouch_idle;
-  //anim.idleAnimArray	[ "crouch" ][ 0 ][ 1 ] = %casual_crouch_twitch;	// %casual_crouch_point
+
   anim.idleAnimWeights["crouch"][0][0] = 6;
-  //anim.idleAnimWeights	[ "crouch" ][ 0 ][ 1 ] = 3;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: PersonalColdBreath()""Summary: Makes cold breath effect play on an AI""Module: AI""CallOn: An AI""Example: level.price thread PersonalColdBreath()""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 PersonalColdBreath() {
   tag = "TAG_EYE";
   self endon("death");
@@ -963,9 +874,7 @@ PersonalColdBreath() {
       break;
     }
 
-    //only play cold breath when stopped
     if((isDefined(self.a.movement)) && (self.a.movement == "stop")) {
-      //don't play cold breath if indoors
       if((isDefined(self.isindoor)) && (self.isindoor == 1)) {
         continue;
       }
@@ -976,12 +885,6 @@ PersonalColdBreath() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: PersonalColdBreathStop()""Summary: Stops cold breath effect playing on an AI""Module: AI""CallOn: An AI""Example: level.price thread PersonalColdBreathStop()""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 PersonalColdBreathStop() {
   self notify("stop personal effect");
 }
@@ -1004,29 +907,23 @@ isSuppressedWrapper() {
 
   if(self.suppressionMeter <= self.suppressionThreshold)
     return false;
-  return self issuppressed(); // takes into account .ignoreSuppression
+  return self issuppressed();
 }
-
-// if not suppressed, sometimes we still want to look cautious, like leaning out of a corner instead of stepping out.
-// this determines whether we should do that or not.
 isPartiallySuppressedWrapper() {
   if(self.suppressionMeter <= self.suppressionThreshold * 0.25)
     return false;
-  return (self issuppressed()); // takes into account .ignoreSuppression
+  return (self issuppressed());
 }
 
 getNodeOffset(node) {
   if(isDefined(node.offset))
     return node.offset;
 
-  // ( right offset, forward offset, vertical offset )
-  // you can get an actor's current eye offset by setting scr_eyeoffset to his entnum.
-  // this should be redone whenever animations change significantly.
   cover_left_crouch_offset = (-26, .4, 36);
   cover_left_stand_offset = (-32, 7, 63);
   cover_right_crouch_offset = (43.5, 11, 36);
   cover_right_stand_offset = (36, 8.3, 63);
-  cover_crouch_offset = (3.5, -12.5, 45); // maybe we could account for the fact that in cover crouch he can stand if he needs to?
+  cover_crouch_offset = (3.5, -12.5, 45);
   cover_stand_offset = (-3.7, -22, 63);
 
   cornernode = false;
@@ -1094,11 +991,9 @@ canSeeEnemy(cacheDuration) {
 }
 
 canSeeEnemyFromExposed() {
-  //prof_begin( "canSeeEnemyFromExposed" );
-
   if(!isDefined(self.enemy)) {
     self.goodShootPos = undefined;
-    //prof_end( "canSeeEnemyFromExposed" );
+
     return false;
   }
 
@@ -1118,7 +1013,6 @@ canSeeEnemyFromExposed() {
       thread persistentDebugLine(self.node.origin + getNodeOffset(self.node), enemyEye);
   }
 
-  //prof_end( "canSeeEnemyFromExposed" );
   return result;
 }
 
@@ -1136,7 +1030,6 @@ canSeePointFromExposedAtNode(point, node) {
 
   if(!sightTracePassed(lookFromPoint, point, false, undefined)) {
     if(node.type == "Cover Crouch" || node.type == "Conceal Crouch") {
-      // also consider the ability to stand at crouch nodes
       lookFromPoint = (0, 0, 64) + node.origin;
       return sightTracePassed(lookFromPoint, point, false, undefined);
     }
@@ -1146,10 +1039,7 @@ canSeePointFromExposedAtNode(point, node) {
 
   return true;
 }
-
-// check vertical angle is within our aiming abilities
 checkPitchVisibility(fromPoint, toPoint, atNode) {
-  // Compute Aiming Limits + Tolerance
   minPitch = self.downAimLimit - anim.aimPitchDiffTolerance;
   maxPitch = self.upAimLimit + anim.aimPitchDiffTolerance;
 
@@ -1169,7 +1059,6 @@ checkPitchVisibility(fromPoint, toPoint, atNode) {
 }
 
 dontGiveUpOnSuppressionYet() {
-  // we'll reset the giveUpOnSuppression timer the next time we want to suppress
   self.a.shouldResetGiveUpOnSuppressionTimer = true;
 }
 
@@ -1178,8 +1067,6 @@ updateGiveUpOnSuppressionTimer() {
     self.a.shouldResetGiveUpOnSuppressionTimer = true;
 
   if(self.a.shouldResetGiveUpOnSuppressionTimer) {
-    // after this time, we will decide that our enemy might not be where we thought they were
-    // this will cause us to look for better cover
     self.a.giveUpOnSuppressionTime = gettime() + randomintrange(15000, 30000);
 
     self.a.shouldResetGiveUpOnSuppressionTimer = false;
@@ -1206,12 +1093,9 @@ aiSuppressAI() {
   } else
     shootPos = self.enemy getShootAtPos();
 
-  // canAttackEnemyNode sometimes returns true even though we can't see the point, because
-  // our eye pos is not right at our node's offset
   if(!self canShoot(shootPos))
     return false;
   if(self.script == "combat") {
-    // make sure we can also see the tip of our gun
     if(!sighttracepassed(self getEye(), self getMuzzlePos(), false, undefined))
       return false;
   }
@@ -1221,8 +1105,6 @@ aiSuppressAI() {
 }
 
 canSuppressEnemyFromExposed() {
-  // FromExposed includes checking from the offset of the node the AI is at
-
   if(!hasSuppressableEnemy()) {
     self.goodShootPos = undefined;
     return false;
@@ -1233,7 +1115,6 @@ canSuppressEnemyFromExposed() {
 
   if(isDefined(self.node)) {
     if(self.node.type == "Cover Left" || self.node.type == "Cover Right") {
-      // Don't try to shoot at stuff behind the node
       if(!self animscripts\corner::canSeePointFromExposedAtCorner(self GetEnemyEyePos(), self.node))
         return false;
     }
@@ -1299,10 +1180,7 @@ needRecalculateSuppressSpot() {
     if(isDefined(self.goodShootPos) && !self canSeeAndShootPoint(self.goodShootPos))
       return true;
 
-    // we need to recalculate the suppress spot
-    // if we've moved or if we saw our enemy in a different place than when we
-    // last calculated it
-    return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024 // 1024 = 32 * 32);
+    return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024
     }
 
     findGoodSuppressSpot(startOffset) {
@@ -1314,7 +1192,6 @@ needRecalculateSuppressSpot() {
         return false;
       }
 
-      // make sure we can see from our eye to our gun; if we can't then we really shouldn't be trying to suppress at all!
       if(!sightTracePassed(self getShootAtPos(), startOffset, false, undefined)) {
         self.goodShootPos = undefined;
         return false;
@@ -1331,29 +1208,28 @@ needRecalculateSuppressSpot() {
       percievedMovementVector = self.lastEnemySightPos - startTracesAt;
       lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
       percievedMovementVector = percievedMovementVector - vector_multiply(lookVector, vectorDot(percievedMovementVector, lookVector));
-      // percievedMovementVector is what self.lastEnemySightPos - startTracesAt looks like from our position( that is, projected perpendicular to the direction we're looking ).
 
       idealTraceInterval = 20.0;
-      numTraces = int(length(percievedMovementVector) / idealTraceInterval + 0.5); // one trace every 20 units, ideally
+      numTraces = int(length(percievedMovementVector) / idealTraceInterval + 0.5);
       if(numTraces < 1)
         numTraces = 1;
       if(numTraces > 20)
-        numTraces = 20; // cap it
+        numTraces = 20;
       vectorDif = self.lastEnemySightPos - startTracesAt;
       vectorDif = (vectorDif[0] / numTraces, vectorDif[1] / numTraces, vectorDif[2] / numTraces);
-      numTraces++; // to get both start and end points for traces
+      numTraces++;
 
       traceTo = startTracesAt;
 
       if(getdebugdvarint("debug_dotshow") == self getentnum()) {
-        thread print3dtime(15, self.lastEnemySightPos, "lastpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
-        thread print3dtime(15, startTracesAt, "currentpos", (1, .2, .2), 1, 0.75); // origin, text, RGB, alpha, scale
+        thread print3dtime(15, self.lastEnemySightPos, "lastpos", (1, .2, .2), 1, 0.75);
+        thread print3dtime(15, startTracesAt, "currentpos", (1, .2, .2), 1, 0.75);
       }
 
       self.goodShootPos = undefined;
 
       goodTraces = 0;
-      neededGoodTraces = 2; // we stop at 3 good traces away from the cover where they disappeared, should be about 40 units
+      neededGoodTraces = 2;
       for(i = 0; i < numTraces + neededGoodTraces; i++) {
         tracePassed = sightTracePassed(startOffset, traceTo, false, undefined);
         thisTraceTo = traceTo;
@@ -1363,23 +1239,21 @@ needRecalculateSuppressSpot() {
             color = (.2, .2, 1);
           else
             color = (.2, .2, .2);
-          // showDebugLine( startOffset, traceTo, color, 0.75 );
-          thread print3dtime(15, traceTo, ".", color, 1, 0.75); // origin, text, RGB, alpha, scale
+
+          thread print3dtime(15, traceTo, ".", color, 1, 0.75);
         }
 
-        // after we've hit self.lastEnemySightPos, look only perpendicular to our line of sight
         if(i == numTraces - 1) {
           vectorDif = vectorDif - vector_multiply(lookVector, vectorDot(vectorDif, lookVector));
         }
 
-        traceTo += vectorDif; // for next time
+        traceTo += vectorDif;
 
         if(tracePassed) {
           goodTraces++;
 
           self.goodShootPos = thisTraceTo;
 
-          // if first trace succeeded, we take it, because it probably means they're crouched under cover and we can shoot over it
           if(i > 0 && goodTraces < neededGoodTraces && i < numTraces + neededGoodTraces - 1) {
             continue;
           }
@@ -1392,7 +1266,6 @@ needRecalculateSuppressSpot() {
       return isDefined(self.goodShootPos);
     }
 
-    // Returns an animation from an array of animations with a corrosponding array of weights.
     anim_array(animArray, animWeights) {
       total_anims = animArray.size;
       idleanim = randomint(total_anims);
@@ -1550,11 +1423,10 @@ needRecalculateSuppressSpot() {
       self endon("death");
       self notify("anim_prone_change");
       self endon("anim_prone_change");
-      // wrapper so we can put a breakpoint on it
+
       self EnterProne(timer, isDefined(self.a.onback));
       self waittill("killanimscript");
 
-      // in case we dont actually make it into prone by the time another script comes in
       if(self.a.pose != "prone" && !isDefined(self.a.onback))
         self.a.pose = "prone";
     }
@@ -1567,11 +1439,10 @@ needRecalculateSuppressSpot() {
       self endon("death");
       self notify("anim_prone_change");
       self endon("anim_prone_change");
-      // wrapper so we can put a breakpoint on it
+
       self ExitProne(timer);
       self waittill("killanimscript");
 
-      // in case we dont actually leave prone, change it out of prone
       if(self.a.pose == "prone")
         self.a.pose = "crouch";
     }
@@ -1599,7 +1470,7 @@ needRecalculateSuppressSpot() {
       return (sightTracePassed(myGunPos, getEnemySightPos(), false, undefined));
     }
 
-    moveAnim(animname) /* string */ {
+    moveAnim(animname) {
       assert(isDefined(self.a.moveAnimSet));
       return self.a.moveAnimSet[animname];
     }
@@ -1611,9 +1482,7 @@ needRecalculateSuppressSpot() {
         return anim2;
     }
 
-    animArray(animname) /* string */ {
-      // println( "playing anim: ", animname );
-
+    animArray(animname) {
       assert(isDefined(self.a.array));
 
       if(!isDefined(self.a.array[animname])) {
@@ -1745,9 +1614,6 @@ needRecalculateSuppressSpot() {
     }
 
     damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
-      /* possibile self.damageLocation's:
-      		"torso_upper""torso_lower""helmet""head""neck""left_arm_upper""left_arm_lower""left_hand""right_arm_upper""right_arm_lower""right_hand""gun""none""left_leg_upper""left_leg_lower""left_foot""right_leg_upper""right_leg_lower""right_foot"*/
-
       if(!isDefined(a)) return false;
       if(self.damageLocation == a) return true;
       if(!isDefined(b)) return false;
@@ -1855,7 +1721,6 @@ needRecalculateSuppressSpot() {
       return self.weapon != "none" && weaponIsBoltAction(self.weapon) && weaponclass(self.weapon) == "spread";
     }
 
-    // meant to be used with any integer seed, for a small integer maximum (ideally one that divides anim.randomIntTableSize)
     getRandomIntFromSeed(intSeed, intMax) {
       assert(intMax > 0);
 
@@ -1872,6 +1737,5 @@ needRecalculateSuppressSpot() {
       if(self usingSidearm())
         return "sidearm";
 
-      // primary and unknowns/none return this slot by default
       return "primary";
     }

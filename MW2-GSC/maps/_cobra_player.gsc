@@ -12,7 +12,6 @@ main(model, type) {
   build_deathmodel("vehicle_cobra_helicopter");
   build_deathmodel("vehicle_cobra_helicopter_fly");
 
-  // this doesn't happen very much but it's a nicer cleaner format than the case statement.
   cobra_death_fx = [];
   cobra_death_fx["vehicle_cobra_helicopter"] = "explosions/helicopter_explosion_hind_desert";
   cobra_death_fx["vehicle_cobra_helicopter_fly"] = "explosions/helicopter_explosion_hind_desert";
@@ -38,28 +37,5 @@ main(model, type) {
 
 init_local() {
   self.delete_on_death = true;
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.script_badplace = false;
 }
-
-/*QUAKED script_vehicle_cobra_helicopter_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra_player::main( "vehicle_cobra_helicopter" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter"default:"vehicletype" "cobra_player"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_cobra_helicopter_fly_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_cobra_player::main( "vehicle_cobra_helicopter_fly" );
-
-and these lines in your CSV:
-#include,vehicle_cobra_helicopter_fly_cobra
-sound,vehicle_cobra,vehicle_standard,all_sp
-
-defaultmdl="vehicle_cobra_helicopter_fly"default:"vehicletype" "cobra_player"default:"script_team" "allies"
-*/

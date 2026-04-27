@@ -29,7 +29,6 @@ init() {
       precacheMenu(game["menu_kickplayer"]);
       precacheMenu(game["menu_muteplayer"]);
     } else {
-      //game["menu_options"] = "ingame_options";
       game["menu_leavegame"] = "popup_leavegame";
 
       if(level.splitscreen) {
@@ -40,7 +39,7 @@ init() {
         game["menu_changeclass_axis"] += "_splitscreen";
         game["menu_class"] += "_splitscreen";
         game["menu_controls"] += "_splitscreen";
-        //game["menu_options"] += "_splitscreen";
+
         game["menu_leavegame"] += "_splitscreen";
         game["menu_onemanarmy"] += "_splitscreen";
 
@@ -56,10 +55,8 @@ init() {
       }
 
       precacheMenu(game["menu_controls"]);
-      //precacheMenu(game["menu_options"]);
-      precacheMenu(game["menu_leavegame"]);
 
-      //precacheMenu("status_update");
+      precacheMenu(game["menu_leavegame"]);
     }
 
     precacheMenu("scoreboard");
@@ -189,8 +186,7 @@ onMenuResponse() {
           self[[level.spectator]]();
           break;
       }
-    } // the only responses remain are change class events
-    else if(menu == game["menu_changeclass"] || (isDefined(game["menu_changeclass_defaults_splitscreen"]) && menu == game["menu_changeclass_defaults_splitscreen"]) || (isDefined(game["menu_changeclass_custom_splitscreen"]) && menu == game["menu_changeclass_custom_splitscreen"])) {
+    } else if(menu == game["menu_changeclass"] || (isDefined(game["menu_changeclass_defaults_splitscreen"]) && menu == game["menu_changeclass_defaults_splitscreen"]) || (isDefined(game["menu_changeclass_custom_splitscreen"]) && menu == game["menu_changeclass_custom_splitscreen"])) {
       self closepopupMenu();
       self closeInGameMenu();
 
@@ -219,7 +215,6 @@ getTeamAssignment() {
   } else {
     playerCounts = self maps\mp\gametypes\_teams::CountPlayers();
 
-    // if teams are equal return the team with the lowest score
     if(playerCounts["allies"] == playerCounts["axis"]) {
       if(getTeamScore("allies") == getTeamScore("axis"))
         assignment = teams[randomInt(2)];
@@ -271,10 +266,6 @@ beginClassChoice(forceNewChoice) {
 
   team = self.pers["team"];
 
-  // menu_changeclass_team is the one where you choose one of the n classes to play as.
-  // menu_class_team is where you can choose to change your team, class, controls, or leave game.
-
-  //	if game mode allows class choice
   if(allowClassChoice())
     self openpopupMenu(game["menu_changeclass_" + team]);
   else
@@ -301,8 +292,6 @@ showMainMenuForTeam() {
 
   team = self.pers["team"];
 
-  // menu_changeclass_team is the one where you choose one of the n classes to play as.
-  // menu_class_team is where you can choose to change your team, class, controls, or leave game.	
   self openpopupMenu(game["menu_class_" + team]);
 }
 
@@ -315,7 +304,6 @@ menuAllies() {
       return;
     }
 
-    // allow respawn when switching teams during grace period.
     if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
 
@@ -345,7 +333,6 @@ menuAxis() {
       return;
     }
 
-    // allow respawn when switching teams during grace period.
     if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
 
@@ -390,7 +377,6 @@ menuSpectator() {
 menuClass(response) {
   self closeMenus();
 
-  // clear new status of unlocked classes
   if(response == "demolitions_mp,0" && self getPlayerData("featureNew", "demolitions")) {
     self setPlayerData("featureNew", "demolitions", false);
   }
@@ -398,7 +384,6 @@ menuClass(response) {
     self setPlayerData("featureNew", "sniper", false);
   }
 
-  // this should probably be an assert
   if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis")) {
     return;
   }
@@ -421,8 +406,7 @@ menuClass(response) {
     if(game["state"] == "postgame") {
       return;
     }
-    if(level.inGracePeriod && !self.hasDoneCombat) // used weapons check?
-    {
+    if(level.inGracePeriod && !self.hasDoneCombat) {
       self maps\mp\gametypes\_class::setClass(self.pers["class"]);
       self.tag_stowed_back = undefined;
       self.tag_stowed_hip = undefined;
@@ -446,15 +430,13 @@ menuClass(response) {
 }
 
 addToTeam(team, firstConnect) {
-  // UTS update playerCount remove from team
   if(isDefined(self.team))
     self maps\mp\gametypes\_playerlogic::removeFromTeamCount();
 
   self.pers["team"] = team;
-  // this is the only place self.team should ever be set
+
   self.team = team;
 
-  // session team is readonly in ranked matches on console
   if(!matchMakingGame() || isDefined(self.pers["isBot"]) || !allowTeamChoice()) {
     if(level.teamBased) {
       self.sessionteam = team;
@@ -466,15 +448,11 @@ addToTeam(team, firstConnect) {
     }
   }
 
-  // UTS update playerCount add to team
   if(game["state"] != "postgame")
     self maps\mp\gametypes\_playerlogic::addToTeamCount();
 
   self updateObjectiveText();
 
-  // give "joined_team" and "joined_spectators" handlers a chance to start
-  // these are generally triggered from the "connected" notify, which can happen on the same
-  // frame as these notifies
   if(isDefined(firstConnect) && firstConnect)
     waittillframeend;
 

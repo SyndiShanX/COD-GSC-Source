@@ -30,10 +30,8 @@ precacheFX() {
 placeGlows() {
   randomStartDelay = randomfloatrange(-20, -15);
 
-  //map_source\prefabs\mp_carentan\lantern01.map
   thread lightGlows("chinese_lantern_FX_origin", "chinese_lantern_FX", "misc/chinese_latern_glow_orange", randomStartDelay);
 
-  //map_source\prefabs\misc_models\ct_street_lamp_on.map
   thread lightGlows("ct_street_lamp_glow_FX_origin", "ct_street_lamp_glow_FX", "misc/ct_street_lamp_glow", randomStartDelay);
 }
 
@@ -46,7 +44,6 @@ lightGlows(targetname, fxName, fxFile, delay, soundalias) {
 
   waittillframeend;
 
-  // script_structs
   ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents))
     return;
@@ -58,7 +55,6 @@ lightGlows(targetname, fxName, fxFile, delay, soundalias) {
 }
 
 lightGlows_create(fxName, fxFile, delay, soundalias) {
-  // default effect angles if they dont exist
   if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
 

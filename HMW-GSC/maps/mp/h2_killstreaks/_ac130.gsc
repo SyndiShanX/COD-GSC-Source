@@ -14,10 +14,6 @@ init() {
 
   precacheModel("vehicle_ac130_coop");
 
-  //precacheItem("ac130_25mm_mp");
-  //precacheItem("ac130_40mm_mp");
-  //precacheItem("ac130_105mm_mp");
-
   PrecacheMiniMapIcon("h2_objpoint_ac130_friendly");
   PrecacheMiniMapIcon("h2_objpoint_ac130_enemy");
 
@@ -96,7 +92,7 @@ start_h2_ac130(lifeID) {
   self _visionsetnakedforplayer("black_bw", 0);
   self _visionsetnakedforplayer("", 1);
 
-  if(self getCurrentWeapon() != "ac130_mp" || self isSwitchingWeapon()) //force switching back to the laptop to keep the FOV
+  if(self getCurrentWeapon() != "ac130_mp" || self isSwitchingWeapon())
     self setSpawnWeapon("ac130_mp");
 
   self _disableWeaponSwitch();
@@ -157,7 +153,6 @@ start_h2_ac130(lifeID) {
   self thread monitorWeaponSwitch();
   self thread ac130Reload();
   self thread maps\mp\h2_killstreaks\_common::thermalVision(self, "leave_ac130");
-  //self thread weaponLockThink( ac130 );
 
   ac130.plane = spawnPlane(self, "script_model", level.UAVRig getTagOrigin("tag_origin"), "h2_objpoint_ac130_friendly", "h2_objpoint_ac130_enemy");
   ac130.plane setModel("tag_origin");
@@ -179,7 +174,7 @@ weaponLockThink(ac130) {
   level endon("game_ended");
 
   for(;;) {
-    eyePos = ac130.playerView.origin; //self getEye() doesn't work well with remote killstreaks in h1
+    eyePos = ac130.playerView.origin;
     trace = bulletTrace(eyePos, eyePos + (anglesToForward(self getPlayerAngles()) * 100000), 1, self);
 
     targetListLOS = [];
@@ -202,9 +197,6 @@ weaponLockThink(ac130) {
       }
       player.remoteHeliLOS = true;
       if(!bulletTracePassed(eyePos, player.origin + (0, 0, 32), false, ac130)) {
-        //if( distance( player.origin, trace["position"] ) > 256 )
-        //	continue;
-
         targetListNoLOS[targetListNoLOS.size] = player;
       } else {
         targetListLOS[targetListLOS.size] = player;
@@ -407,7 +399,6 @@ monitorLargeFire(type) {
 
     missile = MagicBullet(self.ac130Weapon, origin, position, self);
     missile.lifeID = self.ac130LifeID;
-    //missile Missile_SetFlightmodeDirect();
 
     Earthquake(0.2, 1, origin, 1000);
 
@@ -443,7 +434,6 @@ monitorSmallFire(type) {
     if(type == "ac130_40mm_mp") {
       missile = MagicBullet(self.ac130Weapon, origin, position, self);
       missile.lifeID = self.ac130LifeID;
-      //missile Missile_SetFlightmodeDirect();
 
       self playLocalSound("ac130_40mm_fire");
       Earthquake(0.125, 0.5, origin, 1000);
@@ -635,9 +625,9 @@ ac130_damage_tracker() {
   self endon("death");
   level endon("game_ended");
 
-  self.health = 999999; // keep it from dying anywhere in code
-  self.maxhealth = H2_AC130_HEALTH; // this is the health we'll check
-  self.damageTaken = 0; // how much damage has it taken
+  self.health = 999999;
+  self.maxhealth = H2_AC130_HEALTH;
+  self.damageTaken = 0;
 
   for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath, modelName, tagName, partName, iDFlags, sWeapon);

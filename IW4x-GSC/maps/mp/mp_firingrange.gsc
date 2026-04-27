@@ -24,11 +24,9 @@ main() {
 
   setDvar("r_diffusecolorscale", "1.5");
 
-  //TRIGGERS
   alleyTrigger = getent("alleyTrigger", "targetname");
   windowTrigger = getent("triggerwindowTarget", "targetname");
 
-  //TARGETS
   target1 = getent("fieldTarget_BackLeft", "targetname");
   target2 = getent("fieldTarget_FrontLeft", "targetname");
   target3 = getent("fieldTarget_Middle", "targetname");
@@ -50,31 +48,21 @@ main() {
   target19 = getent("target_alleyWindow2", "targetname");
   target20 = getent("target_alleyWindow3", "targetname");
 
-  //TARGET LIGHTs
-
-  //Props
   targetLight1_off = getent("steelBuildingTargetLight1_off", "targetname");
   targetLight1_on = getent("steelBuildingTargetLight1_on", "targetname");
 
   targetLight2_off = getent("steelBuildingTargetLight2_off", "targetname");
   targetLight2_on = getent("steelBuildingTargetLight2_on", "targetname");
 
-  //Lights
-
   level.const_fx_exploder_red_light_1 = 1001;
   level.const_fx_exploder_red_light_2 = 1002;
 
-  //LOUDSPEAKERS
   speaker1 = getent("loudspeaker1", "targetname");
   speaker2 = getent("loudspeaker2", "targetname");
 
-  //PROPANE TANKS
-
-  //Keep the on versions of the light model hidden until appropriate target takes damage.
   targetLight1_on Hide();
   targetLight2_on Hide();
 
-  //TARGETS
   target1 setCanDamage(true);
   target2 setCanDamage(true);
   target3 setCanDamage(true);
@@ -103,15 +91,11 @@ main() {
   target13 thread damageTarget(2);
   target14 thread damageTarget(3);
   target15 thread damageTarget(3);
-  //target16 thread damageTargetLights(targetLight1_on, targetLight1_off, speaker1, "amb_target_buzzer", level.const_fx_exploder_red_light_2 );
-  //target17 thread damageTargetLights(targetLight2_on, targetLight2_off, speaker2, "amb_target_buzzer", level.const_fx_exploder_red_light_1 );
+
   target18 thread damageTarget(4);
   target19 thread damageTarget(4);
   target20 thread damageTarget(5);
 
-  //PROPANE TANKS
-
-  //Sliding Targets
   target1 thread moveTarget(4, 220, 10.1);
   target2 thread moveTarget(4, 220, 5.2);
   target3 thread moveTarget(4, 220, 10.3);
@@ -131,12 +115,9 @@ main() {
   target19 thread moveTarget(6, 70, 6.65);
   target20 thread moveTarget(1, 130, 5.75);
 
-  //Hinge Targets
-  //targetHinge1 thread rotateTarget(2, 90, 0.5, 3);	//-Z direction, 90 degrees, in .5 seconds, wait inbetween for 3 seconds.
   target11 thread rotateTarget(2, 90, 0.5, 2);
   target12 thread rotateTarget(1, 90, 0.7, 3);
 
-  //TRIGGERS
   target9.triggeroff = true;
   alleyTrigger thread triggerCheck(target9);
   target7.triggeroff = true;
@@ -148,11 +129,10 @@ triggerCheck(target) {
   while(1) {
     self waittill("trigger", player);
 
-    //If the target is close enough to the player to cause a possible issue, tell the target to go back the other direction.
     distance = Distance(target.origin, self.origin);
     if(distance <= 90) {
       if(isDefined(target.triggeroff))
-        target.triggeroff = false; //Stop the target.
+        target.triggeroff = false;
 
       target notify("targetStopMoving");
 
@@ -160,7 +140,7 @@ triggerCheck(target) {
         wait 0.1;
       }
       if(isDefined(target.triggeroff))
-        target.triggeroff = true; //Start the target.
+        target.triggeroff = true;
 
       target notify("targetStopMoving");
     }
@@ -182,11 +162,7 @@ damageTarget(dir) {
         break;
       case 2: {
         rotation = 1;
-        if(isDefined(attacker) && isPlayer(attacker)) {
-          //yaw = get2DYaw( attacker.origin, self.origin );
-          //if( attacker.angles[1] > yaw )
-          //	rotation = -1;
-        }
+        if(isDefined(attacker) && isPlayer(attacker)) {}
 
         self rotateyaw(self.angles[2] + (180 * rotation), .3);
         self playSound("amb_target_twirl");
@@ -217,17 +193,12 @@ damageTarget(dir) {
     }
   }
 }
-
-//Pass in one of the following to define the start direction of the target: 1 for +y, 2 for -y, 3 for +x, 4 for -x, 5 for +Z, 6 for -Z.
-//Pass in the distance in units the target is to travel.
-//Pass in the ammount of time in seconds that it will take the target to travel that distance.
 moveTarget(dir, dis, speed) {
   self endon("game_ended");
-  keepMoving = true; //Local var to decide if the target needs to be paused or not.
+  keepMoving = true;
 
-  //Get the targets starting position or nearPos
   startPOS = self.origin;
-  //Find out the targets far position.
+
   FarPOS = self.origin;
 
   sound = spawn("script_origin", self.origin);
@@ -235,41 +206,40 @@ moveTarget(dir, dis, speed) {
   sound playLoopSound("amb_target_chain");
 
   switch (dir) {
-    case 1: //+Y
+    case 1:
       farPOS = self.origin + (0, dis, 0);
       break;
-    case 2: //-Y
+    case 2:
       farPOS = self.origin - (0, dis, 0);
       break;
-    case 3: //+X
+    case 3:
       farPOS = self.origin + (dis, 0, 0);
       break;
-    case 4: //-X
+    case 4:
       farPOS = self.origin - (dis, 0, 0);
       break;
-    case 5: //+Z
+    case 5:
       farPOS = self.origin + (0, 0, dis);
       break;
-    case 6: //-Z
+    case 6:
       farPOS = self.origin - (0, 0, dis);
       break;
-    case 7: //Custom
+    case 7:
       farPOS = self.origin - dis;
       break;
   }
 
-  //Move the target
   while(1) {
-    if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+    if(isDefined(self.triggeroff))
       keepMoving = self.triggeroff;
 
     switch (dir) {
-      case 1: //+Y
+      case 1:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -279,12 +249,12 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 2: //-Y
+      case 2:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -294,12 +264,12 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 3: //+X
+      case 3:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -309,12 +279,12 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 4: //-X
+      case 4:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -324,12 +294,12 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 5: //+Z
+      case 5:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -339,11 +309,11 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 6: //-Z
+      case 6:
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false) {
@@ -353,18 +323,18 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
-      case 7: //Custom
+      case 7:
         if(keepMoving == false)
-          self waittill("targetStopMoving"); //Wait here till the player leaves the trigger.
+          self waittill("targetStopMoving");
 
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
-        if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
+        if(isDefined(self.triggeroff))
           keepMoving = self.triggeroff;
 
         if(keepMoving == false)
-          self waittill("targetStopMoving"); //Wait here till the player leaves the trigger.
+          self waittill("targetStopMoving");
         self moveto(StartPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -376,7 +346,7 @@ rotateTarget(dir, deg, speed, pauseTime) {
   self endon("game_ended");
   while(1) {
     switch (dir) {
-      case 1: //+Z
+      case 1:
         self rotateyaw(self.angles[2] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
@@ -384,7 +354,7 @@ rotateTarget(dir, deg, speed, pauseTime) {
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
-      case 2: //-Z
+      case 2:
         self rotateyaw(self.angles[2] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
@@ -392,7 +362,7 @@ rotateTarget(dir, deg, speed, pauseTime) {
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
-      case 3: //+X
+      case 3:
         self rotateroll(self.angles[0] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
@@ -400,7 +370,7 @@ rotateTarget(dir, deg, speed, pauseTime) {
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
-      case 4: //-X
+      case 4:
         self rotateroll(self.angles[0] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
@@ -408,7 +378,7 @@ rotateTarget(dir, deg, speed, pauseTime) {
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
-      case 5: //+Y
+      case 5:
         self rotateroll(self.angles[1] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
@@ -416,13 +386,13 @@ rotateTarget(dir, deg, speed, pauseTime) {
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
-      case 6: //-Y
+      case 6:
         self rotatepitch(self.angles[1] - deg, speed);
         wait(pauseTime);
         self rotatepitch(self.angles[1] + deg, speed);
         wait(pauseTime);
         break;
-      case 7: //Custom
+      case 7:
         self rotateto((self.angles[0] + 90, self.angles[1] - 90, self.angles[2] + 45), speed);
         wait(pauseTime);
         self rotateto((self.angles[0] - 90, self.angles[1] + 90, self.angles[2] - 45), speed);

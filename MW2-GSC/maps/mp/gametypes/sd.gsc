@@ -6,66 +6,6 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
- // Rallypoints should be destroyed on leaving your team/getting killed
-// Compass icons need to be looked at
-// Doesn't seem to be setting angle on spawn so that you are facing your rallypoint
-
-/*
-	Search and Destroy
-	Attackers objective: Bomb one of 2 positions
-	Defenders objective: Defend these 2 positions / Defuse planted bombs
-	Round ends:	When one team is eliminated, bomb explodes, bomb is defused, or roundlength time is reached
-	Map ends:	When one team reaches the score limit, or time limit or round limit is reached
-	Respawning:	Players remain dead for the round and will respawn at the beginning of the next round
-
-	Level requirements
-	------------------ Allied Spawnpoints:
-			classname		mp_sd_spawn_attacker
-			Allied players spawn from these. Place at least 16 of these relatively close together.
-
-		Axis Spawnpoints:
-			classname		mp_sd_spawn_defender
-			Axis players spawn from these. Place at least 16 of these relatively close together.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-
-		Bombzones:
-			classname					trigger_multiple
-			targetname					bombzone
-			script_gameobjectname		bombzone
-			script_bombmode_original	<if defined this bombzone will be used in the original bomb mode>
-			script_bombmode_single		<if defined this bombzone will be used in the single bomb mode>
-			script_bombmode_dual		<if defined this bombzone will be used in the dual bomb mode>
-			script_team					Set to allies or axis. This is used to set which team a bombzone is used by in dual bomb mode.
-			script_label				Set to A or B. This sets the letter shown on the compass in original mode.
-			This is a volume of space in which the bomb can planted. Must contain an origin brush.
-
-		Bomb:
-			classname				trigger_lookat
-			targetname				bombtrigger
-			script_gameobjectname	bombzone
-			This should be a 16x16 unit trigger with an origin brush placed so that it's center lies on the bottom plane of the trigger.
-			Must be in the level somewhere. This is the trigger that is used when defusing a bomb.
-			It gets moved to the position of the planted bomb model.
-
-	Level script requirements
-	------------------------- Team Definitions:
-			game["attackers"] = "allies";
-			game["defenders"] = "axis";
-			This sets which team is attacking and which team is defending. Attackers plant the bombs. Defenders protect the targets.
-
-		Exploder Effects:
-			Setting script_noteworthy on a bombzone trigger to an exploder group can be used to trigger additional effects.
-*/
-
-/*QUAKED mp_sd_spawn_attacker (0.0 1.0 0.0) (-16 -16 0) (16 16 72)
-Attacking players spawn randomly at one of these positions at the beginning of a round.*/
-
-/*QUAKED mp_sd_spawn_defender (1.0 0.0 0.0) (-16 -16 0) (16 16 72)
-Defending players spawn randomly at one of these positions at the beginning of a round.*/
 
 main() {
   if(getDvar("mapname") == "mp_background") {
@@ -127,17 +67,7 @@ onPrecacheGameType() {
   precacheShader("waypoint_defuse_a");
   precacheShader("waypoint_defuse_b");
   precacheShader("waypoint_escort");
-  /*
-  	precacheShader("waypoint_target");
-  	precacheShader("waypoint_target_a");
-  	precacheShader("waypoint_target_b");
-  	precacheShader("waypoint_defend");
-  	precacheShader("waypoint_defend_a");
-  	precacheShader("waypoint_defend_b");
-  	precacheShader("waypoint_defuse");
-  	precacheShader("waypoint_defuse_a");
-  	precacheShader("waypoint_defuse_b");
-  */
+
   precacheString(&"MP_EXPLOSIVES_RECOVERED_BY");
   precacheString(&"MP_EXPLOSIVES_DROPPED_BY");
   precacheString(&"MP_EXPLOSIVES_PLANTED_BY");
@@ -443,7 +373,6 @@ onBeginUse(player) {
 
     if(level.multibomb) {
       for(i = 0; i < self.otherBombZones.size; i++) {
-        //self.otherBombZones[i] maps\mp\gametypes\_gameobjects::disableObject();
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::allowUse("none");
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::setVisibleTeam("friendly");
       }
@@ -467,7 +396,6 @@ onEndUse(team, player, result) {
   } else {
     if(level.multibomb && !result) {
       for(i = 0; i < self.otherBombZones.size; i++) {
-        //self.otherBombZones[i] maps\mp\gametypes\_gameobjects::enableObject();
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::allowUse("enemy");
         self.otherBombZones[i] maps\mp\gametypes\_gameobjects::setVisibleTeam("any");
       }
@@ -480,12 +408,9 @@ onCantUse(player) {
 }
 
 onUsePlantObject(player) {
-  // planted the bomb
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"])) {
     level thread bombPlanted(self, player);
-    //player logString( "bomb planted: " + self.label );
 
-    // disable all bomb zones except this one
     for(index = 0; index < level.bombZones.size; index++) {
       if(level.bombZones[index] == self) {
         continue;
@@ -495,9 +420,6 @@ onUsePlantObject(player) {
 
     player playSound("mp_bomb_plant");
     player notify("bomb_planted");
-
-    //if( !level.hardcoreMode )
-    //	iPrintLn(&"MP_EXPLOSIVES_PLANTED_BY", player );
 
     leaderDialog("bomb_planted");
 
@@ -515,14 +437,11 @@ onUsePlantObject(player) {
 
 onUseDefuseObject(player) {
   player notify("bomb_defused");
-  //player logString( "bomb defused: " + self.label );
+
   level thread bombDefused();
 
-  // disable this bomb zone
   self maps\mp\gametypes\_gameobjects::disableObject();
 
-  //if( !level.hardcoreMode )
-  //	iPrintLn(&"MP_EXPLOSIVES_DEFUSED_BY", player );
   leaderDialog("bomb_defused");
 
   level thread teamPlayerCardSplash("callout_bombdefused", player);
@@ -597,15 +516,9 @@ bombPlanted(destroyedObj, player) {
   }
   destroyedObj maps\mp\gametypes\_gameobjects::allowUse("none");
   destroyedObj maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
-  /*
-  destroyedObj maps\mp\gametypes\_gameobjects::set2DIcon( "friendly", undefined );
-  destroyedObj maps\mp\gametypes\_gameobjects::set2DIcon( "enemy", undefined );
-  destroyedObj maps\mp\gametypes\_gameobjects::set3DIcon( "friendly", undefined );
-  destroyedObj maps\mp\gametypes\_gameobjects::set3DIcon( "enemy", undefined );
-  */
+
   label = destroyedObj maps\mp\gametypes\_gameobjects::getLabel();
 
-  // create a new object to defuse with.
   trigger = destroyedObj.bombDefuseTrig;
   trigger.origin = level.sdBombModel.origin;
   visuals = [];

@@ -11,7 +11,6 @@
 
 ENEMY_BASE_ACCURACY = 0.6;
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-// VISION SETS
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 vision_chase() {
@@ -19,7 +18,6 @@ vision_chase() {
 
   time = 6;
   maps\_utility::set_vision_set("favela_chase", time);
-  //setExpFog( 708.893, 5902.43, 0.402663, 0.456692, 0.520202, 0.721229, 0, 0.562109, 0.600449, 0.678415, (0.89008, -0.302316, -0.341119), 0, 51.1533, 1.80097 );
 }
 
 vision_torture() {
@@ -27,7 +25,6 @@ vision_torture() {
 
   time = 1;
   maps\_utility::set_vision_set("favela_torture", time);
-  //setExpFog( 708.893, 5902.43, 0.402663, 0.456692, 0.520202, 0.721229, 0, 0.562109, 0.600449, 0.678415, (0.89008, -0.302316, -0.341119), 0, 51.1533, 1.80097 );
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -53,27 +50,18 @@ movePlayerToStartPoint(sTargetname) {
 modify_battlechatter_times() {
   MULT = 0.25;
 
-  // delay to make sure these get set at the level load first
   wait 0.1;
 
-  // "contact to the north!" etc.
-  anim.eventActionMinWait["threat"]["self"] *= MULT; // 14000
-  anim.eventActionMinWait["threat"]["squad"] *= MULT; // 10000
+  anim.eventActionMinWait["threat"]["self"] *= MULT;
+  anim.eventActionMinWait["threat"]["squad"] *= MULT;
 
-  // "cover me!" / "suppressing fire!" / "let's go!" etc.
-  anim.eventActionMinWait["order"]["self"] *= MULT; // 8000;
-  anim.eventActionMinWait["order"]["squad"] *= MULT; // 10000;
+  anim.eventActionMinWait["order"]["self"] *= MULT;
+  anim.eventActionMinWait["order"]["squad"] *= MULT;
 
-  // "reloading!" / "grenade out!"anim.eventActionMinWait["inform"]["self"] *= MULT; // 6000;
-  anim.eventActionMinWait["inform"]["squad"] *= MULT; // 8000;
+  anim.eventActionMinWait["inform"]["squad"] *= MULT;
 
-  // specific categories of the above
-  anim.eventTypeMinWait["inform"]["reloading"] *= MULT; // 20000;
-  anim.eventTypeMinWait["inform"]["killfirm"] *= MULT; // 15000;
-
-  // "Man down!"anim.eventTypeMinWait["reaction"]["casualty"] *= MULT; // 14000;
-
-  // this is the one that I think might make a big difference as long as these enemies have "hostile bursts"anim.eventTypeMinWait["reaction"]["taunt"] *= MULT; // 30000;
+  anim.eventTypeMinWait["inform"]["reloading"] *= MULT;
+  anim.eventTypeMinWait["inform"]["killfirm"] *= MULT;
 }
 
 adjustAccuracy() {
@@ -175,7 +163,6 @@ seek_player() {
 gag_fence_dog() {
   trigger_wait("fence_dog_gag", "targetname");
 
-  // spawn the dog
   spawner = getent("fence_dog_spawner", "targetname");
   dog = spawner stalingradspawn();
   spawn_failed(dog);
@@ -221,15 +208,12 @@ window_smasher() {
 
   self.dontevershoot = true;
 
-  // get nearest window_smash ent
   window = self getWindowParts();
 
-  // wait until AI is at the window node
   windowNode = self getWindowNode();
   self.goalradius = 16;
   self setGoalNode(windowNode);
 
-  // play melee anim
   windowNode thread anim_generic(self, "window_smash");
   thread open_window(window, 0.1);
 
@@ -302,16 +286,13 @@ play_sound_trigger() {
 gag_civilian_window_1() {
   trigger_wait("gag_civilian_window_1", "targetname");
 
-  // spawn character
   spawner = getent("window_civilian_spawner_1", "targetname");
   guy = spawner spawn_ai(true);
   guy endon("death");
 
-  // play anim
   windowNode = getent("civilian_window_node1", "targetname");
   windowNode anim_generic(guy, "civilian_window_1");
 
-  // run away and delete
   runawayNode = getnode("window_civilian_spawner_runto_node", "targetname");
   guy.goalradius = 16;
   guy setGoalNode(runawayNode);
@@ -322,7 +303,6 @@ gag_civilian_window_1() {
 }
 
 ignored_until_goal() {
-  // AI is ignored by enemy AI until he gets to his goal
   self endon("death");
   self.ignoreme = true;
   self waittill("goal");
@@ -347,7 +327,6 @@ faust_spawn_func() {
   }
   level.faust = self;
 
-  // he runs his path. When he gets to the end of his path he gets deleted
   level.faust endon("death");
 
   level.faust set_ignoreall(true);
@@ -478,13 +457,10 @@ process_ai_script_parameters() {
 }
 
 try_balcony_death() {
-  // always return false in this function because we want the death
-  // animscript to continue after this function no matter what
-
   if(!isDefined(self))
     return false;
 
-  if(self.a.pose == "prone") // allow crouch
+  if(self.a.pose == "prone")
     return false;
 
   if(!isDefined(self.prevnode))
@@ -507,7 +483,6 @@ try_balcony_death() {
     level.last_balcony_death = getTime();
   elapsedTime = getTime() - level.last_balcony_death;
 
-  // if one just happened within 5 seconds dont do it
   if(elapsedTime < 5 * 1000)
     return false;
 
@@ -525,21 +500,9 @@ control_run_speed() {
   level endon("runner_shot");
   self endon("death");
 
-  // speed and slows runner's run speed so the player can't catch him but also doesn't get left too far behind
-
   targetSpeed = undefined;
-  //self.moveplaybackrate = 1.2;
-  //self.sprint = true;
 
   flag_wait("soap_control_run_speed");
-  /*
-  for(;;)
-  {
-  	targetSpeed = self get_best_run_speed();
-  	self thread set_run_speed( targetSpeed );
-  	wait 0.2;
-  }
-  */
 }
 
 get_best_run_speed() {
@@ -555,15 +518,12 @@ get_best_run_speed() {
 
   offset = cap_value(offset, DISTANCE_MIN, DISTANCE_MAX);
 
-  // player is far behind, normal run speed
   if(offset < DISTANCE_MIN)
     return RATE_MIN;
 
-  // player is ahead of AI, max run speed
   if(offset >= DISTANCE_MAX)
     return RATE_MAX;
 
-  // player is close behind the AI, control run speed to make sure AI stays ahead
   fraction = get_fraction(offset, DISTANCE_MIN, DISTANCE_MAX);
   targetSpeed = RATE_MAX - ((RATE_MAX - RATE_MIN) * fraction);
   assert(targetSpeed > 0);
@@ -610,13 +570,11 @@ forklift_blocker() {
   forklift_after = getEntArray("forklift_after", "targetname");
   forklift_after_clip = getent("forklift_after_clip", "targetname");
 
-  // hide after
   array_call(forklift_after, ::hide);
   forklift_after_clip notsolid();
 
   flag_wait("block_alley");
 
-  // show after, hide before
   array_call(forklift_after, ::show);
   forklift_after_clip solid();
 
@@ -625,7 +583,6 @@ forklift_blocker() {
 }
 
 car_anims() {
-  // attach hula girl
   tag = "tag_hulagirl_attach";
   level.hula_girl = spawn_anim_model("hula_girl", self getTagOrigin(tag));
   level.hula_girl.angles = self getTagAngles(tag);
@@ -640,7 +597,6 @@ car_anims() {
   wait 1.55;
   level.hula_girl clearAnim(level.scr_anim["hula_girl"]["bobble_stop"], 1.0);
 
-  // opens the door when soap exists the vehicle
   flag_wait("soap_exits_car");
   self setAnim(level.scr_anim["car"]["run_and_wave"]);
 
@@ -820,7 +776,6 @@ play_fx_trig() {
 civilian_flee_walla() {
   self endon("death");
 
-  // civillians don't do wallas until you're in the favela
   if(!flag("civilians_walla")) {
     return;
   }
@@ -837,7 +792,6 @@ civilian_flee_walla() {
     return;
   level.lastWallaTime = getTime();
 
-  // walla
   animScene = level.fleeing_civilian_wallas[level.nextWallaIndex];
   self.allowdeath = true;
   self thread anim_generic(self, animScene);
@@ -908,7 +862,6 @@ curtain_pulldown(bWaitForPlayer) {
     waittill_player_lookat(0.9, undefined, true, 5.0);
   }
 
-  // Don't allow guy to die until 1.5 seconds in so the curtain doesn't fall on it's own
   guy.allowdeath = false;
   guy thread allow_death_delayed(1.5);
 
@@ -965,10 +918,8 @@ retreat_trigger() {
 
   self waittill("trigger");
 
-  // get all AI in the volume
   ai = volume get_ai_touching_volume("axis");
 
-  // make all ai touching the volume go to the specified node with it's radius
   foreach(guy in ai) {
     guy.goalradius = node.radius;
     guy set_goal_node(node);
@@ -1000,17 +951,16 @@ faust_assistant_kill_player_monitor() {
   for(;;) {
     wait 0.05;
 
-    // player must be within range of Faust's assistant
     d = DistanceSquared(self.origin, level.player.origin);
     if(d > distSq) {
       continue;
     }
-    // player must be in front of Faust's assistant
+
     FOV = within_fov(self.origin, self.angles, level.player.origin, cos90);
     if(!FOV) {
       continue;
     }
-    // Faust's assisstant should now kill the player for getting in front of him
+
     self thread faust_assistant_kill_player();
     return;
   }
@@ -1019,8 +969,6 @@ faust_assistant_kill_player_monitor() {
 faust_assistant_kill_player() {
   self endon("death");
   level.player endon("death");
-
-  // kill the player
 
   createThreatBiasGroup("player");
   createThreatBiasGroup("makarov");

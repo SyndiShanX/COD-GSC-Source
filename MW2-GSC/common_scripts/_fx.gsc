@@ -8,16 +8,14 @@
 
 initFX() {
   if(!isDefined(level.func)) {
-    // this array will be filled with code commands that SP or MP may use but doesn't exist in the other.
     level.func = [];
   }
   if(!isDefined(level.func["create_triggerfx"]))
     level.func["create_triggerfx"] = ::create_triggerfx;
 
-  // wrapper for the exploder function so we dont have to use flags and do ifs/waittills on every exploder call
   level.exploderFunction = ::exploder_before_load;
-  waittillframeend; // Wait one frame so the effects get setup by the maps fx thread
-  waittillframeend; // Wait another frame so effects can be loaded based on start functions. Without this FX are initialiazed before they are defined by start functions.
+  waittillframeend;
+  waittillframeend;
   level.exploderFunction = ::exploder_after_load;
 
   setDevDvarIfUninitialized("scr_map_exploder_dump", 0);
@@ -48,10 +46,7 @@ print_org(fxcommand, fxId, fxPos, waittime) {
   }
 }
 
-OneShotfx(fxId, fxPos, waittime, fxPos2) {
-  //	level thread print_org ("OneShotfx", fxId, fxPos, waittime);
-  //level thread OneShotfxthread (fxId, fxPos, waittime, fxPos2);
-}
+OneShotfx(fxId, fxPos, waittime, fxPos2) {}
 
 exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout, exploder_group) {
   if(1) {
@@ -62,20 +57,20 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
       ent.v["angles"] = vectortoangles(fxPos2 - fxPos);
     ent.v["delay"] = waittime;
     ent.v["exploder"] = num;
-    // deprecated
+
     return;
   }
   fx = spawn("script_origin", (0, 0, 0));
-  //	println ("total ", getentarray ("script_origin","classname").size);
+
   fx.origin = fxPos;
   fx.angles = vectortoangles(fxPos2 - fxPos);
-  //	fx.targetname = "exploder";
+
   fx.script_exploder = num;
   fx.script_fxid = fxId;
   fx.script_delay = waittime;
 
   fx.script_firefx = fireFx;
-  fx.script_firefxdelay = (fireFxDelay); // for awhile the script exported strings for this value so we cast it to float
+  fx.script_firefxdelay = (fireFxDelay);
   fx.script_firefxsound = fireFxSound;
 
   fx.script_sound = fxSound;
@@ -100,14 +95,6 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
   createfx_showOrigin(fxid, fxPos, waittime, fxpos2, "exploderfx", fx, undefined, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout);
 }
 
-/*
-loopfxRotate(fxId, fxPos, waittime, angle, fxStart, fxStop, timeout)
-{
-	level thread print_org ("loopfx", fxId, fxPos, waittime);
-level thread loopfxthread (fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout);
-}
-*/
-
 loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout) {
   println("Loopfx is deprecated!");
   ent = createLoopEffect(fxId);
@@ -118,16 +105,7 @@ loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout) {
   ent.v["delay"] = waittime;
 }
 
-/*
-loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout)
-{
-	level thread print_org ("loopfx", fxId, fxPos, waittime);
-level thread loopfxthread (fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout);
-}
-*/
-
 create_looper() {
-  //assert (isDefined(self.looper));
   self.looper = playLoopedFx(level._effect[self.v["fxid"]], self.v["delay"], self.v["origin"], 0, self.v["forward"], self.v["up"]);
   create_loopsound();
 }
@@ -151,23 +129,11 @@ create_loopsound() {
 
 loopfxthread() {
   waitframe();
-  //	println ( "fx testing running Id: ", fxId );
-  //if((isdefined (level.scr_sound)) && (isdefined (level.scr_sound[fxId])))
-  //	 loopSound(level.scr_sound[fxId], fxPos);
 
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
 
   while(1) {
-    /*
-    if(isdefined (ent.org2))
-    {
-    	fxAngle = vectorNormalize (ent.org2 - ent.org);
-    	looper = playLoopedFx( level._effect[fxId], ent.delay, ent.org, 0, fxAngle );
-    }
-    else
-    	looper = playLoopedFx( level._effect[fxId], ent.delay, ent.org, 0 );
-    */
     create_looper();
 
     if(isDefined(self.timeout))
@@ -219,7 +185,6 @@ loopfxStop(timeout) {
 }
 
 loopSound(sound, Pos, waittime) {
-  //	level thread print_org ("loopSound", sound, Pos, waittime);
   level thread loopSoundthread(sound, Pos, waittime);
 }
 
@@ -227,7 +192,7 @@ loopSoundthread(sound, pos, waittime) {
   org = spawn("script_origin", (pos));
 
   org.origin = pos;
-  //	println ("hello1 ", org.origin, sound);
+
   org playLoopSound(sound);
 }
 
@@ -338,15 +303,9 @@ setfireloopmod(value) {
 
 setup_fx() {
   if((!isDefined(self.script_fxid)) || (!isDefined(self.script_fxcommand)) || (!isDefined(self.script_delay))) {
-    //		println (self.script_fxid);
-    //		println (self.script_fxcommand);
-    //		println (self.script_delay);
-    //		println ("Effect at origin ", self.origin," doesn't have script_fxid/script_fxcommand/script_delay");
-    //		self delete();
     return;
   }
 
-  //	println ("^a Command:", self.script_fxcommand, " Effect:", self.script_fxID, " Delay:", self.script_delay, " ", self.origin);
   if(isDefined(self.model))
     if(self.model == "toilet") {
       self thread burnville_paratrooper_hack();
@@ -380,12 +339,9 @@ setup_fx() {
 
 burnville_paratrooper_hack() {
   normal = (0, 0, self.angles[1]);
-  //	println ("z: paratrooper fx hack: ", normal);
+
   id = level._effect[self.script_fxId];
   origin = self.origin;
-
-  //	if(isdefined (self.script_delay))
-  //		wait (self.script_delay);
 
   wait 1;
   level thread burnville_paratrooper_hack_loop(normal, origin, id);
@@ -394,15 +350,12 @@ burnville_paratrooper_hack() {
 
 burnville_paratrooper_hack_loop(normal, origin, id) {
   while(1) {
-    //	iprintln ("z:playing paratrooper fx", origin);
-
     playFX(id, origin);
     wait(30 + randomfloat(40));
   }
 }
 
 create_triggerfx() {
-  //assert (isDefined(self.looper));
   if(!verify_effects_assignment(self.v["fxid"])) {
     return;
   }
@@ -425,7 +378,7 @@ verify_effects_assignment(effectID) {
 verify_effects_assignment_print(effectID) {
   level notify("verify_effects_assignment_print");
   level endon("verify_effects_assignment_print");
-  wait .05; //allow errors on the same frame to que up before printing
+  wait .05;
 
   println("Error:");
   println("Error:**********MISSING EFFECTS IDS**********");
@@ -443,13 +396,6 @@ OneShotfxthread() {
 
   if(self.v["delay"] > 0)
     wait self.v["delay"];
-
-  /*
-  if( isDefined( self.v[ "fire_range" ] ) )
-  {
-  	thread fire_radius( self.v[ "origin" ], self.v[ "fire_range" ] );
-  }
-  */
 
   [[level.func["create_triggerfx"]]]();
 }

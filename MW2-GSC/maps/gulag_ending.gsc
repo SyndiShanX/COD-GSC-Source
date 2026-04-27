@@ -11,16 +11,13 @@
 #include maps\gulag_ending_code;
 #include common_scripts\utility;
 
-/*QUAKED script_origin_pillar1 (1 0.7 0.1) (-32 -32 0) (32 32 94)*/
-/*QUAKED script_origin_pillar2 (0.9 0.75 0.1) (-32 -32 0) (32 32 96)*/
-
 endlog_common() {
   level.default_sprint = getDvar("player_sprintSpeedScale");
   add_start("run", ::start_run, "run", ::gulag_run_for_it);
   add_start("cafe", ::start_cafeteria, "cafe", ::gulag_cafeteria);
   add_start("evac", ::start_evac, "evac", ::gulag_evac);
 
-  waittillframeend; // for _load
+  waittillframeend;
 
   if(isDefined(level.stop_load)) {
     if(getDvar("createfx") == "")
@@ -85,7 +82,6 @@ endlog_common() {
   flag_init("player_evac");
   flag_init("controlled_player_rumble");
   flag_init("evac_begins");
-  //flag_init( "exit_collapses" );
 
   PreCacheItem("smoke_grenade_american");
   PreCacheItem("armory_grenade");
@@ -116,17 +112,13 @@ endlog_common() {
 
   PreCacheModel("com_emergencylightcase_blue");
   PreCacheModel("com_emergencylightcase");
-  //	PreCacheModel( "rappelrope100_le_obj" );
+
   PreCacheModel("com_drop_rope_obj");
   PreCacheModel("com_blackhawk_spotlight_on_mg_setup");
   PreCacheModel("com_floodlight");
   PreCacheModel("ch_street_wall_light_01_on");
   PreCacheModel("ch_street_wall_light_01_off");
   PreCacheItem("m4m203_acog");
-
-  //	thread handle_gulag_world_fx();
-  //	level thread init_tv_movies();
-  //	thread gulag_music();
 
   thread calculate_cafe_run_distances();
 
@@ -155,7 +147,6 @@ endlog_common() {
   array_thread(delete_trees, ::delete_tree_think);
 
   thread file_cabinet_show();
-  //thread pillar_anim_show();
 
   flag_wait("rescue_begins");
 
@@ -227,7 +218,6 @@ gulag_run_for_it() {
 
   set_cafeteria_spotlight_dvars();
 
-  // make the AI keep going if you try to stop them with ADS
   SetSavedDvar("ai_friendlyFireBlockDuration", 0);
 
   thread minor_earthquakes();
@@ -242,15 +232,9 @@ gulag_run_for_it() {
     ent Hide();
   }
 
-  //	level.player FreezeControls( true );
-  // Task Force be advised, they've started the bombardment early – get the hell out of there now!	
-
-  // level.player FreezeControls( false );
-
   orgs = getStructArray("friendly_escape_org", "targetname");
   orgs = array_index_by_parameters(orgs);
 
-  //level.player AllowSprint( false );
   ai = GetAIArray("allies");
   colors = [];
   colors["soap"] = (0, 1, 1);
@@ -260,10 +244,7 @@ gulag_run_for_it() {
   foreach(guy in ai) {
     guy thread endlog_friendly_runout_settings();
     guy thread maps\_spawner::go_to_node(orgs[guy.animname], "struct");
-    //guy thread my_color_trail( colors[ guy.animname ] );
   }
-
-  //thread chase_train(); // the cave in chases you
 
   thread ending_run_fx();
   thread cafe_fx();
@@ -274,7 +255,6 @@ gulag_run_for_it() {
 
   activate_trigger_with_targetname("friendly_escape_trigger");
 
-  // Go go go! 	
   level.soap delayThread(5, ::dialogue_queue, "gulag_cmt_gogogo1");
 
   autosave_by_name("run_autosave");
@@ -287,12 +267,10 @@ gulag_run_for_it() {
 
   flag_wait("there_is_chopper");
 
-  // There’s the chopper!!! Get ready to jump!!!	
   level.soap thread dialogue_queue("gulag_cmt_ready2jump");
 
   flag_wait("exit_collapses");
 
-  // Ahh, bollocks!!! Go back go back!!! We'll find another way out!!!	
   level.soap delayThread(1.5, ::dialogue_queue, "gulag_cmt_anotherway");
 
   noself_delayCall(1.5, ::setsaveddvar, "player_sprintSpeedScale", level.default_sprint);
@@ -302,7 +280,7 @@ gulag_run_for_it() {
   level.max_rocks = 1;
   quake(0.25, 4, level.price.origin, 5000);
 
-  thread chase_train(); // the cave in chases you
+  thread chase_train();
   wait(0.2);
 
   orgs = getStructArray("friendly_changedirection_org", "targetname");
@@ -311,7 +289,7 @@ gulag_run_for_it() {
   ducks = [];
   ducks["soap"] = "reaction_180";
   ducks["redshirt"] = "reaction_180";
-  //ducks[ ducks.size ] = "run_180";
+
   index = 0;
 
   waits = [];
@@ -333,36 +311,11 @@ gulag_run_for_it() {
     }
   }
 
-  /*
-  for( i = 0; i < guys.size; i++ )
-  {
-  	guy = guys[ i ];
-  	guy thread maps\_spawner::go_to_node( orgs[ guy.animname ], "struct" );
-
-  	if( isDefined( ducks[ index ] ) )
-  	{
-  		guy thread anim_generic_run( guy, ducks[ index ] );
-  	}
-
-  	time = waits[ index ];
-  	if( isDefined( time ) )
-  		wait( time );
-  	index++;
-  }
-  */
-
   wait(1);
   level.max_rocks = 4;
 
-  /*
-  foreach ( guy in ai )
-  {
-  	guy.sprint = true;
-  }
-  */
-
   set_cafeteria_spotlight_dvars();
-  flag_wait("enter_final_room"); // ai trigger this
+  flag_wait("enter_final_room");
 
   thread cafe_lights_explode();
 }
@@ -405,10 +358,6 @@ start_endshow() {
   for(;;) {
     ent anim_single(guys, "ending");
   }
-
-  /*
-  gulag_end_animatic_player"gulag_end_animatic_soldier"gulag_end_animatic_price" ]
-  gulag_end_animatic_soap" ][*/
 }
 
 start_cafeteria() {
@@ -430,7 +379,6 @@ start_cafeteria() {
   SetSavedDvar("r_spotlightbrightness", "0.9");
   SetSavedDvar("r_spotlightendradius", "1200");
   SetSavedDvar("r_spotlightstartradius", "50");
-  //setsaveddvar( "r_spotlightfovinnerfraction", "0.7" );
 
   level.cafe_tables = getEntArray("cafe_table", "targetname");
   array_thread(level.cafe_tables, ::cafe_table_think);
@@ -443,32 +391,9 @@ start_cafeteria() {
   thread cafe_lights_explode();
 
   hunted_swing_light = GetEnt("hunted_swing_light", "targetname");
-  //	thread hunted_swing_light_think( hunted_swing_light );
-
-  //swing_lights = getEntArray( "swing_light", "targetname" );
-  //array_thread( swing_lights, ::swing_light_think );
-
-  /*
-  ending_window_littlebird = GetEnt( "ending_window_littlebird", "script_noteworthy" );
-  heli = ending_window_littlebird spawn_vehicle();
-  path = heli vehicle_get_path_array();
-  	
-  heli Delete();
-  wait( 0.05 );
-  heli = ending_window_littlebird spawn_vehicle();
-  path = heli vehicle_get_path_array();
-  */
-
-  //thread gulag_glass_shatter();
 }
 
 gulag_cafeteria() {
-  /*
-  level.soap ent_flag_wait( "run_into_room" );
-  level.price ent_flag_wait( "run_into_room" );
-  level.redshirt ent_flag_wait( "run_into_room" );
-  */
-
   set_cafeteria_spotlight_dvars();
 
   level.soap notify("stop_going_to_node");
@@ -520,11 +445,7 @@ gulag_cafeteria() {
 
   player_gets_hit_by_rock();
 
-  // It's a dead end!!!	
   level.redshirt thread dialogue_queue("gulag_wrm_deadend");
-
-  // We can't go back that way!!! Let's try to get these doors open!!!	
-  //	level.price delayThread( 2.2, ::anim_single_solo, level.price, "gulag_pri_doorsopen" );
 
   delayThread(1.5, ::soap_talks_to_heli);
 
@@ -546,14 +467,13 @@ gulag_cafeteria() {
 
   delayThread(1, ::flag_set, "player_falls_down");
 
-  // roach is down!
   level.soap delaythread(2, ::dialogue_queue, "gulag_cmt_roachisdown");
-  // roach!!
+
   level.soap delaythread(3.1, ::dialogue_queue, "gulag_cmt_roach");
 
   wait(2);
 
-  flag_waitopen("player_falls_down"); // during cafeteria ending
+  flag_waitopen("player_falls_down");
 }
 
 start_evac() {
@@ -580,10 +500,8 @@ drawAnimTimes(guys, anime) {
 }
 
 gulag_evac() {
-  //	delayThread( 2.0, ::play_sound_in_space, "scn_gulag_wall_explosion_short_a", level.soap.origin );
-
   level.player SetMoveSpeedScale(1);
-  // clear the gate sequence from cafe
+
   ai = GetAIArray("allies");
   foreach(guy in ai) {
     guy anim_stopanimscripted();
@@ -598,7 +516,7 @@ gulag_evac() {
   SetSavedDvar("r_spotlightbrightness", 0.6);
   SetSavedDvar("g_friendlyNameDist", 0);
   if(level.start_point == "evac")
-    wait(0.05); // for bug in doing animscripted on first frame of ai
+    wait(0.05);
 
   level.fx_fall_time = 0.1;
   black_overlay = create_client_overlay("black", 0, level.player);
@@ -609,7 +527,7 @@ gulag_evac() {
 
   level.player AllowCrouch(false);
   level.player AllowProne(false);
-  wait(5.2); // should be 2 seconds but the fx take forever to clear
+  wait(5.2);
 
   thread evac_slowmo();
   thread evac_dof();
@@ -623,8 +541,7 @@ gulag_evac() {
   SetSavedDvar("hud_drawhud", 0);
 
   player_rig = spawn_anim_model("player_rig");
-  //player_rig thread maps\_debug::drawTagForever( "tag_player" );
-  //player_rig Hide();
+
   extra_player_rig = spawn_anim_model("player_rig");
   extra_player_rig Hide();
 
@@ -635,7 +552,7 @@ gulag_evac() {
   level.soap forceUseWeapon("m4m203_acog", "primary");
 
   guys = [];
-  //	guys[ guys.size ] = level.soap;
+
   guys["price"] = level.price;
   guys["redshirt"] = level.redshirt;
   guys["player_rig"] = player_rig;
@@ -657,11 +574,10 @@ gulag_evac() {
 
   guys["ending_rope"] MakeUsable();
 
-  // script brushmodel rock
   evac_rock = GetEnt("evac_rock", "targetname");
   evac_rock add_target_pivot();
   evac_rock CastShadows();
-  //evac_rock Hide();
+
   evac_rock.pivot LinkTo(anim_rock, "body_animate", (0, 0, 0), (0, 0, 0));
 
   arcRight = 15;
@@ -687,19 +603,12 @@ gulag_evac() {
   evac_time = GetTime();
   ent thread anim_single(guys, "evac");
 
-  //wait( 0.6 );
-
   ent thread anim_single_solo(level.soap, "evac");
   flag_set("evac_begins");
 
-  // Two-One, I see your flare. SPIE rig coming down.	
   delayThread(5.7, ::radio_dialogue, "gulag_plp_seeflare");
 
-  //thread drawAnimTimes( guys, "evac" );
-
   level.soap thread soap_sets_played_pulled_flag();
-
-  //setsaveddvar( "cg_fov", 50 );
 
   player_rig waittillmatch("single anim", "end");
   level.player Unlink();
@@ -708,24 +617,20 @@ gulag_evac() {
   SetSavedDvar("g_friendlyNameDist", 175);
   thread blend_in_player_movespeed();
 
-  //thread lerp_fov_overtime( 3, 65 );
-
   player_rigs = [];
   player_rigs["carabiner"] = player_carabiner;
   player_rigs["rig"] = player_rig;
 
   ent anim_first_frame(player_rigs, "hookup");
-  //player_Rig thread maps\_debug::drawTagForever( "tag_player" );
+
   player_rig Hide();
   player_carabiner Hide();
 
   tag_origin = spawn_tag_origin();
   tag_origin LinkTo(extra_player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
-  //tag_origin thread maps\_debug::drawTagForever( "tag_origin" );
 
   trigger = getEntWithFlag("player_uses_rig");
 
-  // Press and hold^3 && 1 ^7to clip on.
   trigger SetHintString(&"GULAG_HOLD_1_TO_SPIE");
 
   SetSavedDvar("hud_drawhud", 1);
@@ -734,21 +639,11 @@ gulag_evac() {
 
   trigger trigger_off();
   SetSavedDvar("r_spotlightbrightness", 0);
-  /*
-  // player gets close enough
-  for( ;; )
-  {
-  	if( Distance( level.player.origin, level.soap.origin ) < 64 )
-  		break;
-  	wait( 0.05 );
-  }
-  */
 
   level.player AllowCrouch(false);
   level.player AllowProne(false);
 
   if(isDefined(level.soap.got_player_notetrack)) {
-    // too late to hookup
     return;
   }
 
@@ -760,11 +655,6 @@ gulag_evac() {
     time = 0.5;
     level.player PlayerLinkToBlend(player_rig, "tag_player", time, time * 0.4, time * 0.4);
     delayThread(time, ::player_gets_groundref_and_opens_fov, tag_origin, player_rig);
-
-    //	level.player PlayerLinkToDelta( player_rig, "tag_player", 1, 45, 45, 90, 45 );
-    //level.player PlayerLinkToDelta( player_rig, "tag_player", 1, 0,0,0,0 );
-    //time = 1;
-    //level.player PlayerLinkToBlend( player_rig, "tag_player", time, time * 0.4, time * 0.4 );
 
     thread player_hooks_up(ent, player_rigs);
   }
@@ -781,17 +671,11 @@ gulag_evac() {
   if(!player_linked) {
     time = 0.5;
     level.player PlayerLinkToBlend(extra_player_rig, "tag_player", time, time * 0.4, time * 0.4);
-    //thread player_view_goes_to_zero_then_opens( extra_player_rig, "tag_player", time );
+
     delayThread(time, ::player_gets_groundref, tag_origin, extra_player_rig);
   } else {
     thread wait_then_player_view_goes_to_zero_then_opens(extra_player_rig, 1.5);
   }
-
-  /*
-  // in case we didn't finish lerping
-  level.player PlayerLinkToDelta( player_rig, "tag_player", 1, 45, 45, 90, 45, true );
-  level.player LerpViewAngleClamp( 2, 0.5, 0.5, 0, 0, 0, 0 );
-  */
 
   level.price delaycall(5.05, ::playsound, "gulag_pri_yes");
 
@@ -806,12 +690,7 @@ gulag_evac() {
   thread maps\_ambient::use_eq_settings("gulag_ending_fadeout", level.eq_mix_track);
   wait(7.85);
 
-  //	wait( 1.5 );	
-
-  // set up the mix track we're going to blend to
-  //	level.player SetEqLerp( 1, level.eq_main_track );
   level.player thread maps\_ambient::blend_to_eq_track(1, 0.5);
-  //level.player SetEqLerp( 1, level.eq_mix_track );
 
   black_overlay = create_client_overlay("black", 0, level.player);
   black_overlay.alpha = 1;
@@ -854,8 +733,6 @@ player_hooks_up(ent, player_rigs) {
   }
   level endon("player_gets_pulled");
   wait(0.3);
-  //	wait( 1 );
-  //	thread orient_player_to_rig( player_rig );
 
   player_rigs["carabiner"] Show();
   player_rigs["rig"] Show();
@@ -870,7 +747,7 @@ soap_sets_played_pulled_flag() {
 }
 
 gulag_ending_startpoint_catchup_thread() {
-  waittillframeend; // let the actual start functions run before this one
+  waittillframeend;
   start = level.start_point;
 
   if(is_default_start()) {
@@ -886,7 +763,7 @@ gulag_ending_startpoint_catchup_thread() {
   flag_set("escape_the_gulag");
 
   wait(0.05);
-  DisableForcedSunShadows(); // lets get some sunlight in here
+  DisableForcedSunShadows();
 
   delayThread(0.1, ::vision_set_fog_changes, "gulag_ending", 0);
 

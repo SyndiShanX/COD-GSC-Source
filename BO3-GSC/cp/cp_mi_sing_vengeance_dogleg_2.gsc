@@ -29,30 +29,16 @@
 #using scripts\shared\util_shared;
 #namespace vengeance_dogleg_2;
 
-function skipto_dogleg_2_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_dogleg_2_init() {}
 
-function skipto_dogleg_2_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_dogleg_2_done() {}
 
-function dogleg_2_main() {
-  // Unsupported VM revision (1B).
-}
+function dogleg_2_main() {}
 
-function dogleg_2_vo() {
-  // Unsupported VM revision (1B).
-}
+function dogleg_2_vo() {}
 
-function function_8aac7e91() {
-  // Unsupported VM revision (1B).
-}
+function function_8aac7e91() {}
 
-function function_b4520466() {
-  // Unsupported VM revision (1B).
-}
+function function_b4520466() {}
 
-function function_f476518d() {
-  // Unsupported VM revision (1B).
-}
+function function_f476518d() {}

@@ -6,30 +6,11 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-/*******************************************************************
-//						_littleBird.gsc
-//	
-//	Holds all the littlebird specific functions
-//	
-//	Jordan Hirsh	Jan. 6th 	2009
-********************************************************************/
-
 init() {
   precacheString(&"MP_CIVILIAN_AIR_TRAFFIC");
   precacheString(&"MP_AIR_SPACE_TOO_CROWDED");
 
   return;
-  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION" );
-  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND" );
-
-  //precacheTurret( "minigun_littlebird_mp" );
-  //precacheModel( "vehicle_little_bird_minigun_left" );
-  //precacheModel( "vehicle_little_bird_minigun_right" );
-
-  //level.attackLB = [];
-  //level.lbStrike = 0;
-
-  //level.killStreakFuncs["littlebird_support"] = ::tryUseLbStrike;
 }
 
 tryUseLbStrike(lifeId) {
@@ -67,9 +48,6 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
   trace = bulletTrace(origin, origin + (0, 0, -1000000), false, undefined);
   targetpos = trace["position"];
 
-  //yaw = getBestLbDirection( targetpos );
-
-  //yaw = 90;
   yaw = yawDir;
 
   if(level.teambased) {
@@ -85,7 +63,6 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
     }
   }
 
-  // buffer between airstrikes
   level.airstrikeInProgress = undefined;
 
   owner notify("begin_airstrike");
@@ -125,11 +102,10 @@ doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direc
   assert(isDefined(lb));
 
   lb SetMaxPitchRoll(45, 45);
-  //moving to end point
+
   lb setVehGoalPos(endPoint, 1);
   wait(midTime - 1);
 
-  //slowing down and firing
   lb Vehicle_SetSpeed(45, 60);
   wait(1);
   lb SetMaxPitchRoll(200, 200);
@@ -137,7 +113,6 @@ doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direc
   lb thread startLbFiring();
   wait(7);
 
-  //stops firing and turns around
   lb notify("stopFiring");
   lb Vehicle_SetSpeed(75, 60);
   lb SetMaxPitchRoll(65, 65);
@@ -147,12 +122,10 @@ doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direc
   lb SetMaxPitchRoll(180, 180);
   wait(.75);
 
-  //slows down firing opposite direction
   lb Vehicle_SetSpeed(45, 60);
   lb thread startLbFiring();
   wait(6);
 
-  //off into the sunset
   lb Vehicle_SetSpeed(lb.speed, 60);
   lb notify("stopFiring");
   lb SetMaxPitchRoll(75, 180);
@@ -166,8 +139,6 @@ waitTillGone() {
   self waittill("gone");
   clearProgress(0);
 }
-
-// spawn helicopter at a start node and monitors it
 spawnAttackLittleBird(owner, pathStart, pathGoal, coord) {
   forward = vectorToAngles(pathGoal - pathStart);
   lb = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
@@ -228,9 +199,6 @@ startLbFiring() {
 }
 
 getBestLbDirection(hitpos) {
-  //if( !self.precisionAirstrike )
-  //	return randomFloat( 360 );
-
   checkPitch = -25;
 
   numChecks = 15;
@@ -270,7 +238,6 @@ getBestLbDirection(hitpos) {
 }
 
 callStrike(lifeId, owner, coord, yaw) {
-  // Get starting and ending point for the plane
   direction = (0, yaw, 0);
   planeHalfDistance = 24000;
   planeFlyHeight = 850;
@@ -313,7 +280,6 @@ selectLbStrikeLocation(lifeId) {
 
   self endon("stop_location_selection");
 
-  // wait for the selection. randomize the yaw if we ever stop doing a precision selection
   self waittill("confirm_location", location, locationYaw);
 
   self setblurforplayer(0, 0.3);
@@ -352,7 +318,6 @@ stopLbStrikeLocationSelection(disconnected) {
 }
 
 useLbStrike(lifeId, pos, yawDir) {
-  // find underside of top of skybox
   trace = bulletTrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
   pos = (pos[0], pos[1], trace["position"][2] - 514);
 
@@ -384,7 +349,7 @@ heliDestroyed() {
   if(!isDefined(self)) {
     return;
   }
-  //self trimActiveBirdList();
+
   self Vehicle_SetSpeed(25, 5);
   self thread lbSpin(RandomIntRange(180, 220));
 
@@ -417,7 +382,6 @@ lbExplode() {
 lbSpin(speed) {
   self endon("explode");
 
-  // tail explosion that caused the spinning
   playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   self thread trail_fx(level.chopper_fx["smoke"]["trail"], "tail_rotor_jnt", "stop tail smoke");
 
@@ -429,7 +393,6 @@ lbSpin(speed) {
 }
 
 trail_fx(trail_fx, trail_tag, stop_notify) {
-  // only one instance allowed
   self notify(stop_notify);
   self endon(stop_notify);
   self endon("death");

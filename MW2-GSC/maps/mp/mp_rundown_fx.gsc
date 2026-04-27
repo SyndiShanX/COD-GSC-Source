@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["firelp_small_pm_a_nolight"] = loadfx("fire/firelp_small_pm_a_nolight");
 
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");

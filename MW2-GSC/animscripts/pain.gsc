@@ -11,7 +11,6 @@
 
 main() {
   if(isDefined(self.longDeathStarting)) {
-    // important that we don't run any other animscripts.
     self waittill("killanimscript");
     return;
   }
@@ -42,20 +41,12 @@ main() {
 
   ratio = self.health / self.maxHealth;
 
-  //	println ("hit at " + self.damagelocation);
-
   self notify("anim entered pain");
   self endon("killanimscript");
 
-  // Two pain animations are played.One is a longer, detailed animation with little to do with the actual
-  // location and direction of the shot, but depends on what pose the character starts in.The other is a
-  // "hit" animation that is very location-specific, but is just a single pose for the affected bones so it
-  // can be played easily whichever position the character is in.
   animscripts\utility::initialize("pain");
 
   self animmode("gravity");
-
-  //thread [[anim.println]] ("Shot in "+self.damageLocation+" from "+self.damageYaw+" for "+self.damageTaken+" hit points");
 
   if(!isDefined(self.no_pain_sound))
     self animscripts\face::SayGenericDialogue("pain");
@@ -70,8 +61,6 @@ main() {
     return;
   }
 
-  // corner grenade death takes priority over crawling pain
-
   if(getDvarInt("scr_forceCornerGrenadeDeath") == 1) {
     if(self TryCornerRightGrenadeDeath())
       return;
@@ -83,9 +72,6 @@ main() {
   if(specialPain(self.a.special)) {
     return;
   }
-  // if we didn't handle self.a.special, we can't rely on it being accurate after the pain animation we're about to play.
-  //self.a.special = "none";
-  //self.specialDeathFunc = undefined;
 
   painAnim = getPainAnim();
 
@@ -105,7 +91,6 @@ end_script() {
     self.damageShieldPain = undefined;
     self.allowpain = true;
 
-    // still somewhat risky
     if(!isDefined(self.preDamageShieldIgnoreMe))
       self.ignoreme = false;
 
@@ -125,7 +110,6 @@ wasDamagedByExplosive() {
   if(gettime() - anim.lastCarExplosionTime <= 50) {
     rangesq = anim.lastCarExplosionRange * anim.lastCarExplosionRange * 1.2 * 1.2;
     if(distanceSquared(self.origin, anim.lastCarExplosionDamageLocation) < rangesq) {
-      // assume this exploding car damaged us.
       upwardsDeathRangeSq = rangesq * 0.5 * 0.5;
       self.mayDoUpwardsDeath = (distanceSquared(self.origin, anim.lastCarExplosionLocation) < upwardsDeathRangeSq);
       return true;
@@ -206,12 +190,11 @@ getPainAnim() {
   }
 }
 
-RUN_PAIN_SHORT = 120; // actual animations are 150 but let it run against the wall a bit.
+RUN_PAIN_SHORT = 120;
 RUN_PAIN_MED = 200;
 RUN_PAIN_LONG = 300;
 
 getRunningForwardPainAnim() {
-  // 200 units
   runPains = [];
 
   allowMedPain = false;
@@ -232,7 +215,6 @@ getRunningForwardPainAnim() {
     runPains[runPains.size] = % run_pain_head;
   }
 
-  // randomize medium with long pains
   if(allowMedPain) {
     runPains[runPains.size] = % run_pain_fallonknee_02;
     runPains[runPains.size] = % run_pain_stomach;
@@ -240,10 +222,7 @@ getRunningForwardPainAnim() {
     runPains[runPains.size] = % run_pain_stomach_fast;
     runPains[runPains.size] = % run_pain_leg_fast;
     runPains[runPains.size] = % run_pain_fall;
-  }
-  // short pains are a back up only
-  else if(self mayMoveToPoint(self localToWorldCoords((RUN_PAIN_SHORT, 0, 0)))) {
-    // drop check
+  } else if(self mayMoveToPoint(self localToWorldCoords((RUN_PAIN_SHORT, 0, 0)))) {
     runPains[runPains.size] = % run_pain_fallonknee;
     runPains[runPains.size] = % run_pain_fallonknee_03;
   }
@@ -318,7 +297,6 @@ getStandPainAnim() {
     extendedPainArray[extendedPainArray.size] = % stand_exposed_extendedpain_feet_2_crouch;
   }
 
-  // default, only exposed pain that takes the AI to ground. Other ones look a bit awkward for getting hit by a bullet
   if(painArray.size < 2) {
     if(!self.a.disableLongDeath) {
       painArray[painArray.size] = % exposed_pain_2_crouch;
@@ -391,8 +369,6 @@ getPronePainAnim() {
 }
 
 playPainAnim(painAnim) {
-  // TEMP make all pain faster
-  // rate = 1.5;
   rate = 1;
 
   self setFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .1, rate);
@@ -430,10 +406,6 @@ specialPainBlocker() {
   self.blockingPain = undefined;
   self.allowPain = true;
 }
-
-// Special pain is for corners, rambo behavior, mg42's, anything out of the ordinary stand, crouch and prone.
-// It returns true if it handles the pain for the special animation state, or false if it wants the regular
-// pain function to handle it.
 specialPain(anim_special) {
   if(anim_special == "none")
     return false;
@@ -446,10 +418,10 @@ specialPain(anim_special) {
     case "cover_left":
       if(self.a.pose == "stand") {
         painArray = [];
-        painArray[painArray.size] = % corner_standl_painB; // groin hit
-        painArray[painArray.size] = % corner_standl_painC; // chest hit
-        painArray[painArray.size] = % corner_standl_painD; // left leg hit
-        painArray[painArray.size] = % corner_standl_painE; // right leg hit
+        painArray[painArray.size] = % corner_standl_painB;
+        painArray[painArray.size] = % corner_standl_painC;
+        painArray[painArray.size] = % corner_standl_painD;
+        painArray[painArray.size] = % corner_standl_painE;
         DoPainFromArray(painArray);
         handled = true;
       } else if(self.a.pose == "crouch") {
@@ -481,7 +453,7 @@ specialPain(anim_special) {
       break;
 
     case "cover_right_stand_A":
-      //DoPain(%corner_standR_pain_A_2_alert );
+
       handled = false;
       break;
 
@@ -499,16 +471,6 @@ specialPain(anim_special) {
       DoPain(%corner_standL_pain_B_2_alert);
       handled = true;
       break;
-
-      /*
-      // these are just exposed crouch poses
-      case "cover_right_crouch_A":
-      case "cover_right_crouch_B":
-      case "cover_left_crouch_A":
-      case "cover_left_crouch_B":
-      	handled = false;
-      	break;
-      */
 
     case "cover_crouch":
       painArray = [];
@@ -578,10 +540,6 @@ specialPain(anim_special) {
 painDeathNotify() {
   self endon("death");
 
-  // it isn't safe to notify "pain_death" from the start of an animscript.
-  // this can cause level script to run, which might cause things with this AI to change while the animscript is starting
-  // and this can screw things up in unexpected ways.
-  // take my word for it.
   wait .05;
   self notify("pain_death");
 }
@@ -599,8 +557,6 @@ DoPain(painAnim) {
 }
 
 mg42pain(pose) {
-  //		assertmsg("mg42 pain anims not implemented yet");//scripted_mg42gunner_pain
-
   assertEx(isDefined(level.mg_animmg), "You're missing maps\\_mganim::main();Add it to your level.");
   {
     println("	maps\\_mganim::main();");
@@ -610,10 +566,6 @@ mg42pain(pose) {
   self setflaggedanimknob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
   self animscripts\shared::DoNoteTracks("painanim");
 }
-
-// This is to stop guys from taking off running if they're interrupted during pain.This used to happen when
-// guys were running when they entered pain, but didn't play a special running pain (eg because they were
-// running sideways).It resulted in a running pain or death being played when they were shot again.
 waitSetStop(timetowait, killmestring) {
   self endon("killanimscript");
   self endon("death");
@@ -670,9 +622,6 @@ crawlingPain() {
       return false;
   }
 
-  /*if( self.a.movement != "stop" )
-  	return false;*/
-
   if(isDefined(self.deathFunction))
     return false;
 
@@ -687,12 +636,9 @@ crawlingPain() {
   if(usingSidearm())
     return false;
 
-  // we'll wait a bit to see if this crawling pain will really succeed.
-  // in the meantime, don't start any other ones.
   anim.nextCrawlingPainTime = gettime() + 3000;
   anim.nextCrawlingPainTimeFromLegDamage = gettime() + 3000;
 
-  // needs to be threaded
   self thread crawlingPistol();
 
   self waittill("killanimscript");
@@ -730,7 +676,6 @@ initCrawlingPistolAnims() {
 }
 
 crawlingPistol() {
-  // don't end on killanimscript. pain.gsc will abort if self.crawlingPistolStarting is true.
   self endon("kill_long_death");
   self endon("death");
 
@@ -742,14 +687,13 @@ crawlingPistol() {
   self.specialDeathFunc = undefined;
 
   self thread painDeathNotify();
-  //notify ac130 missions that a guy is crawling so context sensative dialog can be played
+
   level notify("ai_crawling", self);
 
   self thread crawling_stab_achievement();
 
   self setAnimKnobAll(%dying, %body, 1, 0.1, 1);
 
-  // dyingCrawl() returns false if we die without turning around
   if(!self dyingCrawl()) {
     return;
   }
@@ -823,10 +767,9 @@ crawling_stab_achievement() {
     return;
   self endon("end_dying_crawl_back_aim");
   self waittill("death", attacker, type);
-  if(!isDefined(self) || !isDefined(attacker) || !isPlayer(attacker))
+  if(!isDefined(self) || !isDefined(attacker) || !isPlayer(attacker)) {
     return;
-  //	if( type == "MOD_MELEE" )
-  //		maps\_utility::giveachievement_wrapper( "NO_REST_FOR_THE_WEARY" );
+  }
 }
 
 shouldStayAlive() {
@@ -842,18 +785,14 @@ dyingCrawl() {
       return true;
 
     if(self.a.movement == "stop") {
-      if(randomfloat(1) < .4) // chance of randomness
-      {
+      if(randomfloat(1) < .4) {
         if(randomfloat(1) < .5)
           return true;
       } else {
-        // if hit from front, return true
         if(abs(self.damageYaw) > 90)
           return true;
       }
     } else {
-      // if we're not stopped, we want to fall in the direction of movement
-      // so return true if moving backwards
       if(abs(self getMotionAngle()) > 90)
         return true;
     }
@@ -895,15 +834,12 @@ dyingCrawl() {
 
   self notify("done_crawling");
 
-  // check if target is in cone to shoot
   if(!isDefined(self.forceLongDeath) && enemyIsInGeneralDirection(anglesToForward(self.angles) * -1))
     return true;
 
   deathanim = animArrayPickRandom("death");
 
-  // this particular death animation is long enough that we want it to be interruptible
   if(deathanim != % dying_crawl_death_v2) {
-    // all the others are short so we don't want them to be interruptible
     self.a.nodeath = true;
   }
 
@@ -1044,7 +980,7 @@ enemyIsInGeneralDirection(dir) {
 
   toenemy = vectorNormalize(self.enemy getShootAtPos() - self getEye());
 
-  return (vectorDot(toenemy, dir) > 0.5); // cos( 60 ) = 0.5
+  return (vectorDot(toenemy, dir) > 0.5);
 }
 
 preventPainForAShortTime(type) {
@@ -1056,27 +992,22 @@ preventPainForAShortTime(type) {
   self.longDeathStarting = true;
   self.a.doingLongDeath = true;
   self notify("long_death");
-  self.health = 10000; // also prevent death
+  self.health = 10000;
   self.threatbias = self.threatbias - 2000;
 
-  // during this time, we won't be interrupted by more pain.
-  // this increases the chances of the crawling pain succeeding.
   wait .75;
 
-  // important that we die the next time we get hit, // instead of maybe going into pain and coming out and going into combat or something
   if(self.health > 1)
     self.health = 1;
 
-  // important that we wait a bit in case we're about to start pain later in this frame
   wait .05;
 
   self.longDeathStarting = undefined;
-  self.a.mayOnlyDie = true; // we've probably dropped our weapon and stuff; we must not do any other animscripts but death!
+  self.a.mayOnlyDie = true;
 
   if(type == "crawling") {
     wait 1.0;
 
-    // we've essentially succeeded in doing a crawling pain.
     if(isDefined(level.player) && distanceSquared(self.origin, level.player.origin) < 1024 * 1024) {
       anim.numDeathsUntilCrawlingPain = randomintrange(10, 30);
       anim.nextCrawlingPainTime = gettime() + randomintrange(15000, 60000);
@@ -1093,7 +1024,6 @@ preventPainForAShortTime(type) {
   } else if(type == "corner_grenade") {
     wait 1.0;
 
-    // we've essentially succeeded in doing a corner grenade death.
     if(isDefined(level.player) && distanceSquared(self.origin, level.player.origin) < 700 * 700) {
       anim.numDeathsUntilCornerGrenadeDeath = randomintrange(10, 30);
       anim.nextCornerGrenadeDeathTime = gettime() + randomintrange(15000, 60000);
@@ -1124,8 +1054,6 @@ decideNumCrawls() {
 }
 
 shouldKeepCrawling() {
-  // TODO: player distance checks, etc...
-
   assert(isDefined(self.a.numCrawls));
 
   if(!self.a.numCrawls) {
@@ -1159,8 +1087,6 @@ TryCornerRightGrenadeDeath() {
   if(distance(self.origin, level.player.origin) < 175)
     return false;
 
-  // we'll wait a bit to see if this crawling pain will really succeed.
-  // in the meantime, don't start any other ones.
   anim.nextCornerGrenadeDeathTime = gettime() + 3000;
 
   self thread CornerRightGrenadeDeath();
@@ -1179,11 +1105,10 @@ CornerRightGrenadeDeath() {
 
   self thread maps\_utility::set_battlechatter(false);
 
-  self.threatbias = -1000; // no need for AI to target me
+  self.threatbias = -1000;
 
   self setFlaggedAnimKnobAllRestart("corner_grenade_pain", %corner_standR_death_grenade_hit, %body, 1, .1);
 
-  //wait getAnimLength(%corner_standR_death_grenade_hit ) * 0.2;
   self waittillmatch("corner_grenade_pain", "dropgun");
   self animscripts\shared::DropAllAIWeapons();
 
@@ -1237,7 +1162,6 @@ CornerRightGrenadeDeath() {
 CornerDeathReleaseGrenade(velocity, fusetime) {
   releasePoint = self getTagOrigin("tag_inhand");
 
-  // avoid dropping under the floor.
   releasePointLifted = releasePoint + (0, 0, 20);
   releasePointDropped = releasePoint - (0, 0, 20);
   trace = bulletTrace(releasePointLifted, releasePointDropped, false, undefined);
@@ -1249,7 +1173,6 @@ CornerDeathReleaseGrenade(velocity, fusetime) {
   if(trace["surfacetype"] != "none")
     surfaceType = trace["surfacetype"];
 
-  // play the grenade drop sound because we're probably not dropping it with enough velocity for it to play it normally
   thread playSoundAtPoint("grenade_bounce_" + surfaceType, releasePoint);
 
   self.grenadeWeapon = "fraggrenade";
@@ -1272,8 +1195,6 @@ killSelf() {
 }
 
 killWrapper() {
-  // Set in maps\_spawner.gsc, mainly for SpecOps
-  // This helps ensure the kill is done by the player if a player is the one who put the Ai into the long-death
   if(isDefined(self.last_dmg_player)) {
     self Kill(self.origin, self.last_dmg_player);
   } else {

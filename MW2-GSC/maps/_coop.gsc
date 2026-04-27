@@ -18,21 +18,12 @@ main() {
   setDvarIfUninitialized("coop_revive", 1);
   setDvarIfUninitialized("coop_show_constant_icon", 1);
 
-  //later on - hopefully this flag will be set through some real time method
-  //so that the 2nd player can jump in and out of a game at any moment...right
-  //now this check only happens at the load of each level and doesn't get checked again
   if(is_coop())
     flag_set("coop_game");
   if(getDvar("coop_revive", 1) == "1")
     flag_set("coop_revive");
 
   flag_set("coop_show_constant_icon");
-
-  // "Partner down"precacheString(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
-  // "Bleeding out"precacheString(&"SCRIPT_COOP_BLEEDING_OUT");
-  // "Reviving partner..."precacheString(&"SCRIPT_COOP_REVIVING_PARTNER");
-  // "Being revived..."precacheString(&"SCRIPT_COOP_REVIVING");
-  // "Hold ^3[{+usereload}]^7 to revive"precacheString(&"SCRIPT_COOP_REVIVE");
 
   precacheShader("hint_health");
   precacheShader("coop_player_location");
@@ -47,8 +38,8 @@ main() {
   level.coop_icon_shoot = level.coop_icon_green;
   level.coop_icon_damage = level.coop_icon_orange;
 
-  level.coop_icon_blinktime = 7; // how long the non-downed player's hud icon should blink after the downed player presses the nag button
-  level.coop_icon_blinkcrement = 0.375; // how long each "blink" lasts
+  level.coop_icon_blinktime = 7;
+  level.coop_icon_blinkcrement = 0.375;
 
   level.coop_revive_nag_hud_refreshtime = 20;
 
@@ -60,7 +51,6 @@ main() {
   foreach(player in level.players)
   player.reviving_buddy = false;
 
-  // Used to keep one player alive for a few seconds when the other player goes down
   level.coop_last_player_downed_time = 0;
   thread downed_player_manager();
 
@@ -68,7 +58,6 @@ main() {
 }
 
 player_coop_proc() {
-  //this checks to see if we're already running the process
   if(!flag("coop_game"))
     return;
   level endon("coop_game");
@@ -120,7 +109,6 @@ player_coop_proc() {
   while(1) {
     self waittill("deathshield", damage, attacker, direction, point, type, modelName, tagName, partName, dflags, weaponName);
 
-    // we're already downed
     if(self ent_flag("coop_downed")) {
       continue;
     }
@@ -128,9 +116,6 @@ player_coop_proc() {
     death_array["damage"] = damage;
     death_array["player"] = self;
 
-    // Only want to set this on the *second* player to go down.
-    // We want to know the most recent reason for a player to be killed, rather than something that
-    // happened to the first player potentially almost 2 minutes ago (or whatever the revive time is).
     buddy = get_other_player(self);
     if(buddy ent_flag("coop_downed")) {
       self.coop_death_reason = [];
@@ -143,7 +128,6 @@ player_coop_proc() {
 
     self try_crush_player(attacker, type);
 
-    // the downed_player_manager will down the player
     level notify("player_downed");
   }
 }
@@ -161,7 +145,6 @@ try_crush_player(attacker, type) {
     return;
   }
 
-  // If a vehicle crushed the player, make sure the vehicle is moving before we kill, if not, then the player should live
   if(isDefined(attacker.vehicletype)) {
     speed = attacker Vehicle_GetSpeed();
     if(abs(speed) == 0) {
@@ -178,30 +161,25 @@ try_crush_player(attacker, type) {
 
 downed_player_manager() {
   for(;;) {
-    // the array will be refilled when a player is downed
     level.downed_players = [];
 
     level waittill("player_downed");
 
     assertex(isDefined(level.player_downed_death_buffer_time), "level.player_downed_death_buffer_time didnt get defined!");
 
-    // wait until the end of the frame so the array will have all players that were downed in it
     waittillframeend;
 
     if(gettime() < level.coop_last_player_downed_time + level.player_downed_death_buffer_time * 1000) {
-      // cant die until this time has passed
       continue;
     }
 
     level.coop_last_player_downed_time = gettime();
 
-    // figure out which player to down
     highest_damage = 0;
     downed_player = undefined;
-    // randomize it so either player can be downed if they tie on damage		
+
     level.downed_players = array_randomize(level.downed_players);
     foreach(unique_id, array in level.downed_players) {
-      //Print3d( array[ "player" ] getEye(), array[ "damage" ], (1,0,0), 1, 1, 500 );
       if(array["damage"] >= highest_damage) {
         downed_player = array["player"];
       }
@@ -210,7 +188,6 @@ downed_player_manager() {
 
     downed_player thread player_coop_downed();
 
-    // the remaining player gets slightly buffed
     thread maps\_gameskill::resetSkill();
   }
 }
@@ -240,7 +217,6 @@ rebuild_friendly_icon(color, material, non_rotating) {
   assertex(isDefined(color), "rebuild_friendly_icon requires a valid color to be passed in.");
   assertex(isDefined(material), "rebuild_friendly_icon requires a valid material to be passed in.");
 
-  // Rebuild from scratch if it doesn't exist or the material has changed.
   if(!isDefined(self.friendlyIcon) || (self.friendlyIcon.material != material)) {
     create_fresh_friendly_icon(material);
   }
@@ -318,12 +294,12 @@ player_setup_icon() {
 }
 
 player_coop_create_use_target() {
-    level.revive_ent = spawn("script_model", self.origin + (0, 0, 28)); // offset can't be higher than prone height of 30
-    //	level.revive_ent setModel( "defaultvehicle" );
+    level.revive_ent = spawn("script_model", self.origin + (0, 0, 28));
+
     level.revive_ent setModel("tag_origin");
     level.revive_ent linkTo(self, "tag_origin");
     level.revive_ent makeUsable();
-    level.revive_ent setHintString(&"SCRIPT_COOP_REVIVE"); // LANG_ENGLISH		Hold ^3[{+usereload}]^7 to revive"}
+    level.revive_ent setHintString(&"SCRIPT_COOP_REVIVE");
 
     player_coop_destroy_use_target() {
       foreach(player in level.players)
@@ -345,7 +321,6 @@ player_coop_create_use_target() {
 
       self player_coop_create_use_target();
 
-      //put up icon
       self thread player_coop_downed_dialogue();
       self thread player_coop_downed_hud();
       self thread player_coop_downed_icon();
@@ -356,7 +331,6 @@ player_coop_create_use_target() {
       self add_wait(::waittill_msg, "coop_bled_out");
       do_wait_any();
 
-      //take down icon
       waittillframeend;
       self notify("end_func_player_coop_downed_icon");
 
@@ -373,7 +347,7 @@ player_coop_create_use_target() {
 
       other_player = get_other_player(self);
       time = other_player.coop.bleedout_time_default;
-      //time_fifth = time * 0.2;
+
       initialWait = 1;
 
       wait initialWait;
@@ -382,12 +356,10 @@ player_coop_create_use_target() {
     }
 
     get_coop_downed_hud_color(current_time, total_time, doBlinks) {
-      // only one player should see the blinking
       if(!isDefined(doBlinks)) {
         doBlinks = true;
       }
 
-      // maybe we have to deliver the blink state?
       if(doBlinks && self coop_downed_hud_should_blink()) {
         ASSERT(isDefined(self.blinkState));
 
@@ -396,7 +368,6 @@ player_coop_create_use_target() {
         }
       }
 
-      // if we're not blinking, return the base color
       if(current_time < (total_time * level.coop_bleedout_stage3_multiplier)) {
         return level.coop_icon_red;
       }
@@ -415,9 +386,7 @@ player_coop_create_use_target() {
         return false;
       }
 
-      // have we ever pressed the nag button?
       if(isDefined(self.lastReviveNagButtonPressTime)) {
-        // did we press the button recently?
         if((GetTime() - self.lastReviveNagButtonPressTime) < (level.coop_icon_blinktime * 1000)) {
           return true;
         }
@@ -426,7 +395,6 @@ player_coop_create_use_target() {
       return false;
     }
 
-    // this toggles the blink state so we don't have to track increment time in the get_coop_downed_hud_color() function
     player_downed_hud_toggle_blinkstate() {
       self notify("player_downed_hud_blinkstate");
       self endon("player_downed_hud_blinkstate");
@@ -593,7 +561,6 @@ player_coop_create_use_target() {
         player.revive_timer.color = self.revive_text.color;
       }
 
-      // give player a chance to get his timer set
       waittillframeend;
 
       while(time) {
@@ -662,7 +629,6 @@ player_coop_create_use_target() {
           player.revive_timer.alpha = 0;
           self ent_flag_waitopen("coop_pause_bleedout_timer");
 
-          //need this check because was setting a time that wasn't greater than 0 which would give an error
           if(self.coop.bleedout_time >= 1) {
             foreach(player in level.players)
             player.revive_timer settimer(self.coop.bleedout_time - 1);
@@ -689,9 +655,6 @@ player_coop_create_use_target() {
 
       level endon("special_op_terminated");
 
-      //	self thread player_coop_downed_icon_timer();
-
-      //give player a chance to get his timer set
       waittillframeend;
 
       other_player = get_other_player(self);
@@ -704,41 +667,7 @@ player_coop_create_use_target() {
         wait 0.05;
       }
     }
-    /*
-    player_coop_downed_icon_timer()
-    {
-    	self endon( "end_func_player_coop_downed_icon" );
-    	self endon( "death" );
-    	self endon( "revived" );
 
-    	level endon( "special_op_terminated" );
-    	
-    	//give player a chance to get his timer set
-    	waittillframeend;
-
-    	other_player = get_other_player( self );	
-
-    	while( self.coop.bleedout_time > 0 )
-    	{
-    		self ent_flag_waitopen( "coop_pause_bleedout_timer" );
-
-    		origin = self.origin + ( 0, 0, 80 );
-    		_size = .25 + ( distance( self.origin, other_player.origin ) * .0015 );
-
-    		if( self.model != "" )
-    		{
-    			origin = self gettagorigin( "tag_origin" );
-    			offset = vector_multiply( anglestoright( self gettagangles( "tag_origin" ) ), 5 );
-    			origin += offset;
-    		}
-
-    		string = convert_to_time_string( self.coop.bleedout_time );
-    		color = self get_coop_downed_hud_color( self.coop.bleedout_time, self.coop.bleedout_time_default );
-    		print3d( origin + ( 0, 0, 35 + ( _size * 12 ) ), string, color, .75, _size );
-    		wait .05;
-    	}
-    }
-    */
     player_coop_enlist_savior() {
       savior = get_other_player(self);
       savior thread player_coop_revive_buddy();
@@ -779,7 +708,6 @@ player_coop_create_use_target() {
       buttonTime = 0;
       for(;;) {
         level.revive_ent waittill("trigger", player);
-        //		wait 0.05;
 
         if(player != self) {
           continue;
@@ -788,10 +716,8 @@ player_coop_create_use_target() {
         if(player_coop_is_reviving()) {
           self player_coop_freeze_players(true);
 
-          // reset the other player's death protection if he initiates revive, so you can't infinitely revive each other
           level.coop_last_player_downed_time = 0;
 
-          // Gives ability to reload by tapping support.
           wait 0.1;
           if(!player_coop_is_reviving()) {
             player_coop_revive_buddy_cleanup(downed_buddy);
@@ -825,7 +751,6 @@ player_coop_create_use_target() {
             if(buttonTime > totalTime) {
               player_coop_revive_buddy_cleanup(downed_buddy);
 
-              //if we get to here - we double tapped	
               downed_buddy player_coop_revive_self();
               if(!speak_first)
                 self notify("so_revived");
@@ -842,13 +767,6 @@ player_coop_create_use_target() {
       if(!self useButtonPressed()) {
         return false;
       }
-
-      // Leaving this here, but noting that this causes an SRE, so if we need this sort of logic we'll need to do it a different way.
-      // Also, level.default_use_radius is an invalid number to use, need to use the current value of dvar player_useradius
-      /*	if( DistanceSquared( self.origin, level.revive_ent.origin ) > level.default_use_radius * level.default_use_radius )
-      	{
-      		return false;
-      	}*/
 
       return self.reviving_buddy;
     }
@@ -901,7 +819,6 @@ player_coop_create_use_target() {
       player_coop_destroy_use_target();
       self thread player_dying_effect_remove();
 
-      // so other player loses health bonus from being only mobile guy
       thread maps\_gameskill::resetSkill();
     }
 
@@ -916,7 +833,6 @@ player_coop_create_use_target() {
     player_coop_set_down_attributes() {
       self endon("death");
 
-      // Use radius increased when someone is down... more like MP distance
       level.default_use_radius = getdvarint("player_useradius");
       setsaveddvar("player_useradius", 128);
 
@@ -969,7 +885,6 @@ player_coop_create_use_target() {
     }
 
     player_coop_set_original_attributes() {
-      // Use radius decreased to default when someone is revived.
       setsaveddvar("player_useradius", level.default_use_radius);
       level.default_use_radius = undefined;
 
@@ -977,9 +892,6 @@ player_coop_create_use_target() {
       self ent_flag_clear("coop_downed");
       self.down_part2_proc_ran = undefined;
 
-      // This is done like this because when a guy goes down, he forces the *other*
-      // person to turn on the health icon. Since only one guy can be down at a time, // we can trust that we only need to reset on the other player.
-      //	self CreateFriendlyHudIcon_Normal();
       other_player = get_other_player(self);
       other_player delaythread(0.1, ::CreateFriendlyHudIcon_Normal);
 
@@ -992,7 +904,7 @@ player_coop_create_use_target() {
       self EnableUsability();
       self enableoffhandweapons();
       self EnableWeaponSwitch();
-      // Don't enable weapons when placing a sentry.
+
       if(!isDefined(self.placingSentry)) {
         self EnableWeapons();
       }
@@ -1002,13 +914,11 @@ player_coop_create_use_target() {
       self DisableInvulnerability();
     }
 
-    // Could possibly be a useful utility function, but only useful here right now.
     check_for_pistol() {
       AssertEx(isPlayer(self), "check_for_pistol() was called on a non-player.");
 
       weapon_list = self GetWeaponsListPrimaries();
       foreach(weapon in weapon_list) {
-        // Need to account for Akimbo weapons?
         if(WeaponClass(weapon) == "pistol")
           return weapon;
       }
@@ -1063,7 +973,6 @@ player_coop_create_use_target() {
 
       self SwitchToWeapon(weapon_pistol);
 
-      // Don't enable weapons when placing a sentry.
       if(!isDefined(self.placingSentry)) {
         self EnableWeapons();
       }
@@ -1101,7 +1010,6 @@ player_coop_create_use_target() {
       self endon("death");
       self endon("revived");
 
-      //allow this thread to only be run once
       if(!ent_flag_exist("coop_dying_effect"))
         ent_flag_init("coop_dying_effect");
       else if(ent_flag("coop_dying_effect"))
@@ -1141,7 +1049,6 @@ player_coop_create_use_target() {
       self.laststand = false;
       self.achieve_downed_kills = undefined;
       wait .3;
-      //self player_recallweapons();
     }
 
     player_coop_kill() {

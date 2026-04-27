@@ -5,10 +5,7 @@ main() {
   maps\createart\mp_abandon_fog_hdr::main();
   maps\mp\mp_abandon_fx::main();
   common_scripts\_destructible::init();
-  //common_scripts\_destructible_dlc::main();
 
-  //maps\mp\_destructible_dlc2::main(); // call before _load
-  //maps\mp\_destructible_dlc::main(); // call before _load
   maps\mp\_load::main();
 
   ambientPlay("ambient_mp_abandon");

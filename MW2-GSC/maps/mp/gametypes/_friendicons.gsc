@@ -4,7 +4,6 @@
 ********************************************************/
 
 init() {
-  // Draws a team icon over teammates
   level.drawfriend = 0;
 
   game["headicon_allies"] = maps\mp\gametypes\_teams::getTeamHeadIcon("allies");
@@ -72,7 +71,6 @@ updateFriendIconSettings() {
 }
 
 updateFriendIcons() {
-  // for all living players, show the appropriate headicon
   players = level.players;
   for(i = 0; i < players.size; i++) {
     player = players[i];

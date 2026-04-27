@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 238
   ent = createOneshotEffect("fog_ground_200_red");
   ent.v["origin"] = (471.128, 853.821, -8);
   ent.v["angles"] = (270, 0, 0);

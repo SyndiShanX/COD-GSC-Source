@@ -34,8 +34,8 @@ main(model, type) {
 
 init_local() {
   self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-  self.fastropeoffset = 652; // TODO - FIXME: this is ugly.
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.fastropeoffset = 652;
+  self.script_badplace = false;
 }
 
 set_vehicle_anims(positions) {
@@ -56,7 +56,7 @@ setanims() {
   positions = [];
   for(i = 0; i < 0; i++)
     positions[i] = spawnStruct();
-  //copy from _blackhawk when anims are rigged.
+
   return positions;
 }
 

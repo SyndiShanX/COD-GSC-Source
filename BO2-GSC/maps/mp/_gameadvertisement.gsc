@@ -251,7 +251,7 @@ conf_rules() {
 }
 
 oic_rules() {
-  updatedebughud(1, "No join in progress, so shouldn’t advertise to matchmaking once the countdown timer ends.", 0);
+  updatedebughud(1, "No join in progress, so shouldn't advertise to matchmaking once the countdown timer ends.", 0);
 
   return false;
 }

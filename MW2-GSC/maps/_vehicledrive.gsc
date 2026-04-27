@@ -51,7 +51,7 @@ vehicle_exit() {
     level.player.threatbias = level.player.oldthreatbias;
     level.player.oldthreatbias = undefined;
   }
-  //	level.player.ignoreme = false;
+
   if(isDefined(level.vehicleHUD))
     level.vehicleHUD destroy();
   if(isDefined(level.vehicleHUD2))
@@ -64,9 +64,6 @@ vehicle_enter() {
   level.playeronvehicle = true;
   level.playervehicle = self;
   self thread vehicle_ridehandle();
-
-  // probably rethink this stuff	
-  //	self thread Protect_Player();
 }
 
 setup_vehicle_tank() {
@@ -78,7 +75,6 @@ setup_vehicle_other() {
 }
 
 vehicle_giveHealth() {
-  //GIVE THE VEHICLE HEALTH BASED ON SKILL LEVEL
   skill = getdifficulty();
 
   if(skill == ("easy"))
@@ -93,7 +89,7 @@ vehicle_giveHealth() {
     self.health = 2000;
 
   if(isDefined(self.healthbuffer)) {
-    self.health += self.healthbuffer; // restore healthbuffer
+    self.health += self.healthbuffer;
     self.currenthealth = self.health;
     self.maxhealth = self.health;
   }
@@ -103,47 +99,20 @@ Protect_Player() {
   level endon("player exited vehicle");
   self endon("death");
   playerCurrentHealth = level.player.health;
-  /*
-  	if(self.vehicletype == "flak88" || self.vehicletype == "flak88_forward")
-  	{
-  		if(!isDefined(level.player.oldthreatbias))
-  		{
-  			level.player.oldthreatbias = level.player.threatbias;
-  //			level.player.ignoreme = true;
-  		}
-  		level.player.threatbias = -3000;			
 
-  	}
-  	*/
   while(isalive(level.player)) {
     level.player waittill("damage", ammount);
-    /*
-    		if(self.vehicletype != "flak88" && self.vehicletype != "flak88_forward")
-    		{
-    			if(self.health <= 0)
-    				level.player kill ( (0,0,0) );
-    			else
-    				level.player.health = playerCurrentHealth;
-    		}
-    		else
-    		{
-    */
+
     if(self.health <= 0)
       level.player kill((0, 0, 0));
     level.player.health += int(ammount * .2);
-    //		}
   }
 }
-
-//handles varius Hudelements and health regeneration
 vehicle_ridehandle() {
   level endon("player exited vehicle");
   self endon("no_regen_health");
   self endon("death");
 
-  // commenting out sound bit as it is too vehicle specific, these things should be defined in vehicle script not here	
-  //	self thread vehicle_reloadsound();
-  //	self thread vehicle_hud_tank_fireicon();
   self thread vehicle_kill_player_ondeath();
   self.maximumhealth = self.health;
 
@@ -274,8 +243,6 @@ vehicle_hud_tank_fireicon() {
     wait .05;
   }
 }
-
-// sarah - remove this when the SP health overlay is moved back to code.
 healthOverlay() {
   self endon("death");
   overlay = newHudElem();
@@ -288,7 +255,6 @@ healthOverlay() {
   overlay.vertAlign = "fullscreen";
   overlay.alpha = 0;
 
-  //	wait (15000);
   maxHealth = self.health - self.healthbuffer;
   hurt = false;
   bonus = 0.3;

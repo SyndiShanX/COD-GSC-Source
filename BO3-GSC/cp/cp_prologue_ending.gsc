@@ -23,54 +23,28 @@
 #using scripts\shared\vehicle_shared;
 #namespace prologue_ending;
 
-function skipto_prologue_ending_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_prologue_ending_init() {}
 
-function function_a12cfbf4() {
-  // Unsupported VM revision (1B).
-}
+function function_a12cfbf4() {}
 
-function function_cddb4b1f() {
-  // Unsupported VM revision (1B).
-}
+function function_cddb4b1f() {}
 
-function function_e476fc0a() {
-  // Unsupported VM revision (1B).
-}
+function function_e476fc0a() {}
 
-function function_490f0dd8() {
-  // Unsupported VM revision (1B).
-}
+function function_490f0dd8() {}
 
-function skipto_prologue_ending_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_prologue_ending_complete() {}
 
-function prologue_ending_main() {
-  // Unsupported VM revision (1B).
-}
+function prologue_ending_main() {}
 
-function function_313d2f63() {
-  // Unsupported VM revision (1B).
-}
+function function_313d2f63() {}
 
-function function_48d78725() {
-  // Unsupported VM revision (1B).
-}
+function function_48d78725() {}
 
-function function_398b6127() {
-  // Unsupported VM revision (1B).
-}
+function function_398b6127() {}
 
-function function_157cae6a() {
-  // Unsupported VM revision (1B).
-}
+function function_157cae6a() {}
 
-function function_886ee9f1() {
-  // Unsupported VM revision (1B).
-}
+function function_886ee9f1() {}
 
-function function_58c753e3() {
-  // Unsupported VM revision (1B).
-}
+function function_58c753e3() {}

@@ -3,25 +3,6 @@
  * Script: maps\cliffhanger.gsc
 ********************************************************/
 
-/****************************************************************************
-
-Level: 		Cliffhanger (cliffhanger.bsp)
-Location:	Eastern Krgyzstan
-Campaign: Price's PMC on assignment
-Objectives:	
-			1. Climb to the summit.
-			2. Plant C4 on the fuel storage tanks.
-			3. Infiltrate the storage hangar.
-			4. Extract the nuclear power core from the downed satellite.
-			5. Get to the exfil point.
-			6. Get on the snowmobile.
-
-Notes on progression:
-1. climb, jump, climb, spiderman, tarzan, climb to open field
-2. Price: "Cake, start the uplink."3. Cake: "Already on it. Let's hope these codes were worth what we paid."4. Price: "Soap, on me, let's go. Satellite time's not cheap."5. Cake: "Ok, I'm gettin' a good feed. 10 minutes on the clock starting now." (starting open field)
-
-*****************************************************************************/
-
 #include maps\_utility;
 #include maps\_vehicle;
 #include maps\_anim;
@@ -54,31 +35,21 @@ main() {
   add_start("camp", ::start_camp, "sneak through", ::camp_main);
   add_start("c4", ::start_c4, "plant it on the tanks", ::c4_main);
   add_start("goto_hanger", ::start_goto_hanger, "Go there", ::goto_hanger_main);
-  add_start("hangerpath", ::start_hangerpath, "Find it", ::hangerpath_main); //broken and not needed
+  add_start("hangerpath", ::start_hangerpath, "Find it", ::hangerpath_main);
   add_start("hanger", ::start_hanger, "Be there", ::hanger_main);
   add_start("satellite", ::start_satellite, "Got DSM", ::player_used_computer);
   add_start("tarmac", ::start_ch_tarmac, "escape", ::cliffhanger_tarmac_main);
   add_start("icepick", ::start_icepick, "Watch Soap stab", ::snowmobile_main);
   add_start("snowmobile", ::start_snowmobile, "Ride it to the finish", ::snowmobile_main);
-  //	add_start( "snowspawn", ::start_snowmobile, "[snowspawn] -> Snowmobile midpoint", ::snowmobile_main );
-  //	add_start( "lake", ::start_snowmobile, "[lake] -> Snowmobile lake", ::snowmobile_main );
-  //	add_start( "avalanche", ::start_avalanche, "[avalanche]", 						::avalanche_main );
+
   SetSavedDvar("ai_friendlyFireBlockDuration", 0);
 
   global_inits();
 
-  //start everything after the first frame so that level.start_point can be
-  //initialized - this is a bad way of doing things...if people are initilizing
-  //things before they want their start to start, then they should wait on a flag
   waittillframeend;
 
   thread cliffhanger_objective_main();
 }
-
-/************************************************************************************************************/
-
-/*													CLIMB													*/
-/************************************************************************************************************/
 
 cave_main() {
   if(level.start_point == "jump") {
@@ -106,11 +77,6 @@ cave_main() {
   maps\_climb::cliff_scene_with_price();
 }
 
-/************************************************************************************************************/
-
-/*												CLIFFTOP													*/
-/************************************************************************************************************/
-
 clifftop_main() {
   level.price pushplayer(true);
   if(is_e3_start()) {
@@ -120,46 +86,27 @@ clifftop_main() {
   level.friendlyFireDisabled = false;
   SetSavedDvar("g_friendlyfiredist", 175);
   node = getstruct("price_clifftopstart", "targetname");
-  //	level.price stopanimscripted();
-  //level.price disable_exits();
-  //level.price enable_cqbwalk();
 
-  //level.price forceTeleport( node.origin, node.angles );
   level.price.moveplaybackrate = .6;
   level.price.goalradius = 16;
-  //	level.price setgoalpos( level.price.origin );
-  //	level.price enable_ai_color();
 
-  activate_trigger_with_targetname("price_start_clifftop"); //tell price to crouch
+  activate_trigger_with_targetname("price_start_clifftop");
 
   thread maps\_utility::set_ambient("snow_cliff");
 
-  //save at top of cliff
   autosave_by_name("clifftop");
 
-  //settings for no blizzard
   sight_ranges_long();
 
   level.price set_battlechatter(false);
 
-  //give player his guns back after climb takes them
   flag_set("delay_weapon_switch");
   player_weapons_init();
 
-  //array_thread( getnodearray("clifftop_nodes", "script_noteworthy" ), ::clifftop_aim_thread );
   array_thread(getEntArray("patrollers_1_leftguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
   array_thread(getEntArray("patrollers_1_rightguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
 
   thread maps\_blizzard::blizzard_level_transition_light(.05);
-
-  //	level add_wait( ::flag_wait, "airfield_in_sight" );
-  //	level add_func( ::dialog_airfield_in_sight );
-  //	thread do_wait();
-  //	
-  //
-  //	level add_wait( ::flag_wait, "clifftop_patrol1_dead" );
-  //	level add_func( ::dialog_first_guys_dead );
-  //	thread do_wait();
 
   level add_wait(::flag_wait, "clifftop_patrol2_dead");
   level add_wait(::flag_wait, "clifftop_patrol1_dead");
@@ -170,7 +117,6 @@ clifftop_main() {
   level add_func(maps\_blizzard::blizzard_level_transition_light, 4);
   thread do_wait();
 
-  //save after each group
   thread camp_flag_save("clifftop_patrol1_dead");
   thread camp_flag_save("clifftop_patrol2_dead");
 
@@ -210,19 +156,12 @@ clifftop_main() {
   level.price pushplayer(false);
   flag_set("clifftop_guys_move");
 
-  //save just before first encounter
   autosave_by_name("first_encounter");
 
   flag_wait("dialog_take_point");
 }
 
-/************************************************************************************************************/
-
-/*														CAMP												*/
-/************************************************************************************************************/
-
 camp_main() {
-  //save
   autosave_stealth();
 
   thread dialog_your_in();
@@ -233,11 +172,6 @@ camp_main() {
   thread camp_flag_save("give_c4_obj");
   thread start_truck_patrol();
 }
-
-/************************************************************************************************************/
-
-/*														C4													*/
-/************************************************************************************************************/
 
 c4_main() {
   thread dialog_plant_c4_nag();
@@ -254,15 +188,7 @@ c4_main() {
   autosave_stealth();
 }
 
-/************************************************************************************************************/
-
-/*													GOTO HANGER											*/
-/************************************************************************************************************/
-
 goto_hanger_main() {
-  //save
-  //autosave_stealth();
-
   level add_wait(::dialog_goto_hanger);
   level add_func(::flag_set, "price_moving_to_hanger");
   thread do_wait();
@@ -271,23 +197,10 @@ goto_hanger_main() {
 
   thread camp_flag_save("player_halfway_to_hanger");
 
-  //level.price set_force_color( "c" );
-  //level.price enable_ai_color();
   thread player_speed_percent(90, 2);
-
-  //level.price camp_smartstance_settings();
-  //level.price thread follow_player( 200 );//barney
-  //level.price enable_stealth_smart_stance();
-
-  //thread price_teleport_fallback( "starting_hanger_backdoor_path", "hanger_path_price_teleport", 1300 );
 
   flag_wait("starting_hanger_backdoor_path");
 }
-
-/************************************************************************************************************/
-
-/*													HANGER PATH											*/
-/************************************************************************************************************/
 
 hangerpath_main() {
   flag_set("price_moving_to_hanger");
@@ -295,7 +208,7 @@ hangerpath_main() {
   level.price delete();
 
   if(level.start_point == "hangerpath")
-    wait(0.05); // so spawner will work
+    wait(0.05);
 
   price_hanger_start = getent("price_hanger_start", "targetname");
   level.price_spawner.script_stealth = undefined;
@@ -305,14 +218,9 @@ hangerpath_main() {
   level.price disable_ai_color();
   level.price forceUseWeapon("ak47_arctic", "primary");
 
-  //save
   autosave_stealth();
 
-  //level.price set_force_color( "c" );
-  //level.price enable_ai_color();
   player_speed_percent(90, 2);
-
-  //thread price_on_hanger_path();
 
   flag_wait("starting_hanger_backdoor_path");
 
@@ -345,7 +253,6 @@ hangerpath_main() {
 
   surviving_enemies = [];
   foreach(mf in enemies) {
-    //DELETE EVERYONE you cant see
     d = distance(mf.origin, level.player.origin);
     if(d > 1000) {
       mf delete();
@@ -356,14 +263,12 @@ hangerpath_main() {
       continue;
     }
 
-    //keep the rest
     surviving_enemies[surviving_enemies.size] = mf;
   }
-  //the rest magically know where you are (cause they were alerted recently in order to be that close)
+
   disable_stealth_system();
 
-  if(surviving_enemies.size > 0) //someone is alive and broken stealth
-  {
+  if(surviving_enemies.size > 0) {
     foreach(mf in surviving_enemies)
     mf thread setup_stealth_enemy_cleanup();
 
@@ -391,24 +296,16 @@ hangerpath_main() {
   }
 }
 
-/************************************************************************************************************/
-
-/*													HANGER											*/
-/************************************************************************************************************/
-
 hanger_main() {
   flag_wait("player_on_backdoor_path");
 
-  // add the drill that price will pick up in the hangar
   satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
   level.drill = spawn_anim_model("drill");
   satelite_sequence_node anim_first_frame_solo(level.drill, "enter");
 
   if(flag("brought_friends")) {
-    //Brought some friends with you?	
     level.price thread dialogue_queue("cliff_pri_broughtfriends");
   } else {
-    //Took the scenic route eh?	
     level.price thread dialogue_queue("cliff_pri_scenicroute");
   }
 
@@ -426,54 +323,40 @@ hanger_main() {
   soap_opens_hanger_door();
 
   node = getnode("price_prep_for_locker_brawl_node", "targetname");
-  wait(0.05); // or colorchange will overwrite his destination if coming from a start point
+  wait(0.05);
   level.price setgoalnode(node);
   level.price.goalradius = 8;
 
   level.price disable_ai_color();
   level.price forceUseWeapon("ak47_arctic", "primary");
 
-  flag_clear("locker_brawl_breaks_out"); //make sure it wasnt set before
+  flag_clear("locker_brawl_breaks_out");
 
   flag_wait("locker_brawl_breaks_out");
 
   cliffhanger_locker_brawl();
 
-  // teleport price to the correct place
   thread price_anims_satellite();
 
   wait(2);
-  // Watch my back.	
+
   level.price thread dialogue_queue("cliff_pri_watchmyback");
 
   hanger_enemies_enter = getnode("hanger_enemies_enter", "targetname");
-  //hanger_enemies_enter thread maps\_debug::drawOriginForever ();
+
   use_satelite = getent("use_satelite", "targetname");
   satelite_sequence_node = getnode("satelite_sequence", "targetname");
 
   keyboard_trigger = getEntWithFlag("keyboard_used");
   keyboard_trigger trigger_off();
 
-  // Press and hold ^3&& 1^7 to extract the DSM.
-  //keyboard_trigger setHintString(&"CLIFFHANGER_USE_SATELITE" );
-
-  //level.price_targets = [];
-
-  //save
-  //autosave_by_name( "used_keyboard" );
-
-  //	level.price set_force_color( "c" );
-  //	level.price enable_ai_color();
   player_speed_percent(100, 2);
   level.price enable_cqbwalk();
-
-  //level.price disable_stealth_smart_stance();
 
   flag_wait("player_in_hanger");
 
   wait(2);
 
-  // Go up stairs and look for the DSM.	
   level.price thread dialogue_queue("cliff_pri_goupstairs");
 
   thread keyboard_nag();
@@ -494,8 +377,6 @@ hanger_main() {
   flag_set("keyboard_used");
   keyboard_trigger delete();
   wait(2.2);
-
-  //flag_wait( "hanger_return" );
 }
 
 start_satellite() {
@@ -513,7 +394,6 @@ start_satellite() {
   level.price forceTeleport(node.origin, node.angles);
   level.price forceUseWeapon("ak47_arctic", "primary");
 
-  //ch_teleport_player();
   maps\_blizzard::blizzard_level_transition_light(3);
   thread price_puts_his_hands_up();
   flag_set("player_in_hanger");
@@ -524,7 +404,7 @@ player_used_computer() {
   flag_set("start_busted_music");
 
   thread maps\_blizzard::blizzard_level_transition_light(40);
-  //Well, uh, this is a little awkward, innit mate? No, no, it's quite all right, we're all friends here, just a pub crawl with the lads…uh…	
+
   level.price anim_single_queue(level.price, "cliff_pri_pubcrawl");
   thread open_hanger_doors();
   thread guards_run_in();
@@ -552,7 +432,7 @@ player_used_computer() {
   level.player SetMoveSpeedScale(0.3);
 
   level.player delaycall(1.5, ::freezecontrols, false);
-  //thread player_dies_if_he_moves();
+
   thread player_slow_mo();
   thread price_starts_shooting();
 
@@ -593,9 +473,8 @@ start_ch_tarmac(e3) {
   level.price forceTeleport(node.origin, node.angles);
   level.price forceUseWeapon("ak47_arctic", "primary");
 
-  //ch_teleport_player();
   maps\_blizzard::blizzard_level_transition_light(0.05);
-  //	thread price_puts_his_hands_up();
+
   flag_set("player_in_hanger");
   flag_set("reached_top");
   flag_set("hanger_reinforcements");
@@ -635,7 +514,7 @@ cliffhanger_tarmac_main() {
     return;
   level.price endon("death");
 
-  setDvar("player_has_witnessed_capture", ""); // cleanup on aisle 5
+  setDvar("player_has_witnessed_capture", "");
 
   flag_set("tarmac_escape");
   flag_init("price_reaches_bottom");
@@ -650,13 +529,12 @@ cliffhanger_tarmac_main() {
 
   thread price_warns_about_snowmobiles();
 
-  level.price.maxFaceEnemyDist = 200; // make price run-n-gun more instead of strafing
+  level.price.maxFaceEnemyDist = 200;
   level.price set_force_color("g");
-  exploder(54); // tarmac smoking jets
-  exploder(56); // tarmac smoking extra jet before it blows
+  exploder(54);
+  exploder(56);
   spawn_vehicle_from_targetname_and_drive("tarmac_bmp_spawner");
 
-  //thread delete_random_vehicles(); // for now, need to do this manually until we add script_random_killspawn to vehicles	hanger_reinforce_spawners = getEntArray( "hanger_reinforce_spawner", "targetname" );
   hanger_reinforce_spawners = getEntArray("hanger_reinforce_spawner", "targetname");
   array_thread(hanger_reinforce_spawners, ::spawn_ai);
 
@@ -669,23 +547,12 @@ cliffhanger_tarmac_main() {
   blue_house_top_door = getent("blue_house_top_door", "targetname");
   blue_house_top_door delete();
 
-  /*
-  gaz_spawner = getent( "gaz_snowmobile_spawner", "targetname" );
-  level.gaz = gaz_spawner spawn_ai();
-  level.gaz thread magic_bullet_shield();
-  */
-
   maps\_vehicle_spline::init_vehicle_splines();
-  //thread price_ditches_player_detection();
 
   level notify("stop_price_shield");
   if(!isDefined(level.price.magic_bullet_shield)) {
     level.price thread magic_bullet_shield();
   }
-  //music_loop( "cliffhanger_escape_music", DEFINE_ESCAPE_MUSIC_TIME );
-
-  //	snowmobile_triggers = getEntArray( "snowmobile_trigger", "targetname" );
-  //	array_call( snowmobile_triggers, ::setHintString, "Press && 1 to mount" );
 
   run_thread_on_noteworthy("tarmac_hanger_gate", ::connect_and_delete);
 
@@ -698,7 +565,6 @@ cliffhanger_tarmac_main() {
 
   level.price.pathEnemyFightDist = 350;
   level.price.pathEnemyLookAhead = 350;
-  //	level.price enable_ai_color();
 
   level.price set_battlechatter(false);
 
@@ -714,11 +580,6 @@ cliffhanger_tarmac_main() {
   thread maps\cliffhanger_snowmobile_code::recover_vehicle_path_trigger();
   hill_attackers_spawn();
 }
-
-/************************************************************************************************************/
-
-/*												INITIALIZATIONS												*/
-/************************************************************************************************************/
 
 start_flyin() {
   start_common_cliffhanger();
@@ -770,9 +631,9 @@ start_jump() {
 }
 
 start_camp(e3) {
-  flag_set("price_go_to_climb_ridge"); //for stealth spotted dialog
+  flag_set("price_go_to_climb_ridge");
   flag_set("reached_top");
-  flag_set("first_two_guys_in_sight"); //for stealth music
+  flag_set("first_two_guys_in_sight");
   flag_set("said_lets_split_up");
   thread maps\_utility::set_ambient("snow_base_white");
 
@@ -781,9 +642,6 @@ start_camp(e3) {
     friendly_init_cliffhanger();
   }
 
-  //node = getstruct( "price_campstart", "targetname" );
-  //level.price forceTeleport( node.origin, node.angles );
-
   ch_teleport_player("camp");
 
   thread variable_blizzard(0.05);
@@ -791,17 +649,15 @@ start_camp(e3) {
 }
 
 start_c4() {
-  flag_set("price_go_to_climb_ridge"); //for stealth spotted dialog
-  flag_set("dialog_take_point"); //for loudspeakers
+  flag_set("price_go_to_climb_ridge");
+  flag_set("dialog_take_point");
   flag_set("reached_top");
-  flag_set("first_two_guys_in_sight"); //for stealth music
+  flag_set("first_two_guys_in_sight");
   flag_set("said_lets_split_up");
   thread maps\_utility::set_ambient("snow_base_white");
   start_common_cliffhanger();
   friendly_init_cliffhanger();
 
-  //node = getstruct( "price_c4start", "targetname" );
-  //level.price forceTeleport( node.origin, node.angles );
   activate_trigger_with_targetname("tarmac_guys_trigger");
   flag_set("start_truck_patrol");
   thread start_truck_patrol();
@@ -809,14 +665,13 @@ start_c4() {
   thread spawn_beehive();
   thread variable_blizzard();
   sight_ranges_blizzard();
-  //thread dialog_stealth_failure();
 }
 
 start_goto_hanger() {
-  flag_set("price_go_to_climb_ridge"); //for stealth spotted dialog
-  flag_set("dialog_take_point"); //for loudspeakers
+  flag_set("price_go_to_climb_ridge");
+  flag_set("dialog_take_point");
   flag_set("reached_top");
-  flag_set("first_two_guys_in_sight"); //for stealth music
+  flag_set("first_two_guys_in_sight");
   flag_set("said_lets_split_up");
   thread maps\_utility::set_ambient("snow_base_white");
   flag_set("base_c4_planted");
@@ -828,8 +683,6 @@ start_goto_hanger() {
   flag_set("center_building_patroler_buddy_dead");
   flag_set("ridge_patroler_dead");
 
-  //node = getstruct( "price_start_goto_hanger", "targetname" );
-  //level.price forceTeleport( node.origin, node.angles );
   activate_trigger_with_targetname("tarmac_guys_trigger");
   flag_set("start_truck_patrol");
   thread start_truck_patrol();
@@ -838,23 +691,19 @@ start_goto_hanger() {
   thread spawn_beehive();
   thread variable_blizzard();
   sight_ranges_blizzard();
-  //thread dialog_stealth_failure();
 }
 
 start_hangerpath() {
-  flag_set("price_go_to_climb_ridge"); //for stealth spotted dialog
-  flag_set("dialog_take_point"); //for loudspeakers
+  flag_set("price_go_to_climb_ridge");
+  flag_set("dialog_take_point");
   flag_set("reached_top");
-  flag_set("first_two_guys_in_sight"); //for stealth music
+  flag_set("first_two_guys_in_sight");
   flag_set("said_lets_split_up");
   thread maps\_utility::set_ambient("snow_base");
   flag_set("base_c4_planted");
   flag_set("price_moving_to_hanger");
   start_common_cliffhanger();
   friendly_init_cliffhanger();
-
-  //node = getstruct( "price_hangerpath_start", "targetname" );
-  //level.price forceTeleport( node.origin, node.angles );
 
   thread variable_blizzard();
   sight_ranges_blizzard();
@@ -866,8 +715,8 @@ start_hangerpath() {
 
 start_hanger() {
   flag_set("reached_top");
-  flag_set("dialog_take_point"); //for loudspeakers
-  flag_set("first_two_guys_in_sight"); //for stealth music
+  flag_set("dialog_take_point");
+  flag_set("first_two_guys_in_sight");
   thread maps\_utility::set_ambient("snow_base");
   flag_set("done_with_stealth_camp");
   flag_set("base_c4_planted");
@@ -881,12 +730,8 @@ start_hanger() {
   node = getent("price_hanger_start", "targetname");
   level.price forceTeleport(node.origin, node.angles);
 
-  //ch_teleport_player();
   maps\_blizzard::blizzard_level_transition_light(3);
 }
-
-//god_vehicle_spawner
-//magic_bullet_spawner
 
 start_common_cliffhanger() {
   level.price_spawner = getent("price", "script_noteworthy");
@@ -900,13 +745,6 @@ cliffhanger_objective_main() {
   level.curObjective = 1;
   level.objectives = [];
 
-  //goto_hanger_obj = -1;
-  //objnum = 0;
-  //level.curr_obj = 0;
-  //level.curr_obj_string = undefined;
-
-  //thread objective_stealth();
-
   switch (level.start_point) {
     case "default":
     case "cave":
@@ -918,9 +756,7 @@ cliffhanger_objective_main() {
     case "camp":
       objective_enter_camp();
     case "c4":
-      //objective_c4_both();//multiple on compass
-      //objective_c4_fuel_tanks();
-      //objective_c4_mig();
+
       objective_c4_fuel_station();
 
     case "goto_hanger":

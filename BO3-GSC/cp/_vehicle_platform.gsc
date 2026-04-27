@@ -7,68 +7,36 @@
 #using scripts\shared\vehicle_shared;
 #namespace cvehicleplatform;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function set_external_functions() {
-  // Unsupported VM revision (1B).
-}
+function set_external_functions() {}
 
-function get_platform_vehicle() {
-  // Unsupported VM revision (1B).
-}
+function get_platform_vehicle() {}
 
-function set_node_start() {
-  // Unsupported VM revision (1B).
-}
+function set_node_start() {}
 
-function damage_watcher() {
-  // Unsupported VM revision (1B).
-}
+function damage_watcher() {}
 
-function trigger_think() {
-  // Unsupported VM revision (1B).
-}
+function trigger_think() {}
 
-function attach_to_vehicle_node() {
-  // Unsupported VM revision (1B).
-}
+function attach_to_vehicle_node() {}
 
-function set_speed() {
-  // Unsupported VM revision (1B).
-}
+function set_speed() {}
 
-function start_platform() {
-  // Unsupported VM revision (1B).
-}
+function start_platform() {}
 
-function stop_platform() {
-  // Unsupported VM revision (1B).
-}
+function stop_platform() {}
 
-function looping_sounds() {
-  // Unsupported VM revision (1B).
-}
+function looping_sounds() {}
 
-function setup_elevator_doors() {
-  // Unsupported VM revision (1B).
-}
+function setup_elevator_doors() {}
 
-function move_elevator_doors() {
-  // Unsupported VM revision (1B).
-}
+function move_elevator_doors() {}
 
-function __constructor() {
-  // Unsupported VM revision (1B).
-}
+function __constructor() {}
 
-function __destructor() {
-  // Unsupported VM revision (1B).
-}
+function __destructor() {}
 
 #namespace vehicle_platform;
 
-function private autoexec cvehicleplatform() {
-  // Unsupported VM revision (1B).
-}
+function private autoexec cvehicleplatform() {}

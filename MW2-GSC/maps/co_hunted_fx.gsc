@@ -7,8 +7,6 @@
 #include maps\_utility;
 
 main() {
-  //level._effect["firelp_vhc_lrg_pm_farview"]		= loadfx ("fire/firelp_vhc_lrg_pm_farview");
-  //level._effect["lighthaze"]						= loadfx ("misc/lighthaze");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -35,15 +33,13 @@ main() {
   level._effect["insects_light_hunted"] = loadfx("misc/insects_light_hunted");
   level._effect["insects_light_hunted_a"] = loadfx("misc/insects_light_hunted_a");
   level._effect["hunted_vl_white_eql"] = loadfx("misc/hunted_vl_white_eql");
-  //	level._effect["hunted_vl_white_eql_flare"]		= loadfx ("misc/hunted_vl_white_eql_flare");
+
   level._effect["hunted_vl_white_eql_a"] = loadfx("misc/hunted_vl_white_eql_a");
-  //	level._effect["grenadeexp_fuel"]				= loadfx ("explosions/grenadeexp_fuel");
-  //	level._effect["hunted_fel"]						= loadfx ("misc/hunted_fel");	
+
   level._effect["greenhouse_fog_spot_lit"] = loadfx("smoke/greenhouse_fog_spot_lit");
   level._effect["waterfall_hunted"] = loadfx("misc/waterfall_hunted");
   level._effect["stream_hunted"] = loadfx("misc/stream_hunted");
 
-  //footstep fx
   animscripts\utility::setFootstepEffect("asphalt", loadfx("impacts/footstep_dust_dark"));
   animscripts\utility::setFootstepEffect("brick", loadfx("impacts/footstep_dust_dark"));
   animscripts\utility::setFootstepEffect("carpet", loadfx("impacts/footstep_dust_dark"));
@@ -59,35 +55,6 @@ main() {
   animscripts\utility::setFootstepEffect("water", loadfx("impacts/footstep_water_dark"));
   animscripts\utility::setFootstepEffect("wood", loadfx("impacts/footstep_dust_dark"));
 
-  // level script effects
-  //	level._effect["truck_smoke"]					= loadfx ("smoke/car_damage_blacksmoke");
-  //	level._effect["flashlight"]						= loadfx ("misc/flashlight");
-
-  // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
-  /*
-  	if( getdvarint( "sm_enable" ) && getDvar( "r_zfeather" ) != "0" )
-  		level._effect[ "spotlight" ]						 = loadfx( "misc/hunted_spotlight_model" );
-  	else
-  		level._effect[ "spotlight" ]						 = loadfx( "misc/spotlight_large" );
-
-  	level.flare_fx[ "mi17" ] 							 = loadfx( "misc/flares_cobra" );
-
-  	//gas station destruction
-  	level._effect["gasstation_explosion"]			= loadfx ("explosions/hunted_gasstation_explosion");
-  	level._effect["big_explosion"]					= loadfx ("explosions/helicopter_explosion");
-  	level._effect["small_explosion"]				= loadfx ("explosions/small_vehicle_explosion");
-  	level._effect["tracer_incoming"]				= loadfx ("misc/tracer_incoming");
-  	level._effect["gas_pump_fire"]					= loadfx ("fire/gas_pump_fire");
-  	level._effect["thin_black_smoke_M"]				= loadfx ("smoke/thin_black_smoke_M");
-  	level._effect["tire_fire_med"]					= loadfx ("fire/tire_fire_med");
-
-  	level._effect["heli_dlight_blue"]					= loadfx ("misc/aircraft_light_cockpit_blue");
-  	level._effect["heli_dlight_red"]					= loadfx ("misc/aircraft_light_cockpit_red");
-  	level._effect["missile_explosion"]				= loadfx ("explosions/small_vehicle_explosion");
-  	
-  	//Temporarly added to make fx placement easier	
-  	//ac130_gas_station();
-  */
   treadfx_override();
   maps\createfx\co_hunted_fx::main();
 }
@@ -263,8 +230,6 @@ fuel_explosion() {
 
   ent thread common_scripts\_fx::OneShotfxthread();
 }
-
-//Temporarly added to make fx placement easier
 ac130_gas_station() {
   gas_station = getEntArray("gas_station", "targetname");
   gas_station_d = getEntArray("gas_station_d", "targetname");
@@ -274,13 +239,9 @@ ac130_gas_station() {
   array_thread(gas_station, ::hide_ent);
   array_thread(gas_station_d, ::swap_ent, (7680, 0, 0));
 }
-
-//Temporarly added to make fx placement easier
 hide_ent(nodelay) {
   self hide();
 }
-
-//Temporarly added to make fx placement easier
 swap_ent(offset) {
   self.origin = self.origin + offset;
   self show();

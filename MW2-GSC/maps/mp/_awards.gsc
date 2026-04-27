@@ -19,8 +19,6 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    // Reset player awards to none
-
     if(!isDefined(player.pers["stats"]))
       player.pers["stats"] = [];
 
@@ -29,7 +27,6 @@ onPlayerConnect() {
     if(!player.stats.size) {
       player setPlayerData("round", "awardCount", 0);
 
-      // Initialize player stats
       foreach(ref, award in level.awards) {
         if(isDefined(level.awards[ref].defaultvalue))
           player initPlayerStat(ref, level.awards[ref].defaultvalue);
@@ -71,14 +68,11 @@ initAwards() {
   if(isDefined(level.initGametypeAwards))
     [[level.initGametypeAwards]]();
 
-  // flags generated from other stats, these are not awards, // but are checked against for the assignment of some awards
   initAwardFlag("10kills", ::isAtleast, 10, "kills");
   initAwardFlag("1death", ::isAtleast, 1, "deaths");
   initAwardFlag("nodeaths", ::isAtMost, 0, "deaths");
   initAwardFlag("nokills", ::isAtMost, 0, "kills");
 
-  // ordered in priority assigned
-  // TODO: should decouple dependency processing order from order assigned
   initMultiAward("mvp", "kills", "deaths");
   initMultiAward("highlander", "10kills", "nodeaths");
   initThresholdAward("kdratio10", ::isAtleast, 10, "kdratio");
@@ -163,7 +157,6 @@ initAwards() {
   initStatAward("greatestavgalt", 0, ::highestWins);
   initStatAward("leastavgalt", 9999999, ::lowestWins);
 
-  // Offline/private match only awards
   if(!matchMakingGame()) {
     initStatAward("killcamskipped", 0, ::highestWins);
     initStatAward("killsteals", 0, ::highestWins);
@@ -174,11 +167,10 @@ initAwards() {
     initStatAward("mostff", 0, ::highestWins);
     initStatAward("shotgundeaths", 0, ::highestWins);
     initStatAward("shielddeaths", 0, ::highestWins);
-    initStatAward("flankdeaths", 0, ::highestWins); // sets the process property of the "stat only" init above
+    initStatAward("flankdeaths", 0, ::highestWins);
     initMultiAward("participant", "nokills", "1death");
     initMultiAward("afk", "nokills", "nodeaths");
 
-    // special case post process award
     initDerivedAward("noawards");
   }
 }
@@ -188,7 +180,7 @@ initBaseAward(ref) {
 
   level.awards[ref] = spawnStruct();
   level.awards[ref].winners = [];
-  level.awards[ref].exclusive = true; // For now just make all awards exclusive
+  level.awards[ref].exclusive = true;
 }
 
 initAwardProcess(ref, process, var1, var2) {
@@ -292,7 +284,7 @@ getDecodedRatio(value) {
   hiVal = getRatioHiVal(value);
 
   if(!loVal)
-    return (hiVal + 0.001); // favor the "n:0" case
+    return (hiVal + 0.001);
 
   return (hiVal / loVal);
 }
@@ -365,12 +357,9 @@ getAwardRecord(ref) {
 getAwardRecordTime(ref) {
   return level.awards[ref].time;
 }
-
-// does this work correctly for roundbased games?
 assignAwards() {
   println("Awards: Assigning");
 
-  // Special case handling of awards which get stat values updated at the end of a game
   foreach(player in level.players) {
     kills = player getPlayerStat("kills");
     deaths = player getPlayerStat("deaths");
@@ -386,7 +375,6 @@ assignAwards() {
     }
   }
 
-  // process end of match stats
   foreach(ref, award in level.awards) {
     if(!isDefined(level.awards[ref].process)) {
       continue;
@@ -403,7 +391,6 @@ assignAwards() {
       [[process]](ref);
   }
 
-  // set multi-award winners
   foreach(ref, award in level.awards) {
     if(!isMultiAward(ref)) {
       continue;
@@ -429,13 +416,11 @@ assignAwards() {
     }
   }
 
-  // assign awards
   foreach(ref, award in level.awards) {
     if(!isAwardFlag(ref))
       assignAward(ref);
   }
 
-  // assign "noawards" winners
   if(!matchMakingGame()) {
     foreach(player in level.players) {
       awardCount = player getPlayerData("round", "awardCount");
@@ -475,7 +460,6 @@ assignAward(ref) {
     foreach(player in level.players) {
       if(player.clientid == winner) {
         player giveAward(ref);
-        // player writeAwardLine( ref );
       }
     }
   }
@@ -599,7 +583,6 @@ lowestWithHalfPlayedTime(ref) {
   halfGameLength = gameLength * 0.5;
 
   foreach(player in level.players) {
-    // hasSpawned check is required or players who pick a team and never spawn can win awards
     if(player.hasSpawned && player.timePlayed["total"] >= halfGameLength) {
       player setMatchRecordIfLower(ref);
       if(!isAwardFlag(ref))
@@ -626,7 +609,6 @@ isAtLeast(ref, minimum, checkAwardRef) {
     if(checkValue >= minimum)
       addAwardWinner(ref, player.clientid);
 
-    // TODO: Instead of copying the value, reference the other stat directly
     if(isThresholdAward(ref) || isAwardFlag(ref))
       player setPlayerStat(ref, playerValue);
   }
@@ -646,7 +628,6 @@ isAtMostWithHalfPlayedTime(ref, maximum, award_ref) {
   halfGameLength = gameLength * 0.5;
 
   foreach(player in level.players) {
-    // hasSpawned check is required or players who pick a team and never spawn can win awards
     if(player.hasSpawned && player.timePlayed["total"] >= halfGameLength) {
       playerValue = player getPlayerStat(award_ref);
 
@@ -743,7 +724,6 @@ monitorSwaps() {
 
     alreadyUsed = false;
 
-    //creates an array of weapons used
     foreach(usedWeapon in self.usedWeapons) {
       if(weapon == usedWeapon) {
         alreadyUsed = true;
@@ -945,8 +925,6 @@ monitorStunHits() {
     wait(0.05);
   }
 }
-
-//this approximates a players time spent in crouch or prone.
 monitorStanceTime() {
   level endon("game_ended");
   self endon("spawned_player");

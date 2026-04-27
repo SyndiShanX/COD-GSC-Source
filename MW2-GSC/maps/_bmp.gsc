@@ -29,7 +29,6 @@ main(model, type) {
   bmp_death_fx["vehicle_bmp_thermal"] = "explosions/large_vehicle_explosion_IR";
   bmp_death_fx["vehicle_bmp_low"] = "explosions/vehicle_explosion_bmp_low";
 
-  // 	build_deathfx( effect, tag,	sound, bEffectLooping, delay, bSoundlooping, waitDelay, stayontag, notifyString )
   build_deathfx("fire/firelp_med_pm", "tag_deathfx");
   build_deathfx("fire/firelp_med_pm", "tag_cargofire", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx(bmp_death_fx[model], undefined, "exp_armor_vehicle", undefined, undefined, undefined, 0);
@@ -52,7 +51,7 @@ main(model, type) {
 
   build_aianims(::setanims, ::set_vehicle_anims);
 
-  build_frontarmor(.33); // regens this much of the damage from attacks to the front
+  build_frontarmor(.33);
 
   build_bulletshield(true);
 
@@ -64,9 +63,6 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
-  // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-  // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
-
   positions[0].vehicle_getoutanim = % bmp_doors_open;
   positions[0].vehicle_getoutanim_clear = false;
   return positions;
@@ -101,112 +97,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_bmp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_winter_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_winter", "bmp_physics" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_winter
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_winter"default:"vehicletype" "bmp_physics"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_winter (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_winter" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_winter
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_winter"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_desert" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_desert_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_desert"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_low" );
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-and these lines in your CSV:
-#include,vehicle_bmp_low_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_low"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_thermal" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_thermal_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_thermal"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_woodland" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_woodland_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_woodland"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_woodland_jeepride (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_woodland_jeepride" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_woodland_jeepride_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_woodland_jeepride"default:"vehicletype" "bmp"default:"script_team" "axis"*/
-
-/*QUAKED script_vehicle_bmp_woodland_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_bmp::main( "vehicle_bmp_woodland_low" );
-
-and these lines in your CSV:
-#include,vehicle_bmp_woodland_low_bmp
-sound,vehicle_bmp,vehicle_standard,all_sp
-sound,vehicle_armor_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_bmp_woodland_low"default:"vehicletype" "bmp"default:"script_team" "axis"
-*/

@@ -4,40 +4,32 @@
 main() {
   replacefunc(maps\mp\_skill::isskillenabled, ::isskillenabled);
 
-  // battlechatter: change some voice stuff (cpt price)
   replacefunc(maps\mp\gametypes\_battlechatter_mp::onplayerspawned, ::onplayerspawned_stub);
 
-  // damagefeedback: change some of the feedbacks
   replacefunc(maps\mp\gametypes\_damagefeedback::updatedamagefeedback, ::updatedamagefeedback_stub);
 
-  // dom: setup flags for custom teams
   replacefunc(maps\mp\gametypes\dom::precacheflags, ::precacheflags_stub);
 
-  // TODO: match iw4 values for wait times (we override events, so put that hook there?)
   replacefunc(maps\mp\gametypes\_rank::xppointspopup, ::xppointspopup_stub);
   replacefunc(maps\mp\_events::updaterecentkills, ::updaterecentkills_stub);
 
-  // killcam: add copycat logic to killcam
   replacefunc(maps\mp\gametypes\_killcam::killcam, ::killcam_stub);
 
-  // music and dialog: new battlechatter, callouts and in-game music
   replacefunc(maps\mp\gametypes\_music_and_dialog::init, ::init_stub);
   replacefunc(maps\mp\gametypes\_music_and_dialog::onplayerspawned, ::music_onplayerspawned_stub);
 
-  // sanitise names for iw4madmin
   replacefunc(maps\mp\gametypes\_playerlogic::callback_playerconnect, ::callback_playerconnect_stub);
   replacefunc(maps\mp\gametypes\_playerlogic::callback_playerdisconnect, ::callback_playerdisconnect_stub);
 }
 
 should_use_old_lightgrids() {
   if(scripts\mp_patches\common::is_iw4_map()) {
-    // TODO: disable for certain maps atm
     switch (getDvar("mapname")) {
-      case "mp_favela": // shadows need fixed
-      case "mp_fuel2": // map looks way too dark, vision/lightset touchups might fix?
-      case "mp_invasion": // hit or miss
-      case "mp_rundown": // ^
-      case "mp_checkpoint": // ^
+      case "mp_favela":
+      case "mp_fuel2":
+      case "mp_invasion":
+      case "mp_rundown":
+      case "mp_checkpoint":
         return 0;
       default:
         break;
@@ -269,10 +261,8 @@ map_h2m_team_to_h1(team, team_two) {
   level.flagmodels[team]["friendly"] = level.flagmodels[team_two]["friendly"];
   level.flagmodels[team]["enemy"] = level.flagmodels[team_two]["enemy"];
 
-  // set flag fx id data
   set_flag_fx_id_data(team);
 
-  // copy boarder data
   points = ["_a", "_b", "_c"];
   foreach(point in points) {
     level.boarderfxid[team]["friendly"] = [];
@@ -285,7 +275,6 @@ map_h2m_team_to_h1(team, team_two) {
 precacheflags_stub() {
   game["neutral"] = "neutral";
 
-  // stock flag models
   level.flagmodels["marines"]["friendly"] = "h1_flag_mp_domination_usmc_blue";
   level.flagmodels["marines"]["enemy"] = "h1_flag_mp_domination_usmc_red";
   level.flagmodels["sas"]["friendly"] = "h1_flag_mp_domination_sas_blue";
@@ -338,7 +327,6 @@ precacheflags_stub() {
     }
   }
 
-  // set custom flag models for teams
   map_h2m_team_to_h1("tf141", "sas");
   map_h2m_team_to_h1("militia", "opfor");
   map_h2m_team_to_h1("rangers", "marines");
@@ -484,7 +472,6 @@ set_hud_feedback(icon) {
   self.hud_damagefeedback fadeOverTime(fadeoutTime);
   self.hud_damagefeedback.alpha = 0;
 
-  // only update hudelem positioning when necessary
   if(self.hud_damagefeedback.x != x)
     self.hud_damagefeedback.x = x;
 
@@ -532,7 +519,7 @@ xppointspopup_stub(event, amount) {
   if(isDefined(event_id) && event_id != -1)
     self setclientomnvar("ui_points_popup_event", event_id);
 
-  wait 1.1; // update stack timer to match iw4
+  wait 1.1;
 
   self.xpupdatetotal = 0;
 }
@@ -551,7 +538,7 @@ updaterecentkills_stub(killId, weapon) {
 
   was_aiming = int(self playerads() >= 0.2);
 
-  wait 1.1; // update stack timer to match iw4
+  wait 1.1;
 
   if(self.recentkillcount > 1)
     self maps\mp\_events::multikillevent(killId, self.recentkillcount, weapon, was_aiming);

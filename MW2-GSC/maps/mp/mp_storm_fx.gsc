@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["rain_mp_storm"] = loadfx("weather/rain_mp_storm");
   level._effect["rain_noise_splashes"] = loadfx("weather/rain_noise_splashes");
   level._effect["rain_splash_lite_64x64"] = loadfx("weather/rain_splash_lite_64x64");

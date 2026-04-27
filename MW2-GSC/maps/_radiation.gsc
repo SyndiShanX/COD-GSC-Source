@@ -7,15 +7,9 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-/************************************************************************************************************/
-
-/*												RADIATION EFFECT											*/
-/************************************************************************************************************/
-
 main() {
-  // && 1 mR/hr
   precacheString(&"SCOUTSNIPER_MRHR");
-  // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
+
   precacheString(&"SCRIPT_RADIATION_DEATH");
   precacheShellShock("radiation_low");
   precacheShellShock("radiation_med");
@@ -37,7 +31,6 @@ main() {
   array_thread(level.players, ::updateRadiationSound);
   array_thread(level.players, ::updateRadiationFlag);
   array_thread(level.players, ::first_radiation_dialogue);
-  //	array_thread( level.players, ::updateRadiationRatePercent );
 }
 
 updateRadiationTriggers() {
@@ -78,8 +71,8 @@ updateRadiationDosage() {
 
   update_frequency = 1;
   min_rate = 0;
-  max_rate = 1100000 / (60 * update_frequency); // 60 REM / PH
-  max_total = 200000; // 200 REM
+  max_rate = 1100000 / (60 * update_frequency);
+  max_total = 200000;
 
   range = max_rate - min_rate;
 
@@ -203,7 +196,7 @@ updateRadiationRatePercent() {
   ratepercent.y = 350;
   ratepercent.alignX = "right";
   ratepercent.label = "";
-  //if you wanna put back in - delete this line
+
   ratepercent.alpha = 0;
 
   for(;;) {
@@ -212,11 +205,6 @@ updateRadiationRatePercent() {
     wait update_frequency;
   }
 }
-
-// set an update rate
-// add variance so it is never stuck at a single value
-// add background radiation
-// add a radiation icon
 updateRadiationDosimeter() {
   min_rate = 0.028;
   max_rate = 100;
@@ -229,11 +217,11 @@ updateRadiationDosimeter() {
   dosimeter.fontScale = 1.2;
   dosimeter.x = 676;
   dosimeter.y = 360;
-  //if you wanna put back in - delete this line
+
   dosimeter.alpha = 0;
 
   dosimeter.alignX = "right";
-  // && 1 mR/hr
+
   dosimeter.label = &"SCOUTSNIPER_MRHR";
 
   dosimeter thread updateRadiationDosimeterColor(self);
@@ -242,10 +230,8 @@ updateRadiationDosimeter() {
     if(self.radiation.rate <= min_rate) {
       variance = randomfloatrange(-0.001, 0.001);
       dosimeter setValue(min_rate + variance);
-      //println( "min_rate: ", min_rate, "variance: ", variance );
     } else if(self.radiation.rate > max_rate) {
       dosimeter setValue(max_rate);
-      // TODO: Display a warning icon that the meter is beyond it's range
     } else
       dosimeter setValue(self.radiation.rate);
 
@@ -273,7 +259,6 @@ updateRadiationDosimeterColor(player) {
         colorvalue = 1;
 
       self.color = (1, colorvalue, colorvalue);
-      //println( "colorvalue: ", colorvalue );
 
       wait update_frequency;
     }
@@ -283,15 +268,6 @@ updateRadiationDosimeterColor(player) {
     wait update_frequency;
   }
 }
-
-// this is to indicate you are near your limit of radiation and are about to pass out
-// as you near the last 33%( maybe 50% or 75% ) of your max dosage this will be visible while taking more radiation above a TBD threshold
-// doing blurring at the same time as darkening
-// should pulse, pulses should get longer closer to death and more frequent
-// ramp up intensity and frequency
-// smooth out pulsing, sin/cos?
-// ramp up the low end of alpha somehow
-// change pulse to pulse in/out, check some new values to determine what level to pulse out to
 updateRadiationBlackOut() {
   level endon("special_op_terminated");
   self endon("death");
@@ -347,8 +323,6 @@ updateRadiationBlackOut() {
       overlay fadeinBlackOut(duration, alpha, blur, self);
       overlay fadeoutBlackOut(duration, end_alpha, end_blur, self);
 
-      // wait a variable amount based on self.radiation.totalpercent, this is the space in between pulses
-      //wait 1;
       wait(fraction * 0.5);
     }
 
@@ -374,14 +348,12 @@ radiation_kill() {
   waittillframeend;
 
   assert(!isAlive(self));
-  // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
+
   quote = &"SCRIPT_RADIATION_DEATH";
   setDvar("ui_deadquote", quote);
 }
 
 fadeinBlackOut(duration, alpha, blur, player) {
-  //target_blur = 7.2 * alpha;
-
   self fadeOverTime(duration);
   self.alpha = alpha;
   player setBlurForPlayer(blur, duration);
@@ -389,8 +361,6 @@ fadeinBlackOut(duration, alpha, blur, player) {
 }
 
 fadeoutBlackOut(duration, alpha, blur, player) {
-  //target_blur = 7.2 * alpha;
-
   self fadeOverTime(duration);
   self.alpha = alpha;
   player setBlurForPlayer(blur, duration);

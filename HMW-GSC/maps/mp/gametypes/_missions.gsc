@@ -627,9 +627,7 @@ ch_kills(var_0) {
     }
   }
 
-  // TODO: do i need to check anymore?
   if(var_32 == "weapon_melee") {
-    // add a check for processing marksman challenges for melee mod kills?
     challenge = "ch_marksman_" + var_30;
 
     if(isDefined(level.challengeinfo["ch_marksman_" + var_30]) && var_1 getchallengestatus("ch_marksman_" + var_30) > 0)
@@ -1473,7 +1471,7 @@ processchallenge(baseName, progressInc, forceSetProgress) {
   if(!mayprocesschallenges()) {
     return;
   }
-  // what
+
   if(level.players.size < 2 && !getdvarint("force_ranking")) {
     return;
   }
@@ -1934,9 +1932,7 @@ monitorkillstreakprogress() {
   }
 }
 
-genericchallenge(var_0, var_1) {
-  // ?
-}
+genericchallenge(var_0, var_1) {}
 
 playerhasammo() {
   var_0 = self getweaponslistprimaries();

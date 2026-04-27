@@ -6,8 +6,6 @@
 main() {
   setDevDvar("scr_fog_disable", "0");
 
-  /* original contingency fog from julian */
-
   ent = maps\_utility::create_fog("contingency_fog_start");
   ent.startDist = 3500;
   ent.halfwayDist = 8000;
@@ -17,18 +15,15 @@ main() {
   ent.maxOpacity = 0.3;
   ent.transitionTime = 0;
 
-  /* [ contingency_forest ] from contingency_art -> setExpFog( 502.373, 923.152, 0.672458, 0.743307, 0.849584, 0.769946, 0 ); */
-
   ent = maps\_utility::create_fog("contingency_fog_forest");
-  ent.startDist = 250; //302.373;
-  ent.halfwayDist = 350; //923.152;
+  ent.startDist = 250;
+  ent.halfwayDist = 350;
   ent.red = 0.672458;
   ent.green = 0.733307;
   ent.blue = 0.849584;
-  ent.maxOpacity = 0.8; //0.769946;
+  ent.maxOpacity = 0.8;
   ent.transitionTime = 0;
 
-  // directional fog
   ent = maps\_utility::create_fog("contingency_fog_preforest");
   ent.startDist = 302.373;
   ent.halfwayDist = 923.152;
@@ -45,7 +40,6 @@ main() {
   ent.sunEndFadeAngle = 145;
   ent.normalFogScale = 0.1;
 
-  // directional fog
   ent = maps\_utility::create_fog("contingency_fog_postforest");
   ent.startDist = 302.373;
   ent.halfwayDist = 923.152;

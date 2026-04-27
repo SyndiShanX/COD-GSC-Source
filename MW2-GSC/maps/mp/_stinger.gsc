@@ -94,7 +94,7 @@ DrawStar(point) {
 LockSightTest(target) {
   eyePos = self getEye();
 
-  if(!isDefined(target)) //targets can disapear during targeting.
+  if(!isDefined(target))
     return false;
 
   passed = BulletTracePassed(eyePos, target.origin, false, target);
@@ -140,10 +140,8 @@ SoftSightTest() {
     self.stingerLostSightlineTime = getTime();
 
   timePassed = GetTime() - self.stingerLostSightlineTime;
-  //PrintLn( "Losing sight of target [", timePassed, "]..." );
 
   if(timePassed >= LOST_SIGHT_LIMIT) {
-    //PrintLn( "Lost sight of target." );
     ResetStingerLocking();
     return false;
   }
@@ -184,7 +182,7 @@ GetTargetList() {
     }
 
   } else {
-    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.owner != self))
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player))
@@ -240,8 +238,7 @@ StingerUsageLoop() {
 
     StingerDebugDraw(self.stingerTarget);
 
-    if(self.stingerStage == 0) // searching for target
-    {
+    if(self.stingerStage == 0) {
       targets = GetTargetList();
       if(targets.size == 0) {
         continue;
@@ -263,7 +260,7 @@ StingerUsageLoop() {
       if(!(self LockSightTest(sortedTargets[0]))) {
         continue;
       }
-      //PrintLn( "Found a target to lock to..." );
+
       thread LoopStingerLockingFeedback();
       self.stingerTarget = sortedTargets[0];
       self.stingerLockStartTime = GetTime();
@@ -271,10 +268,8 @@ StingerUsageLoop() {
       self.stingerLostSightlineTime = 0;
     }
 
-    if(self.stingerStage == 1) // locking on to a target
-    {
+    if(self.stingerStage == 1) {
       if(!(self StillValidStingerLock(self.stingerTarget))) {
-        //PrintLn( "Failed to get lock." );
         ResetStingerLocking();
         continue;
       }
@@ -284,14 +279,13 @@ StingerUsageLoop() {
         continue;
       }
       timePassed = getTime() - self.stingerLockStartTime;
-      //PrintLn( "Locking [", timePassed, "]..." );
+
       if(timePassed < LOCK_LENGTH) {
         continue;
       }
       self notify("stop_javelin_locking_feedback");
       thread LoopStingerLockedFeedback();
 
-      //PrintLn( "Locked!");
       if(self.stingerTarget.model == "vehicle_av8b_harrier_jet_mp" || self.stingerTarget.model == "vehicle_little_bird_armed")
         self WeaponLockFinalize(self.stingerTarget);
       else
@@ -300,14 +294,12 @@ StingerUsageLoop() {
       self.stingerStage = 2;
     }
 
-    if(self.stingerStage == 2) // target locked
-    {
+    if(self.stingerStage == 2) {
       passed = SoftSightTest();
       if(!passed) {
         continue;
       }
       if(!(self StillValidStingerLock(self.stingerTarget))) {
-        //PrintLn( "Gave up lock." );
         ResetStingerLocking();
         continue;
       }

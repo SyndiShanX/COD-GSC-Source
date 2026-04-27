@@ -9,7 +9,6 @@ setupMiniMap(material) {
     println("^1Warning: shouldn't call setupMiniMap until after _load::main()");
   }
 
-  // use 0 for no required map aspect ratio.
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
   corners = getEntArray("minimap_corner", "targetname");
@@ -26,34 +25,26 @@ setupMiniMap(material) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   west = (0 - north[1], north[0], 0);
 
-  // we need the northwest and southeast corners. all we know is that corner0 is opposite of corner1.
   if(vectordot(cornerdiff, west) > 0) {
-    // corner1 is further west than corner0
     if(vectordot(cornerdiff, north) > 0) {
-      // corner1 is northwest, corner0 is southeast
       northwest = corner1;
       southeast = corner0;
     } else {
-      // corner1 is southwest, corner0 is northeast
       side = vecscale(north, vectordot(cornerdiff, north));
       northwest = corner1 - side;
       southeast = corner0 + side;
     }
   } else {
-    // corner1 is further east than corner0
     if(vectordot(cornerdiff, north) > 0) {
-      // corner1 is northeast, corner0 is southwest
       side = vecscale(north, vectordot(cornerdiff, north));
       northwest = corner0 + side;
       southeast = corner1 - side;
     } else {
-      // corner1 is southeast, corner0 is northwest
       northwest = corner0;
       southeast = corner1;
     }
   }
 
-  // expand map area to fit required aspect ratio
   if(requiredMapAspectRatio > 0) {
     northportion = vectordot(northwest - southeast, north);
     westportion = vectordot(northwest - southeast, west);
@@ -69,7 +60,6 @@ setupMiniMap(material) {
     southeast -= addvec;
   }
 
-  // This level.map_extents stuff seems to rely on northyaw being in a specific direction. It is not correct in the general case. I would not recommend using it.
   level.map_extents = [];
   level.map_extents["top"] = northwest[1];
   level.map_extents["left"] = southeast[0];

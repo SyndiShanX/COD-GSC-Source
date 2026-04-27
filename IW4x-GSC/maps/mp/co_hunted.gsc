@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  SetDvarIfUninitialized("hunted_weather", 2); // 0 = Fog | 1 = Rain | 2 = Dynamic weather
+  SetDvarIfUninitialized("hunted_weather", 2);
 
   level.hunted_weather = GetDvarInt("hunted_weather");
 

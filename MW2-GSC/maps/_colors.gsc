@@ -6,24 +6,10 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-/*
-
-	Color coded AI travel system
-	A colorCode is a color( red, blue, yellow, cyan, green, purple or orange ) and a #.
-	When a trigger and AI and node are color grouped in Radiant, they get a unique color and #.
-	When when a color coded trigger is hit, that colorCode is "fired" and any AI that are in colorCoded mode get their goalnode set.
-
-	AI can be forced to a color generically. For example if an AI is forced to the color "red" and a trigger fires off "red15", the AI
-	will go to that node even if the AI doesn't have script_color_allies( or axis ) "red15". This is mainly for friendlies.
-
-*/
-
 init_color_grouping(nodes) {
-  // friendly spawner global stuff
   flag_init("player_looks_away_from_spawner");
   flag_init("friendly_spawner_locked");
 
-  // 	wait( 0.05 );// begone infinite hangs
   level.arrays_of_colorCoded_nodes = [];
   level.arrays_of_colorCoded_nodes["axis"] = [];
   level.arrays_of_colorCoded_nodes["allies"] = [];
@@ -36,7 +22,6 @@ init_color_grouping(nodes) {
   triggers = array_combine(triggers, getEntArray("trigger_radius", "code_classname"));
   triggers = array_combine(triggers, getEntArray("trigger_once", "code_classname"));
 
-  // tmp stuff for making colors work on team 3.
   level.color_teams = [];
   level.color_teams["allies"] = "allies";
   level.color_teams["axis"] = "axis";
@@ -45,7 +30,6 @@ init_color_grouping(nodes) {
 
   volumes = getEntArray("info_volume", "code_classname");
 
-  // go through all the nodes and if they have color codes then add them too
   foreach(node in nodes) {
     if(isDefined(node.script_color_allies))
       node add_node_to_global_arrays(node.script_color_allies, "allies");
@@ -53,7 +37,6 @@ init_color_grouping(nodes) {
       node add_node_to_global_arrays(node.script_color_axis, "axis");
   }
 
-  // volumes that have color codes wait for trigger and then fire their colorcode to control fixednodesafe volumes
   foreach(volume in volumes) {
     if(isDefined(volume.script_color_allies))
       volume add_volume_to_global_arrays(volume.script_color_allies, "allies");
@@ -62,7 +45,6 @@ init_color_grouping(nodes) {
       volume add_volume_to_global_arrays(volume.script_color_axis, "axis");
   }
 
-  // triggers that have color codes wait for trigger and then fire their colorcode
   foreach(trigger in triggers) {
     if(isDefined(trigger.script_color_allies))
       trigger thread trigger_issues_orders(trigger.script_color_allies, "allies");
@@ -73,8 +55,6 @@ init_color_grouping(nodes) {
   level.colorNodes_debug_array = [];
   level.colorNodes_debug_array["allies"] = [];
   level.colorNodes_debug_array["axis"] = [];
-
-  // 		level.colorNodes_debug_ai = [];
 
   level.color_node_type_function = [];
   add_cover_node("BAD NODE");
@@ -139,9 +119,6 @@ init_color_grouping(nodes) {
     level.currentColorForced["axis"][color] = undefined;
   }
 
-  // 	array_thread( getaiarray(), ::ai_picks_destination );
-  // 	array_thread( getspawnerarray(), ::spawner_processes_colorCoded_ai );
-
   thread player_color_node();
 
   spawners = getspawnerteamarray("allies");
@@ -153,21 +130,12 @@ init_color_grouping(nodes) {
 }
 
 convert_color_to_short_string() {
-  // shorten the forcecolors tring to a single letter
   self.script_forceColor = level.colorCheckList[self.script_forceColor];
 }
 
 ai_picks_destination(currentColorCode) {
   if(isDefined(self.script_forcecolor)) {
     convert_color_to_short_string();
-    /*
-    // axis don't do node behavior if they're forcecolor.
-    if( self get_team() == "axis" )
-    {
-    	ai_follow_the_leader_behavior();
-    	return;
-    }
-    */
 
     self.currentColorCode = currentColorCode;
     color = self.script_forcecolor;
@@ -176,34 +144,6 @@ ai_picks_destination(currentColorCode) {
     thread goto_current_ColorIndex();
     return;
   }
-
-  /*
-  colorTeam = undefined;	
-  if( issubstr( self.classname, "axis" ) || issubstr( self.classname, "enemy" ) )
-  {
-  	assertEx( !isDefined( self.script_color_allies ), "Axis at origin " + self.origin + " has script_color_allies!" );
-  	if( !isDefined( self.script_color_axis ) )
-  		return;
-  	colorTeam = self.script_color_axis;
-  }
-  	
-  if( ( issubstr( self.classname, "ally" ) ) || ( self.type == "civilian" ) )
-  {
-  	assertEx( !isDefined( self.script_color_axis ), "Ally at origin " + self.origin + " has script_color_axis!" );
-  	if( !isDefined( self.script_color_allies ) )
-  		return;
-  	colorTeam = self.script_color_allies;
-  }
-  	
-  colorCodes = strtok( colorTeam, " " );
-  for( i = 0;i < colorCodes.size;i++ )
-  {
-  	self.currentColorCode = currentColorCode;
-  	assertEx( isDefined( level.arrays_of_colorCoded_ai[ self get_team() ][ colorCodes[ i ] ] ), "AI at origin " + self.origin + " has script_color " + colorCodes[ i ] + " which does not exist on any nodes" );
-  	level.arrays_of_colorCoded_ai[ self get_team() ][ colorCodes[ i ] ] = array_add( level.arrays_of_colorCoded_ai[ self get_team() ][ colorCodes[ i ] ], self );
-  	thread goto_current_ColorIndex();
-  }
-  */
 }
 
 goto_current_ColorIndex() {
@@ -212,11 +152,11 @@ goto_current_ColorIndex() {
   }
   nodes = level.arrays_of_colorCoded_nodes[self get_team()][self.currentColorCode];
   self left_color_node();
-  // can be deleted / killed during left_color_node
+
   if(!isalive(self)) {
     return;
   }
-  // can lose color during left_color_node
+
   if(!has_color()) {
     return;
   }
@@ -243,99 +183,11 @@ goto_current_ColorIndex() {
 
 no_node_to_go_to() {
   println("AI with export " + self.export+" was told to go to color node but had no node to go to.");
-  // what to do?
-  /*
-  col = self.script_forcecolor;
-  colors = get_script_palette();
-  timer = 15 * 20;
-  for( i = 0; i < timer; i++ )
-  {
-  	print3d( self.origin + ( 0, 0, 72 ), "? ? ?", colors[ col ], 0.9, 1.2 );
-  	wait( 0.05 );
-  }
-  */
 }
-
-/*
-spawner_processes_colorCoded_ai()
-{
-	if( isDefined( self.script_forceColor ) )
-	{
-		// this is for non forcecolor AI
-		return;
-	}
-
-	self endon( "new_color_code" );
-
-	axis = issubstr( self.classname, "axis" ) || issubstr( self.classname, "enemy" );
-	
-
-	
-	if( isDefined( self.script_color_axis ) || isDefined( self.script_color_allies ) )
-	{
-		assertEx( !isDefined( self.script_forceColor ), "Can't have script_color_axis / allies and script_forceColor on the same spawner." );
-	}
-	else
-	{
-		if( isDefined( self.script_forceColor ) )
-			assertEx( !isDefined( self.script_color_axis ) && !isDefined( self.script_color_allies ), "Can't have script_color_axis / allies and script_forceColor on the spawn spawner." );
-	}
-	
-	
-	colorTeam = undefined;
-	forceTeam = undefined;
-	team = undefined;
-	
-	if( axis )
-	{
-		assertEx( !isDefined( self.script_color_allies ), "Axis spawner at origin " + self.origin + " has script_color_allies!" );
-		if( !isDefined( self.script_color_axis ) && !isDefined( self.script_forcecolor ) )
-			return;
-		colorTeam = self.script_color_axis;
-		team = "axis";
-	}
-	
-	if( ( issubstr( self.classname, "ally" ) ) || ( self.type == "civilian" ) )
-	{
-		assertEx( !isDefined( self.script_color_axis ), "Ally spawner at origin " + self.origin + " has script_color_axis!" );
-		if( !isDefined( self.script_color_allies ) && !isDefined( self.script_forcecolor ) )
-			return;
-		colorTeam = self.script_color_allies;
-		team = "allies";
-	}
-	
-	
-	if( isDefined( colorTeam ) )
-	{
-		colorCodes = strtok( colorTeam, " " );
-		for( i = 0; i < colorCodes.size; i++ )
-		{
-			if( !isDefined( level.arrays_of_colorCoded_spawners[ team ][ colorCodes[ i ] ] ) )
-				continue;
-
-			level.arrays_of_colorCoded_spawners[ team ][ colorCodes[ i ] ] = array_add( level.arrays_of_colorCoded_spawners[ team ][ colorCodes[ i ] ], self );
-		}
-	}
-
-	self endon( "death" );
-	
-	for( ;; )
-	{
-		self waittill( "spawned", spawn );
-		if( spawn_failed( spawn ) )
-			continue;
-			
-		if( isDefined( self.script_forceColor ) )
-			self.currentColorCode = level.currentColorForced[ team ][ self.script_forceColor ];
-
-		spawn thread ai_picks_destination( self.currentColorCode );
-	}
-}
-*/
 
 get_color_list() {
   colorList = [];
-  // returns an array of the acceptable color letters
+
   colorList[colorList.size] = "r";
   colorList[colorList.size] = "b";
   colorList[colorList.size] = "y";
@@ -348,7 +200,6 @@ get_color_list() {
 }
 
 array_remove_dupes(array) {
-  // for numerically indexed arrays only
   string_indexed_array = [];
 
   foreach(val in array) {
@@ -391,7 +242,6 @@ get_colorcodes_from_trigger(color_team, team) {
     usable_colorCodes[usable_colorCodes.size] = colorCode;
   }
 
-  // color codes that don't tie to existing nodes have been culled
   colorCodes = usable_colorCodes;
 
   array = [];
@@ -402,11 +252,9 @@ get_colorcodes_from_trigger(color_team, team) {
 }
 
 colorCode_is_used_in_map(team, colorCode) {
-  // does this order actually tie to existing nodes?
   if(isDefined(level.arrays_of_colorCoded_nodes[team][colorCode]))
     return true;
 
-  // what about a goalvolume
   return isDefined(level.arrays_of_colorCoded_volumes[team][colorCode]);
 }
 
@@ -420,7 +268,6 @@ trigger_issues_orders(color_team, team) {
     self waittill("trigger");
 
     if(isDefined(self.activated_color_trigger)) {
-      // activated by an activate_trigger() call, so don't bother running activate_color_trigger() again.
       self.activated_color_trigger = undefined;
       continue;
     }
@@ -446,33 +293,22 @@ get_colorcodes_and_activate_trigger(color_team, team) {
 }
 
 activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex) {
-  // give spawners activated by this trigger a chance to spawn their AI
-  // removing this because for one thing people shouldn't use compound triggers, but if they do, // the level.currentColorForced will get set, so any AI that spawn will still go to a colored node
-  // even if it happens after this
-  // 		waittillframeend;
-
-  // remove all the dead from any colors this trigger effects
-  // a trigger should never effect the same color twice
   for(i = 0; i < colorCodes.size; i++) {
     if(!isDefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]])) {
       continue;
     }
-    // remove deleted spawners
+
     level.arrays_of_colorCoded_spawners[team][colorCodes[i]] = array_removeUndefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]]);
 
-    // set the .currentColorCode on each appropriate spawner
     for(p = 0; p < level.arrays_of_colorCoded_spawners[team][colorCodes[i]].size; p++)
       level.arrays_of_colorCoded_spawners[team][colorCodes[i]][p].currentColorCode = colorCodes[i];
   }
 
   foreach(color in colors) {
-    // remove the dead from the color forced ai
     level.arrays_of_colorForced_ai[team][color] = array_removeDead(level.arrays_of_colorForced_ai[team][color]);
 
-    // set the last color forced so we can compare it with current when we tell guys to go to nodes, // so they can prefer new nodes over old ones, so they move up
     level.lastColorForced[team][color] = level.currentColorForced[team][color];
 
-    // set the destination of the color forced spawners
     level.currentColorForced[team][color] = colorCodesByColorIndex[color];
 
     color_forced = level.currentColorForced[team][color];
@@ -483,7 +319,6 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
   ai_array = [];
 
   for(i = 0; i < colorCodes.size; i++) {
-    // no need to run this again if it's still the current forced color
     if(same_color_code_as_last_time(team, colors[i])) {
       continue;
     }
@@ -500,7 +335,7 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     if(!isDefined(ai_array[colorCode])) {
       continue;
     }
-    // no need to run this again if it's still the current forced color
+
     if(same_color_code_as_last_time(team, colors[i])) {
       continue;
     }
@@ -519,7 +354,6 @@ same_color_code_as_last_time(team, color) {
 }
 
 process_cover_node_with_last_in_mind_allies(node, lastColorNumberCode) {
-  // nodes that were in the last color order go at the end
   if(issubstr(node.script_color_allies, lastColorNumberCode))
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
   else
@@ -527,7 +361,6 @@ process_cover_node_with_last_in_mind_allies(node, lastColorNumberCode) {
 }
 
 process_cover_node_with_last_in_mind_axis(node, lastColorNumberCode) {
-  // nodes that were in the last color order go at the end
   if(issubstr(node.script_color_axis, lastColorNumberCode))
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
   else
@@ -545,7 +378,6 @@ process_path_node(node, null) {
 prioritize_colorCoded_nodes(team, colorCode, color) {
   nodes = level.arrays_of_colorCoded_nodes[team][colorCode];
 
-  // need a place to store the nodes externally so we can put the pathnodes in the back
   ent = spawnStruct();
   ent.path_nodes = [];
   ent.cover_nodes_first = [];
@@ -553,7 +385,6 @@ prioritize_colorCoded_nodes(team, colorCode, color) {
 
   lastColorForced_exists = isDefined(level.lastColorForced[team][color]);
 
-  // fills ent.path_nodes or .cover_nodes depending on node type	
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
     ent[[level.color_node_type_function[node.type][lastColorForced_exists][team]]](node, level.lastColorForced[team][color]);
@@ -561,7 +392,6 @@ prioritize_colorCoded_nodes(team, colorCode, color) {
 
   ent.cover_nodes_first = array_randomize(ent.cover_nodes_first);
 
-  // these nodes are forced to be last from radiant
   lastnodes = [];
   nodes = [];
   foreach(index, node in ent.cover_nodes_first) {
@@ -578,12 +408,10 @@ prioritize_colorCoded_nodes(team, colorCode, color) {
     nodes[nodes.size] = ent.cover_nodes_last[i];
   }
 
-  // put the path nodes at the end of the array so they're less favored
   for(i = 0; i < ent.path_nodes.size; i++) {
     nodes[nodes.size] = ent.path_nodes[i];
   }
 
-  // put the forced lastnodes at the end
   foreach(node in lastnodes) {
     nodes[nodes.size] = node;
   }
@@ -600,13 +428,11 @@ get_colorCoded_volume(team, colorCode) {
 }
 
 issue_leave_node_order_to_ai_and_get_ai(colorCode, color, team) {
-  // remove dead from this specific colorCode
   level.arrays_of_colorCoded_ai[team][colorCode] = array_removeDead(level.arrays_of_colorCoded_ai[team][colorCode]);
   ai = level.arrays_of_colorCoded_ai[team][colorCode];
   ai = array_combine(ai, level.arrays_of_colorForced_ai[team][color]);
   newArray = [];
   foreach(guy in ai) {
-    // ignore AI that are already going to this colorCode
     if(isDefined(guy.currentColorCode) && guy.currentColorCode == colorCode)
       continue;
     newArray[newArray.size] = guy;
@@ -659,7 +485,7 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
   ai_count = ai.size;
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
-    // add guys to the nodes with the fewest AI on them
+
     if(isalive(node.color_user)) {
       continue;
     }
@@ -667,7 +493,6 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
     assert(isalive(closestAI));
     ai = array_remove(ai, closestAI);
 
-    // 			println( "sent ai to node" );
     closestAI take_color_node(node, colorCode, self, counter);
     counter++;
 
@@ -683,7 +508,6 @@ take_color_node(node, colorCode, trigger, counter) {
 }
 
 player_color_node() {
-  // detect if the player gets a node and set its .color_user
   for(;;) {
     playerNode = undefined;
     if(!isDefined(level.player.node)) {
@@ -695,23 +519,6 @@ player_color_node() {
 
     playerNode = level.player.node;
     playerNode.color_user = level.player;
-
-    /*
-    		if( isalive( olduser ) )
-    		{
-    			// send this guy somewhere else
-    			node = olduser get_best_available_colored_node();
-    			if( !isDefined( node ) )
-    			{
-    				olduser no_node_to_go_to();
-    			}
-    			else
-    			{
-    				olduser setgoalnode( node );
-    				olduser.goalradius = node.radius;
-    			}
-    		}
-    */
 
     for(;;) {
       if(!isDefined(level.player.node)) {
@@ -741,7 +548,6 @@ color_node_finds_a_user() {
 
 color_node_finds_user_from_colorcodes(colorCodeString, team) {
   if(isDefined(self.color_user)) {
-    // If we successfully found a guy for this node then we shouldnt go find another
     return;
   }
 
@@ -756,12 +562,10 @@ color_node_finds_user_for_colorCode(colorCode, team) {
   assertex(colorIsLegit(color), "Color " + color + " is not legit");
 
   if(!isDefined(level.currentColorForced[team][color])) {
-    // AI of this color are not assigned to a colornode currently
     return;
   }
 
   if(level.currentColorForced[team][color] != colorCode) {
-    // AI of this color are not currently assigned to our colorCode
     return;
   }
 
@@ -772,7 +576,6 @@ color_node_finds_user_for_colorCode(colorCode, team) {
       continue;
     }
 
-    // found a guy that should use this node, so assign and get out		
     guy take_color_node(self, colorCode);
     return;
   }
@@ -791,7 +594,7 @@ ai_sets_goal_with_delay(node) {
   delay = my_current_node_delays();
   if(delay) {
     self endon("stop_color_move");
-    // can get a stop color notify during the delay
+
     wait(delay);
   }
 
@@ -799,7 +602,6 @@ ai_sets_goal_with_delay(node) {
 }
 
 ai_sets_goal(node) {
-  // makes AI stop trying to run to their chain of nodes in _spawner go_to_node
   self notify("stop_going_to_node");
 
   set_goal_and_volume(node);
@@ -812,7 +614,6 @@ ai_sets_goal(node) {
 
 set_goal_and_volume(node) {
   if(isDefined(self.colornode_func)) {
-    // run optional function
     self thread[[self.colornode_func]](node);
   }
 
@@ -822,7 +623,6 @@ set_goal_and_volume(node) {
   }
 
   if(isDefined(self.colornode_setgoal_func)) {
-    // run optional function
     self thread[[self.colornode_setgoal_func]](node);
   } else
     self setgoalnode(node);
@@ -915,7 +715,6 @@ use_big_goal_until_goal_is_safe(node, volume) {
     }
   } else {
     for(;;) {
-      // 			if( !( self isKnownEnemyInRadius( node.origin, self.fixedNodeSafeRadius ) ) )
       if(!(self isKnownEnemyInRadius_tmp(node.origin, self.fixedNodeSafeRadius)))
         return;
       wait(1);
@@ -967,8 +766,6 @@ process_color_order_to_ai(node, trigger, counter) {
     trigger script_delay();
   }
 
-  // 	waitSpread( delay_size * 0.5 );// they spread out the time they leave based on how many guys it is
-
   if(!my_current_node_delays()) {
     if(isDefined(counter)) {
       wait(counter * randomfloatrange(0.2, 0.35));
@@ -977,17 +774,14 @@ process_color_order_to_ai(node, trigger, counter) {
 
   self ai_sets_goal(node);
 
-  // record the node so the guy can find out who has his node, and get that guys
   self.color_ordered_node_assignment = node;
 
   for(;;) {
     self waittill("node_taken", taker);
     if(isPlayer(taker)) {
-      // give time for the player to claim the node
       wait(0.05);
     }
 
-    // lost our node so try to get a new one
     node = get_best_available_new_colored_node();
     if(isDefined(node)) {
       assertEx(!isalive(node.color_user), "Node already had color user!");
@@ -1005,7 +799,6 @@ get_best_available_colored_node() {
   assertEx(isDefined(self.script_forceColor), "AI with export " + self.export+" lost his script_forcecolor.. somehow.");
   colorCode = level.currentColorForced[self get_team()][self.script_forceColor];
 
-  // 	nodes = level.arrays_of_colorCoded_nodes[ self get_team() ][ colorCode ];
   nodes = get_prioritized_colorCoded_nodes(self get_team(), colorCode, self.script_forcecolor);
 
   assertEx(nodes.size > 0, "Tried to make guy with export " + self.export+" go to forcecolor " + self.script_forceColor + " but there are no nodes of that color enabled");
@@ -1037,21 +830,16 @@ process_stop_short_of_node(node) {
   if(isDefined(self.node)) {
     return;
   }
-  // first check to see if we're right near it
+
   if(distance(node.origin, self.origin) < 32) {
     reached_node_but_could_not_claim_it(node);
     return;
   }
 
-  // if we're far away, maybe somebody cut us off then took our node, now we're stuck in limbo
-  // so wait one second, if we're still in stop script( ie no killanimscripts ) then push the guy
-  // off the node
-  // 	println( "waiting a second.." );
   currentTime = gettime();
   wait_for_killanimscript_or_time(1);
   newTime = gettime();
 
-  // did we break out of stop fast enough to indicate we continued moving? If not, then reclaim the node		
   if(newTime - currentTime >= 1000)
     reached_node_but_could_not_claim_it(node);
 }
@@ -1062,9 +850,6 @@ wait_for_killanimscript_or_time(timer) {
 }
 
 reached_node_but_could_not_claim_it(node) {
-  // reached our node but somebody else has it so we're gonna tell him to scram
-  // 	println( "Reached node " + node.origin );
-
   ai = getaiarray();
   guy = undefined;
   for(i = 0; i < ai.size; i++) {
@@ -1083,16 +868,8 @@ reached_node_but_could_not_claim_it(node) {
 
 decrementColorUsers(node) {
   node.color_user = self;
-  //assertEx( !isDefined( self.color_node ), "Decrement had color_node" );
+
   self.color_node = node;
-
-  /*
-  needs debugging cause it happened after a guy was attacked by a dog
-
-  assertEx( !isDefined( self.color_node_debug_val ), "Guy had double color_node_debug_val" );
-  self.color_node_debug_val = true;
-
-  */
 
   self endon("stop_color_move");
   self waittill("death");
@@ -1122,50 +899,28 @@ add_volume_to_global_arrays(colorCode_string, team) {
 
 add_node_to_global_arrays(colorCode_string, team) {
   self.color_user = undefined;
-  // 	assertEx( self.radius > 0, "Node " + self.type + " at origin " + self.origin + " does not have a radius set in Radiant." );
+
   colorCodes = strtok(colorCode_string, " ");
   colorCodes = array_remove_dupes(colorCodes);
 
   foreach(colorCode in colorCodes) {
     if(isDefined(level.arrays_of_colorCoded_nodes[team]) && isDefined(level.arrays_of_colorCoded_nodes[team][colorCode])) {
-      // array already exists so add this color coded node to that color code array.
       level.arrays_of_colorCoded_nodes[team][colorCode] = array_add(level.arrays_of_colorCoded_nodes[team][colorCode], self);
       continue;
     }
 
-    // array doesn't exist so we have to initialize all the variables related to this color coding.
     level.arrays_of_colorCoded_nodes[team][colorCode][0] = self;
     level.arrays_of_colorCoded_ai[team][colorCode] = [];
     level.arrays_of_colorCoded_spawners[team][colorCode] = [];
   }
 }
 
-/*
-nodeusers()
-{
-	array_thread( getallnodes(), ::nodeThink );
-}
-
-nodeThink()
-{
-	if( !isDefined( self.script_color_allies ) )
-		return;
-	
-	for( ;; )
-	{
-		if( isDefined( self.color_users ) )
-			print3d( self.origin + ( 0, 0, 16 ), "N - " + self.color_users, ( 1, 1, 1 ) );
-		wait( 0.05 );
-	}
-}
-*/
-
 left_color_node() {
   self.color_node_debug_val = undefined;
 
-  if(!isDefined(self.color_node))
+  if(!isDefined(self.color_node)) {
     return;
-  // 	assertEx( self.color_node.color_user == self, "Color Node user wasnt self!" );
+  }
 
   if(isDefined(self.color_node.color_user) && self.color_node.color_user == self)
     self.color_node.color_user = undefined;
@@ -1192,25 +947,6 @@ GetColorNumberArray() {
   return array;
 }
 
-/*
-removeAIFromColorNumberArray()
-{
-	colorNumberArray = GetColorNumberArray();
-	if( !isDefined( colorNumberArray ) )
-		return;
-
-	team = colorNumberArray[ "team" ];
-	colorTeam = colorNumberArray[ "colorTeam" ];
-		
-	// remove this spawner from any array it was in
-	colors = strtok( colorTeam, " " );
-	for( i = 0;i < colors.size;i++ )
-		level.arrays_of_colorCoded_ai[ team ][ colors[ i ] ] = array_remove( level.arrays_of_colorCoded_ai[ team ][ colors[ i ] ], self );
-	
-	self notify( "stop_color_move" );// clear out any existing color / number processes
-}
-*/
-
 removeSpawnerFromColorNumberArray() {
   colorNumberArray = GetColorNumberArray();
   if(!isDefined(colorNumberArray)) {
@@ -1219,7 +955,6 @@ removeSpawnerFromColorNumberArray() {
   team = colorNumberArray["team"];
   colorTeam = colorNumberArray["colorTeam"];
 
-  // remove this spawner from any array it was in
   colors = strtok(colorTeam, " ");
   colors = array_remove_dupes(colors);
 
@@ -1240,8 +975,6 @@ add_path_node(type) {
   level.color_node_type_function[type][true]["axis"] = ::process_path_node;
   level.color_node_type_function[type][false]["axis"] = ::process_path_node;
 }
-
-// ColorNode respawn system
 
 colorNode_spawn_reinforcement(classname, fromColor) {
   level endon("kill_color_replacements");
@@ -1266,16 +999,12 @@ colorNode_replace_on_death() {
   self.replace_on_death = true;
   assertEx(!isDefined(self.respawn_on_death), "Guy with export " + self.export+" tried to run respawn on death twice.");
 
-  // when a red or green guy dies, an orange guy becomes a red guy
-  // when an orange guy dies, a yellow guy becomes an orange guy	
   classname = self.classname;
   color = self.script_forceColor;
 
-  // if we spawn a new guy with spawn_reinforcement, he needs to get his color assignment before he checks his forcecolor
   waittillframeend;
 
   if(isalive(self)) {
-    // could've died in waittillframeend
     self waittill("death");
   }
 
@@ -1284,7 +1013,7 @@ colorNode_replace_on_death() {
   if(!isDefined(self.script_forceColor)) {
     return;
   }
-  // spawn a replacement yellow guy
+
   thread colorNode_spawn_reinforcement(classname, self.script_forceColor);
 
   if(isDefined(self) && isDefined(self.script_forceColor))
@@ -1293,7 +1022,6 @@ colorNode_replace_on_death() {
   if(isDefined(self) && isDefined(self.origin))
     origin = self.origin;
 
-  // a replacement has been spawned, so now promote somebody to our color
   for(;;) {
     if(get_color_from_order(color, color_order) == "none") {
       return;
@@ -1305,7 +1033,6 @@ colorNode_replace_on_death() {
       correct_colored_friendlies = remove_without_classname(correct_colored_friendlies, classname);
 
     if(!correct_colored_friendlies.size) {
-      // nobody of the correct color existed, so give them more time to spawn
       wait(2);
       continue;
     }
@@ -1313,16 +1040,13 @@ colorNode_replace_on_death() {
     correct_colored_guy = getclosest(level.player.origin, correct_colored_friendlies);
     assertEx(correct_colored_guy.script_forceColor != color, "Tried to replace a " + color + " guy with a guy of the same color!");
 
-    // have to wait until the end of the frame because the guy may have just spawned and been given his forcecolor, // and you cant give a guy forcecolor twice in one frame currently.		
     waittillframeend;
     if(!isalive(correct_colored_guy)) {
-      // if he died during the frame then try again!
       continue;
     }
 
     correct_colored_guy set_force_color(color);
 
-    // should something special happen when a guy is promoted? Like a change in threatbias group?
     if(isDefined(level.friendly_promotion_thread)) {
       correct_colored_guy[[level.friendly_promotion_thread]](color);
     }
@@ -1346,11 +1070,9 @@ get_color_from_order(color, color_order) {
 
 friendly_spawner_vision_checker() {
   level.friendly_respawn_vision_checker_thread = true;
-  // checks to see if the player is looking at the friendly spawner
 
   successes = 0;
   for(;;) {
-    //flag_waitopen( "respawn_friendlies" );
     for(;;) {
       if(!respawn_friendlies_without_vision_check()) {
         break;
@@ -1359,8 +1081,7 @@ friendly_spawner_vision_checker() {
       wait(0.05);
     }
     wait(1);
-    // friendly_respawn is disabled but if the player is far enough away and looking away
-    // from the spawner then we can still spawn from it.
+
     if(!isDefined(level.respawn_spawner_org)) {
       continue;
     }
@@ -1382,14 +1103,13 @@ friendly_spawner_vision_checker() {
     if(successes < 3) {
       continue;
     }
-    // player has been looking away for 3 seconds
+
     flag_set("player_looks_away_from_spawner");
   }
 }
 
 get_color_spawner(classname) {
   if(isDefined(classname)) {
-    // the spawner we were using was deleted
     if(!isDefined(level._color_friendly_spawners[classname])) {
       spawners = getspawnerteamarray("allies");
       foreach(spawner in spawners) {
@@ -1402,11 +1122,9 @@ get_color_spawner(classname) {
     }
   }
 
-  // if the classname is not set, just use the global respawn spawner
   if(!isDefined(classname)) {
     spawner = random(level._color_friendly_spawners);
     if(!isDefined(spawner)) {
-      // that spawner is gone, rebuild it.
       spawners = [];
       foreach(index, spawner in level._color_friendly_spawners) {
         if(isDefined(spawner))
@@ -1453,8 +1171,6 @@ spawn_hidden_reinforcement(classname, fromColor) {
       if(!isDefined(level.friendly_respawn_vision_checker_thread))
         thread friendly_spawner_vision_checker();
 
-      // have to break if respawn_friendlies gets enabled because that disables the
-      // fov check that toggles player_looks_away_from_spawner.
       for(;;) {
         wait_until_vision_check_satisfied_or_disabled();
         flag_waitopen("friendly_spawner_locked");
@@ -1469,7 +1185,7 @@ spawn_hidden_reinforcement(classname, fromColor) {
     spawner.count = 1;
     oldorg = spawner.origin;
     spawner.origin = level.respawn_spawner_org;
-    //		assertEx( spawner.spawnflags & 4, "Friendly color spawner with export " + spawner.export + " does not have UNDELETEABLE checkbox." );
+
     spawn = spawner stalingradspawn();
 
     spawner.origin = oldorg;
@@ -1483,7 +1199,6 @@ spawn_hidden_reinforcement(classname, fromColor) {
     break;
   }
 
-  // figure out which color the spawned guy should be
   for(;;) {
     if(!isDefined(fromColor)) {
       break;
@@ -1513,7 +1228,6 @@ player_sees_spawner() {
 }
 
 kill_color_replacements() {
-  // kills ALL color respawning
   flag_clear("friendly_spawner_locked");
   level notify("kill_color_replacements");
   ai = getaiarray();
@@ -1527,6 +1241,6 @@ remove_replace_on_death() {
 get_team(team) {
   if(isDefined(self.team) && !isDefined(team))
     team = self.team;
-  // tmp stuff for making colors work on team 3.
+
   return (level.color_teams[team]);
 }

@@ -101,7 +101,7 @@ onJoinedTeam() {
 
   for(;;) {
     self waittill("joined_team");
-    //self logString( "joined team: " + self.pers["team"] );
+
     self updateTeamTime();
   }
 }
@@ -215,7 +215,6 @@ updateTeamBalance() {
     if(isDefined(game["BalanceTeamsNextRound"]))
       iPrintLnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
 
-    // TODO: add or change
     level waittill("restarting");
 
     if(isDefined(game["BalanceTeamsNextRound"])) {
@@ -265,11 +264,10 @@ getTeamBalance() {
 
 balanceTeams() {
   iPrintLnBold(game["strings"]["autobalance"]);
-  //Create/Clear the team arrays
+
   AlliedPlayers = [];
   AxisPlayers = [];
 
-  // Populate the team arrays
   players = level.players;
   for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].pers["teamTime"])) {
@@ -285,7 +283,6 @@ balanceTeams() {
 
   while((AlliedPlayers.size > (AxisPlayers.size + 1)) || (AxisPlayers.size > (AlliedPlayers.size + 1))) {
     if(AlliedPlayers.size > (AxisPlayers.size + 1)) {
-      // Move the player that's been on the team the shortest ammount of time (highest teamTime value)
       for(j = 0; j < AlliedPlayers.size; j++) {
         if(isDefined(AlliedPlayers[j].dont_auto_balance)) {
           continue;
@@ -298,7 +295,6 @@ balanceTeams() {
 
       MostRecent[[level.axis]]();
     } else if(AxisPlayers.size > (AlliedPlayers.size + 1)) {
-      // Move the player that's been on the team the shortest ammount of time (highest teamTime value)
       for(j = 0; j < AxisPlayers.size; j++) {
         if(isDefined(AxisPlayers[j].dont_auto_balance)) {
           continue;
@@ -523,10 +519,6 @@ setTeamModels(team, charSet) {
 }
 
 setPlayerModels() {
-  //mptype\mptype_us_army_riot::precache();
-  //game["allies_model"]["riotshield"] = mptype\mptype_us_army_riot::main;
-  //game["axis_model"]["riotshield"] = mptype\mptype_us_army_riot::main;
-
   setTeamModels("allies", game["allies"]);
   setTeamModels("axis", game["axis"]);
 
@@ -573,7 +565,6 @@ playerModelForWeapon(weapon, secondary) {
 }
 
 CountPlayers() {
-  //chad
   players = level.players;
   allies = 0;
   axis = 0;
@@ -622,8 +613,6 @@ playerConnectedTest() {
   }
   level endon("exitLevel_called");
 
-  // every frame, do a getPlayerData on each player in level.players.
-  // this will force a script error if a player in level.players isn't connected.
   for(;;) {
     foreach(player in level.players) {
       player getPlayerData("experience");

@@ -14,13 +14,11 @@
 spawn_player_heli() {
   level.player_repulsor = Missile_CreateRepulsorEnt(level.player, 10000, 800);
 
-  // looker guy rides next to you, he looks around
   looker_guy = GetEnt("looker_guy", "script_noteworthy");
   looker_guy add_spawn_function(::looker_guy);
 
   level.heli_time_tracker = [];
 
-  //	level.player TakeAllWeapons();
   level.player.IgnoreRandomBulletDamage = true;
   player_cant_be_shot();
   level.player_heli = spawn_vehicle_from_targetname_and_drive("heli_intro_player");
@@ -33,24 +31,17 @@ spawn_player_heli() {
   level.player AllowSprint(false);
   level.player AllowJump(false);
 
-  //level.player_heli thread show_color();
   level.player_heli thread handle_landing();
 
   thread casual_heli_guy();
 
-  //	level.player_heli.custom_landing = "hover_then_land";
-
   level.player_heli thread godon();
   level.player_heli thread modify_player_heli_yaw_over_time();
 
-  //level.player_heli thread maps\_debug::drawTagForever( "tag_guy1", (1,1,0) );
-  //level.player_heli thread maps\_debug::drawTagForever( "tag_guy2", (1,1,0) );
-  //level.player_heli thread maps\_debug::drawTagForever( "tag_guy3", (1,1,0) );
-  //level.player_heli thread maps\_debug::drawTagForever( "tag_guy4", (1,1,0) );
   player_view_controller = get_player_view_controller(level.player_heli, "tag_guy2", (0, 0, -8));
 
   tag_origin = spawn_tag_origin();
-  //	tag_origin LinkTo( player_view_controller, "tag_aim", (0,0,0),(0,0,0) );
+
   tag_origin LinkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.ground_ref = tag_origin;
 
@@ -79,7 +70,7 @@ spawn_player_heli() {
   level.player PlayerLinkToDelta(player_view_controller, "TAG_aim", viewPercentFrac, -35, 40, -35, 40, true);
 
   wait(3);
-  //	level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
+
   level.player LerpViewAngleClamp(1, 0.25, 0.25, arcRight, arcLeft, arcTop, arcBottom);
 
   flag_wait("approach_dialogue");
@@ -87,19 +78,13 @@ spawn_player_heli() {
   arcLeft = 45;
   arcTop = 15;
   arcBottom = 45;
-  //	level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
+
   level.player LerpViewAngleClamp(1, 0.25, 0.25, arcRight, arcLeft, arcTop, arcBottom);
 
   flag_wait("player_goes_in_for_landing");
 
-  //level.player PlayerSetGroundReferenceEnt( undefined );
   player_view_controller ClearTargetEntity();
   player_view_controller SetTargetEntity(gulag_center);
-  //	time = 2;
-  //	level.player PlayerLinkToBlend( player_view_controller, "TAG_aim", time, time * 0.5, time * 0.5 );
-  //	wait( time );
-
-  //level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
 
   flag_wait("player_goes_in_for_landing");
 
@@ -107,44 +92,10 @@ spawn_player_heli() {
   arcLeft = 45;
   arcTop = 15;
   arcBottom = 45;
-  /*
-  time = 1;
-  level.player PlayerLinkToBlend( player_view_controller, "TAG_aim", time, time * 0.5, time * 0.5 );
-  wait( time );
-  //level.player PlayerSetGroundReferenceEnt( undefined );
-  */
+
   level.player LerpViewAngleClamp(1, 0.25, 0.25, 25, 25, 15, 25);
   wait(1);
   level.player PlayerLinkToDelta(player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true);
-
-  /*
-  if( !flag( "slamraam_gets_players_attention" ) )
-  {
-  	flag_wait( "slamraam_gets_players_attention" );
-  	wait( 2 );
-  	time = 2;
-  	level.player PlayerLinkToBlend( player_view_controller, "TAG_aim", time, time * 0.5, time * 0.5 );
-  	wait( time );
-  	arcRight = 45;
-  	arcLeft = 45;
-  	arcTop = 10;
-  	arcBottom = 10;
-  	level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
-  }
-
-  if( !flag( "heli_roller_coaster_prep" ) )
-  {
-  	flag_wait( "heli_roller_coaster_prep" );
-  	time = 1;
-  	level.player PlayerLinkToBlend( player_view_controller, "TAG_aim", time, time * 0.5, time * 0.5 );
-  	wait( time );
-  	arcRight = 45;
-  	arcLeft = 45;
-  	arcTop = 10;
-  	arcBottom = 10;
-  	level.player PlayerLinkToDelta( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
-  }
-  */
 }
 
 player_blends_to_tag_origin(tag_origin) {
@@ -154,29 +105,12 @@ player_blends_to_tag_origin(tag_origin) {
   arcBottom = 45;
 
   time = 2;
-  //level.player PlayerLinkToBlend( tag_origin, "tag_origin", time, time * 0.5, time * 0.5 );
-  //wait( time );
+
   level.player PlayerLinkToDelta(tag_origin, "tag_origin", 1, arcRight, arcLeft, arcTop, arcBottom, true);
 }
 
-/*
-recenter_player_view_target( ent )
-{
-	level notify( "stop_moving_gulag_center" );
-	gulag_center = GetEnt( "gulag_center", "targetname" );
-	time = 2;
-	waittillframeend;
-	wait( 0.05 ); // for the linked entitied to get its origin
-	gulag_center MoveTo( ent.origin, time, 0, time );
-	wait( time );
-
-	gulag_center LinkTo( ent );
-}
-*/
-
 draw_ent_line(ent) {
   for(;;) {
-    //line( ent.origin, level.player_heli.origin, (1,0,1) );
     wait(0.05);
   }
 }
@@ -184,7 +118,6 @@ draw_ent_line(ent) {
 player_view_blends_to_heli_tag() {
   ent = spawn_tag_origin();
   ent LinkTo(level.player_heli, "tag_guy2", (0, 0, -16), (0, 90, 0));
-  //	ent thread maps\_debug::drawTagForever( "tag_origin", (1,0.5,0) );
 
   level.player LerpViewAngleClamp(1, 0.25, 0.25, 25, 25, 15, 25);
   wait(1);
@@ -196,73 +129,6 @@ player_view_blends_to_heli_tag() {
   arcBottom = 45;
   level.player PlayerLinkToDelta(ent, "tag_origin", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true);
 }
-
-/*
-explosion_knocks_player_heli_out_of_control()
-{
-	level.player_heli notify( "newpath" );
-
-	ent = spawn_tag_origin();
-	ent LinkTo( level.player_heli, "tag_origin", (333,1000,-100), (0,0,0) );
-	//thread draw_ent_line( ent );
-//	level.player PlayerSetGroundReferenceEnt( ent );
-	
-//	center = GetEnt( "gulag_center", "targetname" );
-//	center.origin = center.original_org;
-	thread recenter_player_view_target( ent );
-
-	tag_origin = spawn_tag_origin();
-	tag_origin LinkTo( level.player_heli, "tag_guy2", (0,0,-16), (0,90,0) );
-	//tag_origin thread maps\_debug::drawTagForever( "tag_origin", (1,0.5,0) );
-
-	//thread player_blends_to_tag_origin( tag_origin );	
-	thread player_view_blends_to_heli_tag();
-	
-	//path_boom = GetVehicleNode( "path_boom", "targetname" );
-	//yaw = path_boom.angles[ 1 ];
-	
-	path = GetVehicleNode( "path_test", "targetname" );
-	level.player_heli Vehicle_SetSpeedImmediate( 1, 1, 1 );
-	level.player_heli ClearLookAtEnt();
-	level.player_heli ClearGoalYaw();
-	level.player_heli ClearTargetYaw();
-	level.player_heli SetGoalYaw( 199 );
-//	level.player_heli AttachPath( path );
-//	level.player_heli StartPath( path );
-//	level.player_heli ResumeSpeed( 75 );
-//	level.player_heli ClearTargetYaw();
-
-	flag_set( "stabilize" );
-	flag_set( "new_friendly_helis_spawn" );
-	delayThread( 0.25, ::flag_set, "pre_boats_attack" );
-
-	flag_wait( "player_heli_backs_up" );
-	path = GetVehicleNode( "path_boom", "targetname" );
-	level.player_heli AttachPath( path );
-	
-	level.player_heli StartPath();
-	level.player_heli ResumeSpeed( 75 );
-	
-	flag_wait( "player_heli_slowdown" );
-	level.player_heli Vehicle_SetSpeed( 2, 5, 5 );
-	level.player_heli waittill( "reached_end_node" );
-	player_landing_path = getstruct( "player_landing_path", "targetname" );
-	level.player_heli Vehicle_SetSpeed( 15, 3, 3 );
-	flag_set( "player_goes_in_for_landing" );
-	
-	// move the focal point for player and heli back to the center
-	gulag_center = GetEnt( "gulag_center", "targetname" );
-	gulag_center Unlink();
-	gulag_center MoveTo( level.gulag_center_org, 2.5, 1, 1 );
-	
-	level.player_heli thread player_heli_rotates_properly_around_gulag();
-
-	tag_origin Delete();
-	level.player_heli thread vehicle_paths( player_landing_path );
-	wait( 4 );
-	flag_set( "stop_rotating_around_gulag" );
-}
-*/
 
 spawn_friendly_helis(heli_spawners) {
   foreach(heli_spawner in heli_spawners) {
@@ -276,7 +142,7 @@ spawn_friendly_helis(heli_spawners) {
   foreach(spawner in heli_spawners) {
     heli = spawner spawn_vehicle();
     heli thread gopath();
-    //heli thread intro_heli_treadfx();
+
     friendly_helis[friendly_helis.size] = heli;
   }
 
@@ -287,9 +153,6 @@ spawn_friendly_helis(heli_spawners) {
     heli thread handle_landing();
     heli thread heli_manual_fire();
 
-    //heli SetAirResistance( 1500 );
-    //heli thread show_color();
-    //heli thread track_heli_times();
     if(!issubstr(heli.classname, "armed")) {
       continue;
     }
@@ -300,7 +163,6 @@ spawn_friendly_helis(heli_spawners) {
 
 controller_view_line() {
   for(;;) {
-    //	Line( self.origin, level.player.origin, ( 1, 0.7, 0 ) );
     wait(0.05);
   }
 }
@@ -312,10 +174,9 @@ remove_ignore_random_bd() {
 }
 
 doomed_just_doomed_think() {
-  // these guys are just.. doomed. To free up AI slots some friendlies must die.
   self endon("death");
   self waittill("unload");
-  waittillframeend; // overwrite whatever happens in the main ai gulag logic
+  waittillframeend;
   wait(60);
   self.IgnoreRandomBulletDamage = false;
   self.attackeraccuracy = 1.0;
@@ -328,75 +189,28 @@ doomed_just_doomed_think() {
   }
 }
 
-/*
-dying_buddy_makes_me_stronger()
-{
-	self endon( "stop_adding_mbs" );
-	self waittill( "death" );
-	allies = GetAIArray( "allies" );
-	if( allies.size >= 5 )
-		return;
-
-	// make 3 guys MBS	
-	for( i = 0; i < 3; i++ )
-	{
-		allies[ i ] thread magic_bullet_shield();
-	}
-
-	array_thread( allies, ::send_notify, "stop_adding_mbs" );
-}
-*/
-
 friendlies_gulag_exterior_logic(ent) {
   self endon("death");
-  self endon("new_color_being_set"); // got turned into a color guy again
+  self endon("new_color_being_set");
   self.qSetGoalPos = false;
-  //self.fixednode = 0;
+
   if(!isDefined(self.magic_bullet_shield))
     self.health = 280;
 
   self.baseaccuracy = 2;
-  //self enable_heat_behavior();
+
   self.attackeraccuracy = 0.0;
   self.IgnoreRandomBulletDamage = true;
 
   self waittill("unload");
 
   self.attackeraccuracy = 0.1;
-
-  //	thread remove_ignore_random_bd();
-  //
-  //	if( ent.leader == self )
-  //		return;
-  //
-  //	if( self == level.soap )
-  //		return;
-  //		
-  //	// let's play follow the leader
-  //	self disable_ai_color();
-  //	self.goalradius = 150;
-  //	
-  //	for( ;; )
-  //	{
-  //		wait( 1 );
-  //		if( IsAlive( ent.leader ) )
-  //		{
-  //			self SetGoalPos( ent.leader.origin );
-  //			continue;
-  //		}
-  //
-  //		// I must take on the mantle
-  //		ent.leader = self;
-  //		self enable_ai_color();
-  //		return;
-  //	}
-  //	
 }
 
 handle_landing() {
   self ent_flag_wait("prep_unload");
   flag_set("a_heli_landed");
-  waittillframeend; // wait until the vehicle script can turn the riders into real ai
+  waittillframeend;
 
   ent = spawnStruct();
   ent.leader = undefined;
@@ -412,26 +226,22 @@ handle_landing() {
 }
 
 friendlies_traverse_gulag_exterior() {
-  //flag_wait( "player_lands" );
-  //activate_trigger_with_targetname( "friendlies_arrive_at_courtyard" );
-  //flag_wait_or_timeout( "friendlies_leave_courtyard", 15 );
   level endon("player_progresses_passed_ext_area");
 
   activate_trigger_with_targetname("friendlies_leave_courtyard");
 
   for(i = 1; i <= 5; i++) {
-    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"msg = "ext_progress_" + i;
     trigger = GetEnt(msg, "targetname");
     if(flag_exist(msg))
       flag_wait(msg);
 
     volume = trigger get_color_volume_from_trigger();
-    //if( isDefined( volume ) )
+
     volume waittill_volume_dead_or_dying();
 
     if(msg == "ext_progress_5") {
       wait(0.7);
-      // The entrance is up ahead, keep moving!	
+
       level.soap thread dialogue_queue("gulag_cmt_upahead");
       wait(0.6);
     }
@@ -445,7 +255,6 @@ friendlies_traverse_showers() {
   level endon("leaving_bathroom_vol2");
 
   for(i = 1; i <= 5; i++) {
-    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"msg = "bathroom_int" + i;
     trigger = GetEnt(msg, "targetname");
     flag_wait(msg);
     volume = trigger get_color_volume_from_trigger();
@@ -496,17 +305,13 @@ heli_manual_fire() {
   self ent_flag_init("start_attack_run");
   self ent_flag_wait("start_attack_run");
   self ent_flag_set("unlock_pitch");
-  /*
-  fly_in_attack_org = GetEnt( "fly_in_attack_org", "targetname" );
-  self maps\_attack_heli::turret_minigun_fire( fly_in_attack_org, 3.5, 0 );
-  wait( 4 );
-  */
+
   self mgon();
   self ent_flag_clear("unlock_pitch");
 }
 
 casual_heli_guy() {
-  waittillframeend; // let the ai on my vehicle spawn
+  waittillframeend;
   level.player_heli thread vehicle_ai_event("idle_alert_to_casual");
 }
 
@@ -524,24 +329,12 @@ bhd_force_fire() {
   for(;;) {
     if(isDefined(delay))
       wait(delay);
-    //		
+
     self mgon();
-    /*
-    foreach ( turret in turrets )
-    {
-    	turret StartFiring();
-    }
-    */
 
     wait(duration);
     self ent_flag_clear("force_fire");
 
-    /*
-    foreach ( turret in turrets )
-    {
-    	turret StopFiring();
-    }
-    */
     self mgoff();
 
     self ent_flag_wait("force_fire");
@@ -572,7 +365,6 @@ fire_until_flag_clears() {
   AssertEx(isDefined(node.script_forcefire_duration), "forcefire duration not set on node at " + self.origin);
   self delayThread(node.script_forcefire_duration, ::ent_flag_clear, "force_fire");
 
-  // force the turrets to fire straight
   target = spawn("script_origin", (0, 0, 0));
   forward = anglesToForward(self.angles);
   up = AnglesToUp(self.angles);
@@ -631,7 +423,6 @@ pitch_modifier() {
 }
 
 remap_targets(ent_targetname, new_targetname) {
-  // remap them so the guys riding in the heli come along too
   ents = getEntArray(ent_targetname, "targetname");
   foreach(ent in ents) {
     ent.targetname = new_targetname;
@@ -672,7 +463,7 @@ modify_player_heli_yaw_over_time() {
   if(flag("player_heli_uses_modified_yaw")) {
     return;
   }
-  // the player's heli rotates slowly over time to give a better viwe
+
   yaw_progress_ent = getstruct("yaw_progress_ent", "targetname");
   yaw_progress_ent_target = getstruct(yaw_progress_ent.target, "targetname");
 
@@ -709,7 +500,7 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
   range_speed = max_speed - min_speed;
   range_units = max_units - min_units;
 
-  waittillframeend; // wait for all progressess to get set once at least
+  waittillframeend;
 
   start_dif = self.progress - level.player_heli.progress;
   start_dif *= 5;
@@ -718,7 +509,7 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
   for(;;) {
     my_progress = self.progress - start_dif;
     my_progress -= 50;
-    // dif is the difference in units of progress between player and me
+
     dif = level.player_heli.progress - my_progress;
 
     if(dif < min_units)
@@ -732,9 +523,6 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
     speed = dif * range_speed / range_units;
     speed += min_speed;
     speed += RandomFloat(4) - 2;
-    //assert( speed <= max_speed && speed >= min_speed );
-    //		our_units	x
-    //		range_units	range_speed
 
     self Vehicle_SetSpeed(speed, 15, 15);
     wait(0.05);
@@ -750,13 +538,11 @@ track_fly_in_progress(fly_in_progress, fly_in_progress_target, fly_in_progress_d
   for(;;) {
     progress_array = get_progression_between_points(self.origin, fly_in_progress.origin, fly_in_progress_target.origin);
     self.progress = progress_array["progress"];
-    //Print3d( self.origin + (0,0,32), self.progress + " " + self.start_dif, (1,0.5,1), 1, 2 );
+
     wait(0.05);
   }
 }
 
-/* -------------- TV MOVIES
----------------*/
 init_tv_movies() {
   wait(1);
   SetSavedDvar("cg_cinematicFullScreen", "0");
@@ -773,18 +559,6 @@ init_tv_movies() {
 tv_movies_stop() {
   StopCinematicInGame();
   level notify("stop_tv_loop");
-
-  /*
-  videos = getEntArray( "interactive_tv", "targetname" );
-
-  foreach ( video in videos )
-  {
-  	if( IsSubStr( video.model, "tv1_cinematic" ) )
-  	{
-  		video setModel( "com_tv1_testpattern" );
-  	}
-  }
-  */
 }
 
 armed_heli_fires_turrets() {
@@ -827,10 +601,6 @@ player_heli_rotates_properly_around_gulag() {
 
   flag_wait("f15_gulag_explosion");
 
-  //thread f15_explosion_causes_heli_to_look_away( gulag_center, follow_ent );
-  //	level notify( "stop_rotating_around_gulag_break" );
-  //thread player_heli_processess_rotation( gulag_center, follow_ent );
-
   flag_set("clear_dof");
 
   level.player.ignoreme = false;
@@ -841,7 +611,6 @@ player_heli_rotates_properly_around_gulag() {
 
   player_heli_landing_path = getstruct("player_heli_landing_path", "targetname");
 
-  // change path for explosion
   level.player_heli delayThread(1.5, ::vehicle_paths, player_heli_landing_path);
 
   wait(1.5);
@@ -854,7 +623,6 @@ player_heli_rotates_properly_around_gulag() {
   level.player_heli delayThread(2.7, ::play_sound_on_entity, "scn_gulag_heli_atlitude_alarm");
   level.player delayThread(2.7, ::play_sound_on_entity, "scn_gulag_heli_shakes");
 
-  //Earthquake( scale, duration, source, radius );
   noself_delayCall(0.5, ::Earthquake, 0.25, 2.5, level.player.origin, 5000);
   noself_delayCall(2.0, ::Earthquake, 0.35, 2.5, level.player.origin, 5000);
   noself_delayCall(2.35, ::Earthquake, 0.2, 1, level.player.origin, 5000);
@@ -887,36 +655,18 @@ player_heli_rotates_properly_around_gulag() {
 
   delayThread(3.5, ::flag_clear, "clear_dof");
 
-  /*
-  foreach ( heli in level.friendly_helis )
-  {
-  	heli ent_flag_wait( "ready_for_landing" );
-  }	
-  */
   wait(5);
   gulag_center MoveTo(org, 3, 0.5, 0.5);
   level.view_org MoveTo(org, 3, 0.5, 0.5);
 
-  //wait( 4 );
   flag_wait("stop_rotating_around_gulag");
   level notify("stop_rotating_around_gulag_break");
 
-  //	self ClearLookAtEnt();
   fly_in_lookat_ent = GetEnt("fly_in_lookat_ent", "targetname");
   self SetLookAtEnt(fly_in_lookat_ent);
 
   flag_wait("player_lands");
   flag_set("clear_dof");
-
-  //self waittill( "reached_dynamic_path_end" );
-  /*
-  wait( 9 );
-  black_overlay = create_client_overlay( "black", 0, level.player );
-  black_overlay FadeOverTime( 1 );
-  black_overlay.alpha = 1;
-  wait( 2 );
-  nextmission();
-  */
 }
 
 f15_explosion_causes_heli_to_look_away(gulag_center, follow_ent) {
@@ -929,13 +679,7 @@ f15_explosion_causes_heli_to_look_away(gulag_center, follow_ent) {
   gulag_center MoveTo(ent.origin, 2, 1, 1);
   level.view_org MoveTo(ent.origin, 2, 1, 1);
 
-  //	level notify( "stop_rotating_around_gulag_break" );
-  //	self SetLookAtEnt( ent );
-
-  //	level.player_view_controller SetTargetEntity( ent );
   wait(3);
-  //	level.player_view_controller SetTargetEntity( gulag_center );
-  //	thread player_heli_processess_rotation( gulag_center, follow_ent );
 
   gulag_center MoveTo(old_org, 2, 1, 1);
   level.view_org MoveTo(old_view_org, 2, 1, 1);
@@ -963,10 +707,8 @@ ground_ref_freaks_out() {
   tag_origin RotateTo(model.angles, 1, 0.4, 0.4);
   wait(1);
 
-  //tag_origin LinkToBlendToTag( level.player_heli, "tag_origin" );
   tag_origin RotateTo(level.player_heli.angles, 1, 0.4, 0.4);
-  //	tag_origin linktoblend
-  //	
+
   wait(1);
   tag_origin LinkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
@@ -981,13 +723,12 @@ player_heli_processess_rotation(gulag_center, follow_ent) {
     right *= dist * level.stabilize_offset * -1;
 
     follow_ent.origin = gulag_center.origin + right;
-    //Print3d( follow_ent.origin, "x", ( 1, 0, 0 ), 1, 10 );
+
     wait(0.05);
   }
 }
 
 toggle_f15_viewing(dvar_val) {
-  //hide/show models and f15 for zach
   self endon("death");
   old_dvar = -1;
   for(;;) {
@@ -1006,7 +747,7 @@ toggle_f15_viewing(dvar_val) {
 spawn_intro_plane(scene, looker) {
   spawner = GetEnt(scene + "_f15", "targetname");
   plane = spawner spawn_vehicle();
-  waittillframeend; // wait for the default vehicle stuff to happen
+  waittillframeend;
   plane.animname = "f15";
   plane assign_animtree();
   plane ent_flag_clear("contrails");
@@ -1051,16 +792,6 @@ spawn_intro_plane(scene, looker) {
   plane thread anim_loop_solo(pilot, "idle", "stop_idle", "tag_body");
   plane waittill("death");
   pilot Delete();
-
-  //	model thread toggle_f15_viewing( 1 );
-
-  /*
-  model thread maps\_f15::playConTrail();
-  afterburners = getfx( "afterburner" );
-  playFXOnTag( afterburners, model, "tag_engine_right" );
-  playFXOnTag( afterburners, model, "tag_engine_left" );	
-  */
-
 }
 
 delete_on_animend() {
@@ -1073,7 +804,6 @@ spawn_intro_missile(name) {
   org = GetEnt("plane_org", "targetname");
 
   org thread anim_single_solo(model, "intro");
-  //model maps\_debug::drawTagForever( "tag_weapon" );
 }
 
 spawn_f15s() {
@@ -1102,12 +832,7 @@ looker_guy() {
 
   if(is_default_start()) {
     self forceUseWeapon("m14_scoped_arctic", "primary");
-    /*
-    pitch_target = GetEnt( "pitch_target", "targetname" );
-    self SetLookAtEntity( level.friendly_helis[ 0 ] );
-    flag_wait( "f15s_spawn" );
-    wait( 0.5 );
-    */
+
     wait(0.05);
     ent = spawn_tag_origin();
     ent LinkTo(level.looker_f15, "tag_origin", (0, 0, 250), (0, 0, 0));
@@ -1116,14 +841,7 @@ looker_guy() {
     ent Delete();
     self SetLookAtEntity(level.looker_f15);
     level.looker_f15 waittill("death");
-    /*
-    flag_wait( "aa_hit" );
-    wait( 1 );
-    self SetLookAtEntity( level.player );
-    wait( 0.8 );
-    self SetLookAtEntity( pitch_target );
-    flag_wait( "approach_dialogue" );
-    */
+
     self SetLookAtEntity();
   } else
   if(level.start_point == "approach") {
@@ -1135,9 +853,6 @@ looker_guy() {
   gulag_center_above.origin = gulag_center.origin + (0, 0, 1000);
   level.gulag_center_above = gulag_center_above;
   self SetLookAtEntity(gulag_center_above);
-
-  //	gulag_center_above.origin = level.player.origin;
-  //	gulag_center_above LinkTo( level.player );
 
   soap_looks_at_targets();
   wait(1.1);
@@ -1151,9 +866,6 @@ looker_guy() {
   self SetLookAtEntity(level.plane_buzzes_gulag);
   wait(3);
   self SetLookAtEntity();
-  //	self SetLookAtEntity( level.looker_f15 );
-  //	wait( 4 );
-  //	self StopLookAt();
 }
 
 soap_looks_at_targets() {
@@ -1177,8 +889,7 @@ looker_attacks_ground() {
       self SetLookAtEntity(self.enemy);
       self Shoot();
       wait(0.05);
-      //			if( IsAlive( self.enemy ) )
-      //				self.enemy Kill();
+
       wait(RandomFloatRange(2.5, 3));
     }
     wait(0.1);
@@ -1221,12 +932,9 @@ slamraam_tracks_player() {
     forward2 = anglesToForward((0, current_yaw, 0));
     dot = VectorDot(forward1, forward2);
 
-    //yaw_dif = abs( current_yaw - yaw );
     yaw_dif = 0;
     if(dot < 1)
       yaw_dif = ACos(dot);
-
-    //println( "yaw " + yaw + " new_yaw " + current_yaw + " dif " + yaw_dif );
 
     time = yaw_dif * 0.025;
     if(time > 0.05 || first_rotate) {
@@ -1263,7 +971,7 @@ slamraam_attacks(fire_delay, between_sets_delay) {
   self.all_missiles_model LinkTo(launcher);
 
   self endon("lose_operation");
-  // wait until the turret is on target
+
   for(;;) {
     if(within_fov_2d(launcher.origin, launcher.angles, level.player.origin, 0.96)) {
       break;
@@ -1272,11 +980,9 @@ slamraam_attacks(fire_delay, between_sets_delay) {
   }
 
   if(isDefined(fire_delay)) {
-    // fire_delay exists so the turret can track before it fires
     wait(fire_delay);
   }
 
-  // spawn single missiles for each missile spot
   foreach(index, tag in tags) {
     model = spawn("script_model", (0, 0, 0));
     model.origin = launcher GetTagOrigin(tag);
@@ -1286,13 +992,8 @@ slamraam_attacks(fire_delay, between_sets_delay) {
     missiles[index] = model;
   }
 
-  //	if( flag( "gulag_perimeter" ) )
-  //		thread heli_player_dies();
-
-  // delete the model that has all 8 missiles in it
   self.all_missiles_model Delete();
 
-  // launch missiles from all the spots
   for(index = 0; index < 4; index++) {
     tag = tags[index];
     launcher slamraam_fires_missile(tag, missiles[index]);
@@ -1301,7 +1002,6 @@ slamraam_attacks(fire_delay, between_sets_delay) {
   if(isDefined(between_sets_delay))
     wait(between_sets_delay);
 
-  // launch missiles from all the spots
   for(index = 4; index < tags.size; index++) {
     tag = tags[index];
     launcher slamraam_fires_missile(tag, missiles[index]);
@@ -1319,10 +1019,6 @@ slamraam_fires_missile(tag, missile) {
 }
 
 tarp_spawner_think() {
-  // each spawner runs this func and they're stored in a global array. The first one early outs, the second executes
-  // the scripted sequence. If you were to spawn two sets at once, you could get some badness.
-
-  // the animname is on the spawner
   self.animname = self.script_parameters;
   AssertEx(isDefined(self.animname), "No animname?! But why.");
 
@@ -1331,19 +1027,16 @@ tarp_spawner_think() {
     ent = get_target_ent();
     org = ent.origin;
   }
-  // the tarp ents are in a prefab and the geo is locked so just find the nearest
+
   tarp_ents = getEntArray("tarp_pull_org", "targetname");
   node = getClosest(org, tarp_ents, 1000);
   AssertEx(isDefined(node), "Tarp guy couldn't find a tarp to pull within 1000 units of his .target origin.");
   node.guys[node.guys.size] = self;
 
-  // when they spawn they get put into node.guys
   if(node.guys.size == 1) {
-    // early out if I'm the first guy
     return;
   }
 
-  // badness!
   AssertEx(node.guys.size == 2, "Tried to make more than 2 guys go to one tarp, BZZZZT!");
 
   tarp_guys = node.guys;
@@ -1417,7 +1110,6 @@ tarp_guys_idle_and_recover(node, tarp_guys) {
       guy SetGoalPos(guy.origin);
 
     if(guy.animname == "operator") {
-      // operator has an idle
       idler = guy;
     }
   }
@@ -1455,40 +1147,15 @@ rotate_until_f15_dies(model) {
     wait(0.05);
   }
   wait(10);
-  /*	
-  	//model SetAnim( level.rotate_anims_vehicle[ "x_left" ], 1, 10, 0.7 );
-  	wait( 0.5 );
-  	model SetAnim( level.rotate_anims_vehicle[ "x_right" ], 1, 10, 0.2 );
-  	wait( 1.5 );
-  	
-  	for( i = 0; i < rotate_frames; i++ )
-  	{
-  		sinner += 18;
-  		//rotate_rate = min_rotate + ( i * rotate_range / rotate_frames );
-  		rotate_rate = base + Sin( sinner ) * 0.1;
-  		base += 0.005;
-  		//println( rotate_rate );
-  		model SetAnim( level.rotate_anims_vehicle[ "x_right" ], 1, 10, rotate_rate );
-  	
-  		wait( 0.05 );
-  	}
-  */
-  /*
-  i					0
-  rotate_frames		rotate_range
-  */
-
 }
 
 gulag_top_drones() {
-  //if( 1 ) return;
   level.total_drones = 0;
-  // drones that swarm the top of the gulag
+
   level.droneCallbackThread = ::drone_think;
 
   flag_wait("approach_dialogue");
 
-  // we'll do something better with the gates.
   gulag_top_gates = getEntArray("gulag_top_gate", "targetname");
   array_call(gulag_top_gates, ::NotSolid);
   array_call(gulag_top_gates, ::Hide);
@@ -1498,9 +1165,6 @@ gulag_top_drones() {
 
   gulag_top_drones = getEntArray("gulag_top_drone", "targetname");
   array_thread(gulag_top_drones, ::gulag_top_drone_think);
-
-  //	gulag_drone_triggers = getEntArray( "gulag_drone_trigger", "targetname" );
-  //	array_thread( gulag_drone_triggers, ::gulag_drone_trigger_think );
 }
 
 gulag_drone_trigger_think() {
@@ -1604,7 +1268,6 @@ blow_up_first_tower_soon() {
 }
 
 remove_rpgs() {
-  // when the first heli lands, all the AI have to reload (so RPG guys lose their rpg).
   flag_wait("remove_rpgs");
 
   tower_height_ent = GetEnt("tower_height_ent", "targetname");
@@ -1614,7 +1277,6 @@ remove_rpgs() {
     guy.bulletsinclip = 0;
     guy.a.rockets = 0;
 
-    // kill left over tower guys
     if(guy.origin[2] > tower_height_ent.origin[2])
       guy Kill();
   }
@@ -1663,14 +1325,12 @@ gulag_cellblocks_friendlies_go_to_control_room() {
   friendly_respawn_trigger = GetEnt("friendly_reinforcement_trigger", "targetname");
   friendly_respawn_trigger thread reinforcement_friendlies();
 
-  // friendlies run into the control room at specific positions from a chain of nodes
   nodes = GetNodeChain("control_room_chain", "targetname");
 
   level.control_room_nodes = nodes;
 
   ai = GetAIArray("allies");
 
-  // some of the friendlies will stay at their node
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
     node.filled = false;
@@ -1751,7 +1411,6 @@ gulag_cellblocks_friendlies_go_to_goalvolume(goalvolNum) {
 reinforcement_friendlies() {
   self waittill("trigger");
 
-  // these guys fill in for any dead
   flag_assert("control_room");
 
   ai = GetAIArray("allies");
@@ -1824,7 +1483,7 @@ setup_celldoor(targetname) {
     light = closest_lights[i];
     AssertEx(isDefined(light), "Ran out of lights!");
     door.lights[door.lights.size] = light;
-    light.targetname = undefined; // so future doors don't grab this one
+    light.targetname = undefined;
   }
 
   door thread door_logic();
@@ -1862,27 +1521,6 @@ ghost_tries_to_open_door() {
   wait(2.9);
   thread play_sound_in_space("scn_gulag_jail_door_unlock", loc);
   thread play_sound_in_space("scn_gulag_armory_door_open", loc);
-
-  /*
-  ents = getEntArray( "cell_door_weapons", "targetname" );
-  loc = ents[0].origin;
-  	
-  thread play_sound_in_space( "scn_gulag_jail_door_buzzer", loc );
-  wait( 1.2 );
-  thread play_sound_in_space( "scn_gulag_jail_door_unlock", loc );
-  wait( 2 );
-  thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-
-  wait( 2 );
-
-  thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-  wait( 0.5 );
-  thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-  	
-  wait( 1 );
-
-  thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-  */
 }
 
 armory_attack_sounds(dist) {
@@ -1908,7 +1546,6 @@ door_logic() {
   move_in = 0.5;
   move_out = 0.2;
 
-  // closed
   if(self.lights.size) {
     dlight_origin = (0, 0, 0);
     foreach(light in self.lights) {
@@ -1937,13 +1574,9 @@ door_logic() {
   buzz_sound_org = self.origin + right * 128 + forward * -64 + (0, 0, 32);
 
   for(;;) {
-    // "open_cell_door_weapons"flag_wait("open_" + self.targetname);
-
-    //		Print3d( buzz_sound_org, "buzz", (1,1,0), 1, 1, 40 );
     thread play_sound_in_space("scn_gulag_jail_door_buzzer", buzz_sound_org);
     delayThread(1.2, ::play_sound_in_space, "scn_gulag_jail_door_unlock", self.origin);
 
-    // opened
     foreach(light in self.lights) {
       light setModel("com_emergencylightcase_blue");
       fx = get_global_fx("light_blue_steady_FX_origin");
@@ -1956,15 +1589,15 @@ door_logic() {
 
     if(self.targetname == "cell_door_weapons") {
       self playSound("scn_gulag_armory_door_open");
-      // special slow open
+
       self MoveTo(self.start_pos + forward * 16, movetime * 0.25, move_in, 0);
 
       wait(movetime * 0.25);
       self playSound("door_bounce");
-      exploder("door_dies"); // sparks
-      delayThread(1, ::exploder, "door_dies"); // sparks
-      delayThread(1.3, ::exploder, "door_dies"); // sparks
-      delayThread(2, ::exploder, "door_dies"); // sparks
+      exploder("door_dies");
+      delayThread(1, ::exploder, "door_dies");
+      delayThread(1.3, ::exploder, "door_dies");
+      delayThread(2, ::exploder, "door_dies");
       foreach(light in self.lights) {
         light setModel("com_emergencylightcase_blue_off");
         light.looper Delete();
@@ -1977,9 +1610,9 @@ door_logic() {
         light thread blue_light_flickers();
       }
 
-      delayThread(1, ::exploder, "door_dies"); // sparks
-      delayThread(1.3, ::exploder, "door_dies"); // sparks
-      delayThread(2, ::exploder, "door_dies"); // sparks
+      delayThread(1, ::exploder, "door_dies");
+      delayThread(1.3, ::exploder, "door_dies");
+      delayThread(2, ::exploder, "door_dies");
 
       level waittill("force_door_open");
 
@@ -1994,12 +1627,12 @@ door_logic() {
       }
 
       self playSound("scn_gulag_armory_door_open2");
-      // special slow open
+
       self MoveTo(self.start_pos + forward * 48, movetime * 0.75, move_in, 0);
       wait(movetime * 0.75);
     } else {
       self playSound("scn_gulag_jail_door_open");
-      // normal
+
       self MoveTo(self.start_pos + forward * 64, movetime, move_in, move_out);
       wait(movetime);
     }
@@ -2010,7 +1643,6 @@ door_logic() {
 
     flag_waitopen("open_" + self.targetname);
 
-    // closed
     foreach(light in self.lights) {
       light setModel("com_emergencylightcase");
       fx = get_global_fx("light_red_steady_FX_origin");
@@ -2070,7 +1702,7 @@ blue_light_flickers() {
 
 friendly_cellblock_respawner() {
   level endon("stop_cellblock_respawn");
-  // respawns buddies
+
   level.cellblock_spawner = GetEnt("friendly_cellblock_spawner", "targetname");
 
   for(;;) {
@@ -2088,9 +1720,6 @@ friendly_cellblock_respawner() {
       spawner = level.cellblock_spawner;
       spawner.count = 1;
       spawner spawn_ai();
-
-      // makes them go to the current friendlygoal
-      //[[ level.friendly_respawn_start_func ]]();
     }
   }
 }
@@ -2139,7 +1768,6 @@ get_cellblock_friendlies() {
 
 friendlies_ignore_grenades_for_awhile() {
   ai = get_cellblock_friendlies();
-  //	array_thread( ai, ::go_to_rappel_room );
 
   foreach(guy in ai) {
     guy.grenadeawareness = 0;
@@ -2153,15 +1781,6 @@ friendlies_ignore_grenades_for_awhile() {
 }
 
 go_to_rappel_room() {
-  /*		
-  if( !isDefined( self.magic_bullet_shield ) )
-  {
-  	self.health = 1;
-  	self.threatbias = 500;
-  	self.attackeraccuracy = 5;
-  }
-  */
-
   rappel_room_node = GetNode("rappel_room_node", "targetname");
   self ClearGoalVolume();
   self SetGoalNode(rappel_room_node);
@@ -2183,7 +1802,6 @@ kill_all_axis() {
 hero_rappels() {
   ent = GetEnt("rappel_ent_int", "targetname");
 
-  //guy thread animscripts\riotshield\riotshield::riotshield_turn_into_regular_ai();
   self.fixednode = true;
 
   clear_rioter();
@@ -2194,9 +1812,6 @@ hero_rappels() {
   self delayThread(10.6, ::clear_rappelling);
   ent thread anim_single_solo(level.cellblock_rope_ai, "rappel_start");
   ent anim_generic(self, "rappel_start");
-
-  //	ent thread anim_generic( self, "rappel_end" );
-  //	ent thread anim_single_solo( level.cellblock_rope_ai, "rappel_end" );
 
   self set_force_color("green");
   self enable_ai_color();
@@ -2216,14 +1831,13 @@ cellblock_rappel_player() {
   flag_set("cellblock_player_starts_rappel");
 
   wait(1.8);
-  // Captain MacTavish, last floor clear. We'll link up with you at the bottom.		
+
   radio_dialogue("gulag_tf1_captainlastfloor");
 }
 
 player_rappels(ent) {
   trigger_ent = GetEnt("rappel_trigger", "script_noteworthy");
 
-  // Press and hold^3 && 1 ^7to rappel.
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
   flag_wait(ent.flag_name);
   trigger_ent Delete();
@@ -2235,9 +1849,8 @@ player_rappels(ent) {
   if(isDefined(ent.rope_obj))
     ent.rope_obj Delete();
 
-  // player rappels
   player_rig = spawn_anim_model("player_rappel", ent.rope_ent.origin);
-  //	player_rig Hide();
+
   scene = [];
   scene[0] = ent.rope;
   scene[1] = player_rig;
@@ -2251,12 +1864,10 @@ player_rappels(ent) {
 
   player_rig delayCall(ent.unlink_time, ::Delete);
 
-  //	if( level.player GetCurrentWeapon() == "riotshield" )
-  //		level.player delayThread( ent.unlink_time - 0.30, ::switch_to_other_primary );
   level.player allowcrouch(false);
   level.player allowprone(false);
   level.player DisableWeapons();
-  //level.player TakeWeapon( "riotshield" );
+
   level.player PlayerLinkToBlend(player_rig, "tag_player", 0.5, 0.2, 0.2);
 }
 
@@ -2319,8 +1930,6 @@ gulag_player_loadout() {
 }
 
 bhd_set_off_nearby_exploders(exploders, org) {
-  //Print3d( org, "x", (1,0,0), 1, 1.5, 60 );
-
   ents = get_array_of_closest(org, exploders, undefined, 3, 750);
   foreach(ent in ents) {
     ent thread activate_individual_exploder();
@@ -2329,9 +1938,7 @@ bhd_set_off_nearby_exploders(exploders, org) {
 }
 
 overlook_spawner_think() {
-  // no endon death cause we return if dead
   thread overlook_gets_more_threat_for_bhd();
-  // if the player shoots one of these guys, then start the heli automatically
 
   self.IgnoreRandomBulletDamage = true;
   self.suppressionwait = 0;
@@ -2349,8 +1956,6 @@ overlook_spawner_think() {
     if(!isalive(self))
       return;
   }
-
-  //	wait( 5 );
 }
 
 overlook_gets_more_threat_for_bhd() {
@@ -2404,7 +2009,6 @@ bhd_heli_rotates_left_and_right() {
   if(isDefined(lowest_dot_guy)) {
     foreach(turret in self.mgturret) {
       turret SetTargetEntity(lowest_dot_guy);
-      //Line( turret.origin, lowest_dot_guy.origin, (1,0,1), 1, 1, 250 );
     }
   }
 
@@ -2465,7 +2069,7 @@ bhd_physics_explosion_from_turrets() {
   self endon("death");
   for(;;) {
     level waittill("physics_jump", origin);
-    //vec = randomvector( 8 );
+
     vec = (30, -30, 160);
     PhysicsJolt(origin, 256, 256, vec);
     wait(1.0);
@@ -2488,16 +2092,14 @@ set_off_overlook_grenades() {
       if(struct.time > GetTime()) {
         continue;
       }
-      //dont fire this one again for 300ms
+
       struct.time = GetTime() + 250;
       vec = randomvector(8);
       z = abs(vec[2]) * -1;
       vec = (vec[0], vec[1], z);
-      //MagicGrenadeManual( "fraggrenade", struct.origin, vec, 0.2 );
+
       playFX(fx, struct.origin);
       play_sound_in_space("grenade_explode_wood", struct.origin);
-
-      //PhysicsExplosionSphere( struct.origin, 350, 350, 3 );
 
       level notify("physics_jump", struct.origin);
       wait(0.25);
@@ -2508,12 +2110,11 @@ set_off_overlook_grenades() {
 bhd_turrets_kill_overlook_guys(heli, odd) {
   self SetMode("manual");
 
-  // for offset based on the way the enemies are killed, so we kill 2 out of 3 frames instead of 1 out of every 3.
   if(odd)
     wait(0.05);
 
   targ_ent = spawn("script_origin", (0, 0, 0));
-  targ_ent.script_ghettotag = true; // keep these even through world cleanse
+  targ_ent.script_ghettotag = true;
   self StartFiring();
   exploders = get_exploder_array("110");
   self SetTargetEntity(targ_ent);
@@ -2546,29 +2147,24 @@ bhd_turrets_kill_overlook_guys(heli, odd) {
   targ_ent Delete();
   self StopFiring();
   self notify("stop_setting_off_exploders");
-  //	self SetMode( "auto_nonai" );
 }
 
 bhd_dialogue_and_m203_hint() {
   kill_deathflag("first_second_story_guys_dead", 4);
 
-  // Two-One is in position for gun run.	
   radio_dialogue("gulag_lbp1_gunrun");
 
-  // Copy Two-One, lasing target on the second floor!	
   level.soap dialogue_queue("gulag_cmt_lasingtarget");
 
-  // Two-One copies, got a tally on 6 tangos, inbound hot.	
   radio_dialogue("gulag_lbp1_gotatally");
 
-  // wait till the player shoots these guys again
   flag_clear("player_shot_at_m203_guys");
   flag_wait("player_shot_at_m203_guys");
 
   if(should_break_m203_hint()) {
     return;
   }
-  // Roach! Hostiles on the third floor, use your M203!	
+
   level.soap dialogue_queue("gulag_cmt_usem203");
 
   display_hint_timeout("grenade_launcher", 5);
@@ -2581,7 +2177,6 @@ turret_rains_down_shells() {
   self.last_casing_impact_sound_time = 0;
   for(;;) {
     if(self IsFiringTurret()) {
-      // spinup
       wait(2);
 
       for(;;) {
@@ -2594,7 +2189,6 @@ turret_rains_down_shells() {
         wait(0.05);
       }
 
-      // spin
       wait(0.75);
       continue;
     }
@@ -2604,13 +2198,11 @@ turret_rains_down_shells() {
 }
 
 shell_casing_impact_sound() {
-  // dont play the sound TOO often
   if(GetTime() < self.last_casing_impact_sound_time + 2500) {
     return;
   }
   self.last_casing_impact_sound_time = GetTime();
 
-  // let's call this a quick trace to the ground
   org = self.origin;
   org = set_z(org, level.soap.origin[2]);
 
@@ -2626,14 +2218,12 @@ bhd_heli_flies_off() {
 
 bhd_heli_think() {
   array_thread(self.mgturret, ::turret_rains_down_shells);
-  //self thread bhd_force_fire();
-  //self ent_flag_wait( "force_fire" );
+
   flag_wait("bhd_attack");
 
   ai = level.deathflags["overlook_cleared"]["ai"];
   guy = undefined;
 
-  // get the first thing it finds in the array
   foreach(guy in ai) {
     break;
   }
@@ -2667,23 +2257,6 @@ bhd_heli_think() {
     if(guy IsTouching(bhd_kill_trigger))
       guy Kill();
   }
-
-  /*
-  if( 1 ) return;
-
-  maps\_spawner::killspawner( 0 );
-  exploder( 110 );
-  wait( 1 );
-
-  // failsafe
-  bhd_kill_trigger = GetEnt( "bhd_kill_trigger", "targetname" );
-  ai = GetAIArray( "axis" );
-  foreach ( guy in ai )
-  {
-  	if( guy IsTouching( bhd_kill_trigger ) )
-  		guy Kill();
-  }
-  */
 }
 
 test_bhd() {
@@ -2693,9 +2266,7 @@ test_bhd() {
   activate_trigger("bhd_spawner_trigger", "script_noteworthy");
 }
 
-iprint(msg) {
-  //iprintlnbold( msg );
-}
+iprint(msg) {}
 
 pow_org() {
   return GetEnt("find_pow_org", "targetname").origin;
@@ -2718,7 +2289,6 @@ breach_rescue_org() {
 }
 
 evac_obj_org() {
-  //	return (0,0,0);
   return getstruct("false_objective", "script_noteworthy").origin + (0, 0, 180);
 }
 
@@ -2758,13 +2328,12 @@ riot_shield_guy() {
   self endon("death");
   self riotshield_sprint_on();
   wait(RandomFloatRange(1.8, 2.2));
-  //	self waittill( "goal" );
+
   self riotshield_sprint_off();
 }
 
 guy_gets_riotshield() {
   if(self.primaryweapon != "mp5" || self.weapon != self.primaryweapon) {
-    // looks bad with bigger weapons
     self forceUseWeapon("mp5", "primary");
   }
 
@@ -2787,7 +2356,7 @@ guy_gets_riotshield() {
 }
 
 friendly_hole_rappel() {
-  flag_init("hole_rappel_failsafe"); // needed in case ai hits the wrong trigger
+  flag_init("hole_rappel_failsafe");
   ai_hole_rappel_triggers = getEntArray("ai_hole_rappel_trigger", "targetname");
   array_thread(ai_hole_rappel_triggers, ::ai_hole_rappel_trigger_think);
   flag_wait("hole_rappel_failsafe");
@@ -2809,7 +2378,7 @@ friendly_hole_rappel() {
   if(!isalive(guy)) {
     return;
   }
-  // force this guy to rappel
+
   ai_hole_rappel_triggers[0] notify("trigger", guy);
 }
 
@@ -2830,7 +2399,7 @@ ai_hole_rappel_trigger_think() {
   flag_set("hole_rappel_failsafe");
   guy.hole_rappel = true;
 
-  self Delete(); // failsafe will search for triggers that still remain
+  self Delete();
 
   guy endon("death");
 
@@ -2859,26 +2428,12 @@ bathroom_spawn_rappel_rope() {
   level.bathroom_rope_ai = [];
   level.bathroom_rope_ai[1] = spawn_anim_model("ai_rope1");
   level.bathroom_rope_ai[2] = spawn_anim_model("ai_rope2");
-  /*
-  level.bathroom_rope_player = spawn_anim_model( "player_rope" );
-  level.bathroom_rope_player_obj = spawn_anim_model( "player_rope_obj" );
-  level.bathroom_rope_player_obj Hide();
-  */
 
   ent = GetEnt("bathroom_rappel_2", "targetname");
   ent anim_first_frame_solo(level.bathroom_rope_ai2, "hole_rappel_start");
 
   ent = GetEnt("bathroom_rappel_1", "targetname");
   ent anim_first_frame_solo(level.bathroom_rope_ai1, "hole_rappel_start");
-
-  /*
-  	ent = GetEnt( "bathroom_rappel_player", "targetname" );
-  	player_ropes = [];
-  	player_ropes[ 0 ] = level.bathroom_rope_player;
-  	player_ropes[ 1 ] = level.bathroom_rope_player_obj;
-
-  	ent anim_first_frame( player_ropes, "hole_rappel_start" );
-  	*/
 }
 
 bathroom_rappel_player() {
@@ -2904,9 +2459,8 @@ price_spawn_think() {
   self waittill_any_timeout(5, "death");
 
   if(!isalive(self)) {
-    // the pow was killed
     setDvar("ui_deadquote", "@GULAG_PRICE_KILLED");
-    //maps\_utility::missionFailedWrapper();
+
     return;
   }
 
@@ -2943,19 +2497,17 @@ ending_rope() {
   rope glow();
 
   trigger_ent = getEntWithFlag("player_ropes");
-  // Press and hold^3 && 1 ^7to rappel.
+
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
 
   escape_lift = spawn_vehicle_from_targetname("escape_lift");
   escape_lift_ent = spawn_tag_origin();
   escape_lift_ent LinkTo(escape_lift, "tag_origin", (0, 0, 0), (0, 180, 0));
-  //	level.player PlayerLinkToBlend( escape_lift_ent, "tag_origin", 0.5, 0.2, 0.2 );
 
   look_ent = GetEnt("evac_obj_org", "targetname");
 
   player_view_controller = get_player_view_controller(escape_lift, "tag_origin", (0, 0, -16));
   player_view_controller SetTargetEntity(look_ent);
-  //thread liner( player_view_controller, look_ent );
 
   viewPercentFrac = 1.0;
   arcRight = 10;
@@ -2968,8 +2520,6 @@ ending_rope() {
 
   escape_lift StartPath();
   level.player PlayerLinkToBlend(escape_lift_ent, "tag_origin", 2, 1.5, 0);
-  //	( player_view_controller, "TAG_aim", viewPercentFrac, arcRight, arcLeft, arcTop, arcBottom, true );
-  //level.player SetPlayerAngles( ( 5, -180, 0 ) );
 }
 
 gulag_become_soap() {
@@ -2986,13 +2536,10 @@ going_in_hot() {
   foreach(turret in self.mgturret) {
     turret SetMode("manual");
     turret SetTargetEntity(fly_in_attack_org);
-    //turret StartFiring();
   }
 
   flag_wait("going_in_hot");
   wait(4.85);
-
-  //mgon();
 
   foreach(turret in self.mgturret) {
     turret SetTargetEntity(fly_in_attack_org);
@@ -3016,7 +2563,6 @@ handle_gulag_world_fx() {
   volumes = [];
   fx_collection = [];
 
-  // this one is first
   endlog_volume = GetEnt("gulag_endlog_destructibles", "script_noteworthy");
   endlog_volume_name = endlog_volume.targetname;
   volumes[endlog_volume_name] = endlog_volume;
@@ -3066,15 +2612,6 @@ handle_gulag_world_fx() {
   }
 
   wait(0.05);
-  /*	
-  	foreach ( index, collection in fx_collection )
-  	{
-  		foreach ( fx in collection )
-  		{
-  			Print3d( fx.v["origin"], index, (1,1,1), 1, 1, 30 );
-  		}
-  	}
-  */
 
   thread handle_exterior_fx(fx_collection["gulag_exterior_fx_vol"], fx_collection["outside"]);
   thread handle_interior_fx(fx_collection["gulag_interior_fx_vol"]);
@@ -3082,8 +2619,6 @@ handle_gulag_world_fx() {
 
   flag_wait("player_lands");
   array_thread(fx_collection["outside"], ::pauseEffect);
-
-  //	disable_exterior_fx
 }
 
 cleanse_the_world() {
@@ -3112,7 +2647,7 @@ cleanse_the_world() {
     if(IsAlive(ent)) {
       continue;
     }
-    // keep these
+
     if(isDefined(ent.script_ghettotag)) {
       continue;
     }
@@ -3121,7 +2656,6 @@ cleanse_the_world() {
     }
     if(!isDefined(ent.classname)) {
       if(!ent IsTouching(volume)) {
-        // looper that should be off anyway
         ent Delete();
       }
 
@@ -3135,7 +2669,6 @@ cleanse_the_world() {
       continue;
     }
     if(ent needs_ent_testing()) {
-      // triggers must have their center in the vol to survive
       org = spawn("script_origin", ent.origin);
       if(!org IsTouching(volume)) {
         ent Delete();
@@ -3149,7 +2682,6 @@ cleanse_the_world() {
       ent Delete();
   }
 
-  // update bcs array
   locs = [];
   foreach(loc in anim.bcs_locations) {
     if(!isDefined(loc))
@@ -3173,13 +2705,11 @@ handle_exterior_fx(array, outside_array) {
     if(first) {
       first = false;
       foreach(fx in outside_array) {
-        // stop the clouds forever
         fx pauseEffect();
       }
 
       outside_array = [];
 
-      // cleanse the outside world of non visual entities
       cleanse_the_world();
     }
 
@@ -3274,14 +2804,12 @@ dont_use_the_door() {
   for(;;) {
     flag_wait("player_tries_door_that_cant_open");
 
-    // Roach - not the door! Plant the breaching charge on the wall over here!	
     level.soap dialogue_queue("gulag_cmt_hurryup");
 
     wait(6);
 
     flag_wait("player_tries_door_that_cant_open");
 
-    // Roach - forget that door! Plant the breaching charge on the wall, we're taking a shortcut!	
     level.soap dialogue_queue("gulag_cmt_forgetthatdoor");
 
     wait(6);
@@ -3299,7 +2827,6 @@ wait_until_player_breaches_bathroom() {
   thread dont_use_the_door();
 
   for(;;) {
-    // Roach - plant the breaching charge on the wall!	
     level.soap dialogue_queue("gulag_cmt_plantbreach");
 
     wait(20);
@@ -3307,8 +2834,6 @@ wait_until_player_breaches_bathroom() {
 }
 
 cellblock_spawn_lots_of_grenades() {
-  //	armory_grenade_spawners = getStructArray("armory_grenade_spawner", "targetname" );
-  //	array_thread( armory_grenade_spawners, ::armory_grenade_think );
   ai = GetAIArray("axis");
   array_thread(ai, ::throw_crazy_grenades);
 }
@@ -3320,7 +2845,7 @@ throw_crazy_grenades() {
     anim.grenadeTimers["AI_armory_grenade"] = 0;
     level.player.grenadeTimers["armory_grenade"] = 0;
     self.grenadeammo = 5;
-    //anim.throwGrenadeAtPlayerASAP = true;
+
     self ThrowGrenadeAtPlayerASAP();
     wait(0.05);
   }
@@ -3388,21 +2913,19 @@ use_choke_points() {
 
 armory_laser_ambush() {
   self endon("death");
-  //enable_dontevershoot();
 
   level.armory_laser_index += 0.35;
   if(level.armory_laser_index > 1.5)
     level.armory_laser_index = 1.5;
   wait(level.armory_laser_index);
-  thread enable_lasers(); // maps\_spawner::ai_lasers();
+  thread enable_lasers();
   wait(RandomFloatRange(2, 2.5));
-  //disable_dontevershoot();
 }
 
 enable_lasers() {
-  if(self.health <= 1) // dying soon
+  if(self.health <= 1) {
     return;
-
+  }
   self.combatMode = "no_cover";
   self.has_no_ir = undefined;
   self.custom_laser_function = ::updateLaserStatus_forced;
@@ -3410,9 +2933,9 @@ enable_lasers() {
 }
 
 disable_lasers() {
-  if(self.health <= 1) // dying soon
+  if(self.health <= 1) {
     return;
-
+  }
   self.combatMode = "cover";
   self.has_no_ir = true;
   self.custom_laser_function = undefined;
@@ -3420,7 +2943,6 @@ disable_lasers() {
 }
 
 updateLaserStatus_forced() {
-  // we have no weapon so there's no laser to turn off or on
   if(self.a.weaponPos["right"] == "none") {
     return;
   }
@@ -3446,7 +2968,6 @@ flee_armory_think() {
 }
 
 ambush_behavior() {
-  // drone?
   if(!issentient(self)) {
     return;
   }
@@ -3470,7 +2991,7 @@ ending_flee_spawner_think() {
 ending_flee_behavior() {
   self endon("death");
   level waittill("ending_flee_death");
-  waittillframeend; // in case multiple die during the frame
+  waittillframeend;
 
   flee_chance = 1 - level.ending_flee_guys / level.ending_flee_max;
   flee_chance += 0.2;
@@ -3499,7 +3020,6 @@ nodes_are_periodically_bad() {
     timer = RandomFloatRange(3, 7);
     wait(timer);
     BadPlace_Cylinder("", 2, self.origin, 16, 64, "axis");
-    //BadPlace_Cylinder( name, duration, origin, radius, height, team, team... );
   }
 }
 
@@ -3525,7 +3045,7 @@ bathroom_periodic_autosave() {
 
 riot_escort_spawner() {
   self endon("death");
-  waittillframeend; // want to be sure the guy we're supposed to escort could have spawned
+  waittillframeend;
   self waittill("goal");
   ents = getEntArray(self.script_linkto, "script_linkname");
   escort = undefined;
@@ -3569,7 +3089,6 @@ bathroom_second_wave() {
 
 debug_center(ent) {
   for(;;) {
-    //line( level.player.origin, ent.origin );
     wait(0.05);
   }
 }
@@ -3578,7 +3097,6 @@ gulag_center_shifts_as_we_move_in() {
   level endon("stop_moving_gulag_center");
   waits = [];
 
-  //0 heli swerves out of the way of SAM site.
   array = [];
   array["time"] = 2;
   array["in"] = 0.2;
@@ -3586,7 +3104,6 @@ gulag_center_shifts_as_we_move_in() {
   array["delay"] = 7;
   waits[waits.size] = array;
 
-  //1 strafe the SAM as we climb above gulag
   array = [];
   array["pre_delay"] = 4;
   array["time"] = 11;
@@ -3594,7 +3111,6 @@ gulag_center_shifts_as_we_move_in() {
   array["out"] = 0.2;
   waits[waits.size] = array;
 
-  //2 As we reach the edge of the parapat, swivel the target to the center
   array = [];
   array["flag"] = "heli_rotates_to_face_center";
   array["time"] = 4.8;
@@ -3602,9 +3118,8 @@ gulag_center_shifts_as_we_move_in() {
   array["out"] = 2;
   waits[waits.size] = array;
 
-  //3 As we go to the target, do a bit of a rollercoaster tilt
   array = [];
-  //	array[ "pre_delay" ] = 4.7;
+
   array["flag"] = "heli_roller_coaster";
   array["time"] = 1.8;
   array["in"] = array["time"] - 0.5;
@@ -3612,7 +3127,6 @@ gulag_center_shifts_as_we_move_in() {
   array["delay"] = array["time"];
   waits[waits.size] = array;
 
-  //4 the view shifts to the 3 final SAMs we need to take out.
   array = [];
   array["time"] = 2.6;
   array["in"] = array["time"] * 0.5;
@@ -3620,7 +3134,6 @@ gulag_center_shifts_as_we_move_in() {
   array["delay"] = array["time"];
   waits[waits.size] = array;
 
-  //5 a little extra view shift to the left
   array = [];
   array["time"] = 1.5;
   array["in"] = array["time"] * 0.5;
@@ -3628,7 +3141,6 @@ gulag_center_shifts_as_we_move_in() {
   array["delay"] = array["time"];
   waits[waits.size] = array;
 
-  //6
   array = [];
   array["pre_delay"] = 3;
   array["flag"] = "slamraam_killed_0";
@@ -3637,7 +3149,6 @@ gulag_center_shifts_as_we_move_in() {
   array["out"] = array["time"] * 0.25;
   waits[waits.size] = array;
 
-  //7
   array = [];
   array["flag"] = "slamraam_killed_1";
   array["time"] = 3;
@@ -3645,7 +3156,6 @@ gulag_center_shifts_as_we_move_in() {
   array["out"] = array["time"] * 0.25;
   waits[waits.size] = array;
 
-  //8 // out to sea
   array = [];
   array["flag"] = "slamraam_killed_2";
   array["time"] = 3;
@@ -3653,50 +3163,11 @@ gulag_center_shifts_as_we_move_in() {
   array["out"] = array["time"] * 0.25;
   waits[waits.size] = array;
 
-  /*
-  	//9 heli spins out of control
-  	array = [];
-  	array[ "flag" ] = "player_heli_backs_up";
-  	array[ "time" ] = 1.8;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
-
-  	//10 heli spins out of control
-  	array = [];
-  	array[ "time" ] = 1.8;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
-  	
-  	//11 back to above center
-  	array = [];
-  //	array[ "pre_delay" ] = 5;
-  	array[ "time" ] = 4;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ] + 2;
-  	waits[ waits.size ] = array;
-  	
-  	//12 to center
-  	array = [];
-  	array[ "time" ] = 4;
-  	array[ "in" ] = array[ "time" ] * 0.25;
-  	array[ "out" ] = array[ "time" ] * 0.25;
-  	array[ "delay" ] = array[ "time" ];
-  	waits[ waits.size ] = array;
-  	*/
-
   flag_wait("slamraam_gets_players_attention");
 
   center = GetEnt("gulag_center", "targetname");
   ent = center;
 
-  //thread debug_center( center );
-
-  // for starts
   if(!isDefined(level.player_view_controller)) {
     return;
   }
@@ -3749,7 +3220,6 @@ ent_debug_print(index) {
   self notify("new_debug_print");
   self endon("new_debug_print");
   for(;;) {
-    //Print3d( self.origin, index, (0,1,1), 1, 6 );
     wait(0.05);
   }
 }
@@ -3760,13 +3230,11 @@ second_tower_stabilize_dialogue() {
   level endon("second_tower_clear");
 
   wait(2.5);
-  // Stabilize.	
+
   radio_dialogue("gulag_rpt_stabilize2");
 
-  // Ready.	
   radio_dialogue("gulag_lbp1_ready");
 
-  // On target.	
   radio_dialogue("gulag_wrm_ontarget");
 }
 
@@ -3785,13 +3253,11 @@ should_break_m203_hint(nothing) {
   player = get_player_from_self();
   Assert(isPlayer(player));
 
-  // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();
   prefix = GetSubStr(weapon, 0, 4);
   if(prefix == "m203")
     return true;
 
-  // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     ammo = player GetWeaponAmmoClip(weapon);
@@ -3805,10 +3271,8 @@ should_break_m203_hint(nothing) {
 }
 
 prepare_perimeter_slamraam_attack() {
-  // spawn the perimeter AI and start up the tarp stuff, and spawn the friendly helicopters that fly by
-
   flag_wait("new_friendly_helis_spawn");
-  //wait( 1 );
+
   level.slamraam_missile = "slamraam_missile";
   thread perimeter_slamraams_defend();
   delayThread(7, ::spawn_perimeter_tarp_guys);
@@ -3823,7 +3287,7 @@ prepare_perimeter_slamraam_attack() {
       if(org.script_parameters != spawner.script_parameters) {
         continue;
       }
-      // move the helis to the origins
+
       remap_targets(spawner.target, org.targetname);
       spawner.target = org.targetname;
       spawner.origin = org.origin;
@@ -3853,10 +3317,8 @@ slamraam_gets_pulled_by_nearby_AI(delay) {
   self.operational = true;
   wait(delay);
 
-  // these guys only spawn once as a big group
   perimeter_guys = array_removeDead(level.perimeter_tarp_guys);
   foreach(index, guy in perimeter_guys) {
-    // this guy is already pulling a tarp?
     if(isDefined(guy.pulling_tarp))
       perimeter_guys[index] = undefined;
   }
@@ -3894,7 +3356,6 @@ all_missiles_model_can_die(slamraam) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
     if(IsAlive(attacker) && isPlayer(attacker)) {
       if(self.health <= 0) {
-        // slamraam_killed_0 slamraam_killed_1 slamraam_killed_2
         flag_set("slamraam_killed_" + slamraam.script_parameters);
         slamraam.operational = false;
         playFX(getfx("slamraam_explosion"), slamraam.origin);
@@ -3915,17 +3376,14 @@ slamraam_tarp_falls() {
   progress = 0.5;
   animation = self.tarp getanim("pulldown");
   if(isDefined(self.tarp.tarp_fell)) {
-    // has it already passed the progress point?
     if(self.tarp GetAnimTime(animation) >= progress)
       return;
   } else {
-    // tarp hasn't fallen so pull it down
     self.tarp.tarp_fell = true;
     self thread anim_single_solo(self.tarp, "pulldown");
     wait(0.05);
   }
 
-  // jump it to 50% mark cause it starts late waiting for guys to give it a tug
   self.tarp SetAnimTime(animation, progress);
 }
 
@@ -3954,8 +3412,7 @@ gulag_boats() {
   wait(1);
 
   wait(1.15);
-  exploder("93"); // building gets hit
-  //flag_set( "heli_evades_boat_attack" );
+  exploder("93");
 
   flag_wait("player_lands");
   array_call(later_boats, ::Delete);
@@ -3988,7 +3445,6 @@ make_heli_smoke() {
   fx = getfx("smoke_swirl_runner_dual");
 
   playFXOnTag(fx, self, "tag_origin");
-  //Print3d( self.origin, "X", (1,0,0), 1, 5, 100 );
 }
 
 f15_missile_spawner_think() {
@@ -4015,7 +3471,7 @@ f15_gulag_attack() {
   plane SetAnim(animation, 1, 0, 1);
 
   level waittill("f15_smoke");
-  //plane thread make_heli_smoke();
+
   level waittill("afterburner");
   plane thread f15_gets_afterburner();
 }
@@ -4025,7 +3481,6 @@ f15_gets_afterburner() {
 }
 
 helis_respawn_to_land() {
-  // don't need these extra guys for the actual landing
   extra_flyin_spawners = getEntArray("extra_flyin_spawner", "script_noteworthy");
   array_thread(extra_flyin_spawners, ::self_delete);
 
@@ -4041,13 +3496,10 @@ helis_respawn_to_land() {
       if(org.script_parameters != spawner.script_parameters) {
         continue;
       }
-      // move the helis to the origins
+
       remap_targets(spawner.target, org.targetname);
       parm = org.script_parameters;
-      /*
-      if( parm == "purple" || parm == "green" )
-      	org.speed = 40;
-      */
+
       spawner.target = org.targetname;
       spawner.origin = org.origin;
       spawner.angles = org.angles;
@@ -4078,10 +3530,10 @@ control_room_destructibles_turn_on() {
 damage_targ_trigger_think() {
   for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
-    if(!isalive(attacker))
+    if(!isalive(attacker)) {
       continue;
-    //		if( attacker != level.player )
-    //			continue;
+    }
+
     if(Distance(attacker.origin, self.origin) > 940)
       continue;
     break;
@@ -4142,9 +3594,6 @@ friendlies_ditch_riot_shields_trigger_think() {
     stopped[other.unique_id] = true;
     other.grenadeawareness = 0.9;
     other delayThread(4, ::disable_dontevershoot);
-
-    //other.ignoreall = false;
-    //other delayThread( 3, animscripts\riotshield\riotshield::riotshield_turn_into_regular_ai );
   }
 }
 
@@ -4191,17 +3640,12 @@ drop_riotshield() {
 }
 
 soap_is_angry_about_attack() {
-  // Quarterback, what the hell was that? Call off the barrage!	
-  // Sheppard, what the hell was that? Get those ships to cease fire!	
   level.soap dialogue_queue("gulag_cmt_calloff");
 
   wait(1);
-  // We’re working on it. The Russian Navy isn't exactly cooperating right now.Keep moving. Out.	
-  // I'm working on it buddy. The Navy isn't in a talking mood right now. Standby.	
+
   radio_dialogue("gulag_hqr_working");
 
-  // Bravo Six - they've agreed to stop firing for now. Keep going, I’ll keep you posted. Out.	
-  // Quarterback to Task Force - Admiral Tarkovsky's a real loose cannon, but he’s agreed to stop firing for now. Keep going, we’ll keep you posted. Out.	
   delayThread(3, ::radio_dialogue, "gulag_hqr_loosecannon");
 }
 
@@ -4216,7 +3660,6 @@ gulag_cellblocks_spotlight() {
   turret SetTargetEntity(ent);
 
   fx = getfx("_attack_heli_spotlight");
-  //playFXOnTag( fx, turret, "tag_aim" );
 
   fx_tag = "tag_light";
   add_wait(::flag_wait, "spotlight_turns_on");
@@ -4238,7 +3681,6 @@ gulag_spotlight_searches(ent, turret) {
   ent.origin = turret.origin + forward * 500 + (0, 0, -500);
 
   units_per_second = 200;
-  //ent thread print3dforever();
 
   for(;;) {
     ai = GetAIArray("axis");
@@ -4328,7 +3770,6 @@ insure_player_has_enemies_to_fight_for_door_sequence() {
 }
 
 enemies_retreat_and_delete() {
-  // spotlight points at this flag
   ent = getEntWithFlag("player_approaches_armory");
   level.spotlight_override_pos = ent.origin;
 
@@ -4338,7 +3779,6 @@ enemies_retreat_and_delete() {
 }
 
 lower_cellblock_enemies_retreat_and_delete() {
-  // spotlight points at this flag again!
   ent = getEntWithFlag("player_approaches_armory");
   level.spotlight_override_pos = ent.origin;
 
@@ -4403,11 +3843,9 @@ high_attacker_accuracy() {
 modulate_player_attacker_accuracy_for_armory() {
   change_accuracy_while_in_armory();
 
-  // reset attackeraccuracy
   maps\_gameskill::updateAllDifficulty();
   anim.shootEnemyWrapper_func = animscripts\utility::shootEnemyWrapper_shootNotify;
 
-  // reset the accuracy of the AI
   axis = GetAIArray("axis");
   foreach(guy in axis) {
     guy.baseaccuracy = 1;
@@ -4427,12 +3865,10 @@ change_accuracy_while_in_armory() {
     }
     anim.shootEnemyWrapper_func = ::shootWrapper_playerRiotshield;
 
-    //		set_player_attacker_accuracy( 0 );
     level.player waittill("weapon_change");
 
     AssertEx(level.player GetCurrentWeapon() != "riotshield", "Changed from riotshield to riotshield??");
 
-    // reset attackeraccuracy
     maps\_gameskill::updateAllDifficulty();
     anim.shootEnemyWrapper_func = animscripts\utility::shootEnemyWrapper_shootNotify;
   }
@@ -4458,10 +3894,8 @@ shootWrapper_playerRiotshield() {
     vec_forward = anglesToForward(vec);
 
     if(VectorDot(forward, vec_forward) >= dot_limit) {
-      // guys in front of you get full accuracy but hit the shield
       self.baseaccuracy = 5000;
     } else {
-      // guys on the side miss
       self.baseaccuracy = 0;
     }
   }
@@ -4492,11 +3926,10 @@ recover_from_riotshield() {
 hallway_hider_spawner() {
   self endon("death");
   wait(0.05);
-  self.baseaccuracy = 5000; // they dont miss much
+  self.baseaccuracy = 5000;
 
   level.hallway_hiders[level.hallway_hiders.size] = self;
 
-  // these guys hide!
   radius = self.radius;
   self.hallway_hider = true;
   self.goalradius = 16;
@@ -4504,7 +3937,6 @@ hallway_hider_spawner() {
   self.combatMode = "ambush";
   self SetGoalPos(self.origin);
   self ClearGoalVolume();
-  //	Print3d( self.origin, "x", (1,0,0), 1, 1, 5000 );
 
   self.saw_player = false;
   self.stays_alive = false;
@@ -4516,7 +3948,7 @@ hallway_hider_spawner() {
   if(!self.saw_player && !self.stays_alive)
     self Delete();
 
-  self.goalradius = radius; // move to node
+  self.goalradius = radius;
 }
 
 wait_for_player_sweeps_cells() {
@@ -4542,7 +3974,6 @@ friendlies_move_up_through_cells() {
 
   friendlies_check_each_cell();
 
-  // get guys off the cellblock node chain
   level notify("stop_following_node_chain");
 
   allies = GetAIArray("allies");
@@ -4569,8 +4000,6 @@ friendlies_check_each_cell() {
   struct thread constantly_activates_trigger();
 
   for(;;) {
-    // struct activates the trigger constantly so that friendlies fill in the holes
-
     flag_wait("nvg_moveup" + struct.index);
     struct.index++;
     if(struct.index > 4) {
@@ -4613,9 +4042,6 @@ friendly_clears_cell_trigger() {
     return;
   level endon("nvg_leave_cellarea");
 
-  // friendly touches a trigger then clears the bad guy in the volume and yells "clear" then sets a flag to move up
-  // if multiple triggers share the same flag, both must be cleared before moving up
-
   myFlag = self.script_flag;
   if(!isDefined(level.nvg_hall_flags[myFlag]))
     level.nvg_hall_flags[myFlag] = 0;
@@ -4634,7 +4060,6 @@ friendly_clears_cell_trigger() {
     }
 
     if(isDefined(other.node) && isDefined(other.node.radius)) {
-      // low visibility so we dont get shot by the wrong guys
       other.maxvisibledist = other.node.radius;
     }
 
@@ -4646,13 +4071,13 @@ friendly_clears_cell_trigger() {
   }
 
   clear_callouts = [];
-  // This one's empty.		
+
   clear_callouts[clear_callouts.size] = "gulag_tf2_onesempty";
-  // This one's empty too.		
+
   clear_callouts[clear_callouts.size] = "gulag_tf3_emptytoo";
-  // Clear.		
+
   clear_callouts[clear_callouts.size] = "gulag_tf2_clear";
-  // Clear.		
+
   clear_callouts[clear_callouts.size] = "gulag_tf3_clear";
 
   callout = clear_callouts[level.clear_callout_index];
@@ -4667,10 +4092,7 @@ friendly_clears_cell_trigger() {
 
   thread radio_dialogue(callout);
 
-  // other says "CLEAR!"level.nvg_hall_flags[myFlag]--;
   if(!level.nvg_hall_flags[myFlag]) {
-    // if both sides are cleared, we can move up now
-    // nvg_moveup1, nvg_moveup2, nvg_moveup3, nvg_moveup4
     flag_set(myFlag);
   }
 }
@@ -4680,7 +4102,6 @@ nvg_hallway_fight() {
 
   level.hallway_hiders = [];
 
-  // these guys hide, some get deleted when its time for the player to sweep the cells.
   array_spawn_function_noteworthy("hallway_hider_spawner", ::hallway_hider_spawner);
   array_spawn_noteworthy("hallway_hider_spawner");
 
@@ -4691,7 +4112,6 @@ nvg_hallway_fight() {
     vol waittill_volume_dead_or_dying();
     wait(2.8);
 
-    // make sure no bad guys have yelled recently
     wait_for_buffer_time_to_pass(anim.lastTeamSpeakTime["axis"], 2.5);
 
     hostiles = vol get_ai_touching_volume("axis");
@@ -4716,17 +4136,14 @@ nvg_hallway_fight() {
   }
 
   is_remaining_guys = remaining_guys.size;
-  // remaining guys rush
+
   waittill_dead_or_dying(remaining_guys, 0, 6);
 
   if(is_remaining_guys) {
     wait(1.4);
   }
 
-  // Of the 5 possible cell guys, remove a few based on difficulty
   hider_count = 1;
-  //	if( level.gameskill >= 2 )
-  //		hider_count++;
 
   level.hallway_hiders = array_randomize(level.hallway_hiders);
 
@@ -4734,7 +4151,7 @@ nvg_hallway_fight() {
     if(!isalive(guy)) {
       continue;
     }
-    // some guys are randomly assigned to stay alive
+
     guy.stays_alive = true;
     hider_count--;
     if(!hider_count) {
@@ -4744,7 +4161,6 @@ nvg_hallway_fight() {
 
   delaythread(1.5, ::flag_set, "lets_sweep_the_nvg_cells");
   if(!flag("nvg_moveup1")) {
-    // Roach, check the cells for stragglers.	
     level.soap thread dialogue_queue("gulag_cmt_stragglers");
   }
 }
@@ -4769,10 +4185,9 @@ riot_shield_detector_think() {
   }
 
   wait(2.5);
-  // Heavy assault troops up ahead! Don't attack them head on! Move quickly and hit them from the side!	
+
   level.soap dialogue_queue("gulag_cmt_hitfromside");
 
-  // Cook your grenades to detonate behind them!	
   level.soap dialogue_queue("gulag_cmt_cookgrenades");
 }
 
@@ -4798,8 +4213,6 @@ gulag_landing_update_entities() {
   delayThread(6, ::player_gets_hud_back);
 
   delayThread(6, ::player_can_be_shot);
-
-  //delaythread( 6, ::kill_all_axis_now );
 
   landing_death_volume = GetEnt("landing_death_volume", "targetname");
   ai = GetAIArray("axis");
@@ -4864,7 +4277,6 @@ price_breach_dof() {
   dof_see_soap["farEnd"] = 180;
   dof_see_soap["farBlur"] = 4;
 
-  // control our blend with this origin;
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = (65, 0, 0);
   ent thread set_fov_from_x();
@@ -4882,31 +4294,22 @@ price_breach_dof() {
 
   wait_for_buffer_time_to_pass(queue_time, 5.85 + offset);
 
-  //	ent delayCall( 1.4, ::moveto, (45,0,0), 0.8, 0.4, 0.4 );
   noself_delayCall(2.0, ::setsaveddvar, "g_friendlynamedist", 196);
-
-  //	blend = level create_blend( ::blend_fov, 65, 45 );
-  //	blend.time = 1;
 
   blend_dof(dof_see_gun, dof_see_price, 1.0);
 
   wait_for_buffer_time_to_pass(queue_time, 7.5 + offset + 2);
 
-  //	thread blend_fov_out();
-  //	ent delayCall( 1.4, ::moveto, (58,0,0), 1.8, 0.8, 0.8 );
-
   ent thread ent_blends_out_fov();
 
   blend_dof(dof_see_price, dof_see_soap, 2);
 
-  //	wait_for_buffer_time_to_pass( queue_time, 12 + offset);
   flag_wait("background_explosion");
 
   blend_dof(dof_see_soap, start, 1);
 }
 
 ent_blends_out_fov() {
-  //wait( 5.5 );
   level waittill("background_explosion");
   wait(0.15);
   blend_out_fov_time = 0.6;
@@ -4924,20 +4327,6 @@ set_fov_from_x() {
     wait(0.05);
   }
 }
-
-/*
-blend_fov_out()
-{
-	//wait( 2 );
-	blend = level create_blend( ::blend_fov, 45, 65 );
-	blend.time = 2;
-}
-
-blend_fov( progress, start, end )
-{
-	SetSavedDvar( "cg_fov", start * ( 1 - progress ) + end * progress );
-}
-*/
 
 sewer_slide_trigger() {
   targets = getStructArray(self.target, "targetname");
@@ -4967,7 +4356,7 @@ guy_does_sewer_slide(org) {
 
 ai_field_blocker() {
   flag_wait("a_heli_landed");
-  // makes the friendlies go the right way
+
   ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
   ai_field_blocker Solid();
   ai_field_blocker DisconnectPaths();
@@ -5013,7 +4402,7 @@ laser_jitters() {
 
 draw_laser_line(dest) {
   self endon("stop_line");
-  //self LaserOn();
+
   self LaserForceOn();
 
   wait(0.05);
@@ -5021,7 +4410,6 @@ draw_laser_line(dest) {
   wait(0.05);
   for(;;) {
     self RotateTo(VectorToAngles(dest.origin - self.origin), 0.1);
-    //		Line( self.origin, dest.origin, (0,1,0) );
 
     wait(0.1);
   }
@@ -5061,16 +4449,9 @@ intro_heli_treadfx() {
   fx = level._vehicle_effect[self.vehicletype]["water"];
 
   for(;;) {
-    //angles = self.angles;
-    //angles = ( 0, angles[1], 0 );
-    //forward = anglesToForward( self.angles );
-    //up = AnglesToUp( self.angles );
-    //start = self.origin + forward * 500 + up * -500;
-    //end = self.origin + forward * 7000 + up * -3000;
     start = self.origin + (0, 0, -500);
     end = self.origin + (0, 0, -5000);
     trace = bulletTrace(start, end, false, self);
-    //Line( start, end );
 
     pos = trace["position"];
 
@@ -5097,7 +4478,7 @@ printpos(surface, pos, start_time) {
 }
 
 add_waterfx(time, pos) {
-  time -= 1.3; // 5 seconds early
+  time -= 1.3;
 
   time *= 1000;
 
@@ -5106,7 +4487,6 @@ add_waterfx(time, pos) {
     wait(remainder * 0.001);
 
   playFX(level.special_water_fx, pos);
-  //Print3d( pos, "x", (1,0,0), 1, 5, 100 );
 }
 
 draw_waterfx() {
@@ -5135,7 +4515,7 @@ part_blows_up_early() {
     if(!isDefined(self.destructible_parts))
       return;
     self DoDamage(500, self.origin, level.player);
-    //self.destructible_parts[0].v["health"] = 1;
+
     waittillframeend;
     count++;
     if(count >= 10) {
@@ -5228,13 +4608,12 @@ die_fast_to_explosive_damage(damage, attacker, direction_vec, point, type, model
 }
 
 bloody_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  angles = direction_vec; // + ( 0, 180, 0 );
+  angles = direction_vec;
   forward = anglesToForward(angles);
   up = AnglesToUp(angles);
 
   fx = getfx("headshot");
   playFX(fx, point, forward, up);
-  //	Line( point, point + forward * 500, (1,0,0), 1, 1, 5000 );
 }
 
 friendlies_traverse_bathroom() {
@@ -5261,7 +4640,6 @@ friendlies_traverse_bathroom() {
       if(volume array_member_touches(axis)) {
         if(volume.script_index != level.old_bathroom_index) {
           level.old_bathroom_index = volume.script_index;
-          //iprintlnbold( "^3Moved to index " + volume.script_index );
         }
         volume.friendly_trigger activate_trigger();
         wait(1);
@@ -5282,8 +4660,6 @@ array_member_touches(array) {
     if(member doingLongDeath())
       continue;
     if(parms) {
-      // if the volume has parameters, the member's classname must have the parms as a substr
-      // so we'll flee riotshield guys
       if(!issubstr(member.classname, self.script_parameters))
         continue;
     }
@@ -5294,11 +4670,8 @@ array_member_touches(array) {
 }
 
 enemies_attack_friendlies_in_armory_first_wave() {
-  // spotlight points at baddies again
   level.spotlight_override_pos = undefined;
 
-  // bunch of baddies spawn in and laser you
-  //activate_trigger_with_targetname( "cellblock_armory_attackers_trigger" );
   array_spawn_targetname("cellblock_armory_first_wave_spawner");
 
   wait(3);
@@ -5354,9 +4727,9 @@ wait_until_first_wave_ends() {
 
 player_riotshield_nag() {
   lines = [];
-  // Roach, pick up one of those riot shields!		
+
   lines[lines.size] = "gulag_cmt_pickupone";
-  // Grab a riot shield!	
+
   lines[lines.size] = "gulag_cmt_riotshield";
 
   index = 0;
@@ -5386,9 +4759,9 @@ armory_roach_is_down() {
   }
   level.soap endon("death");
   lines = [];
-  // roach!!
+
   lines[0] = "gulag_cmt_roach";
-  // roach is down!
+
   lines[1] = "gulag_cmt_roachisdown";
 
   level.player waittill("death");
@@ -5550,11 +4923,9 @@ remove_nearby_origins(orgs, min_dist) {
 }
 
 pa_system() {
-  // run before _load so minimum extra entity overhead in case of entity limit
   orgs = [];
   speakers = getEntArray("pa_speaker", "targetname");
 
-  // only need the origin, so delete the ent
   foreach(speaker in speakers) {
     orgs[orgs.size] = speaker.origin;
     speaker delete();
@@ -5569,66 +4940,64 @@ pa_system() {
     case "approach":
       flag_wait("stab1_clear");
       wait(3);
-      // Attention! The west tower has been destroyed! Enemy special forces troops are sniping at our air defense teams on the west wall from their helicopters! Shoot them down before they do any more damage!	
+
       pa_broadcast("gulag_rpa_ext_1");
 
       wait(8);
-      // They have destroyed all surface-to-air missile batteries along the peninsula - activate local air defense system and engage at will!		
+
       pa_broadcast("gulag_rpa_ext_2");
 
       flag_wait("f15_gulag_explosion");
       wait(12);
 
-      // Enemy helicopters are attacking from the west! I repeat, enemy helicopters are attacking from the west!		
       pa_broadcast("gulag_rpa_ext_3");
 
     case "unload":
     case "f15":
       flag_wait("stop_rotating_around_gulag");
-      // We are under attack! They are attempting to land troops via helicopter in the prison grounds!		
+
       pa_broadcast("gulag_rpa_ext_4");
 
       wait(7);
 
-      // Attention! Attention! Reinforcements are on the way from Petropavlovsk Naval Base! They will arrive in thirty minutes!		
       pa_broadcast("gulag_rpa_ext_5");
 
       flag_wait("player_lands");
       wait(10);
-      // Enemy forces have infiltrated the base! They are moving from the helipad towards the southwest gate!		
+
       pa_broadcast("gulag_rpa_ext_6");
 
       wait(12);
-      // Enemy special forces troops have landed! They are on the ground, I repeat, they are on the ground and moving towards the southwest gate!		
+
       pa_broadcast("gulag_rpa_ext_7");
       wait(12);
-      // The southwest gate is taking heavy fire from enemy troops! Reinforce the southwest gate!		
+
       pa_broadcast("gulag_rpa_ext_8");
 
     case "control_room":
 
       flag_wait("postup_outside_gulag");
       wait(5);
-      // They are attacking the command center! I repeat, they are attacking the command center! Send reinforcements!!		
+
       pa_broadcast("gulag_rpa_int_1");
 
       flag_wait("cell_duty");
       wait(4);
-      // They've taken the main control room and are moving through the central cellblock section!		
+
       pa_broadcast("gulag_rpa_int_2");
 
       wait(3);
-      // They've taken out the main generator! We are switching to auxiliary power!		
+
       pa_broadcast("gulag_rpa_int_3");
 
       wait(10);
-      // Send reinforcements to levels one and two of the main cellblock! Divert two teams to level three as a backup! Reinforcements from Petropavlovsk will arrive in twenty-five minutes!		
+
       pa_broadcast("gulag_rpa_int_4");
 
     case "armory":
 
       flag_wait("armory_attack_sounds");
-      // Enemy is approaching the armory on level two, repeat, the enemy is approaching the armory on level two!		
+
       pa_broadcast("gulag_rpa_int_5");
 
     case "rappel":

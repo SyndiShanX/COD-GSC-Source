@@ -27,9 +27,6 @@ main(model, type) {
   anim._effect["snowmobile_leftground"] = loadfx("treadfx/bigair_snow_snowmobile_emitter");
   anim._effect["snowmobile_bumpbig"] = loadfx("treadfx/bigjump_land_snow_snowmobile");
   anim._effect["snowmobile_bump"] = loadfx("treadfx/smalljump_land_snow_snowmobile");
-  //	anim._effect[ "snowmobile_sway_left"	] = loadfx( "treadfx/leftturn_snow_snowmobile" );
-  //	anim._effect[ "snowmobile_sway_right"	] = loadfx( "treadfx/rightturn_snow_snowmobile" );
-  //	anim._effect[ "snowmobile_collision"	] = loadfx( "explosions/grenadeExp_snow" );
 }
 
 init_local() {
@@ -93,7 +90,6 @@ setRiderShooting() {
   waittillframeend;
 
   if(self.riders.size == 1) {
-    // no passenger, make the driver shoot
     self.driver_shooting = true;
     self.passenger_shooting = false;
   }
@@ -102,7 +98,6 @@ setRiderShooting() {
 snowmobile_fx(fxName) {
   if(isDefined(anim._effect[fxName]))
     playFXOnTag(anim._effect[fxName], self, "tag_deathfx");
-  //println( fxName );
 }
 
 listen_leftground() {
@@ -205,7 +200,6 @@ init_snowmobile_mount_anims() {
   level.snowmobile_mount_anims["snowmobile_passenger"] = [];
   level.snowmobile_mount_anims["snowmobile_driver"] = [];
 
-  // go through all the generic anims and find ones with the specific prefix
   foreach(scene_name, animation in level.scr_anim["generic"]) {
     if(issubstr(scene_name, "snowmobile_passenger_mount")) {
       level.snowmobile_mount_anims["snowmobile_passenger"][scene_name] = true;
@@ -338,48 +332,3 @@ unload_groups() {
 
   return unload_groups;
 }
-
-/*QUAKED script_vehicle_snowmobile (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile::main( "vehicle_snowmobile" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_snowmobile_alt (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile::main( "vehicle_snowmobile_alt" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_snowmobile_coop (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile::main( "vehicle_snowmobile", "snowmobile_player_coop" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_snowmobile_coop_alt (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_snowmobile::main( "vehicle_snowmobile_alt", "snowmobile_player_coop" );
-
-and these lines in your CSV:
-#include,vehicle_snowmobile_snowmobile
-sound,vehicle_snowmobile,vehicle_standard,all_sp
-
-defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"
-*/

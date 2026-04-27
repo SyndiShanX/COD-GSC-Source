@@ -10,12 +10,8 @@
 main() {
   level._effect["cold_breath"] = loadfx("misc/cold_breath");
 
-  //Vehcile DeathFX Overrides
   maps\_vehicle::build_deathfx_override("gauntlet", "vehicle_sa15_gauntlet", "explosions/vehicle_explosion_gauntlet", undefined, "exp_armor_vehicle");
 
-  //	build_deathfx( "explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle" );
-
-  //scripted fx
   level._effect["smoke_geotrail_icbm"] = loadfx("smoke/smoke_geotrail_icbm");
   level._effect["icbm_launch"] = loadfx("smoke/icbm_launch");
 
@@ -40,11 +36,9 @@ main() {
   level._effect["tree_snow_fallen"] = loadfx("snow/tree_snow_fallen");
   level._effect["tree_snow_fallen_small"] = loadfx("snow/tree_snow_fallen_small");
 
-  //Price Sliding fx
   level._effect["price_landing"] = loadfx("snow/snow_price_landing");
   level._effect["price_sliding"] = loadfx("snow/snow_price_sliding");
 
-  //Ambient fx
   level._effect["tree_snow_dump_runner"] = loadfx("snow/tree_snow_dump_runner");
   level._effect["snow_spray_detail_contingency_runner_0x400"] = loadfx("snow/snow_spray_detail_contingency_runner_0x400");
   level._effect["snow_spray_detail_oriented_runner_0x400"] = loadfx("snow/snow_spray_detail_oriented_runner_0x400");
@@ -55,11 +49,9 @@ main() {
   level._effect["snow_vortex_runner_cheap"] = loadfx("snow/snow_vortex_runner_cheap");
   level._effect["room_smoke_200"] = LoadFX("smoke/room_smoke_200");
 
-  //Player Footstep fx
   level._effect["footstep_snow_small"] = loadfx("impacts/footstep_snow_small");
   level._effect["footstep_snow"] = loadfx("impacts/footstep_snow");
 
-  //Player snow
   level._effect["snow_light"] = loadfx("snow/snow_light_contingency");
 
   level thread treadfx_override();
@@ -79,23 +71,19 @@ playerEffect() {
 }
 
 footStepEffects() {
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("snow", loadfx("impacts/footstep_snow"));
   animscripts\utility::setFootstepEffect("ice", loadfx("impacts/footstep_ice"));
   animscripts\utility::setFootstepEffect("slush", loadfx("impacts/footstep_snow_slush"));
 
-  //Small footstep fx
   animscripts\utility::setFootstepEffectSmall("snow", loadfx("impacts/footstep_snow_small"));
   animscripts\utility::setFootstepEffectSmall("ice", loadfx("impacts/footstep_ice"));
   animscripts\utility::setFootstepEffectSmall("slush", loadfx("impacts/footstep_snow_slush_small"));
 
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "snow", loadfx("impacts/bodyfall_snow_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "ice", loadfx("impacts/bodyfall_snow_small_runner"), "bodyfall_", "_small");
-  //animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"slush",		loadfx ( "impacts/bodyfall_snow_small_runner" ), "bodyfall_", "_small" );
 
   animscripts\utility::setNotetrackEffect("bodyfall large", "J_SpineLower", "snow", loadfx("impacts/bodyfall_snow_large_runner"), "bodyfall_", "_large");
   animscripts\utility::setNotetrackEffect("bodyfall large", "J_SpineLower", "ice", loadfx("impacts/bodyfall_snow_large_runner"), "bodyfall_", "_large");
-  //animscripts\utility::setNotetrackEffect( "bodyfall large", 		"J_SpineLower", 		"slush",		loadfx ( "impacts/bodyfall_snow_large_runner" ), "bodyfall_", "_large" );
 
   animscripts\utility::setNotetrackEffect("knee fx left", "J_Knee_LE", "snow", loadfx("impacts/footstep_snow"));
   animscripts\utility::setNotetrackEffect("knee fx left", "J_Knee_LE", "ice", loadfx("impacts/footstep_snow"));

@@ -7,14 +7,7 @@
 #include maps\_utility;
 #include maps\_hud_util;
 
-/* -=-=-=-=-=-=-=-=-=-=
-
-PMC &CO-OP Money system
-
--=-=-=-=-=-=-=-=-=-=-=- */
-
-// constants
-CONST_money_notify_interval = 5000; // Email notifies every $2000 earned
+CONST_money_notify_interval = 5000;
 CONST_money_kill = 100;
 CONST_money_kill_melee = 150;
 CONST_money_juggernaut_kill = 500;
@@ -154,8 +147,6 @@ initNotifyMessage() {
 }
 
 show_total_money() {
-  // Shows total money the player has earned in the corner of the screen
-  // Fades in when money is made, counts up, then fades out
   assert(isDefined(self.hud_totalmoney));
 
   currentCount = 0;
@@ -181,32 +172,26 @@ show_total_money() {
 
 show_total_money_fadeout() {
   self endon("stop_total_money_fade");
-  //self.hud_totalmoney thread fontPulse( self );
+
   wait 3.0;
   self.hud_totalmoney fadeOverTime(0.75);
   self.hud_totalmoney.alpha = 0;
 }
-
-// returns bool if player's current money satisfies an email notification
 money_mailNotify() {
-  // self is player
   cur_money = self.summary["summary"]["total_money"];
-  cur_emails = self.summary["summary"]["intervals"]; // number of emails
+  cur_emails = self.summary["summary"]["intervals"];
 
-  // notify condition A
-  // send player email every CONST_money_notify_interval dollars
   if(cur_emails < int(cur_money / CONST_money_notify_interval))
     self email_popup();
 }
 
 email_popup() {
   giveLoot(self);
-  //iprintln( self.summary[ "summary" ][ "intervals" ] + "th email" );
+
   self.summary["summary"]["intervals"]++;
 }
 
 money_setup() {
-  // in dollars $$$
   registerMoneyType("kill", CONST_money_kill);
   registerMoneyType("kill_melee", CONST_money_kill_melee);
   registerMoneyType("juggernaut_kill", CONST_money_juggernaut_kill);
@@ -221,7 +206,7 @@ money_setup() {
 
 giveMoney_think() {
   self waittill("death", attacker, type, weapon);
-  // split for recursive call
+
   self giveMoney_helper(attacker, type);
 }
 
@@ -231,7 +216,6 @@ giveMoney_helper(attacker, type) {
       attacker = self.saved_player_attacker;
   }
 
-  // if AI removed by script/game, no money to player
   if(!isDefined(attacker)) {
     return;
   }
@@ -244,7 +228,6 @@ giveMoney_helper(attacker, type) {
     playBonusSound = true;
   }
 
-  // Melee kills are worth more money cuz you're good like dat
   if((isDefined(type)) && (issubstr(tolower(type), "melee"))) {
     if(juggernaut)
       killType = "juggernaut_kill_melee";
@@ -253,7 +236,6 @@ giveMoney_helper(attacker, type) {
     playBonusSound = true;
   }
 
-  // if player is last to kill, give player kill points	
   if(isPlayer(attacker)) {
     if(getDvar("money_sharing") == "1") {
       foreach(player in level.players) {
@@ -274,33 +256,19 @@ giveMoney_helper(attacker, type) {
     return;
   }
 
-  // no money if enemy was finished off by other enemies
   if(isAI(attacker) && attacker isBadGuy()) {
     return;
   }
-  // if enemy shot by player was killed by destructibles
+
   if(is_special_targetname_attacker(attacker)) {
     if(isDefined(attacker.attacker))
       self thread giveMoney_helper(attacker.attacker);
     return;
   }
 
-  // if enemy shot by player was killed by natural causes, no money
   if(!isPlayer(attacker) && !isAI(attacker)) {
     return;
   }
-  /*
-  // if enemy shot by player was killed by friendly, give assist
-  if( isDefined( self.attacker_list ) && self.attacker_list.size > 0 )
-  {
-  	for( i = 0; i < self.attacker_list.size; i++ )
-  	{
-  		// if attacker is player and not the last to kill, give player assist points
-  		if( isPlayer( self.attacker_list[ i ] ) && self.attacker_list[ i ] != attacker )
-  			self.attacker_list[ i ] thread giveMoney( "assist" );
-  	}
-  }
-  */
 }
 
 give_objective_reward() {
@@ -336,21 +304,19 @@ AI_money_init() {
 
 took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
   if(!isDefined(self)) {
-    // AI removed, no need to keep track
     return;
   }
 
   if(!isDefined(attacker)) {
     return;
   }
-  // this is to make sure player gets money after killing enemy during their traversal anim
+
   if(isPlayer(attacker))
     self.saved_player_attacker = attacker;
 
   currentTime = gettime();
   timeElapsed = currentTime - self.last_attacked;
-  if(timeElapsed <= 10 * 3000) // 10 * 1000
-  {
+  if(timeElapsed <= 10 * 3000) {
     self.attacker_list[self.attacker_list.size] = attacker;
     self.last_attacked = gettime();
     return;
@@ -360,8 +326,6 @@ took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
   self.attacker_list[0] = attacker;
   self.last_attacked = gettime();
 }
-
-// used by _utility.gsc, edit with care
 updatePlayerMoney(type, value, attacker) {
   self notify("update_money");
   self endon("update_money");
@@ -369,14 +333,10 @@ updatePlayerMoney(type, value, attacker) {
   if(getDvar("money_enable", "0") != "1") {
     return;
   }
-  // optional in game reward control
+
   if(getDvar("in_game_reward") != "1") {
     allowed_types = "completion ";
     allowed_types_array = strTok(allowed_types, " ");
-
-    //disabled_types = "kill kill_melee juggernaut_kill juggernaut_kill_melee headshot assist objective";
-    //disabled_types_array = [];
-    //disabled_types_array = strTok( disabled_types, " " );
 
     foreach(s_type in allowed_types_array) {
       if(type != s_type)
@@ -391,14 +351,11 @@ updatePlayerMoney(type, value, attacker) {
       value = getScoreInfoValue("kill");
   }
 
-  // update reward value trackers
-
   value = int(value);
 
   if(!(type == "kill" || type == "kill_melee" || type == "headshot"))
-    self.summary["summary"]["completion"] += value; // if custom reward type, it counts towards level completion
+    self.summary["summary"]["completion"] += value;
   else if(type == "assist") {
-    // assist points can never add up over kill points
     if(value > getScoreInfoValue("kill"))
       value = getScoreInfoValue("kill");
   }
@@ -410,7 +367,6 @@ updatePlayerMoney(type, value, attacker) {
     bShowMoneyUpdate = false;
 
   if(bShowMoneyUpdate) {
-    // $
     self.hud_moneyupdate.label = "";
     self.hud_moneyupdate setValue(self.moneyUpdateTotal);
     self.hud_moneyupdate.alpha = 0.65;
@@ -428,14 +384,13 @@ updatePlayerMoney(type, value, attacker) {
 
   self.moneyUpdateTotal = 0;
 
-  // email notify
   self thread money_mailNotify();
 }
 
 fontPulseInit() {
   self.baseFontScale = self.fontScale;
   self.maxFontScale = self.fontScale * 2;
-  //self.moveUpSpeed = 1.25;
+
   self.inFrames = 3;
   self.outFrames = 5;
 }
@@ -445,7 +400,6 @@ fontPulse(player) {
   self endon("fontPulse");
 
   scaleRange = self.maxFontScale - self.baseFontScale;
-  //self thread fontMoveup( -60 );
 
   while(self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
@@ -457,21 +411,6 @@ fontPulse(player) {
     wait 0.05;
   }
 }
-
-/*
-fontMoveup( start )
-{
-	self endon( "fontPulse" );
-	self.y = start;
-
-	while( abs( start ) - abs( self.y ) < 60 )
-	{
-		self.y = self.y - self.moveUpSpeed;
-		wait 0.05;
-	}
-}*/
-
-// ============== LOOT NOTIFY ================
 
 giveLoot(attacker) {
   if(!isDefined(attacker.lootIcon)) {
@@ -584,8 +523,6 @@ setupLoot() {
   if(getDvar("scr_loot_slowPrint") == "")
     setDvar("scr_loot_slowPrint", 1);
 }
-
-// ============== helpers ===============
 
 registerMoneyType(type, value) {
   level.scoreInfo[type]["value"] = value;

@@ -26,10 +26,8 @@ main() {
 
   earned_stars = level.player get_current_stars();
 
-  // Set the proper visionset
   vision_set_fog_changes("trainer_pit", 0);
 
-  // setup custom eog summary
   flag_init("so_player_course_completed");
   flag_init("so_killspree_trainer_initialized");
   flag_init("kill_too_many_civs");
@@ -55,17 +53,14 @@ precache_shaders() {
 }
 
 precache_strings() {
-  // Objective
   PrecacheString(&"SO_KILLSPREE_TRAINER_OBJ_MAIN");
 
-  // HUD
   PrecacheString(&"SO_KILLSPREE_TRAINER_MAX_CIV_KILLS_NORM");
   PrecacheString(&"SO_KILLSPREE_TRAINER_MAX_CIV_KILLS_HARD");
   PrecacheString(&"SO_KILLSPREE_TRAINER_MAX_CIV_KILLS_VET");
   PrecacheString(&"SO_KILLSPREE_TRAINER_AREA_CLEARED");
   PrecacheString(&"SO_KILLSPREE_TRAINER_CIVILIAN_HIT");
 
-  // Scoreboard
   PrecacheString(&"SO_KILLSPREE_TRAINER_SCOREBOARD_CIVS_SHOT");
   PrecacheString(&"SO_KILLSPREE_TRAINER_SCOREBOARD_FINAL_TIME");
   PrecacheString(&"SO_KILLSPREE_TRAINER_SCOREBOARD_FINISH_TIME");
@@ -75,7 +70,6 @@ precache_strings() {
   PrecacheString(&"SO_KILLSPREE_TRAINER_SCOREBOARD_TIMETOBEAT");
   PrecacheString(&"SO_KILLSPREE_TRAINER_SCOREBOARD_DESC_CIVS_HIT");
 
-  // Dead Quotes
   PrecacheString(&"SO_KILLSPREE_TRAINER_DEADQUOTE_FRIENDLIES1");
   PrecacheString(&"SO_KILLSPREE_TRAINER_DEADQUOTE_FRIENDLIES2");
   PrecacheString(&"SO_KILLSPREE_TRAINER_DEADQUOTE_HINT1");
@@ -138,19 +132,14 @@ custom_eog_summary() {
 start_map() {
   flag_wait("so_killspree_trainer_initialized");
 
-  /*----------------------- INITIALIZATION
-  -------------------------*/
   thread fade_challenge_in();
-  //	level.challenge_civililans_killed = 0;
-  //	level.missed_enemies_penalty = 0;
-  //	level.killed_civvies_penalty = 0;
 
   level.splash_count = 0;
   level.splash_counted = 1;
-  level.race_times["normal"] = -1; // no limit.
+  level.race_times["normal"] = -1;
   level.race_times["hard"] = 45;
   level.race_times["veteran"] = 35;
-  level.max_civilian_casualties = 5; // UPDATE THE SO_KILLSPREE_TRAINER_CIVVIES_COUNT TO MATCH THIS NUMBER
+  level.max_civilian_casualties = 5;
 
   foreach(player in level.players) {
     player thread init_stars();
@@ -168,7 +157,6 @@ start_map() {
     level.challenge_time_hurry = int(level.challenge_time_limit / 6);
   }
 
-  // replaced pawlows with blackhawks to get rid of helicopter in the minimap.
   so_ambient_vehicles();
   array_thread(getStructArray("delete_heli_node", "script_noteworthy"), ::delete_heli_node);
   array_thread(getEntArray("ai_ambient", "script_noteworthy"), maps\trainer::AI_delete);
@@ -176,19 +164,13 @@ start_map() {
   array_thread(getEntArray("trainee_01", "script_noteworthy"), maps\trainer::AI_delete);
   array_thread(GetAiArray("allies"), maps\trainer::AI_delete);
 
-  //	level.pitguy delete();
-
-  // display "waiting for other player..." message at end.
   trigger_ent = getent("end_trigger", "targetname");
   level thread maps\_specialops_code::wait_all_players_are_touching(trigger_ent);
 
-  // reveal pit weapons
   level thread so_pit_start_sequence();
 
   music_loop("so_killspree_trainer_music", 500);
 
-  /*----------------------- COURSE LOOP
-  -------------------------*/
   thread so_course_loop_think();
 
   flag_wait("challenge_done");
@@ -212,14 +194,9 @@ calculate_finish() {
 
   fade_challenge_out();
 }
-
-//--------------------------------------------------------- // Course Init
-//--------------------------------------------------------- init_course_triggers() {
 so_trigger = GetEnt("so_player_melee_trigger", "targetname");
 level thread maps\_load::flag_set_trigger(so_trigger);
 so_trigger trigger_off();
-
-// Remove thise stair2 trigger, and use the so version
 trigger = get_script_flag_trigger("player_course_stairs2", so_trigger);
 trigger Delete();
 
@@ -231,10 +208,7 @@ triggers = getEntArray("target_trigger", "targetname");
 foreach(trigger in triggers) {
   trigger.script_linkto_num = int(trigger.script_linkto);
 
-  // Disable the trigger manually, cause trainer.gsc will use trigger_off() / trigger_on()
-  // We want to trigger these manually via script depending on how many targets are hit.
   if(trigger.script_linkto != "1") {
-    // Don't have the trigger go back to the realOrigin from trigger_on()
     if(isDefined(trigger.realOrigin)) {
       trigger.realOrigin = undefined;
     }
@@ -276,19 +250,16 @@ course_trigger_thread(triggers) {
     additional_trigger = undefined;
     trigger = triggers[i];
 
-    // Do not notify the first one
     if(i != 0) {
       trigger notify("trigger");
     }
 
-    // 3 and 4 are really close to each other, so treat them as one.
     if(trigger.script_linkto_num == 3) {
       i++;
       additional_trigger = triggers[i];
       additional_trigger notify("trigger");
     }
 
-    // Set the half way flag when 12 (after the jump down) is triggered
     if(trigger.script_linkto_num == 12) {
       flag_set("half_way");
     }
@@ -296,7 +267,6 @@ course_trigger_thread(triggers) {
     trigger course_trigger_logic(additional_trigger);
     thread so_area_cleared();
 
-    // After 5 is done, we need to enable the stairs trigger
     if(trigger.script_linkto_num == 5) {
       so_melee_trigger = GetEnt("so_player_melee_trigger", "targetname");
       so_melee_trigger trigger_on();
@@ -391,9 +361,6 @@ get_script_flag_trigger(str, exclude) {
 
   return undefined;
 }
-
-//--------------------------------------------------------- // Kill Threads
-//--------------------------------------------------------- civilian_kill_thread() {
 level endon("mission failed");
 level endon("special_op_terminated");
 level endon("challenge_done");
@@ -406,8 +373,6 @@ while(1) {
   level notify("civilian_killed_" + count);
 
   so_civilian_hit_hud();
-
-  //		maps\_specialops::info_hud_decrement_timer( level.so_civ_deduction );
 
   foreach(player in level.players) {
     player.HUDcivviesKilled setValue(level.friendlies_hit);
@@ -454,8 +419,6 @@ so_pit_start_sequence() {
 }
 
 pit_cases_and_door() {
-  /*----------------------- PIT GUY OPENS CASE AND SHOWS MORE WEAPONRY
-  -------------------------*/
   level.pit_case_01 playSound("scn_trainer_case_open1");
   pit_weapons_case_01 = getEntArray("pit_weapons_case_01", "script_noteworthy");
   array_thread(pit_weapons_case_01, maps\trainer::weapons_show);
@@ -480,9 +443,8 @@ so_ambient_vehicles() {
   }
 
   foreach(path in path_arr) {
-    // move, spawn and go one heli per path
     blackhawk move_spawn_and_go(path);
-    wait 0.15; // to awoid spawning from the same spawner on the same frame.
+    wait 0.15;
   }
 }
 
@@ -502,7 +464,6 @@ so_course_loop_think() {
   level.first_time = true;
   maps\trainer::clear_hints();
 
-  // stop infinite ammo for player 1.
   flag_set("button_press");
 
   level thread civilian_kill_thread();
@@ -510,23 +471,14 @@ so_course_loop_think() {
   level thread course_completion_thread();
   array_thread(level.players, ::player_death_watch);
 
-  /*----------------------- COURSE LOOPS
-  -------------------------*/
-
-  /*----------------------- COURSE OBJECTIVE
-  -------------------------*/
   if(level.first_time) {
     maps\trainer::registerObjective("obj_course", &"SO_KILLSPREE_TRAINER_OBJ_MAIN", getEnt("origin_course_01", "targetname"));
     maps\trainer::setObjectiveState("obj_course", "current");
   }
 
-  /*----------------------- RESET CQB COURSE AND OPEN DOOR
-  -------------------------*/
   course_triggers_01 = getEntArray("course_triggers_01", "script_noteworthy");
   array_notify(course_triggers_01, "activate");
 
-  /*----------------------- COURSE START
-  -------------------------*/
   level.challenge_time_force_on = true;
   enable_challenge_timer("player_has_started_course", "so_player_course_completed");
   array_thread(level.players, ::display_counters);
@@ -535,7 +487,6 @@ so_course_loop_think() {
   flag_clear("melee_target_hit");
   level.targets_hit_with_melee = 0;
 
-  //	thread maps\trainer::target_flag_management();
   thread so_target_flag_management();
   if(level.first_time) {
     thread maps\trainer::dialogue_course_civilian_killed();
@@ -550,18 +501,13 @@ so_course_loop_think() {
   org = getclosest(level.player.origin, conversation_orgs_pit);
 
   if(cointoss()) {
-    //Ranger 3 Come on. Get some, Allen!	
     org delaythread(3, ::play_sound_in_space, "train_ar3_getsome");
   } else if(cointoss()) {
-    //Ranger 4 Bring it, bitch!	
     org delaythread(3, ::play_sound_in_space, "train_ar4_bringit");
   } else {
-    //Ranger 5 Come on! Get some!	
     org delaythread(3, ::play_sound_in_space, "train_ar5_comeon");
   }
 
-  /*----------------------- TOP OFF PLAYER WEAPONS
-  -------------------------*/
   foreach(player in level.players) {
     playerPrimaryWeapons = player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
@@ -581,11 +527,8 @@ so_course_loop_think() {
   flag_wait("player_course_03a");
   maps\trainer::setObjectiveLocation("obj_course", getEnt("origin_course_03", "targetname"));
 
-  /*----------------------- MELEE TARGET
-  -------------------------*/
   flag_wait("player_course_stairs2");
 
-  //	thread maps\trainer::key_hint_till_flag_set( "melee", "melee_target_hit" );
   so_melee_hint();
 
   flag_wait("player_course_upstairs");
@@ -598,13 +541,10 @@ so_course_loop_think() {
 
   level.gate_cqb_enter thread maps\trainer::door_open();
 
-  /*----------------------- COURSE END
-  -------------------------*/
   flag_wait("so_player_course_completed");
   maps\trainer::clear_hints();
 
   thread maps\trainer::reset_course_targets();
-  //	level.gate_cqb_exit thread maps\trainer::door_close();
 
   maps\trainer::clear_hints();
 
@@ -615,9 +555,6 @@ so_course_loop_think() {
 
   flag_set("challenge_done");
 }
-
-// -------------------------------------------------------- // Target Flag Management copied from Trainer without the endon
-// -------------------------------------------------------- so_target_flag_management() {
 so_waittill_targets_killed(3, "course_initial_targets_dead");
 
 so_waittill_targets_killed(2, "course_pre_start_targets_dead");
@@ -723,17 +660,8 @@ clear_client_hints() {
 }
 
 course_completion_thread() {
-  // "so_pre_jump" trigger just before the jump down
-  //	flag_wait( "so_pre_jump" );
-  //	if( level.targets_hit < 18 )
-  //	{
-  //		iprintlnbold( "You missed a target, go back before you jump down!" );
-  //	}
+  flag_wait("so_player_course_jumped_down");
 
-  // will clear the finnish line trigger once both players is passed the halfway drop down.
-  flag_wait("so_player_course_jumped_down"); // requires all players to trigger the trigger to set the flag.
-
-  // Make sure all of the targets leading up to here are hit, otherwise fail
   if(!flag("half_way")) {
     set_failure_quote("missed_targets");
     missionFailedWrapper();
@@ -742,7 +670,7 @@ course_completion_thread() {
 
   flag_clear("so_player_course_end");
 
-  flag_wait("so_player_course_end"); // requires all players to trigger the trigger to set the flag.
+  flag_wait("so_player_course_end");
 
   if(level.targets_hit < level.totalPitEnemies) {
     level.star_count = 0;
@@ -751,18 +679,16 @@ course_completion_thread() {
     missionFailedWrapper();
     return;
   } else {
-    flag_set("so_player_course_completed"); // this is the flag that completes the challenge.		
+    flag_set("so_player_course_completed");
   }
 }
 
 course_gate_controll() {
   level.gate_cqb_exit thread maps\trainer::door_open();
 
-  // open gate after both players passed the middle of the course.
   flag_wait("so_player_course_jumped_down");
   level.gate_cqb_enter thread maps\trainer::door_close();
 
-  // Wait until all of the targets are down before opening the gate.
   flag_wait("course_end_targets_dead");
 
   level.so_end_trigger trigger_on();
@@ -790,14 +716,7 @@ display_counters() {
   self.HUDcivviesKilled setValue(level.friendlies_hit);
   self.HUDcivviesKilled.alignx = "left";
 
-  //	self thread info_hud_handle_fade( self.HUDenemies );
-  //	self thread info_hud_handle_fade( self.HUDcivvies );
-  //	self thread info_hud_handle_fade( self.HUDenemiesKilled );
-  //	self thread info_hud_handle_fade( self.HUDcivviesKilled );
-
   level waittill("special_op_terminated");
-
-  //	set_failure_quote();
 
   self.HUDenemies thread so_remove_hud_item();
   self.HUDcivvies thread so_remove_hud_item();
@@ -847,7 +766,6 @@ move_spawn_and_go(path_ent) {
   if(isDefined(path_ent.angles))
     self.angles = path_ent.angles;
 
-  // changes targetname of ai so that they to can spawn
   other_ents = getEntArray(self.target, "targetname");
   foreach(ent in other_ents) {
     if(isspawner(ent))
@@ -865,9 +783,6 @@ delete_heli_node() {
   self waittill("trigger", heli);
   heli delete();
 }
-
-//--------------------------------------------------------- // Stars
-//--------------------------------------------------------- init_stars() {
 level.star_count = 3;
 self thread star_challenge_hud(0, level.race_times["normal"], 5, 0);
 self thread star_challenge_hud(1, level.race_times["hard"], 5, 1);
@@ -890,7 +805,6 @@ star_challenge_hud(x_pos_offset, removeTimer, civ_kill_num, next_star_count) {
 
   self thread star_challenge_force_alpha_at_finish(star);
 
-  // don't remove a start if timelimit is less then 0
   if(removeTimer < 0) {
     return;
   }
@@ -940,7 +854,6 @@ star_challenge_force_alpha_at_finish(star) {
 }
 
 get_current_stars() {
-  // run on player
   levelIndex = level.specOpsSettings maps\_endmission::getLevelIndex(level.script);
 
   stars = int((self GetLocalPlayerProfileData("missionSOHighestDifficulty"))[levelIndex]);
@@ -952,83 +865,63 @@ get_current_stars() {
 dialogue_course() {
   flag_wait("player_has_started_course");
   thread maps\trainer::dialogue_course_reload_nag();
-  /*----------------------- COURSE START
-  -------------------------*/
-  //Cpl. Dunn	Clear the first area. Go! Go! Go!	
+
   thread do_course_dialogue("train_cpd_clearfirstgogogo");
 
-  // Disable all of the course progression triggers
   triggers = getEntArray("so_course_progression_triggers", "targetname");
   array_thread(triggers, ::trigger_off);
 
-  // -------------------------------- // Just after first set of Targets
-  // -------------------------------- target_count = 3;
   flag_trigger = "so_course_after_start";
   flag_targets = "course_initial_targets_dead";
   hint_type = "hint_missed_target";
-  sound_alias = "nag_hurry_01"; //Cpl. Dunn	Keep moving forward!
+  sound_alias = "nag_hurry_01";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
-  // ------------------------------- // After 2nd set of targets
-  // ------------------------------- target_count += 2;
   flag_trigger = "so_course_before_building";
   flag_targets = "course_pre_start_targets_dead";
   hint_type = "hint_missed_target";
-  sound_alias = "nag_hurry_01"; //Cpl. Dunn	Keep moving forward!
+  sound_alias = "nag_hurry_01";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
-  /*----------------------- FIRST AREA CLEARED/PASSED BY
-  -------------------------*/
   target_count += 5;
   flag_trigger = "so_course_in_building";
   flag_targets = "course_start_targets_dead";
   hint_type = "hint_missed_target";
-  sound_alias = "train_cpd_areacleared"; //Cpl. Dunn	Area cleared! Move into the building!
+  sound_alias = "train_cpd_areacleared";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
-  /*----------------------- SECOND AREA CLEARED/PASSED BY
-  -------------------------*/
   target_count += 3;
   flag_trigger = "so_course_stairs";
   flag_targets = "course_first_floor_targets_dead";
   hint_type = "hint_missed_target";
-  sound_alias = "train_cpd_upthestairs"; //Cpl. Dunn	Up the stairs!
+  sound_alias = "train_cpd_upthestairs";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
-  /*----------------------- UP THE STAIRS
-  -------------------------*/
   flag_wait("player_course_stairs2");
-  //Cpl. DunnMelee with your knife!	
+
   radio_dialogue("train_cpd_melee");
 
-  /*----------------------- SECOND FLOOR CLEARED/PASSED BY
-  -------------------------*/
   target_count += 5;
   flag_trigger = "so_course_pre_jump";
   flag_targets = "course_second_floor_targets_dead";
   hint_type = "hint_missed_target_before_jump";
-  sound_alias = "train_cpd_jumpdown"; //Cpl. Dunn	Area cleared! Jump down!
+  sound_alias = "train_cpd_jumpdown";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
   flag_wait_or_timeout("player_course_jumped_down", 5);
   {
     if(!flag("player_course_jumped_down")) {
-      //Cpl. Dunn	Move! This is a timed course!
       thread do_course_dialogue("nag_hurry_00");
     }
   }
 
-  /*----------------------- LAST AREA
-  -------------------------*/
   target_count += 4;
   flag_trigger = "so_course_post_jump";
   flag_targets = "course_pre_end_targets_dead";
   hint_type = "hint_missed_target";
-  sound_alias = "train_cpd_lastareamove"; //Cpl. Dunn	Last area! Move! Move!	
+  sound_alias = "train_cpd_lastareamove";
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
-  /*----------------------- SPRINT TO FINISH
-  -------------------------*/
   target_count += 2;
   flag_trigger = "so_course_end";
   flag_targets = "course_end_targets_dead";
@@ -1037,7 +930,7 @@ dialogue_course() {
   course_progression_dialogue(flag_trigger, flag_targets, target_count, hint_type, sound_alias);
 
   flag_wait("course_end_targets_dead");
-  //Cpl. DunnSprint to the exit! Clock's ticking!
+
   thread do_course_dialogue("train_cpd_sprint");
 }
 
@@ -1084,7 +977,6 @@ hint_missed_target(trigger, flag_msg, hint_type) {
   level notify("stop_hint_missed_target");
   level endon("stop_hint_missed_target");
 
-  // Since HintPrintWait() in _utility_code does not support break params, this is a work-around
   level.hint_break_flag = flag_msg;
 
   while(1) {

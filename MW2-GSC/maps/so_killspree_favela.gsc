@@ -48,8 +48,6 @@ main() {
     player.dogs_killed = 0;
   }
 
-  //thread random_favela_background_runners();
-
   maps\_compass::setupMiniMap("compass_map_favela");
 }
 
@@ -67,28 +65,28 @@ so_favela_setup_regular() {
   level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_REGULAR";
   level.points_counter = 30;
 
-  level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
-  level.max_enemy_population = 22; // max enemies in level, before deleting
-  level.max_dogs_at_once = 0; // max number of dogs alive at a time
-  level.enemy_ambush_wave_size = 6; // ambush spawn wave size
-  level.enemy_seek_wave_size = 4; // seek player spawn wave size
-  level.civilian_kill_fail = 6; // civilian casualties allowed before failing mission
+  level.min_enemy_population = 14;
+  level.max_enemy_population = 22;
+  level.max_dogs_at_once = 0;
+  level.enemy_ambush_wave_size = 6;
+  level.enemy_seek_wave_size = 4;
+  level.civilian_kill_fail = 6;
 
-  level.ambush_to_seeker_delay = 45; // x + randomeint(x) seconds until ambushers seek out player
+  level.ambush_to_seeker_delay = 45;
 }
 
 so_favela_setup_hardened() {
   level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_HARDENED";
   level.points_counter = 40;
 
-  level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
-  level.max_enemy_population = 22; // max enemies in level, before deleting
-  level.max_dogs_at_once = 2; // max number of dogs alive at a time
-  level.enemy_ambush_wave_size = 6; // secondary spawn wave size
-  level.enemy_seek_wave_size = 4; // seek player spawn wave size
-  level.civilian_kill_fail = 4; // civilian casualties allowed before failing mission
+  level.min_enemy_population = 14;
+  level.max_enemy_population = 22;
+  level.max_dogs_at_once = 2;
+  level.enemy_ambush_wave_size = 6;
+  level.enemy_seek_wave_size = 4;
+  level.civilian_kill_fail = 4;
 
-  level.ambush_to_seeker_delay = 40; // x + randomeint(x) seconds until ambushers seek out player
+  level.ambush_to_seeker_delay = 40;
 }
 
 so_favela_setup_veteran() {
@@ -97,20 +95,19 @@ so_favela_setup_veteran() {
   level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_VETERAN";
   level.points_counter = 50;
 
-  level.min_enemy_population = 12; // min enemies in level, refills a wave if drops below this number
-  level.max_enemy_population = 20; // max enemies in level, before deleting
-  level.max_dogs_at_once = 2; // max number of dogs alive at a time
-  level.enemy_ambush_wave_size = 6; // secondary spawn wave size, -1 unchanged
-  level.enemy_seek_wave_size = 4; // seek player spawn wave size
-  level.civilian_kill_fail = 3; // civilian casualties allowed before failing mission
+  level.min_enemy_population = 12;
+  level.max_enemy_population = 20;
+  level.max_dogs_at_once = 2;
+  level.enemy_ambush_wave_size = 6;
+  level.enemy_seek_wave_size = 4;
+  level.civilian_kill_fail = 3;
 
-  level.ambush_to_seeker_delay = 40; // x + randomeint(x) seconds until ambushers seek out player
+  level.ambush_to_seeker_delay = 40;
 }
 
 so_favela_init() {
   activate_trigger("vision_shanty", "script_noteworthy");
 
-  // Remove unwanted weapons
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries)
   sentry Delete();
@@ -121,16 +118,16 @@ so_favela_init() {
   assert(isDefined(level.gameskill));
 
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_favela_setup_Regular();
-      break; // Regular
+      break;
     case 2:
       so_favela_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_favela_setup_veteran();
-      break; // Veteran
+      break;
   }
 
   level.points_target = level.points_counter;
@@ -141,31 +138,24 @@ so_favela_init() {
 
   hunter_enemies_level_init();
 
-  // add spawn func for enemy monitors
   add_global_spawn_function("axis", ::hunter_init);
   level thread hunter_register_death();
-  //add_global_spawn_function( "axis", ::ambush_to_seek );
 
   array_spawn_function(getSpawnerTeamArray("neutral"), ::civilian_register_death);
 
-  // favela's original AI managment in shanty town
   array_spawn_function_noteworthy("ignore_and_delete_on_goal", ::ignore_and_delete_on_goal);
   array_spawn_function_noteworthy("delete_at_path_end", ::delete_ai_at_path_end);
   array_spawn_function_noteworthy("delete_at_path_end_no_choke", ::delete_ai_at_path_end_no_choke);
   array_spawn_function_noteworthy("seek_player", ::enemy_seek_player, 512);
   array_spawn_function_noteworthy("dog_seek_player", ::dog_seek_player);
   array_spawn_function_noteworthy("delete_at_goal", ::delete_ai_at_goal);
-  //	array_spawn_function_noteworthy( "dont_see_player_no_choke", ::dont_see_player );
+
   array_spawn_function_noteworthy("ignore_and_delete_on_goal", ::ignore_and_delete_on_goal);
   array_spawn_function_noteworthy("window_smasher", ::window_smasher);
   array_spawn_function_noteworthy("ignored_until_goal", ::ignored_until_goal);
   array_spawn_function_noteworthy("desert_eagle_guy", ::desert_eagle_guy);
   array_spawn_function_noteworthy("faust", ::faust_spawn_func);
-  //array_thread( getEntArray( "curtain_pulldown", "script_noteworthy" ), ::curtain_pulldown );
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Initializations
-// --------------------------------------------------------------------------------- start_so_favela() {
 so_favela_init();
 
 thread enable_escape_warning();
@@ -180,8 +170,6 @@ thread fade_challenge_out("challenge_success");
 flag_wait("start_so_killspree_favela");
 wait 1;
 flag_set("favela_enemies_spawned");
-
-// set off favela enemy AIs
 original_roof_spawn_trig = getent("favela_spawn_trigger", "script_noteworthy");
 seeker_spawn_trig = getent("so_favela_spawn_trigger", "script_noteworthy");
 
@@ -198,8 +186,6 @@ spawn_enemy_secondary_wave(first_wave_trigs, int(level.enemy_seek_wave_size));
 
 wait 2;
 
-//thread enemy_population_watch( 0.5, 5 );	// ( delay, sampling interval in seconds, sampling buffer duration in seconds )
-
 thread enemy_type_monitor();
 
 thread release_doggy();
@@ -208,8 +194,6 @@ thread enemy_refill(10, seeker_spawn_trig, favela_spawn_ambush_trigger);
 thread enemy_remove_when_max(10);
 thread battlechatter_on("axis");
 }
-
-// takes both array of triggers or just one
 spawn_wave_by_trigger(trigger) {
   foreach(trig in trigger)
   trig notify("trigger");
@@ -259,10 +243,6 @@ enemy_refill(delay, seek_trigger, ambush_trigger) {
     if(population_min_delta > 0) {
       spawn_enemy_secondary_wave(ambush_trigger, int(population_min_delta));
 
-      /*
-      spawn_enemy_secondary_wave( seek_trigger, int( population_min_delta/2 ) );
-      spawn_enemy_secondary_wave( ambush_trigger, int( population_min_delta/2 ) );
-      */
       wait 5;
     }
     wait 0.05;
@@ -279,7 +259,6 @@ enemy_remove_when_max(delay) {
     population_max_delta = level.max_enemy_population - level.current_enemy_population;
 
     if(population_max_delta < 0) {
-      // delay to make sure AI count is not temp high
       wait delay;
       population_max_delta = level.max_enemy_population - level.current_enemy_population;
     }
@@ -298,36 +277,6 @@ enemy_remove_when_max(delay) {
     }
   }
 }
-
-/*	
-enemy_population_watch( delay, sample_duration )
-{
-	population_data = [];
-	// interval and sample_duration in seconds
-	
-	repeat = int( sample_duration / interval );
-	
-	while( 1 )
-	{
-		population_data[ population_data.size ] = getAiArray( "axis" ).size;
-		
-		while( population_data.size > repeat )
-			population_data = queue_push( population_data );
-		
-		level.population_data = population_data;
-		
-		// avg population over duration
-		sum = 0;
-		foreach ( data in population_data )
-			sum += data;
-
-		level.current_enemy_population = int( sum/population_data.size );
-		flag_set( "enemy_population_info_available" );
-		
-		wait interval;
-	}
-	
-}*/
 
 queue_push(array) {
   newArray = [];
@@ -353,7 +302,7 @@ doggy_attack() {
 }
 
 should_release_dog() {
-  return ((level.points_counter % 10) == 0); // Every 10 kills let some puppies loose.
+  return ((level.points_counter % 10) == 0);
 }
 
 random_favela_background_runners() {

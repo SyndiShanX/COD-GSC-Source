@@ -66,57 +66,57 @@ init() {
   level.bulletAlphas[level.bulletAlphas.size] = 0.498;
 
   level.weaponInfo = [];
-  //
+
   registerWeaponInfo("ak47", &"WEAPON_AK47_FULLAUTO", "rifle", 30);
-  //
+
   registerWeaponInfo("ak47_semi", &"WEAPON_AK47_SEMIAUTO", "rifle", 30);
-  // AK-47
+
   registerWeaponInfo("ak47_grenadier", &"WEAPON_AK47", "rifle", 30);
-  //
+
   registerWeaponInfo("ak74u", &"WEAPON_AK74U_FULLAUTO", "rifle", 30);
-  //
+
   registerWeaponInfo("ak74u_semi", &"WEAPON_AK74U_SEMIAUTO", "rifle", 30);
-  // M9
+
   registerWeaponInfo("beretta", &"WEAPON_BERETTA", "pistol", 15);
-  // G36C
+
   registerWeaponInfo("g36c", &"WEAPON_G36C", "rifle", 30);
-  // M14
+
   registerWeaponInfo("m14_scoped", &"WEAPON_M14", "sniper", 10);
-  //
+
   registerWeaponInfo("m16_basic", &"WEAPON_M16A4_FULLAUTO", "rifle", 30);
-  //
+
   registerWeaponInfo("m16_basic_semi", &"WEAPON_M16A4_SEMIAUTO", "rifle", 30);
-  // M16A4
+
   registerWeaponInfo("m16_grenadier", &"WEAPON_M16", "rifle", 30);
-  // M203
+
   registerWeaponInfo("m203", &"WEAPON_M203", "grenade", 1);
-  // RPG-7
+
   registerWeaponInfo("rpg", &"WEAPON_RPG", "grenade", 5);
-  // M249 SAW
+
   registerWeaponInfo("saw", &"WEAPON_SAW", "support", 100);
-  //
+
   registerWeaponInfo("m4_grunt", &"WEAPON_M4_FULLAUTO", "rifle", 30);
-  //
+
   registerWeaponInfo("m4_grunt_semi", &"WEAPON_M4_SEMIAUTO", "rifle", 30);
-  // M4A1
+
   registerWeaponInfo("m4_grenadier", &"WEAPON_M4", "rifle", 30);
-  // M40A3
+
   registerWeaponInfo("m40a3", &"WEAPON_M40A3", "sniper", 10);
-  // MP5
+
   registerWeaponInfo("mp5", &"WEAPON_MP5", "smg", 30);
-  //
+
   registerWeaponInfo("mp5_silencer", &"WEAPON_MP5SD", "smg", 30);
-  // USP .45
+
   registerWeaponInfo("usp", &"WEAPON_USP", "pistol", 10);
-  // AT4
+
   registerWeaponInfo("at4", &"WEAPON_AT4", "rocketlauncher", 1);
-  // Dragunov
+
   registerWeaponInfo("dragunov", &"WEAPON_DRAGUNOV", "sniper", 10);
-  // G3
+
   registerWeaponInfo("g3", &"WEAPON_G3", "rifle", 30);
-  // W1200
+
   registerWeaponInfo("winchester1200", &"WEAPON_WINCHESTER1200", "shotgun", 4);
-  // Mini-Uzi
+
   registerWeaponInfo("uzi", &"WEAPON_UZI", "smg", 32);
 
   level.player initWeaponHUD();
@@ -157,21 +157,7 @@ initWeaponHUD() {
     self.hud_bullets[4] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[4].sort = 10;
   }
-  /*
-  if( !isDefined( self.hud_totalammo ) )
-  {
-  	self.hud_totalammo = createFontString( "default", 1.5 );
-  	self.hud_totalammo setParent( self.hud_bullets[0] );
-  	self.hud_totalammo setPoint( "TOPRIGHT", "BOTTOMRIGHT", 0, 5 );
-  }
-  	
-  if( !isDefined( self.hud_weaponname ) )
-  {
-  	self.hud_weaponname = createFontString( "default", 1.5 );
-  	self.hud_weaponname setParent( self.hud_totalammo );
-  	self.hud_weaponname setPoint( "RIGHT", "LEFT", -40, 0 );
-  }
-  */
+
   self thread updateBulletHudThink();
 }
 
@@ -198,15 +184,6 @@ updateBulletHudThink() {
         self updateHudWeaponAmmo(weapon, ammoCount);
         lastAmmoCount = ammoCount;
       }
-      /*			
-      self.hud_totalammo setValue( self GetWeaponAmmoStock( self GetCurrentWeapon() ) );
-      if( self getFractionMaxAmmo( weapon ) < 0.25 )
-      	self.hud_totalammo.color = (1,0,0);
-      else
-      	self.hud_totalammo.color = (1,1,1);
-      	
-      self.hud_weaponname setText( getWeaponInfoString( weapon ) );
-      */
     }
 
     wait(0.05);

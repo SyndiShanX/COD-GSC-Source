@@ -11,26 +11,6 @@
 #include maps\_hud_util;
 #using_animtree("generic_human");
 
-/*dog_goto_player()
-{
-	self endon( "death" );
-	
-	if( isDefined( self.target ) )
-		self waittill( "goal" );
-
-	if( level.player.size == 2 )
-	{
-		if( randomint( 100 ) > 50 )
-			self setgoalentity( level.player[ 0 ] );
-		else
-			self setgoalentity( level.player[ 1 ] );
-	}
-	else
-		self setgoalentity( level.player );
-		
-	self.goalradius = 300;
-}*/
-
 ambush_to_seek() {
   level endon("special_op_terminated");
   self endon("death");
@@ -87,7 +67,6 @@ release_doggy() {
   else
     num_of_dogs = max(level.gameskill, 1);
 
-  // difficulty modifier
   if(is_Coop())
     num_of_dogs += 1;
 
@@ -123,7 +102,6 @@ hud_create_kill_counter() {
     thread hud_update_kill_counter();
   }
 
-  // Give both players a chance to update their huds.
   if(self == level.player) {
     wait 0.05;
     flag_set("challenge_success");
@@ -134,13 +112,11 @@ hud_update_kill_counter() {
   if(self == level.player)
     thread so_dialog_counter_update(level.points_counter, level.points_target);
 
-  // Above 5 kills, just update data.
   if(level.points_counter > 5) {
     self.kill_hudelem_score SetValue(level.points_counter);
     return;
   }
 
-  // Success!
   if(level.points_counter <= 0) {
     self.kill_hudelem_score so_remove_hud_item(true);
     self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
@@ -151,7 +127,6 @@ hud_update_kill_counter() {
     return;
   }
 
-  // Crossed the barrier, let the player know they are close.
   self.kill_hudelem thread so_hud_pulse_close();
   self.kill_hudelem_score thread so_hud_pulse_close();
   self.kill_hudelem_score SetValue(level.points_counter);
@@ -223,8 +198,6 @@ hud_clean_up() {
 
   self notify("hud_cleaned_up");
 }
-
-// --------------------------------------------------------------------------------- enemy_type_monitor() {
 level endon("special_op_terminated");
 
 flag_wait("enemy_population_info_available");

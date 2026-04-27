@@ -5,17 +5,6 @@
 
 #include common_scripts\utility;
 
-/*******************
-
-	- prefabs/bookstore/escalator_up.map
-	- prefabs/bookstore/escalator_down.map
-
-	These two prefabs are set up to work with the script.
-
-	TODO: Make them trigger or radius based so that they don't run all the time.
-		
-*******************/
-
 init() {
   flag_init("_escalator_on");
   flag_set("_escalator_on");

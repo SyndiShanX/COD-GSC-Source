@@ -17,10 +17,9 @@ h2_sentry_initSentry(sentryType, owner) {
   owner thread maps\mp\gametypes\_weapons::updateHudOutline(self);
 
   self setTurretModeChangeWait(true);
-  //	self setConvergenceTime( .25, "pitch" );
-  //	self setConvergenceTime( .25, "yaw" );
+
   self sentry_setInactive();
-  self setDefaultDropPitch(-89.0); // setting this mainly prevents Turret_RestoreDefaultDropPitch() from running
+  self setDefaultDropPitch(-89.0);
 
   self sentry_setOwner(owner);
   self thread sentry_handleOwner();
@@ -52,7 +51,6 @@ init() {
   level.sentrySettings["sentry_minigun"].modelDestroyed = "sentry_minigun_destroyed";
 
   foreach(sentryInfo in level.sentrySettings) {
-    //precacheItem( sentryInfo.weaponInfo );
     precacheModel(sentryInfo.modelBase);
     precacheModel(sentryInfo.modelPlacement);
     precacheModel(sentryInfo.modelPlacementFailed);
@@ -92,7 +90,6 @@ giveSentry(sentryType, lifeId) {
 
   self setCarryingSentry(sentryGun, true);
 
-  // if we failed to place the sentry, it will have been deleted at this point
   if(isDefined(sentryGun))
     return true;
   else
@@ -164,7 +161,6 @@ Sentry Handlers
 ============================ */
 
 sentry_handleDamage() {
-  // use a health buffer to prevent the turret from dying to friendly fire
   healthBuffer = 20000;
   self.health += healthbuffer;
 
@@ -180,7 +176,6 @@ sentry_handleDamage() {
       continue;
     }
 
-    // 7x damage for explosives - GRENADES
     if(isExplosiveDamageMod(type))
       self.health -= (amount * 1);
 
@@ -223,7 +218,7 @@ sentry_handleDeath() {
   self laseroff();
 
   self removeFromTurretList(entNum);
-  // this handles cases of deletion
+
   if(!isDefined(self)) {
     return;
   }
@@ -356,7 +351,7 @@ updateSentryPlacement(sentryGun) {
   sentryGun endon("death");
 
   sentryGun.canBePlaced = true;
-  lastCanPlaceSentry = -1; // force initial update
+  lastCanPlaceSentry = -1;
 
   for(;;) {
     placement = self canPlayerPlaceSentry(1, 22);

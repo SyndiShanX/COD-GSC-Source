@@ -7,8 +7,8 @@
 #include common_scripts\utility;
 #include maps\_anim;
 
-UPDATE_TIME = 0.05; // Time between player input checks.
-BLEND_TIME = 0.5; // Blend time for lean animations.
+UPDATE_TIME = 0.05;
+BLEND_TIME = 0.5;
 STEER_MIN = -1.0;
 STEER_MAX = 1.0;
 TURN_ANIM_RATE_MULTIPLIER = 0.5;
@@ -38,43 +38,37 @@ snowmobile_preLoad(playerHandModel, playerSnowmobileModel) {
   flag_init("player_can_die_on_snowmobile");
   flag_set("player_can_die_on_snowmobile");
 
-  // set player hand model
   if(!isDefined(playerHandModel))
     level.snowmobile_playerHandModel = "viewhands_player_arctic_wind";
   else
     level.snowmobile_playerHandModel = playerHandModel;
 
-  // set player snowmobile model
   if(!isDefined(playerSnowmobileModel))
     level.snowmobile_playerSnowmobileModel = "vehicle_snowmobile_player";
   else
     level.snowmobile_playerSnowmobileModel = playerSnowmobileModel;
 
-  // set gun
   if(!isDefined(level.snowmobile_gunModel))
     level.snowmobile_gunModel = "viewmodel_glock";
   level.snowmobile_gun = "snowmobile_glock";
 
-  // precahe models and itmes
   PreCacheModel(level.snowmobile_playerHandModel);
   PreCacheModel(level.snowmobile_playerSnowmobileModel);
   PreCacheModel(level.snowmobile_gunModel);
   PreCacheItem(level.snowmobile_gun);
   PreCacheRumble("pistol_fire_auto");
 
-  // load gun effects
   level.snowmobile_gunFlashFx = LoadFX("muzzleflashes/uzi_flash_view");
   level.snowmobile_gunShellFx = LoadFX("shellejects/pistol_view");
 
   snowmobile_anims();
 
-  // Hold ^3[{+speed_throw}]^7 to shoot.
   add_hint_string("snowmobile_attack_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player1);
   add_hint_string("snowmobile_attack_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player2);
-  // Hold ^3[{+attack}]^7 to drive.
+
   add_hint_string("snowmobile_drive_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player1);
   add_hint_string("snowmobile_drive_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player2);
-  // Press ^3[{+stance}]^7 to go in reverse.
+
   add_hint_string("snowmobile_reverse_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player1);
   add_hint_string("snowmobile_reverse_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player2);
 }
@@ -247,13 +241,7 @@ make_coop_vehicle(vehicle) {
   if(self != level.player)
     clientOther = level.player;
 
-  // hide arms and player model from other players
   self hideOnClient(clientOther);
-  //vehicle hideOnClient( clientOther );
-
-  // use full snowmobile model with high res cockpit for coop
-  //wait 0.05;
-  //vehicle setModel( "vehicle_snowmobile_co_op" );
 }
 
 snowmobile_fov_check() {
@@ -323,14 +311,12 @@ drive_crash_detection(vehicle) {
 
 waittill_vehicle_crashes() {
   if(!is_specialop())
-    level endon("player_crashes"); // from triggers in the map
+    level endon("player_crashes");
   else
     thread waittill_vehicle_falling_so();
 
   self waittill_any("veh_collision", "veh_falling");
 }
-
-// This could be done cleaner for both SO and SP, but avoiding making changes to Cliffhanger.
 waittill_vehicle_falling_so() {
   trigger_ent = GetEnt("player_crashes_trigger", "script_noteworthy");
   while(1) {
@@ -355,8 +341,6 @@ drive_crash_slide(vehicle, velocity) {
   }
 
   wait(1.0);
-
-  //self EndSliding();
 }
 
 drive_camera(vehicle) {
@@ -457,18 +441,12 @@ drive_turning_anims(vehicle) {
   vehicle SetAnimTime(vehicle getanim(curAnim + "R"), 0.5);
 
   for(;;) {
-    //------------------------------------------------------- // Steer the handlebars based on the player's input
-    //------------------------------------------------------- movement_last = movement;
     movement = vehicle Vehicle_GetSteering() * -1.0;
     movementChange = movement - movement_last;
     steerValue = movement;
     steerValue = clamp(steerValue, STEER_MIN, STEER_MAX);
 
-    //------------------------------------------------------- // Blend turn anims on the vehicle with the right weights
-    //------------------------------------------------------- newDirection = false;
-
     if(movementChange < 0) {
-      // change to turn left anims
       if(lastDirection != -1)
         newDirection = true;
       lastDirection = -1;
@@ -477,7 +455,6 @@ drive_turning_anims(vehicle) {
       newAnim = "turn_right2left_";
     }
     if(movementChange > 0) {
-      // change to turn right anims
       if(lastDirection != 1)
         newDirection = true;
       lastDirection = 1;
@@ -486,8 +463,6 @@ drive_turning_anims(vehicle) {
       newAnim = "turn_left2right_";
     }
 
-    //--------------------------- // Animate the bars and hands
-    //--------------------------- // See where the opposite animation needs to start so that it matches the previous animations position
     newAnimStartTime["L"] = vehicle GetAnimTime(vehicle getanim(curAnim + "L"));
     newAnimStartTime["R"] = vehicle GetAnimTime(vehicle getanim(curAnim + "R"));
 
@@ -496,7 +471,6 @@ drive_turning_anims(vehicle) {
       newAnimStartTime["R"] = abs(1 - newAnimStartTime["R"]);
     }
 
-    // See what the new animation needs to be to match the player's input
     animTimeGoal = abs((steerValue - STEER_MIN) / (STEER_MIN - STEER_MAX));
     if(newAnim == "turn_right2left_")
       animTimeGoal = 1.0 - animTimeGoal;
@@ -506,18 +480,13 @@ drive_turning_anims(vehicle) {
       newAnimStartTime["L"] = animTimeGoal;
     }
 
-    // Fix for bug where handlebars would sometimes get stuck left or right when there is no stick movement.
-    // Happens when stick goes from one side to the other very quickly within 0.05 server framerate.
-    // Just setting newDirection fixes this because it causes it to animate back to where it should be instead of overshooting it's goal time.
     if(newAnimStartTime["L"] > animTimeGoal) {
       newDirection = true;
     }
 
-    // See how far the new animation needs to travel
     amountChange["L"] = abs(animTimeGoal - newAnimStartTime["L"]);
     amountChange["R"] = abs(animTimeGoal - newAnimStartTime["R"]);
 
-    // See what animrate we should play the animation at so that it reaches the animGoalTime over UPDATE_TIME time.
     if(movementChange == 0) {
       estimatedAnimRate["L"] = 0;
       estimatedAnimRate["R"] = 0;
@@ -527,11 +496,9 @@ drive_turning_anims(vehicle) {
     }
 
     if(newDirection) {
-      // clear the anim from the other direction
       vehicle ClearAnim(vehicle getanim(oldAnim + "L"), 0);
       vehicle ClearAnim(vehicle getanim(oldAnim + "R"), 0);
 
-      // set the time on the new direction anim so it doesn't start animating from the beginning, // since the previous anim probably wasn't at the end
       vehicle SetAnimLimited(vehicle getanim(newAnim + "L"), 1, BLEND_TIME, estimatedAnimRate["L"]);
       vehicle SetAnimLimited(vehicle getanim(newAnim + "R"), 1, BLEND_TIME, estimatedAnimRate["R"]);
 
@@ -577,7 +544,6 @@ drive_blend_anims_with_steering(vehicle, animflag, endNotify, leftAnim, centerAn
     steerValue = vehicle Vehicle_GetSteering() * -1.0;
     steerValue = clamp(steerValue, STEER_MIN, STEER_MAX);
 
-    // never set a weight to zero so that all the anims continue to play
     if(steerValue >= 0.0) {
       leftWeight = 0.001;
       centerWeight = -0.999 * steerValue + 1.0;
@@ -597,16 +563,13 @@ drive_blend_anims_with_steering(vehicle, animflag, endNotify, leftAnim, centerAn
 }
 
 is_shoot_button_pressed() {
-  // pc
   return self attackButtonPressed();
 }
 
 drive_shooting_update_anims(vehicle) {
-  // start pull out anim
   vehicle SetAnimKnobLimited(vehicle getanim("gun_pullout_root"), 1.0, 0.0, 1.0);
   self childthread drive_blend_anims_with_steering(vehicle, "pullout_anim", "pullout_done", "gun_pullout_L", "gun_pullout", "gun_pullout_R");
 
-  // attach the gun
   vehicle waittillmatch("pullout_anim", "attach_gun");
   vehicle Attach(level.snowmobile_gunModel, "tag_weapon_left");
   hideParts = [];
@@ -624,10 +587,8 @@ drive_shooting_update_anims(vehicle) {
   vehicle waittillmatch("pullout_anim", "end");
   vehicle notify("pullout_done");
 
-  // start gun anim
   vehicle SetAnim(vehicle getanim("glock"), 1.0, 0.0, 1.0);
 
-  // start idle
   vehicle SetAnimKnobLimited(vehicle getanim("gun_idle"), 1.0, 0.0, 1.0);
 
   vehicle.snowmobileShootTimer = SHOOT_ARM_UP_DELAY;
@@ -642,7 +603,7 @@ drive_shooting_update_anims(vehicle) {
     if(shootButtonPressed && (vehicle.snowmobileAmmoCount > 0)) {
       assert(isPlayer(self));
       self ent_flag_set("player_shot_on_snowmobile");
-      // play gun fire anims
+
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);
 
       if(vehicle.snowmobileAmmoCount == 1)
@@ -650,7 +611,6 @@ drive_shooting_update_anims(vehicle) {
       else
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_fire"), 1.0, 0.0, 1.0);
 
-      // fire bullet
       self drive_magic_bullet(vehicle);
 
       wait(SHOOT_FIRE_TIME);
@@ -658,7 +618,6 @@ drive_shooting_update_anims(vehicle) {
       vehicle.snowmobileAmmoCount -= 1;
       vehicle.snowmobileShootTimer = SHOOT_ARM_UP_DELAY;
     } else if(vehicle.snowmobileAmmoCount <= 0) {
-      // play reload anims
       vehicle SetFlaggedAnimKnobLimitedRestart("reload_anim", vehicle getanim("gun_reload"), 1.0, 0.0, 1.0);
       vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_reload"), 1.0, 0.0, 1.0);
 
@@ -667,7 +626,6 @@ drive_shooting_update_anims(vehicle) {
       vehicle.snowmobileAmmoCount = SHOOT_AMMO_COUNT;
       vehicle.snowmobileShootTimer = SHOOT_ARM_UP_DELAY;
     } else {
-      // play idle
       vehicle SetAnimKnobLimited(vehicle getanim("gun_idle"), 1.0, 0.0, 1.0);
       vehicle.snowmobileShootTimer -= UPDATE_TIME;
     }
@@ -675,11 +633,9 @@ drive_shooting_update_anims(vehicle) {
     wait UPDATE_TIME;
   }
 
-  // start put away anim
   vehicle SetAnimKnobLimited(vehicle getanim("gun_putaway_root"), 1.0, 0.0, 1.0);
   self childthread drive_blend_anims_with_steering(vehicle, "putaway_anim", "putaway_done", "gun_putaway_L", "gun_putaway", "gun_putaway_R");
 
-  // detach the gun
   vehicle waittillmatch("putaway_anim", "detach_gun");
   vehicle Detach(level.snowmobile_gunModel, "tag_weapon_left");
   vehicle.gun_attached = undefined;
@@ -716,7 +672,6 @@ drive_sleeve_anims(vehicle) {
   for(;;) {
     speed = vehicle Vehicle_GetSpeed();
 
-    // Animate sleeve flapping based on speed
     speedLerp = speed / SLEEVE_FLAP_SPEED;
     if(speedLerp > 1.0)
       speedLerp = 1.0;

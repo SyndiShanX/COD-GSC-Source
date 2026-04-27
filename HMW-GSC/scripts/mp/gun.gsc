@@ -1,10 +1,8 @@
 main() {
-  // restore scr_game_hardpoints value when game ends
   if(getDvar("g_gametype") == "gun") {
     level.saved_hardpoints_dvar = getDvar("scr_game_hardpoints");
   }
 
-  // replace gun game weapon pool
   replacefunc(maps\mp\gametypes\gun::setguns, ::setguns_stub);
 
   replacefunc(maps\mp\gametypes\gun::isdedicatedmeleeweapon, ::isdedicatedmeleeweapon_stub);
@@ -27,7 +25,7 @@ setguns_stub() {
 
   level.gun_guns = [];
 
-  ar_additional_attachments = ["none", "reflex", "silencerar", "acog"]; // TODO: add "gl"shotgun_additional_attachments = ["none", "reflex", "foregrip"];
+  ar_additional_attachments = ["none", "reflex", "silencerar", "acog"];
   shotgun_additional_attachments_akimbo = ["none", "fmj", "akimbo"];
 
   snipers_additional_attachments = ["none", "acog", "fmj", "silencersniper"];
@@ -55,15 +53,15 @@ setguns_stub() {
       maps\mp\gametypes\gun::guninfo("h2_scar", "none", ar_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_mg4", "none", lmg_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_cheytac", "none", snipers_additional_attachments);
-      maps\mp\gametypes\gun::guninfo("h2_fal", "reflex", ar_additional_attachments); // no grenade luancher (3/18/2024)
+      maps\mp\gametypes\gun::guninfo("h2_fal", "reflex", ar_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_mp5k", "none", smg_additional_attachments);
-      maps\mp\gametypes\gun::guninfo("h2_fn2000", "none", ar_additional_attachments); // no grenade luancher (3/18/2024)
+      maps\mp\gametypes\gun::guninfo("h2_fn2000", "none", ar_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_model1887", "none", shotgun_additional_attachments_akimbo);
       maps\mp\gametypes\gun::guninfo("h2_barrett", "none", snipers_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_tavor", "acog", ar_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_glock", "none", pistol_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_ump45", "silencersmg", smg_additional_attachments);
-      maps\mp\gametypes\gun::guninfo("h2_ak47", "none", ar_additional_attachments); // has own gl attachment
+      maps\mp\gametypes\gun::guninfo("h2_ak47", "none", ar_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_rpd", "reflex", lmg_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_m21", "none", snipers_additional_attachments);
       break;
@@ -136,8 +134,8 @@ setguns_stub() {
       maps\mp\gametypes\gun::guninfo("h2_striker", "none", shotgun_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_ranger", "none", shotgun_additional_attachments_akimbo);
       maps\mp\gametypes\gun::guninfo("h2_model1887", "none", shotgun_additional_attachments_akimbo);
-      maps\mp\gametypes\gun::guninfo("h2_winchester1200", "none", shotgun_additional_attachments); // should have foregrip
-      maps\mp\gametypes\gun::guninfo("h2_m1014", "none", shotgun_additional_attachments); // should have foregrip
+      maps\mp\gametypes\gun::guninfo("h2_winchester1200", "none", shotgun_additional_attachments);
+      maps\mp\gametypes\gun::guninfo("h2_m1014", "none", shotgun_additional_attachments);
       break;
     case 7:
       maps\mp\gametypes\gun::guninfo("h2_m240", "none", lmg_additional_attachments);
@@ -152,7 +150,7 @@ setguns_stub() {
       maps\mp\gametypes\gun::guninfo("h2_beretta393", "none", pistol_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_tmp", "none", pistol_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_usp", "none", pistol_additional_attachments);
-      maps\mp\gametypes\gun::guninfo("h2_coltanaconda", "none", default_attachments); // pistol_additional_attachments
+      maps\mp\gametypes\gun::guninfo("h2_coltanaconda", "none", default_attachments);
       maps\mp\gametypes\gun::guninfo("h2_m9", "none", pistol_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_colt45", "none", pistol_additional_attachments);
       maps\mp\gametypes\gun::guninfo("h2_deserteagle", "none", pistol_additional_attachments);
@@ -162,7 +160,6 @@ setguns_stub() {
       maps\mp\gametypes\gun::guninfo("h2_m79", "none", default_attachments);
       maps\mp\gametypes\gun::guninfo("h2_rpg", "none", default_attachments);
 
-      // TODO: grenade launchers later
       /*
       maps\mp\gametypes\gun::guninfo("h2_m16", "gl", ar_additional_attachments2, 1);
       maps\mp\gametypes\gun::guninfo("h2_scar", "gl", ar_additional_attachments2, 1);

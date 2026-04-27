@@ -10,8 +10,6 @@
 #include maps\_specialops;
 #include maps\so_defense_invasion_code;
 
-// --------------------------------------------------------------------------------- //	Init
-// --------------------------------------------------------------------------------- main() {
 maps\invasion_precache::main();
 maps\invasion_fx::main();
 maps\createart\invasion_art::main();
@@ -64,9 +62,6 @@ maps\invasion_anim::main_anim();
 
 maps\_compass::setupMiniMap("compass_map_invasion");
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Initializations
-// --------------------------------------------------------------------------------- start_so_defense() {
 so_defense_init();
 so_defense_challenge_prep();
 so_defense_wave_1();
@@ -84,36 +79,32 @@ so_defense_init() {
   so_defense_setup_radio_dialog();
 
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_defense_setup_Regular();
-      break; // Regular
+      break;
     case 2:
       so_defense_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_defense_setup_veteran();
-      break; // Veteran
+      break;
   }
 
-  // Smoke chance when spawning bank, burgertown, or taco enemies.
   level.smoke_chance = 0.33;
   level.smoke_throttle = 60000;
 
   level.btr80_alert_throttle = 10000;
 
-  // Put a clamp on how often the player is alerted to hunter spawn points.
   level.hunter_dialog_throttle = 20000;
 
-  // Remove unwanted sentries
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries)
   sentry Delete();
   common_scripts\_sentry::main();
 
-  // Attacker Accuracy modifiers for sentry turrets.
   level.aamod_sentry_kill = 2.0;
-  // harder difficulties a bit more forgiving on turret usage.
+
   switch (level.gameskill) {
     case 2:
       level.aamod_sentry_kill = 1.75;
@@ -126,13 +117,10 @@ so_defense_init() {
   level.aamod_btr80_kill = -12.0;
   level.aamod_heli_kill = -16.0;
 
-  // Access the stingers before the player has a chance to take them
   level.stingers = [];
   thread stinger_maintain_spawn("diner");
   thread stinger_maintain_spawn("nates_stinger");
-  //	thread dialog_get_stinger();
 
-  // Custom end of game summary info.	
   level.custom_eog_no_partner = true;
   level.eog_summary_callback = ::custom_eog_summary;
   foreach(player in level.players) {
@@ -141,29 +129,22 @@ so_defense_init() {
     player.helicopter_kills = 0;
   }
 
-  // Prevent player from leaving the valid play space.
   thread enable_escape_warning();
   thread enable_escape_failure();
   thread enable_challenge_timer("challenge_start", "challenge_success");
 
-  // Remove ladder clips that are there to help the player in SP.
   ladder = getent("nates_kitchen_ladder_clip", "targetname");
   ladder Delete();
   ladder = getent("bt_ktichen_ladder_clip", "targetname");
   ladder Delete();
 
-  // Remove the Predator Control Unit
   ent = GetEnt("predator_drone_control", "targetname");
   ent Delete();
 
-  // Update the enemies so they can be used properly.
   so_defense_convert_enemies();
   so_defense_set_enemy_spawner_flags();
 
-  // Open doors around the map.
   door_diner_open();
-  //door_nates_locker_open();
-  //door_bt_locker_open();
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@SO_DEFENSE_INVASION_DEADQUOTE_HINT1";
@@ -175,10 +156,8 @@ so_defense_init() {
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_TURRET_PLACEMENT";
   so_include_deadquote_array(deadquotes);
 
-  // HOLD HERE TILL PLAYERS READY IN ONLINE COOP
   so_wait_for_players_ready();
 
-  // Todo: Convert the individual wave items into objectives
   Objective_Add(1, "current", level.challenge_objective);
 }
 
@@ -201,9 +180,6 @@ so_defense_setup_radio_dialog() {
   level.scr_radio["so_def_inv_stingerdiner"] = "so_def_inv_stingerdiner";
   level.scr_radio["so_def_inv_stingernates"] = "so_def_inv_stingernates";
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Waves
-// --------------------------------------------------------------------------------- so_defense_challenge_prep() {
 thread enable_hellfire_attack();
 pause_hellfire_attack();
 
@@ -317,19 +293,15 @@ so_defense_announce_wave_start(wave, timer, set_start_time) {
 
   thread so_defense_announce_start_music(wave);
 
-  // Reset the progress status so it can give appropriate updates each wave.
   level.so_progress_goal_status = "none";
 
-  // Reset the hunter dialog throttle so that it will happen on the first wave again.
   if(isDefined(level.hunter_dialog_throttle))
     level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
 
-  // Reset the stinger missile dialog throttle so that it will wait a while before activating.
   stringer_dialog_throttle_reset();
 }
 
 so_defense_announce_start_music(wave) {
-  // Gives time for the snare drum SFX to complete.
   wait 0.75;
 
   if(wave == "SO_DEFENSE_INVASION_WAVE_5")
@@ -345,7 +317,6 @@ so_defense_announce_wave_complete() {
   level.player playSound("arcademode_kill_streak_won");
   music_stop(2);
 
-  // Give all other notifies a chance to catch up.
   wait 0.05;
   level notify("wave_complete");
   level.hud_display_enemies = undefined;
@@ -370,39 +341,28 @@ custom_eog_summary() {
     player add_custom_eog_summary_line("@SO_DEFENSE_INVASION_KILLS_HELI", player.helicopter_kills);
   }
 }
-
-// --------------------------------------------------------------------------------- //	Enable/Disable events
-// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_nates_exploders() {
 thread fire_off_exploder(getent("north_side_low", "targetname"));
 thread fire_off_exploder(getent("north_side_high", "targetname"));
 thread fire_off_exploder(getent("west_side", "targetname"));
 }
-
-// --------------------------------------------------------------------------------- enable_smoke_wave_north(dialog_wait) {
 create_smoke_wave("magic_smoke_grenade_north", dialog_wait);
 }
 
 enable_smoke_wave_south(dialog_wait) {
   create_smoke_wave("magic_smoke_grenade", dialog_wait);
 }
-
-// --------------------------------------------------------------------------------- enable_hunter_truck_enemies_bank() {
 create_hunter_truck_enemies("truck_north_right");
 }
 
 enable_hunter_truck_enemies_road() {
   create_hunter_truck_enemies("truck_north_left");
 }
-
-// --------------------------------------------------------------------------------- enable_btr80_circling_street() {
 create_btr80("nate_attacker_left");
 }
 
 enable_btr80_circling_parking_lot() {
   create_btr80("nate_attacker_mid");
 }
-
-// --------------------------------------------------------------------------------- enable_hunter_enemy_refill(refill_at, min_fill, max_fill, refill_total) {
 hunter_enemies_refill(refill_at, min_fill, max_fill, refill_total);
 }
 
@@ -421,8 +381,6 @@ enable_hunter_enemy_group_taco(enemy_count) {
 enable_hunter_enemy_group_burger_town(enemy_count) {
   create_hunter_enemy_group("burger_town_enemies", enemy_count);
 }
-
-// --------------------------------------------------------------------------------- enable_hellfire_attack() {
 hellfire_attack_start();
 }
 
@@ -437,8 +395,6 @@ pause_hellfire_attack() {
 unpause_hellfire_attack() {
   hellfire_attack_unpause();
 }
-
-// --------------------------------------------------------------------------------- enable_attack_heli_everywhere(wait_time) {
 create_attack_heli("kill_heli", "attack_heli_circle_node", wait_time);
 }
 
@@ -449,5 +405,3 @@ enable_attack_heli_north(wait_time) {
 enable_attack_heli_south(wait_time) {
   create_attack_heli("kill_heli", "attack_heli_south_circle_node", wait_time);
 }
-
-// ---------------------------------------------------------------------------------

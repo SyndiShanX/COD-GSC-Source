@@ -1,6 +1,4 @@
 main() {
-  // Clientsideeffects for MP
-
   if(getDvar("clientSideEffects", "1") != "1") {
     maps\createfx\mp_overwatch_fx::main();
   }
@@ -15,7 +13,6 @@ precache_createfx_fx() {
 
   level._effect["wall_fire_mp2"] = loadfx("fire/wall_fire_mp2");
 
-  //Playspace
   level._effect["light_dust_motes_fog"] = loadfx("maps/mp_overwatch/light_dust_motes_fog");
   level._effect["light_dust_motes_fog_outdoor"] = loadfx("maps/mp_overwatch/light_dust_motes_fog_outdoor");
   level._effect["fog_bog_a_wind"] = loadfx("maps/mp_overwatch/fog_bog_a_wind");
@@ -23,7 +20,6 @@ precache_createfx_fx() {
   level._effect["wind_blowing_rooftops"] = loadfx("maps/mp_overwatch/wind_blowing_rooftops");
   level._effect["generator_spark_runner_loop_interchange"] = loadfx("explosions/generator_spark_runner_l_nolight");
 
-  //Background
   level._effect["aftermath"] = loadfx("maps/mp_overwatch/aftermath");
   level._effect["aftermath_lt"] = loadfx("maps/mp_overwatch/aftermath_lt");
   level._effect["fan_dust_spiral"] = loadfx("maps/mp_overwatch/fan_dust_spiral");

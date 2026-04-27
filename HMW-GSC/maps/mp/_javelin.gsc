@@ -163,8 +163,7 @@ JavelinUsageLoop() {
     if(!isDefined(self.javelinStage))
       self.javelinStage = 1;
 
-    if(self.javelinStage == 1) // SCANNING: try to find a good point to lock to
-    {
+    if(self.javelinStage == 1) {
       targets = GetTargetList();
       if(targets.size != 0) {
         targetsInReticle = [];
@@ -232,11 +231,9 @@ JavelinUsageLoop() {
         self WeaponLockTargetTooClose(false);
       }
 
-      // make sure we haven't strayed too far
       if(isDefined(self.javelinPoints)) {
         prevAvgPoint = AveragePoint(self.javelinPoints);
         dist = Distance(prevAvgPoint, traceRes[0]);
-        //PrintLn( "[", self.javelinPoints.size, "] - Dist: ", dist );
 
         if(dist > MAX_POINT_PEER_DIST) {
           LockMissesIncr();
@@ -254,7 +251,7 @@ JavelinUsageLoop() {
       if(self.javelinPoints.size < POINTS_NEEDED_TO_START_LOCK) {
         continue;
       }
-      // Go to stage 2:
+
       self.javelinTargetPoint = AveragePoint(self.javelinPoints);;
       self.javelinTargetNormal = AverageNormal(self.javelinNormals);;
       self.javelinLockMisses = undefined;
@@ -269,8 +266,7 @@ JavelinUsageLoop() {
       self.javelinStage = 2;
     }
 
-    if(self.javelinStage == 2) // LOCKING: complete lockon to point
-    {
+    if(self.javelinStage == 2) {
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.5, 1.0, 0.6));
 
@@ -286,7 +282,7 @@ JavelinUsageLoop() {
         self WeaponLockTargetTooClose(false);
 
       timePassed = getTime() - self.javelinLockStartTime;
-      //PrintLn( "Locking [", timePassed, "]..." );
+
       if(timePassed < LOCK_LENGTH) {
         continue;
       }
@@ -297,8 +293,7 @@ JavelinUsageLoop() {
       self setclientomnvar("ui_javelin_lock_status", 2);
     }
 
-    if(self.javelinStage == 3) // LOCKED: try and hold it
-    {
+    if(self.javelinStage == 3) {
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.1, 0.15, 1.0));
 
@@ -322,7 +317,7 @@ GetTargetList() {
   targets = [];
 
   if(level.teamBased) {
-    if(isDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self))
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.harriers)) {
@@ -340,7 +335,7 @@ GetTargetList() {
     if(isDefined(level.ac130player) && (level.ac130player.team != self.team))
       targets[targets.size] = level.ac130.planeModel;
   } else {
-    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.owner != self))
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player))
@@ -405,8 +400,7 @@ VehicleLockSightTest(target) {
 }
 
 javelinLockVehicle(lockLength) {
-  if(self.javelinStage == 2) // locking on to a target
-  {
+  if(self.javelinStage == 2) {
     self WeaponLockStart(self.javelinTarget);
 
     if(!(self StillValidJavelinLock(self.javelinTarget))) {
@@ -431,12 +425,6 @@ javelinLockVehicle(lockLength) {
     if(timePassed < lockLength) {
       return;
     }
-    //strangely buggy with the moving target...
-    //javTarg = eyeTraceForward();
-    //if( !isDefined( javTarg ) )
-    //	return;
-
-    //topAttack = TopAttackPasses( javTarg[0], javTarg[1] );
 
     self WeaponLockFinalize(self.javelinTarget, (0, 0, 0), false);
 
@@ -450,8 +438,7 @@ javelinLockVehicle(lockLength) {
     self.javelinStage = 3;
   }
 
-  if(self.javelinStage == 3) // target locked
-  {
+  if(self.javelinStage == 3) {
     passed = SoftSightTest();
     if(!passed) {
       return;

@@ -7,17 +7,14 @@
 #include maps\_utility;
 #include maps\_hud_util;
 
-//need to be able to save select dvar in menu (spending points while in the menu)
-//need to be able to save select dvar from script (dvars track which items are found)
 main() {
-  // && 1/30 pieces of enemy intel found.
   precachestring(&"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE");
   precachestring(&"SCRIPT_INTELLIGENCE_PREV_FOUND");
   level.intel_items = create_array_of_intel_items();
   println("intelligence.gsc: intelligence items:", level.intel_items.size);
 
   setDvar("ui_level_cheatpoints", level.intel_items.size);
-  level.intel_counter = 0; // intel counter for collected intel points for this mission
+  level.intel_counter = 0;
   setDvar("ui_level_player_cheatpoints", level.intel_counter);
 
   level.table_origins = create_array_of_origins_from_table();
@@ -71,11 +68,6 @@ intel_think() {
     }
   }
 }
-
-//we poll constantly to see if the item's been picked up...this is because script only checks at the
-//beginning if the item was found or not...after that, it doesn't check anymore, however a player can
-//pick up intel, die, reload an earlier part of script and then pick up intel again...this polling
-//insures things like that dont happen.
 poll_for_found() {
   self endon("end_loop_thread");
 
@@ -124,7 +116,6 @@ wait_for_pickup() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
-    // Press and hold^3 && 1 ^7to secure the enemy intelligence.
     self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
     self usetriggerrequirelookat();
   }
@@ -152,15 +143,12 @@ save_intel_for_all_players() {
   }
   logString("found intel item " + self.num);
 
-  // updates percent complete
-
   PrintLn(">> SP PERCENT UPDATE - save_intel_for_all_players()");
 
   maps\_endmission::updateSpPercent();
 }
 
 give_point() {
-  //give_points
   curValue = (self GetLocalPlayerProfileData("cheatPoints"));
   self SetLocalPlayerProfileData("cheatPoints", curValue + 1);
 }
@@ -175,7 +163,6 @@ intel_feedback(found_by_player) {
   delete_time = display_time + fade_time / 1000;
 
   foreach(player in level.players) {
-    //if i did NOT find it, but I already had it, print nothing
     if(found_by_player != player && player GetPlayerIntelIsFound(self.num)) {
       continue;
     }
@@ -188,11 +175,9 @@ intel_feedback(found_by_player) {
 
     intel_found = 0;
 
-    //if I found it and I already had it
     if(found_by_player == player && player GetPlayerIntelIsFound(self.num))
       remaining_print.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
     else {
-      // && 1/30 pieces of enemy intel found.
       remaining_print.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
       player give_point();
       intel_found = (player GetLocalPlayerProfileData("cheatPoints"));
@@ -225,12 +210,10 @@ assert_if_identical_origins() {
   for(i = 1; i < 65; i++) {
     location = tablelookup("maps/_intel_items.csv", 0, i, 4);
     locArray = strTok(location, ",");
-    //assert( locArray.size == 3 );
+
     for(i = 0; i < locArray.size; i++)
       locArray[i] = int(locArray[i]);
     origins[i] = (locArray[0], locArray[1], locArray[2]);
-
-    //if( distancesquared( first.origin, second.origin ) < 4 );
   }
 
   for(i = 0; i < origins.size; i++) {

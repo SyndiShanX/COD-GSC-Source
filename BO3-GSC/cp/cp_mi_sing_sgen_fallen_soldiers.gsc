@@ -29,130 +29,66 @@
 #using scripts\shared\vehicle_shared;
 #namespace cp_mi_sing_sgen_fallen_soldiers;
 
-function skipto_fallen_soldiers_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_fallen_soldiers_init() {}
 
-function skipto_fallen_soldiers_done() {
-  // Unsupported VM revision (1B).
-}
+function skipto_fallen_soldiers_done() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function hendricks_battle_movement() {
-  // Unsupported VM revision (1B).
-}
+function hendricks_battle_movement() {}
 
-function wait_till_an_initial_zone_spawned() {
-  // Unsupported VM revision (1B).
-}
+function wait_till_an_initial_zone_spawned() {}
 
-function wait_till_zone_safe_then_move() {
-  // Unsupported VM revision (1B).
-}
+function wait_till_zone_safe_then_move() {}
 
-function fallen_soldiers_objective() {
-  // Unsupported VM revision (1B).
-}
+function fallen_soldiers_objective() {}
 
-function function_2f485a41() {
-  // Unsupported VM revision (1B).
-}
+function function_2f485a41() {}
 
-function function_d43d6872() {
-  // Unsupported VM revision (1B).
-}
+function function_d43d6872() {}
 
-function open_entrance_hall_doors() {
-  // Unsupported VM revision (1B).
-}
+function open_entrance_hall_doors() {}
 
-function fallen_soldiers_room() {
-  // Unsupported VM revision (1B).
-}
+function fallen_soldiers_room() {}
 
-function play_hendricks_dayroom_scene() {
-  // Unsupported VM revision (1B).
-}
+function play_hendricks_dayroom_scene() {}
 
-function set_hendricks_end_goal() {
-  // Unsupported VM revision (1B).
-}
+function set_hendricks_end_goal() {}
 
-function vo() {
-  // Unsupported VM revision (1B).
-}
+function vo() {}
 
-function say_dayroom_gps_vo() {
-  // Unsupported VM revision (1B).
-}
+function say_dayroom_gps_vo() {}
 
-function function_c1c96249() {
-  // Unsupported VM revision (1B).
-}
+function function_c1c96249() {}
 
-function function_68f0b726() {
-  // Unsupported VM revision (1B).
-}
+function function_68f0b726() {}
 
-function function_88a16751() {
-  // Unsupported VM revision (1B).
-}
+function function_88a16751() {}
 
-function function_a43abada() {
-  // Unsupported VM revision (1B).
-}
+function function_a43abada() {}
 
-function wait_till_all_dead_or_timeout() {
-  // Unsupported VM revision (1B).
-}
+function wait_till_all_dead_or_timeout() {}
 
-function wakeup_think() {
-  // Unsupported VM revision (1B).
-}
+function wakeup_think() {}
 
-function fallen_soldiers_robot_trigger_init() {
-  // Unsupported VM revision (1B).
-}
+function fallen_soldiers_robot_trigger_init() {}
 
-function fallen_soldiers_robot_wakeup() {
-  // Unsupported VM revision (1B).
-}
+function fallen_soldiers_robot_wakeup() {}
 
-function wait_till_wakeup_cooldown_expired() {
-  // Unsupported VM revision (1B).
-}
+function wait_till_wakeup_cooldown_expired() {}
 
-function robot_wake_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
+function robot_wake_spawnfunc() {}
 
-function robot_spawnfunc() {
-  // Unsupported VM revision (1B).
-}
+function robot_spawnfunc() {}
 
-function robot_wake_up() {
-  // Unsupported VM revision (1B).
-}
+function robot_wake_up() {}
 
-function monitor_encounter() {
-  // Unsupported VM revision (1B).
-}
+function monitor_encounter() {}
 
-function wait_till_all_death() {
-  // Unsupported VM revision (1B).
-}
+function wait_till_all_death() {}
 
-function encounter_kill_spawnmanagers() {
-  // Unsupported VM revision (1B).
-}
+function encounter_kill_spawnmanagers() {}
 
-function handle_breadcrumbs() {
-  // Unsupported VM revision (1B).
-}
+function handle_breadcrumbs() {}
 
-function drone_breadcrumb() {
-  // Unsupported VM revision (1B).
-}
+function drone_breadcrumb() {}

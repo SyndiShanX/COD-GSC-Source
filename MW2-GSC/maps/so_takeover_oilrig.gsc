@@ -13,12 +13,11 @@ main() {
   precacheModel("com_barrel_white_rust");
   precacheModel("com_barrel_blue_rust");
 
-  // settings for this challenge
   level.pmc_gametype = "mode_elimination";
   level.pmc_enemies = 15;
   level.pmc_alljuggernauts = true;
   level.pmc_enemies_alive = 1;
-  level.pmc_low_enemy_count = 3; // Used for pulsing the hud
+  level.pmc_low_enemy_count = 3;
 
   save_triggers();
   so_delete_all_spawntriggers();

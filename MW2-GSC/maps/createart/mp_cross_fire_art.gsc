@@ -3,11 +3,8 @@
  * Script: maps\createart\mp_cross_fire_art.gsc
 ********************************************************/
 
-// _createart generated.modify at your own risk. Changing values should be fine.
 main() {
   level.tweakfile = true;
-
-  // * Fog section *
 
   setDvar("scr_fog_disable", "0");
 

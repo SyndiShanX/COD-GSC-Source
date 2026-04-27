@@ -7,87 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	Action SAB/SD = DD
-	Attackers objective: Bomb both of 2 positions
-	Defenders objective: Defend these 2 positions / Defuse planted bombs
-	Round ends:	When one team defends for duration of match, both sites are destroyed.
-	Map ends:	When one team reaches the score limit, or time limit or round limit is reached
-	Respawning:	Players respawn indefinetly and immediately
-
-	Level requirements
-	------------------ Allied Spawnpoints:
-			classname		mp_sd_spawn_attacker
-			Allied players spawn from these. Place at least 16 of these relatively close together.
-
-		Axis Spawnpoints:
-			classname		mp_sd_spawn_defender
-			Axis players spawn from these. Place at least 16 of these relatively close together.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-
-		Bombzones:
-			classname					trigger_multiple
-			targetname					bombzone
-			script_gameobjectname		bombzone
-			script_bombmode_original	<if defined this bombzone will be used in the original bomb mode>
-			script_bombmode_single		<if defined this bombzone will be used in the single bomb mode>
-			script_bombmode_dual		<if defined this bombzone will be used in the dual bomb mode>
-			script_team					Set to allies or axis. This is used to set which team a bombzone is used by in dual bomb mode.
-			script_label				Set to A or B. This sets the letter shown on the compass in original mode.
-			This is a volume of space in which the bomb can planted. Must contain an origin brush.
-
-		Bomb:
-			classname				trigger_lookat
-			targetname				bombtrigger
-			script_gameobjectname	bombzone
-			This should be a 16x16 unit trigger with an origin brush placed so that it's center lies on the bottom plane of the trigger.
-			Must be in the level somewhere. This is the trigger that is used when defusing a bomb.
-			It gets moved to the position of the planted bomb model.
-
-	Level script requirements
-	------------------------- Team Definitions:
-			game["attackers"] = "allies";
-			game["defenders"] = "axis";
-			This sets which team is attacking and which team is defending. Attackers plant the bombs. Defenders protect the targets.
-
-		Exploder Effects:
-			Setting script_noteworthy on a bombzone trigger to an exploder group can be used to trigger additional effects.
-	
-	multiple bombs
-	multiple targets
-	spawning
-	round handling when both sites are destroyed
-
-*/
-
-/*QUAKED mp_dd_spawn_attacker_a (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn near bomb a.*/
-
-/*QUAKED mp_dd_spawn_attacker_b (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn near bomb b.*/
-
-/*QUAKED mp_dd_spawn_attacker (0.75 0.0 0.5) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_dd_spawn_defender (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_dd_spawn_defender_a (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn near bomb site a.*/
-
-/*QUAKED mp_dd_spawn_defender_b (0.0 0.75 0.5) (-16 -16 0) (16 16 72)
-Allied players spawn near bomb site b.*/
-
-/*QUAKED mp_dd_spawn_attacker_start (0.0 1.0 0.0) (-16 -16 0) (16 16 72)
-Attacking players spawn randomly at one of these positions at the beginning of a round.*/
-
-/*QUAKED mp_dd_spawn_defender_start (1.0 0.0 0.0) (-16 -16 0) (16 16 72)
-Defending players spawn randomly at one of these positions at the beginning of a round.*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -399,7 +318,7 @@ updateGametypeDvars() {
   level.plantTime = dvarFloatValue("planttime", 5, 0, 20);
   level.defuseTime = dvarFloatValue("defusetime", 5, 0, 20);
   level.bombTimer = dvarIntValue("bombtimer", 45, 1, 300);
-  level.ddTimeToAdd = dvarFloatValue("addtime", 2, 0, 5);; //how much time is added to the match when a target is destroyed
+  level.ddTimeToAdd = dvarFloatValue("addtime", 2, 0, 5);;
 }
 
 bombs() {
@@ -471,7 +390,7 @@ onUseObject(player) {
     player playSound("mp_bomb_plant");
 
     thread teamPlayerCardSplash("callout_bombplanted", player);
-    //iPrintLn(&"MP_EXPLOSIVES_PLANTED_BY", player );
+
     leaderDialog("bomb_planted");
 
     player thread maps\mp\gametypes\_hud_message::SplashNotify("plant", maps\mp\gametypes\_rank::getScoreInfoValue("plant"));
@@ -486,8 +405,7 @@ onUseObject(player) {
     level.bombOwner = player;
     self.useWeapon = "briefcase_bomb_defuse_mp";
     self setUpForDefusing();
-  } else // defused the bomb
-  {
+  } else {
     self thread bombHandler(player, "defused");
   }
 }
@@ -599,7 +517,7 @@ bombPlanted(destroyedObj, player) {
   destroyedObj maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
   destroyedObj setUpForDefusing();
 
-  destroyedObj BombTimerWait(destroyedObj); //waits for bomb to explode!
+  destroyedObj BombTimerWait(destroyedObj);
 
   destroyedObj thread bombHandler(player, "explode");
 }
@@ -619,7 +537,6 @@ bombHandler(player, destType) {
   self setBombTimerDvar();
 
   setDvar("ui_bombtimer" + self.label, -1);
-  //self maps\mp\gametypes\_gameobjects::updateTimer( 0, false );
 
   if(level.gameEnded) {
     return;
@@ -662,13 +579,9 @@ bombHandler(player, destType) {
       dd_endGame(game["attackers"], game["strings"]["target_destroyed"]);
     else
       level thread teamPlayerCardSplash("callout_time_added", player);
-  } else //defused
-  {
+  } else {
     player notify("bomb_defused");
     self notify("defused");
-
-    //		if( !level.hardcoreMode )
-    //			iPrintLn(&"MP_EXPLOSIVES_DEFUSED_BY", player );
 
     leaderDialog("bomb_defused");
 
@@ -748,8 +661,6 @@ BombTimerWait(siteLoc) {
   while(siteLoc.waitTime >= 0) {
     siteLoc.waitTime--;
     setDvar("ui_bombtimer" + siteLoc.label, siteLoc.waitTime);
-
-    //self maps\mp\gametypes\_gameobjects::updateTimer( waitTime, true );
 
     if(siteLoc.waitTime >= 0)
       wait(1);

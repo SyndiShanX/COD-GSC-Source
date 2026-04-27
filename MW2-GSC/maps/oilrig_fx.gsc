@@ -7,7 +7,6 @@
 #include maps\_utility;
 
 main() {
-  //LittleBird DeathFX override		
   maps\_vehicle::build_deathfx_override("littlebird", "vehicle_little_bird_armed", "explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);
   maps\_vehicle::build_deathfx_override("littlebird", "vehicle_little_bird_armed", "fire/fire_smoke_trail_L", "tag_engine", "littlebird_helicopter_dying_loop", true, 0.05, true, 0.5, true);
   maps\_vehicle::build_deathfx_override("littlebird", "vehicle_little_bird_armed", "explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 2.5, true);
@@ -30,7 +29,7 @@ precacheFX() {
   level._effect["smokescreen"] = loadfx("smoke/smoke_screen");
 
   level._effect["sdv_prop_wash_1"] = loadfx("water/sdv_prop_wash_1");
-  //level._effect[ "sub_prop_wash_1" ]	 					= loadfx( "water/sdv_prop_wash_1" );
+
   level._effect["sdv_contrail"] = loadfx("smoke/jet_contrail");
 
   level._effect["scuba_bubbles"] = loadfx("water/scuba_bubbles_breath");
@@ -90,7 +89,6 @@ precacheFX() {
 
   level._effect["sub_surface_runner"] = loadfx("water/sub_surface_runner");
 
-  // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
   if(getdvarint("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
   else
@@ -100,59 +98,34 @@ precacheFX() {
 }
 
 submarine01_fx() {
-  //for engine exhaust, sounds, etc.
   flag_wait("open_dds_door");
-  //	while( !flag( "sdv_01_passing" ) )
-  //	{
-  //		playFXOnTag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
-  //		wait( .1 );
-  //	}
 }
 
 submarine02_fx() {
-  //for engine exhaust, sounds, etc.
   flag_wait("intro_anim_sequence_starting");
   wait(14);
   self thread play_sound_on_tag("submarine_driveby", "TAG_PROPELLER");
-  //	while( !flag( "sdv_01_arriving" ) )
-  //	{
-  //		playFXOnTag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
-  //		wait( .1 );
-  //	}
 }
 
 sdv01_fx() {
-  //for engine exhaust, sounds, etc.
   self waittill("moving");
   self thread play_sound_on_tag("sdv_start_plr", "TAG_PROPELLER");
   self delaythread(1, ::play_loop_sound_on_tag, "sdv_move_loop_plr", "TAG_PROPELLER", true);
 
-  //PLACE FX HERE
   playFXOnTag(getfx("oilrig_underwater_ambient_emitter"), self, "TAG_PROPELLER");
 
-  /*----------------------- SDV STOPPING
-  -------------------------*/
   self waittill("stopped_moving");
   self notify("stop sound" + "sdv_move_loop_plr");
   self thread play_sound_on_tag("sdv_stop_plr", "TAG_PROPELLER");
 }
 
 sdv02_fx() {
-  //for engine exhaust, sounds, etc.
-
-  /*----------------------- SDV STARTS MOVING
-  -------------------------*/
   self waittill("moving");
   self thread play_sound_on_tag("sdv_start", "TAG_PROPELLER");
   self delaythread(1, ::play_loop_sound_on_tag, "sdv_move_loop", "TAG_PROPELLER", true);
 
-  /*----------------------- SDV PROP WASH FX
-  -------------------------*/
   playFXOnTag(getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
 
-  /*----------------------- SDV STOPPING
-  -------------------------*/
-  //self waittill( "arriving" );
   self waittill("stopped_moving");
   stopFXOnTag(getfx("sdv_contrail"), self, "TAG_PROPELLER");
   self notify("stop sound" + "sdv_move_loop");
@@ -168,17 +141,14 @@ underwater_ambient_fx() {
 }
 
 underwater_bleedout(guy) {
-  //	iprintlnbold( "Blood" );
   playFXOnTag(getfx("deathfx_bloodpool_underwater"), guy, "J_NECK");
 }
 
 knife_blood(playerRig) {
-  //	iprintlnbold( "Throat" );
   playFXOnTag(getfx("bloodspurt_underwater"), playerRig, "TAG_KNIFE_FX");
 }
 
 underwater_struggle(guy) {
-  //	iprintlnbold( "Splash" );
   playFXOnTag(getfx("splash_underwater_stealthkill"), guy, "J_SpineUpper");
 }
 
@@ -190,7 +160,6 @@ playerDrips_left(model) {
 
   num = 10;
   for(i = 0; i < num; i++) {
-    //iprintlnbold( "left" );
     thread play_drip_fx(tags_in_arm, model);
     wait randomfloatrange(0.05, 0.3);
   }
@@ -205,7 +174,6 @@ playerDrips_right(model) {
 
   num = 10;
   for(i = 0; i < num; i++) {
-    //iprintlnbold( "right" );
     thread play_drip_fx(tags_in_arm, model);
     wait randomfloatrange(0.05, 0.3);
   }

@@ -68,7 +68,6 @@ manage_timer() {
 }
 
 flag_gates() {
-  // allow for different flags to be used for different difficulties or sp/coop
   array_thread(getEntArray("flag_trigger", "targetname"), ::gate_think);
 }
 

@@ -9,67 +9,11 @@
 /include _vehicleLogic.gsc;
 
 init() {
-  //tank support cut
   return;
-  //tank support cut
-  /*
-  PrecacheVehicle( "bmp_mp" );
-  PrecacheVehicle( "m1a1_mp" );
-  PrecacheVehicle( "bradley_mp" );
-
-  precacheModel("vehicle_bmp");
-  precacheModel("vehicle_bradley");
-
-  precacheModel("sentry_gun");
-  precacheModel("vehicle_m1a1_abrams_d_static");
-  precacheTurret( "abrams_minigun_mp" );
-  	
-
-  setDevDvar( "tankDir", "" );
-  setDevDvar( "tankForceTrigger", 0 );
-  if( getDvar( "tankDebug" ) == "" )
-  	setDevDvar( "tankDebug", 0 );
-
-  	
-  level.killstreakFuncs["tank"] = ::useTank;
-  level.tankFire = loadfx( "explosions/large_vehicle_explosion" );
-  level.tankCover = loadfx( "props/american_smoke_grenade_mp" );
-
-  level.otherDir["forward"] = "reverse";
-  level.otherDir["reverse"] = "forward";
-
-  tankSpawners = Vehicle_GetSpawnerArray();
-  	
-  if( !tankSpawners.size )
-  	return;
-  	
-  if(!isDefined( getVehicleNode( "startnode", "targetname" ) ) )
-  {
-  	assertEx ( !isDefined( getVehicleNode( "startnode", "targetname" ) ), "Vehicle spawn is setup but tank path is not setup in this level bug your friendly neighborhood LD.");
-  	return false;
-  }
-
-  level.tankSpawner["allies"] = tankSpawners[0];
-  level.tankSpawner["axis"] = tankSpawners[0];
-  level.pathCount = 0;
-  	
-  foreach ( spawner in tankSpawners )
-  {
-  	if( isSubStr( spawner.model, "bradley" ) )
-  		level.tankSpawner["allies"] = spawner;
-  	
-  	if( isSubStr( spawner.model, "bmp" ) )
-  		level.tankSpawner["axis"] = spawner;
-  }
-  	
-  level setupPaths();
-  	
-  */
 }
 
 spawnArmor(owner, vehicletype, model) {
   armor = self Vehicle_Dospawn("tank", owner);
-  //armor setModel( model );
 
   armor.health = 3000;
   armor.targeting_delay = 1;
@@ -124,7 +68,6 @@ tryUseTank() {
   else
     tank = level.tankSpawner["axis"] spawnArmor(self, "vehicle_bmp");
 
-  //level.tank = tank;
   tank startTank();
   return true;
 }
@@ -136,7 +79,6 @@ startTank(tankType) {
 
   level.tankInUse = true;
   self thread tankUpdate(startNode, waitNode);
-  //self thread tankUpdateReverse( startNode, waitNode );
 
   self thread tankDamageMonitor();
   level.tank = self;
@@ -186,7 +128,7 @@ startTank(tankType) {
   self thread destroyTank();
   self thread tankGetMiniTargets();
   self thread checkDanger();
-  self thread watchForThreat(); //reacts to players about to fire with rockets
+  self thread watchForThreat();
 
   self thread forceDirection();
 }
@@ -223,12 +165,6 @@ forceDirection() {
     wait(0.05);
   }
 }
-
-//=================================================================
-//
-//					Movement/Update Functions
-//
-//=================================================================
 
 setDirection(direction) {
   if(self.veh_pathdir != direction) {
@@ -412,8 +348,6 @@ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon
 
   self Vehicle_FinishDamage(inflictor, attacker, tankDamage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
 }
-
-// accumulate damage and react
 tankDamageMonitor() {
   self endon("death");
   self.damageTaken = 0;
@@ -443,26 +377,15 @@ tankDamageMonitor() {
       }
     }
 
-    //stages will be used to effect effeciency of the tank
-    //accuracy, speed, smoke emitters etc....
     if(self.health <= 0) {
       self notify("death");
       print("sent death notify via script");
       return;
     } else if(self.health < (maxHealth / 4) && stage3 == false) {
-      //newSpeed = 4;
-      //self vehicle_SetSpeed( newSpeed, 10, 10 );
-      //self.standardSpeed = newSpeed;
       stage3 = true;
     } else if(self.health < (maxHealth / 2) && stage2 == false) {
-      //newSpeed = 6;
-      //self vehicle_SetSpeed( newSpeed, 10, 10 );
-      //self.standardSpeed = newSpeed;
       stage2 = true;
     } else if(self.health < (maxHealth / 1.5) && stage1 == false) {
-      //newSpeed = 10;
-      //self vehicle_SetSpeed( newSpeed, 10, 10 );
-      //self.standardSpeed = newSpeed;
       stage1 = true;
     }
 
@@ -487,7 +410,6 @@ handleThreat(attacker) {
     targ[0] = attacker;
     self thread acquireTarget(targ);
   } else if(rand < 30) {
-    // all we know here is that it didnt hit the 70% playFX(level.tankCover, self.origin);
     self thread setEvadeSpeed();
   } else {
     self fireWeapon();
@@ -504,14 +426,12 @@ handlePossibleThreat(attacker) {
   if(RandomInt(4) < 3) {
     return;
   }
-  if(position == "front" && distance < 768) //attempts to crush player
-  {
+  if(position == "front" && distance < 768) {
     self thread setEvadeSpeed();
   } else if(position == "rear_side" || (position == "rear" && distance >= 768)) {
     playFX(level.tankCover, self.origin);
     self thread setEvadeSpeed();
-  } else if(position == "rear" && distance < 768) //attempts to crush player
-  {
+  } else if(position == "rear" && distance < 768) {
     self stopToReverse();
     self setEvadeSpeed();
     wait(4);
@@ -584,14 +504,6 @@ watchForThreat() {
     }
   }
 }
-
-//=================================================================
-//
-//					Accessory Functions
-//
-//=================================================================
-
-// checks if owner is valid, returns false if not valid
 checkOwner() {
   if(!isDefined(self.owner) || !isDefined(self.owner.pers["team"]) || self.owner.pers["team"] != self.team) {
     self notify("abandoned");
@@ -636,14 +548,6 @@ destroyTank() {
     objective_state(level.tank.objID[level.otherTeam[team]], "invisible");
   }
 
-  /* get the current team
-  if( isDefined( level.tankSpawner["axis"] ) )
-  	destroyedModel = ;
-  else
-  	destroyedModel = ;
-  */
-
-  // award attacker
   self notify("tankDestroyed");
   self Vehicle_SetSpeed(0, 10, 10);
   level.tankInUse = false;
@@ -654,7 +558,7 @@ destroyTank() {
   self removeFromTankList();
 
   destroyedTank = spawn("script_model", self.origin);
-  // set model to current destroyed model.
+
   destroyedTank setModel("vehicle_m1a1_abrams_d_static");
   destroyedTank.angles = self.angles;
   self.mgTurret delete();
@@ -663,12 +567,6 @@ destroyTank() {
   wait(4);
   destroyedTank delete();
 }
-
-//=================================================================
-//
-//					Main Weapon Targeting Functions
-//
-//=================================================================
 
 onHitPitchClamp() {
   self notify("onTargOrTimeOut");
@@ -705,7 +603,6 @@ fireOnTarget() {
     distance = Distance(self.origin, trace["position"]);
     realDistance = Distance(self.bestTarget.origin, self.origin);
 
-    //hitting somthing not even close
     if(distance < 384 || distance + 256 < realDistance) {
       wait(.5);
 
@@ -717,13 +614,7 @@ fireOnTarget() {
       }
       println("Abandoning due to not hitting intended space");
 
-      // Adjust forward or backward to hit target...
-      // check angle of target
       position = relativeAngle(self.bestTarget);
-
-      //if( position == "rear_side" )
-      // backup
-      //if( position == "front_side" )
 
       self thread explicitAbandonTarget(false, self.bestTarget);
       return;
@@ -809,15 +700,12 @@ acquireTarget(targets) {
   else
     self.bestTarget = self getBestTarget(targets);
 
-  self thread setEngagementSpeed(); // slows tank down to fire on target
+  self thread setEngagementSpeed();
 
-  // checks to abandon target
-  //self thread lostTarget(); // sets lost LOS and time of lost target
-  //self thread abandonTarget(); // if target is lost for 3+ seconds drops target and gets new one
-  self thread watchTargetDeath(targets); //abandons target when target killed
+  self thread watchTargetDeath(targets);
 
-  self SetTurretTargetEnt(self.bestTarget); // sets turret to target entity
-  self fireOnTarget(); // fires on current target.
+  self SetTurretTargetEnt(self.bestTarget);
+  self fireOnTarget();
   self thread setNoTarget();
 }
 
@@ -843,15 +731,12 @@ getBestTarget(targets) {
     cannonAngle = abs(self getTagAngles("tag_flash")[1]);
     angle = abs(angle - cannonAngle);
 
-    //vehicle priorities
     if(isDefined(level.chopper) && targ == level.chopper)
       return targ;
 
     if(isDefined(level.harrier) && targ == level.harrier)
       return targ;
 
-    // in this calculation having a rocket removes 40d of rotation cost from best target calculation
-    // to prioritize targeting dangerous targets.
     weaponsArray = targ GetWeaponsListItems();
     foreach(weapon in weaponsArray) {
       if(isSubStr(weapon, "at4") || isSubStr(weapon, "jav") || isSubStr(weapon, "c4"))
@@ -967,8 +852,6 @@ isTarget(potentialTarget) {
     return false;
 
   return self Vehicle_CanTurretTargetPoint(potentialTarget.origin, 1, self);
-
-  //return self turretSightTrace( potentialTarget, false );
 }
 
 turretSightTrace(targ, debug) {
@@ -983,12 +866,6 @@ turretSightTrace(targ, debug) {
 
   return true;
 }
-
-//=================================================================
-//
-//					Secondary Weapon Targeting Functions
-//
-//=================================================================
 
 isMiniTarget(potentialTarget) {
   self endon("death");
@@ -1062,8 +939,6 @@ getBestMiniTarget(targets) {
   foreach(targ in targets) {
     curDist = Distance(self.origin, targ.origin);
 
-    // in this calculation having a rocket javelin or c4 increases mini turret priority
-    // to prioritize targeting dangerous targets.
     curWeaon = targ GetCurrentWeapon();
     if(isSubStr(curWeaon, "at4") || isSubStr(curWeaon, "jav") || isSubStr(curWeaon, "c4") || isSubStr(curWeaon, "smart") || isSubStr(curWeaon, "grenade"))
       curDist -= 200;
@@ -1091,10 +966,10 @@ acquireMiniTarget(targets) {
     self thread setMiniEngagementSpeed();
 
   self notify("acquiringMiniTarget");
-  self.mgTurret SetTargetEntity(self.bestMiniTarget, (0, 0, 64)); // sets turret to target entity
+  self.mgTurret SetTargetEntity(self.bestMiniTarget, (0, 0, 64));
   wait(.15);
-  self thread fireMiniOnTarget(); // fires on current target.
-  self thread watchMiniTargetDeath(targets); //abandons target when target killed	
+  self thread fireMiniOnTarget();
+  self thread watchMiniTargetDeath(targets);
   self thread watchMiniTargetDistance(targets);
   self thread watchMiniTargetThreat(self.bestMiniTarget);
 }
@@ -1125,8 +1000,6 @@ fireMiniOnTarget() {
         self thread explicitAbandonMiniTarget();
         return;
       }
-
-      //println("Waiting because the turret doesnt have a target" );
 
       wait(.5);
       continue;
@@ -1241,12 +1114,6 @@ removeFromTankList() {
   level.tanks[self getEntityNumber()] = undefined;
 }
 
-/*************************************************************************
- *
- *	PATHFINDING AND PATH NODE FUNCTIONS
- *
-***************************************************************************/
-
 getNodeNearEnemies() {
   validEnemies = [];
 
@@ -1286,8 +1153,6 @@ getNodeNearEnemies() {
 
   sortedNodes = sortByDistance(level.graphNodes, bestOrigin);
 
-  //thread drawLine( bestOrigin, sortedNodes[0].origin, 10.0, (1,0,1) );
-
   return (sortedNodes[0]);
 }
 
@@ -1297,7 +1162,6 @@ setupPaths() {
   endNodes = [];
   aStarGraphNodes = [];
 
-  // setup the start node
   tankNode = GetVehicleNode("startnode", "targetname");
   tankNodes[tankNodes.size] = tankNode;
   startNodes[startNodes.size] = tankNode;
@@ -1307,14 +1171,12 @@ setupPaths() {
     tankNode = GetVehicleNode(tankNode.target, "targetname");
     tankNode.prev = lastNode;
 
-    // case for connected path
     if(tankNode == tankNodes[0]) {
       break;
     }
 
     tankNodes[tankNodes.size] = tankNode;
 
-    // case for disconnected path
     if(!isDefined(tankNode.target))
       return;
   }
@@ -1323,7 +1185,6 @@ setupPaths() {
   tankNodes[0] thread handleBranchNode("forward");
   aStarGraphNodes[aStarGraphNodes.size] = tankNodes[0];
 
-  // find the start and end nodes of the branches
   branchNodes = GetVehicleNodeArray("branchnode", "targetname");
   foreach(branchNode in branchNodes) {
     tankNode = branchNode;
@@ -1341,7 +1202,6 @@ setupPaths() {
     }
   }
 
-  // detect and initialize the branch nodes.These will be used for the aStar node graph
   foreach(tankNode in tankNodes) {
     isBranchNode = false;
     foreach(startNode in startNodes) {
@@ -1390,7 +1250,7 @@ setupPaths() {
       }
       endNode thread handleCapNode(tankNode, "forward");
       endNode.next = getVehicleNode(tankNode.targetname, "targetname");
-      //endNode.target = tankNode.targetname; // READ-ONLY field...
+
       endNode.length = distance(endNode.origin, tankNode.origin);
 
       if(!isDefined(tankNode.branchNodes))
@@ -1415,7 +1275,6 @@ setupPaths() {
     return;
   }
 
-  // subdivide the path a bit...
   segmentNodes = [];
   foreach(tankNode in tankNodes) {
     if(!isDefined(tankNode.branchNodes)) {
@@ -1454,7 +1313,7 @@ setupPaths() {
         if(curLength < pathLength / 2) {
           continue;
         }
-        tankNode.branchNodes = []; // necessary?
+        tankNode.branchNodes = [];
         tankNode thread handleBranchNode("forward");
         aStarGraphNodes[aStarGraphNodes.size] = tankNode;
         break;
@@ -1473,7 +1332,6 @@ setupPaths() {
 getRandomBranchNode(direction) {
   branchNodes = [];
   foreach(graphId, linkNode in self.links) {
-    // pick a branch in the direction we're already heading
     if(self.linkDirs[graphId] != direction) {
       continue;
     }
@@ -1492,7 +1350,6 @@ getNextNodeForEndNode(endNode, direction) {
   changePath = generatePath(graphNode, endNode, undefined, level.otherDir[direction]);
   changeG = changePath[0].g;
 
-  // temporarily force the tank to only go forward
   if(!getDvarInt("tankDebug"))
     changeG = 9999999;
 
@@ -1528,7 +1385,6 @@ handleBranchNode(direction) {
     else
       nextLinkNode = self getPrevNode();
 
-    // if we're already on this path, just keep going
     if(nextLinkNode != goalNode)
       tank startPath(goalNode);
   }
@@ -1593,7 +1449,6 @@ forceTrigger(prevNode, nextNode, tank) {
   for(;;) {
     wait(0.05);
 
-    // tank changed direction
     if(tankDir != tank.veh_pathdir) {
       debugPrintLn2("tank missed node: reversing direction");
       tank thread forceTrigger(nextNode, prevNode, tank);
@@ -1647,8 +1502,6 @@ getNextNode() {
 getPrevNode() {
   return self.prev;
 }
-
-// Builds the aStar node graph
 initNodeGraph(astarBaseNodes) {
   graphNodes = [];
   foreach(pathNode in aStarBaseNodes) {
@@ -1750,8 +1603,6 @@ addLinkNode(graphNode, linkLength, linkDir, linkStartNode) {
 
   self.linkInfos[graphNode.graphId] = linkInfo;
 }
-
-// call function as generatePath(startNode, destNode), otherwise paths will be reversed
 generatePath(destNode, startNode, blockedNodes, direction) {
   level.openList = [];
   level.closedList = [];
@@ -1814,7 +1665,7 @@ generatePath(destNode, startNode, blockedNodes, direction) {
       bestNode = testNode;
     }
 
-    assert(isDefined(bestNode)); // the tank should always have a path
+    assert(isDefined(bestNode));
 
     addToClosedList(bestNode);
     curNode = bestNode;
@@ -1905,27 +1756,7 @@ drawPath(pathNodes) {
   }
 }
 
-drawGraph(pathNodes) {
-  /*
-  level.pathZOffset = 0;
-  foreach ( node in pathNodes )
-  {
-  	println( node.links.size );
-  	foreach ( linkId, graphNode in node.links )
-  	{
-  		if( node.linkDirs[linkId] == "reverse" )
-  			level thread drawLink( node.node.origin, graphNode.node.origin, (0,1,0) );
-  		else
-  			level thread drawLink( node.node.origin, graphNode.node.origin, (1,0,0) );
-
-  		//if( node.linkDirs[linkId] == "reverse" )
-  		//	continue;
-  			
-  		//level thread drawLink( pathNodes[graphId].node.origin, pathNodes[node.graphId].node.origin, (randomFloat( 2 ), randomFloat( 2 ), randomFloat( 2 )) );		
-  	}
-  }
-  */
-}
+drawGraph(pathNodes) {}
 
 drawLink(start, end, color) {
   level endon("endpath");

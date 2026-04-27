@@ -7,12 +7,6 @@
 #include common_scripts\utility;
 #include maps\_hud_util;
 
-/*QUAKED info_player_start_so (0.0 0.3 1.0) (-16 -16 0) (16 16 72)
-Player 1 spawns at these locations in Special Ops games. If there is a player 2 but player2 specific start points, player 2 will be positioned near player 1.*/
-
-/*QUAKED info_player_start_soPlayer2 (0.2 0.5 1.0) (-16 -16 0) (16 16 72)
-Player 2 spawns at these locations in Special Ops games. Will use the closest spawn point to player 1.*/
-
 pick_starting_location_so(return_placement) {
   if(isDefined(return_placement) && return_placement) {
     if(isDefined(level.skip_PlayerSetStreamOrigin) && level.skip_PlayerSetStreamOrigin)
@@ -31,9 +25,6 @@ pick_starting_location_so(return_placement) {
 
   p1_start_point = random(p1_starts);
 
-  // return_placement tells it to not actually place the people, and instead send back where it *would* have placed them.
-  // If the map can potentially spawn them in random locations or far apart, this logic breaks down.
-  // Used by PlayerSetStreamOrigin for map restarts. Use level.skip_PlayerSetStreamOrigin to avoid it.
   if(isDefined(return_placement) && return_placement) {
     assert(p1_starts.size == 1);
     return p1_start_point.origin;
@@ -55,21 +46,17 @@ pick_starting_location_so(return_placement) {
 isDefendMatch() {
   return (level.pmc_gametype == "mode_defend");
 }
-
-// Having to include this is sucky, but I don't know a better way.
 pick_starting_location_pmc(return_placement) {
   if(isDefendMatch()) {
     startingLocations = getEntArray("info_player_start_pmcDefend", "classname");
     assertEx(startingLocations.size > 0, "You don't have any player starting positions in the level for defend mode. Place info_player_start_pmcDefend entities in the level.");
     assertEx(startingLocations.size >= level.players.size, "You don't have enough info_player_start_pmcDefend entities in the level to support " + level.players.size + " players.");
   } else {
-    // Get all of the spawn locations in the map
     startingLocations = getEntArray("info_player_start_pmc", "classname");
     assertEx(startingLocations.size > 0, "You don't have any player starting positions in the level. Place info_player_start_pmc entities in the level.");
     assertEx(startingLocations.size >= level.players.size, "You don't have enough info_player_start_pmc entities in the level to support " + level.players.size + " players.");
   }
 
-  // Pick one at random then put the player at it and put other players at the next nearest ones
   excluders = [];
   spawnEnt = undefined;
   foreach(player in level.players) {
@@ -80,7 +67,6 @@ pick_starting_location_pmc(return_placement) {
 
     assert(isDefined(spawnEnt));
 
-    // See notes in pick_starting_location_so()
     if(isDefined(return_placement) && return_placement) {
       assert(startingLocations.size <= 2);
       return spawnEnt.origin;
@@ -106,7 +92,6 @@ place_player2_near_player1() {
   level.player2 setPlayerAngles(level.player.angles + (0, -25, 0));
   level.player2 SetOrigin(level.player.origin);
 
-  // Offset player 2 a bit from player 1 (adjusted by angle players are facing).
   ent = spawnStruct();
   ent.entity = level.player2;
   ent.right = -20.0;
@@ -214,7 +199,7 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
   ypos = maps\_specialops::so_hud_ypos();
   self.hud_so_timer_msg = maps\_specialops::so_create_hud_item(1, ypos, message, self);
   if(isDefined(level.challenge_time_limit)) {
-    self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, undefined /*convert_to_time_string( level.challenge_time_limit, true )*/ , self);
+    self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, undefined, self);
     self.hud_so_timer_time SetTenthsTimerStatic(level.challenge_time_limit);
   } else
     self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, &"SPECIAL_OPS_TIME_NULL", self);
@@ -226,13 +211,6 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
 
   challenge_timer_wait_start(self.hud_so_timer_msg, self.hud_so_timer_time, start_flag);
 
-  /*	if( !isDefined( level.challenge_progress_manual_update ) || !level.challenge_progress_manual_update )
-  	{
-  		thread challenge_timer_detect_3quarter();
-  		thread challenge_timer_detect_halfway();
-  		thread challenge_timer_detect_quarter();
-  	}*/
-
   if(isDefined(level.challenge_time_limit)) {
     level.so_challenge_time_left = level.challenge_time_limit;
     thread challenge_timer_show_nudge(self.hud_so_timer_msg, self.hud_so_timer_time);
@@ -243,9 +221,6 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
 
   thread challenge_timer_wait_passed(self.hud_so_timer_msg, self.hud_so_timer_time, passed_flag);
 }
-
-// CTW - Better way to do this: Have the timer detect the halfway mark when counting down
-// and if you haven't set these flags, tell the player they need to pick it up.
 challenge_timer_detect_3quarter() {
   if(!flag_exist("so_challenge_is_3quarter"))
     flag_init("so_challenge_is_3quarter");
@@ -279,7 +254,6 @@ challenge_timer_wait_start(hud_msg, hud_time, start_flag) {
   if(isDefined(start_flag))
     flag_wait(start_flag);
 
-  // Force the hud on if player charges ahead.
   foreach(player in level.players) {
     if(!player so_hud_can_show())
       player.so_hud_show_time = gettime();
@@ -318,9 +292,6 @@ challenge_timer_show_nudge(hud_msg, hud_time) {
   level endon("new_challenge_timer");
   level endon("special_op_terminated");
 
-  //	if( level.challenge_time_limit > level.challenge_time_nudge )
-  //		wait level.challenge_time_limit - level.challenge_time_nudge;
-
   while(level.so_challenge_time_left > level.challenge_time_nudge) {
     wait(0.1);
   }
@@ -339,8 +310,6 @@ challenge_timer_show_hurry(hud_msg, hud_time) {
   level endon("new_challenge_timer");
   level endon("special_op_terminated");
 
-  //	if( level.challenge_time_limit > level.challenge_time_hurry )
-  //		wait level.challenge_time_limit - level.challenge_time_hurry;
   while(level.so_challenge_time_left > level.challenge_time_hurry) {
     wait(0.1);
   }
@@ -396,13 +365,11 @@ challenge_timer_should_pulse() {
 
   for(i = 0; i <= level.challenge_time_beep_start; i++) {
     if(level.so_challenge_time_left > i) {
-      // If the timer has been increased, need to reset our beep tracking.
       if(level.so_challenge_time_beep < i)
         level.so_challenge_time_beep = i + 1;
       continue;
     }
 
-    // We already know time_left is less than time_beep, so go go go!
     level.so_challenge_time_beep = i - 1;
     return true;
   }
@@ -418,7 +385,6 @@ challenge_timer_show_failed(hud_msg, hud_time) {
   level endon("new_challenge_timer");
   level endon("special_op_terminated");
 
-  //	wait( level.challenge_time_limit );
   thread challenge_timer_thread();
   level waittill("challenge_timer_failed");
 
@@ -427,7 +393,6 @@ challenge_timer_show_failed(hud_msg, hud_time) {
 
   challenge_timer_destroy(hud_msg, hud_time);
 
-  //	radio_dialogue_stop();
   if(self == level.player)
     thread maps\_specialops::so_dialog_mission_failed_time();
 
@@ -449,17 +414,13 @@ challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
   flag_set("challenge_timer_passed");
   level.challenge_end_time = gettime();
 
-  // This might not work in every circumstance?
-  // Freeze the timer where it is for the couple of seconds it remains visible.
   time = (level.challenge_end_time - level.challenge_start_time) * 0.001;
   if(isDefined(level.challenge_time_limit))
     time = level.challenge_time_limit - time;
 
-  // stupid hack to make this work correctly, because this mission modifies level.challenge_time_limit on the fly
   if(level.script == "so_snowrace2_cliffhanger")
     time = level.challenge_time_limit;
 
-  // We cannot have time be 0 when we call SetTenthsTimerStatic()
   if(time <= 0) {
     time = 0.1;
   }
@@ -505,7 +466,6 @@ failure_summary_display() {
   MissionFailed();
   specialops_mission_over_setup(false);
 
-  // mission failed;
   setDvar("ui_mission_success", 0);
   level notify("so_generate_deathquote");
   maps\_endmission::coop_eog_summary();
@@ -526,7 +486,6 @@ specialops_mission_over_setup(was_success) {
   flag_set("special_op_terminated");
   level notify("stop_music");
 
-  // Initiate a pre-fetch of the texture data to help lower load times a bit.
   stream_origin = undefined;
   if(isDefined(level.pmc_game) && level.pmc_game)
     stream_origin = pick_starting_location_pmc(true);
@@ -562,8 +521,6 @@ specialops_mission_over_setup(was_success) {
   if(!flag("special_op_no_unlink")) {
     foreach(player in level.players) {
       player Unlink();
-      //		org = player spawn_tag_origin();
-      //		player PlayerLinkToDelta( org );
     }
   }
 
@@ -571,7 +528,6 @@ specialops_mission_over_setup(was_success) {
     player freezecontrols(true);
   }
 
-  // This needs to happen last as it's expected for all values used in stat collection to be set by now.
   specialops_mission_over_stats(was_success);
 }
 
@@ -652,9 +608,7 @@ is_current_level_locked() {
 }
 
 is_so_player_signed_in() {
-  //return self isSignedIn();
-
-  return true; //always true until code gives me a function	
+  return true;
 }
 
 can_save_to_profile() {
@@ -664,47 +618,36 @@ can_save_to_profile() {
 specialops_achievement_by_stars(specOpsString) {
   specOpsSum = get_total_stars(specOpsString);
 
-  // --------------- Gold Star: earn 1 star in special ops
   if(specOpsSum >= 1)
     self player_giveachievement_wrapper("GOLD_STAR");
 
-  // --------------- Hotel Bravo: earn 4 star in special ops
   if(specOpsSum >= 4)
     self player_giveachievement_wrapper("HOTEL_BRAVO");
 
-  // --------------- Charlie on our six: earn 8 star in special ops
   if(specOpsSum >= 8)
     self player_giveachievement_wrapper("CHARLIE_ON_OUR_SIX");
 
-  // --------------- Blackjack: earn 21 star in special ops
   if(specOpsSum >= 21)
     self player_giveachievement_wrapper("BLACKJACK");
 
-  // --------------- Specialist: earn 30 star in special ops
   if(specOpsSum >= 30)
     self player_giveachievement_wrapper("SPECIALIST");
 
-  // --------------- Star 69: earn 69 star in special ops
   if(specOpsSum >= 69)
     self player_giveachievement_wrapper("STAR_69");
 
-  // =============== It Goes to Eleven: 1 star in 11 different SO
   if(get_num_of_levels_with_star(specOpsString, 1) >= 11)
     self player_giveachievement_wrapper("IT_GOES_TO_ELEVEN");
 
-  // =============== Operational Asset: 3 stars in 5 different SO
   if(get_num_of_levels_with_star(specOpsString, 3) >= 5)
     self player_giveachievement_wrapper("OPERATIONAL_ASSET");
 
-  // =============== Honor Roll: 1 star in 23 different SO
   if(get_num_of_levels_with_star(specOpsString, 1) >= 23)
     self player_giveachievement_wrapper("HONOR_ROLL");
 
-  // =============== Operative: 3 stars in 10 different SO
   if(get_num_of_levels_with_star(specOpsString, 3) >= 10)
     self player_giveachievement_wrapper("OPERATIVE");
 
-  // =============== Professional: 3 stars in 15 different SO
   if(get_num_of_levels_with_star(specOpsString, 3) >= 15)
     self player_giveachievement_wrapper("PROFESSIONAL");
 }
@@ -738,14 +681,13 @@ specialops_mission_over_stats(was_success) {
   if(!isDefined(was_success) || !was_success) {
     return;
   }
-  // using map name to get dvar used for saving that map's best time
+
   best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
 
-  // Test maps shouldn't have to SRE out.
   if(best_time_name == "") {
     return;
   }
-  // Early out the player that doesnt have the level unlocked, cause we dont give him reward
+
   foreach(player in level.players) {
     if(!(player can_save_to_profile())) {
       PrintLn(">> UpdateGamerProfileAll():	[ PLAYER 2 SKIPPED ALL PROFILE UPDATES DUE TO LEVEL LOCKED ]");
@@ -754,7 +696,6 @@ specialops_mission_over_stats(was_success) {
     }
   }
 
-  // PS3 special handler - PS3 splitscreen, guest player always get stars when first player get stars
   if(issplitscreen() && level.ps3)
     level.player2.eog_noreward = false;
 
@@ -762,7 +703,6 @@ specialops_mission_over_stats(was_success) {
   assert(isDefined(level.challenge_start_time));
   assert(isDefined(level.challenge_end_time));
 
-  // time is capped at 24 hours
   m_seconds = int(min((level.challenge_end_time - level.challenge_start_time), 86400000));
 
   foreach(player in level.players) {
@@ -771,9 +711,9 @@ specialops_mission_over_stats(was_success) {
     }
     current_best_time = player GetLocalPlayerProfileData(best_time_name);
 
-    if(!isDefined(current_best_time))
-      continue; // non local player
-
+    if(!isDefined(current_best_time)) {
+      continue;
+    }
     never_played = current_best_time == 0;
     if(isDefined(player.finish_time) && isDefined(level.challenge_start_time))
       m_seconds = int(min((player.finish_time - level.challenge_start_time), 86400000));
@@ -790,12 +730,10 @@ specialops_mission_over_stats(was_success) {
   levelIndex = level.specOpsSettings maps\_endmission::getLevelIndex(level.script);
 
   if(!isDefined(levelIndex)) {
-    // run the same mission again if the nextmission is not defiend.
     MissionSuccess(level.script);
     return;
   }
 
-  // update mission difficult dvar
   level.specOpsSettings maps\_endmission::setSoLevelCompleted(levelIndex);
 
   foreach(player in level.players) {
@@ -822,8 +760,6 @@ specialops_mission_over_stats(was_success) {
     }
     assertex(isDefined(level.specOpsSettings), "Special Op levels are not yet initialized in _endmission.gsc and we are already trying to save level difficulty completed data.");
 
-    // specOpsString is a string of something like '0123412324200323404...' ranging from 0 to 4, for special ops we need range of 0 to 3.
-    // string size can not count higher then number of levels or we will have 100%+ string_size = specOpsString.size;
     if(string_size > level.specOpsSettings.levels.size)
       string_size = level.specOpsSettings.levels.size;
 
@@ -838,7 +774,6 @@ specialops_mission_over_stats(was_success) {
 
     assert(isDefined(completion_fraction));
 
-    // round up or down
     if(int(completion_fraction * 100) % 100 >= 0.5)
       completion_percentage = int(completion_fraction) + 1;
     else
@@ -870,7 +805,6 @@ specialops_mission_over_stats(was_success) {
       setDvar("ui_debug_setlevel_upto", "");
     }
 
-    // Debug prints
     PrintLn(">> SO DEBUG: 					[ setlevel:" + setlevel + " setlevel_upto:" + upto + " clearall:" + getdvarint("ui_debug_clearall") + " ]");
     PrintLn(">> SO PLAYER ID: 			[" + player GetEntityNumber() + "]");
     PrintLn(">> SO PERCENTAGE COMPLETED: 	[" + specOpsString + "]");
@@ -882,7 +816,6 @@ specialops_mission_over_stats(was_success) {
     PrintLn(">> SO MAX LEVELS: 			[" + level.specOpsSettings.levels.size + "]");
 
     player SetLocalPlayerProfileData("percentCompleteSO", specOpsSum);
-    //player SetLocalPlayerProfileData( "percentCompleteSO", completion_percentage );
   }
 
   UpdateGamerProfileAll();
@@ -894,13 +827,11 @@ specialops_summary_player_choice() {
   for(;;) {
     response = waittill_either_player();
 
-    // if player chooses to return to main menu
     if(response == "summary_closed") {
       ChangeLevel("");
       return;
     }
 
-    // if player chooses to play again
     if(response == "summary_closed_play_again") {
       ChangeLevel(level.script);
       return;
@@ -912,7 +843,6 @@ wait_all_players_are_touching(trigger_ent) {
   for(;;) {
     trigger_ent waittill("trigger");
 
-    // If not in co-op, then a simple touch is all we need.
     if(!is_coop()) {
       return;
     }
@@ -929,7 +859,6 @@ wait_all_players_are_touching(trigger_ent) {
       continue;
     }
 
-    // If we get here then we've succeeded...
     break;
   }
 }
@@ -941,7 +870,6 @@ wait_all_players_have_touched(trigger_ent, touch_style) {
   for(;;) {
     trigger_ent waittill("trigger");
 
-    // If not in co-op, then a simple touch is all we need.
     if(!is_coop()) {
       return;
     }
@@ -964,7 +892,6 @@ wait_all_players_have_touched(trigger_ent, touch_style) {
       }
     }
 
-    // If we get here then we've succeeded...
     break;
   }
 }
@@ -1016,7 +943,7 @@ display_frozen_message() {
   if(!isDefined(self)) {
     return;
   }
-  // Don't need to fade in again if already active.
+
   if(isDefined(self.frozen_and_waiting) && self.frozen_and_waiting) {
     return;
   }
@@ -1085,11 +1012,6 @@ disable_escape_warning() {
     return false;
   }
 
-  //	self.escape_hint_active = undefined;
-
-  //	self.escape_hint_active = undefined;
-  //	if( isDefined( self.ping_escape_splash ) )
-  //		self.ping_escape_splash Destroy();
   return true;
 }
 
@@ -1116,10 +1038,8 @@ ping_escape_warning() {
   self.ping_escape_splash = maps\_specialops::so_create_hud_item(3.5, 0, &"SPECIAL_OPS_ESCAPE_WARNING", self);
   self.ping_escape_splash.alignx = "center";
   self.ping_escape_splash.horzAlign = "center";
-  //	self.ping_escape_splash set_hudelem_red();
 
   while(ping_escape_warning_valid()) {
-    //		self PlayLocalSound( "coop_player_exit_warning" );
     self.ping_escape_splash.alpha = 1;
     self.ping_escape_splash FadeOverTime(1);
     self.ping_escape_splash.alpha = 0.5;
@@ -1146,11 +1066,6 @@ ping_escape_warning_valid() {
   if(flag("special_op_terminated"))
     return false;
 
-  //	if( !isDefined( self.escape_hint_active ) )
-  //	{
-  //		return false;
-  //	}
-
   if(!self is_touching_escape_trigger()) {
     return false;
   }
@@ -1163,113 +1078,52 @@ so_dialog_play(dialog, wait_time, force_stop) {
   if(isDefined(wait_time))
     wait wait_time;
 
-  // This isn't a good long term solution to SO spam. The Battle Chatter stuff (reviving) needs to be switched
-  // to the actual battle chatter system.
   if(isDefined(force_stop) && force_stop)
     radio_dialogue_stop();
   radio_dialogue(dialog);
 }
 
 specialops_dialog_init() {
-  // Let's do this.
-  // Ready up.
   level.scr_radio["so_tf_1_plyr_prep"] = "so_tf_1_plyr_prep";
 
-  // That's the way it's done.
-  // Good job team.
-  // Mission accomplished.
   level.scr_radio["so_tf_1_success_generic"] = "so_tf_1_success_generic";
 
-  // Not bad, but I've seen better.
-  // Well done, but you can do better.
-  // Not the best, but you made it.
   level.scr_radio["so_tf_1_success_jerk"] = "so_tf_1_success_jerk";
 
-  //Nicely done, you beat your previous best.
-  //A new personal record, great work.
-  //You beat your previous best, keep it up.
-  //Excellent job, a new personal best.
   level.scr_radio["so_tf_1_success_best"] = "so_tf_1_success_best";
 
-  // Mission failed. We’ll get 'em next time.
-  // We need to rethink our strategy. Let's run it again.
   level.scr_radio["so_tf_1_fail_generic"] = "so_tf_1_fail_generic";
 
-  // Well that was a disaster! Let's try it again.
-  // Bloody 'ell, we just got our arses kicked.
   level.scr_radio["so_tf_1_fail_generic_jerk"] = "so_tf_1_fail_generic_jerk";
 
-  // We ran outta time. Keep an eye the clock.
-  // Too slow mate. Next time watch the clock, eh?
   level.scr_radio["so_tf_1_fail_time"] = "so_tf_1_fail_time";
 
-  // We win as a team, we lose as a team. Got it?
-  // Look - we work as a team. No one gets left behind!
   level.scr_radio["so_tf_1_fail_bleedout"] = "so_tf_1_fail_bleedout";
 
-  // We're running out of time!
-  // The clock's ticking...
-  // Not much time left!
   level.scr_radio["so_tf_1_time_generic"] = "so_tf_1_time_generic";
 
-  // Time's running out! Go! Go! Go!
-  // We're almost outta time! Move! Move!
-  // Time's almost up! This is gonna be close!!
   level.scr_radio["so_tf_1_time_hurry"] = "so_tf_1_time_hurry";
 
-  // Watch your fire, avoid civilians!
-  // Civilian casualties are unacceptable!
-  // Careful, you're killing innocent civilians!
   level.scr_radio["so_tf_1_civ_kill_warning"] = "so_tf_1_civ_kill_warning";
 
-  // 5 more.
-  // 5 left.
-  // 5 remaining
   level.scr_radio["so_tf_1_progress_5more"] = "so_tf_1_progress_5more";
 
-  // 4 more.
-  // 4 left.
-  // 4 remaining
   level.scr_radio["so_tf_1_progress_4more"] = "so_tf_1_progress_4more";
 
-  // 3 more.
-  // 3 left.
-  // 3 remaining
   level.scr_radio["so_tf_1_progress_3more"] = "so_tf_1_progress_3more";
 
-  // 2 more.
-  // 2 left.
-  // 2 remaining
   level.scr_radio["so_tf_1_progress_2more"] = "so_tf_1_progress_2more";
 
-  // 1 more.
-  // 1 left.
-  // 1 remaining
   level.scr_radio["so_tf_1_progress_1more"] = "so_tf_1_progress_1more";
 
-  // Cutting it close, need to pick up the pace.
-  // You're running behind, hurry up or you won't make it.
-  // Pay attention to the time, you're moving too slow.
   level.scr_radio["so_tf_1_time_status_late"] = "so_tf_1_time_status_late";
 
-  // Looking good, keep up this pace.
-  // Your time is solid, keep it up.
-  // Keep going, you're making good time.
   level.scr_radio["so_tf_1_time_status_good"] = "so_tf_1_time_status_good";
 
-  // 25% done… keep going.
-  // You've made it a quarter of the way, don't stop.
-  // 25% down, 75% to go.
   level.scr_radio["so_tf_1_progress_3quarter"] = "so_tf_1_progress_3quarter";
 
-  // Hallfway there.
-  // You're halfway done.
-  // Halfway through the mission.
   level.scr_radio["so_tf_1_progress_half"] = "so_tf_1_progress_half";
 
-  // Getting close, keep it up.
-  // You're doing well, almost done.
-  // Just a little bit left, keep going.
   level.scr_radio["so_tf_1_progress_quarter"] = "so_tf_1_progress_quarter";
 }
 
@@ -1323,7 +1177,6 @@ so_hud_pulse_init() {
   if(!isDefined(self))
     return false;
 
-  // Bang defaults
   if(!isDefined(self.pulse_time))
     self.pulse_time = 0.5;
 
@@ -1333,7 +1186,6 @@ so_hud_pulse_init() {
   if(!isDefined(self.pulse_scale_big))
     self.pulse_scale_big = 1.6;
 
-  // Looping defaults
   if(!isDefined(self.pulse_loop))
     self.pulse_loop = false;
 
@@ -1349,7 +1201,6 @@ so_hud_pulse_init() {
   if(!isDefined(self.pulse_start_big))
     self.pulse_start_big = true;
 
-  // Successful initialization!		
   return true;
 }
 
@@ -1377,9 +1228,6 @@ waittill_either_player() {
     flag_init("summary_response");
 
   if(level.players.size > 1) {
-    // We must clear this each time we get in here, incase a menuresponse previously was not desired
-    // example, options menuresponse or "back" (online player in pause menu when everyone died)
-    // This will allow us to return to the EOG fine.
     flag_clear("summary_response");
 
     thread waittill_player_respond(0);
@@ -1436,7 +1284,6 @@ so_special_failure_hint() {
 so_special_death_hint_tracker() {
   level endon("so_special_failure_hint_set");
 
-  // NOTE: weapon may be undefined, so be sure to check for it if you use it.
   self waittill("death", attacker, cause, weapon);
 
   if(isDefined(self.coop_death_reason)) {
@@ -1484,8 +1331,6 @@ so_claymore_death(cause, weapon) {
   if(!isDefined(weapon) || (isDefined(weapon) && weapon != "claymore")) {
     return false;
   }
-
-  // No message if killed by a claymore
 
   return true;
 }
@@ -1575,10 +1420,8 @@ so_destructible_death(attacker, cause) {
     return false;
 
   if(issubstr(attacker.destructible_type, "vehicle")) {
-    // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
     so_special_failure_hint_set("@SCRIPT_EXPLODING_VEHICLE_DEATH", "ui_vehicle_death");
   } else {
-    // You were killed by an explosion.\nSome burning objects can explode.
     so_special_failure_hint_set("@SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH", "ui_destructible_death");
   }
 
@@ -1592,22 +1435,16 @@ so_exploding_barrel_death(cause) {
   if(cause != "MOD_EXPLOSIVE")
     return false;
 
-  // check if the death was caused by a barrel
-  // have to check time and location against the last explosion because the attacker isn't the
-  // barrel because the ent that damaged the barrel is passed through as the attacker instead
   if(!isDefined(level.lastExplodingBarrel))
     return false;
 
-  // killed the same frame a barrel exploded
   if(getTime() != level.lastExplodingBarrel["time"])
     return false;
 
-  // within the blast radius of the barrel that exploded
   d = distance(self.origin, level.lastExplodingBarrel["origin"]);
   if(d > level.lastExplodingBarrel["radius"])
     return false;
 
-  // You were killed by an exploding barrel. Red barrels will explode when shot.
   so_special_failure_hint_set("@SCRIPT_EXPLODING_BARREL_DEATH", "ui_barrel_death");
 
   return true;
@@ -1620,12 +1457,9 @@ so_grenade_suicide_death(cause) {
   if(cause != "MOD_SUICIDE")
     return false;
 
-  // magic number copied from fraggrenade asset.
   if((self.lastgrenadetime - gettime()) > 3.5 * 1000)
     return false;
 
-  // You died holding a grenade for too long.
-  // Holding ^3[{+frag}]^7 allows you to cook off live grenades.
   so_special_failure_hint_set("@SCRIPT_GRENADE_SUICIDE_COMBINED");
 
   return true;
@@ -1658,7 +1492,6 @@ so_vehicle_death(attacker, cause) {
   if(attacker.code_classname != "script_vehicle")
     return false;
 
-  // You were run over. Keep on eye out for enemy vehicles on the move.
   so_special_failure_hint_set("@DEADQUOTE_SO_RUN_OVER_BY_VEHICLE");
   return true;
 }

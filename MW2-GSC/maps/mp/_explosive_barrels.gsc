@@ -4,8 +4,6 @@
 ********************************************************/
 
 main() {
-  //------------------ //EFECTS DEFINITIONS
-  //------------------ qBarrels = false;
   precacheItem("barrel_mp");
   barrels = getEntArray("explodable_barrel", "targetname");
   if((isDefined(barrels)) && (barrels.size > 0))
@@ -24,11 +22,8 @@ main() {
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/small_metalhit_1");
   }
 
-  //------------------ //------------------ //----------------- //SOUND DEFINITIONS
-  //----------------- level.barrelExpSound = "explo_metal_rand";
-  //----------------- //----------------- level.barrelHealth = 150;
   maxBrokenPieces = 25;
-  //------------- //------------- level.precachemodeltype = [];
+
   level.barrelExplodingThisFrame = false;
   level.breakables_clip = [];
 
@@ -39,7 +34,7 @@ main() {
   level._breakable_utility_modelindex = 0;
   level._breakable_utility_maxnum = maxBrokenPieces;
   common_scripts\utility::array_thread(getEntArray("explodable_barrel", "targetname"), ::explodable_barrel_think);
-  //common_scripts\utility::array_thread(getentarray ("explodable_barrel","script_noteworthy"), ::explodable_barrel_think); ASK MO
+
   common_scripts\utility::array_thread(getEntArray("oil_spill", "targetname"), ::oil_spill_think);
 }
 
@@ -63,7 +58,7 @@ oil_spill_think() {
     self.damageOwner = other;
 
     playFX(level.breakables_fx["oilspill"]["spark"], P, direction_vec);
-    //P = pointOnSegmentNearestToPoint(self.start.origin, self.end.origin, P);
+
     thread oil_spill_burn_section(P);
     self thread oil_spill_burn(P, self.start.origin);
     self thread oil_spill_burn(P, self.end.origin);
@@ -83,8 +78,7 @@ getClosestEnt(org, array) {
   if(array.size < 1) {
     return;
   }
-  //	dist = distance(array[0] getorigin(), org);
-  //	ent = array[0];
+
   dist = 256;
   ent = undefined;
   for(i = 0; i < array.size; i++) {
@@ -106,7 +100,6 @@ oil_spill_burn_after() {
   }
   self.damageOwner = attacker;
 
-  // do not pass damage owner if they have disconnected before the barrels explode
   if(!isDefined(self.damageOwner))
     self radiusdamage(self.origin, 4, 10, 10);
   else
@@ -159,7 +152,6 @@ oil_spill_burn(P, dest) {
           self radiusdamage(barrels[i].origin, 4, d, d);
         else
           self radiusdamage(barrels[i].origin, 4, d, d, self.damageOwner);
-        //barrels[i] dodamage(, P);
       }
     }
     for(i = 0; i < remove.size; i++)
@@ -194,10 +186,10 @@ oil_spill_burn_section(P) {
 }
 
 explodable_barrel_think() {
-  if(self.classname != "script_model")
+  if(self.classname != "script_model") {
     return;
-  //	if( (self.model != "com_barrel_benzin") && (self.model != "com_barrel_benzin_snow") )
-  //		return;
+  }
+
   if(!isDefined(level.precachemodeltype["com_barrel_benzin"])) {
     level.precachemodeltype["com_barrel_benzin"] = true;
     precacheModel("com_barrel_piece");
@@ -279,7 +271,7 @@ explodable_barrel_explode() {
   offset += (0, 0, 4);
 
   self playSound(level.barrelExpSound);
-  //level thread play_sound_in_space(level.barrelExpSound, self.origin);
+
   playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
 
   level.barrelExplodingThisFrame = true;
@@ -295,7 +287,6 @@ explodable_barrel_explode() {
   if(isDefined(self.radius))
     blastRadius = self.radius;
 
-  // do not pass damage owner if they have disconnected before the barrels explode
   if(!isDefined(self.damageOwner))
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, undefined, "MOD_EXPLOSIVE", "barrel_mp");
   else
@@ -337,7 +328,6 @@ getstruct(name, type) {
 }
 
 breakable_clip() {
-  //targeted brushmodels take priority over proximity based breakables - nate
   if(isDefined(self.target)) {
     targ = getent(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
@@ -345,7 +335,7 @@ breakable_clip() {
       return;
     }
   }
-  //setup it's removable clip part
+
   if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0))
     self.remove = getClosestEnt(self.origin, level.breakables_clip);
   if(isDefined(self.remove))

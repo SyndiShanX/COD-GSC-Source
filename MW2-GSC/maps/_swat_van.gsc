@@ -49,15 +49,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_russian_swat_van (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_swat_van::main( "vehicle_russian_swat_van" );
-
-and these lines in your CSV:
-#include,vehicle_russian_swat_van
-sound,vehicle_swat_van,vehicle_standard,all_sp
-
-defaultmdl="vehicle_russian_swat_van"default:"vehicletype" "swat_van"
-*/

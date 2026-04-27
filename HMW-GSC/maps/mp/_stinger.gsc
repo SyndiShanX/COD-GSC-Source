@@ -163,7 +163,7 @@ GetTargetList() {
     }
 
   } else {
-    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.owner != self))
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player))

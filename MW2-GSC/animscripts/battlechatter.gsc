@@ -3,36 +3,11 @@
  * Script: animscripts\battlechatter.gsc
 ********************************************************/
 
-/****************************************************************************
-
- battleChatter.gsc
-
- Basic concepts: Battle chatter events work on a queue system.Events are
- added the AI's queue, and script calls to playBattleChatter(), scattered
- throughout the animscripts, give the AI oppurtunities to play the events.
- Events have an expiration time; if there are no calls to playBattleChatter
- before an event expires, it will not play.
- Script calls, usually within animscripts or battleChatter_ai::*Waiter()
- functions, call the add*Event(); functions to add a voice event to the
- AI's queue.
- Since an AI can have multiple events in it's queue at a give time, there
- is a priority system in place to help the AI choose which events get added
- to the queue and which events it will play.Events with a priority of 1
- will always be added to the queue (unless battlechatter is disabled on the
- AI)
-		
-*****************************************************************************/
-
 #include common_scripts\utility;
 #include maps\_utility;
 #include animscripts\utility;
 #include animscripts\battlechatter_ai;
 
-/****************************************************************************
- initialization
-*****************************************************************************/
-
-// Initializes the battle chatter system
 init_battleChatter() {
   if(isDefined(anim.chatInitialized) && anim.chatInitialized) {
     return;
@@ -55,7 +30,7 @@ init_battleChatter() {
   SetDvarIfUninitialized("bcs_filterResponse", "off");
 
   SetDvarIfUninitialized("bcs_forceEnglish", "0");
-  // useful if you only have one voice actor's set of aliases and need to test responses
+
   SetDvarIfUninitialized("bcs_allowsamevoiceresponse", "off");
 
   SetDvarIfUninitialized("debug_bcprint", "off");
@@ -76,9 +51,6 @@ init_battleChatter() {
   bcs_setup_teams_array();
   bcs_setup_countryIDs();
 
-  // Player Name IDs:
-  // - these IDs map to whatever the sound dept. uses for the player name alias
-  // (ex. "US_name_player_1" would make our id = 1)
   anim.playerNameIDs["american"] = "1";
   anim.playerNameIDs["seal"] = "1";
   anim.playerNameIDs["taskforce"] = "1";
@@ -86,8 +58,6 @@ init_battleChatter() {
 
   thread setPlayerBcNameID();
 
-  // AI Name IDs
-  // - update these when the number or ID(s) of voice actors for any nationality changes!
   anim.usedIDs = [];
 
   anim.usedIDs["russian"] = [];
@@ -245,7 +215,6 @@ init_battleChatter() {
 
   init_flavorbursts();
 
-  // doesn't impact friendlyfire warnings normally played when battlechatter is on, //just whether it plays when battlechatter is otherwise turned off
   if(!isDefined(level.friendlyfire_warnings)) {
     level.friendlyfire_warnings = false;
   }
@@ -259,11 +228,6 @@ init_battleChatter() {
   anim.eventTypeMinWait["custom"] = [];
   anim.eventTypeMinWait["direction"] = [];
 
-  // If you want to tweak how often battlechatter messages happen, // this is place to do it.
-  // A priority of 1 will force an event to be added to the queue, and
-  // will make it override pre-existing events of the same type.
-
-  // times are in milliseconds
   if(isDefined(level._stealth)) {
     anim.eventActionMinWait["threat"]["self"] = 20000;
     anim.eventActionMinWait["threat"]["squad"] = 30000;
@@ -328,7 +292,6 @@ init_battleChatter() {
   anim.eventDuration["inform"]["killfirm"] = 2000;
   anim.eventDuration["custom"]["generic"] = 1000;
 
-  // event chances are in % out of 100
   anim.eventChance["response"]["exposed"] = 75;
   anim.eventChance["response"]["reload"] = 65;
   anim.eventChance["response"]["callout"] = 75;
@@ -337,16 +300,14 @@ init_battleChatter() {
   anim.eventChance["moveEvent"]["coverme"] = 70;
   anim.eventChance["moveEvent"]["ordertoplayer"] = 10;
 
-  // flavor burst transmission tweakables
-  anim.fbt_desiredDistMax = 620; // try to keep fbts within this range from the player
-  anim.fbt_waitMin = 12; // time to wait between transmissions
+  anim.fbt_desiredDistMax = 620;
+  anim.fbt_waitMin = 12;
   anim.fbt_waitMax = 24;
-  anim.fbt_lineBreakMin = 2; // time to wait between lines
+  anim.fbt_lineBreakMin = 2;
   anim.fbt_lineBreakMax = 5;
 
   anim.moveOrigin = spawn("script_origin", (0, 0, 0));
 
-  // how many units from the player dudes can be and still chatter or be chattered about
   if(!isDefined(level.bcs_maxTalkingDistFromPlayer)) {
     level.bcs_maxTalkingDistFromPlayer = 1500;
   }
@@ -354,15 +315,12 @@ init_battleChatter() {
     level.bcs_maxThreatDistFromPlayer = 2500;
   }
 
-  // set up location triggers
   maps\_bcs_location_trigs::bcs_location_trigs_init();
   Assert(isDefined(anim.bcs_locations));
   anim.locationLastCalloutTimes = [];
 
-  // how long after starting some scripted dialogue will we wait before chattering? (milliseconds)
   anim.scriptedDialogueBufferTime = 4000;
 
-  // how long before we can chatter about a threat again?
   anim.bcs_threatResetTime = 3000;
 
   if(getDvar("debug_bcdrawobjects") == "on")
@@ -383,7 +341,6 @@ init_battleChatter() {
 
   bcs_setup_chatter_toggle_array();
 
-  // which nationalities can do flavor burst transmissions?
   if(!isDefined(anim.flavorburstVoices)) {
     anim.flavorburstVoices = [];
     anim.flavorburstVoices["american"] = true;
@@ -400,12 +357,11 @@ init_battleChatter() {
   anim.lastNameSaid = [];
   anim.lastNameSaidTime = [];
   foreach(team in anim.teams) {
-    anim.lastTeamSpeakTime[team] = -50000; // so it doesnt pause if nobody has ever spoken
+    anim.lastTeamSpeakTime[team] = -50000;
     anim.lastNameSaid[team] = "none";
     anim.lastNameSaidTime[team] = -100000;
   }
 
-  // how long we'll wait before allowing use of a certain AI name again
   anim.lastNameSaidTimeout = 10000;
 
   for(index = 0; index < anim.squadIndex.size; index++) {
@@ -415,1012 +371,489 @@ init_battleChatter() {
     anim.squadIndex[index] init_squadBattleChatter();
   }
 
-  /*----------- THREAT CALLOUT CHANCES ----------- - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI, and holds %chance weights that help determine if that the AI will
-  try to use that type of threat callout to alert players to a threat.
-  	
-  - These are matched against the values of self.allowedCallouts[] for each AI, to determine
-  whether the AI can use a particular kind of callout - not all nationalities get all callouts.
-  self.allowedCallouts gets set up for each AI in battlechatter_ai::init_aiBattleChatter.
-
-   - higher numbers mean a higher chance!
-   - zero values do not get considered.
-   - 100+ values are prioritized above everything except other 100+ values.
-   - chances are dicerolled against one another to find a winner, like this:
-   if( RandomInt( threatCallouts[ "player_yourclock" ] ) > RandomInt( threatCallouts[ "ai_yourclock ] ) )
-  	
-  rough priorities:
-  1. RPG
-  2. exposed
-  3. player_obvious
-  3. "catch-all":
-  	1. player_your_clock
-  	2. player_contact_clock
-  	3. player_target_clock
-  	4. ai_your_clock
-  	5. player_cardinal
-  4. object (aka landmark):
-  	1. player_object_yourclock
-  	1. player_object_clock
-  	2. ai_object_yourclock
-  5. location
-  	1. player_location
-  	2. ai_location
-  	3. generic_location
-  -------------------------------------------------*/
-
   anim.threatCallouts = [];
 
-  // RPG/exposed
-  anim.threatCallouts["rpg"] = 100; // "RPG!"anim.threatCallouts["exposed"] = 25; // "Got a tango in the open!"// "obvious" callouts
-  anim.threatCallouts["player_obvious"] = 40; // "Player! Light 'em up!"( for 12 o'clock threats )
+  anim.threatCallouts["rpg"] = 100;
+  anim.threatCallouts["player_obvious"] = 40;
 
-  // player-relative callouts
-  anim.threatCallouts["player_yourclock"] = 30; // "Player! Contact at your 10 o'clock!"anim.threatCallouts["player_contact_clock"] = 25; // "Player! Contact at 10 o'clock!"anim.threatCallouts["player_target_clock"] = 25; // "Player! Target, 10 o'clock!"anim.threatCallouts["player_cardinal"] = 20; // "Player! Contact, northwest!"// "catch-all" callouts
-  anim.threatCallouts["ai_yourclock"] = 25; // "Peas! Contact at your 10 o'clock!"anim.threatCallouts["ai_contact_clock"] = 20;
+  anim.threatCallouts["player_yourclock"] = 30;
+  anim.threatCallouts["ai_yourclock"] = 25;
   anim.threatCallouts["ai_target_clock"] = 20;
   anim.threatCallouts["ai_cardinal"] = 10;
 
-  /* DEPRECATED
-  // object (aka landmark) callouts
-  anim.threatCallouts[ "player_object_yourclock" ]	= 100;// "Player! Movement by the dumpster at your 10 o'clock!"anim.threatCallouts[ "player_object_clock" ]		= 100;// "Player! Movement by the dumpster at 10 o'clock!"anim.threatCallouts[ "ai_object_yourclock" ]		= 95;// "Peas! Movement by the dumpster at your 10 o'clock!"*/
-
-  // location callouts
-  anim.threatCallouts["player_location"] = 95; // ( Player - relative ) "Contact! 2nd floor window on the left!"anim.threatCallouts["ai_location"] = 100; // ( AI - relative ) "Contact! 2nd floor window on the left!"anim.threatCallouts["generic_location"] = 90;
-
-  anim.lastTeamThreatCallout = [];
-  anim.lastTeamThreatCalloutTime = [];
-  foreach(team in anim.teams) {
-    anim.lastTeamThreatCallout[team] = undefined;
-    anim.lastTeamThreatCalloutTime[team] = undefined;
-  }
-  anim.teamThreatCalloutLimitTimeout = 20000;
-
-  level notify("battlechatter initialized");
-  anim notify("battlechatter initialized");
-}
-
-bcs_setup_teams_array() {
-  if(!isDefined(anim.teams)) {
-    anim.teams = [];
-    anim.teams[anim.teams.size] = "axis";
-    anim.teams[anim.teams.size] = "allies";
-    anim.teams[anim.teams.size] = "team3";
-    anim.teams[anim.teams.size] = "neutral";
-  }
-}
-
-bcs_setup_countryIDs() {
-  if(!isDefined(anim.countryIDs)) {
-    anim.countryIDs["british"] = "UK";
-    anim.countryIDs["american"] = "US";
-    anim.countryIDs["seal"] = "NS";
-    anim.countryIDs["taskforce"] = "TF";
-    anim.countryIDs["secretservice"] = "SS";
-    anim.countryIDs["russian"] = "RU";
-    anim.countryIDs["arab"] = "AB";
-    anim.countryIDs["german"] = "GE";
-    anim.countryIDs["spanish"] = "SP";
-    anim.countryIDs["italian"] = "IT";
-    anim.countryIDs["portuguese"] = "PG";
-    anim.countryIDs["shadowcompany"] = "SC";
-  }
-}
-
-bcs_setup_chatter_toggle_array() {
-  bcs_setup_teams_array();
-
-  if(!isDefined(level.battlechatter)) {
-    level.battlechatter = [];
-    foreach(team in anim.teams) {
-      set_battlechatter_variable(team, true);
-    }
-  }
-}
-
-bcs_setup_flavorburst_toggle_array() {
-  bcs_setup_teams_array();
-
-  if(!isDefined(level.flavorbursts)) {
-    level.flavorbursts = [];
-    foreach(team in anim.teams) {
-      level.flavorbursts[team] = true;
-    }
-  }
-}
-
-init_flavorbursts() {
-  // flavor burst transmission aliases
-  // update these as new transmissions are recorded
-  // (format of the fbt aliases is "FB_US_7_11", //where the first number is what you put below)
-  anim.flavorbursts["american"] = [];
-  numBursts = 41;
-
-  us = [];
-  if(level.script == "roadkill" || level.script == "trainer") {
-    // we don't want to hear chatter about US locales when we're operating in another country
-    //(these correspond to sequence numbers in the aliases)
-    us[us.size] = 13;
-    us[us.size] = 15;
-    us[us.size] = 16;
-    us[us.size] = 19;
-    us[us.size] = 20;
-    us[us.size] = 30;
-    us[us.size] = 31;
-    us[us.size] = 33;
-    us[us.size] = 38;
-  }
-
-  for(i = 0; i < numBursts; i++) {
-    // don't include US-specific aliases, if applicable
-    if(us.size) {
-      foundOne = false;
-      foreach(sequenceNum in us) {
-        if(sequenceNum == i) {
-          foundOne = true;
-          break;
-        }
-      }
-
-      if(foundOne) {
-        continue;
-      }
-    }
-
-    anim.flavorbursts["american"][i] = string(i + 1);
-  }
-
-  anim.flavorbursts["shadowcompany"] = [];
-  numBursts = 9;
-
-  for(i = 1; i <= numBursts; i++) {
-    anim.flavorbursts["shadowcompany"][i] = string(i + 1);
-  }
-
-  anim.flavorburstsUsed = [];
-}
-
-shutdown_battleChatter() {
-  anim.countryIDs = undefined;
-  anim.eventTypeMinWait = undefined;
-  anim.eventActionMinWait = undefined;
-  anim.eventTypeMinWait = undefined;
-  anim.eventPriority = undefined;
-  anim.eventDuration = undefined;
-
-  anim.moveOrigin = undefined;
-
-  anim.scriptedDialogueBufferTime = undefined;
-  anim.bcs_threatResetTime = undefined;
-
-  anim.locationLastCalloutTimes = undefined;
-
-  anim.usedIDs = undefined;
-
-  anim.flavorburstsUsed = undefined;
-
-  anim.lastTeamThreatCallout = undefined;
-  anim.lastTeamThreatCalloutTime = undefined;
-
-  anim.lastNameSaidTimeout = undefined;
-  anim.lastNameSaid = undefined;
-  anim.lastNameSaidTime = undefined;
-
-  anim.chatInitialized = false;
-  anim.player.chatInitialized = false;
-
-  level.battlechatter = undefined;
-
-  for(i = 0; i < anim.squadCreateFuncs.size; i++) {
-    if(anim.squadCreateStrings[i] != "::init_squadBattleChatter") {
-      continue;
-    }
-    if(i != (anim.squadCreateFuncs.size - 1)) {
-      anim.squadCreateFuncs[i] = anim.squadCreateFuncs[anim.squadCreateFuncs.size - 1];
-      anim.squadCreateStrings[i] = anim.squadCreateStrings[anim.squadCreateStrings.size - 1];
-    }
-
-    anim.squadCreateFuncs[anim.squadCreateFuncs.size - 1] = undefined;
-    anim.squadCreateStrings[anim.squadCreateStrings.size - 1] = undefined;
-  }
-
-  level notify("battlechatter disabled");
-  anim notify("battlechatter disabled");
-}
-
-// initializes battlechatter data that resides in the squad manager
-// this is done to keep the squad management system free from clutter
-init_squadBattleChatter() {
-  squad = self;
-
-  // tweakables
-  squad.numSpeakers = 0;
-  squad.maxSpeakers = 1;
-
-  // non tweakables
-  squad.nextSayTime = GetTime() + 50;
-  squad.nextSayTimes["threat"] = GetTime() + 50;
-  squad.nextSayTimes["order"] = GetTime() + 50;
-  squad.nextSayTimes["reaction"] = GetTime() + 50;
-  squad.nextSayTimes["response"] = GetTime() + 50;
-  squad.nextSayTimes["inform"] = GetTime() + 50;
-  squad.nextSayTimes["custom"] = GetTime() + 50;
-
-  squad.nextTypeSayTimes["threat"] = [];
-  squad.nextTypeSayTimes["order"] = [];
-  squad.nextTypeSayTimes["reaction"] = [];
-  squad.nextTypeSayTimes["response"] = [];
-  squad.nextTypeSayTimes["inform"] = [];
-  squad.nextTypeSayTimes["custom"] = [];
-
-  squad.isMemberSaying["threat"] = false;
-  squad.isMemberSaying["order"] = false;
-  squad.isMemberSaying["reaction"] = false;
-  squad.isMemberSaying["response"] = false;
-  squad.isMemberSaying["inform"] = false;
-  squad.isMemberSaying["custom"] = false;
-  squad.lastDirection = "";
-
-  squad.memberAddFuncs[squad.memberAddFuncs.size] = ::addToSystem;
-  squad.memberAddStrings[squad.memberAddStrings.size] = "::addToSystem";
-  squad.memberRemoveFuncs[squad.memberRemoveFuncs.size] = ::removeFromSystem;
-  squad.memberRemoveStrings[squad.memberRemoveStrings.size] = "::removeFromSystem";
-  squad.squadUpdateFuncs[squad.squadUpdateFuncs.size] = ::initContact;
-  squad.squadUpdateStrings[squad.squadUpdateStrings.size] = "::initContact";
-
-  squad.fbt_firstBurst = true;
-  squad.fbt_lastBursterID = undefined;
-
-  for(i = 0; i < anim.squadIndex.size; i++)
-    squad thread initContact(anim.squadIndex[i].squadName);
-
-  squad thread squadThreatWaiter();
-  squad thread squadOfficerWaiter();
-
-  squad thread squadFlavorBurstTransmissions();
-
-  squad.chatInitialized = true;
-  squad notify("squad chat initialized");
-}
-
-// initializes battlechatter data that resides in the squad manager
-// this is done to keep the squad management system free from clutter
-shutdown_squadBattleChatter() {
-  squad = self;
-
-  // tweakables
-  squad.numSpeakers = undefined;
-  squad.maxSpeakers = undefined;
-
-  // non tweakables
-  squad.nextSayTime = undefined;
-  squad.nextSayTimes = undefined;
-
-  squad.nextTypeSayTimes = undefined;
-
-  squad.isMemberSaying = undefined;
-
-  squad.fbt_firstBurst = undefined;
-  squad.fbt_lastBursterID = undefined;
-
-  for(i = 0; i < squad.memberAddFuncs.size; i++) {
-    if(squad.memberAddStrings[i] != "::addToSystem") {
-      continue;
-    }
-    if(i != (squad.memberAddFuncs.size - 1)) {
-      squad.memberAddFuncs[i] = squad.memberAddFuncs[squad.memberAddFuncs.size - 1];
-      squad.memberAddStrings[i] = squad.memberAddStrings[squad.memberAddStrings.size - 1];
-    }
-
-    squad.memberAddFuncs[squad.memberAddFuncs.size - 1] = undefined;
-    squad.memberAddStrings[squad.memberAddStrings.size - 1] = undefined;
-  }
-
-  for(i = 0; i < squad.memberRemoveFuncs.size; i++) {
-    if(squad.memberRemoveStrings[i] != "::removeFromSystem") {
-      continue;
-    }
-    if(i != (squad.memberRemoveFuncs.size - 1)) {
-      squad.memberRemoveFuncs[i] = squad.memberRemoveFuncs[squad.memberRemoveFuncs.size - 1];
-      squad.memberRemoveStrings[i] = squad.memberRemoveStrings[squad.memberRemoveStrings.size - 1];
-    }
-
-    squad.memberRemoveFuncs[squad.memberRemoveFuncs.size - 1] = undefined;
-    squad.memberRemoveStrings[squad.memberRemoveStrings.size - 1] = undefined;
-  }
-
-  for(i = 0; i < squad.squadUpdateFuncs.size; i++) {
-    if(squad.squadUpdateStrings[i] != "::initContact") {
-      continue;
-    }
-    if(i != (squad.squadUpdateFuncs.size - 1)) {
-      squad.squadUpdateFuncs[i] = squad.squadUpdateFuncs[squad.squadUpdateFuncs.size - 1];
-      squad.squadUpdateStrings[i] = squad.squadUpdateStrings[squad.squadUpdateStrings.size - 1];
-    }
-
-    squad.squadUpdateFuncs[squad.squadUpdateFuncs.size - 1] = undefined;
-    squad.squadUpdateStrings[squad.squadUpdateStrings.size - 1] = undefined;
-  }
-
-  for(i = 0; i < anim.squadIndex.size; i++)
-    squad shutdownContact(anim.squadIndex[i].squadName);
-
-  squad.chatInitialized = false;
-}
-
-bcsEnabled() {
-  return anim.chatInitialized;
-}
-
-bcsDebugWaiter() {
-  lastState = getDvar("bcs_enable", "on");
-
-  while(1) {
-    state = getDvar("bcs_enable", "on");
-
-    if(state != lastState) {
-      switch (state) {
-        case "on":
-          if(!anim.chatInitialized)
-            enableBattleChatter();
-          break;
-        case "off":
-          if(anim.chatInitialized)
-            disableBattleChatter();
-          break;
-      }
-      lastState = state;
-    }
-
-    wait(1.0);
-  }
-}
-
-enableBattleChatter() {
-  init_battleChatter();
-
-  anim.player thread animscripts\battleChatter_ai::addToSystem();
-
-  ai = GetAIArray();
-  for(i = 0; i < ai.size; i++) {
-    ai[i] addToSystem();
-  }
-}
-
-disableBattleChatter() {
-  shutdown_battleChatter();
-
-  ai = GetAIArray();
-  for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].squad) && ai[i].squad.chatInitialized)
-      ai[i].squad shutdown_squadBattleChatter();
-
-    ai[i] removeFromSystem();
-  }
-}
-
-// sets the player name to use when playing player-relative phrases
-// these are used to make an alias that looks like: US_1_name_player_US_1
-setPlayerBcNameID(overrideNameID, overrideCountryID) {
-  if(isDefined(overrideNameID) && isDefined(overrideCountryID)) {
-    level.player.bcNameID = overrideNameID;
-    level.player.bcCountryID = overrideCountryID;
-    return;
-  }
-
-  while(!isDefined(level.campaign)) {
-    wait(0.1);
-  }
-
-  nationality = level.campaign;
-
-  nameID = anim.playerNameIDs[nationality];
-  countryID = anim.countryIDs[nationality];
-
-  if(isDefined(nameID)) {
-    level.player.bcNameID = nameID;
-  }
-
-  if(isDefined(countryID)) {
-    level.player.bcCountryID = countryID;
-  }
-}
-
-/****************************************************************************
- processing
-*****************************************************************************/
-
-playBattleChatter() {
-  if(!IsAlive(self)) {
-    return;
-  }
-
-  // battlechatter system is totally turned off (as opposed to dormant)
-  if(!bcsEnabled()) {
-    return;
-  }
-
-  // he's doing a scripted animation
-  if(self._animActive > 0) {
-    return;
-  }
-
-  // he's already saying a battlechatter line
-  if(isDefined(self.isSpeaking) && self.isSpeaking) {
-    return;
-  }
-
-  // an ally is doing scripted dialogue
-  if(self.team == "allies" && isDefined(anim.scriptedDialogueStartTime)) {
-    if((anim.scriptedDialogueStartTime + anim.scriptedDialogueBufferTime) > GetTime()) {
+  playBattleChatter() {
+    if(!IsAlive(self)) {
       return;
     }
-  }
 
-  // hacky! friendlyfire warnings have greatly reduced requirements for whether they can play
-  if(self friendlyfire_warning()) {
-    return;
-  }
+    if(!bcsEnabled()) {
+      return;
+    }
 
-  if(!isDefined(self.battleChatter) || !self.battleChatter) {
-    return;
-  }
+    if(self._animActive > 0) {
+      return;
+    }
 
-  if(self.team == "allies" && GetDvarInt("bcs_forceEnglish", 0)) {
-    return;
-  }
+    if(isDefined(self.isSpeaking) && self.isSpeaking) {
+      return;
+    }
 
-  if(anim.isTeamSpeaking[self.team]) {
-    return;
-  }
-
-  self endon("death");
-
-  //	self thread debugQueueEvents();
-  //	self thread debugPrintEvents();
-
-  event = self getHighestPriorityEvent();
-
-  if(!isDefined(event)) {
-    return;
-  }
-
-  switch (event) {
-    case "custom":
-      self thread playCustomEvent();
-      break;
-    case "response":
-      self thread playResponseEvent();
-      break;
-    case "order":
-      self thread playOrderEvent();
-      break;
-    case "threat":
-      self thread playThreatEvent();
-      break;
-    case "reaction":
-      self thread playReactionEvent();
-      break;
-    case "inform":
-      self thread playInformEvent();
-      break;
-  }
-}
-
-//// threat events functions
-playThreatEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-  self endon("cancel speaking");
-
-  self.curEvent = self.chatQueue["threat"];
-
-  threat = self.chatQueue["threat"].threat;
-
-  if(!IsAlive(threat)) {
-    return;
-  }
-
-  if(threatWasAlreadyCalledOut(threat) && !isPlayer(threat)) {
-    return;
-  }
-
-  anim thread lockAction(self, "threat");
-
-  if(getDvar("debug_bcinteraction") == "on")
-    animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
-
-  success = false;
-
-  switch (self.chatQueue["threat"].eventType) {
-    case "infantry":
-      if(isPlayer(threat) || !isDefined(threat GetTurret())) {
-        success = self threatInfantry(threat);
-      } else {
-        // if we ever want emplacement callouts again, put one here
+    if(self.team == "allies" && isDefined(anim.scriptedDialogueStartTime)) {
+      if((anim.scriptedDialogueStartTime + anim.scriptedDialogueBufferTime) > GetTime()) {
+        return;
       }
-      break;
-    case "dog":
-      success = self threatDog(threat);
-      break;
-    case "vehicle":
-      break;
+    }
+
+    if(self friendlyfire_warning()) {
+      return;
+    }
+
+    if(!isDefined(self.battleChatter) || !self.battleChatter) {
+      return;
+    }
+
+    if(self.team == "allies" && GetDvarInt("bcs_forceEnglish", 0)) {
+      return;
+    }
+
+    if(anim.isTeamSpeaking[self.team]) {
+      return;
+    }
+
+    self endon("death");
+
+    event = self getHighestPriorityEvent();
+
+    if(!isDefined(event)) {
+      return;
+    }
+
+    switch (event) {
+      case "custom":
+        self thread playCustomEvent();
+        break;
+      case "response":
+        self thread playResponseEvent();
+        break;
+      case "order":
+        self thread playOrderEvent();
+        break;
+      case "threat":
+        self thread playThreatEvent();
+        break;
+      case "reaction":
+        self thread playReactionEvent();
+        break;
+      case "inform":
+        self thread playInformEvent();
+        break;
+    }
   }
+  playThreatEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
+    self endon("cancel speaking");
 
-  self notify("done speaking");
+    self.curEvent = self.chatQueue["threat"];
 
-  if(!success) {
-    return;
-  }
+    threat = self.chatQueue["threat"].threat;
 
-  if(!IsAlive(threat)) {
-    return;
-  }
+    if(!IsAlive(threat)) {
+      return;
+    }
 
-  threat.calledOut[self.squad.squadName] = spawnStruct();
-  threat.calledOut[self.squad.squadName].spotter = self;
-  threat.calledOut[self.squad.squadName].threatType = self.chatQueue["threat"].eventType;
-  threat.calledOut[self.squad.squadName].expireTime = GetTime() + anim.bcs_threatResetTime;
+    if(threatWasAlreadyCalledOut(threat) && !isPlayer(threat)) {
+      return;
+    }
 
-  if(isDefined(threat.squad)) {
-    self.squad.squadList[threat.squad.squadName].calledOut = true;
-  }
-}
+    anim thread lockAction(self, "threat");
 
-threatWasAlreadyCalledOut(threat) {
-  if(isDefined(threat.calledOut) && isDefined(threat.calledOut[self.squad.squadName])) {
-    // maybe we can talk about him again if he was previously called out
-    if(threat.calledOut[self.squad.squadName].expireTime < GetTime()) {
-      return true;
+    if(getDvar("debug_bcinteraction") == "on")
+      animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
+
+    success = false;
+
+    switch (self.chatQueue["threat"].eventType) {
+      case "infantry":
+        if(isPlayer(threat) || !isDefined(threat GetTurret())) {
+          success = self threatInfantry(threat);
+        } else {}
+        break;
+      case "dog":
+        success = self threatDog(threat);
+        break;
+      case "vehicle":
+        break;
+    }
+
+    self notify("done speaking");
+
+    if(!success) {
+      return;
+    }
+
+    if(!IsAlive(threat)) {
+      return;
+    }
+
+    threat.calledOut[self.squad.squadName] = spawnStruct();
+    threat.calledOut[self.squad.squadName].spotter = self;
+    threat.calledOut[self.squad.squadName].threatType = self.chatQueue["threat"].eventType;
+    threat.calledOut[self.squad.squadName].expireTime = GetTime() + anim.bcs_threatResetTime;
+
+    if(isDefined(threat.squad)) {
+      self.squad.squadList[threat.squad.squadName].calledOut = true;
     }
   }
 
-  return false;
-}
-
-threatInfantry(threat, forceDetail) {
-  self endon("cancel speaking");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase.master = true;
-  chatPhrase.threatEnt = threat;
-
-  // figure out what kind of callout we want to do
-  callout = self getThreatInfantryCalloutType(threat);
-
-  if(!isDefined(callout) || (isDefined(callout) && !isDefined(callout.type))) {
-    /*
-    printStr = anim.bcPrintFailPrefix + "Couldn't find a threat callout type using getThreatInfantryCalloutType. ";
-    		
-    if( isDefined( threat ) && isDefined( threat.classname ) )
-    {
-    	printStr += "Threat classname was: " + threat.classname;
+  threatWasAlreadyCalledOut(threat) {
+    if(isDefined(threat.calledOut) && isDefined(threat.calledOut[self.squad.squadName])) {
+      if(threat.calledOut[self.squad.squadName].expireTime < GetTime()) {
+        return true;
+      }
     }
-    else if( isDefined( threat ) && !isDefined( threat.classname ) )
-    {
-    	printStr += "Threat didn't have a classname!";
-    }
-    else if( !isDefined( threat ) )
-    {
-    	printStr += "Threat wasn't defined!";
-    }
-    		
-    PrintLn( printStr );
-    */
+
     return false;
   }
 
-  switch (callout.type) {
-    case "rpg":
+  threatInfantry(threat, forceDetail) {
+    self endon("cancel speaking");
 
-      chatPhrase threatInfantryRPG(threat);
-      break;
+    chatPhrase = self createChatPhrase();
+    chatPhrase.master = true;
+    chatPhrase.threatEnt = threat;
 
-    case "exposed":
+    callout = self getThreatInfantryCalloutType(threat);
 
-      // not getting enough variety when we count on AIs to see the targets themselves
-      //before responding, so do a simpler diceroll check that we can control better
-      //
-      // - check for callout.responder because it's not required
-      // for this callout, just nice to have
-      doResponse = self doExposedCalloutResponse(callout.responder);
+    if(!isDefined(callout) || (isDefined(callout) && !isDefined(callout.type))) {
+      return false;
+    }
 
-      // if we can say their name, do it
-      if(doResponse && self canSayName(callout.responder)) {
-        chatPhrase addNameAlias(callout.responder.bcName);
-        chatPhrase.lookTarget = callout.responder;
-      }
+    switch (callout.type) {
+      case "rpg":
 
-      // set up the exposed line to play
-      chatPhrase threatInfantryExposed(threat);
+        chatPhrase threatInfantryRPG(threat);
+        break;
 
-      // add a response event, if we decided to do it
-      if(doResponse) {
-        if(RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
-          callout.responder addResponseEvent("callout", "neg", self, 0.9);
-        } else {
-          callout.responder addResponseEvent("exposed", "acquired", self, 0.9);
+      case "exposed":
+
+        doResponse = self doExposedCalloutResponse(callout.responder);
+
+        if(doResponse && self canSayName(callout.responder)) {
+          chatPhrase addNameAlias(callout.responder.bcName);
+          chatPhrase.lookTarget = callout.responder;
         }
-      }
-      break;
 
-    case "player_obvious":
-
-      chatPhrase addPlayerNameAlias();
-      chatPhrase addThreatObviousAlias();
-      break;
-
-    case "player_yourclock":
-
-      chatPhrase addPlayerNameAlias();
-
-      chatPhrase addThreatCalloutAlias("yourclock", callout.playerClockDirection);
-      break;
-
-    case "player_contact_clock":
-
-      chatPhrase addPlayerNameAlias();
-
-      chatPhrase addThreatCalloutAlias("contactclock", callout.playerClockDirection);
-      break;
-
-    case "player_target_clock":
-
-      chatPhrase addPlayerNameAlias();
-
-      chatPhrase addThreatCalloutAlias("targetclock", callout.playerClockDirection);
-      break;
-
-    case "player_cardinal":
-
-      chatPhrase addPlayerNameAlias();
-
-      cardinalDirection = getDirectionCompass(level.player.origin, threat.origin);
-      normalizedDirection = normalizeCompassDirection(cardinalDirection);
-
-      if(normalizedDirection == "impossible") {
-        return false;
-      }
-
-      chatPhrase addThreatCalloutAlias("cardinal", normalizedDirection);
-      break;
-
-    case "ai_yourclock":
-
-      AssertEx(isDefined(callout.responder), "we should have found a valid responder in order to do an ai_yourclock callout!");
-
-      angles = getRelativeAngles(callout.responder);
-
-      if(self canSayName(callout.responder)) {
-        chatPhrase addNameAlias(callout.responder.bcName);
-        chatPhrase.lookTarget = callout.responder;
-      }
-
-      chatPhrase addThreatCalloutAlias("yourclock", callout.responderClockDirection);
-
-      chatPhrase addCalloutResponseEvent(self, callout, threat);
-
-      break;
-
-    case "ai_contact_clock":
-
-      relativeGuy = self;
-
-      if(self.team == "allies") {
-        // make it player relative for allied callouts
-        relativeGuy = level.player;
-      }
-      // for axis, make it relative to a responder if we have one
-      else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
-        relativeGuy = callout.responder;
-      }
-
-      angles = getRelativeAngles(relativeGuy);
-      clockDirection = getDirectionFacingClock(angles, relativeGuy.origin, threat.origin);
-
-      if(isDefined(callout.responder) && self canSayName(callout.responder)) {
-        chatPhrase addNameAlias(callout.responder.bcName);
-        chatPhrase.lookTarget = callout.responder;
-      }
-
-      chatPhrase addThreatCalloutAlias("contactclock", clockDirection);
-
-      chatPhrase addCalloutResponseEvent(self, callout, threat);
-
-      break;
-
-    case "ai_target_clock":
-
-      relativeGuy = self;
-
-      if(self.team == "allies") {
-        // make it player relative for allied callouts
-        relativeGuy = level.player;
-      }
-      // for axis, make it relative to a responder if we have one
-      else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
-        relativeGuy = callout.responder;
-      }
-
-      angles = getRelativeAngles(relativeGuy);
-      clockDirection = getDirectionFacingClock(angles, relativeGuy.origin, threat.origin);
-
-      if(isDefined(callout.responder) && self canSayName(callout.responder)) {
-        chatPhrase addNameAlias(callout.responder.bcName);
-        chatPhrase.lookTarget = callout.responder;
-      }
-
-      chatPhrase addThreatCalloutAlias("targetclock", clockDirection);
-
-      chatPhrase addCalloutResponseEvent(self, callout, threat);
-
-      break;
-
-    case "ai_cardinal":
-
-      relativeGuy = self;
-
-      if(self.team == "allies") {
-        relativeGuy = level.player;
-      }
-
-      cardinalDirection = getDirectionCompass(relativeGuy.origin, threat.origin);
-      normalizedDirection = normalizeCompassDirection(cardinalDirection);
-
-      if(normalizedDirection == "impossible") {
-        return false;
-      }
-
-      chatPhrase addThreatCalloutAlias("cardinal", normalizedDirection);
-
-      break;
-
-      /* DEPRECATED
-      case "player_object_yourclock":
-
-      	chatPhrase addPlayerNameAlias();
-
-      	success = chatPhrase addThreatCalloutLandmarkAlias( callout.landmark, callout.playerClockDirection, true );
-      	if( !success )
-      	{
-      		return false;
-      	}
-
-      	break;
-
-      case "player_object_clock":
-
-      	chatPhrase addPlayerNameAlias();
-
-      	success = chatPhrase addThreatCalloutLandmarkAlias( callout.landmark, callout.playerClockDirection );
-      	if( !success )
-      	{
-      		return false;
-      	}
-
-      	break;
-
-      case "ai_object_yourclock":
-
-      	// SRS TODO add when we have obj_your_[clocknum] aliases
-      	break;
-      */
-
-    case "generic_location":
-
-      Assert(isDefined(callout.location));
-
-      success = chatPhrase threatInfantry_doCalloutLocation(callout, level.player, threat);
-      if(!success) {
-        return false;
-      }
-
-      break;
-
-    case "player_location":
-
-      Assert(isDefined(callout.location));
-
-      chatPhrase addPlayerNameAlias();
-
-      success = chatPhrase threatInfantry_doCalloutLocation(callout, level.player, threat);
-      if(!success) {
-        return false;
-      }
-
-      break;
-
-    case "ai_location":
-
-      Assert(isDefined(callout.location));
-      AssertEx(isDefined(callout.responder), "we should have found a valid responder in order to do an ai_location callout!");
-
-      if(self canSayName(callout.responder)) {
-        chatPhrase addNameAlias(callout.responder.bcName);
-        chatPhrase.lookTarget = callout.responder;
-      }
-
-      success = chatPhrase threatInfantry_doCalloutLocation(callout, self, threat);
-      if(!success) {
-        return false;
-      }
-
-      // the last alias in the soundaliases array is always the one with the actual location info
-      index = chatPhrase.soundaliases.size - 1;
-      alias = chatPhrase.soundaliases[index];
-
-      // if the location alias is a "report" we'll have an "echo" to go with it
-      if(IsCalloutTypeReport(alias)) {
-        callout.responder addResponseEvent("callout", "echo", self, 0.9, alias);
-      } else if(IsCalloutTypeQA(alias, self)) {
-        callout.responder addResponseEvent("callout", "QA", self, 0.9, alias, callout.location);
-      }
-      // otherwise do a generic response
-      else {
-        if(RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
-          callout.responder addResponseEvent("callout", "neg", self, 0.9);
-        } else {
-          callout.responder addResponseEvent("exposed", "acquired", self, 0.9);
+        chatPhrase threatInfantryExposed(threat);
+
+        if(doResponse) {
+          if(RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
+            callout.responder addResponseEvent("callout", "neg", self, 0.9);
+          } else {
+            callout.responder addResponseEvent("exposed", "acquired", self, 0.9);
+          }
         }
-      }
+        break;
 
-      break;
-  }
+      case "player_obvious":
 
-  setLastCalloutType(callout.type);
+        chatPhrase addPlayerNameAlias();
+        chatPhrase addThreatObviousAlias();
+        break;
 
-  self playPhrase(chatPhrase);
+      case "player_yourclock":
 
-  return true;
-}
+        chatPhrase addPlayerNameAlias();
 
-doExposedCalloutResponse(responder) {
-  if(!isDefined(responder)) {
-    return false;
-  }
+        chatPhrase addThreatCalloutAlias("yourclock", callout.playerClockDirection);
+        break;
 
-  if(responder.countryID != "US" && responder.countryID != "NS" && responder.countryID != "TF") {
-    return false;
-  }
+      case "player_contact_clock":
 
-  if(RandomInt(100) > anim.eventChance["response"]["exposed"]) {
-    return false;
-  }
+        chatPhrase addPlayerNameAlias();
 
-  return true;
-}
+        chatPhrase addThreatCalloutAlias("contactclock", callout.playerClockDirection);
+        break;
 
-// self = a chatPhrase
-// refEnt = the player or an AI, they will determine where the threat is in worldspace relative to themselves
-threatInfantry_doCalloutLocation(callout, refEnt, threat) {
-  success = self addThreatCalloutLocationAlias(callout.location);
+      case "player_target_clock":
 
-  return success;
-}
+        chatPhrase addPlayerNameAlias();
 
-// self = a chatPhrase
-addCalloutResponseEvent(respondTo, callout, threat) {
-  if(!isDefined(callout.responder)) {
-    return;
-  }
+        chatPhrase addThreatCalloutAlias("targetclock", callout.playerClockDirection);
+        break;
 
-  if(RandomInt(100) > anim.eventChance["response"]["callout"]) {
-    return;
-  }
+      case "player_cardinal":
 
-  modifier = "affirm";
+        chatPhrase addPlayerNameAlias();
 
-  // make sure that the guy can't actually see the enemy while we do the diceroll
-  if(!callout.responder CanSee(threat) && RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
-    modifier = "neg";
-  }
+        cardinalDirection = getDirectionCompass(level.player.origin, threat.origin);
+        normalizedDirection = normalizeCompassDirection(cardinalDirection);
 
-  callout.responder addResponseEvent("callout", modifier, respondTo, 0.9);
-}
+        if(normalizedDirection == "impossible") {
+          return false;
+        }
 
-// figures out what kind of callout to do for infantry threats
-// - uses chances from anim.threatCallouts[], matched against callout types in self.allowedCallouts[]
-getThreatInfantryCalloutType(threat) {
-  // get info about the AI
-  location = threat GetLocation();
-  selfClockDirection = getDirectionFacingClock(self.angles, self.origin, threat.origin);
+        chatPhrase addThreatCalloutAlias("cardinal", normalizedDirection);
+        break;
 
-  // try to find a responder
-  responder = self getResponder(64, 1024, "response");
+      case "ai_yourclock":
 
-  responderClockDirection = undefined;
-  if(isDefined(responder)) {
-    responderClockDirection = getDirectionFacingClock(responder.angles, responder.origin, threat.origin);
-  }
+        AssertEx(isDefined(callout.responder), "we should have found a valid responder in order to do an ai_yourclock callout!");
 
-  // get relative info
-  playerCanSeeThreat = false;
-  if(self.team == level.player.team) {
-    playerCanSeeThreat = player_can_see_ai(threat);
-  }
+        angles = getRelativeAngles(callout.responder);
 
-  threatInPlayerFOV = level.player pointInFov(threat.origin);
-  threatInFrontArc = level.player entInFrontArc(threat);
-  playerClockDirection = getDirectionFacingClock(level.player.angles, level.player.origin, threat.origin);
+        if(self canSayName(callout.responder)) {
+          chatPhrase addNameAlias(callout.responder.bcName);
+          chatPhrase.lookTarget = callout.responder;
+        }
 
-  // now, figure out all possible kinds of callouts that this AI can say
-  self.possibleThreatCallouts = [];
+        chatPhrase addThreatCalloutAlias("yourclock", callout.responderClockDirection);
 
-  // is it an RPG?
-  if(!isPlayer(threat) && threat usingRocketLauncher()) {
-    self addPossibleThreatCallout("rpg");
-  }
+        chatPhrase addCalloutResponseEvent(self, callout, threat);
 
-  // is the threat exposed?
-  if(threat IsExposed()) {
-    self addPossibleThreatCallout("exposed");
-  }
+        break;
 
-  // player-relatives: can the player see the threat?
-  if(threatInFrontArc && self canSayPlayerName()) {
-    // guys right in front of you either get "obvious" callouts or nothing
-    if(playerClockDirection == "11" || playerClockDirection == "12" || playerClockDirection == "1") {
-      if(playerCanSeeThreat) {
-        self addPossibleThreatCallout("player_obvious");
-      }
-    } else {
-      self addPossibleThreatCallout("player_yourclock");
-      self addPossibleThreatCallout("player_contact_clock");
-      self addPossibleThreatCallout("player_target_clock");
-      self addPossibleThreatCallout("player_cardinal");
+      case "ai_contact_clock":
+
+        relativeGuy = self;
+
+        if(self.team == "allies") {
+          relativeGuy = level.player;
+        } else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
+          relativeGuy = callout.responder;
+        }
+
+        angles = getRelativeAngles(relativeGuy);
+        clockDirection = getDirectionFacingClock(angles, relativeGuy.origin, threat.origin);
+
+        if(isDefined(callout.responder) && self canSayName(callout.responder)) {
+          chatPhrase addNameAlias(callout.responder.bcName);
+          chatPhrase.lookTarget = callout.responder;
+        }
+
+        chatPhrase addThreatCalloutAlias("contactclock", clockDirection);
+
+        chatPhrase addCalloutResponseEvent(self, callout, threat);
+
+        break;
+
+      case "ai_target_clock":
+
+        relativeGuy = self;
+
+        if(self.team == "allies") {
+          relativeGuy = level.player;
+        } else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
+          relativeGuy = callout.responder;
+        }
+
+        angles = getRelativeAngles(relativeGuy);
+        clockDirection = getDirectionFacingClock(angles, relativeGuy.origin, threat.origin);
+
+        if(isDefined(callout.responder) && self canSayName(callout.responder)) {
+          chatPhrase addNameAlias(callout.responder.bcName);
+          chatPhrase.lookTarget = callout.responder;
+        }
+
+        chatPhrase addThreatCalloutAlias("targetclock", clockDirection);
+
+        chatPhrase addCalloutResponseEvent(self, callout, threat);
+
+        break;
+
+      case "ai_cardinal":
+
+        relativeGuy = self;
+
+        if(self.team == "allies") {
+          relativeGuy = level.player;
+        }
+
+        cardinalDirection = getDirectionCompass(relativeGuy.origin, threat.origin);
+        normalizedDirection = normalizeCompassDirection(cardinalDirection);
+
+        if(normalizedDirection == "impossible") {
+          return false;
+        }
+
+        chatPhrase addThreatCalloutAlias("cardinal", normalizedDirection);
+
+        break;
+
+      case "generic_location":
+
+        Assert(isDefined(callout.location));
+
+        success = chatPhrase threatInfantry_doCalloutLocation(callout, level.player, threat);
+        if(!success) {
+          return false;
+        }
+
+        break;
+
+      case "player_location":
+
+        Assert(isDefined(callout.location));
+
+        chatPhrase addPlayerNameAlias();
+
+        success = chatPhrase threatInfantry_doCalloutLocation(callout, level.player, threat);
+        if(!success) {
+          return false;
+        }
+
+        break;
+
+      case "ai_location":
+
+        Assert(isDefined(callout.location));
+        AssertEx(isDefined(callout.responder), "we should have found a valid responder in order to do an ai_location callout!");
+
+        if(self canSayName(callout.responder)) {
+          chatPhrase addNameAlias(callout.responder.bcName);
+          chatPhrase.lookTarget = callout.responder;
+        }
+
+        success = chatPhrase threatInfantry_doCalloutLocation(callout, self, threat);
+        if(!success) {
+          return false;
+        }
+
+        index = chatPhrase.soundaliases.size - 1;
+        alias = chatPhrase.soundaliases[index];
+
+        if(IsCalloutTypeReport(alias)) {
+          callout.responder addResponseEvent("callout", "echo", self, 0.9, alias);
+        } else if(IsCalloutTypeQA(alias, self)) {
+          callout.responder addResponseEvent("callout", "QA", self, 0.9, alias, callout.location);
+        } else {
+          if(RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
+            callout.responder addResponseEvent("callout", "neg", self, 0.9);
+          } else {
+            callout.responder addResponseEvent("exposed", "acquired", self, 0.9);
+          }
+        }
+
+        break;
     }
+
+    setLastCalloutType(callout.type);
+
+    self playPhrase(chatPhrase);
+
+    return true;
   }
 
-  // can another AI whose name we can say see the threat?
-  if(isDefined(responder) && self canSayName(responder)) {
-    self addPossibleThreatCallout("ai_yourclock");
+  doExposedCalloutResponse(responder) {
+    if(!isDefined(responder)) {
+      return false;
+    }
+
+    if(responder.countryID != "US" && responder.countryID != "NS" && responder.countryID != "TF") {
+      return false;
+    }
+
+    if(RandomInt(100) > anim.eventChance["response"]["exposed"]) {
+      return false;
+    }
+
+    return true;
   }
+  threatInfantry_doCalloutLocation(callout, refEnt, threat) {
+    success = self addThreatCalloutLocationAlias(callout.location);
 
-  // catch-alls
-  // don't want allies to do 12 o'clock callouts if it's not a "your" callout
-  if(enemy_team_name() || (selfClockDirection != "12")) {
-    self addPossibleThreatCallout("ai_contact_clock");
-    self addPossibleThreatCallout("ai_target_clock");
+    return success;
   }
+  addCalloutResponseEvent(respondTo, callout, threat) {
+    if(!isDefined(callout.responder)) {
+      return;
+    }
 
-  self addPossibleThreatCallout("ai_cardinal");
+    if(RandomInt(100) > anim.eventChance["response"]["callout"]) {
+      return;
+    }
 
-  /* DEPRECATED
-  // is the threat in a landmark trigger?
-  if( isDefined( landmark ) )
-  {
-  	// only call out landmarks at 10 or 2
-  	if( playerClockDirection == "10" || playerClockDirection == "2" )
-  	{
-  	
-  		if( self canSayPlayerName() )
-  		{
-  			self addPossibleThreatCallout( "player_object_yourclock" );
-  		}
+    modifier = "affirm";
 
-  		self addPossibleThreatCallout( "player_object_clock" );
-  	}
+    if(!callout.responder CanSee(threat) && RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
+      modifier = "neg";
+    }
 
-  	if( isDefined( responder ) && self canSayName( responder ) )
-  	{
-  		if( responderClockDirection == "10" || responderClockDirection == "2" )
-  		{
-  			self addPossibleThreatCallout( "ai_object_yourclock" );
-  		}
-  	}
+    callout.responder addResponseEvent("callout", modifier, respondTo, 0.9);
   }
-  */
+  getThreatInfantryCalloutType(threat) {
+    location = threat GetLocation();
+    selfClockDirection = getDirectionFacingClock(self.angles, self.origin, threat.origin);
 
-  // is the threat in a location trigger?
-  if(isDefined(location)) {
-    cannedResponse = location GetCannedResponse(self);
+    responder = self getResponder(64, 1024, "response");
 
-    // locations with responses are the best
-    if(isDefined(cannedResponse)) {
-      // if we have an accompanying response line and a responder, don't tell the player because it's cool to have the AI respond
-      if(isDefined(responder)) {
-        self addPossibleThreatCallout("ai_location");
+    responderClockDirection = undefined;
+    if(isDefined(responder)) {
+      responderClockDirection = getDirectionFacingClock(responder.angles, responder.origin, threat.origin);
+    }
+
+    playerCanSeeThreat = false;
+    if(self.team == level.player.team) {
+      playerCanSeeThreat = player_can_see_ai(threat);
+    }
+
+    threatInPlayerFOV = level.player pointInFov(threat.origin);
+    threatInFrontArc = level.player entInFrontArc(threat);
+    playerClockDirection = getDirectionFacingClock(level.player.angles, level.player.origin, threat.origin);
+
+    self.possibleThreatCallouts = [];
+
+    if(!isPlayer(threat) && threat usingRocketLauncher()) {
+      self addPossibleThreatCallout("rpg");
+    }
+
+    if(threat IsExposed()) {
+      self addPossibleThreatCallout("exposed");
+    }
+
+    if(threatInFrontArc && self canSayPlayerName()) {
+      if(playerClockDirection == "11" || playerClockDirection == "12" || playerClockDirection == "1") {
+        if(playerCanSeeThreat) {
+          self addPossibleThreatCallout("player_obvious");
+        }
       } else {
-        debugstring = anim.bcPrintWarnPrefix + "Calling out a location at origin " + location.origin + " with a canned response, but there are no AIs able to respond.";
+        self addPossibleThreatCallout("player_yourclock");
+        self addPossibleThreatCallout("player_contact_clock");
+        self addPossibleThreatCallout("player_target_clock");
+        self addPossibleThreatCallout("player_cardinal");
+      }
+    }
+
+    if(isDefined(responder) && self canSayName(responder)) {
+      self addPossibleThreatCallout("ai_yourclock");
+    }
+
+    if(enemy_team_name() || (selfClockDirection != "12")) {
+      self addPossibleThreatCallout("ai_contact_clock");
+      self addPossibleThreatCallout("ai_target_clock");
+    }
+
+    self addPossibleThreatCallout("ai_cardinal");
+
+    if(isDefined(location)) {
+      cannedResponse = location GetCannedResponse(self);
+
+      if(isDefined(cannedResponse)) {
+        if(isDefined(responder)) {
+          self addPossibleThreatCallout("ai_location");
+        } else {
+          debugstring = anim.bcPrintWarnPrefix + "Calling out a location at origin " + location.origin + " with a canned response, but there are no AIs able to respond.";
+
+          if(self canSayPlayerName()) {
+            self addPossibleThreatCallout("player_location");
+          }
+
+          self addPossibleThreatCallout("generic_location");
+        }
+      } else {
+        if(isDefined(responder)) {
+          self addPossibleThreatCallout("ai_location");
+        }
 
         if(self canSayPlayerName()) {
           self addPossibleThreatCallout("player_location");
@@ -1429,1430 +862,1311 @@ getThreatInfantryCalloutType(threat) {
         self addPossibleThreatCallout("generic_location");
       }
     }
-    // otherwise do whichever
-    else {
-      if(isDefined(responder)) {
-        self addPossibleThreatCallout("ai_location");
+
+    if(!self.possibleThreatCallouts.size) {
+      return undefined;
+    }
+
+    best = getWeightedChanceRoll(self.possibleThreatCallouts, anim.threatCallouts);
+
+    callout = spawnStruct();
+    callout.type = best;
+    callout.responder = responder;
+    callout.responderClockDirection = responderClockDirection;
+
+    callout.playerClockDirection = playerClockDirection;
+
+    if(isDefined(location)) {
+      callout.location = location;
+    }
+
+    return callout;
+  }
+  GetCannedResponse(speaker) {
+    cannedResponseAlias = undefined;
+
+    aliases = self.locationAliases;
+    foreach(alias in aliases) {
+      if(IsCalloutTypeQA(alias, speaker) && !isDefined(self.qaFinished)) {
+        cannedResponseAlias = alias;
+        break;
       }
 
-      if(self canSayPlayerName()) {
-        self addPossibleThreatCallout("player_location");
-      }
-
-      // last ditch effort!
-      self addPossibleThreatCallout("generic_location");
-    }
-  }
-
-  if(!self.possibleThreatCallouts.size) {
-    return undefined;
-  }
-
-  // now figure out which of the possible threat callouts we're actually going to use
-  best = getWeightedChanceRoll(self.possibleThreatCallouts, anim.threatCallouts);
-
-  callout = spawnStruct();
-  callout.type = best;
-  callout.responder = responder;
-  callout.responderClockDirection = responderClockDirection;
-  //callout.landmark = landmark;// DEPRECATED
-  callout.playerClockDirection = playerClockDirection;
-
-  if(isDefined(location)) {
-    callout.location = location;
-  }
-
-  //println( "CALLOUT: " + callout.type );
-
-  return callout;
-}
-
-// determines whether this kind of location has an alias that could do a canned response
-GetCannedResponse(speaker) {
-  cannedResponseAlias = undefined;
-
-  aliases = self.locationAliases;
-  foreach(alias in aliases) {
-    // always do a "QA" type callout if we can, since it's cooler
-    if(IsCalloutTypeQA(alias, speaker) && !isDefined(self.qaFinished)) {
-      cannedResponseAlias = alias;
-      break;
-    }
-
-    // it's ok that we always choose the last one because we randomize them earlier
-    if(IsCalloutTypeReport(alias)) {
-      cannedResponseAlias = alias;
-    }
-  }
-
-  return cannedResponseAlias;
-}
-
-IsCalloutTypeReport(alias) {
-  return IsSubStr(alias, "_report");
-}
-
-// tells us whether a given alias can start a back-and-forth conversation about the location
-IsCalloutTypeQA(alias, speaker) {
-  // first try to see if it's fully constructed
-  if(IsSubStr(alias, "_qa") && SoundExists(alias)) {
-    return true;
-  }
-
-  // otherwise, maybe we have to add prefix/suffix info
-  tryQA = speaker GetQACalloutAlias(alias, 0);
-
-  if(SoundExists(tryQA)) {
-    return true;
-  }
-
-  return false;
-}
-
-GetQACalloutAlias(basealias, lineIndex) {
-  alias = self.countryID + "_" + self.npcID + "_co_";
-  alias += basealias;
-  alias += "_qa" + lineIndex;
-
-  return alias;
-}
-
-addAllowedThreatCallout(threatType) {
-  self.allowedCallouts[self.allowedCallouts.size] = threatType;
-}
-
-addPossibleThreatCallout(threatType) {
-  allowed = false;
-  foreach(calloutType in self.allowedCallouts) {
-    if(calloutType == threatType) {
-      if(!self calloutTypeWillRepeat(threatType)) {
-        allowed = true;
-      }
-      break;
-    }
-  }
-
-  if(!allowed) {
-    return;
-  }
-
-  self.possibleThreatCallouts[self.possibleThreatCallouts.size] = threatType;
-}
-
-calloutTypeWillRepeat(threatType) {
-  if(!isDefined(anim.lastTeamThreatCallout[self.team])) {
-    return false;
-  }
-
-  if(!isDefined(anim.lastTeamThreatCalloutTime[self.team])) {
-    return false;
-  }
-
-  lastThreat = anim.lastTeamThreatCallout[self.team];
-  lastCalloutTime = anim.lastTeamThreatCalloutTime[self.team];
-  timeout = anim.teamThreatCalloutLimitTimeout;
-
-  if((threatType == lastThreat) && (GetTime() - lastCalloutTime < timeout)) {
-    return true;
-  }
-
-  return false;
-}
-
-setLastCalloutType(type) {
-  anim.lastTeamThreatCallout[self.team] = type;
-  anim.lastTeamThreatCalloutTime[self.team] = GetTime();
-}
-
-// returns a member of possibleValues[], determined by dicerolling it against all the other
-//members of possibleValues[].
-// - chances are provided for each possible value by the values
-// in chancesForValues[], which is indexed by possibleValues, so we can match them up
-getWeightedChanceRoll(possibleValues, chancesForValues) {
-  best = undefined;
-  bestRoll = -1; // only want to roll once per value so store this off
-  foreach(value in possibleValues) {
-    // don't consider it if the chance is 0
-    if(chancesForValues[value] <= 0) {
-      continue;
-    }
-
-    thisRoll = RandomInt(chancesForValues[value]);
-
-    // if the best is 100+...
-    if(isDefined(best) && (chancesForValues[best] >= 100)) {
-      // ...and the new challenger isn't at that level, keep going
-      if(chancesForValues[value] < 100) {
-        continue;
-      }
-    }
-    // otherwise, if the new challenger is 100+...
-    else if((chancesForValues[value] >= 100)) {
-      // he wins automatically
-      best = value;
-      bestRoll = thisRoll;
-    }
-    // otherwise, everyone else rolls against each other, or 100+'s roll against each other
-    else if(thisRoll > bestRoll) {
-      best = value;
-      bestRoll = thisRoll;
-    }
-  }
-
-  return best;
-}
-
-threatDog(threat, forceDetail) {
-  self endon("cancel speaking");
-  chatPhrase = self createChatPhrase();
-
-  chatPhrase.master = true;
-  chatPhrase.threatEnt = threat;
-
-  // SRS 10/27/08: updated to be more generic until we have actual dog aliases
-  chatPhrase addThreatAlias("dog", "generic");
-
-  self playPhrase(chatPhrase);
-  return true;
-}
-
-threatInfantryExposed(threat) {
-  exposedVariants = [];
-  exposedVariants = array_add(exposedVariants, "open");
-  exposedVariants = array_add(exposedVariants, "breaking");
-
-  // only allies get these variants - except Russians, who are usually enemies so we didn't record extras for them
-  if(self.owner.team == "allies" && self.owner.countryID != "RU") {
-    exposedVariants = array_add(exposedVariants, "oscarmike");
-    exposedVariants = array_add(exposedVariants, "movement");
-  }
-
-  exposedVariant = exposedVariants[RandomInt(exposedVariants.size)];
-
-  self addThreatExposedAlias(exposedVariant);
-}
-
-threatInfantryRPG(threat) {
-  self addThreatAlias("rpg");
-}
-
-//// reaction events functions
-playReactionEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  self.curEvent = self.chatQueue["reaction"];
-
-  reactTo = self.chatQueue["reaction"].reactTo;
-  modifier = self.chatQueue["reaction"].modifier;
-
-  anim thread lockAction(self, "reaction");
-
-  switch (self.chatQueue["reaction"].eventType) {
-    case "casualty":
-      self reactionCasualty(reactTo, modifier);
-      break;
-    case "taunt":
-      self reactionTaunt(reactTo, modifier);
-      break;
-    case "friendlyfire":
-      self reactionFriendlyFire(reactTo, modifier);
-      break;
-  }
-
-  self notify("done speaking");
-}
-
-reactionCasualty(reactTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addReactionAlias("casualty", "generic");
-
-  self playPhrase(chatPhrase);
-}
-
-reactionTaunt(reactTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-
-  if(isDefined(modifier) && modifier == "hostileburst") {
-    chatPhrase addHostileBurstAlias();
-  } else {
-    chatPhrase addTauntAlias("taunt", "generic");
-  }
-
-  self playPhrase(chatPhrase);
-}
-
-reactionFriendlyFire(reactTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addCheckFireAlias();
-
-  self playPhrase(chatPhrase);
-}
-
-playResponseEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  self.curEvent = self.chatQueue["response"];
-
-  modifier = self.chatQueue["response"].modifier;
-  respondTo = self.chatQueue["response"].respondTo;
-
-  if(!IsAlive(respondTo)) {
-    return;
-  }
-
-  // if he's responding to a "follow" order, make sure that he's actually moving
-  if(self.chatQueue["response"].modifier == "follow" && self.a.state != "move") {
-    return;
-  }
-
-  anim thread lockAction(self, "response");
-
-  if(getDvar("debug_bcinteraction") == "on")
-    animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
-
-  switch (self.chatQueue["response"].eventType) {
-    case "exposed":
-      self responseThreatExposed(respondTo, modifier);
-      break;
-
-    case "callout":
-      self responseThreatCallout(respondTo, modifier);
-      break;
-
-    case "ack":
-      self responseGeneric(respondTo, modifier);
-      break;
-  }
-
-  self notify("done speaking");
-}
-
-responseThreatExposed(respondTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  if(!IsAlive(respondTo)) {
-    return;
-  }
-
-  chatPhrase = self createChatPhrase();
-  // these aliases look different from regular responses, //so construct them using addThreatExposedAlias()
-  chatPhrase addThreatExposedAlias(modifier);
-  chatPhrase.lookTarget = respondTo;
-  chatPhrase.master = true;
-
-  self playPhrase(chatPhrase);
-}
-
-responseThreatCallout(respondTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  if(!IsAlive(respondTo)) {
-    return;
-  }
-
-  chatPhrase = self createChatPhrase();
-
-  success = false;
-  if(modifier == "echo") {
-    success = chatPhrase addThreatCalloutEcho(self.curEvent.reportAlias, respondTo);
-  } else if(modifier == "QA") {
-    success = chatPhrase addThreatCalloutQA_NextLine(respondTo, self.curEvent.reportAlias, self.curEvent.location);
-  } else {
-    success = chatPhrase addThreatCalloutResponseAlias(modifier);
-  }
-
-  if(!success) {
-    return;
-  }
-
-  chatPhrase.lookTarget = respondTo;
-  chatPhrase.master = true;
-
-  self playPhrase(chatPhrase);
-}
-
-responseGeneric(respondTo, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  if(!IsAlive(respondTo)) {
-    return;
-  }
-
-  type = self.chatQueue["response"].eventType;
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addResponseAlias(type, modifier);
-  chatPhrase.lookTarget = respondTo;
-  chatPhrase.master = true;
-
-  self playPhrase(chatPhrase);
-}
-
-//// order events functions
-playOrderEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  self.curEvent = self.chatQueue["order"];
-
-  modifier = self.chatQueue["order"].modifier;
-  orderTo = self.chatQueue["order"].orderTo;
-
-  anim thread lockAction(self, "order");
-
-  switch (self.chatQueue["order"].eventType) {
-    case "action":
-      self orderAction(modifier, orderTo);
-      break;
-    case "move":
-      self orderMove(modifier, orderTo);
-      break;
-    case "displace":
-      self orderDisplace(modifier);
-      break;
-  }
-
-  self notify("done speaking");
-}
-
-orderAction(modifier, orderTo) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-
-  self tryOrderTo(chatPhrase, orderTo);
-
-  chatPhrase addOrderAlias("action", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-orderMove(modifier, orderTo) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-
-  if(getDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
-    animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
-
-  self tryOrderTo(chatPhrase, orderTo);
-
-  chatPhrase addOrderAlias("move", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-orderDisplace(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addOrderAlias("displace", modifier);
-
-  self playPhrase(chatPhrase, true);
-}
-
-tryOrderTo(chatPhrase, orderTo) {
-  if(RandomInt(100) > anim.eventChance["response"]["order"]) {
-    // only return if the orderTo guy isn't the player
-    if(!isDefined(orderTo) || (isDefined(orderTo) && !isPlayer(orderTo))) {
-      return;
-    }
-  }
-
-  if(isDefined(orderTo) && isPlayer(orderTo) && isDefined(level.player.bcNameID)) {
-    chatPhrase addPlayerNameAlias();
-    chatPhrase.lookTarget = level.player;
-  } else if(isDefined(orderTo) && self canSayName(orderTo)) {
-    chatPhrase addNameAlias(orderTo.bcName);
-    chatPhrase.lookTarget = orderTo;
-
-    orderTo addResponseEvent("ack", "yes", self, 0.9);
-  } else {
-    // if we can't specifically respond to someone, throw a notify out there
-    //and hope that someone is around to catch it
-    level notify("follow order", self);
-  }
-}
-
-//// inform events functions
-playInformEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  self.curEvent = self.chatQueue["inform"];
-
-  modifier = self.chatQueue["inform"].modifier;
-
-  anim thread lockAction(self, "inform");
-
-  switch (self.chatQueue["inform"].eventType) {
-    case "incoming":
-      self informIncoming(modifier);
-      break;
-    case "attack":
-      self informAttacking(modifier);
-      break;
-    case "reloading":
-      self informReloading(modifier);
-      break;
-    case "suppressed":
-      self informSuppressed(modifier);
-      break;
-    case "killfirm":
-      self informKillfirm(modifier);
-      break;
-  }
-
-  self notify("done speaking");
-}
-
-informReloading(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addInformAlias("reloading", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-informSuppressed(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addInformAlias("suppressed", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-informIncoming(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  if(modifier == "grenade")
-    chatPhrase.master = true;
-
-  chatPhrase addInformAlias("incoming", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-informAttacking(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addInformAlias("attack", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-informKillfirm(modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  chatPhrase = self createChatPhrase();
-  chatPhrase addInformAlias("killfirm", modifier);
-
-  self playPhrase(chatPhrase);
-}
-
-//// custom events functions
-playCustomEvent() {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  self.curEvent = self.chatQueue["custom"];
-
-  anim thread lockAction(self, self.curEvent.type, true);
-
-  self playPhrase(self.customChatPhrase);
-
-  self notify("done speaking");
-  self.customChatEvent = undefined;
-  self.customChatPhrase = undefined;
-}
-
-/****************************************************************************
- utility
-*****************************************************************************/
-
-playPhrase(chatPhrase, noSound) {
-  anim endon("battlechatter disabled");
-  self endon("death");
-
-  if(isDefined(noSound)) {
-    return;
-  }
-
-  //	if( getDvar( "bcs_stealth" ) != "" && self.voice == "british" )
-  if(isDefined(level._stealth) && (self voice_is_british_based())) {
-    for(i = 0; i < chatPhrase.soundAliases.size; i++)
-      chatPhrase.soundAliases[i] = chatPhrase.soundAliases[i] + "_s";
-  }
-
-  if(self battleChatter_canPrint() || self battleChatter_canPrintDump()) {
-    bcAliases = [];
-    foreach(alias in chatPhrase.soundAliases) {
-      bcAliases[bcAliases.size] = alias;
-    }
-
-    if(self battleChatter_canPrint()) {
-      self battleChatter_print(bcAliases);
-    }
-
-    if(self battleChatter_canPrintDump()) {
-      bcDescriptor = self.curEvent.eventAction + "_" + self.curEvent.eventType;
-
-      if(isDefined(self.curEvent.modifier)) {
-        bcDescriptor += ("_" + self.curEvent.modifier);
-      }
-
-      self thread battleChatter_printDump(bcAliases, bcDescriptor);
-    }
-  }
-
-  for(i = 0; i < chatPhrase.soundAliases.size; i++) {
-    // if battlechatter is turned off and this isn't a friendly fire event, don't keep talking
-    if(!self.battleChatter) {
-      if(!is_friendlyfire_event(self.curEvent)) {
-        continue;
-      }
-      // hacky! passing false here - don't check the typelimit since we set it early for friendlyfire
-      else if(!self can_say_friendlyfire(false)) {
-        continue;
+      if(IsCalloutTypeReport(alias)) {
+        cannedResponseAlias = alias;
       }
     }
 
-    if(self._animActive > 0) {
-      continue;
-    }
-
-    if(isFiltered(self.curEvent.eventAction)) {
-      wait(0.85);
-      continue;
-    }
-
-    if(!SoundExists(chatPhrase.soundAliases[i])) {
-      PrintLn(anim.bcPrintFailPrefix + "Tried to play an alias that doesn't exist: '" + chatPhrase.soundAliases[i] + "'.");
-
-      continue;
-    }
-
-    startTime = GetTime();
-
-    if(chatPhrase.master && self.team == "allies") {
-      self thread maps\_anim::anim_facialFiller(chatPhrase.soundAliases[i], chatPhrase.lookTarget);
-      self PlaySoundAsMaster(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
-      self waittill(chatPhrase.soundAliases[i]);
-    } else {
-      self thread maps\_anim::anim_facialFiller(chatPhrase.soundAliases[i], chatPhrase.lookTarget);
-
-      if(GetDvarInt("bcs_forceEnglish", 0)) {
-        self PlaySoundAsMaster(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
-      } else {
-        self playSound(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
-      }
-      self waittill(chatPhrase.soundAliases[i]);
-    }
-
-    if(GetTime() < startTime + 250) {
-      // This could mean the alias points to a 'null.wav', or that playSound() failed for some other reason.
-      //println( anim.bcPrintFailPrefix + "alias exists but sound didn't play: " + chatPhrase.soundAliases[i] );
-    }
+    return cannedResponseAlias;
   }
-  //	animscripts\shared::LookAtStop();
 
-  self notify("playPhrase_done");
+  IsCalloutTypeReport(alias) {
+    return IsSubStr(alias, "_report");
+  }
+  IsCalloutTypeQA(alias, speaker) {
+    if(IsSubStr(alias, "_qa") && SoundExists(alias)) {
+      return true;
+    }
 
-  self doTypeLimit(self.curEvent.eventAction, self.curEvent.eventType);
-}
+    tryQA = speaker GetQACalloutAlias(alias, 0);
 
-is_friendlyfire_event(curEvent) {
-  if(!isDefined(curEvent.eventAction) || !isDefined(curEvent.eventType)) {
+    if(SoundExists(tryQA)) {
+      return true;
+    }
+
     return false;
   }
 
-  if(curEvent.eventAction == "reaction" && curEvent.eventType == "friendlyfire") {
-    return true;
+  GetQACalloutAlias(basealias, lineIndex) {
+    alias = self.countryID + "_" + self.npcID + "_co_";
+    alias += basealias;
+    alias += "_qa" + lineIndex;
+
+    return alias;
   }
 
-  return false;
-}
-
-isSpeakingFailSafe(eventAction) {
-  self endon("death");
-  wait(25);
-  self clearIsSpeaking(eventAction);
-}
-
-clearIsSpeaking(eventAction) {
-  self.isSpeaking = false;
-  self.chatQueue[eventAction].expireTime = 0;
-  self.chatQueue[eventAction].priority = 0.0;
-  self.nextSayTimes[eventAction] = GetTime() + anim.eventActionMinWait[eventAction]["self"];
-}
-
-lockAction(speaker, eventAction, customEvent) {
-  anim endon("battlechatter disabled");
-
-  Assert(!speaker.isSpeaking);
-
-  squad = speaker.squad;
-  team = speaker.team;
-
-  speaker.isSpeaking = true;
-  speaker thread isSpeakingFailSafe(eventAction);
-
-  squad.isMemberSaying[eventAction] = true;
-  squad.numSpeakers++;
-  anim.isTeamSpeaking[team] = true;
-  anim.isTeamSaying[team][eventAction] = true;
-
-  message = speaker waittill_any_return("death", "done speaking", "cancel speaking");
-
-  squad.isMemberSaying[eventAction] = false;
-  squad.numSpeakers--;
-  anim.isTeamSpeaking[team] = false;
-  anim.isTeamSaying[team][eventAction] = false;
-
-  if(message == "cancel speaking") {
-    return;
+  addAllowedThreatCallout(threatType) {
+    self.allowedCallouts[self.allowedCallouts.size] = threatType;
   }
 
-  anim.lastTeamSpeakTime[team] = GetTime();
-
-  if(IsAlive(speaker)) {
-    speaker clearIsSpeaking(eventAction);
-  }
-  squad.nextSayTimes[eventAction] = GetTime() + anim.eventActionMinWait[eventAction]["squad"];
-}
-
-updateContact(squadName, member) {
-  if(GetTime() - self.squadList[squadName].lastContact > 10000) {
-    isInContact = false;
-    for(i = 0; i < self.members.size; i++) {
-      if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName)
-        isInContact = true;
-    }
-
-    if(!isInContact) {
-      self.squadList[squadName].firstContact = GetTime();
-      self.squadList[squadName].calledOut = false;
-    }
-  }
-
-  self.squadList[squadName].lastContact = GetTime();
-}
-
-canSay(eventAction, eventType, priority, modifier) {
-  self endon("death");
-  self endon("removed from battleChatter");
-
-  if(isPlayer(self)) {
-    return false;
-  }
-
-  if(Distance(level.player.origin, self.origin) > level.bcs_maxTalkingDistFromPlayer) {
-    return false;
-  }
-
-  // our battlechatter is disabled
-  if(!isDefined(self.battlechatter) || !self.battlechatter)
-    return (false);
-
-  if(isDefined(priority) && priority >= 1)
-    return (true);
-
-  // we're not allowed to call out a threat now, and won't be able to before it expires
-  if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction])
-    return (false);
-
-  // the squad is not allowed to call out a threat yet and won't be able to before it expires
-  if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction])
-    return (false);
-
-  if(isDefined(eventType) && typeLimited(eventAction, eventType))
-    return (false);
-
-  if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority)
-    return (false);
-
-  if(self voice_is_british_based())
-    return quietFilter(eventAction, eventType, modifier);
-
-  return (true);
-}
-
-quietFilter(action, type, modifier) {
-  if(!isDefined(modifier))
-    modifier = "";
-
-  if(!isDefined(type))
-    return false;
-
-  switch (action) {
-    case "order":
-      if(type == "action" && modifier == "coverme")
-        return true;
-      break;
-    case "threat":
-      if(type == "infantry" || type == "dog" || type == "rpg")
-        return true;
-      break;
-    case "inform":
-      if(type == "attack" && modifier == "grenade")
-        return true;
-      else if(type == "incoming" && modifier == "grenade")
-        return true;
-      else if(type == "reloading" && modifier == "generic")
-        return true;
-      break;
-    case "reaction":
-      if(type == "casualty" && modifier == "generic")
-        return true;
-      break;
-    default:
-      return false;
-  }
-
-  return false;
-}
-
-getHighestPriorityEvent() {
-  best = undefined;
-  bestpriority = -999999999;
-
-  if(self isValidEvent("custom")) {
-    // don't have to check priority because this is the first if
-    best = "custom";
-    bestpriority = self.chatQueue["custom"].priority;
-  }
-  if(self isValidEvent("response")) {
-    if(self.chatQueue["response"].priority > bestpriority) {
-      best = "response";
-      bestpriority = self.chatQueue["response"].priority;
-    }
-  }
-  if(self isValidEvent("order")) {
-    if(self.chatQueue["order"].priority > bestpriority) {
-      best = "order";
-      bestpriority = self.chatQueue["order"].priority;
-    }
-  }
-  if(self isValidEvent("threat")) {
-    if(self.chatQueue["threat"].priority > bestpriority) {
-      best = "threat";
-      bestpriority = self.chatQueue["threat"].priority;
-    }
-  }
-  if(self isValidEvent("inform")) {
-    if(self.chatQueue["inform"].priority > bestpriority) {
-      best = "inform";
-      bestpriority = self.chatQueue["inform"].priority;
-    }
-  }
-  if(self isValidEvent("reaction")) {
-    if(self.chatQueue["reaction"].priority > bestpriority) {
-      best = "reaction";
-      bestpriority = self.chatQueue["reaction"].priority;
-    }
-  }
-
-  return best;
-}
-
-getTargettingAI(threat) {
-  squad = self.squad;
-  targettingAI = [];
-  for(index = 0; index < squad.members.size; index++) {
-    if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat)
-      targettingAI[targettingAI.size] = squad.members[index];
-  }
-
-  if(!isDefined(targettingAI[0]))
-    return (undefined);
-
-  targettingSpeaker = undefined;
-  for(index = 0; index < targettingAI.size; index++) {
-    if(targettingAI[index] canSay("response"))
-      return (targettingSpeaker);
-  }
-  return (getClosest(self.origin, targettingAI));
-}
-
-getQueueEvents() {
-  queueEvents = [];
-  queueEventStates = [];
-
-  queueEvents[0] = "custom";
-  queueEvents[1] = "response";
-  queueEvents[2] = "order";
-  queueEvents[3] = "threat";
-  queueEvents[4] = "inform";
-
-  for(i = queueEvents.size - 1; i >= 0; i--) {
-    for(j = 1; j <= i; j++) {
-      if(self.chatQueue[queueEvents[j - 1]].priority < self.chatQueue[queueEvents[j]].priority) {
-        strTemp = queueEvents[j - 1];
-        queueEvents[j - 1] = queueEvents[j];
-        queueEvents[j] = strTemp;
-      }
-    }
-  }
-
-  validEventFound = false;
-  for(i = 0; i < queueEvents.size; i++) {
-    eventState = self getEventState(queueEvents[i]);
-
-    if(eventState == " valid" && !validEventFound) {
-      validEventFound = true;
-      queueEventStates[i] = "g " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-    } else if(eventState == " valid") {
-      queueEventStates[i] = "y " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-    } else {
-      if(self.chatQueue[queueEvents[i]].expireTime == 0)
-        queueEventStates[i] = "b " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-      else
-        queueEventStates[i] = "r " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-    }
-  }
-
-  return queueEventStates;
-}
-
-getEventState(strAction) {
-  strState = "";
-  if(self.squad.isMemberSaying[strAction])
-    strState += " playing";
-  if(GetTime() > self.chatQueue[strAction].expireTime)
-    strState += " expired";
-  if(GetTime() < self.squad.nextSayTimes[strAction])
-    strState += " cantspeak";
-
-  if(strState == "")
-    strState = " valid";
-
-  return (strState);
-}
-
-isFiltered(strAction) {
-  if(getDvar("bcs_filter" + strAction, "off") == "on" || getDvar("bcs_filter" + strAction, "off") == "1")
-    return (true);
-
-  return (false);
-}
-
-isValidEvent(strAction) {
-  if(!self.squad.isMemberSaying[strAction] && !anim.isTeamSaying[self.team][strAction] && GetTime() < self.chatQueue[strAction].expireTime && GetTime() > self.squad.nextSayTimes[strAction]) {
-    // redundant?
-    if(!typeLimited(strAction, self.chatQueue[strAction].eventType))
-      return (true);
-  }
-
-  return (false);
-}
-
-typeLimited(strAction, strType) {
-  if(!isDefined(anim.eventTypeMinWait[strAction][strType]))
-    return (false);
-
-  if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType]))
-    return (false);
-
-  if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType])
-    return (false);
-
-  return (true);
-}
-
-doTypeLimit(strAction, strType) {
-  if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
-    return;
-  }
-  self.squad.nextTypeSayTimes[strAction][strType] = GetTime() + anim.eventTypeMinWait[strAction][strType];
-}
-
-bcIsSniper() {
-  if(isPlayer(self))
-    return false;
-
-  if(self isExposed())
-    return false;
-
-  return IsSniperRifle(self.weapon);
-}
-
-isExposed() {
-  // if he's too far away, the disadvantage of his exposed state
-  //is negated by contact distance
-  if(Distance(self.origin, level.player.origin) > 1500) {
-    return false;
-  }
-
-  // if he's in a "location" that'll be a better way to find him
-  if(isDefined(self GetLocation())) {
-    return false;
-  }
-
-  node = self bcGetClaimedNode();
-
-  // if he doesn't have a claimed node, he's not in cover
-  if(!isDefined(node)) {
-    return true;
-  }
-
-  // if the node is cover or conceal, he's not exposed
-  if(!self isNodeCoverOrConceal()) {
-    return false;
-  }
-
-  return true;
-}
-
-isNodeCoverOrConceal() {
-  node = self.node;
-
-  if(!isDefined(node)) {
-    return false;
-  }
-
-  if(IsSubStr(node.type, "Cover") || IsSubStr(node.type, "Conceal")) {
-    return true;
-  }
-
-  return false;
-}
-
-squadHasOfficer(squad) {
-  if(squad.officerCount > 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-isOfficer() {
-  fullRank = self getRank();
-
-  if(!isDefined(fullRank))
-    return false;
-
-  if(fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant") {
-    return true;
-  }
-
-  return false;
-}
-
-bcGetClaimedNode() {
-  if(isPlayer(self))
-    return self.node;
-  else
-    return self GetClaimedNode();
-}
-
-enemy_team_name() {
-  if(self IsBadGuy())
-    return true;
-  else
-    return false;
-}
-
-getName() {
-  if(enemy_team_name()) {
-    name = self.ainame;
-  } else if(self.team == "allies") {
-    name = self.name;
-  } else {
-    name = undefined;
-  }
-
-  if(!isDefined(name) || self voice_is_british_based()) {
-    return (undefined);
-  }
-
-  // check to see if this is a name with two parts, like "Sgt. Peas" or "Agent Smith"tokens = StrTok(name, " ");
-  if(tokens.size < 2) {
-    return (name);
-  }
-
-  Assert(tokens.size > 1);
-  return (tokens[1]);
-}
-
-getRank() {
-  return self.airank;
-}
-
-getClosestFriendlySpeaker(strAction) {
-  speakers = self getSpeakers(strAction, self.team);
-
-  speaker = getClosest(self.origin, speakers);
-  return (speaker);
-}
-
-getSpeakers(strAction, team) {
-  speakers = [];
-
-  soldiers = GetAIArray(team);
-
-  for(i = 0; i < soldiers.size; i++) {
-    if(soldiers[i] == self) {
-      continue;
-    }
-
-    if(!soldiers[i] canSay(strAction)) {
-      continue;
-    }
-
-    speakers[speakers.size] = soldiers[i];
-  }
-
-  return (speakers);
-}
-
-// see if self can find someone to respond to him
-getResponder(distMin, distMax, eventType) {
-  responder = undefined;
-
-  if(!isDefined(eventType)) {
-    eventType = "response";
-  }
-
-  soldiers = array_randomize(self.squad.members);
-
-  for(i = 0; i < soldiers.size; i++) {
-    if(soldiers[i] == self) {
-      continue;
-    }
-
-    if(!IsAlive(soldiers[i])) {
-      continue;
-    }
-
-    if(Distance(self.origin, soldiers[i].origin) > distMin && Distance(self.origin, soldiers[i].origin) < distMax && !self isUsingSameVoice(soldiers[i]) && soldiers[i] canSay(eventType)) {
-      responder = soldiers[i];
-
-      //prioritize for guys whose names we know how to say
-      if(self canSayName(responder)) {
+  addPossibleThreatCallout(threatType) {
+    allowed = false;
+    foreach(calloutType in self.allowedCallouts) {
+      if(calloutType == threatType) {
+        if(!self calloutTypeWillRepeat(threatType)) {
+          allowed = true;
+        }
         break;
       }
     }
-  }
 
-  return responder;
-}
-
-getLocation() {
-  myLocations = self get_all_my_locations();
-  myLocations = array_randomize(myLocations);
-
-  if(myLocations.size) {
-    // give us new ones first
-    foreach(location in myLocations) {
-      if(!location_called_out_ever(location)) {
-        return location;
-      }
+    if(!allowed) {
+      return;
     }
 
-    // otherwise just get a valid one
-    foreach(location in myLocations) {
-      if(!location_called_out_recently(location)) {
-        return location;
-      }
-    }
+    self.possibleThreatCallouts[self.possibleThreatCallouts.size] = threatType;
   }
 
-  return undefined;
-}
-
-get_all_my_locations() {
-  allLocations = anim.bcs_locations;
-  myLocations = [];
-
-  foreach(location in allLocations) {
-    if(self IsTouching(location) && isDefined(location.locationAliases)) {
-      myLocations[myLocations.size] = location;
+  calloutTypeWillRepeat(threatType) {
+    if(!isDefined(anim.lastTeamThreatCallout[self.team])) {
+      return false;
     }
-  }
 
-  return myLocations;
-}
+    if(!isDefined(anim.lastTeamThreatCalloutTime[self.team])) {
+      return false;
+    }
 
-is_in_callable_location() {
-  myLocations = self get_all_my_locations();
+    lastThreat = anim.lastTeamThreatCallout[self.team];
+    lastCalloutTime = anim.lastTeamThreatCalloutTime[self.team];
+    timeout = anim.teamThreatCalloutLimitTimeout;
 
-  foreach(location in myLocations) {
-    if(!location_called_out_recently(location)) {
+    if((threatType == lastThreat) && (GetTime() - lastCalloutTime < timeout)) {
       return true;
     }
-  }
 
-  return false;
-}
-
-location_called_out_ever(location) {
-  lastCalloutTime = location_get_last_callout_time(location);
-  if(!isDefined(lastCalloutTime)) {
     return false;
   }
 
-  return true;
-}
+  setLastCalloutType(type) {
+    anim.lastTeamThreatCallout[self.team] = type;
+    anim.lastTeamThreatCalloutTime[self.team] = GetTime();
+  }
+  getWeightedChanceRoll(possibleValues, chancesForValues) {
+    best = undefined;
+    bestRoll = -1;
+    foreach(value in possibleValues) {
+      if(chancesForValues[value] <= 0) {
+        continue;
+      }
 
-location_called_out_recently(location) {
-  lastCalloutTime = location_get_last_callout_time(location);
-  if(!isDefined(lastCalloutTime)) {
-    return false;
+      thisRoll = RandomInt(chancesForValues[value]);
+
+      if(isDefined(best) && (chancesForValues[best] >= 100)) {
+        if(chancesForValues[value] < 100) {
+          continue;
+        }
+      } else if((chancesForValues[value] >= 100)) {
+        best = value;
+        bestRoll = thisRoll;
+      } else if(thisRoll > bestRoll) {
+        best = value;
+        bestRoll = thisRoll;
+      }
+    }
+
+    return best;
   }
 
-  nextCalloutTime = lastCalloutTime + anim.eventActionMinWait["threat"]["location_repeat"];
-  if(GetTime() < nextCalloutTime) {
+  threatDog(threat, forceDetail) {
+    self endon("cancel speaking");
+    chatPhrase = self createChatPhrase();
+
+    chatPhrase.master = true;
+    chatPhrase.threatEnt = threat;
+
+    chatPhrase addThreatAlias("dog", "generic");
+
+    self playPhrase(chatPhrase);
     return true;
   }
 
-  return false;
-}
+  threatInfantryExposed(threat) {
+    exposedVariants = [];
+    exposedVariants = array_add(exposedVariants, "open");
+    exposedVariants = array_add(exposedVariants, "breaking");
 
-location_add_last_callout_time(location) {
-  anim.locationLastCalloutTimes[location.classname] = GetTime();
-}
+    if(self.owner.team == "allies" && self.owner.countryID != "RU") {
+      exposedVariants = array_add(exposedVariants, "oscarmike");
+      exposedVariants = array_add(exposedVariants, "movement");
+    }
 
-location_get_last_callout_time(location) {
-  if(isDefined(anim.locationLastCalloutTimes[location.classname])) {
-    return anim.locationLastCalloutTimes[location.classname];
+    exposedVariant = exposedVariants[RandomInt(exposedVariants.size)];
+
+    self addThreatExposedAlias(exposedVariant);
   }
 
-  return undefined;
-}
+  threatInfantryRPG(threat) {
+    self addThreatAlias("rpg");
+  }
+  playReactionEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
 
-// if AI is on a cover node, we want to use the node angles to determine threats relative
-// to him; this eliminates false callouts in case the AI's cover animation turns him
-//away from the threats
-getRelativeAngles(ent) {
-  Assert(isDefined(ent));
+    self.curEvent = self.chatQueue["reaction"];
 
-  angles = ent.angles;
+    reactTo = self.chatQueue["reaction"].reactTo;
+    modifier = self.chatQueue["reaction"].modifier;
 
-  if(!isPlayer(ent)) {
-    node = ent bcGetClaimedNode();
-    if(isDefined(node)) {
-      angles = node.angles;
+    anim thread lockAction(self, "reaction");
+
+    switch (self.chatQueue["reaction"].eventType) {
+      case "casualty":
+        self reactionCasualty(reactTo, modifier);
+        break;
+      case "taunt":
+        self reactionTaunt(reactTo, modifier);
+        break;
+      case "friendlyfire":
+        self reactionFriendlyFire(reactTo, modifier);
+        break;
+    }
+
+    self notify("done speaking");
+  }
+
+  reactionCasualty(reactTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addReactionAlias("casualty", "generic");
+
+    self playPhrase(chatPhrase);
+  }
+
+  reactionTaunt(reactTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+
+    if(isDefined(modifier) && modifier == "hostileburst") {
+      chatPhrase addHostileBurstAlias();
+    } else {
+      chatPhrase addTauntAlias("taunt", "generic");
+    }
+
+    self playPhrase(chatPhrase);
+  }
+
+  reactionFriendlyFire(reactTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addCheckFireAlias();
+
+    self playPhrase(chatPhrase);
+  }
+
+  playResponseEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    self.curEvent = self.chatQueue["response"];
+
+    modifier = self.chatQueue["response"].modifier;
+    respondTo = self.chatQueue["response"].respondTo;
+
+    if(!IsAlive(respondTo)) {
+      return;
+    }
+
+    if(self.chatQueue["response"].modifier == "follow" && self.a.state != "move") {
+      return;
+    }
+
+    anim thread lockAction(self, "response");
+
+    if(getDvar("debug_bcinteraction") == "on")
+      animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
+
+    switch (self.chatQueue["response"].eventType) {
+      case "exposed":
+        self responseThreatExposed(respondTo, modifier);
+        break;
+
+      case "callout":
+        self responseThreatCallout(respondTo, modifier);
+        break;
+
+      case "ack":
+        self responseGeneric(respondTo, modifier);
+        break;
+    }
+
+    self notify("done speaking");
+  }
+
+  responseThreatExposed(respondTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    if(!IsAlive(respondTo)) {
+      return;
+    }
+
+    chatPhrase = self createChatPhrase();
+
+    chatPhrase addThreatExposedAlias(modifier);
+    chatPhrase.lookTarget = respondTo;
+    chatPhrase.master = true;
+
+    self playPhrase(chatPhrase);
+  }
+
+  responseThreatCallout(respondTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    if(!IsAlive(respondTo)) {
+      return;
+    }
+
+    chatPhrase = self createChatPhrase();
+
+    success = false;
+    if(modifier == "echo") {
+      success = chatPhrase addThreatCalloutEcho(self.curEvent.reportAlias, respondTo);
+    } else if(modifier == "QA") {
+      success = chatPhrase addThreatCalloutQA_NextLine(respondTo, self.curEvent.reportAlias, self.curEvent.location);
+    } else {
+      success = chatPhrase addThreatCalloutResponseAlias(modifier);
+    }
+
+    if(!success) {
+      return;
+    }
+
+    chatPhrase.lookTarget = respondTo;
+    chatPhrase.master = true;
+
+    self playPhrase(chatPhrase);
+  }
+
+  responseGeneric(respondTo, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    if(!IsAlive(respondTo)) {
+      return;
+    }
+
+    type = self.chatQueue["response"].eventType;
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addResponseAlias(type, modifier);
+    chatPhrase.lookTarget = respondTo;
+    chatPhrase.master = true;
+
+    self playPhrase(chatPhrase);
+  }
+  playOrderEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    self.curEvent = self.chatQueue["order"];
+
+    modifier = self.chatQueue["order"].modifier;
+    orderTo = self.chatQueue["order"].orderTo;
+
+    anim thread lockAction(self, "order");
+
+    switch (self.chatQueue["order"].eventType) {
+      case "action":
+        self orderAction(modifier, orderTo);
+        break;
+      case "move":
+        self orderMove(modifier, orderTo);
+        break;
+      case "displace":
+        self orderDisplace(modifier);
+        break;
+    }
+
+    self notify("done speaking");
+  }
+
+  orderAction(modifier, orderTo) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+
+    self tryOrderTo(chatPhrase, orderTo);
+
+    chatPhrase addOrderAlias("action", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  orderMove(modifier, orderTo) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+
+    if(getDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
+      animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
+
+    self tryOrderTo(chatPhrase, orderTo);
+
+    chatPhrase addOrderAlias("move", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  orderDisplace(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addOrderAlias("displace", modifier);
+
+    self playPhrase(chatPhrase, true);
+  }
+
+  tryOrderTo(chatPhrase, orderTo) {
+    if(RandomInt(100) > anim.eventChance["response"]["order"]) {
+      if(!isDefined(orderTo) || (isDefined(orderTo) && !isPlayer(orderTo))) {
+        return;
+      }
+    }
+
+    if(isDefined(orderTo) && isPlayer(orderTo) && isDefined(level.player.bcNameID)) {
+      chatPhrase addPlayerNameAlias();
+      chatPhrase.lookTarget = level.player;
+    } else if(isDefined(orderTo) && self canSayName(orderTo)) {
+      chatPhrase addNameAlias(orderTo.bcName);
+      chatPhrase.lookTarget = orderTo;
+
+      orderTo addResponseEvent("ack", "yes", self, 0.9);
+    } else {
+      level notify("follow order", self);
+    }
+  }
+  playInformEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    self.curEvent = self.chatQueue["inform"];
+
+    modifier = self.chatQueue["inform"].modifier;
+
+    anim thread lockAction(self, "inform");
+
+    switch (self.chatQueue["inform"].eventType) {
+      case "incoming":
+        self informIncoming(modifier);
+        break;
+      case "attack":
+        self informAttacking(modifier);
+        break;
+      case "reloading":
+        self informReloading(modifier);
+        break;
+      case "suppressed":
+        self informSuppressed(modifier);
+        break;
+      case "killfirm":
+        self informKillfirm(modifier);
+        break;
+    }
+
+    self notify("done speaking");
+  }
+
+  informReloading(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addInformAlias("reloading", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  informSuppressed(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addInformAlias("suppressed", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  informIncoming(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    if(modifier == "grenade")
+      chatPhrase.master = true;
+
+    chatPhrase addInformAlias("incoming", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  informAttacking(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addInformAlias("attack", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+
+  informKillfirm(modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    chatPhrase = self createChatPhrase();
+    chatPhrase addInformAlias("killfirm", modifier);
+
+    self playPhrase(chatPhrase);
+  }
+  playCustomEvent() {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    self.curEvent = self.chatQueue["custom"];
+
+    anim thread lockAction(self, self.curEvent.type, true);
+
+    self playPhrase(self.customChatPhrase);
+
+    self notify("done speaking");
+    self.customChatEvent = undefined;
+    self.customChatPhrase = undefined;
+  }
+
+  playPhrase(chatPhrase, noSound) {
+    anim endon("battlechatter disabled");
+    self endon("death");
+
+    if(isDefined(noSound)) {
+      return;
+    }
+
+    if(isDefined(level._stealth) && (self voice_is_british_based())) {
+      for(i = 0; i < chatPhrase.soundAliases.size; i++)
+        chatPhrase.soundAliases[i] = chatPhrase.soundAliases[i] + "_s";
+    }
+
+    if(self battleChatter_canPrint() || self battleChatter_canPrintDump()) {
+      bcAliases = [];
+      foreach(alias in chatPhrase.soundAliases) {
+        bcAliases[bcAliases.size] = alias;
+      }
+
+      if(self battleChatter_canPrint()) {
+        self battleChatter_print(bcAliases);
+      }
+
+      if(self battleChatter_canPrintDump()) {
+        bcDescriptor = self.curEvent.eventAction + "_" + self.curEvent.eventType;
+
+        if(isDefined(self.curEvent.modifier)) {
+          bcDescriptor += ("_" + self.curEvent.modifier);
+        }
+
+        self thread battleChatter_printDump(bcAliases, bcDescriptor);
+      }
+    }
+
+    for(i = 0; i < chatPhrase.soundAliases.size; i++) {
+      if(!self.battleChatter) {
+        if(!is_friendlyfire_event(self.curEvent)) {
+          continue;
+        } else if(!self can_say_friendlyfire(false)) {
+          continue;
+        }
+      }
+
+      if(self._animActive > 0) {
+        continue;
+      }
+
+      if(isFiltered(self.curEvent.eventAction)) {
+        wait(0.85);
+        continue;
+      }
+
+      if(!SoundExists(chatPhrase.soundAliases[i])) {
+        PrintLn(anim.bcPrintFailPrefix + "Tried to play an alias that doesn't exist: '" + chatPhrase.soundAliases[i] + "'.");
+
+        continue;
+      }
+
+      startTime = GetTime();
+
+      if(chatPhrase.master && self.team == "allies") {
+        self thread maps\_anim::anim_facialFiller(chatPhrase.soundAliases[i], chatPhrase.lookTarget);
+        self PlaySoundAsMaster(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
+        self waittill(chatPhrase.soundAliases[i]);
+      } else {
+        self thread maps\_anim::anim_facialFiller(chatPhrase.soundAliases[i], chatPhrase.lookTarget);
+
+        if(GetDvarInt("bcs_forceEnglish", 0)) {
+          self PlaySoundAsMaster(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
+        } else {
+          self playSound(chatPhrase.soundAliases[i], chatPhrase.soundAliases[i], true);
+        }
+        self waittill(chatPhrase.soundAliases[i]);
+      }
+
+      if(GetTime() < startTime + 250) {}
+    }
+
+    self notify("playPhrase_done");
+
+    self doTypeLimit(self.curEvent.eventAction, self.curEvent.eventType);
+  }
+
+  is_friendlyfire_event(curEvent) {
+    if(!isDefined(curEvent.eventAction) || !isDefined(curEvent.eventType)) {
+      return false;
+    }
+
+    if(curEvent.eventAction == "reaction" && curEvent.eventType == "friendlyfire") {
+      return true;
+    }
+
+    return false;
+  }
+
+  isSpeakingFailSafe(eventAction) {
+    self endon("death");
+    wait(25);
+    self clearIsSpeaking(eventAction);
+  }
+
+  clearIsSpeaking(eventAction) {
+    self.isSpeaking = false;
+    self.chatQueue[eventAction].expireTime = 0;
+    self.chatQueue[eventAction].priority = 0.0;
+    self.nextSayTimes[eventAction] = GetTime() + anim.eventActionMinWait[eventAction]["self"];
+  }
+
+  lockAction(speaker, eventAction, customEvent) {
+    anim endon("battlechatter disabled");
+
+    Assert(!speaker.isSpeaking);
+
+    squad = speaker.squad;
+    team = speaker.team;
+
+    speaker.isSpeaking = true;
+    speaker thread isSpeakingFailSafe(eventAction);
+
+    squad.isMemberSaying[eventAction] = true;
+    squad.numSpeakers++;
+    anim.isTeamSpeaking[team] = true;
+    anim.isTeamSaying[team][eventAction] = true;
+
+    message = speaker waittill_any_return("death", "done speaking", "cancel speaking");
+
+    squad.isMemberSaying[eventAction] = false;
+    squad.numSpeakers--;
+    anim.isTeamSpeaking[team] = false;
+    anim.isTeamSaying[team][eventAction] = false;
+
+    if(message == "cancel speaking") {
+      return;
+    }
+
+    anim.lastTeamSpeakTime[team] = GetTime();
+
+    if(IsAlive(speaker)) {
+      speaker clearIsSpeaking(eventAction);
+    }
+    squad.nextSayTimes[eventAction] = GetTime() + anim.eventActionMinWait[eventAction]["squad"];
+  }
+
+  updateContact(squadName, member) {
+    if(GetTime() - self.squadList[squadName].lastContact > 10000) {
+      isInContact = false;
+      for(i = 0; i < self.members.size; i++) {
+        if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName)
+          isInContact = true;
+      }
+
+      if(!isInContact) {
+        self.squadList[squadName].firstContact = GetTime();
+        self.squadList[squadName].calledOut = false;
+      }
+    }
+
+    self.squadList[squadName].lastContact = GetTime();
+  }
+
+  canSay(eventAction, eventType, priority, modifier) {
+    self endon("death");
+    self endon("removed from battleChatter");
+
+    if(isPlayer(self)) {
+      return false;
+    }
+
+    if(Distance(level.player.origin, self.origin) > level.bcs_maxTalkingDistFromPlayer) {
+      return false;
+    }
+
+    if(!isDefined(self.battlechatter) || !self.battlechatter)
+      return (false);
+
+    if(isDefined(priority) && priority >= 1)
+      return (true);
+
+    if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction])
+      return (false);
+
+    if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction])
+      return (false);
+
+    if(isDefined(eventType) && typeLimited(eventAction, eventType))
+      return (false);
+
+    if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority)
+      return (false);
+
+    if(self voice_is_british_based())
+      return quietFilter(eventAction, eventType, modifier);
+
+    return (true);
+  }
+
+  quietFilter(action, type, modifier) {
+    if(!isDefined(modifier))
+      modifier = "";
+
+    if(!isDefined(type))
+      return false;
+
+    switch (action) {
+      case "order":
+        if(type == "action" && modifier == "coverme")
+          return true;
+        break;
+      case "threat":
+        if(type == "infantry" || type == "dog" || type == "rpg")
+          return true;
+        break;
+      case "inform":
+        if(type == "attack" && modifier == "grenade")
+          return true;
+        else if(type == "incoming" && modifier == "grenade")
+          return true;
+        else if(type == "reloading" && modifier == "generic")
+          return true;
+        break;
+      case "reaction":
+        if(type == "casualty" && modifier == "generic")
+          return true;
+        break;
+      default:
+        return false;
+    }
+
+    return false;
+  }
+
+  getHighestPriorityEvent() {
+    best = undefined;
+    bestpriority = -999999999;
+
+    if(self isValidEvent("custom")) {
+      best = "custom";
+      bestpriority = self.chatQueue["custom"].priority;
+    }
+    if(self isValidEvent("response")) {
+      if(self.chatQueue["response"].priority > bestpriority) {
+        best = "response";
+        bestpriority = self.chatQueue["response"].priority;
+      }
+    }
+    if(self isValidEvent("order")) {
+      if(self.chatQueue["order"].priority > bestpriority) {
+        best = "order";
+        bestpriority = self.chatQueue["order"].priority;
+      }
+    }
+    if(self isValidEvent("threat")) {
+      if(self.chatQueue["threat"].priority > bestpriority) {
+        best = "threat";
+        bestpriority = self.chatQueue["threat"].priority;
+      }
+    }
+    if(self isValidEvent("inform")) {
+      if(self.chatQueue["inform"].priority > bestpriority) {
+        best = "inform";
+        bestpriority = self.chatQueue["inform"].priority;
+      }
+    }
+    if(self isValidEvent("reaction")) {
+      if(self.chatQueue["reaction"].priority > bestpriority) {
+        best = "reaction";
+        bestpriority = self.chatQueue["reaction"].priority;
+      }
+    }
+
+    return best;
+  }
+
+  getTargettingAI(threat) {
+    squad = self.squad;
+    targettingAI = [];
+    for(index = 0; index < squad.members.size; index++) {
+      if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat)
+        targettingAI[targettingAI.size] = squad.members[index];
+    }
+
+    if(!isDefined(targettingAI[0]))
+      return (undefined);
+
+    targettingSpeaker = undefined;
+    for(index = 0; index < targettingAI.size; index++) {
+      if(targettingAI[index] canSay("response"))
+        return (targettingSpeaker);
+    }
+    return (getClosest(self.origin, targettingAI));
+  }
+
+  getQueueEvents() {
+    queueEvents = [];
+    queueEventStates = [];
+
+    queueEvents[0] = "custom";
+    queueEvents[1] = "response";
+    queueEvents[2] = "order";
+    queueEvents[3] = "threat";
+    queueEvents[4] = "inform";
+
+    for(i = queueEvents.size - 1; i >= 0; i--) {
+      for(j = 1; j <= i; j++) {
+        if(self.chatQueue[queueEvents[j - 1]].priority < self.chatQueue[queueEvents[j]].priority) {
+          strTemp = queueEvents[j - 1];
+          queueEvents[j - 1] = queueEvents[j];
+          queueEvents[j] = strTemp;
+        }
+      }
+    }
+
+    validEventFound = false;
+    for(i = 0; i < queueEvents.size; i++) {
+      eventState = self getEventState(queueEvents[i]);
+
+      if(eventState == " valid" && !validEventFound) {
+        validEventFound = true;
+        queueEventStates[i] = "g " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+      } else if(eventState == " valid") {
+        queueEventStates[i] = "y " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+      } else {
+        if(self.chatQueue[queueEvents[i]].expireTime == 0)
+          queueEventStates[i] = "b " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+        else
+          queueEventStates[i] = "r " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+      }
+    }
+
+    return queueEventStates;
+  }
+
+  getEventState(strAction) {
+    strState = "";
+    if(self.squad.isMemberSaying[strAction])
+      strState += " playing";
+    if(GetTime() > self.chatQueue[strAction].expireTime)
+      strState += " expired";
+    if(GetTime() < self.squad.nextSayTimes[strAction])
+      strState += " cantspeak";
+
+    if(strState == "")
+      strState = " valid";
+
+    return (strState);
+  }
+
+  isFiltered(strAction) {
+    if(getDvar("bcs_filter" + strAction, "off") == "on" || getDvar("bcs_filter" + strAction, "off") == "1")
+      return (true);
+
+    return (false);
+  }
+
+  isValidEvent(strAction) {
+    if(!self.squad.isMemberSaying[strAction] && !anim.isTeamSaying[self.team][strAction] && GetTime() < self.chatQueue[strAction].expireTime && GetTime() > self.squad.nextSayTimes[strAction]) {
+      if(!typeLimited(strAction, self.chatQueue[strAction].eventType))
+        return (true);
+    }
+
+    return (false);
+  }
+
+  typeLimited(strAction, strType) {
+    if(!isDefined(anim.eventTypeMinWait[strAction][strType]))
+      return (false);
+
+    if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType]))
+      return (false);
+
+    if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType])
+      return (false);
+
+    return (true);
+  }
+
+  doTypeLimit(strAction, strType) {
+    if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
+      return;
+    }
+    self.squad.nextTypeSayTimes[strAction][strType] = GetTime() + anim.eventTypeMinWait[strAction][strType];
+  }
+
+  bcIsSniper() {
+    if(isPlayer(self))
+      return false;
+
+    if(self isExposed())
+      return false;
+
+    return IsSniperRifle(self.weapon);
+  }
+
+  isExposed() {
+    if(Distance(self.origin, level.player.origin) > 1500) {
+      return false;
+    }
+
+    if(isDefined(self GetLocation())) {
+      return false;
+    }
+
+    node = self bcGetClaimedNode();
+
+    if(!isDefined(node)) {
+      return true;
+    }
+
+    if(!self isNodeCoverOrConceal()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isNodeCoverOrConceal() {
+    node = self.node;
+
+    if(!isDefined(node)) {
+      return false;
+    }
+
+    if(IsSubStr(node.type, "Cover") || IsSubStr(node.type, "Conceal")) {
+      return true;
+    }
+
+    return false;
+  }
+
+  squadHasOfficer(squad) {
+    if(squad.officerCount > 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 
-  return angles;
-}
+  isOfficer() {
+    fullRank = self getRank();
 
-sideIsLeftRight(side) {
-  if(side == "left" || side == "right") {
+    if(!isDefined(fullRank))
+      return false;
+
+    if(fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant") {
+      return true;
+    }
+
+    return false;
+  }
+
+  bcGetClaimedNode() {
+    if(isPlayer(self))
+      return self.node;
+    else
+      return self GetClaimedNode();
+  }
+
+  enemy_team_name() {
+    if(self IsBadGuy())
+      return true;
+    else
+      return false;
+  }
+
+  getName() {
+    if(enemy_team_name()) {
+      name = self.ainame;
+    } else if(self.team == "allies") {
+      name = self.name;
+    } else {
+      name = undefined;
+    }
+
+    if(!isDefined(name) || self voice_is_british_based()) {
+      return (undefined);
+    }
+
+    if(tokens.size < 2) {
+      return (name);
+    }
+
+    Assert(tokens.size > 1);
+    return (tokens[1]);
+  }
+
+  getRank() {
+    return self.airank;
+  }
+
+  getClosestFriendlySpeaker(strAction) {
+    speakers = self getSpeakers(strAction, self.team);
+
+    speaker = getClosest(self.origin, speakers);
+    return (speaker);
+  }
+
+  getSpeakers(strAction, team) {
+    speakers = [];
+
+    soldiers = GetAIArray(team);
+
+    for(i = 0; i < soldiers.size; i++) {
+      if(soldiers[i] == self) {
+        continue;
+      }
+
+      if(!soldiers[i] canSay(strAction)) {
+        continue;
+      }
+
+      speakers[speakers.size] = soldiers[i];
+    }
+
+    return (speakers);
+  }
+  getResponder(distMin, distMax, eventType) {
+    responder = undefined;
+
+    if(!isDefined(eventType)) {
+      eventType = "response";
+    }
+
+    soldiers = array_randomize(self.squad.members);
+
+    for(i = 0; i < soldiers.size; i++) {
+      if(soldiers[i] == self) {
+        continue;
+      }
+
+      if(!IsAlive(soldiers[i])) {
+        continue;
+      }
+
+      if(Distance(self.origin, soldiers[i].origin) > distMin && Distance(self.origin, soldiers[i].origin) < distMax && !self isUsingSameVoice(soldiers[i]) && soldiers[i] canSay(eventType)) {
+        responder = soldiers[i];
+
+        if(self canSayName(responder)) {
+          break;
+        }
+      }
+    }
+
+    return responder;
+  }
+
+  getLocation() {
+    myLocations = self get_all_my_locations();
+    myLocations = array_randomize(myLocations);
+
+    if(myLocations.size) {
+      foreach(location in myLocations) {
+        if(!location_called_out_ever(location)) {
+          return location;
+        }
+      }
+
+      foreach(location in myLocations) {
+        if(!location_called_out_recently(location)) {
+          return location;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  get_all_my_locations() {
+    allLocations = anim.bcs_locations;
+    myLocations = [];
+
+    foreach(location in allLocations) {
+      if(self IsTouching(location) && isDefined(location.locationAliases)) {
+        myLocations[myLocations.size] = location;
+      }
+    }
+
+    return myLocations;
+  }
+
+  is_in_callable_location() {
+    myLocations = self get_all_my_locations();
+
+    foreach(location in myLocations) {
+      if(!location_called_out_recently(location)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  location_called_out_ever(location) {
+    lastCalloutTime = location_get_last_callout_time(location);
+    if(!isDefined(lastCalloutTime)) {
+      return false;
+    }
+
     return true;
   }
 
-  return false;
-}
+  location_called_out_recently(location) {
+    lastCalloutTime = location_get_last_callout_time(location);
+    if(!isDefined(lastCalloutTime)) {
+      return false;
+    }
 
-/* DEPRECATED but this is a cool function, we should keep it around somewhere
-getDirectionReferenceSide( vOrigin, vPoint, vReference )
-{
-	anglesToReference = VectorToAngles( vReference - vOrigin );
-	anglesToPoint = VectorToAngles( vPoint - vOrigin );
+    nextCalloutTime = lastCalloutTime + anim.eventActionMinWait["threat"]["location_repeat"];
+    if(GetTime() < nextCalloutTime) {
+      return true;
+    }
 
-	angle = anglesToReference[ 1 ] - anglesToPoint[ 1 ];
-	angle += 360;
-	angle = Int( angle ) % 360;
-	if( angle > 180 )
-		angle -= 360;
+    return false;
+  }
 
-	if( angle > 2 && angle < 45 )
-		 side = "right";
-	else if( angle < - 2 && angle > - 45 )
-		 side = "left";
-	else
-	{
-		if( Distance( vOrigin, vPoint ) < Distance( vOrigin, vReference ) )
-			side = "front";
-		else
-			side = "rear";
-	}
+  location_add_last_callout_time(location) {
+    anim.locationLastCalloutTimes[location.classname] = GetTime();
+  }
 
-	return( side );
-}
-*/
+  location_get_last_callout_time(location) {
+    if(isDefined(anim.locationLastCalloutTimes[location.classname])) {
+      return anim.locationLastCalloutTimes[location.classname];
+    }
 
-getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
+    return undefined;
+  }
+  getRelativeAngles(ent) {
+    Assert(isDefined(ent));
+
+    angles = ent.angles;
+
+    if(!isPlayer(ent)) {
+      node = ent bcGetClaimedNode();
+      if(isDefined(node)) {
+        angles = node.angles;
+      }
+    }
+
+    return angles;
+  }
+
+  sideIsLeftRight(side) {
+    if(side == "left" || side == "right") {
+      return true;
+    }
+
+    return false;
+  }
+
+  getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
+    anglesToFacing = VectorToAngles(vFacing);
+    anglesToPoint = VectorToAngles(vPoint - vOrigin);
+
+    angle = anglesToFacing[1] - anglesToPoint[1];
+    angle += 360;
+    angle = Int(angle) % 360;
+
+    if(angle > 315 || angle < 45)
+      direction = "front";
+    else if(angle < 135)
+      direction = "right";
+    else if(angle < 225)
+      direction = "rear";
+    else
+      direction = "left";
+
+    return (direction);
+  }
+  normalizeCompassDirection(direction) {
+    Assert(isDefined(direction));
+
+    new = undefined;
+
+    switch (direction) {
+      case "north":
+        new = "n";
+        break;
+      case "northwest":
+        new = "nw";
+        break;
+      case "west":
+        new = "w";
+        break;
+      case "southwest":
+        new = "sw";
+        break;
+      case "south":
+        new = "s";
+        break;
+      case "southeast":
+        new = "se";
+        break;
+      case "east":
+        new = "e";
+        break;
+      case "northeast":
+        new = "ne";
+        break;
+      case "impossible":
+        new = "impossible";
+        break;
+      default:
+        AssertMsg("Can't normalize compass direction " + direction);
+        return;
+    }
+
+    Assert(isDefined(new));
+
+    return new;
+  }
+
+  getDirectionCompass(vOrigin, vPoint) {
+    angles = VectorToAngles(vPoint - vOrigin);
+    angle = angles[1];
+
+    northYaw = GetNorthYaw();
+    angle -= northYaw;
+
+    if(angle < 0)
+      angle += 360;
+    else if(angle > 360)
+      angle -= 360;
+
+    if(angle < 22.5 || angle > 337.5)
+      direction = "north";
+    else if(angle < 67.5)
+      direction = "northwest";
+    else if(angle < 112.5)
+      direction = "west";
+    else if(angle < 157.5)
+      direction = "southwest";
+    else if(angle < 202.5)
+      direction = "south";
+    else if(angle < 247.5)
+      direction = "southeast";
+    else if(angle < 292.5)
+      direction = "east";
+    else if(angle < 337.5)
+      direction = "northeast";
+    else
+      direction = "impossible";
+
+    return (direction);
+  }
+  getFrontArcClockDirection(direction) {
+    AssertEx(isDefined(direction));
+
+    faDirection = "undefined";
+
+    if(direction == "10" || direction == "11") {
+      faDirection = "10";
+    } else if(direction == "12") {
+      faDirection = direction;
+    } else if(direction == "1" || direction == "2") {
+      faDirection = "2";
+    }
+
+    return faDirection;
+  }
+  forward = anglesToForward(viewerAngles);
+  vFacing = VectorNormalize(forward);
   anglesToFacing = VectorToAngles(vFacing);
-  anglesToPoint = VectorToAngles(vPoint - vOrigin);
+  anglesToPoint = VectorToAngles(targetOrigin - viewerOrigin);
 
   angle = anglesToFacing[1] - anglesToPoint[1];
   angle += 360;
   angle = Int(angle) % 360;
 
-  if(angle > 315 || angle < 45)
-    direction = "front";
-  else if(angle < 135)
-    direction = "right";
-  else if(angle < 225)
-    direction = "rear";
-  else
-    direction = "left";
-
-  return (direction);
-}
-
-// takes output from getDirectionCompass and normalizes it to the convention
-//used by the soundaliases
-normalizeCompassDirection(direction) {
-  Assert(isDefined(direction));
-
-  new = undefined;
-
-  switch (direction) {
-    case "north":
-      new = "n";
-      break;
-    case "northwest":
-      new = "nw";
-      break;
-    case "west":
-      new = "w";
-      break;
-    case "southwest":
-      new = "sw";
-      break;
-    case "south":
-      new = "s";
-      break;
-    case "southeast":
-      new = "se";
-      break;
-    case "east":
-      new = "e";
-      break;
-    case "northeast":
-      new = "ne";
-      break;
-    case "impossible":
-      new = "impossible";
-      break;
-    default:
-      AssertMsg("Can't normalize compass direction " + direction);
-      return;
+  if(angle > 345 || angle < 15) {
+    direction = "12";
+  } else if(angle < 45) {
+    direction = "1";
+  } else if(angle < 75) {
+    direction = "2";
+  } else if(angle < 105) {
+    direction = "3";
+  } else if(angle < 135) {
+    direction = "4";
+  } else if(angle < 165) {
+    direction = "5";
+  } else if(angle < 195) {
+    direction = "6";
+  } else if(angle < 225) {
+    direction = "7";
+  } else if(angle < 255) {
+    direction = "8";
+  } else if(angle < 285) {
+    direction = "9";
+  } else if(angle < 315) {
+    direction = "10";
+  } else {
+    direction = "11";
   }
 
-  Assert(isDefined(new));
-
-  return new;
-}
-
-getDirectionCompass(vOrigin, vPoint) {
-  angles = VectorToAngles(vPoint - vOrigin);
-  angle = angles[1];
-
-  northYaw = GetNorthYaw();
-  angle -= northYaw;
-
-  if(angle < 0)
-    angle += 360;
-  else if(angle > 360)
-    angle -= 360;
-
-  if(angle < 22.5 || angle > 337.5)
-    direction = "north";
-  else if(angle < 67.5)
-    direction = "northwest";
-  else if(angle < 112.5)
-    direction = "west";
-  else if(angle < 157.5)
-    direction = "southwest";
-  else if(angle < 202.5)
-    direction = "south";
-  else if(angle < 247.5)
-    direction = "southeast";
-  else if(angle < 292.5)
-    direction = "east";
-  else if(angle < 337.5)
-    direction = "northeast";
-  else
-    direction = "impossible";
-
   return (direction);
-}
-
-// takes a getDirectionFacingClock value and, if it's in the "front arc" (10-2 on the clock face), //will return it normalized to 10, 12, or 2.Otherwise, returns undefined.
-getFrontArcClockDirection(direction) {
-  AssertEx(isDefined(direction));
-
-  faDirection = "undefined";
-
-  if(direction == "10" || direction == "11") {
-    faDirection = "10";
-  } else if(direction == "12") {
-    faDirection = direction;
-  } else if(direction == "1" || direction == "2") {
-    faDirection = "2";
-  }
-
-  return faDirection;
-}
-
-// gets a clock direction from a "viewer" to a "target"getDirectionFacingClock(viewerAngles, viewerOrigin, targetOrigin) {
-forward = anglesToForward(viewerAngles);
-vFacing = VectorNormalize(forward);
-anglesToFacing = VectorToAngles(vFacing);
-anglesToPoint = VectorToAngles(targetOrigin - viewerOrigin);
-
-angle = anglesToFacing[1] - anglesToPoint[1];
-angle += 360;
-angle = Int(angle) % 360;
-
-if(angle > 345 || angle < 15) {
-  direction = "12";
-} else if(angle < 45) {
-  direction = "1";
-} else if(angle < 75) {
-  direction = "2";
-} else if(angle < 105) {
-  direction = "3";
-} else if(angle < 135) {
-  direction = "4";
-} else if(angle < 165) {
-  direction = "5";
-} else if(angle < 195) {
-  direction = "6";
-} else if(angle < 225) {
-  direction = "7";
-} else if(angle < 255) {
-  direction = "8";
-} else if(angle < 285) {
-  direction = "9";
-} else if(angle < 315) {
-  direction = "10";
-} else {
-  direction = "11";
-}
-
-return (direction);
 }
 
 getVectorRightAngle(vDir) {
@@ -2895,7 +2209,6 @@ addRankAlias(name) {
 }
 
 canSayName(ai) {
-  // axis don't use names
   if(enemy_team_name()) {
     return false;
   }
@@ -2904,17 +2217,14 @@ canSayName(ai) {
     return false;
   }
 
-  // SRE'd so added this defensive mechanism
   if(!isDefined(ai.countryID)) {
     return false;
   }
 
-  // don't want to cross the streams for AI names in mixed-nationality squads
   if(self.countryID != ai.countryID) {
     return false;
   }
 
-  // make sure we don't say this guy's name too frequently
   if(self nameSaidRecently(ai)) {
     return false;
   }
@@ -2983,14 +2293,11 @@ isUsingSameVoice(otherguy) {
     return false;
   }
 }
-
-// format: US_1_threat_[type], with optional _[modifier]
 addThreatAlias(type, modifier) {
   Assert(isDefined(type));
 
   threat = self.owner.countryID + "_" + self.owner.npcID + "_threat_" + type;
 
-  // not all threat aliases use modifiers anymore
   if(isDefined(modifier)) {
     threat += ("_" + modifier);
   }
@@ -2998,8 +2305,6 @@ addThreatAlias(type, modifier) {
   self.soundAliases = array_add(self.soundAliases, threat);
   return true;
 }
-
-// format: US_1_exposed_[type]
 addThreatExposedAlias(type) {
   Assert(isDefined(type));
 
@@ -3008,18 +2313,13 @@ addThreatExposedAlias(type) {
   self.soundAliases[self.soundAliases.size] = alias;
   return true;
 }
-
-// format: US_1_order_action_suppress
 addThreatObviousAlias() {
-  // just using the order_action_suppress aliases
   alias = self.owner.countryID + "_" + self.owner.npcID + "_order_action_suppress";
 
   self.soundAliases[self.soundAliases.size] = alias;
 
   return true;
 }
-
-// format: [reportAlias]_echo ("_echo" replaces "_report" in the reportAlias)
 addThreatCalloutEcho(reportAlias, respondTo) {
   Assert(isDefined(reportAlias));
 
@@ -3028,15 +2328,12 @@ addThreatCalloutEcho(reportAlias, respondTo) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find echo alias '" + alias + "'.");
 
-    // TODO maybe output to data csv/txt file later
     return false;
   }
 
   self.soundAliases[self.soundAliases.size] = alias;
   return true;
 }
-
-// format: US_1_resp_ack_co_gnrc_[affirm/neg]
 addThreatCalloutResponseAlias(modifier) {
   Assert(isDefined(modifier));
 
@@ -3045,7 +2342,6 @@ addThreatCalloutResponseAlias(modifier) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find callout response alias '" + alias + "'.");
 
-    // TODO maybe output to data csv/txt file later
     return false;
   }
 
@@ -3056,8 +2352,6 @@ addThreatCalloutResponseAlias(modifier) {
 addThreatCalloutQA_NextLine(respondTo, prevLine, location) {
   Assert(isDefined(respondTo) && isDefined(prevLine));
 
-  // figure out the partial alias so we can reconstruct it later
-  // this is easier than parsing out the prevLine to just get the meat
   partialAlias = undefined;
   foreach(str in location.locationAliases) {
     if(IsSubStr(prevLine, str)) {
@@ -3067,7 +2361,6 @@ addThreatCalloutQA_NextLine(respondTo, prevLine, location) {
   }
   Assert(isDefined(partialAlias));
 
-  // now try to construct the new string
   prefix = self.owner.countryID + "_" + self.owner.npcID + "_co_";
   lastChar = GetSubStr(prevLine, prevLine.size - 1, prevLine.size);
   Assert(string_is_single_digit_integer(lastChar));
@@ -3076,50 +2369,37 @@ addThreatCalloutQA_NextLine(respondTo, prevLine, location) {
   qaAlias = prefix + partialAlias + "_qa" + nextIndex;
 
   if(!SoundExists(qaAlias)) {
-    // finish up the conversation with a yes/no response
     if(RandomInt(100) < anim.eventChance["response"]["callout_negative"]) {
       respondTo addResponseEvent("callout", "neg", self.owner, 0.9);
     } else {
       respondTo addResponseEvent("exposed", "acquired", self.owner, 0.9);
     }
 
-    // from now on we'll use the base alias to refer to it since we talked about it already
     location.qaFinished = true;
 
     return false;
   }
 
-  // keep the QA conversation going, potentially
   respondTo addResponseEvent("callout", "QA", self.owner, 0.9, qaAlias, location);
 
   self.soundAliases[self.soundAliases.size] = qaAlias;
   return true;
 }
-
-// takes a soundalias that ends with "_report" and returns a variant of it that ends with "_echo"createEchoAlias(reportAlias, respondTo) {
 reportSuffix = "_report";
 echoSuffix = "_echo";
-
-// make sure that we're responding in the responder's countryID and voice
 echoPrefix = self.owner.countryID + "_" + self.owner.npcID + "_";
 
 AssertEx(IsSubStr(reportAlias, reportSuffix), "reportAlias doesn't have substring '" + reportSuffix + "', so it doesn't look like an eligible report alias.");
 
-reportSuffixStartIndex = reportAlias.size - reportSuffix.size; // figure out where the end of this baseAlias is
-
-// some guys have longer npcIDs than others, so we have to allow the base prefix to be variable length
+reportSuffixStartIndex = reportAlias.size - reportSuffix.size;
 oldPrefix = self.owner.countryID + "_" + respondTo.npcID + "_";
 oldPrefixLength = oldPrefix.size;
 
-baseAlias = GetSubStr(reportAlias, oldPrefixLength, reportSuffixStartIndex); // start 5 spots in to eliminate the original countryID and npcID info
-
-// construct the final alias
+baseAlias = GetSubStr(reportAlias, oldPrefixLength, reportSuffixStartIndex);
 echoAlias = echoPrefix + baseAlias + echoSuffix;
 
 return echoAlias;
 }
-
-// format: US_1_callout_[contactclock/targetclock/yourclock/cardinal]_[modifier]
 addThreatCalloutAlias(type, modifier) {
   Assert(isDefined(type) && isDefined(modifier));
 
@@ -3128,10 +2408,6 @@ addThreatCalloutAlias(type, modifier) {
   self.soundAliases[self.soundAliases.size] = alias;
   return true;
 }
-
-// "landmarks" are aka "objects" in the soundaliases
-// format: US_1_callout_obj_[landmark]_your(optional)_[frontArcDirection]
-//- isRelative dictates if we will add the "your" to the string
 addThreatCalloutLandmarkAlias(landmark, frontArcDirection, isRelative) {
   Assert(isDefined(landmark) && isDefined(frontArcDirection));
 
@@ -3150,52 +2426,41 @@ addThreatCalloutLandmarkAlias(landmark, frontArcDirection, isRelative) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find sound alias '" + alias + "'. Does landmark '" + landmarkStr + "' have callout references in the battlechatter csv for nationality '" + self.owner.countryID + "'?");
 
-    // TODO maybe output to data csv/txt file later
     return false;
   }
 
   self.soundAliases[self.soundAliases.size] = alias;
   return true;
 }
-
-// format: US_1_co_[location.locationAliases[idx]]
-// -- oldstyle format: US_1_callout_loc_[location](optional if floor exists)_[floor](optional if location exists)_[left/right](optional)_report(optional)
 addThreatCalloutLocationAlias(location) {
   Assert(isDefined(location) && isDefined(location.locationAliases));
 
   finalAlias = undefined;
 
-  // some triggers have more than one alias set up
   locationAliases = location.locationAliases;
   Assert(locationAliases.size);
 
   locAlias = locationAliases[0];
 
   if(locationAliases.size > 1) {
-    // prefer aliases that make the AIs talk more
     responseAlias = undefined;
     responseAlias = location GetCannedResponse(self.owner);
     if(isDefined(responseAlias)) {
       locAlias = responseAlias;
     } else {
-      // otherwise just randomize it
       locAlias = random(locationAliases);
     }
   }
 
   alias = undefined;
 
-  // see if this is a QA conversation that hasn't been finished
   if(!isDefined(location.qaFinished) && IsCalloutTypeQA(locAlias, self.owner)) {
     alias = self.owner GetQACalloutAlias(locAlias, 0);
   } else {
-    // standard prefix
     prefix = self.owner.countryID + "_" + self.owner.npcID + "_";
 
-    // this separates oldstyle location callouts so we can use some older assets
-    //- in the future we'll just add the rest of the prefix string above
     if(!IsSubStr(locAlias, "callout")) {
-      prefix += "co_"; // the newstyle standard
+      prefix += "co_";
     }
 
     alias = prefix + locAlias;
@@ -3216,7 +2481,6 @@ addThreatCalloutLocationAlias(location) {
     printStr += ". Are you sure that there is an alias to support it?";
 
     PrintLn(printStr);
-    // TODO maybe output to data csv/txt file later
 
     return false;
   }
@@ -3265,16 +2529,12 @@ addTauntAlias(type, modifier) {
 
   return (true);
 }
-
-// format: GE_1_hostile_burst
 addHostileBurstAlias() {
   burst = self.owner.countryID + "_" + self.owner.npcID + "_hostile_burst";
   self.soundAliases[self.soundAliases.size] = burst;
 
   return true;
 }
-
-// format: US_1_order_move_follow (etc.)
 addOrderAlias(type, modifier) {
   Assert(isDefined(type) && isDefined(modifier));
 
@@ -3331,10 +2591,8 @@ pointInFov(origin) {
   normalVec = VectorNormalize(origin - self.origin);
 
   dot = VectorDot(forward, normalVec);
-  return dot > 0.766; // fov = 80
+  return dot > 0.766;
 }
-
-// the "front arc" goes from 9 to 3 on a clock face - the front 180 degrees
 entInFrontArc(ent) {
   direction = getDirectionFacingClock(self.angles, self.origin, ent.origin);
 
@@ -3345,32 +2603,23 @@ entInFrontArc(ent) {
   return false;
 }
 
-/****************************************************************************
- flavor burst transmissions
-*****************************************************************************/
-
-// self = the squad
 squadFlavorBurstTransmissions() {
   anim endon("battlechatter disabled");
   self endon("squad_deleting");
 
   if(self.team != "allies") {
-    // hackish, don't need it to be more complicated for now though
     if(level.script != "af_caves") {
       return;
     }
   }
 
-  // wait until an AI gets put in the squad
   while(self.memberCount <= 0) {
     wait(0.5);
   }
 
-  // don't do regular waits if we're coming back from flavorbursts being disabled
   burstingWasPaused = false;
 
   while(isDefined(self)) {
-    // make sure at least one of the guys in the squad can burst
     if(!squadCanBurst(self)) {
       burstingWasPaused = true;
 
@@ -3407,7 +2656,6 @@ squadFlavorBurstTransmissions() {
     aliases = getFlavorBurstAliases(nationality, burstID);
 
     foreach(i, alias in aliases) {
-      // see if we need to migrate our burster
       if(!burster canDoFlavorBurst() || Distance(level.player.origin, burster.origin) > anim.fbt_desiredDistMax) {
         for(j = 0; j < self.members.size; j++) {
           burster = getBurster(self);
@@ -3416,20 +2664,16 @@ squadFlavorBurstTransmissions() {
             continue;
           }
 
-          // to continue the burst transmission, we want to stick with the same
-          //nationality - this is in case we have a squad of mixed nationalities
           if(burster.voice == nationality) {
             break;
           }
         }
 
-        // if we can't find a new burster of the same nationality, //quit this transmission
         if(!isDefined(burster) || burster.voice != nationality) {
           break;
         }
       }
 
-      // play the burst
       self thread playFlavorBurstLine(burster, alias);
       self waittill("burst_line_done");
 
@@ -3472,8 +2716,7 @@ voiceCanBurst() {
 
 getBurster(squad) {
   burster = undefined;
-  // prioritize by player proximity
-  //for some reason, get_array_of_farthest returns the closest at index 0
+
   squadMembers = get_array_of_farthest(level.player.origin, squad.members);
 
   foreach(guy in squadMembers) {
@@ -3484,7 +2727,6 @@ getBurster(squad) {
         break;
       }
 
-      // try not to play it off the last guy we played it off of
       if(isDefined(squad.fbt_lastBursterID) && squad.fbt_lastBursterID == burster.unique_id) {
         continue;
       }
@@ -3492,7 +2734,6 @@ getBurster(squad) {
   }
 
   if(isDefined(burster)) {
-    // store the ent's unique ID because the ent could be gone by the time we check again
     squad.fbt_lastBursterID = burster.unique_id;
   }
 
@@ -3502,7 +2743,6 @@ getBurster(squad) {
 getFlavorBurstID(squad, nationality) {
   bursts = array_randomize(anim.flavorbursts[nationality]);
 
-  // if we used all of the flavor bursts already, reset
   if(anim.flavorburstsUsed.size >= bursts.size) {
     anim.flavorburstsUsed = [];
   }
@@ -3566,7 +2806,6 @@ playFlavorBurstLine(burster, alias) {
     self thread flavorBurstLineDebug(burster, alias);
   }
 
-  // make a separate origin to play the sound off of so that mission dialogue doesn't get cut off when played on this guy at the same time
   soundOrg = spawn("script_origin", burster.origin);
   soundOrg LinkTo(burster);
 
@@ -3588,88 +2827,6 @@ flavorBurstLineDebug(burster, alias) {
   }
 }
 
-/****************************************************************************
- debugging functions
-*****************************************************************************/
-
-/*
-debugPrintEvents()
-{
-	if( !isalive( self ) )
-		return;
-
-	if( getDvar( "debug_bcshowqueue" ) != self.team && getDvar( "debug_bcshowqueue" ) != "all" )
-		return;
-
-	self endon( "death" );
-	self notify( "debugPrintEvents" );
-	self endon( "debugPrintEvents" );
-
-	queueEvents = self getQueueEvents();
-	colors[ "g" ] = ( 0, 1, 0 );
-	colors[ "y" ] = ( 1, 1, 0 );
-	colors[ "r" ] = ( 1, 0, 0 );
-	colors[ "b" ] = ( 0, 0, 0 );
-
-	while( 1 )
-	{
-		aboveHead = self GetShootAtPos() + ( 0, 0, 10 );
-		for( i = 0; i < queueEvents.size; i++ )
-		{
-			Print3d( aboveHead, queueEvents[ i ], colors[ queueEvents[ i ][ 0 ] ], 1, 0.5 );	// origin, text, RGB, alpha, scale
-			aboveHead += ( 0, 0, 5 );
-		}
-		wait 0.05;
-	}
-}
-
-debugQueueEvents()
-{
-	if( getDvar( "debug_bcresponse" ) == "on" )
-		self thread printQueueEvent( "response" );
-	if( getDvar( "debug_bcthreat" ) == "on" )
-		self thread printQueueEvent( "threat" );
-	if( getDvar( "debug_bcinform" ) == "on" )
-		self thread printQueueEvent( "inform" );
-	if( getDvar( "debug_bcorder" ) == "on" )
-		self thread printQueueEvent( "order" );
-}
-
-printAboveHead( string, duration, offset )
-{
-	self endon( "death" );
-
-	if( !isDefined( offset ) )
-		offset = ( 0, 0, 0 );
-
-	for( i = 0; i < ( duration * 2 ); i++ )
-	{
-		if( !isalive( self ) )
-			return;
-
-		aboveHead = self GetShootAtPos() + ( 0, 0, 10 ) + offset;
-		Print3d( aboveHead, string, ( 1, 0, 0 ), 1, 0.5 );	// origin, text, RGB, alpha, scale
-		wait 0.05;
-	}
-}
-
-printQueueEvent( eventAction )
-{
-	time = GetTime();
-
-	if( self.chatQueue[ eventAction ].expireTime > 0 && !isDefined( self.chatQueue[ eventAction ].printed ) )
-	{
-		Print( "QUEUE EVENT " + eventAction + "_" + self.chatQueue[ eventAction ].eventType + ": " );
-		if( time > self.chatQueue[ eventAction ].expireTime )
-			PrintLn( "^2 missed by " + ( time - self.chatQueue[ eventAction ].expireTime ) + "ms" );
-		else
-			PrintLn( "slack of " + ( self.chatQueue[ eventAction ].expireTime - time ) + "ms" );
-
-		self.chatQueue[ eventAction ].printed = true;
-	}
-}
-*/
-
 battleChatter_canPrint() {
   if(GetDebugDvar("debug_bcprint") == self.team || GetDebugDvar("debug_bcprint") == "all")
     return (true);
@@ -3684,8 +2841,6 @@ battleChatter_canPrintDump() {
 
   return false;
 }
-
-// SRS 10/16/08: this used to be unnecessarily covered with two functions
 battleChatter_print(aliases) {
   if(aliases.size <= 0) {
     AssertMsg("battleChatter_print(): the aliases array is empty.");
@@ -3696,12 +2851,11 @@ battleChatter_print(aliases) {
     return;
   }
 
-  colorPrefix = "^5 "; // allies
+  colorPrefix = "^5 ";
   if(enemy_team_name()) {
     colorPrefix = "^6 ";
   }
 
-  // print to the console
   Print(colorPrefix);
 
   foreach(alias in aliases) {
@@ -3710,8 +2864,6 @@ battleChatter_print(aliases) {
 
   PrintLn("");
 }
-
-// optionally dumps info out to files for examination later
 battleChatter_printDump(aliases, descriptor) {
   if(!self battleChatter_canPrintDump()) {
     return;
@@ -3727,28 +2879,22 @@ battleChatter_printDump(aliases, descriptor) {
     return;
   }
 
-  // do this early, in case the file writing hangs for a bit of time
   secsSinceLastDump = -1;
   if(isDefined(level.lastDumpTime)) {
     secsSinceLastDump = (GetTime() - level.lastDumpTime) / 1000;
   }
 
-  level.lastDumpTime = GetTime(); // reset
+  level.lastDumpTime = GetTime();
 
-  // -- CSV dumps help the audio dept optimize where they spend their time -- if(dumpType == "csv") {
-  // only 1 write at a time
   if(!flag_exist("bcs_csv_dumpFileWriting")) {
     flag_init("bcs_csv_dumpFileWriting");
   }
 
-  // open the file, if it's not already open
   if(!isDefined(level.bcs_csv_dumpFile)) {
     filePath = "scriptgen/battlechatter/bcsDump_" + level.script + ".csv";
     level.bcs_csv_dumpFile = OpenFile(filePath, "write");
   }
 
-  // dump a new line for each sound
-  // format: levelname,countryID,npcID,aliasType
   foreach(alias in aliases) {
     aliasType = getAliasTypeFromSoundalias(alias);
 
@@ -3757,8 +2903,6 @@ battleChatter_printDump(aliases, descriptor) {
     battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
   }
 }
-
-// -- TXT dumps help the design dept tweak distributions and timing -- else if(dumpType == "txt") {
 AssertEx(isDefined(descriptor), "battlechatter print dumps of type 'txt' require a descriptor!");
 
 if(!flag_exist("bcs_txt_dumpFileWriting")) {
@@ -3774,8 +2918,6 @@ name = self.name;
 if(enemy_team_name()) {
   name = self.ainame;
 }
-
-// format: (2.3 secs) US_1 order_move_follow: US_1_threat_rpg_generic, US_1_landmark_near_cargocontainer, US_1_direction_relative_north
 dumpString = "(" + secsSinceLastDump + " secs) ";
 dumpString += name + " " + descriptor + ": ";
 foreach(i, alias in aliases) {
@@ -3790,11 +2932,9 @@ battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFil
 }
 
 getAliasTypeFromSoundalias(alias) {
-  // get the prefix and make sure it matches as we'd expect
   prefix = self.countryID + "_" + self.npcID + "_";
   AssertEx(IsSubStr(alias, prefix), "didn't find expected prefix info in alias '" + alias + "' with substr test of '" + prefix + "'.");
 
-  // figure out the alias type by removing the prefix
   aliasType = GetSubStr(alias, prefix.size, alias.size);
 
   return aliasType;
@@ -3834,7 +2974,7 @@ drawBCObject(string, origin, offset, color) {
       continue;
     }
 
-    Print3d(origin + offset, string, color, 1, 0.75); // origin, text, RGB, alpha, scale
+    Print3d(origin + offset, string, color, 1, 0.75);
     wait 0.05;
   }
 }
@@ -3855,7 +2995,7 @@ drawBCDirections(landmark, offset, color) {
 
     string = compass + ", " + clock + ":00";
 
-    Print3d(landmarkOrigin + offset, string, color, 1, 0.75); // origin, text, RGB, alpha, scale
+    Print3d(landmarkOrigin + offset, string, color, 1, 0.75);
     wait 0.05;
   }
 }
@@ -3890,7 +3030,6 @@ friendlyfire_warning() {
     return false;
   }
 
-  // since we're skipping a lot of the normal bcs checks, multiple guys can potentially say this at the same time, so do the typelimit earlier than usual
   self doTypeLimit("reaction", "friendlyfire");
 
   self thread playReactionEvent();
@@ -3906,17 +3045,14 @@ can_say_friendlyfire(checkTypeLimit) {
     return false;
   }
 
-  // do we have a reaction event in our queue?
   if(!isDefined(self.chatQueue["reaction"]) || !isDefined(self.chatQueue["reaction"].eventType)) {
     return false;
   }
 
-  // is it a friendlyfire reaction?
   if(self.chatQueue["reaction"].eventType != "friendlyfire") {
     return false;
   }
 
-  // has it expired?
   if(GetTime() > self.chatQueue["reaction"].expireTime) {
     return false;
   }
@@ -3926,7 +3062,6 @@ can_say_friendlyfire(checkTypeLimit) {
   }
 
   if(checkTypeLimit) {
-    // is it too early to do another one yet?
     if(isDefined(self.squad.nextTypeSayTimes["reaction"]["friendlyfire"])) {
       if(GetTime() < self.squad.nextTypeSayTimes["reaction"]["friendlyfire"]) {
         return false;

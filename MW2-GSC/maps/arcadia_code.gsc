@@ -59,9 +59,9 @@ stryker_moving_up_dialog() {
   self endon("death");
 
   dialog = [];
-  dialog[dialog.size] = "arcadia_str_wererollin"; // Stand clear, we're rollin'.
-  dialog[dialog.size] = "arcadia_str_standclear"; // Be advised, we're movin' up. Stand clear.
-  dialog[dialog.size] = "arcadia_str_oscarmike"; // All ground units, stand clear. Badger One is oscar mike.
+  dialog[dialog.size] = "arcadia_str_wererollin";
+  dialog[dialog.size] = "arcadia_str_standclear";
+  dialog[dialog.size] = "arcadia_str_oscarmike";
 
   for(;;) {
     self waittill("resuming speed");
@@ -78,7 +78,7 @@ stryker_holding_position_dialog() {
   self endon("death");
 
   dialog = [];
-  dialog[dialog.size] = "arcadia_str_holdingposition"; // Badger One holding position.
+  dialog[dialog.size] = "arcadia_str_holdingposition";
 
   for(;;) {
     self waittill("wait for gate");
@@ -141,7 +141,6 @@ rpg_enemy_shoot_stryker() {
   self.goalheight = 64;
   self.goalradius = 64;
 
-  // when this guy spawns he tries to shoot the stryker with his RPG
   self waittill("goal");
 
   if(!isAlive(level.stryker)) {
@@ -218,12 +217,10 @@ sentry_activate_trigger() {
 
   wait 5;
 
-  // Squad, take out the sentry guns!
   level.foley thread dialogue_queue("arcadia_fly_sentryguns");
 
   wait 15;
 
-  // Take out that sentry gun!
   level.foley thread dialogue_queue("arcadia_fly_takeoutsgun");
 }
 
@@ -273,7 +270,6 @@ fake_chopper() {
     wait randomfloatrange(3.0, 5.0);
   }
 
-  // delete the fake chopper when it's not going to spawn any more choppers
   self delete();
 }
 
@@ -297,7 +293,6 @@ fake_chopper_create_and_move(moveTime, destination) {
   chopper useAnimTree(#animtree);
   chopper setanim(%bh_rotors, 1, .2, 1);
 
-  // some play a sound effect
   if(randomint(2) == 0)
     chopper playLoopSound("veh_helicopter_loop");
 
@@ -349,7 +344,6 @@ laser_targeting_device(player) {
 }
 
 get_laser_designation_context(viewpoint, entity) {
-  // Check for volumes
   volumes = getEntArray("stryker_target_location", "targetname");
   dummyEnt = spawn("script_origin", viewpoint);
   foreach(volume in volumes) {
@@ -362,9 +356,7 @@ get_laser_designation_context(viewpoint, entity) {
   }
   dummyEnt delete();
 
-  // Check target entity
   if(isDefined(entity)) {
-    // target a vehicle?
     if(isDefined(entity.vehicletype) || isDefined(entity.destuctableinfo)) {
       if(isDefined(entity.vehicletype) && entity.vehicletype == "mi17")
         return "chopper";
@@ -388,55 +380,55 @@ laser_designate_dialog(inRange, viewpoint, entity) {
 
     switch (context) {
       case "house":
-        dialog[dialog.size] = "arcadia_str_havealock"; // Roger, we have a lock. Engaging house.
-        dialog[dialog.size] = "arcadia_str_badgeronecopies"; // Badger One copies, engaging house.
+        dialog[dialog.size] = "arcadia_str_havealock";
+        dialog[dialog.size] = "arcadia_str_badgeronecopies";
         break;
       case "yellowhouse":
-        dialog[dialog.size] = "arcadia_str_engyellowhouse"; // Badger One engaging enemies at the yellow house
+        dialog[dialog.size] = "arcadia_str_engyellowhouse";
         break;
       case "greyhouse":
-        dialog[dialog.size] = "arcadia_str_targgreyhouse"; // Copy. Targeting enemies at the grey house
+        dialog[dialog.size] = "arcadia_str_targgreyhouse";
         break;
       case "firetruck":
-        dialog[dialog.size] = "arcadia_str_engfiretruck"; // Roger, engaging targets near the fire truck
+        dialog[dialog.size] = "arcadia_str_engfiretruck";
         break;
       case "policecar":
-        dialog[dialog.size] = "arcadia_str_confpolicecar"; // Confirmed, suppressing enemies near the police car
+        dialog[dialog.size] = "arcadia_str_confpolicecar";
         break;
       case "apartment_office":
-        dialog[dialog.size] = "arcadia_str_apartmentoffice"; // Badger One copies, engaging enemies at apartment office.
+        dialog[dialog.size] = "arcadia_str_apartmentoffice";
         break;
       case "security_station":
-        dialog[dialog.size] = "arcadia_str_securitystation"; // Roger, attacking targets at security station.
+        dialog[dialog.size] = "arcadia_str_securitystation";
         break;
       case "checkpoint":
-        dialog[dialog.size] = "arcadia_str_checkpoint"; // Confirmed, engaging enemies at checkpoint.
+        dialog[dialog.size] = "arcadia_str_checkpoint";
         break;
       case "vehicle":
-        dialog[dialog.size] = "arcadia_str_attackingvehicle"; // Roger, attacking vehicle.
-        dialog[dialog.size] = "arcadia_str_engagingvehicle"; // Solid copy. Engaging vehicle.
+        dialog[dialog.size] = "arcadia_str_attackingvehicle";
+        dialog[dialog.size] = "arcadia_str_engagingvehicle";
         break;
       case "chopper":
-        dialog[dialog.size] = "arcadia_str_engchopper"; // Roger. Engaging enemy chopper
+        dialog[dialog.size] = "arcadia_str_engchopper";
         break;
       case "ai":
-        dialog[dialog.size] = "arcadia_str_engaginginfantry"; // Solid copy. Engaging infantry.
+        dialog[dialog.size] = "arcadia_str_engaginginfantry";
         break;
       case "generic":
-        dialog[dialog.size] = "arcadia_str_wehavelock"; // Roger, we have a lock. Engaging target.
-        dialog[dialog.size] = "arcadia_str_engaging"; // Badger One copies, engaging your target.
-        dialog[dialog.size] = "arcadia_str_attacking"; // Roger, attacking your target.
-        dialog[dialog.size] = "arcadia_str_solidcopyeng"; // Solid copy. Engaging target.
+        dialog[dialog.size] = "arcadia_str_wehavelock";
+        dialog[dialog.size] = "arcadia_str_engaging";
+        dialog[dialog.size] = "arcadia_str_attacking";
+        dialog[dialog.size] = "arcadia_str_solidcopyeng";
         break;
       default:
         assertMsg("Unhandled stryker context location dialog " + context);
         break;
     }
   } else {
-    dialog[dialog.size] = "arcadia_str_uhnegative"; // Uh, negative, that target is out of range, over.
-    dialog[dialog.size] = "arcadia_str_invalidtarget"; // Negative, that's an invalid target over.
-    dialog[dialog.size] = "arcadia_str_outtarange"; // Negative, that target's outta range!
-    dialog[dialog.size] = "arcadia_str_outofrange"; // Target is out of range.
+    dialog[dialog.size] = "arcadia_str_uhnegative";
+    dialog[dialog.size] = "arcadia_str_invalidtarget";
+    dialog[dialog.size] = "arcadia_str_outtarange";
+    dialog[dialog.size] = "arcadia_str_outofrange";
   }
 
   if(flag("disable_stryker_dialog")) {
@@ -459,7 +451,6 @@ laser_designate_target() {
   if(getDvar("arcadia_debug_stryker") == "1")
     thread draw_line_for_time(viewpoint, viewpoint + (0, 0, 100), 1, 0, 0, 20);
 
-  // Check if we are supposed to be targeting for artillery now
   artilleryTarget = undefined;
   if(flag("golf_course_mansion"))
     artilleryTarget = laser_origin_within_golf_vehicles(viewpoint);
@@ -468,7 +459,6 @@ laser_designate_target() {
     thread laser_artillery(artilleryTarget);
   } else {
     if(!flag("disable_stryker_laser") && !self ent_flag("disable_stryker_laser")) {
-      // check if target is in range
       if(isAlive(level.stryker)) {
         d = distance(level.stryker.origin, viewpoint);
         inRange = (d >= 200 && d <= 3500);
@@ -481,7 +471,6 @@ laser_designate_target() {
 
   wait 0.5;
 
-  // take away laser
   self notify("use_laser");
 }
 
@@ -506,9 +495,6 @@ get_laser_designated_trace() {
   forward = anglesToForward(angles);
   end = eye + vector_multiply(forward, 7000);
   trace = bulletTrace(eye, end, true, self);
-
-  //thread draw_line_for_time( eye, end, 1, 1, 1, 10 );
-  //thread draw_line_for_time( eye, trace[ "position" ], 1, 0, 0, 10 );
 
   entity = trace["entity"];
   if(isDefined(entity))
@@ -550,20 +536,19 @@ laser_artillery(groupNum, forced) {
     flag_set("lazed_targets_0");
     soundEnt = getent("artillery_soundent_0", "targetname");
     if(!forced)
-      thread radio_dialogue("arcadia_art_missionrec"); // Fire mission received, artillery inbound.
+      thread radio_dialogue("arcadia_art_missionrec");
   }
   if(groupNum == 1) {
     flag_set("lazed_targets_1");
     soundEnt = getent("artillery_soundent_1", "targetname");
     if(!forced)
-      thread radio_dialogue("arcadia_art_confirmed"); // Coordinates confirmed. Firing!
+      thread radio_dialogue("arcadia_art_confirmed");
   }
   assert(isDefined(soundEnt));
 
   if(flag("lazed_targets_0") && flag("lazed_targets_1"))
     level notify("stop_laze_golf_course_dialog");
 
-  // blow everything up
   delay[0] = 4;
   delay[1] = 4;
   assert(isDefined(delay[groupNum]));
@@ -574,15 +559,12 @@ laser_artillery(groupNum, forced) {
   exploder(groupNum);
   wait 1;
 
-  // rumble
   playRumbleOnPosition("arcadia_artillery_rumble", soundEnt.origin);
 
-  // explosion sounds
   soundEnt delayThread(0.0, ::play_sound_in_space, "mortar_explosion_dirt");
   soundEnt delayThread(0.7, ::play_sound_in_space, "mortar_explosion_dirt");
   soundEnt delayThread(1.8, ::play_sound_in_space, "mortar_explosion_dirt");
 
-  // swap the geo
   before = get_golf_geo("golf_before", groupNum);
   assert(before.size > 0);
   array_call(before, ::hide);
@@ -605,7 +587,6 @@ golf_course_battle() {
 
   flag_wait("golf_course_battle");
 
-  // delete stryker when the player goes through the house
   level.stryker connectPaths();
   level.stryker delete();
 
@@ -622,12 +603,10 @@ laze_golf_course_dialog() {
   level endon("stop_laze_golf_course_dialog");
 
   while(1) {
-    // Ramirez, use your laser designator to call in artillery on those vehicles!
     level.foley dialogue_queue("arcadia_fly_laserdes");
 
     wait 20;
 
-    // Ramirez, call artrillery on the enemy vehicles! Use your laser designator!
     level.foley dialogue_queue("arcadia_fly_callartillery");
 
     wait 20;
@@ -844,7 +823,6 @@ golf_course_battle_enemy_think() {
 
   guy setGoalNode(node);
 
-  // make AI shoot down range at fake targets
   targets = getEntArray("golf_enemy_target", "targetname");
   guy setEntityTarget(targets[randomint(targets.size)]);
 
@@ -857,35 +835,6 @@ golf_course_battle_enemy_think() {
 
   guy setGoalNode(nextNode);
 }
-/*
-golf_course_mortars()
-{
-	mortars = getEntArray( "golf_course_mortar", "targetname" );
-	
-	for(;;)
-	{
-		mortars = array_randomize( mortars );
-		
-		foreach( mortar in mortars )
-		{	
-			assert( isDefined( mortar.script_noteworthy ) );
-			surface = mortar.script_noteworthy;
-			mortarID = "mortar_" + surface;
-			assert( isDefined( level._effect[ mortarID ] ) );
-			
-			fx = level._effect[ mortarID ];
-			assert( isDefined( level.scr_sound[ mortarID ] ) );
-			sound = level.scr_sound[ mortarID ];
-			
-			mortar play_sound_in_space( level.scr_sound[ "mortar_incomming" ], mortar.origin );
-			playFX( fx, mortar.origin );
-			mortar thread play_sound_in_space( level.scr_sound[ mortarID ], mortar.origin );
-			
-			wait randomfloatrange( MORTAR_TIME_MIN, MORTAR_TIME_MAX );
-		}
-	}
-}
-*/
 
 crashing_c130() {
   flag_wait("crashing_c130");
@@ -934,19 +883,15 @@ sun_blocker() {
   wait 4;
 
   for(;;) {
-    // cover the sun
     ent = spawn("script_model", fx_origin);
     ent.angles = fx_angles;
     ent setModel("tag_origin");
     playFXOnTag(getfx(fx_id), ent, "tag_origin");
 
-    // wait till we are to the side
     flag_wait("remove_sun_blocker");
 
-    // don't block the sun when we're here
     ent delete();
 
-    // once we go back out to the main area block the sun again
     flag_waitopen("remove_sun_blocker");
   }
 }
@@ -959,7 +904,7 @@ harriers() {
     harrier SetGoalYaw(harrier.angles[1]);
     harrier SetVehGoalPos(harrier.origin, true);
     harrier godon();
-    harrier setHoverParams(randomintrange(80, 120), randomintrange(50, 80), randomintrange(10, 20)); //<radius>, <speed>, <accel>
+    harrier setHoverParams(randomintrange(80, 120), randomintrange(50, 80), randomintrange(10, 20));
   }
 
   flag_wait("harriers_move");
@@ -1097,14 +1042,12 @@ civilian_car_luggage() {
 
   wait 6.5;
 
-  // Do physics on the models
   vec = vectorNormalize(civilian_car_dummy_direction_vec.origin - civilian_car_dummy.origin);
   foreach(piece in civilian_car_luggage) {
     wait randomfloatrange(0.05, 0.15);
     piece unlink();
     scale = randomfloatrange(9000, 10000);
     piece PhysicsLaunchClient(piece.origin, vec * scale);
-    //thread draw_line_for_time( piece.origin, piece.origin + ( vec * scale ), 1, 1, 1, 5.0 );
   }
 
   civilian_car_dummy delete();
@@ -1236,7 +1179,6 @@ ai_avoid_stryker() {
     withinDist = (distanceSquared(self.origin, level.stryker.origin) <= maxdist);
     withinFOV = within_fov(self.origin, self.angles, level.stryker.origin, fov);
 
-    //self.cqbwalking
     if(withinDist && withinFOV)
       self cqb_walk("on");
     else
@@ -1295,7 +1237,6 @@ stryker_run_over_player_monitor() {
   while(isalive(level.stryker)) {
     wait 0.1;
 
-    // check to see if stryker is moving
     speed = level.stryker vehicle_GetSpeed();
     if(speed <= 1) {
       continue;
@@ -1303,23 +1244,23 @@ stryker_run_over_player_monitor() {
     if(flag("disable_stryker_dialog")) {
       continue;
     }
-    // is player nearby?
+
     d = distance(level.player.origin, level.stryker.origin);
     if(d > 450) {
       continue;
     }
-    // is player in front of the vehicle and about to get ran over?
+
     withinFOV = within_fov(level.stryker.origin, level.stryker.angles, level.player.origin, fov);
     if(!withinFOV) {
       continue;
     }
     if(dialogIndex == 0) {
       dialogIndex = 1;
-      // Ramirez! You're gonna get run over! Get outta their way!
+
       level.foley dialogue_queue("arcadia_fly_getrunover");
     } else {
       dialogIndex = 0;
-      // Ramirez! Honey Badger's moving! Get outta their way!
+
       level.dunn dialogue_queue("arcadia_cpd_getoutta");
     }
 
@@ -1347,11 +1288,10 @@ bmps_kill_player_before_artillery() {
   if(!isDefined(level.bmp)) {
     return;
   }
-  // stop shooting random targets
+
   level.bmp endon("death");
   level.bmp notify("attacking_player");
 
-  // shoot at the player
   for(;;) {
     level.bmp SetTurretTargetEnt(level.player, (0, 0, 20));
     wait randomfloatrange(0.5, 1.5);
@@ -1384,7 +1324,7 @@ stryker_threats_eliminated_dialog_1() {
   if(flag("disable_stryker_dialog")) {
     return;
   }
-  // Thanks for the assist, Hunter Two-One.
+
   thread radio_dialogue("arcadia_str_thanks");
 }
 
@@ -1394,7 +1334,7 @@ stryker_threats_eliminated_dialog_2() {
   if(flag("disable_stryker_dialog")) {
     return;
   }
-  // Nice work, Hunter Two-One. Thanks for the assist.
+
   thread radio_dialogue("arcadia_str_nicework");
 }
 

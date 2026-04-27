@@ -10,7 +10,6 @@ main() {
   if(isDefined(self.a.nodeath)) {
     assertex(self.a.nodeath, "Nodeath needs to be set to true or undefined.");
 
-    // allow death script to run for a bit so it doesn't turn to corpse and get deleted too soon during melee sequence
     wait 3;
     return;
   }

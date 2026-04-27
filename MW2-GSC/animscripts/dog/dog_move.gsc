@@ -10,7 +10,6 @@
 
 main() {
   self endon("killanimscript");
-  // self endon( "movemode" );
 
   self clearanim(%root, 0.2);
   self clearanim(%german_shepherd_run_stop, 0);
@@ -36,7 +35,6 @@ main() {
     self setflaggedanimrestart("dog_walk", %german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
   }
 
-  //self thread animscripts\dog\dog_stop::lookAtTarget( "normal" );
   self thread pathChangeCheck();
 
   while(1) {
@@ -46,7 +44,6 @@ main() {
       if(self.disableArrivals == false)
         self thread stopMove();
 
-      // if a "run" notify is received while stopping, clear stop anim and go back to moveLoop
       self waittill("run");
       self clearanim(%german_shepherd_run_stop, 0.1);
     }
@@ -103,12 +100,9 @@ moveLoopStep() {
 pathChangeCheck() {
   self endon("killanimscript");
 
-  self.ignorePathChange = undefined; // this will be turned on / off in other threads at appropriate times
+  self.ignorePathChange = undefined;
 
   while(1) {
-    // no other thread should end on "path_changed"self waittill("path_changed", doingReacquire, newDir);
-
-    // no need to check for doingReacquire since faceMotion should be a good check
     if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
       continue;
     }
@@ -148,9 +142,9 @@ pathChange_doDogTurnAnim() {
 
   turnAnim = self.turnAnim;
 
-  if(gettime() > self.turnTime + 50)
-    return; // too late
-
+  if(gettime() > self.turnTime + 50) {
+    return;
+  }
   self animMode("zonly_physics", false);
   self clearanim(%root, 0.2);
 
@@ -161,14 +155,11 @@ pathChange_doDogTurnAnim() {
   self setflaggedanimrestart("turnAnim", turnAnim, 1, 0.2, self.movePlaybackRate);
   self OrientMode("face current");
 
-  // code move at 60% playTime = getanimlength(turnAnim) * self.movePlaybackRate;
   self animscripts\shared::DoNoteTracksForTime(playTime * 0.60, "turnAnim");
 
   self.ignorePathChange = undefined;
-  self OrientMode("face motion"); // want to face motion, don't do l / r / b anims
+  self OrientMode("face motion");
   self animmode("none", false);
-
-  // cut off at 85% self animscripts\shared::DoNoteTracksForTime(playTime * 0.25, "turnAnim");
 }
 
 pathChange_cleanupDogTurnAnim() {
@@ -221,13 +212,10 @@ playMoveStartAnim() {
     self OrientMode("face angle", self.angles[1] + offsetAngle);
     self animMode("zonly_physics", false);
 
-    // code move at 60% playTime = getanimlength(anim.dogStartMoveAnim[index]) * self.movePlaybackRate;
     self animscripts\shared::DoNoteTracksForTime(playTime * 0.60, "turnAnim");
 
-    self OrientMode("face motion"); // want to face motion, don't do l / r / b anims
+    self OrientMode("face motion");
     self animmode("none", false);
-
-    // cut off at 85% self animscripts\shared::DoNoteTracksForTime(playTime * 0.25, "turnAnim");
 
     self clearanim(%root, 0.2);
   }
@@ -235,7 +223,7 @@ playMoveStartAnim() {
 
 startMove() {
   if(isDefined(self.pathgoalpos)) {
-    wait 0.05; // wait for lookaheaddir to settle
+    wait 0.05;
 
     if(isDefined(self.pathgoalpos)) {
       self playMoveStartAnim();
@@ -243,7 +231,6 @@ startMove() {
     }
   }
 
-  // just use code movement
   self OrientMode("face default");
   self setanimrestart(%german_shepherd_run_start, 1, 0.2, 1);
   self setflaggedanimknobrestart("dog_prerun", %german_shepherd_run_start_knob, 1, 0.2, self.moveplaybackrate);
@@ -273,7 +260,7 @@ dogPlaySoundAndNotify(sound, notifyStr) {
 randomSoundDuringRunLoop() {
   self endon("killanimscript");
 
-  wait 0.2; // incase move script gets killed right away
+  wait 0.2;
 
   while(1) {
     if(getdebugdvar("debug_dog_sound") != "")

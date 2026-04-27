@@ -10,8 +10,6 @@
 DEFAULT_GROUP_SPACING = 50;
 DEFAULT_GOAL_RADIUS = 25;
 RIOTSHIELD_PATH_ENEMY_DIST = 400;
-
-// must be called before maps::\_load::main()
 init_riotshield() {
   if(isDefined(level.riotshield_initialized)) {
     return;
@@ -38,52 +36,22 @@ subclass_riotshield() {
   animscripts\riotshield\riotshield::init_riotshield_AI();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: riotshield_sprint_on()""Summary: Turn on sprint for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 riotshield_sprint_on() {
   animscripts\riotshield\riotshield::riotshield_sprint_on();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: riotshield_fastwalk_on()""Summary: Turn on fast walking ( while still facing a givin direction ) for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 riotshield_fastwalk_on() {
   animscripts\riotshield\riotshield::riotshield_fastwalk_on();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: riotshield_sprint_off()""Summary: Turn off sprint for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 riotshield_sprint_off() {
   animscripts\riotshield\riotshield::riotshield_sprint_off();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: riotshield_fastwalk_off()""Summary: Turn off fast walking for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 riotshield_fastwalk_off() {
   animscripts\riotshield\riotshield::riotshield_fastwalk_off();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: riotshield_flee()""Summary: Drop shield and run away to cover""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 riotshield_flee() {
   assert(self.subclass == "riotshield");
 
@@ -101,25 +69,15 @@ riotshield_flee() {
     self UseCoverNode(node);
 }
 
-//////////////////////////////////////////////////////////////////
-// riotshield group
-
-/*
-=============
-///ScriptDocBegin
-"Name: group_create( <ai_array> )""Summary: Create an AI group from an array of AI""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_create(ai_array, forward, spacing) {
   newarray = [];
   foreach(member in ai_array) {
     if(member.combatMode != "no_cover")
-      continue; //means they lost their shield or were never a riotshield guy
+      continue;
     newarray[newarray.size] = member;
   }
   group = spawnStruct();
 
-  //remove guys out of a previous group and set their group to this one
   foreach(member in newarray) {
     if(isDefined(member.group) && isDefined(member.group.ai_array))
       member.group.ai_array = array_remove(member.group.ai_array, member);
@@ -134,12 +92,6 @@ group_create(ai_array, forward, spacing) {
   return group;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_initialize_formation( <forward>, <spacing> )""Summary: Create an AI group from an array of AI""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_initialize_formation(forward, spacing) {
   assert(isDefined(self.ai_array));
 
@@ -157,7 +109,6 @@ group_initialize_formation(forward, spacing) {
   }
 
   self group_sort_by_closest_match();
-  //self thread group_resort_on_deaths();
 
   self thread check_group_facing_forward();
 }
@@ -181,12 +132,6 @@ group_resort_on_deaths() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_sort_by_closest_match( <forward> )""Summary: ""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_sort_by_closest_match(dir) {
   assert(isDefined(self.ai_array));
 
@@ -203,7 +148,6 @@ group_sort_by_closest_match(dir) {
   offset = right * self.spacing;
   pos = self group_left_corner(center, offset);
 
-  // array of projected distance to phalanx line
   dist_array = [];
   for(i = 0; i < self.ai_array.size; i++) {
     if(isDefined(self.ai_array[i]))
@@ -212,7 +156,6 @@ group_sort_by_closest_match(dir) {
       dist_array[i] = 0;
   }
 
-  // sort	
   for(i = 1; i < dist_array.size; i++) {
     curDist = dist_array[i];
     curAI = self.ai_array[i];
@@ -230,8 +173,6 @@ group_sort_by_closest_match(dir) {
     self.ai_array[j + 1] = curAI;
   }
 }
-
-// poll for now, should get group notify from code
 group_check_deaths() {
   while(1) {
     if(self.fleeThreshold > 0) {
@@ -254,12 +195,6 @@ group_left_corner(center, offset) {
   return center - ((self.ai_array.size - 1) / 2 * offset);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_move( <group_center>, <forward> )""Summary: Move an AI group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_move(group_center, dir) {
   assert(isDefined(self.ai_array));
   assert(isDefined(self.forward));
@@ -290,13 +225,10 @@ group_move(group_center, dir) {
 }
 
 MIN_AT_GOAL_RADIUS = 45;
-
-// do this in code
 check_group_at_goal() {
   self endon("new_goal_set");
 
   while(1) {
-    //self waittill( "ai_at_goal" );
     wait 0.5;
 
     alive_count = 0;
@@ -352,60 +284,30 @@ check_group_facing_forward() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_sprint_on()""Summary: Turn sprint on for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_sprint_on() {
   foreach(ai in self.ai_array)
   if(isalive(ai))
     ai riotshield_sprint_on();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_fastwalk_on()""Summary: Turn fast walk on for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_fastwalk_on() {
   foreach(ai in self.ai_array)
   if(isalive(ai))
     ai riotshield_fastwalk_on();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_sprint_off()""Summary: Turn sprint off for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_sprint_off() {
   foreach(ai in self.ai_array)
   if(isalive(ai))
     ai riotshield_sprint_off();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_fastwalk_off()""Summary: Turn fast walk off for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_fastwalk_off() {
   foreach(ai in self.ai_array)
   if(isalive(ai))
     ai riotshield_fastwalk_off();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_lock_angles( <dir> )""Summary: Lock angles for a riotshield group. This function waits for the AI to turntable small angle changes""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_lock_angles(dir) {
   self.forward = dir;
   yaw = vectorToYaw(dir);
@@ -424,12 +326,6 @@ group_lock_angles(dir) {
   wait 0.1;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_unlock_angles()""Summary: Unlock angles for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_unlock_angles() {
   foreach(ai in self.ai_array) {
     if(!isDefined(ai)) {
@@ -440,12 +336,6 @@ group_unlock_angles() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_free_combat()""Summary: Turn on free combat mode for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 group_free_combat() {
   self group_unlock_angles();
 
@@ -459,13 +349,6 @@ group_free_combat() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: group_center()""Summary: Calculate the center position of the riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 group_center() {
   center = (0, 0, 0);
   alive_count = 0;

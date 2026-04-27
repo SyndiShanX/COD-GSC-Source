@@ -16,7 +16,6 @@ main() {
   level._effect["headshot"] = LoadFX("impacts/flesh_hit_head_fatal_exit");
   level._effect["bodyshot"] = LoadFX("impacts/flesh_hit");
 
-  // ambient level fx
   level._effect["insects_carcass_runner"] = LoadFX("misc/insects_carcass_runner");
   level._effect["firelp_med_pm"] = LoadFX("fire/firelp_med_pm");
   level._effect["firelp_small_pm_a"] = LoadFX("fire/firelp_small_pm_a");
@@ -37,32 +36,25 @@ main() {
   level._effect["chimney_large"] = LoadFX("smoke/chimney_large");
   level._effect["roof_slide"] = LoadFX("misc/roof_slide");
 
-  // airliner exhaust
   level._effect["airliner_exhaust"] = LoadFX("fire/jet_engine_anatov_constant");
   level._effect["airliner_wingtip_left"] = LoadFX("misc/aircraft_light_wingtip_green");
   level._effect["airliner_wingtip_right"] = LoadFX("misc/aircraft_light_wingtip_red");
   level._effect["airliner_tail"] = LoadFX("misc/aircraft_light_white_blink");
   level._effect["airliner_belly"] = LoadFX("misc/aircraft_light_red_blink");
 
-  // fake chopper shellejects
   level._effect["hind_fake_shelleject"] = LoadFX("shellejects/20mm_cargoship");
 
-  // fake rotor wash dust
   level._effect["hind_fake_rotorwash_dust"] = LoadFX("treadfx/heli_dust_icbm");
 
-  // chopper flares
   level.flare_fx["pavelow"] = LoadFX("misc/flares_cobra");
 
-  // fake explosions for the chopper owning
   level._effect["hind_fake_explosion_1"] = LoadFX("explosions/grenadeexp_metal");
   level._effect["hind_fake_explosion_2"] = LoadFX("explosions/circuit_breaker");
   level._effect["hind_fake_explosion_3"] = LoadFX("explosions/pillar_explosion_brick_invasion");
 
-  // fx for player falling
   level._effect["playerfall_impact"] = LoadFX("impacts/bodyfall_dust_large");
   level._effect["playerfall_residual"] = LoadFX("explosions/breach_room_residual");
 
-  // fake squibs around player
   level._effect["squib_plaster"] = LoadFX("impacts/large_plaster");
 
   level._effect["flashlight"] = LoadFX("misc/gulag_cafe_spotlight");
@@ -73,7 +65,6 @@ main() {
 }
 
 setup_util_fx() {
-  // for bloody_death
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit_body_fatal_exit");
 }
 
@@ -108,30 +99,18 @@ flickerlight_fire() {
 }
 
 footstep_effects() {
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("concrete", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("asphalt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("mud", loadfx("impacts/footstep_mud"));
 
-  //Small footstep fx
   animscripts\utility::setFootstepEffectSmall("dirt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("concrete", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("asphalt", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("mud", loadfx("impacts/footstep_mud"));
 
-  //Other notetrack fx
-  /*
-  setNotetrackEffect( <notetrack>, <tag>, <surface>, <loadfx>, <sound_prefix>, <sound_suffix> )
-  	<notetrack>: name of the notetrack to do the fx/sound on
-  	<tag>: name of the tag on the AI to use when playing fx
-  	<surface>: the fx will only play when the AI is on this surface. Specify "all" to make it work for all surfaces.
-  	<loadfx>: load the fx to play here
-  	<sound_prefix>: when this notetrack hits a sound can be played. This is the prefix of the sound alias to play ( gets followed by surface type )
-  	<sound_suffix>: suffix of sound alias to play, follows the surface type. Example: prefix of "bodyfall_" and suffix of "_large" will play sound alias "bodyfall_dirt_large" when the notetrack happens on dirt.
-  */
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "dirt", loadfx("impacts/bodyfall_dust_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "concrete", loadfx("impacts/bodyfall_default_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "asphalt", loadfx("impacts/bodyfall_default_small_runner"), "bodyfall_", "_small");
@@ -172,14 +151,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("technical", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "technical", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("technical", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "technical", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("technical", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "ceramic", driving_tread_fx);
@@ -189,7 +168,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("technical", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "technical", "none", driving_tread_fx );
 
   maps\_treadfx::setvehiclefx("technical_physics", "brick", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "bark", driving_tread_fx);
@@ -204,14 +182,14 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("technical_physics", "gravel", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "ice", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "metal", undefined);
-  //maps\_treadfx::setvehiclefx( "technical_physics", "mud", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("technical_physics", "paper", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "plaster", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "rock", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "sand", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "snow", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "slush", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "technical_physics", "water", driving_tread_fx );
+
   maps\_treadfx::setvehiclefx("technical_physics", "wood", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "asphalt", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "ceramic", driving_tread_fx);
@@ -221,7 +199,6 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("technical_physics", "fruit", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("technical_physics", "default", driving_tread_fx);
-  //maps\_treadfx::setvehiclefx( "technical_physics", "none", driving_tread_fx );
 
   flying_tread_fx = "treadfx/heli_dust_large";
 

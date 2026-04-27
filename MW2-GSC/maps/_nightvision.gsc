@@ -70,16 +70,12 @@ nightVision_check(player) {
 nightVision_On() {
   assert(isPlayer(self));
 
-  // wait for the goggles to come down over the eyes
-
-  self.nightVision_Started = true; // we've started the pulldown
+  self.nightVision_Started = true;
 
   wait(1.0);
   ent_flag_set("nightvision_on");
   self.nightVision_Enabled = true;
-  //thread doShellshock();
 
-  // spawn an ent to play the dlight fx on
   if(self ent_flag("nightvision_dlight_enabled")) {
     assert(!isDefined(level.nightVision_DLight));
     level.nightVision_DLight = spawn("script_model", self getEye());
@@ -96,9 +92,9 @@ nightVision_On() {
 }
 
 enable_ir_beacon() {
-  if(!isAI(self)) // ignore drones
+  if(!isAI(self)) {
     return;
-
+  }
   if(isDefined(self.has_no_ir)) {
     assertex(self.has_no_ir, ".has_ir must be true or undefined");
     return;
@@ -132,23 +128,17 @@ nightVision_Off() {
   assert(isPlayer(self));
   self.nightVision_Started = undefined;
 
-  // wait until the goggles pull off
   wait(0.4);
-  // delete the DLight fx
 
   level notify("night_vision_off");
   if(isDefined(level.nightVision_DLight))
     level.nightVision_DLight delete();
-
-  //	self stopshellshock();
 
   self notify("nightvision_shellshock_off");
 
   ent_flag_clear("nightvision_on");
   self.nightVision_Enabled = undefined;
 
-  //if any of the players are still in nightvision then we don't want to remove
-  //this spawn function yet. Only when all players are not in nightvision
   someoneUsingNightvision = false;
   for(i = 0; i < level.players.size; i++) {
     if(nightvision_Check(level.players[i]))
@@ -168,19 +158,6 @@ nightVision_EffectsOff() {
     guy stop_reflector_effect();
   }
 }
-
-/*
-doShellshock()
-{
-	self endon( "nightvision_shellshock_off" );
-	for(;;)
-	{
-		duration = 60;
-		self shellshock( "nightvision", duration );
-		wait duration;
-	}
-}
-*/
 
 ShouldBreakNVGHintPrint() {
   assert(isPlayer(self));

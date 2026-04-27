@@ -74,7 +74,6 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
     bestSpawnPoint = undefined;
 
     foreach(spawnPoint in remoteMissileSpawnPoints) {
-      //could add a filtering component here but i dont know what it would be.
       spawnPoint.validPlayers[spawnPoint.validPlayers.size] = player;
 
       potentialBestDistance = Distance2D(spawnPoint.targetent.origin, player.origin);
@@ -99,8 +98,7 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
 
       if(spawnPoint.spawnScore > bestSpawn.spawnScore) {
         bestSpawn = spawnPoint;
-      } else if(spawnPoint.spawnScore == bestSpawn.spawnScore) // equal spawn weights so we toss a coin.
-      {
+      } else if(spawnPoint.spawnScore == bestSpawn.spawnScore) {
         if(coinToss())
           bestSpawn = spawnPoint;
       }
@@ -119,7 +117,6 @@ drawLine(start, end, timeSlice, color) {
 }
 _fire(lifeId, player) {
   remoteMissileSpawnArray = getEntArray("remoteMissileSpawn", "targetname");
-  //assertEX( remoteMissileSpawnArray.size > 0 && getMapCustom( "map" ) != "", "No remote missile spawn points found.Contact friendly neighborhood designer" );
 
   foreach(spawn in remoteMissileSpawnArray) {
     if(isDefined(spawn.target))
@@ -135,12 +132,8 @@ _fire(lifeId, player) {
     startPos = remoteMissileSpawn.origin;
     targetPos = remoteMissileSpawn.targetEnt.origin;
 
-    //thread drawLine( startPos, targetPos, 30, (0,1,0) );
-
     vector = vectorNormalize(startPos - targetPos);
     startPos = vector_multiply(vector, 14000) + targetPos;
-
-    //thread drawLine( startPos, targetPos, 15, (1,0,0) );
 
     rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
   } else {
@@ -213,7 +206,6 @@ handleDamage() {
 }
 
 MissileEyes(player, rocket) {
-  //level endon ( "game_ended" );
   player endon("joined_team");
   player endon("joined_spectators");
 
@@ -236,15 +228,12 @@ MissileEyes(player, rocket) {
 
     rocket waittill("death");
 
-    // is defined check required because remote missile doesnt handle lifetime explosion gracefully
-    // instantly deletes its self after an explode and death notify
     if(isDefined(rocket))
       player maps\mp\_matchdata::logKillstreakEvent("predator_missile", rocket.origin);
 
     player ControlsUnlink();
     player freezeControlsWrapper(true);
 
-    // If a player gets the final kill with a hellfire, level.gameEnded will already be true at this point
     if(!level.gameEnded || isDefined(player.finalKill))
       player thread staticEffect(0.5);
 

@@ -6,10 +6,9 @@
 #include maps\_ambient;
 
 main() {
-  // Set the underlying ambient track
   level.ambient_track["exterior_level2"] = "ambient_trainer_ext2";
 
-  ambientDelay("exterior_level2", 2.0, 8.0); // Trackname, min and max delay between ambient events
+  ambientDelay("exterior_level2", 2.0, 8.0);
   ambientEvent("exterior_level2", "elm_windgust1", 3.0);
   ambientEvent("exterior_level2", "elm_windgust2", 3.0);
   ambientEvent("exterior_level2", "elm_windgust3", 3.0);

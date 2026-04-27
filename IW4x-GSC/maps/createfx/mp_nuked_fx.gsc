@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 137
   ent = createLoopEffect("fx_mp_nuked_glint");
   ent.v["origin"] = (1089.39, 140.735, -15.7909);
   ent.v["angles"] = (270, 0, 0);

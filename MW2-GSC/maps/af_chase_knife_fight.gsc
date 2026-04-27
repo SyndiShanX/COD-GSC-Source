@@ -31,11 +31,10 @@ add_knife_fight_starts() {
 }
 
 init_ending() {
-  // ^3[{+usereload}]^7
   add_hint_string("knife", &"AF_CHASE_PRESS_USE", ::stop_pressing_use);
-  // ^3[{+attack}]^7
+
   add_hint_string("hint_crawl_right", &"AF_CHASE_HINT_CRAWL_RIGHT", ::hint_crawl_right);
-  // ^3[{+speed_throw}]^7
+
   add_hint_string("hint_crawl_left", &"AF_CHASE_HINT_CRAWL_LEFT", ::hint_crawl_left);
 
   add_hint_string("hint_melee", &"AF_CHASE_HINT_MELEE_EMPTY", ::stop_melee_hint);
@@ -100,7 +99,7 @@ init_main_and_ending_common_stuff() {
 
   maps\createart\af_chase_fog::main();
 
-  waittillframeend; // after _load	
+  waittillframeend;
   if(isDefined(level.stop_load) && level.stop_load) {
     return;
   }
@@ -110,7 +109,6 @@ init_main_and_ending_common_stuff() {
 empty() {}
 
 Ending_common() {
-  //	thread end_credits();
   battlechatter_off("axis");
   battlechatter_off("allies");
   set_ambient("af_chase_ext");
@@ -140,7 +138,7 @@ Ending_common() {
   delaythread(0.05, ::slowmo_sound_adjustment);
 
   thread maps\_aftermath_player::aftermath_style_walking();
-  cast_structs_to_origins(); // easier than rotating a bunch of WIP locations
+  cast_structs_to_origins();
 
   SetSavedDvar("g_friendlyNameDist", 0);
   SetSavedDvar("sm_sunSampleSizeNear", .25);
@@ -152,7 +150,6 @@ Ending_common() {
   level.sandstorm_time.max = 0.8;
 
   fog_set_changes("afch_fog_dunes_far", 0);
-  //vision_set_changes( "af_chase_outdoors_2", 0 );
 
   remove_extra_autosave_check("boat_check_trailing");
   remove_extra_autosave_check("boat_check_player_speeding_along");
@@ -162,12 +159,10 @@ Ending_common() {
   SetSavedDvar("cg_fov", 65);
   SetSavedDvar("ammoCounterHide", 1);
   SetSavedDvar("compass", 0);
-  SetSavedDvar("compassHideSansObjectivePointer", 1); // for later when we update the objective.
+  SetSavedDvar("compassHideSansObjectivePointer", 1);
   SetSavedDvar("actionSlotsHide", 1);
   level.player AllowSprint(false);
-  //level.player AllowJump( false );
 
-  //	thread maps\af_chase_fx::sand_storm_effect();
   thread maps\af_chase_fx::sandstorm_fog_management();
 
   thread maps\af_chase_fx::sand_storm_rolls_in();
@@ -182,23 +177,15 @@ wakeup_after_crash() {
 
   flag_wait("fell_off_waterfall");
 
-  //set_vision_set( "aftermath", 0 );
-
   shellshock_very_long("af_chase_ending_wakeup");
 
-  //	ai = GetAIArray();
-  //	array_call( ai, ::Delete );
-
-  // setup crash site seqeunces
   thread shepherd_stumbles_out_of_helicopter();
-  //thread modulate_player_movement();
 
   thread more_dust_as_shepherd_nears();
   thread impaled_guy();
 
   ending_common();
 
-  // no sound
   level.eq_ent.origin = (1, 0, 0);
   level.player SetEqLerp(0, level.eq_main_track);
 
@@ -209,9 +196,9 @@ wakeup_after_crash() {
   SetBlur(0, 8);
 
   scene = "wakeup";
-  // player wakes up
+
   anim_node = get_anim_node();
-  //player_wakeup_struct = getstruct( "end_scene_org_wakeup", "targetname" );
+
   player_rig = spawn_anim_model("player_rig");
 
   anim_node anim_first_frame_solo(player_rig, scene);
@@ -229,7 +216,6 @@ wakeup_after_crash() {
   damaged_pavelow thread play_sound_on_entity("scn_afchase_heli_cookoff");
 
   if(do_wakeup_anim) {
-    //level.g = gettime();
     level.player delaythread(5, ::play_sound_on_entity, "scn_afchase_wakeup_player");
     level.player delaythread(12.5, ::play_sound_on_entity, "scn_afchase_wakeup_player_cough");
 
@@ -250,8 +236,6 @@ wakeup_after_crash() {
   level delaythread(5, ::send_notify, "stop_random_breathing_sounds");
 
   player_rig Delete();
-
-  //	shellshock_very_long( "af_chase_ending_wakeup" );
 
   flag_set("player_standing");
   flag_set("start_doing_aftermath_walk");
@@ -282,15 +266,9 @@ fight_turnbuckle() {
   player_rig = get_player_rig();
   player_rig Hide();
 
-  //	convert_shepherd_to_drone();
-
   anim_node anim_first_frame_solo(player_rig, "turn_buckle");
 
   thread fight_turnbuckle_idle_handle();
-
-  //	level.shepherd play_sound_on_tag( "afchase_shp_goodwarrior", "J_Jaw" );
-  //	level.shepherd play_sound_on_tag( "afchase_shp_extrastep", "J_Jaw" );
-  //	level.shepherd play_sound_on_tag( "afchase_shp_necessary", "J_Jaw" );
 
   give_knife_fight_weapon();
 
@@ -304,13 +282,13 @@ fight_turnbuckle() {
   level notify("kill_limp");
   SetSavedDvar("compass", 0);
 
-  level notify("do_staged_pain_pulse"); // stop any more of these
+  level notify("do_staged_pain_pulse");
   level notify("kill_limp");
   flag_set("stop_aftermath_player");
-  fade_in(1); // in case we were fading out
+  fade_in(1);
 
   if(isDefined(level.shepherd.function_stack))
-    level.shepherd function_stack_clear(); // stop the dialogue
+    level.shepherd function_stack_clear();
 
   level.shepherd StopSounds();
 
@@ -338,44 +316,16 @@ fight_turnbuckle() {
 
   delayThread(7.35, ::flag_set, "turn_buckle_fadeout");
 
-  //FRAME 1055 "attach_knife" ( 0 seconds )				
-  //FRAME 1067 "switch_model" ( 0.4 seconds )			
-  //FRAME 1072 "rumble" ( 0.566 seconds )			
-  //FRAME 1121 "rumble" ( 2.2 seconds )			
-  //FRAME 1122 "vision_effect"( 2.233 seconds )			
-  //FRAME 1158 "bodyfall large" ( 3.433 seconds )			
-  //FRAME 1159 "rumble" ( 3.466 seconds )			
-  //FRAME 1247 "rumble" ( 6.4 seconds )			
-  //FRAME 1352 "fadeout"( 9.9 seconds )			
-
-  // Knife
-  //NUMFRAMES 348 ( Time: 11.6 Seconds ) 			
-  //////NOTETRACKS////	
-  //FRAME 1244 "blood" ( 6.3 seconds )
-
-  //alias: scn_afchase_tbuckle_start_front
-  //- Starts from the first frame of the animation sequence
   player_rig thread play_sound_on_entity("scn_afchase_tbuckle_start_front");
 
-  //alias: scn_afchase_tbuckle_pullknife_mono
-  //- This is shepherd grabbing and pulling out the knife.Play on the grab
   knife delayThread(4.31, ::play_sound_on_entity, "scn_afchase_tbuckle_pullknife_mono");
 
-  //alias: scn_afchase_tbuckle_car_front
-  //- This should play just a hair before player's head hits the car
   level.player delayThread(2.11, ::play_sound_on_entity, "scn_afchase_tbuckle_car_front");
 
-  //alias: scn_afchase_tbuckle_bodyfall_front
-  //- This is the players bodyfall, play as you are falling back.
   level.player delayThread(3.31 - 0.5, ::play_sound_on_entity, "scn_afchase_tbuckle_bodyfall_front");
 
-  //alias: scn_afchase_tbuckle_stab_front
-  //- This is the stab, it should play a frame or two before it starts to enter
-  //players chest
   level.player delayThread(6.1, ::knife_in_player);
 
-  //alias: scn_afchase_tbuckle_standup_mono
-  //- This should play on shepherd and starts as he begins to release the knife. So
   level.shepherd delayThread(9.9, ::play_sound_on_entity, "scn_afchase_tbuckle_standup_mono");
 
   anim_scene = "turn_buckle";
@@ -388,7 +338,7 @@ fight_turnbuckle() {
 
   flag_wait("turn_buckle_fadeout");
   wait fade_out_time;
-  wait .5; // half second in black
+  wait .5;
   level.shepherd detach(level.scr_model["knife"], "tag_inhand");
   knife show();
 }
@@ -404,12 +354,10 @@ bloody_player_rig(player_rig) {
 
 shepherd_gloats() {
   level notify("not_random_blur");
-  //	vision_set_changes( "af_chase_outdoors_2", 0 );
+
   vision_set_changes("af_chase_ending_noshock", 0);
   thread maps\_aftermath_player::player_heartbeat();
   level.player stopshellshock();
-
-  //shellshock_very_long( "af_chase_ending_no_control_lowkick" );
 
   anim_node = get_anim_node();
   player_rig = get_player_rig();
@@ -442,17 +390,12 @@ shepherd_gloats() {
   delay_fadein -= start_time_offset;
   thread scene_gun_monologue_dialogue(start_time_offset);
   flag_wait("gloat_fade_in");
-  //wait delay_fadein;
+
   fade_in(3.5);
   anim_node anim_first_frame_solo(level.price, "gun_drop");
 
-  //	gun_model delaythread( 7.450, ::play_sound_on_tag, "anaconda_revolver_flick", "tag_flash" );
-  //	gun_model delaythread( 10.00, ::play_sound_on_tag, "anaconda_click", "tag_flash" );
-
   level.shepherd thread play_sound_on_entity("scn_afchase_shepherd_gloat_stereo");
 
-  // we know
-  //level.price delaythread( 12.5, ::play_sound_on_entity, "afchase_pri_weknow" );
   level.player delaythread(13.45, maps\_gameskill::grenade_dirt_on_screen, "right");
   delaythread(14.7, ::fight_music);
   anim_node anim_single(guys, "gun_monologue");
@@ -463,13 +406,11 @@ fight_music() {
 }
 
 start_gun_drop() {
-  set_vision_set("af_chase_ending_noshock", 0); // still getting player flying lerping or something through some vision set triggers. harmless I think.
+  set_vision_set("af_chase_ending_noshock", 0);
   link_player_to_arms();
 }
 
 gun_drop() {
-  //	thread gun_drop_slowmo();
-
   anim_node = get_anim_node();
   anim_node_ent = spawn("script_origin", anim_node.origin);
   anim_node_ent.angles = anim_node.angles;
@@ -531,7 +472,7 @@ start_gun_crawl() {
 gun_crawl() {
   SaveGame("crawl", &"AUTOSAVE_LEVELSTART", "shot", true);
   beat_up_prices_head();
-  //	SetSavedDvar( "cg_fov", 40 );
+
   level.fov_ent.origin = (40, 0, 0);
   set_vision_set("af_chase_ending_noshock", 3);
 
@@ -541,8 +482,6 @@ gun_crawl() {
 
   guys = [];
   guys["player_rig"] = player_rig;
-
-  //	level.player ShellShock( "af_chase_ending_wakeup", 60 );
 
   button_alt = [];
   button_alt[0] = ::hint_crawl_right;
@@ -555,8 +494,6 @@ gun_crawl() {
   button_track = spawnStruct();
   thread track_buttons(button_track, button_alt, button_hints);
   thread gun_crawl_fight_idle();
-
-  //	anim_node anim_first_frame( guys , "gun_crawl_01");
 
   if(!is_default_start())
     thread blend_player_to_crawl();
@@ -623,8 +560,6 @@ gun_kick() {
   dof_target_ent = get_dof_targetEnt();
   dof_target_ent movetotag(level.shepherd, "J_Ankle_RI", 1);
 
-  //	dof_target_ent LinkTo( level.shepherd, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
-
   scene = "gun_kick";
   animation = player_rig getanim(scene);
   anim_length = GetAnimLength(animation);
@@ -634,10 +569,6 @@ gun_kick() {
   anim_node thread anim_single_solo(player_rig, scene);
 
   blend_in_time = .7;
-  //	new_anim_node thread anim_single_solo( level.shepherd, "gun_kick" );
-  //	level.shepherd LinkTo( new_anim_node );
-  //	wait blend_in_time;
-  //	new_anim_node MoveTo( anim_node.origin, blend_in_time, 0, 0 );
 
   wait anim_length - blend_in_time;
   wait 2;
@@ -649,7 +580,6 @@ start_wounded_show() {
 }
 
 wounded_show() {
-  //run_thread_on_targetname( "shep_blood", ::gen_rocks );
   level.price thread scoot_rocks();
   level.shepherd thread scoot_rocks();
 
@@ -659,10 +589,7 @@ wounded_show() {
 
   sandstorm_wounded_settings();
 
-  //set_vision_set( "aftermath", 0 );
-  //thread maps\_aftermath_player::player_heartbeat();
-
-  level notify("stop_idle_crawl_fight"); // kill this if its running
+  level notify("stop_idle_crawl_fight");
 
   fight_b_animnode = GetEnt("end_scene_org_fight_B", "targetname");
   fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
@@ -674,17 +601,12 @@ wounded_show() {
   anim_node thread anim_first_frame_solo(player_body, scene);
 
   player_rig = get_player_rig();
-  player_rig Delete(); // start over on the player rig
+  player_rig Delete();
   player_rig = get_player_rig();
 
   knife = get_knife();
 
   thread wounded_show_player_view(player_rig);
-
-  //	slowmo_start();
-  //	slowmo_setspeed_slow( 0.70 );
-  //	slowmo_setlerptime_in( 0 );
-  //	slowmo_lerp_in();
 
   guys = [];
   guys["knife"] = knife;
@@ -701,43 +623,6 @@ wounded_show() {
   dof_target_ent LinkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
 
   level.player ShellShock("af_chase_ending_no_control_lowkick", 6000);
-  //wait( 0.3 );
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  /*
-
-  	scene = "fight_C2";
-  	wrestle_c_animnode thread anim_single( fighters, scene );
-  	wait( 0.05 );
-  	foreach ( guy in fighters )
-  	{
-  		animation = guy getanim( scene );
-  		guy SetAnimTime( animation, 0.67 );
-  	}
-
-  	fade_in( 2.5 );
-  	animation = level.price getanim( scene );
-  	scene_time = GetAnimLength( animation );
-  	// blah
-
-  	for( ;; )
-  	{
-  		if( level.price GetAnimTime( animation ) >= 0.89 )
-  			break;
-
-  		wait( 0.05 );
-  	}
-
-  //	wait 37.7 * 0.22;
-
-  	fade_out_time = scene_time * 0.11;
-  	fade_out( fade_out_time );
-  	wait( fade_out_time );
-  	level.player ShellShock( "af_chase_ending_no_control", 60 );
-
-  	wait( 1.5 );
-  */
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   scene = "fight_B";
   animation = level.price getanim(scene);
@@ -747,9 +632,7 @@ wounded_show() {
   fight_b_animnode thread anim_single(fighters, scene);
   wait 1.0;
 
-  //wait( 1.0 );
   fade_in(2.5);
-  // blah
 
   for(;;) {
     if(level.price GetAnimTime(animation) >= 0.39) {
@@ -763,10 +646,7 @@ wounded_show() {
   fade_out(fade_out_time);
   wait(fade_out_time);
 
-  //level.player ShellShock( "af_chase_ending_no_control", 6000 );
   wait(1.05);
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   scene = "fight_B2";
   animation = level.price getanim(scene);
@@ -777,51 +657,22 @@ wounded_show() {
   start_time = gettime();
 
   wait 0.45;
-  //	wait( 0.05 );
-  //
-  //	foreach ( guy in fighters )
-  //	{
-  //		animation = guy getanim( scene );
-  //		guy SetAnimTime( animation, 0.60 );
-  //	}
-  //
+
   fade_in(1);
 
   for(;;) {
-    if(level.price GetAnimTime(animation) >= 0.50) //0.7
+    if(level.price GetAnimTime(animation) >= 0.50) {
       break;
+    }
 
     wait(0.05);
   }
 
-  //	wait 19.23 * 0.1;
-  //	wait 19.23 * 0.1;
-
   fade_out_time = scene_time * 0.10;
-
-  //wait_for_buffer_time_to_pass( start_time , scene_time - fade_out_time );
 
   fade_out(fade_out_time);
   wait(fade_out_time);
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  /*
-  fade_time = 8.0;
-  wait( 15.5 - fade_time );
-
-  slowmo_start();
-  slowmo_setspeed_slow( 0.22 );
-  slowmo_setlerptime_in( fade_time );
-  slowmo_lerp_in();
-  */
-
-  //fade_out( fade_time );
-  //wait( fade_time );
-
-  //	slowmo_setlerptime_out( 0 );
-  //	slowmo_lerp_out();
-  //	slowmo_end();
   wait(1.5);
 }
 
@@ -833,7 +684,7 @@ knife_pullout() {
   flag_set("player_heartbeat_sound");
   SaveGame("pullout", &"AUTOSAVE_LEVELSTART", "shot", true);
 
-  thread spawn_fake_wrestlers(); // so we can jump to the midpoint of an anim more smoothly
+  thread spawn_fake_wrestlers();
 
   fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
   anim_node = get_anim_node_rotated();
@@ -853,24 +704,15 @@ knife_pullout() {
 
   anim_node thread anim_first_frame_solo(player_body, "price_wakeup");
   anim_node anim_first_frame(guys, "knifepull_grab_02");
-  // playerlinktoblend
+
   wait(0.5);
 
-  //	anim_node anim_first_frame( guys, "knifepull_grab_01" );
-  //	thread player_links_to_rig_and_looks_left( player_rig, 5 );
-
-  //	slowmo_start();
-  //	slowmo_setspeed_slow( 0.7 );
-  //	slowmo_setlerptime_in( 0 );
-  //	slowmo_lerp_in();	
   level.player ShellShock("af_chase_ending_pulling_knife_later", 6000);
 
   level notify("player_has_min_arc");
 
   dof_target_ent = get_dof_targetEnt();
   dof_target_ent LinkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   scene = "fight_C";
   animation = level.price getanim(scene);
@@ -879,8 +721,6 @@ knife_pullout() {
   fight_c_animnode thread anim_single(fighters, scene);
 
   thread hide_end_of_fight_C();
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   delaythread(0.3, ::fade_in, 1);
   wait(1.5);
@@ -900,7 +740,6 @@ knife_pullout() {
   flag_set("focused_on_knife");
   flag_set("player_uses_knife");
 
-  //blend_to_knife_dof( 1 );
   level notify("lerp_view_after_uses_knife");
 
   anim_node anim_single(guys, "knifepull_grab_02");
@@ -913,14 +752,12 @@ knife_pullout() {
   level.additive_pull_weight = 0;
   thread hands_do_pull_additive(player_rig);
 
-  // player pulls it out
   knife_struct = spawnStruct();
   knife_struct.faded_out = false;
   knife_struct.pull_scale = 6;
   knife_struct.takes_pain = true;
   knife_struct.sin_scale = 0.75;
-  //	knife_struct.min_rate = 0.05; // 0.09;
-  //	knife_struct.max_rate = 0.09; // 0.14;
+
   knife_struct.rate = 0.065;
   knife_struct.range = 0.03;
   knife_struct.occumulator_base = 4;
@@ -931,7 +768,6 @@ knife_pullout() {
   knife_struct.min_heavy = 90;
   knife_struct.rumble_loop = "light_3s";
   knife_struct player_pulls_out_knife("knifepull_pull_02");
-  //	fade_out_knife_hint( 0.5 );
 
   level.additive_pull_weight = 1;
 
@@ -944,7 +780,6 @@ knife_pullout() {
   anim_node anim_first_frame(guys, "knifepull_pull_03");
   flag_set("two_hand_pull_begins");
 
-  // player pulls it out
   knife_struct = spawnStruct();
   knife_struct.faded_out = false;
   knife_struct.pull_scale = 6;
@@ -964,15 +799,6 @@ knife_pullout() {
 
   level notify("fight_C_is_over");
 
-  //	level.player ShellShock( "af_chase_ending_pulling_knife_later", 3 );
-  //	vision_set_changes( "af_chase_outdoors_2", 3 );
-
-  //	slowmo_start();
-  //	slowmo_setspeed_slow( 0.85 );
-  //	slowmo_setlerptime_in( 0 );
-  //	slowmo_lerp_in();	
-
-  // appear while head looks right
   level.shepherd delayCall(3, ::Show);
   level.price delayCall(3, ::Show);
 }
@@ -1053,14 +879,12 @@ knife_kill() {
   anim_node anim_single(guys, "knifepull_throw");
   blend_to_kill_dof(0.15);
 
-  //guys[ "shepherd" ] = level.shepherd;
-  //guys[ "price" ] = level.price;
   anim_node notify("stop_loop");
 
   anim_node thread anim_single(fighters, "knifepull_throw_kill");
   flag_set("shepherd_killed");
 
-  level.shepherd StopSounds(); // in case of punches
+  level.shepherd StopSounds();
   level.price StopSounds();
 
   anim_node anim_single(guys, "knifepull_throw_kill");
@@ -1073,7 +897,7 @@ knife_kill() {
 start_price_wakeup() {
   thread blend_to_ending_dof(0.1);
 
-  waittillframeend; // after catchup thread.
+  waittillframeend;
   waittillframeend;
 
   maps\af_chase_anim::player_pulls_knife_from_chest(0);
@@ -1097,20 +921,10 @@ price_wakeup() {
   level.fov_ent moveto((65, 0, 0), fovtime, fovtime * 0.5, fovtime * 0.5);
 
   set_vision_set("aftermath_nodesat", 0);
-  //set_vision_set( "af_chase_ending_final", fovtime );
 
   guys = [];
   guys["shepherd"] = level.shepherd;
   guys["price"] = level.price;
-  //guys[ "player" ] = player_rig;
-
-  //	dof_target_ent = get_dof_targetEnt();
-  //	dof_target_ent movetotag( player_rig, "J_Wrist_LE", 2);
-
-  //anim_node2 = spawnStruct();
-  //dif = ( 25887.2, 35597, -9959.6 ) - ( 25865.2, 35546, -9959.6 );
-  //anim_node2.origin = anim_node.origin - dif;
-  //anim_node2.angles = anim_node.angles;
 
   if(level.start_point == "price_wakeup") {
     anim_node thread anim_first_frame_solo(player_body, "price_wakeup");
@@ -1118,29 +932,16 @@ price_wakeup() {
     anim_node anim_first_frame(guys, "price_wakeup");
   }
 
-  //	if( level.start_point == "price_wakeup" )
-  //		wait( 3 );
-
   start_time = gettime();
-  //	AmbientStop( time );
 
   wait_for_buffer_time_to_pass(start_time, 4);
 
-  // stop ambient event system
-  //AmbientStop( 5 );
-
-  //	delaythread( 3, ::ending_fade_out ); // 8, ::fade_out 27
-
   level.override_eq = true;
   time = 30;
-  //level.eq_ent MoveTo( (0.66,0,0), time, time * 0.5, time * 0.5 );
 
   wait_for_buffer_time_to_pass(start_time, 13.5);
 
   fade_out(19.5);
-
-  //	wait_for_buffer_time_to_pass( start_time, 25 );
-  //	fade_in( 4 );
 
   wait_for_buffer_time_to_pass(start_time, 24);
 
@@ -1156,20 +957,17 @@ price_wakeup() {
   anim_length = GetAnimLength(animation);
   waittime = anim_length * 0.75;
   delayThread(waittime, ::fade_out, 1);
-  //	delaythread( 14.1, maps\af_chase_anim::blend_to_ending_dof_fov );
 
   endMusicTiming = 2.7;
   delaythread(endMusicTiming, ::flag_set, "af_chase_final_ending");
-  delaythread(endMusicTiming + 55.70, ::end_credits); //timed to come in on the big swelling boom
-  delaythread(endMusicTiming + 195, ::flag_set, "af_chase_ending_credits"); //timed to come in after the af_chase_final_ending music is done	
+  delaythread(endMusicTiming + 55.70, ::end_credits);
+  delaythread(endMusicTiming + 195, ::flag_set, "af_chase_ending_credits");
 
   delaythread(endMusicTiming + 0.25, ::fade_in, 1);
   level.eq_ent delaycall(endMusicTiming - 1, ::moveto, (0.55, 0, 0), 3);
-  //level.eq_ent MoveTo( (0.66,0,0), time, time * 0.5, time * 0.5 );
 
   anim_node thread anim_single(guys, scene);
   wait(anim_length * 0.85);
-  //wait 0.5;
 }
 
 start_walkoff() {}
@@ -1187,7 +985,7 @@ walkoff() {
 
   player_body = get_player_body();
 
-  arc = 0; // 10;
+  arc = 0;
   level.player PlayerLinkToDelta(player_rig, "tag_player", 1, arc, arc, arc, arc, true);
   delaythread(0.8, ::expand_player_view);
 
@@ -1209,18 +1007,12 @@ walkoff() {
   spawn_nikolai();
 
   thread black_out_on_walk();
-  //	dof_target_ent = get_dof_targetEnt();
 
   level.nikolai animscripts\shared::DropAllAIWeapons();
 
-  //	if( isDefined( level.shepherd ) )
-  //		level.shepherd Delete();
-
   thread blend_to_price_healing_dof(3);
-  //level.player ShellShock( "af_chase_ending_pulling_knife_later", 60 );
-  //set_vision_set( "aftermath_walking", 0 );
+
   set_vision_set("aftermath_nodesat", 0);
-  //set_vision_set( "af_chase_ending_final", 0 );
 
   thread maps\af_chase_anim::blend_to_ending_dof_fov(0.1);
 
@@ -1231,13 +1023,10 @@ walkoff() {
   ending_rescue_chopper.animname = "littlebird";
   ending_rescue_chopper notify("suspend_drive_anims");
   ending_rescue_chopper thread helicopter_sound_blend();
-  //	thread end_blind( ending_rescue_chopper );
 
   guys["nikolai"] = level.nikolai;
   guys["price"] = level.price;
   guys["player_rig"] = player_rig;
-
-  //	dof_target_ent LinkTo( level.price, "tag_eye", ( 0, 0, 0 ), ( 0, 0, 0 ) );
 
   thread scene_walk_off_dialog();
   anim_node = get_anim_node();
@@ -1271,7 +1060,7 @@ end_credits() {
 
   level.eq_ent MoveTo((1.0, 0, 0), fade_out_time, fade_out_time * 0.5, fade_out_time * 0.5);
 
-  delaythread(4, ::nextmission); // next mission will wait for the flag "af_chase_nextmission" on af_chase before continuing.
+  delaythread(4, ::nextmission);
 
   flag_set("do_museum_credits");
 
@@ -1283,17 +1072,16 @@ end_credits() {
 }
 
 knife_fight_objectives() {
-  // Kill Shepherd.
   Objective_Add(obj("get_shepherd"), "current", &"AF_CHASE_KILL_SHEPHERD");
 
   flag_wait("shepherd_killed");
   wait(3.1);
-  //	objective_complete( obj( "get_shepherd" ) );
+
   Objective_Delete(obj("get_shepherd"));
 }
 
 startpoint_catchup() {
-  waittillframeend; // let the actual start functions run before this one
+  waittillframeend;
   start = level.start_point;
 
   flag_set("end_heli_crashed");

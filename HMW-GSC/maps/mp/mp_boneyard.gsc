@@ -47,5 +47,5 @@ main() {
   setDvar("r_veilBackgroundStrength", 1.023);
 
   if(level.ps3)
-    setDvar("sm_sunShadowScale", "0.7"); // ps3 optimization
+    setDvar("sm_sunShadowScale", "0.7");
 }

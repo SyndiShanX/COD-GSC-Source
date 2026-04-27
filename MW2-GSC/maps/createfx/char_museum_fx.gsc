@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 5
   ent = createOneshotEffect("tank_bubbles_character_room");
   ent.v["origin"] = (-578.317, -1401.69, -265.625);
   ent.v["angles"] = (1.82732, 65.9866, -90.8132);

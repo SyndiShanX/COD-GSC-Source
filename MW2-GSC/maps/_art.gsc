@@ -3,8 +3,6 @@
  * Script: maps\_art.gsc
 ********************************************************/
 
-// This function should take care of grain and glow settings for each map, plus anything else that artists
-// need to be able to tweak without bothering level designers.
 #include maps\_utility;
 #include common_scripts\utility;
 #include common_scripts\_artCommon;
@@ -55,11 +53,9 @@ tweakart() {
   if(!isDefined(level.tweakfile))
     level.tweakfile = false;
 
-  // not in DEVGUI
   setDvar("scr_fog_fraction", "1.0");
   setDvar("scr_art_dump", "0");
 
-  // update the devgui variables to current settings
   setDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
   setDvar("scr_dof_nearEnd", level.dofDefault["nearEnd"]);
   setDvar("scr_dof_farStart", level.dofDefault["farStart"]);
@@ -67,23 +63,20 @@ tweakart() {
   setDvar("scr_dof_nearBlur", level.dofDefault["nearBlur"]);
   setDvar("scr_dof_farBlur", level.dofDefault["farBlur"]);
 
-  // not in DEVGUI
   level.fogfraction = 1.0;
 
   file = undefined;
   filename = undefined;
 
-  // set dofvars from < levelname > _art.gsc
   dofvarupdate();
 
   printed = false;
 
   for(;;) {
     while(GetDvarInt("scr_art_tweak") == 0) {
-      //	AssertEx( getDvar( "scr_art_dump" ) == "0", "Must Enable Art Tweaks to export _art file." );
       wait .05;
       if(!GetDvarInt("scr_art_tweak") == 0)
-        common_scripts\_artCommon::setfogsliders(); // sets the sliders to whatever the current fog value is
+        common_scripts\_artCommon::setfogsliders();
     }
 
     if(!printed) {
@@ -91,15 +84,13 @@ tweakart() {
       IPrintLnBold("ART TWEAK ENABLED");
     }
 
-    //translate the slider values to script variables
     common_scripts\_artCommon::translateFogSlidersToScript();
 
     dofvarupdate();
 
-    // catch all those cases where a slider can be pushed to a place of conflict
     fovslidercheck();
 
-    dump = dumpsettings(); // dumps and returns true if the dump dvar is set
+    dump = dumpsettings();
 
     common_scripts\_artCommon::updateFogFromScript();
 
@@ -116,7 +107,6 @@ tweakart() {
 }
 
 fovslidercheck() {
-  // catch all those cases where a slider can be pushed to a place of conflict
   if(level.dofDefault["nearStart"] >= level.dofDefault["nearEnd"]) {
     level.dofDefault["nearStart"] = level.dofDefault["nearEnd"] - 1;
     setDvar("scr_dof_nearStart", level.dofDefault["nearStart"]);
@@ -149,8 +139,6 @@ dumpsettings() {
 
   filename = "createart/" + getDvar("scr_art_visionfile") + "_art.gsc";
 
-  //////////////////
-
   file = 1;
 
   fileprint_launcher_start_file();
@@ -171,14 +159,11 @@ dumpsettings() {
 
   if(!artEndFogFileExport())
     return false;
-  //////////////////////////////
 
   visionFilename = "vision/" + getDvar("scr_art_visionfile") + ".vision";
-  //	file = OpenFile( visionFilename, "write" );
 
   file = 1;
 
-  //	AssertEx( ( file != -1 ), "File not writeable( may need checked out of P4 ): " + filename );
   artStartVisionFileExport();
 
   fileprint_launcher("r_glow\"" + getDvar("r_glowTweakEnable") + "\"");
@@ -232,7 +217,6 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
     else
       next_target = sunlight - scale(30) + jitter;
 
-    // IPrintLn( "jitter = ", jitter );
     if(next_target >= level.sunlight_bright) {
       next_target = level.sunlight_bright;
       direction = "down";
@@ -251,56 +235,40 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
 }
 
 brighten(target_sunlight, time, freq) {
-  // IPrintLn( "Brightening sunlight to ", target_sunlight );
   sunlight = GetDvarFloat("r_lighttweaksunlight");
-  // diffuse = GetDvarFloat( "r_lighttweakdiffusefraction" );
-  // IPrintLn( "sunlight = ", sunlight );
-  // IPrintLn( "diffuse = ", diffuse );
 
   totalchange = target_sunlight - sunlight;
   changeamount = totalchange / (time / freq);
-  // IPrintLn( "totalchange = ", totalchange );
-  // IPrintLn( "changeamount = ", changeamount );
 
   while(time > 0) {
     time = time - freq;
 
     sunlight = sunlight + changeamount;
     setDvar("r_lighttweaksunlight", sunlight);
-    // IPrintLn( "^6sunlight = ", sunlight );
 
     frac = (sunlight - level.sunlight_dark) / (level.sunlight_bright - level.sunlight_dark);
     diffuse = level.diffuse_high + (level.diffuse_low - level.diffuse_high) * frac;
     setDvar("r_lighttweakdiffusefraction", diffuse);
-    // IPrintLn( "^6diffuse = ", diffuse );
 
     wait freq;
   }
 }
 
 darken(target_sunlight, time, freq) {
-  // IPrintLn( "Darkening sunlight to ", target_sunlight );
   sunlight = GetDvarFloat("r_lighttweaksunlight");
-  // diffuse = GetDvarFloat( "r_lighttweakdiffusefraction" );
-  // IPrintLn( "sunlight = ", sunlight );
-  // IPrintLn( "diffuse = ", diffuse );
 
   totalchange = sunlight - target_sunlight;
   changeamount = totalchange / (time / freq);
-  // IPrintLn( "totalchange = ", totalchange );
-  // IPrintLn( "changeamount = ", changeamount );
 
   while(time > 0) {
     time = time - freq;
 
     sunlight = sunlight - changeamount;
     setDvar("r_lighttweaksunlight", sunlight);
-    // IPrintLn( "^6sunlight = ", sunlight );
 
     frac = (sunlight - level.sunlight_dark) / (level.sunlight_bright - level.sunlight_dark);
     diffuse = level.diffuse_high + (level.diffuse_low - level.diffuse_high) * frac;
     setDvar("r_lighttweakdiffusefraction", diffuse);
-    // IPrintLn( "^6diffuse = ", diffuse );
 
     wait freq;
   }
@@ -369,7 +337,6 @@ updateCinematicDoF() {
 
     if(bestDot < 0.923) {
       scrDoF = Distance(start_origin, trace["position"]);
-      // 			scrDoF = GetDvarInt( "scr_cinematic_doffocus" ) * 39;
     } else {
       scrDoF = Distance(start_origin, bestFocalPoint);
     }
@@ -427,9 +394,9 @@ updateDoF() {
     enemyDir = VectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
-    if(dot < 0.923) // 45 degrees
+    if(dot < 0.923) {
       continue;
-
+    }
     distFrom = Distance(playerEye, enemies[index].origin);
 
     if(distFrom - 30 < nearEnd)
@@ -485,9 +452,9 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
     enemyDir = VectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
-    if(dot < 0.923) // 45 degrees
+    if(dot < 0.923) {
       continue;
-
+    }
     distFrom = Distance(playerEye, enemies[index].origin);
     if(distFrom < 2500)
       distFrom = 2500;

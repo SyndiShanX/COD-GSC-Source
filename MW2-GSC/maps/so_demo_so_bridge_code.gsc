@@ -10,7 +10,6 @@
 #include maps\_specialops;
 #include maps\_hud_util;
 
-// --------------------------------------------------------------------------------- track_infinite_ammo_time() {
 level.normal_time = 0;
 level.infinite_time = 0;
 
@@ -24,8 +23,6 @@ while(!flag("special_op_terminated")) {
     level.infinite_time += 0.05;
 }
 }
-
-// --------------------------------------------------------------------------------- register_bridge_enemy() {
 if(!isDefined(level.bridge_enemies)) {
   level.bridge_enemies = 0;
   level.enemy_list = [];
@@ -44,8 +41,6 @@ level.enemy_list = array_remove(level.enemy_list, self);
 foreach(player in level.players)
 player.target_reminder_time = gettime();
 }
-
-// --------------------------------------------------------------------------------- player_refill_ammo() {
 level endon("special_op_terminated");
 
 while(true) {
@@ -90,11 +85,10 @@ player_wait_for_fire() {
   while(true) {
     self waittill("player_fired");
 
-    // Placing sentry is ok.
     if(isDefined(self.placingSentry)) {
       continue;
     }
-    // Certain weapons are allowed...
+
     weapon = self getcurrentweapon();
     if(weapon == "claymore") {
       continue;
@@ -104,7 +98,6 @@ player_wait_for_fire() {
         continue;
     }
 
-    // Start the challenge!
     break;
   }
 
@@ -116,8 +109,6 @@ player_wait_for_fire() {
     player thread player_refill_ammo();
   }
 }
-
-// --------------------------------------------------------------------------------- vehicle_alive_think() {
 level endon("special_op_terminated");
 
 if(!isDefined(level.vehicles_alive))
@@ -127,8 +118,6 @@ level.vehicles_alive++;
 self thread vehicle_track_damage();
 
 self waittill("exploded", attacker);
-
-// In case pesky players find a way to explode a car before doing anything else the normal script catches.
 if(!flag("so_demoman_start"))
   flag_set("so_demoman_start");
 
@@ -169,15 +158,12 @@ vehicle_track_damage() {
 }
 
 vehicle_attacker_is_player(attacker) {
-  // No attacker...
   if(!isDefined(attacker))
     return false;
 
-  // Player attacker...
   if(isPlayer(attacker))
     return true;
 
-  // Player's turret attacker
   if(!isDefined(attacker.targetname))
     return false;
   if(attacker.targetname != "sentry_minigun")
@@ -197,8 +183,6 @@ vehicle_get_slide_car(car_id) {
       return ent;
   }
 }
-
-// --------------------------------------------------------------------------------- // Run on an individual player to help them out.
 hud_display_cars_hint() {
   level endon("special_op_terminated");
 
@@ -208,7 +192,6 @@ hud_display_cars_hint() {
   self.target_help_time = 20000;
 
   thread hud_display_car_locations();
-  //	thread hud_display_car_objectives();
 
   while(!flag("so_demoman_complete")) {
     while(hud_disable_cars_hint()) {
@@ -238,8 +221,6 @@ hud_disable_cars_hint() {
   player_time_test = gettime() - self.target_help_time;
   return (self.target_reminder_time > player_time_test);
 }
-
-// --------------------------------------------------------------------------------- hud_display_car_locations() {
 level endon("special_op_terminated");
 
 while(!flag("so_demoman_complete")) {
@@ -283,8 +264,6 @@ hud_show_target_icon(vehicle) {
 
   icon Destroy();
 }
-
-// --------------------------------------------------------------------------------- hud_display_car_objectives() {
 level endon("special_op_terminated");
 
 Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
@@ -332,8 +311,6 @@ hud_hide_car_objectives() {
       Objective_AdditionalPosition(1, i, (0, 0, 0));
   }
 }
-
-// --------------------------------------------------------------------------------- hud_display_cars_remaining() {
 self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
 self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
 self.car_count.alignx = "left";
@@ -419,7 +396,7 @@ hud_rebuild_time_bonus(timer) {
   if(level.vehicles_alive <= 0) {
     return;
   }
-  // Otherwise build, and wait for the timer to expire then rebuild.
+
   if(self == level.player) {
     if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.infinite_ammo = true;
@@ -451,7 +428,7 @@ hud_rebuild_time_bonus(timer) {
 
   turn_red_time = 5;
   if(timer > turn_red_time) {
-    wait 3; // This wait is for the hud splash to "absorb" into the hud timer.
+    wait 3;
     self.time_title set_hud_blue();
     self.time_bonus set_hud_blue();
     hud_time_bonus_wait(turn_red_time);
@@ -478,7 +455,6 @@ hud_time_splash(timer) {
   if(!isDefined(self.splash_count))
     self.splash_count = 0;
 
-  // Only allow one splash active at a time.	
   self.splash_count++;
   if(self.splash_count > 1) {
     return;
@@ -563,5 +539,3 @@ hud_time_bonus_wait(stop_time) {
     self.infinite_ammo_time -= 0.05;
   }
 }
-
-// ---------------------------------------------------------------------------------

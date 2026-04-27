@@ -247,7 +247,7 @@ snowmobile_loop_passenger_shooting() {
       self updateplayersightaccuracy();
 
     wait(0.05);
-    self thread snowmobile_stop_shooting(); // stop shooting on the next frame unless snowmobile_start_shooting is called again
+    self thread snowmobile_stop_shooting();
   }
 }
 
@@ -342,11 +342,10 @@ snowmobile_decide_shoot() {
 
   snowmobile_decide_shoot_internal();
 
-  self.shoot_while_driving_thread = undefined; // start shooting again the next time we want it
+  self.shoot_while_driving_thread = undefined;
 }
 
 snowmobile_decide_shoot_internal() {
-  // events stop the shooting animations, so stop shooting when they happen
   self endon("snowmobile_event_occurred");
 
   self animscripts\shoot_behavior::decideWhatAndHowToShoot("normal");
@@ -373,7 +372,6 @@ snowmobileShootBehavior() {
 
   if(isDefined(self.enemy.vehicle)) {
     shoot_ahead_speed_multiplier = 0.5;
-    //shoot_ahead_random_spread = 50;
 
     vehicle = self.shootent.vehicle;
     snowmobile = self.ridingvehicle;
@@ -392,7 +390,7 @@ snowmobileShootBehavior() {
           sideness = 128;
         else if(sideness < -128)
           sideness = -128;
-        // flip it so guys farther to the side shoot in front of you
+
         if(sideness > 0)
           sideness = 128 - sideness;
         else
@@ -421,7 +419,6 @@ snowmobile_shoot() {
     }
 
     self animscripts\combat_utility::shootUntilShootBehaviorChange();
-    //	self clearAnim(%exposed_modern, 0.2 );
   }
 }
 
@@ -437,7 +434,6 @@ snowmobile_reload() {
 
   snowmobile_reload_internal();
 
-  // notify "abort_reload" in case the reload didn't finish. works with handledropclip() in shared.gsc
   self notify("abort_reload");
 
   return true;
@@ -498,7 +494,7 @@ snowmobile_trackshootentorpos_driver() {
 
   aimblendtime = .05;
 
-  maxyawdeltachange = 8; // max change in yaw in 1 frame
+  maxyawdeltachange = 8;
   prevyawdelta = 0;
   yawdelta = 0;
 
@@ -565,7 +561,7 @@ snowmobile_trackshootentorpos_passenger() {
 
   aimblendtime = .05;
 
-  maxyawdeltachange_default = 5; // max change in yaw in 1 frame
+  maxyawdeltachange_default = 5;
   maxyawdeltachange_fast = 20;
   maxyawdeltachange_reload = 15;
   yawdelta_overshoot_begin = 40;
@@ -599,8 +595,6 @@ snowmobile_trackshootentorpos_passenger() {
 
       yawdelta = self.angles[1] - anglestoshootpos[1];
       yawdelta = angleclamp180(yawdelta);
-
-      //line( selfshootatpos, shootpos );
     }
 
     assert(self.diraimlimit == 1 || self.diraimlimit == -1);
@@ -680,7 +674,7 @@ snowmobile_death_launchslide() {
 
   velocity = snowmobile.prevFrameVelocity;
   velocity = (velocity[0], velocity[1], randomfloatrange(200, 400)) * .75;
-  //println( length( velocity ) );
+
   if(lengthSquared(velocity) > 1000 * 1000)
     velocity = vectornormalize(velocity) * 1000;
 
@@ -692,8 +686,6 @@ snowmobile_death_launchslide() {
 }
 
 snowmobile_normal_death() {
-  //self snowmobile_death_launchslide();
-
   deathAnims = [];
   deathAnims[0] = level.scr_anim["snowmobile"]["small"]["death"]["back"];
   deathAnims[1] = level.scr_anim["snowmobile"]["small"]["death"]["right"];

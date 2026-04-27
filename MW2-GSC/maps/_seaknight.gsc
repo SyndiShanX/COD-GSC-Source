@@ -39,7 +39,7 @@ main(model, type) {
 
 init_local() {
   self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.script_badplace = false;
 }
 
 set_vehicle_anims(positions) {
@@ -76,10 +76,10 @@ setanims() {
   positions[0].bHasGunWhileRiding = false;
   positions[5].bHasGunWhileRiding = false;
 
-  positions[1].idle = % ch46_unload_1_idle; // these guys don't have an idle animation so I'm using copilot.
-  positions[2].idle = % ch46_unload_2_idle; // these guys don't have an idle animation so I'm using copilot.
-  positions[3].idle = % ch46_unload_3_idle; // these guys don't have an idle animation so I'm using copilot.
-  positions[4].idle = % ch46_unload_4_idle; // these guys don't have an idle animation so I'm using copilot.
+  positions[1].idle = % ch46_unload_1_idle;
+  positions[2].idle = % ch46_unload_2_idle;
+  positions[3].idle = % ch46_unload_3_idle;
+  positions[4].idle = % ch46_unload_4_idle;
 
   positions[5].idle[0] = % SeaKnight_coPilot_idle;
   positions[5].idle[1] = % SeaKnight_coPilot_switches;
@@ -95,11 +95,6 @@ setanims() {
   positions[3].sittag = "tag_detach";
   positions[4].sittag = "tag_detach";
   positions[5].sittag = "tag_detach";
-
-  //	positions[ 1 ].getoutstance = "crouch";
-  //	positions[ 2 ].getoutstance = "crouch";
-  //	positions[ 3 ].getoutstance = "crouch";
-  //	positions[ 4 ].getoutstance = "crouch";
 
   positions[1].getout = % ch46_unload_1;
   positions[2].getout = % ch46_unload_2;
@@ -126,26 +121,3 @@ unload_groups() {
 }
 
 set_attached_models() {}
-
-/*QUAKED script_vehicle_ch46e (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_seaknight::main( "vehicle_ch46e" );
-
-and these lines in your CSV:
-#include,vehicle_ch46e_seaknight
-sound,vehicle_seaknight,vehicle_standard,all_sp
-
-defaultmdl="vehicle_ch46e"default:"vehicletype" "seaknight"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_ch46e_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_seaknight::main( "vehicle_ch46e_low" );
-
-and these lines in your CSV:
-#include,vehicle_ch46e_seaknight_low
-sound,vehicle_seaknight,vehicle_standard,all_sp
-
-defaultmdl="vehicle_ch46e_low"default:"vehicletype" "seaknight"default:"script_team" "allies"
-*/

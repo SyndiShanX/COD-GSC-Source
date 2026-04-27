@@ -62,18 +62,14 @@ monitorFlash() {
 
     assert(isDefined(self.pers["team"]));
     if(level.teamBased && isDefined(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"] && attacker != self) {
-      if(level.friendlyfire == 0) // no FF
-      {
+      if(level.friendlyfire == 0) {
         continue;
-      } else if(level.friendlyfire == 1) // FF
-      {} else if(level.friendlyfire == 2) // reflect
-      {
+      } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         duration = duration * .5;
         rumbleduration = rumbleduration * .5;
         hurtvictim = false;
         hurtattacker = true;
-      } else if(level.friendlyfire == 3) // share
-      {
+      } else if(level.friendlyfire == 3) {
         duration = duration * .5;
         rumbleduration = rumbleduration * .5;
         hurtattacker = true;
@@ -90,8 +86,6 @@ monitorFlash() {
 }
 
 applyFlash(duration, rumbleduration) {
-  // wait for the highest flash duration this frame, // and apply it in the following frame
-
   if(!isDefined(self.flashDuration) || duration > self.flashDuration)
     self.flashDuration = duration;
   if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration)
@@ -100,11 +94,11 @@ applyFlash(duration, rumbleduration) {
   wait .05;
 
   if(isDefined(self.flashDuration)) {
-    self shellshock("flashbang_mp", self.flashDuration); // TODO: avoid shellshock overlap
+    self shellshock("flashbang_mp", self.flashDuration);
     self.flashEndTime = getTime() + (self.flashDuration * 1000);
   }
   if(isDefined(self.flashRumbleDuration)) {
-    self thread flashRumbleLoop(self.flashRumbleDuration); //TODO: Non-hacky rumble.
+    self thread flashRumbleLoop(self.flashRumbleDuration);
   }
 
   self.flashDuration = undefined;

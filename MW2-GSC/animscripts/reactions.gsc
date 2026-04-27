@@ -29,124 +29,13 @@ initReactionAnims() {
   anim.coverReactions["cover_left"] = array(%CornerStndL_react_A);
   anim.coverReactions["cover_right"] = array(%CornerStndR_react_A);
 }
-
-///////////////////////////////////////////////////////////////////////////
-//
-///////////////////////////////////////////////////////////////////////////
 reactionsCheckLoop() {
   self thread bulletWhizbyCheckLoop();
 }
 
-///////////////////////////////////////////////////////////////////////////
-// death reactions
-///////////////////////////////////////////////////////////////////////////
-/* disabled for now since the animations aren't in common csv
-
-MoveDeathReaction()
-{
-	// Decide what pose to use
-	desiredPose = self animscripts\utility::choosePose();
-
-if( desiredPose == "stand" )
-	{
-		deathAnim = getDeathReactionAnim();
-		DoDeathReactionAnim( deathAnim );
-	}
-}
-
-ExposedCombatDeathReaction()
-{
-	// Decide what pose to use
-	desiredPose = self animscripts\utility::choosePose();
-
-if( desiredPose == "stand" )
-	{
-		deathAnim = getDeathReactionAnim();
-		DoDeathReactionAnim( deathAnim );
-	}
-}
-
-DoDeathReactionAnim( deathAnim )
-{
-	self endon( "movemode" );
-
-	rate = self.moveplaybackrate;
-
-	self setFlaggedAnimKnobAll( "deathanim", deathAnim, %body, 1, 1, rate, true );
-
-//	self animscripts\run::SetMoveNonForwardAnims(%walk_backward, %walk_left, %walk_right );
-//	self thread animscripts\run::SetCombatStandMoveAnimWeights( "walk" );
-
-	self animscripts\shared::DoNoteTracks( "deathanim" );
-	self.deathTeamate = false;
-}
-
-getDeathReactionAnim()
-{
-if( self.deathTeamateReaction == "back" )
-return %run_reaction_180;
-else if( self.deathTeamateReaction == "left" )
-return %run_reaction_L_quick;
-else if( self.deathTeamateReaction == "right" )
-return %run_reaction_R_quick;
-}
-
-deathCheck()
-{
-	self endon( "killanimscript" );
-	
-self.deathTeamateReaction = "none";
-self.deathTeamate = false;
-
-	minDeathDistance = 100;
-	maxDeathDistance = 500;
-	minGoalDistance = 200;
-	maxTurnAngle = 135;
-	minTurnAngle = 10;
-	
-self AddAIEventListener( "death" );
-
-	for( ;; )
-	{
-	self waittill( "ai_event", event, originator, position );
-	if( event != "death" )
-			continue;
-			
-	deathDirection = position - self.origin;
-	deathDistance = Length( deathDirection );
-	if( deathDistance >= minDeathDistance && deathDistance <= maxDeathDistance )
-	{
-	goalDirection = self.goalpos - self.origin;
-	goalDistance = Length( goalDirection );
-	if( goalDistance >= minGoalDistance )
-	{
-	goalAngles = VectorToAngles( goalDirection );
-	deltaAngles = Abs( self.angles[1] - goalAngles[1] );
-	if( deltaAngles > minTurnAngle )
-	{
-	if( deltaAngles > maxTurnAngle )
-	self.deathTeamateReaction = "back";
-	else if( self.angles[1] > goalAngles[1] )
-	self.deathTeamateReaction = "left";
-	else
-	self.deathTeamateReaction = "right";
-	
-	self.deathTeamate = true;
-	}
-	}
-	}
-	}
-}
-
-*/
-
 canReactAgain() {
   return (!isDefined(self.lastReactTime) || gettime() - self.lastReactTime > 2000);
 }
-
-///////////////////////////////////////////////////////////////////////////
-// bullet whizby reaction
-///////////////////////////////////////////////////////////////////////////
 
 bulletWhizbyReaction() {
   self endon("killanimscript");
@@ -159,7 +48,6 @@ bulletWhizbyReaction() {
   self animmode("gravity");
   self orientmode("face current");
 
-  // react and go to prone
   if(enemyNear || cointoss()) {
     self clearanim(%root, 0.1);
 
@@ -189,8 +77,7 @@ bulletWhizbyReaction() {
       self setFlaggedAnimKnobRestart("dive", diveAnim, 1, 0.1, rate);
       self animscripts\shared::DoNoteTracks("dive");
     }
-  } else // crouch then handsignal or turn
-  {
+  } else {
     wait randomfloat(0.2);
 
     rate = 1.2 + randomfloat(0.3);
@@ -214,9 +101,6 @@ bulletWhizbyReaction() {
       self clearanim(%root, 0.1);
       self setFlaggedAnimKnobRestart("twitch", twitchAnim, 1, 0.1, 1);
       self animscripts\shared::DoNoteTracks("twitch");
-
-      //if( cointoss() )
-      //	self handsignal( "go" );
     } else {
       turnAnim = randomAnimOfTwo(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
 
@@ -257,10 +141,6 @@ bulletWhizbyCheckLoop() {
     self animcustom(::bulletWhizbyReaction);
   }
 }
-
-///////////////////////////////////////////////////////////////////////////
-// surprised by new enemy reaction
-///////////////////////////////////////////////////////////////////////////
 
 clearLookAtThread() {
   self endon("killanimscript");

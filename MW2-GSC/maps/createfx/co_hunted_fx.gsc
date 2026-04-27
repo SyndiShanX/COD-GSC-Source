@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 391
   ent = createExploder("bird_pm");
   ent.v["origin"] = (2949.88, -5893.61, 87.4039);
   ent.v["angles"] = (5.70663, 18.4085, -85.9897);

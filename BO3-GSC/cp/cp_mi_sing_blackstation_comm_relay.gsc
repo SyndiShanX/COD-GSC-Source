@@ -25,170 +25,86 @@
 #using scripts\shared\util_shared;
 #namespace cp_mi_sing_blackstation_comm_relay;
 
-function objective_comm_relay_traverse_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_comm_relay_traverse_init() {}
 
-function objective_comm_relay_traverse_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_comm_relay_traverse_done() {}
 
-function comm_relay_traverse_main() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_traverse_main() {}
 
-function objective_comm_relay_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_comm_relay_init() {}
 
-function comm_relay_spawner_setup() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_spawner_setup() {}
 
-function objective_comm_relay_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_comm_relay_done() {}
 
-function comm_relay_main() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_main() {}
 
-function function_76732cae() {
-  // Unsupported VM revision (1B).
-}
+function function_76732cae() {}
 
-function delete_with_delay() {
-  // Unsupported VM revision (1B).
-}
+function delete_with_delay() {}
 
-function function_3cd30cbd() {
-  // Unsupported VM revision (1B).
-}
+function function_3cd30cbd() {}
 
-function comm_relay_waypoints() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_waypoints() {}
 
-function comm_relay_dialog() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_dialog() {}
 
-function comm_relay_dialog_part2() {
-  // Unsupported VM revision (1B).
-}
+function comm_relay_dialog_part2() {}
 
-function function_8f139027() {
-  // Unsupported VM revision (1B).
-}
+function function_8f139027() {}
 
-function igc_robot() {
-  // Unsupported VM revision (1B).
-}
+function igc_robot() {}
 
-function function_af9d4545() {
-  // Unsupported VM revision (1B).
-}
+function function_af9d4545() {}
 
-function function_77ccb9da() {
-  // Unsupported VM revision (1B).
-}
+function function_77ccb9da() {}
 
-function function_53f20e51() {
-  // Unsupported VM revision (1B).
-}
+function function_53f20e51() {}
 
-function function_5be784f3() {
-  // Unsupported VM revision (1B).
-}
+function function_5be784f3() {}
 
-function function_104ecb4b() {
-  // Unsupported VM revision (1B).
-}
+function function_104ecb4b() {}
 
-function function_4c16ca2b() {
-  // Unsupported VM revision (1B).
-}
+function function_4c16ca2b() {}
 
-function function_6c35b4f3() {
-  // Unsupported VM revision (1B).
-}
+function function_6c35b4f3() {}
 
-function hendricks_behavior() {
-  // Unsupported VM revision (1B).
-}
+function hendricks_behavior() {}
 
-function function_6eaf20ba() {
-  // Unsupported VM revision (1B).
-}
+function function_6eaf20ba() {}
 
-function function_aadd72bd() {
-  // Unsupported VM revision (1B).
-}
+function function_aadd72bd() {}
 
-function starter_behavior() {
-  // Unsupported VM revision (1B).
-}
+function starter_behavior() {}
 
-function proximity_detection() {
-  // Unsupported VM revision (1B).
-}
+function proximity_detection() {}
 
-function reinforcement_behavior() {
-  // Unsupported VM revision (1B).
-}
+function reinforcement_behavior() {}
 
-function patrol_behavior() {
-  // Unsupported VM revision (1B).
-}
+function patrol_behavior() {}
 
-function retreater_behavior() {
-  // Unsupported VM revision (1B).
-}
+function retreater_behavior() {}
 
-function awaken_behavior() {
-  // Unsupported VM revision (1B).
-}
+function awaken_behavior() {}
 
-function function_48aa6d93() {
-  // Unsupported VM revision (1B).
-}
+function function_48aa6d93() {}
 
-function track_defenders() {
-  // Unsupported VM revision (1B).
-}
+function track_defenders() {}
 
-function track_defenders_count() {
-  // Unsupported VM revision (1B).
-}
+function track_defenders_count() {}
 
-function track_awakened_robot_count() {
-  // Unsupported VM revision (1B).
-}
+function track_awakened_robot_count() {}
 
-function table_flipper_watcher() {
-  // Unsupported VM revision (1B).
-}
+function table_flipper_watcher() {}
 
-function table_flipper_sighted() {
-  // Unsupported VM revision (1B).
-}
+function table_flipper_sighted() {}
 
-function table_flipper() {
-  // Unsupported VM revision (1B).
-}
+function table_flipper() {}
 
-function function_34bb534a() {
-  // Unsupported VM revision (1B).
-}
+function function_34bb534a() {}
 
-function table_flip() {
-  // Unsupported VM revision (1B).
-}
+function table_flip() {}
 
-function breakable_atrium_windows_setup() {
-  // Unsupported VM revision (1B).
-}
+function breakable_atrium_windows_setup() {}
 
-function atrium_windows_break() {
-  // Unsupported VM revision (1B).
-}
+function atrium_windows_break() {}

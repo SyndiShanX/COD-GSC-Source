@@ -15,7 +15,6 @@ global_inits() {
   maps\_pavelow::main("vehicle_pavelow");
   maps\_littlebird::main("vehicle_little_bird_armed");
 
-  //maps\createart\estate_art::main();
   maps\createfx\estate_audio::main();
   maps\createart\estate_fog::main();
 
@@ -32,7 +31,7 @@ global_inits() {
 
   common_scripts\_sentry::main();
 
-  level.customIntroAngles = intro_angles(); //Makes the view point to a specific direction at the end of slam zoom
+  level.customIntroAngles = intro_angles();
 
   PreCacheItem("claymore");
   PreCacheItem("flash_grenade");
@@ -84,7 +83,6 @@ global_inits() {
   precachestring(&"ESTATE_REMIND_PRONE_LINE2_HOLDDOWN");
 
   thread maps\estate_amb::main();
-  //maps\_utility::set_vision_set( "estate", 0 );
 
   level.bouncing_betty_clicks = 0;
   level.custom_linkto_slide = true;
@@ -93,7 +91,7 @@ global_inits() {
 
   level.activeSmokePots = 0;
   level.activeSmokePotLimit = 7;
-  level.smokeTimeOut = 15; //originally 10
+  level.smokeTimeOut = 15;
   level.activeGameplayMines = 0;
   level.canSave = true;
 
@@ -105,16 +103,6 @@ global_inits() {
 
   add_hint_string("claymore_hint", &"ESTATE_USE_CLAYMORE_HINT", ::should_break_claymore_hint);
 
-  //PC Prone Key Config Handling - there are three different bindable controls for going prone on PC		
-
-  //"toggleprone" (press prone once, stays prone)
-  //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"add_hint_string("mineavoid_hint_toggle", &"ESTATE_LEARN_PRONE_TOGGLE", ::should_break_mineavoid_hint);
-
-  //"+prone" (press and hold to go prone, gets up as soon as key is released)
-  //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"add_hint_string("mineavoid_hint_holddown", &"ESTATE_LEARN_PRONE_HOLDDOWN", ::should_break_mineavoid_hint);
-
-  // This last one works for console automatically
-  // Press and hold^3 [{+stance}] ^7to evade the landmine!
   add_hint_string("mineavoid_hint", &"ESTATE_LEARN_PRONE", ::should_break_mineavoid_hint);
 
   level.friendlyForestProgress = 0;
@@ -122,18 +110,18 @@ global_inits() {
   level.perimeter_jeepguards = 0;
 
   level.mainfloorPop = 0;
-  level.topfloorPop = 4; //4 in the top room
-  level.basementPop = 5; //2 in the armory, 3 fleeing from the guestroom
+  level.topfloorPop = 4;
+  level.basementPop = 5;
 
   level.interiorRoomsBreached = 0;
 
-  level.dsmHealthMax = 3000; //health
+  level.dsmHealthMax = 3000;
   level.dsmHealth = level.dsmHealthMax;
-  level.dsm_regen_dist_limit = 1000; //world units
+  level.dsm_regen_dist_limit = 1000;
   level.dsm_regen_amount = 0;
-  level.dsm_regen_amount_max = 50; //health per second
+  level.dsm_regen_amount_max = 50;
 
-  level.playerDSMsafedist = 1500; //player must be within this many units for the game to save during the defense
+  level.playerDSMsafedist = 1500;
 
   level.enemyTotalPop = 0;
   level.enemyPop = 0;
@@ -165,8 +153,6 @@ global_inits() {
 
   thread solar_panels();
 
-  //===========
-
   thread zone_detection_init();
   thread defense_schedule_control();
   thread defense_enemy_spawn();
@@ -179,8 +165,6 @@ global_inits() {
   thread terminal_hunters();
   thread terminal_blockers();
   thread terminal_hillchasers();
-
-  //===========
 
   thread abandonment_start_monitor();
   thread abandonment_early_escape_timer();
@@ -463,7 +447,6 @@ intro_angles() {
 }
 
 ghost_init() {
-  // spawn ghost
   level.ghost = spawn_targetname("ghost", true);
   level.ghost.animname = "ghost";
 
@@ -512,8 +495,6 @@ downhill_run() {
 }
 
 ghost_intro_nav() {
-  //If player waits for intro sequence to end, Ghost gets up and moves out
-
   level endon("ghost_leaving_start_area_early");
 
   flag_wait("start_ghost_intro_nav");
@@ -529,8 +510,6 @@ ghost_intro_nav() {
 }
 
 ghost_intro_interrupt() {
-  //If player rushes away from start location, Ghost gets up and moves out right away
-
   level endon("ghost_leaving_start_area_on_cue");
   level notify("ghost_leaving_start_area_early");
 
@@ -549,7 +528,6 @@ friendly_troop_spawn() {
 }
 
 friendly_troop_init() {
-  //self.disableArrivals = true;
   self.ignoresuppression = true;
   self pushplayer(true);
   self enable_cqbwalk();
@@ -584,7 +562,6 @@ friendly_scout_spawn() {
 }
 
 friendly_scout_init() {
-  //self.disableArrivals = true;
   self.ignoresuppression = true;
   self pushplayer(true);
   self enable_cqbwalk();
@@ -611,7 +588,6 @@ friendly_sniper_spawn() {
 friendly_sniper_init() {
   self endon("death");
 
-  //self.disableArrivals = true;
   self.ignoresuppression = true;
   self pushplayer(true);
   self allowedStances("crouch");
@@ -662,16 +638,9 @@ house_perimeter_jeepguards_deathmonitor() {
   }
 }
 
-/*==========================================
-
-BOUNCING BETTY SEQUENCE
-
-==========================================*/
-
 bouncing_betty_slow_mo() {
   thread bouncing_betty_activate();
 
-  // don't slomo the mission critical speech
   SoundSetTimeScaleFactor("Mission", 0);
   SoundSetTimeScaleFactor("Shellshock", 0);
   SoundSetTimeScaleFactor("Voice", 0);
@@ -680,13 +649,11 @@ bouncing_betty_slow_mo() {
   SoundSetTimeScaleFactor("Effects2", 0.8);
   SoundSetTimeScaleFactor("Announcer", 0);
 
-  slomoLerpTime_in = 2; //1.5
-  slomoLerpTime_out = 0.65; //0.65
-  slomobreachplayerspeed = 0.1; //0.1
-  slomoSpeed = 0.3; //0.25
-  slomoDuration = 10; //24
-
-  //level.player thread play_sound_on_entity( "mine_betty_spin" );
+  slomoLerpTime_in = 2;
+  slomoLerpTime_out = 0.65;
+  slomobreachplayerspeed = 0.1;
+  slomoSpeed = 0.3;
+  slomoDuration = 10;
 
   music_stop();
 
@@ -714,49 +681,28 @@ bouncing_betty_slow_mo() {
 playerFovGroundSpot(specialPlayerCase) {
   angles = level.player getplayerangles();
 
-  angles = (0, angles[1], 0); //only use yaw component
+  angles = (0, angles[1], 0);
 
   forward = anglesToForward(angles);
   right = anglestoright(angles);
   left = right * (-1);
 
-  mineOrg = level.player.origin + forward * 96; //96 units ahead of player
+  mineOrg = level.player.origin + forward * 96;
 
   if(isDefined(specialPlayerCase)) {
     startPoint = level.player.origin + (0, 0, 64);
 
-    //head top traces
-
     endPointForward = level.player.origin + forward * 128 + (0, 0, 64);
-    //Print3d( endPointForward, "x1", ( 0, 0, 1 ), 1, 1, 15000 );
 
     endPointRight = endPointForward + right * 16;
-    //Print3d( endPointRight, "r1", ( 0, 0, 1 ), 1, 1, 15000 );
 
     endPointLeft = endPointForward + left * 16;
-    //Print3d( endPointLeft, "l1", ( 0, 0, 1 ), 1, 1, 15000 );
-
-    //waist high traces
 
     endPointMidForward = level.player.origin + forward * 128 + (0, 0, 28);
-    //Print3d( endPointMidForward, "x2", ( 1, 1, 0 ), 1, 1, 15000 );
 
     endPointMidRight = endPointMidForward + right * 16;
-    //Print3d( endPointMidRight, "r2", ( 1, 1, 1 ), 1, 1, 15000 );
 
     endPointMidLeft = endPointMidForward + left * 16;
-    //Print3d( endPointMidLeft, "l2", ( 1, 1, 1 ), 1, 1, 15000 );
-
-    //low blocker traces
-
-    //endPointLowForward = level.player.origin + forward * 128 + ( 0, 0, 2 );
-    //Print3d( endPointLowForward, "x3", ( 1, 0, 1 ), 1, 1, 15000 );
-
-    //endPointLowRight = endPointLowForward + right * 16;
-    //Print3d( endPointLowRight, "r3", ( 1, 0, 1 ), 1, 1, 15000 );
-
-    //endPointLowLeft = endPointLowForward + left * 16;
-    //Print3d( endPointLowLeft, "l3", ( 1, 0, 1 ), 1, 1, 15000 );
 
     test1 = BulletTracePassed(startPoint, endPointForward, true, level.player);
     test2 = BulletTracePassed(startPoint, endPointRight, true, level.player);
@@ -765,10 +711,6 @@ playerFovGroundSpot(specialPlayerCase) {
     test4 = BulletTracePassed(startPoint, endPointMidForward, true, level.player);
     test5 = BulletTracePassed(startPoint, endPointMidRight, true, level.player);
     test6 = BulletTracePassed(startPoint, endPointMidLeft, true, level.player);
-
-    //test7 = BulletTracePassed( startPoint, endPointLowForward, true, level.player );
-    //test8 = BulletTracePassed( startPoint, endPointLowRight, true, level.player );
-    //test9 = BulletTracePassed( startPoint, endPointLowLeft, true, level.player );
 
     if(test1 && test2 && test3 && test4 && test5 && test6) {
       mineOrg = drop_to_ground(mineOrg, 200, -200);
@@ -784,7 +726,7 @@ playerFovGroundSpot(specialPlayerCase) {
         newdist = length(level.player.origin - alt.origin);
 
         eyePos = level.player getEye();
-        //success = SightTracePassed( eyePos, alt.origin + ( 0, 0, 6 ), true, level.player );
+
         success = player_can_see_origin(alt.origin + (0, 0, 6));
 
         if(success) {
@@ -834,14 +776,11 @@ bouncing_betty_activate() {
     wait randomfloatrange(0.15, 0.2);
   }
 
-  //launch player's special personal mine
-
   mineOrg = playerFovGroundSpot("specialPlayerCase");
 
   if(isDefined(mineOrg)) {
     thread bouncing_betty_throwplayer(mineOrg);
 
-    //playerMine = spawn( "script_origin", level.player.origin + ( 32, -72, 0 ) );
     playerMine = spawn("script_origin", mineOrg);
     playerMine thread bouncing_betty_fx(1, undefined);
   } else {
@@ -863,8 +802,6 @@ bouncing_betty_activate() {
 
   wait 0.35;
 
-  //"AMBUUUSH!!!"level.ghost dialogue_queue("est_gst_ambush");
-
   wait 1;
 
   flag_set("bouncing_betty_done");
@@ -876,20 +813,9 @@ bouncing_betty_hintprint() {
   } else {
     wait 0.1;
 
-    //PC Prone Key Config Handling - there are three different bindable controls for going prone on PC
-
-    if(is_command_bound("toggleprone")) {
-      //"toggleprone" (press prone once, stays prone)
-      //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint_toggle");
-    } else
-    if(is_command_bound("+prone")) {
-      //"+prone" (press and hold to go prone, gets up as soon as key is released)
-      //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint_holddown");
-    } else
-    if(is_command_bound("+stance")) {
-      //"+stance" (press and hold to go prone)
-      //Msg: "Press and hold^3 [{+stance}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint");
-    }
+    if(is_command_bound("toggleprone")) {} else
+    if(is_command_bound("+prone")) {} else
+    if(is_command_bound("+stance")) {}
   }
 }
 
@@ -943,7 +869,6 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
         continue;
       }
       if(guy.name != "Archer" && guy.name != "Toad") {
-        //knockdown the guy
         guy delaythread(randomfloat(0.15), ::anim_generic, guy, "exposed_crouch_extendedpainA");
       }
     }
@@ -972,7 +897,6 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
         if(level.player getstance() == "prone") {
           SetPlayerIgnoreRadiusDamage(true);
 
-          //thread bouncing_betty_gameplay_fake_damage();
           thread bouncing_betty_gameplay_real_damage(explosion_org);
 
           rightFovCheck = within_fov(level.player.origin, level.player.angles + (0, -95, 0), self.origin, cos(180));
@@ -1059,14 +983,8 @@ bouncing_betty_deathquote() {
   if(level.console) {
     textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2");
   } else {
-    //PC Prone Control Handling
-
-    if(is_command_bound("toggleprone")) {
-      //"Press ^3[{toggleprone}]^7 to evade them."textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_TOGGLE");
-    } else
-    if(is_command_bound("+prone")) {
-      //"Press and hold down ^3[{+prone}]^7 to evade them."textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_HOLDDOWN");
-    } else
+    if(is_command_bound("toggleprone")) {} else
+    if(is_command_bound("+prone")) {} else
     if(is_command_bound("+stance")) {
       textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2");
     }
@@ -1118,9 +1036,9 @@ bouncing_betty_throwplayer(mineOrg) {
 
   level.player freezeControls(true);
 
-  vec = (level.player.origin + (0, 0, 40)) - mineOrg; //vector from mine to player's upper body
+  vec = (level.player.origin + (0, 0, 40)) - mineOrg;
   baseThrust = vectornormalize(vec);
-  boost = 2000; //1800
+  boost = 2000;
 
   thread bouncing_betty_shellshock();
   thread bouncing_betty_stances();
@@ -1161,7 +1079,6 @@ bouncing_betty_shellshock() {
   earthquake(1, 1, level.player.origin, 2000);
   wait 1;
 
-  //Taargets, left side, left side!!
   level.ghost thread dialogue_queue("est_gst_targetsleftside");
 
   earthquake(0.5, 0.5, level.player.origin, 2000);
@@ -1176,13 +1093,9 @@ bouncing_betty_shellshock() {
 
   wait 3;
 
-  //"AMBUUUSH!!!"level.ozone dialogue_queue("est_tf1_ambush");
-
   flag_set("start_ambush_music");
 
   wait 2;
-
-  //"AMBUUUSH!!!"level.scarecrow dialogue_queue("est_tf2_ambush");
 
   wait 1;
 
@@ -1227,12 +1140,6 @@ ambush_fake_rpg_barrage() {
   }
 }
 
-/*==========================================
-
-BOUNCING BETTY GAMEPLAY EDITION
-
-==========================================*/
-
 bouncing_betty_gameplay_init() {
   mines = getEntArray("bouncing_betty_gameplay", "targetname");
 
@@ -1274,12 +1181,6 @@ bouncing_betty_gameplay() {
     }
   }
 }
-
-/*==========================================
-
-FOREST SMOKE SCREENS
-
-==========================================*/
 
 forest_smokepot1() {
   level endon("approaching_house");
@@ -1338,7 +1239,7 @@ forest_smokeloop(smokeName, smoke_pots) {
 
   while(flag(smokeName)) {
     foreach(smoke_pot in smoke_pots) {
-      wait 6; //originally 5
+      wait 6;
 
       if(level.activeSmokePots <= level.activeSmokePotLimit) {
         smoke_pot thread smokepot();
@@ -1347,7 +1248,7 @@ forest_smokeloop(smokeName, smoke_pots) {
       }
     }
 
-    wait 18; //originally 15
+    wait 18;
   }
 }
 
@@ -1356,12 +1257,6 @@ forest_smokepot_timer() {
 
   level.activeSmokePots--;
 }
-
-/*==========================================
-
-SPAWNING AND NAV
-
-==========================================*/
 
 ghillie_spawn(ghillie_name) {
   spawners = getEntArray(ghillie_name, "targetname");
@@ -1430,7 +1325,6 @@ prowler_init_1() {
 
   self start_in_prone_and_standup();
 
-  //self.disableArrivals = true;
   self.ignoresuppression = true;
   self pushplayer(true);
 
@@ -1517,15 +1411,7 @@ forest_enemy_groundlevel_magicsnipe_cleanup() {
   self kill();
 }
 
-/******************************
-
-SLOW-MOTION BREACHING
-
-******************************/
-
 house_guestroom_breach_flee() {
-  //Guys in the guestroom try to escape
-
   openDoors = getent("recroom_open_doors", "targetname");
   openDoors hide();
 
@@ -1544,8 +1430,6 @@ house_guestroom_breach_flee() {
 }
 
 house_guestroom_door_remove() {
-  //for any start point after the house breaches are done
-
   openDoors = getent("recroom_open_doors", "targetname");
   openDoors hide();
 
@@ -1624,8 +1508,6 @@ house_furniture_sounds() {
 }
 
 house_extra_breachguys() {
-  //These are guys that spawn in on slow-motion breaches without a special animation, and do normal cool-looking AI behavior
-
   assertEX(isDefined(self.script_slowmo_breach), "breach_normalguy in house must have a script_slowmo_breach keypair");
 
   level waittill("breaching_number_" + self.script_slowmo_breach);
@@ -1675,34 +1557,8 @@ house_normalguy_accuracy() {
   self.baseAccuracy = 1;
 }
 
-//*************************************************
-// EXTERIOR BREACH SPECIFIC EXTRA GUY SPAWNS
-//*************************************************
-
-//These only spawn under very specific circumstances where it would be plausible, //taking into consideration where the player and friendlies may already have gone.
-//They are controlled by triggering by script_flag_set trigs in the main_house prefab
-//They are unilaterally canceled when the armory gets breached because being able to
-//see into every room complicates the spawn plausibility situation.
-
-//trigger for diningroom spawners "breach0_diningroom_spawntrig": these guys emerge from the dining room and rush into the kitchen
-
-//0. (DONE) make sure the triggers only work for the correct breachnum with a script_flag_true "breaching_number_0"//1. (DONE) run tally on extraguys' script_battleplan
-//			- add to floorpops (floorpop ++ 1 time per spawner here for theoretical presence)
-//2. (DONE) run spawnfuncs on extraguys (ends if 3 runs)
-//			- when spawned, add to floorpops (floorpop ++ 1 time here)
-//				- also notify to terminate the cancel thread for the battleplan
-//			- on death, subtract 2 from floorpops (floorpop -- 1 time here, --1 for theoretical presence)
-//3. (DONE) run a cancel thread for each battleplan (ends if 2 runs)
-//			- if cancel flag gets set
-//			- flag_trues on triggers will automatically prevent spawntriggers from triggering (DONE)
-//			- tally spawners for this battleplan per floortype and subtract size of each array from each floorpops (floorpop --1 per spawner for theoretical presence)
-
 house_extras_tally(battlePlanName, waitName) {
-  //Because they may or may not spawn, we pre-emptively add potential spawning Extras to the total count for each floor
-
   level waittill(waitName);
-
-  //spawners = GetSpawnerArray();
 
   spawners = getEntArray("breach_extraguy", "targetname");
 
@@ -1729,9 +1585,6 @@ house_extras_tally(battlePlanName, waitName) {
 }
 
 house_extras_stopcancel() {
-  //spawnfunc for the extraguys
-  //if the extraguy spawns, send a notify that terminates the thread that would artificially decrement the battleplan's spawners from floorpop
-
   assertEX(isDefined(self.script_battleplan), "script_battleplan not specified on Extra spawner in house");
 
   endonMsg = self.script_battleplan;
@@ -1740,9 +1593,6 @@ house_extras_stopcancel() {
 }
 
 house_extras_cancel_and_killswitch(endonMsg, activeCancelName, unlockName) {
-  //shuts down an active Extras spawner system that is still ready to cancel from standby mode
-  //also cancels this Extra spawner system because a non-matching exterior breach was done
-
   level endon(endonMsg);
 
   flag_wait(unlockName);
@@ -1752,13 +1602,11 @@ house_extras_cancel_and_killswitch(endonMsg, activeCancelName, unlockName) {
 }
 
 house_extras_cancel_floorpop_monitor(endonMsg, activeCancelName, unlockName) {
-  //if canceled, this reduces the floorpops associated with the spawners on this battleplan
-
   assertEX(isDefined(endonMsg), "No endonMsg was passed into this function.");
   assertEX(isDefined(activeCancelName), "No activeCancelName was passed into this function.");
   assertEX(isDefined(unlockName), "No unlockName was passed into this function. This is the flag that is set by an exterior breach. e.g. foyer_breached_first");
 
-  level endon(endonMsg); //ends on a successful spawning
+  level endon(endonMsg);
 
   thread house_extras_cancel_and_killswitch(endonMsg, activeCancelName, unlockName);
 
@@ -1774,18 +1622,15 @@ house_extras_cancel_floorpop_monitor(endonMsg, activeCancelName, unlockName) {
       assertEX(isDefined(spawner.script_namenumber), "Missing a script_namenumber on an Extra spawner in house.");
 
       if(spawner.script_namenumber == "mainfloor") {
-        //level.mainfloorPop--;
         level notify("mainfloor_enemy_killed");
       }
 
       if(spawner.script_namenumber == "topfloor") {
         level notify("topfloor_enemy_killed");
-        //level.topfloorPop--;
       }
 
       if(spawner.script_namenumber == "basement") {
         level notify("basement_enemy_killed");
-        //level.basementPop--;
       }
     }
 
@@ -1797,8 +1642,6 @@ house_extras_spawncontrol(spawntrigname, customEndonMsg, unlockMsg, battleplan) 
   assertEX(isDefined(spawntrigname), "Missing a spawntrigname on an Extra spawntrig.");
   assertEX(isDefined(unlockMsg), "Missing an unlockMsg on an Extra spawntrig.");
   assertEX(isDefined(battleplan), "Missing a battleplan on an Extra spawntrig.");
-
-  //*NOTE* It is assumed there is only one spawntrig for each Extras spawn setup
 
   trigs = getEntArray(spawntrigname, "targetname");
 
@@ -1854,13 +1697,8 @@ house_extras_bathroom_screamingguy_setup() {
 }
 
 house_extras_bathroom_screamingguy() {
-  //aaaaAAAAA (enemy charge)
   self thread play_sound_on_entity("est_ru1_attack");
 }
-
-//******************************************************
-// HOUSE EXTERIOR BREACH BASIC NOTIFICATIONS
-//******************************************************
 
 house_extras_breach_mainfloor() {
   level waittill("breaching_number_0");
@@ -1883,8 +1721,6 @@ house_extras_breach_basement() {
 house_exterior_breach_awareness() {
   level waittill_any("breaching_number_0", "breaching_number_1", "breaching_number_2");
 
-  //autosave_by_name( "exterior_breach_save" );
-
   wait 2.5;
 
   allies = getaiarray("allies");
@@ -1900,14 +1736,8 @@ house_exterior_breach_awareness() {
   }
 }
 
-//******************************************************
-// HOUSE FLOOR POP MONITORING FOR DIALOGUE TRIGGERING
-//******************************************************
-
 house_floorpop_deathmonitor_init(extraGuy) {
   assertEX(isDefined(self.script_namenumber), "House spawner guy missing a script_namenumber");
-
-  //don't add any of the interior breach guys (3, 4, 5), they are preemptively included in the count because they spawn after the exterior breaches
 
   if(self.script_namenumber == "mainfloor") {
     level.mainfloorPop++;
@@ -1973,8 +1803,6 @@ house_basement_deathmonitor(extraGuy) {
 }
 
 house_mainfloor_cleared() {
-  //wait until the first breach begins
-
   flag_wait("house_exterior_has_been_breached");
 
   wait 2.1;
@@ -1988,8 +1816,6 @@ house_mainfloor_cleared() {
 }
 
 house_topfloor_cleared() {
-  //wait until the first breach begins
-
   flag_wait("house_exterior_has_been_breached");
 
   while(level.topfloorPop > 0) {
@@ -2001,8 +1827,6 @@ house_topfloor_cleared() {
 }
 
 house_basement_cleared() {
-  //wait until the first breach begins
-
   flag_wait("house_exterior_has_been_breached");
 
   while(level.basementPop > 0) {
@@ -2013,41 +1837,22 @@ house_basement_cleared() {
   flag_set("basement_cleared");
 }
 
-//*************************************************
-// HOUSE CLEARING DIALOGUE
-//*************************************************
-
 house_mainfloor_cleared_dialogue() {
   level endon("house_interior_breaches_done");
 
   flag_wait("mainfloor_cleared");
 
-  /*
-  //Main floor clear!
-  radio_dialogue( "est_scr_mainfloor" );
-
-  //Copy that, main floor clear!
-  radio_dialogue( "est_gst_mainfloor" );
-  */
-
   flag_set("mainfloor_cleared_confirmed");
 }
 
 house_topfloor_cleared_dialogue() {
-  //flag_wait( "mainfloor_cleared" );
-
-  //if mainfloor is cleared
-  //teleport scarecrow to the node upstairs to confirm clearance
-  //then have him proceed downstairs automatically back to his node
-
   flag_wait("topfloor_breached");
 
   level.scarecrow disable_ai_color();
-  //node = getnode( "ozone_housebriefing_start", "targetname" );
+
   node = getnode("scarecrow_teleport_closer", "targetname");
   level.scarecrow forceTeleport(node.origin, node.angles);
   level.scarecrow.goalradius = 32;
-  //level.scarecrow setgoalnode( node );
 
   level.scarecrow.attackeraccuracy = 0;
   level.scarecrow.ignorerandombulletdamage = 1;
@@ -2066,12 +1871,8 @@ house_topfloor_cleared_dialogue() {
 
   flag_set("dialogue_topfloor_cleared");
 
-  //autosave_by_name( "topfloor_cleared" );
-
-  //Top floor clear!	
   radio_dialogue("est_scr_topfloor");
 
-  //Roger that, top floor clear!
   radio_dialogue("est_gst_topfloor");
 
   flag_set("ghost_goes_outside");
@@ -2080,7 +1881,6 @@ house_topfloor_cleared_dialogue() {
   flag_clear("dialogue_topfloor_cleared");
 
   if(!flag("basement_cleared")) {
-    //node = getnode( "scarecrow_breachhouse_start", "targetname" );
     node = getnode("scarecrow_guard_basement1", "targetname");
     level.scarecrow setgoalnode(node);
   }
@@ -2097,13 +1897,8 @@ house_basement_cleared_dialogue() {
   flag_set("dialogue_basement_cleared");
   flag_set("scripted_dialogue_on");
 
-  //if( !flag( "topfloor_breached" ) )
-  //autosave_by_name( "basement_cleared" );
-
-  //Basement clear!	
   radio_dialogue("est_scr_basement");
 
-  //Copy, basement clear!
   radio_dialogue("est_gst_basement");
 
   flag_clear("scripted_dialogue_on");
@@ -2115,18 +1910,12 @@ house_basement_cleared_dialogue() {
 house_topfloor_breached() {
   level waittill("breaching_number_" + "5");
 
-  //autosave_by_name( "topfloor_breach_save" );
-  //autosave_now();
-
   flag_set("topfloor_breached");
   level.interiorRoomsBreached++;
 }
 
 house_basement_breached_armory() {
   level waittill("breaching_number_" + "3");
-
-  //autosave_by_name( "armory_breach_save" );
-  //autosave_now();
 
   flag_set("basement_breached");
   flag_set("armory_breached");
@@ -2135,9 +1924,6 @@ house_basement_breached_armory() {
 
 house_basement_breached_guestroom() {
   level waittill("breaching_number_" + "4");
-
-  //autosave_by_name( "guestroom_breach_save" );
-  //autosave_now();
 
   flag_set("basement_breached");
   flag_set("guestroom_breached");
@@ -2150,9 +1936,6 @@ house_check_upstairs_mainfloor_dialogue() {
   flag_wait("house_friendlies_instructions_given");
 
   while(!flag("topfloor_breached")) {
-    //if main floor is cleared
-    //AND top breach is not yet done
-
     tracePassed = level.ghost SightConeTrace(level.player.origin + (0, 0, 64));
 
     if(tracePassed && flag("ghost_at_bottom_of_stairs")) {
@@ -2166,7 +1949,6 @@ house_check_upstairs_mainfloor_dialogue() {
       if(!flag("topfloor_breached")) {
         flag_set("scripted_dialogue_on");
 
-        //Roach, go upstairs and check any locked rooms on the top floor. Breach and clear.	
         radio_dialogue("est_gst_lockedrooms");
 
         flag_clear("scripted_dialogue_on");
@@ -2184,12 +1966,6 @@ house_check_upstairs_basement_dialogue() {
 
   flag_wait("basement_breached");
 
-  //flag_waitopen( "breaching_on" );
-
-  //if basement is cleared, and top breach is not yet done
-
-  //run scarecrow to basement room
-
   node = getnode("scarecrow_guard_basement2", "targetname");
   level.scarecrow disable_ai_color();
   level.scarecrow setgoalnode(node);
@@ -2204,7 +1980,6 @@ house_check_upstairs_basement_dialogue() {
     if(!flag("basement_cleared")) {
       flag_set("scripted_dialogue_on");
 
-      //I got your back, Roach.	
       radio_dialogue("est_scr_gotyourback");
 
       flag_clear("scripted_dialogue_on");
@@ -2215,8 +1990,6 @@ house_check_upstairs_basement_dialogue() {
     flag_wait("basement_cleared_confirmed");
 
     if(!flag("house_interior_breaches_done")) {
-      //tracePassed = sighttracepassed( level.player.origin, level.scarecrow.origin, true, undefined );
-
       while(!flag("topfloor_breached")) {
         tracePassed = level.scarecrow SightConeTrace(level.player.origin + (0, 0, 64));
 
@@ -2229,7 +2002,6 @@ house_check_upstairs_basement_dialogue() {
 
           flag_set("scarecrow_said_upstairs");
 
-          //I've got this area covered Roach. Get upstairs and check the rooms on the top floor.	
           radio_dialogue("est_scr_getupstairs");
 
           flag_clear("scripted_dialogue_on");
@@ -2251,10 +2023,6 @@ house_check_basement_dialogue() {
 
   if(!flag("house_interior_breaches_done")) {
     if(!flag("basement_cleared")) {
-      //if topfloor is cleared
-      //AND if mainfloor is cleared
-      //AND basement is not cleared
-
       flag_set("scripted_dialogue_on");
 
       level.scarecrow.doorFlashChance = 1;
@@ -2268,7 +2036,6 @@ house_check_basement_dialogue() {
       flag_waitopen("dialogue_topfloor_cleared");
       flag_waitopen("dialogue_basement_cleared");
 
-      //Roach, check the basement for enemy activity. Breach and clear. Go.	
       radio_dialogue("est_gst_checkbasement");
 
       flag_clear("scripted_dialogue_on");
@@ -2278,9 +2045,6 @@ house_check_basement_dialogue() {
 
 house_clearing_banter() {
   level endon("house_interior_breaches_done");
-
-  //if main floor is cleared
-  //AND at least one interior breach remains
 
   flag_wait("mainfloor_cleared_confirmed");
 
@@ -2292,18 +2056,16 @@ house_clearing_banter() {
 
   wait 2;
 
-  //Ozone now navigates to a final guard node inside the kitchen
-
   node = getnode("ozone_guard_kitchen", "targetname");
   level.ozone disable_ai_color();
   level.ozone setgoalnode(node);
 
   if(!flag("topfloor_breached") || !flag("basement_breached")) {
     lines = [];
-    lines[lines.size] = "est_gst_thrukitchen"; //Ozone, make sure no one leaves through the kitchen.	
-    lines[lines.size] = "est_ozn_rogerthat"; //Roger that.	
-    lines[lines.size] = "est_gst_sitrep"; //Scarecrow, gimme a sitrep.	
-    lines[lines.size] = "est_scr_noonesleaving"; //No one's leaving through the front of the basement.
+    lines[lines.size] = "est_gst_thrukitchen";
+    lines[lines.size] = "est_ozn_rogerthat";
+    lines[lines.size] = "est_gst_sitrep";
+    lines[lines.size] = "est_scr_noonesleaving";
 
     foreach(index, line in lines) {
       flag_waitopen("breaching_on");
@@ -2319,9 +2081,6 @@ house_clearing_banter() {
 }
 
 house_battlechatter_check() {
-  //level endon ( "house_interior_breaches_done" );
-  //level endon ( "all_enemies_killed_up_to_house_capture" );
-
   flag_wait("breaching_on");
 
   level.ghost.voice = "seal";
@@ -2358,8 +2117,6 @@ house_autosaves() {
   saveTrig = getent("house_clearing_autosave_trigger", "targetname");
 
   while(1) {
-    //if nothing inside the house has been breached, allow a save every 30 seconds if player touches trigger
-
     if(level.interiorRoomsBreached > 0) {
       if(!flag("first_free_save")) {
         level waittill("slomo_breach_over");
@@ -2374,7 +2131,7 @@ house_autosaves() {
       saveTrig waittill("trigger");
       autosave_by_name("nearDoorBreach_save");
 
-      house_autosave_timeout(); //interruptible debounce if breach is done
+      house_autosave_timeout();
 
       flag_set("first_free_save");
 
@@ -2386,16 +2143,10 @@ house_autosaves() {
 house_autosave_timeout() {
   level endon("slomo_breach_over");
 
-  //level endon ( "breaching_number_3" );
-  //level endon ( "breaching_number_4" );
-  //level endon ( "breaching_number_5" );
-
   wait 30;
 }
 
 house_ghost_sweep() {
-  //Ghost's basic movement through the house during the clearing sequence
-
   flag_set("no_mercy");
 
   level endon("house_reset_ghost");
@@ -2467,11 +2218,7 @@ house_ghost_sweep() {
       flag_waitopen("dialogue_topfloor_cleared");
       flag_waitopen("dialogue_basement_cleared");
 
-      //Office clear!	
       radio_dialogue("est_gst_officeclear");
-
-      //Clear!
-      //radio_dialogue( "est_gst_clear" );
 
       wait 0.5;
 
@@ -2479,7 +2226,6 @@ house_ghost_sweep() {
       flag_waitopen("dialogue_topfloor_cleared");
       flag_waitopen("dialogue_basement_cleared");
 
-      //Let's go, let's go!
       delaythread(1, ::radio_dialogue, "est_gst_letsgo2");
 
       flag_clear("scripted_dialogue_on");
@@ -2496,7 +2242,6 @@ house_ghost_sweep() {
 
       flag_set("scripted_dialogue_on");
 
-      //Dining room clear!
       radio_dialogue("est_gst_diningroomclr");
 
       flag_clear("scripted_dialogue_on");
@@ -2532,8 +2277,6 @@ house_ghost_sweep() {
 house_ghost_sweep_trigger_timeout() {
   level endon("house_reset_ghost");
 
-  //Send Ghost automatically if player never hits the trigger
-
   wait 30;
 
   flag_set("ghost_begins_sweep");
@@ -2549,24 +2292,18 @@ house_ghost_sweep_trigger_manual() {
 }
 
 house_ghost_lastbreach_reset() {
-  //on the final interior breach, sends Ghost back to his spot outside the front door for the talking animation
+  level waittill_any("breaching_number_0", "breaching_number_1", "breaching_number_2");
 
-  level waittill_any("breaching_number_0", "breaching_number_1", "breaching_number_2"); //exterior
+  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5");
 
-  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5"); //interior 1
+  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5");
 
-  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5"); //interior 2
-
-  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5"); //interior 3
+  level waittill_any("breaching_number_3", "breaching_number_4", "breaching_number_5");
 
   level notify("house_reset_ghost");
 
   level.ghost enable_ai_color();
 }
-
-//********************
-// SOLAR PANELS
-//********************
 
 solar_panels() {
   panels = getEntArray("solar_panel", "targetname");
@@ -2577,18 +2314,12 @@ solar_panels() {
 }
 
 solar_panels_rotate() {
-  //self RotateYaw( 45, 180, 3, 3 );
-
   flag_wait("forestfight_littlebird_1");
 
   wait 3;
 
   self RotateYaw(-95, 60, 3, 3);
 }
-
-//********************
-// MUSIC
-//********************
 
 estate_music() {
   switch (level.start_point) {
@@ -2598,7 +2329,7 @@ estate_music() {
     case "house_approach":
     case "house_breach":
       flag_wait("start_ambush_music");
-      thread MusicLoop("estate_ambushfight"); // 2 minutes 18 seconds
+      thread MusicLoop("estate_ambushfight");
 
       flag_wait("all_enemies_killed_up_to_house_capture");
 
@@ -2607,7 +2338,7 @@ estate_music() {
       wait 5.1;
 
     case "house_briefing":
-      thread MusicLoop("estate_basement_clear"); // 1 minutes 38 seconds
+      thread MusicLoop("estate_basement_clear");
 
       flag_wait("download_started");
 
@@ -2623,7 +2354,7 @@ estate_music() {
       wait 1.1;
 
     case "escape":
-      thread MusicLoop("estate_escape"); // 2 minutes 4 seconds
+      thread MusicLoop("estate_escape");
 
       flag_wait("finish_line");
 
@@ -2642,10 +2373,6 @@ temp_text(text) {
   iPrintln(text);
 }
 
-//*****************************
-// PLAYER ZONE DETECTION
-//*****************************
-
 zone_detection_init() {
   level.playerZone = undefined;
 
@@ -2662,82 +2389,8 @@ zone_detection() {
     assertEX(isDefined(self.targetname));
 
     level.playerZone = self.targetname;
-
-    //iprintln( level.playerZone );
   }
 }
-
-/*
-Strike Package concept
-
-A preset themed attack pattern based on known player location
-	- mass helicopter troop assault
-	- faked mass troop drop in the start area and solar panels for a double envelopment assault from the east, player is near house
-	- mass troop smoke assault from the southeast with the fence getting blown up and breached
-	- vehicle assault from the road, unloading lots of enemy troops
-	- troop drop at the boathouse
-	- mass troop smoke assault from the northeast woods
-	
-28 enemy troops in a strike package, no respawns
-
-Need a way to control these options based on player position, so player does not witness spawning
-
-Rolling Strike concept
-
-After a Strike Package is deployed, it is supplemented by a Rolling Strike for some amount of time.
-During the Rolling Strike, the player is not allowed to stray from the building too far.
-Strike Components are deployed a la carte from a 'menu' of 'one-time pads'
-	- MI-17 helicopter 8-man deployment
-	- MD500 helicopter 4-man deployment
-	- UAZ jeep 6-man deployment (limited supply due to pathing options)
-	- ZIL truck 8-man deployment (limited supply due to pathing options)
-	- Remote magic spawned 4-man Hunter-killer team (unlimited supply) with helicopter for show and smoke grenade action
-	- Smokespawned 8-man assault team (unlimited supply) with smoke grenade action
-	- Magic spawned 2-man Sniper team
-	
-No components are called twice during the Rolling Strike, there are many variants for each but quantity 1 for each
-	- need to place many alternate positions that are player position sensitive
-	
-	
-1. Need to set up strike packages.
-		- each is a separate function
-			- these are activated like Strike Components, player reactive, player goes anywhere			
-2. Need to know which zone player is in at all times.
-		- use waittill trigger on back-to-back triggers
-3. Need to place a whole bunch of Strike Components in the level to support the strike packages during rolling strikes.
-		- each zone needs to have corresponding Strike Components to handle visibility to the player
-4. For the final field and the outer road, we need a failure cordon to keep the player from running into the wild
-		- failure cordon
-			- 1. don't get too far from the house warning shout + timer to fail begins unless retriggered
-			- 2. we're doomed, failsafe trigger, automatic lose
-			
-Zones:
-
-script_noteworthy: zone_trigger
-
-targetnames:
-
-zone_backsolarpanelfield
-
-zone_backyardpond
-zone_backyardshed
-zone_stables
-zone_birchfield
-
-zone_house
-zone_forest
-zone_frontsolarpanels
-zone_parkinglot
-zone_porchtriangle
-zone_porch
-zone_frontyardwedge
-zone_frontyardhigh
-
-zone_backpatio
-zone_beach
-zone_boathouse
-
-*/
 
 defense_schedule_control() {
   level endon("main_defense_fight_finished");
@@ -2746,12 +2399,10 @@ defense_schedule_control() {
   flag_wait("defense_battle_begins");
 
   level.packageThresholdPop = 0;
-  level.packageComponentThresholdPop = 14; //the enemy pop at which we allow strikeComponents to be deployed during a strikePackage
+  level.packageComponentThresholdPop = 14;
   level.enemyTotalPop = 0;
   level.componentCycleLimit = 1;
   level.packageTime = undefined;
-
-  //Every playerZone has a corresponding list of strikePackages
 
   level.strikePackage = [];
 
@@ -2895,19 +2546,12 @@ defense_schedule_control() {
 
   addStrikeComponent("zone_boathouse", ::strike_component_rpg_team_stables);
 
-  //tally up the total enemies in the package
-
-  //enemies = [];
-  //enemies = getaiarray("axis" );
   level.enemyTotalPop = 0;
 
   badsave_volume = getent("no_autosave_in_basement", "targetname");
   safeDSMhealth = level.dsmHealthMax * 0.7;
 
   while(1) {
-    //while we are in the defense phase
-    //select a strike package based on player location and run it
-
     randomStrikePackage(level.playerZone);
 
     dsm_real = getent("dsm", "targetname");
@@ -2925,8 +2569,6 @@ defense_schedule_control() {
 
     flag_set("activate_package_on_standby");
 
-    //if all exhausted completely, bail out
-
     foreach(zone, array in level.strikePackage) {
       if(level.strikePackage[zone].size <= 0) {
         level.strikePackage[zone] = undefined;
@@ -2942,25 +2584,15 @@ defense_schedule_control() {
     flag_wait("strike_package_spawned");
     flag_clear("strike_package_spawned");
 
-    //each package spawns everyone at once and the spawners autorun a deathmonitor thread on themselves
-    //monitor the deathcount for the package until some threshold pop is reached
-
     while(level.enemyTotalPop > level.packageComponentThresholdPop) {
       level waittill("counterattacker_died");
     }
-
-    //when a minimum deathcount is reached
-    //randomly select one-time-use Strike Components based on player location until the force cap is reached
-    //keep doing this until the Strike Component usage limit is reached for this Strike Package
-    //OR until the Strike Package Time on Target is expended
 
     if(!isDefined(level.packageTime)) {
       level.packageTime = 30;
     }
 
     defense_component_schedule();
-
-    //deploy the next strike_package
 
     wait 1;
   }
@@ -2976,8 +2608,6 @@ defense_component_schedule() {
   thread defense_component_timeout();
 
   while(level.packageTime > 0) {
-    //Cleanup empty arrays
-
     foreach(zone, array in level.strikeComponents) {
       if(level.strikeComponents[zone].size <= 0) {
         level.strikeComponents[zone] = undefined;
@@ -3013,8 +2643,6 @@ defense_component_schedule() {
 }
 
 defense_component_timeout() {
-  //Each package activates the release of strikeComponents for this amount of time before activating the next package
-
   level endon("main_defense_fight_finished");
   level endon("player_is_escaping");
   level endon("stop_timeout");
@@ -3024,8 +2652,6 @@ defense_component_timeout() {
     level.packageTime--;
   }
 }
-
-//=================================================
 
 addStrikePackage(zone, package) {
   level endon("main_defense_fight_finished");
@@ -3055,8 +2681,6 @@ randomStrikePackage(zone) {
 
   flag_set("strike_packages_definitely_underway");
 
-  //a strikePackage is for one-time use only; this removes any cases of this package in all the strikePackage arrays
-
   foreach(zone, array in level.strikePackage) {
     foreach(index, element in array) {
       if(element == package) {
@@ -3066,12 +2690,7 @@ randomStrikePackage(zone) {
   }
 
   return (true);
-
-  //level.strikePackage[ "zone_backsolarpanelfield" ][ 0 ] = ::strike_package_bighelidrop;
-  //level.strikePackage[ "zone_backsolarpanelfield" ][ 1 ] = "blah";
 }
-
-//=====================================
 
 addStrikeComponent(zone, component) {
   level endon("main_defense_fight_finished");
@@ -3100,8 +2719,6 @@ randomStrikeComponent(zone) {
 
   thread[[component]]();
 
-  //a strikeComponent is for one-time use only; this removes any cases of this package in all the strikePackage arrays
-
   foreach(zone, array in level.strikeComponents) {
     foreach(index, element in array) {
       if(element == component) {
@@ -3113,24 +2730,10 @@ randomStrikeComponent(zone) {
   return (true);
 }
 
-//To do:
-
-//"forest_smokeassault";
-//"birchfield_smokeassault";
-//"beachlanding";
-//"forest_smokeassault";
-//"solarfield_fakedrop";
-
-//=================================================
-
 birchfield_exfil() {
   flag_wait("download_complete");
 
   autosave_by_name("download_done");
-
-  //Ghost goes to a good spot near the front door
-
-  //*TEMP dialogue - Ghost prompts player to get the DSM
 
   if(!flag("dsm_recovered")) {
     thread birchfield_exfil_nag();
@@ -3140,11 +2743,7 @@ birchfield_exfil() {
     wait 3;
   }
 
-  //crank up Ghost's baseaccuracy
-
   level.ghost.baseAccuracy = 1000;
-
-  //spawn token enemies for Ghost to own
 
   flag_wait("dsm_recovered");
 
@@ -3152,12 +2751,8 @@ birchfield_exfil() {
 
   wait 3;
 
-  //Ghost starts using friendlychains again to get to the endzone
-
-  //This is Shepherd. We're almost at the LZ. What's your status, over?	
   radio_dialogue("est_shp_almostatlz");
 
-  //We're on our way to the LZ! Roach, let's go!!	
   level.ghost thread dialogue_queue("est_gst_onourway");
 
   wait 2;
@@ -3186,7 +2781,6 @@ birchfield_exfil() {
   thread birchfield_mortar_playerkill();
   thread birchfield_ghost_covering_shouts();
 
-  //They're bracketing our position with mortars, keep moving but watch your back!!!	
   level.ghost thread dialogue_queue("est_gst_bracketing");
 
   wait 1;
@@ -3200,7 +2794,6 @@ birchfield_exfil_nag() {
   while(1) {
     wait 2;
 
-    //Roach, the transfer's complete! I'll cover the main approach while you get the DSM! Move!	
     radio_dialogue("est_gst_dsmcomplete");
 
     wait delay;
@@ -3209,7 +2802,6 @@ birchfield_exfil_nag() {
       delay = delay * 2;
     }
 
-    //Roach! I'm covering the front! Get the DSM! We gotta get outta here!	
     radio_dialogue("est_gst_getouttahere");
   }
 }
@@ -3223,8 +2815,6 @@ birchfield_mortar_playerkill() {
 }
 
 birchfield_ghost_covering_shouts() {
-  //If Ghost gets to his colornodes, he triggers this line of dialogue to look like he's covering the player
-
   level endon("finish_line");
 
   trigs = getEntArray("ghost_covering_shout", "targetname");
@@ -3234,7 +2824,6 @@ birchfield_ghost_covering_shouts() {
 
   wait 9;
 
-  //We gotta get to the LZ! Roach, come on!	
   level.ghost dialogue_queue("est_gst_gettothelz");
 }
 
@@ -3244,16 +2833,12 @@ birchfield_ghost_shout_trigger() {
   if(!flag("ghost_covered_player")) {
     flag_set("ghost_covered_player");
 
-    //Roach, I got you covered!! Go! Go!!	
     level.ghost dialogue_queue("est_gst_gotyoucovered");
 
-    //Get to the LZ! Keep moving!		
     level.ghost dialogue_queue("est_gst_keepmoving");
   } else {
-    //I'll cover you! Move!!!		
     level.ghost dialogue_queue("est_gst_illcoveryou");
 
-    //Go! Go!		
     level.ghost dialogue_queue("est_gst_gogo");
   }
 }
@@ -3280,8 +2865,6 @@ birchfield_knockout() {
   musicStop();
 }
 
-//=================================================
-
 mortar_in_face_killplayer() {
   mortarHitOrg = playerFovGroundSpot();
   playFX(level._effect["mortar"]["dirt"], mortarHitOrg);
@@ -3289,8 +2872,6 @@ mortar_in_face_killplayer() {
   wait 0.15;
   level.player kill();
 }
-
-//=================================================
 
 strike_package_bighelidrop() {
   flag_waitopen("strike_package_birchfield_dialogue");
@@ -3306,7 +2887,7 @@ strike_package_bighelidrop() {
 
   flag_set("strike_package_bighelidrop_dialogue");
 
-  level.packageThresholdPop = 2; //max number of AI that is allowed to be alive before deploying this group
+  level.packageThresholdPop = 2;
   level.packageTime = 90;
 
   flag_wait("activate_package_on_standby");
@@ -3326,31 +2907,22 @@ strike_package_bighelidrop() {
   thread defense_helidrop_rider_setup(heli3, "heli_phoenix_03");
   thread defense_helidrop_rider_setup(heli4, "heli_phoenix_04");
 
-  //heli5 = spawn_vehicle_from_targetname_and_drive( "heli_phoenix_05" );
-
   wait 3;
 
   flag_set("strike_package_spawned");
 }
 
 strike_package_bighelidrop_dialogue() {
-  //Sniper Team One to strike team, be advised, we got enemy helos approaching from the northwest and southeast.
   radio_dialogue("est_snp1_mainroad");
 
-  //Enemy choppers in 15 seconds.
   radio_dialogue("est_snp1_15seconds");
 
-  //Roger that, 15 seconds!
   radio_dialogue("est_gst_15seconds");
 
   flag_clear("strike_package_bighelidrop_dialogue");
 }
 
-//=================================================
-
 strike_package_birchfield_smokeassault() {
-  //blow up the fence with several charges detonating, and quake the player each time
-
   flag_waitopen("strike_package_bighelidrop_dialogue");
   flag_waitopen("strike_package_boathouse_dialogue");
   flag_waitopen("strike_package_solarfield_dialogue");
@@ -3364,7 +2936,7 @@ strike_package_birchfield_smokeassault() {
 
   flag_set("strike_package_birchfield_dialogue");
 
-  level.packageThresholdPop = 10; //max number of AI that is allowed to be alive before deploying this group
+  level.packageThresholdPop = 10;
   level.packageTime = 120;
 
   flag_wait("activate_package_on_standby");
@@ -3389,15 +2961,9 @@ strike_package_birchfield_smokeassault() {
     flag_set("fence_removed");
   }
 
-  //turn on the smoke machines to hide the spawns
-
-  //spawn the attack as one big batch, no respawns
-
   core_spawn("birchfield_smokeassault_leftflank", ::birchfield_leftflank_routing);
   core_spawn("birchfield_smokeassault_rightflank", ::birchfield_rightflank_routing);
   core_spawn("birchfield_smokeassault_centersupport", ::birchfield_centersupport_routing);
-
-  //send out the distracting MD-500 helicopters
 
   wait 3;
 
@@ -3408,23 +2974,18 @@ strike_package_birchfield_smokeassault_dialogue() {
   wait 2;
 
   if(isalive(level.scarecrow)) {
-    //What the hell was that?
     radio_dialogue("est_scr_whatwasthat");
   }
 
-  //Be advised, you have a large concentration of hostiles moving in from the southeast, they just breached the perimeter!	
   radio_dialogue("est_snp1_hostilesse");
 
-  //I'll try to thin 'em out before they get too close. Recommend you switch to scoped weapons, over.	
   radio_dialogue("est_snp1_thinemout");
 
   if(isalive(level.scarecrow) || isalive(level.ozone)) {
-    //Roger that! Everyone cover the field to the southeast! Move!	
     radio_dialogue("est_gst_fieldtose");
   }
 
   if(isalive(level.ozone)) {
-    //I got eyes on! Here they come! They're in the field to the the southeast!	
     radio_dialogue("est_ozn_eyeson");
   }
 
@@ -3435,8 +2996,6 @@ birchfield_leftflank_routing() {
   assertEX(isalive(self), "Tried to pass a dead AI into this function.");
 
   self endon("death");
-
-  //nodes = getnodearray("birchfield_smokeassault_1a", "targetname" );
 
   nodeLoiterTime = randomfloatrange(0.5, 2);
   nodeInitRadius = 256;
@@ -3494,8 +3053,6 @@ birchfield_centersupport_routing() {
   self terminal_guidance();
 }
 
-//=================================================
-
 strike_package_boathouse_helidrop() {
   flag_waitopen("strike_package_bighelidrop_dialogue");
   flag_waitopen("strike_package_birchfield_dialogue");
@@ -3510,7 +3067,7 @@ strike_package_boathouse_helidrop() {
 
   flag_set("strike_package_boathouse_dialogue");
 
-  level.packageThresholdPop = 12; //max number of AI that is allowed to be alive before deploying this group
+  level.packageThresholdPop = 12;
   level.packageTime = 45;
 
   if(!flag("dsm_recovered")) {
@@ -3529,27 +3086,20 @@ strike_package_boathouse_helidrop() {
 }
 
 strike_package_boathouse_helidrop_dialogue() {
-  //flag_wait( "boathouse_invaders_arrived" );
   wait 5;
 
-  //They're dropping in more troops west of the house!	
   radio_dialogue("est_snp1_troopswest");
 
-  //They must be by the boathouse! Cover the west approach!
   radio_dialogue("est_gst_boathouse");
 
   if(isalive(level.ozone)) {
-    //We got 249s and RPGs at the dining room window, plus L86 machine guns.	
     radio_dialogue("est_ozn_249sandrpgs");
 
-    //Roger that, use 'em to cut 'em down as they come outta the treeline!	
     radio_dialogue("est_gst_cutemdown");
   }
 
   flag_clear("strike_package_boathouse_dialogue");
 }
-
-//=================================================
 
 strike_package_solarfield() {
   flag_waitopen("strike_package_bighelidrop_dialogue");
@@ -3565,7 +3115,7 @@ strike_package_solarfield() {
 
   flag_set("strike_package_solarfield_dialogue");
 
-  level.packageThresholdPop = 17; //max number of AI that is allowed to be alive before deploying this group
+  level.packageThresholdPop = 17;
   level.packageTime = 60;
 
   flag_wait("activate_package_on_standby");
@@ -3574,8 +3124,6 @@ strike_package_solarfield() {
   if(!flag("dsm_recovered")) {
     thread strike_package_solarfield_dialogue();
   }
-
-  //spawn the attack as one big batch, no respawns
 
   core_spawn("solarfield_pkg_openground", ::solarfield_routing_openground);
   core_spawn("solarfield_pkg_forest", ::solarfield_routing_forest);
@@ -3590,36 +3138,27 @@ strike_package_solarfield() {
 strike_package_solarfield_dialogue() {
   level endon("dsm_recovered");
 
-  //I have eyes on additional hostile forces moving in on your position. They're approaching through the solar panels east of the house.	
   radio_dialogue("est_snp1_additionalhostile");
 
-  //They're moving in through the solar panels east of the house!	
   radio_dialogue("est_gst_solarpanelseast");
 
   if(isalive(level.scarecrow)) {
-    //Roger, I'll try to cut 'em off as they come through the trees.	
     radio_dialogue("est_scr_comethrutrees");
   }
 
   claymoreCount = level.player GetWeaponAmmoStock("claymore");
 
   if(level.gameSkill < 2 && !flag("claymore_hint_printed") && claymoreCount > 4) {
-    //only print a hint on screen for easy and normal and less than 5 claymores in their stockpile
-
     flag_set("claymore_hint_printed");
     level.player thread display_hint("claymore_hint");
   }
 
-  //Use your claymores if you have 'em. Plant 'em around the trail east of the house.	
   radio_dialogue("est_gst_easttrail");
 
   flag_clear("strike_package_solarfield_dialogue");
 }
 
 solarfield_routing_openground() {
-  //these guys are faster and more overt
-  //they change locations faster and carry SMGs
-
   assertEX(isalive(self), "Tried to pass a dead AI into this function.");
 
   self endon("death");
@@ -3641,9 +3180,6 @@ solarfield_routing_openground() {
 }
 
 solarfield_routing_forest() {
-  //these guys are slower and sneakier
-  //they carry heavier weapons
-
   assertEX(isalive(self), "Tried to pass a dead AI into this function.");
 
   self endon("death");
@@ -3668,8 +3204,6 @@ solarfield_routing_forest() {
   self terminal_guidance();
 }
 
-//=================================================
-
 strike_package_frontyard_md500_rush() {
   flag_waitopen("strike_package_bighelidrop_dialogue");
   flag_waitopen("strike_package_birchfield_dialogue");
@@ -3684,7 +3218,6 @@ strike_package_frontyard_md500_rush() {
 
   flag_set("strike_package_md500rush_dialogue");
 
-  //level.packageThresholdPop = 8;	//max number of AI that is allowed to be alive before deploying this group
   level.packageThresholdPop = 2;
   level.packageTime = 90;
 
@@ -3708,14 +3241,11 @@ strike_package_frontyard_md500_rush() {
 strike_package_md500_rush_dialogue() {
   level endon("dsm_recovered");
 
-  //Enemy fast-attack choppers coming in from the northwest.	
   radio_dialogue("est_snp1_fastattack");
 
-  //Roger that. Enemy helos approaching from the northwest.	
   radio_dialogue("est_gst_helosnw");
 
   if(isalive(level.scarecrow)) {
-    //We gotta cover the front lawn! 	
     radio_dialogue("est_scr_frontlawn");
   }
 
@@ -3724,38 +3254,26 @@ strike_package_md500_rush_dialogue() {
     level.ozone disable_ai_color();
     level.ozone setgoalnode(node);
 
-    //I'm moving to the main windows, I need someone to mine and cover the driveway approach.	
     radio_dialogue("est_ozn_mainwindows");
   }
 
   claymoreCount = level.player GetWeaponAmmoStock("claymore");
 
   if(level.gameSkill < 2 && !flag("claymore_hint_printed") && claymoreCount > 4) {
-    //only print a hint on screen for easy and normal and if they have more than 5 claymores left in stockpile
-
     flag_set("claymore_hint_printed");
     level.player thread display_hint("claymore_hint");
   }
 
-  //Roach, use your claymores on the driveway and pull back to the house!	
   radio_dialogue("est_gst_useclaymores");
 
   flag_clear("strike_package_md500rush_dialogue");
 }
 
-//****************************************/
-
 /
-// STRIKE COMPONENTS - BASIC SMOKEASSAULT
-//****************************************/
 
 /
 
-//****************************************/
-
 /
-// STRIKE COMPONENTS - RPG TEAMS
-//****************************************/
 
 /
 
@@ -3775,18 +3293,16 @@ strike_component_rpg_team_stables() {
 
   flag_set("strike_component_activated");
 
-  level.componentThresholdPop = 24; //max number of AI that is allowed to be alive before deploying this component
+  level.componentThresholdPop = 24;
 
   flag_wait("activate_component_on_standby");
   flag_clear("activate_component_on_standby");
 
   core_spawn("stables_rpg_team", ::rpg_team_nav, "stables_rpg_team_fp");
 
-  //RPG team moving in from the east!!	
   radio_dialogue("est_snp1_rpgteameast");
 
   if(isalive(level.ozone)) {
-    //Roger that, RPG team moving in from the east!!	
     radio_dialogue("est_ozn_rpgteameast");
   }
 
@@ -3809,17 +3325,15 @@ strike_component_rpg_team_boathouse() {
 
   flag_set("strike_component_activated");
 
-  level.componentThresholdPop = 23; //max number of AI that is allowed to be alive before deploying this component
+  level.componentThresholdPop = 23;
 
   flag_wait("activate_component_on_standby");
   flag_clear("activate_component_on_standby");
 
   core_spawn("boathouse_rpg_team", ::rpg_team_nav, "boathouse_rpg_team_fp");
 
-  //RPG team approaching from the west!!	
   radio_dialogue("est_snp1_rpgteamwest");
 
-  //Solid copy! RPG team approaching from the west!!	
   radio_dialogue("est_gst_rpgteamwest");
 
   flag_clear("rpg_boathouse_dialogue");
@@ -3841,18 +3355,16 @@ strike_component_rpg_team_southwest() {
 
   flag_set("strike_component_activated");
 
-  level.componentThresholdPop = 23; //max number of AI that is allowed to be alive before deploying this component
+  level.componentThresholdPop = 23;
 
   flag_wait("activate_component_on_standby");
   flag_clear("activate_component_on_standby");
 
   core_spawn("southwest_rpg_team", ::rpg_team_nav, "southwest_rpg_team_fp");
 
-  //RPG team moving in from the southwest!!	
   radio_dialogue("est_snp1_rpgteamsw");
 
   if(isalive(level.ozone)) {
-    //Got it! RPG team moving in from the southwest!!	
     radio_dialogue("est_ozn_rpgteamsw");
   }
 
@@ -3885,16 +3397,11 @@ rpg_team_nav(nodeName) {
   self terminal_guidance();
 }
 
-//****************************************/
-
 /
-// HELICOPTER AI SPAWN
-//****************************************/
 
 /
 
 defense_helidrop_rider_setup(heli, heliName) {
-  //wait 0.05;	//*TEMP* take this out when the heli riders bug is fixed
   riders = heli.riders;
 
   nodes = getnodearray(heliName, "targetname");
@@ -3902,10 +3409,6 @@ defense_helidrop_rider_setup(heli, heliName) {
   assertEX(nodes.size, "You have to have at least one node for the riders to attack towards, with the same targetname as the helicopter they're from.");
 
   startNode = nodes[randomint(nodes.size)];
-
-  //use targetnames on nodes tied to helicopters
-  //one or more appropriate node chains lead to the DSM for a given helicopter
-  //randomly pick one for the whole group so they stick together, send them on an attack mission
 
   foreach(rider in riders) {
     if(isDefined(rider.script_startingposition)) {
@@ -3939,8 +3442,6 @@ defense_helidrop_rider_deploy(heli, heliName, startNode) {
   if(isDefined(heli))
     heli waittill("unloaded");
 
-  //access thread for customsettings
-
   settings = defense_helidrop_rider_settings(heliName);
 
   self.goalradius = settings["goalradius"];
@@ -3963,8 +3464,6 @@ defense_helidrop_rider_deploy(heli, heliName, startNode) {
 }
 
 defense_helidrop_rider_settings(heliName) {
-  //filter by helicopter targetname
-
   settings = [];
 
   if(heliName == "md500_rush_1") {
@@ -4021,11 +3520,7 @@ defense_helidrop_rider_settings(heliName) {
   return (settings);
 }
 
-//****************************************/
-
 /
-// AI SPAWN &BIOMETRICS
-//****************************************/
 
 /
 
@@ -4042,18 +3537,14 @@ core_spawn(spawnerName, spawnFunction, var) {
 }
 
 defense_enemy_spawn() {
-  //this is run on all enemies that spawn after the download is started for enemy pop tracking
-
   array_spawn_function_noteworthy("counterattacker", ::defense_enemy_init);
   array_spawn_function_noteworthy("counterattacker", ::defense_enemy_flashbang_tweak);
 }
 
 defense_enemy_flashbang_tweak() {
   if(level.gameSkill >= 2) {
-    // hard and veteran
     self.doorFlashChance = 1;
   } else {
-    // normal and easy
     self.doorFlashChance = .7;
   }
 }
@@ -4070,11 +3561,7 @@ defense_enemy_deathmonitor() {
   level.enemyTotalPop--;
 }
 
-//****************************************/
-
 /
-// ENDING AI DRONES
-//****************************************/
 
 /
 
@@ -4091,22 +3578,11 @@ ending_shadowops_drone_init() {
   self allowedstances("crouch");
 }
 
-//****************************************/
-
 /
-// AI NAVIGATION &ENCROACHMENT
-//****************************************/
 
 /
 
 roaming_nodechain_nav(node, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeClosureRate, nodeClosureInterval, earlyEndonMsg) {
-  //node 				= node to start from
-  //nodeLoiterTime	= how long to stay at the current node post-closure phase, before being assigned to the next one
-  //nodeEndRadius		= smallest goalradius around the node to reach before loitering
-  //nodeClosureRate	= percentage of radius reduction per nodeClosureInterval to pull the AI closer to the node
-  //nodeClosureInterval = time to wait before reducing the goalradius
-  //earlyEndonMsg		= msg to endon
-
   self endon("death");
 
   if(isDefined(earlyEndonMsg)) {
@@ -4138,24 +3614,6 @@ roaming_nodechain_nav(node, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeC
 }
 
 roaming_nodecluster_nav(nodes, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeClosureRate, nodeClosureInterval, earlyEndonMsg) {
-  //nodes				= array of potential starting nodes
-  //nodeLoiterTime	= how long to stay at the current node post-closure phase, before being assigned to the next one
-  //nodeEndRadius		= smallest goalradius around the node to reach before loitering
-  //nodeClosureRate	= percentage of radius reduction per nodeClosureInterval to pull the AI closer to the node
-  //nodeClosureInterval = time to wait before reducing the goalradius
-  //earlyEndonMsg		= msg to endon
-
-  //setup in map: make a set of starting nodes
-  //draw an imaginary line to the end destination from the general starting area
-  //set up multiple nodes at significantly different positions as 'clusters', //each cluster is one side of the line only, clusters sequentially alternate sides of the line
-
-  //randomly pick one of the starting nodes
-  //use nodecluster encroachment loop with adjustable closure rate settings
-
-  //randomly pick one node from the next 'cluster'
-  //use nodecluster encroachment loop with adjustable closure rate settings
-  //loop until no more clusters exist
-
   self endon("death");
 
   if(isDefined(earlyEndonMsg)) {
@@ -4194,15 +3652,7 @@ roaming_nodecluster_nav(nodes, nodeLoiterTime, nodeInitRadius, nodeEndRadius, no
 }
 
 terminal_guidance() {
-  //attack the DSM
-  //attack the player using default AI if there is no DSM to attack
-  //intercept the player on a new navigation goal if player_is_escaping is set
-
   self endon("death");
-
-  //Start monitoring the trigger for failsafe suicide bombing if touched by this enemy
-  //Do not start dsm destruction if the player has recovered the DSM && has hit the player_is_escaping trigger
-  //However, navigation to the DSM is ok even if the DSM has been retrieved if player has not 'escaped' yet
 
   if(!flag("player_is_escaping")) {
     dsm = getent("dsm", "targetname");
@@ -4212,10 +3662,6 @@ terminal_guidance() {
     self.goalradius = 4000;
 
     if(!flag("dsm_recovered") && !flag("dsm_destroyed")) {
-      //self thread dsm_destruction_ai_trig( dsm );
-
-      //Now they are made aware of the dsm as a sentient enemy if they haven't seen it already
-
       self getenemyinfo(dsm);
     }
   }
@@ -4228,10 +3674,6 @@ terminal_guidance() {
 }
 
 terminal_guidance_playerchase() {
-  //AI nav once player is escaping with the DSM
-  //NOW ATTACK THE PLAYER'S EXFIL ROUTE AND GO AFTER THE PLAYER MORE
-  //CHANGE THE ai pursuit SETTINGS IN THE MASTER 'player is escaping' monitoring thread
-
   self endon("death");
 
   chasenode = getnode("chase_player", "targetname");
@@ -4252,8 +3694,6 @@ terminal_hunters() {
 terminal_blockers() {
   flag_wait("point_of_no_return");
 
-  //The enemies that spawn here are too close to the ending dragging sequence, so don't spawn if testing that start point
-
   if(!flag("test_ending")) {
     exfil_blockers = getEntArray("player_exfil_blocker", "targetname");
     array_thread(exfil_blockers, ::spawn_ai);
@@ -4270,11 +3710,7 @@ terminal_hillchasers() {
   array_thread(exfil_hillchasers, ::spawn_ai);
 }
 
-//****************************************/
-
 /
-// FRIENDLIES
-//****************************************/
 
 /
 
@@ -4283,24 +3719,14 @@ tough_friendly_biometrics(guy) {
 
   assertEX(isDefined(guy), "Must specify a string that is the name of the friendly.");
 
-  if(guy == "scarecrow") {
-    //death notification dialogue for scarecrow
-  }
+  if(guy == "scarecrow") {}
 
-  if(guy == "ozone") {
-    //death notification dialogue for ozone
-  }
+  if(guy == "ozone") {}
 }
 
-tough_friendly_kill() {
-  //TODO wait on a flag before killing them
-  //TODO failsafe kill outright during field run from mortar hits!!
-}
+tough_friendly_kill() {}
 
 magic_sniper_guy() {
-  //Once in a while, our magic sniper guy Archer will kill an enemy for the player
-  //Occasionally he will go out of contact and say so
-
   flag_wait("defense_battle_begins");
 
   flag_set("sniper_in_position");
@@ -4350,7 +3776,6 @@ magic_sniper_guy_breaktimes() {
 
   flag_clear("sniper_in_position");
 
-  //I'm displacing. You're gonna be without sniper support for thirty seconds, standby.	
   radio_dialogue("est_snp1_displacing");
 
   flag_clear("sniper_breaktime_dialogue");
@@ -4381,15 +3806,10 @@ magic_sniper_guy_targeting(enemies) {
 
     if(isalive(enemy)) {
       linesight = SightTracePassed(level.player.origin + (0, 0, 64), enemy.origin + (0, 0, 32), false, undefined);
-      //if( linesight )
 
-      //trace1 = player_can_see_ai( enemy );
       trace2 = enemy CanSee(level.player);
       dist = length(level.player.origin - enemy.origin);
-      dangerCloseSniperRange = 480; //so it's unlikely to happen in tight indoor spaces
-
-      //if( enemy CanSee( level.player ) )
-      //if( trace1 && trace2 && dist >= 480 )
+      dangerCloseSniperRange = 480;
 
       if(flag("sniper_in_position")) {
         if(linesight && trace2 && dist >= 480) {
@@ -4415,26 +3835,14 @@ magic_sniper_guy_targeting(enemies) {
   return (false);
 }
 
-//****************************************/
-
 /
-// DSM
-//****************************************/
 
 /
 
 dsm_setup() {
   flag_wait("download_started");
 
-  //This struct controls the function stack for the ai that queue up to suicide bomb the dsm
-
   level.dsmDestructionController = spawnStruct();
-
-  //This makes the dsm look like an AI to the enemy
-  //They will seek cover in the goalradius at their engagementdist if no enemy
-  //If they have an enemy, they will seek cover within the goalradius to attack the enemy
-  //The dsm has a higher threatbias (defaults to 0 on AI) so they will prioritize hunting for it first
-  //They will start engaging it at a range of maxvisibledist
 
   dsm = getent("dsm", "targetname");
 
@@ -4526,120 +3934,47 @@ download_progress() {
 
   if(!flag("download_test")) {
     level.hudelem = maps\_hud_util::get_countdown_hud(-300, undefined, undefined, true);
-    level.hudelem SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem.label = &"ESTATE_DSM_FRAME"; // DSM v6.04
-    //level.hudelem.fontScale = 1.5;
+    level.hudelem SetPulseFX(30, 900000, 700);
+    level.hudelem.label = &"ESTATE_DSM_FRAME";
+
     wait 0.65;
 
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
-    level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = &"ESTATE_DSM_WORKING"; // ...working...
+    level.hudelem_status SetPulseFX(30, 900000, 700);
+    level.hudelem_status.label = &"ESTATE_DSM_WORKING";
     wait 2.85;
 
     level.hudelem_status destroy();
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
-    level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = &"ESTATE_DSM_NETWORK_FOUND"; // ...network found...
+    level.hudelem_status SetPulseFX(30, 900000, 700);
+    level.hudelem_status.label = &"ESTATE_DSM_NETWORK_FOUND";
     wait 3.75;
 
     level.hudelem_status destroy();
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
-    level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = &"ESTATE_DSM_IRONBOX"; // ...ironbox detected...
+    level.hudelem_status SetPulseFX(30, 900000, 700);
+    level.hudelem_status.label = &"ESTATE_DSM_IRONBOX";
     wait 2.25;
 
     level.hudelem_status destroy();
 
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
-    level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = &"ESTATE_DSM_BYPASS"; // ...bypassed.
+    level.hudelem_status SetPulseFX(30, 900000, 700);
+    level.hudelem_status.label = &"ESTATE_DSM_BYPASS";
     wait 3.1;
 
     level.hudelem destroy();
     level.hudelem_status destroy();
   }
 
-  //Download meter - internally fixed time, visibly variable rate update, hard coded
-
-  //6 minutes of defense battle gameplay
-
-  //58 files at 1 file per second = 58 s
-  //122 files at 2 files per second = 61 s
-  //244 files at 4 files per second = 61 s
-  //600 files at 10 files per second = 60 s
-  //2400 files at 20 files per second max rate = 120s
-
-  //3424 files over 360s (6 mins)
-
-  //medium version
-
-  //5 minutes of defense battle gameplay
-
-  //88 files at 1 file per second = 88 s
-  //122 files at 2 files per second = 61 s
-  //204 files at 4 files per second = 51 s
-  //600 files at 10 files per second = 60 s
-  //800 files at 20 files per second max rate = 40s
-
-  //1814 files over 300s (5 mins)
-
-  //short version
-
-  //4 minutes of defense battle gameplay
-
-  //58 files at 1 file per second = 58 s
-  //62 files at 2 files per second = 31 s
-  //124 files at 4 files per second = 31 s
-  //300 files at 10 files per second = 30 s
-  //600 files at 20 files per second max rate = 30s
-
-  //1144 files over 180s (3 mins)
-
-  //subtract from available time pool
-  //only increment by 1 second, cycle through the rates on a per second basis up and down, 12345, 54321 = marker
-
   level.currentfiles = 0;
 
-  //8 minutes
-
-  /*
   level.downloadGroups = [];
-  level.downloadGroups[ 1 ] = 58;		//1
-  level.downloadGroups[ 2 ] = 2400;	//20 fps
-  level.downloadGroups[ 3 ] = 122;	//2 fps
-  level.downloadGroups[ 4 ] = 244;	//4 fps
-  level.downloadGroups[ 5 ] = 600;	//10 fps
-  */
-
-  //5 minutes
-
-  level.downloadGroups = [];
-  level.downloadGroups[1] = 95; //1 fps		//5 files per 5 second burst //100 files = 100 seconds
-  level.downloadGroups[2] = 1280; //20 fps 	//80 files per 4 second burst //1280 files = 64 seconds
-  level.downloadGroups[3] = 112; //2 fps		//8 files per 4 second burst //112 files = 56 seconds
-  level.downloadGroups[4] = 180; //4 fps		//12 files per 3 second burst //180 files = 45 seconds
-  level.downloadGroups[5] = 400; //10 fps 	//50 files per 5 second burst //350 files = 35 seconds
-
-  //For testing timer and file meter
-  /*
-  level.downloadGroups = [];
-  level.downloadGroups[ 1 ] = 35;	//1 fps	//5 files per 5 second burst //100 files = 100 seconds
-  level.downloadGroups[ 2 ] = 560;	//20 fps //80 files per 4 second burst //1200 files = 60 seconds
-  level.downloadGroups[ 3 ] = 56;	//2 fps	//8 files seconds per 4 second burst //120 files = 60 seconds
-  level.downloadGroups[ 4 ] = 84;	//4 fps	//12 files seconds per 3 second burst //180 files = 45 seconds
-  level.downloadGroups[ 5 ] = 350;	//10 fps //50 files per 5 second burst //350 files = 35 seconds
-  */
-
-  //3 minutes
-
-  /*
-  level.downloadGroups = [];
-  level.downloadGroups[ 1 ] = 58;		//1 fps
-  level.downloadGroups[ 2 ] = 600;	//20 fps
-  level.downloadGroups[ 3 ] = 62;		//2 fps
-  level.downloadGroups[ 4 ] = 124;	//4 fps
-  level.downloadGroups[ 5 ] = 300;	//10 fps
-  */
+  level.downloadGroups[1] = 95;
+  level.downloadGroups[2] = 1280;
+  level.downloadGroups[3] = 112;
+  level.downloadGroups[4] = 180;
+  level.downloadGroups[5] = 400;
 
   level.totalfiles = 0;
 
@@ -4647,53 +3982,52 @@ download_progress() {
     level.totalfiles = level.totalfiles + level.downloadGroups[i];
   }
 
-  level.hudelem = maps\_hud_util::get_countdown_hud(-210); //205
-  level.hudelem SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem.label = &"ESTATE_DSM_PROGRESS"; // Files copied:
+  level.hudelem = maps\_hud_util::get_countdown_hud(-210);
+  level.hudelem SetPulseFX(30, 900000, 700);
+  level.hudelem.label = &"ESTATE_DSM_PROGRESS";
 
   level.hudelem_status = maps\_hud_util::get_download_state_hud(-62, undefined, undefined, true);
-  level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.hudelem_status SetPulseFX(30, 900000, 700);
   level.hudelem_status setvalue(0);
 
   level.hudelem_status_total = maps\_hud_util::get_countdown_hud(-62, undefined, undefined, true);
-  level.hudelem_status_total SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.hudelem_status_total SetPulseFX(30, 900000, 700);
 
-  //level.hudelem_status_total.label = "/" + level.totalfiles;
   level.hudelem_status_total.label = &"ESTATE_DSM_SLASH_TOTALFILES";
 
   level.hudelem_dltimer_heading = maps\_hud_util::get_countdown_hud(-210, 120);
-  level.hudelem_dltimer_heading SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dltimer_heading.label = &"ESTATE_DSM_DLTIMELEFT"; // Time left:
+  level.hudelem_dltimer_heading SetPulseFX(30, 900000, 700);
+  level.hudelem_dltimer_heading.label = &"ESTATE_DSM_DLTIMELEFT";
   level.hudelem_dltimer_heading.fontScale = 1.1;
   level.hudelem_dltimer_heading.color = (0.4, 0.5, 0.4);
 
   level.hudelem_dltimer_value = maps\_hud_util::get_countdown_hud(-132, 120, undefined, true);
-  level.hudelem_dltimer_value SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.hudelem_dltimer_value SetPulseFX(30, 900000, 700);
   level.hudelem_dltimer_value.fontScale = 1.1;
   level.hudelem_dltimer_value.color = (0.4, 0.5, 0.4);
   level.hudelem_dltimer_value.alignX = "right";
 
   level.hudelem_dltimer_units = maps\_hud_util::get_countdown_hud(-126, 120, undefined, true);
-  level.hudelem_dltimer_units SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_MINS"; // mins
+  level.hudelem_dltimer_units SetPulseFX(30, 900000, 700);
+  level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_MINS";
   level.hudelem_dltimer_units.fontScale = 1.1;
   level.hudelem_dltimer_units.color = (0.4, 0.5, 0.4);
 
   level.hudelem_dlrate_heading = maps\_hud_util::get_countdown_hud(-91, 120, undefined, true);
-  level.hudelem_dlrate_heading SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dlrate_heading.label = &"ESTATE_DSM_DL_RATEMETER"; // at
+  level.hudelem_dlrate_heading SetPulseFX(30, 900000, 700);
+  level.hudelem_dlrate_heading.label = &"ESTATE_DSM_DL_RATEMETER";
   level.hudelem_dlrate_heading.fontScale = 1.1;
   level.hudelem_dlrate_heading.color = (0.4, 0.5, 0.4);
 
   level.hudelem_dlrate_value = maps\_hud_util::get_countdown_hud(-44, 120, undefined, true);
-  level.hudelem_dlrate_value SetPulseFX(30, 900000, 700); // something, decay start, decay duration
+  level.hudelem_dlrate_value SetPulseFX(30, 900000, 700);
   level.hudelem_dlrate_value.fontScale = 1.1;
   level.hudelem_dlrate_value.color = (0.4, 0.5, 0.4);
   level.hudelem_dlrate_value.alignX = "right";
 
   level.hudelem_dlrate_units = maps\_hud_util::get_countdown_hud(-41, 120, undefined, true);
-  level.hudelem_dlrate_units SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dlrate_units.label = &"ESTATE_DSM_DLRATE"; // Mbps
+  level.hudelem_dlrate_units SetPulseFX(30, 900000, 700);
+  level.hudelem_dlrate_units.label = &"ESTATE_DSM_DLRATE";
   level.hudelem_dlrate_units.fontScale = 1.1;
   level.hudelem_dlrate_units.color = (0.4, 0.5, 0.4);
 
@@ -4708,24 +4042,9 @@ download_progress() {
   startTime = gettime();
 
   while(level.currentfiles < level.totalfiles) {
-    /*
-    if( level.currentfiles > 1200 )
-    {
-    	thread ending_moments();
-    	badguys = getaiarray("axis" );
-    	foreach( guy in badguys )
-    	{
-    		guy kill();
-    	}
-    	break;
-    }
-    */
-
     level.timeElapsed = (gettime() - startTime) / 1000;
 
     fileSegment = 0;
-
-    //Select a download rate
 
     num = randomintrange(1, 100);
 
@@ -4751,29 +4070,29 @@ download_progress() {
 
     switch (marker) {
       case 1:
-        //segment = 1;
+
         segment = 5;
-        rateTime = 1; //1 fps	//5 seconds per burst
+        rateTime = 1;
         break;
       case 2:
-        //segment = 20;
+
         segment = 80;
-        rateTime = 1 / 20; //20 fps //4 seconds per burst
+        rateTime = 1 / 20;
         break;
       case 3:
-        //segment = 2;
+
         segment = 8;
-        rateTime = 1 / 2; //2 fps	//4 seconds per burst
+        rateTime = 1 / 2;
         break;
       case 4:
-        //segment = 4;
+
         segment = 12;
-        rateTime = 1 / 4; //4 fps	//3 seconds per burst
+        rateTime = 1 / 4;
         break;
       case 5:
-        //segment = 10;
+
         segment = 50;
-        rateTime = 1 / 10; //10 fps //5 seconds per burst
+        rateTime = 1 / 10;
         break;
     }
 
@@ -4804,8 +4123,6 @@ download_display_delete() {
   if(isDefined(level.hudelem_status_total))
     level.hudelem_status_total destroy();
 
-  //TIMER
-
   if(isDefined(level.hudelem_dltimer))
     level.hudelem_dltimer destroy();
 
@@ -4817,8 +4134,6 @@ download_display_delete() {
 
   if(isDefined(level.hudelem_dltimer_secs))
     level.hudelem_dltimer_secs destroy();
-
-  //DATA RATE
 
   if(isDefined(level.hudelem_dlrate_heading))
     level.hudelem_dlrate_heading destroy();
@@ -4839,38 +4154,28 @@ download_update(fileSegment, segment, rateTime, marker) {
   if(!level.downloadGroups[marker]) {
     return;
   }
-  //set the download Mbps rate to dovetail the change in file acquisition speed
-  //make the time remaining based off a constant known data size	
-
-  //300 seconds at 20fps is 6000 files, top sustained speed of 26.8 Mbps
-
-  //300 seconds at 20 fps (5 minutes) +/- 2 minutes, 26.8 +/- 6 Mbps
-  //6000 seconds at 1 fps (100 minutes) +/- 30 minutes, 0.13 +/- 0.05 Mbps
-  //3000 seconds at 2 fps (50 minutes) +/- 15 minutes, 0.3 +/- 0.16 Mbps
-  //1500 seconds at 4 fps (25 minutes) +/- 8 minutes, 5 +/- 2.2 Mbps
-  //600 seconds at 10 fps (10 minutes) +/- 3 minutes, 14 +/- 3.7 Mbps
 
   dlrate = undefined;
   timeleft = undefined;
 
   switch (marker) {
-    case 1: //1 fps
+    case 1:
       timeleft = randomintrange(70, 130);
       dlrate = randomfloatrange(0.08, 0.18);
       break;
-    case 2: //20 fps
+    case 2:
       timeleft = randomintrange(3, 5);
       dlrate = randomfloatrange(20.8, 32.8);
       break;
-    case 3: //2 fps
+    case 3:
       timeleft = randomintrange(35, 65);
       dlrate = randomfloatrange(0.17, 0.46);
       break;
-    case 4: //4 fps
+    case 4:
       timeleft = randomintrange(17, 33);
       dlrate = randomfloatrange(2.8, 7.2);
       break;
-    case 5: //10 fps
+    case 5:
       timeleft = randomintrange(7, 13);
       dlrate = randomfloatrange(11.7, 17.7);
       break;
@@ -4894,10 +4199,6 @@ download_update(fileSegment, segment, rateTime, marker) {
 
     dsm_real = getent("dsm", "targetname");
     playerDSMdist = length(level.player.origin - dsm_real.origin);
-
-    //Save only if player is within reasonable range of DSM
-    //&& DSM is at 70% integrity or greater
-    //&& not in the basement areas (a bit of anti-camping)
 
     badsave_volume = getent("no_autosave_in_basement", "targetname");
 
@@ -4950,7 +4251,7 @@ download_fake_timer() {
 
     if(frac >= level.switchtosecs && frac < 1 && !erase_minutes) {
       erase_minutes = true;
-      level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_SECS"; // secs
+      level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_SECS";
     }
 
     if(frac >= level.switchtosecs && frac < 1) {
@@ -4976,8 +4277,6 @@ download_fake_timer() {
 }
 
 digi_rounder(num, tenthsonly) {
-  //Adjusts num to total of 3 sigfigs if > 1, 2 sigfigs if < 1
-
   if(num >= 10 || isDefined(tenthsonly)) {
     num = num * 10;
     num = int(num);
@@ -4996,13 +4295,10 @@ digi_rounder(num, tenthsonly) {
     }
   } else
   if(num < 10 && num >= 1) {
-    //8.2 vs. 8.25
-    //7.6 vs. 7.68
+    bignum = num * 10;
+    checknum = int(num * 10);
 
-    bignum = num * 10; //82 vs. 82.5
-    checknum = int(num * 10); //82 vs. 82
-
-    diff = bignum - checknum; //0 & 0.5
+    diff = bignum - checknum;
 
     if(diff == 0) {
       num = num + 0.01;
@@ -5015,7 +4311,7 @@ digi_rounder(num, tenthsonly) {
     intnum = int(num * 100);
     intchecknum = int(checknum * 100);
 
-    mod = intnum % intchecknum; //mod only accepts integers
+    mod = intnum % intchecknum;
 
     if(mod == 0) {
       num = num + 0.01;
@@ -5030,15 +4326,12 @@ digi_rounder(num, tenthsonly) {
 }
 
 dsm_health_regen() {
-  //regenerates the health of the dsm
-
   flag_wait("download_started");
 
   while(!flag("dsm_recovered")) {
     boostedVal = level.dsmHealth + level.dsm_regen_amount;
 
     if(boostedVal >= level.dsmHealthMax) {
-      //cap it
       level.dsmHealth = level.dsmHealthMax;
     } else {
       level.dsmHealth = boostedVal;
@@ -5049,8 +4342,6 @@ dsm_health_regen() {
 }
 
 dsm_health_regen_calc() {
-  //adjusts the regen per second amount of the dsm
-
   flag_wait("download_started");
 
   dsm_real = getent("dsm", "targetname");
@@ -5081,8 +4372,6 @@ dsm_destruction_damage_detect() {
 
   while(!flag("dsm_recovered")) {
     trig waittill("damage", amount, attacker);
-
-    //stray shot protection on AI, AI must be within X units
 
     if(attacker != level.player) {
       dist = length(trig.origin - attacker.origin);
@@ -5116,90 +4405,6 @@ dsm_destruction_damage_detect() {
     }
   }
 }
-
-/*
-
-dsm_destruction_ai_trig( dsm )
-{
-	//When an enemy AI touches this trigger while the DSM is downloading, begin the dsm destruction process.
-	
-	self endon ( "death" );
-	level endon ( "dsm_recovered" );
-	
-	trig = getent( "dsm_suicide_trig", "targetname" );
-	
-	while( 1 )
-	{
-		trig waittill( "trigger", other );
-		if( other == self )
-		{
-			break;
-		}
-	}
-	
-	//Only one enemy AI can run the destruction function at a time, they get queued up
-	
-	level.dsmDestructionController function_stack( ::dsm_destruction_ai, self, dsm );
-}
-
-dsm_destruction_ai( guy, dsm )
-{
-	guy endon ( "death" );
-	level endon ( "dsm_recovered" );
-	
-	//Player can prevent dsm destruction until this sound effect ends
-	
-	//dsm play_sound_on_entity( "RU_4_inform_attack_grenade" );
-	
-	screams = [];
-	screams[ screams.size ] = "est_ru1_attack";
-	screams[ screams.size ] = "est_ru2_attack";
-	screams[ screams.size ] = "est_ru3_attack";
-	screams[ screams.size ] = "est_ru4_attack";
-	
-	dsm play_sound_on_entity( screams[ randomint( screams.size ) ] );
-
-	//This is the point of no return
-	
-	org = guy.origin;
-	
-	flag_set( "dsm_compromised" );
-	
-	level.ghost stop_magic_bullet_shield();
-	level.ghost.health = 1;
-	
-	thread dsm_suicide_bombing( org, dsm );
-}
-
-dsm_suicide_bombing( org, dsm )
-{
-	//DSM suicide bombing fx
-	
-	level endon ( "dsm_recovered" );
-	
-	playFX( getfx( "suicide_bomber" ), org );
-	detorg = spawn( "script_origin", org );
-	detorg playSound( "clusterbomb_explode_default" );
-	RadiusDamage( org, 512, 5000, 1000 );
-	earthquake( 0.25, 1, org, 2000 );
-	flag_set( "dsm_destroyed" );
-	//dsm delete();
-	//dsm hide();
-	
-	//wait 0.5;
-	
-	setDvar( "ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_DETONATION" );
-	missionFailedWrapper();	
-}
-
-*/
-
-//*************************************************
-// FRIENDLY DEATH CONTROL
-//*************************************************
-
-//These are failsafes for friendly death if they don't die during the dsm defense
-//If they are alive during the player escape, one is shot by enemies, the other is mortared, guaranteed, plus their health is dropped
 
 friendly_death_cointoss() {
   flag_wait("player_is_escaping");
@@ -5266,8 +4471,6 @@ deathtalk_scarecrow() {
   self waittill("death");
 
   if(!flag("player_is_escaping")) {
-    //I'm hit - (static hiss) 	
-
     node = getnode("scarecrow_earlydefense_start", "targetname");
     playerCanSeeFriendly = SightTracePassed(level.player.origin, node.origin, true, undefined);
     dist = length(level.player.origin - node.origin);
@@ -5296,7 +4499,6 @@ deathtalk_scarecrow() {
     if(timeElapsed <= timeLimit) {
       flag_set("scarecrow_death_dialogue");
 
-      //Scarecrow is down, I repeat Scarecrow is down!	
       radio_dialogue("est_snp1_scarecrowdown");
 
       flag_clear("scarecrow_death_dialogue");
@@ -5308,7 +4510,6 @@ deathtalk_ozone() {
   self waittill("death");
 
   if(!flag("player_is_escaping")) {
-    //Aaagh! I'm hit!!! Need assis- (static hiss)	
     radio_dialogue("est_ozn_imhit");
 
     startTime = gettime();
@@ -5331,7 +4532,6 @@ deathtalk_ozone() {
     if(timeElapsed <= timeLimit) {
       flag_set("ozone_death_dialogue");
 
-      //Ozone is down!	
       radio_dialogue("est_snp1_ozoneisdown");
 
       flag_clear("ozone_death_dialogue");
@@ -5339,21 +4539,12 @@ deathtalk_ozone() {
   }
 }
 
-//****************************************/
-
 /
-// ABANDONMENT UTILS
-//****************************************/
 
 /
 
 abandonment_start_monitor() {
   flag_wait("strike_packages_definitely_underway");
-
-  //If player is already in the desertion zone when we start monitoring for desertion
-  //Wait for him to leave the desertion zone and then start enforcing failure
-
-  //Otherwise, start enforcing failure immediately
 
   if(flag("abandonment_danger_zone")) {
     flag_waitopen("abandonment_danger_zone");
@@ -5365,9 +4556,6 @@ abandonment_start_monitor() {
 }
 
 abandonment_early_escape_timer() {
-  //If player is already in the desertion zone when we start monitoring for desertion
-  //Give player some amount of time to get out of the zone before we start enforcing failure
-
   level endon("dsm_recovered");
 
   flag_wait("strike_packages_definitely_underway");
@@ -5391,16 +4579,10 @@ abandonment_exit_tracking() {
 }
 
 abandonment_main_check() {
-  //Begins when we start enforcing failure officially
-
   level endon("dsm_recovered");
   level endon("player_deserted_the_area");
 
   flag_wait("strike_packages_definitely_underway");
-
-  //trigger_multiple_flag_set_touching detect player at danger zone
-  //clear save
-  //start timer until abandonment trigger is untouched
 
   while(1) {
     flag_wait("abandonment_danger_zone");
@@ -5417,16 +4599,11 @@ abandonment_danger_zone_timer() {
   level endon("player_deserted_the_area");
   level endon("player_is_out_of_danger_zone");
 
-  //play initial danger dialogue
-  //play serious warning dialogue
-
   if(!level.usedFirstWarning) {
-    //Roach! Don't stray too far from the safehouse! We need to protect the transfer!		
     thread radio_dialogue("est_gst_dontstray");
 
     level.usedFirstWarning = true;
   } else {
-    //Roach! Stay the close to the house!		
     thread radio_dialogue("est_gst_stayclose");
 
     level.usedFirstWarning = false;
@@ -5435,12 +4612,10 @@ abandonment_danger_zone_timer() {
   wait level.dangerZoneTimeLimit / 2;
 
   if(!level.usedSecondWarning) {
-    //Roach, where the hell are you?! Fall back to the house! Move!	
     thread radio_dialogue("est_gst_fallback");
 
     level.usedSecondWarning = true;
   } else {
-    //Roach, pull back to the safehouse! They're trying to stop the transfer!		
     thread radio_dialogue("est_gst_tryingtostop");
 
     level.usedSecondWarning = false;
@@ -5448,7 +4623,6 @@ abandonment_danger_zone_timer() {
 
   wait level.dangerZoneTimeLimit / 2;
 
-  //fail the mission if the time limit is reached and player has not exited the danger zone
   flag_set("player_entered_autofail_zone");
 }
 
@@ -5457,30 +4631,17 @@ abandonment_failure() {
 
   flag_wait("player_entered_autofail_zone");
 
-  //trigger_multiple_flag_set_touching detect player into fail zone
-  //play failure dialogue
-  //fail mission	
-
   level notify("player_deserted_the_area");
 
-  //Roach! They've destroyed the DSM!! They've destroyed-(static hiss)	
   radio_dialogue("est_gst_destroyedthedsm");
   radio_dialogue_stop();
 
   setDvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_DESERTION");
 
   missionFailedWrapper();
-
-  //Maybe I'll use this if I need it
-  //There's too many of them in here! Roach!!! We've lost the DSM, I repeat we've lost-(static hiss)		
-  //radio_dialogue( "est_gst_lostthedsm" );
 }
 
-//****************************************/
-
 /
-// SMOKESCREEN UTILS
-//****************************************/
 
 /
 
@@ -5496,26 +4657,19 @@ smokepot() {
   self playSound("estate_smokegrenade_explode");
 }
 
-//****************************************/
-
 /
-// VISION SET UTILS
-//****************************************/
 
 /
 
 blackOut(duration, blur) {
-  //wait duration;
   self fadeOverlay(duration, 1, blur);
 }
 
 grayOut(duration, blur) {
-  //wait duration;
   self fadeOverlay(duration, 0.6, blur);
 }
 
 restoreVision(duration, blur) {
-  //wait duration;
   self fadeOverlay(duration, 0, blur);
 }
 
@@ -5526,11 +4680,7 @@ fadeOverlay(duration, alpha, blur) {
   wait duration;
 }
 
-//****************************************/
-
 /
-// HINT PRINT UTILS
-//****************************************/
 
 /
 

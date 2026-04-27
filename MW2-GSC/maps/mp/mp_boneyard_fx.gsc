@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["tanker_embers"] = loadfx("fire/tanker_embers");
   level._effect["firelp_large_pm_nolight"] = loadfx("fire/firelp_large_pm_nolight");
   level._effect["firelp_med_pm_nolight"] = loadfx("fire/firelp_med_pm_nolight");

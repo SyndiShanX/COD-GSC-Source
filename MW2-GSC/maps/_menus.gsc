@@ -3,12 +3,6 @@
  * Script: maps\_menus.gsc
 ********************************************************/
 
-// Need to seperate layout from functionality more for more flexibility
-
-// Create a thread which processes left and right. This will be passed to addItemSetting so it can be different per itemDef
-// 		This should attempt to change the dvar value if in range
-//		Should also automatically update the associated hud elem
-
 #include maps\_utility;
 #include maps\_hud_util;
 
@@ -39,118 +33,118 @@ init() {
   levelMenu = createMenu("levels");
   action = setupAction(::loadMap, "cqb_1");
   description = spawnStruct();
-  // 1st pass
+
   description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
-  // CQB Test
+
   levelMenu addItem(&"MENU_CQB_TEST", action, "loadmap", description);
 
   action = setupAction(::loadMap, "descent");
   description = spawnStruct();
-  // 1st pass
+
   description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
-  // Bunker
+
   levelMenu addItem(&"MENU_BUNKER", action, "loadmap", description);
 
   action = setupAction(::loadMap, "aftermath");
   description = spawnStruct();
-  // 100% initial geo
+
   description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
-  // Aftermath
+
   levelMenu addItem(&"MENU_AFTERMATH", action, "loadmap", description);
 
   action = setupAction(::loadMap, "chechnya_escape");
   description = spawnStruct();
-  // 40% initial geo
+
   description.display = &"MENU_40_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
-  // Chechnya Escape
+
   levelMenu addItem(&"MENU_CHECHNYA_ESCAPE", action, "loadmap", description);
 
   action = setupAction(::loadMap, "marksman");
   description = spawnStruct();
-  // 25% scripted
+
   description.display = &"MENU_25_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
-  // Marksman
+
   levelMenu addItem(&"MENU_MARKSMAN", action, "loadmap", description);
 
   action = setupAction(::loadMap, "seaknight_defend");
   description = spawnStruct();
-  // Prototype Level, 30% scripted
+
   description.display = &"MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
-  // Seaknight Defend
+
   levelMenu addItem(&"MENU_SEAKNIGHT_DEFEND", action, "loadmap", description);
 
   action = setupAction(::loadMap, "wetwork");
   description = spawnStruct();
-  // 100% initial geo
+
   description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
-  // Wetwork
+
   levelMenu addItem(&"MENU_WETWORK", action, "loadmap", description);
 
   action = setupAction(::loadMap, "cargoship");
   description = spawnStruct();
-  // 10% scripted
+
   description.display = &"MENU_10_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
-  // Cargoship
+
   levelMenu addItem(&"MENU_CARGOSHIP", action, "loadmap", description);
 
   action = setupAction(::loadMap, "bog");
   description = spawnStruct();
-  // 35% initial geo
+
   description.display = &"MENU_35_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
-  // Bog
+
   levelMenu addItem(&"MENU_BOG", action, "loadmap", description);
 
   action = setupAction(::loadMap, "training");
   description = spawnStruct();
-  // 5% scripted
+
   description.display = &"MENU_5_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
-  // Training
+
   levelMenu addItem(&"MENU_TRAINING1", action, "loadmap", description);
 
   action = setupAction(::loadMap, "ac130");
   description = spawnStruct();
-  // 30% description.display = &"MENU_30";
+
   description.xPos = 240;
   description.yPos = 100;
-  // AC130
+
   levelMenu addItem(&"MENU_AC130", action, "loadmap", description);
 
   action = setupAction(::loadMap, "seaknight_assault");
   description = spawnStruct();
-  // Initial geo in progress
+
   description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
-  // Seaknight Assault
+
   levelMenu addItem(&"MENU_SEAKNIGHT_ASSAULT", action, "loadmap", description);
 
   action = setupAction(::loadMap, "pilotcobra");
   description = spawnStruct();
-  // Initial geo in progress
+
   description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
-  // Pilot Cobra
+
   levelMenu addItem(&"MENU_PILOT_COBRA", action, "loadmap", description);
 
   controlsMenu = createMenu_Controls("controls");
@@ -165,7 +159,7 @@ init() {
   setting.display[1] = "Southpaw";
   setting.display[2] = "Legacy";
   setting.display[3] = "Legacy Southpaw";
-  // Stick Layout
+
   controlsMenu addItemSetting(&"MENU_THUMBSTICK_LAYOUT", undefined, undefined, undefined, setting);
 
   setting = spawnStruct();
@@ -179,7 +173,7 @@ init() {
   setting.display[1] = "Tactical";
   setting.display[2] = "Lefty";
   setting.display[3] = "Finest Hour";
-  // Button Layout
+
   controlsMenu addItemSetting(&"MENU_BUTTON_LAYOUT", undefined, undefined, undefined, setting);
 
   setting = spawnStruct();
@@ -193,7 +187,7 @@ init() {
   setting.display[1] = "Medium";
   setting.display[2] = "High";
   setting.display[3] = "Very High";
-  // Sensitivity
+
   controlsMenu addItemSetting(&"MENU_LOOK_SENSITIVITY", undefined, undefined, undefined, setting);
 
   setting = spawnStruct();
@@ -203,7 +197,7 @@ init() {
   setting.value[1] = "inversion_enabled";
   setting.display[0] = "Disabled";
   setting.display[1] = "Enabled";
-  // Look Inversion
+
   controlsMenu addItemSetting(&"MENU_LOOK_INVERSION", undefined, undefined, undefined, setting);
 
   setting = spawnStruct();
@@ -213,7 +207,7 @@ init() {
   setting.value[1] = "autoaim_enabled";
   setting.display[0] = "Disabled";
   setting.display[1] = "Enabled";
-  // Auto-aim
+
   controlsMenu addItemSetting(&"MENU_AUTOAIM", undefined, undefined, undefined, setting);
 
   setting = spawnStruct();
@@ -223,32 +217,27 @@ init() {
   setting.value[1] = "vibration_enabled";
   setting.display[0] = "Disabled";
   setting.display[1] = "Enabled";
-  // Vibration
-  controlsMenu addItemSetting(&"MENU_CONTROLLER_VIBRATION", undefined, undefined, undefined, setting);
 
-  // Controls
-  // Subtitles
-  // Save Device
-  //optionsMenu addItem(&"MENU_SAVE_DEVICE", ::void );
+  controlsMenu addItemSetting(&"MENU_CONTROLLER_VIBRATION", undefined, undefined, undefined, setting);
 
   mainMenu = createMenu("main");
   action = setupAction(::pushMenu, levelMenu);
-  // Select Level
+
   mainMenu addItem(&"MENU_SELECT_LEVEL", action, "openmenu_levels");
-  // Options
+
   subMenu = mainMenu addSubMenu("options", &"MENU_OPTIONS");
   action = setupAction(::pushMenu, controlsMenu);
-  // Controls
+
   subMenu addItem(&"MENU_CONTROLS", action);
-  // Subtitles
+
   subMenu addItem(&"MENU_SUBTITLES");
-  // Save Device
+
   subMenu addItem(&"MENU_SAVE_DEVICE");
-  // Credits
+
   mainMenu addItem(&"MENU_CREDITS");
 
   action = setupAction(::loadMultiplayer);
-  // Multiplayer
+
   mainMenu addItem(&"MENU_MULTIPLAYER", action);
 
   pushMenu(mainMenu);
@@ -496,7 +485,6 @@ showMenu(transTime, isNew) {
 
     if(itemDef.itemType == "subMenu" && itemDef.isExpanded) {
       yOffset += itemDef getMenuHeight();
-      //			itemDef thread showMenu( transTime, isNew );
     }
   }
 
@@ -554,7 +542,6 @@ hideMenu(transTime, isNew) {
 
     if(itemDef.itemType == "subMenu" && itemDef.isExpanded) {
       yOffset += itemDef getMenuHeight();
-      //			itemDef thread hideMenu( transTime, isNew );
     }
   }
 
@@ -660,24 +647,6 @@ setSelected(transTime, isSelected) {
   if(isDefined(self.descriptionValue))
     self.descriptionValue fadeOverTime(transTime);
 
-  /*
-  self setElemAlpha( 0.85 );
-  if( isSelected )
-  {
-  	if( self.parentDef == level.curMenu )
-  		self setElemColor( (1,1,1) );
-  	else
-  		self setElemColor( (0.85,0.85,0.85) );
-  }
-  else
-  {
-  	if( self.parentDef == level.curMenu )
-  		self setElemColor( (0.75,0.75,0.75) );
-  	else
-  		self setElemColor( (0.5,0.5,0.5) );
-  }
-  */
-
   if(isSelected) {
     if(self.parentDef == level.curMenu)
       self setElemAlpha(1);
@@ -706,9 +675,6 @@ setElemAlpha(alpha) {
 
   if(self.itemType == "subMenu")
     self.caretIcon.alpha = alpha;
-
-  //	if( isdefined ( self.descriptionValue ) )
-  //		self.descriptionValue.alpha = alpha;
 }
 
 setElemColor(color) {
@@ -760,11 +726,6 @@ onButtonA() {
   if(focusedItem.itemType == "subMenu")
     pushMenu(focusedItem);
   else if(focusedItem.itemType == "item") {
-    /*		if( isDefined( focusedItem.argument ) )
-    			level thread [[focusedItem.callback]]( focusedItem.argument );
-    		else
-    			level thread [[focusedItem.callback]]();*/
-
     focusedItem thread runAction();
   }
 }
@@ -830,32 +791,26 @@ onDPadRight() {
 }
 
 initThumbstickLayout() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_sticksConfig", "thumbstick_default");
 }
 
 initButtonLayout() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_buttonConfig", "buttons_default");
 }
 
 initSensitivity() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_sensitivityConfig", "sensitivity_medium");
 }
 
 initInversion() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_inversionConfig", "inversion_disabled");
 }
 
 initAutoAim() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_autoaimConfig", "autoaim_enabled");
 }
 
 initVibration() {
-  // update to use the real dvars when code will allow it
   setDvar("controls_vibrationConfig", "vibration_enabled");
 }
 

@@ -21,17 +21,12 @@ init() {
   if(!level.teamBased)
     return;
 }
-
-// This can show to single players or to teams.Showing to a single player destroys instances of
-// the icon that are shown to their team.Showing to a team destroys instances of the icon that
-// are shown to players on that team
 setHeadIcon(showTo, icon, offset, width, height) {
   if(!isDefined(self.entityHeadIcons))
     self.entityHeadIcons = [];
 
   if(!isPlayer(showTo) && showTo == "none") {
     foreach(key, headIcon in self.entityHeadIcons) {
-      // TODO: remove and fix properly after ship
       if(isDefined(headIcon))
         headIcon destroy();
 
@@ -50,7 +45,7 @@ setHeadIcon(showTo, icon, offset, width, height) {
     if(icon == "") {
       return;
     }
-    // remove from team or we'd have two icons
+
     if(isDefined(self.entityHeadIcons[showTo.team])) {
       self.entityHeadIcons[showTo.team] destroy();
       self.entityHeadIcons[showTo.team] = undefined;
@@ -122,8 +117,7 @@ destroyIconsOnDeath() {
   self waittill("death");
 
   foreach(key, headIcon in self.entityHeadIcons) {
-    // TODO: remove and fix properly after ship
-    if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons) {
+    if(!isDefined(headIcon))
       continue;
   }
   headIcon destroy();
@@ -148,7 +142,7 @@ keepPositioned(owner, offset) {
   }
 }
 
-setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"{
+setTeamHeadIcon(team, offset)
 if(!level.teamBased) {
   return;
 }
@@ -188,7 +182,7 @@ self thread keepIconPositioned();
 self thread destroyHeadIconsOnDeath();
 }
 
-setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"{
+setPlayerHeadIcon(player, offset)
 if(level.teamBased) {
   return;
 }
@@ -247,7 +241,6 @@ destroyHeadIconsOnDeath() {
   self endon("kill_entity_headicon_thread");
   self waittill("death");
 
-  // TODO: remove and fix properly after ship
   if(!isDefined(self.entityHeadIcon)) {
     return;
   }

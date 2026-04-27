@@ -8,7 +8,6 @@
 #include maps\_hud_util;
 
 init() {
-  //should make hellfires no do friendly fire
   level.no_friendly_fire_splash_damage = true;
 
   if(!isDefined(level.min_time_between_uav_launches)) {
@@ -16,7 +15,7 @@ init() {
   }
 
   level.last_uav_launch_time = 0 - level.min_time_between_uav_launches;
-  //	level.last_uav_offline_time = 0;
+
   level.uav_radio_offline_called = false;
 
   PreCacheItem("remote_missile_detonator");
@@ -32,14 +31,11 @@ init() {
   precacheString(&"HELLFIRE_MISSILE_VIEW");
   precacheString(&"HELLFIRE_FIRE");
 
-  // Predator Drone has been destroyed.
   add_hint_string("hint_predator_drone_destroyed", &"HELLFIRE_DESTROYED", ::should_break_destroyed);
-  // Predator Drone is unavailable.
+
   add_hint_string("hint_predator_drone_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
   add_hint_string("hint_predator_drone_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
   add_hint_string("hint_predator_drone_not_available", &"HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
-
-  //	array_thread( level.players, ::RemoteMissileDetonatorNotify );
 
   VisionSetMissilecam("missilecam");
 
@@ -74,7 +70,6 @@ should_break_use_drone() {
     break_hint = true;
   }
 
-  // Sniper Fi Support
   if(flag_exist("wave_wiped_out") && flag("wave_wiped_out")) {
     break_hint = true;
   }
@@ -97,7 +92,6 @@ init_radio_dialogue() {
 
   level.uav_radio_initialized = true;
 
-  // Offline / Online
   level.scr_radio["uav_reloading"] = "cont_cmt_rearmhellfires";
   level.scr_radio["uav_offline"] = "cont_cmt_hellfiresoffline";
   level.scr_radio["uav_online"] = "cont_cmt_hellfireonline";
@@ -105,14 +99,12 @@ init_radio_dialogue() {
 
   level.scr_radio["uav_down"] = "cont_cmt_uavdown";
 
-  // AI Kills
   level.scr_radio["uav_multi_kill"] = "cont_cmt_mutlipleconfirmed";
   level.scr_radio["uav_multi_kill2"] = "cont_cmt_fivepluskias";
   level.scr_radio["uav_few_kills"] = "cont_cmt_theyredown";
   level.scr_radio["uav_3_kills"] = "cont_cmt_3kills";
   level.scr_radio["uav_1_kill"] = "cont_cmt_hesdown";
 
-  // vehicle kills
   level.scr_radio["uav_btr_kill"] = "cont_cmt_mutlipleconfirmed";
   level.scr_radio["uav_few_kills"] = "cont_cmt_theyredown";
   level.scr_radio["uav_3_kills"] = "cont_cmt_3kills";
@@ -231,11 +223,8 @@ give_remotemissile_weapon(weapon_name) {
 
   self thread RemoteMissileDetonatorNotify();
 }
-
-// Sets the proper dpad depending if they have the claymore or not
 set_remotemissile_actionslot() {
   if(!self HasWeapon("claymore")) {
-    // Move the claymore (since we do not have it yet) to the down dpad
     self.remotemissile_actionslot = 4;
   } else {
     self.remotemissile_actionslot = 2;
@@ -325,12 +314,7 @@ remotemissile_offline(extra_check, alias) {
 
   curr_time = GetTime();
 
-  // Only use extra_check if you don't want the dialogue to happen just before the hellfire "online" is about to
-  // play
   if(extra_check && ((level.last_uav_launch_time + level.min_time_between_uav_launches) - curr_time < 2000) || level.min_time_between_uav_launches < 5000) {
-    // These 2 checks are specific to levels.
-    // SO_ROOFTOP_CONTINGENCY needs dialogue if out of ammo.
-    // All other levels need uav_is_destroyed
     if(!isDefined(level.uav_is_destroyed) && (isDefined(self.uav_weaponname) && self GetWeaponAmmoClip(self.uav_weaponname) > 0)) {
       return;
     }
@@ -342,7 +326,6 @@ remotemissile_offline(extra_check, alias) {
     }
   }
 
-  //	if( !flag( "uav_collecting_stats" ) && curr_time > level.last_uav_offline_time + 1000 )
   if(!flag("uav_collecting_stats") && !level.uav_radio_offline_called) {
     level.uav_radio_offline_called = true;
     remotemissile_radio(alias);
@@ -354,7 +337,6 @@ remotemissile_reload() {
   level endon("stop_uav_reload");
   level endon("special_op_terminated");
 
-  // Wait for reload
   if(flag("uav_reloading")) {
     if(isDefined(level.uav_is_destroyed)) {
       return;
@@ -371,17 +353,8 @@ remotemissile_reload() {
       return;
     }
 
-    // Make uav_user undefined so missile_kill_ai returns immediately.
     level.uav_user = undefined;
 
-    //z: dont want to hear hellfire off line after each shot
-    // Only do the dialogue if we have enough time between reloads.
-    //if( level.min_time_between_uav_launches > 5000 )
-    //{
-    //	thread remotemissile_offline( false );
-    //}
-
-    // Waiting for the flag_clear() notify
     if(flag("uav_reloading")) {
       level waittill("uav_reloading");
     }
@@ -460,21 +433,6 @@ play_kills_dialogue() {
   if(!isDefined(level.uav_radio_initialized)) {
     return;
   }
-
-  // "Good hit. Multiple vehicles destroyed."					level.scr_radio[ "multi_vehicle_kill" ] = "cont_cmt_goodhitvehicles";
-  // "Good effect on target. Multiple enemy vehicles KIA." 	level.scr_radio[ "multi_vehicle_kill2" ] = "cont_cmt_goodeffectkia";
-
-  // "Direct hit on the enemy helo. Nice shot Roach."			level.scr_radio[ "helo_kill" ] = "cont_cmt_directhitshelo";
-  // "Good effect on target. BTR destroyed."					level.scr_radio[ "btr_kill" ] = "cont_cmt_btrdestroyed";
-  // "Good kill. Truck destroyed."							level.scr_radio[ "truck_kill" ] = "cont_cmt_goodkilltruck";
-  // "Direct hit on that jeep."								level.scr_radio[ "jeep_kill" ] = "cont_cmt_directhitjeep";
-  // "Direct hit."											level.scr_radio[ "direct_hit" ] = "cont_cmt_directhit";
-
-  // "Five plus KIAs. Good hit. Good hit.						level.scr_radio[ "multi_kill2" ] = "cont_cmt_fivepluskias";
-  // "Multiple confirmed kills. Nice work."					level.scr_radio[ "multi_kill" ] = "cont_cmt_mutlipleconfirmed";
-  // "They're down."											level.scr_radio[ "few_kills" ] = "cont_cmt_theyredown";
-  // "Good hit. Looks like at least three kills."				level.scr_radio[ "3_kills" ] = "cont_cmt_3kills";
-  // "He's down."												level.scr_radio[ "1_kill" ] = "cont_cmt_hesdown";
 
   ai_alias = undefined;
   ai_kills = 0;
@@ -593,7 +551,7 @@ remotemissile_radio(alias) {
 
 cancel_on_player_damage() {
   self.took_damage = false;
-  //self waittill( "damage" );
+
   self waittill_any("damage", "dtest", "force_out_of_uav");
   self.took_damage = true;
 }
@@ -621,7 +579,7 @@ text_TitleDestroy() {
 
 display_wait_to_fire(time_till_reload) {
   text_NoticeDestroy();
-  // MISSILE RELOADED IN:
+
   self text_LabelCreate(&"HELLFIRE_RELOADING_WITH_TIME", time_till_reload);
   wait(1);
   text_NoticeDestroy();
@@ -687,7 +645,6 @@ NotifyOnMissileDeath(missile) {
     missile waittill("death");
   }
 
-  //defensive check; make sure we're this is still the latest remote missile
   if(isDefined(level.remoteMissileFireTime) && (level.remoteMissileFireTime == timeWeFired)) {
     level notify("remote_missile_exploded");
     level.remoteMissile = undefined;
@@ -770,7 +727,7 @@ UAVRemoteLauncherSequence(player, weap) {
   wait 0.05;
 
   player text_TitleCreate();
-  // CAMERA: UAV_DRONE_011
+
   text_TitleSetText(&"HELLFIRE_DRONE_VIEW");
 
   maps\_load::thermal_EffectsOn();
@@ -795,7 +752,6 @@ UAVRemoteLauncherSequence(player, weap) {
   missile thread do_physics_impact_on_explosion(player);
 
   if(delay_switch_into_missile) {
-    // -MISSILE LAUNCHED- player text_NoticeCreate(&"HELLFIRE_FIRE");
     noDamage = WaitWithAbortOnDamage(1.2);
     if(!noDamage) {
       ExitFromCamera_UAV(player, true);
@@ -804,18 +760,18 @@ UAVRemoteLauncherSequence(player, weap) {
 
     text_NoticeFadeout();
     DrawTargetsEnd();
-    //player VisionSetThermalForPlayer( level.VISION_BLACK, 0.25 );
+
     wait 0.25;
   }
 
-  player.is_flying_missile = true; // used to break the hint
-  // CAMERA: HELLFIRE
+  player.is_flying_missile = true;
+
   text_TitleSetText(&"HELLFIRE_MISSILE_VIEW");
   text_NoticeDestroy();
   SwitchBackToMainWeaponFast();
   player RemoteCameraSoundscapeOn();
   player Unlink();
-  //player VisionSetThermalForPlayer( level.VISION_MISSILE, 0.5 );
+
   player DisableWeapons();
   player CameraLinkTo(missile, "tag_origin");
   player ControlsLinkTo(missile);
@@ -851,7 +807,6 @@ UAVRemoteLauncherSequence(player, weap) {
   }
 
   if(return_to_uav_after_impact) {
-    //new - go back to uav to see explosion
     level.uav Hide();
     SetSavedDvar("cg_fov", 26);
     player.fov_is_altered = true;
@@ -903,17 +858,10 @@ do_physics_impact_on_explosion(player) {
   wait 2;
   level.uavTargetPos = undefined;
   player.fired_hellfire_missile = undefined;
-  //level notify ( "player_missile_finished_impact" );
 }
 
 missile_kills(player) {
   flag_set("uav_collecting_stats");
-
-  //	ai_array = GetAIArray( "axis" );
-  //	foreach ( ai in ai_array )
-  //	{
-  //		ai thread missile_kill_ai( player );
-  //	}
 
   vehicles = getVehicleArray();
   foreach(vehicle in vehicles) {
@@ -1024,7 +972,6 @@ ExitFromCamera_Missile(player, reasonIsPain) {
   }
 
   if(reasonIsPain) {
-    //fast switch back - go right to weapon, no flash
     player VisionSetNakedForPlayer(level.VISION_BLACK, 0);
     wait 0.05;
     player VisionSetNakedForPlayer(level.lvl_visionset, 0.4);
@@ -1036,7 +983,6 @@ ExitFromCamera_Missile(player, reasonIsPain) {
     HudItemsShow();
     player EnableOffhandWeapons();
   } else {
-    //slow switch back - flash from missile explosion
     player VisionSetNakedForPlayer("coup_sunblind", 0);
     player FreezeControls(true);
     wait 0.05;
@@ -1088,7 +1034,6 @@ ExitFromCamera_UAV(player, reasonIsPain) {
   }
 
   if(reasonIsPain) {
-    //fast switch back - go right to weapon
     player SwitchBackToMainWeaponFast();
     player FreezeControls(true);
     wait 0.15;
@@ -1101,7 +1046,6 @@ ExitFromCamera_UAV(player, reasonIsPain) {
     player EnableOffhandWeapons();
     player FreezeControls(false);
   } else {
-    //slow switch back - show laptop, etc
     player FreezeControls(true);
     wait 0.05;
     player VisionSetNakedForPlayer(level.lvl_visionset, 0.75);
@@ -1122,17 +1066,10 @@ ExitFromCamera_UAV(player, reasonIsPain) {
 }
 
 WaitForAttackCommand(player) {
-  // I'd like to use GetCommandFromKey to make this "proper" incase of different keybindings
-  // but it's not mp friendly...
-  //	dpad_left = GetCommandFromKey( "DPAD_LEFT" );
-  //	dpad_left = GetCommandFromKey( "BUTTON_Y" );
-  //	dpad_left = GetCommandFromKey( "BUTTON_B" );
+  player NotifyOnPlayerCommand("abort_remote_missile", "weapnext");
+  player NotifyOnPlayerCommand("abort_remote_missile", "+stance");
 
-  //	player NotifyOnPlayerCommand( "abort_remote_missile", "+actionslot 3" ); 		// DPad Left
-  player NotifyOnPlayerCommand("abort_remote_missile", "weapnext"); // BUTTON_Y
-  player NotifyOnPlayerCommand("abort_remote_missile", "+stance"); // BUTTON_B
-
-  player NotifyOnPlayerCommand("launch_remote_missile", "+attack"); // BUTTON_RTRIG
+  player NotifyOnPlayerCommand("launch_remote_missile", "+attack");
 
   player thread wait_for_other();
   player thread wait_for_command_thread("abort_remote_missile", "abort");
@@ -1179,7 +1116,7 @@ HudItemsHide() {
   if(level.players.size > 0) {
     for(i = 0; i < level.players.size; i++) {
       if(isDefined(level.players[i].using_uav) && level.players[i].using_uav)
-        setDvar("ui_remotemissile_playernum", (i + 1)); // 0 = no uav, 1 = player1, 2 = player2
+        setDvar("ui_remotemissile_playernum", (i + 1));
     }
   } else {
     SetSavedDvar("compass", "0");
@@ -1190,7 +1127,7 @@ HudItemsHide() {
 
 HudItemsShow() {
   if(level.players.size > 0) {
-    setDvar("ui_remotemissile_playernum", 0); // 0 = no uav, 1 = player1, 2 = player2
+    setDvar("ui_remotemissile_playernum", 0);
   } else {
     SetSavedDvar("compass", "1");
     SetSavedDvar("ammoCounterHide", "0");
@@ -1246,7 +1183,7 @@ DrawTargetsStart() {
   level.player.draw_red_boxes = true;
   level endon("uav_destroyed");
   level endon("draw_target_end");
-  //level.player ThermalVisionFOFOverlayOn();
+
   targets_per_frame = 4;
   targets_drawn = 0;
   time_between_updates = .05;
@@ -1279,25 +1216,11 @@ draw_target() {
 
   if(IsAI(self)) {
     Target_SetShader(self, "remotemissile_infantry_target");
-  } else if(isPlayer(self)) // Make sure you add the player to the level.remote_missile_targets before use
-  {
+  } else if(isPlayer(self)) {
     Target_SetShader(self, "hud_fofbox_self_sp");
   } else {
     Target_SetShader(self, "veh_hud_target");
   }
-
-  // There is an order of execution issue, which is why this is commented out.
-  // If player 2 ( level.players[ 1 ] ) runs the Target_ShowToPlayer() last, then player 1 will be able
-  // to see the targets.
-  // So, the work around is to figure out who is controlling the UAV, then call to Target_ShowToPlayer()
-  // before Target_HideFromPlayer()
-  //	foreach( player in level.players )
-  //	{
-  //		if( isDefined( player.is_controlling_UAV ) && player.is_controlling_UAV )
-  //			Target_ShowToPlayer( self, player );
-  //		else
-  //			Target_HideFromPlayer( self, player );
-  //	}
 
   uav_controller = undefined;
   non_uav_controller = undefined;
@@ -1319,8 +1242,8 @@ draw_target() {
 
 DrawTargetsEnd() {
   level notify("draw_target_end");
-  //level.player ThermalVisionFOFOverlayOff();
-  waittillframeend; // was colliding with self waittill death which also removes the target
+
+  waittillframeend;
   level.player.draw_red_boxes = undefined;
   if(isDefined(level.remote_missile_targets)) {
     foreach(tgt in level.remote_missile_targets) {
@@ -1358,7 +1281,6 @@ SwitchBackToMainWeapon_internal(func) {
     return;
   }
 
-  //"primary", "offhand", "item", "altmode", and "exclusive".
   weapons = self GetWeaponsList("primary", "altmode");
   foreach(weapon in weapons) {
     if(self.last_weapon == weapon) {

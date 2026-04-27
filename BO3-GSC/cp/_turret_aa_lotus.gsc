@@ -10,34 +10,18 @@
 #using scripts\shared\vehicle_shared;
 #namespace turret_aa_lotus;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function turret_aa_lotus_init() {
-  // Unsupported VM revision (1B).
-}
+function turret_aa_lotus_init() {}
 
-function isads() {
-  // Unsupported VM revision (1B).
-}
+function isads() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function thread_check_lock_on() {
-  // Unsupported VM revision (1B).
-}
+function thread_check_lock_on() {}
 
-function turret_off() {
-  // Unsupported VM revision (1B).
-}
+function turret_off() {}
 
-function turret_on() {
-  // Unsupported VM revision (1B).
-}
+function turret_on() {}

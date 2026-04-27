@@ -73,7 +73,7 @@ main() {
   add_start("gas_station", ::start_gas_station);
   add_start("crash", ::start_crash);
   add_start("nates_roof", ::start_nates_roof);
-  //add_start( "northside", ::start_roof_northside );
+
   add_start("attack_diner", ::start_attack_diner);
   add_start("defend_diner", ::start_diner_defend);
   add_start("diner", ::start_diner);
@@ -82,22 +82,18 @@ main() {
   add_start("defend_BT", ::start_defend_BT);
   add_start("helis", ::start_helis);
   add_start("convoy", ::start_convoy);
-  //add_start( "surprized_parachute_moment", ::start_surprized_parachute_moment );
-  //add_start( "police_car_cover_moment", ::start_police_car_cover_moment );
-  //add_start( "BT_roof", ::start_BT_roof );
-  //add_start( "bmp_paradrop", 	::start_bmp_paradrop );
-  //add_start( "animated_humvee", 	::start_animated_humvee );
+
   add_start("start_btr80_smash", ::start_btr80_smash);
 
   maps\_attack_heli::preLoad();
   maps\_drone_ai::init();
-  //maps\_juggernaut::main();
+
   maps\_load::main();
   maps\_carry_ai::initCarry();
   thread maps\invasion_amb::main();
   common_scripts\_sentry::main();
   array_thread(getvehiclenodearray("plane_sound", "script_noteworthy"), maps\_mig29::plane_sound_node);
-  //array_thread( getEntArray( "magic_glass_breaker", "targetname" ), ::magic_glass_breaker );
+
   maps\_stinger::init();
 
   maps\invasion_anim::main_anim();
@@ -109,20 +105,8 @@ main() {
   thread setup_nates_kitchen_ladder_clip();
   thread setup_bt_ktichen_ladder_clip();
 
-  level.bcs_maxTalkingDistFromPlayer = 1500; // default = 1500
-  level.bcs_maxThreatDistFromPlayer = 5000; // default = 2500
-
-  //level.player thread playerunlimitedammothread();
-
-  //	
-  //	while(1)
-  //	{
-  //		file = OpenFile( "test.txt", "write" );
-  //		fprintln(file, level.player.origin );
-  //		closefile( file );
-  //		wait .05;
-  //	}
-  //	
+  level.bcs_maxTalkingDistFromPlayer = 1500;
+  level.bcs_maxThreatDistFromPlayer = 5000;
 
   if(level.start_point == "no_game") {
     return;
@@ -184,9 +168,6 @@ main() {
 
   flag_init("bmp_has_spotted_player");
 
-  //NOT SPAWNERS, start out spawned
-
-  //SPAWNERS
   yards_roof_parachute_guy = getent("roof_parachute_landing_guy_yards", "targetname");
   humvee_roof_parachute_guy = getent("humvee_ride_roof_landing", "targetname");
 
@@ -210,14 +191,6 @@ main() {
   nates_defenders = getEntArray("nates_defenders", "script_noteworthy");
   array_thread(nates_defenders, ::add_spawn_function, ::nates_defenders_setup);
   array_thread(nates_defenders, ::add_spawn_function, ::set_threatbias_group, "nates_defenders");
-
-  //	ramirez = getEntArray( "ramirez", "script_noteworthy" );
-  //	array_thread( ramirez, ::add_spawn_function, ::setup_ramirez );
-  //	array_thread( ramirez, ::add_spawn_function, ::set_threatbias_group, "nates_defenders" );
-  //	
-  //	collins = getEntArray( "collins", "script_noteworthy" );
-  //	array_thread( collins, ::add_spawn_function, ::setup_collins );
-  //	array_thread( collins, ::add_spawn_function, ::set_threatbias_group, "nates_defenders" );
 
   president = getEntArray("president", "script_noteworthy");
   array_thread(president, ::add_spawn_function, ::setup_president);
@@ -256,65 +229,39 @@ main() {
 
   thread paradrops_ambient();
 
-  //array_thread( getvehiclenodearray("start_drop", "script_noteworthy" ), ::plane_start_drop );
-  //array_thread( getvehiclenodearray("stop_drop", "script_noteworthy" ), ::plane_stop_drop );
-
   level.uav = spawn_vehicle_from_targetname_and_drive("uav");
   level.uav playLoopSound("uav_engine_loop");
   level.uavRig = spawn("script_model", level.uav.origin);
   level.uavRig setModel("tag_origin");
   thread UAVRigAiming();
 
-  //keep before objectives
   flag_init("sentry_in_position");
   level.obj_sentry = getent("obj_sentry", "script_noteworthy");
   level.obj_sentry thread sentry_init_owner();
-  //level.obj_sentry.maxrange = 1500;//does nothing
-  //level.obj_sentry thread waittill_sentry_moved();
+
   thread diner_window_traverses();
 
-  //createThreatBiasGroup( "rpg_friendlies" );
-  //createThreatBiasGroup( "attack_helis" );
   createThreatBiasGroup("nates_defenders");
   createThreatBiasGroup("gas_station_truck_enemies");
   createThreatBiasGroup("players_group");
   level.player setthreatbiasgroup("players_group");
-  //SetIgnoreMeGroup( "nates_defenders", "gas_station_truck_enemies" );
-  ignoreEachOther("nates_defenders", "gas_station_truck_enemies");
 
-  //attack_helis = getEntArray( "kill_heli", "targetname" );
-  //array_thread( attack_helis, ::add_spawn_function, ::set_threatbias_group, "attack_helis" );
+  ignoreEachOther("nates_defenders", "gas_station_truck_enemies");
 
   friendly_redshirt_rpg = getEntArray("friendly_redshirt_rpg", "script_noteworthy");
   array_thread(friendly_redshirt_rpg, ::add_spawn_function, ::setup_rpg_redshirts);
-  //array_thread( attack_helis, ::add_spawn_function, ::set_threatbias_group, "rpg_friendlies" );
 
-  // These hints are set in _remotemissile.gscs
-  //	add_hint_string( "hint_predator_drone_4", 			&"HELLFIRE_USE_DRONE", 			::should_break_use_drone );
-  //	add_hint_string( "hint_predator_drone_2", 			&"HELLFIRE_USE_DRONE_2", 		::should_break_use_drone );
   add_hint_string("hint_predator_drone_vs_bmps_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone_vs_bmps);
   add_hint_string("hint_predator_drone_vs_bmps_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone_vs_bmps);
   add_hint_string("hint_steer_drone", &"SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
-  //add_hint_string( "hint_throw_semtex", 			&"INVASION_THROW_SEMTEX", 		::should_break_throw_semtex );
-  //add_hint_string( "hint_get_semtex", 				&"INVASION_GET_SEMTEX", 		::should_break_get_semtex );
+
   add_hint_string("hint_throw_smoke", &"INVASION_THROW_SMOKE", ::should_break_throw_smoke);
   add_hint_string("hint_get_smoke", &"INVASION_GET_SMOKE", ::should_break_get_smoke);
 
   add_hint_string("hint_smoke_too_far", &"INVASION_SMOKE_TOO_FAR", ::should_break_smoke_too_far);
   add_hint_string("hint_ads_with_stinger", &"INVASION_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
   add_hint_string("hint_toggle_ads_with_stinger", &"INVASION_TOGGLE_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
-  /*
-  flag_init( "got_stinger" );
-  stingers = getEntArray( "stingers", "targetname" );
-  foreach ( stinger in stingers )
-  {
-  	stinger thread Ammorespawnthink( undefined, "stinger", "got_stinger" );
-  }
-  */
 
-  //start everything after the first frame so that level.start_point can be
-  //initialized - this is a bad way of doing things...if people are initilizing
-  //things before they want their start to start, then they should wait on a flag
   waittillframeend;
 
   setsaveddvar("ai_busyEventDistDeath", "400");
@@ -329,9 +276,7 @@ sentry_init_owner() {
   owner = spawn("script_origin", self.origin);
   owner.targetname = "fake_sentry_owner";
 
-  //	owner.debug_sentry			 = self;// for debug
   self.owner = owner;
-  //	self SetSentryOwner( owner );	
 
   while(1) {
     self waittill("trigger", ent);
@@ -349,46 +294,16 @@ turret_spotlight() {
 }
 
 /using_animtree( "vehicles" );
-//animate_btr80( humvee_opening_node )
-//{
-//	humvee_opening_node anim_single_solo( level.humvee_destroyer, "invasion_opening_BTR" );
-//	level.humvee_destroyer anim_stopanimscripted();
-//	//level.humvee_destroyer ClearAnim(%invasion_opening_BTR, 0);
-//	level.humvee_destroyer thread humvee_destroyer_fires_at_pillars_and_player();
-//}
 
 start_humvee() {
   thread handler_humvee_to_yards();
 }
-
-//start_paradrop()
-//{
-//	start = getent( "start_yards", "targetname" );
-//	level.player setOrigin( start.origin );
-//	level.player setPlayerAngles( start.angles );
-//	
-//	//thread test_paradrop();
-//	paradrop_plane_triggers = getEntArray( "paradrop_plane_trigger", "targetname" );
-//	array_thread( paradrop_plane_triggers, ::paradrop_vehicle );
-//}
 
 start_bmp_paradrop() {
   start = getstruct("start_yards", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
   level.bmp_paradrop = true;
-
-  /*
-  	yards_flight2 = getEntArray( "yards_flight2", "targetname" );
-  	while( 1 )
-  	{
-  		array_thread( yards_flight2, ::paradrop_bmp );
-  		wait 5;
-  	}
-  */
-  //	//thread test_paradrop();
-  //	paradrop_plane_triggers = getEntArray( "paradrop_plane_trigger", "targetname" );
-  //	array_thread( paradrop_plane_triggers, ::paradrop_vehicle );
 }
 
 start_yards() {
@@ -397,7 +312,7 @@ start_yards() {
   level.player setPlayerAngles(start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_yards_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -406,7 +321,6 @@ start_yards() {
     friendlies[i] spawn_ai();
   }
 
-  //array_thread( getEntArray( "ammo_crate_guy", "script_noteworthy" ), ::add_spawn_function, ::ammo_cache_guy_setup );
   thread handler_yards_to_house_destroyer();
 }
 
@@ -416,7 +330,7 @@ start_bmp() {
   level.player setPlayerAngles(start_bmp.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_bmp_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -425,7 +339,6 @@ start_bmp() {
     friendlies[i] spawn_ai();
   }
 
-  //array_thread( getEntArray( "ammo_crate_guy", "script_noteworthy" ), ::add_spawn_function, ::ammo_cache_guy_setup );
   thread handler_house_destroyer_to_pizza();
 }
 
@@ -435,7 +348,7 @@ start_pizza() {
   level.player setPlayerAngles(start_pizza.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_pizza_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -444,7 +357,6 @@ start_pizza() {
     friendlies[i] spawn_ai();
   }
 
-  //activate_trigger_with_targetname( "ambient_battle_trigger" );
   flag_set("spawn_nates_attackers_in_alley");
   thread spawn_nates_attackers_in_alley();
 
@@ -457,7 +369,7 @@ start_gas_station() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_gas_station_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -466,7 +378,6 @@ start_gas_station() {
     friendlies[i] spawn_ai();
   }
 
-  //activate_trigger_with_targetname( "ambient_battle_trigger" );
   activate_trigger_with_targetname("BT_attackers_trigger");
 
   thread handler_gas_station_to_crash();
@@ -478,7 +389,7 @@ start_crash() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_crash_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -491,10 +402,10 @@ start_crash() {
 
   level.taco set_force_color("g");
   level.raptor set_force_color("y");
-  //activate_trigger_with_targetname( "ambient_battle_trigger" );
+
   activate_trigger_with_targetname("move_to_wells_intro");
 
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
+  flag_set("leaving_gas_station");
 
   wait 1;
 
@@ -507,7 +418,7 @@ start_nates_roof() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -515,8 +426,8 @@ start_nates_roof() {
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
   }
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("leaving_gas_station");
+  flag_set("crash_objective");
   thread spawn_president();
   thread spawn_wells();
 
@@ -529,7 +440,7 @@ start_roof_northside() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -538,9 +449,9 @@ start_roof_northside() {
     friendlies[i] spawn_ai();
   }
 
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
+  flag_set("leaving_gas_station");
   flag_set("sentry_in_position");
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   thread spawn_president();
   thread spawn_wells();
   magic_smoke_grenades = getEntArray("magic_smoke_grenade", "targetname");
@@ -556,7 +467,7 @@ start_attack_diner() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -564,8 +475,8 @@ start_attack_diner() {
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
   }
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("leaving_gas_station");
+  flag_set("crash_objective");
   thread spawn_president();
   thread spawn_wells();
 
@@ -583,7 +494,7 @@ start_btr80_smash() {
   level.player setPlayerAngles(player_start.angles);
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
-  //array_thread( friendlies, ::spawn_ai );
+
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
@@ -591,8 +502,8 @@ start_btr80_smash() {
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
   }
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("leaving_gas_station");
+  flag_set("crash_objective");
   thread spawn_president();
   thread spawn_wells();
   level.obj_sentry kill();
@@ -622,8 +533,8 @@ start_diner_defend() {
 
   thread spawn_president();
   thread spawn_wells();
-  flag_set("leaving_gas_station"); //spawns_nates_defenders
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("leaving_gas_station");
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
   level.obj_sentry kill();
@@ -654,16 +565,14 @@ start_diner() {
 
   thread spawn_president();
   thread spawn_wells();
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
-  //thread two_bmps_from_north();
-  //thread dialog_time_to_destroy_BMPS();
 
   thread diner_back_door_open();
   level.obj_sentry kill();
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   activate_trigger_with_targetname("burger_town_enemy_defenders_trigger");
   thread taco_goes_to_BT();
@@ -690,12 +599,11 @@ start_burgertown() {
 
   thread spawn_president();
   thread spawn_wells();
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
-  //thread two_bmps_from_north();
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   thread diner_back_door_open();
   level.obj_sentry kill();
@@ -725,10 +633,9 @@ start_vip_escort() {
 
   thread spawn_president();
   thread spawn_wells();
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
-  //thread two_bmps_from_north();
 
   remove_tvs();
   exploder(333);
@@ -739,7 +646,7 @@ start_vip_escort() {
   wells_in_bushes = getnode("wells_in_bushes", "targetname");
   level.wells setgoalnode(wells_in_bushes);
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   thread diner_back_door_open();
   level.obj_sentry kill();
@@ -764,12 +671,9 @@ start_defend_BT() {
   raptor_spawner.angles = raptor_start.angles;
   raptor_spawner spawn_ai();
 
-  //thread spawn_president();
-  //thread spawn_wells();
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
-  //thread two_bmps_from_north();
 
   remove_tvs();
   exploder(333);
@@ -777,7 +681,7 @@ start_defend_BT() {
   thread taco_goes_to_BT_roof();
   flag_set("taco_goes_to_roof");
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   thread diner_back_door_open();
   level.obj_sentry kill();
@@ -803,9 +707,7 @@ start_helis() {
   raptor_spawner.angles = raptor_start.angles;
   raptor_spawner spawn_ai();
 
-  //thread spawn_president();
-  //thread spawn_wells();
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
   thread give_player_predator_drone();
 
@@ -815,7 +717,7 @@ start_helis() {
   thread taco_goes_to_BT_roof();
   flag_set("taco_goes_to_roof");
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   thread diner_back_door_open();
   level.obj_sentry kill();
@@ -832,15 +734,15 @@ start_convoy() {
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  flag_set("crash_objective"); //turn off bullet shield on defenders
+  flag_set("crash_objective");
   flag_set("sentry_in_position");
 
   remove_tvs();
   exploder(333);
-  //thread taco_goes_to_BT_roof();
+
   flag_set("taco_goes_to_roof");
 
-  flag_set("nates_bomb_incoming"); //prevents nates defenders from spawning
+  flag_set("nates_bomb_incoming");
 
   thread diner_back_door_open();
   level.obj_sentry kill();
@@ -849,63 +751,20 @@ start_convoy() {
   thread handler_convoy();
 }
 
-//start_BT_roof()
-//{
-//	thread spawn_president();
-//	wells_start = getent( "wells_in_nates_prep", "targetname" );
-//	thread spawn_wells( wells_start );
-//	
-//	player_start = getent( "start_BT_roof", "targetname" );
-//	level.player setOrigin( player_start.origin );
-//	level.player setPlayerAngles( player_start.angles );
-//	
-//	
-//	taco_spawner = getent( "taco", "script_noteworthy" );
-//	friendly_start = getent( "start_BT_roof_taco", "targetname" );
-//	taco_spawner.origin = friendly_start.origin;
-//	taco_spawner.angles = friendly_start.angles;
-//	taco_spawner spawn_ai();
-//	
-//	raptor_spawner = getent( "commander", "script_noteworthy" );
-//	raptor_start = getEntArray( "raptor_in_nates_prep", "targetname" );
-//	raptor_spawner.origin = raptor_start.origin;
-//	raptor_spawner.angles = raptor_start.angles;
-//	raptor_spawner spawn_ai();
-//	
-//	flag_set( "move_president_to_prep" );
-//	
-//
-//	flag_set( "crash_objective" );//turn off bullet shield on defenders
-//	flag_set( "sentry_in_position" );
-//	thread give_player_predator_drone();
-//	
-//	exploder( 333 );
-//	
-//	thread handler_vip_escort();
-//}
-
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-
 black_screen_intro() {
   setSavedDvar("hud_drawhud", "0");
   level.player freezeControls(true);
 
-  //thread maps\_introscreen::introscreen_generic_black_fade_in( 3.5, 1 );
   thread maps\_introscreen::introscreen_generic_black_fade_in(5.3, 1);
 
   lines = [];
-  // wolverines
-  lines[lines.size] = &"INVASION_LINE1"; //
-  // Day 2 - 13:45:[{FAKE_INTRO_SECONDS:4}]
+
+  lines[lines.size] = &"INVASION_LINE1";
+
   lines["date"] = &"INVASION_LINE2";
-  //pvt ramerez
+
   lines[lines.size] = &"INVASION_LINE3";
-  //virginia
+
   lines[lines.size] = &"INVASION_LINE4";
   lines[lines.size] = &"INVASION_LINE5";
 
@@ -916,31 +775,20 @@ black_screen_intro() {
 
   level.player freezeControls(false);
 
-  wait 1.8; // wait for date stamp
+  wait 1.8;
 
-  level notify("introscreen_complete"); // Do final notify when player controls have been restored
+  level notify("introscreen_complete");
 
   wait(2);
 
   autosave_by_name("levelstart");
 }
 
-//test_escort()
-//{
-//	while( 1 )
-//	{
-//		wait 3;
-//		paradrop_escort = spawn_vehicle_from_targetname_and_drive( "paradrop_escort" );
-//	}
-//}
-
 handler_humvee_to_yards() {
   level.vtmodel = "vehicle_hummer_viewmodel";
   level.vttype = "humvee";
   build_radiusdamage((0, 0, 53), 512, 90, 20, false);
 
-  //setculldist( 8000 );
-  //thread test_escort();
   thread black_screen_intro();
   battlechatter_off("allies");
 
@@ -986,18 +834,16 @@ handler_humvee_to_yards() {
   level.worm thread magic_bullet_shield();
 
   level.humvee_destroyer = spawn_vehicle_from_targetname_and_drive("humvee_destroyer");
-  //level.humvee_destroyer.veh_pathtype = "follow";
+
   level.humvee_destroyer.veh_pathtype = "constrained";
   level.humvee_destroyer thread humvee_destroyer_action();
 
   wait 2;
-  //Seal Six-One:	We got a BMP! Get out, get out!	
+
   level.raptor thread dialogue_queue("inv_six_gotbmp");
-  //wait 1;
 
   level.humvee_player Vehicle_SetSpeed(0, 10);
 
-  //level.humvee_player waittill( "reached_end_node" );
   wait 1;
 
   level.humvee_player thread vehicle_unload();
@@ -1019,14 +865,12 @@ handler_humvee_to_yards() {
   level.taco pushplayer(true);
   level.worm pushplayer(true);
 
-  //level.humvee_player notify( "death" );
-
   thread handler_yards_to_house_destroyer();
 }
 
 handler_yards_to_house_destroyer() {
   battlechatter_off("allies");
-  //parachute_landing = getent( "parachute_landing", "targetname" );
+
   spawner = getent("roof_parachute_landing_guy_yards", "targetname");
 
   flag_wait("entering_yards");
@@ -1044,34 +888,15 @@ handler_yards_to_house_destroyer() {
 
   thread enable_water_fx();
 
-  //thread friendlies_start_ignoreall();
-  //friendly_at_fence_corner = getent( "friendly_at_fence_corner", "targetname" );
-  //friendly_at_fence_corner thread activate_this_friendly();
-
   level.roof_paratrooper = spawner spawn_ai();
   level.roof_paratrooper.ignoreme = true;
 
-  //Russian paratrooper coming down at our 12 o'clock.	
-  //level.raptor dialogue_queue( level.raptor, "inv_six_rusptroop" );
-  //radio_dialogue( "inv_six_rusptroop" );
-
-  //friendly = get_closest_ai( level.roof_paratrooper.origin, "allies" );
-  //friendly.ignoreall = false;
-
-  //Taco:	Roger that.	
-  //level.taco dialogue_queue( level.taco, "inv_tco_rogerthat" );
-  //radio_dialogue( "inv_tco_rogerthat" );
-
   thread dialog_yards_story();
-
-  //wait 3;
-  //thread dialog_yards_objective();
 
   thread handler_house_destroyer_to_pizza();
 }
 
 handler_house_destroyer_to_pizza() {
-  //flag_init( "start_house_destroyer" );
   flag_wait("start_house_destroyer");
 
   autosave_by_name("hd");
@@ -1081,27 +906,22 @@ handler_house_destroyer_to_pizza() {
   flag_init("house_destroyer_unloading");
   level.house_destroyer = spawn_vehicle_from_targetname("house_destroyer");
   level.house_destroyer thread setup_house_destroyer();
-  //thread friendlies_duck_from_house_destroyer();
-  thread dialog_bmp_hasnt_spotted_us();
-  //level.house_destroyer thread dialog_house_destroyer_destroyed();
 
-  //thread save_when_btr_and_riders_are_dead();
+  thread dialog_bmp_hasnt_spotted_us();
 
   flag_wait("got_visual_on_crash");
 
-  //Seal Six-One:	I got a visual on smoke coming from the crash site.	
   level.raptor dialogue_queue("inv_six_viscrashsite");
 
   battlechatter_on("allies");
 
   thread dialog_house_destroyer_unloading();
   thread flag_save("house_destroyer_unloading");
-  //thread friendlies_stop_ignoring_when_flag( "house_destroyer_unloading" );
 
   thread wait_till_btr_smoked();
   thread watch_for_smoke_throws();
   thread dialog_semtex_that_bmp();
-  //thread dialog_take_point();
+
   thread btr_backed_off();
 
   thread handler_pizza_to_gas_station();
@@ -1113,10 +933,8 @@ handler_pizza_to_gas_station() {
   flag_wait("gas_station_truck_spawned");
   thread maps\_utility::set_ambient("invasion_ext3");
   thread setup_gas_station_truck();
-  //thread friendlies_peal_back();
-  thread flag_save("leaving_gas_station");
 
-  //thread dialog_juggernaut_attack();
+  thread flag_save("leaving_gas_station");
 
   thread handler_gas_station_to_crash();
 }
@@ -1127,7 +945,7 @@ handler_gas_station_to_crash() {
   burning_tree = getent("burning_tree", "script_noteworthy");
   burning_tree notify("stop_burning_tree");
 
-  level.obj_direction = "north"; //not enough time for drop to the east
+  level.obj_direction = "north";
   thread dialog_going_to_crash_site();
   thread one_bmp_from_south();
   thread dialog_dont_engage_that_APC();
@@ -1156,8 +974,8 @@ handler_crash() {
 
   thread police_car_cover_moment();
   level.taco set_force_color("g");
-  //level.raptor set_force_color( "b" );
-  activate_trigger_with_targetname("move_to_wells_intro"); //moves worm and taco
+
+  activate_trigger_with_targetname("move_to_wells_intro");
 
   bank_nates_attackers = getEntArray("bank_nates_attackers", "targetname");
   foreach(spawner in bank_nates_attackers)
@@ -1193,9 +1011,6 @@ police_car_cover_moment() {
   thread move_raptor_wells_and_worm();
 
   BadPlace_Delete("police_car_moment");
-
-  //level.raptor enable_ai_color();
-  //level.wells enable_ai_color();
 }
 
 dialog_wells_intro() {
@@ -1206,27 +1021,23 @@ dialog_wells_intro() {
   thread battlechatter_off("allies");
 
   flag_wait("notetrack_gimmesitrep");
-  //Seal Six-One:	Marine! Gimme a sitrep! Where's the President?	
+
   level.raptor playSound("inv_six_gimmesitrep");
 
   flag_wait("notetrack_meatlocker");
 
-  //Sgt Wells:	We moved him to the meat locker, it's practically bulletproof!	
   level.wells playSound("inv_sgw_meatlocker");
 
   flag_wait("notetrack_status");
 
-  //Seal Six-One:	What's his status?	
   level.raptor playSound("inv_six_status");
 
   flag_wait("notetrack_unconscious");
 
-  //Sgt Wells:	He's still unconscious, you got a corpsman?	
   level.wells playSound("inv_sgw_unconscious");
 
   flag_wait("notetrack_whatelse");
 
-  //Seal Six-One:	(aside) Taco, check it out! (back to Marine) What else?	
   level.raptor playSound("inv_six_whatelse");
 
   flag_wait("notetrack_checkout");
@@ -1235,12 +1046,10 @@ dialog_wells_intro() {
 
   flag_wait("notetrack_supplydrop");
 
-  //Sgt Wells:	We got a supply drop on the roof with an M-5 sentry gun!	
   level.wells playSound("inv_sgw_supplydrop");
 
   flag_wait("notetrack_sentrygunsouth");
 
-  //Seal Six-One:	Roach - get to the roof and get that sentry gun pointed south!	
   level.raptor playSound("inv_six_sentrygunsouth");
 
   wait 3;
@@ -1248,50 +1057,14 @@ dialog_wells_intro() {
   flag_set("player_goto_roof");
   thread battlechatter_on("allies");
 
-  /*	
-  	//Seal Six-One:	Marine! Gimme a sitrep! Where's the President?	
-  	level.raptor dialogue_queue( "inv_six_gimmesitrep" );
-  	
-  	wait .5;
-  	
-  	//Sgt Wells:	We moved him to the meat locker, it's practically bulletproof!	
-  	level.wells dialogue_queue( "inv_sgw_meatlocker" );
-  	
-  	//Seal Six-One:	What's his status?	
-  	level.raptor dialogue_queue( "inv_six_status" );
-  	
-  	wait .5;
-  	
-  	//Sgt Wells:	He's still unconscious, you got a corpsman?	
-  	level.wells dialogue_queue( "inv_sgw_unconscious" );
-  	
-  	//Seal Six-One:	(aside) Taco, check it out! (back to Marine) What else?	
-  	level.raptor dialogue_queue( "inv_six_whatelse" );
-
-  	thread taco_to_meat_locker();
-  	
-  	wait 1;
-  	
-  	//Sgt Wells:	We got a supply drop on the roof with an M-5 sentry gun!	
-  	level.wells dialogue_queue( "inv_sgw_supplydrop" );
-  	
-  	flag_set( "player_goto_roof" );
-  	
-  	//Seal Six-One:	Roach - get to the roof and get that sentry gun pointed south!	
-  	level.raptor dialogue_queue( "inv_six_sentrygunsouth" );
-  */
-
   wait 12;
 
-  //Seal Six-One:	What about anti-tank weapons, air support?	
   level.raptor dialogue_queue("inv_six_antitank");
 
-  //Sgt Wells:	We're all out! It's just Ramirez, Collins and myself sir!	
   level.wells dialogue_queue("inv_sgw_allout");
 
   wait 1;
 
-  //Seal Six-One:	Roger that!	
   level.raptor dialogue_queue("inv_six_rogerthat");
 
   flag_set("wells_intro_done");
@@ -1332,7 +1105,6 @@ handler_crash_to_roof() {
   level.taco setgoalpos(nates_roof_volume_south.origin);
   level.taco setgoalvolume(nates_roof_volume_south);
 
-  //flag_wait( "sentry_in_position" );
   autosave_by_name("sentry_in_position");
 
   flag_set("bank_guys_retreat");
@@ -1348,8 +1120,8 @@ handler_crash_to_roof() {
   level.truck_group_enemies_count_deaths = 0;
   truck1 = thread spawn_vehicle_from_targetname_and_drive("truck_group_left");
   truck1.veh_pathtype = "constrained";
-  wait .1; //easier on spawn code
-  //thread spawn_vehicle_from_targetname_and_drive( "truck_group_mid" );
+  wait .1;
+
   truck2 = thread spawn_vehicle_from_targetname_and_drive("truck_group_right");
   truck2.veh_pathtype = "constrained";
 
@@ -1357,19 +1129,13 @@ handler_crash_to_roof() {
   array_thread(magic_smoke_grenades, ::enemy_uses_smoke);
   thread dialog_they_are_using_smoke();
 
-  //Seal Six-One:	Heads up ladies, we got trucks to the south.	
   radio_dialogue("inv_six_headsupladies");
   thread dialog_foot_mobiles();
 
-  wait 1; //let them spawn
+  wait 1;
   while(level.truck_group_enemies_alive > 5)
     wait 1;
-  //while( level.truck_group_enemies_count_deaths < 14 )
-  //	wait 1;
-  //e = getaiarray("allies" );
-  //f = getaiarray("axis" );
-  //println( "enemies " + e.size );
-  //println( "friendlies " + f.size );
+
   autosave_by_name("trucks_to_north");
   thread handler_roof_north_side();
 }
@@ -1380,29 +1146,19 @@ handler_roof_north_side() {
   array_thread(magic_smoke_grenades, ::enemy_uses_smoke);
 
   level.truck_group_enemies_count_lives = 0;
-  //level.truck_group_enemies_alive = 0;
-  level.truck_group_enemies_count_deaths = 0; //reset counter
+
+  level.truck_group_enemies_count_deaths = 0;
 
   truck3 = thread spawn_vehicle_from_targetname_and_drive("truck_north_right");
   truck3.veh_pathtype = "constrained";
   wait .1;
-  truck4 = thread spawn_vehicle_from_targetname_and_drive("truck_north_left"); //actually second
+  truck4 = thread spawn_vehicle_from_targetname_and_drive("truck_north_left");
   truck4.veh_pathtype = "constrained";
 
   thread dialog_smoke_to_north();
-  //while( 1 )
-  //{
-  //	level waittill ( "truck_guy_died" );
-  //	ratio = level.truck_group_enemies_count_deaths / level.truck_group_enemies_count_lives;
-  //	println( " ratio:" + ratio );
-  //	if( ratio > .7 )
-  //		break;
-  //}
 
-  //Taco:	Incoming, north side!	
   radio_dialogue("inv_tco_incomingnorth");
 
-  //Seal Six-One:	Roger that!	
   radio_dialogue("inv_six_rogerthat");
 
   thread friendlies_shift_north();
@@ -1410,18 +1166,14 @@ handler_roof_north_side() {
 
   wait 6;
 
-  //Taco:	Contact to the north!	
   radio_dialogue("inv_tco_contactnorth");
 
-  //Team, we got contacts to the north.	
   radio_dialogue("inv_six_contactsn");
 
-  //Team, shift your fire north.	
   radio_dialogue("inv_six_shiftfiren");
 
   thread wait_to_spawn_diner_defenders();
 
-  //while( level.truck_group_enemies_count_deaths < 13 )
   while(level.truck_group_enemies_alive > 5)
     wait 1;
 
@@ -1441,8 +1193,7 @@ handler_roof_north_side() {
       if(n >= south_side_nodes.size) {
         break;
       }
-      //friend.goalheight = 80;
-      //friend.goalradius = 500;
+
       friendlies[i].fixednode = false;
       friendlies[i] setgoalnode(south_side_nodes[n]);
       friendlies[i] setgoalvolume(nates_roof_volume_south);
@@ -1450,16 +1201,12 @@ handler_roof_north_side() {
     }
   }
 
-  //Seal Six-One:	Looks like Ivan's had enough.	
   radio_dialogue("inv_six_hadenough");
 
-  //Corporal Dunn, give me a sitrep on Raptor, over.	
   radio_dialogue("inv_six_sitreponraptor");
 
-  //Raptor is secure and stable.	
   radio_dialogue("inv_tco_secureandstable");
 
-  //Seal Six-One:	Team, check weapons and ammo. They'll be back.	
   radio_dialogue("inv_six_checkammo");
 
   dialog_two_bmps_from_north();
@@ -1489,17 +1236,14 @@ handler_roof_to_diner() {
 
   flag_waitopen("player_on_roof");
 
-  flag_set("diner_attack"); //activates player half way to diner trigger for autosave
+  flag_set("diner_attack");
 
   bmps = two_bmps_from_north();
-
-  //thread save_halfway_to_diner( bmps );
 
   thread dialog_taco_sees_uav_op();
 
   thread taco_goes_to_diner();
 
-  //flag_clear( "player_inside_nates" );
   level add_wait(::flag_wait, "player_inside_nates");
   level add_func(::autosave_by_name, "go_to_diner");
   level thread do_wait();
@@ -1516,7 +1260,7 @@ handler_diner_defend() {
   thread get_friendlies_away_from_nates_destruction();
   autosave_by_name("has_drones");
 
-  activate_trigger_with_targetname("burger_town_enemy_defenders_trigger"); //spawn enemies in the BT
+  activate_trigger_with_targetname("burger_town_enemy_defenders_trigger");
   thread taco_goes_to_BT();
 
   thread dialog_time_to_destroy_BMPS();
@@ -1535,7 +1279,7 @@ handler_diner_defend() {
 
 handler_diner_to_burgertown() {
   flag_wait("leaving_diner");
-  //autosave_by_name( "leaving_diner" );
+
   flag_set("nates_bomb_incoming");
   bomb_nates();
 
@@ -1568,21 +1312,10 @@ handler_diner_to_burgertown() {
 
 handler_burgertown() {
   flag_set("move_president_to_prep");
-  //thread dialog_time_to_destroy_BMPS();
-
-  //flag_wait( "bmp_north_left_dead" );
-  //flag_wait( "bmp_north_mid_dead" );
-
-  //flag_wait( "player_on_burgertown_roof" );
 
   level.obj_direction = undefined;
 
   wait 3;
-
-  //thread dialog_come_cover_us_nag();
-
-  //Seal Six-One:	Alright, stay on the roof and cover us! We got the President and we're movin' out now.	
-  //thread radio_dialogue( "inv_six_gotpresident" );
 
   thread taco_goes_to_BT_roof();
   flag_set("taco_goes_to_roof");
@@ -1608,20 +1341,10 @@ handler_vip_escort() {
   foreach(redshirt in level.redshirts)
   redshirt thread smart_barney_on_raptor(end_goal, end_volume);
 
-  //level.player waittill_entity_in_range( level.wells, 400 );
-  //waittill_player_lookat_for_time( timer, dot, dot_only )
-  //level.wells waittill_player_lookat_for_time( 0.1, .99 );
-
-  //flag_set( "player_in_pos_to_cover_vip" );
   autosave_by_name("defend_prez");
-
-  //level.wounded_carry_attackers_dead = 0;
-  //wounded_carry_attackers_TC = getEntArray( "wounded_carry_attackers_TC", "targetname" );
-  //array_thread( wounded_carry_attackers_TC, ::spawn_ai );
 
   wait 1;
 
-  //Everyone lock and load! We're going to move from here to the Burger Town as a group, hua?	
   radio_dialogue("inv_six_lockandload");
 
   wait 5;
@@ -1630,37 +1353,31 @@ handler_vip_escort() {
 
   thread wells_cover_path();
 
-  //thread raptor_can_die();
   bt_locker = getent("president_in_burgertown_meat_locker", "targetname");
-  //level.raptor thread maps\_carry_ai::move_president_to_node( level.president, bt_locker );
+
   level.president invisibleNotSolid();
   level.raptor pushplayer(true);
   level.raptor.dontchangepushplayer = true;
   wounded_carry_path = getent("wounded_carry_path", "targetname");
-  //level.raptor thread maps\_carry_ai::move_president_to_node_nopickup( level.president, wounded_carry_path );
+
   level.raptor thread maps\_carry_ai::move_president_to_node(level.president, wounded_carry_path);
 
-  //On three!	
   radio_dialogue("inv_six_onthree");
 
   wait 1;
 
-  //One!	
   radio_dialogue("inv_six_one");
 
   wait 1;
 
-  //Two!	
   radio_dialogue("inv_six_two");
 
   wait 1;
 
-  //Three!!	
   radio_dialogue("inv_six_three");
 
   wait 1;
 
-  //Go go go! 	
   radio_dialogue("inv_six_gogogo2");
 
   level.wells thread stop_magic_bullet_shield();
@@ -1670,12 +1387,7 @@ handler_vip_escort() {
 
   flag_wait("president_in_BT_meat_locker");
 
-  //level.raptor.dontchangepushplayer = undefined;
-  //level.raptor pushplayer( false );
-
   thread dialog_team_were_inside();
-
-  //thread end_of_script();
 
   thread handler_defend_BT();
 }
@@ -1686,25 +1398,14 @@ handler_defend_BT() {
   setup_hunter_enemies();
   thread enemy_monitor();
   thread spawn_redshirts_during_BT_defend();
-  //bank_enemies = getEntArray( "bank_enemies", "targetname" );
-  //array_thread( bank_enemies, ::spawn_ai );
-
-  //thread dialog_stay_near_BT_nags();
-  //thread mission_fail_if_leaves_BT();
-
-  //while( level.num_of_enemy_forces_spawned < 3 )
-  //	wait 1;
-
-  //wait 10;
 
   flag_wait("first_attack_heli_spawned");
   eHeli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
   eHeli.circling = true;
   eHeli.no_attractor = true;
   level.attack_heli = thread maps\_attack_heli::begin_attack_heli_behavior(eHeli);
-  //level.attack_heli MakeEntitySentient( "axis" );
+
   thread dialog_first_attack_heli();
-  //thread dialog_attack_heli_nags();//does both
 
   thread spawn_rpg_redshirts();
 
@@ -1722,7 +1423,6 @@ handler_defend_BT() {
   eHeli.circling = true;
   eHeli.no_attractor = true;
   level.attack_heli = thread maps\_attack_heli::begin_attack_heli_behavior(eHeli);
-  //level.attack_heli MakeEntitySentient( "axis" );
 
   thread spawn_rpg_redshirts();
   thread dialog_second_attack_heli();
@@ -1748,7 +1448,6 @@ music_invasion_regroup_and_end() {
   music_stop(3);
 
   level.player playSound("invasion_ending");
-  //MusicPlayWrapper( "invasion_ending" );
 }
 
 music_regroup() {
@@ -1756,7 +1455,7 @@ music_regroup() {
     return;
   }
   music_TIME = musicLength("invasion_regroup");
-  //music_TIME 		 		 = 86;
+
   level endon("player_at_convoy");
 
   while(1) {
@@ -1767,10 +1466,6 @@ music_regroup() {
 }
 
 handler_convoy() {
-  //nodes = getvehiclenodes( "apply_brakes", "script_noteworthy" );
-  //foreach( n in nodes )
-  //	n thread setup_brakes();
-
   wait 1;
 
   level.obj_direction = "south";
@@ -1796,9 +1491,9 @@ handler_convoy() {
   thread dialog_come_to_convoy();
   foreach(member in convoy) {
     vehicle = member thread maps\_vehicle::spawn_vehicle_and_gopath();
-    //vehicle.veh_pathtype = "constrained";
+
     vehicle.dontunloadonend = true;
-    //vehicle.script_keepdriver = true;
+
     vehicle thread convoy_targets(targets);
     vehicle thread setup_brakes();
     if(isDefined(member.script_noteworthy)) {
@@ -1806,7 +1501,6 @@ handler_convoy() {
       if(member.script_noteworthy == "obj_vehicle")
         level.convoy = vehicle;
     }
-    //wait .05;//so the spawners arent used more than once per frame
   }
   flag_set("time_to_goto_convoy");
 
@@ -1814,29 +1508,21 @@ handler_convoy() {
   total = enemies.size;
 
   if(total < 12) {
-    //4 guys:
     wounded_carry_attackers_TC = getEntArray("wounded_carry_attackers_TC", "targetname");
     array_thread(wounded_carry_attackers_TC, ::spawn_ai);
   }
 
   if(total < 6) {
-    //6 guys
     wounded_carry_attackers_gas = getEntArray("wounded_carry_attackers_gas", "targetname");
     array_thread(wounded_carry_attackers_gas, ::spawn_ai);
   }
 
-  //convoy = maps\_vehicle::spawn_vehicles_from_targetname_and_drive( "convoy" );
-
-  //iprintlnbold( "convoy is here" );
-  flag_wait("convoy_has_arrived"); //vehicle node sets this
-  //convoy[0] waittill( "reached_path_end" );
+  flag_wait("convoy_has_arrived");
 
   if(!isDefined(level.convoy.usedPositions)) {
     level.convoy.usedPositions = [];
   }
   level.convoy.usedPositions[3] = true;
-
-  //level.player waittill_entity_in_range( level.convoy, 4000 );
 
   flag_set("convoy_in_position");
 
@@ -1845,72 +1531,18 @@ handler_convoy() {
   thread player_enters_convoy_humvee();
   set_vision_set("invasion_near_convoy", 3);
 
-  //Radio HQ Voice 1: 	Seal Six-One, this is Overlord, gimme a sitrep over.	
   radio_dialogue("inv_hqr_sitrep");
 
-  //Seal Six-One:	Overlord, Six-One Actual. Be advised: precious cargo is secure, repeat, precious cargo is secure. We're oscar mike.	
   radio_dialogue("inv_six_cargosecure");
 
-  //Radio HQ Voice 1: 	Overlord copies all. Good job. Out.	
   radio_dialogue("inv_hqr_goodjob");
 
   wait 1;
 
-  //Squad, we still got 2,000 civvies in Arcadia! If you got family there it's your lucky day - we're gonna go save their lives!
   radio_dialogue("inv_fly_2kcivvies");
 
-  //iprintlnbold( "end" );
   nextmission();
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 stinger_hint() {
   flag_wait("first_attack_heli_spawned");
@@ -1952,9 +1584,7 @@ player_enters_convoy_humvee() {
     wait .5;
   }
   goal_pos = humvee gettagorigin("tag_guy1");
-  //humvee_end_pos =(-4692,-4529,2310);
 
-  //thread maps\_debug::drawArrowForever( goal_pos, (0,0,0) );
   while(1) {
     d = Distance(goal_pos, level.player.origin);
     if(d <= 70) {
@@ -1977,20 +1607,13 @@ player_enters_convoy_humvee() {
   org MoveTo(goal_pos + (0, 0, -30), move_time, move_time * 0.5, move_time * 0.5);
 
   wait(move_time);
-
-  //wait 2;
-
-  //iprintlnbold( "nextmission" );
 }
 
 setup_brakes() {
   self ent_flag_init("apply_brakes");
-  //if( self.classname == "script_vehicle_bradley" )
-  //	return;
+
   self ent_flag_wait("apply_brakes");
 
-  //print3d( self.origin + (0,0,100), "brake", (1,1,1), 1, 1, 60 );
-  //self waitill( "trigger", vehicle );
   self.veh_brake = 1;
 }
 
@@ -2023,11 +1646,6 @@ spawn_humvee_boarders() {
   spawners = getEntArray(farthest.target, "targetname");
   println(" selected redshirt group: " + farthest.script_noteworthy);
 
-  //closest = getclosest( level.player.origin, redshirt_spawn_groups );
-  //redshirt_spawn_groups = array_remove( redshirt_spawn_groups, closest );
-  //second_closest = getclosest( level.player.origin, redshirt_spawn_groups );
-  //spawners = getEntArray( second_closest.target, "targetname" );
-
   guys = [];
   foreach(spawner in spawners) {
     if(guys.size < 3) {
@@ -2043,13 +1661,13 @@ dialog_enemies_on_roof() {
   level endon("diner_attack");
 
   dialog = [];
-  //Tangos on the roof behind us!	
+
   dialog[dialog.size] = "inv_six_roofbehind";
-  //Our perimeter is breached! Enemies on the roof! 	
+
   dialog[dialog.size] = "inv_six_enemiesonroof";
-  //Contact! Hostiles are on our roof! Inside our perimeter!	
+
   dialog[dialog.size] = "inv_six_insideperim";
-  //Squad! Hostiles on the roof! Turn around!	
+
   dialog[dialog.size] = "inv_six_turnaround";
 
   current_line = 0;
@@ -2088,15 +1706,6 @@ setup_remote_missile_target_guy() {
   }
   self maps\_remotemissile::setup_remote_missile_target();
 }
-
-//save_when_btr_and_riders_are_dead()
-//{
-//	flag_wait( "house_destroyer_dead" );
-//	if( flag( "house_destroyer_unloading" ) )
-//		flag_wait( "house_destroyer_riders_dead" );
-//	
-//	autosave_by_name( "save_when_btr_and_riders_are_dead" );
-//}
 
 get_friendlies_away_from_nates_destruction() {
   nates_roof_volume_south = getent("nates_roof_volume_south", "targetname");
@@ -2140,15 +1749,11 @@ kill_friendlies_on_roof() {
 
 btr80_smash() {
   scripted_node = getent("btr80_smash", "targetname");
-  //scripted_node.origin = ( -1571.2, -3374.1, 2357.7 );
+
   scripted_node.origin = (805.9, -1688.8, 2309.7);
-  //s_angles[0] = 0;
-  //s_angles[1] = 149;
-  //s_angles[2] = 0;
-  //scripted_node.angles = s_angles;
+
   scripted_node.angles = (0, 149, 0);
   level.player waittill_in_range(scripted_node.origin, 1350);
-  //iprintlnbold( "now" );
 
   btr = spawn_anim_model("btr_ground_smash");
   car = spawn_anim_model("btr_squashedcar");
@@ -2191,7 +1796,7 @@ friendlies_shift_north() {
 
 spawn_nates_defenders() {
   flag_wait("leaving_gas_station");
-  //wait .05;//wait for flag
+
   if(flag("nates_bomb_incoming"))
     return;
   nates_defenders = getEntArray("nates_defenders", "script_noteworthy");
@@ -2207,38 +1812,21 @@ spawn_nates_attackers_in_alley() {
 }
 
 spawn_battle_when_in_uav() {
-  //level endon ( "bmps_from_north_dead" );
-  //while( 1 )
-  //{
   level waittill("player_is_controlling_UAV");
-
-  //wounded_carry_attackers_TC = getEntArray( "wounded_carry_attackers_TC", "targetname" );
-  //array_thread( wounded_carry_attackers_TC, ::spawn_ai );	
 
   uav_ambient_battle = getEntArray("uav_ambient_battle", "targetname");
   array_thread(uav_ambient_battle, ::spawn_ai);
-
-  //bank_nates_attackers = getEntArray( "bank_nates_attackers", "targetname" );
-  //array_thread( bank_nates_attackers, ::spawn_ai );
-
-  //burger_town_nates_attackers = getEntArray( "burger_town_nates_attackers", "targetname" );
-  //array_thread( burger_town_nates_attackers, ::spawn_ai );
-
-  //wounded_carry_attackers_bus = getEntArray( "wounded_carry_attackers_bus", "targetname" );
-  //array_thread( wounded_carry_attackers_bus, ::spawn_ai );
-  //}
 }
 
 convoy_targets(targets) {
   if(self.classname == "script_vehicle_hummer_minigun") {
-    //get the vehicle first, then...
     turret = self.mgturret[0];
-    turret waittill("turret_ready"); // if you grab the vehicle right when it spawns, wait for this, otherwise don't (I will make this an ent flag when P4 unlocks)
+    turret waittill("turret_ready");
     mg_guy = turret getturretowner();
 
-    mg_guy.ignoreall = true; // this makes him not shoot when we run set_manual_target
-    turret thread animscripts\hummer_turret\common::set_manual_target(level.player, 1, 6); // 3 = minFireTime, 6 = maxFireTime
-    mg_guy.ignoreall = false; // now he'll shoot at enemies he sees again
+    mg_guy.ignoreall = true;
+    turret thread animscripts\hummer_turret\common::set_manual_target(level.player, 1, 6);
+    mg_guy.ignoreall = false;
   } else {
     while(!flag("player_at_convoy")) {
       targets = array_randomize(targets);
@@ -2254,7 +1842,7 @@ convoy_targets(targets) {
 
 dialog_shot_down_heli() {
   wait 3;
-  //Nice one Roach. 	
+
   radio_dialogue("inv_six_niceoneheli");
 }
 
@@ -2263,33 +1851,27 @@ dialog_come_to_convoy() {
 
   wait 10;
 
-  //The convoy's here! Everyone on me! We're getting the hell outta here! Let's go, let's go!!	
   radio_dialogue("inv_six_convoyshere");
 
   wait 4;
 
-  //Ramirez! The convoy is just south of Burgertown, get your ass over here! Move!	
   radio_dialogue("inv_six_southofbtown");
 
   wait 4;
 
-  //Ramirez! We gotta get back to the convoy! Let's go!	
   radio_dialogue("inv_tco_backtoconvoy");
 
   while(1) {
     wait 15;
 
-    //The convoy's here! Everyone on me! We're getting the hell outta here! Let's go, let's go!!	
     radio_dialogue("inv_six_convoyshere");
 
     wait 15;
 
-    //Ramirez! The convoy is just south of Burgertown, get your ass over here! Move!	
     radio_dialogue("inv_six_southofbtown");
 
     wait 15;
 
-    //Ramirez! We gotta get back to the convoy! Let's go!	
     radio_dialogue("inv_tco_backtoconvoy");
   }
 }
@@ -2302,28 +1884,19 @@ dialog_uav_the_infantry() {
   level endon("player_is_controlling_UAV");
 
   if(cointoss()) {
-    //Ramirez, use the UAV on the infantry!	
     radio_dialogue("inv_six_theinfantry");
   } else {
-    //Ramirez, use the UAV! We got incoming infantry!
     radio_dialogue("inv_six_theinfantry2");
   }
 
   wait 5;
 
-  // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
   level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone"));
 }
 
 dialog_first_attack_heli() {
-  //INTRO
-  //Hunter Two-One this is Overlord. We got a visual on an enemy attack helicopter headed for your area, over.	
   radio_dialogue("inv_hqr_enemyhelo");
 
-  //Hunter Two-One, be advised, enemy helo approaching your sector. CAP is unavailable at this time, good luck, over.	
-  //radio_dialogue( "inv_hqr_capunavail" );
-
-  //Solid copy Overlord. Ramirez! Take down that helicopter! Go!	
   radio_dialogue("inv_six_takedown");
 
   thread dialog_get_stinger();
@@ -2336,33 +1909,24 @@ dialog_get_stinger() {
   nates_dialog_current = 0;
   nates_dialog = [];
 
-  //Ramirez! I saw a couple Stingers on the roof of Nate's! 	
   nates_dialog[nates_dialog.size] = "inv_tco_roofofnates";
-  //Use 'em to take down that sonofabitch! Go!	inv_tco_roofofnates2";
-  //Ramirez! There's Stingers on the roof of Nate's restaurant! 	
+
   nates_dialog[nates_dialog.size] = "inv_tco_killthathelo";
-  //Use 'em to kill that helo! Go! Go!	inv_tco_killthathelo2";
-  //Ramirez! Check the roof of Nate's restaurant! I saw some Stingers up there!	
+
   nates_dialog[nates_dialog.size] = "inv_six_checktheroof";
-  //Ramirez! There's some Stingers by the supply drop on the roof of Nate's!	
+
   nates_dialog[nates_dialog.size] = "inv_six_supplydroponroof";
 
   diner_dialog_current = 0;
   diner_dialog = [];
 
-  //Ramirez! I saw a Stinger missile in that diner to the west! 	
   diner_dialog[diner_dialog.size] = "inv_tco_dispatchchopper";
-  //Use it to to dispatch that chopper! I'll cover you! Go!	inv_tco_dispatchchopper2";
-  //Ramirez! There's a Stinger missile in that stockpile to the west! 	
-  diner_dialog[diner_dialog.size] = "inv_tco_insidediner";
-  //It's inside the diner! Move! I got ya covered!	inv_tco_insidediner2";
-  //Ramirez! Next to the gas station to the west is a diner! Check there for a Stinger missile!	
-  diner_dialog[diner_dialog.size] = "inv_tco_nexttostation";
-  //Ramirez! I saw a Stinger missile in the diner where we got the UAV control rig! 	
-  diner_dialog[diner_dialog.size] = "inv_tco_dineruav";
 
-  //stingers = getEntArray( "stinger", "targetname" );
-  //closest_stinger = getClosest( level.player.origin, stingers );
+  diner_dialog[diner_dialog.size] = "inv_tco_insidediner";
+
+  diner_dialog[diner_dialog.size] = "inv_tco_nexttostation";
+
+  diner_dialog[diner_dialog.size] = "inv_tco_dineruav";
 
   while(1) {
     needs_stinger = true;
@@ -2409,110 +1973,38 @@ dialog_get_stinger() {
   }
 }
 
-//dialog_second_get_stinger()
-//{
-//	level.attack_heli endon( "death" );
-//	wait 3;
-//	
-//	if( level.first_stinger == "diner" )
-//	{
-//		//Ramirez! I saw some Stinger missiles in that diner to the west! Use them to to dispatch that chopper! I'll cover you! Go!	
-//		radio_dialogue( "inv_tco_dispatchchopper" );
-//	
-//		wait 12;
-//	
-//		//Ramirez! There's Stinger missiles in that stockpile to the west, inside the diner! Move! I got ya covered!	
-//		radio_dialogue( "inv_tco_insidediner" );
-//		
-//		wait 20;
-//		
-//		//Ramirez! I saw some Stinger missiles in that diner to the west! Use them to to dispatch that chopper! I'll cover you! Go!	
-//		radio_dialogue( "inv_tco_dispatchchopper" );
-//	}
-//	else
-//	{
-//		//Ramirez! I saw a couple Stingers on the roof of Nate's! Use 'em to take down that sonofabitch! Go!	
-//		radio_dialogue( "inv_tco_roofofnates" );
-//	
-//		wait 12;
-//	
-//		//Ramirez! There's Stingers on the roof of Nate's restaurant! Use 'em to kill that helo! Go! Go!	
-//		radio_dialogue( "inv_tco_killthathelo" );
-//		
-//		wait 20;
-//		
-//		//Ramirez! I saw a couple Stingers on the roof of Nate's! Use 'em to take down that sonofabitch! Go!	
-//		radio_dialogue( "inv_tco_roofofnates" );
-//	}	
-//}
-
 dialog_destroyed_btr_with_uav() {
   level waittill("bmp_died");
 
   if(isDefined(level.player.fired_hellfire_missile)) {
     wait 3;
-    if(flag("bmps_from_north_dead")) //both are dead
+    if(flag("bmps_from_north_dead")) {
       return;
-    //Good effect on target. That's a kill. One more to go.
+    }
     radio_dialogue("inv_six_onemore");
   }
 }
 
 dialog_second_attack_heli() {
-  //SECOND
-  //Hunter Two-One, relay from Goliath One: you got an enemy helicopter loaded for bear, approaching your area, over.	
   radio_dialogue("inv_hqr_relaygol1");
 
-  //Eyes up!!! Enemy gunship comin' in hot!!!	
   radio_dialogue("inv_tco_eyesup");
 
-  //Roger Overlord, Hunter copies all. Ramirez, we've got another enemy helo, take it out!!	
   radio_dialogue("inv_six_anotherhelo");
 
   thread dialog_get_stinger();
 }
 
-//dialog_attack_heli_nags()
-//{
-//	dialog = [];
-//	//Ramirez, take out that helicopter before the convoy arrives!! Move!!	
-//	dialog[dialog.size] = "inv_six_beforeconvoy";
-//	
-//	//Ramirez, find an anti-aircraft weapon and take out the gunship!!	
-//	dialog[dialog.size] = "inv_six_antiaircraft";
-//	
-//	//Ramirez! Take out that gunship before the convoy arrives! Go! Go!	
-//	dialog[dialog.size] = "inv_six_takegunship";
-//	start = 0;
-//	
-//	while( 1 )
-//	{
-//		wait 60;
-//		if( isalive( level.attack_heli ) )
-//		{
-//			radio_dialogue( dialog[start] );
-//			start++;
-//			if( start >= dialog.size )
-//				start = 0;
-//		}
-//	}
-//}
-
 fire_stinger_at_uav() {
-  if(isDefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed)) {
     return;
-  //	thread uav_forward();
+  }
   level.uav maps\_vehicle::godoff();
   level.uav.health = 400;
 
   level waittill("player_is_controlling_UAV");
 
   wait 2;
-
-  //enemies = getaiarray("axis" );
-  //stinger_source = get_closest_to_player_view( enemies );
-  //	if( !isDefined( stinger_source ) )
-  //		continue;
 
   thread dialog_missile_fired_at_stinger();
 
@@ -2557,41 +2049,24 @@ fire_stinger_at_uav() {
 
   wait 2;
   radio_dialogue_clear_stack();
-  //Be advised, the UAV is offline I repeat, the UAV is offline!! <Garble!>	
+
   radio_dialogue("inv_tco_uavoffline");
 }
 
 dialog_missile_fired_at_stinger() {
   wait 2;
   radio_dialogue_clear_stack();
-  //<Garble!> Someone just fired a missile at the UAV!	
+
   radio_dialogue("inv_tco_firedmissile");
 }
 
-//uav_forward()
-//{
-//	while( 1 )
-//	{
-//		forward = anglesToForward( level.uav.angles );
-//		forwardfar = vector_multiply( forward, 10000 );
-//		end = forwardfar + level.uav.origin;
-//	
-//		maps\_debug::drawArrow( end, level.uav.angles );
-//		wait .05;
-//	}
-//}
-
 dialog_enemy_attack_heli() {
-  //Hunter Two-One this is Overlord. We got a visual on an enemy attack helicopter headed for your area, over.	
   radio_dialogue("inv_hqr_enemyhelo");
 
-  //Hunter Two-One, relay from Goliath One: you got an enemy helicopter loaded for bear, approaching your area, over.	
   radio_dialogue("inv_hqr_relaygol1");
 
-  //Hunter Two-One, be advised, enemy helo approaching your sector. CAP is unavailable at this time, good luck, over.	
   radio_dialogue("inv_hqr_capunavail");
 
-  //Eyes up!!! Enemy gunship comin' in hot!!!	
   radio_dialogue("inv_tco_eyesup");
 }
 
@@ -2613,51 +2088,15 @@ spawn_redshirts_during_BT_defend() {
 
   if(!isDefined(level.redshirts))
     level.redshirts = [];
-  //final_goal = getent( "convoy_obj", "targetname" ).origin;
-  //previous_goal = final_goal;
 
   level endon("time_to_goto_convoy");
 
   while(1) {
-    //while( level.redshirts.size > 0 )
-    //{
-    //	wait 1;
-    //	new_array = [];
-    //	foreach( redshirt in level.redshirts )
-    //	{
-    //		if( isalive( redshirt ) )
-    //			new_array[new_array.size] = redshirt;
-    //	}
-    //	level.redshirts = new_array;
-    //}
     wait 1;
-
-    //get goal
-    //stingers = getEntArray( "stinger", "targetname" );
-    //goal = final_goal;
-    //if( ( isDefined( stingers ) ) && ( stingers.size > 0 ) )
-    //{
-    //	if( stingers.size > 1 )
-    //		goal = ( getfarthest( level.player.origin, stingers ) ).origin;
-    //	else
-    //		goal = stingers[0].origin;
-    //}
-    //else
-    //{
-    //	goal = final_goal;
-    //}
 
     redshirts_desired = 3;
 
     level.redshirts = redshirts_respawn(redshirts_desired);
-
-    //foreach( redshirt in level.redshirts )
-    //{
-    //}
-
-    //assign new goal to all redshirts
-    //if( previous_goal != goal )
-
   }
 }
 
@@ -2679,7 +2118,7 @@ smart_barney(end_flag, end_goal, end_volume) {
   self.goalheight = 80;
   self.goalradius = 500;
   self.useChokePoints = false;
-  //level.taco setgoalentity( level.player );
+
   self.fixednode = false;
 
   nates_roof_goal_volume = getent("nates_roof_goal_volume", "targetname");
@@ -2707,7 +2146,6 @@ smart_barney(end_flag, end_goal, end_volume) {
       self setgoalpos(goal);
     }
 
-    //check for nearby BMPs
     wait 2;
     self.favoriteenemy = undefined;
   }
@@ -2751,9 +2189,8 @@ smart_roaming_barney() {
         forward = vector_multiply(vec, 400);
 
         my_origin = self.origin;
-        forward = (forward[0], forward[1], 0); //keeep z goal same as player position
+        forward = (forward[0], forward[1], 0);
         goal = forward + player;
-        //goal = (goal[0], goal[1], my_origin[2] );//keep z goal the same as where you are
       } else {
         goal = level.player.origin;
       }
@@ -2773,32 +2210,25 @@ enemy_monitor() {
   level.enemy_force[0] = "taco_enemies";
   level.enemy_force[1] = "gas_station_enemies";
   level.enemy_force[2] = "bank_enemies";
-  //level.enemy_force[ 3 ] = "spawners_exit";
-  //level.enemy_force[ 4 ] = "30_seconds_pause";
-  //level.enemy_force[ 5 ] = "40_seconds_pause";
-  //level.enemy_force[ 6 ] = "enemy_heli_attack";
 
   level.dialog = [];
 
-  //Hunter Two-One this is Overlord Actual, we're seeing enemy reinforcements to your north, over.	
   level.dialog["bank_enemies"][0] = "inv_hqr_enemynorth";
-  //Be advised Hunter Two-One, you got enemy infantry by that bank to the north, over.	
+
   level.dialog["bank_enemies"][1] = "inv_hqr_banktonorth";
-  //Hunter Two-One, be advised, enemy foot-mobiles approaching north of your location, over.	
+
   level.dialog["bank_enemies"][2] = "inv_hqr_footmobiles";
 
-  //Hunter Two-One, Overlord. Enemy foot-mobiles approaching you from the southeast, over.	
   level.dialog["taco_enemies"][0] = "inv_hqr_southeast";
-  //Hunter Two-One, Goliath One has a visual on hostiles coming from the southeast, over.	
+
   level.dialog["taco_enemies"][1] = "inv_hqr_visualse";
-  //Hunter Two-One, be advised, enemy foot-mobiles have been sighted near the taco joint, over.	
+
   level.dialog["taco_enemies"][2] = "inv_hqr_tacojoint";
 
-  //Hunter Two-One, Hunter Four has a visual on hostiles near the Nova gas station, over.	
   level.dialog["gas_station_enemies"][0] = "inv_hqr_novagasstation";
-  //Hunter Two-One, relay from Goliath Two, enemy reinforcements approaching from the west, over.	
+
   level.dialog["gas_station_enemies"][1] = "inv_hqr_enemywest";
-  //Hunter Two-One, tangos approaching near the diner to the west, over.	
+
   level.dialog["gas_station_enemies"][2] = "inv_hqr_dinerwest";
 
   level.enemy_heli_attacking = false;
@@ -2807,25 +2237,12 @@ enemy_monitor() {
 
   level.enemy_groups = getEntArray("enemy_groups", "targetname");
 
-  //level.enemy_force[ 0 ] = "enemy_heli_attack";//TEMP DEBUG
-
   while(true) {
     enemies = getaiarray("axis");
     total = enemies.size;
     roaming = total;
     println(" total: " + total);
 
-    /*
-    		for( i = 0 ; i < enemies.size ; i++ )
-    			if( isDefined( enemies[ i ].script_noteworthy ) )
-    				if( enemies[ i ].script_noteworthy == "defender" )
-    					roaming -- ;
-    */
-
-    //println( "roaming/total: " + roaming + "/" + total );
-    //if( ( level.enemy_heli_attacking ) && ( roaming < 1 ) )
-    //	spawn_enemy_group();
-    //else
     if(roaming < 7) {
       if(flag("first_attack_heli_dead")) {
         level.num_of_enemy_forces_spawned++;
@@ -2903,10 +2320,8 @@ spawn_enemy_group() {
     guy = enemy_spawners[i] spawn_ai();
     wait .1;
   }
-  wait 1; // make sure the spawning is done before checking to see how many are spawned
+  wait 1;
 
-  //iprintlnbold ( dialog[ selection ][ randomint ( dialog[ selection ].size ) ] );
-  //iprintlnbold ( "Danger enemies coming from " + selection );
   sound_selection = randomint(level.dialog[selection].size);
   thread radio_dialogue(level.dialog[selection][sound_selection]);
 
@@ -2922,10 +2337,8 @@ spawn_enemy_group() {
 }
 
 dialog_team_were_inside() {
-  //Team, we're inside, we've got the President!	
   radio_dialogue("inv_six_gotthepresident");
 
-  //Friendly convoy is oscar mike.	
   radio_dialogue("inv_six_friedlyconvoy");
 }
 
@@ -2958,27 +2371,6 @@ mission_fail_if_leaves_BT_waiter() {
   maps\_utility::missionFailedWrapper();
 }
 
-//dialog_stay_near_BT_nags()
-//{
-//	while( 1 )
-//	{
-//		level waittill( "warning_player_is_leaving_BT" );
-//		
-//		//Stay with us Roach! 	
-//		thread radio_dialogue( "inv_six_staywithus" );
-//		
-//		level waittill( "warning_player_is_leaving_BT" );
-//		
-//		//Get over here! 	
-//		thread radio_dialogue( "inv_six_getoverhere" );
-//		
-//		level waittill( "warning_player_is_leaving_BT" );
-//		
-//		//Roach, on me! Regroup with the squad!		
-//		thread radio_dialogue( "inv_six_roachonme" );
-//	}
-//}
-
 nates_locker_door_open() {
   nates_meat_locker_door = getent("nates_meat_locker_door", "targetname");
   nates_meat_locker_door_model = getent(nates_meat_locker_door.target, "targetname");
@@ -3010,7 +2402,6 @@ bt_locker_door_close() {
   BT_locker_door rotateyaw(172, .1, 0, 0);
   BT_locker_door disconnectpaths();
 
-  //The door is shut - you guys keep Ivan out.
   thread radio_dialogue("inv_six_gotthepresident2");
 
   if(isalive(level.president)) {
@@ -3028,7 +2419,7 @@ keep_enemies_away() {
   vip_escort_bad_place1 = getent("vip_escort_bad_place1", "targetname");
   vip_escort_bad_place2 = getent("vip_escort_bad_place2", "targetname");
   vip_escort_bad_place3 = getent("vip_escort_bad_place3", "targetname");
-  //BadPlace_Brush( <name>, <duration>, <brush entity>, <team>, ... )
+
   BadPlace_Brush("vip_escort_bad_place1", -1, vip_escort_bad_place1, "axis");
   BadPlace_Brush("vip_escort_bad_place2", -1, vip_escort_bad_place2, "axis");
   BadPlace_Brush("vip_escort_bad_place3", -1, vip_escort_bad_place3, "axis");
@@ -3036,74 +2427,46 @@ keep_enemies_away() {
   BadPlace_Delete("vip_escort_bad_place1");
   BadPlace_Delete("vip_escort_bad_place2");
   BadPlace_Delete("vip_escort_bad_place3");
-
-  /*
-  	node = getent( "wounded_carry_path", "targetname" );
-  	BadPlace_Cylinder( "", 20, node.origin, 400, 300, "axis" );
-  	
-  	while( isdefined ( node.target ) )
-  	{
-  		node = getent( node.target, "targetname" );
-  		BadPlace_Cylinder( "", 20, node.origin, 400, 300, "axis" );
-  	}
-  */
-  //flag_wait ( "president_in_BT_meat_locker" );
-  //BadPlace_Delete( "raptor" );
 }
 
 dialog_go_to_yards() {
   wait 2;
   flag_set("follow_foley");
-  //Seal Six-One:	Team, this way! Let's go let's go!	
+
   level.raptor dialogue_queue("inv_six_teamthisway");
 }
 
 dialog_yards_story() {
   level endon("dialog_bmp_hasnt_spotted_us");
 
-  //Overlord this is Raptor Six requesting air support, over!	
   level.raptor dialogue_queue("inv_six_reqairsupport");
 
-  //Raptor Six, all air support is already engaged.
   level.raptor dialogue_queue("inv_hqr_engaged");
-  //Additional ground support is enroute to your position but has encountered heavy resistance, over.	
+
   level.raptor dialogue_queue("inv_hqr_engaged2");
 
-  //Roger that Overlord.
   level.raptor dialogue_queue("inv_six_onfoot");
-  //Be advised, we have encountered enemy armor and are proceeding on foot, over.
+
   level.raptor dialogue_queue("inv_six_onfoot2");
 
-  //Overlord copies all. Good luck. Out.	
   level.raptor dialogue_queue("inv_hqr_goodluck");
 
   wait 2;
 
-  //Sarge, did HQ just tell us to 'F' ourselves?
   level.raptor dialogue_queue("inv_tco_fourselves");
-  //Pretty much, Corporal!
+
   level.taco dialogue_queue("inv_six_prettymuch");
 
   wait 4;
 
-  //Seal Six-One:	I got a fix on the package. 300 meters east. 	
   level.raptor dialogue_queue("inv_six_300meast");
 
-  //Taco:	Roger that.	
   level.taco dialogue_queue("inv_tco_rogerthat");
-  //radio_dialogue( "inv_tco_rogerthat" );
 }
-
-//dialog_yards_objective()
-//{
-//	//Seal Six-One:	I got a fix on the package. 300 meters east. 	
-//	level.raptor dialogue_queue( level.raptor, "inv_six_300meast" );
-//}
 
 bomb_nates() {
   migs = spawn_vehicles_from_targetname_and_drive("bomb_nates");
 
-  //Seal Six-One:	Enemy fast moverrrs!!! Take coverr!!!	
   thread radio_dialogue("inv_six_fastmovers");
 
   wait 3.5;
@@ -3117,7 +2480,6 @@ bomb_nates() {
 
   delaythread(2, ::falling_debri_on_player);
 
-  //Earthquake( <scale>, <duration>, <source>, <radius> )
   earthquake(.4, 3, level.player.origin, 8000);
 }
 
@@ -3132,7 +2494,6 @@ falling_debri_on_player() {
 }
 
 remove_tvs() {
-  // delete destructible TVs where the explosion takes place
   destructible_tvs = getEntArray("exploder_tv_333", "script_noteworthy");
   foreach(tvi, tv in destructible_tvs)
   tv Delete();
@@ -3140,9 +2501,6 @@ remove_tvs() {
 
 enable_water_fx() {
   friendlies = getaiarray("allies");
-  //	foreach( friend in friendlies )
-  //		friend thread waterfx( "start_house_destroyer" );
-  //	level.player thread waterfx( "start_house_destroyer" );
 }
 
 friendlies_try_to_get_off_roof() {
@@ -3176,20 +2534,20 @@ setup_count_predator_infantry_kills() {
 
 dialog_handle_predator_infantry_kills() {
   dialog10 = [];
-  //Ten plus KIAs. Good hit. Good hit.	
+
   dialog10[dialog10.size] = "inv_hqr_tenpluskia";
-  //Oh man. Thats at least ten more confirms hunter two one. Good shooting.	
+
   dialog10[dialog10.size] = "inv_hqr_tenmoreconfirms";
-  //That looks to be at least five no, ten kills, hunter two one. Keep it up.	
+
   dialog10[dialog10.size] = "inv_hqr_fivenotenkills";
   current_dialog10 = 0;
 
   dialog5 = [];
-  //Five plus confirmed kills. Nice work. Hunter two one.	
+
   dialog5[dialog5.size] = "inv_hqr_fiveplus";
-  //Hunter two one, thats another five plus confirmed. 	
+
   dialog5[dialog5.size] = "inv_hqr_another5plus";
-  //Good hit. More than five KIAs.	
+
   dialog5[dialog5.size] = "inv_hqr_morethanfive";
   current_dialog5 = 0;
 
@@ -3217,11 +2575,9 @@ dialog_handle_predator_infantry_kills() {
     }
     if(kills == 1) {
       if(said_hes_down) {
-        //You got 'em. Good kill.	
         radio_dialogue("inv_hqr_yougotem");
         said_hes_down = false;
       } else {
-        //He's down.
         radio_dialogue("inv_hqr_hesdown");
         said_hes_down = true;
       }
@@ -3242,11 +2598,9 @@ dialog_handle_predator_infantry_kills() {
       continue;
     } else {
       if(said_direct_hit) {
-        //Good kills hunter two one. Good kills.	
         radio_dialogue("inv_hqr_goodkills");
         said_direct_hit = false;
       } else {
-        //Thats a direct hit hunter two one, keep up the fire.	
         radio_dialogue("inv_hqr_directhit");
         said_direct_hit = true;
       }
@@ -3255,44 +2609,12 @@ dialog_handle_predator_infantry_kills() {
   }
 }
 
-//friendlies_stop_ignoring_when_flag( msg )
-//{
-//	flag_wait( msg );
-//	friendlies = getaiarray("allies" );
-//	foreach( friend in friendlies )
-//		friend.ignoreall = false;
-//}
-//
-//friendlies_start_ignoreall()
-//{
-//	friendlies = getaiarray("allies" );
-//	foreach( friend in friendlies )
-//		friend.ignoreall = true;
-//}
-
-//activate_this_friendly()
-//{
-//	self waittill( "trigger", other );
-//	other.fixednode = false;
-//	other.ignoreall = false;
-//	other.pathenemyfightdist = 4000;
-//	other.pathenemylookahead = 4000;
-//	
-//	wait 10;
-//	
-//	other.fixednode = true;
-//	other.ignoreall = true;
-//	other.pathenemyfightdist = 128;
-//	other.pathenemylookahead = 128;
-//}
-
 diner_backdoor_attack() {
   flag_wait("player_in_diner");
   autosave_by_name("at_diner");
   wait 2;
   flag_wait("player_in_diner");
 
-  //Taco:	Incoming!	
   level.taco dialogue_queue("inv_tco_incoming");
 
   thread diner_back_door_open();
@@ -3303,13 +2625,12 @@ diner_backdoor_attack() {
   activate_trigger_with_targetname("diner_enemy_counter_attack_trigger");
   flag_set("back_door_attack_start");
 
-  //Taco:	Back door!	
   level.taco dialogue_queue("inv_tco_backdoor");
 }
 
 diner_back_door_open() {
   diner_back_door = getent("diner_back_door", "targetname");
-  diner_back_door rotateyaw(85, .3); //counter clockwise
+  diner_back_door rotateyaw(85, .3);
   diner_back_door playSound("diner_backdoor_slams_open");
   diner_back_door connectpaths();
 }
@@ -3320,58 +2641,10 @@ dialog_smoke_to_north() {
   flag_wait("smoke_screen_starting");
   wait 4;
 
-  //They're layin' down a smokescreen to the north.	
   radio_dialogue("inv_tco_smokescrnth");
 
-  //Roger. Switch to thermal if you got it.	
   radio_dialogue("inv_six_switchthermal");
 }
-
-//dialog_come_cover_us_nag()
-//{
-//	level endon( "player_in_pos_to_cover_vip" );
-//	
-//	//Taco, get on the roof of Burger Town and provide overwatch! Roach, regroup on me! We're gonna move the package!	
-//	radio_dialogue( "inv_six_overwatch" );
-//		
-//	wait 25;
-//	
-//	while( 1 )
-//	{
-//		//Roach, Taco's got the roof covered! We need you back here! Move!		
-//		radio_dialogue( "inv_six_backhere" );
-//		
-//		//Roger that! Moving! Roach - regroup with the squad, go!	
-//		//radio_dialogue( "inv_tco_regroupsquad" );	
-//		
-//		wait 25;
-//	
-//		//Roach, on me! Regroup with the squad!		
-//		radio_dialogue( "inv_six_roachonme" );
-//		
-//		wait 25;
-//	
-//		
-//		//wait 15;
-//		
-//		/*
-//		//Seal Six-One:	Taco, Roach! Clear the Burgertown roof asap!	
-//		radio_dialogue( "inv_six_clearbtroof" );
-//		
-//		wait 15;
-//		
-//		//Roach, get on the roof of that Burger Town and get ready to cover us.	
-//		radio_dialogue( "inv_six_readytocover" );
-//		
-//		wait 15;
-//		
-//		//Taco, Roach - cover us from the Burger Town roof. Go!	
-//		radio_dialogue( "inv_six_coverusgo" );
-//		
-//		wait 15;
-//		*/
-//	}
-//}
 
 prep_prez_for_run() {
   wells_in_nates_prep = getent("wells_in_nates_prep", "targetname");
@@ -3381,39 +2654,7 @@ prep_prez_for_run() {
   level.raptor maps\_carry_ai::move_president_to_node(level.president, raptor_prep);
 }
 
-//raptor_can_die()
-//{
-//	level.raptor thread stop_magic_bullet_shield();
-//	level.raptor.health = 1000;
-//	level.raptor thread mission_fail_if_prez_dies();
-//	
-//	flag_wait( "president_in_BT_meat_locker" );
-//	
-//	level.raptor thread magic_bullet_shield();
-//	
-//}
-
-//mission_fail_if_prez_dies()
-//{
-//	level endon ( "president_in_BT_meat_locker" );
-//	while( 1 )
-//	{
-//		self waittill ( "damage" );
-//		if( self.health < 800 )
-//			break;
-//	}
-//	
-//	setDvar( "ui_deadquote", &"INVASION_FAIL_PREZ" );
-//	maps\_utility::missionFailedWrapper();
-//}
-
 wounded_carry_attackers() {
-  //level.wounded_carry_attackers_dead = 0;
-
-  //set up all spawners
-  //wounded_carry_attackers = getEntArray( "wounded_carry_attackers", "script_noteworthy" );
-  //array_thread( wounded_carry_attackers, ::add_spawn_function, ::wounded_carry_attackers_counter );
-
   while((getaiarray("axis")).size > 4)
     wait 1;
 
@@ -3429,16 +2670,8 @@ wounded_carry_attackers() {
   while((getaiarray("axis")).size > 4)
     wait 1;
 
-  //while( level.wounded_carry_attackers_dead < 6 )
-  //	wait 1;
-
   wounded_carry_attackers_TC = getEntArray("wounded_carry_attackers_TC", "targetname");
   array_thread(wounded_carry_attackers_TC, ::spawn_ai);
-
-  //while( level.wounded_carry_attackers_dead < 12 )
-  //	wait 1;
-
-  //array_thread( wounded_carry_attackers_TC, ::spawn_ai );
 }
 
 wells_cover_path() {
@@ -3467,32 +2700,26 @@ wells_cover_path() {
 dialog_keep_guys_off_me() {
   level endon("president_in_BT_meat_locker");
   level.raptor endon("death");
-  //24 seconds
+
   wait 6;
 
-  //Seal Six-One:	Team, this way! Let's go let's go!	
   level.raptor dialogue_queue("inv_six_teamthisway");
 
   wait 5;
 
-  //Seal Six-One:	Keep these guys off me!	
   level.raptor dialogue_queue("inv_six_keepoffme");
 
   wait 1;
 
-  //He's down! 	
   level.taco dialogue_queue("inv_tco_hesdown");
 
   wait 5;
-  //On me! 	
+
   level.raptor dialogue_queue("inv_six_onme");
-  //Go go go! 	
+
   level.raptor dialogue_queue("inv_six_gogogo");
 
   wait 4;
-
-  //Stay with us Roach! 	
-  //level.raptor dialogue_queue( level.raptor, "inv_six_staywithus" );
 }
 
 dialog_regroup_at_nates_nag() {
@@ -3502,21 +2729,17 @@ dialog_regroup_at_nates_nag() {
   diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
-  //flag_wait( "diner_enemies_dead" );
   if(flag("leaving_diner"))
     return;
   level endon("leaving_diner");
 
-  //flag_wait( "diner_enemies_dead" );
   while(1) {
     wait 2;
 
-    //Nice work team. Regroup over here.	
     radio_dialogue("inv_six_regroup");
 
     wait 15;
 
-    //Taco, Roach, regroup in the restaurant.
     radio_dialogue("inv_six_regroupinrest");
 
     wait 15;
@@ -3548,7 +2771,6 @@ setup_president() {
   self.has_no_ir = true;
   level.president = self;
   self thread magic_bullet_shield();
-  //president = getent( "president", "targetname" );
 
   president_start_node = getent("president_in_nates_meat_locker", "targetname");
   self thread maps\_carry_ai::setWounded(president_start_node);
@@ -3564,56 +2786,36 @@ dialog_house_destroyer_unloading() {
   flag_wait("house_destroyer_unloading");
   autosave_by_name("unloading");
 
-  //Seal Six-One:	We're spotted! Roach - grab that RPG! Taco, Worm - cover him!	
   level.raptor dialogue_queue("inv_six_grabrpg");
 }
 
-//dialog_house_destroyer_destroyed()
-//{
-//	self waittill( "death" );
-//	if( !isDefined( self ) )
-//		return;
-//	//Nice one Roach. 	
-//	level.raptor dialogue_queue( "inv_six_niceone" );
-//	//level.scr_radio[ "inv_six_niceone" ]					 = "inv_six_niceone";
-//}
-
 dialog_incoming_south_side() {
-  //Taco:	Incoming, north side!	
   radio_dialogue("inv_tco_incomingnorth");
 
-  //Taco:	Contact to the north!	
   radio_dialogue("inv_tco_contactnorth");
 }
 
 dialog_incoming_northside() {
-  //Taco:	Incoming, south side!	
   radio_dialogue("inv_tco_incomingsouth");
 
-  //Taco:	Contact to the south!	
   radio_dialogue("inv_tco_contactsouth");
 }
 
 dialog_foot_mobiles() {
   wait 12;
-  //Incoming from the south! Two dozen plus foot mobiles! 	
+
   radio_dialogue("inv_six_2dozen");
 }
 
 dialog_intro() {
-  //The Russians have everything east of I-95! My sector's gonna fall within the hour! 	
   radio_dialogue("inv_gm1_eastof95");
 
-  //We've lost contact with Annapolis, where is the air support!	
   radio_dialogue("inv_gm2_airsupport");
 
-  //Counterbattery fire is unable to engage! Enemy paratroopers have infiltrated their positions, we are cut off, I repeat we are cut off!	
   radio_dialogue("inv_gm3_cutoff");
 
-  //Broken arrow broken arrow! Drop that thousand pounder on the red smoke, now!	
   radio_dialogue("inv_gm4_brokenarrow");
 
-  //Interrogative, can your Harriers take out the interchange at I-495 and US-50 over?	
   radio_dialogue("inv_gm1_495and50");
 }
 
@@ -3622,15 +2824,12 @@ player_shooting_nates() {
   level endon("crash_objective");
   flag_wait("player_shooting_nates");
 
-  //Seal Six-One:	Check your fire check your fire! Friendlies at 10 o'clock in the purple building.	
   level.raptor thread dialogue_queue("inv_six_purplebuilding");
 }
 
 dialog_going_to_crash_site() {
-  //On me! 	
   radio_dialogue("inv_six_onme");
 
-  //Go go go! 	
   radio_dialogue("inv_six_gogogo");
 }
 
@@ -3638,18 +2837,14 @@ dialog_waiting_at_crash_site() {
   last_line = true;
   level endon("crash_objective");
   flag_wait("raptor_at_crash_site");
-  //Get over here! 	
-  //radio_dialogue( "inv_six_getoverhere" );
 
   while(1) {
     wait 10;
 
     if(last_line) {
-      //Roach, we're at the crash site get over here. 	
       radio_dialogue("inv_six_crashsite");
       last_line = false;
     } else {
-      //The crash site is on the north side of Nate's restaurant. 	
       radio_dialogue("inv_six_northofnates");
       last_line = true;
     }
@@ -3657,8 +2852,6 @@ dialog_waiting_at_crash_site() {
 }
 
 friendlies_duck_from_house_destroyer() {
-  //pos = getvehiclenode( "get_down", "script_noteworthy" );
-  //pos waittill( "trigger" );
   wait 1;
 
   allies = getaiarray("allies");
@@ -3666,8 +2859,6 @@ friendlies_duck_from_house_destroyer() {
     allies[i] thread prone_till_flag("bmp_out_of_sight");
   }
 
-  //pos = getvehiclenode( "bmp_out_of_sight", "script_noteworthy" );
-  //pos waittill( "trigger" );
   wait 5;
 
   flag_set("bmp_out_of_sight");
@@ -3679,15 +2870,12 @@ prone_till_flag(msg) {
   self allowedstances("prone");
   old_goal = self.goalpos;
   self anim_generic_custom_animmode(self, "gravity", "pronehide_dive");
-  //self setgoalpos( self.origin );
-  //self.goalradius = 4;
 
   flag_wait(msg);
 
   wait(randomfloatrange(0, .5));
 
   self allowedstances("stand", "prone", "crouch");
-  //self setgoalpos( old_goal );
 }
 
 btr_backed_off() {
@@ -3696,7 +2884,7 @@ btr_backed_off() {
 
   flag_set("btr_backed_away");
   level.house_destroyer notify("backed_away");
-  //if( !flag( "entered_alley" ) )
+
   activate_trigger_with_targetname("friendlies_hide_in_alley");
 }
 
@@ -3715,13 +2903,11 @@ hint_drone_steering() {
 
 wait_till_time_to_destroy_BMPS() {
   level endon("leaving_diner");
-  //flag_wait( "diner_enemies_dead" );
-  //flag_wait( "diner_enemy_counter_attack_dead" );
 
   diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
-  wait 2; //dont nag immediately after picking up control rig
+  wait 2;
 }
 
 dialog_time_to_destroy_BMPS() {
@@ -3731,13 +2917,9 @@ dialog_time_to_destroy_BMPS() {
   if(flag("bmps_from_north_dead")) {
     return;
   }
-  //if( ( flag( "bmp_north_left_dead" ) ) && ( flag( "bmp_north_mid_dead" ) ) )
-  //	return;
 
-  //Roach, neutralize that enemy armor.	
   radio_dialogue("inv_six_neutralizearmor");
 
-  // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
   level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
 
   thread hint_drone_steering();
@@ -3745,42 +2927,29 @@ dialog_time_to_destroy_BMPS() {
   wait 25;
 
   while(1) {
-    //if( ( flag( "bmp_north_left_dead" ) ) && ( flag( "bmp_north_mid_dead" ) ) )
-    //	return;
-
     if((flag("bmp_north_left_dead")) || (flag("bmp_north_mid_dead"))) {
       r = randomint(3);
       if(r == 0) {
-        //There's still one BMP left!	
         dialog_time_to_destroy_BMPS_action("inv_six_stillonebmp");
 
-        // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
         level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
       } else if(r == 1) {
-        //Waste that BMP now!	
         dialog_time_to_destroy_BMPS_action("inv_six_wastethatbmpnow");
 
-        // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
         level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
       } else {
-        //Roach, neutralize that enemy armor.	
         dialog_time_to_destroy_BMPS_action("inv_six_neutralizearmor");
 
-        // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
         level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
       }
     } else {
       if(cointoss()) {
-        //Seal Six-One:	Roach! Waste those BMPs! Now!	
         dialog_time_to_destroy_BMPS_action("inv_six_wastebmpsnow");
 
-        // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
         level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
       } else {
-        //Destroy those APCs!	
         dialog_time_to_destroy_BMPS_action("inv_six_destroyapcs");
 
-        // get_remotemissile_hint_string() Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
         level.player thread display_hint(level.player get_remotemissile_hint_string("hint_predator_drone_vs_bmps"));
       }
     }
@@ -3803,15 +2972,12 @@ dialog_dont_engage_that_APC() {
 
   apc waittill_player_lookat_for_time(.4, .99);
 
-  //Seal Six-One:	Team, don’t engage that APC - our objective is the crash site.	
   level.raptor thread dialogue_queue("inv_six_dontengageapc");
 }
 
 dialog_two_bmps_from_north() {
-  //Seal Six-One:	Taco, be advised, two BMPs coming in from the north.	
   radio_dialogue("inv_six_bmpsfromnorth");
 
-  //Taco:	Roger that.	
   radio_dialogue("inv_tco_rogerthat");
 }
 
@@ -3823,48 +2989,23 @@ dialog_clear_burgertown_nag() {
   while(1) {
     flag_waitopen("player_in_burgertown");
 
-    //Seal Six-One:	Taco, Roach, we still got hostiles in the Burgertown, move it!	
     radio_dialogue("inv_six_hostilesinbt");
     wait 20;
 
     flag_waitopen("player_in_burgertown");
 
-    //Taco, Roach, we need to move ASAP! Clear that restaurant!	
     radio_dialogue("inv_six_needtomove");
     wait 20;
 
     flag_waitopen("player_in_burgertown");
 
-    //Team, what's the hold up? Secure that restaurant!	
     radio_dialogue("inv_six_whatsholdup");
     wait 20;
   }
 }
 
-//		wait 45;
-//		if( !flag( "burger_town_lower_cleared" ) )
-//		{
-//			//Seal Six-One:	Taco, Roach, we still got hostiles in the Burgertown, move it!	
-//			radio_dialogue( "inv_six_hostilesinbt" );
-//		}
-//		else
-//		{
-//			if( !flag( "burger_town_roof_cleared" ) )
-//			{
-//				//Seal Six-One:	Taco, Roach! Clear the Burgertown roof asap!	
-//				radio_dialogue("inv_six_clearbtroof" );
-//			}
-//			else
-//				break;
-//		}
-//	}
-//}
-
 spawn_rpg_redshirts() {
-  //if( flag( "president_in_BT_meat_locker" ) )
   group = "friendly_redshirt_rpg_BT_spawners";
-  //else
-  //	group = "friendly_redshirt_rpg_NATES_spawners";
 
   redshirt_spawn_groups = getEntArray(group, "targetname");
 
@@ -3885,9 +3026,8 @@ spawn_rpg_redshirts() {
 
 setup_rpg_redshirts() {
   self.big_goal = true;
-  //self thread maps\_debug::drawOriginForever();
+
   self thread smart_roaming_barney();
-  //SetThreatBias( "rpg_friendlies", "attack_helis", 10000 );
 
   self.ignored_by_attack_heli = true;
   self thread magic_bullet_shield();
@@ -3907,7 +3047,7 @@ setup_rpg_redshirts() {
 
   while(isalive(level.attack_heli))
     wait 1;
-  //wait 5;
+
   self clearentitytarget();
 }
 
@@ -3923,11 +3063,6 @@ spawn_redshirts(desired_num) {
   farthest = getfarthest(level.player.origin, redshirt_spawn_groups);
   spawners = getEntArray(farthest.target, "targetname");
   println(" selected redshirt group: " + farthest.script_noteworthy);
-
-  //closest = getclosest( level.player.origin, redshirt_spawn_groups );
-  //redshirt_spawn_groups = array_remove( redshirt_spawn_groups, closest );
-  //second_closest = getclosest( level.player.origin, redshirt_spawn_groups );
-  //spawners = getEntArray( second_closest.target, "targetname" );
 
   guys = [];
   foreach(spawner in spawners) {
@@ -3961,7 +3096,6 @@ taco_goes_to_BT() {
   BT_org = BT_goal.origin;
   BT_goal_volume = getent("BT_goal_volume", "targetname");
 
-  //guy smart_barney( end_flag, end_goal, end_volume );
   level.taco thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
 
   redshirts_desired = 3;
@@ -3980,7 +3114,6 @@ taco_goes_to_diner() {
   diner_goal_volume = getent("diner_goal_volume", "targetname");
   diner_org = getent("predator_drone_control", "targetname").origin;
 
-  //guy smart_barney( end_flag, end_goal, end_volume );
   level.taco thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
   level.redshirts = spawn_redshirts(3);
   foreach(redshirt in level.redshirts)
@@ -3991,10 +3124,10 @@ smart_barney_on_raptor(end_goal, end_volume) {
   self endon("stop_barney");
   self endon("death");
   self ClearGoalVolume();
-  //self thread friendly_adjust_movement_speed();
+
   self.goalheight = 80;
   self.goalradius = 500;
-  //level.taco setgoalentity( level.player );
+
   self.fixednode = false;
 
   while(!flag("president_in_BT_meat_locker")) {
@@ -4003,16 +3136,13 @@ smart_barney_on_raptor(end_goal, end_volume) {
     forward = vector_multiply(vec, 400);
     goal = forward + leader;
     self setgoalpos(goal);
-    //println(" player " + level.player.origin + " goal " + forward );
 
     if(!isDefined(self.favoriteenemy)) {
       self.favoriteenemy = get_closest_ai(self.origin, "axis");
     }
-    //check for nearby BMPs
+
     wait .5;
   }
-  //self notify( "stop_adjust_movement_speed" );
-  //self.moveplaybackrate = 1.0;
 
   self setgoalpos(end_goal);
   self setgoalvolume(end_volume);
@@ -4027,7 +3157,6 @@ friendly_adjust_movement_speed() {
     wait randomfloatrange(.5, 1.5);
 
     while(friendly_should_speed_up()) {
-      //iPrintLnBold( "friendlies speeding up" );
       self.moveplaybackrate = 2.5;
       wait 0.05;
     }
@@ -4044,7 +3173,6 @@ friendly_should_speed_up() {
     return false;
   }
 
-  // check if AI is visible in player's FOV
   if(within_fov(level.player.origin, level.player getPlayerAngles(), self.origin, level.cosine["60"])) {
     prof_end("friendly_movement_rate_math");
     return false;
@@ -4065,105 +3193,13 @@ taco_goes_to_BT_roof() {
   level.taco.goalradius = 1024;
 }
 
-//set_ammo()
-//{
-//	if( (self.classname == "weapon_fraggrenade") || (self.classname == "weapon_flash_grenade") )
-//		self ItemWeaponSetAmmo( 1, 0 );
-//	else
-//		self ItemWeaponSetAmmo( 999, 999 );
-//}
-//
-//delete_if_obj_complete( obj_flag )
-//{
-//	self endon ( "death" );
-//	flag_wait ( obj_flag );
-//	self delete();
-//}
-//
-//ammoRespawnThink( flag, type, obj_flag )
-//{
-//	wait .2; //timing
-//	weapon = self;
-//	ammoItemClass = weapon.classname;
-//	ammoItemOrigin = ( weapon.origin + (0,0,8) ); //wont spawn if inside something
-//	ammoItemAngles = weapon.angles;
-//	weapon set_ammo();
-//	
-//	obj_model = undefined;
-//	if( isdefined ( weapon.target ) )
-//	{
-//		obj_model = getent ( weapon.target, "targetname" );
-//		obj_model.origin = weapon.origin;
-//		obj_model.angles = weapon.angles;
-//	}
-//	
-//	if( type == "flash_grenade" )
-//		ammo_fraction_required = 1;
-//	else
-//		ammo_fraction_required = .2;
-//		
-//	if( isdefined ( flag ) )
-//	{
-//		//self delete();
-//		self.origin = self.origin + (0, 0, -10000);
-//		if( isdefined ( obj_model ) )
-//			obj_model hide();
-//		
-//		flag_wait ( flag );
-//		
-//		if( isdefined ( obj_model ) )
-//			obj_model show();
-//		self.origin = self.origin + (0, 0, 10000);
-//		//weapon = spawn ( ammoItemClass, ammoItemOrigin );
-//		//weapon.angles = ammoItemAngles;
-//		weapon set_ammo();
-//	}
-//	
-//	//if( isdefined ( obj_model ) )
-//	//	obj_model hide();//temp hiding of glowing weapons
-//	
-//	if( ( isdefined ( obj_model ) ) && ( isdefined ( obj_flag ) ) )
-//		obj_model thread delete_if_obj_complete( obj_flag );
-//	
-//	weapon waittill ( "trigger" );
-//	
-//	if( isdefined ( obj_model ) )
-//		obj_model delete();
-//	
-//	while( 1 )
-//	{
-//		wait 1;
-//
-//		if( ( level.player GetFractionMaxAmmo( type ) ) < ammo_fraction_required )
-//		{
-//			while( distance( level.player.origin, ammoItemOrigin ) < 160 )
-//				wait 1;
-//	
-//			//if( level.player pointInFov( ammoItemOrigin ) )
-//			//	continue;
-//	
-//			weapon = spawn ( ammoItemClass, ammoItemOrigin, 1 ); //suspended bit flag
-//			//weapon = spawn ( "weapon_mp5", ammoItemOrigin );
-//			weapon.angles = ammoItemAngles;
-//			weapon set_ammo();
-//			wait .2;
-//			weapon.origin = ( ammoItemOrigin + (0,0,-8) );
-//			//weapon.angles = ammoItemAngles;
-//			
-//			//weapon waittill ( "trigger" );
-//			while( isdefined ( weapon ) )
-//				wait 1;
-//		}
-//	}
-//}
-
 set_up_predator_drone_control_pickup() {
   predator_drone_control = getent("predator_drone_control", "targetname");
   predator_drone_control show();
   predator_drone_control glow();
 
   predator_drone_control setCursorHint("HINT_NOICON");
-  // Press and hold ^3&& 1^7 to pick up the turret.
+
   predator_drone_control setHintString(&"INVASION_DRONE_PICKUP");
   predator_drone_control makeUsable();
 
@@ -4178,8 +3214,7 @@ give_player_predator_drone() {
   flag_set("player_has_predator_drones");
 
   thread dialog_handle_predator_infantry_kills();
-  //	level.player giveWeapon( "remote_missile_detonator" );
-  //	level.player SetActionSlot( 4, "weapon", "remote_missile_detonator" );
+
   level.player maps\_remotemissile::give_remotemissile_weapon("remote_missile_detonator");
 
   predator_drone_control = getent("predator_drone_control", "targetname");
@@ -4193,18 +3228,15 @@ enemy_uses_smoke() {
   flag_set("smoke_screen_starting");
   playFX(getfx("smokescreen"), self.origin);
   self thread play_sound_in_space("smokegrenade_explode_default");
-  //MagicGrenade( "smoke_grenade_american", ( self.origin + (0,0,32) ), self.origin, .1 );
 }
 
 dialog_they_are_using_smoke() {
   flag_wait("smoke_screen_starting");
   wait 7;
 
-  //They're using smoke to cover their advance! 	
   radio_dialogue("inv_tco_usingsmoke");
   wait 1;
 
-  //Seal Six-One:	Team, this is raptor. Switch to thermal optics if you got 'em.	
   radio_dialogue("inv_six_thermaloptics");
 }
 
@@ -4213,8 +3245,7 @@ dialog_pickup_drone_control_nag() {
   flag_wait("player_in_diner");
   flag_wait("back_door_attack_start");
   wait 4;
-  //flag_wait( "diner_enemies_dead" );
-  //flag_wait( "diner_enemy_counter_attack_dead" );
+
   diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
@@ -4222,11 +3253,9 @@ dialog_pickup_drone_control_nag() {
 
   while(!flag("player_has_predator_drones")) {
     if(last_line) {
-      //Taco:	Roach - get the control rig for the UAV!	
       level.taco dialogue_queue("inv_tco_controlrig");
       last_line = false;
     } else {
-      //Taco:	Roach - I got you covered! Pick up the control rig! 	
       level.taco dialogue_queue("inv_tco_pickupcontrolrig");
       last_line = true;
     }
@@ -4239,22 +3268,18 @@ dialog_nates_bombing_reaction() {
     return;
   level endon("taco_goes_to_roof");
   wait 3;
-  //Taco:	raptor you still there?	
+
   radio_dialogue("inv_tco_stillthere");
   wait 1;
 
-  //Seal Six-One:	<cough> Taco, Roach, new plan.	
   radio_dialogue("inv_six_newplan");
 
-  //Seal Six-One:	Secure the Burgertown and get on the <cough> roof.	
   radio_dialogue("inv_six_secureburgertown");
 
   flag_set("time_to_clear_burgertown");
 
-  //Seal Six-One:	Everyone on this net, listen up, we're moving the package asap.	
   radio_dialogue("inv_six_listenup");
 
-  //Seal Six-One:	We need to get the hell out of this building before those fast movers make another pass.	
   radio_dialogue("inv_six_anotherpass");
 
   flag_set("nates_bombed");
@@ -4263,7 +3288,6 @@ dialog_nates_bombing_reaction() {
 dialog_hellfire_attack_reaction() {
   wait 4.5;
   if(flag("player_on_roof")) {
-    //Worm:	What the hell was that?!	
     radio_dialogue("inv_wrm_whatwasthat");
   }
   wait 1;
@@ -4271,15 +3295,12 @@ dialog_hellfire_attack_reaction() {
   while(flag("player_on_roof")) {
     r = randomint(3);
     if(r == 0) {
-      //Seal Six-One:	Roach! Get the <garble> off the roof!	
       radio_dialogue("inv_six_offtheroof");
     }
     if(r == 1) {
-      //Get off the roof! 	
       radio_dialogue("inv_six_getoffroof2");
     }
     if(r == 2) {
-      //Get down from the roof now! 	
       radio_dialogue("inv_six_getoffroofnow");
     }
 
@@ -4293,32 +3314,26 @@ hellfire_attacks() {
   level.player endon("death");
   targets = getEntArray("hellfire_attack_target", "targetname");
 
-  //first in front
   first_tgt = get_closest_to_player_view(targets);
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), first_tgt.origin);
   wait(randomfloatrange(3, 5));
 
-  //second closest to view but not the same, &diff
   remainingtargets = array_remove(targets, first_tgt);
   targetpos = get_closest_to_player_view(remainingtargets);
-  //targetpos = remainingtargets[ randomint( remainingtargets.size ) ];
+
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
   wait(randomfloatrange(3, 5));
 
-  //third random &diff
   remainingtargets = array_remove(targets, targetpos);
   targetpos = remainingtargets[randomint(remainingtargets.size)];
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
   wait(randomfloatrange(3, 5));
 
-  //forth random &diff
   remainingtargets = array_remove(targets, targetpos);
   targetpos = remainingtargets[randomint(remainingtargets.size)];
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
   wait(randomfloatrange(3, 5));
 
-  //fifth kills player or hits roof
-  //if( !flag( "player_inside_nates" ) )
   if(flag("player_on_roof")) {
     rocket_target = level.player.origin;
     rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), rocket_target);
@@ -4330,10 +3345,9 @@ hellfire_attacks() {
 }
 
 hellfire_attacks_after_player_got_off_roof() {
-  wait .2; //timing issue with start point
+  wait .2;
   flag_waitopen("player_on_roof");
 
-  //sixth kill sentry
   ceiling_dust = getEntArray("ceiling_dust", "targetname");
   if(sentry_is_on_roof()) {
     level waittill("hellfire");
@@ -4344,16 +3358,14 @@ hellfire_attacks_after_player_got_off_roof() {
       wait .05;
     level.obj_sentry notify("deleted");
     level.obj_sentry delete();
-    //level.obj_sentry dodamage( ( level.obj_sentry.health + 1000 ), rocket_target );
   }
 
-  //remainder hit roof (add ceiling dust)
   targets = getEntArray("hellfire_attack_target_roof", "targetname");
   while(1) {
     level waittill("hellfire");
     targetpos = targets[randomint(targets.size)];
     target_org = targetpos.origin;
-    //println( " origin " + target_org );
+
     rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), target_org);
     array_thread(ceiling_dust, ::drop_dust);
   }
@@ -4364,8 +3376,7 @@ sentry_is_on_roof() {
     return false;
   if(!isDefined(level.obj_sentry))
     return false;
-  //if( level.obj_sentry.health <= 0 )
-  //	return false;
+
   roof_volume = getent("roof_volume", "targetname");
   if(level.obj_sentry isTouching(roof_volume))
     return true;
@@ -4382,16 +3393,12 @@ dialog_taco_sees_uav_op() {
   level notify("hellfire");
   wait 4;
 
-  //I have a visual on an enemy UAV operator remote-piloting those missiles!	
   radio_dialogue("inv_tco_uavop");
 
-  //He's inside that diner to the west, over!	
   radio_dialogue("inv_tco_uavop2");
 
-  //Ramirez! Get over there, and kill that SOB!	
   radio_dialogue("inv_six_killthatsob");
 
-  //I'm sending part of the squad to help you out! Go!	
   radio_dialogue("inv_six_killthatsob2");
 
   level notify("hellfire");
@@ -4406,72 +3413,26 @@ dialog_taco_sees_uav_op() {
   level notify("hellfire");
 
   wait 4;
-
-  //if( flag( "player_inside_nates" ) )
-  //{
-  //	//I have a visual on an enemy UAV operator remote-piloting those missiles!	
-  //	radio_dialogue( "inv_tco_uavop" );
-  //
-  //	//He's inside that diner to the west, over!	
-  //	radio_dialogue( "inv_tco_uavop2" );
-  //
-  //	//Ramirez! Get over there, and kill that SOB!	
-  //	radio_dialogue( "inv_six_killthatsob" );
-  //
-  //	//I'm sending part of the squad to help you out! Go!	
-  //	radio_dialogue( "inv_six_killthatsob2" );
-  //}
 }
 
 setup_gas_station_truck() {
   gas_station_truck = spawn_vehicle_from_targetname_and_drive("gas_station_truck");
 
   wait 4;
-  //Seal Six-One:	Incoming! Truck 12 o’clock!
+
   level.raptor dialogue_queue("inv_six_truck12");
 }
-
-//friendlies_peal_back()
-//{
-//	wait 8;
-//	friendlies = get_force_color_guys( "allies", "r" );
-//	foreach( friend in friendlies )
-//	{
-//		if( isalive( friend ) )
-//		{
-//			friend set_force_color( "o" );
-//			wait 2;
-//		}
-//	}
-//	
-//	flag_wait( "juggernaut_dead" );
-//	
-//	foreach( friend in friendlies )
-//	{
-//		if( isalive( friend ) )
-//		{
-//			friend set_force_color( "r" );
-//		}
-//	}
-//	
-//	//He's down! 	
-//	radio_dialogue( "inv_tco_hesdown" );
-//	
-//	//Nice one guys. 	
-//	radio_dialogue( "inv_six_niceoneguys" );
-//}
 
 dialog_bmp_hasnt_spotted_us() {
   wait 2;
 
   if(isalive(level.house_destroyer)) {
     level notify("dialog_bmp_hasnt_spotted_us");
-    //Seal Six-One:	That BMP hasn’t spotted us! Hang to the right and stay behind it!	
+
     level.raptor dialogue_queue("inv_six_hangright");
   }
 
   if(isalive(level.house_destroyer)) {
-    //Hang right and stay behind it!	
     level.raptor dialogue_queue("inv_six_staybehind");
   }
 }
@@ -4483,22 +3444,7 @@ spawn_tangled_chute_struggler() {
   guy = tangled_parachute_guy spawn_ai();
 }
 
-//dialog_take_point()
-//{
-//	level endon ( "entered_alley" );
-//	level.house_destroyer waittill_either ( "death", "backed_away" );
-//	
-//	flag_wait( "take_point" );
-//	
-//	//Team the crashed heli at 12 o'clock is our objective. 	
-//	level.raptor dialogue_queue( "inv_six_ourobjective" );
-//	
-//	//Seal Six-One:	Roach, take point - we're cuttin' to the right.	
-//	level.raptor dialogue_queue( "inv_six_takepoint" );
-//}
-
 dialog_sentry_nags() {
-  //level endon ( "sentry_in_position" );
   flag_wait("wells_intro_done");
   level endon("player_on_roof");
 
@@ -4509,23 +3455,12 @@ dialog_sentry_nags() {
       return;
     }
     if(cointoss()) {
-      //Seal Six-One:	Roach, use the ladder in the kitchen and get to the roof.	
       radio_dialogue("inv_six_ladderinkitchen");
     } else {
-      //Seal Six-One:	Roach this is raptor. Get to the roof, there's a maintenance ladder in the kitchen.	
       radio_dialogue("inv_six_gettoroof");
     }
     wait 15;
   }
-  /*	
-  	while( ! flag( "sentry_in_position" ) )
-  	{
-  		//Seal Six-One:	Roach, you on the roof yet? Get that sentry gun online and make sure its pointed south.	
-  		radio_dialogue( "inv_six_onroofyet" );
-  		
-  		wait 15;
-  	}
-  */
 }
 
 taco_to_meat_locker() {
@@ -4536,30 +3471,19 @@ taco_to_meat_locker() {
 }
 
 move_raptor_wells_and_worm() {
-  //wells_inside = getnode( "wells_inside", "script_noteworthy" );
   wells_inside = getnode("wells_kitchen", "targetname");
   if(isalive(level.wells)) {
     level.wells disable_ai_color();
     level.wells setgoalnode(wells_inside);
     level.wells.goalradius = 64;
     level.wells.fixednode = true;
-    //level.wells.goalradius = 190;
-    //level.wells.fixednode = false;
   }
 
-  //wait 2;
-
-  //flag_wait( "wells_intro_done" );
-  //raptor_inside = getnode( "raptor_inside", "script_noteworthy" );
   raptor_inside = getnode("raptor_kitchen", "targetname");
   level.raptor disable_ai_color();
   level.raptor setgoalnode(raptor_inside);
   level.raptor.goalradius = 64;
   level.raptor.fixednode = true;
-  //level.raptor.goalradius = 190;
-  //level.raptor.fixednode = false;
-
-  //wait 2;
 
   if(isalive(level.worm)) {
     worm_inside = getnode("worm_inside", "script_noteworthy");
@@ -4585,49 +3509,26 @@ should_break_throw_smoke() {
     return false;
 }
 
-//should_break_get_semtex()
-//{
-//	clipCount = level.player GetWeaponAmmoStock( "semtex_grenade" );
-//	if( clipCount < 1 )
-//		return false;
-//	else
-//		return true;
-//}
-//
-//should_break_throw_semtex()
-//{
-//	if( flag( "threw_semtex" ) )
-//		return true;
-//	else
-//		return false;
-//}
-
-//	level.player thread display_hint( "hint_throw_semtex" );
-//	level.player thread display_hint( "hint_get_semtex" );
-//watch_for_semtex_throws()
-
 dialog_semtex_that_bmp() {
   level endon("btr_smoke_starting");
-  //level.house_destroyer endon( "death" );
+
   level endon("entered_alley");
 
   dialog = [];
-  //We're spotted! Roach - grab those Semtex explosives! Taco, Worm - cover him!	
-  //dialog[dialog.size] = "inv_six_grabrpg";
-  //Roach - there’s explosives by that supply drop! Move! 	
+
   dialog[dialog.size] = "inv_six_rpgsupplydrop";
-  //Pick up the explosives by the supply drop!
+
   dialog[dialog.size] = "inv_six_pickup";
-  //Roach get more explosives from the supply drop!	
+
   dialog[dialog.size] = "inv_six_getmore";
   dialog_start = 0;
 
   throw_dialog = [];
-  //Ramirez, throw some Semtex on that BMP!
+
   throw_dialog[throw_dialog.size] = "inv_six_throwsemtex";
-  //Ramirez, get some Semtex on that BMP!
+
   throw_dialog[throw_dialog.size] = "inv_six_getsemtex";
-  //Ramirez, destroy that BMP with Semtex!
+
   throw_dialog[throw_dialog.size] = "inv_six_destroy";
   throw_dialog_start = 0;
 
@@ -4637,10 +3538,6 @@ dialog_semtex_that_bmp() {
 
   level.house_destroyer endon("backed_away");
   while(1) {
-    //if( distance ( level.house_destroyer.origin, level.player.origin ) > 2000 )
-    //	break;
-
-    //player_has_semtex = level.player GetWeaponAmmoStock( "semtex_grenade" );
     player_has_semtex = level.player GetWeaponAmmoStock("smoke_grenade_american");
     if(player_has_semtex) {
       if(!flag("threw_smoke")) {
@@ -4718,14 +3615,9 @@ hint_if_smoke_too_far() {
     return;
   level endon("house_destroyer_moving_back");
 
-  //while( !flag( "btr_smoke_starting" ) )
-  //{
   level waittill("btr_smoke_too_far");
   if(!flag("btr_smoke_starting"))
     display_hint_timeout("hint_smoke_too_far", 5);
-
-  //	wait 10;
-  //}
 }
 
 should_break_smoke_too_far() {
@@ -4743,7 +3635,7 @@ dialog_goto_alley() {
   autosave_by_name("btr_smoked");
   flag_set("btr_smoked");
   activate_trigger_with_targetname("friendlies_hide_in_alley");
-  //Use the cover of the smoke to run past the BTR into the alley!	
+
   level.raptor dialogue_queue("inv_six_coverofsmoke");
 
   wait 5;
@@ -4751,7 +3643,7 @@ dialog_goto_alley() {
   if(flag("entered_alley")) {
     return;
   }
-  //Ramirez! Come to alley!	
+
   level.raptor dialogue_queue("inv_six_cometoalley");
 }
 
@@ -4807,21 +3699,6 @@ bank_enemies_setup_retreat() {
   self kill();
 }
 
-//waittill_sentry_moved()
-//{
-//	self thread mission_fail_if_sentry_dies();
-//	
-//	south_side_of_roof = getent( "south_side_of_roof", "targetname" );
-//	while( 1 )
-//	{
-//		if( self isTouching( south_side_of_roof ) )
-//			break;
-//		wait .5;
-//	}
-//	
-//	flag_set ( "sentry_in_position" );
-//}
-
 mission_fail_if_sentry_dies() {
   level endon("sentry_in_position");
   self waittill("death");
@@ -4834,11 +3711,6 @@ mig_fly_overs() {
   migs = spawn_vehicles_from_targetname_and_drive("first_fast_movers");
 
   wait 7;
-
-  //Seal Six-One:	Team be advised, enemy has close air support operating in our AO.	
-  //level.raptor dialogue_queue( "inv_six_closeairsupport" );
-
-  //wait 3;
 
   flag_wait("wells_intro_done");
 
@@ -4866,7 +3738,6 @@ one_bmp_from_south() {
   bmp vehicle_setspeed(0, 15, 15);
 
   bmp bmp_fires_at_nates();
-  //array_thread( getvehiclenodearray("new_target", "script_noteworthy" ), ::new_target_think );
 
   bmp vehicle_setspeed(10, 3, 3);
 
@@ -4874,7 +3745,6 @@ one_bmp_from_south() {
 
   bmp waittill("reached_end_node");
 
-  //end_if_cant_see, no_misses
   bmp thread bmp_turret_attack_player(false, false);
 
   flag_wait("crash_objective");
@@ -4893,7 +3763,6 @@ two_bmps_from_north() {
   thread aim_predator_drone_at_btrs();
   thread dialog_bmp_spotted_you();
   thread dialog_destroyed_btr_with_uav();
-  //thread dialog_bmp_lost_you();
 
   foreach(vehicle in bmps) {
     vehicle thread watch_for_player();
@@ -4903,9 +3772,6 @@ two_bmps_from_north() {
     vehicle thread turret_spotlight();
     vehicle thread maps\_vehicle::damage_hints();
   }
-
-  //bmps[ 0 ] thread dialog_bmp_lost_you( bmps[ 1 ] );//one thread for both
-  //bmps[ 1 ] thread dialog_bmp_lost_you( bmps[ 0 ] );
 
   return bmps;
 }
@@ -4935,10 +3801,8 @@ aim_predator_drone_at_btrs() {
 save_on_death() {
   self waittill("death");
 
-  //level.cansave = undefined;
   if(self ent_flag("spotted_player"))
     flag_clear("bmp_has_spotted_player");
-  //thread autosave_by_name( "go_to_diner" );
 
   level notify("bmp_died");
   level.bmps_from_north_dead++;
@@ -4949,19 +3813,18 @@ dialog_bmp_spotted_you() {
   num = randomint(3);
   while(1) {
     flag_wait("bmp_has_spotted_player");
-    //self ent_flag_wait( "spotted_player" );
 
     switch (num) {
       case 0:
-        //Roach take cover! That BMP's spotted you!	
+
         dialog_bmp_spotted_you_action("inv_six_bmpspottedyou");
         break;
       case 1:
-        //Roach take cover! One of the BMPs has a visual on you!	
+
         dialog_bmp_spotted_you_action("inv_six_bmphasavisual");
         break;
       case 2:
-        //Get behind something solid! That BMP's got you in his sights!	
+
         dialog_bmp_spotted_you_action("inv_six_behindsolid");
         break;
     }
@@ -4984,51 +3847,10 @@ dialog_bmp_spotted_you_action(dialog) {
   radio_dialogue(dialog);
 }
 
-//save_halfway_to_diner( bmps )
-//{
-//	flag_wait( "player_halfway_to_diner" );
-//	
-//	if(
-//	( !bmps[1] ent_flag( "spotted_player" ) || !isalive( bmps[1] ) )
-//	&& ( !bmps[0] ent_flag( "spotted_player" ) || !isalive( bmps[0] ) )
-//	)
-//	{
-//		autosave_by_name( "halfway_to_diner" );
-//		return;
-//	}
-//	
-//	if( bmps[0] ent_flag( "spotted_player" ) && isalive( bmps[0] ) )
-//	{
-//			bmps[0] add_wait( ::ent_flag_wait, "spotted_player" );
-//			bmps[0] add_endon( "death" );
-//			do_wait_any();
-//			
-//			if( !bmps[1] ent_flag( "spotted_player" ) || !isalive( bmps[1] ))
-//			{
-//				autosave_by_name( "halfway_to_diner" );
-//				return;
-//			}
-//	}
-//	
-//	
-//	if( bmps[1] ent_flag( "spotted_player" ) && isalive( bmps[1] ) )
-//	{
-//			bmps[1] add_wait( ::ent_flag_wait, "spotted_player" );
-//			bmps[1] add_endon( "death" );
-//			do_wait_any();
-//			
-//			if( !bmps[0] ent_flag( "spotted_player" ) || !isalive( bmps[0] ) )
-//			{
-//				autosave_by_name( "halfway_to_diner" );
-//				return;
-//			}
-//	}
-//}
-
 dialog_bmp_lost_you() {
   level endon("player_has_predator_drones");
   level.player endon("death");
-  min_time_between = 10; //was 5
+  min_time_between = 10;
 
   while(1) {
     flag_wait("bmp_has_spotted_player");
@@ -5079,21 +3901,18 @@ watch_for_player() {
     if(!can_see_player(level.player)) {
       continue;
     }
-    //thread draw_line_for_time( self.origin, level.player.origin, 1, 0, 0, 1 );
-    flag_set("bmp_has_spotted_player"); //level flag for both btrs
-    self notify("new_target"); //clears ambient target shooting
+
+    flag_set("bmp_has_spotted_player");
+    self notify("new_target");
     self.turret_busy = true;
     self ent_flag_set("spotted_player");
-    //self Vehicle_SetSpeed( 0, 10 );
-
-    //saw player, now miss for 2 bursts
-    miss_player(level.player);
-    wait(randomfloatrange(0.8, 2.4));
 
     miss_player(level.player);
     wait(randomfloatrange(0.8, 2.4));
 
-    //if player is still exposed then hit him
+    miss_player(level.player);
+    wait(randomfloatrange(0.8, 2.4));
+
     while(can_see_player(level.player)) {
       fire_at_player(level.player);
       wait(randomfloatrange(2, 3));
@@ -5102,8 +3921,8 @@ watch_for_player() {
     self clearturrettarget();
     self.turret_busy = false;
     self ent_flag_clear("spotted_player");
-    //self Vehicle_SetSpeed( 10, 1 );
-    flag_clear("bmp_has_spotted_player"); //level flag for both btrs
+
+    flag_clear("bmp_has_spotted_player");
   }
 }
 
@@ -5111,7 +3930,6 @@ new_target_think() {
   level endon("bmps_from_north_dead");
   targets = getEntArray(self.script_linkto, "script_linkname");
   while(1) {
-    //self waittillmatch( "trigger", vehicle );
     self waittill("trigger", vehicle);
 
     if(!isalive(vehicle))
@@ -5125,12 +3943,11 @@ new_target_think() {
 
     thread btr_fire_at_targets(vehicle);
   }
-  //vehicle clearturrettarget();
 }
 
 btr_fire_at_targets(vehicle) {
   vehicle endon("new_target");
-  //vehicle endon( "unload" );
+
   vehicle endon("death");
 
   vehicle waittill("turret_on_target");
@@ -5145,46 +3962,11 @@ btr_fire_at_targets(vehicle) {
   }
 }
 
-/*
-bmp_target_think()
-{
-	while( 1 )
-	{
-			
-		//targets = get_array_of_closest( org, array, excluders, max, maxdist, mindist )
-		if( level.bmp_targets.size < 1 )
-			break;
-		bmp = level.bmps [ randomint( level.bmps.size ) ];
-		turret_angle = bmp getTagAngles( "tag_flash" );
-		vec = anglesToForward( turret_angle );
-		vec *= 100;
-		pos = vec + bmp.origin;
-		
-		target = get_highest_dot( bmp.origin, pos, level.bmp_targets );
-		//closest_index = get_closest_index( bmp.origin, level.bmp_targets, undefined );
-		
-		bmp setturrettargetent( target );
-		level.bmp_targets = array_remove( level.bmp_targets, target );
-		//level.bmp_targets = array_remove_index( level.bmp_targets, closest_index );
-		bmp waittill( "turret_on_target" );
-		//wait( randomfloatrange( 1, 2 ) );
-		
-		s = randomintrange( 4, 6 );
-		for( j = 0; j < s; j++ )
-		{
-				bmp fireWeapon();
-				wait .2;
-		}
-		bmp clearturrettarget();
-	}
-}
-*/
-
 rush_restaurant_enemies_setup() {
   self endon("death");
   nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
   self ClearGoalVolume();
-  self.goalheight = 100; //was 800
+  self.goalheight = 100;
 
   self enable_danger_react(5);
   self setgoalpos(nates_restaurant_goal.origin);
@@ -5207,7 +3989,7 @@ truck_group_enemies_setup() {
   level endon("truck_guys_retreat");
   self endon("death");
   nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
-  self.goalheight = 100; //was 800
+  self.goalheight = 100;
 
   self enable_danger_react(5);
 
@@ -5226,7 +4008,6 @@ truck_group_enemies_setup() {
   } else {
     self setgoalpos(nates_restaurant_goal.origin);
     self.goalradius = 4000;
-    //self.aggressivemode = true;//too easy
   }
 }
 
@@ -5287,8 +4068,7 @@ setup_predator_deaths() {
 maintain_closest_goal(goals) {
   while(1) {
     closest_goal = getclosest(level.player.origin, goals);
-    //only goal enemies to one of the players and assume they stay together
-    //also its cool for player2 to feel hidden from the hunters
+
     if(level.current_goal != closest_goal) {
       level.current_goal = closest_goal;
       move_hunters_to_new_goal(closest_goal);
@@ -5312,8 +4092,6 @@ create_hunter_enemy() {
 
 move_hunters_to_new_goal(closest_goal) {
   waittillframeend;
-  //waittillframeend because you may be in the part of the frame that is before
-  //the script has received the "death" notify but after the AI has died.
 
   foreach(enemy in level.hunter_enemies)
   enemy setgoalpos(closest_goal.origin);
@@ -5345,9 +4123,6 @@ setup_diner_backdoor_attackers() {
   self.goalradius = 100;
   self.favoriteenemy = level.player;
   self setgoalentity(level.player);
-
-  //wait 8;
-  //self.goalradius = 100;
 }
 
 setup_BT_enemy_defenders() {
@@ -5363,42 +4138,17 @@ setup_BT_enemy_defenders() {
 
 nates_defenders_setup() {
   self endon("death");
-  //self.threatbias = 3000;
+
   self thread magic_bullet_shield();
 
   flag_wait("player_on_roof");
   self stop_magic_bullet_shield();
-  //wait 1;
-  //self kill();
 }
-
-//setup_ramirez()
-//{
-//	//self.threatbias = 3000;
-//	self thread magic_bullet_shield();
-//	
-//	flag_wait( "player_on_roof" );
-//	self stop_magic_bullet_shield();
-//	self.goalradius = 1500;
-//}
-//
-//setup_collins()
-//{
-//	//self.threatbias = 3000;
-//	self thread magic_bullet_shield();
-//	
-//	flag_wait( "player_on_roof" );
-//	self stop_magic_bullet_shield();
-//	self.goalradius = 1500;
-//}
 
 setup_wells() {
   level.wells = self;
   self.animname = "wells";
   self thread magic_bullet_shield();
-
-  //flag_wait( "wells_intro_done" );
-  //self thread stop_magic_bullet_shield();
 
   level.wells setgoalnode(getnode("wells_intro_node", "targetname"));
   level.wells.goalradius = 16;
@@ -5432,18 +4182,6 @@ setup_raptor() {
   level.raptor setgoalpos(raptor_prep.origin);
 }
 
-//plane_start_drop()
-//{
-//	self waittill( "trigger", other );
-//	other notify( "start_drop" );
-//}
-//
-//plane_stop_drop()
-//{
-//	self waittill( "trigger", other );
-//	other notify( "stop_drop" );
-//}
-
 is_west_group(group_name) {
   if(group_name == "ambient_paradrop3")
     return true;
@@ -5471,28 +4209,28 @@ paradrops_ambient() {
   drop_groups[drop_groups.size] = "ambient_north_group2";
   drop_groups[drop_groups.size] = "ambient_north_group3";
   drop_groups[drop_groups.size] = "curved_mig_flight1";
-  //drop_groups[drop_groups.size] = "first_fast_movers";
+
   drop_groups[drop_groups.size] = "paradrop_escort";
 
   drop_groups = array_randomize(drop_groups);
   selected = 0;
 
-  north_groups = []; //towards bank
+  north_groups = [];
   north_groups[north_groups.size] = "ambient_north_group1";
   north_groups[north_groups.size] = "ambient_north_group2";
   north_groups[north_groups.size] = "ambient_north_group3";
 
-  south_groups = []; //towards BT
+  south_groups = [];
   south_groups[south_groups.size] = "ambient_paradrop2";
   south_groups[south_groups.size] = "ambient_south_group2";
   south_groups[south_groups.size] = "ambient_south_group3";
 
-  west_groups = []; //towards diner
+  west_groups = [];
   west_groups[west_groups.size] = "ambient_paradrop3";
   west_groups[west_groups.size] = "ambient_west_group3";
   west_groups[west_groups.size] = "ambient_west_group2";
 
-  east_groups = []; //towards nates
+  east_groups = [];
   east_groups[east_groups.size] = "ambient_paradrop1";
   east_groups[east_groups.size] = "ambient_east_group2";
   east_groups[east_groups.size] = "ambient_east_group3";
@@ -5517,8 +4255,7 @@ paradrops_ambient() {
         println(" z: ambient paradrop: " + dir_selection);
       }
     }
-    if(!isDefined(planes)) //no obj direction
-    {
+    if(!isDefined(planes)) {
       if(selected >= drop_groups.size)
         selected = 0;
 
@@ -5543,7 +4280,6 @@ paradrops_ambient() {
         antonov = true;
 
       if(antonov) {
-        //only the first of the antonovs plays the sound.
         if(first_plane) {
           plane thread paradrop(first_plane);
           first_plane = false;
@@ -5554,12 +4290,11 @@ paradrops_ambient() {
         plane thread maps\_vehicle::spawn_vehicle_and_gopath();
       }
     }
-    if(!antonov) //jets only fly over once
-    {
+    if(!antonov) {
       drop_groups = array_remove(drop_groups, drop_groups[old_selection]);
     }
 
-    wait 20; //was 30
+    wait 20;
 
     if(getDvar("invasion_minspec") == "1")
       wait 80;
@@ -5572,9 +4307,6 @@ paradrop_vehicle() {
   self waittill("trigger");
   targets = getEntArray(self.target, "targetname");
   for(i = 0; i < targets.size; i++) {
-    //if( !isdefined ( tgt.script_noteworthy ) )
-    //	continue;
-    //if( tgt.script_noteworthy == "airplane" )
     if(i == 0) {
       first_plane = true;
       targets[i] thread paradrop(first_plane);
@@ -5583,17 +4315,6 @@ paradrop_vehicle() {
     }
   }
 }
-
-//paradrop_bmp()
-//{
-//	airplane = self thread maps\_vehicle::spawn_vehicle_and_gopath();
-//	airplane ent_flag_init( "start_drop" );
-//	airplane ent_flag_init( "stop_drop" );
-//
-//	airplane ent_flag_wait( "start_drop" );
-//	println( "do BMP drop " );
-//	thread drop_bmp();
-//}
 
 drop_bmp() {
   chute = spawn_anim_model("bmp_chute_paradrop");
@@ -5622,22 +4343,6 @@ drop_bmp() {
 }
 
 paradrop(first_plane) {
-  /*
-  spawner_right = undefined;
-  spawner_left = undefined;
-  links = self get_links();
-  targets = getEntArray( links[ 0 ], "script_linkname" );
-  foreach( tgt in targets )
-  {
-  	if( !isdefined ( tgt.script_noteworthy ) )
-  		continue;
-  	if( tgt.script_noteworthy == "paradrop_guy_right" )
-  		spawner_right = tgt;
-  	if( tgt.script_noteworthy == "paradrop_guy_left" )
-  		spawner_left = tgt;
-  }
-  */
-
   assert(isDefined(level.paradropper_left));
   assert(isDefined(level.paradropper_right));
 
@@ -5655,7 +4360,7 @@ paradrop(first_plane) {
     drop_time = self.script_duration;
 
   airplane ent_flag_wait("start_drop");
-  //println( "start drop, airplane num: " + links[0] );
+
   println("start drop, airplane num: ");
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "drop_bmp") {
@@ -5677,9 +4382,8 @@ paradrop(first_plane) {
 }
 
 setup_paradrop_guy_left(paradrop_airplane, drop_time) {
-  //time = gettime();
   level.droppers++;
-  //println("droppers = " + level.droppers );
+
   self.health = 1;
   self.ignoreme = true;
   chute = spawn_anim_model("distant_parachute_guy");
@@ -5692,20 +4396,17 @@ setup_paradrop_guy_left(paradrop_airplane, drop_time) {
     paradrop_airplane thread anim_single_solo(chute, "distant_parachute_guy_left2");
     paradrop_airplane thread anim_generic(self, "distant_parachute_guy_left2");
   }
-  wait drop_time; //anim time is 16.9
+  wait drop_time;
   chute delete();
   if(isalive(self))
     self delete();
   level.droppers--;
   level.dropped++;
-  //drop_time = ( gettime() - time );
-  //println("DROPPED = " + level.dropped + " time: " + drop_time );
 }
 
 setup_paradrop_guy_right(paradrop_airplane, drop_time) {
-  //time = gettime();
   level.droppers++;
-  //println("droppers = " + level.droppers );
+
   self.health = 1;
   self.ignoreme = true;
   chute = spawn_anim_model("distant_parachute_guy");
@@ -5718,14 +4419,12 @@ setup_paradrop_guy_right(paradrop_airplane, drop_time) {
     paradrop_airplane thread anim_single_solo(chute, "distant_parachute_guy_right2");
     paradrop_airplane thread anim_generic(self, "distant_parachute_guy_right2");
   }
-  wait drop_time; //anim time is 16.9
+  wait drop_time;
   chute delete();
   if(isalive(self))
     self delete();
   level.droppers--;
   level.dropped++;
-  //drop_time = ( gettime() - time );
-  //println("DROPPED = " + level.dropped + " time: " + drop_time );
 }
 
 setup_shotgun_guy2() {
@@ -5749,28 +4448,13 @@ setup_backseat_right_guy2() {
 setup_player_humvee_driver() {
   humvee_opening_node = getent("humvee_opening", "targetname");
   humvee_opening_node anim_generic(self, "invasion_opening_hummer2_soldier1");
-  //println( "worm done" );
 }
 
 btr80_notetrack_fire(guy) {
   level.humvee_destroyer fireWeapon();
-  //println( "fire" );
+
   level notify("humvee_destroyer_fired");
 }
-
-//ammo_cache_guy_setup()
-//{
-//	using_supply_crate = getent ( "using_supply_crate", "targetname" );
-//	self.animname = "generic";
-//	self.allowdeath = true;
-//	self.health = 1;
-//	//chair_guy teleport ( chair_guy_origin.origin );
-//	//anim_loop_solo( guy, anime, ender, tag )
-//	using_supply_crate thread anim_loop_solo(self, "airdrop_idles", "stop_idle", undefined);
-//	
-//	level.player waittill_entity_in_range( self, 800 );
-//	using_supply_crate notify ( "stop_idle" );
-//}
 
 fire_at_chain(current) {
   self endon("death");
@@ -5800,8 +4484,6 @@ bmp_fires_first_volley_at_nates() {
 
   self fire_at_chain(current);
 
-  //wait 2;
-
   current = getent("north_side_high", "targetname");
 
   self SetTurretTargetVec(current.origin);
@@ -5830,14 +4512,12 @@ setup_nates_kitchen_ladder_clip() {
   nates_kitchen_ladder_clip = getent("nates_kitchen_ladder_clip", "targetname");
 
   while(1) {
-    //ladder works
     nates_kitchen_ladder_clip notsolid();
 
     flag_wait("player_on_roof");
     while(level.player istouching(nates_kitchen_ladder_clip))
       wait 1;
 
-    //ladder blocked
     nates_kitchen_ladder_clip solid();
 
     flag_waitopen("player_on_roof");
@@ -5848,14 +4528,12 @@ setup_bt_ktichen_ladder_clip() {
   bt_ktichen_ladder_clip = getent("bt_ktichen_ladder_clip", "targetname");
 
   while(1) {
-    //ladder works
     bt_ktichen_ladder_clip notsolid();
 
     flag_wait("player_on_burgertown_roof");
     while(level.player istouching(bt_ktichen_ladder_clip))
       wait 1;
 
-    //ladder blocked
     bt_ktichen_ladder_clip solid();
 
     flag_waitopen("player_on_burgertown_roof");
@@ -5868,8 +4546,6 @@ bmp_fires_at_nates() {
   self SetTurretTargetVec(current.origin);
   self waittill("turret_on_target");
   self fire_at_chain(current);
-
-  //wait 2;
 }
 
 add_org_to_tank_targets(ent, org, exploder) {
@@ -5886,7 +4562,6 @@ roof_parachute_landing_guy_humvee() {
     level.roof_parachute_landing_guy_humvee.ignoreme = true;
   level.roof_parachute_landing_guy_humvee waittill("death");
 
-  //println( "re aim" );
   if(isDefined(level.animated_ride_in))
     return;
   turret = level.humvee_front.mgturret[0];
@@ -5905,8 +4580,6 @@ humvee_explosion1(guy) {
 }
 
 humvee_explosion2(guy) {
-  //playFX( getfx( "humvee_explosion" ), level.humvee_front.origin );
-
   level.humvee_front maps\_vehicle::godoff();
   level.humvee_front kill();
 }
@@ -5916,24 +4589,15 @@ humvee_destroyer_action() {
   self thread turret_spotlight();
   self thread maps\_vehicle::damage_hints();
 
-  //humvee_destroyer_init_target = getent( "humvee_destroyer_init_target", "targetname" );
-  //self setturrettargetvec( humvee_destroyer_init_target.origin );
-
-  //self waittill( "reached_end_node" );
-  //level.humvee_front maps\_vehicle::godon();
-  //level.humvee_player maps\_vehicle::godon();
-
   level.humvee_front.health = 30000;
   level.humvee_player.health = 30000;
-  //self thread impact_causes_physics();
 
   self setturrettargetent(level.humvee_front, (0, 0, 40));
 
   wait 1.5;
 
-  level notify("humvee_blows_up"); //starts animation
+  level notify("humvee_blows_up");
 
-  //self waittill( "turret_on_target" );
   wait 2.5;
 
   turret_guys = getEntArray("turret_guy", "script_noteworthy");
@@ -5947,14 +4611,9 @@ humvee_destroyer_action() {
     self fireWeapon();
     wait .2;
   }
-  //level.humvee_front maps\_vehicle::godoff();
-  //level.humvee_front kill();
 
   self setturrettargetent(level.humvee_player, (0, 0, 40));
   wait 1;
-
-  //self waittill( "turret_on_target" );
-  //wait 1;
 
   for(j = 0; j < 3; j++) {
     self fireWeapon();
@@ -5963,7 +4622,6 @@ humvee_destroyer_action() {
 
   level.humvee_player maps\_vehicle::godoff();
   level.humvee_player kill();
-  //playFX( getfx( "humvee_explosion" ), level.humvee_player.origin );
 
   self setturrettargetent(level.humvee_front, (0, 0, 40));
   wait 1;
@@ -5972,9 +4630,6 @@ humvee_destroyer_action() {
     self fireWeapon();
     wait .2;
   }
-
-  //this vehicle is killed via notetrack function humvee_explosion2()
-  //level.humvee_front playFX( getfx( "humvee_explosion" ), self );
 
   humvee_destroyer_fires_at_pillars_and_player();
 }
@@ -5995,14 +4650,12 @@ humvee_destroyer_fires_at_pillars_and_player() {
 
   for(i = 0; i < ent.targets.size; i++) {
     self setturrettargetvec(ent.targets[i]["origin"]);
-    //self waittill( "turret_on_target" );
 
     house_destroyer_fire(ent.targets[i]["origin"]);
     Earthquake(0.3, .3, ent.targets[i]["origin"], 850);
 
     if(ent.targets[i]["exploder"] > 0)
       exploder(ent.targets[i]["exploder"]);
-    //wait .1;
   }
 
   wait 1;
@@ -6019,7 +4672,7 @@ setup_house_destroyer() {
   self thread maps\_vehicle::damage_hints();
   self thread house_destroyer_move();
   self.damageIsFromPlayer = true;
-  //self thread impact_causes_physics();
+
   self endon("death");
 
   ent = spawnStruct();
@@ -6035,17 +4688,12 @@ setup_house_destroyer() {
 
   for(i = 0; i < ent.targets.size; i++) {
     self setturrettargetvec(ent.targets[i]["origin"]);
-    //self waittill( "turret_on_target" );
 
     house_destroyer_fire(ent.targets[i]["origin"]);
 
     if(ent.targets[i]["exploder"] > 0)
       exploder(ent.targets[i]["exploder"]);
   }
-
-  //targets[ 4 ] = spawnStruct();
-  //targets[ 4 ].pos = getent( "cop_car", "targetname" );
-  //targets[ 4 ].num = -1;
 
   t = getstruct("cop_car", "targetname");
   self setturrettargetvec(t.origin);
@@ -6081,7 +4729,6 @@ setup_house_destroyer() {
   thread maps\invasion_fx::tree_fire_light();
   for(i = 0; i < ent.targets.size; i++) {
     self setturrettargetvec(ent.targets[i]["origin"]);
-    //self waittill( "turret_on_target" );
 
     house_destroyer_fire(ent.targets[i]["origin"]);
 
@@ -6114,21 +4761,6 @@ setup_house_destroyer() {
     }
   }
 
-  //targets[ 4 ].pos = getent( "driveway_car", "targetname" );
-  //targets[ 4 ].pos = getent( "barrier_car", "targetname" );
-
-  /*
-  while( 1 )
-  {
-  	t = randomint( targets.size );
-  	self setturrettargetent( targets[ t ].pos );
-  	self waittill( "turret_on_target" );
-  	
-  	house_destroyer_fire( targets[ t ].pos.origin );
-  		
-  	wait( .7 );
-  }
-  */
 }
 
 house_destroyer_shoot_agro_player() {
@@ -6152,7 +4784,6 @@ house_destroyer_move() {
 
   house_destroyer_first_path = getVehicleNode("house_destroyer_first_path", "targetname");
   self startPath(house_destroyer_first_path);
-  //self waittill( "reached_end_node" );
 
   flag_wait("house_destroyer_stage2");
 
@@ -6161,19 +4792,12 @@ house_destroyer_move() {
   self waittill("reached_end_node");
 
   level.player waittill_entity_in_range_or_timeout(self, 950, 4);
-  //level.player waittill_entity_in_range( self, 950 );
 
   flag_set("house_destroyer_unloading");
 
   self thread vehicle_unload();
 
-  //add get down dialog
-  //self setturrettargetent( level.player );
-
   wait 6;
-  //self waittill( "turret_on_target" );
-
-  //self thread bmp_door_close();
 
   thread bmp_turret_attack_player();
 
@@ -6197,32 +4821,15 @@ house_destroyer_move() {
 }
 
 house_destroyer_fire(center) {
-  //self fireWeapon();
   physicsSphere(center);
   self fireWeapon();
   wait .2;
-
-  //	s = randomintrange( 1, 2 );
-  //	for( j = 0; j < s; j++ )
-  //	{
-  //		self fireWeapon();
-  //		wait .2;
-  //	}
 }
-
-//impact_causes_physics()
-//{
-//	for( ;; )
-//	{
-//		self waittill( "projectile_impact", weaponName, position, radius );
-//		thread physicsSphere( position );
-//	}
-//}
 
 physicsSphere(center) {
   assert(isDefined(center));
   wait 0.1;
-  //PhysicsExplosionSphere( <position>, <outer radius>, <inner radius>, <magnitude> )
+
   physicsExplosionSphere(center, 200, 100, 4.0);
 }
 
@@ -6234,37 +4841,19 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
     no_misses = false;
 
   self notify("stop_shooting");
-  //self thread debug_bmp_hit_player();
+
   self endon("stop_shooting");
   self endon("death");
   self endon("delete");
   while(1) {
-    //choose our target based on distance and visibility
     player = get_closest_player(self.origin);
-    /*
-    if( ! can_see_player( player ) )
-    {
-    	dif_player = get_different_player( player );
-    	if( can_see_player( dif_player ) )
-    		player = dif_player;
-    }
-    */
+
     wait(randomfloatrange(0.8, 1.3));
 
-    // don't try to shoot a player with an RPG or Stinger
-    //if( player usingAntiAirWeapon() )
-    //	continue;
-
-    //dont try to shoot a player who is hiding a safe volume
-    //if( player is_hidden_from_heli( self ) )
-    //	continue;
-
-    //wait for player to be visible
     while(!can_see_player(player))
-      wait(randomfloatrange(0.2, 0.6)); //was .8 1.3
+      wait(randomfloatrange(0.2, 0.6));
 
     if(!no_misses) {
-      //saw player, now miss for 2 bursts
       miss_player(player);
       wait(randomfloatrange(0.8, 2.4));
 
@@ -6272,14 +4861,10 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
       wait(randomfloatrange(0.8, 2.4));
     }
 
-    //if player is still exposed then hit him
     while(can_see_player(player)) {
       fire_at_player(player);
       wait(randomfloatrange(2, 3));
     }
-    //player is hidden, now will suppress/hit him for 1 burst if he tries to peek out
-    //fire_at_player( player );
-    //wait( randomfloatrange( .3, 1 ) );
 
     if(end_if_cant_see) {
       if(!can_see_player(player)) {
@@ -6291,7 +4876,6 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
       }
     }
 
-    //fire_at_player( player );
   }
 }
 
@@ -6305,24 +4889,17 @@ debug_bmp_hit_player() {
 }
 
 fire_at_player(player) {
-  //level.cansave = false;
   burstsize = randomintrange(3, 5);
   println(" **HITTING PLAYER, burst: " + burstsize);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32)); //randomvec was 50
+    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
-  //level.cansave = undefined;
 }
 
 miss_player(player) {
-  //println(" missing player" );
-  //miss_vec = randomvector( 100 );
-  //miss_vec = randomvectorrange( 40, 100 );
-
-  //point in front of player
   forward = anglesToForward(level.player.angles);
   forwardfar = vector_multiply(forward, 100);
   miss_vec = forwardfar + randomvector(50);
@@ -6331,9 +4908,7 @@ miss_player(player) {
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
-    //println( " offset: " + offset );
-    //thread draw_line_for_time( self.origin+(0,0,128), player.origin+offset, 0, 0, 1, 2 );
-    //thread draw_line_for_time( player.origin+offset+(0,0,4), player.origin+offset, 0, 0, 1, 2 );
+
     self setturrettargetent(player, offset);
     self fireweapon();
     wait fireTime;
@@ -6351,20 +4926,18 @@ can_see_player(player) {
     return false;
 
   tag_flash_loc = self getTagOrigin("tag_flash");
-  //BulletTracePassed( <start>, <end>, <hit characters>, <ignore entity> );
+
   player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
     if(isDefined(level.debug))
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
     return true;
   } else {
-    //println( "---trace failed" );
     return false;
   }
 }
 
 end_of_script() {
-  // End of current level.
   iprintlnbold(&"SCRIPT_DEBUG_LEVEL_END");
 }
 
@@ -6448,15 +5021,8 @@ setObjectiveLocation_nearest_enemy(objName) {
       level.obj_pos = AveragePoint(enemy_positions);
       objective_position(objective.id, level.obj_pos + (0, 0, 70));
 
-      //closest_enemy = getclosest( level.player.origin, enemies );
-      //level.obj_pos = closest_enemy.origin + (0,0,70);
-      //Objective_OnEntity( objective.id, closest_enemy, (0,0,70) );
-      //closest_enemy waittill( "death" );
-
       wait 2.2;
     }
-    //if( isalive( closest_enemy ) )
-    //	closest_enemy waittill( "death" );
   }
 }
 
@@ -6474,15 +5040,6 @@ setObjectiveLocationMoving(objName, objEnt, offset) {
   objective = level.objectives[objName];
 
   Objective_OnEntity(objective.id, objEnt, offset);
-
-  //while( objective.state != "done" )
-  //{
-  //	if( !isDefined( objEnt ) )
-  //		break;
-  //	level.obj_pos = objEnt.origin;
-  //	objective_position( objective.id, level.obj_pos );
-  //	wait .05;
-  //}
 }
 
 setObjectiveRemaining(objName, objString, objRemaining) {
@@ -6508,28 +5065,6 @@ bmps_from_north_dead() {
   flag_set("bmps_from_north_dead");
   level notify("bmps_from_north_dead");
 }
-
-//drone_hint()
-//{
-//	if( !flag( "diner_enemies_dead" ) && !flag( "leaving_diner" ) )
-//		level waittill_either ( "leaving_diner", "diner_enemies_dead" );
-//	
-//	wait 2;
-//	
-//	if( flag( "bmps_from_north_dead" ) )
-//		return;
-//	level.player thread display_hint( "hint_predator_drone" );
-//	
-//	while( !flag( "bmps_from_north_dead" ) )
-//	{
-//		level waittill( "player_fired_remote_missile" );
-//		num = level.bmps_from_north_dead;
-//		level waittill( "remote_missile_exploded" );
-//		wait 1;
-//		if( !( level.bmps_from_north_dead > num ) )
-//			level.player thread display_hint( "hint_steer_drone" );
-//	}
-//}
 
 should_break_use_drone_vs_bmps() {
   break_hint = false;
@@ -6581,7 +5116,7 @@ UAVRigAiming() {
     else if(isDefined(level.uavTargetPos))
       targetPos = level.uavTargetPos;
     else
-      targetpos = (-553.753, -2970, 2369.84); // you could put this in invasion.map if you'd like.
+      targetpos = (-553.753, -2970, 2369.84);
 
     angles = VectorToAngles(targetPos - level.uav.origin);
 
@@ -6600,7 +5135,7 @@ cleanse_the_world() {
   ignore_classnames["script_vehicle_corpse"] = true;
   ignore_classnames["script_model"] = true;
   ignore_classnames["script_brushmodel"] = true;
-  //ignore_classnames[ "choose_light" ] = true;
+
   ignore_classnames["script_vehicle_collmap"] = true;
   ignore_classnames["info_volume_breachroom"] = true;
   ignore_classnames["actor_ally_hero_foley"] = true;
@@ -6611,16 +5146,9 @@ cleanse_the_world() {
     if(isalive(ent)) {
       continue;
     }
-    // keep these
-    //if( isDefined( ent.script_ghettotag ) )
-    //	continue;
-
-    //if( ent.origin[ 2 ] < 1850 )
-    //	continue;
 
     if(!isDefined(ent.classname)) {
       if(ent istouching(volume)) {
-        // looper that should be off anyway
         ent delete();
       }
 
@@ -6637,7 +5165,6 @@ cleanse_the_world() {
       continue;
     }
     if(ent needs_ent_testing()) {
-      // triggers must have their center in the vol to survive
       org = spawn("script_origin", ent.origin);
       if(org istouching(volume)) {
         ent delete();
@@ -6675,13 +5202,6 @@ delete_house_area_entities() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
 objective_main() {
   switch (level.start_point) {
     case "default":
@@ -6695,7 +5215,7 @@ objective_main() {
       objective_crash();
     case "nates_roof":
       objective_roof();
-      //objective_sentry();
+
       objective_defend_roof();
     case "attack_diner":
       objective_predator();
@@ -6705,7 +5225,7 @@ objective_main() {
       objective_burgertown();
     case "burgertown":
     case "vip_escort":
-      //objective_regroup_at_nates();
+
     case "defend_bt":
     case "helis":
       objective_defend_raptor();
@@ -6723,7 +5243,6 @@ wait_for_yards() {
 }
 
 objective_crash() {
-  //obj = getEntWithFlag( "crash_objective" );
   obj = getstruct("police_car_moment", "script_noteworthy");
   origin = obj.origin;
 
@@ -6750,18 +5269,6 @@ objective_roof() {
   }
 }
 
-//objective_sentry()
-//{
-//	origin = level.obj_sentry.origin;
-//	
-//	registerObjective( "obj_sentry", &"INVASION_OBJ_SENTRY", origin );
-//	setObjectiveState( "obj_sentry", "current" );
-//
-//	flag_wait( "sentry_in_position" );
-//	
-//	setObjectiveState( "obj_sentry", "done" );
-//}
-
 objective_defend_roof() {
   south_side_of_roof = getstruct("south_side_of_roof_obj_loc", "targetname");
   origin = south_side_of_roof.origin;
@@ -6780,7 +5287,7 @@ objective_defend_roof() {
 
   off_the_roof = getstruct("off_the_roof", "targetname");
   setObjectiveLocation("obj_defend", off_the_roof.origin);
-  setObjectiveWaypoint("obj_defend"); //clear it
+  setObjectiveWaypoint("obj_defend");
 
   flag_wait("time_to_go_get_UAV_control");
 
@@ -6826,20 +5333,17 @@ objective_BMPs() {
     registerObjective("obj_bmps", &"INVASION_OBJ_BMPS", level.bmp_north_left.origin);
     setObjectiveState("obj_bmps", "current");
     thread setObjectiveLocationMoving("obj_bmps", level.bmp_north_left, (0, 0, 96));
-    //setObjectiveWaypoint( "obj_bmps", &"INVASION_WAYPOINT_HOSTILES" );
   } else {
     if(!flag("bmp_north_mid_dead")) {
       registerObjective("obj_bmps", &"INVASION_OBJ_BMPS", level.bmp_north_mid.origin);
       setObjectiveState("obj_bmps", "current");
       thread setObjectiveLocationMoving("obj_bmps", level.bmp_north_mid, (0, 0, 96));
-      //setObjectiveWaypoint( "obj_bmps", &"INVASION_WAYPOINT_HOSTILES" );
     } else
       return;
   }
   flag_wait("bmp_north_left_dead");
   if(!flag("bmp_north_mid_dead")) {
     thread setObjectiveLocationMoving("obj_bmps", level.bmp_north_mid, (0, 0, 96));
-    //setObjectiveWaypoint( "obj_bmps", &"INVASION_WAYPOINT_HOSTILES" );
   }
 
   flag_wait("bmp_north_mid_dead");
@@ -6860,7 +5364,6 @@ objective_regroup_at_nates() {
 }
 
 objective_defend_raptor() {
-  //objective_burgertown_groundfloor = getent( "objective_burgertown_groundfloor", "targetname" );
   origin = level.raptor.origin;
 
   registerObjective("obj_raptor_defend", &"INVASION_OBJ_VIP_ESCORT", origin);
@@ -6876,8 +5379,6 @@ objective_defend_raptor() {
 
   flag_wait("first_attack_heli_spawned");
   wait 9;
-
-  //setObjectiveState( "obj_raptor_defend", "done" );
 }
 
 setup_stingers() {
@@ -6944,33 +5445,20 @@ objective_destroy_helicopter(second_heli) {
     origin = level.attack_heli.origin;
   }
 
-  //if( !isDefined( second_heli ) )
-  //{
   level notify("moving obj_raptor_defend");
   setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_ATTACK_HELI");
   setObjectiveLocation("obj_raptor_defend", origin);
   setObjectiveWaypoint("obj_raptor_defend");
-  //registerObjective( "obj_destroy_helicopter", &"INVASION_OBJ_ATTACK_HELI", origin );
-  //}
-  //else
-  //{
-  //	setObjectiveLocation( "obj_raptor_defend", origin );
-  //}
-  //setObjectiveState( "obj_destroy_helicopter", "current" );
 
   if(needs_stinger)
     level.attack_heli waittill_death_or_stinger();
 
   if(isalive(level.attack_heli)) {
-    //objective_burgertown_groundfloor = getent( "objective_burgertown_groundfloor", "targetname" );
-    //thread setObjectiveLocationMoving( "obj_destroy_helicopter", level.attack_heli );
     level notify("moving obj_raptor_defend");
     thread setObjectiveLocationMoving("obj_raptor_defend", level.attack_heli, (0, 0, 128));
 
     level.attack_heli waittill("death");
   }
-
-  //setObjectiveState( "obj_destroy_helicopter", "done" );
 }
 
 waittill_death_or_stinger() {
@@ -6988,22 +5476,13 @@ waittill_death_or_stinger() {
 }
 
 objective_defend_raptor2() {
-  //meat_locker = getent( "president_in_burgertown_meat_locker", "targetname" );
-  //origin = meat_locker.origin;
-
-  //	registerObjective( "obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND", origin );
-
   level notify("moving obj_raptor_defend");
   setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND");
 
   thread setObjectiveLocation_nearest_enemy("obj_raptor_defend");
-  //setObjectiveLocation( "obj_raptor_defend", origin );
-  //setObjectiveState( "obj_raptor_defend", "current" );
 
   flag_wait("second_attack_heli_spawned");
   wait 9;
-
-  //setObjectiveState( "obj_raptor_defend", "done" );
 }
 
 objective_destroy_helicopter2() {
@@ -7012,16 +5491,11 @@ objective_destroy_helicopter2() {
 }
 
 objective_defend_raptor3() {
-  //meat_locker = getent( "president_in_burgertown_meat_locker", "targetname" );
-  //origin = meat_locker.origin;
-
   level notify("moving obj_raptor_defend");
-  //	registerObjective( "obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND", origin );
+
   setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND");
-  //setObjectiveLocation( "obj_raptor_defend", origin );
 
   thread setObjectiveLocation_nearest_enemy("obj_raptor_defend");
-  //setObjectiveState( "obj_raptor_defend", "current" );
 
   flag_wait("time_to_goto_convoy");
 
@@ -7033,18 +5507,11 @@ objective_convoy() {
 
   if(!isDefined(level.convoy))
     level.convoy = getent("convoy_obj", "targetname");
-  //origin = convoy_obj.origin;
 
   registerObjective("obj_convoy", &"INVASION_OBJ_CONVOY", level.convoy.origin);
   thread setObjectiveLocationMoving("obj_convoy", level.convoy, (0, 0, 128));
   setObjectiveState("obj_convoy", "current");
-
-  //flag_wait( "player_at_convoy" );
-
-  //setObjectiveState( "obj_convoy", "done" );
 }
-
-// Concatenates the proper hint string to use depending which weapon (claymore or remotemissile) is equipped first
 get_remotemissile_hint_string(str) {
   if(isDefined(self.remotemissile_actionslot)) {
     return str + "_" + self.remotemissile_actionslot;

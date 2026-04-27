@@ -24,94 +24,66 @@ main() {
 
   level._effect["explosions/large_vehicle_explosion"] = loadfx("explosions/large_vehicle_explosion");
 
-  //walking through water
   level._effect["water_stop"] = LoadFX("misc/parabolic_water_stand");
   level._effect["water_movement"] = LoadFX("misc/parabolic_water_movement");
 
   level._effect["rocket_hits_heli"] = LoadFX("explosions/grenadeExp_metal");
 
-  /*-----------------------------------------------------------------------------------------------------*/
-
-  //Zodiac Wake
   level._effect["zodiac_wake_geotrail"] = LoadFX("treadfx/zodiac_wake_geotrail_af_chase");
 
-  // only ever see the front of the players boat plays on tag_origin	
   level._effect["zodiac_leftground"] = LoadFX("misc/watersplash_large");
 
-  //Zodiac bigbump
   level._effect["player_zodiac_bumpbig"] = LoadFX("misc/watersplash_large");
   level._effect["zodiac_bumpbig"] = LoadFX("misc/watersplash_large");
-  level._effect_tag["zodiac_bumpbig"] = "tag_guy2"; // pushing this farther forward so the player sees it better.
+  level._effect_tag["zodiac_bumpbig"] = "tag_guy2";
 
-  //Zodiac bump
   level._effect["player_zodiac_bump"] = LoadFX("impacts/large_waterhit");
   level._effect["zodiac_bump"] = LoadFX("impacts/large_waterhit");
 
-  //zodiac collision
   level._effect["zodiac_collision"] = LoadFX("misc/watersplash_large");
-  level._effect_tag["zodiac_collision"] = "TAG_DEATH_FX"; // pushing this farther forward so the player sees it better.
+  level._effect_tag["zodiac_collision"] = "TAG_DEATH_FX";
 
-  /*-----------------------------------------------------------------------------------------------------*/
-
-  //Zodiac Bounce Small Left
   level._effect["zodiac_bounce_small_left"] = LoadFX("water/zodiac_splash_bounce_small");
   level._effect_tag["zodiac_bounce_small_left"] = "TAG_FX_LF";
 
-  //Zodiac Bounce Small Right
   level._effect["zodiac_bounce_small_right"] = LoadFX("water/zodiac_splash_bounce_small");
   level._effect_tag["zodiac_bounce_small_right"] = "TAG_FX_RF";
 
-  //Zodiac Bounce Large Left
   level._effect["zodiac_bounce_large_left"] = LoadFX("water/zodiac_splash_bounce_large");
   level._effect_tag["zodiac_bounce_large_left"] = "TAG_FX_LF";
 
-  //Zodiac Bounce Large Right
   level._effect["zodiac_bounce_large_right"] = LoadFX("water/zodiac_splash_bounce_large");
   level._effect_tag["zodiac_bounce_large_right"] = "TAG_FX_RF";
 
-  /*-----------------------------------------------------------------------------------------------------*/
-
-  //Zodiac Turn Hard Left /Hit left
   level._effect["zodiac_sway_left"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_left"] = "TAG_FX_LF";
 
-  //Zodiac Turn Hard Right /Hit right
   level._effect["zodiac_sway_right"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_right"] = "TAG_FX_RF";
 
-  //Zodiac Turn Light Left
   level._effect["zodiac_sway_left_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_left_light"] = "TAG_FX_LF";
 
-  //Zodiac Turn Light Right
   level._effect["zodiac_sway_right_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_right_light"] = "TAG_FX_RF";
 
-  /*-----------------------------------------------------------------------------------------------------*/
-
-  //sound
   level.zodiac_fx_sound["zodiac_bump"] = "water_boat_splash_small";
   level.zodiac_fx_sound["zodiac_bumpbig"] = "water_boat_splash";
 
   level.zodiac_fx_sound["player_zodiac_bump"] = "water_boat_splash_small_plr";
   level.zodiac_fx_sound["player_zodiac_bumpbig"] = "water_boat_splash_plr";
 
-  //two bumps small and big. change them at points in the level to allow more or less visibility.
   level.water_sheating_time["bump_big_start"] = 2;
   level.water_sheating_time["bump_small_start"] = 1;
 
-  // sheeting time smaller just so action can be more visible.I'm just trying this I suppose
   level.water_sheating_time["bump_big_after_rapids"] = 4;
   level.water_sheating_time["bump_small_after_rapids"] = 2;
 
-  // water sheating time when the player dies. meant to be really long to cover up some nasty.
   level.water_sheating_time["bump_big_player_dies"] = 7;
   level.water_sheating_time["bump_small_player_dies"] = 3;
 
-  //player falls over waterfall, this shoots up just as they go over.
   level._effect["splash_over_waterfall"] = LoadFX("misc/watersplash_large");
 
-  //player falls over waterfall, this shoots up when they hit below
   level._effect["player_hits_water_after_waterfall"] = LoadFX("misc/watersplash_large");
 
   level._effect["powerline_runner_cheap"] = loadfx("explosions/powerline_runner_cheap");
@@ -132,7 +104,6 @@ main() {
   level._effect["footstep_dust_sandstorm_small_runner"] = LoadFX("impacts/footstep_dust_sandstorm_small_runner");
   level._effect["bodyfall_dust_sandstorm_large_runner"] = LoadFX("impacts/bodyfall_dust_sandstorm_large_runner");
 
-  // need something cool here.
   level._effect["body_falls_from_ropes_splash"] = LoadFX("impacts/large_waterhit");
 
   level._effect["sand_storm_distant"] = LoadFX("weather/sand_storm_distant");
@@ -174,9 +145,7 @@ main() {
 
   level._effect["heli_blinds_player"] = LoadFX("weather/sand_storm_player_blind");
   level._effect["shepherd_anaconda"] = LoadFX("muzzleflashes/desert_eagle_flash_wv");
-  // this overrides the blizzard snow fx.	
 
-  //Zodiac Bounce Small Left
   level._effect["pavelow_minigunner_splash_add"] = LoadFX("water/zodiac_splash_bounce_small");
 
   level._effect["bloodpool_ending"] = Loadfx("impacts/deathfx_bloodpool_ending");
@@ -184,30 +153,27 @@ main() {
   if(GetDvarInt("r_reflectionProbeGenerate")) {
     return;
   }
-  //fake blizzard in createfx
-  //thread createfx_stuff();
+
   treadfx_override();
   maps\createfx\af_chase_fx::main();
 }
 
 createfx_stuff() {
   if(getDvar("createfx") != "") {
-    waittillframeend; // let _load run
+    waittillframeend;
     level.sandstorm_time = spawnStruct();
     level.sandstorm_time.min = 0.3;
     level.sandstorm_time.max = 0.5;
 
     thread sand_storm_rolls_in();
-    //thread maps\af_chase_fx::sand_storm_effect();
+
     thread maps\af_chase_fx::sandstorm_fog_management();
   }
 }
 
 sand_storm_rolls_in() {
-  fog_set_changes("afch_fog_dunes", 4); // fog transitions over 20 seconds
+  fog_set_changes("afch_fog_dunes", 4);
 
-  // double the sandstorm
-  //thread sand_storm_effect();
   thread sand_storm_effect();
 
   flag_set("blinder_effect");
@@ -226,7 +192,6 @@ sunlight_change() {
 sunlight_restore(fTime) {
   sunvect = (1.441176, 1.2411765, 0.9705885);
   thread sun_light_fade(level.sand_storm_sun, sunvect, fTime);
-  //	SetSunLight( sunvect[ 0 ], sunvect[ 1 ], sunvect[ 2 ] );
 }
 
 block_out_the_sky() {
@@ -234,7 +199,7 @@ block_out_the_sky() {
   fogent setModel("fog_blackout");
   fogent LinkTo(level.player);
   level.fogent = fogent;
-  flag_set("sandstorm_fully_masked"); // lets script know effects are good to go.
+  flag_set("sandstorm_fully_masked");
 }
 
 sand_storm_effect() {
@@ -258,16 +223,14 @@ sandstorm_fx_increase() {
 }
 
 stop_sandstorm_effect() {
-  // get the fx near price so we can turn them off later
   near_fx = [];
   foreach(ent in level.createFXent) {
     if(distance(ent.v["origin"], level.price.origin) < 400) {
-      ent.origin = ent.v["origin"]; // so we can use normal sorts on distance
+      ent.origin = ent.v["origin"];
       near_fx[near_fx.size] = ent;
     }
   }
 
-  // order them based on price's origin
   near_fx = SortByDistance(near_fx, level.price.origin);
 
   for(;;) {
@@ -325,7 +288,6 @@ sandstorm_fog_management() {
         shepherd_stumble = true;
       }
 
-      // crudely move the ent to shepherd's origin
       dif = 0.80;
       targ.origin = targ.origin * dif + level.shepherd_stumble.origin * (1 - dif);
 
@@ -335,12 +297,7 @@ sandstorm_fog_management() {
       dif = 0.9;
       level.sandstorm_min_dist = level.sandstorm_min_dist * dif + new_dist * (1 - dif);
 
-      // bring in more fog as you get close to him
       level.sandstorm_min_dist = clamp(level.sandstorm_min_dist, 50, 500);
-
-      // 1 - ( ( min_black - max_black ) / black_range ) = 1 - ( ( chase_dist - max_black ) / black_range );
-      //alpha = 1 - ( ( chase_dist - max_black ) / black_range );
-      //alpha = clamp( alpha, 0, 1 );
     } else {
       if(level.sandstorm_min_dist < 500) {
         level.sandstorm_min_dist += 25;
@@ -359,7 +316,6 @@ sandstorm_fog_management() {
 
     angles = VectorToAngles(struct.origin - level.player.origin);
     forward = anglesToForward(angles);
-    //		Line( level.player.origin, level.player.origin + forward * player_dist, (1,0,0), 1, 0, 4 );
   }
 }
 
@@ -370,7 +326,6 @@ blood_pulse() {
 }
 
 play_underwater_fx() {
-  //play bubble fx as the player hits the water.
   playFX(getfx("splash_underwater_afchase"), (25590.3, 26824, -10008.9));
 }
 

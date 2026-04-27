@@ -3,9 +3,6 @@
  * Script: animscripts\stop.gsc
 ********************************************************/
 
-// "Stop" makes the character not walk, run or fight.He can be standing, crouching or lying
-// prone; he can be alert or idle.
-
 #include animscripts\combat_utility;
 #include animscripts\Utility;
 #include animscripts\SetPoseMovement;
@@ -28,8 +25,7 @@ main() {
   }
 
   [[self.exception["stop_immediate"]]]();
-  // We do the exception_stop script a little late so that the AI has some animation they're playing
-  // otherwise they'd go into basepose.
+
   thread delayedException();
 
   animscripts\utility::initialize("stop");
@@ -112,17 +108,13 @@ getDesiredIdlePose() {
 
   self animscripts\face::SetIdleFace(anim.alertface);
 
-  // Find out if we should be standing, crouched or prone
   desiredPose = animscripts\utility::choosePose();
 
   if(myNodeType == "Cover Stand" || myNodeType == "Conceal Stand") {
-    // At cover_stand nodes, we don't want to crouch since it'll most likely make our gun go through the wall.
     desiredPose = animscripts\utility::choosePose("stand");
   } else if(myNodeType == "Cover Crouch" || myNodeType == "Conceal Crouch") {
-    // We should crouch at concealment crouch nodes.
     desiredPose = animscripts\utility::choosePose("crouch");
   } else if(myNodeType == "Cover Prone" || myNodeType == "Conceal Prone") {
-    // We should go prone at prone nodes.
     desiredPose = animscripts\utility::choosePose("prone");
   }
 
@@ -136,12 +128,9 @@ transitionToIdle(pose, idleSet) {
   if(isDefined(anim.idleAnimTransition[pose])) {
     assert(isDefined(anim.idleAnimTransition[pose]["in"]));
 
-    // idles and transitions should have no tag origin movement
-    //self animmode( "zonly_physics", false );
     idleAnim = anim.idleAnimTransition[pose]["in"];
     self setFlaggedAnimKnobAllRestart("idle_transition", idleAnim, %body, 1, .2, self.animplaybackrate);
     self animscripts\shared::DoNoteTracks("idle_transition");
-    //self animmode( "normal", false );
   }
 }
 
@@ -195,7 +184,7 @@ ProneStill() {
 
     self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
 
-    return; // in case we need to change our pose again for whatever reason
+    return;
   }
 
   self thread UpdateProneThread();
@@ -208,14 +197,11 @@ ProneStill() {
     twitches[3] = % prone_twitch_lookfast;
     twitches[4] = % prone_twitch_lookup;
 
-    //twitches[ 1 ] = %prone_twitch_ammocheck2;
-    //twitches[ 6 ] = %prone_twitch_scan2;
-
     twitchAnim = twitches[randomint(twitches.size)];
     self setFlaggedAnimKnobAll("prone_idle", twitchAnim, %exposed_modern, 1, 0.2);
   } else {
     self setAnimKnobAll(%prone_aim_5, %exposed_modern, 1, 0.2);
-    self setFlaggedAnimKnob("prone_idle", %prone_idle, 1, 0.2); // ( additive idle on top )
+    self setFlaggedAnimKnob("prone_idle", %prone_idle, 1, 0.2);
   }
   self waittillmatch("prone_idle", "end");
 

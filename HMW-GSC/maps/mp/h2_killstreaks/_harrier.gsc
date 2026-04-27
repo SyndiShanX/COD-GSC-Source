@@ -16,7 +16,7 @@ h2_randomHarrierMovement() {
   pos = self.defendloc;
 
   for(;;) {
-    newpos = self GetNewPoint(self.origin); //crazy blocking call
+    newpos = self GetNewPoint(self.origin);
     self setVehGoalPos(newpos, 1);
     self waittill("goal");
     wait(randomIntRange(3, 6));
@@ -283,39 +283,39 @@ traceNewPoint(x, y, z) {
         break;
       case 2:
         trc = bulletTrace((self getTagOrigin("tag_left_wingtip")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_left_wingtip" )), (x,y,z), 4 );
+
         break;
       case 3:
         trc = bulletTrace((self getTagOrigin("tag_right_wingtip")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_right_wingtip" )), (x,y,z), 4 );
+
         break;
       case 4:
         trc = bulletTrace((self getTagOrigin("tag_engine_left2")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_engine_left2" )), (x,y,z), 4 );
+
         break;
       case 5:
         trc = bulletTrace((self getTagOrigin("tag_engine_right2")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_engine_right2" )), (x,y,z), 4 );
+
         break;
       case 6:
         trc = bulletTrace((self getTagOrigin("tag_right_alamo_missile")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_right_alamo_missile" )), (x,y,z), 4 );
+
         break;
       case 7:
         trc = bulletTrace((self getTagOrigin("tag_left_alamo_missile")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_left_alamo_missile" )), (x,y,z), 4 );
+
         break;
       case 8:
         trc = bulletTrace((self getTagOrigin("tag_right_archer_missile")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_right_archer_missile" )), (x,y,z), 4 );
+
         break;
       case 9:
         trc = bulletTrace((self getTagOrigin("tag_left_archer_missile")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_left_archer_missile" )), (x,y,z), 4 );
+
         break;
       case 10:
         trc = bulletTrace((self getTagOrigin("tag_light_tail")), (x, y, z), false, self);
-        //self thread drawLine( (self getTagOrigin( "tag_light_tail" )), (x,y,z), 4 );
+
         break;
       default:
         trc = bulletTrace(self.origin, (x, y, z), false, self);
@@ -351,23 +351,23 @@ traceGroundPoint(x, y) {
     switch (i) {
       case 1:
         trc = bulletTrace((x, y, highz), (x, y, z), false, self);
-        //self thread drawLine( ( x,y,highz ), (x,y,z), 4 );
+
         break;
       case 2:
         trc = bulletTrace((x + 20, y + 20, highz), (x + 20, y + 20, z), false, self);
-        //self thread drawLine( ( x+20,y+20,highz ), (x+20,y+20,z), 4 );
+
         break;
       case 3:
         trc = bulletTrace((x - 20, y - 20, highz), (x - 20, y - 20, z), false, self);
-        //self thread drawLine( ( x-20,y-20,highz ), (x-20,y-20,z), 4 );
+
         break;
       case 4:
         trc = bulletTrace((x + 20, y - 20, highz), (x + 20, y - 20, z), false, self);
-        //self thread drawLine( ( x+20,y-20,highz ), (x+20,y-20,z), 4 );
+
         break;
       case 5:
         trc = bulletTrace((x - 20, y + 20, highz), (x - 20, y + 20, z), false, self);
-        //self thread drawLine( ( x-20,y+20,highz ), (x-20,y+20,z), 4 );
+
         break;
       default:
         trc = bulletTrace(self.origin, (x, y, z), false, self);
@@ -383,9 +383,6 @@ traceGroundPoint(x, y) {
 
     wait(0.05);
   }
-
-  //thread drawLine( self.origin, lTrace["position"], 5, (0,1,0) );
-  //thread drawLine( self.origin, trace["position"], 5, (1,0,0) );
 
   return highTrace;
 }
@@ -543,7 +540,7 @@ acquireGroundTarget(targets) {
   self thread watchTargetLOS();
 
   self setVehWeapon("harrier_20mm_mp");
-  self thread fireOnTarget(); // fires on current target.
+  self thread fireOnTarget();
 }
 
 backToDefendLocation(forced) {
@@ -593,8 +590,7 @@ watchTargetLOS(tolerance) {
       return;
     }
 
-    if(!isDefined(self.bestTarget)) //hack to cover host migration vehicle targets
-    {
+    if(!isDefined(self.bestTarget)) {
       self thread breakTarget();
       return;
     }
@@ -727,8 +723,6 @@ getBestTarget(targets) {
     noseAngle = abs(self getTagAngles("tag_flash")[1]);
     angle = abs(angle - noseAngle);
 
-    // in this calculation having a rocket removes 40d of rotation cost from best target calculation
-    // to prioritize targeting dangerous targets.
     weaponsArray = targ GetWeaponsListItems();
     foreach(weapon in weaponsArray) {
       if(isSubStr(weapon, "at4") || isSubStr(weapon, "stinger") || isSubStr(weapon, "jav"))
@@ -803,11 +797,6 @@ checkForFriendlies(missileTarget, radiusSize) {
   }
   return false;
 }
-
-///------------------------------------------------------- //
-//		Health Functions
-//
-///------------------------------------------------------ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
 if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
   return;
 }
@@ -896,8 +885,6 @@ harrierDestroyed() {
 
   harrierExplode();
 }
-
-// crash explosion
 harrierExplode() {
   self playSound("harrier_jet_crash");
   level.airPlane[level.airPlane.size - 1] = undefined;
@@ -1024,7 +1011,7 @@ evasiveManuverOne() {
   moveToPoint = self.origin + vector_multiply(anglesToForward(direction), 500);
 
   self setVehGoalPos(moveToPoint, 1);
-  //println( "evasive manuver one" );
+
   self waittill("goal");
 }
 

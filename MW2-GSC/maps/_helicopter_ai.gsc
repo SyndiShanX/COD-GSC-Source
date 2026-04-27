@@ -23,32 +23,23 @@ evasive_think(vehicle) {
 evasive_createManeuvers(vehicle, maneuverName) {
   assert(isDefined(maneuverName));
 
-  /* evasive_addPoint params:
-  forward			- units forward/back
-  side			- units left/right
-  up				- units up/down
-  goalYawMethod	- can be "average", "forward", or "none"none (default): always points towards the next point
-  					average: finds an angle between the forward direction and the goal direction
-  					forward: chopper will always face the direction it was originally moving
-  */
-
   switch (maneuverName) {
     case "strafe_left_right":
-      // swerve &strafe ( right then left )
+
       vehicle evasive_addPoint(3000, -1500, 500, "average");
       vehicle evasive_addPoint(6000, 3000, -700, "average");
       vehicle evasive_addPoint(3000, -1500, 200, "average");
       break;
 
     case "strafe_right_left":
-      // swerve &strafe ( right then left )
+
       vehicle evasive_addPoint(3000, 1500, 500, "average");
       vehicle evasive_addPoint(6000, -3000, -700, "average");
       vehicle evasive_addPoint(3000, 1500, 200, "average");
       break;
 
     case "360_clockwise":
-      // 360 circle back around ( clockwise )
+
       vehicle evasive_addPoint(1500, 1500, 200, "none");
       vehicle evasive_addPoint(0, 1500, 200, "none");
       vehicle evasive_addPoint(-1500, 1500, 200, "none");
@@ -99,23 +90,17 @@ evasive_startManeuvers(vehicle, points) {
   forwardYaw = vehicle.angles[1];
 
   for(i = 1; i < points.size; i++) {
-    //prof_begin( "cobrapilot_ai" );
-
     if(isDefined(points[i + 1]))
       evadeDirectionYaw = vectorToAngles(points[i + 1]["pos"] - points[i]["pos"]);
     else
       evadeDirectionYaw = (0, forwardYaw, 0);
 
-    // determine goal yaw angle
     goalYawAngle = evadeDirectionYaw[1];
     if(points[i]["goalYawMethod"] == "average")
       goalYawAngle = ((evadeDirectionYaw[1] + forwardYaw) / 2);
     else if(points[i]["goalYawMethod"] == "forward")
       goalYawAngle = vehicle.angles[1];
 
-    //prof_end( "cobrapilot_ai" );
-
-    //draw line to represent target yaw
     if(getDvar("cobrapilot_debug") == "1")
       thread draw_line_until_notify(points[i]["pos"], points[i]["pos"] + (vector_multiply(anglesToForward((0, goalYawAngle, 0)), 250)), 1.0, 1.0, 0.2, vehicle, "evasive_action_done");
 
@@ -159,15 +144,11 @@ evasive_addPoint(forward, side, up, goalYawMethod) {
   self.evasive_points[index]["side"] = side;
   self.evasive_points[index]["up"] = up;
 
-  //prof_begin( "cobrapilot_ai" );
-
   vec_forward = anglesToForward(self.evasive_points[0]["ang"]);
   vec_right = anglesToRight(self.evasive_points[0]["ang"]);
 
   self.evasive_points[index]["pos"] = self.evasive_points[index - 1]["pos"] + (vector_multiply(vec_forward, self.evasive_points[index]["forward"])) + (vector_multiply(vec_right, self.evasive_points[index]["side"])) + (0, 0, up);
   self.evasive_points[index]["goalYawMethod"] = goalYawMethod;
-
-  //prof_end( "cobrapilot_ai" );
 }
 
 evasive_getAllPoints(vehicle) {
@@ -200,20 +181,12 @@ wingman_think(vehicle) {
   vehHelicopter_OldSpeed = 0.0;
   vehHelicopter_OldSpeedTime = getTime();
 
-  // put the wingman at it's goal at the start of the level
   goalPos = wingman_getGoalPos(dist_forward, dist_side, dist_up);
   vehicle Vehicle_SetSpeed(30, 20, 20);
   vehicle setTargetYaw(level.playervehicle.angles[1]);
   vehicle setVehGoalPos(goalPos, true);
 
   for(;;) {
-    //prof_begin( "cobrapilot_ai" );
-
-    /*******************************************************/
-
-    /*** get the point where the wingman should hang out ***/
-    /*******************************************************/
-
     goalPos = wingman_getGoalPos(dist_forward, dist_side, dist_up);
 
     if(getDvar("cobrapilot_debug") == "1") {
@@ -222,22 +195,12 @@ wingman_think(vehicle) {
       thread draw_line_for_time(vehicle.origin, goalPos, 1, 1, 0, goalPosUpdateTime);
     }
 
-    /************************************************************************************************/
-
-    /*** save records of what the players speed was 3 seconds ago to that the wingman can keep up ***/
-    /************************************************************************************************/
-
     time = getTime();
     if(time >= vehHelicopter_OldSpeedTime + vehHelicopter_GetSpeedTime) {
       vehHelicopter_OldSpeedTime = time;
       vehHelicopter_OldSpeed = vehHelicopter_CurrentSpeed;
       vehHelicopter_CurrentSpeed = getPlayerHeliSpeed();
     }
-
-    /***********************************************************************************************/
-
-    /*** set wingmans goal position and target yaw here based on the players speed from the past ***/
-    /***********************************************************************************************/
 
     bGoToGoal = false;
     wingmanSpeed = 0;
@@ -272,14 +235,6 @@ wingman_think(vehicle) {
 
       vehicle setVehGoalPos(goalPos, bStop);
     }
-
-    /***********************************************************************************************/
-
-    /***********************************************************************************************/
-
-    /***********************************************************************************************/
-
-    //prof_end( "cobrapilot_ai" );
 
     wait goalPosUpdateTime;
   }

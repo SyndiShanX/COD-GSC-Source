@@ -31,18 +31,13 @@ main() {
     nextaction = ("crouch");
 
   for(;;) {
-    // Nothing below will work if our gun is completely empty.
-
     Reload(0);
-    //	if( canShootstand && canStand && //	 ( !canShootCrouch || !canCrouch || ( dist < anim.standRangeSq )) )
 
     if(nextaction == ("stand")) {
       timer = gettime() + randomint(2000) + 2000;
       while(timer > gettime()) {
-        //				self animscripts\aim::aim();
         success = LocalShootVolley(0);
-        //			if(!success)
-        //				self interruptPoint();	// We couldn't shoot for some reason, so now would be a good time to run for cover.
+
         nextaction = ("crouch");
       }
     } else if(nextaction == ("crouch")) {
@@ -50,7 +45,6 @@ main() {
       while(timer > gettime()) {
         thread[[anim.println]]("ExposedCombat - Crouched combat");
 
-        //				self animscripts\aim::aim();
         success = ShootVolley();
         if(!success)
           continue;
@@ -69,8 +63,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     anim_autofire = % stand_shoot_auto;
     anim_semiautofire = % stand_shoot;
     anim_boltfire = % stand_shoot;
-  } else // assume crouch
-  {
+  } else {
     anim_autofire = % crouch_shoot_auto;
     anim_semiautofire = % crouch_shoot;
     anim_boltfire = % crouch_shoot;
@@ -125,12 +118,11 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
       if(((completeLastShot) || (i < rand - 1)) && shootTime > quickTime)
         wait shootTime - quickTime;
     }
-  } else // Bolt action
-  {
-    Rechamber(); // In theory you will almost never need to rechamber here, because you will have done
-    // it somewhere smarter, like in cover.
+  } else {
+    Rechamber();
+
     self animscripts\face::SetIdleFace(anim.aimface);
-    // Slowly blend in the first frame of the shoot instead of playing the transition.
+
     self setanimknob(anim_boltfire, 1, .15, 0);
 
     wait 0.2;

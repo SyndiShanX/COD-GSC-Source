@@ -14,8 +14,6 @@ main(model, type) {
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_unload_groups(::Unload_Groups);
-  //build_treadfx();//currently disabled because vehicle type "boat" isn't supported. http://bugzilla.infinityward.net/show_bug.cgi?id=85644
-
 }
 
 init_local() {}
@@ -79,26 +77,3 @@ unload_groups() {
 
   return unload_groups;
 }
-
-/*QUAKED script_vehicle_zodiac (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_zodiac::main( "vehicle_zodiac" );
-
-and these lines in your CSV:
-#include,vehicle_zodiac
-sound,vehicle_zodiac,vehicle_standard,all_sp
-
-defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_zodiac_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_zodiac::main( "vehicle_zodiac","zodiac_physics" );
-
-and these lines in your CSV:
-#include,vehicle_zodiac
-sound,vehicle_zodiac,vehicle_standard,all_sp
-
-defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac_physics"default:"script_team" "allies"
-*/

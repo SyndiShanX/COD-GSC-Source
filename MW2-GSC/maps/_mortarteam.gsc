@@ -7,17 +7,11 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 main() {
-  // a trigger with targetname "mortar_team" targets a spawner.
-  // The spawner targets a node or nodes. The script will randomly pick one for his
-  // destination. The node targets script origins which the mortar will fire at.
-  // The spawner can also target a second spawner which will spawn a secondary mortar operator.
-
   anims();
   array_thread(getEntArray("mortar_team", "targetname"), ::mortarTrigger);
 }
 
 mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
-  // This command can be called directly from script
   ent = spawnStruct();
   ent.delay_base = delay_base;
   ent.delay_range = delay_range;
@@ -36,15 +30,12 @@ mortarSpawner(delayEnt) {
   if(!isDefined(delayEnt))
     delayEnt = self;
 
-  // wrapper that interfaces with radiant to make mortar guys easier to setup
   spawners[0] = self;
 
-  // Optionally target a spawner for an aimguy
   aimguySpawner = getent(self.target, "targetname");
   if(isDefined(aimguySpawner))
     spawners[1] = aimGuySpawner;
 
-  // required target of a destination node or nodes
   node = random(getnodearray(self.target, "targetname"));
   assertEx(isDefined(node), "Mortar_team spawner at origin " + self.origin + " must target a node or nodes");
   assertEx(isDefined(node.target), "Mortar node at origin " + node.origin + " must target script origins for mortar targetting");
@@ -74,7 +65,7 @@ mortarTeamspawn(spawners, node, mortar_targets) {
   name[1] = "aimguy";
 
   if(!isDefined(node.mortarSetup))
-    node.mortarSetup = false; // for making followup spawners not bring a mortar
+    node.mortarSetup = false;
   mortarThink[0] = ::loadGuy;
   mortarThink[1] = ::aimGuy;
 
@@ -110,7 +101,6 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
   self waittill("loadguy_done");
   if(!isalive(self.loadGuy)) {
-    // if the carrier dies, the whole sequence ends there
     node.mortarTeamActive = false;
     self notify("mortar_done");
     return;
@@ -118,7 +108,7 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
   node.mortarEnt = self;
   node.mortarEnt endon("stop_mortar");
-  self.node = node; // so we can externally refer to the node to make the scene stop
+  self.node = node;
   node.mortar_targets = mortar_targets;
   if(isalive(self.aimGuy))
     self thread transferObjectivePositionEntity();
@@ -137,14 +127,11 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
   node notify("stopIdle");
 
-  // wait until the end of the frame in case the guy dies while playing the firing animation on the exact same frame
-  // that the fire notetrack gets hit and thus potentially causing the mortarEnt to become undefined just as it needs
-  // it for firing it.
   waittillframeend;
 
   node.mortarEnt = undefined;
   node.mortar_targets = undefined;
-  node.mortarTeamActive = false; // was true
+  node.mortarTeamActive = false;
   self notify("mortar_done");
 }
 
@@ -155,13 +142,12 @@ transferObjectivePositionEntity() {
 }
 
 singleMortarOneRep(node) {
-  // Make the loadguy fire the mortar once
   loadGuy = self.loadGuy;
   loadGuy endon("death");
   if(loadGuy.health < 5000)
     loadGuy.health = 1;
 
-  node notify("stopIdle"); // in case we broke abruptly from a previous loop to start this one
+  node notify("stopIdle");
 
   loadGuy animscripts\shared::placeWeaponOn(self.weapon, "none");
   node thread anim_loop_solo(loadGuy, "wait_idle", "stopIdle");
@@ -172,7 +158,6 @@ singleMortarOneRep(node) {
 }
 
 aimGuyMortarsUntilDeath(node) {
-  // make the aimguy fire the mortar until he dies
   aimGuy = self.aimGuy;
   if(aimGuy.health < 5000)
     aimGuy.health = 1;
@@ -184,7 +169,7 @@ aimGuyMortarsUntilDeath(node) {
   aimGuy animscripts\shared::placeWeaponOn(self.weapon, "none");
   aimGuy.deathanim = % exposed_crouch_death_fetal;
   for(;;) {
-    node notify("stopIdle"); // in case we broke abruptly from a previous loop to start this one
+    node notify("stopIdle");
     node thread anim_loop_solo(aimGuy, "wait_idle", "stopIdle");
     wait(self.delay_base + randomfloat(self.delay_range));
     node notify("stopIdle");
@@ -194,7 +179,6 @@ aimGuyMortarsUntilDeath(node) {
 }
 
 dualMortarUntilDeath(node) {
-  // make the loadguy and aimguy fire the mortar until either dies
   loadGuy = self.loadGuy;
   aimGuy = self.aimGuy;
   guy = self.guy;
@@ -208,7 +192,7 @@ dualMortarUntilDeath(node) {
   loadGuy endon("stop_mortar");
   aimGuy endon("stop_mortar");
 
-  node notify("stopIdle"); // in case we broke abruptly from a previous loop to start this one
+  node notify("stopIdle");
   node thread anim_loop_solo(loadGuy, "wait_idle", "stopIdle");
   node anim_reach_solo(aimGuy, "fire");
   node notify("stopIdle");
@@ -226,7 +210,6 @@ dualMortarUntilDeath(node) {
 }
 
 aimGuy(ent, node) {
-  //	self thread debugOrigin();
   ent.aimGuy = self;
 
   self endon("death");
@@ -251,8 +234,6 @@ deathNotify(ent) {
 }
 
 loadGuy(ent, node) {
-  //	self thread debugOrigin();
-
   ent.loadGuy = self;
   ent.objectivePositionEntity = self;
 
@@ -267,7 +248,6 @@ loadGuy(ent, node) {
   thread detachMortarOnDeath();
 
   if(node.mortarSetup) {
-    // if the mortar is already setup
     node anim_reach_solo(self, "pickup");
     ent.mortar = node.mortar;
     ent.setup = true;
@@ -420,9 +400,6 @@ anims() {
   level.scr_anim["loadguy"]["setup_left"] = % mortar_loadguy_setup_left;
   level.scr_anim["loadguy"]["setup_right"] = % mortar_loadguy_setup_right;
 
-  //	addNotetrack_attach("loadguy", "attach shell = right", "prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
-  //	addNotetrack_detach("loadguy", "detach shell = right", "prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
-  //	addNotetrack_customFunction("loadguy", "fire", ::fire);
   addNotetrack_customFunction("loadguy", "attach shell = right", ::attachMortar);
   addNotetrack_customFunction("loadguy", "detach shell = right", ::detachMortar);
 
@@ -435,9 +412,6 @@ anims() {
   level.scr_anim["aimguy"]["pickup_alone"] = % mortar_aimguy_pickup_alone;
   level.scr_anim["aimguy"]["fire_alone"] = % mortar_aimguy_fire_alone;
 
-  //	addNotetrack_attach("aimguy", "attach shell = right", "prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
-  //	addNotetrack_detach("aimguy", "detach shell = right", "prop_mortar_ammunition", "TAG_WEAPON_RIGHT");
-  //	addNotetrack_customFunction("aimguy", "fire", ::fire);
   addNotetrack_customFunction("aimguy", "attach shell = right", ::attachMortar);
   addNotetrack_customFunction("aimguy", "detach shell = right", ::detachMortar);
 }

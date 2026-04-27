@@ -12,18 +12,13 @@
 MoveCQB() {
   animscripts\run::changeWeaponStandRun();
 
-  // any endons in this function must also be in CQBShootWhileMoving and CQBDecideWhatAndHowToShoot
-
   if(self.a.pose != "stand") {
-    // (get rid of any prone or other stuff that might be going on)
     self clearAnim(%root, 0.2);
     if(self.a.pose == "prone")
       self ExitProneWrapper(1);
     self.a.pose = "stand";
   }
   self.a.movement = self.moveMode;
-
-  //self clearanim(%combatrun, 0.2);
 
   self thread CQBTracking();
 
@@ -37,9 +32,8 @@ MoveCQB() {
   if(self.stairsState == "none")
     transTime = 0.3;
   else
-    transTime = 0.1; // need to transition to stairs quickly
+    transTime = 0.1;
 
-  // (we don't use %body because that would reset the aiming knobs)
   self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, %walk_and_run_loops, 1, transTime, rate, true);
 
   self animscripts\run::SetMoveNonForwardAnims(%walk_backward, %walk_left, %walk_right);
@@ -94,7 +88,6 @@ findCQBPointsOfInterest() {
     return;
   anim.findingCQBPointsOfInterest = true;
 
-  // one AI per frame, find best point of interest.
   if(!level.cqbPointsOfInterest.size) {
     return;
   }
@@ -104,8 +97,6 @@ findCQBPointsOfInterest() {
     foreach(guy in ai) {
       if(isAlive(guy) && guy isCQBWalking()) {
         moving = (guy.a.movement != "stop");
-
-        // if you change this, change the debug function below too
 
         shootAtPos = (guy.origin[0], guy.origin[1], guy getShootAtPos()[2]);
         lookAheadPoint = shootAtPos;
@@ -126,7 +117,7 @@ findCQBPointsOfInterest() {
               if(distanceSquared(point, shootAtPos) < 64 * 64)
                 continue;
               dot = vectorDot(vectorNormalize(point - shootAtPos), forward);
-              if(dot < 0.643 || dot > 0.966) // 0.643 = cos( 50 ), 0.966 = cos( 15 )
+              if(dot < 0.643 || dot > 0.966)
                 continue;
             } else {
               if(dist < 50 * 50)

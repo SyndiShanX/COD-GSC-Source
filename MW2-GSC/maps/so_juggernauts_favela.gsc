@@ -12,12 +12,11 @@
 main() {
   level.so_compass_zoom = "close";
 
-  // settings for this challenge
   level.pmc_gametype = "mode_elimination";
   level.pmc_enemies = 10;
   level.pmc_alljuggernauts = true;
   level.pmc_enemies_alive = 1;
-  level.pmc_low_enemy_count = 3; // Used for pulsing the hud
+  level.pmc_low_enemy_count = 3;
 
   so_delete_all_spawntriggers();
   so_delete_all_triggers();

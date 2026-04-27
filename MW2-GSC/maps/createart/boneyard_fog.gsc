@@ -6,7 +6,6 @@
 main() {
   setDevDvar("scr_fog_disable", "0");
 
-  /* original boneyuard fog */
   ent = maps\_utility::create_vision_set_fog("boneyard_trailer");
   ent.startDist = 463.626;
   ent.halfwayDist = 2484.36;
@@ -23,7 +22,6 @@ main() {
   ent.sunEndFadeAngle = 61.0525;
   ent.normalFogScale = 0;
 
-  /* boneyard */
   ent = maps\_utility::create_vision_set_fog("boneyard");
   ent.startDist = 925.063;
   ent.halfwayDist = 10169.5;
@@ -40,7 +38,6 @@ main() {
   ent.sunEndFadeAngle = 61.0525;
   ent.normalFogScale = 0;
 
-  /* boneyard */
   ent = maps\_utility::create_vision_set_fog("boneyard_flyby");
   ent.startDist = 925.063;
   ent.halfwayDist = 10169.5;
@@ -57,7 +54,6 @@ main() {
   ent.sunEndFadeAngle = 61.0525;
   ent.normalFogScale = 0;
 
-  /* ride */
   ent = maps\_utility::create_vision_set_fog("boneyard_ride");
   ent.startDist = 925.063;
   ent.halfwayDist = 10169.5;
@@ -74,7 +70,6 @@ main() {
   ent.sunEndFadeAngle = 61.0525;
   ent.normalFogScale = 0;
 
-  /* steering */
   ent = maps\_utility::create_vision_set_fog("boneyard_steer");
   ent.startDist = 925.063;
   ent.halfwayDist = 10169.5;

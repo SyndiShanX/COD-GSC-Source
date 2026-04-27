@@ -8,7 +8,6 @@
 #include common_scripts\utility;
 #include maps\_hud_util;
 
-// this script handles all major global gameskill considerations
 setSkill(reset) {
   if(!isDefined(level.script))
     level.script = ToLower(getDvar("mapname"));
@@ -26,7 +25,6 @@ setSkill(reset) {
     if(getDvar("arcademode") == "1")
       thread maps\_arcademode::main();
 
-    // first init stuff
     set_console_status();
 
     foreach(player in level.players) {
@@ -45,7 +43,7 @@ setSkill(reset) {
       player ent_flag_init("near_death_vision_enabled");
       player ent_flag_set("near_death_vision_enabled");
 
-      player.gs = spawnStruct(); // gs = gameskill
+      player.gs = spawnStruct();
       player.a = spawnStruct();
 
       player.damage_functions = [];
@@ -54,7 +52,6 @@ setSkill(reset) {
       if(is_coop())
         player ent_flag_init("coop_is_dead");
       player.pers = [];
-      //player thread watchWeaponChange();
 
       if(!isDefined(player.baseIgnoreRandomBulletDamage))
         player.baseIgnoreRandomBulletDamage = false;
@@ -71,30 +68,25 @@ setSkill(reset) {
     level.difficultyType[2] = "hardened";
     level.difficultyType[3] = "veteran";
 
-    // string not found for GAMESKILL_EASY
     level.difficultyString["easy"] = &"GAMESKILL_EASY";
-    // string not found for GAMESKILL_NORMAL
+
     level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
-    // string not found for GAMESKILL_HARDENED
+
     level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
-    // string not found for GAMESKILL_VETERAN
+
     level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
-    //thread update_skill_on_change();
 
     thread playerHealthDebug();
 
     thread gameskill_change_monitor();
   }
 
-  //createprintchannel( "script_autodifficulty" );
-
   SetDvarIfUninitialized("autodifficulty_playerDeathTimer", 0);
 
   anim.run_accuracy = 0.5;
   anim.walk_accuracy = 0.8;
 
-  // if( getDvar( "autodifficulty_frac" ) == "" )
-  setDvar("autodifficulty_frac", 0); // disabled for now
+  setDvar("autodifficulty_frac", 0);
 
   level.difficultySettings_frac_data_points = [];
 
@@ -103,24 +95,19 @@ setSkill(reset) {
     player thread increment_take_cover_warnings_on_death();
   }
 
-  level.mg42badplace_mintime = 8; // minimum # of seconds a badplace is created on an mg42 after its operator dies
-  level.mg42badplace_maxtime = 16; // maximum # of seconds a badplace is created on an mg42 after its operator dies
+  level.mg42badplace_mintime = 8;
+  level.mg42badplace_maxtime = 16;
 
-  // RIGHT NOW ONLY .25 AND .75 ARE USED for easy and normal
-
-  // anim.playerGrenadeBaseTime
   level.difficultySettings["playerGrenadeBaseTime"]["easy"] = 40000;
   level.difficultySettings["playerGrenadeBaseTime"]["normal"] = 35000;
   level.difficultySettings["playerGrenadeBaseTime"]["hardened"] = 25000;
   level.difficultySettings["playerGrenadeBaseTime"]["veteran"] = 25000;
 
-  // anim.playerGrenadeRangeTime
   level.difficultySettings["playerGrenadeRangeTime"]["easy"] = 20000;
   level.difficultySettings["playerGrenadeRangeTime"]["normal"] = 15000;
   level.difficultySettings["playerGrenadeRangeTime"]["hardened"] = 10000;
   level.difficultySettings["playerGrenadeRangeTime"]["veteran"] = 10000;
 
-  // time between instances where 2 grenades land near player at once( hardcoded to never happen in easy )
   level.difficultySettings["playerDoubleGrenadeTime"]["easy"] = 60 * 60 * 1000;
   level.difficultySettings["playerDoubleGrenadeTime"]["normal"] = 150 * 1000;
   level.difficultySettings["playerDoubleGrenadeTime"]["hardened"] = 90 * 1000;
@@ -136,28 +123,21 @@ setSkill(reset) {
   level.difficultySettings["threatbias"]["hardened"] = 200;
   level.difficultySettings["threatbias"]["veteran"] = 400;
 
-  // level.longRegenTime
-  // this var controls how long it takes before your health comes back
-
-  //
   level.difficultySettings["base_enemy_accuracy"]["easy"] = 0.9;
   level.difficultySettings["base_enemy_accuracy"]["normal"] = 1.0;
   level.difficultySettings["base_enemy_accuracy"]["hardened"] = 1.15;
   level.difficultySettings["base_enemy_accuracy"]["veteran"] = 1.15;
 
-  // lower numbers = higher accuracy for AI at a distance
   level.difficultySettings["accuracyDistScale"]["easy"] = 1.0;
   level.difficultySettings["accuracyDistScale"]["normal"] = 1.0;
   level.difficultySettings["accuracyDistScale"]["hardened"] = 0.6;
-  level.difficultySettings["accuracyDistScale"]["veteran"] = 0.8; // too many other things make it more difficult
+  level.difficultySettings["accuracyDistScale"]["veteran"] = 0.8;
 
-  // anim.min_sniper_burst_delay_time
   level.difficultySettings["min_sniper_burst_delay_time"]["easy"] = 3.0;
   level.difficultySettings["min_sniper_burst_delay_time"]["normal"] = 2.0;
   level.difficultySettings["min_sniper_burst_delay_time"]["hardened"] = 1.5;
   level.difficultySettings["min_sniper_burst_delay_time"]["veteran"] = 1.1;
 
-  // anim.max_sniper_burst_delay_time
   level.difficultySettings["max_sniper_burst_delay_time"]["easy"] = 4.0;
   level.difficultySettings["max_sniper_burst_delay_time"]["normal"] = 3.0;
   level.difficultySettings["max_sniper_burst_delay_time"]["hardened"] = 2.0;
@@ -178,118 +158,90 @@ setSkill(reset) {
   level.difficultySettings["dog_hits_before_kill"]["hardened"] = 0;
   level.difficultySettings["dog_hits_before_kill"]["veteran"] = 0;
 
-  // anim.pain_test
   level.difficultySettings["pain_test"]["easy"] = ::always_pain;
   level.difficultySettings["pain_test"]["normal"] = ::always_pain;
   level.difficultySettings["pain_test"]["hardened"] = ::pain_protection;
   level.difficultySettings["pain_test"]["veteran"] = ::pain_protection;
 
-  // missTime is a number based on the distance from the AI to the player + some baseline
-  // it simulates bad aim as the AI starts shooting, and helps give the player a warning before they get hit.
-  // this is used for auto and semi auto.
-  // missTime = missTimeConstant + distance * missTimeDistanceFactor
+  level.difficultySettings["missTimeConstant"]["easy"] = 1.0;
+  level.difficultySettings["missTimeConstant"]["normal"] = 0.05;
+  level.difficultySettings["missTimeConstant"]["hardened"] = 0;
+  level.difficultySettings["missTimeConstant"]["veteran"] = 0;
 
-  level.difficultySettings["missTimeConstant"]["easy"] = 1.0; // 0.2;// 0.3;
-  level.difficultySettings["missTimeConstant"]["normal"] = 0.05; // 0.1;
-  level.difficultySettings["missTimeConstant"]["hardened"] = 0; // 0.04;
-  level.difficultySettings["missTimeConstant"]["veteran"] = 0; // 0.03;
-  // determines which misstime constant to use based on difficulty frac. Hard and Vet use their own settings.
-
-  level.difficultySettings["missTimeDistanceFactor"]["easy"] = 0.8 / 1000; // 0.4
+  level.difficultySettings["missTimeDistanceFactor"]["easy"] = 0.8 / 1000;
   level.difficultySettings["missTimeDistanceFactor"]["normal"] = 0.1 / 1000;
   level.difficultySettings["missTimeDistanceFactor"]["hardened"] = 0.05 / 1000;
   level.difficultySettings["missTimeDistanceFactor"]["veteran"] = 0;
-  // determines which missTimeDistanceFactor to use based on difficulty frac. Hard and Vet use their own settings.
 
   level.difficultySettings["flashbangedInvulFactor"]["easy"] = 0.25;
   level.difficultySettings["flashbangedInvulFactor"]["normal"] = 0;
   level.difficultySettings["flashbangedInvulFactor"]["hardened"] = 0;
   level.difficultySettings["flashbangedInvulFactor"]["veteran"] = 0;
 
-  // currently disabled
-  // bullets do enough damage to instantly put player in red flashing at this distance
-  level.difficultySettings["player_criticalBulletDamageDist"]["easy"] = 0; // 200
-  level.difficultySettings["player_criticalBulletDamageDist"]["normal"] = 0; // 200
+  level.difficultySettings["player_criticalBulletDamageDist"]["easy"] = 0;
+  level.difficultySettings["player_criticalBulletDamageDist"]["normal"] = 0;
   level.difficultySettings["player_criticalBulletDamageDist"]["hardened"] = 0;
   level.difficultySettings["player_criticalBulletDamageDist"]["veteran"] = 0;
 
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
   level.difficultySettings["player_deathInvulnerableTime"]["easy"] = 4000;
   level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 2500;
   level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 600;
   level.difficultySettings["player_deathInvulnerableTime"]["veteran"] = 100;
 
-  // level.invulTime_preShield: time player is invulnerable when hit before their health is low enough for a red overlay( should be very short )
   level.difficultySettings["invulTime_preShield"]["easy"] = 0.6;
   level.difficultySettings["invulTime_preShield"]["normal"] = 0.5;
   level.difficultySettings["invulTime_preShield"]["hardened"] = 0.3;
   level.difficultySettings["invulTime_preShield"]["veteran"] = 0.0;
 
-  // level.invulTime_onShield: time player is invulnerable when hit the first time they get a red health overlay( should be reasonably long )
-  // should not be more than or too much lower than player_deathInvulnerableTime
   level.difficultySettings["invulTime_onShield"]["easy"] = 1.6;
   level.difficultySettings["invulTime_onShield"]["normal"] = 1.0;
   level.difficultySettings["invulTime_onShield"]["hardened"] = 0.5;
   level.difficultySettings["invulTime_onShield"]["veteran"] = 0.25;
 
-  // level.invulTime_postShield: time player is invulnerable when hit after the red health overlay is already up( should be short )
   level.difficultySettings["invulTime_postShield"]["easy"] = 0.5;
   level.difficultySettings["invulTime_postShield"]["normal"] = 0.4;
   level.difficultySettings["invulTime_postShield"]["hardened"] = 0.3;
   level.difficultySettings["invulTime_postShield"]["veteran"] = 0.0;
 
-  // level.playerHealth_RegularRegenDelay
-  // The delay before you regen health after getting hurt
   level.difficultySettings["playerHealth_RegularRegenDelay"]["easy"] = 4000;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["normal"] = 4000;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["hardened"] = 3000;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["veteran"] = 1200;
 
-  // level.worthyDamageRatio( player must recieve this much damage as a fraction of maxhealth to get invulTime_PREshield. )
   level.difficultySettings["worthyDamageRatio"]["easy"] = 0.0;
   level.difficultySettings["worthyDamageRatio"]["normal"] = 0.1;
   level.difficultySettings["worthyDamageRatio"]["hardened"] = 0.3;
   level.difficultySettings["worthyDamageRatio"]["veteran"] = 0.3;
 
-  // level.playerDifficultyHealth
-  // the amount of health you have in this difficulty
   level.difficultySettings["playerDifficultyHealth"]["easy"] = 475;
   level.difficultySettings["playerDifficultyHealth"]["normal"] = 275;
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = 165;
   level.difficultySettings["playerDifficultyHealth"]["veteran"] = 115;
 
-  // If you go to red flashing, the amount of time before your health regens
   level.difficultySettings["longRegenTime"]["easy"] = 5000;
   level.difficultySettings["longRegenTime"]["normal"] = 5000;
   level.difficultySettings["longRegenTime"]["hardened"] = 3200;
   level.difficultySettings["longRegenTime"]["veteran"] = 3200;
 
-  // level.healthOverlayCutoff
   level.difficultySettings["healthOverlayCutoff"]["easy"] = 0.02;
   level.difficultySettings["healthOverlayCutoff"]["normal"] = 0.02;
   level.difficultySettings["healthOverlayCutoff"]["hardened"] = 0.02;
   level.difficultySettings["healthOverlayCutoff"]["veteran"] = 0.02;
 
-  // self.gs.regenRate
-  // the rate you regen health once it starts to regen
   level.difficultySettings["health_regenRate"]["easy"] = 0.02;
   level.difficultySettings["health_regenRate"]["normal"] = 0.02;
   level.difficultySettings["health_regenRate"]["hardened"] = 0.02;
   level.difficultySettings["health_regenRate"]["veteran"] = 0.02;
 
-  // level.explosiveplanttime
   level.difficultySettings["explosivePlantTime"]["easy"] = 10;
   level.difficultySettings["explosivePlantTime"]["normal"] = 10;
   level.difficultySettings["explosivePlantTime"]["hardened"] = 5;
   level.difficultySettings["explosivePlantTime"]["veteran"] = 5;
 
-  // Once a player is downed, the other player gets this much time before they can be downed.
   level.difficultySettings["player_downed_buffer_time"]["normal"] = 2;
   level.difficultySettings["player_downed_buffer_time"]["hardened"] = 1.5;
   level.difficultySettings["player_downed_buffer_time"]["veteran"] = 0;
 
-  // in case there are no enties in the map.
   level.lastPlayerSighted = 0;
 
   if(isDefined(level.custom_gameskill_func))
@@ -302,7 +254,6 @@ setSkill(reset) {
   updateGameSkill();
   updateAllDifficulty();
 
-  // not sure what to do with this
   setDvar("autodifficulty_original_setting", level.gameskill);
   SetSavedDvar("player_meleeDamageMultiplier", 100 / 250);
 }
@@ -313,25 +264,20 @@ solo_player_in_special_ops() {
   SetSavedDvar("ai_accuracy_attackercountDecrease", "0.6");
   SetSavedDvar("player_deathInvulnerableToMelee", "1");
 
-  // The delay before you regen health after getting hurt
   level.difficultySettings["playerHealth_RegularRegenDelay"]["normal"] = 2000;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["hardened"] = 2000;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["veteran"] = 900;
 
   level.difficultySettings["invulTime_onShield"]["normal"] = 2.5;
 
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
   level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 3000;
   level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 1300;
   level.difficultySettings["player_deathInvulnerableTime"]["veteran"] = 800;
 
-  // if you go into red flashing, this long before health comes back
   level.difficultySettings["longRegenTime"]["normal"] = 4500;
   level.difficultySettings["longRegenTime"]["hardened"] = 4500;
   level.difficultySettings["longRegenTime"]["veteran"] = 4500;
 
-  // how much health you have
   level.difficultySettings["playerDifficultyHealth"]["normal"] = 350;
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = 205;
   level.difficultySettings["playerDifficultyHealth"]["veteran"] = 205;
@@ -340,38 +286,27 @@ solo_player_in_special_ops() {
 }
 
 solo_player_in_coop_gameskill_settings() {
-  // In missions where one player is on the ground and the other is in a vehicle, both players fail if the player
-  // on the ground dies, so we buff up the ground player a little so he has a better chance, since nobody is going to
-  // revive him.
   AssertEx(level.players.size == 2, "This function is only for special ops featuring 2 players.");
 
-  // Improve DIT so you don't die so easily when you go into red flashing.
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
-  level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 2500; // from 600ms
-  level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 1200; // from 600ms
-  level.difficultySettings["player_deathInvulnerableTime"]["veteran"] = 200; // from 100ms
+  level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 2500;
+  level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 1200;
+  level.difficultySettings["player_deathInvulnerableTime"]["veteran"] = 200;
 
   multiplier = 1.35;
-  // give players more health when their buddy is laid up
+
   level.difficultySettings["playerDifficultyHealth"]["normal"] = Int(275 * multiplier);
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = Int(165 * multiplier);
   level.difficultySettings["playerDifficultyHealth"]["veteran"] = Int(115 * 1.2);
 }
 
 make_remaining_player_a_little_stronger() {
-  // Improve DIT so you don't die so easily when you go into red flashing.
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
   level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 2500;
-  level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 1000; // from 600ms
-  //level.difficultySettings[ "player_deathInvulnerableTime" ][ "veteran" ] = 200; // from 100ms
+  level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 1000;
 
   multiplier = 1.25;
-  // give players more health when their buddy is laid up
+
   level.difficultySettings["playerDifficultyHealth"]["normal"] = Int(275 * multiplier);
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = Int(165 * multiplier);
-  //level.difficultySettings[ "playerDifficultyHealth" ][ "veteran" ] = Int( 115 * 1.12 );
 }
 
 updateAllDifficulty() {
@@ -388,12 +323,8 @@ setDifficulty() {
 
   self set_difficulty_from_locked_settings();
 }
-
-// if level.gameskill changes, we need to call this
 setGlobalDifficulty() {
   difficulty_func = ::get_locked_difficulty_val_global;
-
-  //logString( "difficulty: " + level.gameSkill );
 
   current_skill = get_skill_from_index(level.gameskill);
   anim.dog_health = [[difficulty_func]]("dog_health", level.gameskill);
@@ -406,7 +337,6 @@ setGlobalDifficulty() {
   SetSavedDvar("ai_accuracyDistScale", [[difficulty_func]]("accuracyDistScale", level.gameskill));
 
   if(is_coop()) {
-    // Once a player is downed, the other player gets this much time before they can be downed.
     AssertEx(isDefined(level.difficultySettings["player_downed_buffer_time"][current_skill]), "No player_downed_buffer_time for " + current_skill);
     level.player_downed_death_buffer_time = level.difficultySettings["player_downed_buffer_time"][current_skill];
   }
@@ -430,14 +360,6 @@ updateGameSkill() {
     level.gameskill = level.forcedgameskill;
 
   Assert(level.gameSkill >= 0 && level.gameSkill <= 3);
-
-  // Decrement the level.player's gameskill if playing Special Ops and not in coop
-  //	if( is_specialop() && !is_coop() )
-  //	{
-  //		level.player.gameskill--;
-  //		if( level.player.gameskill < 0 )
-  //			level.player.gameskill = 0;
-  //	}
 
   return level.gameSkill;
 }
@@ -473,9 +395,6 @@ aa_should_start_fresh() {
 
 apply_difficulty_frac_with_func(difficulty_func, current_frac) {
   Assert(isPlayer(self));
-  // TODO: put these properties on the player somehow
-
-  //prof_begin( "apply_difficulty_frac_with_func" );
 
   self.gs.invulTime_preShield = [[difficulty_func]]("invulTime_preShield", current_frac);
   self.gs.invulTime_onShield = [[difficulty_func]]("invulTime_onShield", current_frac);
@@ -501,14 +420,10 @@ apply_difficulty_frac_with_func(difficulty_func, current_frac) {
 
   self.gs.dog_presstime = [[difficulty_func]]("dog_presstime", current_frac);
 
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
   self.deathInvulnerableTime = Int([[difficulty_func]]("player_deathInvulnerableTime", current_frac));
   self.criticalBulletDamageDist = Int([[difficulty_func]]("player_criticalBulletDamageDist", current_frac));
 
   self.damageMultiplier = 100 / [[difficulty_func]]("playerDifficultyHealth", current_frac);
-
-  //prof_end( "apply_difficulty_frac_with_func" );
 }
 
 update_player_attacker_accuracy() {
@@ -521,17 +436,11 @@ update_player_attacker_accuracy() {
 
 apply_difficulty_step_with_func(difficulty_func, current_frac) {
   Assert(isPlayer(self));
-  // TODO: put these properties on the player somehow
 
-  //prof_begin( "apply_difficulty_step_with_func" );
-
-  // sets the value of difficulty settings that can't blend between two
   self.gs.missTimeConstant = [[difficulty_func]]("missTimeConstant", current_frac);
   self.gs.missTimeDistanceFactor = [[difficulty_func]]("missTimeDistanceFactor", current_frac);
   self.gs.dog_hits_before_kill = [[difficulty_func]]("dog_hits_before_kill", current_frac);
   self.gs.double_grenades_allowed = [[difficulty_func]]("double_grenades_allowed", current_frac);
-
-  //prof_end( "apply_difficulty_step_with_func" );
 }
 
 set_difficulty_from_locked_settings() {
@@ -548,9 +457,6 @@ get_locked_difficulty_step_val_global(system, ignored) {
 }
 
 get_blended_difficulty(system, current_frac) {
-  //prof_begin( "get_blended_difficulty" );
-
-  // get the value from the available data points
   difficulty_array = level.difficultySettings_frac_data_points[system];
   Assert(isDefined(difficulty_array));
   Assert(difficulty_array.size >= 1);
@@ -574,8 +480,6 @@ get_blended_difficulty(system, current_frac) {
     }
   }
 
-  //prof_end( "get_blended_difficulty" );
-
   return difficulty_array[difficulty_array.size - 1]["val"];
 }
 
@@ -587,8 +491,7 @@ getRatio(msg, min, max) {
   return (level.difficultySettings[msg][level.difficultyType[min]] * (100 - GetDvarInt("autodifficulty_frac")) + level.difficultySettings[msg][level.difficultyType[max]] * GetDvarInt("autodifficulty_frac")) * 0.01;
 }
 
-get_locked_difficulty_val_player(msg, ignored) // ignored is there because this is used as a function pointer with another function that does have a second parm
-{
+get_locked_difficulty_val_player(msg, ignored) {
   return level.difficultySettings[msg][get_skill_from_index(self.gameskill)];
 }
 
@@ -617,7 +520,6 @@ pain_protection_check() {
   if(!isalive(level.painAI) || level.painAI.script != "pain")
     level.painAI = self;
 
-  // The pain AI can always take pain, so if the player focuses on one guy he'll see pain animations.	
   if(self == level.painAI)
     return false;
 
@@ -628,7 +530,7 @@ pain_protection_check() {
 }
 
 playerHealthDebug() {
-  waittillframeend; // for init to finish
+  waittillframeend;
   SetDvarIfUninitialized("scr_health_debug", "0");
 
   while(1) {
@@ -733,58 +635,6 @@ destroyHealthDebug() {
   }
 }
 
-/*
-// this is run on each enemy AI.
-axisAccuracyControl()
-{
-	self endon( "long_death" );
-	self endon( "death" );
-	
-	//prof_begin( "axisAccuracyControl" );
-	
-	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
-	if( getDvar( "scr_dynamicaccuracy" ) != "on" )
-	{
-// 		self simpleAccuracyControl();
-	}
-	else
-	{
-		for( ;; )
-		{
-			wait( 0.05 );
-			waittillframeend;// in case our accuracy changed this frame
-			
-			//prof_begin( "axisAccuracyControl" );
-			
-			if( isDefined( self.enemy ) && isPlayer( self.enemy ) && self CanSee( self.enemy ) )
-			{
-				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
-				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax )
-					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
-			}
-			else
-			{
-				self.a.accuracyGrowthMultiplier = 1;
-			}
-			
-			self setEnemyAccuracy();
-			
-			//prof_end( "axisAccuracyControl" );
-		}
-	}
-	
-	//prof_end( "axisAccuracyControl" );
-}
-
-alliesAccuracyControl()
-{
-	self endon( "long_death" );
-	self endon( "death" );
-	
-// 	self simpleAccuracyControl();
-}
-*/
-
 set_accuracy_based_on_situation() {
   if(self animscripts\combat_utility::isSniper() && IsAlive(self.enemy)) {
     self setSniperAccuracy();
@@ -809,19 +659,12 @@ set_accuracy_based_on_situation() {
 
   self.accuracy = self.baseAccuracy;
 
-  // rambo corner is more accurate so it's still a threat to the player
   if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult))
     self.accuracy *= self.ramboAccuracyMult;
 }
 
 setSniperAccuracy() {
-  /*
-  // if sniperShotCount isn't defined, a sniper is shooting from some place that's not in normal shoot behavior.
-  // that probably means they're doing some sort of blindfire or something that would look stupid for a sniper to do.
-  Assert( isDefined( self.sniperShotCount ) );
-  */
   if(!isDefined(self.sniperShotCount)) {
-    // snipers get this error if a dog attacks them
     self.sniperShotCount = 0;
     self.sniperHitCount = 0;
   }
@@ -833,7 +676,6 @@ setSniperAccuracy() {
     gameskill = self.enemy.gameskill;
 
   if(shouldForceSniperMissShot()) {
-    // miss
     self.accuracy = 0;
 
     if(gameskill > 0 || self.sniperShotCount > 1)
@@ -841,20 +683,18 @@ setSniperAccuracy() {
     return;
   }
 
-  // guarantee a hit unless baseAccuracy is 0
   self.accuracy = (1 + 1 * self.sniperHitCount) * self.baseAccuracy;
 
   self.sniperHitCount++;
 
   if(gameskill < 1 && self.sniperHitCount == 1)
-    self.lastMissedEnemy = undefined; // miss again
+    self.lastMissedEnemy = undefined;
 }
 
 shouldForceSniperMissShot() {
   if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy)
     return false;
 
-  //dont do this if you're an ally of the player, changed by z for Price cliffhanger sniping
   if(self.team == "allies")
     return false;
 
@@ -872,15 +712,10 @@ shotsAfterPlayerBecomesInvul() {
 }
 
 didSomethingOtherThanShooting() {
-  // make sure the next time resetAccuracyAndPause() is called, we reset our misstime for sure
   self.a.missTimeDebounce = 0;
 }
-
-// called when we start a volley of shots.
 resetAccuracyAndPause() {
   self resetMissTime();
-
-  // self conserveAmmoWhilePlayerIsInvulnerable();
 }
 
 waitTimeIfPlayerIsHit() {
@@ -906,7 +741,6 @@ print3d_time(org, text, color, timer) {
 }
 
 resetMissTime() {
-  //prof_begin( "resetMissTime" );
   if(!self IsBadGuy()) {
     return;
   }
@@ -915,24 +749,22 @@ resetMissTime() {
   }
   if(!self animscripts\weaponList::usingAutomaticWeapon() && !self animscripts\weaponList::usingSemiAutoWeapon()) {
     self.missTime = 0;
-    //prof_end( "resetMissTime" );
+
     return;
   }
 
   if(!isalive(self.enemy)) {
-    //prof_end( "resetMissTime" );
     return;
   }
 
   if(!isPlayer(self.enemy)) {
     self.accuracy = self.baseAccuracy;
-    //prof_end( "resetMissTime" );
+
     return;
   }
 
   dist = Distance(self.enemy.origin, self.origin);
   self setMissTime(self.enemy.gs.missTimeConstant + dist * self.enemy.gs.missTimeDistanceFactor);
-  //prof_end( "resetMissTime" );
 }
 
 resetMissDebounceTime() {
@@ -942,7 +774,6 @@ resetMissDebounceTime() {
 setMissTime(howLong) {
   AssertEx(self IsBadGuy(), "Non axis tried to set misstime");
 
-  // we can only start missing again if it's been a few seconds since we last shot
   if(self.a.missTimeDebounce > GetTime()) {
     return;
   }
@@ -950,12 +781,10 @@ setMissTime(howLong) {
   if(howLong > 0)
     self.accuracy = 0;
 
-  howLong *= 1000; // convert to milliseconds
+  howLong *= 1000;
 
   self.a.missTime = GetTime() + howLong;
   self.a.accuracyGrowthMultiplier = 1;
-  //	thread print3d_time( self.origin + (0,0,32 ), "Aiming..", (1,1,0), howLong * 0.001 );
-  //thread player_aim_debug();
 }
 
 player_aim_debug() {
@@ -973,7 +802,6 @@ player_aim_debug() {
 }
 
 dirt_effect_on_open() {
-  //	lerp scale from .3 to 1 over 0.1;
   scaler = 0.66;
   self ScaleOverTime(0.1, Int(2048 * scaler), Int(1024 * scaler));
   self.y = 100;
@@ -982,21 +810,8 @@ dirt_effect_on_open() {
 }
 
 dirt_detailed_alpha() {
-  /*
-  dirt_fade_in_time = 0.1;
-  self.alpha = 0;
-  self FadeOverTime( dirt_fade_in_time );
-  self.alpha = 0.77;
-  wait( dirt_fade_in_time );
-
-  self FadeOverTime( dirt_fade_in_time );
-  self.alpha = 0;
-  wait( dirt_fade_in_time );
-  self Destroy();
-  */
-
   dirt_fade_in_time = 0.2;
-  self.alpha = 0.7; // cant do the same fade menus do
+  self.alpha = 0.7;
   self FadeOverTime(dirt_fade_in_time);
   self.alpha = 0;
   wait(dirt_fade_in_time);
@@ -1020,8 +835,6 @@ dirt_blurry_alpha() {
 }
 
 dirt_left_effect_on_open() {
-  //	lerp scale from 0 to 1 over 0.05;
-  //	lerp x from -1000 to 0 over 0.05;
   scaler = 0.66;
   self ScaleOverTime(0.05, Int(2048 * scaler), Int(1024 * scaler));
   self.x = -1000;
@@ -1030,9 +843,6 @@ dirt_left_effect_on_open() {
 }
 
 dirt_right_effect_on_open() {
-  //	lerp scale from 0 to 1 over 0.1;
-  //	lerp x from 300 to 0 over 0.1;
-
   scaler = 0.66;
   self ScaleOverTime(0.1, Int(2048 * scaler), Int(1024 * scaler));
   self.x = 300;
@@ -1041,8 +851,6 @@ dirt_right_effect_on_open() {
 }
 
 dirt_left_blurry_alpha() {
-  //	lerp alpha from 0 to 1 over 0.05;
-
   start_time = GetTime();
   dirt_fade_out_time = 1;
 
@@ -1061,8 +869,6 @@ dirt_left_blurry_alpha() {
 }
 
 dirt_right_blurry_alpha() {
-  //	lerp alpha from 0 to 1 over 0.15;
-
   start_time = GetTime();
   dirt_fade_out_time = 1;
 
@@ -1087,7 +893,7 @@ grenade_dirt_on_screen(type) {
   if(isDefined(self.is_controlling_UAV)) {
     return;
   }
-  // already did this effect on this frame
+
   if(self.dirt_on_screen[type] == GetTime()) {
     return;
   }
@@ -1102,7 +908,7 @@ grenade_dirt_on_screen(type) {
       width = Int(640);
       height = Int(480);
 
-      detailed = create_client_overlay_custom_size("fullscreen_dirt_bottom", 1, width, height); // a flash of dirt
+      detailed = create_client_overlay_custom_size("fullscreen_dirt_bottom", 1, width, height);
       detailed thread dirt_effect_on_open();
       detailed thread dirt_detailed_alpha();
 
@@ -1144,110 +950,28 @@ playerHurtcheck() {
     self.damageAttacker = attacker;
 
     if(isDefined(mods[type])) {
-      waittillframeend; // let the scripted grenade - specific stuff from _utility try first
+      waittillframeend;
       [[mods[type]]](point);
     }
   }
 }
 
-/*draw_player_health_packets()
-{
-	Assert( isPlayer( self ) );
-
-	packets = [];
-	red = ( 1, 0, 0 );
-	orange = ( 1, 0.5, 0 );
-	green = ( 0, 1, 0 );
-	
-	for( i = 0; i < 3; i++ )
-	{
-		overlay = NewHudElem();
-		overlay.x = 5 + 20 * i;
-		overlay.y = 20;
-		overlay SetShader( "white", 16, 16 );
-		overlay.alignX = "left";
-		overlay.alignY = "top";
-		overlay.alpha = 1;
-		overlay.color = ( 0, 1, 0 );
-		packets[ packets.size ] = overlay;
-	}
-	
-	for( ;; )
-	{
-		self waittill( "update_health_packets" );
-		if( self ent_flag( "player_has_red_flashing_overlay" ) )
-		{
-			packetBase = 1;
-			for( i = 0; i < packetBase; i++ )
-			{
-				packets[ i ] FadeOverTime( 0.5 );
-				packets[ i ].alpha = 1;
-				packets[ i ].color = red;
-			}
-
-			for( i = packetBase; i < 3; i++ )
-			{
-				packets[ i ] FadeOverTime( 0.5 );
-				packets[ i ].alpha = 0;
-				packets[ i ].color = red;
-			}
-			
-			self ent_flag_waitopen( "player_has_red_flashing_overlay" );
-		}
-
-		packetBase = self.player_health_packets;
-		if( packetBase <= 0 )
-			packetBase = 0;
-		
-		color = red;
-		if( packetBase == 2 )
-			color = orange;
-		if( packetBase == 3 )
-			color = green;
-			
-		for( i = 0; i < packetBase; i++ )
-		{
-			packets[ i ] FadeOverTime( 0.5 );
-			packets[ i ].alpha = 1;
-			packets[ i ].color = color;
-		}
-			
-		for( i = packetBase; i < 3; i++ )
-		{
-			packets[ i ] FadeOverTime( 0.5 );
-			packets[ i ].alpha = 0;
-			packets[ i ].color = red;
-		}
-	}
-}*/
-
 player_health_packets() {
   Assert(isPlayer(self));
 
-  // 	thread draw_player_health_packets();
   self.player_health_packets = 3;
-  /*
-  	for( ;; )
-  	{
-  		self ent_flag_wait( "player_has_red_flashing_overlay" );
-  // 		change_player_health_packets( - 1 );
-  		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
-  	}
-  	*/
 }
 
 playerHealthRegenInit() {
-  wait(0.05); // to give a chance for moscow to init level.strings so it doesnt clear ours
+  wait(0.05);
 
   level.strings["take_cover"] = spawnStruct();
-  // You are Hurt. Get to Cover!
+
   level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
 }
 
 playerHealthRegen() {
   Assert(isPlayer(self));
-
-  //prof_begin( "playerHealthRegen" );
 
   thread healthOverlay();
   oldratio = 1;
@@ -1266,12 +990,10 @@ playerHealthRegen() {
   thread playerHurtcheck();
 
   self.boltHit = false;
-  // self thread boltCheck();
 
   for(;;) {
     wait(0.05);
-    waittillframeend; // if we're on hard, we need to wait until the bolt damage check before we decide what to do
-    //prof_begin( "playerHealthRegen" );
+    waittillframeend;
 
     if(is_coop())
       self thread maps\_coop::player_coop_proc();
@@ -1279,7 +1001,6 @@ playerHealthRegen() {
     if(self.health == self.maxhealth) {
       if(self ent_flag("player_has_red_flashing_overlay")) {
         player_recovers_from_red_flashing();
-        // 				self notify( "hit_again" ); was cutting off the overlay fadeout
       }
 
       lastinvulratio = 1;
@@ -1290,7 +1011,7 @@ playerHealthRegen() {
 
     if(self.health <= 0) {
       showHitLog();
-      //prof_end( "playerHealthRegen" );
+
       return;
     }
 
@@ -1313,11 +1034,6 @@ playerHealthRegen() {
         playerJustGotRedFlashing = true;
       }
     }
-
-    /*
-    if( !wasVeryHurt && veryHurt )
-    	nearAIRushesPlayer();
-    */
 
     if(self.hurtAgain) {
       hurtTime = GetTime();
@@ -1342,7 +1058,6 @@ playerHealthRegen() {
         newHealth = 1.0;
 
       if(newHealth <= 0) {
-        // Player is dead
         return;
       }
 
@@ -1358,15 +1073,12 @@ playerHealthRegen() {
 
     worthyDamageRatio = self.gs.worthyDamageRatio;
 
-    // could tweak for more than 1 guy but 2 guys seem to kill the player well enough
     if(self.attackerCount == 1)
       worthyDamageRatio *= 3;
 
     invulWorthyHealthDrop = oldratio - ratio >= worthyDamageRatio;
 
     if(self.health <= 1) {
-      // if player's health is <= 1, code's player_deathInvulnerableTime has kicked in and the player won't lose health for a while.
-      // set the health to 2 so we can at least detect when they're getting hit.
       self SetNormalHealth(2 / self.maxhealth);
       invulWorthyHealthDrop = true;
 
@@ -1390,7 +1102,7 @@ playerHealthRegen() {
     if(self ent_flag("player_is_invulnerable"))
       continue;
     self ent_flag_set("player_is_invulnerable");
-    level notify("player_becoming_invulnerable"); // because "player_is_invulnerable" notify happens on both set * and * clear
+    level notify("player_becoming_invulnerable");
 
     if(playerJustGotRedFlashing) {
       invulTime = self.gs.invulTime_onShield;
@@ -1406,14 +1118,10 @@ playerHealthRegen() {
 
     self thread playerInvul(invulTime);
   }
-
-  //prof_end( "playerHealthRegen" );
 }
 
 reduceTakeCoverWarnings() {
   Assert(isPlayer(self));
-
-  //prof_begin( "reduceTakeCoverWarnings" );
 
   if(!self take_cover_warnings_enabled()) {
     return;
@@ -1427,7 +1135,6 @@ reduceTakeCoverWarnings() {
     }
   }
 
-  //prof_end( "reduceTakeCoverWarnings" );
 }
 
 DebugTakeCoverWarnings() {
@@ -1437,68 +1144,11 @@ DebugTakeCoverWarnings() {
   }
 }
 
-logHit(newhealth, invulTime) {
-  /* if( !isDefined( level.hitlog ) )
-  {
-  	level.hitlog = [];
-  	thread showHitLog();
-  }
-  	
-  data = spawnStruct();
-  data.regen = false;
-  data.time = GetTime();
-  data.health = newhealth / level.player.maxhealth;
-  data.invulTime = invulTime;
-  	
-  level.hitlog[ level.hitlog.size ] = data;*/
-}
+logHit(newhealth, invulTime) {}
 
-logRegen(newhealth) {
-  /* if( !isDefined( level.hitlog ) )
-  {
-  	level.hitlog = [];
-  	thread showHitLog();
-  }
-  	
-  data = spawnStruct();
-  data.regen = true;
-  data.time = GetTime();
-  data.health = newhealth / level.player.maxhealth;
-  	
-  level.hitlog[ level.hitlog.size ] = data;*/
-}
+logRegen(newhealth) {}
 
-showHitLog() {
-  /* level.player waittill( "death" );
-  	
-  PrintLn( "" );
-  PrintLn( "^3Hit Log:" );
-  	
-  prevhealth = 1;
-  prevtime = 0;
-  for( i = 0; i < level.hitlog.size; i++ )
-  {
-  	timepassed = ( level.hitlog[ i ].time - prevtime ) / 1000;
-  	healthlost = prevhealth - level.hitlog[ i ].health;
-  	PrintLn( "^0[ " + timepassed + " seconds passed ]" );
-  	if( level.hitlog[ i ].regen )
-  	{
-  		PrintLn( "^0Regen at time ^3" + level.hitlog[ i ].time / 1000 + "^0 for ^3" + -1 * healthlost + "^0 damage. Health is now " + level.hitlog[ i ].health );
-  	}
-  	else
-  	{
-  		damage = healthlost;
-  		if( damage == 0 )
-  			damage = "unknown";
-  		PrintLn( "^0Hit at time ^3" + level.hitlog[ i ].time / 1000 + "^0 for ^3" + damage + "^0 damage; invul for ^3" + level.hitlog[ i ].invulTime + "^0 seconds. Health is now " + level.hitlog[ i ].health );
-  	}
-  	
-  	prevtime = level.hitlog[ i ].time;
-  	prevhealth = level.hitlog[ i ].health;
-  }
-  	
-  PrintLn( "" );*/
-}
+showHitLog() {}
 
 playerInvul(timer) {
   Assert(isPlayer(self));
@@ -1522,18 +1172,13 @@ playerInvul(timer) {
 }
 
 default_door_node_flashbang_frequency() {
-  //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors.
-  //Set it to a value between 0 and 1; 0 for never, 1 for always if possible.
-
   if(self.team == "allies")
     self.doorFlashChance = .6;
 
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
-      // hard and veteran
       self.doorFlashChance = .8;
     } else {
-      // normal and easy
       self.doorFlashChance = .6;
     }
   }
@@ -1547,13 +1192,11 @@ grenadeAwareness() {
 
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
-      // hard and fu
       if(RandomInt(100) < 33)
         self.grenadeawareness = 0.2;
       else
         self.grenadeawareness = 0.5;
     } else {
-      // normal
       if(RandomInt(100) < 33)
         self.grenadeawareness = 0;
       else
@@ -1583,7 +1226,7 @@ playerBreathingSound(healthcap) {
     if(self.health <= 0) {
       return;
     }
-    // Player still has a lot of health so no breathing sound
+
     ratio = self.health / self.maxHealth;
     if(ratio > self.gs.healthOverlayCutoff) {
       continue;
@@ -1597,7 +1240,6 @@ healthOverlay() {
   Assert(isPlayer(self));
 
   self endon("noHealthOverlay");
-  //prof_begin( "healthOverlay" );
 
   overlay = NewClientHudElem(self);
   overlay.x = 0;
@@ -1606,7 +1248,6 @@ healthOverlay() {
   if(issplitscreen()) {
     overlay SetShader("splatter_alt_sp", 640, 480 * 2);
 
-    // offset the blood a little so it looks different for each player
     if(self == level.players[0]) {
       overlay.y -= 120;
     }
@@ -1648,74 +1289,29 @@ take_cover_warning_loop() {
   while(IsAlive(self)) {
     self ent_flag_wait("player_has_red_flashing_overlay");
 
-    //prof_begin( "healthOverlay" );
     take_cover_warning();
   }
 }
 
-/*
-overlay_non_flashing_alpha( overlay )
-{
-	self endon( "death" );
-	for( ;; )
-	{
-		do_non_flashing_alpha_when_not_hurt( overlay );
-		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
-	}
-}
-
-do_non_flashing_alpha_when_not_hurt( overlay )
-{
-	level.player_overlay = overlay;
-	level endon( "player_has_red_flashing_overlay" );
-//	dif = 0.95;
-	for( ;; )
-	{
-		// Overlay comes in immediately, but fades out gradually
-		new_alpha = ( 1 - ( self.health * 0.01 ) ) * 0.5;
-		if(new_alpha > overlay.alpha)
-			overlay.alpha = new_alpha;
-		else if( overlay.alpha - 0.025 < new_alpha )
-			overlay.alpha = new_alpha;
-		else
-			overlay.alpha -=0.025;
-		
-		wait( 0.05 );
-	}
-}
-*/
-
 add_hudelm_position_internal(alignY) {
-  //prof_begin( "add_hudelm_position_internal" );
-
   if(level.console)
     self.fontScale = 2;
   else
     self.fontScale = 1.6;
 
-  self.x = 0; // 320;
-  self.y = -36; // 200;
+  self.x = 0;
+  self.y = -36;
   self.alignX = "center";
 
-  /* if( 0 )// if we ever get the chance to localize or find a way to dynamically find how many lines in a string
-  {
-  	if( isDefined( alignY ) )
-  		self.alignY = alignY;
-  	else
-  		self.alignY = "middle";	
-  }
-  else
-  {*/
   self.alignY = "bottom";
-  // }
 
   self.horzAlign = "center";
   self.vertAlign = "middle";
 
   if(!isDefined(self.background))
     return;
-  self.background.x = 0; // 320;
-  self.background.y = -40; // 200;
+  self.background.x = 0;
+  self.background.y = -40;
   self.background.alignX = "center";
   self.background.alignY = "middle";
   self.background.horzAlign = "center";
@@ -1725,8 +1321,6 @@ add_hudelm_position_internal(alignY) {
   else
     self.background SetShader("popmenu_bg", 650, 42);
   self.background.alpha = .5;
-
-  //prof_end( "add_hudelm_position_internal" );
 }
 
 create_warning_elem() {
@@ -1736,8 +1330,7 @@ create_warning_elem() {
   hudelem add_hudelm_position_internal();
   thread destroy_warning_elem_when_hit_again(hudelem);
   hudelem thread destroy_warning_elem_when_mission_failed();
-  // You are Hurt. Get to Cover!
-  //hudelem SetText(&"GAME_GET_TO_COVER" );
+
   hudelem SetText(level.strings["take_cover"].text);
   hudelem.fontscale = 2;
   hudelem.alpha = 1;
@@ -1872,7 +1465,6 @@ should_show_cover_warning() {
   if(self isLinked())
     return false;
 
-  // why get to cover if you're being ignored?
   if(self.ignoreme)
     return false;
 
@@ -1885,17 +1477,12 @@ should_show_cover_warning() {
   if(self.gameskill > 1 && !maps\_load::map_is_early_in_the_game())
     return false;
 
-  // note: takeCoverWarnings is 3 more than the number of warnings left.
-  // this lets it stay away for a while unless we die 3 times in a row without taking cover successfully.
   takeCoverWarnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
   if(takeCoverWarnings <= 3)
     return false;
 
   return true;
 }
-
-// You are Hurt. Get to Cover!
-// &"GAME_GET_TO_COVER";
 take_cover_warning() {
   Assert(isPlayer(self));
 
@@ -1905,9 +1492,7 @@ take_cover_warning() {
   coverWarning = undefined;
 
   if(should_show_cover_warning()) {
-    // get to cover!
     coverWarning = create_warning_elem();
-    // coverWarning may be destroyed at any time if we fail the mission.
   }
 
   stopFlashingBadlyTime = GetTime() + self.gs.longRegenTime;
@@ -1930,9 +1515,7 @@ take_cover_warning() {
 
   fadeFunc(coverWarning, 0, 0.6, true);
 
-  //player_recovers_from_red_flashing();
-
-  wait(0.5); // for fade out
+  wait(0.5);
   self notify("take_cover_done");
   self notify("hit_again");
 }
@@ -1942,7 +1525,6 @@ player_recovers_from_red_flashing() {
 
   self ent_flag_clear("player_has_red_flashing_overlay");
 
-  // recover to the current eq
   if(level.eq_track[level.eq_main_track] == "") {
     maps\_ambient::deactivate_index(level.eq_main_track);
   } else {
@@ -1966,25 +1548,15 @@ healthOverlay_remove(overlay) {
   overlay Destroy();
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: resetSkill()""Summary: Reset the gameskill settings, enabling you to change them.""Module: Gameskill""Example: resetSkill();""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 resetSkill() {
-  waittillframeend; // if we're on the first frame then we want to wait until after _load or animscript has run
+  waittillframeend;
   setskill(true);
 }
 
 init_take_cover_warnings() {
-  // generates "Get to Cover" x number of times when you first get hurt
-  // dvar defaults to - 1
-
   isPreGameplayLevel = level.script == "roadkill" || level.script == "cliffhanger";
 
   if(self GetLocalPlayerProfileData("takeCoverWarnings") == -1 || isPreGameplayLevel) {
-    // takeCoverWarnings is 3 more than the number of warnings we want to occur.
     self SetLocalPlayerProfileData("takeCoverWarnings", 9);
   }
 
@@ -1996,7 +1568,6 @@ increment_take_cover_warnings_on_death() {
   self endon("new_cover_on_death_thread");
   self waittill("death");
 
-  // dont increment if player died to grenades, explosion, etc
   if(!self ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
@@ -2014,7 +1585,7 @@ auto_adjust_difficulty_player_positioner() {
   Assert(isPlayer(self));
 
   org = self.origin;
-  // 	thread debug_message( ".", org, 6 );
+
   wait(5);
   if(self autospot_is_close_to_player(org))
     level.autoAdjust_playerSpots[level.autoAdjust_playerSpots.size] = org;
@@ -2029,7 +1600,7 @@ autospot_is_close_to_player(org) {
 auto_adjust_difficulty_player_movement_check() {
   level.autoAdjust_playerSpots = [];
   level.player.movedRecently = true;
-  wait(1); // for lvl start precaching of debug strings
+  wait(1);
 
   for(;;) {
     level.player thread auto_adjust_difficulty_player_positioner();
@@ -2045,7 +1616,6 @@ auto_adjust_difficulty_player_movement_check() {
       }
       newSpots[newSpots.size] = level.autoAdjust_playerSpots[i];
       level.player.movedRecently = false;
-      // 	thread debug_message( "!", newSpots[ newSpots.size - 1 ], 1 );
     }
 
     level.autoAdjust_playerSpots = newSpots;
@@ -2055,16 +1625,13 @@ auto_adjust_difficulty_player_movement_check() {
 }
 
 auto_adjust_difficulty_track_player_death() {
-  // reduce the difficulty timer when you die
   level.player waittill("death");
   num = GetDvarInt("autodifficulty_playerDeathTimer");
   num -= 60;
   setDvar("autodifficulty_playerDeathTimer", num);
-  // 	scriptPrintln( "script_autodifficulty", "Set deathtimer to " + num );
 }
 
 auto_adjust_difficulty_track_player_shots() {
-  // reduce the "time spent alive" by the time between shots fired if there has been significant time between shots
   lastShotTime = GetTime();
   for(;;) {
     if(level.player attackButtonPressed())
@@ -2072,14 +1639,6 @@ auto_adjust_difficulty_track_player_shots() {
 
     level.timeBetweenShots = GetTime() - lastShotTime;
     wait(0.05);
-    /*
-    if( lastShotTime < 10000 )
-    	continue;
-
-    playerDeathTimer = getcvarint( "playerDeathTimer" );
-    playerDeathTimer = Int( playerDeathTimer - lastShotTime * 0.001 );
-    setcvar( "playerDeathTimer", playerDeathTimer );
-    */
   }
 }
 
@@ -2211,7 +1770,6 @@ hud_debug_add_display(msg, num, isfloat) {
     level.hudDebugNum[level.hudNum] = negativeHud;
   }
 
-  // 	level.hudDebugNum[ level.hudNum ] = hud;
   level.hudNum++;
 }
 
@@ -2259,8 +1817,6 @@ aa_init_stats() {
     return;
   }
 
-  //prof_begin( "aa_init_stats" );
-
   level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
 
   setDvar("aa_player_kills", "0");
@@ -2282,62 +1838,38 @@ aa_init_stats() {
 
   flag_init("aa_main_" + level.script);
   flag_set("aa_main_" + level.script);
-
-  //prof_end( "aa_init_stats" );
 }
 
 command_used(cmd) {
   Assert(isPlayer(self));
 
-  //prof_begin( "command_used" );
-
   binding = GetKeyBinding(cmd);
   if(binding["count"] <= 0) {
-    //prof_end( "command_used" );
     return false;
   }
 
   for(i = 1; i < binding["count"] + 1; i++) {
     if(self buttonPressed(binding["key" + i])) {
-      //prof_end( "command_used" );
       return true;
     }
   }
 
-  //prof_end( "command_used" );
   return false;
 }
 
 aa_time_tracking() {
   if(getDvar("createfx") != "")
     return;
-  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0")
-    return; // shortcut for generating clipmodels gah.
-
-  waittillframeend; // so level.start_point is defined
+  if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
+    return;
+  }
+  waittillframeend;
   for(;;) {
-    //prof_begin( "aa_time_tracking" );
-
-    //aa_add_event_float( "aa_time_tracking", 0.2 );
-
     if(IsGodMode(level.player) || level.start_point != "default" || getDvar("timescale", 1) != "1") {
       if(getDvar("player_cheated") != "1")
         setDvar("player_cheated", 1);
     }
 
-    /*
-    level.sprint_key = GetKeyBinding( "+breath_sprint" );
-    sprinting = false;
-    sprinting = level.player command_used( "+sprint" );
-    if( !sprinting )
-    {
-    	sprinting = level.player command_used( "+breath_sprint" );
-    }
-    if( sprinting )
-    {
-    	aa_add_event_float( "aa_sprint_time", 0.2 );
-    }
-    */
     wait(0.2);
   }
 }
@@ -2378,15 +1910,10 @@ auto_adjust_new_zone(zone) {
 
   flag_wait("auto_adjust_initialized");
 
-  //prof_begin( "auto_adjust_new_zone" );
-
   level.auto_adjust_results[zone] = [];
   level.auto_adjust_flags[zone] = 0;
   flag_wait(zone);
 
-  //prof_begin( "auto_adjust_new_zone" );
-
-  // already processing this zone?
   if(getDvar("aa_zone" + zone) == "") {
     setDvar("aa_zone" + zone, "on");
     level.auto_adjust_flags[zone] = 1;
@@ -2394,7 +1921,6 @@ auto_adjust_new_zone(zone) {
 
     setDvar("start_time" + zone, getDvar("aa_time_tracking"));
 
-    // measure always
     setDvar("starting_player_kills" + zone, getDvar("aa_player_kills"));
     setDvar("starting_deaths" + zone, getDvar("aa_deaths"));
     setDvar("starting_ads_damage_dealt" + zone, getDvar("aa_ads_damage_dealt"));
@@ -2404,19 +1930,15 @@ auto_adjust_new_zone(zone) {
     setDvar("starting_enemy_deaths" + zone, getDvar("aa_enemy_deaths"));
   } else {
     if(getDvar("aa_zone" + zone) == "done") {
-      //prof_end( "auto_adjust_new_zone" );
       return;
     }
   }
 
-  //prof_end( "auto_adjust_new_zone" );
   flag_waitopen(zone);
   auto_adust_zone_complete(zone);
 }
 
 auto_adust_zone_complete(zone) {
-  //prof_begin( "auto_adust_zone_complete" );
-
   setDvar("aa_zone" + zone, "done");
 
   start_time = GetDvarFloat("start_time" + zone);
@@ -2492,7 +2014,6 @@ auto_adust_zone_complete(zone) {
 
   msg += level.script + "/" + zone;
   keys = GetArrayKeys(aa_array);
-  //	array_levelthread( keys, ::aa_print_vals, aa_array );
 
   for(i = 0; i < keys.size; i++) {
     msg = msg + ", " + keys[i] + ": " + aa_array[keys[i]];
@@ -2500,21 +2021,12 @@ auto_adust_zone_complete(zone) {
 
   logString(msg);
   PrintLn("^6" + msg);
-
-  //prof_end( "auto_adust_zone_complete" );
 }
 
 aa_print_vals(key, aa_array) {
   logString(key + ": " + aa_array[key]);
   PrintLn("^6" + key + ": " + aa_array[key]);
 }
-
-/*
-aa_print_vals( key, aa_array, file )
-{
-	FPrintLn( file, key + ": " + aa_array[ key ] );
-}
-*/
 
 aa_update_flags() {}
 
@@ -2552,33 +2064,17 @@ player_did_most_damage() {
 empty_kill_func(type, loc, point) {}
 
 auto_adjust_enemy_died(amount, attacker, type, point) {
-  //prof_begin( "auto_adjust_enemy_died" );
-
-  /*
-  Not worth effecting the speed of the game for one spot in one map in one mode
-  // in case the team got changed.
-  if( !self IsBadGuy() )
-  	return;
-  if( self.type == "civilian" )
-  	return;
-  */
-
   aa_add_event("aa_enemy_deaths", 1);
   if(!isDefined(attacker)) {
-    //prof_end( "auto_adjust_enemy_died" );
     return;
   }
   if(!player_attacker(attacker)) {
-    //prof_end( "auto_adjust_enemy_died" );
     return;
   }
 
-  // defaults to empty_kill_func, for arcademode
   [[level.global_kill_func]](type, self.damagelocation, point);
 
   aa_add_event("aa_player_kills", 1);
-
-  //prof_end( "auto_adjust_enemy_died" );
 }
 
 auto_adjust_enemy_death_detection(amount, attacker, direction_vec, point, type, _, _) {
@@ -2596,21 +2092,17 @@ aa_player_attacks_enemy_with_ads(amount, type, point) {
   aa_add_event("aa_player_damage_dealt", amount);
   AssertEx(GetDvarInt("aa_player_damage_dealt") > 0);
   if(!level.player isADS()) {
-    // defaults to empty_kill_func, for arcademode
     [[level.global_damage_func]](type, self.damagelocation, point);
     return false;
   }
 
   if(!bullet_attack(type)) {
-    // defaults to empty_kill_func, for arcademode
     [[level.global_damage_func]](type, self.damagelocation, point);
     return false;
   }
 
-  // defaults to empty_kill_func, for arcademode
   [[level.global_damage_func_ads]](type, self.damagelocation, point);
 
-  // ads only matters for bullet attacks. Otherwise you could throw a grenade then go ads and get a bunch of ads damage
   aa_add_event("aa_ads_damage_dealt", amount);
   return true;
 }
@@ -2621,15 +2113,7 @@ bullet_attack(type) {
   return type == "MOD_RIFLE_BULLET";
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: add_fractional_data_point( <name> , <frac> , <val> )""Summary: Adds difficulty setting data for a specific system at a specified fraction. The in game difficulty will be blended between this and the other data points.""Module: gameskill""MandatoryArg: <name>: The system being adjusted.""MandatoryArg: <frac>: Which fraction from 0 to 1 that this difficulty value exists at.""MandatoryArg: <val>: The value that this system should be set at when the difficulty is at the specified frac.""Example: 	add_fractional_data_point( "playerGrenadeRangeTime", 1.0, 7500 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 add_fractional_data_point(name, frac, val) {
-  //prof_begin( "add_fractional_data_point" );
-
   if(!isDefined(level.difficultySettings_frac_data_points[name])) {
     level.difficultySettings_frac_data_points[name] = [];
   }
@@ -2641,8 +2125,6 @@ add_fractional_data_point(name, frac, val) {
   AssertEx(frac <= 1, "Tried to set a difficulty data point greater than 1.");
 
   level.difficultySettings_frac_data_points[name][level.difficultySettings_frac_data_points[name].size] = array;
-
-  //prof_end( "add_fractional_data_point" );
 }
 
 coop_with_one_player_downed() {
@@ -2660,6 +2142,5 @@ coop_with_one_player_downed() {
     downed_players++;
   }
 
-  // is only one player downed?	
   return downed_players == 1;
 }

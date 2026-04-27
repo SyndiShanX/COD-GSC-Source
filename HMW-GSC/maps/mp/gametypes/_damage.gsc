@@ -108,7 +108,6 @@ givescoreloss(var_0) {
 }
 
 handlesuicidedeath(var_0, var_1) {
-  // self == victim
   self maps\mp\gametypes\_hud_message::cardKillSplashNotify("killedby", self);
 
   self thread[[level.onxpevent]]("suicide");
@@ -143,7 +142,6 @@ delayedsuicidekick() {
 }
 
 handlefriendlyfiredeath(var_0) {
-  // self == victim
   self maps\mp\gametypes\_hud_message::cardKillSplashNotify("killedby", var_0);
   var_0 maps\mp\gametypes\_hud_message::cardKillSplashNotify("youkilled", self);
 
@@ -226,7 +224,6 @@ incrementkillstreak(var_0, var_1, var_2, var_3) {
 }
 
 handlenormaldeath(var_0, var_1, var_2, var_3, var_4) {
-  // self == victim
   self maps\mp\gametypes\_hud_message::cardKillSplashNotify("killedby", var_1);
   var_1 maps\mp\gametypes\_hud_message::cardKillSplashNotify("youkilled", self);
 
@@ -531,7 +528,7 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   var_29 = var_2 getcurrentweapon();
 
-  var_2 maps\mp\gametypes\_weapons::dropScavengerForDeath(var_1); // must be done before dropWeaponForDeath, since we use some weapon information
+  var_2 maps\mp\gametypes\_weapons::dropScavengerForDeath(var_1);
 
   if(!isDefined(var_2.agentbody))
     var_2 thread[[level.weapondropfunction]](var_1, var_4);
@@ -1632,7 +1629,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   if(isDefined(var_1) && var_1.classname == "script_origin" && isDefined(var_1.type) && var_1.type == "soft_landing")
     return "soft_landing";
 
-  if(isDefined(var_5) && var_5 == "MOD_FALLING" && isDefined(var_2) && var_2 maps\mp\_utility::_hasPerk("specialty_falldamage")) //commando pro perk
+  if(isDefined(var_5) && var_5 == "MOD_FALLING" && isDefined(var_2) && var_2 maps\mp\_utility::_hasPerk("specialty_falldamage"))
     return "soft_landing";
 
   if(var_2 ishardwrireprotected(var_6))
@@ -1851,8 +1848,8 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     if(issubstr(var_5, "MOD_IMPACT") && (var_6 == "m320_mp" || issubstr(var_6, "gl") || issubstr(var_6, "gp25") || var_6 == "h2_semtex_mp")) {
       if(isPlayer(var_1) && var_1 != self && var_1.team != self.team) {
         if(var_6 == "h2_semtex_mp" && isPlayer(var_2)) {
-          var_1 thread maps\mp\gametypes\_hud_message::stucksplashnotify(false); // attacker
-          var_2 thread maps\mp\gametypes\_hud_message::stucksplashnotify(true); // victim
+          var_1 thread maps\mp\gametypes\_hud_message::stucksplashnotify(false);
+          var_2 thread maps\mp\gametypes\_hud_message::stucksplashnotify(true);
         } else {
           maps\mp\gametypes\_gamelogic::setinflictorstat(var_0, var_1, var_6);
         }

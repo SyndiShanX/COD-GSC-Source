@@ -8,20 +8,6 @@
 #include common_scripts\utility;
 
 init() {
-  /*
-  level.lootColors = [];
-  level.lootColors["epic"] = (0.63, 0.2, 0.7) * 1.2;
-  level.lootColors["rare"] = (0, 0.43, 0.76) * 1.2;
-  level.lootColors["common"] = (0.11, 1, 0) * 1.0;
-  level.lootColors["none"] = (1, 1, 0.5);
-  */
-  /*
-  level.lootColors["epic"] = (0.75, 1, 0.73) * 1.0;
-  level.lootColors["rare"] = (0.75, 1, 0.73) * 1.0;
-  level.lootColors["common"] = (0.75, 1, 0.73) * 1.0;
-  level.lootColors["none"] = (1, 1, 0.5);
-  */
-
   precacheString(&"MP_DOLLAR");
 
   level._effect["money"] = loadfx("props/cash_player_drop");
@@ -35,7 +21,6 @@ init() {
 
   level.lootMins["epic"] = 90;
   level.lootMins["rare"] = 70;
-  //level.lootMins["common"] = 95;
 
   level.lootIndices["epic"] = 2;
   level.lootIndices["rare"] = 1;
@@ -176,9 +161,6 @@ updateLootDvars() {
   if(getDvar("scr_loot_rareMin") == "")
     setDvar("scr_loot_rareMin", level.lootMins["rare"]);
 
-  //if( getDvar( "scr_loot_commonMin" ) == "" )
-  //	setDvar( "scr_loot_commonMin", level.lootMins["common"] );
-
   if(getDvar("scr_loot_baseChance") == "")
     setDvar("scr_loot_baseChance", level.lootBaseChance);
 
@@ -195,7 +177,6 @@ updateLootDvars() {
 
     level.lootMins["epic"] = getDvarFloat("scr_loot_epicMin");
     level.lootMins["rare"] = getDvarFloat("scr_loot_rareMin");
-    //level.lootMins["common"] = getDvarFloat( "scr_loot_commonMin" );
 
     level.lootBaseChance = getDvarFloat("scr_loot_baseChance");
     level.lootIdealTime = getDvarFloat("scr_loot_idealTime");
@@ -224,7 +205,7 @@ gotLoot() {
 
   baseChance = level.lootBaseChance;
   idealLootTime = level.lootIdealTime;
-  maxLootChance = 0.50; // 50%chanceMod = min(self.timeSinceLastLoot / idealLootTime, 1);
+  maxLootChance = 0.50;
   chanceMod = chanceMod * chanceMod;
 
   lootChance = baseChance + (maxLootChance - baseChance) * chanceMod;
@@ -294,40 +275,9 @@ giveLoot(victim) {
   return true;
 }
 
-showLootNotify(lootTier) {
-  /*
-  notifyData = spawnStruct();
+showLootNotify(lootTier) {}
 
-  if( lootTier == "epic" )
-  {
-  	notifyData.titleText = "Target of Opportunity!";
-  	notifyData.iconName = "skull_black_plain";
-  	notifyData.iconOverlay = "skull_crosshair_white";
-  }
-  else
-  {
-  	notifyData.titleText = "You've got mail!";
-  }
-  //notifyData.sound = "loot_drop_" + lootTier;
-  notifyData.sound = "mp_last_stand";
-  notifyData.glowColor = (1, 0, 0);
-  notifyData.duration = 3.0;
-
-  thread maps\mp\gametypes\_hud_message::notifyMessage( notifyData );
-  */
-}
-
-playMoneyFx(victim, attacker, sMeansOfDeath) {
-  /*
-  victim endon ( "disconnect" );
-  	
-  origin = victim getTagOrigin( "j_spine4" );
-  victim.fxModel.origin = origin;
-  wait ( 0.05 );
-  */
-  //playFXOnTag( level._effect["money"], victim.fxModel, "tag_origin" );
-  //playFxOnTagForClients	( level._effect["money"], victim.fxModel, "tag_origin", attacker );
-}
+playMoneyFx(victim, attacker, sMeansOfDeath) {}
 
 dropLoot(lootTier, lootName, dropEnt) {
   trace = playerPhysicsTrace(dropEnt.origin + (0, 0, 20), dropEnt.origin - (0, 0, 2000), false, dropEnt);
@@ -352,7 +302,6 @@ dropLoot(lootTier, lootName, dropEnt) {
     self.droppedLootNames[self.droppedLootNames.size] = lootName;
 
   fxEnt = spawn("script_model", dropOrigin);
-  //fxEnt.angles = (-90,0,0);
 
   lootIcon = newClientHudElem(self);
   lootIcon.x = dropOrigin[0];
@@ -361,7 +310,7 @@ dropLoot(lootTier, lootName, dropEnt) {
   lootIcon.alpha = 1;
 
   lootTrigger = spawn("trigger_radius", dropOrigin, 0, 32, 128);
-  //lootTrigger.angles = (-90,0,0);
+
   lootTrigger.fxEnt = fxEnt;
   lootTrigger.icon = lootIcon;
   lootTrigger.owner = self;
@@ -386,7 +335,7 @@ dropLoot(lootTier, lootName, dropEnt) {
       lootIcon setShader("hud_overlay_random", 10, 10);
       lootIcon setWaypoint(true, false);
       lootIcon.alpha = 0.81;
-      //playFxOnTagForClients( level._effect["gears"], fxEnt, "tag_origin", self );
+
       break;
   }
 }
@@ -408,29 +357,9 @@ lootPickupWaiter(lootTier, lootName) {
     if(player != self.owner) {
       continue;
     }
-    //self.owner playLocalSound( "loot_pickup_" + lootTier ); // need better sound
+
     self.owner playLocalSound("mp_last_stand");
 
-    /*
-    switch ( lootTier )
-    {
-    	case "epic":
-    		streakName = getRandomKillstreak( 7 );
-    		self.owner thread [[level.onXPEvent]]( "gear" );
-    		break;
-    	case "rare":
-    		streakName = getRandomKillstreak( 5 );
-    		self.owner thread [[level.onXPEvent]]( "gear" );
-    		break;
-    	default:
-    		streakName = getRandomKillstreak( 3 );
-    		self.owner thread [[level.onXPEvent]]( "money" );
-    		break;
-    }
-
-    self.owner thread randomKillstreakNotify( streakName );
-    self.owner maps\mp\killstreaks\_killstreaks::giveKillstreak( streakName );
-    */
     self.owner pickupLoot(lootTier, lootName);
 
     self.fxEnt delete();
@@ -463,7 +392,7 @@ lootDeleteOnDisconnect() {
   self.owner waittill("disconnect");
 
   self.fxEnt delete();
-  //self.icon destroy(); // code seems to take care of this automatically
+
   self delete();
 }
 

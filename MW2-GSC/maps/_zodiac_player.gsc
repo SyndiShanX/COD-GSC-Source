@@ -13,8 +13,6 @@ main(model, type) {
   build_life(999, 500, 1500);
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
-
-  //build_treadfx();//currently disabled because vehicle type "boat" isn't supported. http://bugzilla.infinityward.net/show_bug.cgi?id=85644
 }
 
 init_local() {}
@@ -53,14 +51,3 @@ setanims() {
 
   return positions;
 }
-/*QUAKED script_vehicle_zodiac_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_zodiac_player::main( "vehicle_zodiac_viewmodel" );
-
-and these lines in your CSV:
-#include,vehicle_zodiac_player
-sound,vehicle_zodiac,vehicle_standard,all_sp
-
-defaultmdl="vehicle_zodiac_viewmodel"default:"vehicletype" "zodiac_player"default:"script_team" "allies"
-*/

@@ -22,7 +22,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -39,7 +39,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -56,7 +56,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -73,7 +73,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -90,7 +90,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -107,7 +107,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -124,7 +124,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -141,7 +141,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -158,7 +158,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -175,7 +175,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;
@@ -192,7 +192,7 @@ create_fogs() {
   ent.blue = 0.65;
   ent.maxOpacity = 0.34;
   ent.transitionTime = 0;
-  // optional
+
   ent.sunred = 0.83;
   ent.sungreen = 0.83;
   ent.sunblue = 0.81;

@@ -7,26 +7,19 @@
 #include maps\_utility;
 #include maps\_hud_util;
 
-/* -=-=-=-=-=-=-=-=-=-=
-
-SP &CO-OP XP/Rank system
-
--=-=-=-=-=-=-=-=-=-=-=- */
-
 init() {
   maps\_hud::init();
 
-  // && 1 was promoted to && 2 && 3!
   precacheString(&"RANK_PLAYER_WAS_PROMOTED_N");
-  // && 1 was promoted to && 2!
+
   precacheString(&"RANK_PLAYER_WAS_PROMOTED");
-  // You've been promoted!
+
   precacheString(&"RANK_PROMOTED");
-  // I
+
   precacheString(&"RANK_ROMANI");
-  // II
+
   precacheString(&"RANK_ROMANII");
-  // + precachestring(&"SCRIPT_PLUS");
+
   precacheshader("line_horizontal");
   precacheshader("line_vertical");
   precacheshader("gradient_fadein");
@@ -35,9 +28,6 @@ init() {
   precachemenu("sp_eog_summary");
 
   level.maxRank = int(tableLookup("sp/rankTable.csv", 0, "maxrank", 1));
-
-  /*	for( rId = 0; rId <= level.maxRank; rId++ )
-  		precacheShader( tableLookup( "sp/rankIconTable.csv", 0, rId, 1 ) );*/
 
   rankId = 0;
   rankName = tableLookup("sp/ranktable.csv", 0, rankId, 1);
@@ -90,7 +80,6 @@ xp_player_init() {
   self.hud_rankscroreupdate.color = (1, 1, 0.65);
   self.hud_rankscroreupdate fontPulseInit();
 
-  // XP BAR
   self.hud_xpbar = xp_bar_client_elem(self);
   self xpbar_update();
 }
@@ -104,7 +93,7 @@ xp_bar_client_elem(client) {
   hudelem.vertAlign = "bottom_adjustable";
   hudelem.alignX = "left";
   hudelem.alignY = "bottom";
-  hudelem setshader("gradient_fadein", get_xpbarwidth(), 4); // gradient_fadein
+  hudelem setshader("gradient_fadein", get_xpbarwidth(), 4);
   hudelem.color = (1, 0.8, 0.4);
   hudelem.alpha = 0.65;
   hudelem.foreground = true;
@@ -112,15 +101,14 @@ xp_bar_client_elem(client) {
 }
 
 hud_width_format() {
-  // screen formatting
   if(getDvar("hiDef") == "1" || getDvar("wideScreen") == "1") {
     if(isSplitscreen())
-      return 966; // customized to match hud's xpbar background
+      return 966;
     else
       return 720;
   } else {
     if(isSplitscreen())
-      return 726; // customized to match hud's xpbar background
+      return 726;
     else
       return 540;
   }
@@ -153,7 +141,7 @@ get_xpbarwidth() {
 xp_setup() {
   level.xpScale = 1;
   if(level.console) {
-    level.xpScale = 1; // getDvarInt( "scr_xpscale" );
+    level.xpScale = 1;
   }
 
   registerScoreInfo("kill", 10);
@@ -165,40 +153,36 @@ xp_setup() {
 
 giveXP_think() {
   self waittill("death", attacker, type, weapon);
-  // split for recursive call
+
   self giveXP_helper(attacker);
 }
 
 giveXP_helper(attacker) {
-  // if AI removed by script/game, no xp to player
   if(!isDefined(attacker)) {
     return;
   }
-  // if player is last to kill, give player kill points	
+
   if(isPlayer(attacker)) {
     attacker thread giveXp("kill");
     return;
   }
 
-  // no xp if enemy was finished off by other enemies
   if(isAI(attacker) && attacker isBadGuy()) {
     return;
   }
-  // if enemy shot by player was killed by destructibles
+
   if(is_special_targetname_attacker(attacker)) {
     if(isDefined(attacker.attacker))
       self thread giveXP_helper(attacker.attacker);
     return;
   }
 
-  // if enemy shot by player was killed by natural causes, no xp
   if(!isPlayer(attacker) && !isAI(attacker)) {
     return;
   }
-  // if enemy shot by player was killed by friendly, give assist
+
   if(isDefined(self.attacker_list) && self.attacker_list.size > 0) {
     for(i = 0; i < self.attacker_list.size; i++) {
-      // if attacker is player and not the last to kill, give player assist points
       if(isPlayer(self.attacker_list[i]) && self.attacker_list[i] != attacker)
         self.attacker_list[i] thread giveXp("assist");
     }
@@ -243,8 +227,6 @@ xp_took_damage(damage, attacker, direction_vec, point, type, modelName, tagName)
   self.attacker_list[0] = attacker;
   self.last_attacked = gettime();
 }
-
-// used by _utility.gsc, edit with cre
 updatePlayerScore(type, value) {
   self notify("update_xp");
   self endon("update_xp");
@@ -252,8 +234,6 @@ updatePlayerScore(type, value) {
   if(getDvar("xp_enable", "0") != "1") {
     return;
   }
-  //assertex ( isDefined( level.scoreInfo ), "Trying to give player XP when XP feature is not enabled, set dvar xp_enable to 1." );
-  //assertex ( isDefined( type ), "First string parameter <type> is undefined or missing, you must label this XP reward." );
 
   if(!isDefined(value)) {
     if(isDefined(level.scoreInfo[type]))
@@ -268,7 +248,6 @@ updatePlayerScore(type, value) {
     self.hud_rankscroreupdate.color = (1, 1, 0.5);
 
   if(type == "assist") {
-    // assist points can never add up over kill points
     if(value > getScoreInfoValue("kill"))
       value = getScoreInfoValue("kill");
 
@@ -276,8 +255,6 @@ updatePlayerScore(type, value) {
   }
 
   self.rankUpdateTotal += value;
-
-  // + self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
 
   self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 0.65;
@@ -287,7 +264,6 @@ updatePlayerScore(type, value) {
   self.hud_rankscroreupdate fadeOverTime(0.75);
   self.hud_rankscroreupdate.alpha = 0;
 
-  // set xp dvar for hud menu to print
   self.summary["summary"]["score"] += self.rankUpdateTotal;
   self.summary["summary"]["xp"] += self.rankUpdateTotal;
   self.summary["rankxp"] += self.rankUpdateTotal;
@@ -311,7 +287,7 @@ updatePlayerScore(type, value) {
 fontPulseInit() {
   self.baseFontScale = self.fontScale;
   self.maxFontScale = self.fontScale * 2;
-  //self.moveUpSpeed = 1.25;
+
   self.inFrames = 3;
   self.outFrames = 5;
 }
@@ -321,7 +297,6 @@ fontPulse(player) {
   self endon("fontPulse");
 
   scaleRange = self.maxFontScale - self.baseFontScale;
-  //self thread fontMoveup( -60 );
 
   while(self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
@@ -333,19 +308,6 @@ fontPulse(player) {
     wait 0.05;
   }
 }
-
-/*
-fontMoveup( start )
-{
-	self endon( "fontPulse" );
-	self.y = start;
-
-	while( abs( start ) - abs( self.y ) < 60 )
-	{
-		self.y = self.y - self.moveUpSpeed;
-		wait 0.05;
-	}
-}*/
 
 updateRank() {
   newRankId = self getRank();
@@ -382,7 +344,6 @@ updateRankAnnounceHUD() {
 
   notifyData = spawnStruct();
 
-  // You've been promoted!
   notifyData.titleText = &"RANK_PROMOTED";
   notifyData.iconName = self getRankInfoIcon(self.summary["rank"]);
   notifyData.sound = "sp_level_up";
@@ -393,12 +354,12 @@ updateRankAnnounceHUD() {
 
   if(subRank == 2) {
     notifyData.textLabel = newRankName;
-    // I
+
     notifyData.notifyText = &"RANK_ROMANI";
     notifyData.textIsString = true;
   } else if(subRank == 3) {
     notifyData.textLabel = newRankName;
-    // II
+
     notifyData.notifyText = &"RANK_ROMANII";
     notifyData.textIsString = true;
   } else {
@@ -451,7 +412,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      // string not found for
+
       self.notifyTitle.label = &"";
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
@@ -467,7 +428,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      // string not found for
+
       self.notifyText.label = &"";
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
@@ -486,7 +447,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.text2Label))
       self.notifyText2.label = notifyData.text2Label;
     else
-      // string not found for
+
       self.notifyText2.label = &"";
 
     self.notifyText2 setText(notifyData.notifyText2);
@@ -539,8 +500,6 @@ resetOnCancel() {
   self.notifyIcon.alpha = 0;
   self.doingNotify = false;
 }
-
-// waits for waitTime, plus any time required to let flashbangs go away.
 waitRequireVisibility(waitTime) {
   interval = .05;
 
@@ -563,8 +522,6 @@ canReadText() {
 isFlashbanged() {
   return isDefined(self.flashEndTime) && gettime() < self.flashEndTime;
 }
-
-// ============== helpers ===============
 
 registerScoreInfo(type, value) {
   level.scoreInfo[type]["value"] = value;

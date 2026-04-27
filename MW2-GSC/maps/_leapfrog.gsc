@@ -3,32 +3,18 @@
  * Script: maps\_leapfrog.gsc
 ********************************************************/
 
-/**** LEAPFROG SYSTEM****
-
-	Thread maps\_leapfrog::leapfrog() on any AI that uses a chain of nodes.
-	Make sure to check the NOT_CHAIN check box on each node in the chain to allow chains to merge or loop.
-	You need at least two chains for this to look good.
-	level.leap_delay_min and max determines how fast they try to advance.
-	set script_delay on a node to have the ai use a delay instead of waiting for a leap notify.
-	script_delay = 0 will make them run past that node before going to the next one.
-
-*************************/
-
 #include maps\_utility;
 
 main() {
-  //	Set delays to tweak how fast the advance should be.
   level.leap_delay_min = 6;
   level.leap_delay_max = 14;
   level.leap_delay_override = false;
 
-  // there will never be more ai on one leap node then what this is set to.
   level.leapfrog_max_node_ai = 6;
 
   level.leap_node_array = [];
   level.leapfrog_random_int = randomint(5);
 
-  // lower threat threatbias group for when leaping.
   createthreatbiasgroup("leapfrog");
   setthreatbiasagainstall("leapfrog", -200);
 
@@ -44,7 +30,6 @@ leapfrog_masterthread() {
 
     level.leap_delay_override = false;
 
-    // used to make ai take the same fork in a path when script_delay is set.
     level.leapfrog_random_int = randomint(5);
 
     node_arr = [];
@@ -67,18 +52,16 @@ leapfrog_masterthread() {
 
     node = node_arr[high_weight][randomint(node_arr[high_weight].size)];
 
-    assert(isDefined(node.target)); // there should always be a new node or it shouldn't be in the array.
+    assert(isDefined(node.target));
 
     node_arr = getnodearray(node.target, "targetname");
     next_node = node_arr[randomint(node_arr.size)];
 
-    // reset future ai count
     if(isDefined(next_node.leapfrog_ai_count))
       next_node.leapfrog_future_ai_count = next_node.leapfrog_ai_count;
     else
       next_node.leapfrog_future_ai_count = 0;
 
-    // increase the weight of all none chosen nodes.
     array_thread(level.leap_node_array, ::increment_leap_weight, node);
 
     new_weight = int(node.leap_weight * -.25);
@@ -99,7 +82,7 @@ increment_leap_weight(node) {
   }
   diff_weight = node.leap_weight - self.leap_weight;
 
-  self.leap_weight += (int(diff_weight * 0.5) + 1); // old .75;
+  self.leap_weight += (int(diff_weight * 0.5) + 1);
 }
 
 leapfrog() {
@@ -107,7 +90,6 @@ leapfrog() {
   self endon("stop_leapfrog");
   self notify("stop_going_to_node");
 
-  // get first node
   node_arr = getnodearray(self.target, "targetname");
   node = node_arr[randomint(node_arr.size)];
 
@@ -125,7 +107,6 @@ leapfrog() {
 
     self waittill("goal");
 
-    // Notify the node and pass the guy. Might be good for something
     node notify("trigger", self);
 
     self.maxsightdistsqrd = old_maxsightdistsqrd;
@@ -157,16 +138,15 @@ leapfrog() {
       if(next_node.leapfrog_future_ai_count > max_node_ai) {
         level.leap_delay_override = true;
         if(isDefined(next_node.leap_weight)) {
-          next_node.leap_weight += 1; // make the full node more likely to leap.
+          next_node.leap_weight += 1;
         }
-        next_node = node; // stay on old node.
+        next_node = node;
       }
     }
 
     node = next_node;
   }
 
-  // notify level and pass the guy that reached his final leapfrog node.
   level notify("leapfrog_completed", self);
 }
 
@@ -218,8 +198,6 @@ remove_leap_node(node) {
 
   level.leap_node_array = array_remove(level.leap_node_array, node);
 }
-
-/* debug stuff */
 
 debug_leap_node() {
   if(isDefined(self.debug_leapnode))

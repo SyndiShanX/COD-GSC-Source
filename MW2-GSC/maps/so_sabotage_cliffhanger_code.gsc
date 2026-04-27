@@ -11,7 +11,6 @@
 #include maps\_vehicle;
 #include maps\_blizzard;
 
-// --------------------------------------------------------------------------------- flags_init() {
 flag_init("challenge_start");
 flag_init("sabotage_success");
 flag_init("explosives_planted");
@@ -60,41 +59,32 @@ spawn_funcs() {
 }
 
 cliffhanger_dialogue() {
-  // INTRO
-  //You'll be like a ghost in this blizzard, so the guards won’t see you until you’re very close.	
   level.scr_radio["cliff_pri_likeaghost"] = "cliff_pri_likeaghost";
-  //Keep an eye on your heart beat sensor, good luck.
+
   level.scr_radio["cliff_pri_keepeyeonheart"] = "cliff_pri_keepeyeonheart";
 
-  // TRUCK
-  //PRICE: The truck is coming back.
   level.scr_radio["cliff_pri_truckcomingback"] = "cliff_pri_truckcomingback";
-  //PRICE: The truck is coming.
+
   level.scr_radio["cliff_pri_truckiscoming"] = "cliff_pri_truckiscoming";
-  //Heads up, the truck just stopped.	
+
   level.scr_radio["cliff_pri_headsup"] = "cliff_pri_headsup";
-  //Four tangos just got out and are looking around.	
+
   level.scr_radio["cliff_pri_lookingaround"] = "cliff_pri_lookingaround";
 
-  // STEALTH BROKEN
-  //Take cover! They're on to you!	
   level.scr_radio["cliff_pri_takecover"] = "cliff_pri_takecover";
-  //You've been spotted take cover!	
+
   level.scr_radio["cliff_pri_beenspotted"] = "cliff_pri_beenspotted";
-  //Get out of there they've found you!	
+
   level.scr_radio["cliff_pri_foundyou"] = "cliff_pri_foundyou";
-  //Heads up! I see tangos coming from multiple directions!	
+
   level.scr_radio["cliff_pri_multipledirections"] = "cliff_pri_multipledirections";
 
-  // STEALTH FAILURE
-  //This is easier when you don't alert them.	
   level.scr_radio["cliff_pri_dontalertthem"] = "cliff_pri_dontalertthem";
-  //That was sloppy.	
+
   level.scr_radio["cliff_pri_sloppy"] = "cliff_pri_sloppy";
-  //There is a reason we brought silencers. 	
+
   level.scr_radio["cliff_pri_silencers"] = "cliff_pri_silencers";
 
-  //SILENCER ADVICE ---- //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
   level.scr_radio["cliff_pri_attractattn"] = "cliff_pri_attractattn";
 
   level.stealth_broken_time = gettime();
@@ -105,16 +95,12 @@ cliffhanger_dialogue() {
 
   wait 4;
 
-  //You'll be like a ghost in this blizzard, so the guards won’t see you until you’re very close.	
   radio_dialogue("cliff_pri_likeaghost");
 
   wait .35;
 
-  //Keep an eye on your heart beat sensor, good luck.
   radio_dialogue("cliff_pri_keepeyeonheart");
 }
-
-// --------------------------------------------------------------------------------- camp_leaner() {
 node = getstruct(self.target, "targetname");
 node stealth_ai_idle_and_react(self, "lean_balcony", "lean_react");
 }
@@ -151,7 +137,7 @@ tent_1_crate_patroller() {
       break;
     }
   }
-  // switch him back to regular patrol anims as he heads inside
+
   self.patrol_walk_anim = undefined;
   self.patrol_walk_twitch = undefined;
   self.patrol_scriptedanim = undefined;
@@ -194,8 +180,6 @@ reduce_footstep_detect_dist() {
   self.footstepDetectDist = 90;
   self.footstepDetectDistSprint = 90;
 }
-
-// --------------------------------------------------------------------------------- stealth_settings() {
 stealth_set_default_stealth_function("cliffhanger", ::stealth_cliffhanger_clifftop);
 
 ai_event = [];
@@ -250,8 +234,6 @@ alert_duration[0] = 1;
 alert_duration[1] = 1;
 alert_duration[2] = 1;
 alert_duration[3] = 0.75;
-
-// easy and normal have 2 alert levels so the above times are effectively doubled
 stealth_alert_level_duration(alert_duration[level.gameskill]);
 
 stealth_ai_event_dist_custom(ai_event);
@@ -288,7 +270,7 @@ stealth_cliffhanger_clifftop() {
       self stealth_plugin_corpse();
       self stealth_plugin_event_all();
       self.baseaccuracy = 1;
-      self.fovcosine = .76; // for the 2nd group -z
+      self.fovcosine = .76;
       self.fovcosinebusy = .1;
 
       self maps\cliffhanger_stealth::init_cliffhanger_cold_patrol_anims();
@@ -321,9 +303,6 @@ clifftop_prespotted_func() {
 
 dialog_stealth_spotted() {
   level endon("special_op_terminated");
-  //Take cover! They're on to you!	
-  //You've been spotted take cover!	
-  //Get out of there they've found you!	
 
   failure = [];
   failure[failure.size] = "cliff_pri_takecover";
@@ -351,9 +330,6 @@ dialog_stealth_spotted() {
 
 dialog_stealth_failure() {
   level endon("special_op_terminated");
-  //This is easier when you don't alert them.	
-  //There is a reason we brought silencers. 	
-  //That was sloppy.	
 
   failure = [];
   failure[failure.size] = "cliff_pri_dontalertthem";
@@ -398,15 +374,13 @@ dialog_unsilenced_weapons() {
     if(issubstr(current_weapon, "silence")) {
       continue;
     }
-    //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+
     thread radio_dialogue("cliff_pri_attractattn");
     break;
   }
 
   level notify("nonsilenced_weapon_pickup");
 }
-
-// --------------------------------------------------------------------------------- so_stealth_music_control() {
 level endon("special_op_terminated");
 level endon("stop_stealth_music");
 while(1) {
@@ -423,34 +397,10 @@ while(1) {
 
 stealth_music_hidden_loop() {
   music_loop("so_sabotage_cliffhanger_stealth_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-  	cliffhanger_stealth_music_TIME = 175;
-  	level endon( "_stealth_spotted" );
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_sabotage_cliffhanger_stealth_music" );
-  		wait cliffhanger_stealth_music_TIME;
-  		wait 10;
-  	}*/
 }
-
-// NOTE: This function fails to loop due to _stealth_spotted being notified everytime a new enemy sees a player.
 stealth_music_busted_loop() {
   music_loop("so_sabotage_cliffhanger_busted_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-  	cliffhanger_stealth_busted_music_TIME = 60;
-  	level endon( "_stealth_spotted" );
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_sabotage_cliffhanger_busted_music" );
-  		wait cliffhanger_stealth_busted_music_TIME;
-  		wait 3;
-  	}*/
 }
-
-// --------------------------------------------------------------------------------- start_truck_patrol() {
 array_thread(getEntArray("truck_guys", "script_noteworthy"), ::add_spawn_function, maps\cliffhanger_stealth::base_truck_guys_think);
 
 flag_wait("start_truck_patrol");
@@ -515,12 +465,9 @@ waittill_player_in_range(player) {
 }
 
 truck_headlights() {
-  //level.truck_patrol maps\_vehicle::lights_on( "headlights" );
   playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_RIGHT_FRONT");
   playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "TAG_LIGHT_LEFT_FRONT");
-  //level.truck_patrol maps\_vehicle::lights_on( "brakelights" );
 
-  //taillights
   playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_LEFT_TAIL");
   playFXOnTag(level._effect["car_taillight_uaz_l"], self, "TAG_LIGHT_RIGHT_TAIL");
 
@@ -548,10 +495,8 @@ dialog_truck_coming() {
     truck_coming = within_fov(self.origin, self.angles, self.close_player.origin, Cos(45));
     if(truck_coming) {
       if(!first_time && cointoss()) {
-        //PRICE: The truck is coming back.
         radio_dialogue("cliff_pri_truckcomingback");
       } else {
-        //PRICE: The truck is coming.
         radio_dialogue("cliff_pri_truckiscoming");
       }
       first_time = false;
@@ -584,22 +529,18 @@ dialog_jeep_stopped() {
   if(flag("_stealth_spotted")) {
     return;
   }
-  //Heads up, the truck just stopped.	
+
   radio_dialogue("cliff_pri_headsup");
 
   if(flag("_stealth_spotted")) {
     return;
   }
-  //Four tangos just got out and are looking around.	
+
   radio_dialogue("cliff_pri_lookingaround");
 }
-
-// --------------------------------------------------------------------------------- setup_explosives() {
 level.plant_targets = [];
 
 plant_targets = getEntArray("explosive_obj_model", "script_noteworthy");
-
-// hide everything first, will show only selected targets
 foreach(obj_model in plant_targets) {
   obj_model hide();
   planted_model = getent(obj_model.target, "targetname");
@@ -625,29 +566,26 @@ for(i = 0; i < level.plant_targets.size; i++)
 }
 
 setup_explosive() {
-  // self is the explosive_obj_model script model that glows
-  // struct is the container of the explosive info related to self
   ID = level.plant_targets.size;
   planted_model = getent(self.target, "targetname");
   planted_model hide();
 
   struct = spawnStruct();
   struct.obj_model = self;
-  struct.objective_id = int(strTok(self.targetname, "_")[1]); // an int in string form
+  struct.objective_id = int(strTok(self.targetname, "_")[1]);
   struct.planted_model = planted_model;
   struct.origin = self.origin;
   struct.plant_flag = "explosive_" + ID;
   struct.id = ID;
   struct.planted = false;
 
-  struct.planted_model.health = 100; // using model since ent_flag_wait was giving it crap about its not alive...
+  struct.planted_model.health = 100;
 
   struct.planted_model ent_flag_init(struct.plant_flag);
   level.plant_targets[level.plant_targets.size] = struct;
 }
 
 explosive_think(exp_struct) {
-  // self is the data container of this explosive
   self thread threeD_objective_hint();
 
   self.obj_model MakeUsable();
@@ -663,7 +601,6 @@ explosive_think(exp_struct) {
   self.planted_model thread maps\_c4::playC4Effects();
   self.planted_model thread play_sound_on_entity("detpack_plant");
 
-  // planted!
   self.planted = true;
   self.planted_model ent_flag_set(self.plant_flag);
   Objective_AdditionalPosition(1, self.id, (0, 0, 0));
@@ -688,7 +625,6 @@ explosives_planted_monitor() {
     level waittill("an_explosive_planted");
   }
 
-  // set new objective
   Objective_State(1, "done");
 
   outside_obj = getstruct("obj_outside_compound", "script_noteworthy");
@@ -697,8 +633,6 @@ explosives_planted_monitor() {
 
   trigger_on("player_outside_compound", "script_noteworthy");
 }
-
-// --------------------------------------------------------------------------------- wind_blown_flag_think() {
 animname = "flag_square";
 if(isDefined(self.script_noteworthy))
   animname = self.script_noteworthy;
@@ -723,22 +657,14 @@ flag_waves() {
     wait(RandomFloatRange(0.3, 0.7));
   }
 }
-
-// --------------------------------------------------------------------------------- force_players_prone() {
 if(!is_coop()) {
   return;
 }
-foreach(player in level.players) {
-  //		player AllowStand( false );
-  //		player AllowCrouch( false );
-}
+foreach(player in level.players) {}
 
 wait 0.5;
 
-foreach(player in level.players) {
-  //		player AllowStand( true );
-  //		player AllowCrouch( true );
-}
+foreach(player in level.players) {}
 }
 
 blizzard_control() {
@@ -749,8 +675,6 @@ blizzard_control() {
 threeD_objective_hint() {
   self.planted_model ent_flag_wait(self.plant_flag);
 }
-
-// --------------------------------------------------------------------------------- type_spawners_special() {
 special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
 test = 0;
 if(!special_case)
@@ -761,7 +685,6 @@ return special_case && original_case;
 }
 
 type_vehicle_special() {
-  // keep all collmaps
   if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap")
     return false;
 
@@ -776,5 +699,3 @@ type_vehicle_special() {
 
   return special_case && special_case2 && original_case;
 }
-
-// ---------------------------------------------------------------------------------

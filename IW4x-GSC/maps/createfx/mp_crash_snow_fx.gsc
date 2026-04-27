@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 101
   ent = createOneshotEffect("battlefield_smokebank_S");
   ent.v["origin"] = (591.801, 506.885, 143.693);
   ent.v["angles"] = (270, 0, 0);

@@ -22,7 +22,6 @@ processLobbyScoreboards() {
       winner = "axis";
 
     if(winner == "tied") {
-      // build both, assign type to your team
       buildScoreboardType("allies");
       buildScoreboardType("axis");
 
@@ -33,14 +32,12 @@ processLobbyScoreboards() {
           player setPlayerData("round", "scoreboardType", player.pers["team"]);
       }
     } else {
-      // build just winner, assign type to winner
       buildScoreboardType(winner);
 
       foreach(player in level.players)
       player setPlayerData("round", "scoreboardType", winner);
     }
-  } else // not teambased
-  {
+  } else {
     buildScoreboardType("neutral");
 
     foreach(player in level.players)
@@ -48,15 +45,13 @@ processLobbyScoreboards() {
   }
 
   foreach(player in level.players) {
-    // TODO: convert this to round stats
     player setClientDvars("player_summary_xp", player.pers["summary"]["xp"], "player_summary_score", player.pers["summary"]["score"], "player_summary_challenge", player.pers["summary"]["challenge"], "player_summary_match", player.pers["summary"]["match"], "player_summary_misc", player.pers["summary"]["misc"]);
   }
 }
 
 setPlayerScoreboardInfo() {
   scoreboardPlayerCount = getClientMatchData("scoreboardPlayerCount");
-  if(scoreboardPlayerCount <= 24) //MaxPlayers
-  {
+  if(scoreboardPlayerCount <= 24) {
     setClientMatchData("players", self.clientMatchDataId, "score", self.pers["score"]);
     println("Scoreboard: [" + self.name + "(" + self.clientMatchDataId + ")][score]: " + self.pers["score"]);
 

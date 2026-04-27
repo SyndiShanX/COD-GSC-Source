@@ -10,8 +10,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_backlot");
 
-  //setExpFog(500, 2200, 0.81, 0.75, 0.63, 1.0, 0);
-  //VisionSetNaked( "mp_backlot" );
   ambientPlay("ambient_backlot_ext");
 
   game["attackers"] = "axis";

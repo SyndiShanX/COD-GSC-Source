@@ -7,7 +7,6 @@
 #include maps\mp\_utility;
 
 main() {
-  //	thread windController();
   level.inc = 0;
 
   array_levelthread(getEntArray("wire", "targetname"), ::wireWander);
@@ -61,11 +60,6 @@ windController() {
 }
 
 shutterWanderLeft(shutter, windDirection) {
-  //	println ("shutter angles ", shutter.angles[1]);
-  //	assert (shutter.angles[1] >= shutter.startYaw);
-  //	assert (shutter.angles[1] < shutter.startYaw + 180);
-
-  //	println ("Wind + ", level.inc);
   level.inc++;
   level endon("wind blows");
 
@@ -93,10 +87,6 @@ shutterWanderLeft(shutter, windDirection) {
     newTime = dif * 0.02 + randomfloat(2);
     if(newTime < 0.3)
       newTime = 0.3;
-    //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
-
-    //		assert (newYaw >= shutter.startYaw);
-    //		assert (newYaw < shutter.startYaw + 179);
 
     shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
@@ -104,11 +94,6 @@ shutterWanderLeft(shutter, windDirection) {
 }
 
 shutterWanderRight(shutter, windDirection) {
-  //	println ("shutter angles ", shutter.angles[1]);
-  //	assert (shutter.angles[1] >= shutter.startYaw);
-  //	assert (shutter.angles[1] < shutter.startYaw + 180);
-
-  //	println ("Wind + ", level.inc);
   level.inc++;
   level endon("wind blows");
 
@@ -136,10 +121,6 @@ shutterWanderRight(shutter, windDirection) {
     newTime = dif * 0.02 + randomfloat(2);
     if(newTime < 0.3)
       newTime = 0.3;
-    //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
-
-    //		assert (newYaw >= shutter.startYaw);
-    //		assert (newYaw < shutter.startYaw + 179);
 
     shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
@@ -154,7 +135,7 @@ wireWander(wire) {
   angles = vectortoangles(org1 - org2);
   ent = spawn("script_model", (0, 0, 0));
   ent.origin = vector_multiply(org1, 0.5) + vector_multiply(org2, 0.5);
-  //	ent setmodel ("temp");
+
   ent.angles = angles;
   wire linkto(ent);
   rottimer = 2;

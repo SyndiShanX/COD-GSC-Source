@@ -49,238 +49,120 @@
 #using scripts\shared\vehicleriders_shared;
 #namespace cp_mi_eth_prologue;
 
-function setup_rex_starts() {
-  // Unsupported VM revision (1B).
-}
+function setup_rex_starts() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function function_7bf018c5() {
-  // Unsupported VM revision (1B).
-}
+function function_7bf018c5() {}
 
-function level_setup() {
-  // Unsupported VM revision (1B).
-}
+function level_setup() {}
 
-function init_flags() {
-  // Unsupported VM revision (1B).
-}
+function init_flags() {}
 
-function on_player_connect() {
-  // Unsupported VM revision (1B).
-}
+function on_player_connect() {}
 
-function on_player_spawned() {
-  // Unsupported VM revision (1B).
-}
+function on_player_spawned() {}
 
-function on_player_loadout() {
-  // Unsupported VM revision (1B).
-}
+function on_player_loadout() {}
 
-function function_3fe38b8a() {
-  // Unsupported VM revision (1B).
-}
+function function_3fe38b8a() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function precache() {
-  // Unsupported VM revision (1B).
-}
+function precache() {}
 
-function setup_skiptos() {
-  // Unsupported VM revision (1B).
-}
+function setup_skiptos() {}
 
-function skipto_air_traffic_controller_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_air_traffic_controller_init() {}
 
-function skipto_air_traffic_controller_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_air_traffic_controller_complete() {}
 
-function skipto_nrc_knocking_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_nrc_knocking_init() {}
 
-function skipto_nrc_knocking_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_nrc_knocking_complete() {}
 
-function skipto_blend_in_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_blend_in_init() {}
 
-function skipto_blend_in_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_blend_in_complete() {}
 
-function skipto_take_out_guards_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_take_out_guards_init() {}
 
-function skipto_take_out_guards_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_take_out_guards_complete() {}
 
-function skipto_security_camera_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_security_camera_init() {}
 
-function skipto_security_camera_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_security_camera_complete() {}
 
-function skipto_hostage_1_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_hostage_1_init() {}
 
-function skipto_hostage_1_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_hostage_1_complete() {}
 
-function skipto_prison_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_prison_init() {}
 
-function skipto_prison_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_prison_complete() {}
 
-function skipto_security_desk_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_security_desk_init() {}
 
-function skipto_security_desk_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_security_desk_complete() {}
 
-function skipto_lift_escape_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_lift_escape_init() {}
 
-function skipto_lift_escape_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_lift_escape_complete() {}
 
-function skipto_intro_cyber_soldiers_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_intro_cyber_soldiers_init() {}
 
-function skipto_intro_cyber_soldiers_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_intro_cyber_soldiers_complete() {}
 
-function skipto_hangar_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_hangar_init() {}
 
-function skipto_hangar_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_hangar_complete() {}
 
-function skipto_vtol_collapse_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_vtol_collapse_init() {}
 
-function skipto_vtol_collapse_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_vtol_collapse_complete() {}
 
-function skipto_jeep_alley_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_jeep_alley_init() {}
 
-function skipto_jeep_alley_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_jeep_alley_complete() {}
 
-function skipto_bridge_battle_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_bridge_battle_init() {}
 
-function skipto_bridge_battle_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_bridge_battle_complete() {}
 
-function skipto_dark_battle_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_dark_battle_init() {}
 
-function skipto_dark_battle_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_dark_battle_complete() {}
 
-function skipto_vtol_tackle_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_vtol_tackle_init() {}
 
-function skipto_vtol_tackle_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_vtol_tackle_complete() {}
 
-function skipto_robot_horde_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_robot_horde_init() {}
 
-function skipto_robot_horde_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_robot_horde_complete() {}
 
-function skipto_robot_defend_init() {
-  // Unsupported VM revision (1B).
-}
+function skipto_robot_defend_init() {}
 
-function function_b5502f69() {
-  // Unsupported VM revision (1B).
-}
+function function_b5502f69() {}
 
-function skipto_robot_defend_complete() {
-  // Unsupported VM revision (1B).
-}
+function skipto_robot_defend_complete() {}
 
-function skipto_message() {
-  // Unsupported VM revision (1B).
-}
+function skipto_message() {}
 
-function init_hendricks() {
-  // Unsupported VM revision (1B).
-}
+function init_hendricks() {}
 
-function init_minister() {
-  // Unsupported VM revision (1B).
-}
+function init_minister() {}
 
-function init_khalil() {
-  // Unsupported VM revision (1B).
-}
+function init_khalil() {}
 
-function deletegroupaddspawners() {
-  // Unsupported VM revision (1B).
-}
+function deletegroupaddspawners() {}
 
-function deletegroupadd() {
-  // Unsupported VM revision (1B).
-}
+function deletegroupadd() {}
 
-function deletegroupdelete() {
-  // Unsupported VM revision (1B).
-}
+function deletegroupdelete() {}
 
-function assign_kill_group() {
-  // Unsupported VM revision (1B).
-}
+function assign_kill_group() {}
 
-function function_4d4f1d4f() {
-  // Unsupported VM revision (1B).
-}
+function function_4d4f1d4f() {}
 
-function function_7072c5d8() {
-  // Unsupported VM revision (1B).
-}
+function function_7072c5d8() {}

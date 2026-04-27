@@ -7,19 +7,10 @@
 #include common_scripts\Utility;
 #using_animtree("generic_human");
 
-////////////////////////////////////////////
-// Initialize anim sets
-//
-// anim.initAnimSet is used as a temporary buffer, because variables, including arrays, can't be passed by reference
-// Set it up in each init_animset_* function and then store it in anim.animset.*
-// This allows using helpers such as "set_animarray_stance_change" for different sets
-////////////////////////////////////////////
-
 init_anim_sets() {
   anim.animsets = spawnStruct();
   anim.animsets.move = [];
 
-  // combat stand
   init_animset_default_stand();
   init_animset_cqb_stand();
   init_animset_pistol_stand();
@@ -27,15 +18,12 @@ init_anim_sets() {
   init_animset_shotgun_stand();
   init_animset_heat_stand();
 
-  // combat crouch
   init_animset_default_crouch();
   init_animset_rpg_crouch();
   init_animset_shotgun_crouch();
 
-  // combat prone
   init_animset_default_prone();
 
-  // move
   init_animset_run_move();
   init_animset_walk_move();
   init_animset_cqb_move();
@@ -55,7 +43,7 @@ init_animset_run_move() {
   anim.initAnimSet["move_f"] = % walk_forward;
   anim.initAnimSet["move_l"] = % walk_left;
   anim.initAnimSet["move_r"] = % walk_right;
-  anim.initAnimSet["move_b"] = % walk_backward; //this looks too fast to be natural
+  anim.initAnimSet["move_b"] = % walk_backward;
 
   anim.initAnimSet["crouch"] = % crouch_fastwalk_F;
   anim.initAnimSet["crouch_l"] = % crouch_fastwalk_L;
@@ -108,7 +96,7 @@ init_animset_cqb_move() {
   anim.initAnimSet = [];
   anim.initAnimSet["sprint"] = % sprint_loop_distant;
   anim.initAnimSet["sprint_short"] = % sprint1_loop;
-  anim.initAnimSet["straight"] = % run_CQB_F_search_v1; // %run_CQB_F_search_v2
+  anim.initAnimSet["straight"] = % run_CQB_F_search_v1;
 
   anim.initAnimSet["move_f"] = % walk_CQB_F;
   anim.initAnimSet["move_l"] = % walk_left;
@@ -187,7 +175,7 @@ init_animset_shotgun_stand() {
 
   anim.initAnimSet["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
 
-  anim.initAnimSet["reload"] = array(%shotgun_stand_reload_A, %shotgun_stand_reload_B, %shotgun_stand_reload_C, %shotgun_stand_reload_C, %shotgun_stand_reload_C); // ( C is standing, want it more often )
+  anim.initAnimSet["reload"] = array(%shotgun_stand_reload_A, %shotgun_stand_reload_B, %shotgun_stand_reload_C, %shotgun_stand_reload_C, %shotgun_stand_reload_C);
   anim.initAnimSet["reload_crouchhide"] = array(%shotgun_stand_reload_A, %shotgun_stand_reload_B);
 
   set_animarray_stance_change();
@@ -237,9 +225,7 @@ init_animset_heat_stand() {
   anim.initAnimSet["single"] = array(%heat_stand_fire_single);
   set_animarray_custom_burst_and_semi_fire_stand(%heat_stand_fire_burst);
 
-  anim.initAnimSet["exposed_idle"] = array(%heat_stand_idle, /*%heat_stand_twitchA, %heat_stand_twitchB, %heat_stand_twitchC,*/ % heat_stand_scanA, %heat_stand_scanB);
-  //heat_stand_scanA
-  //heat_stand_scanB
+  anim.initAnimSet["exposed_idle"] = array(%heat_stand_idle, %heat_stand_scanA, %heat_stand_scanB);
 
   anim.initAnimSet["reload"] = array(%heat_exposed_reload);
   anim.initAnimSet["reload_crouchhide"] = array();
@@ -277,7 +263,7 @@ init_animset_default_stand() {
   anim.initAnimSet["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   anim.initAnimSet["exposed_grenade"] = array(%exposed_grenadeThrowB, %exposed_grenadeThrowC);
 
-  anim.initAnimSet["reload"] = array(%exposed_reload); // %exposed_reloadb, %exposed_reloadc
+  anim.initAnimSet["reload"] = array(%exposed_reload);
   anim.initAnimSet["reload_crouchhide"] = array(%exposed_reloadb);
 
   set_animarray_stance_change();
@@ -451,10 +437,6 @@ clear_custom_animset() {
   self.combatCrouchAnims = undefined;
 }
 
-////////////////////////////////////////////
-// Helpers for the above init_*
-////////////////////////////////////////////
-
 set_animarray_standing_turns_pistol(animArray) {
   anim.initAnimSet["turn_left_45"] = % pistol_stand_turn45L;
   anim.initAnimSet["turn_left_90"] = % pistol_stand_turn90L;
@@ -498,7 +480,7 @@ set_animarray_stance_change() {
 }
 
 set_animarray_burst_and_semi_fire_stand() {
-  anim.initAnimSet["burst2"] = % exposed_shoot_burst3; // ( will be stopped after second bullet )
+  anim.initAnimSet["burst2"] = % exposed_shoot_burst3;
   anim.initAnimSet["burst3"] = % exposed_shoot_burst3;
   anim.initAnimSet["burst4"] = % exposed_shoot_burst4;
   anim.initAnimSet["burst5"] = % exposed_shoot_burst5;
@@ -563,10 +545,6 @@ set_animarray_add_turn_aims_crouch() {
   anim.initAnimSet["add_turn_aim_right"] = % exposed_crouch_turn_aim_6;
 }
 
-////////////////////////////////////////////
-// Stand
-////////////////////////////////////////////
-
 set_animarray_standing() {
   if(usingSidearm()) {
     self.a.array = anim.animsets.pistolStand;
@@ -586,10 +564,6 @@ set_animarray_standing() {
   }
 }
 
-////////////////////////////////////////////
-// Crouch
-////////////////////////////////////////////
-
 set_animarray_crouching() {
   if(usingSidearm())
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
@@ -606,20 +580,12 @@ set_animarray_crouching() {
   }
 }
 
-////////////////////////////////////////////
-// Prone
-////////////////////////////////////////////
-
 set_animarray_prone() {
   if(usingSidearm())
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
 
   self.a.array = anim.animsets.defaultProne;
 }
-
-////////////////////////////////////////////
-// Moving turn
-////////////////////////////////////////////
 
 init_moving_turn_animations() {
   anim.runTurnAnims["L90"] = % run_turn_L90;
@@ -638,10 +604,6 @@ init_moving_turn_animations() {
   anim.cqbTurnAnims["R135"] = % CQB_walk_turn_3;
   anim.cqbTurnAnims["180"] = % CQB_walk_turn_2;
 }
-
-////////////////////////////////////////////
-// Misc
-////////////////////////////////////////////
 
 MAX_RUN_N_GUN_ANGLE = 130;
 RUN_N_GUN_TRANSITION_POINT = 60 / MAX_RUN_N_GUN_ANGLE;
@@ -679,7 +641,6 @@ heat_reload_anim() {
         coverReloadAnim = % heat_cover_reload_L;
 
       if(isDefined(coverReloadAnim)) {
-        //self mayMoveToPoint( reloadAnimPos );
         return coverReloadAnim;
       }
     }

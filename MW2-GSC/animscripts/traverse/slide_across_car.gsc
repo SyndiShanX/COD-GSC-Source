@@ -34,7 +34,6 @@ slide_across_car_dog() {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -43,7 +42,6 @@ slide_across_car_dog() {
   self setflaggedanimrestart("traverse", anim.dogTraverseAnims["jump_up_40"], 1, 0.1, 1);
   self animscripts\shared::DoNoteTracks("traverse");
 
-  // TEMP, can't hear jump over sounds
   self thread play_sound_in_space("anml_dog_bark", self gettagorigin("tag_eye"));
 
   self clearanim(%root, 0);

@@ -9,7 +9,6 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_nuked_fx::main();
 
-  //setexpfog(874.792, 2740, 0.776471, 0.588235, 0.47451, 0.5, 0, 0.803922, 0.717647, 0.6, (-0.432962, -0.395847, 0.809845), 0, 61.0525, 5.68252);
   setexpfog(1074.792, 3540, 0.934471, 0.838235, 0.694513, 0.5, 0, 0.803922, 0.717647, 0.6, (-0.432962, -0.395847, 0.809845), 0, 61.0525, 5.68252);
   ambientPlay("ambient_mp_desert");
 
@@ -17,7 +16,6 @@ main() {
   game["defenders"] = "axis";
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_nuked");
-  //setDvar( "compassmaxrange", "4000" );
 
   nuked_doomsday_clock_init();
   level thread nuked_population_sign_think();
@@ -53,9 +51,8 @@ nuked_population_sign_think() {
   tens_model = GetEnt("counter_tens", "targetname");
   ones_model = GetEnt("counter_ones", "targetname");
 
-  step = (360 / 10); // 10 digits (0-9) on the dial
+  step = (360 / 10);
 
-  // put the dials at 0
   ones = 0;
   tens = 0;
 

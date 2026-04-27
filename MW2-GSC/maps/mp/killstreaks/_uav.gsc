@@ -20,8 +20,8 @@ init() {
 
   precacheModel("vehicle_uav_static_mp");
 
-  level.radarViewTime = 30; // time radar remains active
-  level.uavBlockTime = 30; // this only seems to be used for the FFA version.
+  level.radarViewTime = 30;
+  level.uavBlockTime = 30;
 
   assert(level.radarViewTime > 7);
   assert(level.uavBlockTime > 7);
@@ -335,8 +335,6 @@ blockPlayerUAV() {
   wait(level.uavBlockTime);
 
   self.isRadarBlocked = false;
-
-  //self iPrintLn(&"MP_WAR_COUNTER_RADAR_EXPIRED" );
 }
 
 updateTeamUAVType() {
@@ -365,8 +363,6 @@ usePlayerUAV(doubleUAV, useTime) {
   wait(useTime);
 
   self.hasRadar = false;
-
-  //self iPrintLn(&"MP_WAR_RADAR_EXPIRED" );
 }
 
 setTeamRadarWrapper(team, value) {
@@ -395,7 +391,6 @@ stingerProximityDetonate(targetEnt, player) {
   lastCenter = targetEnt GetPointInBounds(0, 0, 0);
 
   for(;;) {
-    // UAV already destroyed
     if(!isDefined(targetEnt))
       center = lastCenter;
     else
@@ -415,7 +410,6 @@ stingerProximityDetonate(targetEnt, player) {
       radiusDamage(self.origin, 1536, 600, 600, player);
       playFX(level.stingerFXid, self.origin);
 
-      //self playSound( "remotemissile_explode" );
       self hide();
 
       self notify("deleted");
@@ -466,28 +460,6 @@ addActiveUAV() {
     level.activeUAVs[self.team]++;
   else
     level.activeUAVs[self.owner.guid]++;
-  /*
-  	if( level.teamBased )
-  	{
-  		foreach ( player in level.players )
-  		{
-  			if( player.team == self.team )
-  				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
-  			else if( player.team == level.otherTeam[self.team] )
-  				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
-  		}
-  	}	
-  	else
-  	{
-  		foreach ( player in level.players )
-  		{
-  			if( player == self.owner )
-  				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
-  			else
-  				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
-  		}
-  	}
-  */
 }
 
 addActiveCounterUAV() {
@@ -495,38 +467,13 @@ addActiveCounterUAV() {
     level.activeCounterUAVs[self.team]++;
   else
     level.activeCounterUAVs[self.owner.guid]++;
-  /*
-  	if( level.teamBased )
-  	{
-  		foreach ( player in level.players )
-  		{
-  			if( player.team == self.team )
-  				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
-  			else if( player.team == level.otherTeam[self.team] )
-  				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
-  		}
-  	}	
-  	else
-  	{
-  		foreach ( player in level.players )
-  		{
-  			if( player == self.owner )
-  				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
-  			else
-  				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
-  		}
-  	}
-  */
 }
 
 removeActiveUAV() {
   if(level.teamBased) {
     level.activeUAVs[self.team]--;
 
-    if(!level.activeUAVs[self.team]) {
-      //printOnTeam(&"MP_WAR_RADAR_EXPIRED", self.team );
-      //printOnTeam(&"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
-    }
+    if(!level.activeUAVs[self.team]) {}
   } else if(isDefined(self.owner)) {
     level.activeUAVs[self.owner.guid]--;
   }
@@ -536,10 +483,7 @@ removeActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]--;
 
-    if(!level.activeCounterUAVs[self.team]) {
-      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
-      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
-    }
+    if(!level.activeCounterUAVs[self.team]) {}
   } else if(isDefined(self.owner)) {
     level.activeCounterUAVs[self.owner.guid]--;
   }

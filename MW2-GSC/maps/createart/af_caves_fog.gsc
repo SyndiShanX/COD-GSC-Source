@@ -6,8 +6,6 @@
 main() {
   level.tweakfile = false;
 
-  //* Fog and vision section *
-
   setDevDvar("scr_fog_disable", "0");
 
   ent = maps\_utility::create_vision_set_fog("af_caves_outdoors");
@@ -18,13 +16,6 @@ main() {
   ent.blue = 0.454014;
   ent.maxOpacity = 0.7;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors");
   ent.startDist = 3764.17;
@@ -34,13 +25,6 @@ main() {
   ent.blue = 0.454014;
   ent.maxOpacity = 0.7;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors_steamroom");
   ent.startDist = 0;
@@ -50,13 +34,6 @@ main() {
   ent.blue = 0.8262;
   ent.maxOpacity = 0.7682;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors_steamroom_dark");
   ent.startDist = 0;
@@ -66,13 +43,6 @@ main() {
   ent.blue = 0.288116;
   ent.maxOpacity = 0.7682;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors_overlook");
   ent.startDist = 3764.17;
@@ -82,13 +52,6 @@ main() {
   ent.blue = 0.454014;
   ent.maxOpacity = 0.7;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors_skylight");
   ent.startDist = 3764.17;
@@ -98,13 +61,6 @@ main() {
   ent.blue = 0.454014;
   ent.maxOpacity = 0.7;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_indoors_breachroom");
   ent.startDist = 3764.17;
@@ -114,13 +70,6 @@ main() {
   ent.blue = 0.454014;
   ent.maxOpacity = 0.7;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   ent = maps\_utility::create_vision_set_fog("af_caves_outdoors_airstrip");
   ent.startDist = 2044.09;
@@ -130,13 +79,6 @@ main() {
   ent.blue = 0.713726;
   ent.maxOpacity = 0.778285;
   ent.transitionTime = 0;
-  //ent.sunRed = 0;
-  //ent.sunGreen = 0;
-  //ent.sunBlue = 0;
-  //ent.sunDir = (0, 0, 0);
-  //ent.sunBeginFadeAngle = 0;
-  //ent.sunEndFadeAngle = 0;
-  //ent.normalFogScale = 0;
 
   maps\_utility::vision_set_fog_changes("af_caves_outdoors", 0);
 }

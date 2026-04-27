@@ -37,23 +37,23 @@ main() {
   flag_init("trainer_done");
 
   switch (level.level_mode) {
-    case "free": //-> free roam
+    case "free":
       default_start(::start_free);
       add_start("free", ::start_free, "[free_roam]", ::museum_main);
       setDvar("start", "");
       break;
 
-    case "credits_black": //-> coming from menu after never beating game
+    case "credits_black":
       maps\_credits::initcredits("all");
       level.credits_speed = level.credits_speed * .75;
       default_start(::start_black);
       add_start("black", ::start_black, "[black_credits]", ::black_main);
       break;
 
-    case "credits_1": //-> coming from af_chase
+    case "credits_1":
       maps\_credits::initcredits("all");
       break;
-    case "credits_2": //-> coming from menu after beating game
+    case "credits_2":
       maps\_credits::initcredits("all");
       default_start(::start_afcaves);
       break;
@@ -79,10 +79,10 @@ main() {
 
   if(level.level_mode != "credits_1") {
     maps\_load::main();
-    //HAS TO COME AFTER _LOAD::MAIN()
+
     setSavedDvar("sv_saveOnStartMap", false);
     imagename = "levelshots / autosave / autosave_" + level.script + "start";
-    // string not found for AUTOSAVE_LEVELSTART
+
     SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
     maps\_load::set_player_viewhand_model("viewhands_player_us_army");
   }
@@ -110,11 +110,6 @@ post_init() {
   level.friendlyFireDisabled = true;
   thread battlechatter_off();
 }
-
-/************************************************************************************************************/
-
-/*													AF_CAVES												*/
-/************************************************************************************************************/
 
 afcaves_setup() {
   level.anim_ai["af_caves"] = [];
@@ -277,11 +272,6 @@ ai_zodiac_anims(animation) {
   self ai_next_anim(%zodiac_trans_L2R);
 }
 
-/************************************************************************************************************/
-
-/*													DC_BURNING												*/
-/************************************************************************************************************/
-
 dcburning_setup() {
   level.anim_ai["dc_burning"] = [];
   array_thread(getEntArray("ai_dc_burning", "script_noteworthy"), ::add_spawn_function, ::dcburning_ai_setup);
@@ -342,8 +332,7 @@ dcburning_ai_setup() {
       self.anim_speed = level.GLOBAL_ANIM_SPEED * 1.23;
       self.animplaybackrate = self.anim_speed;
       self.moveplaybackrate = self.anim_speed;
-      //self SetAnimTime( getanim_generic( node.animation ), .25 );
-      //self dcburning_dunn_gun_setup( node );
+
       break;
     case "training_intro_foley_begining":
       self.animtime = .64;
@@ -404,12 +393,8 @@ dcburning_dunn(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  //self thread dcburning_dunn_gun( animation );	
   self ai_next_anim(%training_pit_open_case);
 
-  //this is important - dont take this out...its to make up for
-  //a sleight frame diference between drone and AI logic where in
-  //on the current_anim gets set one frame too late.
   percent = .41;
   delay = .1;
   wait delay;
@@ -454,15 +439,8 @@ dcburning_foley(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  //	self ai_next_anim(%training_intro_foley_turnaround_2 );
-  //	self ai_next_anim(%training_intro_foley_idle_talk_1 );
   self ai_next_anim(%training_intro_foley_end);
 }
-
-/************************************************************************************************************/
-
-/*													AIRPORT													*/
-/************************************************************************************************************/
 
 airport_setup() {
   level.anim_ai["airport"] = [];
@@ -562,11 +540,6 @@ airport_security_guard() {
   self ai_next_anim(%airport_security_guard_pillar_death_R);
 }
 
-/************************************************************************************************************/
-
-/*												CLIFFHANGER													*/
-/************************************************************************************************************/
-
 cliffhanger_setup() {
   level.anim_ai["cliffhanger"] = [];
   array_thread(getEntArray("ai_cliffhanger", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_ai_setup);
@@ -640,9 +613,6 @@ cliffhanger_ai_think() {
   self _setanim(getanim_generic(node.animation), 1, 0, self.anim_speed);
 
   switch (node.animation) {
-    /*	case "killhouse_sas_1":
-    	case "killhouse_sas_2":
-    	case "killhouse_sas_3":*/
     case "killhouse_sas_price":
       self ai_wait_current_anim(.5);
       foreach(ent in level.anim_ai["cliffhanger"])
@@ -661,11 +631,6 @@ cliffhanger_ai_think() {
       break;
   }
 }
-
-/************************************************************************************************************/
-
-/*													FAVELA													*/
-/************************************************************************************************************/
 
 favela_setup() {
   level.anim_ai["favela"] = [];
@@ -761,11 +726,6 @@ favela_ai_think() {
   }
 }
 
-/************************************************************************************************************/
-
-/*												HALLWAY 1													*/
-/************************************************************************************************************/
-
 hallway1_main() {
   thread hallway1_camera_think();
 
@@ -795,11 +755,6 @@ hallway1_camera_think() {
   level.camera ResumeSpeed(5);
   level.camera waittill("reached_end_node");
 }
-
-/************************************************************************************************************/
-
-/*												VEHICLES													*/
-/************************************************************************************************************/
 
 vehicles_main() {
   array_thread(getEntArray("civ_vehicles_1", "script_noteworthy"), ::delaythread, 10, ::spawn_ai, true);
@@ -837,11 +792,6 @@ vehicles_camera_think() {
   level.camera waittill("reached_end_node");
 }
 
-/************************************************************************************************************/
-
-/*												HALLWAY 2													*/
-/************************************************************************************************************/
-
 hallway2_main() {
   thread hallway2_camera_think();
 
@@ -868,11 +818,6 @@ hallway2_camera_think() {
 
   level.camera waittill("reached_end_node");
 }
-
-/************************************************************************************************************/
-
-/*													OILRIG													*/
-/************************************************************************************************************/
 
 oilrig_setup() {
   level.anim_ai["oilrig"] = [];
@@ -948,11 +893,6 @@ oilrig_ai_think() {
       break;
   }
 }
-
-/************************************************************************************************************/
-
-/*													ESTATE													*/
-/************************************************************************************************************/
 
 estate_setup() {
   level.anim_ai["estate"] = [];
@@ -1091,11 +1031,6 @@ estate_bh_setup() {
   rope thread estate_ai_think();
 }
 
-/************************************************************************************************************/
-
-/*													HOSTAGE													*/
-/************************************************************************************************************/
-
 hostage_setup() {
   level.anim_ai["hostage"] = [];
   array_thread(getEntArray("ai_hostage", "script_noteworthy"), ::add_spawn_function, ::hostage_ai_setup);
@@ -1141,7 +1076,7 @@ hostage_ai_setup() {
       self set_anim_time(node, .19);
       break;
     case "hostage_chair_dive":
-      self.anim_mode = "gravity"; //zonly_physics, nophysics, none gravity
+      self.anim_mode = "gravity";
       break;
   }
 }
@@ -1216,11 +1151,6 @@ hostage_dive(animation) {
   self ai_next_anim(%hostage_chair_ground_idle);
   self ai_next_anim(%hostage_chair_ground_idle);
 }
-
-/************************************************************************************************************/
-
-/*													TRAINER													*/
-/************************************************************************************************************/
 
 trainer_setup() {
   level.anim_ai["trainer"] = [];
@@ -1309,11 +1239,6 @@ trainer_ai_think() {
       break;
   }
 }
-
-/************************************************************************************************************/
-
-/*													ARCADIA													*/
-/************************************************************************************************************/
 
 arcadia_setup() {
   level.anim_ai["arcadia"] = [];
@@ -1436,11 +1361,6 @@ arcadia_pose(animation) {
   }
 }
 
-/************************************************************************************************************/
-
-/*												BLACK CREDITS												*/
-/************************************************************************************************************/
-
 black_main() {
   thread maps\_credits::playCredits();
 
@@ -1455,18 +1375,11 @@ black_main() {
   level waittill("never");
 }
 
-/************************************************************************************************************/
-
-/*											MUSEUM FREE ROAM												*/
-/************************************************************************************************************/
-
 museum_main() {
-  // black screen while we do things in the background
   blackscreen_start();
 
   flag_wait("museum_ready");
 
-  // room 1 guys spawn initially
   room1trig = GetEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
 
@@ -1545,11 +1458,6 @@ museum_room2_anim_go() {
   level add_abort(::waittill_msg, "new_room_anim_go");
   thread do_wait();
 }
-
-/************************************************************************************************************/
-
-/*												START POINTS												*/
-/************************************************************************************************************/
 
 start_common() {
   SetSavedDvar("hud_drawHUD", "0");
@@ -1795,8 +1703,8 @@ end_credits() {
     wait 3.5;
   thread fade_from_black();
 
-  wait 290; //-> magic timing - do not change...change credit speed instead
-  wait 28; //additional time after credits changes	
+  wait 290;
+  wait 28;
   level.credits_speed = 4;
   flag_set("atvi_credits_go");
 

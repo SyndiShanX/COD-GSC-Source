@@ -6,18 +6,14 @@
 #include animscripts\utility;
 #include maps\_utility;
 #using_animtree("generic_human");
-
-// Deprecated. only used for old traverses that will be deleted.
 advancedTraverse(traverseAnim, normalHeight) {
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
   self endon("killanimscript");
   self traverseMode("nogravity");
-  self traverseMode("noclip"); // So he doesn't get stuck if the wall is a little too high
+  self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -91,11 +87,9 @@ teleportThreadEx(verticalOffset, delay, frames, animRate) {
 DoTraverse(traverseData) {
   self endon("killanimscript");
 
-  // do not do code prone in this script
   self.desired_anim_pose = "stand";
   animscripts\utility::UpdateAnimPose();
 
-  // orient to the Negotiation start node
   startnode = self getNegotiationStartNode();
   endNode = self getNegotiationEndNode();
 
@@ -108,7 +102,7 @@ DoTraverse(traverseData) {
   self.traverseStartNode = startnode;
 
   traverseAnim = traverseData["traverseAnim"];
-  traverseToCoverAnim = traverseData["traverseToCoverAnim"]; // traversals that end up with 180-degree spins into cover at the end
+  traverseToCoverAnim = traverseData["traverseToCoverAnim"];
 
   self traverseMode("nogravity");
   self traverseMode("noclip");
@@ -156,7 +150,7 @@ DoTraverse(traverseData) {
     self.a.movement = "stop";
   } else {
     self.a.movement = "run";
-    //self setAnimKnobAllRestart( animscripts\run::GetRunAnim(), %body, 1, 0.0, 1 );
+
     self clearanim(traverseAnim, 0.2);
   }
 
@@ -196,7 +190,7 @@ handleTraverseDrop() {
   trace = bulletTrace(startpos, self.origin + (0, 0, -512), false, undefined);
   endpos = trace["position"];
   dist = distance(startpos, endpos);
-  realDropHeight = dist - 32 - 0.5; // 0.5 makes sure we end up above the ground a bit
+  realDropHeight = dist - 32 - 0.5;
 
   traverseAnimPos = self getAnimTime(self.traverseAnim);
   traverseAnimDelta = getMoveDelta(self.traverseAnim, traverseAnimPos, 1.0);
@@ -216,8 +210,8 @@ handleTraverseDrop() {
   else
     animRate = 1;
 
-  teleportLength = (traverseAnimLength - traverseAnimPos) / 3.0; // let's make the teleport take 1/3 of the animation time roughly
-  numFrames = ceil(teleportLength * 20); // 0.05 per frame. Maximum number of frames we can use
+  teleportLength = (traverseAnimLength - traverseAnimPos) / 3.0;
+  numFrames = ceil(teleportLength * 20);
 
   self thread teleportThreadEx(dropOffset, 0, numFrames, animRate);
   self thread finishTraverseDrop(endpos[2]);
@@ -248,7 +242,6 @@ dog_wall_and_window_hop(traverseName, height) {
   self traverseMode("nogravity");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -268,7 +261,6 @@ dog_jump_down(frames, rate) {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -282,7 +274,7 @@ dog_jump_down(frames, rate) {
   self setflaggedanimrestart("traverseAnim", self.traverseAnim, 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverseAnim");
 
-  self clearanim(self.traverseAnim, 0); // start run immediately
+  self clearanim(self.traverseAnim, 0);
   self traverseMode("gravity");
   self.traverseComplete = true;
   self.traverseAnimRoot = undefined;
@@ -293,7 +285,6 @@ dog_jump_up(height, frames) {
   self endon("killanimscript");
   self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -304,7 +295,7 @@ dog_jump_up(height, frames) {
   self setflaggedanimrestart("traverseAnim", anim.dogTraverseAnims["jump_up_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverseAnim");
 
-  self clearanim(anim.dogTraverseAnims["jump_up_40"], 0); // start run immediately
+  self clearanim(anim.dogTraverseAnims["jump_up_40"], 0);
   self traverseMode("gravity");
   self.traverseComplete = true;
 }

@@ -6,13 +6,12 @@
 #include maps\_ambient;
 
 main() {
-  // Set the underlying ambient track
   level.ambient_track["arcadia_ext1"] = "ambient_arcadia_ext1";
   level.ambient_track["arcadia_ext3"] = "ambient_arcadia_ext3";
 
   thread maps\_utility::set_ambient("arcadia_ext3");
 
-  ambientDelay("arcadia_ext1", 5.0, 10.0); // Trackname, min and max delay between ambient events
+  ambientDelay("arcadia_ext1", 5.0, 10.0);
   ambientEvent("arcadia_ext1", "null", 0.3);
   ambientEvent("arcadia_ext1", "elm_wind_leafy", 1.0);
   ambientEvent("arcadia_ext1", "elm_dog", 3.0);
@@ -36,7 +35,7 @@ main() {
   ambientEvent("arcadia_ext1", "elm_gunfire_mp5_dist", 1.0);
   ambientEvent("arcadia_ext1", "elm_gunfire_usassault_med", 2.0);
 
-  ambientDelay("arcadia_ext3", 5.0, 8.0); // Trackname, min and max delay between ambient events
+  ambientDelay("arcadia_ext3", 5.0, 8.0);
   ambientEvent("arcadia_ext3", "null", 0.001);
   ambientEvent("arcadia_ext3", "elm_dog", 3.0);
   ambientEvent("arcadia_ext3", "elm_explosions_med", 1.0);

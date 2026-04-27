@@ -7,41 +7,9 @@
 #include maps\_equalizer;
 #include common_scripts\utility;
 
-/* 			Example map_amb.gsc file:
-main()
-{
-	// Set the underlying ambient track
-	level.ambient_track [ "exterior" ] = "ambient_test";
-	thread maps\_utility::set_ambient( "exterior" );
-
-	// Set the eq filter for the ambient channels
-	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - 	
-	// define a filter and give it a name
-	// or use one of the presets( see _equalizer.gsc )
-	// arguments are: name, band, type, freq, gain, q
-	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // maps\_equalizer::defineFilter( "test", 0, "lowshelf", 3000, 6, 2 );
-	// maps\_equalizer::defineFilter( "test", 1, "highshelf", 3000, -12, 2 );
-	// maps\_equalizer::defineFilter( "test", 2, "bell", 1500, 6, 3 );
-	
-	// attach the filter to a region and channel
-	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- add_channel_to_filter( track, channel )	
-
-		
-	ambientDelay( "exterior", 1.3, 3.4 );// Trackname, min and max delay between ambient events
-	ambientEvent( "exterior", "burnville_foley_13b", 			 0.3 );
-	ambientEvent( "exterior", "boat_sink", 					 0.6 );
-	ambientEvent( "exterior", "bullet_large_canvas", 			 0.3 );
-	ambientEvent( "exterior", "explo_boat", 					 1.3 );
-	ambientEvent( "exterior", "Stuka_hit", 					 0.1 );
-	
-	ambientEventStart( "exterior" );
-}
-*/
-
 init() {
   level.ambient_zones = [];
 
-  // this function can be overwritten to do custom stuff when an ambience trigger is hit
   if(!isDefined(level.global_ambience_blend_func))
     level.global_ambience_blend_func = ::empty_amb;
 
@@ -91,20 +59,16 @@ init() {
   level.eq_track[level.eq_main_track] = "";
   level.eq_track[level.eq_mix_track] = "";
 
-  // used to change the meaning of interior / exterior / rain ambience midlevel.
   level.ambient_modifier["interior"] = "";
   level.ambient_modifier["exterior"] = "";
   level.ambient_modifier["rain"] = "";
 
-  // loads any predefined filters in _equalizer.gsc
   loadPresets();
 
   thread hud_hide_with_cg_draw_hud();
 }
 
 empty_amb(p, i, o) {}
-
-// starts this ambient track
 activateAmbient(ambient) {
   thread set_ambience_single(ambient);
 }
@@ -119,12 +83,6 @@ ambientVolume() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: create_ambient_event( <track> , <min_time> , <max_time> )""Summary: Create an ambient event system. It plays random ambient sounds.""Module: Ambient""MandatoryArg: <track>: What to name it""MandatoryArg: <min_time>: The minimum time between sounds""MandatoryArg: <track>: The max time between sounds""Example: event = create_ambient_event( "dcburning_bunker1", 5.0, 15.0 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 create_ambient_event(track, min_time, max_time) {
   assertex(isDefined(level.eq_defs), "_load must run before loading the _amb file for a map.");
   assertex(!isDefined(level.ambientEventEnt[track]), "Already created ambient event " + track);
@@ -149,39 +107,17 @@ assert_event_has_aliases() {
   assertex(self.event_alias.size > 0 || self.event_alias_no_block.size > 0, "Added ambient event system " + self.track + " with no aliases.");
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: add_to_ambient_event( <name> , <weight> )""Summary: Add a sound alias to an ambient event system.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <name>: The sound alias""MandatoryArg: <weight>: How often to play relative to other aliases in the system""Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 add_to_ambient_event(name, weight) {
   assertex(!isDefined(self.event_alias[name]), "Cant change an ambient event weight for an alias (track " + self.track + ", alias " + name + ")");
   self.event_alias[name] = weight;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: add_to_ambient_event_no_block( <name> , <weight> )""Summary: Add a sound alias to an ambient event system. This sound will not block other ambiences from playing after it.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <name>: The sound alias""MandatoryArg: <weight>: How often to play relative to other aliases in the system""Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 add_to_ambient_event_no_block(name, weight) {
   assertex(!isDefined(self.event_alias_no_block[name]), "Cant change an ambient event weight for an alias (track " + self.track + ", alias " + name + ")");
   self.event_alias_no_block[name] = weight;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: map_to_reverb_eq( <eqReverb> )""Summary: Map an ambient event system to reverb or eq tracks. So when the ambient event is activated, appropriate reverb and eq get activated too.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <eqReverb>: The eq/reverb type to map to. For example exterior, bunker, alley, etc.""Example: event map_to_reverb_eq( "bunker" );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 map_to_reverb_eq(eqReverb) {
-  //	assertex( !isDefined( self.remap ), "Tried to remap reverb/eq mapping " + self.track );
-  //	self.remap = eqReverb;
-
-  // copy the reverb/eq settings over the specified settings
   level.eq_defs[self.track] = level.eq_defs[eqReverb];
   level.ambient_eq[self.track] = level.ambient_eq[eqReverb];
   level.ambient_reverb[self.track] = level.ambient_reverb[eqReverb];
@@ -206,8 +142,6 @@ ambientEvent_no_block(track, name, weight) {
 }
 
 getRemap(track) {
-  //	if( isDefined( self.remap ) )
-  //		return self.remap;
   if(track == "exterior" && isDefined(level.remap_exterior))
     return level.remap_exterior;
 
@@ -224,7 +158,6 @@ ambientReverb(track) {
   level notify("reverb_overwrite");
   level endon("reverb_overwrite");
 
-  // first check if this track is remapped to a specific reverb
   track = getRemap(track);
 
   reverb = level.ambient_reverb[track];
@@ -235,7 +168,6 @@ ambientReverb(track) {
   }
 
   if(level.reverb_track == track) {
-    // already doing this one
     return;
   }
 
@@ -245,7 +177,6 @@ ambientReverb(track) {
 }
 
 use_reverb_settings(track) {
-  // red flashing overwrites reverb
   if(level.player ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
@@ -255,12 +186,6 @@ use_reverb_settings(track) {
   set_hud_track("reverb", track);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: map_exterior_to_reverb_eq( <reverb_eq> )""Summary: Reverb and EQ will use this setting when "exterior" ambience is triggered.""Module: Ambient""MandatoryArg: <reverb_eq>: The reverb/eq that exterior gets mapped to.""Example: map_exterior_to_reverb_eq( "snow_base" );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 map_exterior_to_reverb_eq(reverb_eq) {
   level.remap_exterior = reverb_eq;
 }
@@ -272,7 +197,6 @@ ambientMapTo(track, eqReverb) {
 }
 
 setup_new_eq_settings(track, eqIndex) {
-  // this track may be a remapped from an ambient event track.
   track = getRemap(track);
 
   if(!isDefined(track) || !isDefined(level.ambient_eq[track])) {
@@ -281,7 +205,6 @@ setup_new_eq_settings(track, eqIndex) {
   }
 
   if(level.eq_track[eqIndex] == track) {
-    // already doing this one
     return false;
   }
 
@@ -291,12 +214,6 @@ setup_new_eq_settings(track, eqIndex) {
   return true;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: blend_to_eq_track( <eqIndex> , <time> )""Summary: Blends from one EQ track to another. NOTE that when you play this command, it will blend from zero to 100% on the track you select. If you were already on this track, this may sound weird.""Module: Ambience""MandatoryArg: <eqIndex>: Which of the two EQ tracks to blend to, main or mix (level.eq_main_track, level.eq_mix_track)""OptionalArg: <time>: How much time to blend over.""Example: thread maps\_ambient::blend_to_eq_track( level.eq_mix_track, 2 );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 blend_to_eq_track(eqIndex, time) {
   interval = .05;
   count = time / interval;
@@ -310,14 +227,7 @@ blend_to_eq_track(eqIndex, time) {
   level.player SetEqLerp(1, eqIndex);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: use_eq_settings( <track> , <eqIndex> )""Summary: Enable EQ track settings on one of the two EQ channels.""Module: Ambience""MandatoryArg: <track>: The EQ tracks ettings from _equilizer.gsc""MandatoryArg: <eqIndex>: You must select either the main track or the mix track, preferably using level.eq_main_track or level.eq_mix_track. See ::blend_to_eq_track.""Example: thread maps\_ambient::use_eq_settings( "gulag_cavein", level.eq_mix_track );""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 use_eq_settings(track, eqIndex) {
-  // red flashing overwrites eq
   if(level.player ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
@@ -335,7 +245,6 @@ use_eq_settings(track, eqIndex) {
     } else if(isDefined(filter["type"][0]) && !isDefined(filter["type"][1]) && !isDefined(filter["type"][2])) {
       level.player deactivateeq(eqIndex, channel);
     } else {
-      // fallback for odd band combination...should probably be an assert in future games.
       for(band = 0; band < 3; band++) {
         if(isDefined(filter["type"][band]))
           level.player seteq(channel, eqIndex, band, filter["type"][band], filter["gain"][band], filter["freq"][band], filter["q"][band]);
@@ -432,7 +341,7 @@ start_ambient_event(track) {
     }
 
     if(timer == gettime())
-      wait(0.05); // so no infinite loop possibilities
+      wait(0.05);
     ent.playingSound = false;
   }
 }
@@ -464,15 +373,11 @@ add_zone(zone) {
   level.ambient_zones[zone] = true;
 }
 
-check_ambience(type) {
-  // 	assertEx( isDefined( level.ambient_zones[ type ] ), "Ambience " + type + " is not a defined ambience zone" );
-}
+check_ambience(type) {}
 
 ambient_trigger() {
-  // get the ambience zones on this trigger
   tokens = strtok(self.ambient, " ");
   if(tokens.size == 1) {
-    // if this trigger only has one ambience then there is no lerping done
     ambience = tokens[0];
     for(;;) {
       self waittill("trigger", other);
@@ -488,11 +393,9 @@ ambient_trigger() {
   end = undefined;
 
   if(isDefined(ent.target)) {
-    // if the origin targets a second origin, use it as the end point
     target_ent = ent get_target_ent();
     end = target_ent.origin;
   } else {
-    // otherwise double the difference between the target origin and start to get the endpoint
     end = start + vector_multiply(self.origin - start, 2);
   }
 
@@ -528,8 +431,6 @@ ambient_trigger() {
       wait(0.05);
     }
 
-    // when you leave the trigger set it to whichever point it was closest too
-    // or to the inner_ambience( usually "exterior" ) if self.targetname == "ambient_exit"if(progress > cap)
     progress = 1;
     else
       progress = 0;
@@ -582,13 +483,13 @@ ambient_trigger_sets_ambience_levels(start, end, dist, inner_ambience, outer_amb
 play_ambience(ambience) {
   if(!isDefined(level.ambient_track))
     return;
-  if(!isDefined(level.ambient_track[ambience /*+ level.ambient_modifier[ "rain" ]*/ ])) {
+  if(!isDefined(level.ambient_track[ambience])) {
     return;
   }
   if(!isDefined(level.ambience_timescale))
     level.ambience_timescale = 1;
 
-  ambientPlay(level.ambient_track[ambience /*+ level.ambient_modifier[ "rain" ]*/ ], 1, level.ambience_timescale);
+  ambientPlay(level.ambient_track[ambience], 1, level.ambience_timescale);
 
   set_hud_track("ambient", ambience);
 }
@@ -613,27 +514,10 @@ set_ambience_blend(progress, inner_ambience, outer_ambience) {
   if(!isDefined(old_ambient) || old_ambient != current_ambient_event) {
     if(isDefined(level.ambientEventEnt[modified_ambient])) {
       thread start_ambient_event(modified_ambient);
-    } else {
-      //			level notify( "new_ambient_event_track" );
-      //			clear_hud( "event_system" );
-    }
+    } else {}
 
     thread ambientReverb(modified_ambient);
   }
-  //	println( "Ambience becomes: ", ambient + level.ambient_modifier[ "rain" ] );
-
-  //	thread ambientEventStart( ambient + level.ambient_modifier[ "rain" ] );
-
-  /*
-  if( isDefined( level.ambient ) && current_ambient_event != level.ambient )
-  {
-  	if( isDefined( level.ambient_track[ current_ambient_event ] ) )
-  	{
-  		activateAmbient( current_ambient_event );
-  		level.ambient = current_ambient_event;
-  	}
-  }
-  */
 
   if(level.eq_track[level.eq_main_track] != outer_ambience) {
     setup_new_eq_settings(outer_ambience, level.eq_main_track);
@@ -659,30 +543,6 @@ set_ambience_blend(progress, inner_ambience, outer_ambience) {
   }
   level.nextmsg = gettime() + 200;
 }
-
-/*
-set_ambience_single( ambience )
-{
-	if( isDefined( level.ambientEventEnt[ ambience ] ) )
-	{
-// 		thread ambientEventStart( ambience );
-		thread start_ambient_event( ambience );
-	}
-
-	if( level.eq_track[ level.eq_main_track ] != ambience )
-	{
-		setup_new_eq_settings( ambience, level.eq_main_track );
-	}
-
-	[[ level.global_ambience_blend_func ]]( 1, ambience, ambience );
-
-	level.player seteqlerp( 1, level.eq_main_track );
-	
-	
-	ambience_hud( 1 );
-	
-}
-*/
 
 set_ambience_single(ambience) {
   set_ambience_blend(0, ambience, ambience);
@@ -873,9 +733,8 @@ set_ambience_blend_over_time(time, inner_ambience, outer_ambience) {
   update_freq = 0.05;
   update_amount = 1 / (time / update_freq);
 
-  // is progress 0 on the first iteration? it shouldn't be
   for(;;)
-  // for( progress = 0; progress < 1; progress += update_amount )
+
   {
     progress = progress + update_amount;
 

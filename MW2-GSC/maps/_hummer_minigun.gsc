@@ -28,8 +28,6 @@ main(model, type, turret_type) {
   build_unload_groups(::Unload_Groups);
   build_compassicon("automobile", false);
 
-  //	build_turret( "minigun_hummer", "tag_turret", "weapon_suburban_minigun_no_doors", undefined, undefined, 0.2 );
-
   if(!isDefined(turret_type))
     turret_type = "minigun_hummer";
   build_turret(turret_type, "tag_turret", "weapon_suburban_minigun_no_doors", undefined, undefined, 0.2, 20, -14);
@@ -43,9 +41,6 @@ init_local() {
     anims["rot_l"] = % humvee_antenna_L_rotate_360;
     anims["rot_r"] = % humvee_antenna_R_rotate_360;
     thread humvee_antenna_animates(anims);
-
-    //thread maps\_debug::drawTagForever( "tag_antenna" );
-    //thread maps\_debug::drawTagForever( "tag_antenna2" );		
   }
 
   self hidepart("tag_blood");
@@ -76,7 +71,6 @@ setanims() {
   positions[2].getout = % humvee_passenger_out_L;
   positions[3].getout = % humvee_passenger_out_R;
 
-  // turret gunner
   positions[4].getout = % humvee_turret_2_passenger;
   positions[4].exittag = "tag_guy1";
   positions[4].getout_secondary = % humvee_passenger_out_R;
@@ -88,7 +82,7 @@ setanims() {
   positions[3].getin = % humvee_mount_backR;
   positions[4].getin = % humvee_mount_frontR;
 
-  positions[4].mgturret = 0; // which of the turrets is this guy going to use
+  positions[4].mgturret = 0;
 
   positions[4].passenger_2_turret_func = ::humvee_turret_guy_gettin_func;
 
@@ -142,7 +136,7 @@ unload_groups() {
   unload_groups[group][unload_groups[group].size] = 1;
   unload_groups[group][unload_groups[group].size] = 2;
   unload_groups[group][unload_groups[group].size] = 3;
-  unload_groups[group][unload_groups[group].size] = 4; // turret gunner
+  unload_groups[group][unload_groups[group].size] = 4;
 
   group = "all";
   unload_groups[group] = [];
@@ -150,49 +144,9 @@ unload_groups() {
   unload_groups[group][unload_groups[group].size] = 1;
   unload_groups[group][unload_groups[group].size] = 2;
   unload_groups[group][unload_groups[group].size] = 3;
-  unload_groups[group][unload_groups[group].size] = 4; // turret gunner
+  unload_groups[group][unload_groups[group].size] = 4;
 
   unload_groups["default"] = unload_groups["all"];
 
   return unload_groups;
 }
-
-/*QUAKED script_vehicle_hummer_minigun (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hummer_minigun::main( "vehicle_hummer" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_minigun
-sound,weapon_minigun,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_minigun_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hummer_minigun::main( "vehicle_hummer", "hummer_minigun_physics" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_minigun
-sound,weapon_minigun,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun_physics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_hummer_minigun_physics_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_hummer_minigun::main( "vehicle_hummer", "hummer_minigun_physics_player", "minigun_hummer_player" );
-
-and these lines in your CSV:
-#include,vehicle_hummer_minigun
-sound,weapon_minigun,vehicle_standard,all_sp
-sound,vehicle_hummer,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun_physics_player"default:"script_team" "allies"
-*/

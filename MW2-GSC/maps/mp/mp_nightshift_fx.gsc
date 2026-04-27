@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["dust_wind_fast_light"] = loadfx("dust/dust_wind_fast_light");
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");

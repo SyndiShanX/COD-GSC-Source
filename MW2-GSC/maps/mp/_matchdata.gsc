@@ -9,7 +9,6 @@
 
 init() {
   if(!isDefined(game["gamestarted"])) {
-    //setMatchDataDef( "mp/matchdata_" + level.gametype + ".def" );
     setMatchDataDef("mp/matchdata.def");
     setMatchData("map", level.script);
     setMatchData("gametype", level.gametype);
@@ -18,8 +17,8 @@ init() {
     setMatchData("dateTime", getSystemTime());
   }
 
-  level.MaxLives = 250; // must match MaxKills in matchdata definition
-  level.MaxNameLength = 21; // must match Player xuid size in clientmatchdata definition
+  level.MaxLives = 250;
+  level.MaxNameLength = 21;
   level.MaxEvents = 150;
   level.MaxKillstreaks = 125;
   level.MaxLogClients = 128;
@@ -219,7 +218,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
     assert(weaponTokens.size > 1 && weaponTokens.size <= 4);
 
     assertEx(weaponTokens[weaponTokens.size - 1] == "mp", "weaponTokens[weaponTokens.size - 1]: " + weaponTokens[weaponTokens.size - 1]);
-    weaponTokens[weaponTokens.size - 1] = undefined; // remove the trailing "mp"setMatchData("lives", lifeId, "weapon", weaponTokens[0]);
+    weaponTokens[weaponTokens.size - 1] = undefined;
 
     if(isDefined(weaponTokens[1]))
       setMatchData("lives", lifeId, "attachments", 0, weaponTokens[1]);
@@ -248,7 +247,6 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
     attackDirection = VectorNormalize((attackDirection[0], attackDirection[1], 0));
     setMatchData("lives", lifeId, "dotOfDeath", VectorDot(victimForward, attackDirection));
   } else {
-    // 255 is world
     setMatchData("lives", lifeId, "attacker", 255);
     setMatchData("lives", lifeId, "attackerPos", 0, int(self.origin[0]));
     setMatchData("lives", lifeId, "attackerPos", 1, int(self.origin[1]));
@@ -273,8 +271,6 @@ logPlayerData() {
   setMatchData("players", self.clientid, "assists", self getPersStat("assists"));
   setMatchData("players", self.clientid, "longestStreak", self getPersStat("longestStreak"));
 }
-
-// log the lives of players who are still alive at match end.
 gameEndListener() {
   if(!matchMakingGame()) {
     return;

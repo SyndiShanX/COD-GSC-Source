@@ -8,54 +8,28 @@
 #using scripts\shared\util_shared;
 #namespace elevator;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function define_elevator_parts() {
-  // Unsupported VM revision (1B).
-}
+function define_elevator_parts() {}
 
-function get_start_point_in_path() {
-  // Unsupported VM revision (1B).
-}
+function get_start_point_in_path() {}
 
-function trigger_think() {
-  // Unsupported VM revision (1B).
-}
+function trigger_think() {}
 
-function wait_for_all_heroes() {
-  // Unsupported VM revision (1B).
-}
+function wait_for_all_heroes() {}
 
-function elevator_looping_sounds() {
-  // Unsupported VM revision (1B).
-}
+function elevator_looping_sounds() {}
 
-function setup_elevator_doors() {
-  // Unsupported VM revision (1B).
-}
+function setup_elevator_doors() {}
 
-function move_elevator_doors() {
-  // Unsupported VM revision (1B).
-}
+function move_elevator_doors() {}
 
-function move_platform() {
-  // Unsupported VM revision (1B).
-}
+function move_platform() {}
 
-function stop() {
-  // Unsupported VM revision (1B).
-}
+function stop() {}
 
-function process_node() {
-  // Unsupported VM revision (1B).
-}
+function process_node() {}
 
-function get_speed() {
-  // Unsupported VM revision (1B).
-}
+function get_speed() {}

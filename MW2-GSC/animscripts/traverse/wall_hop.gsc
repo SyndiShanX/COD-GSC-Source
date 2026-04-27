@@ -3,11 +3,6 @@
  * Script: animscripts\traverse\wall_hop.gsc
 ********************************************************/
 
-// Fence_climb.gsc
-// Makes the character climb a 48 unit fence
-// TEMP - copied wall dive until we get an animation
-// Makes the character dive over a low wall
-
 #include animscripts\traverse\shared;
 
 main() {

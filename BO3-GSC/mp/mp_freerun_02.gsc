@@ -6,10 +6,6 @@
 #using scripts\shared\util_shared;
 #namespace namespace_bbf5f0d7;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function precache() {
-  // Unsupported VM revision (1B).
-}
+function precache() {}

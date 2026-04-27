@@ -7,30 +7,10 @@
 #include common_scripts\utility;
 #using_animtree("generic_human");
 main() {
-  /*
-
-  	most turn animations are broken some way so that doesn't work as it should
-
-  	the pickup and drop animations needs to move the origin of the stretcher.
-  	the stretchers walk animation should not lift it from the ground the way it does now.
-  	when the pickup animation moves the origin of the stretcher the walk animation
-  	should happen at the correct spot any way.
-  	The origin of the stretcher should be moved to where I need it to be.
-
-  */
-
   precachemodel("character_us_cod3_preview");
   precachemodel("character_usmc_grenadier_a");
   precachemodel("stretcher_animated");
   precachemodel("vehicle_stretcher");
-
-  //	level.stretcher_front_height_offset = 29.5;
-  //	level.stretcher_rear_height_offset = 29;
-  //	level.stretcher_front_height_offset = 0;
-  //	level.stretcher_rear_height_offset = 0;
-  //	level.stretcher_rear_offset = -90;
-  //	level.front_guy_offset = 11;
-  //	level.rear_guy_offset = -6;
 
   level.front_max_turn = 20;
   level.rear_max_turn = 45;
@@ -40,13 +20,11 @@ main() {
   level.rear_offset = -89;
   level.stretcher_front_offset = -6;
   level.stretcher_rear_offset = -11;
-  level.stretcher_length = -80; // negative since it's backwards
+  level.stretcher_length = -80;
 
   level.rear_distance = 100;
 
-  //	level.distover1sec = 80; // 80 is the speed that fits the animation but it's a bit slow.
   level.distover1sec = 140;
-  //	level.distover1sec = 40; // tmp slow speed
 
   level.scr_anim["front_ai"]["pickup"] = % stretcher_F_pickup;
   level.scr_anim["rear_ai"]["pickup"] = % stretcher_R_pickup;
@@ -62,17 +40,12 @@ move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   flat_vector = vectornormalize(front_point - rear_point);
   rough_vector = vectornormalize(flat_origin(front_point) - flat_origin(rear_point));
 
-  //	vector = vectornormalize( front_point - rear_point );
-
   front_point = ground_origin(front_point);
 
   dist = distance(self.last_point, front_point);
   step_time = dist / level.distover1sec;
 
   self.last_point = front_point;
-
-  //	level.stretcher_front_offset = -11;
-  //	level.stretcher_rear_offset = 6;
 
   guy_angles = flat_angle(vectortoangles(flat_vector));
 
@@ -85,12 +58,6 @@ move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   rear_guy_origin = stretcher_rear_origin + vector_multiply(flat_vector, level.stretcher_rear_offset);
 
   stretcher_angles = vectortoangles(stretcher_vector);
-
-  /*
-  	level thread draw_guy(front_guy_origin, stretcher_angles, step_time);
-  	level thread draw_guy(rear_guy_origin, stretcher_angles, step_time);
-  	level thread drawline(stretcher_front_origin, stretcher_rear_origin, ( .3, .3, .8 ) , step_time);
-  */
 
   self moveto(stretcher_front_origin, step_time);
   self rotateto(stretcher_angles, step_time);
@@ -107,9 +74,6 @@ move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   direction = 0;
   if(front_angle_dif > 0)
     direction = 1;
-
-  //	self.drone[0] drone_anim_weight( front_angle_dif, level.front_max_turn, direction, step_time);
-  //	self.drone[1] drone_anim_weight( rear_angle_dif, level.rear_max_turn, direction, step_time);
 
   wait step_time;
 }
@@ -133,7 +97,7 @@ drone_anim_weight(angle, max_angle, direction, step_time) {
     straight_weight = 1 - left_weight;
   }
 
-  self setAnim(level.stretcher_anim[self.animname]["walk"], straight_weight, step_time, 1.75); // rate = 1.75
+  self setAnim(level.stretcher_anim[self.animname]["walk"], straight_weight, step_time, 1.75);
   self setAnim(level.stretcher_anim[self.animname]["right"], right_weight, step_time, 1.75);
   self setAnim(level.stretcher_anim[self.animname]["left"], left_weight, step_time, 1.75);
 }
@@ -174,7 +138,6 @@ follow_path(start_struct) {
     current_point = data_struct.next_point;
     current_angles = data_struct.next_angles;
 
-    // find the rear point
     dist = 0;
     index = rear_data.size;
     while(true) {
@@ -192,11 +155,9 @@ follow_path(start_struct) {
     if(index)
       rear_data = array_remove_first(rear_data);
 
-    // move the stretcher to the next location
     self move_stretcher(current_point, current_angles, rear_point, rear_angles);
 
     if(!data_struct.goal) {
-      // notify when reached.
       next_struct notify("trigger");
 
       if(!isDefined(next_struct.target)) {
@@ -210,11 +171,6 @@ follow_path(start_struct) {
 }
 
 draw_path(start_struct, line_color, knot_color) {
-  /*
-  	THIS DOES THE SAME AS FOLLOW_PATH
-  	ONLY IT DRAWS THE PATH INSTEAD OF MOVING THE STRETCHER DOWN IT.
-  */
-
   if(isDefined(start_struct.angles))
     current_angles = start_struct.angles;
   else
@@ -237,7 +193,6 @@ draw_path(start_struct, line_color, knot_color) {
     rear_data = array_add(rear_data, rear_struct);
     rear_point = undefined;
 
-    // calculate the rear point
     dist = 0;
     index = rear_data.size;
 
@@ -256,8 +211,7 @@ draw_path(start_struct, line_color, knot_color) {
       rear_data = array_remove_first(rear_data);
 
     level thread drawline(current_point, data_struct.next_point, line_color);
-    //		level thread drawline(data_struct.next_point, data_struct.next_point + (0,0,32), knot_color );
-    //		level thread drawline(rear_point, rear_point + (0,0,32), (.9,.4,.5));
+
     level thread drawline(data_struct.next_point + (0, 0, 32), rear_point + (0, 0, 32), (1, 1, 1));
 
     wait .1;
@@ -277,26 +231,14 @@ draw_path(start_struct, line_color, knot_color) {
 }
 
 path_math(current_angles, current_point, next_point, main_dist) {
-  // Returns a data_struct with the next origin and angle etc. to move to.
-  // Doesn't care about elevation though.
-
   data_struct = spawnStruct();
   data_struct.goal = false;
   data_struct.previous_angles = current_angles;
 
-  // adjust the speed of the curve depending on the distance.
-  /*	curve_speed = 1 - ( 256/main_dist );
-
-  	if( curve_speed < .45 )
-  		curve_speed = .45;
-  	if( curve_speed > .65 )
-  		curve_speed = .65;
-  */
   curve_speed = .65;
 
   dist = distance(flat_origin(current_point), flat_origin(next_point));
 
-  // flaten next point;
   height_dif = next_point[2] - current_point[2];
   next_point = (next_point[0], next_point[1], current_point[2]);
 
@@ -343,9 +285,6 @@ path_math(current_angles, current_point, next_point, main_dist) {
   data_struct.vector = vector;
   data_struct.next_point = next_point;
   data_struct.next_angles = next_angles;
-
-  //	level thread print3Dmessage(next_point, next_angles, 100, (.5,.5,1), (0,0,15), .5);
-  //	level thread print3Dmessage(next_point, dist , 100, (.5,.5,1), (0,0,15), .5);
 
   return data_struct;
 }
@@ -397,8 +336,6 @@ array_remove_first(array) {
   return new_array;
 }
 
-/********/
-
 #using_animtree("stretcher");
 spawn_stretcher(point, start_angles) {
   ground = ground_origin(point);
@@ -407,9 +344,9 @@ spawn_stretcher(point, start_angles) {
   anim_ent.angles = (0, 0, 0);
 
   model = spawn("script_model", ground - (44, 0, 0));
-  //	model.angles = (0,90,0);
+
   model setModel("vehicle_stretcher");
-  //	model setModel("stretcher_animated");
+
   model UseAnimTree(#animtree);
   model.animname = "stretcher";
 
@@ -471,11 +408,11 @@ stretcher_anim_single(animation) {
 }
 
 stretcher_anim_loop(animation) {
-  self setAnimRestart(level.stretcher_anim[self.animname][animation], 1, 0, .5); // rate = 1.75
+  self setAnimRestart(level.stretcher_anim[self.animname][animation], 1, 0, .5);
 }
 
 drone_anim_loop(animation) {
-  self setAnimRestart(level.stretcher_anim[self.animname]["walk"], 1, 0, 1.75); // rate = 1.75
+  self setAnimRestart(level.stretcher_anim[self.animname]["walk"], 1, 0, 1.75);
   self setAnimRestart(level.stretcher_anim[self.animname]["right"], 0, 0, 1.75);
   self setAnimRestart(level.stretcher_anim[self.animname]["left"], 0, 0, 1.75);
 }
@@ -565,8 +502,6 @@ thaw(ai) {
   ai unlink();
   ai show();
 }
-
-/**** DEBUG FUNCTIONS****/
 
 draw_structs(struct) {
   while(true) {

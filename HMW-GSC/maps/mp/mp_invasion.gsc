@@ -9,7 +9,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_invasion");
 
-  // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 1.5;
 
   ambientPlay("ambient_mp_urban");

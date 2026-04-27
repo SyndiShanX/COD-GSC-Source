@@ -47,7 +47,7 @@ updateDamageFeedback(typeHit) {
 
   if(typeHit == "hitBodyArmor") {
     self.hud_damagefeedback setShader("damage_feedback_j", 24, 48);
-    self playlocalsound("MP_hit_alert"); // TODO: change sound?
+    self playlocalsound("MP_hit_alert");
   } else if(typeHit == "hitEndGame") {
     self.hud_damagefeedback setShader("damage_feedback_endgame", 24, 48);
     self playlocalsound("MP_hit_alert");
@@ -73,7 +73,6 @@ updateDamageFeedback(typeHit) {
 
   self.hud_damagefeedback.alpha = 0;
 
-  // only update hudelem positioning when necessary
   if(self.hud_damagefeedback.x != x)
     self.hud_damagefeedback.x = x;
 

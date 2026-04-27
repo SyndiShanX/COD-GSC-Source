@@ -36,10 +36,6 @@ mainDebug() {
 
   if(getDvar("level_clear_all") != "off")
     maps\_endmission::clearall();
-
-  //	thread playerNode();
-  //	thread colordebug();
-  //	thread debuggoalpos();
 }
 
 debugchains() {
@@ -61,14 +57,6 @@ debugchains() {
       for(i = 0; i < fnodes.size; i++) {
         if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
           Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
-          /*
-          count++;
-          if( count > 25 )
-          {
-          	count = 0;
-          	waitframe();
-          }
-          */
         }
       }
 
@@ -129,9 +117,6 @@ debug_enemyPosReplay() {
   guy = undefined;
 
   for(i = 0; i < ai.size; i++) {
-    //		if( ai[ i ] GetEntityNumber() != num )
-    //			continue;
-
     guy = ai[i];
     if(!isalive(guy)) {
       continue;
@@ -145,7 +130,6 @@ debug_enemyPosReplay() {
       else
         color = (0, 0, 1);
 
-      //			nodeOffset = guy getEye();
       nodeOffset = guy.origin + (0, 0, 54);
       if(isDefined(guy.node)) {
         if(guy.node.type == "Cover Left") {
@@ -165,7 +149,6 @@ debug_enemyPosReplay() {
       }
       draw_arrow(nodeOffset, guy.goodShootPos, color);
     }
-    //		break;	
   }
   if(1) return;
 
@@ -220,12 +203,6 @@ drawOrgForever(opcolor) {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: drawArrowForever( <org> , <ang> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 drawArrowForever(org, ang) {
   for(;;) {
     drawArrow(org, ang);
@@ -240,12 +217,6 @@ drawOriginForever() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: drawArrow( <org> , <ang> , <opcolor> , <drawtime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 drawArrow(org, ang, opcolor, drawtime) {
   scale = 10;
   forward = anglesToForward(ang);
@@ -279,12 +250,6 @@ drawArrow(org, ang, opcolor, drawtime) {
   Line(org, org + up, green, 0.9, 0, drawtime);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: drawForwardForever( <scale> , <color> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 drawForwardForever(scale, color) {
   if(!isDefined(scale))
     scale = 100;
@@ -306,12 +271,6 @@ drawPlayerViewForever() {
   }
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: drawTagForever( <tag> , <opcolor> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 drawTagForever(tag, opcolor) {
   for(;;) {
     if(!isDefined(self))
@@ -540,7 +499,7 @@ debugDvars() {
   if(getDvar("level_clear_all") == "")
     setDvar("level_clear_all", "off");
 
-  waittillframeend; // for vars to get init'd elsewhere
+  waittillframeend;
   setEmptyDvar("debug_accuracypreview", "off");
 
   if(GetDebugDvar("debug_lookangle") == "")
@@ -659,12 +618,6 @@ debugDvars() {
   level.debug_reflection = 0;
 
   level.debug_fxlighting = 0;
-
-  //if( getDvar( "debug_character_count" ) == "" )
-  //	setDvar( "debug_character_count", "off" );
-
-  //	thread hatmodel();	
-  //thread debug_character_count();
 
   noAnimscripts = getDvar("debug_noanimscripts") == "on";
   for(;;) {
@@ -872,13 +825,12 @@ debug_reflection_buttons() {
       offset = 1000;
     if(offset < 64)
       offset = 64;
-    //		if( offset!=lastoffset )
-    //		{
+
     level.debug_reflectionobject Unlink();
     level.debug_reflectionobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
     lastoffset = offset;
     level.debug_reflectionobject LinkTo(level.player);
-    //			}
+
     wait .05;
   }
 }
@@ -993,53 +945,48 @@ hatmodel() {
 }
 
 debug_character_count() {
-  //drones
   drones = NewHudElem();
   drones.alignX = "left";
   drones.alignY = "middle";
   drones.x = 10;
   drones.y = 100;
-  // drones: [&& 1]
+
   drones.label = &"DEBUG_DRONES";
   drones.alpha = 0;
 
-  //allies
   allies = NewHudElem();
   allies.alignX = "left";
   allies.alignY = "middle";
   allies.x = 10;
   allies.y = 115;
-  // allies: [&& 1]
+
   allies.label = &"DEBUG_ALLIES";
   allies.alpha = 0;
 
-  //allies
   axis = NewHudElem();
   axis.alignX = "left";
   axis.alignY = "middle";
   axis.x = 10;
   axis.y = 130;
-  // axis: [&& 1]
+
   axis.label = &"DEBUG_AXIS";
   axis.alpha = 0;
 
-  //vehicles
   vehicles = NewHudElem();
   vehicles.alignX = "left";
   vehicles.alignY = "middle";
   vehicles.x = 10;
   vehicles.y = 145;
-  // drones: [&& 1]
+
   vehicles.label = &"DEBUG_VEHICLES";
   vehicles.alpha = 0;
 
-  //total
   total = NewHudElem();
   total.alignX = "left";
   total.alignY = "middle";
   total.x = 10;
   total.y = 160;
-  // total: [&& 1]
+
   total.label = &"DEBUG_TOTAL";
   total.alpha = 0;
 
@@ -1067,21 +1014,18 @@ debug_character_count() {
         lastdvar = dvar;
       }
     }
-    //drones
+
     count_drones = getEntArray("drone", "targetname").size;
     drones SetValue(count_drones);
 
-    //allies
     count_allies = GetAIArray("allies").size;
     allies SetValue(count_allies);
 
-    //axis
     count_axis = GetAIArray("bad_guys").size;
     axis SetValue(count_axis);
 
     vehicles SetValue(getEntArray("script_vehicle", "classname").size);
 
-    //total
     total SetValue(count_drones + count_allies + count_axis);
 
     wait 0.25;
@@ -1201,71 +1145,6 @@ setPlayerToCamera(camera) {
   SetDebugAngles(camera.angles);
   SetDebugOrigin(camera.origin + (0, 0, -60));
 }
-/*
-	waitframe();
-	thread anglescheck();
-
-	if( !isDefined( level.camera ) )
-		return;
-
-//	wait( 1 );
-	mintime = 0;
-	linker = false;
-	while( getDvar( "camera" ) == "on" )
-	{
-		for( i=0;i<level.camera.size;i++ )
-		{
-			if( getDvar( "camera" ) != "on" )
-				break;
-
-			setDvar( "nextcamera", "on" );
-			setDvar( "lastcamera", "on" );
-
-			level.player SetOrigin( level.camera[ i ].origin );
-			level.player LinkTo( level.camera[ i ] );
-
-			level.player SetPlayerAngles( level.camera[ i ].angles );
-
-			timer = GetTime() + 10000;
-			if( timer < mintime )
-				timer = mintime;
-
-			oldorigin = level.player GetOrigin();
-			while( GetTime() < timer )
-			{
-				if( GetTime() > timer - 8000 )
-				if(( GetTime() > mintime ) &&( Distance( level.player GetOrigin(), oldorigin ) > 128 ) )
-				{
-					mintime = GetTime() + 500000;
-					timer = mintime;
-				}
-
-				if( getDvar( "camera" ) != "on" )
-					break;
-
-				if( getDvar( "nextcamera" ) == "1" )
-					break;
-
-				if( getDvar( "lastcamera" ) == "1" )
-				{
-					i-=2;
-					if( i < 0 )
-						i+=level.camera.size;
-					break;
-				}
-
-				waitframe();
-			}
-
-			if(( getDvar( "nextcamera" ) == "1" ) ||( getDvar( "lastcamera" ) == "1" ) )
-				mintime = GetTime() + 500000;
-		}
-	}
-
-	if( linker )
-		level.player Unlink();
-}
-*/
 
 anglescheck() {
   while(1) {
@@ -1408,7 +1287,6 @@ watchMinimap() {
 }
 
 updateMinimapSetting() {
-  // use 0 for no required map aspect ratio.
   requiredMapAspectRatio = GetDvarFloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level.minimapheight)) {
@@ -1458,7 +1336,6 @@ updateMinimapSetting() {
         if(disttoside < 0)
           disttoside = 0 - disttoside;
 
-        // extend map bounds to meet the required aspect ratio
         if(requiredMapAspectRatio > 0) {
           mapAspectRatio = disttoside / disttotop;
           if(mapAspectRatio < requiredMapAspectRatio) {
@@ -1478,12 +1355,12 @@ updateMinimapSetting() {
 
         if(level.console) {
           aspectratioguess = 16.0 / 9.0;
-          // .8 would be .75 but it needs to be bigger because of safe area
+
           angleside = 2 * ATan(disttoside * .8 / minimapheight);
           angletop = 2 * ATan(disttotop * aspectratioguess * .8 / minimapheight);
         } else {
           aspectratioguess = 4.0 / 3.0;
-          // multiply by 1.05 to give some margin to work with
+
           angleside = 2 * ATan(disttoside * 1.05 / minimapheight);
           angletop = 2 * ATan(disttotop * aspectratioguess * 1.05 / minimapheight);
         }
@@ -1500,13 +1377,8 @@ updateMinimapSetting() {
         origin.origin = viewpos + (0, 0, -62);
         origin.angles = (90, GetNorthYaw(), 0);
 
-        // because some guns can mess up the field of view, require default weapon
         player GiveWeapon("defaultweapon");
         SetSavedDvar("cg_fov", angle);
-
-        // Internal Dvar set: cg_drawgun - Internal Dvars cannot be changed by script. Use 'setsaveddvar' to alter SAVED internal dvars
-        // setsaveddvar can only be called on dvars with the SAVED flag set
-        // Error: "cg_drawgun" is not a valid dvar to set using setclientdvar
 
         level.minimapplayer = player;
         level.minimaporigin = origin;
@@ -1631,7 +1503,6 @@ debug_colornodes() {
 
     Print3d(guy.origin + (0, 0, 50), guy.currentColorCode, color, 1, 1);
 
-    // axis dont do forcecolor behavior, they do follow the leader for force color
     if(guy.team == "axis") {
       continue;
     }
@@ -1646,7 +1517,7 @@ draw_colorNodes(array, team) {
   keys = GetArrayKeys(array[team]);
   for(i = 0; i < keys.size; i++) {
     color = (1, 1, 1);
-    // use the first letter of the key as the color
+
     color = level.color_debug[GetSubStr(keys[i], 0, 1)];
 
     if(isDefined(level.colorNodes_debug_array[team][keys[i]])) {
@@ -1704,7 +1575,6 @@ fogcheck() {
 }
 
 debugThreat() {
-  //	if( GetTime() > level.last_threat_debug + 1000 )
   {
     level.last_threat_debug = GetTime();
     thread debugThreatCalc();
@@ -1712,8 +1582,6 @@ debugThreat() {
 }
 
 debugThreatCalc() {
-  // debug the threatbias from entities towards the specified ent
-
   ai = GetAIArray();
   entnum = GetDebugDvarInt("debug_threat");
   entity = undefined;
@@ -1914,8 +1782,8 @@ draw_colored_nodes(color) {
 init_animSounds() {
   level.animSounds = [];
   level.animSound_aliases = [];
-  waittillframeend; // now we know _load has run and the level.scr_notetracks have been defined
-  waittillframeend; // wait one extra frameend because _audio.gso files waittillframeend and we have to start after them
+  waittillframeend;
+  waittillframeend;
 
   animnames = GetArrayKeys(level.scr_notetrack);
   for(i = 0; i < animnames.size; i++) {
@@ -1929,8 +1797,6 @@ init_animSounds() {
 }
 
 init_notetracks_for_animname(animname) {
-  // copy all the scr_notetracks into animsound_aliases so they show up properly
-  // level.scr_notetrack[ animname ][ anime ][ notetrack ][ index ][ "dialog" ] = soundalias;
   foreach(anime, anime_array in level.scr_notetrack[animname]) {
     foreach(notetrack, notetrack_array in anime_array) {
       foreach(scr_notetrack in notetrack_array) {
@@ -1948,7 +1814,6 @@ init_notetracks_for_animname(animname) {
 }
 
 init_animSounds_for_animname(animname) {
-  // copy all the scr_animSounds into animsound_aliases so they show up properly
   animes = GetArrayKeys(level.scr_animSound[animname]);
 
   for(i = 0; i < animes.size; i++) {
@@ -1978,7 +1843,7 @@ debug_animSound() {
     if(!enabled) {
       return;
     }
-    // init the related variables
+
     level.animsound_selected = 0;
     level.animsound_input = "none";
     level.animsound_hud = [];
@@ -2033,12 +1898,10 @@ debug_animSound() {
       level.animsound_hud_alias[level.animsound_hud_alias.size] = hudelm;
     }
 
-    // selected is yellow
     level.animsound_hud[0].color = (1, 1, 0);
     level.animsound_hud_timer[0].color = (1, 1, 0);
   } else
   if(!enabled) {
-    // animsound got turned off so delete the hud stuff
     for(i = 0; i < level.animsound_hudlimit; i++) {
       level.animsound_hud[i] Destroy();
       level.animsound_hud_timer[i] Destroy();
@@ -2067,13 +1930,6 @@ debug_animSound() {
 
   if(!isDefined(level.animSounds))
     init_animSounds();
-
-  /*
-  if( !isDefined( level.anim_sound_was_opened ) )
-  {
-  	thread test_animsound_file();
-  }
-  */
 
   level.animSounds_thisframe = [];
   level.animSounds = remove_undefined_from_array(level.animSounds);
@@ -2109,30 +1965,7 @@ debug_animSound() {
   for(i = 0; i < level.animSounds_thisframe.size; i++) {
     animSound = level.animSounds_thisframe[i];
     scale = 1;
-    /*
-    soundalias = get_alias_from_stored( animSound );
-    scale = 0.9;
-    		
-    if( is_tagged && level.animsound_tagged == animSound )
-    	scale = 1;
-    	
-    if( isDefined( soundalias ) )
-    {
-    	if( is_from_animsound( animSound.animname, animSound.anime, animSound.notetrack ) )
-    	{
-    		Print3d( animSound.origin, animSound.notetrack + " " + soundalias, animSound.color, 1, scale );
-    	}
-    	else
-    	{
-    		// put in a * so they know its unchangeable
-    		Print3d( animSound.origin, animSound.notetrack + " *" + soundalias, animSound.color, 1, scale );
-    	}
-    }
-    else
-    {
-    	Print3d( animSound.origin, animSound.notetrack, animSound.color, 1, scale );
-    }
-    */
+
     msg = "*";
     if(level.animsound_locked)
       msg = "*LOCK";
@@ -2178,7 +2011,6 @@ draw_animsounds_in_hud() {
   } else
     level.animsound_input = "none";
 
-  // clear out the hudelems	
   for(i = 0; i < level.animsound_hudlimit; i++) {
     hudelm = level.animsound_hud[i];
     hudelm.label = "";
@@ -2191,7 +2023,6 @@ draw_animsounds_in_hud() {
     hudelm.color = (1, 1, 1);
   }
 
-  // get the highest existing animsound on the guy
   keys = GetArrayKeys(animsounds);
   highest = -1;
   for(i = 0; i < keys.size; i++) {
@@ -2206,7 +2037,6 @@ draw_animsounds_in_hud() {
   if(level.animsound_selected < 0)
     level.animsound_selected = 0;
 
-  // make sure the selected one exists
   for(;;) {
     if(isDefined(animsounds[level.animsound_selected])) {
       break;
@@ -2244,7 +2074,6 @@ draw_animsounds_in_hud() {
   }
 
   if(level.player buttonPressed("del")) {
-    // delete a sound on a guy
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
     if(!isDefined(soundalias)) {
@@ -2274,67 +2103,11 @@ is_from_animsound(animname, anime, notetrack) {
   return isDefined(level.animSound_aliases[animname][anime][notetrack]["created_by_animSound"]);
 }
 
-/*
-test_animsound_file()
-{
-	level.anim_sound_was_opened = true;
-	
-	
-	filename = "createfx/" + level.script + "_audio.gsc";
-	for( ;; )
-	{
-		warning = NewHudElem();
-		warning.alignX = "left";
-		warning.alignY = "middle";
-		warning.x = 10;
-		warning.y = 150;
-		warning.alpha = 0;
-		warning.fontScale = 2;
-		warning.label = filename + " is not open for edit, so you can not save your work. ";
-		
-		for( ;; )
-		{
-			file = OpenFile( filename, "write" );
-			if( file != -1 )
-				break;
-			wait( 5 );
-		}
-	
-		warning Destroy();
-		break;
-	}
-	
-	CloseFile( file );
-	
-}
-*/
-
 display_animSound() {
   if(Distance(level.player.origin, self.origin) > 1500) {
     return;
   }
   level.animSounds_thisframe[level.animSounds_thisframe.size] = self;
-
-  /*
-  timer = GetTime();
-  keys = GetArrayKeys( self.animSounds );
-  for( i=0; i < keys.size; i++ )
-  {
-  	key = keys[ i ];
-  	animSound = self.animSounds[ key ];
-  	if( !isDefined( animSound ) )
-  		continue;
-  	
-  	if( timer > animSound.end_time )
-  	{
-  		self.animSounds[ key ] = undefined;
-  		continue;
-  	}
-  	
-  	animSound.origin = self.origin +( 0, 0, 50 + 10 * key );
-  	level.animSounds_thisframe[ level.animSounds_thisframe.size ] = animSound;
-  }
-  */
 }
 
 debug_animSoundTag(tagnum) {
@@ -2368,7 +2141,7 @@ tag_sound(tag, tagnum) {
     return;
   }
   animSound = level.animsound_tagged.animsounds[tagnum];
-  // store the alias to the array of aliases
+
   soundalias = get_alias_from_stored(animSound);
   if(!isDefined(soundalias) || is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
     level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["soundalias"] = tag;
@@ -2378,16 +2151,6 @@ tag_sound(tag, tagnum) {
 }
 
 debug_animSoundSave() {
-  /*
-  tab = " ";
-  filename = "createfx/"+level.script+"_fx.gsc";
-  file = OpenFile( filename, "write" );
-  AssertEx( file != -1, "File not writeable( maybe you should check it out ): " + filename );
-  cfxprintln( file, "" );
-  cfxprintln( file, "main()" );
-  cfxprintln( file, "{" );
-  */
-
   filename = "createfx/" + level.script + "_audio.gsc";
   file = OpenFile(filename, "write");
   if(file == -1) {
@@ -2428,10 +2191,8 @@ print_aliases_to_file(file) {
         alias = level.animSound_aliases[animnames[i]][anime][notetrack]["soundalias"];
 
         if(notetrack == "#" + anime) {
-          // this isn't really a notetrack, its from the _anim call.
           FPrintLn(file, tab + "addOnStart_animSound( " + tostr(animnames[i]) + ", " + tostr(anime) + ", " + tostr(alias) + " ); ");
         } else {
-          // this is attached to a notetrack					
           FPrintLn(file, tab + "addNotetrack_animSound( " + tostr(animnames[i]) + ", " + tostr(anime) + ", " + tostr(notetrack) + ", " + tostr(alias) + " ); ");
         }
         PrintLn("^1Saved alias ^4" + alias + "^1 to notetrack ^4" + notetrack);

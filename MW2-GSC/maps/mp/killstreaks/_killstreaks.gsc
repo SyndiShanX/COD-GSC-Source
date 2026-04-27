@@ -10,7 +10,6 @@
 KILLSTREAK_STRING_TABLE = "mp/killstreakTable.csv";
 
 init() {
-  // && 1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
   precacheString(&"MP_NUKE_ALREADY_INBOUND");
   precacheString(&"MP_UNAVILABLE_IN_LASTSTAND");
@@ -174,10 +173,9 @@ deadlyKillstreak(streakName) {
     case "predator_missile":
     case "precision_airstrike":
     case "harrier_airstrike":
-      //case "helicopter":
-      //case "helicopter_flares":
+
     case "stealth_airstrike":
-      //case "helicopter_minigun":
+
     case "ac130":
       return true;
   }
@@ -243,8 +241,6 @@ killstreakUsePressed() {
 
   return (true);
 }
-
-//this overwrites killstreak at index 0 and decrements all other killstreaks (FCLS style)
 shuffleKillStreaksFILO(streakName) {
   self _setActionSlot(4, "");
 
@@ -350,7 +346,6 @@ killstreakUseWaiter() {
     streakName = self.pers["killstreaks"][0].streakName;
     result = self killstreakUsePressed();
 
-    //no force switching weapon for ridable killstreaks
     if(!isRideKillstreak(streakName) || !result) {
       if(!self hasWeapon(self getLastWeapon()))
         self switchToWeapon(self getFirstPrimaryWeapon());
@@ -358,9 +353,6 @@ killstreakUseWaiter() {
         self switchToWeapon(self getLastWeapon());
     }
 
-    // give time to switch to the near weapon; when the weapon is none (such as during a "disableWeapon()" period
-    // re-enabling the weapon immediately does a "weapon_change" to the killstreak weapon we just used.In the case that
-    // we have two of that killstreak, it immediately uses the second one
     if(self getCurrentWeapon() == "none") {
       while(self getCurrentWeapon() == "none")
         wait(0.05);
@@ -402,15 +394,6 @@ checkKillstreakReward(streakCount) {
     }
     if(isSubStr(streakName, "-rollover")) {
       continue;
-      /*
-      if( game["defcon"] > 2 )
-      {
-      	self.pers["lastEarnedStreak"] = streakName;
-      	continue;
-      }
-      			
-      useStreakName = strTok( streakName, "-" )[0];
-      */
     } else {
       useStreakName = streakName;
     }
@@ -454,7 +437,6 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
 
   self giveKillstreakWeapon(weapon);
 
-  // shuffle existing killstreaks up a notch
   for(i = self.pers["killstreaks"].size; i >= 0; i--)
     self.pers["killstreaks"][i + 1] = self.pers["killstreaks"][i];
 
@@ -474,7 +456,6 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
   else
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
 
-  // probably obsolete unless we bring back the autoshotty	
   if(isDefined(level.killstreakSetupFuncs[streakName]))
     self[[level.killstreakSetupFuncs[streakName]]]();
 
@@ -604,8 +585,6 @@ clearRideIntro(delay) {
 
   if(isDefined(delay))
     wait(delay);
-
-  //self freezeControlsWrapper( false );
 
   if(!isDefined(level.nukeVisionInProgress))
     self VisionSetNakedForPlayer(getDvar("mapname"), 0);

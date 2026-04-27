@@ -22,8 +22,8 @@ main() {
   self thread setMeleeAttackDist();
 
   self.a = spawnStruct();
-  self.a.pose = "stand"; // to use DoNoteTracks()
-  self.a.nextStandingHitDying = false; // to allow dogs to use bullet shield
+  self.a.pose = "stand";
+  self.a.nextStandingHitDying = false;
   self.a.movement = "run";
 
   animscripts\init::set_anim_playback_rate();
@@ -58,34 +58,30 @@ setMeleeAttackDist() {
 initDogAnimations() {
   if(!isDefined(level.dogsInitialized)) {
     level.dogsInitialized = true;
-    // [{+melee}] Melee the dog right when it bites to grab its throat.
+
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING");
-    // [{+melee}] Melee the dog before it bites to grab its throat.
+
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE");
-    // [{+melee}] Wait for the dog to bite to grab its throat.
+
     precachestring(&"SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON");
-    // [{+melee}]
+
     precachestring(&"SCRIPT_PLATFORM_DOG_HINT");
 
-    // Watch for the ^3[{+melee}]^7 hint to grab a dog.
     precachestring(&"NEW_DOG_DEATH_DO_NOTHING_ALT");
-    // Too late. Watch for the ^3[{+melee}]^7 hint to grab a dog.
+
     precachestring(&"NEW_DOG_DEATH_TOO_LATE_ALT");
-    // Too early. Wait for the ^3[{+melee}]^7 hint to grab a dog.
+
     precachestring(&"NEW_DOG_DEATH_TOO_SOON_ALT");
   }
 
-  // Initialization that should happen once per level
-  if(isDefined(anim.NotFirstTimeDogs)) // Use this to trigger the first init
+  if(isDefined(anim.NotFirstTimeDogs))
     return;
   precacheShader("hud_dog_melee");
   anim.NotFirstTimeDogs = 1;
   anim.dogStoppingDistSq = lengthSquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);
   anim.dogStartMoveDist = length(getmovedelta(%german_shepherd_run_start, 0, 1));
 
-  // notetime = getNotetrackTimes(%german_shepherd_attack_player, "dog_melee" );
-  // anim.dogAttackPlayerDist = length( getmovedelta(%german_shepherd_attack_player, 0, notetime[ 0 ] ) );
-  anim.dogAttackPlayerDist = 102; // hard code for now, above is not accurate.
+  anim.dogAttackPlayerDist = 102;
 
   offset = getstartorigin((0, 0, 0), (0, 0, 0), %german_shepherd_attack_AI_01_start_a);
   anim.dogAttackAIDist = length(offset);
@@ -97,8 +93,6 @@ initDogAnimations() {
   anim.dogTraverseAnims["jump_up_40"] = % german_shepherd_traverse_up_40;
   anim.dogTraverseAnims["jump_up_80"] = % german_shepherd_traverse_up_80;
 
-  // Dog start move animations
-  // number indexes correspond to keyboard number directions
   anim.dogStartMoveAngles[8] = 0;
   anim.dogStartMoveAngles[6] = 90;
   anim.dogStartMoveAngles[4] = -90;
@@ -121,11 +115,9 @@ initDogAnimations() {
   anim.dogLookPose["normal"][6] = % german_shepherd_look_right;
   anim.dogLookPose["normal"][8] = % german_shepherd_look_up;
 
-  // effects used by dog
   level._effect["dog_bite_blood"] = loadfx("impacts/deathfx_dogbite");
   level._effect["deathfx_bloodpool"] = loadfx("impacts/deathfx_bloodpool_view");
 
-  // setup random timings for dogs attacking the player
   slices = 5;
   array = [];
   for(i = 0; i <= slices; i++) {

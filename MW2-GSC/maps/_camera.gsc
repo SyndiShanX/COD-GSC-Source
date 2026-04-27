@@ -14,14 +14,3 @@ main(model, type) {
 }
 
 init_local() {}
-
-/*QUAKED script_vehicle_camera (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_camera::main( "vehicle_camera" );
-
-and these lines in your CSV:
-#include,vehicle_camera_camera
-
-defaultmdl="vehicle_camera"default:"vehicletype" "camera"
-*/

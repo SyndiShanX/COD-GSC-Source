@@ -14,9 +14,9 @@ MoveRun() {
 
   switch (desiredPose) {
     case "stand":
-      if(BeginStandRun()) // returns false( and does nothing ) if we're already stand - running
+      if(BeginStandRun()) {
         return;
-
+      }
       if(isDefined(self.run_overrideanim)) {
         animscripts\move::MoveStandMoveOverride(self.run_overrideanim, self.run_override_weights);
         return;
@@ -35,9 +35,9 @@ MoveRun() {
       break;
 
     case "crouch":
-      if(BeginCrouchRun()) // returns false( and does nothing ) if we're already crouch - running
+      if(BeginCrouchRun()) {
         return;
-
+      }
       if(isDefined(self.crouchrun_combatanim))
         MoveCrouchRunOverride();
       else
@@ -46,9 +46,9 @@ MoveRun() {
 
     default:
       assert(desiredPose == "prone");
-      if(BeginProneRun()) // returns false( and does nothing ) if we're already prone - running
+      if(BeginProneRun()) {
         return;
-
+      }
       ProneCrawl();
       break;
   }
@@ -127,7 +127,6 @@ RunNGun(validTarget) {
   runNGunIncrement = self.runNGunIncrement;
 
   if(!validTarget || (squared(enemyyaw) > maxRunNGunAngle * maxRunNGunAngle)) {
-    // phase out run n gun
     self clearAnim(%add_fire, 0);
     if(squared(self.runNGunWeight) < runNGunIncrement * runNGunIncrement) {
       self.runNGunWeight = 0;
@@ -187,11 +186,6 @@ RunNGun(validTarget) {
 }
 
 RunNGun_Backward() {
-  // we don't blend the running-backward animation because it
-  // doesn't blend well with the run-left and run-right animations.
-  // it's also easier to just play one animation than rework everything
-  // to consider the possibility of multiple "backwards" animations
-
   InitRunNGun();
 
   self setFlaggedAnimKnob("runanim", %combatwalk_B, 1, 0.3, 0.8);
@@ -314,7 +308,6 @@ ShouldSprintForVariation() {
     if(time < self.dangerSprintTime)
       return true;
 
-    // if already sprinted, don't do it again for at least 5 seconds
     if(time - self.dangerSprintTime < 6000)
       return false;
   }
@@ -340,8 +333,6 @@ GetMovePlaybackRate() {
 }
 
 MoveStandCombatNormal() {
-  //self clearanim(%walk_and_run_loops, 0.2 );
-
   rate = GetMovePlaybackRate();
 
   self setanimknob(%combatrun, 1.0, 0.5, rate);
@@ -376,7 +367,6 @@ MoveStandCombatNormal() {
         return;
       }
     } else if(isDefined(self.runNGunWeight) && self.runNGunWeight != 0) {
-      // can't shoot enemy anymore but still need to clear out runNGun
       decidedAnimation = self RunNGun(false);
     }
   } else if(isDefined(self.runNGunWeight) && self.runNGunWeight != 0) {
@@ -399,7 +389,6 @@ MoveStandCombatNormal() {
     self setFlaggedAnimKnobLimited("runanim", runAnim, 1, 0.1, 1, true);
     self SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"), self.sideStepRate);
 
-    // Play the appropriately weighted run animations for the direction he's moving
     self thread SetCombatStandMoveAnimWeights("run");
   }
 
@@ -454,8 +443,7 @@ runShootWhileMovingThreads() {
   self thread RunShootWhileMoving();
 }
 
-stopShootWhileMovingThreads() // we don't stop them if we shoot while moving again
-{
+stopShootWhileMovingThreads() {
   self endon("killanimscript");
   self endon("want_shoot_while_moving");
   self endon("want_aim_while_moving");
@@ -495,7 +483,6 @@ aimedSomewhatAtEnemy() {
 }
 
 CanShootWhileRunningForward() {
-  // continue runNGun if runNGunWeight != 0
   if((!isDefined(self.runNGunWeight) || self.runNGunWeight == 0) && abs(self getMotionAngle()) > self.maxRunNGunAngle)
     return false;
 
@@ -544,9 +531,9 @@ MoveStandNoncombatNormal() {
     runAnim = GetRunAnim();
 
   if(self.stairsState == "none")
-    transTime = 0.3; // 0.3 because it pops when the AI goes from combat to noncombat
+    transTime = 0.3;
   else
-    transTime = 0.1; // need to transition to stairs quickly
+    transTime = 0.1;
 
   self setflaggedanimknob("runanim", runAnim, 1, transTime, 1, true);
 
@@ -566,7 +553,6 @@ MoveCrouchRunOverride() {
 MoveCrouchRunNormal() {
   self endon("movemode");
 
-  // Play the appropriately weighted crouchrun animations for the direction he's moving
   forward_anim = GetCrouchRunAnim();
 
   self setanimknob(forward_anim, 1, 0.4);
@@ -595,7 +581,6 @@ ReloadStandRun() {
   if(!self.faceMotion || self.stairsState != "none")
     return false;
 
-  // if not allowed to shoot, not allowed to reload
   if(isDefined(self.dontShootWhileMoving) || isDefined(self.noRunReload))
     return false;
 
@@ -607,22 +592,17 @@ ReloadStandRun() {
 
   motionAngle = AngleClamp180(self getMotionAngle());
 
-  // want to be running forward; otherwise we won't see the animation play!
   if(abs(motionAngle) > 25)
     return false;
 
   if(!usingRifleLikeWeapon())
     return false;
 
-  // need to restart the run cycle because the reload animation has to be played from start to finish!
-  // the goal is to play it only when we're near the end of the run cycle.
   if(!runLoopIsNearBeginning())
     return false;
 
-  // call in a separate function so we can cleanup if we get an endon
   ReloadStandRunInternal();
 
-  // notify "abort_reload" in case the reload didn't finish, maybe due to "movemode" notify. works with handleDropClip() in shared.gsc
   self notify("abort_reload");
 
   self orientmode("face default");
@@ -649,8 +629,6 @@ ReloadStandRunInternal() {
 }
 
 runLoopIsNearBeginning() {
-  // there are actually 3 loops (left foot, right foot) in one animation loop.
-
   animfraction = self getAnimTime(%walk_and_run_loops);
   loopLength = getAnimLength(%run_lowready_F) / 3.0;
   animfraction *= 3.0;
@@ -701,10 +679,7 @@ UpdateMoveAnimWeights(moveAnimType, frontAnim, backAnim, leftAnim, rightAnim) {
 }
 
 UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
-  //assert( !isDefined( self.runNGun ) || isDefined( self.update_move_front_bias ) );
-
   if(self.faceMotion && !self shouldCQB() && !isDefined(self.update_move_front_bias)) {
-    // once you start to face motion, don't need to change weights
     if(!isDefined(self.wasFacingMotion)) {
       self.wasFacingMotion = 1;
       self setanim(frontAnim, 1, 0.2, 1, true);
@@ -715,7 +690,6 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
   } else {
     self.wasFacingMotion = undefined;
 
-    // Play the appropriately weighted animations for the direction he's moving.
     animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
 
     if(isDefined(self.update_move_front_bias)) {
@@ -730,10 +704,7 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
     self setanim(rightAnim, animWeights["right"], 0.2, 1, true);
   }
 }
-
-// change our weapon while running if we want to and can
 changeWeaponStandRun() {
-  // right now this only handles shotguns, but it could do other things too
   wantShotgun = (isDefined(self.wantShotgun) && self.wantShotgun);
   usingShotgun = isShotgun(self.weapon);
   if(wantShotgun == usingShotgun)
@@ -760,7 +731,6 @@ changeWeaponStandRun() {
       return false;
   }
 
-  // want to be running forward; otherwise we won't see the animation play!
   motionAngle = AngleClamp180(self getMotionAngle());
   if(abs(motionAngle) > 25)
     return false;
@@ -797,7 +767,7 @@ shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTa
 
 interceptNotetracksForWeaponSwitch(notetrack) {
     if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
-      return true; // "don't do the default behavior for this notetrack"}
+      return true;
 
     watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
       self endon("killanimscript");
@@ -821,8 +791,7 @@ interceptNotetracksForWeaponSwitch(notetrack) {
       self.lastweapon = self.weapon;
 
       animscripts\shared::placeWeaponOn(newGun, "right");
-      assert(self.weapon == newGun); // placeWeaponOn should have handled this
+      assert(self.weapon == newGun);
 
-      // reset ammo (assume fully loaded weapon)
       self.bulletsInClip = weaponClipSize(self.weapon);
     }

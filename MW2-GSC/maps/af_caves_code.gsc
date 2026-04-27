@@ -11,8 +11,6 @@
 #include maps\af_caves;
 #include maps\_vehicle;
 #using_animtree("generic_human");
-
-// ----------------------- // --- PLAYER/AI STUFF --- // ----------------------- teleport_to_node(node) {
 self teleport_to_origin(node.origin, node.angles);
 }
 
@@ -46,7 +44,7 @@ price_spawn() {
 turn_off_stealth() {
   disable_stealth_system();
 
-  waittillframeend; // wait for stealth system to finish setting ignoreme
+  waittillframeend;
 
   level.player player_speed_percent(100);
 
@@ -64,7 +62,6 @@ turn_off_stealth() {
 }
 
 price_be_stealthy() {
-  //level.price.dontshootwhilemoving = true;// SRS not sure if we need this
   level.price.dontEverShoot = true;
   level.price.baseaccuracy = 1;
   level.price.maxsightdistsqrd = level.price_stealth_road_sightDistSqrd;
@@ -92,8 +89,6 @@ price_goto_node_and_wait_for_player(nodeTN, dist) {
   node = GetNode(nodeTN, "targetname");
   price_wait_for_player(dist, node);
 }
-
-// destinationEnt: wait for the player to get near the destination rather than near price
 price_wait_for_player(dist, destinationEnt) {
   if(!isDefined(dist)) {
     dist = 150;
@@ -167,8 +162,6 @@ player_unsuppressed_weapon_warning() {
   }
 
   flag_set("unsuppressed_weapon_warning_played");
-
-  // "Make sure you're using a suppressed weapon, otherwise we're dead."radio_dialogue("afcaves_pri_suppressedweapon");
 }
 
 player_falling_kill_trigger() {
@@ -201,16 +194,10 @@ player_falling_kill_trigger_think() {
   } else {
     maps\_utility::missionFailedWrapper();
   }
-
-  //blackout = create_client_overlay( "black", 0, level.player );
-  //blackout FadeOverTime( 2 );
-  //blackout.alpha = 1;
-
-  //level.player Kill();
 }
 
 player_falling_to_death() {
-  triggers = getEntArray("slide_to_death_triggers", "targetname"); //includes all of Ned's remove_gun triggers and any other slide triggers I have added to ensure player slides to death
+  triggers = getEntArray("slide_to_death_triggers", "targetname");
   array_thread(triggers, ::player_falling_to_death_think);
 }
 
@@ -218,7 +205,7 @@ player_falling_to_death_think() {
   level endon("player_falling_to_death");
   self waittill("trigger");
   level.player disableweapons();
-  flag_clear("can_save"); //don't allow saving if we are falling/sliding to death
+  flag_clear("can_save");
   level notify("player_falling_to_death");
 }
 
@@ -238,7 +225,7 @@ playerseek() {
 
 be_aggressive() {
   self.aggressivemode = true;
-  //self enable_heat_behavior();
+
   self.doorFlashChance = .5;
 }
 
@@ -295,51 +282,6 @@ scan_when_idle() {
   }
 }
 
-/* SRS DEPRECATED
-friendly_adjust_movement_speed()
-{
-	self notify( "stop_adjust_movement_speed" );
-	self endon( "death" );
-	self endon( "stop_adjust_movement_speed" );
-	
-	for(;;)
-	{
-		wait .15;
-		
-		while( friendly_should_speed_up() )
-		{
-//			IPrintLnBold( "friendlies speeding up" );
-			self.moveplaybackrate = 2.5;
-			wait 0.05;
-		}
-		
-		self.moveplaybackrate = 1.0;
-	}
-}
-
-friendly_should_speed_up()
-{
-	prof_begin( "friendly_movement_rate_math" );
-	
-	if( DistanceSquared( self.origin, self.goalpos ) <= level.goodFriendlyDistanceFromPlayerSquared )
-	{
-		prof_end( "friendly_movement_rate_math" );
-		return false;
-	}
-	
-	// check if AI is visible in player's FOV
-	if( within_fov( level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine[ "70" ] ) )
-	{
-		prof_end( "friendly_movement_rate_math" );
-		return false;
-	}
-	
-	prof_end( "friendly_movement_rate_math" );
-	
-	return true;
-}
-*/
-
 force_weapon_when_player_not_looking(weaponName) {
   self endon("death");
   while(within_fov(level.player.origin, level.player GetPlayerAngles(), level.price.origin, level.cosine["45"])) {
@@ -374,14 +316,11 @@ spawn_ai_group(aSpawners, doSafe, doStaggered) {
   }
 
   if(doSafe) {
-    //check to ensure all the guys were spawned
     AssertEx((aSpawners.size == spawnedGuys.size), "Not all guys were spawned successfully from array_spawn");
   }
 
   return spawnedGuys;
 }
-
-// basically copied from move::moveCoverToCover(), with some modifications and hardcoded values
 scripted_covercrouch_shuffle_left() {
   self thread scripted_covercrouch_earlyout_notify("barracks_player_near_stair_shooting_spot", level);
   level endon("barracks_player_near_stair_shooting_spot");
@@ -423,7 +362,7 @@ scripted_covercrouch_shuffle_left() {
     self ClearAnim(startAnim, 0.2);
     remainingDist -= startDist;
 
-    blendTime = 0.2; // reset blend for looping move
+    blendTime = 0.2;
   } else {
     self OrientMode("face angle", node.angles[1]);
   }
@@ -441,7 +380,6 @@ scripted_covercrouch_shuffle_left() {
   self SetFlaggedAnim("shuffle", shuffleAnim, 1, blendTime, 0.75);
   self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
 
-  // account for loopTime not being exact since loop animation delta isn't uniform over time
   for(i = 0; i < 2; i++) {
     remainingDist = Distance(self.origin, node.origin);
     if(playEnd)
@@ -451,7 +389,7 @@ scripted_covercrouch_shuffle_left() {
       break;
     }
 
-    playTime = loopTime * (remainingDist / shuffleDist) * 0.9; // don't overshoot
+    playTime = loopTime * (remainingDist / shuffleDist) * 0.9;
     playTime = floor(playTime * serverFPS) * serverSPF;
 
     if(playTime < 0.05) {
@@ -462,14 +400,11 @@ scripted_covercrouch_shuffle_left() {
   }
 
   if(playEnd) {
-    // hardcoded here, derived based on node type in animscript
     blendTime = 0.2;
 
     self ClearAnim(shuffleAnim, blendTime);
     self SetFlaggedAnim("shuffle_end", endAnim, 1, blendTime);
     self animscripts\shared::DoNoteTracks("shuffle_end");
-
-    // clear animation in moveCoverToCoverFinish if needed
   }
 
   self SafeTeleport(node.origin);
@@ -483,7 +418,6 @@ scripted_covercrouch_shuffle_left() {
 
   self notify("scripted_shuffle_done");
 
-  // now exit the cover
   level.scr_anim[self.animname]["scripted_covercrouch_shuffle_exit"] = % covercrouch_run_out_ML;
   self anim_single_run_solo(self, "scripted_covercrouch_shuffle_exit");
 }
@@ -498,8 +432,6 @@ scripted_covercrouch_earlyout_notify(killNotify, ent) {
   ent waittill(killNotify);
   self notify("scripted_shuffle_done");
 }
-
-// ---------------------------------- // --- STEALTH NOSIGHT CLIP LOGIC --- // ---------------------------------- clip_nosight_logic() {
 if(isDefined(self.script_parameters)) {
   if(IsSubStr(self.script_parameters, "difficultymedium")) {
     if(level.gameskill > 1) {
@@ -536,8 +468,6 @@ clip_nosight_logic2() {
 
   self Delete();
 }
-
-// --------------------- // --- PLAYER RAPPEL --- // --------------------- delay_lerpViewAngleClamp() {
 wait(0.2);
 level.player LerpViewAngleClamp(1, 0.5, 0.5, 45, 45, 45, 45);
 }
@@ -583,15 +513,12 @@ af_caves_rappel_behavior() {
 
   ent = GetEnt("rappel_animent", "targetname");
 
-  // first hook up
   player_rig = spawn_anim_model("player_rig");
   player_rig Hide();
-  //player_rig thread maps\_debug::drawTagForever( "tag_player", ( 1, 1, 0 ) );
 
   ending_player_rig = spawn_anim_model("player_rig");
   ending_player_rig Hide();
   ending_player_rig DontCastShadows();
-  //ending_player_rig thread maps\_debug::drawTagForever( "tag_player", ( 0, 1, 1 ) );
 
   node = GetEnt("guard_assassinate", "script_noteworthy");
   node anim_first_frame_solo(ending_player_rig, "rappel_kill");
@@ -604,8 +531,6 @@ af_caves_rappel_behavior() {
 
   ent anim_first_frame(rig_and_rope, "rappel_hookup");
 
-  //	wait( 0.05 );
-
   level.player_rig = player_rig;
   tag_origin = spawn_tag_origin();
   tag_origin LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
@@ -617,7 +542,7 @@ af_caves_rappel_behavior() {
   tag_origin_start.origin = level.player.origin;
 
   level.player PlayerLinkTo(tag_origin_start);
-  wait(0.05); // why?
+  wait(0.05);
   level.player PlayerLinkToBlend(tag_origin, "tag_origin", time, 0.2, 0.2);
   delayThread(time, ::player_gets_groundref_and_opens_fov, tag_origin);
   tag_origin_start Delete();
@@ -632,7 +557,7 @@ af_caves_rappel_behavior() {
   rappel_baddie_spawners = getEntArray("rappel_baddie_spawner", "targetname");
   array_spawn(rappel_baddie_spawners);
 
-  delayThread(6, ::display_hint, "begin_descent"); // 8
+  delayThread(6, ::display_hint, "begin_descent");
 
   player_rig delayCall(0.6, ::Show);
   player_rope delayCall(0.6, ::Show);
@@ -645,8 +570,6 @@ af_caves_rappel_behavior() {
   flag_set("player_hooked_up");
 
   player_rig Hide();
-
-  // do some anim of starting carabiner here
 
   flag_set("descending");
 
@@ -674,9 +597,9 @@ af_caves_rappel_behavior() {
   player_rig ClearAnim(rappel_hookup, 0.2);
   level.player_rig = player_rig;
 
-  min_speed = 0.30; // the slowest speed we can rappel
-  max_speed = 3.5; // the fastest rappelling speed
-  speed = 1; // ignore this, internal variable
+  min_speed = 0.30;
+  max_speed = 3.5;
+  speed = 1;
 
   anim_min_time = 0.80;
   anim_min_time_clamp_speed = max_speed;
@@ -684,18 +607,15 @@ af_caves_rappel_behavior() {
   anim_max_time = 0.9;
   anim_max_time_clamp_speed = 1.5;
 
-  //ending_min_speed = 2; // Min speed during the ending moment
-  //ending_max_speed = 2; // max speed during ending moment
   ending_speed = 0.13;
 
-  break_speed = 0.375; // how fast the brakes work, the higher the number the more brakes
+  break_speed = 0.375;
 
-  nobreak_rate = 0.006; // the speed that we accumulate accelleration while not braking
-  nobreak_maxspeed = 0.12; // the maximum accelleration while not braking
-  nobreak_minspeed = 0.08; // our accelleration the moment we stop braking
-  nobreak_speed = nobreak_minspeed; // internal variable
+  nobreak_rate = 0.006;
+  nobreak_maxspeed = 0.12;
+  nobreak_minspeed = 0.08;
+  nobreak_speed = nobreak_minspeed;
 
-  // effects the way the player pops off the cliff while rappelling
   close_anim_dest = 100;
   far_anim_dest = 0.1;
   far_anim_min = 0.1;
@@ -703,12 +623,10 @@ af_caves_rappel_behavior() {
   far_anim_rate = 1;
   old_org = level.player.origin;
 
-  // the amount of time you have to be moving at max speed to DIE if you dont brake.
-  death_buffer = 20000; // no fail on easy / normal
+  death_buffer = 20000;
   if(level.gameskill >= 2)
     death_buffer = 1500;
 
-  //tag_origin thread liner();
   was_breaking = false;
   sin_index_old = 0;
   sin_index = 0;
@@ -725,8 +643,7 @@ af_caves_rappel_behavior() {
   able_to_break_time = GetTime() + 1500;
 
   for(;;) {
-    // at % through the anim, go into ending mode with the knife
-    if(player_rig GetAnimTime(far_anim) >= 0.94) // .94
+    if(player_rig GetAnimTime(far_anim) >= 0.94)
       flag_set("rappel_end");
 
     breaking = level.player adsButtonPressed() || level.player attackButtonPressed() && !flag("rappel_end");
@@ -740,7 +657,6 @@ af_caves_rappel_behavior() {
       }
     }
 
-    // last_time_braked + the amount of time you have to fall before you can brake
     if(breaking && GetTime() > last_time_braked + 5 && GetTime() > able_to_break_time) {
       nobreak_speed = nobreak_minspeed;
       speed -= break_speed;
@@ -780,8 +696,6 @@ af_caves_rappel_behavior() {
 
         if(GetTime() > death_fall_timer + death_buffer) {
           if(!flag("rappel_end")) {
-            //level.player Unlink();
-
             if(animtime >= 0.65 && animtime < anim_min_time) {
               player_fell = true;
               break;
@@ -791,7 +705,6 @@ af_caves_rappel_behavior() {
       }
 
       if(flag("rappel_end")) {
-        // blend the current speed with the desired ending_speed
         dif = 0.15;
         speed = ending_speed * dif + speed * (1 - dif);
       }
@@ -816,7 +729,6 @@ af_caves_rappel_behavior() {
         if(far_anim_dest >= far_anim_max)
           far_anim_dest = far_anim_max;
       } else {
-        // use the
         far_anim_dest -= far_anim_rate * 3;
         if(far_anim_dest <= far_anim_min)
           far_anim_dest = far_anim_min;
@@ -857,14 +769,12 @@ af_caves_rappel_behavior() {
       wait(0.05);
     }
 
-    //println( "break!" );
-    //angles = ( -15, -100, 0 );
     angles = tag_origin.angles;
     angles = (0, angles[1], 0);
     forward = anglesToForward(angles);
     up = AnglesToUp(angles);
     velocity = forward * 750;
-    //	velocity = up * 500;
+
     tag_origin Unlink();
     tag_origin MoveSlide((0, 0, 0), 32, velocity);
     tag_origin delayThread(0.75, ::hurt_player_on_bounce);
@@ -886,10 +796,6 @@ af_caves_rappel_behavior() {
       wait(0.05);
     }
 
-    //level.player Unlink();
-    // since I removed it at the begining no point in reseting it here.
-    // level.player PlayerSetGroundReferenceEnt( undefined );
-    // level.player EnableWeapons();
     if(flag("player_failed_rappel")) {
       return;
     }
@@ -907,9 +813,6 @@ af_caves_rappel_behavior() {
     knife DontCastShadows();
     knife LinkTo(ending_player_rig, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
-    //		ending_player_rig delayCall( 0.6, ::Show );
-    //		knife delayCall( 0.6, ::Show );
-
     thread hint_fade();
 
     node = GetEnt("guard_assassinate", "script_noteworthy");
@@ -925,14 +828,14 @@ af_caves_rappel_behavior() {
     guys[1] = enemy;
 
     enemy.a.nodeath = true;
-    //		node.origin += (0,0,8);
+
     level.player Unlink();
     ending_player_rig relink_player_for_knife_kill(percentage);
     ending_player_rig Show();
     knife Show();
 
     node.guard = enemy;
-    //enemy delayThread( 1.5, ::clear_nodeath_and_kill );
+
     enemy gun_remove();
 
     thread lerp_savedDvar("sm_sunSampleSizeNear", 0.0156, 0.5);
@@ -943,11 +846,9 @@ af_caves_rappel_behavior() {
     flag_clear("descending");
     ending_player_rig waittillmatch("single anim", "end");
 
-    //Print3d( player_rig.origin, ".", (1,0,0), 1, 1, 1000 );
     ending_player_rig MoveTo(ending_player_rig.origin + (0, 0, 12), 0.4, .2, .2);
 
     if(old_weapon != level.secondaryweapon) {
-      // switch to the default secondary if it's in the player's inventory
       weaps = level.player GetWeaponsListAll();
       foreach(weap in weaps) {
         if(weap == level.secondaryweapon) {
@@ -979,8 +880,6 @@ af_caves_rappel_behavior() {
     level.player AllowProne(true);
   }
 }
-
-// called when a notetrack hits
 rappel_guard1_deathgurgle(guard1) {
   speaker = spawn("script_origin", guard1 getEye());
   speaker LinkTo(guard1);
@@ -996,7 +895,7 @@ player_decent_death() {
   level.player waittill("death");
 
   level notify("new_quote_string");
-  // You did not brake in time.
+
   setDvar("ui_deadquote", &"AF_CAVES_FELL_TO_DEATH");
   blackout = create_client_overlay("black", 0, level.player);
   blackout FadeOverTime(1.5);
@@ -1008,20 +907,9 @@ player_decent_death() {
 relink_player_for_knife_kill(percentage) {
   waittillframeend;
 
-  /*
-  if( percentage < 0.94 )
-  	time = 0.8;	
-  else
-  if( percentage < 0.96 )
-  	time = 0.6;	
-  else
-  	time = 0.4;	
-  */
-
   time = 0.4;
 
-  //	time = 0.8;//0.4 // 0.866 sec is the length of the melee anim for the rappel_knife weapon
-  level.player PlayerLinkToBlend(self, "tag_player", time, time * 0.5, time * 0.5); // 0.5
+  level.player PlayerLinkToBlend(self, "tag_player", time, time * 0.5, time * 0.5);
   wait(time);
 
   level.player TakeWeapon("rappel_knife");
@@ -1043,7 +931,6 @@ hurt_player_on_bounce() {
       level.player DoDamage(maxhealth * 0.35, randomvec);
       level.player Kill();
     }
-    //println(vel );
 
     if(vel > old_vel)
       old_vel = vel;
@@ -1074,8 +961,6 @@ liner() {
     wait(0.05);
   }
 }
-
-// ----------------- // --- STEAMROOM --- // ----------------- steamroom_door_crack_open() {
 door = level.steamroom_door;
 
 yawopen = -50;
@@ -1108,8 +993,6 @@ steamroom_door_full_open() {
 
   door DisconnectPaths();
 }
-
-// ----------------------------- // --- EXPLOSION EARTHQUAKES --- // ----------------------------- setup_barrel_earthquake() {
 array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
 
 level thread explosion_earthquake();
@@ -1191,8 +1074,6 @@ explosion_earthquake() {
     }
   }
 }
-
-// ---------------------------------- // --- CONTROL ROOM SWINGING LAMP --- // ---------------------------------- hunted_hanging_light() {
 fx = getfx("gulag_cafe_spotlight");
 tag_origin = spawn_tag_origin();
 
@@ -1215,11 +1096,10 @@ swing_light_org_off_think() {
 
 lamp_animates(root) {
   root.lamp = self;
-  self.animname = "lamp"; // uses one set of anims
+  self.animname = "lamp";
   self.origin = root.origin;
   self DontCastShadows();
 
-  // cant blend to the same anim	
   odd = true;
   anims = [];
   anims[0] = self getanim("swing");
@@ -1247,8 +1127,6 @@ lamp_rotates_yaw() {
     wait(time);
   }
 }
-
-// -------------- // --- MUSIC --- // -------------- intro_music() {
 ender = "player_hooking_up";
 level endon(ender);
 
@@ -1303,9 +1181,6 @@ stealth_music() {
   wait(1);
   MusicPlayWrapper("af_caves_stealth_busted");
 }
-
-// ---------------- // --- TV STUFF --- // ---------------- tv_cinematic_think() {
-// play cinematics on the TVs
 SetSavedDvar("cg_cinematicFullScreen", "0");
 
 while(1) {
@@ -1322,7 +1197,6 @@ tv_movie() {
   level endon("stop_cinematic");
 
   while(1) {
-    // SRS TODO need new video
     CinematicInGameLoopResident("gulag_securitycam");
 
     wait(5);
@@ -1333,26 +1207,22 @@ tv_movie() {
   }
 }
 
-barracks_tv_light() // turns off when tv gets shot
-{
+barracks_tv_light() {
   light = GetEnt("tv_light", "targetname");
 
   wait_for_targetname_trigger("tv_trigger");
   light SetLightIntensity(0);
 }
 
-barracks_destroy_tv() // destroy it when stealth is broken or if the player passes by the stealth area.
-{
+barracks_destroy_tv() {
   flag_wait("destroy_tv");
 
   wait(RandomIntRange(2, 4));
-  exploder("stealth_broken"); // destroy the tv
+  exploder("stealth_broken");
 
   light = GetEnt("tv_light", "targetname");
   light SetLightIntensity(0);
 }
-
-// --------------------- // --- CANYON CONVOY --- // --------------------- convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
 canyon_convoy = getEntArray(vehicleTN, "targetname");
 thread drone_vehicle_flood_start(canyon_convoy, "canyon_convoy", minWait, maxWait);
 
@@ -1382,8 +1252,6 @@ drone_vehicle_flood_start(aSpawners, groupName, minWait, maxWait, noSound) {
 drone_vehicle_flood_stop(groupName) {
   level notify("stop_drone_vehicle_flood" + groupName);
 }
-
-// ------------ // --- MISC --- // ------------ get_global_fx(name) {
 fxName = level.global_fx[name];
 return level._effect[fxName];
 }
@@ -1395,7 +1263,6 @@ delete_corpse_in_volume(volume) {
 }
 
 half_particles_setup() {
-  //half buffer particles for PS3/PC
   if((level.Console && level.ps3) || !level.Console) {
     SetHalfResParticles(true);
   } else {
@@ -1405,8 +1272,6 @@ half_particles_setup() {
   flag_wait("disable_half_buffer");
   SetHalfResParticles(false);
 }
-
-// if any trigger is activated in a trigger array
 waittill_trigger_array(triggers) {
   for(k = 1; k < triggers.size; k++)
     triggers[k] endon("trigger");

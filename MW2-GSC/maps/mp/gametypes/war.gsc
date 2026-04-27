@@ -6,33 +6,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-/*
-	War
-	Objective: 	Score points for your team by eliminating players on the opposing team
-	Map ends:	When one team reaches the score limit, or time limit is reached
-	Respawning:	No wait / Near teammates
-
-	Level requirementss
-	------------------ Spawnpoints:
-			classname		mp_tdm_spawn
-			All players spawn from these. The spawnpoint chosen is dependent on the current locations of teammates and enemies
-			at the time of spawn. Players generally spawn behind their teammates relative to the direction of enemies.
-
-		Spectator Spawnpoints:
-			classname		mp_global_intermission
-			Spectators spawn from these and intermission is viewed from these positions.
-			Atleast one is required, any more and they are randomly chosen between.
-*/
-
-/*QUAKED mp_tdm_spawn (0.0 0.0 1.0) (-16 -16 0) (16 16 72)
-Players spawn away from enemies and near their team at one of these positions.*/
-
-/*QUAKED mp_tdm_spawn_axis_start (0.5 0.0 1.0) (-16 -16 0) (16 16 72)
-Axis players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
-/*QUAKED mp_tdm_spawn_allies_start (0.0 0.5 1.0) (-16 -16 0) (16 16 72)
-Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
-
 main() {
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -54,7 +27,6 @@ main() {
   level.onStartGameType = ::onStartGameType;
   level.getSpawnPoint = ::getSpawnPoint;
   level.onNormalDeath = ::onNormalDeath;
-  //level.onTimeLimit = ::onTimeLimit;	// overtime not fully supported yet
 
   game["dialog"]["gametype"] = "tm_death";
 

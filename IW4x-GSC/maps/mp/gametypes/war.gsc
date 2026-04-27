@@ -27,7 +27,6 @@ main() {
   level.onStartGameType = ::onStartGameType;
   level.getSpawnPoint = ::getSpawnPoint;
   level.onNormalDeath = ::onNormalDeath;
-  //level.onTimeLimit = ::onTimeLimit;	// overtime not fully supported yet
 
   game["dialog"]["gametype"] = "tm_death";
 

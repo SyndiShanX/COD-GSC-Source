@@ -70,23 +70,10 @@ doNuke(allowCancel) {
   maps\mp\gametypes\_gamelogic::pauseTimer();
   level.timeLimitOverride = true;
   setGameEndTime(int(gettime() + (level.nukeTimer * 1000)));
-  setDvar("ui_bomb_timer", 4); // Nuke sets '4' to avoid briefcase icon showing
+  setDvar("ui_bomb_timer", 4);
 
   if(level.teambased) {
     thread teamPlayerCardSplash("used_nuke", self, self.team);
-    /*
-    players = level.players;
-    		
-    foreach( player in level.players )
-    {
-    	playerteam = player.pers["team"];
-    	if( isDefined( playerteam ) )
-    	{
-    		if( playerteam == self.pers["team"] )
-    			player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
-    	}
-    }
-    */
   } else {
     if(!level.hardcoreMode)
       self iprintlnbold(&"MP_FRIENDLY_TACTICAL_NUKE");
@@ -104,7 +91,6 @@ doNuke(allowCancel) {
   if(level.cancelMode && allowCancel)
     level thread cancelNukeOnDeath(self);
 
-  // leaks if lots of nukes are called due to endon above.
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
@@ -123,7 +109,7 @@ cancelNukeOnDeath(player) {
   maps\mp\gametypes\_gamelogic::resumeTimer();
   level.timeLimitOverride = false;
 
-  setDvar("ui_bomb_timer", 0); // Nuke sets '4' to avoid briefcase icon showing
+  setDvar("ui_bomb_timer", 0);
 
   level notify("nuke_cancelled");
 }
@@ -200,7 +186,6 @@ nukeAftermathEffect() {
 nukeSlowMo() {
   level endon("nuke_cancelled");
 
-  //SetSlowMotion( <startTimescale>, <endTimescale>, <deltaTime> )
   setSlowMotion(1.0, 0.25, 0.5);
   level waittill("nuke_death");
   setSlowMotion(0.25, 1, 2.0);
@@ -251,12 +236,6 @@ nukeEarthquake() {
   level endon("nuke_cancelled");
 
   level waittill("nuke_death");
-
-  // TODO: need to get a different position to call this on
-  //earthquake( 0.6, 10, nukepos, 100000 );
-
-  //foreach( player in level.players )
-  //player PlayRumbleOnEntity( "damage_heavy" );
 }
 
 waitForNukeCancel() {

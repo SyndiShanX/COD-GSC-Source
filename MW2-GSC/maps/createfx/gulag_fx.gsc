@@ -7,7 +7,6 @@
 #include common_scripts\_createfx;
 
 main() {
-  // CreateFX entities placed: 907
   ent = createLoopSound();
   ent.v["stopable"] = true;
   ent.v["origin"] = (2392, -4299, 3670);

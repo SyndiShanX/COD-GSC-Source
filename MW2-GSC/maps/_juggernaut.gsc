@@ -8,8 +8,6 @@
 #using_animtree("generic_human");
 
 JUGGERNAUT_MUSIC_DISTANCE = 2500;
-
-// must be called before maps::\_load::main()
 main() {
   if(isDefined(level.juggernaut_initialized)) {
     return;
@@ -26,7 +24,6 @@ main() {
 subclass_juggernaut() {
   self.juggernaut = true;
 
-  //self.health = 1800;//moved to ai type
   self.minPainDamage = 200;
 
   self.grenadeAmmo = 0;
@@ -91,7 +88,7 @@ subclass_juggernaut() {
   level notify("juggernaut_died");
 
   if(!isDefined(self))
-    return; // deleted
+    return;
   if(!isDefined(attacker))
     return;
   if(!isPlayer(attacker)) {
@@ -104,7 +101,6 @@ juggernaut_hunt_immediately_behavior() {
   self endon("death");
   self.useChokePoints = false;
 
-  //small goal at the player so they can close in aggressively
   while(1) {
     wait .5;
     if(isDefined(self.enemy)) {
@@ -141,7 +137,7 @@ juggernaut_sound_when_player_close() {
     }
     if(level.pmc_alljuggernauts) {
       if(!BulletTracePassed(self getEye(), player getEye(), false, undefined)) {
-        wait 0.25; // reduce the amount of traces to the rate it used to use
+        wait 0.25;
         continue;
       }
     }
@@ -151,7 +147,7 @@ juggernaut_sound_when_player_close() {
 
   level.juggernaut_next_alert_time = gettime() + 15000;
   level notify("juggernaut_attacking");
-  //iprintlnbold( "juggernaut" );
+
   array_thread(level.players, ::playLocalSoundWrapper, "_juggernaut_attack");
 }
 

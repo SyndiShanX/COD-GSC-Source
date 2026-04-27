@@ -6,22 +6,12 @@
 #using scripts\shared\vehicle_shared;
 #namespace siegebot_theia;
 
-function autoexec __init__sytem__() {
-  // Unsupported VM revision (1B).
-}
+function autoexec __init__sytem__() {}
 
-function __init__() {
-  // Unsupported VM revision (1B).
-}
+function __init__() {}
 
-function _setup_() {
-  // Unsupported VM revision (1B).
-}
+function _setup_() {}
 
-function sarah_rumble_on_landing() {
-  // Unsupported VM revision (1B).
-}
+function sarah_rumble_on_landing() {}
 
-function sarah_minigun_spin() {
-  // Unsupported VM revision (1B).
-}
+function sarah_minigun_spin() {}

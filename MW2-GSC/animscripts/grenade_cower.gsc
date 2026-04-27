@@ -16,10 +16,8 @@ main() {
   }
 
   if(self.a.pose == "prone") {
-    // TODO: use an i-just-dived loop?
-
     animscripts\stop::main();
-    return; // Should never get to here
+    return;
   }
 
   self AnimMode("zonly_physics");
@@ -27,7 +25,7 @@ main() {
 
   grenadeAngle = 0;
 
-  if(isDefined(self.grenade)) // failsafe
+  if(isDefined(self.grenade))
     grenadeAngle = AngleClamp180(vectorToAngles(self.grenade.origin - self.origin)[1] - self.angles[1]);
   else
     grenadeAngle = self.angles[1];
@@ -61,14 +59,11 @@ TryDive(grenadeAngle) {
 
   diveAnim = undefined;
   if(abs(grenadeAngle) > 90) {
-    // grenade behind us
     diveAnim = % exposed_dive_grenade_B;
   } else {
-    // grenade in front of us
     diveAnim = % exposed_dive_grenade_F;
   }
 
-  // when the dives are split into a dive, idle, and get up, // maybe we can get a better point to do the moveto check with
   moveBy = getMoveDelta(diveAnim, 0, 0.5);
   diveToPos = self localToWorldCoords(moveBy);
 

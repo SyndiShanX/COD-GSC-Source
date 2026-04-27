@@ -8,7 +8,6 @@
 #include maps\_anim;
 #include maps\_specialops;
 
-// --------------------------------------------------------------------------------- should_spawn() {
 switch (level.gameSkill) {
   case 0:
   case 1:
@@ -19,8 +18,6 @@ switch (level.gameSkill) {
     return !(self.spawnflags & 1024);
 }
 }
-
-// --------------------------------------------------------------------------------- create_ghillie_enemies(enemy_id, wait_id, activate_id) {
 ghillie_enemies_init();
 
 assertex(isDefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
@@ -60,11 +57,10 @@ ghillie_player_damage_tracker() {
   while(1) {
     self waittill("damage", damage, attacker);
 
-    // is it a ghillie?
     if(!isai(attacker) || !isDefined(attacker.ghillie_is_prone)) {
       continue;
     }
-    // Only set this if they are currently unaware.
+
     if(!array_contains(level.ghillies_unaware, attacker.unique_id)) {
       continue;
     }
@@ -76,10 +72,8 @@ ghillie_enemy_init(enemy_id, activate_id) {
   level.ghillie_count++;
   level.enemies_spawned++;
 
-  // Ghillies count as "unaware" before they've fired their first shot.	
   ghillie_enemy_set_unaware();
 
-  //	self.sightlatency = 1000;
   self.baseaccuracy = 6;
   self.goalradius = 96;
   self.grenadeAmmo = 0;
@@ -117,8 +111,6 @@ ghillie_enemy_register_death() {
   else
     death_register_basic(attacker, undefined, true);
 }
-
-// This can probably be revisited to be simpler.
 ghillie_enemy_behavior(activate_id) {
   level endon("special_op_terminated");
   self endon("quit_ghillie_behavior");
@@ -270,9 +262,6 @@ ghillie_enemy_crouch_and_fire() {
   thread ghillie_enemy_enable_shooting();
   thread ghillie_enemy_abandon_shooting();
 
-  //	if( isDefined( level.ghillies_unaware[ self.unique_id ] ) )
-  //		thread ghillie_enemy_detect_fire();
-
   waittill_any("shooting", "abandon_shooting");
 
   self.dontEverShoot = true;
@@ -357,7 +346,7 @@ ghillie_enemy_quit_ghillie() {
 
   self.ghillie_is_prone = false;
   self.ghillie_is_frozen = false;
-  //	self.combatmode = "cover";
+
   self.dontEverShoot = undefined;
   self allowedstances("stand", "crouch");
   self.goalradius = 512;
@@ -443,7 +432,6 @@ ghillie_enemy_can_be_seen(check_for_flub, check_offset) {
   if(!can_see_me && is_coop())
     can_see_me = ghillie_enemy_sight_test(level.player2, check_offset);
 
-  // If I can be seen, then check for a flub. If not, then restart my flub from scratch.
   if(isDefined(check_for_flub) && check_for_flub) {
     if(can_see_me)
       can_see_me = ghillie_enemy_check_flub();
@@ -468,7 +456,6 @@ ghillie_enemy_sight_test(player, check_offset) {
   if(!player player_looking_at(my_eye, dot, true))
     return false;
 
-  // Normal tests
   can_see_me = SightTracePassed(my_eye, their_eye, false, self);
   if(!can_see_me)
     can_see_me = SightTracePassed(self.origin, their_eye, false, self);
@@ -484,22 +471,17 @@ ghillie_enemy_sight_test(player, check_offset) {
 }
 
 ghillie_enemy_check_flub() {
-  // If we aren't allowing flubs, always return true.
   if(!isDefined(level.ghillie_flub_time_min))
     return true;
 
-  // If we don't have a current flub time, set it now and return.
-  // This makes it so the time is set from the first moment of being seen again.
   if(!isDefined(self.ghillie_flub_time)) {
     ghillie_enemy_set_flub_time();
     return true;
   }
 
-  // Otherwise, player has been staring at me, see if I should make a mistake.
   if(gettime() < self.ghillie_flub_time)
     return true;
 
-  // We are ready to make a mistake.
   ghillie_enemy_clear_flub_time();
   return false;
 }
@@ -545,8 +527,6 @@ ghillie_get_time(time_min, time_max) {
     wait_time *= level.coop_difficulty_scalar;
   return wait_time;
 }
-
-// --------------------------------------------------------------------------------- create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
 patrol_enemies_init();
 
 assertex(isDefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
@@ -641,7 +621,6 @@ patrol_enemy_register_death() {
   level.patrols = array_removedead(level.patrols);
 
   if(patrol_enemy_can_multi_kill(attacker, cause, weapon_name)) {
-    // Only register multi-kills when in stealth.
     current_time = gettime();
     if(current_time == level.patrol_death_time)
       level.patrol_multi_kills++;
@@ -661,7 +640,7 @@ patrol_enemy_register_death() {
       case 3:
         thread patrol_enemy_kill_triple();
         break;
-      default: // No known 4x+ kill possibilities. Better to say nothing than sound dumb.
+      default:
     }
   }
 
@@ -755,8 +734,6 @@ patrol_enemy_sight_test(player) {
 
   return true;
 }
-
-// --------------------------------------------------------------------------------- death_register_unaware(attacker, force_dialog, skip_dialog) {
 if(isDefined(attacker) && isPlayer(attacker)) {
   level notify("kill_registered");
   attacker.kills_stealth++;
@@ -786,11 +763,6 @@ death_register_basic(attacker, force_dialog, skip_dialog) {
 
   level.deaths_basic++;
   level.bonus_time_given += level.bonus_basic;
-  // The "basic" dialog wound up being a bit too harsh, so using these lines for the kills, and will use
-  // the "sloppy" type lines for once everyone is dead after stealth is broken.
-  //	death_dialog( level.dialog_kill_basic, level.deaths_basic, force_dialog, skip_dialog );
-  // New update, no lines for "broken stealth" kills.
-  //	death_dialog( level.dialog_kill_quiet, level.deaths_nofire, force_dialog, skip_dialog );
 }
 
 death_dialog(dialog, total, force_dialog, skip_dialog) {
@@ -811,8 +783,6 @@ death_dialog(dialog, total, force_dialog, skip_dialog) {
 
   radio_dialogue(dialog[total % dialog.size], 1.0);
 }
-
-// --------------------------------------------------------------------------------- turn_on_stealth() {
 battlechatter_off("axis");
 battlechatter_off("allies");
 
@@ -836,17 +806,11 @@ rangesSpotted["stand"] = 2500;
 maps\_stealth_utility::stealth_detect_ranges_set(rangesHidden, rangesSpotted);
 
 thread stealth_music_loop();
-// Decided to not chastize player ever.
-//	thread stealth_chastize_loop();
 }
 
 stealth_disable() {
   level endon("special_op_terminated");
 
-  // Currently the Ghillies behave poorly when the Stealth System is active. The way the map is structured
-  // makes it viable to disable stealth from pocket to pocket. Wait until all the patrols are dead before doing
-  // so though, just in case they are at the edge.
-  // A flag can be set to force it (player touches a trigger where they've gone too far to allow stealth to continue.
   while(level.patrol_count > 0 && !flag("force_disable_stealth"))
     wait 1;
 
@@ -864,10 +828,8 @@ stealth_disable() {
 }
 
 stealth_enable() {
-  // Clear this so the next trigger has a chance to set it when new ghillies are spawned.
   flag_clear("force_disable_stealth");
 
-  // Force the ghillies out of ghillie mode.
   ghillie_enemies_quit_ghillie();
 
   foreach(player in level.players) {
@@ -899,32 +861,10 @@ stealth_music_loop() {
 
 stealth_music_hidden_loop() {
   music_loop("so_hidden_so_ghillies_stealth_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-  	level endon( "_stealth_spotted" );
-
-  	hidden_stealth_music_TIME = 119;
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_hidden_so_ghillies_stealth_music" );
-  		wait hidden_stealth_music_TIME;
-  		wait 2;
-  	}*/
 }
 
 stealth_music_busted_loop() {
   music_loop("so_hidden_so_ghillies_busted_music", 2);
-
-  /*	level endon( "special_op_terminated" );
-  	level endon( "_stealth_spotted" );
-
-  	hidden_stealth_busted_music_TIME = 88;
-  	while( 1 )
-  	{
-  		MusicPlayWrapper( "so_hidden_so_ghillies_busted_music" );
-  		wait hidden_stealth_busted_music_TIME;
-  		wait 2;
-  	}*/
 }
 
 stealth_chastize_loop() {
@@ -938,15 +878,11 @@ stealth_chastize_loop() {
     death_dialog(level.dialog_kill_basic, level.deaths_basic, true);
   }
 }
-
-// --------------------------------------------------------------------------------- turn_on_radiation() {
 thread maps\_radiation::main();
 
 wait 4;
 thread radio_dialogue("so_hid_ghil_rad_warning");
 }
-
-// --------------------------------------------------------------------------------- hud_bonuses_create() {
 ypos = so_hud_ypos();
 stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
 nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
@@ -996,16 +932,12 @@ hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
     basic_kills SetValue(self.kills_basic);
   }
 }
-
-// --------------------------------------------------------------------------------- objective_set_chopper() {
 flag_wait("so_hidden_obj_chopper");
 
 obj = getstruct("so_hidden_obj_chopper", "script_noteworthy");
 objective_position(1, obj.origin);
 playFX(getfx("extraction_smoke"), obj.origin);
 }
-
-// --------------------------------------------------------------------------------- create_chatter_aliases_for_patrols() {
 aliases = [];
 aliases[aliases.size] = "scoutsniper_ru1_passcig";
 aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
@@ -1018,8 +950,6 @@ aliases[aliases.size] = "scoutsniper_ru2_notwandering";
 aliases[aliases.size] = "scoutsniper_ru1_wandering";
 aliases[aliases.size] = "scoutsniper_ru2_zahkaevspayinggood";
 aliases[aliases.size] = "scoutsniper_ru1_wasteland";
-//aliases[ aliases.size ] = "scoutsniper_ru2_imonit";//yelling
-//aliases[ aliases.size ] = "scoutsniper_ru1_takealook";//radio and loud
 aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
 aliases[aliases.size] = "scoutsniper_ru1_onourway";
 aliases[aliases.size] = "scoutsniper_ru1_passcig";
@@ -1038,7 +968,6 @@ aliases[aliases.size] = "scoutsniper_ru4_didnteatbreakfast";
 aliases[aliases.size] = "scoutsniper_ru2_yescomrade";
 aliases[aliases.size] = "scoutsniper_ru4_takenzakhaevsoffer";
 aliases[aliases.size] = "scoutsniper_ru2_clearrotorblades";
-//aliases[ aliases.size ] = "scoutsniper_ru4_mayhaveproblem";//fear
 aliases[aliases.size] = "scoutsniper_ru2_radiationdosimeters";
 aliases[aliases.size] = "scoutsniper_ru4_canceltransactions";
 aliases[aliases.size] = "scoutsniper_ru2_dontbelieveatall";
@@ -1059,13 +988,13 @@ script_chatgroups() {
 
   level.current_conversation_point = RandomInt(level.chatter_aliases.size);
 
-  while(true /*!flag( "done_with_stealth_camp" )*/ ) {
+  while(true) {
     flag_waitopen("_stealth_spotted");
 
     closest_talker = undefined;
     next_closest = undefined;
     enemies = GetAIArray("axis");
-    //sort from closest to furthest
+
     closest_enemies = get_array_of_closest(getAveragePlayerOrigin(), enemies);
 
     for(i = 0; i < closest_enemies.size; i++) {
@@ -1076,10 +1005,8 @@ script_chatgroups() {
           if(!closest_talker ent_flag("_stealth_normal")) {
             continue;
           }
-        //find next closest member of same chat group
-        next_closest = find_next_member(closest_enemies, i, closest_chat_group);
 
-        //if has no buddy or is too far from buddy or buddy is alert find another
+        next_closest = find_next_member(closest_enemies, i, closest_chat_group);
 
         if(!isDefined(next_closest))
           continue;
@@ -1088,15 +1015,13 @@ script_chatgroups() {
             continue;
         d = Distance(next_closest.origin, closest_talker.origin);
         if(d > 220) {
-          //println( d );
           continue;
         } else
           break;
       }
     }
-    //we have a group, say something
+
     if(isDefined(next_closest)) {
-      //check if closest guy is our last talker, if so use second closest
       if(isDefined(level.last_talker)) {
         if(level.last_talker == closest_talker)
           talker = next_closest;
@@ -1112,9 +1037,9 @@ script_chatgroups() {
         level.current_conversation_point = 0;
       level.last_talker = talker;
 
-      wait .5; // conversation has pauses
+      wait .5;
     } else
-      wait 2; // lets try again in 2 seconds
+      wait 2;
   }
 }
 
@@ -1150,14 +1075,13 @@ chatter_play_sound(alias) {
   org LinkTo(self);
 
   org playSound(alias, "sounddone");
-  //println( "script_chatter alias = " + alias );
 
   self chatter_play_sound_wait(org);
   if(IsAlive(self))
     self notify("play_sound_done");
 
   org StopSounds();
-  wait(0.05); // stopsounds doesnt work if the org is deleted same frame
+  wait(0.05);
 
   org Delete();
 }
@@ -1177,8 +1101,6 @@ find_next_member(closest_enemies, closest, closest_chat_group) {
   }
   return undefined;
 }
-
-// --------------------------------------------------------------------------------- clip_nosight_wait_for_activate() {
 self endon("death");
 
 flag_wait(self.script_flag);
@@ -1206,8 +1128,6 @@ clip_nosight_wait_stealth() {
 
   self delete();
 }
-
-// --------------------------------------------------------------------------------- init_prone_DOF() {
 foreach(player in level.players) {
   player.dofDefault["nearStart"] = level.dofDefault["nearStart"];
   player.dofDefault["nearEnd"] = level.dofDefault["nearEnd"];
@@ -1267,8 +1187,6 @@ set_prone_DOF() {
 
   self maps\_art::setdefaultdepthoffield();
 }
-
-// --------------------------------------------------------------------------------- dialog_unsilenced_weapons() {
 self endon("death");
 level endon("nonsilenced_weapon_pickup");
 
@@ -1291,12 +1209,10 @@ while(true) {
   if(issubstr(current_weapon, "silence")) {
     continue;
   }
-  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+
   thread radio_dialogue("so_hid_ghil_pri_attractattn");
   break;
 }
 
 level notify("nonsilenced_weapon_pickup");
 }
-
-// ---------------------------------------------------------------------------------

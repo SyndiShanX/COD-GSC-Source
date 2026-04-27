@@ -8,9 +8,6 @@ main() {
   maps\createart\mp_complex_fog::main();
   maps\createart\mp_complex_fog_hdr::main();
   common_scripts\_destructible::init();
-  //common_scripts\_destructible_dlc::main();
-
-  //maps\mp\_destructible_dlc::main(); // call before _load
 
   maps\mp\_load::main();
 
@@ -18,7 +15,6 @@ main() {
 
   ambientPlay("ambient_mp_complex");
 
-  // raise up planes to avoid them flying through buildings
   level.airstrikeHeightScale = 2;
 
   game["attackers"] = "allies";

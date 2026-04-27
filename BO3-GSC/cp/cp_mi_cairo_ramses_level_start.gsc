@@ -22,74 +22,38 @@
 #using scripts\shared\vehicle_shared;
 #namespace level_start;
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function init_heroes() {
-  // Unsupported VM revision (1B).
-}
+function init_heroes() {}
 
-function setup_players_for_station_walk() {
-  // Unsupported VM revision (1B).
-}
+function setup_players_for_station_walk() {}
 
-function tether_player_to_hendricks() {
-  // Unsupported VM revision (1B).
-}
+function tether_player_to_hendricks() {}
 
-function setup_players_for_station_fight() {
-  // Unsupported VM revision (1B).
-}
+function setup_players_for_station_fight() {}
 
-function ramses_station_intro_igc() {
-  // Unsupported VM revision (1B).
-}
+function ramses_station_intro_igc() {}
 
-function function_1f8e97be() {
-  // Unsupported VM revision (1B).
-}
+function function_1f8e97be() {}
 
-function set_up_train() {
-  // Unsupported VM revision (1B).
-}
+function set_up_train() {}
 
-function station_intro_scene_init() {
-  // Unsupported VM revision (1B).
-}
+function station_intro_scene_init() {}
 
-function enterstation_1st_ride_done_func() {
-  // Unsupported VM revision (1B).
-}
+function enterstation_1st_ride_done_func() {}
 
-function attach_extracam_to_traincar() {
-  // Unsupported VM revision (1B).
-}
+function attach_extracam_to_traincar() {}
 
-function enterstation_1st_ride_arrival_rumble() {
-  // Unsupported VM revision (1B).
-}
+function enterstation_1st_ride_arrival_rumble() {}
 
-function enterstation_1st_ride_stop_rumble() {
-  // Unsupported VM revision (1B).
-}
+function enterstation_1st_ride_stop_rumble() {}
 
-function function_ba280036() {
-  // Unsupported VM revision (1B).
-}
+function function_ba280036() {}
 
-function turn_on_reflection_extracam() {
-  // Unsupported VM revision (1B).
-}
+function turn_on_reflection_extracam() {}
 
-function turn_off_reflection_extracam() {
-  // Unsupported VM revision (1B).
-}
+function turn_off_reflection_extracam() {}
 
-function link_ents() {
-  // Unsupported VM revision (1B).
-}
+function link_ents() {}
 
-function link_players() {
-  // Unsupported VM revision (1B).
-}
+function link_players() {}

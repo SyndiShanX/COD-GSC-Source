@@ -16,7 +16,6 @@ main() {
   setDvar("compassmaxrange", "2300");
   setDvar("r_lightGridEnableTweaks", 1);
   setDvar("r_lightGridIntensity", 1.3);
-  //setDvar( "r_lightGridContrast", .5 );
 
   setDvar("r_tessellation", 0);
   setDvar("r_lodBiasRigid", -2000);

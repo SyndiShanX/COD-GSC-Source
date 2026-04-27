@@ -110,8 +110,6 @@ onPlayerConnect() {
       player.plague = true;
   }
 }
-
-// TODO: When possible move above onPlayerConnect threads here
 onPlayerSpawned() {
   self endon("disconnect");
 
@@ -203,8 +201,6 @@ monitorCombatHighSurvival() {
     waitframe();
   }
 }
-
-// round based tracking
 initMissionData() {
   keys = getArrayKeys(level.killstreakFuncs);
   foreach(key in keys)
@@ -270,15 +266,13 @@ ch_hardpoints(data) {
     case "stealth_airstrike":
       player processChallenge("ch_stealth_airstrike");
       player processChallenge("ch_airstrikes");
-      //			if( player.pers["stealth_airstrike"] >= 2 )
-      //				player processChallenge( "ch_???" );
+
       break;
 
     case "harrier_airstrike":
       player processChallenge("ch_harrier_strike");
       player processChallenge("ch_airstrikes");
-      //			if( player.pers["harrier_airstrike"] >= 2 )
-      //				player processChallenge( "ch_???" );
+
       break;
 
     case "helicopter":
@@ -291,60 +285,46 @@ ch_hardpoints(data) {
     case "helicopter_flares":
       player processChallenge("ch_helicopter_flares");
       player processChallenge("ch_helicopters");
-      //			if( player.pers["helicopter_flares"] >= 2 )
-      //				player processChallenge( "ch_???" );
+
       break;
 
     case "helicopter_minigun":
       player processChallenge("ch_helicopter_minigun");
       player processChallenge("ch_helicopters");
-      //			if( player.pers["helicopter_minigun"] >= 2 )
-      //				player processChallenge( "ch_???" );
+
       break;
 
     case "airdrop":
       player processChallenge("ch_airdrop");
       player processChallenge("ch_airdrops");
 
-      //			if( player.pers["airdrop"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "airdrop_sentry_minigun":
       player processChallenge("ch_sentry");
       player processChallenge("ch_airdrops");
 
-      //			if( player.pers["airdrop"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "airdrop_mega":
       player processChallenge("ch_airdrop_mega");
       player processChallenge("ch_airdrops", 4);
 
-      //			if( player.pers["airdrop_mega"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "ac130":
       player processChallenge("ch_ac130");
 
-      //			if( player.pers["airdrop_mega"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "emp":
       player processChallenge("ch_emp");
 
-      //			if( player.pers["emp"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "predator_missile":
       player processChallenge("ch_predator_missile");
 
-      //			if( player.pers["emp"] >= 2 )
-      //				player processChallenge( "ch_???" );
       break;
 
     case "nuke":
@@ -372,14 +352,14 @@ ch_vehicle_kills(data) {
   player.pers[data.sWeapon + "_streak"]++;
 
   switch (data.sWeapon) {
-    case "cobra_player_minigun_mp": // Chopper Gunner
+    case "cobra_player_minigun_mp":
       player processChallenge("ch_cobracommander");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_hidef");
       break;
 
-    case "artillery_mp": // Precision Airstrike
+    case "artillery_mp":
       player processChallenge("ch_carpetbomber");
 
       if(player.pers[data.sWeapon + "_streak"] >= 5)
@@ -389,7 +369,7 @@ ch_vehicle_kills(data) {
         player processChallenge("ch_finishingtouch");
       break;
 
-    case "stealth_bomb_mp": // Stealth Bomber
+    case "stealth_bomb_mp":
       player processChallenge("ch_thespirit");
 
       if(player.pers[data.sWeapon + "_streak"] >= 6)
@@ -399,37 +379,37 @@ ch_vehicle_kills(data) {
         player processChallenge("ch_technokiller");
       break;
 
-    case "pavelow_minigun_mp": // Pave Low
+    case "pavelow_minigun_mp":
       player processChallenge("ch_jollygreengiant");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_transformer");
       break;
 
-    case "sentry_minigun_mp": // Sentry Gun
+    case "sentry_minigun_mp":
       player processChallenge("ch_looknohands");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_absentee");
       break;
 
-    case "harrier_20mm_mp": // Harrier Strike
+    case "harrier_20mm_mp":
       player processChallenge("ch_yourefired");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_truelies");
       break;
 
-    case "ac130_105mm_mp": // AC130
-    case "ac130_40mm_mp": // AC130
-    case "ac130_25mm_mp": // AC130
+    case "ac130_105mm_mp":
+    case "ac130_40mm_mp":
+    case "ac130_25mm_mp":
       player processChallenge("ch_spectre");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_deathfromabove");
       break;
 
-    case "remotemissile_projectile_mp": // Hellfire
+    case "remotemissile_projectile_mp":
       player processChallenge("ch_predator");
 
       if(player.pers[data.sWeapon + "_streak"] >= 4)
@@ -439,14 +419,14 @@ ch_vehicle_kills(data) {
         player processChallenge("ch_dronekiller");
       break;
 
-    case "cobra_20mm_mp": // Attack Helicopter
+    case "cobra_20mm_mp":
       player processChallenge("ch_choppervet");
 
       if(isDefined(player.finalKill))
         player processChallenge("ch_og");
       break;
 
-    case "nuke_mp": // Nuke
+    case "nuke_mp":
       data.victim processChallenge("ch_radiationsickness");
       break;
 
@@ -481,7 +461,7 @@ MGKill() {
       return;
   }
   player.pers["MGStreak"]++;
-  //iprintln( player.pers["MGStreak"] );
+
   if(player.pers["MGStreak"] >= 5)
     player processChallenge("ch_mgmaster");
 }
@@ -491,7 +471,7 @@ endMGStreakWhenLeaveMG() {
   while(1) {
     if(!isAlive(self) || self useButtonPressed()) {
       self.pers["MGStreak"] = undefined;
-      //iprintln("0");
+
       break;
     }
     wait .05;
@@ -499,9 +479,7 @@ endMGStreakWhenLeaveMG() {
 }
 
 endMGStreak() {
-  // in case endMGStreakWhenLeaveMG fails for whatever reason.
   self.pers["MGStreak"] = undefined;
-  //iprintln("0");
 }
 
 killedBestEnemyPlayer(wasBest) {
@@ -667,7 +645,6 @@ ch_kills(data, time) {
   if(isDefined(data.modifiers["buzzkill"]) && data.modifiers["buzzkill"] >= 9)
     player processChallenge("ch_thedenier");
 
-  // Filter out killstreak weapons	
   if(isKillstreakWeapon(data.sWeapon)) {
     return;
   }
@@ -720,7 +697,6 @@ ch_kills(data, time) {
     if(isStrStart(data.sWeapon, "frag_grenade_short") && (!isDefined(data.victim.explosiveInfo["throwbackKill"]) || !data.victim.explosiveInfo["throwbackKill"]))
       player processChallenge("ch_martyr");
 
-    // this isdefined check should not be needed... find out where these mystery explosions are coming from
     if(isDefined(data.victim.explosiveInfo["damageTime"]) && data.victim.explosiveInfo["damageTime"] == time) {
       if(data.sWeapon == "none")
         data.sWeapon = data.victim.explosiveInfo["weapon"];
@@ -844,9 +820,7 @@ ch_kills(data, time) {
 
         if(data.victim.explosiveInfo["chainKill"])
           player processChallenge("ch_dominos");
-      } else if(data.sWeapon == "explodable_barrel") {
-        //player processChallenge( "ch_redbarrelsurprise" );
-      } else if(data.sWeapon == "destructible_car") {
+      } else if(data.sWeapon == "explodable_barrel") {} else if(data.sWeapon == "destructible_car") {
         player processChallenge("ch_carbomb");
       } else if(isStrStart(data.sWeapon, "rpg_")) {
         if(player.explosiveKills[expId] > 1)
@@ -1010,7 +984,6 @@ ch_kills(data, time) {
   }
 
   if(data.sMeansOfDeath == "MOD_PISTOL_BULLET" || data.sMeansOfDeath == "MOD_RIFLE_BULLET" || data.sMeansOfDeath == "MOD_HEAD_SHOT" && !isKillstreakWeapon(data.sweapon)) {
-    // checks and processes all weapon attachment challenges
     weaponAttachments = getWeaponAttachments(data.sweapon);
     baseWeapon = getBaseWeaponName(data.sWeapon);
 
@@ -1045,8 +1018,7 @@ ch_kills(data, time) {
     if(player _hasPerk("specialty_bulletaccuracy") && !player playerAds())
       player processChallenge("ch_bulletaccuracy_pro");
 
-    if(distanceSquared(player.origin, data.victim.origin) < 65536) // 256^2
-    {
+    if(distanceSquared(player.origin, data.victim.origin) < 65536) {
       if(player _hasPerk("specialty_heartbreaker"))
         player processChallenge("ch_deadsilence_pro");
 
@@ -1241,20 +1213,6 @@ ch_roundwin(data) {
     }
   }
 }
-
-/*
-char *modNames[MOD_NUM] =
-{
-	"MOD_UNKNOWN", "MOD_PISTOL_BULLET", "MOD_RIFLE_BULLET", "MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_MELEE", "MOD_HEAD_SHOT", "MOD_CRUSH", "MOD_TELEFRAG", "MOD_FALLING", "MOD_SUICIDE", "MOD_TRIGGER_HURT", "MOD_EXPLOSIVE", "MOD_IMPACT", };
-
-static const char *g_HitLocNames[] =
-{
-	"none", "helmet", "head", "neck", "torso_upper", "torso_lower", "right_arm_upper", "left_arm_upper", "right_arm_lower", "left_arm_lower", "right_hand", "left_hand", "right_leg_upper", "left_leg_upper", "right_leg_lower", "left_leg_lower", "right_foot", "left_foot", "gun", };
-
-*/
-
-// ==========================================
-// Callback functions
 
 playerDamaged(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
   self endon("disconnect");
@@ -1477,9 +1435,6 @@ monitorSprintTime() {
 
   sprintTime = int(getTime() - startTime);
   self incPlayerStat("sprinttime", sprintTime);
-
-  //total = self getPlayerStat( "sprinttime" );
-  //println( "SprintTime: ", sprintTime, " Total:", total );
 }
 
 monitorFallDistance() {
@@ -1512,14 +1467,10 @@ monitorFallDistance() {
 
       if(falldist / 12.0 > 30 && !isAlive(self))
         self processChallenge("ch_goodbye");
-
-      //println( "You fell ", falldist / 12.0, " feet");
     }
     wait .05;
   }
 }
-
-// TODO: Make this challenge happen after winning while being the last person on your team
 lastManSD() {
   if(!mayProcessChallenges()) {
     return;
@@ -1598,8 +1549,6 @@ monitorMisc() {
 
   self waittill("disconnect");
 
-  // make sure the threads end when we disconnect.
-  // (this allows one disconnect waittill instead of 4 disconnect endons)
   self notify("destroyed_explosive");
   self notify("begin_airstrike");
   self notify("destroyed_car");
@@ -1607,9 +1556,6 @@ monitorMisc() {
 }
 
 monitorMiscSingle(waittillString) {
-  // don't need to endon disconnect because we will get the notify we're waiting for when we disconnect.
-  // avoiding the endon disconnect saves a lot of script variables (5 * 4 threads * 64 players = 1280)
-
   while(1) {
     self waittill(waittillString);
 
@@ -1664,7 +1610,6 @@ healthRegenerated() {
   self thread resetBrinkOfDeathKillStreakShortly();
 
   if(isDefined(self.lastDamageWasFromEnemy) && self.lastDamageWasFromEnemy) {
-    // TODO: this isn't always getting incremented when i regen
     self.healthRegenerationStreak++;
     if(self.healthRegenerationStreak >= 5) {
       self processChallenge("ch_invincible");
@@ -1720,7 +1665,7 @@ processChallenge(baseName, progressInc, forceSetProgress) {
   if(missionStatus == 0) {
     return;
   }
-  // challenge already completed
+
   if(missionStatus > level.challengeInfo[baseName]["targetval"].size) {
     return;
   }
@@ -1731,7 +1676,6 @@ processChallenge(baseName, progressInc, forceSetProgress) {
     progress += progressInc;
   }
 
-  // we've completed this tier	
   if(progress >= level.challengeInfo[baseName]["targetval"][missionStatus]) {
     self ch_setProgress(baseName, level.challengeInfo[baseName]["targetval"][missionStatus]);
     self thread giveRankXpAfterWait(baseName, missionStatus);
@@ -1821,9 +1765,6 @@ updateChallenges() {
   }
 }
 
-/*
-	challenge_targetVal and rewardVal should cast their return values to int
-*/
 challenge_targetVal(refString, tierId) {
   value = tableLookup("mp/allChallengesTable.csv", CH_REF_COL, refString, CH_TARGET_COL + ((tierId - 1) * 2));
   return int(value);
@@ -1935,7 +1876,6 @@ monitorKillstreakProgress() {
   for(;;) {
     self waittill("got_killstreak", streakCount);
 
-    //for scr_givkillstreak
     if(!isDefined(streakCount)) {
       continue;
     }

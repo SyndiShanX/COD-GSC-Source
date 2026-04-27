@@ -5,7 +5,6 @@ main() {
     maps\createfx\mp_underground_fx::main();
   }
 
-  //ambient fx
   level._effect["falling_dirt_frequent_runner"] = loadfx("dust/falling_dirt_frequent_runner");
   level._effect["dust_wind_fast_paper"] = loadfx("dust/dust_wind_fast_paper");
   level._effect["dust_wind_slow_paper"] = loadfx("dust/dust_wind_slow_paper");

@@ -15,7 +15,6 @@ init() {
 
   level.onlineGame = getDvarInt("onlinegame");
 
-  //level.rankedMatch = ( level.onlineGame );
   setDvarIfUninitialized("scr_classic", 0);
   setDvarIfUninitialized("scr_rankedmatch", 1);
   level.rankedMatch = ((getDvarInt("scr_rankedmatch") == 1) && level.onlineGame);
@@ -41,7 +40,6 @@ init() {
 
   level.tiSpawnDelay = getDvarInt("scr_tispawndelay");
 
-  // hack to allow maps with no scripts to run correctly
   if(!isDefined(level.tweakablesInitialized))
     maps\mp\gametypes\_tweakables::init();
 
@@ -203,7 +201,6 @@ testShock() {
 }
 
 onXPEvent(event) {
-  //self thread maps\mp\_loot::giveMoney( event, 10 );
   self thread maps\mp\gametypes\_rank::giveRankXP(event);
 }
 

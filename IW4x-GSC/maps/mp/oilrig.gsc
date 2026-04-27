@@ -59,8 +59,7 @@ custom_kill_trigger() {
         continue;
       }
 
-      if(player.origin[2] < -350.0) // -2948.0 <- water level
-      {
+      if(player.origin[2] < -350.0) {
         player suicide();
       }
     }

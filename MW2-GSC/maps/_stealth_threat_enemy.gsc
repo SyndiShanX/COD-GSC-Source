@@ -16,11 +16,6 @@ stealth_threat_enemy_main() {
   self thread enemy_Threat_Loop();
 }
 
-/************************************************************************************************************/
-
-/*													LOGIC													*/
-/************************************************************************************************************/
-
 enemy_Threat_Loop() {
   self endon("death");
   self endon("pain_death");
@@ -57,11 +52,6 @@ enemy_alert_level_change_reponse(type) {
       break;
   }
 }
-
-// we do this because we assume dogs are sleeping...if so, then they'll never get an enemy
-// because to make that assumption we set their ignorall to true in their init...so we need
-// to give them the ability to find an enemy once they take damage...we might extend this in
-// the future to also do the same thing if an ai gets too close or makes too much noise
 enemy_threat_logic_dog() {
   self endon("death");
   self endon("pain_death");
@@ -112,23 +102,13 @@ enemy_threat_logic_dog_wakeup_dist(dog, dist) {
   dog.favoriteenemy = undefined;
 }
 
-/************************************************************************************************************/
-
-/*												THREAT LEVELS												*/
-/************************************************************************************************************/
-
 enemy_alert_level_reset_wrapper() {
-  //this function is different than normal because if we want to change the behavior the enemies have
-  //after losing a known enemy - we can set it up here...also we don't care about any previous knowledge of corpses
-  //through this wrapper either and we make sure we wait for the spotted flag to clear before going back to normal.
-  //this why this function exists instead of just using the normal wrapper
-
   self endon("_stealth_enemy_alert_level_change");
-  self endon("enemy_awareness_reaction"); //we'll end on a new event, but events will also end on a new threat
+  self endon("enemy_awareness_reaction");
   self endon("death");
   self endon("pain_death");
 
-  self stealth_group_spotted_flag_waitopen(); //wait for everyone to lose their enemy too
+  self stealth_group_spotted_flag_waitopen();
 
   self enemy_stop_current_behavior();
 
@@ -140,7 +120,7 @@ enemy_alert_level_reset_wrapper() {
   self ent_flag_clear("_stealth_attack");
   self ent_flag_set("_stealth_normal");
 
-  function = ai_get_behavior_function("threat", "reset"); // default ::enemy_alert_level_normal
+  function = ai_get_behavior_function("threat", "reset");
   self thread[[function]]();
 }
 
@@ -155,10 +135,9 @@ enemy_alert_level_warning_wrapper(type) {
   self enemy_find_original_goal();
   self enemy_stop_current_behavior();
 
-  function = ai_get_behavior_function("threat", type); // default ::enemy_alert_level_warning1, 2
+  function = ai_get_behavior_function("threat", type);
   self[[function]]();
 
-  // done with warning response behavior and still in warning state, return to normal
   self enemy_alert_level_normal_wrapper();
 }
 
@@ -231,11 +210,8 @@ enemy_alert_level_warning1() {
   self setgoalpos(spot);
   self.goalradius = 64;
 
-  // we do the timeout - because sometimes this puts his goal into a postion that
-  // is invalid and he'll never actually hit his goal...so we time out after 2 seconds
   self waittill_notify_or_timeout("goal", 2);
 
-  // if AI can't reach it's goal, at least face it.
   if(!self isInGoal(self.origin))
     self.shootPosOverride = spot + (0, 0, 64);
 
@@ -259,8 +235,6 @@ enemy_alert_level_warning2() {
   }
   self.disablearrivals = false;
   self.disableexits = false;
-  //	self.oldfixednode = self.fixednode;
-  //	self.fixednode = true;
 
   lastknownspot = self.enemy.origin;
   dist = distance(lastknownspot, self.origin);
@@ -289,8 +263,6 @@ enemy_alert_level_warning2() {
 
   enemy_lookaround_for_time(15);
 
-  //	self.fixednode = self.oldfixednode;
-
   if(self.type != "dog") {
     type = "a";
     if(randomint(100) > 50)
@@ -305,7 +277,7 @@ enemy_alert_level_warning2() {
 enemy_alert_level_attack_wrapper() {
   self endon("death");
   self endon("pain_death");
-  self endon("_stealth_enemy_alert_level_change"); // - > this might not be a good idea - just added it recently - haven't tested
+  self endon("_stealth_enemy_alert_level_change");
 
   self notify("endNewEnemyReactionAnim");
   self notify("movemode");
@@ -313,10 +285,10 @@ enemy_alert_level_attack_wrapper() {
   self.disablearrivals = false;
   self.disableexits = false;
 
-  self enemy_find_original_goal(); //should ALWAYS know what the original goal was just in case...if we dont have any warnings, we catch it here
+  self enemy_find_original_goal();
   self ent_flag_set("_stealth_attack");
 
-  function = ai_get_behavior_function("threat", "attack"); // default ::enemy_alert_level_attack
+  function = ai_get_behavior_function("threat", "attack");
   self[[function]]();
 }
 
@@ -361,7 +333,6 @@ enemy_alert_level_normal_wrapper() {
   if(self ent_flag_exist("_stealth_saw_corpse"))
     self ent_flag_waitopen("_stealth_saw_corpse");
 
-  //to make sure found corpse is set
   wait .05;
 
   if(self ent_flag_exist("_stealth_found_corpse"))
@@ -369,7 +340,7 @@ enemy_alert_level_normal_wrapper() {
 
   self ent_flag_set("_stealth_normal");
 
-  function = ai_get_behavior_function("threat", "normal"); // default ::enemy_alert_level_normal
+  function = ai_get_behavior_function("threat", "normal");
   self[[function]]();
 }
 
@@ -378,11 +349,6 @@ enemy_alert_level_normal() {
 
   self enemy_go_back();
 }
-
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
 
 enemy_init() {
   self enemy_default_threat_behavior();
@@ -413,15 +379,12 @@ enemy_default_threat_behavior() {
 
   self enemy_set_threat_behavior(array);
 }
-
-// set the code alert level
 enemy_set_alert_level(type) {
-  assertEx(isDefined(level._stealth.logic.alert_level_table[type]), "unsupported alert_level"); // may need a way to custom alert_level_table
+  assertEx(isDefined(level._stealth.logic.alert_level_table[type]), "unsupported alert_level");
   self.alertLevel = level._stealth.logic.alert_level_table[type];
 }
 
 enemy_set_threat_behavior(array) {
-  //clear the array
   self._stealth.behavior.ai_functions["threat"] = [];
 
   if(!isDefined(array["reset"]))
@@ -434,14 +397,13 @@ enemy_set_threat_behavior(array) {
   foreach(key, function in array)
   self ai_create_behavior_function("threat", key, function);
 
-  self._stealth.logic.alert_level.max_warnings = array.size - 3; // sub 2 for reset, normal, and attack
+  self._stealth.logic.alert_level.max_warnings = array.size - 3;
 }
 
 enemy_alert_level_change(type) {
-  self notify("_stealth_enemy_alert_level_change", type); // calls ::enemy_alert_level_change_reponse but one frame later. Must be after enemy_Animation_Loop thread process... messy
+  self notify("_stealth_enemy_alert_level_change", type);
 
   if(!isDefined(self._stealth.plugins.threat)) {
-    // from _stealth_visibility_enemy::enemy_alert_level_nothing()
     self.goalradius = level.default_goalradius;
     return;
   }
@@ -470,7 +432,6 @@ enemy_threat_anim_defaults() {
 enemy_set_threat_anim_behavior(array) {
   def = enemy_threat_anim_defaults();
 
-  //set defautls for reset and attack if they're not there
   if(!isDefined(array["reset"]))
     array["reset"] = def["reset"];
   if(!isDefined(array["warning"]))

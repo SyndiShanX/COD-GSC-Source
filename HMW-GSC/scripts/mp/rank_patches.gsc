@@ -1,5 +1,4 @@
 main() {
-  // we remove iprintlns
   replacefunc(maps\mp\gametypes\_rank::updaterankannouncehud, ::updaterankannouncehud_stub);
 }
 

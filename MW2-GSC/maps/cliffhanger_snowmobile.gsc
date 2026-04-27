@@ -16,20 +16,11 @@
 #include maps\cliffhanger;
 #include maps\cliffhanger_snowmobile_code;
 
-/************************************************************************************************************/
-
-/*													SNOWMOBILE												*/
-/************************************************************************************************************/
-
 start_tarmac() {
   level.moto_drive = false;
   if(getDvar("moto_drive") == "")
     setDvar("moto_drive", "0");
-  /*
-  bike_animations();
-  bike_driver_animations();
-  bike_rider_animations();
-  */
+
   start_common_cliffhanger();
   friendly_init_cliffhanger();
 
@@ -52,7 +43,6 @@ start_tarmac() {
 price_reaches_slide_start() {
   price_slide_catchup = getnode("price_slide_catchup", "targetname");
   if(flag("player_slides_down_hill")) {
-    // player already slide down hill so skip ahead
     level.price teleport_ent(price_slide_catchup);
   }
 
@@ -62,9 +52,7 @@ price_reaches_slide_start() {
 
   flag_wait("player_slides_down_hill");
 
-  // north of the node? then teleport
   if(level.price.origin[1] > price_slide_catchup.origin[1]) {
-    // player already slide down hill so skip ahead
     level.price teleport_ent(price_slide_catchup);
   }
   level.price waittill("goal");
@@ -75,7 +63,6 @@ price_makes_for_his_mobile() {
 
   price_reaches_slide_start();
 
-  // the anim lacks the notetrack
   level.price delayThread(1, animscripts\shared::noteTrackPoseCrouch);
   flag_set("price_reaches_bottom");
   level.price disable_surprise();
@@ -98,7 +85,7 @@ hill_attackers_spawn() {
       break;
     }
     level waittill("cliff_death");
-    waittillframeend; // for a chance for cliffdeaths to get increments
+    waittillframeend;
   }
 
   if(!flag("clifftop_snowmobile_guys_die")) {
@@ -112,15 +99,6 @@ hill_attackers_spawn() {
   wait(2);
   flag_set("cliff_guys_all_dead");
   level.price_prep_time = gettime();
-  /*
-  for( ;; )
-  {
-  	if( level.cliffdeaths >= 4 )
-  		break;
-  	level waittill( "cliff_death" );
-  	waittillframeend; // for a chance for cliffdeaths to get increments
-  }
-  */
 
   price_icepicks_a_snowmobile();
 }
@@ -158,25 +136,24 @@ price_got_new_colornode(node) {
   remark_func = undefined;
 
   if(gettime() > self.next_comment_time) {
-    // haven't spoken in awhile so it's ok to make a comment about what I'm doing
     remark = undefined;
 
     switch (node.script_noteworthy) {
       case "central_jeeps":
-        // “I’m heading for those jeeps, cover me!”
+
         remark = "headingforjeeps";
         remark_func = ::cover_price;
 
         break;
 
       case "last_mig":
-        // “I’ll make a run for the next MiG! Give me some covering fire!”
+
         remark = "runtonextmig";
         remark_func = ::cover_price;
         break;
 
       case "final_spot":
-        // “Cover me, I’m making a break for it!”
+
         remark = "makingabreak";
         remark_func = ::cover_price;
         break;
@@ -196,15 +173,13 @@ price_got_new_colornode(node) {
   self waittill("goal");
 
   remarks = [];
-  // got to my node before the player so tell him to go
+
   switch (node.script_noteworthy) {
     case "cinderblock_wall":
       wait(0.5);
-      // “Soap, make a run for that MIG to the east!”
-      //remarks[ remarks.size ] = "runformigeast";
-      // “To the east, soap! Go!”
+
       remarks[remarks.size] = "eastgo";
-      // “Head for that MiG, I’ll cover you!”
+
       remarks[remarks.size] = "headformig";
 
       remark_func = ::go_to_mig;
@@ -213,13 +188,13 @@ price_got_new_colornode(node) {
     case "central_jeeps":
     case "last_mig":
     case "final_spot":
-      // “All right, let’s go!”
+
       remarks[remarks.size] = "allright";
-      // “I’ll cover you! Come to me!”
+
       remarks[remarks.size] = "cometome";
-      // “To the east, soap! Go!”
+
       remarks[remarks.size] = "eastgo";
-      // “I’ve got you covered Soap! Move up! Move up!”
+
       remarks[remarks.size] = "moveup";
 
       remark_func = ::go_to_slide;
@@ -262,7 +237,7 @@ set_next_comment_time() {
 
 clifftop_mobile_spawner_think() {
   self thread add_spawn_function(::icepick_vehicle_think);
-  //	self script_delay();
+
   if(isDefined(self.script_delay)) {
     self.script_delay = undefined;
     flag_wait("cliff_guys_all_dead");
@@ -285,7 +260,6 @@ price_warns_about_snowmobiles() {
     wait(0.05);
   }
 
-  // “Snowmobiles! Take ‘em out!!”
   level.price thread dialogue_queue("snowmoibles");
 }
 
@@ -325,7 +299,6 @@ price_navigates_tarmac_and_calls_to_player() {
 
   flag_set("escape_with_soap");
 
-  // “Stay close and hug the wall! We’ll use the MiGs for cover and cross the tarmac to the southeast!”
   price dialogue_queue("hugthewall");
 
   if(is_e3_start()) {
@@ -333,7 +306,6 @@ price_navigates_tarmac_and_calls_to_player() {
   } else {
     buffer_start = gettime();
 
-    // first_corner endon conditions: player leaves hanger, enemies die
     price wait_until_player_leaves_hanger_or_enemies_recede(node);
 
     if(level.player.position == "hanger") {
@@ -342,7 +314,6 @@ price_navigates_tarmac_and_calls_to_player() {
   }
 
   price.grenadeawareness = 0;
-  //Soap! Follow me! Let's go!!!
 
   price.speak_index = 0;
   price.next_comment_time = 0;
@@ -365,12 +336,11 @@ price_navigates_tarmac_and_calls_to_player() {
   setObjective_pointerText("obj_exfiltrate", "");
 
   price.colornode_func = undefined;
-  price notify("new_node_orders"); // stop any more color talking
+  price notify("new_node_orders");
   price disable_ai_color();
 }
 
 price_yells_for_player_to_come_from_positions(positions, op_timer) {
-  // is the player at one of these positions?
   if(!isDefined(positions[level.player.position])) {
     return;
   }
@@ -413,7 +383,6 @@ remind_player_where_to_go(remarks) {
 }
 
 price_yells_for_player_to_come_to_positions(positions, op_timer) {
-  // is the player at one of these positions?
   if(isDefined(positions[level.player.position])) {
     return;
   }
@@ -440,7 +409,6 @@ wait_until_player_leaves_hanger_or_enemies_recede(node) {
 }
 
 detect_enemies_recede(node) {
-  // if the enemies are all suppressed or dead/dying, then its time to go
   if(!isDefined(node.target)) {
     return;
   }
@@ -506,26 +474,22 @@ price_icepicks_a_snowmobile() {
   snowmobile hide();
 
   point = GetStartOrigin(org.origin, org.angles, level.price getAnim("icepick_fight"));
-  //Print3d( point, "x", (1,0.5,0), 1, 2, 5000 );
 
   spawners[0].animname = "passenger";
-  //spawners[1].animname = "driver";
+
   spawners[1] delete();
   spawners[1] = undefined;
 
   org anim_teleport(spawners, "icepick_fight");
   org anim_reach_and_approach_solo(level.price, "icepick_fight", undefined, "Cover Right");
 
-  // wait until at least 2 seconds have passed
   wait_for_buffer_time_to_pass(level.price_prep_time, 3.5);
 
   guys = get_guys_with_targetname_from_spawner("snowmobile_icepick_spawner");
-  //	assert( guys.size == 2 );
 
   passenger = guys[0];
-  //driver = guys[1];
+
   passenger.animname = "passenger";
-  //driver.animname = "driver";
 
   player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
   player_snowmobile_spawner.origin = snowmobile.origin;
@@ -539,19 +503,7 @@ price_icepicks_a_snowmobile() {
   all_guys[all_guys.size] = passenger;
   all_guys[all_guys.size] = snowmobile;
 
-  //driver linkto( snowmobile, "TAG_BODY", (0,0,0), (0,0,0) );
-  //driver thread snowmobile_driver_handles_death();
-  //driver.a.special = "snowmobile";
-  //snowmobile thread anim_single_solo( driver, "icepick_fight","TAG_BODY" );
   org anim_single(all_guys, "icepick_fight");
-  /*
-  if( isalive( driver ) )
-  {
-  	driver.a.special = "none";
-  	driver unlink();
-  	driver waittill( "death" );
-  }
-  */
 
   wait(0.75);
 
@@ -577,7 +529,7 @@ price_icepicks_a_snowmobile() {
   player_snowmobile_block = getent("player_snowmobile_block", "targetname");
   player_snowmobile_block delete();
 
-  waittillframeend; // for the mount vehicle to finish.
+  waittillframeend;
   flag_set("player_rides_snowmobile");
 }
 
@@ -594,11 +546,9 @@ penalize_player_for_running_over_price(damage, attacker, direction_vec, point, t
 remind_player_to_get_on_snowmobile() {
   level.player_snowmobile endon("vehicle_mount");
   for(;;) {
-    // Soap, take that snowmobile! Let's get the hell out of here!
     level.price thread dialogue_queue("cliff_pri_takesnowmobile");
     wait(randomfloatrange(9, 14));
 
-    // Soap! Get on that snowmobile let's go!
     level.price thread dialogue_queue("cliff_pri_snowmobileletsgo");
     wait(randomfloatrange(9, 14));
   }
@@ -640,11 +590,9 @@ friendlies_get_on_snowmobile() {
   }
   wait_for_riders_to_die();
 
-  // wait for price's vehicle to stop, note he hasn't gotten on it yet
   while(level.price_snowmobile.veh_speed > 0)
     wait(0.05);
 
-  // clear the riders so price can get on
   npc_snowmobile.riders = [];
   foreach(index, _ in npc_snowmobile.usedPositions) {
     npc_snowmobile.usedPositions[index] = false;
@@ -660,22 +608,16 @@ friendlies_get_on_snowmobile() {
   }
 
   if(!npc_snowmobile.riders.size) {
-    // Price hasn't got on yet, so force him on
-    npc_snowmobile thread anim_generic(level.price, "snowmobile_driver_mount_dir1_short", "tag_driver"); // but enter script state before
+    npc_snowmobile thread anim_generic(level.price, "snowmobile_driver_mount_dir1_short", "tag_driver");
     npc_snowmobile thread maps\_vehicle_aianim::guy_enter(level.price);
   }
 
-  //npc_snowmobile Vehicle_SetSpeed( 70, 35, 35 );
-  //level.gaz.baseAccuracy = 0;
   price_snowmobile_path = getvehiclenode("price_snowmobile_path", "targetname");
-  //npc_snowmobile attachPath( price_snowmobile_path );
 
-  //npc_snowmobile.veh_pathtype = "constrained";
   npc_snowmobile startPath(price_snowmobile_path);
   npc_snowmobile.target = price_snowmobile_path.targetname;
   npc_snowmobile thread getonpath(true);
   npc_snowmobile Vehicle_SetSpeedImmediate(15, 5, 5);
-  //npc_snowmobile thread gopath( npc_snowmobile );
 
   npc_snowmobile thread price_leads_player_to_heli();
 
@@ -685,10 +627,6 @@ friendlies_get_on_snowmobile() {
   npc_snowmobile resumespeed(5);
   flag_wait("player_rides_snowmobile");
   npc_snowmobile.veh_pathtype = "constrained";
-
-  //	level.price.ignoreme = true;
-
-  //	level.price.ignoreall = true;
 }
 
 wait_for_riders_to_die() {
@@ -708,7 +646,7 @@ price_gets_on_snowmobile(npc_snowmobile) {
     return;
   }
   price_snowmobile_run_path = getnode("price_snowmobile_run_path", "targetname");
-  //	level.price maps\_spawner::go_to_node( price_snowmobile_run_path, "node" ); // run around back so you dont get run over
+
   level.price mount_snowmobile(npc_snowmobile, 0);
 }
 
@@ -716,11 +654,7 @@ start_icepick() {
   level.moto_drive = false;
   if(getDvar("moto_drive") == "")
     setDvar("moto_drive", "0");
-  /*
-  bike_animations();
-  bike_driver_animations();
-  bike_rider_animations();
-  */
+
   start_common_cliffhanger();
   friendly_init_cliffhanger();
 
@@ -731,11 +665,6 @@ start_icepick() {
   flag_set("hanger_slowmo_ends");
   flag_set("start_big_explosion");
   flag_set("player_slides_down_hill");
-  /*
-  gaz_spawner = getent( "gaz_snowmobile_spawner", "targetname" );
-  level.gaz = gaz_spawner spawn_ai();
-  level.gaz thread magic_bullet_shield();
-  */
 
   init_vehicle_splines();
 
@@ -746,7 +675,6 @@ start_icepick() {
 
   level notify("stop_price_shield");
   level.price.baseAccuracy = 1;
-  //	level.gaz.baseAccuracy = 0;
 
   player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
   level.player teleport_ent(player_snowmobile_spawner);
@@ -763,11 +691,6 @@ start_snowmobile(e3) {
   level.moto_drive = false;
   if(getDvar("moto_drive") == "")
     setDvar("moto_drive", "0");
-  /*
-  bike_animations();
-  bike_driver_animations();
-  bike_rider_animations();
-  */
 
   ai = getaiarray("axis");
   foreach(guy in ai) {
@@ -784,11 +707,6 @@ start_snowmobile(e3) {
   flag_set("player_in_hanger");
   flag_set("hanger_slowmo_ends");
   flag_set("start_big_explosion");
-  /*
-  gaz_spawner = getent( "gaz_snowmobile_spawner", "targetname" );
-  level.gaz = gaz_spawner spawn_ai();
-  level.gaz thread magic_bullet_shield();
-  */
 
   init_vehicle_splines();
 
@@ -800,7 +718,6 @@ start_snowmobile(e3) {
   magic_bullet_spawner = getEntArray("magic_bullet_spawner", "script_noteworthy");
   array_thread(magic_bullet_spawner, ::_delete);
 
-  //	For trying the scripted snowmobile path
   npc_snowmobile_spawner = getent("god_vehicle_spawner", "script_noteworthy");
   npc_snowmobile_spawner.script_vehicleride = undefined;
   npc_snowmobile_spawner.target = "price_snowmobile_path";
@@ -820,9 +737,8 @@ start_snowmobile(e3) {
     npc_snowmobile thread vehicle_paths(price_snowspawn);
   }
 
-  //	npc_snowmobile = getent( "npc_snowmobile", "targetname" );
   npc_snowmobile.player_offset = 250;
-  //	npc_snowmobile thread maps\_vehicle_aianim::guy_enter( level.gaz, npc_snowmobile );
+
   npc_snowmobile thread maps\_vehicle_aianim::guy_enter(level.price);
   npc_snowmobile become_price_snowmobile();
   npc_snowmobile.veh_pathtype = "constrained";
@@ -831,7 +747,6 @@ start_snowmobile(e3) {
   npc_snowmobile thread price_leads_player_to_heli();
   level notify("stop_price_shield");
   level.price.baseAccuracy = 0;
-  //	level.gaz.baseAccuracy = 0;
 
   player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
   level.player_snowmobile = player_snowmobile_spawner spawn_vehicle();
@@ -857,7 +772,7 @@ start_snowmobile(e3) {
   level.player_snowmobile thread maps\_snowmobile_drive::drive_vehicle();
   level.player player_mount_vehicle(level.player_snowmobile);
 
-  waittillframeend; // for the mount vehicle to finish.
+  waittillframeend;
   flag_set("player_rides_snowmobile");
   flag_set("player_slides_down_hill");
   player_snowmobile_block = getent("player_snowmobile_block", "targetname");
@@ -883,9 +798,6 @@ snowmobile_main() {
   kill_enemy_snowmobiles = getEntArray("kill_enemy_snowmobile", "targetname");
   array_thread(kill_enemy_snowmobiles, ::kill_enemy_snowmobile_think);
 
-  //	banister_spawners = getEntArray( "banister_spawner", "script_noteworthy" );
-  //	array_thread( banister_spawners, ::banister_spawner_think );
-
   player_path_triggers = getEntArray("player_path_trigger", "targetname");
   array_thread(player_path_triggers, ::player_path_trigger_think);
 
@@ -910,18 +822,12 @@ snowmobile_main() {
   fence_planks = getEntArray("fence_plank", "targetname");
   array_thread(fence_planks, ::fence_plank_think);
 
-  //thread price_snowmobile_icon();
-
-  // faster regen for this part to make it more exciting
   level.longRegenTime = 2000;
 
-  // a little extra invul time for the harder difs
   if(level.player.deathInvulnerableTime > 2000)
     level.player.deathInvulnerableTime = 2000;
 
   thread ride_dialogue();
-
-  //SetSavedDvar( "r_showMissingLightgrid", "0" );
 
   snowmobile = level.player_snowmobile;
   assert(isDefined(snowmobile));
@@ -950,38 +856,29 @@ snowmobile_main() {
   wait(2.4);
 
   add_wait(::flag_wait, "snowmobile_fog_clears");
-  //	add_func( ::blizzard_no_fog, 2 );
+
   thread do_wait();
 
-  //thread player_falls_into_revine();
-  //thread player_jump_slowmo();
   thread enemy_snowmobiles_spawn_and_attack();
 
-  //	level endon( "avalanche_begins" );
-  //	flag_wait( "avalanche_begins" );
-
   add_wait(::flag_wait, "price_get_speed_up");
-  // Pin the throttle!! Keep going!!
+
   add_func(::radio_dialogue, "cliff_pri_pinthrottle");
   thread do_wait();
 
   flag_wait("player_reaches_hilltop");
   level.SPLINE_MIN_PROGRESS = -6000;
-  // Papa Six, we’re getting close to bingo fuel. What’s your status over?
+
   radio_dialogue("cliff_hp1_status");
 
-  // Kilo Six-One, we’re taking heavy fire but we’re almost there! Standby!
   radio_dialogue("cliff_pri_almostthere");
 
   flag_wait("there_is_chopper");
 
-  // There’s the chopper! Let’s go!
   radio_dialogue("cliff_pri_thechopper");
 
-  // Papa Six we have you on visual. Get your ass on board! We’re running on fumes here!
   radio_dialogue("cliff_hp1_fumes");
 
-  //Ok they got the ACS, we're outta here!
   thread radio_dialogue("cliff_crc_gotacs");
 
   flag_wait("ending_heli_flies_in");
@@ -998,14 +895,9 @@ snowmobile_main() {
 
   wait(2);
   nextmission();
-  //missionSuccess( "cliffhanger" );
-
-  //	nextmission();
 }
 
 snowmobile_gameskill_settings() {
-  // spend less time in red flashing
-  // If you go to red flashing, the amount of time before your health regens
   level.difficultySettings["longRegenTime"]["easy"] = 2000;
   level.difficultySettings["longRegenTime"]["normal"] = 2000;
   level.difficultySettings["longRegenTime"]["hardened"] = 2000;
@@ -1018,10 +910,9 @@ ride_dialogue() {
   }
 
   wait(2.5);
-  // Kilo Six-One, the primary exfil point is compromised! We’re en route to Bravo using enemy transport! Meet us there! Over!
+
   thread radio_dialogue("cliff_pri_enroute");
 
-  // Papa Six, this Kilo Six-One, roger that, we’ll see you at Bravo. Out.
   thread radio_dialogue("cliff_hp1_seeyouatbravo");
 }
 
@@ -1046,29 +937,9 @@ player_makes_snowmobile_jump() {
 player_jump_slowmo() {
   flag_wait("snowmobile_jump");
   wait(0.40);
-  /*
-  slowmo_start();
-  slowmo_setspeed_slow( 0.5 );
-  slowmo_setlerptime_in( 0.2 );
-  slowmo_lerp_in();
-  */
-  //	level.player delaythread( 2.5, ::play_sound_on_entity, "slomo_whoosh" );
-  //wait( animation_length * 0.005 );
 
   wait(2.6);
-  /*
-  if( flag( "snowmobile_in_house" ) )
-  {
-  	thread player_jolts_house();
-  	wait( 1.1 );
-  }
-  */
 
-  /*
-  slowmo_setlerptime_out( 0.5 );
-  slowmo_lerp_out();
-  slowmo_end();
-  */
   if(level.player.vehicle vehicle_getSpeed() > 50) {
     level.player.vehicle Vehicle_SetSpeed(50, 20, 20);
   }
@@ -1088,11 +959,6 @@ player_falls_into_revine() {
 }
 
 start_avalanche() {
-  /*
-  bike_animations();
-  bike_driver_animations();
-  bike_rider_animations();
-  */
   init_vehicle_splines();
   level.moto_drive = false;
   if(getDvar("moto_drive") == "")
@@ -1124,13 +990,6 @@ avalanche_main() {
 
   flag_set("avalanche_ride_starts");
 
-  //	snowmobile_escape_spawner = getent( "snowmobile_escape", "targetname" );
-  //	snowmobile_escape = snowmobile_escape_spawner Vehicle_Dospawn();
-  //snowmobile_escape = getent( "snowmobile_escape", "targetname" );
-
-  //level.player unlink();
-  //	level.player PlayerLinkToDelta( player_ride, "tag_origin", 1 );
-  //	level.player playerlinktodelta( player_ride, "tag_origin", 1, 60, 60, 120, 40 );
   player_ride = spawn_vehicle_from_targetname("player_end_ride");
   level.player_ride = player_ride;
   avalanche_progress_org = getent("avalanche_progress_org", "targetname");
@@ -1141,7 +1000,7 @@ avalanche_main() {
 
   player_ride thread track_player_ride_progress();
   thread price_progress_dialogue();
-  //player_ride hide();
+
   level.player DisableWeapons();
 
   if(isDefined(level.player.vehicle)) {
@@ -1173,30 +1032,17 @@ avalanche_main() {
   scene_org = spawn("script_origin", crash_recovery.origin);
   scene_org.angles = crash_recovery.angles;
 
-  /*
-  // translate the posts into the proper positions for the animations
-  ent = spawnStruct();
-  ent.entity = scene_org;
-  ent.forward = -10;
-  ent.up = 25;
-  ent.right = 0;
-  ent.yaw = 0;
-  ent translate_local();
-  */
-  //scene_org LinkTo( player_ride );
-
-  // I'm driving
   level.price delaythread(3.5, ::dialogue_queue, "i_drive");
-  // “Avalaaaanche!!!!!”
+
   delaythread(12.5, ::radio_dialogue_queue, "avalanche");
-  // “More tangos on our six! Take ‘em out!”
+
   delaythread(16.5, ::radio_dialogue_queue, "moretangos");
 
   scene_org anim_single(scene, "crash_rescue");
 
   tag_origin = spawn_tag_origin();
-  tag_origin.origin = player_ride.origin; // getTagOrigin( "tag_passenger" );
-  tag_origin.angles = player_ride.angles; // getTagAngles( "tag_passenger" );
+  tag_origin.origin = player_ride.origin;
+  tag_origin.angles = player_ride.angles;
 
   ent = spawnStruct();
   ent.entity = tag_origin;
@@ -1205,10 +1051,8 @@ avalanche_main() {
   ent.right = 0;
   ent.yaw = 180;
   ent translate_local();
-  //tag_origin linkto( player_ride, "tag_player", (0,0,0), (0,180,0) );
+
   tag_origin linkto(player_ride);
-  //LinkTo( linkto entity, tag, originOffset, anglesOffset );
-  //tag_origin thread maps\_debug::drawTagForever( "tag_origin" );
 
   level.player PlayerSetGroundReferenceEnt(undefined);
 
@@ -1217,33 +1061,23 @@ avalanche_main() {
   level.player PlayerLinkToBlend(tag_origin, "tag_origin", timer, timer * 0.2, timer * 0.2);
   delaythread(timer + 0.1, ::open_up_player_fov, tag_origin, "tag_origin");
 
-  //view_arms linkto( player_ride );
   level.price delete();
-
-  /*
-  viewmodel = spawn_tag_origin();
-  viewmodel linkto( player_ride, "tag_origin", ( 0, 0, 0 ), ( 0, 180, 0 ) );
-  timer = 0.5;
-  level.player PlayerLinkToBlend( viewModel, "tag_origin", timer, timer * 0.2, timer * 0.2 );
-  */
 
   level.player EnableWeapons();
   thread gopath(player_ride);
   player_ride VehPhys_DisableCrashing();
   wait(0.5);
-  //	level.player playerlinktodelta( viewmodel, "tag_origin", 1, 60, 60, 120, 40 );
+
   wait(2.0);
   level.avalanche_vehicles = [];
   avalanche_ents = spawn_vehicles_from_targetname("avalance_vehicle");
   array_thread(avalanche_ents, ::avalanche_section);
 
-  exploder(2); //Avalanche start exploder
+  exploder(2);
 
   flag_wait("avalanche_reconstitutes");
 
   wait(2.5);
-  //	avalanche_ents = spawn_vehicles_from_targetname( "avalanche_recon" );
-  //	array_thread( avalanche_ents, ::avalanche_section );
 
   flag_wait("the_end");
   wait(6);
@@ -1262,10 +1096,9 @@ avalanche_heli_attacks() {
 
   avalanche_heli goPath();
   speed = level.player_ride vehicle_getSpeed();
-  //avalanche_heli Vehicle_SetSpeed( speed, speed * 0.5, speed * 0.5 );
+
   avalanche_heli.personal_offset = 900;
 
-  // move the avalanche back a little to give the heli space
   set_avalanche_offset(2300);
 
   avalanche_heli delaythread(5, ::avalanche_maintains_distance_behind_player);
@@ -1290,8 +1123,7 @@ snowmobile_ending_autosave() {
   id = SaveGameNoCommit("blah", &"AUTOSAVE_AUTOSAVE");
   level.player endon("death");
   angles = level.player.vehicle.angles;
-  //	if( flag( "price_disables_hill_autosave" ) )
-  //		return;
+
   wait(2);
 
   new_angles = level.player.vehicle.angles;
@@ -1332,7 +1164,7 @@ player_dies_if_snowmobile_slows_down() {
   level endon("snowmobile_jump");
   flag_wait("player_rides_snowmobile");
   level.player.vehicle endon("veh_collision");
-  level endon("player_crashes"); // from triggers in the map
+  level endon("player_crashes");
   flag_wait("bad_heli_goes_to_death_position");
 
   for(;;) {

@@ -14,7 +14,7 @@ become_soap() {
   AssertEx(!isDefined(level.soap), "Too much soap!");
   level.soap = self;
   self.animname = "soap";
-  //self thread magic_bullet_shield();
+
   self make_hero();
 }
 
@@ -27,28 +27,14 @@ become_price() {
 
   self.attackeraccuracy = 0;
   self.IgnoreRandomBulletDamage = true;
-  //self forceUseWeapon( "ak47", "primary" );
+
   self gun_remove();
-  //self Attach( "gulag_price_ak47", "tag_weapon_chest" );
 
-  /*
-  self waittill_any_timeout( 5, "death" );
-
-  if( !isalive( self ) )
-  {	
-  	// the pow was killed
-  	setDvar( "ui_deadquote", "@GULAG_PRICE_KILLED" );
-  	//maps\_utility::missionFailedWrapper();
-  	return;
-  }
-  	
-  */
   self notify("saved");
 
   self waittill("change_to_regular_weapon");
-  //self detach( "gulag_price_ak47", "tag_weapon_chest" );
+
   self forceUseWeapon("ak47", "primary");
-  //self magic_bullet_shield();
 }
 
 become_redshirt() {
@@ -67,7 +53,6 @@ moderate_ai_moveplaybackrate() {
   max_playback = 1.00;
   max_dist = 200;
 
-  // how much can the player sprint?	
   min_sprint = 1;
   max_sprint = 1.5;
   min_sprint_dist = 100;
@@ -83,10 +68,9 @@ moderate_ai_moveplaybackrate() {
   }
   level endon("match_up_for_final_room");
 
-  max_speed_dif = 0.45; // the maximum difference in speed adjustment between the lead and last ai
-  max_dist_dif = 200; // the distance at which to differ by max speed dif
+  max_speed_dif = 0.45;
+  max_dist_dif = 200;
 
-  // the distance mods make the AI get a speed boost/slowdown to get them to the right place
   distance_mods = [];
   distance_mods["soap"] = 20;
   distance_mods["redshirt"] = -40;
@@ -109,15 +93,11 @@ moderate_ai_moveplaybackrate() {
     foreach(index, guy in ai) {
       center += guy.origin;
 
-      // for adjusting the speed of the individual AI	
       dist = distance(guy.origin, level.friendly_endpoint);
       ai_dist[index] = dist + distance_mods[index];
     }
     center /= ai.size;
 
-    // ==========================================================================================
-    // for adjusting the speed of the individual AI	
-    // ==========================================================================================
     lowest = 99999999;
     foreach(dist in ai_dist) {
       if(dist < lowest)
@@ -135,22 +115,13 @@ moderate_ai_moveplaybackrate() {
         highest = dist;
     }
 
-    // 0.4
-    // 200	ourdist
-
     current_speed_dif = highest * max_speed_dif / max_dist_dif;
 
-    current_speed_dif *= 0.5; // lower the speed dif a bit
-
-    //current_speed_dif *= 0.5; // you actually want it to be half cause we adjust it by the range from -1 to 1
+    current_speed_dif *= 0.5;
 
     if(current_speed_dif > max_speed_dif)
       current_speed_dif = max_speed_dif;
 
-    //		0 of 200
-    //		- half the range =
-    //		-100
-    //
     half_range = highest * 0.5;
 
     ai_speedmod = [];
@@ -160,15 +131,11 @@ moderate_ai_moveplaybackrate() {
       ai_speedmod[index] = dist * current_speed_dif;
     }
 
-    // ==========================================================================================
-
     dist1 = distance(center, level.friendly_endpoint);
     dist2 = distance(level.player.origin, level.friendly_endpoint);
     dist = dist2 - dist1;
 
     level notify("player_dist_from_squad", dist);
-    //		if( dist > 1000 )
-    //			thread player_dies_to_cavein( 2 );
 
     old_dist = dist;
 
@@ -182,8 +149,6 @@ moderate_ai_moveplaybackrate() {
       scale = 1;
     scale = 1 - scale;
     ai_playback = min_playback + range_playback * scale;
-
-    //println( "dist " + old_dist + " ai_playback " + ai_playback );
 
     dist = old_dist - min_sprint_dist;
     scale = dist / range_sprint_dist;
@@ -204,34 +169,12 @@ moderate_ai_moveplaybackrate() {
         guy.moveplaybackrate = ai_playback + ai_speedmod[index];
         if(guy.moveplaybackrate > 1.15)
           guy.moveplaybackrate = 1.15;
-
-        //Print3d( guy.origin + (0,0,64), ai_speedmod[ index ], (1,1,0), 1, 1, 1 );
       }
     }
-
-    /*
-    foreach ( guy in ai )
-    {
-    	guy.moveplaybackrate = ai_playback;
-    }			
-    */
-
-    /*
-    foreach ( guy in ai )
-    {
-    	if( guy == level.price && flag( "price_speed_boost" ) )
-    		guy.moveplaybackrate += 0.15;
-    }
-    */
 
     wait(0.05);
   }
 }
-
-//println( "dist " + int( dist ) + " playback " + int ( ai_playback * 100 ) );
-
-// myrange
-//range_dist	range_playback
 
 adjust_be_behind(guy) {
   desired_dist = level.cafe_run_distances[self.animname][guy.animname];
@@ -241,19 +184,11 @@ adjust_be_behind(guy) {
 
   dot = get_dot(self.origin, self.angles, guy.origin);
   if(dot < 0.8) {
-    // he should be in front of me, slow down
     speed_change = -0.15;
   } else {
     dist_dif = desired_dist - dist;
     dist_offset = 50;
     speed_offset = 0.15;
-
-    /*
-    dist_dif
-    dist_offset	speed_offset
-    35
-    50	0.15
-    */
 
     speed_change = dist_dif * speed_offset / dist_offset;
     if(speed_change > speed_offset) {
@@ -280,20 +215,12 @@ adjust_be_ahead_of(guy) {
 
   dot = get_dot(self.origin, self.angles, guy.origin);
   if(dot > 0) {
-    // if he's ahead of us then we're negative distance relative to where we want to be
     dist *= -1;
   }
 
   dist_dif = desired_dist - dist;
   dist_offset = 50;
   speed_offset = 0.15;
-
-  /*
-  dist_dif
-  dist_offset	speed_offset
-  35
-  50	0.15
-  */
 
   speed_change = dist_dif * speed_offset / dist_offset;
   if(speed_change > speed_offset) {
@@ -354,14 +281,12 @@ minor_earthquakes() {
     forward = anglesToForward(angles);
     org = level.player.origin + forward * 180;
     org = set_z(org, level.player.origin[2] + 64);
-    //PhysicsJitter( org, 350, 250, 0.05, 0.2 );
+
     vec = randomvector(phys);
     if(vec[2] < 0) {
       vec = set_z(vec, vec[2] * -1);
     }
     PhysicsJolt(org, 350, 250, vec);
-    //PhysicsExplosionSphere( org, 350, 250, 0.5 );
-    //		Print3d( org, ".", (1,0,0), 1, 1, 5 );
 
     wait(RandomFloatRange(1, 5));
   }
@@ -369,29 +294,23 @@ minor_earthquakes() {
 
 gulag_player_loadout() {
   level.player takeallweapons();
-  //level.player GiveWeapon( "m14_scoped" );
+
   level.player GiveWeapon("m4m203_reflex_arctic");
-  //level.player GiveWeapon( "fraggrenade" );
-  //level.player GiveWeapon( "flash_grenade" );
-  //level.player SetOffhandSecondaryClass( "flash" );
+
   level.player SetViewModel("viewhands_udt");
   level.player SwitchToWeapon("m4m203_reflex_arctic");
-  //level.player GiveWeapon( "claymore" );
-  //level.player SetActionSlot( 4, "weapon", "claymore" );
-  //level.player GiveMaxAmmo( "claymore" );
 
   level.player SwitchToWeapon("m14_scoped_arctic");
 }
 
 stumble_trigger_think() {
   level endon("skip_stumble_trigger_think");
-  wait(3); // for start points
-  // the roller does the actual rotation
+  wait(3);
+
   eq_view_roller = getent("eq_view_roller", "targetname");
 
   player_ent = spawn_tag_origin();
 
-  // move the roller to the ent that the player refers to for ground
   eq_view_roller.origin = player_ent.origin;
   player_ent linkto(eq_view_roller);
 
@@ -420,14 +339,8 @@ stumble_trigger_think() {
     jolt_origin = level.player.origin;
     PhysicsJolt(jolt_origin, 350, 250, vec);
 
-    /*
-    angles = level.player getplayerangles();
-    angles = ( 0, angles[ 1 ], 0 );
-    ent.angles = angles;
-    */
     start_angles = eq_view_roller.angles;
 
-    // spawn a reference ent to do the rotation on, because this rotation is at server framerate	
     ent.angles = eq_view_roller.angles;
     ent addpitch(30);
     ent addroll(5);
@@ -451,13 +364,12 @@ stumble_trigger_think() {
   }
 
   if(!flag("big_earthquake_hits")) {
-    flag_wait("big_earthquake_hits"); // this is actually the second big earthquake
+    flag_wait("big_earthquake_hits");
     trigger = getentwithflag("big_earthquake_hits");
     eq_view_roller = getent(trigger.target, "targetname");
     jolt_origin = eq_view_roller.origin;
     start_angles = eq_view_roller.angles;
 
-    // move the roller to the ent that the player refers to for ground
     eq_view_roller.origin = player_ent.origin;
 
     player_ent linkto(eq_view_roller);
@@ -468,7 +380,7 @@ stumble_trigger_think() {
     PhysicsJolt(jolt_origin, 350, 250, vec);
   }
 
-  flag_wait("player_falls_down"); // during cafeteria ending
+  flag_wait("player_falls_down");
 
   quake(0.35, 4, self.origin, 5000);
   vec = randomvector(0.6);
@@ -483,10 +395,8 @@ stumble_trigger_think() {
 
   start_angles = eq_view_roller.angles;
 
-  // move the roller to the ent that the player refers to for ground
   eq_view_roller.origin = player_ent.origin;
 
-  // angle the ents with the player so its relative to the player's current view
   player_angles = level.player getplayerAngles();
   eq_view_roller.angles = (0, player_angles[1], 0);
   ent.angles = eq_view_roller.angles;
@@ -504,63 +414,35 @@ stumble_trigger_think() {
   level.player disableweapons();
 
   time_until_buried = 1.9;
-  // set up the mix track we're going to blend to
+
   thread maps\_ambient::use_eq_settings("gulag_cavein", level.eq_mix_track);
 
   level.player SetEqLerp(1, level.eq_main_track);
-  // blend out the ambient and blend in to the mix track
+
   noself_delaycall(time_until_buried, ::AmbientStop, 2);
   delaythread(time_until_buried, maps\_ambient::blend_to_eq_track, level.eq_mix_track, 2);
-
-  /*
-
-  for( i = 0; i < 3; i++ )
-  {
-  	ent addyaw( 250 );
-  	ent addpitch( 18 );
-  	ent addroll( 18 );
-  	
-  	// player gets knocked sideways
-  	timer = 0.5;
-  	eq_view_roller RotateTo( ent.angles, timer, 0, 0 );
-  	wait( timer );
-  }
-  */
-
-  //	Line( fx_org, fx_org + (0,0,-32), (1,0,0), 1, 0, 500 );
-  //	Line( fx_org, level.player.origin, (1,0,1), 1, 0, 500 );
-
-  /*
-  level.player delaycall( 0.05, ::setstance, "prone" );
-  level.player delaycall( 0.5, ::allowcrouch, false );
-  level.player delaycall( 0.5, ::allowstand, false );
-  level.player delaycall( 0.5, ::ShellShock, "gulag_attack", 5, false );
-  */
 
   ent addyaw(20);
   ent addpitch(35);
   ent addroll(25);
-  // player gets knocked sideways
+
   timer = 0.2;
   eq_view_roller RotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
   wait(timer);
 
   thread fx_fall_around_player(eq_view_roller.angles);
-  //	Line( fx_org, fx_org + (0,0,-32), (1,0,0), 1, 0, 500 );
-  //	Line( fx_org, level.player.origin, (1,0,1), 1, 0, 500 );
 
   wait(0.75);
 
-  // player wobbles left
   timer = 0.5;
-  //	ent addyaw( 20 );
+
   ent addpitch(-35);
   ent addroll(-25);
   eq_view_roller RotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
   wait(timer);
 
   timer = 0.5;
-  //	ent addyaw( 20 );
+
   ent addpitch(5);
   ent addroll(-15);
   eq_view_roller RotateTo(ent.angles, timer, 0, timer);
@@ -576,23 +458,11 @@ stumble_trigger_think() {
   black_overlay = create_client_overlay("black", 0, level.player);
   black_overlay.alpha = 1;
 
-  //	level.player Shellshock( "nosound", 1, false );
-
-  /*
-  	level.player delaycall( 0.05, ::setstance, "prone" );
-  	level.player delaycall( 0.05, ::allowcrouch, false );
-  	level.player delaycall( 0.05, ::allowstand, false );
-  	level.player delaycall( 0.05, ::ShellShock, "gulag_attack", 5, false );
-  */
-
   level.player allowcrouch(true);
   level.player allowstand(true);
-  flag_clear("player_falls_down"); // during cafeteria ending
+  flag_clear("player_falls_down");
   wait(1);
   black_overlay destroy();
-
-  //	timer = 0.3;
-  //	eq_view_roller RotateTo( start_angles, timer, timer * 0.5, timer * 0.5 );
 }
 
 player_blur_manager() {
@@ -619,17 +489,7 @@ fx_fall_around_player(angles) {
   above_player = level.player.origin + (0, 0, 100) + forward * 50;
 
   fx_org = level.player.origin + forward * 35 + right * -10 + (0, 0, 32);
-  /*
-  	fx = getfx( "0_ceiling_rock_explosion" );
-  //	thread player_ending_cavein();
-  	//thread player_dies_to_cavein( 2 );
-  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-  	*/
 
-  //	fx = getfx( "0_ceiling_rock" );
   fx = getfx("hallway_collapsing_huge");
   for(i = 0; i < 10; i++) {
     fx_org = level.player.origin + forward * 35 + right * -10 + (0, 0, 180);
@@ -637,126 +497,6 @@ fx_fall_around_player(angles) {
     wait(randomfloatrange(0.1, 0.25));
   }
 }
-
-/*
-	fx = [];
-	fx[ fx.size ] = "0_ceiling_collapse";
-	fx[ fx.size ] = "0_ceiling_collapse_big";
-	fx[ fx.size ] = "0_ceiling_collapse_huge";
-	fx[ fx.size ] = "0_ceiling_collapse_huge";
-
-	index = start_index;
-	if( !isDefined( index ) )
-		index = 0;
-	
-	counts = [];
-	counts[ 0 ] = 12;
-	counts[ 1 ] = 15;
-	counts[ 2 ] = 10;
-	counts[ 3 ] = 20;
-
-	thread black_death();
-
-	last_org = level.player.origin;
-	for( ;; )
-	{
-		for( i = 0; i < counts[ index ]; i++ )
-		{
-			angles = level.player getplayerangles();
-			forward = anglesToForward( angles );
-			vec = level.player.origin - last_org;
-						
-			
-			org = level.player.origin + forward * 100 + vec * 10;
-			org = set_z( org, level.player.origin[2] );
-			
-			trace = bulletTrace( org, org + (0,0,3000), false, undefined );
-			current_fx = getfx( fx[ index ] );
-			playFX( current_fx, trace[ "position" ] );
-			last_org = level.player.origin;
-			
-			if( randomint( 100 ) > 40 )
-			{
-				if( index == 1 )
-					level.player DoDamage( 5, randomvector( 500 ) );
-				if( index > 1 )
-					level.player DoDamage( 15, randomvector( 500 ) );
-			}
-			wait( 0.05 );
-		}
-		
-		if( index == 2 )
-		{
-			level.player kill();
-		}
-
-		index++;
-		if( index >= fx.size )
-			break;
-	}
-*/
-
-/*
-	
-ent.angles = eq_view_roller.angles;
-ent addpitch( 10 );
-ent addroll( 12 );
-	
-timer = 0.3;
-eq_view_roller RotateTo( ent.angles, timer, timer * 0.5, timer * 0.5 );
-wait( timer );
-
-ent addpitch( -15 );
-ent addroll( -18 );
-
-timer = 0.4;
-eq_view_roller RotateTo( ent.angles, timer, timer * 0.5, timer * 0.5 );
-wait( timer );
-
-timer = 0.3;
-eq_view_roller RotateTo( start_angles, timer, timer * 0.5, timer * 0.5 );
-
-*/
-
-/*
-eq_view_roller RotateRoll( -10, 1, 0.5, 0.5 );
-wait( 1 );
-eq_view_roller RotateRoll( 20, 1, 0.5, 0.5 );
-wait( 1 );
-eq_view_roller RotateRoll( -10, 1, 0.5, 0.5 );
-*/
-
-/*
-	
-// each guy that hits the trigger does a unique stumble
-doing_anim = [];
-
-ducks = [];
-ducks[ ducks.size ] = "run_duck";
-ducks[ ducks.size ] = "run_flinch";
-ducks[ ducks.size ] = "run_stumble";
-	
-index = 0;
-ent = spawnStruct();
-ent.eq = false;
-	
-for( ;; )
-{
-	self waittill( "trigger", guy );
-	if( !isalive( guy ) )
-		return;
-	if( isDefined( doing_anim[ guy.unique_id ] ) )
-		continue;
-	
-	doing_anim[ guy.unique_id ] = true;
-	animation = ducks[ index ];
-	index++;
-	if( index >= ducks.size )
-		index = 0;
-		
-	guy thread guy_ducks( animation, ent );
-}
-*/
 
 stumble_anim(animation) {
   animation = getgenericanim(animation);
@@ -779,7 +519,6 @@ stumble_anim(animation) {
 }
 
 turnaround_trigger_think() {
-  // each guy that hits the trigger does a unique stumble
   doing_anim = [];
 
   ducks = [];
@@ -853,8 +592,6 @@ guy_ducks(animation, ent) {
 
   self.run_overrideanim = undefined;
   self notify("movemode");
-  //	runAnim = animscripts\run::GetRunAnim();
-  //	self setFlaggedAnimKnobLimited( "runanim", runAnim, 1, 0.1, 1, true );
 }
 
 hallway_flicker_light() {
@@ -864,46 +601,6 @@ hallway_flicker_light() {
   model = self;
   light = getent(model.target, "targetname");
   intensity = light getLightIntensity();
-
-  /*
-  for( ;; )
-  {
-  	off_count = randomint( 3 ) + 1;
-  	for( p = 0; p < off_count; p++ )
-  	{
-  		count = randomint( 4 ) + 2;
-  		for( i = 0; i < count; i++ )
-  		{
-  			light setLightIntensity( 0 );
-  			model setModel( off );
-  			wait( 0.05 );
-  			light setLightIntensity( intensity );
-  			model setModel( on );
-  			wait( 0.05 );
-  		}
-  		light setLightIntensity( 0 );
-  		model setModel( off );
-  		wait( randomfloatrange( 0.2, 0.3 ) );
-  	}
-
-  	count = randomint( 4 ) + 2;
-  	for( i = 0; i < count; i++ )
-  	{
-  		light setLightIntensity( 0 );
-  		model setModel( off );
-  		wait( 0.05 );
-  		light setLightIntensity( intensity );
-  		model setModel( on );
-  		wait( 0.05 );
-  	}
-
-  	light setLightIntensity( intensity );
-  	model setModel( on );
-  	wait( randomfloatrange( 0.35, 0.45 ) );
-  	if( flag( "exit_collapses" ) )
-  		break;
-  }
-  */
 
   for(;;) {
     count = randomint(3) + 2;
@@ -925,7 +622,7 @@ hallway_flicker_light() {
 ending_window_littlebird() {
   self godon();
   hover = 50;
-  self SetYawSpeed(140, 80, 80); //, 60, overshoot percent );
+  self SetYawSpeed(140, 80, 80);
   self SetHoverParams(5, 5, hover);
 }
 
@@ -935,17 +632,16 @@ ptest() {
     forward = anglesToForward(angles);
     org = level.player.origin + forward * 180;
     org = set_z(org, level.player.origin[2] + 64);
-    //PhysicsJitter( org, 350, 250, 0.05, 0.2 );
+
     vec = randomvector(0.3);
     PhysicsJolt(org, 350, 250, vec);
-    //PhysicsExplosionSphere( org, 350, 250, 0.5 );
+
     Print3d(org, ".", (1, 0, 0), 1, 1, 5);
     wait(0.5);
   }
 }
 
 first_hallway_collapse(pos) {
-  // 11.6
   wait(10.3);
   if(distance(level.player.origin, pos) > 700)
     exploder("first_hallway_collapse");
@@ -954,7 +650,6 @@ first_hallway_collapse(pos) {
 stumble_baddie() {
   spawner = getent("stumble_baddie_spawner", "targetname");
 
-  // don't do it if the player is looking this way
   if(within_fov_of_players(spawner.origin, 0.7)) {
     return;
   }
@@ -990,7 +685,7 @@ file_cabinet_show() {
 
   models = array_index_by_parameters(models);
   flag_wait("enter_final_room");
-  //flag_wait( "reach_mound" );
+
   wait(3);
 
   models["1"] path_anim(0.2);
@@ -1031,15 +726,12 @@ pillar_anim_show() {
   model1targ = getent(models["1"].target, "targetname");
   model2targ = getent(models["2"].target, "targetname");
 
-  //model1targ thread maps\_debug::drawOriginForever();
-  //model2targ thread maps\_debug::drawOriginForever();
-
   models["1"] linkto(model1targ);
   models["2"] linkto(models["1"]);
   model2targ linkto(model1targ);
 
   flag_wait("enter_final_room");
-  //flag_wait( "reach_mound" );
+
   wait(1);
 
   targ2 = getent(model1targ.target, "targetname");
@@ -1083,62 +775,9 @@ pillar_anim_show() {
   model2targ unlink();
   model2targ rotateto(targets["script_origin_pillar2"].angles, timer, 0, timer);
   model2targ moveto(targets["script_origin_pillar2"].origin, timer, 0, timer);
-
-  /*
-  models = getEntArray( "pillar_anim", "targetname" );
-  array_thread( models, ::path_anim_setup );
-  	
-  models = array_index_by_parameters( models );
-  //flag_wait( "reach_mound" );
-  wait( 1 );
-  	
-  ents = [];
-  foreach ( model in models )
-  {
-  	ent = spawn( "script_origin", (0,0,0) );
-  	path = model.paths[ 0 ];
-  	ent.paths = model.paths;
-  	ent.origin = path[ "origin" ];
-  	ent.angles = path[ "angles" ];
-  	
-  	ent.path_index = 0;
-  	
-  	model linkto( ent );
-  	ents[ model.script_parameters ] = ent;
-  }
-
-  //fakeseys on the first one
-  ents[ "1" ] path_anim( 0.1 );
-  ents[ "2" ] path_anim( 0.1 );
-  	
-  // first grind in
-  ents[ "1" ] path_anim( 2, 0.2, 0.2 );
-  ents[ "2" ] path_anim( 2, 0.2, 0.2 );
-  wait( 2.5 );
-
-  // now start to fall
-  ents[ "1" ] path_anim( 2, 2, 0 );
-  ents[ "2" ] path_anim( 2, 2, 0 );
-  wait( 2 );
-
-  // falling
-  ents[ "1" ] path_anim( 0.25 );
-  ents[ "2" ] path_anim( 0.25 );
-  wait( 0.25 );
-  	
-  // falling
-  ents[ "1" ] path_anim( 0.25 );
-  ents[ "2" ] path_anim( 0.25 );
-  wait( 0.25 );
-
-  // BAM, slide apart	
-  ents[ "1" ] path_anim( 2, 0, 2 );
-  ents[ "2" ] path_anim( 2, 0, 2 );
-  */
 }
 
 delete_tree_think() {
-  // this ent is just for ref, delete all links
   ent = self;
   for(;;) {
     if(!isDefined(ent.target)) {
@@ -1153,66 +792,14 @@ delete_tree_think() {
 }
 
 eqtest() {
-  /*
-  channels = [];
-  channels[ "item"			 ] = true;
-  channels[ "menu"			 ] = true;
-  channels[ "weapon"		 ] = true;
-  channels[ "voice" 			 ] = true;	
-  channels[ "body" 		 ] = true;	
-  channels[ "physics"		 ] = true;	
-  channels[ "local"		 ] = true;	
-  channels[ "music"		 ] = true;	
-  channels[ "announcer"		 ] = true;	
-  channels[ "auto" 		 ] = true;	
-  channels[ "physics" 			 ] = true;
-  channels[ "ambdist1" 	 ] = true;
-  channels[ "ambdist2"			 ] = true;	
-  channels[ "auto" ] = true;	
-  channels[ "auto2"] = true;	
-  channels[ "auto2d" ] = true;	
-  channels[ "autodog"] = true;	
-  channels[ "explosiveimpact"] = true;	
-  channels[ "element"] = true;	
-  channels[ "vehicle"] = true;	
-  channels[ "vehiclelimited" ] = true;	
-  channels[ "body" ] = true;	
-  channels[ "reload" ] = true;	
-  channels[ "effects1" ] = true;	
-  channels[ "effects2" ] = true;	
-  channels[ "voice"] = true;	
-  channels[ "mission"] = true;	
-
-  	*/
-  /*
-  main_track = level.eq_main_track;
-  mix_track = level.eq_mix_track;
-
-  // put the player on the mixtrack first
-  level.player SetEqLerp( 1, main_track );
-
-  filter = "highshelf";
-  db = -25;
-  freq = 1100;
-  a = 5;
-  	
-  foreach ( channel, _ in channels )
-  {
-  	level.player seteqbands( channel, mix_track, "highshelf", db, freq, 1, "lowshelf", 2, freq, 1 );
-  }
-  	
-  */
-
   AmbientStop(0.5);
 
   thread maps\_ambient::use_eq_settings("gulag_cavein", level.eq_mix_track);
 
-  // now blend to the mix track, which is our filter
   maps\_ambient::blend_to_eq_track(level.eq_mix_track, 2);
 }
 
 player_dies_to_cavein(start_index) {
-  // buried
   if(flag("player_died_to_cave_in")) {
     return;
   }
@@ -1282,16 +869,7 @@ player_ending_cavein() {
   level endon("stop_cavein");
 
   fx = getfx("player_cavein");
-  /*
-  tag_origin = spawn_tag_origin();
-  tag_origin.origin = level.player.origin + (0,0,60);
-  tag_origin linkto( level.player );
-  playFXOnTag( fx, tag_origin, "tag_origin" );
-  */
 
-  //	thread black_death();
-
-  //	wait( 1.2 );
   delay = 1.5;
   for(;;) {
     wait(delay);
@@ -1300,48 +878,6 @@ player_ending_cavein() {
     if(delay <= 0.2)
       delay = 0.2;
   }
-
-  /*
-  fx = [];
-  fx[ fx.size ] = "hallway_collapsing";
-  fx[ fx.size ] = "hallway_collapsing_big";
-  fx[ fx.size ] = "hallway_collapsing_huge";
-
-  index = 0;
-  	
-  counts = [];
-  counts[ 0 ] = 4;
-  counts[ 1 ] = 80;
-  counts[ 2 ] = 80;
-
-  thread black_death();
-
-  last_org = level.player.origin;
-  for( ;; )
-  {
-  	for( i = 0; i < counts[ index ]; i++ )
-  	{
-  		angles = level.player getplayerangles();
-  		forward = anglesToForward( angles );
-  		vec = level.player.origin - last_org;
-  					
-  		
-  		org = level.player.origin + forward * 100 + vec * 10;
-  		org = set_z( org, level.player.origin[2] );
-  		
-  		trace = bulletTrace( org, org + (0,0,3000), false, undefined );
-  		current_fx = getfx( fx[ index ] );
-  		playFX( current_fx, trace[ "position" ] );
-  		last_org = level.player.origin;
-  		
-  		wait( 0.1 );
-  	}
-  	
-  	index++;
-  	if( index >= fx.size )
-  		break;
-  }
-  */
 }
 
 black_death() {
@@ -1361,13 +897,12 @@ trigger_damage_think() {
   RadiusDamage(ent.origin + (0, 0, 16), 32, 500, 500, level.player);
   wait(0.2);
   RadiusDamage(ent.origin - (0, 0, 16), 32, 500, 500, level.player);
-  //	Print3d( ent.origin, "x", (1,0,0), 1, 1, 50 );
 }
 
 chase_player_dies_if_goes_wrong_way() {
   level.player endon("death");
   flag_wait("chase_brush_kill_volume_activates");
-  wait(2.5); // 2.3
+  wait(2.5);
 
   volume = getent("player_cavein_kill_volume", "targetname");
   time = 5;
@@ -1384,8 +919,8 @@ chase_player_dies_if_goes_wrong_way() {
 
 chase_train_chases(dist, starter) {
   level endon("stop_chase_fx");
-  min_speed = 6.0; // 8.0;
-  max_speed = 16; // 20;
+  min_speed = 6.0;
+  max_speed = 16;
   min_dist = dist;
   max_dist = dist + 75;
 
@@ -1436,8 +971,8 @@ chase_brush_accellerates_to_max_speed(chase_vehicle, time, max_speed) {
 
 chase_train() {
   level notify("collapse_fx_stop");
-  speed = 190; //186;
-  speed = 270; //186;
+  speed = 190;
+  speed = 270;
   speed /= 19.76;
   speed = 6;
 
@@ -1457,7 +992,7 @@ chase_train() {
   fx_vehicle thread chase_train_chases(400, true);
 
   wait(3.5);
-  //	wait( 1.25 + 3.25 );
+
   chase_brush = getent("chase_brush", "targetname");
   chase_brush show();
 
@@ -1469,9 +1004,6 @@ chase_train() {
   chase_vehicle startpath();
   chase_brush linkto(chase_vehicle);
   chase_vehicle thread chase_train_chases(900, false);
-
-  //chase_vehicle Vehicle_SetSpeedImmediate( speed, speed, speed );
-  //fx_vehicle Vehicle_SetSpeedImmediate( speed, speed, speed );
 
   level waittill("stop_chase_fx");
 
@@ -1485,7 +1017,7 @@ chase_train_fx() {
 
   fx = getfx("hallway_collapsing_chase");
   ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, -90));
-  //ent thread maps\_debug::drawtagforever( "tag_origin" );
+
   count = 5;
   for(;;) {
     angles = self.angles;
@@ -1520,19 +1052,13 @@ chase_train_kills_player_if_it_gets_close() {
     level.chase_distance = distance(org1, org2);
     chase_dist = level.chase_distance;
 
-    // algebra!
-    //1 - ( ( min_black - max_black ) / black_range ) = 1 - ( ( chase_dist - max_black ) / black_range );
     alpha = 1 - ((chase_dist - max_black) / black_range);
     alpha = clamp(alpha, 0, 1);
 
     level.black_overlay.alpha = alpha;
     level.black_overlay fadeOverTime(0.2);
 
-    //Line( level.player.origin, self.origin, (1,0,1), 1, 0, 2 );
-
-    //println( "distance " + distance( org1, org2 ) );
     if(chase_dist < 260) {
-      // this function automatically early outs on second call
       thread player_dies_to_cavein(2);
     }
 
@@ -1575,7 +1101,6 @@ set_friendly_endpoint_think() {
   flag_clear("friendlies_turn_corner");
   flag_wait("friendlies_turn_corner");
 
-  // This way this way!!!	
   level.redshirt thread dialogue_queue("gulag_wrm_thisway");
 
   hall_org = getstruct(new_org.target, "targetname");
@@ -1656,7 +1181,7 @@ cafe_fx() {
     rocks = array_randomize(rocks);
     foreach(ent in rocks) {
       ent activate_individual_exploder();
-      //ent.last_occurred_time = gettime();
+
       wait(level.fx_fall_time);
     }
     wait(0.1);
@@ -1781,7 +1306,7 @@ price_slide_box_topples() {
 }
 
 kill_player_on_touch() {
-  level.touchkill = self; // for debugging
+  level.touchkill = self;
   self endon("stop_killing");
   for(;;) {
     if(level.player istouching(self)) {
@@ -1885,7 +1410,6 @@ flicker_slow(ent) {
 }
 
 cafe_table_org_think() {
-  // these ents are associated by distance because a set of ents are in a prefab
   index = get_closest_index(self.origin, level.cafe_tables, 32);
   if(!isDefined(index)) {
     return;
@@ -1898,7 +1422,6 @@ cafe_table_org_think() {
   ent.angles = self.angles;
   table linkto(ent);
 
-  //ent thread maps\_debug::drawOriginForever();
   wait(1);
 
   target = getstruct(self.target, "targetname");
@@ -1958,7 +1481,6 @@ swing_light_think() {
 
     self rotateto(ref_ent.angles, 1, 0.3, 0.3);
     forward = anglesToForward(ref_ent.angles);
-    //		Line( self.origin, self.origin + forward * 100, (1,1,1), 1, 0, 20 );
 
     wait(1);
   }
@@ -1984,8 +1506,6 @@ evil_hidden_spawner() {
   wait(0.05);
   self unlink();
 
-  //	self Detach( "weapon_m4", "tag_weapon_right" );
-
   level waittill("dropit");
   wait(0.30);
   self SetAnim(animation, 1, 0, 0.55);
@@ -2003,22 +1523,14 @@ evil_hidden_spawner() {
   delaythread(0.20, ::play_sound_in_space, "physics_brick_default", weapon_impact_org.origin);
   delaythread(0.20, ::play_sound_in_space, "physics_brick_default", weapon_impact_org.origin);
   delaythread(0.20, ::play_sound_in_space, "physics_brick_default", weapon_impact_org.origin);
-
-  /*
-  wait( 0.30 );
-  self SetAnim( animation, 1, 0, 0.95 );
-  wait( 0.05 );	
-  self DropWeapon( weapon, "right", 0 );
-  */
 }
 
 players_view_opens(player_rig) {
   wait(0.5);
-  //( linkto entity, tag, viewpercentag fraction, right arc, left arc, top arc, bottom arc, use tag angles);
+
   level.player PlayerLinkToDelta(player_rig, "tag_player", 1, 0, 0, 0, 0, true);
   wait(3.2 - 0.5);
-  //	wait( 0.05 );
-  //LerpViewAngleClamp( time, accel time, decel time, right arc, left arc, top arc, bottom arc );
+
   level.player LerpViewAngleClamp(1, 0.5, 0.5, 17, 17, 12, 8);
 }
 
@@ -2039,10 +1551,6 @@ player_gets_knocked_out_by_price(player_rig) {
   tag_origin = spawn_tag_origin();
   tag_origin LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
 
-  //evil_hidden_spawner = getent( "evil_hidden_spawner", "targetname" );
-  //evil_hidden_spawner thread add_spawn_function( ::evil_hidden_spawner );
-  //evil_hidden_spawner spawn_ai();
-
   thread spawn_ak47();
   queue = gettime();
   level.queue_time = queue;
@@ -2061,18 +1569,8 @@ player_gets_knocked_out_by_price(player_rig) {
   level.price_breach_ent rotateto(level.price_breach_struct.angles, 0.5, 0.2, 0.2);
   level.price_breach_ent notify("stop_following_player");
 
-  //noself_delayCall( 0.0, ::Earthquake, 0.2, 0.5, level.player.origin, 128 );
-  //	Earthquake( scale, duration, source, radius );
   noself_delayCall(0.1, ::Earthquake, 1.0, 0.6, level.player.origin, 128);
   delaythread(0.0, ::white_punch_screen);
-  //	level.player delaycall( 0.1, ::SetBlurForPlayer, 20, 0 );
-  //	level.player delaycall( 0.3, ::SetBlurForPlayer, 0, 1.5 );
-  //	level.player delaycall( 0.5, ::SetBlurForPlayer, 0, 0.5 );
-
-  //	noself_delayCall( 0.1, ::SetBlur, 2.5, 0.1 );
-  //	noself_delayCall( 0.21, ::SetBlur, 0, 1 );
-
-  //	level.player PlayerSetGroundReferenceEnt( tag_origin );	
 
   level.player PlayerLinkToBlend(player_rig, "tag_player", time, time * 0.4, time * 0.4);
   delaythread(time, ::players_view_opens, player_rig);
@@ -2080,20 +1578,9 @@ player_gets_knocked_out_by_price(player_rig) {
   level notify("breach_concludes");
   level.player DoDamage(50 / level.player.damageMultiplier, level.price.origin);
 
-  // slow mo for a bit
   wait_for_buffer_time_to_pass(queue, 6.7);
 
-  //slowmo_start();
-  //slowmo_setspeed_slow( 0.1 );
-  //slowmo_setlerptime_in( 0.2 );
-  //slowmo_lerp_in();
-
-  // soap enters scene
   wait_for_buffer_time_to_pass(queue, 7.3);
-
-  //slowmo_setlerptime_out( 0.2 );
-  //slowmo_lerp_out();
-  //slowmo_end();
 
   wait_for_buffer_time_to_pass(queue, 24.6);
   thread radio_dialogue("gulag_hqr_getout");
@@ -2115,19 +1602,13 @@ spawn_ak47() {
   hide_parts["tag_silencer"] = true;
   hide_parts["tag_flash_silenced"] = true;
   hide_parts["tag_motion_tracker"] = true;
-  //	hide_parts[ "tag_heartbeat" ] = true;
-  //	hide_parts[ "tag_heartbeat" ] = true;
 
   ak47 setModel("gulag_price_ak47");
-  foreach(part, _ in hide_parts) {
-    //ak47 hidepart( part );
-  }
+  foreach(part, _ in hide_parts) {}
 
-  //	ak47.origin = level.price gettagorigin( "tag_weapon_chest" );
-  //	ak47.angles = level.price gettagangles( "tag_weapon_chest" );	
   ak47 linkto(level.price, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   wait(1.4);
-  //	ak47 unlink();	
+
   println("ak update info:");
   println("	ak47.origin = " + ak47.origin + ";");
   println("	ak47.angles = " + ak47.angles + ";");
@@ -2139,7 +1620,6 @@ spawn_ak47() {
 }
 
 calculate_cafe_run_distances() {
-  // grab the required distances from placed ents
   cafe_distance_trackersA = getEntArray("cafe_distance_tracker", "targetname");
   cafe_distance_trackersB = cafe_distance_trackersA;
   dists = [];
@@ -2165,7 +1645,7 @@ calculate_cafe_run_distances() {
 
 cavein_spawner_think() {
   self endon("death");
-  flag_wait("enemy_cavein"); // exploder
+  flag_wait("enemy_cavein");
   wait(0.5);
   for(;;) {
     RadiusDamage(self.origin, 35, 10, 10);
@@ -2180,10 +1660,9 @@ new_interval() {
 
 endlog_friendly_runout_settings() {
   self.interval = 16;
-  //self.noDodgeMove = true;
+
   thread new_interval();
-  //self delaythread( 5.5, ::ramp_interval, 64, 4 );
-  //		self.run_overrideanim = getgenericanim( "panic_run" );
+
   self ent_flag_init("run_into_room");
   self.ignoresuppression = true;
   self.animplaybackrate = 1;
@@ -2205,17 +1684,6 @@ endlog_friendly_runout_settings() {
     wait(1);
     self.moveplaybackrate = 1.0;
   }
-
-  /*
-  if( self.animname == "soap" )
-  {
-  	self waittillmatch( "single anim", "end" );
-  	wait( 8 );
-  	self.moveplaybackrate = 0.96;
-  	wait( 12 );
-  	self.moveplaybackrate = 1.0;
-  }
-  */
 }
 
 ramp_interval(num, time) {
@@ -2264,25 +1732,6 @@ evac_slowmo() {
   slowmo_setlerptime_in(0.05);
   slowmo_lerp_in();
 
-  /*
-  //wait( 8 );
-  	
-  //wait( 1.75 );
-  wait( 1.1 );
-
-  slowmo_setspeed_slow( 0.8 );
-  slowmo_setlerptime_in( 0.05 );
-  slowmo_lerp_in();
-  	
-  wait( 0.5 );
-  //wait( 3 );
-
-  slowmo_setspeed_slow( 0.4 );
-  slowmo_setlerptime_in( 0.05 );
-  slowmo_lerp_in();
-  	
-  wait ( 3 - 1.6 );
-  */
   wait(3);
 
   outblend = 0.5;
@@ -2339,25 +1788,10 @@ die_soon() {
 }
 
 soap_talks_to_heli() {
-  /*
-  // Viper Six-Four, this is Bravo Six Actual! We're trapped in the mess hall at the northeast corner of the gulag, depth 100 meters!!! I need a four-point SPIE rig for emergency extraction over!	
-  level.soap anim_single_solo( level.soap, "gulag_cmt_depth100" );
-  	
-  // Roger on the SPIE rig - we're on the way, give us fifteen seconds.	
-  radio_dialogue( "gulag_plp_15secs" );
-  	
-  // We'll be dead in five!!! Move your arse man!!!	
-  level.soap dialogue_queue( "gulag_cmt_deadinfive" );
-  	
-  level waittill( "more_soap_dialogue" );	
-  */
   wait(0.5);
 
-  // Six-Four, where the hell are you, over?!!!!	
-  //	level.soap dialogue_queue( "gulag_cmt_whereareyou" );
   wait(2.8);
-  //	wait( 3.2 );
-  // Bravo Six, there's too much smoke, I can't see you I can't see you -	
+
   radio_dialogue("gulag_plp_cantsee");
 }
 
@@ -2372,16 +1806,6 @@ cafe_falls_apart() {
   thread earthquake_buildup();
 
   maps\_utility::fog_set_changes("gulag_cafe_falls_apart", 5);
-  /*
-  wait( 8 );
-  black_overlay = create_client_overlay( "black", 0, level.player );
-  black_overlay.alpha = 0;
-  black_overlay fadeOverTime( 3 );
-  black_overlay.alpha = 1;
-  level waittill( "stop_cavein" );
-  wait( 0.05 );
-  black_overlay destroy();
-  */
 }
 
 earthquake_buildup() {
@@ -2430,14 +1854,11 @@ quake_rumble() {
 }
 
 quake(mag, duration, org, range) {
-  //vec = randomvector( 5 );
-  //PlayRumbleOnPosition( "heavy_3s", level.player.origin + vec );
   thread quake_rumble();
 
   Earthquake(mag, duration, org, range);
   level notify("swing", mag);
 
-  // artillery sound
   angles = (randomint(360), randomint(360), randomint(360));
   forward = anglesToForward(angles);
   range = randomfloatrange(500, 1000);
@@ -2539,11 +1960,10 @@ swing_light_org_off_think() {
 
 lamp_animates(root) {
   root.lamp = self;
-  self.animname = "lamp"; // uses one set of anims
+  self.animname = "lamp";
   self.origin = root.origin;
   self dontcastshadows();
 
-  // cant blend to the same anim	
   odd = true;
   anims = [];
   anims[0] = self getanim("swing");
@@ -2580,8 +2000,7 @@ swap_world_fx() {
 
 orient_player_to_rig(player_rig) {
   tag_origin = spawn_tag_origin();
-  //	angles = player_rig gettagangles( "tag_player" );
-  //	origin = player_rig gettagorigin( "tag_player" );
+
   tag_origin.origin = level.player.origin;
   tag_origin.angles = level.player.angles;
   wait(0.05);
@@ -2589,8 +2008,6 @@ orient_player_to_rig(player_rig) {
   wait(5);
   wait(0.05);
   tag_origin LinkToBlendToTag(player_rig, "tag_player", false);
-  //	tag_origin linkto( player_rig, "tag_player", (0,0,0),(0,0,0) );
-  //	tag_origin thread maps\_debug::drawtagforever( "tag_origin" );
 }
 
 map_spawners_to_starts(orgs) {

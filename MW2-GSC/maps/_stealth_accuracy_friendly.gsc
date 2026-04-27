@@ -19,11 +19,6 @@ stealth_accuracy_friendly_main() {
   self thread ai_message_handler_spotted(function, "accuracy_friendly");
 }
 
-/************************************************************************************************************/
-
-/*												FRIENDLY LOGIC												*/
-/************************************************************************************************************/
-
 friendly_acc_hidden() {
   self.baseAccuracy = self._stealth.behavior.goodaccuracy;
   self.Accuracy = self._stealth.behavior.goodaccuracy;
@@ -33,11 +28,6 @@ friendly_acc_spotted() {
   self.baseAccuracy = self._stealth.behavior.old_baseAccuracy;
   self.Accuracy = self._stealth.behavior.old_Accuracy;
 }
-
-/************************************************************************************************************/
-
-/*													SETUP													*/
-/************************************************************************************************************/
 
 friendly_init() {
   assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");

@@ -77,7 +77,6 @@ EMP_JamTeam(teamName, duration, delay) {
 
   assert(teamName == "allies" || teamName == "axis");
 
-  //wait ( delay );
   thread teamPlayerCardSplash("callout_used_emp", self);
 
   level notify("EMP_JamTeam" + teamName);
@@ -98,8 +97,6 @@ EMP_JamTeam(teamName, duration, delay) {
 
   wait(0.1);
 
-  // resetting the vision set to the same thing won't normally have an effect.
-  // however, if the client receives the previous visionset change in the same packet as this one, // this will force them to lerp from the bright one to the normal one.
   _visionsetnaked("coup_sunblind", 0);
   _visionsetnaked("", 3.0);
 
@@ -140,8 +137,6 @@ EMP_JamPlayers(owner, duration, delay) {
 
   assert(isDefined(owner));
 
-  //wait ( delay );
-
   foreach(player in level.players) {
     player playLocalSound("mp_lose_flag");
 
@@ -157,8 +152,6 @@ EMP_JamPlayers(owner, duration, delay) {
 
   wait(0.1);
 
-  // resetting the vision set to the same thing won't normally have an effect.
-  // however, if the client receives the previous visionset change in the same packet as this one, // this will force them to lerp from the bright one to the normal one.
   _visionsetnaked("coup_sunblind", 0);
   _visionsetnaked("", 3.0);
 

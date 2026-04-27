@@ -13,7 +13,7 @@ main() {
   anim.boatanims = [];
   anim.boatanims["left"] = spawnStruct();
   anim.boatanims["left"].base = % zodiac_aim_left;
-  anim.boatanims["left"].trans = % zodiac_trans_R2L; // Why would we use the "R_2_L" animation to transition from the "left" pose to the "right" pose, you ask? I don't know, my friend. I don't know.
+  anim.boatanims["left"].trans = % zodiac_trans_R2L;
   anim.boatanims["left"].aim = spawnStruct();
   anim.boatanims["left"].aim.left = % zodiac_rightside_aim4;
   anim.boatanims["left"].aim.center = % zodiac_rightside_aim5;
@@ -50,13 +50,12 @@ draw_line_toshootpos() {
   }
 }
 
-endthink() // this function is not called right now, but it should be if an AI ever gets off a zodiac.
-{
+endthink() {
   self.a.specialShootBehavior = undefined;
 }
 
 think() {
-  self endon("killanimscript"); // (includes death)
+  self endon("killanimscript");
 
   if(!ent_flag_exist("transitioning_positions"))
     ent_flag_init("transitioning_positions");
@@ -83,7 +82,6 @@ think() {
 
   self childthread watchVelocity();
   self childthread idleAimDir();
-  //	self childthread draw_line_toshootpos();
 
   for(;;) {
     self thread disableBoatIdle();
@@ -120,7 +118,6 @@ think() {
       continue;
     }
 
-    // we want the additive idle for anything after this point in the loop (shooting or aiming)
     self thread enableBoatIdle();
 
     if(aimedAtShootEntOrPos()) {
@@ -138,16 +135,12 @@ think() {
 
 shouldReload() {
   if(NeedToReload(0)) {
-    // it looks bad to reload when we have targets.
-    // we'll reload when we get a chance.
-
     if(!isDefined(self.a.wantBoatReloadTime))
       self.a.wantBoatReloadTime = gettime();
     self animscripts\weaponList::RefillClip();
   }
 
   if(isDefined(self.a.wantBoatReloadTime)) {
-    // don't wait too long.
     if(gettime() - self.a.wantBoatReloadTime > 2500)
       return true;
 
@@ -179,7 +172,6 @@ disableBoatIdle() {
   }
   self endon("killanimscript");
 
-  // actually wait a bit before clearing it in case we still want it
   self endon("want_boat_idle");
   wait .05;
 
@@ -321,7 +313,6 @@ getDesiredBoatAimYaw() {
 }
 
 updateBoatAim() {
-  // need to be able to aim quickly because we're moving quickly, so don't cap too much
   maxTurn = 15;
   if(!isDefined(self.shootPos))
     maxTurn = 5;
@@ -406,7 +397,7 @@ needToChangePose_other() {
   if(!isDefined(self.shootPos))
     return "none";
 
-  aimYaw = getBoatAimYawToShootPos(0.5); // half second prediction
+  aimYaw = getBoatAimYawToShootPos(0.5);
 
   if(self.a.boat_pose == "left") {
     if(aimYaw > 15 && aimYaw < 160)
@@ -430,31 +421,10 @@ needToChangePose() {
     return self.scripted_boat_pose;
   }
 
-  // we always want the "left" pose now
   if(self.a.boat_pose == "right")
     return "left";
 
   return "none";
-
-  /*
-  if( !isDefined( self.shootPos ) )
-  	return "none";
-  	
-  aimYaw = getBoatAimYawToShootPos( 0.5 ); // half second prediction
-  	
-  if( self.a.boat_pose == "left" )
-  {
-  	if( aimYaw > 15 && aimYaw < 160 )
-  		return "right";
-  }
-  else if( self.a.boat_pose == "right" )
-  {
-  	if( aimYaw < -15 && aimYaw > -160 )
-  		return "left";
-  }
-  	
-  return "none";
-  */
 }
 
 setup_anim_array_boat() {

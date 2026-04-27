@@ -9,7 +9,6 @@
 #using_animtree("generic_human");
 
 MoveWalk() {
-  // Decide what pose to use
   preferredPose = undefined;
   if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > 64 * 64)
     preferredPose = "stand";
@@ -90,7 +89,7 @@ DoWalkAnim(walkAnim) {
   if(self.a.pose == "stand") {
     if(isDefined(self.enemy)) {
       self thread animscripts\cqb::CQBTracking();
-      // (we don't use %body because that would reset the aiming knobs)
+
       self setFlaggedAnimKnobAll("walkanim", animscripts\cqb::DetermineCQBAnim(), %walk_and_run_loops, 1, 1, rate, true);
     } else {
       self setFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1, rate, true);

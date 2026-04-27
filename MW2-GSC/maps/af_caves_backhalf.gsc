@@ -15,7 +15,6 @@
 #using_animtree("generic_human");
 
 main_af_caves_backhalf_preload() {
-  //thread destructible_management();
   PreCacheShellShock("af_cave_collapse");
   PreCacheItem("hellfire_missile_af_caves_end");
   PreCacheModel("weapon_rpd_MG_Setup");
@@ -27,7 +26,7 @@ main_af_caves_backhalf_preload() {
   level.ledgeKillfirm = 0;
   level.ledgeEnemiesKilledByPlayer = 0;
   level.riotshields = getEntArray("riotshield", "targetname");
-  level.priceLedgeHelpCooldown = 2; //seconds you have to wait since the last time Price killed an enemy to give him super accuracy
+  level.priceLedgeHelpCooldown = 2;
   level.riotShieldInstructed = false;
   level.aColornodeTriggersBackhalf = [];
   level.gettingflankednaggiven = false;
@@ -42,22 +41,18 @@ main_af_caves_backhalf_preload() {
   flag_init("can_talk");
   flag_set("can_talk");
 
-  //ledge
   flag_init("ledge_sequence_dialogue_over");
   flag_init("shephered_ledge_dialogue_starting");
   flag_init("shephered_ledge_dialogue_done");
 
-  //overlook
   flag_init("unload_overlook_dudes");
   flag_init("overlook_dudes_decimated");
 
-  //skylight
   flag_init("unload_skylight_dudes");
   flag_init("smoke_thrown");
   flag_init("price_has_given_flank_hint");
   flag_init("stop_smoke");
 
-  //Breach
   flag_init("start_breach_nags");
   flag_init("breach_door_closed");
   flag_init("control_room_breached");
@@ -69,7 +64,6 @@ main_af_caves_backhalf_preload() {
   flag_init("player_detonated_explosives");
   flag_init("price_at_the_keyboard");
 
-  //Airstrip
   flag_init("start_airstrip_aftermath_fx");
   flag_init("end_cave_collapse");
   flag_init("player_escaped");
@@ -80,7 +74,6 @@ main_af_caves_backhalf_preload() {
   flag_init("danger_close_last_missile_has_hit");
   flag_init("unload_airstrip_blackhawk_dudes");
 
-  //objectives
   flag_init("obj_ledge_traverse_given");
   flag_init("obj_ledge_traverse_complete");
   flag_init("obj_overlook_to_skylight_given");
@@ -114,37 +107,26 @@ main_af_caves_backhalf_postload() {
   foreach(destroyed_piece in netting_destroyed)
   destroyed_piece Hide();
 
-  //
   generic_damage_triggers = getEntArray("generic_damage", "targetname");
   array_thread(generic_damage_triggers, ::generic_damage_triggers_think);
-  //dialogue
+
   backhalf_dialogue();
 
-  //vehicles
   aVehicleSpawners = maps\_vehicle::_getvehiclespawnerarray();
   array_thread(aVehicleSpawners, ::add_spawn_function, ::vehicle_think);
   array_thread(GetVehicleNodeArray("plane_sound", "script_noteworthy"), maps\_mig29::plane_sound_node);
   array_thread(GetVehicleNodeArray("uav_sound", "script_noteworthy"), maps\_ucav::plane_sound_node);
   array_thread(GetVehicleNodeArray("fire_missile", "script_noteworthy"), maps\_ucav::fire_missile_node);
 
-  //Ledge	
   array_spawn_function_targetname("hostiles_ledge_fight", ::AI_ledge_hostiles_think);
   array_spawn_function_noteworthy("ledge_prone_guy", ::AI_ledge_prone_guy_think);
 
-  //Overlook
   array_spawn_function_noteworthy("overlook_heli_fastropers", ::AI_overlook_heli_fastropers_think);
 
-  //Skylight
   array_spawn_function_noteworthy("skylight_heli_fastropers", ::AI_skylight_heli_fastropers_think);
   array_spawn_function_noteworthy("riotshield_flanker", ::AI_riotshield_flanker_think);
   array_spawn_function_noteworthy("shotgun_flanker", ::AI_shotgun_flanker_think);
 
-  //array_spawn_function_noteworthy( "riotshield_flanker_long", ::AI_riotshield_flanker_think, "longSprint" );
-
-  //Control Room		
-  //array_spawn_function_noteworthy( "flashlight", ::attach_flashlight );
-
-  //Airstrip
   array_spawn_function_noteworthy("airstrip_littlebird_hostiles", ::AI_airstrip_littlebird_hostiles_think);
   array_spawn_function_noteworthy("airstrip_heli_fastropers", ::AI_airstrip_heli_fastropers_think);
   array_spawn_function_targetname("ambient_airstrip", ::AI_ambient_airstrip_think);
@@ -158,17 +140,11 @@ main_af_caves_backhalf_postload() {
   blackhawk_airstrip thread add_spawn_function(::blackhawk_airstrip_think);
 
   thread fx_management();
-
-  //thread debug();
 }
 
 AA_backhalf_init() {
   thread AA_ledge_init();
 }
-
-/****************************************************************************
-LEDGE FIGHT
-****************************************************************************/
 
 AA_ledge_init() {
   flag_wait("steamroom_halfway_point");
@@ -191,18 +167,14 @@ music_ledge_to_breach() {
   while(!flag("control_room_explosion")) {
     MusicPlayWrapper("af_caves_goingloud");
     wait(time);
-    //wait( 196 );
+
     music_stop(1);
     wait(1.1);
   }
 }
 
 AAA_sequence_ledge_to_cave() {
-  //to do ....remove door opening here, will be in Sean's script
-  //thread steamroom_door_full_open();
-
-  //flag_wait( "player_approaching_steamroom_exit" );
-  flag_wait("steamroom_done"); // SRS changed to a flag I can control in script
+  flag_wait("steamroom_done");
 
   turn_off_stealth();
   level.price.goalvolume = 64;
@@ -215,13 +187,10 @@ AAA_sequence_ledge_to_cave() {
   triggersEnable("colornodes_backhalf_ledge", "script_noteworthy", true);
   activate_trigger_with_noteworthy("colornodes_backhalf_ledge_start");
 
-  /*----------------------- CANYON VEHICLES
-  -------------------------*/
   thread convoy_loop("canyon_convoy", "control_room_breached", 1.5, 2.2);
-  //flag_wait( "player_approaching_steamroom_exit" );// SRS this flag wasn't doing anything since it was being checked earlier in the thread
+
   air_convoy_ledge = spawn_vehicles_from_targetname_and_drive("air_convoy_ledge");
 
-  //get overlook fastropers ready
   thread blackhawk_overlook_rappel_think();
 
   flag_wait("player_clear_steamroom");
@@ -241,7 +210,7 @@ AAA_sequence_ledge_to_cave() {
   thread spawn_vehicles_from_targetname_and_drive_on_flag("jets_canyon_01", "shephered_ledge_dialogue_done");
 
   flag_wait("player_crossed_bridge");
-  level.priceLedgeHelpCooldown = .1; // let Price be accurate more ofthen now that we're closer
+  level.priceLedgeHelpCooldown = .1;
 
   flag_wait("player_ledge_last_stairs");
   level.price.ignoreme = false;
@@ -268,16 +237,14 @@ price_has_awesome_accuracy_while_player_is_using_shield(sFlagToEndOn) {
     } else {
       level.price.baseaccuracy = level.price.old_baseaccuracy;
     }
-    //level.player waittill_either_or_timeout( "weapon_change", "done_with_ledge_sequence" );
+
     wait(2);
   }
 
-  //make price have average accuracy
   level.price.baseaccuracy = 2;
 }
 
 price_hasnt_killed_a_fool_in_the_last_few_seconds(iSeconds) {
-  //only give Price awesome accuracy if it's been at lease XX seconds since his last kill
   currentTime = GetTime();
   timeElapsed = currentTime - level.lasttimePriceKilledEnemy;
   if(currentTime == level.lasttimePriceKilledEnemy)
@@ -300,19 +267,19 @@ AI_ledge_hostiles_think() {
   baseaccuracyFactor = undefined;
 
   switch (level.gameSkill) {
-    case 0: // easy
+    case 0:
       doorFlashChanceFactor = 1;
       baseaccuracyFactor = 1000;
       break;
-    case 1: // regular
+    case 1:
       doorFlashChanceFactor = 1.3;
       baseaccuracyFactor = 1000;
       break;
-    case 2: // hardened
+    case 2:
       doorFlashChanceFactor = 1.5;
       baseaccuracyFactor = 1000;
       break;
-    case 3: // veteran
+    case 3:
       doorFlashChanceFactor = 1.5;
       baseaccuracyFactor = 1000;
       break;
@@ -326,9 +293,7 @@ AI_ledge_hostiles_think() {
   while(isDefined(self)) {
     self waittill("death", attacker);
 
-    //Final killfirm if all dead
     if(flag("ledge_gunners_dead")) {
-      //Captain Price	We're clear. Move in.
       if((!flag("player_inside_overlook")) && (level.ledgeKillfirmFinal == false)) {
         level.ledgeKillfirmFinal = true;
         radio_dialogue("riot_killfirm_final");
@@ -339,12 +304,6 @@ AI_ledge_hostiles_think() {
       if((flag("can_talk")) && (!flag("ledge_gunners_dead"))) {
         wait(0.05);
 
-        //Otherwise, generic killfirm
-
-        //Good night
-        //He's down
-        //Got 'em
-        //Got one.
         flag_clear("can_talk");
         if(level.ledgeKillfirm == 3)
           level.ledgeKillfirm = 0;
@@ -364,22 +323,13 @@ AI_ledge_hostiles_think() {
 }
 
 dialogue_ledge_to_cave() {
-  //flag_wait( "player_approaching_steamroom_exit" );
-  flag_wait("steamroom_done"); // SRS changed to a script controlled flag
+  flag_wait("steamroom_done");
 
   flag_set("obj_ledge_traverse_given");
 
-  //Shadow Company HQ	Avatar One this is Oxide, we've lost contact with multiple squads near the steam room. I need a camera sweep of the catwalk, over.		stealth wiretap
-  //radio_dialogue( "afcaves_schq_catwalk" );
-
-  //Shadow Company 4	Roger that Oxide, UAV is online. Standby.		stealth wiretap
-  //radio_dialogue( "afcaves_sc4_uavonline" );
-
   flag_wait("player_clear_steamroom");
   flag_wait("steamroom_ambush_finish_dialogue_ended");
-  //flag_wait( "player_ledge_riotshields" );
 
-  ////Captain Price	Grab a riot shield...we'll need cover out here.
   radio_dialogue("afcaves_pri_pickupriotsheild");
 
   delayThread(2, ::dialogue_nag_riotshield, "ledge_gunners_dead", "player_crossed_bridge");
@@ -392,15 +342,12 @@ dialogue_ledge_to_cave() {
 
   flag_set("shephered_ledge_dialogue_starting");
 
-  //Shadow Company 4	Oxide, Avatar One. We have unauthorized personnel on the catwalk. I repeat, we have unauthorized personnel on the catwalk.
   radio_dialogue("afcaves_sc4_gettingthis");
 
   flag_set("shephered_ledge_dialogue_done");
 
   flag_set("can_talk");
 
-  /*----------------------- LEDGE GUNNERS DEAD
-  -------------------------*/
   flag_wait("ledge_gunners_dead");
   level.player notify("done_with_ledge_sequence");
 
@@ -419,66 +366,49 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
     if((flag(sFlagToEndOn1)) || (flag(sFlagToEndOn2))) {
       return;
     }
-    //No riot shield, but near a pickup
+
     if((!player_has_riot_shield()) && (player_is_near_a_riot_shield_pickup())) {
       if(flag("can_talk")) {
         flag_clear("can_talk");
         if(iRiotShieldPickupHintNumber == 3)
           iRiotShieldPickupHintNumber = 0;
-        //Captain Price	Soap, grab a riot shield and lead the way. I'll take care of any shooters!
-        //Captain Price	11	5	Soap, grab a riot shield. We'll need all the cover we can get.
-        //Grab a riot shield. We're completely exposed out here.
+
         radio_dialogue("pickupriotsheild_0" + iRiotShieldPickupHintNumber);
         iRiotShieldPickupHintNumber++;
         flag_set("can_talk");
         level.player waittill_notify_or_timeout("weapon_change", 5);
       }
-    }
-
-    //Player has the shield
-    else if(player_has_riot_shield()) {
-      //Have we given the general instruction yet?
+    } else if(player_has_riot_shield()) {
       if(level.riotShieldInstructed == false) {
         if(flag("can_talk")) {
           flag_clear("can_talk");
-          //Captain Price	11	3	Take point with the riot shield. I'll take care of any resistance.
+
           radio_dialogue("afcaves_pri_takepoint2");
           level.riotShieldInstructed = true;
           flag_set("can_talk");
         }
-      }
-      //Player has it, but is not using it
-      else if(!player_is_using_riot_shield()) {
+      } else if(!player_is_using_riot_shield()) {
         if(flag("can_talk")) {
           flag_clear("can_talk");
           if(iRiotShieldSwitchHintNumber == 2)
             iRiotShieldSwitchHintNumber = 0;
-          //Switch to the shield, we're exposed out here!
-          //Bring up the riot shield, Soap!
-          //Give us some cover with that riot shield, Soap!
+
           radio_dialogue("switchriotsheild_0" + iRiotShieldSwitchHintNumber);
           iRiotShieldSwitchHintNumber++;
           flag_set("can_talk");
         }
-      }
-      //Player is using it, but not crouched
-      else if(!player_is_crouched()) {
+      } else if(!player_is_crouched()) {
         if(flag("can_talk")) {
           flag_clear("can_talk");
           if(iRiotShieldCrouchHintNumber == 2)
             iRiotShieldCrouchHintNumber = 0;
-          //Captain Price	11	3	Stay low with that shield so I can get a clean shot
-          //Captain Price	11	3	Keep low with that shield.
-          //Crouch down with that shield, Soap! I'll take care of the shooters.
+
           radio_dialogue("crouchriotsheild_0" + iRiotShieldCrouchHintNumber);
           iRiotShieldCrouchHintNumber++;
           flag_set("can_talk");
         }
       } else if(level.riotShieldInstructed == true) {
         if((iCatWalkChatterNumber < 3) && (flag("can_talk"))) {
-          //Shadow Company 5	Oxide, Disciple Nine, we've got hostile contact approximately 50 meters from the nest, over.		stealth wiretap
-          //Shadow Company HQ	All personnel - be advised, we have two enemy foot-mobiles on the catwalk heading to the crow's nest.		stealth wiretap
-          //Shadow Company HQ	Terminate with extreme prejudice.
           flag_clear("can_talk");
           radio_dialogue("catwalk_enemy_chatter_0" + iCatWalkChatterNumber);
           iCatWalkChatterNumber++;
@@ -492,8 +422,7 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
             flag_clear("can_talk");
             if(iRiotShieldMoveUpNumber == 1)
               iRiotShieldMoveUpNumber = 0;
-            //Captain Price	Move up.
-            //Captain Price	Take point with the shield and draw their fire. I'll cover you.
+
             radio_dialogue("riotsheildmove_0" + iRiotShieldMoveUpNumber);
             iRiotShieldMoveUpNumber++;
             flag_set("can_talk");
@@ -554,10 +483,6 @@ player_is_near_a_riot_shield_pickup() {
   return false;
 }
 
-/****************************************************************************
-OVERLOOK FIGHT
-****************************************************************************/
-
 AA_overlook_init() {
   thread AAA_sequence_overlook_to_breach();
   thread dialogue_overlook_to_breach();
@@ -577,21 +502,13 @@ AAA_sequence_overlook_to_breach() {
   level.price.fixednodesaferadius = 1024;
   level.fixednodesaferadius_default = 1024;
 
-  /*----------------------- OVERLOOK CAVE
-  -------------------------*/
-  //get fastropers ready for skylight area
   blackhawk_skylight_01 = spawn_vehicle_from_targetname_and_drive("blackhawk_skylight_01");
   rappelSoundOrg = blackhawk_skylight_01.origin;
 
-  /*----------------------- SKYLIGHT AREA - FASTROPERS
-  -------------------------*/
   flag_wait("player_enter_skylight");
 
-  //thread overlook_grenade_hints();
   flag_set("unload_skylight_dudes");
 
-  /*------------------------- SKYLIGHT - MAKE ALL IN OVERLOOK SEEK THE PLAYER
-  -------------------------*/
   volume_overlook = GetEnt("volume_overlook", "targetname");
   aAI = volume_overlook get_ai_touching_volume("axis");
   array_thread(aAI, ::AI_player_seek);
@@ -602,14 +519,11 @@ AAA_sequence_overlook_to_breach() {
   flag_set("smoke_thrown");
 
   if(isDefined(blackhawk_skylight_01)) {
-    //Butcher Two roping into sector Papa Quebec!
     delaythread(2, ::play_sound_in_space, "afcaves_sc5_papaquebec", rappelSoundOrg);
   }
 
   thread dialougue_nag_smokefight();
 
-  /*----------------------- SKYLIGHT AREA - CLEANUP
-  -------------------------*/
   flag_wait("obj_overlook_to_skylight_complete");
 
   if(isDefined(blackhawk_skylight_01)) {
@@ -617,30 +531,6 @@ AAA_sequence_overlook_to_breach() {
     blackhawk_skylight_01 thread vehicle_paths_then_delete(skylight1_heli_depart);
   }
 }
-
-//overlook_grenade_hints()
-//{
-//	if( level.gameskill > 1 )
-//		return;
-//	level endon( "player_in_skylight_area" );
-//	
-//	thread player_grenade_usage_monitor();
-//}
-//
-//player_grenade_usage_monitor()
-//{
-//	level endon( "player_in_skylight_area" );
-//	level.player endon( "death" );
-//	level endon( "player_used_flash" );
-//	while( true )
-//	{
-//		flag_wait_or_timeout( "player_used_flash", 120 );
-//		if( !flag( "player_used_flash" ) )
-//		{
-//			hint
-//		}
-//	}
-//}
 
 overlook_autosaves() {
   thread overlook_to_skylight_autosaves_every_3_dudes();
@@ -674,15 +564,12 @@ vehicle_paths_then_delete(node) {
 dialogue_overlook_to_breach() {
   flag_wait("ledge_sequence_dialogue_over");
 
-  //Shadow Company HQ	Butcher One-Five, rendezvous at the nest and prepare to escort Gold Eagle to the LZ.
   radio_dialogue("afcaves_schq_escourtgoldeagle");
 
-  //Captain Price	Gold Eagle must be Shepherd! We're running out of time, let's go!
   radio_dialogue("afcaves_pri_mustbeshepherd");
 
   flag_wait("player_inside_overlook");
 
-  //Strategy nags
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
   }
@@ -691,14 +578,12 @@ dialogue_overlook_to_breach() {
     return;
   }
   if(player_has_frags()) {
-    //Captain Price	They're using shields! Throw some frags!	
     level.price dialogue_execute("afcaves_pri_sheildsthrowfrags");
 
     if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
       return;
     wait(10);
   } else if(player_has_flash()) {
-    //Captain Price	They're using shields! Use flash grenades!	
     level.price dialogue_execute("afcaves_pri_sheildsuseflash");
 
     if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
@@ -709,7 +594,7 @@ dialogue_overlook_to_breach() {
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
   }
-  //Captain Price	Try to flank them!	
+
   level.price dialogue_execute("afcaves_pri_trytoflank");
 
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
@@ -718,7 +603,7 @@ dialogue_overlook_to_breach() {
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
   }
-  //Captain Price	Soap! Hit them from the sides!	
+
   level.price dialogue_execute("afcaves_pri_hitfromsides");
 
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
@@ -727,15 +612,8 @@ dialogue_overlook_to_breach() {
   if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
   }
-  //Captain Price	Try to flank and hit them from the sides!	
+
   level.price dialogue_execute("afcaves_pri_flankandhitsides");
-
-  //flag_wait( "unload_overlook_dudes" );
-  //radio_dialogue( "afcaves_sc5_rapellingin" );
-
-  // SRS we play this earlier now per steve.maybe check a flag to see if we weren't able to play it earlier?
-  //Shepherd	Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out. 	
-  //radio_dialogue( "afcaves_shp_burntherest" );
 }
 
 player_has_frags() {
@@ -757,10 +635,9 @@ dialougue_nag_smokefight() {
     wait(3);
 
   thread autosave_by_name("skylight");
-  //Captain Price	The're using thermal through the smoke!	
+
   level.price dialogue_execute("afcaves_pri_usingthermal");
 
-  //Captain Price	Soap! They're digging in, Shepherd must be close! We have to break through!		
   level.price dialogue_execute("afcaves_pri_moveright");
 
   flag_set("price_has_given_flank_hint");
@@ -777,7 +654,7 @@ dialougue_nag_smokefight() {
 
   if(flag("can_talk")) {
     flag_clear("can_talk");
-    //Captain Price	I'll draw their fire through the smoke! Watch for flanking routes!	
+
     level.price dialogue_execute("afcaves_pri_drawfire");
     flag_set("can_talk");
   }
@@ -791,14 +668,13 @@ dialougue_nag_smokefight() {
 
   if(flag("can_talk")) {
     flag_clear("can_talk");
-    //Captain Price	Switching to thermal! Keep an eye on our flanks!
+
     level.price dialogue_execute("afcaves_pri_switchingtotherm");
     flag_set("can_talk");
   }
 }
 
 AI_overlook_heli_fastropers_think() {
-  //called from spawn func
   self endon("death");
   self.ignoreme = true;
   self waittill("jumpedout");
@@ -824,7 +700,6 @@ AI_axis_death_think() {
 }
 
 AI_skylight_heli_fastropers_think() {
-  //called from spawn func
   self endon("death");
   self.ignoreme = true;
   self waittill("jumpedout");
@@ -839,8 +714,7 @@ AI_skylight_heli_fastropers_think() {
 AI_riotshield_flanker_think(longSprint) {
   self endon("death");
   self.useChokePoints = false;
-  //self.goalradius = 128;
-  //self.script_moveoverride = 1;
+
   if(self.code_classname == "actor_enemy_riotshield") {
     self riotshield_sprint_on();
     wait(RandomFloatRange(4.8, 5.2));
@@ -857,23 +731,14 @@ AI_shotgun_flanker_think() {
 }
 
 blackhawk_overlook_rappel_think() {
-  /*----------------------- OVERLOOK HELI
-  -------------------------*/
   blackhawk_overlook_rappel = spawn_vehicle_from_targetname_and_drive("blackhawk_overlook_rappel");
   blackhawk_overlook_rappel endon("death");
 
-  /*----------------------- OVERLOOK HELI FASTROPERS
-  -------------------------*/
   flag_wait("player_inside_overlook");
   flag_set("unload_overlook_dudes");
 
-  /*----------------------- OTHER AMBIENT BLACKHAWK
-  -------------------------*/
   blackhawk_overlook_01 = spawn_vehicle_from_targetname_and_drive("blackhawk_overlook_01");
 
-  /*----------------------- OVERLOOK HELI FASTROPERS
-  -------------------------*/
-  //heli takes off
   blackhawk_overlook_rappel waittill("unloaded");
   wait(5);
 
@@ -882,10 +747,6 @@ blackhawk_overlook_rappel_think() {
     blackhawk_overlook_rappel thread vehicle_paths_then_delete(overlook_heli_depart);
   }
 }
-
-/****************************************************************************
-BREACH CONTROL ROOM
-****************************************************************************/
 
 AA_breach_init() {
   thread AAA_sequence_breach_to_airstrip();
@@ -925,8 +786,6 @@ leftover_skylight_enemies_think() {
   volume_skylight_defend = getent("volume_skylight_defend", "targetname");
   volume_skylight_breach_hall = getent("volume_skylight_breach_hall", "targetname");
 
-  //track the player when he is in their volume, otherwise, fight from the smoke volume
-
   while(true) {
     wait(1);
     if((level.player istouching(volume_skylight_defend)) || (level.player istouching(volume_skylight_breach_hall))) {
@@ -951,19 +810,13 @@ AAA_sequence_breach_to_airstrip() {
   flag_set("stop_smoke");
   flag_set("obj_overlook_to_skylight_complete");
 
-  /*----------------------- SKYLIGHT - MAKE ALL IN SKYLIGHT SEEK THE PLAYER
-  -------------------------*/
   breach_safe_volume = GetEnt("breach_safe_volume", "targetname");
   aAI = breach_safe_volume get_ai_touching_volume("axis");
   array_thread(aAI, ::AI_player_seek);
 
-  /*----------------------- PRICE HEADS TOWARDS BREACH
-  -------------------------*/
   triggersEnable("skylight_finished_colornodes", "script_noteworthy", true);
   activate_trigger_with_noteworthy("skylight_finished_colornodes");
 
-  /*------------------------ GUY CLOSES BREACH DOOR
-  -------------------------*/
   flag_wait("breach_door_closed");
   level.slomoBasevision = "af_caves_indoors_breachroom";
   level.price.fixednodesaferadius = 64;
@@ -972,8 +825,6 @@ AAA_sequence_breach_to_airstrip() {
   triggersEnable("colornodes_backhalf_breach_start", "script_noteworthy", true);
   activate_trigger_with_noteworthy("colornodes_backhalf_breach_start");
 
-  /*----------------------- SETUP ROOM
-  -------------------------*/
   c4_packs = getEntArray("c4barrelPacks", "targetname");
   array_thread(c4_packs, ::c4_packs_think);
 
@@ -983,12 +834,10 @@ AAA_sequence_breach_to_airstrip() {
 
   flag_wait("control_room_breached");
   level.player SetMoveSpeedScale(1);
-  //control_room_runners = array_spawn( getEntArray( "control_room_runners", "targetname" ), true );
-  //array_thread( control_room_runners,::control_room_runners_think );
+
   thread c4_barrels();
   thread control_room_cleared_monitor();
-  /*----------------------- AUTO DOOR CLOSES
-  -------------------------*/
+
   exitdoor_left = make_door_from_prefab("exitdoor_left");
   exitdoor_right = make_door_from_prefab("exitdoor_right");
   exitdoor_left.openangles = 90;
@@ -1002,8 +851,6 @@ AAA_sequence_breach_to_airstrip() {
 
   thread price_control_room_think();
 
-  /*----------------------- KEYBOARD OBJECTIVE
-  -------------------------*/
   flag_wait("obj_door_controls_given");
   thread escape_timer_invisible(20);
 
@@ -1016,8 +863,6 @@ AAA_sequence_breach_to_airstrip() {
   exitdoor_right thread control_door_open("right");
   flag_set("control_room_door_opened");
 
-  /*----------------------- PRE-EXPLOSION
-  -------------------------*/
   flag_wait("player_approaching_exit_to_airstrip");
 
   thread pre_self_destruct_explosions();
@@ -1025,8 +870,6 @@ AAA_sequence_breach_to_airstrip() {
   node_price_escape_final = GetNode("node_price_escape_final", "targetname");
   level.price SetGoalNode(node_price_escape_final);
 
-  /*----------------------- PLAYER ESCAPED
-  -------------------------*/
   flag_wait("player_touching_cave_exit");
   wait(.3);
   kill_timer();
@@ -1038,7 +881,6 @@ breach_enemies_think() {
   wait(.5);
   self.health = 1;
 
-  //only have extra guys on vet
   if(level.gameskill < 3) {
     if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "veteran")) {
       self delete();
@@ -1053,7 +895,7 @@ breach_enemies_think() {
 
 price_control_room_think() {
   flag_wait("control_room_cleared");
-  //give price regular baseaccuracy in case it was jacked way up during skylight fight
+
   level.price.baseaccuracy = 2;
 
   thread autosave_now();
@@ -1066,14 +908,9 @@ price_control_room_think() {
 
   thread price_keyboard_anim();
 
-  //triggersEnable( "colornodes_backhalf_door_control", "script_noteworthy", true );
-  //activate_trigger_with_noteworthy( "colornodes_backhalf_door_control" );
-
   level.price thread keyboard_sounds();
   flag_wait("control_room_door_opened");
 
-  /*----------------------- DOOR OPENED, PRICE TAKES OFF
-  -------------------------*/
   level.price disable_ai_color();
   price_computer_node notify("stop_idle");
   level.price anim_stopanimscripted();
@@ -1117,37 +954,6 @@ control_room_cleared_monitor() {
   flag_set("control_room_cleared");
 }
 
-//control_room_runners_think()
-//{
-//	self endon( "death" );
-//	self.health = 1;
-//	self.disablelongdeath = 1;
-//	self.ignoreme = true;
-//	self.ignoreall = true;
-//	self.goalradius = 64;
-//	self cqb_walk( "off" );
-//	self.neverEnableCQB = true;
-//	flag_wait( "control_room_cleared" );
-//	
-//	control_room_volume = getent( "control_room_volume", "script_noteworthy" );
-//	if( !self istouching( control_room_volume ) )
-//	{
-//		self.diequietly = true;
-//		self kill();
-//	}
-//	else
-//	{
-//		self.ignoreme = false;
-//		self.ignoreall = false;
-//		
-//	}
-//	aAI_to_delete = [];
-//	aAI_to_delete[ 0 ] = self;
-//	thread AI_delete_when_out_of_sight( aAI_to_delete, 256 );
-//	wait( 2 );
-//	self setgoalpos( self.origin );
-//}
-
 pre_self_destruct_explosions() {
   level notify("pre_explosion_happening");
   timesLooped = 0;
@@ -1186,11 +992,11 @@ pre_self_destruct_explosions() {
 keyboard_think() {
   self glow();
   self MakeUsable();
-  // Hold ^3&& 1^7 to override the door lock.
+
   self SetHintString(&"AF_CAVES_USE_KEYBOARD");
 
   self waittill("trigger");
-  //self thread play_sound_in_space( "scn_afcaves_enter_code_typing" );
+
   keyboards = getEntArray("keyboard", "targetname");
   array_notify(keyboards, "trigger");
   self MakeUnusable();
@@ -1207,25 +1013,21 @@ dialogue_breach_to_airstrip() {
   wait(randomfloatrange(1, 1.25));
 
   if(!flag("control_room_breached")) {
-    //Shadow Company 6	Oxide, Butcher Five-Actual. I've got a severed det cord - we're gonna need ten mikes to get the trunk rigged and the EBC primed, over.
     radio_dialogue("afcaves_sc6_severeddet");
   }
 
   if(!flag("control_room_getting_breached")) {
-    //Shadow Company HQ	Negative, Gold Eagle wants those charges hot in less than three mikes. Get it done, out.
     radio_dialogue("afcaves_schq_chargeshot");
   }
 
   flag_set("start_breach_nags");
 
   flag_wait("control_room_cleared");
-  //flag_wait( "control_room_runners_dead" );
+
   wait(1);
 
-  //Shepherd	All units be advised this is Gold Eagle. The site has been compromised.
   radio_dialogue("afcaves_shp_sitecompromised");
 
-  //Shepherd	I am executing directive one-one-six bravo. If you're still inside, your service will be honored. Shepherd out.		echoing P.A. announcement
   radio_dialogue("afcaves_shp_directive116");
 
   control_room_volume = getent("control_room_volume", "script_noteworthy");
@@ -1233,7 +1035,6 @@ dialogue_breach_to_airstrip() {
     thread autosave_by_name("timer_start");
   }
 
-  //Captain Price	Overide the door controls! Hurry!	
   level.price dialogue_execute("afcaves_pri_overridecontrol");
   level.price notify("nag_anim");
 
@@ -1244,7 +1045,7 @@ dialogue_breach_to_airstrip() {
   flag_wait("control_room_door_opened");
 
   wait(2);
-  //Captain Price	RUUNN!!!
+
   level.price dialogue_execute("afcaves_pri_run");
 
   flag_set("obj_escape_given");
@@ -1252,7 +1053,6 @@ dialogue_breach_to_airstrip() {
   wait(.5);
 
   if(!flag("player_touching_cave_exit")) {
-    //Captain Price	Keep moving! This place is gonna blow!!	
     level.price dialogue_execute("afcaves_pri_gonnablow");
   }
 }
@@ -1306,7 +1106,6 @@ dialogue_nag_control_room_door() {
       break;
     }
 
-    //Captain Price Override the door controls! Use the keyboard!	
     level.price dialogue_execute("afcaves_pri_usekeyboard");
     level.price notify("nag_anim");
 
@@ -1316,7 +1115,7 @@ dialogue_nag_control_room_door() {
     }
 
     level.price notify("nag_anim");
-    //Price Open the door! We're running out of time!
+
     level.price dialogue_execute("afcaves_pri_openthedoor");
 
     wait(6);
@@ -1325,7 +1124,7 @@ dialogue_nag_control_room_door() {
     }
 
     level.price notify("nag_anim");
-    //Price Come onnn...come onnn...
+
     level.price dialogue_execute("afcaves_pri_comeoncomeon");
 
     wait(6);
@@ -1334,13 +1133,12 @@ dialogue_nag_control_room_door() {
     }
 
     level.price notify("nag_anim");
-    //Captain Price	Soap! Get that door open!
+
     level.price dialogue_execute("afcaves_pri_getdooropen");
   }
 }
 
 music_control_room() {
-  //level endon( "end_cave_collapse" );
   flag_wait("control_room_explosion");
   MusicStop();
   time = musicLength("af_caves_controlroom");
@@ -1348,20 +1146,18 @@ music_control_room() {
   while(true) {
     MusicPlayWrapper("af_caves_controlroom");
     wait(time);
-    //wait( 279 );
+
     music_stop(1);
     wait(1.1);
   }
 }
 
 controlroom_sheppard_close_the_door() {
-  /*----------------------- BREACH SETUP
-  -------------------------*/
   icon_trigger = GetEnt("trigger_breach_icon", "targetname");
   icon_trigger trigger_off();
 
   wait(2);
-  //hide the breach door model for now
+
   breach_door = level.breach_doors[2];
   breach_door Hide();
 
@@ -1369,13 +1165,11 @@ controlroom_sheppard_close_the_door() {
   breach_path_clip NotSolid();
   breach_path_clip ConnectPaths();
 
-  old_door = GetEnt("blast_door_slam", "targetname"); // this is the wood door
+  old_door = GetEnt("blast_door_slam", "targetname");
   old_door.origin = breach_door.origin;
   startAngles = old_door.angles;
   old_door.angles += (0, -74, 0);
 
-  /*----------------------- GUY CLOSES BREACH DOOR
-  -------------------------*/
   flag_wait("player_approaching_breach");
 
   guy = spawn_targetname("control_room_door_close_guy", true);
@@ -1422,8 +1216,7 @@ controlroom_breach_destruction() {
   flag_set("control_room_breached");
 }
 
-controlroom_guys_think() // making the guys in the rear wait till the slowmo has ended before they shoot.
-{
+controlroom_guys_think() {
   self endon("death");
   self.dontEverShoot = true;
 
@@ -1432,10 +1225,6 @@ controlroom_guys_think() // making the guys in the rear wait till the slowmo has
 
   self.dontEverShoot = undefined;
 }
-
-/****************************************************************************
-AIRSTRIP
-****************************************************************************/
 
 AA_airstrip_init() {
   thread AAA_sequence_airstrip();
@@ -1486,11 +1275,6 @@ AAA_sequence_airstrip() {
 
   battlechatter_off("allies");
 
-  /*----------------------- CAVE COLLAPSE AND PLAYER SHELLSHOCK
-  -------------------------*/
-  //exploder( "control_room_detonate" );
-  //wait( 1 );
-
   level.player PlayLocalSound("af_caves_selfdestruct");
 
   cave_exit_playerview_02 = GetEnt("cave_exit_playerview_02", "targetname");
@@ -1514,8 +1298,6 @@ AAA_sequence_airstrip() {
   playFXOnTag(getfx("player_cave_escape"), dummy, "tag_origin");
   wait(.5);
 
-  /*----------------------- FIRST CUT TO BLACKOUT
-  -------------------------*/
   level.black_overlay = create_client_overlay("black", 1);
   level.black_overlay.foreground = false;
   array_thread(level.fx_start_to_ledge, ::pauseEffect);
@@ -1529,8 +1311,8 @@ AAA_sequence_airstrip() {
   airstrip_danger_close_shooters = array_spawn(getEntArray("airstrip_danger_close_shooters", "targetname"), true);
   array_thread(airstrip_danger_close_shooters, ::airstrip_danger_close_shooters_think);
 
-  flag_set("player_detonated_explosives"); // turn off the barrels below
-  //level.player PlayerLinkToDelta( playerOrg, "tag_player", 1, 0, 20, 10, 10 );
+  flag_set("player_detonated_explosives");
+
   shellshockTime = 17;
   level.player ShellShock("af_cave_collapse", shellshockTime);
   thread autosave_now(true);
@@ -1543,24 +1325,16 @@ AAA_sequence_airstrip() {
   SetBlur(2, .1);
   SetSavedDvar("ui_hidemap", 1);
   SetSavedDvar("hud_showStance", "0");
-  //SetSavedDvar( "compass", "1" );
 
   thread airstrip_heli_crash_destruction();
 
-  /*----------------------- BLOCK EXIT
-  -------------------------*/
   rock_rubble1 = GetEnt("rock_rubble1", "targetname");
   rock_rubble1 Solid();
   rock_rubble1 Show();
   rock_rubble1 DisconnectPaths();
 
-  /*----------------------- PRICE RUNS FORWARD
-  -------------------------*/
   level.price.moveplaybackrate = .5;
   SetSavedDvar("g_friendlyNameDist", 0);
-
-  //price_fallforward = GetEnt( "price_fallforward", "targetname" );
-  //price_fallforward anim_first_frame_solo( level.price, price_fallforward.animation );
 
   price_fighting_cave_exit = GetEnt("price_fighting_cave_exit", "targetname");
   price_fighting_cave_exit anim_first_frame_solo(level.price, price_fighting_cave_exit.animation);
@@ -1576,21 +1350,16 @@ AAA_sequence_airstrip() {
   flag_set("danger_close_dialogue_start");
   wait(1);
 
-  /*----------------------- FIRST BLACKOUT FADE UP
-  -------------------------*/
   level.black_overlay FadeOverTime(2);
   level.black_overlay.alpha = 0;
 
   wait(1);
-  //price_fallforward thread anim_custom_animmode_solo( level.price, "gravity", price_fallforward.animation );
+
   price_fighting_cave_exit thread anim_custom_animmode_solo(level.price, "gravity", price_fighting_cave_exit.animation);
-  //wait( 0.05 );
-  //level.price SetAnimTime( level.scr_anim[ "price" ][ price_fallforward.animation ], .6 );
-  //node_price_fallforward = GetNode( "node_price_fallforward", "targetname" );
+
   level.price disable_ai_color();
   level.price cqb_walk("off");
   level.price.neverEnableCQB = true;
-  //level.price SetGoalNode( node_price_fallforward );
 
   wait(2.5);
   SetBlur(.2, 1.5);
@@ -1607,12 +1376,10 @@ AAA_sequence_airstrip() {
   SetBlur(3, 1);
   wait(2);
 
-  /*----------------------- BLACKOUT BEGIN
-  -------------------------*/
   level.black_overlay FadeOverTime(2);
   level.black_overlay.alpha = 1;
   SetBlur(3, .5);
-  //flag_set( "danger_close_dialogue_start" );
+
   wait(2);
   level.player Unlink();
   level.player SetOrigin(cave_exit_playerview_01.origin);
@@ -1623,10 +1390,7 @@ AAA_sequence_airstrip() {
   level.player AllowJump(true);
   level.player AllowCrouch(true);
   level.player AllowProne(true);
-  //level.player SetStance( "stand" );
 
-  /*----------------------- SETUP PRICE FALLING BACK
-  -------------------------*/
   price_fallback = GetEnt("price_fallback", "targetname");
   level.price anim_stopanimscripted();
   price_fallback anim_first_frame_solo(level.price, "launchfacility_a_c4_plant_short");
@@ -1635,18 +1399,15 @@ AAA_sequence_airstrip() {
 
   wait(1.5);
 
-  /*----------------------- PRICE RUNS BACKWARDS
-  -------------------------*/
   flag_set_delayed("price_falling_back", .1);
   price_fallback thread anim_custom_animmode_solo(level.price, "gravity", "launchfacility_a_c4_plant_short");
-  //level.price SetAnimTime( level.scr_anim[ "price" ][ price_fallback.animation ], .2 );
+
   node_price_fallback = GetNode("node_price_fallback", "targetname");
   level.price SetGoalNode(node_price_fallback);
   level.price.goalradius = 32;
 
   wait(.5);
-  /*----------------------- BLACKOUT END
-  -------------------------*/
+
   level.black_overlay FadeOverTime(2);
   level.black_overlay.alpha = 0;
 
@@ -1654,8 +1415,6 @@ AAA_sequence_airstrip() {
   SetBlur(0, 3);
   level.player FreezeControls(false);
 
-  /*----------------------- DANGER CLOSE MOMENT
-  -------------------------*/
   thread danger_close_firestorm();
 
   wait(1);
@@ -1666,14 +1425,10 @@ AAA_sequence_airstrip() {
   level.price.moveplaybackrate = 1.0;
   level.player setMoveSpeedScale(1);
 
-  //thread danger_close_firestorm();
-
   wait(3);
   level.player EnableWeapons();
   level.player disableinvulnerability();
 
-  /*----------------------- PRICE LEADS PLAYER OUT
-  -------------------------*/
   wait(3);
   level.price.IgnoreRandomBulletDamage = false;
   level.price enable_pain();
@@ -1688,31 +1443,23 @@ AAA_sequence_airstrip() {
   activate_trigger_with_noteworthy("colornodes_backhalf_airstrip_start");
   triggersEnable("colornodes_backhalf_airstrip", "script_noteworthy", true);
 
-  /*----------------------- AIRSTRIP START
-  -------------------------*/
   thread spawn_vehicles_from_targetname_and_drive_on_flag("littlebird_airstrip", "player_airstrip_start");
   delayThread(1, ::spawn_vehicle_from_targetname_and_drive, "blackhawk_airstrip");
 
   flag_wait("player_airstrip_start");
   level.price PushPlayer(false);
 
-  /*----------------------- AIRSTRIP MIDPOINT
-  -------------------------*/
   flag_wait("player_airstrip_midpoint");
 
   thread autosave_by_name("airstrip_fight_start");
   level.price.fixednodesaferadius = 1024;
   level.fixednodesaferadius_default = 1024;
 
-  /*----------------------- AIRSTRIP END TENT
-  -------------------------*/
   flag_wait("player_approaching_end_tent");
   thread autosave_by_name("airstrip_fight_start");
 
   flag_wait("player_entering_end_tent");
 
-  /*----------------------- LEVEL END
-  -------------------------*/
   flag_wait("level_exit");
 
   level.price.IgnoreRandomBulletDamage = true;
@@ -1725,8 +1472,6 @@ AAA_sequence_airstrip() {
   level.black_overlay FadeOverTime(3);
   level.black_overlay.alpha = 1;
 
-  //delaythread( 3,::freeze_player_at_end );
-  //Captain Price	Shepherd mentioned Zodiacs...there must riveracess nearby - let's go!
   level.price dialogue_execute("afcaves_pri_rivernearby");
 
   maps\_loadout::SavePlayerWeaponStatePersistent("af_caves");
@@ -1750,7 +1495,6 @@ airstrip_danger_close_shooters_think() {
 
 blackhawk_airstrip_think() {
   self endon("death");
-  //self.enableRocketDeath = true;
 
   self thread blackhawk_airstrip_crash_locations();
   flag_set("unload_airstrip_blackhawk_dudes");
@@ -1811,7 +1555,6 @@ AI_airstrip_littlebird_hostiles_think() {
   self.ignoreme = true;
   self waittill("jumpedout");
   self.ignoreme = false;
-  //self thread AI_player_seek();	
 }
 
 danger_close_firestorm() {
@@ -1833,20 +1576,18 @@ danger_close_firestorm() {
   flag_set("start_airstrip_aftermath_fx");
   wait(2);
   flag_set("danger_close_moment_over");
-
-  //array_thread( level.createfxent, ::restartEffect );
 }
 
 missile_impact_think(lastMissile) {
   dummy = spawn("script_origin", self.origin);
   dummy LinkTo(self);
   self waittill("death");
-  //scale duration
+
   if(isDefined(lastMissile)) {
     flag_set("danger_close_last_missile_has_hit");
     dummy thread play_sound_in_space("exp_javelin_armor_destroy");
     Earthquake(.5, 1.5, level.player.origin, 5000);
-    //thread exploder( "escape_cave_exit" );
+
     thread exploder("rpg_damage");
     RadiusDamage(dummy.origin, 512, 1000, 1000);
   } else {
@@ -1854,7 +1595,7 @@ missile_impact_think(lastMissile) {
   }
 
   level.player PlayRumbleOnEntity("damage_heavy");
-  //RadiusDamage( dummy.origin, 512, 1000, 1000 );
+
   wait(0.05);
   dummy Delete();
 
@@ -1868,39 +1609,31 @@ missile_impact_think(lastMissile) {
 dialogue_airstrip() {
   flag_wait("obj_escape_complete");
 
-  /*----------------------- DANGER CLOSE DIALOGUE
-  -------------------------*/
   flag_wait("danger_close_dialogue_start");
-  //Shepherd	Excalibur, this is Gold Eagle. Fire mission - target package Romeo - danger close.	
+
   radio_dialogue("afcaves_shp_dangerclose");
 
-  //Shadow Company HQ	That's within a hundred meters of your position sir!
   radio_dialogue("afcaves_schq_100meters");
 
   flag_set("danger_close_dialogue_end");
 
-  //Shepherd	That's not a suggestion! Send it!
   radio_dialogue("afcaves_shp_sendit");
 
-  //Shadow Company HQ	Roger, fire mission danger close!
   thread radio_dialogue("afcaves_schq_firemissionclose");
 
   flag_wait("price_falling_back");
-  //Captain Price	Soaap!! Incomiiing!!! Get down! Get down!
+
   level.price thread dialogue_execute("afcaves_pri_fallback2");
 
-  /*----------------------- LEVEL END DIALOGUE
-  -------------------------*/
   flag_wait("danger_close_moment_over");
 
-  //Captain Price	Since when does Shepherd care about danger close...
   level.price dialogue_execute("afcaves_pri_sincewhen");
 
   thread autosave_by_name("airstrip_fight_start");
   wait(1.5);
 
   flag_set("obj_level_end_given");
-  //Captain Price	Let's go! Stay close and follow me!		
+
   level.price dialogue_execute("afcaves_pri_stayclose");
 
   battlechatter_on("allies");
@@ -1909,46 +1642,31 @@ dialogue_airstrip() {
   wait(2);
 
   if(!flag("player_airstrip_start")) {
-    //Captain Price	To the west, Soap, Go!	
     level.price thread dialogue_execute("afcaves_pri_tothewest");
   }
 
   flag_wait("player_airstrip_start");
 
-  //Shadow Company HQ	Sir, sandstorm activity is picking up here. It's too risky for flight ops.
   radio_dialogue("afcaves_schq_riskyforflightops");
 
-  //Shepherd	Understood. Head for the tunnel. We'll take the Zodiacs.		stealth wiretap
   radio_dialogue("afcaves_shp_takezodiacs");
 
-  //Shadow Company HQ	Yes sir!		stealth wiretap
   radio_dialogue("afcaves_schq_yessir2");
 
-  /*----------------------- AIRSTRIP MIDPOINT
-  -------------------------*/
   flag_wait("player_airstrip_midpoint");
 
-  /*----------------------- AIRSTRIP END TENT
-  -------------------------*/
-
-  /*----------------------- LEVEL END DIALOGUE
-  -------------------------*/
   flag_wait("player_entering_end_tent");
 
-  //Captain Price	Head for the tunnel! He's getting away!		
   level.price dialogue_execute("afcaves_pri_gettingaway2");
 
   wait(10);
 
   if(!flag("level_exit")) {
-    //Captain Price	Soap! Follow me! Let's go!	
     level.price dialogue_execute("afcaves_pri_followmeletsgo");
   }
 }
 
-music_airstrip() {
-  //musicstop();
-}
+music_airstrip() {}
 
 airstrip_tower_destruction() {
   trig = GetEnt("tower_trigger", "targetname");
@@ -1959,7 +1677,6 @@ airstrip_tower_destruction() {
   level.player PlayRumbleOnEntity("damage_light");
 
   trig thread play_sound_in_space("explo_wood_tower", trig.origin);
-  //	exploder( "tower" );
 
   volume = GetEnt("tower_victims", "targetname");
 
@@ -2014,20 +1731,13 @@ airstrip_heli_crash_destruction() {
   flag_wait("player_approaching_end_tent");
 }
 
-/****************************************************************************
-OBJECTIVES
-****************************************************************************/
-
 obj_ledge_traverse() {
   flag_wait("obj_ledge_traverse_given");
   objective_number = 6;
 
-  // Traverse the rock bridge
   Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_LEDGE_TRAVERSE");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
-  // Capt. MacTavish
-  //Objective_SetPointerTextOverride( objective_number, &"OILRIG_OBJ_SOAP" );
 
   flag_wait("player_ledge_stairs_01");
 
@@ -2035,7 +1745,6 @@ obj_ledge_traverse() {
 
   obj_position = GetEnt("obj_ledge_gunners", "targetname");
   Objective_Position(objective_number, obj_position.origin);
-  //Objective_SetPointerTextOverride( objective_number );
 
   flag_wait("player_ledge_end");
 
@@ -2051,7 +1760,6 @@ obj_overlook_to_skylight() {
   flag_wait("obj_ledge_traverse_complete");
   objective_number = 6;
 
-  // Locate Shepherd.\n
   Objective_Add(objective_number, "active", &"AF_CAVES_LOCATE_SHEPHERD");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
@@ -2078,22 +1786,16 @@ obj_overlook_to_skylight() {
 }
 
 obj_breach() {
-  //"breach the control room"flag_wait("obj_breach_given");
-
   objective_number = 6;
 
-  // Reach Shepherd's Command Center
   Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_BREACH", (0, 0, 0));
 
   breach_positions = getEntArray("obj_breach", "targetname");
 
-  // grab the script_slow_breach index off the nearest breach and put it on the entity
   assign_script_breachgroup_to_ents(breach_positions);
 
-  // find out which breaches should be added to the objective positions
   breach_indices = get_breach_indices_from_ents(breach_positions);
 
-  // add positions for these breaches
   objective_breach(objective_number, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 
   Objective_Current(objective_number);
@@ -2103,7 +1805,6 @@ obj_breach() {
   objective_clearAdditionalPositions(objective_number);
 
   flag_wait("control_room_cleared");
-  //flag_wait( "control_room_runners_dead" );
 
   Objective_State(objective_number, "done");
 
@@ -2111,12 +1812,10 @@ obj_breach() {
 }
 
 obj_door_controls() {
-  //"override the door controls"flag_wait("obj_door_controls_given");
-
   objective_number = 7;
 
   obj_position = GetEnt("keyboard", "targetname");
-  // Override the door controls
+
   Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_DOOR_CONTROLS", obj_position.origin);
   Objective_Current(objective_number);
 
@@ -2128,11 +1827,8 @@ obj_door_controls() {
 }
 
 obj_escape() {
-  //"escape from the cave"flag_wait("obj_escape_given");
-
   objective_number = 8;
 
-  // Escape from the cave
   Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_ESCAPE");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
@@ -2145,11 +1841,8 @@ obj_escape() {
 }
 
 obj_level_end() {
-  //"escape from the cave"flag_wait("obj_level_end_given");
-
   objective_number = 6;
 
-  // Follow Price.
   Objective_Add(objective_number, "active", &"AF_CAVES_LOCATE_SHEPHERD");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
@@ -2160,337 +1853,174 @@ obj_level_end() {
 }
 
 obj_hummer() {
-  //"mount the humvee turret"flag_wait("obj_hummer_given");
-
   flag_wait("obj_hummer_complete");
 }
 
 obj_hummer_gunner() {
-  //"eliminate all enemy resistance"flag_wait("obj_hummer_gunner_given");
-
   flag_wait("obj_hummer_gunner_complete");
 }
 
 backhalf_dialogue() {
-  /*----------------------- LEDGE
-  -------------------------*/
-  //****Captain Price	The clock's ticking! Let's go!		stealth
-  //level.scr_radio[ "afcaves_pri_clocksticking" ] = "afcaves_pri_clocksticking";
-
-  //Shadow Company HQ	Avatar One this is Oxide, we've lost contact with multiple squads near the steam room. I need a camera sweep of the catwalk, over.		stealth wiretap
   level.scr_radio["afcaves_schq_catwalk"] = "afcaves_schq_catwalk";
 
-  //Shadow Company 4	Roger that Oxide, UAV is online. Standby.		stealth wiretap
   level.scr_radio["afcaves_sc4_uavonline"] = "afcaves_sc4_uavonline";
 
-  //Captain Price	Grab a riot shield...we'll need cover out here.
   level.scr_radio["afcaves_pri_pickupriotsheild"] = "afcaves_pri_pickupriotsheild";
 
-  //Captain Price	Take point with the riot shield. I'll take care of any resistance.		stealth
   level.scr_radio["afcaves_pri_takepoint2"] = "afcaves_pri_takepoint2";
 
-  //Shadow Company 4	Oxide, Avatar One. We have unauthorized personnel on the catwalk. I repeat, we have unauthorized personnel on the catwalk.
   level.scr_radio["afcaves_sc4_gettingthis"] = "afcaves_sc4_gettingthis";
 
-  //****Shadow Company HQ	Avatar One, divert your camera feed to the facial recognition database at Langley. Break. Standby for fur- ( further orders. )		stealth wiretap
   level.scr_radio["afcaves_schq_facialrecog"] = "afcaves_schq_facialrecog";
 
-  //****Shepherd	Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out. 	
   level.scr_radio["afcaves_shp_burntherest"] = "afcaves_shp_burntherest";
 
-  //Shepherd	It's Price. Backup priority items and burn the rest. All fire teams - just delay 'em until we're ready to leave. Shepherd out.		stealth wiretap
   level.scr_radio["afcaves_shp_shepout"] = "afcaves_shp_shepout";
 
-  //***Captain Price	We're exposed! Go loud!!		
-  //level.scr_radio[ "afcaves_pri_exposedgoloud" ] = "afcaves_pri_exposedgoloud";
-
-  //Shadow Company 5	Oxide, Disciple Nine, we've got hostile contact approximately 50 meters from the nest, over.
   level.scr_radio["catwalk_enemy_chatter_00"] = "afcaves_sc5_50meters";
 
-  //Shadow Company HQ	Terminate with extreme prejudice.
   level.scr_radio["catwalk_enemy_chatter_01"] = "afcaves_schq_prejudice";
 
-  //Shadow Company HQ	All personnel - be advised, we have two enemy foot-mobiles on the catwalk heading to the crow's nest.
   level.scr_radio["catwalk_enemy_chatter_02"] = "afcaves_schq_2enemies";
 
-  /*----------------------- RIOT ----- MOVE UP
-  -------------------------*/
-  //Captain Price	Move up.	
   level.scr_radio["riotsheildmove_00"] = "afcaves_pri_moveup";
 
-  //Captain Price	Take point with the shield and draw their fire. I'll cover you.	
   level.scr_radio["riotsheildmove_01"] = "afcaves_pri_takepointdraw";
 
-  /*----------------------- RIOT ----- NEED TO CROUCH
-  -------------------------*/
-  //Captain Price	Stay low with that shield so I can get a clean shot!		stealth
   level.scr_radio["crouchriotsheild_00"] = "afcaves_pri_staylow";
 
-  //Captain Price	Keep low with that shield!		stealth
   level.scr_radio["crouchriotsheild_01"] = "afcaves_pri_keeplow";
 
-  //Captain Price	Crouch down with that shield, Soap! I'll take care of the shooters.		stealth
   level.scr_radio["crouchriotsheild_02"] = "afcaves_pri_crouchdown";
 
-  /*----------------------- RIOT ----- NEED TO SWITCH
-  -------------------------*/
-  //Captain Price	Switch to the shield, we're exposed out here!		stealth
   level.scr_radio["switchriotsheild_00"] = "afcaves_pri_switchtosheild";
 
-  //Captain Price	Bring up the riot shield, Soap!		stealth
   level.scr_radio["switchriotsheild_01"] = "afcaves_pri_bringup";
 
-  //Captain Price	Give us some cover with that riot shield, Soap!		stealth
   level.scr_radio["switchriotsheild_02"] = "afcaves_pri_giveuscover";
 
-  /*----------------------- RIOT ----- NEED TO PICKUP
-  -------------------------*/
-  //Captain Price	Soap, grab a riot shield and lead the way. I'll take care of any shooters!
   level.scr_radio["pickupriotsheild_00"] = "afcaves_pri_pickupriotsheild2";
 
-  //Captain Price	Soap, grab a riot shield. We'll need all the cover we can get.
   level.scr_radio["pickupriotsheild_01"] = "afcaves_pri_pickupriotsheild3";
 
-  //Captain Price	Grab a riot shield. We're completely exposed out here.
   level.scr_radio["pickupriotsheild_02"] = "afcaves_pri_grabasheild";
 
-  /*----------------------- RIOT ----- KILLFIRMS
-  -------------------------*/
-  //Captain Price	We're clear. Move in.		stealth
   level.scr_radio["riot_killfirm_final"] = "afcaves_pri_wereclearmove";
 
-  //Captain Price	Good night		stealth
   level.scr_radio["riot_killfirm_00"] = "afcaves_pri_goodnight2";
 
-  //Captain Price	He's down		stealth
   level.scr_radio["riot_killfirm_01"] = "afcaves_pri_hesdown2";
 
-  //Captain Price	Got 'em		stealth
   level.scr_radio["riot_killfirm_02"] = "afcaves_pri_gotem";
 
-  //Captain Price	Got one.		stealth
   level.scr_radio["riot_killfirm_03"] = "afcaves_pri_gotone2";
 
-  /*----------------------- OVERLOOK
-  -------------------------*/
-  //Shadow Company HQ	Butcher One-Five, rendezvous at the nest and prepare to escort Gold Eagle to the LZ.
   level.scr_radio["afcaves_schq_escourtgoldeagle"] = "afcaves_schq_escourtgoldeagle";
 
-  //Captain Price	Gold Eagle must be Shepherd! We're running out of time, let's go!		
   level.scr_radio["afcaves_pri_mustbeshepherd"] = "afcaves_pri_mustbeshepherd";
 
-  //Shadow Company 5	Disciple Three rapelling in!		stealth wiretap
   level.scr_radio["afcaves_sc5_rapellingin"] = "afcaves_sc5_rapellingin";
 
-  /*----------------------- OVERLOOK STRATEGY NAGS
-  -------------------------*/
-  //Captain Price	Try to flank them!	
   level.scr_sound["price"]["afcaves_pri_trytoflank"] = "afcaves_pri_trytoflank";
 
-  //Captain Price	They're using shields! Use flash grenades!	
   level.scr_sound["price"]["afcaves_pri_sheildsuseflash"] = "afcaves_pri_sheildsuseflash";
 
-  //Captain Price	Soap! Hit them from the sides!	
   level.scr_sound["price"]["afcaves_pri_hitfromsides"] = "afcaves_pri_hitfromsides";
 
-  //Captain Price	They're using shields! Throw some frags!	
   level.scr_sound["price"]["afcaves_pri_sheildsthrowfrags"] = "afcaves_pri_sheildsthrowfrags";
 
-  //Captain Price	Try to flank and hit them from the sides!	
   level.scr_sound["price"]["afcaves_pri_flankandhitsides"] = "afcaves_pri_flankandhitsides";
 
-  /*----------------------- BREACH
-  -------------------------*/
-  //Shadow Company 6	Oxide, Butcher Five-Actual. I've got a severed det cord - we're gonna need ten mikes to get the trunk rigged and the EBC primed, over.		stealth wiretap
   level.scr_radio["afcaves_sc6_severeddet"] = "afcaves_sc6_severeddet";
 
-  //Shadow Company HQ	Negative, Gold Eagle wants those charges hot in less than three mikes. Get it done, out.		stealth wiretap
   level.scr_radio["afcaves_schq_chargeshot"] = "afcaves_schq_chargeshot";
 
-  /*----------------------- BREACH NAGS
-  -------------------------*/
-
-  //Captain Price	They've sealed the control room. Get a frame charge on the door!	
   level.scr_sound["price"]["breach_nag_00"] = "afcaves_pri_getframecharge";
 
-  //Captain Price	Soap! We've got to go now! Breach the door!	
   level.scr_sound["price"]["breach_nag_01"] = "afcaves_pri_breachthedoor";
 
-  //Captain Price	Blow the door! We can't let Shepherd escape!	
   level.scr_sound["price"]["breach_nag_02"] = "afcaves_pri_blowthedoor";
 
-  //Captain Price	Get a charge on the door! Do it!	
   level.scr_sound["price"]["breach_nag_03"] = "afcaves_pri_chargedoit";
 
-  //Shadow Company HQ	All fire teams, be advised - we have a positive ID. Enemy operators are ex-SAS and Task Force 141. Approach with extreme caution, over.		stealth wiretap
-  //level.scr_radio[ "" ] = "";
-
-  //****Shadow Company HQ	All fire teams, be advised - enemy operators are ex-SAS and Task Force 141. Approach with extreme caution, over.		stealth wiretap
-  //level.scr_radio[ "afcaves_schq_exsas" ] = "afcaves_schq_exsas";
-
-  /*----------------------- SKYLIGHT
-  -------------------------*/
-  //Captain Price	I'm popping smoke! Move around the right flank!		
-  //level.scr_radio[ "afcaves_pri_poppingsmoke" ] = "afcaves_pri_poppingsmoke";
-
-  //Captain Price	I'll draw their fire through the smoke! Watch for flanking routes!	
   level.scr_sound["price"]["afcaves_pri_drawfire"] = "afcaves_pri_drawfire";
 
-  //Captain Price	Soap! They're digging in, Shepherd must be close! We have to break through!	
   level.scr_sound["price"]["afcaves_pri_moveright"] = "afcaves_pri_moveright";
 
-  //Captain Price	The're using thermal through the smoke!		
   level.scr_sound["price"]["afcaves_pri_usingthermal"] = "afcaves_pri_usingthermal";
 
-  //Captain Price	Switching to thermal! Keep an eye on our flanks!	
   level.scr_sound["price"]["afcaves_pri_switchingtotherm"] = "afcaves_pri_switchingtotherm";
 
-  /*----------------------- SKYLIGHT - GETTING FLANKED - TODO
-  -------------------------*/
-  //Captain Price	Eyes up! They're flanking us!	
   level.scr_sound["price"]["afcaves_pri_eyesup"] = "afcaves_pri_eyesup";
 
-  /*----------------------- BREACH ROOM
-  -------------------------*/
-  //Captain Price	Soap! Get that door open over there! Hit the panel!		
   level.scr_sound["price"]["afcaves_pri_dooropen"] = "afcaves_pri_dooropen";
 
-  //Captain Price	Overide the door controls! Hurry!		
   level.scr_sound["price"]["afcaves_pri_overridecontrol"] = "afcaves_pri_overridecontrol";
 
-  //Captain Price	Soap! Get that door open!		
   level.scr_sound["price"]["afcaves_pri_getdooropen"] = "afcaves_pri_getdooropen";
 
-  //Captain Price	Override the door controls! Use the keyboard!		
   level.scr_sound["price"]["afcaves_pri_usekeyboard"] = "afcaves_pri_usekeyboard";
 
-  //Captain Price	Open the door! We're running out of time!		
   level.scr_sound["price"]["afcaves_pri_openthedoor"] = "afcaves_pri_openthedoor";
 
-  //Captain Price	Come onnn...come onnn...		
   level.scr_sound["price"]["afcaves_pri_comeoncomeon"] = "afcaves_pri_comeoncomeon";
 
-  //Shepherd	All units be advised this is Gold Eagle. The site has been compromised.
   level.scr_radio["afcaves_shp_sitecompromised"] = "afcaves_shp_sitecompromised";
 
-  //Shepherd	I am executing directive one-one-six bravo. If you're still inside, your service will be honored. Shepherd out.		echoing P.A. announcement
   level.scr_radio["afcaves_shp_directive116"] = "afcaves_shp_directive116";
 
-  /*----------------------- ESCAPE
-  -------------------------*/
-  //Captain Price	RUUNN!!!		
   level.scr_sound["price"]["afcaves_pri_run"] = "afcaves_pri_run";
 
-  //Captain Price	Keep moving! This place is gonna blow!!!		
   level.scr_sound["price"]["afcaves_pri_gonnablow"] = "afcaves_pri_gonnablow";
 
-  /*----------------------- AIRSTRIP - ALL
-  -------------------------*/
-  //****Shadow Company 6	Get ready to move in!		evil marine radio through a gas mask
-  //level.scr_radio[ "afcaves_sc6_getready" ] = "afcaves_sc6_getready";
-
-  //****Shadow Company 9	Weapons free, take 'em out!		evil marine radio through a gas mask
-  //level.scr_radio[ "afcaves_sc9_weaponsfree" ] = "afcaves_sc9_weaponsfree";
-
-  //****Shadow Company 8	Low vis from the tower, you'll have to take 'em on the ground!		evil marine radio through a gas mask
-  //level.scr_radio[ "afcaves_sc8_lowvis" ] = "afcaves_sc8_lowvis";
-
-  //****Shadow Company 9	Oscar and Romeo teams, sweep the blast zone, pattern Papa Alpha.		evil marine radio through a gas mask
-  //level.scr_radio[ "afcaves_sc9_blastzone" ] = "afcaves_sc9_blastzone";
-  //radio_dialogue( "afcaves_sc9_blastzone" );
-
-  //****Shadow Company 9	Roger that.		evil marine radio through a gas mask
-  //level.scr_radio[ "afcaves_sc9_rogerthat" ] = "afcaves_sc9_rogerthat";
-  //radio_dialogue( "afcaves_sc9_rogerthat" );
-
-  /*----------------------- AIRSTRIP - STORY DIALOGUE
-  -------------------------*/
-  //Shadow Company HQ	Sir, sandstorm activity is picking up here. It's too risky for flight ops.		stealth wiretap
   level.scr_radio["afcaves_schq_riskyforflightops"] = "afcaves_schq_riskyforflightops";
 
-  //Shepherd	Understood. Head for the tunnel. We'll take the Zodiacs.		stealth wiretap
   level.scr_radio["afcaves_shp_takezodiacs"] = "afcaves_shp_takezodiacs";
 
-  //Shadow Company HQ	Yes sir!		stealth wiretap
   level.scr_radio["afcaves_schq_yessir2"] = "afcaves_schq_yessir2";
 
-  //Captain Price	Head for the tunnel! He's getting away!		
   level.scr_sound["price"]["afcaves_pri_gettingaway2"] = "afcaves_pri_gettingaway2";
 
-  //Captain Price	Shepherd mentioned Zodiacs...there must riveracess nearby - let's go!
   level.scr_sound["price"]["afcaves_pri_rivernearby"] = "afcaves_pri_rivernearby";
 
-  /*----------------------- AIRSTRIP - PRICE GUIDANCE
-  -------------------------*/
-  //Captain Price	Let's go! Stay close and follow me!		
   level.scr_sound["price"]["afcaves_pri_stayclose"] = "afcaves_pri_stayclose";
 
-  //Captain Price	Head for that humvee, I'll cover you!		
   level.scr_sound["price"]["afcaves_pri_headforhumvee"] = "afcaves_pri_headforhumvee";
 
-  //Captain Price	Soap! Follow me! Let's go!		
   level.scr_sound["price"]["afcaves_pri_followmeletsgo"] = "afcaves_pri_followmeletsgo";
 
-  //Captain Price	To the west, Soap, Go!		
   level.scr_sound["price"]["afcaves_pri_tothewest"] = "afcaves_pri_tothewest";
 
-  //Captain Price	Come to me, I'll cover you. Go!		
   level.scr_sound["price"]["afcaves_pri_cometome"] = "afcaves_pri_cometome";
 
-  //Captain Price	Make a run for that tower, dead ahead! I'll cover you!		
   level.scr_sound["price"]["afcaves_pri_towerahead"] = "afcaves_pri_towerahead";
 
-  //Captain Price	Move forward to that tower!		
   level.scr_sound["price"]["afcaves_pri_forwardtotower"] = "afcaves_pri_forwardtotower";
 
-  //Captain Price	Move west towards the tower! Follow me!		
   level.scr_sound["price"]["afcaves_pri_movewesttower"] = "afcaves_pri_movewesttower";
 
-  /*----------------------- AIRSTRIP - HUMMER GAMEPLAY
-  -------------------------*/
-
-  //Captain Price	Targets to the west! Light em up!		
   level.scr_sound["price"]["afcaves_pri_targetswest"] = "afcaves_pri_targetswest";
 
-  //Captain Price	Sniper from from the tower! Take it out!		
   level.scr_sound["price"]["afcaves_pri_sniperfromtower"] = "afcaves_pri_sniperfromtower";
 
-  /*----------------------- AIRSTRIP - DANGER CLOSE
-  -------------------------*/
-  //Shepherd	Excalibur, this is Gold Eagle. Fire mission - target package Romeo - danger close.		stealth wiretap
   level.scr_radio["afcaves_shp_dangerclose"] = "afcaves_shp_dangerclose";
 
-  //Shadow Company HQ	That's within a hundred meters of your position sir!		stealth wiretap
   level.scr_radio["afcaves_schq_100meters"] = "afcaves_schq_100meters";
 
-  //Shepherd	That's not a suggestion! Send it!		stealth wiretap
   level.scr_radio["afcaves_shp_sendit"] = "afcaves_shp_sendit";
 
-  //Shadow Company HQ	Roger, fire mission danger close!		stealth wiretap
   level.scr_radio["afcaves_schq_firemissionclose"] = "afcaves_schq_firemissionclose";
 
-  //Captain Price	Soaap!! Incomiiing!!! Fall baack, fall baaack!!!		
-  //level.scr_sound[ "price" ][ "afcaves_pri_fallback" ] = "afcaves_pri_fallback";
-
-  //Captain Price	Soaap!! Incomiiing!!! Get down! Get down
   level.scr_sound["price"]["afcaves_pri_fallback2"] = "afcaves_pri_fallback2";
 
-  //Get the hell out...Artillery inbound
-  //level.scr_sound[ "price" ][ "afcaves_pri_fallback3" ] = "afcaves_pri_fallback3";
-
-  //Captain Price	Since when does Shepherd care about danger close... 		
   level.scr_sound["price"]["afcaves_pri_sincewhen"] = "afcaves_pri_sincewhen";
 }
-
-/****************************************************************************
-UTILITY
-****************************************************************************/
 
 riot_shield_quick_sprint() {
   self endon("death");
   self riotshield_sprint_on();
   wait(RandomFloatRange(2.8, 3.2));
-  //	self waittill( "goal" );
+
   self riotshield_sprint_off();
 }
 
@@ -2583,24 +2113,14 @@ AI_player_seek() {
   self endon("stop_seeking");
   if(self.code_classname == "actor_enemy_riotshield")
     self thread riot_shield_quick_sprint();
-  //self enable_danger_react( 3 );
-  //self.fixednode = false;
-  //self.ignoreSuppression = true;
-  //self.goalradius = 800;
-  //self.interval = 0;
-  //self.baseaccuracy = 5;
-  //self.neverEnableCQB = true;
-  //self.grenadeawareness = 0;
-  //self.ignoreSuppression = true;
-  //self.goalheight = 100;
-  //self.aggressivemode = true;	//dont linger at cover when you cant see your enemy
+
   newGoalRadius = Distance(self.origin, level.player.origin);
   while(IsAlive(self)) {
     wait 1;
     self.goalradius = newGoalRadius;
-    //self SetGoalPos( self LastKnownPos( level.player ) );
+
     self SetGoalEntity(level.player);
-    //self SetGoalPos( level.player.origin );
+
     newGoalRadius -= 175;
     if(newGoalRadius < 512) {
       newGoalRadius = 512;
@@ -2614,7 +2134,6 @@ smoke_throw(aSmokeOrgs, sFlagToStop) {
   while(true) {
     smokeTarget = undefined;
     foreach(org in aSmokeOrgs) {
-      //MagicGrenade( "smoke_grenade_american_no_visblock", org.origin, org.origin + ( 0, 0, 1), RandomFloat( 1.1 ) );
       playFX(getfx("smokescreen"), org.origin);
       org thread play_sound_in_space("smokegrenade_explode_default");
       wait(RandomFloatRange(.1, .3));
@@ -2662,20 +2181,9 @@ escape_timer_invisible(iSeconds) {
   level endon("obj_escape_complete");
   level endon("kill_timer");
 
-  /*----------------------- TIMER SETUP
-  -------------------------*/
-  //level.hudTimerIndex = 20;
-  //level.timer = maps\_hud_util::get_countdown_hud();
-  //level.timer SetPulseFX( 30, 900000, 700 );// something, decay start, decay duration
-  // Reach exit in:
-  //level.timer.label = &"AF_CAVES_TIME_REMAINING";
-  //level.timer SetTenthsTimer( iSeconds );
-
-  /*----------------------- TIMER EXPIRED
-  -------------------------*/
   thread timer_tick();
   wait(iSeconds);
-  //level.timer Destroy();
+
   level thread mission_failed_out_of_time();
 }
 
@@ -2693,12 +2201,12 @@ mission_failed_out_of_time() {
   level endon("kill_timer");
   level notify("mission failed");
   MusicStop(1);
-  // Mission failed
+
   level.player PlayLocalSound("af_caves_selfdestruct");
-  //exploder( "control_room_detonate" );
+
   playFX(getfx("player_death_explosion"), level.player.origin);
   Earthquake(1, 1, level.player.origin, 100);
-  // You did not reach the cave exit in time.
+
   setDvar("ui_deadquote", &"AF_CAVES_RAN_OUT_OF_TIME");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
@@ -2708,13 +2216,9 @@ mission_failed_out_of_time() {
 
 kill_timer() {
   level notify("kill_timer");
-  //if( isDefined( level.timer ) )
-  //level.timer Destroy();
 }
 
-cooking_destructible_think() {
-  //vehicle_slamraam_destroyed
-}
+cooking_destructible_think() {}
 
 generic_damage_triggers_think() {}
 
@@ -2740,15 +2244,11 @@ AI_ambient_airstrip_think() {
   self.fxSmokeTag = [];
   self.fxFireTag = [];
 
-  /*----------------------- WAIT FOR A FLAG, IF APPLICABLE
-  -------------------------*/
   if(isDefined(self.script_flag)) {
     reference anim_generic_first_frame(self, animation);
     flag_wait(self.script_flag);
   }
 
-  /*----------------------- SPECIFICS PER ANIM
-  -------------------------*/
   slowDownRate = undefined;
   timesLooped = undefined;
   switch (animation) {
@@ -2766,11 +2266,9 @@ AI_ambient_airstrip_think() {
     case "civilian_crawl_2":
       slowDownRate = .5;
       self.fxSmokeTag[0] = "tag_bipod";
-      //			self.fxFireTag[ 0 ] = "tag_stowed_hip_rear";
-      //			self.fxFireTag[ 0 ] = "tag_stowed_hip_le";
+
       self.fxFireTag[0] = "tag_shield_back";
-      //			self.fxFireTag[ 1 ] = "tag_reflector_arm_ri";
-      //			self.fxFireTag[ 4 ] = "tag_reflector_arm_le";
+
       self.a.pose = "prone";
       break;
     case "civilian_crawl_1":
@@ -2798,14 +2296,12 @@ AI_ambient_airstrip_think() {
       anim_generic_custom_animmode(self, "gravity", animation);
   }
 
-  /*----------------------- PRE-DEATH SPECIFICS
-  -------------------------*/
   switch (animation) {
     case "civilian_leaning_death":
       self.a.nodeath = true;
       break;
   }
-  //self.a.nodeath = true;
+
   self.deathanim = undefined;
   self anim_stopanimscripted();
   self.skipDeathAnim = true;
@@ -2831,7 +2327,7 @@ play_looping_fx_on_tags(aTags, sType) {
 play_fx_on_tag_till_dead(fx, tag, sType) {
   additionalDelay = 0;
   if(sType == "smoke")
-    additionalDelay = 3; // if somoke, wait an additional X time before playing fx again
+    additionalDelay = 3;
 
   self endon("death");
   while(true) {
@@ -2845,18 +2341,9 @@ play_fx_on_tag_till_dead(fx, tag, sType) {
 AI_ambient_airstrip_ignored_by_price() {
   self endon("death");
   self.ignoreme = true;
-  //	distsquared = 128 * 128;
-  //	while( true )
-  //	{
-  //		wait( .3 );
-  //		if( DistanceSquared( self.origin, level.price.origin ) < distsquared )
-  //			break;
-  //	}
-  //	self.ignoreme = false;
 }
 
 backhalf_loadout() {
-  // SRS take weapons so the player doesn't have 4 weapons when using a start point
   level.player TakeWeapon(level.primaryweapon);
   level.player TakeWeapon(level.secondaryweapon);
 
@@ -2891,19 +2378,19 @@ c4_barrels_think() {
 
   eDamageTrigger = self;
   eDamageTrigger setCanDamage(true);
-  //determine barrel hitpoints based on difficulty
+
   eDamageTrigger.hitpoints = undefined;
   switch (level.gameSkill) {
-    case 0: // easy
+    case 0:
       eDamageTrigger.hitpoints = 5;
       break;
-    case 1: // regular
+    case 1:
       eDamageTrigger.hitpoints = 4;
       break;
-    case 2: // hardened
+    case 2:
       eDamageTrigger.hitpoints = 2;
       break;
-    case 3: // veteran
+    case 3:
       eDamageTrigger.hitpoints = 1;
       break;
   }
@@ -2911,19 +2398,19 @@ c4_barrels_think() {
   while(!flag("player_detonated_explosives")) {
     eDamageTrigger waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, idFlags);
     if((isDefined(attacker)) && (isPlayer(attacker))) {
-      if(idFlags & 8) // bullet penetration occurred
+      if(idFlags & 8) {
         continue;
-      //dont explode if you shot through an enemy...unless on veteran
-      if((isDefined(level.last_player_damage)) && (level.last_player_damage == GetTime()) && (level.gameskill != 3))
+      }
+      if((isDefined(level.last_player_damage)) && (level.last_player_damage == GetTime()) && (level.gameskill != 3)) {
         continue;
-      //knock hitpoints down one
+      }
       if(eDamageTrigger.hitpoints > 0)
         eDamageTrigger.hitpoints -= 1;
-      //remove all hitpoints if it was a grenade, etc
+
       if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE") || IsSubStr(type, "MOD_PROJECTILE"))) {
         break;
       }
-      //blow up the barrel if hitpoints is zero
+
       if(eDamageTrigger.hitpoints == 0) {
         break;
       }
@@ -2944,7 +2431,7 @@ c4_barrel_explode() {
   level.player PlayLocalSound("af_caves_selfdestruct");
   playFX(getfx("player_death_explosion"), level.player.origin);
   Earthquake(1, 1, level.player.origin, 100);
-  // Mission Failed.\nYou shot and detonated the rigged explosives.
+
   setDvar("ui_deadquote", &"AF_CAVES_MISSIONFAIL_EXPLOSIVES");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
@@ -2952,7 +2439,7 @@ c4_barrel_explode() {
 }
 
 c4_packs_think() {
-  self thread c4_barrels_think(); //make rigged c4 explosive as well
+  self thread c4_barrels_think();
   wait(RandomFloatRange(0, .6));
   if(cointoss()) {
     playFXOnTag(getfx("light_c4_blink_nodlight"), self, "tag_fx");
@@ -2960,7 +2447,7 @@ c4_packs_think() {
     playFXOnTag(getfx("c4_light_blink_dlight"), self, "tag_fx");
   }
   flag_wait("end_cave_collapse");
-  //stopFXOnTag( getfx( "light_c4_blink_nodlight" ), self, "tag_fx" );
+
   self Delete();
 }
 
@@ -2969,18 +2456,12 @@ AI_ignored_think() {
 }
 
 fx_management() {
-  /*----------------------- CREATE ARRAYS OF FX FOR THE LEVEL
-  -------------------------*/
   level.fx_start_to_ledge = [];
   level.fx_ledge_to_airstrip = [];
 
-  /*----------------------- GET VOLUMES THAT ENCOMPASS EFFECTS
-  -------------------------*/
   fx_volume_start_to_ledge = getent("fx_volume_start_to_ledge", "targetname");
   fx_volume_ledge_to_airstrip = getent("fx_volume_ledge_to_airstrip", "targetname");
 
-  /*----------------------- CATALOG ALL FX BY VOLUME
-  -------------------------*/
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {
     EntFx = level.createfxent[i];
@@ -2996,23 +2477,3 @@ fx_management() {
   }
   dummy delete();
 }
-
-//destructible_management()
-//{
-//	/*----------------------- //	TURN OFF ALL DESTRUCTIBLES IN MY HALF
-//	-------------------------*/	
-//	fx_volume_ledge_to_airstrip = getEntArray( "fx_volume_ledge_to_airstrip", "targetname" );
-//	thread mask_destructibles_in_volumes( fx_volume_ledge_to_airstrip );
-//	thread mask_interactives_in_volumes( fx_volume_ledge_to_airstrip );
-//	
-//	flag_wait( "steamroom_halfway_point" );
-//
-//	/*----------------------- //	TURN OFF ALL DESTRUCTIBLES IN START, RE-ENABLE ONES IN SECOND HALF
-//	-------------------------*/	
-//	fx_volume_start_to_ledge = getEntArray( "fx_volume_start_to_ledge", "targetname" );
-//	mask_destructibles_in_volumes( fx_volume_start_to_ledge );
-//	mask_interactives_in_volumes( fx_volume_start_to_ledge );
-//	
-//	activate_destructibles_in_volume( fx_volume_ledge_to_airstrip );
-//	activate_interactives_in_volume( fx_volume_ledge_to_airstrip );
-//}

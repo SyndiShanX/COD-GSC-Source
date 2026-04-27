@@ -16,11 +16,6 @@
 
 RED = (1, 0, 0);
 
-/************************************************************************************************************/
-
-/*													SNOWMOBILE												*/
-/************************************************************************************************************/
-
 enemy_snowmobile_chase_spawner_think() {
   self endon("death");
   self thread chase_player();
@@ -38,7 +33,6 @@ enemy_snowmobile_chase_spawner_think() {
 chase_player() {
   self.goalradius = 250;
   target_ent = spawn("script_origin", (0, 0, 0));
-  // shoot near the player if he is with price
 
   for(;;) {
     if(!isalive(self)) {
@@ -64,7 +58,7 @@ chase_player() {
 
       target_ent.origin = drop_to_ground(target_ent.origin) + (0, 0, 1);
     }
-    //Line( self.origin, target_ent.origin );
+
     self setgoalpos(level.player.origin);
     wait(randomfloatrange(0.4, 0.7));
   }
@@ -92,15 +86,14 @@ price_ditches_player_detection() {
 }
 
 modulate_speed_based_on_distance() {
-  // modulate speed based on distance until player gets on his bike
   if(flag("player_gets_on_snowmobile"))
     return;
   level endon("player_gets_on_snowmobile");
 
   for(;;) {
     dist = distance(self.origin, level.player.origin);
-    maxspeed = 60; // the speed the bike goes when it is near the player
-    maxrange = 1000; // the distance at which to stop
+    maxspeed = 60;
+    maxrange = 1000;
 
     dist = maxrange - dist;
     if(dist < 0)
@@ -113,8 +106,6 @@ modulate_speed_based_on_distance() {
 }
 
 stop_modulation_at_big_hill() {
-  //flag_wait( "player_reaches_hilltop" );
-
   price_goes_down_hill = getent("price_goes_down_hill", "targetname");
   for(;;) {
     price_goes_down_hill waittill("trigger", other);
@@ -124,38 +115,10 @@ stop_modulation_at_big_hill() {
       break;
     }
   }
-  //	level.price.vehicle.veh_pathtype = "follow";
-
-  //level.price.vehicle notify( "stop_modulating_speed" );
-  //level.price.vehicle vehicle_setspeed( 75, 30, 30 );	
-  /*
-  for( ;; )
-  {
-  	if( !isDefined( level.player.vehicle ) )
-  		return;
-  		
-  	if( flag( "price_takes_jump" ) )
-  		break;
-  	
-  	min_speed = level.price.vehicle.veh_speed;
-  	if( min_speed > 169 )
-  		break;
-  		
-  	level.price.vehicle.min_speed = min_speed;
-  	wait( 0.05 );
-  }
-  */
 
   level.price.vehicle notify("stop_modulating_speed");
-  //	level.price.vehicle vehicle_setspeed( 0, 20, 20 );
 
-  //	flag_wait( "price_gets_to_other_side" );
   level.price.vehicle resumespeed(100);
-  //level.price.vehicle vehicle_setspeed( 50, 35, 35 );
-  //	level.price.vehicle.veh_pathtype = "constrained";
-  //	wait( 6 );
-  //	speed = 60;
-  //	level.price.vehicle Vehicle_SetSpeed( speed, speed * 0.25, speed * 0.25 );
 }
 
 price_leads_player_to_heli() {
@@ -172,7 +135,6 @@ price_leads_player_to_heli() {
 
   thread unload_failsafe();
   wait(1);
-  //	self notify( "unload" );
 
   level.price waittill("jumpedout");
 
@@ -213,21 +175,9 @@ banister_spawn_func() {
 
     if(dist < 210) {
       self set_generic_deathanim("balcony_death");
-      /*
-      org = self.origin;
-      org = ( org[0], org[1] - 15, org[2] );
-      RadiusDamage( org, 20, 1500, 1500, self );
-      wait( 0.2 );
-      */
+
       self kill();
       return;
-      /*
-      self kill();
-      angles = level.player.vehicle.angles;
-      forward = anglesToForward( angles );
-      forward *= 50;
-      self StartRagdollFromImpact( level.player.vehicle.origin, forward );
-      */
     }
     wait(0.05);
   }
@@ -260,8 +210,7 @@ friends_drive() {
   }
 
   flag_wait("player_gets_on_snowmobile");
-  self.health = 5000; // need to use vehicle bullet shield
-  //level.snowmobile_path[ 0 ] thread bike_drives_path( self );
+  self.health = 5000;
 }
 
 speed_print() {
@@ -295,17 +244,9 @@ remove_from_chase_vehicles() {
 avalache_chase_vehicle_spawner_think() {
   self waittill("spawned", vehicle);
   vehicle endon("death");
-  //vehicle thread speed_print();
+
   vehicle thread vehicle_becomes_crashable();
   vehicle thread vehicle_tumble_in_avalanche();
-
-  // we would do this if drivers shooting looked good
-  /*if( vehicle.riders.size == 1 )
-  {
-  	// no passenger, make the driver shoot
-  	vehicle.driver_shooting = true;
-  	vehicle.passenger_shooting = false;
-  }*/
 
   level.chase_vehicles[level.chase_vehicles.size] = vehicle;
   vehicle.personal_offset = 0;
@@ -331,7 +272,6 @@ snowmobile_maintains_distance_behind_player() {
       speed = 0.25;
     } else
     if(progress_dif > 50) {
-      // we're ahead so slow down
       speed = 0.75;
     } else
     if(progress_dif < -400) {
@@ -356,10 +296,9 @@ snowmobile_maintains_distance_behind_player() {
 }
 
 chase_vehicles_get_personal_progress_offset() {
-  // makes vehicles spread out behind player
   for(;;) {
     offset = 100;
-    waittillframeend; // for chase_vehicles to be up to date
+    waittillframeend;
     if(level.chase_vehicles.size) {
       array = get_array_of_closest(level.player_ride.origin, level.chase_vehicles);
       for(i = 0; i < array.size; i++) {
@@ -382,13 +321,10 @@ avalanche_section() {
   thread gopath(self);
   self.personal_offset = 2000;
   self thread avalanche_maintains_distance_behind_player();
-
-  //	self thread avlanche_node_think( node );
 }
 
 avalanche_maintains_distance_behind_player() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "main_avalanche") {
-    // this trigger follows the avalanche and kills vehicles that get in it
     level.main_avalanche = self;
     avalanche_trigger = getent("avalanche_trigger", "targetname");
     avalanche_trigger playSound("avalanche_ambiance_main");
@@ -440,7 +376,7 @@ trigger_follows_avalanche() {
     progress_percent = progress / dist;
 
     self.origin = avalanche_progress_org.origin * (1 - progress_percent) + targ.origin * progress_percent;
-    //Line( self.origin, level.player.origin, (0,0.6,0.4), 1, 0, int(0.2*20));
+
     wait(0.2);
   }
 }
@@ -485,7 +421,6 @@ enemy_snowmobiles_spawn_and_attack() {
     wait_time -= 0.5;
     if(wait_time < 0.5)
       wait_time = 0.5;
-    //wait( randomfloatrange( 2, 3 ) );		
   }
 }
 
@@ -543,8 +478,6 @@ icepick_vehicle_think() {
   }
 
   if(isalive(self.riders[0])) {
-    //wait( 1 );
-    //self vehicle_unload();
     foreach(rider in self.riders) {
       if(isalive(rider))
         rider.baseAccuracy = 1;
@@ -564,7 +497,7 @@ wait_for_end_node_or_player_rides() {
 
 icepick_ride_until_crash() {
   self.riders[0] endon("death");
-  //self endon( "reached_path_end" );
+
   self endon("death");
   self endon("veh_collision");
 
@@ -572,33 +505,10 @@ icepick_ride_until_crash() {
   flag_wait("player_starts_snowmobile_trip");
 
   node = self get_my_spline_node(self.origin);
-  //Line( vehicle.origin, node.midpoint, (1, 0, 0 ), 1, 0, 5000 );
+
   node thread[[level.drive_spline_path_fun]](self);
-
-  /*
-  for( ;; )
-  {
-  	if( self vehicle_getspeed() > 15 )
-  	{
-  		break;
-  	}
-  	wait( 0.05 );
-  }
-
-  for( ;; )
-  {
-  	if( self vehicle_getspeed() < 4 )
-  	{
-  		break;
-  	}
-  	wait( 0.05 );
-  }
-  */
 }
 
-/*
-		HUNTER KILLER HELI chases player during snowmobile ride
-*/
 hk_heli() {
   if(getdebugdvarint("chasecam")) {
     return;
@@ -620,29 +530,11 @@ hk_heli() {
   flag_set("hk_gives_chase");
   hk.attack_progress = 4000;
   hk.warnings = 0;
-  hk.hover_warnings = 3; // warnings at which heli goes after you
+  hk.hover_warnings = 3;
   hk ent_flag_init("firing");
 
   hk thread hk_moves();
   hk thread hk_wait_until_player_stops_progressing();
-  /*
-  	for( ;; )
-  	{
-  //		hk SetVehGoalPos( level.player.origin + (0,0,1200), false );	
-  		angles = vectortoangles( level.player.origin - hk.origin );
-  		yaw = angles[ 1 ];
-  		if( hk.warnings >= 8 )
-  		{
-  			hk SetGoalYaw( yaw );
-  		}
-  		else
-  		{
-  			hk ClearGoalYaw();
-  		}
-  		
-  		wait( 0.05 );
-  	}
-  	*/
 }
 
 hk_fires_on_player() {
@@ -650,19 +542,16 @@ hk_fires_on_player() {
   if(!isDefined(level.player.vehicle)) {
     return;
   }
-  //	if( flag( "bad_heli_goes_to_death_position" ) )
-  //		return;
 
   self endon("stop_tracking");
   self setVehWeapon("hind_turret");
-  //self setVehWeapon( "hunted_crash_missile" );
 
   forward = anglesToForward(level.player.angles);
   level.hk_lookat_ent.origin = level.player.origin;
   target_guide = spawn("script_origin", level.player.origin);
 
   self setturrettargetent(level.hk_lookat_ent, (0, 0, 0));
-  //self setlookatent( level.hk_lookat_ent );
+
   self setlookatent(level.player);
 
   forward_dist = level.player.vehicle vehicle_getSpeed() * 80;
@@ -675,12 +564,10 @@ hk_fires_on_player() {
   forward_org = forward * forward_dist;
   level.hk_lookat_ent.origin = level.player.origin + forward_org;
 
-  // target_guide lets us plant the target and still keep it linked to the player
   target_guide.origin = level.hk_lookat_ent.origin;
   target_guide linkto(level.player);
 
   printTime = 5;
-  //Line( self.origin, target.origin, (0.8,1,0), 1, 1, int(printTime*20) );
 
   for(;;) {
     level.hk_lookat_ent.origin = get_trace_pos(target_guide.origin, 0);
@@ -699,28 +586,14 @@ hk_fires_on_player() {
   }
 
   for(i = 0; i < burst_break; i++) {
-    /*
-    dif = i / burst;
-    dif = 1 - dif;
-    forward_speed = 1000;
-    forward_org = forward * forward_speed * ( dif + 1 );
-    target.origin = level.player.origin + forward_org;	
-    */
-
     dif = i / burst;
 
     pos = start_pos * (1 - dif) + level.player.origin * dif;
-    //target.origin = pos;
 
-    // once we start firing, the target homes in on the player
-    //angles = vectortoangles( level.player.origin - target.origin );
-    //	forward = anglesToForward( angles );
-    //target.origin += forward * 300;
     level.hk_lookat_ent.origin = get_trace_pos(pos, 0);
 
     delay = randomfloatrange(0.1, 0.3);
-    //Line( level.player.origin, target.origin, RED, 1, 1, int(delay*20) );
-    //Line( self.origin, target.origin, RED, 1, 1, int(printTime*20) );
+
     maps\_helicopter_globals::fire_missile("hind_zippy", 1, level.hk_lookat_ent, delay);
   }
 
@@ -762,7 +635,7 @@ hk_modulates_track_offset() {
 
 hk_moves() {
   self endon("death");
-  //level endon( "bad_heli_goes_to_death_position" );
+
   flag_assert("bad_heli_goes_to_death_position");
 
   self Vehicle_SetSpeed(120, 50, 50);
@@ -772,7 +645,6 @@ hk_moves() {
   flag_wait("player_gets_on_snowmobile");
 
   for(;;) {
-    // bit hacky way to wait for the player to link to the vehicle, only needed cause of start points
     if(get_player_targ().index > 0) {
       break;
     }
@@ -792,10 +664,8 @@ hk_moves() {
     pos = get_position_from_spline_unlimited(get_player_targ(), get_player_progress() + dest_dist, dest_offset);
     pos = get_trace_pos(pos, 1200);
 
-    //self clearlookatent();
     self setNearGoalNotifyDist(1000);
 
-    //self ent_flag_waitopen( "firing" );	
     if(!flag("bad_heli_goes_to_death_position")) {
       hk_flies_to_pos_until_goal(pos);
       self SetVehGoalPos(pos, true);
@@ -805,17 +675,8 @@ hk_moves() {
     hk_fires_on_player();
     delay = randomfloatrange(2, 3);
     wait_for_buffer_time_to_pass(timer, delay);
-    //self thread hk_tracks_player();
 
-    /*
-    add_wait( ::hk_waits_until_player_passes );
-    add_wait( ::_wait, 4 );
-    add_endon( "stop_tracking" );
-    do_wait_any();
-    */
     self notify("stop_tracking");
-
-    //Line( self.origin, pos, (1,0,1), 1, 0, int( 0.5 * 20 ) );
   }
 }
 
@@ -849,7 +710,7 @@ hk_flies_to_pos_until_goal(target_pos) {
     pos = (pos[0], pos[1], self.origin[2]);
     pos = get_trace_pos(pos, 1200);
     self SetVehGoalPos(pos, false);
-    //Line( self.origin, target_pos, (0.5,1,0), 1, 1, int(timer*20) );
+
     wait(timer);
   }
 }
@@ -923,8 +784,6 @@ hk_wait_until_player_stops_progressing() {
     if(self.warnings >= self.hover_warnings)
       self.attack_progress = 1000;
 
-    //		else
-    //			self.attack_progress = 4000;
     wait(0.5);
   }
 }
@@ -940,9 +799,6 @@ objective_ent_leads_player() {
     pos = get_position_from_spline(targ, progress, 0);
     pos = set_z(pos, level.player_snowmobile.origin[2]);
     pos = PhysicsTrace(pos + (0, 0, 5000), pos + (0, 0, -5000));
-    //bike_lookahead_pos = set_z( bike_lookahead_pos, z );
-    //return PhysicsTrace( bike_lookahead_pos + ( 0, 0, 200 ), bike_lookahead_pos + ( 0, 0, -200 ) );
-    //pos = get_bike_pos_from_spline( targ, progress, 0, level.player.origin[2] );
 
     self.origin = pos;
     wait(5);
@@ -972,20 +828,18 @@ set_obj_point_from_flag(index, flagname) {
 snowmobile_dialogue() {
   flag_wait("enemies_persue_on_bike");
 
-  // “More tangos to the rear! Just outrun them! Go! Go!”	
   radio_dialogue("outrunthem");
 
   wait(4);
-  // “Don’t slow down! Keep moving or you’re dead!”	
+
   radio_dialogue("keepmoving");
 
   wait(3);
-  // “Go! Go! Go!”	
+
   radio_dialogue("gogogo");
 
   flag_wait("snowmobile_price_full_speed");
 
-  // “Come on! Come on!” 	
   radio_dialogue("comeoncomeon");
 }
 
@@ -997,7 +851,6 @@ price_progress_dialogue() {
     wait(0.1);
   }
 
-  // “We’re gonna make it! Just hang on!”	
   thread radio_dialogue_queue("gonnamakeit");
 
   for(;;) {
@@ -1007,7 +860,6 @@ price_progress_dialogue() {
     wait(0.1);
   }
 
-  // “Come on! Come on!” 	
   thread radio_dialogue_queue("comeoncomeon");
 
   for(;;) {
@@ -1017,7 +869,6 @@ price_progress_dialogue() {
     wait(0.1);
   }
 
-  // “Hang ooonnn!!!” 	
   thread radio_dialogue_queue("hangon2");
 }
 
@@ -1089,20 +940,17 @@ init_cliff_deaths() {
 }
 
 slope_tree_think() {
-  //foliage_tree_pine_snow_lg_b
   yaw = randomint(360);
   self.angles = (0, yaw, 0);
   range = 64;
   offset = randomint(range * 2) - range;
 
-  //Line( self.origin, self.origin + ( offset, 0, 0 ), (1,0,0), 1, 0, 5000 );
   self.origin += (offset, 0, 0);
   trace = bulletTrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), false, undefined);
   self.origin = trace["position"] + (0, 0, -8);
-  // self hide();
+
   self.clip hide();
   self.clip.origin = self.origin;
-  //Line( self.origin, self.clip.origin + ( offset, 0, 0 ), (0,1,0), 1, 0, 5000 );
 
   ent = common_scripts\_createfx::createLoopSound();
   ent.v["origin"] = self.origin;
@@ -1138,11 +986,11 @@ speedy_littlebird_spawner_think() {
   maps\_helicopter_globals::fire_missile("hind_zippy", 1, level.hk);
 
   flag_wait("end_camp_player_leaves_camp");
-  waittillframeend; // wait until the littlebird starts moving cause its waiting on the same flag
+  waittillframeend;
   if(player_looking_at(self.origin)) {
     return;
   }
-  // speed up this littlebird if the player isnt looking at it
+
   self vehicle_setspeedImmediate(120, 50, 35);
   self set_heli_move("instant");
   wait(2);
@@ -1161,7 +1009,6 @@ ending_heli_think() {
   if(isDefined(self.vehicle_triggers["trigger_use"]))
     array_thread(self.vehicle_triggers["trigger_use"], ::ending_heli_trigger_use);
 
-  //	thread dismount_player_when_he_gets_close();
   self waittill("reached_dynamic_path_end");
   self waittill("near_goal");
   self disconnectPaths();
@@ -1178,7 +1025,7 @@ ending_heli_think() {
   self thread anim_single_solo(model, "player_evac", "tag_detach");
   level.player PlayerLinkToBlend(model, "tag_origin", 0.5, 0.2, 0.2);
   delaythread(0.5, ::reset_player_fov, model, "tag_origin");
-  //self waittill( "player_evac" );
+
   wait(6);
   flag_wait("price_enters_heli");
   path = getstruct("ending_heli_escape_path", "targetname");
@@ -1203,7 +1050,6 @@ ending_heli_trigger_multiple() {
 }
 
 ending_heli_trigger_use() {
-  // "Press and hold ^3&& 1^7 to board."self setHintString(&"CLIFFHANGER_BOARD");
   add_wait(::waittill_msg, "trigger");
   level add_wait(::waittill_msg, "player_boards");
   do_wait_any();
@@ -1236,10 +1082,7 @@ reset_player_fov(ent, tag) {
 
 magic_bullet_spawner_think() {}
 
-god_vehicle_spawner_think() {
-  //	self VehPhys_DisableCrashing();
-  //	self waittill( "reached_end_node" );
-}
+god_vehicle_spawner_think() {}
 
 price_snowmobile_icon() {
   if(!isalive(level.price))
@@ -1258,7 +1101,6 @@ price_snowmobile_icon() {
 }
 
 ending_heli_fly_off_trigger_think() {
-  // ending heli hits a trigger then flies off and deletes
   flag_wait("hk_gives_chase");
 
   for(;;) {
@@ -1271,7 +1113,6 @@ ending_heli_fly_off_trigger_think() {
 
   path = getstruct(self.target, "targetname");
   level.hk SetVehGoalPos(path.origin, true);
-  //level.hk thread vehicle_paths( path );
 }
 
 player_top_speed_limit_trigger_think() {
@@ -1280,7 +1121,6 @@ player_top_speed_limit_trigger_think() {
   for(;;) {
     self waittill("trigger", other);
     assert(isPlayer(other));
-    //other.vehicle.veh_topspeed = self.script_speed;
   }
 }
 
@@ -1307,7 +1147,7 @@ kill_enemy_snowmobile_think() {
 player_path_trigger_think() {
   self waittill("trigger");
   node = getvehiclenode(self.target, "targetname");
-  //	level.player.vehicle attachPath( node );
+
   level.player.vehicle.veh_pathType = "follow";
   level.player.vehicle startPath(node);
 }
@@ -1332,7 +1172,6 @@ player_is_protected_on_trip_to_objective(objective, org) {
 
   self player_is_protected_on_trip_to_objective_think(objective, org);
 
-  // clear existing changes
   level.player maps\_gameskill::resetSkill();
 }
 
@@ -1361,14 +1200,11 @@ player_is_protected_on_trip_to_objective_think(objective, org) {
     if(org != original_org) {
       original_org = org;
       dist = distance(level.player.origin, org);
-      dist -= 55; // give the player a pseudo freeby for the update
+      dist -= 55;
     }
 
-    //Line( level.player.origin, org, (1,0,0), 1, 0 );
-    //Print3d( org, level.player.attackeraccuracy, (1,0,0), 1, 1 );
-
     current_dist = distance(level.player.origin, org);
-    current_dist += 50; // must continue making progress
+    current_dist += 50;
 
     if(current_dist < dist || dist < 150) {
       level.player set_player_attacker_accuracy(0);

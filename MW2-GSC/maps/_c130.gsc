@@ -9,16 +9,6 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 
-/*QUAKED script_vehicle_c130 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_c130::main( "vehicle_ac130_low" );
-
-and these lines in your CSV:
-#include,vehicle_c130
-
-defaultmdl="vehicle_ac130_low"default:"vehicletype" "c130"default:"script_team" "allies"*/
-
 main(model, type) {
   build_template("c130", model, type);
   build_localinit(::init_local);

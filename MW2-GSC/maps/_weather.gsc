@@ -3,99 +3,64 @@
  * Script: maps\_weather.gsc
 ********************************************************/
 
-// Utility rain functions:
 #include maps\_utility;
 #include common_scripts\utility;
 
-/*
-=============
-///ScriptDocBegin
-"Name: rainHard( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 rainHard(transition) {
   println("Rain becomes Hard over " + transition + " seconds");
   level notify("rain_change", "hard", transition);
   level thread rainEffectChange(10, transition);
   wait(transition * 0.5);
   level.ambient_modifier["rain"] = "";
-  //	This is commented out until ambient weather sounds are added to the tree
-  //maps\_ambient::activateAmbient( level.ambient );
+
   wait(transition * 0.5);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: rainMedium()""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 rainMedium(transition) {
   println("Rain becomes Medium over " + transition + " seconds");
   level notify("rain_change", "hard", transition);
   level thread rainEffectChange(8, transition);
   wait(transition * 0.5);
   level.ambient_modifier["rain"] = "";
-  //	This is commented out until ambient weather sounds are added to the tree
-  //maps\_ambient::activateAmbient( level.ambient );
+
   wait(transition * 0.5);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: rainLight( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 rainLight(transition) {
   println("Rain becomes Light over " + transition + " seconds");
   level notify("rain_change", "light", transition);
   level thread rainEffectChange(5, transition);
   wait(transition * 0.5);
   level.ambient_modifier["rain"] = "light";
-  //	This is commented out until ambient weather sounds are added to the tree
-  //maps\_ambient::activateAmbient( level.ambient );
+
   wait(transition * 0.5);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: rainNone( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 rainNone(transition) {
   println("Rain fades out over " + transition + " seconds");
   level notify("rain_change", "none", transition);
   level thread rainEffectChange(0, transition);
   wait(transition * 0.5);
   level.ambient_modifier["rain"] = "norain";
-  //	This is commented out until ambient weather sounds are added to the tree
-  //maps\_ambient::activateAmbient( level.ambient );
+
   wait(transition * 0.5);
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: rainInit( <lvl> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
-=============
-*/
 rainInit(lvl) {
   flag_init("_weather_lightning_enabled");
   flag_set("_weather_lightning_enabled");
 
   if(lvl == "none") {
-    level.rainLevel = 0; // starting rain level
+    level.rainLevel = 0;
     level._effect["rain_drops"] = level._effect["rain_" + level.rainLevel];
     rainNone(0.1);
   } else
   if(lvl == "light") {
-    level.rainLevel = 5; // starting rain level
+    level.rainLevel = 5;
     level._effect["rain_drops"] = level._effect["rain_" + level.rainLevel];
     rainLight(0.1);
   } else {
-    level.rainLevel = 10; // starting rain level
+    level.rainLevel = 10;
     level._effect["rain_drops"] = level._effect["rain_" + level.rainLevel];
     rainHard(0.1);
   }
@@ -103,16 +68,10 @@ rainInit(lvl) {
 
 lightning(normal, flash) {
   [[normal]]();
-  waittillframeend; // so exploders get setup
+  waittillframeend;
   for(;;)
     lightningThink(normal, flash);
 }
-
-//////
-/*
-	BELOW THIS LINE IS INTERNAL RAIN FUNCTIONS
-*/
-//////
 
 rainEffectChange(change, transition) {
   level notify("rain_level_change");
@@ -229,7 +188,6 @@ rainlevelwait() {
 lightningThink(normal, flash) {
   level endon("rain_change");
 
-  // in case we get broken out, we may have lightning sooner than planned if we're getting rainier
   nextStrike = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
   if(nextStrike < level.nextLightning)
     level.nextLightning = nextStrike;
@@ -261,7 +219,6 @@ lightningFlash(normal, flashfunc, flashType) {
   flash[1] = "double";
   flash[2] = "triple";
 
-  //this is where the sound happens
   thread thunder();
 
   if(!isDefined(flashType))
@@ -274,7 +231,6 @@ lightningFlash(normal, flashfunc, flashType) {
     level.lightningExploderIndex = lit_num;
   }
 
-  //this is where the visuals happen
   switch (flash[flashType]) {
     case "quick": {
       fogflash(flashfunc);
@@ -340,7 +296,7 @@ thunder() {
     ent playSound("elm_thunder_distant", "sounddone");
     ent thread play_sound_on_entity("elm_thunder_strike");
   }
-  //	iprintlnbold ("thunder!");	
+
   ent waittill("sounddone");
   ent delete();
 }

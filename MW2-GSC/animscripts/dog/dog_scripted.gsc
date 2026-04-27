@@ -9,7 +9,7 @@ main() {
   self endon("death");
   self notify("killanimscript");
 
-  self.codeScripted["root"] = % root; // TEMP!
+  self.codeScripted["root"] = % root;
 
   self endon("end_sequence");
   self startscriptedanim(self.codeScripted["notifyName"], self.codeScripted["origin"], self.codeScripted["angles"], self.codeScripted["anim"], self.codeScripted["animMode"], self.codeScripted["root"]);

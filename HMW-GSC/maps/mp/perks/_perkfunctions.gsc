@@ -125,10 +125,8 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   self endon("death");
   level endon("game_ended");
 
-  // PlayFXOnTag fails if run on the same frame the parent entity was created
   wait(0.05);
 
-  //playFXOnTag( showEffect, self, "TAG_FX" );
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
 
@@ -180,7 +178,7 @@ GlowStickDamageListener(owner) {
   level endon("game_ended");
 
   self setCanDamage(true);
-  // use large health to work around teamkilling issue
+
   self.health = 5000;
 
   for(;;) {
@@ -194,7 +192,7 @@ GlowStickDamageListener(owner) {
     if(self.health < (5000 - 20)) {
       if(isDefined(owner) && attacker != owner) {
         attacker notify("destroyed_insertion", owner);
-        attacker notify("destroyed_explosive"); // count towards SitRep Pro challenge
+        attacker notify("destroyed_explosive");
         owner thread maps\mp\_utility::leaderDialogOnPlayer("ti_destroyed");
         owner thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("flare_destroyed", attacker);
       }
@@ -270,9 +268,7 @@ GlowStickEnemyUseListener(owner) {
     self.enemyTrigger waittill("trigger", player);
 
     player notify("destroyed_insertion", owner);
-    player notify("destroyed_explosive"); // count towards SitRep Pro challenge
-
-    //playFX( level.spawnGlowSplat, self.origin);		
+    player notify("destroyed_explosive");
 
     if(isDefined(owner) && player != owner)
       owner thread maps\mp\_utility::leaderDialogOnPlayer("ti_destroyed");
@@ -296,7 +292,7 @@ setCombatHigh() {
 
   if(level.splitscreen) {
     yOffset = 56;
-    iconSize = 21; // 32/1.5
+    iconSize = 21;
   } else {
     yOffset = 112;
     iconSize = 32;

@@ -5,17 +5,6 @@
 
 #include maps\_utility;
 
-/*
-psource_editmode = ""; //toggles value, edit or view default to view.
-psource_image = ""; //sets image
-psource_select_next = ""; // selects next psourceposition;
-psource_select_prev = ""; // selects prev psourceposition
-psource_setview = "";// sets the view of the currently selected position.
-psource_help ""; //prints to console some help text
-psource_dump ""; //dumps view list to the console to be cut and pasted into script somewhere
-
-*/
-
 init() {
   flag_init("psource_Notviewing");
   flag_init("psource_refresh");
@@ -76,9 +65,8 @@ main() {
   level.psource_viewindex = undefined;
   thread psource_viewmode();
 
-  // this handles all of the dvar settings
   while(1) {
-    psource_enable(); // pauses if not enabled.
+    psource_enable();
     psource_image_update();
     psource_editmode_update();
     psource_select_next();
@@ -94,7 +82,7 @@ main() {
 
 psource_enable() {
   if(getDvar("psource_enable") != "1") {
-    flag_set("psource_refresh"); // makes everything stop drawing.
+    flag_set("psource_refresh");
     level.photosourcemod.alpha = 0;
     level.photosource.alpha = 0;
   }
@@ -332,7 +320,7 @@ psource_setview() {
   if(getDvar("psource_setview") == "")
     return;
   view = psource_getcurrentview();
-  //	view.temp_image = "case";
+
   psource_setvieworgang(view);
   setDvar("psource_setview", "");
 }
@@ -353,10 +341,10 @@ psource_dump() {
   println("--------******--------");
   println(" ");
   println(" ");
-  //	println ("thread maps\\\_photosource::photosource_init();");
+
   for(i = 0; i < level.psource_views.size; i++)
     println("maps\\\_photosource::psource_create(\"" + level.psource_views[i].image + "\"," + level.psource_views[i].origin + "," + level.psource_views[i].angles + ");");
-  //	println ("thread maps\\\_photosource::photosource_main();");
+
   println(" ");
   println(" ");
   println(" ");
@@ -429,7 +417,7 @@ psource_image_update() {
     return;
   view = psource_getcurrentview();
   view.image = getDvar("psource_image");
-  view.temp_image = "case"; // this is what will show when a new material is created( can't load mid level )
+  view.temp_image = "case";
   setDvar("psource_image", "");
 }
 
@@ -459,8 +447,6 @@ psource_newview(bScriptAdded) {
     flag_set("psource_refresh");
   return view;
 }
-
-//use this in level file to initialize all the stuff.
 psource_create(image, position, angle) {
   if(!isDefined(level.flag))
     level.flag = [];

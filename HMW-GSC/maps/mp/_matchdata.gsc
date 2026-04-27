@@ -126,7 +126,7 @@ logkillstreakevent(var_0, var_1) {
   }
   var_2 = getmatchdata("killstreakCount");
   setmatchdata("killstreakCount", var_2 + 1);
-  setmatchdata("killstreaks", var_2, "eventType", var_0); // TODO: errors here when calling built in
+  setmatchdata("killstreaks", var_2, "eventType", var_0);
   setmatchdata("killstreaks", var_2, "player", self.clientid);
   setmatchdata("killstreaks", var_2, "eventStartTimeDeciSecondsFromMatchStart", maps\mp\_utility::gettimepasseddeciseconds());
   setmatchdata("killstreaks", var_2, "eventPos", 0, int(var_1[0]));

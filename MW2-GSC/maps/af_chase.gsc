@@ -29,8 +29,6 @@ main() {
   precachestring(&"AF_CHASE_FAILED_TO_CRAWL");
   precachestring(&"AF_CHASE_FAILED_TO_PULL_KNIFE");
 
-  //	PreCacheItem( "cheytac" );
-
   PreCacheItem("m203");
   PreCacheRumble("steady_rumble");
   PreCacheRumble("smg_fire");
@@ -87,7 +85,6 @@ main() {
 
   PreCacheShader("overlay_hunted_black");
   precacheItem("ending_knife");
-  //	precacheItem( "ending_knife_silent" );
 
   precacheShader("hud_icon_commando_knife");
   precacheShader("reticle_center_throwingknife");
@@ -98,12 +95,8 @@ main() {
   level.next_rpg_firetime = GetTime();
 
   maps\af_chase_precache::main();
-  //	maps\_patrol_anims::main();
-  maps\af_chase_fx::main();
 
-  //original worldspawn values;
-  // sunlight 1.5;
-  //	0.960784 0.827451 0.647059
+  maps\af_chase_fx::main();
 
   SetSunLight(1.441176, 1.2411765, 0.9705885);
   SetSavedDvar("r_specularcolorscale", "3");
@@ -117,21 +110,6 @@ main() {
   add_start("boatdrive_end", ::start_boatdrive_end, "", maps\af_chase_knife_fight::wakeup_after_crash);
   maps\af_chase_knife_fight::add_knife_fight_starts();
   add_start("debug_boatdrive", ::start_debug_boatdrive, "", ::empty);
-
-  /*
-  	add_start( "wakeup", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  	add_start( "wakefast", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  	add_start( "turnbuckle", 			::start_turnbuckle, "", 							::fight_turnbuckle );
-  	add_start( "gloat", 				::start_shepherd_gloats, "", 						::shepherd_gloats );
-  	add_start( "gun_drop", 	 			::start_gun_drop, "", 								::gun_drop );
-  	add_start( "crawl", 				::start_gun_crawl, "", 								::gun_crawl );
-  	add_start( "gun_kick", 				::start_gun_kick, "", 								::gun_kick );
-  	add_start( "wounded", 				::start_wounded_show, "Watch Price/Shep fight",		::wounded_show );
-  	add_start( "pullout", 				::start_knife_pullout, "", 	 						::knife_pullout );
-  	add_start( "kill", 				::start_knife_pullout, "", 	 						::knife_pullout );
-  	add_start( "price_wakeup", 			::start_price_wakeup, "", 							::price_wakeup );
-  	add_start( "walkoff", 				::start_walkoff, "", 								::walkoff );
-  */
 
   default_start(::start_default);
 
@@ -150,21 +128,7 @@ main() {
   maps\_zodiac_drive::zodiac_preLoad("viewhands_player_tf141");
   maps\_zodiac_ai::main();
 
-  //add_hint_string( "btobackup" , &"SCRIPT_PLATFORM_ZODIAC_STEADY", ::hint_test );
-
   SetDevDvarIfUninitialized("scr_zodiac_test", 0);
-
-  //	SetExpFog( 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0 );
-
-  /* - Some temp stuff for messing with level fog and vision sets.
-  	maps\_utility::set_vision_set( "af_chase_outdoors_2", 0 );
-  	Start Fog - 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0
-  	Caves fog - 1000, 8000, 0.60, 0.50, 0.40, 0.45, 0
-  	resevoir fog 1 -8000, 45000, 0.60, 0.50, 0.40, 0.3, 0
-  	reveoir 2 - 2000, 20000, 0.60, 0.50, 0.40, 0.2, 0
-  	rapids - 1000, 11000, 0.60, 0.50, 0.40, 0.55, 0
-  	gorge - 1500, 15000, 0.60, 0.50, 0.40, 0.45, 0
-  	waterfall - 10000, 50000, 0.60, 0.50, 0.40, 0.75, 0*/
 
   script_vehicle_zodiac_players = getEntArray("script_vehicle_zodiac_player", "classname");
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, maps\_zodiac_drive::drive_vehicle);
@@ -180,9 +144,6 @@ main() {
   foreach(object in actor_enemy_afghan_RPG) {
     object.script_sightrange = sight_range;
   }
-
-  //	thread_the_needle = getEntArray( "thread_the_needle", "targetname" );
-  //	array_thread( thread_the_needle, ::trigger_thread_the_needle );
 
   rope_splashers = getEntArray("rope_splashers", "script_noteworthy");
   array_thread(rope_splashers, ::add_spawn_function, ::rope_splashers);
@@ -217,9 +178,6 @@ main() {
   array_thread(all_zodicas, ::add_spawn_function, ::zodiac_treadfx);
   array_thread(all_zodicas, ::add_spawn_function, ::zodiac_enemy_setup);
 
-  //	foreach ( zodiac in script_vehicle_zodiac_physics )
-  //		zodiac.origin += ( 0, 0, 64 );// bump them up because they were previously not physics and placed below the surface
-
   script_vehicle_pavelow = getEntArray("script_vehicle_pavelow", "classname");
   array_thread(script_vehicle_pavelow, ::add_spawn_function, ::disable_origin_offset);
 
@@ -238,9 +196,6 @@ main() {
   end_caves_trigger thread trigger_end_caves();
   end_caves_trigger thread autosave_boat_chase();
 
-  //	price_tells_player_go_right = GetEnt( "price_tells_player_go_right", "targetname" );
-  //	price_tells_player_go_right thread trigger_price_tells_player_go_right();
-
   heli_attack_player_idle = getStructArray("heli_attack_player_idle", "script_noteworthy");
   array_thread(heli_attack_player_idle, ::heli_attack_player_idle);
 
@@ -256,7 +211,7 @@ main() {
 
   thread maps\af_chase_zodiac::zodiac_main();
 
-  SetSavedDvar("ai_friendlyFireBlockDuration", "0"); // this might bite me later.
+  SetSavedDvar("ai_friendlyFireBlockDuration", "0");
 
   price_position_switch = getEntArray("price_position_switch", "targetname");
   array_thread(price_position_switch, ::price_position_switch);
@@ -274,7 +229,7 @@ main() {
   array_thread(neutral_enemies, ::trigger_neutral_enemies);
 
   dialog_cave = GetEnt("dialog_cave", "targetname");
-  //	dialog_cave = spawn( "trigger_radius", (-18968, -18324, 0), 0, 730.399, 1000 );
+
   dialog_cave thread dialog_cave();
 
   thread dialog_boat_battlechatter();
@@ -297,12 +252,10 @@ main() {
   open_area = getEntArray("open_area", "targetname");
   array_thread(open_area, ::trigger_open_area);
   battlechatter_off("allies");
-  //	thread dump_on_command();
 
   sentry_technicals = getEntArray("sentry_technical", "script_noteworthy");
   array_thread(sentry_technicals, ::add_spawn_function, ::sentry_technical_think);
 
-  //	thread dialog_radio();
   explode_barrels_in_radiuss = getEntArray("explode_barrels_in_radius", "targetname");
   array_thread(explode_barrels_in_radiuss, ::explode_barrels_in_radius_think);
   thread af_chase_music();
@@ -358,7 +311,6 @@ start_default() {
   thread maps\_introscreen::af_chase_intro();
 
   wait 3;
-  //	vehicle_dump();
 
   flag_wait("player_on_boat");
   maps\_friendlyfire::TurnOff();
@@ -374,11 +326,10 @@ start_boatdrive_begin() {
   friendly_boat = spawn_vehicle_from_targetname("players_boat");
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
-  //	friendly_boat Vehicle_SetSpeedImmediate( 33,90,90 );
 
   thread enable_bread_crumb_chase();
 }
@@ -392,13 +343,11 @@ start_debug_boatdrive() {
 }
 
 start_boatdrive_lake_mid() {
-  //fast forward to new location. speed is approximated based on pretend playthrough.
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_mid_lake");
   boat_common();
   flag_set("exit_caves");
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  // move player boat to new position
   player_boat_spawner = GetEnt("players_boat", "targetname");
   player_boat_spawner_position = getstruct("lake_mid_start_pose", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
@@ -407,12 +356,12 @@ start_boatdrive_lake_mid() {
   friendly_boat = spawn_vehicle_from_targetname("players_boat");
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
 
-  friendly_boat Vehicle_SetSpeedImmediate(60, 90, 90); // last two params don't do anything but are required for the boat.
+  friendly_boat Vehicle_SetSpeedImmediate(60, 90, 90);
 
   thread enable_bread_crumb_chase();
 
@@ -420,12 +369,10 @@ start_boatdrive_lake_mid() {
 }
 
 start_boatdrive_lake() {
-  //fast forward to new location. speed is approximated based on pretend playthrough.
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_lake");
   boat_common();
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  // move player boat to new position
   player_boat_spawner = GetEnt("players_boat", "targetname");
   player_boat_spawner_position = getstruct("lake_start_pose", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
@@ -434,12 +381,12 @@ start_boatdrive_lake() {
   friendly_boat = spawn_vehicle_from_targetname("players_boat");
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
 
-  friendly_boat Vehicle_SetSpeedImmediate(48, 90, 90); // last two params don't do anything but are required for the boat.
+  friendly_boat Vehicle_SetSpeedImmediate(48, 90, 90);
 
   thread enable_bread_crumb_chase();
 
@@ -447,7 +394,6 @@ start_boatdrive_lake() {
 }
 
 start_boatdrive_rapids() {
-  //fast forward to new location. speed is approximated based on pretend playthrough.
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_rapids");
 
   change_target_ent_on_vehicle_spawner("seaknight_fly_over", "enemy_heli_pos_rapids");
@@ -455,11 +401,8 @@ start_boatdrive_rapids() {
   boat_common();
   flag_set("exit_caves");
 
-  //af_chase_outdoors_2
-  //set vision set so the water thing can work
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  // move player boat to new position
   player_boat_spawner = GetEnt("players_boat", "targetname");
   player_boat_spawner_position = getstruct("rapids_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
@@ -469,21 +412,19 @@ start_boatdrive_rapids() {
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
   enemy_pickup_heli = spawn_vehicle_from_targetname_and_drive("seaknight_fly_over");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
 
-  friendly_boat Vehicle_SetSpeedImmediate(78, 90, 90); // last two params don't do anything but are required. not optional for boats I guess.
+  friendly_boat Vehicle_SetSpeedImmediate(78, 90, 90);
 
   thread enable_bread_crumb_chase();
 
-  //catch up the current
   thread river_current("river_current_start_rapids");
 }
 
 start_boatdrive_river_below_rapids() {
-  //fast forward to new location. speed is approximated based on pretend playthrough.
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_below_rapids");
   change_target_ent_on_vehicle_spawner("seaknight_fly_over", "enemy_heli_pos_rapids");
 
@@ -491,11 +432,8 @@ start_boatdrive_river_below_rapids() {
   flag_set("exit_caves");
   flag_set("on_river");
 
-  //af_chase_outdoors_2
-  //set vision set so the water thing can work
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  // move player boat to new position
   player_boat_spawner = GetEnt("players_boat", "targetname");
   player_boat_spawner_position = getstruct("below_rapids_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
@@ -504,23 +442,19 @@ start_boatdrive_river_below_rapids() {
   friendly_boat = spawn_vehicle_from_targetname("players_boat");
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
 
-  friendly_boat Vehicle_SetSpeedImmediate(78, 90, 90); // last two params don't do anything but are required. not optional for boats I guess.
+  friendly_boat Vehicle_SetSpeedImmediate(78, 90, 90);
 
   thread enable_bread_crumb_chase();
 
-  //catch up the current
   thread river_current("river_current_start_rapids");
 }
 
 start_boatdrive_end() {
-  //fast forward to new location. speed is approximated based on pretend playthrough.
-
-  //	thread music_start();
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_end");
 
   seaknight_pickup_boat_spot = GetEnt("seaknight_pickup_boat_spot", "script_noteworthy");
@@ -531,11 +465,8 @@ start_boatdrive_end() {
   flag_set("exit_caves");
   flag_set("enemy_zodiacs_wipe_out");
 
-  //af_chase_outdoors_2
-  //set vision set so the water thing can work
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  // move player boat to new position
   player_boat_spawner = GetEnt("players_boat", "targetname");
   player_boat_spawner_position = getstruct("end_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
@@ -545,13 +476,13 @@ start_boatdrive_end() {
   enemy_boat = spawn_vehicle_from_targetname_and_drive("enemy_chase_boat");
   enemy_pickup_heli = spawn_vehicle_from_targetname("enemy_pickup_heli");
 
-  waittillframeend; // let the spawned vehicle run its spawn_func to catch this useby notify.
+  waittillframeend;
 
   level.player PlayerLinkToBlend(friendly_boat, "tag_player", .2, .1, .1);
   friendly_boat UseBy(level.player);
   level.player.drivingVehicle = friendly_boat;
 
-  friendly_boat Vehicle_SetSpeedImmediate(57, 90, 90); // last two params don't do anything but are required. not optional for boats I guess.
+  friendly_boat Vehicle_SetSpeedImmediate(57, 90, 90);
 
   thread enable_bread_crumb_chase();
   thread river_current("river_current_start_boatdrive_end");
@@ -564,7 +495,7 @@ start_boatdrive_nofail() {
 }
 
 afchase_objectives() {
-  waittillframeend; // let the start points initiate stuff first
+  waittillframeend;
 
   switch (level.start_point) {
     case "default":
@@ -576,7 +507,7 @@ afchase_objectives() {
     case "boatdrive_below_rapids":
     case "boatdrive_end":
     case "boatdrive_end_test":
-      // Don't let Shepherd get away.
+
       Objective_Add(obj("pursue"), "current", &"AF_CHASE_PURSUE");
       objective_onentity(obj("pursue"), level.enemy_boat, (0, 0, 160));
 
@@ -626,14 +557,12 @@ dialog_radio() {
 
   level.player radio_dialogue("afchase_shp_observe");
 
-  //"afchase_shp_uavsupport"//"afchase_shp_dangerclose"//"afchase_shp_clearedhot"//"afchase_shp_takeem"//"afchase_shp_tryagain"flag_wait("exit_caves");
-
   wait 4;
   level.player radio_dialogue("afchase_shp_uavsupport");
 }
 
 start_point_catchup_thread() {
-  waittillframeend; // let the actual start functions run before this one
+  waittillframeend;
   start = level.start_point;
   if(is_default_start())
     return;
@@ -674,7 +603,7 @@ af_chase_music() {
     case "boatdrive_rapids":
     case "boatdrive_below_rapids":
     case "boatdrive_end":
-      thread MusicLoop("af_chase_startinboat"); // 3 minutes 21 seconds
+      thread MusicLoop("af_chase_startinboat");
 
       flag_wait("test_boat_is_on_spline");
       level notify("stop_music");
@@ -686,7 +615,7 @@ af_chase_music() {
     case "gloat":
       flag_wait("af_chase_final_fight");
     case "gun_drop":
-      musicplaywrapper("af_chase_final_fight"); // becomes ~1 second desynced but I don't care.
+      musicplaywrapper("af_chase_final_fight");
     case "crawl":
     case "gun_kick":
     case "wounded":

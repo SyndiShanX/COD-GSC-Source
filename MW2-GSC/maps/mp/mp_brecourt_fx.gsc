@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-  //ambient fx
   level._effect["insect_trail_runner_icbm"] = loadfx("misc/insect_trail_runner_icbm");
   level._effect["leaves_fall_gentlewind"] = loadfx("misc/leaves_fall_gentlewind");
   level._effect["leaves_ground_gentlewind"] = loadfx("misc/leaves_ground_gentlewind");

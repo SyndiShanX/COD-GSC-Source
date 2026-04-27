@@ -5,7 +5,6 @@ main() {
 
   precache_audio_fx();
 
-  //ambient fx
   level._effect["dust_wind_fast_paper"] = loadfx("maps/mp_morningwood/mp_mwd_paperfast");
   level._effect["dust_wind_slow_paper"] = loadfx("maps/mp_morningwood/mp_mwd_paperslow");
   level._effect["embers_prague_light"] = loadfx("weather/embers_prague_light");

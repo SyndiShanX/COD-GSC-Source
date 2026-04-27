@@ -37,174 +37,88 @@
 #using scripts\shared\vehicleriders_shared;
 #namespace cp_mi_sing_blackstation_police_station;
 
-function objective_police_station_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_police_station_init() {}
 
-function objective_police_station_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_police_station_done() {}
 
-function police_station_main() {
-  // Unsupported VM revision (1B).
-}
+function police_station_main() {}
 
-function function_5723cc6() {
-  // Unsupported VM revision (1B).
-}
+function function_5723cc6() {}
 
-function function_969d668a() {
-  // Unsupported VM revision (1B).
-}
+function function_969d668a() {}
 
-function police_station_waypoints() {
-  // Unsupported VM revision (1B).
-}
+function police_station_waypoints() {}
 
-function function_2397a7b2() {
-  // Unsupported VM revision (1B).
-}
+function function_2397a7b2() {}
 
-function function_1932762c() {
-  // Unsupported VM revision (1B).
-}
+function function_1932762c() {}
 
-function function_e2038b3() {
-  // Unsupported VM revision (1B).
-}
+function function_e2038b3() {}
 
-function function_d87a714f() {
-  // Unsupported VM revision (1B).
-}
+function function_d87a714f() {}
 
-function function_a7bb8a82() {
-  // Unsupported VM revision (1B).
-}
+function function_a7bb8a82() {}
 
-function cybercore_takedown() {
-  // Unsupported VM revision (1B).
-}
+function cybercore_takedown() {}
 
-function function_693c6a46() {
-  // Unsupported VM revision (1B).
-}
+function function_693c6a46() {}
 
-function function_2c3b5e41() {
-  // Unsupported VM revision (1B).
-}
+function function_2c3b5e41() {}
 
-function function_7f3763ee() {
-  // Unsupported VM revision (1B).
-}
+function function_7f3763ee() {}
 
-function function_cbbb2fea() {
-  // Unsupported VM revision (1B).
-}
+function function_cbbb2fea() {}
 
-function function_bd78d653() {
-  // Unsupported VM revision (1B).
-}
+function function_bd78d653() {}
 
-function function_e27b9e3c() {
-  // Unsupported VM revision (1B).
-}
+function function_e27b9e3c() {}
 
-function lobby_patroller() {
-  // Unsupported VM revision (1B).
-}
+function lobby_patroller() {}
 
-function spawn_lobby_turrets() {
-  // Unsupported VM revision (1B).
-}
+function spawn_lobby_turrets() {}
 
-function turret_gunner_think() {
-  // Unsupported VM revision (1B).
-}
+function turret_gunner_think() {}
 
-function turret_think() {
-  // Unsupported VM revision (1B).
-}
+function turret_think() {}
 
-function lobby_ai_behavior() {
-  // Unsupported VM revision (1B).
-}
+function lobby_ai_behavior() {}
 
-function proximity_detection_lobby() {
-  // Unsupported VM revision (1B).
-}
+function proximity_detection_lobby() {}
 
-function function_dbf996a() {
-  // Unsupported VM revision (1B).
-}
+function function_dbf996a() {}
 
-function kane_intro_check() {
-  // Unsupported VM revision (1B).
-}
+function kane_intro_check() {}
 
-function worklight_setup() {
-  // Unsupported VM revision (1B).
-}
+function worklight_setup() {}
 
-function worklight_destruction() {
-  // Unsupported VM revision (1B).
-}
+function worklight_destruction() {}
 
-function function_d7f282ac() {
-  // Unsupported VM revision (1B).
-}
+function function_d7f282ac() {}
 
-function function_5eb730ee() {
-  // Unsupported VM revision (1B).
-}
+function function_5eb730ee() {}
 
-function spawn_management() {
-  // Unsupported VM revision (1B).
-}
+function spawn_management() {}
 
-function function_b45ce54a() {
-  // Unsupported VM revision (1B).
-}
+function function_b45ce54a() {}
 
-function cellblock_enemy_spawn() {
-  // Unsupported VM revision (1B).
-}
+function cellblock_enemy_spawn() {}
 
-function cellblock_enemy_scene() {
-  // Unsupported VM revision (1B).
-}
+function cellblock_enemy_scene() {}
 
-function function_878db82b() {
-  // Unsupported VM revision (1B).
-}
+function function_878db82b() {}
 
-function function_f6f7ab3d() {
-  // Unsupported VM revision (1B).
-}
+function function_f6f7ab3d() {}
 
-function function_37170d4a() {
-  // Unsupported VM revision (1B).
-}
+function function_37170d4a() {}
 
-function function_1fb3b8c9() {
-  // Unsupported VM revision (1B).
-}
+function function_1fb3b8c9() {}
 
-function objective_kane_intro_init() {
-  // Unsupported VM revision (1B).
-}
+function objective_kane_intro_init() {}
 
-function objective_kane_intro_done() {
-  // Unsupported VM revision (1B).
-}
+function objective_kane_intro_done() {}
 
-function kane_intro_igc() {
-  // Unsupported VM revision (1B).
-}
+function kane_intro_igc() {}
 
-function function_80a596c6() {
-  // Unsupported VM revision (1B).
-}
+function function_80a596c6() {}
 
-function function_7a574065() {
-  // Unsupported VM revision (1B).
-}
+function function_7a574065() {}

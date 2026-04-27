@@ -13,17 +13,13 @@ main() {
 
   level._effect["javelin_muzzle"] = loadfx("muzzleflashes/javelin_flash_wv");
 
-  //Hangar Welder
   level._effect["welding_runner"] = loadfx("misc/welding_runner");
 
-  //humvees at end
   level._effect["humvee_radiator_steam"] = loadfx("smoke/steam_vent_large_wind");
 
-  //basketball effects
   level._effect["ball_bounce_dust_runner"] = loadfx("impacts/ball_bounce_dust_runner");
   level._effect["footstep_dust"] = loadfx("impacts/footstep_dust");
 
-  //ambient fx
   level._effect["sand_storm_distant_oriented"] = LoadFX("weather/sand_storm_distant_oriented_training");
   level._effect["sand_storm_distant"] = LoadFX("weather/sand_storm_distant_training");
 
@@ -54,7 +50,6 @@ hummer_steam() {
 }
 
 footstep_effects() {
-  //Regular footstep fx
   animscripts\utility::setFootstepEffect("wood", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("sand", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("dirt", loadfx("impacts/footstep_dust"));
@@ -62,7 +57,6 @@ footstep_effects() {
   animscripts\utility::setFootstepEffect("rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("mud", loadfx("impacts/footstep_mud"));
 
-  //Small footstep fx
   animscripts\utility::setFootstepEffectSmall("wood", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("sand", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("dirt", loadfx("impacts/footstep_dust"));
@@ -70,21 +64,10 @@ footstep_effects() {
   animscripts\utility::setFootstepEffectSmall("rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffectSmall("mud", loadfx("impacts/footstep_mud"));
 
-  //Other notetrack fx
-  /*
-  setNotetrackEffect( <notetrack>, <tag>, <surface>, <loadfx>, <sound_prefix>, <sound_suffix> )
-  	<notetrack>: name of the notetrack to do the fx/sound on
-  	<tag>: name of the tag on the AI to use when playing fx
-  	<surface>: the fx will only play when the AI is on this surface. Specify "all" to make it work for all surfaces.
-  	<loadfx>: load the fx to play here
-  	<sound_prefix>: when this notetrack hits a sound can be played. This is the prefix of the sound alias to play ( gets followed by surface type )
-  	<sound_suffix>: suffix of sound alias to play, follows the surface type. Example: prefix of "bodyfall_" and suffix of "_large" will play sound alias "bodyfall_dirt_large" when the notetrack happens on dirt.
-  */
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "sand", loadfx("impacts/bodyfall_dust_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "dirt", loadfx("impacts/bodyfall_dust_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "concrete", loadfx("impacts/bodyfall_default_small_runner"), "bodyfall_", "_small");
   animscripts\utility::setNotetrackEffect("bodyfall small", "J_SpineLower", "rock", loadfx("impacts/bodyfall_default_small_runner"), "bodyfall_", "_small");
-  //	animscripts\utility::setNotetrackEffect( "bodyfall small", 		"J_SpineLower", 		"mud",		loadfx ( "impacts/bodyfall_mud_small_runner" ), "bodyfall_", "_small" );
 
   animscripts\utility::setNotetrackEffect("bodyfall large", "J_SpineLower", "sand", loadfx("impacts/bodyfall_dust_large_runner"), "bodyfall_", "_large");
   animscripts\utility::setNotetrackEffect("bodyfall large", "J_SpineLower", "dirt", loadfx("impacts/bodyfall_dust_large_runner"), "bodyfall_", "_large");

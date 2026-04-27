@@ -7,38 +7,20 @@
 #using scripts\shared\util_shared;
 #namespace stealth_status;
 
-function init() {
-  // Unsupported VM revision (1B).
-}
+function init() {}
 
-function enabled() {
-  // Unsupported VM revision (1B).
-}
+function enabled() {}
 
-function create_stealth_indicator() {
-  // Unsupported VM revision (1B).
-}
+function create_stealth_indicator() {}
 
-function icon_show() {
-  // Unsupported VM revision (1B).
-}
+function icon_show() {}
 
-function function_180adb28() {
-  // Unsupported VM revision (1B).
-}
+function function_180adb28() {}
 
-function status_monitor_thread() {
-  // Unsupported VM revision (1B).
-}
+function status_monitor_thread() {}
 
-function shader_for_alert_level() {
-  // Unsupported VM revision (1B).
-}
+function shader_for_alert_level() {}
 
-function update() {
-  // Unsupported VM revision (1B).
-}
+function update() {}
 
-function clean_icon_on_death() {
-  // Unsupported VM revision (1B).
-}
+function clean_icon_on_death() {}

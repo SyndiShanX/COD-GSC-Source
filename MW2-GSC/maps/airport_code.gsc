@@ -20,11 +20,6 @@ CONST_FF_WANDER_DIST = 600;
 CONST_ELEV_CABLE_HEIGHT = 94;
 CONST_ELEV_CABLE_CLOSE = 2;
 
-/************************************************************************************************************/
-
-/*												INTRO ELEVATOR												*/
-/************************************************************************************************************/
-
 elevator_setup(doors) {
   doors["left"].close_pos = doors["left"].origin;
   doors["right"].close_pos = doors["right"].origin;
@@ -60,21 +55,16 @@ elevator_open_doors(doors, snd) {
   doors["left"] ConnectPaths();
   doors["right"] ConnectPaths();
 
-  speed = 14; // scaler
+  speed = 14;
   closed_pos = doors["left"].close_pos;
   dist = abs(Distance(doors["left"].open_pos, closed_pos));
-  moveTime = (dist / speed) * 0.5; // scaler
+  moveTime = (dist / speed) * 0.5;
 
   doors["left"] MoveTo(doors["left"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
   doors["right"] MoveTo(doors["right"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
 
   doors["left"] waittill("movedone");
 }
-
-/************************************************************************************************************/
-
-/*													INTRO													*/
-/************************************************************************************************************/
 
 blend_movespeedscale_custom(percent, time) {
   player = self;
@@ -125,13 +115,9 @@ player_dynamic_move_speed() {
   SetDvarIfUninitialized("debug_playerDMS", 0);
 
   while(flag("player_dynamic_move_speed")) {
-    //if we're close enough to an actor to be significant - then just use him
-    //otherwise go through a series of complicated steps to figure out where
-    //we are in relation to the whole team
     guy = getClosest(level.player.origin, level.team);
     ahead = false;
 
-    //we dont have distance2d SQUARED...so here's a hack
     origin1 = (level.player.origin[0], level.player.origin[1], 0);
     origin2 = (guy.origin[0], guy.origin[1], 0);
 
@@ -145,10 +131,7 @@ player_dynamic_move_speed() {
       if(GetDvarInt("debug_playerDMS"))
         Line(actor.origin, level.player.origin, (1, 0, 0), 1);
     } else {
-      //calculate if we are ahead of anyone
       foreach(member in level.team) {
-        //for this level, this function is so aggressive that we'll never get this far
-        //ahead of someone - so don't count it
         if(DistanceSquared(level.player.origin, member.origin) > squared(500))
           continue;
         ahead = member player_DMS_ahead_test();
@@ -156,8 +139,7 @@ player_dynamic_move_speed() {
           break;
         }
       }
-      //calculate a facing plane based on everyone's angles, then get the closest point on the closest
-      //plane to us - and use that point to decide how close we are to the average of the group
+
       planes = [];
       foreach(member in level.team) {
         member.plane_origin.origin = member player_DMS_get_plane();
@@ -174,37 +156,28 @@ player_dynamic_move_speed() {
     if(GetDvarInt("debug_playerDMS"))
       Print3d(actor.origin, "dist: " + Distance(level.player.origin, actor.origin), (1, 1, 1), 1);
 
-    //if he's wait out in front - really slow him down
     if(DistanceSquared(level.player.origin, actor.origin) > squared(100) && ahead) {
       if(GetDvarInt("debug_playerDMS"))
         PrintLn("TOOO FAR AHEAD!!!!!!!!!!!");
 
       if(current > .55)
         current -= .015;
-    }
-    //if he's too close - take him as much as 20% under his baseline
-    else
+    } else
     if(DistanceSquared(level.player.origin, actor.origin) < squared(50) || ahead) {
       if(current < .78)
         current += .015;
 
       if(current > .8)
         current -= .015;
-    }
-    //if he's REALLY far away - take him as much as 75% over his baseline ( as long as total speed doesn't reach 110%, capped below )
-    else
+    } else
     if(DistanceSquared(level.player.origin, actor.origin) > squared(300)) {
       if(current < 1.75)
         current += .02;
-    }
-    //if he's far away - take him as much as 35% over his baseline
-    else
+    } else
     if(DistanceSquared(level.player.origin, actor.origin) > squared(100)) {
       if(current < 1.35)
         current += .01;
-    }
-    //if he's in range - take him back to his baseline
-    else
+    } else
     if(DistanceSquared(level.player.origin, actor.origin) < squared(85)) {
       if(current > 1.0)
         current -= .01;
@@ -217,7 +190,6 @@ player_dynamic_move_speed() {
     else
       level.player AllowSprint(false);
 
-    //set his speed based on baseline and this ratio
     level.player.adjusted_baseline = level.player.baseline_speed * current;
     if(level.player.adjusted_baseline > 1.1)
       level.player.adjusted_baseline = 1.1;
@@ -243,7 +215,7 @@ player_DMS_get_plane() {
 
 player_DMS_ahead_test() {
   ahead = false;
-  //this is a test to see if we're closer to their goal than they are
+
   if(isDefined(self.last_set_goalent))
     ahead = self[[level.drs_ahead_test]](self.last_set_goalent, 50);
   else if(isDefined(self.last_set_goalnode))
@@ -274,7 +246,6 @@ lobby_sign() {
 }
 
 elevator_floor_indicator() {
-  //setup
   temp = getEntArray("elev_num", "targetname");
   lights = [];
   foreach(item in temp)
@@ -293,23 +264,22 @@ elevator_floor_indicator() {
   snd = spawn("script_origin", doors["left"].close_pos);
   snd2 = spawn("script_origin", doors["left"].close_pos);
 
-  //sounds
   snd playSound("elev_run_start");
   snd2 playLoopSound("elev_run_loop");
   thread play_sound_in_space("scn_airport_elevator_opening_long", level.player.origin + (0, 0, 70));
 
   wait 5.5;
 
-  wait 4.5; // 5.5	 - > M 	 - > 1st before click
+  wait 4.5;
   snd playSound("elevator_pass_floor_beep");
 
-  wait 6.5; // 11	 - > L1	 - > 2nd after click
+  wait 6.5;
   snd playSound("elevator_pass_floor_beep");
 
-  wait 4.5; // 15.5	 - > 1	 - > 3rd after cough
+  wait 4.5;
   snd playSound("elevator_pass_floor_beep");
 
-  wait 2; // 18
+  wait 2;
   level.team["makarov"] thread dialogue_queue("airport_mkv_snamibog");
 
   wait 2;
@@ -317,9 +287,8 @@ elevator_floor_indicator() {
   snd2 StopLoopSound("elev_run_loop");
   thread play_sound_in_space("elev_run_end", snd.origin);
 
-  wait 1; // 21	 - > 2
+  wait 1;
 
-  //level.makarov dialogue_queue( "airport_mkv_noruss" );
   snd playSound("elev_bell_ding");
 
   lights["1"] Hide();
@@ -438,9 +407,6 @@ lobby_security_intro() {
   node thread anim_generic(self, self.animation);
   self set_allowdeath(true);
   self.noragdoll = 1;
-  //	self.a.nodeath 	= 1;
-
-  //	wait 1;
 
   flag_wait("lobby_open_fire");
   wait RandomFloatRange(.15, .25);
@@ -525,14 +491,12 @@ lobby_drone_logic() {
     if(!isDefined(self)) {
       break;
     }
-    /*----------------------- KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
-    -------------------------*/
+
     if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
-    if(player_looking_at(self.origin + (0, 0, 48)))
+    if(player_looking_at(self.origin + (0, 0, 48))) {
       continue;
-    /*----------------------- ALL TESTS PASSED, DELETE THE BASTARD
-    -------------------------*/
+    }
     break;
   }
 
@@ -604,13 +568,13 @@ lobby_generic_logic_crawlers() {
     self DoDamage(1, level.player.origin);
 
     wait 8;
-    //iprintlnbold( "canshoot" );
+
     self SetContents(self.oldcontents);
     wait 11;
-    //iprintlnbold( "can NOT shoot" );
+
     self SetContents(0);
     wait 5;
-    //iprintlnbold( "canshoot" );
+
     self SetContents(self.oldcontents);
   }
 }
@@ -620,7 +584,7 @@ stair_top_terror() {
   flag_waitopen("lobby_to_stairs_flow");
   flag_wait("lobby_to_stairs_flow");
 
-  wait 11; // "lobby_cleanup"org = GetEnt("upperdeck_terror", "targetname");
+  wait 11;
   org playLoopSound("scn_airport_crowd_stairs_loop");
 
   flag_wait_or_timeout("stairs_top_open_fire", 16.5);
@@ -671,15 +635,12 @@ lobby_to_stairs_flow() {
   while(!flag("stairs_top_open_fire")) {
     wait .2;
 
-    /*----------------------- KEEP LOOPING IF ANY PLAYERS TOO CLOSE OR CAN BULLETTRACE
-    -------------------------*/
     if(DistanceSquared(self.origin, level.player.origin) < squared(2048))
       continue;
     if(player_looking_at(self.origin + (0, 0, 48))) {
       continue;
     }
-    /*----------------------- ALL TESTS PASSED, DELETE THE BASTARD
-    -------------------------*/
+
     self Delete();
   }
 
@@ -702,7 +663,7 @@ running_civ_soundscape(array, alias) {
   array = array_removeDead(array);
   origin = get_average_origin(array);
   obj = spawn("script_origin", origin + (0, 0, 64));
-  //obj setModel( "weapon_us_smoke_grenade" );
+
   obj playSound(alias);
 
   time = .1;
@@ -759,7 +720,6 @@ intro_security_run_die() {
       break;
   }
 
-  //wait 3.25;
   wait 2.25;
 
   self gun_remove();
@@ -907,7 +867,6 @@ lobby_ai_new() {
       self bodyshot("bodyshot");
       self thread anim_generic(self, "run_pain_fallonknee");
 
-      //self.deathanim = %coverstand_death_left;
       wait 1.25;
       self.noragdoll = 1;
       self bodyshot("killshot");
@@ -1018,7 +977,6 @@ lobby_ai_run() {
       node = getstruct(node.target, "targetname");
       node anim_generic_reach(self, node.script_animation);
 
-      //self.a.nodeath 	= true;
       self.IgnoreRandomBulletDamage = true;
 
       node thread anim_generic(self, node.script_animation);
@@ -1069,7 +1027,6 @@ lobby_open_fire(node) {
 
   self.goalradius = 8;
   self SetGoalPos(self.origin);
-  //self OrientMode( "face angle", node.angles[1] );
 
   delay = undefined;
   speed = undefined;
@@ -1105,16 +1062,10 @@ lobby_open_fire(node) {
 
   self StopAnimScripted();
   self thread spray_and_pray(delay, speed, forward);
-  //	flag_wait( "lobby_to_stairs_go" );
+
   wait time;
 
   self notify("stop_spray_and_pray");
-
-  //	if( self.script_noteworthy == "saw" )
-  //		return;
-
-  //	self thread anim_single_run_solo( self, "stand_reload" );	
-
 }
 
 lobby_moveout_to_stairs_makarov(node) {
@@ -1163,10 +1114,8 @@ lobby_moveout_to_stairs_makarov(node) {
   }
   flag_wait("stairs_go_up");
   self set_generic_run_anim("casual_killer_jog_A");
-  //Up the stairs. Go.
-  self radio_dialogue("airport_mkv_upstairs");
 
-  //thread lobby_player_allow_sprint();
+  self radio_dialogue("airport_mkv_upstairs");
 }
 
 lobby_player_allow_sprint() {
@@ -1361,11 +1310,6 @@ lobby_prestairs_nodes_behavior(node) {
   self.goalradius = 16;
 }
 
-/************************************************************************************************************/
-
-/*												UPPERDECK													*/
-/************************************************************************************************************/
-
 stairs_team_at_top(node) {
   self endon("death");
   flag_waitopen("friendly_fire_warning");
@@ -1549,7 +1493,6 @@ upperdeck_makarov_moveup(node) {
   self disable_exits();
   self disable_dynamic_run_speed();
 
-  //thread radio_dialogue( "airport_mkv_runner" );	
   node anim_generic_run(self, "casual_killer_walk_point");
 
   self set_moveplaybackrate(1.35);
@@ -1594,11 +1537,9 @@ stairs_cop() {
   vec = anglesToForward(self.angles);
   origin = origin + vector_multiply(vec, 20);
 
-  //	target = spawn( "script_model", origin );
-  //	target setModel( "weapon_us_smoke_grenade" );
   target = spawn("script_origin", origin);
   target.health = 100;
-  //	target LinkTo( self );
+
   level.team["saw"] SetEntityTarget(target);
   level.team["shotgun"] SetEntityTarget(target);
 
@@ -1623,7 +1564,6 @@ upperdeck_crawler() {
   self.grenadeawareness = 0;
   self disable_surprise();
   self.a.pose = "prone";
-  //self.diequietly = true;
 
   self endon("death");
 
@@ -1663,8 +1603,6 @@ upperdeck_crawler() {
   level endon("friendly_fire_warning");
 
   flag_wait("stairs_upperdeck_civs_dead");
-
-  //self.diequietly = false;
 
   if(isDefined(self.script_parameters)) {
     actor = level.team[self.script_parameters];
@@ -1733,7 +1671,7 @@ upperdeck_runners_more(_flag) {
 }
 
 upperdeck_runners_setup() {
-  waittillframeend; // - > because civilian subclass script isn't finished running...which is weak - subclass scripts should run before any spawnfuncs do
+  waittillframeend;
   self.allowdeath = true;
   self.health = 1;
   self.interval = 0;
@@ -1859,7 +1797,7 @@ upperdeck_canned_deaths() {
   self thread upperdeck_canned_deaths_cleanup();
   self thread do_lobby_player_fire();
 
-  waittillframeend; // - > some of the following functions require a partner which might not be initilized yet
+  waittillframeend;
 
   switch (self.enode.animation) {
     case "airport_civ_dying_groupB_pull":
@@ -1901,19 +1839,17 @@ upperdeck_canned_deaths_groupB_pull() {
   self.deathanim = % airport_civ_dying_groupB_pull_death;
   mate.deathanim = % airport_civ_dying_groupB_wounded_death;
 
-  //kill the mate if self dies
   self add_wait(::waittill_msg, "death");
   mate add_abort(::waittill_msg, "death");
   mate add_func(::_kill);
   thread do_wait();
 
-  //kill self if mate dies
   mate add_wait(::waittill_msg, "death");
   self add_abort(::waittill_msg, "death");
   self add_func(::_kill);
   thread do_wait();
 
-  self upperdeck_canned_deaths_group(mate); // , "down" );
+  self upperdeck_canned_deaths_group(mate);
   self Kill();
 }
 
@@ -1971,13 +1907,11 @@ upperdeck_canned_deaths_cowercrouch() {
 }
 
 upperdeck_canned_deaths_group(mate, type) {
-  //set into first frame
   self thread upperdeck_canned_deaths_first_frame();
   mate upperdeck_canned_deaths_first_frame();
 
-  wait .05; // need to wait sometimes cause firstframe will be called after the wait function below returns( instant wait return )
+  wait .05;
 
-  //wait to animate
   killers = self upperdeck_canned_deaths_wait_animate();
   if(killers.size)
     array_thread(killers, ::upperdeck_canned_deaths_execute, self, type);
@@ -1988,7 +1922,6 @@ upperdeck_canned_deaths_group(mate, type) {
     self disable_ignorerandombulletdamage_drone();
   mate disable_ignorerandombulletdamage_drone();
 
-  //animate
   if(isDefined(self.script_soundalias))
     self delayThread(self.script_wait, ::play_sound_on_tag_endon_death, self.script_soundalias);
   if(mate.health > 0) {
@@ -2019,15 +1952,12 @@ set_skipdeathanim(value) {
 }
 
 upperdeck_canned_deaths_player() {
-  //set into first frame
   self upperdeck_canned_deaths_first_frame();
 
-  //wait to animate
   self add_wait(::upperdeck_canned_deaths_wait_player_close);
   self add_wait(::upperdeck_canned_deaths_wait_player_see);
   do_wait_any();
 
-  //animate
   self.enode anim_generic(self, self.enode.animation);
 
   self.skipDeathAnim = 1;
@@ -2037,10 +1967,8 @@ upperdeck_canned_deaths_player() {
 }
 
 upperdeck_canned_deaths_single(type) {
-  //set into first frame
   self upperdeck_canned_deaths_first_frame();
 
-  //wait to animate
   killers = self upperdeck_canned_deaths_wait_animate();
   if(killers.size)
     array_thread(killers, ::upperdeck_canned_deaths_execute, self, type);
@@ -2050,7 +1978,6 @@ upperdeck_canned_deaths_single(type) {
   else
     self disable_ignorerandombulletdamage_drone();
 
-  //animate
   if(isDefined(self.script_soundalias))
     self delayThread(self.script_wait, ::play_sound_on_tag_endon_death, self.script_soundalias);
   self.enode anim_generic(self, self.enode.animation);
@@ -2085,7 +2012,6 @@ upperdeck_canned_deaths_wait_animate() {
   flag_wait("upperdeck_flow1");
 
   while(actors.size) {
-    //the first guy in the list or the only guy is what we test against
     actor = actors[0];
     if(Distance(actor.origin, self.origin) < self.radius)
       return actors;
@@ -2201,13 +2127,12 @@ upperdeck_canned_deaths_execute(enemy, type) {
   if(enemy.health <= 0) {
     return;
   }
-  //set dont ever shoot at the right time if enemy is alive	
+
   self add_wait(::_wait, enemy.script_delay);
   enemy add_abort(::waittill_msg, "death");
   self add_func(::upperdeck_canned_deaths_execute_fire, enemy);
   thread do_wait();
 
-  //wait to start aiming
   self upperdeck_canned_deaths_execute_wait(enemy);
 
   self maps\_casual_killer::set_casual_killer_run_n_gun(type);
@@ -2220,8 +2145,7 @@ upperdeck_canned_deaths_execute(enemy, type) {
   self.upperdeck_enemies++;
 
   target = spawn("script_origin", enemy GetTagOrigin("tag_eye"));
-  //	target = spawn( "script_model", enemy GetTagOrigin( "tag_eye" ) );
-  //	target setModel( "weapon_us_smoke_grenade" );
+
   target.health = 100;
 
   self thread upperdeck_canned_deaths_execute_fake_target(enemy, target);
@@ -2262,7 +2186,7 @@ upperdeck_canned_deaths_execute_fake_target(enemy, target) {
     vec = vector_multiply(vec, 80);
 
     origin = (start + vec);
-    //target MoveTo( origin, .1 );
+
     target.origin = origin;
 
     wait .05;
@@ -2274,8 +2198,7 @@ upperdeck_canned_deaths_cleanup() {
 
   node = self.enode;
   self waittill("death");
-  if(isDefined(self)) // check for deletion not death
-  {
+  if(isDefined(self)) {
     self bodyshot("killshot");
     self playSound("generic_death_russian_" + RandomIntRange(1, 8));
   }
@@ -2299,11 +2222,6 @@ upperdeck_fakesound() {
   node Delete();
   self Delete();
 }
-
-/************************************************************************************************************/
-
-/*													MASSACRE												*/
-/************************************************************************************************************/
 
 massacre_rentacop_stop() {
   flag_set("massacre_rentacop_stop");
@@ -2385,7 +2303,7 @@ massacre_rentacop_rush_animate(guy, anime) {
       guy Kill();
       break;
     case "fem":
-      guy.deathanim = % run_death_roll; // exposed_death_falltoknees run_death_roll corner_standR_deathB
+      guy.deathanim = % run_death_roll;
       guy bodyshot("killshot");
       guy Kill();
       break;
@@ -2402,7 +2320,7 @@ massacre_rentacop_rush_animate(guy, anime) {
 massacre_rentacop_rush_guy() {
   self endon("death");
 
-  waittillframeend; // default civilian nonsense
+  waittillframeend;
 
   self.allowdeath = true;
   self.ignoreme = true;
@@ -2445,7 +2363,7 @@ massacre_rentacop_rush_guy() {
 massacre_rentacop_runaway_guy() {
   self endon("death");
 
-  waittillframeend; // default civilian nonsense
+  waittillframeend;
 
   self.ignoreme = true;
   self.health = 1;
@@ -2479,7 +2397,7 @@ massacre_rentacop_runaway_guy() {
 massacre_rentacop_row1_fighter() {
   self endon("death");
 
-  waittillframeend; // default civilian nonsense
+  waittillframeend;
 
   self.ignoreme = true;
   self.health = 1;
@@ -2510,8 +2428,6 @@ massacre_rentacop_row1_fighter() {
 
   level.makarov waittill("m79_shot2");
 
-  //	deathanim = "death_explosion_run_L_v1";
-  //	if( cointoss() )
   deathanim = "death_explosion_run_L_v2";
 
   node = spawnStruct();
@@ -2523,7 +2439,7 @@ massacre_rentacop_row1_fighter() {
 massacre_rentacop_row1_runner() {
   self endon("death");
 
-  waittillframeend; // default civilian nonsense
+  waittillframeend;
 
   self.IgnoreRandomBulletDamage = true;
   self.ignoreme = true;
@@ -2531,7 +2447,6 @@ massacre_rentacop_row1_runner() {
   self.allowdeath = 1;
   self.pathrandompercent = 0;
 
-  //node = getstruct( self.target, "targetname" );
   node = getstruct("massacre_rentacop_row1_defender_node", "targetname");
   self thread anim_generic_loop(self, "CornerCrR_alert_idle");
 
@@ -2545,7 +2460,7 @@ massacre_rentacop_row1_runner() {
   self forceUseWeapon(self.sidearm, "primary");
 
   flag_set("massacre_rentacop_row1_runner_go");
-  //node thread anim_generic( self, "airport_security_guard_4" );
+
   node thread anim_generic(self, "react_stand_2_run_180");
 
   node add_wait(::waittill_msg, "react_stand_2_run_180");
@@ -2569,7 +2484,7 @@ massacre_rentacop_row1_runner() {
 massacre_rentacop_row1_defender() {
   self endon("death");
 
-  waittillframeend; // default civilian nonsense
+  waittillframeend;
 
   self.ignoreme = true;
   self.health = 1;
@@ -2631,7 +2546,6 @@ massacre_rentacops_rambo() {
   self.ignoreme = true;
   self.health = 1;
 
-  //	self thread play_sound_on_tag_endon_death( "airport_rac_freeze" );
   anime = undefined;
 
   if(cointoss())
@@ -2651,7 +2565,6 @@ massacre_rentacops_rear() {
   self endon("death");
   self endon("long_death");
 
-  //self.health = 1;	
   self.goalradius = 8;
   self.accuracy = 1;
   self.baseaccuracy = 1;
@@ -2782,8 +2695,6 @@ massacre_rentacops_blindfire() {
     self notify("stop_loop");
 
     self StopAnimScripted();
-
-    //self thread spray_and_pray( 0, undefined, cointoss(), 75, 20 );
 
     self anim_generic(self, "covercrouch_blindfire_1");
 
@@ -3029,7 +2940,7 @@ massacre_elevator() {
   elevator.e["housing"]["mainframe"][0] playSound("elevator_shake_groan");
 
   wait .05;
-  //array_thread( level.players, ::playLocalSoundWrapper, "_juggernaut_attack" );
+
   exploder(1);
   struct = getstruct("elevator_pick", "targetname");
   array = getEntArray("elevator_casing_glass", "targetname");
@@ -3040,7 +2951,6 @@ massacre_elevator() {
   glass Delete();
 
   wait .5;
-  //elevator.e[ "housing" ][ "mainframe" ][ 0 ] playSound( "elavator_rumble" );
 
   velF = (0, 0, 1000);
   velR = (0, 0, -1000);
@@ -3063,7 +2973,7 @@ massacre_elevator() {
   wait 1;
   elevator.e["housing"]["mainframe"][0] playSound("elevator_crash");
   exploder(2);
-  //temp
+
   left_door Delete();
   right_door Delete();
   wait .5;
@@ -3190,24 +3100,20 @@ massacre_runners_m79_death() {
   dot = VectorDot(vec, anglesToForward(self.angles));
   dot2 = VectorDot(vec, AnglesToRight(self.angles));
   angles = (0, 0, 0);
-  //in front
+
   if(dot > .5) {
     deathanim = "death_explosion_run_B_v1";
     if(cointoss())
       deathanim = "death_explosion_run_B_v2";
 
     angles = (10, 0, 0);
-  }
-  //in back
-  else if(dot < -.5) {
+  } else if(dot < -.5) {
     deathanim = "death_explosion_run_F_v1";
     if(cointoss())
       deathanim = "death_explosion_run_F_v2";
 
     angles = (-10, 0, 0);
-  }
-  //to the right
-  else if(dot2 > .6) {
+  } else if(dot2 > .6) {
     deathanim = "death_explosion_run_L_v1";
     if(cointoss())
       deathanim = "death_explosion_run_L_v2";
@@ -3350,16 +3256,6 @@ massacre_team_dialogue() {
 
   flag_wait("massacre_rentacop_stop_dead");
   wait .75;
-  //Security detail up ahead!	
-  //level.team[ "shotgun" ] radio_dialogue( "airport_at1_security" );
-  //level.team[ "makarov" ] radio_dialogue( "airport_mkv_careofit" );
-
-  //flag_wait( "massacre_rentacops_rear_dead" );
-  //Movement at the elevators!
-  //level.team[ "makarov" ] radio_dialogue( "airport_mkv_elevators" );
-
-  //	flag_wait( "massacre_elevator_grenade_ready" );
-  //	radio_dialogue( "airport_mkv_fragout" );
 }
 
 massacre_node_flag(node) {
@@ -3527,7 +3423,6 @@ massacre_killers_m4() {
   wait 1;
 
   while(abs(self.angles[1] - node.angles[1]) > 5) {
-    //overzealous application ( because code/animscripts love to fuck with orientmode all the time and he may never turn to this angle )
     self OrientMode("face angle", node.angles[1]);
     wait .1;
   }
@@ -3555,7 +3450,7 @@ massacre_killers_saw(node) {
   wait .1;
 
   self.ignoreall = true;
-  //hack
+
   self ClearAnim(%run_n_gun, 0.2);
   self.runNGunAnims["F"] = % casual_killer_walk_shoot_F_aimdown;
   wait .5;
@@ -3755,7 +3650,6 @@ massacre_restaurant_destroy() {
   level.makarov waittill("m79_shot2");
   wait .05;
 
-  //poles
   poles = getEntArray("massacre_post_post_exp", "targetname");
   foreach(pole in poles) {
     pieces = getEntArray(pole.target, "targetname");
@@ -3773,13 +3667,11 @@ massacre_restaurant_destroy() {
 
     time = .1;
     pole RotatePitch(angle, time, 0, time);
-    //pole NotSolid(); // --> FIX ME I'M SLOW
   }
 
   pole = GetEnt("massacre_post_pre_exp", "targetname");
   pole Delete();
 
-  //glass
   vec = anglesToForward((0, 180, 0));
   vec = vec * 500;
   glass = GetGlassArray("massacre_glass_exp_1");
@@ -3789,7 +3681,6 @@ massacre_restaurant_destroy() {
   pole = GetEnt("massacre_post_top", "script_noteworthy");
   pole playSound("storefront_wood_break");
 
-  //sign
   sign = GetEnt("massacre_sign", "script_noteworthy");
   sign PhysicsLaunchClient(sign.origin + (0, 50, 5), (50, 500, -100));
 
@@ -3797,7 +3688,6 @@ massacre_restaurant_destroy() {
   roof playSound("storefront_wood_collapse");
   pole LinkTo(roof);
 
-  //angles = (-2.912, 2.421, -2.40804);
   angles = (357.694 - 360, 3.01101, -13.3077);
   time = .7;
 
@@ -3844,7 +3734,6 @@ massacre_killers_makarov(node) {
 
   wait 2.5;
 
-  //hack
   self.ignoreall = true;
   self.aim_anime = % casual_killer_walk_shoot_R;
   self.aim_weight = 1.0;
@@ -3901,10 +3790,8 @@ massacre_killers_makarov(node) {
 
   wait .25;
   self.moveplaybackrate = 1.35;
-  //self waittill( "casual_killer_walk_point" );
 
   self ent_flag_wait("massacre_node_end");
-  //self waittill( "reached_path_end" );
 
   flag_set("massacre_eleveator_should_come_up");
 }
@@ -4012,7 +3899,6 @@ aim_stop() {
   if(!isDefined(time))
     time = .25;
 
-  //self ClearAnim(%run_n_gun, 0.2 );	
   self SetAnimLimited(%casual_killer_walk_shoot_F, 1, time);
   self SetAnimLimited(anime, 0, time);
   self SetFlaggedAnimKnob("runanim", %run_n_gun, 1, time);
@@ -4047,12 +3933,11 @@ massacre_killers_attack_civs(node) {
   self.noreload = true;
   self.ignoreall = false;
 
-  waittillframeend; // because animscripts is going to set his angle on goal after this.
+  waittillframeend;
   animset_stand = anim.animsets.defaultStand;
   animset_crouch = anim.animsets.defaultCrouch;
 
   while(abs(self.angles[1] - node.angles[1]) > 5) {
-    //overzealous application ( because code/animscripts love to fuck with orientmode all the time and he may never turn to this angle )
     self OrientMode("face angle", 180);
     wait .1;
   }
@@ -4108,11 +3993,6 @@ massacre_lean_shoot_anims() {
   self animscripts\animset::init_animset_complete_custom_stand(animset);
   self animscripts\animset::init_animset_complete_custom_crouch(animset);
 }
-
-/************************************************************************************************************/
-
-/*													GATE													*/
-/************************************************************************************************************/
 
 gate_moveout(node) {
   self ent_flag_wait("gate_ready_to_go");
@@ -4239,8 +4119,6 @@ gate_moveout_makarov(node) {
 
   node waittill("trigger");
 
-  //node anim_generic_run( self, "casual_killer_walk_point" );
-
   self.moveplaybackrate = 1.2;
 
   flag_set("gate_heli_moveon");
@@ -4260,13 +4138,12 @@ gate_canned_deaths_execute(enemy, type) {
   if(enemy.health <= 0) {
     return;
   }
-  //set dont ever shoot at the right time if enemy is alive	
+
   self add_wait(::_wait, enemy.script_delay);
   enemy add_abort(::waittill_msg, "death");
   self add_func(::upperdeck_canned_deaths_execute_fire, enemy);
   thread do_wait();
 
-  //wait to start aiming
   self upperdeck_canned_deaths_execute_wait(enemy);
 
   self maps\_casual_killer::enable_casual_killer();
@@ -4279,8 +4156,7 @@ gate_canned_deaths_execute(enemy, type) {
   if(IsAI(enemy)) {
     target = spawn("script_origin", enemy.origin + (0, 0, 35));
     target.health = 100;
-    //target = spawn( "script_model", enemy GetTagOrigin( "j_ankle_ri" ) + (0,0,10) );
-    //target setModel( "weapon_us_smoke_grenade" );
+
     target LinkTo(enemy);
   }
 
@@ -4313,7 +4189,6 @@ gate_drs_ahead_test(node, dist) {
       return true;
   }
 
-  //ok guess he's not here yet	
   return false;
 }
 
@@ -4508,11 +4383,6 @@ gate_stairs_player_allow_sprint() {
   thread player_dynamic_move_speed();
 }
 
-/************************************************************************************************************/
-
-/*													BASEMENT												*/
-/************************************************************************************************************/
-
 basement_drop_chop_guys() {
   self endon("death");
 
@@ -4541,7 +4411,6 @@ basement_sec_runner() {
 }
 
 basement_door_kick(light, lightintensity) {
-  //2 guys down the stairs
   nodes = GetNodeArray("basement_moveup1", "targetname");
   light SetLightIntensity(lightintensity);
   animnode = undefined;
@@ -4609,7 +4478,6 @@ basement_moveup() {
   foreach(member in level.team)
   member enable_cqbwalk();
 
-  //4 to beginning of hallway
   nodes = GetNodeArray("basement_moveup2", "targetname");
   foreach(node in nodes) {
     name = node.script_noteworthy;
@@ -4637,11 +4505,6 @@ basement_flicker_light() {
     wait .1;
   }
 }
-
-/************************************************************************************************************/
-
-/*													TARMAC													*/
-/************************************************************************************************************/
 
 tarmac_difficulty_mod() {
   if(isDefined(self.script_drone)) {
@@ -4786,7 +4649,6 @@ tarmac_riotshield_group_last_stand() {
   actors = array_combine(actors, get_living_ai_array("riotshield_group_2", "script_noteworthy"));
   actors = array_combine(actors, get_living_ai_array("riotshield_group_3", "script_noteworthy"));
 
-  //nodes from left to right
   nodes = [];
   nodes["weak"] = getstruct("tarmac_riotshield_van2_retreat1", "targetname");
   nodes["center"] = getstruct("tarmac_riotshield_consolodate_node", "targetname");
@@ -4798,7 +4660,6 @@ tarmac_riotshield_group_last_stand() {
 
   actors = array_removeDead(actors);
 
-  //nodes from right to left
   nodes = [];
   nodes["weak"] = getstruct("tarmac_riotshield_last_stand_right", "targetname");
   nodes["center"] = getstruct("tarmac_riotshield_last_stand_center", "targetname");
@@ -4824,7 +4685,7 @@ tarmac_riotshield_group_last_stand_proc(actors, nodes) {
   newarray = [];
   foreach(member in actors) {
     if(member.combatMode != "no_cover")
-      continue; // means they lost their shield or were never a riotshield guy
+      continue;
     newarray[newarray.size] = member;
   }
 
@@ -4839,8 +4700,8 @@ tarmac_riotshield_group_last_stand_proc(actors, nodes) {
     case 4:
       teams["center"] = actors;
       break;
-    case 5: // 0 3 2
-    case 6: // 0 3 3
+    case 5:
+    case 6:
       teams["center"] = get_array_of_farthest(nodes["strong"].origin, actors, undefined, 3);
       teams["strong"] = array_remove_array(actors, teams["center"]);
       break;
@@ -4905,9 +4766,8 @@ tarmac_move_through_smoke() {
     node = getstruct(self.target, "targetname");
 
   goal_type = undefined;
-  //only nodes and structs dont have classnames - ents do
+
   if(!isDefined(node.classname)) {
-    //only structs don't have types, nodes do
     if(!isDefined(node.type))
       goal_type = "struct";
     else
@@ -4917,7 +4777,6 @@ tarmac_move_through_smoke() {
 
   require_player_dist = 300;
 
-  //calling this because i DO want the radius to explode	
   self thread maps\_spawner::go_to_node(node, goal_type, undefined, require_player_dist);
 
   wait 1;
@@ -4931,10 +4790,9 @@ tarmac_enemies_wave1() {
   self.targetname = "tarmac_enemies_wave1";
   thread enable_teamflashbangImmunity();
   self enable_teamflashbangImmunity();
-  //self AddAIEventListener( "grenade danger" );
 
   self add_wait(::waittill_msg, "damage");
-  //self add_wait( ::_waittillmatch, "ai_event", "grenade danger" );
+
   self add_wait(::waittill_msg, "bullet_hitshield");
   level add_wait(::flag_wait, "tarmac_open_fire");
   do_wait_any();
@@ -4948,7 +4806,7 @@ tarmac_enemies_wave1() {
   if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "riotshield_group"))
     self.goalradius = 1500;
   else
-    return; // dont want riotshield guys going blue just yet
+    return;
 
   trigger_wait_targetname("tarmac_retreat1");
   self set_force_color("blue");
@@ -4998,8 +4856,7 @@ tarmac_riotshield_group(name) {
       break;
   }
 
-  wait 10; // wait for certain time before even thinking of retreating.
-  //iprintlnbold( "retreat" );
+  wait 10;
 
   flag_wait("tarmac_retreat1");
 
@@ -5140,7 +4997,6 @@ tarmac_enemies_2ndfloor() {
   self SetThreatBiasGroup("2ndfloorenemies");
 
   self disable_surprise();
-  //	self.disableBulletWhizbyReaction = true;
 
   self waittill("goal");
 
@@ -5149,7 +5005,7 @@ tarmac_enemies_2ndfloor() {
   node = GetNode(self.target, "targetname");
 
   if(isDefined(node.script_noteworthy) && node.script_noteworthy == "flash_throw") {
-    waittillframeend; // so that the large goal radius will be set
+    waittillframeend;
     self.goalradius = 8;
     self.ignoreall = true;
 
@@ -5167,11 +5023,6 @@ tarmac_enemies_2ndfloor() {
 
   flag_wait_either("tarmac_advance6", "tarmac_2ndfloor_move_back");
 
-  /*	
-  	node = GetNode( "floor2_node2", "targetname" );
-  	self.radius = node.radius;
-  	self SetGoalNode( node );
-  */
   self.ignoreall = true;
   self.ignoreme = true;
 
@@ -5219,11 +5070,6 @@ tarmac_van_fake(value) {
   model Delete();
 }
 
-/************************************************************************************************************/
-
-/*											TARMAC OUTTER EDGE												*/
-/************************************************************************************************************/
-
 tarmac_security_backup() {
   self waittill("drone_spawned", guy);
   guy waittill("death");
@@ -5250,8 +5096,6 @@ tarmac_security() {
   self add_func(::flag_set, "tarmac_killed_security");
   thread do_wait();
 
-  //self.target_obj = spawnStruct();
-  //self.target_obj.origin = ( 512, 2592, -32 );
   self.target_obj = level.player;
 
   self.ref = spawn("script_origin", self.origin);
@@ -5305,11 +5149,9 @@ tarmac_sec_node_behavior_loop() {
   name = "walk";
 
   while(1) {
-    //if the next node is stand - move there first with the last movement type
     if(node.script_noteworthy == "stand")
       tarmac_sec_do_this_node(node, name);
 
-    //otherwise do movement code to the next node
     name = node.script_noteworthy;
     tarmac_sec_do_this_node(node, name);
 
@@ -5344,7 +5186,6 @@ tarmac_sec_node_stand_idle() {
   self StopAnimScripted();
 
   self SetFlaggedAnimKnobAllRestart("drone_anim", %pistol_stand_aim_5, %body, 1, 0.2, 1);
-  //	self.ref thread anim_generic_loop( self, "pistol_stand_aim_5" );
 }
 
 tarmac_sec_node_stand_update() {
@@ -5359,16 +5200,15 @@ tarmac_sec_node_logic_walk(node) {
   vec2 = AnglesToRight(VectorToAngles(vec1));
   vec3 = (node.origin - self.origin);
 
-  //front
   if(VectorDot(vec1, vec3) > .4)
     self.run_anim = "pistol_walk";
-  //right
+
   else if(VectorDot(vec2, vec3) >= .6)
     self.run_anim = "pistol_walk_left";
-  //left
+
   else if(VectorDot(vec2, vec3) <= .6)
     self.run_anim = "pistol_walk_right";
-  //back
+
   else
     self.run_anim = "pistol_walk_back";
 
@@ -5383,8 +5223,6 @@ tarmac_sec_node_logic_run(node) {
 
   self tarmac_sec_node_do_movement(node);
 }
-
-//do movement code
 tarmac_sec_node_do_movement(node) {
   self thread tarmac_sec_run_cycle(node);
 
@@ -5393,8 +5231,6 @@ tarmac_sec_node_do_movement(node) {
   self ClearAnim(%body, 0.2);
   self StopAnimScripted();
 }
-
-//play proper animations at proper angles
 tarmac_sec_run_cycle(node) {
   self endon("death");
   self endon("goal");
@@ -5439,8 +5275,6 @@ tarmac_sec_find_move_angles(node) {
   }
   return angles;
 }
-
-//wait till goal
 tarmac_sec_node_goal(node) {
   self ent_flag_set("moving");
   while(DistanceSquared(self.origin, node.origin) > squared(self.radius))
@@ -5448,16 +5282,10 @@ tarmac_sec_node_goal(node) {
   self ent_flag_clear("moving");
   self notify("goal");
 }
-
-//run the proper logic on this node
 tarmac_sec_do_this_node(node, name) {
-  //self thread tarmac_sec_debug_node( node );
-
   func = self.tarmac_sec_node_funcs[name];
   self[[func]](node);
 }
-
-//debug lines
 tarmac_sec_debug_node(node) {
   self notify("debug_goal");
   thread draw_line_from_ent_to_ent_until_notify(self, node, 1, 1, 1, self, "debug_goal");
@@ -5527,10 +5355,9 @@ tarmac_police_fire() {
 }
 
 fake_fire() {
-  if(IsAI(self)) // regular AI
+  if(IsAI(self))
     self Shoot();
-  else // DRONE
-  {
+  else {
     fireAnim = % pistol_stand_fire_A;
     self SetAnimKnobRestart(fireAnim, 1, .2, 1.0);
     self delayCall(.25, ::clearAnim, fireAnim, 0);
@@ -5556,7 +5383,7 @@ tarmac_handle_player_too_far() {
 
     flag_set("tarmac_too_far");
     oldstring = level.fail_string;
-    // The police barricade has too much fire power to confront.
+
     level.fail_string = &"AIRPORT_FAIL_POLICE_BARRICADE";
     thread tarmac_handle_player_too_far_death();
 
@@ -5577,11 +5404,6 @@ tarmac_handle_player_too_far_death() {
   setDvar("ui_deadquote", level.fail_string);
   missionFailedWrapper();
 }
-
-/************************************************************************************************************/
-
-/*										TARMAC FRIENDLY LOGIC												*/
-/************************************************************************************************************/
 
 tarmac_moveout(node) {
   self endon("death");
@@ -5795,11 +5617,6 @@ tarmac_get_enemies() {
   return ai;
 }
 
-/************************************************************************************************************/
-
-/*											TARMAC VAN LOGIC												*/
-/************************************************************************************************************/
-
 tarmac_van_setup(name) {
   van_hack = GetEnt(name, "targetname");
 
@@ -5929,7 +5746,7 @@ tarmac_van_unload_guy(index, seat) {
 
   guy waittill("single anim");
   guy.moveplaybackrate = 1;
-  //guy Unlink();
+
   movenode Delete();
 
   guy notify("hack_unloaded");
@@ -6059,11 +5876,9 @@ tarmac_bcs_enemy() {
       continue;
     }
     if(!isDefined(other)) {
-      //	AssertMsg( "*** COME GRAB MO RIGHT NOW *** other should be defined from a BCS trigger set to only trigger from AI." );
       continue;
     }
     if(!isDefined(other.origin)) {
-      //	AssertMsg( "*** COME GRAB MO RIGHT NOW *** other.origin should be defined from a BCS trigger set to only trigger from AI." );
       continue;
     }
 
@@ -6087,11 +5902,6 @@ tarmac_bcs_enemy() {
     wait 15;
   }
 }
-
-/************************************************************************************************************/
-
-/*													ESCAPE													*/
-/************************************************************************************************************/
 
 escape_van_driver() {
   self.nounload = true;
@@ -6165,7 +5975,6 @@ escape_relax() {
 }
 
 escape_setup_variables() {
-  //NORMAL DYNAMIC RUN SPEED	
   level.scr_anim["generic"]["DRS_sprint"] = % heat_run_loop;
   level.scr_anim["generic"]["DRS_combat_jog"] = % combat_jog;
   level.scr_anim["generic"]["DRS_run_2_stop"] = % run_2_stand_F_6;
@@ -6214,24 +6023,10 @@ escape_create_survivors() {
 }
 
 escape_player_disable_jump_n_weapon() {
-  /*	level endon( "escape_player_is_in" );
-  	while( 1 )
-  	{
-  		self waittill( "trigger" );*/
-
-  //	flag_wait( "" );
-
   level.player AllowJump(false);
   weapon = level.player get_correct_weapon();
   store_current_weapon(weapon);
   level.player enablePlayerWeapons(false);
-
-  /*	while( level.player IsTouching( self ) )
-  		wait .05;
-
-  	level.player AllowJump( true );
-  	level.player enablePlayerWeapons( true );
-  }*/
 }
 
 store_current_weapon(weapon) {
@@ -6295,7 +6090,6 @@ grab_player_if_he_gets_close() {
   flag_set("player_ready_for_proper_ending");
   flag_clear("player_dynamic_move_speed");
   thread player_loses_speed();
-  //	level.player FreezeControls( true );
 }
 
 player_loses_speed() {
@@ -6324,7 +6118,6 @@ escape_animate_player_death() {
   level.player FreezeControls(true);
   van = level.escape_van_dummy;
 
-  // this is the model the player will attach to for the ride sequence
   model = spawn_anim_model("player_ending");
   model Hide();
   level.playermodel = model;
@@ -6333,7 +6126,6 @@ escape_animate_player_death() {
 
   time = 0.5;
   level.player PlayerLinkToBlend(model, "tag_player", time, time * .5, time * .5);;
-  //	wait time;
 
   model delaycall(0.5, ::Show);
   model NotSolid();
@@ -6354,7 +6146,6 @@ escape_mak_dialogue() {
   self waittillmatch("single anim", "dialog");
   self playSound("airport_mkv_nomessage");
   self waittillmatch("single anim", "dialog");
-  //self playSound( "airport_mkv_thiswill" );
 }
 
 makarov_shoot_player() {
@@ -6382,7 +6173,6 @@ escape_animate_player_death2() {
   van thread anim_single(team, "end_player_shot", "origin_animate_jnt");
   level.makarov StopAnimScripted();
   level.makarov AnimCustom(::makarov_shoot_player);
-  //van thread anim_single_solo( level.makarov, "end_alt" );
 
   flag_wait("escape_player_shot");
 
@@ -6398,7 +6188,6 @@ escape_animate_player_death2() {
   node = spawn("script_origin", origin);
   node.angles = level.player.angles;
 
-  // this is the model the player will attach to for the ride sequence
   model = spawn_anim_model("player_ending");
   level.playermodel = model;
   model LinkTo(node);
@@ -6423,7 +6212,7 @@ escape_draw_blood() {
   level.player SetContents(0);
 
   wait 1;
-  tagPos = self GetTagOrigin("tag_torso"); // rough tag to play fx on
+  tagPos = self GetTagOrigin("tag_torso");
 
   model = spawn("script_model", tagPos + (-15, 10, -7.5));
   model.angles = (-90, 225 - 90, 0);
@@ -6521,11 +6310,6 @@ escape_police_car_guys() {
   self Delete();
 }
 
-/************************************************************************************************************/
-
-/*												INITIALIZATIONS												*/
-/************************************************************************************************************/
-
 player_init() {
   blend_movespeedscale_custom(15);
   level.player AllowSprint(false);
@@ -6569,11 +6353,6 @@ team_init() {
 
   level.team = array_removeDead_keepkeys(level.team);
 }
-
-/************************************************************************************************************/
-
-/*											DEPARTURES SIGN													*/
-/************************************************************************************************************/
 
 sign_departure_status_init() {
   array = sign_departure_status_system_setup();
@@ -6661,13 +6440,12 @@ sign_departure_status_flip_to(state) {
     bottomtab = self.tabs[bottomname];
     newtab = self.tabs[newname];
 
-    //move top to bottom position
     toptab RotatePitch(180, time);
     newtab.angles = self.status["angles"]["top"];
-    //bring new to top position
+
     wait .05;
     newtab Show();
-    //bring bottom to wait position
+
     wait(time - .1);
     bottomtab Hide();
     bottomtab.angles = self.status["angles"]["waiting"];
@@ -6676,15 +6454,10 @@ sign_departure_status_flip_to(state) {
   }
 }
 
-/************************************************************************************************************/
-
-/*													MISC													*/
-/************************************************************************************************************/
-
 delete_glass() {
   name = self.target;
   glass = GetGlass(name);
-  level waittillmatch("glass_destroyed", glass); // glass_destroyed
+  level waittillmatch("glass_destroyed", glass);
 
   self Delete();
 }
@@ -6741,7 +6514,7 @@ bodyshot(fx) {
 
 scream_track(node, alias, speed) {
   obj = spawn("script_origin", node.origin);
-  //obj setModel( "projectile_us_smoke_grenade" );
+
   obj playSound(alias);
 
   while(isDefined(node.target)) {
@@ -6861,8 +6634,7 @@ spray_and_pray_get_target_node(delay, speed_scaler, node) {
   array["node"] = node;
 
   array["target"] = spawn("script_origin", node.origin);
-  //	array[ "target" ] = spawn( "script_model", node.origin );
-  //	array[ "target" ] setModel( "weapon_us_smoke_grenade" );
+
   return array;
 }
 
@@ -6898,8 +6670,7 @@ spray_and_pray_get_target(delay, speed_scaler, forward, height, angle, dist) {
     array["node_origin"] = array["start_origin"];
 
   array["target"] = spawn("script_origin", origin);
-  //	array[ "target" ] = spawn( "script_model", origin );
-  //	array[ "target" ] setModel( "weapon_us_smoke_grenade" );
+
   return array;
 }
 
@@ -7111,17 +6882,11 @@ disable_calm_combat() {
   self.no_pistol_switch = undefined;;
 }
 
-/************************************************************************************************************/
-
-/*											FRIENDLY FIRE													*/
-/************************************************************************************************************/
-
 friendly_fire() {
   level.player endon("death");
 
-  // You blew your cover... don't fire on Makarov's squad.
   PreCacheString(&"AIRPORT_FAIL_BLEW_COVER_FIRE");
-  // You blew your cover... Convince Makarov you're loyal to the cause.
+
   PreCacheString(&"AIRPORT_FAIL_BLEW_COVER_WANDER");
 
   level.friendly_fire_aggressive_num = 0;
@@ -7152,21 +6917,20 @@ friendly_fire() {
 
   if(is_default_start()) {
     wait 41 - CONST_FF_FIRE_TIME;
-    //level.player thread friendly_fire_notpartofteam();
+
     level.player thread friendly_fire_nade_throw();
     add_wait(::flag_wait, "lobby_open_fire");
     level.player add_func(::friendly_fire_wander_away);
     thread do_wait();
   } else {
     wait .05;
-    //level.player thread friendly_fire_notpartofteam();
+
     level.player thread friendly_fire_wander_away();
     level.player thread friendly_fire_nade_throw();
   }
 
   flag_wait("friendly_fire_warning");
 
-  // You blew your cover... don't fire on Makarov's squad.
   if(!isDefined(level.fail_string))
     level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
 
@@ -7238,7 +7002,6 @@ friendly_fire_wander_away() {
       level.ff_data["no_dist_line_num"] = 2;
   }
 
-  // You blew your cover... Convince Makarov you're loyal to the cause.
   level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
@@ -7291,7 +7054,6 @@ friendly_fire_notpartofteam() {
     }
   }
 
-  // You blew your cover... Convince Makarov you're loyal to the cause.
   level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
@@ -7299,7 +7061,7 @@ friendly_fire_notpartofteam() {
 friendly_fire_is_attacking_check(_flag) {
   self endon("death");
   level endon("friendly_fire_warning");
-  //	"+melee"//	"+melee_breath"//	"-smoke"//	"+smoke"NotifyOnCommand("attack", "+frag");
+
   NotifyOnCommand("attack", "+attack");
 
   while(1) {
@@ -7365,7 +7127,7 @@ friendly_fire_watch_player_nade() {
       continue;
     }
     flag_set("friendly_fire_warning");
-    // You blew your cover... don't fire on Makarov's squad.
+
     level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
@@ -7389,7 +7151,7 @@ friendly_fire_watch_player_flash() {
     }
     friendly_fire_handle_aggrissive_num();
     if(flag("friendly_fire_warning"))
-      // You blew your cover... don't fire on Makarov's squad.
+
       level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
@@ -7408,7 +7170,7 @@ friendly_fire_watch_player_fire() {
     friendly_fire_handle_aggrissive_num();
 
     if(flag("friendly_fire_warning"))
-      // You blew your cover... don't fire on Makarov's squad.
+
       level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
   }
 }
@@ -7562,11 +7324,6 @@ friendly_fire_update_team_origin() {
   }
 }
 
-/************************************************************************************************************/
-
-/*												VISION SETS													*/
-/************************************************************************************************************/
-
 airport_vision_elevator() {
   node = spawn("script_origin", level.player.origin);
   angles = level.player.angles;
@@ -7706,7 +7463,7 @@ airport_vision_exterior(dontwait) {
     flag_wait("tarmac_hear_fsb");
 
   time = 12;
-  //	maps\_utility::set_vision_set( "airport_exterior", time );
+
   SetExpFog(619.914, 3914.89, 0.584314, 0.623529, 0.635294, 0.710723, time);
 }
 
@@ -7736,11 +7493,6 @@ airport_vision_makarov(dontwait) {
   maps\_utility::set_vision_set("airport_intro", time);
 }
 
-/************************************************************************************************************/
-
-/*												JET ENGINES													*/
-/************************************************************************************************************/
-
 jet_engine() {
   self endon("death");
 
@@ -7757,7 +7509,6 @@ jet_engine() {
 
     self jet_engine_state_check();
 
-    //this makes sure we take only one damage amount every server frame
     wait .05;
   }
 }
@@ -7814,8 +7565,8 @@ jet_engine_do_state() {
     case "death":
       self jet_engine_fx_explode();
       range = 300;
-      RadiusDamage(self.fx.origin + (0, 0, -40), range, 300, 20, self.des); // similar to destructibles
-      PhysicsExplosionSphere(self.fx.origin, range, 0, range * .01); // similar to destructibles
+      RadiusDamage(self.fx.origin + (0, 0, -40), range, 300, 20, self.des);
+      PhysicsExplosionSphere(self.fx.origin, range, 0, range * .01);
       self StopLoopSound();
       self StopSounds();
       self playSound("dst_jet_engine_explosion");
@@ -7941,7 +7692,7 @@ jet_engine_suck_debris_final(engine) {
 jet_engine_health_drain() {
   self endon("death");
 
-  dmg = Int(self.script_health / 60); // this will make it blow up in 60 seconds
+  dmg = Int(self.script_health / 60);
 
   while(1) {
     self notify("damage", dmg);
@@ -7973,7 +7724,6 @@ jet_engine_setup() {
 
   self.state = "new";
 
-  //setup the parts
   self.new = GetEnt(self.target, "targetname");
   self.new setCanDamage(true);
 
@@ -7989,7 +7739,6 @@ jet_engine_setup() {
 }
 
 jet_engine_death_print() {
-  // You were killed by an exploding jet engine.\nJet engines on fire are likely to explode.
   PreCacheString(&"AIRPORT_EXPLODING_JET_ENGINE_DEATH");
   PreCacheShader("hud_burningjetengineicon");
 
@@ -8085,16 +7834,14 @@ glass_elevator_cable() {
   moveTime = dist / speed;
 
   while(1) {
-    //start at the top
-    //moving down
     elevator waittill("elevator_moving");
     elevator elevator_animated_down(cable, housing, moveTime);
-    //stopped	
+
     elevator waittill("elevator_moved");
-    //moving back up
+
     elevator waittill("elevator_moving");
     elevator elevator_animated_up(cable, housing, moveTime);
-    //stopped	
+
     elevator waittill("elevator_moved");
   }
 }
@@ -8187,8 +7934,7 @@ GrenadeDangerbsc() {
     if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
       continue;
     }
-    if(Distance(grenade.origin, level.player.origin) < 512) // grenade radius is 220
-    {
+    if(Distance(grenade.origin, level.player.origin) < 512) {
       flag_set("bsc_nade");
 
       guy = level.makarov;
@@ -8227,13 +7973,11 @@ should_break_m203_hint(nothing) {
   player = get_player_from_self();
   Assert(isPlayer(player));
 
-  // am I using my m203 weapon?
   weapon = player GetCurrentWeapon();
   prefix = GetSubStr(weapon, 0, 4);
   if(prefix == "m203")
     return true;
 
-  // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     ammo = player GetWeaponAmmoClip(weapon);

@@ -7,7 +7,6 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 main(model, type) {
-  //SNDFILE=vehicle_coupe_car
   build_template("policecar", model, type);
   build_localinit(::init_local);
 
@@ -27,22 +26,7 @@ main(model, type) {
 }
 
 init_local() {}
-
-//MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 set_vehicle_anims(positions) {
-  //
-  //tag_driver
-  //tag_passenger
-  //tag_guy0(behind driver)
-  //tag_guy1(behind passenger)	
-
-  //positions[ 0 ].sittag = "tag_driver";
-  //positions[ 1 ].sittag = "tag_passenger";
-  //positions[ 2 ].sittag = "tag_guy0"; //driver_side_rear
-  //positions[ 3 ].sittag = "tag_guy1";//passenger_side_rear
-  //positions[ 4 ].sittag = "tag_guy2"; //driver_far_rear
-  //positions[ 5 ].sittag = "tag_guy3";//passenger_side_far_rear
-
   positions[0].vehicle_getoutanim = % uaz_driver_exit_into_stand_door;
   positions[1].vehicle_getoutanim = % uaz_passenger_exit_into_stand_door;
   positions[2].vehicle_getoutanim = % uaz_rear_driver_exit_into_stand_door;
@@ -63,16 +47,10 @@ set_vehicle_anims(positions) {
   positions[2].vehicle_getinsound = "truck_door_open";
   positions[3].vehicle_getinsound = "truck_door_open";
 
-  //		positions[ 0 ].vehicle_getinsoundtag = "TAG_DOOR_LEFT_FRONT";
-  //		positions[ 1 ].vehicle_getinsoundtag = "TAG_DOOR_RIGHT_FRONT";
-  //		positions[ 2 ].vehicle_getinsoundtag = "TAG_DOOR_LEFT_BACK";
-  //		positions[ 3 ].vehicle_getinsoundtag = "TAG_DOOR_RIGHT_BACK";
-
   return positions;
 }
 
 #using_animtree("generic_human");
-//MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 setanims() {
   positions = [];
   for(i = 0; i < 6; i++)
@@ -80,17 +58,13 @@ setanims() {
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
-  positions[2].sittag = "tag_guy0"; // driver_side_rear
-  positions[3].sittag = "tag_guy1"; // passenger_side_rear
-  //	positions[ 4 ].sittag = "tag_guy2";// driver_far_rear
-  //	positions[ 5 ].sittag = "tag_guy3";// passenger_side_far_rear
+  positions[2].sittag = "tag_guy0";
+  positions[3].sittag = "tag_guy1";
 
   positions[0].idle = % uaz_driver_idle_drive;
   positions[1].idle = % uaz_passenger_idle_drive;
   positions[2].idle = % uaz_rear_driver_idle;
   positions[3].idle = % uaz_passenger2_idle;
-  //	positions[ 4 ].idle = %uaz_rear_driver_idle;
-  //	positions[ 5 ].idle = %uaz_passenger2_idle;
 
   positions[0].getout = % uaz_driver_exit_into_stand;
   positions[1].getout = % uaz_passenger_exit_into_stand;
@@ -104,28 +78,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_policecar_lapd (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_policecar::main( "vehicle_policecar_lapd_destructible" );
-
-and these lines in your CSV:
-#include,vehicle_policecar_lapd
-sound,vehicle_policecar_lapd,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_policecar_lapd_destructible"default:"vehicletype" "policecar"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_policecar_russia (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_policecar::main( "vehicle_policecar_russia_destructible" );
-
-and these lines in your CSV:
-#include,vehicle_policecar_russia
-sound,vehicle_policecar_lapd,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_policecar_russia_destructible"default:"vehicletype" "policecar"default:"script_team" "axis"
-*/

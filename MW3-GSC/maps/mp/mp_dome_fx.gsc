@@ -1,5 +1,4 @@
 main() {
-  //ambient fx
   level._effect["sand_storm_light_outside"] = loadfx("weather/sand_storm_mp_dome_exterior");
   level._effect["sand_storm_light_inside"] = loadfx("weather/sand_storm_mp_dome_interior");
   level._effect["sand_storm_light_inside_outdoor_only"] = loadfx("weather/sand_storm_mp_dome_interior_outdoor_only");

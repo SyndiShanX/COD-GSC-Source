@@ -7,7 +7,6 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 main(model, type) {
-  //SNDFILE=vehicle_coupe_car
   build_template("coupe", model, type);
   build_localinit(::init_local);
 
@@ -57,28 +56,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_coupe_gray (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_coupe::main( "vehicle_coupe_gray_destructible" );
-
-and these lines in your CSV:
-#include,vehicle_coupe_gray
-sound,vehicle_coupe,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_coupe_gray_destructible"default:"vehicletype" "coupe"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_coupe_gold (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_coupe::main( "vehicle_coupe_gold_destructible" );
-
-and these lines in your CSV:
-#include,vehicle_coupe_gold
-sound,vehicle_coupe,vehicle_standard,all_sp
-sound,vehicle_car_exp,vehicle_standard,all_sp
-
-defaultmdl="vehicle_coupe_gold_destructible"default:"vehicletype" "coupe"default:"script_team" "allies"
-*/

@@ -6,8 +6,6 @@
 main() {
   level.tweakfile = false;
 
-  //* Fog and vision section *
-
   setDevDvar("scr_fog_disable", "0");
 
   ent = maps\_utility::create_vision_set_fog("dcburning_crash");

@@ -8,7 +8,6 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 
-/**** ride stuff****/
 ride_uaz_mount() {
   flag_wait("wait_for_player");
 
@@ -29,7 +28,6 @@ uaz_control() {
 
   flag_wait("uaz_mounted");
 
-  // make invulnerable while doing mount animation.
   level.player EnableInvulnerability();
 
   level.player allowProne(false);
@@ -51,7 +49,6 @@ uaz_control() {
 
   self waittill("boneyard_uaz_mount");
 
-  // once mounted make vulnerable again.
   level.player DisableInvulnerability();
 
   self thread player_rig_adjust_height();
@@ -135,7 +132,6 @@ uaz_steer() {
 
   lookahead = 200;
 
-  //calculate initial goal_offset
   angle1 = vectortoangles(level.c130.origin - self.origin)[1];
   angle2 = self.angles[1];
   angle = angle1 - angle2;
@@ -145,41 +141,36 @@ uaz_steer() {
 
   angles_ent = spawn("script_origin", (0, 0, 0));
   goal_offset = 0;
-  input_multiplier = 5; //5
+  input_multiplier = 5;
 
   goal_offset_range = 3;
 
-  // used to make the player slide off the road
   off_road_offset = 544;
 
   start_time = gettime();
   blend_in_control_time = 1.5;
-  blend_in_control_time *= 1000; // convert to milliseconds
+  blend_in_control_time *= 1000;
 
   blend_out_control_time = 2.0;
-  blend_out_control_time *= 1000; // convert to milliseconds
+  blend_out_control_time *= 1000;
 
   left_dot_limit = 0.78;
   right_dot_limit = 0.78;
 
-  speed = 50; //35
+  speed = 50;
   goal_speed = 95;
-  time = 8.0; //9.5
+  time = 8.0;
   full_accel = (goal_speed - speed) / (time * 20);
   slow_accel = full_accel * 0.5;
   full_accel *= 4;
   accel = slow_accel;
 
   while(true) {
-    // -1 to 1 for left/right
     input = level.player GetNormalizedMovement()[1];
-    input *= -1; // swap it for the direction we're going in
+    input *= -1;
     goal_offset += input * input_multiplier;
     goal_offset = clamp(goal_offset, goal_offset_range * -1, goal_offset_range);
 
-    // ============================================================================================	
-    // This section overrides the player's steering if he steers too hard left or right
-    // ============================================================================================	
     angles_runway = vectortoangles((0, 100, 0));
     forward_runway = anglesToForward(angles_runway);
 
@@ -188,21 +179,16 @@ uaz_steer() {
 
     my_right = anglestoright(self.angles);
 
-    // turning too hard?
     if(vectordot(my_right, forward_runway) > 0) {
       if(dot < left_dot_limit) {
-        // if you turn left too far, start turning right
         goal_offset = goal_offset_range * -1;
       }
     } else {
       if(dot < right_dot_limit) {
-        // if you turn right too far, start turning left
         goal_offset = goal_offset_range;
       }
     }
-    // ============================================================================================	
 
-    // use a reference ent so we can easily add angles to it
     angles_ent.angles = (0, self.angles[1], 0);
     angles_ent addyaw(goal_offset);
     forward = anglesToForward(angles_ent.angles);
@@ -212,48 +198,31 @@ uaz_steer() {
       goal = level.c130.ramp_trigger.origin;
     }
 
-    // ============================================================================================	
-    // This section blends the goalpos of the UAZ at the start and end of the ride
-    // ============================================================================================	
-
-    // find the spot the uaz should drive to if it were driving straight towards
-    // the c130.
     if(flag("player_loses_control_of_uaz")) {
-      // once the player loses control, blend out control of the uaz
       difference = gettime() - level.control_loss_time;
       difference /= blend_out_control_time;
       difference = clamp(difference, 0, 1);
 
-      //Line( goal, level.c130.ramp_trigger.origin, (1,0,0) );
-
-      // merge in our desired direction and merge out the ideal goal.
       goal = level.c130.ramp_trigger.origin * difference + goal * (1 - difference);
     } else {
       angles_to_c130 = vectortoangles((level.c130.origin + (off_road_offset, 0, 0)) - self.origin);
       forward_to_c130 = anglesToForward(angles_to_c130);
       straight_to_c130_goal = self.origin + forward_to_c130 * lookahead;
 
-      // blend in control over time, so we dont oversteer early on, // we blend a value from 0 to 1 over blend_in_control_time seconds.
       difference = gettime() - start_time;
       difference /= blend_in_control_time;
       difference = clamp(difference, 0, 1);
 
-      // merge in our desired direction and merge out the ideal goal.
       goal = goal * difference + straight_to_c130_goal * (1 - difference);
     }
-    // ============================================================================================	
-
-    //		Line( goal, level.c130.ramp_trigger.origin, (1,0,0) );
 
     if(speed >= 60)
       accel = full_accel;
-    // calculate the speed
+
     speed += accel;
     speed = clamp(speed, 0, goal_speed);
 
-    // drive
     self vehicleDriveTo(goal, speed);
-    //line( self.origin, goal );
 
     wait 0.05;
   }
@@ -268,9 +237,6 @@ modulate_uaz_crashability() {
   self VehPhys_DisableCrashing();
 
   for(;;) {
-    // after 2 seconds, you can only only crash if you're off the road
-    // this is cause if you get side swiped you crash in a really
-    // weird way that is hard to comprehend
     if(abs(level.uaz.origin[0] - level.c130.origin[0]) > 450) {
       self VehPhys_EnableCrashing();
     } else {
@@ -291,7 +257,7 @@ uaz_steer_viewmodel() {
     input += (self Vehicle_GetSteering() * 0.25);
     input = clamp(input, -1, 1);
 
-    steering += input * 0.1; // ( 1.1 - abs( input ) );
+    steering += input * 0.1;
     if(abs(steering) > abs(input))
       steering = input;
 
@@ -343,24 +309,14 @@ ride_uaz_fake_price_fire() {
 #using_animtree("vehicles");
 ride_uaz_door() {
   anim_model = self maps\_vehicle_aianim::getanimatemodel();
-  //	anim_model setflaggedanimknob( "uaz_door_anim", level.scr_anim[ "generic" ][ "boneyard_UAZ_door" ], 1, .2, 1 );
+
   anim_model setflaggedanim("uaz_door_anim", level.scr_anim["generic"]["boneyard_UAZ_door"], 1, .2, 1);
   anim_model waittillmatch("uaz_door_anim", "end");
   anim_model ClearAnim(level.scr_anim["generic"]["boneyard_UAZ_door"], 0);
-
-  /*
-  	flag_wait( "wait_for_player" );
-  	anim_model = self maps\_vehicle_aianim::getanimatemodel();
-  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_exit_into_stand_door, false );
-
-  	flag_wait( "uaz_mounted" );
-  	anim_model ClearAnim(%uaz_passenger_exit_into_stand_door, 0 );
-  	anim_model maps\_vehicle_aianim::setanimrestart_once(%uaz_passenger_enter_from_huntedrun_door, true );
-  */
 }
 
 park_uaz() {
-  park_goal = getent("uaz_park", "script_noteworthy"); // use uaz_park for the final animation
+  park_goal = getent("uaz_park", "script_noteworthy");
   park_goal setModel("tag_origin");
 
   tag_origin = park_goal spawn_tag_origin();
@@ -370,7 +326,6 @@ park_uaz() {
   goal = self.origin + forward * 500;
   self vehicleDriveTo(goal, 60);
 
-  // re add rook so that he stays attached to the truck
   self.riders = array_add(self.riders, level.rook);
 
   dummy = self maps\_vehicle::vehicle_to_dummy();
@@ -390,7 +345,6 @@ park_uaz() {
 }
 
 park_rumble() {
-  // quick rumble hack so that I don't have to do a new one.
   level.player PlayRumbleOnEntity("artillery_rumble");
   wait .5;
   level.player PlayRumbleOnEntity("damage_heavy");
@@ -423,14 +377,14 @@ ride_bump() {
       self joltbody(self.origin + offset[randomint(2)], jolt);
     }
 
-    max_random = ((max_speed - speed) / 100) + 0.1; // range 0.1 to 0.9
+    max_random = ((max_speed - speed) / 100) + 0.1;
     wait 0.2 + randomfloat(max_random);
   }
 }
 
 ride_bump_node() {
   self waittill("trigger", vehicle);
-  vehicle.max_jolt = self.script_physicsjolt / 1000; // script_physicsjolt is a int so have to / 1000
+  vehicle.max_jolt = self.script_physicsjolt / 1000;
 }
 
 ride_rumble_setup() {
@@ -459,7 +413,6 @@ vehicle_event_node_setup() {
 vehicle_dialogue_node() {
   self waittill("trigger");
 
-  // don't player this one line if the flag is set. Yes it's ugly, but so be it.
   if(flag("ride_minigun_gunner_dead") && self.script_soundalias == "byard_pri_thedrivers") {
     return;
   }
@@ -467,8 +420,6 @@ vehicle_dialogue_node() {
 }
 
 vehicle_event_node() {
-  // doing the handling of vehicle nodes here since the global script isn't working right now.
-  // besides it lets me do more stuff to.
   while(true) {
     self waittill("trigger", vehicle);
     assert(isDefined(vehicle));
@@ -555,7 +506,7 @@ vehicle_crash_guy(vehicle) {
 }
 
 vehicle_crash_launch_guys() {
-  wait 0.1; // .1 longer wait then the one in vehicle_crash_guy
+  wait 0.1;
   expl_origin = self gettagorigin("tag_guy1");
   PhysicsExplosionCylinder(expl_origin, 300, 300, 2);
 }
@@ -580,7 +531,6 @@ vehicle_player_induced_death() {
   self endon("dying");
   self endon("end_induced_death");
 
-  // we don't wan't them to crash.
   damage_limit_arr = [];
   damage_limit_arr[0] = 2500;
   damage_limit_arr[1] = 2500;
@@ -596,8 +546,9 @@ vehicle_player_induced_death() {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
     if(attacker != level.player)
       continue;
-    if(type == "MOD_PROJECTILE") // always crash from direct hit rpgs.
+    if(type == "MOD_PROJECTILE") {
       break;
+    }
     total_damage += damage;
   }
 
@@ -618,12 +569,10 @@ vehicle_track_frontal() {
 }
 
 vehicle_crash_turn(left_turn, wait_time) {
-  // right turn
   offset = (64, -256, 16);
   vector = (64, 256, 0);
 
   if(isDefined(left_turn)) {
-    // left turn default
     offset = (64, 256, 16);
     vector = (64, -256, 0);
   }
@@ -688,10 +637,9 @@ launch_object() {
   force_multiplier_arr["bc_military_tire04"] = 25;
   force_multiplier_arr["bc_military_tire05"] = 25;
   force_multiplier_arr["com_junktire"] = 25;
-  force_multiplier_arr["road_barrier_post"] = 4; // old 22
+  force_multiplier_arr["road_barrier_post"] = 4;
 
   foreach(obj in obj_array) {
-    // playes a light rumble for each impact.
     if(vehicle == level.uaz)
       level.player PlayRumbleOnEntity("damage_light");
 
@@ -699,7 +647,6 @@ launch_object() {
     angles1 = vectortoangles((obj.origin + (0, 0, 6)) - vehicle.origin);
     angles2 = vectortoangles(velocity);
 
-    // add a slight random angle so that the stacks don't look bad.
     if(obj_array.size > 2) {
       random_angels = (0, randomint(30) - 15, 0);
       angles1 += random_angels;
@@ -712,11 +659,9 @@ launch_object() {
     if(isDefined(force_multiplier_arr[obj.model]))
       force_multiplier = force_multiplier_arr[obj.model];
 
-    // lets me overide if needed.
     if(isDefined(obj.script_accel))
       force_multiplier = force_multiplier * obj.script_accel;
 
-    //play sound from hit
     if(isDefined(obj.script_soundalias))
       level thread play_sound_in_space(obj.script_soundalias, obj.origin);
 
@@ -727,7 +672,6 @@ launch_object() {
     obj PhysicsLaunchClient(contact_point, velocity);
 
     dir = vectornormalize(velocity);
-    // line( contact_point, contact_point + 100 * dir, (1,0,0), 1, 0, 100 );
   }
 }
 
@@ -791,7 +735,6 @@ collapse_wing() {
   pivot_2 waittill("rotatedone");
 }
 
-/**** C130 STUFF****/
 assemble_c130() {
   c130 = getent("c130_flight", "targetname");
   lower_hatch = getent("lower_hatch", "targetname");
@@ -847,7 +790,6 @@ extra_row_of_sparks_from_ramp(my_hatch) {
 
   start_origin = level.c130.origin[2];
   for(;;) {
-    // stop if c130 takes off
     if(level.c130.origin[2] > start_origin + 50) {
       hinges[0] StopLoopSound();
       return;
@@ -873,7 +815,6 @@ spawn_spark_between_hinges(hinges) {
   delay = 4;
   delay *= 20;
   for(i = 0; i < delay; i++) {
-    //		Print3d( ent.origin, "x", (1,0,0), 1, 1 );
     wait(0.05);
   }
   wait(4);
@@ -900,7 +841,6 @@ ramp_death_trigger(c130) {
   level.uaz vehicle_crash_turn(self.script_parameters, 1.5);
 
   level.player kill();
-  //	missionfailedwrapper();
 }
 
 ride_uaz_player_launch() {
@@ -956,7 +896,6 @@ c130_sparks() {
   ent.origin += origin_offset;
   ent.angles = angles_offset;
   ent linkto(self);
-  //ent thread maps\_debug::drawtagforever( "tag_origin" );
 
   wait 5;
   wait 12;
@@ -969,7 +908,6 @@ c130_sparks() {
   }
 }
 
-/**** FLYBY STUFF****/
 flyby_rumble() {
   level.player PlayRumbleOnEntity("c130_flyby");
   level thread screenshake(.2, 5, 1, 4);
@@ -1031,12 +969,10 @@ screenshake(scale, duration, fade_in, fade_out) {
 }
 
 angel_flare_burst(flare_count) {
-  // Angel Flare Swirl
   playFXOnTag(getfx("angel_flare_swirl"), self, "tag_flash_flares");
 
   self playSound("ac130_flare_burst");
 
-  // Angel Flare Trails
   for(i = 0; i < flare_count; i++) {
     self thread angel_flare();
     wait randomfloatrange(0.1, 0.25);
@@ -1058,8 +994,6 @@ angel_flare() {
   animation = level.scr_anim["angel_flare_rig"]["ac130_angel_flares"][level.anim_index % anim_count];
   level.anim_index++;
 
-  //	animation = random( level.scr_anim[ "angel_flare_rig" ][ "ac130_angel_flares" ] );
-
   rig SetFlaggedAnim("flare_anim", animation, 1, 0, 1);
 
   wait 0.1;
@@ -1077,13 +1011,10 @@ angel_flare() {
   stopFXOnTag(fx_id, rig, "flare_right_bot");
 }
 
-/***** THREE WAY FIGHTING STUFF*****/
-
 threewayfight_setup() {
   add_global_spawn_function("axis", ::threewayfight_threads);
   add_global_spawn_function("team3", ::threewayfight_threads);
 
-  // doesn't count ai waiting to be deleted. Won't affect ai riding vehicles or ai with valid script_noteworthy
   level.ai_cap["axis"] = 15;
   level.ai_cap["team3"] = 15;
   level.ai_cap["axis_alive"] = 0;
@@ -1093,7 +1024,6 @@ threewayfight_setup() {
 }
 
 threewayfight_threads() {
-  // don't do this on vehicles or other non sentient ents
   if(!issentient(self)) {
     return;
   }
@@ -1105,7 +1035,6 @@ threewayfight_threads() {
   if(difficulty == 0)
     difficulty = 1;
 
-  //	might work to work around the self.ridingvehicle issue.
   waittillframeend;
 
   switch (state) {
@@ -1123,15 +1052,13 @@ threewayfight_threads() {
     case "spray_guy":
       self thread spray_guy();
       break;
-    case "minigun_guy": // NO BREAK PAST THIS POINT!!!
+    case "minigun_guy":
       self.health *= difficulty;
       if(level.gameskill >= 2) {
-        // make hardened and veteran harder
         self setthreatbiasgroup("aware_of_player");
       }
     default:
-      // delete generic guys that would push the count above the limit
-      // there is probably a better way to do this.
+
       if(level.ai_cap[self.team] < level.ai_cap[self.team + "_alive"] && !isDefined(self.ridingvehicle)) {
         println("^2didn't spawn " + self.team + " guy because of ai_cap.");
 
@@ -1145,7 +1072,7 @@ threewayfight_threads() {
 }
 
 threewayfight_threads_defaults() {
-  self bad_aim(); // returns
+  self bad_aim();
   self thread react_to_player();
   self thread player_enemy();
   self thread delay_awareness();
@@ -1163,9 +1090,7 @@ ai_cap_count() {
   assertEx(level.ai_cap[ai_team + "_alive"] >= 0, "How did this get to be less then 0?");
 }
 
-enemy_dog() {
-  //???
-}
+enemy_dog() {}
 
 delay_awareness() {
   self endon("death");
@@ -1186,9 +1111,6 @@ delay_awareness() {
 }
 
 react_to_player() {
-  // if the player shoots at an AI the threatbias for that AI will be switched
-  // to one that doesn't make the player less of a threat.
-
   self endon("death");
   self endon("tobedeleted");
 
@@ -1203,19 +1125,16 @@ react_to_player() {
     }
   }
 
-  self waittill_stack_clear(); // removes variables used by waittill_stack.
+  self waittill_stack_clear();
   self setthreatbiasgroup("aware_of_player");
 }
 
 player_enemy() {
-  //	default values are 30000 and 3.
-  level.advanceToEnemyInterval = 120000; // less often.
-  //	level.advanceToEnemyGroupMax = 1;
+  level.advanceToEnemyInterval = 120000;
 
   default_MaxDist = self.engagemaxdist;
   default_FalloffDist = self.engagemaxfalloffdist;
 
-  // Change engagement dist when fighting the player.
   self endon("death");
   self endon("tobedeleted");
 
@@ -1223,26 +1142,19 @@ player_enemy() {
     self waittill("enemy");
 
     if(isPlayer(self.enemy)) {
-      // reset dists
       self SetEngagementMaxDist(default_MaxDist, default_FalloffDist);
     } else {
-      // lets the ai fight from further away. This stops them from moving around when they are not fighting the player.
       self SetEngagementMaxDist(default_MaxDist * 2, default_FalloffDist * 2);
     }
   }
 }
 
 bad_aim() {
-  // makes the ai less likely to kill each other, but still attack the player with full Accuracy.
-
   self endon("death");
   self.attackerAccuracy = 0.1;
 }
 
 struggle_guy() {
-  // Is supposed to spawn close to an enemy struggle guy and then do a melee sequence.
-  // will eventually forced what melee animations to use.
-
   self endon("death");
   old_sightdist = self.maxsightdistsqrd;
   self.maxsightdistsqrd = 96 * 96;
@@ -1310,9 +1222,9 @@ littlebird_reaction(path_name) {
       amount = self.waittill_stack.a;
       damager = self.waittill_stack.b;
 
-      if(!flag("littlebird_react")) // || damager != level.player ) - let heli react toany damage
+      if(!flag("littlebird_react")) {
         continue;
-
+      }
       total_damage += amount;
       if(total_damage < 400)
         continue;
@@ -1327,7 +1239,6 @@ littlebird_reaction(path_name) {
       index = 0;
     }
 
-    // debug shit
     level thread mark_heli_path(current_path);
 
     self SetMaxPitchRoll(25, 25);
@@ -1338,8 +1249,7 @@ littlebird_reaction(path_name) {
 
     self waittill_either("goal", "near_goal");
     wait 2;
-    //		self maps\_vehicle::set_heli_move( "fast" );
-    //		self SetMaxPitchRoll( 25, 25 );
+
     self thread littlebird_notarget_timeout();
   }
 }
@@ -1379,9 +1289,6 @@ road_rocket_guys_clear() {
 }
 
 rpg_guy() {
-  // rpg guy will show up and fire one rgp at a random target and then become a normal guy.
-  // target node needs to target atleast one script_origin, or the ai have a self.rocket_target
-
   assertEX(issubstr(ToLower(self.classname), "rpg"), "Actor with export: " + self.export+" doesn't have an RPG!");
 
   self endon("death");
@@ -1450,10 +1357,6 @@ rpg_guy() {
 }
 
 spray_guy() {
-  // spray guy will show up and fire for a few seconds and then become a normal guy.
-  // target node needs to target atleast two script_origins.
-  // set script_wait on the spawner to control how long he will spray.
-
   self endon("death");
   self disable_ai_color();
 
@@ -1468,9 +1371,9 @@ spray_guy() {
 
   self.no_pistol_switch = true;
   self.ignoresuppression = true;
-  //	self.maxFaceEnemyDist				= 0;
+
   self.noRunReload = true;
-  //	self.ammoCheatInterval 				= 2000;
+
   self.disableBulletWhizbyReaction = true;
   self.combatmode = "no_cover";
   self SetThreatBiasGroup("lowthreat");
@@ -1496,7 +1399,7 @@ spray_guy() {
 
   self.no_pistol_switch = undefined;
   self.ignoresuppression = false;
-  //	self.maxFaceEnemyDist 				= 512;
+
   self.noRunReload = undefined;
   self.disableBulletWhizbyReaction = undefined;
   self.combatmode = "cover";
@@ -1527,7 +1430,7 @@ delete_excess_trigger() {
     level.delete_excess_safe_volume = getent(self.target, "targetname");
 
   flag_set("delete_excess");
-  waittillframeend; // lets everyone that waits for the flag continue their thread.
+  waittillframeend;
   flag_clear("delete_excess");
 }
 
@@ -1543,7 +1446,6 @@ delete_excess_exeption(guy) {
 }
 
 delete_excess() {
-  // Delete enemies that are far away because new ones will be spawned in.
   while(true) {
     flag_wait("delete_excess");
 
@@ -1594,15 +1496,13 @@ higround_littlebird_hunt_btr80(node_name) {
 
     if(!isDefined(old_goal) || goal != old_goal) {
       self Vehicle_SetSpeed(50, 20, 20);
-      //			self maps\_vehicle::set_heli_move( "faster" );
+
       self SetMaxPitchRoll(25, 25);
 
       old_goal = goal;
       flag_clear("littlebird_at_goal");
       self thread maps\_vehicle::vehicle_paths(goal);
       self thread littlebird_at_goal();
-      //			self maps\_vehicle::set_heli_move( "fast" );
-      //			self SetMaxPitchRoll( 25, 25 );
     }
     wait 0.1;
   }
@@ -1628,7 +1528,7 @@ higround_littlebird_aligned(end_msg) {
     flag_wait("littlebird_at_goal");
     btr80_origin = level.btr80.origin + (0, 0, 128);
     heli_origin = self.origin + (0, 0, -56);
-    // only fov check
+
     if(player_looking_at(heli_origin, 0.85, true, self) && player_looking_at(btr80_origin, 0.70, true, level.btr80)) {
       break;
     }
@@ -1662,18 +1562,8 @@ higround_littlebird_failed_attack() {
 
   self fire_missile(miss_target_arr, 3);
 
-  // delete target ents
   delayThread(2, ::array_call, miss_target_arr, ::delete);
 }
-
-/*******************************/
-
-/*******************************/
-
-/*** Vehicle ai anim threads ***/
-/*******************************/
-
-/*******************************/
 
 uaz_unload_groups() {
   unload_groups = [];
@@ -1692,8 +1582,6 @@ uaz_unload_groups() {
 
   return unload_groups;
 }
-
-// Copied from Jeepride, get rid of the once I don't need, when I know which that is
 vehicle_aianimthread_setup() {
   level.vehicle_aianimthread["hide_attack_forward"] = ::guy_hide_attack_forward;
   level.vehicle_aianimcheck["hide_attack_forward"] = ::guy_hide_attack_forward_check;
@@ -1728,13 +1616,11 @@ vehicle_aianimthread_setup() {
   level.vehicle_aianimthread["free_attack"] = ::guy_free_attack;
   level.vehicle_aianimcheck["free_attack"] = ::guy_free_attack_check;
 
-  // suburban
   level.vehicle_aianimthread["hide_attack_right"] = ::guy_hide_attack_right;
   level.vehicle_aianimcheck["hide_attack_right"] = ::guy_hide_attack_right_check;
 }
 
 guy_free_attack(guy, pos) {
-  // free guy to attack.
   guy endon("newanim");
   guy endon("death");
   guy notify("animontag_thread");
@@ -1743,14 +1629,14 @@ guy_free_attack(guy, pos) {
   guy.noragdoll = true;
 
   self thread guy_free_attack_cleanup(guy);
-  guy.deathanim = % boneyard_crouch_exposed_death_twist; // %covercrouch_death_3;
+  guy.deathanim = % boneyard_crouch_exposed_death_twist;
 
   animtime = getanimlength(guy.deathanim);
   guy thread guy_free_attack_death(animtime);
 
   old_stance = "";
 
-  fov = level.cosine["20"]; // only do standing when player is clearly infront of the pickup.
+  fov = level.cosine["20"];
   while(true) {
     if(within_fov(self.origin, self.angles, level.player.origin, fov))
       stance = "stand";
@@ -2037,22 +1923,9 @@ killer_bird_goal(goal_origin) {
   }
 }
 
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-/***** MISC STUFF*****/
-
 ramp_sunsample_over_time(samplesize, time) {
   current_samplesize = getdvarfloat("sm_sunSampleSizeNear");
-  range = current_samplesize - samplesize; // min sample size is 0.25
+  range = current_samplesize - samplesize;
 
   frames = time * 20;
   for(i = 0; i <= frames; i++) {
@@ -2196,8 +2069,7 @@ main_turret_think(target_ai) {
       }
     }
 
-    if(!isDefined(target_ent)) // never mind the old target stuff ->> || ( isDefined( old_target_ent ) && target_ent == old_target_ent ) )
-    {
+    if(!isDefined(target_ent)) {
       wait 0.5;
       continue;
     }
@@ -2236,7 +2108,7 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
 
   starttime = gettime();
   while(true) {
-    self ent_flag_waitopen("hold_fire"); // lets me pause firing while still aiming at the target.
+    self ent_flag_waitopen("hold_fire");
     self FireWeapon();
     wait 0.2;
   }
@@ -2252,7 +2124,6 @@ main_turret_attack_target_death(target_ent) {
 
   wait randomfloat(1);
 
-  // remove the target if it's in the special enemy list unless it's alive.
   if(is_in_array(self.main_turret_enemies, target_ent) && !isalive(target_ent))
     self.main_turret_enemies = array_remove(self.main_turret_enemies, target_ent);
   self notify("clear_turret_target");
@@ -2410,12 +2281,11 @@ move_and_delete(add_delay) {
 
   self disable_ai_color();
 
-  // just kill them after a random time isntead of crazy move stuff.
   random_delayed_kill(3, 7);
 }
 
 origin_is_behind(node_origin) {
-  forward = anglesToForward((0, 0, 0)); // we are heading north in this level.
+  forward = anglesToForward((0, 0, 0));
   vector = VectorNormalize(node_origin - self.origin);
   dot = VectorDot(forward, vector);
   return (dot < -0.2);
@@ -2431,12 +2301,10 @@ switch_colors() {
       colorCodes = strtok(level.base_colors[guy.team], " ");
 
       if(isDefined(color)) {
-        // if not a base color switch to one that is.
         if(isDefined(color) && !is_in_array(colorCodes, color) || isDefined(guy.old_forcecolor)) {
           guy set_force_color(colorCodes[0]);
         }
       } else {
-        // if guy used to be a color turn old color to the base color
         if(isDefined(guy.old_forcecolor))
           guy.old_forcecolor = colorCodes[0];
       }
@@ -2446,19 +2314,6 @@ switch_colors() {
 }
 
 waittill_stack_add(msg, ent) {
-  /*
-  	Used to wait on multiple messages and/or entities and get the message and triggering ent and variables passed through the notify
-
-  	msg: message to wait for.
-  	ent: optional ent to waittill on instead of self.
-
-  	level waittill_stack_add( "damage", ai1 ); // waits for damage on ai1
-  	level waittill_stack_add( "damage", ai2 ); // waits for damage on ai2
-  	level waittill( "waittill_stack", msg, ent ); // returns messge and ai1 or ai2 on damage to either
-  	damager = level.waittill_stack.b;	// gets the second variable passes by the notify.
-  	level waittill_stack_clear(); // cleans up any variables.
-  */
-
   if(!isDefined(self.waittill_stack))
     self.waittill_stack = spawnStruct();
 
@@ -2526,7 +2381,6 @@ move_spawn_and_go(path_ent) {
   if(isDefined(path_ent.angles))
     self.angles = path_ent.angles;
 
-  // changes targetname of ai so that they to can spawn
   other_ents = getEntArray(self.target, "targetname");
   foreach(ent in other_ents) {
     if(isspawner(ent))
@@ -2537,7 +2391,6 @@ move_spawn_and_go(path_ent) {
 
   vehicle = self thread maps\_vehicle::spawn_vehicle_and_gopath();
 
-  // debug shit
   if(vehicle maps\_vehicle::ishelicopter())
     level thread mark_heli_path(path_ent);
 
@@ -2583,8 +2436,6 @@ delete_not_touching() {
     wait 0.5;
   self trigger_off();
 }
-
-/* temp */
 
 drawpath() {
   self endon("death");
@@ -2735,8 +2586,6 @@ debug_stance(stance) {
 }
 
 boneyard_gameskill_ride_settings() {
-  // RIGHT NOW ONLY .25 AND .75 ARE USED for easy and normal
-
   level.difficultySettings["threatbias"]["easy"] = 0;
   level.difficultySettings["threatbias"]["normal"] = 0;
   level.difficultySettings["threatbias"]["hardened"] = 0;
@@ -2747,77 +2596,61 @@ boneyard_gameskill_ride_settings() {
   level.difficultySettings["base_enemy_accuracy"]["hardened"] = 1.0;
   level.difficultySettings["base_enemy_accuracy"]["veteran"] = 1.0;
 
-  // lower numbers = higher accuracy for AI at a distance
   level.difficultySettings["accuracyDistScale"]["easy"] = 1.0;
   level.difficultySettings["accuracyDistScale"]["normal"] = 1.0;
   level.difficultySettings["accuracyDistScale"]["hardened"] = 1.0;
-  level.difficultySettings["accuracyDistScale"]["veteran"] = 1.0; // too many other things make it more difficult
+  level.difficultySettings["accuracyDistScale"]["veteran"] = 1.0;
 
   level.difficultySettings["pain_test"]["easy"] = maps\_gameskill::always_pain;
   level.difficultySettings["pain_test"]["normal"] = maps\_gameskill::always_pain;
   level.difficultySettings["pain_test"]["hardened"] = maps\_gameskill::always_pain;
   level.difficultySettings["pain_test"]["veteran"] = maps\_gameskill::always_pain;
 
-  // Death Invulnerable Time controls how long the player is death-proof after going into red flashing
-  // This protection resets after the player recovers full health.
   level.difficultySettings["player_deathInvulnerableTime"]["easy"] = 800;
   level.difficultySettings["player_deathInvulnerableTime"]["normal"] = 600;
   level.difficultySettings["player_deathInvulnerableTime"]["hardened"] = 400;
   level.difficultySettings["player_deathInvulnerableTime"]["veteran"] = 200;
 
-  // level.invulTime_preShield: time player is invulnerable when hit before their health is low enough for a red overlay( should be very short )
   level.difficultySettings["invulTime_preShield"]["easy"] = 0.0;
   level.difficultySettings["invulTime_preShield"]["normal"] = 0.0;
   level.difficultySettings["invulTime_preShield"]["hardened"] = 0.0;
   level.difficultySettings["invulTime_preShield"]["veteran"] = 0.0;
 
-  // level.invulTime_onShield: time player is invulnerable when hit the first time they get a red health overlay( should be reasonably long )
-  // should not be more than or too much lower than player_deathInvulnerableTime
   level.difficultySettings["invulTime_onShield"]["easy"] = 0.5;
   level.difficultySettings["invulTime_onShield"]["normal"] = 0.5;
   level.difficultySettings["invulTime_onShield"]["hardened"] = 0.5;
   level.difficultySettings["invulTime_onShield"]["veteran"] = 0.5;
 
-  // level.invulTime_postShield: time player is invulnerable when hit after the red health overlay is already up( should be short )
   level.difficultySettings["invulTime_postShield"]["easy"] = 0.3;
   level.difficultySettings["invulTime_postShield"]["normal"] = 0.3;
   level.difficultySettings["invulTime_postShield"]["hardened"] = 0.3;
   level.difficultySettings["invulTime_postShield"]["veteran"] = 0.3;
 
-  // level.playerHealth_RegularRegenDelay
-  // The delay before you regen health after getting hurt
   level.difficultySettings["playerHealth_RegularRegenDelay"]["easy"] = 500;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["normal"] = 500;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["hardened"] = 500;
   level.difficultySettings["playerHealth_RegularRegenDelay"]["veteran"] = 500;
 
-  // level.worthyDamageRatio( player must recieve this much damage as a fraction of maxhealth to get invulTime_PREshield. )
   level.difficultySettings["worthyDamageRatio"]["easy"] = 0.2;
   level.difficultySettings["worthyDamageRatio"]["normal"] = 0.2;
   level.difficultySettings["worthyDamageRatio"]["hardened"] = 0.2;
   level.difficultySettings["worthyDamageRatio"]["veteran"] = 0.2;
 
-  // self.gs.regenRate
-  // the rate you regen health once it starts to regen
   level.difficultySettings["health_regenRate"]["easy"] = 0.01;
   level.difficultySettings["health_regenRate"]["normal"] = 0.008;
   level.difficultySettings["health_regenRate"]["hardened"] = 0.008;
   level.difficultySettings["health_regenRate"]["veteran"] = 0.008;
 
-  // level.playerDifficultyHealth
-  // the amount of health you have in this difficulty
   level.difficultySettings["playerDifficultyHealth"]["easy"] = 1000;
   level.difficultySettings["playerDifficultyHealth"]["normal"] = 800;
   level.difficultySettings["playerDifficultyHealth"]["hardened"] = 600;
   level.difficultySettings["playerDifficultyHealth"]["veteran"] = 500;
 
-  // If you go to red flashing, the amount of time before your health regens
   level.difficultySettings["longRegenTime"]["easy"] = 1000;
   level.difficultySettings["longRegenTime"]["normal"] = 1000;
   level.difficultySettings["longRegenTime"]["hardened"] = 1000;
   level.difficultySettings["longRegenTime"]["veteran"] = 1000;
 
-  // level.healthOverlayCutoff
   level.difficultySettings["healthOverlayCutoff"]["easy"] = 0.02;
   level.difficultySettings["healthOverlayCutoff"]["normal"] = 0.02;
   level.difficultySettings["healthOverlayCutoff"]["hardened"] = 0.02;

@@ -6,13 +6,7 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-/*
-TODO:
--track headshots?
-*/
-
 init_stats() {
-  // kill
   self.stats["kills"] = 0;
   self.stats["kills_melee"] = 0;
   self.stats["kills_explosives"] = 0;
@@ -20,11 +14,9 @@ init_stats() {
   self.stats["kills_vehicle"] = 0;
   self.stats["kills_sentry"] = 0;
 
-  // accuracy
   self.stats["shots_fired"] = 0;
   self.stats["shots_hit"] = 0;
 
-  // weapon stats
   self.stats["weapon"] = [];
 
   self thread shots_fired_recorder();
@@ -38,8 +30,6 @@ register_kill(killedEnt, cause) {
     player = self.owner;
 
   if(!isPlayer(player)) {
-    // fix for enemies sometimes blowing themselves up in Spec Ops and then the mission summary
-    // says 38/40 kills or whatever, eventhough you had to kill all 40 enemies to win
     if(isDefined(level.pmc_match) && level.pmc_match)
       player = level.players[randomint(level.players.size)];
   }
@@ -47,7 +37,7 @@ register_kill(killedEnt, cause) {
   if(!isPlayer(player)) {
     return;
   }
-  // overall
+
   player.stats["kills"]++;
 
   if(isDefined(killedEnt)) {
@@ -60,7 +50,6 @@ register_kill(killedEnt, cause) {
     if(killedEnt.code_classname == "script_vehicle") {
       player.stats["kills_vehicle"]++;
 
-      // give player credit for the kills of the guys inside the vehicle who are now dead also
       if(isDefined(killedEnt.riders))
         foreach(rider in killedEnt.riders)
       if(isDefined(rider))
@@ -74,7 +63,6 @@ register_kill(killedEnt, cause) {
   if(cause_is_explosive(cause))
     player.stats["kills_explosives"]++;
 
-  // specific
   weaponName = player getCurrentWeapon();
   assert(isDefined(weaponName));
   if(player is_new_weapon(weaponName))
@@ -87,16 +75,12 @@ register_shot_hit() {
     return;
   assert(isDefined(self.stats));
 
-  // Only allow one shot hit per frame, because sometimes we can hit several entities with one shot in one frame ( such as grenade damage or RPG round ).
-  // Since a weapon was only fired once we only want to count it as one hit, that way we can't achieve higher than 100% accuracy.
   if(isDefined(self.registeringShotHit))
     return;
   self.registeringShotHit = true;
 
-  // overall
   self.stats["shots_hit"]++;
 
-  // specific
   weaponName = self getCurrentWeapon();
   assert(isDefined(weaponName));
   if(is_new_weapon(weaponName))
@@ -113,10 +97,8 @@ shots_fired_recorder() {
   for(;;) {
     self waittill("weapon_fired");
 
-    // overall stats
     self.stats["shots_fired"]++;
 
-    // stats for specific weapon
     weaponName = self getCurrentWeapon();
     assert(isDefined(weaponName));
     if(is_new_weapon(weaponName))
@@ -164,7 +146,6 @@ set_stat_dvars() {
     setDvar("stats_" + playerNum + "_kills_vehicle", player.stats["kills_vehicle"]);
     setDvar("stats_" + playerNum + "_kills_sentry", player.stats["kills_sentry"]);
 
-    // Sort the weapons used from most used to least used based on kills, then calculate accuracy
     weapons = player get_best_weapons(5);
     foreach(weapon in weapons) {
       weapon.accuracy = 0;
@@ -172,7 +153,6 @@ set_stat_dvars() {
         weapon.accuracy = int((weapon.shots_hit / weapon.shots_fired) * 100);
     }
 
-    // Put detailed weapon info into dvars ( name, kills, shots fired, and accuracy )
     for(i = 1; i < 6; i++) {
       setDvar("stats_" + playerNum + "_weapon" + i + "_name", " ");
       setDvar("stats_" + playerNum + "_weapon" + i + "_kills", " ");

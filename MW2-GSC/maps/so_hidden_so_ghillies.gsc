@@ -9,8 +9,6 @@
 #include maps\_specialops;
 #include maps\so_hidden_so_ghillies_code;
 
-// --------------------------------------------------------------------------------- //	Init
-// --------------------------------------------------------------------------------- main() {
 level.so_compass_zoom = "far";
 
 default_start(::start_so_hidden);
@@ -22,7 +20,7 @@ add_start("so_hidden_patrol_houses", ::start_so_hidden_patrol_houses, "Patrol - 
 add_start("so_hidden_patrol_barn", ::start_so_hidden_patrol_barn, "Patrol - Barn");
 add_start("so_hidden_ghillie_houses", ::start_so_hidden_ghillie_houses, "Ghillie - Houses");
 
-setsaveddvar("sm_sunShadowScale", "0.7"); // optimization
+setsaveddvar("sm_sunShadowScale", "0.7");
 setsaveddvar("ui_hidemap", "1");
 
 maps\so_hidden_so_ghillies_anim::main();
@@ -34,9 +32,6 @@ maps\_load::main();
 
 thread maps\so_ghillies_amb::main();
 }
-
-// --------------------------------------------------------------------------------- //	Challenge Initializations
-// --------------------------------------------------------------------------------- start_so_hidden() {
 start_so_hidden_basics();
 
 thread enable_patrol_enemies_crates();
@@ -124,7 +119,6 @@ start_so_hidden_basics() {
   thread enable_challenge_timer("so_hidden_start", "so_hidden_complete");
   thread enable_triggered_complete("so_hidden_exit_trigger", "so_hidden_complete", "all");
 
-  // Hint to show current bonuses.
   array_thread(level.players, ::hud_bonuses_create);
 }
 
@@ -138,39 +132,33 @@ so_hidden_init() {
   flag_init("school_windows");
   flag_init("house_windows");
 
-  //	thread stealth_achievement();
-
   level.custom_eog_no_kills = true;
   level.custom_eog_no_partner = true;
   level.eog_summary_callback = ::custom_eog_summary;
 
   switch (level.gameSkill) {
-    case 0: // Easy
+    case 0:
     case 1:
       so_hidden_setup_regular();
-      break; // Regular
+      break;
     case 2:
       so_hidden_setup_hardened();
-      break; // Hardened
+      break;
     case 3:
       so_hidden_setup_veteran();
-      break; // Veteran
+      break;
   }
 
-  // Objective marker updates.
   thread objective_set_chopper();
 
-  // Give player a chance to not be seen through windows.	
   array_thread(getEntArray("clip_nosight", "targetname"), ::clip_nosight_wait_for_activate);
 
-  // Open up the church doorway.
   church_doors = getEntArray("church_door_front", "targetname");
   foreach(door in church_doors) {
     door ConnectPaths();
     door Delete();
   }
 
-  // Keeps track of how many are active at a time.
   level.ghillie_count = 0;
   level.patrol_count = 0;
   level.enemies_spawned = 0;
@@ -179,7 +167,6 @@ so_hidden_init() {
 
   patrol_enemy_reset_multi_kill();
 
-  // Only allow kill announcements every few seconds.	
   level.death_dialog_throttle = 2500;
   level.death_dialog_time = gettime() + level.death_dialog_throttle;
 
@@ -198,18 +185,15 @@ so_hidden_init() {
   level.dialog_kill_basic[level.dialog_kill_basic.size] = "so_hid_ghil_noisy";
   level.dialog_kill_basic[level.dialog_kill_basic.size] = "so_hid_ghil_do_better";
 
-  // Global time bonuses
   level.bonus_stealth = 6;
   level.bonus_nofire = 3;
   level.bonus_basic = 1;
   level.bonus_time_given = 0;
 
-  // Global number of kill counts
   level.deaths_stealth = 0;
   level.deaths_nofire = 0;
   level.deaths_basic = 0;
 
-  // Individual player kill counts
   foreach(player in level.players) {
     player.kills_stealth = 0;
     player.kills_nofire = 0;
@@ -300,9 +284,6 @@ so_hidden_setup_veteran() {
   level.ghillie_shoot_hold_max = 0.4;
   level.ghillie_crouch_chance = 0.0;
 }
-
-// --------------------------------------------------------------------------------- //	Enable/Disable events
-// --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_patrol_enemies_crates() {
 thread create_patrol_enemies("patrol_enemy_crates", "patrol_enemies_spawn_crates");
 }
 
@@ -321,8 +302,6 @@ enable_patrol_enemies_barn() {
   flag_set("house_windows");
   thread create_patrol_enemies("patrol_enemy_barn", "patrol_enemies_spawn_barn");
 }
-
-// --------------------------------------------------------------------------------- enable_ghillie_enemies_crates() {
 thread create_ghillie_enemies("ghillie_enemy_crates", "ghillie_enemies_spawn_crates");
 }
 
@@ -333,16 +312,12 @@ enable_ghillie_enemies_valley() {
 enable_ghillie_enemies_houses() {
   thread create_ghillie_enemies("ghillie_enemy_houses", "ghillie_enemies_spawn_houses");
 }
-
-// --------------------------------------------------------------------------------- enable_stealth() {
 thread turn_on_stealth();
 }
 
 enable_radiation() {
   thread turn_on_radiation();
 }
-
-// --------------------------------------------------------------------------------- custom_eog_summary() {
 enemies_left = level.enemies_spawned;
 foreach(player in level.players) {
   enemies_left -= player.kills_stealth;
@@ -358,22 +333,18 @@ foreach(player in level.players) {
     player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_SKIPPED", enemies_left);
 }
 }
-
-// --------------------------------------------------------------------------------- stealth_achievement() {
 flag_wait("so_hidden_complete");
 
 if(!stealth_achieved()) {
   return;
 }
 foreach(player in level.players) {
-  // No achievement for individual players unless they made at least one perfect kill.
   if(player.kills_stealth > 0)
     player maps\_utility::player_giveachievement_wrapper("WRAITH");
 }
 }
 
 stealth_achieved() {
-  // No achievement if any non-perfect kills happened during the mission.
   foreach(player in level.players) {
     if(player.kills_nofire > 0)
       return false;
@@ -383,5 +354,3 @@ stealth_achieved() {
 
   return true;
 }
-
-// ---------------------------------------------------------------------------------

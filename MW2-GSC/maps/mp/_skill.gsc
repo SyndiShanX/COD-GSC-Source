@@ -16,7 +16,6 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    // look at how spawning works
     player.connectTime = getTime();
     player.targets = [];
 
@@ -39,10 +38,6 @@ onWeaponFired() {
 
   for(;;) {
     self waittill("weapon_fired");
-
-    // find likely target
-    // find target and tag when they shot me.
-    //self.target
   }
 }
 
@@ -52,10 +47,6 @@ onDeath() {
 
   for(;;) {
     self waittill("death");
-
-    //
-    // find target and tag when they shot me.
-    //self.target
   }
 }
 

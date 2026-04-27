@@ -26,7 +26,6 @@ cover_wall_think(coverType) {
 
   self.a.aimIdleThread = undefined;
 
-  // face the direction of our covernode
   self OrientMode("face angle", self.coverNode.angles[1]);
 
   if(isDefined(self.weapon) && usingMG() && isDefined(self.node) && isDefined(self.node.turretInfo) && canspawnturret()) {
@@ -54,7 +53,6 @@ cover_wall_think(coverType) {
 
   self animmode("normal");
 
-  //start in hide position
   if(coverType == "crouch" && self.a.pose == "stand") {
     transAnim = animArray("stand_2_hide");
     time = getAnimLength(transAnim);
@@ -63,7 +61,7 @@ cover_wall_think(coverType) {
     wait time;
     self.a.coverMode = "hide";
   } else {
-    loopHide(.4); // need to transition to hide here in case we didn't do an approach
+    loopHide(.4);
 
     if(distanceSquared(self.origin, self.coverNode.origin) > 1) {
       self thread animscripts\shared::moveToOriginOverTime(self.coverNode.origin, .4);
@@ -81,7 +79,7 @@ cover_wall_think(coverType) {
   if(coverType == "crouch") {
     if(self.a.pose == "prone")
       self ExitProneWrapper(1);
-    self.a.pose = "crouch"; // in case we only lerped into the pose
+    self.a.pose = "crouch";
   }
 
   if(self.coverType == "stand")
@@ -114,7 +112,7 @@ initCoverCrouchNode() {
   if(isDefined(self.crouchingIsOK)) {
     return;
   }
-  // it's only ok to crouch at this node if we can see out from a crouched position.
+
   crouchHeightOffset = (0, 0, 42);
   forward = anglesToForward(self.angles);
   self.crouchingIsOK = sightTracePassed(self.origin + crouchHeightOffset, self.origin + crouchHeightOffset + vector_multiply(forward, 64), false, undefined);
@@ -131,7 +129,7 @@ setup_cover_stand(exposedAnimSet) {
 }
 
 coverReload() {
-  Reload(2.0, animArray("reload")); // ( reload no matter what )
+  Reload(2.0, animArray("reload"));
   return true;
 }
 
@@ -152,7 +150,7 @@ popUpAndShoot() {
 
   if(isDefined(self.shootPos)) {
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
-    // too close for RPG or out of ammo
+
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand")
         animscripts\shared::throwDownWeapon(%RPG_stand_throw);
@@ -181,7 +179,7 @@ shootAsTold() {
 
     if(!isDefined(self.shootPos)) {
       assert(!isDefined(self.shootEnt));
-      // give shoot_behavior a chance to iterate
+
       self waittill("do_slow_things");
       waittillframeend;
       if(isDefined(self.shootPos))
@@ -193,22 +191,8 @@ shootAsTold() {
       break;
     }
 
-    // crouch only
     if(self.coverType == "crouch" && needToChangeCoverMode()) {
       break;
-
-      // TODO: if changing between stances without returning to cover is implemented, // we can't just endon("return_to_cover") because it will cause problems when it
-      // happens while changing stance.
-      // see corner's implementation of this idea for a better implementation.
-
-      // NYI
-      /*changeCoverMode();
-      			
-      // if they're moving too fast for us to respond intelligently to them, // give up on firing at them for the moment
-      if( needToChangeCoverMode() )
-      	break;
-      			
-      continue;*/
     }
 
     shootUntilShootBehaviorChange_coverWall();
@@ -218,7 +202,7 @@ shootAsTold() {
 
 shootUntilShootBehaviorChange_coverWall() {
   if(self.coverType == "crouch")
-    self thread angleRangeThread(); // gives stopShooting notify when shootPosOutsideLegalYawRange returns true
+    self thread angleRangeThread();
   self thread aimIdleThread();
 
   shootUntilShootBehaviorChange();
@@ -329,7 +313,7 @@ look(lookTime) {
   if(!peekOut())
     return false;
 
-  animscripts\shared::playLookAnimation(animArray("look_idle"), lookTime); // TODO: replace
+  animscripts\shared::playLookAnimation(animArray("look_idle"), lookTime);
 
   lookanim = undefined;
   if(self isSuppressedWrapper())
@@ -347,8 +331,6 @@ peekOut() {
   if(isDefined(self.coverNode.script_dontpeek))
     return false;
 
-  // assuming no delta, so no maymovetopoint check
-
   self setFlaggedAnimKnobAll("looking_start", animArray("hide_to_look"), %body, 1, .2);
   animscripts\shared::DoNoteTracks("looking_start");
 
@@ -361,8 +343,6 @@ fastLook() {
 
   return true;
 }
-
-// These should be adjusted in animation data
 pop_up_and_hide_speed() {
   if(self.a.coverMode == "left" || self.a.coverMode == "right" || self.a.coverMode == "over")
     return 1;
@@ -465,11 +445,6 @@ setup_additive_aim(transTime) {
     self setanimlimited(%exposed_aim_4, 1, 0);
     self setanimlimited(%exposed_aim_6, 1, 0);
     self setanimlimited(%exposed_aim_8, 1, 0);
-    // these don't seem to have 45 degree aiming limits, // so i'm using the exposed ones instead
-    /*self setanimlimited(%covercrouch_lean_aim2_add,1,0);
-    self setanimlimited(%covercrouch_lean_aim4_add,1,0);
-    self setanimlimited(%covercrouch_lean_aim6_add,1,0);
-    self setanimlimited(%covercrouch_lean_aim8_add,1,0);*/
   } else if(aimCoverMode == "over") {
     self setanimlimited(%coverstandaim_aim2_add, 1, 0);
     self setanimlimited(%coverstandaim_aim4_add, 1, 0);
@@ -504,7 +479,6 @@ go_to_hide() {
 }
 
 tryThrowingGrenadeStayHidden(throwAt) {
-  // TODO: check suppression and add rambo grenade support
   return tryThrowingGrenade(throwAt, true);
 }
 
@@ -522,7 +496,7 @@ tryThrowingGrenade(throwAt, safe) {
       theanim = animArrayPickRandom("grenade_exposed");
   }
 
-  self animMode("zonly_physics"); // Unlatch the feet
+  self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
   threwGrenade = TryGrenade(throwAt, theanim);
@@ -586,8 +560,8 @@ useSelfPlacedTurret(weaponInfo, weaponModel) {
     turret thread deleteIfNotUsed(self);
     if(isDefined(self.turret_function))
       thread[[self.turret_function]](turret);
-    //		self setAnimKnob(%cover, 0, 0 );
-    self waittill("turret_use_failed"); // generally this won't notify, and we'll just not do any more cover_wall for now
+
+    self waittill("turret_use_failed");
   } else {
     turret delete();
   }
@@ -601,14 +575,9 @@ useStationaryTurret() {
   if(!turret.isSetup) {
     return;
   }
-  //	turret setmode( "auto_ai" ); // auto, auto_ai, manual, manual_ai
-  //	turret startFiring(); // seems to be a bug with the turret being in manual mode to start with
-  //	wait( 1 );
+
   thread maps\_mg_penetration::gunner_think(turret);
   self waittill("continue_cover_script");
-
-  //	turret thread maps\_spawner::restorePitch();
-  //	self useturret( turret ); // dude should be near the mg42
 }
 
 setup_crouching_anim_array(exposedAnimSet) {
@@ -616,9 +585,8 @@ setup_crouching_anim_array(exposedAnimSet) {
 
     anim_array["hide_idle"] = % covercrouch_hide_idle;
     anim_array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4
-        //%covercrouch_twitch_5 // excluding #5 because it's a wave to someone behind him, and in idle twitches we don't know if that makes sense at the time);
 
-        anim_array["hide_idle_flinch"] = array( /*%covercrouch_explosion_1, %covercrouch_explosion_2, %covercrouch_explosion_3*/ // these just don't look good for flinching);
+        anim_array["hide_idle_flinch"] = array(
 
           anim_array["hide_2_crouch"] = % covercrouch_hide_2_aim; anim_array["hide_2_stand"] = % covercrouch_hide_2_stand; anim_array["hide_2_lean"] = % covercrouch_hide_2_lean; anim_array["hide_2_right"] = % covercrouch_hide_2_right; anim_array["hide_2_left"] = % covercrouch_hide_2_left;
 
@@ -637,8 +605,7 @@ setup_crouching_anim_array(exposedAnimSet) {
             anim_array["single"] = array(%exposed_shoot_semi1);
           }
 
-          anim_array["burst2"] = % exposed_shoot_burst3; // ( will be limited to 2 shots )
-          anim_array["burst3"] = % exposed_shoot_burst3; anim_array["burst4"] = % exposed_shoot_burst4; anim_array["burst5"] = % exposed_shoot_burst5; anim_array["burst6"] = % exposed_shoot_burst6;
+          anim_array["burst2"] = % exposed_shoot_burst3; anim_array["burst3"] = % exposed_shoot_burst3; anim_array["burst4"] = % exposed_shoot_burst4; anim_array["burst5"] = % exposed_shoot_burst5; anim_array["burst6"] = % exposed_shoot_burst6;
 
           anim_array["blind_fire"] = array(%covercrouch_blindfire_1, %covercrouch_blindfire_2, %covercrouch_blindfire_3, %covercrouch_blindfire_4);
 
@@ -684,7 +651,7 @@ setup_crouching_anim_array(exposedAnimSet) {
 
             anim_array["single"] = array(%coverstandaim_fire);
 
-            anim_array["burst2"] = % coverstandaim_autofire; // ( will be limited to 2 shots )
+            anim_array["burst2"] = % coverstandaim_autofire;
             anim_array["burst3"] = % coverstandaim_autofire;
             anim_array["burst4"] = % coverstandaim_autofire;
             anim_array["burst5"] = % coverstandaim_autofire;
@@ -703,14 +670,14 @@ setup_crouching_anim_array(exposedAnimSet) {
             else
               anim_array["single"] = array(%exposed_shoot_semi1);
 
-            anim_array["burst2"] = % exposed_shoot_burst3; // ( will be limited to 2 shots )
+            anim_array["burst2"] = % exposed_shoot_burst3;
             anim_array["burst3"] = % exposed_shoot_burst3;
             anim_array["burst4"] = % exposed_shoot_burst4;
             anim_array["burst5"] = % exposed_shoot_burst5;
             anim_array["burst6"] = % exposed_shoot_burst6;
           }
 
-          anim_array["blind_fire"] = array(%coverstand_blindfire_1, %coverstand_blindfire_2 /*, %coverstand_blindfire_3*/ ); // #3 looks silly
+          anim_array["blind_fire"] = array(%coverstand_blindfire_1, %coverstand_blindfire_2);
 
           anim_array["reload"] = % coverstand_reloadA;
 
@@ -756,7 +723,7 @@ setup_crouching_anim_array(exposedAnimSet) {
             wait(0.1);
           }
 
-          self notify("stopShooting"); // For changing shooting pose to compensate for player moving
+          self notify("stopShooting");
         }
 
         needToChangeCoverMode() {

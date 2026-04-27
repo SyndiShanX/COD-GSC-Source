@@ -70,7 +70,7 @@ onSpawnPlayer() {
 
 printOTHint() {
   self endon("disconnect");
-  // give the "Overtime!" message time to show
+
   wait(0.25);
 
   self.otSpawned = true;
@@ -164,9 +164,6 @@ getSpawnPoint() {
   else
     spawnTeam = game["defenders"];
 
-  //	if( game["switchedsides"] )
-  //		spawnTeam = getOtherTeam( spawnteam );
-
   if(level.inGracePeriod) {
     if(getDvar("mapname") == "mp_shipment_long") {
       spawnPoints = getEntArray("mp_cha_spawn_" + spawnteam + "_start", "classname");
@@ -207,37 +204,31 @@ ctf() {
   level.iconEscort2D = "waypoint_escort";
   precacheShader(level.iconEscort3D);
   precacheShader(level.iconEscort2D);
-  //level.iconEscort2D = level.iconEscort3D; // flags with words on compass
 
   level.iconKill3D = "waypoint_kill";
   level.iconKill2D = "waypoint_kill";
   precacheShader(level.iconKill3D);
   precacheShader(level.iconKill2D);
-  //level.iconKill2D = level.iconKill3D; // flags with words on compass
 
   level.iconCaptureFlag3D = "waypoint_capture_flag";
   level.iconCaptureFlag2D = "waypoint_capture_flag";
   precacheShader(level.iconCaptureFlag3D);
   precacheShader(level.iconCaptureFlag2D);
-  //level.iconCaptureFlag2D = level.iconCaptureFlag3D; // flags with words on compass
 
   level.iconDefendFlag3D = "waypoint_defend_flag";
   level.iconDefendFlag2D = "waypoint_defend_flag";
   precacheShader(level.iconDefendFlag3D);
   precacheShader(level.iconDefendFlag2D);
-  //level.iconDefendFlag2D = level.iconDefendFlag3D; // flags with words on compass
 
   level.iconReturnFlag3D = "waypoint_return_flag";
   level.iconReturnFlag2D = "waypoint_return_flag";
   precacheShader(level.iconReturnFlag3D);
   precacheShader(level.iconReturnFlag2D);
-  //level.iconReturnFlag2D = level.iconReturnFlag3D; // flags with words on compass
 
   level.iconWaitForFlag3D = "waypoint_waitfor_flag";
   level.iconWaitForFlag2D = "waypoint_waitfor_flag";
   precacheShader(level.iconWaitForFlag3D);
   precacheShader(level.iconWaitForFlag2D);
-  //level.iconWaitForFlag2D = level.iconWaitForFlag3D; // flags with words on compass
 
   precacheShader(level.icon2D["axis"]);
   precacheShader(level.icon2D["allies"]);
@@ -316,8 +307,6 @@ ctf() {
   level.enemyFlagStatusText["axis"].glowAlpha = 1;
   level.enemyFlagStatusText["axis"].hideWhenInMenu = true;
 }
-
-//sets overtime and associated variables
 onTimeLimit() {
   if(!inOvertime() && game["teamScores"]["allies"] == game["teamScores"]["axis"] && game["switchedsides"]) {
     thread maps\mp\gametypes\_gamelogic::endGame("overtime", game["strings"]["time_limit_reached"]);
@@ -474,7 +463,6 @@ onPickup(player) {
   } else {
     if(inOvertime()) {
       if(isDefined(level.flagCaptured)) {
-        // denied splash!
         return;
       }
 
@@ -486,8 +474,6 @@ onPickup(player) {
       level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
 
       level.flagCaptured = true;
-
-      //wait ( 1.5 );
 
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(team, 1);
       thread maps\mp\gametypes\_gamelogic::endGame("winner", game["strings"]["grabbed_flag"]);
@@ -511,8 +497,6 @@ onPickup(player) {
 
     level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::allowUse("none");
     level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
-    //level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::set3DIcon( "friendly", level.iconKill3D );
-    //level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::set2DIcon( "friendly", level.iconKill3D );
 
     if(!level.teamFlags[team] maps\mp\gametypes\_gameobjects::isHome()) {
       level.capZones[team].trigger maps\mp\_entityheadIcons::setHeadIcon(player, level.iconWaitForFlag3D, (0, 0, 85));
@@ -638,9 +622,7 @@ onUse(player) {
   level.teamFlags[otherTeam] returnFlag();
 }
 
-onCantUse(player) {
-  //	player iPrintLnBold(&"MP_CANT_PLANT_WITHOUT_BOMB" );
-}
+onCantUse(player) {}
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {

@@ -23,62 +23,32 @@
 #using scripts\shared\visionset_mgr_shared;
 #namespace cp_mi_cairo_lotus;
 
-function setup_rex_starts() {
-  // Unsupported VM revision (1B).
-}
+function setup_rex_starts() {}
 
-function function_70a1a72e() {
-  // Unsupported VM revision (1B).
-}
+function function_70a1a72e() {}
 
-function main() {
-  // Unsupported VM revision (1B).
-}
+function main() {}
 
-function precache() {
-  // Unsupported VM revision (1B).
-}
+function precache() {}
 
-function init_flags() {
-  // Unsupported VM revision (1B).
-}
+function init_flags() {}
 
-function function_e8474b63() {
-  // Unsupported VM revision (1B).
-}
+function function_e8474b63() {}
 
-function init_clientfields() {
-  // Unsupported VM revision (1B).
-}
+function init_clientfields() {}
 
-function setup_skiptos() {
-  // Unsupported VM revision (1B).
-}
+function setup_skiptos() {}
 
-function skipto_lotus_2() {
-  // Unsupported VM revision (1B).
-}
+function skipto_lotus_2() {}
 
-function skipto_lotus_3() {
-  // Unsupported VM revision (1B).
-}
+function skipto_lotus_3() {}
 
-function function_50499b8() {
-  // Unsupported VM revision (1B).
-}
+function function_50499b8() {}
 
-function function_770c08f3() {
-  // Unsupported VM revision (1B).
-}
+function function_770c08f3() {}
 
-function function_51098e8a() {
-  // Unsupported VM revision (1B).
-}
+function function_51098e8a() {}
 
-function function_3330eab6() {
-  // Unsupported VM revision (1B).
-}
+function function_3330eab6() {}
 
-function on_player_spawned() {
-  // Unsupported VM revision (1B).
-}
+function on_player_spawned() {}

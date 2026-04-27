@@ -23,16 +23,13 @@ main(model, type) {
 
   build_drive(%bh_rotors, undefined, 0);
 
-  //Bullet damage Crash and Burn, spins out of control and explodes when it reaches destination
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);
   build_deathfx("fire/fire_smoke_trail_L", "tag_engine_left", "apache_helicopter_dying_loop", true, 0.05, true, 0.5, true);
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 2.5, true);
   build_deathfx(apache_death_fx[model], undefined, "apache_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");
 
-  //Death by Rocket effects, explodes immediatly
   build_rocket_deathfx(apache_aerial_death_fx[model], "tag_deathfx", "apache_helicopter_crash", undefined, undefined, undefined, undefined, true, undefined, 0);
 
-  //light effects
   build_light(model, "wingtip_green", "tag_light_L_wing", "misc/aircraft_light_wingtip_green", "running", 0);
   build_light(model, "wingtip_red", "tag_light_R_wing", "misc/aircraft_light_wingtip_red", "running", 0.05);
   build_light(model, "white_blink", "tag_light_belly", "misc/aircraft_light_white_blink", "running", 0.1);
@@ -46,7 +43,7 @@ main(model, type) {
 }
 
 init_local() {
-  self.script_badplace = false; // All helicopters dont need to create bad places
+  self.script_badplace = false;
   maps\_vehicle::lights_on("running");
 }
 
@@ -64,26 +61,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_apache (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_apache::main( "vehicle_apache" );
-
-and these lines in your CSV:
-#include,vehicle_apache_apache
-sound,vehicle_apache,vehicle_standard,all_sp
-
-defaultmdl="vehicle_apache"default:"vehicletype" "apache"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_apache_dark (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_apache::main( "vehicle_apache_dark" );
-
-and these lines in your CSV:
-#include,vehicle_apache_dark_apache
-sound,vehicle_apache,vehicle_standard,all_sp
-
-defaultmdl="vehicle_apache_dark"default:"vehicletype" "apache"default:"script_team" "allies"
-*/

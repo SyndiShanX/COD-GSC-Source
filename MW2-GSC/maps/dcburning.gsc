@@ -13,8 +13,7 @@ main() {
   setDvarIfUninitialized("cheap_spot", "1");
   initPrecache();
   maps\dcburning_precache::main();
-  /*----------------------- LEVEL VARIABLES
-  -------------------------*/
+
   level.c4_models = [];
   level.chattertrigsinterior = getEntArray("interior_bcs", "targetname");
   level.chattertrigsexteriror = getEntArray("exterior_bcs", "targetname");
@@ -27,7 +26,7 @@ main() {
   level.onHeli = false;
   level.CannonRange = 6000;
   level.CannonRangeSquared = level.CannonRange * level.CannonRange;
-  //setsaveddvar( "thermalBlurFactorScope", 300 );
+
   level.firemagicRPGs = true;
   level.squadsize = 3;
   level.mortarDamageRadius = 100;
@@ -59,12 +58,9 @@ main() {
     if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes"))
       level.aColornodeTriggers = array_add(level.aColornodeTriggers, trigger);
   }
-  //level.motiontrackergun_off = "masada_dcburn_mt_black_off";
-  //level.motiontrackergun_on = "masada_dcburn_mt_black_on";
+
   disable_color_trigs();
 
-  /*----------------------- STARTS
-  -------------------------*/
   add_start("debug", ::start_debug, "debug");
   add_start("elevator_bottom", ::start_elevator_bottom, "elevator_bottom");
   add_start("elevator_top", ::start_elevator_top, "elevator_top");
@@ -78,8 +74,6 @@ main() {
 
   default_start(::start_default);
 
-  /*----------------------- SUPPORT SCRIPTS
-  -------------------------*/
   maps\dc_crashsite::main();
   maps\_breach_hinges_left::main();
   maps\_breach::main();
@@ -101,13 +95,9 @@ main() {
   thread maps\_mortar::bunker_style_mortar();
   thread maps\_mortar::bog_style_mortar();
   array_thread(getEntArray("animated_vehicle", "script_noteworthy"), ::vehicle_animated_think);
-  // --> moved to dc_crashsite.gsc |||||array_thread( getvehiclenodearray("plane_sound", "script_noteworthy" ), maps\_mig29::plane_sound_node );
+
   array_thread(getvehiclenodearray("plane_bomb", "script_noteworthy"), maps\_mig29::plane_bomb_cluster);
 
-  /*----------------------- FLAGS
-  -------------------------*/
-
-  //misc
   flag_init("slamraam_c4_detonated");
   flag_init("stop_elevator_doors");
   flag_init("difficulty_initialized");
@@ -116,7 +106,6 @@ main() {
 
   maps\_compass::setupMiniMap("compass_map_dcburning");
 
-  //objectives
   flag_init("obj_follow_sgt_macey_given");
   flag_init("obj_follow_sgt_macey_complete");
   flag_init("obj_commerce_given");
@@ -133,11 +122,9 @@ main() {
   flag_init("obj_heli_mount_complete");
   flag_init("obj_heli_ride_given");
 
-  //bunker
   flag_init("bunker_door_closed");
   flag_init("delete_bunker_mortars");
 
-  //trenches
   flag_init("seaknight_drones_loaded");
   flag_init("seaknight_drones2_loaded");
   flag_init("bradley_can_start_firing");
@@ -151,7 +138,6 @@ main() {
   flag_init("lav_is_suppressing");
   flag_init("leader_orders_everyone_across_street");
 
-  //elevator_bottom
   flag_init("atrium_guys_at_end_of_anim");
   flag_init("commerce_first_floor_enemies_dead");
   flag_init("courtyard_has_been_cleared");
@@ -161,24 +147,20 @@ main() {
   flag_init("player_shot_at_samsite_guys");
   flag_init("commerce_samsite_revealed");
 
-  //elevator_top
   flag_init("fifth_floor_guys_damaged");
   flag_init("start_music_to_crowsnest");
   flag_init("macey_tells_you_to_move_to_crows");
 
-  //crows nest - snipe
   flag_init("player_shot_at_crowsnest_guys");
   flag_init("crowsnest_has_been_cleared");
   flag_init("make_seaknights_take_off");
   flag_init("can_start_crow_nags");
   flag_init("only_2_sniper_enemies_remaining");
 
-  //wave of enemies after snipe
   flag_init("player_killed_enough");
   flag_init("humvee_spotlight_deleted");
   flag_init("perimeter_enemies_have_retreated");
 
-  //crows nest - armor
   flag_init("start_crow_armor_sequence");
   flag_init("only_1_javelin_enemies_remaining");
   flag_init("only_2_javelin_enemies_remaining");
@@ -186,7 +168,6 @@ main() {
   flag_init("crowsnest_sequence_finished");
   flag_init("player_has_killed_at_least_one_javelin_target");
 
-  //roof
   flag_init("roof_breach_complete");
   flag_init("roof_littlebird_lifted_off");
   flag_init("player_heli_spawned");
@@ -201,40 +182,32 @@ main() {
   flag_init("littlebird_crash_path_end");
   flag_init("littlebird_crash_path_end2");
 
-  //lincoln
   flag_init("player_starting_fastrope");
   flag_init("player_fastroped_out");
   flag_init("player_facing_blackhawk");
 
-  //player crash and crash site
   flag_init("player_crash_starting");
 
-  /*----------------------- GLOBAL THREADS
-  -------------------------*/
-  //setsaveddvar( "sm_sunSampleSizeNear", 0.125 );// 0.25 by default...higher value makes shadows look longer (inc size)
-  setsaveddvar("sm_sunShadowScale", 0.5); // 1 by default...lower values is better performance
+  setsaveddvar("sm_sunShadowScale", 0.5);
 
-  // Press^3 [{+actionslot 3}] ^7to use\nthe M203 Grenade Launcher.
   add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
   add_hint_string("javelin_pickup", &"DCBURNING_HINT_JAVELIN_PICKUP", ::should_break_javelin_pickup_hint);
   add_hint_string("javelin_switch", &"DCBURNING_HINT_JAVELIN_SWITCH", ::should_break_javelin_switch_hint);
   add_hint_string("javelin_shoot", &"DCBURNING_HINT_JAVELIN_FIRE", ::should_break_javelin_fire_hint);
 
-  // Press^3 [{+actionslot 3}] ^7to activate heartbeat sensor.
-  //add_hint_string( "hint_heartbeat_sensor", &"DCBURNING_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat );
   array_thread(getEntArray("destructible_trigger", "targetname"), ::destructible_trigger_think);
   thread AA_global();
   hideAll();
   fx_management();
-  //setSavedDvar( "r_specularColorScale", "6.25" );
+
   setsaveddvar("r_lightGridEnableTweaks", 0);
   setsaveddvar("r_lightGridIntensity", 1.2);
   setsaveddvar("r_lightGridContrast", 0);
-  //thread destructibles_think();
+
   thread init_difficulty();
   thread lights();
   init_air_vehicle_flags();
-  //thread player_death();
+
   array_thread(getEntArray("ai_cleanup_trigger", "targetname"), ::ai_cleanup_trigger_think);
   array_thread(getEntArray("redshirt_trigger", "targetname"), ::redshirt_trigger_think);
   array_thread(getEntArray("rpg_targets", "targetname"), ::rpg_targets_think);
@@ -244,15 +217,13 @@ main() {
   createthreatbiasgroup("ignored");
   createthreatbiasgroup("oblivious");
   level.player setthreatbiasgroup("player");
-  setignoremegroup("allies", "oblivious"); // oblivious ignore allies
-  setignoremegroup("axis", "oblivious"); // oblivious ignore axis
-  setignoremegroup("player", "oblivious"); // oblivious ignore player
-  setignoremegroup("oblivious", "allies"); // allies ignore oblivious
-  setignoremegroup("oblivious", "axis"); // axis ignore oblivious
-  setignoremegroup("oblivious", "oblivious"); // oblivious ignore oblivious
+  setignoremegroup("allies", "oblivious");
+  setignoremegroup("axis", "oblivious");
+  setignoremegroup("player", "oblivious");
+  setignoremegroup("oblivious", "allies");
+  setignoremegroup("oblivious", "axis");
+  setignoremegroup("oblivious", "oblivious");
 
-  /*----------------------- SPAWNER THREADS
-  -------------------------*/
   aVehicleSpawners = maps\_vehicle::_getvehiclespawnerarray();
   array_thread(aVehicleSpawners, ::add_spawn_function, ::vehicle_think);
   array_thread(getEntArray("ai_ambient", "script_noteworthy"), ::add_spawn_function, ::ai_ambient_noprop_think);
@@ -281,17 +252,11 @@ main() {
   array_spawn_function_noteworthy("hummer_gunner", ::AI_hummer_gunner_think);
   array_spawn_function_targetname("commerce_rpg_upper", ::AI_commerce_rpg_upper_think);
 
-  //array_spawn_function_targetname( "friendlies_pavlov_street", ::AI_ambient_combat_think );
-
   setsaveddvar("r_spotlightbrightness", "6");
   setsaveddvar("r_spotlightstartradius", "50");
   setsaveddvar("r_spotlightEndradius", "250");
   setsaveddvar("r_spotlightfovinnerfraction", "0");
   setsaveddvar("r_spotlightexponent", "2");
-
-  //flag_wait( "player_crash_done" );
-  //wait( 2 );
-  //iPrintlnbold(&"SCRIPT_DEBUG_LEVEL_END" );
 }
 
 init_air_vehicle_flags() {
@@ -312,14 +277,8 @@ air_nodes_think() {
     iPrintlnbold("flag: " + self.script_flag + " has been set");
 }
 
-/****************************************************************************
-START FUNCTIONS
-****************************************************************************/
-
 start_default() {
   AA_bunker_init();
-  //start_debug();
-  //start_roof();
 }
 
 start_debug() {
@@ -389,7 +348,7 @@ start_roof() {
   array_thread(level.squad, ::cqb_walk, "off");
   flag_set("player_headed_to_roof");
   flag_set("player_approaching_outer_balcony");
-  //thread music_loop( "dcburning_stairway_escape_loop", 40.96 );
+
   dummy_trigger("trigger_dummy_roof_colornode");
   AA_roof_init();
 }
@@ -402,7 +361,7 @@ start_heli_ride2() {
   level.blackhawk.minigunUser = level.player;
 
   level.blackhawk thread maps\_minigun::minigun_think();
-  //thread maps\_minigun::minigun_hints_on();
+
   thread AA_heli_ride2();
 }
 
@@ -412,16 +371,12 @@ start_crash() {
   flag_set("player_crash_done");
 }
 
-/****************************************************************************
-BUNKER
-****************************************************************************/
-
 AA_bunker_init() {
   initFriendlies("Bunker");
   thread bunker_mortars();
   thread music_bunker();
   thread commerce_flyby();
-  //thread commerce_lasers();
+
   thread AAA_sequence_bunker_to_commerce();
   thread obj_follow_sgt_macey();
   thread obj_commerce();
@@ -459,28 +414,17 @@ AAA_sequence_bunker_to_commerce() {
   if(getdvarint("r_dcburning_culldist") == 1) {
     setculldist(28500);
   }
-  /*----------------------- PLAYER AND SQUAD IGNORED
-  -------------------------*/
+
   thread ignoreme_on_squad_and_player();
 
   flavorbursts_off("allies");
   battlechatter_off("allies");
   battlechatter_off("axis");
 
-  /*----------------------- PLAYER SQUAD
-  -------------------------*/
   level.teamLeader thread make_ambient_ai("bunker_radio_door_guy");
   level.friendly02 thread make_ambient_ai("gun_toss_guy2");
   level.friendly03 thread make_ambient_ai("gun_toss_guy1");
 
-  //laptop_light_org = getent( "laptop_light_org", "targetname" );
-  //laptop_light_model = spawn_tag_origin();
-  //laptop_light_model.origin = laptop_light_org.origin;
-  //laptop_light_org delete();
-  //playFXOnTag( getfx( "dlight_laptop" ), laptop_light_model, "tag_origin" );
-
-  /*----------------------- AMBIENT DRONES
-  -------------------------*/
   bunker_laptop_guys = array_spawn(getEntArray("bunker_laptop_guys", "targetname"));
   thread bunker_radio_chatter();
   bunker_hallway_injured_guys = array_spawn(getEntArray("bunker_hallway_injured_guys", "targetname"));
@@ -496,8 +440,6 @@ AAA_sequence_bunker_to_commerce() {
   flag_wait("player_bunker_comm_room");
   triggersEnable("colornodes_trenches", "script_noteworthy", true);
 
-  /*----------------------- EXTERIOR MORTARS ON, DRONES
-  -------------------------*/
   flag_wait("player_approaching_bunker_exit_hall");
 
   drones_flood_monument = getEntArray("drones_flood_monument", "targetname");
@@ -513,8 +455,6 @@ AAA_sequence_bunker_to_commerce() {
   drone_warrior_hydrant = dronespawn(getent("drone_warrior_hydrant", "targetname"));
   drone_warrior_hydrant thread drone_warrior_hydrant_think();
 
-  /*----------------------- LITTLEBIRD AND SEAKNIGHT BY MONUMENT
-  -------------------------*/
   seaknight_loader_start = getent("seaknight_loader_start", "targetname");
   seaknight_loader_start notify("spawn");
 
@@ -528,7 +468,7 @@ AAA_sequence_bunker_to_commerce() {
   littlebird_monument_riders_right = array_spawn(getEntArray("littlebird_monument_riders_right", "targetname"));
   array_thread(littlebird_monument_riders_right, ::AI_ignored_and_oblivious_on);
   array_thread(littlebird_monument_riders_right, ::magic_bullet_shield);
-  // you'll send this node off to some commands to get the nodes contained in the stage prefab
+
   pickup_node_before_stage_monument = getstruct("pickup_node_before_stage_monument", "script_noteworthy");
   littlebird_monument set_stage(pickup_node_before_stage_monument, littlebird_monument_riders_left, "left");
   littlebird_monument set_stage(pickup_node_before_stage_monument, littlebird_monument_riders_right, "right");
@@ -538,47 +478,30 @@ AAA_sequence_bunker_to_commerce() {
   monument_spotters = array_spawn(spawners, true);
   aTrenchAIToDelete = array_merge(aTrenchAIToDelete, monument_spotters);
 
-  /*----------------------- LITTLEBIRD LOADS UP
-  -------------------------*/
   flag_wait("player_approaching_monument");
 
-  /*----------------------- DRONES LOADING INTO SEAKNIGHT
-  -------------------------*/
   spawner = getent("drones_seaknight", "targetname");
-  thread seaknight_drone_loaders(spawner, "seaknight_drones_loaded", "player_exiting_start_trench2"); //load drones then set flag when loaded
+  thread seaknight_drone_loaders(spawner, "seaknight_drones_loaded", "player_exiting_start_trench2");
 
   spawner = getent("drones_seaknight2", "targetname");
-  thread seaknight_drone_loaders(spawner, "seaknight_drones2_loaded", "player_exiting_start_trench"); //load drones then set flag when loaded
+  thread seaknight_drone_loaders(spawner, "seaknight_drones2_loaded", "player_exiting_start_trench");
 
-  /*----------------------- FIRE HYDRANT DRONE
-  -------------------------*/
   flag_wait("player_exiting_start_trench");
 
-  //thread friendly_speed_adjustment_on();
-
-  /*----------------------- SEAKNIGHT DEFENDERS LOAD UP AFTER DRONES, THEN FLY OFF
-  -------------------------*/
   seaknight_loader_start thread waittill_flag_then_notify("seaknight_drones_loaded", "load_riders");
   seaknight_loader_start thread waittill_notify_then_notify("riders_loaded", "play_anim");
 
   seaknight_loader_start2 thread waittill_flag_then_notify("seaknight_drones2_loaded", "load_riders");
   seaknight_loader_start2 thread waittill_notify_then_notify("riders_loaded", "play_anim");
 
-  /*----------------------- SPOTLIGHT DEFAULT TARGETS MOVE A LITTLE
-  -------------------------*/
   spot_targets = getEntArray("spot_targets", "script_noteworthy");
   array_thread(spot_targets, ::spot_targets_think);
 
-  /*----------------------- CLOSE BUNKER AND DELETE FRIENDLIES THERE
-  -------------------------*/
   bunker_doorup = getent("bunker_door_up", "targetname");
   bunker_doorup hide_entity();
   bunker_door = getEntArray("bunker_door", "targetname");
   array_thread(bunker_door, ::show_entity);
   flag_set("bunker_door_closed");
-
-  //stopFXOnTag( getfx( "dlight_laptop" ), laptop_light_model, "tag_origin" );
-  //laptop_light_model delete();
 
   mortar_bunker = getStructArray("mortar_bunker", "targetname");
   mortar_bunker_radius_triggers = getEntArray("mortar_bunker", "targetname");
@@ -593,8 +516,6 @@ AAA_sequence_bunker_to_commerce() {
   array_thread(aAI, ::AI_delete);
   array_thread(level.effects_bunker, ::pauseEffect);
 
-  /*----------------------- COMMERCE WALL/STREET FRIENDLIES
-  -------------------------*/
   spawner = getent("monument_waver", "targetname");
   monument_waver = spawner spawn_ai(true);
   spawners = getEntArray("friendlies_commerce_street", "targetname");
@@ -602,9 +523,8 @@ AAA_sequence_bunker_to_commerce() {
   foreach(spawner in spawners) {
     friendlies_commerce_street[friendlies_commerce_street.size] = spawner spawn_ai(true);
   }
-  //wall_death_nodes = getnodearray("wall_death_nodes", "script_noteworthy" );
+
   array_thread(friendlies_commerce_street, ::try_to_magic_bullet_shield);
-  //array_thread( friendlies_commerce_street,::AI_try_to_hang_and_die_near_player, wall_death_nodes );
 
   spawners = getEntArray("friendlies_commerce_wall", "targetname");
   friendlies_commerce_wall = [];
@@ -612,15 +532,10 @@ AAA_sequence_bunker_to_commerce() {
     friendlies_commerce_wall[friendlies_commerce_wall.size] = spawner spawn_ai(true);
   }
 
-  /*----------------------- MONUMENT MORTAR GUYS
-  -------------------------*/
   flag_wait("player_exiting_start_trench2");
   spawners = getEntArray("monument_mortarguys", "targetname");
   monument_mortarguy = array_spawn(spawners, true);
-  //array_spawn( getEntArray( "trench_mortarguys", "targetname" ), true );
 
-  /*----------------------- JAVELIN MOMENT
-  -------------------------*/
   flag_wait("commerce_enemy_javeling_failsafe");
 
   aTrenchAIToDelete = array_add(aTrenchAIToDelete, monument_waver);
@@ -634,42 +549,26 @@ AAA_sequence_bunker_to_commerce() {
   drones_flood_monument2 = getEntArray("drones_flood_monument2", "targetname");
   thread drone_flood_start(drones_flood_monument2, "drones_flood_monument2");
 
-  /*----------------------- BUNKER MORTARS OFF
-  -------------------------*/
   flag_wait("player_trench_capitol_failsafe");
 
   heli_trench = spawn_vehicle_from_targetname_and_drive("heli_trench");
   heli_commerce_front = spawn_vehicle_from_targetname_and_drive("heli_commerce_front");
 
-  //heli_trench maxPitch
-  /*----------------------- PLAYER IS FAIR GAME
-  -------------------------*/
   flag_wait("player_commerce_trench_01");
   level.player.ignoreme = false;
   level.player set_threatbias(1500);
 
-  /*----------------------- GET RID OF AI ON 4th FLOOR NOW
-  -------------------------*/
   flag_wait("player_commerce_trench_03");
-  //thread AI_cleanup_volume( "volume_commerce_fouth_floor", "axis" );
 
-  /*----------------------- PLAYER AND TEAM NOT IGNORED
-  -------------------------*/
   flag_wait_either("player_touching_commerce_wall_left", "player_touching_commerce_wall_right");
   thread autosave_by_name("commerce_wall");
   thread ignoreme_off_squad_and_player();
 
-  /*----------------------- BRADLEY NOW FIRING AT REAL TARGETS
-  -------------------------*/
   level.bradley_commerce.fireAtDefaultTargets = false;
 
-  /*----------------------- COMMERCE WALL FRIENDLIES CAN DIE
-  -------------------------*/
   array_thread(friendlies_commerce_street, ::stop_magic_bullet_shield);
   array_thread(friendlies_commerce_street, ::AI_redshirt_think);
 
-  /*----------------------- PLAYER TEAM MOVES UP
-  -------------------------*/
   flag_wait_or_timeout("player_approaching_commerce", 5);
   triggersEnable("colornodes_commerce_approach", "script_noteworthy", true);
   colornodes_commerce_approach = getEntArray("colornodes_commerce_approach", "script_noteworthy");
@@ -683,7 +582,7 @@ AAA_sequence_bunker_to_commerce() {
     if(!isDefined(guy))
       continue;
     guy.ignoresuppression = false;
-    guy.aggressivemode = false; //dont linger at cover when you cant see your enemy
+    guy.aggressivemode = false;
   }
 
   flag_wait_any("leader_orders_everyone_across_street", "player_entered_commerce_right", "player_entered_commerce_left");
@@ -696,11 +595,8 @@ AAA_sequence_bunker_to_commerce() {
   level.squad = remove_dead_from_array(level.squad);
   array_thread(level.squad, ::AI_ignored_and_oblivious_on);
 
-  /*----------------------- PLAYER AT COMMERCE STAIRS...BLOCK OTHER ENTRANCE SO AI GO TO PLAYER DOOR
-  -------------------------*/
   flag_wait("player_entering_commerce");
 
-  //make AI aware of enemies and not ignored
   level.squad = remove_dead_from_array(level.squad);
   array_thread(level.squad, ::AI_ignored_and_oblivious_off);
 
@@ -714,8 +610,6 @@ AAA_sequence_bunker_to_commerce() {
   blocker solid();
   blocker disconnectpaths();
 
-  /*----------------------- PLAYER INSIDE LOBBY
-  -------------------------*/
   flag_wait_either("player_entered_commerce_left", "player_entered_commerce_right");
   thread drone_flood_stop("drones_flood_monument");
   thread drone_flood_stop("drones_flood_monument2");
@@ -730,7 +624,7 @@ AAA_sequence_bunker_to_commerce() {
     if(!isDefined(guy))
       continue;
     guy.ignoresuppression = true;
-    guy.aggressivemode = true; //dont linger at cover when you cant see your enemy
+    guy.aggressivemode = true;
   }
 
   thread autosave_by_name("commerce_entered");
@@ -742,13 +636,6 @@ AAA_sequence_bunker_to_commerce() {
 
   thread dialogue_nag_get_to_elevator();
 
-  /*----------------------- DEAL WITH FRIENDLIES ON OPPOSITE SIDE
-  -------------------------*/
-  //array_thread( level.squad,::disable_ai_color );
-  //TODO
-
-  /*----------------------- BRADLEY OWNS REMAINING ENEMIES
-  -------------------------*/
   volume_commerce_lobby_upper = getent("volume_commerce_lobby_upper", "targetname");
   upper_floor_enemies = volume_commerce_lobby_upper get_ai_touching_volume("axis");
 
@@ -763,55 +650,37 @@ AAA_sequence_bunker_to_commerce() {
   delaythread(4, ::m203_hint);
 
   flag_wait_either("commerce_first_floor_enemies_dead", "player_middle_commerce_first_floor");
-  //thread friendly_speed_adjustment_off();
 
   level.player reset_threatbias();
 
-  //friendlies move to elevator...if not done already
   if(!flag("player_middle_commerce_first_floor")) {
     trig_colornode = getent("colornodes_elevators", "script_noteworthy");
     trig_colornode notify("trigger", level.player);
   }
 
-  /*----------------------- BRADLEY FIRING AGAIN, RANDOMLY
-  -------------------------*/
   flag_wait("player_heading_up_to_mezzanine");
   thread AI_drone_cleanup("all", 1024, true);
   level.bradleyPreferredTargets = undefined;
   level.bradley_commerce.fireAtDefaultTargets = true;
   level.bradley_commerce.firing = true;
 
-  /*----------------------- MEZZANINE BLOCKERS TO GUIDE PLAYER
-  -------------------------*/
   mezzanine_blockers = getEntArray("mezzanine_blockers", "targetname");
   array_thread(mezzanine_blockers, ::show_entity);
 
-  /*----------------------- BRADLEY STOPS FIRING AS PLAYER ENTERS TOP MEZZ
-  -------------------------*/
   flag_wait("ask_bradley_to_stop_firing");
   level.bradley_commerce.firing = false;
 
-  /*----------------------- CLEANUP TRENCHES AND CLOSE DOOR TO MEZZANINE
-  -------------------------*/
   flag_wait("player_entering_top_elevator_area");
-  //thread drone_flood_stop( "drone_flood_pavlov" );
 
   thread AI_cleanup_non_squad("all", 128);
-
-  //close door back to mezzanine only if friendlies are close to player
-  //mezzanine_door = getent( "mezzanine_door", "targetname" );
-  //mezzanine_door show_entity();
-
-  //delaythread( 2, maps\_mortar::bog_style_mortar_off, 2 );
 }
 
 AI_commerce_rpg_upper_think() {
   self endon("death");
-  self.a.disableLongDeath = true; // no long death on these guys
+  self.a.disableLongDeath = true;
   level endon("player_approaching_commerce");
   flag_wait("player_commerce_trench_03");
 
-  //teleport to closest commerce door and kill self when player too near
   aNodes = getnodearray("commerce_lobby_teleport_nodes", "targetname");
   eNode = getClosest(level.player.origin, aNodes);
   self forceTeleport(eNode.origin, eNode.angles);
@@ -825,21 +694,13 @@ AI_commerce_rpg_upper_think() {
   self kill();
 }
 
-m203_hint() {
-  //level.grenadeHint_timeout = gettime() + 8000;
-  //level.player thread display_hint( "grenade_launcher" );
-
-  //TODO...use dialogue hint instead
-  //Sgt. Foley	Use your grenade launchers!	
-  //dcburn_mcy_grenadelaunch
-}
+m203_hint() {}
 
 seaknight_drone_loaders(spawner, sFlagToSetWhenLoaded, sFlagToStop) {
   i = 1;
   while(!flag(sFlagToStop)) {
     dude = spawner dronespawn();
-    //dude.runcycle = level.scr_anim[ "generic" ][ "wounded_walkcycle" ];
-    //self.moveplaybackrate = .5;
+
     wait(randomfloatrange(1, 2.5));
   }
   seaknight_drone_loaders = get_drones_with_targetname(spawner.targetname);
@@ -852,21 +713,7 @@ vehicle_littlebird_gopath_when_loaded_and_flag_set(sFlag, pathStart) {
   while(self.riders.size < 6)
     wait(.1);
 
-  //	newArray = [];
-  //	foreach( guy in self.riders )
-  //	{
-  //		if( isDefined( guy.magic_bullet_shield ) )
-  //			guy stop_magic_bullet_shield();
-  //		dude = maps\_vehicle_aianim::convert_guy_to_drone( guy );
-  //		dude setcontents( 0 );
-  //	}
-  //	self.riders = newArray;
   flag_wait(sFlag);
-
-  /*----------------------- LITTLEBIRD TAKES OFF
-  -------------------------*/
-  //self thread vehicle_liftoff( 3 );
-  //wait( 1 );
 
   self thread vehicle_paths(pathStart);
   self setmaxpitchroll(20, 50);
@@ -898,19 +745,18 @@ spot_targets_think() {
   movetime = 2.4;
   moveDistVert = 50;
   moveDistHor = 50;
-  //self thread debug_message( "ORG", undefined, 9999, self );
+
   wait(movetime);
   while(!flag("obj_commerce_defend_snipe_given")) {
-    //up
     self moveTo(self.origin + (0, 0, moveDistVert), movetime, 1, 1);
     wait(movetime);
-    //right
+
     self moveTo(self.origin + (moveDistHor, 0, 0), movetime, 1, 1);
     wait(movetime);
-    //down
+
     self moveTo(self.origin + (0, 0, moveDistVert * (-1)), movetime, 1, 1);
     wait(movetime);
-    //left
+
     self moveTo(self.origin + (moveDistHor * (-1), 0, 0), movetime, 1, 1);
     wait(movetime);
   }
@@ -941,292 +787,196 @@ bunker_radio_chatter() {
 
   level endon("javelin_is_owning_fools");
 
-  //Goliath, Goliath, this is Stalker Two-One, standby for report one-dash-three over.	
   bunker_radio("dcburn_rm1_report1dash3");
 
-  //Stalker Two-One this is Goliath, send your traffic, over. 	
   bunker_radio("dcburn_rm2_sendtraffic");
 
-  //Line Whiskey - four zero personnel... Line X-Ray, three columns of mechanized infantry, break. 	
   bunker_radio("dcburn_rm1_40personnel");
 
-  //Line Yankee, two-zero Bravo-Tango-Romeos, five two five, six three niner. 	
   bunker_radio("dcburn_rm1_lineyankee");
 
-  //Line Zulu, Russian paratroopers, break. 	
   bunker_radio("dcburn_rm1_linezulu");
 
-  //Line Alpha, one niner one five Zulu, Line Echo, AK47s and RPGs. How copy so far, over?	
   bunker_radio("dcburn_rm1_linealpha");
 
-  //Yeah, say again, Line Yankee, over.	
   bunker_radio("dcburn_rm2_sayagain");
 
-  //Roger, I say again Line Yankee, Line Yankee, two-zero Bravo-Tango-Romeos, five two five, six three niner, how copy?	
   bunker_radio("dcburn_rm1_sayagain");
 
-  //Solid copy. Do you have any remarks, over?	
   bunker_radio("dcburn_rm2_remarks");
 
-  //Negative, no further remarks at this time, over.	
   bunker_radio("dcburn_rm1_noremarks");
 
-  //Roger, solid copy on all. Stalker, do not engage unless compromised, and continue to report every ten mikes on enemy disposition. We need as all the intel we can get on any grid north of the White House. Goliath out.	
   bunker_radio("dcburn_rm2_needintel");
 
-  //Grizzly Actual, this is Wolverine Two, we are diverting to engage enemy paratroopers, how copy, over?	
   bunker_radio("dcburn_rm3_engparatroop");
 
-  //This is Grizzly, solid copy. All Grizzly teams, be advised, Wolverine is now engaged with foot-mobiles to our nine o'clock.	
   bunker_radio("dcburn_rm4_footmobiles");
 
-  //Grizzly, this is Grizzly Two, interrogative - are we cleared to use our thermobaric LAWs, over?	
   bunker_radio("dcburn_rm5_thermlaws");
 
-  //Two-Three, what's your target?	
   bunker_radio("dcburn_rm4_whattarget");
 
-  //Snipers confirmed on the Boomerang in Building Alpha-Two-Five. It'll be easier if we drop the whole building, over.	
   bunker_radio("dcburn_rm5_dropbuilding");
 
-  //Two-Three, confirm Alpha-Two-Five is the Federal Reserve Building, over.	
   bunker_radio("dcburn_rm4_fedresbuild");
 
-  //Two, Two-Three, roger that, they're all over the top floor.	
   bunker_radio("dcburn_rm5_allover");
 
-  //I'm going to have to check in with Overlord. Standby.	
   bunker_radio("dcburn_rm4_checkin");
 
-  //Two-Three. Roger.	
   bunker_radio("dcburn_rm5_roger");
 
-  //Overlord, Overlord, this is Grizzly Actual. Grizzly Two has confirmed enemy snipers in Building Alpha-Two-Five and is requesting permission to engage with thermobaric LAWs over.	
   bunker_radio("dcburn_rm4_thermlaws");
 
-  //Overlord copies all. Standby.	
   bunker_radio("dcburn_rm6_copiesall");
 
-  //Roger, standing by.	
   bunker_radio("dcburn_rm4_stndingby");
 
-  //Grizzly this is Overlord. The use of thermobaric weapons is now authorized. Go ahead and level the building. Out.	
   bunker_radio("dcburn_rm6_thermlawsauth");
 
-  //Grizzly Two, this is Grizzly Actual. You are approved to level the building, over.	
   bunker_radio("dcburn_rm4_approved");
 
-  //Solid copy.	
   bunker_radio("dcburn_rm5_solidcopy");
 
-  //Grizzly Two-Two, Echo Five Kilo, this is Grizzly Two, you are approved to engage the snipers in Building Alpha-Two-Five.	
   bunker_radio("dcburn_rm5_apprengage");
 
-  //Roger that. Engaging targets with thermobaric LAWs.	
   bunker_radio("dcburn_rm1_engagingtarg");
 
-  //Grizzly Two, target has been suppressed.	
   bunker_radio("dcburn_rm1_targetsupp");
 
-  //All Grizzly personnel, this is Grizzly Actual. We have neutralized the snipers in Building Alpha-Two-Five. Saddle up - we're oscar mike. Out.	
   bunker_radio("dcburn_rm4_saddleup");
 
-  //Three-One this is Three-Three, BTR-60 at your two o'clock!	
   bunker_radio("dcburn_rm5_btr60");
 
-  //Roger, engaging with LAW rocket!	
   bunker_radio("dcburn_rm6_lawrocket");
 
-  //Hunter Two-One this is Two Two, we have engaged the enemy at Logan Circle Park!	
   bunker_radio("dcburn_rm1_logancircpark");
 
-  //Two-One Two Three! Two-Two is down, repeat two-two is down! 	
   bunker_radio("dcburn_rm2_22isdown");
 
-  //Three-Three this is Three-One, interrogative: where is the air support! Over!	
   bunker_radio("dcburn_rm3_airsupport");
 
-  //One-Three, One-Two, be advised, our Mark-19 is down, I repeat our Mark-19 is down, over!	
   bunker_radio("dcburn_rm5_mark19down");
 
-  //All Hunter teams, Two-Bravo is in contact with Overlord FAC! Break, retrograde to Franklin Square but continue to delay the enemy in your sectors!! Out!	
   bunker_radio("dcburn_rm4_retrograde");
 
-  //Two, Two-Three! Be advised, we have visual on enemy paratroopers at grid Papa Uniform 2 5 niner, 1 1 niner! We are low on ammo and have sustained major casualties! 	
   bunker_radio("dcburn_rm3_lowammo");
 
-  //One-Zero-Zero enemy foot-mobiles and one column of five BTR-60s will be on top of us in less than two minutes, break! Enemy is unaware of our presence at this time, how copy, over?	
   bunker_radio("dcburn_rm3_5btr60s");
 
-  //Solid copy on all. Two-Three standby, I'm calling it in. Warhammer this is Two-Bravo, standby for fire mission.	
   bunker_radio("dcburn_rm2_callingitin");
 
-  //Wolverine Two, this is Warhammer, standing by for fire mission.	
   bunker_radio("dcburn_ra2_standingby");
 
-  //Grid to suppress: Golf Foxtrot 2 7 niner, 3 1 6. Grid to mark, Golf Foxtrot, 2 7 8, 5 6 niner, over!	
   bunker_radio("dcburn_rm2_gridtomark");
 
-  //Grid to suppress: Golf Foxtrot 2 7 niner, 3 1 6. Grid to mark, Golf Foxtrot, 2 7 8, 5 6 niner, out.	
   bunker_radio("dcburn_ra2_gridtosuppress");
 
-  //Column of BTR-60s with attached infantry, request splash, danger close, over.	
   bunker_radio("dcburn_rm2_reqsplash");
 
-  //Column of BTR-60s with attached infantry, request splash, danger close, out.	
   bunker_radio("dcburn_ra2_dangerclose");
 
-  //Message to observer - Bravo, two rounds. Two guns in effect. Target number Alpha Whiskey, 3 2 3, over.	
   bunker_radio("dcburn_ra2_mess2ob");
 
-  //Message to observer - Bravo, two rounds. Two guns in effect. Target number Alpha Whiskey, 3 2 3, out.	
   bunker_radio("dcburn_rm2_2gunseffect");
 
-  //Shot - over.	
   bunker_radio("dcburn_ra2_shot");
 
-  //Shot - out.	
   bunker_radio("dcburn_rm2_shot");
 
-  //Splash - over.	
   bunker_radio("dcburn_rm2_splash");
 
-  //Splash - out.	
   bunker_radio("dcburn_ra2_splash");
 
-  //Two, Two-Three, target is partially suppressed but moving in quickly! (off mike) Hit that BTR with the LAW! Take it out! Take it out!	
   bunker_radio("dcburn_rm3_takeitout");
 
-  //Wolverine One-Two, this is Wolverine Two-Actual. Gimme a sitrep. How far are you from Two-Three's position, over.	
   bunker_radio("dcburn_rm2_linkup");
 
-  //Two-Actual, One-Two! We're dug in by the Capitol Building and are taking heavy fire from the east! Two-Three is about six-hundred meters to the south of us, over!	
   bunker_radio("dcburn_rm4_dugin");
 
-  //One-Two, can you link up with Two-Three from where you are, over?	
   bunker_radio("dcburn_rm2_sitrep");
 
-  //Negative negative! (off mike) Gray, get the two-forty Golf setup on our right flank move move! (on mike) They're rollin' us with a couple platoons of T-80s! Request Broken Arrow! Repeat - Broken Arrow!	
   bunker_radio("dcburn_rm4_brokenarrow");
 
-  //Roger that! Solid copy on Broken Arrow! Major, it's been an honor! Out.	
   bunker_radio("dcburn_rm2_brokearrow");
 
-  //Viper Three Actual, this is Viper Actual, gimme a sitrep over!	
   bunker_radio("dcburn_rm5_sitrep");
 
-  //Viper Actual this is Three-Bravo, Echo Four Sierra! Three-Bravo-Actual is KIA! Repeat, Three-Bravo-Actual is KIA!! Break! We are down to three men, I repeat, we are down to three men how copy over!!	
   bunker_radio("dcburn_rm6_kia");
 
-  //Solid copy Three-Bravo, be advised, I have Warhammer standing by, switch to tac freq 1 7 niner and go to town, over.	
   bunker_radio("dcburn_rm5_tacfreq");
 
-  //Roger that! Switching to 1 7 niner!! Out!	
   bunker_radio("dcburn_rm6_switching");
 
-  //Warpig Two, this is Warpig Two-One, I have visual on enemy armor closing twelve klicks due north of the Washington Monument, supported by infantry, APCs and attack helos, how copy over!	
   bunker_radio("dcburn_rm1_12klicksnorth");
 
-  //Contact left contact left!!	
   bunker_radio("dcburn_rm2_contactleft");
 
-  //Taking fire, eleven o'clock, one hundred meters!	
   bunker_radio("dcburn_rm3_takingfire");
 
-  //Two-One-Alpha, Two-Two-Alpha - one of Warpig Two's victors just took a hit!!! Repeat, one of Warpig Two's victors has been hit!!!	
   bunker_radio("dcburn_rm4_tookahit");
 
-  //Warpig Two, this is Wolverine Two, what's your status over!!!	
   bunker_radio("dcburn_rm5_status");
 
-  //Wolverine Two this is Warpig Two-One!! We are taking heavy fire along the Potomac! Break! Two-Two-Echo's victor is gone - they took a direct hit from a Hind -	
   bunker_radio("dcburn_rm1_heavyfire");
 
-  //Ambush!!!! Left side left side!!!	
   bunker_radio("dcburn_rm2_ambush");
 
-  //Contact left! Contact left!!	
   bunker_radio("dcburn_rm3_contactleft");
 
-  //Two-Three! RPG at your three o'clock!!	
   bunker_radio("dcburn_rm4_rpg");
 
-  //Get the Mark 19 on that sector, cover that sector!!!	
   bunker_radio("dcburn_rm5_coversector");
 
-  //Overlord, this is War Horse Five-One checking in with you, flight of two A-10s, holding area Lima, angels ten. Four by BLU-97s, two thousand rounds for the section. Ready for tasking.	
   bunker_radio("dcburn_rp1_tasking");
 
-  //Roger War Horse Five-One, I have Stalker Two on the ground requesting immediate CAS at map grid Charlie Alpha, 3 1 5, niner niner 2, break. Push to IP Buick, how copy over?	
   bunker_radio("dcburn_fac_pushtoipbuick");
 
-  //Solid copy. Map grid Charlie Alpha, 3 1 5, niner niner 2, pushing to IP Cadillac.	
   bunker_radio("dcburn_rp1_mapgrid");
 
-  //Stalker Two, you have War Horse Five-One, flight of two A-10s at angels ten, pushing to IP Cadillac.	
   bunker_radio("dcburn_fac_2a10s");
 
-  //Stalker copies all. Out.	
   bunker_radio("dcburn_rm2_stalkercopies");
 
-  //War Horse Five-One, this is Stalker, standby for information!	
   bunker_radio("dcburn_rm2_standby");
 
-  //War Horse standing by. 	
   bunker_radio("dcburn_rp1_stndingby");
 
-  //TOT two zero! Close-in-fire-support, non standard, minus one to minus one two, then plus four to plus two. Gun target line, zero five zero. I'm gonna talk you onto the target, how copy over?	
   bunker_radio("dcburn_rm2_talktotarg");
 
-  //Solid copy on all. Go ahead, over.	
   bunker_radio("dcburn_rp1_goahead");
 
-  //North-northwest of Union Station, about 800 metres, there is an oval track! Call contact!	
   bunker_radio("dcburn_rm2_ovaltrack");
 
-  //Contact.	
   bunker_radio("dcburn_rp1_contact");
 
-  //At the south edge of that oval track is a road running along an east-west axis to the White House. Call contact!	
   bunker_radio("dcburn_rm2_ewaxis");
 
-  //Contact.	
   bunker_radio("dcburn_rp1_contact");
 
-  //We are observing from a position 200 metres south of Logan Circle Park, looking east down that road. Call contact!	
   bunker_radio("dcburn_rm2_logancircpark");
 
-  //Contact.	
   bunker_radio("dcburn_rp1_contact");
 
-  //Your target is a column of six enemy T-72s moving from east to west along that road. The convention center is about halfway between our OP and the oval track, be advised, major civvies are packed into that convention center, awaiting evac. 	
   bunker_radio("dcburn_rm2_yourtarget");
 
-  //War Horse has contact on all. We are passing IP Cadillac, rolling in to heading zero-nine-zero.	
   bunker_radio("dcburn_rp1_rollingin");
 
-  //Roger that. Bring the rain.	
   bunker_radio("dcburn_rm2_bringrain");
 
-  //War Horse off safe. Guns guns guns. 	
   bunker_radio("dcburn_rp1_offsafe");
 
-  //Guns guns guns.	
   bunker_radio("dcburn_rp1_guns");
 
-  //Dash two off safe. Rollin' in. 	
   bunker_radio("dcburn_rp2_offsafe");
 
-  //Apex inbound! Break right break right!...I'm hit! Ejecting!	
   bunker_radio("dcburn_rp1_ejecting");
 
-  //I can't see it I can't see - (static burst)	
   bunker_radio("dcburn_rp2_cantseeit");
 
-  //Overlord, this is Stalker Two, War Horse Five-One, flight of two A-10s is down, I see only one chute deploying. BDA is 80 over 15. Convention center is taking HEAT rounds from T-72s, it uh, doesn't look good from where we are, how copy over?	
   bunker_radio("dcburn_rm2_onechute");
 
-  //Stalker Two, this is Overlord. Solid copy on all. We do not have any other close-air support in the area at this time. Displace to a more secure location south of K Street and await further instructions. Out. 	
   bunker_radio("dcburn_fac_southkstreet");
 }
 
@@ -1239,30 +989,25 @@ dialogue_bunker() {
   bunker_radio_org_room2 endon("death");
   bunker_radio_org_room1 endon("death");
 
-  //Marine 5	We've got wounded!	
   bunker_radio_org_room2play_sound_in_space("dcburn_gm5_gotwounded");
   wait(1);
-  //Marine 3	He's all yours doc.	
+
   bunker_radio_org_room1 play_sound_in_space("dcburn_gm3_allyoursdoc");
 
   flag_wait("player_bunker_walk_01a");
 
-  //Marine 1	Give him some water and keep him still.	
   bunker_radio_org_room2 play_sound_in_space("dcburn_gm1_keepstill");
 
-  //Marine 1	Corporal, where's your Canteen?
   bunker_radio_org_room2 play_sound_in_space("dcburn_gm1_wherescanteen");
 
   wait(1);
 
-  //Marine 2	Right here, L-T.	
   bunker_radio_org_room2 play_sound_in_space("dcburn_gm2_righthere");
 
   wait(2);
-  //Marine 6	He's stable for now. Get him to the evac site.	
+
   bunker_radio_org_room1 play_sound_in_space("dcburn_gm6_stablefornow");
 
-  //Marine 4	Christenson, two stretchers to Rajan.
   bunker_radio_org_room1 play_sound_in_space("dcburn_gm4_2stretchers");
 }
 
@@ -1285,15 +1030,12 @@ dialogue_nag_cross_the_street() {
 
   while(true) {
     if(!flag("player_crossing_street")) {
-      //Sgt. Macey	All right! RCT One's LAV has them suppressed! Get ready to move on my mark!
       level.teamleader dialogue_execute("dcburn_mcy_humveesupp");
     }
 
     if(!flag("player_crossing_street")) {
-      //Sgt. Macey	Ready….!	
       level.teamleader dialogue_execute("dcburn_mcy_ready");
 
-      //Sgt. Macey	Go go go!!! Move up! Move up!	
       level.teamleader dialogue_execute("dcburn_mcy_gomoveup");
     }
 
@@ -1304,7 +1046,6 @@ dialogue_nag_cross_the_street() {
       break;
     }
 
-    //Sgt. Macey	Move up and stay out of that Humvee's line of fire!	
     radio_dialogue("dcburn_mcy_lineoffire");
 
     wait(randomintrange(7, 11));
@@ -1312,49 +1053,48 @@ dialogue_nag_cross_the_street() {
       break;
     }
 
-    //Sgt. Macey	Move! Move!	
     radio_dialogue("dcburn_mcy_movemove");
 
     wait(randomintrange(7, 11));
     if(flag("player_entering_commerce")) {
       break;
     }
-    //Sgt. Macey	The 50cal has them suppressed! Move in! Move in!	
+
     radio_dialogue("dcburn_mcy_50calsupp");
 
     wait(randomintrange(7, 11));
     if(flag("player_entering_commerce")) {
       break;
     }
-    //Sgt. Macey	Push, push, push! We're sitting ducks out here!	
+
     radio_dialogue("dcburn_mcy_sittingducks");
 
     wait(randomintrange(7, 11));
     if(flag("player_entering_commerce")) {
       break;
     }
-    //Sgt. Macey	Get out of the killzone before you get your ass blown off! Move up!	
+
     radio_dialogue("dcburn_mcy_blownoff");
 
     wait(randomintrange(7, 11));
     if(flag("player_entering_commerce")) {
       break;
     }
-    //Sgt. Macey	Move up, get out of the killzone!	
+
     radio_dialogue("dcburn_mcy_moveup");
 
     wait(randomintrange(7, 11));
     if(flag("player_entering_commerce")) {
       break;
     }
-    //Sgt. Macey	Get your ass out of the killzone and into the target building, NOW!	
+
     radio_dialogue("dcburn_mcy_intotargbuilding");
   }
 }
 
 dialogue_nag_get_to_elevator() {
   grenadeHintGiven = false;
-  //Sgt. Macey: Move up! Go! Go!
+
   level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_00");
   flag_set("obj_commerce_given");
 
@@ -1368,7 +1108,6 @@ dialogue_nag_get_to_elevator() {
     }
 
     if(grenadeHintGiven == false) {
-      //Sgt. Foley	Use your grenade launchers!	
       level.teamleader dialogue_execute("dcburn_mcy_grenadelaunch");
       grenadeHintGiven = true;
       wait(randomintrange(7, 11));
@@ -1377,28 +1116,28 @@ dialogue_nag_get_to_elevator() {
     if(flag("player_approaching_bottom_elevators")) {
       break;
     }
-    //Sgt. Macey: Move in!
+
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_01");
 
     wait(randomintrange(7, 11));
     if(flag("player_approaching_bottom_elevators")) {
       break;
     }
-    //Sgt. Macey: Push forward! Move! Move!
+
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_02");
 
     wait(randomintrange(7, 11));
     if(flag("player_approaching_bottom_elevators")) {
       break;
     }
-    //Sgt. Macey: Keep moving forward!
+
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_03");
 
     wait(randomintrange(7, 11));
     if(flag("player_approaching_bottom_elevators")) {
       break;
     }
-    //Sgt. Macey: Move up! Move up!
+
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_04");
     wait(randomintrange(7, 11));
   }
@@ -1420,20 +1159,16 @@ dialogue_trenches() {
 
   flag_wait("player_bunker_walk_02");
 
-  //Overlord Radio Voice	Ensure all weapons are condition-one and get topside to provide support. Casevac birds are under heavy fire.	
   bunker_radio_org_room2 thread play_sound_on_entity("dcburn_hqr_ensureweapons");
 
   flag_wait("player_bunker_walk_03");
 
-  //Ranger 1: On your feet. We're Oscar Mike
   level.friendly03 thread dialogue_execute("dcburn_gr1_onyourfeet");
 
   flag_wait("player_approaching_bunker_exit_hall");
 
-  //Sgt. Macey Roger, Two-One out.
   level.teamleader dialogue_execute("dcburn_mcy_rogerout");
 
-  //Sgt. Macey: Listen up! This evac site is getting hit hard and we need to buy 'em some time. Hooah?
   level.teamleader dialogue_execute("dcburn_mcy_evachithard");
 
   flag_set("obj_follow_sgt_macey_given");
@@ -1447,12 +1182,10 @@ dialogue_trenches() {
 
   array_thread(level.chattertrigsexteriror, ::trigger_on);
 
-  //Overlord HQ Radio Voice	All callsigns, the LZ is under heavy fire. Uncover enemy positions and engage potential targets.	
   radio_dialogue("dcburn_hqr_uncoverengage");
 
   flag_wait("javelin_is_owning_fools");
 
-  //Cpl. Dunn	They've got optics on us..snipers, rpg teams and heavy arms fire, all floors...12 o'clock due west of our position.	
   thread radio_dialogue("dcburn_cpd_opticsonus");
 
   flavorbursts_on("allies");
@@ -1463,57 +1196,31 @@ dialogue_trenches() {
 
   wait(.75);
 
-  //Sgt. Macey	Overlord, this is Hunter 2-1. Requesting airstrike, over.	
   level.teamleader dialogue_execute("dcburn_mcy_reqairstrike");
 
-  //Overlord HQ Radio Voice	Uh, negative Two-One, all available air units are currently tasked with multiple casevacs along the Potomac. Proceed west to the target building and provide support, out.	
   radio_dialogue("dcburn_hqr_alongpotomac");
 
   thread autosave_by_name("trench_start");
 
-  //Sgt. Macey	Everyone move up, get out of the killzone. We gotta buy some time for those casevac birds.	
   level.teamleader dialogue_execute("dcburn_mcy_buytime");
 
   flag_wait("player_trench_capitol_failsafe");
 
-  //Sgt. Macey	Overlord this is Hunter Two-One. We're screening west with no adjacent support, and friendly victors from RCT One are hauling ass past us, over.	
   level.teamleader dialogue_execute("dcburn_mcy_haulingpastus");
-
-  //Overlord HQ Radio Voice: Roger. RCT One has already peeled off an LAV to provide suppression, over."thread radio_dialogue("dcburn_hqr_humvee");
 
   wait(3);
   flag_set("bradley_can_start_firing");
-
-  //Sgt. Macey	Copy that.	
-  //radio_dialogue("dcburn_mcy_copythat");
-
-  //Cpl. Dunn	We're running the gauntlet with no armor or air and they give us one Humvee…	
-  //radio_dialogue("dcburn_cpd_gauntlet");
-
-  //Marine 3	Welcome to the suck.	
-  //radio_dialogue("dcburn_gm3_welcometosuck");
-
-  //Sgt. Macey	Hey - no more talking. Stay frosty.	
-  //radio_dialogue("dcburn_mcy_stayfrosty");
 
   flag_wait("commerce_rappelers_inserting");
   wait(1);
 
   if(!flag("player_commerce_trench_03")) {
-    //Overlord HQ Radio Voice	Hunter Two-One, this is Overlord. SEAL Team Six is maneuvering into position on the northwest corner of the target building. Link up with them on the top floor and eliminate enemy fire teams, over.	
     radio_dialogue("dcburn_hqr_linkup");
-
-    //Sgt. Macey	Roger solid copy on all.	
-    //radio_dialogue("dcburn_mcy_solidcopyonall");
   }
 
   if(!flag("player_commerce_trench_03")) {
-    //Sgt. Macey	Keep your fire low...we got friendlies inserting up there.	
     level.teamleader dialogue_execute("dcburn_mcy_firelow");
   }
-
-  //Cpl. Dunn	I see foot mobiles...12 o'clock, 100 meters!	
-  //radio_dialogue("dcburn_cpd_footmobiles");
 
   flag_set("trenches_dialogue_done");
 }
@@ -1526,14 +1233,10 @@ javelins_trench() {
 
   flag_wait("player_leaving_bunker");
 
-  //helicopter_crash_apache_01 = getent( "helicopter_crash_apache_01", "targetname" );
   spawn_vehicles_from_targetname_and_drive("apache_01");
-  //apache.perferred_crash_location = helicopter_crash_apache_01;
-  //apache thread apache_think();
 
   javelin_source_org = getent("javelin_source_org", "targetname");
   monument_heli_owned = spawn_vehicle_from_targetname("monument_heli_owned");
-  //monument_heli_owned Vehicle_TurnEngineOff();
 
   m1a1_owned = spawn_vehicle_from_targetname("m1a1_owned");
   m1a1_owned2 = spawn_vehicle_from_targetname("m1a1_owned2");
@@ -1548,25 +1251,17 @@ javelins_trench() {
   wait(2);
   thread gopath(m1a1_owned);
 
-  /*----------------------- HELI OWNED BY ENEMY JAV
-  -------------------------*/
   flag_wait_either("looking_commerce_enemy_javelin", "commerce_enemy_javeling_failsafe");
 
-  /*----------------------- SPAWN SOME FRIENDLY FODDER TO SHOOT AT
-  -------------------------*/
   spawner = getent("commerce_friendly_fodder", "targetname");
   spawner spawn_ai(true);
 
-  /*----------------------- HELI OWNED BY JAV
-  -------------------------*/
   newMissile = MagicBullet("javelin_noimpact", javelin_source_org.origin, monument_heli_owned.origin);
   playFX(getfx("javelin_muzzle"), javelin_source_org.origin);
-  newMissile thread javelin_earthquake(); //custom function to ensure an earthquake on impact
+  newMissile thread javelin_earthquake();
   newMissile Missile_SetTargetPos(monument_heli_owned.origin);
-  newMissile Missile_SetFlightmodeTop(); //Code added this command so we could make the Javelin do an arc instead of a straight line
+  newMissile Missile_SetFlightmodeTop();
 
-  /*----------------------- SEAKNIGHT TAKES OFF
-  -------------------------*/
   seaknight_monument_takeoff_01 = get_vehicle("seaknight_monument_takeoff_01", "script_noteworthy");
   heli_monument_path_01 = getstruct("heli_monument_path_01", "targetname");
   seaknight_monument_takeoff_01 thread vehicle_paths(heli_monument_path_01);
@@ -1576,8 +1271,6 @@ javelins_trench() {
   thread gopath(m1a1_owned2);
   m1a1_owned2 maps\_vehicle::godoff();
 
-  /*----------------------- M1A1 #1 AND SEAKNIGHT OWNED BY JAV
-  -------------------------*/
   m1a1_owned setturrettargetent(javelin_source_org);
   m1a1_owned thread vehicle_tank_fire_turret(javelin_source_org);
   m1a1_owned thread m1a1_owned_think();
@@ -1591,8 +1284,6 @@ javelins_trench() {
 
   thread maps\dcburning_fx::monument_heli_destroyed(monument_heli_owned);
 
-  /*----------------------- OTHER TARGETS GET HIT BY JAVELINS
-  -------------------------*/
   wait(10);
   m1a1_owned2 setturrettargetent(javelin_source_org);
   m1a1_owned2 thread vehicle_tank_fire_turret(javelin_source_org);
@@ -1612,17 +1303,7 @@ javelins_trench() {
   dummy = spawn("script_origin", (0, 0, 0));
   while(!flag("player_entering_top_elevator_area")) {
     wait(randomfloatrange(5, 8));
-    //alternate javelin targets between vehicles and trenches
 
-    //		if( ( toggle == 1 ) && ( isDefined( javelin_vehicle_target_array ) ) && ( javelin_vehicle_target_array.size > 0 ) )
-    //		{
-    //			eTargetVehicle = getclosest( level.player.origin, javelin_vehicle_target_array );
-    //			javelin_vehicle_target_array = array_remove( javelin_vehicle_target_array, eTargetVehicle );
-    //			eTargetVehicle vehicle_owned_by_javelin( javelin_source_org );
-    //			toggle = 0;
-    //		}
-    //		else
-    //		{
     iRand = randomint(javelin_targets_trench.size);
     eTargetTrenchOrg = javelin_targets_trench[iRand];
     dummy.origin = eTargetTrenchOrg.origin;
@@ -1632,7 +1313,7 @@ javelins_trench() {
     newMissile Missile_SetTargetEnt(dummy);
     newMissile Missile_SetFlightmodeTop();
     toggle = 1;
-    //		}
+
     wait(randomfloatrange(5, 10));
   }
 
@@ -1658,23 +1339,7 @@ radius_damage_m1a1_owned() {
   }
 }
 
-apache_think() {
-  //	self endon( "death" );
-  //	flag_wait( "apache_commerce" );
-  //	javelin_source_org = getent( "javelin_source_org", "targetname" );
-  //	attractor = Missile_CreateAttractorEnt( self, 100000, 100000 );
-  //	MagicBullet( "rpg", javelin_source_org.origin, self.origin );
-  //	while( isDefined( self ) )
-  //	{
-  //		self waittill( "damage", amount, attacker );
-  //		if( !isdefined ( attacker ) )
-  //				continue;
-  //		if( isPlayer( attacker ) )
-  //			continue;
-  //		break;
-  //	}
-  //	self notify( "death" );
-}
+apache_think() {}
 
 vehicle_tank_fire_turret(eTarget) {
   self endon("death");
@@ -1712,7 +1377,7 @@ vehicle_heli_fire_turret(eTarget) {
 helis_monument() {
   flag_wait("player_leaving_bunker");
   helis_monument = spawn_vehicles_from_targetname("helisquad_monument");
-  //array_call( helis_monument,::Vehicle_TurnEngineOff );
+
   flag_wait("player_approaching_monument");
   array_call(helis_monument, ::Vehicle_SetSpeed, 100);
   array_thread(helis_monument, ::gopath);
@@ -1721,11 +1386,7 @@ helis_monument() {
 helis_monument_ground() {
   flag_wait("player_leaving_bunker");
   helis_monument = spawn_vehicles_from_targetname("helisquad_monument_ground");
-  //	foreach( heli in helis_monument )
-  //	{
-  //		if( ( isDefined( heli.script_noteworthy ) ) && ( heli.script_noteworthy == "seaknight_monument_takeoff_01" ) )
-  //			heli Vehicle_TurnEngineOff();
-  //	}
+
   array_thread(helis_monument, maps\_vehicle::godon);
 }
 
@@ -1733,7 +1394,7 @@ helis_monument_cargo() {
   flag_wait("player_leaving_bunker");
   helis_monument_cargo = spawn_vehicles_from_targetname("helis_monument_cargo");
   helis_monument_cargo_noliftoff = spawn_vehicles_from_targetname("helis_monument_cargo_noliftoff");
-  //array_call( helis_monument_cargo_noliftoff,::Vehicle_TurnEngineOff );
+
   flag_wait("player_approaching_monument");
   array_thread(helis_monument_cargo, ::heli_cargo_liftoff_and_go);
   array_thread(helis_monument_cargo_noliftoff, ::gopath);
@@ -1744,30 +1405,11 @@ capitol_trench() {
   jets = spawn_vehicles_from_targetname_and_drive("jets_capitol_01");
 }
 
-//commerce_lasers()
-//{
-//	laser_orgs = getEntArray( "laser_orgs", "targetname" );
-//	flag_wait( "javelin_is_owning_fools" );
-//	aTargets = getEntArray( "target_crowsnest", "targetname" );
-//	array_thread( laser_orgs,::commerce_lasers_think, aTargets );
-//}
-
-//commerce_lasers_think( aTargets )
-//{
-//	while( !flag( "second_abrams_killed" ) )
-//	{
-//		iRand = randomint( aTargets.size );
-//		wait( randomfloatrange( 1.2, 3.4 ) );
-//	}
-//}
-
 humvee_commerce_left() {
   flag_wait("player_approaching_bunker_exit");
 
   humvee_spotlight_left = spawn_vehicle_from_targetname("humvee_spotlight_left");
 
-  /*----------------------- HUMVEE SPOTLIGHT SETUP
-  -------------------------*/
   humvee_spotlight_left humvee_spotlight_setup();
 
   flag_wait("javelin_is_owning_fools");
@@ -1789,8 +1431,7 @@ humvee_commerce_left() {
   flag_set("humvee_commerce_left_done_with_spotlight");
   humvee_spotlight_left thread gopath();
   humvee_spotlight_left waittill("reached_end_node");
-  /*----------------------- CLEANUP
-  -------------------------*/
+
   humvee_spotlight_left vehicle_delete();
 }
 
@@ -1800,16 +1441,12 @@ humvee_commerce() {
   humvee_spotlight maps\_vehicle::godon();
   HummerTurret = humvee_spotlight.mgturret[0];
 
-  /*----------------------- HUMVEE SPOTLIGHT SETUP
-  -------------------------*/
   humvee_spotlight humvee_spotlight_setup();
 
   flag_wait("humvee_commerce_left_done_with_spotlight");
 
   humvee_spotlight.turret thread humvee_spotlight_think(humvee_spotlight, HummerTurret);
 
-  /*----------------------- HUMVEE SPOTLIGHT TARGETS RAPPELERS FOR A WHILE
-  -------------------------*/
   flag_wait("commerce_rappelers_rappeling");
 
   if(isDefined(level.commercerappelers)) {
@@ -1828,12 +1465,8 @@ humvee_commerce() {
     }
   }
 
-  /*----------------------- CLEANUP
-  -------------------------*/
   flag_wait("player_entering_top_elevator_area");
 
-  /*----------------------- CLEANUP
-  -------------------------*/
   flag_wait("player_in_crowsnest_room");
 
   humvee_spotlight.spotlight_org delete();
@@ -1858,8 +1491,7 @@ bradley_commerce() {
   level.bradley_commerce.firing = true;
   while(!flag("player_entering_top_elevator_area")) {
     wait(0.05);
-    /*----------------------- KILL ANY PREFERRED TARGETS
-    -------------------------*/
+
     if(level.bradley_commerce.firing == false) {
       wait(1);
       continue;
@@ -1875,19 +1507,13 @@ bradley_commerce() {
     } else if(level.bradley_commerce.fireAtDefaultTargets) {
       iRand = randomInt(bradleyDefaultTargets.size);
       eTarget = bradleyDefaultTargets[iRand];
-    }
-    /*----------------------- OTHERWISE JUST GET A TARGET
-    -------------------------*/
-    else
+    } else
       eTarget = level.bradley_commerce vehicle_get_target();
     if(!isDefined(eTarget)) {
       wait(randomfloatrange(2, 4));
       continue;
     }
 
-    /*----------------------- SHOOT AT THE TARGET
-    -------------------------*/
-    //targetLoc = eTarget gettagorigin( "tag_eye" );
     level.bradley_commerce setturrettargetent(eTarget);
     level.bradley_commerce waittill_notify_or_timeout("turret_rotate_stopped", 1);
     iBurstNumber = randomfloatrange(2, 6);
@@ -1922,11 +1548,11 @@ vehicle_get_target() {
       eTarget = self.defaultTargets[randomint(self.defaultTargets.size)];
       break;
     case "bradley":
-      //getEnemyTarget( fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders )
+
       eTarget = maps\_helicopter_globals::getEnemyTarget(self.weaponrange, level.cosine["180"], true, false, false, true);
       break;
     case "btr80":
-      //getEnemyTarget( fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders )
+
       eTarget = maps\_helicopter_globals::getEnemyTarget(level.CannonRange, level.cosine["180"], true, true, false, true);
       break;
   }
@@ -1985,7 +1611,6 @@ rappel_window_exploder(guy) {
 }
 
 humvee_spotlight_think(humvee, HummerTurret) {
-  //self ==> spotlight turret
   humvee endon("death");
   self endon("death");
 
@@ -2035,8 +1660,7 @@ spotlight_preferred_targets() {
   self thread find_player_attacker_for_spotlight(self);
 
   flag_wait_either("player_touching_commerce_lobby_right", "player_touching_commerce_lobby_left");
-  /*----------------------- POINT SPOTLIGHT AT ENEMIES NEAR PLAYER, OR ONES DAMAGING PLAYER
-  -------------------------*/
+
   volume_commerce_lobby_lower = getent("volume_commerce_lobby_lower", "targetname");
   volume_commerce_lobby_upper = getent("volume_commerce_lobby_upper", "targetname");
   enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis");
@@ -2056,22 +1680,16 @@ spotlight_preferred_targets() {
       wait(randomfloatrange(3, 5));
     else
       wait(.5);
-    enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis"); //want to get these guys again in case more spawned in
+    enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis");
   }
 
-  /*----------------------- FIFTH FLOOR - POINT SPOTLIGHT AT ENEMY WINDOWS NEAREST PLAYER
-  -------------------------*/
   flag_wait("player_entering_top_elevator_area");
   humvee_spotlight_targets_upper = getEntArray("humvee_spotlight_targets_upper", "targetname");
   aAI = undefined;
 
   while(isDefined(self)) {
     wait(randomfloatrange(2, 4));
-    //		aAI = getaiarray("axis" );
-    //		if( aAI.size == 0 )
-    //			continue;
-    //		guy = getClosest( level.player.origin, aAI );
-    //		self.spotlightPreferredTarget = getClosest( guy.origin, humvee_spotlight_targets_upper );
+
     self.spotlightPreferredTarget = humvee_spotlight_targets_upper[randomint(humvee_spotlight_targets_upper.size)];
   }
 }
@@ -2101,7 +1719,6 @@ humvee_default_targets_think(targets, turret) {
     }
   }
 
-  //cleanup
   foreach(target in targets)
   target delete();
 }
@@ -2111,7 +1728,6 @@ humvee_convoy() {
   humvee_convoy_00 = getEntArray("humvee_convoy_00", "targetname");
 
   if(getdvarint("r_dcburning_culldist") == 1) {
-    //make vehicle convoy a bit thinner on minspec
     thread drone_vehicle_flood_start(humvee_convoy_00, "humvee_convoy_00", 7, 10, true);
   } else {
     thread drone_vehicle_flood_start(humvee_convoy_00, "humvee_convoy_00", 3.1, 4.8, true);
@@ -2121,10 +1737,6 @@ humvee_convoy() {
 
   drone_vehicle_flood_stop("humvee_convoy_00");
 }
-
-/****************************************************************************
-COMMERCE BUILDING - ELEVATOR_BOTTOM
-****************************************************************************/
 
 AA_elevator_bottom_init() {
   thread atrium_guys();
@@ -2166,7 +1778,6 @@ AAA_sequence_elevator_bottom_to_top() {
     if(!isDefined(guy))
       continue;
     guy.attackeraccuracy = 0;
-    //guy.useChokePoints = true;
   }
 
   thread elevator_start();
@@ -2181,27 +1792,19 @@ AAA_sequence_elevator_bottom_to_top() {
   }
   array_thread(aFodder_friendlies, ::AI_redshirt_think);
 
-  /*----------------------- PLAYER ENTERING COURTYARD
-  -------------------------*/
   flag_wait("player_entering_courtyard");
 
   if(getdvarint("r_dcburning_culldist") == 1) {
     setculldist(0);
   }
 
-  /*----------------------- TRY TO THIN OUT LOBBY ENEMIES
-  -------------------------*/
   thread AI_cleanup_volume("volume_commerce_lobby_upper", "axis");
   thread AI_cleanup_volume("volume_commerce_lobby_lower", "axis");
 
-  /*----------------------- ALL ATRIUM ENEMIES GO INTO AMBUSH MODE
-  -------------------------*/
   flag_wait("player_headed_to_atrium_side_hall");
   aAI = getaiarray("axis");
   array_thread(aAI, ::AI_ambush_behavior);
 
-  /*----------------------- PLAYER ENTERING COURTYARD SIDE HALL
-  -------------------------*/
   flag_wait("player_entering_commerce_side_hall");
 
   flag_set("stop_elevator_doors");
@@ -2211,24 +1814,6 @@ AAA_sequence_elevator_bottom_to_top() {
 
   flag_wait("player_heading_up_to_mezzanine");
 
-  /*----------------------- PAVLOV STREET DRONES
-  -------------------------*/
-  //pavlov_ai = [];
-  //drone_warriors_pavlov = getEntArray( "drone_warriors_pavlov", "targetname" );
-  //friendlies_pavlov_street = getEntArray( "friendlies_pavlov_street", "targetname" );
-  //hostiles_pavlov_street = getEntArray( "hostiles_pavlov_street", "targetname" );
-  //spawners = array_merge( friendlies_pavlov_street, drone_warriors_pavlov );
-  //spawners = array_merge( spawners, hostiles_pavlov_street );
-  //foreach( spawner in spawners )
-  //{
-  //	pavlov_ai[ pavlov_ai.size ] = spawner spawn_ai( true );
-  //}
-
-  //drone_flood_pavlov = getEntArray( "drone_flood_pavlov", "targetname" );
-  //thread drone_flood_start( drone_flood_pavlov, "drone_flood_pavlov" );
-
-  /*----------------------- MEZZANINE
-  -------------------------*/
   flag_wait("player_entering_mezzanine_top");
   thread waittill_targetname_volume_dead_then_set_flag("volume_commerce_lobby_upper", "mezzanine_top_has_been_cleared");
   spawn_vehicles_from_targetname_and_drive("jets_mezz_01");
@@ -2236,13 +1821,9 @@ AAA_sequence_elevator_bottom_to_top() {
   flag_wait("player_approaching_pavlov_hole");
   delaythread(0, ::spawn_vehicles_from_targetname_and_drive, "helis_mezzanine");
 
-  /*----------------------- HEADED TO FOURTH FLOOR
-  -------------------------*/
   flag_wait("player_at_bottom_of_pavlovs_ramp");
   thread AI_cleanup("axis");
 
-  /*----------------------- SPAWN SAM SITE HOSTILES AND FRIENDLY FODDER
-  -------------------------*/
   thread samsite_enemy_chatter();
 
   battlechatter_off("allies");
@@ -2256,15 +1837,14 @@ AAA_sequence_elevator_bottom_to_top() {
   samsite.puller thread samsite_ai_think(commerce_samsite_nodes[0]);
   samsite.turret thread samsite_turret_think();
   samsite thread samsite_c4_think();
-  /*----------------------- SAM SITE HOSTILES ALERTED!
-  -------------------------*/
+
   flag_wait_any("player_entering_fourth_floor", "player_shot_at_samsite_guys", "player_gawking_at_fourth_floor_guys");
   flag_set("player_shot_at_samsite_guys");
   battlechatter_on("allies");
 
   if(!flag("player_entering_fourth_floor")) {
-    thread dummy_trigger("dummy_colornodes_pavlov_end"); //make friendlies move up
-    activate_trigger("spawner_hostiles_commerce_floor4", "targetname", level.player); //spawn enemies across balcony, etc
+    thread dummy_trigger("dummy_colornodes_pavlov_end");
+    activate_trigger("spawner_hostiles_commerce_floor4", "targetname", level.player);
   }
 
   array_thread(commerce_allied_fodder_4, ::AI_delete);
@@ -2273,21 +1853,15 @@ AAA_sequence_elevator_bottom_to_top() {
   thread waittill_targetname_volume_dead_then_set_flag("volume_commerce_fourth_floor", "floor_four_has_been_cleared");
   flag_wait_either("floor_four_has_been_cleared", "player_headed_to_fifth_floor");
 
-  /*----------------------- HEADED TO FIFTH FLOOR
-  -------------------------*/
   flag_wait("player_headed_to_fifth_floor");
   battlechatter_off("allies");
-
-  //array_thread( pavlov_ai,::AI_delete );
 
   thread AI_cleanup_non_squad("all");
 }
 
 samsite_c4_think() {
-  //self ==> the samsite struct
   c4_locations = getStructArray("c4_slamraam", "script_noteworthy");
   foreach(c4_location in c4_locations) {
-    //c4_location( tag, origin_offset, angles_offset, org )
     level.c4_models[level.c4_models.size] = self.base maps\_c4::c4_location(undefined, undefined, undefined, c4_location.origin);
   }
 
@@ -2296,7 +1870,7 @@ samsite_c4_think() {
   flag_set("slamraam_c4_detonated");
 
   self.base setModel("vehicle_slamraam_destroyed");
-  //playFX( getfx( "vehicle_explosion_slamraam" ), self.base.origin );
+
   playFX(getfx("large_vehicle_explosion"), self.base.origin);
   thread play_sound_in_space("exp_slamraam_destroyed", self.base.origin);
   self.turret delete();
@@ -2323,8 +1897,8 @@ atrium_guys() {
     guy.nocorpsedelete = true;
     guy.ignoreme = true;
     guy.reference = spawner;
-    guy.dontDoNotetracks = true; //allows using of ai _anim functons without getting errors
-    guy.script_looping = 0; //will force drone to scip default idle behavior
+    guy.dontDoNotetracks = true;
+    guy.script_looping = 0;
     guy gun_remove();
     guy.deathanim = level.scr_anim["generic"][spawner.animation + "_death"];
     assert(isDefined(guy.deathanim));
@@ -2377,32 +1951,28 @@ samsite_enemy_chatter() {
   level endon(sFlagToKillDialogue);
 
   while(!flag(sFlagToKillDialogue)) {
-    //	Russian Airborne 1	Lieutenant Gureyvich, we have acquired two enemy aircrafts approaching, airspeed 500 knots, altitude 320 metres!	
     play_sound_then_kill_on_flag("dcburn_ra1_acquiredtwo", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 2	Good! Lock on and engage the targets!	
     play_sound_then_kill_on_flag("dcburn_ra2_lockon", origin, sFlagToKillDialogue);
 
     wait(1);
-    //	Russian Airborne 3	Missile locked on and ready to fire!	
+
     play_sound_then_kill_on_flag("dcburn_ra3_missilelocked", origin, sFlagToKillDialogue);
 
     wait(.5);
-    //	Russian Airborne 1	Two more southbound aircrafts, airspeed 620 knots, altitude 400 metres!	
+
     play_sound_then_kill_on_flag("dcburn_ra1_2moresouthbound", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 2	Fire missile!	
     play_sound_then_kill_on_flag("dcburn_ra2_firemissile", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 3	Yes sir! Firing missile!	
     play_sound_then_kill_on_flag("dcburn_ra3_firingmissile", origin, sFlagToKillDialogue);
 
     wait(1.5);
-    //	Russian Airborne 1	2 targets, moving north, 500 meters!	
+
     play_sound_then_kill_on_flag("dcburn_ra1_movingnorth", origin, sFlagToKillDialogue);
 
     wait(1);
-    //	Russian Airborne 2	Left, 10 degrees!	
+
     play_sound_then_kill_on_flag("dcburn_ra2_10degrees", origin, sFlagToKillDialogue);
   }
 }
@@ -2413,23 +1983,6 @@ samsite_ai_think(eNode) {
   self thread AI_hostiles_commerce_samsite_think();
 
   self waittill_either("damage", "alerted");
-
-  //		if( !isDefined( attacker ) )
-  //			continue;
-  //		if( isPlayer( attacker ) )
-  //		{
-  //			self thread stop_magic_bullet_shield();
-  //			self.allowdeath = true;
-  //			self stopanimscripted();
-  //			self notify( "alerted" );
-  //			self.ignoreme = false;
-  //			if( isDefined( type ) )
-  //			{
-  //				if( ( type == "MOD_PROJECTILE" ) || ( type == "MOD_PROJECTILE_SPLASH" ) || ( type == "MOD_GRENADE_SPLASH" ) || ( type == "MOD_GRENADE" ) )
-  //					self kill();
-  //			}
-  //			break;
-  //		}
 
   self anim_stopanimscripted();
   self.ignorerandombulletdamage = false;
@@ -2460,8 +2013,6 @@ samsite_turret_think() {
 }
 
 samsite_setup(targetname, sFlagToStart, sFlagToSetWhenDone) {
-  /*----------------------- SETUP SAMSITE AI AND RETURN TO CALLER
-  -------------------------*/
   aSamsiteComponents = getEntArray(targetname, "targetname");
   eSamsiteBase = undefined;
   eSamsiteTarp = undefined;
@@ -2489,10 +2040,8 @@ samsite_setup(targetname, sFlagToStart, sFlagToSetWhenDone) {
 
   aAI_samsite = array_spawn(aSpawners, true);
   foreach(guy in aAI_samsite) {
-    //guy.allowdeath = false;
     guy.ignoreme = true;
     guy.ignoreall = true;
-    //guy thread magic_bullet_shield();
   }
 
   assertex(aAI_samsite.size == 2, "Need exactly 2 AI for the sam site");
@@ -2527,17 +2076,12 @@ samsite_setup(targetname, sFlagToStart, sFlagToSetWhenDone) {
   samsite.turret = eSamsiteTurret;
   samsite.base = eSamsiteBase;
 
-  /*----------------------- MAKE SAMSITE GO ONCE FLAG SET
-  -------------------------*/
   eSamsiteBase thread samsite_tarp_think(aSamSiteActors, sFlagToStart, sFlagToSetWhenDone);
 
-  /*----------------------- RETURN SAMSITE AI TO CALLER
-  -------------------------*/
   return samsite;
 }
 
 samsite_tarp_think(aSamSiteActors, sFlagToStart, sFlagToSetWhenDone) {
-  //self ==> the samsite base
   self anim_first_frame(aSamSiteActors, "pulldown");
   flag_wait(sFlagToStart);
   self anim_single(aSamSiteActors, "pulldown");
@@ -2573,7 +2117,7 @@ elevator_dude_think(spawner) {
   sLoop = "dcburning_elevator_corpse_idle_A";
   sNudge = "dcburning_elevator_corpse_bump_A";
   self.allowdeath = false;
-  self.dontDoNotetracks = true; //allows using of ai _anim functons without getting errors
+  self.dontDoNotetracks = true;
   self.script_looping = 0;
   self gun_remove();
   self setcontents(0);
@@ -2641,33 +2185,24 @@ elevator_start() {
 dialogue_elevator_bottom_to_top() {
   flag_wait("player_approaching_bottom_elevators");
 
-  //Sgt. Macey	Overlord, this is Hunter Two-One, be advised, we're inside and proceeding to the upper floors.	
   radio_dialogue("dcburn_mcy_upperfloors");
 
-  //Overlord HQ Radio Voice	Roger, Overlord copies all.	
   radio_dialogue("dcburn_hqr_copiesall");
 
-  /*----------------------- HEADED TO COURTYARD
-  -------------------------*/
   flag_wait_either("courtyard_has_been_cleared", "player_heading_up_to_mezzanine");
 
   if(flag("courtyard_has_been_cleared")) {
-    //****Sgt. Macey: Hostiles suppressed in Section Two-Echo.
     radio_dialogue("dcburn_mcy_alldeadcourtyard");
 
-    //Overlord HQ Radio Voice: Solid copy, Two-One.	
     radio_dialogue("dcburn_hqr_solidcopy");
   }
 
   thread autosave_by_name("courtyard_has_been_cleared");
 
-  /*----------------------- UP TO MEZZANINE
-  -------------------------*/
   flag_wait("player_heading_up_to_mezzanine");
-  //***Sgt. Macey: Overlord this is Hunter Two-One. Proceeding to the mezzanine. Tell the LAV from RCT One to hold their fire, over.
+
   radio_dialogue("dcburn_mcy_tomezzanine");
 
-  //****Overlord HQ Radio Voice: Copy that, Two One, good hunting.
   radio_dialogue("dcburn_hqr_goodhunt");
   flag_set("ask_bradley_to_stop_firing");
 
@@ -2675,106 +2210,59 @@ dialogue_elevator_bottom_to_top() {
 
   flag_wait_either("mezzanine_top_has_been_cleared", "player_at_bottom_of_pavlovs_ramp");
   if(flag("mezzanine_top_has_been_cleared")) {
-    //****Sgt. Macey: Hostiles suppressed in Section Two-Echo.
     radio_dialogue("dcburn_mcy_alldeadmezzanine");
 
-    //Overlord HQ Radio Voice: Roger that, Two-One.	
     radio_dialogue("dcburn_hqr_rogerthat");
   }
   flavorbursts_off("allies");
 
-  //Ranger 1	This is Delta Four-One at the Lincoln Memorial!!! We are taking heavy fire, request arty and airstrike on our position!!! Send whatever you got! Broken arrow broken arrow!!!	
   level.player thread play_sound_on_entity("dcburn_ar1_lincolnmemorial");
 
   flavorbursts_on("allies");
 
   flag_wait("player_at_bottom_of_pavlovs_ramp");
 
-  //	if( player_has_motiontracker() )
-  //	{
-  //		if( !motiontracker_enabled() )
-  //		{
-  //			//Sgt. Macey	15	3	Let's get the drop on them...Ramirez, activate your heartbeat sensor.
-  //			radio_dialogue( "dcburn_mcy_droponthem" );
-  //			level.heartbeat_timeout = gettime() + 15000;
-  //			level.player thread display_hint( "hint_heartbeat_sensor" );//it will endon this thread if not threaded
-  //		}
-  //		else
-  //		{
-  //			//Sgt. Macey	15	4	Keep an eye on your heartbeat sensor Ramirez. I wanna hit 'em fast and hard.
-  //			radio_dialogue( "dcburn_mcy_hitemfast" );
-  //		}
-  //	}
-
-  //That's the frickin' Capitol Building!	
   level.friendly02 dialogue_execute("dcburn_cpd_capitolbuild");
 
-  //****Overlord HQ Radio Voice: Hunter Two-One be advised, hostiles on the southwest corner of the fifth floor are hammering the evac site, over.
   radio_dialogue("dcburn_hqr_crownag");
 
-  //****Sgt. Macey: Solid copy Overlord. We are Oscar Mike to the fifth floor. Out.
   radio_dialogue("dcburn_mcy_omwtofifth");
-
-  //Sgt. Macey	Outlaw Two-Three this is Two-One-Actual. Interrogative - what are you seeing from your position over?	
-  //radio_dialogue( "dcburn_mcy_whatseeing_r" );
-
-  //Marine 5	The LZ is still receiving heavy fire from the target building, break - I see RPG teams on the upper floors, and medium caliber fire coming from the southwest corner over.	
-  //radio_dialogue("dcburn_gm5_lzheavyfire");
-
-  //Sgt. Macey	Solid copy, Two-One out.	
-  //radio_dialogue("dcburn_mcy_solidcopy_r");
 
   flag_wait("player_at_top_of_pavlovs_ramp");
 
   if(!flag("player_shot_at_samsite_guys")) {
     thread autosave_by_name("crow_sneak");
-    //Sgt. Macey: Standby to engage.
+
     radio_dialogue("dcburn_mcy_sby2engage");
   }
 
   flag_wait_either("floor_four_has_been_cleared", "player_headed_to_fifth_floor");
   if(flag("floor_four_has_been_cleared")) {
-    //****Sgt. Macey: Enemy fire team eliminated in Section Four-Charlie.
     radio_dialogue("dcburn_mcy_alldeadfourth");
 
-    //Overlord HQ Radio Voice	Copy that, Two-One.	
     radio_dialogue("dcburn_hqr_copythat");
   }
 
   flavorbursts_off("allies");
 
-  //Ranger 2	Gator Two-Six, Gator Two-Five, be advised, we are pulling out of D.C.!! BCT Four has taken 90 percent losses! Our position is untenable, we are out of here! I repeat, we are getting the f*** outta dodge!	
   level.player play_sound_on_entity("dcburn_ar2_pullingout");
 
-  //Ranger 3	All Goliath victors, pull back from the MSR!! Delta Four-One is calling in a Broken Arrow!!! Pull back from the MSR now!!! We are leaving!!!	
   level.player play_sound_on_entity("dcburn_ar3_pullback");
 
   flavorbursts_on("allies");
 }
-
-/****************************************************************************
-GLOBAL
-****************************************************************************/
 
 AA_global() {
   thread commerce_top_drone_flood();
 }
 
 commerce_top_drone_flood() {
-  /*----------------------- DRONES FLOOD TOWARDS COMMERCE FROM THE SOUTH
-  -------------------------*/
-
   flag_wait("obj_commerce_defend_snipe_complete");
-  /*----------------------- BTR80s AND DRONES FLOOD TOWARDS COMMERCE FROM THE SOUTH
-  -------------------------*/
-  //hostiles_drones_comm_south = getEntArray( "hostiles_drones_comm_south", "targetname" );
-  //thread drone_flood_start( hostiles_drones_comm_south, "hostiles_drones_comm_south" );
 
   bmp_flood_south = getEntArray("bmp_flood_south", "targetname");
   thread crows_nest_bmp_flood(bmp_flood_south);
 
   flag_wait("obj_commerce_defend_javelin_complete");
-  //thread drone_flood_stop( "hostiles_drones_comm_south" );
 }
 
 crows_nest_bmp_flood(aSpawners) {
@@ -2799,16 +2287,10 @@ crows_nest_bmp_flood_think(spawner) {
   bmp thread obj_commerce_defend_javelin_enemies_think();
   bmp endon("death");
 
-  //if reaches end node, kill it, but don't let it cound as an obj
-
   bmp waittill("reached_end_node");
   bmp notify("deleted_through_script");
   bmp delete();
 }
-
-/****************************************************************************
-COMMERCE BUILDING - ELEVATOR_TOP
-****************************************************************************/
 
 AA_elevator_top_init() {
   thread music_to_crowsnest();
@@ -2835,23 +2317,16 @@ AAA_sequence_elevator_top_2_crowsnest() {
   if(isDefined(level.vehicles_commerce_ambient))
     array_thread(level.vehicles_commerce_ambient, ::vehicle_delete);
 
-  /*----------------------- SETUP
-  -------------------------*/
   volume_commerce_sector_2 = getent("volume_commerce_sector_2", "targetname");
   volume_commerce_sector_3 = getent("volume_commerce_sector_3", "targetname");
   flare_dynamic_01 = getent("flare_dynamic_01", "targetname");
   dynamicLight = getent(flare_dynamic_01.target, "targetname");
   dynamicLight setLightIntensity(0);
-  /*----------------------- ENEMY FLARE MOMENT
-  -------------------------*/
+
   flag_wait_either("player_approaching_flare_moment", "player_looking_at_flare_moment");
-  //thread AI_drone_cleanup( "all", 1024, true );
+
   flare_dynamic_01 thread flare_burst_on_and_flicker(4, 4, 10);
   commerce_flare_guys = array_spawn(getEntArray("commerce_flare_guys", "targetname"), true);
-
-  /*----------------------- ENEMY FIRE TEAMS FIGHTING OTHER ALLIES
-  -------------------------*/
-  //Done through spawn triggers now
 
   flag_wait("player_approaching_crowsnest");
 
@@ -2870,8 +2345,6 @@ helis_crows_snipe_think() {
   flag_wait("obj_commerce_defend_crow_given");
   self thread vehicle_delete_when_hit_script_noteworthy("start");
 
-  /*----------------------- MAKE ANY AMBIENT VEHICLES COUNT AS OBJECTIVES WHILE ALIVE
-  -------------------------*/
   flag_wait("obj_commerce_defend_javelin_given");
   self thread helis_crowsnest_think();
 }
@@ -2890,49 +2363,36 @@ crows_nest_enemy_chatter() {
   level endon(sFlagToKillDialogue);
 
   while(!flag(sFlagToKillDialogue)) {
-    //	Russian Airborne 3	2 transports attempting to evac at grid square 253221!	
     play_sound_then_kill_on_flag("dcburn_ra3_gridsquare", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 1	Don't worry, they're not going to get very far.	
     play_sound_then_kill_on_flag("dcburn_ra1_dontworry", origin, sFlagToKillDialogue);
 
     wait(.5);
 
-    //	Russian Airborne 2	Target detected. Armored personnel carrier, moving northwest at 60 kilometres per hour. 20 degrees left of the Washington Monument.	
     play_sound_then_kill_on_flag("dcburn_ra2_60kph", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 3	I see it. Locking onto target. Standby for launch.	
     play_sound_then_kill_on_flag("dcburn_ra3_standbyforlaunch", origin, sFlagToKillDialogue);
 
     wait(.5);
 
-    //	Russian Airborne 1	Tank, range two miles. Speed, 20 kilometres per hour, moving left to right by the green car.	
     play_sound_then_kill_on_flag("dcburn_ra1_bygreencar", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 2	I have the tank in my sights and I'm tracking it now. 	
     play_sound_then_kill_on_flag("dcburn_ra2_trackingitnow", origin, sFlagToKillDialogue);
 
     wait(.75);
 
-    //	Russian Airborne 3	This is too easy. I thought the Americans would fight harder than this!	
     play_sound_then_kill_on_flag("dcburn_ra3_tooeasy", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 1	Armored personnel carrier, range four miles. I confirm target is hostile.	
     play_sound_then_kill_on_flag("dcburn_ra1_confirmhostile", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 2	Locking onto target. Standby. They've increased speed to 25 kilometres per hour.	
     play_sound_then_kill_on_flag("dcburn_ra2_25kph", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 3	Enemy tank moving east, range 572 metres, bearing 172 degrees! Request permission to engage!	
     play_sound_then_kill_on_flag("dcburn_ra3_range572meters", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 1	Armored personnel carrier has stopped, they're loading passengers. Destroy it.	
     play_sound_then_kill_on_flag("dcburn_ra1_destroyit", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 2	Tank moving east, range 572 metres, acknowledged. You are cleared to engage the target.	
     play_sound_then_kill_on_flag("dcburn_ra2_clearedtoengage", origin, sFlagToKillDialogue);
 
-    //	Russian Airborne 3	I bet you never thought you'd see the day the Americans would run from us on the battlefield!	
     play_sound_then_kill_on_flag("dcburn_ra3_runfromus", origin, sFlagToKillDialogue);
   }
 }
@@ -2947,40 +2407,34 @@ dialogue_to_crowsnest() {
   flag_wait("player_entering_top_elevator_area");
 
   flag_set("start_music_to_crowsnest");
-  //****Sgt. Macey: Overlord, We're on the fifth floor, proceeding to the southwest corner.
+
   radio_dialogue("dcburn_mcy_onfifth");
 
-  if((flag("player_approaching_flare_moment")) || (flag("player_approaching_flare_moment"))) {
-    //alt dialogue pending
-  } else {
-    //Overlord HQ Radio Voice: Copy that, Two-One.
+  if((flag("player_approaching_flare_moment")) || (flag("player_approaching_flare_moment"))) {} else {
     radio_dialogue("dcburn_hqr_copy21");
   }
 
   flag_wait_either("player_approaching_flare_moment", "player_looking_at_flare_moment");
 
   wait(.2);
-  //****Cpl. Dunn: I got movement.
+
   radio_dialogue("dcburn_cdn_movement");
 
   wait(1);
 
   if(!flag("fifth_floor_guys_damaged")) {
-    //Sgt. Macey	Watch your sectors.	
     radio_dialogue("dcburn_mcy_watchsectors");
   }
   wait(3);
   if(!flag("fifth_floor_guys_damaged")) {
-    //Sgt. Macey	Check those corners.	
     radio_dialogue("dcburn_mcy_checkcorners");
   }
   flag_wait("player_approaching_crowsnest2");
 
-  //Sgt. Macey: All Hunter units, I have a visual on the enemy crow's nest at the southwest corner. Move forward and clear it out.
   radio_dialogue("dcburn_mcy_visoncrow");
 
   flavorbursts_off("allies");
-  //Ranger 4	Mystic Two-One, CENTCOM just gave the order to abandon all evac sites to the east of the Potomac!!! Get your ass outta there!!! 	
+
   level.player play_sound_on_entity("dcburn_ar4_centcom");
   flavorbursts_on("allies");
 
@@ -2989,22 +2443,17 @@ dialogue_to_crowsnest() {
 
   if(!flag("player_shot_at_crowsnest_guys")) {
     thread autosave_by_name("crow_sneak");
-    //Sgt. Macey: Standby to engage.
+
     radio_dialogue("dcburn_mcy_sby2engage");
   }
 
   flavorbursts_off("allies");
-  //Ranger 1	Darkstar One-Three, we do not have enough shells remaning in the battery to provide effective supporting fire to your position! We are pullin' outta D.C. in five mikes!! Out!!	
+
   level.player play_sound_on_entity("dcburn_ar1_fivemikes");
 
-  //Ranger 2	Rhino Two-One, get your team outta there pronto!!! We cannot hold this position any longer!! We are leaving D.C.!! I repeat, we are leaving D.C.!!! 	
   level.player play_sound_on_entity("dcburn_ar2_outtathere");
   flavorbursts_on("allies");
 }
-
-/****************************************************************************
-COMMERCE BUILDING - CROWS_NEST SNIPE
-****************************************************************************/
 
 AA_crows_nest_snipe_init() {
   thread AAA_sequence_crowsnest();
@@ -3017,15 +2466,11 @@ AA_crows_nest_snipe_init() {
 }
 
 AAA_sequence_crowsnest() {
-  /*----------------------- SEQUENCE SETUP
-  -------------------------*/
   triggersEnable("colornodes_crowsnest", "script_noteworthy", true);
   volume_crowsnest = getent("volume_crowsnest", "targetname");
 
   flag_wait("player_approaching_crowsnest");
 
-  /*----------------------- SPAWN CROWSNEST TEAMS
-  -------------------------*/
   hostiles_crowsnest = array_spawn(getEntArray("hostiles_crowsnest", "targetname"), true);
   thread waittill_dead_then_set_flag(hostiles_crowsnest, "crowsnest_has_been_cleared");
   array_thread(hostiles_crowsnest, ::AI_sneak_monitor, "player_shot_at_crowsnest_guys");
@@ -3033,8 +2478,6 @@ AAA_sequence_crowsnest() {
 
   array_thread(level.squad, ::crowsnest_friendlies_inside);
 
-  /*----------------------- CROWSNEST CLEARED
-  -------------------------*/
   flag_wait("player_shot_at_crowsnest_guys");
 
   tanks_crowsnest_wave1 = spawn_vehicles_from_targetname("tanks_crowsnest_wave1");
@@ -3047,12 +2490,10 @@ AAA_sequence_crowsnest() {
 
   thread flag_set_delayed("obj_commerce_complete", 1);
 
-  /*----------------------- FRIENDLIES INTO CROWNEST IF NOT THERE ALREADY
-  -------------------------*/
   colornodes_crowsnest = getent("colornodes_crowsnest", "script_noteworthy");
   colornodes_crowsnest notify("trigger", level.player);
-  thread dummy_trigger("dummy_colornodes_crows1"); //make friendlies move up
-  thread dummy_trigger("dummy_colornodes_crows2"); //make friendlies move up
+  thread dummy_trigger("dummy_colornodes_crows1");
+  thread dummy_trigger("dummy_colornodes_crows2");
 
   flag_wait("humvee_spotlight_deleted");
 
@@ -3098,61 +2539,40 @@ AAA_sequence_crowsnest_snipe() {
   model_barrett_glow.angles = model_barrett.angles;
   model_barrett_glow hide();
 
-  /*----------------------- SPAWN FRIENDLY VEHICLES THAT PLAYER HAS TO KEEP ALIVE
-  -------------------------*/
   level.evacSiteVehicles = getEntArray("vehicles_crowsnest_defend", "targetname");
   array_thread(level.evacSiteVehicles, ::vehicles_crowsnest_defend_think);
   thread crowsnest_defend_failure();
 
-  /*----------------------- SPAWN WW2 MEMORIAL GUYS
-  -------------------------*/
   level.evacSiteEnemies = array_spawn(getEntArray("hostiles_ww2_barret", "targetname"), true);
   array_thread(level.evacSiteEnemies, ::obj_commerce_defend_snipe_enemies_think);
   array_thread(level.evacSiteEnemies, ::AI_blood_spatter_when_sniped);
   array_thread(level.evacSiteEnemies, ::magic_bullet_shield);
 
-  /*----------------------- CROWSNEST CLEARED, GET ON BARRET
-  -------------------------*/
   flag_wait("crowsnest_has_been_cleared");
 
   array_thread(level.evacSiteEnemies, ::stop_magic_bullet_shield);
 
   flag_wait("obj_commerce_defend_snipe_given");
 
-  /*----------------------- FRIENDLIES START SHOOTING TOWARDS DRONES BELOW
-  -------------------------*/
   thread friendlies_shoot_at_crows_drones_start();
 
-  /*----------------------- MAKE BARRET GLOW IF PLAYER NOT ON IT
-  -------------------------*/
   thread crowsnest_barret_glow(model_barrett, model_barrett_glow);
   thread crowsnest_nags_snipe();
-  /*----------------------- MAKE ENEMIES START TO OWN EVAC SITE
-  EITHER WHEN PLAYER GETS ON GUN, OR TIMEOUT
-  -------------------------*/
+
   flag_wait_or_timeout("player_is_on_turret", 5);
 
-  /*----------------------- GRADUALLY MAKE ENEMIES FIRE AT LIVE TARGETS
-  -------------------------*/
   thread evac_site_enemies_fire_live();
 
-  /*----------------------- PREP ENEMIES COME UP BEHIND PLAYER
-  -------------------------*/
   flag_wait("only_2_sniper_enemies_remaining");
 
   thread player_fails_if_abandons_crowsnest();
 
-  //Overlord (HQ Radio) Hunter Two-One be advised, you have enemy foot mobiles converging on your position...stay frosty.	
   flag_clear("can_talk");
   radio_dialogue("dcburn_hqr_stayfrosty");
   flag_set("can_talk");
 
-  /*----------------------- BARRETT GAMEPLAY DONE...ENEMIES INSIDE!
-  -------------------------*/
   flag_wait("obj_commerce_defend_snipe_complete");
 
-  /*----------------------- FRIENDLIES STOP OWNING DRONES
-  -------------------------*/
   thread friendlies_shoot_at_crows_drones_stop();
 
   thread autosave_now(true);
@@ -3166,14 +2586,10 @@ AAA_sequence_crowsnest_snipe() {
   thread player_barrett_damage();
   level.guysKilled = 0;
 
-  /*----------------------- FRIENDLIES TAKE UP DEFENSIVE POSITIONS
-  -------------------------*/
   triggersEnable("colornodes_crowsnest_surrounded", "script_noteworthy", true);
   trig_colornode = getent("colornodes_crowsnest_surrounded", "script_noteworthy");
   trig_colornode notify("trigger", level.player);
 
-  /*----------------------- SURROUNDING ENEMIES KILLED
-  -------------------------*/
   flag_wait("player_killed_enough");
   flag_set("start_crow_armor_sequence");
 
@@ -3189,7 +2605,6 @@ player_fails_if_abandons_crowsnest() {
   level endon("player_getting_on_minigun");
   flag_wait("player_abandoning_crowsnest");
 
-  //"Mission Failed.\nThe evac site was destroyed."setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -3197,7 +2612,6 @@ player_fails_if_abandons_crowsnest() {
 player_barrett_damage() {
   wait(3);
 
-  //give player some clues that he is getting lit up
   iLoveTaps = 0;
   while(flag("player_is_on_turret")) {
     level.player DoDamage(20 / level.player.damageMultiplier, level.player.origin);
@@ -3209,7 +2623,6 @@ player_barrett_damage() {
     }
   }
 
-  //Player can't take a hint, throw a nade at his ass
   if(flag("player_is_on_turret")) {
     obj_commerce_defend_javelin = getstruct("obj_commerce_defend_javelin", "targetname");
     MagicGrenade("fraggrenade", obj_commerce_defend_javelin.origin + (0, 0, 144), obj_commerce_defend_javelin.origin + (0, 0, 32));
@@ -3258,8 +2671,6 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   array_thread(aTargetHeliNodes, ::friendly_stinger_target_nodes_think, self);
   isJavelin = false;
 
-  /*----------------------- DON'T TELEPORT TILL OUT OF SIGHT
-  -------------------------*/
   while(!flag("only_1_javelin_enemies_remaining")) {
     wait(1);
     if(within_fov(level.player.origin, level.player.angles, stingerJavNode.origin + (0, 0, 32), level.cosine["90"]))
@@ -3273,8 +2684,7 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   if(flag("only_1_javelin_enemies_remaining")) {
     return;
   }
-  /*----------------------- FRIENDLY IDLES WITH WEAPON
-  -------------------------*/
+
   playerBadPlace = undefined;
   self.reference = stingerJavNode;
   magicBulletType = "stinger";
@@ -3302,8 +2712,7 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   self attach(weapon, "TAG_INHAND", 1);
 
   randomWait = 8;
-  /*----------------------- SHOOT AT TARGETS
-  -------------------------*/
+
   self.ignoreme = true;
   while(!flag("only_1_javelin_enemies_remaining")) {
     randomWait = randomfloatrange(6, 9);
@@ -3365,7 +2774,7 @@ friendly_stinger_target_nodes_think(guy) {
   level endon("obj_commerce_defend_javelin_complete");
   guy endon("stop_shooting_stingers_and_javs");
   self endon("death");
-  //self ==> the node the heli target will trigger to show its in a good place to be shot
+
   while((!flag("only_1_javelin_enemies_remaining")) && (isDefined(guy.scriptedTargets))) {
     self waittill("trigger", heli);
     if(!isDefined(heli)) {
@@ -3437,21 +2846,21 @@ dialogue_nag_hostiles_at_crows() {
     if(flag("player_killed_enough")) {
       break;
     }
-    //Cpl. Dunn	22	2	Hostiles inside the perimeter! Open fire! Open fire!	
+
     level.friendly02 dialogue_execute("dcburn_cpd_inperimeter");
     wait(randomfloatrange(8, 14));
 
     if(flag("player_killed_enough")) {
       break;
     }
-    //Cpl. Dunn	22	4	Taking fire! Taking fire! Foot mobiles inside the perimeter! 	
+
     level.friendly02 dialogue_execute("dcburn_cpd_takingfire");
     wait(randomfloatrange(8, 14));
 
     if(flag("player_killed_enough")) {
       break;
     }
-    //Cpl. Dunn	22	3	Eyes up! Hostiles on our six!!!	
+
     level.friendly02 dialogue_execute("dcburn_cpd_hostatsix");
     wait(randomfloatrange(8, 14));
   }
@@ -3461,7 +2870,7 @@ AI_sneak_monitor(sFlagToSet) {
   self endon("alerted");
   self thread AI_player_gunshot_monitor();
   wait(.5);
-  //self waittill_any( "grenade danger", "damage", "gunshot", "death" );
+
   self waittill_any("damage", "death", "shot_at");
   flag_set(sFlagToSet);
   if(isDefined(self))
@@ -3503,8 +2912,7 @@ AI_crowsnest_player_too_close() {
 
 evac_site_enemies_fire_live() {
   level endon("obj_commerce_defend_snipe_complete");
-  /*----------------------- GRADUALLY MAKE ENEMIES FIRE AT LIVE TARGETS (BUT NOT FOR VET/HARDENED)
-  -------------------------*/
+
   iRampInterval = 4;
   if((level.gameskill == 2) || (level.gameskill == 3))
     iRampInterval = 0.1;
@@ -3532,7 +2940,6 @@ crowsnest_nags_snipe() {
   wait(.5);
 
   while(!flag("obj_commerce_defend_snipe_complete")) {
-    //reset nag numbers
     if(barret_nag_number > barret_nag_number_max)
       barret_nag_number = 0;
     if(stay_in_nest_nag_number > stay_in_nest_nag_number_max)
@@ -3566,8 +2973,6 @@ crowsnest_nags_snipe() {
 }
 
 crowsnest_ambient_vehicles() {
-  /*----------------------- GET SCRIPTED EVAC SITE VEHICLES READY
-  -------------------------*/
   crowsnest_seaknight_01 = getent("crowsnest_seaknight_01", "targetname");
   crowsnest_seaknight_02 = getent("crowsnest_seaknight_02", "targetname");
   crowsnest_seaknight_01 notify("spawn");
@@ -3609,7 +3014,6 @@ crowsnest_defend_failure() {
   thread evac_site_damage_nags_snipe();
 
   while(!flag("obj_commerce_defend_snipe_complete")) {
-    //HUDpercentage setText( get_evac_site_percent_destroyed() );
     percentDestroyed = get_evac_site_percent_destroyed();
     if(flag("obj_commerce_defend_snipe_complete")) {
       break;
@@ -3639,31 +3043,31 @@ evac_site_damage_nags_snipe() {
     level waittill("evac_vehicle_owned");
     if(level.evacSitePercentDestroyed == 100) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	All callsigns, this is the Washington Monument evac site!!! Be advised, our situation is critical!!! We can't take much more of this!!! We need more time to get these civvies outta here!!!	
+
       radio_dialogue("dcburn_evc_damage_fail");
       flag_set("can_talk");
       return;
     } else if((level.evacSitePercentDestroyed > 25) && (level.evacSitePercentDestroyed < 50) && (percentDestoyedAtLeast < 25)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	We're taking fire at the Washington Monument! We are down to 80 percent combat effectiveness! Request immediate sniper fire on targets west of the Monument, over!	
+
       radio_dialogue("dcburn_evc_damage_00");
       percentDestoyedAtLeast = 25;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 50) && (level.evacSitePercentDestroyed < 75) && (percentDestoyedAtLeast < 50)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	All callsigns, be advised, enemies to the west are attempting a force-in-detail assault on the Washington Monument evac site! 	
+
       radio_dialogue("dcburn_evc_damage_01");
       percentDestoyedAtLeast = 50;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 75) && (level.evacSitePercentDestroyed < 90) && (percentDestoyedAtLeast < 75)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	Washington Monument evac site to all callsigns!! Enemy fire from the west is threatening to destroy our position!! We can't take much more of this!!	
+
       radio_dialogue("dcburn_evc_damage_02");
       percentDestoyedAtLeast = 75;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 90) && (level.evacSitePercentDestroyed < 100) && (percentDestoyedAtLeast < 90)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	Washington Monument evac site taking heavy fire!!! We're down to 50 percent combat effectiveness!!! We gotta get more fire support or this evac site is gonna fall!!! Over!!!	
+
       radio_dialogue("dcburn_evc_damage_03");
       percentDestoyedAtLeast = 90;
       flag_set("can_talk");
@@ -3741,20 +3145,15 @@ dialogue_crowsnest() {
   wait(1);
   flag_set("make_seaknights_take_off");
 
-  //Sgt. Macey: Overlord this is Hunter Two-One. We've secured the enemy crow's nest on the southwest corner.
   level.teamleader dialogue_execute("dcburn_mcy_seccrowsnest");
 
-  //Overlord HQ Radio Voice: Overlord copies all. Evac site reports several transports away, but they are still vulnerable. Can you provide support from your position, over?
   radio_dialogue("dcburn_hqr_canyousupport");
 
-  //Sgt. Macey: Roger that. We're sittin' on a stockpile of enemy munitions. We'll dig in and burn through their ammo. Out.
   level.teamleader dialogue_execute("dcburn_mcy_stockpile");
 
   if(!flag("player_is_on_turret")) {
-    //Sgt. Macey	21	1	Ramirez, get on that sniper rifle! Scan for targets to the south of the Washington Monument.	
     level.teamleader thread dialogue_execute("dcburn_mcy_sniperrifle");
   } else {
-    //Sgt. Macey	Ramirez, scan for targets to the south of the Washington Monument!	
     level.teamleader thread dialogue_execute("dcburn_mcy_scanfortargets");
   }
 
@@ -3765,26 +3164,23 @@ dialogue_crowsnest() {
     wait(4);
   }
 
-  //Evac Site Radio Voice	All callsigns on this net, this is the Washington Monument Evac Site! We're holding our own but have glassed enemies to the west and are taking fire from that direction!	
   radio_dialogue("dcburn_evc_glassedenemieswest");
   flag_set("can_start_crow_nags");
 }
 
 vehicles_crowsnest_defend_think() {
   level endon("obj_commerce_defend_snipe_complete");
-  /*----------------------- MAKE DAMAGEABLE/INVULNERABLE
-  -------------------------*/
+
   self setCanDamage(true);
   origin = self.origin;
-  /*----------------------- WAIT TILL DAMAGED
-  -------------------------*/
+
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
     if(!isDefined(type))
       continue;
     if(!isDefined(attacker))
       continue;
-    if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret")) //don't blow up if using barrett
+    if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret"))
       continue;
     if(!isDefined(amount))
       continue;
@@ -3800,8 +3196,6 @@ vehicles_crowsnest_defend_think() {
     }
   }
 
-  /*----------------------- REMOVE FROM POOL OF TARGETS/VEHICLES
-  -------------------------*/
   if(is_in_array(level.evacSiteVehicles, self))
     level.evacSiteVehicles = array_remove(level.evacSiteVehicles, self);
   if(is_in_array(level.targetsScriptedJavStinger, self))
@@ -3809,8 +3203,6 @@ vehicles_crowsnest_defend_think() {
   self.dead = true;
   level notify("evac_vehicle_owned");
 
-  /*----------------------- IF A SCRIPT_MODEL, DELETE AND SWAP
-  -------------------------*/
   eDeathModel = undefined;
   effect = "large_vehicle_explosion";
   sound = "exp_tanker_vehicle";
@@ -3835,20 +3227,16 @@ vehicles_crowsnest_defend_think() {
 
     self setModel(eDeathModel);
   }
-  /*----------------------- PLAY FX AND EXPLOSION
-  -------------------------*/
+
   playFX(getfx(effect), origin);
   thread play_sound_in_space(sound, origin);
 }
 
 vehicles_cheap_waittill_destroyed_think() {
   self endon("death");
-  /*----------------------- MAKE DAMAGEABLE/INVULNERABLE
-  -------------------------*/
+
   self setCanDamage(true);
 
-  /*----------------------- WAIT TILL DAMAGED
-  -------------------------*/
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
     if(!isDefined(type))
@@ -3867,8 +3255,6 @@ vehicles_cheap_waittill_destroyed_think() {
     }
   }
 
-  /*----------------------- IF A SCRIPT_MODEL, DELETE AND SWAP
-  -------------------------*/
   eDeathModel = undefined;
   effect = "large_vehicle_explosion";
   sound = "exp_tanker_vehicle";
@@ -3902,8 +3288,7 @@ vehicles_cheap_waittill_destroyed_think() {
 
     self setModel(eDeathModel);
   }
-  /*----------------------- PLAY FX AND EXPLOSION
-  -------------------------*/
+
   playFX(getfx(effect), self.origin);
   self thread play_sound_in_space(sound);
   if(isDefined(fireFx)) {
@@ -3916,10 +3301,6 @@ vehicles_cheap_waittill_destroyed_think() {
     dummy delete();
   }
 }
-
-/****************************************************************************
-COMMERCE BUILDING - CROWS_NEST ARMOR
-****************************************************************************/
 
 AA_crows_nest_armor_init() {
   thread AAA_sequence_crowsnest_armor();
@@ -3950,11 +3331,11 @@ javelin_hints() {
       return;
     }
     if(!player_has_javelin()) {
-      level.player thread display_hint("javelin_pickup"); //it will endon this thread if not threaded
+      level.player thread display_hint("javelin_pickup");
     } else if((player_has_javelin()) && (javelin_equipped())) {
-      level.player thread display_hint("javelin_shoot"); //it will endon this thread if not threaded
+      level.player thread display_hint("javelin_shoot");
     } else {
-      level.player thread display_hint("javelin_switch"); //it will endon this thread if not threaded
+      level.player thread display_hint("javelin_switch");
     }
   }
 }
@@ -3980,9 +3361,6 @@ should_break_javelin_pickup_hint() {
     return true;
 
   assert(isPlayer(self));
-
-  //if( gettime() > level.heartbeat_timeout )
-  //return true;
 
   if(javelin_equipped())
     return true;
@@ -4026,18 +3404,10 @@ backup_enemies_for_javelin_sequence() {
 
   wait(1);
 
-  //spawn a few more tanks in case the player already went nuts during the javelin sequence
   if(level.crowsarmor.size < 5) {
     tanks_crowsnest_wave2 = spawn_vehicles_from_targetname_and_drive("tanks_crowsnest_wave2");
     array_thread(tanks_crowsnest_wave2, ::tanks_crowsnest_wave2_think);
   }
-
-  //	wait( .5 );
-  //	
-  //	if( level.crowsarmor.size < level.requiredJavTargets )
-  //	{
-  //		level.requiredJavTargets = level.crowsarmor.size;
-  //	}
 }
 
 player_invulnerable_till_one_javelin_target_killed() {
@@ -4056,32 +3426,22 @@ AAA_sequence_crowsnest_armor() {
   barrett_trigger.origin = barrett_trigger.origin + (0, 0, -20);
   barrett_trigger usetriggerrequirelookat();
 
-  /*----------------------- ENEMY ARMOR ROLLS IN
-  -------------------------*/
   level.monument_target thread monument_target_think();
   helis_crowsnest = spawn_vehicles_from_targetname_and_drive("helis_crowsnest");
   helis_crowsnest_respawners = spawn_vehicles_from_targetname_and_drive("helis_crowsnest_respawners");
   array_thread(helis_crowsnest, ::helis_crowsnest_think);
   array_thread(helis_crowsnest_respawners, ::helis_crowsnest_think);
 
-  /*----------------------- FRIENDLIES START SHOOTING AT DRONES, THEN STINGERS AT DUMMIES
-  -------------------------*/
   thread make_friendlies_shoot_stingers_and_javs();
 
   volume = getent("perimeter_enemies", "targetname");
   thread flag_set_when_volume_cleared_of_bad_guys(volume, "perimeter_enemies_have_retreated");
 
-  /*----------------------- FRIENDLIES CAN HIT LIVE TARGETS NOW
-  -------------------------*/
   wait(25);
   level.friendliesCanHelpCrowsnest = true;
 
-  /*----------------------- ONLY 2 ARMOR/HELIS REMAINING
-  -------------------------*/
   flag_wait("only_2_javelin_enemies_remaining");
 
-  /*----------------------- DONE
-  -------------------------*/
   flag_wait("obj_commerce_defend_javelin_complete");
 
   thread autosave_now();
@@ -4098,8 +3458,6 @@ make_friendlies_shoot_stingers_and_javs() {
 }
 
 javelin_weapon_switch() {
-  /*----------------------- SWITCH OUT JAVELIN, GIVE EOTECH IF PLAYER DOES NOT HAVE
-  -------------------------*/
   if(!player_has_javelin()) {
     return;
   }
@@ -4142,15 +3500,12 @@ javelin_weapon_switch() {
 dialogue_crow_armor() {
   flag_wait("start_crow_armor_sequence");
 
-  //Overlord (HQ Radio) Hunter Two-One, recommend you clear outta there...I see a mass of foot-mobiles converging on your position…		
   radio_dialogue("dcburn_hqr_clearout");
 
-  //Sgt. Macey	23	2	Negative negative. I have eyes on enemy armor and helicopters advancing on the evac site from the south and southwest! 	
   level.teamleader dialogue_execute("dcburn_mcy_negative");
 
   flag_set("obj_commerce_defend_javelin_given");
 
-  //Ramirez, use some of this ordnance to take out the enemy vehicles! Move!
   level.teamleader dialogue_execute("dcburn_mcy_useordnance");
 
   thread crowsnest_nags_armor();
@@ -4172,7 +3527,6 @@ crowsnest_nags_armor() {
   wait(.5);
 
   while(!flag("obj_commerce_defend_javelin_complete")) {
-    //reset nag numbers
     if(rocket_nag_number > rocket_nag_number_max)
       rocket_nag_number = 0;
     if(stay_in_nest_nag_number > stay_in_nest_nag_number_max)
@@ -4207,24 +3561,23 @@ crowsnest_nags_armor() {
 
 monument_target_think() {
   level.evacSitePercentDestroyed = 0;
-  /*----------------------- USE DUMMY SCRIPT MODEL TO DETERMINE DAMAGE DONE BY ENEMY ARMOR, HELIS
-  -------------------------*/
+
   level endon("mission failed");
   level endon("missionfailed");
   self setCanDamage(true);
-  //determine barrel hitpoints based on difficulty
+
   self.hitpoints = undefined;
   switch (level.gameSkill) {
-    case 0: // easy
+    case 0:
       self.hitpoints = 5000;
       break;
-    case 1: // regular
+    case 1:
       self.hitpoints = 5000;
       break;
-    case 2: // hardened
+    case 2:
       self.hitpoints = 5000;
       break;
-    case 3: // veteran
+    case 3:
       self.hitpoints = 5000;
       break;
   }
@@ -4281,31 +3634,31 @@ evac_site_damage_nags_armor() {
     level waittill("monument_dummy_hit");
     if(level.evacSitePercentDestroyed == 100) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	All callsigns, this is the Washington Monument evac site!!! Be advised, our situation is critical!!! We can't take much more of this!!! We need more time to get these civvies outta here!!!	
+
       radio_dialogue("dcburn_evc_damage_fail");
       flag_set("can_talk");
       return;
     } else if((level.evacSitePercentDestroyed > 25) && (level.evacSitePercentDestroyed < 50) && (percentDestoyedAtLeast < 25)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	We're taking fire at the Washington Monument! We are down to 80 percent combat effectiveness! Request immediate sniper fire on targets west of the Monument, over!	
+
       radio_dialogue("dcburn_evc_damage_00");
       percentDestoyedAtLeast = 25;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 50) && (level.evacSitePercentDestroyed < 75) && (percentDestoyedAtLeast < 50)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	All callsigns, be advised, enemies to the west are attempting a force-in-detail assault on the Washington Monument evac site! 	
+
       radio_dialogue("dcburn_evc_damage_01");
       percentDestoyedAtLeast = 50;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 75) && (level.evacSitePercentDestroyed < 90) && (percentDestoyedAtLeast < 75)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	Washington Monument evac site to all callsigns!! Enemy fire from the west is threatening to destroy our position!! We can't take much more of this!!	
+
       radio_dialogue("dcburn_evc_damage_02");
       percentDestoyedAtLeast = 75;
       flag_set("can_talk");
     } else if((level.evacSitePercentDestroyed > 90) && (level.evacSitePercentDestroyed < 100) && (percentDestoyedAtLeast < 90)) {
       flag_clear("can_talk");
-      //Evac Site Radio Voice	Washington Monument evac site taking heavy fire!!! We're down to 50 percent combat effectiveness!!! We gotta get more fire support or this evac site is gonna fall!!! Over!!!	
+
       radio_dialogue("dcburn_evc_damage_03");
       percentDestoyedAtLeast = 90;
       flag_set("can_talk");
@@ -4409,15 +3762,11 @@ tank_fire_at_evac_site() {
   }
 }
 
-/****************************************************************************
-COMMERCE TO ROOFTOP
-****************************************************************************/
-
 AA_commerce_to_roof_init() {
   thread AAA_sequence_get_to_roof();
   thread dialogue_get_to_roof();
   thread obj_rooftop();
-  //thread music_to_roof();
+
   flag_wait("player_approaching_outer_balcony");
   thread AA_roof_init();
 }
@@ -4433,27 +3782,23 @@ breach_double_door_swings_open() {
 }
 
 AI_breach_defenders_think() {
-  //friendlies_breach_defend keep player company till he goes up the stairs
   self endon("death");
   self thread try_to_magic_bullet_shield();
   self.neverEnableCQB = true;
-  //self.fixednode = false;
+
   self.goalradius = 16;
   self.baseaccuracy = 1000;
-  self.attackeraccuracy = 0; //makes any AI attacking him have shitty accuracy
+  self.attackeraccuracy = 0;
 
   flag_wait("player_roof_stairs_00");
 
-  //player heading up stairs...kill these guys
   self.health = 1;
   self.baseaccuracy = .01;
-  self.attackeraccuracy = 10; //makes any AI attacking him have awesome accuracy
+  self.attackeraccuracy = 10;
   self thread stop_magic_bullet_shield();
 }
 
 AAA_sequence_get_to_roof() {
-  /*----------------------- SETUP FRIENDLIES TO BREACH DOOR
-  -------------------------*/
   flag_wait("only_2_javelin_enemies_remaining");
 
   trigger_volume_breach_stairwell = getent("trigger_volume_breach_stairwell", "targetname");
@@ -4471,8 +3816,6 @@ AAA_sequence_get_to_roof() {
     guy thread AI_ignored_and_oblivious_on();
   }
 
-  /*----------------------- PLAYER SQUAD HEADS TO ROOF DOOR
-  -------------------------*/
   flag_wait("crowsnest_sequence_finished");
   triggersEnable("colornodes_start_to_roof", "script_noteworthy", true);
   trig_colornode = getent("colornodes_start_to_roof", "script_noteworthy");
@@ -4484,51 +3827,41 @@ AAA_sequence_get_to_roof() {
 
   delaythread(3, ::spawn_trigger_dummy, "dummy_spawner_roof_wave_01");
 
-  /*----------------------- ENEMIES START TO OVERRUN, DOOR BREACHED
-  -------------------------*/
   flag_wait("obj_rooftop_given");
 
   if((isDefined(level.crowsArmor)) && (level.crowsArmor.size > 0))
     array_thread(level.crowsArmor, ::crows_armor_cleanup);
 
-  //thread friendly_speed_adjustment_on();
   friendlies = getaiarray("allies");
   array_thread(friendlies, ::cqb_walk, "off");
   foreach(guy in friendlies)
   guy.neverEnableCQB = true;
 
-  //wait( 2 );
-
   flag_wait("roof_breach_complete");
 
-  /*----------------------- BREACHERS COVER PLAYER EXIT
-  -------------------------*/
   foreach(guy in aBreachers) {
     guy setgoalnode(guy.eNode);
-    //guy.fixednode = true;
+
     guy.goalradius = 64;
   }
 
-  /*----------------------- SQUAD HEADS TO THE ROOF
-  -------------------------*/
   triggersEnable("colornodes_to_roof", "script_noteworthy", true);
 
-  setsaveddvar("ai_friendlyFireBlockDuration", 0); //ai won't stop in front of player line of fire
+  setsaveddvar("ai_friendlyFireBlockDuration", 0);
   foreach(guy in level.squad) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-    //guy.fixednode = true;
-    //guy.ignoreall = true;
+    }
+
     guy.a.disablePain = true;
     guy.ignoresuppression = true;
     guy.disableDamageShieldPain = true;
     guy.grenadeawareness = 0;
     guy.goalradius = 32;
 
-    //make Dunn and Macey have better accuracy than attackers
     if((guy == level.teamleader) || (guy == level.friendly02)) {
-      self.attackeraccuracy = .01; //makes any AI attacking him miss a lot
-      self.baseaccuracy = 1000; //excellent accuracy
+      self.attackeraccuracy = .01;
+      self.baseaccuracy = 1000;
     }
   }
 
@@ -4538,17 +3871,11 @@ AAA_sequence_get_to_roof() {
     guy thread AI_ignored_and_oblivious_off();
   }
 
-  /*----------------------- MORE ENEMIES
-  -------------------------*/
   spawn_trigger_dummy("dummy_spawner_roof_wave_02");
 
-  /*----------------------- MAIN SQUAD HEADS TO THE ROOF IF PLAYER NOT ON HIS WAY
-  -------------------------*/
   if(!flag("player_roof_stairs_00"))
     thread dummy_trigger("dummy_colornodes_to_roof");
 
-  /*----------------------- CLEANUP
-  -------------------------*/
   flag_wait("player_roof_stairs_01");
   if((isDefined(level.evacSiteEnemies)) && (level.evacSiteEnemies.size > 0))
     array_thread(level.evacSiteEnemies, ::AI_delete);
@@ -4559,24 +3886,19 @@ AAA_sequence_get_to_roof() {
   flag_wait("player_roof_stairs_02");
   jets_tenches_01 = spawn_vehicles_from_targetname_and_drive("jets_tenches_01");
 
-  /*----------------------- TRY TO TELEPORT KEY FRIENDLIES TO ROOF
-  -------------------------*/
   eNodeLeader = getnode("node_roof_leader", "targetname");
   eNodeFriendly02 = getnode("node_roof_friendly02", "targetname");
   level.teamleader thread try_to_teleport_friendlies_to_roof(eNodeLeader);
   level.friendly02 thread try_to_teleport_friendlies_to_roof(eNodeFriendly02);
 
-  /*----------------------- ENEMY JETS DROPPING CLUSTER BOMBS
-  -------------------------*/
   flag_wait("player_top_floor_commerce");
   jets_tenches_02 = spawn_vehicles_from_targetname_and_drive("jets_tenches_02");
 
   flag_wait("player_outer_balcony_top_commerce");
   eHeli = spawn_vehicle_from_targetname("heli_deck2");
   thread maps\_vehicle::gopath(eHeli);
-  //eHeli.dontWaitForPathEnd = true;
+
   eHeli thread heli_balcony_think();
-  //eHeli = maps\_attack_heli::begin_attack_heli_behavior( eHeli );
 
   flag_wait("player_at_commerce_rooftop");
 
@@ -4587,9 +3909,6 @@ AAA_sequence_get_to_roof() {
 
   thread kill_timer();
   thread autosave_by_name("rooftop");
-  //eHeli Vehicle_SetSpeed( 10 );
-
-  //music_stop( 5 );
 }
 
 heli_balcony_think() {
@@ -4613,16 +3932,9 @@ AI_roof_escape_redshirts_think() {
   self endon("death");
   self.neverEnableCQB = true;
   self.health = 1;
-  //self.fixednode = false;
+
   self.goalradius = 32;
   self.baseaccuracy = .01;
-  //	while( isalive( self ) )
-  //	{
-  //		wait( 1 );
-  //		self.ignoreall = true;
-  //		wait( 1 );
-  //		self.ignoreall = false;
-  //	}
 }
 
 dummy_trigger(dummyName) {
@@ -4637,36 +3949,20 @@ roof_breach_monitor(eVoloume) {
   flag_set("roof_breach_complete");
 }
 
-//music_to_roof()
-//{
-//	flag_wait( "roof_door_kicked" );
-//	
-//	MusicPlay( "dcburning_stairway_escape_header" );
-//	wait( 40.978 );
-//	music_stop();
-//	thread music_loop( "dcburning_stairway_escape_loop", 40.96 );
-//
-//}
-
 dialogue_get_to_roof() {
   flag_wait("crowsnest_sequence_finished");
 
-  //Overlord (HQ Radio) Outstanding work, Hunter Two-One, all transports are away. Now get your ass to the roof ASAP...you are in danger of being overrun.	
   radio_dialogue("dcburn_hqr_roofasap");
 
   flag_set("obj_rooftop_given");
 
-  //Sgt. Macey	Roger that, we're headed to the rooftop! Everyone, move out!		
   level.teamleader dialogue_execute("dcburn_mcy_rooftop");
 
   thread escape_timer(90);
 
-  //Overlord (HQ Radio)	32	7	Atlas Two-Six is now away. All remaining evacuation units, execute level three evacuation protocols. Urgent surgicals only.	
   radio_dialogue("dcburn_hqr_urgentsurgicals");
 
-  //nag player to get to breach door
   while(!flag("roof_breach_complete")) {
-    //Sgt. Macey	Get to the roof and RV with the SEAL Team! Move! Move!		
     level.teamleader dialogue_execute("dcburn_mcy_rvwithseals");
 
     wait(randomfloatrange(8, 12));
@@ -4674,7 +3970,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	26	3	Keep moving! This sector's gonna be crawlin' with hostiles! We gotta go, NOW!!
     level.teamleader dialogue_execute("dcburn_mcy_crawlin");
 
     wait(randomfloatrange(8, 12));
@@ -4682,7 +3977,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	Ramirez! Let's move out!	
     level.teamleader dialogue_execute("dcburn_mcy_letsmoveout");
 
     wait(randomfloatrange(8, 12));
@@ -4690,7 +3984,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	Ramirez! Move your ass! We've gotta get to the roof, NOW!	
     level.teamleader dialogue_execute("dcburn_mcy_gettoroofnow");
 
     wait(randomfloatrange(8, 12));
@@ -4698,7 +3991,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	Ramirez, let's go! Hostiles are overrunning this position!	
     level.teamleader dialogue_execute("dcburn_mcy_overrunningpos");
 
     wait(randomfloatrange(8, 12));
@@ -4707,15 +3999,11 @@ dialogue_get_to_roof() {
     }
   }
 
-  //**Ranger 5	32	8	We just lost Atlas Two-Three to triple-A from the Capitol Building!!!	
   radio_dialogue("dcburn_ar5_triplea");
 
-  //**Ranger 2	32	9	Get those civvies back in their seats!!!!	
   radio_dialogue("dcburn_ar2_backinseats");
 
-  //nag player to get up stairs after roof breached
   while(!flag("player_roof_stairs_00")) {
-    //Sgt. Macey	26	5	We're outnumbered - we need to get to the roof ASAP!!!! Go! Go! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_outnumbered");
 
     wait(randomfloatrange(8, 12));
@@ -4723,7 +4011,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	Ramirez! Up the stairs! Let's go!	
     level.teamleader dialogue_execute("dcburn_mcy_upthestairsgo");
 
     wait(randomfloatrange(8, 12));
@@ -4731,7 +4018,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	Ramirez! Get up the stairs to the roof ASAP…our evac choppers aren't going to wait all day!	
     level.teamleader dialogue_execute("dcburn_mcy_waitallday");
 
     wait(randomfloatrange(8, 12));
@@ -4739,33 +4025,31 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	We're getting overrun! Everyone to the roof! Now!	
     level.teamleader dialogue_execute("dcburn_mcy_gettingoverrun");
   }
 
   wait(2);
-  //Sgt. Foley We're out of time! Go!	
+
   level.teamleader dialogue_execute("dcburn_mcy_outoftimego");
   wait(2);
-  //Cpl. Dunn		Hostiles closing in!!!	
+
   level.friendly02 dialogue_execute("dcburn_cpd_closingin");
 
   flag_wait("player_roof_stairs_02");
-  //Sgt. Macey: Move up! Go! Go!
+
   level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_00");
 
   flavorbursts_off("allies");
-  //Ranger 3	32	5	I've got a major hydraulic leak! We're barely gonna make it over the MSR! We gotta touch down - we gotta (static)!	
+
   level.player play_sound_on_entity("dcburn_ar3_gottatouchdown");
   flavorbursts_on("allies");
 
   flag_wait("player_outer_balcony_top_commerce");
 
   while(!flag("player_headed_to_roof")) {
-    //Sgt. Macey: Push forward! Move! Move!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_02");
     wait(2);
-    //Sgt. Foley There's no time! Keep moving!
+
     level.teamleader dialogue_execute("dcburn_mcy_notime");
 
     if(flag("player_headed_to_roof")) {
@@ -4778,16 +4062,13 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Foley We have to keep moving! Go! Go! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_keepmoving");
     wait(2);
   }
 
   flag_wait("player_headed_to_roof");
   radio_dialogue("dcburn_bhp_whatsyourstatus");
-  //Black Hawk Pilot	Hunter, this is Dagger Two-One. We are in position at the LZ on the rooftop, what's your status?	
 
-  //Sgt. Macey	We're on our way! Hostiles following close behind!	
   level.teamleader dialogue_execute("dcburn_mcy_hostilesclose");
 
   while(!flag("player_at_commerce_rooftop")) {
@@ -4803,7 +4084,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Foley We're getting overrun! Move! Move! Move!	
     level.teamleader dialogue_execute("dcburn_mcy_overrun");
 
     wait(1);
@@ -4817,7 +4097,7 @@ dialogue_get_to_roof() {
     if(flag("player_at_commerce_rooftop")) {
       break;
     }
-    //Sgt. Macey: Move up! Go! Go!
+
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_00");
 
     wait(1);
@@ -4832,7 +4112,6 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Foley We're out of time! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_outoftimego");
 
     wait(1);
@@ -4847,15 +4126,10 @@ dialogue_get_to_roof() {
       break;
     }
 
-    //Sgt. Macey	26	5	We're outnumbered - we need to get to the roof ASAP!!!! Go! Go! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_outnumbered");
   }
   flag_set("rooftop_run_dialogue_finished");
 }
-
-/****************************************************************************
-ROOF/HELI RIDE
-****************************************************************************/
 
 AA_roof_init() {
   thread obj_heli_mount();
@@ -4881,7 +4155,6 @@ dialogue_roof() {
   flag_wait("player_at_commerce_rooftop");
 
   flag_wait("blackhawk_landed");
-  //wait( 3 );
 
   flag_set("obj_heli_mount_given");
   thread dialogue_nag_minigun();
@@ -4894,95 +4167,51 @@ dialogue_roof() {
   while(!flag("can_talk"))
     wait(.5);
 
-  //Sgt. Macey Overlord, we've linked up with the SEALs on the rooftop and are heading out. Interrogative - has the bunker been evacuated, over?	
   radio_dialogue("dcburn_mcy_bunkerevac");
 
-  //Overlord (HQ Radio)	27	2	Negative Two-One, they're still pinned down by infantry and light armor. Doesn't look good from here, over.		
   radio_dialogue("dcburn_hqr_stillpinned");
 
-  //Sgt. Macey	27	3	Copy Overlord, we'll do what we can from the air, out.	
   radio_dialogue("dcburn_mcy_fromtheair");
-
-  //wait( 4 );
-
-  //Sgt. Macey	28	1	This is Hunter Two-One Actual. We have eyes on multiple hostile victors and foot mobiles....request permission to engage, over.	
-  //radio_dialogue( "dcburn_mcy_permission" );	
-
-  //Overlord (HQ Radio)	28	2	Your call, Two-One. Outlaw is pinned down at the bunkers. You're cleared hot along the MSR, over.		
-  //radio_dialogue( "dcburn_hqr_clearedhot" );
 
   flag_set("obj_heli_ride_given");
   thread autosave_now(true);
 
-  //Overlord (HQ Radio)	32	1	First wave of civilian transports is away. Reaver Two, proceed with second stage evacation. Litter urgent personnel only.	
   thread radio_dialogue("dcburn_hqr_firstwave");
-
-  //Sgt. Macey	28	3	Squad, we're engaging all targets of opportunity to buy Outlaw some time to get out! This may be a one way trip. Hooah?		
-  //radio_dialogue( "dcburn_mcy_onewaytrip" );
-
-  //Cpl. Dunn Hooah. Rangers lead the way!
-  //radio_dialogue( "dcburn_cpd_leadtheway" );
-
-  //Sgt. Macey All the way.		
-  //radio_dialogue( "dcburn_mcy_alltheway" );
-
-  //SEAL Team LeaderWe're with you, Two-One. Let's do this.		
-  //radio_dialogue( "dcburn_sll_withyou" );
 
   flag_wait("player_heli_05");
 
-  //Little Bird Pilot 1	Dagger Two, SAM launch! Break left break left!!!	
   radio_dialogue_overlap("dcburn_lbp1_breakleftbreakleft");
 
   flag_wait("player_heli_07");
 
-  //Sgt. Foley Overlord, Dagger Two-Two is hit and going down!
   radio_dialogue("dcburn_mcy_hitgoingdown");
 
   flag_wait("player_heli_09");
   wait(1);
-  //Black Hawk Pilot	RPG teams in sight...I want you to pull that trigger till they don't get up.	
+
   radio_dialogue("dcburn_bhp_dontgetup");
 
-  //Overlord (HQ Radio)	32	3	Atlas Two-Three, Two-Four and Two-Five are all away. Ground units at LZ 4, fall back now.
   radio_dialogue("dcburn_hqr_fallbacknow");
 
-  //Little Bird Pilot 1	Ramirez, we got foot mobiles and light armor down there. You're cleared hot.
-  //radio_dialogue( "dcburn_lbp1_clearedhot" );	
-
-  flag_set("player_has_used_minigun"); //**TODO, check to see if player has used gun to blow shit up yet
+  flag_set("player_has_used_minigun");
   if(!flag("player_has_used_minigun")) {
-    //Sgt. Macey	Ramirez, spin her up and let her rip!!!	dcburn_mcy_spinherup
     radio_dialogue("dcburn_mcy_spinherup");
   }
 
   flag_wait("player_heli_10c");
-  //Little Bird Pilot 1	Enemy gunship lifting off at your twelve o'clock.	
+
   radio_dialogue("dcburn_lbp1_gunshipliftingoff");
 
-  //Ranger 2	32	4	This is Atlas Two-Five at LZ 1! Engines are at 30 percent! I can't carry any more people! We're gonna have to leave some of them behind!!	
   radio_dialogue("dcburn_ar2_leavebehind");
 
-  //Little Bird Pilot 1	Light armor rolling in.	
-  //radio_dialogue( "dcburn_lbp1_armorrollingin" );	
-
   flag_wait("player_heli_14");
-  //Evac Site Radio Voice	Dagger Two, the evac site is taking fire from the main road!	
+
   radio_dialogue("dcburn_evc_mainroad");
 
-  //Little Bird Pilot 1	Copy that, we're on it.	
-  //radio_dialogue( "dcburn_lbp1_wereonit" );	
-
-  //**Overlord (HQ Radio)	32	10	Overlord to all units, evacuation order Irene, I repeat, evacuation order Irene. Everyone get the hell outta there.	
   radio_dialogue("dcburn_hqr_orderirene");
 
-  //Ranger 1	32	11	Get your men on that transport now, WE ARE LEAVING!!!	
   radio_dialogue("dcburn_ar1_weareleaving");
 
-  //Little Bird Pilot 1	Foot mobiles...take em out.	
-  //radio_dialogue( "dcburn_lbp1_footmobiles" );	
-
-  //Ranger 4	32	6	This is Atlas One-One, civilian transport going down two klicks west of Dupont Circle! We are- (static) (screaming women and children on board in background)	
   radio_dialogue("dcburn_ar4_wearegoingdown");
 }
 
@@ -4992,7 +4221,6 @@ dialogue_nag_minigun() {
   flag_set("can_talk");
 
   while(!flag("player_getting_on_minigun")) {
-    //Sgt. Macey We've gotta move! Ramirez, get on that minigun!
     flag_clear("can_talk");
     level.teamleader dialogue_execute("dcburn_mcy_moveminigun");
     flag_set("can_talk");
@@ -5008,7 +4236,7 @@ dialogue_nag_minigun() {
     }
 
     flag_clear("can_talk");
-    //Sgt. Macey Ramirez, get on the minigun!!!	
+
     level.teamleader dialogue_execute("dcburn_mcy_getonminigun");
     flag_set("can_talk");
 
@@ -5023,7 +4251,7 @@ dialogue_nag_minigun() {
     }
 
     flag_clear("can_talk");
-    //Sgt. Macey	Ramirez!!! Get in the chopper!!!	
+
     level.teamleader dialogue_execute("dcburn_mcy_getinchopper");
     flag_set("can_talk");
 
@@ -5038,7 +4266,7 @@ dialogue_nag_minigun() {
     }
 
     flag_clear("can_talk");
-    //Sgt. Macey	Ramirez!!! We are way outnumbered! Get on board!! Move!!!	
+
     level.teamleader dialogue_execute("dcburn_mcy_wayoutnumbered");
     flag_set("can_talk");
 
@@ -5053,7 +4281,7 @@ dialogue_nag_minigun() {
     }
 
     flag_clear("can_talk");
-    //Sgt. Macey	Ramirez!! Forget about it! We got a minigun on board! Get on the helicopter! Let's go!!!	
+
     level.teamleader dialogue_execute("dcburn_mcy_forgetaboutit");
     flag_set("can_talk");
 
@@ -5068,7 +4296,7 @@ dialogue_nag_minigun() {
     }
 
     flag_clear("can_talk");
-    //Sgt. Macey	Ramirez!!! You're polishing brass on the Titanic! Get on the minigun, let's go!!!	
+
     level.teamleader dialogue_execute("dcburn_mcy_brassontitanic");
     flag_set("can_talk");
 
@@ -5098,29 +4326,25 @@ AI_awesome_accuracy_untill_flag(sFlag) {
 }
 
 AI_roof_defenders_think() {
-  //rooftop_defender defend chokepoint till player on heli
   self endon("death");
   self thread try_to_magic_bullet_shield();
   self.neverEnableCQB = true;
-  //self.fixednode = false;
+
   self.goalradius = 16;
   self.baseaccuracy = 1000;
-  self.attackeraccuracy = 0; //makes any AI attacking him have shitty accuracy
+  self.attackeraccuracy = 0;
 
   flag_wait("player_getting_on_minigun");
 
-  //player on minigun...this guy gets overrun
   self.health = 1;
   self.baseaccuracy = .01;
-  self.attackeraccuracy = 10; //makes any AI attacking him have awesome accuracy
+  self.attackeraccuracy = 10;
   self thread stop_magic_bullet_shield();
 }
 
 AAA_sequence_heli_ride() {
   flag_wait("player_headed_to_roof");
 
-  /*----------------------- BLACKHAWK RIDER TO LEAD PLAYER
-  -------------------------*/
   level.AIdeleteExcluders = [];
   spawner = getent("rooftop_helirider", "targetname");
   rooftop_helirider = spawner spawn_ai();
@@ -5128,8 +4352,6 @@ AAA_sequence_heli_ride() {
     rooftop_helirider thread AI_rooftop_helirider_think();
   }
 
-  /*----------------------- INVINCIBLE DUDE THAT WILL GUARD ROOFTOP CHOKEPOINT
-  -------------------------*/
   spawner = getent("rooftop_defender", "targetname");
   defender = spawner spawn_ai();
   if(isDefined(defender))
@@ -5139,11 +4361,8 @@ AAA_sequence_heli_ride() {
   if(isDefined(turret2))
     turret2 delete();
 
-  //thread autosave_by_name( "headed_to_roof" );
   triggersEnable("colornodes_roof", "script_noteworthy", true);
 
-  /*----------------------- TRENCH AMBIENT - FRIENDLY DRONES
-  -------------------------*/
   allied_drones_heliride_01 = getEntArray("allied_drones_heliride_01", "targetname");
   allied_drones_heliride_02 = getEntArray("allied_drones_heliride_02", "targetname");
   allied_drones_heliride_03 = getEntArray("allied_drones_heliride_03", "targetname");
@@ -5153,17 +4372,11 @@ AAA_sequence_heli_ride() {
   thread drone_flood_start(allied_drones_heliride_03, "allied_drones_heliride_03");
   thread drone_flood_start(allied_drones_heliride_03, "allied_drones_heliride_04");
 
-  /*----------------------- SPAWN AND SETUP PLAYER BLACKHAWK
-  -------------------------*/
   player_blackhawk_setup();
   level.blackhawk Vehicle_SetSpeed(5);
   heli_roof_approach_01_end = getent("heli_roof_approach_01_end", "targetname");
   level.blackhawk SetLookAtEnt(heli_roof_approach_01_end);
-  //level.blackhawk.animname = "blackhawk";
-  //level.blackhawk assign_animtree();
 
-  /*----------------------- PLAYER BLACKHAWK LANDS
-  -------------------------*/
   flag_wait("roof_littlebird_lifted_off");
   level.blackhawk clearlookatent();
   heli_roof_approach_01 = getent("heli_roof_approach_01", "targetname");
@@ -5176,16 +4389,14 @@ AAA_sequence_heli_ride() {
   trigger_origin = level.blackhawk gettagorigin("tag_player");
   trigger_radius = 160;
   trigger_height = 100;
-  trigger_spawnflags = 0; // player only
+  trigger_spawnflags = 0;
   triggerApproach = spawn("trigger_radius", trigger_origin, trigger_spawnflags, trigger_radius, trigger_height);
   thread team_leader_gets_on_blackhawk(triggerApproach);
 
-  /*----------------------- WAIT FOR PLAYER TO APPROACH GUN...MUST BE FACING CHOPPER
-  -------------------------*/
   trigger_origin = level.blackhawk gettagorigin("tag_player");
   trigger_radius = 40;
   trigger_height = 100;
-  trigger_spawnflags = 0; // player only
+  trigger_spawnflags = 0;
   level.blackhawk.trigger = spawn("trigger_radius", trigger_origin, trigger_spawnflags, trigger_radius, trigger_height);
 
   balackHawkOrigin = level.blackhawk gettagorigin("TAG_ORIGIN");
@@ -5207,22 +4418,17 @@ AAA_sequence_heli_ride() {
   thread player_blackhawk_health_tweaks();
 
   maps\_friendlyfire::TurnOff();
-  level.disable_destructible_bad_places = true; //disables all badplaces for destructibles so AI won't wig out while player is lighting shit up
+  level.disable_destructible_bad_places = true;
 
-  /*----------------------- KILLSPAWNERS
-  -------------------------*/
   killSpawner(7);
   killSpawner(8);
   killSpawner(10);
 
-  //level.player enableinvulnerability();
   volume_roof = getent("volume_roof", "targetname");
   aAI_to_delete = volume_roof get_ai_touching_volume("axis");
   array_thread(aAI_to_delete, ::AI_delete);
   delaythread(1.5, ::delete_squad);
 
-  /*----------------------- SEAKNIGHTS FLY FROM EVAC SITE
-  -------------------------*/
   roof_seaknight_01 = getent("roof_seaknight_01", "targetname");
   roof_seaknight_02 = getent("roof_seaknight_02", "targetname");
   roof_seaknight_01 notify("spawn");
@@ -5231,43 +4437,33 @@ AAA_sequence_heli_ride() {
   roof_seaknight_01 thread notify_delay("play_anim", 1);
   roof_seaknight_02 thread notify_delay("play_anim", 1);
 
-  /*----------------------- PLAYER LERPED ONTO MINIGUN
-  -------------------------*/
   player_lerped_onto_minigun();
   music_stop(5);
   flag_wait("roof_heli_about_to_be_owned");
   flag_set("player_heli_ready_to_take_off");
 
   thread autosave_by_name("heli_ride_01");
-  /*----------------------- WW2 MEMORIAL HELIS SPAWNED
-  -------------------------*/
-  ww2_heli = spawn_vehicle_from_targetname("ww2_heli");
-  //ww2_trucks = spawn_vehicles_from_targetname( "ww2_trucks" );
 
-  /*----------------------- START HELI RIDE
-  -------------------------*/
+  ww2_heli = spawn_vehicle_from_targetname("ww2_heli");
+
   path_player_heli = getstruct("path_player_heli", "targetname");
   level.blackhawk vehicle_liftoff(76);
   level.blackhawk player_blackhawk_default_params();
   level.blackhawk thread player_blackhawk_default_params();
   level.blackhawk thread vehicle_paths(path_player_heli);
 
-  /*----------------------- TRENCH AMBIENT - ABRAMS DESTROYED
-  -------------------------*/
   abrams_street = getent("abrams_street", "targetname");
   abrams_street delete();
   m1a1_heliride_01 = spawn_vehicle_from_targetname_and_drive("m1a1_heliride_01");
   m1a1_heliride_02 = spawn_vehicle_from_targetname_and_drive("m1a1_heliride_02");
   javelin_source_org = getent(m1a1_heliride_01.script_linkto, "script_linkname");
   newMissile = MagicBullet("javelin_dcburn", javelin_source_org.origin, m1a1_heliride_01.origin);
-  newMissile thread javelin_earthquake(); //custom function to ensure an earthquake on impact
+  newMissile thread javelin_earthquake();
   newMissile Missile_SetTargetEnt(m1a1_heliride_01);
-  newMissile Missile_SetFlightmodeTop(); //Code added this command so we could make the Javelin do an arc instead of a straight line
+  newMissile Missile_SetFlightmodeTop();
 
   humvee_heliride_01 = spawn_vehicle_from_targetname("humvee_heliride_01");
 
-  /*----------------------- FLYING OVER TRENCHES AND WASH MONUMNET
-  -------------------------*/
   flag_wait("player_heli_02");
   level.blackhawk Vehicle_SetSpeed(75);
   level.littlebird_wingman_02 vehicle_setSpeed(70);
@@ -5275,15 +4471,11 @@ AAA_sequence_heli_ride() {
   array_thread(level.effects_commerce, ::pauseEffect);
   array_thread(level.effects_bunker, ::pauseEffect);
 
-  /*----------------------- ARMED LITTLEBIRD SWITCHES PATH
-  -------------------------*/
   eNode = getstruct("helipath_to_ww2_littlebird_wingman_armed", "targetname");
   sSpawnerTargetname = "littlebird_wingman_armed";
   level.littlebird_wingman_armed = level.littlebird_wingman_armed heli_teleport_to_newpath(sSpawnerTargetname, eNode);
   level.littlebird_wingman_armed Vehicle_SetSpeed(100);
 
-  /*----------------------- WINGMEN LITTLEBIRDS SWITCH PATHS
-  -------------------------*/
   level.littlebird_wingman_02 vehicle_delete();
   level.littlebird_wingman_02 = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_02_drone_roof");
 
@@ -5292,8 +4484,6 @@ AAA_sequence_heli_ride() {
   level.littlebird_wingman_01 = level.littlebird_wingman_01 heli_teleport_to_newpath(sSpawnerTargetname, eNode);
   level.littlebird_wingman_01 Vehicle_SetSpeed(55);
 
-  /*----------------------- AXIS DRONES NEAR WW2
-  -------------------------*/
   axis_ww2_drones_01 = getEntArray("axis_ww2_drones_01", "targetname");
   axis_ww2_drones_02 = getEntArray("axis_ww2_drones_02", "targetname");
   axis_ww2_drones_03 = getEntArray("axis_ww2_drones_03", "targetname");
@@ -5303,39 +4493,29 @@ AAA_sequence_heli_ride() {
   thread drone_flood_start(axis_ww2_drones_03, "axis_ww2_drones_03");
   thread drone_flood_start(axis_ww2_drones_04, "axis_ww2_drones_04");
 
-  /*----------------------- DELETE ALL AI
-  -------------------------*/
   waittillframeend;
   aAI = getaiarray();
   assertex(level.littlebird_wingman_02.riders.size > 0, "the riders for level.littlebird_wingman_02 are not in level.littlebird_wingman_02.riders");
   excluders = level.littlebird_wingman_02.riders;
   array_thread(aAI, ::AI_delete, excluders);
 
-  /*----------------------- SPAWN WW2 ENEMIES
-  -------------------------*/
   activate_trigger("spawner_ww2_guys", "targetname", level.player);
-  spawn_trigger_dummy("dummy_spawner_ww2_street_guys"); //flood spawner of guys near cars
+  spawn_trigger_dummy("dummy_spawner_ww2_street_guys");
 
-  /*----------------------- MORTARS/ARTY
-  -------------------------*/
   level.noMaxMortarDist = true;
   level.playerMortarFovOffset = (0, 40, 0);
-  level._effect["mortar"]["dirt"] = loadfx("explosions/artilleryExp_dirt_brown_2"); //swap out trenches mortar effect with bigger one
-  delaythread(3, maps\_mortar::bog_style_mortar_on, 2); //same trenches mortars, but with bigger explosions
+  level._effect["mortar"]["dirt"] = loadfx("explosions/artilleryExp_dirt_brown_2");
+  delaythread(3, maps\_mortar::bog_style_mortar_on, 2);
 
   flag_wait("player_heli_03a");
   newMissile = MagicBullet("javelin_dcburn", javelin_source_org.origin, humvee_heliride_01.origin);
-  newMissile thread javelin_earthquake(); //custom function to ensure an earthquake on impact
+  newMissile thread javelin_earthquake();
   newMissile Missile_SetTargetEnt(humvee_heliride_01);
-  newMissile Missile_SetFlightmodeTop(); //Code added this command so we could make the Javelin do an arc instead of a straight line
+  newMissile Missile_SetFlightmodeTop();
 
   sam_launch_ww2 = getstruct("sam_launch_ww2", "targetname");
   delaythread(1.5, ::sam_launch, 8, sam_launch_ww2, level.littlebird_wingman_02);
 
-  //flag_wait( "player_heli_04" );
-
-  /*----------------------- FLYING PAST MONUMENT
-  -------------------------*/
   flag_wait("player_heli_05");
   level.blackhawk Vehicle_SetSpeed(90);
   thread gopath(humvee_heliride_01);
@@ -5344,16 +4524,12 @@ AAA_sequence_heli_ride() {
 
   level.littlebird_wingman_armed Vehicle_SetSpeed(150);
 
-  /*----------------------- LITTLEBIRD SHOT DOWN
-  -------------------------*/
   javelin_littlebird_monument = getstruct("javelin_littlebird_monument", "targetname");
   newMissile2 = MagicBullet("javelin_dcburn", javelin_littlebird_monument.origin, level.littlebird_wingman_02.origin);
   newMissile2 Missile_SetTargetEnt(level.littlebird_wingman_02);
   littlebird_monument_crash = getstruct("littlebird_monument_crash", "targetname");
   level.littlebird_wingman_02 thread maps\dcburning_fx::littlebird_monument_crash(littlebird_monument_crash);
 
-  /*----------------------- STRAFING RUN PATH TO WW2 MEMORIAL
-  -------------------------*/
   eNode = getstruct("helipath_to_ww2_strafing_littlebird_wingman_armed", "targetname");
   sSpawnerTargetname = "littlebird_wingman_armed";
   level.littlebird_wingman_armed = level.littlebird_wingman_armed heli_teleport_to_newpath(sSpawnerTargetname, eNode);
@@ -5365,45 +4541,34 @@ AAA_sequence_heli_ride() {
   thread drone_flood_stop("allied_drones_heliride_03");
   thread drone_flood_stop("allied_drones_heliride_04");
 
-  /*----------------------- WW2 MEMORIAL
-  -------------------------*/
   flag_wait("player_heli_10");
   level.player.ignoreme = true;
   level.blackhawk Vehicle_SetSpeed(25);
   activate_trigger("spawner_ww2_guys_middle", "targetname", level.player);
   level.littlebird_wingman_armed Vehicle_SetSpeed(120);
 
-  /*----------------------- PASSING THROUGH SMOKE
-  -------------------------*/
   flag_wait("player_heli_10a");
-  level.createRpgRepulsors = false; //don't allow AI to miss on the first shot like they do on the ground
+  level.createRpgRepulsors = false;
 
   bmps_heli_ride_ww2_02 = spawn_vehicles_from_targetname_and_drive("bmps_heli_ride_ww2_02");
   activate_trigger("spawner_ww2_guys_end", "targetname", level.player);
 
   flag_wait("player_heli_10b");
-  //level.player disableinvulnerability();
+
   level.player.ignoreme = false;
 
   flag_wait("player_heli_10c");
 
   array_thread(level.effects_trenches, ::pauseEffect);
 
-  /*----------------------- WW2 HELI LIFT OFF
-  -------------------------*/
   if(isDefined(ww2_heli))
     ww2_heli thread notify_delay("liftoff", 3);
 
-  /*----------------------- BTR80s
-  -------------------------*/
   flag_wait("player_heli_14");
-  //bmps_heli_ride_ww2_01 = spawn_vehicles_from_targetname_and_drive( "bmps_heli_ride_ww2_01" );
+
   wait(.5);
   level.blackhawk Vehicle_SetSpeed(50);
 
-  //bmps_heli_ride_ww2_03 = spawn_vehicles_from_targetname_and_drive( "bmps_heli_ride_ww2_03" );
-  /*----------------------- WW2 MEMORIAL STREET - STOP FLOODSPAWNER AND AXIS DRONES
-  -------------------------*/
   crows_nest_bmps = get_vehicle_array("crows_nest_bmps", "script_noteworthy");
   foreach(vehicle in crows_nest_bmps) {
     if(isDefined(vehicle)) {
@@ -5455,7 +4620,7 @@ team_leader_gets_on_blackhawk(triggerApproach) {
   animEnt = spawn("script_origin", level.blackhawk.origin);
   animEnt.origin = level.blackhawk.origin;
   animEnt.angles = level.blackhawk.angles;
-  //thread debug_message( "org", animEnt.origin, 9999, animEnt );
+
   ent = spawnStruct();
   ent.entity = animEnt;
   ent.up = -100;
@@ -5484,10 +4649,10 @@ AI_rooftop_helirider_think() {
 
   self thread try_to_magic_bullet_shield();
   self.neverEnableCQB = true;
-  //self.fixednode = false;
+
   self.goalradius = 16;
   self.baseaccuracy = 1000;
-  self.attackeraccuracy = 0; //makes any AI attacking him have shitty accuracy
+  self.attackeraccuracy = 0;
 
   flag_wait("blackhawk_landed");
 
@@ -5495,13 +4660,13 @@ AI_rooftop_helirider_think() {
   animEnt = spawn("script_origin", level.blackhawk.origin);
   animEnt.origin = level.blackhawk.origin;
   animEnt.angles = level.blackhawk.angles;
-  //thread debug_message( "org", animEnt.origin, 9999, animEnt );
+
   ent = spawnStruct();
   ent.entity = animEnt;
   ent.up = -100;
   ent.right = 78;
   ent.forward = 21;
-  //ent.yaw = 180;
+
   ent translate_local();
   animEnt linkto(level.blackhawk);
 
@@ -5518,13 +4683,11 @@ player_lerped_onto_minigun(nolerp) {
   level.player allowjump(false);
   level.blackhawk maps\_blackhawk_minigun::player_mount_blackhawk_gun(nolerp);
   level.onHeli = true;
-  //setsaveddvar( "sm_sunSampleSizeNear", 1 );// air
-  //setsaveddvar( "sm_sunShadowScale", 0.5 );// optimized for air
 }
 
 try_to_teleport_friendlies_to_roof(eNode) {
   assert(isDefined(eNode));
-  //in case key friendlies got left behind
+
   level endon("player_getting_on_minigun");
   self endon("death");
   self endon("stop_teleport_hack");
@@ -5551,10 +4714,9 @@ player_blackhawk_setup(heliNode) {
   if(isDefined(heliNode)) {
     level.blackhawk Vehicle_Teleport(heliNode.origin, heliNode.angles);
     level.blackhawk thread vehicle_paths(heliNode);
-    ////level.player.origin = level.blackhawk.origin;
+
     level.blackhawk useby(level.player);
     level.blackhawk player_blackhawk_default_params();
-    //level.blackhawk maps\_blackhawk_minigun::player_mount_blackhawk_gun();
   }
 }
 
@@ -5566,18 +4728,13 @@ player_blackhawk_default_params() {
 }
 
 vehicle_ww2_enemy_helis_think() {
-  //Called from spawn_func
   self endon("death");
-  /*----------------------- HELI SETUP
-  -------------------------*/
-  //move closest crash location to the heli's origin so it doesn't clip into the ground
+
   aCrashLocations = maps\_vehicle::get_unused_crash_locations();
   eCrashLoc = getClosest(self.origin, aCrashLocations);
   eCrashLoc.origin = self.origin;
   self.perferred_crash_location = eCrashLoc;
 
-  /*----------------------- HELI LIFTOFF
-  -------------------------*/
   self waittill("liftoff");
   self thread ground_heli_kill_player();
   ePath = getstruct(self.script_Linkto, "script_linkname");
@@ -5642,7 +4799,6 @@ heli_at4_sequence() {
   model_at4 setModel("weapon_stinger");
   roof_rocket_guy thread delete_on_death(model_at4);
   model_at4.angles = angles_hand;
-  //reference thread anim_generic_loop( roof_rocket_guy, "AT4_idle", "stop_idle" );
 
   eNode = getnode("at4_guy_retreat", "targetname");
   roof_rocket_guy setgoalnode(eNode);
@@ -5673,8 +4829,6 @@ player_blackhawk_think() {
 littlebird_wingman_02_think() {
   flag_wait("player_approaching_outer_balcony");
 
-  /*----------------------- SPAWN LITTLEBIRD AND RIDERS TO NODES
-  -------------------------*/
   aRoof_riders_left = array_spawn(getEntArray("littlebird_roof_riders_left", "targetname"));
   array_thread(aRoof_riders_left, ::AI_ignored_and_oblivious_on);
   array_thread(aRoof_riders_left, ::magic_bullet_shield);
@@ -5684,40 +4838,27 @@ littlebird_wingman_02_think() {
   level.littlebird_wingman_02 = spawn_vehicle_from_targetname("littlebird_wingman_02");
   level.littlebird_wingman_02 thread gopath();
 
-  // you'll send this node off to some commands to get the nodes contained in the stage prefab
   pickup_node_before_stage = getstruct("pickup_node_before_stage", "script_noteworthy");
   level.littlebird_wingman_02 set_stage(pickup_node_before_stage, aRoof_riders_left, "left");
   level.littlebird_wingman_02 set_stage(pickup_node_before_stage, aRoof_riders_right, "right");
 
-  /*----------------------- LITTLEBIRD LANDS BEFORE PLAYER GETS THERE
-  -------------------------*/
-  //touch_down happens when the vehicle paths into the vehicle node contained in theprefabs/script_gags/littlebird_stage_load.map prefab
   level.littlebird_wingman_02 waittill("touch_down");
 
-  /*----------------------- MAKE LEFT RIDERS GET ON BEFORE PLAYER GETS THERE
-  -------------------------*/
   level.littlebird_wingman_02 thread load_side("left", aRoof_riders_left);
   level.littlebird_wingman_02 thread load_side("right", aRoof_riders_right);
 
-  /*----------------------- SETUP HELI AND HAVE IT CIRCLE PLAYER BLACKHAWK
-  -------------------------*/
   flag_wait("player_approach_commerce_roof_01");
   level.littlebird_wingman_01 = spawn_vehicle_from_targetname("littlebird_wingman_01");
   level.littlebird_wingman_01 thread vehicle_ai_event("idle_alert_to_casual");
   thread gopath(level.littlebird_wingman_01);
 
-  /*----------------------- MAKE RIGHT RIDERS GET ON WHEN PLAYER ARRIVES
-  -------------------------*/
   while(level.littlebird_wingman_02.riders.size < 6)
     wait(.1);
 
   thread flag_set("roof_littlebird_lifted_off");
-  /*----------------------- LITTLEBIRD TAKES OFF AND CIRCLES
-  -------------------------*/
-  //wait( .5 );
-  //level.littlebird_wingman_02 vehicle_ai_event( "idle_alert" );
+
   level.littlebird_wingman_02 thread vehicle_liftoff(3);
-  //level.littlebird_wingman_02 vehicle_ai_event( "idle_alert_to_casual" );
+
   heli_roof_loop_01 = getstruct("heli_roof_loop_01", "targetname");
   wait(1);
   level.littlebird_wingman_02 thread vehicle_paths(heli_roof_loop_01);
@@ -5732,36 +4873,26 @@ littlebird_wingman_armed_think() {
 
   level.littlebird_wingman_armed = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_armed");
   level.littlebird_wingman_armed Vehicle_SetSpeed(25);
-  //littlebird_wingman_armed thread maps\_attack_heli::heli_spotlight_on();
-  //littlebird_wingman_armed thread maps\_attack_heli::heli_spotlight_random_targets_on();
 
   wingman_roof_node_01 = getstruct("wingman_roof_node_01", "script_noteworthy");
   wingman_roof_node_01 waittill("trigger");
-  //littlebird_wingman_armed SetLookAtEnt( level.blackhawk );
+
   roof_target_for_helis = getent("roof_target_for_helis", "targetname");
   level.littlebird_wingman_armed SetLookAtEnt(roof_target_for_helis);
   level.littlebird_wingman_armed Vehicle_SetSpeed(10);
 
-  /*----------------------- SWITCH PATH WHEN PLAYER GETS ON BLACKHAWK
-  -------------------------*/
   waittillframeend;
   foreach(turret in level.littlebird_wingman_armed.mgturret) {
     turret SetMode("auto_nonai");
-    //turret StartFiring();
   }
 
   flag_wait("player_getting_on_minigun");
 
-  //littlebird_wingman_armed mgoff();
   foreach(turret in level.littlebird_wingman_armed.mgturret) {
     turret SetMode("manual");
     turret StopFiring();
   }
 }
-
-/****************************************************************************
-HELI RIDE 2
-****************************************************************************/
 
 AA_heli_ride2() {
   thread AAA_sequence_heli_ride2();
@@ -5775,57 +4906,27 @@ AA_heli_ride2() {
 }
 
 dialogue_heli_ride2() {
-  //flag_wait( "player_heli_18" );
-  //Little Bird Pilot 1	Overlord, this is Dagger Two-One. We've taken some of the heat off the evac site -	
-  //radio_dialogue( "dcburn_lbp1_takenheatoff" );
-
   flag_wait("player_heli_18a");
-  //Black Hawk Pilot	Incoming! Incoming!	
+
   radio_dialogue_overlap("dcburn_bhp_incoming");
-
-  //flag_wait( "littlebird_wingman_02_crash_start" );
-
-  //Little Bird Pilot 1	Dagger Two, SAM launch! Break left break left!!!	
-  //radio_dialogue( "dcburn_lbp1_breakleftbreakleft" );
 
   flag_wait("player_heli_18d");
 
-  //Sgt. Foley	Overlord, we're hit, but still in the air. We've got a massive SAM battery dead ahead...we're going in!!
   radio_dialogue("dcburn_mcy_stillintheair");
 
   flag_wait("player_heli_19");
-  //Black Hawk Pilot	RPG teams! 12 o'clock!!!
-  //radio_dialogue( "dcburn_bhp_rpgteams" );
 
-  //Black Hawk Pilot	We're losing attitude control…!!!
   radio_dialogue("dcburn_bhp_attitudecontrol");
 
-  //Ranger 2	32	2	We're bleeding hydraulic fluid, I'm losin' the tail rotor!	
-  //radio_dialogue( "dcburn_ar2_hydraulicfluid" );
-
-  //Sgt. Foley	Take us up!!! If we're goin' down we're taking those SAM sites with us!!!
   radio_dialogue("dcburn_mcy_takeusup");
 
   flag_wait("player_heli_20");
-  //Black Hawk Pilot	Multiple fire teams spotted!		struggling with the controls, keeping it aloft, still flying	helicopter radio
-  //radio_dialogue( "dcburn_bhp_fireteams" );
 
-  //Little Bird Pilot 1	Overlord, Dagger Two-two and Two-three are down. I repeat, Dagger Two-Two and Two-Three are down, over.	
-  //radio_dialogue( "dcburn_lbp1_22and23aredown" );
-
-  //Little Bird Pilot 1	Foot mobiles...take em out.	
-  //radio_dialogue( "dcburn_lbp1_footmobiles" );	
-
-  //Black Hawk Pilot	RPG teams in sight...I want you to pull that trigger till they don't get up.	
-  //radio_dialogue( "dcburn_bhp_dontgetup" );	
-
-  //Little Bird Pilot 1	SAM launch! Hang on!!	
   radio_dialogue("dcburn_lbp1_samlaunch");
 
   flag_wait("player_crash_starting");
   wait(.3);
 
-  //Little Bird Pilot 1	We're hit! Mayday mayday, this is Dagger Two-One, we are going down at grid square Papa Bravo, 2 niner 2, 1 7 8. I repeat, we are going down.
   soundOrg = spawn_tag_origin();
   soundOrg linkTo(level.player);
   soundOrg thread play_sound_on_tag_endon_death("dcburn_lbp1_maydaymayday", "tag_origin");
@@ -5833,15 +4934,12 @@ dialogue_heli_ride2() {
   flag_wait("player_heli_crash");
   soundOrg notify("death");
   soundOrg delete();
-
-  //Little Bird Pilot 1	Brace for impact!	
-  //radio_dialogue( "dcburn_lbp1_braceforimpact" );
 }
 
 AAA_sequence_heli_ride2() {
   flag_wait("player_heli_18");
   thread autosave_now();
-  //level.player enableinvulnerability();
+
   level.blackhawk Vehicle_SetSpeed(70);
 
   if(isDefined(level.littlebird_wingman_armed))
@@ -5851,8 +4949,6 @@ AAA_sequence_heli_ride2() {
   if(isDefined(level.littlebird_wingman_02))
     level.littlebird_wingman_02 vehicle_delete();
 
-  /*----------------------- CLEANUP AI
-  -------------------------*/
   vehicles_to_delete = getEntArray("vehicles_crowsnest_defend", "targetname");
   foreach(vehicle in vehicles_to_delete) {
     if(isDefined(vehicle)) {
@@ -5860,11 +4956,9 @@ AAA_sequence_heli_ride2() {
     }
   }
 
-  /*----------------------- LITTLEBIRD CRASH SETUP
-  -------------------------*/
   littlebird_wingman_02_drone_crash = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_02_drone_crash");
   littlebird_wingman_02_drone_crash Vehicle_SetSpeed(70);
-  //littlebird_wingman_02_drone_crash SetAcceleration( 100 );
+
   targetOffset = (0, 0, 250);
   targetOrg = spawn("script_origin", littlebird_wingman_02_drone_crash.origin);
   targetOrg.origin = littlebird_wingman_02_drone_crash.origin;
@@ -5873,13 +4967,8 @@ AAA_sequence_heli_ride2() {
   targetOrg thread ent_cleanup(littlebird_wingman_02_drone_crash);
   attractor = Missile_CreateAttractorEnt(targetOrg, 8000, 3000);
 
-  /*----------------------- LITTLEBIRD CRASHES
-  -------------------------*/
   missile_org_lincoln = getent("missile_org_lincoln", "targetname");
-  //flag_wait( "littlebird_wingman_02_crash_start" );
 
-  //LerpViewAngleClamp( <time>, <accel time>, <decel time>, <right arc>, <left arc>, <top arc>, <bottom arc> )
-  //level.player lerpViewAngleClamp( 0.5, 0, 0, 10, 10, 10, 10 );
   eMissile1 = magicBullet("slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin);
   wait(.5);
   eMissile2 = magicBullet("slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin);
@@ -5895,12 +4984,10 @@ AAA_sequence_heli_ride2() {
   littlebird_crash_ww2 = getstruct("littlebird_crash_ww2", "targetname");
   littlebird_wingman_02_drone_crash thread maps\dcburning_fx::littlebird_monument_crash(littlebird_crash_ww2);
 
-  /*----------------------- PLAYER HELI HIT
-  -------------------------*/
   flag_wait("player_heli_18b");
   wait(2);
   earthquake(.5, 1.5, level.player.origin, 1600);
-  //level.player disableinvulnerability();
+
   level.blackhawk thread play_sound_in_space("blackhawk_down_missile_impact");
   level.player thread play_sound_in_space("blackhawk_helicopter_secondary_exp");
   playFX(level._effect["player_death_explosion"], level.player.origin + (0, 0, 50));
@@ -5916,24 +5003,6 @@ AAA_sequence_heli_ride2() {
 
   SetBlur(1, .6);
 
-  /*----------------------- 2ND LITTLEBIRD CRASHES
-  -------------------------*/
-  //littlebird_wingman_01_drone_crash = spawn_vehicle_from_targetname_and_drive( "littlebird_wingman_01_drone_crash" );
-  //littlebird_wingman_01_drone_crash Vehicle_SetSpeed( 80 );
-  //littlebird_wingman_01_drone_crash SetDeceleration( 100 );
-  //littlebird_wingman_01_drone_crash delaythread( 7, maps\dcburning_fx::littlebird_crash2 );
-  //littlebird_wingman_01_drone_crash SetAcceleration( 100 );
-  //littlebrid_crash_02_start
-  //littlebrid_crash_02_end
-
-  //wait( 3.5 );
-
-  //littlebird_wingman_02_drone_crash thread maps\dcburning_fx::littlebird_crash();
-
-  //thread littlebird_wingman_01_crash( littlebird_wingman_01_drone_crash, targetOrg, missile_org_lincoln );
-
-  /*----------------------- WINDOW FIGHT - START
-  -------------------------*/
   flag_wait("player_heli_18d");
   level.blackhawk Vehicle_SetSpeed(25, 60, 60);
   array_thread(level.effects_ww2, ::pauseEffect);
@@ -5956,8 +5025,6 @@ AAA_sequence_heli_ride2() {
   aSpawners = getEntArray("axis_lincoln_drones_04", "targetname");
   thread drone_flood_start(aSpawners, "axis_lincoln_drones_04");
 
-  /*----------------------- WINDOW FIGHT - CORNER
-  -------------------------*/
   flag_wait("player_heli_19a");
   vehicle_delete_non_squad();
   thread AI_cleanup_volume("volume_enemies_glass_02", "axis");
@@ -5967,8 +5034,6 @@ AAA_sequence_heli_ride2() {
   flag_wait("player_heli_19b");
   thread AI_cleanup_volume("volume_enemies_glass_03", "axis");
 
-  /*----------------------- WINDOW FIGHT - ROOFTOP REVEAL
-  -------------------------*/
   flag_wait("player_heli_19c");
 
   littlebird_wingman_armed_lincoln = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_armed_lincoln");
@@ -5979,10 +5044,6 @@ AAA_sequence_heli_ride2() {
   activate_trigger("spawner_enemies_balcony_01", "targetname", level.player);
   slamraam_lincoln = spawn_vehicles_from_targetname("slamraam_lincoln");
   activate_trigger("spawner_axis_lincoln_01", "targetname", level.player);
-  //drone_flood_stop( "axis_lincoln_drones_01" );
-  //drone_flood_stop( "axis_lincoln_drones_02" );
-  //drone_flood_stop( "axis_lincoln_drones_03" );
-  //drone_flood_stop( "axis_lincoln_drones_04" );
 
   flag_wait("player_heli_19d");
   level.blackhawk Vehicle_SetSpeed(80, 20, 20);
@@ -6007,25 +5068,18 @@ AAA_sequence_heli_ride2() {
     }
   }
 
-  /*----------------------- CLEANUP AND CRASH
-  -------------------------*/
   flag_wait("player_heli_22");
   drone_flood_stop("axis_lincoln_drones_01");
   drone_flood_stop("axis_lincoln_drones_02");
   drone_flood_stop("axis_lincoln_drones_03");
   drone_flood_stop("axis_lincoln_drones_04");
 
-  /*----------------------- BLACKHAWK CRASHES
-  -------------------------*/
-
-  //thread maps\_minigun::minigun_hints_off();
   flag_set("player_crash_starting");
   level.blackhawk thread play_sound_in_space("blackhawk_down_missile_impact");
   level.player thread play_sound_in_space("blackhawk_helicopter_hit");
   level.blackhawk Vehicle_TurnEngineOff();
   level.blackhawk thread play_loop_sound_on_entity("blackhawk_helicopter_dying_loop");
 
-  //level.player enableInvulnerability();
   level.blackhawk Vehicle_SetSpeed(150, 50, 50);
   playFX(level._effect["player_death_explosion"], level.player.origin);
   level.player PlayRumbleOnEntity("damage_heavy");
@@ -6036,25 +5090,21 @@ AAA_sequence_heli_ride2() {
   flag_clear("player_on_minigun");
   flag_set("player_off_minigun");
   level notify("player_off_blackhawk_gun");
-  //thread notify_hack();
 
   level.player playerLinkToBlend(level.blackhawk, "tag_player", .5);
-  //PlayerLinkToDelta( <linkto entity>, <tag>, <viewpercentag fraction>, <right arc>, <left arc>, <top arc>, <bottom arc>, <use tag angles> )
+
   level.player playerlinkToDelta(level.blackhawk, "tag_player", 1, 20, 20, 10, 10);
   SetBlur(3, .1);
   level.blackhawk thread player_crash_fx();
   earthquake(.7, 2.5, level.player.origin, 1600);
   level.blackhawk thread player_spinout();
   wait 1;
-  //level.blackhawk stopSounds();
-  //level.blackhawk StopLoopSound();
+
   flavorbursts_off("allies");
   SetBlur(0, .5);
 
   thread AI_cleanup("all", undefined, true);
   thread AI_drone_cleanup("axis", undefined, true);
-
-  //level.player thread play_loop_sound_on_entity( "dcburning_heli_alarm" );
 
   flag_wait("player_heli_crash");
 
@@ -6080,7 +5130,6 @@ AAA_sequence_heli_ride2() {
   flag_set("player_crash_done");
   level.player SetActionSlot(1, "nightvision");
 
-  //reset hunted spotlight to dynamic version
   if(GetDvarInt("sm_enable") && getDvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/hunted_spotlight_model_dim");
   else
@@ -6107,57 +5156,11 @@ player_heli_damaged_earthquake() {
   }
 }
 
-//littlebird_wingman_01_crash( littlebird_wingman_01_drone_crash, targetOrg, missile_org_lincoln )
-//{
-//	targetOffset = ( 0, 0, 0 );
-//	targetOrg unlink();
-//	targetOrg.origin = littlebird_wingman_01_drone_crash.origin;
-//	targetOrg linkTo( littlebird_wingman_01_drone_crash, "tag_origin", targetOffset, ( 0, 0, 0 ) );
-//	wait( .5 );
-//	eMissile6 = magicBullet( "slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin );
-//	wait( .5 );
-//	eMissile7 = magicBullet( "slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin );
-//	wait( .1 );
-//	eMissile8 = magicBullet( "slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin );
-//
-//}
-
-//notify_hack()
-//{
-//	level.blackhawk endon( "death" );
-//	while( isDefined( level.blackhawk ) )
-//	{
-//		wait( 0.05 );
-//		level.blackhawk stopSounds();
-//		level.blackhawk notify( "stop sound" + "Minigun_gatling_fire" );
-//		level notify( "stopMinigunSound" );
-//	}
-//
-//}
-//slamraam_think()
-//{
-//	//self ==> slamraam base
-//	slamraam_launcher = spawn( "script_model", self.origin );
-//	slamraam_launcher= "vehicle_slamraam_launcher";
-//	self.missileModel = "projectile_slamraam_missile";
-//	self.missileTags = [];
-//	self.missileTags[ 0 ] = "tag_missle1";
-//	self.missileTags[ 1 ] = "tag_missle2";
-//	self.missileTags[ 2 ] = "tag_missle3";
-//	self.missileTags[ 3 ] = "tag_missle4";
-//	self.missileTags[ 4 ] = "tag_missle5";
-//	self.missileTags[ 5 ] = "tag_missle6";
-//	self.missileTags[ 6 ] = "tag_missle7";
-//	self.missileTags[ 7 ] = "tag_missle8";
-//}
-
 blackhawk_smoke_fx() {
   self endon("death");
   for(;;) {
-    //playFXOnTag( getfx( "chopper_smoke_trail" ), level.blackhawk, "tag_guy0" );
     playFXOnTag(getfx("smoke_trail_black_heli"), level.blackhawk, "tag_gun_r");
-    //playFXOnTag( getfx( "turret_overheat_haze" ), level.blackhawk, "tag_flash" );
-    //playFXOnTag( getfx( "turret_overheat_smoke" ), level.blackhawk, "tag_flash" );
+
     wait .05;
   }
 }
@@ -6185,7 +5188,6 @@ player_spinout() {
 }
 
 AI_ambush_behavior() {
-  // drone?
   if(!issentient(self)) {
     return;
   }
@@ -6200,10 +5202,6 @@ AI_hummer_gunner_think() {
   self.maxsightdistsqrd = 0;
 
   wait(0.2);
-  //turret = self getTurret();
-  //turret setmode( "manual" );
-  //turret SetTargetEntity( ent );
-  //turret.dontshoot = true;
 }
 
 AI_glass_building_enemies_think() {
@@ -6211,12 +5209,8 @@ AI_glass_building_enemies_think() {
   self.neverEnableCQB = true;
   self.grenadeawareness = 0;
   self.ignoresuppression = true;
-  self.aggressivemode = true; //dont linger at cover when you cant see your enemy
+  self.aggressivemode = true;
 }
-
-/****************************************************************************
-OBJECTIVE FUNCTIONS
-****************************************************************************/
 
 obj_follow_sgt_macey() {
   flag_wait("obj_follow_sgt_macey_given");
@@ -6238,30 +5232,7 @@ obj_commerce() {
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader, (0, 0, 70));
 
-  //	flag_wait( "player_approaching_bottom_elevators" );
-  //	thread autosave_by_name( "player_approaching_bottom_elevators" );
-  //	obj_position = getstruct( "obj_commerce_sector_1a", "targetname" );
-  //	Objective_Position( objective_number, obj_position.origin );
-  //	
-  //	flag_wait( "player_entering_commerce_side_hall" );
-  //	thread autosave_by_name( "player_entering_commerce_side_hall" );
-  //	obj_position = getstruct( "obj_commerce_sector_1b", "targetname" );
-  //	Objective_Position( objective_number, obj_position.origin );
-  //	
-  //	flag_wait( "player_entering_mezzanine" );
-  //	obj_position = getstruct( "obj_commerce_sector_1c", "targetname" );
-  //	Objective_Position( objective_number, obj_position.origin );
-  //
-  //	flag_wait( "player_at_top_of_pavlovs_ramp" );
-  //	obj_position = getstruct( "obj_commerce_sector_1d", "targetname" );
-  //	Objective_Position( objective_number, obj_position.origin );
-  //	
-  //	flag_wait( "player_entering_top_elevator_area" );
-  //	obj_position = getstruct( "obj_commerce_sector_2", "targetname" );
-  //	Objective_Position( objective_number, obj_position.origin );
-  //	
   flag_wait("player_around_corner_to_crows_nest");
-  //flag_wait( "macey_tells_you_to_move_to_crows" );
 
   objective_position(objective_number, (0, 0, 0));
   obj_position = getstruct("obj_commerce_sector_3", "targetname");
@@ -6285,47 +5256,22 @@ obj_commerce_defend_snipe() {
   objective_state(objective_number, "done");
 }
 
-//obj_commerce_defend_snipe()
-//{
-//	flag_wait( "obj_commerce_defend_snipe_given" );
-//	//level.evacSiteEnemies = [];
-//	//level.evacSiteVehicles = [];
-//	//level.evacSiteEnemyVehicles = [];
-//	objective_number = 3;
-//	obj_position = getstruct( "obj_commerce_defend_snipe", "targetname" );
-//	objective_add( objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", obj_position.origin );
-//	objective_state( objective_number, "current" );
-//	//"empty", "active", "invisible", "done", "current" and "failed"//	Objective_String( objective_number, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE" );
-//	objective_current( objective_number );
-//
-//	flag_wait( "obj_commerce_defend_snipe_complete" );
-//
-//	objective_state( objective_number, "done" );
-//}
-
 obj_commerce_defend_snipe_enemies_think() {
   level endon("obj_commerce_defend_snipe_complete");
   self waittill("death");
   level.lasttimePlayerKilledEnemy = getTime();
-  //level.evacSiteEnemies = remove_dead_from_array(level.evacSiteEnemies );
+
   level.snipeEnemies = (level.snipeEnemies - 1);
-  //Objective_String( 3, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", level.evacSiteEnemies.size );
 
   if(level.snipeEnemies < 3)
     flag_set("only_2_sniper_enemies_remaining");
   if(level.snipeEnemies == 0)
     flag_set("obj_commerce_defend_snipe_complete");
-
-  //	if( level.evacSiteEnemies.size < 3 )
-  //		flag_set( "only_2_sniper_enemies_remaining" );
-  //	if( level.evacSiteEnemies.size == 0 )
-  //		flag_set( "obj_commerce_defend_snipe_complete" );
 }
 
 obj_commerce_defend_crow() {
   flag_wait("obj_commerce_defend_crow_given");
   objective_number = 4;
-  //obj_position = getstruct( "obj_commerce_sector_3", "targetname" );
 
   objective_add(objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_CROW");
   crow_defend_obj1 = getent("crow_defend_obj1", "targetname");
@@ -6354,22 +5300,6 @@ obj_commerce_defend_javelin() {
   objective_state(objective_number, "done");
 }
 
-//obj_commerce_defend_javelin()
-//{
-//	flag_wait( "obj_commerce_defend_javelin_given" );
-//	wait( .5 );
-//	objective_number = 4;
-//	obj_position = getstruct( "obj_commerce_defend_javelin", "targetname" );
-//	objective_add( objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN", obj_position.origin );
-//	objective_state( objective_number, "current" );
-//	Objective_String( objective_number, &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN", level.requiredJavTargets );
-//	objective_current( objective_number );
-//
-//	flag_wait( "obj_commerce_defend_javelin_complete" );
-//
-//	objective_state( objective_number, "done" );
-//}
-
 obj_commerce_defend_javelin_enemies_think() {
   level endon("obj_commerce_defend_javelin_complete");
   self endon("deleted_through_script");
@@ -6388,8 +5318,6 @@ obj_commerce_defend_javelin_enemies_think() {
       flag_set("player_has_killed_at_least_one_javelin_target");
 
     level.requiredJavTargets = level.requiredJavTargets - 1;
-
-    //Objective_String( 4, &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN", level.requiredJavTargets );
 
     if(level.requiredJavTargets < 3)
       flag_set("only_2_javelin_enemies_remaining");
@@ -6410,7 +5338,6 @@ obj_rooftop() {
 
   objective_add(objective_number, "active", &"DCBURNING_OBJ_ROOFTOP", obj_position.origin);
   objective_current(objective_number);
-  //Objective_OnEntity( objective_number, level.teamleader, ( 0, 0, 70 ) );
 
   flag_wait("player_roof_stairs_00");
   obj_position = getstruct("obj_commerce_roof02", "targetname");
@@ -6449,7 +5376,6 @@ obj_heli_mount() {
   flag_wait("obj_rooftop_complete");
   objective_number = 7;
 
-  //obj_position = getstruct( "obj_commerce_roof", "targetname" );
   obj_org = spawn("script_origin", (0, 0, 0));
   obj_org.origin = level.blackhawk gettagorigin("tag_player");
   obj_org linkto(level.blackhawk, "tag_player", (0, 0, 25), (0, 0, 0));
@@ -6475,19 +5401,9 @@ obj_heli_ride() {
   objective_current(objective_number);
 
   flag_wait("obj_heli_ride_complete");
-
-  //objective_state( objective_number, "done" );
 }
 
-/****************************************************************************
-MUSIC
-****************************************************************************/
-
 AA_music_init() {}
-
-/****************************************************************************
-UTILITY FUNCTIONS
-****************************************************************************/
 
 AA_utility() {}
 
@@ -6501,35 +5417,7 @@ AI_think(guy) {
 
 AI_allies_think() {}
 
-AI_axis_think() {
-  /*----------------------- IF YOUR ENEMY IS A REDSHIRT, HAVE BETTER ACCURACY
-  -------------------------*/
-  //	self.old_baseaccuracy = self.baseaccuracy;
-  //	while( isalive( self ) )
-  //	{
-  //		self.baseaccuracy = self.old_baseaccuracy;
-  //		wait( 1 );
-  //		self waittill( "enemy" );
-  //		prof_begin( "AI_axis_accuracy" );
-  //		if( !isDefined( self.enemy ) )
-  //		{
-  //			prof_end( "AI_axis_accuracy" );
-  //			continue;
-  //		}
-  //		if( isPlayer( self.enemy ) )
-  //		{
-  //			prof_end( "AI_axis_accuracy" );
-  //			continue;
-  //		}
-  //		if( isDefined( self.enemy.redshirt ) )
-  //		{
-  //			self.baseaccuracy = 5000;
-  //			prof_end( "AI_axis_accuracy" );
-  //			wait( 1 );
-  //			
-  //		}
-  //	}
-}
+AI_axis_think() {}
 
 AI_blood_spatter_when_sniped() {
   while(isalive(self)) {
@@ -6542,11 +5430,7 @@ AI_blood_spatter_when_sniped() {
       if(!isDefined(direction_vec))
         direction_vec = (0, 0, 1);
 
-      //playFX( getfx( "headshot" ), impact_org, direction_vec );
       playFX(getfx("thermal_body_gib"), impact_org);
-      //playFX( getfx( "headshot3" ), impact_org );
-      //playFX( getfx( "headshot4" ), impact_org );
-      //playFX( <effect id >, <position of effect>, <forward vector>, <up vector> )
     }
   }
 }
@@ -6556,7 +5440,7 @@ ai_no_suppress_think() {
   if(flag("lav_is_suppressing"))
     return;
   self.ignoresuppression = true;
-  self.aggressivemode = true; //dont linger at cover when you cant see your enemy
+  self.aggressivemode = true;
 }
 
 AI_redshirt_think() {
@@ -6565,11 +5449,10 @@ AI_redshirt_think() {
   if(!isDefined(self))
     return;
   self thread try_to_magic_bullet_shield(true);
-  self.baseaccuracy = .01; //lousy shot
-  self.attackeraccuracy = 10; //makes any AI attacking him have super high accuracy
-  self.aggressivemode = true; //dont linger at cover when you cant see your enemy
-  /*----------------------- KILL REDSHIRT WHEN PLAYER SEES
-  -------------------------*/
+  self.baseaccuracy = .01;
+  self.attackeraccuracy = 10;
+  self.aggressivemode = true;
+
   attacker = undefined;
   impact_org = undefined;
 
@@ -6589,7 +5472,7 @@ AI_redshirt_think() {
 
 try_to_magic_bullet_shield(no_death_detection) {
   self endon("death");
-  //make sure he's not in the process of melee
+
   while(isDefined(self.melee))
     wait(.1);
   self thread magic_bullet_shield(no_death_detection);
@@ -6636,14 +5519,14 @@ AI_commerce_flare_guys_think() {
   self endon("death");
   self.ignoreme = true;
   self.disableexits = true;
-  //self setthreatbiasgroup( "oblivious" );
+
   self cqb_walk("on");
   eNode = getnode(self.target, "targetname");
   self.goalradius = 16;
   self setgoalnode(eNode);
   wait(1);
   self waittill_either("goal", "damage");
-  //self setthreatbiasgroup( "axis" );
+
   self.ignoreme = false;
   self.disableexits = false;
   self thread AI_ambush_behavior();
@@ -6653,8 +5536,6 @@ AI_commerce_flare_guys_think() {
 }
 
 AI_jav_sting_spot_think() {
-  /*----------------------- SETUP FOR JAVELIN, STINGER AND SPOTTER ENEMIES
-  -------------------------*/
   self endon("death");
   self.allowdeath = true;
   self.ignoreme = true;
@@ -6665,15 +5546,14 @@ AI_jav_sting_spot_think() {
   self.sAnimFireConceal = undefined;
   self.sAnimReload = undefined;
   self.sAnimReact = undefined;
-  self.fireAtLiveTargets = false; //by default, will only fire at script_origins till you tell otherwise
-  self.iTargetToggle = 0; //used to toggle back and forth between scripted "live" targets and default script_origins
+  self.fireAtLiveTargets = false;
+  self.iTargetToggle = 0;
   self.fireNodes = undefined;
   self.old_goalradius = self.goalradius;
   self.goalradius = 16;
   aTargets = undefined;
   nextNode = undefined;
-  /*----------------------- SETUP DEFAULT TARGETS AND SCRIPTED TARGETS
-  -------------------------*/
+
   if(isDefined(self.target)) {
     self.grenadeawareness = 0;
     self.ignoreall = true;
@@ -6696,23 +5576,18 @@ AI_jav_sting_spot_think() {
     aTargets = self get_linked_ents();
     assertex(isDefined(aTargets), "Javelin enemy with export " + self.export+" needs to be linked to targets to fire at.");
   }
-  self.targetsScripted = aTargets; //vehicles, people, whatever
-  self.targetsDefault = []; //script_origins that are just fired at by default
+  self.targetsScripted = aTargets;
+  self.targetsDefault = [];
   foreach(target in aTargets) {
-    //assertex( !isspawner( target ), "Javelin/Stinger AI with export " + self.export + " is script_Linked to an entity that hasn't spawned yet." );
     if(target.code_classname == "script_origin") {
       self.targetsScripted = array_remove(self.targetsScripted, target);
       self.targetsDefault = array_add(self.targetsDefault, target);
     }
   }
 
-  /*----------------------- ADD SCRIPTED TARGETS TO THE POOL FOR OTHERS TO USE IF THEY RUN OUT
-  -------------------------*/
   if(self.targetsScripted.size > 0)
     level.targetsScriptedJavStinger = array_merge(level.targetsScriptedJavStinger, self.targetsScripted);
 
-  /*----------------------- SETUP ANIMS FOR THIS GUY AND THREAD OFF
-  -------------------------*/
   switch (self.script_noteworthy) {
     case "enemy_javelin":
       self gun_remove();
@@ -6727,14 +5602,14 @@ AI_jav_sting_spot_think() {
       self gun_remove();
       self.sAnimIdle = "enemy_spotter_prone_idle";
       self.sAnimReact = "enemy_spotter_prone_react";
-      //self.deathanim = getAnim_generic( "enemy_spotter_prone_death" );
+
       self thread AI_spotter_think();
       break;
     case "enemy_spotter_crouched":
       self gun_remove();
       self.sAnimIdle = "enemy_spotter_crouched_idle";
       self.sAnimReact = "enemy_spotter_crouched_react";
-      //self.deathanim = getAnim_generic( "enemy_spotter_crouched_death" );
+
       self thread AI_spotter_think();
       break;
   }
@@ -6779,8 +5654,6 @@ AI_stinger_think() {
   self attach("weapon_stinger", "TAG_INHAND", 1);
   self.stinger = true;
 
-  /*----------------------- SHOOT AT TARGETS WHILE ALIVE AND UNALERTED
-  -------------------------*/
   while(isalive(self)) {
     self.reference thread anim_generic_loop(self, self.sAnimIdle, "stop_idle");
     wait(randomfloatrange(2, 5));
@@ -6830,8 +5703,7 @@ AI_javelin_think() {
   self attach("weapon_javelin_sp", "TAG_INHAND", 1);
   self.javelin = true;
   iFireNodeCounter = 0;
-  /*----------------------- SHOOT AT TARGETS WHILE ALIVE AND UNALERTED
-  -------------------------*/
+
   while(isalive(self)) {
     if(isDefined(self.firenodes)) {
       self.deathanim = undefined;
@@ -6839,7 +5711,6 @@ AI_javelin_think() {
         iFireNodeCounter = 0;
       self.goalradius = 16;
 
-      //retreat and delete, if objective completed
       if((flag("obj_commerce_defend_snipe_complete")) && (!isDefined(self.script_parameters))) {
         eNode = getClosest(self.origin, javelin_death_nodes);
         self setgoalnode(eNode);
@@ -6886,32 +5757,17 @@ AI_jav_sting_get_target() {
   level.targetsScriptedJavStinger = remove_dead_targets_from_array(level.targetsScriptedJavStinger);
 
   eTarget = undefined;
-  /*----------------------- TOGGLE BACK AND FORTH BETWEEN SCRIPTED AND DEFAULT TARGETS...UNLESS HARDENED/VETERAN
-  -------------------------*/
-  //if( ( level.gameskill == 2 ) || ( level.gameskill == 3 ) )
-  //self.iTargetToggle = 1;		//always fire at live targets
 
-  /*----------------------- FIRE AT SCRIPTED SCRIPTED TARGETS
-  -------------------------*/
   if((self.iTargetToggle == 1) && (self.fireAtLiveTargets == true)) {
-    //try to fire at my own scripted targets
     if(self.targetsScripted.size > 0) {
       eTarget = self.targetsScripted[randomint(self.targetsScripted.size)];
-    }
-
-    //if no more targets, fire at the pool of targets available
-    else if(level.targetsScriptedJavStinger.size > 0) {
+    } else if(level.targetsScriptedJavStinger.size > 0) {
       eTarget = level.targetsScriptedJavStinger[randomint(level.targetsScriptedJavStinger.size)];
-    }
-    //if no more scripted or level targets, fire at default
-    else {
+    } else {
       eTarget = self.targetsDefault[randomint(self.targetsDefault.size)];
     }
     self.iTargetToggle = 0;
-  }
-  /*----------------------- OR FIRE AT DEFAULT NULL TARGETS
-  -------------------------*/
-  else {
+  } else {
     eTarget = self.targetsDefault[randomint(self.targetsDefault.size)];
     self.iTargetToggle = 1;
   }
@@ -6933,7 +5789,6 @@ AI_jav_sting_spot_react() {
   self waittill("alerted");
   self.goalradius = self.old_goalradius;
 
-  //get stinger reaction anim depending on pose
   if(isDefined(self.stinger)) {
     if((isDefined(self.a.pose)) && (self.a.pose == "crouch"))
       self.sAnimReact = "stinger_react_crouch";
@@ -6943,7 +5798,7 @@ AI_jav_sting_spot_react() {
   self notify("stop_idle");
   self anim_stopanimscripted();
   anim_generic(self, self.sAnimReact);
-  self.deathanim = undefined; //reset after reaction complete
+  self.deathanim = undefined;
 
   if(isDefined(self.stinger)) {
     self detach("weapon_stinger", "TAG_INHAND");
@@ -6983,39 +5838,6 @@ AI_waittill_damaged_and_set_flag_think() {
   }
 }
 
-//AI_try_to_hang_and_die_near_player( death_nodes )
-//{
-//	self endon( "death" );
-//	self.goalradius = 1024;
-//	eNode = undefined;
-//	/*----------------------- //	TRY TO HANG AROUND NEAR THE PLAYER SO HE CAN SEE YOUR ASS DIE
-//	-------------------------*/	
-//	while( isDefined( self ) )
-//	{
-//		eNode = getclosest( level.player.origin, death_nodes );
-//		self setgoalnode( eNode );
-//		wait( 4 );
-//	}
-//}
-
-//AI_player_distance_monitor()
-//{
-//	self endon( "death" );
-//	self endon( "alerted" );
-//	while( isDefined( self ) )
-//	{
-//		wait( 1 );
-//		if( !within_fov( self.origin, self.angles, level.player.origin + ( 0, 0, 32), level.cosine[ "45" ] ) )
-//			continue;
-//		if( !sighttracepassed( self.origin + ( 0, 0, 32 ), level.player.origin + ( 0, 0, 32 ), false, self ) )
-//			continue;
-//		if( distancesquared( self.origin, level.player.origin ) < level.stealthDistanceSquared )
-//			break;
-//	}
-//	self thread AI_become_alerted();
-//
-//}
-
 AI_drone_think() {
   self endon("death");
   self thread AI_ragdoll(true);
@@ -7029,8 +5851,8 @@ AI_drone_think() {
     self thread AI_drone_corpse_delete();
 
   if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ai_ambient")) {
-    self.dontDoNotetracks = true; //allows using of ai _anim functons without getting errors
-    self.script_looping = 0; //will force drone to scip default idle behavior
+    self.dontDoNotetracks = true;
+    self.script_looping = 0;
   }
 
   self waittill("goal");
@@ -7078,7 +5900,7 @@ AI_drone_warrior_fodder_think() {
   self endon("death");
   trigger_origin = self.origin;
   trigger_height = 100;
-  trigger_spawnflags = 0; // player only
+  trigger_spawnflags = 0;
   trigger = undefined;
   if(cointoss()) {
     trigger_radius = 720;
@@ -7105,8 +5927,7 @@ AI_drone_headshot_death(trigger) {
   vec = vectornormalize(headOrigin - origin);
   playFX(getfx("headshot"), headOrigin, vec);
   playFXOnTag(getfx("bodyshot"), self, "tag_eye");
-  //magicbullet( "m14_scoped", origin, headOrigin );
-  //bullettracer( origin, headOrigin, true );
+
   self notify("stop_drone_fighting");
   if(cointoss())
     thread play_sound_in_space("generic_death_american_1", self.origin);
@@ -7126,13 +5947,12 @@ AI_drone_mortar_death(trigger) {
   if(cointoss())
     thread play_sound_in_space("generic_death_american_1", self.origin);
 
-  //Pick a death anim....either the mortar-specific ones or just the default deathanim
   if(!isDefined(self.animset)) {
-    sAnim = level.scr_anim["generic"]["deathanim_mortar_0" + randomint(2)]; //random between fall to knees and blowback
+    sAnim = level.scr_anim["generic"]["deathanim_mortar_0" + randomint(2)];
   } else if((isSubStr(self.animset, "stand")) || (isSubStr(self.animset, "crouch"))) {
-    sAnim = level.scr_anim["generic"]["deathanim_mortar_01"]; //don't do fall to knees anim if against a wall...will clip through
+    sAnim = level.scr_anim["generic"]["deathanim_mortar_01"];
   } else {
-    sAnim = level.scr_anim["generic"]["deathanim_mortar_0" + randomint(2)]; //random between fall to knees and blowback
+    sAnim = level.scr_anim["generic"]["deathanim_mortar_0" + randomint(2)];
   }
 
   if(isDefined(self.deathanim)) {
@@ -7182,7 +6002,7 @@ initPrecache() {
   precacheModel("weapon_javelin_sp");
 
   precacheshader("splatter");
-  //precacheShader( "waypoint_targetneutral" );
+
   precacheModel("com_blackhawk_spotlight_on_mg_setup");
   precachestring(&"DCBURNING_INFO_EVAC_SITE_HEALTH");
   precachestring(&"DCBURNING_OBJ_COMMERCE");
@@ -7191,12 +6011,10 @@ initPrecache() {
   precachestring(&"DCBURNING_OBJ_LINCOLN");
   precachestring(&"DCBURNINGINFO_EVAC_SITE_HEALTH");
   precachestring(&"DCBURNING_MISSIONFAIL_LEFT_CHOPPER");
-  //precachestring(&"DCBURNING_SWITCH_HEARTBEAT" );
+
   precachestring(&"DCBURNING_RAN_OUT_OF_TIME");
   precachestring(&"DCBURNING_TIME_REMAINING");
 
-  //precacheShader( "white" );
-  //precacheShader( "black" );
   precachemodel("adrenaline_syringe_animated");
   precachemodel("clotting_powder_animated");
   precachemodel("com_folding_chair");
@@ -7214,19 +6032,19 @@ init_difficulty() {
   level.friendlyArmorTargets = undefined;
   level.requiredJavTargets = undefined;
   switch (level.gameSkill) {
-    case 0: // easy
+    case 0:
       level.requiredJavTargets = 3;
       level.friendlyArmorTargets = 1;
       break;
-    case 1: // regular
+    case 1:
       level.requiredJavTargets = 4;
       level.friendlyArmorTargets = 1;
       break;
-    case 2: // hardened
+    case 2:
       level.requiredJavTargets = 4;
       level.friendlyArmorTargets = 1;
       break;
-    case 3: // veteran
+    case 3:
       level.requiredJavTargets = 4;
       level.friendlyArmorTargets = 1;
       break;
@@ -7297,9 +6115,6 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
   waittillframeend;
   assert(isDefined(sStartPoint));
 
-  /*-----------------------																								
-  SPAWN KEY FRIENDLIES
-  -------------------------*/
   if((isDefined(bDontSpawnFriendlies)) && (bDontSpawnFriendlies != true)) {
     level.squad = [];
     level.teamleader = spawn_targetname("teamLeader");
@@ -7315,20 +6130,15 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
 
   level.mortarExcluders = level.squad;
 
-  /*----------------------- END HERE IF THIS IS THE BUNKER
-  -------------------------*/
   if(sStartPoint == "Bunker") {
     return;
   }
-  /*----------------------- TELEPORT PLAYERS
-  -------------------------*/
+
   if((isDefined(bWarpPlayer)) && (bWarpPlayer == true)) {
     aPlayerNodes = getnodearray("playerStart" + sStartPoint, "targetname");
     teleport_players(aPlayerNodes);
   }
 
-  /*----------------------- TELEPORT FRIENDLIES
-  -------------------------*/
   aFriendlies = level.squad;
   warpNodes = getnodearray("friendlyStart" + sStartPoint, "targetname");
   assertEx(warpNodes.size == 3, "Need exactly 3 nodes with targetname: nodeStart" + sStartPoint);
@@ -7396,23 +6206,16 @@ vehicle_heli_land(eNode) {
 }
 
 heli_cargo_liftoff_and_go() {
-  //Self ==> a spawned helicopter
-  // NOTE: spawned heli needs to have a script_noteworthy that matches the script_noteworthy of a path struct that it will attach to after liftoff
-
   assertex(isDefined(self.script_noteworthy), "Heli at " + self.origin + " needs to have a script_noteworthy that matches the script_noteworthy of the path you will attach it to.");
   ePath = getstruct(self.script_noteworthy, "script_noteworthy");
   assertex(isDefined(ePath), "Heli at " + self.origin + " needs to have a script_noteworthy that matches the script_noteworthy of the path you will attach it to.");
   dist = distance(self.origin, ePath.origin);
   self vehicle_liftoff(dist);
-  //self cleargoalyaw();
-  //self Vehicle_SetSpeed( 30, 10, 10 );
-  //self sethoverparams( 32, 10, 3 );
-  //self setmaxpitchroll( 5, 10 );
+
   self thread vehicle_paths(ePath);
 }
 
 heli_teleport_to_newpath(sSpawnerTargetname, eNode) {
-  // self ==> the spawned heli you will delete and respawn
   self vehicle_delete();
   assertex(isDefined(eNode.targetname), "The node you are respawning the heli at needs to have a targetname.");
   spawner = getvehiclespawner(sSpawnerTargetname);
@@ -7500,7 +6303,6 @@ custom_rumble() {
 }
 
 vehicle_mi28_think() {
-  //self setyawspeed( 90, 30, 20 );
   self setmaxpitchroll(20, 40);
   if((isDefined(self.script_parameters)) && (self.script_parameters == "custom_rumble")) {
     self thread custom_rumble();
@@ -7514,15 +6316,9 @@ vehicle_mi28_think() {
   self.defaultWeapon = "havoc_turret";
   self.hitsRemaining = 3;
   self thread maps\_attack_heli::heli_default_missiles_on("missile_attackheli_dcburn");
-  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ambient")) {
-    //do ambient vehicle stuff
-  } else if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ambient_attacker")) {
-    //self thread vehicle_turret_think();
-  } else {
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ambient")) {} else if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ambient_attacker")) {} else {
     target_set(self, (0, 0, -80));
     target_setJavelinOnly(self, true);
-    //Target_SetAttackMode( self, "direct" );
-    //Target_SetAttackMode( self, "top" );
   }
 
   if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "regular")) {
@@ -7562,11 +6358,10 @@ vehicle_delete() {
   if(!isDefined(self))
     return;
   self endon("death");
-  //cleanly delete riders even if magic_bullet_shielded
+
   if((isDefined(self.riders)) && (self.riders.size))
     array_thread(self.riders, ::AI_delete);
 
-  //delete any attached turrets
   if(isDefined(self.mgturret)) {
     foreach(turret in self.mgturret) {
       if(isDefined(turret))
@@ -7586,7 +6381,7 @@ vehicle_btr80_think() {
     return;
   }
   self.hitsRemaining = 3;
-  //self SetDeceleration( 1 );
+
   target_set(self, (0, 0, 0));
   target_setJavelinOnly(self, true);
   Target_SetAttackMode(self, "top");
@@ -7621,7 +6416,7 @@ vehicle_damage_think() {
       continue;
     if(IsString(attacker))
       continue;
-    if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret")) //don't blow up if using barrett
+    if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret"))
       continue;
     if((isDefined(attacker.script_team)) && (attacker.script_team == "axis"))
       continue;
@@ -7647,14 +6442,12 @@ vehicle_damage_think() {
     }
   }
 
-  if((isDefined(level.blackhawk)) && (attacker == level.blackhawk)) {
-    //
-  } else if(!isPlayer(attacker)) {
+  if((isDefined(level.blackhawk)) && (attacker == level.blackhawk)) {} else if(!isPlayer(attacker)) {
     self notify("killed_by_friendly");
     if(getDvar("dc_debug") == "1")
       iprintlnbold("friendly just owned a vehicle");
     level.friendlyArmorTargets--;
-    //assertex( level.friendlyArmorTargets > -1, "Friendlies have killed more vehicles than they should have" );
+
     thread friendly_crows_help_cooldown();
   }
 
@@ -7672,40 +6465,30 @@ vehicle_turret_think() {
       continue;
     }
     wait(0.05);
-    /*----------------------- DISTANCE CHECK TO PLAYER
-    -------------------------*/
+
     if(distancesquared(level.player.origin, self.origin) > level.CannonRangeSquared)
       eTarget = undefined;
     else
       eTarget = level.player;
 
-    /*----------------------- IF CURRENT IS PLAYER, DO SIGHT TRACE
-    -------------------------*/
     if((isDefined(eTarget)) && (isPlayer(eTarget))) {
       sightTracePassed = false;
       sightTracePassed = sighttracepassed(self.origin, level.player.origin + (0, 0, 0), false, self);
-      /*----------------------- IF CURRENT IS PLAYER BUT CAN'T SEE HIM, GET ANOTHER TARGET
-      -------------------------*/
+
       if(!sightTracePassed) {
         eTarget = undefined;
       }
     }
 
-    /*----------------------- IF PLAYER ISN'T CURRENT TARGET, GET ANOTHER
-    -------------------------*/
     if(!isDefined(eTarget))
       eTarget = self vehicle_get_target();
 
-    /*----------------------- ROTATE TURRET TO CURRENT TARGET
-    -------------------------*/
     if((isDefined(eTarget)) && (isalive(eTarget))) {
       targetLoc = eTarget.origin + (0, 0, 32);
       self setTurretTargetVec(targetLoc);
       fRand = (randomfloatrange(2, 3));
       self waittill_notify_or_timeout("turret_rotate_stopped", fRand);
 
-      /*----------------------- FIRE MAIN CANNON IF WITHIN **PLAYER** FOV (NO CHEAP SHOTS)
-      -------------------------*/
       if((isDefined(eTarget)) && (isPlayer(eTarget))) {
         playerEye = level.player getEye();
         bInFOV = within_fov(playerEye, level.blackhawk.angles + (0, -90, 0), self.origin, level.cosine["45"]);
@@ -7730,7 +6513,7 @@ vehicle_fire_main_cannon() {
   switch (self.vehicletype) {
     case "btr80":
       iFireTime = .5;
-      //iFireTime = weaponfiretime( "bmp_turret" );
+
       iBurstNumber = randomintrange(3, 6);
       break;
     default:
@@ -7749,7 +6532,6 @@ vehicle_fire_main_cannon() {
 }
 
 friendly_crows_help_cooldown() {
-  //If friendly just owned a vehicle, cool down a bit before letting him kill another one
   if(flag("obj_commerce_defend_javelin_complete")) {
     level.friendliesCanHelpCrowsnest = undefined;
     return;
@@ -7837,9 +6619,8 @@ ai_ambient_prop_think() {
         ent.forward = 4;
         ent translate_local();
       } else if(sAnim == "afgan_caves_sleeping_guard_idle") {
-        //ent.up = 0;
         ent.yaw = 180;
-        //ent.forward = 0;
+
         ent translate_local();
       } else if((sAnim == "DC_Burning_CPR_wounded") || (sAnim == "DC_Burning_CPR_medic")) {
         sFailSafeFlag = "player_bunker_walk_01";
@@ -7866,7 +6647,7 @@ ai_ambient_prop_think() {
         ent = spawnStruct();
         ent.entity = self.eAnimEnt;
         ent.up = -12;
-        //ent.yaw = 180;
+
         ent.right = 2;
         ent translate_local();
       } else {
@@ -7893,7 +6674,6 @@ ai_ambient_cleanup() {
 }
 
 make_ambient_ai(targetname) {
-  //used to make one of your special squad friendlies into one of the pre-placed ambient bunker guys
   spawner = getent(targetname, "targetname");
   self.script_flag = spawner.script_flag;
   self.animation = spawner.animation;
@@ -7905,18 +6685,15 @@ make_ambient_ai(targetname) {
 }
 
 ai_ambient_noprop_think() {
-  /*----------------------- GLOBAL SCRIPT TO HANDLE ALL AMMBIENT GUYS
-  -------------------------*/
   self endon("death");
-  assert(isDefined(self.animation)); //must be defined in the spawner
+  assert(isDefined(self.animation));
   sAnim = self.animation;
   bSpecial = false;
   if(!isDefined(self.eAnimEnt))
     self.eAnimEnt = self.spawner;
 
   sFailSafeFlag = undefined;
-  /*----------------------- SPECIAL CASES
-  -------------------------*/
+
   switch (sAnim) {
     case "death_explosion_run_F_v1":
     case "civilian_run_2_crawldeath":
@@ -7954,7 +6731,7 @@ ai_ambient_noprop_think() {
       eBuddy = spawner spawn_ai();
       self.eAnimEnt anim_generic_first_frame(self, sAnim);
       self.eAnimEnt anim_generic_first_frame(eBuddy, "wounded_carry_fastwalk_wounded");
-      //self gun_remove();
+
       eBuddy gun_remove();
       bSpecial = true;
       eEndOrg = getent(self.script_Linkto, "script_linkname");
@@ -8008,33 +6785,23 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   eGoal = undefined;
   sAnimGo = undefined;
   looping = false;
-  /*----------------------- DOES AI HAVE A GOAL NODE?
-  -------------------------*/
+
   if(isDefined(self.target))
     eGoal = getnode(self.target, "targetname");
 
-  /*----------------------- CLEANUP PROPS AND ANIMATION NODE WHEN DEAD
-  -------------------------*/
   self thread ai_ambient_cleanup();
 
-  /*----------------------- GO AHEAD AND PLAY LOOPING IDLE (IF ANIM IS LOOPING)
-  -------------------------*/
   if(isarray(level.scr_anim["generic"][sAnim])) {
     looping = true;
     self.eAnimEnt thread anim_generic_loop(self, sAnim, "stop_idle");
-    sAnimGo = sAnim + "_go"; //This will be the next animation to play after the loop (if defined)
+    sAnimGo = sAnim + "_go";
     if(anim_exists(sAnimGo))
       sAnim = sAnimGo;
     else
       sAnimGo = undefined;
-  }
-  /*----------------------- FREEZE FRAME AT START OF ANIM (IF IT'S NOT A LOOP)
-  -------------------------*/
-  else
+  } else
     self.eAnimEnt anim_generic_first_frame(self, sAnim);
 
-  /*----------------------- WAIT FOR A FLAG (IF DEFINED IN THE SPAWNER) THEN PLAY ANIM
-  -------------------------*/
   if(isDefined(self.script_flag)) {
     if(isDefined(sFailSafeFlag))
       flag_wait_either(self.script_flag, sFailSafeFlag);
@@ -8042,8 +6809,6 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       flag_wait(self.script_flag);
   }
 
-  /*----------------------- DO CUSTOM SHIT BASED ON ANIMNAME
-  -------------------------*/
   switch (sAnim) {
     case "death_explosion_run_F_v1":
     case "civilian_run_2_crawldeath":
@@ -8051,8 +6816,6 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       break;
   }
 
-  /*----------------------- IF HEADED TO A GOAL NODE LATER....
-  -------------------------*/
   if(isDefined(eGoal)) {
     self.disablearrivals = true;
     self.disableexits = true;
@@ -8066,16 +6829,12 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.eAnimEnt anim_generic(self, sAnimGo);
   }
 
-  /*----------------------- DO CUSTOM SHIT BASED ON ANIMNAME
-  -------------------------*/
   switch (sAnim) {
     case "civilian_run_2_crawldeath":
       self kill();
       break;
   }
 
-  /*----------------------- FINISH ANIM THEN RUN TO A NODE
-  -------------------------*/
   if(isDefined(eGoal)) {
     self setgoalnode(eGoal);
     wait(1);
@@ -8084,15 +6843,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self waittill("goal");
     if(isDefined(self.cqbwalking) && self.cqbwalking)
       self cqb_walk("off");
-  }
-
-  /*----------------------- FINISH ANIM THEN PLAY LOOPING IDLE
-  -------------------------*/
-  else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"]))
+  } else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"]))
     self.eAnimEnt thread anim_generic_loop(self, sAnim + "_idle", "stop_idle");
 
-  /*----------------------- PLAY MORTAR REACTIONS IF AVAILABLE
-  -------------------------*/
   if(anim_exists(sAnim + "_react")) {
     if(!looping)
       sAnim = sAnim + "_idle";
@@ -8126,38 +6879,6 @@ dialogue_random_incoming_javelins() {
   iRand = randomint(2);
   dialouge_random_friendly("dcburn_javelins_incoming_0" + iRand);
 }
-
-//destructibles_think()
-//{
-//	/*----------------------- //	DESTRUCTIBLES THAT SHOULD BE TRIGGERED WHEN AN ARTY ROUND HITS AND PLAYER IS LOOKING
-//	-------------------------*/	
-//	mortar_destructibles = [];
-//	trigger_bunker_prop_damage = getEntArray( "trigger_bunker_prop_damage", "targetname" );
-//	mortar_destructibles = array_merge( trigger_bunker_prop_damage, mortar_destructibles );
-//	if( mortar_destructibles.size > 0 )
-//		array_thread( mortar_destructibles,::destructibles_mortar_think );
-//
-//	/*----------------------- //	DESTRUCTIBLES THAT SHOULD BE TRIGGERED BY PLAYER MINIGUN
-//	-------------------------*/	
-//}
-//
-//destructibles_mortar_think()
-//{
-//	//self==> the trigger_radius surrounding the destructible we want to trigger if the player is looking
-//	while( isDefined( self ) )
-//	{
-//		level waittill( "mortar_hit" );
-//		if( level.player istouching( self ) )
-//			continue;
-//		bInFOV = within_fov( level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine[ "35" ] );
-//		if( bInFOV )
-//		{
-//			RadiusDamage( self.origin, self.radius, 500, 500 );
-//			self delete();
-//			break;
-//		}
-//	}
-//}
 
 javelin_earthquake() {
   dummy = spawn("script_origin", self.origin);
@@ -8218,41 +6939,6 @@ AI_friendly_fodder_think() {
   }
 }
 
-//seaknight_take_off()
-//{
-//	
-//	eAnimEnt = spawn( "script_origin", self.origin );
-//	eAnimEnt.origin = self.model gettagorigin( "tag_origin" );
-//	eAnimEnt.angles = self.model gettagangles( "tag_origin" );
-//
-//	dummy = self vehicle_to_dummy();
-//	dummy.animname = "seaknight";
-//	dummy assign_animtree();
-//	//eAnimEnt = spawn( "script_origin", dummy.origin );
-//	//eAnimEnt.origin = dummy gettagorigin( "tag_origin" );
-//	//eAnimEnt.angles = dummy gettagangles( "tag_origin" );
-//		
-//	//eAnimEnt.origin = dummy.origin;
-//	//eAnimEnt.angles = dummy.angles;
-//	//dummy thread vehicle_seaknight_rotors();
-//	eAnimEnt anim_single_solo( dummy, "take_off" );
-//}
-//
-//vehicle_seaknight_rotors()
-//{
-//	self endon( "death" );
-//	xanim = self getanim( "rotors" );
-//	length = getanimlength( xanim );
-//
-//	while( true )
-//	{
-//		if( !isDefined( self ) )
-//			break;
-//		self setanim( xanim );
-//		wait length;
-//	}
-//}
-
 flareFlicker() {
   while(isDefined(self)) {
     wait(randomfloatrange(.05, .1));
@@ -8268,20 +6954,16 @@ flicker_fire() {
 }
 
 flare_burst_on_and_flicker(rampUpTime, rampDownTime, intensity) {
-  //self ==> the script_model of the flare
   assertex(self.classname == "script_model", "This function can only be called on a script_model. Preferably mil_emergency_flare");
   dynamicLight = getent(self.target, "targetname");
   assertex(maps\_lights::is_light_entity(dynamicLight), "The flare script_model must be targeting a scriptable primary light");
 
-  //ramp up flare light from zero and play sfx and fx
   playFXOnTag(getfx("flare_ambient"), self, "TAG_FIRE_FX");
   thread play_sound_in_space("flare_ignite", self.origin);
   dynamicLight flare_ramp_up(rampUpTime, intensity);
 
-  //ramp down light to normal flicker
   dynamicLight flare_ramp_down(rampDownTime);
 
-  //play flicker and looping sound and effect
   self thread flare_flicker();
 }
 
@@ -8290,7 +6972,6 @@ flare_ramp_up(transitionTime, intensity) {
   curr = 0;
   increment_on = (intensity - 0) / (transitionTime / .05);
 
-  //ramp up
   time = 0;
   randomFlicker = undefined;
   while(time < transitionTime) {
@@ -8310,7 +6991,6 @@ flare_ramp_down(transitionTime) {
   curr = self getLightIntensity();
   increment = (curr - 0) / (transitionTime / .05);
 
-  //ramp down
   time = 0;
   randomFlicker = undefined;
   while(time < transitionTime) {
@@ -8327,7 +7007,6 @@ flare_ramp_down(transitionTime) {
 }
 
 flare_flicker(minIntensity, maxIntensity) {
-  //self ==> the script_model of the flare
   assertex(self.classname == "script_model", "This function can only be called on a script_model. Preferably mil_emergency_flare");
   dynamicLight = getent(self.target, "targetname");
   assertex(maps\_lights::is_light_entity(dynamicLight), "The flare script_model must be targeting a scriptable primary light");
@@ -8388,10 +7067,7 @@ AI_delete(excluders) {
   }
   if(isDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
-  if(!isSentient(self)) {
-    //		self notify( "death" );
-    //		waittillframeend;
-  }
+  if(!isSentient(self)) {}
 
   self delete();
 }
@@ -8535,16 +7211,12 @@ hack_height_for_seaknight() {
 }
 
 animated_seaknight_riders_think(aRiders) {
-  //self ==> the animated seaknight
-
-  //put guys into position
   i = 0;
   foreach(rider in aRiders) {
     i++;
     rider.dontDoNotetracks = true;
     rider.anim_variation = i;
     self anim_generic_first_frame(rider, "ch46_load_" + rider.anim_variation, "tag_detach");
-    //self anim_generic_loop( rider, "ch46_unload_idle", "stop_rider_idle" );
   }
 
   assertex(i < 5, "Too many riders...can't have more than 4");
@@ -8643,7 +7315,6 @@ AI_door_breaker_think() {
   door = undefined;
   eNode = getnode(self.target, "targetname");
 
-  //setup door
   foreach(ent in door_actors) {
     if(ent.code_classname == "script_origin") {
       org = ent;
@@ -8658,7 +7329,6 @@ AI_door_breaker_think() {
       eNode = ent;
   }
 
-  //waittill door clear
   while(true) {
     wait(0.05);
     if(level.player istouching(trigger))
@@ -8669,10 +7339,9 @@ AI_door_breaker_think() {
   }
 
   door thread door_fall_over(org);
-  //go to node and seek player
+
   self thread stop_magic_bullet_shield();
 
-  //wait( .5 );
   self.goalradius = 16;
   self setgoalnode(eNode);
 
@@ -8699,23 +7368,19 @@ AI_player_seek() {
   self endon("death");
   self endon("stop_seeking");
   self enable_danger_react(3);
-  //self.fixednode = false;
-  //self.ignoresuppression = true;
-  //self.goalradius = 800;
-  //self.interval = 0;
-  //self.baseaccuracy = 5;
+
   self.neverEnableCQB = true;
   self.grenadeawareness = 0;
   self.ignoresuppression = true;
   self.goalheight = 100;
-  self.aggressivemode = true; //dont linger at cover when you cant see your enemy
+  self.aggressivemode = true;
   newGoalRadius = distance(self.origin, level.player.origin);
   while(isalive(self)) {
     wait 1;
     self.goalradius = newGoalRadius;
-    //self setgoalpos( self lastKnownPos( level.player ) );
+
     self setgoalentity(level.player);
-    //self setgoalpos( level.player.origin );
+
     newGoalRadius -= 175;
     if(newGoalRadius < 512) {
       newGoalRadius = 512;
@@ -8799,8 +7464,7 @@ drone_vehicle_flood_start(aSpawners, groupName, minWait, maxWait, noSound) {
   while(true) {
     foreach(spawner in aSpawners) {
       vehicle = spawner thread spawn_vehicle_and_gopath();
-      //if( isDefined( noSound ) )
-      //	vehicle Vehicle_TurnEngineOff();
+
       vehicle = undefined;
       wait(randomfloatrange(minWait, maxWait));
     }
@@ -8818,7 +7482,7 @@ AI_invisible_patrol_fodder_think() {
   self thread magic_bullet_shield();
   self.a.disablePain = true;
   self.ignoreall = true;
-  //self setthreatbiasgroup( "oblivious" );
+
   self.walkdist = 1000;
   self.disablearrivals = true;
   self clearEnemy();
@@ -8829,8 +7493,6 @@ AI_invisible_patrol_fodder_think() {
 AI_at4_friendly_think() {}
 
 spawn_trigger_dummy(sDummyTargetname) {
-  //triggers a spawner trig through convoluted means
-  //since I can't use a unique targetname or script_noteworthy
   ent = getent(sDummyTargetname, "targetname");
   assert(isDefined(ent));
   assert(isDefined(ent.script_linkTo));
@@ -8861,7 +7523,6 @@ friendly_adjust_movement_speed() {
     wait randomfloatrange(.5, 1.5);
 
     while(friendly_should_speed_up()) {
-      //iPrintLnBold( "friendlies speeding up" );
       self.moveplaybackrate = 3.5;
       wait 0.05;
     }
@@ -8884,7 +7545,6 @@ friendly_should_speed_up() {
     return false;
   }
 
-  // check if AI is visible in player's FOV
   if(within_fov(level.player.origin, level.player getPlayerAngles(), self.origin, level.cosine["90"])) {
     prof_end("friendly_movement_rate_math");
     return false;
@@ -8946,8 +7606,6 @@ killSpawner(num) {
 }
 
 rpg_targets_think() {
-  /*----------------------- SHOOT MAGIC RPGS AT THIS TARGET IF PLAYER NEAR
-  -------------------------*/
   eTrigger = getent(self.script_Linkto, "script_linkname");
   eRPGsource = getent(self.target, "targetname");
   sFlagToEnd = self.script_flag;
@@ -8969,60 +7627,37 @@ rpg_targets_think() {
   }
 }
 
-//player_death()
-//{
-//	level.player waittill( "death" );
-//	if( !level.onHeli )
-//		return;
-//
-//	/*----------------------- //	MAKE SURE PLAYER STAYS ATTACHED
-//	-------------------------*/		
-//	level.player playerLinkToBlend( level.blackhawk, "tag_player", .5 );
-//	level.player playerlinkTo( level.blackhawk, "tag_player" );
-//}
-
 fx_management() {
-  if(getDvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
-  /*----------------------- CREATE ARRAYS OF FX FOR THE LEVEL
-  -------------------------*/
+  }
   level.effects_commerce = [];
   level.effects_trenches = [];
   level.effects_bunker = [];
   level.effects_ww2 = [];
   level.effects_lincoln = [];
 
-  /*----------------------- GET ANY VOLUMES YOU WANT TRIGGERED DIRECTLY IN GAME (EX: FLARES THAT GO THROUGH FLOORS)
-  -------------------------*/
   triggered_fx_volumes = getEntArray("triggered_fx_volumes", "targetname");
   foreach(volume in triggered_fx_volumes) {
     volume.fx = [];
   }
 
-  /*----------------------- GET MAJOR VOLUMES THAT ENCOMPASS EFFECTS
-  -------------------------*/
   effects_commerce = getent("effects_commerce", "script_noteworthy");
   effects_trenches = getent("effects_trenches", "script_noteworthy");
   effects_bunker = getent("effects_bunker", "script_noteworthy");
   effects_ww2 = getent("effects_ww2", "script_noteworthy");
   effects_lincoln = getent("effects_lincoln", "script_noteworthy");
 
-  /*----------------------- CATALOG ALL FX BY VOLUME
-  -------------------------*/
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {
     EntFx = level.createfxent[i];
     dummy.origin = EntFx.v["origin"];
 
-    /*----------------------- ASSIGN FX TO TRIGGERED VOLUMES (EX: FLARES THAT GO THROUGH FLOORS)
-    -------------------------*/
     foreach(volume in triggered_fx_volumes) {
       if(dummy istouching(volume))
         volume.fx[volume.fx.size] = EntFx;
     }
 
-    /*----------------------- ASSIGN MAJOR VOLUME FX TO LEVEL VARIABLES
-    -------------------------*/
     if(dummy istouching(effects_commerce)) {
       level.effects_commerce[level.effects_commerce.size] = EntFx;
       continue;
@@ -9047,8 +7682,6 @@ fx_management() {
 
   dummy delete();
 
-  /*----------------------- VOLUMES CONTROLED BY LEVEL TRIGGERS (EX: FLARES THAT GO THROUGH FLOORS)
-  -------------------------*/
   foreach(volume in triggered_fx_volumes) {
     triggers = getEntArray(volume.target, "targetname");
     assertex(triggers.size == 2, "Volume at " + volume.origin + "needs to target 2 triggers");
@@ -9086,7 +7719,6 @@ cheap_destructibles_think() {
 
   self setCanDamage(true);
 
-  //hitsRemaining = randomintrange( 5, 10 );
   hitsRemaining = 5;
 
   effect = "cheap_vehicle_explosion";
@@ -9101,7 +7733,7 @@ cheap_destructibles_think() {
       hitsRemaining = 10;
       destroyedModel = "vehicle_mack_truck_short_destroy";
       effect = "cheap_mack_truck_explosion";
-      //sound = "ffar_impact_armor_vehicle";
+
       sound = "exp_tanker_vehicle";
       fireFx = "tanker_fire";
       fireOffset = (0, 0, 110);
@@ -9133,7 +7765,6 @@ cheap_destructibles_think() {
     }
   }
 
-  // blows up
   playFX(getfx(effect), self.origin);
   self thread play_sound_in_space(sound);
   if(bEarthquake)
@@ -9204,13 +7835,11 @@ should_break_m203_hint(nothing) {
   if(gettime() > level.grenadeHint_timeout)
     return true;
 
-  // am I using my m203 weapon?
   weapon = player getcurrentweapon();
   prefix = getsubstr(weapon, 0, 4);
   if(prefix == "m203")
     return true;
 
-  // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     prefix = getsubstr(weapon, 0, 4);
@@ -9221,7 +7850,6 @@ should_break_m203_hint(nothing) {
       return false;
   }
 
-  //no m203 being used, no m203 ammo to switch to....stop the hint
   return true;
 }
 
@@ -9237,46 +7865,6 @@ struct_delete(array, sFlag) {
     member = undefined;
   }
 }
-
-//should_break_activate_heartbeat()
-//{
-//	assert( isPlayer( self ) );
-//
-//	if( gettime() > level.heartbeat_timeout )
-//		return true;
-//	
-//	weapons = level.player getweaponslistprimaries();
-//	has_motiontracker = false;
-//	foreach ( weapon in weapons )
-//	{
-//		if( weapon == level.motiontrackergun_on )
-//		{
-//			has_motiontracker = true;
-//			break;
-//		}
-//	}
-//	
-//	return level.player getCurrentWeapon() == level.motiontrackergun_on || !has_motiontracker;
-//}
-
-//player_has_motiontracker()
-//{
-//	weapons = level.player GetWeaponsListAll();
-//	if( !isDefined( weapons ) )
-//		return false;
-//	foreach ( weapon in weapons )
-//	{
-//		if( IsSubStr( weapon, "_mt_" ) )
-//			return true;
-//	}
-//	return false;
-//}
-
-//motiontracker_enabled()
-//{
-//	return level.player getCurrentWeapon() == level.motiontrackergun_on;
-//}
-//
 
 play_sound_then_kill_on_flag(sLine, origin, sFlag) {
   soundOrg = spawn_tag_origin();
@@ -9306,7 +7894,6 @@ remove_dead_targets_from_array(array) {
 }
 
 destructible_trigger_think() {
-  //triggered by player, then does damage to its fixedNodeSafeRadius by a mortar)
   self waittill("trigger");
 
   playFX(level._effect["mortar"]["dirt"], self.origin);
@@ -9319,17 +7906,13 @@ escape_timer(iSeconds) {
   level endon("obj_rooftop_complete");
   level endon("kill_timer");
 
-  /*----------------------- TIMER SETUP
-  -------------------------*/
   level.hudTimerIndex = 20;
   level.timer = maps\_hud_util::get_countdown_hud();
-  level.timer SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  // Retrieve pilot in:
+  level.timer SetPulseFX(30, 900000, 700);
+
   level.timer.label = &"DCBURNING_TIME_REMAINING";
   level.timer settenthstimer(iSeconds);
 
-  /*----------------------- TIMER EXPIRED
-  -------------------------*/
   thread timer_tick();
   wait(iSeconds);
   level.timer destroy();
@@ -9350,7 +7933,7 @@ mission_failed_out_of_time() {
   level endon("kill_timer");
   level notify("mission failed");
   musicstop(1);
-  // Mission failed.
+
   setDvar("ui_deadquote", &"DCBURNING_RAN_OUT_OF_TIME");
   maps\_utility::missionFailedWrapper();
   level notify("kill_timer");
@@ -9406,46 +7989,8 @@ waittill_flag_then_notify(flagToWaitFor, notifyToNotify) {
 }
 
 player_blackhawk_health_tweaks() {
-  //thread player_heli_damage_ramp();
-
   level.player enableinvulnerability();
-
-  //	old_longRegenTime = level.player.gs.longRegenTime;	
-  //	old_deathInvulnerableTime = level.player.deathInvulnerableTime;				//2500
-  //	old_bg_viewKickScale = getDvar( "bg_viewKickScale" ); 						// 0.8
-  //	old_bg_viewKickMax = getDvar( "bg_viewKickMax" );							// 90
-  //	old_bg_viewKickMin = getDvar( "bg_viewKickMin" );							// 5
-  //	level.player ent_flag_clear( "near_death_vision_enabled" );
-  //	
-  //	level.player.gs.longRegenTime = 500;	
-  //	level.player.baseIgnoreRandomBulletDamage = true;
-  //	level.ignoreRandomBulletDamage = true;
-  //	level.player.deathInvulnerableTime = 7000;
-  //	setsaveddvar( "bg_viewKickScale", 0.1 );
-  //	setsaveddvar( "bg_viewKickMax", "5" );
-  //	setsaveddvar( "bg_viewKickMin", "1" );
-  //	
-  //	flag_wait( "player_crash_done" );
-  //	
-  //	level.player.gs.longRegenTime = old_longRegenTime;
-  //	level.player.deathInvulnerableTime = old_deathInvulnerableTime;
-  //	setsaveddvar( "bg_viewKickScale", old_bg_viewKickScale );
-  //	setsaveddvar( "bg_viewKickMax", old_bg_viewKickMax );
-  //	setsaveddvar( "bg_viewKickMin", old_bg_viewKickMin );
-  //	level.player ent_flag_set( "near_death_vision_enabled" );
 }
-
-//player_heli_damage_ramp()
-//{
-//	flag_wait( "player_heli_14" );
-//	while( !flag( "player_crash_done" ) )
-//	{
-//		level.player waittill( "damage" );
-//		level.player enableInvulnerability();
-//		wait( .5 );
-//		level.player disableInvulnerability();
-//	}
-//}
 
 flag_set_when_volume_cleared_of_bad_guys(volume, sFlagToSet) {
   while(true) {

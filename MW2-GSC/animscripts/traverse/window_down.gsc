@@ -12,14 +12,12 @@ main() {
   landAnim = % windowclimb_land;
   normalHeight = 35;
 
-  // do not do code prone in this script
   self.desired_anim_pose = "crouch";
   animscripts\utility::UpdateAnimPose();
 
   self endon("killanimscript");
-  self traverseMode("noclip"); // So he doesn't get stuck if the wall is a little too high
+  self traverseMode("noclip");
 
-  // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
@@ -28,13 +26,12 @@ main() {
   self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
   thread animscripts\shared::DoNoteTracksForever("traverse", "stop_traverse_notetracks");
 
-  // keeps the actor from sinking in to the ground or from levitating to some extent.
   wait 1.5;
   angles = (0, startnode.angles[1], 0);
   forward = anglesToForward(angles);
   forward = vector_multiply(forward, 85);
   trace = bulletTrace(startnode.origin + forward, startnode.origin + forward + (0, 0, -500), false, undefined);
-  //	thread showLine(startnode.origin + forward, trace["position"]);
+
   endheight = trace["position"][2];
 
   finaldif = startnode.origin[2] - endheight;
@@ -45,23 +42,15 @@ main() {
     heightChange = finaldif - level.window_down_height[i];
   }
   assertEx(heightChange > 0, "window_jump at " + startnode.origin + " is too high off the ground");
-  //	heightChange -= 0;
-  self thread teleportThread(heightChange * -1);
 
-  //	thread printerdebugger(heightchange, trace["position"]);
+  self thread teleportThread(heightChange * -1);
 
   oldheight = self.origin[2];
   change = 0;
   level.traverseFall = [];
   for(;;) {
-    /*
-
-    thread printer(self.origin);	
-
-    */
     change = oldheight - self.origin[2];
-    if(self.origin[2] - change < endheight) // predict when he's about to hit the ground
-    {
+    if(self.origin[2] - change < endheight) {
       break;
     }
     oldheight = self.origin[2];
@@ -72,10 +61,9 @@ main() {
 
   self notify("stop_traverse_notetracks");
   self setFlaggedAnimKnoballRestart("traverse", landAnim, %body, 1, 0.15, 1);
-  //	self waittillmatch("traverse", "gravity on");
+
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("traverse");
-  //	wait 0.9;
 }
 
 printer(org) {
@@ -102,25 +90,3 @@ printerdebugger(msg, org) {
     wait(0.05);
   }
 }
-
-/*
-
-dif = startNode.origin[2] - self.origin[2];
-#included = false;
-for(i=0;i<level.traverseFall.size;i++)
-{
-	if(level.traverseFall[i] != dif)
-		continue;
-	included = true;
-	break;
-}
-if(!includeD)
-	level.traverseFall[level.traverseFall.size] = dif;
-if(getdebugdvar("debug_traversefall") != "")
-{
-	setDvar("debug_traversefall", "");
-	for(i=0;i<level.traverseFall.size;i++)
-		println ("	level.window_down_height[", i, "] = ", level.traverseFall[i], ";");
-}
-
-*/

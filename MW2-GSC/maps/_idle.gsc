@@ -11,12 +11,12 @@
 
 create_animation_list() {
   array = [];
-  array[array.size] = "phone"; // 0
-  array[array.size] = "smoke"; // 1
-  array[array.size] = "lean_smoke"; // 2
-  array[array.size] = "coffee"; // 3
-  array[array.size] = "sleep"; // 4
-  array[array.size] = "sit_load_ak"; // 5
+  array[array.size] = "phone";
+  array[array.size] = "smoke";
+  array[array.size] = "lean_smoke";
+  array[array.size] = "coffee";
+  array[array.size] = "sleep";
+  array[array.size] = "sit_load_ak";
 
   return array;
 }
@@ -26,13 +26,8 @@ idle_main() {
 }
 
 idle() {
-  //->since this system works with the stealth system - we want to make sure that _stealth has had a chance
-  //to be initialized...if it's done through radient it will be, but if it's done through script with a
-  //spawn_func, then it will initalize after this causing problems...this waittillframeend insures that the
-  //spawn_func for stealth apps has a chance to run before this does.
   waittillframeend;
 
-  //the waittillframeend ( which is necessary ) is just enough time for this guy to be deleted from max 32 ai over-spawning.
   if(!isalive(self)) {
     return;
   }
@@ -199,7 +194,6 @@ reaction_proc(node, ender, react_anim, tag) {
   type = undefined;
   self waittill("_idle_reaction", type);
 
-  // cut the loop
   node notify(ender);
 
   if(isDefined(self.anim_props)) {
@@ -213,7 +207,6 @@ reaction_proc(node, ender, react_anim, tag) {
   }
 
   if(type != "doFlashBanged") {
-    // this is the reaction
     if(isDefined(tag) || isDefined(self.has_delta))
       node anim_generic(self, react_anim, tag);
     else
@@ -242,7 +235,7 @@ animate_props_on_death(node, anime) {
 
 create_random_animation() {
   array = create_animation_list();
-  //never return sleep, lean smoke, coffee, or sit_load_ak as a random animation
+
   return array[randomint(array.size - 4)];
 }
 

@@ -13,7 +13,6 @@ main(model, type, no_destroyed) {
   build_localinit(::init_local);
 
   if(!isDefined(no_destroyed)) {
-    // dont blow up in roadkill
     build_deathmodel("vehicle_stryker", "vehicle_stryker_destroyed");
     build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");
   }
@@ -24,7 +23,7 @@ main(model, type, no_destroyed) {
   build_team("allies");
   build_mainturret();
   build_compassicon("tank");
-  build_frontarmor(.33); // regens this much of the damage from attacks to the front
+  build_frontarmor(.33);
 
   level._effect["stryker_shell"] = loadfx("shellejects/stryker_shell");
 }
@@ -43,7 +42,7 @@ additional_firing_anims() {
   fx = getfx("stryker_shell");
 
   for(;;) {
-    self waittill("weapon_fired"); // waits for Code notify when FireWeapon() is called.
+    self waittill("weapon_fired");
     foreach(animation in anims) {
       self SetAnimRestart(animation, 1, 0, 1);
     }
@@ -53,10 +52,6 @@ additional_firing_anims() {
 }
 
 set_vehicle_anims(positions) {
-  /*
-  positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
-  positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
-  */
   return positions;
 }
 
@@ -70,70 +65,3 @@ setanims() {
   positions[0].getout_delete = true;
   return positions;
 }
-
-/*QUAKED script_vehicle_stryker (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker" );
-
-and these lines in your CSV:
-#include,vehicle_stryker
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker"default:"vehicletype" "stryker"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_stryker_nophysics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker", "stryker_nophysics" );
-
-and these lines in your CSV:
-#include,vehicle_stryker
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_stryker_desert_nophysics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker_desert", "stryker_nophysics" );
-
-and these lines in your CSV:
-#include,vehicle_stryker_desert
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_stryker_desert_nophysics_nodestroyed (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker_desert", "stryker_nophysics", "no_destroyed" );
-
-and these lines in your CSV:
-#include,vehicle_stryker_desert_nodestroyed
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_stryker_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker_desert" );
-
-and these lines in your CSV:
-#include,vehicle_stryker_desert
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_stryker_desert_nodestroyed (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_stryker::main( "vehicle_stryker_desert", undefined, "no_destroyed" );
-
-and these lines in your CSV:
-#include,vehicle_stryker_desert_nodestroyed
-sound,vehicle_stryker,vehicle_standard,all_sp
-
-defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"
-*/

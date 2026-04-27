@@ -3,19 +3,6 @@
  * Script: maps\estate.gsc
 ********************************************************/
 
-/****************************************************************************
-
-Level:Loose Ends (estate.bsp)
-Location: Georgian-Russian Border (45 miles into Russian territory)
-Campaign: Task Force 141
-Objectives:
-1. Locate and neutralize Vladimir Makarov.
-2. Recover the hard drive from Makarov's computer.
-3. Hold out until the extraction force arrives.
-4. Get to the secondary LZ for extraction.
-
-*****************************************************************************/
-
 #include common_scripts\utility;
 #include maps\_utility;
 #include maps\_vehicle;
@@ -88,7 +75,6 @@ start_common_estate() {
   }
 
   if(!flag("skip_houseapproach")) {
-    //thread house_defense_heli_frontyard();
     thread house_approach_jeepassault();
     thread house_approach_autosave();
     thread house_approach_futilejeep();
@@ -105,8 +91,6 @@ start_common_estate() {
     thread house_clearing_save_basement();
 
     thread house_backwards_door_handling();
-
-    //House clearing monitoring and dialogue threads
 
     thread house_battlechatter_check();
 
@@ -130,14 +114,10 @@ start_common_estate() {
     thread house_ghost_sweep();
     thread house_ghost_lastbreach_reset();
 
-    //basic flag setters for which exterior breach is done
-
     thread house_extras_breach_mainfloor();
     thread house_extras_breach_kitchen();
     thread house_extras_breach_basement();
     thread house_exterior_breach_awareness();
-
-    //**** Extra guys - Breach 0 ( Main Foyer )
 
     thread house_extras_tally("breach0_diningroom", "breaching_number_0");
     thread house_extras_tally("breach0_foyerhall", "breaching_number_0");
@@ -145,39 +125,28 @@ start_common_estate() {
 
     thread house_extras_cancel_floorpop_monitor("breach0_diningroom", "breach0_diningroom_cancel", "foyer_breached_first");
     thread house_extras_cancel_floorpop_monitor("breach0_foyerhall", "breach0_foyerhall_cancel", "foyer_breached_first");
-    //thread house_extras_cancel_floorpop_monitor( "breach0_bathroomrush", "breach0_bathroomrush_cancel", "foyer_breached_first" ); //no cancel triggers needed
 
-    //If player goes into kitchen first, enemies spawn from dining room and run into kitchen
     thread house_extras_spawncontrol("breach0_diningroom_spawntrig", "breach0_diningroom_cancel", "breaching_number_0", "breach0_diningroom");
 
-    //If player goes from foyer directly straight ahead towards the dining room, enemies run out in front of player in dining room
     thread house_extras_spawncontrol("breach0_foyerhall_spawntrig", "breach0_foyerhall_cancel", "breaching_number_0", "breach0_foyerhall");
 
-    //If player goes from foyer up the stairs, one enemy runs out of the bathroom
     thread house_extras_spawncontrol("breach0_bathroomrush_spawntrig", undefined, "breaching_number_0", "breach0_bathroomrush");
-    thread house_extras_bathroom_screamingguy_setup(); //this guy screams as he emerges from the bathroom
-
-    //**** Extra guys - Breach 1 ( Kitchen )
+    thread house_extras_bathroom_screamingguy_setup();
 
     thread house_extras_tally("breach1_foyertodining", "breaching_number_1");
     thread house_extras_tally("breach1_officerush", "breaching_number_1");
 
     thread house_extras_cancel_floorpop_monitor("breach1_foyertodining", "breach1_foyertodining_cancel", "kitchen_breached_first");
-    thread house_extras_cancel_floorpop_monitor("breach1_officerush", "breach1_officerush_cancel", "kitchen_breached_first"); //no cancel triggers needed
+    thread house_extras_cancel_floorpop_monitor("breach1_officerush", "breach1_officerush_cancel", "kitchen_breached_first");
 
-    //If player goes towards the dining room, two enemies enter dining from foyerhall, one enemy enters kitchen from foyerhall
     thread house_extras_spawncontrol("breach1_foyertodining_spawntrig", "breach1_foyertodining_cancel", "breaching_number_1", "breach1_foyertodining");
 
-    //If player enters foyerhall from kitchen, front door, or dining room, four enemies rush out of the office into the great room
     thread house_extras_spawncontrol("breach1_officerush_spawntrig", undefined, "breaching_number_1", "breach1_officerush");
-
-    //**** Extra guys - Breach 2 ( Basement )
 
     thread house_extras_tally("breach2_stairdown", "breaching_number_2");
 
     thread house_extras_cancel_floorpop_monitor("breach2_stairdown", "breach2_stairdown_cancel", "basement_breached_first");
 
-    //If player continues to push into the rec room, two guys will run down and out from the stairwell that leads from the kitchen
     thread house_extras_spawncontrol("breach2_stairdown_spawntrig", "breach2_stairdown_cancel", "breaching_number_2", "breach2_stairdown");
   }
 
@@ -302,8 +271,6 @@ startForestFight() {
 
   activate_trigger_with_targetname("forestfight_start_redshirts");
   activate_trigger_with_targetname("ambush_start_ghost");
-
-  //kill friendlies in the blast area of the bouncing betty ambush
 
   wait 0.05;
 
@@ -543,7 +510,7 @@ startAltEnding() {
   flag_set("test_whole_ending");
   flag_set("test_ending");
   flag_set("play_ending_sequence");
-  //flag_set( "test_with_pavelow_already_in_place" );
+
   flag_set("point_of_no_return");
   thread end_of_level();
   thread ghost_init();
@@ -565,7 +532,7 @@ startEnding() {
   flag_set("test_whole_ending");
   flag_set("test_ending");
   flag_set("play_ending_sequence");
-  //flag_set( "test_with_pavelow_already_in_place" );
+
   flag_set("point_of_no_return");
   thread end_of_level();
   thread ghost_init();
@@ -617,7 +584,6 @@ startDiskdrive() {
 startHeliTweak() {
   flag_set("skip_intro");
 
-  //heliName = "house_defense_heli_frontyard";
   heliName = "md500_rush_3";
 
   heli_tweak(heliName);
@@ -625,21 +591,6 @@ startHeliTweak() {
 
 startHeliTweak2() {
   flag_set("skip_intro");
-
-  /*
-  heliName = "md500_rush_2";
-  thread heli_tweak( heliName );
-  	
-  wait 4;
-  	
-  heliName = "md500_rush_1";
-  thread heli_tweak( heliName );
-  	
-  wait 2;
-  	
-  heliName = "md500_rush_3";
-  thread heli_tweak( heliName );
-  */
 
   heliName = "boathouse_mi17";
   thread heli_tweak(heliName);
@@ -674,8 +625,6 @@ startFakeRPGTweak() {
   ambush_fake_rpg_barrage();
 }
 
-//*************** MISSION BEGINS*******************/
-
 /
 
 intro() {
@@ -685,7 +634,6 @@ intro() {
   flag_set("slam_zoom_done");
 
   level.player setStance("crouch");
-  //level.player setPlayerAngles ( (16, 326, 0) );
 
   wait 1.8;
 
@@ -698,16 +646,6 @@ intro() {
 
 intro_dialogue() {
   flag_wait("slam_zoom_done");
-
-  //"Snipers in position."radio_dialogue("est_snp1_inposition");
-
-  //"Strike team, go. Engage Makarov on sight."level.ghost dialogue_queue("est_gst_engageonsight");
-
-  //"Roger that."radio_dialogue("est_sld1_rogerthat");
-
-  //"Copy."radio_dialogue("est_sld2_solidcopy");
-
-  //"Let's go, let's go!"level.ghost dialogue_queue("est_gst_letsgoletsgo");
 }
 
 objectives() {
@@ -716,20 +654,17 @@ objectives() {
   objective_location_makarov = getent("objective_location_makarov", "targetname");
   objective_add(1, "current", &"ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
 
-  //flag_wait( "futilejeeps_destroyed" );
   flag_wait("deploy_house_defense_jeeps");
 
   objective_add(2, "current", &"ESTATE_OBJ_BREACH");
   objective_current(2);
 
   exteriorBreaches = getEntArray("breach_objective_exterior", "targetname");
-  // grab the script_slow_breach index off the nearest breach and put it on the entity
+
   assign_script_breachgroup_to_ents(exteriorBreaches);
 
-  // find out which breaches should be added to the objective positions
   breach_indices = get_breach_indices_from_ents(exteriorBreaches);
 
-  // add positions for these breaches
   objective_breach(2, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 
   thread objective_exterior_breach_check("0");
@@ -738,7 +673,6 @@ objectives() {
 
   flag_wait("house_exterior_has_been_breached");
 
-  // wait a moment with no breach obj's active because you see them pop at start of breach
   objective_clearAdditionalPositions(2);
   wait(1);
 
@@ -752,10 +686,8 @@ objectives() {
     breach thread objective_interior_breach_update(breach.script_slowmo_breach);
   }
 
-  // find out which breaches to add
   breach_indices = get_breach_indices_from_ents(interiorBreaches);
 
-  // add positions for these breaches
   maps\_slowmo_breach::objective_breach(2, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 
   thread objective_interior_breach_check("3");
@@ -768,8 +700,6 @@ objectives() {
 
   flag_wait("all_enemies_killed_up_to_house_capture");
 
-  //wait 2;
-
   flag_wait("ghost_gives_regroup_order");
 
   objective_state(2, "done");
@@ -779,7 +709,6 @@ objectives() {
   node = getstruct("ghost_talknode", "targetname");
   objective_add(1, "current", &"ESTATE_OBJ_REGROUP", node.origin);
 
-  //flag_wait( "dsm_ready_to_use" );
   flag_wait("house_briefing_is_over");
 
   objective_state(1, "done");
@@ -794,8 +723,6 @@ objectives() {
   objective_add(4, "current", &"ESTATE_OBJ_DOWNLOAD", dsm_real.origin);
 
   Objective_SetPointerTextOverride(4, &"ESTATE_OBJ_POINTER_PROTECT");
-
-  //iprintlnbold( "End of Currently Scripted Level" );
 
   flag_wait("download_complete");
 
@@ -845,20 +772,15 @@ objective_breach_save() {
 objective_interior_breach_update(breachnum) {
   level waittill("breaching_number_" + breachnum);
 
-  // remove this breach so it doesn't get readded
   self delete();
 
-  // now get all the existing breaches and recreate them
   interiorBreaches = getEntArray("breach_objective_interior", "targetname");
   assign_script_breachgroup_to_ents(interiorBreaches);
 
-  // clear the old positions
   objective_clearAdditionalPositions(2);
 
-  // find out which breaches still exist
   breach_indices = get_breach_indices_from_ents(interiorBreaches);
 
-  // add positions for these breaches
   maps\_slowmo_breach::objective_breach(2, breach_indices[0], breach_indices[1], breach_indices[2], breach_indices[3]);
 }
 
@@ -895,21 +817,16 @@ forest_ambush_mortars() {
 
   wait 1;
 
-  //trig = getent( "mortar_on", "targetname" );
-  //trig notify ( "trigger" );
-
   thread maps\_mortar::bog_style_mortar_on("1");
 
   wait 2;
 
   thread forest_friendly_initial_advance();
 
-  // They've got this area presighted for mortar fire!!!
   level.scarecrow dialogue_queue("est_scr_presighted");
 
   wait 3;
 
-  // COUNTERATTACK INTO THE SMOKE! Push push push!!! Roach
   level.ghost dialogue_queue("est_gst_counterattack");
 
   wait 3;
@@ -917,7 +834,6 @@ forest_ambush_mortars() {
   level.fixednodesaferadius_default = 256;
 
   if(!flag("player_is_out_of_ambush_zone")) {
-    // Roach! You're gonna get hit by a mortar! Lose 'em in the smoke!! Go go gooo!!!!
     level.ghost dialogue_queue("est_gst_loseeminsmoke");
   }
 
@@ -927,8 +843,6 @@ forest_ambush_mortars() {
 }
 
 forest_friendly_initial_advance() {
-  //Send the bulletproof friendlies forward into the smoke to lead the player
-
   trig = getent("forest_friendly_colortrig", "targetname");
   trig notify("trigger");
 
@@ -945,15 +859,9 @@ forest_escape_autosave() {
 }
 
 forest_mortar_playerkill() {
-  //Kill the player after sufficient warning is given that it is unsafe to stay in the ambush area
-
   wait 3;
 
-  //Check if autosave happened recently
-
   if(isDefined(level.curAutoSave) && level.curAutoSave >= 3) {
-    //give enough time to get back to safety if autosave happened and player ran back into danger zone
-
     wait 5;
   }
 
@@ -1010,8 +918,6 @@ forest_ghillie_reveal() {
 }
 
 first_smoke_screen() {
-  //Automatically starts after player is knocked down
-
   level endon("smokepot1");
 
   flag_wait("smoke_screen_activated");
@@ -1035,8 +941,6 @@ first_smoke_screen() {
 forest_smoke_fight() {
   flag_wait("smokepot1");
 
-  //deploy the shotgun guys, slow crouch move
-
   thread prowler_spawn();
 }
 
@@ -1048,21 +952,7 @@ forest_smoke_screens() {
   thread forest_smokepot3();
 }
 
-/*
-house_defense_heli_frontyard()
-{
-	flag_wait( "forestfight_littlebird_1" );
-	//flag_wait( "start_early_helicopter" );
-	
-	heli = spawn_vehicle_from_targetname_and_drive( "house_defense_heli_frontyard" );	
-	
-	wait 5;
-}
-*/
-
 heli_tweak(heliName) {
-  //for tweaking an individual heli path to make it look right, not part of the actual level
-
   player_heli_tweak_observe = getent("heli_tweak", "targetname");
   level.player teleport_ent(player_heli_tweak_observe);
 
@@ -1102,17 +992,12 @@ house_approach_jeepassault() {
 house_approach_dialogue() {
   flag_wait("house_approach_dialogue");
 
-  //Clear the perimeter!
   level.ghost dialogue_queue("est_gst_clearperimieter");
 
   battlechatter_off("allies");
 
   flag_wait("house_perimeter_softened");
 
-  //level.scarecrow.goalradius = 16;
-  //level.ozone.goalradius = 16;
-
-  //Breach and clear the safehouse! Go! Go!
   level.ghost dialogue_queue("est_gst_breachnclear");
 
   SoundSetTimeScaleFactor("Announcer", 0);
@@ -1122,16 +1007,6 @@ house_approach_dialogue() {
   level.ghost.fixednodesaferadius = 64;
   level.scarecrow.fixednodesaferadius = 64;
   level.ozone.fixednodesaferadius = 64;
-
-  /*
-  level.scarecrow disable_ai_color();
-  node1 = getnode( "scarecrow_breachhouse_start", "targetname" );
-  level.scarecrow setgoalnode( node1 );
-  	
-  level.ozone disable_ai_color();
-  node2 = getnode( "ozone_breachhouse_start", "targetname" );
-  level.ozone setgoalnode( node2 );
-  */
 }
 
 house_approach_futilejeep() {
@@ -1140,7 +1015,6 @@ house_approach_futilejeep() {
   battlechatter_off("allies");
   battlechatter_off("axis");
 
-  //Two trucks leaving the target building!
   thread radio_dialogue("est_snp1_trucksleaving");
 
   wait 1;
@@ -1153,31 +1027,22 @@ house_approach_futilejeep() {
 
   wait 3;
 
-  //Don't let those trucks get away!
   level.ghost thread dialogue_queue("est_gst_trucksgetaway");
 
   wait 1.5;
 
-  //Bloody hell, these trucks are bulletproofed!
-  //level.ghost thread dialogue_queue( "est_gst_bulletproofed" );
-
   wait 2.0;
 
-  //Roger! Firing Javelin, danger close!
   thread radio_dialogue("est_snp1_firingjavelin");
-
-  //snipers launch a magical javelin to intercept the fleeing jeeps
 
   wait 2;
 
   doomedJeep1 thread house_approach_futilejeep_javelin("futilejeep_javelin_sourcepoint1");
 
-  //Javelin, danger close!!! Get back from the road!!!
   level.ghost thread dialogue_queue("est_gst_dangerclose");
 
   wait 1;
 
-  //Bloody hell, these trucks are bulletproofed!
   level.ghost thread dialogue_queue("est_gst_bulletproofed");
 
   wait 2;
@@ -1186,7 +1051,6 @@ house_approach_futilejeep() {
 
   wait 1;
 
-  //Two away!
   thread radio_dialogue("est_snp1_twoaway");
 
   doomedJeep2 thread house_approach_futilejeep_javelin("futilejeep_javelin_sourcepoint2");
@@ -1197,7 +1061,6 @@ house_approach_futilejeep() {
 
   wait 2.75;
 
-  //Moving vehicles have been neutralized.
   thread radio_dialogue("est_snp1_neutralized");
 
   wait 2;
@@ -1209,9 +1072,9 @@ house_approach_futilejeep_javelin(launchEntName) {
   fakeJavLauncher = getent(launchEntName, "targetname");
 
   newMissile = MagicBullet("javelin", fakeJavLauncher.origin, self.origin);
-  newMissile thread javelin_earthquake(self); //quake on impact
+  newMissile thread javelin_earthquake(self);
   newMissile Missile_SetTargetEnt(self);
-  newMissile Missile_SetFlightmodeTop(); //top down kill mode for javelin
+  newMissile Missile_SetFlightmodeTop();
 }
 
 javelin_earthquake(targetObj) {
@@ -1227,7 +1090,6 @@ javelin_earthquake(targetObj) {
 house_friendly_rush() {
   flag_wait("futilejeeps_destroyed");
 
-  //Be advised, we have not, I repeat, we have not spotted Makarov, and no one else has left the house. Those trucks may have been decoys.
   thread radio_dialogue("est_snp1_decoys");
 
   wait 6;
@@ -1245,18 +1107,10 @@ house_friendly_rush() {
 
   wait 2.15;
 
-  //Roger that, we're advancing on the house now!
   level.ghost dialogue_queue("est_gst_advancingonhouse");
 
   battlechatter_on("allies");
   battlechatter_on("axis");
-
-  /*
-  level.breachfriendlies = [];
-  level.breachfriendlies[ 0 ] = level.ghost;
-  level.breachfriendlies[ 1 ] = level.ozone;
-  level.breachfriendlies[ 2 ] = level.scarecrow;
-  */
 }
 
 house_enemy_cleanup_tracker() {
@@ -1305,12 +1159,10 @@ house_enemy_deathmonitor() {
 
 house_clearing_save_mainfloor() {
   flag_wait("save_the_game_indoors");
-  //autosave_by_name( "inside_the_house" );	
 }
 
 house_clearing_save_basement() {
   flag_wait("save_the_game_downstairs");
-  //autosave_by_name( "inside_the_house" );	
 }
 
 house_backwards_door_handling() {
@@ -1328,8 +1180,6 @@ house_backwards_door_handling() {
 }
 
 house_briefing_scarecrow() {
-  //*TEMP* Scarecrow needs photographer mocap for this conversation with Shepherd and Price
-
   level.scarecrow endon("death");
 
   level.scarecrow.voice = "taskforce";
@@ -1344,9 +1194,6 @@ house_briefing_scarecrow() {
     animStartPoint anim_generic_reach(level.scarecrow, "estate_house_photoshoot");
     animStartPoint thread anim_generic_run(level.scarecrow, "estate_house_photoshoot");
 
-    //level.scarecrow waittillmatch( "single anim", "ps_scn_estate_photographer" );
-    //level.scarecrow thread play_sound_on_entity( "scn_estate_photographer" );
-
     level.scarecrow waittillmatch("single anim", "camera");
 
     camera = spawn("script_model", (0, 0, 0));
@@ -1354,18 +1201,6 @@ house_briefing_scarecrow() {
     camera linkto(level.scarecrow, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
     delaythread(10, ::flag_set, "photographs_done");
-
-    /*
-    		
-    photosnap_notetracks = 15;
-    		
-    while( photosnap_notetracks > 0 )
-    {
-    	level.scarecrow waittillmatch( "single anim", "ps_scn_estate_photo_snap" );
-    	level.scarecrow thread play_sound_on_entity( "scn_estate_photo_snap" );
-    	photosnap_notetracks--;
-    }
-    */
 
     level.scarecrow waittillmatch("single anim", "camera");
 
@@ -1379,7 +1214,6 @@ house_briefing_scarecrow() {
 
   flag_wait("scarecrow_to_earlydefense_start");
 
-  //I'm in position!
   radio_dialogue("est_scr_inposition");
 
   level.scarecrow stop_magic_bullet_shield();
@@ -1431,7 +1265,6 @@ house_briefing_ozone() {
 
   flag_wait("defense_battle_begins");
 
-  //Ready to engage!
   radio_dialogue("est_ozn_readyengage");
 
   level.ozone stop_magic_bullet_shield();
@@ -1475,8 +1308,6 @@ house_briefing_dialogue() {
 
   thread autosave_by_name("house_briefing_sequence");
 
-  //*TEMP* Ghost needs mocap for this conversation with Shepherd and Price
-
   level.ghost.voice = "taskforce";
   level.ghost.countryID = "TF";
 
@@ -1490,84 +1321,65 @@ house_briefing_dialogue() {
 
   flag_set("ghost_gives_regroup_order");
 
-  //All clear. Squad, regroup on me.
   thread radio_dialogue("est_gst_regroup");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Scarecrow, photographs.
   level.ghost thread dialogue_queue("est_gst_photos");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Roger that.
   thread radio_dialogue("est_scr_rogerthat");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Shepherd, this is Ghost. No sign of Makarov, I repeat, no sign of Makarov. Captain Price, any luck in Afghanistan?
   level.ghost thread dialogue_queue("est_gst_nosign");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Price: Negative. Soap and I are in position at the boneyard. No sign of Makarov. So much for the intel.
-  //thread radio_dialogue( "est_pri_somuchforintel" );
-
-  //Price: Plenty...at least fifty hired guns here, but no sign of Makarov. Perhaps our intel was off.
   thread radio_dialogue("est_pri_atleast50");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Well, the quality of the intel's about to change. This safehouse's a bloody gold mine.
   level.ghost thread dialogue_queue("est_gst_goldmine");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  // Shepherd: Copy that. Ghost, have your team collect everything you can for an operations playbook. Names, contacts, places, everything.
   thread radio_dialogue("est_shp_everything");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //We're already on it sir. Makarov will have nowhere to run.
   level.ghost thread dialogue_queue("est_gst_alreadyonit");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Shepherd: That's the idea. I'm bringing up the extraction force, E.T.A. five minutes. Get that intel. Shepherd out.
   thread radio_dialogue("est_shp_eta5mins");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Roach, get to Makarov's computer and start the transfer.
   level.ghost thread dialogue_queue("est_gst_starttransfer");
 
   flag_set("house_briefing_is_over");
-  flag_set("dsm_ready_to_use"); //enables the use trigger
+  flag_set("dsm_ready_to_use");
 
   level.ghost waittillmatch("single anim", "dialogue");
 
-  //Ozone, you're on rear security. I've got the front. Go.
   level.ghost dialogue_queue("est_gst_rearsecurity");
 
   flag_set("ozone_to_earlydefense_start");
 
-  //node = getnode( "ghost_earlydefense_start", "targetname" );
   node = getnode("ghost_cover_front", "targetname");
   level.ghost setgoalnode(node);
   level.ghost clear_run_anim();
 
-  //On my way.
   radio_dialogue("est_ozn_onmyway");
 
   wait 2;
 
-  //Price: Task Force, this is Price. More of Makarov's men just arrived at the boneyard. They're searching for something…
   radio_dialogue("est_pri_searching");
 
-  //Price: Wait...they're getting closer to us…
   radio_dialogue("est_pri_gettingcloser");
 
-  //Price: We're going silent for a few minutes. Good luck up there in Russia. Price out.
   radio_dialogue("est_pri_goingsilent");
 
   flag_set("house_briefing_dialogue_done");
@@ -1583,25 +1395,17 @@ house_briefing_dialogue() {
 defense_intro() {
   flag_wait("download_started");
 
-  //*TEMP dialogue hint to the player to get weapons from the basement if desired
-
   if(!flag("skip_house_defense_dialogue")) {
     wait 3;
 
     flag_wait("house_briefing_dialogue_done");
 
-    //Roach, there's an armory in the basement. Better stock up while you can.	
     radio_dialogue("est_ozn_stockup");
 
     flag_wait("photographs_done");
 
-    //Makarov's men are going to do whatever it takes to keep us from leaving with this intel. We need to protect the DSM until the transfer's done.
     radio_dialogue("est_gst_withintel");
 
-    //We got 60 seconds tops, over.
-    //radio_dialogue( "est_snp1_60seconds" );
-
-    //Use the weapons caches and set up your claymores if you've got any left. Defensive positions, let's go!
     radio_dialogue("est_gst_weaponscache");
 
     flag_set("scarecrow_to_earlydefense_start");
@@ -1611,7 +1415,7 @@ defense_intro() {
 
   autosave_by_name("defense_started");
 
-  wait 1; //for the house_defense startpoint to not break
+  wait 1;
 
   level.ghost.baseAccuracy = 1;
   level.ozone.baseAccuracy = 1;
@@ -1638,12 +1442,10 @@ defense_download_nag() {
   while(!flag("download_started")) {
     wait 10;
 
-    //Roach - connect the DSM to Makarov's computer.
     radio_dialogue("est_gst_filesoff");
 
     wait 8;
 
-    //Roach, we're not leaving without those files. Start the transfer.
     radio_dialogue("est_gst_startdownload");
 
     wait 30;
@@ -1687,14 +1489,12 @@ ending_passing_out(overlay) {
   overlay grayOut(0.5, 12);
   overlay restoreVision(0.5, 2.2);
 
-  //Roach, hang in there!!!	
   thread radio_dialogue("est_gst_hanginthere");
 }
 
 ending_eq_reset() {
   wait 3;
 
-  // recover to the current eq
   if(level.eq_track[level.eq_main_track] == "") {
     maps\_ambient::deactivate_index(level.eq_main_track);
   } else {
@@ -1712,8 +1512,6 @@ ending_attackers() {
   ending_attackers = getEntArray("ending_attacker", "targetname");
   array_thread(ending_attackers, ::ending_attackers_spawn);
 
-  //make sure all bad guys have the same settings when the player is locked into the ending sequence
-
   wait 1;
 
   leftovers = getaiarray("axis");
@@ -1725,9 +1523,6 @@ ending_attackers() {
 }
 
 ending_attackers_deathmonitor(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  //as soon as the player kills one of the enemy during the dragging sequence, he becomes invulnerable
-  //self waittill ( "damage", damage, attacker );
-
   if(!isalive(self)) {
     if(attacker == level.player) {
       level.ending_attacker_deaths++;
@@ -1743,7 +1538,6 @@ ending_attackers_deathmonitor(damage, attacker, direction_vec, point, type, mode
       }
 
       if(level.gameskill == 2) {
-        //on hard and veteran, must kill two ending attackers or you die
         if(level.ending_attacker_deaths > 1) {
           level.player.attackeraccuracy = 0;
           flag_set("drag_sequence_killcount_achieved");
@@ -1751,7 +1545,6 @@ ending_attackers_deathmonitor(damage, attacker, direction_vec, point, type, mode
       }
 
       if(level.gameskill == 3) {
-        //on hard and veteran, must kill two ending attackers or you die
         if(level.ending_attacker_deaths > 1) {
           level.player.attackeraccuracy = 0;
           flag_set("drag_sequence_killcount_achieved");
@@ -1765,32 +1558,14 @@ ending_attackers_spawn() {
   guy = self stalingradspawn();
   if(isDefined(guy)) {
     guy endon("death");
-    //guy enable_cqbwalk();
+
     wait 1;
     guy.grenadeammo = 0;
     guy.baseaccuracy = 0.2;
   }
-
-  /*
-  dist = length( guy.origin - level.player.origin );
-  	
-  while( dist > 700 )
-  {
-  	dist = length( guy.origin - level.player.origin );
-  	wait 0.1;
-  }
-  	
-  if( isalive( level.player ) )
-  {
-  	guy.baseAccuracy = 1000000;
-  	level.player.threatbias = 1000000;
-  }
-  */
 }
 
 ending_drag_damagecheck() {
-  //level endon ( "ending_slacker_death" );
-
   level.player.attackeraccuracy = 0;
 
   wait 5;
@@ -1800,24 +1575,12 @@ ending_drag_damagecheck() {
   wait 3;
 
   level.player.attackeraccuracy = 0.2;
-
-  /*
-  while( level.player.health > 5 )
-  {
-  	level.player waittill ( "damage" );
-  }
-  	
-  level notify ( "ending_normal_death" );
-  	
-  thread ending_drag_failure();
-  */
 }
 
 ending_drag_slackerfail() {
   level endon("ending_normal_death");
   level endon("drag_sequence_killcount_achieved");
 
-  //wait for thunder one to get to it's first waypoint
   flag_wait("drag_sequence_slacker_check");
 
   if(!flag("drag_sequence_killcount_achieved")) {
@@ -1876,10 +1639,6 @@ ending_moments() {
 
   thread ending_shadow_fader();
 
-  //self PlayLocalSound( "breathing_heartbeat" );	//hearbeat stuff
-
-  //thread maps\_mortar::bog_style_mortar_off( "2" );
-
   overlay = undefined;
 
   if(flag("test_ending")) {
@@ -1893,8 +1652,6 @@ ending_moments() {
     thread battlechatter_off("allies");
     thread battlechatter_off("axis");
   }
-
-  //Cut to black
 
   overlay = newHudElem();
   overlay.x = 0;
@@ -1916,22 +1673,17 @@ ending_moments() {
     level.player AllowCrouch(false);
     level.player AllowStand(true);
 
-    //level.player painVisionOn();
     thread maps\_ambient::use_eq_settings("deathsdoor", level.eq_main_track);
     thread maps\_ambient::use_reverb_settings("deathsdoor");
     thread ending_blur_cycler();
 
     level.player shellshock("estate_bouncingbetty", 11);
 
-    //thread ending_music();
     flag_set("begin_ending_music");
 
     SetSavedDvar("hud_showStance", "0");
-    level.player setstance("stand"); //otherwise the player position will be wrong when attached to the anim
+    level.player setstance("stand");
 
-    //Start the dragging sequence
-
-    //node = getstruct( "ending_chopper_node", "targetname" );
     node = getstruct("ghost_dragnode", "targetname");
 
     playerview = spawn_anim_model("playerview");
@@ -1958,8 +1710,6 @@ ending_moments() {
     tag_origin linkto(playerview, "tag_player", (0, 0, 0), (0, 0, 0));
     level.player playersetgroundreferenceent(tag_origin);
 
-    //Intercept with dialogue and start red smoke here
-
     wait 1;
 
     thread ending_attackers();
@@ -1983,8 +1733,6 @@ ending_moments() {
     node thread anim_single_solo(playerview, "estate_ending_drag");
     node anim_single_solo(level.ghost, "estate_ending_drag");
 
-    //Now the player must fight or die
-
     level.player LerpViewAngleClamp(1, 1, 1, 30, 30, 30, 5);
     level.player enableweapons();
 
@@ -1998,31 +1746,11 @@ ending_moments() {
     if(!flag("test_ending_body_toss"))
       level.ghost delete();
 
-    /*
-    switch( level.gameskill )
-    {
-    	case 0:
-    		level.player.attackeraccuracy = 1;		
-    		break;
-    	case 1:
-    		level.player.attackeraccuracy = 0.9;		
-    		break;
-    	case 2:
-    		level.player.attackeraccuracy = 0.3;		
-    		break;
-    	case 3:
-    		level.player.attackeraccuracy = 0.15;		
-    		break;
-    }
-    */
-
     playerview waittillmatch("single anim", "mortarhit");
     thread ending_mortarhit("ending_mortarhit_1");
-    //level.player thread maps\_gameskill::grenade_dirt_on_screen( "bottom_b" );
 
     playerview waittillmatch("single anim", "mortarhit");
     thread ending_mortarhit("ending_mortarhit_2");
-    //level.player thread maps\_gameskill::grenade_dirt_on_screen( "right" );
 
     level notify("stop_blur_cycler");
 
@@ -2031,8 +1759,6 @@ ending_moments() {
     playerview waittillmatch("single anim", "mortarhit");
     thread ending_mortarhit("ending_mortarhit_3");
     level.player thread maps\_gameskill::grenade_dirt_on_screen("left");
-
-    //Start flying in the shadowops littlebirds to drop off the drones for the strugglewalk
 
     playerview waittillmatch("single anim", "mortarhit");
     thread ending_mortarhit("ending_mortarhit_4");
@@ -2044,15 +1770,11 @@ ending_moments() {
 
     thread maps\_mortar::bog_style_mortar_off("2");
 
-    //wait for notetrack in ending drag
-
     overlay blackOut(3, 12);
 
     level.player delaycall(3, ::takeallweapons);
 
     level.player FreezeControls(true);
-
-    //Wake up after dragging sequence
 
     SetSavedDvar("ui_hidemap", 1);
     SetSavedDvar("compass", "0");
@@ -2121,10 +1843,7 @@ ending_moments() {
     pavelow = spawn_vehicle_from_targetname("animated_pavelow");
     pavelow.animname = "pavelow";
 
-    level.pavelow = pavelow; //this is for the pavelow in the gasoline function
-
-    //pavelow = getent( "final_pavelow_liftoff_1", "targetname" );
-    //pavelow.animname = "pavelow";
+    level.pavelow = pavelow;
   }
 
   level.player takeallweapons();
@@ -2147,11 +1866,8 @@ ending_moments() {
   shepherd gun_remove();
 
   if(!flag("test_ending_body_toss")) {
-    //Wake up to find Ghost dragging you to your feet, drag to Pave Low
-
     wait 2;
 
-    //overlay thread restoreVision( 4, 0 );
     overlay delayThread(0.5, ::restoreVision, 3, 0);
 
     level.player delayCall(0.5, ::FreezeControls, false);
@@ -2159,8 +1875,6 @@ ending_moments() {
     level.player LerpViewAngleClamp(1, 1, 1, 3, 3, 3, 3);
 
     level.player setBlurForPlayer(0, 16);
-
-    //thread temp_music_ending_delay();
 
     flag_set("made_it_to_lz");
 
@@ -2171,10 +1885,8 @@ ending_moments() {
 
     thread ending_eq_reset();
 
-    //Come on, get up!	
     ghost thread dialogue_queue("est_gst_comeongetup");
 
-    //Get up! Get up! We're almost there!	
     ghost thread dialogue_queue("est_gst_getupgetup");
 
     level.player LerpViewAngleClamp(7, 1, 1, 30, 30, 30, 15);
@@ -2204,9 +1916,6 @@ ending_moments() {
 
     level.player PlayRumbleOnEntity("shepherd_pistol");
 
-    //level.player notify ( "damage" );
-    //level.player notify ( "pain" );
-
     level.player delaycall(1.3, ::PlayRumbleOnEntity, "shot_collapse");
 
     level.player SetNormalHealth(1);
@@ -2219,8 +1928,6 @@ ending_moments() {
 
     SetSavedDvar("g_friendlyNameDist", 0);
 
-    //"NO!"ghost delaythread(1, ::dialogue_queue, "est_gst_no"); //1.25 original
-
     if(flag("no_slow_mo")) {
       delaythread(1.5, ::ending_slowmo, 3);
     }
@@ -2232,8 +1939,6 @@ ending_moments() {
     shepherd waittill_notetrack_or_damage("pistol_putaway");
     pistol delete();
 
-    //thread ending_shadow_fader_mover( 0.02, 2, 0.8, 0.1 );
-
     level.player delaycall(0.8, ::PlayRumbleOnEntity, "dsm_rummage");
 
     shepherd waittill_notetrack_or_damage("dsm_pullout");
@@ -2244,14 +1949,11 @@ ending_moments() {
     shepherd waittill_notetrack_or_damage("dsm_putaway");
     dsm delete();
 
-    //Shepherd's men start picking up your body
-
     overlay thread blackOut(7, 6);
 
     wait 8;
   }
 
-  //Set up the body toss section
   throwingGuy = level.ending_actors["guy1_ending"];
   throwingHelperGuy = level.ending_actors["guy2_ending"];
 
@@ -2272,12 +1974,7 @@ ending_moments() {
 
   level.player LerpViewAngleClamp(1, 1, 1, 20, 20, 10, 0);
 
-  //Anims are set to play simultaneously but I want to try a different pacing
-  //Set the gasoline anims to go on delayed standby in a separate thread
-
   thread ending_gasoline_sequence(gasolineGuy, shepherd, overlay);
-
-  //Shepherd's throwers toss your body into the pit
 
   node thread anim_single_solo(playerview, "estate_ending_part2");
   node thread anim_single_solo(playerBody, "estate_ending_part2");
@@ -2289,21 +1986,15 @@ ending_moments() {
 
   wait 1.8;
 
-  //level.player thread play_sound_on_entity( "scn_estate_player_bodyfall" );
   level.player PlayRumbleOnEntity("bodytoss_impact");
 
   wait 1.3;
 
   playerBody hide();
 
-  //guys[ guys.size ] = level.ending_actors[ "ghost_ending" ];
-
-  //switch to the bloodied corpse model of Ghost
-
   level.ending_actors["ghost_ending"] hide();
   deadGhost show();
 
-  //guys[ guys.size ] = level.ending_actors[ "ghost_ending_dead" ];
   guys[guys.size] = deadGhost;
 
   node anim_first_frame(guys, "estate_ending_part2_2ndbody");
@@ -2325,9 +2016,6 @@ ending_moments() {
 
   wait 0.8;
 
-  //throwingGuy delete();
-  //throwingHelperGuy delete();
-
   throwingGuy hide();
   throwingHelperGuy hide();
 
@@ -2346,14 +2034,9 @@ ending_player_fullhealth() {
 }
 
 ending_pavelow_fakearrival() {
-  //This thread controls the timing for when the player is forcibly killed by mortars and not getting to the LZ fast enough
-  //Total time of flight path is currently 40 seconds
-
   level endon("finish_line");
 
   flag_wait("point_of_no_return");
-
-  //wait 20;
 
   level.pavelow = spawn_vehicle_from_targetname("final_pavelow_liftoff_1");
   level.pavelow.animname = "pavelow";
@@ -2369,8 +2052,6 @@ ending_pavelow_fakearrival() {
   level.pavelow setvehgoalpos(node2.origin, 0);
 
   level.pavelow waittill_any("goal", "near_goal");
-
-  //pavelow vehicle_setspeed( 15 );
 
   node3 = getstruct(node2.target, "targetname");
   level.pavelow setvehgoalpos(node3.origin, 1);
@@ -2394,9 +2075,6 @@ ending_thunderone_heli_sequence() {
 
   heli setTargetYaw(195);
 
-  //heli thread ending_thunderone_manual_chainguns();
-
-  //heli waittill_any( "goal", "near_goal" );
   heli waittill("goal");
 
   heli vehicle_setspeed(8);
@@ -2432,8 +2110,6 @@ ending_thunderone_heli_sequence() {
 }
 
 ending_shadow_fader() {
-  //use a script_origin's x-position to update sm_sunSampleSizeNear smoothly at will
-
   level.shadowfader = spawn("script_origin", (0.25, 0, 0));
 
   while(1) {
@@ -2461,54 +2137,6 @@ ending_shadow_fader_mover(setting, fadeTime, accelTime, decelTime) {
   level.shadowfader MoveTo((setting, 0, 0), fadeTime, accelTime, decelTime);
 }
 
-/*
-ending_thunderone_manual_chainguns()
-{
-	org = getstruct( "redsmoke", "targetname" );
-	faketarget = spawn( "script_origin", org.origin );
-	
-	foreach ( turret in self.mgturret )
-	{
-		
-		baddudes = getaiarray("axis" );
-		if( baddudes.size )
-		{
-			turret SetMode( "manual" );
-			turret StartFiring();
-		}
-		else
-		{
-		
-			turret SetTargetEntity( faketarget );
-			turret SetMode( "manual" );
-			turret StartFiring();
-		}
-	}
-	
-	wait 4.5;
-	
-	foreach ( turret in self.mgturret )
-	{
-		
-		baddudes = getaiarray("axis" );
-		if( baddudes.size )
-		{
-			turret SetMode( "auto_ai" );
-			turret StartFiring();
-		}
-	}
-	
-	wait 9;
-	
-	//self mgoff();
-	
-	foreach ( turret in self.mgturret )
-	{
-		turret StopFiring();
-	}
-}
-*/
-
 ending_shadowops_heli_sequence() {
   flag_wait("enter_the_littlebirds");
 
@@ -2529,32 +2157,26 @@ ending_shadowops_heli_sequence() {
     }
 
     if(index == 0) {
-      //Cover them! Move, move!
       ent play_sound_on_entity("est_tf2_coverthem");
     }
 
     if(index == 1) {
-      //Spread out!	
       ent play_sound_on_entity("est_tf2_spreadout");
     }
 
     if(index == 2) {
-      //Go! Go! Go!
       ent play_sound_on_entity("est_tf1_gogogo");
     }
 
     if(index == 3) {
-      //Get 'em to strafe that ridgeline!	
       ent play_sound_on_entity("est_tf3_straferidgeline");
     }
 
     if(index == 4) {
-      //Roger that!	
       ent play_sound_on_entity("est_tf4_rogerthat");
     }
 
     if(index == 5) {
-      //Secure this landing zone! Gold Eagle is touching down, I repeat, Gold Eagle is touching down!	
       ent play_sound_on_entity("est_tf1_goldeagle");
     }
   }
@@ -2563,102 +2185,75 @@ ending_shadowops_heli_sequence() {
 temp_shepherd_dialogue(shepherd, ghost) {
   wait 6.5;
 
-  //Gold Eagle is on the ground. Watch for snipers on thermal, over.	
   thread radio_dialogue("est_hp2_watchforsnipers");
 
   wait 10.5;
 
-  //Shepherd: Do you have the DSM?
-  //shepherd waittillmatch( "single anim", "shepherd_dsm_talk" );
-  //shepherd dialogue_queue( "est_shp_havethedsm" );
-
-  //Ghost: We got it, sir!
   ghost dialogue_queue("est_gst_wegotit");
   wait 0.85;
-
-  //Shepherd: Well done, soldier.
-  //shepherd dialogue_queue( "est_shp_welldone" );
-
-  //Shepherd: Good. That's one less loose end.
-  //shepherd dialogue_queue( "est_shp_looseend" );
 
   wait 1.5;
 
   wait 12;
 
-  //Area is sanitized. All targets destroyed.
   radio_dialogue("est_hp2_sanitized");
 
-  //Solid copy, no movement detected. Two-six going into holding pattern.	
   radio_dialogue("est_hp1_holdingpattern");
 }
 
 ending_redsmoke_sequence() {
-  //dialogue from Ghost
-  //start the redsmoke fx
-
   smokepot = getstruct("redsmoke", "targetname");
   playFX(getfx("redsmoke"), smokepot.origin);
 
-  //I've got you Roach, hang on!
   radio_dialogue("est_gst_gotyouroach");
 
-  //Thunder Two-One, I've popped red smoke in the treeline! Standby to engage on my mark!
   radio_dialogue("est_gst_redsmoke");
 
-  //Roger that, I have a visual on the red smoke. Standing by.
   radio_dialogue("est_fp1_visual");
 
   flag_set("drag_sequence_slacker_check");
 
-  //Thunder Two-One, cleared hot!
   radio_dialogue("est_gst_clearedhot");
 
-  //Roger that cleared hot. 	
   radio_dialogue("est_fp1_clearedhot");
 
   flag_set("thunderone_heli");
 
-  //Guns guns guns.
   radio_dialogue("est_hp1_gunsgunsguns");
 
   wait 9;
 
-  //This is Viper Two-Six, standby for rocket attack, over.	
   radio_dialogue("est_hp1_rocketattck");
 
-  //Uh, roger…hit 'em hard on that hill, make sure they're down.
   radio_dialogue("est_hp2_hitemhard");
 
-  //Roger I'm on it. Coming around on heading two-five-zero.	
   radio_dialogue("est_hp1_imonit");
 
-  //Roger, I got 'em lined up.
   radio_dialogue("est_hp1_linedup");
 }
 
 ending_mortarhit_ghost_sequence() {
   thread ending_mortarhit("ending_mortarhit_a");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "left" );
+
   wait 1;
   thread ending_mortarhit("ending_mortarhit_b");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "right" );
+
   wait 0.75;
   thread ending_mortarhit("ending_mortarhit_c");
   level.player thread maps\_gameskill::grenade_dirt_on_screen("right");
 
   wait 0.6;
   thread ending_mortarhit("ending_mortarhit_d");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "left" );
+
   wait 1;
   thread ending_mortarhit("ending_mortarhit_e");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "left" );
+
   wait 0.5;
   thread ending_mortarhit("ending_mortarhit_f");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "left" );
+
   wait 0.25;
   thread ending_mortarhit("ending_mortarhit_g");
-  //level.player thread maps\_gameskill::grenade_dirt_on_screen( "right" );
+
   wait 0.6;
   thread ending_mortarhit("ending_mortarhit_h");
   level.player thread maps\_gameskill::grenade_dirt_on_screen("left");
@@ -2689,8 +2284,6 @@ temp_music_ending_delay() {
 }
 
 ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
-  //Make sure that the gasoline anims are playing by this point
-
   flag_wait("begin_overlapped_gasoline_sequence");
 
   thread ending_gasoline_price_radio();
@@ -2714,11 +2307,9 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   flag_wait("cigar_flicked");
 
-  //level.player thread play_sound_on_entity ( "scn_estate_player_ignite" );
+  wait 0.15;
 
-  wait 0.15; //dramatic timing for cigar freefall
-
-  flag_set("cigar_flareup"); //one last dramatic cigar glow pulse at the onset of slowmo
+  flag_set("cigar_flareup");
 
   flyOverHeli = spawn_vehicles_from_targetname("final_pavelow_liftoff_2");
   flyOverHeliNode = getent("final_pavelow_flyover", "targetname");
@@ -2730,7 +2321,6 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
     thread ending_slowmo(140, 0.1);
   }
 
-  //wait 0.7;
   wait 0.6;
 
   playFX(getfx("gasoline_fire_on_player_ignite"), level.player.origin + (-66, 56, 64));
@@ -2743,9 +2333,8 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   wait 1.2;
 
-  //mainHeli = getent( "final_pavelow_liftoff_1", "targetname" );
   heliNode = getent("final_heli_goal_1", "targetname");
-  //mainHeli thread set_heli_goal( heliNode );
+
   level.pavelow thread set_heli_goal(heliNode);
 
   wait 0.5;
@@ -2767,30 +2356,9 @@ ending_gasoline_price_radio() {
 
   level.player LerpViewAngleClamp(1, 1, 1, 3, 3, 3, 3);
 
-  //level.player thread play_sound_on_entity( "scn_estate_ghost_bodyfall_breath" );
-
   wait 5;
 
-  //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
-  //(off mike) Soap, hold the left flank! 	
-  //Do not trust Shepherd - I say again, do not trust Shepherd!	
-  //(off mike) Soap get dowwwwn!!!	
-
   radio_dialogue("est_pri_underattack");
-
-  /*
-  //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
-  radio_dialogue( "est_pri_comein" );
-  	
-  //(off mike) Soap, hold the left flank! 	
-  radio_dialogue( "est_pri_holdleftflank" );
-
-  //Do not trust Shepherd - I say again, do not trust Shepherd!	
-  radio_dialogue( "est_pri_donottrust" );
-
-  //(off mike) Soap get dowwwwn!!!	
-  radio_dialogue( "est_pri_getdown" );
-  */
 }
 
 ending_smoking_fx() {
@@ -2832,18 +2400,16 @@ ending_smoking_fx() {
 }
 
 ending_slowmo(duration, speed) {
-  slomoLerpTime_in = 0.1; //1.5
-  slomoLerpTime_out = 1; //0.65
-  slomobreachplayerspeed = 0.1; //0.1
-  slomoSpeed = 0.31; //0.25
+  slomoLerpTime_in = 0.1;
+  slomoLerpTime_out = 1;
+  slomobreachplayerspeed = 0.1;
+  slomoSpeed = 0.31;
 
   if(isDefined(speed)) {
     slowmoSpeed = speed;
   }
 
-  slomoDuration = duration; //24
-
-  //level.player thread play_sound_on_entity( "slomo_whoosh" );
+  slomoDuration = duration;
 
   slowmo_start();
   slowmo_setspeed_slow(slomoSpeed);

@@ -6,36 +6,30 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-CONST_default_radial_radius = 8; // default distance between radial button and center
-CONST_radial_center_extrude_dist = 40; // this is the distance between the floating radial center and the oberver's eye
-CONST_direct_travel = 1; // no path, directly zoom to position
-CONST_view_travel_unit_dist = 1200; // distance unit per travel interval
-CONST_view_travel_unit_time = 1; // in seconds per travel interval
-CONST_blur_strength = 3; // blur strength during view travel, sine curved over travel duration
+CONST_default_radial_radius = 8;
+CONST_radial_center_extrude_dist = 40;
+CONST_direct_travel = 1;
+CONST_view_travel_unit_dist = 1200;
+CONST_view_travel_unit_time = 1;
+CONST_blur_strength = 3;
 
 init() {
   precacheShellShock("frag_grenade_mp");
 
-  radial_button_definitions(); // define radial button sets and buttons
-  radial_init(); // setup radial button mechanism
-  view_path_setup(); // setup view flight paths
+  radial_button_definitions();
+  radial_init();
+  view_path_setup();
   player_init();
 }
-
-// ====================================================================================
-// == 		inits 	 ==
-// ====================================================================================
 
 radial_button_definitions() {
   newRadialButtonGroup("main", "player_view1_start", "player_view1_end");
 
-  //	Main menu's buttons:
   bWeapons_a = newRadialButton("main", "Primary Weapon", "radial_weapons_primary", ::action_weapons_primary);
   bWeapons_b = newRadialButton("main", "Secondary Weapon", "radial_weapons_secondary", ::action_weapons_secondary);
   bGears = newRadialButton("main", "Gears", "radial_gears", ::action_gears);
   bKillStreaks = newRadialButton("main", "Kill Streaks", "radial_killstreaks", ::action_killstreak);
   bLeadboards = newRadialButton("main", "Leaderboards", "radial_leaderboards", ::action_leaderboards);
-  //
 
   newRadialButtonGroup("gears", "player_view2_start", "player_view2_end");
   newRadialButtonGroup("weapons_primary", "player_view3_start", "player_view3_end");
@@ -45,9 +39,7 @@ radial_button_definitions() {
 }
 
 radial_init() {
-  // calculate start &end angles of all buttons for range selection
   foreach(button_group in level.radial_button_group) {
-    // sort buttons by angle so we can calculate mid angles in sequence
     sort_buttons_by_angle(button_group);
 
     for(i = 0; i < button_group.size; i++) {
@@ -56,7 +48,7 @@ radial_init() {
         button_group[i].end_angle = mid_angle;
         button_group[i + 1].start_angle = mid_angle;
       } else {
-        mid_angle = getMidAngle(button_group[i].pos_angle, button_group[0].pos_angle) + 180; // +180 to mirror angle
+        mid_angle = getMidAngle(button_group[i].pos_angle, button_group[0].pos_angle) + 180;
         if(mid_angle > 360)
           mid_angle -= 360;
 
@@ -66,7 +58,6 @@ radial_init() {
     }
   }
 
-  // monitors
   thread updateSelectedButton();
   thread watchSelectButtonPress();
   thread watchBackButtonPress();
@@ -127,7 +118,7 @@ onPlayerConnect() {
 
   player thread get_right_stick_angle();
 
-  zoom_to_radial_menu("main"); // fly to the first radial menu
+  zoom_to_radial_menu("main");
 }
 
 readyPlayer() {
@@ -159,12 +150,7 @@ readyPlayer() {
   }
 }
 
-// ====================================================================================
-// ==Radial Mechanics==
-// ====================================================================================
-
 get_right_stick_angle() {
-  // self is user
   level endon("game_ended");
   self endon("disconnect");
 
@@ -173,7 +159,7 @@ get_right_stick_angle() {
     rs_angles = vectortoangles(rs_vec);
     level.rs_angle = int(rs_angles[1]);
 
-    wait 0.05; // update rate
+    wait 0.05;
   }
 }
 
@@ -293,8 +279,6 @@ watchBackButtonPress() {
 }
 
 sort_buttons_by_angle(button_group) {
-  // button_group is actual array
-  // bubble sort buttons
   for(i = 0; i < button_group.size - 1; i++) {
     for(j = 0; j < button_group.size - 1 - i; j++) {
       if(button_group[j + 1].pos_angle < button_group[j].pos_angle)
@@ -327,8 +311,6 @@ draw_radial_buttons(button_group) {
   foreach(button in level.radial_button_group[button_group])
   button thread draw_radial_button(button_group);
 }
-
-//print3d(<origin>, <text>, <color>, <alpha>, <scale>, <duration> )
 draw_radial_button(button_group) {
   level endon("game_ended");
   self endon("remove_button");
@@ -337,8 +319,6 @@ draw_radial_button(button_group) {
   button_radial_pos = floating_origin + radial_angle_to_vector(self.pos_angle, 4);
 
   while(1) {
-    //line( level.radial_button_group_info[ button_group ][ "view_pos" ], self.pos, ( 0, 1, 0 ), 0.05, false );
-
     range_color = (1, 0, 0);
     if(isInRange(self.start_angle, self.end_angle))
       range_color = (1, 1, 0);
@@ -351,7 +331,6 @@ draw_radial_button(button_group) {
       line(floating_origin, floating_origin + radial_angle_to_vector(self.start_angle, 2), range_color, 0.05);
       line(floating_origin + radial_angle_to_vector(self.start_angle, 2), floating_origin + radial_angle_to_vector(self.end_angle, 2), range_color, 0.05);
 
-      // right stick debug ling
       r_radial_pos = floating_origin + radial_angle_to_vector(level.rs_angle, 2);
       line(floating_origin, r_radial_pos, (1, 1, 1), 0.05);
     }
@@ -376,8 +355,6 @@ Zoom_To_Radial_Menu(button_group, reverse) {
   foreach(button in level.radial_button_group[level.radial_button_previous_group])
   button notify("remove_button");
 
-  //iPrintLnBold( "flying to: " + button_group );
-
   if(isDefined(reverse) && reverse)
     level.observer go_path_by_targetname_reverse(level.radial_button_group_info[level.radial_button_previous_group]["view_start"], button_group);
   else
@@ -386,12 +363,6 @@ Zoom_To_Radial_Menu(button_group, reverse) {
   level thread draw_radial_buttons(button_group);
   level.radial_button_current_group = button_group;
 }
-
-// ====================================================================================
-// ==	Radial menu - math		 ==
-// ====================================================================================
-
-// edit function with care, returns orientation-sensistive angles
 getRadialAngleFromEnt(button_group, ent) {
   assertex(isDefined(level.radial_button_group[button_group]), "getRadialAngleFromEnt: Radial button group does not exist.");
   assertex(isDefined(ent), "getRadialAngleFromEnt: Missing entity to be measured.");
@@ -408,16 +379,13 @@ getRadialAngleFromEnt(button_group, ent) {
   projNorm = VectorNormalize(VectorFromLineToPoint(rPos, (rPos + rForward), ePos));
   radial_angle = Acos(VectorDot(projNorm, rUpwardNorm));
 
-  // vector mirroring
   if(VectorDot(AnglesToRight(rAngle), projNorm) < 0)
     radial_angle = 360 - radial_angle;
 
   return radial_angle;
 }
-
-// converts projected angle into player's view plane into a vector
 radial_angle_to_vector(angle, scaler) {
-  b_angles = (270 - (angle), 0, 0); // 270 degrees offset to face the player
+  b_angles = (270 - (angle), 0, 0);
   b_vec = anglesToForward(b_angles);
   b_vec_norm = VectorNormalize(b_vec);
   b_vec_final = vector_multiply(b_vec_norm, scaler);
@@ -426,7 +394,6 @@ radial_angle_to_vector(angle, scaler) {
 }
 
 getMidAngle(a1, a2) {
-  // 0 -> 360 domain
   mid_angle = ((a1 + a2 + 720) / 2) - 360;
   return mid_angle;
 }
@@ -442,23 +409,12 @@ isInRange(start_angle, end_angle) {
 
   return in_range;
 }
-
-// ====================================================================================
-// ==Button action functions ==
-// ====================================================================================
-
-// close radial buttons
 action_back() {
-  //if( isDefined( level.radial_button_previous_group ) && level.radial_button_previous_group != "" )
-  //	zoom_to_radial_menu( level.radial_button_previous_group );
-  /*else*/
   if(isDefined(level.radial_button_current_group) && level.radial_button_current_group != "main")
     zoom_to_radial_menu("main", true);
   else
     return;
 }
-
-// ==== main ====
 action_weapons_primary() {
   iPrintLnBold("action_weapons_primary");
   zoom_to_radial_menu("weapons_primary");
@@ -484,15 +440,9 @@ action_leaderboards() {
   zoom_to_radial_menu("leaderboards");
 }
 
-// ====================================================================================
-// == Pathing functions==
-// ====================================================================================
-
 view_path_setup() {
-  // setup all paths
   level.view_paths = [];
 
-  // build paths
   build_path_by_targetname("player_view1_start");
   build_path_by_targetname("player_view2_start");
   build_path_by_targetname("player_view3_start");
@@ -514,12 +464,11 @@ build_path_by_targetname(path_name) {
 }
 
 go_path_by_targetname(path_name) {
-  // self is player
   if(!isDefined(level.dummy_mover)) {
     start_node = level.view_paths[path_name][0];
     level.dummy_mover = spawn("script_model", start_node.origin);
     level.dummy_mover.angles = start_node.angles;
-    //self AllowedStances( "stand" );
+
     self setOrigin(level.dummy_mover.origin - (0, 0, 65));
     self linkTo(level.dummy_mover);
     wait 0.05;
@@ -528,19 +477,10 @@ go_path_by_targetname(path_name) {
     self thread force_player_angles();
   }
 
-  /*
-  travel_time = 1;
-  dist = 0;
-  foreach ( idx, node in level.view_paths[ path_name ] )
-  {
-  	if( isDefined( level.view_paths[ path_name ][ idx + 1 ] ) )
-  		dist += abs( distance( level.view_paths[ path_name ][ idx ].origin, level.view_paths[ path_name ][ idx + 1 ].origin ) );
-  }*/
-
   travel_speed = CONST_view_travel_unit_time;
   total_distance = abs(distance(level.dummy_mover.origin, level.view_paths[path_name][level.view_paths[path_name].size - 1].origin));
   travel_speed *= total_distance / CONST_view_travel_unit_dist;
-  travel_speed = max(travel_speed, 0.1); // due to repeated button presses, the travel distance can be cut to 0 travel speed at times.
+  travel_speed = max(travel_speed, 0.1);
 
   blur_time = travel_speed;
   if(!CONST_direct_travel)
@@ -548,15 +488,11 @@ go_path_by_targetname(path_name) {
   self thread blur_sine(CONST_blur_strength, blur_time);
 
   foreach(idx, node in level.view_paths[path_name]) {
-    //travel_speed = travel_time * ( abs( distance( level.dummy_mover.origin, node.origin ) ) / dist );
-    //travel_speed += 0.05;
-
     if(CONST_direct_travel) {
       if(idx != level.view_paths[path_name].size - 1)
         continue;
     }
 
-    //level.dummy_mover MoveTo( node.origin, travel_speed );
     level.dummy_mover MoveTo(node.origin, travel_speed, travel_speed * 0.5, 0);
     level.dummy_mover RotateTo(node.angles, travel_speed, travel_speed * 0.5, 0);
     wait travel_speed;
@@ -569,7 +505,7 @@ go_path_by_targetname_reverse(path_name, back_to_button_group) {
   travel_speed = CONST_view_travel_unit_time;
   total_distance = abs(distance(level.dummy_mover.origin, level.radial_button_group_info[back_to_button_group]["player_view_pos"]));
   travel_speed *= total_distance / CONST_view_travel_unit_dist;
-  travel_speed = max(travel_speed, 0.1); // due to repeated button presses, the travel distance can be cut to 0 travel speed at times.
+  travel_speed = max(travel_speed, 0.1);
 
   blur_time = travel_speed;
   if(!CONST_direct_travel)
@@ -582,7 +518,6 @@ go_path_by_targetname_reverse(path_name, back_to_button_group) {
       level.dummy_mover MoveTo(node.origin, travel_speed);
       level.dummy_mover RotateTo(node.angles, travel_speed);
 
-      //self thread travel_view_fx( travel_speed );
       wait travel_speed;
     }
   }

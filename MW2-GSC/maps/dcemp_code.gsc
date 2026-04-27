@@ -14,8 +14,6 @@ CONST_BTR_SLIDE_TIME_2 = .65;
 CONST_STREET_CAR_WAIT = .25;
 CONST_NEW_HELI_DROP_HEIGHT = 5500;
 
-//------- SPACE SUIT INPUT --------->
-
 CONST_ISS_INPUT_X_MIN = 8;
 CONST_ISS_INPUT_RATE_X = .3;
 CONST_ISS_INPUT_FORCE_X = .75;
@@ -25,11 +23,6 @@ CONST_ISS_INPUT_DEC_X = .05;
 CONST_ISS_INPUT_RATE_Y = .5;
 CONST_ISS_INPUT_DEC_Y = .05;
 CONST_ISS_INPUT_ACC_Y_MIN = 1;
-
-//<--------------------------------- /************************************************************************************************************/
-
-/*													INTRO													*/
-/************************************************************************************************************/
 
 iss_get_satellite_model() {
   node = getent("iss_player_link", "targetname");
@@ -63,7 +56,7 @@ iss_camera_setup() {
   node = getent("iss_player_link2", "targetname");
 
   camera = spawn_anim_model("iss_rig", node.origin);
-  //camera hide();
+
   camera.angles = node.angles;
   camera linkto(node);
   camera.node = node;
@@ -72,7 +65,6 @@ iss_camera_setup() {
   level.player PlayerSetGroundReferenceEnt(camera);
 
   node anim_first_frame_solo(camera, "ISS_animation");
-  //	camera thread iss_camera_spotlight();
 
   return camera;
 }
@@ -96,7 +88,7 @@ iss_camera_spotlight() {
   while(!flag("iss_destroy_blast_wave")) {
     offset = self iss_camera_offset();
 
-    model.origin = self.origin + offset; // model moveto( self.origin + offset, .1 );
+    model.origin = self.origin + offset;
     model.angles = level.player getplayerangles() + self.angles;
     wait .05;
   }
@@ -185,7 +177,7 @@ iss_destroy_iss_parts() {
 
   time = magicnumber * self.distance_to_blast;
 
-  time = time - 3; // + randomfloat( .1 );
+  time = time - 3;
 
   flag_wait_or_timeout("iss_destroy_blast_wave", time);
   flag_set("iss_destroy_first_wave");
@@ -353,11 +345,6 @@ iss_preload_lights() {
   }
 }
 
-/************************************************************************************************************/
-
-/*													INTRO													*/
-/************************************************************************************************************/
-
 intro_enemy_setup() {
   flag_wait("crash_cut_to_black");
 
@@ -409,11 +396,6 @@ intro_enemy_reaction() {
   self delete();
 }
 
-/************************************************************************************************************/
-
-/*													EMP														*/
-/************************************************************************************************************/
-
 emp_entities() {
   switch (self.targetname) {
     case "emp_delete":
@@ -425,7 +407,7 @@ emp_entities() {
             thread play_sound_in_space("glass_pane_blowout", self getorigin());
             break;
           case "window":
-            playFX(level._effect["dcemp_glass_74x44"], self getorigin(), anglesToForward((0, 270, 0))); //, anglestoright( (0,270,0) ) );
+            playFX(level._effect["dcemp_glass_74x44"], self getorigin(), anglesToForward((0, 270, 0)));
             thread play_sound_in_space("glass_pane_blowout", self getorigin());
             break;
         }
@@ -550,10 +532,6 @@ emp_heli_spotlight() {
   heli thread play_loop_sound_on_entity("scn_dcemp_cobra_shutdown_hover");
   self delete();
 
-  //	node thread anim_first_frame_solo( heli, "crash" );
-
-  //	wait level.EMPWAIT_BETA;
-
   node thread anim_single_solo(heli, "crash");
 
   heli waittillmatch("single anim", "emp");
@@ -573,7 +551,7 @@ emp_heli_spotlight() {
   flag_set("emp_heli_crash");
 
   playFX(level._effect["helicopter_crash"], heli gettagorigin("TAG_DEATHFX"));
-  //thread play_sound_in_space( "mi17_helicopter_crash_dist", heli gettagorigin( "TAG_DEATHFX" ) );
+
   heli setModel("vehicle_mi-28_d_animated");
 
   time = 0;
@@ -582,7 +560,6 @@ emp_heli_spotlight() {
   noself_delaycall(time, ::earthquake, 0.25, 1.5, level.player.origin, 5000);
 
   node waittill("crash");
-  //heli delete();
 }
 
 heli_spark_effects() {
@@ -704,7 +681,6 @@ emp_jet_crash() {
 
   jet = spawn_vehicle_from_targetname_and_drive("emp_jet_crasher");
 
-  //jet ent_flag_set( "contrails" );
   jet ent_flag_clear("engineeffects");
 
   wait 5.25;
@@ -766,7 +742,7 @@ emp_heli_crash() {
 
   range = 900;
   maxd = 600;
-  RadiusDamage(heli.origin + (0, 0, 10), range, maxd, 20, heli); //similar to destructibles
+  RadiusDamage(heli.origin + (0, 0, 10), range, maxd, 20, heli);
 
   time = .25;
   level.player delaycall(time, ::PlayRumbleLoopOnEntity, "tank_rumble");
@@ -793,24 +769,21 @@ emp_heli_crash_guys_fallout() {
 
   self linkto(node);
 
-  //find out the various end origins we need
   grndpos = GetGroundPosition(node.origin, 0, 1000, 64);
   delta = getmovedelta(getanim_generic("fastrope_fall"), 0, 1);
   endpos = node.origin + delta;
   animdist = abs(delta[2]);
 
-  //this is the full distance from the ai's height to the ground
   fulldist = node.origin[2] - grndpos[2];
-  //this is the extra distance we need to cover that the animation does not
+
   extradist = endpos[2] - grndpos[2];
-  //this is the length of time it takes for the ai to fall the distance of delta[ 2 ]
+
   length = getanimlength(getanim_generic("fastrope_fall"));
-  //this is the equation to figure out the time it takes to fall delta[ 2 ] + dist
+
   time = (length * fulldist) / animdist;
 
   time -= .25;
 
-  //this is the new rate the animation needs to play at in order for it to play the full length of time
   rate = (length / time);
 
   self playSound("generic_death_falling_scream");
@@ -833,11 +806,6 @@ emp_heli_crash_guys_fallout() {
 
   playFX(level._effect["bodyfall_dust_high"], grndpos);
 }
-
-/************************************************************************************************************/
-
-/*													STREET													*/
-/************************************************************************************************************/
 
 street_hide_moment() {
   foreach(member in level.team)
@@ -899,9 +867,6 @@ street_hide_moment() {
   foreach(piece in glass)
   destroyglass(piece, dir * 200);
 
-  //	time = 4.5;
-  //	array_thread( level.team, ::notify_delay, "killanimscript", time );
-
   wait 4;
 
   flag_set("allow_ammo_pickups");
@@ -921,10 +886,10 @@ street_hide_moment() {
 
   time = 1.25;
   wait time;
-  //What the hell are we gonna do now? We got no air support...we got no comms…we're screwed man! We are totally- fucked!			
+
   level.dunn thread dialogue_queue("dcemp_cpd_wearetotally");
   wait 6.25 - time;
-  //Shut up!! Get a grip Corporal! Our weapons still work, which means we can still kick some ass, huah?			
+
   level.foley thread dialogue_queue("dcemp_fly_getagrip");
   level.dunn delaycall(.5, ::stopsounds);
   flag_wait("corner_start_crash_scene");
@@ -1002,7 +967,7 @@ street_heli_player_kill() {
   }
   range = 300;
 
-  PhysicsExplosionSphere(origin, range, 0, range * .01); //similar to destructibles	
+  PhysicsExplosionSphere(origin, range, 0, range * .01);
 
   playFX(level._effect["helicopter_explosion"], origin);
   thread play_sound_in_space("exp_armor_vehicle", origin);
@@ -1027,7 +992,6 @@ street_guy_fall_guy() {
 }
 
 street_btr_scene() {
-  //SETUP
   heli = getent("street_heli", "targetname");
   target = getent("street_heli_target", "targetname");
   slide1 = getent("street_btr_slide_1", "targetname");
@@ -1055,13 +1019,11 @@ street_btr_scene() {
   if(level.start_point != "corner") {
     flag_wait("street_crash_btr_first");
 
-    //start dropping the heli
     street_btr_scene_drop_heli();
 
     flag_set("street_btr_death");
     waittillframeend;
 
-    //kill the btr and get a model so we can animate it
     earthquake(.5, 1.25, level.player.origin, 2048);
     level.player PlayRumbleLoopOnEntity("tank_rumble");
     level.player delaycall(1.25, ::stopRumble, "tank_rumble");
@@ -1070,13 +1032,10 @@ street_btr_scene() {
     model = self street_btr_scene_kill_btr();
     thread street_btr_blur(model);
 
-    //show the damaged heli
     array_call(getEntArray("street_heli_destroyed", "targetname"), ::show);
 
-    //move the heli parts
     d_heli thread street_btr_animate_heli();
 
-    //move the btr
     model street_btr_animate_btr();
   } else {
     model = self street_btr_scene_kill_btr();
@@ -1084,7 +1043,6 @@ street_btr_scene() {
     model.angles = slide2.angles;
   }
 
-  //delete the damage trig and turn on the clip brush
   clip solid();
   clip disconnectpaths();
 
@@ -1141,7 +1099,6 @@ street_crash_cars() {
     }
   }
 
-  //fx and light
   foreach(fx in info["fx"]) {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
@@ -1187,7 +1144,6 @@ street_crash_helis() {
 
     if(self.script_flag_wait == "street_crash_heli_first")
       self.origin += (0, 0, CONST_NEW_HELI_DROP_HEIGHT);
-    //self.script_flag_wait = "street_crash_btr_first";
 
     flag_wait(self.script_flag_wait);
 
@@ -1213,8 +1169,8 @@ street_crash_helis() {
     range = 300;
     maxd = 300;
     if(!flag("street_safe"))
-      RadiusDamage(self.origin + (0, 0, 10), range, maxd, 20, self); //similar to destructibles
-    PhysicsExplosionSphere(self.origin, range, 0, range * .01); //similar to destructibles	
+      RadiusDamage(self.origin + (0, 0, 10), range, maxd, 20, self);
+    PhysicsExplosionSphere(self.origin, range, 0, range * .01);
 
     playFX(level._effect["helicopter_explosion"], endorg + (0, 0, -128));
     thread play_sound_in_space("exp_armor_vehicle", endorg);
@@ -1282,7 +1238,6 @@ street_crash_helis_anim() {
         clipcar = getent("street_blackhawk_car_clip", "targetname");
         clipcar linkto(car);
 
-        //car.angles += (0,90,0);
         car.animname = "street_car";
         car UseAnimTree(#animtree);
         self thread anim_single_solo(car, "crash");
@@ -1294,9 +1249,6 @@ street_crash_helis_anim() {
   self thread anim_single_solo(heli, "crash");
 
   if(level.start_point != "corner" && level.start_point != "meetup") {
-    //		heli waittillmatch( "single anim", "play_sound" );
-    //		heli playSound( "scn_dcemp_heli_shutdown" );
-
     heli waittillmatch("single anim", "pre_explode");
 
     thread flag_set(self.script_flag_set);
@@ -1327,8 +1279,8 @@ street_crash_helis_anim() {
     range = 300;
     maxd = 300;
     if(!flag("street_safe"))
-      RadiusDamage(heli gettagOrigin("TAG_DEATHFX"), range, maxd, 20, heli); //similar to destructibles
-    PhysicsExplosionSphere(heli gettagOrigin("TAG_DEATHFX"), range, 0, range * .01); //similar to destructibles	
+      RadiusDamage(heli gettagOrigin("TAG_DEATHFX"), range, maxd, 20, heli);
+    PhysicsExplosionSphere(heli gettagOrigin("TAG_DEATHFX"), range, 0, range * .01);
 
     switch (self.script_flag_set) {
       case "street_crash_left":
@@ -1556,8 +1508,8 @@ street_btr_scene_kill_btr() {
   self delete();
 
   range = 300;
-  RadiusDamage(model.origin + (0, 0, 10), range, 300, 20, model); //similar to destructibles
-  PhysicsExplosionSphere(model.origin, range, 0, range * .01); //similar to destructibles	
+  RadiusDamage(model.origin + (0, 0, 10), range, 300, 20, model);
+  PhysicsExplosionSphere(model.origin, range, 0, range * .01);
 
   return model;
 }
@@ -1574,8 +1526,8 @@ street_kill_vehicle() {
   self delete();
 
   range = 300;
-  RadiusDamage(model.origin + (0, 0, 10), range, 300, 20, model); //similar to destructibles
-  PhysicsExplosionSphere(model.origin, range, 0, range * .01); //similar to destructibles	
+  RadiusDamage(model.origin + (0, 0, 10), range, 300, 20, model);
+  PhysicsExplosionSphere(model.origin, range, 0, range * .01);
 
   return model;
 }
@@ -1600,7 +1552,6 @@ street_btr_animate_btr() {
   wait time;
   earthquake(.2, .5, level.player.origin, 2048);
 
-  //cleanup
   slide1 delete();
   slide2 delete();
 }
@@ -1633,7 +1584,7 @@ street_btr_animate_heli() {
   foreach(part in parts) {
     vec = vectornormalize((part.origin + (0, 0, 32)) - struct.origin);
     vec = vec * randomfloatrange(800, 900);
-    //part PhysicsLaunchClient( targets[ part.script_noteworthy ].origin, vec );
+
     part movegravity(vec, 5);
     part rotatevelocity((randomfloatrange(150, 250), randomfloatrange(150, 250), randomfloatrange(150, 250)), 5, 0, 5);
   }
@@ -1652,15 +1603,12 @@ do_player_crash_fx(origin) {
 
   dist = distancesquared(level.player.origin, origin);
 
-  //player stuff		
   if(dist < squared(1500)) {
     level.player PlayRumbleLoopOnEntity("tank_rumble");
     level.player delaycall(1.0, ::stopRumble, "tank_rumble");
     earthquake(0.5, 1, origin, 2000);
     level.player setvelocity(anglestoup(level.player.angles) * 210);
     if(dist < squared(650)) {
-      //level.player dirtEffect( origin );
-
       level.player allowStand(false);
       level.player allowProne(false);
       level.player setstance("crouch");
@@ -1678,11 +1626,6 @@ do_player_crash_fx(origin) {
     }
   }
 }
-
-/************************************************************************************************************/
-
-/*													CORNER													*/
-/************************************************************************************************************/
 
 corner_hide_damage() {
   scene = corner_get_scene();
@@ -1702,12 +1645,6 @@ corner_show_damage() {
 
 corner_get_scene() {
   array = [];
-
-  //	fixed an issue from rockets checkin when you where away. -Roger
-  //	plane = getEntArray( "corner_crash_plane", "targetname" );
-  //	tail = getEntArray( "crash_plane_tail", "targetname" );
-  //	post_crash_ents = array_combine( plane, tail );
-  //	array[ "plane" ] 		= plane;
 
   array["lights"] = getEntArray("light_crash_fire", "script_noteworthy");
 
@@ -1820,7 +1757,7 @@ corner_truck_engine_crash() {
 
   wait .25;
 
-  playFX(level._effect["firelp_med_pm_nolight"], centerfx.origin); //, anglestoup( centerfx.angles ), anglesToForward( centerfx.angles ) );
+  playFX(level._effect["firelp_med_pm_nolight"], centerfx.origin);
 
   wait 3.0;
 
@@ -1936,11 +1873,6 @@ corner_dead_check() {
   guy delete();
 }
 
-/************************************************************************************************************/
-
-/*													MEETUP													*/
-/************************************************************************************************************/
-
 meetup_runner_threads() {
   level.foley delaythread(0, ::meetup_runner_jog, "meetup_runner_foley");
   level.team["marine1"] delaythread(3, ::meetup_runner_walk, "meetup_runner_2");
@@ -1954,7 +1886,6 @@ meetup_runner_dunn() {
   node = getstruct("meetup_runner_anim_node", "targetname");
   node.origin = self.origin;
 
-  //start
   self disable_exits();
   self disable_arrivals();
   self setlookatentity(level.runner);
@@ -1971,7 +1902,6 @@ meetup_runner_dunn() {
 
   flag_wait("meetup_do_scripted_scene");
 
-  //node waittill( "DCemp_run_sequence" );
   time = getanimlength(getanim_generic("DCemp_run_sequence_guy1"));
   time *= .62;
   self thread delaycall(time, ::setlookatentity);
@@ -2094,11 +2024,6 @@ meetup_runner_end() {
   self anim_generic_run(self, "casual_stand_idle_trans_in");
 }
 
-/************************************************************************************************************/
-
-/*													LOBBY													*/
-/************************************************************************************************************/
-
 lobby_enemy_suppressive_fire() {
   level endon("office_enemy_suppressive_fire");
   level thread notify_delay("office_enemy_suppressive_fire", 5);
@@ -2120,11 +2045,6 @@ lobby_enemy_suppressive_fire() {
     wait randomfloatrange(.5, 1.5);
   }
 }
-
-/************************************************************************************************************/
-
-/*													OFFICE													*/
-/************************************************************************************************************/
 
 office_enemies_wave1() {
   self endon("death");
@@ -2157,11 +2077,6 @@ office_enemies_wave1_runner() {
 
   self.ignoreall = false;
 }
-
-/************************************************************************************************************/
-
-/*													PARKING													*/
-/************************************************************************************************************/
 
 parking_drone() {
   spawner = getent("parkinglot_drone", "targetname");
@@ -2244,11 +2159,6 @@ parking_traverse_from_office() {
 
   self unlink();
 }
-
-/************************************************************************************************************/
-
-/*													PLAZA													*/
-/************************************************************************************************************/
 
 plaza_flare_fx() {
   model = getent("street_flare", "targetname");
@@ -2344,11 +2254,6 @@ plaza_enemies_wakeup() {
 
   node anim_generic_gravity_run(self, anims[self.reactnum]);
 }
-
-/************************************************************************************************************/
-
-/*													MISC													*/
-/************************************************************************************************************/
 
 send_team_to_random_nodes(team, nodes) {
   index = 0;
@@ -2591,8 +2496,6 @@ kill_random_teammate(num, del) {
   array = array_removedead(array);
   array = get_array_of_farthest(level.player.origin, array);
 
-  //if we got here its because we couldn't kill enough people the player was NOT looking at
-  //so now we dont do a look at check.
   for(i = 0; i < num; i++) {
     member = array[i];
 
@@ -2920,20 +2823,6 @@ fx_rain_pause() {
     if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx pauseEffect();
   }
-
-  /*
-  array = getfxarraybyID( "rain_noise_splashes" );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite" ) );
-  array = array_combine( array, getfxarraybyID( "cgo_ship_puddle_large" ) );
-  array = array_combine( array, getfxarraybyID( "cgo_ship_puddle_small" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_4x64" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_4x128" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x64" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x128" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_64x64" ) );
-  array = array_combine( array, getfxarraybyID( "rain_splash_lite_128x128" ) );
-  	
-  array_thread( array, ::pauseEffect );*/
 }
 
 fx_rain_pause2() {
@@ -2954,19 +2843,6 @@ fx_rain_restart() {
     if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx restartEffect();
   }
-
-  /*	array = getfxarraybyID( "rain_noise_splashes" );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite" ) );
-  	array = array_combine( array, getfxarraybyID( "cgo_ship_puddle_large" ) );
-  	array = array_combine( array, getfxarraybyID( "cgo_ship_puddle_small" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_4x64" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_4x128" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x64" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x128" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_64x64" ) );
-  	array = array_combine( array, getfxarraybyID( "rain_splash_lite_128x128" ) );
-  	
-  	array_thread( array, ::restartEffect );*/
 }
 
 fx_end_pause() {
@@ -3052,10 +2928,6 @@ dcemp_create_triggerfx() {
   end.node = getstruct("whitehousefxnode", "targetname");
   end.radius = squared(end.node.radius);
 
-  /*israinfx = false;
-  if( self.v[ "fxid" ] == "rain_noise_splashes" || 	self.v[ "fxid" ] == "rain_splash_lite" || 	self.v[ "fxid" ] == "cgo_ship_puddle_large" || 	self.v[ "fxid" ] == "cgo_ship_puddle_small" || 	self.v[ "fxid" ] == "rain_splash_lite_4x64" || 	self.v[ "fxid" ] == "rain_splash_lite_4x128" || 	self.v[ "fxid" ] == "rain_splash_lite_8x64" || 	self.v[ "fxid" ] == "rain_splash_lite_8x128" || 	self.v[ "fxid" ] == "rain_splash_lite_64x64" || 	self.v[ "fxid" ] == "rain_splash_lite_128x128" )
-   	israinfx = true;*/
-
   isissfx = false;
   if(self.v["fxid"] == "dcemp_sun" || self.v["fxid"] == "space_nuke" || self.v["fxid"] == "space_nuke_shockwave" || self.v["fxid"] == "space_emp" || self.v["fxid"] == "space_explosion" || self.v["fxid"] == "space_explosion_small")
     isissfx = true;
@@ -3064,27 +2936,25 @@ dcemp_create_triggerfx() {
   if(self.v["fxid"] == "carpetbomb" || self.v["fxid"] == "wire_spark")
     isendfx = true;
 
-  //INTRO FX
   if(distancesquared(self.v["origin"], intro.node.origin) < intro.radius)
     flag_wait("intro_fx");
-  //ISS FX
+
   else
   if(isissfx)
     flag_wait("iss_fx");
-  //RAIN FX
+
   else
   if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
     flag_wait("rain_fx");
-  //RAIN FX2
+
   else
   if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
     flag_wait("rain_fx2");
-  //END FX
+
   else
   if(distancesquared(self.v["origin"], end.node.origin) < end.radius || isendfx)
     flag_wait("end_fx");
 
-  //OTHER FX just start at first frame
   self common_scripts\_fx::create_triggerfx();
 }
 
@@ -3125,7 +2995,7 @@ CornerStndR_aim() {
 
   self setAnimLimited(%add_idle, 1, .2);
   self setAnimKnobLimitedRestart(%CornerStndR_lean_idle, 1, .2);
-  //%CornerStndR_lean_auto
+
   self waittill("stop_custom_aim");
 }
 
@@ -3137,7 +3007,7 @@ CornerCrR_aim() {
 
   self setAnimLimited(%add_idle, 1, .2);
   self setAnimKnobLimitedRestart(%CornerCrR_lean_idle, 1, .2);
-  //%CornerStndR_lean_auto
+
   self waittill("stop_custom_aim");
 }
 
@@ -3200,7 +3070,6 @@ script2model_iss() {
 
   data = getStructArray("iss_entity", "targetname");
 
-  //spawning 700 entities...so need to break it up into several frames
   num = 0;
 
   foreach(obj in data) {

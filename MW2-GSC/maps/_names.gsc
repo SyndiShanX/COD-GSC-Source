@@ -26,7 +26,6 @@ setup_names() {
   for(i = 0; i < nationalities.size; i++)
     level.names[nationalities[i]] = [];
 
-  // American names will ideally match 1:1 with names that we've recorded, so the friendlies will more obviously talk to each other
   add_name("american", "Abrahamsson");
   add_name("american", "Alavi");
   add_name("american", "Alderman");
@@ -107,7 +106,7 @@ setup_names() {
   add_name("american", "Silvers");
   add_name("american", "Slayback");
   add_name("american", "Smith");
-  //add_name( "american", "Song" );
+
   add_name("american", "Stone");
   add_name("american", "Sue");
   add_name("american", "Taehoon");
@@ -185,7 +184,6 @@ setup_names() {
   add_name("seal", "Yankee");
   add_name("seal", "Zero");
 
-  // taskforce = seal, but the non-stealth version
   copy_names("taskforce", "seal");
 
   add_name("secretservice", "Smith");
@@ -479,10 +477,10 @@ get_name_for_nationality(nationality) {
   rank = randomint(10);
 
   if(nationality == "seal" || nationality == "taskforce") {
-    fullname = lastname; // TF141 soldiers just get a callsign
+    fullname = lastname;
     self.airank = "private";
   } else if(nationality == "secretservice") {
-    fullname = "Agent " + lastname; // Secret Service guys are all "Agents"self.airank = "private";
+    fullname = "Agent " + lastname;
   } else if(rank > 5) {
     fullname = "Pvt. " + lastname;
     self.airank = "private";
@@ -532,9 +530,7 @@ getRankFromName(name) {
       self.airank = "captain";
       break;
     default:
-      // SRS 02/01/09: this is more annoying than useful now that we have lots of friendlies
-      //whose names are callsigns. we may want to ditch rank references altogether in the scripts.
-      //println( "sentient has invalid rank " + shortRank + "!" );
+
       self.airank = "private";
       break;
   }

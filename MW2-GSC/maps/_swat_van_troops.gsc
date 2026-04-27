@@ -9,11 +9,11 @@
 main(model, type) {
   build_template("swat_van_troops", model, type);
   build_localinit(::init_local);
-  build_deathmodel("vehicle_russian_swat_van"); // RADNAME = _troops
+  build_deathmodel("vehicle_russian_swat_van");
 
   build_deathfx("explosions/large_vehicle_explosion", undefined, "car_explode", undefined, undefined, undefined, 0);
-  build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE" /* right_wheel_02_jnt */ , undefined, undefined, undefined, true, 0);
-  build_deathfx("fire/firelp_med_pm", "TAG_CARGO_FIRE" /* tag_headlight_left */ , "fire_metal_medium", undefined, undefined, true, 0);
+  build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", undefined, undefined, undefined, true, 0);
+  build_deathfx("fire/firelp_med_pm", "TAG_CARGO_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
 
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
   build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
@@ -29,10 +29,7 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {
-  // 	maps\_vehicle::lights_on( "headlights" );
-  // 	maps\_vehicle::lights_on( "brakelights" );
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   positions[0].vehicle_getoutanim = % russian_swat_van_driver_getout_door;
@@ -143,15 +140,3 @@ unload_groups() {
 
   return unload_groups;
 }
-
-/*QUAKED script_vehicle_russian_swat_van_troops (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_swat_van_troops::main( "vehicle_russian_swat_van" );
-
-and these lines in your CSV:
-#include,vehicle_russian_swat_van_troops
-sound,vehicle_swat_van,vehicle_standard,all_sp
-
-defaultmdl="vehicle_russian_swat_van"default:"vehicletype" "swat_van_troops"default:"script_team" "axis"
-*/

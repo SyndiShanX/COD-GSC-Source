@@ -10,7 +10,6 @@
 KILLSTREAK_STRING_TABLE = "sp/killstreakTable.csv";
 
 init() {
-  // && 1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
 
   initKillstreakData();
@@ -19,11 +18,7 @@ init() {
   level.killstreakSetupFuncs = [];
 
   thread maps\_killstreak_ac130::init();
-  //thread maps\mp\_remotemissile::init();
-  //thread maps\mp\_uav::init();
-  //thread maps\mp\_airstrike::init();
-  //thread maps\mp\_helicopter::init();
-  //thread maps\mp\_autoshotgun::init();
+
   thread maps\_killstreak_autosentry::init();
 }
 
@@ -38,33 +33,18 @@ initKillstreakData() {
     assert(streakRef != "");
 
     streakUseHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 6);
-    // string not found for
+
     assert(streakUseHint != &"");
     precacheString(streakUseHint);
 
     streakFailHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 11);
-    // string not found for
+
     assert(streakFailHint != &"");
     precacheString(streakFailHint);
-
-    //chad - no earn dialog yet
-    //streakEarnDialog = tableLookup( KILLSTREAK_STRING_TABLE, 0, i, 8 );
-    //assert( streakEarnDialog != "" );
-    //game["dialog"][streakRef] = streakEarnDialog;
 
     streakFriendlyUseDialog = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 9);
     assert(streakFriendlyUseDialog != "");
     game["dialog"][streakRef + "_inbound"] = streakFriendlyUseDialog;
-
-    /*
-    Chad:
-    	enemies will never use killstreak rewards because they are just stupid AI haha
-    	maybe someday I can make them use killstreaks to make things interesting
-    		
-    streakEnemyUseDialog = tableLookup( KILLSTREAK_STRING_TABLE, 0, i, 9 );
-    assert( streakEnemyUseDialog != "" );
-    game["dialog"]["enemy_"+streakRef+"_inbound"] = streakEnemyUseDialog;
-    */
 
     streakWeapon = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 12);
     if(streakWeapon != "")
@@ -103,20 +83,8 @@ killstreakUsePressed() {
   } else if(self[[level.killstreakFuncs[streakName]]]()) {
     team = self.team;
 
-    /* Chad - leader dialog doesn't exist but we can probably just do a playlocalsoundwrapper on all
-    players instead since there isn't anyone on the other team
-    		
-    //array_thread( level.players, ::playLocalSoundWrapper, level.pmc.sound[ "juggernaut_attack" ] );
-    		
-    if( level.teamBased )
-    	thread leaderDialog( streakName + "_inbound", team );
-    else
-    	self thread leaderDialogOnPlayer( streakName + "_inbound" );
-    */
-
     self playLocalSound("weap_c4detpack_trigger_plr");
 
-    //self setClientDvar( "ui_killstreak", "" );
     self.pers["killstreak"] = undefined;
   } else if(isDefined(level.killstreakFuncs[streakName + "_failed"])) {
     self[[level.killstreakFuncs[streakName + "_failed"]]]();
@@ -170,7 +138,7 @@ streakNotify(streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // && 1 Kill Streak!
+
   notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
 
@@ -183,13 +151,12 @@ rewardNotify(streakName, streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // && 1 Kill Streak!
+
   notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.notifyText = getKillstreakHint(streakName);
   notifyData.textIsString = true;
-  // chad - earn dialog not hooked up yet
-  //notifyData.sound = getKillstreakSound( streakName );
+
   notifyData.leaderSound = streakName;
 
   self maps\_rank::notifyMessage(notifyData);
@@ -221,7 +188,6 @@ giveKillstreak(streakName) {
     self giveKillstreakWeapon(weapon);
   } else {
     self setActionSlot(4, "");
-    //self setClientDvar( "ui_killstreak", streakName );
   }
 
   self.pers["killstreak"] = streakName;
@@ -233,7 +199,6 @@ giveKillstreak(streakName) {
 giveKillstreakWeapon(weapon) {
   self giveWeapon(weapon);
   self setActionSlot(4, "weapon", weapon);
-  //self setClientDvar( "ui_killstreak", "" );
 }
 
 getStreakCost(streakName) {

@@ -8,7 +8,6 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_mp_underpass");
   setDvar("compassmaxrange", "2800");
 
-  //setExpFog( 500, 3500, .5, 0.5, 0.45, 1, 0 );
   ambientPlay("ambient_mp_rain");
 
   game["attackers"] = "axis";
@@ -47,7 +46,7 @@ main() {
   setDvar("r_veilBackgroundStrength", 0.963);
 
   if(level.ps3)
-    setDvar("sm_sunShadowScale", "0.5"); // ps3 optimization
+    setDvar("sm_sunShadowScale", "0.5");
 
   thread zombie_easter_egg();
 }
@@ -60,7 +59,7 @@ zombie_easter_egg() {
   damageTrigger hide();
   damageTrigger.angles = (90, -180, 0);
   damageTrigger setCanDamage(true);
-  damageTrigger.health = 999999; // keep it from dying anywhere in code
+  damageTrigger.health = 999999;
 
   for(;;) {
     damageTrigger waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath, modelName, tagName, partName, iDFlags, sWeapon);

@@ -43,7 +43,6 @@ init() {
   level._effect["ac130_light_red_blink"] = loadfx("misc/aircraft_light_red_blink");
   level._effect["ac130_engineeffect"] = loadfx("fire/jet_engine_ac130");
 
-  // ac130 muzzleflash effects for player on ground to see
   level._effect["coop_muzzleflash_105mm"] = loadfx("muzzleflashes/ac130_105mm");
   level._effect["coop_muzzleflash_40mm"] = loadfx("muzzleflashes/ac130_40mm");
 
@@ -76,7 +75,6 @@ init() {
   level.ac130_Speed["move"] = 250;
   level.ac130_Speed["rotate"] = 70;
 
-  //flag_init( "ir_beakons_on" );
   flag_init("allow_context_sensative_dialog");
   flag_set("allow_context_sensative_dialog");
 
@@ -159,33 +157,32 @@ init_sounds() {
   setAC130Ambience("ambient_ac130_int1");
 
   level.scr_sound["foo"]["bar"] = "";
-  //------------------------------------------------------------------------------------------------- //CONTEXT SENSATIVE DIALOG
-  //------------------------------------------------------------------------------------------------- add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy"); // More enemy personnel.
-  add_context_sensative_dialog("ai", "in_sight", 1, "ac130_fco_getthatguy"); // Get that guy.
-  add_context_sensative_dialog("ai", "in_sight", 2, "ac130_fco_guymovin"); // Roger, guy movin'.
-  add_context_sensative_dialog("ai", "in_sight", 3, "ac130_fco_getperson"); // Get that person.
-  add_context_sensative_dialog("ai", "in_sight", 4, "ac130_fco_guyrunnin"); // Guy runnin'.
-  add_context_sensative_dialog("ai", "in_sight", 5, "ac130_fco_gotarunner"); // Uh, we got a runner here.
-  add_context_sensative_dialog("ai", "in_sight", 6, "ac130_fco_backonthose"); // Get back on those guys.
-  add_context_sensative_dialog("ai", "in_sight", 7, "ac130_fco_gonnagethim"); // You gonna get him?
-  add_context_sensative_dialog("ai", "in_sight", 8, "ac130_fco_personnelthere"); // Personnel right there.
-  add_context_sensative_dialog("ai", "in_sight", 9, "ac130_fco_nailthoseguys"); // Nail those guys.
-  add_context_sensative_dialog("ai", "in_sight", 11, "ac130_fco_lightemup"); // Light �em up.
-  add_context_sensative_dialog("ai", "in_sight", 12, "ac130_fco_takehimout"); // Yeah take him out.
-  add_context_sensative_dialog("ai", "in_sight", 14, "ac130_plt_yeahcleared"); // Yeah, cleared to engage.
-  add_context_sensative_dialog("ai", "in_sight", 15, "ac130_plt_copysmoke"); // Copy, smoke �em.
-  add_context_sensative_dialog("ai", "in_sight", 16, "ac130_fco_rightthere"); // Right there...tracking.
-  add_context_sensative_dialog("ai", "in_sight", 17, "ac130_fco_tracking"); // Tracking.
 
-  add_context_sensative_dialog("ai", "wounded_crawl", 0, "ac130_fco_movingagain"); // Ok he�s moving again.
+  add_context_sensative_dialog("ai", "in_sight", 1, "ac130_fco_getthatguy");
+  add_context_sensative_dialog("ai", "in_sight", 2, "ac130_fco_guymovin");
+  add_context_sensative_dialog("ai", "in_sight", 3, "ac130_fco_getperson");
+  add_context_sensative_dialog("ai", "in_sight", 4, "ac130_fco_guyrunnin");
+  add_context_sensative_dialog("ai", "in_sight", 5, "ac130_fco_gotarunner");
+  add_context_sensative_dialog("ai", "in_sight", 6, "ac130_fco_backonthose");
+  add_context_sensative_dialog("ai", "in_sight", 7, "ac130_fco_gonnagethim");
+  add_context_sensative_dialog("ai", "in_sight", 8, "ac130_fco_personnelthere");
+  add_context_sensative_dialog("ai", "in_sight", 9, "ac130_fco_nailthoseguys");
+  add_context_sensative_dialog("ai", "in_sight", 11, "ac130_fco_lightemup");
+  add_context_sensative_dialog("ai", "in_sight", 12, "ac130_fco_takehimout");
+  add_context_sensative_dialog("ai", "in_sight", 14, "ac130_plt_yeahcleared");
+  add_context_sensative_dialog("ai", "in_sight", 15, "ac130_plt_copysmoke");
+  add_context_sensative_dialog("ai", "in_sight", 16, "ac130_fco_rightthere");
+  add_context_sensative_dialog("ai", "in_sight", 17, "ac130_fco_tracking");
+
+  add_context_sensative_dialog("ai", "wounded_crawl", 0, "ac130_fco_movingagain");
   add_context_sensative_timeout("ai", "wounded_crawl", undefined, 6);
 
-  add_context_sensative_dialog("ai", "wounded_pain", 0, "ac130_fco_doveonground"); // Yeah, he just dove on the ground.	
-  add_context_sensative_dialog("ai", "wounded_pain", 1, "ac130_fco_knockedwind"); // Probably just knocked the wind out of him.
-  add_context_sensative_dialog("ai", "wounded_pain", 2, "ac130_fco_downstillmoving"); // That guy's down but still moving.
-  add_context_sensative_dialog("ai", "wounded_pain", 3, "ac130_fco_gettinbackup"); // He's gettin' back up.
-  add_context_sensative_dialog("ai", "wounded_pain", 4, "ac130_fco_yepstillmoving"); // Yep, that guy�s still moving.
-  add_context_sensative_dialog("ai", "wounded_pain", 5, "ac130_fco_stillmoving"); // He's still moving.
+  add_context_sensative_dialog("ai", "wounded_pain", 0, "ac130_fco_doveonground");
+  add_context_sensative_dialog("ai", "wounded_pain", 1, "ac130_fco_knockedwind");
+  add_context_sensative_dialog("ai", "wounded_pain", 2, "ac130_fco_downstillmoving");
+  add_context_sensative_dialog("ai", "wounded_pain", 3, "ac130_fco_gettinbackup");
+  add_context_sensative_dialog("ai", "wounded_pain", 4, "ac130_fco_yepstillmoving");
+  add_context_sensative_dialog("ai", "wounded_pain", 5, "ac130_fco_stillmoving");
   add_context_sensative_timeout("ai", "wounded_pain", undefined, 12);
 
   add_context_sensative_dialog("weapons", "105mm_ready", 0, "ac130_gnr_gunready1");
@@ -199,39 +196,39 @@ init_sounds() {
   add_context_sensative_dialog("explosion", "secondary", 1, "ac130_tvo_directsecondary2");
   add_context_sensative_timeout("explosion", "secondary", undefined, 7);
 
-  add_context_sensative_dialog("kill", "single", 0, "ac130_plt_gottahurt"); // Ooo that's gotta hurt.
-  add_context_sensative_dialog("kill", "single", 1, "ac130_fco_iseepieces"); // Yeah, good kill. I see lots of little pieces down there.
-  add_context_sensative_dialog("kill", "single", 2, "ac130_fco_oopsiedaisy"); // (chuckling) Oopsie-daisy.
-  add_context_sensative_dialog("kill", "single", 3, "ac130_fco_goodkill"); // Good kill good kill.
-  add_context_sensative_dialog("kill", "single", 4, "ac130_fco_yougothim"); // You got him.
-  add_context_sensative_dialog("kill", "single", 5, "ac130_fco_yougothim2"); // You got him!
-  add_context_sensative_dialog("kill", "single", 6, "ac130_fco_thatsahit"); // That's a hit.
-  add_context_sensative_dialog("kill", "single", 7, "ac130_fco_directhit"); // Direct hit.
-  add_context_sensative_dialog("kill", "single", 8, "ac130_fco_rightontarget"); // Yep, that was right on target.
-  add_context_sensative_dialog("kill", "single", 9, "ac130_fco_okyougothim"); // Ok, you got him. Get back on the other guys.
-  add_context_sensative_dialog("kill", "single", 10, "ac130_fco_within2feet"); // All right you got the guy. That might have been within two feet of him.
+  add_context_sensative_dialog("kill", "single", 0, "ac130_plt_gottahurt");
+  add_context_sensative_dialog("kill", "single", 1, "ac130_fco_iseepieces");
+  add_context_sensative_dialog("kill", "single", 2, "ac130_fco_oopsiedaisy");
+  add_context_sensative_dialog("kill", "single", 3, "ac130_fco_goodkill");
+  add_context_sensative_dialog("kill", "single", 4, "ac130_fco_yougothim");
+  add_context_sensative_dialog("kill", "single", 5, "ac130_fco_yougothim2");
+  add_context_sensative_dialog("kill", "single", 6, "ac130_fco_thatsahit");
+  add_context_sensative_dialog("kill", "single", 7, "ac130_fco_directhit");
+  add_context_sensative_dialog("kill", "single", 8, "ac130_fco_rightontarget");
+  add_context_sensative_dialog("kill", "single", 9, "ac130_fco_okyougothim");
+  add_context_sensative_dialog("kill", "single", 10, "ac130_fco_within2feet");
 
-  add_context_sensative_dialog("kill", "small_group", 0, "ac130_fco_nice"); // (chuckling) Niiiice.
-  add_context_sensative_dialog("kill", "small_group", 1, "ac130_fco_directhits"); // Yeah, direct hits right there.
-  add_context_sensative_dialog("kill", "small_group", 2, "ac130_fco_iseepieces"); // Yeah, good kill. I see lots of little pieces down there.
-  add_context_sensative_dialog("kill", "small_group", 3, "ac130_fco_goodkill"); // Good kill good kill.
-  add_context_sensative_dialog("kill", "small_group", 4, "ac130_fco_yougothim"); // You got him.
-  add_context_sensative_dialog("kill", "small_group", 5, "ac130_fco_yougothim2"); // You got him!
-  add_context_sensative_dialog("kill", "small_group", 6, "ac130_fco_thatsahit"); // That's a hit.
-  add_context_sensative_dialog("kill", "small_group", 7, "ac130_fco_directhit"); // Direct hit.
-  add_context_sensative_dialog("kill", "small_group", 8, "ac130_fco_rightontarget"); // Yep, that was right on target.
-  add_context_sensative_dialog("kill", "small_group", 9, "ac130_fco_okyougothim"); // Ok, you got him. Get back on the other guys.
+  add_context_sensative_dialog("kill", "small_group", 0, "ac130_fco_nice");
+  add_context_sensative_dialog("kill", "small_group", 1, "ac130_fco_directhits");
+  add_context_sensative_dialog("kill", "small_group", 2, "ac130_fco_iseepieces");
+  add_context_sensative_dialog("kill", "small_group", 3, "ac130_fco_goodkill");
+  add_context_sensative_dialog("kill", "small_group", 4, "ac130_fco_yougothim");
+  add_context_sensative_dialog("kill", "small_group", 5, "ac130_fco_yougothim2");
+  add_context_sensative_dialog("kill", "small_group", 6, "ac130_fco_thatsahit");
+  add_context_sensative_dialog("kill", "small_group", 7, "ac130_fco_directhit");
+  add_context_sensative_dialog("kill", "small_group", 8, "ac130_fco_rightontarget");
+  add_context_sensative_dialog("kill", "small_group", 9, "ac130_fco_okyougothim");
 
-  add_context_sensative_dialog("misc", "action", 0, "ac130_plt_scanrange"); // Set scan range.
+  add_context_sensative_dialog("misc", "action", 0, "ac130_plt_scanrange");
   add_context_sensative_timeout("misc", "action", 0, 70);
 
-  add_context_sensative_dialog("misc", "action", 1, "ac130_plt_cleanup"); // Clean up that signal.
+  add_context_sensative_dialog("misc", "action", 1, "ac130_plt_cleanup");
   add_context_sensative_timeout("misc", "action", 1, 80);
 
-  add_context_sensative_dialog("misc", "action", 2, "ac130_plt_targetreset"); // Target reset.
+  add_context_sensative_dialog("misc", "action", 2, "ac130_plt_targetreset");
   add_context_sensative_timeout("misc", "action", 2, 55);
 
-  add_context_sensative_dialog("misc", "action", 3, "ac130_plt_azimuthsweep"); // Recalibrate azimuth sweep angle. Adjust elevation scan.
+  add_context_sensative_dialog("misc", "action", 3, "ac130_plt_azimuthsweep");
   add_context_sensative_timeout("misc", "action", 3, 100);
 }
 
@@ -248,13 +245,11 @@ add_context_sensative_dialog(name1, name2, group, soundAlias) {
   assertex(soundexists(fullSoundAlias), "ERROR: missing soundalias " + fullSoundAlias);
 
   if((!isDefined(level.scr_sound[name1])) || (!isDefined(level.scr_sound[name1][name2])) || (!isDefined(level.scr_sound[name1][name2][group]))) {
-    // creating group for the first time
     level.scr_sound[name1][name2][group] = spawnStruct();
     level.scr_sound[name1][name2][group].played = false;
     level.scr_sound[name1][name2][group].sounds = [];
   }
 
-  //group exists, add the sound to the array
   index = level.scr_sound[name1][name2][group].sounds.size;
   level.scr_sound[name1][name2][group].sounds[index] = soundAlias;
 }
@@ -386,15 +381,14 @@ setAC130Player(player) {
   player thread context_Sensative_Dialog();
   player thread shotFired();
   player thread clouds();
-  //thread maps\_ac130_amb::main();
 
   player thread removeAC130PlayerAfterTime(level.ac130_use_duration * player.killStreakScaler);
   player thread removeAC130PlayerOnDisconnect();
   player thread removeAC130PlayerOnChangeTeams();
   player thread removeAC130PlayerOnSpectate();
-  //player thread removeAC130PlayerOnDeath();
+
   player thread removeAC130PlayerOnCrash();
-  //player thread removeAC130PlayerOnGameEnd();
+
   player thread removeAC130PlayerOnGameCleanup();
 
   thread AC130_AltScene();
@@ -410,7 +404,6 @@ playAC130Effects() {
 }
 
 AC130_AltScene() {
-  // need team check
   foreach(player in level.players) {
     if(player != level.ac130player && player.team == level.ac130player.team)
       player thread setAltSceneObj(level.ac130.cameraModel, "tag_origin", 20);
@@ -521,15 +514,12 @@ removeAC130Player(player, disconnected) {
     }
   }
 
-  // delay before AC130 can be used again
   wait(0.5);
 
   level.ac130.planeModel playSound("veh_ac130_ext_dist_fade");
 
   wait(0.5);
 
-  // TODO: this might already be undefined if the player disconnected... need a better solution.
-  // we could set it to "true" or something... but we'll have to check places it is used for potential issues with that.
   level.ac130player = undefined;
   level.ac130.planeModel hide();
   level.ac130.planeModel stopLoopSound();
@@ -607,7 +597,6 @@ ac130_spawn() {
   ac130model.health = ac130model.maxhealth;
   ac130model thread damageTracker();
 
-  //ac130model linkTo( level.ac130, "tag_player", ( 0, 0, 32 ), ( -25, 0, 0 ) );
   ac130model linkTo(level.ac130, "tag_player", (0, 80, 32), (-25, 0, 0));
   level.ac130.planeModel = ac130model;
   level.ac130.planeModel hide();
@@ -791,7 +780,6 @@ weaponReload(weapon) {
 
   self setWeaponAmmoClip(weapon, 9999);
 
-  // force the reload to stop if we're currently using the weapon
   if(self getCurrentWeapon() == weapon) {
     self takeWeapon(weapon);
     self _giveWeapon(weapon);
@@ -950,8 +938,6 @@ context_Sensative_Dialog_Guy_In_Sight() {
 context_Sensative_Dialog_Guy_In_Sight_Check() {
   prof_begin("AI_in_sight_check");
 
-  //enemies = getaiarray("axis" );
-  //replace with level of enemy team members?
   enemies = [];
 
   for(i = 0; i < enemies.size; i++) {
@@ -1021,7 +1007,6 @@ enemy_killed_thread() {
   for(;;) {
     level waittill("ai_killed", guy);
 
-    // context kill dialog
     thread context_Sensative_Dialog_Kill(guy, level.ac130player);
   }
 }
@@ -1149,7 +1134,6 @@ context_Sensative_Dialog_Filler() {
     if((isDefined(level.radio_in_use)) && (level.radio_in_use == true))
       level waittill("radio_not_in_use");
 
-    // if 3 seconds has passed and nothing has been transmitted then play a sound
     currentTime = getTime();
     if((currentTime - level.lastRadioTransmission) >= 3000) {
       level.lastRadioTransmission = currentTime;
@@ -1180,10 +1164,7 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 
   randGroup = randomint(level.scr_sound[name1][name2].size);
 
-  // if randGroup has already played
   if(level.scr_sound[name1][name2][randGroup].played == true) {
-    //loop through all groups and use the next one that hasn't played yet
-
     for(i = 0; i < level.scr_sound[name1][name2].size; i++) {
       randGroup++;
       if(randGroup >= level.scr_sound[name1][name2].size)
@@ -1194,7 +1175,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
       break;
     }
 
-    // all groups have been played, reset all groups to false and pick a new random one
     if(!isDefined(validGroupNum)) {
       for(i = 0; i < level.scr_sound[name1][name2].size; i++)
         level.scr_sound[name1][name2][i].played = false;
@@ -1215,8 +1195,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 }
 
 context_Sensative_Dialog_Timedout(name1, name2, groupNum) {
-  // dont play this sound if it has a timeout specified and the timeout has not expired
-
   if(!isDefined(level.context_sensative_dialog_timeouts))
     return false;
 
@@ -1264,7 +1242,7 @@ playSoundOverRadio(soundAlias, force_transmit_on_turn, timeout) {
   if(soundPlayed) {
     return;
   }
-  // Dont make the sound wait to be played if force transmit wasn't set to true
+
   if(!force_transmit_on_turn) {
     return;
   }
@@ -1517,7 +1495,6 @@ angel_flare() {
   playFXOnTag(fx_id, rig, "flare_left_bot");
   playFXOnTag(fx_id, rig, "flare_right_bot");
 
-  //rig waittillmatch( "flare_anim", "end" );
   wait(3.0);
 
   stopFXOnTag(fx_id, rig, "flare_left_top");

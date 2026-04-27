@@ -8,7 +8,6 @@
 #using_animtree("vehicles");
 
 main(model, type) {
-  //SNDFILE=vehicle_abrams
   build_template("m1a1", model, type);
   build_localinit(::init_local);
   build_deathmodel("vehicle_m1a1_abrams", "vehicle_m1a1_abrams_dmg");
@@ -25,7 +24,7 @@ main(model, type) {
   build_mainturret();
   build_compassicon("tank");
   build_aianims(::setanims, ::set_vehicle_anims);
-  build_frontarmor(.33); // regens this much of the damage from attacks to the front
+  build_frontarmor(.33);
 }
 
 init_local() {}
@@ -45,26 +44,3 @@ setanims() {
 
   return positions;
 }
-
-/*QUAKED script_vehicle_m1a1_abrams (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_m1a1::main( "vehicle_m1a1_abrams" );
-
-and these lines in your CSV:
-#include,vehicle_m1a1_abrams_m1a1
-sound,vehicle_abrams,vehicle_standard,all_sp
-
-defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1"default:"script_team" "allies"*/
-
-/*QUAKED script_vehicle_m1a1_abrams_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
-
-put this in your GSC:
-maps\_m1a1_player::main( "vehicle_m1a1_abrams" );
-
-and these lines in your CSV:
-#include,vehicle_m1a1_abrams_m1a1_player
-sound,vehicle_abrams,vehicle_standard,all_sp
-
-defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1_player"default:"script_team" "allies"
-*/

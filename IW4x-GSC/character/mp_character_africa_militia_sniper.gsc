@@ -3,9 +3,6 @@
  * Script: character\mp_character_africa_militia_sniper.gsc
 ************************************************************/
 
-// IW5 GSC SOURCE
-// Decompiled by https://github.com/xensik/gsc-tool
-
 main() {
   self setModel("mp_body_opforce_africa_militia_sniper");
   self attach("head_opforce_africa_sniper", "", 1);
