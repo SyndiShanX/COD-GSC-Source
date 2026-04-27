@@ -28,13 +28,13 @@ freeze_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       self.var_91180673 delete();
     }
 
-    playSound(localclientnum, #"hash_68f3e5dbc3422363", self.origin);
+    playSound(localclientnum, #"zmb_trap_acid_start", self.origin);
     audio::playloopat("zmb_trap_acid_loop", self.origin);
     self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[#"freeze_spray"], self, "tag_origin");
     return;
   }
 
-  playSound(localclientnum, #"hash_4da8231bc8767676", self.origin);
+  playSound(localclientnum, #"zmb_trap_acid_end", self.origin);
   audio::stoploopat("zmb_trap_acid_loop", self.origin);
 
   if(isDefined(self.var_91180673)) {
@@ -48,7 +48,7 @@ freeze_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 freeze_trap_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self.n_freeze_trap_death_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_4dbed2be32ca74bc"], self, "tag_stowed_back");
-    playSound(localclientnum, #"hash_4d4c9f8ad239b61f", self.origin);
+    playSound(localclientnum, #"zmb_exp_jib_acid_zombie", self.origin);
     return;
   }
 

@@ -105,7 +105,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   self endon(#"disconnect");
 
   if(newval == 1) {
-    self endon(#"hash_6d7afe7c92e095d8");
+    self endon(#"rumble_gondola_finished");
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
@@ -118,7 +118,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     return;
   }
 
-  self notify(#"hash_6d7afe7c92e095d8");
+  self notify(#"rumble_gondola_finished");
 
   if(isinarray(getlocalplayers(), self)) {
     self playrumbleonentity(localclientnum, "damage_heavy");

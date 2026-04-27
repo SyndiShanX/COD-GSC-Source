@@ -13,7 +13,7 @@ main() {
 function_10156cf8() {
   while(true) {
     level waittill(#"hash_388057c56b2acf4c");
-    playsoundatposition(#"hash_3eeefdf762713cfa", (-7169, -4858, 547));
+    playsoundatposition(#"amb_fire_alarm", (-7169, -4858, 547));
   }
 }
 

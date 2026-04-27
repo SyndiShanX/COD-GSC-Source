@@ -85,8 +85,8 @@ soundloopthink() {
 function_6e0048f1() {
   wait 0.1;
   level waittill(#"poa");
-  audio::playloopat(#"hash_441952a4718e4f31", (-720, 3949, -608));
-  audio::playloopat(#"hash_441952a4718e4f31", (-729, 5238, -608));
-  audio::playloopat(#"hash_441952a4718e4f31", (-1616, 5252, -562));
-  audio::playloopat(#"hash_441952a4718e4f31", (-1602, 3860, -608));
+  audio::playloopat(#"amb_lab_alarm", (-720, 3949, -608));
+  audio::playloopat(#"amb_lab_alarm", (-729, 5238, -608));
+  audio::playloopat(#"amb_lab_alarm", (-1616, 5252, -562));
+  audio::playloopat(#"amb_lab_alarm", (-1602, 3860, -608));
 }
