@@ -35,8 +35,8 @@ init_clientfield() {
 }
 
 init_quests() {
-  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
-  zm_sq::register(#"narrative_room", #"step_1", #"hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
+  zm_sq::register(#"jump_scare", #"step_1", #"jump_scare_quest", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"narrative_room", #"step_1", #"narrative_room_hidden", &function_6f55d670, &function_13c87ace);
   zm_sq::register(#"narrative_room", #"step_2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
 }
 

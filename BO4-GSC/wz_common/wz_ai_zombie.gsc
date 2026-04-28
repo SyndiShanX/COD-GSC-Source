@@ -102,7 +102,7 @@ __main__() {
   if(isDefined(getgametypesetting(#"wzzombiesattackablesenabled")) ? getgametypesetting(#"wzzombiesattackablesenabled") : 0) {
     callback::add_callback(#"hash_70eeb7d813f149b2", &function_cf065988);
     callback::add_callback(#"hash_15858698313c5f32", &function_b0503d98);
-    callback::add_callback(#"hash_6d9bdacc6c29cfa5", &function_68cc8bce);
+    callback::add_callback(#"on_turret_placed", &function_68cc8bce);
     callback::add_callback(#"on_turret_destroyed", &on_turret_destroyed);
     turretweapon = getweapon(#"gun_ultimate_turret");
 
@@ -1847,8 +1847,8 @@ function_cc9c6a13(state) {
 
       break;
     case 5:
-      self function_d1e55248(#"hash_5780e28b762b831a", 0);
-      val::reset(#"hash_5780e28b762b831a", "ignoreall");
+      self function_d1e55248(#"ai_cleanup_state", 0);
+      val::reset(#"ai_cleanup_state", "ignoreall");
       self pathmode("move allowed");
       break;
     default:
@@ -1893,8 +1893,8 @@ function_b8eff92a(state) {
 
       break;
     case 5:
-      self function_d1e55248(#"hash_5780e28b762b831a", !self.isonnavmesh);
-      val::set(#"hash_5780e28b762b831a", "ignoreall", 1);
+      self function_d1e55248(#"ai_cleanup_state", !self.isonnavmesh);
+      val::set(#"ai_cleanup_state", "ignoreall", 1);
 
       if(!self.isonnavmesh) {
         self pathmode("dont move", 1);

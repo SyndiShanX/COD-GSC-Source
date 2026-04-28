@@ -27,8 +27,8 @@ __init__() {
 
   assert(level.wzhighvaluetargets <= 8);
   clientfield::register("allplayers", "ishighvaluetarget", 16000, 1, "int");
-  callback::add_callback(#"hash_405e46788e83af41", &update_targets);
-  callback::add_callback(#"hash_7912e21750e4010d", &update_targets);
+  callback::add_callback(#"death_circle_start", &update_targets);
+  callback::add_callback(#"death_circle_locked", &update_targets);
   callback::add_callback(#"on_player_downed", &function_9141be4e);
   callback::on_player_killed_with_params(&function_3f8e4156);
   callback::on_disconnect(&on_player_disconnect);

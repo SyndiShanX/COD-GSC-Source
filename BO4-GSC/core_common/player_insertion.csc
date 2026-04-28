@@ -95,7 +95,7 @@ function_6c4ae982(localclientnum) {
 
       if(wormhole_fx === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        playSound(localclientnum, #"hash_37244e4f8de40dd5");
+        playSound(localclientnum, #"evt_portal_spawn");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_reveal");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_sprites");
       } else if(wormhole_fx === 0 && var_d5823792) {

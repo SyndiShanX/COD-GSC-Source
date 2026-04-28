@@ -91,7 +91,7 @@ function_e5f05a92() {
     waitframe(1);
   }
 
-  level notify(#"hash_576f1c2e68b31710");
+  level notify(#"players_start_clear");
   mdl_gate movez(100 * -1, 0.5);
   mdl_gate playSound(#"hash_7f2e66132114e68c");
   wait 0.5;

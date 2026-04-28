@@ -338,7 +338,7 @@ function_e3eaa42b() {
 }
 
 function_e7b80b1e(var_72284260) {
-  self endon(#"hash_382a628dad5ecbb5");
+  self endon(#"stop_follow_chain");
   assert(isDefined(var_72284260));
 
   if(!isDefined(var_72284260.target) && !isDefined(var_72284260.script_bot_chain_src)) {
@@ -639,8 +639,8 @@ function_cf70f2fe(startstruct, resuming = 0) {
   goalent = self isinvehicle() ? self getvehicleoccupied() : self;
   goalent endon(#"death");
   self endon(#"death");
-  self notify(#"hash_382a628dad5ecbb5");
-  self endon(#"hash_382a628dad5ecbb5");
+  self notify(#"stop_follow_chain");
+  self endon(#"stop_follow_chain");
   debugstart = startstruct;
 
   if(resuming && isDefined(self.bot.var_53ffa4c4)) {
@@ -752,7 +752,7 @@ function_73d1cfe6() {
     self.bot.var_53ffa4c4 = undefined;
   }
 
-  self notify(#"hash_382a628dad5ecbb5");
+  self notify(#"stop_follow_chain");
 }
 
 function_58b429fb() {

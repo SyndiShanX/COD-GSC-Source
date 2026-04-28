@@ -960,7 +960,7 @@ class csceneobject {
       });
     }
 
-    level notify(#"hash_4d265bbfcf0b6b4b", {
+    level notify(#"damage_threshold_scene", {
       #str_shot: s_shot.name, #str_scene: _o_scene._str_name
     });
   }
@@ -1060,15 +1060,15 @@ class csceneobject {
 
     if(var_f2059ab8 <= var_520e99b5) {
       _e.var_68ade67d = 1;
-      _e notify(#"hash_4d265bbfcf0b6b4b", {
+      _e notify(#"damage_threshold_scene", {
         #str_shot: s_shot.name, #str_scene: _o_scene._str_name, #var_37fa9b04: var_37fa9b04, #var_859dbb7c: var_f2059ab8, #var_d2b5cb6a: var_520e99b5
       });
-      level notify(#"hash_4d265bbfcf0b6b4b", {
+      level notify(#"damage_threshold_scene", {
         #e_damaged: _e, #str_shot: s_shot.name, #str_scene: _o_scene._str_name, #var_37fa9b04: var_37fa9b04, #var_859dbb7c: var_f2059ab8, #var_d2b5cb6a: var_520e99b5
       });
 
       if(isDefined(_o_scene._e_root)) {
-        _o_scene._e_root notify(#"hash_4d265bbfcf0b6b4b", {
+        _o_scene._e_root notify(#"damage_threshold_scene", {
           #e_damaged: _e, #str_shot: s_shot.name, #str_scene: _o_scene._str_name, #var_37fa9b04: var_37fa9b04, #var_859dbb7c: var_f2059ab8, #var_d2b5cb6a: var_520e99b5
         });
       }
@@ -1198,7 +1198,7 @@ class csceneobject {
   function function_2035b6d6(_e) {
     _e notify(#"cleanupdelete");
     _e endon(#"death", #"preparedelete", #"cleanupdelete");
-    s_waitresult = _o_scene waittilltimeout(0.15, #"hash_60adeaccbb565546", #"scene_stop", #"scene_done", #"scene_skip_completed");
+    s_waitresult = _o_scene waittilltimeout(0.15, #"new_shot_ready", #"scene_stop", #"scene_done", #"scene_skip_completed");
     _e thread scene::synced_delete(_o_scene._str_name);
   }
 
@@ -1207,7 +1207,7 @@ class csceneobject {
     _e endon(#"death", #"prepareshow", #"preparehide", #"cleanuphide");
 
     if(_o_scene._str_mode !== "init") {
-      _o_scene waittilltimeout(0.15, #"hash_60adeaccbb565546", #"scene_stop", #"scene_done", #"scene_skip_completed");
+      _o_scene waittilltimeout(0.15, #"new_shot_ready", #"scene_stop", #"scene_done", #"scene_skip_completed");
     }
 
     _e val::set(#"scene", "hide", 2);
@@ -2724,7 +2724,7 @@ class cscene {
   function function_ab0c6edb() {
     self endon(#"death", #"scene_stop", #"scene_done", #"scene_skip_completed");
     waitframe(1);
-    self notify(#"hash_60adeaccbb565546");
+    self notify(#"new_shot_ready");
   }
 
   function play(str_shot = "play", a_ents, b_testing = 0, str_mode = "") {

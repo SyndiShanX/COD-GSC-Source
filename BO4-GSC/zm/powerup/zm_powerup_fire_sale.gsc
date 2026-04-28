@@ -234,7 +234,7 @@ sndfiresalemusic_stop() {
 
   foreach(struct in array) {
     if(isDefined(struct.sndent)) {
-      struct.sndent playSound(#"hash_332ced69176833bb");
+      struct.sndent playSound(#"mus_fire_sale_end");
       waitframe(1);
       struct.sndent delete();
       struct.sndent = undefined;

@@ -308,7 +308,7 @@ round_spawning() {
     }
 
     if(var_3cafeff5) {
-      wait isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+      wait isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
       continue;
     }
 
@@ -968,16 +968,16 @@ get_zombie_spawn_delay(n_round) {
 
   switch (n_player_count) {
     case 1:
-      n_delay = zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+      n_delay = zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
       break;
     case 2:
-      n_delay = zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5") * 0.75;
+      n_delay = zombie_utility::get_zombie_var(#"zombie_spawn_delay_base") * 0.75;
       break;
     case 3:
-      n_delay = zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5") * 0.445;
+      n_delay = zombie_utility::get_zombie_var(#"zombie_spawn_delay_base") * 0.445;
       break;
     case 4:
-      n_delay = zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5") * 0.335;
+      n_delay = zombie_utility::get_zombie_var(#"zombie_spawn_delay_base") * 0.335;
       break;
   }
 

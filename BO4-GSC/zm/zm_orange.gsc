@@ -499,7 +499,7 @@ function_1f712bb1() {
 function_19a4e7cf(n_offset, var_e503dc79) {
   var_ef61bf9 = util::spawn_model("tag_origin", level.chests[var_e503dc79].origin + (0, 0, n_offset - 75));
   var_ef61bf9.angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-  playFXOnTag(level._effect[#"hash_572a14944ad27060"], var_ef61bf9, "tag_origin");
+  playFXOnTag(level._effect[#"lght_marker_override"], var_ef61bf9, "tag_origin");
   return var_ef61bf9;
 }
 
@@ -595,7 +595,7 @@ function_681c28c9() {
   level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
   level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
   level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
-  level._effect[#"hash_572a14944ad27060"] = #"zombie/fx_weapon_box_marker_zmb";
+  level._effect[#"lght_marker_override"] = #"zombie/fx_weapon_box_marker_zmb";
 }
 
 function_30829a12() {

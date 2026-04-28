@@ -1251,7 +1251,7 @@ function_88d65504(axe, var_7900b267, move_pos) {
 
   if(trace[#"fraction"] < 1) {
     hit_ent = trace[#"entity"];
-    level notify(#"hash_435816ec8f13c19b", {
+    level notify(#"gladiator_axe_hit", {
       #var_f1445bd6: trace, #ai_gladiator: self, #mdl_axe: axe, #hit_ent: hit_ent
     });
 

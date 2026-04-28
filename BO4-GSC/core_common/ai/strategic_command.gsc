@@ -1363,11 +1363,11 @@ function_f867cce0(missioncomponent, commanderteam) {
   type = missioncomponent.scriptbundlename;
 
   switch (type) {
-    case # "hash_6e9081699001bcd9":
+    case # "missioncomponent_destroy":
       break;
     case # "hash_3bf68fbcb5c53b6c":
       break;
-    case # "hash_4984fd4b0ba666a2":
+    case # "missioncomponent_goto":
       break;
     default:
       return false;

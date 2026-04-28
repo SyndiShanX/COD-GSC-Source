@@ -26,11 +26,11 @@ enable() {
 }
 
 disable() {
-  self notify(#"hash_1980fe24a98adbe4");
+  self notify(#"zm_bgb_phantom_reload_end");
 }
 
 function_44514728() {
-  self endon(#"hash_1980fe24a98adbe4");
+  self endon(#"zm_bgb_phantom_reload_end");
 
   while(true) {
     self waittill(#"reload_start");

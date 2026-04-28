@@ -255,7 +255,7 @@ death_check_for_challenge_updates(e_attacker) {
     e_attacker zm_stats::function_c0c6ab19(#"explosions");
     e_attacker contracts::increment_zm_contract(#"contract_zm_explosive_kills");
 
-    if(w_damage == getweapon(#"hash_790eab2239858f5d")) {
+    if(w_damage == getweapon(#"shotgun_trenchgun_t8_upgraded_grenade")) {
       e_attacker shotgun_kill();
     }
   }
@@ -356,7 +356,7 @@ death_check_for_challenge_updates(e_attacker) {
     e_attacker stats::inc_stat(#"item_stats", w_damage.name, #"instakills", #"statvalue", 1);
   }
 
-  if(w_damage.rootweapon.name == #"smg_handling_t8_dw" || w_damage.rootweapon.name == #"hash_1aea58adc540688c" || w_damage.rootweapon.name == #"smg_handling_t8_upgraded_dw" || w_damage.rootweapon.name == #"hash_3b19c698ebc05141") {
+  if(w_damage.rootweapon.name == #"smg_handling_t8_dw" || w_damage.rootweapon.name == #"smg_handling_t8_lh" || w_damage.rootweapon.name == #"smg_handling_t8_upgraded_dw" || w_damage.rootweapon.name == #"smg_handling_t8_upgraded_lh") {
     e_attacker debug_print("<dev string:x434>");
 
     e_attacker zm_stats::increment_challenge_stat(#"hash_2a72be53205a8db3");
@@ -485,12 +485,12 @@ death_check_for_challenge_updates(e_attacker) {
       return;
     }
 
-    if(w_damage == getweapon(#"hero_hammer_lv1") || w_damage == getweapon(#"hero_hammer_lv2") || w_damage == getweapon(#"hero_hammer_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv1") || w_damage == getweapon(#"hero_minigun_t8_lv2") || w_damage == getweapon(#"hero_minigun_t8_lv3") || w_damage == getweapon(#"hash_492e530f9862f6cc") || w_damage == getweapon(#"hash_628d99860c78650f")) {
+    if(w_damage == getweapon(#"hero_hammer_lv1") || w_damage == getweapon(#"hero_hammer_lv2") || w_damage == getweapon(#"hero_hammer_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv1") || w_damage == getweapon(#"hero_minigun_t8_lv2") || w_damage == getweapon(#"hero_minigun_t8_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv2_grenade") || w_damage == getweapon(#"hero_minigun_t8_lv3_grenade")) {
       e_attacker debug_print("<dev string:x799>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_3e5b9b81d573d194");
 
-      if(w_damage == getweapon(#"hero_hammer_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv3") || w_damage == getweapon(#"hash_628d99860c78650f") || w_damage == getweapon(#"hash_492e530f9862f6cc") && e_attacker hasweapon(getweapon(#"hero_minigun_t8_lv3"))) {
+      if(w_damage == getweapon(#"hero_hammer_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv3") || w_damage == getweapon(#"hero_minigun_t8_lv3_grenade") || w_damage == getweapon(#"hero_minigun_t8_lv2_grenade") && e_attacker hasweapon(getweapon(#"hero_minigun_t8_lv3"))) {
         e_attacker debug_print("<dev string:x75e>");
 
         e_attacker zm_stats::increment_challenge_stat(#"maxed_special_weapon_kills");
@@ -874,7 +874,7 @@ function_a3cd4521() {
     var_a9d7bd6++;
   }
 
-  if(self stats::function_af5584ca(#"hash_3ebae93ea866519c") == 3) {
+  if(self stats::function_af5584ca(#"gum_gobbler_powerups_grabbed") == 3) {
     var_a9d7bd6++;
   }
 

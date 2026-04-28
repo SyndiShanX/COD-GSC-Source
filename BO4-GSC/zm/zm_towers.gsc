@@ -110,7 +110,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"pickup_dung", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_2bbcb9e09bd7bb26", 1, 1, "counter");
   clientfield::register("scriptmover", "entry_gate_dust", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_16b9e3d69cb7a017", 1, 1, "int");
+  clientfield::register("world", "" + #"boss_battle_teleport", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_42cc4bf5e47478c5", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_3b746cf6eec416b2", 1, 1, "int");
   clientfield::register("world", "" + #"hash_584e8f7433246444", 1, 1, "int");
@@ -144,7 +144,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "ra_eyes_beam_fire", 1, 1, "int");
   clientfield::register("scriptmover", "ra_rooftop_eyes_beam_fire", 1, 1, "int");
   clientfield::register("world", "" + #"hash_57c08e5f4792690c", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_440f23773f551a48", 1, 1, "int");
+  clientfield::register("world", "" + #"force_stream_glyph", 1, 1, "int");
   clientfield::register("world", "" + #"hash_4e5e2b411c997804", 1, 1, "int");
   clientfield::register("toplayer", "" + #"maelstrom_initiate", 1, 1, "counter");
   clientfield::register("world", "" + #"maelstrom_initiate_fx", 1, 1, "int");
@@ -154,11 +154,11 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"maelstrom_discharge", 1, 1, "counter");
   clientfield::register("actor", "" + #"maelstrom_death", 1, 1, "counter");
   clientfield::register("toplayer", "" + #"maelstrom_storm", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_182c03ff2a21c07c", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"maelstrom_storm_change", 1, 1, "counter");
   clientfield::register("toplayer", "" + #"maelstrom_ending", 1, 1, "int");
   clientfield::register("world", "" + #"hash_1f09a5290d31eb37", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"hash_63e758aa5387132a", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_23ba00d2f804acc2", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"defend_key_glint", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_2407f687f7d24a83", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_5afda864f8b64f5c", 1, 1, "int");
   clientfield::register("world", "" + #"hash_39e6b14b9e5b0f3d", 1, 1, "int");
@@ -573,7 +573,7 @@ init_announcer() {
   zm_audio::sndannouncervoxadd(#"hash_43b0860b33146764", #"hash_2cef54d67ed44093");
   zm_audio::sndannouncervoxadd(#"hash_c8182d04e7f43c9", #"hash_5850b57ef4133eea");
   zm_audio::sndannouncervoxadd(#"hash_77080de04389f4df", #"hash_33d02faecbf4ced5");
-  zm_audio::sndannouncervoxadd(#"hash_1b8dd2e5977116cb", #"hash_58fcefd43425141f");
+  zm_audio::sndannouncervoxadd(#"stage_1_end", #"hash_58fcefd43425141f");
   zm_audio::sndannouncervoxadd(#"hash_436d318af3fd771f", #"hash_5e7804dc338f11b6");
   zm_audio::sndannouncervoxadd(#"hash_62c7007e0bc4eab6", #"hash_621cc4c04ffd6c81");
 }
@@ -1063,12 +1063,12 @@ function_8d6c5e6e(cmd) {
       level.s_remus.var_12b6c455 = 11;
       level thread zm_towers_narrative::function_d6e81c01(#"hash_49fb781467abd24c", #"hash_634818c98eff6728");
       break;
-    case # "hash_63968ec6789bd654":
+    case # "remus_wall":
       mdl_wall = level.s_remus.a_objects[14];
       mdl_wall scene::play(#"p8_fxanim_zm_towers_wall_2_bundle", mdl_wall);
       break;
-    case # "hash_36c98a2b5fcf250c":
-      level flag::set(#"hash_6205682540170b8");
+    case # "arena_rock_on":
+      level flag::set(#"arena_rock_unlocked");
       level clientfield::set("<dev string:xe1d>" + #"hash_39e6b14b9e5b0f3d", 1);
       break;
     case # "hash_5f00c356627b87c":
@@ -1098,7 +1098,7 @@ function_8d6c5e6e(cmd) {
       }
 
       break;
-    case # "hash_50d92ca3c6c7c2a8":
+    case # "super_open_sesame":
       level thread function_4110a06f();
       return 1;
     case # "hash_3ce58f31f72a510f":

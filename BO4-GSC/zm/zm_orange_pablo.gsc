@@ -154,13 +154,13 @@ pablo_intro() {
     if(zm_hms_util::any_player_in_zone("lighthouse_level_4") && level.pablo_npc zm_audio::can_speak()) {
       str_alias = #"hash_61f15b67b89a32a7";
 
-      if(level flag::get(#"hash_3310bb35ce396e49")) {
+      if(level flag::get(#"pap_rock_picked_up")) {
         str_alias = #"hash_921478d69bafc7c";
       }
 
       level function_e44c7c0c(str_alias);
 
-      if(!level flag::get(#"hash_3310bb35ce396e49")) {
+      if(!level flag::get(#"pap_rock_picked_up")) {
         a_players = zm_zonemgr::get_players_in_zone("lighthouse_level_4", 1);
         player = zm_hms_util::function_3815943c(a_players);
 

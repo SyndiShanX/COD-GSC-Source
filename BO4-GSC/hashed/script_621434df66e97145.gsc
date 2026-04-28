@@ -69,7 +69,7 @@ init_weapons_locker() {
   level flag::wait_till(#"hash_25d9ccebd2bdecd9");
   e_door_l = getent("e_sarge_l", "targetname");
   e_door_r = getent("e_sarge_r", "targetname");
-  e_door_l playSound(#"hash_75410a9cb6086f34");
+  e_door_l playSound(#"evt_weapon_locker");
   e_door_l rotateyaw(185, 0.85, 0.1, 0.1);
   e_door_r rotateyaw(-220, 1, 0.05, 0.05);
   level.s_weapons_locker zm_unitrigger::create(&function_9d485d13, 64);
@@ -149,7 +149,7 @@ function_6c029b7() {
         continue;
       }
 
-      self notify(#"hash_41d1d9f238b43a7");
+      self notify(#"shower_trap_activated");
       self.e_activator = e_who;
       level.s_shower_trap.activated_by_player = e_who;
 
@@ -166,7 +166,7 @@ function_79eec899() {
   open_panels(level.s_shower_trap.a_s_panels);
 
   while(true) {
-    self waittill(#"hash_41d1d9f238b43a7");
+    self waittill(#"shower_trap_activated");
     function_91ecec97(level.s_shower_trap.a_e_lights, "p8_zm_off_trap_switch_light_red_on");
     level.s_shower_trap.var_6b64b967 = 1;
     e_who = self.e_activator;
@@ -222,7 +222,7 @@ function_a77f3804(e_activator, e_volume) {
   }
 
   self clientfield::set("shower_trap_death_fx", 1);
-  level notify(#"hash_336bf8053ce21208", {
+  level notify(#"shower_trap_kill", {
     #e_player: e_activator
   });
   wait randomfloatrange(0.25, 0.5);
@@ -585,7 +585,7 @@ function_6facfabc() {
         continue;
       }
 
-      self notify(#"hash_5a7f89c0b12d9f27");
+      self notify(#"spinning_trap_activated");
       self.e_activator = e_who;
       level.s_spinning_trap.activated_by_player = e_who;
 
@@ -602,7 +602,7 @@ function_7fffc105() {
   open_panels(level.s_spinning_trap.a_s_panels);
 
   while(true) {
-    self waittill(#"hash_5a7f89c0b12d9f27");
+    self waittill(#"spinning_trap_activated");
     function_91ecec97(level.s_spinning_trap.a_e_lights, "p8_zm_off_trap_switch_light_red_on");
     level.s_spinning_trap.var_6b64b967 = 1;
     e_who = self.e_activator;
@@ -683,7 +683,7 @@ function_7bd8cfde(e_activator, s_trap) {
     s_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
   }
 
-  level notify(#"hash_63be45d89436088", {
+  level notify(#"spinning_trap_kill", {
     #e_player: e_activator
   });
 
@@ -712,14 +712,14 @@ function_7bd8cfde(e_activator, s_trap) {
       self function_63e5e387(s_trap);
     }
 
-    level notify(#"hash_148b3ce521088846", {
+    level notify(#"spin_trap_kill", {
       #e_player: e_activator
     });
     self dodamage(self.health + 1000, self.origin, s_trap.e_volume);
     return;
   }
 
-  level notify(#"hash_148b3ce521088846", {
+  level notify(#"spin_trap_kill", {
     #e_player: e_activator
   });
   self dodamage(self.health + 1000, self.origin, s_trap.e_volume);

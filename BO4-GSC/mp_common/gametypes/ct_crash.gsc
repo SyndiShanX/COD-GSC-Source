@@ -614,7 +614,7 @@ function_5f17f29() {
   e_player = getplayers()[0];
 
   while(true) {
-    level waittill(#"hash_4467c8999d018835");
+    level waittill(#"soldier_rescued");
     e_player thread ct_utils::function_785eb2ca();
   }
 }

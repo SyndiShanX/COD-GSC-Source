@@ -360,7 +360,7 @@ function_abd3bc1a() {
   self flagsys::clear(#"hash_287397edba8966f9");
   self val::set(#"player_insertion", "freezecontrols", 1);
   self val::set(#"player_insertion", "disablegadgets", 1);
-  self val::set(#"hash_37b74f87edd2df20", "show_hud", 0);
+  self val::set(#"player_insertion_hud", "show_hud", 0);
   self val::set(#"hash_ce6d3e6ece6e18d", "show_weapon_hud", 0);
   self death_circle::function_b57e3cde(1);
 
@@ -385,7 +385,7 @@ function_baf204f5() {
 function_7a4c1517() {
   self val::reset(#"player_insertion", "freezecontrols");
   self val::reset(#"player_insertion", "disablegadgets");
-  self val::reset(#"hash_37b74f87edd2df20", "show_hud");
+  self val::reset(#"player_insertion_hud", "show_hud");
   self val::reset(#"hash_ce6d3e6ece6e18d", "show_weapon_hud");
 }
 
@@ -560,7 +560,7 @@ function_35742117(insertion) {
 
     player setorigin(player.resurrect_origin);
     player setplayerangles(player.resurrect_angles);
-    level callback::callback(#"hash_74b19f5972b0ee52", {
+    level callback::callback(#"player_insertion_drop", {
       #player: player
     });
   }
@@ -759,7 +759,7 @@ function_adc8cff4(reinserting = 0) {
   self val::set(#"player_insertion", "disable_oob", 0);
   self clientfield::set_to_player("realtime_multiplay", 1);
   self thread function_7bf9c38f(reinserting);
-  level callback::callback(#"hash_74b19f5972b0ee52", {
+  level callback::callback(#"player_insertion_drop", {
     #player: self
   });
 }
@@ -1005,7 +1005,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
-    player playrumbleonentity(#"hash_233b436a07cd091a");
+    player playrumbleonentity(#"infiltration_camera_rumble");
   }
 
   wait 0.2;
@@ -1023,7 +1023,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
       continue;
     }
 
-    player playrumbleonentity(#"hash_62ba49f452a20378");
+    player playrumbleonentity(#"infiltration_rumble_lg");
   }
 
   wait 2;
@@ -2040,8 +2040,8 @@ function_2d683dc2(aircraft) {
 
   self thread player_freefall(aircraft);
   self hide_postfx();
-  self stoprumble(#"hash_233b436a07cd091a");
-  level callback::callback(#"hash_74b19f5972b0ee52", {
+  self stoprumble(#"infiltration_camera_rumble");
+  level callback::callback(#"player_insertion_drop", {
     #player: self
   });
 }
@@ -2094,7 +2094,7 @@ function_4630bf0a() {
 function_4eb0c560() {
   [[level.wingsuit_hud]] - > close(self);
   self val::reset(#"player_insertion", "disablegadgets");
-  self val::reset(#"hash_37b74f87edd2df20", "show_hud");
+  self val::reset(#"player_insertion_hud", "show_hud");
   self val::reset(#"hash_ce6d3e6ece6e18d", "show_weapon_hud");
   self setclientuivisibilityflag("weapon_hud_visible", 1);
 

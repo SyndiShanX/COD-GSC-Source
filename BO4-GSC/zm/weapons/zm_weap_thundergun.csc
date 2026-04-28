@@ -16,7 +16,7 @@ autoexec __init__system__() {
 __init__() {
   level.w_thundergun = getweapon(#"thundergun");
   level.w_thundergun_upgraded = getweapon(#"thundergun_upgraded");
-  clientfield::register("actor", "" + #"hash_7549405bcfcbcfb", 24000, 1, "counter", &function_5059c81b, 0, 0);
+  clientfield::register("actor", "" + #"thundergun_impact_fx", 24000, 1, "counter", &thundergun_impact_fx, 0, 0);
 }
 
 __main__() {
@@ -36,7 +36,7 @@ thundergun_fx_fire(localclientnum) {
   playSound(localclientnum, #"wpn_thunder_breath", (0, 0, 0));
 }
 
-function_5059c81b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+thundergun_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self)) {
     v_fx_origin = self gettagorigin(self zm_utility::function_467efa7b(1));
 

@@ -41,8 +41,8 @@
 #namespace zm_orange_ee_misc;
 
 preload() {
-  clientfield::register("toplayer", "" + #"hash_12114abc7407913b", 24000, 1, "counter");
-  clientfield::register("toplayer", "" + #"hash_5e38e846ce88405b", 24000, 1, "counter");
+  clientfield::register("toplayer", "" + #"jump_scare_lighthouse", 24000, 1, "counter");
+  clientfield::register("toplayer", "" + #"jump_scare_note", 24000, 1, "counter");
 }
 
 main() {
@@ -52,8 +52,8 @@ main() {
   level flag::init("facility_flinger_fixed");
   level flag::init(#"edge_launched");
   level flag::init(#"edge_of_the_world_complete");
-  zm_sq::register(#"hash_12114abc7407913b", #"step_1", #"hash_5986bb2ab1879d84", &function_30ed45c9, &function_960f84d7);
-  zm_sq::register(#"hash_5e38e846ce88405b", #"step_1", #"hash_2572fbc6efde23a8", &function_48a634b7, &function_ee63b8a7);
+  zm_sq::register(#"jump_scare_lighthouse", #"step_1", #"hash_5986bb2ab1879d84", &function_30ed45c9, &function_960f84d7);
+  zm_sq::register(#"jump_scare_note", #"step_1", #"hash_2572fbc6efde23a8", &function_48a634b7, &function_ee63b8a7);
   zm_sq::register(#"hash_729a1e4eb041be9b", #"step_1", #"trinket_quest", &trinket_quest, &trinket_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_1", #"edge_quest", &edge_quest, &edge_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_2", #"edge_quest", &function_8bc27fd3, &security_balcony_time_);
@@ -64,7 +64,7 @@ main() {
   zm_sq::register(#"hash_3e4c279707a5abe5", #"step_1", #"hash_3e4c279707a5abe5", &function_594f2c26, &function_5c6d5a0e);
   zm_sq::start(#"hash_66685502a7dee586", !zm_utility::is_standard());
   zm_sq::start(#"hash_3e4c279707a5abe5", !zm_utility::is_standard());
-  level flag::init(#"hash_431a5026505d71aa");
+  level flag::init(#"hidden_song_2_activated");
   function_779045();
 
   if(zm_utility::is_ee_enabled()) {
@@ -76,8 +76,8 @@ main() {
   level flag::wait_till(#"all_players_spawned");
 
   if(zm_utility::is_ee_enabled()) {
-    zm_sq::start(#"hash_12114abc7407913b");
-    zm_sq::start(#"hash_5e38e846ce88405b");
+    zm_sq::start(#"jump_scare_lighthouse");
+    zm_sq::start(#"jump_scare_note");
     zm_sq::start(#"hash_729a1e4eb041be9b");
     level thread function_716974ba();
     level thread sq_glasses();
@@ -570,8 +570,8 @@ function_30ed45c9(var_a276c861) {
 }
 
 function_dbb49281() {
-  self notify(#"hash_2ca5123c06ec42f0");
-  self endon(#"disconnect", #"hash_2ca5123c06ec42f0");
+  self notify(#"track_player_eyes_lighthouse");
+  self endon(#"disconnect", #"track_player_eyes_lighthouse");
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_scare_lighthouse", "targetname");
 
@@ -585,7 +585,7 @@ function_dbb49281() {
 
     if(n_time >= 30 && self adsButtonPressed() && (self zm_zonemgr::entity_in_zone("main_entrance") || self zm_zonemgr::entity_in_zone("outer_walkway") || self zm_zonemgr::entity_in_zone("loading_platform")) && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + #"hash_12114abc7407913b", 1);
+      self clientfield::increment_to_player("" + #"jump_scare_lighthouse", 1);
       j_time = 0;
 
       while(self adsButtonPressed() && j_time < 5) {
@@ -611,8 +611,8 @@ function_48a634b7(var_a276c861) {
 }
 
 function_b6b24d3a() {
-  self notify(#"hash_7bbb3fe051fd6c74");
-  self endon(#"disconnect", #"hash_7bbb3fe051fd6c74");
+  self notify(#"track_player_eyes_note");
+  self endon(#"disconnect", #"track_player_eyes_note");
   var_11dc5e9d = 144;
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_scare_note", "targetname");
@@ -627,7 +627,7 @@ function_b6b24d3a() {
 
     if(n_time >= 30 && distance(self.origin, var_616e76c5.origin) <= var_11dc5e9d && self zm_zonemgr::entity_in_zone("forecastle") && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self) && self getstance() === "crouch") {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + #"hash_5e38e846ce88405b", 1);
+      self clientfield::increment_to_player("" + #"jump_scare_note", 1);
       b_saw_the_wth = 1;
     }
 
@@ -750,7 +750,7 @@ function_1b0e51b5() {
       self forceoffhandend();
     }
 
-    self notify(#"hash_53bfad7081c69dee");
+    self notify(#"water_player_freeze_broken");
     self zm_bgb_anywhere_but_here::activation(0);
 
     if(getplayers().size == 1) {
@@ -775,7 +775,7 @@ edge_exit_watcher() {
       self forceoffhandend();
     }
 
-    self notify(#"hash_53bfad7081c69dee");
+    self notify(#"water_player_freeze_broken");
     self zm_bgb_anywhere_but_here::activation(0);
 
     if(getplayers().size == 1) {
@@ -830,9 +830,9 @@ hidden_song_2() {
   s_location = struct::spawn((-528, 1196, 320));
   s_unitrigger = s_location zm_unitrigger::create("", 32);
   s_location thread function_cabcfdd2();
-  waitresult = level flag::wait_till_any(array(#"hash_778a2b8282d704f", #"hash_431a5026505d71aa"));
+  waitresult = level flag::wait_till_any(array(#"hash_778a2b8282d704f", #"hidden_song_2_activated"));
 
-  if(waitresult._notify === #"hash_431a5026505d71aa") {
+  if(waitresult._notify === #"hidden_song_2_activated") {
     if(level.musicsystem.currentplaytype < 4) {
       level thread zm_audio::sndmusicsystem_stopandflush();
       waitframe(1);
@@ -845,7 +845,7 @@ hidden_song_2() {
 
 function_cabcfdd2() {
   level endon(#"hash_778a2b8282d704f");
-  level endon(#"hash_431a5026505d71aa");
+  level endon(#"hidden_song_2_activated");
   var_b3ee22cc = 0;
 
   while(true) {
@@ -857,7 +857,7 @@ function_cabcfdd2() {
     if(var_b3ee22cc >= 3) {
       playsoundatposition(#"hash_4d9caefa6e6dd2e7", self.origin);
       wait 3;
-      level flag::set(#"hash_431a5026505d71aa");
+      level flag::set(#"hidden_song_2_activated");
     }
   }
 }

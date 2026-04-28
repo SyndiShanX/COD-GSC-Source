@@ -436,7 +436,7 @@ function_738575c4(takeoldweapon, givestreak = 1) {
 
 function_d2f0197a() {
   if(isDefined(self.pers[#"dynamic_loadout"].armor)) {
-    self addtalent(#"hash_6be738527a4213aa");
+    self addtalent(#"gear_armor_mp");
     armor = self.pers[#"dynamic_loadout"].armor;
     self function_52630bb(armor);
     self armor::set_armor(armor.armor, armor.armor, 0, armor.var_767b7337, armor.var_782dbf79, armor.var_673a16ad, armor.var_741010b5, 1, 1, 1);
@@ -445,9 +445,9 @@ function_d2f0197a() {
 
 function_659633d8(var_31e314e8) {
   switch (var_31e314e8.name) {
-    case # "hash_16cfc7f70dbd8712":
+    case # "gear_armor_tier_two":
       return # "specialty_armor_tier_two";
-    case # "hash_39045b0020cc3e00":
+    case # "gear_armor_tier_three":
       return # "specialty_armor_tier_three";
     default:
       return # "specialty_armor";
@@ -460,9 +460,9 @@ function_51a2c3b3(var_31e314e8) {
   }
 
   switch (var_31e314e8.name) {
-    case # "hash_16cfc7f70dbd8712":
+    case # "gear_armor_tier_two":
       playFXOnTag(#"hash_56c8182de62c1c6", self, "j_spineupper");
-    case # "hash_39045b0020cc3e00":
+    case # "gear_armor_tier_three":
       playFXOnTag(#"hash_3c6a01bd4394d4f3", self, "j_spineupper");
     default:
       playFXOnTag(#"hash_4a955131370a3720", self, "j_spineupper");
@@ -542,7 +542,7 @@ function_898839b4() {
     }
   }
 
-  return getweapon(#"hash_1773b576c62a506");
+  return getweapon(#"bare_hands_bounty");
 }
 
 function_c1932ad3(weap, data) {

@@ -283,7 +283,7 @@ slot_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasti
     level.vsmgr[type].state[localclientnum].force_update = 1;
   }
 
-  level notify(#"hash_4dea82d5e85dfc");
+  level notify(#"visionset_mgr_state");
 }
 
 visionset_slot_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -302,7 +302,7 @@ lerp_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasti
     level.vsmgr[type].state[localclientnum].force_update = 1;
   }
 
-  level notify(#"hash_4dea82d5e85dfc");
+  level notify(#"visionset_mgr_state");
 }
 
 visionset_lerp_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -380,7 +380,7 @@ demo_jump_monitor() {
       }
     }
 
-    level notify(#"hash_4dea82d5e85dfc");
+    level notify(#"visionset_mgr_state");
   }
 }
 
@@ -419,7 +419,7 @@ monitor() {
   }
 
   while(true) {
-    level waittill(#"hash_4dea82d5e85dfc");
+    level waittill(#"visionset_mgr_state");
 
     foreach(k, v in level.vsmgr) {
       if(!v.in_use) {

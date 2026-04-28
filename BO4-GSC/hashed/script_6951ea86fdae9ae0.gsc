@@ -58,7 +58,7 @@ is_active() {
 
 function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   if(isDefined(var_a9dd1993)) {
     var_3b058622 = getweapon(var_a9dd1993);

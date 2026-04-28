@@ -93,7 +93,7 @@ init_flags() {
 }
 
 init_steps() {
-  zm_sq::register(#"boss_fight", #"step_1", #"hash_29b25d86ddeb7d44", &function_51e51897, &function_99cfd11d);
+  zm_sq::register(#"boss_fight", #"step_1", #"boss_fight_stage_1", &function_51e51897, &function_99cfd11d);
   zm_sq::register(#"boss_fight", #"step_2", #"hash_29b26086ddeb825d", &function_85bc1590, &function_af6afecd);
   zm_sq::register(#"boss_fight", #"step_3", #"hash_29b25f86ddeb80aa", &function_ed500548, &function_3c959c2e);
   zm_sq::register(#"boss_fight", #"step_4", #"hash_29b25a86ddeb782b", &function_37f8d5ce, &function_eeb1c75d);
@@ -903,7 +903,7 @@ function_1122d832(var_d503d5d9, str_loc, n_stage) {
   level thread scene::stop(#"p8_fxanim_zm_zod_skybox_bundle");
   level thread scene::play(#"p8_fxanim_zm_zod_skybox_bundle", var_d503d5d9);
   level thread function_f74b38da("zm_power_on_rumble");
-  level thread zodt8_sentinel::function_63a0f09e(1, 0);
+  level thread zodt8_sentinel::main_quest_screen_flash(1, 0);
   wait 0.5;
   self function_1e93034e(str_loc);
   self function_a8a76e18(1);
@@ -991,7 +991,7 @@ function_9bc73093(n_stage) {
   wait n_wait;
 
   if(n_stage != 5) {
-    level thread zodt8_sentinel::function_63a0f09e(1, 0);
+    level thread zodt8_sentinel::main_quest_screen_flash(1, 0);
     self boss_leave(1);
     self clientfield::set("bs_bdy_fx_cf", 2);
     wait 0.5;
@@ -1044,7 +1044,7 @@ function_9bc73093(n_stage) {
 
 function_ee223250(var_bcccab17) {
   for(var_aae7efaa = 0; var_aae7efaa < var_bcccab17; var_aae7efaa++) {
-    level waittill(#"hash_3a4456148ade383a");
+    level waittill(#"special_ai_type_completed");
   }
 
   level notify(#"hash_38f29f9cb03586ea");
@@ -1728,11 +1728,11 @@ function_47073904(v_loc, n_time = 8) {
     n_time_passed += 0.1;
   }
 
-  level notify(#"hash_738991c86bf9f7c2");
+  level notify(#"boss_mist_end");
 }
 
 function_65bd10f6() {
-  level waittill(#"hash_38f29f9cb03586ea", #"hash_738991c86bf9f7c2", #"intermission");
+  level waittill(#"hash_38f29f9cb03586ea", #"boss_mist_end", #"intermission");
   self clientfield::set("bs_att_mst_cf", 0);
   util::wait_network_frame(4);
   self delete();
@@ -2913,7 +2913,7 @@ function_98198f98(str_archetype) {
     }
 
     if(!b_wait) {
-      level notify(#"hash_3a4456148ade383a");
+      level notify(#"special_ai_type_completed");
       return;
     }
   }
@@ -2946,16 +2946,16 @@ function_d25f8fbc(cmd) {
     case # "start_bf":
       level thread function_435a7941();
       return 1;
-    case # "hash_1774efff8d070e0d":
+    case # "start_bf_2":
       level thread function_435a7941(1);
       return 1;
-    case # "hash_1774eeff8d070c5a":
+    case # "start_bf_3":
       level thread function_435a7941(2);
       return 1;
-    case # "hash_1774e9ff8d0703db":
+    case # "start_bf_4":
       level thread function_435a7941(3);
       return 1;
-    case # "hash_1774e8ff8d070228":
+    case # "start_bf_5":
       level thread function_435a7941(4);
       return 1;
     case # "hash_56b003484b719b01":

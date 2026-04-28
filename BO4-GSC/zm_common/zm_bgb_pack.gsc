@@ -234,7 +234,7 @@ activate_elixir(n_index) {
         has_succeeded = self function_5d618bb4(str_bgb, n_index);
 
         if(has_succeeded) {
-          self notify(#"hash_27b238d082f65849", str_bgb);
+          self notify(#"bgb_gumball_anim_activate", str_bgb);
           self bgb::activation_start();
           self thread bgb::run_activation_func(str_bgb);
         }

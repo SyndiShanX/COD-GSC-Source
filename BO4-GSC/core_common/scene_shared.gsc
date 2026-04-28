@@ -1450,7 +1450,7 @@ play_pair(var_a33156af, var_6a5164f0, var_b6213032 = 0, var_d8b95786 = 0) {
     a_players = util::get_players();
 
     foreach(player in a_players) {
-      player val::set(#"hash_588e644c65309ea3", "freezecontrols", 1);
+      player val::set(#"scene_play_pair", "freezecontrols", 1);
 
       if(!var_d8b95786) {
         player util::delay(0.1, "disconnect", &lui::screen_fade_in, 1, undefined, "scene_system");
@@ -1463,7 +1463,7 @@ function_cae579da(str_team) {
   a_players = util::get_players(str_team);
 
   foreach(player in a_players) {
-    player val::set(#"hash_588e644c65309ea3", "freezecontrols", 1);
+    player val::set(#"scene_play_pair", "freezecontrols", 1);
     player thread lui::screen_fade_out(0, undefined, "scene_system");
   }
 }

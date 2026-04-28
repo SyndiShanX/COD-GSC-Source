@@ -1007,10 +1007,10 @@ function_7706a6fa(commander) {
     var_31b80437 = tolower(var_832340f2);
     components = array();
     var_35301d62 = array();
-    var_35301d62[#"hash_f5c6c6aa7dc0f6d"] = array();
-    var_35301d62[#"hash_6e9081699001bcd9"] = array();
+    var_35301d62[#"missioncomponent_defend"] = array();
+    var_35301d62[#"missioncomponent_destroy"] = array();
     var_35301d62[#"hash_3bf68fbcb5c53b6c"] = array();
-    var_35301d62[#"hash_4984fd4b0ba666a2"] = array();
+    var_35301d62[#"missioncomponent_goto"] = array();
 
     foreach(missioncomponent in level.var_8239a46c) {
       if(!strategiccommandutility::function_f867cce0(missioncomponent, commanderteam)) {
@@ -1022,16 +1022,16 @@ function_7706a6fa(commander) {
       var_b313868d = array();
 
       switch (type) {
-        case # "hash_f5c6c6aa7dc0f6d":
+        case # "missioncomponent_defend":
           var_b313868d[#"type"] = "defend";
           break;
-        case # "hash_6e9081699001bcd9":
+        case # "missioncomponent_destroy":
           var_b313868d[#"type"] = "destroy";
           break;
         case # "hash_3bf68fbcb5c53b6c":
           var_b313868d[#"type"] = "capturearea";
           break;
-        case # "hash_4984fd4b0ba666a2":
+        case # "missioncomponent_goto":
           if(isDefined(component.var_c68dc48c) || isDefined(component.var_b95bcdc6)) {
             var_b313868d[#"type"] = "goto";
           } else {

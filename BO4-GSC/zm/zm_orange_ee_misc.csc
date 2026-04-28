@@ -17,8 +17,8 @@ preload() {
 function
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + #"hash_12114abc7407913b", 24000, 1, "counter", &function_30ed45c9, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_5e38e846ce88405b", 24000, 1, "counter", &function_48a634b7, 0, 0);
+  clientfield::register("toplayer", "" + #"jump_scare_lighthouse", 24000, 1, "counter", &function_30ed45c9, 0, 0);
+  clientfield::register("toplayer", "" + #"jump_scare_note", 24000, 1, "counter", &function_48a634b7, 0, 0);
 }
 
 function_30ed45c9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

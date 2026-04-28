@@ -71,7 +71,7 @@ function_68af83a9(s_event) {
 }
 
 function_cec06121(var_264ee2f5) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 12;
 
   foreach(player in getplayers()) {

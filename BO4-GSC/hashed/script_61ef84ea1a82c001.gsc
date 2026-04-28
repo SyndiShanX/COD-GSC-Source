@@ -30,7 +30,7 @@
 #namespace namespace_273ad667;
 
 autoexec __init__system__() {
-  system::register(#"hash_1f7228023b83d053", &__init__, &__main__, undefined);
+  system::register(#"zm_escape_weap_quest_spork", &__init__, &__main__, undefined);
 }
 
 __init__() {
@@ -38,9 +38,9 @@ __init__() {
   clientfield::register("toplayer", "" + #"fill_blood", 1, 4, "int");
   clientfield::register("toplayer", "" + #"hash_2058d8d474a6b3e1", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_cc5b97a575d4d6d", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_ef497244490a0fc", 1, 3, "int");
+  clientfield::register("world", "" + #"physics_launch_metal", 1, 3, "int");
   level flag::init(#"hash_1a367a4a0dfb0471");
-  level flag::init(#"hash_79e07d3dcfbfb5ae");
+  level flag::init(#"water_tower_destroyed");
   level flag::init(#"hash_29dc018e9551ecf");
   level flag::init(#"spoon_quest_completed");
   level.var_92a01e03 = struct::get("s_firm_use_trig");
@@ -259,19 +259,19 @@ function_834ba04a() {
   switch (n_script_int) {
     case 1:
       hidemiscmodels(self.target);
-      level thread clientfield::set("" + #"hash_ef497244490a0fc", 1);
+      level thread clientfield::set("" + #"physics_launch_metal", 1);
       break;
     case 2:
       hidemiscmodels(self.target);
-      level thread clientfield::set("" + #"hash_ef497244490a0fc", 2);
+      level thread clientfield::set("" + #"physics_launch_metal", 2);
       break;
     case 3:
       hidemiscmodels(self.target);
-      level thread clientfield::set("" + #"hash_ef497244490a0fc", 3);
+      level thread clientfield::set("" + #"physics_launch_metal", 3);
       break;
     case 4:
       hidemiscmodels(self.target);
-      level thread clientfield::set("" + #"hash_ef497244490a0fc", 4);
+      level thread clientfield::set("" + #"physics_launch_metal", 4);
       break;
   }
 
@@ -280,9 +280,9 @@ function_834ba04a() {
 
 function_48d7e846() {
   level flag::wait_till_all(level.var_ac9cb27a);
-  level flag::set(#"hash_79e07d3dcfbfb5ae");
+  level flag::set(#"water_tower_destroyed");
   level.var_4b9d0136 thread scene::play(#"p8_fxanim_zm_esc_water_tower_bundle", level.var_4b9d0136);
-  level thread clientfield::increment("" + #"hash_cd028842e18845e", 1);
+  level thread clientfield::increment("" + #"rumble_water_tower", 1);
   wait 3;
   e_closest = arraygetclosest(level.var_4b9d0136.origin, zm_vo::get_valid_players());
 

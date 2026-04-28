@@ -58,7 +58,7 @@ init() {
 }
 
 function_5ad3e281() {
-  level flag::wait_till(#"hash_2a7d461c7eff8179");
+  level flag::wait_till(#"pap_quest_started");
   changeadvertisedstatus(0);
 }
 
@@ -78,7 +78,7 @@ function_a7faeaaf() {
 
 function_90a833e2() {
   level flag::init(#"pap_disabled");
-  level flag::init(#"hash_2a7d461c7eff8179");
+  level flag::init(#"pap_quest_started");
   level flag::init(#"hash_798d51388d6e10f4");
   level flag::init(#"hash_18134dc5b9b39a96");
   level flag::init(#"hash_582eea77824b014d");
@@ -361,7 +361,7 @@ function_199b1814(str_tower, str_encounter) {
     }
   }
 
-  level flag::set(#"hash_2a7d461c7eff8179");
+  level flag::set(#"pap_quest_started");
   level flag::set(var_31e5b512);
   level flag::set(#"hash_798d51388d6e10f4");
 
@@ -884,7 +884,7 @@ function_9b320791() {
   str_notify = self.var_427eb1ae;
   level waittill(str_notify);
   self thread fx::play("fx_challenge_head_blood_burst", self getcentroid(), undefined, undefined, 1, undefined, 1, 0);
-  self notify(#"hash_691806c47ba12fac");
+  self notify(#"fx_stop_blood_drips");
   self hide();
 }
 
@@ -1005,7 +1005,7 @@ function_f3c4aeac() {
   self show();
   self playSound(#"hash_3d7066af9c9bf849");
   self thread fx::play("fx_challenge_head_blood_burst", self getcentroid(), undefined, undefined, 1, undefined, 1, 0);
-  self thread fx::play("fx_challenge_head_blood_drips", self getcentroid(), undefined, #"hash_691806c47ba12fac", 1, str_fx_tag, 1, 0);
+  self thread fx::play("fx_challenge_head_blood_drips", self getcentroid(), undefined, #"fx_stop_blood_drips", 1, str_fx_tag, 1, 0);
 }
 
 get_encounter(str_tower) {
@@ -1107,7 +1107,7 @@ function_438a415(str_head) {
       return;
   }
 
-  level flag::set(#"hash_2a7d461c7eff8179");
+  level flag::set(#"pap_quest_started");
 
   if(level flag::get(#"hash_2cf71ce4a3d1c081") || level flag::get(var_31e5b512)) {
     return;

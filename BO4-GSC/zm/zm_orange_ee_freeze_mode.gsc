@@ -69,7 +69,7 @@ freeze_quest_cleanup(var_a276c861, var_19e802fa) {
     zm_round_spawning::function_43aed0ca(level.round_number + 1);
   }
 
-  level flag::clear(#"hash_7d9f8ec3cb9af87e");
+  level flag::clear(#"zipline_handle_picked_up");
   level.func_get_delay_between_rounds = &function_f85d3d98;
   zm_hms_util::function_2ba419ee(1, int(max(199, level.round_number)));
   level flag::clear(#"break_freeze_faster");
@@ -154,7 +154,7 @@ function_f0bdc5df() {
   level endon(#"end_game");
   self endon(#"death", #"player_frozen");
   self thread function_6577cacc();
-  self notify(#"hash_42fcb8fa7aec0734");
+  self notify(#"player_entered_water");
   self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 1);
   self allowslide(0);
   self thread function_1b305413();
@@ -177,7 +177,7 @@ function_1b305413() {
 player_sprinting() {
   level endon(#"end_game");
   self endon(#"death", #"player_frozen");
-  self notify(#"hash_668824b34b3076bc");
+  self notify(#"player_exited_water");
   self allowslide(1);
   self thread zm_orange_water::function_d2dd1f2b();
   self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
@@ -186,7 +186,7 @@ player_sprinting() {
 
 function_6577cacc() {
   level endon(#"end_game");
-  self endon(#"death", #"hash_668824b34b3076bc");
+  self endon(#"death", #"player_exited_water");
 
   if(!isDefined(self.var_36a93d1)) {
     self.var_36a93d1 = 0;
@@ -211,8 +211,8 @@ function_9364acc1() {
   self.var_7dc2d507 = 1;
   self notify(#"player_frozen");
   self zm_orange_water::function_bad6907c();
-  self clientfield::set("" + #"hash_55543319943057f1", 1);
-  self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 1);
+  self clientfield::set("" + #"water_player_freeze_fx", 1);
+  self clientfield::set_to_player("" + #"water_player_freeze_sfx", 1);
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
   t_ice enablelinkto();
   t_ice linkto(self);
@@ -225,12 +225,12 @@ function_9364acc1() {
     self.var_d844486 = 1;
   }
 
-  self waittill(#"hash_53bfad7081c69dee");
+  self waittill(#"water_player_freeze_broken");
   self playSound(#"hash_2f8c9575cb36a298");
   self.var_7dc2d507 = 0;
   self zm_orange_water::function_46c3bbf7();
-  self clientfield::set("" + #"hash_55543319943057f1", 0);
-  self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
+  self clientfield::set("" + #"water_player_freeze_fx", 0);
+  self clientfield::set_to_player("" + #"water_player_freeze_sfx", 0);
   self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
   waitframe(2);
   self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);

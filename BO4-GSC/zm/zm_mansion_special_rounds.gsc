@@ -99,7 +99,7 @@ function_36c1dcca(n_round, var_b2239dab) {
 }
 
 function_3dab3302() {
-  level notify(#"hash_21672c4f6ccf13d0");
+  level notify(#"special_round_starting");
   level thread function_93eab559();
 }
 
@@ -120,7 +120,7 @@ function_41509519(var_d25bbdd5) {
     level.var_4c350e72++;
   }
 
-  level notify(#"hash_7b9245ff51f3d4f7");
+  level notify(#"special_round_ending");
   level clientfield::set("" + #"hash_42e03f9ae74a1070", 0);
 }
 

@@ -920,7 +920,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     self killcam::killcam(lpattacknum, self getentitynumber(), killcam_entity_info, weapon, smeansofdeath, self.deathtime, deathtimeoffset, psoffsettime, willrespawnimmediately, globallogic_utils::timeuntilroundend(), perks, killstreaks, attacker, keep_deathcam);
 
     if(sessionmodeiswarzonegame()) {
-      self luinotifyevent(#"hash_5b2d65a026de792d", 0);
+      self luinotifyevent(#"quick_fade_up", 0);
     }
   } else if(self.cancelkillcam) {
     if(isDefined(self.killcamsskipped)) {
@@ -2252,7 +2252,7 @@ updatekillstreak(einflictor, attacker, weapon) {
               }
 
               attacker.var_ea1458aa.var_2bad4cbb++;
-              attacker challenges::function_a4db0a4c();
+              attacker challenges::multikill_2_killstreak_5();
             }
           }
         }

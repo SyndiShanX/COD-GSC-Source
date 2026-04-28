@@ -63,7 +63,7 @@ open_door(a_str_door_names, var_47eb646a = 0, var_91ccb2d7, b_play_audio = 0) {
         level thread zm_audio::sndannouncerplayvox(#"hash_79b3b9e8ed3f0631", undefined, undefined, undefined, 1);
       } else {
         level thread function_7a35b1d7(#"hash_7203281c0385cddd");
-        level thread zm_audio::sndannouncerplayvox(#"hash_77e06980e2fc1567", undefined, undefined, undefined, 1);
+        level thread zm_audio::sndannouncerplayvox(#"door_open_single", undefined, undefined, undefined, 1);
       }
 
       var_6e4ed9cd = 1;
@@ -994,7 +994,7 @@ function_766eff6(var_31721422, a_str_zones, var_de0f1997, var_f7c3c527) {
     } else {
       foreach(player in level.activeplayers) {
         if(isalive(player) && player zm_zonemgr::is_player_in_zone(a_str_zones)) {
-          player notify(#"hash_b696fc900429737");
+          player notify(#"player_defend_area_waiting");
 
           if(!(isDefined(player.var_fd3dfced) && player.var_fd3dfced)) {
             player.var_fd3dfced = 1;

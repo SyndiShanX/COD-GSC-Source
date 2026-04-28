@@ -46,7 +46,7 @@ on_begin() {
 }
 
 nuke_loop() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 5;
 
   while(true) {

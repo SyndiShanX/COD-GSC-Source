@@ -50,7 +50,7 @@ init() {
   zm_sq::register(#"ww_quest", #"destroy_wall", #"destroy_wall", &destroy_wall_setup, &destroy_wall_cleanup);
   zm_sq::register(#"ww_quest", #"knock_brazier", #"knock_brazier", &knock_brazier_setup, &knock_brazier_cleanup);
   zm_sq::register(#"ww_quest", #"hash_32b57ffc37ccf79a", #"hash_32b57ffc37ccf79a", &function_26956e1e, &function_4f056f0c);
-  zm_sq::register(#"ww_quest", #"hash_2e681afa5f81f37", #"hash_2e681afa5f81f37", &function_708cd4d, &function_c4e5bf05);
+  zm_sq::register(#"ww_quest", #"craft_acid_trap", #"craft_acid_trap", &function_708cd4d, &function_c4e5bf05);
   zm_sq::register(#"ww_quest", #"hash_27967f916a97a057", #"hash_27967f916a97a057", &function_2eea86a9, &function_57b4770f);
   zm_sq::register(#"ww_quest", #"hash_34d18772151ea4fa", #"hash_34d18772151ea4fa", &function_a1e2245, &function_e02f2459);
   zm_sq::register(#"ww_quest", #"hash_2e126c422fbf5654", #"hash_2e126c422fbf5654", &function_9ef8d102, &function_1c380f29);
@@ -60,7 +60,7 @@ init() {
   zm_sq::register(#"ww_quest", #"place_impervious_jar", #"place_impervious_jar", &function_ec26e009, &function_4877f171);
   zm_sq::register(#"ww_quest", #"hash_530b93342f7f39ae", #"hash_530b93342f7f39ae", &function_bbdde10e, &function_40f77b4a);
   zm_sq::register(#"ww_quest", #"hash_38a9bcd55c0565ca", #"hash_38a9bcd55c0565ca", &function_ab13e06, &function_868dcb6d);
-  zm_sq::register(#"ww_quest", #"hash_2512f1281c5c7237", #"hash_2512f1281c5c7237", &function_869d271a, &function_79875787);
+  zm_sq::register(#"ww_quest", #"poison_magic_box", #"poison_magic_box", &function_869d271a, &function_79875787);
   zm_sq::register(#"ww_quest", #"hash_4e767f415b51d0a1", #"hash_4e767f415b51d0a1", &function_3cadd22, &function_f04288b4);
   zm_sq::start(#"ww_quest", 1);
   level scene::add_scene_func("p8_fxanim_zm_towers_ww_quest_bowl_bundle", &function_73808ab9, "init");
@@ -146,7 +146,7 @@ knock_brazier_cleanup(b_skipped, var_19e802fa) {
 }
 
 function_be25f239() {
-  level endon(#"hash_70b6094c8cd39890", #"hash_9b33f522f6f1424", #"end_game");
+  level endon(#"hash_70b6094c8cd39890", #"rough_statue_picked_up", #"end_game");
   var_7ccafcfd = getent("t_l_t_w_w_q", "targetname");
   level flag::wait_till(#"hash_17f15c9242ddea6f");
   s_info = var_7ccafcfd waittill(#"trigger");
@@ -164,7 +164,7 @@ function_26956e1e(b_skipped) {
 
   s_loc = struct::get("s_ww_quest_rough_statue_unitrigger_" + level.var_9f950fe2);
   e_player = s_loc zm_unitrigger::function_fac87205(&function_bdcb6aac);
-  level notify(#"hash_9b33f522f6f1424");
+  level notify(#"rough_statue_picked_up");
   e_player thread function_710d3ac7();
 }
 

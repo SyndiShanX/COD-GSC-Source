@@ -148,7 +148,7 @@ function_f2f4ced8() {
   playsoundatposition(#"zmb_ai_brutus_spawn", self.origin);
 
   if(!isDefined(level.var_b491030) || level flag::get(#"main_quest_completed")) {
-    self playSound(#"hash_5d69a47fd8c0e9e5");
+    self playSound(#"zmb_ai_brutus_spawn_laugh");
   }
 }
 

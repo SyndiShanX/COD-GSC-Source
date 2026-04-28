@@ -70,7 +70,7 @@ init() {
     level.var_2fc3a917[level.var_2fc3a917.size] = s_temp;
   }
 
-  zm_sq::register(#"ww_quest_weapon", #"step_1", #"hash_2af54f403e86105d", &function_da84e99e, &function_6d5a79fe);
+  zm_sq::register(#"ww_quest_weapon", #"step_1", #"ww_quest_weapon_step1", &function_da84e99e, &function_6d5a79fe);
   level thread function_661dc825();
 
   if(!zm_utility::is_standard()) {

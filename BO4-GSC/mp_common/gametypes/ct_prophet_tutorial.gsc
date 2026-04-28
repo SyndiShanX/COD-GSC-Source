@@ -1141,7 +1141,7 @@ function_c7bb6e59() {
   ct_utils::function_9aca2fa0("ct_action2");
   self thread function_f868e3e2();
   level flag::wait_till("fin2_enemy_chopper_destroyed");
-  level notify(#"hash_1c966d2b46abb009");
+  level notify(#"surround_spawn_end");
   level notify(#"hash_73522d92576b145b");
   level notify(#"hash_60e26e14a51c5211");
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_score_hit"));
@@ -1843,7 +1843,7 @@ function_980638c8(params) {
   weapon = params.weapon;
 
   if(isPlayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
-    level notify(#"hash_1dc7d838ff48073d");
+    level notify(#"fin2_enemy_killed");
     level notify(#"hash_60e26e14a51c5211");
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"dart");
     var_23efb519 = level.var_dd8875fe;

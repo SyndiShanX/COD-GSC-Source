@@ -34,9 +34,9 @@ __init__() {
   level.var_9d47488.script = &function_c3d93fc;
   level.var_9d47488.weapon = getweapon("eq_seeker_mine");
   level.var_9d47488.prompt = seeker_mine_prompt::register("seeker_mine_prompt");
-  level.var_9d47488.var_8e526d12 = getweapon(#"hash_27d90cc12712230f");
-  level.var_9d47488.var_42f768ff = getweapon(#"hash_1ca0e9052a71989");
-  level.var_9d47488.var_4bbc3170 = getweapon(#"hash_597ead6ff2ce9284");
+  level.var_9d47488.var_8e526d12 = getweapon(#"seeker_mine_loop");
+  level.var_9d47488.var_42f768ff = getweapon(#"seeker_mine_fail");
+  level.var_9d47488.var_4bbc3170 = getweapon(#"seeker_mine_success");
   level.var_f93c9e9c = &function_b6ee86e3;
   function_5aa948ab();
   callback::on_connect(&onplayerconnect);
@@ -628,7 +628,7 @@ function_dfbbefb8() {
   wait level.var_9d47488.tunables.var_b9cf9139;
   self.var_dda9b735.prompt = 0;
   wait level.var_9d47488.tunables.var_9bdbf8df;
-  self notify(#"hash_13bc4f053f8da5b0");
+  self notify(#"seeker_mine_prompt_closed");
   self.var_dda9b735.prompt = 3;
 }
 
@@ -652,7 +652,7 @@ function_6c023d11() {
     waitframe(1);
   }
 
-  self notify(#"hash_89051c7805b3d19");
+  self notify(#"seeker_mine_death");
 }
 
 function_e56220fe() {
@@ -707,7 +707,7 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
     return;
   }
 
-  self notify(#"hash_13bc4f053f8da5b0");
+  self notify(#"seeker_mine_prompt_closed");
   gesturetable = "gestable_shocked_reaction";
   var_84a7f98e = undefined;
   waitduration = 0;
@@ -733,7 +733,7 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
       break;
     case 1:
       gesturetable = "gestable_shocked_success";
-      var_84a7f98e = getweapon(#"hash_597ead6ff2ce9284");
+      var_84a7f98e = getweapon(#"seeker_mine_success");
       islooping = 0;
       self playsoundtoplayer(#"uin_seeker_qte_success", self);
       self battlechatter::function_72b65730();
@@ -750,7 +750,7 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
       break;
     case 3:
       gesturetable = "gestable_shocked_success";
-      var_84a7f98e = getweapon(#"hash_597ead6ff2ce9284");
+      var_84a7f98e = getweapon(#"seeker_mine_success");
       islooping = 0;
       self playsoundtoplayer(#"uin_seeker_qte_success", self);
       println("<dev string:x92>");
@@ -768,7 +768,7 @@ function_24d08109(seekermine, waitduration, var_26b2b1bb, state) {
   self notify("d5876c031211735");
   self endon("d5876c031211735");
   self endon(#"death");
-  self waittilltimeout(waitduration, #"hash_89051c7805b3d19");
+  self waittilltimeout(waitduration, #"seeker_mine_death");
 
   if(state == 1) {
     wait level.var_9d47488.tunables.var_e8e9a9cc;
@@ -821,7 +821,7 @@ function_e380fde7(var_84a7f98e, gesturetable, waitduration, islooping, animdelay
   }
 
   if(isDefined(self.var_dda9b735.islooping) && self.var_dda9b735.islooping) {
-    self waittilltimeout(waitduration, #"hash_89051c7805b3d19");
+    self waittilltimeout(waitduration, #"seeker_mine_death");
 
     if(isDefined(self) && isDefined(self.var_dda9b735.gesture)) {
       self stopgestureviewmodel(self.var_dda9b735.gesture, 0, 0);

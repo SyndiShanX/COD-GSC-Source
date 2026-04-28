@@ -39,7 +39,7 @@ init_shared() {
   level.smartcoversettings.var_ac3f76c7 = "smart_cover_objective_full";
   level.smartcoversettings.var_546a220c = "smart_cover_objective_open";
   level.smartcoversettings.smartcoverweapon = getweapon("ability_smart_cover");
-  level.smartcoversettings.var_4115bb3a = getweapon(#"hash_34575452eba07c65");
+  level.smartcoversettings.var_4115bb3a = getweapon(#"smart_cover_detonator");
   level.smartcoversettings.objectivezones = [];
   setupdvars();
   ability_player::register_gadget_should_notify(27, 1);
@@ -481,7 +481,7 @@ function_d82c03d4(player) {
 function_37f1dcd1() {
   level endon(#"game_ended");
   self.owner endon(#"disconnect", #"joined_team", #"changed_specialist", #"hacked");
-  self endon(#"hash_5de1fc3780ea0eaa");
+  self endon(#"smart_cover_destroyed");
   waitresult = self waittill(#"death");
 
   if(!isDefined(self)) {
@@ -514,7 +514,7 @@ function_375cfa56(smartcover, owner) {
 
 function_2a494565(isselfdestruct) {
   smartcover = self;
-  smartcover notify(#"hash_5de1fc3780ea0eaa");
+  smartcover notify(#"smart_cover_destroyed");
   smartcover clientfield::set("enemyequip", 0);
   smartcover clientfield::set("friendlyequip", 0);
 
@@ -1030,8 +1030,8 @@ microwaveentity(entity) {
   }
 
   if(getgametypesetting(#"competitivesettings") === 1) {
-    var_756fda07 = getstatuseffect(#"hash_4571e9bb8d1be2af");
-    var_2b29cf8c = getstatuseffect(#"hash_13ef8ef2acaa9aec");
+    var_756fda07 = getstatuseffect(#"microwave_slowed_comp");
+    var_2b29cf8c = getstatuseffect(#"microwave_dot_comp");
   } else {
     var_756fda07 = getstatuseffect(#"microwave_slowed");
     var_2b29cf8c = getstatuseffect(#"microwave_dot");

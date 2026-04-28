@@ -107,7 +107,7 @@ function_6c288c45(spawnorigin, spawnangles) {
   turretvehicle thread turret_laser_watch();
   turretvehicle thread setup_death_watch_for_new_targets();
   turretvehicle thread targetting_delay::function_7e1a12ce(bundle.var_2aeadfa0);
-  callback::callback(#"hash_6d9bdacc6c29cfa5", {
+  callback::callback(#"on_turret_placed", {
     #turret: turretvehicle, #owner: self
   });
 }
@@ -453,7 +453,7 @@ turretscanning() {
         if(var_afae28e0 && isDefined(turretvehicle.turret_target) && isDefined(turretvehicle.turret_target.var_e78602fc) && turretvehicle.turret_target.var_e78602fc == turretvehicle) {
           if(isDefined(turretvehicle.owner)) {
             turretvehicle.owner luinotifyevent(#"mini_turret_kill");
-            turretvehicle.owner playsoundtoplayer(#"hash_7ea486136cd776c", turretvehicle.owner);
+            turretvehicle.owner playsoundtoplayer(#"mpl_turret_kill", turretvehicle.owner);
           }
 
           turretvehicle.turretrotscale = 1;

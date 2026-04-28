@@ -106,7 +106,7 @@ on_weapon_fired(params) {
   }
 
   self endon(#"disconnect", #"hash_593afdd4317784a0");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   if(!isDefined(self.var_9979ffd6)) {
     self.var_9979ffd6 = 0.2;

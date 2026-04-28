@@ -113,7 +113,7 @@ function_816c3132(var_5ea5c94d) {
       wait 1;
     }
 
-    level flag::set(#"hash_3028604821838259");
+    level flag::set(#"golden_pap_active");
     level flag::set(#"hash_1d9afa9be4c10160");
     level thread zm_orange_pap::function_56db9cdc();
     level.var_1c53964e thread zm_hms_util::function_6a0d675d(#"hash_17b44ac72ae4b92f", -1, 0, 1);
@@ -143,7 +143,7 @@ function_3c9be590(var_5ea5c94d, ended_early) {
     s_challenge_station zm_orange_challenges::function_fd8a137e();
   }
 
-  level flag::clear(#"hash_3028604821838259");
+  level flag::clear(#"golden_pap_active");
   zm_hms_util::pause_zombies(1, 0);
   level flag::set(#"disable_special_rounds");
   zm_orange_mq_hell::spawn_guide();
@@ -357,7 +357,7 @@ function_dc380897() {
   self.e_fire playSound(#"hash_49156c17a247721c");
   arrayremovevalue(level.var_4d8e32c8, self);
 
-  if(!level flag::get(#"hash_3028604821838259")) {
+  if(!level flag::get(#"golden_pap_active")) {
     wait 1;
     level notify(#"hash_39b6629ce957cce9");
     self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);

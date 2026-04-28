@@ -40,7 +40,7 @@
 main() {
   level endon(#"end_game");
   level.var_4182b94e = struct::get_array("initial_spawn_points", "targetname");
-  level flag::init(#"hash_18775b013e93e516");
+  level flag::init(#"slumber_party");
   var_50f6b3f4 = getent("counter_tens", "targetname");
   var_50f6b3f4.start_angles = var_50f6b3f4.angles;
   var_d02e9cd = getent("counter_ones", "targetname");
@@ -57,7 +57,7 @@ main() {
       level.var_b691023c = undefined;
     }
 
-    level waittill(#"hash_5d42d8ee7a08b543");
+    level waittill(#"trial_round_start");
 
     switch (level.round_number) {
       case 1:
@@ -77,7 +77,7 @@ main() {
         break;
     }
 
-    level waittill(#"hash_7646638df88a3656");
+    level waittill(#"trial_round_end");
 
     if(isDefined(level.e_avogadro)) {
       level.e_avogadro kill();
@@ -118,17 +118,17 @@ teleport_player() {
 }
 
 function_439b486f() {
-  if(!level flag::get(#"hash_18775b013e93e516")) {
-    level flag::set(#"hash_18775b013e93e516");
+  if(!level flag::get(#"slumber_party")) {
+    level flag::set(#"slumber_party");
     exploder::exploder("fxexp_disco_lgt");
     var_51bef3af = spawn("script_model", (1, 1145, -350));
     var_51bef3af playSound(#"hash_c8d3a1557c42ab7");
-    s_notify = level waittilltimeout(253, #"hash_7646638df88a3656");
+    s_notify = level waittilltimeout(253, #"trial_round_end");
     var_51bef3af stopsound(#"hash_c8d3a1557c42ab7");
     waitframe(1);
     var_51bef3af delete();
     exploder::stop_exploder("fxexp_disco_lgt");
-    level flag::clear(#"hash_18775b013e93e516");
+    level flag::clear(#"slumber_party");
   }
 }
 
@@ -155,7 +155,7 @@ function_1bc491ab() {
   if(isDefined(ai)) {
     ai.health = int(ai.health * 2);
     level.zombie_total--;
-    n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+    n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
     wait n_delay;
     return true;
   }
@@ -164,7 +164,7 @@ function_1bc491ab() {
 }
 
 spawn_boss() {
-  level endon(#"end_game", #"hash_7646638df88a3656");
+  level endon(#"end_game", #"trial_round_end");
   exploder::exploder("fxexp_pyramid_open");
   var_1c91a56e = struct::get("apd_door_scene", "targetname");
   level waittill(#"zombie_total_set");
@@ -186,7 +186,7 @@ function_e478fb2a() {
 }
 
 spawn_done(n_threshold) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   waitframe(1);
 
   if(isDefined(level.e_avogadro)) {

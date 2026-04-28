@@ -89,7 +89,7 @@ function_653412f4(var_a276c861) {
   }
 
   if(!var_a276c861) {
-    level waittill(#"hash_75e5d46ef453bd62");
+    level waittill(#"jordans_reward_step_1_done");
   }
 }
 
@@ -214,7 +214,7 @@ function_54765bde(var_11a2d7c6, var_8750fd81) {
 function_dd162dbf() {
   self notify("21a67d99777d1f78");
   self endon("21a67d99777d1f78");
-  level endon(#"hash_75e5d46ef453bd62");
+  level endon(#"jordans_reward_step_1_done");
   self endon(#"disconnect");
 
   if(!isDefined(self.var_c859fa3a)) {
@@ -235,7 +235,7 @@ function_dd162dbf() {
 grenade_throw_watcher() {
   self notify("3cf135e64119b4db");
   self endon("3cf135e64119b4db");
-  level endon(#"hash_75e5d46ef453bd62");
+  level endon(#"jordans_reward_step_1_done");
   self endon(#"disconnect");
 
   while(true) {
@@ -291,7 +291,7 @@ function_fefbf8c2(e_grenade) {
             wait 0.1;
 
             if(level.var_46169cd9 >= level.var_22aacd56) {
-              level notify(#"hash_75e5d46ef453bd62");
+              level notify(#"jordans_reward_step_1_done");
             }
           }
         }
@@ -402,7 +402,7 @@ function_3a57d343() {
   self notify("69c331ec544efd5c");
   self endon("69c331ec544efd5c");
   self endon(#"death");
-  level endon(#"hash_33d9d5dbe3f1e8c2");
+  level endon(#"jordans_reward_step_2_completed");
   w_wraith_fire = getweapon(#"eq_wraith_fire");
 
   while(true) {
@@ -723,12 +723,12 @@ function_9215e9d(t_unitrigger, var_711067a4) {
   }
 
   wait n_time;
-  self notify(#"hash_36de4efbe292709d");
+  self notify(#"stop_trigger_watcher");
   return true;
 }
 
 function_123c7022(t_unitrigger, var_711067a4) {
-  self endon(#"hash_36de4efbe292709d", #"death");
+  self endon(#"stop_trigger_watcher", #"death");
   t_unitrigger endon(#"death");
 
   do {
@@ -1097,7 +1097,7 @@ function_dc123817(str_notify) {
 }
 
 function_da604bc0(t_unitrigger, var_1611e2c0) {
-  self endon(#"hash_36de4efbe292709d", #"death");
+  self endon(#"stop_trigger_watcher", #"death");
 
   iprintlnbold("<dev string:x15f>" + self.playernum);
 
@@ -1235,7 +1235,7 @@ function_3ddf07f4() {
 }
 
 function_95b6c945() {
-  if(!getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(!getdvarint(#"zm_debug_ee_system", 0)) {
     return;
   }
 

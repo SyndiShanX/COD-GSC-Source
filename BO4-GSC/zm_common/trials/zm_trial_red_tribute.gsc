@@ -70,7 +70,7 @@ on_end(round_reset) {
 
 function_29bcf2f8() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_bfc22435 = 0;
 
   if(isDefined(self.var_7a281a7e)) {
@@ -108,7 +108,7 @@ function_29bcf2f8() {
 }
 
 function_6fa5c86() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   level flag::set("infinite_round_spawning");
 
   while(true) {
@@ -136,7 +136,7 @@ on_ai_spawned() {
 
 track_spawns() {
   self endon(#"death");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 1;
 
   if(!(isDefined(self.var_12745932) && self.var_12745932)) {

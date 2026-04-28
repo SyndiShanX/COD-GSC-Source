@@ -32,8 +32,8 @@ init() {
   clientfield::register("scriptmover", "" + #"hash_2928b6d60aaacda6", 1, getminbitcountfornum(7), "int", &function_6357e884, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_670a34b297f8faca", 1, 1, "int", &function_d326587e, 0, 0);
   clientfield::register("toplayer", "" + #"duffel_prison", 1, 1, "int", &duffel_prison, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_1ee540924e569350", 1, 1, "int", &function_e83bf3a, 0, 0);
-  clientfield::register("actor", "" + #"hash_27db1707c088563c", 1, 1, "int", &function_e33e10b9, 0, 0);
+  clientfield::register("toplayer", "" + #"shell_shock_player", 1, 1, "int", &function_e83bf3a, 0, 0);
+  clientfield::register("actor", "" + #"brutus_stun_shell", 1, 1, "int", &function_e33e10b9, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_376c030aee1d6ccb", 1, 2, "int", &function_3537ad19, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_201ef69f0a0a5dce", 1, 1, "int", &group_bot_mp, 0, 0);
   clientfield::register("allplayers", "" + #"hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
@@ -49,7 +49,7 @@ init() {
   level._effect[#"energy_glow"] = #"hash_390f28af5955af1f";
   level._effect[#"kr_glow"] = #"hash_10198f7ef5535f3a";
   level._effect[#"ritual_gobo"] = #"hash_140f0bd65e4d70d2";
-  level._effect[#"hash_180f832f742958d6"] = #"hash_66bb6697a9882bd6";
+  level._effect[#"ritual_gobo_activate"] = #"hash_66bb6697a9882bd6";
   level._effect[#"door_explosion"] = #"hash_4fba451426ea3bb7";
   level._effect[#"hash_1a454ca256b757e6"] = #"hash_5028a74e717df332";
   level._effect[#"hash_7d5a495febe292e4"] = #"hash_321ad275226af072";
@@ -101,7 +101,7 @@ function_d36b21ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_c8043066(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  s_portal = struct::get(#"hash_4f3ae1de39c4b3e3");
+  s_portal = struct::get(#"dm_energy_tag_origin");
 
   if(newval == 1) {
     if(!isDefined(s_portal.mdl_portal)) {
@@ -139,7 +139,7 @@ function_d598fd7e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"ritual_gobo"], self, "tag_origin");
     wait 1.6;
-    util::playFXOnTag(localclientnum, level._effect[#"hash_180f832f742958d6"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"ritual_gobo_activate"], self, "tag_origin");
     return;
   }
 
@@ -202,8 +202,8 @@ function_430edc4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       mdl_ghost delete();
     }
 
-    if(isDefined(level._effect[#"hash_1839aae8f96148af"])) {
-      self.var_99f0142a = util::playFXOnTag(localclientnum, level._effect[#"hash_1839aae8f96148af"], self, "tag_origin");
+    if(isDefined(level._effect[#"air_blast_2"])) {
+      self.var_99f0142a = util::playFXOnTag(localclientnum, level._effect[#"air_blast_2"], self, "tag_origin");
     }
   }
 }

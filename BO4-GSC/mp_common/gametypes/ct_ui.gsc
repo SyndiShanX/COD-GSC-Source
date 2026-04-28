@@ -34,7 +34,7 @@ function_6889bb61(var_74d544ba) {
   level flag::clear("desc_countdown_done");
 
   if(isDefined(var_74d544ba) && var_74d544ba) {
-    level waittill(#"hash_4c62fe02843b1a98");
+    level waittill(#"draft_game_start");
   }
 
   self clientfield::set_to_player("screen_blur", 1);

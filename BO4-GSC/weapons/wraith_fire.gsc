@@ -50,11 +50,11 @@ function_dfe5cf4c(watcher, player) {
 function_4dbceded() {
   self waittill(#"death");
   waittillframeend();
-  self notify(#"hash_51d0dcaebb5940a5");
+  self notify(#"wraith_fire_deleted");
 }
 
 function_13f6636b(owner, weapon) {
-  self endon(#"hacked", #"hash_51d0dcaebb5940a5");
+  self endon(#"hacked", #"wraith_fire_deleted");
   assert(isDefined(weapon.customsettings), "<dev string:x38>" + weapon.name);
   self thread function_4dbceded();
   team = self.team;

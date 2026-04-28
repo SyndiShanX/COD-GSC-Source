@@ -205,11 +205,11 @@ function_c52e8ba(e_player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
-      case # "hash_4083e9da0ba41dec":
+      case # "pegasus_ride_started":
         self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         break;
       case # "hash_718fe784e4ddaa70":
-        if(!level flag::get(#"hash_4083e9da0ba41dec")) {
+        if(!level flag::get(#"pegasus_ride_started")) {
           self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         } else {
           self.hint_string[n_player_index] = #"hash_5aabbca03c1acbc8";
@@ -217,7 +217,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
 
         break;
       case # "hash_42322632a02d834d":
-        if(!level flag::get(#"hash_4083e9da0ba41dec")) {
+        if(!level flag::get(#"pegasus_ride_started")) {
           self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         } else {
           self.hint_string[n_player_index] = #"hash_7f2b5399434a7ec9";

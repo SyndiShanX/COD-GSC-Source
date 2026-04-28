@@ -1136,7 +1136,7 @@ function_be93a2bf() {
     ai.health = int(ai.health * 2);
     ai thread function_ea2d02a6();
     level.zombie_total--;
-    n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+    n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
 
     if(flag::get(#"hash_2b7c76b6b0dfc0fd")) {
       if(getplayers().size > 2) {

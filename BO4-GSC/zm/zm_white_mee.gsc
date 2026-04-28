@@ -82,7 +82,7 @@ init_quests() {
   zm_sq::register(#"mee_mixed", #"step_1", #"mee_mixed_step1", &mee_mixed_step1_setup, &mee_mixed_step1_cleanup);
   level flag::init(#"hash_502f2e83a538c679");
   level flag::init(#"hash_7346ae8e42a74ce6");
-  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"jump_scare", #"step_1", #"jump_scare_quest", &jump_scare, &jump_scare_cleanup);
   level flag::wait_till(#"all_players_spawned");
 
   if(zm_utility::is_ee_enabled()) {
@@ -512,7 +512,7 @@ function_61e129a8() {
   b_delayed = 0;
 
   do {
-    if(level flag::get(#"hash_7cc3b03eefb11fc") && !level flag::get(#"crawler_step_complete") || level flag::get(#"hash_6ebb9d0d0539bf68") && !level flag::get(#"hash_7c2ae917559738ec")) {
+    if(level flag::get(#"hash_7cc3b03eefb11fc") && !level flag::get(#"crawler_step_complete") || level flag::get(#"mannequin_step_started") && !level flag::get(#"hash_7c2ae917559738ec")) {
       b_delayed = 1;
       wait 1;
       continue;

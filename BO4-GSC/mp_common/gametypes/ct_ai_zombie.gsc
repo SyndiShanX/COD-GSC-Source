@@ -658,8 +658,8 @@ function_cc9c6a13(state) {
       self pathmode("move allowed");
       break;
     case 5:
-      self function_d1e55248(#"hash_5780e28b762b831a", 0);
-      val::reset(#"hash_5780e28b762b831a", "ignoreall");
+      self function_d1e55248(#"ai_cleanup_state", 0);
+      val::reset(#"ai_cleanup_state", "ignoreall");
       self pathmode("move allowed");
       break;
     default:
@@ -677,8 +677,8 @@ function_b8eff92a(state) {
       self function_9758722("sprint");
       break;
     case 5:
-      self function_d1e55248(#"hash_5780e28b762b831a", !self.isonnavmesh);
-      val::set(#"hash_5780e28b762b831a", "ignoreall", 1);
+      self function_d1e55248(#"ai_cleanup_state", !self.isonnavmesh);
+      val::set(#"ai_cleanup_state", "ignoreall", 1);
 
       if(!self.isonnavmesh) {
         self pathmode("dont move", 1);

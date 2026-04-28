@@ -41,7 +41,7 @@ clearirtarget() {
     clientnum = self getentitynumber();
 
     if((self.stingertarget.locked_on & 1 << clientnum) != 0) {
-      self notify(#"hash_41e93a518427847c");
+      self notify(#"locked_on_lost");
     }
 
     self lockingon(self.stingertarget, 0);

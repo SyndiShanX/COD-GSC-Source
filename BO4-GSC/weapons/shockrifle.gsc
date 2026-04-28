@@ -339,7 +339,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
 
   self.var_beee9523 = 0;
   self function_3474c820();
-  playsoundatposition(#"hash_f2b6a97233cbeb2", self.origin);
+  playsoundatposition(#"wpn_shockrifle_electrocution_end", self.origin);
 
   if(isPlayer(self)) {
     self clientfield::set_to_player("shock_rifle_shocked", 0);

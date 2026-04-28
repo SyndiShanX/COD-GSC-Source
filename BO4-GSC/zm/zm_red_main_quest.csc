@@ -55,13 +55,13 @@ init() {
   clientfield::register("scriptmover", "" + #"hash_431f319e4b8fe9db", 16000, 1, "int", &function_f3c6c429, 0, 0);
   clientfield::register("world", "" + #"hash_158233cdc645bef6", 16000, 1, "int", &function_6fd9deaa, 0, 0);
   clientfield::register("toplayer", "" + #"hash_492a33037a532fe0", 16000, 1, "counter", &function_6d38ea52, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_4aeb7fcdd8302eaa", 16000, 1, "int", &function_70e5b4bd, 0, 0);
+  clientfield::register("toplayer", "" + #"play_death_selected", 16000, 1, "int", &function_70e5b4bd, 0, 0);
   clientfield::register("toplayer", "" + #"hash_7a99ff005314c5fc", 16000, 1, "int", &function_f648d45a, 0, 0);
   clientfield::register("toplayer", "" + #"hash_7f85dc0ce20a6f2c", 16000, 1, "int", &function_40cc4833, 0, 0);
   clientfield::register("toplayer", "" + #"hash_4e3e66f200f76f34", 16000, 1, "int", &function_83c7dece, 0, 0);
   clientfield::register("toplayer", "" + #"hash_565ca9982285f23e", 16000, 1, "int", &function_530c191c, 0, 0);
   clientfield::register("actor", "" + #"hash_415416bf220de94", 16000, 1, "int", &function_cb766634, 0, 0);
-  clientfield::register("actor", "" + #"hash_3e2b1092de25c2dd", 16000, 1, "int", &function_3e4aa1cc, 0, 0);
+  clientfield::register("actor", "" + #"play_death_charged", 16000, 1, "int", &function_3e4aa1cc, 0, 0);
   clientfield::register("actor", "" + #"hash_24b5302c2f39ebc2", 16000, 1, "int", &function_fac1b5c7, 0, 0);
   clientfield::register("actor", "" + #"hash_6a8479b5a5b359a7", 16000, 1, "int", &function_106dc737, 0, 0);
   clientfield::register("actor", "" + #"hash_4feb66128e57d092", 16000, 1, "int", &function_343099ca, 0, 0);
@@ -69,7 +69,7 @@ init() {
   clientfield::register("actor", "" + #"hash_4e1b58f05f69a65a", 16000, 1, "int", &function_f39e44d7, 0, 0);
   clientfield::register("actor", "" + #"hash_5a6761fe764bdccf", 16000, 1, "int", &function_6bd8c915, 0, 0);
   var_ff76a259 = getminbitcountfornum(5);
-  clientfield::register("world", "" + #"hash_74aaba5c17a71e0d", 16000, var_ff76a259, "int", &function_af9f249c, 0, 0);
+  clientfield::register("world", "" + #"play_death_spotlight", 16000, var_ff76a259, "int", &function_af9f249c, 0, 0);
   clientfield::register("world", "" + #"hash_7e49e921c4dd052f", 16000, var_ff76a259, "int", &function_704042f5, 0, 0);
   clientfield::register("world", "" + #"hash_9d4aab5c25b93ff", 16000, var_ff76a259, "int", &function_a1833637, 0, 0);
   clientfield::register("world", "" + #"hash_58e58259618537e7", 16000, var_ff76a259, "int", &function_52659f14, 0, 0);
@@ -107,7 +107,7 @@ init() {
   level._effect[#"hash_7fc7f7b5958831d4"] = #"hash_520fd2427c5fcea3";
   level._effect[#"hash_431f319e4b8fe9db"] = #"hash_37bc7da216893b77";
   level._effect[#"hash_415416bf220de94"] = #"hash_7b7ba0ac0755a064";
-  level._effect[#"hash_3e2b1092de25c2dd"] = #"hash_318aaa12f9dc7fd4";
+  level._effect[#"play_death_charged"] = #"hash_318aaa12f9dc7fd4";
   level._effect[#"hash_24b5302c2f39ebc2"] = #"hash_569b6effe4db6f54";
   level._effect[#"hash_6a8479b5a5b359a7"] = #"hash_513bda1b67490064";
   level._effect[#"hash_4feb66128e57d092"] = #"hash_194fead3457d21f5";
@@ -166,10 +166,10 @@ function_dee06e64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_70f269cd(localclientnum, newval, str_step) {
   switch (str_step) {
     case # "oil":
-      a_s_points = function_cc7e9fc3(#"hash_219b4f20890b177b");
+      a_s_points = function_cc7e9fc3(#"s_progress_oil");
       break;
     case # "reflect":
-      a_s_points = function_cc7e9fc3(#"hash_6ae79ecdde61ddea", #"hash_219b4f20890b177b");
+      a_s_points = function_cc7e9fc3(#"hash_6ae79ecdde61ddea", #"s_progress_oil");
       break;
     case # "split_prophecy":
       a_s_points = function_cc7e9fc3(#"hash_64f85050330547ca", #"hash_6ae79ecdde61ddea");
@@ -181,13 +181,13 @@ function_70f269cd(localclientnum, newval, str_step) {
       a_s_points = function_cc7e9fc3(#"hash_215626beb36c1b07", #"hash_64f85050330547ca");
       break;
     case # "light":
-      a_s_points = function_cc7e9fc3(#"hash_20ba31ada21bdeaf", #"hash_218b3395cd5cfd78");
+      a_s_points = function_cc7e9fc3(#"s_progress_light", #"hash_218b3395cd5cfd78");
       break;
     case # "play":
-      a_s_points = function_cc7e9fc3(#"hash_30d4d7a6ef033383");
+      a_s_points = function_cc7e9fc3(#"s_progress_play");
       break;
     case # "blood":
-      a_s_points = function_cc7e9fc3(#"hash_196c59af72f28307", #"hash_30d4d7a6ef033383");
+      a_s_points = function_cc7e9fc3(#"s_progress_blood", #"s_progress_play");
       break;
   }
 
@@ -453,7 +453,7 @@ function_9dbc7c12(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_613a43b6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  s_fx = struct::get(#"hash_1ccb47ff147a81f4");
+  s_fx = struct::get(#"s_prophecy_line");
   playFX(localclientnum, level._effect[#"hash_530e1caa1a8c81d2"], s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
 }
 
@@ -862,7 +862,7 @@ function_cb766634(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_3e4aa1cc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  str_fx = level._effect[#"hash_3e2b1092de25c2dd"];
+  str_fx = level._effect[#"play_death_charged"];
   self function_95d76b40(localclientnum, newval, str_fx);
 }
 
@@ -1117,7 +1117,7 @@ function_67b43987(localclientnum, newval, str_ww) {
 }
 
 function_141a55a4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  a_s_glyphs = struct::get_array(#"hash_61ba778e4f6ae3e");
+  a_s_glyphs = struct::get_array(#"s_play_warn");
 
   if(newval) {
     foreach(s_glyph in a_s_glyphs) {
@@ -1251,7 +1251,7 @@ function_180e26e2() {
   level.var_bbe677e8[#"close"] = [];
   level.var_bbe677e8[#"far"] = [];
   level.var_bbe677e8[#"all"] = [];
-  a_s_pos = struct::get_array(#"hash_7c9fecc7da908461");
+  a_s_pos = struct::get_array(#"s_play_react");
 
   foreach(s_pos in a_s_pos) {
     str_type = s_pos.script_noteworthy;
@@ -1358,7 +1358,7 @@ function_9b5699b4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_59ea1144(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  s_omphalos = struct::get(#"hash_2ea39900a13a8305");
+  s_omphalos = struct::get(#"s_cleanse_dest");
 
   if(newval) {
     if(!isDefined(s_omphalos.var_2f2435ec)) {
@@ -1374,7 +1374,7 @@ function_59ea1144(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_806b16b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  s_omphalos = struct::get(#"hash_2ea39900a13a8305");
+  s_omphalos = struct::get(#"s_cleanse_dest");
 
   if(!isDefined(s_omphalos.mdl_rumble)) {
     s_omphalos.mdl_rumble = util::spawn_model(localclientnum, #"tag_origin", s_omphalos.origin, s_omphalos.angles);
@@ -1500,7 +1500,7 @@ function_842fb5d0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 cleanse_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  s_fx = struct::get(#"hash_2ea39900a13a8305");
+  s_fx = struct::get(#"s_cleanse_dest");
 
   if(newval) {
     if(!isDefined(s_fx.var_8928e499)) {

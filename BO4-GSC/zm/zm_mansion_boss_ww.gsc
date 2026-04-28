@@ -482,7 +482,7 @@ boss_teleport_players(var_a88dacea) {
     var_45e1b44b = level.s_boss.a_s_align[3];
     var_45e1b44b thread scene::play(#"aib_t8_zm_mnsn_hallion_intro");
     level thread function_52818528();
-    level notify(#"hash_4b195fabca6f5aaf");
+    level notify(#"boss_intro_started");
     util::wait_network_frame();
     var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
     var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
@@ -514,7 +514,7 @@ function_52818528() {
   wait n_wait;
   mansion_util::function_2057ddc1(undefined, "werewolf", "intro", undefined, #"werewolf_intro", 10, 1, 0, 1);
   wait 1;
-  mansion_util::function_2057ddc1(undefined, "druid_arena", "enter", undefined, #"hash_6ffba77e7b683b46", 10, 1);
+  mansion_util::function_2057ddc1(undefined, "druid_arena", "enter", undefined, #"druid_arena_enter", 10, 1);
 }
 
 function_528abede(s_loc, var_79bdd0d5) {
@@ -531,7 +531,7 @@ function_528abede(s_loc, var_79bdd0d5) {
   if(var_79bdd0d5) {
     self val::set("bossfight_intro", "freezecontrols", 1);
     self val::set("bossfight_intro", "disable_weapons", 1);
-    level waittill(#"hash_4b195fabca6f5aaf");
+    level waittill(#"boss_intro_started");
     self thread lui::screen_fade_in(0.1);
     level waittill(#"boss_intro_done");
     self val::reset("bossfight_intro", "freezecontrols");
@@ -733,17 +733,17 @@ function_738f7574(n_stage) {
   while(true) {
     if(var_3b12bc77) {
       level thread function_f433c7f5(n_stage);
-      level waittill(#"hash_3d52ec26acedf741");
+      level waittill(#"boss_attack_complete");
     }
 
     if(var_de4b911c) {
       if(level flag::get(#"hash_f4dfa99c5e22bc6")) {
         level thread function_fdd04f47(n_stage);
-        level waittill(#"hash_3d52ec26acedf741");
+        level waittill(#"boss_attack_complete");
       } else if(!var_3b12bc77) {
         level waittill(#"hash_f4dfa99c5e22bc6");
         level thread function_fdd04f47(n_stage);
-        level waittill(#"hash_3d52ec26acedf741");
+        level waittill(#"boss_attack_complete");
       }
     }
 
@@ -934,7 +934,7 @@ function_f433c7f5(n_stage) {
   }
 
   wait 2;
-  level notify(#"hash_3d52ec26acedf741");
+  level notify(#"boss_attack_complete");
 }
 
 function_7bcf3048() {
@@ -944,7 +944,7 @@ function_7bcf3048() {
 }
 
 function_c1b6e914() {
-  level endon(#"hash_4be216e72d412c40", #"hash_3d52ec26acedf741", #"hash_38f29f9cb03586ea", #"end_game", #"intermission");
+  level endon(#"hash_4be216e72d412c40", #"boss_attack_complete", #"hash_38f29f9cb03586ea", #"end_game", #"intermission");
   self endon(#"death");
 
   while(true) {
@@ -1005,7 +1005,7 @@ function_367de434() {
 }
 
 function_cc0b32f8(n_stage) {
-  level endon(#"hash_3d52ec26acedf741", #"end_game", #"intermission");
+  level endon(#"boss_attack_complete", #"end_game", #"intermission");
   level waittill(#"boss_captured");
   level notify(#"hash_4be216e72d412c40");
 
@@ -1055,7 +1055,7 @@ function_13552544() {
 }
 
 function_3aa2bc7a(v_blast_origin) {
-  level endon(#"hash_3d52ec26acedf741", #"end_game", #"intermission");
+  level endon(#"boss_attack_complete", #"end_game", #"intermission");
   a_players = util::get_active_players();
   a_players = arraysortclosest(a_players, v_blast_origin, undefined, 0, 200);
 
@@ -1127,7 +1127,7 @@ function_1a240284(n_stage, var_2100633b) {
   util::wait_network_frame();
   self.origin = (0, 0, 0);
   function_f25a51e4(0);
-  level notify(#"hash_3d52ec26acedf741");
+  level notify(#"boss_attack_complete");
 
   if(var_2100633b) {
     level notify(#"hash_54f2e7b4cb8826a");
@@ -1357,7 +1357,7 @@ function_fdd04f47(n_stage) {
   var_45e1b44b thread function_677a2503();
   var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
   level flag::clear(#"hash_f4dfa99c5e22bc6");
-  level notify(#"hash_3d52ec26acedf741");
+  level notify(#"boss_attack_complete");
 }
 
 function_677a2503(var_754a5572 = 1) {
@@ -1711,7 +1711,7 @@ function_ec25f7c2() {
     util::wait_network_frame();
   }
 
-  level waittill(#"hash_3d52ec26acedf741");
+  level waittill(#"boss_attack_complete");
   self function_ccd8387e(0);
   level flag::set(#"hash_eed1544f10c5bb3");
 }

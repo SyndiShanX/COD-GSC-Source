@@ -803,10 +803,10 @@ event_handler[weapon_change] function_6846a2b7(eventstruct) {
 
 event_handler[event_41480c76] function_c33f3471(eventstruct) {
   if(self function_21c0fa55()) {
-    level callback(#"hash_4152cf6a61494581", eventstruct);
+    level callback(#"offhand_weapon_change", eventstruct);
   }
 
-  self callback(#"hash_4152cf6a61494581", eventstruct);
+  self callback(#"offhand_weapon_change", eventstruct);
 }
 
 event_handler[event_6e84b1b1] function_ff9acfac(eventstruct) {

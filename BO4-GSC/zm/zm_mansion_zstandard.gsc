@@ -127,7 +127,7 @@ registerlast_truck_headshot_() {
 
 function_a97f7327() {
   level zm_utility::function_7a35b1d7(#"hash_60f7952659026bea");
-  level thread zm_audio::sndannouncerplayvox(#"hash_3acd6d72567def3a", undefined, undefined, undefined, 1);
+  level thread zm_audio::sndannouncerplayvox(#"door_open_all", undefined, undefined, undefined, 1);
 }
 
 function_40dfd00b(n_round_number) {

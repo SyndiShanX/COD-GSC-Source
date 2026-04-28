@@ -465,7 +465,7 @@ bgb_gumball_anim(bgb) {
     waitframe(1);
   }
 
-  evt = self waittilltimeout(3, #"hash_593f920e9efd2ecd", #"bgb_gumball_anim_give");
+  evt = self waittilltimeout(3, #"bgb_gumball_anim_failed", #"bgb_gumball_anim_give");
 
   if(isDefined(evt) && evt.bgb === bgb) {
     if(evt._notify == #"bgb_gumball_anim_give") {
@@ -484,7 +484,7 @@ function_a6c704c(bgb) {
   util::delay(#"offhand_fire", "death", &zm_audio::create_and_play_dialog, #"elixir", #"drink");
 
   if(isDefined(level.bgb[bgb].var_4a9b0cdc) && level.bgb[bgb].var_4a9b0cdc || self function_e98aa964(1)) {
-    self notify(#"hash_27b238d082f65849", bgb);
+    self notify(#"bgb_gumball_anim_activate", bgb);
     self activation_start();
     self thread run_activation_func(bgb);
     return true;
@@ -548,7 +548,7 @@ function_3b2a02d8(bgb) {
   self zm_stats::increment_player_stat("bgbs_chewed");
   self zm_stats::increment_challenge_stat(#"gum_gobbler_consume");
   self zm_stats::forced_attachment("boas_bgbs_chewed");
-  self zm_stats::function_c0c6ab19(#"hash_67f429ee3f93764d");
+  self zm_stats::function_c0c6ab19(#"elixers_used");
 
   if(level.bgb[bgb].rarity > 0) {
     self zm_stats::increment_challenge_stat(#"hash_41d41d501c70fb30");
@@ -575,7 +575,7 @@ function_62f40b0d(bgb, var_f3b15ce0) {
     return;
   }
 
-  self notify(#"hash_593f920e9efd2ecd", {
+  self notify(#"bgb_gumball_anim_failed", {
     #bgb: bgb
   });
 }
@@ -640,7 +640,7 @@ bgb_limit_monitor() {
       self thread bgb_set_debug_text(self.bgb);
 
       self thread run_timer(level.bgb[self.bgb].limit);
-      self waittill(#"hash_347d2afccb8337ab");
+      self waittill(#"bgb_run_timer_cleared");
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
     case # "rounds":
@@ -887,7 +887,7 @@ run_timer(max) {
     }
   }
 
-  self notify(#"hash_347d2afccb8337ab");
+  self notify(#"bgb_run_timer_cleared");
   self clear_timer();
   self.var_ec8a9710 = undefined;
 }
@@ -1093,7 +1093,7 @@ function_c6cd71d5(str_powerup, v_origin = self get_player_dropped_powerup_origin
   e_powerup.e_player_owner = self;
 
   if(isPlayer(self)) {
-    self zm_stats::increment_challenge_stat(#"hash_3ebae93ea866519c");
+    self zm_stats::increment_challenge_stat(#"gum_gobbler_powerups_grabbed");
   }
 }
 

@@ -1531,7 +1531,7 @@ function_f95a14a0() {
 
   self ghost();
   self notsolid();
-  self val::set(#"hash_65edbe063d05f17b", "ignoreall", 1);
+  self val::set(#"skeleton_fake_death", "ignoreall", 1);
   self.var_126d7bef = 1;
   self.ignore_round_spawn_failsafe = 1;
   self.b_ignore_cleanup = 1;
@@ -1567,7 +1567,7 @@ function_f95a14a0() {
     self.e_linkto delete();
   }
 
-  self val::reset(#"hash_65edbe063d05f17b", "ignoreall");
+  self val::reset(#"skeleton_fake_death", "ignoreall");
 
   if(zm_utility::is_trials()) {
     s_scene thread zm_red::function_19a28e98();

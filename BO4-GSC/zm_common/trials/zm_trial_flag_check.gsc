@@ -40,7 +40,7 @@ on_end(round_reset) {
 }
 
 monitor_flag(str_flag) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     level flag::wait_till(str_flag);

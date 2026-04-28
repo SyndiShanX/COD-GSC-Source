@@ -717,7 +717,7 @@ wunderfizz_devgui_callback(cmd) {
     case # "wunderfizz_idle":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x7b>");
       break;
-    case # "hash_67d324a91b1fd821":
+    case # "wunderfizz_power_off":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x82>");
       break;
     case # "wunderfizz_initial":

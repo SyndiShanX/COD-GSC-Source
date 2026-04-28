@@ -579,7 +579,7 @@ give_talents() {
   self.var_c8836f02 = self function_fd62a2aa(self.class_num);
 
   foreach(var_ebdddedf in self.var_c8836f02) {
-    if(var_ebdddedf.namehash == #"hash_6be738527a4213aa" && level.hardcoremode) {
+    if(var_ebdddedf.namehash == #"gear_armor_mp" && level.hardcoremode) {
       var_ebdddedf.namehash = #"hash_5c9c79c25b74b7bb";
     }
 
@@ -1355,11 +1355,11 @@ function_b61852e1() {
   self notify("25e412c683e8d36");
   self endon("25e412c683e8d36");
   waitframe(1);
-  self luinotifyevent(#"hash_21e30e91084f7e66", 0);
+  self luinotifyevent(#"post_loadout_given", 0);
   wait 0.1;
-  self luinotifyevent(#"hash_21e30e91084f7e66", 0);
+  self luinotifyevent(#"post_loadout_given", 0);
   wait 0.5;
-  self luinotifyevent(#"hash_21e30e91084f7e66", 0);
+  self luinotifyevent(#"post_loadout_given", 0);
 }
 
 function_43048d33(spawn_weapon, primaryweapon) {

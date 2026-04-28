@@ -37,7 +37,7 @@
 #namespace zm_orange_mq_soapstone;
 
 preload() {
-  level flag::init(#"hash_710c2f40baf302c8");
+  level flag::init(#"soapstones_collected");
   level flag::init(#"hash_3a8a317fc0b5e5b0");
   level flag::init(#"hash_57d2cbf7d6c2035a");
   level flag::init(#"hash_238e5c8b416f855");
@@ -94,7 +94,7 @@ function_d878e1ee(var_a276c861) {
     zm_orange_pablo::function_3f9e02b8(7, #"hash_3a5a3e5c65b49526", #"hash_f90cca21dd0dd02", &function_a9c8883f);
     waitframe(1);
     zm_orange_pablo::function_d83490c5(7);
-    level flag::wait_till(#"hash_710c2f40baf302c8");
+    level flag::wait_till(#"soapstones_collected");
     level thread function_1c744b3f();
     e_stone = getent("papa_bear", "targetname");
     e_stone.s_unitrigger = e_stone zm_unitrigger::create("", 96);
@@ -113,7 +113,7 @@ function_d878e1ee(var_a276c861) {
 }
 
 function_a9c8883f() {
-  level flag::set(#"hash_710c2f40baf302c8");
+  level flag::set(#"soapstones_collected");
 }
 
 function_afa2f621() {

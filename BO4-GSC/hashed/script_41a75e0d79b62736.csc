@@ -15,14 +15,14 @@ function_be33348b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     self postfx::playpostfxbundle(#"pstfx_blood_wash");
     self postfx::playpostfxbundle(#"pstfx_zm_acid_dmg");
-    self postfx::playpostfxbundle(#"hash_25c3aa91c32db43c");
-    self.var_431ddde9 = self playLoopSound(#"hash_341a3fa00975f232");
+    self postfx::playpostfxbundle(#"pstfx_zm_acid_dmg_2");
+    self.var_431ddde9 = self playLoopSound(#"zmb_trap_acid_loop_plr");
     return;
   }
 
   self postfx::exitpostfxbundle(#"pstfx_blood_wash");
   self postfx::exitpostfxbundle(#"pstfx_zm_acid_dmg");
-  self postfx::exitpostfxbundle(#"hash_25c3aa91c32db43c");
+  self postfx::exitpostfxbundle(#"pstfx_zm_acid_dmg_2");
 
   if(isDefined(self.var_431ddde9)) {
     self stoploopsound(self.var_431ddde9);

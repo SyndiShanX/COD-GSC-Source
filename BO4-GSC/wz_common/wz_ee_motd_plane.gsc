@@ -20,9 +20,9 @@ __init__() {
 
   if(level.var_5c9e1f9) {
     level.var_f5ea5804 = 0;
-    level callback::add_callback(#"hash_3057417db7f8acdd", &function_d53a8c5b);
-    level callback::add_callback(#"hash_405e46788e83af41", &function_d53a8c5b);
-    level callback::add_callback(#"hash_7912e21750e4010d", &function_d53a8c5b);
+    level callback::add_callback(#"death_circle_moving", &function_d53a8c5b);
+    level callback::add_callback(#"death_circle_start", &function_d53a8c5b);
+    level callback::add_callback(#"death_circle_locked", &function_d53a8c5b);
   }
 
   level thread function_fc45523f();
@@ -44,9 +44,9 @@ function_d53a8c5b() {
     return;
   }
 
-  level callback::remove_callback(#"hash_3057417db7f8acdd", &function_d53a8c5b);
-  level callback::remove_callback(#"hash_405e46788e83af41", &function_d53a8c5b);
-  level callback::remove_callback(#"hash_7912e21750e4010d", &function_d53a8c5b);
+  level callback::remove_callback(#"death_circle_moving", &function_d53a8c5b);
+  level callback::remove_callback(#"death_circle_start", &function_d53a8c5b);
+  level callback::remove_callback(#"death_circle_locked", &function_d53a8c5b);
 }
 
 function_3e59cbbb(goal) {

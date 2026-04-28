@@ -276,7 +276,7 @@ function_86c058b() {
   level.temp_disable = level.var_32ae304;
   level.var_32ae304 = undefined;
   wait 3.5;
-  level notify(#"hash_60c1587995518e92");
+  level notify(#"vp_squad_move");
   level waittill(#"hash_18806b37ec38ff49");
   wait 4;
   ct_vo::function_831e0584(array(#"hash_76712094e9fc348d"), 1);
@@ -686,7 +686,7 @@ function_f6c6baf3() {
   level.var_5008031d = undefined;
 
   while(true) {
-    waitresult = e_player waittill(#"hash_70f03cfbb15356c0");
+    waitresult = e_player waittill(#"sensor_dart_active");
     e_dart = waitresult.dart;
     level.var_5008031d = e_dart;
     var_308b5f44 = struct::get("s_blightfather_dart_loc", "targetname");
@@ -996,7 +996,7 @@ function_79d4c106() {
   e_player thread ct_utils::function_61c3d59c(var_7d5a0f5e, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_2613f24ad4fa5cbc"), "stop_nag");
   setDvar(#"hash_3e06b14c41136e95", 0);
-  e_player waittill(#"hash_7b84cc3c326479a6");
+  e_player waittill(#"overwatch_helicopter_called");
   setDvar(#"hash_3e06b14c41136e95", 1);
   level notify(#"stop_nag");
   ct_utils::function_daa27144();
@@ -1152,7 +1152,7 @@ function_1d2b336(s_start_loc) {
     self bot_stance::crouch();
   }
 
-  level waittill(#"hash_60c1587995518e92");
+  level waittill(#"vp_squad_move");
   self val::reset(#"ai_vp", "ignoreall");
 
   if(isDefined(b_crouched) && b_crouched) {

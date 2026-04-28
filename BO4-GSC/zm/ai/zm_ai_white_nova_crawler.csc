@@ -29,16 +29,16 @@ function_582a3075(localclientnum) {
     self._effect = [];
   }
 
-  self._effect[#"hash_219e13e8868d7af4"] = "zm_ai/fx8_nova_crawler_explode";
+  self._effect[#"nova_crawler_burst_fx"] = "zm_ai/fx8_nova_crawler_explode";
 
   if(isDefined(self.subarchetype)) {
     if(self.subarchetype == #"blue_nova_crawler") {
-      self._effect[#"hash_219e13e8868d7af4"] = "zm_ai/fx8_nova_crawler_mq_explode";
+      self._effect[#"nova_crawler_burst_fx"] = "zm_ai/fx8_nova_crawler_mq_explode";
       return;
     }
 
     if(self.subarchetype == #"ranged_nova_crawler") {
-      self._effect[#"hash_219e13e8868d7af4"] = "zm_ai/fx8_nova_crawler_elec_explode";
+      self._effect[#"nova_crawler_burst_fx"] = "zm_ai/fx8_nova_crawler_elec_explode";
       self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
     }
   }

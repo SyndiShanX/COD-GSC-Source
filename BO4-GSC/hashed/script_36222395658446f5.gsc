@@ -659,10 +659,10 @@ function_d291665f() {
   self endon(#"disconnect");
 
   while(!self flag::get(#"hash_1213756b45a941f0")) {
-    waitresult = level waittill(#"hash_148b3ce521088846", #"hash_317f58ba0d580c27", #"hash_528d7b7f7d6c51a1");
+    waitresult = level waittill(#"spin_trap_kill", #"acid_trap_kill", #"fan_trap_kill");
 
     switch (waitresult._notify) {
-      case # "hash_148b3ce521088846":
+      case # "spin_trap_kill":
         if(isDefined(self.var_8d32f494)) {
           self.var_8d32f494++;
 
@@ -675,7 +675,7 @@ function_d291665f() {
         }
 
         break;
-      case # "hash_317f58ba0d580c27":
+      case # "acid_trap_kill":
         if(isDefined(self.var_78b705d8)) {
           self.var_78b705d8++;
 
@@ -688,7 +688,7 @@ function_d291665f() {
         }
 
         break;
-      case # "hash_528d7b7f7d6c51a1":
+      case # "fan_trap_kill":
         if(isDefined(self.var_27738b05)) {
           self.var_27738b05++;
 

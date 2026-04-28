@@ -19,7 +19,7 @@
 #namespace namespace_1063645;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + #"hash_3e57db9b106dff0a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"zombie_blood_powerup_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_4ccf2ce25e0dc836", 1, 1, "int");
 }
 
@@ -34,7 +34,7 @@ function_fb0bd6b9() {
     level.var_d8e7f0cf[2] = array(6, 6, 6);
   }
 
-  level flag::init(#"hash_6429ffd7bef6f720");
+  level flag::init(#"nixie_door_open");
   level flag::init(#"hash_7ebd1255a2e91e3e");
   level flag::init(#"hash_795bde5570f8b67c");
   var_5554a9f4 = getent("nixie_door_trigger", "targetname");
@@ -76,7 +76,7 @@ _goodlighting_hangar_a() {
   mdl_door_right rotateyaw(195, 1, 0.2, 0.2);
   level thread function_152c339e();
   self delete();
-  level flag::set(#"hash_6429ffd7bef6f720");
+  level flag::set(#"nixie_door_open");
   level thread function_89f2ec87();
   wait 1;
   mdl_door_left rotateyaw(8, 1, 0.2, 0.2);
@@ -412,7 +412,7 @@ function_f2f53f97() {
   level.var_461a9705 = 1;
   s_spawn_location = struct::get("nixie_tube_zombie_blood_start");
   mdl_powerup = util::spawn_model(s_spawn_location.model, s_spawn_location.origin, s_spawn_location.angles);
-  mdl_powerup clientfield::set("" + #"hash_3e57db9b106dff0a", 1);
+  mdl_powerup clientfield::set("" + #"zombie_blood_powerup_fx", 1);
 
   for(s_target = struct::get(s_spawn_location.target); isDefined(s_target); s_target = struct::get(s_target.target)) {
     n_time = distance(mdl_powerup.origin, s_target.origin) / 300;

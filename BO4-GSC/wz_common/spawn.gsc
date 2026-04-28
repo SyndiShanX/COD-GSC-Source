@@ -21,8 +21,8 @@
 #namespace spawn;
 
 function_f468d9a5(spawnpoint) {
-  distance = getdvarfloat(#"hash_69b296d9dc607a9a", 4350);
-  height = getdvarfloat(#"hash_73c6222ce96fa34a", 5000);
+  distance = getdvarfloat(#"wz_alt_spawn_distance", 4350);
+  height = getdvarfloat(#"wz_alt_spawn_height", 5000);
   velocity = getdvarfloat(#"hash_ae6b05a24ae0d2a", 1760);
   dir = anglesToForward(spawnpoint.angles);
   pos = spawnpoint.origin - dir * distance;

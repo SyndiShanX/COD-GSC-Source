@@ -209,7 +209,7 @@ function_4b44aa37() {
 }
 
 function_857ced89() {
-  self endon(#"disconnect", #"hash_1549266f638bd78f", #"hash_5435513976a87bce", #"hash_2e9b55fc4344af57");
+  self endon(#"disconnect", #"specialty_mod_electriccherry_take", #"hash_5435513976a87bce", #"hash_2e9b55fc4344af57");
   self.var_c25a91ee = 1;
   self playsoundtoplayer(#"hash_2283cbfbc6b9e736", self);
   var_9ade76c0 = self.var_dbaad7dd;

@@ -33,9 +33,9 @@ init() {
   level._effect[#"hash_5f92f2e28c7ef455"] = #"hash_13cf1738cd97717e";
   level._effect[#"brazier_fire_blue"] = #"hash_487863cb3f012833";
   level._effect[#"brazier_fire_green"] = #"hash_276c55785b205f4e";
-  level._effect[#"hash_533608bb3b3407b6"] = #"hash_4eff7803b81cd67d";
+  level._effect[#"brazier_fire_orange"] = #"hash_4eff7803b81cd67d";
   level._effect[#"brazier_fire_purple"] = #"hash_2a46ebc323110b3d";
-  level._effect[#"hash_64a625f8e26e3699"] = #"hash_79207c9d697f9e30";
+  level._effect[#"brazier_fire_white"] = #"hash_79207c9d697f9e30";
   level._effect[#"hash_fa374812e6016c9"][1] = #"hash_676d05725a4ffab9";
   level._effect[#"hash_eafc8632695ccef"][1] = #"hash_511e23c849ed0926";
   level._effect[#"hash_fa374812e6016c9"][2] = #"hash_5199aa40f704fb10";
@@ -115,7 +115,7 @@ function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     case 0:
       break;
     case 1:
-      self.var_9c32107c = playFX(localclientnum, level._effect[#"hash_64a625f8e26e3699"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_white"], v_pos, v_up, v_forward);
       break;
     case 2:
       self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_blue"], v_pos, v_up, v_forward);
@@ -124,7 +124,7 @@ function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_purple"], v_pos, v_up, v_forward);
       break;
     case 4:
-      self.var_9c32107c = playFX(localclientnum, level._effect[#"hash_533608bb3b3407b6"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_orange"], v_pos, v_up, v_forward);
       break;
   }
 

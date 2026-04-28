@@ -22,10 +22,10 @@ function_6df391ab() {
   if(!(isDefined(getgametypesetting(#"wzenableatv")) && getgametypesetting(#"wzenableatv"))) {
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle", #"");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_black", #"");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"hash_7df5c3630a76391e", #"");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_blue", #"");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_green", #"");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_police", #"");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"hash_2a97e28588c0e70d", #"");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_red", #"");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"quad_wz_vehicle_tan", #"");
   }
 

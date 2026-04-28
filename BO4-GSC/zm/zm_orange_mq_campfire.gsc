@@ -51,7 +51,7 @@ function_a874e5d0(var_5ea5c94d, ended_early) {
     level.var_f1907c72.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   }
 
-  level notify(#"hash_1f0238cda598f6e9");
+  level notify(#"blood_event_done");
   level.var_96eedc2a++;
 
   if(level.var_96eedc2a >= 4) {

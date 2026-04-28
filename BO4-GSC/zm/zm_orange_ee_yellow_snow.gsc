@@ -52,10 +52,10 @@ preload() {
 main() {
   level function_47274b1e();
   level function_19f2a68d();
-  zm_sq::register(#"yellow_snowballs", #"step_1", #"hash_2ed342ae0266e20", &function_8ba3d474, &function_f5a84740);
-  zm_sq::register(#"yellow_snowballs", #"step_2", #"hash_2ed342ae0266e20", &function_37507fb7, &function_6ad60943);
-  zm_sq::register(#"yellow_snowballs", #"step_3", #"hash_2ed342ae0266e20", &function_80794c22, &function_2b9f7a47);
-  zm_sq::register(#"yellow_snowballs", #"step_4", #"hash_2ed342ae0266e20", &function_985dbc38, &function_256ebdea);
+  zm_sq::register(#"yellow_snowballs", #"step_1", #"yellow_snowballs_quest", &function_8ba3d474, &function_f5a84740);
+  zm_sq::register(#"yellow_snowballs", #"step_2", #"yellow_snowballs_quest", &function_37507fb7, &function_6ad60943);
+  zm_sq::register(#"yellow_snowballs", #"step_3", #"yellow_snowballs_quest", &function_80794c22, &function_2b9f7a47);
+  zm_sq::register(#"yellow_snowballs", #"step_4", #"yellow_snowballs_quest", &function_985dbc38, &function_256ebdea);
   level waittill(#"all_players_spawned");
   level function_698e6ba();
 

@@ -832,7 +832,7 @@ function_c8e681c8() {
   level.var_f3fb470f = undefined;
   level thread function_5ceffaa6("stop_nag", 0);
   level thread ct_vo::function_14b08e49(array(#"hash_21ad27ad404090b2"), "stop_nag");
-  level waittill(#"hash_48b4c5f856407d62");
+  level waittill(#"spawn_select_closed");
   level notify(#"stop_nag");
   e_player clientfield::set_player_uimodel("hudItems.spawnSelectHidePrompt", 0);
 
@@ -889,7 +889,7 @@ function_c8e681c8() {
   level.var_f3fb470f = undefined;
   level thread function_5ceffaa6("stop_nag", 1);
   level thread ct_vo::function_14b08e49(array(#"hash_612ae33753ce1a52"), "stop_nag");
-  level waittill(#"hash_48b4c5f856407d62");
+  level waittill(#"spawn_select_closed");
   level notify(#"stop_nag");
   level notify(#"start_spawn_beacon_exit_collision");
   level.var_4a4cff9b = undefined;
@@ -983,7 +983,7 @@ function_5ceffaa6(str_level_endon, var_651072b9) {
 }
 
 function_9d45d90a(var_95a93511, var_6238499c, var_b20fd485) {
-  level endon(#"combattraining_logic_finished", #"hash_48b4c5f856407d62");
+  level endon(#"combattraining_logic_finished", #"spawn_select_closed");
   e_player = ct_utils::get_player();
 
   if(isDefined(var_95a93511)) {
@@ -1707,7 +1707,7 @@ gunship_event() {
   }
 
   level.var_74bfba73 = undefined;
-  level notify(#"hash_4049796fbd169552");
+  level notify(#"gunship_event_complete");
   e_player = getplayers()[0];
   e_player show();
   ac130::function_8721028e(level.ac130.owner, 1);
@@ -1728,7 +1728,7 @@ gunship_event() {
 }
 
 function_e47d773c() {
-  level endon(#"combattraining_logic_finished", #"hash_4049796fbd169552");
+  level endon(#"combattraining_logic_finished", #"gunship_event_complete");
   level thread ct_vo::function_5df1a850(level.ac130, array(#"hash_30bea962898791f8"));
   level thread function_b8fea992("s_chopper_enemy_wave1", randomfloatrange(0.7, 1.7), "stop_flood_spawners");
   wait 15;
@@ -1779,7 +1779,7 @@ function_b8fea992(str_spawn_locs, var_264ee2f5, str_endon_notify) {
 }
 
 function_79293a0b() {
-  level endon(#"combattraining_logic_finished", #"hash_4049796fbd169552");
+  level endon(#"combattraining_logic_finished", #"gunship_event_complete");
   wait 35;
   n_start_time = gettime() / 1000;
 
@@ -2134,7 +2134,7 @@ function_7e060369() {
   level endon(#"combattraining_logic_finished");
 
   while(true) {
-    waitresult = level waittill(#"hash_31be1f8b27209ad0");
+    waitresult = level waittill(#"spawn_beacon_spawned");
     e_beacon = waitresult.beacon.spawnbeacon;
 
     if(isDefined(e_beacon) && !isbot(waitresult.owner)) {
@@ -2298,9 +2298,9 @@ function_fa3dd4f0() {
 
   while(true) {
     level.var_3711d636 = undefined;
-    level waittill(#"hash_4c1be11f1e312a36");
+    level waittill(#"spawn_select_open");
     level.var_3711d636 = 1;
-    level waittill(#"hash_48b4c5f856407d62");
+    level waittill(#"spawn_select_closed");
     level.var_3711d636 = undefined;
     waitframe(1);
   }

@@ -94,9 +94,9 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_537d7278 = [];
   level.var_537d7278[#"allies"] = spawnStruct();
   level.var_537d7278[#"allies"].friendly = #"p8_mp_flag_carry_1_blackops";
-  level.var_537d7278[#"allies"].enemy = #"hash_1ad3d7548486082";
+  level.var_537d7278[#"allies"].enemy = #"p8_mp_flag_carry_1_blackops_alt";
   level.var_537d7278[#"axis"] = spawnStruct();
-  level.var_537d7278[#"axis"].friendly = #"hash_4ddde6545c52fa2f";
+  level.var_537d7278[#"axis"].friendly = #"p8_mp_flag_carry_1_mercs_alt";
   level.var_537d7278[#"axis"].enemy = #"p8_mp_flag_carry_1_mercs";
   globallogic_audio::set_leader_gametype_dialog("startCtf", "hcStartCtf", "objCapture", "objCapture", "bbStartCtf", "hcbbStartCtf");
   level thread ctf_icon_hide();

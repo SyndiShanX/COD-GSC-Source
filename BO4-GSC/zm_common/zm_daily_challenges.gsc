@@ -139,7 +139,7 @@ death_check_for_challenge_updates(e_attacker) {
 
         break;
       case # "miniboss":
-        e_attacker zm_stats::increment_challenge_stat(#"hash_258c10d310bf4203");
+        e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_miniboss");
 
         debug_print("<dev string:x128>");
 
@@ -217,7 +217,7 @@ death_check_for_challenge_updates(e_attacker) {
   }
 
   if(zm_loadout::is_lethal_grenade(w_damage)) {
-    e_attacker zm_stats::increment_challenge_stat(#"hash_5f9b7801af13f397");
+    e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_equipment");
 
     debug_print("<dev string:x25f>");
   }

@@ -256,7 +256,7 @@ function_732cbc35() {
   var_eed14f5e = array(#"hash_1a4f889ff65c0a0c");
   function_593bdda2(1, 1, var_eed14f5e, 0, var_5be6a7a9, var_49a50326, var_c897b566);
   level.var_e72728b8 = array(#"sig_buckler_dw", #"eq_swat_grenade");
-  level notify(#"hash_4d65fa7bba19c892");
+  level notify(#"single_grenade_complete");
   wait 0.1;
   ct_vo::function_3ca1b77d();
   ct_vo::function_831e0584(array("vox_tvoi_tutor_ajax_flash_stunned_0"), 1);
@@ -265,7 +265,7 @@ function_732cbc35() {
 }
 
 function_f29a3861() {
-  level endon(#"hash_4d65fa7bba19c892", #"combattraining_logic_finished");
+  level endon(#"single_grenade_complete", #"combattraining_logic_finished");
   level.var_fa76e237 = undefined;
 
   while(true) {
@@ -539,7 +539,7 @@ function_c6e7b0d9() {
     if(!var_a14cd67) {
       ct_vo::function_831e0584(array("vox_tvoi_tutor_ajax_flash_fail"), 0);
       ct_utils::kill_all_bots();
-      level notify(#"hash_18530bbb9146c297");
+      level notify(#"kill_bots_now");
       ct_utils::function_79957328(undefined);
       waitframe(1);
       level thread ct_utils::function_9ab507a9("courtyard_collision", "start_courtyard_collision", "stop_courtyard_collision", undefined, 1, 1);
@@ -864,7 +864,7 @@ function_8c3101de() {
   level.var_e72728b8 = undefined;
   ct_utils::function_654280be();
   ct_utils::function_9aca2fa0("ct_action");
-  level notify(#"hash_4161e19c15c58c8c");
+  level notify(#"all_guys_dead");
   level.var_5830bda2 = 1;
   ct_vo::function_3ca1b77d();
   ct_vo::function_831e0584(array(#"hash_7de3d0ed50c305d6"), 1);
@@ -919,7 +919,7 @@ function_b73895e1() {
 }
 
 function_4e24aa26() {
-  level endon(#"hash_4161e19c15c58c8c", #"combattraining_logic_finished");
+  level endon(#"all_guys_dead", #"combattraining_logic_finished");
   var_6ee32682 = 0;
 
   while(true) {

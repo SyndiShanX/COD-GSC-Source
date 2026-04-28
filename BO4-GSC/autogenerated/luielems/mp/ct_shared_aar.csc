@@ -69,12 +69,12 @@ class cct_shared_aar: cluielem {
       return;
     }
 
-    if(#"hash_3327faf4ae535f2b" == state_name) {
+    if(#"newrecord_gold" == state_name) {
       set_data(localclientnum, "_state", 9);
       return;
     }
 
-    if(#"hash_32ceb5e1ecc00d78" == state_name) {
+    if(#"newrecord_silver" == state_name) {
       set_data(localclientnum, "_state", 10);
       return;
     }

@@ -154,11 +154,11 @@ function_e31d7cf9(playerhealth, priorplayerhealth, basehealth) {
     return (getdvarint(#"hash_5a4cebcd3aef8f0", 90) / basehealth);
   }
 
-  return getdvarint(#"hash_213e599222859525", 90) / basehealth;
+  return getdvarint(#"shrapnel_stage_1", 90) / basehealth;
 }
 
 function_bf9b3d6(playerhealth, basehealth) {
-  return getdvarint(#"hash_213e599222859525", 90) / basehealth;
+  return getdvarint(#"shrapnel_stage_1", 90) / basehealth;
 }
 
 function_4e9cfc19(localclientnum, playerhealth, priorplayerhealth, basehealth = 100) {

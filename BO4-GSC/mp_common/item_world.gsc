@@ -48,7 +48,7 @@ __init__() {
   level.var_9cddbf4e[#"hash_574076754776e003"] = {
     #open_sound: # "hash_36e23ce3e5f7e4c0", #var_b9492c6: # "hash_22f426a8593609e8"};
   level.var_9cddbf4e[#"wpn_t7_drop_box_wz"] = {
-    #open_sound: # "hash_613f8a1669f8b231", #var_b9492c6: # "hash_2b751d50426093db"};
+    #open_sound: # "evt_supply_drop_open", #var_b9492c6: # "hash_2b751d50426093db"};
   callback::on_connect(&_on_player_connect);
   callback::on_spawned(&_on_player_spawned);
   callback::on_disconnect(&_on_player_disconnect);
@@ -1080,7 +1080,7 @@ function_116fd9a7() {
   function_937ea9e(#"generic_pickup", &function_41a52251);
   function_937ea9e(#"hash_5c844f5c1207159c", &function_2b2e9302);
   function_937ea9e(#"hash_31380667bf69d3a0", &function_a240798a);
-  function_937ea9e(#"hash_50375e5de228e9fc", &function_a712496a);
+  function_937ea9e(#"generic_weapon_pickup", &function_a712496a);
 }
 
 function_76915220() {

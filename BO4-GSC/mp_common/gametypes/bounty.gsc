@@ -309,7 +309,7 @@ function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
   if(!var_e9d49a33) {
     overrideentitycamera = player::function_c0f28ff9(attacker, weapon);
     var_50d1e41a = potm::function_775b9ad1(weapon, meansofdeath);
-    potm::function_66d09fea(#"hash_11588f7b0737f095", attacker, self, inflictor, var_50d1e41a, overrideentitycamera);
+    potm::function_66d09fea(#"bh_downed", attacker, self, inflictor, var_50d1e41a, overrideentitycamera);
   }
 
   if(isDefined(attacker)) {
@@ -813,7 +813,7 @@ function_b3faa437() {
   bagomoney.ondrop = &function_62d627a0;
   bagomoney.var_22389d70 = 0;
   bagomoney.var_78149e41 = gameobjects::get_next_obj_id();
-  objective_add(bagomoney.var_78149e41, "invisible", bagomoney, #"hash_34a0ac740c9d0bc2");
+  objective_add(bagomoney.var_78149e41, "invisible", bagomoney, #"bag_o_money_held");
   objective_onentity(bagomoney.var_78149e41, bagomoney);
   bagomoney gameobjects::set_visible_team(#"none");
   level.bagomoney = bagomoney;
@@ -853,7 +853,7 @@ function_cd23eebc(player) {
 }
 
 function_319af5a2(player) {
-  self endon(#"hash_1af469c6cd76e56b");
+  self endon(#"bagomoney_dropped");
   objective_setprogress(self.var_78149e41, float(level.var_3e14d8dd) / level.var_b2a8558a);
   player clientfield::set_to_player("bountyBagMoney", int(float(level.var_3e14d8dd) / level.var_16fd9420));
 
@@ -882,7 +882,7 @@ function_319af5a2(player) {
 }
 
 function_62d627a0(player) {
-  self notify(#"hash_1af469c6cd76e56b");
+  self notify(#"bagomoney_dropped");
   self.visuals[0] solid();
 
   if(isDefined(self.var_78149e41)) {
@@ -1233,7 +1233,7 @@ function_1aca4a4e(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, #"switched_pathing");
         }
       }
     }
@@ -1313,7 +1313,7 @@ function_656691ab() {
         self function_9ffc1856(self.heligoalpos, 1);
       }
 
-      self notify(#"hash_340ab3c2b94ff86a");
+      self notify(#"switched_pathing");
       break;
     }
 

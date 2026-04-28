@@ -101,7 +101,7 @@ setup_lighthouse() {
 
     if(isDefined(level.var_ab11c23d.vh_target)) {
       level.var_ab11c23d.vh_target.b_moving = 0;
-      level.var_ab11c23d.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+      level.var_ab11c23d.vh_target clientfield::set("" + #"lighthouse_beam_fx", 0);
       waitframe(1);
       level.var_ab11c23d.vh_target delete();
     }
@@ -119,7 +119,7 @@ setup_lighthouse() {
 
 function_dbad2f5a() {
   self endon(#"death", #"hash_2b53ed06a97eb26c");
-  level.var_ab11c23d notify(#"hash_78fc5bbd712046b0");
+  level.var_ab11c23d notify(#"lighthouse_state_change");
 
   for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
     waitframe(1);
@@ -158,7 +158,7 @@ function_f223e16f(round_reset) {
   self endon(#"death");
   self.vh_target.b_moving = 0;
   wait 2;
-  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+  self.vh_target clientfield::set("" + #"lighthouse_beam_fx", 0);
   self.vh_target.e_spotlight delete();
   self.vh_target delete();
 
@@ -178,7 +178,7 @@ function_f223e16f(round_reset) {
 
 function_1e902f3b() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   b_locked_weapons = 0;
 
   while(true) {

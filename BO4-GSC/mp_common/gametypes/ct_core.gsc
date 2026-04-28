@@ -233,7 +233,7 @@ function_fa03fc55() {
 
 function_d2845186() {
   level endon(#"hash_699329b4df616aed");
-  level waittill(#"hash_4c62fe02843b1a98");
+  level waittill(#"draft_game_start");
 
   if(isDefined(level.var_e92a00d3)) {
     self[[level.var_e92a00d3]]();

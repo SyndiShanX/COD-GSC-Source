@@ -1270,7 +1270,7 @@ function_5c5cb67b() {
     return true;
   }
 
-  if(level flag::get(#"hash_7943879f3be8ccc6")) {
+  if(level flag::get(#"dark_side_open")) {
     return true;
   }
 
@@ -1278,8 +1278,8 @@ function_5c5cb67b() {
 }
 
 function_173c3ce8(var_ecffa2a8, var_2c5f83d, vol_override = undefined) {
-  self notify(#"hash_6daf8e8dc22cab08");
-  self endon(#"hash_6daf8e8dc22cab08", #"death");
+  self notify(#"player_zone_watcher");
+  self endon(#"player_zone_watcher", #"death");
   self.var_95cfa01d = 1;
   self.var_b05f25ad = 0;
 

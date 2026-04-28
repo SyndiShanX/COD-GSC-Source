@@ -49,10 +49,10 @@ on_localplayer_spawned(local_client_num) {
 
       if(isDefined(self) && self function_8e51b4f(11)) {
         setDvar(#"hash_7327ca257aa61e93", 1);
-        setDvar(#"hash_7b7e1cadbd098787", 1);
+        setDvar(#"cg_hitdet_client_marker", 1);
       } else {
         setDvar(#"hash_7327ca257aa61e93", 0);
-        setDvar(#"hash_7b7e1cadbd098787", 0);
+        setDvar(#"cg_hitdet_client_marker", 0);
       }
 
       if(isprofilebuild()) {}

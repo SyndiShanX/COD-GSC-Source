@@ -440,8 +440,8 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, #"hash_52d967f4fc8b12fc")) {
-    level.var_55b76576[level.var_55b76576.size] = #"hash_52d967f4fc8b12fc";
+  if(!isinarray(level.var_55b76576, #"outer_walkway_open")) {
+    level.var_55b76576[level.var_55b76576.size] = #"outer_walkway_open";
   }
 
   if(!isDefined(level.var_55b76576)) {

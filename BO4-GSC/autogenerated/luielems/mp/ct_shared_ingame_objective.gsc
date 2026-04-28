@@ -34,7 +34,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_7b45e6511e6e3303" == state_name) {
+    if(#"timer_on_fadeout" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 3);
       return;
     }
@@ -44,7 +44,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_1f92740e023d0e37" == state_name) {
+    if(#"dynobj_killtoearnhellstorm_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 5);
       return;
     }
@@ -54,7 +54,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_2ad0da501b5586a4" == state_name) {
+    if(#"dynobj_killtoearnrcxd_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 7);
       return;
     }
@@ -64,7 +64,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_4de4402f8698c768" == state_name) {
+    if(#"dynobj_killtoearnswat_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 9);
       return;
     }
@@ -74,7 +74,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_2f0272e755f4abf7" == state_name) {
+    if(#"dynobj_killtoearnlightningstrike_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 11);
       return;
     }
@@ -84,7 +84,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_71743ffed428ea2f" == state_name) {
+    if(#"dynobj_killtoearnseraphchopper_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 13);
       return;
     }
@@ -94,7 +94,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_7d5a07e3680ec561" == state_name) {
+    if(#"dynobj_killsoldiers_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 15);
       return;
     }
@@ -104,7 +104,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_5ba30c4069a3b28" == state_name) {
+    if(#"dynobj_killwithpurifier_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 17);
       return;
     }
@@ -114,7 +114,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_83700757d6b9194" == state_name) {
+    if(#"dynobj_killmantises_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 19);
       return;
     }
@@ -124,7 +124,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_2a4442540584316a" == state_name) {
+    if(#"dynobj_earnmantis_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 21);
       return;
     }
@@ -134,7 +134,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_1a051da4d150816" == state_name) {
+    if(#"dynobj_earnstraferun_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 23);
       return;
     }
@@ -144,7 +144,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_21962bee0a15424" == state_name) {
+    if(#"dynobj_killtoearnnomadks_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 25);
       return;
     }
@@ -154,7 +154,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_29a3c52abd286a3d" == state_name) {
+    if(#"dynobj_killzombies_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 27);
       return;
     }
@@ -164,7 +164,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_34061eae676df48d" == state_name) {
+    if(#"dynobj_earndart_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 29);
       return;
     }
@@ -174,7 +174,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_4bfdec8101cde9e7" == state_name) {
+    if(#"dynobj_teamdefend_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 31);
       return;
     }
@@ -184,7 +184,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_1a4b4231363359c4" == state_name) {
+    if(#"dynobj_killspawnbeacons_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 33);
       return;
     }
@@ -194,7 +194,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_5c25a457d21d00a3" == state_name) {
+    if(#"dynobj_killwiretrappedenemies_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 35);
       return;
     }
@@ -204,7 +204,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_6e90224596225271" == state_name) {
+    if(#"oneline_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 37);
       return;
     }
@@ -214,7 +214,7 @@ class cct_shared_ingame_objective: cluielem {
       return;
     }
 
-    if(#"hash_75d2922ca26f2a88" == state_name) {
+    if(#"dynobj_killenemies_timer_on" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 39);
       return;
     }

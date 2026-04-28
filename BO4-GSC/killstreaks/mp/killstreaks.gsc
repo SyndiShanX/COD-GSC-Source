@@ -45,7 +45,7 @@ init() {
   level.var_514f9d20 = &function_b11487a4;
   level.var_9f8e080d = &function_ed335136;
   level.var_19a15e42 = &function_daabc818;
-  callback::callback(#"hash_45f35669076bc317");
+  callback::callback(#"on_init_killstreaks");
 
   level.killstreak_init_end_time = getmillisecondsraw();
   elapsed_time = level.killstreak_init_end_time - level.killstreak_init_start_time;

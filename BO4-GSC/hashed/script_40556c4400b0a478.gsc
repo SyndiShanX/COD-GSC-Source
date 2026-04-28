@@ -10,7 +10,7 @@
 #namespace namespace_9d28c60;
 
 autoexec __init__system__() {
-  system::register(#"hash_2e2fcde8843638d9", &__init__, undefined, undefined);
+  system::register(#"zm_ai_brutus_special", &__init__, undefined, undefined);
 }
 
 __init__() {

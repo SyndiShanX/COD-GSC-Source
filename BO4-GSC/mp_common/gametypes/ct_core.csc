@@ -36,13 +36,13 @@ player_keyline_render(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
   if(newval && !(isDefined(self.b_keylined) && self.b_keylined)) {
     self.b_keylined = 1;
-    self playrenderoverridebundle(#"hash_1c90592671f4c6e9");
+    self playrenderoverridebundle(#"rob_sonar_set_friendly_mp");
     return;
   }
 
   if(isDefined(self.b_keylined) && self.b_keylined) {
     self.b_keylined = 0;
-    self stoprenderoverridebundle(#"hash_1c90592671f4c6e9");
+    self stoprenderoverridebundle(#"rob_sonar_set_friendly_mp");
   }
 }
 
@@ -53,13 +53,13 @@ enemy_keyline_render(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval && !(isDefined(self.b_keylined) && self.b_keylined)) {
     self.b_keylined = 1;
-    self playrenderoverridebundle(#"hash_1dced6114b72a678");
+    self playrenderoverridebundle(#"rob_sonar_set_enemy_mp");
     return;
   }
 
   if(isDefined(self.b_keylined) && self.b_keylined) {
     self.b_keylined = 0;
-    self stoprenderoverridebundle(#"hash_1dced6114b72a678");
+    self stoprenderoverridebundle(#"rob_sonar_set_enemy_mp");
   }
 }
 
@@ -93,11 +93,11 @@ actor_keyline_render(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(newval) {
-    self playrenderoverridebundle(#"hash_1dced6114b72a678");
+    self playrenderoverridebundle(#"rob_sonar_set_enemy_mp");
     return;
   }
 
-  self stoprenderoverridebundle(#"hash_1dced6114b72a678");
+  self stoprenderoverridebundle(#"rob_sonar_set_enemy_mp");
 }
 
 enemy_vehicle_keyline_render(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

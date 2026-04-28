@@ -1116,7 +1116,7 @@ wavespawntimer() {
   self notify("1a95a923bdb84bdb");
   self endon("1a95a923bdb84bdb");
   level endon(#"game_ended");
-  level callback::callback(#"hash_3be1213f454fa90e");
+  level callback::callback(#"wave_spawn_triggered");
 
   if(isDefined(level.var_75db41a7) && gettime() >= level.var_75db41a7) {
     level callback::callback(#"hash_7fc21de2eaebdb3b");
@@ -1132,7 +1132,7 @@ wavespawntimer() {
     }
 
     if(notified) {
-      level callback::callback(#"hash_3be1213f454fa90e");
+      level callback::callback(#"wave_spawn_triggered");
 
       if(isDefined(level.var_75db41a7) && time >= level.var_75db41a7) {
         level callback::callback(#"hash_7fc21de2eaebdb3b");
@@ -2984,7 +2984,7 @@ updatealivetimes(team) {
 
   level.alivetimesaverage[team] = average_player_spawn_time / total_player_count;
 
-  if(getdvarint(#"hash_7d48f244ba0d0b2d", 0)) {
+  if(getdvarint(#"spawnsystem_debug_script", 0)) {
     iprintln("<dev string:x8b>" + level.alivetimesaverage[#"allies"] + "<dev string:xa3>" + level.alivetimesaverage[#"axis"]);
   }
 }
@@ -3502,10 +3502,10 @@ function_b9b7618() {
       game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"match_starting_in"] = #"mp/match_starting_in";
     game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
     game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"waiting_to_spawn_ss"] = #"mp/waiting_to_spawn_ss";
     game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
     game.strings[#"match_starting"] = #"mp/match_starting";
     game.strings[#"change_class"] = #"mp/change_class_next_spawn";

@@ -20,9 +20,9 @@ autoexec __init__system__() {
 
 __init__() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("scriptmover", "" + #"hash_5ecbfb9042fc7f38", 1, 1, "int", &function_e4a48a64, 0, 0);
+  clientfield::register("scriptmover", "" + #"soul_catcher_portal", 1, 1, "int", &function_e4a48a64, 0, 0);
   clientfield::register("actor", "" + #"hash_588871862d19b97d", 1, 1, "int", &function_b543a4ed, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_2be4ce9b84bd3b58", 1, 1, "counter", &function_1f632068, 0, 0);
+  clientfield::register("scriptmover", "" + #"soul_catcher_impact", 1, 1, "counter", &function_1f632068, 0, 0);
   clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter", &function_63eff42e, 0, 0);
   clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int", &function_dfe17a5d, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_51657261e835ac7c", 1, n_bits, "int", &function_724af26a, 0, 0);

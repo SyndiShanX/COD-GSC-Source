@@ -604,7 +604,7 @@ enable_zone(zone_name) {
   level.zones[zone_name].is_enabled = 1;
   level.zones[zone_name].is_spawning_allowed = 1;
   level notify(zone_name);
-  level notify(#"hash_7f3e3ea9f03a4f3a", {
+  level notify(#"new_zone_enabled", {
     #str_zone_name: zone_name
   });
   spawn_points = zm_gametype::get_player_spawns_for_gametype();

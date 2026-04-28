@@ -42,7 +42,7 @@ on_end(round_reset) {
 
 function_83fa47e8() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self bgb_pack::function_59004002(#"zm_bgb_perk_up", 1);
   self bgb_pack::function_59004002(#"zm_bgb_perkaholic", 1);
   wait 8;

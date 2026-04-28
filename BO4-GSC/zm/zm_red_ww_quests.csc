@@ -77,25 +77,25 @@ init() {
   level._effect[#"charon_combat_fx"] = #"hash_7b7ba0ac0755a064";
   level._effect[#"hemera_combat_fx"] = #"hash_7e9736ee8b5ec443";
   level._effect[#"ouranos_combat_fx"] = #"hash_194fead3457d21f5";
-  level._effect[#"hash_4024dfc409879380"] = #"hash_570e356dcecf7c0f";
-  level._effect[#"hash_18794d000c118e97"] = #"hash_131f7254a32ca20e";
-  level._effect[#"hash_799b84ee296b448d"] = #"hash_690957421115776c";
-  level._effect[#"hash_25540559b2b0c1b4"] = #"hash_3f2f5721b1727993";
-  level._effect[#"hash_3c9246be63bb58bd"] = #"hash_5199aa40f704fb10";
+  level._effect[#"charon_teleport_3p"] = #"hash_570e356dcecf7c0f";
+  level._effect[#"gaia_teleport_3p"] = #"hash_131f7254a32ca20e";
+  level._effect[#"hemera_teleport_3p"] = #"hash_690957421115776c";
+  level._effect[#"ouranos_teleport_3p"] = #"hash_3f2f5721b1727993";
+  level._effect[#"pap_projectile_b"] = #"hash_5199aa40f704fb10";
   level._effect[#"hash_23f796cb2dcb35c3"] = #"hash_1dfbcfd9b38812ed";
-  level._effect[#"hash_3c9241be63bb503e"] = #"hash_56c34b9c914d89a7";
+  level._effect[#"pap_projectile_g"] = #"hash_56c34b9c914d89a7";
   level._effect[#"hash_32278e3b7ad26e0"] = #"hash_1185a069551613dc";
-  level._effect[#"hash_3c9256be63bb73ed"] = #"maps/zm_red/fx8_soul_red";
+  level._effect[#"pap_projectile_r"] = #"maps/zm_red/fx8_soul_red";
   level._effect[#"hash_70ef864effe35b13"] = #"maps/zm_red/fx8_soul_charge_red";
-  level._effect[#"hash_3c924bbe63bb613c"] = #"hash_36d2617efc112fc";
+  level._effect[#"pap_projectile_y"] = #"hash_36d2617efc112fc";
   level._effect[#"hash_2c33b0af2f93389e"] = #"hash_7425021c14828449";
   level._effect[#"gaia_sprout_fx"] = #"hash_4ee71079fa3bd589";
   level._effect[#"hash_28b5e7d929f598ee"] = #"hash_7d10580c812fce51";
   level._effect[#"hash_3f03e0537e170fc4"] = #"hash_647338beb2cb34ec";
-  zm_sq_modules::function_d8383812(#"ww_sc_earth", 16000, #"ww_sc_g", 100, level._effect[#"hash_3c9241be63bb503e"], level._effect[#"hash_32278e3b7ad26e0"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"ww_sc_death", 16000, #"ww_sc_c", 100, level._effect[#"hash_3c9256be63bb73ed"], level._effect[#"hash_70ef864effe35b13"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"ww_sc_light", 16000, #"ww_sc_h", 100, level._effect[#"hash_3c924bbe63bb613c"], level._effect[#"hash_2c33b0af2f93389e"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"ww_sc_air", 16000, #"ww_sc_o", 100, level._effect[#"hash_3c9246be63bb58bd"], level._effect[#"hash_23f796cb2dcb35c3"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"ww_sc_earth", 16000, #"ww_sc_g", 100, level._effect[#"pap_projectile_g"], level._effect[#"hash_32278e3b7ad26e0"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"ww_sc_death", 16000, #"ww_sc_c", 100, level._effect[#"pap_projectile_r"], level._effect[#"hash_70ef864effe35b13"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"ww_sc_light", 16000, #"ww_sc_h", 100, level._effect[#"pap_projectile_y"], level._effect[#"hash_2c33b0af2f93389e"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"ww_sc_air", 16000, #"ww_sc_o", 100, level._effect[#"pap_projectile_b"], level._effect[#"hash_23f796cb2dcb35c3"], undefined, undefined, 1);
 }
 
 function_91aa103(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -330,7 +330,7 @@ ouranos_feather_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 charon_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[#"charon_portal_active"], self, "tag_origin");
-    playSound(localclientnum, #"hash_2545ab11d0e8966a", self.origin);
+    playSound(localclientnum, #"zmb_portal_open", self.origin);
     return;
   }
 
@@ -395,7 +395,7 @@ charon_teleport_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
         self postfx::playpostfxbundle(#"hash_33f79c189a73adf9");
       }
     } else {
-      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_4024dfc409879380"], self, "j_spine4");
+      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"charon_teleport_3p"], self, "j_spine4");
     }
 
     return;
@@ -463,7 +463,7 @@ function_edc6704a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_162c09a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self playrenderoverridebundle("rob_gaia_bush_transform_start");
-    util::lock_model(#"hash_3cb03679991cf4ad");
+    util::lock_model(#"p8_zm_red_gaia_bush_01_script");
     return;
   }
 
@@ -474,12 +474,12 @@ function_162c09a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self playrenderoverridebundle("rob_gaia_bush_transform_finish");
   }
 
-  util::unlock_model(#"hash_3cb03679991cf4ad");
+  util::unlock_model(#"p8_zm_red_gaia_bush_01_script");
 }
 
 gaia_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playSound(localclientnum, #"hash_2545ab11d0e8966a", self.origin);
+    playSound(localclientnum, #"zmb_portal_open", self.origin);
     wait 0.5;
 
     if(isDefined(self)) {
@@ -517,7 +517,7 @@ hemera_teleport_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
         self postfx::playpostfxbundle(#"hash_867b31debc40b0a");
       }
     } else {
-      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_799b84ee296b448d"], self, "j_spine4");
+      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hemera_teleport_3p"], self, "j_spine4");
     }
 
     return;
@@ -552,7 +552,7 @@ gaia_teleport_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
         self postfx::playpostfxbundle(#"hash_2ea4efbdd5fc3dfd");
       }
     } else {
-      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_18794d000c118e97"], self, "j_spine4");
+      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"gaia_teleport_3p"], self, "j_spine4");
     }
 
     return;
@@ -587,7 +587,7 @@ ouranos_teleport_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
         self postfx::playpostfxbundle(#"hash_49cc4d561f671b1a");
       }
     } else {
-      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_25540559b2b0c1b4"], self, "j_spine4");
+      self.var_f252bba1[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"ouranos_teleport_3p"], self, "j_spine4");
     }
 
     return;

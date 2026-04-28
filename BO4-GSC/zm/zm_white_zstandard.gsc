@@ -296,7 +296,7 @@ function_8daf4de5() {
 
 function_54b015d9() {
   level zm_utility::function_e64ac3b6(16, #"hash_1de54db35ad2c33a");
-  level thread zm_audio::sndannouncerplayvox(#"hash_6acb03a0373891c1", undefined, undefined, undefined, 1);
+  level thread zm_audio::sndannouncerplayvox(#"jolting_jacks", undefined, undefined, undefined, 1);
 }
 
 intro_zombie_dog(n_round_number) {
@@ -376,7 +376,7 @@ function_a39e7a56() {
       ai = zombie_utility::spawn_zombie(getEntArray("zombie_spawner", "script_noteworthy")[0], undefined, s_spawn_point);
 
       if(isDefined(ai)) {
-        n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+        n_delay = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
         level.defend_spawns++;
       }
 
@@ -504,5 +504,5 @@ registerlast_truck_headshot_() {
 
 function_a97f7327() {
   level zm_utility::function_7a35b1d7(#"hash_299d0a3534135476");
-  level thread zm_audio::sndannouncerplayvox(#"hash_3acd6d72567def3a", undefined, undefined, undefined, 1);
+  level thread zm_audio::sndannouncerplayvox(#"door_open_all", undefined, undefined, undefined, 1);
 }

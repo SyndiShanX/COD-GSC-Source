@@ -24,7 +24,7 @@ preload() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + #"hash_33c373888aa78dc2", 20000, 1, "counter");
+  clientfield::register("toplayer", "" + #"key_press_feedback", 20000, 1, "counter");
 }
 
 init() {
@@ -248,7 +248,7 @@ function_bcec00bc(origin, arc_angle_degrees = 90, do_trace, e_ignore = undefined
 }
 
 function_f359c8a0(s_key, e_player) {
-  e_player clientfield::increment_to_player("" + #"hash_33c373888aa78dc2", 1);
+  e_player clientfield::increment_to_player("" + #"key_press_feedback", 1);
   level.var_f13364b4.var_12633dc5 = e_player;
 
   switch (s_key.script_string) {
@@ -546,14 +546,14 @@ function_6b002f3c() {
 }
 
 function_c9dcb3aa() {
-  level flag::set(#"hash_3ee874ebee843004");
+  level flag::set(#"private_mannequin_program_code_entered");
 
   iprintlnbold("<dev string:x21b>" + level.var_f13364b4.var_a7450be4);
 }
 
 function_69dd6c5b() {
-  if(level flag::get(#"hash_3ee874ebee843004")) {
-    level flag::set(#"hash_315d0bf1d50724f0");
+  if(level flag::get(#"private_mannequin_program_code_entered")) {
+    level flag::set(#"sawyer_authorization_code_entered");
 
     iprintlnbold("<dev string:x242>" + level.var_f13364b4.var_72c3e48c);
 
@@ -564,10 +564,10 @@ function_69dd6c5b() {
 }
 
 function_97ab5da4() {
-  a_flags = array(#"hash_3ee874ebee843004", #"hash_315d0bf1d50724f0");
+  a_flags = array(#"private_mannequin_program_code_entered", #"sawyer_authorization_code_entered");
 
   if(level flag::get_all(a_flags)) {
-    level flag::set(#"hash_359cbec050523f4");
+    level flag::set(#"mccain_authorization_code_entered");
 
     iprintlnbold("<dev string:x269>" + level.var_f13364b4.var_98e79e76);
 
@@ -578,10 +578,10 @@ function_97ab5da4() {
 }
 
 function_9a405843() {
-  a_flags = array(#"hash_3ee874ebee843004", #"hash_315d0bf1d50724f0", #"hash_359cbec050523f4");
+  a_flags = array(#"private_mannequin_program_code_entered", #"sawyer_authorization_code_entered", #"mccain_authorization_code_entered");
 
   if(level flag::get_all(a_flags)) {
-    level flag::set(#"hash_130656ec8ad5480d");
+    level flag::set(#"pernell_authorization_code_entered");
     return;
   }
 
@@ -1300,7 +1300,7 @@ rushmore_speech_flag() {
 }
 
 function_5b16217f() {
-  level endon(#"hash_1a91b42d31e0b28d");
+  level endon(#"stop_all_vo");
   level.var_5dd0d3ff zm_hms_util::function_6a0d675d(#"hash_45f67ba6693762f7", 0, 0);
   level.var_5dd0d3ff zm_hms_util::function_6a0d675d(#"hash_45f67ba6693762f7", 1, 0, 1);
   level.var_5dd0d3ff zm_hms_util::function_6a0d675d(#"hash_45f67ba6693762f7", 2, 0, 1);

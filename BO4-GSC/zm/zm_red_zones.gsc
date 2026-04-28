@@ -26,7 +26,7 @@ init() {
 }
 
 cliff_forge_vo() {
-  level flag::wait_till(#"hash_7943879f3be8ccc6");
+  level flag::wait_till(#"dark_side_open");
 
   for(a_players = function_6645d04c(); a_players.size == 0; a_players = function_6645d04c()) {
     wait 1.6;
@@ -64,7 +64,7 @@ function_6645d04c() {
 }
 
 zone_init() {
-  level flag::init(#"hash_4083e9da0ba41dec");
+  level flag::init(#"pegasus_ride_started");
   level flag::init("always_on");
   level flag::set("always_on");
   zm_zonemgr::zone_init("zone_temple_of_apollo");
@@ -105,7 +105,7 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_upper", #"hash_cfcbf5509bfbc1b", 0);
   zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_west", #"hash_cfcbf5509bfbc1b", 0);
   zm_zonemgr::add_adjacent_zone("zone_spartan_monument_upper", "zone_spartan_monument_west", #"hash_cfcbf5509bfbc1b", 0);
-  zm_zonemgr::add_adjacent_zone("zone_river_upper", "zone_river_lower", #"hash_4083e9da0ba41dec", 0);
+  zm_zonemgr::add_adjacent_zone("zone_river_upper", "zone_river_lower", #"pegasus_ride_started", 0);
   zm_zonemgr::add_adjacent_zone("zone_river_lower", "zone_cliff_tombs_upper", "connect_river_acheron_to_cliff_tombs", 0);
   zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_forge", #"connect_cliff_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_center", #"connect_cliff_zones", 0);
@@ -408,7 +408,7 @@ function_17ac86f7() {
   self thread zm_audio::function_713192b1(#"hash_303ce0aa4cf6a23e", #"hash_1b3475683eff03ae");
   self thread function_f7a190a8(undefined, 60, #"hash_106d425e41e8c240", #"temp_apollo");
   self thread function_f7a190a8(#"hash_3dba794053dea40e", 60, #"hash_654702bdca18105", #"amphi");
-  self thread zm_audio::function_713192b1(#"hash_4f55839413fe0046", #"hash_185c7ca2794dd39");
+  self thread zm_audio::function_713192b1(#"hash_4f55839413fe0046", #"serp_pass");
   self thread function_f7a190a8(#"pap_quest_completed", 30, #"hash_78d4c8eb48aabd66", #"center_world");
 }
 

@@ -363,7 +363,7 @@ function_7f9eb7f() {
     arrayremovevalue(owner.var_85988a58, undefined);
   } else if(self.damagetaken > self.health) {
     arrayremovevalue(owner.var_85988a58, self);
-    self.owner luinotifyevent(#"hash_126effa63f6e04bd");
+    self.owner luinotifyevent(#"mini_turret_destroyed");
   }
 
   owner clientfield::set_player_uimodel("hudItems.ultimateTurretCount", owner.var_85988a58.size);
@@ -1001,7 +1001,7 @@ turretscanning() {
         if(var_afae28e0 && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
           if(isDefined(veh.owner)) {
             veh.owner luinotifyevent(#"mini_turret_kill");
-            veh.owner playsoundtoplayer(#"hash_7ea486136cd776c", veh.owner);
+            veh.owner playsoundtoplayer(#"mpl_turret_kill", veh.owner);
           }
 
           veh.turretrotscale = 1;

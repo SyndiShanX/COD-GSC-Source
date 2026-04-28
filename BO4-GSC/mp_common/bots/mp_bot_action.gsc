@@ -280,7 +280,7 @@ function_74ab5468(actionparams) {
   self bot_action::function_ccdcc5d9(weapon);
 
   while(self isswitchingweapons()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -545,16 +545,16 @@ activate_radiation_field(actionparams) {
 
   while(!self gadgetisactive(slot)) {
     self bottapbutton(button);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(self gadgetisactive(slot) && self.health > 20) {
     self bottapbutton(button);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(self isthrowinggrenade() || !self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -669,31 +669,31 @@ use_grapple(actionparams) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x14c>" + "<dev string:x169>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
   self bot_action::function_8a2b82ad(actionparams);
   self bot_action::aim_at_target(actionparams);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self botgetlookdot() < 0.99 || self istraversing()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
 
   self bot_action::function_ccdcc5d9(weapon);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(!self isgrappling() && self getcurrentoffhand() == weapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
 
   while(self isgrappling() && self getcurrentoffhand() == weapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
@@ -864,7 +864,7 @@ function_79988b4b(actionparams) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x1d3>" + "<dev string:x169>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
@@ -874,7 +874,7 @@ function_79988b4b(actionparams) {
   self bot_action::aim_at_target(actionparams);
 
   while(self botgetlookdot() < 0.999 || self istraversing()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
@@ -882,7 +882,7 @@ function_79988b4b(actionparams) {
   self bot_action::function_ccdcc5d9(weapon);
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self function_d4c687c9();
@@ -961,7 +961,7 @@ function_76c8b8e8(actionparams) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x215>" + "<dev string:x169>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
@@ -973,11 +973,11 @@ function_76c8b8e8(actionparams) {
   while(gettime() - starttime < 1000) {
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1174,7 +1174,7 @@ use_tripwire(actionparams) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x280>" + "<dev string:x169>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
@@ -1182,10 +1182,10 @@ use_tripwire(actionparams) {
   self function_a57c34b7(self.origin);
   self bot_action::function_8a2b82ad(actionparams);
   self bot_action::aim_at_target(actionparams);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self botgetlookdot() < 0.99 || self istraversing()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
@@ -1196,23 +1196,23 @@ use_tripwire(actionparams) {
   actionparams.target = actionparams.target2;
   self bot_action::function_8a2b82ad(actionparams);
   self bot_action::aim_at_target(actionparams);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self botgetlookdot() < 0.99 || self istraversing() || gettime() - var_c7b51a54 < 1000) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
 
   self bottapbutton(button);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   if(!self isswitchingweapons()) {
     self bottapbutton(71);
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1221,15 +1221,15 @@ use_icepick(actionparams) {
   self bot_action::function_ccdcc5d9(weapon);
 
   while(self isswitchingweapons() || !self isweaponready()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(self getcurrentweapon() == weapon && !self isswitchingweapons()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1482,7 +1482,7 @@ function_39c29cdd(actionparams) {
   self bot_action::function_11c3d810(scorestreakweapon);
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1493,7 +1493,7 @@ function_8f5d7136(actionparams) {
   self bot_action::function_11c3d810(scorestreakweapon);
 
   while(!self isweaponready() || self getcurrentweapon() != scorestreakweapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   wait 0.5;
@@ -1501,7 +1501,7 @@ function_8f5d7136(actionparams) {
   self bot_action::aim_at_target(actionparams);
 
   while(self botgetlookdot() < 0.999 || self istraversing()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
@@ -1510,7 +1510,7 @@ function_8f5d7136(actionparams) {
   self.var_3f8901ac = gettime();
 
   while(!self isweaponready() || self getcurrentweapon() == scorestreakweapon || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self function_d4c687c9();
@@ -1521,7 +1521,7 @@ function_942b5513(actionparams) {
   self bot_action::function_11c3d810(scorestreakweapon);
 
   while(!self isweaponready() || self getcurrentweapon() != scorestreakweapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   shots_fired = 0;
@@ -1552,18 +1552,18 @@ function_942b5513(actionparams) {
         break;
       }
 
-      self waittill(#"hash_347a612b61067eb3");
+      self waittill(#"bot_action_update");
     }
   } else {
     while(shots_fired < 3) {
       self botpressbutton(16);
-      self waittill(#"hash_347a612b61067eb3");
+      self waittill(#"bot_action_update");
       shots_fired++;
     }
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1574,14 +1574,14 @@ activate_turret(actionparams) {
   self function_a57c34b7(self.origin);
 
   while(self getcurrentweapon() != scorestreakweapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self bot_action::function_8a2b82ad(actionparams);
   self bot_action::aim_at_target(actionparams);
 
   while(self botgetlookdot() < 0.999 || self istraversing()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     self bot_action::function_8a2b82ad(actionparams);
     self bot_action::aim_at_target(actionparams);
   }
@@ -1591,13 +1591,13 @@ activate_turret(actionparams) {
 
   while(self getcurrentweapon() == scorestreakweapon && gettime() - starttime < 1000) {
     self bottapbutton(0);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   wait 1;
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self function_d4c687c9();
@@ -1609,7 +1609,7 @@ function_27f291e1(actionparams) {
   starttime = gettime();
 
   while(!isDefined(self.rocket) && gettime() - starttime < 4000) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   wait 1;
@@ -1664,7 +1664,7 @@ function_27f291e1(actionparams) {
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1675,7 +1675,7 @@ function_7d799351(actionparams) {
   self function_a57c34b7(self.origin);
 
   while(!self isweaponready() || self getcurrentweapon() != scorestreakweapon) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(!self isinvehicle() && self getcurrentweapon() == scorestreakweapon) {

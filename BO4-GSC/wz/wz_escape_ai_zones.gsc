@@ -39,7 +39,7 @@ init() {
     function_c41ad9f9();
   }
 
-  level notify(#"hash_7f7eec328c07606d");
+  level notify(#"ai_zones_setup");
 
   if(isDefined(level.warzonespawnspecial) && level.warzonespawnspecial) {
     level thread spawn_special_ai();

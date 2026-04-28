@@ -808,7 +808,7 @@ class cdoor {
 
   function open() {
     if(m_str_type === "breach" && !(isDefined(var_9bc2acd6) && var_9bc2acd6)) {
-      self notify(#"hash_722c5466076f75cf");
+      self notify(#"breach_door_setup");
       var_9bc2acd6 = 1;
       return;
     }
@@ -1422,8 +1422,8 @@ function_dc98f943(c_door) {
   level notify(#"hash_9db88375ef038b", {
     #c_door: c_door, #player: waitresult.player
   });
-  e_door val::set(#"hash_25bedd86747e41e1", "takedamage", 1);
-  e_door val::set(#"hash_25bedd86747e41e1", "allowdeath", 1);
+  e_door val::set(#"c_door_damage", "takedamage", 1);
+  e_door val::set(#"c_door_damage", "allowdeath", 1);
 
   if(isDefined(c_door.m_s_bundle.registersidestepshouldstun)) {
     e_door.health = c_door.m_s_bundle.registersidestepshouldstun;
@@ -1451,8 +1451,8 @@ function_dc98f943(c_door) {
     e_door function_dfee3dec();
   }
 
-  e_door val::reset(#"hash_25bedd86747e41e1", "takedamage");
-  e_door val::reset(#"hash_25bedd86747e41e1", "allowdeath");
+  e_door val::reset(#"c_door_damage", "takedamage");
+  e_door val::reset(#"c_door_damage", "allowdeath");
   e_door.health = 0;
 
   if(isDefined(c_door.m_s_bundle.var_ffb77aca)) {

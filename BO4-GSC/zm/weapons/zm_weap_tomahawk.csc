@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"tomahawk_trail"] = #"hash_77b995b902df3cd9";
   level._effect[#"tomahawk_trail_ug"] = #"hash_5384d01e513526";
   level._effect[#"tomahawk_charged_trail"] = #"hash_3d47ab5cd1e7b732";
-  level._effect[#"hash_f0d62b29afe4b7c"] = #"hash_5c8911bafb8efe53";
+  level._effect[#"tomahawk_charged_trail_blue"] = #"hash_5c8911bafb8efe53";
   level._effect[#"tomahawk_impact"] = #"hash_681b2b47d9fb71c9";
   level._effect[#"tomahawk_impact_ug"] = #"hash_26ef5fefeb29c436";
   level._effect[#"tomahawk_fire_dot"] = #"hash_5686def5b4c85661";
@@ -119,7 +119,7 @@ tomahawk_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 4) {
-    self.n_trail_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_f0d62b29afe4b7c"], self, "tag_fx");
+    self.n_trail_fx = util::playFXOnTag(localclientnum, level._effect[#"tomahawk_charged_trail_blue"], self, "tag_fx");
   }
 }
 

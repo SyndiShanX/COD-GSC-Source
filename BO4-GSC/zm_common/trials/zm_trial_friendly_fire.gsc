@@ -58,7 +58,7 @@ register_bot_weapons() {
 }
 
 on_begin(var_9e0a2a85 = 1) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   if(ishash(var_9e0a2a85)) {
     var_9e0a2a85 = zm_trial::function_5769f26a(var_9e0a2a85);
@@ -139,7 +139,7 @@ on_player_damage(params) {
 
 function_e2c5e34c() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     self val::reset("zm_trial_friendly_fire", "ignoreme");

@@ -122,7 +122,7 @@ on_player_score(new_score, delta_score) {
   var_2c74fba6 = level.var_9d6b3096[gametype].var_9a5a8dcf;
 
   if(old_score < var_2c74fba6 && new_score >= var_2c74fba6) {
-    player increment_cwl_contract(#"hash_1075c38287814aa0");
+    player increment_cwl_contract(#"contract_wl_score_per_mode_hard");
   }
 }
 
@@ -277,7 +277,7 @@ function_a4c8ce2a(data) {
 
 contract_win(winner) {
   winner increment_cwl_contract(#"contract_wl_win_games");
-  winner increment_cwl_contract(#"hash_2809e14b0f3b4c5e");
+  winner increment_cwl_contract(#"contract_wl_win_games_hard");
   var_15b1abd9 = winner stats::get_stat_global(#"hash_a06075423336d9c");
 
   if(var_15b1abd9 > 0) {

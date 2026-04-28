@@ -178,7 +178,7 @@ function_7b29c2d2(weapon) {
   if(self.var_88ebd633.var_d9449a3 >= 5) {
     self thread activecamo::function_896ac347(weapon, #"rapid_kills", 1);
     self.var_88ebd633.var_d9449a3 = 0;
-    self notify(#"hash_7e9b17b054c01cb3");
+    self notify(#"rapid_kills_timeout");
     return;
   }
 
@@ -188,8 +188,8 @@ function_7b29c2d2(weapon) {
 }
 
 function_160898c() {
-  self notify(#"hash_7e9b17b054c01cb3");
-  self endon(#"death", #"hash_7e9b17b054c01cb3");
+  self notify(#"rapid_kills_timeout");
+  self endon(#"death", #"rapid_kills_timeout");
   wait 5;
   self.var_88ebd633.var_d9449a3 = 0;
 }
@@ -211,7 +211,7 @@ function_432cf6d(weapon) {
   if(self.var_88ebd633.var_bcacb3a3 >= 5) {
     self thread activecamo::function_896ac347(weapon, #"rapid_headshots", 1);
     self.var_88ebd633.var_bcacb3a3 = 0;
-    self notify(#"hash_3dbf3a8521ba1621");
+    self notify(#"rapid_headshots_timeout");
     return;
   }
 
@@ -221,8 +221,8 @@ function_432cf6d(weapon) {
 }
 
 function_d01affa9() {
-  self notify(#"hash_3dbf3a8521ba1621");
-  self endon(#"death", #"hash_3dbf3a8521ba1621");
+  self notify(#"rapid_headshots_timeout");
+  self endon(#"death", #"rapid_headshots_timeout");
   wait 7;
   self.var_88ebd633.var_bcacb3a3 = 0;
 }
@@ -246,8 +246,8 @@ function_5ae5fabe() {
     self stats::function_dad108fa(#"weapons_mastery_assault", 1);
   }
 
-  if(self stats::get_stat_global(#"hash_517bf5c8991ad97a") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_cqb", #"challenges", #"statvalue") >= 21) {
-    self stats::function_dad108fa(#"hash_517bf5c8991ad97a", 1);
+  if(self stats::get_stat_global(#"secondary_mastery_cqb") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_cqb", #"challenges", #"statvalue") >= 21) {
+    self stats::function_dad108fa(#"secondary_mastery_cqb", 1);
   }
 
   if(self stats::get_stat_global(#"weapons_mastery_lmg") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_lmg", #"challenges", #"statvalue") >= 28) {

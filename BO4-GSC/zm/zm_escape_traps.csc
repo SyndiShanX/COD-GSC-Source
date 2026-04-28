@@ -33,7 +33,7 @@ __init__() {
   level._effect[#"hash_294b19c300d1b482"] = #"hash_45008cc138e3bba3";
   level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_215c779c48fd6856";
   level._effect[#"hash_5647f8e593893bce"] = #"hash_4d61168f93739083";
-  level._effect[#"zombie_eye_trail"] = #"hash_526060b70ce93d7e";
+  level._effect[#"zombie_eye_trail"] = #"zm_ai/fx8_zombie_eye_glow_red_trail";
   level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
 }
 
@@ -122,7 +122,7 @@ player_acid_trap_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
     }
 
     self notify(#"player_acid_trap_post_fx_complete");
-    self.var_431ddde9 = self playLoopSound(#"hash_341a3fa00975f232");
+    self.var_431ddde9 = self playLoopSound(#"zmb_trap_acid_loop_plr");
     self thread function_17956e93(localclientnum);
     self thread postfx::playpostfxbundle(#"pstfx_zm_acid_dmg");
     self.var_b1409d8f = playfxoncamera(localclientnum, level._effect[#"hash_4391e5c4b43c63c9"]);
@@ -229,7 +229,7 @@ rumble_spinning_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   self endon(#"death");
 
   if(newval == 1) {
-    self endon(#"hash_6fb55d3438a8d5fa");
+    self endon(#"rumble_spinning_trap_finished");
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
@@ -242,5 +242,5 @@ rumble_spinning_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
 
-  self notify(#"hash_6fb55d3438a8d5fa");
+  self notify(#"rumble_spinning_trap_finished");
 }

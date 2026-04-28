@@ -721,7 +721,7 @@ function_cd9f1d74(n_reward) {
       var_b7a9df7c = #"p8_zm_elixir_in_plain_sight_ui";
       str_elixir = #"zm_bgb_in_plain_sight";
     case 3:
-      var_b7a9df7c = #"hash_65291a8ef0716ac6";
+      var_b7a9df7c = #"p8_zm_elixir_phantom_reload_ui";
       str_elixir = #"zm_bgb_phantom_reload";
     case 4:
       var_b7a9df7c = #"p8_zm_elixir_sword_flay_ui";
@@ -783,7 +783,7 @@ function_7f4f9503(str_bgb) {
   self bgb::bgb_gumball_anim(str_bgb);
 
   if(level.bgb[str_bgb].limit_type == "activated") {
-    self notify(#"hash_27b238d082f65849", str_bgb);
+    self notify(#"bgb_gumball_anim_activate", str_bgb);
     self bgb::activation_start();
     self thread bgb::run_activation_func(str_bgb);
   }

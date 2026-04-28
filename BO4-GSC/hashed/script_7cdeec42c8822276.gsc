@@ -90,18 +90,18 @@ function_b741acea() {
 }
 
 function_88b87834() {
-  level waittill(#"hash_70624458fe48ac18");
+  level waittill(#"groom_lake_enter");
   level flag::set(#"hash_26e9fe6561459de3");
   function_fac06066();
 }
 
 function_bcae2e4b() {
-  level waittill(#"hash_3e95ff63d623d736");
+  level waittill(#"groom_lake_exit");
   function_4074a9e2();
 }
 
 round_spawning() {
-  level endon(#"hash_3e95ff63d623d736");
+  level endon(#"groom_lake_exit");
   function_b741acea();
   n_spawn_delay = zm_round_logic::get_zombie_spawn_delay(level.var_37769559);
 
@@ -173,7 +173,7 @@ spawn_archetype(str_archetype) {
 }
 
 end_round() {
-  level endon(#"hash_3e95ff63d623d736");
+  level endon(#"groom_lake_exit");
   wait 15;
   function_d89bf8aa();
 }

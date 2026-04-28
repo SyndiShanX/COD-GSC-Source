@@ -23,7 +23,7 @@
 init() {
   level flag::init(#"hash_26c0c05d0a3e382f");
   level flag::init(#"pyre_lit");
-  level flag::init(#"hash_6205682540170b8");
+  level flag::init(#"arena_rock_unlocked");
   level._effect[#"bloodsplosion"] = #"hash_37631c88b85a74ec";
   level.s_side_quests = spawnStruct();
   level.s_side_quests.var_25f5a473 = struct::get_array("s_pyre");
@@ -129,7 +129,7 @@ function_fb74fc5f() {
   playsoundatposition(#"hash_7f8f5a20e4b87aac", (0, 0, 0));
 
   while(true) {
-    s_waitresult = level waittill(#"hash_3042a9bf2f57ea0a");
+    s_waitresult = level waittill(#"wraith_fire_impact");
     v_origin = s_waitresult.var_814c9389;
 
     if(isPlayer(s_waitresult.attacker)) {
@@ -353,7 +353,7 @@ arena_rock() {
   var_c2b730ca = getent("viking_salute", "targetname");
   var_c2b730ca thread function_3ce07a2b();
   level waittill(#"21_guns");
-  level flag::set(#"hash_6205682540170b8");
+  level flag::set(#"arena_rock_unlocked");
   level clientfield::set("" + #"hash_39e6b14b9e5b0f3d", 1);
 }
 
@@ -444,7 +444,7 @@ function_5d0d1807() {
     model clientfield::set("" + #"hash_5afda864f8b64f5c", 1);
   }
 
-  level waittill(#"hash_7b9245ff51f3d4f7");
+  level waittill(#"special_round_ending");
   a_scenes = struct::get_array("special_rounds_scene_alt", "targetname");
 
   foreach(s_scene in a_scenes) {

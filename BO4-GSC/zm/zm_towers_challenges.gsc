@@ -344,11 +344,11 @@ function_702ac990(e_player, e_trig) {
     self.n_challenges_complete++;
 
     if(self.n_challenges_complete <= 3) {
-      e_player zm_towers_crowd::function_b8dfa139(#"hash_300454c11a18ae03");
+      e_player zm_towers_crowd::function_b8dfa139(#"challenge_complete_easy");
     } else if(self.n_challenges_complete > 3 && self.n_challenges_complete <= 6) {
-      e_player zm_towers_crowd::function_b8dfa139(#"hash_39efd1a80488c531");
+      e_player zm_towers_crowd::function_b8dfa139(#"challenge_complete_med");
     } else if(self.n_challenges_complete > 6 && self.n_challenges_complete <= 9) {
-      e_player zm_towers_crowd::function_b8dfa139(#"hash_69fc3ba948618464");
+      e_player zm_towers_crowd::function_b8dfa139(#"challenge_complete_hard");
     }
 
     if(self.n_challenges_complete == self.var_62368fa4.size) {

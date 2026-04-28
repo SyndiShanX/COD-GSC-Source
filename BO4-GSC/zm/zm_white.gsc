@@ -625,7 +625,7 @@ function_1f712bb1() {
   wait 3;
   level.var_af3a53b2 = util::spawn_model("tag_origin", level.chests[level.chest_index].origin + (0, 0, -75));
   level.var_af3a53b2.angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-  playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_af3a53b2, "tag_origin");
+  playFXOnTag(level._effect[#"lght_marker_override"], level.var_af3a53b2, "tag_origin");
 }
 
 function_2336a7c8() {
@@ -652,7 +652,7 @@ function_da0655c7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[#"lght_marker_override"], level.var_3caf613d[i], "tag_origin");
   }
 
   level waittill(#"fire_sale_off");
@@ -687,7 +687,7 @@ function_cf95fbb7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[#"lght_marker_override"], level.var_3caf613d[i], "tag_origin");
   }
 }
 
@@ -712,7 +712,7 @@ function_785cadc4() {
   level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
   level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
   level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
-  level._effect[#"hash_572a14944ad27060"] = #"zombie/fx_weapon_box_marker_zmb";
+  level._effect[#"lght_marker_override"] = #"zombie/fx_weapon_box_marker_zmb";
 }
 
 function_d574cfc6() {
@@ -976,7 +976,7 @@ white_devgui() {
     str_command = getdvarstring(#"zm_white_devgui_cmd", "<dev string:x413>");
 
     switch (str_command) {
-      case # "hash_1535ec651f8ba226":
+      case # "spawn_all_perks":
         level.var_e8d9c0d1 = 1;
         break;
       case # "start_lgt_exp":

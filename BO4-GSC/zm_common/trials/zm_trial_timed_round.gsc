@@ -84,7 +84,7 @@ function_8b87e57c(var_6325d314, n_grace, n_time_limit) {
 }
 
 function_31f197c2() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self endon(#"disconnect");
   wait 0.5;
   var_9a703be9 = level.n_trial_timer;

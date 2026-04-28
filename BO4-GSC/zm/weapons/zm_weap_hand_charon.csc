@@ -27,9 +27,9 @@ __init__() {
   level._effect[#"charon_proj"] = #"hash_4952906e2b897ac8";
   level._effect[#"charon_proj_charged"] = #"hash_3a0c132d4e39ba81";
   level._effect[#"charon_proj_impact"] = #"hash_25c4a39b373bfc67";
-  level._effect[#"hash_3a8801fc057183dc"] = #"hash_237010c93c358590";
-  level._effect[#"hash_4ce416875acfbfab"] = #"hash_6c9f6d6353ff3c71";
-  level._effect[#"hash_4cdd0a875ac98c99"] = #"hash_6ca6596354053923";
+  level._effect[#"charon_proj_charged_impact"] = #"hash_237010c93c358590";
+  level._effect[#"charon_flash_1p"] = #"hash_6c9f6d6353ff3c71";
+  level._effect[#"charon_flash_3p"] = #"hash_6ca6596354053923";
   level._effect[#"charon_pool"] = #"hash_3d88b8f128288ebe";
   level._effect[#"charon_impact_torso"] = #"hash_6937321c4a8e7349";
   level._effect[#"hash_74d5f15912f2e8ee"] = #"hash_7fca1782163cbb01";
@@ -228,7 +228,7 @@ function_12c042fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     playFX(localclientnum, level._effect[#"charon_proj_impact"], v_org, v_ang);
   } else if(newval == 2) {
-    playFX(localclientnum, level._effect[#"hash_3a8801fc057183dc"], v_org, v_ang);
+    playFX(localclientnum, level._effect[#"charon_proj_charged_impact"], v_org, v_ang);
   }
 
   playSound(localclientnum, #"hash_5674d8ca7846c4a5", self.origin);
@@ -255,14 +255,14 @@ function_3b17ff6f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     if(self zm_utility::function_f8796df3(localclientnum)) {
       if(viewmodelhastag(localclientnum, "tag_flash")) {
-        self.fx_muzzle_flash = playviewmodelfx(localclientnum, level._effect[#"hash_4ce416875acfbfab"], "tag_flash");
+        self.fx_muzzle_flash = playviewmodelfx(localclientnum, level._effect[#"charon_flash_1p"], "tag_flash");
       }
 
       return;
     }
 
     if(isDefined(self gettagorigin("tag_flash"))) {
-      self.fx_muzzle_flash = util::playFXOnTag(localclientnum, level._effect[#"hash_4cdd0a875ac98c99"], self, "tag_flash");
+      self.fx_muzzle_flash = util::playFXOnTag(localclientnum, level._effect[#"charon_flash_3p"], self, "tag_flash");
     }
   }
 }

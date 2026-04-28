@@ -71,7 +71,7 @@ throw_chakram(actionparams) {
       self bottapbutton(24);
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -147,7 +147,7 @@ function_ef04e9cc(actionparams) {
   self bot_action::function_ccdcc5d9(weapon);
 
   while(self isswitchingweapons()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -295,7 +295,7 @@ function_ae19f70f(actionparams) {
 
 function_99428ae2(actionparams) {
   self notify(#"hash_782d5f24975a7cd1");
-  self endon(#"hash_782d5f24975a7cd1", #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
+  self endon(#"hash_782d5f24975a7cd1", #"bot_action_stop", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   self waittill(#"wallbuy_done");
   actionparams.var_d9c6fa12 = 1;
@@ -450,7 +450,7 @@ zombie_scan_for_threats(actionparams) {
       self bot_action::function_c17972fc();
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     targetvisible = self bot_action::is_target_visible(actionparams);
   }
 }
@@ -462,7 +462,7 @@ zombie_reload_weapon(actionparams) {
     self bottapbutton(4);
   }
 
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self isreloading()) {
     if(self bot_action::is_target_enemy(actionparams) && self bot_action::is_target_visible(actionparams)) {
@@ -485,7 +485,7 @@ zombie_reload_weapon(actionparams) {
       self bot_action::function_c17972fc();
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 

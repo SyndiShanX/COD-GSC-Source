@@ -130,14 +130,14 @@ function_3e2cd736(local_client_num) {
   self endon(#"stop_googles");
   wait 0.8;
   level.vision_pulse[local_client_num] = 1;
-  level notify(#"hash_7f642789ed08aae0");
+  level notify(#"vision_pulse_toggle");
 }
 
 function_43c942dc(local_client_num) {
   self endon(#"stop_googles");
   wait 0.85;
   level.vision_pulse[local_client_num] = 0;
-  level notify(#"hash_7f642789ed08aae0");
+  level notify(#"vision_pulse_toggle");
 }
 
 function_ab898b2d(notifystring) {
@@ -231,8 +231,8 @@ shutdown_vision_pulse(localclientnum) {
 }
 
 function_85e399a9(localclientnum) {
-  self notify(#"hash_54f15501beb799f9");
-  self endon(#"hash_54f15501beb799f9");
+  self notify(#"watch_owner_death");
+  self endon(#"watch_owner_death");
   self endon(#"stop_googles");
   self waittill(#"death", #"game_ended");
   self shutdown_vision_pulse(localclientnum);

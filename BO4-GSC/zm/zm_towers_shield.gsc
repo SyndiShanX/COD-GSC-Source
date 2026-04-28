@@ -704,7 +704,7 @@ function_4e59dd4b() {
 }
 
 function_4284585f(b_skipped = 0) {
-  level endon(#"end_game", #"hash_4a06aa98c6c7b671");
+  level endon(#"end_game", #"boss_battle_started");
   self endon(#"disconnect");
 
   if(b_skipped) {

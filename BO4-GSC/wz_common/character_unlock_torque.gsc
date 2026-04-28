@@ -83,7 +83,7 @@ function_a2877194(params) {
     self.var_c0bc1135++;
 
     if(self.var_c0bc1135 == 1) {
-      self character_unlock::function_c8beca5e(#"torque_unlock", #"hash_3843c83850f09a08", 1);
+      self character_unlock::function_c8beca5e(#"torque_unlock", #"torque_unlock_barricade", 1);
     }
   }
 }

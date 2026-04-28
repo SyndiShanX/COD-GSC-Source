@@ -113,8 +113,8 @@ zone_init() {
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "docks_to_boathouse", 0);
   } else {
     zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", #"hash_48e7d63b38c5e2da", 0);
-    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"hash_52d967f4fc8b12fc", 0);
-    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"hash_52d967f4fc8b12fc", 0);
+    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"outer_walkway_open", 0);
+    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"outer_walkway_open", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", #"hash_38c97197db36afb7", 0);
   }
 
@@ -538,7 +538,7 @@ function_9d1d7efd() {
     if(a_players.size > 0 && level.pablo_npc.a_n_interacts.size < 1) {
       if(a_players[0] zm_audio::can_speak() && !level flag::get(#"hell_on_earth")) {
         player = array::random(a_players);
-        player thread zm_orange_util::function_51b752a9(#"hash_14a884c0dda265b2", -1, 0, 1);
+        player thread zm_orange_util::function_51b752a9(#"vox_lighthouse_enter", -1, 0, 1);
         break;
       }
     }

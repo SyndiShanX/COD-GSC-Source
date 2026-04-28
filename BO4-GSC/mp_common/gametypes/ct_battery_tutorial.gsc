@@ -1037,7 +1037,7 @@ function_86610592() {
     level.var_51ff7a58 = 1;
     level.players[0] ct_utils::function_1bb93418();
     level notify(#"killstreak_ready");
-    level.players[0] notify(#"hash_d492b9f291b1e7b");
+    level.players[0] notify(#"killstreak_ready_planemortar");
   }
 
   if(level.var_ff7ed5c8 > 700) {
@@ -1047,7 +1047,7 @@ function_86610592() {
 
 function_537c9eea() {
   self endon(#"death");
-  self waittill(#"hash_d492b9f291b1e7b");
+  self waittill(#"killstreak_ready_planemortar");
   self.var_51ff7a58 = 1;
   self ct_utils::function_1bb93418();
 }
@@ -1222,7 +1222,7 @@ function_d0bcce1(n_index) {
 
 on_grenade_fired(params) {
   grenade = params.projectile;
-  self notify(#"hash_25cbcadbbeb229d8", {
+  self notify(#"war_machine_fired", {
     #v_pos: grenade.origin, #e_grenade: grenade
   });
 }
@@ -1250,7 +1250,7 @@ function_ae3fa0e0() {
 grenade_sticky_watcher() {
   self endon(#"death");
   waitresult = self waittill(#"stuck_to_player");
-  level notify(#"hash_791dd53f2a2f4a6", {
+  level notify(#"grenade_stuck_to_player", {
     #player: waitresult.player, #grenade: self
   });
 }
@@ -1471,7 +1471,7 @@ function_8670e3b1(s_loc) {
   self thread function_d91a23c7();
 
   while(true) {
-    waitresult = level waittill(#"hash_791dd53f2a2f4a6");
+    waitresult = level waittill(#"grenade_stuck_to_player");
     e_player = waitresult.player;
     e_grenade = waitresult.grenade;
 
@@ -1492,7 +1492,7 @@ function_8670e3b1(s_loc) {
   e_grenade resetmissiledetonationtime(1.5);
   s_loc = struct::get("sticky_run_goal");
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32);
-  self notify(#"hash_53dc7cff4c3c5f5c");
+  self notify(#"ai_guard_radius");
   self notify(#"hash_140ce23fccc7b0c");
 }
 
@@ -1817,7 +1817,7 @@ function_76f5d2dc(str_s_target) {
   s_loc = struct::get(str_s_target, "targetname");
 
   while(true) {
-    waitresult = level.players[0] waittill(#"hash_25cbcadbbeb229d8");
+    waitresult = level.players[0] waittill(#"war_machine_fired");
     n_dist = distance(s_loc.origin, waitresult.v_pos);
 
     if(n_dist <= 20) {
@@ -1863,7 +1863,7 @@ function_cc38079e() {
   level endon(#"window_hit");
 
   while(!level flag::get("window_hit")) {
-    waitresult = self waittill(#"hash_25cbcadbbeb229d8");
+    waitresult = self waittill(#"war_machine_fired");
     waitresult.e_grenade thread function_e7a8d041();
   }
 }

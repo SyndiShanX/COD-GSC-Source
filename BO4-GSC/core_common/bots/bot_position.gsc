@@ -62,7 +62,7 @@ start() {
 }
 
 stop() {
-  self notify(#"hash_6cefc75b9a427c7d");
+  self notify(#"bot_position_stop");
   self function_e027100a();
 
   if(isDefined(self.bot)) {
@@ -132,7 +132,7 @@ function_e027100a() {
 }
 
 handle_goal() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", #"bot_position_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -145,7 +145,7 @@ handle_goal() {
 }
 
 handle_goal_changed() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", #"bot_position_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -167,7 +167,7 @@ handle_goal_changed() {
 }
 
 handle_path_success() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", #"bot_position_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -178,7 +178,7 @@ handle_path_success() {
 }
 
 handle_path_failed() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", #"bot_position_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -295,7 +295,7 @@ can_teleport() {
 }
 
 function_2bcdf566() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", #"bot_position_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {

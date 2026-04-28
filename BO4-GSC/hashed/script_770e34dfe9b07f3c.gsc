@@ -24,7 +24,7 @@ __init__() {
   }
 
   clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int");
-  zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
+  zm_trial::register_challenge(#"pack_a_punch_sacrifice", &on_begin, &on_end);
 }
 
 on_begin(var_c4da4541, var_93a137cd) {
@@ -94,7 +94,7 @@ on_end(round_reset) {
 }
 
 pap_machine_fx() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
 
   while(true) {
     var_4c755588 = function_34835ec7();
@@ -112,7 +112,7 @@ pap_machine_fx() {
 }
 
 function_34835ec7() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
 
   while(true) {
     var_4d8e32c8 = getEntArray("zm_pack_a_punch", "targetname");
@@ -129,7 +129,7 @@ function_34835ec7() {
 
 function_a14072bf() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_41d5077e = 0;
   self.var_14361e0c = 0.1;
 
@@ -151,7 +151,7 @@ function_a14072bf() {
 }
 
 function_c33c2895() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   zm_trial_util::function_2976fa44(level.var_6f6736a8);
 
   while(true) {
@@ -171,6 +171,6 @@ function_c33c2895() {
 }
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_28d1b9857e2ca681");
+  challenge = zm_trial::function_a36e8c38(#"pack_a_punch_sacrifice");
   return isDefined(challenge);
 }

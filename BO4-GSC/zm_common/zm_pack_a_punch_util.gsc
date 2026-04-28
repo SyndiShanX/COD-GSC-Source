@@ -175,13 +175,13 @@ update_hint_string(player) {
     } else if(function_8b1a219a()) {
       self sethintstring(#"hash_4ded27bb7bc35a8d", current_cost);
     } else {
-      self sethintstring(#"hash_4c9d507af46126af", current_cost);
+      self sethintstring(#"zombie/perk_packapunch_damage", current_cost);
     }
   } else if(isDefined(level.var_e4e8d300) && level.var_e4e8d300) {
     if(function_8b1a219a()) {
       self sethintstring(#"hash_12517f2f23bd1966");
     } else {
-      self sethintstring(#"hash_6c8cfa12133d4a58");
+      self sethintstring(#"zombie/perk_packapunch_free");
     }
   } else if(function_8b1a219a()) {
     self sethintstring(#"hash_4b18cdd522ca58f7", current_cost);

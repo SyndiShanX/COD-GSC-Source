@@ -75,7 +75,7 @@ function_6bf7d04f(var_c766fbe6) {
       var_c766fbe6[#"blight_father"] = 4;
     }
   } else if(level.round_number == 28) {
-    assert(level.var_d77a6967.name == #"hash_7aff6c8730240d5");
+    assert(level.var_d77a6967.name == #"heads_up_deactivated");
     var_c766fbe6[#"blight_father"] = max(var_c766fbe6[#"blight_father"], 1);
     var_c766fbe6[#"stoker"] = max(var_c766fbe6[#"stoker"], 1);
     var_c766fbe6[#"catalyst"] = max(var_c766fbe6[#"catalyst"], 1);

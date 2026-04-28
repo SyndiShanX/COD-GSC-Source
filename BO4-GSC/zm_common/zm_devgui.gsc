@@ -895,11 +895,11 @@ devgui_add_weapon(weapon, upgrade, in_box, cost, weaponvo, weaponvoresp, ammo_co
 }
 
 function_3b534f9c() {
-  level.zombie_devgui_gun = getdvarstring(#"hash_1c9225f4f6e82068");
+  level.zombie_devgui_gun = getdvarstring(#"zombie_devgui_gun_player1");
 
   for(;;) {
     wait 0.1;
-    cmd = getdvarstring(#"hash_1c9225f4f6e82068");
+    cmd = getdvarstring(#"zombie_devgui_gun_player1");
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
@@ -909,11 +909,11 @@ function_3b534f9c() {
         players[0] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
 
-      setDvar(#"hash_1c9225f4f6e82068", "<dev string:x38>");
+      setDvar(#"zombie_devgui_gun_player1", "<dev string:x38>");
     }
 
     wait 0.1;
-    cmd = getdvarstring(#"hash_1c9228f4f6e82581");
+    cmd = getdvarstring(#"zombie_devgui_gun_player2");
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
@@ -923,11 +923,11 @@ function_3b534f9c() {
         players[1] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
 
-      setDvar(#"hash_1c9228f4f6e82581", "<dev string:x38>");
+      setDvar(#"zombie_devgui_gun_player2", "<dev string:x38>");
     }
 
     wait 0.1;
-    cmd = getdvarstring(#"hash_1c9227f4f6e823ce");
+    cmd = getdvarstring(#"zombie_devgui_gun_player3");
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
@@ -937,11 +937,11 @@ function_3b534f9c() {
         players[2] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
 
-      setDvar(#"hash_1c9227f4f6e823ce", "<dev string:x38>");
+      setDvar(#"zombie_devgui_gun_player3", "<dev string:x38>");
     }
 
     wait 0.1;
-    cmd = getdvarstring(#"hash_1c922af4f6e828e7");
+    cmd = getdvarstring(#"zombie_devgui_gun_player4");
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
@@ -951,7 +951,7 @@ function_3b534f9c() {
         players[3] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
       }
 
-      setDvar(#"hash_1c922af4f6e828e7", "<dev string:x38>");
+      setDvar(#"zombie_devgui_gun_player4", "<dev string:x38>");
     }
   }
 }
@@ -1782,7 +1782,7 @@ zombie_devgui_think() {
       case # "pack_current_weapon":
         zombie_devgui_pack_current_weapon();
         break;
-      case # "hash_f9c9f7dd75a4047":
+      case # "rank_up_player":
         function_8c9f2dea();
         break;
       case # "hash_5605531ad17b5408":

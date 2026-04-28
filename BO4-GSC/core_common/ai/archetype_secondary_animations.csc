@@ -124,7 +124,7 @@ function_f5dde44(substate) {
     return false;
   }
 
-  return substate == #"melee" || substate == #"charge_melee" || substate == #"hash_48dda7ed88efe32f";
+  return substate == #"melee" || substate == #"charge_melee" || substate == #"charge_melee_attack";
 }
 
 secondaryfacialanimationthink(localclientnum) {

@@ -920,7 +920,7 @@ give_perk_reward(var_16c042b8, var_6c9485fc = 15) {
 }
 
 function_545834dc(var_16c042b8) {
-  self endon(#"death", #"hash_358f065cca50b2a7");
+  self endon(#"death", #"challenge_reward_cleanup");
 
   while(true) {
     if(self hasperk(var_16c042b8)) {
@@ -1002,7 +1002,7 @@ function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, n_fx_type = 1) {
   self.var_4373c66b = undefined;
   b_timeout = mdl_reward.b_timeout;
   mdl_reward delete();
-  self notify(#"hash_358f065cca50b2a7");
+  self notify(#"challenge_reward_cleanup");
 
   if(isDefined(b_timeout) && b_timeout) {
     return false;

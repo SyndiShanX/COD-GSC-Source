@@ -42,7 +42,7 @@ init() {
 
 init_flags() {
   level flag::init(#"hash_774b069a64b060b");
-  level flag::init(#"hash_381e771ed6c80ccb");
+  level flag::init(#"groom_lake_enabled");
   level flag::init(#"hash_38f45c699c5d5d63");
   level flag::init(#"hash_26e9fe6561459de3");
   level flag::init(#"hash_537cc10c9deca9da");
@@ -576,7 +576,7 @@ function_7f4bdad3() {
 }
 
 enable_groom_lake() {
-  level flag::set(#"hash_381e771ed6c80ccb");
+  level flag::set(#"groom_lake_enabled");
   level flag::set(#"hash_38f45c699c5d5d63");
   level thread zm_office_teleporters::function_bb3f9afd();
   level thread function_8213feb8();
@@ -600,7 +600,7 @@ function_8213feb8() {
 
   level thread zm_office_defcon::start_defcon_countdown();
   callback::on_ai_spawned(&function_db17af3a);
-  level notify(#"hash_253a424c838fcd19");
+  level notify(#"groom_lake_entered");
   function_22537270();
   wait 30;
   zm_office_teleporters::enable_cage_portal(1);
@@ -608,7 +608,7 @@ function_8213feb8() {
 }
 
 function_43d7897e() {
-  level endon(#"hash_4a19fd40add44b83");
+  level endon(#"groom_lake_empty");
   b_waiting = 1;
 
   while(b_waiting) {
@@ -648,7 +648,7 @@ function_9209d032() {
     wait 1;
   }
 
-  level notify(#"hash_4a19fd40add44b83");
+  level notify(#"groom_lake_empty");
   zm_office_zones::function_cada51b5(0);
   zm_office_teleporters::enable_cage_portal(0);
   exploder::stop_exploder("fx_exp_teleporter_hangar_warmup");
@@ -811,7 +811,7 @@ function_3290d759() {
 }
 
 function_8039854f() {
-  level waittill(#"hash_253a424c838fcd19");
+  level waittill(#"groom_lake_entered");
   level flag::clear("spawn_zombies");
   wait 3;
   a_valid = zm_vo::get_valid_players();

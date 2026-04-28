@@ -14,7 +14,7 @@
 
 init_clientfield() {
   clientfield::register("scriptmover", "" + #"hash_38dbf4f346c0b609", -15000, 1, "counter", &function_56b9111c, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_9055852bfeb9f00", -15000, 1, "counter", &function_f2332be2, 0, 0);
+  clientfield::register("scriptmover", "" + #"cage_lock_impact", -15000, 1, "counter", &function_f2332be2, 0, 0);
   clientfield::register("scriptmover", "" + #"crystal_explosion", 16000, 1, "counter", &crystal_explosion_func, 0, 0);
   clientfield::register("vehicle", "" + #"spartoi_charge", 16000, 1, "counter", &function_417c12e1, 0, 0);
   clientfield::register("toplayer", "" + #"hash_687fbbd292ea6be0", 16000, 1, "int", &function_5783c958, 0, 0);

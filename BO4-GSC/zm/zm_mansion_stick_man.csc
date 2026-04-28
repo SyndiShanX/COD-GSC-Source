@@ -21,14 +21,14 @@ init_clientfields() {
   clientfield::register("allplayers", "" + #"hash_30aa04edc476253f", 8000, 1, "int", &function_3c4642b1, 0, 0);
   level._effect[#"stick_fire"] = #"hash_31d36dbca458b0dd";
   level._effect[#"falling_leaves"] = #"hash_6d3c039680511839";
-  level._effect[#"hash_dea2f3dceff7569"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"stone_rise_fx"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
   level._effect[#"player_afterlife"] = #"hash_6484874c383f70f9";
-  level._effect[#"hash_418533e3f4de4e1a"] = #"hash_5586bb7a838e870a";
+  level._effect[#"stick_fire_smoke"] = #"hash_5586bb7a838e870a";
 }
 
 function_a7012457(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playFX(localclientnum, level._effect[#"hash_dea2f3dceff7569"], self.origin);
+    playFX(localclientnum, level._effect[#"stone_rise_fx"], self.origin);
   }
 }
 
@@ -91,7 +91,7 @@ function_959fcbff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     wait 2;
-    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[#"hash_418533e3f4de4e1a"], self, "tag_origin");
+    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[#"stick_fire_smoke"], self, "tag_origin");
   }
 }
 
@@ -128,7 +128,7 @@ function_a5f32c8f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_f568352e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval) {
-    self postfx::playpostfxbundle(#"hash_2b222dbd1ad76165");
+    self postfx::playpostfxbundle(#"pstfx_burn_loop_inferno");
 
     if(!isDefined(self.var_eb29cb6e)) {
       self playSound(localclientnum, #"hash_414c95206d51679c");
@@ -138,7 +138,7 @@ function_f568352e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self postfx::stoppostfxbundle(#"hash_2b222dbd1ad76165");
+  self postfx::stoppostfxbundle(#"pstfx_burn_loop_inferno");
 
   if(isDefined(self.var_eb29cb6e)) {
     self playSound(localclientnum, #"hash_6560ce0b7a4a80c9");

@@ -368,7 +368,7 @@ function_d6c7161f() {
   level endon(#"combattraining_logic_finished");
 
   while(true) {
-    self waittill(#"hash_477083bb681cce64");
+    self waittill(#"radiation_field_start");
     var_326df4eb = undefined;
 
     foreach(s_beacon in level.a_s_beacons) {
@@ -384,7 +384,7 @@ function_d6c7161f() {
     if(isDefined(var_326df4eb)) {
       var_583c5a3b = 1.75 + 0.6 * level.var_f3bb2d59;
       n_start_time = gettime() / 1000;
-      self waittilltimeout(var_583c5a3b, #"hash_4aaf6d6479e7cf20");
+      self waittilltimeout(var_583c5a3b, #"radiation_field_stop");
       dt = gettime() / 1000 - n_start_time;
 
       if(dt >= 1.75) {
@@ -419,7 +419,7 @@ function_d6c7161f() {
 }
 
 function_66a805d4(e_player) {
-  e_player endon(#"death", #"hash_4aaf6d6479e7cf20");
+  e_player endon(#"death", #"radiation_field_stop");
 
   while(true) {
     n_wait = randomfloatrange(0.1, 0.4);

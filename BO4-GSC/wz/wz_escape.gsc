@@ -28,7 +28,7 @@
 
 event_handler[level_init] main(eventstruct) {
   callback::on_spawned(&on_player_spawned);
-  callback::add_callback(#"hash_3be1213f454fa90e", &function_78d5fb9b);
+  callback::add_callback(#"wave_spawn_triggered", &function_78d5fb9b);
 
   callback::on_vehicle_spawned(&on_vehicle_spawned);
 
@@ -96,7 +96,7 @@ function_28990311() {
 }
 
 function_78d5fb9b() {
-  playsoundatposition(#"hash_5bcfe3a4f3bf67a6", (-1638, -2162, 2673));
+  playsoundatposition(#"evt_spawn_horn", (-1638, -2162, 2673));
 }
 
 function_74ee36be() {

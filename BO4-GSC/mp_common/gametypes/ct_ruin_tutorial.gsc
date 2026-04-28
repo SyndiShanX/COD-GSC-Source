@@ -395,7 +395,7 @@ function_cc2f8b4() {
 
   while(true) {
     e_player = getplayers()[0];
-    waitresult = e_player waittill(#"hash_7550ae00cd28adcb");
+    waitresult = e_player waittill(#"gadget_grapple_failed");
     level.var_9d2a5e6d = 1;
   }
 }
@@ -1218,8 +1218,8 @@ function_1c78b967() {
     rocket thread remotemissile::function_9761dd1d();
     rocket playSound("wpn_remote_missile_launch_npc");
     killstreak_detect::killstreaktargetset(rocket);
-    magicbullet(getweapon(#"hash_33be4792feeabece"), rocket.origin, rocket.origin + anglesToForward(rocket.angles + (20, 0, 0)) * 1000, rocket.owner);
-    magicbullet(getweapon(#"hash_33be4792feeabece"), rocket.origin, rocket.origin + anglesToForward(rocket.angles - (20, 0, 0)) * 1000, rocket.owner);
+    magicbullet(getweapon(#"remote_missile_mini"), rocket.origin, rocket.origin + anglesToForward(rocket.angles + (20, 0, 0)) * 1000, rocket.owner);
+    magicbullet(getweapon(#"remote_missile_mini"), rocket.origin, rocket.origin + anglesToForward(rocket.angles - (20, 0, 0)) * 1000, rocket.owner);
     e_player waittilltimeout(1, #"death");
   }
 
@@ -1304,7 +1304,7 @@ earn_the_hellstorm_objective() {
     level thread update_momentum();
     var_ab60380 = "killstreak_quantity_" + #"remote_missile";
     result = e_player waittilltimeout(var_40b03ff, #"death", var_ab60380);
-    level notify(#"hash_271b3e8ba24ae2e2");
+    level notify(#"killstreak_end_event");
     setbombtimer("A", 0);
     setmatchflag("bomb_timer_a", 0);
     e_player ct_utils::function_1bb93418();
@@ -1345,7 +1345,7 @@ function_e2a79d4() {
 }
 
 update_momentum() {
-  level endon(#"combattraining_logic_finished", #"hash_271b3e8ba24ae2e2");
+  level endon(#"combattraining_logic_finished", #"killstreak_end_event");
 
   while(true) {
     e_player = getplayers()[0];
@@ -1716,7 +1716,7 @@ function_228e8cd6(weapon) {
     self[[level.var_9863df4b]](weapon);
   }
 
-  self notify(#"hash_7550ae00cd28adcb");
+  self notify(#"gadget_grapple_failed");
 }
 
 function_63aa235() {

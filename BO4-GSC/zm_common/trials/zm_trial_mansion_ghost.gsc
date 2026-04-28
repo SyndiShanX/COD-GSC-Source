@@ -61,7 +61,7 @@ on_end(round_reset) {
 }
 
 function_889abd74() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   self endon(#"disconnect");
   level.e_ghost endon(#"death");
   var_da67715 = 20;
@@ -88,7 +88,7 @@ function_889abd74() {
 }
 
 ghost_path() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait randomintrange(0, 3);
   var_c98c4943 = array::random(array("monkey_loc", "bull_loc", "dl_loc"));
   nd_start = getvehiclenode(var_c98c4943 + "_trail_start_node", "targetname");

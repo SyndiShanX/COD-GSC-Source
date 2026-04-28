@@ -210,8 +210,8 @@ function_c9f197d2(var_4c3c217a = 1) {
   self.fake_death = 1;
   self.var_7b0667d9 = 1;
   self.var_b4bc9e1f = 1;
-  self val::set(#"hash_65edbe063d05f17b", "takedamage", 0);
-  self val::set(#"hash_65edbe063d05f17b", "ignoreall", 1);
+  self val::set(#"skeleton_fake_death", "takedamage", 0);
+  self val::set(#"skeleton_fake_death", "ignoreall", 1);
   self.canbetargetedbyturnedzombies = 0;
   self.b_ignore_cleanup = 1;
   self.ignore_nuke = 1;
@@ -227,7 +227,7 @@ function_c9f197d2(var_4c3c217a = 1) {
     waitresult = self waittilltimeout(60, #"hash_782dbc5eec90f62f");
 
     if(waitresult._notify == #"timeout") {
-      self val::reset(#"hash_65edbe063d05f17b", "takedamage");
+      self val::reset(#"skeleton_fake_death", "takedamage");
       self kill();
     }
 
@@ -252,8 +252,8 @@ function_c9f197d2(var_4c3c217a = 1) {
     self.fake_death = 0;
     self.var_7b0667d9 = undefined;
     self.var_b4bc9e1f = undefined;
-    self val::reset(#"hash_65edbe063d05f17b", "takedamage");
-    self val::reset(#"hash_65edbe063d05f17b", "ignoreall");
+    self val::reset(#"skeleton_fake_death", "takedamage");
+    self val::reset(#"skeleton_fake_death", "ignoreall");
     self.canbetargetedbyturnedzombies = 1;
     self.var_6d23c054 = 1;
     self.b_ignore_cleanup = undefined;
@@ -547,10 +547,10 @@ function_6ae10cf1(cmd) {
     case # "skeleton_spawn":
       zm_devgui::spawn_archetype("<dev string:x2e9>");
       break;
-    case # "hash_12e2063dc669bbe0":
+    case # "skeleton_spawn_spear":
       zm_devgui::spawn_archetype("<dev string:x303>");
       break;
-    case # "hash_65bce5ef69a7ff3e":
+    case # "skeleton_spawn_helmet":
       zm_devgui::spawn_archetype("<dev string:x323>");
       break;
     case # "hash_57892c7b7a106128":

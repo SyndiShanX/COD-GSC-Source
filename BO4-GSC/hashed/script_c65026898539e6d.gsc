@@ -58,7 +58,7 @@ function_c83a4a77() {
 
 function_25f146be() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     zm_trial_util::function_dace284(function_c83a4a77());

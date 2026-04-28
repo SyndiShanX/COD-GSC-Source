@@ -58,7 +58,7 @@ class cct_progressbar_status: cluielem {
       return;
     }
 
-    if(#"hash_7185fe2194047325" == state_name) {
+    if(#"sabotagedata_complete" == state_name) {
       set_data(localclientnum, "_state", 10);
       return;
     }

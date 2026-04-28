@@ -434,9 +434,9 @@ _initializeblackboard(commander, team) {
   blackboard::registerblackboardattribute(commander, #"pathing_calculated_paths", array(), undefined);
   blackboard::registerblackboardattribute(commander, #"pathing_requested_bots", array(), undefined);
   blackboard::registerblackboardattribute(commander, #"pathing_requested_points", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_f5c6c6aa7dc0f6d", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_6e9081699001bcd9", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_4984fd4b0ba666a2", array(), undefined);
+  blackboard::registerblackboardattribute(commander, #"missioncomponent_defend", array(), undefined);
+  blackboard::registerblackboardattribute(commander, #"missioncomponent_destroy", array(), undefined);
+  blackboard::registerblackboardattribute(commander, #"missioncomponent_goto", array(), undefined);
   blackboard::registerblackboardattribute(commander, #"missioncomponents", array(), undefined);
   blackboard::registerblackboardattribute(commander, #"gameobjects", array(), undefined);
   blackboard::registerblackboardattribute(commander, #"gameobjects_vehicles", array(), undefined);

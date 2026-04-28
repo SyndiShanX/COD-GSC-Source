@@ -461,7 +461,7 @@ function_37304ace(localclientnum, menu_name) {
   level endon(menu_name + "_closed");
 
   while(true) {
-    waitresult = level waittill(#"hash_6d381d5ecca233c6");
+    waitresult = level waittill(#"inspect_player_weapon");
 
     if(isDefined(waitresult.clear_weapon) && waitresult.clear_weapon) {
       level.var_44011752 hide();
@@ -1016,7 +1016,7 @@ function_db3c4c69(localclientnum) {
     adddebugcommand(localclientnum, "<dev string:x66>" + var_ee63b362 + "<dev string:x369>" + "<dev string:x373>" + "<dev string:x167>" + name + "<dev string:x9a>");
   }
 
-  setDvar(#"hash_1311d7636a782655", "<dev string:x4b>");
+  setDvar(#"weap_render_name", "<dev string:x4b>");
   setDvar(#"weap_render", "<dev string:x4b>");
   var_c11ba901 = array("<dev string:x2e7>", "<dev string:x2f5>", "<dev string:x2fc>", "<dev string:x303>", "<dev string:x386>", "<dev string:x38f>", "<dev string:x39a>");
   weapon_name = "<dev string:x4b>";
@@ -1025,8 +1025,8 @@ function_db3c4c69(localclientnum) {
   while(true) {
     wait 0.1;
 
-    if(getdvarstring(#"hash_1311d7636a782655", weapon_name) != weapon_name) {
-      weapon_name = getdvarstring(#"hash_1311d7636a782655");
+    if(getdvarstring(#"weap_render_name", weapon_name) != weapon_name) {
+      weapon_name = getdvarstring(#"weap_render_name");
 
       if(weapon_name != "<dev string:x4b>") {
         foreach(weapon in a_weapons) {
@@ -1110,14 +1110,14 @@ function_ea9a5e69(localclientnum) {
     waitframe(1);
   }
 
-  setDvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
+  setDvar(#"jumpkit_render", "<dev string:x4b>");
   var_f7a528f2 = "<dev string:x4b>";
 
   while(true) {
     wait 0.1;
 
-    if(getdvarstring(#"hash_4243dd01393aa940", var_f7a528f2) != var_f7a528f2) {
-      var_f7a528f2 = getdvarstring(#"hash_4243dd01393aa940");
+    if(getdvarstring(#"jumpkit_render", var_f7a528f2) != var_f7a528f2) {
+      var_f7a528f2 = getdvarstring(#"jumpkit_render");
 
       if(var_f7a528f2 != "<dev string:x4b>") {
         level notify("<dev string:x16b>" + localclientnum, {
@@ -1215,7 +1215,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
 
   level notify("<dev string:x16b>" + localclientnum, {
     #menu: "<dev string:x40e>", #status: "<dev string:x18e>"});
-  setDvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
+  setDvar(#"jumpkit_render", "<dev string:x4b>");
   function_59013397();
 }
 
@@ -2176,7 +2176,7 @@ lobby_main(localclientnum, menu_name, state) {
       level notify(#"positiondraft_close", {
         #localclientnum: localclientnum, #var_b69dc9af: 1
       });
-      level waittill(#"hash_21c79522aa982cdd");
+      level waittill(#"positiondraft_close_finished");
     } else if(level.lastlobbystate === "inspect_specialist") {
       level notify("menu_change" + localclientnum, {
         #menu: "directorTraining", #status: "closed", #state: undefined, #mode: 1

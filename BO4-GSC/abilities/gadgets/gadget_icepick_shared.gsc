@@ -110,7 +110,7 @@ function_c18360f6(var_11a83c3a, params) {
     params.eattacker.var_7b9616d6 = time;
 
     if(params.eattacker.var_bcae5314 == 2) {
-      scoreevents::processscoreevent(#"hash_e18a9f29b8e1132", var_11a83c3a.var_e2131267, undefined, icepickweapon);
+      scoreevents::processscoreevent(#"hacked_multikill_2", var_11a83c3a.var_e2131267, undefined, icepickweapon);
       params.eattacker.var_bcae5314 = 0;
     }
 
@@ -346,7 +346,7 @@ function_6c031486(hacker) {
   }
 
   icepickweapon = getweapon(#"gadget_icepick");
-  hacker notify(#"hash_7b4714f415b8f49e");
+  hacker notify(#"force_end_hack");
   var_3e361f1a = hacker gadgetgetslot(icepickweapon);
   hacker gadgetdeactivate(var_3e361f1a, icepickweapon);
   hacker switchtoweapon();
@@ -396,7 +396,7 @@ sort_vehicles(&array, sort_func) {
 }
 
 starthack(player) {
-  player endoncallback(&function_4802ca63, #"death", #"hash_7b4714f415b8f49e");
+  player endoncallback(&function_4802ca63, #"death", #"force_end_hack");
   level.var_fdb0a658 = 1;
   player clientfield::set_player_uimodel("IcePickInfo.hackStarted", 1);
   icepickweapon = getweapon(#"gadget_icepick");
@@ -467,7 +467,7 @@ starthack(player) {
 }
 
 function_aaf0a382(entities, player, max) {
-  player endon(#"death", #"hash_7b4714f415b8f49e");
+  player endon(#"death", #"force_end_hack");
   var_e8e3cc00 = 0;
 
   foreach(entity in entities) {
@@ -493,7 +493,7 @@ function_aaf0a382(entities, player, max) {
 }
 
 function_2b2ed159(entity, attackingplayer) {
-  attackingplayer endon(#"death", #"hash_7b4714f415b8f49e");
+  attackingplayer endon(#"death", #"force_end_hack");
   var_87bdc7d3 = int(function_ab1f58d0(entity) * 1000);
   var_7570395 = 0;
   attackingplayer.var_e989badb = entity;
@@ -598,7 +598,7 @@ function_2b2ed159(entity, attackingplayer) {
 }
 
 function_4802ca63(str_notify) {
-  if(str_notify != #"hash_7b4714f415b8f49e" || !isDefined(self) || !isPlayer(self)) {
+  if(str_notify != #"force_end_hack" || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 
@@ -863,7 +863,7 @@ function_30fe16c7() {
 gadget_icepick_off(slot, weapon) {
   self clientfield::set_to_player("gadget_icepick_on", 0);
   self notify(#"hash_2945c35e0b146804");
-  self notify(#"hash_7b4714f415b8f49e");
+  self notify(#"force_end_hack");
   self function_124efc19(0);
   self function_de8a54a6(1);
   self.var_6704e6fa = 1;
@@ -916,7 +916,7 @@ function_d1f6e8d0(player) {
 }
 
 function_f1148c2c(player) {
-  player endon(#"death", #"hash_7b4714f415b8f49e");
+  player endon(#"death", #"force_end_hack");
   player notify(#"hash_5e72464fef90323e");
 
   if(player isswitchingweapons()) {

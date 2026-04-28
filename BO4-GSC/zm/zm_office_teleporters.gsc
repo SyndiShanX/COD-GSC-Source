@@ -283,7 +283,7 @@ teleport_player(user) {
   playFX(level._effect[#"teleport_arrive"], user.origin);
   playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
-  user playsoundtoplayer(#"hash_39876bf613387fef", user);
+  user playsoundtoplayer(#"evt_teleporter_go_plr", user);
   wait 0.5;
   user function_96e88318();
   util::setclientsysstate("levelNotify", "cool_fx", user);

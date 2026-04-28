@@ -65,7 +65,7 @@ power_gain_event_score(event, eattacker, score, weapon) {
 
   var_f1ee6456 = 1;
 
-  var_f1ee6456 *= getdvarfloat(#"hash_eae9a8ee387705d", 1);
+  var_f1ee6456 *= getdvarfloat(#"dev_score_multiplier", 1);
 
   if(!isDefined(level.var_607bc6e7)) {
     level.var_607bc6e7 = getgametypesetting(#"scoreheropowergainfactor");

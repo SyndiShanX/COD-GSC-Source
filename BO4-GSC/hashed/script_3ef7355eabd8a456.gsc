@@ -39,7 +39,7 @@ init_clientfields() {
 }
 
 init_flags() {
-  level flag::init(#"hash_4c30d0428f1d4060");
+  level flag::init(#"server_part_pickup_acquired");
   level flag::init(#"hash_5516784173c2ee27");
   level flag::init(#"server_fixed");
   level flag::init(#"card_inserted");
@@ -118,7 +118,7 @@ pernell_archive_step1_setup(var_5ea5c94d) {
     level.var_2cbf5e38 = 0;
     s_server_part_pickup = struct::get("server_part_pickup");
     s_server_part_pickup zm_unitrigger::create(#"", 64, &function_8703c1fe);
-    level flag::wait_till(#"hash_4c30d0428f1d4060");
+    level flag::wait_till(#"server_part_pickup_acquired");
     var_185199a1 = getent(s_server_part_pickup.target, "targetname");
     var_185199a1 playSound(#"hash_18f957b8000dd0c6");
     var_185199a1 delete();
@@ -154,7 +154,7 @@ pernell_archive_step1_cleanup(var_5ea5c94d, ended_early) {
 function_8703c1fe() {
   waitresult = self waittill(#"trigger");
   level.var_2cbf5e38 = 1;
-  level flag::set(#"hash_4c30d0428f1d4060");
+  level flag::set(#"server_part_pickup_acquired");
 
   iprintlnbold("<dev string:x65>");
 }
@@ -213,7 +213,7 @@ pernell_archive_step2_cleanup(var_5ea5c94d, ended_early) {
 function_e8d6a81b(e_item) {
   s_punch_card = level.var_5a599dbf[level.var_3d015a65];
   s_punch_card.in_inventory = 1;
-  self thread zm_vo::function_a2bd5a0c(#"hash_7e030fccc2c5a121");
+  self thread zm_vo::function_a2bd5a0c(#"vox_pickup_generic");
 
   if(isDefined(e_item)) {
     e_item playSound(#"hash_18f957b8000dd0c6");

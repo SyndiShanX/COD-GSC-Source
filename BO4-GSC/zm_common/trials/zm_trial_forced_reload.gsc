@@ -94,7 +94,7 @@ function_29ee24dd(weapon) {
 
   if(n_stock_ammo > 0) {
     while(true) {
-      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
+      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"give_full_ammo", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
       w_current = self getcurrentweapon();
 
       if(s_waitresult._notify == "reload" && weapon != w_current) {

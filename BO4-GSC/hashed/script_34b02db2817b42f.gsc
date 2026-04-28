@@ -169,7 +169,7 @@ function_e08b0124(e_player) {
 }
 
 function_9d66ea6f(e_item, e_player) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(e_player.name + "<dev string:x65>");
     println(e_player.name + "<dev string:x65>");
   }
@@ -252,7 +252,7 @@ function_20b366ef() {
   level endon(#"end_game");
 
   while(!level flag::get(#"chimney_grenaded")) {
-    s_waitresult = level waittill(#"hash_3042a9bf2f57ea0a");
+    s_waitresult = level waittill(#"wraith_fire_impact");
     v_origin = s_waitresult.var_814c9389;
 
     if(istouching(v_origin, level.var_74170866.s_fireplace.var_7126b6eb)) {
@@ -296,7 +296,7 @@ function_a66f0de2() {
 }
 
 function_b9a31cb(e_item, e_player) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(e_player.name + "<dev string:x16d>");
     println(e_player.name + "<dev string:x16d>");
   }
@@ -382,7 +382,7 @@ function_cba90c3c() {
 }
 
 complete_quest() {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(level.var_74170866.e_player.name + "<dev string:x18a>");
     println(level.var_74170866.e_player.name + "<dev string:x18a>");
   }

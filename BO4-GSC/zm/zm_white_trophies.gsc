@@ -206,19 +206,19 @@ function_5e1138a2() {
           iprintlnbold("<dev string:x38>" + "<dev string:x154>");
 
           self zm_utility::giveachievement_wrapper("zm_white_perk", 0);
-          self notify(#"hash_1305a28597a2e439");
+          self notify(#"stop_perk_watcher");
           return;
         }
       }
 
-      self notify(#"hash_1305a28597a2e439");
+      self notify(#"stop_perk_watcher");
       self.var_c9f12812 = array(0, 0, 0, 0);
     }
   }
 }
 
 perk_watcher() {
-  self endon(#"hash_1305a28597a2e439", #"disconnect");
+  self endon(#"stop_perk_watcher", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"perk_bought");

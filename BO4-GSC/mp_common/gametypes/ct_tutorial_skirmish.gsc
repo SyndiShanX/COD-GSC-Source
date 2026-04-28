@@ -301,7 +301,7 @@ challenges_init() {
   level.var_6f99c3bd = function_5f516f9d(#"melee_kills");
   level.var_7e008e0c = function_5f516f9d(#"best_killstreak");
   level.var_24370902 = function_5f516f9d(#"scorestreak_kills");
-  level.var_924497ca = function_5f516f9d(#"hash_512584b15284d144");
+  level.var_924497ca = function_5f516f9d(#"secondary_weapon_kills");
   level.var_94b2e2da = function_5f516f9d(#"hash_513bb5302a850f1c");
   level.var_9356f44c = function_5f516f9d(#"hash_1ebacadf6dc3dbdf");
   level.var_f0b5757d = function_5f516f9d(#"veteran_kills");
@@ -539,8 +539,8 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
       case # "weapon_pistol":
       case # "weapon_launcher":
       case # "weapon_cqb":
-        if(attacker newvalueoptions(#"hash_512584b15284d144") < level.var_924497ca) {
-          attacker function_9401373f(#"hash_512584b15284d144", 1);
+        if(attacker newvalueoptions(#"secondary_weapon_kills") < level.var_924497ca) {
+          attacker function_9401373f(#"secondary_weapon_kills", 1);
         }
 
         break;
@@ -592,8 +592,8 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 }
 
 function_8e22d234() {
-  level notify(#"hash_27b4c904ffa4ce27");
-  level endon(#"hash_27b4c904ffa4ce27");
+  level notify(#"check_leaderboard");
+  level endon(#"check_leaderboard");
   a_players = getplayers();
   a_scores = [];
 
@@ -700,7 +700,7 @@ function_78a17c00() {
     b_complete = 0;
   }
 
-  if(self newvalueoptions(#"hash_512584b15284d144") < level.var_924497ca) {
+  if(self newvalueoptions(#"secondary_weapon_kills") < level.var_924497ca) {
     b_complete = 0;
   }
 

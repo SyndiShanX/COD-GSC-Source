@@ -64,7 +64,7 @@ on_player_killed() {
     attacker function_15d026c0();
 
     if(attacker.var_a028bb76 >= 2) {
-      attacker character_unlock::function_c8beca5e(#"menendez_unlock", #"hash_4bc3134998048aa7", 1);
+      attacker character_unlock::function_c8beca5e(#"menendez_unlock", #"menendez_unlock_melee", 1);
     }
   }
 }

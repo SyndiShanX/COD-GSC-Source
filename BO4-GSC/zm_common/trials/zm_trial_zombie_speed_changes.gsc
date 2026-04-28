@@ -35,7 +35,7 @@ on_begin() {
 on_end(round_reset) {}
 
 function_4458377c() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     a_ai_zombies = getaiteamarray(level.zombie_team);

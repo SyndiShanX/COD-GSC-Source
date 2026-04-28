@@ -189,7 +189,7 @@ deathcam(victim) {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.spectatekillcam = 0;
-  self luinotifyevent(#"hash_5b2d65a026de792d", 0);
+  self luinotifyevent(#"quick_fade_up", 0);
   self clientfield::set_player_uimodel("hudItems.killcamActive", 0);
   self.var_e5681505 = undefined;
 }

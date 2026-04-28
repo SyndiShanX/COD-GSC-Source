@@ -62,7 +62,7 @@ main() {
   zm_orange_mq_sendoff::init();
   level flag::init("sam_music_done");
   level flag::init(#"hash_18b94410e3b6b0bf");
-  zm_sq::register(#"main_quest", #"hash_86e283359f19a5f", #"main_quest_step1", &zm_orange_mq_dials::function_77ed3bab, &zm_orange_mq_dials::function_51ecc801);
+  zm_sq::register(#"main_quest", #"step_1_dials", #"main_quest_step1", &zm_orange_mq_dials::function_77ed3bab, &zm_orange_mq_dials::function_51ecc801);
   zm_sq::register(#"main_quest", #"hash_467104204a4803ad", #"main_quest_step2", &zm_orange_mq_vessel::function_a5254494, &zm_orange_mq_vessel::function_77e4073b);
   zm_sq::register(#"main_quest", #"hash_7c16d3a3e4250b9a", #"main_quest_step3", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
   zm_sq::register(#"main_quest", #"hash_2dfcd4264b2c2340", #"main_quest_step4", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);

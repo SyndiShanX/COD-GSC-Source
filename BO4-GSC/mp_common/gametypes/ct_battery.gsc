@@ -684,7 +684,7 @@ function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     self.damagetaken += 751;
   } else if(weapon === getweapon(#"eq_cluster_semtex_grenade") && !(isDefined(self.var_21c8bc5f) && self.var_21c8bc5f)) {
     self.var_21c8bc5f = 1;
-    level notify(#"hash_18859ff9fe569290", {
+    level notify(#"chopper_impact_clustergrenade", {
       #v_loc: vpoint
     });
     ct_utils::get_player() thread ct_utils::magic_explosion(vpoint);
@@ -1071,7 +1071,7 @@ function_f75c4ec2(v_target) {
 
 function_868cd9ac() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_16e650a0fe963515", "<dev string:x84>");
+  setDvar(#"devgui_ct_battery", "<dev string:x84>");
   level flag::init("<dev string:x6d>");
 
   if(sessionmode != 4) {
@@ -1085,7 +1085,7 @@ function_868cd9ac() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_16e650a0fe963515", "<dev string:x84>");
+    cmd = getdvarstring(#"devgui_ct_battery", "<dev string:x84>");
 
     if(cmd == "<dev string:x84>") {
       continue;
@@ -1168,6 +1168,6 @@ function_868cd9ac() {
         break;
     }
 
-    setDvar(#"hash_16e650a0fe963515", "<dev string:x84>");
+    setDvar(#"devgui_ct_battery", "<dev string:x84>");
   }
 }

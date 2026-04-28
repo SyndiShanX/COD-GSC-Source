@@ -25,5 +25,5 @@ widows_wine_perk_activate() {
 }
 
 widows_wine_perk_lost(b_pause, str_perk, str_result, n_slot) {
-  self notify(#"hash_4fa1f45a60444ddc");
+  self notify(#"stop_widows_wine_mod");
 }

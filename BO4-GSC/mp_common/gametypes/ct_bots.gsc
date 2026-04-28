@@ -848,13 +848,13 @@ registerspecialty_earnmoremomentumspawnstart() {
     wait randomfloatrange(0.01, 0.5);
   }
 
-  self notify(#"hash_1213d70444c626d4", "stop_wander");
+  self notify(#"bot_goal_timeout", "stop_wander");
   self.navmeshpoint = undefined;
   self.var_86ba7e6d = 0;
 }
 
 function_eff20434() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"bot_goal_timeout", #"reset_pathing");
   self thread registerspecialty_earnmoremomentumspawnstart();
   self waittill(#"bot_goal_reached", #"stop_wander", #"stop_chase");
   self.navmeshpoint = undefined;
@@ -862,14 +862,14 @@ function_eff20434() {
 }
 
 function_6390598e() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"bot_goal_timeout", #"reset_pathing");
   self waittill(#"bot_goal_reached", #"stop_wander", #"stop_chase");
   self val::set(#"revived_bot", "ignoreme", 1);
   self val::set(#"revived_bot", "ignoreall", 1);
 }
 
 function_f83f2862() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"bot_goal_timeout", #"reset_pathing");
   self waittill(#"hash_69dbfbd660f8c53e");
 
   if(!(isDefined(self.var_9f73d035) && self.var_9f73d035)) {
@@ -983,7 +983,7 @@ function_3abfdc6b() {
 
 function_4b111722() {
   self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_wander", #"reset_pathing", #"hash_658257c9e391c92c");
-  self notify(#"hash_37ed6c252b08c1a4");
+  self notify(#"bot_wander_state");
 
   if(!isDefined(self.navmeshpoint)) {
     searchradius = 1024;
@@ -1227,7 +1227,7 @@ function_ae20926a() {
   e_player = getplayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_30cf2650faf0b7fb", 4, "green", 2);
   e_player thread ct_utils::function_d471f8fa(30, undefined, 1);
-  level notify(#"hash_4467c8999d018835");
+  level notify(#"soldier_rescued");
 }
 
 function_4afb85fd() {

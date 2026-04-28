@@ -22,7 +22,7 @@ class cct_shared_warning: cluielem {
       return;
     }
 
-    if(#"hash_5e59fb81ffd2fd6b" == state_name) {
+    if(#"warnheal_timer_on" == state_name) {
       set_data(localclientnum, "_state", 2);
       return;
     }

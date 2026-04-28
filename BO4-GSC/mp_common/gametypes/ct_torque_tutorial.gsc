@@ -955,7 +955,7 @@ function_3d1b545f(_hash) {
 }
 
 function_d4463404() {
-  level endoncallback(&function_713b1c8, #"countdown_timer_done", #"hash_582be86269c7fecc", #"tut_6_barricade_dead", #"tut_6_razorwire_dead");
+  level endoncallback(&function_713b1c8, #"countdown_timer_done", #"countdown_timer_end", #"tut_6_barricade_dead", #"tut_6_razorwire_dead");
   self endoncallback(&function_713b1c8, #"death");
   level thread function_e96cc63f(1, "s_torque_tut_6_enemy_razorwire_balc", 1, 2, 1, 0, "bot_razorwire_balc");
   level thread function_e96cc63f(2, "s_torque_tut_6_enemy_razorwire", 1, 1, 1, 1, "bot_razorwire");
@@ -1630,7 +1630,7 @@ function_60ad1028() {
 function_d04c80b2() {
   self endon(#"death");
   self.var_87bacb64 = 0;
-  self waittill(#"hash_71a1db99eb99dcff");
+  self waittill(#"swat_team_done");
   self.var_87bacb64 = 1;
 }
 
@@ -1659,7 +1659,7 @@ function_bfebe12d() {
   self thread ct_utils::function_61c3d59c(var_ec746d30, undefined, undefined);
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_final_2_strike_ready"));
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_final_2_strike_ready_nag");
-  self waittill(#"hash_6e666a0689c3fd62");
+  self waittill(#"swat_team_called");
   ct_utils::function_9aca2fa0("ct_action2");
   level.b_killstreak_used = 1;
   self thread ct_utils::function_61c3d59c(#"hash_5c2b727f43f4c8ef");
@@ -1865,7 +1865,7 @@ function_344aee09(_hash) {
     level notify(#"hash_4daf98b666a39c1d");
     level.var_86b67c3f = 0;
     e_player = ct_utils::get_player();
-    level notify(#"hash_582be86269c7fecc");
+    level notify(#"countdown_timer_end");
     level notify(#"hash_4c9c5fbc89779e64");
     level notify(#"hash_3ce5abc259d8b041");
     level notify(#"hash_360fb35e8476aec5");
@@ -1935,7 +1935,7 @@ function_344aee09(_hash) {
       }
 
       e_player thread ct_utils::function_79957328(undefined, str_respawn);
-      level waittill(#"hash_603de7ab282bcda9");
+      level waittill(#"restore_player_respawned");
       e_player thread ct_utils::function_49e0c5bc(1);
       e_player ct_vo::function_3ca1b77d(1);
       var_3069da18 = 1;

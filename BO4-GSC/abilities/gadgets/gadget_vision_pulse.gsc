@@ -152,7 +152,7 @@ gadget_vision_pulse_off(slot, weapon) {
 }
 
 gadget_vision_pulse_start(slot, weapon) {
-  self endon(#"disconnect", #"death", #"emp_vp_jammed", #"shutdown_vision_pulse", #"hash_7e581b90612825f4");
+  self endon(#"disconnect", #"death", #"emp_vp_jammed", #"shutdown_vision_pulse", #"vision_pulse_shutdown_immediate");
   wait 0.1;
 
   if(isDefined(self._pulse_ent)) {
@@ -220,13 +220,13 @@ shutdown_vision_pulse(spottedenemy, immediate, weapon) {
   }
 
   if(immediate) {
-    self notify(#"hash_7e581b90612825f4");
+    self notify(#"vision_pulse_shutdown_immediate");
     self ability_player::function_f2250880(weapon, 0);
   }
 }
 
 function_19bef771(weapon) {
-  self endon(#"death", #"shutdown_vision_pulse", #"hash_7e581b90612825f4");
+  self endon(#"death", #"shutdown_vision_pulse", #"vision_pulse_shutdown_immediate");
   wait float(weapon.var_4d88a1ff) / 1000;
   self disableoffhandweapons();
   self switchtooffhand(level.weaponvisionpulse);
@@ -243,7 +243,7 @@ function_19bef771(weapon) {
 }
 
 wait_until_is_done(slot, timepulse) {
-  self endon(#"hash_7e581b90612825f4", #"shutdown_vision_pulse", #"death");
+  self endon(#"vision_pulse_shutdown_immediate", #"shutdown_vision_pulse", #"death");
   wait float(timepulse) / 1000;
   self globallogic_score::function_d3ca3608(#"hash_32591f4be1bf4f22");
 }

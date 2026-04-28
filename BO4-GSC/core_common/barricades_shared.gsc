@@ -131,7 +131,7 @@ class cbarricade: cdoor {
 
     if(isDefined(m_s_bundle.var_ccc6dafc) && m_s_bundle.var_ccc6dafc) {
       m_e_door setCanDamage(1);
-      m_e_door val::set(#"hash_25bedd86747e41e1", "allowdeath", 0);
+      m_e_door val::set(#"c_door_damage", "allowdeath", 0);
       thread function_b4a1f06a();
     }
 

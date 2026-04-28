@@ -11,7 +11,7 @@
 #namespace zm_sq;
 
 autoexec init() {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     adddebugcommand("<dev string:x38>");
   }
 }
@@ -22,7 +22,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   assert(ishash(var_e788cdd7), "<dev string:xab>");
 
   if(!isDefined(name)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:xca>");
       println("<dev string:xca>");
     }
@@ -31,7 +31,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(step_name)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x10d>");
       println("<dev string:x10d>");
     }
@@ -40,7 +40,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(setup_func)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x155>");
       println("<dev string:x155>");
     }
@@ -49,7 +49,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(cleanup_func)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x19e>");
       println("<dev string:x19e>");
     }
@@ -58,7 +58,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(isDefined(level._ee) && isDefined(level._ee[name]) && isDefined(var_d6ca4caf) && isDefined(level._ee[name].record_stat)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x1e9>");
       println("<dev string:x1e9>");
     }
@@ -127,7 +127,7 @@ start(name, var_9d8cf7f = 0) {
   assert(isDefined(level._ee[name]), "<dev string:x244>" + hashtostring(name) + "<dev string:x24a>");
 
   if(level._ee[name].started) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x244>" + hashtostring(name) + "<dev string:x265>");
       println("<dev string:x244>" + hashtostring(name) + "<dev string:x265>");
     }
@@ -174,7 +174,7 @@ get_step_index(ee_name, step_name) {
 run_step(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2c8>");
     println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2c8>");
   }
@@ -187,7 +187,7 @@ run_step(ee, step, var_5ea5c94d) {
     waitresult = level waittill(step.var_e788cdd7 + "_setup_completed", step.var_e788cdd7 + "_ended_early");
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2da>");
     println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2da>");
   }
@@ -199,7 +199,7 @@ run_step(ee, step, var_5ea5c94d) {
   ended_early = isDefined(waitresult) && waitresult._notify == step.var_e788cdd7 + "_ended_early";
   [[step.cleanup_func]](var_5ea5c94d, ended_early);
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2ef>");
     println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2ef>");
   }
@@ -266,7 +266,7 @@ run_step(ee, step, var_5ea5c94d) {
     zm_stats::function_ea5b4947();
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x244>" + hashtostring(ee.name) + "<dev string:x306>");
     println("<dev string:x244>" + hashtostring(ee.name) + "<dev string:x306>");
   }
@@ -282,7 +282,7 @@ function_3f795dc3(ee, step, var_5ea5c94d) {
 }
 
 function_df365859(notifyhash) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(self.ee.name) + "<dev string:x2c4>" + hashtostring(self.name) + "<dev string:x316>");
     println(hashtostring(self.ee.name) + "<dev string:x2c4>" + hashtostring(self.name) + "<dev string:x316>");
   }
@@ -299,7 +299,7 @@ function_f09763fd(ee_name, step_name) {
   index = get_step_index(ee_name, step_name);
 
   if(index == -1) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x244>" + hashtostring(ee_name) + "<dev string:x325>" + hashtostring(step_name));
       println("<dev string:x244>" + hashtostring(ee_name) + "<dev string:x325>" + hashtostring(step_name));
     }
@@ -359,7 +359,7 @@ function_614612f(ee_name) {
     return;
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x3e0>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
     println("<dev string:x3e0>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
   }
@@ -376,7 +376,7 @@ function_f2dd8601(ee_name, var_f2c264bb) {
       waitresult = level waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x413>");
 
       if(waitresult._notify == #"timeout") {
-        if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+        if(getdvarint(#"zm_debug_ee_system", 0)) {
           iprintlnbold("<dev string:x41e>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
           println("<dev string:x41e>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
         }
@@ -388,7 +388,7 @@ function_f2dd8601(ee_name, var_f2c264bb) {
     wait 1;
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x448>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x456>");
     println("<dev string:x448>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x456>");
   }
@@ -422,17 +422,17 @@ devgui_think() {
         step_name = ee.steps[var_f2c264bb].name;
 
         if(var_f2c264bb < ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x45f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
             println("<dev string:x45f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
           }
         } else if(var_f2c264bb == ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x48f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name));
             println("<dev string:x48f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name));
           }
         } else {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x4a2>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name) + "<dev string:x456>");
             println("<dev string:x4a2>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name) + "<dev string:x456>");
           }
@@ -451,7 +451,7 @@ devgui_think() {
         var_f2c264bb = int(cmd[2]);
 
         if(var_f2c264bb < ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x4b1>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
             println("<dev string:x4b1>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
           }

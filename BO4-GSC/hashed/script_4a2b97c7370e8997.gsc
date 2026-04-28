@@ -40,7 +40,7 @@ function_3b7e62cf() {
 
 function_98c1b6be() {
   if(self.active === 1) {
-    self waittill(#"hash_26d932820f7f5373");
+    self waittill(#"elevator_use_complete");
   }
 
   self zm_office_elevators::disable_callboxes();

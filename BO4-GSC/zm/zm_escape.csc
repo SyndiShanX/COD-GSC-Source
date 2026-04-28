@@ -62,7 +62,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
   clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
   clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
-  clientfield::register("world", "" + #"hash_cd028842e18845e", 1, 1, "counter", &function_a104a4cb, 0, 0);
+  clientfield::register("world", "" + #"rumble_water_tower", 1, 1, "counter", &rumble_water_tower, 0, 0);
   clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
   clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int", &gondola_light, 0, 1);
@@ -87,7 +87,7 @@ event_handler[level_init] main(eventstruct) {
   level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_escape_weapons.csv";
   level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_2ac7ec38d265c496";
   level._effect[#"chest_light_closed"] = #"hash_5b118cefec864e37";
-  level._effect[#"hash_9d26763cbe16490"] = #"hash_5a9159bef624d260";
+  level._effect[#"magic_box_arrive"] = #"hash_5a9159bef624d260";
   level._effect[#"magic_box_leave"] = #"hash_2b008afec3e70add";
   level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
   level.var_5603a802 = "pstfx_zm_hellhole";
@@ -148,7 +148,7 @@ function_eef4ae09(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   playrumbleonposition(localclientnum, "zm_escape_warden_catwalk_rumble", s_catwalk_lava_exp.origin);
 }
 
-function_a104a4cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+rumble_water_tower(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   var_83771283 = struct::get("s_break_large_metal");
   playrumbleonposition(localclientnum, "zm_escape_metal_rumble1", var_83771283.origin);
   wait 3;

@@ -319,7 +319,7 @@ function_6f63ad34() {
 }
 
 function_ea526b81() {
-  level flag::wait_till(#"hash_7943879f3be8ccc6");
+  level flag::wait_till(#"dark_side_open");
   level.var_5b175281 = level.check_for_valid_spawn_near_team_callback;
   level.check_for_valid_spawn_near_team_callback = &function_f0bd229;
 
@@ -1226,7 +1226,7 @@ function_f2427bae(slot, weapon) {
 }
 
 function_46159bb7(a_s_valid_respawn_points) {
-  if(level flag::get(#"hash_7943879f3be8ccc6")) {
+  if(level flag::get(#"dark_side_open")) {
     return a_s_valid_respawn_points;
   }
 
@@ -1577,28 +1577,28 @@ function_acb5b0ec() {
 function_76dc48b8(cmd) {
   switch (cmd) {
     case # "hash_6eb30455e9df06a1":
-      level thread function_71a6c3ea();
+      level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24be>", &function_5b984671, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24be>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24be>");
       return 1;
     case # "hash_6eb30155e9df0188":
-      level thread function_71a6c3ea();
+      level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24e6>", &function_75ef7b1f, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24e6>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24e6>");
       return 1;
     case # "hash_6eb30255e9df033b":
-      level thread function_71a6c3ea();
+      level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x2506>", &function_883a1fb8, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x2506>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x2506>");
       return 1;
     case # "hash_6eb30755e9df0bba":
-      level thread function_71a6c3ea();
+      level thread super_open_sesame();
       function_eeb6a1e7();
       scene::play("<dev string:x2526>");
       return 1;
@@ -1607,8 +1607,8 @@ function_76dc48b8(cmd) {
       function_eeb6a1e7();
       level thread play_outro();
       return 1;
-    case # "hash_50d92ca3c6c7c2a8":
-      level thread function_71a6c3ea();
+    case # "super_open_sesame":
+      level thread super_open_sesame();
       return 1;
     case # "enable_cave_zone":
       level thread function_f39d0796();
@@ -1960,7 +1960,7 @@ function_7c8b5f27() {
   }
 }
 
-function_71a6c3ea() {
+super_open_sesame() {
   zm_devgui::zombie_devgui_open_sesame();
   scene::init("<dev string:x25c3>");
   level complete_pap();
@@ -2009,7 +2009,7 @@ free_eagles() {
   zm_devgui::zombie_devgui_open_sesame();
   level zm_utility::function_9ad5aeb1(1);
   wait 1;
-  level flag::set(#"hash_4083e9da0ba41dec");
+  level flag::set(#"pegasus_ride_started");
   var_ff91be3a = struct::get_array("<dev string:x25fb>", "<dev string:x44>");
   var_a10268d3 = level.players;
 
@@ -2037,13 +2037,13 @@ complete_pap() {
   level flag::set(#"hash_3dba794053dea40e");
   level flag::set("<dev string:x25b8>");
   level flag::set(#"hash_32ff7a456732ef09");
-  level flag::set(#"hash_4083e9da0ba41dec");
+  level flag::set(#"pegasus_ride_started");
   level flag::set(#"pap_quest_completed");
   level flag::set(#"zm_red_fasttravel_open");
   level flag::set(#"cage_dropped");
   level flag::set(#"hash_67695ee69c57c0b2");
   level flag::set(#"hash_61de3b8fe6f6a35");
-  level flag::set(#"hash_7943879f3be8ccc6");
+  level flag::set(#"dark_side_open");
   level thread zm_red_power_quest::devgui_complete();
   level thread scene::play(#"p8_fxanim_zm_red_omphalos_crystal_left_bundle", "<dev string:x260e>");
   level thread scene::play(#"p8_fxanim_zm_red_omphalos_crystal_front_bundle", "<dev string:x260e>");
@@ -2065,7 +2065,7 @@ complete_pap() {
 }
 
 function_f39d0796() {
-  level flag::set(#"hash_4083e9da0ba41dec");
+  level flag::set(#"pegasus_ride_started");
 }
 
 function_3594d78b() {

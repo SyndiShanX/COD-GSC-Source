@@ -144,7 +144,7 @@ function_50a86206(params) {
 
 function_80fc1a78(time) {
   self notify("3a74e555d7969d08");
-  self endon(#"death", #"hash_7d29584dcbbe7d67", "4c2f097babffd515");
+  self endon(#"death", #"kill_avogadro_reveal", "4c2f097babffd515");
   self show();
   wait time;
 }
@@ -238,7 +238,7 @@ function_7e5905cd(entity) {
 
   if(isDefined(enemy)) {
     self.shield = 1;
-    self notify(#"hash_7d29584dcbbe7d67");
+    self notify(#"kill_avogadro_reveal");
     self show();
   }
 

@@ -14,7 +14,7 @@
 #namespace namespace_ca8676a3;
 
 autoexec __init__system__() {
-  system::register(#"hash_217942543a3e669b", &__init__, &__main__, undefined);
+  system::register(#"zm_ai_mannequin_ally", &__init__, &__main__, undefined);
 }
 
 __init__() {

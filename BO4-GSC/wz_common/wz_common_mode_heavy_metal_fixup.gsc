@@ -25,9 +25,9 @@ function_95ba8fb7() {
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"armor_item_medium");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"armor_item_small", #"armor_item_large");
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"health_item_small");
-    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"hash_1b975e4c6ae8b190");
+    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"health_item_small_stack");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"health_item_medium", #"health_item_large");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"hash_5119794c0791738", #"hash_1bb3938ead724a68");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"health_item_medium_stack", #"health_item_large_stack");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"guns_ars_dlc1", #"heavymetal_guns");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"guns_launchers_dlc1", #"heavymetal_guns");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"guns_lmgs_dlc1", #"heavymetal_guns");

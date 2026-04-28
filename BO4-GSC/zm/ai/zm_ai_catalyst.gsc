@@ -593,7 +593,7 @@ function_6c92ebda(behaviortreeentity, asmstatename) {
 }
 
 function_e137506e(electriccatalyst) {
-  self endon(#"death", #"disconnect", #"hash_7283e5f17e4fa10a");
+  self endon(#"death", #"disconnect", #"electric_shock_finished");
   electriccatalyst waittill(#"death");
   self notify(#"killed_electric_catalyst");
 }
@@ -611,7 +611,7 @@ function_73961a38(notifyhash) {
   }
 
   self.var_6b8f84c7 = undefined;
-  self notify(#"hash_7283e5f17e4fa10a");
+  self notify(#"electric_shock_finished");
 }
 
 function_e7a0424c(behaviortreeentity) {

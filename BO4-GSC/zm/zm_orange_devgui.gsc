@@ -145,7 +145,7 @@ devgui() {
       case # "hash_2918cc0fd8ab72cd":
         level thread zm_orange_pap::function_eaaea036();
         break;
-      case # "hash_3da3831f62e16b2c":
+      case # "pap_ice_freeze":
         level thread zm_orange_pap::function_96ef31b7();
         break;
       case # "test_hell":

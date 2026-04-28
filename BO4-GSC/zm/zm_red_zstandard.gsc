@@ -45,7 +45,7 @@ function_84139b27() {
   zm_utility::function_c492c4d6(#"bathhouse", #"hash_25397ad54563b3eb", array(#"zone_bathhouse_outside", #"zone_bathhouse_inside"), array(#"temple", #"spartan", #"serpent", #"forge"), #"hash_51132818e4c5d547", #"hash_5fbf18c7a76fd791", #"hash_797bd344ce29484a", &function_fbb4cc60);
   zm_utility::function_c492c4d6(#"offering", #"hash_6590ecfcc4e560b6", array(#"zone_offering"), array(#"temple", #"spartan", #"serpent", #"forge"), #"hash_64e7a9268225aa04", #"hash_2e6557c6e7a7c024", #"hash_797bd344ce29484a", &function_fbb4cc60);
   zm_utility::function_c492c4d6(#"amphitheater", #"hash_66971554c4e38c0a", array(#"zone_amphitheater"), array(#"bathhouse", #"temple", #"offering", #"center"), #"hash_7726ad6d8b5ad02c", #"hash_c90e11aa231f05c", #"hash_797bd344ce29484a", &function_fbb4cc60);
-  zm_utility::function_c492c4d6(#"temple", #"hash_5bb9416e03ac7a05", array(#"zone_temple_of_apollo", #"zone_temple_of_apollo_back", #"zone_temple_of_apollo_right_path", #"zone_temple_of_apollo_left_path"), array(#"amphitheater", #"bathhouse", #"offering", #"center"), #"hash_6284385c7d20f875", #"hash_73fd81875766f7bb", #"hash_797bd344ce29484a", &function_fbb4cc60);
+  zm_utility::function_c492c4d6(#"temple", #"s_defend_area_obj_temple", array(#"zone_temple_of_apollo", #"zone_temple_of_apollo_back", #"zone_temple_of_apollo_right_path", #"zone_temple_of_apollo_left_path"), array(#"amphitheater", #"bathhouse", #"offering", #"center"), #"hash_6284385c7d20f875", #"hash_73fd81875766f7bb", #"hash_797bd344ce29484a", &function_fbb4cc60);
   zm_utility::function_c492c4d6(#"spartan", #"hash_6a904e27e74c5e8b", array(#"zone_spartan_monument_east", #"zone_spartan_monument_west", #"zone_spartan_monument_upper"), array(#"offering", #"bathhouse", #"serpent", #"forge"), #"hash_4cd3593f18ffe83f", #"hash_7a8bc638c30d31d9", #"hash_797bd344ce29484a", &function_fbb4cc60);
   zm_utility::function_c492c4d6(#"serpent", #"hash_191bf5238547dfc7", array(#"zone_serpent_pass_center", #"zone_serpent_pass_upper", #"zone_serpent_pass_lower"), array(#"center", #"amphitheater", #"spartan", #"bathhouse"), #"hash_25760f552752078b", #"hash_315f9683804aa985", #"hash_242a68e3a5256bb2", &function_1716cce9);
   zm_utility::function_c492c4d6(#"forge", #"hash_118577da8f7df38b", array(#"zone_cliff_tombs_forge", #"zone_cliff_tombs_upper", #"zone_cliff_tombs_center", #"zone_cliff_tombs_lower"), array(#"center", #"amphitheater", #"temple", #"offering"), #"hash_145f1e36dfff4c6b", #"hash_dcf5f6182603525", #"hash_242a68e3a5256bb2", &function_1716cce9);
@@ -112,7 +112,7 @@ registerlast_truck_headshot_() {
 
 function_a97f7327() {
   level zm_utility::function_7a35b1d7(#"hash_16f7ba8230a89680");
-  level thread zm_audio::sndannouncerplayvox(#"hash_3acd6d72567def3a", undefined, undefined, undefined, 1);
+  level thread zm_audio::sndannouncerplayvox(#"door_open_all", undefined, undefined, undefined, 1);
 }
 
 function_40dfd00b(n_round_number) {

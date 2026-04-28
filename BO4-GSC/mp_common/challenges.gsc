@@ -968,7 +968,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
     }
 
     if(var_6af452fc.var_b535f1ea === self && isDefined(var_6af452fc.var_2acdce3e)) {
-      if(isDefined(var_6af452fc.var_2acdce3e[#"hash_1527a22d8a6fdc21"]) && var_6af452fc.var_2acdce3e[#"hash_1527a22d8a6fdc21"].endtime > time) {
+      if(isDefined(var_6af452fc.var_2acdce3e[#"stunned_slow_grenade"]) && var_6af452fc.var_2acdce3e[#"stunned_slow_grenade"].endtime > time) {
         if(self util::is_item_purchased(#"eq_slow_grenade")) {
           self stats::function_dad108fa(#"ekia_concussed_enemy", 1);
         }
@@ -1168,7 +1168,7 @@ challengekills(data) {
           player.pers[#"kill_enemy_one_bullet_sniper"]++;
 
           if(player.pers[#"kill_enemy_one_bullet_sniper"] % 10 == 0) {
-            player stats::function_dad108fa(#"hash_2ebd387ffb67e1dc", 1);
+            player stats::function_dad108fa(#"kill_enemy_one_bullet_sniper_10", 1);
           }
         }
       } else if(weaponclass == "weapon_cqb") {
@@ -2337,9 +2337,9 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
     }
   } else {
     if(level.hardcoremode) {
-      self stats::function_dad108fa(#"hash_753f02ea48b19cd", 1);
+      self stats::function_dad108fa(#"objective_ekia_hc", 1);
     } else if(!level.arenamatch) {
-      self stats::function_dad108fa(#"hash_45fca5cee12d8bdb", 1);
+      self stats::function_dad108fa(#"objective_ekia_core", 1);
     }
 
     self contracts::player_contract_event(#"objective_ekia");
@@ -2394,7 +2394,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
     }
 
     if(isDefined(victim.lastconcussedby) && victim.lastconcussedby == self && isDefined(victim.var_121392a1)) {
-      if(isDefined(victim.var_121392a1[#"hash_1527a22d8a6fdc21"]) && victim.var_121392a1[#"hash_1527a22d8a6fdc21"].endtime > gettime()) {
+      if(isDefined(victim.var_121392a1[#"stunned_slow_grenade"]) && victim.var_121392a1[#"stunned_slow_grenade"].endtime > gettime()) {
         if(self util::is_item_purchased(#"eq_slow_grenade")) {
           self stats::function_dad108fa(#"hash_1a02c128bae3a6a0", 1);
         }
@@ -2535,7 +2535,7 @@ killedbaseoffender(objective, weapon, inflictor) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_offenderkillcount > 1) {
-    self stats::function_dad108fa(#"hash_4b3049ba027dd495", 1);
+    self stats::function_dad108fa(#"double_kill_attackers_defenders", 1);
   }
 
   self.challenge_offenderkillcount = 0;
@@ -2562,7 +2562,7 @@ killedbasedefender(objective) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_defenderkillcount > 1) {
-    self stats::function_dad108fa(#"hash_4b3049ba027dd495", 1);
+    self stats::function_dad108fa(#"double_kill_attackers_defenders", 1);
   }
 
   self.challenge_defenderkillcount = 0;

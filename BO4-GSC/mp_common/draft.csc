@@ -59,7 +59,7 @@ __init__() {
   level.draftstructs = [];
   level.draftstructs[#"free"] = #"draft_team_struct";
   level.draftstructs[#"allies"] = #"draft_team_struct_allies";
-  level.draftstructs[#"axis"] = #"hash_700492f71a083a7c";
+  level.draftstructs[#"axis"] = #"draft_team_struct_axis";
   level.draftstructs[#"spectator"] = #"draft_team_struct_allies";
   level.draftexploders = [];
   level.draftexploders[#"allies"] = "mp_draft_lights_allies";

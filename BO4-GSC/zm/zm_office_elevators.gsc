@@ -81,8 +81,8 @@ init() {
 }
 
 function_3d4e24ea() {
-  level._effect[#"hash_4a38c13e2040d160"] = #"hash_11e609d597dcebf2";
-  level.fx_elevator_light = level._effect[#"hash_4a38c13e2040d160"];
+  level._effect[#"fxref_elevator_light"] = #"hash_11e609d597dcebf2";
+  level.fx_elevator_light = level._effect[#"fxref_elevator_light"];
   level._effect[#"hash_336249bfea00c9ea"] = #"hash_48ec8658075edc9d";
   level.var_dca712ff = level._effect[#"hash_336249bfea00c9ea"];
   level._effect[#"hash_3718db938f7babf7"] = #"hash_142b1b8f881ae741";
@@ -576,7 +576,7 @@ elevator_move_to(elevator) {
   elevator.active = 0;
   elevator enable_elevator_buys();
   elevator enable_callboxes();
-  elevator notify(#"hash_26d932820f7f5373");
+  elevator notify(#"elevator_use_complete");
 }
 
 zombie_elevator_closets(going_up) {

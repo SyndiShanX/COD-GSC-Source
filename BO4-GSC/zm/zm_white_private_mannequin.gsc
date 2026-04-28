@@ -53,10 +53,10 @@ init_vo() {
 }
 
 init_flags() {
-  level flag::init(#"hash_3ee874ebee843004");
-  level flag::init(#"hash_315d0bf1d50724f0");
-  level flag::init(#"hash_359cbec050523f4");
-  level flag::init(#"hash_130656ec8ad5480d");
+  level flag::init(#"private_mannequin_program_code_entered");
+  level flag::init(#"sawyer_authorization_code_entered");
+  level flag::init(#"mccain_authorization_code_entered");
+  level flag::init(#"pernell_authorization_code_entered");
   level flag::init(#"hash_6202f3e00d7008b0");
   level flag::init(#"hash_1b68ccd211cab219");
   level flag::init(#"hash_7524c96c167377ef");
@@ -131,18 +131,18 @@ delete_entities() {
 
 private_mannequin_step1_setup(var_5ea5c94d) {
   if(!var_5ea5c94d) {
-    while(!flag::get(#"hash_130656ec8ad5480d")) {
-      level flag::wait_till(#"hash_3ee874ebee843004");
+    while(!flag::get(#"pernell_authorization_code_entered")) {
+      level flag::wait_till(#"private_mannequin_program_code_entered");
 
       iprintlnbold("<dev string:x38>");
 
       level play_start_vo();
       level thread timer_countdown();
       level clientfield::set("" + #"hash_681de2aa531ffcd0", 1);
-      a_flags = array(#"hash_315d0bf1d50724f0", #"hash_7524c96c167377ef");
+      a_flags = array(#"sawyer_authorization_code_entered", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
-      if(flag::get(#"hash_315d0bf1d50724f0")) {
+      if(flag::get(#"sawyer_authorization_code_entered")) {
         iprintlnbold("<dev string:x83>");
 
         level flag::set(#"hash_7524c96c167377ef");
@@ -154,10 +154,10 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         continue;
       }
 
-      a_flags = array(#"hash_359cbec050523f4", #"hash_7524c96c167377ef");
+      a_flags = array(#"mccain_authorization_code_entered", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
-      if(flag::get(#"hash_359cbec050523f4")) {
+      if(flag::get(#"mccain_authorization_code_entered")) {
         iprintlnbold("<dev string:xa8>");
 
         level flag::set(#"hash_7524c96c167377ef");
@@ -169,10 +169,10 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         continue;
       }
 
-      a_flags = array(#"hash_130656ec8ad5480d", #"hash_7524c96c167377ef");
+      a_flags = array(#"pernell_authorization_code_entered", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
-      if(flag::get(#"hash_130656ec8ad5480d")) {
+      if(flag::get(#"pernell_authorization_code_entered")) {
         iprintlnbold("<dev string:xce>");
 
         level flag::set(#"hash_7524c96c167377ef");
@@ -189,10 +189,10 @@ private_mannequin_step1_setup(var_5ea5c94d) {
 
 private_mannequin_step1_cleanup(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
-    level flag::set(#"hash_3ee874ebee843004");
-    level flag::set(#"hash_315d0bf1d50724f0");
-    level flag::set(#"hash_130656ec8ad5480d");
-    level flag::set(#"hash_130656ec8ad5480d");
+    level flag::set(#"private_mannequin_program_code_entered");
+    level flag::set(#"sawyer_authorization_code_entered");
+    level flag::set(#"pernell_authorization_code_entered");
+    level flag::set(#"pernell_authorization_code_entered");
   }
 }
 
@@ -209,10 +209,10 @@ timer_countdown() {
 reset_codes() {
   iprintlnbold("<dev string:x11b>");
 
-  level flag::clear(#"hash_3ee874ebee843004");
-  level flag::clear(#"hash_315d0bf1d50724f0");
-  level flag::clear(#"hash_130656ec8ad5480d");
-  level flag::clear(#"hash_130656ec8ad5480d");
+  level flag::clear(#"private_mannequin_program_code_entered");
+  level flag::clear(#"sawyer_authorization_code_entered");
+  level flag::clear(#"pernell_authorization_code_entered");
+  level flag::clear(#"pernell_authorization_code_entered");
   level.var_f13364b4.a_n_codes[level.var_f13364b4.var_8deb4ed2].var_544c05c6 = 1;
   level.var_f13364b4.a_n_codes[level.var_f13364b4.var_a7450be4].var_544c05c6 = 1;
   level.var_f13364b4.a_n_codes[level.var_f13364b4.var_72c3e48c].var_544c05c6 = 1;

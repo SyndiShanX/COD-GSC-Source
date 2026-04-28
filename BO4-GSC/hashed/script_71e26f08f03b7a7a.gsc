@@ -10,7 +10,7 @@
 #namespace namespace_3d2704b3;
 
 autoexec __init__system__() {
-  system::register(#"hash_280fe2667ed2d300", &__init__, undefined, #"item_supply_drop");
+  system::register(#"item_supply_drop_system", &__init__, undefined, #"item_supply_drop");
 }
 
 __init__() {
@@ -73,7 +73,7 @@ start(supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20) {
     return;
   }
 
-  level flagsys::wait_till(#"hash_405e46788e83af41");
+  level flagsys::wait_till(#"death_circle_start");
 
   if(isarray(minwaittime)) {
     foreach(key, value in minwaittime) {
@@ -204,12 +204,12 @@ start(supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20) {
       return;
     }
 
-    level waittill(#"hash_1ff3496c9049969");
+    level waittill(#"death_circle_changed");
   }
 }
 
 start_flare(maxflares = undefined, var_47d17dcb = 0) {
-  level flagsys::wait_till(#"hash_405e46788e83af41");
+  level flagsys::wait_till(#"death_circle_start");
   var_3d3a70a8 = 0;
 
   while(true) {
@@ -224,7 +224,7 @@ start_flare(maxflares = undefined, var_47d17dcb = 0) {
       return;
     }
 
-    level waittill(#"hash_1ff3496c9049969");
+    level waittill(#"death_circle_changed");
   }
 }
 
@@ -237,7 +237,7 @@ start_vehicle(vehicletype, supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20)
     return;
   }
 
-  level flagsys::wait_till(#"hash_405e46788e83af41");
+  level flagsys::wait_till(#"death_circle_start");
 
   if(isarray(minwaittime)) {
     foreach(key, value in minwaittime) {
@@ -316,6 +316,6 @@ start_vehicle(vehicletype, supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20)
       return;
     }
 
-    level waittill(#"hash_1ff3496c9049969");
+    level waittill(#"death_circle_changed");
   }
 }

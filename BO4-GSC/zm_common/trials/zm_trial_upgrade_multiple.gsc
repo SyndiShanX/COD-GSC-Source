@@ -93,7 +93,7 @@ on_end(round_reset) {
 
 function_e73fbbf7(var_5ba20db5, var_27f8d634) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_c2490d61 = 0;
   var_fa5d7ea0 = 0;
 

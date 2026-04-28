@@ -819,15 +819,15 @@ function_1bdf6fc7() {
   var_af24b2c1 = 0;
 
   do {
-    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", #"hash_4aaf6d6479e7cf20");
+    s_notify = self waittill(#"state_done_2", #"radiation_field_stop");
 
-    if(s_notify._notify == #"hash_4aaf6d6479e7cf20") {
+    if(s_notify._notify == #"radiation_field_stop") {
       self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_core_button_rele"));
       self thread ct_utils::function_329f9ba6(#"hash_5e4e9959d2d94c69", 2, "green", 1);
       continue;
     }
 
-    if(s_notify._notify == #"hash_251bbd6b8ba2fdfe") {
+    if(s_notify._notify == #"state_done_2") {
       var_af24b2c1 = 1;
     }
   }
@@ -835,7 +835,7 @@ function_1bdf6fc7() {
 
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_core_red_zone", "vox_tvoi_tutor_fire_core_max"));
   self thread ct_utils::function_61c3d59c(#"hash_a6ed66603c69f47");
-  self waittill(#"hash_4aaf6d6479e7cf20");
+  self waittill(#"radiation_field_stop");
   self ct_utils::function_c2a10fc();
   level thread util::stop_magic_bullet_shield(self);
   self ct_vo::function_3ca1b77d();
@@ -1394,7 +1394,7 @@ function_d0f4d458() {
   wait 0.1;
   self thread ct_utils::function_61c3d59c(#"hash_41159f797a914d3a", undefined, undefined);
   level waittill(#"fin2_timer_done");
-  level notify(#"hash_1c966d2b46abb009");
+  level notify(#"surround_spawn_end");
   a_e_enemies = self ct_bots::function_dde6edbd();
 
   foreach(e_enemy in a_e_enemies) {
@@ -1413,7 +1413,7 @@ function_bc2aaee0() {
     waitframe(1);
   }
 
-  level notify(#"hash_1c966d2b46abb009");
+  level notify(#"surround_spawn_end");
   wait 1;
   n_enemy_count = 10;
   n_dist_min = 1600;
@@ -1474,7 +1474,7 @@ function_bfebe12d() {
     level.var_58360a73 = 0;
     waitframe(1);
     callback::on_player_killed_with_params(&function_78986232);
-    self waittill(#"hash_3c0def159f71e194");
+    self waittill(#"killstreak_ready_straferun");
     level flag::set("fin2_killstreak_earned");
   } else {
     ct_utils::function_e44c5b8e(#"straferun", 0, 1);
@@ -1719,7 +1719,7 @@ function_344aee09(_hash) {
     level.var_86b67c3f = 0;
     e_player = ct_utils::get_player();
     util::stop_magic_bullet_shield(e_player);
-    level notify(#"hash_582be86269c7fecc");
+    level notify(#"countdown_timer_end");
     level notify(#"hash_4c9c5fbc89779e64");
     level notify(#"hash_3ce5abc259d8b041");
     level notify(#"hash_360fb35e8476aec5");
@@ -1771,7 +1771,7 @@ function_344aee09(_hash) {
       }
 
       e_player thread ct_utils::function_79957328(undefined, str_respawn);
-      level waittill(#"hash_603de7ab282bcda9");
+      level waittill(#"restore_player_respawned");
       e_player thread ct_utils::function_49e0c5bc(1);
       e_player ct_vo::function_3ca1b77d(1);
       var_3069da18 = 1;
@@ -1878,29 +1878,29 @@ function_41dcd216() {
       case # "hash_5db424be8b8d04a8":
         e_player thread ct_utils::function_329f9ba6(#"hash_6d1f5359302a862c", 10, "<dev string:x3f6>", 2, 1);
         break;
-      case # "hash_3ca93ce413cad85a":
+      case # "vo_test_1a":
         a_str_vo = array("<dev string:x3fe>", "<dev string:x41e>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "hash_3cad24e413ce9869":
+      case # "vo_test_2a":
         a_str_vo = array("<dev string:x43e>", "<dev string:x462>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "hash_3ca93be413cad6a7":
+      case # "vo_test_1b":
         a_str_vo = array("<dev string:x3fe>", "<dev string:x41e>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "hash_3cad21e413ce9350":
+      case # "vo_test_2b":
         a_str_vo = array("<dev string:x43e>", "<dev string:x462>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "hash_60bb5681fede555f":
+      case # "vo_test_1":
         self ct_vo::function_831e0584(array("<dev string:x43e>", "<dev string:x462>"));
         break;
-      case # "hash_60bb5781fede5712":
+      case # "vo_test_2":
         self thread ct_vo::function_831e0584(array("<dev string:x43e>", "<dev string:x462>"));
         break;
-      case # "hash_60bb5881fede58c5":
+      case # "vo_test_3":
         e_player function_53e140e6();
         break;
     }
@@ -1925,14 +1925,14 @@ function_53e140e6() {
   var_af24b2c1 = 0;
 
   do {
-    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", #"hash_4aaf6d6479e7cf20");
+    s_notify = self waittill(#"state_done_2", #"radiation_field_stop");
 
-    if(s_notify._notify == #"hash_4aaf6d6479e7cf20") {
+    if(s_notify._notify == #"radiation_field_stop") {
       self ct_vo::function_831e0584(array("<dev string:x4b7>"));
       continue;
     }
 
-    if(s_notify._notify == #"hash_251bbd6b8ba2fdfe") {
+    if(s_notify._notify == #"state_done_2") {
       var_af24b2c1 = 1;
     }
   }
@@ -1940,7 +1940,7 @@ function_53e140e6() {
 
   self thread ct_vo::function_831e0584(array("<dev string:x43e>", "<dev string:x462>"));
   self thread ct_utils::function_61c3d59c(#"hash_a6ed66603c69f47");
-  self waittill(#"hash_4aaf6d6479e7cf20");
+  self waittill(#"radiation_field_stop");
   wait 10;
 }
 

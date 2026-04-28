@@ -99,7 +99,7 @@ player_stats_init() {
   self globallogic_score::initpersstat(#"meat_stink_pickedup", 0);
   self globallogic_score::initpersstat(#"carpenter_pickedup", 0);
   self globallogic_score::initpersstat(#"fire_sale_pickedup", 0);
-  self globallogic_score::initpersstat(#"hash_27399de28b76c5c6", 0);
+  self globallogic_score::initpersstat(#"bonfire_sale_pickedup", 0);
   self globallogic_score::initpersstat(#"minigun_pickedup", 0);
   self globallogic_score::initpersstat(#"island_seed_pickedup", 0);
   self globallogic_score::initpersstat(#"hero_weapon_power_pickedup", 0);
@@ -108,8 +108,8 @@ player_stats_init() {
   self globallogic_score::initpersstat(#"zmarcade_key_pickedup", 0);
   self globallogic_score::initpersstat(#"shield_charge_pickedup", 0);
   self globallogic_score::initpersstat(#"dung_pickedup", 0);
-  self globallogic_score::initpersstat(#"hash_1b192689f4c8c402", 0);
-  self globallogic_score::initpersstat(#"hash_65472fa120ebce1c", 0);
+  self globallogic_score::initpersstat(#"bonus_points_player_pickedup", 0);
+  self globallogic_score::initpersstat(#"free_perk_pickedup", 0);
   self globallogic_score::initpersstat(#"bonus_points_team_pickedup", 0);
   self globallogic_score::initpersstat(#"ww_grenade_pickedup", 0);
   self globallogic_score::initpersstat(#"use_magicbox", 0);
@@ -257,9 +257,9 @@ player_stats_init() {
   self add_global_stat("ZM_DAILY_CHALLENGE_GAMES_PLAYED", 1);
 
   if(isDefined(level.var_1aa5a6d6)) {
-    self stats::set_stat(#"hash_1c539a1b16b48b16", level.var_1aa5a6d6);
+    self stats::set_stat(#"current_event_calling", level.var_1aa5a6d6);
   } else {
-    self stats::set_stat(#"hash_1c539a1b16b48b16", 0);
+    self stats::set_stat(#"current_event_calling", 0);
   }
 
   if(getdvarint(#"hash_27ff853067d7c38c", 0)) {
@@ -1326,7 +1326,7 @@ update_global_counters_on_match_end() {
     meat_stink_pickedup += player.pers[#"meat_stink_pickedup"];
     carpenter_pickedup += player.pers[#"carpenter_pickedup"];
     fire_sale_pickedup += player.pers[#"fire_sale_pickedup"];
-    var_d61f06ce += player.pers[#"hash_27399de28b76c5c6"];
+    var_d61f06ce += player.pers[#"bonfire_sale_pickedup"];
     minigun_pickedup += player.pers[#"minigun_pickedup"];
     island_seed_pickedup += player.pers[#"island_seed_pickedup"];
     hero_weapon_power_pickedup += player.pers[#"hero_weapon_power_pickedup"];
@@ -1335,8 +1335,8 @@ update_global_counters_on_match_end() {
     zmarcade_key_pickedup += player.pers[#"zmarcade_key_pickedup"];
     shield_charge_pickedup += player.pers[#"shield_charge_pickedup"];
     dung_pickedup += player.pers[#"dung_pickedup"];
-    var_614312ad += player.pers[#"hash_1b192689f4c8c402"];
-    var_be43e4a5 += player.pers[#"hash_65472fa120ebce1c"];
+    var_614312ad += player.pers[#"bonus_points_player_pickedup"];
+    var_be43e4a5 += player.pers[#"free_perk_pickedup"];
     bonus_points_team_pickedup += player.pers[#"bonus_points_team_pickedup"];
     ww_grenade_pickedup += player.pers[#"ww_grenade_pickedup"];
     use_magicbox += player.pers[#"use_magicbox"];

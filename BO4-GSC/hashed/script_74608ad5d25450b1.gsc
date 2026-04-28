@@ -30,7 +30,7 @@
 preload() {
   namespace_bd74bbd2::register(#"sc_mk2x", 20000, "sc_mk2x", &function_a66f0de2, &function_17f3e9e2);
   clientfield::register("scriptmover", "" + #"hash_56a1bc72bf8de8f1", 20000, 1, "int");
-  clientfield::register("actor", "" + #"hash_38c69da8fb2b74e4", 20000, 1, "int");
+  clientfield::register("actor", "" + #"mk2x_guard_fx", 20000, 1, "int");
 }
 
 init() {
@@ -140,7 +140,7 @@ function_c0fc92d2() {
 }
 
 function_9d66ea6f(e_item, e_player) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(e_player.name + "<dev string:x38>");
     println(e_player.name + "<dev string:x38>");
   }
@@ -186,7 +186,7 @@ function_ecdebc72() {
       self.var_13a2274b = 1;
       self.actor_damage_func = &function_cdddec81;
       self zombie_utility::set_zombie_run_cycle("walk");
-      self clientfield::set("" + #"hash_38c69da8fb2b74e4", 1);
+      self clientfield::set("" + #"mk2x_guard_fx", 1);
     }
   }
 }
@@ -221,7 +221,7 @@ function_cdddec81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
       }
 
       self zombie_utility::zombie_eye_glow_stop();
-      self clientfield::set("" + #"hash_757f891a37d3db00", 1);
+      self clientfield::set("" + #"freezegun_crumple_fx", 1);
       return (self.health + 666);
     }
   }
@@ -292,7 +292,7 @@ function_cf69599(e_item, e_player) {
   }
 
   if(level.var_ae5fb719.var_128cd2c8 < 1) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold(e_player.name + "<dev string:x65>");
       println(e_player.name + "<dev string:x65>");
     }
@@ -356,7 +356,7 @@ function_a66f0de2() {
 }
 
 function_b9a31cb(e_item, e_player) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(e_player.name + "<dev string:x82>");
     println(e_player.name + "<dev string:x82>");
   }
@@ -443,7 +443,7 @@ function_c6fc34a() {
 }
 
 complete_quest() {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(level.var_ae5fb719.e_player.name + "<dev string:x9f>");
     println(level.var_ae5fb719.e_player.name + "<dev string:x9f>");
   }

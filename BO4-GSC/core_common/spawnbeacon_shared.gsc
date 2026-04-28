@@ -187,10 +187,10 @@ beacon_spawned(watcher, owner) {
     return;
   }
 
-  owner notify(#"hash_31be1f8b27209ad0", {
+  owner notify(#"spawn_beacon_spawned", {
     #player: owner, #beacon: self
   });
-  level notify(#"hash_31be1f8b27209ad0", {
+  level notify(#"spawn_beacon_spawned", {
     #player: owner, #beacon: self
   });
 
@@ -482,7 +482,7 @@ destroyspawnbeacon(destroyedbyenemy) {
     playFX(level.spawnbeaconsettings.settingsbundle.var_bb6c29b4, spawnbeacon.origin);
   }
 
-  if((isDefined(self.var_ca3a0f16) ? self.var_ca3a0f16 : 0) || isDefined(player) && isDefined(player.var_c4a4cb7d) && player hasweapon(getweapon(#"hash_7ab3f9a730359659"), 1)) {
+  if((isDefined(self.var_ca3a0f16) ? self.var_ca3a0f16 : 0) || isDefined(player) && isDefined(player.var_c4a4cb7d) && player hasweapon(getweapon(#"spawn_beacon_held"), 1)) {
     if(isDefined(self.objectiveid)) {
       gameobjects::release_obj_id(self.objectiveid);
     }

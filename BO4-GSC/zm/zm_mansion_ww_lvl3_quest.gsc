@@ -79,7 +79,7 @@ __main__() {
     level thread function_6e094214();
     level thread function_7b5a8c15();
     level thread function_bc8c390e();
-    getweapon(#"zitem_chaos_lvl3_part_3").var_62a98b13 = #"hash_3b036955869eed34";
+    getweapon(#"zitem_chaos_lvl3_part_3").var_62a98b13 = #"experiment_comp";
     zm_crafting::function_d1f16587(#"zblueprint_chaos_lvl3", &ww_lvl3_crafted);
     level thread function_25058256();
   }

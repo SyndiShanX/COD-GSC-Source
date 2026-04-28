@@ -92,8 +92,8 @@ function_da600615(bot) {
   }
 }
 
-function_b5b6ef3e(func, obj) {
-  callback::add_callback(#"hash_45f35669076bc317", func, obj);
+on_init_killstreaks(func, obj) {
+  callback::add_callback(#"on_init_killstreaks", func, obj);
 }
 
 register_ui(killstreak_type, killstreak_menu) {
@@ -2794,7 +2794,7 @@ init_ride_killstreak_internal(streak, always_allow) {
     laptopwait = "timeout";
   } else if(isDefined(streak) && streak == "remote_missile") {
     laptopwait = "timeout";
-    var_5df1cb97 = getdvarfloat(#"hash_409036e81396b597", 0.075);
+    var_5df1cb97 = getdvarfloat(#"aku_tweak", 0.075);
   } else {
     laptopwait = self waittilltimeout(0.2, #"disconnect", #"death", #"weapon_switch_started");
     laptopwait = laptopwait._notify;

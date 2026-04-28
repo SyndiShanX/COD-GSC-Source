@@ -174,7 +174,7 @@ function_59093304(str_zone, var_e07ad59f = 0) {
 }
 
 function_86f1ed70(a_ents) {
-  a_ents[#"pap"] thread function_25adf2e0("roof", #"hash_79b5f8e539d36a49");
+  a_ents[#"pap"] thread function_25adf2e0("roof", #"pap_moved_roof");
   a_ents[#"pap"] clientfield::set("" + #"hash_504d26c38b96651c", 1);
 }
 
@@ -227,7 +227,7 @@ function_1ab4e68() {
     }
   }
 
-  level waittill(#"hash_222aa78f79091e7");
+  level waittill(#"pack_a_punch_on_notify");
 
   if(zm_custom::function_901b751c(#"zmpapenabled") != 2 && !(isDefined(level.var_af325495) && level.var_af325495)) {
     level thread zombie_brutus_util::attempt_brutus_spawn(1, "zone_roof");
@@ -347,7 +347,7 @@ function_c0bc0375() {
       level waittill(#"hide_p");
       self zm_pack_a_punch::function_bb629351(0, "hidden");
       self zm_pack_a_punch::set_state_hidden();
-      level waittill(#"hash_79b5f8e539d36a49", #"hash_1fc69d74f13da62e", #"hash_6d668f3614ed2393");
+      level waittill(#"pap_moved_roof", #"hash_1fc69d74f13da62e", #"hash_6d668f3614ed2393");
       a_e_pack = getEntArray("zm_pack_a_punch", "targetname");
 
       for(e_pack = self; self == e_pack; e_pack = array::random(a_e_pack)) {}

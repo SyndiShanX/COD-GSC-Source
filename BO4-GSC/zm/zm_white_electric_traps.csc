@@ -20,7 +20,7 @@ __init__() {
 init_fx() {
   level._effect[#"hash_6d40a3f1944d81b2"] = #"hash_3a5776a6c23c9563";
   level._effect[#"hash_3d339d7ae7b008d3"] = #"hash_6a84f61b7271e098";
-  level._effect[#"hash_6a97de5de4ae14a"] = #"zombie/fx_tesla_shock_zmb";
+  level._effect[#"electric_shock_ai"] = #"zombie/fx_tesla_shock_zmb";
   level._effect[#"hash_21e93d9faa37cad"] = #"zombie/fx_tesla_shock_eyes_zmb";
 }
 
@@ -61,7 +61,7 @@ electrocute_ai(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       setfxignorepause(localclientnum, self.n_shock_eyes_fx, 1);
     }
 
-    self.n_shock_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_6a97de5de4ae14a"], self, str_tag);
+    self.n_shock_fx = util::playFXOnTag(localclientnum, level._effect[#"electric_shock_ai"], self, str_tag);
 
     if(isDefined(self) && isDefined(self.n_shock_eyes_fx)) {
       setfxignorepause(localclientnum, self.n_shock_fx, 1);

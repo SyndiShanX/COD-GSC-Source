@@ -110,7 +110,7 @@ on_ai_killed(params) {
       if(params.eattacker.var_b4a6cec6 == level.var_b4a6cec6) {
         params.eattacker zm_trial_util::function_63060af4(1);
         params.eattacker.var_9360d1b5 = 1;
-        params.eattacker notify(#"hash_6170578b35e8c5d7");
+        params.eattacker notify(#"minutemen_complete");
 
         if(level.var_f995ece6 zm_trial_timer::is_open(params.eattacker)) {
           level.var_f995ece6 zm_trial_timer::close(params.eattacker);
@@ -126,7 +126,7 @@ function_ccbbe9c4(n_obj_id) {
   self zm_trial_util::function_c2cd0cba(level.var_b4a6cec6);
   self zm_trial_util::function_2190356a(self.var_b4a6cec6);
   waitframe(1);
-  s_notify = self waittill(#"hash_9e146af7233ec36", #"hash_7646638df88a3656");
+  s_notify = self waittill(#"hash_9e146af7233ec36", #"trial_round_end");
   objective_setinvisibletoplayer(n_obj_id, self);
 
   if(s_notify._notify == #"hash_9e146af7233ec36") {
@@ -135,8 +135,8 @@ function_ccbbe9c4(n_obj_id) {
 }
 
 function_8b87e57c(timer_label, grace_period, timer_value) {
-  level endon(#"end_of_round", #"host_migration_begin", #"hash_7646638df88a3656", #"end_game");
-  self endon(#"hash_6170578b35e8c5d7");
+  level endon(#"end_of_round", #"host_migration_begin", #"trial_round_end", #"end_game");
+  self endon(#"minutemen_complete");
 
   if(!isDefined(level.var_489d6aa2)) {
     level.var_489d6aa2 = timer_label;

@@ -240,7 +240,7 @@ function_834e6f7() {
 }
 
 function_39e0636(var_a276c861) {
-  level flag::init(#"hash_6df692c4073d421b");
+  level flag::init(#"a_skeet_fink_chunk_picked_up");
   level clientfield::set("" + #"hash_155407a9010f2b23", 1);
   a_s_damage = struct::get_array(#"a_skeet_fink_damage", "targetname");
   a_s_damage = array::sort_by_script_int(a_s_damage, 1);
@@ -301,7 +301,7 @@ function_4fccc01f(var_a276c861, ended_early) {
   }
 
   if(var_a276c861 || ended_early) {
-    level flag::set(#"hash_6df692c4073d421b");
+    level flag::set(#"a_skeet_fink_chunk_picked_up");
   }
 }
 
@@ -364,7 +364,7 @@ function_c4542a0c(t_trig) {
   waitresult = t_trig waittill(#"trigger");
   e_player = waitresult.activator;
   e_player playSound("zmb_sk_tree_pickup");
-  level flag::set(#"hash_6df692c4073d421b");
+  level flag::set(#"a_skeet_fink_chunk_picked_up");
   e_player thread zm_vo::function_a2bd5a0c(#"hash_191dec8da1ad1b1f", 1);
 
   if(isDefined(t_trig.mdl_stake)) {
@@ -377,7 +377,7 @@ function_c4542a0c(t_trig) {
 }
 
 function_15c82a8a(var_a276c861) {
-  if(level flag::get(#"hash_6df692c4073d421b")) {
+  if(level flag::get(#"a_skeet_fink_chunk_picked_up")) {
     var_4b9c76d7 = struct::get(#"a_skeet_fink_charge", "targetname");
     var_4b9c76d7.mdl_stake = util::spawn_model(#"hash_1a8e66a7966f8086", var_4b9c76d7.origin, var_4b9c76d7.angles);
     var_4b9c76d7.mdl_stake notsolid();
@@ -491,7 +491,7 @@ function_ed59d8e4() {
 }
 
 function_2879cfed(var_a276c861) {
-  if(level flag::get(#"hash_6df692c4073d421b")) {
+  if(level flag::get(#"a_skeet_fink_chunk_picked_up")) {
     foreach(s_unitrigger_stub in level.a_t_crafting[#"zblueprint_mansion_a_skeet_fink"]) {
       s_unitrigger_stub.locked = undefined;
     }
@@ -533,7 +533,7 @@ function_7aa50bb7(e_player) {
   can_use &= !e_player hasweapon(level.w_stake_knife);
 
   if(can_use) {
-    self sethintstring(self.stub.blueprint.var_391591d0);
+    self sethintstring(self.stub.blueprint.purchaseprompt);
   } else {
     self sethintstring("");
   }

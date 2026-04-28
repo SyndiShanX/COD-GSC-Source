@@ -413,7 +413,7 @@ function_86a8adbe() {
             case # "cargo_chest":
               mdl_map showpart("j_cargo");
               break;
-            case # "hash_1cb95429bf87e1dd":
+            case # "engine_room_chest":
               mdl_map showpart("j_engine_room");
               break;
             case # "grand_stair_lower_chest":
@@ -428,7 +428,7 @@ function_86a8adbe() {
             case # "bridge_chest":
               mdl_map showpart("j_bridge");
               break;
-            case # "hash_51c31615840ad554":
+            case # "dining_hall_chest":
               mdl_map showpart("j_dining_hall");
               break;
           }
@@ -621,7 +621,7 @@ function_704f6133() {
     e_blocker disconnectpaths();
   }
 
-  s_result = level waittill(#"hash_3e80d503318a5674");
+  s_result = level waittill(#"artifact_picked_up");
 
   if(!zm_custom::function_3f3752ab()) {
     zm_utility::giveachievement_wrapper("ZM_ZODT8_TRIAL_STEP_1", 1);
@@ -1164,19 +1164,19 @@ function_32d2bdc8() {
   var_a1310885 = array("zone_state_rooms_front", "zone_state_rooms_rear", "millionaire_suite_zone", "zone_grand_stairs_a_deck", "zone_grand_stairs_b_deck", "zone_grand_stairs_c_deck", "zone_grand_stairs_d_deck", "zone_grand_stairs_bottom", "zone_lounge", "zone_lounge_aft_deck", "zone_promenade_deck", "zone_dining_hall_fore", "zone_dining_hall_aft");
 
   if(isinarray(var_1c65f0a, self.zone_name)) {
-    a_models = array(#"hash_636abbe1a523130e", #"hash_5c0ea5a6a5ed7e85", #"hash_b78331fbec32771", #"hash_b78321fbec325be", #"hash_7acfc598beff0154", #"hash_7fc6151633627760", #"hash_7fc6161633627913", #"hash_2037bec607c2dd03", #"hash_75df996f8f4f5df", #"hash_527359033a0fec16", #"hash_75dfa96f8f4f792", #"hash_7887f7fa61198709", #"hash_75dfb96f8f4f945", #"hash_7befa3e8cd85887a", #"hash_2d534835676d4bf0", #"hash_2d534b35676d5109", #"hash_2d534a35676d4f56", #"hash_4e3ccf7051cc76f8", #"hash_4e3cd07051cc78ab", #"hash_2d534d35676d546f", #"hash_17bfc1b5e3c3e731", #"hash_17bfc0b5e3c3e57e", #"hash_2400eb2938a774e4", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4");
+    a_models = array(#"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85", #"c_t8_zmb_2ndclass_female2_hat2", #"c_t8_zmb_2ndclass_female2_hat3", #"hash_7acfc598beff0154", #"c_t8_zmb_2ndclass_female3_hat2", #"c_t8_zmb_2ndclass_female3_hat3", #"hash_2037bec607c2dd03", #"c_t8_zmb_3rdclass_female1", #"hash_527359033a0fec16", #"c_t8_zmb_3rdclass_female2", #"hash_7887f7fa61198709", #"c_t8_zmb_3rdclass_female3", #"hash_7befa3e8cd85887a", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"c_t8_zmb_3rdclass_male3_skin2", #"c_t8_zmb_3rdclass_male3_skin3", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3", #"hash_2400eb2938a774e4", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4");
   } else if(isinarray(var_c9c43b66, self.zone_name)) {
-    a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"hash_2d534835676d4bf0", #"hash_2d534b35676d5109", #"hash_2d534a35676d4f56", #"hash_2400eb2938a774e4", #"hash_2d534d35676d546f", #"hash_17bfc1b5e3c3e731", #"hash_17bfc0b5e3c3e57e");
+    a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"hash_2400eb2938a774e4", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3");
   } else if(isinarray(var_dd90adf6, self.zone_name)) {
     if(randomint(100) < 33) {
       a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"hash_57e580a51c30799e", #"hash_57e580a51c30799e", #"hash_7ba2b528997fa55", #"hash_7ba2b528997fa55");
     }
   } else if(isinarray(var_a1310885, self.zone_name)) {
-    a_models = array(#"hash_490bb2c56163df6", #"hash_182b1a4c65e73801", #"hash_182b174c65e732e8", #"hash_182b184c65e7349b", #"hash_2f441451d3b56959", #"hash_cecf5a5c3d66868", #"hash_70f7ce06d71221d1", #"hash_7d45b54d5e3cd677", #"hash_182b174c65e732e8", #"hash_182b184c65e7349b", #"hash_7d45b44d5e3cd4c4", #"hash_cecf5a5c3d66868", #"hash_14c00dedfd2de36a", #"hash_5e3cb12fa50e229c", #"hash_5e3cb22fa50e244f", #"hash_5e3caf2fa50e1f36", #"hash_5e3cb02fa50e20e9", #"hash_5e3cad2fa50e1bd0", #"hash_5e43ac8e88cc1d41", #"hash_1bc5c2590cdbe137", #"hash_1bc5c1590cdbdf84", #"hash_1bc5c0590cdbddd1", #"hash_1bc5bf590cdbdc1e", #"hash_1bc5be590cdbda6b", #"hash_636abbe1a523130e", #"hash_5c0ea5a6a5ed7e85");
+    a_models = array(#"hash_490bb2c56163df6", #"c_t8_zmb_1stclass_male1", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"hash_2f441451d3b56959", #"hash_cecf5a5c3d66868", #"hash_70f7ce06d71221d1", #"c_t8_zmb_1stclass_male1_skin2", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"c_t8_zmb_1stclass_male1_skin3", #"hash_cecf5a5c3d66868", #"c_t8_zmb_1stclass_female1", #"c_t8_zmb_1stclass_female1_skin2", #"c_t8_zmb_1stclass_female1_skin3", #"c_t8_zmb_1stclass_female1_skin4", #"c_t8_zmb_1stclass_female1_skin5", #"c_t8_zmb_1stclass_female1_skin6", #"hash_5e43ac8e88cc1d41", #"hash_1bc5c2590cdbe137", #"hash_1bc5c1590cdbdf84", #"hash_1bc5c0590cdbddd1", #"hash_1bc5bf590cdbdc1e", #"hash_1bc5be590cdbda6b", #"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85");
   } else if(self.zone_name == "zone_bridge") {
     a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"hash_2400eb2938a774e4", #"hash_57e580a51c30799e", #"hash_7ba2b528997fa55", #"hash_7ba2b528997fa55");
   } else if(self.zone_name == "zone_galley") {
-    a_models = array(#"hash_490bb2c56163df6", #"hash_636abbe1a523130e", #"hash_5c0ea5a6a5ed7e85", #"hash_2d534835676d4bf0", #"hash_2d534b35676d5109", #"hash_182b174c65e732e8");
+    a_models = array(#"hash_490bb2c56163df6", #"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_1stclass_male2");
   }
 
   if(isDefined(a_models)) {
@@ -1677,7 +1677,7 @@ function_5ef52c07() {
   self thread function_e9642771(e_water);
 
   while(isalive(self)) {
-    s_result = self waittill(#"zone_change", #"hash_20a44fff6b27cb96");
+    s_result = self waittill(#"zone_change", #"main_quest_step_10_started");
 
     if(isalive(self) && s_result._notify === #"zone_change") {
       if(!(isDefined(self.var_14dd80fb) && self.var_14dd80fb) && isDefined(s_result.zone_name) && isinarray(var_67382c0b, s_result.zone_name)) {
@@ -2043,7 +2043,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "hash_6976e0f87940fc21":
+      case # "smoke_stack_top":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_6ccb25e6c862372d";
@@ -2057,7 +2057,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "hash_b20cb95c337f16d":
+      case # "smoke_stack_bottom":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_781dafec4ac0550f";
@@ -2140,8 +2140,8 @@ function_c52e8ba(player, var_8d5d092c) {
 
 function_ae5d684b() {
   switch (self.unitrigger_stub.script_string) {
-    case # "hash_b20cb95c337f16d":
-    case # "hash_6976e0f87940fc21":
+    case # "smoke_stack_bottom":
+    case # "smoke_stack_top":
       self.unitrigger_stub.var_8d5d092c = "smoke_stack";
       break;
     case # "engine_room":

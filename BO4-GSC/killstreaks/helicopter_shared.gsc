@@ -2196,7 +2196,7 @@ function_656691ab() {
         self set_goal_pos(self.heligoalpos, 1);
       }
 
-      self notify(#"hash_340ab3c2b94ff86a");
+      self notify(#"switched_pathing");
       break;
     }
 

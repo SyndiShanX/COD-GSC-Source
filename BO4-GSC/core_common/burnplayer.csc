@@ -87,7 +87,7 @@ burn_on_postfx() {
   self endon(#"death");
   self notify(#"burn_on_postfx");
   self endon(#"burn_on_postfx");
-  self playSound(0, #"hash_791f349cb716e078");
+  self playSound(0, #"chr_burn_start_light");
   self thread postfx::playpostfxbundle(#"pstfx_burn_loop");
 }
 

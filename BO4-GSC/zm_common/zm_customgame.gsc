@@ -1180,7 +1180,7 @@ function_74b79f63() {
       break;
     case 2:
       level flag::set("power_on");
-      level flagsys::set(#"hash_3e80d503318a5674");
+      level flagsys::set(#"artifact_picked_up");
 
       if(function_901b751c(#"zmpowerdoorstate") == 1) {
         a_zombie_doors = getEntArray("zombie_door", "targetname");

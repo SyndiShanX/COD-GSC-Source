@@ -706,7 +706,7 @@ game_start() {
     wait 1;
   }
 
-  level notify(#"hash_4c62fe02843b1a98");
+  level notify(#"draft_game_start");
   level thread globallogic::sndsetmatchsnapshot(0);
 }
 

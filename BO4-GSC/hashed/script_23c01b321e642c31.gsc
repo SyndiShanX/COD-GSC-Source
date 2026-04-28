@@ -79,7 +79,7 @@ on_end(round_reset) {
 
 function_7f62f098(challenge) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     var_96936cca = self.var_5a9bcbe4;

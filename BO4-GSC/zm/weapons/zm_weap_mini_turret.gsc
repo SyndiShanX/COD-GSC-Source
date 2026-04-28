@@ -431,7 +431,7 @@ turretscanning() {
         }
 
         if(var_afae28e0 && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
-          veh.owner playsoundtoplayer(#"hash_7ea486136cd776c", veh.owner);
+          veh.owner playsoundtoplayer(#"mpl_turret_kill", veh.owner);
           veh.turretrotscale = 1;
           wait randomfloatrange(0.05, 0.2);
         }

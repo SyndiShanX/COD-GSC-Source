@@ -119,12 +119,12 @@ function_33f0ddd3(s_event) {
 
 function_29ee24dd() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   a_w_weapons = self getweaponslist(0);
   self reset_ammo(1);
 
   while(true) {
-    s_waitresult = self waittill(#"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"melee_reload", #"wallbuy_done");
+    s_waitresult = self waittill(#"zmb_max_ammo", #"give_full_ammo", #"melee_reload", #"wallbuy_done");
     w_current = self getcurrentweapon();
 
     if(s_waitresult._notify == "melee_reload") {

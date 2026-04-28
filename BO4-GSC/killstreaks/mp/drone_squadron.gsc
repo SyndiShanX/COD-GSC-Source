@@ -42,7 +42,7 @@ __init__() {
   qrdrone::init_shared();
   killstreaks::register_killstreak("killstreak_drone_squadron", &function_d52c51c6);
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"killstreak_remote"));
-  killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_26ffb92552ae26be"));
+  killstreaks::register_alt_weapon("drone_squadron", getweapon(#"drone_squadron_turret"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_5fbda3ef4b135b49"));
   remote_weapons::registerremoteweapon("drone_squadron", #"hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
   level.killstreaks[#"drone_squadron"].threatonkill = 1;

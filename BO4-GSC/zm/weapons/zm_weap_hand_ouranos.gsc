@@ -38,7 +38,7 @@ __init__() {
   clientfield::register("scriptmover", "ouranos_shoot", 16000, 1, "counter");
   clientfield::register("scriptmover", "ouranos_impact", 16000, 1, "counter");
   clientfield::register("allplayers", "" + #"ouranos_beam_fire", 16000, 1, "int");
-  clientfield::register("allplayers", "" + #"hash_4fb73e88d45af0ef", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"ouranos_beam_fire_sfx", 16000, 1, "int");
   clientfield::register("actor", "" + #"ouranos_proj_knock", 16000, getminbitcountfornum(3), "int");
   clientfield::register("actor", "" + #"ouranos_zombie_impact", 16000, 1, "counter");
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int", &ouranos_feather_hit);
@@ -85,7 +85,7 @@ function_3f8da82c() {
       continue;
     }
 
-    self clientfield::set("" + #"hash_4fb73e88d45af0ef", 0);
+    self clientfield::set("" + #"ouranos_beam_fire_sfx", 0);
     self clientfield::set("" + #"ouranos_beam_fire", 0);
   }
 }
@@ -592,7 +592,7 @@ player_charged_shot(weapon) {
   self thread function_a2065170();
   self thread function_cf3b7cef();
   self notify(#"start_beaming");
-  self clientfield::set("" + #"hash_4fb73e88d45af0ef", 1);
+  self clientfield::set("" + #"ouranos_beam_fire_sfx", 1);
   self clientfield::set("" + #"ouranos_beam_fire", 1);
 
   while(zm_utility::is_player_valid(self) && self attackButtonPressed() && self getweaponammostock(weapon) && self getcurrentweapon() === weapon && !self meleeButtonPressed()) {
@@ -601,7 +601,7 @@ player_charged_shot(weapon) {
     waitframe(2);
   }
 
-  self clientfield::set("" + #"hash_4fb73e88d45af0ef", 0);
+  self clientfield::set("" + #"ouranos_beam_fire_sfx", 0);
   self clientfield::set("" + #"ouranos_beam_fire", 0);
   a_e_targets = zm_hero_weapon::function_7c3681f7();
 

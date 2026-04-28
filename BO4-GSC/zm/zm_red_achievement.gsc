@@ -31,7 +31,7 @@ function_3aed7ccf() {
 
 function_ec51ce01() {
   self endon(#"disconnect");
-  level waittill(#"hash_71d7e6a55a1ca9e");
+  level waittill(#"boss_battle_over");
 
   if(zm_utility::is_classic()) {
     self iprintlnbold("<dev string:x38>");

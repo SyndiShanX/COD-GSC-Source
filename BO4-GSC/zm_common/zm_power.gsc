@@ -180,7 +180,7 @@ electric_switch() {
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
         case # "elec_switch":
-          self sethintstring(#"hash_3071a199ee6ad7a6");
+          self sethintstring(#"zombie/electric_switch_off");
           break;
       }
     }
@@ -234,7 +234,7 @@ function_9d9892d2(master_switch) {
 }
 
 artifact_mind_on(master_switch, fx_pos, user) {
-  level notify(#"hash_3e80d503318a5674", {
+  level notify(#"artifact_picked_up", {
     #player: user
   });
 }

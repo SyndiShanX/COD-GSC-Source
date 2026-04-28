@@ -26,7 +26,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_widows_wine_perk_for_level();
-  namespace_9ff9f642::register_slowdown(#"hash_54016f8b03c9745e", 0.7, 12);
+  namespace_9ff9f642::register_slowdown(#"widows_wine_slowdown", 0.7, 12);
   namespace_9ff9f642::register_slowdown(#"hash_6b28a9e80349ad7e", 0.8, 6);
   namespace_9ff9f642::register_slowdown(#"hash_fa4899571ae8dbd", 0.85, 3);
 }
@@ -127,7 +127,7 @@ widows_wine_contact_explosion() {
       case # "boss":
         continue;
       default:
-        var_3e5502b5 = #"hash_54016f8b03c9745e";
+        var_3e5502b5 = #"widows_wine_slowdown";
         var_ca6267ad = 12;
         b_freeze = 1;
         break;
@@ -184,7 +184,7 @@ function_c6366dbe() {
         case # "boss":
           continue;
         default:
-          var_3e5502b5 = #"hash_54016f8b03c9745e";
+          var_3e5502b5 = #"widows_wine_slowdown";
           var_ca6267ad = 12;
           break;
       }

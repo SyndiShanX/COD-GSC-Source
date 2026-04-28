@@ -130,9 +130,9 @@ play_vo(str_vo, var_3a78a180 = 1) {
 
 function_62b6f78a(str_vo, var_3a78a180 = 1) {
   level endon(#"combattraining_logic_finished");
-  level notify(#"hash_13084191e4b3baf1");
+  level notify(#"play_vo_end");
   waitframe(1);
-  level endoncallback(&function_d7a1a570, #"hash_13084191e4b3baf1");
+  level endoncallback(&function_d7a1a570, #"play_vo_end");
   e_player = get_player();
   e_player endoncallback(&function_d7a1a570, #"death");
   e_player.var_9e2e6113++;
@@ -290,8 +290,8 @@ function_869da1cf(_hash) {
 }
 
 vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_mod, str_weapon) {
-  level endon(#"combattraining_logic_finished", #"hash_658f0911fdecfaf8");
-  self endon(#"death", #"hash_658f0911fdecfaf8");
+  level endon(#"combattraining_logic_finished", #"vo_on_damage_end");
+  self endon(#"death", #"vo_on_damage_end");
   e_player = get_player();
   e_player endon(#"death");
 
@@ -312,8 +312,8 @@ vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_
 }
 
 function_28126982(a_str_vo) {
-  level endon(#"combattraining_logic_finished", #"hash_658f0911fdecfaf8");
-  self endon(#"hash_658f0911fdecfaf8");
+  level endon(#"combattraining_logic_finished", #"vo_on_damage_end");
+  self endon(#"vo_on_damage_end");
   e_player = get_player();
   self waittill(#"death");
   e_player function_3ca1b77d();
@@ -366,7 +366,7 @@ function_625a37f9(vo, _notify, b_once = 1, var_cd53c705 = 1, var_dfbbbce6 = 10, 
 }
 
 function_dae6df54(_hash) {
-  level notify(#"hash_13084191e4b3baf1");
+  level notify(#"play_vo_end");
 }
 
 function_8d5bc717(str_trig, vo) {
@@ -534,7 +534,7 @@ function_b86d3b7d() {
 
 function_dfd7add4() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
+  setDvar(#"devgui_ct_vo", "<dev string:x77>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x7a>");
@@ -542,7 +542,7 @@ function_dfd7add4() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
+    cmd = getdvarstring(#"devgui_ct_vo", "<dev string:x77>");
 
     if(cmd == "<dev string:x77>") {
       continue;
@@ -555,6 +555,6 @@ function_dfd7add4() {
         break;
     }
 
-    setDvar(#"hash_31b5762ac1fb40cf", "<dev string:x77>");
+    setDvar(#"devgui_ct_vo", "<dev string:x77>");
   }
 }

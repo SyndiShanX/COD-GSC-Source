@@ -218,7 +218,7 @@ function_615d8c38(params) {
     return;
   }
 
-  self notify(#"hash_2fb2eddfa6a0ef3f");
+  self notify(#"stop_grapple_attempt");
   var_59d5af75 = self gettagorigin("j_knee_le");
 
   if(isDefined(params.einflictor) && params.shitloc === "none" && isDefined(var_59d5af75)) {

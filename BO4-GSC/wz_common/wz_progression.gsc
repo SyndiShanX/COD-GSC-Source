@@ -313,7 +313,7 @@ function_6a7970fe() {
   player stats::function_d40764f3(#"hash_5e9a745460a10f80", 1);
 
   if(isDefined(player.avenger) && player.avenger) {
-    player stats::function_d40764f3(#"hash_5387d5e6f15c6b55", 1);
+    player stats::function_d40764f3(#"top_5_avenger", 1);
   }
 
   if(isDefined(player.items_picked_up) && player.items_picked_up.size <= 1) {
@@ -643,7 +643,7 @@ function_a117c988() {
     attacker = self.laststandparams.attacker;
 
     if(isDefined(attacker) && isDefined(attacker.var_121392a1) && isarray(attacker.var_121392a1)) {
-      if(isDefined(attacker.var_121392a1[#"blind_base"]) || isDefined(attacker.var_121392a1[#"swat_grenade"]) || isDefined(attacker.var_121392a1[#"hash_1527a22d8a6fdc21"])) {
+      if(isDefined(attacker.var_121392a1[#"blind_base"]) || isDefined(attacker.var_121392a1[#"swat_grenade"]) || isDefined(attacker.var_121392a1[#"stunned_slow_grenade"])) {
         self.laststandparams.var_6314a3a3 = 1;
       }
     }

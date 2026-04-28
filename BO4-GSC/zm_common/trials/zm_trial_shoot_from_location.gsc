@@ -68,7 +68,7 @@ on_end(round_reset) {
 
 function_3658663() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   b_locked_weapons = 0;
 
   while(true) {

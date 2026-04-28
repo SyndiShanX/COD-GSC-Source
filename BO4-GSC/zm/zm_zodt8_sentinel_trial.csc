@@ -36,7 +36,7 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"hash_3400ccffbd3d73b3", 1, 2, "int", &function_49661954, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_15b23de7589e61a", 1, 1, "int", &function_25a6443, 0, 0);
   clientfield::register("scriptmover", "" + #"blocker_fx", 1, 1, "int", &function_74e395f7, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_68e2384b254175da", 1, 1, "counter", &function_9a686624, 0, 0);
+  clientfield::register("scriptmover", "" + #"planet_glyph_activate", 1, 1, "counter", &function_9a686624, 0, 0);
   clientfield::register("scriptmover", "" + #"pipe_fx", 1, 2, "int", &pipe_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"teleport_sigil", 1, 1, "int", &teleport_sigil, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_46e2ed49fb0f55c6", 1, 1, "int", &function_9f92e675, 0, 0);
@@ -56,17 +56,17 @@ init_clientfields() {
 init_flags() {}
 
 init_fx() {
-  level._effect[#"hash_2e7f9a3bff90af4a"] = #"hash_7b0d80c48289dd0b";
-  level._effect[#"hash_573af1567956ac69"] = #"hash_661da9149933ecf9";
-  level._effect[#"hash_538a9337bb9927da"] = #"zm_ai/fx8_cata_elec_aura";
-  level._effect[#"hash_3dba8e7d212e4382"] = #"hash_641c2257723638c2";
-  level._effect[#"hash_59916e76378fa3d8"] = #"hash_62eafc17a432322a";
-  level._effect[#"hash_1e6b4bfa36f9487b"] = #"hash_1832a0ef5af0040d";
-  level._effect[#"hash_4b9011909a431ac8"] = #"hash_619361bb6a9a5d2d";
-  level._effect[#"hash_50a595992ac285d0"] = #"hash_3009e42178ffd484";
+  level._effect[#"soul_fx_earth"] = #"hash_7b0d80c48289dd0b";
+  level._effect[#"soul_fx_water"] = #"zm_ai/fx8_cata_water_purify_trail";
+  level._effect[#"soul_fx_air"] = #"zm_ai/fx8_cata_elec_aura";
+  level._effect[#"soul_fx_fire"] = #"hash_641c2257723638c2";
+  level._effect[#"soul_capture_earth"] = #"hash_62eafc17a432322a";
+  level._effect[#"soul_capture_water"] = #"hash_1832a0ef5af0040d";
+  level._effect[#"soul_capture_air"] = #"hash_619361bb6a9a5d2d";
+  level._effect[#"soul_capture_fire"] = #"hash_3009e42178ffd484";
   level._effect[#"hash_4ab2496c89a7d871"] = #"hash_4a305119bc50ca3d";
   level._effect[#"packed_artifact"] = #"zombie/fx_ritual_glow_relic_zod_zmb";
-  level._effect[#"catalyst_blocker"] = #"hash_5b773dbbac0012ff";
+  level._effect[#"catalyst_blocker"] = #"zombie/fx8_power_door_amb_quest";
   level._effect[#"sentinel_aura"] = #"hash_3def678deb7f4078";
   level._effect[#"sentinel_activate"] = #"hash_464f27bfbf0ce7bf";
   level._effect[#"sentinel_glow"] = #"hash_41b2c270f26faabc";
@@ -86,9 +86,9 @@ init_fx() {
   level._effect[#"hash_2bb182b164a2d789"] = #"hash_71fc8c15d53b5fe2";
   level._effect[#"hash_4274dc30c3876166"] = #"hash_2f27882b95a820fd";
   level._effect[#"ice_blocker"] = #"hash_55a1d3ce6c554a7a";
-  level._effect[#"hash_53533bf74eb74209"] = #"hash_2909be1122353509";
+  level._effect[#"ice_blocker_dmg1"] = #"hash_2909be1122353509";
   level._effect[#"hash_535338f74eb73cf0"] = #"hash_28b4c41121ecff3c";
-  level._effect[#"hash_452505f92d084e74"] = #"hash_7fb7de4ea65f1b9d";
+  level._effect[#"ice_blocker_death"] = #"hash_7fb7de4ea65f1b9d";
   level._effect[#"hash_6160e75bd4d4852"] = #"hash_369788360ca4879d";
   level._effect[#"hash_3316f2b0a2dcecda"] = #"hash_56e16e07d428fead";
   level._effect[#"step7_snow"] = #"hash_d778729ca762c5a";
@@ -112,14 +112,14 @@ init_fx() {
 }
 
 function_91be5845() {
-  zm_sq_modules::function_d8383812(#"hash_41a5c5168ffb2a97", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"hash_2e7f9a3bff90af4a"], level._effect[#"hash_59916e76378fa3d8"], undefined, &function_7729e81c);
-  zm_sq_modules::function_d8383812(#"hash_400a481490a4e390", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"hash_573af1567956ac69"], level._effect[#"hash_1e6b4bfa36f9487b"], undefined, &function_7729e81c);
-  zm_sq_modules::function_d8383812(#"hash_5562e324d230f057", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"hash_538a9337bb9927da"], level._effect[#"hash_4b9011909a431ac8"], undefined, &function_7729e81c);
-  zm_sq_modules::function_d8383812(#"hash_41fae186552f1259", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"hash_3dba8e7d212e4382"], level._effect[#"hash_50a595992ac285d0"], undefined, &function_7729e81c);
-  zm_sq_modules::function_d8383812(#"hash_7182a46bb3cdf577", 1, #"hash_7182a46bb3cdf577", 111, level._effect[#"hash_2e7f9a3bff90af4a"], level._effect[#"hash_59916e76378fa3d8"], undefined);
-  zm_sq_modules::function_d8383812(#"hash_466c2764cc790370", 1, #"hash_466c2764cc790370", 111, level._effect[#"hash_573af1567956ac69"], level._effect[#"hash_1e6b4bfa36f9487b"], undefined);
-  zm_sq_modules::function_d8383812(#"hash_34f2b4c4f7d74137", 1, #"hash_34f2b4c4f7d74137", 111, level._effect[#"hash_538a9337bb9927da"], level._effect[#"hash_4b9011909a431ac8"], undefined);
-  zm_sq_modules::function_d8383812(#"hash_49ad34a64ecaebb9", 1, #"hash_49ad34a64ecaebb9", 111, level._effect[#"hash_3dba8e7d212e4382"], level._effect[#"hash_50a595992ac285d0"], undefined);
+  zm_sq_modules::function_d8383812(#"hash_41a5c5168ffb2a97", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"soul_fx_earth"], level._effect[#"soul_capture_earth"], undefined, &function_7729e81c);
+  zm_sq_modules::function_d8383812(#"hash_400a481490a4e390", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"soul_fx_water"], level._effect[#"soul_capture_water"], undefined, &function_7729e81c);
+  zm_sq_modules::function_d8383812(#"hash_5562e324d230f057", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"soul_fx_air"], level._effect[#"soul_capture_air"], undefined, &function_7729e81c);
+  zm_sq_modules::function_d8383812(#"hash_41fae186552f1259", 1, #"hash_3d7f94e7862a63ab", 50, level._effect[#"soul_fx_fire"], level._effect[#"soul_capture_fire"], undefined, &function_7729e81c);
+  zm_sq_modules::function_d8383812(#"hash_7182a46bb3cdf577", 1, #"hash_7182a46bb3cdf577", 111, level._effect[#"soul_fx_earth"], level._effect[#"soul_capture_earth"], undefined);
+  zm_sq_modules::function_d8383812(#"hash_466c2764cc790370", 1, #"hash_466c2764cc790370", 111, level._effect[#"soul_fx_water"], level._effect[#"soul_capture_water"], undefined);
+  zm_sq_modules::function_d8383812(#"hash_34f2b4c4f7d74137", 1, #"hash_34f2b4c4f7d74137", 111, level._effect[#"soul_fx_air"], level._effect[#"soul_capture_air"], undefined);
+  zm_sq_modules::function_d8383812(#"hash_49ad34a64ecaebb9", 1, #"hash_49ad34a64ecaebb9", 111, level._effect[#"soul_fx_fire"], level._effect[#"soul_capture_fire"], undefined);
 }
 
 function_7729e81c(localclientnum, def, s_capture_point) {}
@@ -127,16 +127,16 @@ function_7729e81c(localclientnum, def, s_capture_point) {}
 function_33aa16f0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 1:
-      str_fx = #"hash_2e7f9a3bff90af4a";
+      str_fx = #"soul_fx_earth";
       break;
     case 2:
-      str_fx = #"hash_573af1567956ac69";
+      str_fx = #"soul_fx_water";
       break;
     case 3:
-      str_fx = #"hash_538a9337bb9927da";
+      str_fx = #"soul_fx_air";
       break;
     case 4:
-      str_fx = #"hash_3dba8e7d212e4382";
+      str_fx = #"soul_fx_fire";
       break;
   }
 
@@ -316,7 +316,7 @@ function_9ecc1074(localclientnum) {
   if(s_result._notify == "underwater_begin") {
     while(isalive(self)) {
       if(self util::function_50ed1561(localclientnum)) {
-        self.var_733dd716 = playfxoncamera(localclientnum, level._effect[#"hash_1e7095084eda811c"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
+        self.var_733dd716 = playfxoncamera(localclientnum, level._effect[#"water_player_jump_in_new"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
       }
 
       wait randomintrange(15, 20);
@@ -446,7 +446,7 @@ function_49661954(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 2) {
     self playSound(localclientnum, #"hash_1892310a436314b2");
-    util::playFXOnTag(localclientnum, level._effect[#"hash_53533bf74eb74209"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"ice_blocker_dmg1"], self, "tag_origin");
     return;
   }
 
@@ -467,7 +467,7 @@ function_49661954(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   self playSound(localclientnum, #"hash_28d76e47e3d57bf6");
   util::playFXOnTag(localclientnum, level._effect[#"hash_535338f74eb73cf0"], self, "tag_origin");
-  util::playFXOnTag(localclientnum, level._effect[#"hash_452505f92d084e74"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"ice_blocker_death"], self, "tag_origin");
 }
 
 function_94822f89(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -540,7 +540,7 @@ function_d592393d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   b_underwater = self isplayerswimmingunderwater();
 
   if(newval) {
-    self thread postfx::playpostfxbundle(#"hash_5513ce472ffeb0f3");
+    self thread postfx::playpostfxbundle(#"pstfx_heat_distortion_zm");
 
     if(!b_underwater) {
       setpbgactivebank(localclientnum, 4);
@@ -553,7 +553,7 @@ function_d592393d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     setpbgactivebank(localclientnum, 1);
   }
 
-  self postfx::stoppostfxbundle(#"hash_5513ce472ffeb0f3");
+  self postfx::stoppostfxbundle(#"pstfx_heat_distortion_zm");
 }
 
 function_48719840(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

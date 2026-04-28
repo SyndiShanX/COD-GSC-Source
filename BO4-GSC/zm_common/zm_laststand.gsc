@@ -859,8 +859,8 @@ function_b7c101fa() {
   self endon(#"disconnect");
   self.var_72249004 = 0;
   self.var_308dc243 = 0;
-  self.var_d66589da = int(zombie_utility::get_zombie_var(#"hash_67ae1b8cbb7c985"));
-  self.var_5d4c5daf = int(zombie_utility::get_zombie_var(#"hash_3098c53bba6402d3"));
+  self.var_d66589da = int(zombie_utility::get_zombie_var(#"self_revive_count_solo"));
+  self.var_5d4c5daf = int(zombie_utility::get_zombie_var(#"self_revive_count_coop"));
   level thread check_self_revive_for_hotjoin();
   self waittill(#"spawned");
   level flag::wait_till("start_zombie_round_logic");

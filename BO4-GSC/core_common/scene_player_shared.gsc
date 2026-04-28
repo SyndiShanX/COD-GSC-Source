@@ -245,8 +245,8 @@ class csceneplayer: csceneobject {
   }
 
   function function_509b9f47(player) {
-    player notify(#"hash_375ad02201949a8d");
-    player endon(#"camanimscripted", #"hash_375ad02201949a8d", #"disconnect");
+    player notify(#"start_delay_end_camera");
+    player endon(#"camanimscripted", #"start_delay_end_camera", #"disconnect");
     _o_scene waittilltimeout(0.1, #"scene_done", #"scene_stop", #"scene_skip_completed");
     stop_camera(player);
 

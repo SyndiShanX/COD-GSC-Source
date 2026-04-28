@@ -171,7 +171,7 @@ function_ca6698c6() {
   player thread killstreaks::play_killstreak_start_dialog("overwatch_helicopter", player.team, killstreak_id);
   helicopter killstreaks::play_pilot_dialog_on_owner("arrive", "overwatch_helicopter", killstreak_id);
   settings = getscriptbundle("killstreak_overwatch_helicopter");
-  player notify(#"hash_7b84cc3c326479a6", {
+  player notify(#"overwatch_helicopter_called", {
     #chopper: helicopter
   });
   player addweaponstat(settings.ksweapon, #"used", 1);
@@ -222,7 +222,7 @@ function_f6442ecd(helicopter, player, ownerleft) {
 
 deletehelicoptercallback() {
   helicopter = self;
-  helicopter notify(#"hash_3904c1a9ebdc27de");
+  helicopter notify(#"overwatch_heli_shutdown");
 }
 
 function_a0068ca0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
@@ -320,7 +320,7 @@ function_49dca506(helicopter, attacker) {
 function_520df983(helicopter) {
   function_49dca506(helicopter);
   helicopter.var_570c07f9 = 1;
-  helicopter notify(#"hash_3904c1a9ebdc27de");
+  helicopter notify(#"overwatch_heli_shutdown");
   helicopter playLoopSound(#"exp_veh_plane_spinout_lp");
   helicopter::heli_explode();
   helicopter playSound(#"exp_veh_large");
@@ -328,7 +328,7 @@ function_520df983(helicopter) {
 }
 
 function_a9fc0ef6(helicopter) {
-  waitresult = helicopter waittill(#"hash_3904c1a9ebdc27de");
+  waitresult = helicopter waittill(#"overwatch_heli_shutdown");
   attacker = waitresult.attacker;
 
   if(!(isDefined(helicopter.var_570c07f9) && helicopter.var_570c07f9)) {
@@ -351,7 +351,7 @@ watchplayerteamchangethread(helicopter) {
   player thread function_f6442ecd(helicopter, player, ownerleft);
 
   if(ownerleft && isDefined(helicopter)) {
-    helicopter notify(#"hash_3904c1a9ebdc27de");
+    helicopter notify(#"overwatch_heli_shutdown");
   }
 }
 
@@ -797,7 +797,7 @@ function_ab6f69a1(swat, helicopter) {
 function_67260255(swat, helicopter, killstreak_id) {
   swat endon(#"death");
   helicopter endon(#"death");
-  helicopter waittill(#"hash_3904c1a9ebdc27de");
+  helicopter waittill(#"overwatch_heli_shutdown");
   swat unlink();
   swat startragdoll();
   swat kill(swat.origin, undefined, undefined, undefined, 0, 1);

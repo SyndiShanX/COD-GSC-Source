@@ -1015,7 +1015,7 @@ zombieshouldstun(behaviortreeentity) {
 
 zombiestunstart(behaviortreeentity) {
   behaviortreeentity pathmode("dont move", 1);
-  callback::callback(#"hash_1eda827ff5e6895b");
+  callback::callback(#"on_ai_stunned");
 }
 
 function_c377438f(behaviortreeentity) {
@@ -1613,7 +1613,7 @@ notetrackboardmelee(animationentity) {
         heightdiff = abs(animationentity.player_targets[i].origin[2] - animationentity.first_node.trigger_location.origin[2]);
 
         if(playertriggerdistsq < triggerdistsq && heightdiff * heightdiff < triggerdistsq) {
-          animationentity.player_targets[i] playsoundtoplayer(#"hash_75318bcffca7ff06", animationentity.player_targets[i]);
+          animationentity.player_targets[i] playsoundtoplayer(#"evt_player_swiped_victim", animationentity.player_targets[i]);
           animationentity.player_targets[i] dodamage(animationentity.meleeweapon.meleedamage, animationentity.origin, self, self, "none", "MOD_MELEE");
           break;
         }

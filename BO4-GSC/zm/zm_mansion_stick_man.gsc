@@ -384,7 +384,7 @@ function_2345b68a() {
 
 function_44a7951d() {
   if(self === level.stick_player) {
-    self notify(#"hash_1544918b5f670dae");
+    self notify(#"sacrifice_player_reset");
     self setvisibletoall();
 
     if(isDefined(self.e_linkto)) {
@@ -405,7 +405,7 @@ function_4aa24b78() {
   self notify("5a517bbed613c3ee");
   self endon("5a517bbed613c3ee");
   level endon(#"stone_visible");
-  self endon(#"player_downed", #"death", #"hash_1544918b5f670dae");
+  self endon(#"player_downed", #"death", #"sacrifice_player_reset");
 
   if(self === level.stick_player) {
     self waittill(#"_zombie_game_over");
@@ -523,7 +523,7 @@ function_8a51807c() {
 
 function_d8ca90b7() {
   level endon(#"stick_drag");
-  level.stick_player endon(#"disconnect", #"hash_1544918b5f670dae");
+  level.stick_player endon(#"disconnect", #"sacrifice_player_reset");
   level flag::wait_till(#"hash_7ffc33bb45377f5e");
 
   while(true) {
@@ -670,10 +670,10 @@ function_3b71b7a7() {
 
 function_25a79bc1() {
   level endon(#"stone_visible");
-  self endon(#"player_downed", #"death", #"hash_1544918b5f670dae");
+  self endon(#"player_downed", #"death", #"sacrifice_player_reset");
 
   while(true) {
-    self waittill(#"fasttravel_over", #"hash_3e4335abc3d58a0b", #"hash_55489b8cb6c75352");
+    self waittill(#"fasttravel_over", #"bgb_anywhere_but_here_complete", #"zm_bgb_nowhere_but_there_complete");
 
     if(self !== level.stick_player) {
       return;
@@ -957,7 +957,7 @@ function_6ae66179() {
 }
 
 function_50955e48() {
-  self endon(#"player_downed", #"death", #"hash_1544918b5f670dae");
+  self endon(#"player_downed", #"death", #"sacrifice_player_reset");
   var_4e7ea1ce = 0;
   s_scene = struct::get(#"p8_fxanim_zm_man_wm_01_bundle", "scriptbundlename");
 
@@ -1069,9 +1069,9 @@ player_stuck() {
 
   var_3add8e25 = struct::get("s_stick_scene", "targetname");
   var_3add8e25 thread scene::play(level.var_9661fac0, self);
-  s_result = self waittilltimeout(getanimlength(var_cab90298), #"hash_1544918b5f670dae");
+  s_result = self waittilltimeout(getanimlength(var_cab90298), #"sacrifice_player_reset");
 
-  if(s_result._notify === #"hash_1544918b5f670dae") {
+  if(s_result._notify === #"sacrifice_player_reset") {
     b_watcher = 0;
   } else {
     b_watcher = 1;
@@ -1120,7 +1120,7 @@ function_1e60e7d2() {
 
 function_be4a0b7a(n_timeout) {
   level endon(#"stick_drag");
-  self endon(#"disconnect", #"hash_1544918b5f670dae");
+  self endon(#"disconnect", #"sacrifice_player_reset");
   n_start_time = gettime();
 
   for(n_total_time = 0; !self util::stance_button_held() && n_total_time < n_timeout; n_total_time = (n_current_time - n_start_time) / 1000) {

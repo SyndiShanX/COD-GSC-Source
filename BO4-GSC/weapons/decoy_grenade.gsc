@@ -40,13 +40,13 @@ on_spawn(watcher) {
   grenade.maxhealth = 10000;
   grenade.health = grenade.maxhealth;
   grenade setmaxhealth(grenade.maxhealth);
-  grenade notify(#"hash_5a09ded231e405ad");
+  grenade notify(#"decoy_grenade_stationary");
   grenade clientfield::set("decoy_grenade_footsteps", 0);
   grenade function_e9d18b65();
 }
 
 play_footsteps() {
-  self endon(#"death", #"hash_5a09ded231e405ad");
+  self endon(#"death", #"decoy_grenade_stationary");
   wait 0.25;
 
   while(true) {

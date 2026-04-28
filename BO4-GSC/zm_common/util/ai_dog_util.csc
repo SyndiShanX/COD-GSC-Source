@@ -25,7 +25,7 @@ __init__() {
 init_dog_fx() {
   level._effect[#"dog_eye_glow"] = #"hash_70696527ecb861ae";
   level._effect[#"hash_55d6ab2c7eecbad4"] = #"hash_249f091d13da3663";
-  level._effect[#"hash_808a86715bfac90"] = #"hash_78f02617f4f71d8a";
+  level._effect[#"dog_head_glow"] = #"hash_78f02617f4f71d8a";
   level._effect[#"hash_5e4d4083a69396b8"] = #"hash_36a9dd505e78a";
   level._effect[#"hash_33fd6545401e3622"] = #"hash_39b25de05718b20c";
   level._effect[#"hash_63f497890003547"] = #"hash_3055dc23ae9ca695";
@@ -53,7 +53,7 @@ dog_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastim
       self.var_a9305c6e = self playLoopSound(level.var_17c4823f);
     }
 
-    array::add(self.var_93471229, util::playFXOnTag(localclientnum, level._effect[#"hash_808a86715bfac90"], self, "j_neck_end"));
+    array::add(self.var_93471229, util::playFXOnTag(localclientnum, level._effect[#"dog_head_glow"], self, "j_neck_end"));
     array::add(self.var_93471229, util::playFXOnTag(localclientnum, level._effect[#"hash_5e4d4083a69396b8"], self, "j_tail0"));
     array::add(self.var_93471229, util::playFXOnTag(localclientnum, level._effect[#"hash_5e4d4083a69396b8"], self, "j_tail1"));
     array::add(self.var_93471229, util::playFXOnTag(localclientnum, level._effect[#"hash_33fd6545401e3622"], self, "j_spine2"));

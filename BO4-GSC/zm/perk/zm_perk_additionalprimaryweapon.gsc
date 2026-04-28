@@ -87,7 +87,7 @@ take_additional_primary_weapon_perk(b_pause, str_perk, str_result, n_slot) {
   self notify(#"hash_4dba2ff9e70127f5");
 
   if(isDefined(self.laststandpistol)) {
-    self endon(#"disconnect", #"hash_499749b8848c21fd");
+    self endon(#"disconnect", #"additional_primary_weapon_tracker");
 
     if(self.laststandpistol !== self.var_2a62e678) {
       self clientfield::set_player_uimodel("hudItems.perks.additional_primary_weapon", 0);
@@ -129,8 +129,8 @@ take_additional_primary_weapon_perk(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_1a9f3a91() {
-  self notify(#"hash_499749b8848c21fd");
-  self endon(#"disconnect", #"hash_4dba2ff9e70127f5", #"hash_499749b8848c21fd");
+  self notify(#"additional_primary_weapon_tracker");
+  self endon(#"disconnect", #"hash_4dba2ff9e70127f5", #"additional_primary_weapon_tracker");
 
   while(isDefined(self.s_loadout)) {
     wait 0.05;

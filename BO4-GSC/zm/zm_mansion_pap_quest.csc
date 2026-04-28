@@ -20,7 +20,7 @@
 #namespace mansion_pap;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + #"hash_51257ec597a8f84f", 8000, getminbitcountfornum(3), "int", &function_9e5522ac, 0, 0);
+  clientfield::register("scriptmover", "" + #"pap_key_pickup", 8000, getminbitcountfornum(3), "int", &function_9e5522ac, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_47b8db8cde2c4291", 8000, getminbitcountfornum(13), "int", &function_731e7fcf, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_6babc320ed9a08f1", 8000, 1, "int", &function_828749d4, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_1f18edb30c01161a", 8000, 1, "int", &function_9d797e21, 0, 0);
@@ -28,8 +28,8 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"hash_11eb6b7dc7db71ad", 8000, getminbitcountfornum(1), "int", &function_924f922d, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_58b293ceeb7f93e4", 8000, 1, "int", &function_5fc23aa1, 0, 0);
   clientfield::register("scriptmover", "" + #"vision_stone_wormhole", 8000, getminbitcountfornum(17), "int", &function_c0257c1d, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_2d63a1398e98f279", 8000, 1, "int", &function_6812bd74, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_ea66e39c63f5b41", 13000, 1, "int", &function_ec12026f, 0, 0);
+  clientfield::register("toplayer", "" + #"vision_stone_wormhole_sfx", 8000, 1, "int", &vision_stone_wormhole_sfx, 0, 0);
+  clientfield::register("toplayer", "" + #"vision_stone_wormhole_fov", 13000, 1, "int", &function_ec12026f, 0, 0);
   clientfield::register("allplayers", "" + #"hash_49de76d6c4f95e5d", 8000, 1, "int", &function_738252b1, 0, 0);
 
   if(zm_utility::is_standard() || zm_custom::function_901b751c(#"zmpapenabled") == 2) {
@@ -70,23 +70,23 @@ init_fx() {
   level._effect[#"hash_60c83e34e4fd1f6c"] = #"hash_73f660fbf8e552c7";
   level._effect[#"hash_24e8dc159b114ae3"] = #"hash_715cf74f791295c4";
   level._effect[#"hash_17a4fb60d97429ad"] = #"hash_7dcfe2ffad2ca4fc";
-  level._effect[#"hash_736e639110a07205"] = #"hash_d9457aa02fd04ec";
-  level._effect[#"hash_736e609110a06cec"] = #"hash_5d311a076b143596";
-  level._effect[#"hash_736e619110a06e9f"] = #"hash_163eb4e35b91af14";
-  level._effect[#"hash_736e5e9110a06986"] = #"hash_680fec8c354d5473";
-  level._effect[#"hash_736e5f9110a06b39"] = #"hash_60fe8e16abfbc3dc";
-  level._effect[#"hash_736e5c9110a06620"] = #"hash_60fe9116abfbc8f5";
-  level._effect[#"hash_736e5d9110a067d3"] = #"hash_60fe9016abfbc742";
-  level._effect[#"hash_736e6a9110a07dea"] = #"hash_2445dc176f3ccbd0";
-  level._effect[#"hash_736e6b9110a07f9d"] = #"hash_641b8ba2af258ead";
-  level._effect[#"hash_4505647f40a2100f"] = #"hash_dff2364b383cb35";
-  level._effect[#"hash_4505637f40a20e5c"] = #"hash_5e3ff002a36de9bf";
-  level._effect[#"hash_4505667f40a21375"] = #"hash_4c3f2c9d9bab6b2b";
-  level._effect[#"hash_4505657f40a211c2"] = #"hash_686a88e23e439f4b";
-  level._effect[#"hash_4505607f40a20943"] = #"hash_60d482b113231004";
-  level._effect[#"hash_45055f7f40a20790"] = #"hash_3df0d337eb84dcac";
-  level._effect[#"hash_4505627f40a20ca9"] = #"hash_5e4b61b99bf91d12";
-  level._effect[#"hash_4505617f40a20af6"] = #"hash_2f0597b421f2c488";
+  level._effect[#"vision_stone_wormhole_1"] = #"hash_d9457aa02fd04ec";
+  level._effect[#"vision_stone_wormhole_2"] = #"hash_5d311a076b143596";
+  level._effect[#"vision_stone_wormhole_3"] = #"hash_163eb4e35b91af14";
+  level._effect[#"vision_stone_wormhole_4"] = #"hash_680fec8c354d5473";
+  level._effect[#"vision_stone_wormhole_5"] = #"hash_60fe8e16abfbc3dc";
+  level._effect[#"vision_stone_wormhole_6"] = #"hash_60fe9116abfbc8f5";
+  level._effect[#"vision_stone_wormhole_7"] = #"hash_60fe9016abfbc742";
+  level._effect[#"vision_stone_wormhole_8"] = #"hash_2445dc176f3ccbd0";
+  level._effect[#"vision_stone_wormhole_9"] = #"hash_641b8ba2af258ead";
+  level._effect[#"vision_stone_wormhole_10"] = #"hash_dff2364b383cb35";
+  level._effect[#"vision_stone_wormhole_11"] = #"hash_5e3ff002a36de9bf";
+  level._effect[#"vision_stone_wormhole_12"] = #"hash_4c3f2c9d9bab6b2b";
+  level._effect[#"vision_stone_wormhole_13"] = #"hash_686a88e23e439f4b";
+  level._effect[#"vision_stone_wormhole_14"] = #"hash_60d482b113231004";
+  level._effect[#"vision_stone_wormhole_15"] = #"hash_3df0d337eb84dcac";
+  level._effect[#"vision_stone_wormhole_16"] = #"hash_5e4b61b99bf91d12";
+  level._effect[#"vision_stone_wormhole_17"] = #"hash_2f0597b421f2c488";
 }
 
 soul_release(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -522,7 +522,7 @@ function_ec12026f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_6812bd74(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+vision_stone_wormhole_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!isDefined(self.var_cc366f3c)) {
       self playSound(localclientnum, #"hash_5294772867120e07");

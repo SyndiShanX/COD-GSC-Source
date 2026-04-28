@@ -661,7 +661,7 @@ gondola_lights_red() {
 
   foreach(model in var_1d558ef4) {
     model setModel(#"p8_zm_esc_gondola_frame_light_red");
-    playsoundatposition(#"hash_6e8a64e3abaab719", model.origin);
+    playsoundatposition(#"zmb_gondola_start_alert", model.origin);
     waitframe(1);
   }
 

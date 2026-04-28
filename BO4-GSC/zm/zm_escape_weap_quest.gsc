@@ -33,9 +33,9 @@ autoexec __init__system__() {
 
 __init__() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("scriptmover", "" + #"hash_5ecbfb9042fc7f38", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"soul_catcher_portal", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_588871862d19b97d", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_2be4ce9b84bd3b58", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"soul_catcher_impact", 1, 1, "counter");
   clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int");
   clientfield::register("scriptmover", "" + #"hash_51657261e835ac7c", 1, n_bits, "int");
@@ -261,7 +261,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
     self.s_scene scene::play(var_3e4fd9fd);
   }
 
-  var_3e1900e4 clientfield::increment("" + #"hash_2be4ce9b84bd3b58");
+  var_3e1900e4 clientfield::increment("" + #"soul_catcher_impact");
   self.var_43bd3b5++;
   self notify(#"finished_eating");
   self.var_aa1a7f2e = 0;
@@ -316,7 +316,7 @@ soul_catcher_state_manager() {
     self.t_hurt show();
   }
 
-  self.mdl_rune clientfield::set("" + #"hash_5ecbfb9042fc7f38", 1);
+  self.mdl_rune clientfield::set("" + #"soul_catcher_portal", 1);
   self.s_scene scene::play("Start");
   self flag::set(#"wolf_intro_anim_complete");
   self waittill(#"finished_eating");
@@ -327,7 +327,7 @@ soul_catcher_state_manager() {
   }
 
   self notify(#"wolf_departing");
-  self.mdl_rune clientfield::set("" + #"hash_5ecbfb9042fc7f38", 0);
+  self.mdl_rune clientfield::set("" + #"soul_catcher_portal", 0);
   self.mdl_rune setModel("p8_zm_esc_dream_catcher");
   self.s_scene scene::play("Depart");
 }

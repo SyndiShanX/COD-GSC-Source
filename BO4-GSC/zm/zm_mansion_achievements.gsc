@@ -127,7 +127,7 @@ function_c91cfd5a() {
   level endon(#"end_game");
 
   for(var_532a9491 = 0; var_532a9491 < 3; var_532a9491++) {
-    level waittill(#"hash_144b3192f03325f3");
+    level waittill(#"prima_materia_created");
   }
 
   iprintlnbold("<dev string:xe3>");

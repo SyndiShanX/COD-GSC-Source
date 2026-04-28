@@ -65,7 +65,7 @@ setdefaultcallbacks() {
 }
 
 function_6e6149a6(func, obj) {
-  add_callback(#"hash_1eda827ff5e6895b", func, obj);
+  add_callback(#"on_ai_stunned", func, obj);
 }
 
 function_823e7181(func, obj) {

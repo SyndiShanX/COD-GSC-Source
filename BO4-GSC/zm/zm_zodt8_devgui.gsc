@@ -39,7 +39,7 @@ function_5d346946() {
 
 function_78c32556(cmd) {
   switch (cmd) {
-    case # "hash_50d92ca3c6c7c2a8":
+    case # "super_open_sesame":
       level thread function_4110a06f();
       return 1;
     case # "gear_up":
@@ -54,13 +54,13 @@ function_78c32556(cmd) {
     case # "move_pap":
       level thread function_10dafedb();
       return 1;
-    case # "hash_74823c0e0a29545b":
+    case # "give_flare_red":
       give_flare("<dev string:x567>");
       return 1;
-    case # "hash_130280144168a5e7":
+    case # "give_flare_green":
       give_flare("<dev string:x56d>");
       return 1;
-    case # "hash_2972e55f40fe8050":
+    case # "give_flare_blue":
       give_flare("<dev string:x575>");
       return 1;
     case # "hash_59b568ce3fe548b6":
@@ -222,7 +222,7 @@ function_51855e65(round_number) {
 
   if(round_number >= 7) {
     level flag::set("<dev string:x67e>");
-    level flag::set(#"hash_3e80d503318a5674");
+    level flag::set(#"artifact_picked_up");
   }
 
   if(round_number >= 8) {

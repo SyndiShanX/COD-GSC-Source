@@ -14,17 +14,17 @@ autoexec __init__system__() {
 }
 
 _init_() {
-  clientfield::register("actor", "" + #"hash_2f305a0bea20d6ed", 1, 1, "int", &function_16d503c6, 0, 0);
-  clientfield::register("actor", "" + #"hash_757f891a37d3db00", 1, 1, "int", &function_64927e54, 0, 0);
-  clientfield::register("actor", "" + #"hash_26d3eeef96a2291e", 1, 1, "int", &function_89a4ffa9, 0, 0);
-  clientfield::register("actor", "" + #"hash_32ec41222f58aa75", 1, 1, "int", &function_407434d9, 0, 0);
+  clientfield::register("actor", "" + #"freezegun_shatter_fx", 1, 1, "int", &function_16d503c6, 0, 0);
+  clientfield::register("actor", "" + #"freezegun_crumple_fx", 1, 1, "int", &function_64927e54, 0, 0);
+  clientfield::register("actor", "" + #"freezegun_shatter_upgraded_fx", 1, 1, "int", &function_89a4ffa9, 0, 0);
+  clientfield::register("actor", "" + #"freezegun_crumple_upgraded_fx", 1, 1, "int", &function_407434d9, 0, 0);
   clientfield::register("actor", "" + #"hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
   clientfield::register("actor", "" + #"hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
   clientfield::register("actor", "" + #"hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
-  level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
-  level._effect[#"hash_757f891a37d3db00"] = #"hash_3da4857b4b1553dc";
-  level._effect[#"hash_26d3eeef96a2291e"] = #"hash_35e2193ab697e2f1";
-  level._effect[#"hash_32ec41222f58aa75"] = #"hash_3de16b7e3bd7e5ce";
+  level._effect[#"freezegun_shatter_fx"] = #"hash_6910f1de979f539f";
+  level._effect[#"freezegun_crumple_fx"] = #"hash_3da4857b4b1553dc";
+  level._effect[#"freezegun_shatter_upgraded_fx"] = #"hash_35e2193ab697e2f1";
+  level._effect[#"freezegun_crumple_upgraded_fx"] = #"hash_3de16b7e3bd7e5ce";
   level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
   level._effect[#"hash_1aa3522b88c2b76f"] = #"hash_7bd6bc3aea3ff42f";
   level._effect[#"hash_485f1b39da0ca6ca"] = #"hash_58c96eb815e5079c";
@@ -41,7 +41,7 @@ function_16d503c6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_2f305a0bea20d6ed"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[#"freezegun_shatter_fx"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_3b6be5ed(localclientnum);
@@ -57,7 +57,7 @@ function_89a4ffa9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_26d3eeef96a2291e"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[#"freezegun_shatter_upgraded_fx"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_3b6be5ed(localclientnum);
@@ -73,7 +73,7 @@ function_64927e54(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_757f891a37d3db00"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[#"freezegun_crumple_fx"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_f0236487(localclientnum);
@@ -86,7 +86,7 @@ function_407434d9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_32ec41222f58aa75"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[#"freezegun_crumple_upgraded_fx"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_f0236487(localclientnum);

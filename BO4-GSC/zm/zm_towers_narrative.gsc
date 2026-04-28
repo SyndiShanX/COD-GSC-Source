@@ -29,7 +29,7 @@ init() {
   level flag::init(#"hash_3e90f82a2802b3");
   level flag::init(#"hash_26c9e53e0e558572");
   level flag::init(#"hash_4863d7214aa660e2");
-  level flag::init(#"hash_5ee1f3505b34a52d");
+  level flag::init(#"remus_started");
 
   if(!zm_utility::is_ee_enabled()) {
     hidemiscmodels("mdl_narrative_ix");
@@ -357,7 +357,7 @@ function_51f7da68() {
   }
 
   while(true) {
-    s_waitresult = level waittill(#"hash_3042a9bf2f57ea0a");
+    s_waitresult = level waittill(#"wraith_fire_impact");
     v_origin = s_waitresult.var_814c9389;
 
     if(istouching(v_origin, self)) {

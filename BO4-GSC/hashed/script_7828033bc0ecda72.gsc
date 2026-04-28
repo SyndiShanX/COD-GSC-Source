@@ -18,7 +18,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_b143bd998abdd27", &on_begin, &on_end);
+  zm_trial::register_challenge(#"no_player_death", &on_begin, &on_end);
 }
 
 on_begin() {

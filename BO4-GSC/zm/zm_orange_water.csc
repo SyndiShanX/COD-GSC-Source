@@ -14,15 +14,15 @@
 #namespace zm_orange_water;
 
 init() {
-  clientfield::register("allplayers", "" + #"hash_55543319943057f1", 24000, 1, "int", &function_e8d94580, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_5160727729fd57a2", 24000, 1, "int", &function_a2d360f1, 0, 0);
+  clientfield::register("allplayers", "" + #"water_player_freeze_fx", 24000, 1, "int", &function_e8d94580, 0, 0);
+  clientfield::register("toplayer", "" + #"water_player_freeze_sfx", 24000, 1, "int", &water_player_freeze_sfx, 0, 0);
   clientfield::register("toplayer", "" + #"hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
   clientfield::register("toplayer", "" + #"hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
   clientfield::register("toplayer", "" + #"hash_67340426cd141891", 24000, 2, "int", &function_6b5ed7f9, 0, 0);
   level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
   level._effect[#"hash_211384df1c05676c"] = #"hash_434ed0cd342c0caa";
   level._effect[#"hash_3cf697eb0a408b2e"] = #"hash_432cd0cd340f2644";
-  level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
+  level._effect[#"freezegun_shatter_fx"] = #"hash_6910f1de979f539f";
   level._effect[#"hash_28591d0dc8bbbf02"] = #"hash_8197ce41f763db3";
   level._effect[#"hash_2818130dc884170f"] = #"hash_86876e41fba07d2";
 }
@@ -55,10 +55,10 @@ function_e8d94580(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   self stoprenderoverridebundle("rob_tricannon_classified_zombie_ice");
-  self notify(#"hash_5ab24a026f132ea4");
+  self notify(#"snd_stop_frozen");
 }
 
-function_a2d360f1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+water_player_freeze_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self thread function_7da5e6a2();
   }
@@ -277,7 +277,7 @@ function_7da5e6a2() {
   self.var_cdb19015 = 0;
   self playSound(0, #"hash_71f59624b7f67f22");
   self.var_1ab2df8c = self playLoopSound(#"hash_34fa9c6b99cc772e");
-  self waittill(#"hash_5ab24a026f132ea4");
+  self waittill(#"snd_stop_frozen");
   self stoploopsound(self.var_1ab2df8c);
   self.var_1ab2df8c = undefined;
 }

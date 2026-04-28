@@ -1058,7 +1058,7 @@ event_handler[offhand_fire] function_97023fdf(eventstruct) {
 }
 
 event_handler[grenade_launcher_fire] function_aa7da3a(eventstruct) {
-  self callback::callback(#"hash_198a389d6b65f68d", eventstruct);
+  self callback::callback(#"grenade_launcher_fired", eventstruct);
 }
 
 function_43ec7f33(str_notify) {

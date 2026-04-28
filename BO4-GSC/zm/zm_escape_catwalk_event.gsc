@@ -577,8 +577,8 @@ function_e16c819a(a_ents) {
 }
 
 function_993f4add() {
-  self notify(#"hash_2c989e619ebfe50a");
-  self endon(#"hash_2c989e619ebfe50a");
+  self notify(#"start_damage_watcher");
+  self endon(#"start_damage_watcher");
   s_result = self waittill(#"death", #"b_h_stop_damage_watcher");
 
   if(s_result._notify == "death") {

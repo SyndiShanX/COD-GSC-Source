@@ -179,7 +179,7 @@ function_f4970a20(watcher, player) {
     return;
   }
 
-  player notify(#"hash_70f03cfbb15356c0", {
+  player notify(#"sensor_dart_active", {
     #dart: self
   });
   player clientfield::set_player_uimodel("hudItems.sensorDartCount", player.sensor_darts.size);
@@ -237,7 +237,7 @@ function_c142e8ec(attacker, callback_data) {
     }
 
     attacker challenges::destroyedequipment();
-    scoreevents::processscoreevent(#"hash_4c5d3e163d180de8", attacker, self.owner, undefined);
+    scoreevents::processscoreevent(#"sensor_dart_shutdown", attacker, self.owner, undefined);
 
     if(isDefined(level.var_d2600afc)) {
       self[[level.var_d2600afc]](attacker, self.owner, self.weapon);
@@ -252,7 +252,7 @@ function_4db10465() {
 }
 
 function_4b3bc61d(attacker, weapon, target) {
-  level notify(#"hash_4ee855fb0aa467c9");
+  level notify(#"sensor_dart_destroyed");
 
   if(!isDefined(weapon) || !weapon.isemp) {
     playFX(level._equipment_explode_fx_lg, self.origin);
@@ -275,7 +275,7 @@ function_4b3bc61d(attacker, weapon, target) {
     self[[level.var_d2600afc]](attacker, self.owner, self.weapon, weapon);
   }
 
-  self.owner luinotifyevent(#"hash_4ee855fb0aa467c9");
+  self.owner luinotifyevent(#"sensor_dart_destroyed");
   self delete();
 }
 

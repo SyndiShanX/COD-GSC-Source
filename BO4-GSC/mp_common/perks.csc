@@ -439,7 +439,7 @@ function_365c39ef(awareness_action, bundle) {
       return bundle.var_6ae8117c;
     case # "doublejump_boosted":
       return bundle.var_37bac39d;
-    case # "hash_589eac8b592bcb4d":
+    case # "melee_missed":
       return bundle.var_3b22f5be;
     case # "weapon_fired":
       return bundle.var_abea5dd8;

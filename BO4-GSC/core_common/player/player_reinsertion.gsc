@@ -332,7 +332,7 @@ function_eb815c5() {
     level.reinsertion.cameraent clientfield::set("infiltration_camera", player_insertion::function_1e4302d0(2, level.insertion.index));
   }
 
-  level callback::add_callback(#"hash_74b19f5972b0ee52", &function_6198f712);
+  level callback::add_callback(#"player_insertion_drop", &function_6198f712);
 }
 
 function_6198f712(eventstruct) {

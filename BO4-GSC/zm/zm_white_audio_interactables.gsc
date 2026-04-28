@@ -494,7 +494,7 @@ function_6b2499f9() {
 
 function_a0b040d4() {
   level endon(#"hash_48039f3a4c1a3248");
-  level.var_215e60c4 = struct::get(#"hash_17790fb78d228f05", "targetname");
+  level.var_215e60c4 = struct::get(#"tedd_talk", "targetname");
   s_unitrigger = level.var_215e60c4 zm_unitrigger::create(&function_c9271718, 64, &function_ee32c750);
   s_unitrigger thread function_4bda6193();
   level waittill(#"hash_398e4b1e72edb4ee");

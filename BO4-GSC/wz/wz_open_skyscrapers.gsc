@@ -305,7 +305,7 @@ function_4b227faf() {
 }
 
 function_c447999a() {
-  level endon(#"hash_78e53817cafb5265");
+  level endon(#"start_warzone_button");
 
   if(!getdvarint(#"hash_4b508e86f8bff982", 0)) {
     return;

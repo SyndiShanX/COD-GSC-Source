@@ -104,8 +104,8 @@ spawn_hawk() {
   bundle = level.hawk_settings.bundle;
   var_a33bcd86 = int(isDefined(bundle.var_a33bcd86) ? bundle.var_a33bcd86 : 0);
   vehicle function_d733412a(0);
-  self callback::function_d8abfc3d(#"hash_247d67dbf83dbc1a", &function_903cf6aa);
-  self callback::function_d8abfc3d(#"hash_72a7670db71677f", &function_3e6a41b7);
+  self callback::function_d8abfc3d(#"remote_missile_started", &function_903cf6aa);
+  self callback::function_d8abfc3d(#"remote_missile_ended", &function_3e6a41b7);
 
   if(isbot(self)) {
     var_a33bcd86 = 0;
@@ -255,8 +255,8 @@ watch_destroyed(vehicle) {
   vehicle waittill(#"death");
 
   if(isDefined(self)) {
-    self callback::function_52ac9652(#"hash_247d67dbf83dbc1a", &function_903cf6aa);
-    self callback::function_52ac9652(#"hash_72a7670db71677f", &function_3e6a41b7);
+    self callback::function_52ac9652(#"remote_missile_started", &function_903cf6aa);
+    self callback::function_52ac9652(#"remote_missile_ended", &function_3e6a41b7);
 
     if(!self util::function_63d27d4e("remote_missile")) {
       self destroy_missile_hud();

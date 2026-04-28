@@ -43,8 +43,8 @@ __init__() {
   level._effect[#"spectral_key_muzzle_flash3p_idle"] = #"hash_74faec7770b9fa92";
   level._effect[#"hash_5a834a39ce281cef"] = #"hash_42b1e9abdde1d678";
   level._effect[#"hash_6ca5cf8a3ac2254a"] = #"hash_6894b23015ff2626";
-  level._effect[#"hash_5e08e3b80445f6d7"] = #"hash_db890f21c0af009";
-  level._effect[#"hash_5e01d7b8043fc3c5"] = #"hash_dbf9cf21c11231b";
+  level._effect[#"spectral_key_charging_1p"] = #"hash_db890f21c0af009";
+  level._effect[#"spectral_key_charging_3p"] = #"hash_dbf9cf21c11231b";
   level._effect[#"hash_3ae08d08271270d6"] = #"hash_35b66c4bdba4f1a8";
   level._effect[#"hash_3ad9a108270c7424"] = #"hash_35bd784bdbab24ba";
   level._effect[#"hash_4a41e8484e30822e"] = #"hash_55a201e66dbc23d3";
@@ -624,10 +624,10 @@ function_36c349d0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     if(self zm_utility::function_f8796df3(localclientnum)) {
-      self.var_2a2f2afa[localclientnum] = playviewmodelfx(localclientnum, level._effect[#"hash_5e08e3b80445f6d7"], "tag_flash");
+      self.var_2a2f2afa[localclientnum] = playviewmodelfx(localclientnum, level._effect[#"spectral_key_charging_1p"], "tag_flash");
       self playrenderoverridebundle("rob_key_charging", "tag_weapon_right");
     } else {
-      self.var_2a2f2afa[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_5e01d7b8043fc3c5"], self, "tag_flash");
+      self.var_2a2f2afa[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"spectral_key_charging_3p"], self, "tag_flash");
     }
 
     self thread function_7203304d(localclientnum);

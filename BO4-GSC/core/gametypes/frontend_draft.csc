@@ -20,7 +20,7 @@ init() {
   level thread function_91858511();
   level.draftactivecam = "";
   level.draftxcam = #"ui_cam_draft_common";
-  level.var_482af62e = #"hash_12263e5d70551bf9";
+  level.var_482af62e = #"ui_cam_draft_common_zoom";
   level.var_df72fe54 = undefined;
   level.draftcharacters = [];
   level.var_6963abdb = [];
@@ -609,7 +609,7 @@ function_91858511() {
       level.var_6963abdb = [];
 
       if(isDefined(waitresult.var_b69dc9af) && waitresult.var_b69dc9af) {
-        level notify(#"hash_21c79522aa982cdd");
+        level notify(#"positiondraft_close_finished");
       }
     }
   }

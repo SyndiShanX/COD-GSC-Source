@@ -117,7 +117,7 @@ init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = #"hash_54b0f0ec952ddba8";
+  level.halftimesubcaption = #"mp/switching_sides_caps";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -1404,10 +1404,10 @@ callback_startgametype() {
       game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"match_starting_in"] = #"mp/match_starting_in";
     game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
     game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"waiting_to_spawn_ss"] = #"mp/waiting_to_spawn_ss";
     game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
     game.strings[#"match_starting"] = #"mp/match_starting";
     game.strings[#"change_class"] = #"mp/change_class_next_spawn";

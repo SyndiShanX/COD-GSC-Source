@@ -43,7 +43,7 @@ on_end(round_reset) {
 
 function_1633056a() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     if(self function_26f124d8() && !self.heal.enabled) {

@@ -1427,7 +1427,7 @@ abilities_devgui_think() {
       case # "hash_5ddbad8870b98e93":
         abilities_devgui_handle_player_command(cmd, &function_ce4e80a7, arg);
         break;
-      case # "hash_5515835378aa90c8":
+      case # "give_special_offhand_slot":
         abilities_devgui_handle_player_command(cmd, &function_4f50aea3, arg);
         break;
       case # "hash_67d528f29bfc7c97":

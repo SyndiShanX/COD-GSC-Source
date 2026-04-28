@@ -102,7 +102,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int");
   clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int");
   clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_cd028842e18845e", 1, 1, "counter");
+  clientfield::register("world", "" + #"rumble_water_tower", 1, 1, "counter");
   clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int");
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int");
   clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int");
@@ -205,7 +205,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_30a6ae7c();
 
   if(zm_utility::is_trials()) {
-    level.var_22dfe858 = #"hash_5d69a47fd8c0e9e5";
+    level.var_22dfe858 = #"zmb_ai_brutus_spawn_laugh";
   }
 }
 
@@ -989,8 +989,8 @@ function_acb5b0ec() {
 
 function_91d91b76(cmd) {
   switch (cmd) {
-    case # "hash_50d92ca3c6c7c2a8":
-      level thread function_71a6c3ea();
+    case # "super_open_sesame":
+      level thread super_open_sesame();
       return 1;
     case # "hash_19614ce604c9ce92":
       level thread function_2b57b5d6();
@@ -1019,7 +1019,7 @@ function_91d91b76(cmd) {
   }
 }
 
-function_71a6c3ea() {
+super_open_sesame() {
   zm_devgui::zombie_devgui_open_sesame();
   level thread zm_escape_catwalk_event::function_e11ac4f5();
   namespace_9d58c1cd::function_7101d54f();

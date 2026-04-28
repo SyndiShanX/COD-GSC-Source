@@ -460,7 +460,7 @@ function_d82c03d4(player) {
 function_dd007be2() {
   level endon(#"game_ended");
   self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
-  self endon(#"hash_c72d58e3d4735b");
+  self endon(#"concertina_wire_destroyed");
   waitresult = self waittill(#"death");
 
   if(!isDefined(self)) {
@@ -496,7 +496,7 @@ function_a1253947() {
 
 function_4ee7d46a(isselfdestruct) {
   concertinawire = self;
-  concertinawire notify(#"hash_c72d58e3d4735b");
+  concertinawire notify(#"concertina_wire_destroyed");
   concertinawire clientfield::set("enemyequip", 0);
   concertinawire clientfield::set("friendlyequip", 0);
 
@@ -842,7 +842,7 @@ function_a9160578(damagedealt, player) {
   self.playersdamaged[entnumb] = 1;
 
   if(isDefined(level.var_87226c31.bundle.var_89ee8a9) && self.damagedealt >= level.var_87226c31.bundle.var_89ee8a9) {
-    scoreevents::processscoreevent(#"hash_6024b59ca1d3b641", self.owner, undefined, self.weapon, self.playersdamaged.size);
+    scoreevents::processscoreevent(#"concertina_wire_damage", self.owner, undefined, self.weapon, self.playersdamaged.size);
     self.damagedealt -= level.var_87226c31.bundle.var_89ee8a9;
   }
 }

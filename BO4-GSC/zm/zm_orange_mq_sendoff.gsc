@@ -119,7 +119,7 @@ sun_deck_watcher() {
 }
 
 function_d096f18f() {
-  level.var_ab11c23d notify(#"hash_78fc5bbd712046b0");
+  level.var_ab11c23d notify(#"lighthouse_state_change");
   level.var_ab11c23d rotateto((10, level.var_ab11c23d.angles[1] - 5, 0), 0.2);
   level.var_ab11c23d waittill(#"rotatedone");
   level.var_ab11c23d rotatevelocity((0, -1440, 0), 4.5, 3);

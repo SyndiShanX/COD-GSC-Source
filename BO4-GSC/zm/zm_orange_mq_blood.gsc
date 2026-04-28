@@ -96,7 +96,7 @@ function_8d43b840(var_5ea5c94d) {
 
 function_2d9e1e29(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
-    level notify(#"hash_6cbede8616798eb");
+    level notify(#"mq_blood_skipped");
     level.s_mq_blood_vessel_loc.vessel hide();
     level.s_mq_blood_vessel_loc thread blood_think();
 
@@ -117,7 +117,7 @@ function_2d9e1e29(var_5ea5c94d, ended_early) {
     level flag::clear(#"infinite_round_spawning");
   }
 
-  level notify(#"hash_1f0238cda598f6e9");
+  level notify(#"blood_event_done");
 }
 
 blood_think() {
@@ -163,7 +163,7 @@ blood_think() {
 }
 
 function_ee4a200b() {
-  level endon(#"end_game", #"hash_6cbede8616798eb");
+  level endon(#"end_game", #"mq_blood_skipped");
 
   if(level.var_9e3c632e > 1) {
     self.vessel setModel("p8_zm_ora_elemental_vessel");
@@ -202,7 +202,7 @@ function_15f8d6f0() {
 }
 
 blood_event() {
-  level endon(#"hash_1f0238cda598f6e9", #"end_game");
+  level endon(#"blood_event_done", #"end_game");
   level waittill(#"hash_6fb77fda0e7419a6");
   level flag::set(#"infinite_round_spawning");
   level flag::set(#"blood_active");

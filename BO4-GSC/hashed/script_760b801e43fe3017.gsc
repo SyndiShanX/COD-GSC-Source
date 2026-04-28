@@ -81,7 +81,7 @@ on_end(round_reset) {
 }
 
 function_a2c43fea(var_d42c8aaa = 2000) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
 
   while(true) {
     n_score_total = 0;
@@ -104,17 +104,17 @@ function_a2c43fea(var_d42c8aaa = 2000) {
 }
 
 function_ba517920(challenge) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(challenge.var_3fd9ed88 < challenge.var_b49b94ed) {
-    level waittill(#"trap_kill", #"hash_528d7b7f7d6c51a1", #"hash_317f58ba0d580c27", #"hash_148b3ce521088846");
+    level waittill(#"trap_kill", #"fan_trap_kill", #"acid_trap_kill", #"spin_trap_kill");
     challenge.var_3fd9ed88++;
     zm_trial_util::function_dace284(challenge.var_3fd9ed88);
   }
 }
 
 function_69c5df45(challenge) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     if(challenge.var_3fd9ed88 >= challenge.var_b49b94ed) {

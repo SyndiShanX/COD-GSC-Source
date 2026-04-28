@@ -12,7 +12,7 @@
 
 preload() {
   level._effect[#"campfire_soul"] = #"hash_59977c4c851916e0";
-  level._effect[#"hash_6d2d7bab75c2c0"] = #"hash_1a06427eff8dfe13";
+  level._effect[#"campfire_soul_end"] = #"hash_1a06427eff8dfe13";
   level._effect[#"campfire_flames"] = #"hash_487863cb3f012833";
   level._effect[#"snowpile_swap"] = #"hash_6d8c75ffdf65fe0";
   init_clientfields();
@@ -24,9 +24,9 @@ preload() {
 function
 
 init_clientfields() {
-  zm_sq_modules::function_d8383812(#"snowball_campfire_1", 24000, "snowball_campfire_1", 400, level._effect[#"campfire_soul"], level._effect[#"hash_6d2d7bab75c2c0"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"snowball_campfire_2", 24000, "snowball_campfire_2", 400, level._effect[#"campfire_soul"], level._effect[#"hash_6d2d7bab75c2c0"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"snowball_campfire_3", 24000, "snowball_campfire_3", 400, level._effect[#"campfire_soul"], level._effect[#"hash_6d2d7bab75c2c0"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"snowball_campfire_1", 24000, "snowball_campfire_1", 400, level._effect[#"campfire_soul"], level._effect[#"campfire_soul_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"snowball_campfire_2", 24000, "snowball_campfire_2", 400, level._effect[#"campfire_soul"], level._effect[#"campfire_soul_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"snowball_campfire_3", 24000, "snowball_campfire_3", 400, level._effect[#"campfire_soul"], level._effect[#"campfire_soul_end"], undefined, undefined, 1);
   clientfield::register("scriptmover", "fx8_reward_brazier_fire_blue", 24000, 1, "int", &campfire_flames, 0, 0);
   clientfield::register("scriptmover", "fx8_snowpile_swap", 24000, 1, "int", &snowpile_swap, 0, 0);
   clientfield::register("toplayer", "spleen_carry_sound", 20000, 1, "int", &spleen_carry_sound, 0, 0);

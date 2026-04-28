@@ -54,7 +54,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("zbarrier", "tutorial_keyline_fx", 1, 2, "int");
   clientfield::register("item", "tutorial_keyline_fx", 1, 2, "int");
   clientfield::register("scriptmover", "tutorial_keyline_fx", 1, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_1b509b0ba634a25a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"path_blocker_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_1390e08de02cbdc7", 1, 1, "int");
   clientfield::register("worlduimodel", "hudItems.ztut.showLocation", 1, 1, "int");
   clientfield::register("worlduimodel", "hudItems.ztut.showPerks", 1, 1, "int");
@@ -682,7 +682,7 @@ function_2517cb55() {
   level waittill(#"zombie_shot");
   function_a09d93d9();
   self notify(#"shoot_zombie_completed");
-  self notify(#"hash_c366d831c1ff919");
+  self notify(#"shoot_zombie_killed");
   function_68da8e33(#"hash_4b3c8234832c799e", 0.3);
   w_pistol = self getcurrentweapon();
 
@@ -1799,7 +1799,7 @@ function_269d9f82(str_barrier, b_on = 1) {
   if(isDefined(b_on) && b_on) {
     foreach(s_position in a_s_positions) {
       s_position.mdl_pos = util::spawn_model("tag_origin", s_position.origin, s_position.angles);
-      s_position.mdl_pos clientfield::set("" + #"hash_1b509b0ba634a25a", 1);
+      s_position.mdl_pos clientfield::set("" + #"path_blocker_fx", 1);
       s_position.mdl_fx = util::spawn_model(#"p8_zm_power_door_symbol_01", s_position.origin + var_d3c21d73, s_position.angles);
       s_position.mdl_fx clientfield::set("" + #"hash_1390e08de02cbdc7", 1);
       s_position.mdl_collision = util::spawn_model("collision_player_wall_128x128x10", s_position.origin + var_d3c21d73, s_position.angles);
@@ -1812,7 +1812,7 @@ function_269d9f82(str_barrier, b_on = 1) {
 
   foreach(s_position in a_s_positions) {
     if(isDefined(s_position.mdl_pos)) {
-      s_position.mdl_pos clientfield::set("" + #"hash_1b509b0ba634a25a", 0);
+      s_position.mdl_pos clientfield::set("" + #"path_blocker_fx", 0);
       util::wait_network_frame();
       s_position.mdl_pos delete();
     }

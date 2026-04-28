@@ -48,7 +48,7 @@ function_57755268() {
   zm_red_main_quest::play_cleanup(0, 0);
   level.var_84199d1 = 1;
   level.var_4e4909a6 = undefined;
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 5;
   level notify(#"kill_round_wait");
 }

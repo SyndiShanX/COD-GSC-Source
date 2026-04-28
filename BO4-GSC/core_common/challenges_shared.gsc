@@ -1321,7 +1321,7 @@ multikill(killcount, weapon) {
     }
 
     self.var_ea1458aa.var_e0bfa611++;
-    self function_a4db0a4c();
+    self multikill_2_killstreak_5();
   }
 
   if(isDefined(level.var_c8de519d) && isDefined(level.var_c8de519d.multikill)) {
@@ -1329,7 +1329,7 @@ multikill(killcount, weapon) {
   }
 }
 
-function_a4db0a4c() {
+multikill_2_killstreak_5() {
   if(!isDefined(self.var_ea1458aa.var_e0bfa611)) {
     return;
   }
@@ -1339,7 +1339,7 @@ function_a4db0a4c() {
   }
 
   if(self.var_ea1458aa.var_e0bfa611 > 0 && self.var_ea1458aa.var_2bad4cbb > 0) {
-    self stats::function_dad108fa(#"hash_5803a1b332accd42", 1);
+    self stats::function_dad108fa(#"multikill_2_killstreak_5", 1);
     self.var_ea1458aa.var_e0bfa611 = undefined;
     self.var_ea1458aa.var_2bad4cbb = undefined;
   }
@@ -1435,7 +1435,7 @@ multi_rcbomb_kill() {
 }
 
 function_46754062() {
-  self stats::function_dad108fa(#"hash_709699a31c8f89f7", 1);
+  self stats::function_dad108fa(#"multikill_2_rcxd", 1);
 }
 
 multi_remotemissile_kill() {

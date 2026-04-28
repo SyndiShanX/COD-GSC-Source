@@ -81,7 +81,7 @@ function_74872db6() {
       }
     }
 
-    level notify(#"hash_786860db94bcc0f3");
+    level notify(#"contract_zm_no_pap_complete");
   }
 
   if(level.round_number == 30) {
@@ -282,7 +282,7 @@ function_ac03f21e() {
 }
 
 function_677a89c8() {
-  level endon(#"hash_786860db94bcc0f3");
+  level endon(#"contract_zm_no_pap_complete");
   self endon(#"disconnect");
 
   while(true) {

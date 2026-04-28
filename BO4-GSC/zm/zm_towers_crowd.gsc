@@ -257,7 +257,7 @@ function_2d074f7d(params) {
       str_event = #"elephant_kill";
       break;
     case # "elephant_rider":
-      str_event = #"hash_29a47f9b217e8b1c";
+      str_event = #"elephant_rider_kill";
       break;
     case # "zombie":
       if(self.missinglegs) {
@@ -275,7 +275,7 @@ function_2d074f7d(params) {
     }
 
     player.var_7df228aa.n_zombie_kills++;
-    player notify(#"hash_4093e684a539c91d");
+    player notify(#"player_has_killed");
 
     if(player.var_7df228aa.n_zombie_kills == 10) {
       player function_b8dfa139(#"hash_158076998c9b511f");
@@ -353,7 +353,7 @@ function_1b848dc2() {
   level flag::wait_till("start_zombie_round_logic");
 
   while(true) {
-    s_waitresult = self waittilltimeout(240, #"hash_4093e684a539c91d", #"death");
+    s_waitresult = self waittilltimeout(240, #"player_has_killed", #"death");
 
     if(isalive(self) && s_waitresult._notify == "timeout") {
       self function_b8dfa139(#"hash_1ecab55fd270f67b");
@@ -712,7 +712,7 @@ function_b8dfa139(str_event) {
       var_9c93ba8f = 30;
       var_ac39950d = 1;
       break;
-    case # "hash_29a47f9b217e8b1c":
+    case # "elephant_rider_kill":
       var_9c93ba8f = 10;
       var_ac39950d = 1;
       break;
@@ -748,13 +748,13 @@ function_b8dfa139(str_event) {
     case # "hash_5986c925a370e137":
       var_9c93ba8f = 20;
       break;
-    case # "hash_300454c11a18ae03":
+    case # "challenge_complete_easy":
       var_9c93ba8f = 5;
       break;
-    case # "hash_39efd1a80488c531":
+    case # "challenge_complete_med":
       var_9c93ba8f = 10;
       break;
-    case # "hash_69fc3ba948618464":
+    case # "challenge_complete_hard":
       var_9c93ba8f = 15;
       break;
     case # "hash_4122108abe671eb7":
@@ -769,7 +769,7 @@ function_b8dfa139(str_event) {
     case # "player_death":
       var_9c93ba8f = -13;
       break;
-    case # "hash_1f2dfda53e67bf22":
+    case # "trap_kill_self":
       var_9c93ba8f = -12;
       break;
     case # "crawler_created":
@@ -1080,7 +1080,7 @@ function_6ddff873() {
 
 function_75d594ec() {
   level endon(#"end_game");
-  level waittill(#"hash_7b9245ff51f3d4f7");
+  level waittill(#"special_round_ending");
 
   if(zm_audio::sndmusicsystem_isabletoplay()) {
     foreach(player in level.players) {
@@ -1200,7 +1200,7 @@ function_8e83be5d() {
       case # "trap_kill":
         if(isPlayer(waitresult.e_victim)) {
           e_player = waitresult.e_victim;
-          str_event = #"hash_1f2dfda53e67bf22";
+          str_event = #"trap_kill_self";
         } else {
           e_player = waitresult.e_trap.activated_by_player;
           str_event = #"trap_kill";
@@ -1331,12 +1331,12 @@ function_eb6ff6a5() {
 
 function_e0bb973(cmd) {
   switch (cmd) {
-    case # "hash_b988aa7a2727ae5":
+    case # "crowd_throw_item_immediate_good":
       level flag::set(#"crowd_throw_item_immediate");
       level flag::set(#"hash_1a9f6d0c1e7684b4");
       level flag::clear(#"hash_80fa0541e21f744");
       break;
-    case # "hash_4840e9ef3902deb3":
+    case # "crowd_throw_item_immediate_bad":
       level flag::set(#"crowd_throw_item_immediate");
       level flag::clear(#"hash_1a9f6d0c1e7684b4");
       level flag::set(#"hash_80fa0541e21f744");
@@ -1426,11 +1426,11 @@ function_e0bb973(cmd) {
     case # "hash_19fccc380453c9fa":
     case # "hash_1dc206ff31de03eb":
     case # "hash_1ecab55fd270f67b":
-    case # "hash_1f2dfda53e67bf22":
+    case # "trap_kill_self":
     case # "crawler_kill":
     case # "hash_2048e4bc4cd51960":
     case # "heavy_kill":
-    case # "hash_29a47f9b217e8b1c":
+    case # "elephant_rider_kill":
     case # "hash_3d85834be3aff6d2":
     case # "hash_4122108abe671eb7":
     case # "trap_kill":

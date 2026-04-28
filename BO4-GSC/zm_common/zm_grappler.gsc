@@ -147,9 +147,9 @@ function_a60cb756(var_b4666218, var_e9f8c8f3) {
 
   if(var_b4666218 != (isDefined(self.var_564dec14) && self.var_564dec14)) {
     if(isDefined(var_b4666218) && var_b4666218) {
-      self notify(#"hash_3219c34bb024ffb7");
+      self notify(#"grappled_start");
     } else {
-      self notify(#"hash_5d85f16cb4fd5a32");
+      self notify(#"grappled_end");
     }
 
     self.var_564dec14 = var_b4666218;

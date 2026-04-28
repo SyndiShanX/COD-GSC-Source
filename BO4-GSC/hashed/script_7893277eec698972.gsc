@@ -39,10 +39,10 @@ init() {
   }
 
   if(zm_custom::function_901b751c(#"zmwonderweaponisenabled")) {
-    zm_sq::register(#"hash_1222a3e832bad772", #"hash_2725edd09b4bb1b6", #"hash_13b316981d67e1ad", &step_1_setup, &step_1_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", #"hash_6cc4f52e0ed36f92", #"hash_13b313981d67dc94", &step_2_setup, &step_2_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", #"hash_575b4d3faca8bf2e", #"hash_13b314981d67de47", &step_3_setup, &step_3_cleanup);
-    zm_sq::register(#"hash_1222a3e832bad772", #"hash_1d89a5560669ab60", #"hash_13b311981d67d92e", &step_4_setup, &step_4_cleanup);
+    zm_sq::register(#"wonder_weapon_quest", #"stoker_key_step", #"hash_13b316981d67e1ad", &step_1_setup, &step_1_cleanup);
+    zm_sq::register(#"wonder_weapon_quest", #"hash_6cc4f52e0ed36f92", #"hash_13b313981d67dc94", &step_2_setup, &step_2_cleanup);
+    zm_sq::register(#"wonder_weapon_quest", #"soul_capture_step", #"hash_13b314981d67de47", &step_3_setup, &step_3_cleanup);
+    zm_sq::register(#"wonder_weapon_quest", #"hash_1d89a5560669ab60", #"hash_13b311981d67d92e", &step_4_setup, &step_4_cleanup);
     level flag::init(#"hash_1562cc6d96b2bc4");
     level flag::init(#"hash_635fa9d7a8be6607");
     level flag::init(#"hash_2889330d50a4cc38");
@@ -64,7 +64,7 @@ init() {
     if(isDefined(w_blueprint)) {
       w_blueprint.component01.var_62a98b13 = #"hash_4223e614aaaeb5be";
       w_blueprint.component02.var_62a98b13 = #"condenser_coil";
-      w_blueprint.component03.var_62a98b13 = #"hash_d2d731e2804301b";
+      w_blueprint.component03.var_62a98b13 = #"retort_pot";
       w_blueprint.component01.var_25bb96cc = #"hash_604432f9a80a26e3";
       w_blueprint.component02.var_25bb96cc = #"hash_604432f9a80a26e3";
       w_blueprint.component03.var_25bb96cc = #"hash_604432f9a80a26e3";
@@ -99,7 +99,7 @@ function_2c93a769() {
 
   callback::on_connect(&function_707a3db7);
   zm_crafting::function_d1f16587(#"zblueprint_zod_tricannon_upgrade", &function_8498110e);
-  zm_sq::start(#"hash_1222a3e832bad772", 1);
+  zm_sq::start(#"wonder_weapon_quest", 1);
 }
 
 step_1_setup(var_a276c861) {
@@ -759,7 +759,7 @@ function_4facba35(str_drop, v_origin, v_spawn) {
 
 function_3ef485b1(t_trig) {
   level endon(#"end_game");
-  t_trig endon(#"hash_cf18f85af2935e8");
+  t_trig endon(#"distill_timeout");
   waitresult = t_trig waittill(#"trigger");
   e_player = waitresult.activator;
 
@@ -789,7 +789,7 @@ function_74df2b21(t_trig) {
   t_trig endon(#"picked_up");
   wait 30;
   level.var_ab242e52--;
-  t_trig notify(#"hash_cf18f85af2935e8");
+  t_trig notify(#"distill_timeout");
   t_trig.var_abf1e2f7 delete();
   t_trig delete();
 }

@@ -2158,7 +2158,7 @@ robotdeployminiraps() {
 
 function_125cc705() {
   if(self.subarchetype === #"robot_rpg") {
-    self.var_21001b38 = getweapon(#"hash_3b5610f58856b4ea");
+    self.var_21001b38 = getweapon(#"launcher_standard_ai");
     self.var_d5bd74f1 = getweapon(#"hash_1d8ec79043d16eb");
     self.var_cdf2311b = 0;
     self thread function_ce50548d();

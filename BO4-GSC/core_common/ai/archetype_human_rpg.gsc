@@ -36,7 +36,7 @@ archetypehumanrpgonanimscriptedcallback(entity) {
 
 function_daf99f58() {
   if(self.subarchetype === #"human_rpg") {
-    self.var_b3aacd00 = getweapon(#"hash_3b5610f58856b4ea");
+    self.var_b3aacd00 = getweapon(#"launcher_standard_ai");
     self.var_2fcec084 = getweapon(#"hash_1d8ec79043d16eb");
     self.var_b999a026 = 0;
     self thread function_567e5a33();

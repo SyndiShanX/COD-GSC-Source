@@ -251,10 +251,10 @@ devgui() {
         var_afaaaae2 = strtok(str_command, "<dev string:x2e3>")[2];
         function_c1ccd7f3(&function_9af806be, n_player, level.var_8e9d88b6[var_afaaaae2]);
         break;
-      case # "hash_39098b3e5f02ee30":
-      case # "hash_3b6473dd2b0c56c7":
-      case # "hash_10e7f44f002ed3c6":
-      case # "hash_33d0946a156bc141":
+      case # "player_3_clear":
+      case # "player_2_clear":
+      case # "player_1_clear":
+      case # "player_4_clear":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         function_c1ccd7f3(&function_2a94cd59, n_player);
         break;

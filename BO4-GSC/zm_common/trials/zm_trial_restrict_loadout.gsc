@@ -581,7 +581,7 @@ function_f3fdd8f7() {
 
 monitor_objective(challenge) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   assert(isarray(challenge.a_n_objective_ids), "<dev string:x56>");
 
   foreach(n_objective_id in challenge.a_n_objective_ids) {

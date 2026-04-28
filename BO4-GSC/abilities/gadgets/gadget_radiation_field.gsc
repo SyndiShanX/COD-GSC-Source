@@ -110,7 +110,7 @@ sndonoverride_eye_() {
 
   total_time = level.radiationfield_bundle.baseduration + level.radiationfield_bundle.var_500496c9;
   redline = 0.75;
-  player notify(#"hash_477083bb681cce64");
+  player notify(#"radiation_field_start");
 
   while(true) {
     wait rate;
@@ -564,7 +564,7 @@ waitanddelete(time) {
 shutdown(var_fb096220) {
   profilestart();
   player = self;
-  player notify(#"hash_4aaf6d6479e7cf20");
+  player notify(#"radiation_field_stop");
 
   if(isDefined(player) && player function_831bf182()) {
     player deactivate_gadget();

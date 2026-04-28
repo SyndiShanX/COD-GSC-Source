@@ -168,7 +168,7 @@ _fire(lifeid, player, team, killstreak_id) {
   }
 
   if(isDefined(player)) {
-    player callback::callback(#"hash_247d67dbf83dbc1a");
+    player callback::callback(#"remote_missile_started");
   }
 
   offset = level.var_46c23c0f * 200;
@@ -263,7 +263,7 @@ _fire(lifeid, player, team, killstreak_id) {
   waitframe(1);
 
   if(!isDefined(player)) {
-    rocket notify(#"hash_2dd8cca4f8f64e9d");
+    rocket notify(#"stop_radio_snd");
     waitframe(1);
 
     if(isDefined(rocket)) {
@@ -293,7 +293,7 @@ _fire(lifeid, player, team, killstreak_id) {
   fwd = anglesToForward(veh.angles);
   endpos = veh.origin + vectorscale(fwd, 20000);
   time = 5;
-  rocket notify(#"hash_2dd8cca4f8f64e9d");
+  rocket notify(#"stop_radio_snd");
   veh moveto(endpos, time);
   veh thread waitthendelete(time);
   rocket thread watch_missile_kill_z();
@@ -448,7 +448,7 @@ waitthendelete(waittime) {
 
 function_71f4cd34() {
   rocket = self;
-  var_d0c52d0b = getweapon(#"hash_33be4792feeabece");
+  var_d0c52d0b = getweapon(#"remote_missile_mini");
   mini_missile = magicbullet(var_d0c52d0b, rocket.origin, rocket.origin + anglesToForward(rocket.angles) * 1000, rocket.owner);
 }
 
@@ -565,7 +565,7 @@ function_97f822ec(rocket, performplayerkillstreakend, unlink, team, killstreak_i
     self killstreaks::thermal_glow(0);
     self enableweaponcycling();
     killstreakrules::killstreakstop("remote_missile", team, killstreak_id);
-    self callback::callback(#"hash_72a7670db71677f");
+    self callback::callback(#"remote_missile_ended");
   }
 }
 
@@ -650,7 +650,7 @@ function_dc2222ff(player) {
   self.var_a7a295cf setinvisibletoall();
   self.var_a7a295cf setvisibletoplayer(player);
   self.var_a7a295cf playLoopSound(#"hash_1375217a84811e44", 0.5);
-  self waittill(#"hash_2dd8cca4f8f64e9d");
+  self waittill(#"stop_radio_snd");
   self.var_a7a295cf stoploopsound(0.5);
   self thread stopondeath(self.var_a7a295cf);
 }

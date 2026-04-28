@@ -151,7 +151,7 @@ function_393b459a(e_activator) {
     wait 1.4;
   }
 
-  wait getdvarfloat(#"hash_3201af3906143d06", 5) + 0.6;
+  wait getdvarfloat(#"fountain_button_cooldown", 5) + 0.6;
   level thread function_9940fbb9(self.var_ebd977d);
   array::thread_all(self.a_s_buttons, &gameobjects::enable_object);
 }
@@ -196,7 +196,7 @@ function_886f3928(e_activator) {
   level thread function_9940fbb9(self.var_ebd977d, "busy");
   array::thread_all(self.a_mdl_doors, &function_dd0b407b);
   array::wait_till(self.a_mdl_doors, "hidden_door_moved");
-  wait getdvarfloat(#"hash_5b883b04d5499fd6", 5);
+  wait getdvarfloat(#"hidden_door_cooldown", 5);
   level thread function_9940fbb9(self.var_ebd977d);
   array::thread_all(self.a_s_buttons, &gameobjects::enable_object);
 }

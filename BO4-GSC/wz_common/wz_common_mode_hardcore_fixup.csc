@@ -25,11 +25,11 @@ function_acd44e5f() {
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"armor_item_large");
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"armor_shard_item");
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"health_item_large");
-    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"hash_1bb3938ead724a68");
+    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"health_item_large_stack");
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"health_item_small", #"health_item_medium");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"hash_1b975e4c6ae8b190", #"hash_5119794c0791738");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"health_item_small_stack", #"health_item_medium_stack");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"health_list_low", #"health_list_low_hardcore");
     wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"sensor_dart_wz_item");
-    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"hash_34fc35458ae105ac");
+    wz_common_fixup::item_remover(var_a12b4736, var_87d0eef8, #"sensor_dart_wz_item_stack");
   }
 }

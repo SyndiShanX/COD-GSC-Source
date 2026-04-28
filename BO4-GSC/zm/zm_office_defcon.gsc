@@ -22,10 +22,10 @@ pentagon_packapunch_init() {
   level.defcon_level = 1;
   level.defcon_activated = 0;
   level.ignore_spawner_func = &pentagon_ignore_spawner;
-  level._effect[#"hash_4ec0caccaa9167d3"] = #"hash_6cd6da1c7e245c1c";
-  level.var_5531a118 = level._effect[#"hash_4ec0caccaa9167d3"];
-  level._effect[#"hash_415ba37393754417"] = #"hash_35cb5be5a38af07c";
-  level.var_2e21f906 = level._effect[#"hash_415ba37393754417"];
+  level._effect[#"defcon_light_green"] = #"hash_6cd6da1c7e245c1c";
+  level.defcon_light_green = level._effect[#"defcon_light_green"];
+  level._effect[#"defcon_light_red"] = #"hash_35cb5be5a38af07c";
+  level.defcon_light_red = level._effect[#"defcon_light_red"];
   level thread defcon_sign_lights();
   punch_switches = getEntArray("punch_switch", "targetname");
 
@@ -49,7 +49,7 @@ defcon_sign_setup() {
         self.lights[j] setModel("p8_zm_off_trap_switch_light_green_on");
         self.var_dd7da790[j] = util::spawn_model("tag_origin", self.lights[j].origin);
         self.var_dd7da790[j].angles = self.lights[j].angles;
-        self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.var_5531a118, self.var_dd7da790[j], "tag_origin");
+        self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.defcon_light_green, self.var_dd7da790[j], "tag_origin");
       }
     }
   }
@@ -72,7 +72,7 @@ defcon_sign_setup() {
           self.var_dd7da790[j] delete();
           self.var_dd7da790[j] = util::spawn_model("tag_origin", self.lights[j].origin);
           self.var_dd7da790[j].angles = self.lights[j].angles;
-          self.var_dd7da790[j].var_b8a3170a = playFXOnTag(level.var_2e21f906, self.var_dd7da790[j], "tag_origin");
+          self.var_dd7da790[j].var_b8a3170a = playFXOnTag(level.defcon_light_red, self.var_dd7da790[j], "tag_origin");
         }
 
         if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_handle") {
@@ -125,7 +125,7 @@ defcon_sign_setup() {
           self.var_dd7da790[j] delete();
           self.var_dd7da790[j] = util::spawn_model("tag_origin", self.lights[j].origin);
           self.var_dd7da790[j].angles = self.lights[j].angles;
-          self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.var_5531a118, self.var_dd7da790[j], "tag_origin");
+          self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.defcon_light_green, self.var_dd7da790[j], "tag_origin");
         }
 
         if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_handle") {
@@ -468,7 +468,7 @@ function_d2f6cecb() {
         self.var_dd7da790[j] delete();
         self.var_dd7da790[j] = util::spawn_model("<dev string:x98>", self.lights[j].origin);
         self.var_dd7da790[j].angles = self.lights[j].angles;
-        self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.var_5531a118, self.var_dd7da790[j], "<dev string:x98>");
+        self.var_dd7da790[j].var_fe0165db = playFXOnTag(level.defcon_light_green, self.var_dd7da790[j], "<dev string:x98>");
       }
 
       if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "<dev string:xa5>") {

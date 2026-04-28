@@ -26,9 +26,9 @@ init() {
   level._effect[#"hash_294b19c300d1b482"] = #"hash_29ac72c5aa5398bc";
   level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_709cca7d0048aa72";
   level._effect[#"hash_5647f8e593893bce"] = #"hash_69af1783a31b44f7";
-  level._effect[#"zombie_eye_trail"] = #"hash_526060b70ce93d7e";
+  level._effect[#"zombie_eye_trail"] = #"zm_ai/fx8_zombie_eye_glow_red_trail";
   level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
-  level._effect[#"hash_44ccd33973542202"] = #"hash_5fdb13b4843bc710";
+  level._effect[#"fire_trap_blue"] = #"hash_5fdb13b4843bc710";
 }
 
 acid_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -78,7 +78,7 @@ player_acid_trap_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
     }
 
     self notify(#"player_acid_trap_post_fx_complete");
-    self.var_431ddde9 = self playLoopSound(#"hash_341a3fa00975f232");
+    self.var_431ddde9 = self playLoopSound(#"zmb_trap_acid_loop_plr");
     self thread function_17956e93(localclientnum);
     self thread postfx::playpostfxbundle(#"hash_98397d99cb3a03");
     self.var_b1409d8f = playfxoncamera(localclientnum, level._effect[#"hash_4391e5c4b43c63c9"]);
@@ -160,7 +160,7 @@ fire_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
     playSound(localclientnum, #"hash_370460eab1a33ee6", self.origin);
     audio::playloopat("wpn_fire_trap_loop", self.origin);
-    self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[#"hash_44ccd33973542202"], self, "tag_origin");
+    self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[#"fire_trap_blue"], self, "tag_origin");
     return;
   }
 
@@ -244,7 +244,7 @@ rumble_spinning_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   self endon(#"death");
 
   if(newval == 1) {
-    self endon(#"hash_6fb55d3438a8d5fa");
+    self endon(#"rumble_spinning_trap_finished");
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
@@ -257,5 +257,5 @@ rumble_spinning_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
 
-  self notify(#"hash_6fb55d3438a8d5fa");
+  self notify(#"rumble_spinning_trap_finished");
 }

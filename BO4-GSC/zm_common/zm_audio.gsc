@@ -2006,21 +2006,21 @@ sndannouncer_init() {
     level.zmannouncerprefix = "zmba";
   }
 
-  sndannouncervoxadd(#"carpenter", #"hash_4d495ea70e8796d2");
-  sndannouncervoxadd(#"insta_kill", #"hash_4c409b9a3baca485");
-  sndannouncervoxadd(#"double_points", #"hash_1ee1ecb2bf07589c");
-  sndannouncervoxadd(#"nuke", #"hash_61ee7a1e5b4c68c7");
+  sndannouncervoxadd(#"carpenter", #"vox_powerup_carpenter");
+  sndannouncervoxadd(#"insta_kill", #"vox_powerup_instakill");
+  sndannouncervoxadd(#"double_points", #"vox_powerup_doublepoints");
+  sndannouncervoxadd(#"nuke", #"vox_powerup_nuke");
   sndannouncervoxadd(#"full_ammo", #"hash_773c07eb3a67a793");
-  sndannouncervoxadd(#"fire_sale", #"hash_3cf43f66b71287e5");
-  sndannouncervoxadd(#"minigun", #"hash_7e30cbacaffa9676");
+  sndannouncervoxadd(#"fire_sale", #"vox_powerup_firesale");
+  sndannouncervoxadd(#"minigun", #"vox_powerup_death_machine");
   sndannouncervoxadd(#"bonus_points_team", #"hash_5540d7f63941a8b3");
   sndannouncervoxadd(#"bonus_points_player", #"hash_5540d7f63941a8b3");
   sndannouncervoxadd(#"bonus_points_player_shared", #"hash_5540d7f63941a8b3");
   sndannouncervoxadd(#"hero_weapon_power", #"hash_49a75f92b85c0f95");
   sndannouncervoxadd(#"zombie_blood", #"hash_2f095e1811169fc7");
   sndannouncervoxadd(#"bonfire_sale", #"hash_554659b1fbc7a5bd");
-  sndannouncervoxadd(#"boxmove", #"hash_523d2f6c8930a8ee");
-  sndannouncervoxadd(#"dogstart", #"hash_12ca8e434ec4d884");
+  sndannouncervoxadd(#"boxmove", #"vox_event_magicbox");
+  sndannouncervoxadd(#"dogstart", #"vox_event_dogstart");
   sndannouncervoxadd(#"shield_upgrade", #"hash_1853f3e031b48c22");
 
   if(zm_utility::is_standard()) {
@@ -2083,9 +2083,9 @@ sndannouncer_init() {
     sndannouncervoxadd(#"dropped_to_last_place", #"hash_c085a88269ae2cf");
     sndannouncervoxadd(#"player_down", #"hash_3dca2528566ddf10");
     sndannouncervoxadd(#"pap_avail", #"hash_67b680cea28e5157");
-    sndannouncervoxadd(#"hash_77e06980e2fc1567", #"hash_5100f8a2b1c77bd4");
+    sndannouncervoxadd(#"door_open_single", #"hash_5100f8a2b1c77bd4");
     sndannouncervoxadd(#"hash_79b3b9e8ed3f0631", #"hash_1f56554135705816");
-    sndannouncervoxadd(#"hash_3acd6d72567def3a", #"hash_4a4a214d167991b");
+    sndannouncervoxadd(#"door_open_all", #"hash_4a4a214d167991b");
     sndannouncervoxadd(#"carpenter", #"hash_642d1c987098b98a");
     sndannouncervoxadd(#"insta_kill", #"hash_709765ed03192a2d");
     sndannouncervoxadd(#"double_points", #"hash_660aab11b5d4ebe4");
@@ -2116,7 +2116,7 @@ sndannouncer_init() {
     sndannouncervoxadd(#"hash_e5dacec7371220e", #"hash_6e2246878a31d24d");
     sndannouncervoxadd(#"lightning_hounds", #"hash_2fabde0f1747632a");
     sndannouncervoxadd(#"bombers", #"hash_5bfc95be3db89d7e");
-    sndannouncervoxadd(#"hash_6acb03a0373891c1", #"hash_2629e8b3b9215214");
+    sndannouncervoxadd(#"jolting_jacks", #"hash_2629e8b3b9215214");
     sndannouncervoxadd(#"electric_zombie", #"hash_3a33b9a23485f075");
   }
 }

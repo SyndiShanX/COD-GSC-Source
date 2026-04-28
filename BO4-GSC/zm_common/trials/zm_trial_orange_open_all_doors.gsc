@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  level.var_c79f394d = array(#"hash_38c97197db36afb7", #"hash_48e7d63b38c5e2da", #"hash_52d967f4fc8b12fc", #"hash_6f7fd3d4d070db87");
+  level.var_c79f394d = array(#"hash_38c97197db36afb7", #"hash_48e7d63b38c5e2da", #"outer_walkway_open", #"hash_6f7fd3d4d070db87");
   zombie_doors = getEntArray("zombie_door", "targetname");
   zombie_debris = getEntArray("zombie_debris", "targetname");
   level.var_a0f5e369 = function_d34c075e(zombie_doors);
@@ -97,7 +97,7 @@ function_a4cfa984(door_ents, debris_ents) {
 
 function_b2fa4678() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   var_c43a6efa = 0;
   var_58161ed2 = function_e242d7a8();
 
@@ -107,7 +107,7 @@ function_b2fa4678() {
     if(var_54e16eaa != var_c43a6efa) {
       if(var_54e16eaa >= var_58161ed2) {
         zm_trial_util::function_7d32b7d0(1);
-        level notify(#"hash_6ba2e2da302282");
+        level notify(#"all_doors_opened");
         level.var_d0b04690 = 1;
       } else {
         zm_trial_util::function_dace284(var_54e16eaa);
@@ -121,14 +121,14 @@ function_b2fa4678() {
 }
 
 monitor_timer(n_timer) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 12;
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_128378c9(n_timer, 1, #"hash_c2b77be4cf5b142");
   }
 
-  level waittilltimeout(n_timer + 1, #"hash_6ba2e2da302282");
+  level waittilltimeout(n_timer + 1, #"all_doors_opened");
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_885fb2c8();

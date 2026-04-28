@@ -779,7 +779,7 @@ function_d8c752e0() {
     waitframe(1);
   }
 
-  rider = function_e5f2ff53(self, "tag_char_align_a", #"hash_6101964904e7d17b");
+  rider = function_e5f2ff53(self, "tag_char_align_a", #"elephant_rider_front");
   rider.ai.var_758ed187 = #"hash_20cbd41b17321edc";
   rider.ai.var_4f12fc77 = "tag_char_align_a";
   rider.instakill_func = &function_707d0196;
@@ -792,7 +792,7 @@ function_d8c752e0() {
   }
 
   rider thread function_2798bb2(self, rider);
-  rider = function_e5f2ff53(self, "tag_char_align_b", #"hash_2672ad69ba7c107");
+  rider = function_e5f2ff53(self, "tag_char_align_b", #"elephant_rider_back");
   rider.ai.var_758ed187 = #"hash_20cbd71b173223f5";
   rider.ai.var_4f12fc77 = "tag_char_align_b";
   rider.instakill_func = &function_707d0196;
@@ -806,13 +806,13 @@ function_d8c752e0() {
   rider thread function_2798bb2(self, rider);
 
   if(isDefined(level.var_a52a5487) && level.var_a52a5487) {
-    rider = function_e5f2ff53(self, "tag_char_align_c", #"hash_6101964904e7d17b");
+    rider = function_e5f2ff53(self, "tag_char_align_c", #"elephant_rider_front");
     rider.ai.var_758ed187 = #"hash_20cbd41b17321edc";
     rider.ai.var_4f12fc77 = "tag_char_align_c";
     rider.instakill_func = &function_707d0196;
     rider.ai.entryanim = #"hash_1447273275dbb9a9";
     rider thread function_2798bb2(self, rider);
-    rider = function_e5f2ff53(self, "tag_char_align_d", #"hash_2672ad69ba7c107");
+    rider = function_e5f2ff53(self, "tag_char_align_d", #"elephant_rider_back");
     rider.ai.var_758ed187 = #"hash_20cbd71b173223f5";
     rider.ai.var_4f12fc77 = "tag_char_align_d";
     rider.instakill_func = &function_707d0196;
@@ -862,7 +862,7 @@ function_4c731a08() {
   self bloodimpact("none");
   namespace_81245006::initweakpoints(self, #"c_t8_zmb_dlc0_towers_boss_weakpoint_def");
   aiutility::addaioverridedamagecallback(self, &function_cfe82365);
-  function_2e4487f6(self, #"hash_8e173ae91589439");
+  function_2e4487f6(self, #"elephant_stage_1");
   self thread function_f51431a9(self);
   self thread function_423390f2();
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
@@ -1077,7 +1077,7 @@ function_498f147(elephant, point, boneindex) {
     }
   }
 
-  if(self.ai.var_112ec817 == #"hash_8e173ae91589439") {
+  if(self.ai.var_112ec817 == #"elephant_stage_1") {
     if(function_c153d922(elephant, point, "tag_chest_armor_ws")) {
       return "tag_chest_armor_ws";
     }
@@ -1201,7 +1201,7 @@ function_137a1ca8(entity) {
 }
 
 function_16096ca1(elephant) {
-  if(elephant.ai.var_112ec817 == #"hash_8e173ae91589439") {
+  if(elephant.ai.var_112ec817 == #"elephant_stage_1") {
     return false;
   }
 
@@ -1227,7 +1227,7 @@ function_16096ca1(elephant) {
 }
 
 function_d6ae999a(elephant) {
-  if(elephant.ai.var_112ec817 != #"hash_8e173ae91589439") {
+  if(elephant.ai.var_112ec817 != #"elephant_stage_1") {
     return true;
   }
 
@@ -1319,7 +1319,7 @@ function_f51431a9(elephant) {
         }
 
         break;
-      case # "hash_8e173ae91589439":
+      case # "elephant_stage_1":
         if(function_d6ae999a(elephant) || var_55fb74b2) {
           elephant function_4d479d22(elephant);
         }
@@ -1332,11 +1332,11 @@ function_f51431a9(elephant) {
 }
 
 function_2e4487f6(elephant, stage) {
-  assert(stage == #"hash_8e173ae91589439" || stage == #"hash_8e170ae91588f20");
+  assert(stage == #"elephant_stage_1" || stage == #"hash_8e170ae91588f20");
   elephant.ai.var_112ec817 = stage;
 
   switch (stage) {
-    case # "hash_8e173ae91589439":
+    case # "elephant_stage_1":
       break;
     case # "hash_8e170ae91588f20":
       break;
@@ -1608,7 +1608,7 @@ function_f2c697c7(entity) {
   }
 
   switch (stage) {
-    case # "hash_8e173ae91589439":
+    case # "elephant_stage_1":
       entity.ai.var_a504b9a3.var_6392c3a2 = gettime() + randomintrange(2500, 3000);
       entity.ai.var_a504b9a3.var_190509f3 = 250 * 250;
       entity.ai.var_a504b9a3.var_f84fafb2 = 400 * 400;
@@ -1700,7 +1700,7 @@ function_d3d560e9(entity) {
   }
 
   switch (stage) {
-    case # "hash_8e173ae91589439":
+    case # "elephant_stage_1":
       entity.ai.var_5c1cc6e9 = gettime() + randomintrange(8000, 10000);
       break;
     case # "hash_8e170ae91588f20":
@@ -1803,7 +1803,7 @@ function_2c58bc39(entity) {
 
   switch (stage) {
     case # "hash_8e170ae91588f20":
-    case # "hash_8e173ae91589439":
+    case # "elephant_stage_1":
       function_ab5aea01(entity);
       break;
     default:
@@ -1918,7 +1918,7 @@ setup_devgui() {
         foreach(elephant in elephants) {
           stage = elephant.ai.var_112ec817;
 
-          if(stage == #"hash_8e173ae91589439") {
+          if(stage == #"elephant_stage_1") {
             elephant function_4d479d22(elephant);
           }
         }

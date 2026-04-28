@@ -30,7 +30,7 @@ function_27473e44() {
 }
 
 init() {
-  level._effect[#"hash_7e57e8f68ea37ffa"] = #"hash_66c3b340356c182b";
+  level._effect[#"wolf_protector_eye_glow"] = #"hash_66c3b340356c182b";
   level._effect[#"hash_2b6b5aa12ed687c5"] = #"hash_6ded6189669f2669";
   level._effect[#"hash_674126a125f46aae"] = #"hash_1d5598025e3875a8";
 }
@@ -54,7 +54,7 @@ wolf_protector_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval === 1) {
     self setdrawname(#"hash_3de0e353449c8994", 1);
-    self._eyeglow_fx_override = level._effect[#"hash_7e57e8f68ea37ffa"];
+    self._eyeglow_fx_override = level._effect[#"wolf_protector_eye_glow"];
     self._eyeglow_tag_override = "tag_eye";
     self zm::createzombieeyes(localclientnum);
     self mapshaderconstant(localclientnum, 0, "scriptVector2", 0, zm::get_eyeball_on_luminance(), self zm::get_eyeball_color());

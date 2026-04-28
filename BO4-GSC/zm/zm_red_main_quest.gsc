@@ -110,13 +110,13 @@ init_clientfield() {
   clientfield::register("scriptmover", "" + #"hash_431f319e4b8fe9db", 16000, 1, "int");
   clientfield::register("world", "" + #"hash_158233cdc645bef6", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_492a33037a532fe0", 16000, 1, "counter");
-  clientfield::register("toplayer", "" + #"hash_4aeb7fcdd8302eaa", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"play_death_selected", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_7a99ff005314c5fc", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_7f85dc0ce20a6f2c", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_4e3e66f200f76f34", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_565ca9982285f23e", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_415416bf220de94", 16000, 1, "int");
-  clientfield::register("actor", "" + #"hash_3e2b1092de25c2dd", 16000, 1, "int");
+  clientfield::register("actor", "" + #"play_death_charged", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_24b5302c2f39ebc2", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_6a8479b5a5b359a7", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_4feb66128e57d092", 16000, 1, "int");
@@ -124,7 +124,7 @@ init_clientfield() {
   clientfield::register("actor", "" + #"hash_4e1b58f05f69a65a", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_5a6761fe764bdccf", 16000, 1, "int");
   var_ff76a259 = getminbitcountfornum(5);
-  clientfield::register("world", "" + #"hash_74aaba5c17a71e0d", 16000, var_ff76a259, "int");
+  clientfield::register("world", "" + #"play_death_spotlight", 16000, var_ff76a259, "int");
   clientfield::register("world", "" + #"hash_7e49e921c4dd052f", 16000, var_ff76a259, "int");
   clientfield::register("world", "" + #"hash_9d4aab5c25b93ff", 16000, var_ff76a259, "int");
   clientfield::register("world", "" + #"hash_58e58259618537e7", 16000, var_ff76a259, "int");
@@ -150,7 +150,7 @@ init_clientfield() {
 
 init_flags() {
   level flag::init(#"monument_changed");
-  level flag::init(#"hash_4e74b4172497a14a");
+  level flag::init(#"spartan_monuments_done");
   level flag::init(#"oil_completed");
   level flag::init(#"hash_70a5801e57336554");
   level flag::init(#"split_completed");
@@ -184,7 +184,7 @@ init_steps() {
   zm_sq::register(#"main_quest", #"push_ballista", #"push_ballista", &push_ballista_setup, &push_ballista_cleanup);
   zm_sq::register(#"main_quest", #"ignite_ballista", #"ignite_ballista", &ignite_ballista_setup, &ignite_ballista_cleanup);
   zm_sq::register(#"main_quest", #"teleport", #"teleport", &teleport_setup, &teleport_cleanup);
-  zm_sq::register(#"narrative_room", #"1", #"hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
+  zm_sq::register(#"narrative_room", #"1", #"narrative_room_hidden", &function_6f55d670, &function_13c87ace);
   zm_sq::register(#"narrative_room", #"2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
   zm_sq::start(#"main_quest");
   zm_sq::start(#"narrative_room");
@@ -232,7 +232,7 @@ function_a9481419() {
   self endon(#"disconnect");
 
   while(true) {
-    s_flame = struct::get(#"hash_11e79ab8fb768baa");
+    s_flame = struct::get(#"eternal_flame");
     function_e9af1fc4(s_flame, 13689);
 
     if(!(isDefined(self.var_b4f85096) && self.var_b4f85096)) {
@@ -499,8 +499,8 @@ function_f0f982b() {
   playsoundatposition(#"hash_48910fcc61ab6c8a", (0, 0, 0));
   exploder::exploder("exp_lgt_skylight");
   var_e986e64a = getent("cave_door", "targetname");
-  var_d25ef27c = struct::get(#"hash_4625361373037689");
-  var_a4a51709 = struct::get(#"hash_9e0e9cf53602f0a");
+  var_d25ef27c = struct::get(#"cave_door_1");
+  var_a4a51709 = struct::get(#"cave_door_open");
   var_e986e64a moveto(var_d25ef27c.origin, 2.9);
   wait 0.25;
   playsoundatposition(#"hash_396f1597d3662c78", (0, 0, 0));
@@ -538,7 +538,7 @@ reflect_setup(b_skipped) {
       player thread function_8142733f();
     }
 
-    level flag::wait_till(#"hash_4e74b4172497a14a");
+    level flag::wait_till(#"spartan_monuments_done");
     a_players = util::get_active_players();
 
     foreach(player in a_players) {
@@ -601,10 +601,10 @@ function_a9bde51() {
 
 function_e64c55ea() {
   self endon(#"disconnect");
-  level endon(#"hash_103477b55ed9a149");
+  level endon(#"vision_mode_vo");
   var_c29a1099 = getent("vol_reflect", "targetname");
 
-  while(!level flag::get(#"hash_4e74b4172497a14a")) {
+  while(!level flag::get(#"spartan_monuments_done")) {
     if(zm_utility::is_player_valid(self) && !(isDefined(level.var_4ea7b88f) && level.var_4ea7b88f) && self istouching(var_c29a1099)) {
       level.var_4ea7b88f = 1;
       self thread zm_vo::function_a2bd5a0c(#"hash_1aa9fc5f46a728d0");
@@ -618,17 +618,17 @@ function_cad81195() {
   a_origin = (439, -4107, -677);
   var_e25ba3b3 = spawn("script_origin", a_origin);
   var_e25ba3b3 playLoopSound(#"hash_34d1426dd3b11eb8");
-  flag::wait_till(#"hash_4e74b4172497a14a");
+  flag::wait_till(#"spartan_monuments_done");
   var_e25ba3b3 delete();
 }
 
 function_8142733f() {
   self endon(#"disconnect");
-  level endon(#"hash_4e74b4172497a14a");
+  level endon(#"spartan_monuments_done");
   self thread function_f94701f3();
   var_c29a1099 = getent("vol_reflect", "targetname");
 
-  while(!level flag::get(#"hash_4e74b4172497a14a")) {
+  while(!level flag::get(#"spartan_monuments_done")) {
     self waittill(#"hash_288cb56263c7b7fa");
 
     if(self istouching(var_c29a1099)) {
@@ -640,7 +640,7 @@ function_8142733f() {
 
       if(!(isDefined(level.var_97a5d82f) && level.var_97a5d82f)) {
         level.var_97a5d82f = 1;
-        level notify(#"hash_103477b55ed9a149");
+        level notify(#"vision_mode_vo");
         self thread zm_vo::function_a2bd5a0c(#"hash_4c8a4f38397df93a");
       }
 
@@ -672,7 +672,7 @@ function_b7c33177() {
 }
 
 function_f94701f3() {
-  level endon(#"hash_4e74b4172497a14a");
+  level endon(#"spartan_monuments_done");
   self waittill(#"disconnect");
 
   foreach(var_9be47330 in level.var_6775c28d) {
@@ -693,7 +693,7 @@ function_f94701f3() {
 function_b87e4fa1() {
   self endon(#"death");
 
-  while(isDefined(self.var_b1224954) && self istouching(self.var_b1224954) && !level flag::get(#"hash_4e74b4172497a14a")) {
+  while(isDefined(self.var_b1224954) && self istouching(self.var_b1224954) && !level flag::get(#"spartan_monuments_done")) {
     waitframe(1);
   }
 
@@ -827,7 +827,7 @@ function_5f80a70a() {
 }
 
 spartan_monuments() {
-  level endon(#"hash_4e74b4172497a14a");
+  level endon(#"spartan_monuments_done");
   level.var_4822b326 = 1;
 
   while(level.var_6775c28d.size > 0) {
@@ -889,7 +889,7 @@ spartan_monuments() {
   }
 
   level.var_67c7040c function_822fc9a(1.6);
-  level flag::set(#"hash_4e74b4172497a14a");
+  level flag::set(#"spartan_monuments_done");
   a_players = getplayers();
 
   foreach(player in a_players) {
@@ -983,8 +983,8 @@ function_e4ccd9be(var_1c49ffa5 = 1) {
 }
 
 reflect_cleanup(b_skipped, var_19e802fa) {
-  if(!level flag::get(#"hash_4e74b4172497a14a")) {
-    level flag::set(#"hash_4e74b4172497a14a");
+  if(!level flag::get(#"spartan_monuments_done")) {
+    level flag::set(#"spartan_monuments_done");
   }
 
   foreach(var_9be47330 in level.var_6775c28d) {
@@ -1840,7 +1840,7 @@ take_spear_setup(b_skipped) {
   }
 
   s_prophecy = level.var_cc9c60d2;
-  s_backup = struct::get(#"hash_7c6d4a7c40906a70");
+  s_backup = struct::get(#"s_prophecy_point");
 
   if(!isDefined(s_prophecy.v_gegenees_death)) {
     s_prophecy.v_gegenees_death = s_backup.origin;
@@ -1872,7 +1872,7 @@ take_spear_setup(b_skipped) {
 }
 
 take_spear_cleanup(b_skipped, var_19e802fa) {
-  s_backup = struct::get(#"hash_7c6d4a7c40906a70");
+  s_backup = struct::get(#"s_prophecy_point");
 
   if(isDefined(s_backup)) {
     s_backup struct::delete();
@@ -1923,7 +1923,7 @@ place_spear_cleanup(b_skipped, var_19e802fa) {
   }
 
   s_prophecy = level.var_cc9c60d2;
-  s_spear = struct::get(#"hash_18ff2df3f645697b");
+  s_spear = struct::get(#"s_prophecy_inject");
   mdl_spear = util::spawn_model("c_t8_zmb_dlc2_gegenees_spear_golden", s_spear.origin, s_spear.angles);
   s_spear struct::delete();
   var_f8d39ecf = struct::get(#"hash_69e0bef55957f3ff");
@@ -2403,7 +2403,7 @@ function_8e8da19a() {
 
 function_8ed9dd3c() {
   level endon(#"end_game");
-  s_mirror = struct::get(#"hash_6ac21db894ff6862");
+  s_mirror = struct::get(#"s_prophecy_extend");
   str_model = s_mirror.model;
   v_origin = s_mirror.origin;
   v_angles = s_mirror.angles;
@@ -2639,7 +2639,7 @@ function_8e7bc7d6(e_player) {
 
 give_ankh_setup(b_skipped) {
   level endon(#"end_game", #"give_ankh" + "_ended_early");
-  s_loc = struct::get(#"hash_68e5680a6c84cf71");
+  s_loc = struct::get(#"s_light_key");
 
   if(b_skipped) {
     s_loc struct::delete();
@@ -2654,7 +2654,7 @@ give_ankh_setup(b_skipped) {
 }
 
 give_ankh_cleanup(b_skipped, var_19e802fa) {
-  s_loc = struct::get(#"hash_68e5680a6c84cf71");
+  s_loc = struct::get(#"s_light_key");
 
   if(isDefined(s_loc)) {
     if(isDefined(s_loc.s_unitrigger)) {
@@ -2694,7 +2694,7 @@ defend_ra_setup(b_skipped) {
 
 defend_ra_cleanup(b_skipped, var_19e802fa) {
   function_9f390ef0(0);
-  s_unitrigger = struct::get(#"hash_56ba037bba790648");
+  s_unitrigger = struct::get(#"s_light_pole");
 
   if(isDefined(s_unitrigger) && isDefined(s_unitrigger.s_unitrigger)) {
     zm_unitrigger::unregister_unitrigger(s_unitrigger.s_unitrigger);
@@ -2735,13 +2735,13 @@ function_ecbc541d() {
   level.var_8016c0d8 = 40;
   s_light.var_f1e9d276 = 1;
   s_light.var_7134dc2b = var_19d2da88 gettagorigin("staff_jnt");
-  s_unitrigger = struct::get(#"hash_56ba037bba790648");
+  s_unitrigger = struct::get(#"s_light_pole");
   s_ww = struct::get(#"hash_1cc363b6ee27ea18");
   var_d93f6af3 = s_ww.model;
   var_151563d0 = s_ww.origin;
   var_97e6bcd7 = s_ww.angles;
   s_ww struct::delete();
-  s_runes = struct::get(#"hash_ea56ff869e65f82");
+  s_runes = struct::get(#"s_light_tracker");
   a_mdl_runes[0] = util::spawn_model(#"p8_zm_red_rune_ra_01", s_runes.origin, s_runes.angles);
   a_mdl_runes[1] = util::spawn_model(#"p8_zm_red_rune_ra_02", s_runes.origin, s_runes.angles);
   a_mdl_runes[2] = util::spawn_model(#"p8_zm_red_rune_ra_03", s_runes.origin, s_runes.angles);
@@ -3018,7 +3018,7 @@ function_a30dee24() {
 
 function_e4162ab8() {
   level endon(#"end_game", #"defend_ra" + "_ended_early", #"hash_4140f0472ba137c", #"hash_2f511b37fc55c45a");
-  self endon(#"death", #"hash_4a05d34e6e2ebdf0");
+  self endon(#"death", #"light_fake_death");
   self thread watch_for_fake_death();
   waitframe(1);
 
@@ -3070,7 +3070,7 @@ function_e4162ab8() {
 
 function_fbbee9d0(s_scene, str_scene) {
   level endon(#"end_game", #"defend_ra" + "_ended_early", #"hash_4140f0472ba137c", #"hash_2f511b37fc55c45a");
-  self endon(#"death", #"hash_4a05d34e6e2ebdf0");
+  self endon(#"death", #"light_fake_death");
   s_scene scene::play(str_scene, "init", self);
   s_scene thread scene::play(str_scene, "loop", self);
 }
@@ -3091,7 +3091,7 @@ watch_for_fake_death() {
     return;
   }
 
-  self notify(#"hash_4a05d34e6e2ebdf0");
+  self notify(#"light_fake_death");
 }
 
 function_554bdd28(s_scene, str_scene) {
@@ -3352,7 +3352,7 @@ take_staff_setup(b_skipped) {
 }
 
 take_staff_cleanup(b_skipped, var_19e802fa) {
-  level notify(#"hash_5fcd23307b562aca");
+  level notify(#"light_staff_taken");
   s_loc = struct::get(#"hash_1ab7c0d94efd8f5b");
 
   if(isDefined(s_loc)) {
@@ -3410,7 +3410,7 @@ function_4340daa(e_player) {
 
 give_staff_setup(b_skipped) {
   level endon(#"end_game", #"give_staff" + "_ended_early");
-  s_loc = struct::get(#"hash_56ba037bba790648");
+  s_loc = struct::get(#"s_light_pole");
 
   if(b_skipped) {
     s_loc struct::delete();
@@ -3427,7 +3427,7 @@ give_staff_setup(b_skipped) {
 }
 
 give_staff_cleanup(b_skipped, var_19e802fa) {
-  s_loc = struct::get(#"hash_56ba037bba790648");
+  s_loc = struct::get(#"s_light_pole");
 
   if(isDefined(s_loc)) {
     if(isDefined(s_loc.s_unitrigger)) {
@@ -3585,7 +3585,7 @@ function_59ef31c5() {
 init_play() {
   s_play = spawnStruct();
   level.var_28dcf408 = s_play;
-  var_38e73d19[#"death"] = "" + #"hash_4aeb7fcdd8302eaa";
+  var_38e73d19[#"death"] = "" + #"play_death_selected";
   var_38e73d19[#"earth"] = "" + #"hash_7a99ff005314c5fc";
   var_38e73d19[#"air"] = "" + #"hash_7f85dc0ce20a6f2c";
   var_38e73d19[#"light"] = "" + #"hash_4e3e66f200f76f34";
@@ -3600,7 +3600,7 @@ init_play() {
   a_s_spotlights[3] = struct::get(#"hash_2038af2a6cbb94ee");
   a_s_spotlights[4] = struct::get(#"hash_2038b22a6cbb9a07");
   s_play.a_s_spotlights = a_s_spotlights;
-  var_ed2fbe40[#"death"] = "" + #"hash_74aaba5c17a71e0d";
+  var_ed2fbe40[#"death"] = "" + #"play_death_spotlight";
   var_ed2fbe40[#"earth"] = "" + #"hash_7e49e921c4dd052f";
   var_ed2fbe40[#"air"] = "" + #"hash_9d4aab5c25b93ff";
   var_ed2fbe40[#"light"] = "" + #"hash_58e58259618537e7";
@@ -5148,7 +5148,7 @@ function_790e49a5(str_ww, b_uncharged) {
       if(b_uncharged) {
         var_84c10792 = "" + #"hash_415416bf220de94";
       } else {
-        var_84c10792 = "" + #"hash_3e2b1092de25c2dd";
+        var_84c10792 = "" + #"play_death_charged";
       }
 
       break;
@@ -5322,7 +5322,7 @@ function_79a4f7f8() {
 function_1ddccc6c() {
   level endon(#"end_game");
   wait 5;
-  s_reward = struct::get(#"hash_534aae214445a501");
+  s_reward = struct::get(#"s_play_reward");
   v_reward = s_reward.origin;
   s_reward struct::delete();
   level thread zm_powerups::specific_powerup_drop("full_ammo", v_reward, undefined, undefined, undefined, 0, 1);
@@ -5519,7 +5519,7 @@ door_interact_setup(b_skipped) {
   callback::on_connect(&isfollowingspalette);
   array::thread_all(getplayers(), &isfollowingspalette);
   callback::on_disconnect(&function_afd5b72a);
-  s_unitrigger = struct::get(#"hash_4054acecbf766067");
+  s_unitrigger = struct::get(#"s_blood_reveal");
   s_unitrigger zm_unitrigger::create(&function_c3735f60, 64);
 
   while(true) {
@@ -5536,7 +5536,7 @@ door_interact_setup(b_skipped) {
 
 door_interact_cleanup(b_skipped, var_19e802fa) {
   level notify(#"hash_57e7801ba472d7f9");
-  s_unitrigger = struct::get(#"hash_4054acecbf766067");
+  s_unitrigger = struct::get(#"s_blood_reveal");
 
   if(isDefined(s_unitrigger.s_unitrigger)) {
     zm_unitrigger::unregister_unitrigger(s_unitrigger.s_unitrigger);
@@ -5628,7 +5628,7 @@ isfollowingspalette() {
     return;
   }
 
-  s_door = struct::get(#"hash_4054acecbf766067");
+  s_door = struct::get(#"s_blood_reveal");
   v_door = s_door.origin;
 
   while(true) {
@@ -5741,7 +5741,7 @@ mid_igc_setup(b_skipped) {
       e_grapplee = ai_blight_father.e_grapplee;
 
       if(e_grapplee === e_actor) {
-        ai_blight_father notify(#"hash_2fb2eddfa6a0ef3f");
+        ai_blight_father notify(#"stop_grapple_attempt");
         level thread zm_ai_blight_father::function_c526065b(ai_blight_father);
         break;
       }
@@ -6219,7 +6219,7 @@ cleanse_setup(b_skipped) {
 
   level thread function_f2fa1520();
   level thread function_482dc5ac();
-  s_rune = struct::get(#"hash_7a21f9a230f88631");
+  s_rune = struct::get(#"s_cleanse_stab");
   mdl_rune = util::spawn_model(s_rune.model, s_rune.origin, s_rune.angles);
   var_db8ec3ee = util::spawn_model(#"tag_origin", s_rune.origin);
   var_db8ec3ee clientfield::set("" + #"hash_297c800c6e18f746", 1);
@@ -6267,7 +6267,7 @@ cleanse_cleanup(b_skipped, var_19e802fa) {
     }
 
     wait 2;
-    s_scene = struct::get(#"hash_1dda242c988113ce");
+    s_scene = struct::get(#"s_cleanse_electric");
     level scene::add_scene_func(s_scene.scriptbundlename, &function_67e537fd);
     s_scene thread scene::play();
 
@@ -6340,7 +6340,7 @@ function_f2fa1520() {
 
 function_482dc5ac() {
   level endon(#"end_game", #"cleanse" + "_ended_early", #"hash_6a4f03503cfcfac4");
-  s_target = struct::get(#"hash_5c0ec58a74f10a88");
+  s_target = struct::get(#"s_cleanse_view");
   v_target = s_target.origin;
   s_target struct::delete();
 
@@ -6442,7 +6442,7 @@ function_7b4b880f() {
 }
 
 function_67e537fd(a_ents) {
-  if(isDefined(self.targetname) && self.targetname != #"hash_1dda242c988113ce") {
+  if(isDefined(self.targetname) && self.targetname != #"s_cleanse_electric") {
     return;
   }
 
@@ -6590,7 +6590,7 @@ ignite_ballista_setup(b_skipped) {
 ignite_ballista_cleanup(b_skipped, var_19e802fa) {
   callback::remove_on_connect(&function_2b23b087);
   array::notify_all(getplayers(), #"hash_659f3fc9efbd4620");
-  s_strike = struct::get(#"hash_dfe5ea1e5b36d65");
+  s_strike = struct::get(#"s_cleanse_arm");
   s_stand = struct::get(#"hash_3e111145a5afc255");
   s_strike struct::delete();
   s_stand struct::delete();
@@ -6611,7 +6611,7 @@ function_2b23b087() {
   self endon("3bd01db8602ba8a7");
   level endon(#"end_game", #"ignite_ballista" + "_ended_early", #"hash_659f3fc9efbd4620");
   self endon(#"disconnect");
-  s_strike = struct::get(#"hash_dfe5ea1e5b36d65");
+  s_strike = struct::get(#"s_cleanse_arm");
   s_stand = struct::get(#"hash_3e111145a5afc255");
   v_strike = s_strike.origin;
   v_stand = s_stand.origin;
@@ -6678,7 +6678,7 @@ teleport_setup(b_skipped) {
   }
 
   level thread function_d67d9a14();
-  s_unitrigger = struct::get(#"hash_5112e768ad998b70");
+  s_unitrigger = struct::get(#"s_cleanse_leave");
   s_unitrigger zm_unitrigger::create(&function_72004612);
   s_cleanse = level.var_29e8cce2;
   level thread scene::init_streamer(#"aib_vign_cust_zm_red_boss_intro", #"allies");
@@ -6696,7 +6696,7 @@ teleport_cleanup(b_skipped, var_19e802fa) {
   level notify(#"cleanse_teleported");
   level flag::set(#"hash_5a7f1f9adac6dc8c");
   callback::remove_on_connect(&function_dcc3c705);
-  s_unitrigger = struct::get(#"hash_5112e768ad998b70");
+  s_unitrigger = struct::get(#"s_cleanse_leave");
 
   if(isDefined(s_unitrigger.s_unitrigger)) {
     zm_unitrigger::unregister_unitrigger(s_unitrigger.s_unitrigger);
@@ -6756,7 +6756,7 @@ function_e8e36e67() {
 }
 
 function_72004612(e_player) {
-  s_teleport = struct::get(#"hash_5112e768ad998b70");
+  s_teleport = struct::get(#"s_cleanse_leave");
   v_teleport = s_teleport.origin;
   b_ready = 1;
 

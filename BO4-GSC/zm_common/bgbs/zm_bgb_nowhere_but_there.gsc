@@ -114,7 +114,7 @@ activation() {
   wait 3;
   self val::reset(#"zm_bgb_nowhere_but_there", "ignoreme");
   self.var_ca944973 = undefined;
-  self notify(#"hash_55489b8cb6c75352");
+  self notify(#"zm_bgb_nowhere_but_there_complete");
 
   if(isDefined(s_respawn_point.var_72d2300b) && s_respawn_point.var_72d2300b) {
     s_respawn_point struct::delete();

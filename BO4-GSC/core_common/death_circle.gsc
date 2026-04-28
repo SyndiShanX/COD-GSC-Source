@@ -324,7 +324,7 @@ function_a1dbce4a() {
 }
 
 start() {
-  level endoncallback(&cleanup_circle, #"game_ended", #"hash_12a8f2c59a67e4fc");
+  level endoncallback(&cleanup_circle, #"game_ended", #"death_circle_clear");
 
   if(!level.var_d8958e58 || level.deathcircles.size <= 0) {
     return;
@@ -353,8 +353,8 @@ start() {
   level thread function_dc15ad60();
   circle = undefined;
   var_9275bfa4 = undefined;
-  level flagsys::set(#"hash_405e46788e83af41");
-  level callback::callback(#"hash_405e46788e83af41");
+  level flagsys::set(#"death_circle_start");
+  level callback::callback(#"death_circle_start");
   level.var_74887eb = level.deathcircles.size;
 
   if(util::get_game_type() == #"warzone_bigteam_dbno_quad") {
@@ -378,7 +378,7 @@ start() {
     level.deathcircle.nextcircle = nextcircle;
 
     if(isDefined(nextcircle)) {
-      level notify(#"hash_1ff3496c9049969");
+      level notify(#"death_circle_changed");
       var_7791d394 = nextcircle;
 
       if(isDefined(getgametypesetting(#"hash_21ab1ca7e18bddcd")) && getgametypesetting(#"hash_21ab1ca7e18bddcd")) {
@@ -447,7 +447,7 @@ start() {
     }
 
     level.var_78442886 = i;
-    level callback::callback(#"hash_3057417db7f8acdd");
+    level callback::callback(#"death_circle_moving");
 
     if(isDefined(nextcircle)) {
       level.deathcircle function_9229c3b3(scalesec, nextcircle.radius, nextcircle.origin);
@@ -456,7 +456,7 @@ start() {
     }
 
     level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 0);
-    level callback::callback(#"hash_7912e21750e4010d");
+    level callback::callback(#"death_circle_locked");
   }
 
   if(level.deathcircle.radius <= 0) {
@@ -531,7 +531,7 @@ countdown(waitsec, circleindex, nextcircle) {
 }
 
 function_9229c3b3(scalesec, newradius, neworigin) {
-  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_6adadb0779eac3c6");
+  level endon(#"game_ended", #"death_circle_clear", #"hash_6adadb0779eac3c6");
 
   if(scalesec <= 0) {
     self.radius = newradius;
@@ -611,7 +611,7 @@ function_a086017a(point) {
 }
 
 function_dc15ad60() {
-  level endoncallback(&cleanup_feedback, #"game_ended", #"hash_12a8f2c59a67e4fc");
+  level endoncallback(&cleanup_feedback, #"game_ended", #"death_circle_clear");
 
   while(!isDefined(level.deathcircle)) {
     waitframe(1);
@@ -927,7 +927,7 @@ devgui_loop() {
 }
 
 devgui_clear() {
-  level notify(#"hash_12a8f2c59a67e4fc");
+  level notify(#"death_circle_clear");
 
   if(isDefined(level.deathcircle)) {
     level.deathcircle delete();

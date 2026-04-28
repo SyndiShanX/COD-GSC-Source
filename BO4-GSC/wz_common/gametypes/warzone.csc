@@ -303,7 +303,7 @@ function_a1aaf8c0() {
   self endon("15d660e19319a47");
 
   while(isDefined(self)) {
-    waitresult = level waittill(#"hash_5af34d08eac79f88");
+    waitresult = level waittill(#"teammateindex_change");
     function_2dba6c5(waitresult.localclientnum, waitresult.teammateindex);
   }
 }

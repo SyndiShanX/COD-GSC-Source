@@ -233,7 +233,7 @@ function_9c223c27() {
   self endon(#"death");
   self.e_vessel show();
   self zm_orange_ee_dynamite::function_170afe2c(1);
-  self waittill(#"hash_126c823a82e09010");
+  self waittill(#"dynamite_bomb_detonated");
   self.e_safe hide();
 
   if(level.var_98138d6b > 1) {

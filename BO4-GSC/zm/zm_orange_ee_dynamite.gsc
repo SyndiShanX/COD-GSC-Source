@@ -373,7 +373,7 @@ function_2e1427a3() {
   e_bomb playrumbleonentity("zm_orange_dynamite_bomb_explosion");
   wait 0.1;
   e_bomb hide();
-  self notify(#"hash_126c823a82e09010");
+  self notify(#"dynamite_bomb_detonated");
   wait 2.5;
   e_bomb delete();
 }
@@ -389,7 +389,7 @@ place_dynamite_bomb() {
   }
 
   array::run_all(var_b3e4b8b8, &zm_hms_util::function_7a5ba111);
-  self waittill(#"hash_126c823a82e09010");
+  self waittill(#"dynamite_bomb_detonated");
   level thread function_61511fcf(self.script_int);
 }
 
@@ -397,7 +397,7 @@ function_61511fcf(n_index) {
   switch (n_index) {
     case 0:
       function_70f4c8c3("outer_walkway_blocker");
-      level flag::set(#"hash_52d967f4fc8b12fc");
+      level flag::set(#"outer_walkway_open");
       break;
     case 1:
       function_70f4c8c3("sunken_path_blocker");

@@ -166,7 +166,7 @@ electric_trap_think() {
         continue;
       }
 
-      self.stub.related_parent.trap_struct notify(#"hash_5c14ac54b628d28");
+      self.stub.related_parent.trap_struct notify(#"electric_trap_activated");
       self.stub.related_parent.trap_struct.e_activator = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
@@ -181,7 +181,7 @@ function_f118c57a(e_player) {
   function_91ecec97(self.a_e_lights, "p8_zm_off_trap_switch_light_green_on");
 
   while(true) {
-    self waittill(#"hash_5c14ac54b628d28");
+    self waittill(#"electric_trap_activated");
     function_91ecec97(self.a_e_lights, "p8_zm_off_trap_switch_light_red_on");
     self.var_6b64b967 = 1;
     e_who = self.e_activator;
@@ -426,7 +426,7 @@ function_9492f89b(v_volume, var_1e034eed) {
   }
 
   if(self.var_58538bef && (self zm_utility::is_jumping() || self issliding())) {
-    self notify(#"hash_15541419dbbe7e1a");
+    self notify(#"avoid_electric_trap");
   }
 
   self.var_58538bef = undefined;

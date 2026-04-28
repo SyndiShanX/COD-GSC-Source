@@ -51,7 +51,7 @@ init_flags() {
   level flag::init(#"hash_b0eb2954517bcc0");
   level flag::init(#"hash_4b098ade9fc33501");
   level flag::init(#"hash_352e983079eccab6");
-  level flag::init(#"hash_3b7cff73fa5e7121");
+  level flag::init(#"heat_pack_crafted");
 }
 
 main() {
@@ -152,7 +152,7 @@ function_a913e7bc(e_player) {
     zm_ui_inventory::function_7df6bb60("heat_pack_part_tube", 0);
     zm_ui_inventory::function_7df6bb60("heat_pack_part_canister", 0);
     level zm_ui_inventory::function_7df6bb60("heat_pack_phase", 1);
-    level flag::set(#"hash_3b7cff73fa5e7121");
+    level flag::set(#"heat_pack_crafted");
 
     if(level.var_98138d6b > 1) {
       level.var_1c53964e zm_hms_util::function_6a0d675d("vox_heat_pack_craft", -1, 1, 0);
@@ -211,7 +211,7 @@ function_26384c47() {
   level endon(#"end_game");
 
   if(zm_utility::is_classic() || zm_utility::is_trials()) {
-    level flag::wait_till_all(array(#"hash_3028604821838259", #"hash_5a3d0402a5557739"));
+    level flag::wait_till_all(array(#"golden_pap_active", #"hash_5a3d0402a5557739"));
     self thread function_d8d2ddc6();
   }
 }
@@ -331,7 +331,7 @@ function_d8d2ddc6() {
   while(true) {
     s_touching = self function_1036f994();
 
-    if(level flag::get(#"hash_3028604821838259")) {
+    if(level flag::get(#"golden_pap_active")) {
       self.var_28a430ac function_c0df509(s_touching.n_touching);
 
       if(s_touching.var_50d20c23) {
@@ -380,7 +380,7 @@ function_4578fdfd() {
     wait 0.1;
     s_touching = self function_1036f994();
 
-    if(level flag::get(#"hash_3028604821838259") && s_touching.var_50d20c23) {
+    if(level flag::get(#"golden_pap_active") && s_touching.var_50d20c23) {
       self.var_cd75ce36 -= 0.1;
 
       if(self.var_cd75ce36 <= 0) {

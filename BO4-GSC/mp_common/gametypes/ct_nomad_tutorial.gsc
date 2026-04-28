@@ -611,7 +611,7 @@ function_afa281f4() {
   level notify(#"vo_callout");
   level.var_4255e463 = 0;
   level.var_e882762e = 1;
-  function_45d34164(array(#"hash_222b4b892fd765a2"), 40, #"hash_72958f658edea7f4", 2, undefined, 0);
+  function_45d34164(array(#"s_nomad_tripwire_obj3_goto_1"), 40, #"hash_72958f658edea7f4", 2, undefined, 0);
   function_45d34164(undefined, 40, #"hash_72a68f658eed1b27", 2, undefined, 1);
   ct_utils::function_d00e0eeb();
   level.var_e882762e = undefined;
@@ -666,7 +666,7 @@ function_244e4db8() {
   e_player = getplayers()[0];
   e_player thread ct_utils::function_61c3d59c(#"hash_6b153adcd9c8cfcb", undefined);
   wait 1;
-  level notify(#"hash_16cac42598bc6a4");
+  level notify(#"juno_attack");
 
   while(true) {
     var_e8d6f89 = ct_bots::function_2a8fc6b2();
@@ -784,7 +784,7 @@ function_34696b67() {
   s_loc = struct::get("s_defuse_bomb_loc", "targetname");
   e_bomb = util::spawn_model("p8_mp_bomb_crate_whole", s_loc.origin, s_loc.angles);
   level.var_efb41f70 = 0;
-  ct_utils::function_9d1fc273(e_bomb, &function_ae12f07c, #"hash_7b74e27a1a2facf8", 5);
+  ct_utils::function_9d1fc273(e_bomb, &function_ae12f07c, #"sd_defuse_prompt", 5);
   e_bomb.gameobject.onbeginuse = &function_d2b15099;
   e_bomb.gameobject.useweapon = getweapon(#"briefcase_bomb_defuse");
 
@@ -1316,7 +1316,7 @@ function_89eab9e8() {
   self clientfield::set("enemy_keyline_render", 1);
   s_path = struct::get(s_target.script_noteworthy, "targetname");
   self thread ct_utils::function_1e7b75f2(s_path);
-  level waittill(#"hash_16cac42598bc6a4");
+  level waittill(#"juno_attack");
   self val::reset(#"dog_meat", "ignoreme");
   self val::reset(#"dog_meat", "ignoreall");
 }

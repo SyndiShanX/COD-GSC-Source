@@ -1127,7 +1127,7 @@ function_9693e041(player) {
     self.hint_string = #"hash_55d25caf8f7bbb2f";
   } else {
     if(!(isDefined(_shad_turret_debug_server) && _shad_turret_debug_server)) {
-      str = self.blueprint.var_391591d0;
+      str = self.blueprint.purchaseprompt;
       str_pc = function_c9163c5d(str);
       self.hint_string = zm_utility::function_d6046228(str, str_pc);
     }
@@ -1392,7 +1392,7 @@ function_15d10d06(player) {
     return true;
   }
 
-  str = self.blueprint.var_391591d0;
+  str = self.blueprint.purchaseprompt;
   str_pc = function_c9163c5d(str);
   self.hint_string = zm_utility::function_d6046228(str, str_pc);
   return true;

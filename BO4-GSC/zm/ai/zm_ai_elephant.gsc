@@ -308,7 +308,7 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return (damage * var_786d7e06.damage_scale);
   }
 
-  if(self.ai.var_112ec817 == #"hash_8e173ae91589439") {
+  if(self.ai.var_112ec817 == #"elephant_stage_1") {
     var_dd54fdb1 = namespace_81245006::function_37e3f011(self, "tag_carriage_ws_le");
 
     if(isDefined(var_dd54fdb1) && namespace_81245006::function_f29756fe(var_dd54fdb1) === 1) {

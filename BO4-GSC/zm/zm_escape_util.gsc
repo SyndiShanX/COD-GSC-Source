@@ -231,7 +231,7 @@ function_1abf5396(var_cba19e17) {
     if(isPlayer(waitresult.activator) && var_cba19e17.var_ead5d884) {
       waitresult.activator dodamage(10, waitresult.activator.origin);
       waitresult.activator clientfield::increment_to_player("" + #"hash_257c215ab25a21c5");
-      waitresult.activator playsoundtoplayer(#"hash_75318bcffca7ff06", waitresult.activator);
+      waitresult.activator playsoundtoplayer(#"evt_player_swiped_victim", waitresult.activator);
       wait 4;
     }
 

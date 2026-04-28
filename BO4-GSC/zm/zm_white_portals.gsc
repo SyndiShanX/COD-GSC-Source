@@ -78,9 +78,9 @@ init_clientfields() {
 }
 
 function_24167ed8() {
-  level flag::init(#"hash_2120a14c5eeab590");
+  level flag::init(#"mmtd_built");
   level flag::init(#"shield_built");
-  level flag::init(#"hash_2a5fb4f6bae2e180");
+  level flag::init(#"civil_engineering");
   zm_crafting::function_d1f16587(#"ztable_white_open", &function_5702b2e7);
 }
 
@@ -103,7 +103,7 @@ function_5702b2e7(e_player) {
   if(t_crafting.blueprint.name == #"zblueprint_white_mmtd") {
     t_crafting.var_4f749ffe show();
     t_crafting.var_ae360c37 show();
-    level flag::set(#"hash_2120a14c5eeab590");
+    level flag::set(#"mmtd_built");
 
     if(function_8b1a219a()) {
       level.var_279a11a3 = self.stub.var_4f749ffe zm_unitrigger::create(#"hash_57249497bfb88a5", 64, &function_735e7b);
@@ -116,8 +116,8 @@ function_5702b2e7(e_player) {
     level flag::set(#"shield_built");
   }
 
-  if(level flag::get(#"hash_2120a14c5eeab590") && level flag::get(#"shield_built")) {
-    level flag::set(#"hash_2a5fb4f6bae2e180");
+  if(level flag::get(#"mmtd_built") && level flag::get(#"shield_built")) {
+    level flag::set(#"civil_engineering");
   }
 }
 
@@ -290,7 +290,7 @@ teleport_player(user) {
   user clientfield::increment_to_player("teleporter_arrive", 1);
   playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
-  user playsoundtoplayer(#"hash_39876bf613387fef", user);
+  user playsoundtoplayer(#"evt_teleporter_go_plr", user);
   wait 0.5;
   user function_96e88318();
   user notify(#"teleporting_done");

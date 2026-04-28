@@ -27,7 +27,7 @@ __init__() {
   clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
   level._effect[#"hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
   level._effect[#"hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
-  zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
+  zm_trial::register_challenge(#"pack_a_punch_sacrifice", &on_begin, &on_end);
 }
 
 on_begin(localclientnum, a_params) {}
@@ -35,7 +35,7 @@ on_begin(localclientnum, a_params) {}
 on_end(localclientnum) {}
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_28d1b9857e2ca681");
+  challenge = zm_trial::function_a36e8c38(#"pack_a_punch_sacrifice");
   return isDefined(challenge);
 }
 

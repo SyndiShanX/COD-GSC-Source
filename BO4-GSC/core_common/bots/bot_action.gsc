@@ -92,7 +92,7 @@ function_42907fd4() {
 }
 
 stop() {
-  self notify(#"hash_5b4f399c08222e2");
+  self notify(#"bot_action_stop");
 }
 
 reset() {
@@ -103,7 +103,7 @@ reset() {
 
 update() {
   if(isDefined(self.bot.action)) {
-    self notify(#"hash_347a612b61067eb3");
+    self notify(#"bot_action_update");
 
     forcedstr = isDefined(self.bot.actionparams.forced) && self.bot.actionparams.forced ? "<dev string:x38>" : "<dev string:x43>";
     record3dtext("<dev string:x46>" + hashtostring(self.bot.action.name) + forcedstr, self.origin, (1, 0, 1), "<dev string:x4b>", self, 0.5);
@@ -377,7 +377,7 @@ function_9480d296() {
 }
 
 execution_loop() {
-  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
+  self endon(#"bot_action_stop", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
   level endon(#"game_ended");
 
   while(self bot::initialized()) {
@@ -399,7 +399,7 @@ execution_loop() {
 }
 
 function_e7b123e8(actionparams) {
-  self endoncallback(&function_7a456ee0, #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
+  self endoncallback(&function_7a456ee0, #"bot_action_stop", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
   level endon(#"game_ended");
   action = actionparams.action;
   self.bot.action = action;
@@ -414,7 +414,7 @@ function_e7b123e8(actionparams) {
   if(executetime == finishtime) {
     self botprinterror("<dev string:xfb>" + hashtostring(action.name) + "<dev string:x105>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self.bot.action = undefined;
@@ -431,7 +431,7 @@ function_7a456ee0(notifyhash) {
 }
 
 action_timeout(actionname) {
-  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
+  self endon(#"bot_action_stop", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   wait 10;
 
@@ -441,7 +441,7 @@ action_timeout(actionname) {
 
   self botprintwarning("<dev string:xfb>" + hashtostring(actionname) + "<dev string:x119>" + 10 + "<dev string:x12d>");
 
-  self notify(#"hash_5b4f399c08222e2");
+  self notify(#"bot_action_stop");
 }
 
 function_fef5423c(smin, smax) {
@@ -944,7 +944,7 @@ look_for_enemy(actionparams) {
 
   while(!self function_cf788c22() && self function_ab4c3550() && self bot::in_combat() && self is_target_enemy(actionparams) && !self is_target_visible(actionparams)) {
     self function_d273d4e7();
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1000,7 +1000,7 @@ function_e0dcb8c1(actionparams) {
   while(!self function_cf788c22() && !self.ignoreall && isDefined(target) && self is_target_enemy(actionparams) && isalive(target) && !self is_target_visible(actionparams)) {
     self function_8a2b82ad(actionparams);
     self aim_at_target(actionparams);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1040,7 +1040,7 @@ scan_for_threats(actionparams) {
       self function_2b8f7067();
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     targetvisible = self is_target_visible(actionparams);
   }
 }
@@ -1062,7 +1062,7 @@ function_9e1d8dfe(actionparams) {
       self function_2b8f7067();
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     targetvisible = self is_target_visible(actionparams);
   }
 }
@@ -1182,14 +1182,14 @@ revive_player(actionparams) {
     }
 
     self bot_stance::crouch();
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   while(isalive(player) && isDefined(player.revivetrigger) && self istouching(player.revivetrigger)) {
     self look_at_point(player.revivetrigger.origin, "Revive Trigger", (1, 1, 1));
     self bot_stance::crouch();
     self bottapbutton(3);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self function_e0c89027();
@@ -1312,7 +1312,7 @@ function_5647e838(actionparams) {
 function_40aa6f87(actionparams) {
   while(isDefined(self.bot.traversal)) {
     self botsetlookpoint(self.bot.traversal.endpos);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1338,10 +1338,10 @@ switch_to_weapon_weight(actionparams) {
 switch_to_weapon(actionparams) {
   weapon = actionparams.weapon;
   self botswitchtoweapon(weapon);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self isswitchingweapons()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1415,7 +1415,7 @@ reload_weapon(actionparams) {
     self bottapbutton(4);
   }
 
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(self isreloading()) {
     if(self is_target_enemy(actionparams) && self is_target_visible(actionparams)) {
@@ -1433,7 +1433,7 @@ reload_weapon(actionparams) {
       self function_2b8f7067();
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1509,13 +1509,13 @@ function_abf40e98(actionparams) {
 melee_glass(actionparams) {
   self look_along_path();
   self bottapbutton(2);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   if(self ismeleeing()) {
     self look_along_path();
 
     while(self ismeleeing()) {
-      self waittill(#"hash_347a612b61067eb3");
+      self waittill(#"bot_action_update");
     }
   }
 }
@@ -1593,11 +1593,11 @@ melee_enemy(actionparams) {
     return;
   }
 
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   if(self ismeleeing()) {
     while(self ismeleeing()) {
-      self waittill(#"hash_347a612b61067eb3");
+      self waittill(#"bot_action_update");
     }
   }
 }
@@ -1660,7 +1660,7 @@ function_a314673(actionparams) {
       self bot::function_e2c892a5(1);
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1750,7 +1750,7 @@ function_e73c8946(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1787,7 +1787,7 @@ function_22e2ba8c(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1866,14 +1866,14 @@ function_36ca6d92(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   self function_b74c1de4();
   wait 0.1;
 
   while(self isswitchingweapons()) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -1966,7 +1966,7 @@ fire_grenade(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -2046,7 +2046,7 @@ fire_locked_rocketlauncher(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
 
     if(self isfiring()) {
       break;
@@ -2059,7 +2059,7 @@ fire_locked_rocketlauncher(actionparams) {
       self aim_at_target(actionparams);
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -2125,7 +2125,7 @@ fire_rocketlauncher(actionparams) {
 
           if(self playerads() >= 1) {
             self bottapbutton(0);
-            self waittill(#"hash_347a612b61067eb3");
+            self waittill(#"bot_action_update");
             break;
           }
         } else {
@@ -2134,7 +2134,7 @@ fire_rocketlauncher(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
 
     if(self isfiring()) {
       break;
@@ -2147,7 +2147,7 @@ fire_rocketlauncher(actionparams) {
       self aim_at_target(actionparams);
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -2168,7 +2168,7 @@ activate_health_gadget(actionparams) {
   self function_ccdcc5d9(weapon);
 
   while(self isthrowinggrenade() || !self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -2197,12 +2197,12 @@ throw_offhand(actionparams) {
   slot = self gadgetgetslot(weapon);
   button = self function_c6e02c38(weapon);
   self function_5aa9dd1b(actionparams);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 
   while(!self function_d911b948()) {
     self function_5aa9dd1b(actionparams);
     self bottapbutton(button);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   holding = 1;
@@ -2218,7 +2218,7 @@ throw_offhand(actionparams) {
       }
     }
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 
   if(holding) {
@@ -2226,12 +2226,12 @@ throw_offhand(actionparams) {
       self bottapbutton(71);
       self bottapbutton(49);
       self function_c17972fc();
-      self waittill(#"hash_347a612b61067eb3");
+      self waittill(#"bot_action_update");
     }
   }
 
   while(!self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -2298,7 +2298,7 @@ bleed_out_weight(actionparams) {
 bleed_out(actionparams) {
   while(!isDefined(self.revivetrigger) && !(isDefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived)) {
     self bottapbutton(3);
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -3020,7 +3020,7 @@ function_a9847723(weapon) {
   }
 
   self bottapbutton(button);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 }
 
 function_8171a298(weapon) {
@@ -3032,9 +3032,9 @@ function_8171a298(weapon) {
   }
 
   self botswitchtoweapon(weapon);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
   self bottapbutton(button);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 }
 
 function_ec16df22(weapon) {
@@ -3047,7 +3047,7 @@ function_ec16df22(weapon) {
 
   self bottapbutton(button);
   self botswitchtoweapon(weapon);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 }
 
 test_gadget(actionparams) {
@@ -3056,14 +3056,14 @@ test_gadget(actionparams) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x667>" + "<dev string:x681>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
   self function_ccdcc5d9(weapon);
 
   while(self isthrowinggrenade() || !self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -3117,14 +3117,14 @@ deploy_gadget(actionparams, checkgrenade) {
   if(!isDefined(weapon)) {
     self botprinterror("<dev string:x6cd>" + "<dev string:x681>");
 
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
     return;
   }
 
   self function_ccdcc5d9(weapon);
 
   while(isDefined(checkgrenade) && checkgrenade && self isthrowinggrenade() || !self isweaponready() || self getcurrentweapon() == level.weaponnone) {
-    self waittill(#"hash_347a612b61067eb3");
+    self waittill(#"bot_action_update");
   }
 }
 
@@ -3138,7 +3138,7 @@ function_e7fa3d0() {
 
 function_29163ca5(weapon) {
   self botswitchtoweapon(weapon);
-  self waittill(#"hash_347a612b61067eb3");
+  self waittill(#"bot_action_update");
 }
 
 function_11c3d810(weapon) {

@@ -45,7 +45,7 @@ __init__() {
   level.hero_weapon[#"hammer"][0] = getweapon(#"hero_hammer_lv1");
   level.hero_weapon[#"hammer"][1] = getweapon(#"hero_hammer_lv2");
   level.hero_weapon[#"hammer"][2] = getweapon(#"hero_hammer_lv3");
-  level.var_af47ddb5 = getweapon(#"hash_76986baf9b6770c6");
+  level.var_af47ddb5 = getweapon(#"hero_hammer_lv3_bolt");
   zm_loadout::register_hero_weapon_for_level("hero_hammer_lv1");
   zm_loadout::register_hero_weapon_for_level("hero_hammer_lv2");
   zm_loadout::register_hero_weapon_for_level("hero_hammer_lv3");

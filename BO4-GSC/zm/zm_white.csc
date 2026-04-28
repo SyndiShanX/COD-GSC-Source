@@ -52,8 +52,8 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
   level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
   level._effect[#"animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
-  level._effect[#"hash_4cee8d16fd03fab3"] = #"hash_d763bb85d068431";
-  level._effect[#"hash_b6fb18d53b3ba8f"] = #"hash_2a09c05622f43005";
+  level._effect[#"plasma_trap_red"] = #"hash_d763bb85d068431";
+  level._effect[#"plasma_trap_green"] = #"hash_2a09c05622f43005";
   level._effect[#"hash_50a4de8d221c0d88"] = #"hash_5088b0c20d6a9452";
   clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int", &portal_map_magicbox_lights_init, 0, 0);
@@ -120,10 +120,10 @@ function_bc7eec87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      fx_id = level._effect[#"hash_4cee8d16fd03fab3"];
+      fx_id = level._effect[#"plasma_trap_red"];
       break;
     case 2:
-      fx_id = level._effect[#"hash_b6fb18d53b3ba8f"];
+      fx_id = level._effect[#"plasma_trap_green"];
       break;
     case 3:
       fx_id = level._effect[#"hash_50a4de8d221c0d88"];

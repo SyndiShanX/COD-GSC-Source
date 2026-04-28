@@ -19,7 +19,7 @@
 init_clientfields() {
   clientfield::register("scriptmover", "" + #"candle_light", 8000, 1, "int", &function_7b2555da, 0, 0);
   clientfield::register("scriptmover", "" + #"monolith_water", 8000, 1, "int", &function_5755829d, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_4d45dc65a8307183", 8000, 1, "counter", &function_7fb1dad8, 0, 0);
+  clientfield::register("scriptmover", "" + #"soul_possess_orb", 8000, 1, "counter", &function_7fb1dad8, 0, 0);
   clientfield::register("actor", "" + #"soul_possess", 8000, 1, "int", &function_46354b9d, 0, 0);
   clientfield::register("toplayer", "" + #"hash_3d7d4c5e6ed616e9", 8000, 1, "int", &function_5790d8f, 0, 1);
   clientfield::register("scriptmover", "" + #"jewelry_dropped", 8000, 1, "int", &function_4e782d34, 0, 0);
@@ -28,7 +28,7 @@ init_clientfields() {
   level._effect[#"candle_light"] = #"hash_7c3ce9a7a1d0be65";
   level._effect[#"candle_extinguish"] = #"hash_46177358e1ae4e80";
   level._effect[#"monolith_water"] = #"hash_4290601f9ae7b873";
-  level._effect[#"hash_4d45dc65a8307183"] = #"hash_59977c4c851916e0";
+  level._effect[#"soul_possess_orb"] = #"hash_59977c4c851916e0";
   level._effect[#"soul_possess"] = #"hash_5ea48c095e439dd3";
   level._effect[#"jewelry_dropped"] = #"hash_69fe2bd378e08226";
 }
@@ -83,7 +83,7 @@ function_46354b9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_7fb1dad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_4d45dc65a8307183"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"soul_possess_orb"], self, "tag_origin");
   self playSound(localclientnum, #"hash_72a28324d62874cc");
   var_3e97d494 = self playLoopSound(#"hash_298631572be3dd79");
 }

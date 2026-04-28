@@ -22,7 +22,7 @@ __init__() {
   clientfield::register("scriptmover", "ouranos_shoot", 16000, 1, "counter", &function_b3ffbfd, 0, 0);
   clientfield::register("scriptmover", "ouranos_impact", 16000, 1, "counter", &ouranos_impact_fx, 0, 0);
   clientfield::register("allplayers", "" + #"ouranos_beam_fire", 16000, 1, "int", &skull_turret_beam_fire, 0, 1);
-  clientfield::register("allplayers", "" + #"hash_4fb73e88d45af0ef", 16000, 1, "int", &function_98b06f97, 0, 1);
+  clientfield::register("allplayers", "" + #"ouranos_beam_fire_sfx", 16000, 1, "int", &ouranos_beam_fire_sfx, 0, 1);
   clientfield::register("actor", "" + #"ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
   clientfield::register("actor", "" + #"ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int");
@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"ouranos_impact"] = #"hash_5869597389a55f7b";
   level._effect[#"ouranos_proj_knock"] = #"hash_215ead487c4bef59";
   level._effect[#"ouranos_wind_knock"] = #"hash_4cc40e13ee8dff61";
-  level._effect[#"hash_31736c99409b40ef"] = #"hash_44bd80522ac100e7";
+  level._effect[#"ouranos_wind_3p"] = #"hash_44bd80522ac100e7";
 }
 
 function_1322534b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -164,7 +164,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     }
 
     if(!self zm_utility::function_f8796df3(localclientnum)) {
-      self.var_c400cdd5 = util::playFXOnTag(localclientnum, level._effect[#"hash_31736c99409b40ef"], self, "tag_weapon_right");
+      self.var_c400cdd5 = util::playFXOnTag(localclientnum, level._effect[#"ouranos_wind_3p"], self, "tag_weapon_right");
     }
 
     if(!isDefined(self.var_76c23e4c)) {
@@ -187,7 +187,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   }
 }
 
-function_98b06f97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+ouranos_beam_fire_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_76c23e4c)) {
       self playSound(localclientnum, #"hash_5e5e7d42f62fb92d");

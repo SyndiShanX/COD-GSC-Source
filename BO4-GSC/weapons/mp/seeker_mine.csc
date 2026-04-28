@@ -52,7 +52,7 @@ seeker_mine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   if(newval > 0) {
     if(isDefined(self.seeker_fx)) {
       stopfx(localclientnum, self.seeker_fx);
-      self notify(#"hash_6b4bac2b8c2122ef");
+      self notify(#"seeker_fx_end");
     }
 
     if(newval == 1) {
@@ -66,7 +66,7 @@ seeker_mine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 }
 
 function_fc90058e(localclientnum, fx) {
-  self waittill(#"death", #"hash_6b4bac2b8c2122ef");
+  self waittill(#"death", #"seeker_fx_end");
 
   if(isDefined(fx)) {
     stopfx(localclientnum, fx);

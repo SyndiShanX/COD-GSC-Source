@@ -43,7 +43,7 @@ on_end(round_reset) {
 }
 
 function_83b71e7c() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self endon(#"death");
 
   while(true) {

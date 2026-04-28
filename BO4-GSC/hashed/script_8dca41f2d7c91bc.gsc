@@ -66,7 +66,7 @@ function_2c0a7925(b_disable) {
 }
 
 function_15c362c9() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   function_2c0a7925(1);
 
   foreach(player in getplayers()) {
@@ -92,7 +92,7 @@ function_15c362c9() {
 
 function_d38bb58b(var_32e3ef04) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hash_6256990b4b694197");
+  level endon(#"trial_round_end", #"hash_6256990b4b694197");
   self zm_trial_util::function_63060af4(0);
 
   if(self flag::get(#"ww_combat_active") || self flag::get(#"hash_3247dad158e8b329")) {
@@ -228,7 +228,7 @@ function_eee5f1e5(e_player) {
 }
 
 function_4ff0c5fd(e_player) {
-  level endon(#"end_game", #"hash_7646638df88a3656");
+  level endon(#"end_game", #"trial_round_end");
   e_player endon(#"disconnect", #"hash_11371635986ba290");
   a_ai_spawned = [];
   var_1cda8410 = [];

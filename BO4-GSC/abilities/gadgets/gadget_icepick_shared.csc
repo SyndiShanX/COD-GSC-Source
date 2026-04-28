@@ -58,7 +58,7 @@ function_b2755499(weapon, entity) {
     case # "straferun_gun":
       returnweapon = getweapon("straferun");
       break;
-    case # "hash_26ffb92552ae26be":
+    case # "drone_squadron_turret":
       returnweapon = getweapon("drone_squadron");
       break;
     case # "player_air_vehicle1_main_turret_3rd_person":
@@ -381,11 +381,11 @@ icepick_on(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, b
 }
 
 function_4a82368f(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  isplaying = postfx::function_556665f2(#"hash_108c587fdd95588a");
+  isplaying = postfx::function_556665f2(#"pstfx_dni_screen_futz_lp");
 
   if(newval == 1) {
     if(!isplaying && self isremotecontrolling(local_client_num)) {
-      self postfx::playpostfxbundle(#"hash_108c587fdd95588a");
+      self postfx::playpostfxbundle(#"pstfx_dni_screen_futz_lp");
     }
 
     return;
@@ -393,7 +393,7 @@ function_4a82368f(local_client_num, oldval, newval, bnewent, binitialsnap, field
 
   if(newval == 0) {
     if(isplaying) {
-      self postfx::stoppostfxbundle(#"hash_108c587fdd95588a");
+      self postfx::stoppostfxbundle(#"pstfx_dni_screen_futz_lp");
     }
   }
 }

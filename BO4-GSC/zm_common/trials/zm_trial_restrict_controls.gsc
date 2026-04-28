@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_begin(var_bd9d962 = #"invert") {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 5;
   level.var_2439365b = var_bd9d962;
 
@@ -102,7 +102,7 @@ function_3d8fa20a() {
   self notify("63943c3872eb77bc");
   self endon("63943c3872eb77bc");
   self endon(#"death");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 5;
 
   while(self zm_utility::is_jumping()) {
@@ -123,7 +123,7 @@ function_3d8fa20a() {
 function_dc856fd8() {
   self notify("4becff0e4eba900e");
   self endon("4becff0e4eba900e");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self endon(#"disconnect");
   self allowjump(0);
   self allowprone(0);

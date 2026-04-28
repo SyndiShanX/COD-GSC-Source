@@ -98,7 +98,7 @@ function_3675de8b() {
 }
 
 function_fe5b1120(helicopter, attackingplayer) {
-  helicopter notify(#"hash_216c905d79c8bbea");
+  helicopter notify(#"swat_helicopter_destroyed");
 
   if(isDefined(helicopter.rope)) {
     function_d4331865(helicopter.rope);
@@ -176,7 +176,7 @@ function_87bf6422(killstreak) {
     return false;
   }
 
-  player notify(#"hash_6e666a0689c3fd62");
+  player notify(#"swat_team_called");
   player thread function_6936559a(context);
   player thread spawn_swat_team(player, context, player.origin);
   util::function_5a68c330(21, player.team, player getentitynumber(), level.killstreaks[#"swat_team"].uiname);
@@ -745,7 +745,7 @@ function_ace0a9bc() {
 
 function_8fa2faa5(swat, helicopter, position) {
   swat endon(#"death", #"stop_riding");
-  helicopter endon(#"death", #"hash_216c905d79c8bbea");
+  helicopter endon(#"death", #"swat_helicopter_destroyed");
   level endon(#"game_ended");
   ride_anim = undefined;
 
@@ -778,10 +778,10 @@ function_8fa2faa5(swat, helicopter, position) {
 function_67260255(swat, helicopter, killstreak_id) {
   swat endon(#"swat_landed", #"death");
   helicopter endon(#"death");
-  params = helicopter waittill(#"hash_216c905d79c8bbea");
+  params = helicopter waittill(#"swat_helicopter_destroyed");
 
   if(isDefined(swat.script_owner)) {
-    swat.script_owner notify(#"hash_216c905d79c8bbea");
+    swat.script_owner notify(#"swat_helicopter_destroyed");
     swat.script_owner notify(#"payload_fail");
   }
 
@@ -1015,7 +1015,7 @@ function_656691ab() {
         self function_9ffc1856(self.heligoalpos, 1);
       }
 
-      self notify(#"hash_340ab3c2b94ff86a");
+      self notify(#"switched_pathing");
       break;
     }
 
@@ -1056,7 +1056,7 @@ function_67c394f2(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, #"switched_pathing");
         }
       }
     }
@@ -1151,7 +1151,7 @@ function_11038a4a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   if(idamage >= self.health) {
     self.health = idamage + 1;
     helicopter.overridevehicledamage = undefined;
-    helicopter notify(#"hash_216c905d79c8bbea", {
+    helicopter notify(#"swat_helicopter_destroyed", {
       #attacker: eattacker
     });
     function_d4331865(helicopter.rope);
@@ -1176,10 +1176,10 @@ function_61baa879(helicopter) {
     return;
   }
 
-  helicopter endon(#"hash_216c905d79c8bbea", #"death");
+  helicopter endon(#"swat_helicopter_destroyed", #"death");
   helicopter.rope endon(#"death");
   helicopter.rope show();
-  helicopter endon(#"hash_216c905d79c8bbea", #"death");
+  helicopter endon(#"swat_helicopter_destroyed", #"death");
   level endon(#"game_ended");
   helicopter.rope animation::play("p8_fxanim_gp_vehicle_lb_swat_rappel_start_anim", helicopter, "tag_origin", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
 }
@@ -1199,7 +1199,7 @@ function_21f27c75(helicopter) {
     return;
   }
 
-  helicopter endon(#"hash_216c905d79c8bbea", #"death");
+  helicopter endon(#"swat_helicopter_destroyed", #"death");
   helicopter.rope endon(#"death");
   rope = helicopter.rope;
   helicopter notify(#"hash_6d5d50a125188a1b");
@@ -1589,7 +1589,7 @@ function_263d3e9e(var_1c996690, context, owner, secondattempt = 0) {
 }
 
 function_fe13a227(helicopter, var_1c996690, destination) {
-  helicopter endon(#"death", #"payload_delivered", #"hash_216c905d79c8bbea");
+  helicopter endon(#"death", #"payload_delivered", #"swat_helicopter_destroyed");
 
   while(true) {
     recordsphere(var_1c996690, 4, (1, 0.5, 0), "<dev string:x3b>");
@@ -1650,7 +1650,7 @@ function_820e7c92(owner, var_1c996690, nodes, context) {
   destination = getstartorigin(var_1c996690, (0, 0, 0), "ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
   var_6aa266d6 = helicopter::getvalidrandomstartnode(destination).origin;
   helicopter = spawn_swat_helicopter(owner, var_6aa266d6, vectortoangles(owner.origin - var_6aa266d6), context);
-  helicopter endon(#"death", #"hash_216c905d79c8bbea");
+  helicopter endon(#"death", #"swat_helicopter_destroyed");
   helicopter.hardpointtype = "swat_team";
 
   helicopter thread function_fe13a227(helicopter, var_1c996690, destination);
@@ -1835,7 +1835,7 @@ spawn_swat_team(owner, context, origin) {
     self.swat_team = [];
   } else {
     owner swat_cleanup();
-    owner notify(#"hash_71a1db99eb99dcff");
+    owner notify(#"swat_team_done");
   }
 
   owner.var_6c0553ea = context;
@@ -1924,7 +1924,7 @@ function_48d57bc8() {
 }
 
 function_8821879c(killstreak_id) {
-  self endon(#"hash_71a1db99eb99dcff", #"disconnect", #"joined_team");
+  self endon(#"swat_team_done", #"disconnect", #"joined_team");
 
   if(!isDefined(self.var_6c0553ea)) {
     return;
@@ -2033,7 +2033,7 @@ function_8821879c(killstreak_id) {
 }
 
 function_47e16e28() {
-  self endon(#"hash_71a1db99eb99dcff", #"disconnect", #"joined_team");
+  self endon(#"swat_team_done", #"disconnect", #"joined_team");
 
   while(self.var_976238cf == #"swat_team") {
     waitframe(1);
@@ -2046,7 +2046,7 @@ function_47e16e28() {
 }
 
 swat_loop(killstreak_id) {
-  self endon(#"hash_71a1db99eb99dcff");
+  self endon(#"swat_team_done");
   self endoncallback(&function_d524c2b8, #"disconnect", #"joined_team");
   endtime = gettime() + self.var_6c0553ea.time;
   self.var_976238cf = #"swat_team";
@@ -2319,7 +2319,7 @@ function_4c2ed78d(owner, forced = 0) {
 
 swat_escort(playgesture = 1) {
   owner = self;
-  owner endon(#"hash_71a1db99eb99dcff", #"disconnect", #"joined_team");
+  owner endon(#"swat_team_done", #"disconnect", #"joined_team");
   owner waittill(#"payload_delivered");
   owner function_d738127f();
 
@@ -2493,7 +2493,7 @@ start_swat_team_leave() {
     }
 
     if(isDefined(self.owner)) {
-      self.owner notify(#"hash_71a1db99eb99dcff");
+      self.owner notify(#"swat_team_done");
     }
 
     self.swat_team[i] thread swat_leave();
@@ -2560,7 +2560,7 @@ swat_cleanup(destroy_heli) {
     destroy_heli = 1;
   }
 
-  self notify(#"hash_71a1db99eb99dcff");
+  self notify(#"swat_team_done");
   profilestart();
 
   if(isDefined(self.var_6c0553ea)) {
@@ -2632,7 +2632,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       attacker.var_6c0553ea.clear_kills++;
 
       if(attacker.var_6c0553ea.clear_kills == 2) {
-        scoreevents::processscoreevent(#"hash_7e7146503217ca9c", attacker, victim, getweapon(#"swat_team"));
+        scoreevents::processscoreevent(#"swat_team_area_clear", attacker, victim, getweapon(#"swat_team"));
       }
     }
 

@@ -913,7 +913,7 @@ function_60f8374c() {
 
 function_2e0d129b(cmd) {
   switch (cmd) {
-    case # "hash_4d20b9f9a8da7a33":
+    case # "brutus_round_skip":
       level.var_cab8d080 = 1;
 
       if(isDefined(level.next_brutus_round)) {

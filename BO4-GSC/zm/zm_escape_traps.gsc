@@ -205,7 +205,7 @@ function_9c2d463d(t_damage) {
   if(level.round_number < 40) {
     self.marked_for_death = 1;
     self clientfield::set("fan_trap_blood_fx", 1);
-    level notify(#"hash_528d7b7f7d6c51a1", {
+    level notify(#"fan_trap_kill", {
       #e_player: t_damage.activated_by_player
     });
     self zombie_utility::gib_random_parts();
@@ -241,7 +241,7 @@ function_9c2d463d(t_damage) {
     return;
   }
 
-  level notify(#"hash_528d7b7f7d6c51a1", {
+  level notify(#"fan_trap_kill", {
     #e_player: t_damage.activated_by_player
   });
 
@@ -550,7 +550,7 @@ function_9699194a(t_damage) {
   if(level.round_number < 40) {
     self.marked_for_death = 1;
     self clientfield::set("acid_trap_death_fx", 1);
-    level notify(#"hash_317f58ba0d580c27", {
+    level notify(#"acid_trap_kill", {
       #e_player: t_damage.activated_by_player
     });
     wait randomfloatrange(0.25, 2);
@@ -588,7 +588,7 @@ function_9699194a(t_damage) {
     return;
   }
 
-  level notify(#"hash_317f58ba0d580c27", {
+  level notify(#"acid_trap_kill", {
     #e_player: t_damage.activated_by_player
   });
 
@@ -826,7 +826,7 @@ function_1f7e661f(t_damage) {
       self launchragdoll(150 * anglestoup(self.angles) + (v_away_from_source[0], v_away_from_source[1], 0));
     }
 
-    level notify(#"hash_148b3ce521088846", {
+    level notify(#"spin_trap_kill", {
       #e_player: t_damage.activated_by_player
     });
     self dodamage(self.health + 1000, self.origin, undefined, t_damage);
@@ -840,7 +840,7 @@ function_1f7e661f(t_damage) {
   }
 
   if(self.zm_ai_category === #"popcorn") {
-    level notify(#"hash_148b3ce521088846", {
+    level notify(#"spin_trap_kill", {
       #e_player: t_damage.activated_by_player
     });
     self dodamage(self.health + 1000, self.origin, undefined, t_damage);
@@ -1040,7 +1040,7 @@ function_e3f8ed75() {
 zapper_light_red() {
   for(i = 0; i < self.var_cd6ebde4.size; i++) {
     self.var_cd6ebde4[i] setModel(#"p7_zm_mob_trap_control_base_red");
-    self.var_cd6ebde4[i] playSound(#"hash_6c4aadc21a173f8b");
+    self.var_cd6ebde4[i] playSound(#"zmb_switch_flip_trap");
     self.var_cd6ebde4[i] playSound(#"hash_6c4cdf83585f2851");
   }
 

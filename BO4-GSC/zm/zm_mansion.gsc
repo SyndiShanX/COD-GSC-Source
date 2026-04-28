@@ -146,7 +146,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("clientuimodel", "player_lives", 8000, 2, "int");
   clientfield::register("clientuimodel", "zmhud.ammoModifierActive", 8000, 1, "int");
   clientfield::register("world", "" + #"hash_42e03f9ae74a1070", 8000, 1, "int");
-  clientfield::register("vehicle", "" + #"hash_602ae5683c010563", 8000, 1, "int");
+  clientfield::register("vehicle", "" + #"power_on_projectile_fx", 8000, 1, "int");
   clientfield::register("vehicle", "" + #"hash_4bd91c5285da0899", 8000, 1, "counter");
   clientfield::register("scriptmover", "" + #"soul_fx", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"stone_pickup", 8000, 1, "int");
@@ -157,12 +157,12 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("item", "" + #"hash_35ce4034ca7e543c", 8000, 3, "int");
   clientfield::register("scriptmover", "" + #"hash_487e544e29aa8e45", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"activate_mansion_artifact", 8000, getminbitcountfornum(3), "int");
-  clientfield::register("scriptmover", "" + #"hash_44ee99a6591fe600", 8000, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_6a4f537da00ae3f9", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"activate_mansion_artifact_card", 8000, 1, "int");
+  clientfield::register("toplayer", "" + #"silver_bullet_weapon_fx", 8000, 1, "int");
   clientfield::register("world", "" + #"hash_7fcdc47572bdbafa", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"force_stream_model", 8000, 1, "int");
   clientfield::register("world", "" + #"hash_458d10e70473adfd", 8000, 1, "int");
-  zm_sq::register(#"zm_mansion_pap_quest", #"hash_12a37f2c621d1245", #"capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
+  zm_sq::register(#"zm_mansion_pap_quest", #"capture_souls_step", #"capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
   zm_sq::register(#"zm_mansion_silver_bullet", #"collect_silver", #"silver_bullet", &mansion_silver_bullet::init, &mansion_silver_bullet::cleanup);
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
@@ -294,7 +294,7 @@ on_player_spawned() {
   self.var_d049df11 = 0;
   self.var_c09a076a = 0;
   self.is_blue = 0;
-  self clientfield::set_to_player("" + #"hash_6a4f537da00ae3f9", 0);
+  self clientfield::set_to_player("" + #"silver_bullet_weapon_fx", 0);
   self thread function_3bd89e18();
   self thread function_3cdddd34();
   self.var_aed1893c = [];
@@ -903,7 +903,7 @@ function_2d164b86() {
   var_3f772556 = getent("artifact_mind_card", "targetname");
   var_3f772556 linkto(mdl_artifact);
   mdl_artifact clientfield::set("" + #"activate_mansion_artifact", 1);
-  var_3f772556 clientfield::set("" + #"hash_44ee99a6591fe600", 1);
+  var_3f772556 clientfield::set("" + #"activate_mansion_artifact_card", 1);
   mdl_artifact notsolid();
   mdl_artifact bobbing((0, 0, 1), 0.5, 5);
   fx_holder = util::spawn_model("tag_origin", mdl_artifact.origin, mdl_artifact.angles);
@@ -924,7 +924,7 @@ function_2d164b86() {
     var_fdbbb780 = 1;
   }
 
-  s_result = level waittill(#"hash_3e80d503318a5674");
+  s_result = level waittill(#"artifact_picked_up");
 
   if(zm_custom::function_901b751c(#"zmpowerstate") == 2) {
     level flag::set("power_on1");
@@ -950,7 +950,7 @@ function_2d164b86() {
   }
 
   mdl_artifact clientfield::set("" + #"activate_mansion_artifact", 2);
-  var_3f772556 clientfield::set("" + #"hash_44ee99a6591fe600", 0);
+  var_3f772556 clientfield::set("" + #"activate_mansion_artifact_card", 0);
   wait 3;
   var_3f772556 delete();
   mdl_artifact setModel(#"hash_57d5802b9383f9c7");
@@ -1086,9 +1086,9 @@ function_94cf8d37(var_62406c, var_62c4256, n_acceleration, n_speed) {
     var_62c4256 setspeed(n_speed);
   }
 
-  var_62c4256 clientfield::set("" + #"hash_602ae5683c010563", 1);
+  var_62c4256 clientfield::set("" + #"power_on_projectile_fx", 1);
   var_62c4256 vehicle::get_on_and_go_path(nd_spline);
-  var_62c4256 clientfield::set("" + #"hash_602ae5683c010563", 0);
+  var_62c4256 clientfield::set("" + #"power_on_projectile_fx", 0);
   var_62c4256 clientfield::increment("" + #"hash_4bd91c5285da0899", 1);
   wait 0.1;
   var_62c4256 delete();
@@ -1597,10 +1597,10 @@ devgui_setup() {
 
 function_3f147b12(cmd) {
   switch (cmd) {
-    case # "hash_3f7ea542adb3e296":
+    case # "mansion_open_sesame":
       level thread open_sesame();
       return 1;
-    case # "hash_50d92ca3c6c7c2a8":
+    case # "super_open_sesame":
       level open_sesame();
       function_1aba9a64();
       level notify(#"hash_2588983e2be22ca5");
@@ -1665,13 +1665,13 @@ function_3f147b12(cmd) {
     case # "hash_50721510760870d3":
       level flag::set("<dev string:x3b3f>");
       break;
-    case # "hash_38316c2c32e062e1":
+    case # "special_rounds_wolf":
       zm_devgui::zombie_devgui_goto_round(level.var_abe2c289);
       break;
     case # "hash_bb64387472f6f70":
       zm_devgui::zombie_devgui_goto_round(level.var_5657e981);
       break;
-    case # "hash_32a1dfdaac71530":
+    case # "special_rounds_mixed":
       zm_devgui::zombie_devgui_goto_round(level.var_83b4d39);
       break;
     case # "hash_4d26340ade7eef62":
@@ -1727,7 +1727,7 @@ function_3f147b12(cmd) {
     case # "hash_5bf31fb6caf6eac5":
       zombie_werewolf_util::function_47a88a0c(1, undefined, 1);
       break;
-    case # "hash_141442e4fca71a1d":
+    case # "force_spawn_wolf":
       zombie_dog_util::function_62db7b1c(1, undefined);
       break;
     case # "hash_50f5df2c61fab9c0":
@@ -2103,7 +2103,7 @@ function_3f147b12(cmd) {
       level scene::init_streamer(#"cin_zm_mansion_outro_butler", #"allies", 0, 0);
       level thread play_outro_igc();
       break;
-    case # "hash_2b5e2a1e2bb301d1":
+    case # "special_round_fog_stop":
     case # "special_round_fog":
       function_d7bc714e(cmd);
       break;

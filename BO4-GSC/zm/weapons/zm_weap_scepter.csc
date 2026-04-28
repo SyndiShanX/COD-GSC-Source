@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"hash_1c2f974106158a5f"] = #"hash_7c1a6aad09dc0d7a";
   level._effect[#"hash_1c28ab41060f8dad"] = #"hash_7c145ead09d78d68";
   level._effect[#"scepter_bubble"] = #"hash_17756eb35aac3766";
-  level._effect[#"hash_4c17911c3aed59ae"] = #"hash_15d8d928da3054a8";
+  level._effect[#"scepter_bubble_end"] = #"hash_15d8d928da3054a8";
   level._effect[#"hash_47a7d03689c68789"] = #"hash_7bf95975cc22d9e3";
   level._effect[#"scepter_revive"] = #"hash_7247f41820f6a4ac";
   level._effect[#"scepter_heal"] = #"zombie/fx_bgb_near_death_3p";
@@ -43,8 +43,8 @@ __init__() {
   level._effect[#"hash_3c76ccfed62fd65c"] = #"hash_6838372e395a2dad";
   level._effect[#"hash_143a6ec5331de8ec"] = #"hash_2dfc8a9a16973a20";
   level._effect[#"hash_14407ac5332268fe"] = #"hash_2e02969a169bba32";
-  level._effect[#"hash_37498552cad06776"] = #"hash_2bd6cabc06cbf037";
-  level._effect[#"hash_37429952caca6ac4"] = #"hash_2bcfbebc06c5bd25";
+  level._effect[#"scepter_melee_1p"] = #"hash_2bd6cabc06cbf037";
+  level._effect[#"scepter_melee_3p"] = #"hash_2bcfbebc06c5bd25";
   level._effect[#"turret_zombie_shock"] = "zm_weapons/fx8_scepter_ray_zmb_hit_shock";
   level._effect[#"turret_zombie_explode"] = "zm_weapons/fx8_scepter_ray_zmb_hit_exp";
   level._effect[#"skull_turret_shock_eyes"] = "zm_weapons/fx8_scepter_ray_zmb_hit_eye";
@@ -61,11 +61,11 @@ function_abff2ba8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_cde26b0e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    playviewmodelfx(localclientnum, level._effect[#"hash_37498552cad06776"], "tag_flash");
+    playviewmodelfx(localclientnum, level._effect[#"scepter_melee_1p"], "tag_flash");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[#"hash_37429952caca6ac4"], self, "tag_flash");
+  util::playFXOnTag(localclientnum, level._effect[#"scepter_melee_3p"], self, "tag_flash");
 }
 
 skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -227,7 +227,7 @@ beacon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 
   if(isDefined(self.n_beacon_fx)) {
     deletefx(localclientnum, self.n_beacon_fx, 1);
-    util::playFXOnTag(localclientnum, level._effect[#"hash_4c17911c3aed59ae"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"scepter_bubble_end"], self, "tag_origin");
     self.n_beacon_fx = undefined;
   }
 

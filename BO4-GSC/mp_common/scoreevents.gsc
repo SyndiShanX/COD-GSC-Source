@@ -349,7 +349,7 @@ scoreeventplayerkill(data, time) {
 
       if(isDefined(sensor)) {
         if(function_9aef690a(weapon)) {
-          processscoreevent(#"hash_1f661efe5e6707ad", var_78056843, victim, weapon);
+          processscoreevent(#"sensor_dart_assist_unique", var_78056843, victim, weapon);
         } else {
           processscoreevent(#"sensor_dart_assist", var_78056843, victim, weapon);
         }
@@ -484,7 +484,7 @@ scoreeventplayerkill(data, time) {
     if(victimlastvisionpulsedtime != 0 && victimlastvisionpulsedtime > time - level.weaponvisionpulse.var_9d776ba6) {
       if(isDefined(victimlastvisionpulsedby) && attacker != victimlastvisionpulsedby && attacker util::isenemyplayer(victimlastvisionpulsedby) == 0) {
         if(function_9aef690a(weapon)) {
-          processscoreevent(#"hash_bad79b50f40ce0b", victimlastvisionpulsedby, victim, level.weaponvisionpulse);
+          processscoreevent(#"vision_pulse_assist_unique", victimlastvisionpulsedby, victim, level.weaponvisionpulse);
         } else {
           processscoreevent(#"vision_pulse_assist", victimlastvisionpulsedby, victim, level.weaponvisionpulse);
         }
@@ -533,9 +533,9 @@ scoreeventplayerkill(data, time) {
 
       if(isDefined(var_7006e4f4) && var_504c7a2f == 1) {
         if(var_7006e4f4 == attacker) {
-          processscoreevent(#"hash_3d3467f13cf43727", attacker, victim, getweapon(#"mute_smoke"));
+          processscoreevent(#"mute_smoke_kill", attacker, victim, getweapon(#"mute_smoke"));
         } else {
-          processscoreevent(#"hash_5a52344f66f68864", var_7006e4f4, victim, weapon);
+          processscoreevent(#"mute_smoke_assist", var_7006e4f4, victim, weapon);
         }
       }
     }
@@ -1442,7 +1442,7 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     processscoreevent(#"lightninggun_multikill", self, victim, weapon);
     self multikillmedalachievement();
   } else if(self.recentlightningguncount == 2) {
-    processscoreevent(#"hash_1ff9cffb9d62d81a", self, victim, weapon);
+    processscoreevent(#"tempest_multikill_2", self, victim, weapon);
     self multikillmedalachievement();
   }
 

@@ -419,7 +419,7 @@ function_482c54d5(watcher, owner) {
     ai_zombie thread function_aa1b44dc(self);
   }
 
-  s_result = self waittilltimeout(5, #"stationary", #"hash_14fd7b6a20ac8f44");
+  s_result = self waittilltimeout(5, #"stationary", #"stuck_to_zombie");
   waitframe(1);
 
   if(isPlayer(s_result.target)) {
@@ -542,7 +542,7 @@ function_aa1b44dc(e_grenade) {
 
   if(s_result.projectile === e_grenade) {
     self.var_4bfa8f6c = e_grenade;
-    e_grenade notify(#"hash_14fd7b6a20ac8f44");
+    e_grenade notify(#"stuck_to_zombie");
   }
 }
 

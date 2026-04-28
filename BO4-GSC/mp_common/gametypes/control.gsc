@@ -94,9 +94,9 @@ event_handler[gametype_init] main(eventstruct) {
   level.audiocues = [];
   level.mission_bundle = getscriptbundle("mission_settings_control");
   globallogic_spawn::addsupportedspawnpointtype("control");
-  game.strings[#"hash_bab7f2001813aa7"] = #"hash_15294f07ee519376";
+  game.strings[#"all_zones_captured_winner"] = #"hash_15294f07ee519376";
   game.strings[#"hash_5db475ae2d5164e1"] = #"hash_3a9b595d0bf81f13";
-  hud_message::function_36419c2(1, game.strings[#"hash_bab7f2001813aa7"], game.strings[#"hash_5db475ae2d5164e1"]);
+  hud_message::function_36419c2(1, game.strings[#"all_zones_captured_winner"], game.strings[#"hash_5db475ae2d5164e1"]);
   level.audioplaybackthrottle = int(level.mission_bundle.msaudioplaybackthrottle);
 
   if(!isDefined(level.audioplaybackthrottle)) {

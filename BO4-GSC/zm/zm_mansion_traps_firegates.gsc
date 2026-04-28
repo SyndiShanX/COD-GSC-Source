@@ -56,7 +56,7 @@ __main__() {}
 
 init_clientfields() {
   clientfield::register("scriptmover", "" + #"trap_light", 8000, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_17df66ef5f71c0de", 8000, 2, "int");
+  clientfield::register("scriptmover", "" + #"trap_light_wolf", 8000, 2, "int");
 }
 
 init() {

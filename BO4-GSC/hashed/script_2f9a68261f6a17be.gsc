@@ -24,7 +24,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_149b9c514fee8fc3", &on_begin, &on_end);
+  zm_trial::register_challenge(#"trap_kills_only", &on_begin, &on_end);
 }
 
 on_begin() {
@@ -96,15 +96,15 @@ function_33f0ddd3(s_event) {
 }
 
 is_active() {
-  s_challenge = zm_trial::function_a36e8c38(#"hash_149b9c514fee8fc3");
+  s_challenge = zm_trial::function_a36e8c38(#"trap_kills_only");
   return isDefined(s_challenge);
 }
 
 function_70594057() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   level waittill(#"zombie_total_set");
 
   for(n_kills = 0; true; n_kills++) {
-    level waittill(#"trap_kill", #"hash_528d7b7f7d6c51a1", #"hash_317f58ba0d580c27", #"hash_148b3ce521088846");
+    level waittill(#"trap_kill", #"fan_trap_kill", #"acid_trap_kill", #"spin_trap_kill");
   }
 }

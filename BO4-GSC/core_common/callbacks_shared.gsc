@@ -431,11 +431,11 @@ remove_on_offhand_fire(func, obj) {
 }
 
 function_4b7977fe(func, obj) {
-  add_callback(#"hash_198a389d6b65f68d", func, obj);
+  add_callback(#"grenade_launcher_fired", func, obj);
 }
 
 function_61583a71(func, obj) {
-  remove_callback(#"hash_198a389d6b65f68d", func, obj);
+  remove_callback(#"grenade_launcher_fired", func, obj);
 }
 
 on_detonate(func, obj) {
@@ -483,11 +483,11 @@ remove_on_trigger_once(func, obj) {
 }
 
 function_33f0ddd3(func, obj) {
-  add_callback(#"hash_39bf72fd97e248a0", func, obj);
+  add_callback(#"on_player_loadout_changed", func, obj);
 }
 
 function_824d206(func, obj) {
-  remove_callback(#"hash_39bf72fd97e248a0", func, obj);
+  remove_callback(#"on_player_loadout_changed", func, obj);
 }
 
 on_boast(func, obj) {
@@ -499,11 +499,11 @@ remove_on_boast(func, obj) {
 }
 
 function_5753ac6e(func, obj) {
-  add_callback(#"hash_4a9c56bba76da754", func, obj);
+  add_callback(#"on_boast_end", func, obj);
 }
 
 function_16046baa(func, obj) {
-  remove_callback(#"hash_4a9c56bba76da754", func, obj);
+  remove_callback(#"on_boast_end", func, obj);
 }
 
 on_menu_response(func, obj) {
@@ -716,7 +716,7 @@ event_handler[player_boast] function_3b159f77(eventstruct) {
 
 event_handler[event_8451509a] function_e35aeddd(eventstruct) {
   self endon(#"disconnect");
-  callback(#"hash_4a9c56bba76da754");
+  callback(#"on_boast_end");
 }
 
 event_handler[player_melee] codecallback_playermelee(eventstruct) {

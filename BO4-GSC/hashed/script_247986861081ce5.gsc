@@ -63,11 +63,11 @@ function_bc0ec5b3(b_activate) {
 
 function_a5cebb9a(b_show) {
   if(b_show) {
-    function_260958b(#"hash_7ed874a0ecdefd90", level.var_b92b8b07.n_index);
+    function_260958b(#"zm_office_challenges", level.var_b92b8b07.n_index);
     return;
   }
 
-  function_260958b(#"hash_7ed874a0ecdefd90", 0);
+  function_260958b(#"zm_office_challenges", 0);
 }
 
 function_92df87d7() {

@@ -600,7 +600,7 @@ function_2e10e66e(var_ab9610ad = undefined) {
     return;
   }
 
-  item = function_434d0c2b(#"backpack", array(#"hash_7c3701ba5f0879c2"), var_ab9610ad);
+  item = function_434d0c2b(#"backpack", array(#"backpack_item_fast"), var_ab9610ad);
 
   if(isDefined(item)) {
     equip_backpack(item);

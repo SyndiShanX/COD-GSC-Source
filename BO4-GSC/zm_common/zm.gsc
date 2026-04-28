@@ -736,7 +736,7 @@ function_1442d44f() {
   zombie_utility::set_zombie_var(#"zombie_health_increase", var_c6ceb446[#"zomhealthincrease"], 0);
   zombie_utility::set_zombie_var(#"zombie_health_increase_multiplier", var_c6ceb446[#"zomhealthincreasemult"], 1);
   zombie_utility::set_zombie_var(#"zombie_health_start", var_c6ceb446[#"zombasehealth"], 0);
-  zombie_utility::set_zombie_var(#"hash_7d5a25e2463f7fc5", var_c6ceb446[#"zomspawndelay"], 0);
+  zombie_utility::set_zombie_var(#"zombie_spawn_delay_base", var_c6ceb446[#"zomspawndelay"], 0);
   zombie_utility::set_zombie_var(#"zombie_new_runner_interval", var_c6ceb446[#"zomnewrunnerint"], 0);
   zombie_utility::set_zombie_var(#"zombie_max_ai", var_c6ceb446[#"zommaxcount"], 0);
   zombie_utility::set_zombie_var(#"zombie_ai_per_player", var_c6ceb446[#"zommaxcountperplayer"], 0);
@@ -750,8 +750,8 @@ function_1442d44f() {
   zombie_utility::set_zombie_var(#"penalty_died", var_c6ceb446[#"plypenaltydeath"], 1);
   zombie_utility::set_zombie_var(#"penalty_downed", var_c6ceb446[#"plypenaltydowned"], 1);
   zombie_utility::set_zombie_var(#"hash_3037a1f286b662e6", var_c6ceb446[#"plypenaltydownedpointstep"], 1);
-  zombie_utility::set_zombie_var(#"hash_3098c53bba6402d3", var_c6ceb446[#"plyselfrevivecountcoop"], 0);
-  zombie_utility::set_zombie_var(#"hash_67ae1b8cbb7c985", var_c6ceb446[#"plyselfrevivecountsolo"], 0);
+  zombie_utility::set_zombie_var(#"self_revive_count_coop", var_c6ceb446[#"plyselfrevivecountcoop"], 0);
+  zombie_utility::set_zombie_var(#"self_revive_count_solo", var_c6ceb446[#"plyselfrevivecountsolo"], 0);
   zombie_utility::set_zombie_var(#"hash_cc85b961f25c2ff", var_c6ceb446[#"plyshielddamagemult"], 1);
   zombie_utility::set_zombie_var(#"retain_weapons", var_c6ceb446[#"plyretainweapons"], 0);
   zombie_utility::set_zombie_var(#"perks_decay", var_c6ceb446[#"plyperksdecay"], 0);
@@ -1366,7 +1366,7 @@ actor_killed_override(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     if(isDefined(self.archetype) && (self.archetype == #"tiger" || self.archetype == #"brutus" || self.archetype == #"zombie_dog" || self.archetype == #"catalyst" || self.archetype == #"stoker" || self.archetype == #"blight_father")) {
       bookmarkname = #"hash_1553fcea4f6a00e";
     } else {
-      bookmarkname = #"hash_37300d83d8e6f1fc";
+      bookmarkname = #"actor_kill_single";
     }
 
     if(bookmarkname == #"hash_1553fcea4f6a00e") {
@@ -2075,7 +2075,7 @@ player_too_many_players_check() {
 
   if(getplayers().size > max_players) {
     foreach(player in getplayers()) {
-      player val::set(#"hash_1a88595aedca8cc4", "freezecontrols");
+      player val::set(#"too_many_players", "freezecontrols");
     }
 
     level notify(#"end_game");

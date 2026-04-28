@@ -94,7 +94,7 @@ activate_safes(targetname, count) {
 }
 
 function_fb346efb() {
-  level flagsys::wait_till(#"hash_405e46788e83af41");
+  level flagsys::wait_till(#"death_circle_start");
   lastcircleindex = level.deathcircles.size - 1;
 
   while(level.deathcircleindex < lastcircleindex) {

@@ -178,7 +178,7 @@ function_ec34b5ee(alias) {
     level.var_e356155f = 1;
     level function_2389bb7a(alias);
     level.var_e356155f = 0;
-    level notify(#"hash_62d5ef9902abf374");
+    level notify(#"computer_done_speaking");
   }
 }
 
@@ -503,14 +503,14 @@ function_c05cc102(s_params) {
   s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode", #"death");
 
   if(isDefined(s_params.projectile) && s_waitresult._notify == "death") {
-    level notify(#"hash_3042a9bf2f57ea0a", {
+    level notify(#"wraith_fire_impact", {
       #attacker: self, #var_814c9389: s_params.projectile.origin
     });
     return;
   }
 
   if(s_waitresult._notify == "projectile_impact_explode") {
-    level notify(#"hash_3042a9bf2f57ea0a", {
+    level notify(#"wraith_fire_impact", {
       #attacker: self, #var_814c9389: s_waitresult.position
     });
   }

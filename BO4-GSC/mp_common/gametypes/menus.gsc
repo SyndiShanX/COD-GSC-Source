@@ -107,7 +107,7 @@ on_menu_response(params) {
     }
 
     if(sessionmodeiswarzonegame()) {
-      level notify(#"hash_197c640e2f684a74");
+      level notify(#"force_end_transition");
       return;
     }
 

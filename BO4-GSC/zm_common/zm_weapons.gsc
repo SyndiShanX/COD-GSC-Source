@@ -1858,7 +1858,7 @@ function_7c5dd4bd(w_weapon) {
   }
 
   self setweaponammoclip(w_weapon, w_weapon.clipsize);
-  self notify(#"hash_278526d0bbdb4ce7");
+  self notify(#"give_full_ammo");
 
   if(zm_trial_reset_loadout::is_active(1)) {
     self function_7f7c1226(w_weapon);

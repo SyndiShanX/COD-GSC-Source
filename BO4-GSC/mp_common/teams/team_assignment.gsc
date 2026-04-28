@@ -49,11 +49,11 @@ function_ee150fcc(team, team_players) {
 
   foreach(player in team_players) {
     party = player getparty();
-    assert(party.var_a15e4438 <= level.maxteamplayers);
-    var_ab9e77bf[party.party_id] = party.fill ? party.var_a15e4438 : level.maxteamplayers;
+    assert(party.party_member_count <= level.maxteamplayers);
+    var_ab9e77bf[party.party_id] = party.fill ? party.party_member_count : level.maxteamplayers;
 
     if(var_f8896168) {
-      var_ab9e77bf[party.party_id] = party.var_a15e4438;
+      var_ab9e77bf[party.party_id] = party.party_member_count;
     }
   }
 
@@ -106,7 +106,7 @@ function_efe5a681(team) {
   available_spots = function_ee150fcc(team, team_players);
   party = self getparty();
 
-  if(party.var_a15e4438 > available_spots) {
+  if(party.party_member_count > available_spots) {
     return false;
   }
 
@@ -252,7 +252,7 @@ function_1e545bc7() {
 
   party = self getparty();
 
-  if(isDefined(party) && party.var_a15e4438 > 1) {
+  if(isDefined(party) && party.party_member_count > 1) {
     return function_5d02dd86(party);
   }
 
@@ -666,7 +666,7 @@ function_6c66cc64(team) {
 
   foreach(player in players) {
     party = player getparty();
-    println("<dev string:x38>" + "<dev string:x172>" + player.name + "<dev string:x177>" + (party.fill ? "<dev string:x183>" : "<dev string:x189>") + "<dev string:x18e>" + party.var_a15e4438);
+    println("<dev string:x38>" + "<dev string:x172>" + player.name + "<dev string:x177>" + (party.fill ? "<dev string:x183>" : "<dev string:x189>") + "<dev string:x18e>" + party.party_member_count);
   }
 }
 

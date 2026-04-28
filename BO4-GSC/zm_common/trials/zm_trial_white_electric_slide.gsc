@@ -75,10 +75,10 @@ on_end(round_reset) {
 }
 
 function_729edb5f() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(self.var_795dfe46 < level.var_795dfe46) {
-    self waittill(#"hash_15541419dbbe7e1a");
+    self waittill(#"avoid_electric_trap");
     self.var_795dfe46++;
 
     if(self.var_795dfe46 < level.var_795dfe46) {

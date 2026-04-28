@@ -807,7 +807,7 @@ robot_damage_none(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
 shutdown_robot() {
   self.active = 0;
-  self val::set(#"hash_3de2bce887b7b68d", "ignoreme", 1);
+  self val::set(#"escort_robot_shutdown", "ignoreme", 1);
   self.canwalk = 0;
   self stop_robot();
   self notify(#"robot_shutdown");
@@ -834,7 +834,7 @@ reboot_robot() {
   level endon(#"game_ended");
   self.active = 1;
   self.shutdowndamage = 0;
-  self val::reset(#"hash_3de2bce887b7b68d", "ignoreme");
+  self val::reset(#"escort_robot_shutdown", "ignoreme");
   self notify(#"robot_reboot");
 
   if(isDefined(level.shutdowndamage) && level.shutdowndamage) {

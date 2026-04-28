@@ -41,8 +41,8 @@
 #namespace zm_orange_mq_hell;
 
 preload() {
-  clientfield::register("scriptmover", "" + #"hash_6aaf03a4358f45f5", 24000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_6a4317183d0ca452", 24000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"ring_of_fire_start", 24000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"ring_of_fire_shrink", 24000, 1, "counter");
   clientfield::register("world", "" + #"lava_init", 24000, 1, "int");
   clientfield::register("world", "" + #"lava_control", 24000, 2, "int");
   clientfield::register("world", "" + #"hash_72b5b0359ca48427", 24000, 1, "int");
@@ -123,7 +123,7 @@ function_f1749965() {
   }
 
   level.var_5d5b7e8e.e_ring = util::spawn_model("p8_big_cylinder", level.var_5d5b7e8e.s_ring_center.origin);
-  level.var_5d5b7e8e.e_ring clientfield::increment("" + #"hash_6aaf03a4358f45f5", 1);
+  level.var_5d5b7e8e.e_ring clientfield::increment("" + #"ring_of_fire_start", 1);
   level.var_5d5b7e8e.e_ring.n_radius = 500;
   level.var_5d5b7e8e.e_ring thread function_af9fb8d1();
   level.var_5d5b7e8e.e_ring thread function_556d1b32();
@@ -138,7 +138,7 @@ function_556d1b32() {
   while(self.n_radius > 200) {
     wait 0.1;
     self.n_radius = max(200, self.n_radius - 1);
-    level.var_5d5b7e8e.e_ring clientfield::increment("" + #"hash_6a4317183d0ca452", 1);
+    level.var_5d5b7e8e.e_ring clientfield::increment("" + #"ring_of_fire_shrink", 1);
   }
 }
 
@@ -560,7 +560,7 @@ function_27c3d40f() {
 
 function_199360fe() {
   wait 6;
-  playsoundatposition(#"hash_7450f52d085366c6", (0, 0, 0));
+  playsoundatposition(#"evt_last_stand_riser", (0, 0, 0));
 }
 
 function_d12badc3(n_radius) {

@@ -102,7 +102,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "ra_eyes_beam_fire", 1, 1, "int", &ra_eyes_beam_fire, 0, 0);
   clientfield::register("scriptmover", "ra_rooftop_eyes_beam_fire", 1, 1, "int", &ra_rooftop_eyes_beam_fire, 0, 0);
   clientfield::register("world", "" + #"hash_57c08e5f4792690c", 1, 1, "int", &function_339af7bd, 0, 0);
-  clientfield::register("world", "" + #"hash_440f23773f551a48", 1, 1, "int", &function_e131f9b8, 0, 0);
+  clientfield::register("world", "" + #"force_stream_glyph", 1, 1, "int", &function_e131f9b8, 0, 0);
   clientfield::register("world", "" + #"hash_4e5e2b411c997804", 1, 1, "int", &function_98d53b6b, 0, 0);
   clientfield::register("toplayer", "" + #"maelstrom_initiate", 1, 1, "counter", &maelstrom_initiate, 0, 0);
   clientfield::register("world", "" + #"maelstrom_initiate_fx", 1, 1, "int", &maelstrom_initiate_fx, 0, 0);
@@ -112,11 +112,11 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"maelstrom_discharge", 1, 1, "counter", &maelstrom_discharge, 0, 0);
   clientfield::register("actor", "" + #"maelstrom_death", 1, 1, "counter", &maelstrom_death, 0, 0);
   clientfield::register("toplayer", "" + #"maelstrom_storm", 1, 1, "int", &maelstrom_storm, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_182c03ff2a21c07c", 1, 1, "counter", &function_2d6ec02, 0, 0);
+  clientfield::register("toplayer", "" + #"maelstrom_storm_change", 1, 1, "counter", &function_2d6ec02, 0, 0);
   clientfield::register("toplayer", "" + #"maelstrom_ending", 1, 1, "int", &maelstrom_ending, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_63e758aa5387132a", 1, 1, "counter", &function_7dbeb0c5, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_23ba00d2f804acc2", 1, 1, "int", &function_fa2e6690, 0, 0);
-  clientfield::register("world", "" + #"hash_16b9e3d69cb7a017", 1, 1, "int", &function_fc502d48, 0, 1);
+  clientfield::register("scriptmover", "" + #"defend_key_glint", 1, 1, "int", &defend_key_glint, 0, 0);
+  clientfield::register("world", "" + #"boss_battle_teleport", 1, 1, "int", &function_fc502d48, 0, 1);
   clientfield::register("world", "" + #"hash_1f09a5290d31eb37", 1, 1, "counter", &function_5b893414, 0, 0);
   clientfield::register("world", "" + #"hash_2383fd01b106ced8", 1, 1, "int", &function_4c2b87ed, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_2407f687f7d24a83", 1, 1, "int", &function_5cdc8b28, 0, 0);
@@ -130,7 +130,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_73172b799c18404e"] = #"hash_7d94f7b4389cad84";
   level._effect[#"entry_gate_dust"] = #"hash_43b2eaf6037de947";
   level._effect[#"special_round_smoke"] = #"hash_7f90f442be248933";
-  level._effect[#"hash_2a49b738100ad198"] = #"hash_573f4333a69a2e97";
+  level._effect[#"special_round_fire"] = #"hash_573f4333a69a2e97";
   level._effect[#"special_round_camera_start"] = #"hash_5e456969dcb6d449";
   level._effect[#"special_round_camera_persist"] = #"hash_30a51086d1de2e56";
   level._effect[#"trap_switch_green"] = #"hash_24ce0898c3432283";
@@ -152,7 +152,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"brazier_fire_green"] = #"hash_1839d27856f4aed9";
   level._effect[#"brazier_fire_red"] = #"hash_4d95d8d2f3b07ca5";
   level._effect[#"brazier_fire_purple"] = #"hash_231c5e173b446f0c";
-  level._effect[#"hash_169c8ab62603115c"] = #"hash_2a4dc3aacf70bb96";
+  level._effect[#"brazier_fire_yellow"] = #"hash_2a4dc3aacf70bb96";
   level._effect[#"head_fire_blue"] = #"hash_5089724c9ec9d4f7";
   level._effect[#"head_fire_green"] = #"hash_29adecede9b00a2";
   level._effect[#"head_fire_purple"] = #"hash_19cfaef54c89e021";
@@ -173,7 +173,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_1f7bfd354d2472e3"] = #"hash_153286962fe0c0c5";
   level._effect[#"hash_1f7511354d1e7631"] = #"hash_153992962fe6f3d7";
   level._effect[#"maelstrom_initiate"] = #"hash_223c6a623adb13fb";
-  level._effect[#"hash_504ad50f841882fe"] = #"hash_26b672f2c1c8a570";
+  level._effect[#"maelstrom_conduct_elbow"] = #"hash_26b672f2c1c8a570";
   level._effect[#"hash_2cf77bcee904664d"] = #"hash_50ce930e4dd4bc12";
   level._effect[#"hash_2cf75dcee9043353"] = #"hash_50c7bb0e4dcee15c";
   level._effect[#"hash_4a9ad8ec06102c34"] = #"hash_4d91ce766ebeda81";
@@ -190,7 +190,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"maelstrom_death"] = #"hash_6a5c671e82cb5243";
   level._effect[#"maelstrom_camera_fx"] = #"hash_33ca6401bbf3798c";
   level._effect[#"hash_63e758aa5387132a"] = #"hash_7df55a8e3d87037a";
-  level._effect[#"hash_23ba00d2f804acc2"] = #"hash_56b121a7e7eee303";
+  level._effect[#"defend_key_glint"] = #"hash_56b121a7e7eee303";
   level._effect[#"hash_5afda864f8b64f5c"] = #"hash_5f48f8d916a0f612";
   level thread zm_audio_sq::init();
   level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_towers_weapons.csv";
@@ -541,7 +541,7 @@ toggle_chaos_ball(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_fd119bd7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_4e35f286 = playFX(localclientnum, level._effect[#"hash_37043a271f6dd852"], self.origin);
+    self.var_4e35f286 = playFX(localclientnum, level._effect[#"chaos_ball_light"], self.origin);
     return;
   }
 
@@ -1309,7 +1309,7 @@ function_57f3914e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      s_fx.n_fire = playFX(localclientnum, level._effect[#"hash_169c8ab62603115c"], s_fx.origin);
+      s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
       playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
@@ -1342,7 +1342,7 @@ function_6e6d4bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      s_fx.n_fire = playFX(localclientnum, level._effect[#"hash_169c8ab62603115c"], s_fx.origin);
+      s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
       playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
@@ -1375,7 +1375,7 @@ function_66050c9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      s_fx.n_fire = playFX(localclientnum, level._effect[#"hash_169c8ab62603115c"], s_fx.origin);
+      s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
       playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
@@ -1408,7 +1408,7 @@ function_1c231f3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      s_fx.n_fire = playFX(localclientnum, level._effect[#"hash_169c8ab62603115c"], s_fx.origin);
+      s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
       playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
@@ -1468,7 +1468,7 @@ function_ee4f01d8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 acid_trap_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self.n_acid_trap_death_fx = util::playFXOnTag(localclientnum, level._effect[#"acid_death"], self, "j_spine4");
-    self.var_5911b395 = self playLoopSound(#"hash_21fbee9ffef9a6d7");
+    self.var_5911b395 = self playLoopSound(#"zmb_trap_acid_loop_npc");
     return;
   }
 
@@ -1529,7 +1529,7 @@ acid_trap_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   if(newval) {
     self postfx::playpostfxbundle("pstfx_zm_acid_dmg_towers");
     self postfx::playpostfxbundle("pstfx_zm_acid_dmg_towers_2");
-    self.var_431ddde9 = self playLoopSound(#"hash_341a3fa00975f232");
+    self.var_431ddde9 = self playLoopSound(#"zmb_trap_acid_loop_plr");
     return;
   }
 
@@ -1843,9 +1843,9 @@ function_7dbeb0c5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   playFX(localclientnum, level._effect[#"hash_63e758aa5387132a"], self.origin, anglesToForward(self.angles));
 }
 
-function_fa2e6690(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+defend_key_glint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self.var_1cac7f38 = util::playFXOnTag(localclientnum, level._effect[#"hash_23ba00d2f804acc2"], self, "tag_origin");
+    self.var_1cac7f38 = util::playFXOnTag(localclientnum, level._effect[#"defend_key_glint"], self, "tag_origin");
     return;
   }
 

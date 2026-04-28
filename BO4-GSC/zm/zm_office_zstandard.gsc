@@ -200,7 +200,7 @@ defend_areas() {
   level thread function_bee94926();
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
   level thread zm_utility::enable_power_switch(1, 1);
-  level notify(#"hash_2ec0be5019c6c395");
+  level notify(#"office_power_on");
   level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"power_activated");
   level.var_4c71614b = 1;
   zm_utility::function_fef4b36a(str_next_defend);
@@ -307,7 +307,7 @@ function_fa0d0109(var_37b7b46a, var_7f66a3c0, str_next_defend) {
 enable_groom_lake() {
   function_231d0b19();
   level flag::set(#"hash_537cc10c9deca9da");
-  level flag::set(#"hash_381e771ed6c80ccb");
+  level flag::set(#"groom_lake_enabled");
   zm_office_teleporters::function_bb3f9afd();
   level.var_a23b5c5 movez(150, 1);
 }

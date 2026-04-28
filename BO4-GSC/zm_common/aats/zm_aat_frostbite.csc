@@ -24,7 +24,7 @@ __init__() {
   clientfield::register("vehicle", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &function_bad6b477, 1, 0);
   clientfield::register("actor", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
   clientfield::register("vehicle", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
-  level._effect[#"hash_139ac9f86d1a96cd"] = "zm_weapons/fx8_aat_water_torso";
+  level._effect[#"aat_frostbite_trail"] = "zm_weapons/fx8_aat_water_torso";
   level._effect[#"aat_frostbite_explosion"] = "zm_weapons/fx8_aat_water_exp";
 }
 
@@ -36,7 +36,7 @@ function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       str_fx_tag = "tag_origin";
     }
 
-    self.var_c19403bf = util::playFXOnTag(localclientnum, level._effect[#"hash_139ac9f86d1a96cd"], self, str_fx_tag);
+    self.var_c19403bf = util::playFXOnTag(localclientnum, level._effect[#"aat_frostbite_trail"], self, str_fx_tag);
 
     if(self.archetype === #"catalyst" || self.archetype === #"tiger") {
       self thread function_b8cda358(localclientnum);

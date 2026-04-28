@@ -194,7 +194,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
   if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
     if(weapon_utils::ismeleemod(smeansofdeath)) {
       attacker globallogic_score::givepointstowin(int(level.pointspermeleekill));
-      scoreevents::processscoreevent(#"hash_6c8030eb05b53d5a", attacker, self, weapon);
+      scoreevents::processscoreevent(#"melee_kill_sas", attacker, self, weapon);
     } else if(weapon == level.weapon_sas_primary_weapon) {
       attacker.killswithprimary++;
 
@@ -203,7 +203,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
       }
 
       attacker globallogic_score::givepointstowin(level.pointsperprimarykill);
-      scoreevents::processscoreevent(#"hash_614b27b37ccee280", attacker, self, weapon);
+      scoreevents::processscoreevent(#"crossbow_kill_sas", attacker, self, weapon);
     } else if(weapon == level.weapon_sas_primary_grenade_weapon) {
       attacker globallogic_score::givepointstowin(int(level.pointsperprimarygrenadekill));
     } else {
@@ -216,7 +216,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
       }
 
       attacker globallogic_score::givepointstowin(level.pointspersecondarykill);
-      scoreevents::processscoreevent(#"hash_25ec47f9609803a9", attacker, self, weapon);
+      scoreevents::processscoreevent(#"ballistic_knife_kill_sas", attacker, self, weapon);
     }
 
     if(isDefined(level.setbackweapon) && weapon == level.setbackweapon) {

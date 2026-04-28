@@ -24,7 +24,7 @@ autoexec __init__system__() {
 __init__() {
   killstreak_detect::init_shared();
   remote_weapons::init_shared();
-  killstreaks::function_b5b6ef3e(&init_killstreak);
+  killstreaks::on_init_killstreaks(&init_killstreak);
 }
 
 init_killstreak() {

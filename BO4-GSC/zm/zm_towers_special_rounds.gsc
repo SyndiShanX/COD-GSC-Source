@@ -176,7 +176,7 @@ function_461a99a5(s_spot) {
 }
 
 function_f63225b8() {
-  level notify(#"hash_21672c4f6ccf13d0");
+  level notify(#"special_round_starting");
   level thread function_93eab559();
 }
 
@@ -195,7 +195,7 @@ function_9a74f284(var_d25bbdd5) {
     }
   }
 
-  level notify(#"hash_7b9245ff51f3d4f7");
+  level notify(#"special_round_ending");
   level function_417990b9();
   level thread function_39a9e7ce();
 }
@@ -213,7 +213,7 @@ function_a5dc8595() {
 }
 
 function_66d172e9() {
-  level notify(#"hash_21672c4f6ccf13d0");
+  level notify(#"special_round_starting");
   level thread function_93eab559();
 }
 
@@ -232,7 +232,7 @@ function_93b3cc13(var_d25bbdd5) {
     }
   }
 
-  level notify(#"hash_7b9245ff51f3d4f7");
+  level notify(#"special_round_ending");
   level function_417990b9();
   level thread function_39a9e7ce();
 }
@@ -242,7 +242,7 @@ function_1e895d4(var_d25bbdd5) {
     level.var_f8ae1232++;
   }
 
-  level notify(#"hash_7b9245ff51f3d4f7");
+  level notify(#"special_round_ending");
   level function_417990b9();
   level thread function_39a9e7ce();
 }
@@ -309,7 +309,7 @@ function_93eab559(var_b45e3d90 = 0) {
 
   zm_towers_util::function_afd37143(#"special_round_start");
 
-  if(level flag::get(#"hash_6205682540170b8")) {
+  if(level flag::get(#"arena_rock_unlocked")) {
     level thread zm_towers_side_quests::function_5d0d1807();
   }
 }

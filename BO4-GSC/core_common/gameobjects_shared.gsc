@@ -151,7 +151,7 @@ class cinteractobj {
       switch (t_override.classname) {
         case # "trigger_use_new":
         case # "trigger_radius_use":
-        case # "hash_6119f399228d396b":
+        case # "trigger_radius_use_new":
         case # "trigger_use":
           return true;
         default:

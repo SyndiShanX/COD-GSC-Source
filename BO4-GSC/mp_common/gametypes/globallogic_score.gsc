@@ -677,10 +677,10 @@ function_17a678b7(player, scoresub) {
 }
 
 function_889ed975(player, score_add, var_252f7989, var_f8258842) {
-  var_1eb7c454 = getdvarfloat(#"hash_eae9a8ee387705d", 1);
-  score_add = int(score_add * var_1eb7c454);
-  var_252f7989 = int(var_252f7989 * var_1eb7c454);
-  var_f8258842 = int(var_f8258842 * var_1eb7c454);
+  dev_score_multiplier = getdvarfloat(#"dev_score_multiplier", 1);
+  score_add = int(score_add * dev_score_multiplier);
+  var_252f7989 = int(var_252f7989 * dev_score_multiplier);
+  var_f8258842 = int(var_f8258842 * dev_score_multiplier);
 
   score = player.pers[#"score"] + score_add;
   var_e21e8076 = player.pers[#"objscore"];

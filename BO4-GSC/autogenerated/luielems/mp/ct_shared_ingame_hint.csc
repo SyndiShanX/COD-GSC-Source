@@ -57,7 +57,7 @@ class cct_shared_ingame_hint: cluielem {
       return;
     }
 
-    if(#"hash_3d131b584420ca82" == state_name) {
+    if(#"red_paused_fadeout" == state_name) {
       set_data(localclientnum, "_state", 9);
       return;
     }

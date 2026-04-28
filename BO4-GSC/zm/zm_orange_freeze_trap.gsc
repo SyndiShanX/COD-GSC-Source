@@ -87,7 +87,7 @@ function_c2e32275() {
         continue;
       }
 
-      self notify(#"hash_35807fa157a46934");
+      self notify(#"freeze_trap_activated");
       self.e_activator = e_who;
       level.s_freeze_trap.activated_by_player = e_who;
 
@@ -114,7 +114,7 @@ function_270aecf7() {
   open_panels(level.s_freeze_trap.a_s_panels);
 
   while(true) {
-    self waittill(#"hash_35807fa157a46934");
+    self waittill(#"freeze_trap_activated");
     function_91ecec97(level.s_freeze_trap.a_e_lights, "p8_zm_off_trap_switch_light_red_on");
     level.s_freeze_trap.var_6b64b967 = 1;
     e_who = self.e_activator;

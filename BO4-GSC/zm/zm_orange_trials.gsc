@@ -61,7 +61,7 @@ main() {
   zm_player::register_player_damage_callback(&function_dcebc908);
 
   while(true) {
-    level waittill(#"hash_5d42d8ee7a08b543");
+    level waittill(#"trial_round_start");
 
     switch (level.round_number) {
       case 2:
@@ -106,7 +106,7 @@ main() {
       level.var_c3a029eb = 0;
     }
 
-    level waittill(#"hash_7646638df88a3656");
+    level waittill(#"trial_round_end");
 
     if(level.var_c3a029eb === 1 && level.round_number >= 29) {
       level thread lui::screen_flash(0.2, 3, 0.5, 1, "black");
@@ -138,11 +138,11 @@ main() {
     foreach(player in getplayers()) {
       if(player.var_7dc2d507 === 1) {
         waitframe(2);
-        player notify(#"hash_53bfad7081c69dee");
+        player notify(#"water_player_freeze_broken");
         player.var_7dc2d507 = 0;
         player zm_orange_water::function_46c3bbf7();
-        player clientfield::set("" + #"hash_55543319943057f1", 0);
-        player clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
+        player clientfield::set("" + #"water_player_freeze_fx", 0);
+        player clientfield::set_to_player("" + #"water_player_freeze_sfx", 0);
         player clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
         waitframe(2);
         player clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);
@@ -324,11 +324,11 @@ function_7206d28() {
   self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
 
   if(self.var_7dc2d507 === 1) {
-    self notify(#"hash_53bfad7081c69dee");
+    self notify(#"water_player_freeze_broken");
     self.var_7dc2d507 = 0;
     self zm_orange_water::function_46c3bbf7();
-    self clientfield::set("" + #"hash_55543319943057f1", 0);
-    self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
+    self clientfield::set("" + #"water_player_freeze_fx", 0);
+    self clientfield::set_to_player("" + #"water_player_freeze_sfx", 0);
     self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
     waitframe(2);
     self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);
@@ -352,7 +352,7 @@ function_b93ad88d() {
 }
 
 function_53a1ecb9() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   level waittill(#"hash_715188521b564b16");
   ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], undefined);
 
@@ -384,7 +384,7 @@ blood_buff() {
 
   self thread function_8532d13f();
   self zombie_utility::set_zombie_run_cycle("run");
-  level waittill(#"hash_7646638df88a3656");
+  level waittill(#"trial_round_end");
   self val::reset(#"bludy", "takedamage");
   self val::reset(#"bludy", "allowdeath");
 

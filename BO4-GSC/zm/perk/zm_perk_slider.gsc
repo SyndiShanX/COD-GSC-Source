@@ -52,7 +52,7 @@ function_1781c013() {
 }
 
 function_5ba17a72() {
-  clientfield::register("allplayers", "" + #"hash_7b8ad0ed3ef67813", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"perk_slider_explosion", 1, 1, "counter");
 }
 
 function_90f58801(state) {}
@@ -79,15 +79,15 @@ function_1d4d3034() {
 }
 
 function_ae56fb1a(b_pause, str_perk, str_result, n_slot) {
-  self notify(#"hash_6939dd7af68cec");
+  self notify(#"stop_slide_watcher");
   self zm_perks::function_f0ac059f(n_slot, 0, #"perk_slider");
   self zm_perks::function_13880aa5(n_slot, 0, #"perk_slider");
   self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
 }
 
 function_dc9a257a(n_slot) {
-  self notify(#"hash_6939dd7af68cec");
-  self endon(#"disconnect", #"hash_6939dd7af68cec");
+  self notify(#"stop_slide_watcher");
+  self endon(#"disconnect", #"stop_slide_watcher");
   self slide_explosion(n_slot);
   self.var_f354086e = 0;
 
@@ -165,7 +165,7 @@ slide_explosion(n_slot) {
     if(isarray(var_1574e1cf) && var_1574e1cf.size) {
       a_ai = self getenemiesinradius(self.origin, 256);
       a_ai = arraysortclosest(a_ai, self.origin);
-      self clientfield::increment("" + #"hash_7b8ad0ed3ef67813");
+      self clientfield::increment("" + #"perk_slider_explosion");
       self zm_perks::function_13880aa5(n_slot, 0.05, #"perk_slider");
       self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
       var_708c0444 = 0;

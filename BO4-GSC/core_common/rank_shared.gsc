@@ -156,7 +156,7 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
     }
 
     if(isDefined(var_e775f7ed) && var_e775f7ed) {
-      level.scoreinfo[type][#"hash_4e7be147d773e419"] = var_e775f7ed;
+      level.scoreinfo[type][#"job_defining"] = var_e775f7ed;
     }
 
     if(isDefined(dp) && dp) {
@@ -255,8 +255,8 @@ getscoreinfovalue(type) {
       n_score = [[level.scoremodifiercallback]](type, n_score);
     }
 
-    var_1eb7c454 = getdvarfloat(#"hash_eae9a8ee387705d", 1);
-    n_score = int(n_score * var_1eb7c454);
+    dev_score_multiplier = getdvarfloat(#"dev_score_multiplier", 1);
+    n_score = int(n_score * dev_score_multiplier);
 
     return n_score;
   }
@@ -276,7 +276,7 @@ getscoreinfoposition(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_pos = isDefined(level.scoreinfo[type][#"hash_7c1f7c7897445706"]) ? level.scoreinfo[type][#"hash_7c1f7c7897445706"] : 0;
+    n_pos = isDefined(level.scoreinfo[type][#"role_defining"]) ? level.scoreinfo[type][#"role_defining"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_pos)) {
       n_resource = [[level.scoremodifiercallback]](type, n_pos);
