@@ -8,7 +8,7 @@
 #include script_36222395658446f5;
 #include script_46cea9e5d4ef9e21;
 #include script_602009d88d859543;
-#include script_61ef84ea1a82c001;
+#include scripts\zm\zm_escape_weap_quest_spork;
 #include script_668c4fbb94671fb4;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;

@@ -7,7 +7,7 @@
 #include script_3c345dd878d144b7;
 #include script_43de70169069c6ab;
 #include script_4f8f41168a7c3ea8;
-#include script_5db30ea2f37108d;
+#include scripts\zm\zm_escape_weap_quest_spork;
 #include script_675455e5e6c0c5ad;
 #include script_711bbbba637da80;
 #include scripts\core_common\clientfield_shared;

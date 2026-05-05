@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_61ef84ea1a82c001.gsc
+ * Script: zm\zm_escape_weap_quest_spork.gsc
 ***********************************************/
 
 #include scripts\core_common\array_shared;
@@ -27,7 +27,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_273ad667;
+#namespace zm_escape_weap_quest_spork;
 
 autoexec __init__system__() {
   system::register(#"zm_escape_weap_quest_spork", &__init__, &__main__, undefined);
@@ -365,10 +365,10 @@ function_d987ffa1() {
 
 function_2ad53df2(cmd) {
   switch (cmd) {
-    case # "hash_7ecd9429ad1bc7c7":
+    case #"hash_7ecd9429ad1bc7c7":
       level thread function_45d8a460();
       return 1;
-    case # "hash_3e92494695e7803f":
+    case #"hash_3e92494695e7803f":
       level thread function_3dfa5598();
       return 1;
   }

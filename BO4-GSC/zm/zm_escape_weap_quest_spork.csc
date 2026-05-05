@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_5db30ea2f37108d.csc
+ * Script: zm\zm_escape_weap_quest_spork.csc
 ***********************************************/
 
 #include scripts\core_common\animation_shared;
@@ -9,7 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-#namespace namespace_273ad667;
+#namespace zm_escape_weap_quest_spork;
 
 autoexec __init__system__() {
   system::register(#"zm_escape_weap_quest_spork", &__init__, undefined, undefined);
