@@ -61,7 +61,7 @@ function_3e8ff788(attacker, victim, var_f5db414c, killtime, weapon, spawnbeaconw
   }
 
   if(attacker != attacker.var_7c18e526 && (isDefined(attacker.var_1a6703cc) ? attacker.var_1a6703cc : 0) + 5000 > killtime) {
-    scoreevents::processscoreevent(#"hash_62131f4647f7c61a", attacker.var_7c18e526, undefined, spawnbeaconweapon);
+    scoreevents::processscoreevent(#"spawn_beacon_savior", attacker.var_7c18e526, undefined, spawnbeaconweapon);
   }
 }
 
@@ -81,7 +81,7 @@ function_5bfd1343(attacker, var_f231d134, killtime, capturedobjective, spawnbeac
   }
 
   if(attacker != attacker.var_7c18e526 && (isDefined(attacker.var_1a6703cc) ? attacker.var_1a6703cc : 0) + 5000 > killtime) {
-    scoreevents::processscoreevent(#"hash_5ce122c3419f6a58", attacker.var_7c18e526, undefined, spawnbeaconweapon);
+    scoreevents::processscoreevent(#"spawn_beacon_vanguard", attacker.var_7c18e526, undefined, spawnbeaconweapon);
   }
 }
 

@@ -1288,7 +1288,7 @@ function_4d479d22(elephant) {
 
   elephant.health = elephant.maxhealth;
   elephant animation::play("ch_vign_tplt_inbtl_hllpht_evlve_2_stg_2_00_hllpht", undefined, undefined, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
-  level notify(#"hash_634700dd42db02d8");
+  level notify(#"boss_armor_broken");
   elephant setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
   var_dd54fdb1 = namespace_81245006::function_37e3f011(elephant, "tag_carriage_ws_le");
   namespace_81245006::function_6c64ebd3(var_dd54fdb1, 2);

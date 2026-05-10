@@ -8,7 +8,7 @@
 #namespace zm_orange_ee_dynamite;
 
 init() {
-  level._effect[#"hash_281c546a716f0d89"] = #"hash_29df8e00a5429cf0";
+  level._effect[#"dynamite_zombie_aura"] = #"hash_29df8e00a5429cf0";
   level._effect[#"dynamite_explosion"] = #"hash_eb0cf9b1e7697fb";
   level._effect[#"dynamite_zombie_explosion"] = #"hash_e52765b1b6a1c81";
   clientfield::register("scriptmover", "" + #"dynamite_explosion_fx", 24000, 1, "counter", &play_dynamite_explosion_fx, 0, 0);
@@ -28,7 +28,7 @@ function_ee32b1b8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval > 0) {
-    self.var_31d7361d = util::playFXOnTag(localclientnum, level._effect[#"hash_281c546a716f0d89"], self, "j_spine4");
+    self.var_31d7361d = util::playFXOnTag(localclientnum, level._effect[#"dynamite_zombie_aura"], self, "j_spine4");
   }
 }
 

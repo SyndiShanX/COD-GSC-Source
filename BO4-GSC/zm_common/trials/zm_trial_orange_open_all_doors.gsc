@@ -24,7 +24,7 @@ __init__() {
   zombie_debris = getEntArray("zombie_debris", "targetname");
   level.var_a0f5e369 = function_d34c075e(zombie_doors);
   level.var_3a748490 = function_d34c075e(zombie_debris);
-  zm_trial::register_challenge(#"hash_12dc7b4f915f4cf1", &on_begin, &on_end);
+  zm_trial::register_challenge(#"orange_all_doors", &on_begin, &on_end);
 }
 
 on_begin(n_timer) {

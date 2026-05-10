@@ -361,8 +361,8 @@ function function_dc16557c() {
       match_record::set_stat(#"ai_zones", i, #"ai_spawned_zombie", ai_zone.var_7c620997);
       match_record::set_stat(#"ai_zones", i, #"ai_killed_zombie", ai_zone.var_58ba2ab7);
       match_record::set_stat(#"ai_zones", i, #"players_killed_by_zombie", ai_zone.players_killed_by_zombie);
-      match_record::set_stat(#"ai_zones", i, #"hash_7c33a0c7c454cdeb", ai_zone.var_af37e04a);
-      match_record::set_stat(#"ai_zones", i, #"hash_78530caab146b8b2", ai_zone.var_41e86d33);
+      match_record::set_stat(#"ai_zones", i, #"ai_spawned_blightfather", ai_zone.var_af37e04a);
+      match_record::set_stat(#"ai_zones", i, #"ai_killed_blightfather", ai_zone.var_41e86d33);
       match_record::set_stat(#"ai_zones", i, #"hash_468f7191e8118876", ai_zone.var_719d00b8);
 
       if(isDefined(level.var_c64b3b46) && level.var_c64b3b46) {

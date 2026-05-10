@@ -46,7 +46,7 @@ function_f339b159() {
   level.var_af224340 = getent("punch_card_screen", "targetname");
   level.var_af224340 hide();
   level thread function_19daa1b1();
-  level flag::init(#"hash_7b2be1fafb5f35c7");
+  level flag::init(#"punch_card_inserted");
   level.var_da4b53f8 = getent("punch_card_anim", "targetname");
   level.var_da4b53f8 hide();
 }
@@ -105,12 +105,12 @@ function_7a70f281() {
   self playSound("evt_punch_card_insert");
   self moveto(self.origin + v_forward * -14, 3);
   wait 1;
-  level flag::set(#"hash_7b2be1fafb5f35c7");
+  level flag::set(#"punch_card_inserted");
   self waittill(#"movedone");
   self hide();
   self.origin = v_starting_origin;
   self.angles = var_5287d229;
-  level flag::clear(#"hash_7b2be1fafb5f35c7");
+  level flag::clear(#"punch_card_inserted");
 }
 
 function_9e497c58() {
@@ -208,7 +208,7 @@ function_626095c1(object) {
 }
 
 function_f0e98e5f() {
-  level.var_65d94f2 = struct::get_array(#"hash_508091eba85fdf0a");
+  level.var_65d94f2 = struct::get_array(#"white_audio_log");
 
   foreach(var_9b5d57b6 in level.var_65d94f2) {
     var_9b5d57b6 function_488e39dc();

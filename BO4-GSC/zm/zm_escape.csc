@@ -60,8 +60,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"hash_51b0de5e2b184c28", 1, 1, "int", &function_1bccf046, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_4be2ce4248d80d22", 1, 1, "int", &function_e6537e9f, 0, 0);
   clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
-  clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
-  clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
+  clientfield::register("world", "" + #"sound_building_64", 1, 1, "int", &sound_building_64, 0, 0);
+  clientfield::register("world", "" + #"exploder_building_64", 1, 1, "int", &exploder_building_64, 0, 0);
   clientfield::register("world", "" + #"rumble_water_tower", 1, 1, "counter", &rumble_water_tower, 0, 0);
   clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
@@ -157,16 +157,16 @@ rumble_water_tower(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   playrumbleonposition(localclientnum, "zm_escape_metal_rumble3", var_83771283.origin);
 }
 
-function_516663f8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+sound_building_64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     return;
   }
 
-  level notify(#"hash_46a6202f04dd1722");
+  level notify(#"end_sound_building_64");
 }
 
 function_37c86e6e(localclientnum) {
-  level endon(#"hash_46a6202f04dd1722");
+  level endon(#"end_sound_building_64");
   s_sound_origin = struct::get("s_b_64_sound");
 
   while(true) {
@@ -174,7 +174,7 @@ function_37c86e6e(localclientnum) {
   }
 }
 
-function_d8b90aba(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+exploder_building_64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level thread function_b2b92c61(localclientnum);
     return;

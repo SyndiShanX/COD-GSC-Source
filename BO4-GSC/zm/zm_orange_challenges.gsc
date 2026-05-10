@@ -36,7 +36,7 @@
 init() {
   init_clientfields();
   init_flags();
-  zm_armor::register(#"hash_35c87147e29f1708", 1);
+  zm_armor::register(#"challenge_reward_armor", 1);
 }
 
 init_clientfields() {
@@ -45,14 +45,14 @@ init_clientfields() {
 
 init_flags() {
   level flag::init(#"all_challenges_complete");
-  level flag::init(#"hash_4a8105909cc2603d");
+  level flag::init(#"bell_challenge_active");
   level flag::init(#"break_freeze_faster");
   level flag::init(#"challenge_active");
   level flag::init(#"challenges_started");
   level flag::init(#"extra_snowballs");
   level flag::init(#"hash_2a1215d8a3e31013");
   level flag::init(#"half_price_traps");
-  level flag::init(#"hash_84593b9650c7abf");
+  level flag::init(#"soup_challenge_active");
   level flag::init(#"hash_2d3f1dd5445d3423");
   level flag::init(#"hash_4e33fc3d32735214");
   level flag::init(#"hash_701aa76674161d36");
@@ -514,7 +514,7 @@ function_6d50f216() {
 
 function_2ae162bf() {
   level endon(#"end_game");
-  level flag::set(#"hash_84593b9650c7abf");
+  level flag::set(#"soup_challenge_active");
   var_d6578e1f = self.var_d6578e1f;
 
   foreach(s_ingredient in var_d6578e1f.a_s_ingredients) {
@@ -565,12 +565,12 @@ function_39ca7654() {
   self.var_d6578e1f.var_2abe7ecb = getEntArray("challenges_bell", "targetname");
   var_2abe7ecb = self.var_d6578e1f.var_2abe7ecb;
   self.var_d6578e1f function_3bb5cdd9(self);
-  level flag::set(#"hash_4a8105909cc2603d");
+  level flag::set(#"bell_challenge_active");
 }
 
 function_a0ebbf07() {
   level endon(#"end_game");
-  level flag::clear(#"hash_4a8105909cc2603d");
+  level flag::clear(#"bell_challenge_active");
 
   foreach(var_c3e20cb in self.var_d6578e1f.var_2abe7ecb) {
     var_c3e20cb val::reset("challenges", "allowdeath");
@@ -1152,7 +1152,7 @@ function_65a629f5() {
   }
 
   self.var_735249ac setModel("p8_cas_kitchenware_soup_pot");
-  level flag::clear(#"hash_84593b9650c7abf");
+  level flag::clear(#"soup_challenge_active");
 }
 
 function_48f86741(var_d6578e1f) {
@@ -1397,7 +1397,7 @@ function_472fa2ca(s_challenge) {
       }
     }
 
-    if(level flag::get(#"hash_4a8105909cc2603d")) {
+    if(level flag::get(#"bell_challenge_active")) {
       if(s_challenge.n_current_progress > s_challenge.a_n_sequence.size) {
         s_challenge.n_current_progress = s_challenge.a_n_sequence.size;
       }
@@ -1843,7 +1843,7 @@ function_816f228f(e_who) {
     case # "armor":
       foreach(player in getplayers()) {
         if(!player laststand::player_is_in_laststand() && isalive(player)) {
-          player zm_armor::add(#"hash_35c87147e29f1708", 100, 100);
+          player zm_armor::add(#"challenge_reward_armor", 100, 100);
         }
       }
 

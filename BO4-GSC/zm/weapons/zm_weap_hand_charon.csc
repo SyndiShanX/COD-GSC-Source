@@ -32,8 +32,8 @@ __init__() {
   level._effect[#"charon_flash_3p"] = #"hash_6ca6596354053923";
   level._effect[#"charon_pool"] = #"hash_3d88b8f128288ebe";
   level._effect[#"charon_impact_torso"] = #"hash_6937321c4a8e7349";
-  level._effect[#"hash_74d5f15912f2e8ee"] = #"hash_7fca1782163cbb01";
-  level._effect[#"hash_779c72a2983289e3"] = #"hash_55d06957e137b062";
+  level._effect[#"charon_impact_arm_left"] = #"hash_7fca1782163cbb01";
+  level._effect[#"charon_impact_arm_right"] = #"hash_55d06957e137b062";
   level._effect[#"hash_e84c5306b5ffdf7"] = #"hash_b3bc039e7aca94";
   level._effect[#"hash_4c22be78d74e1de8"] = #"hash_1e3e41de01894921";
   level._effect[#"hash_1bce475aa707ac4c"] = #"hash_5dab3144897e562f";
@@ -83,11 +83,11 @@ function_d64a6790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       if(isDefined(self gettagorigin("j_elbow_le"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_74d5f15912f2e8ee"], self, "j_elbow_le");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_arm_left"], self, "j_elbow_le");
       }
 
       if(isDefined(self gettagorigin("j_elbow_ri"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_779c72a2983289e3"], self, "j_elbow_ri");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_arm_right"], self, "j_elbow_ri");
       }
 
       if(isDefined(self gettagorigin("j_hip_le"))) {
@@ -151,11 +151,11 @@ function_120153b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self gettagorigin("j_elbow_le"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_74d5f15912f2e8ee"], self, "j_elbow_le");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_arm_left"], self, "j_elbow_le");
   }
 
   if(isDefined(self gettagorigin("j_elbow_ri"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_779c72a2983289e3"], self, "j_elbow_ri");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_arm_right"], self, "j_elbow_ri");
   }
 
   if(isDefined(self gettagorigin("j_hip_le"))) {

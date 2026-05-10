@@ -62,7 +62,7 @@ init() {
     w_blueprint = zm_crafting::function_b18074d0(#"zblueprint_zod_tricannon_upgrade");
 
     if(isDefined(w_blueprint)) {
-      w_blueprint.component01.var_62a98b13 = #"hash_4223e614aaaeb5be";
+      w_blueprint.component01.var_62a98b13 = #"onion_swan";
       w_blueprint.component02.var_62a98b13 = #"condenser_coil";
       w_blueprint.component03.var_62a98b13 = #"retort_pot";
       w_blueprint.component01.var_25bb96cc = #"hash_604432f9a80a26e3";

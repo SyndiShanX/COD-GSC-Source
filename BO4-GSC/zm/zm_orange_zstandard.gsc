@@ -496,7 +496,7 @@ function_f8dc2ddb(n_obj_id) {
   self endon(#"disconnect");
 
   while(true) {
-    s_results = self waittill(#"hash_702a9c7f10066b19", #"death");
+    s_results = self waittill(#"zipline_use_detected", #"death");
 
     if(s_results.str_location === "lighthouse_to_facility" || s_results._notify === "death") {
       objective_setinvisibletoplayer(n_obj_id, self);

@@ -17,7 +17,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_stronghold_perk_for_level();
-  level._effect[#"hash_24e322568c9492c5"] = #"hash_497cb15bcf6c05b1";
+  level._effect[#"perk_stronghold_circle"] = #"hash_497cb15bcf6c05b1";
   callback::on_localclient_connect(&on_localclient_connect);
 }
 
@@ -32,7 +32,7 @@ enable_stronghold_perk_for_level() {
 init_stronghold() {}
 
 function_5a4557ee() {
-  clientfield::register("toplayer", "" + #"hash_24e322568c9492c5", 1, 1, "int", &function_2400dd1d, 0, 1);
+  clientfield::register("toplayer", "" + #"perk_stronghold_circle", 1, 1, "int", &function_2400dd1d, 0, 1);
 }
 
 function_44bd921f() {}
@@ -47,7 +47,7 @@ function_2400dd1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       deletefx(localclientnum, self.var_f9c892e3[localclientnum], 1);
     }
 
-    self.var_f9c892e3[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_24e322568c9492c5"], self, "j_spine");
+    self.var_f9c892e3[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"perk_stronghold_circle"], self, "j_spine");
 
     if(!isDefined(self.var_2ec16150)) {
       self playSound(localclientnum, #"hash_5e1e162af8490f1d");

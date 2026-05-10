@@ -1365,7 +1365,7 @@ function_f867cce0(missioncomponent, commanderteam) {
   switch (type) {
     case # "missioncomponent_destroy":
       break;
-    case # "hash_3bf68fbcb5c53b6c":
+    case # "missioncomponent_capturearea":
       break;
     case # "missioncomponent_goto":
       break;

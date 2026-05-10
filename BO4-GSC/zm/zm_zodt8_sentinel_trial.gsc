@@ -3310,7 +3310,7 @@ function_353e1c69(mdl_blocker) {
   var_af1d9eb1 = arraycopy(a_spawn_structs);
 
   foreach(s_spawn in a_spawn_structs) {
-    if(s_spawn.targetname !== #"step7_stoker" && s_spawn.targetname !== #"hash_21b17b50ba89b6ae" || isDefined(s_spawn.script_int) && s_spawn.script_int > a_players.size) {
+    if(s_spawn.targetname !== #"step7_stoker" && s_spawn.targetname !== #"step7_blight_father" || isDefined(s_spawn.script_int) && s_spawn.script_int > a_players.size) {
       arrayremovevalue(var_af1d9eb1, s_spawn, 1);
       continue;
     }
@@ -3336,7 +3336,7 @@ function_353e1c69(mdl_blocker) {
       if(isDefined(ai_stoker)) {
         ai_stoker.var_12745932 = 1;
       }
-    } else if(s_spawn.targetname == #"hash_21b17b50ba89b6ae") {
+    } else if(s_spawn.targetname == #"step7_blight_father") {
       function_204d58b0(s_spawn, n_round_number);
     }
 
@@ -3825,12 +3825,12 @@ function_f4b715c1(var_5ea5c94d) {
     level.zm_bgb_anywhere_but_here_validation_override = &return_false;
     level.var_88de5053 = 3;
     zm_sq::start(#"boss_fight");
-    level flag::wait_till(#"hash_25d8c88ff3f91ee5");
+    level flag::wait_till(#"boss_fight_all_complete");
   }
 }
 
 function_b4d0381e(var_5ea5c94d, ended_early) {
-  level flag::set(#"hash_25d8c88ff3f91ee5");
+  level flag::set(#"boss_fight_all_complete");
 
   foreach(player in util::get_active_players()) {
     player clientfield::set_to_player("water_drippies", 0);

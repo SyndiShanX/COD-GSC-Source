@@ -111,7 +111,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
   switch (level.var_ad7c0539) {
     case 1:
     case 2:
-      if(isDefined(weapon) && (weapon.name == #"hash_3f62a872201cd1ce" || weapon.name == #"eq_swat_grenade")) {
+      if(isDefined(weapon) && (weapon.name == #"swat_grenade_payload" || weapon.name == #"eq_swat_grenade")) {
         if(self.health < 10) {
           self.health = 10;
         }
@@ -625,7 +625,7 @@ function_9d1bba67() {
   level.var_47cd3e56 = 0;
   level thread ct_bots::activate_bots(level.var_7b46025.size, #"axis");
   wait 0.1;
-  a_str_vo = array(#"hash_3a11ade5936ba51");
+  a_str_vo = array(#"vox_tvoi_tutor_ajax_hip_fire_nag");
   level thread ct_vo::function_14b08e49(a_str_vo, "enemy_killed");
   level.var_fcf21a21 = 1;
   ct_utils::function_654280be();

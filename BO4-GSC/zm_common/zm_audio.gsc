@@ -2113,7 +2113,7 @@ sndannouncer_init() {
     sndannouncervoxadd(#"wardens", #"hash_5f87c10f7c1ad814");
     sndannouncervoxadd(#"werewolf", #"hash_23c5292237128e03");
     sndannouncervoxadd(#"nosferatu", #"hash_38bb4e0a7dfc9a1d");
-    sndannouncervoxadd(#"hash_e5dacec7371220e", #"hash_6e2246878a31d24d");
+    sndannouncervoxadd(#"crim_nosferatu", #"hash_6e2246878a31d24d");
     sndannouncervoxadd(#"lightning_hounds", #"hash_2fabde0f1747632a");
     sndannouncervoxadd(#"bombers", #"hash_5bfc95be3db89d7e");
     sndannouncervoxadd(#"jolting_jacks", #"hash_2629e8b3b9215214");

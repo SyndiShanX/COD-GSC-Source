@@ -1069,10 +1069,10 @@ function_ba96cdf(player) {
 
 function_116fd9a7() {
   level.var_66383953 = [];
-  function_937ea9e(#"hash_9ed0c30684ca35a", &function_d045e83b);
+  function_937ea9e(#"generic_ammo_pickup", &function_d045e83b);
   function_937ea9e(#"generic_armor_pickup", &function_2e5b5858);
   function_937ea9e(#"hash_3bfb97e39d67e5f9", &function_cb9b4dd7);
-  function_937ea9e(#"hash_788c59214ead02af", &function_14b2eddf);
+  function_937ea9e(#"generic_attachment_pickup", &function_14b2eddf);
   function_937ea9e(#"hash_6247ea34d3b1ddb6", &function_42ffe9b2);
   function_937ea9e(#"hash_2cbf15cbb314c93e", &function_2eebeff5);
   function_937ea9e(#"hash_51b30f6e7331e136", &function_349d4c26);

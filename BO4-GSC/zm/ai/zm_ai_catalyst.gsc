@@ -1351,9 +1351,9 @@ function_1a0ae193() {
   while(true) {
     waitframe(1);
 
-    if(getdvarstring(#"hash_403368b958977fcb", "<dev string:x1fe>") != "<dev string:x1fe>") {
-      function_fa69f8d2(int(getdvarstring(#"hash_403368b958977fcb")));
-      setDvar(#"hash_403368b958977fcb", "<dev string:x1fe>");
+    if(getdvarstring(#"spawn_catalyst_type", "<dev string:x1fe>") != "<dev string:x1fe>") {
+      function_fa69f8d2(int(getdvarstring(#"spawn_catalyst_type")));
+      setDvar(#"spawn_catalyst_type", "<dev string:x1fe>");
     }
   }
 }

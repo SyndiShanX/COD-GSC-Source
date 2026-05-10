@@ -111,13 +111,13 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"hash_2bbcb9e09bd7bb26", 1, 1, "counter");
   clientfield::register("scriptmover", "entry_gate_dust", 1, 1, "int");
   clientfield::register("world", "" + #"boss_battle_teleport", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_42cc4bf5e47478c5", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"ww_quest_brazier_fire", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_3b746cf6eec416b2", 1, 1, "int");
   clientfield::register("world", "" + #"hash_584e8f7433246444", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_418c1c843450232b", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_4d547bf36c6cb2d8", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_38ba3ad0902aa355", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_24d7233bb17e6558", 1, 1, "int");
+  clientfield::register("world", "" + #"ww_quest_scorpio_danu", 1, 1, "int");
+  clientfield::register("world", "" + #"ww_quest_scorpio_ra", 1, 1, "int");
+  clientfield::register("world", "" + #"ww_quest_scorpio_odin", 1, 1, "int");
+  clientfield::register("world", "" + #"ww_quest_scorpio_zeus", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"ww_quest_melting", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"hash_2c6f04d08665dbda", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_2a332df32456c86f", 1, 1, "int");
@@ -136,7 +136,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"hash_c382c02584ba249", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_273efcc293063e5e", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"fertilizer_smell", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_5a3e1454226ef7a4", 1, 1, "int");
+  clientfield::register("world", "" + #"fertilizer_smell_bowl", 1, 1, "int");
   clientfield::register("world", "" + #"hash_73088ea3053b96f1", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_233e31d0c2b47b1b", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_12dfb8249f8212d2", 1, 1, "int");
@@ -160,7 +160,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"hash_63e758aa5387132a", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"defend_key_glint", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_2407f687f7d24a83", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_5afda864f8b64f5c", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"narrative_brazier_fire", 1, 1, "int");
   clientfield::register("world", "" + #"hash_39e6b14b9e5b0f3d", 1, 1, "int");
   level.var_210ce105 = zm_towers_crowd_meter::register("zm_towers_crowd_meter");
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
@@ -537,8 +537,8 @@ init_announcer() {
   zm_audio::sndannouncervoxadd(#"hash_260c83bb9470b", #"hash_7f3dee972dfa0bf1");
   zm_audio::sndannouncervoxadd(#"hash_78c79ed7fe5a14e6", #"hash_739067da8bb4af8c");
   zm_audio::sndannouncervoxadd(#"hash_2865f19fb8f73873", #"hash_4f6a00a5a3c6564d");
-  zm_audio::sndannouncervoxadd(#"hash_2a8f3ff63eb265a9", #"hash_327de5526794e5f0");
-  zm_audio::sndannouncervoxadd(#"challenges_challenge_completed", #"hash_5b911d862216715d");
+  zm_audio::sndannouncervoxadd(#"challenges_challenge_available", #"hash_327de5526794e5f0");
+  zm_audio::sndannouncervoxadd(#"challenges_challenge_completed", #"vox_challenges_complete");
   zm_audio::sndannouncervoxadd(#"challenges_danu_completed", #"hash_fc0a3fb08fac69b");
   zm_audio::sndannouncervoxadd(#"challenges_ra_completed", #"hash_203f6b90f79090f0");
   zm_audio::sndannouncervoxadd(#"challenges_odin_completed", #"hash_34daf48f11cac2b1");

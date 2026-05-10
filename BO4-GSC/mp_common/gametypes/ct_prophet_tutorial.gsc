@@ -867,7 +867,7 @@ function_5398e045() {
   self thread ct_utils::function_61c3d59c(#"hash_5a15cd7ce4d7ba35", undefined);
   wait 1;
   self thread function_8bbca25b();
-  s_notify = level waittill(#"tempest2_enemy_killed", #"hash_7cc7c12d2396a9e", #"hash_6af26ccf744145f0");
+  s_notify = level waittill(#"tempest2_enemy_killed", #"player_fired_tempest", #"hash_6af26ccf744145f0");
 
   if(s_notify._notify !== "tempest2_enemy_killed") {
     self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_chain_group_stun"));
@@ -892,7 +892,7 @@ function_8bbca25b() {
   }
 
   wait 0.5;
-  level notify(#"hash_7cc7c12d2396a9e");
+  level notify(#"player_fired_tempest");
 }
 
 function_c4546e73(s_start_loc) {
@@ -1178,7 +1178,7 @@ function_c448a1e0() {
   while(!level flag::get("fin2_enemy_chopper_destroyed")) {
     if(!(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
       self thread ct_utils::function_e96cc63f(4, "s_tut_fin2_enemy", 1, 2, 3, 1, "fin2_enemy_bot");
-      self waittill(#"hash_78aff79640650d11");
+      self waittill(#"killstreak_ready_dart");
       level notify(#"hash_3ce5abc259d8b041");
       ct_utils::function_49e0c5bc();
     }
@@ -1715,7 +1715,7 @@ function_f99e791d() {
       self thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_EarnDart");
       self thread ct_utils::function_80bf685b(0);
       self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_score_nag", 20, 20);
-      self waittill(#"hash_78aff79640650d11");
+      self waittill(#"killstreak_ready_dart");
       self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_score_earn"));
       level.var_51ff7a58 = 1;
     }
@@ -1941,7 +1941,7 @@ function_222141a5(var_58d9f1c6 = 1) {
 function_324c6d8c() {
   level endon(#"combattraining_logic_finished");
   sessionmode = currentsessionmode();
-  setDvar(#"hash_42113ca5668d7812", "<dev string:x38>");
+  setDvar(#"devgui_ct_prophet", "<dev string:x38>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x3b>");
@@ -1956,7 +1956,7 @@ function_324c6d8c() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_42113ca5668d7812", "<dev string:x38>");
+    cmd = getdvarstring(#"devgui_ct_prophet", "<dev string:x38>");
 
     if(cmd == "<dev string:x38>") {
       continue;
@@ -1996,6 +1996,6 @@ function_324c6d8c() {
         break;
     }
 
-    setDvar(#"hash_42113ca5668d7812", "<dev string:x38>");
+    setDvar(#"devgui_ct_prophet", "<dev string:x38>");
   }
 }

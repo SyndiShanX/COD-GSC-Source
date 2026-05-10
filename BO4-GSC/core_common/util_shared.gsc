@@ -2371,7 +2371,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  self endon(#"death", #"hash_375a9d48dd6a9427");
+  self endon(#"death", #"cancel_auto_delete");
   self notify(#"__auto_delete__");
   self endon(#"__auto_delete__");
   level flag::wait_till("all_players_spawned");

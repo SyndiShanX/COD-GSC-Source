@@ -934,7 +934,7 @@ function_52d196f2(n_difficulty = 2) {
 
   e_player thread function_9be2d75f();
   a_parms = [];
-  a_parms[#"hash_72de0eaa7f3c7619"] = var_a7b6c024[n_difficulty];
+  a_parms[#"node_wait_mods"] = var_a7b6c024[n_difficulty];
   a_parms[#"attack_rest"] = var_89d9697a[n_difficulty];
   a_parms[#"shoot_spread"] = var_ed621a12[n_difficulty];
   a_parms[#"speed"] = var_c52588b6[n_difficulty];

@@ -61,7 +61,7 @@ init() {
   clientfield::register("toplayer", "" + #"pegasus_shellshock", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"waterfall_passthrough", 16000, 1, "int");
   clientfield::register("world", "" + #"hash_28eb5e403f599ce2", 17000, 1, "int");
-  level zm_audio::function_6191af93(#"location_enter", #"hash_4576fb3345db827b", "", "");
+  level zm_audio::function_6191af93(#"location_enter", #"temp_attalid", "", "");
   level.var_2e32e0bb = 1;
   callback::on_spawned(&on_player_spawned);
   level thread function_5ad3e281();

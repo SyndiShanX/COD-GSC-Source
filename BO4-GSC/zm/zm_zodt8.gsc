@@ -1610,7 +1610,7 @@ on_player_spawned() {
 
 function_51581a6c() {
   self endon(#"death");
-  level endon(#"hash_25d8c88ff3f91ee5");
+  level endon(#"boss_fight_all_complete");
   level flag::wait_till("power_on");
   self thread function_f1a16811();
 
@@ -1638,7 +1638,7 @@ function_51581a6c() {
 
 function_f1a16811() {
   self endon(#"death");
-  level endon(#"hash_25d8c88ff3f91ee5");
+  level endon(#"boss_fight_all_complete");
 
   while(true) {
     t_result = trigger::wait_till("trigger_water_drippies_fore", "targetname", self);
@@ -1659,7 +1659,7 @@ function_f1a16811() {
 }
 
 function_4ec55dd() {
-  level endon(#"hash_25d8c88ff3f91ee5");
+  level endon(#"boss_fight_all_complete");
 
   while(true) {
     wait randomintrange(10, 20);

@@ -11,7 +11,7 @@ dev_cac_init() {
   dev_cac_overlay = 0;
   dev_cac_camera_on = 0;
   level thread dev_cac_gdt_update_think();
-  var_b7b0fdc0 = getdvarint(#"hash_158f81eb73a459bd", 0);
+  var_b7b0fdc0 = getdvarint(#"scr_debug_charmindex", 0);
 
   for(var_1db243f1 = getdvarint(#"hash_729117f20b736ab4", 0);; var_1db243f1 = deathfxindex) {
     wait 0.5;
@@ -116,7 +116,7 @@ dev_cac_init() {
       setDvar(#"devgui_dev_cac", "<dev string:x38>");
     }
 
-    charmindex = getdvarint(#"hash_158f81eb73a459bd", 0);
+    charmindex = getdvarint(#"scr_debug_charmindex", 0);
 
     if(var_b7b0fdc0 != charmindex) {
       host function_3fb8b14(host getcurrentweapon(), charmindex);

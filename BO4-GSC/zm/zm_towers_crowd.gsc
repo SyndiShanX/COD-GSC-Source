@@ -735,7 +735,7 @@ function_b8dfa139(str_event) {
     case # "trap_kill":
       var_9c93ba8f = 1;
       break;
-    case # "hash_689abcb17111463":
+    case # "crawler_created_ww":
       var_9c93ba8f = 3;
       break;
     case # "hash_197ae1fc115dc636":
@@ -1187,7 +1187,7 @@ function_8e83be5d() {
         }
 
         if(waitresult.weapon === level.w_crossbow || waitresult.weapon === level.w_crossbow_upgraded) {
-          str_event = #"hash_689abcb17111463";
+          str_event = #"crawler_created_ww";
         } else {
           waitresult.zombie function_308a32f0(e_player);
         }
@@ -1435,7 +1435,7 @@ function_e0bb973(cmd) {
     case # "hash_4122108abe671eb7":
     case # "trap_kill":
     case # "hash_131b705484b2876":
-    case # "hash_689abcb17111463":
+    case # "crawler_created_ww":
     case # "crawler_created":
     case # "trap_activated":
     case # "hash_5986c925a370e137":

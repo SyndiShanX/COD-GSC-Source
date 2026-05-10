@@ -46,17 +46,17 @@ class cct_shared_button_prompt: cluielem {
       return;
     }
 
-    if(#"hash_15620c895dcec00e" == state_name) {
+    if(#"smoke_button_paused" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 7);
       return;
     }
 
-    if(#"hash_2cb5a2ce94a6ee6d" == state_name) {
+    if(#"frag_button_paused" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 8);
       return;
     }
 
-    if(#"hash_4df4fd56580d5967" == state_name) {
+    if(#"x_button_paused" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 9);
       return;
     }

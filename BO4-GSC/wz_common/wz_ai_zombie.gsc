@@ -1599,7 +1599,7 @@ function_54fc0f3e() {
       [[self.current_state.update_func]](self);
     }
 
-    if(isDefined(self.current_state) && getdvarint(#"hash_7c11c6eba2f88f9f", 0)) {
+    if(isDefined(self.current_state) && getdvarint(#"sr_ai_debug", 0)) {
       if(getdvarint(#"recorder_enablerec", 0)) {
         record3dtext(hashtostring(self.current_state.name), self.origin, (0, 1, 1), "<dev string:x71>", self);
       } else {

@@ -359,7 +359,7 @@ function_7f999aa0(var_806e2de0) {
   if((var_4493e3e1 || slot != -1) && (var_4493e3e1 || var_806e2de0.a_b_vapors[slot] || zm_perks::function_e56d8ef4(#"specialty_additionalprimaryweapon")) && isDefined(var_806e2de0.additional_primary_weapon)) {
     if(var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) {
       if(self hasweapon(var_806e2de0.additional_primary_weapon)) {
-        self notify(#"hash_29c66728ccd27f03", {
+        self notify(#"restore_additional_primary_weapon", {
           #weapon: var_806e2de0.additional_primary_weapon
         });
       }

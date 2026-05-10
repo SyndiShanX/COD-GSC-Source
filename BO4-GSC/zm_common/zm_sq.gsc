@@ -402,8 +402,8 @@ devgui_think() {
 
   while(true) {
     wait 1;
-    cmd = getdvarstring(#"hash_319d902ea18eb39");
-    setDvar(#"hash_319d902ea18eb39", "<dev string:x45c>");
+    cmd = getdvarstring(#"devgui_ee_cmd");
+    setDvar(#"devgui_ee_cmd", "<dev string:x45c>");
     cmd = strtok(cmd, "<dev string:x2c4>");
 
     if(cmd.size == 0) {

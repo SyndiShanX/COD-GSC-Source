@@ -38,10 +38,10 @@ __init__() {
   clientfield::register("toplayer", "" + #"hash_37c33178198d54e4", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_5d9808a62579e894", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_4ec2b359458774e4", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_4724376be4e925a3", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"place_blue_rock", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_1aa1c7790dc67d1e", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_7cdfc8f4819bab2e", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_61ed2f45564d54f9", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"explode_blue_rock", 1, 1, "int");
   clientfield::register("toplayer", "" + #"totem_fall", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_2a7ceb22f84e5aa9", 1, 1, "int");
   level flag::init(#"hash_6ee51d9a7d37aecc");
@@ -617,8 +617,8 @@ fan_trap_think() {
 
   self.var_27738b05 = 0;
   self flag::wait_till(#"hash_7e372a60b99a89e0");
-  self clientfield::set_to_player("" + #"hash_61ed2f45564d54f9", 1);
-  self clientfield::set_to_player("" + #"hash_4724376be4e925a3", 0);
+  self clientfield::set_to_player("" + #"explode_blue_rock", 1);
+  self clientfield::set_to_player("" + #"place_blue_rock", 0);
   level.var_dc120ff3 setvisibletoplayer(self);
   level.var_dc120ff3 playLoopSound(#"hash_3129e04ec52b7ef2");
   self thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
@@ -642,7 +642,7 @@ function_34759490(e_player) {
     e_player = s_result.activator;
 
     if(e_player flag::get(#"hash_7317dfbae4fa0df5") && !e_player flag::get(#"hash_7e372a60b99a89e0")) {
-      e_player clientfield::set_to_player("" + #"hash_4724376be4e925a3", 1);
+      e_player clientfield::set_to_player("" + #"place_blue_rock", 1);
     } else if(e_player flag::get(#"hash_7e372a60b99a89e0") && !e_player flag::get(#"hash_29001ce64677a5cf")) {
       level.var_dc120ff3 setinvisibletoplayer(e_player);
       e_player flag::set(#"hash_29001ce64677a5cf");

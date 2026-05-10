@@ -30,7 +30,7 @@ __init__() {
   level._effect[#"hash_43cf6c236d2e9ba"] = #"hash_7d7d5c3856622734";
   level._effect[#"electrocute"] = #"hash_5aa1120d061d1f6c";
   level._effect[#"aoe_marker"] = #"hash_211c80023671737b";
-  level._effect[#"hash_6bfee027c13054b6"] = #"hash_2dc8e3470244bf1c";
+  level._effect[#"staff_base_fx"] = #"hash_2dc8e3470244bf1c";
   level._effect[#"hash_788ff1a315628747"] = #"hash_661f2c77e14f0edf";
   level._effect[#"pegasus_teleport"] = #"hash_5f7d8c231fbcf09e";
 }
@@ -129,5 +129,5 @@ function_46a56fe2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_5b4619(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"hash_788ff1a315628747"], self, "tag_fx_ball");
-  util::playFXOnTag(localclientnum, level._effect[#"hash_6bfee027c13054b6"], self, "tag_fx_ball");
+  util::playFXOnTag(localclientnum, level._effect[#"staff_base_fx"], self, "tag_fx_ball");
 }

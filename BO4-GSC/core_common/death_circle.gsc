@@ -589,7 +589,7 @@ function_ce0f27e0() {
 
     if(isDefined(player.var_1f1736dc)) {
       var_7dbb0472 = int(gettime() - player.var_1f1736dc);
-      player stats::function_d40764f3(#"hash_44caad08afb32e51", var_7dbb0472);
+      player stats::function_d40764f3(#"time_outside_circle", var_7dbb0472);
       player match_record::function_34800eec(#"hash_3e8d4387ea9e7f42", var_7dbb0472);
     }
   }

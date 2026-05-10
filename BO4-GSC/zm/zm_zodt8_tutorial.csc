@@ -20,7 +20,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("item", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
   clientfield::register("scriptmover", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"path_blocker_fx", 1, 1, "int", &function_7c8084eb, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_1390e08de02cbdc7", 1, 1, "int", &function_8057ebca, 0, 0);
+  clientfield::register("scriptmover", "" + #"symbol_blocker_fx", 1, 1, "int", &symbol_blocker_fx, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showLocation", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showPerks", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showEquipment", 1, 1, "int", undefined, 0, 0);
@@ -28,7 +28,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("worlduimodel", "hudItems.ztut.showSpecial", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showElixirs", 1, 1, "int", undefined, 0, 0);
   level._effect[#"path_blocker_fx"] = #"zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
-  level._effect[#"hash_1390e08de02cbdc7"] = #"zombie/fx8_power_door_amb_quest";
+  level._effect[#"symbol_blocker_fx"] = #"zombie/fx8_power_door_amb_quest";
   zm_tut_hint_text::register("zm_tut_hint_text");
   callback::on_localclient_connect(&function_9fc8cc9c);
 }
@@ -116,10 +116,10 @@ function_7c8084eb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_8057ebca(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+symbol_blocker_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     v_forward = anglesToForward(self.angles);
-    self.blocker_fx = playFX(localclientnum, level._effect[#"hash_1390e08de02cbdc7"], self.origin, v_forward);
+    self.blocker_fx = playFX(localclientnum, level._effect[#"symbol_blocker_fx"], self.origin, v_forward);
     audio::playloopat(#"hash_7c4e89429c24b4bd", self.origin);
     return;
   }

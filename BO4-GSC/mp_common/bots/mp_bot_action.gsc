@@ -83,7 +83,7 @@ function_938667bd() {
   bot_action::register_action(#"activate_noncombat_grapple", &bot_action::weapon_rank, &function_554a6177, &use_grapple);
   bot_action::register_action(#"activate_gravity_slam", &bot_action::weapon_rank, &function_97e7772c, &bot_action::function_94f96101);
   bot_action::register_action(#"deploy_spawnbeacon", &bot_action::weapon_rank, &function_9a0eb4f0, &bot_action::deploy_gadget);
-  bot_action::register_action(#"hash_17f1a25f8c10e1cd", &bot_action::weapon_rank, &function_4a95cdaf, &bot_action::deploy_gadget);
+  bot_action::register_action(#"deploy_concertina_wire", &bot_action::weapon_rank, &function_4a95cdaf, &bot_action::deploy_gadget);
   bot_action::register_action(#"hash_5d6b13cfb592ee04", &bot_action::weapon_rank, &function_e43892c4, &function_79988b4b);
   bot_action::register_action(#"use_icepick", &bot_action::weapon_rank, &bot_action::function_38d0d1df, &use_icepick);
 }
@@ -198,7 +198,7 @@ function_aaede90c() {
   bot_action::function_7e847a84(#"sig_blade", #"hash_5397239dd3c8da8d");
   bot_action::function_a2c83569(#"sig_blade", #"hash_7aaeac32a4e1bf84");
   bot_action::function_a2c83569(#"sig_blade", #"hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_concertina_wire", #"hash_17f1a25f8c10e1cd");
+  bot_action::function_7e847a84(#"eq_concertina_wire", #"deploy_concertina_wire");
   bot_action::function_7e847a84(#"ability_smart_cover", #"hash_5d6b13cfb592ee04");
   bot_action::function_7e847a84(#"eq_emp_grenade", #"throw_mine");
   bot_action::function_7e847a84(#"gadget_icepick", #"use_icepick");

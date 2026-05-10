@@ -179,7 +179,7 @@ function_86f1ed70(a_ents) {
 }
 
 function_8d3078dc(a_ents) {
-  a_ents[#"pap"] thread function_25adf2e0("building_64", #"hash_1fc69d74f13da62e");
+  a_ents[#"pap"] thread function_25adf2e0("building_64", #"pap_moved_building_64");
   a_ents[#"pap"] clientfield::set("" + #"hash_504d26c38b96651c", 1);
 }
 
@@ -347,7 +347,7 @@ function_c0bc0375() {
       level waittill(#"hide_p");
       self zm_pack_a_punch::function_bb629351(0, "hidden");
       self zm_pack_a_punch::set_state_hidden();
-      level waittill(#"pap_moved_roof", #"hash_1fc69d74f13da62e", #"hash_6d668f3614ed2393");
+      level waittill(#"pap_moved_roof", #"pap_moved_building_64", #"hash_6d668f3614ed2393");
       a_e_pack = getEntArray("zm_pack_a_punch", "targetname");
 
       for(e_pack = self; self == e_pack; e_pack = array::random(a_e_pack)) {}

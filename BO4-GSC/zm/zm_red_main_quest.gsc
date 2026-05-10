@@ -79,7 +79,7 @@ init_clientfield() {
   clientfield::register("allplayers", "" + #"hash_72bd7a6af2ba1c5e", 16000, 1, "int");
   clientfield::register("allplayers", "" + #"hash_4a149c9daff159cd", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_7343b1cdab1f31c5", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_2a17f2993036fab4", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"greek_fire_annihilate", 16000, 1, "counter");
   clientfield::register("scriptmover", "" + #"rune_fire", 16000, 1, "int");
   clientfield::register("scriptmover", "" + #"monument_eyes", 16000, var_7551dff2, "int");
   clientfield::register("scriptmover", "" + #"hash_78fa79d021d86cb6", 16000, 1, "int");
@@ -157,7 +157,7 @@ init_flags() {
   level flag::init(#"flag_prophecy_completed");
   level flag::init(#"flag_light_completed");
   level flag::init(#"hash_f38b18eaf7b063b");
-  level flag::init(#"hash_5a7f1f9adac6dc8c");
+  level flag::init(#"flag_cleanse_teleported");
 }
 
 init_steps() {
@@ -388,7 +388,7 @@ function_b252fc5(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoin
     if(isDefined(attacker.var_b0cde18d) && attacker.var_b0cde18d && self.zm_ai_category == #"basic") {
       if(self.archetype == #"zombie" && !zm_utility::is_magic_bullet_shield_enabled(self)) {
         mdl_fx = util::spawn_model(#"tag_origin", self gettagorigin("j_spine4"), self gettagangles("j_spine4"));
-        mdl_fx clientfield::increment("" + #"hash_2a17f2993036fab4");
+        mdl_fx clientfield::increment("" + #"greek_fire_annihilate");
         mdl_fx thread util::delayed_delete(0.25);
         gibserverutils::annihilate(self);
       }
@@ -629,7 +629,7 @@ function_8142733f() {
   var_c29a1099 = getent("vol_reflect", "targetname");
 
   while(!level flag::get(#"spartan_monuments_done")) {
-    self waittill(#"hash_288cb56263c7b7fa");
+    self waittill(#"inside_charon_pool");
 
     if(self istouching(var_c29a1099)) {
       if(!(isDefined(self.var_a56de6e0) && self.var_a56de6e0)) {
@@ -645,13 +645,13 @@ function_8142733f() {
       }
 
       level flag::wait_till(#"monument_changed");
-      level.var_67c7040c flag::clear(#"hash_1267306c12c34607");
+      level.var_67c7040c flag::clear(#"done_cleaning_up");
       var_e041507a = self getentitynumber() + 1;
       level.var_67c7040c clientfield::set("" + #"monument_eyes", var_e041507a);
       level.var_67c7040c.b_in_use = 1;
       var_46307de5 = level.var_67c7040c;
       zm_weap_hand_charon::function_25513188(var_46307de5);
-      s_result = self waittill(#"monument_change", #"hash_56c5053f5e67838b", #"monument_shot");
+      s_result = self waittill(#"monument_change", #"left_charon_pool", #"monument_shot");
 
       if(isDefined(var_46307de5)) {
         zm_weap_hand_charon::function_5760b289(var_46307de5);
@@ -666,7 +666,7 @@ function_b7c33177() {
   wait 0.15;
 
   if(isDefined(self)) {
-    self flag::set(#"hash_1267306c12c34607");
+    self flag::set(#"done_cleaning_up");
     self.b_in_use = undefined;
   }
 }
@@ -699,7 +699,7 @@ function_b87e4fa1() {
 
   self.var_a56de6e0 = undefined;
   self clientfield::set_to_player("" + #"hash_491027931a3fc18f", 0);
-  self notify(#"hash_56c5053f5e67838b");
+  self notify(#"left_charon_pool");
 
   if(isDefined(level.var_67c7040c)) {
     level.var_67c7040c notify(#"clean_up");
@@ -708,7 +708,7 @@ function_b87e4fa1() {
 
 function_47c0d27() {
   self endon(#"death");
-  self flag::init(#"hash_1267306c12c34607");
+  self flag::init(#"done_cleaning_up");
 
   while(true) {
     s_result = level waittill(#"ww_charon_hit");
@@ -721,7 +721,7 @@ function_47c0d27() {
           level notify(#"monument_shot", {
             #e_player: s_result.player
           });
-          self flag::wait_till(#"hash_1267306c12c34607");
+          self flag::wait_till(#"done_cleaning_up");
         }
       }
     }
@@ -896,7 +896,7 @@ spartan_monuments() {
     player notify(#"monument_change");
   }
 
-  level.var_67c7040c flag::wait_till(#"hash_1267306c12c34607");
+  level.var_67c7040c flag::wait_till(#"done_cleaning_up");
 }
 
 function_2a9c51b5() {
@@ -913,7 +913,7 @@ function_2a9c51b5() {
 function_5dc6a4b7(str_notify) {
   v_origin = self.origin;
   v_angles = self.angles;
-  self flag::wait_till(#"hash_1267306c12c34607");
+  self flag::wait_till(#"done_cleaning_up");
 
   if(str_notify == #"monument_shot") {
     self.b_shot = 1;
@@ -1812,7 +1812,7 @@ function_907d5e60(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
 }
 
 defeat_gegenees_cleanup(b_skipped, var_19e802fa) {
-  s_gegenees = struct::get(#"hash_3556fe84a78fb6b");
+  s_gegenees = struct::get(#"s_prophecy_dormant");
 
   if(isDefined(s_gegenees)) {
     s_gegenees struct::delete();
@@ -5001,7 +5001,7 @@ function_542a6ee4(e_player, str_ww, str_task, n_spotlight, var_d8d4faff) {
         level function_37411f7e(a_s_spawns, str_ww, 0, 1, var_d8d4faff);
         break;
       case # "air":
-        a_s_spawns = struct::get_array(#"hash_6da4b236b2ab84fa");
+        a_s_spawns = struct::get_array(#"s_play_clouded");
         n_to_kill += a_s_spawns.size;
         level function_37411f7e(a_s_spawns, str_ww, 0, 1, var_d8d4faff);
         break;
@@ -6694,7 +6694,7 @@ teleport_setup(b_skipped) {
 
 teleport_cleanup(b_skipped, var_19e802fa) {
   level notify(#"cleanse_teleported");
-  level flag::set(#"hash_5a7f1f9adac6dc8c");
+  level flag::set(#"flag_cleanse_teleported");
   callback::remove_on_connect(&function_dcc3c705);
   s_unitrigger = struct::get(#"s_cleanse_leave");
 
@@ -6743,7 +6743,7 @@ function_d67d9a14() {
 
 function_e8e36e67() {
   level endon(#"end_game");
-  level flag::wait_till(#"hash_5a7f1f9adac6dc8c");
+  level flag::wait_till(#"flag_cleanse_teleported");
   level clientfield::set("" + #"cleanse_portal", 0);
   level clientfield::set("" + #"hash_51858e923e750c33", 0);
   level clientfield::set("" + #"hash_2b05d4c6217bac22", 0);

@@ -40,7 +40,7 @@ init_clientfields() {
 
 init_flags() {
   level flag::init(#"server_part_pickup_acquired");
-  level flag::init(#"hash_5516784173c2ee27");
+  level flag::init(#"server_part_pickup_deposited");
   level flag::init(#"server_fixed");
   level flag::init(#"card_inserted");
   level flag::init(#"hash_5df188993c013698");
@@ -125,7 +125,7 @@ pernell_archive_step1_setup(var_5ea5c94d) {
     zm_unitrigger::unregister_unitrigger(s_server_part_pickup.s_unitrigger);
     s_server_part_pickup struct::delete();
     level.var_595db1e1 zm_unitrigger::create(#"", 64, &function_e4fcfb0a);
-    level flag::wait_till(#"hash_5516784173c2ee27");
+    level flag::wait_till(#"server_part_pickup_deposited");
     playsoundatposition(#"hash_359664e44a2bb635", level.var_595db1e1.origin);
     level clientfield::set("" + #"hash_3284b0cf34bfe44e", 0);
     level clientfield::increment("" + #"hash_b143d97bf92fc66", 1);
@@ -161,7 +161,7 @@ function_8703c1fe() {
 
 function_e4fcfb0a() {
   waitresult = self waittill(#"trigger");
-  level flag::set(#"hash_5516784173c2ee27");
+  level flag::set(#"server_part_pickup_deposited");
 }
 
 function_a546fd97() {

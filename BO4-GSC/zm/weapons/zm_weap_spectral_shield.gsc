@@ -70,7 +70,7 @@ __init__() {
   clientfield::register("vehicle", "" + #"zombie_spectral_key_stun", 1, n_bits, "int");
   clientfield::register("scriptmover", "" + #"zombie_spectral_key_stun", 1, n_bits, "int");
   clientfield::register("scriptmover", "" + #"spectral_key_essence", 1, 1, "int");
-  clientfield::register("allplayers", "" + #"hash_7663ae2eb866d2eb", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"spectral_key_absorb", 1, 1, "counter");
   clientfield::register("allplayers", "" + #"spectral_key_charging", 1, 2, "int");
   clientfield::register("allplayers", "" + #"spectral_shield_blast", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"shield_crafting_fx", 1, 1, "counter");
@@ -305,7 +305,7 @@ function_b952c1b(ai_zombie) {
   var_88f24b00 delete();
   wait 0.1;
   self playsoundontag(#"zmb_sq_souls_impact", "tag_weapon_right");
-  self clientfield::increment("" + #"hash_7663ae2eb866d2eb");
+  self clientfield::increment("" + #"spectral_key_absorb");
   self.var_9fd623ed = math::clamp(self.var_9fd623ed + 1, 0, self.var_f7c822b5 * 3);
   self thread function_804309c();
   self notify(#"hash_22a49f7903e394a5");

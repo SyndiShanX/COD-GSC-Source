@@ -441,7 +441,7 @@ function_5d0d1807() {
   level thread scene::init("special_rounds_scene_alt", "targetname");
 
   foreach(model in a_mdl_fire) {
-    model clientfield::set("" + #"hash_5afda864f8b64f5c", 1);
+    model clientfield::set("" + #"narrative_brazier_fire", 1);
   }
 
   level waittill(#"special_round_ending");
@@ -453,7 +453,7 @@ function_5d0d1807() {
   }
 
   foreach(model in a_mdl_fire) {
-    model clientfield::set("" + #"hash_5afda864f8b64f5c", 0);
+    model clientfield::set("" + #"narrative_brazier_fire", 0);
   }
 }
 

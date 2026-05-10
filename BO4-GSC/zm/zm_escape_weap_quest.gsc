@@ -34,7 +34,7 @@ autoexec __init__system__() {
 __init__() {
   n_bits = getminbitcountfornum(4);
   clientfield::register("scriptmover", "" + #"soul_catcher_portal", 1, 1, "int");
-  clientfield::register("actor", "" + #"hash_588871862d19b97d", 1, 1, "int");
+  clientfield::register("actor", "" + #"soul_catcher_charge_start", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"soul_catcher_impact", 1, 1, "counter");
   clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int");
@@ -199,7 +199,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
   var_66a8d5fc = scene::function_8582657c(#"ai_zm_esc_zombie_dreamcatch_rise", "rise");
 
   if(isDefined(ai_zombie)) {
-    ai_zombie clientfield::set("" + #"hash_588871862d19b97d", 1);
+    ai_zombie clientfield::set("" + #"soul_catcher_charge_start", 1);
   }
 
   vec_dir = self.s_scene.origin - var_678e573f.origin;
@@ -255,7 +255,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
 
   if(isDefined(ai_zombie)) {
     ai_zombie unlink();
-    ai_zombie clientfield::set("" + #"hash_588871862d19b97d", 0);
+    ai_zombie clientfield::set("" + #"soul_catcher_charge_start", 0);
     self.s_scene scene::play(var_3e4fd9fd, ai_zombie);
   } else {
     self.s_scene scene::play(var_3e4fd9fd);

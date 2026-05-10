@@ -198,7 +198,7 @@ function_64c8ff91() {
   level flag::init(#"hash_20c92720a4602dc7");
   level flag::init(#"hash_cad6742c753621");
   level flag::init(#"hash_6b64093194524df3");
-  level flag::init(#"hash_2bf040db75b1dac7");
+  level flag::init(#"flag_defend_combat_started");
   level flag::init(#"hash_277d03629ade12e8");
 }
 
@@ -638,10 +638,10 @@ mix_fertilizer_setup(b_skipped) {
   }
 
   mdl_fertilizer setModel(#"hash_571dce3dbd970ee6");
-  level clientfield::set("" + #"hash_5a3e1454226ef7a4", 1);
+  level clientfield::set("" + #"fertilizer_smell_bowl", 1);
   e_player = mdl_fertilizer zm_unitrigger::function_fac87205("", 96, 1);
   e_player playSound(#"hash_338c802929e278d4");
-  level clientfield::set("" + #"hash_5a3e1454226ef7a4", 0);
+  level clientfield::set("" + #"fertilizer_smell_bowl", 0);
   mdl_fertilizer delete();
   e_player thread zm_vo::function_a2bd5a0c(#"hash_4529b90b3d008c9f", 0, 0, 9999, 1);
 }
@@ -3594,7 +3594,7 @@ function_2eb4a526() {
 
 debug_spawns() {
   level endon(#"stop_debug_spawn");
-  level flag::wait_till(#"hash_2bf040db75b1dac7");
+  level flag::wait_till(#"flag_defend_combat_started");
   v_test = getent("<dev string:xc1>", "<dev string:xd0>");
 
   while(true) {
@@ -3631,7 +3631,7 @@ event_handler[weapon_fired] debug_trilane(event_struct) {
   level flag::clear(#"hash_20c92720a4602dc7");
   level flag::clear(#"hash_cad6742c753621");
   level flag::clear(#"hash_6b64093194524df3");
-  level flag::clear(#"hash_2bf040db75b1dac7");
+  level flag::clear(#"flag_defend_combat_started");
   level flag::clear(#"hash_277d03629ade12e8");
   level notify(#"stop_debug_spawn");
   setDvar(#"zm_debug_trilane", 1);
@@ -3721,7 +3721,7 @@ function_865bdf22() {
 
 defend_timer() {
   level endon(#"end_game");
-  level flag::set(#"hash_2bf040db75b1dac7");
+  level flag::set(#"flag_defend_combat_started");
   n_total_time = 300;
   var_45fb490a = 0;
   var_fc655932 = 0;
@@ -3765,7 +3765,7 @@ key_glint() {
 
 function_59e60f33() {
   level endon(#"end_game");
-  level flag::wait_till(#"hash_2bf040db75b1dac7");
+  level flag::wait_till(#"flag_defend_combat_started");
   n_total_time = 300;
   mdl_key = getent("defend_key_model", "targetname");
   mdl_key movez(87, n_total_time);
@@ -4457,8 +4457,8 @@ boss_fight() {
   level thread function_1a05e10c(#"boss_ranged_attack_2_launched", #"m_quest", #"missile_track");
   level thread function_1a05e10c(#"towers_boss_charge", #"m_quest", #"charge_warn");
   level thread function_c64fc074();
-  level thread function_95785950(45, level.var_49328379, #"armor_nag", #"hash_634700dd42db02d8");
-  level thread function_95785950(90, level.var_8b66546e, #"basket_nag", #"hash_634700dd42db02d8");
+  level thread function_95785950(45, level.var_49328379, #"armor_nag", #"boss_armor_broken");
+  level thread function_95785950(90, level.var_8b66546e, #"basket_nag", #"boss_armor_broken");
   array::thread_all(level.players, &function_3d487e02);
   wait 2;
   function_14833fc2();
@@ -4480,7 +4480,7 @@ boss_fight() {
   wait 15;
   function_14833fc2();
   trigger::wait_till("large_gate_r_trigger", "targetname");
-  level notify(#"hash_5d826e11ebe4b6e7");
+  level notify(#"second_boss_spawn");
   level.var_a52a5487 = 1;
   var_19ef8f95 = struct::get("towers_boss_location_2", "script_noteworthy");
   sp_spawner = getent("zombie_towers_boss2_spawner", "script_noteworthy");
@@ -4903,7 +4903,7 @@ function_ae1cbf2e() {
 }
 
 function_c64fc074() {
-  level waittill(#"hash_634700dd42db02d8");
+  level waittill(#"boss_armor_broken");
   zm_vo::function_7e4562d7(#"hash_6e1019732c1a9fc4", undefined, 1);
   level thread function_95785950(30, level.var_49328379, #"heart_nag");
 }
@@ -4918,7 +4918,7 @@ function_e50623f() {
   wait 2;
   level zm_audio::sndannouncerplayvox(#"stage_1_end", undefined, undefined, 4, 1);
   level notify(#"hash_26a91ce7b67d0e6d");
-  level waittill(#"hash_5d826e11ebe4b6e7");
+  level waittill(#"second_boss_spawn");
   wait 0.5;
   level zm_audio::sndannouncerplayvox(#"hash_436d318af3fd771f");
   wait 1;
@@ -4928,7 +4928,7 @@ function_e50623f() {
 }
 
 function_4550c346() {
-  level waittill(#"hash_634700dd42db02d8");
+  level waittill(#"boss_armor_broken");
   zm_vo::function_7e4562d7(#"hash_256347ab90346d20", undefined, 1);
 }
 

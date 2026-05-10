@@ -36,8 +36,8 @@ __init__() {
   level.w_crossbow_charged_upgraded = getweapon(#"ww_crossbow_charged_t8_upgraded");
   level.var_7cfd8159 = [];
   clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
-  clientfield::register("actor", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"crossbow_captured_fx", 1, 1, "int");
+  clientfield::register("actor", "" + #"crossbow_captured_fx", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_690509b9a2ec2ef3", 1, 2, "int");
   clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int");
   clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int");
@@ -275,7 +275,7 @@ function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   params = {
     #eattacker: var_37fa9b04.attacker, #einflictor: var_37fa9b04.inflictor, #weapon: var_37fa9b04.weapon, #smeansofdeath: var_37fa9b04.mod, #shitloc: "none"};
   self.var_2c2980d3 = 1;
-  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"crossbow_captured_fx", 1);
 
   if(isDefined(str_scene)) {
     if(isDefined(str_shot)) {
@@ -288,7 +288,7 @@ function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   }
 
   self function_e1c4ab06(params);
-  self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
+  self clientfield::set("" + #"crossbow_captured_fx", 0);
   self.var_2c2980d3 = undefined;
 
   if(isDefined(str_scene)) {
@@ -385,7 +385,7 @@ function_c805f2f9(params) {
   }
 
   player.var_7cfd8159[player.var_7cfd8159.size] = self;
-  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"crossbow_captured_fx", 1);
   str_scene = self function_e43d1b24();
 
   if(isDefined(str_scene) && isalive(self)) {
@@ -425,7 +425,7 @@ function_c805f2f9(params) {
     self.var_2c2980d3 = undefined;
     self.var_427e5396 = undefined;
     self.instakill_func = undefined;
-    self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
+    self clientfield::set("" + #"crossbow_captured_fx", 0);
 
     if(self.health <= 0 && self.archetype !== #"elephant") {
       self playSound("wpn_scorpion_zombie_explode");

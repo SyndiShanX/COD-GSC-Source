@@ -109,7 +109,7 @@ function_7be1ea25() {
       var_cfa5f67b = -2147483647;
       trace = bulletTrace((x, y, var_bfd46ccc), (x, y, var_cfa5f67b), 0, self, 1);
       position = trace[#"position"];
-      objective_add(localclientnum, obj_id, "active", #"hash_4d290db83b852838", position, #"none", waitresult.clientnum);
+      objective_add(localclientnum, obj_id, "active", #"teammate_waypoint_infil", position, #"none", waitresult.clientnum);
       level thread function_97d0a8af(localclientnum, obj_id, x, y, waitresult.clientnum);
     }
 
@@ -192,7 +192,7 @@ on_player_spawned(localclientnum) {
 
   function_2dba6c5(localclientnum, function_8978c19(localclientnum));
   forcestreamxmodel(#"hash_23c676424ced3f27", 4, 0);
-  forcestreamxmodel(#"hash_153258d8addb7554", 4, 0);
+  forcestreamxmodel(#"p8_wz_foliage_plant_red_kale_autumn", 4, 0);
   forcestreamxmodel(#"hash_6d6a1262dc74e606", 5, 0);
   forcestreamxmodel(#"hash_299eb2a348408676", 5, 0);
   thread function_a1aaf8c0();

@@ -127,7 +127,7 @@ damage(n_damage, mod_type, e_attacker) {
     }
 
     self.armor = 0;
-    self playSound(#"hash_2817ca3f96127e62");
+    self playSound(#"zmb_armor_break");
     return (n_damage - var_ee47fd1b);
   }
 
@@ -157,7 +157,7 @@ damage(n_damage, mod_type, e_attacker) {
       self remove(str_armor);
 
       if(self.armor <= 0) {
-        self playSound(#"hash_2817ca3f96127e62");
+        self playSound(#"zmb_armor_break");
       }
 
       n_index++;

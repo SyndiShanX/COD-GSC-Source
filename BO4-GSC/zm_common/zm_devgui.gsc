@@ -1272,7 +1272,7 @@ zombie_devgui_think() {
         players = getplayers();
         array::thread_all(players, &function_dc7312be);
         break;
-      case # "hash_428dbd0a89fc5d32":
+      case # "player1_ammodown":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1280,7 +1280,7 @@ zombie_devgui_think() {
         }
 
         break;
-      case # "hash_119220b211e16ba9":
+      case # "player2_ammodown":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1288,7 +1288,7 @@ zombie_devgui_think() {
         }
 
         break;
-      case # "hash_6cdf097974c7bcd0":
+      case # "player3_ammodown":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1296,7 +1296,7 @@ zombie_devgui_think() {
         }
 
         break;
-      case # "hash_5e281497ef267e37":
+      case # "player4_ammodown":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1958,16 +1958,16 @@ zombie_devgui_think() {
       case # "hash_3f826ccc785705ba":
         function_26417ea7();
         break;
-      case # "hash_683b625d2ace3726":
-        function_fb88b423();
+      case # "knockdown_all_ai":
+        knockdown_all_ai();
         break;
       case # "hash_3f9e70ff9f34194a":
         function_1b531660();
         break;
-      case # "hash_4369eeba583c6d2d":
+      case # "give_weapon_charm":
         function_61a7bb28();
         break;
-      case # "hash_757311298fe0366e":
+      case # "cycle_weapon_charm":
         function_184b9c6a();
         break;
       case # "hash_27a8af524430a8e1":
@@ -4157,7 +4157,7 @@ function_26417ea7() {
   level.var_565d6ce0 = !(isDefined(level.var_565d6ce0) && level.var_565d6ce0);
 }
 
-function_fb88b423() {
+knockdown_all_ai() {
   zombies = getaiarray();
 
   foreach(zombie in zombies) {

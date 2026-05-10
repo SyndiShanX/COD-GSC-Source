@@ -12,7 +12,7 @@ autoexec __init__system__() {
 
 main() {
   function_a5202150(#"hash_23c6eb5541cbc62f", "sig_buckler_dw");
-  function_a5202150(#"hash_419f11534af12a76", "sig_buckler_dw");
+  function_a5202150(#"ges_battle_cry", "sig_buckler_dw");
   function_a5202150(#"ges_blinded", "sig_buckler_dw");
   function_a5202150(#"hash_4f15a5e59317b738", "sig_buckler_dw");
   function_a5202150(#"hash_6dbb203d420a583", "sig_buckler_dw");
@@ -22,7 +22,7 @@ main() {
   function_a5202150(#"ges_shocked", "sig_buckler_dw");
   function_a5202150(#"hash_5723248289b2a00b", "sig_buckler_dw");
   function_a5202150(#"hash_23c6eb5541cbc62f", "sig_buckler_turret");
-  function_a5202150(#"hash_419f11534af12a76", "sig_buckler_turret");
+  function_a5202150(#"ges_battle_cry", "sig_buckler_turret");
   function_a5202150(#"ges_blinded", "sig_buckler_turret");
   function_a5202150(#"hash_4f15a5e59317b738", "sig_buckler_turret");
   function_a5202150(#"hash_6dbb203d420a583", "sig_buckler_turret");

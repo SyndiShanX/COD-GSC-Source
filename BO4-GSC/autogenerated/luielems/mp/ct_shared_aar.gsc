@@ -82,7 +82,7 @@ class cct_shared_aar: cluielem {
       return;
     }
 
-    if(#"hash_71b423d13c228d59" == state_name) {
+    if(#"newrecord_bronze" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 11);
       return;
     }

@@ -125,7 +125,7 @@ applyemp(attacker, explosionpoint) {
 empgrenadedeathwaiter() {
   self notify(#"empgrenadedeathwaiter");
   self endon(#"empgrenadedeathwaiter", #"empgrenadetimedout");
-  self waittill(#"death", #"hash_3ffb993d40af48ca");
+  self waittill(#"death", #"gadget_clear_emp");
 
   if(isDefined(self)) {
     self checktoturnoffemp();

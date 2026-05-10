@@ -253,7 +253,7 @@ function_50ef4b12(weapon) {
     return true;
   }
 
-  if(getweapon(#"hash_615e6c73989c85b4") == weapon.rootweapon) {
+  if(getweapon(#"willy_pete_l2") == weapon.rootweapon) {
     return true;
   }
 

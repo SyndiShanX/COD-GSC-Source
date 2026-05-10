@@ -227,11 +227,11 @@ devgui() {
       case # "hash_114b0d4db1699d85":
       case # "hash_138c6bb93906947e":
       case # "hash_15ba4b3713a7633c":
-      case # "hash_34fa2d4dc5eb050f":
+      case # "player_4_bf1":
       case # "hash_361dd9611538c0df":
       case # "player_2_tn1":
       case # "hash_410061a21976fb0d":
-      case # "hash_41af396a9a424584":
+      case # "player_1_bf1":
       case # "hash_41e44f4b44ea8a50":
       case # "hash_42e797318220640c":
       case # "player_1_tn1":
@@ -243,9 +243,9 @@ devgui() {
       case # "hash_544ef1318c01b458":
       case # "hash_546d41eb20e9ed47":
       case # "hash_5642f90448974736":
-      case # "hash_5a4711612a21ad6d":
+      case # "player_2_bf1":
       case # "hash_6601596aaf4e0e5e":
-      case # "hash_66603731967362a6":
+      case # "player_3_bf1":
       case # "hash_7f4e4b4da709788d":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         var_afaaaae2 = strtok(str_command, "<dev string:x2e3>")[2];

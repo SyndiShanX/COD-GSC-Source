@@ -1836,7 +1836,7 @@ function_2969ccb4(var_43d50d89 = 1, var_463b195d = 1) {
 
 function_41dcd216() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
+  setDvar(#"devgui_ct_firebreak", "<dev string:xaf>");
   level flag::init("<dev string:x38>");
 
   if(sessionmode != 4) {
@@ -1852,7 +1852,7 @@ function_41dcd216() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
+    cmd = getdvarstring(#"devgui_ct_firebreak", "<dev string:xaf>");
 
     if(cmd == "<dev string:xaf>") {
       continue;
@@ -1905,7 +1905,7 @@ function_41dcd216() {
         break;
     }
 
-    setDvar(#"hash_5b3b4d1a60845a9b", "<dev string:xaf>");
+    setDvar(#"devgui_ct_firebreak", "<dev string:xaf>");
   }
 }
 

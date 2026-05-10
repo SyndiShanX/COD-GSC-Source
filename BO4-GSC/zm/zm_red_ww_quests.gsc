@@ -790,7 +790,7 @@ function_6ef2b98f(eventstruct) {
   }
 
   if(eventstruct.event == "give_weapon" && isDefined(function_9b3e9487(eventstruct.weapon)) && function_9b3e9487(eventstruct.weapon) && self flag::get(#"hash_664c4b8d9b3d0237")) {
-    self notify(#"hash_540044cdce85f636");
+    self notify(#"picked_up_ww");
   }
 
   self thread function_f25f67a7();
@@ -1525,7 +1525,7 @@ function_f5639b00(e_player) {
   e_player endon(#"hash_740799bb1b6c19b6");
 
   if(isPlayer(e_player)) {
-    e_player waittill(#"disconnect", #"hash_540044cdce85f636");
+    e_player waittill(#"disconnect", #"picked_up_ww");
   }
 
   if(isDefined(e_player)) {
@@ -3305,7 +3305,7 @@ function_6161ce9a(e_player) {
   }
 
   if(!level flag::get("round_reset")) {
-    s_result = e_player waittilltimeout(20, #"hash_1b2c21ba7b18dbf9", #"hash_52d2f17ac6d67de2", #"hash_4969a839c4e666dc", #"start_beaming", #"death");
+    s_result = e_player waittilltimeout(20, #"hash_1b2c21ba7b18dbf9", #"hash_52d2f17ac6d67de2", #"start_beam_attack", #"start_beaming", #"death");
   }
 
   if(isDefined(s_result) && s_result._notify === "timeout") {

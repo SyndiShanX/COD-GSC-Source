@@ -68,7 +68,7 @@ init_flags() {
   level flag::init(#"hash_67757a8cb27cb8aa");
   level flag::init(#"hash_eed1544f10c5bb3");
   level flag::init(#"hash_5f2b9a36a2c517af");
-  level flag::init(#"hash_25d8c88ff3f91ee5");
+  level flag::init(#"boss_fight_all_complete");
   level flag::init(#"hash_480ab8b0d38942cc");
 }
 
@@ -318,7 +318,7 @@ function_f242ac9f(var_5ea5c94d) {
 }
 
 function_43f5567a(var_5ea5c94d, ended_early) {
-  level flag::set(#"hash_25d8c88ff3f91ee5");
+  level flag::set(#"boss_fight_all_complete");
   music::setmusicstate("none");
   level.musicsystemoverride = 0;
 
@@ -1250,7 +1250,7 @@ function_bb528a4b(n_stage) {
       }
 
       level thread function_f74b38da("zm_power_on_rumble");
-      level notify(#"hash_14400d2bff068132");
+      level notify(#"boss_cancel_action");
       level notify(#"hash_38f29f9cb03586ea");
     }
   }
@@ -1386,7 +1386,7 @@ function_ae76e58d() {
 }
 
 function_a430c55f() {
-  level endon(#"hash_25d8c88ff3f91ee5", #"end_game", #"intermission");
+  level endon(#"boss_fight_all_complete", #"end_game", #"intermission");
 
   while(true) {
     waitresult = self waittill(#"trigger");

@@ -448,7 +448,7 @@ function_f5116ee2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_8c5b87a7(localclientnum) {
-  self notify(#"hash_2bb8be6b846aed93");
+  self notify(#"boss_attack_beam_end");
 
   if(isDefined(self.var_ca2681ca)) {
     level beam::kill(self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a");
@@ -479,8 +479,8 @@ function_c6932c3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_e8071e64(localclientnum) {
-  self notify(#"hash_2bb8be6b846aed93");
-  self endon(#"hash_2bb8be6b846aed93", #"death");
+  self notify(#"boss_attack_beam_end");
+  self endon(#"boss_attack_beam_end", #"death");
   assert(isDefined(level.var_90bda347));
 
   if(!isDefined(level.var_90bda347)) {
@@ -529,7 +529,7 @@ function_a96b063f() {
 }
 
 function_da0759d0() {
-  self endon(#"hash_2bb8be6b846aed93");
+  self endon(#"boss_attack_beam_end");
 
   while(isDefined(self.var_ca2681ca) && isDefined(level.var_90bda347)) {
     self.var_ca2681ca function_25d9319(level.var_90bda347);
@@ -561,7 +561,7 @@ function_ff52ba5a(localclientnum) {
 }
 
 function_2585c107() {
-  self endon(#"hash_2bb8be6b846aed93");
+  self endon(#"boss_attack_beam_end");
   level endon(#"intermission");
 
   while(true) {
@@ -581,7 +581,7 @@ function_2585c107() {
 
 function_1c341163(localclientnum) {
   level endon(#"intermission");
-  self waittill(#"hash_2bb8be6b846aed93");
+  self waittill(#"boss_attack_beam_end");
   soundstoplineemitter(#"hash_3d5a33369bbe2308", self.var_da4fd8df, self.var_608d2b77);
 
   if(isDefined(self)) {

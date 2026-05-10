@@ -152,7 +152,7 @@ function_3c39c720() {
   }
 
   while(true) {
-    s_result = self waittill(#"hash_4969a839c4e666dc");
+    s_result = self waittill(#"start_beam_attack");
 
     if(self flag::get(#"ww_combat_active")) {
       continue;

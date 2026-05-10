@@ -44,7 +44,7 @@ function_efbf12ac(localclientnum) {
     return;
   }
 
-  self notify(#"hash_5423f6c5db580daa");
+  self notify(#"ray_gun_beam_end");
 
   if(isDefined(self.var_21553ca5)) {
     beamkill(localclientnum, self.var_21553ca5);
@@ -62,7 +62,7 @@ function_e7a7ac96(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", #"hash_5423f6c5db580daa");
+  self endon(#"death", #"ray_gun_beam_end");
   self.var_d1f92a1c = util::spawn_model(localclientnum, "tag_origin", self.origin + (0, 0, 4000));
   str_beam = "beam8_zm_raygun2v_elec";
 

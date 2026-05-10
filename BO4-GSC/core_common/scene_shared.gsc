@@ -2260,8 +2260,8 @@ function_a4ad0308(o_scene) {
     return;
   }
 
-  self notify(#"hash_f7c1e0e8fb935d5");
-  self endoncallback(&function_63033fc3, #"hash_f7c1e0e8fb935d5", #"disconnect");
+  self notify(#"scene_skip_button_pressed");
+  self endoncallback(&function_63033fc3, #"scene_skip_button_pressed", #"disconnect");
   o_scene endoncallback(&function_63033fc3, #"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_63783193d9ac5bfc");
   level endoncallback(&function_63033fc3, #"hash_7a8cd7f6a20dde3e");
   b_skip_scene = 0;

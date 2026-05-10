@@ -11,7 +11,7 @@
 #namespace red_boss_battle;
 
 init() {
-  clientfield::register("missile", "" + #"hash_64910f94ebb8d66a", 16000, 2, "int", &function_6e3ecc82, 0, 0);
+  clientfield::register("missile", "" + #"chaos_bolt_fx", 16000, 2, "int", &function_6e3ecc82, 0, 0);
   clientfield::register("scriptmover", "" + #"pegasus_emerge", 16000, 1, "counter", &pegasus_emerge, 0, 0);
   clientfield::register("scriptmover", "" + #"pegasus_storm", 16000, 1, "int", &function_272aa016, 0, 0);
   clientfield::register("allplayers", "" + #"hash_73e309ffb25bf63d", 16000, 1, "int", &function_a27b945a, 0, 0);
@@ -20,9 +20,9 @@ init() {
   clientfield::register("scriptmover", "" + #"lightning_arc_fx", 16000, 1, "int", &function_37d1ee2e, 0, 0);
   clientfield::register("scriptmover", "" + #"viper_bite_bitten_fx", 16000, 1, "int", &function_5091797, 0, 0);
   clientfield::register("scriptmover", "" + #"viper_bite_projectile_impact", 16000, 1, "counter", &function_e2680ff3, 0, 0);
-  level._effect[#"hash_52f038f656770d3f"] = #"hash_433034414b39f1ef";
+  level._effect[#"chaos_bolt_1"] = #"hash_433034414b39f1ef";
   level._effect[#"chaos_bolt_2"] = #"hash_433035414b39f3a2";
-  level._effect[#"hash_52f03af6567710a5"] = #"hash_7a9a94bbcf902878";
+  level._effect[#"chaos_bolt_3"] = #"hash_7a9a94bbcf902878";
   level._effect[#"pegasus_emerge"] = #"hash_9c7935d1106ec1d";
   level._effect[#"storm_radius"] = #"hash_4dd46a244305d465";
   level.s_boss_battle = spawnStruct();

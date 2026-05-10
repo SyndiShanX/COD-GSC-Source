@@ -134,7 +134,7 @@ function_bda82828() {
   }
 
   level.a_mdl_chaos = [];
-  a_s_chaos = struct::get_array(#"hash_2cb6fcd3ae46aec0");
+  a_s_chaos = struct::get_array(#"s_chaos_audience");
 
   foreach(s_audience in a_s_chaos) {
     var_b6b01674 = s_audience function_ba40fcf4();
@@ -276,7 +276,7 @@ function_77dd379a() {
   }
 
   level.a_mdl_chaos = [];
-  a_s_chaos = struct::get_array(#"hash_2cb6fcd3ae46aec0");
+  a_s_chaos = struct::get_array(#"s_chaos_audience");
 
   foreach(s_audience in a_s_chaos) {
     var_b6b01674 = s_audience function_ba40fcf4();

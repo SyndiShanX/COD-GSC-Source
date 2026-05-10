@@ -24,7 +24,7 @@ init() {
   clientfield::register("allplayers", "" + #"hash_72bd7a6af2ba1c5e", 16000, 1, "int", &function_d087b08c, 0, 1);
   clientfield::register("allplayers", "" + #"hash_4a149c9daff159cd", 16000, 1, "int", &function_d02ccc7c, 0, 1);
   clientfield::register("toplayer", "" + #"hash_7343b1cdab1f31c5", 16000, 1, "counter", &function_3d3614aa, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_2a17f2993036fab4", 16000, 1, "counter", &function_6a9e68bf, 0, 0);
+  clientfield::register("scriptmover", "" + #"greek_fire_annihilate", 16000, 1, "counter", &greek_fire_annihilate, 0, 0);
   clientfield::register("scriptmover", "" + #"rune_fire", 16000, 1, "int", &function_659d8180, 0, 0);
   clientfield::register("scriptmover", "" + #"monument_eyes", 16000, var_7551dff2, "int", &monument_eyes, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_78fa79d021d86cb6", 16000, 1, "int", &function_27f4136d, 0, 0);
@@ -95,7 +95,7 @@ init() {
   level._effect[#"hash_7210806af22770bb"] = #"hash_527b5ca4206503fd";
   level._effect[#"hash_48f9a29daf00294a"] = #"hash_752bfcf80c9da234";
   level._effect[#"hash_48f3969daefba938"] = #"hash_7531e8f80ca1ebe6";
-  level._effect[#"hash_2a17f2993036fab4"] = #"hash_6638fd8cf4876df";
+  level._effect[#"greek_fire_annihilate"] = #"hash_6638fd8cf4876df";
   level._effect[#"rune_fire"] = #"hash_7504bcf503817eb2";
   level._effect[#"hash_784f06b253332f8f"] = #"hash_7d24820ee5231fef";
   level._effect[#"hash_797e7381ba62ff8a"] = #"hash_795ee7d89d6f10d2";
@@ -407,8 +407,8 @@ function_3d3614aa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self playrumbleonentity(localclientnum, #"hash_230077451d7197c1");
 }
 
-function_6a9e68bf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_2a17f2993036fab4"], self, "tag_origin");
+greek_fire_annihilate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  util::playFXOnTag(localclientnum, level._effect[#"greek_fire_annihilate"], self, "tag_origin");
 }
 
 function_d7aac18b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

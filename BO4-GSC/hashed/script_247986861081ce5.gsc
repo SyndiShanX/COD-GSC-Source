@@ -87,12 +87,12 @@ function_f76df1da() {
 function_8bddfcc3() {
   iprintlnbold("<dev string:x5d>");
 
-  level notify(#"hash_4d3a2c46c22b012e");
+  level notify(#"cage_challenges_complete");
   function_bc0ec5b3(0);
 }
 
 function_1b350677() {
-  level endon(#"hash_4d3a2c46c22b012e");
+  level endon(#"cage_challenges_complete");
 
   while(true) {
     if(!level.var_f0efd877 && function_c32f5235()) {

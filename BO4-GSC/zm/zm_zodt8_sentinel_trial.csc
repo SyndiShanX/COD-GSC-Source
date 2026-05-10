@@ -81,7 +81,7 @@ init_fx() {
   level._effect[#"glyph_activate"] = #"hash_6a4db7ffc84cf7fc";
   level._effect[#"orb_trail"] = #"hash_6d900123df67f4ce";
   level._effect[#"orb_essence"] = #"hash_2aac2efa85bfb786";
-  level._effect[#"hash_2dd4629ae81753e5"] = #"hash_203548b984de70a4";
+  level._effect[#"orb_essence_neptune"] = #"hash_203548b984de70a4";
   level._effect[#"hash_23c18b717592a89d"] = #"hash_43cec289a09441e9";
   level._effect[#"hash_2bb182b164a2d789"] = #"hash_71fc8c15d53b5fe2";
   level._effect[#"hash_4274dc30c3876166"] = #"hash_2f27882b95a820fd";
@@ -577,7 +577,7 @@ function_92436a06(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     util::playFXOnTag(localclientnum, level._effect[#"hash_4274dc30c3876166"], self, "tag_origin");
 
     if(self.origin[2] < 2000) {
-      self.var_92d5024f = util::playFXOnTag(localclientnum, level._effect[#"hash_2dd4629ae81753e5"], self, "tag_origin");
+      self.var_92d5024f = util::playFXOnTag(localclientnum, level._effect[#"orb_essence_neptune"], self, "tag_origin");
     } else {
       self.var_92d5024f = util::playFXOnTag(localclientnum, level._effect[#"orb_essence"], self, "tag_origin");
     }

@@ -49,7 +49,7 @@ preload() {
   namespace_4b68b2b3::preload();
   zm_orange_mq_hell::preload();
   zm_orange_mq_sendoff::preload();
-  clientfield::register("toplayer", "" + #"hash_668f474410d5c1d0", 24000, 1, "int");
+  clientfield::register("toplayer", "" + #"gehen_clear_hud", 24000, 1, "int");
 }
 
 main() {
@@ -238,7 +238,7 @@ hud_disable() {
     player showcrosshair(0);
     player allowcrouch(0);
     player thread function_b20c4898();
-    player clientfield::set_to_player("" + #"hash_668f474410d5c1d0", 1);
+    player clientfield::set_to_player("" + #"gehen_clear_hud", 1);
     player val::set(#"gehen", "disable_weapons", 1);
   }
 }
@@ -247,7 +247,7 @@ hud_enable() {
   foreach(player in getplayers()) {
     player showcrosshair(1);
     player allowcrouch(1);
-    player clientfield::set_to_player("" + #"hash_668f474410d5c1d0", 0);
+    player clientfield::set_to_player("" + #"gehen_clear_hud", 0);
   }
 }
 

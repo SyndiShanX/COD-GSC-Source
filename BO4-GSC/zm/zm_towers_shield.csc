@@ -30,7 +30,7 @@ __init__() {
   clientfield::register("toplayer", "" + #"hash_2cd1bb15f71aedb8", 1, 1, "counter", &function_7faf18dd, 0, 0);
   clientfield::register("toplayer", "" + #"hash_1769e95fdb10dfae", 1, 1, "counter", &function_f2c5818e, 0, 0);
   level._effect[#"charged_eyes"] = #"hash_2d151fbde925d3e";
-  level._effect[#"hash_5a722d93fee71051"] = #"hash_7a37d99aaa7057cf";
+  level._effect[#"upgraded_charged_eyes"] = #"hash_7a37d99aaa7057cf";
   level._effect[#"firestorm_1p"] = #"hash_5a45cca38c2dd6c8";
   level._effect[#"firestorm_3p"] = #"hash_5a4cd8a38c3409da";
   level._effect[#"hash_7f665a0db122bf39"] = #"hash_2c36c10b1ca1f825";
@@ -215,7 +215,7 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx_katar[#"flame_3p"] = util::playFXOnTag(localclientnum, var_c10d7c76, self, "tag_blade_fx");
 
     if(var_515e20e6) {
-      self.var_d16b03db = util::playFXOnTag(localclientnum, level._effect[#"hash_5a722d93fee71051"], self, "tag_barrels_fx");
+      self.var_d16b03db = util::playFXOnTag(localclientnum, level._effect[#"upgraded_charged_eyes"], self, "tag_barrels_fx");
       return;
     }
 

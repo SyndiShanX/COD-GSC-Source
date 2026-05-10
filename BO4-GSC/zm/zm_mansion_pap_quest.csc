@@ -52,7 +52,7 @@ init_fx() {
   level._effect[#"pap_projectile_end"] = #"hash_1a06427eff8dfe13";
   level._effect[#"hash_3e60b8be62e0e427"] = #"hash_41384db90e66558b";
   level._effect[#"hash_32c45f56d5a6bf6c"] = #"hash_5d1eb6746beee299";
-  level._effect[#"hash_5dfd7f47fc0123ad"] = #"hash_45b5a28321d54ea0";
+  level._effect[#"stone_blue_glow"] = #"hash_45b5a28321d54ea0";
   level._effect[#"hash_34d62c40ae5290e6"] = #"hash_3d736a45c27a711d";
   level._effect[#"hash_229bf68ca0edaadb"] = #"hash_2949c26febe96072";
   level._effect[#"hash_2e59763a88bb2bd4"] = #"hash_749d6ee7eea4a790";
@@ -178,7 +178,7 @@ function_731e7fcf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.b_completed = 1;
       str_tag = "charging_circle_number_12_jnt";
       self stoprenderoverridebundle(#"hash_611a8e938ecec293", str_tag);
-      self stoprenderoverridebundle(#"hash_31724d2ff7557f6f", "charging_circle_jnt");
+      self stoprenderoverridebundle(#"rob_zm_mansion_clock", "charging_circle_jnt");
       self stopallloopsounds();
 
       if(isDefined(self.var_23864f02)) {
@@ -194,7 +194,7 @@ function_731e7fcf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(!(isDefined(self.b_started) && self.b_started)) {
         self.b_started = 1;
-        self playrenderoverridebundle(#"hash_31724d2ff7557f6f", "charging_circle_jnt");
+        self playrenderoverridebundle(#"rob_zm_mansion_clock", "charging_circle_jnt");
         self playrenderoverridebundle(#"hash_61170b938ecbae23", "charging_circle_number_01_jnt");
         self playrenderoverridebundle(#"hash_61170c938ecbafd6", "charging_circle_number_02_jnt");
         self playrenderoverridebundle(#"hash_61170d938ecbb189", "charging_circle_number_03_jnt");
@@ -272,7 +272,7 @@ function_9d797e21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           str_effect = level._effect[#"hash_229bf68ca0edaadb"];
           break;
         case # "p8_zm_man_pap_gazing_stone_02_full":
-          str_effect = level._effect[#"hash_5dfd7f47fc0123ad"];
+          str_effect = level._effect[#"stone_blue_glow"];
           break;
         case # "p8_zm_man_pap_gazing_stone_03_full":
           str_effect = level._effect[#"hash_34d62c40ae5290e6"];

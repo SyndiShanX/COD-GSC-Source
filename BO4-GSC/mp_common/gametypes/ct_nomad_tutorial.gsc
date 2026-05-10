@@ -386,7 +386,7 @@ function_45d34164(var_2970d97, var_9c8d914, var_af764233, var_f1111d99, var_7d59
   }
 
   ct_utils::function_c2a10fc();
-  level notify(#"hash_6ae51860f226eb91");
+  level notify(#"tripwire_complete_msg");
 }
 
 function_b93032f4() {
@@ -1296,7 +1296,7 @@ function_dfc80de0() {
 
 function_b7ff9e87() {
   self waittill(#"death");
-  self val::reset(#"hash_3ae9db07bc956789", "ignoreall");
+  self val::reset(#"reset_bot_tripwire", "ignoreall");
 }
 
 function_89eab9e8() {
@@ -1537,7 +1537,7 @@ function_e8009771() {
 }
 
 function_621ffb5a() {
-  level endon(#"hash_6ae51860f226eb91");
+  level endon(#"tripwire_complete_msg");
 
   switch (level.var_ad7c0539) {
     case 1:

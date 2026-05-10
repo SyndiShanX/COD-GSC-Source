@@ -1029,7 +1029,7 @@ jump_scare(var_a276c861) {
 track_player_eyes() {
   self notify(#"track_player_eyes");
   self endon(#"disconnect", #"track_player_eyes");
-  level endon(#"hash_10a56459715cd20e", #"insanity_mode_triggered");
+  level endon(#"reset_all_clocks", #"insanity_mode_triggered");
   self thread function_cbeb9a33();
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_gl_scare", "targetname");

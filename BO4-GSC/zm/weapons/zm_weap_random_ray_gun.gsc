@@ -905,8 +905,8 @@ function_ad3de341(e_attacker) {
     self notify(#"hash_2250ef170a9d4a6");
   }
 
-  self val::set(#"hash_1b572998d0efb58f", "ignoreall", 1);
-  self val::set(#"hash_1b572998d0efb58f", "ignoreme", 1);
+  self val::set(#"ai_confused", "ignoreall", 1);
+  self val::set(#"ai_confused", "ignoreme", 1);
   self.canbetargetedbyturnedzombies = 0;
   self.v_zombie_custom_goal_pos = self.origin;
   self zombie_utility::set_zombie_run_cycle("walk");

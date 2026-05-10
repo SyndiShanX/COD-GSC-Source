@@ -160,7 +160,7 @@ ww_quest_step2_cleanup(var_5ea5c94d, ended_early) {
 }
 
 function_401b015a(e_player) {
-  if(level flag::get(#"hash_84593b9650c7abf")) {
+  if(level flag::get(#"soup_challenge_active")) {
     return false;
   }
 
@@ -175,7 +175,7 @@ function_f7a8831a() {
   while(true) {
     self waittill(#"trigger_activated");
 
-    if(level flag::get(#"hash_84593b9650c7abf")) {
+    if(level flag::get(#"soup_challenge_active")) {
       continue;
     }
 

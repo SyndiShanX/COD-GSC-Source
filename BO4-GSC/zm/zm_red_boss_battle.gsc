@@ -57,7 +57,7 @@
 #namespace red_boss_battle;
 
 init() {
-  clientfield::register("missile", "" + #"hash_64910f94ebb8d66a", 16000, 2, "int");
+  clientfield::register("missile", "" + #"chaos_bolt_fx", 16000, 2, "int");
   clientfield::register("scriptmover", "" + #"pegasus_emerge", 16000, 1, "counter");
   clientfield::register("scriptmover", "" + #"pegasus_storm", 16000, 1, "int");
   clientfield::register("allplayers", "" + #"hash_73e309ffb25bf63d", 16000, 1, "int");
@@ -517,15 +517,15 @@ chaos_bolt_thrower(e_target) {
     projectile = magicbullet(level.s_boss_battle.var_5db6ed5f, var_5f07628, v_target_pos, e_perseus);
 
     if(level.s_boss_battle.n_stage > 1) {
-      projectile clientfield::set("" + #"hash_64910f94ebb8d66a", 2);
+      projectile clientfield::set("" + #"chaos_bolt_fx", 2);
     } else {
-      projectile clientfield::set("" + #"hash_64910f94ebb8d66a", 1);
+      projectile clientfield::set("" + #"chaos_bolt_fx", 1);
     }
 
     b_annihilator = 0;
   } else {
     projectile = magicbullet(level.s_boss_battle.var_5db6ed5f, var_5f07628, v_target_pos, e_perseus);
-    projectile clientfield::set("" + #"hash_64910f94ebb8d66a", 3);
+    projectile clientfield::set("" + #"chaos_bolt_fx", 3);
     b_annihilator = 1;
   }
 
@@ -1619,7 +1619,7 @@ function_2a866d1a(a_ents) {
     v_target_loc = e_perseus.origin + v_direction;
     launchvelocity = vectornormalize(v_target_loc - e_perseus.origin) * 800;
     projectile = e_perseus magicmissile(level.s_boss_battle.var_5db6ed5f, v_target_loc + (16, 0, 54), launchvelocity);
-    projectile clientfield::set("" + #"hash_64910f94ebb8d66a", 3);
+    projectile clientfield::set("" + #"chaos_bolt_fx", 3);
   }
 }
 
@@ -2234,11 +2234,11 @@ function_4c17036d(e_attacker, b_hero_weapon = 0) {
 stat_tracker_setup(b_skipped) {
   level endon(#"end_game", #"stat_tracker" + "_ended_early");
 
-  while(!level flag::exists(#"hash_5a7f1f9adac6dc8c") || !level flag::exists(#"boss_battle_complete")) {
+  while(!level flag::exists(#"flag_cleanse_teleported") || !level flag::exists(#"boss_battle_complete")) {
     wait 1;
   }
 
-  level flag::wait_till_all(array(#"hash_5a7f1f9adac6dc8c", #"boss_battle_complete"));
+  level flag::wait_till_all(array(#"flag_cleanse_teleported", #"boss_battle_complete"));
 }
 
 stat_tracker_cleanup(b_skipped, var_19e802fa) {

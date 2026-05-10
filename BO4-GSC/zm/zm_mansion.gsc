@@ -1668,7 +1668,7 @@ function_3f147b12(cmd) {
     case # "special_rounds_wolf":
       zm_devgui::zombie_devgui_goto_round(level.var_abe2c289);
       break;
-    case # "hash_bb64387472f6f70":
+    case # "special_rounds_bat":
       zm_devgui::zombie_devgui_goto_round(level.var_5657e981);
       break;
     case # "special_rounds_mixed":
@@ -1714,7 +1714,7 @@ function_3f147b12(cmd) {
     case # "hash_5e5988c329d7cffe":
       level notify(#"hash_348748d248801d6b");
       break;
-    case # "hash_692c555ad0747a7c":
+    case # "force_spawn_bat":
       bat::function_2e37549f(1, undefined);
       break;
     case # "hash_627749f1d7a46328":
@@ -1730,7 +1730,7 @@ function_3f147b12(cmd) {
     case # "force_spawn_wolf":
       zombie_dog_util::function_62db7b1c(1, undefined);
       break;
-    case # "hash_50f5df2c61fab9c0":
+    case # "force_spawn_nosferatu":
       zm_ai_nosferatu::function_74f25f8a(1, undefined);
       break;
     case # "hash_737d2d8656f8cee":
@@ -2093,10 +2093,10 @@ function_3f147b12(cmd) {
     case # "hash_59e2caf7a91feffb":
       level flag::set("<dev string:x3daf>");
       break;
-    case # "hash_54603db1db9f5ec5":
+    case # "chaos_material_nosferatu":
       level flag::set("<dev string:x3dd7>");
       break;
-    case # "hash_2540786a5e16c895":
+    case # "chaos_material_bat":
       level flag::set("<dev string:x3e00>");
       break;
     case # "igc_play_outro":

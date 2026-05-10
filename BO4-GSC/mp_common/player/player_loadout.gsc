@@ -1104,7 +1104,7 @@ function_c3448ab0(slot, previous_weapon, force_give_gadget_health_regen = 1) {
   }
 
   if(globallogic_utils::function_308e3379()) {
-    secondaryoffhand = getweapon(#"hash_28323cd36d8b5f93");
+    secondaryoffhand = getweapon(#"gadget_health_regen_bb");
     secondaryoffhandcount = 0;
   } else if(force_give_gadget_health_regen === 1 && level.new_health_model) {
     tactical_gear = self function_d78e0e04(self.class_num);

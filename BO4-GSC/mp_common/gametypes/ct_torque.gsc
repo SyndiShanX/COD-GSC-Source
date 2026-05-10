@@ -165,7 +165,7 @@ function_6db6572b() {
   function_5a72abb2();
   level.var_f682cf14 = util::spawn_model("tag_origin", (0, 0, 0), (0, 0, 0));
 
-  level thread function_d69c54a8();
+  level thread devgui_ct_torque();
 }
 
 function_c4632a02() {
@@ -1169,9 +1169,9 @@ function_dd64960c(a_ents) {
   }
 }
 
-function_d69c54a8() {
+devgui_ct_torque() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
+  setDvar(#"devgui_ct_torque", "<dev string:x97>");
   level flag::init("<dev string:x9a>");
 
   if(sessionmode != 4) {
@@ -1200,7 +1200,7 @@ function_d69c54a8() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
+    cmd = getdvarstring(#"devgui_ct_torque", "<dev string:x97>");
 
     if(cmd == "<dev string:x97>") {
       continue;
@@ -1316,6 +1316,6 @@ function_d69c54a8() {
         break;
     }
 
-    setDvar(#"hash_2bdefa89fdfb0546", "<dev string:x97>");
+    setDvar(#"devgui_ct_torque", "<dev string:x97>");
   }
 }

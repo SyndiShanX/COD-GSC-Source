@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_168c1517a89a7cd", &on_begin, &on_end);
+  zm_trial::register_challenge(#"shocking_spree", &on_begin, &on_end);
 }
 
 on_begin(var_b3d469ae, var_5cd0152f) {
@@ -77,7 +77,7 @@ on_end(round_reset) {
 }
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_168c1517a89a7cd");
+  challenge = zm_trial::function_a36e8c38(#"shocking_spree");
   return isDefined(challenge);
 }
 

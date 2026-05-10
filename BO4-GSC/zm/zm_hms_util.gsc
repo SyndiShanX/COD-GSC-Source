@@ -30,7 +30,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  if(getdvarint(#"hash_79f58c97fc43e423", 0)) {
+  if(getdvarint(#"show_ent_counts", 0)) {
     level thread function_774b42ac();
   }
 
@@ -672,7 +672,7 @@ devgui() {
 
   while(true) {
     waitframe(1);
-    str_command = getdvarstring(#"hash_6c7113bf98c41367", "<dev string:x9d>");
+    str_command = getdvarstring(#"zm_hms_util_cmd", "<dev string:x9d>");
 
     switch (str_command) {
       case # "give_targets":
@@ -682,7 +682,7 @@ devgui() {
         break;
     }
 
-    setDvar(#"hash_6c7113bf98c41367", "<dev string:x9d>");
+    setDvar(#"zm_hms_util_cmd", "<dev string:x9d>");
   }
 }
 

@@ -416,10 +416,10 @@ function_9c896b69(localclientnum) {
   level endon(#"disconnect", #"draft_closed");
 
   while(true) {
-    waitresult = level waittill(#"positiondraft_update", #"positiondraft_reject", #"hash_6f2435126950e914");
+    waitresult = level waittill(#"positiondraft_update", #"positiondraft_reject", #"positiondraft_characterselected");
     localclientnum = waitresult.localclientnum;
 
-    if(waitresult._notify == #"hash_6f2435126950e914") {
+    if(waitresult._notify == #"positiondraft_characterselected") {
       level childthread update_team(localclientnum, 1);
       level childthread function_1cf2437c(localclientnum, waitresult.characterindex);
       continue;

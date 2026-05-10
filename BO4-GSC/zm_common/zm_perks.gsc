@@ -1413,7 +1413,7 @@ perks_register_clientfield() {
   clientfield::register("toplayer", "" + #"hash_1da6660f0414562", 1, 3, "int");
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int");
+    clientfield::register("world", "" + #"zeus_bird_fx", 1, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int");
     clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int");
     clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter");
@@ -3150,7 +3150,7 @@ function_fb633f9d(n_slot, n_state) {
 function_ba56adf1(var_c188cf87, var_59ad3e22) {
   level endon(#"end_game");
   level flag::wait_till("all_players_spawned");
-  level clientfield::set("" + #"hash_46334db9e3c76275", 1);
+  level clientfield::set("" + #"zeus_bird_fx", 1);
 
   while(true) {
     a_e_players = arraysortclosest(level.players, var_c188cf87, undefined, 0, 750);

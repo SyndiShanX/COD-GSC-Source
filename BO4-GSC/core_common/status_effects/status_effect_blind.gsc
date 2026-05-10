@@ -39,7 +39,7 @@ blind_apply(var_756fda07, weapon, applicant) {
   }
 
   if(isDefined(blindarray[var_c94d654b]) && blindarray[var_c94d654b] + 3000 < gettime()) {
-    if(isDefined(weapon) && weapon == getweapon(#"hash_3f62a872201cd1ce")) {
+    if(isDefined(weapon) && weapon == getweapon(#"swat_grenade_payload")) {
       if(isDefined(level.playgadgetsuccess)) {
         self.owner.var_ef9b6f0b = 1;
         level notify(#"hash_ac034f4f7553641");
@@ -50,7 +50,7 @@ blind_apply(var_756fda07, weapon, applicant) {
         }
 
         if(applicant.var_a467e27f == (isDefined(var_9194a036) ? var_9194a036 : 0)) {
-          applicant thread[[level.playgadgetsuccess]](getweapon(#"hash_3f62a872201cd1ce"), undefined, self.owner, undefined);
+          applicant thread[[level.playgadgetsuccess]](getweapon(#"swat_grenade_payload"), undefined, self.owner, undefined);
         }
       }
     }

@@ -20,15 +20,15 @@ __init__() {
   clientfield::register("toplayer", "" + #"hash_37c33178198d54e4", 1, 1, "int", &function_2a127860, 0, 0);
   clientfield::register("toplayer", "" + #"hash_5d9808a62579e894", 1, 1, "int", &function_f0e07568, 0, 0);
   clientfield::register("toplayer", "" + #"hash_4ec2b359458774e4", 1, 1, "int", &function_7353e021, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_4724376be4e925a3", 1, 1, "int", &function_3b405536, 0, 0);
+  clientfield::register("toplayer", "" + #"place_blue_rock", 1, 1, "int", &place_blue_rock, 0, 0);
   clientfield::register("toplayer", "" + #"hash_1aa1c7790dc67d1e", 1, 1, "int", &function_46b21d8a, 0, 0);
   clientfield::register("toplayer", "" + #"hash_7cdfc8f4819bab2e", 1, 1, "int", &function_73ca75df, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_61ed2f45564d54f9", 1, 1, "int", &function_fa6bb35e, 0, 0);
+  clientfield::register("toplayer", "" + #"explode_blue_rock", 1, 1, "int", &function_fa6bb35e, 0, 0);
   clientfield::register("toplayer", "" + #"totem_fall", 1, 1, "int", &totem_fall, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_2a7ceb22f84e5aa9", 1, 1, "int", &function_85aab97f, 0, 0);
   level._effect[#"hash_1aa1c7790dc67d1e"] = #"hash_2a9ea20e6cb5f0fb";
   level._effect[#"hash_7cdfc8f4819bab2e"] = #"hash_e1bfaf62712f587";
-  level._effect[#"hash_61ed2f45564d54f9"] = #"hash_5531980ba0ce0b70";
+  level._effect[#"explode_blue_rock"] = #"hash_5531980ba0ce0b70";
   level._effect[#"blood_rise"] = #"hash_56628b3f5bc6da0d";
   level._effect[#"blood_splash"] = #"hash_4d27fd6de25c639b";
 }
@@ -91,7 +91,7 @@ function_7353e021(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self.var_a86cb7e0 hide();
 }
 
-function_3b405536(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+place_blue_rock(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!isDefined(self.var_40bb11af)) {
     var_1eaed254 = struct::get("s_fan_trap_place_loc");
     self.var_40bb11af = util::spawn_model(localclientnum, var_1eaed254.model, var_1eaed254.origin - (0, 0, 3), var_1eaed254.angles);
@@ -120,7 +120,7 @@ function_73ca75df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_fa6bb35e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   var_1eaed254 = struct::get("s_fan_trap_place_loc");
-  self.var_c61d3d80 = playFX(localclientnum, level._effect[#"hash_61ed2f45564d54f9"], var_1eaed254.origin - (0, 0, 3));
+  self.var_c61d3d80 = playFX(localclientnum, level._effect[#"explode_blue_rock"], var_1eaed254.origin - (0, 0, 3));
   playSound(0, #"hash_3375efdd38e50fb8", var_1eaed254.origin);
 }
 

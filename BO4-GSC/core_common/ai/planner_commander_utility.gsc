@@ -1009,7 +1009,7 @@ function_7706a6fa(commander) {
     var_35301d62 = array();
     var_35301d62[#"missioncomponent_defend"] = array();
     var_35301d62[#"missioncomponent_destroy"] = array();
-    var_35301d62[#"hash_3bf68fbcb5c53b6c"] = array();
+    var_35301d62[#"missioncomponent_capturearea"] = array();
     var_35301d62[#"missioncomponent_goto"] = array();
 
     foreach(missioncomponent in level.var_8239a46c) {
@@ -1028,7 +1028,7 @@ function_7706a6fa(commander) {
         case # "missioncomponent_destroy":
           var_b313868d[#"type"] = "destroy";
           break;
-        case # "hash_3bf68fbcb5c53b6c":
+        case # "missioncomponent_capturearea":
           var_b313868d[#"type"] = "capturearea";
           break;
         case # "missioncomponent_goto":

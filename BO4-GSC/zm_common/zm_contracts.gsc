@@ -227,7 +227,7 @@ function_902ef0de(var_38280f2f, delta) {
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       zm_stats::function_ea5b4947(0);
-      self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
+      self luinotifyevent(#"loot_contract_complete", 1, level.contract_ids[var_38280f2f]);
     }
   }
 

@@ -365,10 +365,10 @@ function_d987ffa1() {
 
 function_2ad53df2(cmd) {
   switch (cmd) {
-    case #"hash_7ecd9429ad1bc7c7":
+    case # "hash_7ecd9429ad1bc7c7":
       level thread function_45d8a460();
       return 1;
-    case #"hash_3e92494695e7803f":
+    case # "hash_3e92494695e7803f":
       level thread function_3dfa5598();
       return 1;
   }

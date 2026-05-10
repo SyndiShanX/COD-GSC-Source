@@ -10,7 +10,7 @@
 #namespace namespace_3d0f1be7;
 
 autoexec __init__system__() {
-  system::register(#"hash_411c8f5d7f8749b9", &__init__, undefined, undefined);
+  system::register(#"wz_blast_door_light", &__init__, undefined, undefined);
 }
 
 __init__() {}

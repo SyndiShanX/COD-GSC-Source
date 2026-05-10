@@ -70,7 +70,7 @@ function_25f77618() {
   self zm_audio::function_6191af93(#"perk", #"generic", #"hash_285be55574f6258d", #"generic", 25);
   self zm_audio::function_6191af93(#"weapon_pickup", #"shield", #"hash_14a052272fa3cf92", #"shield", 25);
   self zm_audio::function_6191af93(#"roundstart", #"special", #"hash_d345ba7a03b3891", #"special", 25);
-  self zm_audio::function_6191af93(#"surrounded", #"self", #"hash_7edcffe24c4d3d76", #"self", 25);
+  self zm_audio::function_6191af93(#"surrounded", #"self", #"surrounded_rich_mind", #"self", 25);
 }
 
 function_148c9f71() {

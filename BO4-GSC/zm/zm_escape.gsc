@@ -100,8 +100,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"hash_51b0de5e2b184c28", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_4be2ce4248d80d22", 1, 1, "int");
   clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int");
+  clientfield::register("world", "" + #"sound_building_64", 1, 1, "int");
+  clientfield::register("world", "" + #"exploder_building_64", 1, 1, "int");
   clientfield::register("world", "" + #"rumble_water_tower", 1, 1, "counter");
   clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int");
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int");
@@ -301,14 +301,14 @@ function_8d0c655f() {
 
 function_2141ca97() {
   if(zm_custom::function_901b751c(#"zmpowerstate") != 2) {
-    level clientfield::set("" + #"hash_4a8a7b58bf6cd5d8", 1);
+    level clientfield::set("" + #"sound_building_64", 1);
     level thread function_83c0bb0d();
   }
 
   level flag::wait_till("power_on1");
   exploder::exploder("lgtexp_building64_power_on");
-  level clientfield::set("" + #"hash_4a8a7b58bf6cd5d8", 0);
-  level clientfield::set("" + #"hash_29fea4571b8649a0", 0);
+  level clientfield::set("" + #"sound_building_64", 0);
+  level clientfield::set("" + #"exploder_building_64", 0);
 }
 
 function_83c0bb0d() {
@@ -320,11 +320,11 @@ function_83c0bb0d() {
 
     if(n_players > 0) {
       if(!var_41ac1ae7) {
-        level clientfield::set("" + #"hash_29fea4571b8649a0", 1);
+        level clientfield::set("" + #"exploder_building_64", 1);
         var_41ac1ae7 = 1;
       }
     } else {
-      level clientfield::set("" + #"hash_29fea4571b8649a0", 0);
+      level clientfield::set("" + #"exploder_building_64", 0);
       var_41ac1ae7 = 0;
     }
 

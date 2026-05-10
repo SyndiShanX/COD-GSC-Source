@@ -28,7 +28,7 @@ init() {
   clientfield::register("scriptmover", "" + #"barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
   level._effect[#"barrel_drip"] = #"hash_657c3b5d3d9bfdfa";
   level._effect[#"barrel_splash"] = #"hash_42bcb312df258591";
-  level._effect[#"hash_6a63e8eb86cc88e2"] = #"hash_5934158bcfb9c884";
+  level._effect[#"barrel_pray"] = #"hash_5934158bcfb9c884";
   level._effect[#"hash_345c6b60fb9b8682"] = #"hash_782ae54493a94c4a";
 }
 
@@ -41,7 +41,7 @@ function_3e37bb63(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_5e130882(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_6a63e8eb86cc88e2"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"barrel_pray"], self, "tag_origin");
   wait 3;
 
   if(isDefined(self) && isDefined(self.fx)) {

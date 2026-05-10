@@ -34,7 +34,7 @@ init_clientfields() {
 
 init_fx() {
   level._effect[#"apd_projectile"] = #"maps/zm_white/fx8_power_wisp";
-  level._effect[#"hash_50817e52341b2129"] = #"maps/zm_white/fx8_power_wisp_lg";
+  level._effect[#"apd_projectile_avo"] = #"maps/zm_white/fx8_power_wisp_lg";
   level._effect[#"apd_projectile_end"] = #"hash_4b9c72e8053cbd1e";
   level._effect[#"hash_6a86077d83942719"] = #"hash_51c50bab95b10eb4";
   level._effect[#"hash_3215540730982960"] = #"hash_108f821580c61bdc";

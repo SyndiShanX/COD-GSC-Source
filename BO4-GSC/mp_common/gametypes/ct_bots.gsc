@@ -1151,7 +1151,7 @@ function_9125af5f() {
       break;
     case 3:
       if(!isDefined(self.navmeshpoint)) {
-        self notify(#"hash_5c9e0bd318ff091e");
+        self notify(#"moving_to_exfil");
         self.navmeshpoint = level.var_caeb46b7.origin;
 
         if(!(isDefined(self.var_224386e9) && self.var_224386e9)) {
@@ -1184,7 +1184,7 @@ function_ae20926a() {
   level notify(#"hash_4974b99613386da1");
   level.var_88024dd9++;
   self clientfield::set("player_keyline_render", 1);
-  self waittill(#"hash_5c9e0bd318ff091e");
+  self waittill(#"moving_to_exfil");
 
   while(true) {
     e_player = getplayers()[0];

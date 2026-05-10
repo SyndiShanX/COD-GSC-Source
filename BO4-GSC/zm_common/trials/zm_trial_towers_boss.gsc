@@ -323,7 +323,7 @@ function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
 function_c64fc074() {
   self notify("7d5d5c98ec5ee437");
   self endon("7d5d5c98ec5ee437");
-  level waittill(#"hash_634700dd42db02d8");
+  level waittill(#"boss_armor_broken");
   zm_vo::function_3c173d37();
   zm_vo::function_7e4562d7(#"hash_6e1019732c1a9fc4");
 }

@@ -133,7 +133,7 @@ devgui() {
       case # "move_pap_lagoon":
         zm_orange_pap::function_ccc079bc("<dev string:x97a>");
         break;
-      case # "hash_7bfd0d4950600d9a":
+      case # "move_pap_golden":
         zm_orange_pap::function_ccc079bc("<dev string:x987>");
         break;
       case # "full_unlock":

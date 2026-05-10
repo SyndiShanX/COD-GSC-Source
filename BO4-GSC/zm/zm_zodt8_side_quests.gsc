@@ -848,7 +848,7 @@ function_ebb2139() {
       playsoundatposition(#"hash_6cea60c7eda4bc0a", var_a89972df.origin);
     }
 
-    if(level flag::get(#"boss_fight_started") && !level flag::get(#"hash_25d8c88ff3f91ee5")) {
+    if(level flag::get(#"boss_fight_started") && !level flag::get(#"boss_fight_all_complete")) {
       continue;
     }
 
@@ -2306,7 +2306,7 @@ function_ff05eb5() {
     }
 
     if(isDefined(waitresult.weapon) && waitresult.weapon.gadget_type === 11) {
-      playsoundatposition(#"hash_4b939760d149465a", self.origin);
+      playsoundatposition(#"zmb_hit_piano", self.origin);
 
       if(isDefined(self.var_fd9d797f) && self.var_fd9d797f) {
         iprintlnbold("<dev string:x166>");

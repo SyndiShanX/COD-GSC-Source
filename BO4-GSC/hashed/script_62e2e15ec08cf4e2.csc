@@ -27,7 +27,7 @@ init() {
 init_fx() {
   level._effect[#"server_spark_fx"] = #"hash_620a92bcd2225e0f";
   level._effect[#"no_power_fx"] = #"hash_14eb4b8e52dfe0bb";
-  level._effect[#"hash_78b4a1a435fd8bf7"] = #"hash_62f9570a97e8f893";
+  level._effect[#"server_aat_dmg_fx"] = #"hash_62f9570a97e8f893";
 }
 
 init_clientfields() {

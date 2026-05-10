@@ -36,7 +36,7 @@ main() {
 
 function_13dda28a(var_5ea5c94d) {
   if(!var_5ea5c94d) {
-    level notify(#"hash_50b21267cdd893be");
+    level notify(#"mq_campfire_start");
     level flag::clear(#"hash_43c116bdb3a96e16");
     level.var_f1907c72 thread function_561d9cff();
     level waittill(#"hash_e8247a060147428");
@@ -62,7 +62,7 @@ function_a874e5d0(var_5ea5c94d, ended_early) {
 }
 
 function_1ad84248() {
-  level endon(#"end_game", #"hash_50b21267cdd893be");
+  level endon(#"end_game", #"mq_campfire_start");
 
   switch (level.var_96eedc2a) {
     case 3:

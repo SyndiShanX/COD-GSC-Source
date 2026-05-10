@@ -251,30 +251,30 @@ function_96d38b95(result) {
   var_b65d83f5.total_deaths = totaldeaths;
   var_b65d83f5.total_wins = totalwins;
   var_b65d83f5.total_xp = totalxp;
-  var_6e81e3c3 = spawnStruct();
-  var_6e81e3c3.daily_contract_id = dailycontractid;
-  var_6e81e3c3.daily_contract_target = dailycontracttarget;
-  var_6e81e3c3.daily_contract_current = dailycontractcurrent;
-  var_6e81e3c3.daily_contract_completed = dailycontractcompleted;
-  var_6e81e3c3.weeklya_contract_id = weeklyacontractid;
-  var_6e81e3c3.weeklya_contract_target = weeklyacontracttarget;
-  var_6e81e3c3.weeklya_contract_current = weeklyacontractcurrent;
-  var_6e81e3c3.weeklya_contract_completed = weeklyacontractcompleted;
-  var_6e81e3c3.weeklyb_contract_id = weeklybcontractid;
-  var_6e81e3c3.weeklyb_contract_target = weeklybcontracttarget;
-  var_6e81e3c3.weeklyb_contract_current = weeklybcontractcurrent;
-  var_6e81e3c3.weeklyb_contract_completed = weeklybcontractcompleted;
-  var_6e81e3c3.special_contract_id = specialcontractid;
-  var_6e81e3c3.special_contract_target = specialcontracttarget;
-  var_6e81e3c3.special_contract_curent = specialcontractcurent;
-  var_6e81e3c3.special_contract_completed = specialcontractcompleted;
+  end_match_contracts = spawnStruct();
+  end_match_contracts.daily_contract_id = dailycontractid;
+  end_match_contracts.daily_contract_target = dailycontracttarget;
+  end_match_contracts.daily_contract_current = dailycontractcurrent;
+  end_match_contracts.daily_contract_completed = dailycontractcompleted;
+  end_match_contracts.weeklya_contract_id = weeklyacontractid;
+  end_match_contracts.weeklya_contract_target = weeklyacontracttarget;
+  end_match_contracts.weeklya_contract_current = weeklyacontractcurrent;
+  end_match_contracts.weeklya_contract_completed = weeklyacontractcompleted;
+  end_match_contracts.weeklyb_contract_id = weeklybcontractid;
+  end_match_contracts.weeklyb_contract_target = weeklybcontracttarget;
+  end_match_contracts.weeklyb_contract_current = weeklybcontractcurrent;
+  end_match_contracts.weeklyb_contract_completed = weeklybcontractcompleted;
+  end_match_contracts.special_contract_id = specialcontractid;
+  end_match_contracts.special_contract_target = specialcontracttarget;
+  end_match_contracts.special_contract_curent = specialcontractcurent;
+  end_match_contracts.special_contract_completed = specialcontractcompleted;
   var_8607894c = spawnStruct();
   var_8607894c.var_3cc73d67 = player function_5d23af5b();
   var_8607894c.specialist_head = player startquantity();
   var_8607894c.specialist_legs = player function_cde23658();
   var_8607894c.specialist_torso = player function_92ea4100();
   var_8607894c.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", var_906bdcf3, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", var_a14ea2be, #"hash_43cb38816354c3aa", var_b65d83f5, #"hash_11fcb8f188ed5050", var_6e81e3c3, #"end_match_specialist", var_8607894c);
+  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", var_906bdcf3, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", var_a14ea2be, #"hash_43cb38816354c3aa", var_b65d83f5, #"end_match_contracts", end_match_contracts, #"end_match_specialist", var_8607894c);
 }
 
 record_special_move_data_for_life(killer) {

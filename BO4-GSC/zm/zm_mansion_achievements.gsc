@@ -77,7 +77,7 @@ on_ai_killed(params) {
 
 function_51e43f4f() {
   level endon(#"end_game");
-  level flagsys::wait_till(#"hash_25d8c88ff3f91ee5");
+  level flagsys::wait_till(#"boss_fight_all_complete");
 
   iprintlnbold("<dev string:x38>");
 

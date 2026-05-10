@@ -284,19 +284,19 @@ function function_8916aa62(str_line) {
     case # "mural_andromeda":
       str_vo_line = #"hash_60a1b31d1e49dfef";
       break;
-    case # "hash_2bfb4eb3328f4aec":
+    case # "urn_herakles":
       str_vo_line = #"hash_33c6fcca57aca8d";
       break;
     case # "mural_bellerophon_fall":
       str_vo_line = #"hash_497d4298ff17357a";
       break;
-    case # "hash_30574e66f25be5e4":
+    case # "urn_erinyes":
       str_vo_line = #"hash_6ef7ae2fd8250179";
       break;
     case # "hash_50e280aeaa829e6c":
       str_vo_line = #"hash_62abf8f91f119ead";
       break;
-    case # "hash_29f246efb660b3f0":
+    case # "urn_talos":
       str_vo_line = #"hash_3a5e26183d8b51c1";
       break;
     case # "hash_e2cf00499808431":
@@ -338,7 +338,7 @@ function function_8916aa62(str_line) {
     case # "hash_7d5051b5c30af3ff":
       str_vo_line = #"hash_3c592afca5126028";
       break;
-    case # "hash_48f3eb6c6c2d5cea":
+    case # "statue_pygmalion":
       str_vo_line = #"hash_3d675b5319c334b7";
       break;
     case # "statue_female":

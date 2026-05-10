@@ -651,7 +651,7 @@ function_921657e4() {
     notifyhash = #"player_callout";
 
     if(isDefined(nextnotifydata.var_3d4cfe83) && nextnotifydata.var_3d4cfe83) {
-      notifyhash = #"hash_22b5b25be43ad2d7";
+      notifyhash = #"player_callout_colon";
     } else if(isDefined(nextnotifydata.var_cf88c427) && nextnotifydata.var_cf88c427) {
       notifyhash = #"player_callout_number";
     }

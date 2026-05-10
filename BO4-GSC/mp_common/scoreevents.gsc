@@ -394,7 +394,7 @@ scoreeventplayerkill(data, time) {
           continue;
         }
 
-        if(effect.var_3d1ed4bd == getweapon(#"hash_3f62a872201cd1ce") || effect.var_3d1ed4bd == getweapon(#"seeker_mine_arc") || effect.var_3d1ed4bd == getweapon(#"eq_slow_grenade")) {
+        if(effect.var_3d1ed4bd == getweapon(#"swat_grenade_payload") || effect.var_3d1ed4bd == getweapon(#"seeker_mine_arc") || effect.var_3d1ed4bd == getweapon(#"eq_slow_grenade")) {
           processscoreevent(#"hash_61640bd6bb7451ad", attacker, victim, effect.var_3d1ed4bd);
           break;
         }

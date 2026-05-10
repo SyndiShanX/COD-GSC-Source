@@ -1558,9 +1558,9 @@ function_63d4897() {
     }
 
     var_d0a5fa3b = 0;
-    anglesx = getdvarfloat(#"hash_1cc010d013592cb", -0.0123);
-    anglesy = getdvarfloat(#"hash_1cc000d01359118", -0.0123);
-    anglesz = getdvarfloat(#"hash_1cc030d01359631", -0.0123);
+    anglesx = getdvarfloat(#"prop_anglesx", -0.0123);
+    anglesy = getdvarfloat(#"prop_anglesy", -0.0123);
+    anglesz = getdvarfloat(#"prop_anglesz", -0.0123);
 
     if(anglesx != -0.0123 && anglesx != var_309e583f.anglesoffset[0]) {
       var_309e583f.anglesoffset = (anglesx, var_309e583f.anglesoffset[1], var_309e583f.anglesoffset[2]);

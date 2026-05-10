@@ -27,7 +27,7 @@
 #namespace zm_towers_ww_quest;
 
 init() {
-  level._effect[#"hash_42cc4bf5e47478c5"] = #"hash_387c78244f5f45e5";
+  level._effect[#"ww_quest_brazier_fire"] = #"hash_387c78244f5f45e5";
   level._effect[#"hash_5b4e7c178480d885"] = #"hash_62eafc17a432322a";
   level flag::init(#"hash_57454e59c155098d");
   level flag::init(#"hash_2fb4b4431d3ed627");
@@ -92,7 +92,7 @@ function_73808ab9(a_ents) {
   mdl_fx = util::spawn_model("tag_origin", s_fx.origin, s_fx.angles);
   s_fx struct::delete();
   mdl_fx linkto(mdl_brazier, "tag_fx_jnt");
-  mdl_fx clientfield::set("" + #"hash_42cc4bf5e47478c5", 1);
+  mdl_fx clientfield::set("" + #"ww_quest_brazier_fire", 1);
   level.var_1285519 = mdl_fx;
   level scene::remove_scene_func("p8_fxanim_zm_towers_ww_quest_bowl_bundle", &function_73808ab9, "init");
 }
@@ -120,7 +120,7 @@ knock_brazier_setup(b_skipped) {
 
 knock_brazier_cleanup(b_skipped, var_19e802fa) {
   wait 0.05;
-  level.var_1285519 clientfield::set("" + #"hash_42cc4bf5e47478c5", 0);
+  level.var_1285519 clientfield::set("" + #"ww_quest_brazier_fire", 0);
   level.var_1285519 clientfield::set("" + #"hash_3b746cf6eec416b2", 1);
   level scene::play("p8_fxanim_zm_towers_ww_quest_bowl_bundle");
   level clientfield::set("" + #"hash_584e8f7433246444", 1);
@@ -129,16 +129,16 @@ knock_brazier_cleanup(b_skipped, var_19e802fa) {
 
   switch (level.var_9f950fe2) {
     case # "danu":
-      str_clientfield = "" + #"hash_418c1c843450232b";
+      str_clientfield = "" + #"ww_quest_scorpio_danu";
       break;
     case # "ra":
-      str_clientfield = "" + #"hash_4d547bf36c6cb2d8";
+      str_clientfield = "" + #"ww_quest_scorpio_ra";
       break;
     case # "odin":
-      str_clientfield = "" + #"hash_38ba3ad0902aa355";
+      str_clientfield = "" + #"ww_quest_scorpio_odin";
       break;
     case # "zeus":
-      str_clientfield = "" + #"hash_24d7233bb17e6558";
+      str_clientfield = "" + #"ww_quest_scorpio_zeus";
       break;
   }
 

@@ -146,7 +146,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         iprintlnbold("<dev string:x83>");
 
         level flag::set(#"hash_7524c96c167377ef");
-        level.countdown_clock zm_white_computer_system::function_9b1511fa();
+        level.countdown_clock zm_white_computer_system::cancel_clock_countdown();
         level function_d1086c12();
         level thread timer_countdown();
       } else {
@@ -161,7 +161,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         iprintlnbold("<dev string:xa8>");
 
         level flag::set(#"hash_7524c96c167377ef");
-        level.countdown_clock zm_white_computer_system::function_9b1511fa();
+        level.countdown_clock zm_white_computer_system::cancel_clock_countdown();
         level function_5de15b91();
         level thread timer_countdown();
       } else {
@@ -176,7 +176,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         iprintlnbold("<dev string:xce>");
 
         level flag::set(#"hash_7524c96c167377ef");
-        level.countdown_clock zm_white_computer_system::function_9b1511fa();
+        level.countdown_clock zm_white_computer_system::cancel_clock_countdown();
         level thread visit_prototype_minigun();
         continue;
       }

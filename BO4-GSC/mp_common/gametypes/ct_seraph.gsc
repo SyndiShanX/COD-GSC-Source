@@ -137,7 +137,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 function_6db6572b() {
   level.var_7a0aaea2 = 216000;
 
-  level thread function_849be68a();
+  level thread devgui_ct_seraph();
 }
 
 function_ba542258(mode) {
@@ -632,9 +632,9 @@ function_8aa1c633() {
   e_player thread ct_utils::function_329f9ba6(#"hash_443101fa69c21abf", 5, "green");
 }
 
-function_849be68a() {
+devgui_ct_seraph() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_527da51d610a31b1", "<dev string:x38>");
+  setDvar(#"devgui_ct_seraph", "<dev string:x38>");
   level flag::init("<dev string:x3b>");
 
   if(sessionmode != 4) {
@@ -643,7 +643,7 @@ function_849be68a() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_527da51d610a31b1", "<dev string:x38>");
+    cmd = getdvarstring(#"devgui_ct_seraph", "<dev string:x38>");
 
     if(cmd == "<dev string:x38>") {
       continue;
@@ -660,6 +660,6 @@ function_849be68a() {
         break;
     }
 
-    setDvar(#"hash_527da51d610a31b1", "<dev string:x38>");
+    setDvar(#"devgui_ct_seraph", "<dev string:x38>");
   }
 }

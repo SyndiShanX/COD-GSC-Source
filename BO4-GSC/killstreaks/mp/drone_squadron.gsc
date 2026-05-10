@@ -467,7 +467,7 @@ function_c94a0c4d(params) {
 
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     if(isPlayer(attacker)) {
-      scoreevents::processscoreevent(#"hash_8bf3519db5f0fd4", attacker, self.owner, weapon);
+      scoreevents::processscoreevent(#"swarm_buddy_destroyed", attacker, self.owner, weapon);
     }
   }
 }

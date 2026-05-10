@@ -37,7 +37,7 @@ init() {
   clientfield::register("scriptmover", "" + #"hash_376c030aee1d6ccb", 1, 2, "int", &function_3537ad19, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_201ef69f0a0a5dce", 1, 1, "int", &group_bot_mp, 0, 0);
   clientfield::register("allplayers", "" + #"hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_624198b41791933f", 1, 1, "int", &function_8fe4f2a7, 0, 0);
+  clientfield::register("scriptmover", "" + #"setup_outro_ghosts", 1, 1, "int", &setup_outro_ghosts, 0, 0);
   clientfield::register("toplayer", "" + #"hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
   clientfield::register("toplayer", "" + #"hash_506164c22c4c7ca8", 1, 1, "counter", &function_42693309, 0, 0);
   level._effect[#"brutus_energy"] = #"hash_aced2664257a0ca";
@@ -65,7 +65,7 @@ init() {
   level._effect[#"hash_6b3f19f4c90a1b75"] = #"hash_6f69cced7e86cb70";
   level._effect[#"hash_508055920f327121"] = #"hash_8c3d3c756b91f54";
   level._effect[#"hash_201ef69f0a0a5dce"] = #"hash_1f06be75e7efc6a2";
-  level._effect["" + #"hash_3fafd72f00908d53"] = #"hash_992fe8f8e8dfb1";
+  level._effect["" + #"shock_brutus_sp"] = #"hash_992fe8f8e8dfb1";
   scene::add_scene_func(#"p8_fxanim_zm_esc_blast_afterlife_seagull_ghost_bundle", &function_bbf4268e, "shot_1");
 }
 
@@ -317,7 +317,7 @@ summoning_key_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 }
 
 function_de16ce8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect["" + #"hash_3fafd72f00908d53"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect["" + #"shock_brutus_sp"], self, "tag_origin");
 }
 
 function_9c59bce1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -488,7 +488,7 @@ function_5688631d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   stopforcestreamingxmodel(#"c_t8_zmb_mob_ghoul_body3_rob");
 }
 
-function_8fe4f2a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+setup_outro_ghosts(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     self playrenderoverridebundle(#"hash_68ee9247aaae4517");
     self function_78233d29(#"hash_68ee9247aaae4517", "", "Brightness", 0);

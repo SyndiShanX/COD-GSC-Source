@@ -32,7 +32,7 @@ register_actions() {
   register_action(#"reload_weapon", &current_weapon_rank, &reload_weapon_weight, &reload_weapon);
   register_action(#"look_for_enemy", &current_weapon_rank, &look_for_enemy_weight, &look_for_enemy);
   register_action(#"hash_55fc6b6e868ae6c3", &current_weapon_rank, &function_1176a20b, &function_e0dcb8c1);
-  register_action(#"hash_2bbb309be663cb4c", &function_728212e8, &scan_for_threats_weight, &function_9e1d8dfe);
+  register_action(#"scan_for_threats_ct", &function_728212e8, &scan_for_threats_weight, &scan_for_threats_ct);
   register_action(#"scan_for_threats", &function_728212e8, &scan_for_threats_weight, &scan_for_threats);
   register_action(#"bleed_out", &rank_priority, &bleed_out_weight, &bleed_out);
   register_action(#"hash_7aaeac32a4e1bf84", &weapon_rank, &function_36505c2d, &function_a314673);
@@ -1045,7 +1045,7 @@ scan_for_threats(actionparams) {
   }
 }
 
-function_9e1d8dfe(actionparams) {
+scan_for_threats_ct(actionparams) {
   targetvisible = self is_target_visible(actionparams);
   actionparams.targetvisible = targetvisible;
 

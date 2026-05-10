@@ -319,7 +319,7 @@ function_20edb636(weapon, playerbundle) {
       returnstruct.var_17a094cf = playerbundle.var_d5983ddb;
       break;
     case # "eq_swat_grenade":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
     case # "hash_5825488ac68418af":
       returnstruct.var_17a094cf = playerbundle.var_bd81e586;
       returnstruct.startdelay = mpdialog_value("nineBangSuccessDialogBuffer", 0);

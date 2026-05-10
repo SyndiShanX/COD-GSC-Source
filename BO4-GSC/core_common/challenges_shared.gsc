@@ -767,8 +767,8 @@ function_d6f929d6() {
   var_7f6396f0 = getdvarfloat(#"hash_5b9ffb659d9e0093", 0);
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
-      var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
+    if(isDefined(player.pers[#"first_connect_time"])) {
+      var_28ee869a = gettime() - player.pers[#"first_connect_time"];
       player function_659f7dc(var_28ee869a, var_b50d0caa, var_7f6396f0);
     }
   }

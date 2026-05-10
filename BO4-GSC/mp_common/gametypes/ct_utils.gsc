@@ -1316,9 +1316,9 @@ function_80540e80(var_64ef1697 = "BUTTON_A", var_2ee3d6f5 = 0.5) {
   level endon(#"combattraining_logic_finished");
   self function_281d799();
   a_str_state = [];
-  a_str_state[#"button_a"] = #"hash_4df4fd56580d5967";
-  a_str_state[#"button_lshdr"] = #"hash_15620c895dcec00e";
-  a_str_state[#"button_rshdr"] = #"hash_2cb5a2ce94a6ee6d";
+  a_str_state[#"button_a"] = #"x_button_paused";
+  a_str_state[#"button_lshdr"] = #"smoke_button_paused";
+  a_str_state[#"button_rshdr"] = #"frag_button_paused";
   a_str_state[#"button_square"] = #"square_button_paused";
   str_state = a_str_state[var_64ef1697];
   str_state_off = str_state + "_off";

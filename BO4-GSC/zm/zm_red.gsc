@@ -1212,7 +1212,7 @@ function_8f72e6b8() {
   w_component = zm_crafting::get_component(#"zitem_red_strike_part_2");
   w_component.var_62a98b13 = #"hammer_arges";
   w_component = zm_crafting::get_component(#"zitem_red_strike_part_3");
-  w_component.var_62a98b13 = #"hash_2ac16e115b8e401a";
+  w_component.var_62a98b13 = #"tongs_steropes";
 }
 
 function_f2427bae(slot, weapon) {

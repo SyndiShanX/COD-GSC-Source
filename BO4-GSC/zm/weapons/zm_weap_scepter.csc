@@ -82,7 +82,7 @@ function_69ccb98b(localclientnum) {
     return;
   }
 
-  self notify(#"hash_3cbfa1076dfa868b");
+  self notify(#"skull_turret_beam_end");
 
   if(isDefined(self.var_d559073)) {
     beamkill(localclientnum, self.var_d559073);
@@ -106,7 +106,7 @@ function_da5829be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", #"hash_3cbfa1076dfa868b");
+  self endon(#"death", #"skull_turret_beam_end");
 
   if(!isDefined(self.var_4cd8e6cb)) {
     self playSound(localclientnum, #"hash_3765e25049981166");

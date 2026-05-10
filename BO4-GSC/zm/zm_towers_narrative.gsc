@@ -333,7 +333,7 @@ function_831dcf3e() {
     mdl_fx = getent(t_brazier.target, "targetname");
 
     if(zm_utility::is_ee_enabled()) {
-      mdl_fx clientfield::set("" + #"hash_5afda864f8b64f5c", 0);
+      mdl_fx clientfield::set("" + #"narrative_brazier_fire", 0);
     }
 
     mdl_fx delete();
@@ -352,7 +352,7 @@ function_51f7da68() {
   mdl_fx = getent(self.target, "targetname");
 
   if(self flag::get(#"hash_6e4b1162d4626a6e")) {
-    mdl_fx clientfield::set("" + #"hash_5afda864f8b64f5c", 0);
+    mdl_fx clientfield::set("" + #"narrative_brazier_fire", 0);
     self flag::clear(#"hash_6e4b1162d4626a6e");
   }
 
@@ -370,7 +370,7 @@ function_51f7da68() {
   if(var_d34eaa6e == self.script_int) {
     level.var_75fb83c = var_d34eaa6e;
     self flag::set(#"hash_6e4b1162d4626a6e");
-    mdl_fx clientfield::set("" + #"hash_5afda864f8b64f5c", 1);
+    mdl_fx clientfield::set("" + #"narrative_brazier_fire", 1);
 
     if(level.var_75fb83c >= level.var_3d8b20c0) {
       level flag::set(#"hash_61f2d2e8517e7f57");

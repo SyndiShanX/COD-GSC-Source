@@ -1743,7 +1743,7 @@ function_17ab2327() {
 function_421135df() {
   level endon(#"combattraining_logic_finished");
   sessionmode = currentsessionmode();
-  setDvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
+  setDvar(#"devgui_ct_ruin", "<dev string:x38>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x3b>");
@@ -1753,7 +1753,7 @@ function_421135df() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
+    cmd = getdvarstring(#"devgui_ct_ruin", "<dev string:x38>");
 
     if(cmd == "<dev string:x38>") {
       continue;
@@ -1776,6 +1776,6 @@ function_421135df() {
         break;
     }
 
-    setDvar(#"hash_6f59f2ade883b8e2", "<dev string:x38>");
+    setDvar(#"devgui_ct_ruin", "<dev string:x38>");
   }
 }

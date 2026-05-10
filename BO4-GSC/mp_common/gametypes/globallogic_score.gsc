@@ -1766,15 +1766,15 @@ function_b1a3b359(killedplayer, damagedone, weapon, assist_level = undefined) {
 
   if(!level.var_724cf71) {
     switch (weapon.name) {
-      case # "hash_577b41452577c37f":
+      case # "concussion_grenade_l2":
       case # "concussion_grenade":
         assist_level = "assist_concussion";
         break;
-      case # "hash_af1a40bb1375dab":
+      case # "flash_grenade_l2":
       case # "flash_grenade":
         assist_level = "assist_flash";
         break;
-      case # "hash_4cd586d22c20b3cf":
+      case # "emp_grenade_l2":
       case # "emp_grenade":
         assist_level = "assist_emp";
         break;

@@ -322,7 +322,7 @@ on_player_spawned() {
   weapon = undefined;
 
   if(getdvarstring(#"bot_spawn_weapon", "<dev string:x38>") != "<dev string:x38>") {
-    weapon = util::get_weapon_by_name(getdvarstring(#"bot_spawn_weapon"), getdvarstring(#"hash_c6e51858c88a5ee"));
+    weapon = util::get_weapon_by_name(getdvarstring(#"bot_spawn_weapon"), getdvarstring(#"bot_spawn_weapon_attachments"));
 
     if(isDefined(weapon)) {
       self function_35e77034(weapon);
@@ -1521,7 +1521,7 @@ function_5524bfd5(companionname) {
 function_263ca697() {
   weapon = self getcurrentweapon();
   setDvar(#"bot_spawn_weapon", getweaponname(weapon.rootweapon));
-  setDvar(#"hash_c6e51858c88a5ee", util::function_2146bd83(weapon));
+  setDvar(#"bot_spawn_weapon_attachments", util::function_2146bd83(weapon));
   bots = get_bots();
 
   foreach(bot in bots) {

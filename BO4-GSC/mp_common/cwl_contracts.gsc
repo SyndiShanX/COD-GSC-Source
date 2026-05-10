@@ -222,7 +222,7 @@ function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self stats::get_stat_global(#"time_played_total") - self.pers[#"hash_5651f00c6c1790a4"] + var_9d12108c;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
+      self luinotifyevent(#"loot_contract_complete", 1, level.contract_ids[var_38280f2f]);
     }
   }
 

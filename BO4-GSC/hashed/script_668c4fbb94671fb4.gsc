@@ -393,7 +393,7 @@ function_b264ca4d() {
   var_6e25652d = getvehiclenode("gh_b_st_node", "targetname");
   level.var_ddea3ebd = vehicle::spawn(undefined, "gh_tb", #"hash_741d76f17830f464", var_6e25652d.origin, var_6e25652d.angles);
   level.var_ddea3ebd thread function_c2f5fca4(var_6e25652d);
-  array::thread_all(util::get_players(), &function_29d29761, level.var_ddea3ebd, #"hash_115ac6d40d4cc85b");
+  array::thread_all(util::get_players(), &function_29d29761, level.var_ddea3ebd, #"ghost_boat_react");
   self thread function_c3923440();
   level waittill(#"hash_361c36fab747c7f0");
   var_4f11e61a = struct::get("gh_d_pos", "targetname");
@@ -3016,7 +3016,7 @@ function_629fa2c8(var_5b9ba5a5, e_player) {
     case # "hash_fd8e78c22906fc1":
       str_vo_line = #"hash_5f84ae79adca64b4";
       break;
-    case # "hash_115ac6d40d4cc85b":
+    case # "ghost_boat_react":
       str_vo_line = #"hash_459548ac9c477e2e";
       break;
     case # "hash_1d191ca6765471c6":

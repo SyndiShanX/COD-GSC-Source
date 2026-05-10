@@ -209,8 +209,8 @@ function_59c85637() {
 
   var_1ef5a3ba = 0;
 
-  if(isDefined(self.pers[#"hash_150795bee4d46ce4"])) {
-    var_1ef5a3ba = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - var_c06441ec, 0);
+  if(isDefined(self.pers[#"first_connect_time"])) {
+    var_1ef5a3ba = max(gettime() - self.pers[#"first_connect_time"] - var_c06441ec, 0);
   }
 
   return var_1ef5a3ba;

@@ -13,7 +13,7 @@
 #namespace namespace_e01afe67;
 
 autoexec __init__system__() {
-  system::register(#"hash_993ee8bedbddc19", &__init__, undefined, undefined);
+  system::register(#"zm_trial_death_from_above", &__init__, undefined, undefined);
 }
 
 __init__() {

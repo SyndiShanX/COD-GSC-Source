@@ -305,13 +305,13 @@ function_d940763b(localclientnum) {
   level thread scene::play(#"p8_fxanim_core_frontend_zm_lab_mixer_fluid_03_bundle", "mixer_idle");
 
   while(true) {
-    waitresult = level waittill(#"hash_201d829556393f76", #"hash_7e320f49f449ea9f", #"hash_6d47a1e190b93eaf", #"hash_7c3e120025ea0122", #"hash_341a5b4aa52ea814", #"talisman_show_label", #"bottle1_fill_complete", #"bottle1_leave", #"skip_to_reveal", #"hash_6551ceddc995b613");
+    waitresult = level waittill(#"init_controller_model", #"invalidate_controller_model", #"hash_6d47a1e190b93eaf", #"hash_7c3e120025ea0122", #"hash_341a5b4aa52ea814", #"talisman_show_label", #"bottle1_fill_complete", #"bottle1_leave", #"skip_to_reveal", #"hash_6551ceddc995b613");
 
     switch (waitresult._notify) {
-      case # "hash_201d829556393f76":
+      case # "init_controller_model":
         level.var_49f26c00.controller_model = getuimodelforcontroller(waitresult.controller);
         break;
-      case # "hash_7e320f49f449ea9f":
+      case # "invalidate_controller_model":
         level.var_49f26c00.controller_model = undefined;
         break;
       case # "hash_6d47a1e190b93eaf":

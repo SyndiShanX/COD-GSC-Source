@@ -48,7 +48,7 @@
 #namespace zm_orange_trials;
 
 preload() {
-  clientfield::register("scriptmover", "" + #"hash_71906a124221219", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"blood_buff_aura", 24000, 1, "int");
   clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int");
   level flag::init(#"hash_4466889733a90df2");
   level flag::init(#"hash_198bc172b5af7f25");

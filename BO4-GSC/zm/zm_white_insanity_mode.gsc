@@ -311,7 +311,7 @@ insanity_mode_step3_setup(var_5ea5c94d) {
       if(level flag::get(#"hash_12b747be855cc622") && !level flag::get(#"hash_7cd09ec15b9808a9")) {
         zm_unitrigger::unregister_unitrigger(s_insanity_mode_confirmation.s_unitrigger);
         zm_white_main_quest::function_63e4838b(0);
-        level.countdown_clock zm_white_computer_system::function_9b1511fa();
+        level.countdown_clock zm_white_computer_system::cancel_clock_countdown();
       }
     }
   }

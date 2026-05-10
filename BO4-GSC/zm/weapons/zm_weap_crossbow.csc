@@ -21,7 +21,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_37c2ef99d645cf87"] = #"hash_446cf10b26252043";
+  level._effect[#"crossbow_captured_fx"] = #"hash_446cf10b26252043";
   level._effect[#"hash_690509b9a2ec2ef3"] = #"hash_75b48b8b912d1e41";
   level._effect[#"hash_25f2b145ee5374d9"] = #"hash_11321db507e6caf1";
   level._effect[#"hash_389b5fcf2a0e0690"] = #"hash_794c542edfcb65cb";
@@ -35,8 +35,8 @@ __init__() {
   level._effect[#"hash_cfd019f2f01e866"] = #"hash_2c30b8327eb9deaa";
   level.var_7cfd8159 = [];
   clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter", &function_75a608a3, 0, 0);
-  clientfield::register("actor", "" + #"hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
+  clientfield::register("actor", "" + #"crossbow_captured_fx", 1, 1, "int", &crossbow_captured_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"crossbow_captured_fx", 1, 1, "int", &crossbow_captured_fx, 0, 0);
   clientfield::register("actor", "" + #"hash_690509b9a2ec2ef3", 1, 2, "int", &function_59a204ea, 0, 0);
   clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int", &function_b6e5e889, 0, 1);
   clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int", &function_bec8c33, 0, 1);
@@ -189,7 +189,7 @@ function_fc035b41(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_8635aaf9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+crossbow_captured_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_tag = "j_spine4";
   v_origin = self gettagorigin("j_spine4");
 
@@ -211,7 +211,7 @@ function_8635aaf9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.var_7a5134d5)) {
-      self.var_7a5134d5 = util::playFXOnTag(localclientnum, level._effect[#"hash_37c2ef99d645cf87"], self, str_tag);
+      self.var_7a5134d5 = util::playFXOnTag(localclientnum, level._effect[#"crossbow_captured_fx"], self, str_tag);
     }
 
     if(math::cointoss(25) && !isDefined(self.var_f6e0481f)) {

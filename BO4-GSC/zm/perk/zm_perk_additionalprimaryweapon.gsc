@@ -144,7 +144,7 @@ function_1a9f3a91() {
   }
 
   while(true) {
-    s_result = self waittill(#"weapon_change", #"hash_29c66728ccd27f03");
+    s_result = self waittill(#"weapon_change", #"restore_additional_primary_weapon");
 
     if(isDefined(self.laststandpistol)) {
       self clientfield::set_player_uimodel("hudItems.perks.additional_primary_weapon", 0);

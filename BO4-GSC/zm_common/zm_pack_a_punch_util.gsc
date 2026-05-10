@@ -100,7 +100,7 @@ update_hint_string(player) {
         return false;
       }
     } else {
-      self sethintstring(#"hash_5b77a8f33d352c37");
+      self sethintstring(#"zombie/perk_packapunch_busy");
       return true;
     }
   }
@@ -170,7 +170,7 @@ update_hint_string(player) {
       if(function_8b1a219a()) {
         self sethintstring(#"hash_7f57747f6802bc18", current_cost);
       } else {
-        self sethintstring(#"hash_673794817f9c09b4", current_cost);
+        self sethintstring(#"zombie/perk_packapunch_aat", current_cost);
       }
     } else if(function_8b1a219a()) {
       self sethintstring(#"hash_4ded27bb7bc35a8d", current_cost);

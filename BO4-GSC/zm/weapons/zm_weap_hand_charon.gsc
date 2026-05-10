@@ -727,7 +727,7 @@ function_249b5556(n_damage) {
         continue;
       }
 
-      self notify(#"hash_288cb56263c7b7fa");
+      self notify(#"inside_charon_pool");
     }
   }
 }

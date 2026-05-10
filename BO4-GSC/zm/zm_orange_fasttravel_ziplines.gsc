@@ -465,7 +465,7 @@ function_5dbd6a40(s_zipline_use) {
   self.var_b20b0960.origin = vnd_start.origin;
   self.var_b20b0960.angles = self.angles;
   self.var_b20b0960 setspeed(32);
-  self notify(#"hash_702a9c7f10066b19", {
+  self notify(#"zipline_use_detected", {
     #str_location: s_zipline_use.str_location
   });
   level notify(#"zipline_used", {

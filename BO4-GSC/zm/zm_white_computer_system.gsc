@@ -809,18 +809,18 @@ clock_countdown() {
   self.var_4cdc88ae = 1;
   level.var_18f1ca6e function_b2fba7f5();
   level.var_18f1ca6e thread function_a196c54b();
-  self endon(#"hash_10b7419f15453a9e");
+  self endon(#"cancel_clock_countdown");
   self function_80707067();
   self function_5e0b6734(1, 0, 1, 0, 1);
   self waittill(#"hash_6cb5d5beb3730446");
-  self function_9b1511fa();
+  self cancel_clock_countdown();
 }
 
-function_9b1511fa() {
+cancel_clock_countdown() {
   self function_58dddc4e();
   self function_eb17b80b();
   self.var_4cdc88ae = 0;
-  self notify(#"hash_10b7419f15453a9e");
+  self notify(#"cancel_clock_countdown");
 }
 
 function_5e0b6734(var_b995184a, var_2199b576, var_ec214a86, var_d1201d6b, var_f3ea62ff) {

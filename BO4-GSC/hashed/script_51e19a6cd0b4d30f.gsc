@@ -11,7 +11,7 @@
 init() {
   registerclientfield("toplayer", "RGB_keyboard_manager", 1, 3, "int");
 
-  if(function_8b1a219a() && getdvarint(#"hash_cca6902a7ce5273", 0) == 1) {
+  if(function_8b1a219a() && getdvarint(#"aura_activate_switch", 0) == 1) {
     callback::on_game_playing(&function_ca0a1ea4);
   }
 

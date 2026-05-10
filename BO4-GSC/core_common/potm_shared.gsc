@@ -1036,7 +1036,7 @@ function_d1cb3471() {
 
 waitthennotifyplaypotm() {
   setDvar(#"scr_force_potm", 0);
-  setDvar(#"hash_2428eb9c3d05eee0", 0);
+  setDvar(#"scr_force_potm_fancy", 0);
   level function_b6a5e7fa(1);
 }
 
@@ -2195,7 +2195,7 @@ debugupdate() {
     level thread waitthennotifyplaypotm();
   }
 
-  if(getdvarint(#"hash_2428eb9c3d05eee0", 0) == 1) {
+  if(getdvarint(#"scr_force_potm_fancy", 0) == 1) {
     level thread waitthennotifyplaypotm();
   }
 

@@ -599,7 +599,7 @@ player_charged_shot(weapon) {
     return;
   }
 
-  self notify(#"hash_4969a839c4e666dc");
+  self notify(#"start_beam_attack");
   self clientfield::set("hemera_beam_flash", 1);
   self.mdl_beam clientfield::set("" + #"hemera_beam", 1);
   self playSound(#"hash_1f3a25ed02b0fb5f");

@@ -196,7 +196,7 @@ play_powerup_fx(localclientnum, str_fx, var_6df65756 = 0) {
 
   if(var_6df65756 && !isDefined(self.var_71e06c56)) {
     self playSound(localclientnum, #"zmb_spawn_powerup_intro");
-    self.var_71e06c56 = self playLoopSound(#"hash_3119fa236ffcf847");
+    self.var_71e06c56 = self playLoopSound(#"zmb_spawn_powerup_intro_loop");
   }
 
   self.n_powerup_fx = util::playFXOnTag(localclientnum, str_fx, self, "tag_origin");

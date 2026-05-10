@@ -723,7 +723,7 @@ function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
     case # "eq_hawk":
     case # "frag_grenade":
     case # "eq_swat_grenade":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
     case # "hash_5825488ac68418af":
     case # "eq_cluster_semtex_grenade":
     case # "eq_slow_grenade":
@@ -850,7 +850,7 @@ function_95e44f78(weapon, timedelay) {
       dialogkey = playerbundle.var_35e44265;
       break;
     case # "eq_swat_grenade":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
     case # "hash_5825488ac68418af":
       dialogkey = playerbundle.var_29a98af1;
       break;
@@ -2294,7 +2294,7 @@ play_gadget_ready(weapon, userflip = 0) {
       dialogkey = playerbundle.warmachineweaponready;
       break;
     case # "eq_swat_grenade":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
     case # "hash_5825488ac68418af":
       dialogkey = playerbundle.var_cb080e91;
       break;
@@ -3069,7 +3069,7 @@ play_gadget_activate(weapon) {
       break;
     case # "hash_5825488ac68418af":
     case # "eq_swat_grenade":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
       dialogkey = playerbundle.var_b3d4d56b;
       break;
     case # "frag_grenade":
@@ -3273,7 +3273,7 @@ play_gadget_success(weapon, waitkey, victim, var_5d738b56) {
     case # "molotov_fire":
     case # "eq_swat_grenade":
     case # "eq_grapple":
-    case # "hash_3f62a872201cd1ce":
+    case # "swat_grenade_payload":
     case # "eq_smoke":
     case # "eq_concertina_wire":
     case # "gadget_health_boost":
