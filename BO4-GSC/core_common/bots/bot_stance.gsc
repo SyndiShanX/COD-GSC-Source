@@ -16,8 +16,8 @@ __init__() {
   level.var_17a3a139 = [];
   level.botstances = [];
   register_handler(#"default", &handle_default);
-  register_handler(#"hash_2405aec12988c1f7", &function_7857357b);
-  register_handler(#"hash_ca2f8909b847c6f", &function_f1b497ec);
+  register_handler(#"at_crouch_cover", &function_7857357b);
+  register_handler(#"at_stand_cover", &function_f1b497ec);
   register_handler(#"hash_7a468797a3a33424", &function_41d967fe);
   register_handler(#"hash_2ebb09bf5581043d", &function_f71302f4);
   register_handler(#"hash_3173f482acc24ec8", &function_821cce69);
@@ -369,7 +369,7 @@ function_d22ff818(tacbundle, params, node) {
     return false;
   }
 
-  if(isDefined(tacbundle.var_1f5429aa) && isDefined(tacbundle.var_48aa05a1)) {
+  if(isDefined(tacbundle.slidedistmin) && isDefined(tacbundle.slidedistmax)) {
     var_8be65bb9 = self function_f04bd922();
     movepoint = self.goalpos;
 
@@ -380,8 +380,8 @@ function_d22ff818(tacbundle, params, node) {
     }
 
     distsq = distance2dsquared(self.origin, movepoint);
-    var_d6ff7b1b = tacbundle.var_1f5429aa * tacbundle.var_1f5429aa;
-    var_e70d67bc = tacbundle.var_48aa05a1 * tacbundle.var_48aa05a1;
+    var_d6ff7b1b = tacbundle.slidedistmin * tacbundle.slidedistmin;
+    var_e70d67bc = tacbundle.slidedistmax * tacbundle.slidedistmax;
 
     if(distsq < var_d6ff7b1b) {
       self bot::record_text("<dev string:x1a5>", (1, 0, 0), "<dev string:x4c>");
@@ -439,7 +439,7 @@ function_1989cfaf(tacbundle, params, node) {
   }
 
   distsq = distance2dsquared(self.origin, node.origin);
-  mindistsq = isDefined(tacbundle.var_1f5429aa) ? tacbundle.var_1f5429aa : 0;
+  mindistsq = isDefined(tacbundle.slidedistmin) ? tacbundle.slidedistmin : 0;
   mindistsq *= mindistsq;
 
   if(distsq < mindistsq) {
@@ -448,7 +448,7 @@ function_1989cfaf(tacbundle, params, node) {
     return false;
   }
 
-  maxdistsq = isDefined(tacbundle.var_48aa05a1) ? tacbundle.var_48aa05a1 : 0;
+  maxdistsq = isDefined(tacbundle.slidedistmax) ? tacbundle.slidedistmax : 0;
   maxdistsq *= maxdistsq;
 
   if(distsq > maxdistsq) {

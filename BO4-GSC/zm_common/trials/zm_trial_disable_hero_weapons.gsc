@@ -36,7 +36,7 @@ on_begin() {
 
   foreach(player in getplayers()) {
     player function_6a8979c9();
-    player callback::function_33f0ddd3(&function_33f0ddd3);
+    player callback::on_player_loadout_changed(&on_player_loadout_changed);
     player zm_trial_util::function_9bf8e274();
   }
 
@@ -45,7 +45,7 @@ on_begin() {
 
 on_end(round_reset) {
   foreach(player in getplayers()) {
-    player callback::function_824d206(&function_33f0ddd3);
+    player callback::function_824d206(&on_player_loadout_changed);
 
     foreach(weapon in player getweaponslist(1)) {
       player unlockweapon(weapon);
@@ -67,7 +67,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-function_33f0ddd3(eventstruct) {
+on_player_loadout_changed(eventstruct) {
   self function_6a8979c9();
 }
 

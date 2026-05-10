@@ -98,7 +98,7 @@ __main__() {
 
 function_70072647() {
   self.var_9fd623ed = 0;
-  self callback::function_33f0ddd3(&function_33f0ddd3);
+  self callback::on_player_loadout_changed(&on_player_loadout_changed);
 }
 
 function_98890cd8(w_current) {
@@ -113,7 +113,7 @@ function_98890cd8(w_current) {
   return false;
 }
 
-function_33f0ddd3(eventstruct) {
+on_player_loadout_changed(eventstruct) {
   if(eventstruct.weapon === level.var_d7e67022 || eventstruct.weapon === level.var_637136f3) {
     if(eventstruct.event === "give_weapon") {
       if(eventstruct.weapon === level.var_d7e67022) {
@@ -167,7 +167,7 @@ function_4173ee30() {
     }
 
     zm_hero_weapon::show_hint(w_current, #"hash_1656aebadea29360");
-    self playsoundtoplayer(#"hash_6a9b5c781d4019b2", self);
+    self playsoundtoplayer(#"zmb_shield_on", self);
 
     if(w_current == level.var_637136f3) {
       self.var_f7c822b5 = 4;
@@ -222,7 +222,7 @@ function_401e4768() {
   self notify(#"hash_1b7c4bada7fa6175");
 
   if(function_98890cd8(self.previousweapon)) {
-    self playsoundtoplayer(#"hash_6632e419b4028fc4", self);
+    self playsoundtoplayer(#"zmb_shield_off", self);
   }
 
   self thread function_cb1c46b8(0);
@@ -419,7 +419,7 @@ function_16dd8932() {
 melee_power(weapon) {
   if(self.var_9fd623ed >= 3 && (weapon == level.var_4e845c84 || weapon == level.var_58e17ce3)) {
     self clientfield::increment("" + #"spectral_shield_blast", 1);
-    self playSound(#"hash_4fa7a7bff648310f");
+    self playSound(#"zmb_shield_blast");
     self.var_9fd623ed = math::clamp(self.var_9fd623ed - 3, 0, self.var_f7c822b5 * 3);
     self thread function_804309c();
     self notify(#"hash_22a49f7903e394a5");
@@ -1225,7 +1225,7 @@ function_9693e041(player) {
       return;
     }
 
-    self.hint_string = #"hash_53fd856df9288be7";
+    self.hint_string = #"zombie/build_piece_have_one";
     self.cost = undefined;
     return 1;
   }

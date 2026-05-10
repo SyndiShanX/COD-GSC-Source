@@ -337,11 +337,11 @@ function_67b12ae8(e_player) {
   }
 
   if(level flag::get(#"half_price_traps")) {
-    self sethintstring(#"hash_23c1c09e94181fdb", int(500));
+    self sethintstring(#"zombie/button_buy_trap", int(500));
     return 1;
   }
 
-  self sethintstring(#"hash_23c1c09e94181fdb", 1000);
+  self sethintstring(#"zombie/button_buy_trap", 1000);
   return 1;
 }
 

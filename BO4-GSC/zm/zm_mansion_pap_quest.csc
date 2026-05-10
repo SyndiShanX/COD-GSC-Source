@@ -23,13 +23,13 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"pap_key_pickup", 8000, getminbitcountfornum(3), "int", &function_9e5522ac, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_47b8db8cde2c4291", 8000, getminbitcountfornum(13), "int", &function_731e7fcf, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_6babc320ed9a08f1", 8000, 1, "int", &function_828749d4, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_1f18edb30c01161a", 8000, 1, "int", &function_9d797e21, 0, 0);
+  clientfield::register("scriptmover", "" + #"seeing_stone_glow", 8000, 1, "int", &function_9d797e21, 0, 0);
   clientfield::register("scriptmover", "" + #"ghost_trail", 8000, 1, "int", &ghost_trail_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_11eb6b7dc7db71ad", 8000, getminbitcountfornum(1), "int", &function_924f922d, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_58b293ceeb7f93e4", 8000, 1, "int", &function_5fc23aa1, 0, 0);
   clientfield::register("scriptmover", "" + #"vision_stone_wormhole", 8000, getminbitcountfornum(17), "int", &function_c0257c1d, 0, 0);
   clientfield::register("toplayer", "" + #"vision_stone_wormhole_sfx", 8000, 1, "int", &vision_stone_wormhole_sfx, 0, 0);
-  clientfield::register("toplayer", "" + #"vision_stone_wormhole_fov", 13000, 1, "int", &function_ec12026f, 0, 0);
+  clientfield::register("toplayer", "" + #"vision_stone_wormhole_fov", 13000, 1, "int", &vision_stone_wormhole_fov, 0, 0);
   clientfield::register("allplayers", "" + #"hash_49de76d6c4f95e5d", 8000, 1, "int", &function_738252b1, 0, 0);
 
   if(zm_utility::is_standard() || zm_custom::function_901b751c(#"zmpapenabled") == 2) {
@@ -53,7 +53,7 @@ init_fx() {
   level._effect[#"hash_3e60b8be62e0e427"] = #"hash_41384db90e66558b";
   level._effect[#"hash_32c45f56d5a6bf6c"] = #"hash_5d1eb6746beee299";
   level._effect[#"stone_blue_glow"] = #"hash_45b5a28321d54ea0";
-  level._effect[#"hash_34d62c40ae5290e6"] = #"hash_3d736a45c27a711d";
+  level._effect[#"stone_green_glow"] = #"hash_3d736a45c27a711d";
   level._effect[#"hash_229bf68ca0edaadb"] = #"hash_2949c26febe96072";
   level._effect[#"hash_2e59763a88bb2bd4"] = #"hash_749d6ee7eea4a790";
   level._effect[#"hash_9ac3900bb7115d"] = #"hash_75d6f353559fa727";
@@ -275,7 +275,7 @@ function_9d797e21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           str_effect = level._effect[#"stone_blue_glow"];
           break;
         case # "p8_zm_man_pap_gazing_stone_03_full":
-          str_effect = level._effect[#"hash_34d62c40ae5290e6"];
+          str_effect = level._effect[#"stone_green_glow"];
           break;
       }
 
@@ -505,7 +505,7 @@ function_c0257c1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_ec12026f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+vision_stone_wormhole_fov(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(function_8b1a219a()) {
       self.basefov = getDvar(#"cg_fov_default", 90);

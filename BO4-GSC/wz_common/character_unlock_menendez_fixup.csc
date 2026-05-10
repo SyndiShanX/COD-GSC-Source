@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"menendez_unlock", #"hash_77118b5dbb73e0b6", #"cu20_item", &function_d95e620c, #"menendez_unlock_melee");
+  character_unlock_fixup::register_character_unlock(#"menendez_unlock", #"prt_wz_menendez", #"cu20_item", &function_d95e620c, #"menendez_unlock_melee");
 }
 
 function_d95e620c() {

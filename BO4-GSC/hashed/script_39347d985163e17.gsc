@@ -27,14 +27,14 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_27f8093e2c3d8f82", &on_begin, &on_end);
+  zm_trial::register_challenge(#"red_oracle_boon", &on_begin, &on_end);
 }
 
 on_begin(var_264ee2f5) {
   var_264ee2f5 = zm_trial::function_5769f26a(var_264ee2f5);
   level thread function_cec06121(var_264ee2f5);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
-  callback::function_33f0ddd3(&function_68af83a9);
+  callback::on_player_loadout_changed(&function_68af83a9);
 }
 
 on_end(round_reset) {
@@ -186,6 +186,6 @@ function_ebd0491e() {
 }
 
 is_active() {
-  s_challenge = zm_trial::function_a36e8c38(#"hash_27f8093e2c3d8f82");
+  s_challenge = zm_trial::function_a36e8c38(#"red_oracle_boon");
   return isDefined(s_challenge);
 }

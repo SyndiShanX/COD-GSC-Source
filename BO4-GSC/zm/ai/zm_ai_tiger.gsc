@@ -192,7 +192,7 @@ function_4703be8a() {
 }
 
 function_8d4da9d6() {
-  if(gettime() > self.var_86152978) {
+  if(gettime() > self.pouncedelay) {
     return true;
   }
 

@@ -138,7 +138,7 @@ watchthrow(missileweapon) {
   trace = player check_launch_space(grenade.origin);
 
   if(trace[#"fraction"] < 1) {
-    player iprintlnbold(#"hash_150caa190a45d9eb");
+    player iprintlnbold(#"killstreak/dart_not_available");
     grenade cleanup_grenade();
     player notify(#"dart_throw_failed");
     return;
@@ -375,7 +375,7 @@ stop_remote_weapon(attacker, weapon) {
     challenges::destroyedaircraft(attacker, weapon, 1, 1);
     attacker challenges::addflyswatterstat(weapon, dart);
     dart killstreaks::function_73566ec7(attacker, weapon, dart.owner);
-    luinotifyevent(#"player_callout", 2, #"hash_5cbeb6b82bac95e5", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_dart", attacker.entnum);
     attacker battlechatter::function_dd6a6012("dart", weapon);
   }
 

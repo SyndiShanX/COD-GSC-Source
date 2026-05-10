@@ -218,7 +218,7 @@ bgb_finalize() {
       v.consumable = 1;
     }
 
-    v.camo_index = var_5415dfb9.var_daefc551;
+    v.camo_index = var_5415dfb9.bgbcamoindex;
     v.dlc_index = var_ddcb67f4.dlc;
   }
 }

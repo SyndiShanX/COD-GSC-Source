@@ -44,7 +44,7 @@ class cbarricade: cdoor {
     m_e_door endon(#"delete", #"barricade_removed");
 
     while(true) {
-      m_e_door waittill(#"hash_7166c13e79b73f9");
+      m_e_door waittill(#"player_opened_door");
 
       if(isDefined(var_a2f96f78.target)) {
         var_59746f25 = struct::get_array(var_a2f96f78.target, "targetname");

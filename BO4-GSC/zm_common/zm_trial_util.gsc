@@ -336,7 +336,7 @@ function_d37a769(var_806e2de0) {
       }
 
       self zm_perks::function_81bc6765(slot, level._custom_perks[vapor].alias);
-      self zm_perks::function_9bdf581f(vapor, slot);
+      self zm_perks::give_perk_vapor(vapor, slot);
     }
   }
 
@@ -657,7 +657,7 @@ function_9c71b46f() {
 
       if(!player hasperk(perk) && !player zm_perks::has_perk_paused(perk)) {
         n_index = player zm_perks::function_c1efcc57(perk);
-        player zm_perks::function_9bdf581f(perk, n_index);
+        player zm_perks::give_perk_vapor(perk, n_index);
       }
     }
   }

@@ -29,7 +29,7 @@ enable() {
 
 disable() {
   self endon(#"disconnect");
-  self notify(#"hash_1b878c77be2d017b");
+  self notify(#"disable_free_fire");
   wait 0.1;
 
   if(self hasperk("specialty_freefire")) {
@@ -48,7 +48,7 @@ validation() {
 }
 
 function_1ff1beff() {
-  self endon(#"disconnect", #"player_downed", #"hash_1b878c77be2d017b");
+  self endon(#"disconnect", #"player_downed", #"disable_free_fire");
   w_current = self getcurrentweapon();
 
   if(!(isDefined(w_current.isheroweapon) && w_current.isheroweapon) && !zm_weapons::is_wonder_weapon(w_current)) {

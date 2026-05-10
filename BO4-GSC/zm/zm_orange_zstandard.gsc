@@ -219,7 +219,7 @@ function_c87db3f7(str_next_defend) {
   level waittill(#"creating_zone_defend_area");
   level flag::wait_till("started_defend_area");
   level flag::set("fasttravel_disabled");
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   wait 2;
   level flag::clear("fasttravel_disabled");
 }
@@ -258,7 +258,7 @@ function_7b3abf7b() {
 }
 
 intro_zombie_dog(n_round_number) {
-  level endon(#"hash_7a04a7fb98fa4e4d");
+  level endon(#"end_defend_area");
   n_spawn_count = 0;
 
   while(n_spawn_count < 3) {
@@ -280,7 +280,7 @@ function_b4cae8b9() {
 }
 
 intro_electric_zombie(n_round_number) {
-  level endon(#"hash_7a04a7fb98fa4e4d");
+  level endon(#"end_defend_area");
   n_spawn_count = 0;
 
   while(n_spawn_count < 3) {
@@ -474,7 +474,7 @@ function_80a9077f() {
 
       s_zipline_crank.var_3bc09679 thread scene::play("move_down_9");
       s_zipline_crank.var_68a09be4 = 1;
-      s_zipline_crank notify(#"hash_6c3e5c135959d4ec");
+      s_zipline_crank notify(#"zipline_in_place");
     }
   }
 }

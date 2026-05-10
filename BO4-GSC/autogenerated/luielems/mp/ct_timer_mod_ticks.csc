@@ -37,7 +37,7 @@ class cct_timer_mod_ticks: cluielem {
       return;
     }
 
-    if(#"hash_654551b30d95836c" == state_name) {
+    if(#"plus_killedwarlord" == state_name) {
       set_data(localclientnum, "_state", 5);
       return;
     }

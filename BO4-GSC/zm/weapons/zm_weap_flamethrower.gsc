@@ -717,7 +717,7 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
       self.var_68f4c9de = util::spawn_model("tag_origin", v_pos, self.angles);
       self.var_68f4c9de thread scene::init(#"p8_zm_flame_tornado_miniboss_scene", self);
       self thread function_e6f0a2c7(var_ab287846);
-      var_ab287846 waittill(#"death", #"hash_751e0293eed9a1cf", #"hash_124840b260697eb9");
+      var_ab287846 waittill(#"death", #"hash_751e0293eed9a1cf", #"miniboss_scene_stop");
 
       if(isDefined(self) && isDefined(self.var_68f4c9de)) {
         self.var_68f4c9de scene::play(#"p8_zm_flame_tornado_miniboss_scene", self);
@@ -809,7 +809,7 @@ function_e6f0a2c7(var_ab287846) {
     waitframe(1);
   }
 
-  var_ab287846 notify(#"hash_124840b260697eb9");
+  var_ab287846 notify(#"miniboss_scene_stop");
 }
 
 track_lifted_for_ragdoll_count() {

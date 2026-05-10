@@ -144,7 +144,7 @@ function_3a965fac(scene_name, prt, mode, fields) {
   var_8b15a963 = function_9bfe9255(prt, mode);
 
   if(isDefined(var_8b15a963)) {
-    canselect = !(isDefined(fields.var_819846c7) && fields.var_819846c7);
+    canselect = !(isDefined(fields.disallowselection) && fields.disallowselection);
     var_7accf7bb = {
       #scene: scene_name, #prt: prt, #canselect: canselect, #dvar: fields.requireddvar, #role_index: var_8b15a963, #list_index: level.var_e362b5d9.size, #mode: mode, #fields: fields, #isdefault: isDefined(fields.var_c6376b99) && fields.var_c6376b99
     };

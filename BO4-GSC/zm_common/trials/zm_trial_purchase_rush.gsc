@@ -84,7 +84,7 @@ on_player_spawned() {
 start_timer(timeout, var_f97d1a30) {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
-    level.var_f995ece6 zm_trial_timer::set_timer_text(self, #"hash_424e01ea2299eec0");
+    level.var_f995ece6 zm_trial_timer::set_timer_text(self, #"zmtrials/purchase_rush");
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, 1);
     self zm_trial_util::start_timer(timeout);
     self thread function_a0f0109f(timeout, var_f97d1a30);

@@ -174,11 +174,11 @@ function_40eb02fc(response, intpayload) {
   package = struct::get_script_bundle("bountyhunterpackage", level.bountypackagelist[intpayload - 1]);
 
   switch (response) {
-    case # "hash_28554ae159269915":
+    case # "buy_package_primary":
       clientfield = "luielement.BountyHunterLoadout.primary";
       slot = 0;
       break;
-    case # "hash_c785a629253dcd5":
+    case # "buy_package_secondary":
       clientfield = "luielement.BountyHunterLoadout.secondary";
       slot = 1;
       break;
@@ -212,27 +212,27 @@ function_40eb02fc(response, intpayload) {
       clientfield = "luielement.BountyHunterLoadout.secondaryAttachmentTrack.tierPurchased";
       slot = 12;
       break;
-    case # "hash_7760a837c6f81098":
+    case # "buy_package_armor":
       clientfield = "luielement.BountyHunterLoadout.armor";
       slot = 5;
       break;
-    case # "hash_46637ad5c1dd8390":
+    case # "buy_package_mobility":
       clientfield = "luielement.BountyHunterLoadout.mobilityTrack.tierPurchased";
       slot = 6;
       break;
-    case # "hash_603babb2a7c35420":
+    case # "buy_package_recon":
       clientfield = "luielement.BountyHunterLoadout.reconTrack.tierPurchased";
       slot = 7;
       break;
-    case # "hash_5792934483949728":
+    case # "buy_package_assault":
       clientfield = "luielement.BountyHunterLoadout.assaultTrack.tierPurchased";
       slot = 8;
       break;
-    case # "hash_265c0500ba88a4a4":
+    case # "buy_package_support":
       clientfield = "luielement.BountyHunterLoadout.supportTrack.tierPurchased";
       slot = 9;
       break;
-    case # "hash_7b3685fb5a146b83":
+    case # "buy_package_ammo":
       isammo = 1;
 
       if(function_2b402d5d(package)) {
@@ -242,12 +242,12 @@ function_40eb02fc(response, intpayload) {
       }
 
       break;
-    case # "hash_6e8d37dc2b55eb07":
+    case # "buy_package_scorestreak":
       isscorestreak = 1;
       clientfield = "luielement.BountyHunterLoadout.scorestreak";
       slot = 10;
       break;
-    case # "hash_45dc798feb538f7b":
+    case # "buy_package_equipment":
       clientfield = "luielement.BountyHunterLoadout.equipment";
       slot = 2;
       break;

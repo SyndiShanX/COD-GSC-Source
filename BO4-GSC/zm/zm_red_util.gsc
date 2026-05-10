@@ -317,7 +317,7 @@ function function_8916aa62(str_line) {
     case # "interact_sandals":
       str_vo_line = #"hash_13ae4ec246717759";
       break;
-    case # "hash_4d78ef43b2835e3b":
+    case # "interact_treasure_chest":
       str_vo_line = #"hash_4125f996df00a018";
       break;
     case # "interact_forge":

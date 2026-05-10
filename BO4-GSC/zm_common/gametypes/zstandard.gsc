@@ -84,9 +84,9 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_76859bbd = &function_1687c93;
   level.custom_door_buy_check = &function_7acf9d9b;
   level.var_2e93df96 = &function_7acf9d9b;
-  level.var_d0b54199 = &function_b8839207;
-  level.var_9093a47e = &function_b8839207;
-  level.var_ddcd74c6 = &function_b8839207;
+  level.var_d0b54199 = &set_door_hint_string;
+  level.var_9093a47e = &set_door_hint_string;
+  level.var_ddcd74c6 = &set_door_hint_string;
   level.var_256aa316 = &function_cded672a;
   level.var_c621179 = &function_7adb4617;
   level.var_236b9f7a = &function_37fe3e07;
@@ -685,7 +685,7 @@ function_10c7411b() {
 function_e03ea502() {
   self endon(#"disconnect");
   level endon(#"end_game");
-  str_extra_info = #"hash_4ba6bddb362745d9";
+  str_extra_info = #"zmarcade/blank";
   level waittill(#"start_of_round");
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + ".multiplier_blink", 0);
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + ".multiplier_count", self.var_7e008e0c + 1);
@@ -693,7 +693,7 @@ function_e03ea502() {
   while(true) {
     s_waitresult = self waittilltimeout(self.var_72b24dc2, #"zm_arcade_kill", #"damage", #"bled_out", #"player_downed", #"bonus_points_player_grabbed", #"multiplier_timeout", #"player_defend_area_waiting", #"player_grabbed_key");
     clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + ".multiplier_blink", 0);
-    str_extra_info = #"hash_4ba6bddb362745d9";
+    str_extra_info = #"zmarcade/blank";
 
     switch (s_waitresult._notify) {
       case # "bonus_points_player_grabbed":
@@ -1390,15 +1390,15 @@ function_75ebd926(e_player) {
     return true;
   } else if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(e_player.player_shield_reset_health) && isDefined(e_player.var_d3345483) && e_player.var_d3345483 || !e_player zm_crafting::function_2d53738e(self.blueprint.w_result) && (isDefined(self.blueprint.firstonefree) && self.blueprint.firstonefree && !e_player zm_crafting::function_48ce9379(self.blueprint.w_result) || isDefined(level.var_905507c3) && level.var_905507c3)) {
     if(function_8b1a219a()) {
-      self.hint_string = isDefined(self.blueprint.var_abd9b2d0) ? self.blueprint.var_abd9b2d0 : # "hash_40987a3e6d86b097";
+      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : # "hash_40987a3e6d86b097";
     } else {
-      self.hint_string = isDefined(self.blueprint.var_abd9b2d0) ? self.blueprint.var_abd9b2d0 : # "zombie/grab_shield_free";
+      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : # "zombie/grab_shield_free";
     }
 
     self.cost = undefined;
     return true;
   } else {
-    self.hint_string = #"hash_53fd856df9288be7";
+    self.hint_string = #"zombie/build_piece_have_one";
     self.cost = undefined;
     return true;
   }
@@ -1492,7 +1492,7 @@ function_7acf9d9b(e_door) {
   return 0;
 }
 
-function_b8839207(e_door) {
+set_door_hint_string(e_door) {
   e_door endon(#"death");
 
   if(zm_utility::function_e37823df() && e_door.script_noteworthy !== "electric_door" && e_door.script_noteworthy !== "electric_buyable_door" && !(isDefined(e_door.var_c947f134) && e_door.var_c947f134)) {

@@ -149,7 +149,7 @@ function_3fcb1e5e() {
 function_1c5d2f2() {
   level flag::wait_till(#"hash_ed90925c898d1b0");
   var_83aecc80 = struct::get("nixie_tube_2");
-  playsoundatposition(#"hash_59db059ae5cc54c2", var_83aecc80.origin);
+  playsoundatposition(#"evt_nixie_clock_confirm", var_83aecc80.origin);
   var_e0ed1d92 = struct::get("citadel_elevator");
   var_e0ed1d92 thread function_6b107487();
 }
@@ -588,5 +588,5 @@ function_7101d54f() {
     e_player zm_crafting::function_3e29352d(w_component);
   }
 
-  level flag::set(#"hash_7039457b1cc827de");
+  level flag::set(#"have_wardens_key");
 }

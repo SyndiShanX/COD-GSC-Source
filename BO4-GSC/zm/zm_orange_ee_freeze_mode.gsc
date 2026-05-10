@@ -26,7 +26,7 @@ preload() {}
 main() {
   level flag::init(#"freeze_mode");
   level flag::init(#"all_freeze");
-  zm_audio::sndannouncervoxadd(#"freeze_mode", #"hash_2df47a99f054462e");
+  zm_audio::sndannouncervoxadd(#"freeze_mode", #"vox_freeze_mode");
   level.var_50c3a25b = getEntArray("freeze_mode_ice", "targetname");
 
   foreach(ice in level.var_50c3a25b) {
@@ -46,7 +46,7 @@ main() {
 }
 
 freeze_quest(var_a276c861) {
-  level flag::wait_till_any(array(#"all_freeze", #"hell_on_earth", #"hash_198bc172b5af7f25"));
+  level flag::wait_till_any(array(#"all_freeze", #"hell_on_earth", #"trials_hell_on_earth"));
 }
 
 freeze_quest_cleanup(var_a276c861, var_19e802fa) {
@@ -54,7 +54,7 @@ freeze_quest_cleanup(var_a276c861, var_19e802fa) {
     level flag::set(#"all_freeze");
   }
 
-  if(level flag::get(#"hell_on_earth") || level flag::get(#"hash_198bc172b5af7f25")) {
+  if(level flag::get(#"hell_on_earth") || level flag::get(#"trials_hell_on_earth")) {
     return;
   }
 

@@ -27,7 +27,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + #"hash_681de2aa531ffcd0", 20000, 1, "int");
+  clientfield::register("world", "" + #"mannequin_force_stream", 20000, 1, "int");
 }
 
 __main__() {
@@ -138,7 +138,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
 
       level play_start_vo();
       level thread timer_countdown();
-      level clientfield::set("" + #"hash_681de2aa531ffcd0", 1);
+      level clientfield::set("" + #"mannequin_force_stream", 1);
       a_flags = array(#"sawyer_authorization_code_entered", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
@@ -398,7 +398,7 @@ function_88265619() {
       e_part show();
     }
 
-    level clientfield::set("" + #"hash_681de2aa531ffcd0", 0);
+    level clientfield::set("" + #"mannequin_force_stream", 0);
     var_e3d10631[0] zm_unitrigger::create(&function_11862a9b, 96, undefined, 1, 1);
     var_e3d10631[0] thread function_1e88595a();
 
@@ -445,14 +445,14 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
 }
 
 function_8527738e() {
-  level._effect[#"hash_fc6d4d4b4df98f8"] = #"hash_4419642343624864";
+  level._effect[#"paper_stack_explode"] = #"hash_4419642343624864";
   level.var_c8b6a556 = getent("pernel_paper_stack", "targetname");
   level.var_c8b6a556 setCanDamage(1);
   level.var_c8b6a556 val::set("private_mannequin_quest_paper_stack", "allowDeath", 0);
   s_notify = level.var_c8b6a556 waittill(#"damage");
   level.var_c8b6a556.tag = util::spawn_model("tag_origin", level.var_c8b6a556.origin);
   level.var_c8b6a556.tag.angles = level.var_c8b6a556.angles;
-  playFXOnTag(level._effect[#"hash_fc6d4d4b4df98f8"], level.var_c8b6a556.tag, "tag_origin");
+  playFXOnTag(level._effect[#"paper_stack_explode"], level.var_c8b6a556.tag, "tag_origin");
   level.var_c8b6a556 hide();
   wait 5;
   level.var_c8b6a556.tag delete();

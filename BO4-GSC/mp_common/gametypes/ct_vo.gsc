@@ -163,7 +163,7 @@ function_56ed19d9() {
   self.var_8701e993 = undefined;
 }
 
-function_c72e58c1(_hash) {
+play_vo_end(_hash) {
   level thread function_d7a1a570(_hash);
 }
 

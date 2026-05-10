@@ -16,7 +16,7 @@ autoexec __init__system__() {
 __init__() {
   n_bits = getminbitcountfornum(4);
   clientfield::register("item", "" + #"hash_7e5c581ade235dfc", 16000, n_bits, "int", &function_c0d2e1a2, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_403e80cafccc207c", 16000, 1, "int", &function_e634058b, 0, 0);
+  clientfield::register("toplayer", "" + #"oracle_boon_recieved", 16000, 1, "int", &oracle_boon_recieved, 0, 0);
 }
 
 function_c0d2e1a2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -43,7 +43,7 @@ function_cd5f9803(localclientnum) {
   }
 }
 
-function_e634058b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+oracle_boon_recieved(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     self thread postfx::playpostfxbundle(#"hash_2b92b9e84c59cfe4");
     return;

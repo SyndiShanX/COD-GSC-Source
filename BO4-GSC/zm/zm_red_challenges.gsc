@@ -32,12 +32,12 @@ init() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + #"hash_74fc30de57a0657a", 16000, 3, "int");
-  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 16000, 3, "int");
+  clientfield::register("scriptmover", "" + #"apollo_bowl_fx", 16000, 3, "int");
+  clientfield::register("scriptmover", "" + #"tribute_flame_fx", 16000, 3, "int");
   clientfield::register("scriptmover", "" + #"keyline_model", 16000, 1, "int");
   clientfield::register("scriptmover", "" + #"pickup_glow", 16000, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_8b48433c3fe40e4", 16000, 3, "int");
-  clientfield::register("toplayer", "" + #"hash_4bde11d71410ea67", 16000, 3, "int");
+  clientfield::register("toplayer", "" + #"highlight_players_tribute_bowl", 16000, 3, "int");
   clientfield::register("world", "" + #"cleanup_challenges", 16000, 1, "int");
   clientfield::register("allplayers", "" + #"hash_47490b879090eb55", 16000, 3, "int");
   clientfield::register("allplayers", "" + #"hash_7b1dd5c08e2585c", 16000, 3, "int");
@@ -200,7 +200,7 @@ player_death_watcher(a_params) {
   self waittill(#"death");
 
   if(isDefined(s_bowl) && isDefined(s_bowl.var_9d32404)) {
-    s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
+    s_bowl.var_9d32404 clientfield::set("" + #"tribute_flame_fx", 0);
   }
 }
 
@@ -589,7 +589,7 @@ function_895a4ebf() {
 
   if(level.var_1044e9e1 > 1) {
     if(!isDefined(var_4d0cb1b1) || var_4d0cb1b1 != level.var_1044e9e1) {
-      level notify(#"hash_58de66439e1aa5a2");
+      level notify(#"challenge_phase_updated");
     }
   }
 }
@@ -617,7 +617,7 @@ function_7e8e23a6() {
   if(true) {
     n_index = self getentitynumber();
     s_bowl = level.var_3e72dc3c[n_index];
-    self clientfield::set_to_player("" + #"hash_4bde11d71410ea67", s_bowl.var_e668d197);
+    self clientfield::set_to_player("" + #"highlight_players_tribute_bowl", s_bowl.var_e668d197);
     return s_bowl;
   } else {
     while(true) {
@@ -629,7 +629,7 @@ function_7e8e23a6() {
       }
 
       if(!maxis_quest_(s_bowl)) {
-        self clientfield::set_to_player("" + #"hash_4bde11d71410ea67", s_bowl.var_e668d197);
+        self clientfield::set_to_player("" + #"highlight_players_tribute_bowl", s_bowl.var_e668d197);
         return s_bowl;
       }
     }
@@ -875,7 +875,7 @@ function_f51adffa() {
 
   foreach(player in getplayers()) {
     player thread zm_red_util::show_text(level.var_2c5f83d, 0, "stop_challenge", 0);
-    player thread function_173c3ce8(level.s_active_challenge.n_id, level.var_2c5f83d, undefined);
+    player thread player_zone_watcher(level.s_active_challenge.n_id, level.var_2c5f83d, undefined);
   }
 }
 
@@ -932,7 +932,7 @@ function_1d60215() {
 
   foreach(player in getplayers()) {
     player thread zm_red_util::show_text(var_9862b6f2, 0, "stop_challenge", 0);
-    player thread function_173c3ce8(level.s_active_challenge.n_id, undefined, vol_area);
+    player thread player_zone_watcher(level.s_active_challenge.n_id, undefined, vol_area);
   }
 
   level.var_ae2ad596 = zm_utility::function_d7db256e(level.var_c699da9d, undefined, 1);
@@ -1244,7 +1244,7 @@ function_1398b789() {}
 
 player_progress_bar() {
   level flag::wait_till("power_on");
-  self thread zm_red_util::show_text(#"hash_18137f65a42bc186", 0, "start_challenge");
+  self thread zm_red_util::show_text(#"zm_red/challenge_available", 0, "start_challenge");
 }
 
 function_a17a600() {
@@ -1277,7 +1277,7 @@ function_5c5cb67b() {
   return false;
 }
 
-function_173c3ce8(var_ecffa2a8, var_2c5f83d, vol_override = undefined) {
+player_zone_watcher(var_ecffa2a8, var_2c5f83d, vol_override = undefined) {
   self notify(#"player_zone_watcher");
   self endon(#"player_zone_watcher", #"death");
   self.var_95cfa01d = 1;
@@ -1348,7 +1348,7 @@ function_304fb042() {
   if(!(isDefined(level.var_7aec13aa) && level.var_7aec13aa)) {
     level clientfield::set("" + #"cleanup_challenges", 1);
     level.var_483180c5 clientfield::set("" + #"rob_coals", 0);
-    level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", 0);
+    level.var_d5ba7324 clientfield::set("" + #"apollo_bowl_fx", 0);
 
     foreach(player in getplayers()) {
       player zm_red_util::function_7e30f24c();
@@ -1356,7 +1356,7 @@ function_304fb042() {
       s_bowl = player.s_tribute_bowl;
 
       if(isDefined(s_bowl) && isDefined(s_bowl.var_9d32404)) {
-        s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
+        s_bowl.var_9d32404 clientfield::set("" + #"tribute_flame_fx", 0);
       }
     }
 

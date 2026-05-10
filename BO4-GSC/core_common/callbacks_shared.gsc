@@ -482,7 +482,7 @@ remove_on_trigger_once(func, obj) {
   function_52ac9652(#"on_trigger_once", func, obj);
 }
 
-function_33f0ddd3(func, obj) {
+on_player_loadout_changed(func, obj) {
   add_callback(#"on_player_loadout_changed", func, obj);
 }
 
@@ -498,7 +498,7 @@ remove_on_boast(func, obj) {
   remove_callback(#"on_boast", func, obj);
 }
 
-function_5753ac6e(func, obj) {
+on_boast_end(func, obj) {
   add_callback(#"on_boast_end", func, obj);
 }
 
@@ -956,7 +956,7 @@ event_handler[underwater] codecallback_underwater(eventstruct) {
 }
 
 event_handler[event_d6f9e6ad] function_8877d89(eventstruct) {
-  self callback(#"hash_42aa89b2a0951308", eventstruct);
+  self callback(#"player_grapple_failed", eventstruct);
 }
 
 event_handler[debug_movement] function_930ce3c3(eventstruct) {

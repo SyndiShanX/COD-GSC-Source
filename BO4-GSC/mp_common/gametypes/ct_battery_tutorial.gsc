@@ -192,7 +192,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     level notify(#"stop_nag");
-    ct_vo::function_c72e58c1();
+    ct_vo::play_vo_end();
     ct_vo::function_47ece28d();
 
     if(level.var_ad7c0539 === 7) {
@@ -449,7 +449,7 @@ function_27e2d4aa() {
     wait 0.5;
   }
 
-  ct_vo::function_c72e58c1();
+  ct_vo::play_vo_end();
   ct_vo::function_47ece28d();
   wait 0.1;
   level.players[0] ct_vo::play_vo(#"hash_4a3fa914d1ccc37c", 1);
@@ -504,7 +504,7 @@ function_a03539a3() {
   }
 
   level notify(#"hash_4c9c5fbc89779e64");
-  ct_vo::function_c72e58c1();
+  ct_vo::play_vo_end();
   ct_vo::function_47ece28d();
   level thread ct_vo::play_vo(#"hash_281160c4a36c9dd0", 0);
   ct_utils::function_c2a10fc();
@@ -713,7 +713,7 @@ function_8d7d4d37() {
       level notify(#"bounce_failed");
       wait 0.5;
       level.players[0] ct_utils::function_49e0c5bc(0, 0);
-      ct_vo::function_c72e58c1();
+      ct_vo::play_vo_end();
       ct_vo::function_47ece28d();
       level flag::clear("enemy_arrived");
       level notify(#"start_war_machine_wall_bounce_forward_collision");
@@ -767,7 +767,7 @@ function_de37fc52() {
 
     if(!level flag::get("window_hit")) {
       level.players[0] ct_utils::function_49e0c5bc(0, 0);
-      ct_vo::function_c72e58c1();
+      ct_vo::play_vo_end();
       ct_vo::function_47ece28d();
     }
 
@@ -997,7 +997,7 @@ function_8e068518() {
     }
 
     if(!isalive(level.players[0])) {
-      level.players[0] ct_utils::function_1bb93418();
+      level.players[0] ct_utils::ingame_objective_close();
       level.var_ff7ed5c8 = 0;
       level.players[0] ct_utils::function_80bf685b(level.var_ff7ed5c8);
       level.players[0].momentum = 0;
@@ -1035,7 +1035,7 @@ function_86610592() {
     level.players[0] ct_utils::function_80bf685b(level.var_ff7ed5c8);
   } else {
     level.var_51ff7a58 = 1;
-    level.players[0] ct_utils::function_1bb93418();
+    level.players[0] ct_utils::ingame_objective_close();
     level notify(#"killstreak_ready");
     level.players[0] notify(#"killstreak_ready_planemortar");
   }
@@ -1049,7 +1049,7 @@ function_537c9eea() {
   self endon(#"death");
   self waittill(#"killstreak_ready_planemortar");
   self.var_51ff7a58 = 1;
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
 }
 
 function_e17f2b8a() {
@@ -1104,7 +1104,7 @@ function_e17f2b8a() {
         if(level flag::get("scorestreak_fail")) {
           level flag::clear("scorestreak_fail");
           level ct_vo::play_vo(#"hash_bebb353e21b47f1", 1);
-          level.players[0] ct_utils::function_1bb93418();
+          level.players[0] ct_utils::ingame_objective_close();
         } else if(level flag::get("scorestreak_done")) {
           break;
         }

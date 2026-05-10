@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"torque_unlock", #"hash_6999516e5e35a515", #"cu02_item", &function_d95e620c, #"hash_a9ec4883fd0293d", #"torque_unlock_barricade", #"hash_b47463756c6a60f");
+  character_unlock_fixup::register_character_unlock(#"torque_unlock", #"prt_wz_engineer", #"cu02_item", &function_d95e620c, #"torque_unlock_razor_wire", #"torque_unlock_barricade", #"hash_b47463756c6a60f");
 }
 
 function_d95e620c() {

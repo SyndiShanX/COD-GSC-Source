@@ -41,7 +41,7 @@ on_begin(weapon_name) {
     player zm_trial_util::function_dc9ab223(1);
   }
 
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_44200d07(1);
   level zm_trial::function_cd75b690(1);
 }
@@ -69,7 +69,7 @@ on_end(round_reset) {
     player zm_trial_util::function_dc9ab223(0);
   }
 
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_44200d07(0);
   level zm_trial::function_cd75b690(0);
 }
@@ -79,7 +79,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(zm_loadout::function_59b0ef71("lethal_grenade", s_event.weapon)) {
       self lockweapon(s_event.weapon, 1, 1);

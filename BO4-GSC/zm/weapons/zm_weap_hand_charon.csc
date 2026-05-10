@@ -34,10 +34,10 @@ __init__() {
   level._effect[#"charon_impact_torso"] = #"hash_6937321c4a8e7349";
   level._effect[#"charon_impact_arm_left"] = #"hash_7fca1782163cbb01";
   level._effect[#"charon_impact_arm_right"] = #"hash_55d06957e137b062";
-  level._effect[#"hash_e84c5306b5ffdf7"] = #"hash_b3bc039e7aca94";
-  level._effect[#"hash_4c22be78d74e1de8"] = #"hash_1e3e41de01894921";
-  level._effect[#"hash_1bce475aa707ac4c"] = #"hash_5dab3144897e562f";
-  level._effect[#"hash_322a2cba1a33e239"] = #"hash_4611402cb26df20";
+  level._effect[#"charon_impact_hip_left"] = #"hash_b3bc039e7aca94";
+  level._effect[#"charon_impact_hip_right"] = #"hash_1e3e41de01894921";
+  level._effect[#"charon_impact_leg_left"] = #"hash_5dab3144897e562f";
+  level._effect[#"charon_impact_leg_right"] = #"hash_4611402cb26df20";
   level._effect[#"hash_355fbaf759524a7c"] = #"hash_6d56f51f9b1fabaa";
   level._effect[#"hash_1b9a6c3712623d2b"] = #"hash_2ea0cefc397c3d81";
   level._effect[#"hash_2bb39e5073633f5b"] = #"hash_31e7c5600f464e95";
@@ -91,19 +91,19 @@ function_d64a6790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       if(isDefined(self gettagorigin("j_hip_le"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_e84c5306b5ffdf7"], self, "j_hip_le");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_hip_left"], self, "j_hip_le");
       }
 
       if(isDefined(self gettagorigin("j_hip_ri"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_4c22be78d74e1de8"], self, "j_hip_ri");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_hip_right"], self, "j_hip_ri");
       }
 
       if(isDefined(self gettagorigin("j_knee_le"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_1bce475aa707ac4c"], self, "j_knee_le");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_leg_left"], self, "j_knee_le");
       }
 
       if(isDefined(self gettagorigin("j_knee_ri"))) {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_322a2cba1a33e239"], self, "j_knee_ri");
+        util::playFXOnTag(localclientnum, level._effect[#"charon_impact_leg_right"], self, "j_knee_ri");
       }
 
       if(isDefined(self gettagorigin("j_spinelower"))) {
@@ -159,19 +159,19 @@ function_120153b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self gettagorigin("j_hip_le"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_e84c5306b5ffdf7"], self, "j_hip_le");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_hip_left"], self, "j_hip_le");
   }
 
   if(isDefined(self gettagorigin("j_hip_ri"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_4c22be78d74e1de8"], self, "j_hip_ri");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_hip_right"], self, "j_hip_ri");
   }
 
   if(isDefined(self gettagorigin("j_knee_le"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_1bce475aa707ac4c"], self, "j_knee_le");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_leg_left"], self, "j_knee_le");
   }
 
   if(isDefined(self gettagorigin("j_knee_ri"))) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_322a2cba1a33e239"], self, "j_knee_ri");
+    util::playFXOnTag(localclientnum, level._effect[#"charon_impact_leg_right"], self, "j_knee_ri");
   }
 
   if(isDefined(self gettagorigin("j_spinelower"))) {

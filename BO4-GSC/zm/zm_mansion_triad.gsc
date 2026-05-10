@@ -36,7 +36,7 @@ init() {
   clientfield::register("allplayers", "" + #"shield_fire", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"triad_beam", 8000, getminbitcountfornum(3), "int");
   clientfield::register("scriptmover", "" + #"wisp_fx", 8000, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_2108935a0c33f89a", 8000, getminbitcountfornum(3), "int");
+  clientfield::register("scriptmover", "" + #"knight_sigil_fx", 8000, getminbitcountfornum(3), "int");
   zm_sq_modules::function_d8383812(#"soul_capture_kp1", 8000, #"kp_1", &function_4175b958, &function_138b784e, 1);
   zm_sq_modules::function_d8383812(#"soul_capture_kp2", 8000, #"kp_2", &function_53e85e3d, &function_25d21cdb, 1);
   zm_sq_modules::function_d8383812(#"soul_capture_kp3", 8000, #"kp_3", &function_5e8b7383, &function_28082147, 1);
@@ -179,7 +179,7 @@ init_step_1(var_a276c861) {
 
   if(!var_a276c861) {
     level flag::wait_till(#"gazed_main_hall");
-    level zm_ui_inventory::function_7df6bb60(#"hash_7b00754a8b214587", 1);
+    level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_9", 1);
     level thread kp_fireplace();
     level flag::wait_till_all(array(#"kp_upg_main", #"kp_upg_dead", #"kp_upg_green"));
   }
@@ -194,7 +194,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
 }
 
 init_step_2(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_22f194aa6971efed", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_10", 1);
   a_s_fireplaces = struct::get_array("fireplace_location");
 
   foreach(s_fireplace in a_s_fireplaces) {
@@ -287,7 +287,7 @@ cleanup_step_2(var_5ea5c94d, ended_early) {
 }
 
 init_step_3(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_22f193aa6971ee3a", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_11", 1);
 
   if(!isDefined(level.var_fbcb1d5b)) {
     s_loc = struct::get("kp_1", "script_noteworthy");
@@ -422,7 +422,7 @@ init_step_4(var_a276c861) {
     level flag::wait_till(#"forest_open");
   }
 
-  level zm_ui_inventory::function_7df6bb60(#"hash_22f192aa6971ec87", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_12", 1);
 }
 
 cleanup_step_4(var_5ea5c94d, ended_early) {
@@ -745,14 +745,14 @@ function_fb54ddba() {
     s_result = self waittill(#"weapon_change", #"shield_timeout");
 
     if(s_result._notify !== "weapon_change" || !mansion_util::is_shield(s_result.weapon)) {
-      self notify(#"hash_459246e5bfcc3713");
+      self notify(#"shield_swapped");
     }
   }
 }
 
 function_4c8574b3() {
   self endon(#"disconnect");
-  self waittilltimeout(55, #"shield_timeout", #"hash_459246e5bfcc3713", #"destroy_riotshield");
+  self waittilltimeout(55, #"shield_timeout", #"shield_swapped", #"destroy_riotshield");
   self.is_blue = 0;
   self clientfield::set("" + #"shield_fire", 0);
   self notify(#"shield_timeout");
@@ -813,7 +813,7 @@ function_4490aa7d() {
       var_ca0ae05d = "knight_main_hall_stationed";
       s_loc = struct::get("kp_1", "script_noteworthy");
       mdl_symbol = getent("kp_mark_lion", "script_noteworthy");
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 1);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 1);
       e_wisp = util::spawn_model(#"p8_zm_man_statue_kisa_stone_02", s_spawn.origin, s_spawn.angles);
       level.var_fbcb1d5b = e_wisp;
       break;
@@ -821,7 +821,7 @@ function_4490aa7d() {
       var_ca0ae05d = "knight_cemetery_stationed";
       s_loc = struct::get("kp_2", "script_noteworthy");
       mdl_symbol = getent("kp_mark_cobra", "script_noteworthy");
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 2);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 2);
       e_wisp = util::spawn_model(#"p8_zm_man_statue_kisa_stone_01", s_spawn.origin, s_spawn.angles);
       level.var_abe1b67c = e_wisp;
       break;
@@ -829,7 +829,7 @@ function_4490aa7d() {
       var_ca0ae05d = "knight_greenhouse_stationed";
       s_loc = struct::get("kp_3", "script_noteworthy");
       mdl_symbol = getent("kp_mark_wolf", "script_noteworthy");
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 3);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 3);
       e_wisp = util::spawn_model(#"p8_zm_man_statue_kisa_stone_03", s_spawn.origin, s_spawn.angles);
       level.var_c22f75e6 = e_wisp;
       break;
@@ -899,13 +899,13 @@ function_d409a74f(mdl_symbol) {
 
   switch (mdl_symbol.script_noteworthy) {
     case # "kp_mark_lion":
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 0);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
     case # "kp_mark_wolf":
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 0);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
     case # "kp_mark_cobra":
-      mdl_symbol clientfield::set("" + #"hash_2108935a0c33f89a", 0);
+      mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
   }
 

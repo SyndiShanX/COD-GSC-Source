@@ -156,7 +156,7 @@ event_handler[gametype_init] main(eventstruct) {
   function_aaa24662();
   level.var_bde3d03 = &function_b777ff94;
   setDvar(#"g_allowlaststandforactiveclients", 1);
-  setDvar(#"hash_7036719f41a78d54", 50);
+  setDvar(#"player_laststandrevivehealth", 50);
   setDvar(#"hash_6d545f685fa213dd", 3);
   setDvar(#"scr_deleteexplosivesonspawn", 0);
   level.wound_disabled = 1;
@@ -1026,7 +1026,7 @@ on_dead_event(team) {
 function_61c315e0() {
   if(infection::function_74650d7()) {
     params = globallogic::function_9c839e9();
-    function_ded0be06(params);
+    infection_end_game(params);
   }
 }
 
@@ -1060,7 +1060,7 @@ function_eb1c0d37(teams) {
   return true;
 }
 
-function_ded0be06(params) {
+infection_end_game(params) {
   if(function_eb1c0d37(params.var_dfa2cc2c)) {
     level notify(#"infection_end_game");
   } else {
@@ -1138,7 +1138,7 @@ function_ded0be06(params) {
 
 function_5af3a29(params) {
   if(infection::function_74650d7()) {
-    level function_ded0be06(params);
+    level infection_end_game(params);
     return;
   }
 

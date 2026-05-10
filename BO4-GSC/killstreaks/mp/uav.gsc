@@ -260,7 +260,7 @@ destroyuav(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     attacker battlechatter::function_dd6a6012("uav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
-    luinotifyevent(#"player_callout", 2, #"hash_7f902a0b5852fe90", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_uav", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 
@@ -277,8 +277,8 @@ destroyuav(attacker, weapon) {
     playFXOnTag(params.ksexplosionfx, self, "tag_origin");
   }
 
-  if(isDefined(params.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    playFXOnTag(params.var_bb6c29b4, self, "tag_origin");
+  if(isDefined(params.shockrifledestructionfx) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFXOnTag(params.shockrifledestructionfx, self, "tag_origin");
   }
 
   self stoploopsound();

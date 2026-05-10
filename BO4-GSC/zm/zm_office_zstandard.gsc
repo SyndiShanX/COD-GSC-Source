@@ -90,7 +90,7 @@ function_74872db6() {
 }
 
 intro_zombie_dog(n_round_number) {
-  level endon(#"hash_7a04a7fb98fa4e4d");
+  level endon(#"end_defend_area");
   n_spawn_count = 0;
 
   while(n_spawn_count < 3) {
@@ -112,7 +112,7 @@ function_b4cae8b9() {
 }
 
 intro_nova_crawler(n_round_number) {
-  level endon(#"hash_7a04a7fb98fa4e4d");
+  level endon(#"end_defend_area");
   n_spawn_count = 0;
 
   while(n_spawn_count < 3) {
@@ -254,7 +254,7 @@ function_c87db3f7(str_next_defend) {
   }
 
   zm_office_teleporters::function_a6bb56f6();
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   wait 2;
 
   if(str_next_defend == #"groom_lake") {
@@ -306,7 +306,7 @@ function_fa0d0109(var_37b7b46a, var_7f66a3c0, str_next_defend) {
 
 enable_groom_lake() {
   function_231d0b19();
-  level flag::set(#"hash_537cc10c9deca9da");
+  level flag::set(#"visited_groom_lake");
   level flag::set(#"groom_lake_enabled");
   zm_office_teleporters::function_bb3f9afd();
   level.var_a23b5c5 movez(150, 1);

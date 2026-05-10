@@ -142,7 +142,7 @@ function_c67a5089() {
     }
   }
 
-  while(var_743d50f5.size > 0 && level.var_755e455a.size < (isDefined(getgametypesetting(#"hash_221008a2c793dfa1")) ? getgametypesetting(#"hash_221008a2c793dfa1") : 14)) {
+  while(var_743d50f5.size > 0 && level.var_755e455a.size < (isDefined(getgametypesetting(#"maxcharacterunlocks")) ? getgametypesetting(#"maxcharacterunlocks") : 14)) {
     var_b844743b = function_d59c2d03(var_743d50f5.size);
 
     if(!isDefined(level.var_755e455a)) {

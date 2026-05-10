@@ -157,7 +157,7 @@ defend_areas() {
   enable_gondola_at_docks(0);
 
   if(getdvarint(#"hash_b3363e1d25715d7", 0)) {
-    level notify(#"hash_417b024aa81e3cb8");
+    level notify(#"powerhouse_pap_activate");
     level thread function_c3ad6d4a();
     level thread enable_gondola_at_docks(1);
     level thread function_b9cacd48();
@@ -179,7 +179,7 @@ defend_areas() {
   zm_zonemgr::function_8caa21df(array("zone_powerhouse", "zone_new_industries"));
   wait 3;
   zm_utility::enable_power_switch(1, 1, "power_house_power_switch", "script_noteworthy");
-  level notify(#"hash_417b024aa81e3cb8");
+  level notify(#"powerhouse_pap_activate");
 
   if(str_next_defend == #"new_industries") {
     str_first_defend = #"new_industries";
@@ -267,7 +267,7 @@ defend_areas() {
   zm_zonemgr::function_8caa21df(s_defend_area.a_str_zones);
   wait 10;
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   zm_utility::function_fef4b36a(str_next_defend);
   level enable_gondola_at_docks(1);
   zm_utility::open_door(array("door_cafeteria_to_times_square", "door_cell_block_floor_3", "door_cafeteria_to_infirmary", "door_shower_to_citadel", "door_model_warden_office_to_warden_house"), undefined, undefined, 1);

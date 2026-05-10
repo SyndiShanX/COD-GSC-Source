@@ -66,7 +66,7 @@ on_local_client_connect(localclientnum) {
   if(isDefined(nixie_cage)) {
     nixie_sound_manager = spawn(localclientnum, nixie_cage.origin, "script_origin");
     nixie_sound_manager.targetname = "nixie_sound_manager";
-    nixie_sound_manager.loop_sound = nixie_sound_manager playLoopSound(#"hash_589f33024097b46");
+    nixie_sound_manager.loop_sound = nixie_sound_manager playLoopSound(#"evt_nixie_clock_lp");
   } else {
     return;
   }
@@ -341,8 +341,8 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
 
 function_bbca669b(e_activator, dynent) {
   if(isDefined(e_activator) && isDefined(dynent)) {
-    e_activator notify(#"hash_2f586f8df1e6596d");
-    e_activator endon(#"hash_2f586f8df1e6596d", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b", #"disconnect");
+    e_activator notify(#"nixie_clock_wait");
+    e_activator endon(#"nixie_clock_wait", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b", #"disconnect");
     wait 5;
     e_activator thread function_c1cc29be(e_activator, dynent);
   }
@@ -396,7 +396,7 @@ function_c1cc29be(e_activator, dynent) {
       var_790990d7 thread function_b4231440(localclientnum);
     }
 
-    playSound(localclientnum, #"hash_6c0f63cd38c393e7", dynent.origin);
+    playSound(localclientnum, #"evt_nixie_clock_off", dynent.origin);
     dynent.canuse = 0;
     e_activator thread function_f451b137();
     dynent.canuse = 1;
@@ -431,7 +431,7 @@ music_ee() {
     a_mdl_tubes = getEntArray(player.localclientnum, "mdl_nixie_tubes", "script_string");
 
     if(a_mdl_tubes.size > 0) {
-      a_mdl_tubes[0] playSound(player.localclientnum, #"hash_5ecaf6acf6be0b1f", a_mdl_tubes[0].origin);
+      a_mdl_tubes[0] playSound(player.localclientnum, #"mus_nixie_clock", a_mdl_tubes[0].origin);
     }
   }
 }

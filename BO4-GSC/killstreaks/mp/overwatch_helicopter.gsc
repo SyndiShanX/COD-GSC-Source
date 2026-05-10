@@ -49,9 +49,9 @@ __init__() {
   level.var_24de8afe = &function_24de8afe;
   level.killstreaks[#"overwatch_helicopter"].threatonkill = 1;
   level.var_93215f31 = getdvarint(#"hash_1300f6ba32e8d68c", 2500);
-  level.var_bf127508 = getdvarint(#"hash_163c95340307e3aa", 1800);
-  level.var_5f6d1a12 = getdvarint(#"hash_16579f34031ebc60", 2000);
-  level.var_fb59767 = getdvarint(#"hash_3a28b6936bc7d2a9", 200);
+  level.var_bf127508 = getdvarint(#"scr_overwatch_height_min", 1800);
+  level.var_5f6d1a12 = getdvarint(#"scr_overwatch_height_max", 2000);
+  level.var_fb59767 = getdvarint(#"scr_overwatch_height_offset", 200);
   level.var_739f9c79 = getdvarint(#"hash_26f6fa23a134bc05", 4);
   level.var_b6d2e275 = getdvarint(#"hash_27120423a14b94bb", 6);
 
@@ -179,7 +179,7 @@ function_ca6698c6() {
   player thread watchplayerteamchangethread(helicopter);
   function_ab667e1c(player, helicopter);
   helicopter thread function_5c15f6d6();
-  util::function_5a68c330(21, player.team, player getentitynumber(), #"hash_76bc8a74d60388e4");
+  util::function_5a68c330(21, player.team, player getentitynumber(), #"killstreak/attack_helicopter");
   return true;
 }
 
@@ -302,7 +302,7 @@ performleavehelicopterfromdamage() {
 
 function_49dca506(helicopter, attacker) {
   if(isDefined(attacker)) {
-    luinotifyevent(#"player_callout", 2, #"hash_20aa28bee9cfdd61", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_helicopter_gunner", attacker.entnum);
   }
 
   if(target_istarget(helicopter)) {
@@ -341,8 +341,8 @@ function_a9fc0ef6(helicopter) {
 }
 
 watchplayerteamchangethread(helicopter) {
-  helicopter notify(#"hash_73c07c54a285eb73");
-  helicopter endon(#"hash_73c07c54a285eb73", #"overwatch_hacked");
+  helicopter notify(#"overwatch_team_change");
+  helicopter endon(#"overwatch_team_change", #"overwatch_hacked");
   assert(isPlayer(self));
   player = self;
   player endon(#"overwatch_left");

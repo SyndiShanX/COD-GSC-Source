@@ -56,7 +56,7 @@ play_seeker_mine_fx(localclientnum) {
   self endon(#"death");
   playSound(0, #"hash_153d2d19a99f3a29", self.origin);
   sound = self playLoopSound(#"hash_40039ac740a9f96e");
-  self.fxloop = util::playFXOnTag(localclientnum, #"hash_180b04db9cd1ee12", self, "tag_body_animate");
+  self.fxloop = util::playFXOnTag(localclientnum, #"weapon/fx8_equip_seeker_active", self, "tag_body_animate");
   level thread function_cece47d2(localclientnum, self, self.fxloop);
 }
 

@@ -26,7 +26,7 @@ __init__() {
   }
 
   level.var_160dcfef.var_193db709 = [];
-  setDvar(#"hash_8d4e58d73e3f876", 0);
+  setDvar(#"deployable_debug_on", 0);
 }
 
 register_deployable(weapon, var_c0064c29, var_94b4fa08 = undefined, placehintstr = undefined, var_a39cb3db = undefined, var_fe12c0d9 = undefined) {
@@ -166,7 +166,7 @@ function_b3d993e9(deployable_weapon, sethintstring = 0) {
 
 function_ab25be55(weapon, sethintstring) {
   if(self isplayerswimming() && !(isDefined(weapon.canuseunderwater) ? weapon.canuseunderwater : 0)) {
-    self sethintstring(#"hash_37605398dce96965");
+    self sethintstring(#"weapon/cant_plant_equipment");
     return false;
   }
 

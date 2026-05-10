@@ -146,8 +146,8 @@ registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d96f193711e7602", &function_61e7d5f5);
   assert(isscriptfunctionptr(&function_6bbfa1a0));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_753bdf09b9b21d9a", &function_6bbfa1a0);
-  assert(isscriptfunctionptr(&function_dd674e3c));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_649ab6146cce9955", &function_dd674e3c);
+  assert(isscriptfunctionptr(&gladiatorisrunning));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatorisrunning", &gladiatorisrunning);
   assert(isscriptfunctionptr(&function_7468904d));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_19966227fe912af8", &function_7468904d);
   assert(isscriptfunctionptr(&gladiatorshouldreact));
@@ -162,8 +162,8 @@ registerbehaviorscriptfunctions() {
   behaviorstatemachine::registerbsmscriptapiinternal(#"gladiatorpickaxe", &gladiatorpickaxe);
   assert(isscriptfunctionptr(&function_7891bd9b));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2ec3db12905e5ef2", &function_7891bd9b);
-  assert(isscriptfunctionptr(&function_490a290d));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_324b5266aa732357", &function_490a290d);
+  assert(isscriptfunctionptr(&gladiatormeleeend));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatormeleeend", &gladiatormeleeend);
   assert(isscriptfunctionptr(&function_6719445a));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a99cf7ed75b85d4", &function_6719445a);
   assert(isscriptfunctionptr(&function_fced00e1));
@@ -604,7 +604,7 @@ function_7891bd9b(entity) {
   entity pathmode("dont move", 1);
 }
 
-function_490a290d(entity) {
+gladiatormeleeend(entity) {
   entity pathmode("move allowed");
 }
 
@@ -624,7 +624,7 @@ function_6bbfa1a0(entity) {
   return false;
 }
 
-function_dd674e3c(entity) {
+gladiatorisrunning(entity) {
   locomotionspeed = entity getblackboardattribute("_locomotion_speed");
 
   if(locomotionspeed === "locomotion_speed_run") {
@@ -1606,7 +1606,7 @@ function_24a38427() {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_1a45d40a78c47d72", "<dev string:x41>");
+    string = getdvarstring(#"gladiator_devgui_cmd", "<dev string:x41>");
     cmd = strtok(string, "<dev string:x228>");
     gladiators = getaiarchetypearray(#"gladiator");
 
@@ -1645,6 +1645,6 @@ function_24a38427() {
       }
     }
 
-    setDvar(#"hash_1a45d40a78c47d72", "<dev string:x41>");
+    setDvar(#"gladiator_devgui_cmd", "<dev string:x41>");
   }
 }

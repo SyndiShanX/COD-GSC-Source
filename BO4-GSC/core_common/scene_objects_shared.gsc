@@ -435,7 +435,7 @@ class csceneobject {
   function on_play_anim(ent) {}
 
   function function_98561e95() {
-    self endon(#"hash_456b12fb28128d17");
+    self endon(#"placeholder_move_done");
     var_9f5994d7 = var_acbd43ee;
     self waittill(#"death", #"scene_stop");
 
@@ -487,7 +487,7 @@ class csceneobject {
 
     _e unlink();
     _e animation::stop();
-    _e notify(#"hash_456b12fb28128d17");
+    _e notify(#"placeholder_move_done");
   }
 
   function _play_anim(animation, n_rate, n_blend, n_time, var_7d32b2c6, paused) {
@@ -496,7 +496,7 @@ class csceneobject {
         _e dontinterpolate();
       }
 
-      _e flagsys::set(#"hash_7cddd51e45d3ff3e");
+      _e flagsys::set(#"non_shared_igc");
     }
 
     function_a04fb5f4();
@@ -565,7 +565,7 @@ class csceneobject {
     }
 
     if(isPlayer(_e)) {
-      _e flagsys::clear(#"hash_7cddd51e45d3ff3e");
+      _e flagsys::clear(#"non_shared_igc");
     }
 
     if(getdvarint(#"debug_scene", 0) > 0) {
@@ -634,7 +634,7 @@ class csceneobject {
     var_2a3b0294 = (isDefined(var_55b4f21e.var_922b4fc5) ? var_55b4f21e.var_922b4fc5 : 0, isDefined(var_55b4f21e.var_3e692842) ? var_55b4f21e.var_3e692842 : 0, isDefined(var_55b4f21e.var_be60a82b) ? var_55b4f21e.var_be60a82b : 0);
     var_f3bd6699 = (isDefined(var_55b4f21e.var_16999a5d) ? var_55b4f21e.var_16999a5d : 0, isDefined(var_55b4f21e.var_29563fd6) ? var_55b4f21e.var_29563fd6 : 0, isDefined(var_55b4f21e.var_eb00c330) ? var_55b4f21e.var_eb00c330 : 0);
 
-    if(isDefined(_o_scene._s.var_6a17a93d) && _o_scene._s.var_6a17a93d) {
+    if(isDefined(_o_scene._s.additiveoffsets) && _o_scene._s.additiveoffsets) {
       var_d3c21d73 = var_2dd2901f + var_2a3b0294 + var_24a7cd13;
       v_ang_offset = var_acf1be3a + var_f3bd6699 + var_75cdf4bd;
     } else {
@@ -1053,7 +1053,7 @@ class csceneobject {
       var_520e99b5 = s_shot.damagethreshold;
     }
 
-    if(!(isDefined(_s.var_a1c5c678) && _s.var_a1c5c678)) {
+    if(!(isDefined(_s.disablehitmarker) && _s.disablehitmarker)) {
       b_dead = var_f2059ab8 <= 0;
       var_37fa9b04.attacker util::show_hit_marker(b_dead);
     }
@@ -1115,7 +1115,7 @@ class csceneobject {
       }
     }
 
-    if(isDefined(_s.var_2baad8fc) && _s.var_2baad8fc) {
+    if(isDefined(_s.makesentienttarget) && _s.makesentienttarget) {
       _e util::function_5d36c37a();
     }
 
@@ -1590,7 +1590,7 @@ class csceneobject {
 
   function function_1e19d813() {
     if(isDefined(_o_scene._e_root)) {
-      _o_scene._e_root notify(#"hash_4e8860ad89fcf927", {
+      _o_scene._e_root notify(#"stop_scene_on_death", {
         #var_fbd6d50c: _e, #str_scene: _o_scene._str_name
       });
     }
@@ -1603,7 +1603,7 @@ class csceneobject {
       }
     }
 
-    if(isDefined(_s.var_d318cc2c) && _s.var_d318cc2c) {
+    if(isDefined(_s.stopsceneondeath) && _s.stopsceneondeath) {
       if(isDefined(_o_scene._e_root) && isDefined(_o_scene._e_root.scene_played)) {
         foreach(str_shot in _o_scene.var_5a2219f0) {
           _o_scene._e_root.scene_played[str_shot] = 1;
@@ -1642,8 +1642,8 @@ class csceneobject {
   }
 
   function function_9ec459a2() {
-    if(isDefined(var_55b4f21e.var_64c0ee5a) && isDefined(_e)) {
-      _e setModel(var_55b4f21e.var_64c0ee5a);
+    if(isDefined(var_55b4f21e.shotmodelcleanup) && isDefined(_e)) {
+      _e setModel(var_55b4f21e.shotmodelcleanup);
     }
   }
 
@@ -3409,7 +3409,7 @@ class cscene {
           continue;
         }
 
-        if(!isDefined(s_shot.entry) && !isDefined(s_shot.shotmodel) && !isDefined(s_shot.var_64c0ee5a) && !isDefined(s_shot.cleanuphide) && !isDefined(s_shot.cleanupshow) && !isDefined(s_shot.cleanupdelete) && !isDefined(s_shot.var_3ea5d95f) && !isDefined(s_shot.var_8645db22)) {
+        if(!isDefined(s_shot.entry) && !isDefined(s_shot.shotmodel) && !isDefined(s_shot.shotmodelcleanup) && !isDefined(s_shot.cleanuphide) && !isDefined(s_shot.cleanupshow) && !isDefined(s_shot.cleanupdelete) && !isDefined(s_shot.var_3ea5d95f) && !isDefined(s_shot.var_8645db22)) {
           arrayremovevalue(s_obj.shots, s_shot, 1);
         }
       }
@@ -3552,7 +3552,7 @@ class cscene {
     _str_name = str_scenedef;
     _b_testing = b_test_run;
     _str_team = util::get_team_mapping(_s.team);
-    _a_streamer_hint[#"allies"] = isDefined(_s.var_a6da2039) ? _s.var_a6da2039 : _s.streamerhintteama;
+    _a_streamer_hint[#"allies"] = isDefined(_s.streamerhintsidea) ? _s.streamerhintsidea : _s.streamerhintteama;
     _a_streamer_hint[#"axis"] = isDefined(_s.var_991a84ba) ? _s.var_991a84ba : _s.streamerhintteamb;
     _str_notify_name = isstring(_s.malebundle) || ishash(_s.malebundle) ? _s.malebundle : _str_name;
 

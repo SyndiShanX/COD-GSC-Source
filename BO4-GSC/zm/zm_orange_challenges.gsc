@@ -224,7 +224,7 @@ function_9f2ab302() {
 }
 
 function_af2eff2e() {
-  level endon(#"end_game", #"hell_on_earth", #"hash_198bc172b5af7f25");
+  level endon(#"end_game", #"hell_on_earth", #"trials_hell_on_earth");
   self endon(#"challenge_station_completed");
 
   while(true) {
@@ -1379,7 +1379,7 @@ function_472fa2ca(s_challenge) {
         break;
       case 1:
         var_66bb9366 = #"hash_53f014fab33492d8";
-        playsoundatposition(#"hash_23c7a9bf9d34bbe4", self.origin);
+        playsoundatposition(#"zmb_bell_c", self.origin);
         break;
       case 2:
         var_66bb9366 = #"hash_594894375473c7b";
@@ -1387,7 +1387,7 @@ function_472fa2ca(s_challenge) {
         break;
       case 3:
         var_66bb9366 = #"hash_33ce9da949624fae";
-        playsoundatposition(#"hash_23c7a5bf9d34b518", self.origin);
+        playsoundatposition(#"zmb_bell_g", self.origin);
         break;
     }
 
@@ -1894,7 +1894,7 @@ swap_weapon(w_reward) {
 
   foreach(w_gun in var_6822257f) {
     if(w_gun.rootweapon === w_reward) {
-      self zm_weapons::function_7c5dd4bd(w_gun);
+      self zm_weapons::give_full_ammo(w_gun);
       return;
     }
   }
@@ -1969,7 +1969,7 @@ function_fd8a137e(n_time = 0) {
   }
 }
 
-function_e4b04738() {
+complete_current_challenge() {
   if(level flag::get(#"challenge_active")) {
     if(isDefined(level.var_97a44fdd)) {
       var_d6578e1f = level.var_97a44fdd.var_d6578e1f;

@@ -655,7 +655,7 @@ function_b858f95a() {
     s_bowl = self.s_tribute_bowl;
 
     if(isDefined(s_bowl.var_9d32404) && isDefined(self.var_9e09931e)) {
-      s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", self.var_9e09931e);
+      s_bowl.var_9d32404 clientfield::set("" + #"tribute_flame_fx", self.var_9e09931e);
     }
   }
 }

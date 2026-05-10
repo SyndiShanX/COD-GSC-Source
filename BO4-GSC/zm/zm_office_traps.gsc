@@ -57,11 +57,11 @@ function_e021562c() {
   level.fix_trigger_array = getEntArray("trigger_battery_trap_fix", "targetname");
 
   if(isDefined(level.fix_trigger_array)) {
-    array::thread_all(level.fix_trigger_array, &function_cebfdd08);
+    array::thread_all(level.fix_trigger_array, &fix_electric_trap);
   }
 }
 
-function_cebfdd08() {
+fix_electric_trap() {
   if(!isDefined(self.script_flag_wait)) {
     return;
   }

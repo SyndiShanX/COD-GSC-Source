@@ -242,8 +242,8 @@ initzmbehaviorsandasm() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiegrappleactionstart", &zombiegrappleactionstart);
   assert(isscriptfunctionptr(&zombieknockdownactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionstart", &zombieknockdownactionstart);
-  assert(isscriptfunctionptr(&function_c8939973));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_a6273a84b4237ce", &function_c8939973);
+  assert(isscriptfunctionptr(&zombieknockdownactionterminate));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionterminate", &zombieknockdownactionterminate);
   assert(isscriptfunctionptr(&zombiegetupactionterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiegetupactionterminate", &zombiegetupactionterminate);
   assert(isscriptfunctionptr(&zombiepushedactionstart));
@@ -272,8 +272,8 @@ initzmbehaviorsandasm() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"findnodesservice", &findnodesservice);
   assert(isscriptfunctionptr(&zombieattackableobjectservice));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieattackableobjectservice", &zombieattackableobjectservice);
-  assert(isscriptfunctionptr(&function_fb814207));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiefindfleshservice", &function_fb814207, 2);
+  assert(isscriptfunctionptr(&findfleshservice));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiefindfleshservice", &findfleshservice, 2);
   assert(isscriptfunctionptr(&function_f637b05d));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_712f0844b14c72fe", &function_f637b05d, 1);
   assert(isscriptfunctionptr(&zombieenteredplayable));
@@ -289,7 +289,7 @@ initzmbehaviorsandasm() {
   setDvar(#"scr_zm_use_code_enemy_selection", 0);
 }
 
-function_fb814207(behaviortreeentity) {
+findfleshservice(behaviortreeentity) {
   if(isDefined(self.var_72411ccf)) {
     self[[self.var_72411ccf]](self);
     return;
@@ -983,7 +983,7 @@ zombieknockdownactionstart(behaviortreeentity) {
   behaviortreeentity.blockingpain = 1;
 }
 
-function_c8939973(behaviortreeentity) {
+zombieknockdownactionterminate(behaviortreeentity) {
   if(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
     behaviortreeentity.knockdown = 0;
     behaviortreeentity collidewithactors(1);

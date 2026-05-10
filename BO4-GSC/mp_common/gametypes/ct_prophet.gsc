@@ -330,7 +330,7 @@ function_dd1fa6e7() {
 
 function_1c8a3d23() {
   self endon(#"death");
-  self waittill(#"hash_225857690f87699b");
+  self waittill(#"seeker_mine_deployed");
   level notify(#"stop_seeker_nag");
   level.var_f0e1e497 = 1;
 }

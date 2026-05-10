@@ -279,7 +279,7 @@ revive_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
     if(!isDefined(self.var_a776839a)) {
       self.var_a776839a = util::playFXOnTag(localclientnum, level._effect[#"scepter_revive"], self, "tag_eye");
       sndorigin = self gettagorigin("J_Eyeball_LE");
-      self playSound(localclientnum, #"hash_29c60da797dd7b3");
+      self playSound(localclientnum, #"wpn_scepter_revive");
     }
 
     return;

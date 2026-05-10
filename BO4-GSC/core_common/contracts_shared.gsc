@@ -85,7 +85,7 @@ get_contract_stat(slot, stat_name) {
 function_d17bcd3c(slot) {
   player = self;
   var_5ceb23d0 = spawnStruct();
-  var_5ceb23d0.var_38280f2f = #"hash_6a1133003efe7380";
+  var_5ceb23d0.var_38280f2f = #"undefined_contract_name";
   var_5ceb23d0.var_59cb904f = 0;
   var_5ceb23d0.var_c3e2bb05 = 0;
   var_38280f2f = player stats::function_ff8f4f17(#"loot_contracts", slot, #"contracthash");
@@ -157,7 +157,7 @@ setup_player_contracts(max_contract_slots, var_1b3f5772) {
 
     var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-    if(var_38280f2f == #"hash_6a1133003efe7380") {
+    if(var_38280f2f == #"undefined_contract_name") {
       continue;
     }
 
@@ -214,7 +214,7 @@ function_5e1c4d33(var_5ceb23d0) {
 
   var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-  if(var_38280f2f == #"hash_6a1133003efe7380") {
+  if(var_38280f2f == #"undefined_contract_name") {
     player.pers[#"contracts"][var_38280f2f] = undefined;
     return;
   }
@@ -556,7 +556,7 @@ function_d8c98325(var_38280f2f, delta, flags, var_4b67585c, var_2de8a050) {
   player = self;
 
   if(var_38280f2f != #"") {
-    var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 4);
+    var_ae857992 = getdvarint(#"loot_season_number", 4);
     player function_cce105c8(var_38280f2f, 1, delta, 2, var_ae857992, 3, flags, 4, var_4b67585c, 5, var_2de8a050);
   }
 }

@@ -117,7 +117,7 @@ function_f2d27140(var_6a87ce6d) {
     self zm_vo::function_cf1e151c(level.var_4687b0d0[var_6a87ce6d]);
   }
 
-  self notify(#"hash_53eb32eaa511640c");
+  self notify(#"roll_stop_spin");
   self stoploopsound();
   self playSound(#"hash_376eaa517cd09530");
   self thread function_ad05f6f3();
@@ -136,7 +136,7 @@ function_64834acd() {
 }
 
 function_21a979f7() {
-  self endon(#"hash_53eb32eaa511640c");
+  self endon(#"roll_stop_spin");
 
   while(true) {
     if(self.angles[0] < 360) {
@@ -169,11 +169,11 @@ function_ad05f6f3() {
 function_6aad582c(e_player) {
   e_player endoncallback(&function_3741630d, #"disconnect");
 
-  if(e_player zm_characters::is_character(array(#"hash_3c0932fa55ee6e5b"))) {
+  if(e_player zm_characters::is_character(array(#"prt_zm_brigadier"))) {
     var_59c8624c = #"hash_24f1e841c9ab0766";
-  } else if(e_player zm_characters::is_character(array(#"hash_5ebf024e1559c04a"))) {
+  } else if(e_player zm_characters::is_character(array(#"prt_zm_butler"))) {
     var_59c8624c = #"hash_680df11406aaad0d";
-  } else if(e_player zm_characters::is_character(array(#"hash_4e8f51ec275a4a38"))) {
+  } else if(e_player zm_characters::is_character(array(#"prt_zm_gunslinger"))) {
     var_59c8624c = #"hash_14367bddc8694d4f";
   } else if(e_player zm_characters::is_character(array(#"hash_515977e191d13967"))) {
     var_59c8624c = #"hash_53875c52fa6301c0";
@@ -200,11 +200,11 @@ function_9ea70701() {
   var_91f0b44f.var_59c8624c = #"hash_502b8782f8b740c";
   var_91f0b44f.s_unitrigger_stub = var_91f0b44f zm_unitrigger::create("", 64, &function_33864e5d);
   var_fb14f184 = struct::get("s_int_n_p");
-  var_fb14f184.var_690ea031 = array(#"hash_5ebf024e1559c04a");
+  var_fb14f184.var_690ea031 = array(#"prt_zm_butler");
   var_fb14f184.var_59c8624c = #"hash_7172cde1ce628720";
   var_fb14f184.s_unitrigger_stub = var_fb14f184 zm_unitrigger::create("", 64, &function_33864e5d);
   var_64dd4c0d = struct::get("s_int_a_p");
-  var_64dd4c0d.var_690ea031 = array(#"hash_3c0932fa55ee6e5b");
+  var_64dd4c0d.var_690ea031 = array(#"prt_zm_brigadier");
   var_64dd4c0d.var_59c8624c = #"hash_26c5ceaa58dd1ddc";
   var_64dd4c0d.s_lookat = struct::get("s_int_a_p_lookat", "targetname");
   var_64dd4c0d.s_unitrigger_stub = var_64dd4c0d zm_unitrigger::create("", 64, &function_33864e5d);

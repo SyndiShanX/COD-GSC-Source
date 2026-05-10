@@ -52,7 +52,7 @@ function_4074a9e2() {
   }
 
   level.var_894a83d8 = 0;
-  level flag::clear(#"hash_26e9fe6561459de3");
+  level flag::clear(#"in_groom_lake");
   level flag::set("spawn_zombies");
   level flag::set("pause_round_timeout");
   callback::remove_on_ai_killed(&function_1cae4e0a);
@@ -91,7 +91,7 @@ function_b741acea() {
 
 function_88b87834() {
   level waittill(#"groom_lake_enter");
-  level flag::set(#"hash_26e9fe6561459de3");
+  level flag::set(#"in_groom_lake");
   function_fac06066();
 }
 

@@ -77,7 +77,7 @@ initscoreinfo() {
       sp = int(tablelookupcolumnforrow(scoreinfotablename, row, 3));
       hs = int(tablelookupcolumnforrow(scoreinfotablename, row, 4));
       res = float(tablelookupcolumnforrow(scoreinfotablename, row, 5));
-      var_e775f7ed = tablelookupcolumnforrow(scoreinfotablename, row, 6);
+      job_defining = tablelookupcolumnforrow(scoreinfotablename, row, 6);
       dp = int(tablelookupcolumnforrow(scoreinfotablename, row, 7));
       is_objective = tablelookupcolumnforrow(scoreinfotablename, row, 8);
       medalname = tablelookupcolumnforrow(scoreinfotablename, row, 11);
@@ -89,7 +89,7 @@ initscoreinfo() {
       is_deprecated = tablelookupcolumnforrow(scoreinfotablename, row, 21);
       bounty_reward = tablelookupcolumnforrow(scoreinfotablename, row, 22);
       mark2_bonus_xp = int(isDefined(tablelookupcolumnforrow(scoreinfotablename, row, 24)) ? tablelookupcolumnforrow(scoreinfotablename, row, 24) : 0);
-      registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_objective, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp);
+      registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_objective, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp);
 
       if(!isDefined(game.scoreinfoinitialized)) {
         setddlstat = tablelookupcolumnforrow(scoreinfotablename, row, 12);
@@ -123,7 +123,7 @@ getrankxpcapped(inrankxp) {
   return inrankxp;
 }
 
-registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp) {
+registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_obj, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp) {
   overridedvar = "scr_" + level.gametype + "_score_" + type;
 
   if(getdvarstring(overridedvar) != "") {
@@ -155,8 +155,8 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
       level.scoreinfo[type][#"res"] = res;
     }
 
-    if(isDefined(var_e775f7ed) && var_e775f7ed) {
-      level.scoreinfo[type][#"job_defining"] = var_e775f7ed;
+    if(isDefined(job_defining) && job_defining) {
+      level.scoreinfo[type][#"job_defining"] = job_defining;
     }
 
     if(isDefined(dp) && dp) {

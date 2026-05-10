@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"bruno_unlock", #"hash_4815f130a1c1d840", #"cu11_item", &function_d95e620c, #"hash_21c5510d64c20b71");
+  character_unlock_fixup::register_character_unlock(#"bruno_unlock", #"prt_wz_bruno", #"cu11_item", &function_d95e620c, #"hash_21c5510d64c20b71");
 }
 
 function_d95e620c() {

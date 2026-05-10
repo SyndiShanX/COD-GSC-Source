@@ -136,7 +136,7 @@ function_edc8c459(entity) {
   entity endon(#"death");
   entity solid();
   entity show();
-  entity.var_8ba6ede3 = undefined;
+  entity.shoulddigup = undefined;
   function_905d3c1a(entity);
 
   if(!isDefined(entity)) {

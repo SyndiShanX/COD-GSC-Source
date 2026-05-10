@@ -1481,7 +1481,7 @@ function_bfebe12d() {
   }
 
   level.var_51ff7a58 = 1;
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   wait 1;
   var_7cfb8d51 = self gamepadusedlast() ? # "hash_67a58d84d0f91968" : # "hash_4f0b2e3958c55f94";
   self thread ct_utils::function_61c3d59c(var_7cfb8d51, array("vox_tvoi_tutor_fire_score_earned_0", "vox_tvoi_tutor_fire_score_earned_1"));
@@ -1537,7 +1537,7 @@ function_78986232(params) {
     var_595e41ee = 100;
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"score/blank", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 
     if(!eattacker ct_utils::function_a7540094()) {
@@ -1688,7 +1688,7 @@ function_9f1d8637(var_f54b52b3) {
         self ct_utils::function_61c3d59c(self.var_141125f2);
         self.var_141125f2 = undefined;
       } else {
-        self ct_utils::function_1bb93418();
+        self ct_utils::ingame_objective_close();
       }
     }
 
@@ -1731,7 +1731,7 @@ function_344aee09(_hash) {
     level notify(#"hash_2d2294060e47449f");
     level notify(#"hash_6ebe7e4ea0726f0b");
     waitframe(1);
-    e_player thread ct_utils::function_1bb93418();
+    e_player thread ct_utils::ingame_objective_close();
     str_hint = undefined;
 
     if(_hash == #"death") {
@@ -1761,7 +1761,7 @@ function_344aee09(_hash) {
 
       if(_hash == #"hash_33333dd0736c30a1") {
         level.var_78be0c60 = 1;
-        e_player ct_vo::function_c72e58c1(#"failed");
+        e_player ct_vo::play_vo_end(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_gas_gauge_00"));
         setslowmotion(1, 0.1, 0.5);
         e_player ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_6d618a9f705ba66" : # "hash_5168ae1a4907adb6");
@@ -1957,7 +1957,7 @@ function_d74a7e31() {
   level.var_8ca3c62 = 0;
   self ct_utils::function_8b7a2fdd();
   self ct_utils::function_a7d0e0f3();
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level notify(#"hash_4c9c5fbc89779e64");
   level notify(#"tutorial_goto_end");
   level notify(#"tut_stop");

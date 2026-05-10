@@ -68,7 +68,7 @@ __init__() {
 function_b4f41a02() {
   level endon(#"game_ended");
   aitypes = array(#"spawner_boct_zombie_wz", #"spawner_boct_zombie_mob_wz", #"spawner_wz_blight_father", #"spawner_boct_zombie_dog_wz", #"spawner_boct_brutus_special_wz", #"spawner_boct_brutus_wz", #"spawner_boct_avogadro");
-  setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
+  setDvar(#"wz_ai_devgui_cmd", "<dev string:x38>");
 
   foreach(type in aitypes) {
     if(function_e949cfd7(type)) {
@@ -81,7 +81,7 @@ function_b4f41a02() {
 
   while(true) {
     wait 0.1;
-    cmd = getdvarstring(#"hash_209287456d55fca1", "<dev string:x38>");
+    cmd = getdvarstring(#"wz_ai_devgui_cmd", "<dev string:x38>");
 
     if(cmd == "<dev string:x38>") {
       continue;
@@ -103,7 +103,7 @@ function_b4f41a02() {
         break;
     }
 
-    setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
+    setDvar(#"wz_ai_devgui_cmd", "<dev string:x38>");
   }
 }
 
@@ -443,7 +443,7 @@ function_a679f9b(params) {
 
     if(isDefined(params.eattacker) && isPlayer(params.eattacker)) {
       if(self.archetype == #"zombie") {
-        self.ai_zone.var_58ba2ab7++;
+        self.ai_zone.ai_killed_zombie++;
         return;
       }
 
@@ -1163,11 +1163,11 @@ function_16e2f075(params) {
     return;
   }
 
-  if(!(isDefined(self.var_85c3882d) && self.var_85c3882d)) {
+  if(!(isDefined(self.inconcertinawire) && self.inconcertinawire)) {
     self.var_1b5e8136 = gettime();
   }
 
-  self.var_85c3882d = 1;
+  self.inconcertinawire = 1;
 
   if(!(isDefined(self.var_a9d9d11b) && self.var_a9d9d11b) || self.var_a9d9d11b < gettime()) {
     self.var_a9d9d11b = gettime() + 500;
@@ -1210,13 +1210,13 @@ function_7a87d2a7(damageduration) {
       timesincestart = gettime() - ai.var_1b5e8136;
 
       if(timesincestart > 1000) {
-        ai.var_85c3882d = undefined;
+        ai.inconcertinawire = undefined;
       }
 
       timesincelast = gettime() - ai.var_cd7665dd;
 
       if(timesincelast > 250) {
-        ai.var_85c3882d = undefined;
+        ai.inconcertinawire = undefined;
         ai.var_1b5e8136 = undefined;
         var_202d087b[var_202d087b.size] = ai;
       }

@@ -83,7 +83,7 @@ play_electrical_sound(trap) {
 }
 
 player_damage(trigger) {
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
 
   if(!(isDefined(self.b_no_trap_damage) && self.b_no_trap_damage)) {
     self thread zm_traps::player_elec_damage(trigger);

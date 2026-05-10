@@ -49,15 +49,15 @@ __init__() {
   } else if(function_8b1a219a()) {
     zm_utility::add_zombie_hint("default_buy_debris", #"hash_4b77c0a6bc72bc31");
   } else {
-    zm_utility::add_zombie_hint("default_buy_debris", #"hash_1595dd9d4d64f37b");
+    zm_utility::add_zombie_hint("default_buy_debris", #"zombie/button_buy_clear_debris_cost");
   }
 
   if(function_8b1a219a()) {
     zm_utility::add_zombie_hint("default_buy_door", #"hash_5483a959bcbbba41");
     zm_utility::add_zombie_hint("default_buy_door_close", #"hash_4cf42029f734b45b");
   } else {
-    zm_utility::add_zombie_hint("default_buy_door", #"hash_456cd0f0d10be48b");
-    zm_utility::add_zombie_hint("default_buy_door_close", #"hash_261288d018c0e7e5");
+    zm_utility::add_zombie_hint("default_buy_door", #"zombie/button_buy_open_door_cost");
+    zm_utility::add_zombie_hint("default_buy_door_close", #"zombie/button_buy_close_door");
   }
 
   init_blockers();
@@ -158,7 +158,7 @@ door_init() {
         return;
       }
 
-      self sethintstring(#"hash_671e980430950a22");
+      self sethintstring(#"zombie/need_local_power");
 
       if(isDefined(level.door_dialog_function)) {
         self thread[[level.door_dialog_function]]();
@@ -166,7 +166,7 @@ door_init() {
 
       return;
     } else if(self.script_noteworthy == "kill_counter_door") {
-      self sethintstring(#"hash_25a2adc4e37f3813", cost);
+      self sethintstring(#"zombie/door_activate_counter", cost);
       return;
     }
   }
@@ -684,7 +684,7 @@ door_think() {
           self door_opened(n_cost, 1);
         }
 
-        self sethintstring(#"hash_671e980430950a22");
+        self sethintstring(#"zombie/need_local_power");
         wait 3;
         continue;
       case # "electric_door":

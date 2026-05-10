@@ -62,7 +62,7 @@ on_begin(weapon_name, var_eaa7f0ba, var_957937ee, var_9c56c5a9, var_b896fe29) {
         }
       }
     }
-  } else if(weapon_name == #"hash_74285cd06483f6da") {
+  } else if(weapon_name == #"re_upgraded_weapon") {
     assert(isDefined(level.zombie_weapons_upgraded));
     level.var_ab9d0ec6 = [];
 

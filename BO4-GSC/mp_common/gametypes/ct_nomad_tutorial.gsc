@@ -178,7 +178,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
           level thread ct_vo::function_41e59aeb(array(#"hash_e219524f43ed980"), 1);
           break;
         case 8:
-          level thread ct_vo::function_41e59aeb(array(#"hash_605295eab859687c"), 1);
+          level thread ct_vo::function_41e59aeb(array(#"vox_tvoi_tutor_noma_score_player_dead"), 1);
           break;
         case 9:
           level thread ct_vo::function_41e59aeb(array(#"hash_29c415884674152e"), 1);
@@ -581,7 +581,7 @@ function_59bc0dd3(player) {
   self influencers::create_entity_enemy_influencer("claymore", player.team);
   self.destroyablebytrophysystem = 0;
   self.detonating = 0;
-  wait level.var_c72e8c51.var_e14f5fca;
+  wait level.var_c72e8c51.tripwireactivationdelay;
   player notify(#"tripwire_spawn", {
     #tripwire: self
   });
@@ -779,7 +779,7 @@ function_34696b67() {
   ct_utils::function_e9ab1003("s_defuse_bomb_obj");
   level notify(#"stop_bomb_start_collision");
   level notify(#"start_bomb_defend_collision");
-  level thread ct_vo::function_831e0584(array(#"hash_758836b142ae69e2"), 1);
+  level thread ct_vo::function_831e0584(array(#"vox_tvoi_tutor_noma_defuse_bomb"), 1);
   ct_utils::function_9aca2fa0("ct_action2");
   s_loc = struct::get("s_defuse_bomb_loc", "targetname");
   e_bomb = util::spawn_model("p8_mp_bomb_crate_whole", s_loc.origin, s_loc.angles);
@@ -1158,7 +1158,7 @@ function_4f54cf00(s_loc, var_ebb5bb71) {
   function_432f35f8(s_loc);
   level.var_e72728b8 = array(#"ability_dog", #"eq_tripwire");
   level notify(#"hash_32494c3c40fc33cb");
-  level notify(#"hash_6fc151c22f7e43a8");
+  level notify(#"tripwire_intro_msg");
   e_mine delete();
   waypoint ct_utils::function_f9ed304d();
   waitframe(1);

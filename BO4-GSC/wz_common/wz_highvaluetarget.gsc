@@ -60,7 +60,7 @@ update_targets() {
       player clientfield::set("ishighvaluetarget", 0);
 
       if(isalive(player)) {
-        player playsoundtoplayer(#"hash_321dbeea036e0e68", player);
+        player playsoundtoplayer(#"evt_wz_bounty_success", player);
         player luinotifyevent(#"hash_6b67aa04e378d681", 1, 12);
         item_supply_drop::drop_supply_drop(player.origin);
       }

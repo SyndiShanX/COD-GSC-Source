@@ -18,14 +18,14 @@
 class class_358332cc {
   var riders;
   var var_3acc1a95;
-  var var_4301b21d;
+  var numseats;
   var var_709c0a6f;
   var var_9e2a2132;
   var var_dad0959b;
 
   constructor() {
     riders = [];
-    var_4301b21d = 0;
+    numseats = 0;
     var_3acc1a95 = 0;
     var_9e2a2132 = 0;
     var_709c0a6f = 0;
@@ -81,10 +81,10 @@ function_810a3de5(vehicle) {}
 
 function_41cf7b1d(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(issubstr(position, "driver")) {
@@ -97,10 +97,10 @@ function_41cf7b1d(vehicle) {
 
 function_f7ce77b(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(position == "passenger1") {
@@ -113,10 +113,10 @@ function_f7ce77b(vehicle) {
 
 function_2453a4a2(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(position == "gunner1") {
@@ -129,11 +129,11 @@ function_2453a4a2(vehicle) {
 
 function_72b503cc(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   var_3acc1a95 = 0;
   bundle = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(issubstr(position, "crew")) {
@@ -152,10 +152,10 @@ function_999240f5(vehicle) {
   }
 
   assert(isDefined(vehicle.vehicleridersbundle));
-  var_4301b21d = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle).var_4301b21d;
+  numseats = struct::get_script_bundle("vehicleriders", vehicle.vehicleridersbundle).numseats;
 
-  if(isDefined(var_4301b21d)) {
-    return var_4301b21d;
+  if(isDefined(numseats)) {
+    return numseats;
   }
 
   return 0;
@@ -169,15 +169,15 @@ on_vehicle_spawned() {
   }
 
   function_810a3de5(self);
-  var_4301b21d = function_999240f5(self);
+  numseats = function_999240f5(self);
 
-  if(!isDefined(var_4301b21d) || var_4301b21d <= 0) {
+  if(!isDefined(numseats) || numseats <= 0) {
     return;
   }
 
   self.var_761c973 = new class_358332cc();
   self.var_761c973.riders = [];
-  self.var_761c973.var_4301b21d = var_4301b21d;
+  self.var_761c973.numseats = numseats;
   self flag::init("driver_occupied", 0);
   self flag::init("passenger1_occupied", 0);
   self flag::init("gunner1_occupied", 0);
@@ -448,8 +448,8 @@ unload(seat) {
     return;
   }
 
-  var_4301b21d = self.var_761c973.var_4301b21d;
-  assert(var_4301b21d > 0);
+  numseats = self.var_761c973.numseats;
+  assert(numseats > 0);
 
   switch (seat) {
     case # "driver":
@@ -543,7 +543,7 @@ function_2ef91b74(vehicle) {
 }
 
 function_2ca26543(vehicle) {
-  assert(isDefined(vehicle.var_761c973.var_4301b21d) && vehicle.var_761c973.var_4301b21d > 0);
+  assert(isDefined(vehicle.var_761c973.numseats) && vehicle.var_761c973.numseats > 0);
 
   if(!isDefined(vehicle.var_761c973.var_3acc1a95)) {
     return;

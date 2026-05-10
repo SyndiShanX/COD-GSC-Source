@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"diego_unlock", #"hash_7fc15da2c5864d3c", #"cu12_item", &function_d95e620c, #"hash_7d0b41a17f2e9a9");
+  character_unlock_fixup::register_character_unlock(#"diego_unlock", #"prt_wz_diego", #"cu12_item", &function_d95e620c, #"hash_7d0b41a17f2e9a9");
 }
 
 function_d95e620c() {

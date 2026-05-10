@@ -59,7 +59,7 @@ function_eaba72c9() {
       setDvar(#"wz_flare_drop", 0);
     }
 
-    if(getdvarint(#"hash_5dc24c61c66f6fee", 0) > 0) {
+    if(getdvarint(#"wz_debug_supply_drop", 0) > 0) {
       debug_supply_drop();
     }
 

@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_begin() {
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
 
   foreach(player in getplayers()) {
     player thread zm_trial_util::function_bf710271();
@@ -61,7 +61,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level.var_153e9058 = undefined;
   level.var_fe2bb2ac = undefined;
   level zm_trial::function_25ee130(0);
@@ -72,7 +72,7 @@ on_end(round_reset) {
   }
 
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
+  str_text = zm_utility::function_d6046228(#"zombie/button_buy_trap", #"hash_6e8ef1b690e98e51");
 
   foreach(t_trap in a_t_traps) {
     if(!(isDefined(t_trap._trap_in_use) && t_trap._trap_in_use) && isDefined(t_trap.var_b3166dc1) && t_trap.var_b3166dc1) {
@@ -81,7 +81,7 @@ on_end(round_reset) {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon" && !zm_loadout::function_2ff6913(s_event.weapon)) {
     self lockweapon(s_event.weapon, 1, 1);
 

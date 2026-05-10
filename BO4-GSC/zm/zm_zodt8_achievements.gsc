@@ -126,7 +126,7 @@ function_934d3464() {
 }
 
 function_6b34cb92() {
-  level endon(#"end_game", #"hash_5c62047f5c8fdbdd", #"hash_6cd15a5470217958");
+  level endon(#"end_game", #"water_drained_fore_drain_start", #"water_drained_aft_drain_start");
 
   while(true) {
     level waittill(#"end_of_round");

@@ -40,7 +40,7 @@ on_end(round_reset) {
 
 function_a543a954() {
   level endon(#"trial_round_end");
-  level waittill(#"hash_5dc448a84a24492", #"magma_forge_completed");
+  level waittill(#"forging_magma_gat", #"magma_forge_completed");
   level.var_e60b8c3a = 1;
   zm_trial_util::function_7d32b7d0(1);
 }

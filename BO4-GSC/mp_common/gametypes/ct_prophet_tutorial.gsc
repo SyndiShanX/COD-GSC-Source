@@ -222,7 +222,7 @@ function_ede7a778() {
     self thread ct_utils::function_61c3d59c(#"hash_7657f4c839045d4");
     self thread function_25bdd976();
     self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_seeker_mine_nag", 7, 15);
-    self waittill(#"hash_225857690f87699b");
+    self waittill(#"seeker_mine_deployed");
     self thread ct_utils::function_61c3d59c(#"hash_62b1eebe8dd5d654");
     level notify(#"hash_60e26e14a51c5211");
     waitframe(1);
@@ -233,7 +233,7 @@ function_ede7a778() {
   while(!(isDefined(var_d7cff8ac) && var_d7cff8ac));
 
   self waittill(#"seeker_discharge");
-  level notify(#"hash_7fb05a5bbcb14d6b");
+  level notify(#"seeker_found_target");
   level.e_seeker_mine.overridevehicledamage = &function_8259415c;
   self function_222141a5();
   self allowmelee(1);
@@ -317,7 +317,7 @@ function_1690f8ca() {
   level.var_72c3ea74 = struct::get_array("s_prophet_soldier_loc_2", "targetname");
   level.var_da5432a2 = 0;
   level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
-  self val::set(#"hash_40d296a404d374dd", "ignoreme", 1);
+  self val::set(#"seeker_distraction", "ignoreme", 1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_distract_enemy_0"));
   var_4bf2090e = 0;
   trig_tut_seeker2_deploy = getent("trig_tut_seeker2_deploy", "targetname");
@@ -328,7 +328,7 @@ function_1690f8ca() {
     self ct_utils::function_6ad0c151();
     self thread function_25bdd976();
     self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_distract_enemy_nag", 7, 15);
-    self waittill(#"hash_225857690f87699b");
+    self waittill(#"seeker_mine_deployed");
     level notify(#"hash_60e26e14a51c5211");
     level.var_e72728b8 = array(#"eq_seeker_mine", #"shock_rifle");
     self thread function_bd01a19b();
@@ -354,7 +354,7 @@ function_1690f8ca() {
   level notify(#"hash_7711f0aa30443b10");
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_throw_seeker"));
   self thread ct_utils::function_61c3d59c(#"hash_1bf4eaaf5d2ecee1", undefined);
-  self val::reset(#"hash_40d296a404d374dd", "ignoreme");
+  self val::reset(#"seeker_distraction", "ignoreme");
   self thread function_222141a5();
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_shoot_enemy_nag", 10, 15);
   ct_utils::function_d00e0eeb();
@@ -397,7 +397,7 @@ function_7c64c8be(s_start_loc) {
 
   s_target = struct::get(s_start_loc.target, "targetname");
   var_adf33a9e = util::spawn_model("tag_origin", s_target.origin, s_target.angles);
-  var_adf33a9e function_2baad8fc();
+  var_adf33a9e makesentienttarget();
   var_adf33a9e.team = #"allies";
   self setentitytarget(var_adf33a9e);
   self thread function_df8f80c4(var_adf33a9e);
@@ -430,7 +430,7 @@ function_969b78e1() {
   level notify(#"colbounds_prophet_seeker3_on");
   ct_utils::function_e9ab1003(undefined);
   function_7065027f();
-  self val::reset(#"hash_40d296a404d374dd", "ignoreme");
+  self val::reset(#"seeker_distraction", "ignoreme");
 
   while(!isalive(level.var_924c5b44)) {
     waitframe(1);
@@ -505,11 +505,11 @@ function_8b563364(var_8f2a3132 = 0) {
 
     if(var_8f2a3132) {
       var_76d6a4df = level.var_9d47488.tunables.prompttime;
-      var_6eaff3ec = level.e_seeker_mine.settings.var_e0c78652;
-      var_8cebe88e = level.var_9d47488.tunables.var_b9cf9139;
-      level.e_seeker_mine.settings.var_e0c78652 = 1000000;
+      var_6eaff3ec = level.e_seeker_mine.settings.discharge_duration;
+      var_8cebe88e = level.var_9d47488.tunables.perceptiontime;
+      level.e_seeker_mine.settings.discharge_duration = 1000000;
       level.var_9d47488.tunables.prompttime = 1000000;
-      level.var_9d47488.tunables.var_b9cf9139 = 1000000;
+      level.var_9d47488.tunables.perceptiontime = 1000000;
     } else {
       var_a4ffa394 = self gamepadusedlast() ? # "hash_3d13389ee2095bf" : # "hash_60940c2522225649";
       self thread ct_utils::function_61c3d59c(var_a4ffa394, undefined);
@@ -539,11 +539,11 @@ function_8b563364(var_8f2a3132 = 0) {
   self function_c1ddd9e7();
 
   if(isalive(level.e_seeker_mine)) {
-    level.e_seeker_mine.settings.var_e0c78652 = var_6eaff3ec;
+    level.e_seeker_mine.settings.discharge_duration = var_6eaff3ec;
   }
 
   level.var_9d47488.tunables.prompttime = var_76d6a4df;
-  level.var_9d47488.tunables.var_b9cf9139 = var_8cebe88e;
+  level.var_9d47488.tunables.perceptiontime = var_8cebe88e;
   return 1;
 }
 
@@ -648,7 +648,7 @@ function_8868dc7c() {
   }
 
   self ct_utils::function_6ad0c151();
-  level notify(#"hash_56227775188dc01");
+  level notify(#"cleanup_enemy_prophet");
   ct_utils::function_c2a10fc();
   level.var_8fce01d = 0;
   wait 1;
@@ -907,7 +907,7 @@ function_c4546e73(s_start_loc) {
   a_s_target = struct::get_array("s_tempest2_enemy_shootat", "targetname");
   s_target = array::random(a_s_target);
   var_adf33a9e = util::spawn_model("tag_origin", s_target.origin, s_target.angles);
-  var_adf33a9e function_2baad8fc();
+  var_adf33a9e makesentienttarget();
   var_adf33a9e.team = #"allies";
   self setentitytarget(var_adf33a9e);
   self thread function_df8f80c4(var_adf33a9e);
@@ -1376,7 +1376,7 @@ function_383a4355() {
   self val::set(#"enemy_prophet", "ignoreall", 1);
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32, 1, 1, 1);
   level.var_924c5b44 = self;
-  level waittill(#"hash_56227775188dc01");
+  level waittill(#"cleanup_enemy_prophet");
   self dodamage(self.health + 100, self.origin);
 }
 
@@ -1452,7 +1452,7 @@ function_58c62280(b_keyline, var_2f3964e3) {
 
   switch (level.var_8ca3c62) {
     case 1:
-      level waittill(#"hash_7fb05a5bbcb14d6b");
+      level waittill(#"seeker_found_target");
       self val::reset(#"enemy_bot", "ignoreall");
       self thread ct_utils::function_5b59f3b7(self.origin, self.angles, 200);
       break;
@@ -1657,7 +1657,7 @@ function_9bf1e805(e_player) {
     }
   }
 
-  e_player notify(#"hash_225857690f87699b");
+  e_player notify(#"seeker_mine_deployed");
 
   while(true) {
     if(isDefined(level.var_394c5463) && level.var_394c5463) {
@@ -1683,7 +1683,7 @@ function_a4036130() {
   self endon(#"death");
   self.var_e19bcce0 = 1;
   self.settings.var_efc15586 = 10000;
-  self.settings.var_e0c78652 = 10000;
+  self.settings.discharge_duration = 10000;
   self.settings.var_7fa25761 = 10000;
 }
 
@@ -1850,7 +1850,7 @@ function_980638c8(params) {
     level.var_595e41ee = 50;
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
-    eattacker globallogic_score::giveplayermomentumnotification(level.var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(level.var_595e41ee, #"score/blank", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 
     if(!eattacker ct_utils::function_a7540094()) {
@@ -1892,7 +1892,7 @@ function_25bdd976(var_ccd0840c = 1, var_a4339f5b = 1, str_nag, var_23cfda = 0) {
       self thread ct_vo::function_261ed63c(str_nag, 20, 20, "nag_give_player_one_seeker_end");
     }
 
-    self waittill(#"hash_225857690f87699b");
+    self waittill(#"seeker_mine_deployed");
     level notify(#"nag_give_player_one_seeker_end");
     array::add(level.var_e72728b8, #"eq_seeker_mine", 0);
 
@@ -1965,10 +1965,10 @@ function_324c6d8c() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "hash_3438e777b263d2c2":
+      case # "dont_end_off":
         level.var_94d65b52 = 0;
         break;
-      case # "hash_617cd243f40d3ae8":
+      case # "dont_end_on":
         level.var_94d65b52 = 1;
         break;
       case # "kill_player":

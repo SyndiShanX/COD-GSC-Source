@@ -51,7 +51,7 @@ preload() {
   clientfield::register("scriptmover", "" + #"blood_buff_aura", 24000, 1, "int");
   clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int");
   level flag::init(#"hash_4466889733a90df2");
-  level flag::init(#"hash_198bc172b5af7f25");
+  level flag::init(#"trials_hell_on_earth");
   level.var_43216bdf = &function_ff59ba7a;
 }
 
@@ -113,7 +113,7 @@ main() {
       wait 0.2;
 
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + #"hash_78b8d89d34b32241", 0);
+        player clientfield::set_to_player("" + #"hell_burn_fx", 0);
       }
 
       level flag::clear(#"hash_4466889733a90df2");
@@ -127,7 +127,7 @@ main() {
       level clientfield::set("" + #"lava_control", 0);
       level clientfield::set("" + #"hash_5e69ee96304ec40b", 0);
       level.var_71435e8 = 0;
-      level flag::clear(#"hash_198bc172b5af7f25");
+      level flag::clear(#"trials_hell_on_earth");
       level flag::clear(#"hash_69a9d00e65ee6c40");
     }
 
@@ -312,7 +312,7 @@ function_ff0b7907() {
       level.var_43c25ad2 = 1;
     }
 
-    level flag::set(#"hash_198bc172b5af7f25");
+    level flag::set(#"trials_hell_on_earth");
     level flag::set(#"hash_69a9d00e65ee6c40");
   }
 
@@ -341,7 +341,7 @@ function_7206d28() {
     self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
   }
 
-  self clientfield::set_to_player("" + #"hash_78b8d89d34b32241", 1);
+  self clientfield::set_to_player("" + #"hell_burn_fx", 1);
 }
 
 function_b93ad88d() {

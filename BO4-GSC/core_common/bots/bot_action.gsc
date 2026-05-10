@@ -35,7 +35,7 @@ register_actions() {
   register_action(#"scan_for_threats_ct", &function_728212e8, &scan_for_threats_weight, &scan_for_threats_ct);
   register_action(#"scan_for_threats", &function_728212e8, &scan_for_threats_weight, &scan_for_threats);
   register_action(#"bleed_out", &rank_priority, &bleed_out_weight, &bleed_out);
-  register_action(#"hash_7aaeac32a4e1bf84", &weapon_rank, &function_36505c2d, &function_a314673);
+  register_action(#"hip_fire_bulletweapon", &weapon_rank, &function_36505c2d, &hip_fire_bulletweapon);
   register_action(#"hash_434716893aa869f3", &weapon_rank, &function_294f4909, &function_e73c8946);
   register_action(#"hash_4c707ba80bf09cec", &weapon_rank, &function_294f4909, &function_22e2ba8c);
   register_action(#"hash_3d7dd2878425bcce", &weapon_rank, &function_2bc7472b, &function_36ca6d92);
@@ -211,7 +211,7 @@ function_36052a7f(weaponname) {
 
 register_bulletweapon(weaponname) {
   register_weapon(weaponname, &function_22991a48);
-  function_a2c83569(weaponname, #"hash_7aaeac32a4e1bf84");
+  function_a2c83569(weaponname, #"hip_fire_bulletweapon");
   function_a2c83569(weaponname, #"hash_434716893aa869f3");
 }
 
@@ -406,7 +406,7 @@ function_e7b123e8(actionparams) {
   self.bot.actionparams = actionparams;
   self thread action_timeout(action.name);
   executetime = gettime();
-  self function_fef5423c(self.bot.tacbundle.var_5eaa9e02, self.bot.tacbundle.var_bc0b2a06);
+  self function_fef5423c(self.bot.tacbundle.nextactiontimemin, self.bot.tacbundle.nextactiontimemax);
   self[[action.executefunc]](actionparams);
   self notify(#"hash_1728f8b5de3bde13");
   finishtime = gettime();
@@ -1648,7 +1648,7 @@ function_36505c2d(actionparams) {
   return 100;
 }
 
-function_a314673(actionparams) {
+hip_fire_bulletweapon(actionparams) {
   weapon = actionparams.weapon;
 
   while(!self function_cf788c22() && self is_target_enemy(actionparams) && self is_target_visible(actionparams) && self bot::weapon_loaded(weapon)) {
@@ -1768,7 +1768,7 @@ function_22e2ba8c(actionparams) {
 
       if(self function_bacb1c08(actionparams) && self playerads() >= 1) {
         if(!isDefined(self.bot.var_ddc0e12b)) {
-          self.bot.var_ddc0e12b = randomfloat(1) < (isDefined(self.bot.tacbundle.var_6ef48dfa) ? self.bot.tacbundle.var_6ef48dfa : 0);
+          self.bot.var_ddc0e12b = randomfloat(1) < (isDefined(self.bot.tacbundle.sniperquickscopechance) ? self.bot.tacbundle.sniperquickscopechance : 0);
         }
 
         if(!isDefined(self.bot.var_f2b47a08)) {
@@ -2316,7 +2316,7 @@ set_target_aim(actionparams) {
 }
 
 function_9c6ca396(actionparams) {
-  self function_26c2bce7(actionparams, self.bot.tacbundle.var_a78526b8);
+  self function_26c2bce7(actionparams, self.bot.tacbundle.aimtagbody);
 }
 
 function_d4102d11(actionparams) {
@@ -2721,8 +2721,8 @@ function_31a76186(actionparams) {
 }
 
 function_bacb1c08(actionparams) {
-  var_b4c8298c = isDefined(self.bot.tacbundle.var_b4c8298c) ? self.bot.tacbundle.var_b4c8298c : 0;
-  return self botgetlookdot() >= var_b4c8298c;
+  adsfiredot = isDefined(self.bot.tacbundle.adsfiredot) ? self.bot.tacbundle.adsfiredot : 0;
+  return self botgetlookdot() >= adsfiredot;
 }
 
 function_55d5a581(actionparams) {

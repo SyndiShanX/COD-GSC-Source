@@ -470,7 +470,7 @@ monitor_detectnearbyenemies(local_client_num) {
   self.var_7122b2ff = 0;
 
   while(true) {
-    if(getdvarint(#"hash_340cb17d497f0877", 0) > 0) {
+    if(getdvarint(#"live_update_awareness", 0) > 0) {
       level.var_6fc25f5c = getscriptbundle(#"awareness");
       var_55336d8d = level.var_6fc25f5c;
       level.var_842a5e1f = getscriptbundle(#"awareness_deadsilence");
@@ -562,7 +562,7 @@ monitor_detectnearbyenemies(local_client_num) {
       distcurrentsq = distance2dsquared(sixthsenseent.origin, localplayer.origin);
 
       if(!var_7aeac1e7) {
-        if(speed >= bundle.var_293163bd) {
+        if(speed >= bundle.detectionminspeed) {
           movement_type = sixthsenseent getmovementtype();
 
           if(isPlayer(player) && (player isplayerswimming() || player function_d76efdcc())) {
@@ -675,7 +675,7 @@ monitor_detectnearbyenemies(local_client_num) {
         bitfields = enemydetectedbitfield;
 
         for(i = 0; i < 6; i++) {
-          self thread function_c90f8547(var_c948d7f9[i], bitfields &(1 << 4) - 1, bundle.var_a3d426e6);
+          self thread function_c90f8547(var_c948d7f9[i], bitfields &(1 << 4) - 1, bundle.awarenessdelay);
           bitfields >>= 3;
         }
 
@@ -701,7 +701,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
       if(previousenemydetectedbitfield != 0 && enemylosttime >= 0.05) {
         for(i = 0; i < 6; i++) {
-          self thread function_c90f8547(var_c948d7f9[i], 0, bundle.var_a3d426e6);
+          self thread function_c90f8547(var_c948d7f9[i], 0, bundle.awarenessdelay);
         }
 
         previousenemydetectedbitfield = 0;
@@ -734,13 +734,13 @@ function_c2b5b27c(local_client_num) {
     waitresult = self waittill(#"awareness_action");
 
     if(isDefined(waitresult.var_53714565)) {
-      var_9f19a239 = waitresult.var_53714565;
+      performer = waitresult.var_53714565;
 
-      if(!isDefined(var_9f19a239.var_629d0f94)) {
-        var_9f19a239.var_629d0f94 = [];
+      if(!isDefined(performer.var_629d0f94)) {
+        performer.var_629d0f94 = [];
       }
 
-      var_9f19a239.var_629d0f94[waitresult.action] = gettime();
+      performer.var_629d0f94[waitresult.action] = gettime();
     }
   }
 }

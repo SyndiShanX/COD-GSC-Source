@@ -357,7 +357,7 @@ function_78e3e07b(team, index, objective_strings) {
   if(level.splitscreen) {
     setobjectivescoretext(team, objective_strings.score_text);
   } else {
-    setobjectivescoretext(team, objective_strings.var_4687634f);
+    setobjectivescoretext(team, objective_strings.score_text_splitscreen);
   }
 
   function_db4846b(team, index);
@@ -388,11 +388,11 @@ function_e17a230f(team) {
         continue;
       }
 
-      if(isDefined(var_53c9b682.var_47177317) && var_53c9b682.var_47177317 && isDefined(game.overtime_first_winner) && team != game.overtime_first_winner) {
+      if(isDefined(var_53c9b682.overtime_winner) && var_53c9b682.overtime_winner && isDefined(game.overtime_first_winner) && team != game.overtime_first_winner) {
         continue;
       }
 
-      if(isDefined(var_53c9b682.var_76fa703c) && var_53c9b682.var_76fa703c && isDefined(game.overtime_first_winner) && team == game.overtime_first_winner) {
+      if(isDefined(var_53c9b682.overtime_loser) && var_53c9b682.overtime_loser && isDefined(game.overtime_first_winner) && team == game.overtime_first_winner) {
         continue;
       }
     }

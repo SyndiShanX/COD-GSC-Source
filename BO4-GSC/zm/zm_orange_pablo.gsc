@@ -27,7 +27,7 @@ init() {
   level.pablo_npc.name = "herm";
   level.pablo_npc.isspeaking = 0;
   level.pablo_npc.var_5b6ebfd0 = 0;
-  level.pablo_npc flag::init(#"hash_5945cee69b029018");
+  level.pablo_npc flag::init(#"interact_vo_done");
   level flag::init(#"pablo_intro");
   level flag::init(#"hash_641f14d0b2fd57d7");
   level flag::init(#"hash_6e81da82129193f6");
@@ -129,7 +129,7 @@ pablo_intro() {
 
   while(true) {
     if(zm_hms_util::any_player_in_zone(var_de23a374) && level.pablo_npc zm_audio::can_speak()) {
-      level function_e44c7c0c(#"hash_2a582565ea3add7e");
+      level function_e44c7c0c(#"vox_pablo_intro");
       a_players = [];
 
       foreach(zone in var_de23a374) {
@@ -139,7 +139,7 @@ pablo_intro() {
       player = zm_hms_util::function_3815943c(a_players);
 
       if(isDefined(player)) {
-        player zm_orange_util::function_51b752a9(#"hash_2a582565ea3add7e", -1, 0, 1);
+        player zm_orange_util::function_51b752a9(#"vox_pablo_intro", -1, 0, 1);
       }
 
       break;
@@ -360,8 +360,8 @@ function_39614d4b() {
     }
   }
 
-  self flag::wait_till(#"hash_5945cee69b029018");
-  self flag::clear(#"hash_5945cee69b029018");
+  self flag::wait_till(#"interact_vo_done");
+  self flag::clear(#"interact_vo_done");
   self.var_df3d62aa = undefined;
   level.var_f45a0bfd.is_moving = 0;
   self notify(#"hash_688d0bffbc9f5888");
@@ -383,7 +383,7 @@ function_9f77ef2(s_info) {
     level function_e44c7c0c(s_info.var_e7b75754, s_info.var_c67e664c);
   }
 
-  self flag::set(#"hash_5945cee69b029018");
+  self flag::set(#"interact_vo_done");
 }
 
 function_1dc9b29a() {

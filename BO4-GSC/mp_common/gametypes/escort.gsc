@@ -579,9 +579,9 @@ function_dd7755c1() {
   while(true) {
     animrate = 1;
 
-    if(isDefined(self.var_85c3882d) && self.var_85c3882d) {
+    if(isDefined(self.inconcertinawire) && self.inconcertinawire) {
       animrate -= 0.3;
-      self.var_85c3882d = 0;
+      self.inconcertinawire = 0;
     }
 
     if(isDefined(self.beingmicrowavedby) && self.beingmicrowavedby.size > 0) {

@@ -23,7 +23,7 @@
 function_f468d9a5(spawnpoint) {
   distance = getdvarfloat(#"wz_alt_spawn_distance", 4350);
   height = getdvarfloat(#"wz_alt_spawn_height", 5000);
-  velocity = getdvarfloat(#"hash_ae6b05a24ae0d2a", 1760);
+  velocity = getdvarfloat(#"wz_alt_spawn_velocity", 1760);
   dir = anglesToForward(spawnpoint.angles);
   pos = spawnpoint.origin - dir * distance;
   hold_origin = (pos[0], pos[1], spawnpoint.origin[2] + height);
@@ -235,12 +235,12 @@ function_ea62f5af() {
   var_a56604c5 = namespace_eb06e24d::get_parachute_kit().lootid;
   var_c9b1d229 = namespace_eb06e24d::function_4a39b434().lootid;
   var_42b02106 = namespace_eb06e24d::get_wingsuit_kit().lootid;
-  var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+  current_life_index = self match_record::get_player_stat(#"current_life_index");
 
-  if(isDefined(var_f8e6b703)) {
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4f557c87c0538129", var_a56604c5);
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4b4bd85ab964d386", var_c9b1d229);
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_63862160f8335af2", var_42b02106);
+  if(isDefined(current_life_index)) {
+    self match_record::set_stat(#"lives", current_life_index, #"hash_4f557c87c0538129", var_a56604c5);
+    self match_record::set_stat(#"lives", current_life_index, #"hash_4b4bd85ab964d386", var_c9b1d229);
+    self match_record::set_stat(#"lives", current_life_index, #"hash_63862160f8335af2", var_42b02106);
   }
 }
 
@@ -255,7 +255,7 @@ function_8cef1872() {
   self clientfield::set("ClearStreamerLoadingHints", 1);
   self val::reset(#"hash_5bb0dd6b277fc20c", "freezecontrols");
   self val::reset(#"hash_5bb0dd6b277fc20c", "disablegadgets");
-  self callback::callback(#"hash_4fca7a48128c4741");
+  self callback::callback(#"on_player_in_game");
 }
 
 function_c263fd97() {
@@ -269,7 +269,7 @@ function_c263fd97() {
   self ghost();
   self val::set(#"hash_5bb0dd6b277fc20c", "freezecontrols", 1);
   self val::set(#"hash_5bb0dd6b277fc20c", "disablegadgets", 1);
-  var_80e2abb1 = getdvarfloat(#"hash_78198bd3a356f650", 0.5);
+  var_80e2abb1 = getdvarfloat(#"wz_alt_spawn_stability", 0.5);
   starttime = gettime();
   var_ffa47239 = getdvarint(#"hash_24ce936622303dc1", 4000);
   var_2ee361bf = getdvarint(#"hash_6e24885f4fa8a2a2", 10000);

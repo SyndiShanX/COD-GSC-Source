@@ -187,7 +187,7 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
       if(isDefined(bundle.var_2db988a0) && bundle.var_2db988a0) {
         shotstokill = 1;
       } else {
-        shotstokill = bundle.var_2e48926e;
+        shotstokill = bundle.kshero_flamethrower;
       }
 
       break;
@@ -208,7 +208,7 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
     case # "hash_17df39d53492b0bf":
       shotstokill = bundle.var_605815a6;
       break;
-    case # "hash_7b24d0d0d2823bca":
+    case # "ac130_autocannon":
       shotstokill = bundle.var_50c51e5;
       break;
     case # "ac130_chaingun":
@@ -341,8 +341,8 @@ function_dd7587e4(bundle, maxhealth, attacker, weapon, type, damage, flags, char
         } else {
           rocketstokill = isDefined(bundle.ksrocketstokill) ? bundle.ksrocketstokill : 0;
 
-          if(level.competitivesettingsenabled && isDefined(bundle.var_b744074b) && bundle.var_b744074b != 0) {
-            rocketstokill = bundle.var_b744074b;
+          if(level.competitivesettingsenabled && isDefined(bundle.ksrocketstokillcwl) && bundle.ksrocketstokillcwl != 0) {
+            rocketstokill = bundle.ksrocketstokillcwl;
           }
 
           if(rocketstokill == 0) {} else if(rocketstokill > 0) {

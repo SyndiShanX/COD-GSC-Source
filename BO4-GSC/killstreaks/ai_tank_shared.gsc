@@ -72,7 +72,7 @@ init_shared(bundlename) {
     if(function_8b1a219a()) {
       remote_weapons::registerremoteweapon("killstreak_ai_tank", #"hash_3abd55f34c1661ac", &starttankremotecontrol, &endtankremotecontrol, 1);
     } else {
-      remote_weapons::registerremoteweapon("killstreak_ai_tank", #"hash_747fc4429380f380", &starttankremotecontrol, &endtankremotecontrol, 1);
+      remote_weapons::registerremoteweapon("killstreak_ai_tank", #"mp/remote_use_tank", &starttankremotecontrol, &endtankremotecontrol, 1);
     }
 
     level.var_66e94ad5 = bundle.ksweapon;
@@ -174,7 +174,7 @@ function_61610d6b() {
 
   foreach(point in var_9afbe37) {
     point.objectiveid = gameobjects::get_next_obj_id();
-    objective_add(point.objectiveid, "invisible", point.origin, #"hash_60fb0be7a198b305");
+    objective_add(point.objectiveid, "invisible", point.origin, #"datapad_patrol_location");
     objective_setinvisibletoall(point.objectiveid);
 
     if(!isDefined(level.var_51368c39)) {
@@ -254,7 +254,7 @@ usekillstreakaitankdrop(killstreaktype) {
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.islocationgood = &islocationgood;
-  context.objective = #"hash_1b5a86007f598bbc";
+  context.objective = #"airdrop_swat_team";
   context.validlocationsound = level.killstreakcorebundle.ksvalidcarepackagelocationsound;
   context.tracemask = 1 | 4;
   context.droptag = "tag_cargo_attach";
@@ -804,12 +804,12 @@ function_9868e24e(player) {
               if(target_info.state == 2) {
                 if(target_info.var_8c0f6d2c < gettime()) {
                   target_info.state = 3;
-                  self playsoundtoplayer(#"hash_683ed977cfc2bf2b", player);
+                  self playsoundtoplayer(#"uin_mantis_lockon", player);
                 }
               } else {
                 target_info.state = 2;
                 target_info.var_8c0f6d2c = gettime() + 500;
-                self playsoundtoplayer(#"hash_5386a095fd840c2e", player);
+                self playsoundtoplayer(#"uin_mantis_locking", player);
               }
             }
 
@@ -1380,7 +1380,7 @@ function_dd91d091(params) {
       self asmrequestsubstate(#"locomotion@movement");
       result = self waittill(#"near_goal", #"stunned");
     } else {
-      self asmrequestsubstate(#"hash_236f963ae1728eb3");
+      self asmrequestsubstate(#"idle@stationary");
     }
 
     wait randomintrange(2, 5);
@@ -1595,7 +1595,7 @@ state_combat_update(params) {
       self function_d4c687c9();
       self setbrake(1);
       vehicle_ai::clearallmovement(1);
-      self asmrequestsubstate(#"hash_236f963ae1728eb3");
+      self asmrequestsubstate(#"idle@stationary");
       wait 1;
     }
   }
@@ -2426,7 +2426,7 @@ reload_rockets(player) {
   weapon_wait_duration_ms = int(bundle.ksweaponreloadtime * 1000);
   player setvehicleweaponwaitduration(weapon_wait_duration_ms);
   player setvehicleweaponwaitendtime(gettime() + weapon_wait_duration_ms);
-  self playsoundtoplayer(#"hash_67ccc430f6e101f3", player);
+  self playsoundtoplayer(#"wpn_mantis_reload", player);
   wait bundle.ksweaponreloadtime;
   self.numberrockets = 4;
   self update_client_ammo(self.numberrockets);

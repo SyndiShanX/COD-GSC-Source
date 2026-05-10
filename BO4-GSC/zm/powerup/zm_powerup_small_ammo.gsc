@@ -167,7 +167,7 @@ give_clip_of_ammo(w_weapon) {
     return;
   }
 
-  self notify(#"hash_64f02bb4452a4bd7");
+  self notify(#"give_small_ammo");
 
   if(zm_trial_reset_loadout::is_active(1)) {
     self function_7f7c1226(w_weapon);

@@ -23,7 +23,7 @@ __init__() {
   level.var_a6a3e12a = [];
   clientfield::register_clientuimodel("hudItems.depositing", 13000, 1, "int", 0);
 
-  if(getdvarint(#"hash_7074ed0f04816b75", 0)) {
+  if(getdvarint(#"cash_deposit_enabled", 0)) {
     clientfield::register("allplayers", "wz_cash_carrying", 13000, 1, "int");
   }
 
@@ -54,7 +54,7 @@ setup_safes() {
 
   item_world::function_4de3ca98();
 
-  if(getdvarint(#"hash_7074ed0f04816b75", 0)) {
+  if(getdvarint(#"cash_deposit_enabled", 0)) {
     item_drop::function_f3f9788a(#"cash_item_500", 1);
     level.var_590e0497 = [];
 
@@ -188,7 +188,7 @@ function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
 
     if(var_22aec194.count < initialcount) {
       [[level._setteamscore]](activator.team, [[level._getteamscore]](activator.team) + scoreamount);
-      playsoundatposition(#"hash_2b58f77dbea4ade1", self.origin);
+      playsoundatposition(#"fly_cash_deposit", self.origin);
       globallogic_score::function_889ed975(activator, scoreamount, 0, 0);
       activator stats::function_bb7eedf0(#"score", scoreamount);
       activator stats::function_b7f80d87(#"score", scoreamount);

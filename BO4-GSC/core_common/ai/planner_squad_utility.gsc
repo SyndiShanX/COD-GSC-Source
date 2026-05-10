@@ -34,7 +34,7 @@ __init__() {
   plannerutility::registerplannerapi(#"hash_5dfbc649e2cdd6aa", &function_2083115a);
   plannerutility::registerplannerapi(#"squadhaspathableammocache", &strategyhaspathableammocache);
   plannerutility::registerplannerapi(#"hash_2b8bf371fba6de6a", &function_a0f209b7);
-  plannerutility::registerplannerapi(#"hash_3ed9287b5cc1ec2c", &function_e96dd96b);
+  plannerutility::registerplannerapi(#"squadtargetfocus", &function_e96dd96b);
   plannerutility::registerplannerapi(#"hash_5678bc75fd7c0675", &function_50c7bd5a);
   plannerutility::registerplanneraction(#"hash_186a23f9ca83351f", &strategyclearareaobjectparam, &strategyclearareatoobjectinit, &strategyclearareatoattackobjectupdate, undefined);
   plannerutility::registerplanneraction(#"squadclearareatoattackobject", &strategyclearareaobjectparam, &strategyclearareatoobjectinit, &strategyclearareatoattackobjectupdate, undefined);

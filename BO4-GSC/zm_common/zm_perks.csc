@@ -23,11 +23,11 @@ init() {
   level._effect[#"hash_7c3a9f5103c06ff6"] = #"hash_420040b9ccd8bd85";
 
   if(level.var_c3e5c4cd == 2) {
-    level._effect[#"hash_223e3f9bde46f5b4"] = #"hash_1678d9a47030413d";
-    level._effect[#"hash_10e42380c1009ee9"] = #"hash_6ecd7d04b43d3fde";
-    level._effect[#"hash_110d9fbfd034c819"] = #"hash_3060d78224e9c44e";
-    level._effect[#"hash_6e4e902b59a22662"] = #"hash_3bb50572a528b187";
-    level._effect[#"hash_26247c4bfd6fed73"] = #"hash_57eb5602b41fa4db";
+    level._effect[#"danu_ledge_fx"] = #"hash_1678d9a47030413d";
+    level._effect[#"ra_ledge_fx"] = #"hash_6ecd7d04b43d3fde";
+    level._effect[#"zeus_ledge_fx"] = #"hash_3060d78224e9c44e";
+    level._effect[#"odin_ledge_fx"] = #"hash_3bb50572a528b187";
+    level._effect[#"purchased_ledge_fx"] = #"hash_57eb5602b41fa4db";
     level._effect[#"zeus_bird_fx"] = #"hash_3a24f6e29267c4d7";
   }
 
@@ -92,7 +92,7 @@ perks_register_clientfield() {
     clientfield::register("clientuimodel", "hudItems.extraPerkVapor." + i + ".specialEffectActive", n_version, 1, "int", undefined, 0, 0);
   }
 
-  clientfield::register("scriptmover", "" + #"hash_cf74c35ecc5a49", 1, 1, "int", &function_bb184fed, 0, 0);
+  clientfield::register("scriptmover", "" + #"init_perk_altar_icon", 1, 1, "int", &init_perk_altar_icon, 0, 0);
   clientfield::register("toplayer", "" + #"hash_35fe26fc5cb223b3", 1, 3, "int", &_train_sd_bombexplode, 0, 1);
   clientfield::register("toplayer", "" + #"hash_6fb426c48a4877e0", 1, 3, "int", &function_d5f2f6ac, 0, 1);
   clientfield::register("toplayer", "" + #"hash_345845080e40675d", 1, 3, "int", &function_136826b0, 0, 1);
@@ -102,7 +102,7 @@ perks_register_clientfield() {
     clientfield::register("world", "" + #"zeus_bird_fx", 1, 1, "int", &zeus_bird_fx, 0, 0);
     clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
     clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
-    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
+    clientfield::register("toplayer", "" + #"perk_totem_rob", 1, 1, "counter", &perk_totem_rob, 0, 0);
   }
 
   level thread perk_init_code_callbacks();
@@ -243,37 +243,37 @@ play_perk_fx_on_client(client_num, fx_light, duration) {
   fxobj delete();
 }
 
-function_ccbdf992(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+perk_totem_rob(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self playrenderoverridebundle(#"hash_4659ecede94f0b38", "tag_accessory_left");
   }
 }
 
-function_bb184fed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+init_perk_altar_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     switch (self.model) {
       case # "p8_fxanim_zm_vapor_altar_danu_mod":
       case # "p8_fxanim_zm_perk_vending_brew_mod":
         n_slot = 0;
-        var_fe826f11 = level._effect[#"hash_223e3f9bde46f5b4"];
+        var_fe826f11 = level._effect[#"danu_ledge_fx"];
         var_7ad76c54 = 3;
         break;
       case # "p8_fxanim_zm_red_vapor_altar_ra_mod":
       case # "p8_fxanim_zm_vapor_altar_ra_mod":
       case # "p8_fxanim_zm_perk_vending_cola_mod":
         n_slot = 1;
-        var_fe826f11 = level._effect[#"hash_10e42380c1009ee9"];
+        var_fe826f11 = level._effect[#"ra_ledge_fx"];
         var_7ad76c54 = 5;
         break;
       case # "p8_fxanim_zm_vapor_altar_zeus_mod":
       case # "p8_fxanim_zm_perk_vending_soda_mod":
         n_slot = 2;
-        var_fe826f11 = level._effect[#"hash_110d9fbfd034c819"];
+        var_fe826f11 = level._effect[#"zeus_ledge_fx"];
         break;
       case # "p8_fxanim_zm_perk_vending_tonic_mod":
       case # "p8_fxanim_zm_vapor_altar_odin_mod":
         n_slot = 3;
-        var_fe826f11 = level._effect[#"hash_6e4e902b59a22662"];
+        var_fe826f11 = level._effect[#"odin_ledge_fx"];
         var_7ad76c54 = 2;
         break;
       default:
@@ -470,7 +470,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
     if(newval == 7) {
       self.mdl_altar function_5b123b68(localclientnum, 0);
     } else {
-      self.mdl_altar.var_be82764e = level._effect[#"hash_26247c4bfd6fed73"];
+      self.mdl_altar.var_be82764e = level._effect[#"purchased_ledge_fx"];
       self.mdl_altar function_5b123b68(localclientnum, 1, 1);
     }
   }

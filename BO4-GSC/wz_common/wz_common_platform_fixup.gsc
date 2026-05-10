@@ -31,10 +31,10 @@ function_a38f195f() {
       item_world_fixup::function_2749fcc3(#"zombie_supply_stash_diner_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
       item_world_fixup::function_2749fcc3(#"zombie_supply_stash_lighthouse_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
       item_world_fixup::function_2749fcc3(#"hash_6056a687e77f7229", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
-      item_world_fixup::function_2749fcc3(#"hash_550872d1d1938f94", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
+      item_world_fixup::function_2749fcc3(#"zombie_supply_stash_crater_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
       item_world_fixup::function_2749fcc3(#"zombie_stash_graveyard_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
       item_world_fixup::function_2749fcc3(#"hospital_stash_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
-      item_world_fixup::function_2749fcc3(#"hash_7d028af90dad72ae", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
+      item_world_fixup::function_2749fcc3(#"zombie_supply_stash_buried_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_solo", 2147483647);
       return;
     }
 
@@ -43,10 +43,10 @@ function_a38f195f() {
       item_world_fixup::function_2749fcc3(#"zombie_supply_stash_diner_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
       item_world_fixup::function_2749fcc3(#"zombie_supply_stash_lighthouse_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
       item_world_fixup::function_2749fcc3(#"hash_6056a687e77f7229", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
-      item_world_fixup::function_2749fcc3(#"hash_550872d1d1938f94", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
+      item_world_fixup::function_2749fcc3(#"zombie_supply_stash_crater_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
       item_world_fixup::function_2749fcc3(#"zombie_stash_graveyard_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
       item_world_fixup::function_2749fcc3(#"hospital_stash_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
-      item_world_fixup::function_2749fcc3(#"hash_7d028af90dad72ae", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
+      item_world_fixup::function_2749fcc3(#"zombie_supply_stash_buried_ee", #"zombie_supply_stash_ee_parent", #"zombie_supply_stash_ee_parent_duo", 2147483647);
     }
   }
 }

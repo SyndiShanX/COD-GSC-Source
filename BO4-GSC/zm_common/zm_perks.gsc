@@ -1406,7 +1406,7 @@ perks_register_clientfield() {
     clientfield::register_clientuimodel("hudItems.extraPerkVapor." + i + ".specialEffectActive", n_version, 1, "int", 0);
   }
 
-  clientfield::register("scriptmover", "" + #"hash_cf74c35ecc5a49", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"init_perk_altar_icon", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_35fe26fc5cb223b3", 1, 3, "int");
   clientfield::register("toplayer", "" + #"hash_6fb426c48a4877e0", 1, 3, "int");
   clientfield::register("toplayer", "" + #"hash_345845080e40675d", 1, 3, "int");
@@ -1416,7 +1416,7 @@ perks_register_clientfield() {
     clientfield::register("world", "" + #"zeus_bird_fx", 1, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int");
     clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int");
-    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter");
+    clientfield::register("toplayer", "" + #"perk_totem_rob", 1, 1, "counter");
   }
 }
 
@@ -2035,7 +2035,7 @@ function_b7f2c635(player) {
   if(self.stub.var_36d60c16 !== 1 && player getstance() === "prone" && distancesquared(self.origin, player.origin) < 9216) {
     self.stub.var_36d60c16 = 1;
     player zm_score::add_to_player_score(100);
-    self playsoundtoplayer(#"hash_30fa33e2fb90b58f", player);
+    self playsoundtoplayer(#"evt_spare_change", player);
   }
 
   if(player.var_47654123[n_slot] && !isDefined(player function_5ea0c6cf())) {
@@ -2289,7 +2289,7 @@ taking_cover_tanks_(player, perk, n_slot, s_vapor_altar) {
       player thread function_ef7f9ab0(n_slot);
     }
 
-    player thread function_9bdf581f(perk, n_slot, 1);
+    player thread give_perk_vapor(perk, n_slot, 1);
 
     if(isDefined(level.perk_bought_func)) {
       player[[level.perk_bought_func]](perk);
@@ -2400,10 +2400,10 @@ function_b2ac6ee7() {
   self.hint_parm1 = self.cost;
 }
 
-function_9bdf581f(perk, n_slot, b_bought = 0) {
+give_perk_vapor(perk, n_slot, b_bought = 0) {
   self endon(#"player_downed", #"disconnect", #"perk_abort_drinking");
   level endon(#"end_game");
-  level notify(#"hash_4e566c83cdfabe44", {
+  level notify(#"give_perk_vapor", {
     #e_player: self, #perk: perk
   });
   self perks::perk_setperk(perk);
@@ -2712,7 +2712,7 @@ function_cc24f525() {
         self.var_47654123[n_slot] = 0;
       }
 
-      self thread function_9bdf581f(var_16c042b8, n_slot);
+      self thread give_perk_vapor(var_16c042b8, n_slot);
     }
   }
 }
@@ -2741,7 +2741,7 @@ function_29387491(var_16c042b8, n_slot) {
       self.var_47654123[n_slot] = 0;
     }
 
-    self thread function_9bdf581f(var_16c042b8, n_slot);
+    self thread give_perk_vapor(var_16c042b8, n_slot);
     return;
   }
 
@@ -2828,7 +2828,7 @@ function_7723353c() {
       self function_f9385a02(str_perk, n_slot);
     }
 
-    self function_9bdf581f(str_perk, n_slot);
+    self give_perk_vapor(str_perk, n_slot);
   }
 }
 
@@ -2860,7 +2860,7 @@ function_8b413937(s_vapor_altar) {
   } else {
     s_vapor_altar function_a30c73b9("on");
     waitframe(1);
-    s_vapor_altar.mdl_altar clientfield::set("" + #"hash_cf74c35ecc5a49", 1);
+    s_vapor_altar.mdl_altar clientfield::set("" + #"init_perk_altar_icon", 1);
   }
 
   s_vapor_altar function_a1bad730();
@@ -2872,7 +2872,7 @@ function_8b413937(s_vapor_altar) {
 
 function_72c30be7(var_dd74d130, s_vapor_altar) {
   s_vapor_altar.mdl_altar = var_dd74d130[#"prop 1"];
-  s_vapor_altar.mdl_altar clientfield::set("" + #"hash_cf74c35ecc5a49", 1);
+  s_vapor_altar.mdl_altar clientfield::set("" + #"init_perk_altar_icon", 1);
 }
 
 function_a30c73b9(str_state) {
@@ -3196,7 +3196,7 @@ function_df87281a(var_16c042b8, b_extra = 0) {
     self function_a7ae070c(var_16c042b8);
   } else {
     self.var_c27f1e90[4] = var_16c042b8;
-    self function_9bdf581f(var_16c042b8, 4);
+    self give_perk_vapor(var_16c042b8, 4);
     self function_b8c12b0f(3, 1);
   }
 
@@ -3371,7 +3371,7 @@ function_2babacc2() {
     n_slot = function_c1efcc57(var_16c042b8);
 
     if(n_slot >= 0) {
-      self function_9bdf581f(var_16c042b8, n_slot, 0);
+      self give_perk_vapor(var_16c042b8, n_slot, 0);
 
       if(!isDefined(var_8cf447e1)) {
         var_8cf447e1 = [];
@@ -3481,7 +3481,7 @@ function_b2dfd295(perk, var_8c7df7fc) {
       self thread function_f9385a02(perk, var_c3f41835);
     }
 
-    self thread function_9bdf581f(perk, var_c3f41835);
+    self thread give_perk_vapor(perk, var_c3f41835);
     return;
   }
 

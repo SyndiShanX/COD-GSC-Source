@@ -59,7 +59,7 @@ __init__() {
   plannerutility::registerplanneraction(#"hash_4c584e62f0069dfa", &function_7a9a7a24, undefined, undefined, undefined);
   plannerutility::registerplanneraction(#"hash_3eb5ac2692fce4e7", &function_b032f16b, undefined, undefined, undefined);
   plannerutility::registerplanneraction(#"hash_60a8773a51426c27", &function_9c7e3773, undefined, undefined, undefined);
-  plannerutility::registerplannerapi(#"hash_3df2466d38b695da", &function_39cd5957);
+  plannerutility::registerplannerapi(#"commanderisattackingteam", &function_39cd5957);
   plannerutility::registerplannerapi(#"hash_2d8246b9d8badd2e", &function_97659d05);
   plannerutility::registerplannerapi(#"hash_10cfd447c35656ef", &function_9e016913);
 }

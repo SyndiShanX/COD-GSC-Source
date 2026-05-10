@@ -225,7 +225,7 @@ zombieshouldmelee(entity) {
     return false;
   }
 
-  if(isDefined(entity.var_8a96267d) && entity.var_8a96267d || isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3) {
+  if(isDefined(entity.var_8a96267d) && entity.var_8a96267d || isDefined(entity.shoulddigup) && entity.shoulddigup) {
     return false;
   }
 
@@ -272,7 +272,7 @@ function_e8f3596d(entity) {
 }
 
 function_cc184b8b(entity) {
-  return isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3;
+  return isDefined(entity.shoulddigup) && entity.shoulddigup;
 }
 
 function_562c0e1d(entity) {
@@ -345,7 +345,7 @@ function_6a3bcddc(entity) {
 function_55b7ea22(entity) {
   entity solid();
   entity clientfield::set("zombie_riser_fx", 1);
-  entity.var_8ba6ede3 = undefined;
+  entity.shoulddigup = undefined;
 }
 
 function_98b102d8(entity) {
@@ -487,7 +487,7 @@ function_e261b81d() {
         self function_36151fe3();
         break;
       case 5:
-        self function_101763c9();
+        self ai_cleanup_state();
         break;
       case 0:
       default:
@@ -751,7 +751,7 @@ function_b793bca2() {
   self.var_ef59b90 = 1;
 }
 
-function_101763c9() {
+ai_cleanup_state() {
   self endon(#"death");
   spawn_point = self.ai_zone.spawn_points[randomint(self.ai_zone.spawn_points.size)];
 
@@ -766,7 +766,7 @@ function_101763c9() {
     wait 2;
     self forceteleport(spawn_point.origin, spawn_point.angles);
     wait 2;
-    self.var_8ba6ede3 = 1;
+    self.shoulddigup = 1;
     self waittill(#"not_underground");
   } else {
     self.var_8a96267d = 1;
@@ -778,7 +778,7 @@ function_101763c9() {
 
     self forceteleport(spawn_point.origin, spawn_point.angles);
     wait 2;
-    self.var_8ba6ede3 = 1;
+    self.shoulddigup = 1;
     self waittill(#"not_underground");
   }
 

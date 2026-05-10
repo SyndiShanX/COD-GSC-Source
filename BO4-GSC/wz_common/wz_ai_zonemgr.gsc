@@ -117,7 +117,7 @@ __init__() {
   level thread function_f3e8cf82();
   level thread function_b5a875df();
 
-  level thread function_d0055419();
+  level thread devgui_wz_ai();
 }
 
 on_player_downed() {
@@ -198,9 +198,9 @@ spawn_a_zombie() {
   }
 }
 
-function_d0055419() {
+devgui_wz_ai() {
   sessionmode = currentsessionmode();
-  setDvar(#"hash_70cb00491d863294", "<dev string:x44>");
+  setDvar(#"devgui_wz_ai", "<dev string:x44>");
 
   if(sessionmode != 4) {
     adddebugcommand("<dev string:x47>");
@@ -226,7 +226,7 @@ function_d0055419() {
 
   while(true) {
     wait 0.25;
-    cmd = getdvarstring(#"hash_70cb00491d863294", "<dev string:x44>");
+    cmd = getdvarstring(#"devgui_wz_ai", "<dev string:x44>");
 
     if(cmd == "<dev string:x44>") {
       continue;
@@ -335,7 +335,7 @@ function_d0055419() {
       }
     }
 
-    setDvar(#"hash_70cb00491d863294", "<dev string:x44>");
+    setDvar(#"devgui_wz_ai", "<dev string:x44>");
   }
 }
 
@@ -358,12 +358,12 @@ function function_dc16557c() {
       match_record::set_stat(#"ai_zones", i, #"zone_brutus", ai_zone.zone_brutus);
       match_record::set_stat(#"ai_zones", i, #"zone_hellhounds", ai_zone.zone_hellhounds);
       match_record::set_stat(#"ai_zones", i, #"hash_46c66659061c4df6", ai_zone.var_7bf9c18e);
-      match_record::set_stat(#"ai_zones", i, #"ai_spawned_zombie", ai_zone.var_7c620997);
-      match_record::set_stat(#"ai_zones", i, #"ai_killed_zombie", ai_zone.var_58ba2ab7);
+      match_record::set_stat(#"ai_zones", i, #"ai_spawned_zombie", ai_zone.ai_spawned_zombie);
+      match_record::set_stat(#"ai_zones", i, #"ai_killed_zombie", ai_zone.ai_killed_zombie);
       match_record::set_stat(#"ai_zones", i, #"players_killed_by_zombie", ai_zone.players_killed_by_zombie);
       match_record::set_stat(#"ai_zones", i, #"ai_spawned_blightfather", ai_zone.var_af37e04a);
       match_record::set_stat(#"ai_zones", i, #"ai_killed_blightfather", ai_zone.var_41e86d33);
-      match_record::set_stat(#"ai_zones", i, #"hash_468f7191e8118876", ai_zone.var_719d00b8);
+      match_record::set_stat(#"ai_zones", i, #"players_killed_by_blightfather", ai_zone.var_719d00b8);
 
       if(isDefined(level.var_c64b3b46) && level.var_c64b3b46) {
         if(isDefined(ai_zone.item_drops)) {
@@ -484,7 +484,7 @@ function_a82cad64(ai_zone) {
     ai_zone.var_46a58d6e = 1;
 
     if(isDefined(ai_zone.var_7f923f43) && ai_zone.var_7f923f43) {
-      stash notify(#"hash_4c78fc894646853d");
+      stash notify(#"stash_is_empty");
       return;
     }
 
@@ -613,7 +613,7 @@ function_9e142fa2(n_duration, n_dist) {
 
 function_bbad9099(ai_zone, var_c0d8ceca) {
   stash = function_630eb346(ai_zone);
-  stash waittilltimeout(var_c0d8ceca - 7.5, #"hash_4c78fc894646853d");
+  stash waittilltimeout(var_c0d8ceca - 7.5, #"stash_is_empty");
   ai_zone.minimap clientfield::set("aizoneflag_tu14", 0);
   function_f48ade1d(ai_zone, stash, 0);
 
@@ -1158,8 +1158,8 @@ function_5f0d105a(zone_category, zone_name, spawner_type, var_aeae9f59, var_f1fb
   var_a59ba023.zone_blightfather = 0;
   var_a59ba023.zone_brutus = 0;
   var_a59ba023.zone_hellhounds = 0;
-  var_a59ba023.var_7c620997 = 0;
-  var_a59ba023.var_58ba2ab7 = 0;
+  var_a59ba023.ai_spawned_zombie = 0;
+  var_a59ba023.ai_killed_zombie = 0;
   var_a59ba023.players_killed_by_zombie = 0;
   var_a59ba023.var_af37e04a = 0;
   var_a59ba023.var_41e86d33 = 0;
@@ -1402,7 +1402,7 @@ function_4b95d880() {
         self.var_7aa3cde7++;
 
         if(self.var_cafac64a == #"spawner_boct_zombie_wz" || self.var_cafac64a == #"spawner_boct_zombie_mob_wz") {
-          self.var_7c620997++;
+          self.ai_spawned_zombie++;
 
           if(!isDefined(self.var_6192eb0)) {
             self.var_6192eb0 = 0;
@@ -1842,7 +1842,7 @@ function_f3e8cf82() {
   }
 
   if(isdedicated()) {
-    level.var_65d14681 = !getDvar(#"hash_1a301f2f6d1873d5", 0);
+    level.var_65d14681 = !getDvar(#"sv_loadtest", 0);
   }
 
   if(isDefined(level.var_65d14681) && level.var_65d14681) {
@@ -1856,7 +1856,7 @@ function_f3e8cf82() {
     level flagsys::wait_till_all(array(#"hash_60fcdd11812a0134", #"hash_2299e4b3b840b63f"));
   }
 
-  level notify(#"hash_54391c26dfd50b8a");
+  level notify(#"start_spawn_special_ai");
   level.var_8110be92 = 1;
   level thread function_1c8ea11(0);
   level thread function_1c8ea11(1);

@@ -37,7 +37,7 @@ function_2d1ff9c7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self notify(#"hash_16c59bda348653cd");
+  self notify(#"stop_static_postfx");
 
   if(isDefined(self.var_ed19a23) && self.var_ed19a23) {
     filter::disable_filter_vehicle_hijack_oor(self, 0);
@@ -57,7 +57,7 @@ function_32a729d9(localclientnum, value) {
 dart_static_postfx(localclientnum) {
   self notify("3edfd3cf94760371");
   self endon("3edfd3cf94760371");
-  self endon(#"death", #"exit_vehicle", #"hash_16c59bda348653cd");
+  self endon(#"death", #"exit_vehicle", #"stop_static_postfx");
 
   while(true) {
     vehicle = getplayervehicle(self);

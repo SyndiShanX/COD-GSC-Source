@@ -78,7 +78,7 @@ function_15263a60(radius) {
   self endon(#"death");
   ent_num = self getentitynumber();
 
-  if(getdvarint(#"hash_f62c07bd78a8c27", 0)) {
+  if(getdvarint(#"scr_mute_smoke_debug", 0)) {
     var_1ec8a7f0 = "<dev string:x38>" + ent_num;
     level thread util::drawcylinder(self.origin, 250, 120, undefined, var_1ec8a7f0, (1, 0, 0), 0.9);
     self thread function_9cf45892(var_1ec8a7f0);

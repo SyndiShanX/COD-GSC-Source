@@ -40,7 +40,7 @@
 event_handler[gametype_init] main(eventstruct) {
   globallogic::init();
   infection::initialize();
-  infection::function_153000d0(#"hash_70fe115fad3f4fa", #"hash_3ca96ae1bd7d344f");
+  infection::function_153000d0(#"prt_mp_zombie_male", #"prt_mp_zombie_female");
   level.var_757f1b92 = getweapon("melee_bowie_bloody");
   level.var_4ae49bbd = getweapon("hatchet");
   level.var_30783ca9 = &function_1a87243c;
@@ -792,7 +792,7 @@ setfirstinfected() {
   level thread popups::displayteammessagetoall(#"mp/got_infected", self);
   scoreevents::processscoreevent("first_infected", self);
   sound::play_on_players("mpl_flagget_sting_enemy");
-  self thread infection::function_da08f4d0();
+  self thread infection::ambient_sound();
   level.infect_allowsuicide = 1;
   level.infect_chosefirstinfected = 1;
   self.infect_isbeingchosen = undefined;

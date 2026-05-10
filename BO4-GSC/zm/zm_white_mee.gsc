@@ -42,7 +42,7 @@ preload() {
   clientfield::register("scriptmover", "" + #"hash_5e1264789183cde1", 20000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_72a33f6d2cc925c5", 20000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_1df297369e47699a", 20000, 1, "counter");
-  clientfield::register("toplayer", "" + #"hash_7d631c764117de1e", 20000, 1, "counter");
+  clientfield::register("toplayer", "" + #"prime_jump_scare", 20000, 1, "counter");
   clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 20000, 1, "counter");
   clientfield::register("toplayer", "" + #"delete_model", 20000, 1, "counter");
   callback::on_spawned(&function_ba51762d);
@@ -1034,7 +1034,7 @@ track_player_eyes() {
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_gl_scare", "targetname");
   waitframe(1);
-  self clientfield::increment_to_player("" + #"hash_7d631c764117de1e", 1);
+  self clientfield::increment_to_player("" + #"prime_jump_scare", 1);
 
   while(!b_saw_the_wth) {
     n_time = 0;

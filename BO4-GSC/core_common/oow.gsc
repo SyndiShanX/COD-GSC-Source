@@ -24,17 +24,17 @@ on_game_playing() {
   mapbundle = map::get_script_bundle();
 
   if(isDefined(mapbundle)) {
-    if(!isDefined(mapbundle.var_aa91547b)) {
-      mapbundle.var_aa91547b = 0;
+    if(!isDefined(mapbundle.oowheightmin)) {
+      mapbundle.oowheightmin = 0;
     }
 
-    if(!isDefined(mapbundle.var_eac026ad)) {
-      mapbundle.var_eac026ad = 0;
+    if(!isDefined(mapbundle.oowheightmax)) {
+      mapbundle.oowheightmax = 0;
     }
 
-    if(mapbundle.var_aa91547b != 0 || mapbundle.var_eac026ad != 0) {
-      level.oow.height_min = isDefined(mapbundle.var_aa91547b) ? mapbundle.var_aa91547b : 0;
-      level.oow.height_max = isDefined(mapbundle.var_eac026ad) ? mapbundle.var_eac026ad : 0;
+    if(mapbundle.oowheightmin != 0 || mapbundle.oowheightmax != 0) {
+      level.oow.height_min = isDefined(mapbundle.oowheightmin) ? mapbundle.oowheightmin : 0;
+      level.oow.height_max = isDefined(mapbundle.oowheightmax) ? mapbundle.oowheightmax : 0;
       assert(level.oow.height_min <= level.oow.height_max);
 
       if(!(level.oow.height_min <= level.oow.height_max)) {

@@ -75,7 +75,7 @@ function_f3393d6a() {
   }
 
   self.var_e06cb519 = self stats::get_stat(#"playercalling", #"currentseason");
-  self.var_bf6f8ec3 = self stats::get_stat(#"playercalling", #"hash_3a5ab6fb11258ebf");
+  self.var_bf6f8ec3 = self stats::get_stat(#"playercalling", #"currentcallingid");
 
   if(zm_utility::is_classic() || zm_utility::is_standard()) {
     self.var_d0b65bbe = hash(self stats::get_stat(#"playercalling", #"currentfaction"));
@@ -88,13 +88,13 @@ function_f3393d6a() {
       var_98a2d658 = level.callingsbundle.factioncallings[var_51fe014e].classicpact;
 
       foreach(task in var_98a2d658) {
-        self function_c3be3572(task.task, #"hash_20deab97abbf7b12", task.target, task.xp);
+        self function_c3be3572(task.task, #"classicpact_tasks", task.target, task.xp);
       }
     } else if(zm_utility::is_standard()) {
       var_c53e054e = level.callingsbundle.factioncallings[var_51fe014e].rushpact;
 
       foreach(task in var_c53e054e) {
-        self function_c3be3572(task.task, #"hash_764a5fc3ba8820d2", task.target, task.xp);
+        self function_c3be3572(task.task, #"rushpact_tasks", task.target, task.xp);
       }
     }
 
@@ -108,7 +108,7 @@ function_f3393d6a() {
     s_tcm = level.callingsbundle.var_2e61f0ce[self.var_e06cb519].var_203c6468[self.var_bf6f8ec3];
 
     foreach(task in s_tcm.tcmpact) {
-      self function_c3be3572(task.task, #"hash_647ebc7d24425fee", task.target, task.xp);
+      self function_c3be3572(task.task, #"tcmpact_tasks", task.target, task.xp);
     }
 
     self function_c3be3572(s_tcm.tcmgoal, #"tcmgoal", s_tcm.tcmgoaltarget, s_tcm.tcmgoalxp, 0, 0);
@@ -171,7 +171,7 @@ function_7b01d125(var_a0639b8c, var_f65a9845) {
 }
 
 function_104c5d35() {
-  var_94237d8 = array(#"hash_20deab97abbf7b12", #"hash_764a5fc3ba8820d2", #"hash_647ebc7d24425fee", #"tcmgoal");
+  var_94237d8 = array(#"classicpact_tasks", #"rushpact_tasks", #"tcmpact_tasks", #"tcmgoal");
 
   foreach(var_acbd7392 in var_94237d8) {
     var_1e9f2834 = 1;
@@ -196,7 +196,7 @@ function_104c5d35() {
 
     if(isDefined(var_1e9f2834) && var_1e9f2834 && isDefined(var_ed9fe2be) && var_ed9fe2be) {
       self luinotifyevent(#"zombie_callings_notification", 4, 3, function_7b01d125(self.var_e06cb519, self.var_d0b65bbe) + 1, self.var_e06cb519 + 1, self getentitynumber());
-      self stats::inc_stat(#"playercalling", #"seasons", self.var_e06cb519, #"factions", self.var_d0b65bbe, #"hash_7a54171ce10db54f", 1);
+      self stats::inc_stat(#"playercalling", #"seasons", self.var_e06cb519, #"factions", self.var_d0b65bbe, #"pactscompleted", 1);
 
       iprintln("<dev string:x38>" + hashtostring(var_acbd7392) + "<dev string:x53>" + hashtostring(self.var_d0b65bbe));
     }

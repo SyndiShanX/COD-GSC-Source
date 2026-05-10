@@ -51,10 +51,10 @@ autoexec registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6263cd4f7b34692e", &function_fdde7116);
   assert(isscriptfunctionptr(&function_fdde7116));
   behaviorstatemachine::registerbsmscriptapiinternal(#"hash_6263cd4f7b34692e", &function_fdde7116);
-  assert(isscriptfunctionptr(&function_66063225));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_4068cafe20c75854", &function_66063225);
-  assert(isscriptfunctionptr(&function_66063225));
-  behaviorstatemachine::registerbsmscriptapiinternal(#"hash_4068cafe20c75854", &function_66063225);
+  assert(isscriptfunctionptr(&tigershouldrun));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"tigershouldrun", &tigershouldrun);
+  assert(isscriptfunctionptr(&tigershouldrun));
+  behaviorstatemachine::registerbsmscriptapiinternal(#"tigershouldrun", &tigershouldrun);
   assert(!isDefined(&function_e0f73303) || isscriptfunctionptr(&function_e0f73303));
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
   assert(!isDefined(&function_351bcb1b) || isscriptfunctionptr(&function_351bcb1b));
@@ -94,7 +94,7 @@ function_1637910a() {
 }
 
 function_8747b993() {
-  self.var_86152978 = gettime() + 15000;
+  self.pouncedelay = gettime() + 15000;
 }
 
 function_e235da7d(entity) {
@@ -447,7 +447,7 @@ function_36b5df8c(behaviortreeentity) {
     return false;
   }
 
-  if(gettime() <= self.var_86152978) {
+  if(gettime() <= self.pouncedelay) {
     return false;
   }
 
@@ -476,7 +476,7 @@ function_fdde7116(behaviortreeentity) {
   return bb_getshouldrunstatus() == "walk";
 }
 
-function_66063225(behaviortreeentity) {
+tigershouldrun(behaviortreeentity) {
   if(isDefined(behaviortreeentity.aat_turned) && behaviortreeentity.aat_turned) {
     return true;
   }
@@ -980,7 +980,7 @@ function_88b22921() {
 
   foreach(enemy in enemies) {
     if(isalive(enemy)) {
-      enemy.var_86152978 = gettime();
+      enemy.pouncedelay = gettime();
     }
   }
 }
@@ -992,7 +992,7 @@ function_1e4eb5f0() {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_3b467d1615c469f8", "<dev string:x60>");
+    string = getdvarstring(#"tiger_devgui_cmd", "<dev string:x60>");
     cmd = strtok(string, "<dev string:x185>");
 
     if(cmd.size > 0) {
@@ -1015,6 +1015,6 @@ function_1e4eb5f0() {
       }
     }
 
-    setDvar(#"hash_3b467d1615c469f8", "<dev string:x60>");
+    setDvar(#"tiger_devgui_cmd", "<dev string:x60>");
   }
 }

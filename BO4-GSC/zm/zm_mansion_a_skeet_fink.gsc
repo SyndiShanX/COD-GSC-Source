@@ -182,7 +182,7 @@ function_abf0bf8c() {
 
     if(isPlayer(s_waitresult.attacker) && !zm_loadout::is_offhand_weapon(s_waitresult.weapon)) {
       if(isDefined(s_waitresult.position) && distancesquared(s_waitresult.position, self.origin) < 100) {
-        level.var_d5f74526 notify(#"hash_5a5c7c802e5f3037", {
+        level.var_d5f74526 notify(#"rune_obj_destroyed", {
           #var_c8407ea2: self.script_int, #mdl_rune: self.mdl_rune, #attacker: s_waitresult.attacker
         });
         self.mdl_rune ghost();
@@ -205,7 +205,7 @@ function_29a3aca4() {
   var_1fc5672 = 0;
 
   while(var_1fc5672 < level.var_6d3c8378.size) {
-    s_waitresult = self waittill(#"hash_5a5c7c802e5f3037");
+    s_waitresult = self waittill(#"rune_obj_destroyed");
 
     if(s_waitresult.var_c8407ea2 !== var_1fc5672) {
       s_waitresult.mdl_rune clientfield::set("" + #"hash_693891d7b7f47419", 2);
@@ -316,7 +316,7 @@ function_6941c919() {
 
     if(isPlayer(s_waitresult.attacker)) {
       if(w_base_weapon === level.w_bowie_knife) {
-        level.var_d5f74526 notify(#"hash_15ccd1fdda38284a", {
+        level.var_d5f74526 notify(#"rune_slashed", {
           #var_c8407ea2: self.script_int, #attacker: s_waitresult.attacker
         });
         continue;
@@ -337,9 +337,9 @@ function_1dc8ad86() {
   b_fail = 0;
 
   while(true) {
-    s_waitresult = self waittill(#"hash_15ccd1fdda38284a", #"rune_bashed");
+    s_waitresult = self waittill(#"rune_slashed", #"rune_bashed");
 
-    if(s_waitresult._notify == #"hash_15ccd1fdda38284a") {
+    if(s_waitresult._notify == #"rune_slashed") {
       if(s_waitresult.var_c8407ea2 == var_1fc5672) {
         var_1fc5672++;
         level clientfield::set("" + #"hash_70b438bea0135fc8", var_1fc5672);

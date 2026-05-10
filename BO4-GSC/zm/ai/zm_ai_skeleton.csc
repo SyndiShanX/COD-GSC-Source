@@ -30,7 +30,7 @@ skeletonspawnsetup(localclientnum) {
 }
 
 function_3b8e5273(localclientnum) {
-  if(self.subarchetype === #"hash_342763a42d8fbca" || self.subarchetype === #"hash_fd7b9665529dd42") {
+  if(self.subarchetype === #"skeleton_sword_and_shield" || self.subarchetype === #"skeleton_helmet_sword_and_shield") {
     if(!(isDefined(level.shield_streaming) && level.shield_streaming)) {
       level.shield_streaming = 1;
       forcestreamxmodel(#"c_t8_zmb_dlc2_skeleton_shield");

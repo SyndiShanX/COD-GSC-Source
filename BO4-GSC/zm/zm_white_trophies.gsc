@@ -40,7 +40,7 @@ on_player_connect() {
 
 shard_watcher() {
   level endon(#"game_ended");
-  self waittill(#"hash_5aa1c9627e8626e0");
+  self waittill(#"shard_step_complete");
 
   iprintlnbold("<dev string:x38>" + "<dev string:x4b>");
 
@@ -48,7 +48,7 @@ shard_watcher() {
 }
 
 function_e0aaa050() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"shard_step_complete");
   self endon(#"death", #"disconnect");
 
   for(i = 0; i < 20; i++) {
@@ -65,7 +65,7 @@ function_e0aaa050() {
 }
 
 function_f37ba127() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"shard_step_complete");
   self endon(#"disconnect");
 
   while(true) {
@@ -83,7 +83,7 @@ function_f37ba127() {
 }
 
 function_9785ebce() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"shard_step_complete");
 
   for(i = 0; i < 4; i++) {
     level waittill(#"hash_13f3f231b45420ef");
@@ -153,7 +153,7 @@ function_2c104547(s_params) {
 }
 
 pap_watcher() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"shard_step_complete");
   level waittill(#"pap_power_ready");
 
   if(level.round_number <= 5) {
@@ -187,7 +187,7 @@ function_48f916b(params) {
 }
 
 function_5e1138a2() {
-  level endon(#"hash_5aa1c9627e8626e0");
+  level endon(#"shard_step_complete");
   self endon(#"disconnect");
 
   while(true) {
@@ -240,7 +240,7 @@ function_91cfddc4() {
 }
 
 function_df71a9b9() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"shard_step_complete");
 
   while(true) {
     waitresults = level waittill(#"ray_gun_mk2v_stun_hit");

@@ -45,7 +45,7 @@ function_32639301() {
   s_trap.var_6b64b967 = 0;
   s_trap.var_41ee2ddc = 1;
   level flag::wait_till("all_players_spawned");
-  level flag::wait_till(#"hash_25d9cfebd2bdf1f2");
+  level flag::wait_till(#"enable_countermeasure_6");
 
   foreach(s_button in s_trap.a_s_buttons) {
     s_button zm_unitrigger::create(&function_d1112480, 64);
@@ -97,7 +97,7 @@ function_d1112480(e_player) {
     return 1;
   }
 
-  self sethintstring(#"hash_23c1c09e94181fdb", 1000);
+  self sethintstring(#"zombie/button_buy_trap", 1000);
   return 1;
 }
 

@@ -701,7 +701,7 @@ function_8ff10cdc() {
 function_63841688() {
   callback::on_disconnect(&on_disconnect);
   level thread pap_timeout_watcher();
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
 }
 
 on_disconnect() {
@@ -733,7 +733,7 @@ pap_timeout_watcher() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "take_weapon" && zm_white_util::function_c654e39a(s_event.weapon)) {
     b_rescue = 0;
     w_ray_gun = s_event.weapon;

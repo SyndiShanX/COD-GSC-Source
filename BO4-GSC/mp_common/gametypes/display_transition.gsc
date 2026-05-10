@@ -176,7 +176,7 @@ function_b3964dc9() {
 
   player = self;
   player function_3f65d5d3();
-  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_ee32e40c182320b");
+  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"downbutnotout_transition");
 }
 
 function_f4c03c3b() {
@@ -270,14 +270,14 @@ function_8feabee3(transition, outcome) {
 }
 
 function_26bbb839(transition, outcome) {
-  thread function_b8e20f5f(transition, outcome, transition.slowdown, transition.var_d7f20c92, &function_9185f489);
+  thread function_b8e20f5f(transition, outcome, transition.slowdown, transition.slowdowntimestart, &function_9185f489);
   thread function_b8e20f5f(transition, outcome, transition.freezeplayers, transition.freezetime, &function_a3b4d41d);
-  thread function_b8e20f5f(transition, outcome, transition.var_b0bc6ae0, transition.var_8d7c57a2, &function_8feabee3);
-  thread function_b8e20f5f(transition, outcome, transition.var_619875ca, transition.var_73f860db, &function_b7fec738);
-  thread function_b8e20f5f(transition, outcome, transition.var_7a712c7, transition.var_a803fe51, &function_66713ac);
-  thread function_b8e20f5f(transition, outcome, transition.var_93a95648, transition.var_de820e2d, &function_654c0030);
+  thread function_b8e20f5f(transition, outcome, transition.announcehalftime, transition.var_8d7c57a2, &function_8feabee3);
+  thread function_b8e20f5f(transition, outcome, transition.announceencouragement, transition.var_73f860db, &function_b7fec738);
+  thread function_b8e20f5f(transition, outcome, transition.announceroundswitchsides, transition.var_a803fe51, &function_66713ac);
+  thread function_b8e20f5f(transition, outcome, transition.announceendgame, transition.var_de820e2d, &function_654c0030);
   thread function_b8e20f5f(transition, outcome, transition.var_f9995c63, transition.var_41fc87a8, &function_d9d842b2);
-  thread function_b8e20f5f(transition, outcome, transition.pickup_message, transition.var_5026a297, &function_e22f5208);
+  thread function_b8e20f5f(transition, outcome, transition.pickup_message, transition.playerintermissiontime, &function_e22f5208);
 }
 
 checkroundswitch() {
@@ -440,7 +440,7 @@ function_40a46b5b(transition, outcome) {
     return true;
   }
 
-  if(isDefined(transition.var_b5dabc6b) && transition.var_b5dabc6b) {
+  if(isDefined(transition.skipfinalround) && transition.skipfinalround) {
     if(util::waslastround() || util::isoneround()) {
       return true;
     }

@@ -18,7 +18,7 @@ class cct_shared_desc: cluielem {
       return;
     }
 
-    if(#"hash_2ac3b79c708dcfd5" == state_name) {
+    if(#"default_desc_training" == state_name) {
       set_data(localclientnum, "_state", 2);
       return;
     }

@@ -30,7 +30,7 @@ __init__() {
 on_begin() {
   level.var_375482b5 = 1;
   callback::on_ai_killed(&on_ai_killed);
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
 
   foreach(player in getplayers()) {
@@ -46,7 +46,7 @@ on_begin() {
 on_end(round_reset) {
   level.var_375482b5 = undefined;
   callback::remove_on_ai_killed(&on_ai_killed);
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
   level zm_trial::function_25ee130(0);
   level thread refill_ammo();
@@ -92,7 +92,7 @@ lock_shield() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(s_event.weapon.inventorytype === "item") {
       return;
@@ -163,7 +163,7 @@ reset_ammo(var_f2c84b6b) {
   }
 
   if(isDefined(self.var_9b0383f5) && self.var_9b0383f5) {
-    self waittill(#"hash_1ac4338b0d419091");
+    self waittill(#"pap_use_finished");
   }
 
   a_weapons = self getweaponslist(0);

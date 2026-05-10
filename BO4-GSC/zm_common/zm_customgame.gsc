@@ -1418,8 +1418,8 @@ function_34c2aeb5() {
 }
 
 drain_health(var_c454f44e) {
-  self notify(#"hash_13fcb28a561bd5fe");
-  self endon(#"disconnect", #"hash_13fcb28a561bd5fe");
+  self notify(#"end_drain_health");
+  self endon(#"disconnect", #"end_drain_health");
   level endon(#"game_ended");
   self val::set(#"custom_games", "health_regen", 0);
 

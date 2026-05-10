@@ -28,7 +28,7 @@ function_7e4aeb0b() {
     item_world::function_160294c7(var_534542fd);
   }
 
-  var_595e1a69 = getdynentarray(#"hash_7d60590fc39ccb98");
+  var_595e1a69 = getdynentarray(#"wz_event_pot_of_gold");
 
   foreach(var_534542fd in var_595e1a69) {
     item_world::function_160294c7(var_534542fd);

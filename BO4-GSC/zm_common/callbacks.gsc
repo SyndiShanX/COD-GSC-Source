@@ -64,7 +64,7 @@ setdefaultcallbacks() {
   level._gametype_default = "zclassic";
 }
 
-function_6e6149a6(func, obj) {
+on_ai_stunned(func, obj) {
   add_callback(#"on_ai_stunned", func, obj);
 }
 

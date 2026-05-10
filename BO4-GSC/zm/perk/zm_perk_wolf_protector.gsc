@@ -36,7 +36,7 @@ function_27473e44() {
   if(function_8b1a219a()) {
     zm_perks::register_perk_basic_info(#"specialty_wolf_protector", #"perk_wolf_protector", 3000, #"hash_4cacb949ec1378", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), #"zmperkswolfprotector");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", #"perk_wolf_protector", 3000, #"hash_5b2099ef891bc954", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), #"zmperkswolfprotector");
+    zm_perks::register_perk_basic_info(#"specialty_wolf_protector", #"perk_wolf_protector", 3000, #"zombie/perk_wolf_protector", getweapon("zombie_perk_bottle_wolf_protector"), getweapon("zombie_perk_totem_wolf_protector"), #"zmperkswolfprotector");
   }
 
   zm_perks::register_perk_clientfields(#"specialty_wolf_protector", &register_clientfield, &set_clientfield);

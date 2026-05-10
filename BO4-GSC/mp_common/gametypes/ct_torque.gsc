@@ -436,7 +436,7 @@ function_27bf93d(var_93b6a23b = 2000, var_844ac87e = 1) {
 
 j_fore_le_01() {
   level endoncallback(&function_76a85acc, #"combattraining_logic_finished");
-  level notify(#"hash_b368182103cc73");
+  level notify(#"vip_go_path");
   ct_utils::function_6d7f4ec6(45);
   e_player = ct_utils::get_player();
   level thread checkpoints_think();
@@ -882,9 +882,9 @@ spawn_robot(str_team = #"allies", var_3b640040 = "walk") {
   return robot;
 }
 
-function_91c380a() {
+vip_go_path() {
   self endoncallback(&function_b47c8ec8, #"death");
-  level waittill(#"hash_b368182103cc73");
+  level waittill(#"vip_go_path");
 
   for(var_1d6b3936 = getnode("nd_vip_start_path", "targetname"); isDefined(var_1d6b3936.target); var_1d6b3936 = getnode(var_1d6b3936.target, "targetname")) {
     self.var_1d6b3936 = var_1d6b3936;

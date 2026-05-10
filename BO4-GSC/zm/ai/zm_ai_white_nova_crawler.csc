@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   level._effect[#"fx8_nova_crawler_zombie_buff"] = "zm_ai/fx8_nova_crawler_zombie_buff";
-  level._effect[#"hash_fa591e70e810d4a"] = "zm_ai/fx8_nova_crawler_gas_cloud_lg";
+  level._effect[#"white_nova_crawler_gas_cloud"] = "zm_ai/fx8_nova_crawler_gas_cloud_lg";
   clientfield::register("actor", "nova_buff_aura_clientfield", 8000, 1, "int", &function_be621cc7, 0, 0);
   clientfield::register("actor", "white_nova_crawler_phase_end_clientfield", 8000, 1, "counter", &function_18c564d0, 0, 0);
   clientfield::register("actor", "nova_gas_cloud_fx_clientfield", 8000, 1, "counter", &function_c9ef107f, 0, 0);
@@ -66,7 +66,7 @@ function_c9ef107f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   fx_location = self gettagorigin("j_mainroot");
 
   if(isDefined(fx_location)) {
-    playFX(localclientnum, level._effect[#"hash_fa591e70e810d4a"], fx_location);
+    playFX(localclientnum, level._effect[#"white_nova_crawler_gas_cloud"], fx_location);
   }
 }
 

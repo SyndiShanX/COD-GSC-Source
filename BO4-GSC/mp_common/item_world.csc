@@ -147,7 +147,7 @@ function_cdd9b388() {
   while(true) {
     waitframe(1);
 
-    if(getdvarint(#"hash_3fdd3b60f349d462", 0)) {
+    if(getdvarint(#"wz_item_world_items", 0)) {
       if(isDefined(self)) {
         origin = self.origin;
         var_f4b807cb = function_2e3efdda(origin, undefined, 128, 2000);
@@ -391,10 +391,10 @@ function_78bf134c(localclientnum, clientdata, networkid, model, itementry) {
   model.var_2584a90d = renderbundle;
 
   if(isDefined(itementry) && isDefined(itementry.worldfx) && !isDefined(model.modelfx) && !model ishidden()) {
-    originoffset = (isDefined(itementry.var_5dc4470b) ? itementry.var_5dc4470b : 0, isDefined(itementry.var_54a3b4ca) ? itementry.var_54a3b4ca : 0, isDefined(itementry.var_3e688854) ? itementry.var_3e688854 : 0);
+    originoffset = (isDefined(itementry.modeloffsetx) ? itementry.modeloffsetx : 0, isDefined(itementry.modeloffsety) ? itementry.modeloffsety : 0, isDefined(itementry.modeloffsetz) ? itementry.modeloffsetz : 0);
     originoffset = rotatepoint(originoffset * -1, model.angles);
-    originoffset += rotatepoint((isDefined(itementry.var_22d128f2) ? itementry.var_22d128f2 : 0, isDefined(itementry.var_48907470) ? itementry.var_48907470 : 0, isDefined(itementry.var_702943a1) ? itementry.var_702943a1 : 0), model.angles);
-    angles = combineangles(model.angles, (isDefined(itementry.var_15b88fde) ? itementry.var_15b88fde : 0, isDefined(itementry.var_8c9a7dc8) ? itementry.var_8c9a7dc8 : 0, isDefined(itementry.var_7a51d937) ? itementry.var_7a51d937 : 0));
+    originoffset += rotatepoint((isDefined(itementry.fxpositionoffsetx) ? itementry.fxpositionoffsetx : 0, isDefined(itementry.fxpositionoffsety) ? itementry.fxpositionoffsety : 0, isDefined(itementry.fxpositionoffsetz) ? itementry.fxpositionoffsetz : 0), model.angles);
+    angles = combineangles(model.angles, (isDefined(itementry.fxangleoffsetx) ? itementry.fxangleoffsetx : 0, isDefined(itementry.fxangleoffsety) ? itementry.fxangleoffsety : 0, isDefined(itementry.fxangleoffsetz) ? itementry.fxangleoffsetz : 0));
     forward = anglesToForward(angles);
     up = anglestoup(angles);
     model.modelfx = playFX(localclientnum, itementry.worldfx, model.origin + originoffset, forward, up);
@@ -516,7 +516,7 @@ _draw(localclientnum, draworigin) {
         function_2990e5f(localclientnum, model);
       }
 
-      originoffset = (isDefined(item.itementry.var_5dc4470b) ? item.itementry.var_5dc4470b : 0, isDefined(item.itementry.var_54a3b4ca) ? item.itementry.var_54a3b4ca : 0, isDefined(item.itementry.var_3e688854) ? item.itementry.var_3e688854 : 0);
+      originoffset = (isDefined(item.itementry.modeloffsetx) ? item.itementry.modeloffsetx : 0, isDefined(item.itementry.modeloffsety) ? item.itementry.modeloffsety : 0, isDefined(item.itementry.modeloffsetz) ? item.itementry.modeloffsetz : 0);
       model.origin += rotatepoint(originoffset, model.angles);
 
       if(item_world_util::function_da09de95(item.networkid)) {
@@ -2051,7 +2051,7 @@ function_7571fda9(item) {
   }
 
   itementry = item.itementry;
-  originoffset = (isDefined(itementry.var_5dc4470b) ? itementry.var_5dc4470b : 0, isDefined(itementry.var_54a3b4ca) ? itementry.var_54a3b4ca : 0, isDefined(itementry.var_3e688854) ? itementry.var_3e688854 : 0);
+  originoffset = (isDefined(itementry.modeloffsetx) ? itementry.modeloffsetx : 0, isDefined(itementry.modeloffsety) ? itementry.modeloffsety : 0, isDefined(itementry.modeloffsetz) ? itementry.modeloffsetz : 0);
   originoffset = rotatepoint(originoffset * -1, item.angles);
   return originoffset;
 }
@@ -2067,7 +2067,7 @@ function_118d052e(item) {
     return item.angles;
   }
 
-  angles = combineangles(item.angles, (isDefined(itementry.var_15b88fde) ? itementry.var_15b88fde : 0, isDefined(itementry.var_8c9a7dc8) ? itementry.var_8c9a7dc8 : 0, isDefined(itementry.var_7a51d937) ? itementry.var_7a51d937 : 0));
+  angles = combineangles(item.angles, (isDefined(itementry.fxangleoffsetx) ? itementry.fxangleoffsetx : 0, isDefined(itementry.fxangleoffsety) ? itementry.fxangleoffsety : 0, isDefined(itementry.fxangleoffsetz) ? itementry.fxangleoffsetz : 0));
   return angles;
 }
 

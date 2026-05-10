@@ -23,7 +23,7 @@ __init__() {
   clientfield::register("scriptmover", "" + #"soul_catcher_portal", 1, 1, "int", &function_e4a48a64, 0, 0);
   clientfield::register("actor", "" + #"soul_catcher_charge_start", 1, 1, "int", &function_b543a4ed, 0, 0);
   clientfield::register("scriptmover", "" + #"soul_catcher_impact", 1, 1, "counter", &function_1f632068, 0, 0);
-  clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter", &function_63eff42e, 0, 0);
+  clientfield::register("actor", "" + #"soul_catcher_eaten", 1, 1, "counter", &function_63eff42e, 0, 0);
   clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int", &function_dfe17a5d, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_51657261e835ac7c", 1, n_bits, "int", &function_724af26a, 0, 0);
   clientfield::register("toplayer", "" + #"tomahawk_pickup_fx", 13000, 1, "int", &function_1302ffdd, 0, 0);

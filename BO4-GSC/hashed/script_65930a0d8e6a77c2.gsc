@@ -30,7 +30,7 @@ trap_activate() {
   self thread zm_traps::trap_damage();
   playsoundatposition(#"hash_1a3423b6a6b71330", level.var_a19e2d89.origin);
   level exploder::exploder("fxexp_trap_poison");
-  level.var_a19e2d89 playLoopSound(#"hash_5ca6140cea7b68ca");
+  level.var_a19e2d89 playLoopSound(#"zmb_venom_spray");
   level.var_7012847c = 1;
   self.var_67dd3af6 = 1;
   wait self._trap_duration;
@@ -59,7 +59,7 @@ trap_player_damage(t_trap) {
 
     if(self issliding() || self issprinting()) {
       self.is_in_acid = undefined;
-      self notify(#"hash_cbf6a8f73a300c8");
+      self notify(#"venom_trap_damage_player");
       return;
     }
 

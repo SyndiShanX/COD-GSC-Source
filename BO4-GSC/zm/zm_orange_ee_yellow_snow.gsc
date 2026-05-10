@@ -45,7 +45,7 @@ preload() {
   zm_sq_modules::function_d8383812(#"snowball_campfire_1", 24000, "snowball_campfire_1", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"snowball_campfire_2", 24000, "snowball_campfire_2", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"snowball_campfire_3", 24000, "snowball_campfire_3", &is_soul_capture, &soul_captured, 1);
-  level flag::init(#"hash_5e095d53ae9513f5");
+  level flag::init(#"yellow_snowballs_granted");
   level flag::init(#"hash_2b7269d8e32bf3d7");
 }
 
@@ -347,7 +347,7 @@ function_985dbc38(var_a276c861) {
     level.var_3af3c634 thread function_c0ee8171();
     level flag::wait_till(#"hash_3ff453a959b4445b");
     zm_orange_pablo::function_d83490c5(2);
-    level flag::wait_till(#"hash_5e095d53ae9513f5");
+    level flag::wait_till(#"yellow_snowballs_granted");
   }
 }
 
@@ -494,7 +494,7 @@ function_901d1798() {
 }
 
 function_ae42be1() {
-  level flag::set(#"hash_5e095d53ae9513f5");
+  level flag::set(#"yellow_snowballs_granted");
   level thread function_b51a6dd7();
 
   if(isDefined(level.var_d1206a2b)) {
@@ -515,6 +515,6 @@ function_256ebdea(var_a276c861, var_19e802fa) {
   if(var_a276c861 || var_19e802fa) {
     level thread function_b51a6dd7();
     level flag::set(#"hash_3ff453a959b4445b");
-    level flag::set(#"hash_5e095d53ae9513f5");
+    level flag::set(#"yellow_snowballs_granted");
   }
 }

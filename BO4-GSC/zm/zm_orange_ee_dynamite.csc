@@ -13,7 +13,7 @@ init() {
   level._effect[#"dynamite_zombie_explosion"] = #"hash_e52765b1b6a1c81";
   clientfield::register("scriptmover", "" + #"dynamite_explosion_fx", 24000, 1, "counter", &play_dynamite_explosion_fx, 0, 0);
   clientfield::register("actor", "" + #"hash_6adfdd12c9656e1c", 24000, 1, "int", &function_ee32b1b8, 0, 0);
-  clientfield::register("actor", "" + #"hash_147a734966a62e10", 24000, 1, "counter", &function_baf2de8d, 0, 0);
+  clientfield::register("actor", "" + #"dynamite_zombie_explosion_fx", 24000, 1, "counter", &function_baf2de8d, 0, 0);
   forcestreamxmodel("p8_zm_ora_dynamite_barrier_destroyed");
 }
 

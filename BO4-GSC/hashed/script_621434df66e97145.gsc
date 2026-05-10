@@ -66,7 +66,7 @@ init_weapons_locker() {
   }
 
   callback::on_connect(&on_player_connect);
-  level flag::wait_till(#"hash_25d9ccebd2bdecd9");
+  level flag::wait_till(#"enable_countermeasure_3");
   e_door_l = getent("e_sarge_l", "targetname");
   e_door_r = getent("e_sarge_r", "targetname");
   e_door_l playSound(#"evt_weapon_locker");
@@ -109,7 +109,7 @@ function_31c7123b() {
   s_trap.var_6b64b967 = 0;
   s_trap.var_41ee2ddc = 1;
   level flag::wait_till("all_players_spawned");
-  level flag::wait_till(#"hash_25d9cdebd2bdee8c");
+  level flag::wait_till(#"enable_countermeasure_4");
 
   foreach(s_button in s_trap.a_s_buttons) {
     s_button.s_trap = s_trap;
@@ -324,7 +324,7 @@ function_d8a7606() {
   s_trap.var_6b64b967 = 0;
   s_trap.var_41ee2ddc = 1;
   level flag::wait_till("all_players_spawned");
-  level flag::wait_till(#"hash_25d9caebd2bde973");
+  level flag::wait_till(#"enable_countermeasure_1");
 
   foreach(s_button in s_trap.a_s_buttons) {
     s_button.s_trap = s_trap;
@@ -544,7 +544,7 @@ init_spinning_trap() {
   s_trap.var_6b64b967 = 0;
   s_trap.var_41ee2ddc = 1;
   level flag::wait_till("all_players_spawned");
-  level flag::wait_till(#"hash_25d9cbebd2bdeb26");
+  level flag::wait_till(#"enable_countermeasure_2");
 
   foreach(s_button in s_trap.a_s_buttons) {
     s_button.s_trap = s_trap;
@@ -941,7 +941,7 @@ function_67b12ae8(e_player) {
     return 1;
   }
 
-  self sethintstring(#"hash_23c1c09e94181fdb", 1000);
+  self sethintstring(#"zombie/button_buy_trap", 1000);
   return 1;
 }
 
@@ -962,7 +962,7 @@ swap_weapon(w_reward) {
 
   foreach(w_gun in var_6822257f) {
     if(w_gun.rootweapon === w_reward) {
-      self zm_weapons::function_7c5dd4bd(w_gun);
+      self zm_weapons::give_full_ammo(w_gun);
       return;
     }
   }

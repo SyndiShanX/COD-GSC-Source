@@ -73,7 +73,7 @@ function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 function_b3c2dc1c(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[#"fx8_aat_opposite_exp"], self, "j_spine4");
-  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
+  playSound(0, #"zmb_ai_catalyst_plasma_explode", self.origin);
 }
 
 function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -129,7 +129,7 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 function_dce55f49(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue === 1) {
-    self playSound(localclientnum, #"hash_579a9e520b10d768");
+    self playSound(localclientnum, #"zmb_ai_catalyst_electric_burst");
     self thread function_8c78e227(localclientnum);
     return;
   }
@@ -159,7 +159,7 @@ function_8c78e227(localclientnum) {
 
 function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_plasma_blast"], self, "j_spine4");
-  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
+  playSound(0, #"zmb_ai_catalyst_plasma_explode", self.origin);
   function_2a9101fe(localclientnum, #"hash_528115ad9eebc84f", self.origin);
 }
 

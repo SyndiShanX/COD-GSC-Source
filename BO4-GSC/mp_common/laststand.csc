@@ -61,7 +61,7 @@ laststand_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", #"hash_7698972484f247e8");
+  self endon(#"death", #"end_bleed_fx");
 
   if(newval != oldval && newval) {
     self util::waittill_dobj(localclientnum);
@@ -73,7 +73,7 @@ laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     stopfx(localclientnum, self.var_63796ff0);
   }
 
-  self notify(#"hash_7698972484f247e8");
+  self notify(#"end_bleed_fx");
 }
 
 function_8960f852(oldval, newval) {

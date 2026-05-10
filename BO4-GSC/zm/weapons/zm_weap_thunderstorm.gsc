@@ -33,7 +33,7 @@ __init__() {
   clientfield::register("actor", "" + #"pegasus_beam_target", 16000, 3, "int");
   clientfield::register("actor", "" + #"hash_561a1fd86bc1a53a", 16000, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_43cf6c236d2e9ba", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_1187b848bf7868c5", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"pegasus_staff_fx", 16000, 1, "int");
   weaponobjects::function_e6400478(#"thunderstorm", &function_72e5d54f, undefined);
   deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, #"hash_3b6c37d4718707a2");
   level.a_mdl_pegasus = [];
@@ -301,7 +301,7 @@ function_b603ab34(e_player, mdl_pegasus) {
   v_pos = util::ground_position(v_pos + (0, 0, 30), 1000, 12);
   mdl_temp = util::spawn_model(#"hash_30b0badbca0a10de", v_pos + (0, 0, -5), (0, 0, 0));
   waitframe(1);
-  mdl_temp clientfield::set("" + #"hash_1187b848bf7868c5", 1);
+  mdl_temp clientfield::set("" + #"pegasus_staff_fx", 1);
   mdl_pegasus waittill(#"hash_7a19b162c9e303dc");
   mdl_temp delete();
 }

@@ -20,7 +20,7 @@ __init__() {
     return;
   }
 
-  level.var_ef215639 = [1: # "hash_1483048e184df991", 2: # "hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
+  level.var_ef215639 = [1: # "evt_death_circle_weak", 2: # "evt_death_circle_med", 3: "evt_death_circle_strong"];
   level.var_cb450873 = #"hash_313f1d0b4ff27caa";
   level.var_f6795a59 = [1: # "hash_7c7ea03189fe65d8", 2: # "hash_5c64e89ab323857a", 3: # "hash_3fc5123369b4c59f"];
   level.var_601fc3c5 = [1: # "wz/fx8_player_outside_circle", 2: # "hash_474c4d87482063e0", 3: # "hash_474c4e8748206593"];
@@ -54,19 +54,19 @@ function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       player = function_27673a7(localclientnum);
 
       if(isDefined(player) && isDefined(player.var_2cbc8a68)) {
-        player.var_2cbc8a68 stoprenderoverridebundle(#"hash_75168376918f5ab7");
+        player.var_2cbc8a68 stoprenderoverridebundle(#"rob_wz_boundary");
         player.var_2cbc8a68 delete();
       }
 
       if(isDefined(self.var_2c8e49d2)) {
-        self.var_2c8e49d2 stoprenderoverridebundle(#"hash_75168376918f5ab7");
+        self.var_2c8e49d2 stoprenderoverridebundle(#"rob_wz_boundary");
         self.var_2c8e49d2 delete();
       }
 
       self function_a5edb367(#"death_ring");
       self.var_2c8e49d2 = spawn(localclientnum, self.origin, "script_model");
       self.var_2c8e49d2 setModel("p8_big_cylinder");
-      self.var_2c8e49d2 playrenderoverridebundle(#"hash_75168376918f5ab7");
+      self.var_2c8e49d2 playrenderoverridebundle(#"rob_wz_boundary");
       self.var_2c8e49d2 linkto(self);
       self.var_29b256b0 = spawn(0, self.origin, "script_origin");
       self.var_29b256b0.handle = self.var_29b256b0 playLoopSound(level.var_cb450873);
@@ -81,7 +81,7 @@ function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self function_bc95cd57(0);
 
   if(isDefined(self.var_2c8e49d2)) {
-    self.var_2c8e49d2 stoprenderoverridebundle(#"hash_75168376918f5ab7");
+    self.var_2c8e49d2 stoprenderoverridebundle(#"rob_wz_boundary");
     self.var_2c8e49d2 delete();
   }
 
@@ -96,7 +96,7 @@ on_localclient_connect(localclientnum) {
 
   if(isDefined(player)) {
     player.var_2cbc8a68 = spawn(localclientnum, (0, 0, -10000), "script_model");
-    player.var_2cbc8a68 playrenderoverridebundle(#"hash_75168376918f5ab7");
+    player.var_2cbc8a68 playrenderoverridebundle(#"rob_wz_boundary");
   }
 
   level thread function_382da026(localclientnum);
@@ -310,7 +310,7 @@ function_9e8e1f4f(localclientnum, tagfx = undefined) {
   }
 }
 
-function_63d6411e() {
+death_circle_clear() {
   self setcompassicon("");
 }
 
@@ -338,12 +338,12 @@ function_a453467f(localclientnum) {
     radius = 15000 * self.scale;
 
     if(isDefined(self.var_2c8e49d2)) {
-      if(!self.var_2c8e49d2 function_d2503806(#"hash_75168376918f5ab7")) {
-        self.var_2c8e49d2 playrenderoverridebundle(#"hash_75168376918f5ab7");
+      if(!self.var_2c8e49d2 function_d2503806(#"rob_wz_boundary")) {
+        self.var_2c8e49d2 playrenderoverridebundle(#"rob_wz_boundary");
       }
 
       modelscale = radius / 150000;
-      self.var_2c8e49d2 function_78233d29(#"hash_75168376918f5ab7", "", "Scale", modelscale);
+      self.var_2c8e49d2 function_78233d29(#"rob_wz_boundary", "", "Scale", modelscale);
 
       if(isDefined(self.var_29b256b0)) {
         self.var_29b256b0.origin = function_32f7227c(self, radius, localclientnum);
@@ -361,7 +361,7 @@ function_71f8d788() {
   self waittill(#"death");
 
   if(isDefined(self.var_2c8e49d2)) {
-    self.var_2c8e49d2 stoprenderoverridebundle(#"hash_75168376918f5ab7");
+    self.var_2c8e49d2 stoprenderoverridebundle(#"rob_wz_boundary");
     self.var_2c8e49d2 delete();
   }
 }

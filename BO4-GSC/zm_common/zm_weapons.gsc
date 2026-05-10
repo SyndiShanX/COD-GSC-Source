@@ -446,7 +446,7 @@ add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, weaponvoresp
   if(function_8b1a219a()) {
     struct.hint = #"hash_2791ecebb85142c4";
   } else {
-    struct.hint = #"hash_60606b68e93a29c8";
+    struct.hint = #"zombie/weaponcostonly_cfill";
   }
 
   struct.cost = cost;
@@ -1048,7 +1048,7 @@ get_weapon_hint_ammo() {
     return # "hash_2791ecebb85142c4";
   }
 
-  return # "hash_60606b68e93a29c8";
+  return # "zombie/weaponcostonly_cfill";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
@@ -1318,7 +1318,7 @@ ammo_give(weapon, b_purchased = 1) {
       self zm_utility::play_sound_on_ent("purchase");
     }
 
-    self function_7c5dd4bd(weapon);
+    self give_full_ammo(weapon);
     return 1;
   }
 
@@ -1713,7 +1713,7 @@ set_stowed_weapon(weapon) {
 }
 
 clear_stowed_weapon() {
-  self notify(#"hash_70957a1035bda74b");
+  self notify(#"change_stowed_weapon");
   self.weapon_stowed = undefined;
   self clearstowedweapon();
 }
@@ -1848,7 +1848,7 @@ function_f5a0899d(weapon, var_d921715f = 1) {
   return false;
 }
 
-function_7c5dd4bd(w_weapon) {
+give_full_ammo(w_weapon) {
   if(zm_loadout::function_2ff6913(w_weapon)) {
     return;
   }

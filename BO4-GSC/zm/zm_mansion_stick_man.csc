@@ -14,11 +14,11 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"falling_leaves", 8000, 1, "int", &function_664898b6, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_34321e7ca580e772", 8000, 1, "int", &function_f6c7ad1b, 0, 0);
   clientfield::register("scriptmover", "" + #"stick_fire", 8000, 2, "int", &function_959fcbff, 0, 0);
-  clientfield::register("scriptmover", "" + #"stone_rise", 8000, 1, "counter", &function_a7012457, 0, 0);
+  clientfield::register("scriptmover", "" + #"stone_rise", 8000, 1, "counter", &stone_rise_fx, 0, 0);
   clientfield::register("toplayer", "" + #"player_dragged", 8000, 1, "int", &function_a5f32c8f, 0, 0);
   clientfield::register("toplayer", "" + #"hash_4be98315796ad666", 8000, 1, "int", &function_f568352e, 0, 0);
   clientfield::register("allplayers", "" + #"sacrifice_player", 8000, 1, "int", &function_d61c8c59, 0, 0);
-  clientfield::register("allplayers", "" + #"hash_30aa04edc476253f", 8000, 1, "int", &function_3c4642b1, 0, 0);
+  clientfield::register("allplayers", "" + #"sacrifice_player_dragged", 8000, 1, "int", &function_3c4642b1, 0, 0);
   level._effect[#"stick_fire"] = #"hash_31d36dbca458b0dd";
   level._effect[#"falling_leaves"] = #"hash_6d3c039680511839";
   level._effect[#"stone_rise_fx"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
@@ -26,7 +26,7 @@ init_clientfields() {
   level._effect[#"stick_fire_smoke"] = #"hash_5586bb7a838e870a";
 }
 
-function_a7012457(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+stone_rise_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     playFX(localclientnum, level._effect[#"stone_rise_fx"], self.origin);
   }
@@ -224,7 +224,7 @@ function_3c4642b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self.var_928ceb18)) {
     stopfx(localclientnum, self.var_928ceb18);
     self.var_928ceb18 = undefined;
-    self notify(#"hash_ac788aea26a8b23");
+    self notify(#"stop_drag_fx");
   }
 
   if(function_65b9eb0f(localclientnum)) {
@@ -239,7 +239,7 @@ function_3c4642b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_443d6ae(localclientnum) {
-  self endon(#"death", #"hash_ac788aea26a8b23");
+  self endon(#"death", #"stop_drag_fx");
   wait 0.15;
   self playrenderoverridebundle(#"hash_429426f01ad84c8b");
 }

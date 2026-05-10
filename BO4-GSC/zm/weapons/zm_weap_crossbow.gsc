@@ -42,7 +42,7 @@ __init__() {
   clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int");
   clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int");
   clientfield::register("allplayers", "" + #"hash_6c3560ab45e186ec", 1, 1, "counter");
-  clientfield::register("allplayers", "" + #"hash_b38c687db71dae", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"crossbow_persistent_fx", 1, 1, "int");
   callback::on_ai_damage(&function_615d8c38);
   callback::on_connect(&function_39ffd9fc);
   callback::on_connect(&function_89ec3604);
@@ -139,15 +139,15 @@ function_8426ad52(weapon) {
 
 crossbow_weapon_change(params) {
   if(is_crossbow(params.weapon) && !is_crossbow_charged(params.weapon)) {
-    self clientfield::set("" + #"hash_b38c687db71dae", 1);
-    self thread function_7157628d();
+    self clientfield::set("" + #"crossbow_persistent_fx", 1);
+    self thread crossbow_persistent_fx();
     return;
   }
 
   self notify(#"hash_72be12bd6b55fdab");
 }
 
-function_7157628d() {
+crossbow_persistent_fx() {
   self notify("6e0a9e3b0455824");
   self endon("6e0a9e3b0455824");
   self endoncallback(&function_a4d47b95, #"death", #"disconnect", #"hash_72be12bd6b55fdab");
@@ -157,7 +157,7 @@ function_7157628d() {
     w_current = self getcurrentweapon();
 
     if(is_crossbow(w_current) && self ismeleeing()) {
-      self clientfield::set("" + #"hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"crossbow_persistent_fx", 0);
 
       while(self ismeleeing()) {
         waitframe(1);
@@ -166,15 +166,15 @@ function_7157628d() {
       w_current = self getcurrentweapon();
 
       if(is_crossbow(w_current)) {
-        self clientfield::set("" + #"hash_b38c687db71dae", 1);
+        self clientfield::set("" + #"crossbow_persistent_fx", 1);
       }
     } else if(is_crossbow(w_current) && function_8426ad52(w_current) && self.chargeshotlevel > 1 && !self.b_crossbow_charged && self attackButtonPressed()) {
       self clientfield::set("" + #"hash_faa2f4808c12f8d", 1);
-      self clientfield::set("" + #"hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"crossbow_persistent_fx", 0);
       self.b_crossbow_charged = 1;
     } else if(self.b_crossbow_charged && (self.chargeshotlevel <= 1 || !self attackButtonPressed())) {
       self clientfield::set("" + #"hash_faa2f4808c12f8d", 0);
-      self clientfield::set("" + #"hash_b38c687db71dae", 1);
+      self clientfield::set("" + #"crossbow_persistent_fx", 1);
       self.b_crossbow_charged = 0;
     }
 
@@ -183,7 +183,7 @@ function_7157628d() {
 }
 
 function_a4d47b95(str_notify) {
-  self clientfield::set("" + #"hash_b38c687db71dae", 0);
+  self clientfield::set("" + #"crossbow_persistent_fx", 0);
 }
 
 function_39ffd9fc() {

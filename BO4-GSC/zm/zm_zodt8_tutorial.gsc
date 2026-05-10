@@ -509,7 +509,7 @@ function_43b2606b() {
 
 function_f761f5e4() {
   self.dontspeak = 1;
-  zm_characters::set_character(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"));
+  zm_characters::set_character(array(#"prt_zm_bruno", #"hash_14e91ceb9a7b3eb6"));
   self.var_c27f1e90[0] = #"specialty_staminup";
   self.var_c27f1e90[1] = #"specialty_extraammo";
   self.var_c27f1e90[2] = #"specialty_cooldown";
@@ -602,7 +602,7 @@ function_513e90cf() {
     }
   }
 
-  zm_characters::set_character(array(#"hash_f531a8c2df891cc", #"hash_26072a3b34719d22"));
+  zm_characters::set_character(array(#"prt_zm_diego", #"hash_26072a3b34719d22"));
   music::setmusicstate("tutorial_beginner_start");
   self teleport_to("tutorial_beginner_start");
   self takeallweapons();
@@ -870,7 +870,7 @@ magicbox() {
   level flag::wait_till_clear("tutorial_vo_playing");
   function_68da8e33(#"hash_7a9ff9dcf14fb90b", 0.5);
   function_68da8e33(#"hash_212ed6f23e15aabf", 0.8);
-  function_68da8e33(#"hash_17a3d677a0f6162e", 1);
+  function_68da8e33(#"vox_beginner_end_narr_0", 1);
 }
 
 function_dc366ad7() {
@@ -896,7 +896,7 @@ function_88b4ae49() {
 }
 
 function_bfd3a7b1() {
-  zm_characters::set_character(array(#"hash_68255d9ce2a09382", #"hash_1a427f842f175b3c"));
+  zm_characters::set_character(array(#"prt_zm_scarlett", #"hash_1a427f842f175b3c"));
   self teleport_to("tutorial_intermediate_start");
   music::setmusicstate("tutorial_intermediate_start");
   var_1c8259f7 = getweapon("zitem_rocketshield_part_2");
@@ -911,8 +911,8 @@ function_bfd3a7b1() {
   self function_3fe47ed7("ar_accurate_t8");
   self giveweapon(level.weaponbasemelee);
   self function_43b2606b();
-  self zm_perks::function_9bdf581f(#"specialty_staminup", 0);
-  self zm_perks::function_9bdf581f(#"specialty_extraammo", 1);
+  self zm_perks::give_perk_vapor(#"specialty_staminup", 0);
+  self zm_perks::give_perk_vapor(#"specialty_extraammo", 1);
   self freeze_player_controls();
   function_edf32a3b(8);
   util::streamer_wait();
@@ -955,10 +955,10 @@ function_bfd3a7b1() {
   self function_3fe47ed7("zhield_dw");
   self giveweapon(level.weaponbasemelee);
   self function_43b2606b();
-  self zm_perks::function_9bdf581f(#"specialty_staminup", 0);
-  self zm_perks::function_9bdf581f(#"specialty_extraammo", 1);
-  self zm_perks::function_9bdf581f(#"specialty_cooldown", 2);
-  self zm_perks::function_9bdf581f(#"specialty_deadshot", 3);
+  self zm_perks::give_perk_vapor(#"specialty_staminup", 0);
+  self zm_perks::give_perk_vapor(#"specialty_extraammo", 1);
+  self zm_perks::give_perk_vapor(#"specialty_cooldown", 2);
+  self zm_perks::give_perk_vapor(#"specialty_deadshot", 3);
   wait 1;
   self zm_laststand::function_3d685b5f(0);
   self freeze_player_controls();
@@ -1085,7 +1085,7 @@ function_a52087a1() {
 }
 
 function_b375d3c3() {
-  level endon(#"end_game", #"hash_5cefed971a2f1a52");
+  level endon(#"end_game", #"tutorial_progressed");
   self endon(#"death");
   self waittill(#"player_downed");
   self endon(#"player_revived", #"zombified", #"disconnect");
@@ -1108,7 +1108,7 @@ bot() {
     waitframe(1);
   }
 
-  bot.var_29b433bd = int(zm_characters::get_character_index(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6")));
+  bot.var_29b433bd = int(zm_characters::get_character_index(array(#"prt_zm_bruno", #"hash_14e91ceb9a7b3eb6")));
   bot bot::allow_all(0);
   bot thread bot::fixed_spawn_override(var_7d37d68d.origin, var_7d37d68d.angles[1], bot bot::get_nearest_node(var_7d37d68d.origin));
   waitframe(1);
@@ -1783,7 +1783,7 @@ function_261ed63c(str_alias, n_time, str_endon) {
 function_384bed55(b_on = 1) {
   if(isDefined(b_on) && b_on) {
     self.objective_id = gameobjects::get_next_obj_id();
-    objective_add(self.objective_id, "active", self.origin, #"hash_410c56f34d7ed87");
+    objective_add(self.objective_id, "active", self.origin, #"objective_zm_tutorial");
     function_da7940a3(self.objective_id, 1);
     return;
   }

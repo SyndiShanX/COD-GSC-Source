@@ -667,7 +667,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
     }
 
     self zm_stats::function_c0c6ab19(#"weapons_packed");
-    self contracts::increment_zm_contract(#"hash_b6b948aac4bd4c");
+    self contracts::increment_zm_contract(#"contract_zm_pack_a_punch");
 
     if(!pap_machine.var_a86430cb) {
       if(isDefined(weaponidx)) {
@@ -709,7 +709,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
 
   if(isDefined(self)) {
     self.var_9b0383f5 = undefined;
-    self notify(#"hash_1ac4338b0d419091", {
+    self notify(#"pap_use_finished", {
       #var_7139c18c: s_result._notify
     });
   }
@@ -840,7 +840,7 @@ wait_for_player_to_take(player, weapon, packa_timer, var_a86430cb, var_9c076b6 =
           upgrade_weapon = player zm_weapons::weapon_give(upgrade_weapon, 0, 1, pap_machine.unitrigger_stub.var_3ded6a21, pap_machine.unitrigger_stub.var_f716c676);
         } else {
           upgrade_weapon = player zm_weapons::give_build_kit_weapon(upgrade_weapon, pap_machine.unitrigger_stub.var_3ded6a21, pap_machine.unitrigger_stub.var_f716c676);
-          player zm_weapons::function_7c5dd4bd(upgrade_weapon);
+          player zm_weapons::give_full_ammo(upgrade_weapon);
         }
 
         player notify(#"weapon_give", upgrade_weapon);

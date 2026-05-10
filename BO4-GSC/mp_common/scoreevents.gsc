@@ -235,7 +235,7 @@ scoreeventplayerkill(data, time) {
         if(isDefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
           processscoreevent(#"kill_enemy_who_killed_teammate", attacker, victim, weapon);
           attacker activecamo::function_896ac347(weapon, #"avenger", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
           victim recordkillmodifier("avenger");
         }
       }
@@ -433,7 +433,7 @@ scoreeventplayerkill(data, time) {
     if(challenges::ishighestscoringplayer(victim)) {
       processscoreevent(#"kill_enemy_who_has_high_score", attacker, victim, weapon);
       attacker activecamo::function_896ac347(weapon, #"kingslayer", 1);
-      attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+      attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
       attacker contracts::increment_contract(#"hash_a75db3f2b544591");
     }
 
@@ -692,7 +692,7 @@ scoreeventplayerkill(data, time) {
           processscoreevent(#"revenge_kill", attacker, victim, weapon);
           attacker stats::function_e24eec31(weapon, #"revenge_kill", 1);
           attacker activecamo::function_896ac347(weapon, #"revenge", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
           victim recordkillmodifier("revenge");
           attacker.lastkilledby = undefined;
         }
@@ -702,7 +702,7 @@ scoreeventplayerkill(data, time) {
         level.globalbuzzkills++;
         processscoreevent(#"stop_enemy_killstreak", attacker, victim, weapon);
         attacker activecamo::function_896ac347(weapon, #"buzzkill", 1);
-        attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+        attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
         victim recordkillmodifier("buzzkill");
       }
 
@@ -966,11 +966,11 @@ heavyweaponkill(attacker, victim, weapon) {
     case # "sig_minigun_alt":
     case # "sig_minigun":
     case # "sig_minigun_turret_28":
-    case # "hash_5a34aef4b8c72a24":
+    case # "sig_minigun_turret_24":
     case # "sig_minigun_turret_32":
-    case # "hash_5a3832f4b8ca4047":
-    case # "hash_5a492ef4b8d8acae":
-    case # "hash_5a4932f4b8d8b37a":
+    case # "sig_minigun_turret_36":
+    case # "sig_minigun_turret_40":
+    case # "sig_minigun_turret_44":
       if(attacker function_a867284b() && attacker playerads() == 1) {
         event = "mounted_kill";
       } else {
@@ -1569,7 +1569,7 @@ updateoneshotmultikills(victim, weapon, firsttimedamaged, meansofdeath) {
 
   if(self.oneshotmultikills > 1) {
     processscoreevent(#"kill_enemies_one_bullet", self, victim, weapon);
-    self contracts::increment_contract(#"hash_45b74ebf1ab2fd47");
+    self contracts::increment_contract(#"contract_mp_collateral");
   } else if(weapon.statindex != level.weapon_hero_annihilator.statindex) {
     processscoreevent(#"kill_enemy_one_bullet", self, victim, weapon);
 
@@ -1672,7 +1672,7 @@ ongameend(data) {
   if(isDefined(winner)) {
     if(level.teambased) {
       if(!match::get_flag("tie") && player.team == winner) {
-        player.pers[#"hash_6344af0b142ed0b6"] = 1;
+        player.pers[#"loot_tier_skip"] = 1;
         processscoreevent(#"won_match", player, undefined, undefined);
         return;
       }
@@ -1682,7 +1682,7 @@ ongameend(data) {
 
       for(index = 0; index < topthreeplayers; index++) {
         if(level.placement[#"all"][index] == player) {
-          player.pers[#"hash_6344af0b142ed0b6"] = 1;
+          player.pers[#"loot_tier_skip"] = 1;
           processscoreevent(#"won_match", player, undefined, undefined);
           return;
         }

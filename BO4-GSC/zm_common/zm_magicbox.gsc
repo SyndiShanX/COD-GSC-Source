@@ -299,7 +299,7 @@ boxstub_update_prompt(player) {
       if(function_8b1a219a()) {
         self.hint_string = #"hash_62a71d8ac2e7af43";
       } else {
-        self.hint_string = #"hash_6a4c5538a960189d";
+        self.hint_string = #"zombie/trade_weapon_fill";
       }
 
       if(!(isDefined(self.stub.trigger_target.var_1f9dff37) && self.stub.trigger_target.var_1f9dff37) && !(isDefined(self.stub.trigger_target.var_481aa649) && self.stub.trigger_target.var_481aa649) && isDefined(self.stub.trigger_target.var_c2f3a87c) && self.stub.trigger_target.var_c2f3a87c) {

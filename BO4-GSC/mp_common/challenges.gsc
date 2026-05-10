@@ -2325,7 +2325,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
         break;
       case # "recon_car":
       case # "inventory_recon_car":
-        self stats::function_dad108fa(#"hash_7daf653f5e86b75", 1);
+        self stats::function_dad108fa(#"rcxd_objective_ekia", 1);
       case # "ultimate_turret":
       case # "inventory_ultimate_turret":
       case # "tank_robot":
@@ -2347,7 +2347,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
     var_8a4cfbd = weapon.var_76ce72e8 && isDefined(scoreevents) && scoreevents.var_fcd2ff3a === 1;
 
     if(var_8a4cfbd) {
-      self stats::function_dad108fa(#"hash_d4a989a2da3fa72", 1);
+      self stats::function_dad108fa(#"objective_ekia_specialized_equipment", 1);
     } else if(weapon.issignatureweapon) {
       self stats::function_dad108fa(#"hash_6c3172682467122", 1);
     }
@@ -2376,7 +2376,7 @@ function_2f462ffd(victim, weapon, inflictor, objective) {
 
       if(gear == #"gear_medicalinjectiongun") {
         if(var_d72bd991.var_46a82df0 === 1) {
-          self stats::function_dad108fa(#"hash_47c5c8af0f105c71", 1);
+          self stats::function_dad108fa(#"objective_ekia_full_heal_medicalinjectiongun", 1);
         }
       } else if(gear == #"gear_equipmentcharge") {
         if(var_8a4cfbd) {
@@ -2500,11 +2500,11 @@ killedbaseoffender(objective, weapon, inflictor) {
         break;
       case # "swat_team":
       case # "inventory_swat_team":
-        self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
+        self stats::function_dad108fa(#"ground_assault_defender", 1);
         break;
       case # "ultimate_turret":
       case # "inventory_ultimate_turret":
-        self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
+        self stats::function_dad108fa(#"ground_assault_defender", 1);
 
         if(isDefined(inflictor)) {
           if(!isDefined(inflictor.var_d6489fb6)) {

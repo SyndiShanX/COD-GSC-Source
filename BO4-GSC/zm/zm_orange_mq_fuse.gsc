@@ -41,7 +41,7 @@ preload() {
   zm_sq_modules::function_d8383812(#"little_bird_2", 24000, "little_bird_2", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"little_bird_3", 24000, "little_bird_3", &is_soul_capture, &soul_captured, 1);
   clientfield::register("scriptmover", "elemental_shard_glow", 24000, 1, "int");
-  level flag::init(#"hash_4923165da58bf5cf");
+  level flag::init(#"fuse_step_complete");
 }
 
 main() {

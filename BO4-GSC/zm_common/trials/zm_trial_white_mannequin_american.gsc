@@ -41,7 +41,7 @@ on_begin() {
   }
 
   var_a2c75164 zm_white_private_mannequin::function_a51b6403(0);
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
   if(isDefined(level.mannequin_ally)) {
@@ -52,7 +52,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
   foreach(player in getplayers()) {
@@ -95,7 +95,7 @@ function_545d53bf() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     var_972e1f84 = 0;
     dist = distancesquared(self.origin, level.mannequin_ally.origin);

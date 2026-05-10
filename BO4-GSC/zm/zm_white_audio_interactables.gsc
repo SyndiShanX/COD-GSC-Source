@@ -20,7 +20,7 @@
 #namespace zm_white_audio_interactables;
 
 init() {
-  level flag::init(#"hash_398e4b1e72edb4ee");
+  level flag::init(#"lounge_revoked");
 
   if(zm_utility::is_ee_enabled()) {
     level thread function_f0e98e5f();
@@ -497,12 +497,12 @@ function_a0b040d4() {
   level.var_215e60c4 = struct::get(#"tedd_talk", "targetname");
   s_unitrigger = level.var_215e60c4 zm_unitrigger::create(&function_c9271718, 64, &function_ee32c750);
   s_unitrigger thread function_4bda6193();
-  level waittill(#"hash_398e4b1e72edb4ee");
+  level waittill(#"lounge_revoked");
   vol = getent("vol_soul_lounge", "targetname");
   exploder::exploder("fxexp_elec_lounge");
   vol thread function_cf1b4a16();
   wait 60;
-  level flag::clear(#"hash_398e4b1e72edb4ee");
+  level flag::clear(#"lounge_revoked");
   exploder::stop_exploder("fxexp_elec_lounge");
 }
 
@@ -568,7 +568,7 @@ function_93040a5d() {
       zm_hms_util::function_e308175e(alias, level.var_215e60c4.origin, player);
 
       if(level.var_5da5aff4) {
-        level flag::set(#"hash_398e4b1e72edb4ee");
+        level flag::set(#"lounge_revoked");
       }
     }
 
@@ -590,7 +590,7 @@ function_ce7e594b() {
 function_cf1b4a16() {
   shock_status_effect = getstatuseffect(#"hash_320c81d91eb89d73");
 
-  while(level flag::get(#"hash_398e4b1e72edb4ee")) {
+  while(level flag::get(#"lounge_revoked")) {
     foreach(player in getplayers()) {
       if(player istouching(self)) {
         player playrumbleonentity("damage_heavy");

@@ -44,7 +44,7 @@ __init__() {
   zm_traps::register_trap_basic_info("werewolfer", &function_670dda89, &zm_trap_electric::trap_audio);
   zm_traps::register_trap_damage("werewolfer", &function_436d9a24, &ai_damage);
   level flag::init(#"hash_2287cf5d6310237e");
-  level flag::init(#"hash_6f483dda6f8ab19d");
+  level flag::init(#"werewolf_trap_active");
 
   if(!isDefined(level.var_7aa02c24)) {
     level.var_7aa02c24 = new throttle();
@@ -74,7 +74,7 @@ function_670dda89() {
   level notify(#"traps_activated", {
     #var_be3f58a: self.script_string
   });
-  level flag::set(#"hash_6f483dda6f8ab19d");
+  level flag::set(#"werewolf_trap_active");
   level thread function_408fcb87();
   level exploder::exploder("fxexp_ele_trap_activate");
 
@@ -95,14 +95,14 @@ function_670dda89() {
   self waittilltimeout(self._trap_duration, #"trap_deactivate");
   self notify(#"trap_done");
   level exploder::stop_exploder("fxexp_ele_trap_activate");
-  level flag::clear(#"hash_6f483dda6f8ab19d");
+  level flag::clear(#"werewolf_trap_active");
   self thread function_38b44aab();
 }
 
 function_408fcb87() {
   t_trap = getent("werewolfer", "script_noteworthy");
 
-  while(level flag::get(#"hash_6f483dda6f8ab19d")) {
+  while(level flag::get(#"werewolf_trap_active")) {
     foreach(player in getplayers()) {
       if(isDefined(player) && player istouching(t_trap) && player.currentweapon === getweapon(#"zhield_dw")) {
         player riotshield::player_damage_shield(5);
@@ -128,7 +128,7 @@ function_38b44aab() {
 }
 
 function_436d9a24(t_damage) {
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
 
   if(!(isDefined(self.b_no_trap_damage) && self.b_no_trap_damage)) {
     self thread zm_traps::player_elec_damage(t_damage);

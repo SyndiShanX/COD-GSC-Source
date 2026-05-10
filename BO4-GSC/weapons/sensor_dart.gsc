@@ -195,7 +195,7 @@ function_f4970a20(watcher, player) {
   if(isDefined(level.var_2e552187)) {
     n_fuse_time = level.var_2e552187;
   } else {
-    n_fuse_time = int((isDefined(level.var_e88e144b.var_f196f1c0) ? level.var_e88e144b.var_f196f1c0 : 0) * 1000);
+    n_fuse_time = int((isDefined(level.var_e88e144b.sensorlifetime) ? level.var_e88e144b.sensorlifetime : 0) * 1000);
   }
 
   self thread weaponobjects::function_d9c08e94(n_fuse_time, &function_4db10465);
@@ -258,8 +258,8 @@ function_4b3bc61d(attacker, weapon, target) {
     playFX(level._equipment_explode_fx_lg, self.origin);
   }
 
-  if(isDefined(level.var_e88e144b.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    playFX(level.var_e88e144b.var_bb6c29b4, self.origin);
+  if(isDefined(level.var_e88e144b.shockrifledestructionfx) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFX(level.var_e88e144b.shockrifledestructionfx, self.origin);
   }
 
   if(isDefined(attacker) && self.owner util::isenemyplayer(attacker)) {

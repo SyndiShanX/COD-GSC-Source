@@ -36,7 +36,7 @@ on_begin() {
   level.var_8c018a0e = 1;
   level.var_4f7df1ac = 1;
   level flag::clear(#"hash_745ef45972843bd3");
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
   level thread nuke_loop();
 
@@ -169,7 +169,7 @@ on_end(round_reset) {
   level.var_8c018a0e = undefined;
   level.var_4f7df1ac = undefined;
   level flag::set(#"hash_745ef45972843bd3");
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
   foreach(player in getplayers()) {
@@ -177,7 +177,7 @@ on_end(round_reset) {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(!zm_loadout::function_2ff6913(s_event.weapon)) {
       self lockweapon(s_event.weapon, 1, 1);

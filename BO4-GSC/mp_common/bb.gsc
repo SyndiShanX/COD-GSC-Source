@@ -32,13 +32,13 @@ function_bf5cad4e(gamemodedata) {
   firstblood = (isDefined(level.var_8a3a9ca4.firstblood) ? level.var_8a3a9ca4.firstblood : 0) - (isDefined(level.var_8a3a9ca4.roundstart) ? level.var_8a3a9ca4.roundstart : 0);
   alliesscore = isDefined([[level._getteamscore]](#"allies")) ? [[level._getteamscore]](#"allies") : 0;
   axisscore = isDefined([[level._getteamscore]](#"axis")) ? [[level._getteamscore]](#"axis") : 0;
-  var_5e25b17b = abs(alliesscore - axisscore);
+  scorediscrepancy = abs(alliesscore - axisscore);
   gamemodedata = {};
   gamemodedata.gamemode = level.gametype;
   gamemodedata.wintype = isDefined(gamemodedata.wintype) ? gamemodedata.wintype : "NA";
   gamemodedata.matchtime = matchtime;
   gamemodedata.firstblood = firstblood;
-  gamemodedata.var_5e25b17b = var_5e25b17b;
+  gamemodedata.scorediscrepancy = scorediscrepancy;
   gamemodedata.timeremaining = isDefined(gamemodedata.remainingtime) ? gamemodedata.remainingtime : 0;
   gamemodedata.var_20de6a02 = isDefined(gamemodedata.var_20de6a02) ? gamemodedata.var_20de6a02 : 0;
   gamemodedata.var_be1de2ab = isDefined(gamemodedata.var_be1de2ab) ? gamemodedata.var_be1de2ab : 0;
@@ -152,7 +152,7 @@ function_6661621a() {
   mploadout.killstreak2 = self.killstreak.size < 1 ? 0 : hash(self.killstreak[1]);
   mploadout.killstreak3 = self.killstreak.size < 2 ? 0 : hash(self.killstreak[2]);
   talents = self function_4a9f1384(self.class_num);
-  mploadout.var_942f949 = talents.size < 0 ? 0 : talents[0];
+  mploadout.talent0 = talents.size < 0 ? 0 : talents[0];
   mploadout.talent1 = talents.size < 1 ? 0 : talents[1];
   mploadout.talent2 = talents.size < 2 ? 0 : talents[2];
   mploadout.talent3 = talents.size < 3 ? 0 : talents[3];
@@ -169,7 +169,7 @@ function_6661621a() {
     var_c0f05cbb = level.weaponnone;
   }
 
-  mploadout.var_9911e1f2 = var_c0f05cbb.name;
+  mploadout.specialistability = var_c0f05cbb.name;
   mploadout.specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
   function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
 }

@@ -107,7 +107,7 @@ function_815e3997() {
         trigger sethintstring(#"hash_675cfe2c548c034e");
       }
     } else {
-      trigger sethintstring(#"hash_c0173e448a7253f", 750);
+      trigger sethintstring(#"zm_escape/move_gondola", 750);
     }
 
     trigger setinvisibletoall();
@@ -892,7 +892,7 @@ gondola_cooldown() {
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-    trigger sethintstring(#"hash_72dc5724ddfb88b5");
+    trigger sethintstring(#"zm_escape/gondola_cooldown");
   }
 
   wait 10;

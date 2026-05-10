@@ -30,7 +30,7 @@ function_1c4b5097(item) {
 
   if(itementry.name === #"cu33_item") {
     if(self character_unlock::function_f0406288(#"outrider_unlock")) {
-      if(self stats::get_stat_global(#"hash_35020c395a89befb") >= 25) {
+      if(self stats::get_stat_global(#"kills_high_ground") >= 25) {
         self character_unlock::function_c8beca5e(#"outrider_unlock", #"hash_28966e441535b733", 1);
       }
     }
@@ -39,7 +39,7 @@ function_1c4b5097(item) {
 
 function_c915e2a7() {
   if(self character_unlock::function_f0406288(#"outrider_unlock")) {
-    if(self stats::get_stat_global(#"hash_35020c395a89befb") >= 25) {
+    if(self stats::get_stat_global(#"kills_high_ground") >= 25) {
       self character_unlock::function_c8beca5e(#"outrider_unlock", #"hash_28966e441535b733", 1);
     }
   }

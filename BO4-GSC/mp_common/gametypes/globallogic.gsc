@@ -1899,7 +1899,7 @@ function_e4335431() {
   foreach(stash in level.item_spawn_stashes) {
     state = function_ffdbe8c2(stash);
     data = {
-      #pos_x: stash.origin[0], #pos_y: stash.origin[1], #pos_z: stash.origin[2], #type: stash.var_15d44120, #used: state != 0, #state: state, #var_a7feba9c: isDefined(stash.var_80b1d504) ? stash.var_80b1d504 : 0, #var_fa0ba6bc: isDefined(stash.lootlocker) && stash.lootlocker
+      #pos_x: stash.origin[0], #pos_y: stash.origin[1], #pos_z: stash.origin[2], #type: stash.var_15d44120, #used: state != 0, #state: state, #keys_consumed: isDefined(stash.var_80b1d504) ? stash.var_80b1d504 : 0, #var_fa0ba6bc: isDefined(stash.lootlocker) && stash.lootlocker
     };
 
     if(!isDefined(var_726f6c6)) {
@@ -2275,7 +2275,7 @@ beacon_cp_biodomes_server_room_top_floor_door_rumble() {
   }
 
   if(util::function_8570168d()) {
-    level notify(#"hash_5562cfc90ce9dfe2");
+    level notify(#"play_interstitial");
   }
 
   function_bd1e54e7(outcome);
@@ -3176,10 +3176,10 @@ set_game_playing() {
   }
 
   data = {
-    #var_ea8aaaef: var_bc9cd862, #var_962b073b: var_2c5afb5e, #var_be2fca42: var_b3418d40, #var_f0956407: var_84dc46fb, #var_cac41566: var_47f5b811, #var_31942899: gettime(), #player_count: totalplayers
+    #var_ea8aaaef: var_bc9cd862, #var_962b073b: var_2c5afb5e, #var_be2fca42: var_b3418d40, #var_f0956407: var_84dc46fb, #var_cac41566: var_47f5b811, #prematch_duration_ms: gettime(), #player_count: totalplayers
   };
   function_92d1707f(#"hash_24f510499c464072", data);
-  match_record::set_stat(#"hash_5288d149bac65a79", gettime());
+  match_record::set_stat(#"prematch_duration_ms", gettime());
 }
 
 function_b4262bec() {
@@ -3492,7 +3492,7 @@ function_b9b7618() {
     }
 
     gamestate::set_state(game.state);
-    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"platform/press_to_spawn";
 
     if(level.teambased) {
       game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
@@ -3506,12 +3506,12 @@ function_b9b7618() {
     game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
     game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
     game.strings[#"waiting_to_spawn_ss"] = #"mp/waiting_to_spawn_ss";
-    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"you_will_spawn"] = #"mp/you_will_respawn";
     game.strings[#"match_starting"] = #"mp/match_starting";
     game.strings[#"change_class"] = #"mp/change_class_next_spawn";
-    game.strings[#"item_on_respawn"] = #"hash_220160808c99fe71";
+    game.strings[#"item_on_respawn"] = #"mp/item_on_respawn";
     game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
-    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"last_stand"] = #"mpui/last_stand";
     game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
     [[level.onprecachegametype]]();
     game.gamestarted = 1;

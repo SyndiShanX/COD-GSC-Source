@@ -36,7 +36,7 @@ class cct_progressbar_status: cluielem {
       return;
     }
 
-    if(#"hash_42f8a09c2e0a99e3" == state_name) {
+    if(#"connection_lost1" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 5);
       return;
     }
@@ -46,7 +46,7 @@ class cct_progressbar_status: cluielem {
       return;
     }
 
-    if(#"hash_7f00f68e42b5b8f6" == state_name) {
+    if(#"awaitingconnection1" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 7);
       return;
     }

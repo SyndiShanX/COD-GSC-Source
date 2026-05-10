@@ -45,14 +45,14 @@ on_begin() {
     player zm_trial_util::function_dc9ab223(1, 1);
   }
 
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_44200d07(1);
   level zm_trial::function_cd75b690(1);
 }
 
 on_end(round_reset) {
   callback::remove_on_spawned(&function_dc856fd8);
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_ai_spawned(&on_ai_spawned);
 
   foreach(player in getplayers()) {
@@ -113,7 +113,7 @@ function_16824dc3() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     self lockweapon(s_event.weapon, 0, 1);
 

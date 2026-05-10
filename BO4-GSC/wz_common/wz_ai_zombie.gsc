@@ -102,7 +102,7 @@ __main__() {
   if(isDefined(getgametypesetting(#"wzzombiesattackablesenabled")) ? getgametypesetting(#"wzzombiesattackablesenabled") : 0) {
     callback::add_callback(#"hash_70eeb7d813f149b2", &function_cf065988);
     callback::add_callback(#"hash_15858698313c5f32", &function_b0503d98);
-    callback::add_callback(#"on_turret_placed", &function_68cc8bce);
+    callback::add_callback(#"on_turret_placed", &on_turret_placed);
     callback::add_callback(#"on_turret_destroyed", &on_turret_destroyed);
     turretweapon = getweapon(#"gun_ultimate_turret");
 
@@ -120,7 +120,7 @@ __main__() {
   }
 }
 
-function_68cc8bce(params) {
+on_turret_placed(params) {
   owner = params.owner;
   turret = params.turret;
   owner endon(#"death");
@@ -158,7 +158,7 @@ function_cf065988(params) {
   cover = params.cover;
   owner endon(#"death");
   cover endon(#"death");
-  slots = wz_ai_utils::function_bdb2b85b(cover, owner.smartcover.lastvalid.origin, owner.smartcover.lastvalid.angles, owner.smartcover.lastvalid.width / 2 + 12, 6, level.smartcoversettings.bundle.var_b345c668);
+  slots = wz_ai_utils::function_bdb2b85b(cover, owner.smartcover.lastvalid.origin, owner.smartcover.lastvalid.angles, owner.smartcover.lastvalid.width / 2 + 12, 6, level.smartcoversettings.bundle.microwaveradius);
 
   if(!isDefined(slots) || slots.size <= 0) {
     return;
@@ -402,8 +402,8 @@ initzombiebehaviors() {
   behaviortreenetworkutility::registerbehaviortreeaction(#"hash_5bd00a38dffd47e", &function_7c8e35e8, &function_fee7d867, &function_3f71b9c2);
   assert(isscriptfunctionptr(&zombieknockdownactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieknockdownactionstart", &zombieknockdownactionstart);
-  assert(isscriptfunctionptr(&function_c8939973));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a21325931f5ca2f", &function_c8939973);
+  assert(isscriptfunctionptr(&zombieknockdownactionterminate));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a21325931f5ca2f", &zombieknockdownactionterminate);
   assert(isscriptfunctionptr(&zombiegetupactionterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiegetupactionterminate", &zombiegetupactionterminate);
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
@@ -615,7 +615,7 @@ function_e91d8371(entity) {
 }
 
 zombieshouldmelee(entity) {
-  if(isDefined(entity.var_8a96267d) && entity.var_8a96267d || isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3) {
+  if(isDefined(entity.var_8a96267d) && entity.var_8a96267d || isDefined(entity.shoulddigup) && entity.shoulddigup) {
     return false;
   }
 
@@ -740,7 +740,7 @@ function_e8f3596d(entity) {
 }
 
 function_cc184b8b(entity) {
-  return isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3;
+  return isDefined(entity.shoulddigup) && entity.shoulddigup;
 }
 
 function_562c0e1d(entity) {
@@ -896,7 +896,7 @@ function_6a3bcddc(entity) {
 function_55b7ea22(entity) {
   entity solid();
   entity clientfield::set("zombie_riser_fx", 1);
-  entity.var_8ba6ede3 = undefined;
+  entity.shoulddigup = undefined;
 }
 
 function_98b102d8(entity) {
@@ -1012,7 +1012,7 @@ showzombie(entity) {
 }
 
 function_78106a79(entity, asmstatename) {
-  if(entity ai::is_stunned() || isDefined(entity.var_85c3882d) && entity.var_85c3882d) {
+  if(entity ai::is_stunned() || isDefined(entity.inconcertinawire) && entity.inconcertinawire) {
     return 5;
   }
 
@@ -1121,7 +1121,7 @@ function_e261b81d() {
         self function_36151fe3();
         break;
       case 5:
-        self function_101763c9();
+        self ai_cleanup_state();
         break;
       case 6:
         self function_936718a8();
@@ -2167,7 +2167,7 @@ function_b793bca2() {
   self.var_ef59b90 = 1;
 }
 
-function_101763c9() {
+ai_cleanup_state() {
   self endon(#"death");
 
   if(isDefined(self.attackable)) {
@@ -2227,7 +2227,7 @@ function_101763c9() {
       wait 0.2;
     }
 
-    self.var_8ba6ede3 = 1;
+    self.shoulddigup = 1;
     self waittill(#"not_underground");
     self.var_ef59b90 = 1;
   } else {
@@ -2443,7 +2443,7 @@ function_b9b03294(entity) {
 }
 
 function_2a7b4aab(entity) {
-  return entity.var_85c3882d === 1;
+  return entity.inconcertinawire === 1;
 }
 
 zombieshouldknockdown(entity) {
@@ -2458,7 +2458,7 @@ zombieknockdownactionstart(behaviortreeentity) {
   behaviortreeentity val::set(#"zombie_knockdown", "blockingpain", 1);
 }
 
-function_c8939973(behaviortreeentity) {
+zombieknockdownactionterminate(behaviortreeentity) {
   if(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
     behaviortreeentity.knockdown = 0;
     behaviortreeentity collidewithactors(1);

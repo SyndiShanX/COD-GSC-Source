@@ -339,7 +339,7 @@ get_location_string(e_player) {
       str_display = #"hash_7a784e915fb4da82";
       break;
     case # "zone_pap_room":
-    case # "hash_3c2efff9d599c329":
+    case # "zone_pap_room_balcony_body_pit":
     case # "zone_pap_room_balcony_flooded_crypt":
       str_display = #"hash_54ab01103f8534bd";
       break;

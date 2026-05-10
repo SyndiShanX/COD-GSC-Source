@@ -94,7 +94,7 @@ tryusepredatormissile(lifeid) {
   waterdepth = self depthofplayerinwater();
 
   if(!self isonground() || self util::isusingremote() || waterdepth > 2) {
-    self iprintlnbold(#"hash_3f750164757cd400");
+    self iprintlnbold(#"killstreak/remote_missile_not_usable");
     return 0;
   }
 
@@ -661,7 +661,7 @@ missile_sound_play(player) {
   self.snd_first linkto(self);
   self.snd_first setinvisibletoall();
   self.snd_first setvisibletoplayer(player);
-  player playlocalsound(#"hash_520c69ce78db3657");
+  player playlocalsound(#"wpn_remote_missile_launch_plr");
   self.snd_first playLoopSound(#"wpn_remote_missile_loop_plr", 0.5);
   self thread stopondeath(self.snd_first);
   self.snd_third = spawn("script_model", self.origin);

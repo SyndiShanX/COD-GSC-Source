@@ -34,7 +34,7 @@
 #namespace mansion_ley_line;
 
 init() {
-  clientfield::register("allplayers", "" + #"hash_5370f4bc9fc25d13", 8000, 1, "int");
+  clientfield::register("allplayers", "" + #"shield_elec_fx", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"ley_lines", 8000, 2, "int");
   clientfield::register("scriptmover", "" + #"power_beam", 8000, 2, "int");
   clientfield::register("scriptmover", "" + #"red_ray", 8000, 2, "int");
@@ -43,8 +43,8 @@ init() {
   clientfield::register("scriptmover", "" + #"stone_glow", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"stone_despawn", 8000, 1, "counter");
   clientfield::register("scriptmover", "" + #"stone_soul", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_34c5ab29531f15f0", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_546e7612359187c3", 8000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"atlas_crystal_fx", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"coil_hit_fx", 8000, 1, "counter");
   clientfield::register("toplayer", "" + #"mansion_mq_rumble", 8000, 1, "counter");
   clientfield::register("world", "" + #"skybox_stream", 8000, 1, "int");
   register_steps();
@@ -131,10 +131,10 @@ register_steps() {
 }
 
 init_flags() {
-  level flag::init(#"hash_546b8f78e6510d81");
-  level flag::init(#"hash_546b8c78e6510868");
-  level flag::init(#"hash_546b8d78e6510a1b");
-  level flag::init(#"hash_546b9278e651129a");
+  level flag::init(#"symbol_hit_player_1");
+  level flag::init(#"symbol_hit_player_2");
+  level flag::init(#"symbol_hit_player_3");
+  level flag::init(#"symbol_hit_player_4");
   level flag::init(#"ley_start");
   level flag::init(#"rings_done");
   level flag::init(#"ring_rotate");
@@ -144,7 +144,7 @@ init_flags() {
   level flag::init(#"house_defend");
   level flag::init(#"house_defend_done");
   level flag::init(#"greenhouse_open");
-  level flag::init(#"hash_702dbaf6695a5607");
+  level flag::init(#"telescope_in_place");
 }
 
 init_step_1(var_a276c861) {
@@ -169,7 +169,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
   level flag::set(#"gazed_library");
   level flag::set(#"ley_start");
 
-  foreach(str_flag in array(#"hash_546b8f78e6510d81", #"hash_546b8c78e6510868", #"hash_546b8d78e6510a1b", #"hash_546b9278e651129a")) {
+  foreach(str_flag in array(#"symbol_hit_player_1", #"symbol_hit_player_2", #"symbol_hit_player_3", #"symbol_hit_player_4")) {
     level flag::set(str_flag);
   }
 
@@ -178,7 +178,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
 }
 
 init_step_2(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b006e4a8b2139a2", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_2", 1);
 
   if(!var_a276c861) {
     level flag::wait_till(#"rings_done");
@@ -190,7 +190,7 @@ cleanup_step_2(var_5ea5c94d, ended_early) {
 }
 
 init_step_3(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b006f4a8b213b55", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_3", 1);
   exploder::exploder("fxexp_telescope_charge");
   playsoundatposition(#"hash_75404411ef08e098", (4029, -146, -138));
   level thread door_opener();
@@ -234,7 +234,7 @@ cleanup_step_3(var_5ea5c94d, ended_early) {
 }
 
 init_step_4(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b00684a8b212f70", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_4", 1);
   level thread function_c888f1f4();
   level thread function_1be5e603();
 
@@ -295,7 +295,7 @@ function_a8de7aeb(player) {}
 
 crescent_activate() {
   level flag::wait_till(#"gazed_library");
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b006d4a8b2137ef", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_1", 1);
   scene::add_scene_func(#"p8_fxanim_zm_man_beam_device_bundle", &function_d961aafc, "shot 1");
   level scene::play(#"p8_fxanim_zm_man_beam_device_bundle", "shot 1");
   scene::remove_scene_func(#"p8_fxanim_zm_man_beam_device_bundle", &function_d961aafc, "shot 1");
@@ -321,7 +321,7 @@ function_70d8a7cb() {
       for(i = 0; i < a_players.size; i++) {
         if(a_players[i] === s_result.attacker) {
           self playSound(#"hash_7651f08f562fc850");
-          self clientfield::increment("" + #"hash_546e7612359187c3", 1);
+          self clientfield::increment("" + #"coil_hit_fx", 1);
           level flag::set("symbol_hit_player_" + i + 1);
         }
       }
@@ -334,7 +334,7 @@ function_fde77b55(mdl_coil) {
   level endon(#"ley_start", #"ley_reset");
 
   while(true) {
-    level flag::wait_till_any(array(#"hash_546b8f78e6510d81", #"hash_546b8c78e6510868", #"hash_546b8d78e6510a1b", #"hash_546b9278e651129a"));
+    level flag::wait_till_any(array(#"symbol_hit_player_1", #"symbol_hit_player_2", #"symbol_hit_player_3", #"symbol_hit_player_4"));
     a_str_flags = [];
 
     for(i = 1; i < getplayers().size + 1; i++) {
@@ -360,7 +360,7 @@ function_fde77b55(mdl_coil) {
 
 function_d3128b5f() {
   level flag::wait_till(#"ley_start");
-  level.mdl_crystal clientfield::set("" + #"hash_34c5ab29531f15f0", 0);
+  level.mdl_crystal clientfield::set("" + #"atlas_crystal_fx", 0);
   var_95807f2d = [];
   a_s_rings = struct::get_array(#"control_ring", "script_string");
 
@@ -575,7 +575,7 @@ function_71d1b235() {
   s_atlas thread scene::play("melt");
   e_head = getent("head_collision", "targetname");
   e_head movey(32, 3);
-  level.mdl_crystal clientfield::set("" + #"hash_34c5ab29531f15f0", 1);
+  level.mdl_crystal clientfield::set("" + #"atlas_crystal_fx", 1);
   level waittill(#"rings_delete");
   level.mdl_rings showpart("link_ring1_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
   level.mdl_rings showpart("link_ring2_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
@@ -614,7 +614,7 @@ function_ea49787e(a_ents) {
   level.mdl_atlas = a_ents[#"atlas"];
   level.mdl_rings = a_ents[#"atlas_rings"];
   util::wait_network_frame(5);
-  level.mdl_crystal clientfield::set("" + #"hash_34c5ab29531f15f0", 1);
+  level.mdl_crystal clientfield::set("" + #"atlas_crystal_fx", 1);
   level.mdl_rings hidepart("link_ring1_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
   level.mdl_rings hidepart("link_ring2_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
   level.mdl_rings hidepart("link_ring3_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
@@ -664,7 +664,7 @@ function_250cf19b() {
   level endon(#"greenhouse_open", #"wheel_locked");
   level scene::stop(#"p8_fxanim_zm_man_dome_crank_bundle");
   level thread scene::play(#"p8_fxanim_zm_man_dome_crank_bundle", "reset");
-  level flag::wait_till(#"hash_702dbaf6695a5607");
+  level flag::wait_till(#"telescope_in_place");
   waitframe(1);
   level scene::stop(#"p8_fxanim_zm_man_dome_crank_bundle");
   level thread scene::play(#"p8_fxanim_zm_man_dome_crank_bundle", "part_open");
@@ -754,7 +754,7 @@ function_250cf19b() {
 
 function_5164d716() {
   level endon(#"wheel_locked", #"greenhouse_open");
-  level flag::wait_till(#"hash_702dbaf6695a5607");
+  level flag::wait_till(#"telescope_in_place");
   var_e0cc1e20 = getent("trigger_obs_wheel_lock", "targetname");
   var_e0cc1e20.health = 99999;
 
@@ -1102,7 +1102,7 @@ function_d8162064() {
   mdl_door_left linkto(level.mdl_telescope, "p8_zm_man_greenhouse_ext_dome_01_link_jnt");
   array::run_all(util::get_active_players(), &clientfield::increment_to_player, "" + #"mansion_mq_rumble", 1);
   level scene::play(#"p8_fxanim_zm_man_telescope_bundle");
-  level flag::set(#"hash_702dbaf6695a5607");
+  level flag::set(#"telescope_in_place");
 }
 
 function_a99a5c4e(a_s_valid_respawn_points) {
@@ -1192,9 +1192,9 @@ function_b87ae607(n_stage) {
   e_trap = getent("werewolfer_trap_touch", "targetname");
 
   while(true) {
-    level flag::wait_till(#"hash_6f483dda6f8ab19d");
+    level flag::wait_till(#"werewolf_trap_active");
 
-    while(level flag::get(#"hash_6f483dda6f8ab19d")) {
+    while(level flag::get(#"werewolf_trap_active")) {
       foreach(player in util::get_active_players()) {
         if(isDefined(player.var_c09a076a) && player.var_c09a076a && player istouching(e_trap) && !(isDefined(player.var_c79d709f) && player.var_c79d709f) && !(isDefined(player.var_4ceff143) && player.var_4ceff143)) {
           player.var_4ceff143 = 1;
@@ -1212,9 +1212,9 @@ function_b87ae607(n_stage) {
 function_371e56be(e_trap) {
   self notify(#"hash_1e76041e9fa5f479");
   self endon(#"disconnect", #"hash_1e76041e9fa5f479", #"death");
-  self clientfield::set("" + #"hash_5370f4bc9fc25d13", 1);
+  self clientfield::set("" + #"shield_elec_fx", 1);
 
-  while(level flag::get(#"hash_6f483dda6f8ab19d") && self istouching(e_trap) && mansion_util::is_shield(self getcurrentweapon())) {
+  while(level flag::get(#"werewolf_trap_active") && self istouching(e_trap) && mansion_util::is_shield(self getcurrentweapon())) {
     waitframe(1);
   }
 
@@ -1222,7 +1222,7 @@ function_371e56be(e_trap) {
   self thread function_53577dc7();
 
   if(!mansion_util::is_shield(self getcurrentweapon())) {
-    self notify(#"hash_459246e5bfcc3713");
+    self notify(#"shield_swapped");
     self notify(#"hash_1e76041e9fa5f479");
   }
 
@@ -1230,21 +1230,21 @@ function_371e56be(e_trap) {
     s_result = self waittill(#"shield_timeout", #"weapon_change");
 
     if(s_result._notify !== "weapon_change" || !mansion_util::is_shield(s_result.weapon)) {
-      self notify(#"hash_459246e5bfcc3713");
+      self notify(#"shield_swapped");
     }
   }
 }
 
 function_53577dc7() {
   self endon(#"disconnect");
-  self waittilltimeout(9.2, #"shield_timeout", #"hash_459246e5bfcc3713", #"destroy_riotshield");
+  self waittilltimeout(9.2, #"shield_timeout", #"shield_swapped", #"destroy_riotshield");
   self.var_4ceff143 = 0;
-  self clientfield::set("" + #"hash_5370f4bc9fc25d13", 0);
+  self clientfield::set("" + #"shield_elec_fx", 0);
   self notify(#"shield_timeout");
 }
 
 tube_shoot() {
-  level flag::wait_till(#"hash_702dbaf6695a5607");
+  level flag::wait_till(#"telescope_in_place");
   level.mdl_telescope clientfield::set("" + #"power_beam", 2);
   level.mdl_telescope playSound(#"hash_7602966ff564e065");
   level.mdl_telescope playLoopSound(#"hash_69b6d00136d35f2b");

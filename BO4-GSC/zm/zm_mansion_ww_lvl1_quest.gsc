@@ -113,7 +113,7 @@ function_7706457d(e_player) {
   if(!level flag::get(#"hash_4c1f880bcc6be2d0")) {
     foreach(e_lock in level.var_79f3b34b) {
       if(zombie_utility::is_player_valid(e_player) && e_player function_8b4cc6ae(e_lock.origin, 10, 1, e_lock)) {
-        str_prompt = zm_utility::function_d6046228(#"hash_170f427c6f774cc6", #"hash_182213d7353c3062");
+        str_prompt = zm_utility::function_d6046228(#"zm_mansion/rotate_lock", #"hash_182213d7353c3062");
         self sethintstringforplayer(e_player, str_prompt);
         return true;
       }

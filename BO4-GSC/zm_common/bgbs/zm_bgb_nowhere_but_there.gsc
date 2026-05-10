@@ -28,9 +28,9 @@ __init__() {
     return;
   }
 
-  level._effect[#"hash_8393b410b8f909d"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
-  level._effect[#"hash_8b86393f63bb1ef"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
-  level._effect[#"hash_1eae5969d11a8b16"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
+  level._effect[#"teleport_splash_nowhere"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
+  level._effect[#"teleport_aoe_nowhere"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
+  level._effect[#"teleport_aoe_kill_nowhere"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
   bgb::register(#"zm_bgb_nowhere_but_there", "activated", 1, undefined, undefined, &validation, &activation);
   bgb::register_invulnerable_during_activation(#"zm_bgb_nowhere_but_there", 1);
   bgb::function_8a5d8cfb(#"zm_bgb_nowhere_but_there", 1);
@@ -87,17 +87,17 @@ activation() {
   }
 
   self show();
-  playFX(level._effect[#"hash_8393b410b8f909d"], self.origin);
-  playFX(level._effect[#"hash_8b86393f63bb1ef"], self.origin);
+  playFX(level._effect[#"teleport_splash_nowhere"], self.origin);
+  playFX(level._effect[#"teleport_aoe_nowhere"], self.origin);
   a_ai = getaiarray();
   a_aoe_ai = arraysortclosest(a_ai, self.origin, a_ai.size, 0, 200);
 
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
       if(ai.archetype === #"zombie") {
-        playFX(level._effect[#"hash_1eae5969d11a8b16"], ai gettagorigin("j_spineupper"));
+        playFX(level._effect[#"teleport_aoe_kill_nowhere"], ai gettagorigin("j_spineupper"));
       } else {
-        playFX(level._effect[#"hash_1eae5969d11a8b16"], ai.origin);
+        playFX(level._effect[#"teleport_aoe_kill_nowhere"], ai.origin);
       }
 
       ai.marked_for_recycle = 1;

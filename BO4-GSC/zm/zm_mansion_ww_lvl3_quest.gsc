@@ -54,7 +54,7 @@ __init__() {
     clientfield::register("scriptmover", "" + #"hash_7ef82b98770c5c0d", 8000, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_c0e8acbde8dbc06", 8000, 1, "int");
     clientfield::register("vehicle", "" + #"hash_6ded20ebb8e016ba", 8000, 1, "int");
-    clientfield::register("scriptmover", "" + #"hash_48c6d058e9587c19", 8000, 1, "int");
+    clientfield::register("scriptmover", "" + #"bile_idle_fx", 8000, 1, "int");
     clientfield::register("world", "" + #"hash_19f5ea0e9b3d47f3", 8000, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_486960f190957256", 8000, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_12e4702a9346b3d9", 8000, 1, "int");
@@ -638,7 +638,7 @@ function_cfffc455() {
   mdl_bile.angles = function_c1fa62a2(v_angles, v_normal);
 
   if(isDefined(mdl_bile)) {
-    mdl_bile clientfield::set("" + #"hash_48c6d058e9587c19", 1);
+    mdl_bile clientfield::set("" + #"bile_idle_fx", 1);
     var_47323b73 = mdl_bile zm_unitrigger::create(&function_21db5b62, 96);
     mdl_bile thread function_dca0343();
     s_waitresult = mdl_bile waittilltimeout(90, #"bile_delete");
@@ -690,7 +690,7 @@ function_c60245c1(e_player) {
 
 function_366a1f08() {
   self endon(#"death");
-  self clientfield::set("" + #"hash_48c6d058e9587c19", 0);
+  self clientfield::set("" + #"bile_idle_fx", 0);
   wait 0.1;
   self ghost();
   self notify(#"bile_delete");
@@ -1193,7 +1193,7 @@ function_7aa50bb7(e_player) {
   if(e_player zm_weapons::has_weapon_or_upgrade(level.var_7b9ca97a)) {
     self sethintstring("");
   } else if(e_player zm_weapons::has_weapon_or_upgrade(level.var_6fe89212)) {
-    self sethintstring(self.stub.blueprint.var_4dbc4aee);
+    self sethintstring(self.stub.blueprint.craftingprompt);
   } else {
     self sethintstring(#"hash_652c97821a6cf09d");
   }

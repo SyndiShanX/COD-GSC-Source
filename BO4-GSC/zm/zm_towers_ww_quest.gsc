@@ -49,19 +49,19 @@ init() {
   level flag::init(#"hash_70b6094c8cd39890");
   zm_sq::register(#"ww_quest", #"destroy_wall", #"destroy_wall", &destroy_wall_setup, &destroy_wall_cleanup);
   zm_sq::register(#"ww_quest", #"knock_brazier", #"knock_brazier", &knock_brazier_setup, &knock_brazier_cleanup);
-  zm_sq::register(#"ww_quest", #"hash_32b57ffc37ccf79a", #"hash_32b57ffc37ccf79a", &function_26956e1e, &function_4f056f0c);
+  zm_sq::register(#"ww_quest", #"grab_rough_statue", #"grab_rough_statue", &function_26956e1e, &function_4f056f0c);
   zm_sq::register(#"ww_quest", #"craft_acid_trap", #"craft_acid_trap", &function_708cd4d, &function_c4e5bf05);
-  zm_sq::register(#"ww_quest", #"hash_27967f916a97a057", #"hash_27967f916a97a057", &function_2eea86a9, &function_57b4770f);
-  zm_sq::register(#"ww_quest", #"hash_34d18772151ea4fa", #"hash_34d18772151ea4fa", &function_a1e2245, &function_e02f2459);
-  zm_sq::register(#"ww_quest", #"hash_2e126c422fbf5654", #"hash_2e126c422fbf5654", &function_9ef8d102, &function_1c380f29);
-  zm_sq::register(#"ww_quest", #"hash_396293edac63aa6f", #"hash_396293edac63aa6f", &function_dd053937, &function_4509873);
-  zm_sq::register(#"ww_quest", #"hash_776efec5f9b03a68", #"hash_776efec5f9b03a68", &function_a616131a, &function_605806f);
-  zm_sq::register(#"ww_quest", #"hash_7e929133c03a391b", #"hash_7e929133c03a391b", &function_ac4e38bc, &function_8c32234c);
+  zm_sq::register(#"ww_quest", #"place_rough_statue", #"place_rough_statue", &function_2eea86a9, &function_57b4770f);
+  zm_sq::register(#"ww_quest", #"melt_rough_statue", #"melt_rough_statue", &function_a1e2245, &function_e02f2459);
+  zm_sq::register(#"ww_quest", #"grab_serket_spile", #"grab_serket_spile", &function_9ef8d102, &function_1c380f29);
+  zm_sq::register(#"ww_quest", #"earn_impervious_jar", #"earn_impervious_jar", &function_dd053937, &function_4509873);
+  zm_sq::register(#"ww_quest", #"take_impervious_jar", #"take_impervious_jar", &function_a616131a, &function_605806f);
+  zm_sq::register(#"ww_quest", #"plant_serket_spile", #"plant_serket_spile", &function_ac4e38bc, &function_8c32234c);
   zm_sq::register(#"ww_quest", #"place_impervious_jar", #"place_impervious_jar", &function_ec26e009, &function_4877f171);
-  zm_sq::register(#"ww_quest", #"hash_530b93342f7f39ae", #"hash_530b93342f7f39ae", &function_bbdde10e, &function_40f77b4a);
+  zm_sq::register(#"ww_quest", #"fill_impervious_jar", #"fill_impervious_jar", &function_bbdde10e, &function_40f77b4a);
   zm_sq::register(#"ww_quest", #"hash_38a9bcd55c0565ca", #"hash_38a9bcd55c0565ca", &function_ab13e06, &function_868dcb6d);
   zm_sq::register(#"ww_quest", #"poison_magic_box", #"poison_magic_box", &function_869d271a, &function_79875787);
-  zm_sq::register(#"ww_quest", #"hash_4e767f415b51d0a1", #"hash_4e767f415b51d0a1", &function_3cadd22, &function_f04288b4);
+  zm_sq::register(#"ww_quest", #"take_wonder_weapon", #"take_wonder_weapon", &function_3cadd22, &function_f04288b4);
   zm_sq::start(#"ww_quest", 1);
   level scene::add_scene_func("p8_fxanim_zm_towers_ww_quest_bowl_bundle", &function_73808ab9, "init");
   var_85034658 = array("danu", "ra", "odin", "zeus");
@@ -123,7 +123,7 @@ knock_brazier_cleanup(b_skipped, var_19e802fa) {
   level.var_1285519 clientfield::set("" + #"ww_quest_brazier_fire", 0);
   level.var_1285519 clientfield::set("" + #"hash_3b746cf6eec416b2", 1);
   level scene::play("p8_fxanim_zm_towers_ww_quest_bowl_bundle");
-  level clientfield::set("" + #"hash_584e8f7433246444", 1);
+  level clientfield::set("" + #"ww_quest_fire_trail", 1);
   level flag::set(#"hash_17f15c9242ddea6f");
   wait 1;
 
@@ -221,9 +221,9 @@ function_708cd4d(b_skipped) {
 function_c4e5bf05(b_skipped, var_19e802fa) {
   if((b_skipped || var_19e802fa) && !isDefined(level.var_708e0925)) {
     level.var_708e0925 = "ra";
-    var_c65eed8e = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");
+    whippeter = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");
 
-    foreach(part in var_c65eed8e) {
+    foreach(part in whippeter) {
       if(part trigger::is_trigger_of_type("trigger_use_new")) {
         part triggerenable(1);
         continue;
@@ -545,13 +545,13 @@ function_a616131a(b_skipped) {
   }
 
   mdl_jar notsolid();
-  mdl_jar clientfield::set("" + #"hash_2c6f04d08665dbda", 1);
+  mdl_jar clientfield::set("" + #"impervious_jar_petals", 1);
   n_time = mdl_jar zm_utility::fake_physicslaunch(var_8fa68ef.origin, 1000);
   wait n_time;
   mdl_jar.origin = var_8fa68ef.origin;
   mdl_jar.angles = var_8fa68ef.angles;
-  mdl_jar clientfield::set("" + #"hash_2a332df32456c86f", 1);
-  mdl_jar clientfield::set("" + #"hash_2c6f04d08665dbda", 0);
+  mdl_jar clientfield::set("" + #"impervious_jar_landed", 1);
+  mdl_jar clientfield::set("" + #"impervious_jar_petals", 0);
   s_loc = struct::get(var_8fa68ef.target);
   s_loc.var_6d6bbd67 = mdl_jar;
   e_player = s_loc zm_unitrigger::function_fac87205(&function_5f2a9b69);
@@ -563,7 +563,7 @@ function_a616131a(b_skipped) {
 
 function_605806f(b_skipped, var_19e802fa) {
   level flag::set(#"hash_45259bb6368fc0d3");
-  level zm_ui_inventory::function_7df6bb60(#"hash_d3e328bb2670edf", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_ww_quest_impervious_jar", 1);
 }
 
 function_5f2a9b69(e_player) {
@@ -632,7 +632,7 @@ function_4877f171(b_skipped, var_19e802fa) {
   mdl_jar_filled = util::spawn_model(#"p8_zm_gla_jar_gold_01_full", v_origin - (0, 0, 2048), v_angles);
   level.var_6d6bbd67 = mdl_jar;
   level.var_1028e128 = mdl_jar_filled;
-  level zm_ui_inventory::function_7df6bb60(#"hash_d3e328bb2670edf", 0);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_ww_quest_impervious_jar", 0);
 }
 
 function_f6781b0f(e_player) {
@@ -681,7 +681,7 @@ function_ab13e06(b_skipped) {
 function_868dcb6d(b_skipped, var_19e802fa) {
   level flag::set(#"hash_1c66e5c351c08de1");
   level.var_1028e128 delete();
-  level zm_ui_inventory::function_7df6bb60(#"hash_d3e328bb2670edf", 2);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_ww_quest_impervious_jar", 2);
 }
 
 function_869d271a(b_skipped) {
@@ -735,7 +735,7 @@ function_79875787(b_skipped, var_19e802fa) {
   callback::on_spawned(&function_e7e07200);
   array::thread_all(level.players, &function_e7e07200);
   level.customrandomweaponweights = &function_73ed3038;
-  level zm_ui_inventory::function_7df6bb60(#"hash_d3e328bb2670edf", 0);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_ww_quest_impervious_jar", 0);
 
   if(b_skipped) {
     iprintlnbold("<dev string:x87>");

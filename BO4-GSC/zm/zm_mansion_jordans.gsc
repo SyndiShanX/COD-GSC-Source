@@ -429,7 +429,7 @@ function_b094be90(var_5cae7dc6 = 0) {
     level notify(#"hash_13411a5231901c2e", {
       #var_8ee6e347: self.script_int
     });
-    self notify(#"hash_4b152ceaa6708e09");
+    self notify(#"candle_relit");
   }
 
   if(var_5cae7dc6) {
@@ -990,9 +990,9 @@ function_64b50b8c(var_c2415b72) {
 }
 
 function_6366a177(s_lookat, var_3ac8690f, var_149b3205) {
-  self val::set(#"hash_69fe6012338fa244", #"freezecontrols");
-  self val::set(#"hash_69fe6012338fa244", "ignoreme", 1);
-  self val::set(#"hash_69fe6012338fa244", "takedamage", 0);
+  self val::set(#"placeholder_jump_scare", #"freezecontrols");
+  self val::set(#"placeholder_jump_scare", "ignoreme", 1);
+  self val::set(#"placeholder_jump_scare", "takedamage", 0);
   var_6c759f99 = util::spawn_model(#"hash_3ae1ad382a5ec0c8", s_lookat.origin + (0, 0, -62), s_lookat.angles);
   var_6c759f99 hide();
   var_6c759f99 showtoplayer(self);
@@ -1020,9 +1020,9 @@ function_6366a177(s_lookat, var_3ac8690f, var_149b3205) {
   var_6c759f99 delete();
 
   if(isDefined(self)) {
-    self val::reset(#"hash_69fe6012338fa244", #"freezecontrols");
-    self val::reset(#"hash_69fe6012338fa244", "ignoreme");
-    self val::reset(#"hash_69fe6012338fa244", "takedamage");
+    self val::reset(#"placeholder_jump_scare", #"freezecontrols");
+    self val::reset(#"placeholder_jump_scare", "ignoreme");
+    self val::reset(#"placeholder_jump_scare", "takedamage");
     self notify(#"hash_5fa4964a839dbe6d");
   }
 }

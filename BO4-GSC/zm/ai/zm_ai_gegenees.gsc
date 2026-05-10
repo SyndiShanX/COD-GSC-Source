@@ -355,7 +355,7 @@ function_43104218(entity) {
 }
 
 function_e0b648bb(entity) {
-  if(isDefined(entity.var_d7e69143) && entity.var_d7e69143) {
+  if(isDefined(entity.destroy_poi) && entity.destroy_poi) {
     if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
       dist_sq = distancesquared(entity.origin, entity.zombie_poi[1].origin);
       melee_dist_sq = zombiebehavior::function_997f1224(entity);
@@ -455,7 +455,7 @@ function_d82de95f(entity) {
       hit_enemy = bullettracepassed(blast_origin, test_origin, 0, undefined);
 
       if(hit_enemy) {
-        entity.locked_enemy status_effect::status_effect_apply(getstatuseffect(#"hash_706608d269d2fefc"), undefined, entity, undefined, 2000);
+        entity.locked_enemy status_effect::status_effect_apply(getstatuseffect(#"gegenees_spear_hit"), undefined, entity, undefined, 2000);
         entity.locked_enemy thread function_60164697();
         entity.locked_enemy clientfield::increment_to_player("gegenees_damage_cf");
       }
@@ -556,7 +556,7 @@ gegeneestargetservice(entity) {
   entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
   entity zombie_utility::run_ignore_player_handler();
   entity.favoriteenemy = entity.var_93a62fe;
-  entity.var_d7e69143 = 0;
+  entity.destroy_poi = 0;
 
   if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
     var_eee191fa = 1;
@@ -569,7 +569,7 @@ gegeneestargetservice(entity) {
     }
 
     if(var_eee191fa) {
-      entity.var_d7e69143 = 1;
+      entity.destroy_poi = 1;
       entity.var_b491d096 = entity.zombie_poi[1];
       goalpos = entity.zombie_poi[0];
       return entity zm_utility::function_64259898(goalpos);
@@ -708,12 +708,12 @@ function_c3c86ec1(entity) {
     hitent clientfield::increment_to_player("gegenees_damage_cf");
   }
 
-  if(isDefined(entity.var_d7e69143) && entity.var_d7e69143) {
+  if(isDefined(entity.destroy_poi) && entity.destroy_poi) {
     if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
       entity.zombie_poi[1] notify(#"hash_90cfd38343f41f2");
     }
 
-    entity.var_d7e69143 = 0;
+    entity.destroy_poi = 0;
   }
 }
 
@@ -945,7 +945,7 @@ function_c03e8d05() {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
+    string = getdvarstring(#"gegenees_devgui_cmd", "<dev string:x1aa>");
     cmd = strtok(string, "<dev string:x1ad>");
     gegenees = getaiarchetypearray(#"gegenees");
 
@@ -978,6 +978,6 @@ function_c03e8d05() {
       }
     }
 
-    setDvar(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
+    setDvar(#"gegenees_devgui_cmd", "<dev string:x1aa>");
   }
 }

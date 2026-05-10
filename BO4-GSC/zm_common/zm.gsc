@@ -585,7 +585,7 @@ init_strings() {
   if(function_8b1a219a()) {
     zm_utility::add_zombie_hint("default_treasure_chest", #"hash_52426a433be4aa00");
   } else {
-    zm_utility::add_zombie_hint("default_treasure_chest", #"hash_40a3bd4c33eac8cc");
+    zm_utility::add_zombie_hint("default_treasure_chest", #"zombie/random_weapon_cost");
   }
 
   if(function_8b1a219a()) {
@@ -594,14 +594,14 @@ init_strings() {
     zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"hash_693bb70d9737a5b");
     zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"hash_42e37d69c3691009");
   } else {
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"hash_1c189b8ad7ec73a1");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"hash_1c1c218ad7ef8d2a");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"hash_1c26138ad7f7c9e5");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"hash_2a43ddece6c85f63");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"zombie/button_buy_back_barrier_10");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"zombie/button_buy_back_barrier_20");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"zombie/button_buy_back_barrier_50");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"zombie/button_buy_back_barrier_100");
   }
 
-  zm_utility::add_zombie_hint("default_reward_barrier_piece", #"hash_6a8e67597b680da2");
-  zm_utility::add_zombie_hint("default_buy_area", #"hash_cc45440fbd070dc");
+  zm_utility::add_zombie_hint("default_reward_barrier_piece", #"zombie/button_reward_barrier");
+  zm_utility::add_zombie_hint("default_buy_area", #"zombie/button_buy_open_area_cost");
 }
 
 init_sounds() {
@@ -752,17 +752,17 @@ function_1442d44f() {
   zombie_utility::set_zombie_var(#"hash_3037a1f286b662e6", var_c6ceb446[#"plypenaltydownedpointstep"], 1);
   zombie_utility::set_zombie_var(#"self_revive_count_coop", var_c6ceb446[#"plyselfrevivecountcoop"], 0);
   zombie_utility::set_zombie_var(#"self_revive_count_solo", var_c6ceb446[#"plyselfrevivecountsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_cc85b961f25c2ff", var_c6ceb446[#"plyshielddamagemult"], 1);
+  zombie_utility::set_zombie_var(#"shield_damage_mult", var_c6ceb446[#"plyshielddamagemult"], 1);
   zombie_utility::set_zombie_var(#"retain_weapons", var_c6ceb446[#"plyretainweapons"], 0);
   zombie_utility::set_zombie_var(#"perks_decay", var_c6ceb446[#"plyperksdecay"], 0);
   zombie_utility::set_zombie_var(#"hash_1ab42b4d7db4cb3c", var_c6ceb446[#"plyxpmodfier"], 1);
   zombie_utility::set_zombie_var(#"highlight_craftables", var_c6ceb446[#"plyhighlightcraftables"], 0);
   zombie_utility::set_zombie_var(#"zombie_point_scalar", var_c6ceb446[#"zompointscalar"], undefined, undefined, 1);
-  zombie_utility::set_zombie_var(#"hash_3a4a041c1d674898", var_c6ceb446[#"zommixedstart"], 0);
+  zombie_utility::set_zombie_var(#"mixed_start_round", var_c6ceb446[#"zommixedstart"], 0);
   zombie_utility::set_zombie_var(#"hash_762b7db4166c70aa", var_c6ceb446[#"zommixedstartsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_6eb9b2d60babd5aa", var_c6ceb446[#"zomcatalyststart"], 0);
+  zombie_utility::set_zombie_var(#"catalyst_start_round", var_c6ceb446[#"zomcatalyststart"], 0);
   zombie_utility::set_zombie_var(#"hash_376905ad360fc2e8", var_c6ceb446[#"zomcatalyststartsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_3b4ad7449c039d1b", var_c6ceb446[#"zomstokerstart"], 0);
+  zombie_utility::set_zombie_var(#"stoker_start_round", var_c6ceb446[#"zomstokerstart"], 0);
   zombie_utility::set_zombie_var(#"hash_2374f3ef775ac2c3", var_c6ceb446[#"zomstokerstartsolo"], 0);
   level flagsys::set(#"zombie_vars_init");
 }
@@ -1472,7 +1472,7 @@ function_51133aa1() {
 function_d723e40() {
   level endon(#"resume_end_game");
   wait 1;
-  luinotifyevent(#"hash_1fc4832b89307895", 0);
+  luinotifyevent(#"begin_restart_prompt", 0);
   wait zombie_utility::get_zombie_var(#"hash_6bae95928bbe8f1");
   level notify(#"resume_end_game");
 }
@@ -1486,7 +1486,7 @@ restart_prompt() {
 
   level thread function_d723e40();
   level waittill(#"resume_end_game");
-  luinotifyevent(#"hash_3aa743d9ad6c8e19", 0);
+  luinotifyevent(#"end_restart_prompt", 0);
 }
 
 function_70171add() {

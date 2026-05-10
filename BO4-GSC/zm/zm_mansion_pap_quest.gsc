@@ -114,7 +114,7 @@ init(var_5ea5c94d) {
 
   level thread function_a865c184();
   level thread function_5caf3d1a();
-  level thread function_c996ff1();
+  level thread open_pap_door();
   level.var_a05737eb = 0;
 }
 
@@ -124,7 +124,7 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"pap_key_pickup", 8000, getminbitcountfornum(3), "int");
   clientfield::register("scriptmover", "" + #"hash_47b8db8cde2c4291", 8000, getminbitcountfornum(13), "int");
   clientfield::register("scriptmover", "" + #"hash_6babc320ed9a08f1", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_1f18edb30c01161a", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"seeing_stone_glow", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"ghost_trail", 8000, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_11eb6b7dc7db71ad", 8000, getminbitcountfornum(1), "int");
   clientfield::register("scriptmover", "" + #"hash_58b293ceeb7f93e4", 8000, 1, "int");
@@ -191,13 +191,13 @@ function_39549562(var_7b192260, var_f8561a50) {
 
   var_f8561a50 thread function_debf98ad((1, 0, 1));
 
-  var_f8561a50 clientfield::set("" + #"hash_1f18edb30c01161a", 1);
+  var_f8561a50 clientfield::set("" + #"seeing_stone_glow", 1);
   s_result = self waittill(#"death");
   level notify(#"hash_483503537a553500", {
     #e_player: s_result.attacker
   });
   zm_sq_modules::function_3f808d3d(var_7b192260);
-  var_f8561a50 clientfield::set("" + #"hash_1f18edb30c01161a", 0);
+  var_f8561a50 clientfield::set("" + #"seeing_stone_glow", 0);
 
   var_f8561a50 thread function_debf98ad((1, 0, 0));
 }
@@ -214,7 +214,7 @@ function_7255025f() {
   }
 
   var_634714d5 = getEntArray("gazign_stone_covers", "script_noteworthy");
-  array::run_all(var_634714d5, &function_2baad8fc);
+  array::run_all(var_634714d5, &makesentienttarget);
   var_d8358012 = struct::get("mh_cpt1", "script_noteworthy");
   var_a7181dd8 = struct::get("mh_cpt2", "script_noteworthy");
   var_b4c5b933 = struct::get("mh_cpt3", "script_noteworthy");
@@ -486,7 +486,7 @@ function_686b9870() {
 
 function_53c0c5e(player) {
   if(function_fc79b7da("crystal_main_hall") || function_fc79b7da("crystal_library") || function_fc79b7da("crystal_greenhouse")) {
-    str_prompt = zm_utility::function_d6046228(#"hash_3dd539cb05389d25", #"hash_2b92feb97bdafc9b");
+    str_prompt = zm_utility::function_d6046228(#"zm_mansion/unlock_pap_gate", #"hash_2b92feb97bdafc9b");
     self sethintstringforplayer(player, str_prompt);
     return true;
   }
@@ -574,7 +574,7 @@ function_35ce3b56(s_scene) {
   self.var_65a45e8c = gettime();
 }
 
-function_c996ff1() {
+open_pap_door() {
   level flag::wait_till("unlock_pap_gate");
   var_7ba3f1dd = getent("ooze_gate_col", "targetname");
 
@@ -642,7 +642,7 @@ function_1c62cd2() {
   self endon(#"death");
   var_9d90ef8b = scene::function_12479eba(#"aib_vign_cust_zm_mnsn_forest_gate_intro");
   wait var_9d90ef8b * 0.8;
-  mansion_util::function_2057ddc1(level.var_a6583e6d.origin, "werewolf", "react_first", array(0, 1), #"hash_1c4067bfba5af231");
+  mansion_util::function_2057ddc1(level.var_a6583e6d.origin, "werewolf", "react_first", array(0, 1), #"werewolf_react_first");
 }
 
 function_74bb3b2() {
@@ -825,7 +825,7 @@ function_9e7129d2(e_player, s_stone, var_6cf4ded4, str_hint) {
   s_wormhole thread scene::play(#"p8_fxanim_zm_man_wormhole_bundle_vision_stone", e_wormhole);
 
   if(!isDefined(var_6cf4ded4)) {
-    var_6cf4ded4 = getdvarint(#"hash_8a909b353203ed4", 1);
+    var_6cf4ded4 = getdvarint(#"dev_vision_stone_wormhole_fx", 1);
   }
 
   e_wormhole clientfield::set("" + #"vision_stone_wormhole", var_6cf4ded4);
@@ -1561,7 +1561,7 @@ function_51367ff6(v_loc) {
 }
 
 function_49eab22d(s_key) {
-  level clientfield::set("" + #"hash_42e03f9ae74a1070", 0);
+  level clientfield::set("" + #"special_round_postfx", 0);
 
   if(s_key.targetname === "cemetery_pap_key") {
     exploder::stop_exploder("fxexp_pap_barrier_nosferatu");

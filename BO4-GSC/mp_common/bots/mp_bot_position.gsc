@@ -13,12 +13,12 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  bot_position::function_e9e03d6f(#"hash_8d7d6c68a4e0ec3", &function_eef95251);
+  bot_position::function_e9e03d6f(#"mp_in_combat", &mp_in_combat);
   bot_position::function_e9e03d6f(#"hash_15b1d6f5448dc185", &function_eecaf17c);
   bot_position::function_e9e03d6f(#"hash_27560b4cbc3c3443", &function_ff38b7b);
 }
 
-function_eef95251(params, tacbundle) {
+mp_in_combat(params, tacbundle) {
   if(!isDefined(self.enemy)) {
     return false;
   }

@@ -91,8 +91,8 @@ init_flags() {
 init_quests() {
   zm_sq::register(#"jump_scare", #"1", #"jump_scare_quest", &jump_scare, &jump_scare_cleanup);
   zm_sq::register(#"drawings", #"1", #"drawings_quest", &function_cb19e12a, &drawings_cleanup);
-  zm_sq::register(#"narrative_room", #"1", #"narrative_room_hidden", &function_6f55d670, &function_13c87ace);
-  zm_sq::register(#"narrative_room", #"2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
+  zm_sq::register(#"narrative_room", #"1", #"narrative_room_hidden", &narrative_room_hidden, &function_13c87ace);
+  zm_sq::register(#"narrative_room", #"2", #"narrative_room_revealed", &narrative_room, &narrative_room_cleanup);
   zm_sq::register(#"hells_redeemer", #"hash_66e936afdcdd5d4d", #"hash_574005386f679cf6", &function_21d4e9e9, &function_e7aa5f07);
   zm_sq::register(#"hells_redeemer", #"hash_385585cb6cbead68", #"hash_574004386f679b43", &function_14154e6a, &function_8d4b5efe);
   zm_sq::register(#"hells_redeemer", #"hash_42a50f35aa200869", #"hash_574003386f679990", &function_bd0aa04e, &function_13ebfa5e);
@@ -128,7 +128,7 @@ on_player_connect() {
   self thread track_player_eyes();
 }
 
-function_6f55d670(var_a276c861) {
+narrative_room_hidden(var_a276c861) {
   level waittill(#"fake_waittill");
 }
 
@@ -497,7 +497,7 @@ function_96c2cea0(str_notify) {
 
 function_6272b55b() {
   self endoncallback(&function_96c2cea0, #"disconnect");
-  level endon(#"hash_3698278a3a5d8beb", #"hash_23a4d169a87154ff");
+  level endon(#"hash_3698278a3a5d8beb", #"lock_box_captured");
   mdl_lock = getent("box_lock", "targetname");
 
   while(isDefined(mdl_lock)) {
@@ -508,7 +508,7 @@ function_6272b55b() {
       if(distancesquared(e_tomahawk.origin, mdl_lock.origin) < 10000 && isDefined(mdl_lock.var_1e4fbc72) && mdl_lock.var_1e4fbc72 && !isDefined(mdl_lock.var_3d3748c4) && !self hasweapon(getweapon(#"zhield_spectral_dw_upgraded"))) {
         mdl_lock.var_3d3748c4 = 1;
         mdl_lock.var_d86e9c27 = self;
-        level notify(#"hash_23a4d169a87154ff");
+        level notify(#"lock_box_captured");
         continue;
       }
 
@@ -1195,7 +1195,7 @@ function_442fe4d3() {
         break;
       }
 
-      s_result.activator status_effect::status_effect_apply(getstatuseffect(#"hash_19533caf858a9f3b"), undefined, self);
+      s_result.activator status_effect::status_effect_apply(getstatuseffect(#"shock_zm_trap"), undefined, self);
       s_result.activator playrumbleonentity("damage_heavy");
       s_result.activator dodamage(25, self.stub.related_parent.origin);
       s_result.activator playSound(#"hash_7f81f21dc017790d");
@@ -1224,7 +1224,7 @@ function_27c26acb() {
     e_player thread function_c8220768();
   }
 
-  level waittill(#"hash_12afa3ad484b2b");
+  level waittill(#"walnut_teleporter_ready");
   var_3d2317e9 setModel("p8_zm_esc_teleporter_device");
   var_86e0f327.s_unitrigger_stub = var_86e0f327 zm_unitrigger::create(&function_ad132260, 64, &function_283deb4);
   var_77b254ca.s_unitrigger_stub = var_77b254ca zm_unitrigger::create(&function_ad132260, 64, &function_283deb4);
@@ -1236,9 +1236,9 @@ function_c8220768() {
   }
 
   self endon(#"disconnect");
-  level endon(#"hash_12afa3ad484b2b");
+  level endon(#"walnut_teleporter_ready");
   self waittill(#"done_speaking");
-  level notify(#"hash_12afa3ad484b2b");
+  level notify(#"walnut_teleporter_ready");
 }
 
 function_ad132260(player) {
@@ -1496,7 +1496,7 @@ audio_log() {
     return;
   }
 
-  if(self.e_activator stats::get_stat_global(#"hash_ad3a508a80a0e6e")) {
+  if(self.e_activator stats::get_stat_global(#"darkops_escape_ee")) {
     level.var_a0ddc1d0 = 1;
   }
 

@@ -75,7 +75,7 @@ function_15dea507(aoeid, type, var_5ff737c1) {
   var_46f1b5eb.loopsound = var_6ec6e01.var_1ee49376;
   var_46f1b5eb.startrumble = var_6ec6e01.startrumble;
   var_46f1b5eb.endrumble = var_6ec6e01.endrumble;
-  var_46f1b5eb.var_a8609f98 = var_6ec6e01.var_a8609f98;
+  var_46f1b5eb.dmgrumble = var_6ec6e01.dmgrumble;
   var_46f1b5eb.earthquakescale = var_6ec6e01.earthquakescale;
   var_46f1b5eb.earthquakeduration = var_6ec6e01.earthquakeduration;
   var_46f1b5eb.effectradius = var_6ec6e01.effectradius;

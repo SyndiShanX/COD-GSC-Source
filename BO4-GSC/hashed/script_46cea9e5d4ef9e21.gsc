@@ -52,7 +52,7 @@ function_fb0bd6b9() {
 _goodlighting_hangar_a() {
   self sethintstring(#"hash_2f5a14e8bf175422");
   self.b_can_open = 0;
-  level flag::wait_till(#"hash_7039457b1cc827de");
+  level flag::wait_till(#"have_wardens_key");
 
   if(function_8b1a219a()) {
     self sethintstring(#"hash_749f3ae6e6a73762");
@@ -214,13 +214,13 @@ function_ba25a76f(n_max_time, var_62002857 = 0) {
 function_d6ae109c(b_turn_on) {
   if(b_turn_on) {
     self.e_sound = spawn("script_origin", self.origin);
-    playsoundatposition(#"hash_5870f3024077503", self.origin);
-    self.e_sound playLoopSound(#"hash_589f33024097b46");
+    playsoundatposition(#"evt_nixie_clock_on", self.origin);
+    self.e_sound playLoopSound(#"evt_nixie_clock_lp");
     return;
   }
 
   if(isDefined(self.e_sound)) {
-    playsoundatposition(#"hash_6c0f63cd38c393e7", self.origin);
+    playsoundatposition(#"evt_nixie_clock_off", self.origin);
     self.e_sound stoploopsound();
     wait 0.5;
     self.e_sound delete();
@@ -280,7 +280,7 @@ function_290d172d() {
         s_tube.mdl_tube hidepart("tag_nixie_" + s_tube.script_int);
         s_tube.script_int = (s_tube.script_int + 1) % 10;
         s_tube.mdl_tube showpart("tag_nixie_" + s_tube.script_int);
-        s_tube.mdl_tube playSound(#"hash_1aead9e7cdebe7d2");
+        s_tube.mdl_tube playSound(#"evt_nixie_clock_switch");
         break;
       }
     }
@@ -294,8 +294,8 @@ function_290d172d() {
 }
 
 function_bbca669b(e_activator) {
-  level notify(#"hash_2f586f8df1e6596d");
-  level endon(#"hash_2f586f8df1e6596d", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b");
+  level notify(#"nixie_clock_wait");
+  level endon(#"nixie_clock_wait", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b");
   wait 2;
   level thread function_c1cc29be(e_activator);
 }

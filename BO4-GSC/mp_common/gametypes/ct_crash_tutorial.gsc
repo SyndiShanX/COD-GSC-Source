@@ -320,7 +320,7 @@ function_6dd7691f() {
 
   level.var_e72728b8 = undefined;
   level thread function_885de242();
-  level notify(#"hash_58b92d4fec6c6932");
+  level notify(#"stop_assault_pack_lower_collision");
   level notify(#"start_assault_pack_lower_exit_collision");
   level.players[0] thread function_c93a1ee3();
   level ct_vo::play_vo(#"hash_4338c28cf3210c0e", 1);
@@ -650,7 +650,7 @@ function_45f0ba8d() {
 
     if(level flag::get("squad_dead") || !isalive(level.players[0])) {
       level flag::set("stop_reinforce");
-      level.players[0] ct_utils::function_1bb93418();
+      level.players[0] ct_utils::ingame_objective_close();
       level.players[0] ct_utils::function_49e0c5bc(1);
 
       if(level flag::get("squad_dead")) {
@@ -688,9 +688,9 @@ function_45f0ba8d() {
 function_537c9eea() {
   self endon(#"death");
   level endon(#"killstreak_ready");
-  self waittill(#"hash_600461f8d5fa1837");
+  self waittill(#"killstreak_ready_tank_robot");
   level.var_51ff7a58 = 1;
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level notify(#"killstreak_ready");
 }
 
@@ -707,7 +707,7 @@ function_1089714c(str_type) {
     level.var_37591676 += n_points;
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
-    level.players[0] globallogic_score::giveplayermomentumnotification(n_points, #"hash_480234a872bd64ac", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
+    level.players[0] globallogic_score::giveplayermomentumnotification(n_points, #"score/blank", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
   } else {
     level.var_37591676 += 100;
   }
@@ -716,7 +716,7 @@ function_1089714c(str_type) {
     level.players[0] ct_utils::function_80bf685b(level.var_37591676);
   } else {
     level.var_51ff7a58 = 1;
-    level.players[0] ct_utils::function_1bb93418();
+    level.players[0] ct_utils::ingame_objective_close();
     level notify(#"killstreak_ready");
   }
 
@@ -735,7 +735,7 @@ function_667b9fbc() {
 
 function_9b2c973f() {
   level endon(#"combattraining_logic_finished");
-  self endon(#"hash_600461f8d5fa1837");
+  self endon(#"killstreak_ready_tank_robot");
   level endon(#"squad_dead");
   a_bots = self ct_bots::function_71ec2b36();
   n_squad_size = a_bots.size;
@@ -1139,7 +1139,7 @@ function_da2f82f1(n_radius) {
   self bot::set_interact(level.pod);
   waitframe(1);
   level.pod.in_use = 1;
-  self waittill(#"hash_69dbfbd660f8c53e");
+  self waittill(#"supply_pod_used");
   level.pod.in_use = 0;
   self thread ct_utils::function_5b59f3b7(self.origin, self.angles, 16);
   self thread function_b03052f5();
@@ -1515,7 +1515,7 @@ function_b086032b(v_org) {
     waitframe(1);
     self bot_action::reset();
     waitframe(1);
-    self waittill(#"hash_69dbfbd660f8c53e");
+    self waittill(#"supply_pod_used");
     waitframe(1);
     self.var_72ec14cd = 1;
     level.var_3092f7b8++;
@@ -1752,7 +1752,7 @@ ammo_watch(str_event) {
           self bot::set_interact(level.pod.supplypod.gameobject);
           self bot_action::reset();
           waitframe(1);
-          self waittill(#"hash_69dbfbd660f8c53e");
+          self waittill(#"supply_pod_used");
           self.b_reloaded = 1;
           wait 1.5;
           self thread ct_utils::function_5b59f3b7(self.v_org, self.v_ang, 16);
@@ -1890,7 +1890,7 @@ function_7bbbb2b2(v_org) {
     waitframe(1);
     self bot_action::reset();
     waitframe(1);
-    self waittill(#"hash_69dbfbd660f8c53e");
+    self waittill(#"supply_pod_used");
     waitframe(1);
     self.var_72ec14cd = 1;
     level.var_cd01b270.in_use = 0;

@@ -94,7 +94,7 @@ class cdoor {
 
       if(b_open_door) {
         if(isDefined(var_7d28591d) && var_7d28591d) {
-          var_2b9a525f = m_s_bundle.var_f2943dab + var_3880cb10;
+          var_2b9a525f = m_s_bundle.door_swing_angle_barricaded + var_3880cb10;
         } else {
           var_2b9a525f = m_s_bundle.door_swing_angle + var_3880cb10;
         }
@@ -103,7 +103,7 @@ class cdoor {
       }
     } else if(b_open_door) {
       if(isDefined(var_7d28591d) && var_7d28591d) {
-        var_2b9a525f = m_s_bundle.var_f2943dab;
+        var_2b9a525f = m_s_bundle.door_swing_angle_barricaded;
       } else {
         var_2b9a525f = m_s_bundle.door_swing_angle;
       }
@@ -331,7 +331,7 @@ class cdoor {
   }
 
   function function_2190a0ee(b_reusable, var_23456fbb) {
-    m_e_door endon(#"hash_190d72393c0a8869", #"delete", #"gameobject_deleted");
+    m_e_door endon(#"used_up_door", #"delete", #"gameobject_deleted");
 
     while(true) {
       if(var_23456fbb) {
@@ -344,7 +344,7 @@ class cdoor {
 
       if(!self flag::get("animating")) {
         if(!b_reusable) {
-          m_e_door notify(#"hash_190d72393c0a8869");
+          m_e_door notify(#"used_up_door");
         }
 
         unlock();
@@ -367,7 +367,7 @@ class cdoor {
             thread function_145675ba(e_player, m_s_bundle.var_a22b716, var_f40ac45d, var_3488a701);
           }
 
-          m_e_door notify(#"hash_7166c13e79b73f9");
+          m_e_door notify(#"player_opened_door");
           open();
         }
       }
@@ -1087,7 +1087,7 @@ setup_door_info(s_door_bundle, s_door_instance, c_door) {
     s_door_bundle.door_open_time = s_door_instance.door_open_time;
     s_door_bundle.door_slide_open_units = s_door_instance.door_slide_open_units;
     s_door_bundle.door_swing_angle = s_door_instance.door_swing_angle;
-    s_door_bundle.var_f2943dab = s_door_instance.var_f2943dab;
+    s_door_bundle.door_swing_angle_barricaded = s_door_instance.door_swing_angle_barricaded;
     s_door_bundle.door_closes = s_door_instance.door_closes;
     s_door_bundle.var_d37e8f3e = s_door_instance.var_d37e8f3e;
     s_door_bundle.door_start_open = s_door_instance.door_start_open;
@@ -1109,7 +1109,7 @@ setup_door_info(s_door_bundle, s_door_instance, c_door) {
     s_door_instance.door_open_time = undefined;
     s_door_instance.door_slide_open_units = undefined;
     s_door_instance.door_swing_angle = undefined;
-    s_door_instance.var_f2943dab = undefined;
+    s_door_instance.door_swing_angle_barricaded = undefined;
     s_door_instance.door_closes = undefined;
     s_door_instance.var_d37e8f3e = undefined;
     s_door_instance.door_start_open = undefined;
@@ -1198,8 +1198,8 @@ setup_door_info(s_door_bundle, s_door_instance, c_door) {
     c_door.m_s_bundle.door_swing_angle = 0;
   }
 
-  if(!isDefined(c_door.m_s_bundle.var_f2943dab)) {
-    c_door.m_s_bundle.var_f2943dab = 0;
+  if(!isDefined(c_door.m_s_bundle.door_swing_angle_barricaded)) {
+    c_door.m_s_bundle.door_swing_angle_barricaded = 0;
   }
 
   if(isDefined(c_door.m_s_bundle.door_closes) && c_door.m_s_bundle.door_closes) {

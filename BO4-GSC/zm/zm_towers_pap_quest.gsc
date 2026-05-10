@@ -156,7 +156,7 @@ pap_quest_init(var_5ea5c94d) {
   level zm_ui_inventory::function_7df6bb60(#"hash_4fce42c559430ff9", 1);
   level zm_ui_inventory::function_7df6bb60(#"hash_6257a73f22800e57", 1);
   level zm_ui_inventory::function_7df6bb60(#"hash_61f69ed4cbd8f2f5", 1);
-  level zm_ui_inventory::function_7df6bb60(#"hash_5114ed99a6bad03b", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_pap_quest_tiger_head", 1);
 
   if(!var_5ea5c94d) {
     level flag::wait_till_all(array(#"hash_3d833ecc64915d8d", #"hash_d38ff215be3a4fc", #"hash_4142472dec557d03", #"hash_45b6b1ee5d5038b4"));
@@ -257,7 +257,7 @@ pap_quest_restart() {
   level zm_ui_inventory::function_7df6bb60(#"hash_4fce42c559430ff9", 1);
   level zm_ui_inventory::function_7df6bb60(#"hash_6257a73f22800e57", 1);
   level zm_ui_inventory::function_7df6bb60(#"hash_61f69ed4cbd8f2f5", 1);
-  level zm_ui_inventory::function_7df6bb60(#"hash_5114ed99a6bad03b", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_towers_pap_quest_tiger_head", 1);
 
   if(isDefined(level.var_9ca6160c)) {
     array::delete_all(level.var_9ca6160c);
@@ -531,7 +531,7 @@ function_199b1814(str_tower, str_encounter) {
     }
   }
 
-  s_waitresult = level waittill(#"hash_2ea1048758a3ff14");
+  s_waitresult = level waittill(#"pap_quest_drop_head");
   v_origin = s_waitresult.v_origin;
   var_7246d429 = s_waitresult.var_7246d429;
   str_archetype = s_waitresult.str_archetype;
@@ -637,7 +637,7 @@ function_9ec8ec89() {
 
   if(level.var_4629a597 >= level.var_5c51cf1a) {
     self thread zm_towers_util::function_ae1b4f5b(100, 75, 75);
-    level notify(#"hash_2ea1048758a3ff14", {
+    level notify(#"pap_quest_drop_head", {
       #v_origin: v_origin, #var_7246d429: var_7246d429, #str_archetype: str_archetype, #var_1e137cec: var_1e137cec
     });
   }
@@ -1039,7 +1039,7 @@ function_1191a919(str_encounter) {
       str_clientfield = #"hash_61f69ed4cbd8f2f5";
       break;
     case # "tigers":
-      str_clientfield = #"hash_5114ed99a6bad03b";
+      str_clientfield = #"zm_towers_pap_quest_tiger_head";
       break;
     default:
       str_encounter = get_encounter(str_encounter);

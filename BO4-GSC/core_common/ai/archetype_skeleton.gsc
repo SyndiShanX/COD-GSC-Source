@@ -61,14 +61,14 @@ function_a1acece9() {
   self setup_variant_type();
   self callback::function_d8abfc3d(#"hash_dfbeaa068b23e7c", &setup_variant_type);
 
-  if(self.subarchetype == #"hash_fd7b9665529dd42") {
+  if(self.subarchetype == #"skeleton_helmet_sword_and_shield") {
     self attach(#"c_t8_zmb_dlc2_skeleton_helmet", "j_head");
     self attach(#"c_t8_zmb_dlc2_skeleton_sword", "tag_weapon_right");
     self attach(#"c_t8_zmb_dlc2_skeleton_shield", "tag_weapon_left");
-  } else if(self.subarchetype == #"hash_1520c8987a671df0") {
+  } else if(self.subarchetype == #"skeleton_helmet_spear") {
     self attach(#"c_t8_zmb_dlc2_skeleton_helmet", "j_head");
     self attach(#"c_t8_zmb_dlc2_skeleton_spear", "tag_weapon_right");
-  } else if(self.subarchetype == #"hash_342763a42d8fbca") {
+  } else if(self.subarchetype == #"skeleton_sword_and_shield") {
     self attach(#"c_t8_zmb_dlc2_skeleton_sword", "tag_weapon_right");
     self attach(#"c_t8_zmb_dlc2_skeleton_shield", "tag_weapon_left");
   } else if(self.subarchetype == #"skeleton_spear") {

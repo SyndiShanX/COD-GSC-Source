@@ -601,16 +601,16 @@ function_68dfeba9() {
 }
 
 function_8fff2dd() {
-  level._effect[#"hash_7c49a746639d8fb9"] = "maps/zm_white/fx8_zm_white_code_type_0";
-  level._effect[#"hash_7c49a646639d8e06"] = "maps/zm_white/fx8_zm_white_code_type_1";
-  level._effect[#"hash_7c49a546639d8c53"] = "maps/zm_white/fx8_zm_white_code_type_2";
-  level._effect[#"hash_7c49a446639d8aa0"] = "maps/zm_white/fx8_zm_white_code_type_3";
-  level._effect[#"hash_7c49ab46639d9685"] = "maps/zm_white/fx8_zm_white_code_type_4";
-  level._effect[#"hash_7c49aa46639d94d2"] = "maps/zm_white/fx8_zm_white_code_type_5";
-  level._effect[#"hash_7c49a946639d931f"] = "maps/zm_white/fx8_zm_white_code_type_6";
-  level._effect[#"hash_7c49a846639d916c"] = "maps/zm_white/fx8_zm_white_code_type_7";
-  level._effect[#"hash_7c49af46639d9d51"] = "maps/zm_white/fx8_zm_white_code_type_8";
-  level._effect[#"hash_7c49ae46639d9b9e"] = "maps/zm_white/fx8_zm_white_code_type_9";
+  level._effect[#"code_value_0"] = "maps/zm_white/fx8_zm_white_code_type_0";
+  level._effect[#"code_value_1"] = "maps/zm_white/fx8_zm_white_code_type_1";
+  level._effect[#"code_value_2"] = "maps/zm_white/fx8_zm_white_code_type_2";
+  level._effect[#"code_value_3"] = "maps/zm_white/fx8_zm_white_code_type_3";
+  level._effect[#"code_value_4"] = "maps/zm_white/fx8_zm_white_code_type_4";
+  level._effect[#"code_value_5"] = "maps/zm_white/fx8_zm_white_code_type_5";
+  level._effect[#"code_value_6"] = "maps/zm_white/fx8_zm_white_code_type_6";
+  level._effect[#"code_value_7"] = "maps/zm_white/fx8_zm_white_code_type_7";
+  level._effect[#"code_value_8"] = "maps/zm_white/fx8_zm_white_code_type_8";
+  level._effect[#"code_value_9"] = "maps/zm_white/fx8_zm_white_code_type_9";
   level._effect[#"hash_440d5b73d8a98ff4"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
   level._effect[#"hash_440d5c73d8a991a7"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
   level._effect[#"hash_440d5d73d8a9935a"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";

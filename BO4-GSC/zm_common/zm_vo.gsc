@@ -150,11 +150,11 @@ _play_banter(var_3e24b5d5, var_a33019a0, a_players, b_force = 0) {
 
             if(function_7e4562d7(var_a2be76a3.var_dbeb023e, var_a2be76a3.var_1dc0a881, 1)) {
               if(isDefined(player1)) {
-                player1 notify(#"hash_ed377b19afa69d2");
+                player1 notify(#"banter_vo_done");
               }
 
               if(isDefined(player2)) {
-                player2 notify(#"hash_ed377b19afa69d2");
+                player2 notify(#"banter_vo_done");
               }
 
               function_3f8824e6(var_ac829b0, var_3e24b5d5);

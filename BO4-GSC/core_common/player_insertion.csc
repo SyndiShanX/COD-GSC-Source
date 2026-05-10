@@ -121,7 +121,7 @@ function_ed1567cc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self function_d309e55a("tag_ramp_control_animate", 1);
     }
 
-    self playSound(0, #"hash_329be5a324e42ee1");
+    self playSound(0, #"evt_plane_door_open");
     level notify(#"hash_5975d5f569535c41");
     return;
   }

@@ -515,7 +515,7 @@ function_9a100883(weapon_level, enabled) {
 }
 
 function_6bba3829(e_player, ai_enemy) {
-  var_ea65bd9c = getdvarstring(#"hash_16e05c0b86ebb83d", "<dev string:x12e>");
+  var_ea65bd9c = getdvarstring(#"scr_zm_hero_weapon_system", "<dev string:x12e>");
 
   if(var_ea65bd9c == "<dev string:x138>") {
     return;
@@ -583,7 +583,7 @@ function_6bba3829(e_player, ai_enemy) {
 }
 
 function_3fe4a02e(e_player, n_points, str_event) {
-  var_ea65bd9c = getdvarstring(#"hash_16e05c0b86ebb83d", "<dev string:x12e>");
+  var_ea65bd9c = getdvarstring(#"scr_zm_hero_weapon_system", "<dev string:x12e>");
 
   if(var_ea65bd9c == "<dev string:x138>") {
     return;

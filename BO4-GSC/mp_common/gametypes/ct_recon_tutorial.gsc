@@ -141,7 +141,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
             level thread ct_vo::function_41e59aeb(array(#"hash_77c6ce9bf6da35f4"), 1);
             break;
           default:
-            level thread ct_vo::function_41e59aeb(array(#"hash_72daf28dd50991c5"), 1);
+            level thread ct_vo::function_41e59aeb(array(#"vox_tvoi_tutor_reco_death"), 1);
             break;
         }
       }
@@ -226,7 +226,7 @@ function_86c058b() {
   ct_vo::function_3ca1b77d();
   level thread ct_vo::function_831e0584(array(#"hash_63c5e3c0cbf4683b"));
   e_player = getplayers()[0];
-  a_str_vo = array(#"hash_94c2603d3b522a7");
+  a_str_vo = array(#"vox_tvoi_tutor_reco_start");
   e_player thread ct_utils::function_61c3d59c(#"hash_75a61367f89fc81a", a_str_vo);
   s_loc = struct::get("s_recon_vision_pulse_obj", "targetname");
   waypoint = ct_utils::create_waypoint(#"hash_1f1deaa6bff12db8", s_loc.origin, s_loc.angles, #"any", undefined, 40, undefined);
@@ -390,7 +390,7 @@ function_ae2eb600() {
   s_loc = struct::get("s_inside_church", "targetname");
   ct_utils::function_9a4e412e(s_loc, "in_church");
   level notify(#"start_enter_church_collision");
-  level notify(#"hash_439e586d5a4210cd");
+  level notify(#"player_inside_church");
   ct_utils::function_e9ab1003("s_inside_church");
 }
 
@@ -1324,7 +1324,7 @@ function_35bd7aef(s_loc) {
   self val::set(#"ai_church", "ignoreall", 1);
   self val::set(#"ai_church", "ignoreme", 1);
   self thread ct_utils::function_5b59f3b7(self.origin, self.angles, 32);
-  level waittill(#"hash_439e586d5a4210cd");
+  level waittill(#"player_inside_church");
   self val::reset(#"ai_church", "ignoreme");
   n_delay = randomfloatrange(0.2, 0.8);
   wait n_delay;

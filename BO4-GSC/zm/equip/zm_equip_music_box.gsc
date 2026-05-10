@@ -24,7 +24,7 @@ __init__() {
   level.w_music_box = getweapon(#"music_box");
   clientfield::register("scriptmover", "" + #"music_box_light_fx", 24000, 1, "int");
   clientfield::register("scriptmover", "" + #"music_box_teleport", 1, 1, "int");
-  clientfield::register("actor", "" + #"hash_4881cb6bc59fdc49", 24000, 1, "int");
+  clientfield::register("actor", "" + #"music_box_zombie_flame_trail_fx", 24000, 1, "int");
   callback::on_grenade_fired(&on_grenade_fired);
   zm_loadout::register_lethal_grenade_for_level(#"music_box");
 
@@ -130,7 +130,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
       var_23ef51ef = vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
       e_zombie launchragdoll(var_23ef51ef + (0, 0, 32));
       e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
-      e_zombie clientfield::set("" + #"hash_4881cb6bc59fdc49", 1);
+      e_zombie clientfield::set("" + #"music_box_zombie_flame_trail_fx", 1);
     }
   }
 

@@ -15,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int", &function_d8505ab6, 0, 0);
+  clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int", &nova_crawler_burst_fx, 0, 0);
   clientfield::register("toplayer", "nova_crawler_burst_postfx_clientfield", 1, 1, "int", &function_c81db9a1, 0, 0);
   clientfield::register("toplayer", "nova_crawler_gas_cloud_postfx_clientfield", 1, 1, "int", &function_f8947dfe, 0, 0);
   ai::add_archetype_spawn_function(#"nova_crawler", &function_1d34f2b6);
@@ -28,7 +28,7 @@ function_1d34f2b6(localclientnum) {
   }
 }
 
-function_d8505ab6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+nova_crawler_burst_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1 && isDefined(self._effect) && isDefined(self._effect[#"nova_crawler_burst_fx"])) {
     playFX(localclientnum, self._effect[#"nova_crawler_burst_fx"], self.origin);
   }

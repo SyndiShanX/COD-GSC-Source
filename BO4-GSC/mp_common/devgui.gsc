@@ -44,7 +44,7 @@ __init__() {
   level thread dev::devgui_test_chart_think();
   level thread devgui_player_spawn_think();
   level thread devgui_vehicle_spawn_think();
-  level thread function_7bef8d25();
+  level thread devgui_health_think();
   level thread function_be0f9897();
   level thread dev::function_487bf571();
   level thread devgui_end_round_think();
@@ -824,7 +824,7 @@ function_6a24e58f() {
   }
 }
 
-function_7bef8d25() {
+devgui_health_think() {
   level notify(#"devgui_health_think");
   level endon(#"devgui_health_think");
   wait 5;

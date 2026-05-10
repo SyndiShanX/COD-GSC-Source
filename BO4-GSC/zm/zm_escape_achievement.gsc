@@ -159,7 +159,7 @@ function_ce31237b() {
   self.var_5b73502a = 0;
 
   while(!self.var_23d1ca17 || !self.var_ba2bd447 || !self.var_5b73502a) {
-    s_result = self waittill(#"hash_2706d6137c04adf4");
+    s_result = self waittill(#"fed_wolf_head");
     str_zone = self zm_zonemgr::get_player_zone();
 
     if(!isDefined(str_zone)) {

@@ -1207,9 +1207,9 @@ turn_grenade_into_a_dud(weapon, isthrowngrenade, player) {
       }
 
       if(isthrowngrenade) {
-        player iprintlnbold(#"hash_10012bedb9f60e99", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+        player iprintlnbold(#"mp/grenade_unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
       } else {
-        player iprintlnbold(#"hash_255050263c8cd26d", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+        player iprintlnbold(#"mp/launcher_unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
       }
 
       self makegrenadedud();

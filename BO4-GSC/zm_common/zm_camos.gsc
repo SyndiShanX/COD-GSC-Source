@@ -183,11 +183,11 @@ function_7b29c2d2(weapon) {
   }
 
   if(self.var_88ebd633.var_d9449a3 == 1) {
-    self thread function_160898c();
+    self thread rapid_kills_timeout();
   }
 }
 
-function_160898c() {
+rapid_kills_timeout() {
   self notify(#"rapid_kills_timeout");
   self endon(#"death", #"rapid_kills_timeout");
   wait 5;
@@ -216,11 +216,11 @@ function_432cf6d(weapon) {
   }
 
   if(self.var_88ebd633.var_bcacb3a3 == 1) {
-    self thread function_d01affa9();
+    self thread rapid_headshots_timeout();
   }
 }
 
-function_d01affa9() {
+rapid_headshots_timeout() {
   self notify(#"rapid_headshots_timeout");
   self endon(#"death", #"rapid_headshots_timeout");
   wait 7;

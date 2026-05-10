@@ -92,7 +92,7 @@ state_combat_update(params) {
     isatgoal = isDefined(goalinfo.isatgoal) && goalinfo.isatgoal || self isapproachinggoal() && isDefined(self.overridegoalpos);
 
     if(isDefined(isatgoal) && isatgoal) {
-      self asmrequestsubstate(#"hash_236f963ae1728eb3");
+      self asmrequestsubstate(#"idle@stationary");
       self cancelaimove();
       self function_d4c687c9();
     } else {
@@ -106,7 +106,7 @@ state_combat_update(params) {
         self vehicle_ai::waittill_pathing_done();
         self notify(#"amws_end_interrupt_watch");
       } else {
-        self asmrequestsubstate(#"hash_236f963ae1728eb3");
+        self asmrequestsubstate(#"idle@stationary");
         self cancelaimove();
         self function_d4c687c9();
       }

@@ -29,8 +29,8 @@ function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     if(isDefined(settingsbundle) && isDefined(settingsbundle.var_d354164e)) {
       foreach(var_127d3a7a in settingsbundle.var_d354164e) {
         if(self.model === var_127d3a7a.var_a3c9023c) {
-          util::lock_model(var_127d3a7a.var_cdf1f53d);
-          self thread function_8a817bd6(var_127d3a7a.var_cdf1f53d);
+          util::lock_model(var_127d3a7a.splitmdl);
+          self thread function_8a817bd6(var_127d3a7a.splitmdl);
           break;
         }
       }

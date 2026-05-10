@@ -317,7 +317,7 @@ function_1e84c767() {
 
   function_9a022fbc("close");
 
-  level.var_63c19b1b = getdvarint(#"hash_6c85efe41dc0fd26", 0) == 1;
+  level.var_63c19b1b = getdvarint(#"scr_skip_ct_tutorial", 0) == 1;
 
   if(!(isDefined(level.var_63c19b1b) && level.var_63c19b1b)) {
     gamedifficulty = function_1aeaebae();
@@ -385,7 +385,7 @@ function_a217c7b4(b_success) {
   e_player = getplayers(#"allies")[0];
   e_player ct_ui::function_fa910e34(b_success, var_cd803a6b);
   level notify(#"hash_6731a3e5cccf7357");
-  level notify(#"hash_42057c28bd084d77");
+  level notify(#"destroysites_reset");
 }
 
 function_45a4f027() {

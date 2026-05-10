@@ -89,7 +89,7 @@ function_bff5c062(supplypod, attackingplayer) {
   supplypod.gameobject gameobjects::set_owner_team(attackingplayer.team);
   supplypod.gameobject gameobjects::set_visible_team(#"friendly");
   supplypod.gameobject gameobjects::allow_use(#"friendly");
-  supplypod notify(#"hash_523ddcbd662010e5");
+  supplypod notify(#"end_damage_watcher");
   supplypod notify(#"hacked");
 
   if(isDefined(supplypod.var_2d045452)) {
@@ -171,7 +171,7 @@ hintobjectivehint_updat(weapon) {
   scoreevents::processscoreevent(#"golden_kill_bonus", self, undefined, level.var_934fb97.weapon);
 
   if(isDefined(self.var_bfeea3dd) && isalive(self.var_bfeea3dd) && self != self.var_bfeea3dd) {
-    scoreevents::processscoreevent(#"hash_131b23d720fc82c3", self.var_bfeea3dd, undefined, level.var_934fb97.weapon);
+    scoreevents::processscoreevent(#"golden_ammo_assist", self.var_bfeea3dd, undefined, level.var_934fb97.weapon);
   }
 
   self playlocalsound(#"hash_6c2a2fee191330a0");
@@ -188,7 +188,7 @@ function_92856c6(attacker, victim, weapon, attackerweapon, meansofdeath) {
 
   if(attacker function_49ef5263()) {
     if(isDefined(attacker.var_bfeea3dd) && isalive(attacker.var_bfeea3dd) && attacker != attacker.var_bfeea3dd) {
-      scoreevents::processscoreevent(#"hash_131b23d720fc82c3", attacker.var_bfeea3dd, undefined, level.var_934fb97.weapon);
+      scoreevents::processscoreevent(#"golden_ammo_assist", attacker.var_bfeea3dd, undefined, level.var_934fb97.weapon);
     }
 
     attacker playlocalsound(#"hash_6c2a2fee191330a0");
@@ -313,7 +313,7 @@ on_player_spawned() {
       player.var_57de9100.trigger setinvisibletoplayer(player);
     }
 
-    player thread function_18f999b5(float(player.var_17d74a5c) / 1000);
+    player thread supplypodreactivate(float(player.var_17d74a5c) / 1000);
     player.var_17d74a5c += gettime();
     player clientfield::set_player_uimodel("hudItems.goldenBullet", 1);
   }
@@ -399,7 +399,7 @@ function_890b2784() {
 }
 
 function_827486aa(destroyedbyenemy, var_7497ba51 = 1) {
-  self notify(#"hash_523ddcbd662010e5");
+  self notify(#"end_damage_watcher");
   self.var_ab0875aa = 1;
 
   if(isDefined(self.var_83d9bfb5) && self.var_83d9bfb5) {
@@ -462,8 +462,8 @@ function_9d4aabb9(destroyedbyenemy) {
         }
       }
 
-      playcommanderaudio(level.var_934fb97.bundle.var_2ee73347, self.team);
-      playcommanderaudio(level.var_934fb97.bundle.var_79efc1, util::getotherteam(self.team));
+      playcommanderaudio(level.var_934fb97.bundle.destroyedfriendly, self.team);
+      playcommanderaudio(level.var_934fb97.bundle.destroyedenemy, util::getotherteam(self.team));
     } else {
       playcommanderaudio(level.var_934fb97.bundle.var_10c9ba2d, self.team);
       playcommanderaudio(level.var_934fb97.bundle.var_f29e64de, util::getotherteam(self.team));
@@ -475,8 +475,8 @@ function_9d4aabb9(destroyedbyenemy) {
     self playSound(level.var_934fb97.bundle.destructionaudio);
   }
 
-  if(isDefined(level.var_934fb97.bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
-    playFX(level.var_934fb97.bundle.var_bb6c29b4, self.origin);
+  if(isDefined(level.var_934fb97.bundle.shockrifledestructionfx) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
+    playFX(level.var_934fb97.bundle.shockrifledestructionfx, self.origin);
   }
 
   deployable::function_81598103(self);
@@ -520,7 +520,7 @@ function_3c4843e3(supplypod, timetoadd) {
 
 function_a2c40499(player) {
   level endon(#"game_ended");
-  self endon(#"hash_523ddcbd662010e5");
+  self endon(#"end_damage_watcher");
   waitresult = player waittill(#"disconnect", #"joined_team", #"changed_specialist");
 
   if(!isDefined(self)) {
@@ -534,7 +534,7 @@ function_a2c40499(player) {
 watchfordeath() {
   level endon(#"game_ended");
   self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
-  self endon(#"hash_523ddcbd662010e5");
+  self endon(#"end_damage_watcher");
   waitresult = self waittill(#"death");
 
   if(!isDefined(self)) {
@@ -555,7 +555,7 @@ watchfordeath() {
 watchfordamage() {
   self endon(#"death");
   level endon(#"game_ended");
-  self endon(#"hash_523ddcbd662010e5");
+  self endon(#"end_damage_watcher");
   supplypod = self;
   supplypod endon(#"death");
   supplypod.health = level.var_934fb97.bundle.kshealth;
@@ -660,7 +660,7 @@ function_9abdee8c(object) {
   supplypod clientfield::set("enemyequip", 1);
   supplypod.builttime = gettime();
   supplypod.uniqueid = function_fec0924();
-  playcommanderaudio(level.var_934fb97.bundle.var_69b1ff7, player getteam());
+  playcommanderaudio(level.var_934fb97.bundle.deployedfriendly, player getteam());
   playcommanderaudio(level.var_934fb97.bundle.deployedenemy, util::getotherteam(player getteam()));
 
   if(isDefined(level.var_934fb97.bundle.ambientaudio)) {
@@ -676,8 +676,8 @@ function_9abdee8c(object) {
     objective_setinvisibletoall(supplypod.var_134eefb9);
   }
 
-  triggerradius = level.var_934fb97.bundle.var_366f43e9;
-  triggerheight = level.var_934fb97.bundle.var_2f1567fb;
+  triggerradius = level.var_934fb97.bundle.kstriggerradius;
+  triggerheight = level.var_934fb97.bundle.kstriggerheight;
   var_b1a6d849 = level.var_934fb97.bundle.var_2d890f85;
   upangle = vectorscale(vectornormalize(anglestoup(supplypod.angles)), 5);
   var_40989bda = supplypod.origin + upangle;
@@ -733,7 +733,7 @@ function_a1434496(team, player, result) {
 
     if(isDefined(player) && isPlayer(player)) {
       if(supplypod.owner != player) {
-        scoreevents::processscoreevent(#"hash_69dbfbd660f8c53e", supplypod.owner, undefined, level.var_934fb97.weapon);
+        scoreevents::processscoreevent(#"supply_pod_used", supplypod.owner, undefined, level.var_934fb97.weapon);
         relativepos = vectornormalize(player.origin - supplypod.owner.origin);
         dir = anglesToForward(supplypod.owner getplayerangles());
         dotproduct = vectordot(dir, relativepos);
@@ -755,12 +755,12 @@ function_a1434496(team, player, result) {
     player.var_57de9100 = self;
     player.var_29fdd9dd = self.team;
     player.var_bfeea3dd = supplypod.owner;
-    player notify(#"hash_69dbfbd660f8c53e");
+    player notify(#"supply_pod_used");
 
     if(!(isDefined(level.var_934fb97.bundle.var_18ede0bb) ? level.var_934fb97.bundle.var_18ede0bb : 0)) {
       duration = isDefined(level.var_934fb97.bundle.var_84471829) ? level.var_934fb97.bundle.var_84471829 : 30;
       player.var_17d74a5c = gettime() + int(duration * 1000);
-      player thread function_18f999b5(duration);
+      player thread supplypodreactivate(duration);
     } else {
       player.var_48107b1c = 1;
     }
@@ -787,13 +787,13 @@ supplypod_catch(supplypod) {
     }
 
     beamlaunch(supplypod, self, "tag_origin_animate", var_715428d3, level.var_934fb97.weapon);
-    playsoundatposition(#"hash_f70797817dfefdb", supplypod.origin);
+    playsoundatposition(#"mpl_supply_pod_can_launch", supplypod.origin);
   }
 }
 
-function_18f999b5(waittime) {
-  self notify(#"hash_10cd6a20d4e45365");
-  self endon(#"hash_10cd6a20d4e45365", #"disconnect");
+supplypodreactivate(waittime) {
+  self notify(#"supplypodreactivate");
+  self endon(#"supplypodreactivate", #"disconnect");
   result = self waittilltimeout(waittime, #"death");
 
   if(result._notify == #"timeout") {
@@ -849,7 +849,7 @@ function_63c23d02(supplypod) {
 
   if(isDefined(supplypod.var_3823265d)) {
     self function_9abdee8c(supplypod);
-    playsoundatposition(#"hash_66e85d590b4f4b8", supplypod.origin);
+    playsoundatposition(#"mpl_supply_pod_deploy", supplypod.origin);
   }
 
   if(isDefined(level.var_84bf013e)) {
@@ -943,9 +943,9 @@ function_bcf0dd99() {
 
 function_b8a25634(owner) {
   player = self;
-  cooldowns[0] = level.var_934fb97.bundle.var_b9443d6b;
+  cooldowns[0] = level.var_934fb97.bundle.pod_equipment_cooldown;
   cooldowns[1] = level.var_934fb97.bundle.var_ea340924;
-  cooldowns[2] = level.var_934fb97.bundle.var_ff3d4d40;
+  cooldowns[2] = level.var_934fb97.bundle.pod_ability_cooldown;
 
   for(slot = 0; slot < 3; slot++) {
     if(!isDefined(cooldowns[slot])) {

@@ -311,7 +311,7 @@ pack_door_init() {
 
   while(true) {
     trigger setcursorhint("HINT_NOICON");
-    trigger sethintstring(#"hash_11b82b0d638f6098");
+    trigger sethintstring(#"zm_office/pack_room_door");
     level waittill(#"defcon_activated", #"player_in_pack");
     players = getplayers();
     trigger sethintstring("");

@@ -53,7 +53,7 @@ finalize_init() {
     level callback::add_callback(#"hash_7119d854cd41a4fd", &function_28ba0ba6);
     level callback::add_callback(#"vehicle_emped", &function_362499ea);
     level.operator_weapons = [#"ar_fastfire_t8_operator": 1, #"ar_stealth_t8_operator": 1, #"tr_longburst_t8_operator": 1, #"tr_midburst_t8_operator": 1, #"tr_powersemi_t8_operator": 1, #"sniper_fastrechamber_t8_operator": 1, #"sniper_quickscope_t8_operator": 1, #"lmg_spray_t8_operator": 1, #"lmg_standard_t8_operator": 1, #"smg_accurate_t8_operator": 1, #"smg_fastfire_t8_operator": 1, #"pistol_revolver_t8_operator": 1];
-    level.var_f290f0ba = [#"zombie_supply_stash_boxinggym_quest": 1, #"zombie_supply_stash_diner_quest": 2, #"zombie_supply_stash_lighthouse_quest": 3, #"hash_3ad3de90342f2d4b": 4, #"hash_61373b747c6a21fd": 5, #"hash_43647ef7af66f82f": 6, #"hash_49e8a607ea22e650": 7, #"zombie_stash_graveyard_quest": 8, #"hospital_stash_quest": 9, #"hash_4ee6deffa30cc6e2": 10, #"zombie_supply_stash_boxinggym_ee": 11, #"zombie_supply_stash_diner_ee": 12, #"zombie_supply_stash_lighthouse_ee": 13, #"hash_2a93e93b275c38ed": 14, #"hash_734bf5054445e0df": 15, #"hash_408b3ed7db6f9401": 16, #"hash_550872d1d1938f94": 17, #"zombie_stash_graveyard_ee": 18, #"hospital_stash_ee": 19, #"hash_7d028af90dad72ae": 20, #"zombie_supply_stash_boxinggym": 21, #"zombie_supply_stash_diner": 22, #"zombie_supply_stash_lighthouse": 23, #"hash_2783dbab1f862606": 24, #"hash_6dea2e4afc816818": 25, #"hash_4b49cb98f0fd776a": 26, #"hash_468067e2be6e3cfd": 27, #"zombie_stash_graveyard": 28, #"hospital_stash": 29, #"hash_78f8f730158519ff": 30];
+    level.var_f290f0ba = [#"zombie_supply_stash_boxinggym_quest": 1, #"zombie_supply_stash_diner_quest": 2, #"zombie_supply_stash_lighthouse_quest": 3, #"hash_3ad3de90342f2d4b": 4, #"hash_61373b747c6a21fd": 5, #"hash_43647ef7af66f82f": 6, #"zombie_supply_stash_crater_quest": 7, #"zombie_stash_graveyard_quest": 8, #"hospital_stash_quest": 9, #"zombie_supply_stash_buried_quest": 10, #"zombie_supply_stash_boxinggym_ee": 11, #"zombie_supply_stash_diner_ee": 12, #"zombie_supply_stash_lighthouse_ee": 13, #"hash_2a93e93b275c38ed": 14, #"hash_734bf5054445e0df": 15, #"hash_408b3ed7db6f9401": 16, #"zombie_supply_stash_crater_ee": 17, #"zombie_stash_graveyard_ee": 18, #"hospital_stash_ee": 19, #"zombie_supply_stash_buried_ee": 20, #"zombie_supply_stash_boxinggym": 21, #"zombie_supply_stash_diner": 22, #"zombie_supply_stash_lighthouse": 23, #"zombie_supply_stash_north_farm": 24, #"zombie_supply_stash_south_farm": 25, #"zombie_supply_stash_west_farm": 26, #"zombie_supply_stash_crater": 27, #"zombie_stash_graveyard": 28, #"hospital_stash": 29, #"zombie_supply_stash_buried": 30];
     callback::add_callback(#"hash_5775ae80fc576ea6", &function_314e09eb);
 
     thread devgui_setup();
@@ -467,7 +467,7 @@ function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -780,7 +780,7 @@ function_7870114(var_38280f2f) {
 
       break;
     case # "warzone_dbno_quad":
-    case # "hash_6ebd226da5b61bfb":
+    case # "warzone_escape_dbno_base":
     case # "warzone_dbno":
       if(var_38280f2f == #"hash_137173b281445b4d") {
         return true;
@@ -865,7 +865,7 @@ function_e82e67c5(n_time_played) {
       self increment_wz_contract(#"hash_114034ef741c57c", var_89bb208b);
       break;
     case # "warzone_dbno_quad":
-    case # "hash_6ebd226da5b61bfb":
+    case # "warzone_escape_dbno_base":
     case # "warzone_dbno":
       self increment_wz_contract(#"hash_137173b281445b4d", var_89bb208b);
       break;

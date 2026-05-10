@@ -34,8 +34,8 @@ function_c7c05a13() {
   var_21249230 = getscriptbundle(fields.zm_inventory);
   level.var_a16c38d9 = [];
 
-  if(isDefined(var_21249230.challenges) && isDefined(var_21249230.var_5a90928f)) {
-    function_cb96f01d(var_21249230.var_5a90928f, "ChallengesInfo.stage", 5, 1);
+  if(isDefined(var_21249230.challenges) && isDefined(var_21249230.challengesclientfield)) {
+    function_cb96f01d(var_21249230.challengesclientfield, "ChallengesInfo.stage", 5, 1);
 
     if(isDefined(var_21249230.var_f7d932ea)) {
       function_cb96f01d(var_21249230.var_f7d932ea, "ChallengesInfo.currentProgress", 7, 1);
@@ -50,7 +50,7 @@ function_c7c05a13() {
     function_cb96f01d(var_21249230.var_88c17f11, "ObjProgInfo.Eye.stage", 2, var_21249230.var_f3d39d90);
   }
 
-  if(isDefined(var_21249230.var_38b9613) && var_21249230.var_38b9613) {
+  if(isDefined(var_21249230.isobjprogressnonlinear) && var_21249230.isobjprogressnonlinear) {
     if(isDefined(var_21249230.objnonlinearprogitems)) {
       for(i = 0; i < var_21249230.objnonlinearprogitems.size; i++) {
         item = var_21249230.objnonlinearprogitems[i];
@@ -71,7 +71,7 @@ function_c7c05a13() {
 
       if(isDefined(item.clientfield)) {
         clientfield = "PaPItems." + i + 1 + ".stage";
-        function_cb96f01d(item.clientfield, clientfield, 2, item.var_7db3435c);
+        function_cb96f01d(item.clientfield, clientfield, 2, item.ispersonalitem);
       }
     }
   }
@@ -93,12 +93,12 @@ function_c7c05a13() {
 
         if(isDefined(component.clientfield)) {
           var_2641997d = "WonderWeaponItems." + index + ".stage";
-          function_cb96f01d(component.clientfield, var_2641997d, 3, component.var_7db3435c);
+          function_cb96f01d(component.clientfield, var_2641997d, 3, component.ispersonalitem);
         }
 
         if(isDefined(component.var_9f618001)) {
           var_9f618001 = "WonderWeaponItems." + index + ".numAcquired";
-          function_cb96f01d(component.var_9f618001, var_9f618001, 2, component.var_7db3435c);
+          function_cb96f01d(component.var_9f618001, var_9f618001, 2, component.ispersonalitem);
         }
 
         index++;
@@ -110,7 +110,7 @@ function_c7c05a13() {
     for(p = 0; p < var_21249230.shieldpieces.size; p++) {
       if(isDefined(var_21249230.shieldpieces[p].clientfield)) {
         clientfield = "ShieldPieces." + p + 1 + ".stage";
-        function_cb96f01d(var_21249230.shieldpieces[p].clientfield, clientfield, 1, var_21249230.shieldpieces[p].var_7db3435c);
+        function_cb96f01d(var_21249230.shieldpieces[p].clientfield, clientfield, 1, var_21249230.shieldpieces[p].ispersonalitem);
       }
     }
   }
@@ -121,7 +121,7 @@ function_c7c05a13() {
 
       if(isDefined(quest.var_a0ebe517)) {
         var_e7e5896d = "QuestPhaseInfos." + q + 1 + ".phase";
-        function_cb96f01d(var_21249230.quests[q].var_a0ebe517, var_e7e5896d, 2, var_21249230.quests[q].var_7db3435c);
+        function_cb96f01d(var_21249230.quests[q].var_a0ebe517, var_e7e5896d, 2, var_21249230.quests[q].ispersonalitem);
       }
 
       var_d4cb13fd = "Quest" + q + 1;
@@ -133,7 +133,7 @@ function_c7c05a13() {
         for(i = 0; i < phase.items.size; i++) {
           if(isDefined(phase.items[i].clientfield)) {
             var_2641997d = var_d4cb13fd + "." + index + ".stage";
-            function_cb96f01d(phase.items[i].clientfield, var_2641997d, 2, phase.items[i].var_7db3435c);
+            function_cb96f01d(phase.items[i].clientfield, var_2641997d, 2, phase.items[i].ispersonalitem);
           }
 
           index++;

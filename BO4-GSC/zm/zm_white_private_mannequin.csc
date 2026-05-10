@@ -12,12 +12,12 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + #"hash_681de2aa531ffcd0", 20000, 1, "int", &function_a1ee0828, 0, 0);
+  clientfield::register("world", "" + #"mannequin_force_stream", 20000, 1, "int", &mannequin_force_stream, 0, 0);
 }
 
 __main__() {}
 
-function_a1ee0828(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+mannequin_force_stream(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     forcestreamxmodel("c_t8_zmb_dlc3_mannequin_male_damage_ally_ready_pose");
     return;

@@ -387,7 +387,7 @@ function_4670ef4d() {
   }
 
   if(self.damagelocation === "helmet" || self.damagelocation === "head" || self.damagelocation === "neck") {
-    level notify(#"hash_5a1a76d189cf6925");
+    level notify(#"killowatt_headshot");
     level.s_side_quests.var_7d942960++;
     self playSound("zmb_ee_gtr_sting_" + level.s_side_quests.var_7d942960);
   }
@@ -397,7 +397,7 @@ function_c846dfc3() {
   level endon(#"end_game");
 
   while(true) {
-    level waittill(#"hash_5a1a76d189cf6925");
+    level waittill(#"killowatt_headshot");
 
     if(level.s_side_quests.var_7d942960 >= 8) {
       return;

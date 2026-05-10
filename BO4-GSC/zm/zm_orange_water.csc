@@ -14,7 +14,7 @@
 #namespace zm_orange_water;
 
 init() {
-  clientfield::register("allplayers", "" + #"water_player_freeze_fx", 24000, 1, "int", &function_e8d94580, 0, 0);
+  clientfield::register("allplayers", "" + #"water_player_freeze_fx", 24000, 1, "int", &water_player_freeze_fx, 0, 0);
   clientfield::register("toplayer", "" + #"water_player_freeze_sfx", 24000, 1, "int", &water_player_freeze_sfx, 0, 0);
   clientfield::register("toplayer", "" + #"hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
   clientfield::register("toplayer", "" + #"hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
@@ -40,7 +40,7 @@ on_player_spawned(localclientnum) {
   }
 }
 
-function_e8d94580(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+water_player_freeze_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!self zm_utility::function_f8796df3(localclientnum)) {
       self thread function_84fcb204(localclientnum);
@@ -276,7 +276,7 @@ function_7da5e6a2() {
   self endon(#"death", #"disconnect");
   self.var_cdb19015 = 0;
   self playSound(0, #"hash_71f59624b7f67f22");
-  self.var_1ab2df8c = self playLoopSound(#"hash_34fa9c6b99cc772e");
+  self.var_1ab2df8c = self playLoopSound(#"evt_frozen_lp");
   self waittill(#"snd_stop_frozen");
   self stoploopsound(self.var_1ab2df8c);
   self.var_1ab2df8c = undefined;

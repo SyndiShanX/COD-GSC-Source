@@ -64,7 +64,7 @@ main() {
         level thread function_1a2500e5();
         break;
       case 15:
-        level thread function_439b486f();
+        level thread slumber_party();
         break;
       case 21:
         level thread head_hunter();
@@ -117,7 +117,7 @@ teleport_player() {
   }
 }
 
-function_439b486f() {
+slumber_party() {
   if(!level flag::get(#"slumber_party")) {
     level flag::set(#"slumber_party");
     exploder::exploder("fxexp_disco_lgt");

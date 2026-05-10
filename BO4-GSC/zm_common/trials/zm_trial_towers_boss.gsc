@@ -134,7 +134,7 @@ boss_fight() {
   sp_spawner = getent("zombie_towers_boss_spawner", "script_noteworthy");
   level thread function_4d682898();
   level thread function_92e1954c();
-  level thread function_1a05e10c(#"hash_4b701378fdc308f", "m_quest", "spear_warn");
+  level thread function_1a05e10c(#"boss_ranged_attack_1", "m_quest", "spear_warn");
   level thread function_1a05e10c(#"boss_ranged_attack_2_start", "m_quest", "missle_warn");
   level thread function_1a05e10c(#"boss_ranged_attack_2_launched", "m_quest", "missle_track");
   level thread function_1a05e10c(#"towers_boss_charge", "m_quest", "charge_warn");
@@ -242,7 +242,7 @@ function_3d487e02() {
   level endon(#"end_game", #"boss_battle_done");
   self endon(#"disconnect");
   b_success = 0;
-  params = getstatuseffect(#"hash_12a64221f4d27f9b");
+  params = getstatuseffect(#"elephant_spear_fire");
   weapon = getweapon(#"eq_molotov");
 
   while(true) {

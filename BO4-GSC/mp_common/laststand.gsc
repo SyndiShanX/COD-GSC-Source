@@ -128,7 +128,7 @@ function_4e612708() {
 on_player_damage(params) {
   if(self is_reviving_any()) {
     if(isDefined(self.reviving_player) && isDefined(self.reviving_player.var_d75a6ff5)) {
-      self.reviving_player.var_d75a6ff5.var_d733f8d7 += params.idamage;
+      self.reviving_player.var_d75a6ff5.reviver_damage += params.idamage;
 
       if(self.health <= params.idamage) {
         self.reviving_player.var_d75a6ff5.var_bb36e277 = 1;
@@ -733,7 +733,7 @@ revive_trigger_think() {
       }
 
       if(players[i] can_revive(self)) {
-        self.revivetrigger setrevivehintstring(#"hash_51a0f083a5566a3", self.team);
+        self.revivetrigger setrevivehintstring(#"coop/button_to_revive_player", self.team);
         break;
       }
     }
@@ -811,7 +811,7 @@ function_356caede(team) {
   }
 
   players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
-  height = getdvarint(#"hash_48068f92d21e2a64", 15);
+  height = getdvarint(#"finisher_trigger_height", 15);
 
   foreach(player in players) {
     if(player can_revive(self, 1, height)) {
@@ -1089,7 +1089,7 @@ revive_do_revive(playerbeingrevived) {
   self playLoopSound(#"hash_67a426610a2d2a2d");
 
   if(isDefined(playerbeingrevived.var_d75a6ff5)) {
-    playerbeingrevived.var_d75a6ff5.var_d10f3b9a++;
+    playerbeingrevived.var_d75a6ff5.revive_attempts++;
   }
 
   self.reviving_player = playerbeingrevived;
@@ -1138,7 +1138,7 @@ revive_do_revive(playerbeingrevived) {
       }
     }
 
-    playerbeingrevived.revivetrigger sethintstring(#"hash_51a0f083a5566a3");
+    playerbeingrevived.revivetrigger sethintstring(#"coop/button_to_revive_player");
     playerbeingrevived.revivetrigger.beingrevived = 0;
 
     if(isDefined(revived) && revived && isDefined(level.var_f80fdd3f)) {
@@ -1246,7 +1246,7 @@ revive_success(reviver, b_track_stats = 1) {
   });
   self reviveplayer();
   self.var_d887a4ad = undefined;
-  health = getdvarint(#"hash_7036719f41a78d54", 0);
+  health = getdvarint(#"player_laststandrevivehealth", 0);
 
   if(isDefined(reviver)) {
     var_e705e073 = reviver function_15098882();
@@ -1328,7 +1328,7 @@ revive_hud_think() {
 }
 
 faderevivemessageover(playertorevive, time) {
-  self thread laststand::revive_hud_show_n_fade(#"hash_14cc93f11ba8334a", time, playertorevive);
+  self thread laststand::revive_hud_show_n_fade(#"coop/player_needs_to_be_revived", time, playertorevive);
 }
 
 function_ecdd4b27() {
@@ -1337,7 +1337,7 @@ function_ecdd4b27() {
   }
 
   self.var_d75a6ff5 = {
-    #player_xuid: int(self getxuid(1)), #start_time: gettime(), #end_time: 0, #damage: 0, #death: 0, #bleed_out: 0, #var_d10f3b9a: 0, #var_d733f8d7: 0, #var_35b89428: 0
+    #player_xuid: int(self getxuid(1)), #start_time: gettime(), #end_time: 0, #damage: 0, #death: 0, #bleed_out: 0, #revive_attempts: 0, #reviver_damage: 0, #reviver_death: 0
   };
 }
 

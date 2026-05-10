@@ -1027,7 +1027,7 @@ init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnerable = 1) 
 
     foreach(player in a_players) {
       if(player.team === #"allies") {
-        player thread function_1f9e783e(s_scenedef.var_a6da2039, str_scenedef);
+        player thread function_1f9e783e(s_scenedef.streamerhintsidea, str_scenedef);
         continue;
       }
 
@@ -1035,9 +1035,9 @@ init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnerable = 1) 
         player thread function_1f9e783e(s_scenedef.var_991a84ba, str_scenedef);
       }
     }
-  } else if(var_1b38cf1d == #"allies" && isDefined(s_scenedef.var_a6da2039)) {
+  } else if(var_1b38cf1d == #"allies" && isDefined(s_scenedef.streamerhintsidea)) {
     a_players = util::get_players(#"allies");
-    array::thread_all(a_players, &function_1f9e783e, s_scenedef.var_a6da2039, str_scenedef);
+    array::thread_all(a_players, &function_1f9e783e, s_scenedef.streamerhintsidea, str_scenedef);
   } else if(var_1b38cf1d == #"axis" && isDefined(s_scenedef.var_991a84ba)) {
     a_players = util::get_players(#"axis");
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.var_991a84ba, str_scenedef);
@@ -2228,7 +2228,7 @@ function_46546b5c(str_scenedef) {
     return false;
   }
 
-  if(getdvarint(#"hash_862358d532e674c", 0) === 1) {
+  if(getdvarint(#"scr_scene_skip_custom_games", 0) === 1) {
     var_41c1a1b7 = getscriptbundle(str_scenedef);
 
     if(isDefined(var_41c1a1b7.var_2af733c9) && var_41c1a1b7.var_2af733c9) {
@@ -2244,7 +2244,7 @@ function_a63b9bca(str_scenedef) {
     return false;
   }
 
-  if(getdvarint(#"hash_862358d532e674c", 0) === 2) {
+  if(getdvarint(#"scr_scene_skip_custom_games", 0) === 2) {
     var_41c1a1b7 = getscriptbundle(str_scenedef);
 
     if(isDefined(var_41c1a1b7.var_2af733c9) && var_41c1a1b7.var_2af733c9) {
@@ -2781,11 +2781,11 @@ function_1a1f1be7(var_8826a030) {
 
 function_61635c87(b_enable) {
   if(b_enable) {
-    self flagsys::set(#"hash_6ce14241f77af1e7");
+    self flagsys::set(#"interactive_shot_in_combat");
     return;
   }
 
-  self flagsys::clear(#"hash_6ce14241f77af1e7");
+  self flagsys::clear(#"interactive_shot_in_combat");
 }
 
 function_3d35d3ca(str_team) {

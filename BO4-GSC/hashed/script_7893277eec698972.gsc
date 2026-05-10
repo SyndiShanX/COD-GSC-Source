@@ -43,7 +43,7 @@ init() {
     zm_sq::register(#"wonder_weapon_quest", #"hash_6cc4f52e0ed36f92", #"hash_13b313981d67dc94", &step_2_setup, &step_2_cleanup);
     zm_sq::register(#"wonder_weapon_quest", #"soul_capture_step", #"hash_13b314981d67de47", &step_3_setup, &step_3_cleanup);
     zm_sq::register(#"wonder_weapon_quest", #"hash_1d89a5560669ab60", #"hash_13b311981d67d92e", &step_4_setup, &step_4_cleanup);
-    level flag::init(#"hash_1562cc6d96b2bc4");
+    level flag::init(#"stoker_key_obtained");
     level flag::init(#"hash_635fa9d7a8be6607");
     level flag::init(#"hash_2889330d50a4cc38");
     level flag::init(#"hash_35ab49975b4cc894");
@@ -107,7 +107,7 @@ step_1_setup(var_a276c861) {
 
   if(!var_a276c861) {
     callback::on_ai_spawned(&function_f7b0a02a);
-    level waittill(#"hash_1562cc6d96b2bc4");
+    level waittill(#"stoker_key_obtained");
   }
 }
 
@@ -121,17 +121,17 @@ step_1_cleanup(var_a276c861, var_19e802fa) {
         level.var_85a8dbba delete();
       }
 
-      level flag::set(#"hash_1562cc6d96b2bc4");
+      level flag::set(#"stoker_key_obtained");
     }
 
     return;
   }
 
-  level flag::set(#"hash_1562cc6d96b2bc4");
+  level flag::set(#"stoker_key_obtained");
 }
 
 function_f7b0a02a() {
-  level endon(#"hash_1562cc6d96b2bc4", #"end_game");
+  level endon(#"stoker_key_obtained", #"end_game");
 
   if(self.archetype == #"stoker") {
     waitresult = self waittill(#"hash_4651621237a54fc7", #"death");
@@ -160,7 +160,7 @@ function_f7b0a02a() {
 }
 
 function_a20e6e5d() {
-  level endon(#"hash_503e8bfd27a38f08", #"hash_1562cc6d96b2bc4", #"end_game");
+  level endon(#"hash_503e8bfd27a38f08", #"stoker_key_obtained", #"end_game");
   waitresult = level.var_85a8dbba waittill(#"trigger");
   player = waitresult.activator;
 
@@ -171,11 +171,11 @@ function_a20e6e5d() {
 
   level.var_85a8dbba delete();
   level.var_86d6efbf delete();
-  level flag::set(#"hash_1562cc6d96b2bc4");
+  level flag::set(#"stoker_key_obtained");
 }
 
 function_ca409b53() {
-  level endon(#"hash_1562cc6d96b2bc4", #"hash_1562cc6d96b2bc4", #"end_game");
+  level endon(#"stoker_key_obtained", #"stoker_key_obtained", #"end_game");
   level.var_86d6efbf rotate((0, 360, 0));
   wait 15;
   level.var_86d6efbf zm_powerups::hide_and_show(&ghost, &show);
@@ -410,7 +410,7 @@ function_10d4ff8d(e_player) {
   if(function_e796525(e_player)) {
     self setvisibletoplayer(e_player);
     self setcursorhint("HINT_WEAPON", level.w_tricannon_base);
-    self sethintstring(#"hash_6a4c5538a960189d");
+    self sethintstring(#"zombie/trade_weapon_fill");
     return 1;
   }
 

@@ -36,8 +36,8 @@
 init() {
   level.var_29a4ccd4 = 10;
   level.var_7b05c4b5 = 0;
-  level.var_ae120f18 = array(#"hash_13ff54f31624000a");
-  callback::add_callback(#"hash_42aa89b2a0951308", &function_cd74cce0);
+  level.var_ae120f18 = array(#"vox_tvoi_tutor_ruin_start");
+  callback::add_callback(#"player_grapple_failed", &function_cd74cce0);
   level flag::init("killstreak_earned");
   level flag::init("mission_complete");
   var_88546af8 = soundgetplaybacktime(#"hash_6923615495bbfbcf");
@@ -1130,7 +1130,7 @@ function_e340db61() {
     if(isDefined(b_first_time) && b_first_time) {
       e_player thread ct_utils::function_61c3d59c(#"hash_508f1a5bc110c570");
       ct_vo::function_831e0584(array("vox_tvoi_tutor_ruin_final_1_hell_1"), 1);
-      e_player thread ct_utils::function_1bb93418();
+      e_player thread ct_utils::ingame_objective_close();
     }
 
     level notify(#"hash_4c9c5fbc89779e64");
@@ -1138,7 +1138,7 @@ function_e340db61() {
     level.temp_disable = level.var_32ae304;
     level.var_32ae304 = undefined;
     level thread function_1c78b967();
-    result = level waittill(#"hash_6308f4ed0b129e5d", #"dodge_the_hellstorm_objective_success");
+    result = level waittill(#"dodge_the_hellstorm_objective_end", #"dodge_the_hellstorm_objective_success");
     level.var_32ae304 = level.temp_disable;
 
     if(result._notify == "dodge_the_hellstorm_objective_success") {
@@ -1170,12 +1170,12 @@ function_3857a1fb() {
 
 function_b57b281a(hash) {
   e_player = ct_utils::get_player();
-  e_player thread ct_utils::function_1bb93418();
+  e_player thread ct_utils::ingame_objective_close();
 }
 
 function_1c78b967() {
   level endon(#"combattraining_logic_finished");
-  level endoncallback(&function_b8f40318, #"hash_6308f4ed0b129e5d", #"dodge_the_hellstorm_objective_success");
+  level endoncallback(&dodge_the_hellstorm_objective_end, #"dodge_the_hellstorm_objective_end", #"dodge_the_hellstorm_objective_success");
   e_player = ct_utils::get_player();
   e_player ct_bots::function_fd2d220e();
   setDvar(#"hash_3fb2952874e511c2", #"");
@@ -1227,12 +1227,12 @@ function_1c78b967() {
   level thread ct_utils::kill_all_bots(undefined);
   level notify(#"tutorial_goto_end");
   level thread ct_vo::function_831e0584(array("vox_tvoi_tutor_ruin_final_1_hell_fail"), 0);
-  level notify(#"hash_6308f4ed0b129e5d");
+  level notify(#"dodge_the_hellstorm_objective_end");
 }
 
 function_139e074b() {
   level endon(#"combattraining_logic_finished");
-  level endon(#"hash_6308f4ed0b129e5d", #"dodge_the_hellstorm_objective_success");
+  level endon(#"dodge_the_hellstorm_objective_end", #"dodge_the_hellstorm_objective_success");
   e_player = ct_utils::get_player();
   e_player endon(#"death");
 
@@ -1246,7 +1246,7 @@ function_139e074b() {
   }
 }
 
-function_b8f40318(hash) {
+dodge_the_hellstorm_objective_end(hash) {
   setbombtimer("A", 0);
   setmatchflag("bomb_timer_a", 0);
 }
@@ -1307,7 +1307,7 @@ earn_the_hellstorm_objective() {
     level notify(#"killstreak_end_event");
     setbombtimer("A", 0);
     setmatchflag("bomb_timer_a", 0);
-    e_player ct_utils::function_1bb93418();
+    e_player ct_utils::ingame_objective_close();
     callback::remove_on_player_killed_with_params(&function_1f212110);
 
     if(result._notify == var_ab60380) {
@@ -1444,7 +1444,7 @@ function_1f212110(params) {
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
     var_6a98b865 = eattacker.momentum;
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"score/blank", undefined, 0, weapon, 0, eventindex, event, undefined);
 
     if(eattacker.momentum >= cost * 0.6 && var_6a98b865 < cost * 0.6) {
       ct_vo::function_831e0584(array("vox_tvoi_tutor_ruin_final_2_score_success"), 0);
@@ -1495,7 +1495,7 @@ function_bbdd4fa9() {
     }
 
     function_22720795("s_enemy_event3");
-    e_player thread ct_utils::function_1bb93418();
+    e_player thread ct_utils::ingame_objective_close();
     level thread function_a9e139d7();
     ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_7bc7eb557d98f163" : # "hash_76bd8e89161df2ad");
     level.var_e891c5ba = undefined;

@@ -183,9 +183,9 @@ function_14cf2357() {
 }
 
 function_b0b1cbb8(ai_type) {
-  wz_ai_zonemgr::function_462b41e2(#"farmnorth", ai_type, #"hash_2783dbab1f862606", #"hash_3ad3de90342f2d4b", #"hash_2a93e93b275c38ed");
-  wz_ai_zonemgr::function_462b41e2(#"farmsouth", ai_type, #"hash_6dea2e4afc816818", #"hash_61373b747c6a21fd", #"hash_734bf5054445e0df");
-  wz_ai_zonemgr::function_462b41e2(#"farmwest", ai_type, #"hash_4b49cb98f0fd776a", #"hash_43647ef7af66f82f", #"hash_408b3ed7db6f9401");
+  wz_ai_zonemgr::function_462b41e2(#"farmnorth", ai_type, #"zombie_supply_stash_north_farm", #"hash_3ad3de90342f2d4b", #"hash_2a93e93b275c38ed");
+  wz_ai_zonemgr::function_462b41e2(#"farmsouth", ai_type, #"zombie_supply_stash_south_farm", #"hash_61373b747c6a21fd", #"hash_734bf5054445e0df");
+  wz_ai_zonemgr::function_462b41e2(#"farmwest", ai_type, #"zombie_supply_stash_west_farm", #"hash_43647ef7af66f82f", #"hash_408b3ed7db6f9401");
 }
 
 function_c41ad9f9() {
@@ -238,9 +238,9 @@ function_c41ad9f9() {
   wz_ai_zonemgr::function_462b41e2(#"diner", level.var_85d43ea3, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", level.var_85d43ea3, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", level.var_85d43ea3, #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", level.var_85d43ea3, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(level.var_85d43ea3);
 }
 
@@ -294,9 +294,9 @@ function_53f0d046() {
   wz_ai_zonemgr::function_462b41e2(#"diner", level.var_85d43ea3, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", level.var_85d43ea3, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", level.var_85d43ea3, #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", level.var_85d43ea3, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(level.var_85d43ea3);
 }
 
@@ -350,9 +350,9 @@ function_864a9dec() {
   wz_ai_zonemgr::function_462b41e2(#"diner", level.var_85d43ea3, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", level.var_85d43ea3, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", level.var_85d43ea3, #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", level.var_85d43ea3, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(level.var_85d43ea3);
 }
 
@@ -382,9 +382,9 @@ function_36cc50(var_8667e69, maxcount, maxalive) {
   wz_ai_zonemgr::function_462b41e2(#"diner", var_8667e69, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", var_8667e69, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", var_8667e69, #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", var_8667e69, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", var_8667e69, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", var_8667e69, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", var_8667e69, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", var_8667e69, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(var_8667e69);
 }
 
@@ -418,9 +418,9 @@ function_f910ed8a() {
   wz_ai_zonemgr::function_462b41e2(#"diner", level.var_85d43ea3, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", level.var_85d43ea3, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", level.var_85d43ea3, #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", level.var_85d43ea3, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(level.var_85d43ea3);
 }
 
@@ -473,9 +473,9 @@ function_e938f117() {
   wz_ai_zonemgr::function_462b41e2(#"diner", level.var_85d43ea3, #"zombie_supply_stash_diner", #"zombie_supply_stash_diner_quest", #"zombie_supply_stash_diner_ee");
   wz_ai_zonemgr::function_462b41e2(#"boxinggym", level.var_85d43ea3, #"zombie_supply_stash_boxinggym", #"zombie_supply_stash_boxinggym_quest", #"zombie_supply_stash_boxinggym_ee");
   wz_ai_zonemgr::function_462b41e2(#"cemetary", level.var_85d43ea3, #"zombie_stash_graveyard", #"zombie_stash_graveyard_quest", #"zombie_stash_graveyard_ee");
-  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"hash_468067e2be6e3cfd", #"hash_49e8a607ea22e650", #"hash_550872d1d1938f94");
+  wz_ai_zonemgr::function_462b41e2(#"nuketowncrater", level.var_85d43ea3, #"zombie_supply_stash_crater", #"zombie_supply_stash_crater_quest", #"zombie_supply_stash_crater_ee");
   wz_ai_zonemgr::function_462b41e2(#"nuketownbunker", level.var_85d43ea3, #"hash_688b1b12624fa9a3", #"hash_e14eae568dbe7c6");
-  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"hash_78f8f730158519ff", #"hash_4ee6deffa30cc6e2", #"hash_7d028af90dad72ae");
+  wz_ai_zonemgr::function_462b41e2(#"buried", level.var_85d43ea3, #"zombie_supply_stash_buried", #"zombie_supply_stash_buried_quest", #"zombie_supply_stash_buried_ee");
   function_b0b1cbb8(level.var_85d43ea3);
   wz_ai_zonemgr::function_462b41e2(#"lighthouse", #"spawner_boct_brutus_wz", #"zombie_supply_stash_lighthouse", #"zombie_supply_stash_lighthouse_quest", #"zombie_supply_stash_lighthouse_ee");
 }

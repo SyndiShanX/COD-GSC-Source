@@ -113,13 +113,13 @@ function_c5d0e538() {
       add_helico(var_b9d1e3a4, #"hash_5e132c061625eb87");
     }
 
-    var_739bc386 = getdynent(#"hash_78f8f730158519ff");
+    var_739bc386 = getdynent(#"zombie_supply_stash_buried");
 
     if(isDefined(var_739bc386)) {
       add_helico(var_739bc386, #"hash_5e132c061625eb87");
     }
 
-    var_847e155a = getdynent(#"hash_4ee6deffa30cc6e2");
+    var_847e155a = getdynent(#"zombie_supply_stash_buried_quest");
 
     if(isDefined(var_847e155a)) {
       add_helico(var_847e155a, #"hash_5e132c061625eb87");

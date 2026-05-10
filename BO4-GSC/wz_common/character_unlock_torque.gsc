@@ -69,7 +69,7 @@ function_a2877194(params) {
     self.var_41ae08e8++;
 
     if(self.var_41ae08e8 == 2) {
-      self character_unlock::function_c8beca5e(#"torque_unlock", #"hash_a9ec4883fd0293d", 1);
+      self character_unlock::function_c8beca5e(#"torque_unlock", #"torque_unlock_razor_wire", 1);
     }
 
     return;

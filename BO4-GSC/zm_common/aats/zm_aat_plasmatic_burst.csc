@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_plasmatic_burst", #"hash_164d02d599d1fa8f", "t7_icon_zm_aat_blast_furnace");
+  aat::register("zm_aat_plasmatic_burst", #"zmui/zm_aat_plasmatic_burst", "t7_icon_zm_aat_blast_furnace");
   clientfield::register("actor", "zm_aat_plasmatic_burst" + "_explosion", 1, 1, "counter", &zm_aat_plasmatic_burst_explosion, 0, 0);
   clientfield::register("vehicle", "zm_aat_plasmatic_burst" + "_explosion", 1, 1, "counter", &zm_aat_plasmatic_burst_explosion, 0, 0);
   clientfield::register("actor", "zm_aat_plasmatic_burst" + "_burn", 1, 1, "int", &function_7abfa551, 0, 0);

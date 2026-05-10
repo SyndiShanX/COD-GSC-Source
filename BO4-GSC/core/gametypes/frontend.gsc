@@ -268,10 +268,10 @@ function_41cd078d() {
 }
 
 function_e4ea0153() {
-  setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
+  setDvar(#"scr_aar_devgui_cmd", "<dev string:x86>");
 
   while(true) {
-    aarcmd = getdvarstring(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
+    aarcmd = getdvarstring(#"scr_aar_devgui_cmd", "<dev string:x86>");
 
     if(aarcmd == "<dev string:x86>") {
       waitframe(1);
@@ -289,7 +289,7 @@ function_e4ea0153() {
       function_9eac333e();
     }
 
-    setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x86>");
+    setDvar(#"scr_aar_devgui_cmd", "<dev string:x86>");
     wait 0.25;
   }
 }

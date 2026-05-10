@@ -291,7 +291,7 @@ iskillstreakallowed(hardpointtype, team, var_1d8339ae) {
         secondsleft = int(float(level.empendtime - gettime()) / 1000);
 
         if(secondsleft > 0) {
-          self iprintlnbold(#"hash_2ce2d6e10e74ed97", secondsleft);
+          self iprintlnbold(#"killstreak/not_available_emp_active", secondsleft);
           return 0;
         }
       }

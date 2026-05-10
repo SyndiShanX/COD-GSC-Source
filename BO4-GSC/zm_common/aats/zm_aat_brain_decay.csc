@@ -21,7 +21,7 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_brain_decay", #"hash_3c1c6f0860be6c5", "t7_icon_zm_aat_turned");
+  aat::register("zm_aat_brain_decay", #"zmui/zm_aat_brain_decay", "t7_icon_zm_aat_turned");
   clientfield::register("actor", "zm_aat_brain_decay", 1, 1, "int", &function_791e18ed, 0, 0);
   clientfield::register("vehicle", "zm_aat_brain_decay", 1, 1, "int", &function_791e18ed, 0, 0);
   clientfield::register("actor", "zm_aat_brain_decay_exp", 1, 1, "counter", &zm_aat_brain_decay_explosion, 0, 0);

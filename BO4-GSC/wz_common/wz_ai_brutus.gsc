@@ -202,7 +202,7 @@ function_9d76e96c(entity) {
 
 function_e2ab1df7(entity) {
   entity solid();
-  entity.var_8ba6ede3 = undefined;
+  entity.shoulddigup = undefined;
 }
 
 function_1bd1ebe7(entity) {
@@ -278,7 +278,7 @@ function_85e8940a(entity) {
 
   var_aa6baab8 = entity ai::function_9139c839().var_1709a39;
   players = getplayers(#"all", entity.origin, var_aa6baab8);
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
   entity clientfield::increment("brutus_shock_attack", 1);
 
   foreach(player in players) {
@@ -298,7 +298,7 @@ function_85e8940a(entity) {
       continue;
     }
 
-    damage = mapfloat(entity getpathfindingradius() + 15, entity ai::function_9139c839().var_1709a39, entity ai::function_9139c839().var_7ea758e1, 0, distance(entity.origin, player.origin));
+    damage = mapfloat(entity getpathfindingradius() + 15, entity ai::function_9139c839().var_1709a39, entity ai::function_9139c839().shockattackdamage, 0, distance(entity.origin, player.origin));
     damage = int(max(10, damage));
     player dodamage(damage, entity.origin, entity, entity, "none", "MOD_PROJECTILE_SPLASH");
     player status_effect::status_effect_apply(shock_status_effect, undefined, self, 0);

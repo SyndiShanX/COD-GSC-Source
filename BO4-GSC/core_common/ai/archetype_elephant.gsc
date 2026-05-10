@@ -112,7 +112,7 @@ function_67525edc(dustball) {
       distsq = distancesquared(dustball.origin, target.origin);
 
       if(distsq <= 150 * 150) {
-        params = getstatuseffect(#"hash_12a64221f4d27f9b");
+        params = getstatuseffect(#"elephant_spear_fire");
         weapon = getweapon(#"eq_molotov");
         target status_effect::status_effect_apply(params, weapon, dustball, 0, 3000, undefined, dustball.origin);
       }
@@ -235,7 +235,7 @@ function_106b6b29() {
 }
 
 function_8d7ad318(launchpos, trajectory, targetpos) {
-  self endon(#"hash_79e095919e415a70", #"death");
+  self endon(#"head_launch_done", #"death");
 
   assert(trajectory.size);
   recordsphere(targetpos, 3, (0, 1, 1), "<dev string:x38>");
@@ -298,7 +298,7 @@ function_4b28fc8c(entity) {
   }
 
   self playSound(#"hash_62894125ab280b62");
-  self notify(#"hash_79e095919e415a70");
+  self notify(#"head_launch_done");
 
   if(isDefined(entity.ai.var_502d9d0d)) {
     [[entity.ai.var_502d9d0d]](entity, headproj);
@@ -971,11 +971,11 @@ function_74fba881(elephant) {
     if(elephant isattached(#"c_t8_zmb_dlc0_elephant_chain6", "tag_origin")) {
       elephant detach(#"c_t8_zmb_dlc0_elephant_chain6", "tag_origin");
       elephant attach(#"hash_4f282585ef50e907", "tag_origin");
-      elephant playSound(#"hash_9d86c1e08ca3809");
+      elephant playSound(#"exp_chain_break_final");
     } else if(elephant isattached(#"c_t8_zmb_dlc0_elephant_chain6_evil", "tag_origin")) {
       elephant detach(#"c_t8_zmb_dlc0_elephant_chain6_evil", "tag_origin");
       elephant attach(#"hash_6594ef853a532da6", "tag_origin");
-      elephant playSound(#"hash_9d86c1e08ca3809");
+      elephant playSound(#"exp_chain_break_final");
     }
 
     return;
@@ -1893,9 +1893,9 @@ setup_devgui() {
   adddebugcommand("<dev string:x78b>");
 
   while(true) {
-    setDvar(#"hash_7a7fc216709f1aa4", "<dev string:x4a>");
+    setDvar(#"elephant_devgui_cmd", "<dev string:x4a>");
     wait 0.2;
-    cmd = getdvarstring(#"hash_7a7fc216709f1aa4", "<dev string:x4a>");
+    cmd = getdvarstring(#"elephant_devgui_cmd", "<dev string:x4a>");
 
     if(cmd == "<dev string:x4a>") {
       continue;
@@ -1973,13 +1973,13 @@ setup_devgui() {
 
         break;
       case # "hash_6f54f417f7b5ac51":
-        level flag::set(#"hash_37071af70fe7a9f2");
+        level flag::set(#"flag_main_quest_completed");
         setDvar(#"hash_3065419bcba97739", 1);
         break;
       case # "hash_484a268dfc6c97aa":
         setDvar(#"zombie_default_max", 0);
         setDvar(#"hash_2b64162aa40fe2bb", 1);
-        level flag::set(#"hash_37071af70fe7a9f2");
+        level flag::set(#"flag_main_quest_completed");
         setDvar(#"hash_3065419bcba97739", 1);
         break;
       case # "hash_1b7f90925f6498e3":
@@ -2006,7 +2006,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_28ef2ead2bec713f":
+      case # "force_ground_attack":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -2026,7 +2026,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_3659cf300f60df4b":
+      case # "force_projectile_attack":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {

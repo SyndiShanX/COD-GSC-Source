@@ -297,7 +297,7 @@ function_fe02a12f() {
 
 function_2ce54724() {
   while(level.var_4b9c09fd > 0) {
-    level flag::wait_till_clear(#"hash_26e9fe6561459de3");
+    level flag::wait_till_clear(#"in_groom_lake");
     wait 0.1;
   }
 

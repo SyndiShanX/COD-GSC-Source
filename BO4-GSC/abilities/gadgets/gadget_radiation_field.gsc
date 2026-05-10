@@ -85,7 +85,7 @@ on_player_spawned() {
 player_damage_override(einflictor, eattacker, idamage, idflags, mod, weapon, vpoint, vdir, shitloc, modelindex, psoffsettime) {
   if(isDefined(self.var_d44d1214)) {
     if(mod == "MOD_BULLET" || mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || mod == "MOD_HEAD_SHOT") {
-      idamage *= isDefined(level.radiationfield_bundle.var_ebea02e3) ? level.radiationfield_bundle.var_ebea02e3 : 1;
+      idamage *= isDefined(level.radiationfield_bundle.bulletdamagescaler) ? level.radiationfield_bundle.bulletdamagescaler : 1;
       fx = level.radiationfield_bundle.var_befbf4c5;
 
       if(isDefined(fx)) {
@@ -108,7 +108,7 @@ sndonoverride_eye_() {
     objective_setprogress(player.var_e9791ff9, 0);
   }
 
-  total_time = level.radiationfield_bundle.baseduration + level.radiationfield_bundle.var_500496c9;
+  total_time = level.radiationfield_bundle.baseduration + level.radiationfield_bundle.midduration;
   redline = 0.75;
   player notify(#"radiation_field_start");
 
@@ -203,7 +203,7 @@ function_1503c832(weapon) {
   player.var_ab42e44e = player.origin;
   player.var_ab42e44e += fwd;
   player.var_e9791ff9 = gameobjects::get_next_obj_id();
-  objective_add(player.var_e9791ff9, "active", (player.var_ab42e44e[0], player.var_ab42e44e[1], player.var_ab42e44e[2]), #"hash_1bf4e9e4ba326a9");
+  objective_add(player.var_e9791ff9, "active", (player.var_ab42e44e[0], player.var_ab42e44e[1], player.var_ab42e44e[2]), #"radiation_field_meter");
   objective_setteam(player.var_e9791ff9, player.team);
   objective_setinvisibletoall(player.var_e9791ff9);
   objective_setvisibletoplayer(player.var_e9791ff9, player);
@@ -306,7 +306,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
   radius_delta = (max_radius - min_radius) / nsteps;
   var_a9e00cb3 = (max_height - min_height) / nsteps;
   player_radius = 10;
-  var_1d93ec08 = int(level.radiationfield_bundle.var_533b6b6e * 1000);
+  var_1d93ec08 = int(level.radiationfield_bundle.scoreeventsfrequency * 1000);
 
   while(true) {
     fwd = vecscale(vectornormalize(anglesToForward(player.angles)), 20);
@@ -376,7 +376,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
             }
 
             array::add(player.var_57e6a430, var_a3ca7cb2);
-            player playlocalsound(#"hash_6808d51f3971786e");
+            player playlocalsound(#"mpl_rad_hit_notify");
 
             if(isPlayer(var_a3ca7cb2)) {
               var_a3ca7cb2 playlocalsound(#"hash_7890710107740214");
@@ -398,11 +398,11 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
 
           if(dist < level.radiationfield_bundle.var_e914cf2b) {
             t = 1 - dist / level.radiationfield_bundle.var_e914cf2b;
-            dot_scaler = 1 - t + level.radiationfield_bundle.var_c3e28ba8 * t;
+            dot_scaler = 1 - t + level.radiationfield_bundle.dotdamagescaler * t;
           }
 
           if(level.hardcoremode) {
-            dot_scaler *= isDefined(level.radiationfield_bundle.var_78c1e37b) ? level.radiationfield_bundle.var_78c1e37b : 0.25;
+            dot_scaler *= isDefined(level.radiationfield_bundle.hardcoredamagescalar) ? level.radiationfield_bundle.hardcoredamagescalar : 0.25;
           }
 
           if(isPlayer(var_a3ca7cb2)) {
@@ -510,13 +510,13 @@ function_a1cc4c59(weapon, killcament) {
   player endon(#"radiation_shutdown", #"disconnect");
   player.var_5350f794 = undefined;
   damage_state(1, weapon, level.radiationfield_bundle.var_4d16c61f, level.radiationfield_bundle.var_9c3a936e, level.radiationfield_bundle.baseheightmin, level.radiationfield_bundle.baseheightmax, level.radiationfield_bundle.baseduration, level.radiationfield_bundle.var_1acd89e2, level.radiationfield_bundle.var_e5a95fca, undefined, killcament);
-  damage_state(2, weapon, level.radiationfield_bundle.var_9c3a936e, level.radiationfield_bundle.var_2b4199b5, level.radiationfield_bundle.baseheightmax, level.radiationfield_bundle.midheight, level.radiationfield_bundle.var_500496c9, level.radiationfield_bundle.var_1acd89e2, level.radiationfield_bundle.var_e5a95fca, undefined, killcament);
-  player playlocalsound(#"hash_352529c7ca9f6143");
+  damage_state(2, weapon, level.radiationfield_bundle.var_9c3a936e, level.radiationfield_bundle.midradius, level.radiationfield_bundle.baseheightmax, level.radiationfield_bundle.midheight, level.radiationfield_bundle.midduration, level.radiationfield_bundle.var_1acd89e2, level.radiationfield_bundle.var_e5a95fca, undefined, killcament);
+  player playlocalsound(#"mpl_rad_field_meltdown_alert");
   player hide_player();
   player.var_d44d1214 clientfield::set("self_destruct_start", 1);
   player function_6b83f6a9(1);
   player function_ad7b9f4a("RAISEWEAPON", weapon, 0, 0, 1, 0);
-  damage_state(3, weapon, level.radiationfield_bundle.var_2b4199b5, level.radiationfield_bundle.finalradius, level.radiationfield_bundle.midheight, level.radiationfield_bundle.finalheight, level.radiationfield_bundle.finalduration, level.radiationfield_bundle.var_3ef39bc5, level.radiationfield_bundle.var_d0e0a088, level.radiationfield_bundle.var_8d1e6357, killcament);
+  damage_state(3, weapon, level.radiationfield_bundle.midradius, level.radiationfield_bundle.finalradius, level.radiationfield_bundle.midheight, level.radiationfield_bundle.finalheight, level.radiationfield_bundle.finalduration, level.radiationfield_bundle.var_3ef39bc5, level.radiationfield_bundle.var_d0e0a088, level.radiationfield_bundle.var_8d1e6357, killcament);
   player function_c5a2e918();
 }
 

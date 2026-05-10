@@ -333,7 +333,7 @@ function_c37caebd() {
   s_loc = struct::get("s_torque_tut_1_razorwire_deploy", "targetname");
   self function_44776cd(1, s_loc);
   level notify(#"hash_60e26e14a51c5211");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   wait 1;
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
   self thread function_222141a5();
@@ -410,13 +410,13 @@ function_23f8245b() {
   self function_44776cd(1, "s_torque_tut_2_razorwire_deploy_r");
   self setlowready(1);
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level notify(#"hash_60e26e14a51c5211");
   waitframe(1);
   self ct_vo::function_3ca1b77d(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_two_razor_wire_5", "vox_tvoi_tutor_torq_two_razor_wire_6"));
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_shoot_enemy_nag", 30, 15);
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level.var_ec07b7b8 = 0;
   level.a_s_targets = struct::get_array("s_torque_tut_2_enemy_spawn", "targetname");
   level.a_s_targets = array::sort_by_script_int(level.a_s_targets, 1);
@@ -532,7 +532,7 @@ function_b2770e99() {
   s_loc = struct::get("s_torque_tut_3_razorwire_deploy", "targetname");
   self function_44776cd(1, s_loc);
   level notify(#"hash_60e26e14a51c5211");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
   self ct_vo::function_3ca1b77d(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_comp_0"));
@@ -600,7 +600,7 @@ function_4aa64c88() {
   s_loc = struct::get("s_torque_tut_4_barricade_deploy", "targetname");
   self function_44776cd(2, s_loc);
   level notify(#"hash_60e26e14a51c5211");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
   self ct_vo::function_3ca1b77d(1);
   self thread ct_utils::function_61c3d59c(#"hash_4a1a6d0229d29555");
@@ -691,7 +691,7 @@ function_43d3770a() {
   }
   while(!(isDefined(level.var_431fcb17) && level.var_431fcb17));
 
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
 }
 
 function_d27e566() {
@@ -727,7 +727,7 @@ function_d27e566() {
   self thread function_dbc41f2b();
   self thread ct_utils::function_61c3d59c(#"hash_56eb0801e59fea09");
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_enemy_razor_wire_nag", 30, 20);
-  level waittill(#"hash_38e6233b0c75e979");
+  level waittill(#"enemy_razorwire_destroyed");
   level notify(#"hash_60e26e14a51c5211");
   level notify(#"hash_4c2e751dd9e2bb57");
   self takeweapon(getweapon(#"launcher_standard_t8"));
@@ -752,7 +752,7 @@ function_fd0b81b() {
   }
 
   level.var_7afae51f.waypoint ct_utils::function_f9ed304d();
-  level notify(#"hash_38e6233b0c75e979");
+  level notify(#"enemy_razorwire_destroyed");
 }
 
 function_d7355d9(_hash) {
@@ -761,7 +761,7 @@ function_d7355d9(_hash) {
   }
 
   level.var_7afae51f.waypoint ct_utils::function_f9ed304d();
-  level notify(#"hash_38e6233b0c75e979");
+  level notify(#"enemy_razorwire_destroyed");
 }
 
 function_dbc41f2b() {
@@ -833,7 +833,7 @@ function_c0bc3c1c() {
   self bot_action::function_ee2eaccc(n_slot);
   wait 0.5;
   self waittill(#"hash_794fe961bd7a1e08");
-  level notify(#"hash_7dc3e85f3283efb7");
+  level notify(#"enemy_razorwire_placed");
   self thread function_159532aa();
   wait 1;
   self notify(#"hash_505598c7196ba834");
@@ -920,11 +920,11 @@ function_b17df12a() {
   level thread ct_utils::function_a3f8ddfa("colbounds_tut_6_north");
   s_loc = struct::get("s_torque_tut_6_razorwire_deploy", "targetname");
   self function_44776cd(1, s_loc);
-  self thread ct_utils::function_1bb93418();
+  self thread ct_utils::ingame_objective_close();
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
   self setlowready(1);
   self ct_vo::function_3ca1b77d(1);
-  self thread ct_utils::function_1bb93418();
+  self thread ct_utils::ingame_objective_close();
   self thread function_222141a5();
   level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
   self setlowready(0);
@@ -943,7 +943,7 @@ function_b17df12a() {
   ct_utils::function_9aca2fa0("ct_action2");
   self function_d4463404();
   level notify(#"hash_3ce5abc259d8b041");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level notify(#"hash_4c2e751dd9e2bb57");
   level.var_8197175 = 1;
   ct_utils::function_9aca2fa0("ct_action");
@@ -1052,7 +1052,7 @@ function_e2a695f2() {
 
   ct_utils::function_9aca2fa0("ct_action");
   level notify(#"hash_3ce5abc259d8b041");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   self ct_vo::function_3ca1b77d(1);
 }
 
@@ -1646,14 +1646,14 @@ function_bfebe12d() {
     level.var_d1f07c87 = 0;
     waitframe(1);
     callback::on_player_killed_with_params(&function_78986232);
-    self waittill(#"hash_50fd5d1e6267d529");
+    self waittill(#"killstreak_ready_swat_team");
   } else {
     ct_utils::function_e44c5b8e(#"swat_team", 0, 1);
   }
 
   level.var_51ff7a58 = 1;
   level flag::set("fin2_killstreak_earned");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   wait 1;
   var_ec746d30 = self gamepadusedlast() ? # "hash_68966a9a9f01485a" : # "hash_5aa86538a8f0dfa";
   self thread ct_utils::function_61c3d59c(var_ec746d30, undefined, undefined);
@@ -1690,7 +1690,7 @@ function_78986232(params) {
     var_595e41ee = 150;
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"score/blank", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 
     if(!eattacker ct_utils::function_a7540094()) {
@@ -1875,7 +1875,7 @@ function_344aee09(_hash) {
     level notify(#"hash_4c2e751dd9e2bb57");
     level notify(#"hash_6ebe7e4ea0726f0b");
     waitframe(1);
-    e_player thread ct_utils::function_1bb93418();
+    e_player thread ct_utils::ingame_objective_close();
 
     if(isalive(level.var_7afae51f)) {
       level.var_7afae51f concertina_wire::function_4ee7d46a(1);
@@ -1885,15 +1885,15 @@ function_344aee09(_hash) {
       n_wait = 1;
 
       if(level.var_8ca3c62 === 4) {
-        e_player ct_vo::function_c72e58c1(#"died");
+        e_player ct_vo::play_vo_end(#"died");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_rad_field_player_dead"));
         b_prompt = 0;
       } else if(level.var_8ca3c62 === 6 || level.var_8ca3c62 === 7) {
-        e_player ct_vo::function_c72e58c1(#"died");
+        e_player ct_vo::play_vo_end(#"died");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_final_event_1_player_dead"));
         b_prompt = 0;
       } else if(level.var_8ca3c62 === 8) {
-        e_player thread ct_vo::function_c72e58c1(#"died");
+        e_player thread ct_vo::play_vo_end(#"died");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_final_2_player_dead"));
         e_player thread swat_team::swat_cleanup();
         b_prompt = 0;
@@ -1908,19 +1908,19 @@ function_344aee09(_hash) {
       n_wait = 2;
 
       if(_hash == #"tut_6_barricade_dead") {
-        e_player ct_vo::function_c72e58c1(#"failed");
+        e_player ct_vo::play_vo_end(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_smrt_cvr_destroy"));
         var_16b5c6bb = e_player gamepadusedlast() ? # "hash_4194c81053f07918" : # "hash_7b43013359063e4";
         ct_utils::function_a61ebb46(var_16b5c6bb);
         str_respawn = "s_torque_tut_6_respawn";
       } else if(_hash == #"tut_6_razorwire_dead") {
-        e_player ct_vo::function_c72e58c1(#"failed");
+        e_player ct_vo::play_vo_end(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_destroy"));
         var_edd14440 = e_player gamepadusedlast() ? # "hash_16e6d107836c380a" : # "hash_618673f250fa320a";
         ct_utils::function_a61ebb46(var_edd14440);
         str_respawn = "s_torque_tut_6_respawn";
       } else if(_hash == #"hash_34a524e09eb9209f") {
-        e_player ct_vo::function_c72e58c1(#"failed");
+        e_player ct_vo::play_vo_end(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_stuck_nag"));
         var_a139eb64 = e_player gamepadusedlast() ? # "hash_4762a2aaf0787460" : # "hash_1736a34805e7e1cc";
         ct_utils::function_a61ebb46(var_a139eb64);
@@ -2267,7 +2267,7 @@ function_400149db() {
 
 function_6ad22c31(var_9a9deac6, a_str_vo_obj, str_objective = #"hash_5fadc5cf57233ef4") {
   level endon(#"combattraining_logic_finished");
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
   level waittill(#"enemy_stuck_in_razorwire");
 
   if(isDefined(var_9a9deac6)) {

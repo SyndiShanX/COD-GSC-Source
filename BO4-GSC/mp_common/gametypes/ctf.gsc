@@ -268,7 +268,7 @@ onendgame(var_c1e98979) {
         level.enddefeatreasontext = #"hash_34d0ee5d4c21542d";
       } else {
         level.endvictoryreasontext = #"hash_7cafa946822ee652";
-        level.enddefeatreasontext = #"hash_5235bbca93844647";
+        level.enddefeatreasontext = #"mpui/ctf_overtime_defeat_did_not_defend";
       }
     } else {
       winningteam = game.outcome.var_aefc8b8d.team;
@@ -426,7 +426,7 @@ createflaghint(team, origin) {
   radius = 128;
   height = 64;
   trigger = spawn("trigger_radius", origin, 0, radius, height);
-  trigger sethintstring(#"hash_479e7adbf3e4f211");
+  trigger sethintstring(#"mp/ctf_cant_capture_flag");
   trigger setcursorhint("HINT_NOICON");
   trigger.original_origin = origin;
   trigger turn_off();
@@ -576,8 +576,8 @@ ondrop(player) {
 
   if(isDefined(player)) {
     util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
-    level thread popups::displayteammessagetoteam(#"hash_3118e621ec8d35b8", player, team, undefined, undefined);
-    level thread popups::displayteammessagetoteam(#"hash_6730bd6c7d8d0567", player, otherteam, undefined, undefined);
+    level thread popups::displayteammessagetoteam(#"mp/friendly_flag_dropped", player, team, undefined, undefined);
+    level thread popups::displayteammessagetoteam(#"mp/enemy_flag_dropped", player, otherteam, undefined, undefined);
   } else {
     util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
   }
@@ -660,8 +660,8 @@ onpickup(player) {
     demo::bookmark(#"event", gettime(), player);
     potm::bookmark(#"event", gettime(), player);
     player stats::function_bb7eedf0(#"returns", 1);
-    level thread popups::displayteammessagetoteam(#"hash_347504f7414c2861", player, team, undefined, undefined);
-    level thread popups::displayteammessagetoteam(#"hash_565752dc258425f0", player, otherteam, undefined, undefined);
+    level thread popups::displayteammessagetoteam(#"mp/friendly_flag_returned", player, team, undefined, undefined);
+    level thread popups::displayteammessagetoteam(#"mp/enemy_flag_returned", player, otherteam, undefined, undefined);
     self.visuals[0] clientfield::set("ctf_flag_away", 0);
     self gameobjects::set_flags(0);
     self function_ef8d5fb5();
@@ -687,8 +687,8 @@ onpickup(player) {
   demo::bookmark(#"event", gettime(), player);
   potm::bookmark(#"event", gettime(), player);
   util::printandsoundoneveryone(otherteam, undefined, #"", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
-  level thread popups::displayteammessagetoteam(#"hash_6b94e754d048dae9", player, team, undefined, undefined);
-  level thread popups::displayteammessagetoteam(#"hash_25ed0737f009ca72", player, otherteam, undefined, undefined);
+  level thread popups::displayteammessagetoteam(#"mp/friendly_flag_taken", player, team, undefined, undefined);
+  level thread popups::displayteammessagetoteam(#"mp/enemy_flag_taken", player, otherteam, undefined, undefined);
   globallogic_audio::leader_dialog("ctfFriendlyFlagTaken", team, undefined, "ctf_flag");
   globallogic_audio::leader_dialog("ctfEnemyFlagTaken", otherteam, undefined, "ctf_flag_enemy");
   player.isflagcarrier = 1;
@@ -838,8 +838,8 @@ oncapture(player) {
   player stats::function_bb7eedf0(#"captures_in_capture_area", 1);
   player contracts::increment_contract(#"contract_mp_objective_capture");
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
-  level thread popups::displayteammessagetoteam(#"hash_97b6e279104e355", player, team, undefined, undefined);
-  level thread popups::displayteammessagetoteam(#"hash_352c694daa4f9440", player, enemyteam, undefined, undefined);
+  level thread popups::displayteammessagetoteam(#"mp/enemy_flag_captured", player, team, undefined, undefined);
+  level thread popups::displayteammessagetoteam(#"mp/friendly_flag_captured", player, enemyteam, undefined, undefined);
   globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_enemy", enemyteam);
   globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_friend", team);
   player giveflagcapturexp(player);

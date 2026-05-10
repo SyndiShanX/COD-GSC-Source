@@ -151,7 +151,7 @@ function_87bf6422(killstreak) {
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.islocationgood = &islocationgood;
-  context.objective = #"hash_1b5a86007f598bbc";
+  context.objective = #"airdrop_swat_team";
   context.validlocationsound = level.killstreakcorebundle.ksvalidcarepackagelocationsound;
   context.tracemask = 1;
   context.droptag = "tag_attach";

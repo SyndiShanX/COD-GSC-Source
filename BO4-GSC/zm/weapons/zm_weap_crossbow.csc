@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"hash_666361d58cf5e083"] = #"hash_2f290373e23f9616";
   level._effect[#"hash_70d2a1e399efcc91"] = #"hash_50be4928aa2fb3d4";
   level._effect[#"hash_70d98de399f5c943"] = #"hash_50c53528aa35b086";
-  level._effect[#"hash_650bbbea29506d1e"] = #"hash_2b4f0b7b45b86a3d";
+  level._effect[#"projectile_fizzleout_fx"] = #"hash_2b4f0b7b45b86a3d";
   level._effect[#"hash_cfd019f2f01e866"] = #"hash_2c30b8327eb9deaa";
   level.var_7cfd8159 = [];
   clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter", &function_75a608a3, 0, 0);
@@ -41,10 +41,10 @@ __init__() {
   clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int", &function_b6e5e889, 0, 1);
   clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int", &function_bec8c33, 0, 1);
   clientfield::register("allplayers", "" + #"hash_6c3560ab45e186ec", 1, 1, "counter", &function_fc035b41, 0, 0);
-  clientfield::register("allplayers", "" + #"hash_b38c687db71dae", 1, 1, "int", &function_7157628d, 0, 1);
+  clientfield::register("allplayers", "" + #"crossbow_persistent_fx", 1, 1, "int", &crossbow_persistent_fx, 0, 1);
 }
 
-function_7157628d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+crossbow_persistent_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
 
   if(!isDefined(self.var_b00e8bda)) {
@@ -73,7 +73,7 @@ function_7157628d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_75a608a3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFX(localclientnum, level._effect[#"hash_650bbbea29506d1e"], self.origin);
+  playFX(localclientnum, level._effect[#"projectile_fizzleout_fx"], self.origin);
 }
 
 function_bec8c33(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

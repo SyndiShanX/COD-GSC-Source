@@ -26,7 +26,7 @@ preload() {
   clientfield::register("world", "" + #"hash_5e69ee96304ec40b", 24000, 1, "int", &function_eb481d38, 0, 0);
   clientfield::register("vehicle", "" + #"lantern_fx", 24000, 2, "int", &function_f490f0e5, 0, 0);
   clientfield::register("vehicle", "" + #"lantern_explode_fx", 24000, 1, "counter", &play_lantern_explode_fx, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_78b8d89d34b32241", 24000, 2, "int", &function_19f2f0f2, 0, 0);
+  clientfield::register("toplayer", "" + #"hell_burn_fx", 24000, 2, "int", &function_19f2f0f2, 0, 0);
   clientfield::register("scriptmover", "" + #"lantern_outline", 24000, 1, "int", &function_cbc22c9d, 0, 0);
   zm_sq_modules::function_d8383812(#"sc_lantern_1", 24000, "sc_lantern_1", 400, level._effect[#"lantern_soul"], level._effect[#"lantern_soul_end"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"sc_lantern_2", 24000, "sc_lantern_2", 400, level._effect[#"lantern_soul"], level._effect[#"lantern_soul_end"], undefined, undefined, 1);
@@ -36,7 +36,7 @@ preload() {
 }
 
 function_f1749965(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrenderoverridebundle(#"hash_75168376918f5ab7");
+  self playrenderoverridebundle(#"rob_wz_boundary");
   self function_e378599(500);
   self.var_4156bf58 = 1;
 }
@@ -50,7 +50,7 @@ function_44aa40e0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_e378599(n_radius) {
   self.n_radius = max(200, n_radius);
   n_scale = self.n_radius / 150000;
-  self function_78233d29(#"hash_75168376918f5ab7", "", "Scale", n_scale);
+  self function_78233d29(#"rob_wz_boundary", "", "Scale", n_scale);
 }
 
 lava_init(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

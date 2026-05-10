@@ -445,7 +445,7 @@ function_d1ca61a7() {
 
   if(isDefined(w_take)) {
     if(w_take == w_give) {
-      e_player zm_weapons::function_7c5dd4bd(w_give);
+      e_player zm_weapons::give_full_ammo(w_give);
       b_give_weapon = 0;
     } else {
       e_player zm_weapons::weapon_take(w_take);

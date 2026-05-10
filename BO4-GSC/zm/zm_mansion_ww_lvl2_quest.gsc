@@ -308,7 +308,7 @@ function_7aa50bb7(e_player) {
   if(e_player zm_weapons::has_weapon_or_upgrade(level.var_6fe89212) || e_player zm_weapons::has_weapon_or_upgrade(level.var_7b9ca97a)) {
     self sethintstring("");
   } else if(e_player zm_weapons::has_weapon_or_upgrade(level.var_f086136b)) {
-    self sethintstring(self.stub.blueprint.var_4dbc4aee);
+    self sethintstring(self.stub.blueprint.craftingprompt);
   } else {
     self sethintstring(#"hash_61bd1f669b4c6a1c");
   }

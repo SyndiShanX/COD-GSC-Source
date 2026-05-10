@@ -239,21 +239,21 @@ function_4b227faf() {
   var_55d52358 = function_91b29d2a(var_284a1b99.target);
   var_f41e1beb = function_91b29d2a(var_25e0e288.target);
 
-  if(getdvarint(#"hash_50975241d48cd6e1", 0)) {
+  if(getdvarint(#"dev_draw_atv", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_6c8a74fa, 0, 0);
   }
 
-  if(getdvarint(#"hash_5e06d8d533e0af7c", 0)) {
+  if(getdvarint(#"dev_draw_cargo_truck", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_346f9993, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_46a9ff45, 0, 0);
   }
 
-  if(getdvarint(#"hash_723608e658ae5e0", 0)) {
+  if(getdvarint(#"dev_draw_heli", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_99b9c72b, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_78e45028, 0, 0);
   }
 
-  if(getdvarint(#"hash_25be466ac3a75b4f", 0)) {
+  if(getdvarint(#"dev_draw_raft", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_6b5f6eb2, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_8c0143c5, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_b212d5c7, 0, 0);
@@ -262,19 +262,19 @@ function_4b227faf() {
     var_4ff6627b = arraycombine(var_4ff6627b, var_d5253bc7, 0, 0);
   }
 
-  if(getdvarint(#"hash_14ddfe1d4333e9e", 0)) {
+  if(getdvarint(#"dev_draw_muscle_car", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_2ee195e7, 0, 0);
   }
 
-  if(getdvarint(#"hash_6ba532422c2147de", 0)) {
+  if(getdvarint(#"dev_draw_suv", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_55d52358, 0, 0);
   }
 
-  if(getdvarint(#"hash_4b7e74dc0f26db48", 0)) {
+  if(getdvarint(#"dev_draw_arav", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_c3fc5903, 0, 0);
   }
 
-  if(getdvarint(#"hash_5248bb421df16d24", 0)) {
+  if(getdvarint(#"dev_draw_pbr", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_f41e1beb, 0, 0);
   }
 
@@ -417,21 +417,21 @@ function_eef7849() {
   var_55d52358 = function_91b29d2a(var_284a1b99.target);
   var_f41e1beb = function_91b29d2a(var_25e0e288.target);
 
-  if(getdvarint(#"hash_50975241d48cd6e1", 0)) {
+  if(getdvarint(#"dev_draw_atv", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_6c8a74fa, 0, 0);
   }
 
-  if(getdvarint(#"hash_5e06d8d533e0af7c", 0)) {
+  if(getdvarint(#"dev_draw_cargo_truck", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_346f9993, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_46a9ff45, 0, 0);
   }
 
-  if(getdvarint(#"hash_723608e658ae5e0", 0)) {
+  if(getdvarint(#"dev_draw_heli", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_99b9c72b, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_78e45028, 0, 0);
   }
 
-  if(getdvarint(#"hash_25be466ac3a75b4f", 0)) {
+  if(getdvarint(#"dev_draw_raft", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_6b5f6eb2, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_8c0143c5, 0, 0);
     var_4ff6627b = arraycombine(var_4ff6627b, var_b212d5c7, 0, 0);
@@ -440,19 +440,19 @@ function_eef7849() {
     var_4ff6627b = arraycombine(var_4ff6627b, var_d5253bc7, 0, 0);
   }
 
-  if(getdvarint(#"hash_14ddfe1d4333e9e", 0)) {
+  if(getdvarint(#"dev_draw_muscle_car", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_2ee195e7, 0, 0);
   }
 
-  if(getdvarint(#"hash_6ba532422c2147de", 0)) {
+  if(getdvarint(#"dev_draw_suv", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_55d52358, 0, 0);
   }
 
-  if(getdvarint(#"hash_4b7e74dc0f26db48", 0)) {
+  if(getdvarint(#"dev_draw_arav", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_c3fc5903, 0, 0);
   }
 
-  if(getdvarint(#"hash_5248bb421df16d24", 0)) {
+  if(getdvarint(#"dev_draw_pbr", 0)) {
     var_4ff6627b = arraycombine(var_4ff6627b, var_f41e1beb, 0, 0);
   }
 
@@ -512,7 +512,7 @@ function_df930125(str_type) {
 }
 
 function_f42944c7() {
-  if(!getdvarint(#"hash_57a9b32c8a8503f1", 0) || !self function_1221d304()) {
+  if(!getdvarint(#"dev_draw_vehicles", 0) || !self function_1221d304()) {
     return;
   }
 
@@ -539,7 +539,7 @@ function_f42944c7() {
   str_type = hashtostring(self.vehicletype);
   v_color = self function_b2775b52();
 
-  while(getdvarint(#"hash_57a9b32c8a8503f1", 0)) {
+  while(getdvarint(#"dev_draw_vehicles", 0)) {
     var_91d1913b = distance2d(level.players[0].origin, self.origin);
     n_radius = 0.015 * var_91d1913b;
 
@@ -568,7 +568,7 @@ function_f567f0cd() {
   level notify(#"hash_79845fe0e187bb22");
   level endon(#"hash_79845fe0e187bb22");
 
-  while(getdvarint(#"hash_57a9b32c8a8503f1", 0)) {
+  while(getdvarint(#"dev_draw_vehicles", 0)) {
     n_total = 0;
     var_bd9acc19 = 176;
 
@@ -590,7 +590,7 @@ function_f567f0cd() {
 }
 
 function_1221d304() {
-  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", #"vehicle_boct_mil_truck_cargo_wz_green", #"vehicle_boct_mil_truck_cargo_wz_tan", #"vehicle_boct_mil_boat_tactical_raft_wz_blk", #"vehicle_boct_mil_boat_tactical_raft_wz_gry", #"vehicle_boct_mil_boat_tactical_raft_wz_odg", #"veh_quad_player_wz_blk", #"hash_232abda4e81275f4", #"veh_quad_player_wz_grn", #"hash_2f8d60a5381870ee", #"veh_quad_player_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_grey", #"vehicle_t8_mil_helicopter_light_transport_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_dark", #"vehicle_t8_mil_helicopter_light_transport_wz_black", #"veh_fav_player_wz_blk", #"veh_fav_player_wz_grn", #"veh_fav_player_wz_tan", #"veh_muscle_car_convertible_player_wz_bandit_blk", #"veh_muscle_car_convertible_player_wz_blu", #"veh_muscle_car_convertible_player_wz_grn", #"veh_muscle_car_convertible_player_wz_org", #"veh_muscle_car_convertible_player_wz_phantom", #"veh_muscle_car_convertible_player_wz_red", #"veh_muscle_car_convertible_player_wz_replacer", #"veh_muscle_car_convertible_player_wz_wht", #"veh_muscle_car_convertible_player_wz_ylw", #"veh_muscle_car_convertible_player_wz_blk", #"veh_muscle_car_convertible_player_wz_racing_grn", #"veh_suv_player_police_wz", #"vehicle_boct_mil_boat_pbr_wz_police", #"veh_suv_player_wz_blk", #"veh_suv_player_wz_gry", #"veh_suv_player_wz_met_gry", #"veh_suv_player_wz_wht", #"vehicle_t8_mil_helicopter_light_transport_wz_police", #"veh_suv_player_private_security_wz", #"veh_quad_player_wz_police", #"hash_482e864157620248", #"hash_1d37bc413f25898e", #"hash_1d37af413f257377", #"hash_8ea0340ead96490", #"hash_79bf6a7491c80c7", #"hash_32e4c0a7619f03a9", #"hash_22d9b5a7a0d9dd73", #"vehicle_boct_mil_boat_pbr_wz_black", #"vehicle_boct_mil_boat_pbr_wz_green", #"vehicle_boct_mil_boat_pbr_wz_grey", #"vehicle_boct_mil_boat_pbr_wz_tan", #"vehicle_t8_mil_helicopter_light_gunner_wz_black", #"vehicle_t8_mil_helicopter_light_gunner_wz_dark", #"vehicle_t8_mil_helicopter_light_gunner_wz_green", #"vehicle_t8_mil_helicopter_light_gunner_wz_grey", #"vehicle_t8_mil_helicopter_light_gunner_wz_tan", #"hash_77ac4aa97a8b5aa2", #"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz_dark_grey", #"veh_motorcycle_sidecar_player_wz_light_grey", #"veh_motorcycle_sidecar_player_wz_metal_grey", #"veh_motorcycle_sidecar_player_wz_olive", #"veh_motorcycle_sidecar_player_wz_tan", #"veh_motorcycle_sidecar_player_wz_white", #"veh_motorcycle_sidecar_player_wz_heroes", #"vehicle_t8_mil_helicopter_light_gunner_wz_heroes", #"veh_fav_player_wz_heroes");
+  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", #"vehicle_boct_mil_truck_cargo_wz_green", #"vehicle_boct_mil_truck_cargo_wz_tan", #"vehicle_boct_mil_boat_tactical_raft_wz_blk", #"vehicle_boct_mil_boat_tactical_raft_wz_gry", #"vehicle_boct_mil_boat_tactical_raft_wz_odg", #"veh_quad_player_wz_blk", #"veh_quad_player_wz_blu", #"veh_quad_player_wz_grn", #"veh_quad_player_wz_red", #"veh_quad_player_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_grey", #"vehicle_t8_mil_helicopter_light_transport_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_dark", #"vehicle_t8_mil_helicopter_light_transport_wz_black", #"veh_fav_player_wz_blk", #"veh_fav_player_wz_grn", #"veh_fav_player_wz_tan", #"veh_muscle_car_convertible_player_wz_bandit_blk", #"veh_muscle_car_convertible_player_wz_blu", #"veh_muscle_car_convertible_player_wz_grn", #"veh_muscle_car_convertible_player_wz_org", #"veh_muscle_car_convertible_player_wz_phantom", #"veh_muscle_car_convertible_player_wz_red", #"veh_muscle_car_convertible_player_wz_replacer", #"veh_muscle_car_convertible_player_wz_wht", #"veh_muscle_car_convertible_player_wz_ylw", #"veh_muscle_car_convertible_player_wz_blk", #"veh_muscle_car_convertible_player_wz_racing_grn", #"veh_suv_player_police_wz", #"vehicle_boct_mil_boat_pbr_wz_police", #"veh_suv_player_wz_blk", #"veh_suv_player_wz_gry", #"veh_suv_player_wz_met_gry", #"veh_suv_player_wz_wht", #"vehicle_t8_mil_helicopter_light_transport_wz_police", #"veh_suv_player_private_security_wz", #"veh_quad_player_wz_police", #"hash_482e864157620248", #"hash_1d37bc413f25898e", #"hash_1d37af413f257377", #"hash_8ea0340ead96490", #"hash_79bf6a7491c80c7", #"hash_32e4c0a7619f03a9", #"hash_22d9b5a7a0d9dd73", #"vehicle_boct_mil_boat_pbr_wz_black", #"vehicle_boct_mil_boat_pbr_wz_green", #"vehicle_boct_mil_boat_pbr_wz_grey", #"vehicle_boct_mil_boat_pbr_wz_tan", #"vehicle_t8_mil_helicopter_light_gunner_wz_black", #"vehicle_t8_mil_helicopter_light_gunner_wz_dark", #"vehicle_t8_mil_helicopter_light_gunner_wz_green", #"vehicle_t8_mil_helicopter_light_gunner_wz_grey", #"vehicle_t8_mil_helicopter_light_gunner_wz_tan", #"hash_77ac4aa97a8b5aa2", #"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz_dark_grey", #"veh_motorcycle_sidecar_player_wz_light_grey", #"veh_motorcycle_sidecar_player_wz_metal_grey", #"veh_motorcycle_sidecar_player_wz_olive", #"veh_motorcycle_sidecar_player_wz_tan", #"veh_motorcycle_sidecar_player_wz_white", #"veh_motorcycle_sidecar_player_wz_heroes", #"vehicle_t8_mil_helicopter_light_gunner_wz_heroes", #"veh_fav_player_wz_heroes");
 
   foreach(str_type in a_str_types) {
     if(self.vehicletype == str_type) {
@@ -604,10 +604,10 @@ function_1221d304() {
 function_b2775b52() {
   switch (self.vehicletype) {
     case # "veh_quad_player_wz_blk":
-    case # "hash_232abda4e81275f4":
+    case # "veh_quad_player_wz_blu":
     case # "veh_quad_player_wz_grn":
     case # "veh_quad_player_wz_tan":
-    case # "hash_2f8d60a5381870ee":
+    case # "veh_quad_player_wz_red":
       return (0, 0, 1);
     case # "vehicle_boct_mil_truck_cargo_wz_tan":
     case # "vehicle_boct_mil_truck_cargo_wz_dark":
@@ -670,7 +670,7 @@ function_b2775b52() {
 }
 
 function_6a3e277() {
-  if(!getdvarint(#"hash_9af4a204686e76d", 0) || !self function_1221d304()) {
+  if(!getdvarint(#"dev_draw_water_depth", 0) || !self function_1221d304()) {
     return;
   }
 
@@ -678,7 +678,7 @@ function_6a3e277() {
   self util::delay("<dev string:x372>", undefined, &function_fe9593b2);
   level flag::wait_till("<dev string:x33d>");
 
-  while(getdvarint(#"hash_9af4a204686e76d", 0)) {
+  while(getdvarint(#"dev_draw_water_depth", 0)) {
     waitframe(1);
 
     if(distance2d(level.players[0].origin, self.origin) > 1024) {
@@ -698,7 +698,7 @@ function_fe9593b2() {
   self endon(#"death");
   level flag::wait_till("<dev string:x33d>");
 
-  while(getdvarint(#"hash_9af4a204686e76d", 0)) {
+  while(getdvarint(#"dev_draw_water_depth", 0)) {
     waitframe(1);
 
     if(distance2d(level.players[0].origin, self.origin) > 1024) {
@@ -715,13 +715,13 @@ function_fe9593b2() {
 }
 
 function_2d706436() {
-  if(!getdvarint(#"hash_9af4a204686e76d", 0)) {
+  if(!getdvarint(#"dev_draw_water_depth", 0)) {
     return;
   }
 
   self endon(#"death", #"disconnect");
 
-  while(getdvarint(#"hash_9af4a204686e76d", 0)) {
+  while(getdvarint(#"dev_draw_water_depth", 0)) {
     n_height = getwaterheight(self.origin) - self.origin[2];
 
     if(n_height > 0) {
@@ -804,11 +804,11 @@ function_38146f54() {
   while(getdvarint(#"hash_184bc9c4871144d3", 0)) {
     waitframe(2);
 
-    if(!getdvarint(#"hash_639a741f419f5790", 0)) {
+    if(!getdvarint(#"dev_kill_player_vehicle", 0)) {
       continue;
     }
 
-    setDvar(#"hash_639a741f419f5790", 0);
+    setDvar(#"dev_kill_player_vehicle", 0);
 
     foreach(var_f0ffe8b2 in level.var_6eef6733) {
       foreach(vh_player in var_f0ffe8b2) {
@@ -923,7 +923,7 @@ function_9cc59537() {
           v_angles = point.angles;
           var_c24ea284 = undefined;
           var_4b82457c = distance2d(point.origin, level.players[0].origin);
-          var_24b0b1ea = itemlistbundle.var_7fb0967b;
+          var_24b0b1ea = itemlistbundle.distributiondistance;
 
           if(isDefined(var_24b0b1ea)) {
             if(items.size > 0) {
@@ -1264,7 +1264,7 @@ function_e8f0335f() {
 }
 
 event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
-  if(!getdvarint(#"hash_69592e1b2d05fb21", 0)) {
+  if(!getdvarint(#"dev_draw_dynents", 0)) {
     return;
   }
 
@@ -1272,7 +1272,7 @@ event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
   dynent notify(#"debug_draw");
   dynent endon(#"debug_draw");
 
-  while(getdvarint(#"hash_69592e1b2d05fb21", 0)) {
+  while(getdvarint(#"dev_draw_dynents", 0)) {
     waitframe(10);
 
     if(!isDefined(level.players[0])) {

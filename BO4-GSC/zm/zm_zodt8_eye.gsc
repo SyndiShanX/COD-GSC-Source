@@ -124,7 +124,7 @@ init_boss() {
   e_boss notsolid();
   e_boss.e_damage = getent("bs_bdy_dmg", "targetname");
   e_boss.e_damage.takedamage = 1;
-  e_boss.e_damage function_2baad8fc();
+  e_boss.e_damage makesentienttarget();
   e_boss.e_damage.zm_ai_category = #"boss";
   e_boss.e_damage enablelinkto();
   e_boss.e_damage linkto(e_boss);
@@ -149,13 +149,13 @@ function_8dec32e2() {
   sp_blight_father = getent("zombie_spawner_blight_father", "targetname");
   zm_transform::function_cfca77a7(sp_blight_father, #"hash_9ecf8085fb7a68f", &zm_ai_blight_father::function_39212989, 10, undefined, undefined, "aib_vign_zm_zod_bltfthr_spawn_pre_split", "aib_vign_zm_zod_bltfthr_spawn_post_split");
   sp_catalyst = getent("zombie_spawn_1", "script_string");
-  zm_transform::function_cfca77a7(sp_catalyst, #"hash_7c89b1397a38e3ad", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
+  zm_transform::function_cfca77a7(sp_catalyst, #"boss_fight_transform1", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
   sp_catalyst = getent("zombie_spawn_2", "script_string");
-  zm_transform::function_cfca77a7(sp_catalyst, #"hash_7c89ae397a38de94", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
+  zm_transform::function_cfca77a7(sp_catalyst, #"boss_fight_transform2", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
   sp_catalyst = getent("zombie_spawn_3", "script_string");
-  zm_transform::function_cfca77a7(sp_catalyst, #"hash_7c89af397a38e047", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
+  zm_transform::function_cfca77a7(sp_catalyst, #"boss_fight_transform3", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
   sp_catalyst = getent("zombie_spawn_4", "script_string");
-  zm_transform::function_cfca77a7(sp_catalyst, #"hash_7c89ac397a38db2e", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
+  zm_transform::function_cfca77a7(sp_catalyst, #"boss_fight_transform4", &zm_ai_utility::function_db610082, 0, undefined, &function_724b3e30, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
 }
 
 init_vo() {
@@ -866,7 +866,7 @@ function_8f3497ee(n_stage, str_loc) {
         mdl.origin -= (0, 0, 13800);
         mdl show();
         mdl.origin += (0, 0, 13800);
-        mdl clientfield::set("" + #"hash_15b23de7589e61a", 1);
+        mdl clientfield::set("" + #"ice_rising_fx", 1);
       }
 
       function_901c5ffe("pd", 1);
@@ -1704,7 +1704,7 @@ function_47073904(v_loc, n_time = 8) {
   e_target = util::spawn_model("tag_origin", v_loc);
   util::wait_network_frame();
   e_target clientfield::set("bs_att_mst_cf", 1);
-  e_target thread function_65bd10f6();
+  e_target thread boss_mist_end();
   wait 1;
   n_time_passed = 0;
 
@@ -1731,7 +1731,7 @@ function_47073904(v_loc, n_time = 8) {
   level notify(#"boss_mist_end");
 }
 
-function_65bd10f6() {
+boss_mist_end() {
   level waittill(#"hash_38f29f9cb03586ea", #"boss_mist_end", #"intermission");
   self clientfield::set("bs_att_mst_cf", 0);
   util::wait_network_frame(4);
@@ -2620,7 +2620,7 @@ boss_cleanup_zombie() {
 function_f5b2d086() {
   level endon(#"hash_38f29f9cb03586ea", #"spawn_zombies", #"hash_71fd67248b9a37ca", #"intermission");
   wait 6;
-  var_e8ebec1d = array(#"hash_7c89b1397a38e3ad", #"hash_7c89ae397a38de94", #"hash_7c89af397a38e047", #"hash_7c89ac397a38db2e");
+  var_e8ebec1d = array(#"boss_fight_transform1", #"boss_fight_transform2", #"boss_fight_transform3", #"boss_fight_transform4");
   level.var_8a64ef3a = 0;
   var_ffd2fe87 = 4 + level.var_f3c4bd00;
 

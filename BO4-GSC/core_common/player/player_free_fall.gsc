@@ -27,10 +27,10 @@ function_d2a1520c() {
   wingsuit = self namespace_eb06e24d::get_wingsuit();
 
   if(self util::is_female()) {
-    return wingsuit.var_5677bd3d;
+    return wingsuit.model_female;
   }
 
-  return wingsuit.var_94166112;
+  return wingsuit.model_male;
 }
 
 function_c9a18304(eventstruct) {

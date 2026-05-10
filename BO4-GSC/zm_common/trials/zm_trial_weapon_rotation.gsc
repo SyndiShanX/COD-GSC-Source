@@ -91,8 +91,8 @@ on_begin(var_44c4c23d, var_bd332e71) {
 }
 
 take_player_weapons(n_interval, e_player) {
-  e_player notify(#"hash_c1ae406f049058a");
-  e_player endon(#"disconnect", #"hash_c1ae406f049058a");
+  e_player notify(#"end_take_player_weapons");
+  e_player endon(#"disconnect", #"end_take_player_weapons");
   level endon(#"trial_round_end");
 
   if(!e_player zm_laststand::laststand_has_players_weapons_returned()) {
@@ -100,7 +100,7 @@ take_player_weapons(n_interval, e_player) {
   }
 
   if(isDefined(e_player.var_9b0383f5) && e_player.var_9b0383f5) {
-    e_player waittill(#"hash_1ac4338b0d419091");
+    e_player waittill(#"pap_use_finished");
   }
 
   a_weap = e_player getweaponslistprimaries();

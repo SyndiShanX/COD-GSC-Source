@@ -357,7 +357,7 @@ function_702ac990(e_player, e_trig) {
     }
   }
 
-  e_trig sethintstring(#"hash_6a6563f3b19ad5bd");
+  e_trig sethintstring(#"zm_towers/challenge_complete");
 
   switch (e_trig.challenge_struct.targetname) {
     case # "odin_brazier":
@@ -1834,7 +1834,7 @@ _good_door_opened(e_player, e_trig) {
   var_50ed6de = (0, 90, 0);
   var_aa4f9213 = level.var_5d1e28ac[self.var_860b8f1e];
   e_player thread function_ae982bb9(#"challenge_completed");
-  e_player clientfield::increment_to_player("" + #"hash_2bbcb9e09bd7bb26");
+  e_player clientfield::increment_to_player("" + #"challenge_complete_crowd_react");
 
   switch (var_aa4f9213) {
     case # "self_revive":
@@ -2046,7 +2046,7 @@ swap_weapon(w_reward) {
 
   foreach(w_gun in var_6822257f) {
     if(w_gun.rootweapon === w_reward) {
-      self zm_weapons::function_7c5dd4bd(w_gun);
+      self zm_weapons::give_full_ammo(w_gun);
       return;
     }
   }
@@ -2111,7 +2111,7 @@ function_a83b406a() {
       if(isDefined(e_player.challenge_struct)) {
         if(isDefined(e_player.challenge_struct.var_97467803) && e_player.challenge_struct.var_97467803) {
           if(e_player.challenge_struct flag::get(#"flag_challenge_active")) {
-            e_player.challenge_struct function_e4b04738(e_player.challenge_struct.var_5630d868, e_player, e_player.challenge_struct.e_trig.hint_string, e_player.challenge_struct.initboss_balcony_south);
+            e_player.challenge_struct complete_current_challenge(e_player.challenge_struct.var_5630d868, e_player, e_player.challenge_struct.e_trig.hint_string, e_player.challenge_struct.initboss_balcony_south);
           }
         }
       }
@@ -2119,7 +2119,7 @@ function_a83b406a() {
   }
 }
 
-function_e4b04738(var_5630d868, e_player, str_hint_text, var_2597a9f0) {
+complete_current_challenge(var_5630d868, e_player, str_hint_text, var_2597a9f0) {
   level zm_ui_inventory::function_7df6bb60(#"zm_towers_challenges_progress", var_5630d868, e_player);
   self function_2ae8eabe(var_5630d868, var_5630d868);
   self notify(var_2597a9f0);

@@ -3691,11 +3691,11 @@ _show_hit_marker(var_554cb812, var_1ed250ec) {
 function_5d36c37a(str_tag = "tag_aim_target") {
   if(!issentient(self) && !function_ffa5b184(self)) {
     if(isDefined(self gettagorigin(str_tag))) {
-      self function_2baad8fc(str_tag);
+      self makesentienttarget(str_tag);
       return;
     }
 
-    self function_2baad8fc();
+    self makesentienttarget();
   }
 }
 
@@ -3846,7 +3846,7 @@ is_spectating() {
 }
 
 function_8570168d() {
-  if(getDvar(#"hash_49e94b7aefac4f49", 0)) {
+  if(getDvar(#"ui_simulatect", 0)) {
     return true;
   }
 

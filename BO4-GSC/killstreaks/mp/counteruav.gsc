@@ -465,7 +465,7 @@ destroycounteruav(attacker, weapon) {
     attacker battlechatter::function_dd6a6012("counteruav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
     self killstreaks::function_73566ec7(attacker, weapon, self.owner);
-    luinotifyevent(#"player_callout", 2, #"hash_3544b7c59fa5c59c", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_counteruav", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 
@@ -488,8 +488,8 @@ deletecounteruav() {
     self thread playFX(params.ksexplosionfx);
   }
 
-  if(isDefined(params.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
-    self thread playFX(params.var_bb6c29b4);
+  if(isDefined(params.shockrifledestructionfx) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
+    self thread playFX(params.shockrifledestructionfx);
   }
 
   wait 0.1;

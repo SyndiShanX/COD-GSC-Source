@@ -236,7 +236,7 @@ function_5bac75b6(behaviortreeentity) {
 }
 
 function_4cc712c8(behaviortreeentity) {
-  return isDefined(self.var_8ba6ede3) && self.var_8ba6ede3;
+  return isDefined(self.shoulddigup) && self.shoulddigup;
 }
 
 use_low_attack() {
@@ -294,7 +294,7 @@ function_a5c4f83b(behaviortreeentity) {
 
 function_47e1bdeb(behaviortreeentity) {
   behaviortreeentity solid();
-  behaviortreeentity.var_8ba6ede3 = undefined;
+  behaviortreeentity.shoulddigup = undefined;
 }
 
 function_a5103696(behaviortreeentity) {
@@ -305,7 +305,7 @@ function_1980a07a(behaviortreeentity) {
   behaviortreeentity endon(#"death");
   behaviortreeentity zombiedogintro();
   behaviortreeentity pathmode("move allowed");
-  behaviortreeentity.var_8ba6ede3 = undefined;
+  behaviortreeentity.shoulddigup = undefined;
   behaviortreeentity notify(#"not_underground");
 }
 

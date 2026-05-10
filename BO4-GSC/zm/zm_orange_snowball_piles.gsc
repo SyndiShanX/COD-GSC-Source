@@ -41,7 +41,7 @@ function_dd028fcb(e_player) {
     return 0;
   }
 
-  if(level flag::get(#"hash_5e095d53ae9513f5")) {
+  if(level flag::get(#"yellow_snowballs_granted")) {
     self sethintstring(#"hash_7a1ce549121dd33f");
     return 1;
   }
@@ -70,7 +70,7 @@ function_79ef6b93() {
   self playSound("fly_pickup_snowball");
 
   if(isDefined(self.var_3b55baa1) && (var_d49d10b0 == level.w_snowball || var_d49d10b0 == level.w_snowball_upgraded || var_d49d10b0 == level.w_snowball_yellow || var_d49d10b0 == level.w_snowball_yellow_upgraded)) {
-    if(level flag::get(#"hash_5e095d53ae9513f5")) {
+    if(level flag::get(#"yellow_snowballs_granted")) {
       if(var_d49d10b0 == level.w_snowball || var_d49d10b0 == level.w_snowball_upgraded) {
         if(level flag::get(#"extra_snowballs")) {
           self zm_weapons::weapon_give(level.w_snowball_yellow_upgraded, 1, 0);
@@ -94,7 +94,7 @@ function_79ef6b93() {
   n_slot = self gadgetgetslot(var_d49d10b0);
   self.var_e01bb56 = self gadgetpowerget(n_slot);
 
-  if(level flag::get(#"hash_5e095d53ae9513f5")) {
+  if(level flag::get(#"yellow_snowballs_granted")) {
     if(level flag::get(#"extra_snowballs")) {
       self zm_weapons::weapon_give(level.w_snowball_yellow_upgraded, 1, 0);
     } else {

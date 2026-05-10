@@ -60,7 +60,7 @@ init() {
   clientfield::register("missile", "" + #"chaos_bolt_fx", 16000, 2, "int");
   clientfield::register("scriptmover", "" + #"pegasus_emerge", 16000, 1, "counter");
   clientfield::register("scriptmover", "" + #"pegasus_storm", 16000, 1, "int");
-  clientfield::register("allplayers", "" + #"hash_73e309ffb25bf63d", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"boss_lightning_bolt", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_3bb8b5cda11eecc6", 16000, 1, "counter");
   clientfield::register("scriptmover", "" + #"lightning_impact_fx", 16000, 1, "int");
   clientfield::register("scriptmover", "" + #"lightning_arc_fx", 16000, 1, "int");
@@ -80,7 +80,7 @@ init() {
   level flag::init(#"hash_75d94a4065de2749");
   level flag::init(#"hash_3e2ec7f6fb6b50c9");
   level flag::init(#"hash_3e2ec4f6fb6b4bb0");
-  level flag::init(#"hash_1c0b421abe38d4e0");
+  level flag::init(#"oracle_key_picked_up");
   level flag::init(#"boss_battle_complete");
   zm_sq::register(#"boss_battle", #"stat_tracker", #"stat_tracker", &stat_tracker_setup, &stat_tracker_cleanup, 1);
   zm_sq::start(#"boss_battle");
@@ -129,8 +129,8 @@ init() {
   level.s_boss_battle.var_5dc26e42 = 0;
   level.s_boss_battle.var_7fc7f236 = 15000;
   level.s_boss_battle.var_5db6ed5f = getweapon("perseus_bolt_projectile");
-  level.s_boss_battle.var_86d9f46c = getstatuseffect(#"hash_19533caf858a9f3b");
-  level.s_boss_battle.var_b42f3b39 = getstatuseffect(#"hash_12a64221f4d27f9b");
+  level.s_boss_battle.var_86d9f46c = getstatuseffect(#"shock_zm_trap");
+  level.s_boss_battle.var_b42f3b39 = getstatuseffect(#"elephant_spear_fire");
 
   if(zm_utility::is_ee_enabled()) {
     setDvar(#"hash_336a4b6a4bdec400", 0);
@@ -224,7 +224,7 @@ function_3a2efd4e(b_cheated = 0, var_7982b1c8 = 1, var_8ef91a04 = 1) {
   zm_round_spawning::function_376e51ef(#"skeleton");
   zm_round_spawning::function_376e51ef(#"gegenees");
   level function_3de660a0();
-  level clientfield::set("" + #"hash_71f9fcfb2cd84a9c", 1);
+  level clientfield::set("" + #"boss_arena_visgroup", 1);
   zm_zonemgr::enable_zone("zone_boss_plateau_1");
   zm_zonemgr::enable_zone("zone_boss_plateau_2");
   zm_zonemgr::enable_zone("zone_boss_plateau_3");
@@ -641,7 +641,7 @@ function_20bfbc00(a_ents) {
   e_boss clientfield::set("" + #"special_target", 1);
 
   if(!function_ffa5b184(e_boss)) {
-    e_boss function_2baad8fc();
+    e_boss makesentienttarget();
   }
 
   if(!isDefined(level.var_2c19331b)) {
@@ -1039,7 +1039,7 @@ function_f6306dea() {
         }
 
         if(math::cointoss() || var_c47b0cbf) {
-          level thread function_4a58a0(e_perseus);
+          level thread teleport_attack(e_perseus);
           level waittill(#"teleport_attack_complete");
         } else {
           level thread function_d9802986();
@@ -1266,7 +1266,7 @@ function_21ef9bb7(a_ents) {
   target_set(e_boss);
 
   if(!function_ffa5b184(e_boss)) {
-    e_boss function_2baad8fc();
+    e_boss makesentienttarget();
   }
 
   while(true) {
@@ -1448,7 +1448,7 @@ function_b4723f8e(v_origin, e_pegasus) {
       n_radius_squared = n_radius * n_radius;
 
       if(distancesquared(e_player.origin, v_origin) < n_radius_squared) {
-        e_player clientfield::set("" + #"hash_73e309ffb25bf63d", 1);
+        e_player clientfield::set("" + #"boss_lightning_bolt", 1);
         e_player thread lightning_flash();
         e_player status_effect::status_effect_apply(level.s_boss_battle.var_86d9f46c, undefined, e_pegasus);
         e_player dodamage(10, v_origin);
@@ -1525,7 +1525,7 @@ function_290d42b8(b_skipped = 0) {
   }
 }
 
-function_4a58a0(e_perseus) {
+teleport_attack(e_perseus) {
   level endon(#"boss_battle_over", #"trial_round_end");
 
   if(getdvarint(#"zm_debug_ee", 0)) {
@@ -1580,11 +1580,11 @@ function_4a58a0(e_perseus) {
     if(level flag::get(#"hash_6dab61ca45a8eaea")) {
       level notify(#"perseus_defeated");
       e_perseus thread function_caa7eeb();
-      level flag::wait_till(#"hash_1c0b421abe38d4e0");
+      level flag::wait_till(#"oracle_key_picked_up");
 
       foreach(player in getplayers()) {
-        if(isDefined(player) && player clientfield::get_to_player("" + #"hash_403e80cafccc207c")) {
-          player clientfield::set_to_player("" + #"hash_403e80cafccc207c", 0);
+        if(isDefined(player) && player clientfield::get_to_player("" + #"oracle_boon_recieved")) {
+          player clientfield::set_to_player("" + #"oracle_boon_recieved", 0);
         }
       }
 
@@ -1662,7 +1662,7 @@ function_caa7eeb() {
   var_791705a1 = level.var_92830991 zm_unitrigger::function_fac87205(&function_662093d4, 64);
   level.var_92830991 delete();
   var_791705a1 zm_vo::function_a2bd5a0c(#"hash_213d18d49a47d63b");
-  level flag::set(#"hash_1c0b421abe38d4e0");
+  level flag::set(#"oracle_key_picked_up");
 }
 
 function_662093d4(player) {
@@ -2312,7 +2312,7 @@ function_27486895(cmd) {
       level thread zm_red::super_open_sesame();
       level thread function_3a2efd4e(1);
       break;
-    case # "hash_a12e7297235e57b":
+    case # "boss_stage_3":
       level thread function_290d42b8(1);
       break;
     case # "hash_7fe81b8551badbeb":

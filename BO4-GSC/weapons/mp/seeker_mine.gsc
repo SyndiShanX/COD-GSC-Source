@@ -68,12 +68,12 @@ function_5aa948ab() {
     level.var_9d47488.tunables.prompttime = 0;
   }
 
-  if(!isDefined(level.var_9d47488.tunables.var_b9cf9139)) {
-    level.var_9d47488.tunables.var_b9cf9139 = 0;
+  if(!isDefined(level.var_9d47488.tunables.perceptiontime)) {
+    level.var_9d47488.tunables.perceptiontime = 0;
   }
 
-  if(!isDefined(level.var_9d47488.tunables.var_5ee35075)) {
-    level.var_9d47488.tunables.var_5ee35075 = 0;
+  if(!isDefined(level.var_9d47488.tunables.latencytime)) {
+    level.var_9d47488.tunables.latencytime = 0;
   }
 
   if(!isDefined(level.var_9d47488.tunables.var_9bdbf8df)) {
@@ -88,15 +88,15 @@ function_5aa948ab() {
     level.var_9d47488.tunables.var_9abfd5cf = 0;
   }
 
-  if(!isDefined(level.var_9d47488.tunables.var_e8e9a9cc)) {
-    level.var_9d47488.tunables.var_e8e9a9cc = 0;
+  if(!isDefined(level.var_9d47488.tunables.rootedtime)) {
+    level.var_9d47488.tunables.rootedtime = 0;
   }
 
-  if(!isDefined(level.var_9d47488.tunables.var_a06eff0b)) {
-    level.var_9d47488.tunables.var_a06eff0b = 0;
+  if(!isDefined(level.var_9d47488.tunables.successdelaytime)) {
+    level.var_9d47488.tunables.successdelaytime = 0;
   }
 
-  level.var_9d47488.tunables.var_1f80b74 = level.var_9d47488.tunables.prompttime + level.var_9d47488.tunables.var_b9cf9139 + level.var_9d47488.tunables.var_5ee35075 + level.var_9d47488.tunables.var_9bdbf8df + level.var_9d47488.tunables.var_2fa95b34;
+  level.var_9d47488.tunables.var_1f80b74 = level.var_9d47488.tunables.prompttime + level.var_9d47488.tunables.perceptiontime + level.var_9d47488.tunables.latencytime + level.var_9d47488.tunables.var_9bdbf8df + level.var_9d47488.tunables.var_2fa95b34;
   level.var_9d47488.tunables.maxduration = level.var_9d47488.tunables.var_1f80b74 + level.var_9d47488.tunables.failedtime;
 
   if(!isDefined(level.var_9d47488.tunables.yaw)) {
@@ -303,8 +303,8 @@ function_f43b3686(originalowner) {
     }
   }
 
-  if(isDefined(level.var_4b3541d4.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    playFX(level.var_4b3541d4.var_bb6c29b4, self.origin);
+  if(isDefined(level.var_4b3541d4.shockrifledestructionfx) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFX(level.var_4b3541d4.shockrifledestructionfx, self.origin);
   }
 
   arrayremovevalue(level.seeker_mine[originalownerentnum].mines, self);
@@ -516,7 +516,7 @@ function_724e8f1c(var_26b2b1bb, arcsource, depth) {
       self.var_8103e91a = var_26b2b1bb;
     }
 
-    function_1750438e(level.var_9d47488.tunables.var_1aab44e0, arcsource.arcweapon, arcsource.owner);
+    function_1750438e(level.var_9d47488.tunables.sestart, arcsource.arcweapon, arcsource.owner);
     return self.seeker_mine_se.seduration;
   }
 
@@ -562,7 +562,7 @@ function_afd97197() {
 }
 
 minigame_start(var_26b2b1bb, seekermine) {
-  self notify(#"hash_3319597daca726ad");
+  self notify(#"seeker_minigame_start");
   self.var_dda9b735.state = 0;
   self.var_dda9b735.prompt = 0;
   self.var_dda9b735.isshocked = 1;
@@ -624,8 +624,8 @@ function_dfbbefb8() {
   wait level.var_9d47488.tunables.prompttime;
   self.var_dda9b735.prompt = 2;
   self.var_dda9b735.var_aacd5e7c = gettime();
-  wait level.var_9d47488.tunables.var_5ee35075;
-  wait level.var_9d47488.tunables.var_b9cf9139;
+  wait level.var_9d47488.tunables.latencytime;
+  wait level.var_9d47488.tunables.perceptiontime;
   self.var_dda9b735.prompt = 0;
   wait level.var_9d47488.tunables.var_9bdbf8df;
   self notify(#"seeker_mine_prompt_closed");
@@ -724,8 +724,8 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
       println("<dev string:x38>");
       self playsoundtoplayer(#"uin_seeker_qte_fail", self);
 
-      if(isDefined(level.var_9d47488.tunables.var_a60d049b)) {
-        self playrumbleonentity(level.var_9d47488.tunables.var_a60d049b);
+      if(isDefined(level.var_9d47488.tunables.failrumble)) {
+        self playrumbleonentity(level.var_9d47488.tunables.failrumble);
       }
 
       self battlechatter::pain_vox("MOD_ELECTROCUTED", self.arcweapon);
@@ -738,14 +738,14 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
       self playsoundtoplayer(#"uin_seeker_qte_success", self);
       self battlechatter::function_72b65730();
       function_1750438e(level.var_9d47488.tunables.sesuccess, seekermine.arcweapon, seekermine.owner);
-      animdelay = level.var_9d47488.tunables.var_a06eff0b;
+      animdelay = level.var_9d47488.tunables.successdelaytime;
       println("<dev string:x59>");
       break;
     case 2:
       waitduration = level.var_9d47488.tunables.failedtime;
       self playsoundtoplayer(#"uin_seeker_qte_fail", self);
       self battlechatter::pain_vox("MOD_ELECTROCUTED", self.arcweapon);
-      function_1750438e(level.var_9d47488.tunables.var_292fba11, seekermine.arcweapon, seekermine.owner);
+      function_1750438e(level.var_9d47488.tunables.sefail, seekermine.arcweapon, seekermine.owner);
       println("<dev string:x76>");
       break;
     case 3:
@@ -771,7 +771,7 @@ function_24d08109(seekermine, waitduration, var_26b2b1bb, state) {
   self waittilltimeout(waitduration, #"seeker_mine_death");
 
   if(state == 1) {
-    wait level.var_9d47488.tunables.var_e8e9a9cc;
+    wait level.var_9d47488.tunables.rootedtime;
   } else {
     thread function_e380fde7(undefined, undefined, 0, 0, 0);
   }

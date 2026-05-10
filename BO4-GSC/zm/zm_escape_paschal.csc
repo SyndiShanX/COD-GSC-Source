@@ -22,20 +22,20 @@ init() {
   clientfield::register("scriptmover", "" + #"hash_6e2f9a57d1bc4b6a", 1, 1, "int", &function_e5437696, 0, 0);
   clientfield::register("scriptmover", "" + #"ritual_gobo", 1, 1, "int", &function_d598fd7e, 0, 0);
   clientfield::register("scriptmover", "" + #"seagull_fx", 1, 1, "int", &seagull_fx, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_7c708a514455bf88", 1, 1, "int", &function_430edc4e, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_592c96b2803d9fd5", 1, 1, "int", &function_a4c0dc8a, 0, 0);
+  clientfield::register("scriptmover", "" + #"seagull_blast_fx", 1, 1, "int", &seagull_blast_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"seagull_disappear_fx", 1, 1, "int", &seagull_disappear_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"summoning_key_glow", 1, 1, "int", &summoning_key_glow, 0, 0);
   clientfield::register("actor", "" + #"hash_2b6e463a7a482630", 1, 1, "counter", &function_de16ce8a, 0, 0);
   clientfield::register("actor", "" + #"hash_29d283d7f747d358", 1, 1, "counter", &function_9c59bce1, 0, 0);
   clientfield::register("actor", "" + #"hash_df589cc30f4c7dd", 1, 1, "int", &function_e482b6b8, 0, 0);
   clientfield::register("allplayers", "" + #"hash_4f58771e117ee3ee", 1, 1, "int", &function_a596ea8d, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_2928b6d60aaacda6", 1, getminbitcountfornum(7), "int", &function_6357e884, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_670a34b297f8faca", 1, 1, "int", &function_d326587e, 0, 0);
+  clientfield::register("scriptmover", "" + #"seagull_glint_fx", 1, 1, "int", &seagull_glint_fx, 0, 0);
   clientfield::register("toplayer", "" + #"duffel_prison", 1, 1, "int", &duffel_prison, 0, 0);
   clientfield::register("toplayer", "" + #"shell_shock_player", 1, 1, "int", &function_e83bf3a, 0, 0);
-  clientfield::register("actor", "" + #"brutus_stun_shell", 1, 1, "int", &function_e33e10b9, 0, 0);
+  clientfield::register("actor", "" + #"brutus_stun_shell", 1, 1, "int", &brutus_stun_shell, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_376c030aee1d6ccb", 1, 2, "int", &function_3537ad19, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_201ef69f0a0a5dce", 1, 1, "int", &group_bot_mp, 0, 0);
+  clientfield::register("scriptmover", "" + #"corpse_burn_fx", 1, 1, "int", &group_bot_mp, 0, 0);
   clientfield::register("allplayers", "" + #"hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
   clientfield::register("scriptmover", "" + #"setup_outro_ghosts", 1, 1, "int", &setup_outro_ghosts, 0, 0);
   clientfield::register("toplayer", "" + #"hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
@@ -50,11 +50,11 @@ init() {
   level._effect[#"kr_glow"] = #"hash_10198f7ef5535f3a";
   level._effect[#"ritual_gobo"] = #"hash_140f0bd65e4d70d2";
   level._effect[#"ritual_gobo_activate"] = #"hash_66bb6697a9882bd6";
-  level._effect[#"door_explosion"] = #"hash_4fba451426ea3bb7";
-  level._effect[#"hash_1a454ca256b757e6"] = #"hash_5028a74e717df332";
+  level._effect[#"door_explosion"] = #"explosions/fx8_exp_bomb_wood";
+  level._effect[#"seagull_trail_fx"] = #"hash_5028a74e717df332";
   level._effect[#"hash_7d5a495febe292e4"] = #"hash_321ad275226af072";
-  level._effect[#"hash_592c96b2803d9fd5"] = #"hash_2a63b961f5ed2417";
-  level._effect[#"hash_6d3840ae2ba64bdd"] = #"hash_362eac491136c198";
+  level._effect[#"seagull_disappear_fx"] = #"hash_2a63b961f5ed2417";
+  level._effect[#"lighthouse_r_b"] = #"hash_362eac491136c198";
   level._effect[#"hash_289e42e25063ac26"] = #"hash_e714752caf5a93d";
   level._effect[#"hash_287c57e25046e96f"] = #"hash_e416a52caccc0f4";
   level._effect[#"hash_287868e250431d7b"] = #"hash_e454d52cad07884";
@@ -64,7 +64,7 @@ init() {
   level._effect[#"hash_86cc6dd23ec4ddb"] = #"hash_152749b3d661b4cd";
   level._effect[#"hash_6b3f19f4c90a1b75"] = #"hash_6f69cced7e86cb70";
   level._effect[#"hash_508055920f327121"] = #"hash_8c3d3c756b91f54";
-  level._effect[#"hash_201ef69f0a0a5dce"] = #"hash_1f06be75e7efc6a2";
+  level._effect[#"corpse_burn_fx"] = #"hash_1f06be75e7efc6a2";
   level._effect["" + #"shock_brutus_sp"] = #"hash_992fe8f8e8dfb1";
   scene::add_scene_func(#"p8_fxanim_zm_esc_blast_afterlife_seagull_ghost_bundle", &function_bbf4268e, "shot_1");
 }
@@ -163,8 +163,8 @@ seagull_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
   }
 
   if(newval) {
-    self.var_d1a51444 = util::playFXOnTag(localclientnum, level._effect[#"hash_1a454ca256b757e6"], self, "j_wrist_ri");
-    self.var_7b2dcfc6 = util::playFXOnTag(localclientnum, level._effect[#"hash_1a454ca256b757e6"], self, "j_wrist_le");
+    self.var_d1a51444 = util::playFXOnTag(localclientnum, level._effect[#"seagull_trail_fx"], self, "j_wrist_ri");
+    self.var_7b2dcfc6 = util::playFXOnTag(localclientnum, level._effect[#"seagull_trail_fx"], self, "j_wrist_le");
     self.n_trail_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_7d5a495febe292e4"], self, "j_spine1");
     self function_78233d29(#"hash_24cdaac09819f0e", "", "Alpha", 1);
   }
@@ -183,7 +183,7 @@ function_bbf4268e(clientnum, a_ents) {
   }
 }
 
-function_430edc4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+seagull_blast_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self.var_8eef2f82)) {
     killfx(localclientnum, self.var_8eef2f82);
     self.var_8eef2f82 = undefined;
@@ -208,8 +208,8 @@ function_430edc4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_a4c0dc8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.var_a5b517e5 = util::playFXOnTag(localclientnum, level._effect[#"hash_592c96b2803d9fd5"], self, "tag_origin");
+seagull_disappear_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  self.var_a5b517e5 = util::playFXOnTag(localclientnum, level._effect[#"seagull_disappear_fx"], self, "tag_origin");
 }
 
 function_a596ea8d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -282,7 +282,7 @@ function_49b054dd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   exploder::stop_exploder("lgtexp_wardenhouse_red");
 
   if(newval == 1) {
-    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"hash_6d3840ae2ba64bdd"], self, "tag_origin");
+    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"lighthouse_r_b"], self, "tag_origin");
     return;
   }
 
@@ -384,7 +384,7 @@ function_e482b6b8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_d326587e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+seagull_glint_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self.var_4e35f286)) {
     stopfx(localclientnum, self.var_4e35f286);
     self.var_4e35f286 = undefined;
@@ -404,7 +404,7 @@ function_e83bf3a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self thread postfx::exitpostfxbundle(#"pstfx_slowed");
 }
 
-function_e33e10b9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+brutus_stun_shell(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     self.var_91f82333 = util::playFXOnTag(localclientnum, level._effect[#"brutus_stun"], self, "tag_origin");
 
@@ -455,7 +455,7 @@ group_bot_mp(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   }
 
   if(newval == 1) {
-    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[#"hash_201ef69f0a0a5dce"], self, "tag_origin");
+    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[#"corpse_burn_fx"], self, "tag_origin");
 
     if(!isDefined(self.var_dae2b711)) {
       self.var_dae2b711 = self playLoopSound(#"hash_56a667536b4a0ffc");

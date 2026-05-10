@@ -922,8 +922,8 @@ function_75070c6() {
 }
 
 function_e5e8cbd2(b_respawn) {
-  self notify(#"hash_25ca29da51a78702");
-  self endon(#"hash_25ca29da51a78702");
+  self notify(#"update_purified_fx");
+  self endon(#"update_purified_fx");
   self.var_5c8ac43e = 1;
 
   if(isDefined(level.var_e1ade08)) {

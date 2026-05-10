@@ -414,7 +414,7 @@ function_c0fa0ecb(weapon) {
 function_c1f96c48(weapon) {
   switch (weapon.statname) {
     case # "ar_accurate_t8":
-      return # "hash_3d392c6f96aa2ac1";
+      return # "camo_active_headshot_base_headshots";
     case # "ar_fastfire_t8":
       return # "hash_9da725fe15aa048";
     case # "lmg_standard_t8":
@@ -438,7 +438,7 @@ function_938534a8(permanentstatname) {
   var_19ef0b8d = undefined;
 
   switch (permanentstatname) {
-    case # "hash_3d392c6f96aa2ac1":
+    case # "camo_active_headshot_base_headshots":
       var_19ef0b8d = #"camo_active_ar_accurate_base";
       break;
     case # "hash_9da725fe15aa048":

@@ -606,8 +606,8 @@ function_96ce9058(localclientnum, var_6c2b2289, inventoryitem, item) {
       waitframe(1);
 
       for(i = 0; i < 5; i++) {
-        if(isDefined(item.itementry.objectives[i]) && isDefined(item.itementry.objectives[i].var_7e835304)) {
-          value = stats::get_stat_global(localclientnum, item.itementry.objectives[i].var_7e835304);
+        if(isDefined(item.itementry.objectives[i]) && isDefined(item.itementry.objectives[i].objectivestatname)) {
+          value = stats::get_stat_global(localclientnum, item.itementry.objectives[i].objectivestatname);
 
           if(isDefined(value) && value != var_1ce96a13[i]) {
             var_1ce96a13[i] = value;
@@ -1089,10 +1089,10 @@ function_1a99656a(localclientnum, inventoryitem, networkid, itemid, count, total
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "armorMax"), armormax);
     description = isDefined(item.itementry.description) ? item.itementry.description : # "";
 
-    if(getDvar(#"hash_4a5fd7d94cfc9dfd", 0) == 1) {
+    if(getDvar(#"wz_mp_character_unlocks_outfits", 0) == 1) {
       if(isDefined(item.itementry.unlockableitemref)) {
-        if(isDefined(item.itementry.var_a51bc1f7)) {
-          description = isDefined(item.itementry.var_a51bc1f7) ? item.itementry.var_a51bc1f7 : # "";
+        if(isDefined(item.itementry.outfitunlockdescription)) {
+          description = isDefined(item.itementry.outfitunlockdescription) ? item.itementry.outfitunlockdescription : # "";
         }
       }
     }
@@ -1441,8 +1441,8 @@ function_39b663b7(localclientnum, inventoryitem, item) {
 
         var_2571317b = 0;
 
-        if(isDefined(item.itementry.objectives[i].var_7e835304)) {
-          var_2571317b = setuimodelvalue(createuimodel(objectivemodel, "unlockProgress"), stats::get_stat_global(localclientnum, item.itementry.objectives[i].var_7e835304));
+        if(isDefined(item.itementry.objectives[i].objectivestatname)) {
+          var_2571317b = setuimodelvalue(createuimodel(objectivemodel, "unlockProgress"), stats::get_stat_global(localclientnum, item.itementry.objectives[i].objectivestatname));
         } else {
           setuimodelvalue(createuimodel(objectivemodel, "unlockProgress"), -1);
         }
@@ -1459,7 +1459,7 @@ function_39b663b7(localclientnum, inventoryitem, item) {
     }
 
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "unlockableItemRef"), item.itementry.unlockableitemref);
-    setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "quote"), item.itementry.var_e8b98a8a);
+    setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "quote"), item.itementry.unlockablequote);
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "rewardName"), item.itementry.rewardname);
   }
 }
@@ -2497,10 +2497,10 @@ function_6231c19(params) {
     networkid = item_world_util::function_970b8d86(self, var_a4250c2b);
     item = function_15d578f4(params.localclientnum, networkid);
 
-    if(isDefined(item) && isDefined(item.itementry) && isDefined(item.itementry.var_340eac1f) && item.itementry.var_340eac1f) {
+    if(isDefined(item) && isDefined(item.itementry) && isDefined(item.itementry.istacticalweapon) && item.itementry.istacticalweapon) {
       setuimodelvalue(level.var_53cbbb33[params.localclientnum], 0);
       setuimodelvalue(level.var_3a0390dd[params.localclientnum], 1);
-    } else if(isDefined(item) && isDefined(item.itementry) && isDefined(item.itementry.var_dc6c5d3b) && item.itementry.var_dc6c5d3b) {
+    } else if(isDefined(item) && isDefined(item.itementry) && isDefined(item.itementry.isoperatorweapon) && item.itementry.isoperatorweapon) {
       setuimodelvalue(level.var_3a0390dd[params.localclientnum], 0);
       setuimodelvalue(level.var_53cbbb33[params.localclientnum], 1);
     } else {
@@ -2638,22 +2638,22 @@ function_b1136fc8(localclientnum, item) {
 
     switch (item.itementry.itemtype) {
       case # "weapon":
-        playSound(localclientnum, #"hash_67fed8a52accbb23", item.origin);
+        playSound(localclientnum, #"fly_drop_weapon", item.origin);
         break;
       case # "ammo":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
       case # "health":
-        playSound(localclientnum, #"hash_4d393a136d0df945", item.origin);
+        playSound(localclientnum, #"fly_drop_health", item.origin);
         break;
       case # "equipment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
       case # "armor":
-        playSound(localclientnum, #"hash_6bd51d5a531ff32", item.origin);
+        playSound(localclientnum, #"fly_drop_armor", item.origin);
         break;
       case # "backpack":
-        playSound(localclientnum, #"hash_60e9138ddc9660ed", item.origin);
+        playSound(localclientnum, #"fly_drop_backpack", item.origin);
         break;
       case # "attachment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
@@ -2680,13 +2680,13 @@ function_31868137(localclientnum, item) {
 
     switch (item.itementry.itemtype) {
       case # "weapon":
-        playSound(localclientnum, #"hash_62fabedcce13774c", item.origin);
+        playSound(localclientnum, #"fly_pickup_weapon", item.origin);
         break;
       case # "ammo":
         playSound(localclientnum, #"fly_pickup_ammo", item.origin);
         break;
       case # "health":
-        playSound(localclientnum, #"hash_7cb9f9cf7068ccee", item.origin);
+        playSound(localclientnum, #"fly_pickup_health", item.origin);
         break;
       case # "equipment":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
@@ -2695,10 +2695,10 @@ function_31868137(localclientnum, item) {
         playSound(localclientnum, #"fly_pickup_armor", item.origin);
         break;
       case # "backpack":
-        playSound(localclientnum, #"hash_69949bb7db9ef21e", item.origin);
+        playSound(localclientnum, #"fly_pickup_backpack", item.origin);
         break;
       case # "attachment":
-        playSound(localclientnum, #"hash_48ae9b1190e79fc5", item.origin);
+        playSound(localclientnum, #"fly_pickup_attachment", item.origin);
         break;
       case # "quest":
         playSound(localclientnum, #"hash_5738a0fcb2e4efca", item.origin);

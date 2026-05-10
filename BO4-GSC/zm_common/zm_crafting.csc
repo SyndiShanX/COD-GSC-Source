@@ -94,8 +94,8 @@ function_b18074d0(name) {
       blueprint.w_result = get_component(blueprint.result);
       level.var_5df2581a[name] = blueprint;
 
-      if(!isDefined(blueprint.var_4dbc4aee)) {
-        blueprint.var_4dbc4aee = "ERROR: Missing Prompt String";
+      if(!isDefined(blueprint.craftingprompt)) {
+        blueprint.craftingprompt = "ERROR: Missing Prompt String";
       }
     }
   } else {

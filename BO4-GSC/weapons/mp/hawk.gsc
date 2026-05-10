@@ -284,7 +284,7 @@ function_17b75237(attacker, victim, weapon, attackerweapon, meansofdeath) {
     return false;
   }
 
-  if(gettime() - (isDefined(var_f27d6782.var_a7e1d732) ? var_f27d6782.var_a7e1d732 : 0) <= int(level.hawk_settings.bundle.var_fb7c1412 * 1000)) {
+  if(gettime() - (isDefined(var_f27d6782.var_a7e1d732) ? var_f27d6782.var_a7e1d732 : 0) <= int(level.hawk_settings.bundle.tag_grace_period * 1000)) {
     if(isDefined(level.playgadgetsuccess)) {
       attacker thread[[level.playgadgetsuccess]](level.hawk_settings.weapon, undefined, self, undefined);
     }
@@ -484,7 +484,7 @@ getvalidtargets(hawk, &stance_offsets) {
 
   forward = anglesToForward(self.hawk.var_82bf9f7b);
   bundle = level.hawk_settings.bundle;
-  var_e4f883c1 = bundle.var_957e91c4 * bundle.var_957e91c4;
+  var_e4f883c1 = bundle.tag_distance * bundle.tag_distance;
   now = gettime();
   enemies = self getenemies();
 
@@ -782,7 +782,7 @@ function_9ace0fb6(targets) {
 
           info.state = 1;
           info.var_a7e1d732 = time;
-        } else if(isDefined(info.var_a7e1d732) && time - info.var_a7e1d732 < int(bundle.var_fb7c1412 * 1000)) {
+        } else if(isDefined(info.var_a7e1d732) && time - info.var_a7e1d732 < int(bundle.tag_grace_period * 1000)) {
           info.state = 1;
           info.var_a7e1d732 = time;
         }

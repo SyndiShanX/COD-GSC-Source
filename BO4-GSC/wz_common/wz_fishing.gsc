@@ -249,7 +249,7 @@ function_ee4ce537(dynent) {
 function_6c71782a(dynent) {
   self notify("48d65f5f22c36da2");
   self endon("48d65f5f22c36da2");
-  self endon(#"death", #"hash_61bb9580151c93d5", #"hash_667fd08050e0942b");
+  self endon(#"death", #"hash_61bb9580151c93d5", #"fishing_force_end");
 
   if(!isPlayer(self)) {
     return;

@@ -977,7 +977,7 @@ white_devgui() {
 
     switch (str_command) {
       case # "spawn_all_perks":
-        level.var_e8d9c0d1 = 1;
+        level.spawn_all_perks = 1;
         break;
       case # "start_lgt_exp":
         level flag::set("<dev string:x416>");
@@ -991,15 +991,15 @@ white_devgui() {
       case # "hash_3a77444633569cdc":
         level flag::clear("<dev string:x437>");
         break;
-      case # "hash_75c01ef1f8005214":
+      case # "enable_soul_fill":
         iprintln("<dev string:x444>");
         level flag::set(#"soul_fill");
         break;
-      case # "hash_7db70cb23b9d2739":
+      case # "disable_soul_fill":
         iprintln("<dev string:x462>");
         level flag::clear(#"soul_fill");
         break;
-      case # "hash_708994ac8f2d6d5":
+      case # "start_insanity_mode":
         if(zm_utility::is_ee_enabled()) {
           zm_sq::function_87306f8a(#"insanity_mode", #"step_6");
         } else {

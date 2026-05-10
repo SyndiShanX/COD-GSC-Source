@@ -104,7 +104,7 @@ function_3dab3302() {
 }
 
 function_93eab559() {
-  level clientfield::set("" + #"hash_42e03f9ae74a1070", 1);
+  level clientfield::set("" + #"special_round_postfx", 1);
 
   if(zm_utility::is_standard()) {
     return;
@@ -121,7 +121,7 @@ function_41509519(var_d25bbdd5) {
   }
 
   level notify(#"special_round_ending");
-  level clientfield::set("" + #"hash_42e03f9ae74a1070", 0);
+  level clientfield::set("" + #"special_round_postfx", 0);
 }
 
 function_4c350e72() {

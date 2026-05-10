@@ -19,16 +19,16 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_frostbite", #"hash_5386c3e338c1b314", "t7_icon_zm_aat_thunder_wall");
-  clientfield::register("actor", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &function_bad6b477, 1, 0);
-  clientfield::register("vehicle", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &function_bad6b477, 1, 0);
+  aat::register("zm_aat_frostbite", #"zmui/zm_aat_frostbite", "t7_icon_zm_aat_thunder_wall");
+  clientfield::register("actor", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &aat_frostbite_trail, 1, 0);
+  clientfield::register("vehicle", "zm_aat_frostbite_trail_clientfield", 1, 1, "int", &aat_frostbite_trail, 1, 0);
   clientfield::register("actor", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
   clientfield::register("vehicle", "zm_aat_frostbite_explosion_clientfield", 1, 1, "counter", &aat_frostbite_explosion, 1, 0);
   level._effect[#"aat_frostbite_trail"] = "zm_weapons/fx8_aat_water_torso";
   level._effect[#"aat_frostbite_explosion"] = "zm_weapons/fx8_aat_water_exp";
 }
 
-function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+aat_frostbite_trail(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     str_fx_tag = self zm_utility::function_467efa7b(1);
 

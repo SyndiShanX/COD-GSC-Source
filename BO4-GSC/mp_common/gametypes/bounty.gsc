@@ -139,7 +139,7 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_defaults::function_daa7e9d5();
   laststand_mp::function_367cfa1b(&function_95002a59);
   laststand_mp::function_eb8c0e47(&onplayerrevived);
-  setDvar(#"hash_7036719f41a78d54", getgametypesetting(#"laststandrevivehealth"));
+  setDvar(#"player_laststandrevivehealth", getgametypesetting(#"laststandrevivehealth"));
   clientfield::register("allplayers", "bountymoneytrail", 1, 1, "int");
   clientfield::register("toplayer", "realtime_multiplay", 1, 1, "int");
   level.var_1aef539f = &function_a800815;
@@ -184,7 +184,7 @@ onconnect() {
       }
 
       if(numteammates) {
-        self function_3a77006e(int(var_69c2bc0d / numteammates), "moneychange_initialallocation");
+        self givemoney(int(var_69c2bc0d / numteammates), "moneychange_initialallocation");
       }
     }
   }
@@ -632,7 +632,7 @@ onscoreevent(params) {
   money = self rank::function_bcb5e246(event);
 
   if(isDefined(money) && money > 0 && !(params.victim === self)) {
-    self function_3a77006e(money, "moneychange_scoreevent");
+    self givemoney(money, "moneychange_scoreevent");
     self playsoundtoplayer(#"hash_767e2476f594e0f3", self);
   }
 }
@@ -659,7 +659,7 @@ onplayerdamage(params) {
       var_80ed4b57 = self.health;
     }
 
-    player function_3a77006e(var_80ed4b57, "moneychange_playerdamage");
+    player givemoney(var_80ed4b57, "moneychange_playerdamage");
     player playsoundtoplayer(#"hash_767e2476f594e0f3", player);
   }
 }
@@ -757,7 +757,7 @@ givelastattackerwarning(team) {
 function_c04436fc() {
   foreach(player in level.players) {
     if(isDefined(level.var_a5221eec) && level.var_a5221eec == player.team) {
-      player function_3a77006e(level.var_3e14d8dd, "moneychange_bagomoney");
+      player givemoney(level.var_3e14d8dd, "moneychange_bagomoney");
     }
   }
 }
@@ -1589,7 +1589,7 @@ function_d4a84cde(team, player, result) {
 
   if(isDefined(result) && result && isDefined(player) && isPlayer(player)) {
     self.usecount++;
-    player function_3a77006e(level.var_860cdbdb, "moneychange_bountydrop");
+    player givemoney(level.var_860cdbdb, "moneychange_bountydrop");
     player pickup_health::function_dd4bf8ac(level.var_a2b93ad3);
     weapons = player getweaponslist();
 
@@ -1608,7 +1608,7 @@ function_d4a84cde(team, player, result) {
   }
 }
 
-function_3a77006e(amount, reason) {
+givemoney(amount, reason) {
   if(!isDefined(self.pers[#"money"]) || self laststand_mp::is_cheating()) {
     return;
   }
@@ -1653,7 +1653,7 @@ function_b968a61c() {
 
   while(true) {
     wait 0.25;
-    var_9b37b387 = getdvarint(#"hash_312d65fd43c7008c", 0);
+    var_9b37b387 = getdvarint(#"scr_bounty_money", 0);
 
     if(var_9b37b387 <= 0) {
       continue;
@@ -1666,6 +1666,6 @@ function_b968a61c() {
       player clientfield::set_to_player("<dev string:xd2>", player.pers[#"money"]);
     }
 
-    setDvar(#"hash_312d65fd43c7008c", 0);
+    setDvar(#"scr_bounty_money", 0);
   }
 }

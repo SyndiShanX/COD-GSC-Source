@@ -43,7 +43,7 @@ init() {
   clientfield::register("toplayer", "" + #"player_dragged", 8000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_4be98315796ad666", 8000, 1, "int");
   clientfield::register("allplayers", "" + #"sacrifice_player", 8000, 1, "int");
-  clientfield::register("allplayers", "" + #"hash_30aa04edc476253f", 8000, 1, "int");
+  clientfield::register("allplayers", "" + #"sacrifice_player_dragged", 8000, 1, "int");
   register_steps();
   init_flags();
   init_components();
@@ -107,7 +107,7 @@ init_step_1(var_a276c861) {
 
   if(!var_a276c861) {
     level flag::wait_till(#"gazed_greenhouse");
-    level zm_ui_inventory::function_7df6bb60(#"hash_7b00694a8b213123", 1);
+    level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_5", 1);
     exploder::exploder("fxexp_leaves_fall_dead");
     level thread init_sticks();
     level flag::wait_till(#"stick_done");
@@ -281,7 +281,7 @@ function_f2071006() {
 }
 
 init_step_2(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b006a4a8b2132d6", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_6", 1);
 
   if(!var_a276c861) {
     callback::on_disconnect(&function_44a7951d);
@@ -294,7 +294,7 @@ init_step_2(var_a276c861) {
     level flag::wait_till(#"stick_rise");
   }
 
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b006b4a8b213489", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_7", 1);
 
   if(!var_a276c861) {
     level thread function_9e01297e();
@@ -397,7 +397,7 @@ function_44a7951d() {
     }
 
     self thread function_a0a113c9("death");
-    level thread function_36d70cbd();
+    level thread sacrifice_player_reset();
   }
 }
 
@@ -413,7 +413,7 @@ function_4aa24b78() {
   }
 }
 
-function_36d70cbd() {
+sacrifice_player_reset() {
   self notify("2c7398c281ee6695");
   self endon("2c7398c281ee6695");
   level endon(#"stone_visible");
@@ -465,7 +465,7 @@ function_36d70cbd() {
       level flag::clear(#"stick_hide");
     }
 
-    level zm_ui_inventory::function_7df6bb60(#"hash_7b006b4a8b213489", 0);
+    level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_7", 0);
     level thread function_d8ca90b7();
 
     if(isDefined(level.e_guide) && isDefined(level.e_guide.mdl_head)) {
@@ -480,7 +480,7 @@ function_36d70cbd() {
     }
 
     level flag::wait_till(#"stick_rise");
-    level zm_ui_inventory::function_7df6bb60(#"hash_7b006b4a8b213489", 1);
+    level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_7", 1);
     level thread function_9e01297e();
     level thread stick_guide();
     return;
@@ -560,7 +560,7 @@ function_959fcbff(player) {
   wait 2;
   level.var_e34d55ef setModel(#"p8_zm_man_dead_tree_branches_burned");
 
-  if(player zm_characters::is_character(array(#"hash_5ebf024e1559c04a"))) {
+  if(player zm_characters::is_character(array(#"prt_zm_butler"))) {
     player thread function_3ce20299();
   } else {
     player thread function_eabb32ca();
@@ -583,7 +583,7 @@ function_959fcbff(player) {
   }
 
   player.e_linkto clientfield::set("" + #"hash_69b312bcaae6308b", 1);
-  player clientfield::set("" + #"hash_30aa04edc476253f", 1);
+  player clientfield::set("" + #"sacrifice_player_dragged", 1);
   player.e_linkto movez(-80, 1.5);
   wait 0.375;
   a_players = getplayers();
@@ -596,7 +596,7 @@ function_959fcbff(player) {
   player thread function_25a79bc1();
   player.e_linkto waittilltimeout(1.5 - 0.375, #"movedone");
   player.e_linkto clientfield::set("" + #"hash_69b312bcaae6308b", 0);
-  player clientfield::set("" + #"hash_30aa04edc476253f", 0);
+  player clientfield::set("" + #"sacrifice_player_dragged", 0);
   s_pos = struct::get("wm_ht_pos", "targetname");
   player.e_linkto.origin = s_pos.origin;
   player setorigin(player.e_linkto.origin);
@@ -1287,7 +1287,7 @@ function_9bd05071(player) {
 }
 
 init_step_3(var_a276c861) {
-  level zm_ui_inventory::function_7df6bb60(#"hash_7b00744a8b2143d4", 1);
+  level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_8", 1);
   level thread cemetery_defend();
   level thread function_97ea199a();
   level thread function_f3668a9();

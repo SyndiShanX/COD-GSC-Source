@@ -88,13 +88,13 @@ init() {
   level._effect[#"pap_projectile_r"] = #"maps/zm_red/fx8_soul_red";
   level._effect[#"hash_70ef864effe35b13"] = #"maps/zm_red/fx8_soul_charge_red";
   level._effect[#"pap_projectile_y"] = #"hash_36d2617efc112fc";
-  level._effect[#"hash_2c33b0af2f93389e"] = #"hash_7425021c14828449";
+  level._effect[#"pap_projectile_y_end"] = #"hash_7425021c14828449";
   level._effect[#"gaia_sprout_fx"] = #"hash_4ee71079fa3bd589";
   level._effect[#"hash_28b5e7d929f598ee"] = #"hash_7d10580c812fce51";
   level._effect[#"hash_3f03e0537e170fc4"] = #"hash_647338beb2cb34ec";
   zm_sq_modules::function_d8383812(#"ww_sc_earth", 16000, #"ww_sc_g", 100, level._effect[#"pap_projectile_g"], level._effect[#"hash_32278e3b7ad26e0"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"ww_sc_death", 16000, #"ww_sc_c", 100, level._effect[#"pap_projectile_r"], level._effect[#"hash_70ef864effe35b13"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"ww_sc_light", 16000, #"ww_sc_h", 100, level._effect[#"pap_projectile_y"], level._effect[#"hash_2c33b0af2f93389e"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"ww_sc_light", 16000, #"ww_sc_h", 100, level._effect[#"pap_projectile_y"], level._effect[#"pap_projectile_y_end"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"ww_sc_air", 16000, #"ww_sc_o", 100, level._effect[#"pap_projectile_b"], level._effect[#"hash_23f796cb2dcb35c3"], undefined, undefined, 1);
 }
 
@@ -338,7 +338,7 @@ charon_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     stopfx(localclientnum, self.var_8eb4e749);
   }
 
-  playSound(localclientnum, #"hash_15e7e9734cce421e", self.origin);
+  playSound(localclientnum, #"zmb_portal_close", self.origin);
 }
 
 charon_curse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -495,7 +495,7 @@ gaia_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 
   self stoprenderoverridebundle("rob_zm_gaia_portal_dissolve");
-  playSound(localclientnum, #"hash_15e7e9734cce421e", self.origin);
+  playSound(localclientnum, #"zmb_portal_close", self.origin);
 }
 
 hemera_teleport_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

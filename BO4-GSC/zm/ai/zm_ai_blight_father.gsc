@@ -899,19 +899,19 @@ function_cacd1506(var_84ed9a13, entity, inflictor, attacker, damage, flags, mean
   }
 
   if(namespace_81245006::function_f29756fe(var_84ed9a13) == 3) {
-    if(isDefined(level.var_c2981ce9[var_84ed9a13.var_51e8b151])) {
-      entity[[level.var_c2981ce9[var_84ed9a13.var_51e8b151]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
+    if(isDefined(level.var_c2981ce9[var_84ed9a13.hittag1])) {
+      entity[[level.var_c2981ce9[var_84ed9a13.hittag1]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
 
     if(!entity isplayinganimscripted()) {
-      entity.var_fbec06fa = var_84ed9a13.var_51e8b151;
-      entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.var_51e8b151);
+      entity.var_fbec06fa = var_84ed9a13.hittag1;
+      entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.hittag1);
     }
 
     bone = boneindex;
 
     if(zm_utility::is_explosive_damage(meansofdamage)) {
-      bone = var_84ed9a13.var_51e8b151;
+      bone = var_84ed9a13.hittag1;
     }
 
     function_3df61a1a(entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, bone, modelindex);
@@ -2499,7 +2499,7 @@ function_44e3e0d1(var_51a7ab9c) {
       v_dir = player.origin - var_51a7ab9c;
       v_dir = (v_dir[0], v_dir[1], 0.1);
       v_dir = vectornormalize(v_dir);
-      n_push_strength = getdvarint(#"hash_708ca0a943843f57", 500);
+      n_push_strength = getdvarint(#"blightfather_n_push_strength", 500);
       n_push_strength = 200 + randomint(n_push_strength - 200);
       v_player_velocity = player getvelocity();
       player setvelocity(v_player_velocity + v_dir * n_push_strength);
@@ -2519,7 +2519,7 @@ function_8e8b1dfc(var_c45ef84c, blight_father, weapon) {
       continue;
     }
 
-    status_effect = getstatuseffect(#"hash_7867f8f9aaaa0c40");
+    status_effect = getstatuseffect(#"chaos_missile_damage");
     player status_effect::status_effect_apply(status_effect, weapon, blight_father);
     player clientfield::increment_to_player("blight_father_chaos_missile_rumble_clientfield", 1);
   }
@@ -2531,7 +2531,7 @@ function_3dbdca02() {
   self waittill(#"death");
   level.var_1b8dabf3--;
   level.zombie_ai_limit++;
-  level notify(#"hash_5fb3aa7a0745af2c");
+  level notify(#"blightfather_total_update");
 }
 
 function_39212989() {
@@ -2767,7 +2767,7 @@ function_f8411b4d(blight_father) {
   }
 
   foreach(var_84ed9a13 in namespace_81245006::function_fab3ee3e(blight_father)) {
-    adddebugcommand("<dev string:x254>" + var_84ed9a13.var_51e8b151 + "<dev string:x28c>" + var_84ed9a13.var_51e8b151 + "<dev string:x2c1>");
+    adddebugcommand("<dev string:x254>" + var_84ed9a13.hittag1 + "<dev string:x28c>" + var_84ed9a13.hittag1 + "<dev string:x2c1>");
   }
 
   level.var_d4c91513 = 1;
@@ -2784,7 +2784,7 @@ function_a2751530() {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_1999cec56042c9de", "<dev string:x51c>");
+    string = getdvarstring(#"blight_father_devgui_cmd", "<dev string:x51c>");
     cmd = strtok(string, "<dev string:x53>");
 
     if(cmd.size > 0) {
@@ -2825,7 +2825,7 @@ function_a2751530() {
       }
     }
 
-    setDvar(#"hash_1999cec56042c9de", "<dev string:x51c>");
+    setDvar(#"blight_father_devgui_cmd", "<dev string:x51c>");
   }
 }
 

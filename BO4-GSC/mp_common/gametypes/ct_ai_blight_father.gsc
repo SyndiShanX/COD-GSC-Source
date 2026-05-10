@@ -126,7 +126,7 @@ function_7c52f40() {
 
   self callback::function_d8abfc3d(#"hash_45b50cc48ee7f9d8", &function_4b103bc4);
   self hide();
-  self.var_8ba6ede3 = 1;
+  self.shoulddigup = 1;
   util::wait_network_frame();
   self clientfield::set("blight_father_weakpoint_l_elbow_fx", 1);
   self clientfield::set("blight_father_weakpoint_r_elbow_fx", 1);
@@ -239,13 +239,13 @@ function_af7555b9(entity) {
 }
 
 blightfathershouldspawn(entity) {
-  return isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3;
+  return isDefined(entity.shoulddigup) && entity.shoulddigup;
 }
 
 blightfatherspawnstart(entity) {
   entity solid();
   entity clientfield::set("zombie_riser_fx", 1);
-  entity.var_8ba6ede3 = undefined;
+  entity.shoulddigup = undefined;
 }
 
 function_819f6f9d(entity) {
@@ -543,13 +543,13 @@ function_cacd1506(var_84ed9a13, entity, inflictor, attacker, damage, flags, mean
   inflictor thread function_6f109d76(self);
 
   if(namespace_81245006::function_f29756fe(var_84ed9a13) == 3) {
-    if(isDefined(level.var_c2981ce9[var_84ed9a13.var_51e8b151])) {
-      entity[[level.var_c2981ce9[var_84ed9a13.var_51e8b151]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
+    if(isDefined(level.var_c2981ce9[var_84ed9a13.hittag1])) {
+      entity[[level.var_c2981ce9[var_84ed9a13.hittag1]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
 
     if(!entity isplayinganimscripted() && !entity.blockingpain) {
-      entity.var_fbec06fa = var_84ed9a13.var_51e8b151;
-      entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.var_51e8b151);
+      entity.var_fbec06fa = var_84ed9a13.hittag1;
+      entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.hittag1);
     }
 
     bone = boneindex;
@@ -1066,7 +1066,7 @@ function_44e3e0d1(var_51a7ab9c) {
       v_dir = player.origin - var_51a7ab9c;
       v_dir = (v_dir[0], v_dir[1], 0.1);
       v_dir = vectornormalize(v_dir);
-      n_push_strength = getdvarint(#"hash_708ca0a943843f57", 500);
+      n_push_strength = getdvarint(#"blightfather_n_push_strength", 500);
       n_push_strength = 200 + randomint(n_push_strength - 200);
       v_player_velocity = player getvelocity();
       player setvelocity(v_player_velocity + v_dir * n_push_strength);
@@ -1086,7 +1086,7 @@ function_8e8b1dfc(var_c45ef84c, blight_father, weapon) {
       continue;
     }
 
-    status_effect = getstatuseffect(#"hash_7867f8f9aaaa0c40");
+    status_effect = getstatuseffect(#"chaos_missile_damage");
     level.activeplayers[i] status_effect::status_effect_apply(status_effect, weapon, blight_father);
     level.activeplayers[i] clientfield::increment_to_player("blight_father_chaos_missile_rumble_clientfield", 1);
   }

@@ -21,7 +21,7 @@ class cct_shared_desc: cluielem {
       return;
     }
 
-    if(#"hash_2ac3b79c708dcfd5" == state_name) {
+    if(#"default_desc_training" == state_name) {
       player clientfield::function_9bf78ef8(_uid, "_state", 2);
       return;
     }

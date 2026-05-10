@@ -29,7 +29,7 @@ __main__() {
   if(function_8b1a219a()) {
     prompt = #"hash_2791ecebb85142c4";
   } else {
-    prompt = #"hash_60606b68e93a29c8";
+    prompt = #"zombie/weaponcostonly_cfill";
   }
 
   level.var_8e4168e9 = "bowie_knife";

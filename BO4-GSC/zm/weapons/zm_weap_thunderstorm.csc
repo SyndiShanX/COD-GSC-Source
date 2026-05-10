@@ -18,11 +18,11 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "" + #"aoe_indicator", 16000, 1, "counter", &aoe_indicator_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"electric_storm", 16000, 1, "int", &electric_storm_fx, 0, 0);
-  clientfield::register("scriptmover", "" + #"pegasus_beam_start", 16000, 3, "int", &function_6e837718, 0, 0);
+  clientfield::register("scriptmover", "" + #"pegasus_beam_start", 16000, 3, "int", &pegasus_beam_start, 0, 0);
   clientfield::register("actor", "" + #"pegasus_beam_target", 16000, 3, "int", &function_46a56fe2, 0, 0);
   clientfield::register("actor", "" + #"hash_561a1fd86bc1a53a", 16000, 1, "int", &function_ab086ad8, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_43cf6c236d2e9ba", 16000, 1, "counter", &function_acecb36a, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_1187b848bf7868c5", 16000, 1, "int", &function_5b4619, 0, 0);
+  clientfield::register("scriptmover", "" + #"pegasus_staff_fx", 16000, 1, "int", &function_5b4619, 0, 0);
   level._effect[#"electric_storm"] = #"hash_162a58538b5d6db0";
   level._effect[#"hash_11c14ffaefdfd970"] = #"hash_515548ac872ebd06";
   level._effect[#"hash_3d5823fb08a48ea1"] = #"hash_58e484ac8b26c8ef";
@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"electrocute"] = #"hash_5aa1120d061d1f6c";
   level._effect[#"aoe_marker"] = #"hash_211c80023671737b";
   level._effect[#"staff_base_fx"] = #"hash_2dc8e3470244bf1c";
-  level._effect[#"hash_788ff1a315628747"] = #"hash_661f2c77e14f0edf";
+  level._effect[#"staff_head_fx"] = #"hash_661f2c77e14f0edf";
   level._effect[#"pegasus_teleport"] = #"hash_5f7d8c231fbcf09e";
 }
 
@@ -81,7 +81,7 @@ function_acecb36a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   util::playFXOnTag(localclientnum, level._effect[#"hash_43cf6c236d2e9ba"], self, "tag_origin");
 }
 
-function_6e837718(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+pegasus_beam_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level.var_667af8b4[newval] = self;
 
   if(isDefined(self gettagorigin("j_h_chest"))) {
@@ -128,6 +128,6 @@ function_46a56fe2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_5b4619(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_788ff1a315628747"], self, "tag_fx_ball");
+  util::playFXOnTag(localclientnum, level._effect[#"staff_head_fx"], self, "tag_fx_ball");
   util::playFXOnTag(localclientnum, level._effect[#"staff_base_fx"], self, "tag_fx_ball");
 }

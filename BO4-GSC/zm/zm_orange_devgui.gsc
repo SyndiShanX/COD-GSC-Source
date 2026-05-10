@@ -70,16 +70,16 @@ devgui() {
       case # "lava_toggle":
         zm_orange_mq_hell::lava_control();
         break;
-      case # "hash_75c01ef1f8005214":
+      case # "enable_soul_fill":
         iprintln("<dev string:x8f9>");
         level flag::set(#"soul_fill");
         break;
-      case # "hash_7db70cb23b9d2739":
+      case # "disable_soul_fill":
         iprintln("<dev string:x917>");
         level flag::clear(#"soul_fill");
         break;
-      case # "hash_58843c67593e2cfe":
-        zm_orange_challenges::function_e4b04738();
+      case # "complete_current_challenge":
+        zm_orange_challenges::complete_current_challenge();
         break;
       case # "test_last_stand":
         zm_devgui::zombie_devgui_open_sesame();
@@ -142,11 +142,11 @@ devgui() {
         zm_orange_zones::function_3b77181c(1);
         level thread zm_sq::function_f2dd8601(#"pap_rock", 1);
         break;
-      case # "hash_2918cc0fd8ab72cd":
-        level thread zm_orange_pap::function_eaaea036();
+      case # "pap_ice_melt":
+        level thread zm_orange_pap::pap_ice_melt();
         break;
       case # "pap_ice_freeze":
-        level thread zm_orange_pap::function_96ef31b7();
+        level thread zm_orange_pap::pap_ice_freeze();
         break;
       case # "test_hell":
         zm_orange_mq_hell::test_hell();

@@ -135,20 +135,20 @@ setuppropplayernames(localclientnum) {
 
 highlightprop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 0) {
-    self notify(#"hash_3fe34dcd29fd6a0f");
+    self notify(#"highlightpropteamchange");
     self duplicate_render::update_dr_flag(localclientnum, "prop_ally", 0);
     self duplicate_render::update_dr_flag(localclientnum, "prop_clone", 0);
     return;
   }
 
-  self thread function_15e0dfb8(localclientnum, newval);
+  self thread highlightpropteamchange(localclientnum, newval);
 }
 
-function_15e0dfb8(localclientnum, var_dc9f0c39) {
+highlightpropteamchange(localclientnum, var_dc9f0c39) {
   self endon(#"entityshutdown");
   level endon(#"disconnect");
-  self notify(#"hash_3fe34dcd29fd6a0f");
-  self endon(#"hash_3fe34dcd29fd6a0f");
+  self notify(#"highlightpropteamchange");
+  self endon(#"highlightpropteamchange");
 
   while(true) {
     localplayer = function_5c10bd79(localclientnum);
@@ -170,18 +170,18 @@ function_15e0dfb8(localclientnum, var_dc9f0c39) {
 
 highlightplayer(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 0) {
-    self notify(#"hash_3fe34dcd29fd6a0f");
+    self notify(#"highlightpropteamchange");
     self duplicate_render::update_dr_flag(localclientnum, "prop_clone", 0);
     return;
   }
 
-  self thread function_29561f83(localclientnum, newval);
+  self thread highlightplayerteamchange(localclientnum, newval);
 }
 
-function_29561f83(localclientnum, var_dc9f0c39) {
+highlightplayerteamchange(localclientnum, var_dc9f0c39) {
   self endon(#"entityshutdown");
-  self notify(#"hash_3f606627f154954b");
-  self endon(#"hash_3f606627f154954b");
+  self notify(#"highlightplayerteamchange");
+  self endon(#"highlightplayerteamchange");
 
   while(true) {
     localplayer = function_5c10bd79(localclientnum);

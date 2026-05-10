@@ -641,7 +641,7 @@ function_9d1bba67() {
 
 function_b87295f2() {
   level endon(#"combattraining_logic_finished");
-  ct_vo::function_831e0584(array(#"hash_5b73d53d22211be2"), 1);
+  ct_vo::function_831e0584(array(#"vox_tvoi_tutor_ajax_melee"), 1);
   e_player = getplayers()[0];
   e_player thread ct_utils::function_61c3d59c(#"hash_2933d1e2a048635e", undefined);
   level.var_7b46025 = struct::get_array("s_shield_melee_ai", "targetname");
@@ -1088,7 +1088,7 @@ function_109c0cc2() {
       continue;
     }
 
-    e_player thread ct_utils::function_1bb93418();
+    e_player thread ct_utils::ingame_objective_close();
     return;
   }
 
@@ -1126,7 +1126,7 @@ wait_for_car() {
       e_player = getplayers()[0];
 
       if(!isalive(e_player)) {
-        e_player ct_utils::function_1bb93418();
+        e_player ct_utils::ingame_objective_close();
         ct_utils::kill_all_bots(undefined);
         ct_utils::function_79957328(0.5);
         e_player ct_vo::function_831e0584(array("vox_tvoi_tutor_ajax_final_event_2_dead"));
@@ -1190,7 +1190,7 @@ function_537c9eea() {
   self endon(#"death");
   self waittill("killstreak_quantity_" + #"recon_car");
   self.var_51ff7a58 = 1;
-  self ct_utils::function_1bb93418();
+  self ct_utils::ingame_objective_close();
 }
 
 function_e9b5de80() {
@@ -1309,7 +1309,7 @@ function_e9b5de80() {
       b_success = 1;
       ct_utils::function_9aca2fa0("ct_endgame");
     } else {
-      e_player ct_utils::function_1bb93418();
+      e_player ct_utils::ingame_objective_close();
       e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_ajax_final_event_3_miss"));
       e_player ct_utils::function_49e0c5bc();
 

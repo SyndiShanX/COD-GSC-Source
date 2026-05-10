@@ -431,12 +431,12 @@ function_ba3ebac4() {
   while(true) {
     waitframe(1);
 
-    if(!getdvarint(#"hash_879482f07431cc8", 0)) {
+    if(!getdvarint(#"force_zombie_cleanup", 0)) {
       continue;
     }
 
     function_367e3573(1);
-    setDvar(#"hash_879482f07431cc8", 0);
+    setDvar(#"force_zombie_cleanup", 0);
   }
 }
 

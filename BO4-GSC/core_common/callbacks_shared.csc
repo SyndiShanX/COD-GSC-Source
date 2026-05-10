@@ -810,7 +810,7 @@ event_handler[event_41480c76] function_c33f3471(eventstruct) {
 }
 
 event_handler[event_6e84b1b1] function_ff9acfac(eventstruct) {
-  level callback(#"hash_2fc4cfecaed47583", eventstruct);
+  level callback(#"localclientusingoffhand", eventstruct);
 }
 
 event_handler[event_eae361ae] function_a1ad9b51(eventstruct) {

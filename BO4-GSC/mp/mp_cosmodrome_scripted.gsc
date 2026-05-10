@@ -413,7 +413,7 @@ function_56b1158f(locs, color) {
     color = (0, 1, 0);
   }
 
-  while(getdvarint(#"hash_2115192db52b1b16", 0)) {
+  while(getdvarint(#"dev_debug_pa", 0)) {
     foreach(loc in locs) {
       print3d(loc + (0, 0, 8), loc, color, 1, 1.2, 30);
       sphere(loc, 8, color, 1, 0, 4, 30);
@@ -428,7 +428,7 @@ function_cd7664d5(loc, alias, color) {
     color = (0, 1, 0);
   }
 
-  if(getdvarint(#"hash_2115192db52b1b16", 0)) {
+  if(getdvarint(#"dev_debug_pa", 0)) {
     print3d(loc + (0, 0, 32), alias, color, 1, 1.2, 120);
   }
 }

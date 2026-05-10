@@ -258,7 +258,7 @@ function_391d5d90(params) {
 
     if(isDefined(self.favoriteenemy) && isalive(self.favoriteenemy)) {
       self setbrake(0);
-      self setspeed(self.settings.var_2c69a255);
+      self setspeed(self.settings.chasespeed);
 
       if(function_23d1cec2() && !ispointonnavmesh(self.origin, self)) {
         function_d55a99f2(500, 0);
@@ -323,7 +323,7 @@ function_3acf1c61() {
   }
 
   if(isDefined(target_pos)) {
-    target_pos_onnavmesh = getclosestpointonnavmesh(target_pos, self.settings.var_c694bbbf * 1.5, self getpathfindingradius() * 1.2, 4194287);
+    target_pos_onnavmesh = getclosestpointonnavmesh(target_pos, self.settings.discharge_distance * 1.5, self getpathfindingradius() * 1.2, 4194287);
   }
 
   if(isDefined(target_pos_onnavmesh)) {
@@ -397,7 +397,7 @@ function_fb89ba8a(params) {
   self endon(#"change_state");
   self thread function_13ade03e();
   starttime = gettime();
-  var_b2c9484f = int(self.settings.var_e0c78652 * 1000);
+  var_b2c9484f = int(self.settings.discharge_duration * 1000);
 
   while(starttime + var_b2c9484f > gettime() && !isDefined(self.var_290ed3ab) || isDefined(self.var_290ed3ab) && self.var_290ed3ab > gettime() || isDefined(self.var_e19bcce0) && self.var_e19bcce0) {
     if(isDefined(self.arcweapon)) {
@@ -551,7 +551,7 @@ function_3e16dec3(params) {
 
       if(isDefined(self.current_pathto_pos)) {
         if(self function_a57c34b7(self.current_pathto_pos, 0, 1)) {
-          self setspeed(self.settings.var_68c74e4f);
+          self setspeed(self.settings.huntspeed);
           self setbrake(0);
           self waittill_pathing_done(2);
           continue;
@@ -559,7 +559,7 @@ function_3e16dec3(params) {
       }
     }
 
-    self setspeed(self.settings.var_9eff22ee);
+    self setspeed(self.settings.seekspeed);
 
     if(function_23d1cec2()) {
       if(!ispointonnavmesh(self.origin, self)) {
@@ -724,7 +724,7 @@ function_9ba314a1(target) {
   target_pos_onnavmesh = undefined;
 
   if(isDefined(target)) {
-    target_pos_onnavmesh = getclosestpointonnavmesh(target.origin, self.settings.var_c694bbbf * 1.5, self getpathfindingradius() * 1.2, 4194287);
+    target_pos_onnavmesh = getclosestpointonnavmesh(target.origin, self.settings.discharge_distance * 1.5, self getpathfindingradius() * 1.2, 4194287);
 
     if(!isDefined(target_pos_onnavmesh)) {
       return true;
@@ -754,7 +754,7 @@ function_3e3b6ce1() {
       }
 
       var_b9733045 = self targetting_delay::function_1c169b3a(target, 0);
-      canseetarget = var_b9733045 && target sightconetrace(self function_d3a9800e(), self, anglesToForward(self.angles), self.settings.var_e7260470);
+      canseetarget = var_b9733045 && target sightconetrace(self function_d3a9800e(), self, anglesToForward(self.angles), self.settings.vis_cone_angle);
 
       if(isDefined(level.var_6cfbe5a)) {
         [[level.var_6cfbe5a]] - > waitinqueue(self);

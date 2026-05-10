@@ -72,19 +72,19 @@ function_25f1e3c1() {
 }
 
 function_938667bd() {
-  bot_action::register_action(#"hash_5397239dd3c8da8d", &bot_action::weapon_rank, &function_c98fad6b, &function_74ab5468);
+  bot_action::register_action(#"wield_specialist_weapon", &bot_action::weapon_rank, &function_c98fad6b, &wield_specialist_weapon);
   bot_action::register_action(#"hash_6fbd1b1c42e3a0c5", &bot_action::weapon_rank, &function_1c7ea685, &bot_action::deploy_gadget);
   bot_action::register_action(#"activate_localheal", &bot_action::weapon_rank, &function_7fa22be8, &bot_action::deploy_gadget);
   bot_action::register_action(#"activate_radiation_field", &bot_action::weapon_rank, &function_65b9c7c2, &activate_radiation_field);
   bot_action::register_action(#"use_tripwire", &bot_action::weapon_rank, &function_d18123f8, &use_tripwire);
   bot_action::register_action(#"activate_dog", &bot_action::weapon_rank, &bot_action::function_38d0d1df, &bot_action::deploy_gadget);
-  bot_action::register_action(#"hash_4600e058d958fc21", &bot_action::weapon_rank, &function_17a8721f, &function_76c8b8e8);
+  bot_action::register_action(#"use_sensor_dart", &bot_action::weapon_rank, &function_17a8721f, &use_sensor_dart);
   bot_action::register_action(#"activate_vision_pulse", &bot_action::weapon_rank, &bot_action::function_38d0d1df, &bot_action::deploy_gadget);
   bot_action::register_action(#"activate_noncombat_grapple", &bot_action::weapon_rank, &function_554a6177, &use_grapple);
   bot_action::register_action(#"activate_gravity_slam", &bot_action::weapon_rank, &function_97e7772c, &bot_action::function_94f96101);
   bot_action::register_action(#"deploy_spawnbeacon", &bot_action::weapon_rank, &function_9a0eb4f0, &bot_action::deploy_gadget);
   bot_action::register_action(#"deploy_concertina_wire", &bot_action::weapon_rank, &function_4a95cdaf, &bot_action::deploy_gadget);
-  bot_action::register_action(#"hash_5d6b13cfb592ee04", &bot_action::weapon_rank, &function_e43892c4, &function_79988b4b);
+  bot_action::register_action(#"deploy_smart_cover", &bot_action::weapon_rank, &function_e43892c4, &deploy_smart_cover);
   bot_action::register_action(#"use_icepick", &bot_action::weapon_rank, &bot_action::function_38d0d1df, &use_icepick);
 }
 
@@ -164,42 +164,42 @@ function_c2e797aa() {
 
 function_aaede90c() {
   bot_action::function_7e847a84(#"eq_swat_grenade", #"throw_grenade");
-  bot_action::function_7e847a84(#"sig_buckler_dw", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_buckler_dw", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"sig_buckler_dw", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"sig_buckler_dw", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"sig_buckler_dw", #"hash_3d7dd2878425bcce");
   bot_action::function_7e847a84(#"eq_cluster_semtex_grenade", #"throw_grenade");
-  bot_action::function_7e847a84(#"hero_pineapplegun", #"hash_5397239dd3c8da8d");
+  bot_action::function_7e847a84(#"hero_pineapplegun", #"wield_specialist_weapon");
   bot_action::function_a2c83569(#"hero_pineapplegun", #"fire_grenade");
   bot_action::function_7e847a84(#"gadget_supplypod", #"hash_6fbd1b1c42e3a0c5");
   bot_action::function_7e847a84(#"eq_localheal", #"activate_localheal");
   bot_action::function_7e847a84(#"gadget_radiation_field", #"activate_radiation_field");
-  bot_action::function_7e847a84(#"hero_flamethrower", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"hero_flamethrower", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"hero_flamethrower", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"hero_flamethrower", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"hero_flamethrower", #"hash_434716893aa869f3");
   bot_action::function_7e847a84(#"eq_tripwire", #"use_tripwire");
   bot_action::function_7e847a84(#"ability_dog", #"activate_dog");
   bot_action::function_7e847a84(#"eq_hawk", #"throw_grenade");
-  bot_action::function_7e847a84(#"sig_bow_quickshot", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_bow_quickshot", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"sig_bow_quickshot", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"sig_bow_quickshot", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"sig_bow_quickshot", #"hash_434716893aa869f3");
   bot_action::function_7e847a84(#"eq_seeker_mine", #"throw_mine");
-  bot_action::function_7e847a84(#"shock_rifle", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"shock_rifle", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"shock_rifle", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"shock_rifle", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"shock_rifle", #"hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_sensor", #"hash_4600e058d958fc21");
+  bot_action::function_7e847a84(#"eq_sensor", #"use_sensor_dart");
   bot_action::function_7e847a84(#"gadget_vision_pulse", #"activate_vision_pulse");
   bot_action::function_7e847a84(#"eq_grapple", #"activate_noncombat_grapple");
   bot_action::function_7e847a84(#"eq_gravityslam", #"activate_gravity_slam");
   bot_action::function_7e847a84(#"gadget_spawnbeacon", #"deploy_spawnbeacon");
-  bot_action::function_7e847a84(#"hero_annihilator", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"hero_annihilator", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"hero_annihilator", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"hero_annihilator", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"hero_annihilator", #"hash_434716893aa869f3");
   bot_action::function_7e847a84(#"eq_smoke", #"throw_grenade");
-  bot_action::function_7e847a84(#"sig_blade", #"hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_blade", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_7e847a84(#"sig_blade", #"wield_specialist_weapon");
+  bot_action::function_a2c83569(#"sig_blade", #"hip_fire_bulletweapon");
   bot_action::function_a2c83569(#"sig_blade", #"hash_434716893aa869f3");
   bot_action::function_7e847a84(#"eq_concertina_wire", #"deploy_concertina_wire");
-  bot_action::function_7e847a84(#"ability_smart_cover", #"hash_5d6b13cfb592ee04");
+  bot_action::function_7e847a84(#"ability_smart_cover", #"deploy_smart_cover");
   bot_action::function_7e847a84(#"eq_emp_grenade", #"throw_mine");
   bot_action::function_7e847a84(#"gadget_icepick", #"use_icepick");
 }
@@ -275,7 +275,7 @@ function_c98fad6b(actionparams) {
   return 100;
 }
 
-function_74ab5468(actionparams) {
+wield_specialist_weapon(actionparams) {
   weapon = actionparams.weapon;
   self bot_action::function_ccdcc5d9(weapon);
 
@@ -858,7 +858,7 @@ function_e43892c4(actionparams) {
   return 100;
 }
 
-function_79988b4b(actionparams) {
+deploy_smart_cover(actionparams) {
   weapon = actionparams.weapon;
 
   if(!isDefined(weapon)) {
@@ -955,7 +955,7 @@ function_17a8721f(actionparams) {
   return 100;
 }
 
-function_76c8b8e8(actionparams) {
+use_sensor_dart(actionparams) {
   weapon = actionparams.weapon;
 
   if(!isDefined(weapon)) {

@@ -23,7 +23,7 @@ ai_init() {
 }
 
 function_41822a58() {
-  if(getdvarint(#"hash_20cd968623dbb8ef", 0)) {
+  if(getdvarint(#"scr_wz_patrol_ai", 0)) {
     patrolspawns = struct::get_array("wz_patrol_loc", "targetname");
 
     foreach(spot in patrolspawns) {

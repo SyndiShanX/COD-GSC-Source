@@ -99,7 +99,7 @@ function_2297363d(localclientnum) {
   while(isDefined(player)) {
     if(function_fd33f2ef(localclientnum) == 3) {
       if(doearthquake) {
-        player.grappleeq = earthquake(localclientnum, level.var_1b2035de.var_1598129, 10000, player.origin, 0, 0);
+        player.grappleeq = earthquake(localclientnum, level.var_1b2035de.grapplescreenshake, 10000, player.origin, 0, 0);
         doearthquake = 0;
       }
 

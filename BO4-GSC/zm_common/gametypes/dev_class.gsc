@@ -88,7 +88,7 @@ dev_cac_init() {
       case # "dpad_reticle":
         host thread dev_cac_dpad_think("<dev string:x9b>", &dev_cac_cycle_render_options, "<dev string:x9b>");
         break;
-      case # "hash_70b765122950a76":
+      case # "dpad_weaponmodelslot":
         host thread dev_cac_dpad_think("<dev string:xa5>", &dev_cac_cycle_render_options, "<dev string:xa5>");
         break;
       case # "dpad_reticle_color":

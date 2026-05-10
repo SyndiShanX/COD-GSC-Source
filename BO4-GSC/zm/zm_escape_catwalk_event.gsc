@@ -216,7 +216,7 @@ function_fd3fa3a3() {
   }
 
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_c_bundle", "scriptbundlename");
-  playsoundatposition(#"hash_83f364ceb17bf92", var_4bdae8cd.origin);
+  playsoundatposition(#"evt_fxa_rocks_recyard_c", var_4bdae8cd.origin);
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
 }
 

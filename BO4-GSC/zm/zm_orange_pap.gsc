@@ -584,13 +584,13 @@ function_ccc079bc(var_b876e1f5) {
   level notify(#"hash_39b6629ce957cce9");
 }
 
-function_eaaea036() {
+pap_ice_melt() {
   foreach(var_143bf55a in level.var_9f657597) {
     var_143bf55a scene::play("<dev string:x9e>");
   }
 }
 
-function_96ef31b7() {
+pap_ice_freeze() {
   foreach(var_143bf55a in level.var_9f657597) {
     var_143bf55a scene::play("<dev string:xa5>");
   }

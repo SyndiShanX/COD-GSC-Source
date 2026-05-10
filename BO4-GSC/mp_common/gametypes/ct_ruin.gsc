@@ -209,7 +209,7 @@ function_7d779cf7(gamedifficulty) {
 }
 
 function_926fcb2f(b_success) {
-  level endon(#"hash_42057c28bd084d77");
+  level endon(#"destroysites_reset");
 
   if(level.ctdifficulty !== 0) {
     var_5d3ac5f0 = getEntArray("destroysite", "targetname");
@@ -299,7 +299,7 @@ j_fore_le_01() {
 
 function_4b5c96a0() {
   self endon(#"death", #"target_destroyed");
-  level endon(#"ct_ruin_end", #"hash_42057c28bd084d77");
+  level endon(#"ct_ruin_end", #"destroysites_reset");
   self.waypoint gameobjects::set_visible_team(#"any");
   b_keyline = 0;
 

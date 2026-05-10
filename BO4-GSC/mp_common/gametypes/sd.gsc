@@ -693,7 +693,7 @@ onuseplantobject(player) {
 
   thread sound::play_on_players("mus_sd_planted" + "_" + level.teampostfix[player.pers[#"team"]]);
   player notify(#"bomb_planted");
-  level thread popups::displayteammessagetoall(#"hash_12473d7e6ed6e752", player);
+  level thread popups::displayteammessagetoall(#"mp/explosives_planted_by", player);
 
   if(isDefined(player.pers[#"plants"])) {
     player.pers[#"plants"]++;
@@ -885,7 +885,7 @@ bombplanted(destroyedobj, player) {
   defuseobject gameobjects::allow_use(#"enemy");
   defuseobject gameobjects::set_use_time(level.defusetime);
   defuseobject gameobjects::set_use_text(#"mp/defusing_explosive");
-  defuseobject gameobjects::set_use_hint_text(#"hash_754b795109a2bbba");
+  defuseobject gameobjects::set_use_hint_text(#"platform/hold_to_defuse_explosives");
   defuseobject gameobjects::set_visible_team(#"any");
   defuseobject.label = label;
   defuseobject.onbeginuse = &function_a8c87bae;

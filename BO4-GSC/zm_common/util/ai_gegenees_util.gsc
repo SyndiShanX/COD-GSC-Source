@@ -58,7 +58,7 @@ function_b656013e() {
   level flag::wait_till(#"pap_quest_completed");
   bundle.weakpointdamagescale = 0.5;
   bundle.instakilldamagescale = 0.4;
-  bundle.var_97b22faa = 0.75;
+  bundle.instakillweakpointdamagescale = 0.75;
 }
 
 function_ea46ca6f() {

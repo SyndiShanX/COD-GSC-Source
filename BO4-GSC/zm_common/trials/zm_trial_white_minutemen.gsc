@@ -44,7 +44,7 @@ on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   }
 
   callback::on_ai_killed(&on_ai_killed);
-  level flag::set(#"hash_25d9ccebd2bdecd9");
+  level flag::set(#"enable_countermeasure_3");
   n_obj_id = gameobjects::get_next_obj_id();
   level.a_n_objective_ids[#"minutemen"] = n_obj_id;
   objective_add(n_obj_id, "active", level.s_weapons_locker.origin, #"hash_423a75e2700a53ab");

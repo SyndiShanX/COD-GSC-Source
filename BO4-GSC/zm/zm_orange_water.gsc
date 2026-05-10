@@ -208,7 +208,7 @@ function_ea0c7ed8() {
   while(true) {
     foreach(e_water in level.a_e_water) {
       if(self istouching(e_water) && !self laststand::player_is_in_laststand()) {
-        self function_b52931e7();
+        self player_entered_water();
         return;
       }
     }
@@ -217,7 +217,7 @@ function_ea0c7ed8() {
   }
 }
 
-function_b52931e7() {
+player_entered_water() {
   level endon(#"end_game");
   self endon(#"death", #"player_frozen");
   self.b_in_water = 1;
@@ -265,20 +265,20 @@ function_4ab00cab() {
 
     foreach(e_water in level.a_e_water) {
       if(!self istouching(e_water) || self laststand::player_is_in_laststand()) {
-        self thread function_6cf1cc01();
+        self thread player_exited_water();
         return;
       }
     }
   }
 }
 
-function_6cf1cc01() {
+player_exited_water() {
   level endon(#"end_game");
   self endon(#"death", #"player_frozen");
   self.b_in_water = 0;
   self notify(#"player_exited_water");
 
-  if(!level flag::get(#"hell_on_earth") && !level flag::get(#"hash_198bc172b5af7f25")) {
+  if(!level flag::get(#"hell_on_earth") && !level flag::get(#"trials_hell_on_earth")) {
     self allowsprint(1);
     self allowslide(1);
     self thread function_d2dd1f2b();

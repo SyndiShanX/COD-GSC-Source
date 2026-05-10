@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"woods_unlock", #"hash_3f01badbd66b2962", #"cu22_item", &function_d95e620c, #"hash_17a4baf5ec553be7", #"hash_17a4bbf5ec553d9a");
+  character_unlock_fixup::register_character_unlock(#"woods_unlock", #"prt_wz_woods", #"cu22_item", &function_d95e620c, #"hash_17a4baf5ec553be7", #"hash_17a4bbf5ec553d9a");
 }
 
 function_d95e620c() {

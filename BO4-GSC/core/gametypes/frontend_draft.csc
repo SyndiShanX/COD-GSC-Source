@@ -360,7 +360,7 @@ setup_team(localclientnum) {
     level.draftxcam = #"hash_2598b6f5e72695c7";
     targetname = "WZdraftCharacter";
   } else if(sessionmode == 0) {
-    level.draftxcam = #"hash_590b617ac1441b1b";
+    level.draftxcam = #"ui_scene_cam_zm_lobby";
     targetname = "ZMdraftCharacter";
   }
 
@@ -395,12 +395,12 @@ function_a5644aa3(localclientnum) {
   level endon(#"disconnect", #"draft_closed");
 
   while(true) {
-    level waittill(#"hash_4bb9479c29665c84");
+    level waittill(#"positiondraft_changingcharacter");
     function_532dfc0b(localclientnum, 1000);
     level.var_e6802f10 = 1;
-    waitresult = level waittill(#"hash_4ef5fa5de0b8868b", #"hash_3f81f5a6c0c89878");
+    waitresult = level waittill(#"positiondraft_changingcharactercomplete", #"positiondraft_resetcharacterscene");
 
-    if(waitresult._notify == #"hash_4ef5fa5de0b8868b") {
+    if(waitresult._notify == #"positiondraft_changingcharactercomplete") {
       function_e79c182b(localclientnum, 1000);
     } else {
       function_e79c182b(localclientnum, 0, 1);

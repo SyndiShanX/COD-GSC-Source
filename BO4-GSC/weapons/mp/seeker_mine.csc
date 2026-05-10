@@ -45,7 +45,7 @@ function_3ade2b96(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   self.var_3ade2b96 = 0;
-  self notify(#"hash_43f06be9944cddc1");
+  self notify(#"seeker_mine_shockfx_end");
 }
 
 seeker_mine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -83,7 +83,7 @@ on_player_corpse(localclientnum, params) {
 }
 
 function_a6451cfe(localclientnum, camfx) {
-  self waittill(#"death", #"hash_43f06be9944cddc1");
+  self waittill(#"death", #"seeker_mine_shockfx_end");
 
   if(isDefined(camfx)) {
     stopfx(localclientnum, camfx);

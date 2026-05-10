@@ -1531,7 +1531,7 @@ function_d9dfa25() {
 
   a_formations[a_formations.size] = s_formation;
 
-  index = getdvarint(#"hash_5293cadde39a7ceb", -1);
+  index = getdvarint(#"dev_formation_index", -1);
 
   if(index > -1) {
     if(isDefined(a_formations[index])) {
@@ -1623,7 +1623,7 @@ function_700e474f(startorigin, endorigin, var_872f085f, goal, index) {
   offset = (dist / 2, math::sign(goal) * 1000, -1000);
   var_9fa20618 = firstgoal + rotatepoint(offset, var_872f085f);
 
-  if(getdvarint(#"hash_5bbd3d044e1ec1b8", 0)) {
+  if(getdvarint(#"dev_draw_goals", 0)) {
     self thread function_84898b3f(firstgoal, var_9fa20618, endorigin, index);
   }
 
@@ -1659,7 +1659,7 @@ function_71da60d1() {
 function_84898b3f(firstgoal, var_9fa20618, endorigin, index) {
   self endon(#"death");
 
-  while(getdvarint(#"hash_5bbd3d044e1ec1b8", 0)) {
+  while(getdvarint(#"dev_draw_goals", 0)) {
     color = index < 0 ? (0, 0, 1) : (1, 0, 0);
     sphere(firstgoal, 700, color);
     sphere(var_9fa20618, 700, color);
@@ -1973,7 +1973,7 @@ function_b80277f7() {
 function_1c06c249(plane) {
   if(isPlayer(self) && isDefined(plane)) {
     self match_record::function_ded5f5b6(#"hash_1657e02fb5073e4a", plane.origin);
-    self match_record::set_player_stat(#"hash_16618233fdac5c29", gettime());
+    self match_record::set_player_stat(#"deployment_jump_time", gettime());
     self match_record::set_player_stat(#"hash_63b95d780b2bd355", self flagsys::get(#"hash_224cb97b8f682317"));
   }
 }
@@ -2086,8 +2086,8 @@ start_freefall(velocity, parachute) {
 function_4630bf0a() {
   if(isPlayer(self)) {
     self match_record::function_ded5f5b6(#"hash_7d9d379ecba10793", self.origin);
-    self match_record::set_player_stat(#"hash_1469faf3180d8b7a", gettime());
-    self.var_37ef8626 = gettime();
+    self match_record::set_player_stat(#"deployment_land_time", gettime());
+    self.deployment_land_time = gettime();
   }
 }
 
@@ -2324,7 +2324,7 @@ function_943c98fb(insertion) {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_683dafe2da41b42e", "<dev string:x282>");
+    string = getdvarstring(#"insertion_devgui_cmd", "<dev string:x282>");
     start_insertion = 0;
 
     switch (string) {
@@ -2341,7 +2341,7 @@ function_943c98fb(insertion) {
       level function_8dcd8623();
     }
 
-    setDvar(#"hash_683dafe2da41b42e", "<dev string:x282>");
+    setDvar(#"insertion_devgui_cmd", "<dev string:x282>");
 
     if(getdvarint(#"hash_5566ccc7de522a4a", 0)) {
       setDvar(#"hash_5566ccc7de522a4a", 0);

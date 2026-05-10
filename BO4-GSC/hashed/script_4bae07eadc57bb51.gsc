@@ -44,8 +44,8 @@ init_flags() {
   level flag::init(#"hash_774b069a64b060b");
   level flag::init(#"groom_lake_enabled");
   level flag::init(#"hash_38f45c699c5d5d63");
-  level flag::init(#"hash_26e9fe6561459de3");
-  level flag::init(#"hash_537cc10c9deca9da");
+  level flag::init(#"in_groom_lake");
+  level flag::init(#"visited_groom_lake");
 }
 
 init_quests() {
@@ -588,10 +588,10 @@ enable_groom_lake() {
 function_8213feb8() {
   level waittill(#"hash_15a9f7117b9637b");
 
-  if(level flag::get(#"hash_537cc10c9deca9da")) {
+  if(level flag::get(#"visited_groom_lake")) {
     zm_office_zones::function_cada51b5(1);
   } else {
-    level flag::set(#"hash_537cc10c9deca9da");
+    level flag::set(#"visited_groom_lake");
   }
 
   while(zm_office_floors::function_df2506d3(4).size < 1) {

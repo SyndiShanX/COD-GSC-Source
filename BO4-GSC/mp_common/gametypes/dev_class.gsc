@@ -13,7 +13,7 @@ dev_cac_init() {
   level thread dev_cac_gdt_update_think();
   var_b7b0fdc0 = getdvarint(#"scr_debug_charmindex", 0);
 
-  for(var_1db243f1 = getdvarint(#"hash_729117f20b736ab4", 0);; var_1db243f1 = deathfxindex) {
+  for(var_1db243f1 = getdvarint(#"scr_debug_deathfxindex", 0);; var_1db243f1 = deathfxindex) {
     wait 0.5;
     reset = 1;
 
@@ -89,7 +89,7 @@ dev_cac_init() {
       case # "dpad_reticle":
         host thread dev_cac_dpad_think("<dev string:x9b>", &dev_cac_cycle_render_options, "<dev string:x9b>");
         break;
-      case # "hash_70b765122950a76":
+      case # "dpad_weaponmodelslot":
         host thread dev_cac_dpad_think("<dev string:xa5>", &dev_cac_cycle_render_options, "<dev string:xa5>");
         break;
       case # "dpad_reticle_color":
@@ -123,7 +123,7 @@ dev_cac_init() {
     }
 
     var_b7b0fdc0 = charmindex;
-    deathfxindex = getdvarint(#"hash_729117f20b736ab4", 0);
+    deathfxindex = getdvarint(#"scr_debug_deathfxindex", 0);
 
     if(var_1db243f1 != deathfxindex) {
       host function_a85d2581(host getcurrentweapon(), deathfxindex);

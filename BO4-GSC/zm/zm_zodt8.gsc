@@ -123,7 +123,7 @@ event_handler[level_init] main(eventstruct) {
     level thread function_3ad6764f();
   }
 
-  level clientfield::set("" + #"hash_3c58464f16d8a1be", 0);
+  level clientfield::set("" + #"reveal_ee_space", 0);
   level clientfield::set("" + #"hash_2994a957c49bf321", 1);
   level clientfield::set("" + #"hash_7e91637e80ad93", 1);
   e_clip = getent("e_clip_lifeboat", "targetname");
@@ -309,7 +309,7 @@ autoexec opt_in() {
   level.bgb_machine_count = 2;
   level.random_pandora_box_start = 1;
   level.clientfieldaicheck = 1;
-  level.var_5bfd847e = #"hash_7bef4c44b5d916bc";
+  level.var_5bfd847e = #"activate_fast_travel";
   level.pack_a_punch_camo_index = 146;
   level.pack_a_punch_camo_index_number_variants = 5;
   setDvar(#"hash_558e57dbb6559778", 1);
@@ -332,8 +332,8 @@ function_4d4e4de() {
     var_ddf9ad37 = zombie_utility::get_zombie_var(#"hash_376905ad360fc2e8");
     var_424eb3ee = randomintrange(zombie_utility::get_zombie_var(#"hash_2374f3ef775ac2c3"), zombie_utility::get_zombie_var(#"hash_2374f3ef775ac2c3") + 2);
   } else {
-    var_ddf9ad37 = zombie_utility::get_zombie_var(#"hash_6eb9b2d60babd5aa");
-    var_424eb3ee = randomintrange(zombie_utility::get_zombie_var(#"hash_3b4ad7449c039d1b"), zombie_utility::get_zombie_var(#"hash_3b4ad7449c039d1b") + 2);
+    var_ddf9ad37 = zombie_utility::get_zombie_var(#"catalyst_start_round");
+    var_424eb3ee = randomintrange(zombie_utility::get_zombie_var(#"stoker_start_round"), zombie_utility::get_zombie_var(#"stoker_start_round") + 2);
   }
 
   var_80a62d86 = var_424eb3ee + randomintrange(3, 5);
@@ -354,9 +354,9 @@ function_34d1e89a(var_424eb3ee) {
     }
   }
 
-  if(level flag::exists(#"hash_1562cc6d96b2bc4")) {
+  if(level flag::exists(#"stoker_key_obtained")) {
     zm_round_spawning::function_2876740e(#"stoker", &function_1a43f284);
-    level flag::wait_till(#"hash_1562cc6d96b2bc4");
+    level flag::wait_till(#"stoker_key_obtained");
     zm_round_spawning::function_9bf14a10(#"stoker", &function_1a43f284);
   }
 }
@@ -554,7 +554,7 @@ function_96c0d840() {
   while(true) {
     hidemiscmodels("coal_warm");
     hidemiscmodels("coal_hot");
-    level waittill(#"hash_47ecba5609d2b603");
+    level waittill(#"water_drained_aft_drain_finish");
     hidemiscmodels("coal_cold");
 
     if(level flag::get(#"hash_65e37079e0d22d47") && !level flag::get(#"planet_step_completed")) {
@@ -563,7 +563,7 @@ function_96c0d840() {
       showmiscmodels("coal_warm");
     }
 
-    level waittill(#"hash_74a58a7760ce1b5c");
+    level waittill(#"water_drained_aft_refill_start");
     wait 12;
     showmiscmodels("coal_cold");
   }

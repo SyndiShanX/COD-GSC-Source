@@ -16,7 +16,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + #"hash_26af481b9a9d41ce", 1, 1, "counter", &function_618e1db4, 0, 0);
+  clientfield::register("allplayers", "" + #"firestorm_shot_fx", 1, 1, "counter", &firestorm_shot_fx, 0, 0);
   clientfield::register("allplayers", "" + #"hash_18fc1da5f1785e6b", 1, 1, "counter", &function_311767a6, 0, 0);
   clientfield::register("allplayers", "" + #"charge_gem", 1, 2, "int", &function_8a2b203b, 0, 1);
   clientfield::register("allplayers", "" + #"hash_275debebcd185ea1", 1, 1, "int", &function_467afa20, 0, 1);
@@ -51,7 +51,7 @@ __init__() {
   level._effect[#"hash_76550305a8accb7c"] = #"hash_1cf28497519df049";
 }
 
-function_618e1db4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+firestorm_shot_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self.weapon == getweapon(#"zhield_zword_turret_upgraded")) {
     var_27aa6343 = level._effect[#"hash_7f665a0db122bf39"];
     var_a1f103c8 = level._effect[#"hash_7f6c660db1273f4b"];

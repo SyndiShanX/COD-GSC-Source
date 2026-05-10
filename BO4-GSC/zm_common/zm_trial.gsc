@@ -610,7 +610,7 @@ on_round_end() {
   }
 
   level notify(#"trial_round_end");
-  playsoundatposition(#"hash_351022f2dd6aba77", (0, 0, 0));
+  playsoundatposition(#"zmb_trials_round_end", (0, 0, 0));
   assert(isDefined(level.var_d77a6967));
   assert(isDefined(level.var_3dd975d5));
 

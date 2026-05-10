@@ -36,7 +36,7 @@ __init__() {
 on_begin() {
   str_targetname = "trials_lighthouse_beam";
   level setup_lighthouse();
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
   foreach(player in getplayers()) {
@@ -47,7 +47,7 @@ on_begin() {
 on_end(round_reset) {
   level notify(#"hash_2b53ed06a97eb26c");
   level.var_ab11c23d function_f223e16f(round_reset);
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
   foreach(player in getplayers()) {
@@ -211,7 +211,7 @@ function_91f0d131() {
   return 0;
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     var_f2b6fe6e = 0;
 

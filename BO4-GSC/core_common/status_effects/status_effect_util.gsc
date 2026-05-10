@@ -145,10 +145,10 @@ status_effect_apply(var_756fda07, weapon, applicant, isadditive, durationoverrid
       var_8725a10d = globallogic_score::function_3cbc4c6c(var_756fda07.var_2e4a8800);
     }
 
-    if(isDefined(var_8725a10d) && isDefined(var_8725a10d.var_3e3b11a9)) {
+    if(isDefined(var_8725a10d) && isDefined(var_8725a10d.activationthreshold)) {
       resistance = function_3c54ae98(var_756fda07.setype);
 
-      if(var_8725a10d.var_3e3b11a9 < resistance) {
+      if(var_8725a10d.activationthreshold < resistance) {
         var_b7a9b136 = 0;
       }
     }

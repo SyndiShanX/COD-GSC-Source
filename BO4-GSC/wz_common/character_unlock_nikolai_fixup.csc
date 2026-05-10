@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"nikolai_unlock", #"hash_1d718be46a94371f", #"cu16_item", &function_d95e620c, #"hash_6a5c9e02cc60e87e");
+  character_unlock_fixup::register_character_unlock(#"nikolai_unlock", #"prt_wz_nikolai", #"cu16_item", &function_d95e620c, #"hash_6a5c9e02cc60e87e");
 }
 
 function_d95e620c() {

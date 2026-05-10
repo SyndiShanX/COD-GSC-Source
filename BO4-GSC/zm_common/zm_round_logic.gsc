@@ -743,7 +743,7 @@ round_think(restart = 0) {
   callback::callback(#"hash_6df5348c2fb9a509");
 
   if(level flag::exists(#"ztcm")) {
-    luinotifyevent(#"hash_2f5757ad20bc3ae", 0);
+    luinotifyevent(#"zombie_notification_tcm_splash", 0);
     function_89888d49();
   }
 

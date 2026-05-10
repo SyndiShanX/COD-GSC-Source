@@ -838,7 +838,7 @@ function_c1091a8f(str_cmd, key) {
     case # "hash_972ca08eb9fbf0c":
       level.var_4af38aa3 = 0;
       break;
-    case # "hash_628ffe45aab5f07":
+    case # "dev_cooldowns_on":
       level.var_7c3d4959 = 1;
       break;
     case # "default_cooldowns":

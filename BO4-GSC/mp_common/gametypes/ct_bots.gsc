@@ -104,13 +104,13 @@ function_fa0d912f(var_7b4ae7d1) {
         fields = getcharacterfields(role_index, currentsessionmode());
         count += 1;
 
-        if(isDefined(fields) && isDefined(fields.var_49a55967) && fields.var_49a55967) {
+        if(isDefined(fields) && isDefined(fields.iscombattrainingenabled) && fields.iscombattrainingenabled) {
           break;
         }
       }
       while(count < var_5ec2386a);
 
-      if(!isDefined(fields) || !(isDefined(fields.var_49a55967) && fields.var_49a55967)) {
+      if(!isDefined(fields) || !(isDefined(fields.iscombattrainingenabled) && fields.iscombattrainingenabled)) {
         role_index = 1;
       }
 
@@ -735,7 +735,7 @@ function_956b904a() {
         self thread function_eca43db6();
         break;
       case 1:
-        self thread function_4b111722();
+        self thread bot_wander_state();
         break;
       case 3:
         self thread bot_chase_state();
@@ -870,7 +870,7 @@ function_6390598e() {
 
 function_f83f2862() {
   self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"bot_goal_timeout", #"reset_pathing");
-  self waittill(#"hash_69dbfbd660f8c53e");
+  self waittill(#"supply_pod_used");
 
   if(!(isDefined(self.var_9f73d035) && self.var_9f73d035)) {
     e_player = getplayers()[0];
@@ -981,7 +981,7 @@ function_3abfdc6b() {
   }
 }
 
-function_4b111722() {
+bot_wander_state() {
   self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_wander", #"reset_pathing", #"hash_658257c9e391c92c");
   self notify(#"bot_wander_state");
 

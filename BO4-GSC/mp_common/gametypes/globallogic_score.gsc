@@ -65,9 +65,9 @@ function_39193e3a() {
     if(isDefined(waitresult.weapon) && isDefined(waitresult.player)) {
       player = waitresult.player;
 
-      if(isDefined(player.pers[#"hash_53919d92ff1d039"])) {
-        scoreevents::function_6f51d1e9("battle_command_ultimate_command", player.pers[#"hash_53919d92ff1d039"], undefined, undefined);
-        player.pers[#"hash_53919d92ff1d039"] = undefined;
+      if(isDefined(player.pers[#"combat_efficiency_suppliers"])) {
+        scoreevents::function_6f51d1e9("battle_command_ultimate_command", player.pers[#"combat_efficiency_suppliers"], undefined, undefined);
+        player.pers[#"combat_efficiency_suppliers"] = undefined;
       }
     }
   }
@@ -459,7 +459,7 @@ giveplayermomentum(event, player, victim, descvalue, weapon, playersaffected) {
   }
 
   if(!isDefined(label)) {
-    player giveplayermomentumnotification(score, #"hash_480234a872bd64ac", descvalue, countstowardrampage, weapon, combatefficiencyscore, eventindex, event, playersaffected);
+    player giveplayermomentumnotification(score, #"score/blank", descvalue, countstowardrampage, weapon, combatefficiencyscore, eventindex, event, playersaffected);
     return;
   }
 
@@ -1884,7 +1884,7 @@ function_e7b4c25c(nemesis_name, value, nemesis_rank, var_15574043, nemesis_xp, n
 function_30ab51a4(params) {
   if(isDefined(self) && isDefined(self.pers)) {
     self.pers[#"hash_49e7469988944ecf"] = undefined;
-    self.pers[#"hash_53919d92ff1d039"] = undefined;
+    self.pers[#"combat_efficiency_suppliers"] = undefined;
   }
 }
 

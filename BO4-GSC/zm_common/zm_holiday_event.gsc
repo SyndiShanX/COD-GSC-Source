@@ -240,7 +240,7 @@ function_4634a866() {
   level.var_47cc5401 = 1;
   level flag::wait_till("magicbox_initialized");
   level._effect[#"hash_2ff87d61167ea531"] = #"wz/fx8_zm_box_marker_rainbow";
-  level._effect[#"hash_21167096dfea3409"] = #"wz/fx8_zm_box_marker_rainbow";
+  level._effect[#"custom_pandora_light"] = #"wz/fx8_zm_box_marker_rainbow";
 
   foreach(s_chest in level.chests) {
     if(isDefined(s_chest.pandora_light)) {

@@ -77,16 +77,16 @@ stop_postfx(immediate) {
     self.var_f0b8faa1 = undefined;
 
     if(isDefined(immediate) && immediate) {
-      if(self postfx::function_556665f2(#"hash_5a76eaaf7f7e3de5")) {
-        self postfx::stoppostfxbundle(#"hash_5a76eaaf7f7e3de5");
+      if(self postfx::function_556665f2(#"postfx_bundle_vision_pulse")) {
+        self postfx::stoppostfxbundle(#"postfx_bundle_vision_pulse");
       }
 
       if(self postfx::function_556665f2(#"hash_1356e810590b8caf")) {
         self postfx::stoppostfxbundle(#"hash_1356e810590b8caf");
       }
     } else {
-      if(self postfx::function_556665f2(#"hash_5a76eaaf7f7e3de5")) {
-        self postfx::exitpostfxbundle(#"hash_5a76eaaf7f7e3de5");
+      if(self postfx::function_556665f2(#"postfx_bundle_vision_pulse")) {
+        self postfx::exitpostfxbundle(#"postfx_bundle_vision_pulse");
       }
 
       if(self postfx::function_556665f2(#"hash_1356e810590b8caf")) {
@@ -165,13 +165,13 @@ function_ab898b2d(notifystring) {
         stop_postfx();
         self thread function_3e2cd736(localclientnum);
         self.var_f0b8faa1 = 1;
-        self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+        self.var_1618a13f = #"postfx_bundle_vision_pulse";
         self postfx::playpostfxbundle(self.var_1618a13f);
         self function_116b95e5(self.var_1618a13f, #"hash_7c1a0903a45d4d45", 0);
         self function_116b95e5(self.var_1618a13f, #"hash_51ebcff0b5d75894", 0);
         self function_116b95e5(self.var_1618a13f, #"hash_2efccfad2b32081a", 1);
         self thread function_844dbcb7(localclientnum);
-        self thread function_85e399a9(localclientnum);
+        self thread watch_owner_death(localclientnum);
         self callback::on_end_game(&on_game_ended);
         waitframe(1);
         self.var_168d7f5c = 0;
@@ -230,7 +230,7 @@ shutdown_vision_pulse(localclientnum) {
   }
 }
 
-function_85e399a9(localclientnum) {
+watch_owner_death(localclientnum) {
   self notify(#"watch_owner_death");
   self endon(#"watch_owner_death");
   self endon(#"stop_googles");
@@ -284,7 +284,7 @@ do_vision_world_pulse_lerp_helper(currenttime, elapsedtime, localclientnum, dura
   }
 
   if(!isDefined(self.var_1618a13f)) {
-    self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+    self.var_1618a13f = #"postfx_bundle_vision_pulse";
   }
 
   if(self postfx::function_556665f2(self.var_1618a13f)) {
@@ -391,7 +391,7 @@ vision_pulse_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(newval && bnewent && bwastimejump) {
-    self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+    self.var_1618a13f = #"postfx_bundle_vision_pulse";
     self postfx::playpostfxbundle(self.var_1618a13f);
     self function_116b95e5(self.var_1618a13f, #"hash_7c1a0903a45d4d45", 0);
     self function_116b95e5(self.var_1618a13f, #"hash_51ebcff0b5d75894", 0);
@@ -415,7 +415,7 @@ toggle_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     }
 
     if(!isDefined(self.var_1618a13f)) {
-      self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+      self.var_1618a13f = #"postfx_bundle_vision_pulse";
     }
 
     if(!self postfx::function_556665f2(self.var_1618a13f)) {
@@ -428,7 +428,7 @@ function_ea179305(localclientnum, enabled) {
   if(is_enabled(localclientnum)) {
     if(enabled) {
       if(!isDefined(self.var_1618a13f)) {
-        self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+        self.var_1618a13f = #"postfx_bundle_vision_pulse";
       }
 
       if(self postfx::function_556665f2(self.var_1618a13f)) {
@@ -438,8 +438,8 @@ function_ea179305(localclientnum, enabled) {
       return;
     }
 
-    if(self postfx::function_556665f2(#"hash_5a76eaaf7f7e3de5")) {
-      self postfx::stoppostfxbundle(#"hash_5a76eaaf7f7e3de5");
+    if(self postfx::function_556665f2(#"postfx_bundle_vision_pulse")) {
+      self postfx::stoppostfxbundle(#"postfx_bundle_vision_pulse");
     }
 
     if(!self postfx::function_556665f2(#"hash_1356e810590b8caf")) {
@@ -497,7 +497,7 @@ function_9e2a452e(localclientnum, robname) {
       self function_78233d29(robname, "", "Alpha", alpha);
 
       if(!isDefined(self.var_1618a13f)) {
-        self.var_1618a13f = #"hash_5a76eaaf7f7e3de5";
+        self.var_1618a13f = #"postfx_bundle_vision_pulse";
       }
 
       if(self postfx::function_556665f2(self.var_1618a13f)) {
@@ -515,7 +515,7 @@ set_reveal_enemy(localclientnum, on_off) {
       return;
     }
 
-    owner thread function_85e399a9(localclientnum);
+    owner thread watch_owner_death(localclientnum);
 
     if(isalive(owner) && isDefined(level.gameended) && !level.gameended && util::function_fbce7263(owner.team, self.team)) {
       robname = #"hash_75f4d8048e6adb94";

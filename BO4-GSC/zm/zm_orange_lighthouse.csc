@@ -56,7 +56,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[#"lighthouse_beam"], self, "tag_origin");
       self playSound(localclientnum, #"hash_c28cead5117620");
       self.centerstruct = spawn(0, self.origin, "script_origin");
-      self.centerstruct playLoopSound(#"hash_6181b0e69ec35a3b");
+      self.centerstruct playLoopSound(#"zmb_lighthouse_beam");
       break;
     case 2:
       if(isDefined(self.centerstruct)) {

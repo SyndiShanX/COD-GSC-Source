@@ -18,7 +18,7 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("clientuimodel", "hudItems.depositing", 13000, 1, "int", undefined, 0, 0);
 
-  if(getdvarint(#"hash_7074ed0f04816b75", 0)) {
+  if(getdvarint(#"cash_deposit_enabled", 0)) {
     clientfield::register("allplayers", "wz_cash_carrying", 13000, 1, "int", &function_3d113bfb, 0, 1);
     level.var_f042433 = [];
     level.var_e245bbc5 = [];
@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_localclient_connect(localclientnum) {
-  if(getdvarint(#"hash_7074ed0f04816b75", 0)) {
+  if(getdvarint(#"cash_deposit_enabled", 0)) {
     level.var_f042433[localclientnum] = [];
 
     for(i = 0; i < 1; i++) {

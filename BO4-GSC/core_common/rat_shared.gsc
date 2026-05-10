@@ -15,7 +15,7 @@ init() {
     level.rat.common = spawnStruct();
     level.rat.script_command_list = [];
     level.rat.playerskilled = 0;
-    level.rat.var_cd4fd549 = 0;
+    level.rat.botskilled = 0;
     callback::on_player_killed(&function_cecf7c3d);
     addratscriptcmd("<dev string:x38>", &function_5fd1a95b);
     addratscriptcmd("<dev string:x4d>", &rscteleport);
@@ -227,7 +227,7 @@ function_a6d4d86b(params) {
 
 function_cecf7c3d() {
   if(isDefined(self.bot)) {
-    level.rat.var_cd4fd549 += 1;
+    level.rat.botskilled += 1;
     return;
   }
 
@@ -239,7 +239,7 @@ function_d197a150(params) {
 }
 
 function_c4336b49(params) {
-  return level.rat.var_cd4fd549;
+  return level.rat.botskilled;
 }
 
 function_51706559(params) {

@@ -117,7 +117,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("actor", "" + #"hash_2856f87ecdfaf62", 16000, 1, "counter");
   clientfield::register("actor", "" + #"hash_1bdce857fd614cef", 16000, 1, "counter");
   clientfield::register("world", "" + #"postfx_play", 16000, 2, "int");
-  clientfield::register("world", "" + #"hash_71f9fcfb2cd84a9c", 16000, 1, "int");
+  clientfield::register("world", "" + #"boss_arena_visgroup", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"eye_vignette", 16000, 1, "int");
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
@@ -342,7 +342,7 @@ function_a7641284() {
   }
 
   level endon(#"egg_free", #"pap_quest_completed");
-  var_af2013df = array(#"hash_67695ee69c57c0b2", #"hash_61de3b8fe6f6a35");
+  var_af2013df = array(#"serpent_pass_eagle_free", #"cliff_tombs_eagle_free");
   level flag::wait_till_all(var_af2013df);
 
   while(true) {
@@ -396,7 +396,7 @@ function_f8822ae1(player, var_feed7374) {
 init_flags() {
   level flag::init(#"round_one");
   level flag::init(#"spartoi_resurrect");
-  level flag::init(#"hash_6c92a415bd4bb739");
+  level flag::init(#"sentinel_interacted");
   level flag::init(#"pegasus_exited");
 }
 
@@ -427,7 +427,7 @@ registermp_vehicles_agr_prespawn(s_chest) {
 }
 
 function_c000f08b() {
-  level endon(#"end_game", #"hash_49085a6baf9c2c27");
+  level endon(#"end_game", #"early_round_reset");
 
   if(zm_custom::function_901b751c(#"zmenhancedstate") == 2 || zm_custom::function_901b751c(#"zmminibossstate") == 2 || zm_custom::function_901b751c(#"startround") > 1) {
     level thread function_12b9b9a9();
@@ -566,14 +566,14 @@ function_c000f08b() {
 }
 
 function_d2085d57() {
-  level endon(#"hash_1cf28f130f16e2eb", #"hash_49085a6baf9c2c27");
+  level endon(#"hash_1cf28f130f16e2eb", #"early_round_reset");
   level flag::wait_till("gameplay_started");
   exploder::stop_exploder("exp_lgt_temple_gameplay_group");
   level notify(#"hash_1cf28f130f16e2eb");
 }
 
 function_d7831b0f() {
-  level endon(#"end_game", #"hash_49085a6baf9c2c27");
+  level endon(#"end_game", #"early_round_reset");
   level thread function_a3e22935();
   s_result = level waittill(#"end_of_round", #"hash_dc34ebe02d09532");
   level.no_powerups = undefined;
@@ -590,7 +590,7 @@ function_d7831b0f() {
 function_a3e22935() {
   level endon(#"end_game", #"end_of_round", #"hash_dc34ebe02d09532");
   level waittill(#"host_migration_begin");
-  level notify(#"hash_49085a6baf9c2c27");
+  level notify(#"early_round_reset");
   level waittill(#"host_migration_end");
   level thread function_c000f08b();
   wait 1;
@@ -604,7 +604,7 @@ function_12b9b9a9() {
     level.var_c54ec9bb = undefined;
     level.noroundnumber = undefined;
     level.max_zombie_func = undefined;
-    level notify(#"hash_49085a6baf9c2c27");
+    level notify(#"early_round_reset");
   }
 
   a_s_spawns = struct::get_array(#"hash_39721602c33f4cc7");
@@ -1613,11 +1613,11 @@ function_76dc48b8(cmd) {
     case # "enable_cave_zone":
       level thread function_f39d0796();
       return 1;
-    case # "hash_4abb72859ec9576c":
-      level thread function_3594d78b();
+    case # "force_spawn_gegenees":
+      level thread force_spawn_gegenees();
       break;
-    case # "hash_2f2a0c012b9587d3":
-      level thread function_590ce3bd();
+    case # "force_spawn_spartoi":
+      level thread force_spawn_spartoi();
       break;
     case # "hash_23e8dfb7c173d426":
       level thread function_80b73b4();
@@ -1730,7 +1730,7 @@ function_76dc48b8(cmd) {
     case # "hash_5e2fc595f8d3d7bd":
       level thread zm_red_power_quest::devgui_complete();
       return 1;
-    case # "hash_55435ba74ce9b712":
+    case # "challenge_shield_and_spear_damage":
       level.var_656c1a37 = 0;
       level thread zm_red_challenges::start_challenge();
       break;
@@ -1781,15 +1781,15 @@ function_76dc48b8(cmd) {
       level.var_656c1a37 = 10;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_7629cafaf2e465e3":
+    case # "challenge_kill_with_equipment":
       level.var_656c1a37 = 9;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_368aef09ae7ed576":
+    case # "challenge_kill_with_hero_weapon":
       level.var_656c1a37 = 12;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_2e0e00c6ad36186f":
+    case # "challenge_kill_with_god_hand":
       level.var_656c1a37 = 8;
       level thread zm_red_challenges::start_challenge();
       break;
@@ -1885,7 +1885,7 @@ function_76dc48b8(cmd) {
     case # "greek_fire":
       level thread zm_red_main_quest::function_25bb4829(1);
       break;
-    case # "hash_4e0fd48904ba6582":
+    case # "oracle_boon_reset_all":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;
@@ -1905,7 +1905,7 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case # "hash_66233ad30c165ffd":
+    case # "oracle_boon_reset_ammo":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[1].b_available = 1;
@@ -2022,8 +2022,8 @@ free_eagles() {
   level thread zm_red_pap_quest::function_5a4d8124();
   level flag::set(#"cage_dropped");
   level flag::set(#"eagle_attack");
-  level flag::set(#"hash_67695ee69c57c0b2");
-  level flag::set(#"hash_61de3b8fe6f6a35");
+  level flag::set(#"serpent_pass_eagle_free");
+  level flag::set(#"cliff_tombs_eagle_free");
 }
 
 complete_pap() {
@@ -2041,8 +2041,8 @@ complete_pap() {
   level flag::set(#"pap_quest_completed");
   level flag::set(#"zm_red_fasttravel_open");
   level flag::set(#"cage_dropped");
-  level flag::set(#"hash_67695ee69c57c0b2");
-  level flag::set(#"hash_61de3b8fe6f6a35");
+  level flag::set(#"serpent_pass_eagle_free");
+  level flag::set(#"cliff_tombs_eagle_free");
   level flag::set(#"dark_side_open");
   level thread zm_red_power_quest::devgui_complete();
   level thread scene::play(#"p8_fxanim_zm_red_omphalos_crystal_left_bundle", "<dev string:x260e>");
@@ -2068,11 +2068,11 @@ function_f39d0796() {
   level flag::set(#"pegasus_ride_started");
 }
 
-function_3594d78b() {
+force_spawn_gegenees() {
   zombie_gegenees_util::spawn_single(1);
 }
 
-function_590ce3bd() {
+force_spawn_spartoi() {
   zombie_skeleton_util::function_1ea880bd(1);
 }
 
@@ -2080,14 +2080,14 @@ function_80b73b4() {
   self notify("<dev string:x263d>");
   self endon("<dev string:x263d>");
 
-  if(getdvarint(#"hash_49d01fe7f6492094", 0) == 0) {
-    setDvar(#"hash_49d01fe7f6492094", 1);
+  if(getdvarint(#"dev_draw_spawn_locations", 0) == 0) {
+    setDvar(#"dev_draw_spawn_locations", 1);
   } else {
-    setDvar(#"hash_49d01fe7f6492094", 0);
+    setDvar(#"dev_draw_spawn_locations", 0);
     return;
   }
 
-  while(getdvarint(#"hash_49d01fe7f6492094", 0)) {
+  while(getdvarint(#"dev_draw_spawn_locations", 0)) {
     function_e8760afa(level.zm_loc_types[#"zombie_location"]);
     function_e8760afa(level.zm_loc_types[#"gegenees_location"]);
     function_e8760afa(level.zm_loc_types[#"blight_father_location"]);

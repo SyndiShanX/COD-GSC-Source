@@ -156,7 +156,7 @@ function_486ef0f6() {
         str_hint_text = #"hash_786af67b8225aaf4";
         break;
       case # "showers":
-        str_hint_text = #"hash_8a1754e2c346504";
+        str_hint_text = #"zm_escape/location_showers";
         break;
       case # "power_plant":
         str_hint_text = #"hash_7806b6b51cd2aed2";

@@ -22,7 +22,7 @@ __init__() {
   level._effect[#"tesla_viewmodel_tube_upgraded"] = #"zombie/fx_tesla_tube_view_ug_zmb";
   level._effect[#"tesla_viewmodel_tube2_upgraded"] = #"zombie/fx_tesla_tube_view2_ug_zmb";
   level._effect[#"tesla_viewmodel_tube3_upgraded"] = #"zombie/fx_tesla_tube_view3_ug_zmb";
-  clientfield::register("toplayer", "" + #"hash_611f27e5d51d036f", 28000, 1, "int", &function_4dfaa84c, 0, 0);
+  clientfield::register("toplayer", "" + #"tesla_gun_equipped", 28000, 1, "int", &function_4dfaa84c, 0, 0);
 }
 
 function_4dfaa84c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -32,12 +32,12 @@ function_4dfaa84c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self notify(#"hash_319d2bba47dac2c4");
+  self notify(#"tesla_gun_unequipped");
   self clear_tesla_tube_effect(localclientnum);
 }
 
 tesla_fx_rail(localclientnum) {
-  self endon(#"death", #"hash_319d2bba47dac2c4");
+  self endon(#"death", #"tesla_gun_unequipped");
   w_current = getcurrentweapon(localclientnum);
   wait randomfloatrange(0, 12);
 
@@ -58,7 +58,7 @@ tesla_fx_rail(localclientnum) {
 }
 
 tesla_fx_tube(localclientnum) {
-  self endon(#"death", #"hash_319d2bba47dac2c4");
+  self endon(#"death", #"tesla_gun_unequipped");
   w_current = getcurrentweapon(localclientnum);
 
   while(true) {

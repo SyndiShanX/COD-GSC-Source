@@ -1460,7 +1460,7 @@ function_26489405() {
 }
 
 function_8570168d() {
-  if(getDvar(#"hash_49e94b7aefac4f49", 0)) {
+  if(getDvar(#"ui_simulatect", 0)) {
     return true;
   }
 

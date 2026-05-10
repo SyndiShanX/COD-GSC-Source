@@ -250,7 +250,7 @@ function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -275,7 +275,7 @@ function_902ef0de(var_38280f2f, delta) {
 
 function_90a854d2(slot) {
   if(getdvarint(#"hash_657185da33fd5f8", 0) > 0) {
-    var_38280f2f = #"hash_6a1133003efe7380";
+    var_38280f2f = #"undefined_contract_name";
 
     switch (slot) {
       case 0:

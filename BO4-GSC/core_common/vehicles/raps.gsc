@@ -108,16 +108,16 @@ initsounds() {
   }
 
   if(isDefined(self.vehicletype) && self.vehicletype == #"hash_22f2770b0b570f88") {
-    self.sndalias[#"inair"] = #"hash_b4c1fb7fb7b70be";
-    self.sndalias[#"land"] = #"hash_56707e87f5b058df";
-    self.sndalias[#"spawn"] = #"hash_220536a567c22f9d";
+    self.sndalias[#"inair"] = #"veh_raps_mini_in_air";
+    self.sndalias[#"land"] = #"veh_raps_mini_land";
+    self.sndalias[#"spawn"] = #"veh_raps_mini_spawn";
     self.sndalias[#"direction"] = undefined;
-    self.sndalias[#"jump_up"] = #"hash_1182d9ecfe86442e";
+    self.sndalias[#"jump_up"] = #"veh_raps_mini_jump_up";
     self.sndalias[#"vehclose250"] = #"hash_4d4a13f08b063112";
     self.sndalias[#"vehclose1500"] = undefined;
-    self.sndalias[#"vehtargeting"] = #"hash_57d3d8cf8a3cb109";
+    self.sndalias[#"vehtargeting"] = #"veh_raps_mini_targeting";
     self.sndalias[#"vehalarm"] = #"hash_28033d94de922793";
-    self.sndalias[#"vehcollision"] = #"hash_481f37c2ab12bdfe";
+    self.sndalias[#"vehcollision"] = #"veh_raps_mini_collision";
   }
 }
 

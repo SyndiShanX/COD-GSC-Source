@@ -392,10 +392,10 @@ function_d5ca3f62(player) {
 
 function_2cbae477(var_babebdbc = #"weapon/fx8_equip_swat_smk_signal", var_76361c1a = "tag_flash") {
   playFXOnTag(var_babebdbc, self, var_76361c1a);
-  self playSound(#"hash_6c91edfde8408dad");
+  self playSound(#"evt_strobe_start");
   self.sndent = spawn("script_origin", self.origin);
   self.sndent linkto(self);
-  self.sndent playLoopSound(#"hash_63e34e1932c25073");
+  self.sndent playLoopSound(#"evt_strobe_lp");
 }
 
 function_284b1d4c(origin, model, timeout = undefined, var_babebdbc = undefined, var_76361c1a = undefined) {

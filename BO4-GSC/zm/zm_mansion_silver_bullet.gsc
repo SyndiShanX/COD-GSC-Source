@@ -80,7 +80,7 @@ function_766980a4() {
     s_result = level waittill(#"blueprint_completed");
 
     if(s_result.produced == getweapon(#"zitem_silver_bullet_part_4")) {
-      level zm_ui_inventory::function_7df6bb60(#"hash_26da6ef83af4ba62", 1);
+      level zm_ui_inventory::function_7df6bb60(#"q_silver_bullets_phase", 1);
       break;
     }
   }

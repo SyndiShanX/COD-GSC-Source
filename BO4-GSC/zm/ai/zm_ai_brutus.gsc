@@ -541,9 +541,9 @@ function_85e8940a(entity) {
   zombies = getaiteamarray(level.zombie_team);
   ents = arraycombine(players, zombies, 0, 0);
   ents = arraysortclosest(ents, entity.origin, undefined, 0, entity ai::function_9139c839().var_1709a39);
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
   entity clientfield::increment("brutus_shock_attack", 1);
-  level notify(#"hash_7a4ba7676000c3c6", {
+  level notify(#"brutus_ground_slam", {
     #brutus: self
   });
 
@@ -557,7 +557,7 @@ function_85e8940a(entity) {
         continue;
       }
 
-      damage = mapfloat(entity getpathfindingradius() + 15, entity ai::function_9139c839().var_1709a39, entity ai::function_9139c839().var_7ea758e1, 0, distance(entity.origin, ent.origin));
+      damage = mapfloat(entity getpathfindingradius() + 15, entity ai::function_9139c839().var_1709a39, entity ai::function_9139c839().shockattackdamage, 0, distance(entity.origin, ent.origin));
       damage = int(max(10, damage));
       ent dodamage(damage, entity.origin, entity, entity, "none");
       ent status_effect::status_effect_apply(shock_status_effect, undefined, self, 0);

@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"richtofen_unlock", #"hash_66b69b90a30bcc88", #"cu17_item", &function_d95e620c, #"hash_418312990213bc41");
+  character_unlock_fixup::register_character_unlock(#"richtofen_unlock", #"prt_wz_richtofen", #"cu17_item", &function_d95e620c, #"hash_418312990213bc41");
 }
 
 function_d95e620c() {

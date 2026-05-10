@@ -252,8 +252,8 @@ function_2d1eb0ec(intpayload) {
     if(!var_2cf49821 && self function_7cadec11() && !self isinfreefall() && !self function_9a0edd92() && !self inlaststand() && isalive(self)) {
       gesture = undefined;
 
-      if(isDefined(callout.var_17d07d2d) && var_f4cd8d56 == 1) {
-        gesture = self gestures::function_c77349d4(callout.var_17d07d2d);
+      if(isDefined(callout.gestablecalloutalt) && var_f4cd8d56 == 1) {
+        gesture = self gestures::function_c77349d4(callout.gestablecalloutalt);
       } else if(isDefined(callout.gestablecallout)) {
         gesture = self gestures::function_c77349d4(callout.gestablecallout);
       }

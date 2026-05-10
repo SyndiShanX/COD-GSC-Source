@@ -37,7 +37,7 @@ init_flags() {
   level flag::init(#"hash_550c8dc4c89d7873");
   level flag::init(#"ww_icicle_melting");
   level flag::init(#"ww_icicle_melted");
-  level flag::init(#"hash_7f9c695cfdccd6b4");
+  level flag::init(#"ww_key_picked_up");
   level flag::init(#"ww_safe_opened");
   level flag::init(#"hash_174f5682aa48c4b");
   level flag::init(#"hash_45b20bfeff570913");
@@ -199,14 +199,14 @@ ww_quest_step3_setup(var_5ea5c94d) {
   if(!var_5ea5c94d) {
     level.s_ww_quest.s_campfire zm_unitrigger::create(&function_10aa0f27, 64);
     level.s_ww_quest.s_campfire thread function_993730f4();
-    level flag::wait_till(#"hash_7f9c695cfdccd6b4");
+    level flag::wait_till(#"ww_key_picked_up");
   }
 }
 
 ww_quest_step3_cleanup(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
     level zm_ui_inventory::function_7df6bb60("zm_orange_ww_quest", 2);
-    level flag::set(#"hash_7f9c695cfdccd6b4");
+    level flag::set(#"ww_key_picked_up");
   }
 
   level.s_ww_quest.s_campfire zm_unitrigger::unregister_unitrigger(level.s_ww_quest.s_campfire.s_unitrigger);
@@ -219,14 +219,14 @@ function_10aa0f27(e_player) {
 }
 
 function_993730f4() {
-  level endon(#"end_game", #"hash_7f9c695cfdccd6b4");
+  level endon(#"end_game", #"ww_key_picked_up");
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
   level zm_ui_inventory::function_7df6bb60("zm_orange_ww_quest", 2);
   playsoundatposition(#"evt_key_pickup", self.origin);
   level.s_ww_quest.var_27a40ea3 hidepart("tag_key");
   self thread function_a67de655(e_who);
-  level flag::set(#"hash_7f9c695cfdccd6b4");
+  level flag::set(#"ww_key_picked_up");
 }
 
 function_a67de655(e_player) {

@@ -217,7 +217,7 @@ spawn_dog(bundle, owner) {
   dog callback::function_d8abfc3d(#"on_killed_player", &function_64247932);
   dog.ai.var_b1248bd1 = 1;
   dog set_state(1, 1);
-  owner thread function_458bc8de(dog);
+  owner thread state_toggle_watcher(dog);
   owner thread function_2f6f43cf(dog, bundle.ksweapon);
   dog thread killstreaks::function_fff56140(owner, &abort_dog);
   dog callback::function_d8abfc3d(#"on_end_game", &function_a1b9ccf1);
@@ -308,7 +308,7 @@ function_8296c0eb(owner) {
 
 toggle_state(owner) {
   if(function_8296c0eb(owner)) {
-    owner gestures::function_56e00fbf(#"hash_2c75f3bef8443438", undefined, 0);
+    owner gestures::function_56e00fbf(#"gestable_dog_calling", undefined, 0);
   }
 
   if(self ai_state::is_state(1)) {
@@ -325,11 +325,11 @@ function_2d96af8d() {
   self ai_patrol::function_325c6829(self.script_owner.origin);
 }
 
-function_458bc8de(dog) {
+state_toggle_watcher(dog) {
   self endon(#"disconnect");
   dog endon(#"death");
-  dog notify(#"hash_27a4203e237c5098");
-  dog endon(#"hash_27a4203e237c5098");
+  dog notify(#"state_toggle_watcher");
+  dog endon(#"state_toggle_watcher");
   wait 0.5;
 
   while(true) {

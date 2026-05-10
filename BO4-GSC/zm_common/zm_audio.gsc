@@ -2010,12 +2010,12 @@ sndannouncer_init() {
   sndannouncervoxadd(#"insta_kill", #"vox_powerup_instakill");
   sndannouncervoxadd(#"double_points", #"vox_powerup_doublepoints");
   sndannouncervoxadd(#"nuke", #"vox_powerup_nuke");
-  sndannouncervoxadd(#"full_ammo", #"hash_773c07eb3a67a793");
+  sndannouncervoxadd(#"full_ammo", #"vox_powerup_max_ammo");
   sndannouncervoxadd(#"fire_sale", #"vox_powerup_firesale");
   sndannouncervoxadd(#"minigun", #"vox_powerup_death_machine");
-  sndannouncervoxadd(#"bonus_points_team", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player_shared", #"hash_5540d7f63941a8b3");
+  sndannouncervoxadd(#"bonus_points_team", #"vox_powerup_bonus_points_team");
+  sndannouncervoxadd(#"bonus_points_player", #"vox_powerup_bonus_points_team");
+  sndannouncervoxadd(#"bonus_points_player_shared", #"vox_powerup_bonus_points_team");
   sndannouncervoxadd(#"hero_weapon_power", #"hash_49a75f92b85c0f95");
   sndannouncervoxadd(#"zombie_blood", #"hash_2f095e1811169fc7");
   sndannouncervoxadd(#"bonfire_sale", #"hash_554659b1fbc7a5bd");
@@ -2059,7 +2059,7 @@ sndannouncer_init() {
     sndannouncervoxadd(#"incoming_mini_boss", #"hash_50e18452b9e9f79c");
     sndannouncervoxadd(#"incoming_heavy", #"hash_162307bf1d9cd28a");
     sndannouncervoxadd(#"power_activated", #"hash_1903816aeeed7cdb");
-    sndannouncervoxadd(#"rush_zone_nag", #"hash_643588a5ac2630e9");
+    sndannouncervoxadd(#"rush_zone_nag", #"vox_rush_zone_nag");
     sndannouncervoxadd(#"defend_start", #"hash_52b5e94b0f834e89");
     sndannouncervoxadd(#"defend_complete", #"hash_54ce3eea0889438");
     sndannouncervoxadd(#"player_out", #"hash_46140c2ff7ed0028");
@@ -2084,7 +2084,7 @@ sndannouncer_init() {
     sndannouncervoxadd(#"player_down", #"hash_3dca2528566ddf10");
     sndannouncervoxadd(#"pap_avail", #"hash_67b680cea28e5157");
     sndannouncervoxadd(#"door_open_single", #"hash_5100f8a2b1c77bd4");
-    sndannouncervoxadd(#"hash_79b3b9e8ed3f0631", #"hash_1f56554135705816");
+    sndannouncervoxadd(#"door_open_mult", #"hash_1f56554135705816");
     sndannouncervoxadd(#"door_open_all", #"hash_4a4a214d167991b");
     sndannouncervoxadd(#"carpenter", #"hash_642d1c987098b98a");
     sndannouncervoxadd(#"insta_kill", #"hash_709765ed03192a2d");

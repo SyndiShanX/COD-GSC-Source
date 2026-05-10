@@ -150,11 +150,11 @@ function_22a92b8b() {
   mapname = util::get_map_name();
 
   switch (mapname) {
-    case # "hash_15642edd0e4376f1":
-    case # "hash_5562580f1b903614":
+    case # "cp_col_journalist":
+    case # "cp_defection":
     case # "hash_65a6e39408662d48":
-    case # "hash_68bac554964f4148":
-    case # "hash_7bdf016123a0147b":
+    case # "cp_col_air":
+    case # "cp_newsroom":
       ignore = 0;
       break;
   }

@@ -15,7 +15,7 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "" + #"music_box_light_fx", 24000, 1, "int", &music_box_light_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"music_box_teleport", 1, 1, "int", &music_box_teleport, 0, 0);
-  clientfield::register("actor", "" + #"hash_4881cb6bc59fdc49", 24000, 1, "int", &function_e722a4fd, 0, 0);
+  clientfield::register("actor", "" + #"music_box_zombie_flame_trail_fx", 24000, 1, "int", &music_box_zombie_flame_trail_fx, 0, 0);
 }
 
 function_3224694(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -81,7 +81,7 @@ music_box_teleport(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   }
 }
 
-function_e722a4fd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+music_box_zombie_flame_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self)) {
     if(newval == 1) {
       self.fx_id = util::playFXOnTag(localclientnum, "zm_weapons/fx8_music_box_zombie_flame_trail", self, "j_spine4");

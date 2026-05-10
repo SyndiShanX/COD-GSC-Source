@@ -25,7 +25,7 @@ __init__() {
 
 on_begin() {
   str_targetname = "trials_shoot_from_water";
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
   foreach(player in getplayers()) {
@@ -34,7 +34,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
   foreach(player in getplayers()) {
@@ -96,7 +96,7 @@ function_9e0e99e1() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon" || s_event.event === "give_weapon_alt" || s_event.event == "give_weapon_dual") {
     var_f2b6fe6e = 0;
 

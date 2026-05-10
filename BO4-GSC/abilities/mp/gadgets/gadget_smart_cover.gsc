@@ -49,8 +49,8 @@ function_a430cceb(attacker, weapon) {
 }
 
 function_9a2b3318(origin, angles, player) {
-  if(isDefined(level.smartcoversettings.bundle.var_bc78f60e)) {
-    length2 = (level.smartcoversettings.bundle.var_bc78f60e + level.smartcoversettings.bundle.maxwidth) * (level.smartcoversettings.bundle.var_bc78f60e + level.smartcoversettings.bundle.maxwidth);
+  if(isDefined(level.smartcoversettings.bundle.protectedzoneradius)) {
+    length2 = (level.smartcoversettings.bundle.protectedzoneradius + level.smartcoversettings.bundle.maxwidth) * (level.smartcoversettings.bundle.protectedzoneradius + level.smartcoversettings.bundle.maxwidth);
 
     foreach(protectedzone in level.smartcoversettings.objectivezones) {
       if(isDefined(protectedzone)) {

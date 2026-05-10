@@ -17,18 +17,18 @@ preload() {
 function
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + #"jump_scare_lighthouse", 24000, 1, "counter", &function_30ed45c9, 0, 0);
-  clientfield::register("toplayer", "" + #"jump_scare_note", 24000, 1, "counter", &function_48a634b7, 0, 0);
+  clientfield::register("toplayer", "" + #"jump_scare_lighthouse", 24000, 1, "counter", &jump_scare_lighthouse, 0, 0);
+  clientfield::register("toplayer", "" + #"jump_scare_note", 24000, 1, "counter", &jump_scare_note, 0, 0);
 }
 
-function_30ed45c9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+jump_scare_lighthouse(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_34d554b44dfcb81d");
     playSound(localclientnum, #"hash_750bc40787e0e29f", (0, 0, 0));
   }
 }
 
-function_48a634b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+jump_scare_note(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_34d551b44dfcb304");
     playSound(localclientnum, #"hash_750bc50787e0e452", (0, 0, 0));

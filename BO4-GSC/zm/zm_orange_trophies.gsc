@@ -180,7 +180,7 @@ function_3202188() {
   self endon(#"disconnect");
 
   while(self.var_65b6215d.size < 5) {
-    s_result = self waittill(#"hash_1ac4338b0d419091");
+    s_result = self waittill(#"pap_use_finished");
 
     if(s_result.var_7139c18c == "pap_taken") {
       if(!isDefined(self.var_65b6215d)) {

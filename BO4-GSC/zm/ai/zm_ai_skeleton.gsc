@@ -117,7 +117,7 @@ function_e75e796() {
   self.health = self.maxhealth;
   self.var_490042cd = gettime();
 
-  if(self.subarchetype === #"hash_fd7b9665529dd42" || self.subarchetype === #"hash_1520c8987a671df0") {
+  if(self.subarchetype === #"skeleton_helmet_sword_and_shield" || self.subarchetype === #"skeleton_helmet_spear") {
     namespace_81245006::initweakpoints(self, #"c_t8_zmb_skeleton_helmet_weakpoint_def");
   } else {
     namespace_81245006::initweakpoints(self, #"c_t8_zmb_skeleton_weakpoint_def");
@@ -270,7 +270,7 @@ function_42a1dabd() {
 
   self endon(#"death");
   var_67f0b3a6 = #"aib_vign_cust_zm_red_spart_swrd_dth_f_00";
-  wait_time = self ai::function_9139c839().var_fc268a04;
+  wait_time = self ai::function_9139c839().fakedeathlooptime;
   self ghost();
   self notsolid();
   var_ee3cfcfe = {
@@ -300,7 +300,7 @@ function_42a1dabd() {
     var_ee3cfcfe scene::stop(var_67f0b3a6);
     var_cee6fc30 = #"ai_t8_zm_red_spar_swrd_rebuild_01";
 
-    if(self.subarchetype == #"skeleton_spear" || self.subarchetype == #"hash_1520c8987a671df0") {
+    if(self.subarchetype == #"skeleton_spear" || self.subarchetype == #"skeleton_helmet_spear") {
       var_cee6fc30 = #"ai_t8_zm_red_spar_spear_rebuild_01";
     }
 
@@ -316,11 +316,11 @@ function_42a1dabd() {
     var_708e5e40.angles = (var_ee3cfcfe.angles[0], var_ee3cfcfe.angles[1] + 90, var_ee3cfcfe.angles[2]);
     var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
 
-    if(self.subarchetype == #"hash_fd7b9665529dd42" && !(isDefined(self.var_992c3917) && self.var_992c3917)) {
+    if(self.subarchetype == #"skeleton_helmet_sword_and_shield" && !(isDefined(self.var_992c3917) && self.var_992c3917)) {
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_bundle";
-    } else if(self.subarchetype == #"hash_1520c8987a671df0" && !(isDefined(self.var_992c3917) && self.var_992c3917)) {
+    } else if(self.subarchetype == #"skeleton_helmet_spear" && !(isDefined(self.var_992c3917) && self.var_992c3917)) {
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_bundle";
-    } else if(self.subarchetype == #"hash_1520c8987a671df0" || self.subarchetype == #"skeleton_spear") {
+    } else if(self.subarchetype == #"skeleton_helmet_spear" || self.subarchetype == #"skeleton_spear") {
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
     }
 

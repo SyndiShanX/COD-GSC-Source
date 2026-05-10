@@ -205,7 +205,7 @@ defend_areas() {
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
   level flag::wait_till("started_defend_area");
   level util::delay(5, undefined, &zm_round_spawning::function_376e51ef, #"werewolf");
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   zm_utility::function_fef4b36a(str_next_defend);
   a_zbarriers = getzbarrierarray();
 

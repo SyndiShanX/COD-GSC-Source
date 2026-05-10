@@ -339,7 +339,7 @@ function_63c3fd24(var_314c1b5a) {
       wait 1;
       self.var_68c35930 zm_vo::function_cf1e151c(var_314c1b5a[self.var_68c35930.script_int]);
       level flag::clear(#"phonograph_playing");
-      self.var_68c35930 notify(#"hash_53eb32eaa511640c");
+      self.var_68c35930 notify(#"roll_stop_spin");
       self.var_68c35930 stoploopsound();
       self.var_68c35930 playSound(#"hash_376eaa517cd09530");
       self.var_68c35930 thread function_ad05f6f3();
@@ -359,7 +359,7 @@ function_64834acd() {
 }
 
 function_21a979f7() {
-  self endon(#"hash_53eb32eaa511640c");
+  self endon(#"roll_stop_spin");
 
   while(true) {
     if(self.angles[0] < 360) {
@@ -740,7 +740,7 @@ function_a7ae2066() {
 }
 
 function_678d6318() {
-  s_trigger_loc = struct::get(#"hash_2ca9b43546a096e3");
+  s_trigger_loc = struct::get(#"bra_detector");
   s_unitrigger = s_trigger_loc zm_unitrigger::create(undefined, (180, 180, 64), &zm_unitrigger::function_69168e61, 0, 1);
 
   while(true) {

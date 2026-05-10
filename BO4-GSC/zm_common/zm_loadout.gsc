@@ -182,7 +182,7 @@ function_54cb37a4(weapon) {
     self thread[[level.zombie_weapons_callbacks[weapon]]]();
   }
 
-  self zm_weapons::function_7c5dd4bd(weapon);
+  self zm_weapons::give_full_ammo(weapon);
 
   if(isDefined(self.var_57c1d146[weapon]) && self.var_57c1d146[weapon]) {
     self.var_57c1d146[weapon] = undefined;
@@ -283,7 +283,7 @@ function_6519eea8(slot, weapon) {
   }
 
   old_weapon = self function_8f85096(slot);
-  self notify(#"hash_4078956b159dd0f3", {
+  self notify(#"new_slot_weapon", {
     #slot: slot, #weapon: weapon
   });
   self notify("new_" + slot, {

@@ -596,10 +596,10 @@ turn_gadget_on(slot, weapon) {
 
   if(sessionmodeismultiplayergame()) {
     if(weapon.name == #"gadget_health_regen") {
-      var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+      current_life_index = self match_record::get_player_stat(#"current_life_index");
 
-      if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_2380fc76594e930d", 1);
+      if(isDefined(current_life_index)) {
+        self match_record::inc_stat(#"lives", current_life_index, #"hash_2380fc76594e930d", 1);
       }
     } else {
       self function_33644ff2(game.timepassed, weapon.name);
@@ -872,10 +872,10 @@ gadget_ready(slot, weapon) {
 
   if(sessionmodeismultiplayergame()) {
     if(weapon.name == #"gadget_health_regen") {
-      var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+      current_life_index = self match_record::get_player_stat(#"current_life_index");
 
-      if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_656f3981134db095", 1);
+      if(isDefined(current_life_index)) {
+        self match_record::inc_stat(#"lives", current_life_index, #"health_regen_earned_count", 1);
       }
     } else {
       self function_ac24127(game.timepassed, weapon.name);
@@ -1418,7 +1418,7 @@ abilities_devgui_think() {
       case # "ability_power_f":
         abilities_devgui_handle_player_command(cmd, &function_3db3dc4f, arg);
         break;
-      case # "hash_5b8a32e219f9ae64":
+      case # "equipment_power_f":
         abilities_devgui_handle_player_command(cmd, &function_626f2cd1, arg);
         break;
       case # "hash_2d2f6f2bb98a38b3":

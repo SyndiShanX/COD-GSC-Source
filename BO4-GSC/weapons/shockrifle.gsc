@@ -124,7 +124,7 @@ function_aa6e2f52(watcher, owner) {
   }
 
   playFXOnTag("weapon/fx8_hero_sig_shockrifle_spike_active", self, "tag_fx");
-  wait isDefined(level.var_a5ff950.var_aded392d) ? level.var_a5ff950.var_aded392d : 0;
+  wait isDefined(level.var_a5ff950.shockdelay) ? level.var_a5ff950.shockdelay : 0;
 
   if(isDefined(waitresult.hitent) && isDefined(owner) && util::function_fbce7263(waitresult.hitent.team, owner.team)) {
     self thread function_5fff8c45(watcher, waitresult.hitent);
@@ -161,7 +161,7 @@ function_5fff8c45(watcher, hitent) {
   up = anglestoup(self.angles);
   traceorigin = self.origin + up;
 
-  while(self.var_7471e7b7 < level.var_a5ff950.var_1fb6bd43) {
+  while(self.var_7471e7b7 < level.var_a5ff950.submunitioncharges) {
     waitresult = damagearea waittill(#"trigger");
     ent = waitresult.activator;
 
@@ -303,7 +303,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
   }
 
   shocked_hands = getweapon(#"shocked_hands");
-  var_cb36e12 = getweapon(#"hash_19abd3767bd1566d");
+  var_cb36e12 = getweapon(#"force_crawl_hands");
   self giveweapon(shocked_hands);
   self switchtoweaponimmediate(shocked_hands, 1);
   prevstance = self getstance();
@@ -325,7 +325,7 @@ function_c80bac1f(shockcharge, var_51415470, shockduration) {
 
   if(isDefined(owner) && util::function_fbce7263(self.team, owner.team)) {
     if(var_51415470) {
-      scoreevents::processscoreevent(#"hash_6f0ec202863eacd", owner, self, level.shockrifleweapon);
+      scoreevents::processscoreevent(#"tempest_paralyzed_enemy", owner, self, level.shockrifleweapon);
     } else {
       scoreevents::processscoreevent(#"tempest_shock_chain", owner, self, level.shockrifleweapon);
     }

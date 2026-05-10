@@ -78,7 +78,7 @@ function_959bac94() {
 }
 
 function_ba459d03(team) {
-  if(isDefined(level.var_ba13fb7a) && level.var_ba13fb7a) {
+  if(isDefined(level.debug_team_assignment) && level.debug_team_assignment) {
     team_str = string(team);
 
     if(isDefined(level.teams[team])) {

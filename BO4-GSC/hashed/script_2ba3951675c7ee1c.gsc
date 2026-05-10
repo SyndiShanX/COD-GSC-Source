@@ -602,7 +602,7 @@ function_6222e98f() {
 }
 
 function_95a4deeb() {
-  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"forging_magma_gat", #"hash_2c23d48f0925d266");
 
   while(true) {
     s_result = self waittill(#"weapon_change", #"player_downed");
@@ -642,7 +642,7 @@ function_95a4deeb() {
 }
 
 function_6b09dab1() {
-  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"forging_magma_gat", #"hash_2c23d48f0925d266");
   self waittill(#"fasttravel_over");
 
   if(self hasweapon(getweapon(#"ww_blundergat_fire_t8_unfinished"))) {
@@ -665,7 +665,7 @@ function_6b09dab1() {
 }
 
 function_7f19d274() {
-  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"forging_magma_gat", #"hash_2c23d48f0925d266");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -871,7 +871,7 @@ function_d3db303d() {
         e_player.var_6417e645 = 1;
         e_player.var_1ea09849 = undefined;
         e_player notify(#"hash_3c807aeefe7734fa");
-        e_player notify(#"hash_5dc448a84a24492");
+        e_player notify(#"forging_magma_gat");
 
         if(isPlayer(e_player) && !(isDefined(e_player.intermission) && e_player.intermission) && !(isDefined(e_player.is_drinking) && e_player.is_drinking)) {
           e_player zm_weapons::switch_back_primary_weapon();
@@ -881,7 +881,7 @@ function_d3db303d() {
         self.stub.e_player = e_player;
         var_25b99c94 = struct::get("s_ni_mach");
         var_25b99c94 thread scene::play();
-        level notify(#"hash_5dc448a84a24492");
+        level notify(#"forging_magma_gat");
         function_e1f2fb39();
         self.stub thread function_e672cf9(e_player, var_fc074136);
         self.stub thread function_ecc34f71(e_player);
@@ -1108,7 +1108,7 @@ function_48c915fa() {
     s_result = t_door waittill(#"trigger");
     e_player = s_result.activator;
 
-    if(level flag::get(#"hash_7039457b1cc827de")) {
+    if(level flag::get(#"have_wardens_key")) {
       t_door delete();
       self.e_lock delete();
 
@@ -1159,7 +1159,7 @@ function_48c915fa() {
 function_38792a35() {
   self endon(#"death");
   self sethintstring(#"hash_2f5a14e8bf175422");
-  level flag::wait_till(#"hash_7039457b1cc827de");
+  level flag::wait_till(#"have_wardens_key");
 
   if(function_8b1a219a()) {
     self sethintstring(#"hash_782c9287b8dfe2d4");

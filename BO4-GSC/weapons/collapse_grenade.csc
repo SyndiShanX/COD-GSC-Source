@@ -18,8 +18,8 @@ __init__() {
 }
 
 function_fe37390(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  self playrenderoverridebundle(#"hash_75168376918f5ab7");
-  self function_78233d29(#"hash_75168376918f5ab7", "", "Scale", 1);
+  self playrenderoverridebundle(#"rob_wz_boundary");
+  self function_78233d29(#"rob_wz_boundary", "", "Scale", 1);
 }
 
 function_6f48ad35(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

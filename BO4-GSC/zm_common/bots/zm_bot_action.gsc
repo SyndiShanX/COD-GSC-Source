@@ -26,8 +26,8 @@ __main__() {
 
 register_actions() {
   bot_action::register_action(#"melee_zombie_enemy", &bot_action::current_melee_weapon_rank, &function_aa4daa54, &bot_action::melee_enemy);
-  bot_action::register_action(#"hash_22d98a5a241c78ba", &bot_action::rank_priority, &function_b4d8b7d6, &function_3c22de9a);
-  bot_action::register_action(#"hash_5c2824c8a8f125f7", &bot_action::rank_priority, &function_ae19f70f, &function_2c6e5988);
+  bot_action::register_action(#"use_zombie_interact", &bot_action::rank_priority, &function_b4d8b7d6, &use_zombie_interact);
+  bot_action::register_action(#"use_zombie_weapon_upgrade", &bot_action::rank_priority, &function_ae19f70f, &use_zombie_weapon_upgrade);
   bot_action::register_action(#"zombie_auto_revive", &bot_action::rank_priority, &function_f4707540, &zombie_auto_revive);
   bot_action::register_action(#"zombie_reload_weapon", &bot_action::current_weapon_rank, &bot_action::reload_weapon_weight, &zombie_reload_weapon);
   bot_action::register_action(#"zombie_revive_player", &bot_action::rank_priority, &function_296516b4, &bot_action::revive_player);
@@ -308,7 +308,7 @@ function_f59547eb(trigger) {
   return distance2dsquared(self.origin, trigger.origin) <= (120 + var_12f8c7ca + var_e61f062b) * (120 + var_12f8c7ca + var_e61f062b);
 }
 
-function_2c6e5988(actionparams) {
+use_zombie_weapon_upgrade(actionparams) {
   zombie_weapon_upgrade = actionparams.zombie_weapon_upgrade;
   trigger = zombie_weapon_upgrade.trigger_stub.playertrigger[self getentitynumber()];
   trigger useby(self);
@@ -408,7 +408,7 @@ function_b4d8b7d6(actionparams) {
   return 100;
 }
 
-function_3c22de9a(actionparams) {
+use_zombie_interact(actionparams) {
   trigger = function_d41104ab(actionparams.interact);
   self bottapbutton(3);
   waitframe(1);

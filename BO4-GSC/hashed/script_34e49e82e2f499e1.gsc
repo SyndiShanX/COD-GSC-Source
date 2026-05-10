@@ -254,10 +254,10 @@ function_62ef723(activator, laststate, state) {
   }
 }
 
-function_274ee8b5(dynent, var_8a50fb55) {
+function_274ee8b5(dynent, boaster) {
   level endon(#"game_ended");
 
-  while(isDefined(var_8a50fb55) && isalive(var_8a50fb55) && !var_8a50fb55 inlaststand() && var_8a50fb55 function_15049d95()) {
+  while(isDefined(boaster) && isalive(boaster) && !boaster inlaststand() && boaster function_15049d95()) {
     waitframe(1);
   }
 

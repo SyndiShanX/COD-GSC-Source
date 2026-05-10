@@ -27,7 +27,7 @@ init() {
 
 setup_character_vo() {
   if(!zm_trial::is_trial_mode() && !zm_utility::is_standard()) {
-    if(self zm_characters::is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
+    if(self zm_characters::is_character(array(#"prt_zm_richtofen", #"prt_zm_richtofen_ofc", #"prt_zm_richtofen_whi_novials"))) {
       self thread function_5bd0ee94();
     }
   }
@@ -44,32 +44,32 @@ function_5bd0ee94() {
 }
 
 function_25f77618() {
-  self zm_audio::function_6191af93(#"ammo", #"out", #"hash_6498f9b40d233db", #"out", 25);
-  self zm_audio::function_6191af93(#"ammo", #"low", #"hash_6498f9b40d233db", #"low", 25);
-  self zm_audio::function_6191af93(#"magicbox", #"homunculus", #"hash_e1b7317229bdec5", #"homunculus", 25);
-  self zm_audio::function_6191af93(#"magicbox", #"pistol", #"hash_e1b7317229bdec5", #"pistol", 25);
-  self zm_audio::function_6191af93(#"magicbox", #"sniper", #"hash_e1b7317229bdec5", #"sniper", 25);
-  self zm_audio::function_6191af93(#"magicbox", #"raygun", #"hash_e1b7317229bdec5", #"raygun", 25);
-  self zm_audio::function_6191af93(#"kill", #"homunculus", #"hash_fe54ed4fd5d8e31", #"homunculus", 25);
-  self zm_audio::function_6191af93(#"kill", #"explosive", #"hash_fe54ed4fd5d8e31", #"explosive", 25);
-  self zm_audio::function_6191af93(#"kill", #"headshot", #"hash_fe54ed4fd5d8e31", #"headshot", 25);
-  self zm_audio::function_6191af93(#"kill", #"streak_self", #"hash_fe54ed4fd5d8e31", #"streak_self", 25);
-  self zm_audio::function_6191af93(#"kill", #"melee", #"hash_fe54ed4fd5d8e31", #"melee", 25);
-  self zm_audio::function_6191af93(#"kill", #"raygun", #"hash_fe54ed4fd5d8e31", #"raygun", 25);
-  self zm_audio::function_6191af93(#"kill", #"specialround", #"hash_fe54ed4fd5d8e31", #"specialround", 25);
-  self zm_audio::function_6191af93(#"powerup", #"firesale", #"hash_336075b054ae439f", #"firesale", 25);
-  self zm_audio::function_6191af93(#"powerup", #"nuke", #"hash_336075b054ae439f", #"nuke", 25);
-  self zm_audio::function_6191af93(#"revive", #"down", #"hash_319bb42d8dc9a388", #"down", 25);
-  self zm_audio::function_6191af93(#"revive", #"support_demp", #"hash_319bb42d8dc9a388", #"support_demp", 25);
-  self zm_audio::function_6191af93(#"revive", #"support_niko", #"hash_319bb42d8dc9a388", #"support_niko", 25);
-  self zm_audio::function_6191af93(#"revive", #"support_take", #"hash_319bb42d8dc9a388", #"support_take", 25);
-  self zm_audio::function_6191af93(#"general", #"attacked", #"hash_7e2486c17f45616f", #"attacked", 25);
-  self zm_audio::function_6191af93(#"general", #"crawl_spawn", #"hash_7e2486c17f45616f", #"crawl_spawn", 25);
-  self zm_audio::function_6191af93(#"general", #"gib", #"hash_7e2486c17f45616f", #"gib", 25);
-  self zm_audio::function_6191af93(#"general", #"outofmoney", #"hash_7e2486c17f45616f", #"outofmoney", 25);
-  self zm_audio::function_6191af93(#"perk", #"generic", #"hash_285be55574f6258d", #"generic", 25);
-  self zm_audio::function_6191af93(#"weapon_pickup", #"shield", #"hash_14a052272fa3cf92", #"shield", 25);
-  self zm_audio::function_6191af93(#"roundstart", #"special", #"hash_d345ba7a03b3891", #"special", 25);
+  self zm_audio::function_6191af93(#"ammo", #"out", #"ammo_rich_mind", #"out", 25);
+  self zm_audio::function_6191af93(#"ammo", #"low", #"ammo_rich_mind", #"low", 25);
+  self zm_audio::function_6191af93(#"magicbox", #"homunculus", #"magicbox_rich_mind", #"homunculus", 25);
+  self zm_audio::function_6191af93(#"magicbox", #"pistol", #"magicbox_rich_mind", #"pistol", 25);
+  self zm_audio::function_6191af93(#"magicbox", #"sniper", #"magicbox_rich_mind", #"sniper", 25);
+  self zm_audio::function_6191af93(#"magicbox", #"raygun", #"magicbox_rich_mind", #"raygun", 25);
+  self zm_audio::function_6191af93(#"kill", #"homunculus", #"kill_rich_mind", #"homunculus", 25);
+  self zm_audio::function_6191af93(#"kill", #"explosive", #"kill_rich_mind", #"explosive", 25);
+  self zm_audio::function_6191af93(#"kill", #"headshot", #"kill_rich_mind", #"headshot", 25);
+  self zm_audio::function_6191af93(#"kill", #"streak_self", #"kill_rich_mind", #"streak_self", 25);
+  self zm_audio::function_6191af93(#"kill", #"melee", #"kill_rich_mind", #"melee", 25);
+  self zm_audio::function_6191af93(#"kill", #"raygun", #"kill_rich_mind", #"raygun", 25);
+  self zm_audio::function_6191af93(#"kill", #"specialround", #"kill_rich_mind", #"specialround", 25);
+  self zm_audio::function_6191af93(#"powerup", #"firesale", #"powerup_rich_mind", #"firesale", 25);
+  self zm_audio::function_6191af93(#"powerup", #"nuke", #"powerup_rich_mind", #"nuke", 25);
+  self zm_audio::function_6191af93(#"revive", #"down", #"revive_rich_mind", #"down", 25);
+  self zm_audio::function_6191af93(#"revive", #"support_demp", #"revive_rich_mind", #"support_demp", 25);
+  self zm_audio::function_6191af93(#"revive", #"support_niko", #"revive_rich_mind", #"support_niko", 25);
+  self zm_audio::function_6191af93(#"revive", #"support_take", #"revive_rich_mind", #"support_take", 25);
+  self zm_audio::function_6191af93(#"general", #"attacked", #"general_rich_mind", #"attacked", 25);
+  self zm_audio::function_6191af93(#"general", #"crawl_spawn", #"general_rich_mind", #"crawl_spawn", 25);
+  self zm_audio::function_6191af93(#"general", #"gib", #"general_rich_mind", #"gib", 25);
+  self zm_audio::function_6191af93(#"general", #"outofmoney", #"general_rich_mind", #"outofmoney", 25);
+  self zm_audio::function_6191af93(#"perk", #"generic", #"perk_rich_mind", #"generic", 25);
+  self zm_audio::function_6191af93(#"weapon_pickup", #"shield", #"weapon_pickup_rich_mind", #"shield", 25);
+  self zm_audio::function_6191af93(#"roundstart", #"special", #"roundstart_rich_mind", #"special", 25);
   self zm_audio::function_6191af93(#"surrounded", #"self", #"surrounded_rich_mind", #"self", 25);
 }
 
@@ -105,7 +105,7 @@ function_76659f5e() {
   foreach(e_player in a_e_players) {
     level notify(#"next_rmb");
 
-    if(e_player zm_characters::is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
+    if(e_player zm_characters::is_character(array(#"prt_zm_richtofen", #"prt_zm_richtofen_ofc", #"prt_zm_richtofen_whi_novials"))) {
       level notify(#"next_rmb");
     }
   }

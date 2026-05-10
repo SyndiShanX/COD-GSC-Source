@@ -36,8 +36,8 @@ init_clientfield() {
 
 init_quests() {
   zm_sq::register(#"jump_scare", #"step_1", #"jump_scare_quest", &jump_scare, &jump_scare_cleanup);
-  zm_sq::register(#"narrative_room", #"step_1", #"narrative_room_hidden", &function_6f55d670, &function_13c87ace);
-  zm_sq::register(#"narrative_room", #"step_2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
+  zm_sq::register(#"narrative_room", #"step_1", #"narrative_room_hidden", &narrative_room_hidden, &function_13c87ace);
+  zm_sq::register(#"narrative_room", #"step_2", #"narrative_room_revealed", &narrative_room, &narrative_room_cleanup);
 }
 
 init_objects() {
@@ -104,7 +104,7 @@ is_weapon_sniper(w_weapon) {
 
 jump_scare_cleanup(var_a276c861, var_19e802fa) {}
 
-function_6f55d670(var_a276c861) {
+narrative_room_hidden(var_a276c861) {
   level waittill(#"fake_waittill");
 }
 

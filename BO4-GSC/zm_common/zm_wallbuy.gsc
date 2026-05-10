@@ -402,7 +402,7 @@ wall_weapon_update_prompt(player) {
       if(function_8b1a219a()) {
         self.stub.hint_string = #"hash_7778a99e3a7d47";
       } else {
-        self.stub.hint_string = #"hash_18379e4e114fabf9";
+        self.stub.hint_string = #"zombie/weaponcostonly_cfill_bgb_secret_shopper";
       }
 
       if(self.stub.var_8d306e51) {
@@ -426,7 +426,7 @@ wall_weapon_update_prompt(player) {
       if(function_8b1a219a()) {
         self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = #"hash_60606b68e93a29c8";
+        self.stub.hint_string = #"zombie/weaponcostonly_cfill";
       }
 
       if(self.stub.var_8d306e51) {
@@ -479,7 +479,7 @@ wall_weapon_update_prompt(player) {
       } else if(function_8b1a219a()) {
         self.stub.hint_string = #"hash_1299ea66da4a06b0";
       } else {
-        self.stub.hint_string = #"hash_4a6901dda0793d3c";
+        self.stub.hint_string = #"zombie/weaponammoonly_cfill_bgb_secret_shopper";
       }
 
       if(self.stub.var_8d306e51) {
@@ -511,7 +511,7 @@ wall_weapon_update_prompt(player) {
       } else if(function_8b1a219a()) {
         self.stub.hint_string = #"hash_3f279e3e0f564e99";
       } else {
-        self.stub.hint_string = #"hash_382490a598f64833";
+        self.stub.hint_string = #"zombie/weaponammoonly_cfill";
       }
 
       if(self.stub.var_8d306e51) {
@@ -594,7 +594,7 @@ get_weapon_hint_ammo() {
     return # "hash_2791ecebb85142c4";
   }
 
-  return # "hash_60606b68e93a29c8";
+  return # "zombie/weaponcostonly_cfill";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {

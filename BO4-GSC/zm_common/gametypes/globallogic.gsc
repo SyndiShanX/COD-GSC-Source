@@ -1394,7 +1394,7 @@ callback_startgametype() {
     }
 
     setDvar(#"cg_thirdpersonangle", 354);
-    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"platform/press_to_spawn";
 
     if(level.teambased) {
       game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
@@ -1408,10 +1408,10 @@ callback_startgametype() {
     game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
     game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
     game.strings[#"waiting_to_spawn_ss"] = #"mp/waiting_to_spawn_ss";
-    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"you_will_spawn"] = #"mp/you_will_respawn";
     game.strings[#"match_starting"] = #"mp/match_starting";
     game.strings[#"change_class"] = #"mp/change_class_next_spawn";
-    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"last_stand"] = #"mpui/last_stand";
     game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
     game.strings[#"tie"] = #"mp/match_tie";
     game.strings[#"round_draw"] = #"mp/round_draw";

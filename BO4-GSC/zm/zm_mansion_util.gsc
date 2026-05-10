@@ -652,7 +652,7 @@ function_f15c4657() {
   level.sam_clue_dig_traversal++;
   str_alias = #"hash_63097ff550404256" + level.sam_clue_dig_traversal + "_pickup";
 
-  if(self zm_characters::is_character(array(#"hash_5ebf024e1559c04a")) && level.sam_clue_dig_traversal == 3) {
+  if(self zm_characters::is_character(array(#"prt_zm_butler")) && level.sam_clue_dig_traversal == 3) {
     self zm_vo::function_a2bd5a0c(#"hash_4c470787fc7738eb");
     self playsoundtoplayer(#"hash_663346a99e3bdffc", self);
     return;

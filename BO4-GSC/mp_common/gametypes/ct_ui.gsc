@@ -46,7 +46,7 @@ function_6889bb61(var_74d544ba) {
   self ct_gadgets::function_d77271ae();
 
   if(isDefined(level._objective_zapper_tall)) {
-    self[[level._objective_zapper_tall]](#"hash_2ac3b79c708dcfd5");
+    self[[level._objective_zapper_tall]](#"default_desc_training");
   }
 
   self disableweapons();

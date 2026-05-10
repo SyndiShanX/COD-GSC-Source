@@ -67,9 +67,9 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"safe_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"flare_fx", 1, 2, "int");
   clientfield::register("scriptmover", "" + #"flare_on_car", 1, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_2ec182fecae80e80", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"shield_frost_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"portal_pass", 1, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_1cf8b9339139c50d", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"engineer_smoke_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"car_fx", 1, 1, "int");
   clientfield::register("world", "" + #"engineer_spark_fx", 1, 1, "int");
   clientfield::register("world", "" + #"fireworks_fx", 1, 2, "counter");
@@ -81,7 +81,7 @@ init_flags() {
   level flag::init(#"hash_2aaea7cd22f44712");
   level flag::init(#"skeleton_car_crash");
   level flag::init(#"activate_sea_walkers");
-  level flag::init(#"hash_480b6b675a3076ec");
+  level flag::init(#"sea_walkers_queued");
   level flag::init(#"vomit_blade_acquired");
   level flag::init(#"hash_f244999377a9081");
   level flag::init(#"hash_598d4e6af1cf4c39");
@@ -99,8 +99,8 @@ init_quests() {
   zm_sq::register(#"fishy_offering", #"step_2", #"fishy_step_2", &fishy_offering_step_2_setup, &fishy_offering_step_2_cleanup);
   zm_sq::register(#"portal_pass", #"step_1", #"portal_pass_step_1", &portal_pass_step_1_setup, &portal_pass_step_1_cleanup);
   zm_sq::register(#"portal_pass", #"step_2", #"portal_pass_step_2", &portal_pass_step_2_setup, &portal_pass_step_2_cleanup);
-  zm_sq::register(#"hash_68677a02650cad00", #"step_1", #"hash_4ba91dee7d31240b", &function_b87c71d7, &function_46a445cd);
-  zm_sq::register(#"hash_68677a02650cad00", #"step_2", #"hash_4ba91eee7d3125be", &function_9a209775, &function_2ae7b2a6);
+  zm_sq::register(#"skull_singers", #"step_1", #"hash_4ba91dee7d31240b", &function_b87c71d7, &function_46a445cd);
+  zm_sq::register(#"skull_singers", #"step_2", #"hash_4ba91eee7d3125be", &function_9a209775, &function_2ae7b2a6);
   zm_sq::register(#"ships_engineer", #"step_1", #"ships_engineer_step_1", &ships_engineer_1_setup, &ships_engineer_1_cleanup);
   zm_sq::register(#"ships_engineer", #"step_2", #"ships_engineer_step_2", &ships_engineer_2_setup, &ships_engineer_2_cleanup);
   zm_sq::register(#"ships_engineer", #"step_3", #"ships_engineer_step_3", &ships_engineer_3_setup, &ships_engineer_3_cleanup);
@@ -115,7 +115,7 @@ init_quests() {
   zm_sq::start(#"vomit_blade");
   zm_sq::start(#"fishy_offering");
   zm_sq::start(#"portal_pass");
-  zm_sq::start(#"hash_68677a02650cad00");
+  zm_sq::start(#"skull_singers");
   zm_sq::start(#"ships_engineer");
 }
 
@@ -153,8 +153,8 @@ function_4e186966() {
   s_fx = struct::get(self.target);
   self waittill(#"trigger", #"death");
   mdl_fx = util::spawn_model("tag_origin", s_fx.origin, (300, 180, 0));
-  mdl_fx clientfield::set("" + #"hash_1cf8b9339139c50d", 1);
-  level thread util::delete_on_death_or_notify(mdl_fx, #"ships_engineer_step_3_completed", "" + #"hash_1cf8b9339139c50d");
+  mdl_fx clientfield::set("" + #"engineer_smoke_fx", 1);
+  level thread util::delete_on_death_or_notify(mdl_fx, #"ships_engineer_step_3_completed", "" + #"engineer_smoke_fx");
   s_fx struct::delete();
 
   if(isDefined(self)) {
@@ -659,7 +659,7 @@ function_76351c42() {
 }
 
 fishy_offering_step_1_setup(var_5ea5c94d) {
-  a_spots = array::randomize(struct::get_array(#"hash_152bb6bdedef598a"));
+  a_spots = array::randomize(struct::get_array(#"fish_spawn_loc"));
   e_fish = getent("dead_offering", "targetname");
   e_fish val::set(#"fishy_offering", "takedamage", 1);
   e_fish val::set(#"fishy_offering", "allowdeath", 0);
@@ -684,7 +684,7 @@ fishy_offering_step_1_setup(var_5ea5c94d) {
         e_fish playSound(#"hash_7c391343ab3a2c17");
 
         if(s_landing.b_splash === 1 && level flag::get(#"water_drained_aft")) {
-          fx::play(#"hash_708765aa3f48456d", s_landing.origin + (0, 0, 20), (270, 180, 180));
+          fx::play(#"water/fx_water_impact_object_sm", s_landing.origin + (0, 0, 20), (270, 180, 180));
         }
 
         s_landing.origin += (0, 0, 48);
@@ -839,7 +839,7 @@ function_ebb2139() {
     waitresult = self waittill(#"trigger");
     e_player = waitresult.activator;
 
-    if(!zm_utility::can_use(e_player) || level flag::get(#"hash_480b6b675a3076ec")) {
+    if(!zm_utility::can_use(e_player) || level flag::get(#"sea_walkers_queued")) {
       continue;
     }
 
@@ -860,7 +860,7 @@ function_ebb2139() {
 }
 
 function_5daf1bb7() {
-  level flag::set(#"hash_480b6b675a3076ec");
+  level flag::set(#"sea_walkers_queued");
   s_fx_loc = struct::get(#"floaters_fx");
   playrumbleonposition("grenade_rumble", s_fx_loc.origin);
   level waittill(#"start_of_round");
@@ -869,7 +869,7 @@ function_5daf1bb7() {
   level.var_d889fbd9 = level.round_number;
   level waittill(#"end_of_round");
   level flag::clear(#"activate_sea_walkers");
-  level flag::clear(#"hash_480b6b675a3076ec");
+  level flag::clear(#"sea_walkers_queued");
 }
 
 function_5afcaeb7(var_a276c861) {
@@ -1480,9 +1480,9 @@ function_73bdaf30() {
   mdl_shield = getent("shield_model", "targetname");
 
   if(isDefined(mdl_shield)) {
-    mdl_shield playSound(#"hash_4e75eec96f7ea36a");
+    mdl_shield playSound(#"zmb_shield_land");
     mdl_shield setModel(#"hash_7f061176170234d9");
-    mdl_shield clientfield::set("" + #"hash_2ec182fecae80e80", 1);
+    mdl_shield clientfield::set("" + #"shield_frost_fx", 1);
     earthquake(0.5, 1.25, mdl_shield.origin, 512);
 
     if(isDefined(level.ai[#"axis"])) {
@@ -1579,7 +1579,7 @@ fireworks_show() {
 
   foreach(s_launcher in level.a_s_launchers) {
     s_launcher.var_f0bbde5 = struct::get(s_launcher.target);
-    s_launcher flag::init(#"hash_2078d5bf94139877");
+    s_launcher flag::init(#"fired_this_round");
     s_unitrigger = s_launcher zm_unitrigger::create(undefined, undefined, &use_launcher);
     zm_unitrigger::function_47625e58(s_unitrigger, s_unitrigger.origin + (0, 0, 32));
     zm_unitrigger::function_89380dda(s_unitrigger);
@@ -1593,7 +1593,7 @@ fireworks_show() {
     level waittill(#"start_of_round");
 
     foreach(s_launcher in level.a_s_launchers) {
-      s_launcher flag::clear(#"hash_2078d5bf94139877");
+      s_launcher flag::clear(#"fired_this_round");
     }
 
     while(level.var_ba8e1acf.size > 0) {
@@ -1637,7 +1637,7 @@ init_flare(v_origin, v_angles, str_color) {
   mdl_flare val::set(#"mdl_flare", "allowdeath", 0);
   mdl_flare val::set(#"mdl_flare", "takedamage", 1);
   mdl_flare.str_color = str_color;
-  mdl_flare flag::init(#"hash_2078d5bf94139877");
+  mdl_flare flag::init(#"fired_this_round");
   return mdl_flare;
 }
 
@@ -1760,11 +1760,11 @@ function_7ae29395() {
     waitresult = self.trigger waittill(#"trigger");
 
     if(isPlayer(waitresult.activator)) {
-      self.s_launcher flag::set(#"hash_2078d5bf94139877");
+      self.s_launcher flag::set(#"fired_this_round");
       var_a3c52257 = 0;
 
       foreach(s_launcher in level.a_s_launchers) {
-        if(s_launcher flag::get(#"hash_2078d5bf94139877")) {
+        if(s_launcher flag::get(#"fired_this_round")) {
           var_a3c52257++;
         }
       }
@@ -1964,7 +1964,7 @@ vomit_blade_cleanup(var_a276c861, var_19e802fa) {
     level flag::wait_till("<dev string:x138>");
 
     foreach(player in util::get_active_players()) {
-      player thread function_2c343fd8();
+      player thread vomit_blade_fx();
     }
   }
 
@@ -2053,7 +2053,7 @@ function_cc7214a9(params) {
             }
 
             player.var_f8b767c9 = undefined;
-            player thread function_2c343fd8();
+            player thread vomit_blade_fx();
 
             while(isDefined(player) && player laststand::player_is_in_laststand()) {
               waitframe(1);
@@ -2081,7 +2081,7 @@ function_cc7214a9(params) {
   }
 }
 
-function_2c343fd8() {
+vomit_blade_fx() {
   self endon(#"disconnect");
   wait 1;
   self clientfield::set("" + #"hash_2c387ea19f228b5d", 1);
@@ -2313,7 +2313,7 @@ function_ff05eb5() {
 
         playsoundatposition(#"hash_5ef8e030b84ace08", self.origin);
         level thread scene::play(str_bundle, "sample");
-        waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"hash_68677a02650cad00", #"correct_tune");
+        waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"skull_singers", #"correct_tune");
 
         if(!(isDefined(self.var_d6fff827) && self.var_d6fff827)) {
           self.var_d6fff827 = 1;
@@ -2330,7 +2330,7 @@ function_ff05eb5() {
 
       playsoundatposition(#"hash_165a8e8934d64af5", self.origin);
       level thread scene::play(str_bundle, "fail");
-      waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"hash_68677a02650cad00", #"wrong_tune");
+      waitresult.attacker util::delay(3, "death", &zm_audio::create_and_play_dialog, #"skull_singers", #"wrong_tune");
     }
   }
 }

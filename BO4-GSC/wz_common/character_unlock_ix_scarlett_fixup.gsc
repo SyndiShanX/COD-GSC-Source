@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"ix_scarlett_unlock", #"hash_63c7568898cd4fec", #"cu30_item", &function_d95e620c, #"hash_74fceff1a255277d");
+  character_unlock_fixup::register_character_unlock(#"ix_scarlett_unlock", #"prt_wz_scarlett_dlc0", #"cu30_item", &function_d95e620c, #"hash_74fceff1a255277d");
 }
 
 function_d95e620c() {

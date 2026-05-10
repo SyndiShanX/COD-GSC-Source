@@ -50,7 +50,7 @@ katana_rush_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
       foreach(e_player in a_e_players) {
         if(!e_player util::function_50ed1561(localclientnum)) {
-          e_player thread zm_utility::function_bb54a31f(localclientnum, #"hash_34ce6f9f022458f8", #"hash_49e404aa0d33e9ac");
+          e_player thread zm_utility::function_bb54a31f(localclientnum, #"hash_34ce6f9f022458f8", #"stop_katana_rush_postfx");
         }
       }
     } else if(self hasdobj(localclientnum)) {
@@ -67,7 +67,7 @@ katana_rush_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player notify(#"hash_49e404aa0d33e9ac");
+        e_player notify(#"stop_katana_rush_postfx");
       }
     }
 

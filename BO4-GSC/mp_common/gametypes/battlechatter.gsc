@@ -491,7 +491,7 @@ pain_vox(meansofdeath, weapon) {
 
       if(isDefined(weapon)) {
         if(weapon.doesfiredamage) {
-          dialogkey = playerbundle.var_c3b67de0;
+          dialogkey = playerbundle.exertpainburn;
         }
       } else {
         dialogkey = playerbundle.exertpaindamagetick;
@@ -503,13 +503,13 @@ pain_vox(meansofdeath, weapon) {
 
       dialogkey = playerbundle.exertpainfalling;
     } else if(meansofdeath == "MOD_BURNED") {
-      dialogkey = playerbundle.var_c3b67de0;
+      dialogkey = playerbundle.exertpainburn;
     } else if(meansofdeath == "MOD_ELECTROCUTED") {
-      dialogkey = playerbundle.var_68bb30c1;
+      dialogkey = playerbundle.exertpainstun;
     } else if(self isplayerunderwater()) {
       dialogkey = playerbundle.exertpainunderwater;
     } else if(meansofdeath == "MOD_MELEE") {
-      dialogkey = playerbundle.var_b801796c;
+      dialogkey = playerbundle.exertpainpunched;
     } else {
       if(isDefined(weapon)) {
         if(weapon.name == "shock_rifle") {
@@ -595,43 +595,43 @@ function_551980b7(dialogname) {
       dialogkey = playerbundle.threatbattery;
       break;
     case # "buffassault":
-      dialogkey = playerbundle.var_f33cef89;
+      dialogkey = playerbundle.threatbuffassault;
       break;
     case # "engineer":
-      dialogkey = playerbundle.var_41e91a42;
+      dialogkey = playerbundle.threatengineer;
       break;
     case # "firebreak":
-      dialogkey = playerbundle.var_f671ae19;
+      dialogkey = playerbundle.threatfirebreak;
       break;
     case # "nomad":
-      dialogkey = playerbundle.var_928f03c4;
+      dialogkey = playerbundle.threatnomad;
       break;
     case # "outrider":
-      dialogkey = playerbundle.var_decbe599;
+      dialogkey = playerbundle.threatoutrider;
       break;
     case # "prophet":
-      dialogkey = playerbundle.var_443d5083;
+      dialogkey = playerbundle.threatprophet;
       break;
     case # "reaper":
-      dialogkey = playerbundle.var_a8809c1c;
+      dialogkey = playerbundle.threatreaper;
       break;
     case # "recon":
-      dialogkey = playerbundle.var_f3745d99;
+      dialogkey = playerbundle.threatrecon;
       break;
     case # "ruin":
-      dialogkey = playerbundle.var_1bfb0e39;
+      dialogkey = playerbundle.threatruin;
       break;
     case # "seraph":
       dialogkey = playerbundle.threatseraph;
       break;
     case # "spectre":
-      dialogkey = playerbundle.var_5fdf57ca;
+      dialogkey = playerbundle.threatspectre;
       break;
     case # "swatpolice":
-      dialogkey = playerbundle.var_aa447d74;
+      dialogkey = playerbundle.threatswatpolice;
       break;
     case # "zero":
-      dialogkey = playerbundle.var_53f12400;
+      dialogkey = playerbundle.threatzero;
       break;
   }
 
@@ -836,7 +836,7 @@ function_95e44f78(weapon, timedelay) {
       dialogkey = playerbundle.var_fa5db24c;
       break;
     case # "eq_concertina_wire":
-      dialogkey = playerbundle.var_b51a051a;
+      dialogkey = playerbundle.concertinawireweaponthreat;
       break;
     case # "eq_slow_grenade":
     case # "concussion_grenade":
@@ -867,7 +867,7 @@ function_95e44f78(weapon, timedelay) {
       dialogkey = playerbundle.var_e6d1c1e3;
       break;
     case # "ability_smart_cover":
-      dialogkey = playerbundle.var_efb67b32;
+      dialogkey = playerbundle.smartcoverweaponthreat;
       break;
     case # "gadget_supplypod":
       dialogkey = playerbundle.var_2339275b;
@@ -882,10 +882,10 @@ function_95e44f78(weapon, timedelay) {
       dialogkey = playerbundle.var_606d0b06;
       break;
     case # "eq_tripwire":
-      dialogkey = playerbundle.var_6f89cd5;
+      dialogkey = playerbundle.tripwireweaponthreat;
       break;
     case # "gadget_spawnbeacon":
-      dialogkey = playerbundle.var_1b7e4074;
+      dialogkey = playerbundle.spawnbeaconweaponthreat;
       break;
     case # "eq_molotov":
       dialogkey = playerbundle.var_c4b4c50e;
@@ -894,7 +894,7 @@ function_95e44f78(weapon, timedelay) {
       dialogkey = playerbundle.var_27b0d135;
       break;
     case # "gadget_icepick":
-      dialogkey = playerbundle.var_e21e8b0a;
+      dialogkey = playerbundle.icepickweaponthreat;
       break;
     case # "eq_hawk":
       dialogkey = playerbundle.var_f1416960;
@@ -1380,16 +1380,16 @@ function_f5c48bfa(attacker, owner, gadgetweapon, attackerweapon) {
 
   switch (gadgetweapon.name) {
     case # "eq_sensor":
-      dialogkey = playerbundle.var_6f728fb2;
+      dialogkey = playerbundle.sensordartweapondestroyed;
       break;
     case # "gadget_spawnbeacon":
-      dialogkey = playerbundle.var_d2fd550a;
+      dialogkey = playerbundle.spawnbeaconweapondestroyed;
       break;
     case # "claymore":
-      dialogkey = playerbundle.var_827669e9;
+      dialogkey = playerbundle.claymoreweapondestroyed;
       break;
     case # "eq_concertina_wire":
-      dialogkey = playerbundle.var_e4bd50dc;
+      dialogkey = playerbundle.concertinawireweapondestroyed;
       break;
     case # "gun_mini_turret":
       dialogkey = playerbundle.var_1b6223ae;
@@ -1398,29 +1398,29 @@ function_f5c48bfa(attacker, owner, gadgetweapon, attackerweapon) {
       dialogkey = playerbundle.dogweapondestroyed;
       break;
     case # "seeker_mine_arc":
-      dialogkey = playerbundle.var_e79fdef1;
+      dialogkey = playerbundle.seekermineweapondestroyed;
       var_45a3f7df = 1;
       break;
     case # "ability_smart_cover":
-      dialogkey = playerbundle.var_1ab815cb;
+      dialogkey = playerbundle.smartcoverweapondestroyed;
       break;
     case # "gadget_supplypod":
       dialogkey = playerbundle.supplypodweapondestroyed;
       break;
     case # "eq_tripwire":
-      dialogkey = playerbundle.var_63661ff;
+      dialogkey = playerbundle.tripwireweapondestroyed;
       break;
     case # "trophy_system":
-      dialogkey = playerbundle.var_faa66cb4;
+      dialogkey = playerbundle.trophysystemweapondestroyed;
       break;
     case # "eq_emp_grenade":
-      dialogkey = playerbundle.var_bbc9856;
+      dialogkey = playerbundle.jammerweapondestroyed;
       break;
     case # "eq_hawk":
       dialogkey = playerbundle.hawkweapondestroyed;
       break;
     case # "eq_shroud":
-      dialogkey = playerbundle.var_987d028;
+      dialogkey = playerbundle.shroudweapondestroyed;
       break;
     default:
       return;
@@ -1772,7 +1772,7 @@ function_5d15920e(dialogkey, playerbundle) {
     return "MOD_DROWN";
   }
 
-  if(dialogkey === playerbundle.var_44d86dec) {
+  if(dialogkey === playerbundle.exertexplosive) {
     return "MOD_EXPLOSIVE";
   }
 
@@ -1784,11 +1784,11 @@ function_5d15920e(dialogkey, playerbundle) {
     return "MOD_MELEE_WEAPON_BUTT";
   }
 
-  if(dialogkey === playerbundle.var_207908de) {
+  if(dialogkey === playerbundle.exertdeathheadshot) {
     return "MOD_HEAD_SHOT";
   }
 
-  if(dialogkey === playerbundle.var_1dfcabbd) {
+  if(dialogkey === playerbundle.exertdeathfalling) {
     return "MOD_FALLING";
   }
 
@@ -1800,7 +1800,7 @@ function_5d15920e(dialogkey, playerbundle) {
     return "MOD_DOT_SELF";
   }
 
-  if(dialogkey === playerbundle.var_f8b4bcc1) {
+  if(dialogkey === playerbundle.exertdeathradiation) {
     return "MOD_DOT";
   }
 
@@ -1837,7 +1837,7 @@ get_death_vox(weapon, meansofdeath) {
   }
 
   if(self weapon_utils::isexplosivedamage(meansofdeath)) {
-    return playerbundle.var_44d86dec;
+    return playerbundle.exertexplosive;
   }
 
   if(isDefined(meansofdeath)) {
@@ -1853,10 +1853,10 @@ get_death_vox(weapon, meansofdeath) {
 
         return playerbundle.var_53f25688;
       case # "mod_head_shot":
-        return playerbundle.var_207908de;
+        return playerbundle.exertdeathheadshot;
       case # "mod_trigger_hurt":
         if(self getvelocity()[2] < -100) {
-          return playerbundle.var_1dfcabbd;
+          return playerbundle.exertdeathfalling;
         } else {
           return playerbundle.exertdeath;
         }
@@ -1867,7 +1867,7 @@ get_death_vox(weapon, meansofdeath) {
           if(isDefined(self.suicide) && self.suicide) {
             return playerbundle.var_48305ed9;
           } else {
-            return playerbundle.var_f8b4bcc1;
+            return playerbundle.exertdeathradiation;
           }
         }
 
@@ -2267,7 +2267,7 @@ play_gadget_ready(weapon, userflip = 0) {
       dialogkey = playerbundle.var_d294848f;
       break;
     case # "ability_smart_cover":
-      dialogkey = playerbundle.var_47d3c3bd;
+      dialogkey = playerbundle.smartcoverweaponready;
       break;
     case # "mute_smoke":
       dialogkey = playerbundle.var_7b1fe307;
@@ -2302,19 +2302,19 @@ play_gadget_ready(weapon, userflip = 0) {
       dialogkey = playerbundle.semtexready;
       break;
     case # "eq_concertina_wire":
-      dialogkey = playerbundle.var_b55793d6;
+      dialogkey = playerbundle.concertinawireweaponready;
       break;
     case # "eq_seeker_mine":
-      dialogkey = playerbundle.var_486b28c0;
+      dialogkey = playerbundle.seekermineweaponready;
       break;
     case # "eq_sensor":
-      dialogkey = playerbundle.var_e4a019a;
+      dialogkey = playerbundle.sensordartweaponready;
       break;
     case # "eq_tripwire":
-      dialogkey = playerbundle.var_3a5a4e80;
+      dialogkey = playerbundle.tripwireweaponready;
       break;
     case # "gadget_icepick":
-      dialogkey = playerbundle.var_a2661f2f;
+      dialogkey = playerbundle.icepickweaponready;
       break;
     case # "eq_emp_grenade":
       dialogkey = playerbundle.var_8610c190;
@@ -2722,7 +2722,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
         dialogalias = var_aa988d26.var_f0be54bd;
         break;
       case # "david_mason":
-        dialogalias = var_aa988d26.var_1d9994d5;
+        dialogalias = var_aa988d26.davidmasoncallout;
         break;
       case # "hudson":
         dialogalias = var_aa988d26.hudsoncallout;
@@ -2734,7 +2734,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
         dialogalias = var_aa988d26.masoncallout;
         break;
       case # "matt_shadows":
-        dialogalias = var_aa988d26.var_e7c3ff0b;
+        dialogalias = var_aa988d26.shadowscallout;
         break;
       case # "menendez":
         dialogalias = var_aa988d26.menendezcallout;
@@ -2746,7 +2746,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
         dialogalias = var_aa988d26.reznovcallout;
         break;
       case # "sarah_hall":
-        dialogalias = var_aa988d26.var_9e49481e;
+        dialogalias = var_aa988d26.sarahhallcallout;
         break;
       case # "sergei":
         dialogalias = var_aa988d26.sergeicallout;
@@ -2790,16 +2790,16 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
         dialogalias = var_aa988d26.nikolaicallout;
         break;
       case # "ofc_dempsey":
-        dialogalias = var_aa988d26.var_95a03453;
+        dialogalias = var_aa988d26.ofcdempseycallout;
         break;
       case # "ofc_nikolai":
-        dialogalias = var_aa988d26.var_69033114;
+        dialogalias = var_aa988d26.ofcnikolaicallout;
         break;
       case # "ofc_richtofen":
-        dialogalias = var_aa988d26.var_d56828f1;
+        dialogalias = var_aa988d26.ofcrichtofencallout;
         break;
       case # "ofc_takeo":
-        dialogalias = var_aa988d26.var_33edc6fa;
+        dialogalias = var_aa988d26.ofctakeocallout;
         break;
       case # "primis_richtofen":
       case # "richtofen":
@@ -2928,15 +2928,15 @@ function_cad61ec(weapon) {
 
   switch (weapon.name) {
     case # "eq_concertina_wire":
-      dialogkey = playerbundle.var_6d3b52e5;
+      dialogkey = playerbundle.concertinawireweaponuse;
       var_4d031df6 = playerbundle.var_45efe6f7;
       break;
     case # "ability_smart_cover":
-      dialogkey = playerbundle.var_906d49a;
+      dialogkey = playerbundle.smartcoverweaponuse;
       var_4d031df6 = playerbundle.var_918699f4;
       break;
     case # "gadget_spawnbeacon":
-      dialogkey = playerbundle.var_41c2519b;
+      dialogkey = playerbundle.spawnbeaconweaponuse;
       var_4d031df6 = playerbundle.var_9a961aab;
       break;
     case # "gadget_supplypod":
@@ -3115,18 +3115,18 @@ play_gadget_activate(weapon) {
       dialogkey = playerbundle.var_44c8bf55;
       break;
     case # "eq_seeker_mine":
-      dialogkey = playerbundle.var_931b8099;
+      dialogkey = playerbundle.seekermineweaponuse;
       break;
     case # "eq_cluster_semtex_grenade":
       dialogkey = playerbundle.var_da293cfd;
       break;
     case # "eq_sensor":
-      dialogkey = playerbundle.var_8a8c748;
+      dialogkey = playerbundle.sensordartweaponuse;
       var_4d031df6 = playerbundle.var_15990d1b;
       break;
     case # "eq_tripwire":
       if((isDefined(self.var_9e50f96) ? self.var_9e50f96 : 0) + float(mpdialog_value("tripwireUseCooldown", 0)) / 1000 < gettime()) {
-        dialogkey = playerbundle.var_9ee8c066;
+        dialogkey = playerbundle.tripwireweaponuse;
         self.var_9e50f96 = gettime();
       }
 
@@ -3136,7 +3136,7 @@ play_gadget_activate(weapon) {
       break;
     case # "gadget_vision_pulse":
       dialogkey = playerbundle.visionpulseabilityuse;
-      var_4d031df6 = playerbundle.var_8c880e98;
+      var_4d031df6 = playerbundle.visionpulseabilityusefutz;
       break;
     case # "gadget_spawnbeacon":
       var_3bf73cf3 = function_94b5718c(self);

@@ -36,7 +36,7 @@ __init__() {
   clientfield::register("scriptmover", "" + #"soul_catcher_portal", 1, 1, "int");
   clientfield::register("actor", "" + #"soul_catcher_charge_start", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"soul_catcher_impact", 1, 1, "counter");
-  clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter");
+  clientfield::register("actor", "" + #"soul_catcher_eaten", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int");
   clientfield::register("scriptmover", "" + #"hash_51657261e835ac7c", 1, n_bits, "int");
   clientfield::register("toplayer", "" + #"tomahawk_pickup_fx", 13000, 1, "int");
@@ -151,7 +151,7 @@ function_d2093ddd(willbekilled, inflictor, attacker, damage, flags, mod, weapon,
           self.animname = "zombie_eaten";
           self notsolid();
           self setteam(util::get_enemy_team(self.team));
-          attacker notify(#"hash_2706d6137c04adf4");
+          attacker notify(#"fed_wolf_head");
           self.var_cfd3756 = level.a_s_soul_catchers[i];
           self.var_cfd3756.var_aa1a7f2e = 1;
 
@@ -276,7 +276,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
 function_37937b33() {
   self endon(#"death");
   self waittill(#"zombie_eaten_hide");
-  self clientfield::increment("" + #"hash_338ecd1287d0623b");
+  self clientfield::increment("" + #"soul_catcher_eaten");
   self ghost();
 }
 
@@ -483,7 +483,7 @@ tomahawk_pickup() {
     if(function_8b1a219a()) {
       trigger sethintstring(#"hash_456f80deeaa8ebee");
     } else {
-      trigger sethintstring(#"hash_1cf1c33d78cb53aa");
+      trigger sethintstring(#"zm_escape/tomahawk_pickup");
     }
 
     trigger setcursorhint("HINT_NOICON");

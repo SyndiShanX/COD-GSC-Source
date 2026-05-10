@@ -77,15 +77,15 @@ init_fx() {
 }
 
 init_clientfields() {
-  clientfield::register("world", "" + #"hash_3c58464f16d8a1be", 1, 1, "int");
+  clientfield::register("world", "" + #"reveal_ee_space", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"essence_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"land_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"planet_light", 1, getminbitcountfornum(9), "int");
   clientfield::register("scriptmover", "" + #"planet_fx", 1, getminbitcountfornum(9), "int");
   clientfield::register("scriptmover", "" + #"pulse_shader", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"sentinel_shader", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_3400ccffbd3d73b3", 1, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_15b23de7589e61a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"ice_damage_fx", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"ice_rising_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"blocker_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"planet_glyph_activate", 1, 1, "counter");
   clientfield::register("scriptmover", "" + #"pipe_fx", 1, 2, "int");
@@ -93,13 +93,13 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"hash_46e2ed49fb0f55c6", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"water_props", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_6e41de51a0092771", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_53c7d27cc9130e8f", 1, getminbitcountfornum(4), "int");
+  clientfield::register("scriptmover", "" + #"artifact_element_fx", 1, getminbitcountfornum(4), "int");
   clientfield::register("toplayer", "" + #"boiler_fx", 1, 1, "int");
   clientfield::register("toplayer", "" + #"main_flash", 1, 1, "int");
   clientfield::register("toplayer", "" + #"iceberg_rumbles", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_7a927551ca199a1c", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"cold_time_fx", 1, 1, "counter");
   clientfield::register("toplayer", "" + #"icy_bubbles", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_58b44c320123e829", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"water_ragdolls", 1, 1, "int");
   clientfield::register("toplayer", "" + #"camera_snow", 1, 1, "int");
   clientfield::register("vehicle", "" + #"orb_fx", 1, 1, "int");
 }
@@ -121,8 +121,8 @@ init_flags() {
   level flag::init(#"hash_452df3df817c57f9");
   level flag::init(#"orrery_initialized");
   level flag::init(#"orrery_activated");
-  level flag::init(#"hash_76dd603f61fa542d");
-  level flag::init(#"hash_77f76266b597a1f7");
+  level flag::init(#"orrery_revealed");
+  level flag::init(#"planet_out_of_order");
   level flag::init(#"planet_step_completed");
   level flag::init(#"hash_1a742576c41a0ab9");
   level flag::init(#"step_7_active");
@@ -144,7 +144,7 @@ init_steps() {
 }
 
 function_91be5845() {
-  level.a_s_sparks = array::randomize(struct::get_array(#"hash_b29f24eab97a1d"));
+  level.a_s_sparks = array::randomize(struct::get_array(#"catalyst_spark_loc"));
   a_str_noteworthy = array(#"hash_41a5c5168ffb2a97", #"hash_400a481490a4e390", #"hash_5562e324d230f057", #"hash_41fae186552f1259");
 
   while(level.a_s_sparks.size > a_str_noteworthy.size) {
@@ -989,7 +989,7 @@ function_1c841015() {
 
     if(!level flag::get(#"water_drained_aft")) {
       level thread zm_zodt8::change_water_height_aft(1);
-      level notify(#"hash_47d532bd5a3fa1f5");
+      level notify(#"water_drained_aft_water_pump");
     }
 
     s_result = level flag::wait_till_any(a_flags);
@@ -1181,7 +1181,7 @@ function_8a0679e4(s_struct, s_portal) {
   level.var_eeb98313 = &function_65880cbe;
   level clientfield::set("fasttravel_exploder", 0);
   level thread function_43a16eb7(s_struct.script_noteworthy, s_portal);
-  level waittill(#"hash_332a98e65f5dce4");
+  level waittill(#"mq_teleport_start");
   function_999a6c5(s_struct.script_noteworthy, 1);
   s_powerup = struct::get(s_struct.script_noteworthy, "script_powerup");
 
@@ -1500,16 +1500,16 @@ function_ad0eee44(str_element) {
   if(level flag::get(#"hash_511653209a0c8cc5" + str_element + "_completed")) {
     switch (str_element) {
       case # "earth":
-        mdl_artifact clientfield::set("" + #"hash_53c7d27cc9130e8f", 1);
+        mdl_artifact clientfield::set("" + #"artifact_element_fx", 1);
         break;
       case # "water":
-        mdl_artifact clientfield::set("" + #"hash_53c7d27cc9130e8f", 2);
+        mdl_artifact clientfield::set("" + #"artifact_element_fx", 2);
         break;
       case # "air":
-        mdl_artifact clientfield::set("" + #"hash_53c7d27cc9130e8f", 3);
+        mdl_artifact clientfield::set("" + #"artifact_element_fx", 3);
         break;
       case # "fire":
-        mdl_artifact clientfield::set("" + #"hash_53c7d27cc9130e8f", 4);
+        mdl_artifact clientfield::set("" + #"artifact_element_fx", 4);
         break;
     }
 
@@ -1761,7 +1761,7 @@ function_92cd9426(var_5ea5c94d, ended_early) {
   }
 
   if(level flag::get(#"water_drained_fore")) {
-    level flag::set(#"hash_76dd603f61fa542d");
+    level flag::set(#"orrery_revealed");
     return;
   }
 
@@ -1854,7 +1854,7 @@ function_1f9c58bd() {
     wait 0.2;
   }
 
-  level flag::set(#"hash_76dd603f61fa542d");
+  level flag::set(#"orrery_revealed");
 }
 
 function_9b60ef24() {
@@ -1980,7 +1980,7 @@ function_443b1ad2(var_5ea5c94d) {
   level zm_ui_inventory::function_7df6bb60(#"zm_zodt8_sentinel_trial", 6);
 
   if(getdvarint(#"zm_debug_ee_system", 0)) {
-    level flag::set(#"hash_76dd603f61fa542d");
+    level flag::set(#"orrery_revealed");
   }
 
   if(!var_5ea5c94d) {
@@ -2161,7 +2161,7 @@ function_63ce4441() {
     function_7711ae4b(a_glyphs, var_364a23fa);
 
     if(level flag::get(#"hash_1a742576c41a0ab9")) {
-      level flag::wait_till_any(array(#"planet_step_completed", #"hash_77f76266b597a1f7"));
+      level flag::wait_till_any(array(#"planet_step_completed", #"planet_out_of_order"));
 
       if(level flag::get(#"planet_step_completed")) {
         break;
@@ -2190,7 +2190,7 @@ function_63ce4441() {
 }
 
 function_7711ae4b(a_glyphs, mdl_light) {
-  level endon(#"hash_77f76266b597a1f7");
+  level endon(#"planet_out_of_order");
 
   for(i = 0; i < a_glyphs.size; i++) {
     str_planet_name = a_glyphs[i].targetname;
@@ -2207,7 +2207,7 @@ function_7711ae4b(a_glyphs, mdl_light) {
 }
 
 function_f016aaf8(a_glyphs, mdl_light) {
-  level endon(#"hash_77f76266b597a1f7");
+  level endon(#"planet_out_of_order");
 
   for(i = 0; i < a_glyphs.size; i++) {
     str_planet_name = a_glyphs[i].targetname;
@@ -2221,7 +2221,7 @@ function_f016aaf8(a_glyphs, mdl_light) {
 }
 
 function_50b3a576(str_planet_name, n_number) {
-  level endoncallback(&function_699ac1b, str_planet_name + "_pickup", #"planet_step_completed", #"hash_77f76266b597a1f7");
+  level endoncallback(&function_699ac1b, str_planet_name + "_pickup", #"planet_step_completed", #"planet_out_of_order");
 
   while(!level flag::exists(str_planet_name + "_pickup")) {
     waitframe(1);
@@ -2480,7 +2480,7 @@ function_f84f44e5(str_planet_name) {
 }
 
 function_51054f59() {
-  level flag::wait_till(#"hash_76dd603f61fa542d");
+  level flag::wait_till(#"orrery_revealed");
   var_43b4f0a = struct::get(#"loc_sun");
   playsoundatposition(#"hash_792f64fc5493af58", var_43b4f0a.origin);
   exploder::exploder("exp_crate_blast");
@@ -2506,7 +2506,7 @@ function_51054f59() {
     s_result = var_27805204 waittill(#"trigger_activated");
 
     if(isDefined(s_result.e_who)) {
-      s_result.e_who zm_audio::create_and_play_dialog(#"m_quest", #"hash_7ccac254437d97c2");
+      s_result.e_who zm_audio::create_and_play_dialog(#"m_quest", #"orrery_interact_first");
     }
 
     playsoundatposition(#"hash_1321699865d55fc2", var_27805204.origin);
@@ -2522,8 +2522,8 @@ function_51054f59() {
     level flag::set(#"infinite_round_spawning");
     level.a_planets = arraycopy(level.var_21807a83);
 
-    if(level flag::get(#"hash_77f76266b597a1f7")) {
-      level flag::clear(#"hash_77f76266b597a1f7");
+    if(level flag::get(#"planet_out_of_order")) {
+      level flag::clear(#"planet_out_of_order");
     }
 
     waitframe(1);
@@ -2623,7 +2623,7 @@ planet_behavior(mdl_planet) {
     mdl_planet.origin = var_44c99f3b.origin;
     mdl_planet linkto(var_44c99f3b);
 
-    while(!level flag::get(#"hash_77f76266b597a1f7")) {
+    while(!level flag::get(#"planet_out_of_order")) {
       if(isDefined(var_44c99f3b)) {
         var_44c99f3b vehicle::get_on_and_go_path(nd_path);
 
@@ -2640,7 +2640,7 @@ planet_behavior(mdl_planet) {
 }
 
 planet_cleanup(mdl_planet) {
-  level waittill(#"hash_77f76266b597a1f7", mdl_planet.str_object_name + "_pickup");
+  level waittill(#"planet_out_of_order", mdl_planet.str_object_name + "_pickup");
 
   if(isDefined(mdl_planet)) {
     mdl_planet.var_ddb0a5b4 = 0;
@@ -2798,12 +2798,12 @@ function_acc65da4(mdl_planet) {
     mdl_planet rotate((15, 50, 0));
     mdl_planet playSound(#"hash_6e67e59759b21e8e");
 
-    if(!level flag::get(#"hash_77f76266b597a1f7")) {
+    if(!level flag::get(#"planet_out_of_order")) {
       mdl_planet playLoopSound(#"hash_733ab9b8fda8f02b");
       level thread function_647da52c(str_planet_name);
 
       if(str_planet_name == #"sun") {
-        s_landing function_6099877a(undefined, #"hash_77f76266b597a1f7");
+        s_landing function_6099877a(undefined, #"planet_out_of_order");
       } else {
         s_landing zm_unitrigger::create();
         s_landing function_1f6c1c1f();
@@ -2816,7 +2816,7 @@ function_acc65da4(mdl_planet) {
         mdl_planet stoploopsound();
         mdl_planet playSound(#"hash_134115584a37eb8a");
       } else {
-        level flag::set(#"hash_77f76266b597a1f7");
+        level flag::set(#"planet_out_of_order");
         zm_unitrigger::unregister_unitrigger(s_landing.s_unitrigger);
       }
     }
@@ -2828,20 +2828,20 @@ function_acc65da4(mdl_planet) {
     mdl_planet stoploopsound();
     mdl_planet playSound(#"hash_7007602a9c1e2b84");
     mdl_planet clientfield::set("" + #"land_fx", 0);
-    level flag::set(#"hash_77f76266b597a1f7");
+    level flag::set(#"planet_out_of_order");
 
     iprintlnbold("<dev string:x230>");
   }
 
   if(!level flag::get(#"orrery_initialized")) {
     waitframe(1);
-    level flag::clear(#"hash_77f76266b597a1f7");
+    level flag::clear(#"planet_out_of_order");
     level notify(#"hash_158580acc65694d5");
   }
 }
 
 function_1f6c1c1f() {
-  level endon(#"hash_77f76266b597a1f7");
+  level endon(#"planet_out_of_order");
   s_result = self waittill(#"trigger_activated");
 
   if(isDefined(s_result.e_who)) {
@@ -2850,7 +2850,7 @@ function_1f6c1c1f() {
 }
 
 function_647da52c(str_planet_name) {
-  level endon(#"hash_77f76266b597a1f7", str_planet_name + "_pickup");
+  level endon(#"planet_out_of_order", str_planet_name + "_pickup");
   n_interval = 10;
   n_current_time = 0;
 
@@ -2879,7 +2879,7 @@ function_647da52c(str_planet_name) {
     }
   }
 
-  level flag::set(#"hash_77f76266b597a1f7");
+  level flag::set(#"planet_out_of_order");
 }
 
 function_fd93c584(mdl_planet) {
@@ -3002,7 +3002,7 @@ function_cfd304b3() {
 
     foreach(player in a_players) {
       if(isDefined(player)) {
-        player clientfield::increment_to_player("" + #"hash_7a927551ca199a1c", 1);
+        player clientfield::increment_to_player("" + #"cold_time_fx", 1);
       }
     }
 
@@ -3017,7 +3017,7 @@ function_cfd304b3() {
 
   foreach(player in a_players) {
     if(isDefined(player)) {
-      player clientfield::increment_to_player("" + #"hash_7a927551ca199a1c", 1);
+      player clientfield::increment_to_player("" + #"cold_time_fx", 1);
       player clientfield::set_to_player("" + #"camera_snow", 0);
       player clientfield::set("bs_player_ice_br_cf", 0);
     }
@@ -3076,7 +3076,7 @@ function_1cfbff5e() {
   level thread main_quest_screen_flash();
   wait 0.5;
   clean_up_ai();
-  s_blockers = struct::get_array(#"hash_653ae82f1c11d82c");
+  s_blockers = struct::get_array(#"initial_mq_block");
   level.a_mdl_blockers = [];
   level.var_1012c716 = 0;
   n_players = util::get_active_players().size;
@@ -3090,7 +3090,7 @@ function_1cfbff5e() {
 
 function_4fc9e782(s_blocker, n_health) {
   mdl_blocker = util::spawn_model(#"hash_55657a69ddb2f287" + "full", s_blocker.origin, s_blocker.angles);
-  mdl_blocker function_2baad8fc();
+  mdl_blocker makesentienttarget();
   mdl_blocker disconnectpaths();
   mdl_blocker.health = n_health;
   mdl_blocker.maxhealth = n_health;
@@ -3110,7 +3110,7 @@ function_4fc9e782(s_blocker, n_health) {
 function_a68ae7b5(s_blocker, n_health) {
   level endon(#"frozen_timeout", #"hash_349bc60cedc7491e");
   self val::set(#"mq_block", "takedamage", 1);
-  self clientfield::set("" + #"hash_3400ccffbd3d73b3", 1);
+  self clientfield::set("" + #"ice_damage_fx", 1);
   b_shrunk = 0;
   var_e4eccdc0 = 0;
   var_cf6ec580 = n_health * 0.666;
@@ -3143,14 +3143,14 @@ function_a68ae7b5(s_blocker, n_health) {
       if(self.health < var_3f5e36d1) {
         var_e4eccdc0 = 1;
         self setModel(#"hash_55657a69ddb2f287" + "dmg_02");
-        self clientfield::set("" + #"hash_3400ccffbd3d73b3", 3);
+        self clientfield::set("" + #"ice_damage_fx", 3);
         continue;
       }
 
       if(!b_shrunk) {
         b_shrunk = 1;
         self setModel(#"hash_55657a69ddb2f287" + "dmg_01");
-        self clientfield::set("" + #"hash_3400ccffbd3d73b3", 2);
+        self clientfield::set("" + #"ice_damage_fx", 2);
       }
     }
   }
@@ -3158,7 +3158,7 @@ function_a68ae7b5(s_blocker, n_health) {
   level.var_1012c716++;
   self connectpaths();
   self setModel(#"hash_55657a69ddb2f287" + "dmg_03");
-  self clientfield::set("" + #"hash_3400ccffbd3d73b3", 0);
+  self clientfield::set("" + #"ice_damage_fx", 0);
   self notsolid();
 
   foreach(var_d8d42129 in struct::get_array(s_blocker.target)) {
@@ -3169,7 +3169,7 @@ function_a68ae7b5(s_blocker, n_health) {
     }
   }
 
-  if(s_blocker.script_string === #"hash_3f00f45f819284ba") {
+  if(s_blocker.script_string === #"any_mq_block") {
     level flag::set(#"hash_349bc60cedc7491e");
     return;
   }
@@ -3294,7 +3294,7 @@ get_spawnpoints(var_78837396 = 1, var_7d9a5da1) {
   }
 
   if(a_s_spawnpoints.size) {
-    s_final = struct::get(#"hash_3f00f45f819284ba", "script_string");
+    s_final = struct::get(#"any_mq_block", "script_string");
     a_s_spawnpoints = arraysortclosest(a_s_spawnpoints, s_final.origin, var_7d9a5da1);
   }
 
@@ -3425,7 +3425,7 @@ function_9003b2d4() {
   s_struct function_6099877a();
   s_struct.var_b7273b77 = 0;
   function_d3786e2e(getent("iceberg_water", "targetname") getentitynumber());
-  level clientfield::set("" + #"hash_3c58464f16d8a1be", 1);
+  level clientfield::set("" + #"reveal_ee_space", 1);
   level.disable_nuke_delay_spawning = 1;
   level notify(#"disable_nuke_delay_spawning");
   level flag::set(#"hash_280d10a2ac060edb");
@@ -3480,7 +3480,7 @@ function_c8c01471() {
   }
 
   foreach(player in util::get_active_players()) {
-    player clientfield::set_to_player("" + #"hash_58b44c320123e829", 1);
+    player clientfield::set_to_player("" + #"water_ragdolls", 1);
   }
 
   level flag::wait_till_clear(#"hash_280d10a2ac060edb");
@@ -3565,7 +3565,7 @@ function_7b4cd474() {
 
   if(!getdvarint(#"zm_debug_ee_system", 0)) {
     level.zm_bgb_anywhere_but_here_validation_override = &return_false;
-    s_loc = struct::get(#"hash_3f00f45f819284ba", "script_string");
+    s_loc = struct::get(#"any_mq_block", "script_string");
     level thread function_43a16eb7(#"interior_interact", s_loc);
 
     foreach(player in util::get_active_players()) {
@@ -3573,7 +3573,7 @@ function_7b4cd474() {
     }
 
     level thread function_c8c01471();
-    level waittill(#"hash_332a98e65f5dce4");
+    level waittill(#"mq_teleport_start");
     level.musicsystemoverride = 1;
     music::setmusicstate("location_tree");
     a_players = util::get_active_players();
@@ -3604,8 +3604,8 @@ function_7b4cd474() {
 
   var_a93e2138 show();
   level thread function_43a16eb7(#"iceberg_viewing", s_tree);
-  level waittill(#"hash_332a98e65f5dce4");
-  level clientfield::set("" + #"hash_3c58464f16d8a1be", 0);
+  level waittill(#"mq_teleport_start");
+  level clientfield::set("" + #"reveal_ee_space", 0);
   music::setmusicstate("none");
   level.musicsystemoverride = 0;
   zm_audio::sndvoxoverride(1);
@@ -3629,7 +3629,7 @@ function_7b4cd474() {
     ent moveto(ent.origin + (0, 0, 14400), 45, 10, 10);
   }
 
-  var_a93e2138 clientfield::set("" + #"hash_15b23de7589e61a", 1);
+  var_a93e2138 clientfield::set("" + #"ice_rising_fx", 1);
   exploder::exploder("exp_iceberg_splashes");
   wait 7.5;
   level flag::clear(#"hash_280d10a2ac060edb");
@@ -3662,7 +3662,7 @@ function_50128c10(var_79727c11, a_icebergs, var_c53a4cdc) {
   }
 
   mdl waittill(#"movedone");
-  var_79727c11 clientfield::set("" + #"hash_15b23de7589e61a", 0);
+  var_79727c11 clientfield::set("" + #"ice_rising_fx", 0);
 }
 
 function_28228fa2(s_tree) {
@@ -3737,28 +3737,28 @@ function_6fef3bc3(nd_path) {
 
   if(isDefined(nd_path.targetname)) {
     switch (nd_path.targetname) {
-      case # "hash_7762924fc6051394":
+      case # "orb_path_1":
         str_model = #"p8_zm_zod_planets_mercury_large";
         break;
-      case # "hash_7762954fc60518ad":
+      case # "orb_path_2":
         str_model = #"p8_zm_zod_planets_venus_large";
         break;
-      case # "hash_7762944fc60516fa":
+      case # "orb_path_3":
         str_model = #"p8_zm_zod_planets_mars_large";
         break;
-      case # "hash_77628f4fc6050e7b":
+      case # "orb_path_4":
         str_model = #"p8_zm_zod_planets_jupiter_large";
         break;
-      case # "hash_77628e4fc6050cc8":
+      case # "orb_path_5":
         str_model = #"p8_zm_zod_planets_saturn_large";
         break;
-      case # "hash_7762914fc60511e1":
+      case # "orb_path_6":
         str_model = #"p8_zm_zod_planets_uranus_large";
         break;
-      case # "hash_7762904fc605102e":
+      case # "orb_path_7":
         str_model = #"p8_zm_zod_planets_neptune_large";
         break;
-      case # "hash_7762934fc6051547":
+      case # "orb_path_0":
         str_model = #"p8_zm_zod_planets_sun_large";
         break;
     }
@@ -3769,7 +3769,7 @@ function_6fef3bc3(nd_path) {
     }
   }
 
-  level waittill(#"hash_332a98e65f5dce4");
+  level waittill(#"mq_teleport_start");
 
   if(isDefined(mdl_planet)) {
     mdl_planet delete();
@@ -3874,7 +3874,7 @@ function_594ebc75(var_5ea5c94d) {
   level clientfield::set("fasttravel_exploder", 0);
   scene::function_d8a83a50("cin_zm_zod_outro", &function_5dc629ad, "play");
   scene::function_d8a83a50("cin_zm_zod_outro", &function_c41154ec, "Shot090");
-  scene::function_d8a83a50("cin_zm_zod_outro", &function_44a2fe02, "Shot110");
+  scene::function_d8a83a50("cin_zm_zod_outro", &reveal_ee_space, "Shot110");
   scene::function_d8a83a50("cin_zm_zod_outro", &function_d87932b5, "Shot120");
   scene::function_d8a83a50("cin_zm_zod_outro", &end_game, "done");
   level thread scene::play("cin_zm_zod_outro");
@@ -3889,8 +3889,8 @@ function_d87932b5() {
   level lui::screen_fade_out(2, "white");
 }
 
-function_44a2fe02() {
-  level clientfield::set("" + #"hash_3c58464f16d8a1be", 1);
+reveal_ee_space() {
+  level clientfield::set("" + #"reveal_ee_space", 1);
   getent("mov_ship_rob", "targetname") clientfield::set("" + #"hash_6e41de51a0092771", 0);
 }
 
@@ -4071,7 +4071,7 @@ function_43a16eb7(var_e6d63e1c, s_loc) {
 
 function_26284c6a(a_players) {
   array::wait_till(a_players, #"player_begin_fasttravel_rail", 1);
-  level notify(#"hash_332a98e65f5dce4");
+  level notify(#"mq_teleport_start");
 }
 
 clean_up_ai(var_82ea43f2 = 0, var_a8d0b313 = 1, b_hide_body = 1) {

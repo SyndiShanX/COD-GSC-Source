@@ -196,7 +196,7 @@ function_656f23d5(killstreaktype) {
 
 function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function, isinventoryweapon) {
   killstreak_init(type);
-  menukey = bundle.var_a99ef6da;
+  menukey = bundle.ksmenukey;
 
   if(!isDefined(menukey)) {
     menukey = type;
@@ -222,7 +222,7 @@ function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function, isinve
     register_vehicle(type, vehicle);
   }
 
-  function_7e46eaea(type, bundle.var_b45be9e6, bundle.var_502a0e23, bundle.var_667c638e, bundle.var_a56710c6, bundle.var_bc2f6af9, bundle.var_6417048f, isDefined(bundle.var_65d707d0) ? bundle.var_65d707d0 : 0, isDefined(bundle.var_a9b0c301) ? bundle.var_a9b0c301 : 0);
+  function_7e46eaea(type, bundle.var_b45be9e6, bundle.var_502a0e23, bundle.var_667c638e, bundle.var_a56710c6, bundle.var_bc2f6af9, bundle.var_6417048f, isDefined(bundle.ksutilizesairspace) ? bundle.ksutilizesairspace : 0, isDefined(bundle.var_a9b0c301) ? bundle.var_a9b0c301 : 0);
   level.killstreaks[type].var_4a5906fd = bundle.var_3211a185;
 
   if(isDefined(level.cratetypes)) {
@@ -249,7 +249,7 @@ function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function, isinve
   level.killstreaks[type].script_bundle = bundle;
   killstreak_bundles::register_bundle(type, bundle);
 
-  if(isDefined(bundle.var_1bc9830d) && bundle.var_1bc9830d && !(isDefined(isinventoryweapon) && isinventoryweapon)) {
+  if(isDefined(bundle.ksregisterdvars) && bundle.ksregisterdvars && !(isDefined(isinventoryweapon) && isinventoryweapon)) {
     register_dev_dvars(type);
   }
 }
@@ -1150,10 +1150,10 @@ remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
     }
 
     if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
-      var_ad8ae78f = {
+      scorestreakdata = {
         #gametime: function_f8d53445(), #killstreak: killstreak, #activatedby: getplayerspawnid(self)
       };
-      function_92d1707f(#"hash_1aa07f199266e0c7", var_ad8ae78f);
+      function_92d1707f(#"hash_1aa07f199266e0c7", scorestreakdata);
 
       if(isDefined(isfrominventory) && isfrominventory) {
         remove_used_killstreak(killstreak);
@@ -1626,7 +1626,7 @@ display_unavailable_time() {
     timeleft = 1;
   }
 
-  self iprintlnbold(#"hash_55a79f95e07a10bc", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+  self iprintlnbold(#"mp/unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
 }
 
 trigger_killstreak(killstreaktype, isfrominventory) {
@@ -2638,7 +2638,7 @@ destroyactivevehicles(attacker, team, weapon, radius) {
     if(robot.allowdeath !== 0 && robot.magic_bullet_shield !== 1 && isDefined(team) && !util::function_fbce7263(robot.team, team)) {
       if(isDefined(attacker) && (!isDefined(robot.owner) || robot.owner util::isenemyplayer(attacker))) {
         scoreevents::processscoreevent(#"destroyed_combat_robot", attacker, robot.owner, weapon);
-        luinotifyevent(#"player_callout", 2, #"hash_3b274c8c3c961f3", attacker.entnum);
+        luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_combat_robot", attacker.entnum);
       }
 
       robot kill();

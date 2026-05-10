@@ -25,7 +25,7 @@ __main__() {
 }
 
 function_3b1ba6c7() {
-  self callback::function_33f0ddd3(&function_c6b2d4d8);
+  self callback::on_player_loadout_changed(&function_c6b2d4d8);
 }
 
 function_c6b2d4d8(s_event) {

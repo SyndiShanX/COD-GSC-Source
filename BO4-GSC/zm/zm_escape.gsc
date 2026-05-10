@@ -664,14 +664,14 @@ get_location_string(str_location) {
     case # "zone_infirmary_roof":
     case # "zone_in_cr":
     case # "zone_infirmary":
-      str_display = #"hash_960d3edb9fefcec";
+      str_display = #"zm_escape/location_infirmary";
       break;
     case # "zone_roof":
     case # "zone_roof_infirmary":
       str_display = #"hash_676a058bfe70473";
       break;
     case # "cellblock_shower":
-      str_display = #"hash_8a1754e2c346504";
+      str_display = #"zm_escape/location_showers";
       break;
     case # "zone_citadel":
     case # "zone_citadel_shower":
@@ -714,7 +714,7 @@ function_17ac86f7() {
   self thread zm_audio::function_713192b1(#"hash_3aafbefc77b80ce3", #"wardens_house");
   self thread zm_audio::function_713192b1(#"hash_4c183909b38ae649", #"wardens_office");
   self thread zm_audio::function_713192b1(#"hash_f76546edee4a6a1", #"cafeteria");
-  self thread zm_audio::function_713192b1(#"hash_8a1754e2c346504", #"showers");
+  self thread zm_audio::function_713192b1(#"zm_escape/location_showers", #"showers");
   self thread zm_audio::function_713192b1(#"hash_9b40009eaa83579", #"cell_block");
 }
 
@@ -821,9 +821,9 @@ setupmusic() {
   zm_audio::function_3442c81a(#"hash_23dc7787e4d6b8b5", "location_cellblock", 1, undefined, 4);
   zm_audio::function_3442c81a(#"hash_7806b6b51cd2aed2", "location_powerstation", 1, undefined, 4);
   zm_audio::function_3442c81a(#"hash_408e00ed0c7af3b3", "location_stairwell", 1, undefined, 4);
-  zm_audio::function_3442c81a(#"hash_960d3edb9fefcec", "location_infirmary", 1, undefined, 4);
+  zm_audio::function_3442c81a(#"zm_escape/location_infirmary", "location_infirmary", 1, undefined, 4);
   zm_audio::function_3442c81a(#"hash_4213dc004145588f", "location_dock", 1, undefined, 4);
-  zm_audio::function_3442c81a(#"hash_8a1754e2c346504", "location_showers", 1, undefined, 4);
+  zm_audio::function_3442c81a(#"zm_escape/location_showers", "location_showers", 1, undefined, 4);
   zm_audio::function_3442c81a(#"hash_68ef83a1a918a522", "location_wardens_office", 1, undefined, 4);
   zm_audio::function_3442c81a(#"hash_676a058bfe70473", "location_rooftop", 1, 0, 4);
 }

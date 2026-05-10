@@ -414,7 +414,7 @@ displaylockoncanceledmessage() {
   self.lockoncanceledmessage.hidewheninmenu = 1;
   self.lockoncanceledmessage.archived = 0;
   self.lockoncanceledmessage.alpha = 1;
-  self.lockoncanceledmessage settext(#"hash_31537402e7b1c369");
+  self.lockoncanceledmessage settext(#"mp/cannot_lockon_to_target");
 }
 
 function private function_d656e945(team) {
@@ -887,8 +887,8 @@ setfriendlyflags(weapon, target) {
           if(isDefined(damagetaken) && isDefined(maxhealth)) {
             rocketstokill = level.killstreakbundle[killstreaktype].ksrocketstokill;
 
-            if(level.competitivesettingsenabled && isDefined(level.killstreakbundle[killstreaktype].var_b744074b) && level.killstreakbundle[killstreaktype].var_b744074b != 0) {
-              rocketstokill = level.killstreakbundle[killstreaktype].var_b744074b;
+            if(level.competitivesettingsenabled && isDefined(level.killstreakbundle[killstreaktype].ksrocketstokillcwl) && level.killstreakbundle[killstreaktype].ksrocketstokillcwl != 0) {
+              rocketstokill = level.killstreakbundle[killstreaktype].ksrocketstokillcwl;
             }
 
             damageperrocket = maxhealth / rocketstokill + 1;

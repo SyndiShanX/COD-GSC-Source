@@ -14,7 +14,7 @@
 #namespace namespace_5f342394;
 
 autoexec __init__system__() {
-  system::register(#"hash_6c9de9db7f3e44a3", &__init__, undefined, undefined);
+  system::register(#"kill_in_area", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -22,7 +22,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_6c9de9db7f3e44a3", &on_begin, &on_end);
+  zm_trial::register_challenge(#"kill_in_area", &on_begin, &on_end);
 }
 
 on_begin(var_a84ac7c8, str_archetype, n_kill_count, str_destination, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9) {

@@ -1252,7 +1252,7 @@ function_ba453727() {
 }
 
 objective_result(str_winning_team, var_db3d629e = #"hash_6ef5bcff7fb1d1ab", var_95ee5812 = #"hash_6ef5bcff7fb1d1ab") {
-  var_1a47c004 = #"hash_70cccbb95b710d8c";
+  var_1a47c004 = #"cpui/objective_update";
 
   foreach(e_player in level.players) {
     if(isalive(e_player)) {

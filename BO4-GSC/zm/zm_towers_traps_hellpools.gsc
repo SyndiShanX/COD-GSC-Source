@@ -125,9 +125,9 @@ function_55d14d78() {
     case # "odin":
       level.var_15783f81 = struct::get("zm_towers_hellpool_odin_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
-      var_c65eed8e = getEntArray("zm_towers_hellpool_odin", "script_noteworthy");
+      whippeter = getEntArray("zm_towers_hellpool_odin", "script_noteworthy");
 
-      foreach(part in var_c65eed8e) {
+      foreach(part in whippeter) {
         if(part trigger::is_trigger_of_type("trigger_use_new")) {
           part triggerenable(1);
           part.script_string = "its_a_trap";
@@ -148,9 +148,9 @@ function_55d14d78() {
     case # "zeus":
       level.var_15783f81 = struct::get("zm_towers_hellpool_zeus_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
-      var_c65eed8e = getEntArray("zm_towers_hellpool_zeus", "script_noteworthy");
+      whippeter = getEntArray("zm_towers_hellpool_zeus", "script_noteworthy");
 
-      foreach(part in var_c65eed8e) {
+      foreach(part in whippeter) {
         if(part trigger::is_trigger_of_type("trigger_use_new")) {
           part triggerenable(1);
           part.script_string = "its_a_trap";
@@ -171,9 +171,9 @@ function_55d14d78() {
     case # "danu":
       level.var_15783f81 = struct::get("zm_towers_hellpool_danu_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
-      var_c65eed8e = getEntArray("zm_towers_hellpool_danu", "script_noteworthy");
+      whippeter = getEntArray("zm_towers_hellpool_danu", "script_noteworthy");
 
-      foreach(part in var_c65eed8e) {
+      foreach(part in whippeter) {
         if(part trigger::is_trigger_of_type("trigger_use_new")) {
           part triggerenable(1);
           part.script_string = "its_a_trap";
@@ -194,9 +194,9 @@ function_55d14d78() {
     case # "ra":
       level.var_15783f81 = struct::get("zm_towers_hellpool_ra_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
-      var_c65eed8e = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");
+      whippeter = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");
 
-      foreach(part in var_c65eed8e) {
+      foreach(part in whippeter) {
         if(part trigger::is_trigger_of_type("trigger_use_new")) {
           part triggerenable(1);
           part.script_string = "its_a_trap";

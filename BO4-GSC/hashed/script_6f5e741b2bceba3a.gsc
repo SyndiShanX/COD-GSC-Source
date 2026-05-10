@@ -65,7 +65,7 @@ on_end(round_reset) {
 
   level.var_21c2f32a = undefined;
   level.var_943b6e2b = undefined;
-  level notify(#"hash_31c14df051f6c165");
+  level notify(#"stop_wallbuy_watcher");
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
@@ -82,7 +82,7 @@ is_active() {
 }
 
 wallbuy_watcher() {
-  level endon(#"hash_31c14df051f6c165", #"game_ended");
+  level endon(#"stop_wallbuy_watcher", #"game_ended");
 
   while(true) {
     s_notify = level waittill(#"weapon_bought");

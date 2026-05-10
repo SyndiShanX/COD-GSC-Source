@@ -153,7 +153,7 @@ function_853efded(var_5b811c5d) {
   function_ad40eac3(hash(var_5b811c5d));
 }
 
-function_1bb93418() {
+ingame_objective_close() {
   level.ct_shared_ingame_objective ct_shared_ingame_objective::close(self);
   self.var_c5598268 = undefined;
 }
@@ -269,7 +269,7 @@ function_8963dae3() {
   while(true) {
     level waittill(#"hash_638cbd8ff39a4183");
     self clientfield::set("enemy_keyline_render", 1);
-    level waittill(#"hash_930de0009fc6a96");
+    level waittill(#"simulation_pulse_end");
     self clientfield::set("enemy_keyline_render", 0);
   }
 }
@@ -607,7 +607,7 @@ function_bfa522d1(b_looping, n_cycles = 3) {
 
     wait 1;
     function_d017bdff();
-    level notify(#"hash_930de0009fc6a96");
+    level notify(#"simulation_pulse_end");
 
     if(!(isDefined(b_looping) && b_looping)) {
       var_fb1ab1b7--;
@@ -632,7 +632,7 @@ function_d017bdff(_hash) {
 }
 
 timelimitclock_intermission() {
-  level endon(#"hash_42057c28bd084d77", #"hash_19a2268f375ca51f");
+  level endon(#"destroysites_reset", #"hash_19a2268f375ca51f");
   clockobject = spawn("script_origin", (0, 0, 0));
   n_time_left = 100;
 
@@ -891,10 +891,10 @@ function_b42ce622(var_4b3a6521) {
 
     switch (var_4b3a6521) {
       case # "awaitingconnection":
-        self thread function_7b72086e(#"awaitingconnection", #"hash_7f00f68e42b5b8f6", 1);
+        self thread function_7b72086e(#"awaitingconnection", #"awaitingconnection1", 1);
         break;
       case # "connection_lost":
-        self thread function_7b72086e(#"connection_lost", #"hash_42f8a09c2e0a99e3", 1);
+        self thread function_7b72086e(#"connection_lost", #"connection_lost1", 1);
         break;
       case # "downloading":
         self thread function_7b72086e(#"downloading", #"downloading1", 1);
@@ -1398,7 +1398,7 @@ function_61c3d59c(str_text, a_str_vo, var_5b811c5d, var_23301438 = 0) {
     }
 
     if(level.ct_shared_ingame_objective ct_shared_ingame_objective::is_open(self)) {
-      self function_1bb93418();
+      self ingame_objective_close();
       wait 0.1;
     }
 
@@ -1446,7 +1446,7 @@ function_75c126af(str_id) {
 }
 
 function_c2a10fc() {
-  get_player() thread function_1bb93418();
+  get_player() thread ingame_objective_close();
 }
 
 function_5dec7b34(str_warning, a_str_vo) {
@@ -1514,7 +1514,7 @@ function_9ff75262() {
 }
 
 countdown_timer(n_seconds = 60, var_f6dfeaa0 = "countdown_timer_done") {
-  level endoncallback(&function_18747fb7, #"countdown_timer_end");
+  level endoncallback(&countdown_timer_end, #"countdown_timer_end");
   n_bomb_timer = int(gettime() + int(n_seconds * 1000));
   setmatchflag("bomb_timer_a", 1);
   setbombtimer("A", n_bomb_timer);
@@ -1535,7 +1535,7 @@ countdown_timer(n_seconds = 60, var_f6dfeaa0 = "countdown_timer_done") {
   level notify(#"countdown_timer_end");
 }
 
-function_18747fb7(_hash) {
+countdown_timer_end(_hash) {
   setbombtimer("A", 0);
   setmatchflag("bomb_timer_a", 0);
 }
@@ -2181,7 +2181,7 @@ onboarding_complete() {
   }
 
   e_player thread function_a7d0e0f3();
-  e_player thread function_1bb93418();
+  e_player thread ingame_objective_close();
   e_player thread function_84181d75(0, e_player.origin);
 
   if(!util::function_8570168d()) {
@@ -3708,7 +3708,7 @@ function_5160be8c() {
       eventindex = level.scoreinfo[event][#"row"];
 
       if(isDefined(eventindex)) {
-        e_player globallogic_score::giveplayermomentumnotification(cost, #"hash_480234a872bd64ac", undefined, 0, undefined, 0, eventindex, event, undefined);
+        e_player globallogic_score::giveplayermomentumnotification(cost, #"score/blank", undefined, 0, undefined, 0, eventindex, event, undefined);
       }
     }
   }
@@ -3755,7 +3755,7 @@ function_944e4110(params) {
     level.var_de284b17 += var_595e41ee;
     event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"score/blank", undefined, 0, weapon, 0, eventindex, event, undefined);
   }
 }
 
@@ -3775,7 +3775,7 @@ function_b3b2c91e() {
   level.var_de284b17 += var_595e41ee;
   event = #"ekia";
   eventindex = level.scoreinfo[event][#"row"];
-  e_player globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, undefined, 0, eventindex, event, undefined);
+  e_player globallogic_score::giveplayermomentumnotification(var_595e41ee, #"score/blank", undefined, 0, undefined, 0, eventindex, event, undefined);
 }
 
 function_68848e5(var_4c911967) {
@@ -4097,10 +4097,10 @@ function_dfd7add4() {
       case # "timer_unfreeze":
         level notify(#"timer_freeze_end");
         break;
-      case # "hash_7582b4c6519810f":
-        e_player function_1bb93418();
+      case # "ingame_objective_close":
+        e_player ingame_objective_close();
         break;
-      case # "hash_19bcb7c1479154ad":
+      case # "ingame_objective_open":
         e_player swampslashersounds();
         break;
       case # "kill_player":

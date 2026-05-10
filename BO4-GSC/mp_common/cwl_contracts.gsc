@@ -213,7 +213,7 @@ function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -265,7 +265,7 @@ function_a4c8ce2a(data) {
     }
   }
 
-  var_67d27328 = player stats::get_stat(#"arenastats", 2, #"leagueplaystats", #"hash_36cd820c1ff6c16b");
+  var_67d27328 = player stats::get_stat(#"arenastats", 2, #"leagueplaystats", #"aarsubdivisionpoints");
 
   if(var_67d27328 > 0) {
     player increment_contract(#"hash_35e52e40ab6d1223", var_67d27328);
@@ -286,7 +286,7 @@ contract_win(winner) {
     }
 
     if(var_15b1abd9 % 2 == 0) {
-      winner increment_cwl_contract(#"hash_4a14b348f01ad76d");
+      winner increment_cwl_contract(#"contract_wl_win_streak");
     }
   }
 }

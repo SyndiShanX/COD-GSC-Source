@@ -27,7 +27,7 @@ __init__() {
 
 on_begin() {
   callback::on_weapon_fired(&on_weapon_fired);
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
 
   foreach(player in getplayers()) {
@@ -40,7 +40,7 @@ on_begin() {
 
 on_end(round_reset) {
   callback::remove_on_weapon_fired(&on_weapon_fired);
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
 
   foreach(player in getplayers()) {
@@ -51,7 +51,7 @@ on_end(round_reset) {
   level zm_trial::function_25ee130(0);
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(zm_loadout::is_melee_weapon(s_event.weapon) || zm_loadout::is_lethal_grenade(s_event.weapon) || zm_loadout::is_tactical_grenade(s_event.weapon, 1)) {
       self lockweapon(s_event.weapon, 1, 1);

@@ -10,7 +10,7 @@
 init_clientfields() {
   clientfield::register("scriptmover", "" + #"hash_7327d0447d656234", 1, 1, "int", &function_6799fbc4, 0, 0);
   clientfield::register("item", "" + #"hash_76662556681a502c", 1, 1, "int", &function_e2c78db9, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_59be891b288663cc", 1, 1, "int", &function_41f46060, 0, 0);
+  clientfield::register("scriptmover", "" + #"locked_crafting_table_fx", 1, 1, "int", &locked_crafting_table_fx, 0, 0);
   clientfield::register("toplayer", "" + #"hash_257c215ab25a21c5", 1, 1, "counter", &function_b334fc71, 0, 0);
   level._effect[#"crafting_table_locked"] = #"hash_1f101b4b415639bb";
 }
@@ -65,7 +65,7 @@ function_e2c78db9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_41f46060(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+locked_crafting_table_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(self.var_aa4114ee)) {
     stopfx(localclientnum, self.var_aa4114ee);
     self.var_aa4114ee = undefined;

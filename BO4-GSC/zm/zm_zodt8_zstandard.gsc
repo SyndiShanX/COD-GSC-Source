@@ -71,7 +71,7 @@ function_944ac830() {
 
   while(true) {
     level waittill(#"started_defend_area");
-    level waittill(#"hash_7a04a7fb98fa4e4d");
+    level waittill(#"end_defend_area");
 
     if(isalive(self)) {
       self zm_challenges::function_979f4cc0(#"hash_7a406e363a7db141");
@@ -174,7 +174,7 @@ defend_areas() {
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, var_cec10eb3);
   level flag::wait_till("started_defend_area");
   level util::delay(var_cec10eb3 / 4, "end_game", &zm_round_spawning::function_376e51ef, #"stoker");
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   zm_utility::function_fef4b36a(str_next_defend);
 
   if(str_next_defend == #"dining_hall") {
@@ -193,7 +193,7 @@ defend_areas() {
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, 45);
   level flag::wait_till("started_defend_area");
   level util::delay(4, "end_game", &zm_round_spawning::function_376e51ef, #"blight_father");
-  level waittill(#"hash_7a04a7fb98fa4e4d");
+  level waittill(#"end_defend_area");
   level.stopshellshock = 1;
   zm_utility::enable_power_switch(1, 1);
 
@@ -297,7 +297,7 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(level flag::get(#"disable_fast_travel")) {
-    self.hint_string[n_player_index] = #"hash_91829275c00db24";
+    self.hint_string[n_player_index] = #"zmarcade/fasttravel_disabled";
   } else if(!(isDefined(player zombie_utility::is_player_valid(player)) && player zombie_utility::is_player_valid(player))) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(player.var_564dec14) && player.var_564dec14) {
@@ -324,7 +324,7 @@ function function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else {
-    self.hint_string[n_player_index] = #"hash_204ec88c63b3436b";
+    self.hint_string[n_player_index] = #"zmarcade/fasttravel";
     b_result = 1;
   }
 

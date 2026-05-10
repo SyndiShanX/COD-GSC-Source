@@ -241,7 +241,7 @@ function_84d102f2() {
 
       waitframe(1);
 
-      if(level flag::get(#"hash_67695ee69c57c0b2") && level flag::get(#"hash_61de3b8fe6f6a35")) {
+      if(level flag::get(#"serpent_pass_eagle_free") && level flag::get(#"cliff_tombs_eagle_free")) {
         self iprintlnbold("<dev string:x10b>");
 
         self zm_utility::giveachievement_wrapper("zm_red_eagle");

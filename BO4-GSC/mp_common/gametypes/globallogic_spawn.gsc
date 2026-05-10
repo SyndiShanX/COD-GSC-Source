@@ -726,18 +726,18 @@ spawnplayer() {
     var_8fa79650 = self getcharacterwarpaintlootid();
     decallootid = self getcharacterdecallootid();
     var_b3d9cfaa = self function_11d0e790();
-    var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+    current_life_index = self match_record::get_player_stat(#"current_life_index");
 
-    if(isDefined(var_f8e6b703)) {
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_gender", gender);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_decal_lootid", decallootid);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit_lootid", var_be574bd8);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_lootid", var_8fa79650);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit", outfitindex);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_outfit", warpaintoutfitindex);
+    if(isDefined(current_life_index)) {
+      self match_record::set_stat(#"lives", current_life_index, #"character_gender", gender);
+      self match_record::set_stat(#"lives", current_life_index, #"character_decal_lootid", decallootid);
+      self match_record::set_stat(#"lives", current_life_index, #"character_outfit_lootid", var_be574bd8);
+      self match_record::set_stat(#"lives", current_life_index, #"character_warpaint_lootid", var_8fa79650);
+      self match_record::set_stat(#"lives", current_life_index, #"character_outfit", outfitindex);
+      self match_record::set_stat(#"lives", current_life_index, #"character_warpaint_outfit", warpaintoutfitindex);
 
       for(i = 0; i < var_b3d9cfaa.size; i++) {
-        self match_record::set_stat(#"lives", var_f8e6b703, #"hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
+        self match_record::set_stat(#"lives", current_life_index, #"hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
       }
     }
   }

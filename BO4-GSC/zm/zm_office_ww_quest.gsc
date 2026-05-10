@@ -46,16 +46,16 @@ init_clientfields() {
 }
 
 function_1bfc7178() {
-  level._effect[#"hash_7c49a746639d8fb9"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
-  level._effect[#"hash_7c49a646639d8e06"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
-  level._effect[#"hash_7c49a546639d8c53"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
-  level._effect[#"hash_7c49a446639d8aa0"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
-  level._effect[#"hash_7c49ab46639d9685"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
-  level._effect[#"hash_7c49aa46639d94d2"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
-  level._effect[#"hash_7c49a946639d931f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
-  level._effect[#"hash_7c49a846639d916c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
-  level._effect[#"hash_7c49af46639d9d51"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
-  level._effect[#"hash_7c49ae46639d9b9e"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
+  level._effect[#"code_value_0"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
+  level._effect[#"code_value_1"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
+  level._effect[#"code_value_2"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
+  level._effect[#"code_value_3"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
+  level._effect[#"code_value_4"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
+  level._effect[#"code_value_5"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
+  level._effect[#"code_value_6"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
+  level._effect[#"code_value_7"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
+  level._effect[#"code_value_8"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
+  level._effect[#"code_value_9"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
 }
 
 function_65337201(n_set, n_value, n_id) {
@@ -342,7 +342,7 @@ function_2b049ee1(e_player) {
   } else if(function_8b1a219a()) {
     self sethintstring(#"hash_4230a57b5ddc96b2");
   } else {
-    self sethintstring(#"hash_67ddc0f0c16c1216");
+    self sethintstring(#"zm_office/open_crate");
   }
 
   return true;

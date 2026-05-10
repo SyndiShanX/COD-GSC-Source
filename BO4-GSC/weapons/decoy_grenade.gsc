@@ -95,9 +95,9 @@ function_7c24c60f(reloadtime) {
   self endon(#"death");
   time_ratio = reloadtime / 3;
   wait time_ratio;
-  self playSound(#"hash_337f5ae3f1674ad3");
+  self playSound(#"fly_ar_standard_mag_out");
   wait time_ratio;
-  self playSound(#"hash_7a315f233edf3cba");
+  self playSound(#"fly_ar_standard_mag_in");
   wait time_ratio;
 }
 

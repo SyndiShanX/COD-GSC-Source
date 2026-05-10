@@ -58,7 +58,7 @@ function_49f4b6ee() {
   }
 }
 
-add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"hash_2082da6662372184") {
+add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"zmb_armor_receive") {
   var_4812bba2 = 0;
 
   if(isDefined(var_28066539)) {

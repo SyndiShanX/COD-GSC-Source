@@ -125,7 +125,7 @@ function_6db6572b() {
   level.var_f3c95b8b = getnodearray("nd_enemy_bot", "targetname");
   level thread ct_utils::function_6b71f442();
 
-  level thread function_868cd9ac();
+  level thread devgui_ct_battery();
 }
 
 function_ba542258(mode) {
@@ -678,7 +678,7 @@ function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       ct_utils::get_player() thread ct_utils::function_329f9ba6(#"hash_70f2d94bae3edef5", 2, "red");
     }
   } else if(smeansofdeath === "MOD_IMPACT" && weapon === getweapon(#"hero_pineapplegun")) {
-    level notify(#"hash_788c0d72802f35af", {
+    level notify(#"pineapple_grenade_impact", {
       #v_loc: vpoint
     });
     self.damagetaken += 751;
@@ -782,7 +782,7 @@ function_1f04fda(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon,
   w_pineapple = getweapon(#"hero_pineapple_grenade");
 
   if(weapon === w_pineapple) {
-    level notify(#"hash_788c0d72802f35af", {
+    level notify(#"pineapple_grenade_impact", {
       #v_loc: vpoint
     });
   } else if(smeansofdeath !== "MOD_IMPACT" && weapon === w_cluster) {
@@ -983,7 +983,7 @@ function_4674d2e7() {
   self endon(#"death");
 
   while(true) {
-    s_notify = level waittill(#"hash_788c0d72802f35af");
+    s_notify = level waittill(#"pineapple_grenade_impact");
     var_1c5e8282 = distance(self.origin, s_notify.v_loc);
 
     if(var_1c5e8282 < 4) {
@@ -1069,7 +1069,7 @@ function_f75c4ec2(v_target) {
   self.var_439da772 = 0;
 }
 
-function_868cd9ac() {
+devgui_ct_battery() {
   sessionmode = currentsessionmode();
   setDvar(#"devgui_ct_battery", "<dev string:x84>");
   level flag::init("<dev string:x6d>");
@@ -1126,7 +1126,7 @@ function_868cd9ac() {
         }
 
         break;
-      case # "hash_47e019566f91d4d1":
+      case # "keylines_on":
         if(!(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe)) {
           level.var_d6d98fbe = 1;
 
@@ -1146,7 +1146,7 @@ function_868cd9ac() {
         }
 
         break;
-      case # "hash_3384d4df94b5c66d":
+      case # "keylines_off":
         if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
           level.var_d6d98fbe = 0;
 

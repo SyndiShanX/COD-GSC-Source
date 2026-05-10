@@ -20,7 +20,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_3493e071de24d8a1", &on_begin, &on_end);
+  zm_trial::register_challenge(#"mansion_nosferatu_bite", &on_begin, &on_end);
 }
 
 on_begin(var_53c7b205 = #"1") {

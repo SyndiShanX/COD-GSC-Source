@@ -36,11 +36,11 @@ __init__() {
 
   level.var_9cddbf4e = [];
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_01_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: # "evt_supply_stash_open", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_04_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: # "evt_supply_stash_open", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_death_stash_mod"] = {
-    #open_sound: # "hash_5e8b0f6cade25ff6", #var_b9492c6: # "hash_70fb2ee1b706a28a"};
+    #open_sound: # "evt_death_stash_open", #var_b9492c6: # "hash_70fb2ee1b706a28a"};
   level.var_9cddbf4e[#"hash_1dcbe8021fb16344"] = {
     #open_sound: # "hash_56b5b65c141f4629", #var_b9492c6: # "hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_ammo_mod"] = {
@@ -52,7 +52,7 @@ __init__() {
   callback::on_connect(&_on_player_connect);
   callback::on_spawned(&_on_player_spawned);
   callback::on_disconnect(&_on_player_disconnect);
-  callback::add_callback(#"hash_41781454d98b676a", &function_9aefb438);
+  callback::add_callback(#"popups_team_message", &function_9aefb438);
   clientfield::register("world", "item_world_seed", 1, 31, "int");
   clientfield::register("world", "item_world_disable", 1, 1, "int");
   clientfield::register("scriptmover", "item_world_attachments", 10000, 1, "int");
@@ -975,7 +975,7 @@ function_ad7ad6ce(trigger_struct) {
 function_eb900758(stash) {
   self childthread function_d87c50ae(stash);
   self childthread function_6266f448(stash);
-  self waittill(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self waittill(#"disconnect", #"death", #"entering_last_stand", #"close_multi_item_pickup");
 
   if(isDefined(stash) && isDefined(stash.lootlocker) && stash.lootlocker) {
     function_35c26e09(stash);
@@ -990,7 +990,7 @@ function_eb900758(stash) {
 function_6266f448(stash) {
   self notify("6dcb0aa0e1be50d9");
   self endon("6dcb0aa0e1be50d9");
-  self endon(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self endon(#"disconnect", #"death", #"entering_last_stand", #"close_multi_item_pickup");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -1000,13 +1000,13 @@ function_6266f448(stash) {
     }
   }
 
-  self notify(#"hash_2781407e327b42ee");
+  self notify(#"close_multi_item_pickup");
 }
 
 function_d87c50ae(stash) {
   self notify("4bd96bb741326417");
   self endon("4bd96bb741326417");
-  self endon(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self endon(#"disconnect", #"death", #"entering_last_stand", #"close_multi_item_pickup");
 
   while(true) {
     waitframe(1);
@@ -1041,7 +1041,7 @@ function_d87c50ae(stash) {
     }
   }
 
-  self notify(#"hash_2781407e327b42ee");
+  self notify(#"close_multi_item_pickup");
 }
 
 function_937ea9e(identifier, handler) {
@@ -1078,7 +1078,7 @@ function_116fd9a7() {
   function_937ea9e(#"hash_51b30f6e7331e136", &function_349d4c26);
   function_937ea9e(#"hash_2b4dff2e0db72d06", &function_670cce3f);
   function_937ea9e(#"generic_pickup", &function_41a52251);
-  function_937ea9e(#"hash_5c844f5c1207159c", &function_2b2e9302);
+  function_937ea9e(#"generic_quest_pickup", &function_2b2e9302);
   function_937ea9e(#"hash_31380667bf69d3a0", &function_a240798a);
   function_937ea9e(#"generic_weapon_pickup", &function_a712496a);
 }
@@ -1183,7 +1183,7 @@ function_a54d07e6(item, activator) {
         }
 
         setdynentstate(stashes[0], 2);
-        stashes[0] notify(#"hash_4c78fc894646853d");
+        stashes[0] notify(#"stash_is_empty");
       }
     }
 
@@ -1793,7 +1793,7 @@ function_1a46c8ae(player, var_a1ca235e, var_3d1f9df4, var_7089b458, var_381f3b39
   }
 
   data = {
-    #game_time: function_f8d53445(), #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0, #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0, #var_5b8ff5e9: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0, #var_6789038: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0, #var_d1f97c0f: isDefined(var_381f3b39) ? var_381f3b39 : 0
+    #game_time: function_f8d53445(), #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0, #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0, #dropped_amount: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0, #given_item: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0, #given_amount: isDefined(var_381f3b39) ? var_381f3b39 : 0
   };
 
   if(isDefined(var_a1ca235e)) {

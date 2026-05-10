@@ -205,17 +205,17 @@ function_a87e7c22(subtarget) {
     if(!isDefined(self.var_d2c05029[subtarget]) || self.var_d2c05029[subtarget] <= time) {
       self.var_d2c05029[subtarget] = time + 150;
       bone = self submodelboneforsubtarget(subtarget);
-      self playrenderoverridebundle(#"hash_20bdbaa0db5eb57d", bone);
+      self playrenderoverridebundle(#"rob_vehicle_target", bone);
       wait 0.1;
-      self stoprenderoverridebundle(#"hash_20bdbaa0db5eb57d", bone);
+      self stoprenderoverridebundle(#"rob_vehicle_target", bone);
     }
 
     return;
   }
 
-  self playrenderoverridebundle(#"hash_20bdbaa0db5eb57d");
+  self playrenderoverridebundle(#"rob_vehicle_target");
   wait 0.15;
-  self stoprenderoverridebundle(#"hash_20bdbaa0db5eb57d");
+  self stoprenderoverridebundle(#"rob_vehicle_target");
 }
 
 rumble(localclientnum) {
@@ -610,7 +610,7 @@ function_34105b89(localclientnum, groupid, ison) {
     return;
   }
 
-  num_slots = settings.var_e08bc957;
+  num_slots = settings.control_numgroups;
 
   if(isDefined(num_slots) && groupid > num_slots) {
     return;
@@ -1328,11 +1328,11 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     foreach(var_b5ddf091 in self.settings.malfunction_effects) {
-      tag = var_b5ddf091.var_454a4e08;
+      tag = var_b5ddf091.tag_transition;
       effect = var_b5ddf091.transition;
 
-      if(isDefined(var_b5ddf091.transition) && isDefined(var_b5ddf091.var_454a4e08)) {
-        util::playFXOnTag(localclientnum, var_b5ddf091.transition, self, var_b5ddf091.var_454a4e08);
+      if(isDefined(var_b5ddf091.transition) && isDefined(var_b5ddf091.tag_transition)) {
+        util::playFXOnTag(localclientnum, var_b5ddf091.transition, self, var_b5ddf091.tag_transition);
       }
 
       switch (newval) {
@@ -1353,8 +1353,8 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
           break;
         case 2:
-          if(isDefined(var_b5ddf091.active) && isDefined(var_b5ddf091.var_2f451e59)) {
-            handle = util::playFXOnTag(localclientnum, var_b5ddf091.active, self, var_b5ddf091.var_2f451e59);
+          if(isDefined(var_b5ddf091.active) && isDefined(var_b5ddf091.tag_active)) {
+            handle = util::playFXOnTag(localclientnum, var_b5ddf091.active, self, var_b5ddf091.tag_active);
 
             if(!isDefined(self.fx_handles[#"malfunction"])) {
               self.fx_handles[#"malfunction"] = [];
@@ -1367,8 +1367,8 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
           break;
         case 3:
-          if(isDefined(var_b5ddf091.fatal) && isDefined(var_b5ddf091.var_ceeccc7a)) {
-            handle = util::playFXOnTag(localclientnum, var_b5ddf091.fatal, self, var_b5ddf091.var_ceeccc7a);
+          if(isDefined(var_b5ddf091.fatal) && isDefined(var_b5ddf091.tag_fatal)) {
+            handle = util::playFXOnTag(localclientnum, var_b5ddf091.fatal, self, var_b5ddf091.tag_fatal);
 
             if(!isDefined(self.fx_handles[#"malfunction"])) {
               self.fx_handles[#"malfunction"] = [];

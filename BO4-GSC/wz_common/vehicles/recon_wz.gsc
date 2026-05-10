@@ -161,7 +161,7 @@ function_ec1a4a6b() {
     zvelocity = abs(velocity[2]);
 
     if(speed < 0.1 && zvelocity < 0.1) {
-      self notify(#"hash_363004a4e0ccc1f");
+      self notify(#"recon_car_settled");
       return;
     }
 

@@ -125,7 +125,7 @@ on_connect() {
   level endon(#"end_game");
   self endon(#"disconnect");
 
-  if(self zm_characters::is_character(array(#"hash_447b3c77b73aa2a9"))) {
+  if(self zm_characters::is_character(array(#"prt_zm_stuhlinger"))) {
     self thread function_3e0d878f();
     self thread function_2e565334();
   }
@@ -509,7 +509,7 @@ function_c3d56ed8() {
 
   if(isDefined(w_take)) {
     if(function_5cd05b9(w_take, w_give)) {
-      e_player zm_weapons::function_7c5dd4bd(w_take);
+      e_player zm_weapons::give_full_ammo(w_take);
       b_give_weapon = 0;
     } else {
       e_player zm_weapons::weapon_take(w_take);

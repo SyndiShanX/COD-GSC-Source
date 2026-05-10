@@ -130,7 +130,7 @@ player_init_shield_health(weapon, var_cd9d17e0 = 0) {
       break;
   }
 
-  var_2aaf6cdb = zombie_utility::get_zombie_var(#"hash_cc85b961f25c2ff");
+  var_2aaf6cdb = zombie_utility::get_zombie_var(#"shield_damage_mult");
 
   if(isDefined(var_2aaf6cdb)) {
     level.var_7bcfc873 *= var_2aaf6cdb;

@@ -305,7 +305,7 @@ function_dc380897() {
   } else if(level.var_d7374603 == 3) {
     player thread zm_orange_util::function_51b752a9(#"hash_549030026224cbce", -1, 0, 1);
   } else if(level.var_d7374603 == 4) {
-    player thread zm_orange_util::function_51b752a9(#"hash_103075d32e77e799", -1, 0, 1);
+    player thread zm_orange_util::function_51b752a9(#"vox_golden_pap_defend", -1, 0, 1);
   }
 
   level flag::clear(#"hash_11d64d1f93c196cc");

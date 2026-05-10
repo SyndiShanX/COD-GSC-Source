@@ -30,7 +30,7 @@ init_shared() {
   level.var_ccdda8d1 = params.setype;
   level.var_660293e0 = [];
   level.var_d3b05dcb = [];
-  level._effect[#"hash_6024e139900c449a"] = #"hash_3937ef26298b6caf";
+  level._effect[#"wraith_fire_fire_light_fx"] = #"hash_3937ef26298b6caf";
   weaponobjects::function_e6400478(#"eq_wraith_fire", &function_5ea93036, 1);
   weaponobjects::function_e6400478(#"eq_wraith_fire_extra", &function_5ea93036, 1);
   level.var_f9145520 = 0;
@@ -207,11 +207,11 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
 
         if(function_a66ba8cc(water_depth) || is_under_water(newpos)) {
           newpos -= (0, 0, water_depth);
-          level thread function_42b9fdbe(var_fc031a6d, newpos, (0, 0, 1), int(customsettings.var_b79d64a9), team);
+          level thread function_42b9fdbe(var_fc031a6d, newpos, (0, 0, 1), int(customsettings.molotov_duration), team);
           break;
         }
 
-        level thread function_42b9fdbe(var_f483ab45, newpos, wall_normal, int(customsettings.var_b79d64a9), team);
+        level thread function_42b9fdbe(var_f483ab45, newpos, wall_normal, int(customsettings.molotov_duration), team);
         z -= randomintrange(20, 30);
       }
 
@@ -242,7 +242,7 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
 
     if(trace[#"fraction"] < 0.9) {
       var_252a0dc7 = trace[#"normal"];
-      function_a25dee15(var_f483ab45, traceposition, var_252a0dc7, int(customsettings.var_b79d64a9), team);
+      function_a25dee15(var_f483ab45, traceposition, var_252a0dc7, int(customsettings.molotov_duration), team);
     }
   }
 
@@ -257,7 +257,7 @@ function_523961e2(startpos, normal, var_4997e17c, fxindex, fxcount, defaultdista
 }
 
 function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, killcament, weapon, customsettings, team, var_e76400c0, wallnormal, var_693f108f) {
-  defaultdistance = customsettings.var_6193a41b * multiplier;
+  defaultdistance = customsettings.molotov_radius * multiplier;
   defaultdropdistance = getdvarint(#"hash_4270b8db6cf2ceff", 90);
   colorarray = [];
   colorarray[colorarray.size] = (0.9, 0.2, 0.2);
@@ -274,9 +274,9 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   locations[#"tallfire"] = [];
   locations[#"smallfire"] = [];
   locations[#"steam"] = [];
-  fxcount = customsettings.var_b650dc43;
+  fxcount = customsettings.molotov_fire_count;
   var_33ad9452 = isDefined(customsettings.var_bc24d9d3) ? customsettings.var_bc24d9d3 : 0;
-  fxcount = int(math::clamp(fxcount * multiplier + 6, 6, customsettings.var_b650dc43));
+  fxcount = int(math::clamp(fxcount * multiplier + 6, 6, customsettings.molotov_fire_count));
 
   if(multiplier < 0.04) {
     fxcount = 0;
@@ -379,9 +379,9 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
 
   if(!is_under_water(var_6b23e1c9)) {
     if(isDefined(mdl_anchor)) {
-      playFXOnTag(level._effect[#"hash_6024e139900c449a"], mdl_anchor, "tag_origin", 0);
+      playFXOnTag(level._effect[#"wraith_fire_fire_light_fx"], mdl_anchor, "tag_origin", 0);
     } else {
-      e_light_fx = playFX(level._effect[#"hash_6024e139900c449a"], var_6b23e1c9, forward, normal, 0, team);
+      e_light_fx = playFX(level._effect[#"wraith_fire_fire_light_fx"], var_6b23e1c9, forward, normal, 0, team);
 
       if(!isDefined(level.var_d3b05dcb)) {
         level.var_d3b05dcb = [];
@@ -393,7 +393,7 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
     }
 
     if(!isDefined(var_e76400c0)) {
-      var_af1bdf1 = function_a25dee15(var_8eb0a180, var_6b23e1c9, normal, int(customsettings.var_b79d64a9), team);
+      var_af1bdf1 = function_a25dee15(var_8eb0a180, var_6b23e1c9, normal, int(customsettings.molotov_duration), team);
       var_af1bdf1 function_4e5a1dd3(mdl_anchor);
     }
   }
@@ -427,7 +427,7 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
       fireweapon = isDefined(locations[#"tallfire"][lockey]) ? var_1c8ca3ba : var_8eb0a180;
     }
 
-    level thread function_42b9fdbe(fireweapon, locations[#"loc"][lockey], locations[#"normal"][lockey], int(customsettings.var_b79d64a9), team, mdl_anchor);
+    level thread function_42b9fdbe(fireweapon, locations[#"loc"][lockey], locations[#"normal"][lockey], int(customsettings.molotov_duration), team, mdl_anchor);
   }
 }
 
@@ -466,7 +466,7 @@ function_4e5a1dd3(mdl_anchor) {
 }
 
 incendiary_debug_line(from, to, color, depthtest, time) {
-  debug_rcbomb = getdvarint(#"hash_75de04766593ca0c", 0);
+  debug_rcbomb = getdvarint(#"scr_wraith_fire_debug", 0);
 
   if(debug_rcbomb == 1) {
     if(!isDefined(time)) {
@@ -483,8 +483,8 @@ incendiary_debug_line(from, to, color, depthtest, time) {
 
 function damageeffectarea(owner, position, killcament, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, mdl_anchor) {
   level endon(#"game_ended");
-  radius = customsettings.var_6193a41b * radius_multiplier;
-  height = customsettings.var_cbd86f3e;
+  radius = customsettings.molotov_radius * radius_multiplier;
+  height = customsettings.molotov_height;
   trigger_radius_position = position - (0, 0, height);
   trigger_radius_height = height * 2;
   spawnflags = function_30125f88();
@@ -514,7 +514,7 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
   self.var_ebf0b1c9 = [];
   burntime = 0;
   var_d0603aba = 1;
-  damageendtime = int(gettime() + customsettings.var_b79d64a9 * 1000);
+  damageendtime = int(gettime() + customsettings.molotov_duration * 1000);
 
   while(gettime() < damageendtime) {
     damageapplied = 0;
@@ -552,7 +552,7 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
       break;
     }
 
-    wait customsettings.var_90bd7d92;
+    wait customsettings.molotov_damage_interval;
   }
 
   arrayremovevalue(self.var_ebf0b1c9, undefined);
@@ -646,8 +646,8 @@ stopfiresound() {
 
 function_9464e4ad(owner, position, killcament, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, mdl_anchor) {
   level endon(#"game_ended");
-  radius = customsettings.var_6193a41b * radius_multiplier;
-  height = customsettings.var_cbd86f3e;
+  radius = customsettings.molotov_radius * radius_multiplier;
+  height = customsettings.molotov_height;
   trigger_radius_position = position - (0, 0, height);
   trigger_radius_height = height * 2;
   spawnflags = function_30125f88();
@@ -664,7 +664,7 @@ function_9464e4ad(owner, position, killcament, normal, weapon, customsettings, r
   }
 
   self.var_ebf0b1c9 = [];
-  damageendtime = int(gettime() + customsettings.var_b79d64a9 * 1000);
+  damageendtime = int(gettime() + customsettings.molotov_duration * 1000);
 
   while(gettime() < damageendtime) {
     damageapplied = 0;
@@ -884,8 +884,8 @@ damageinfirearea(origin, killcament, trace, position, weapon, customsettings, ow
   self endon(#"death");
   timer = 0;
 
-  if(candofiredamage(killcament, self, customsettings.var_90bd7d92)) {
-    level.var_eb1010d2 = getdvarint(#"hash_75de04766593ca0c", 0);
+  if(candofiredamage(killcament, self, customsettings.molotov_damage_interval)) {
+    level.var_eb1010d2 = getdvarint(#"scr_wraith_fire_debug", 0);
 
     if(level.var_eb1010d2) {
       if(!isDefined(level.incendiarydamagetime)) {
@@ -966,7 +966,7 @@ sndfiredamage_deleteent(ent) {
 hitpos(start, end, color) {
   trace = bulletTrace(start, end, 0, undefined);
 
-  level.var_eb1010d2 = getdvarint(#"hash_75de04766593ca0c", 0);
+  level.var_eb1010d2 = getdvarint(#"scr_wraith_fire_debug", 0);
 
   if(level.var_eb1010d2) {
     debugstar(trace[#"position"], 2000, color);
@@ -1006,7 +1006,7 @@ resetfiredamage(entnum, time) {
 }
 
 function_85ff22aa(origin, radius, color, alpha, time) {
-  debug_fire = getdvarint(#"hash_66232b46a7e21dec", 0);
+  debug_fire = getdvarint(#"debug_wraith_fire_fire", 0);
 
   if(debug_fire > 0) {
     if(debug_fire > 1) {

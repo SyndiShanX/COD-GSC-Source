@@ -141,10 +141,10 @@ function_c5d0e538() {
     add_helico(var_b9d1e3a4, #"hash_5e132c061625eb87");
   }
 
-  var_facd88e0 = getdynent(#"hash_43d72946b8b0dcb2");
+  farm_chest = getdynent(#"hash_43d72946b8b0dcb2");
 
-  if(isDefined(var_facd88e0)) {
-    add_helico(var_facd88e0, #"hash_5e132c061625eb87");
+  if(isDefined(farm_chest)) {
+    add_helico(farm_chest, #"hash_5e132c061625eb87");
   }
 
   var_cd5ee6fb = getdynent(#"hash_183c9fe8af52fac7");
@@ -153,13 +153,13 @@ function_c5d0e538() {
     add_helico(var_cd5ee6fb, #"hash_5e132c061625eb87");
   }
 
-  var_d3db07bc = getdynent(#"hash_468067e2be6e3cfd");
+  var_d3db07bc = getdynent(#"zombie_supply_stash_crater");
 
   if(isDefined(var_d3db07bc)) {
     add_helico(var_d3db07bc, #"hash_5e132c061625eb87");
   }
 
-  var_955bd1d9 = getdynent(#"hash_49e8a607ea22e650");
+  var_955bd1d9 = getdynent(#"zombie_supply_stash_crater_quest");
 
   if(isDefined(var_955bd1d9)) {
     add_helico(var_955bd1d9, #"hash_5e132c061625eb87");

@@ -9,10 +9,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_a35b43eb;
+#namespace zm_traps_firegates;
 
 autoexec __init__system__() {
-  system::register(#"hash_18d1bdf8dbbfec6c", &__init__, undefined, undefined);
+  system::register(#"zm_traps_firegates", &__init__, undefined, undefined);
 }
 
 __init__() {

@@ -120,15 +120,15 @@ init() {
 stat_tracker_setup(b_skipped) {
   level endon(#"end_game", #"stat_tracker" + "_ended_early");
 
-  while(!level flag::exists(#"hash_5aa1c9627e8626e0")) {
+  while(!level flag::exists(#"shard_step_complete")) {
     wait 1;
   }
 
-  level flag::wait_till(#"hash_5aa1c9627e8626e0");
+  level flag::wait_till(#"shard_step_complete");
 }
 
 stat_tracker_cleanup(b_skipped, var_19e802fa) {
-  level flag::set(#"hash_5aa1c9627e8626e0");
+  level flag::set(#"shard_step_complete");
 }
 
 function_94c0714() {
@@ -258,7 +258,7 @@ function_ca3759b1() {
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_nine_ncom_0");
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_eight_ncom_0");
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_seven_ncom_0");
-  playsoundatposition(#"hash_5dddf55133ac4bcf", (-576, -1992, -87));
+  playsoundatposition(#"evt_nuke_incoming", (-576, -1992, -87));
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_six_ncom_0");
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_five_ncom_0");
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_four_ncom_0");
@@ -542,7 +542,7 @@ function_26739c84() {
 }
 
 s_construction_push_point_a_markets() {
-  level endon(#"hash_5aa1c9627e8626e0");
+  level endon(#"shard_step_complete");
   zm_hms_util::function_3c173d37();
   level.var_8200dc81 zm_hms_util::function_6a0d675d(#"vox_boss_success", 1, 0, 1);
   zm_hms_util::function_3c173d37();
@@ -769,7 +769,7 @@ function_297251d8() {
 }
 
 shock_player(n_damage = 50) {
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
   self thread player_elec_damage(n_damage);
   self status_effect::status_effect_apply(shock_status_effect, undefined, self, 0);
 }
@@ -1094,8 +1094,8 @@ function_b58e5865() {
 
   level.var_5da5aff4 = 0;
 
-  if(level flag::get(#"hash_398e4b1e72edb4ee")) {
-    level flag::clear(#"hash_398e4b1e72edb4ee");
+  if(level flag::get(#"lounge_revoked")) {
+    level flag::clear(#"lounge_revoked");
     exploder::stop_exploder("fxexp_elec_lounge");
   }
 

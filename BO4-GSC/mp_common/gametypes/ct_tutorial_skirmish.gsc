@@ -41,7 +41,7 @@ init() {
   level.ct_difficulty = getdvarstring(#"overridedifficulty", "(default)");
 
   if(level.ct_difficulty == "tutorial" || level.ct_difficulty == "easy") {
-    level thread function_8599f7cb();
+    level thread play_interstitial();
   } else {
     level thread function_6cc515f7(level.ct_difficulty);
   }
@@ -169,7 +169,7 @@ get_roleindex(name) {
   return undefined;
 }
 
-function_8599f7cb() {
+play_interstitial() {
   level notify(#"interstitial");
   level endon(#"interstitial");
   var_d4002929 = 0;
@@ -189,10 +189,10 @@ function_8599f7cb() {
     level.b_movie = 0;
     return;
   } else {
-    level thread function_8e22d234();
+    level thread check_leaderboard();
   }
 
-  level waittill(#"hash_5562cfc90ce9dfe2");
+  level waittill(#"play_interstitial");
 
   if(!var_d4002929) {
     return;
@@ -256,7 +256,7 @@ function_6cc515f7(str_difficulty) {
     level.b_movie = 0;
     return;
   } else {
-    level thread function_8e22d234();
+    level thread check_leaderboard();
   }
 
   if(var_d4002929) {
@@ -302,12 +302,12 @@ challenges_init() {
   level.var_7e008e0c = function_5f516f9d(#"best_killstreak");
   level.var_24370902 = function_5f516f9d(#"scorestreak_kills");
   level.var_924497ca = function_5f516f9d(#"secondary_weapon_kills");
-  level.var_94b2e2da = function_5f516f9d(#"hash_513bb5302a850f1c");
+  level.var_94b2e2da = function_5f516f9d(#"eq_ability_kills");
   level.var_9356f44c = function_5f516f9d(#"hash_1ebacadf6dc3dbdf");
   level.var_f0b5757d = function_5f516f9d(#"veteran_kills");
   level.var_b7ad6f5b = function_5f516f9d(#"hash_683d7dfc8782d6b9", 1);
-  level.var_c30109f4 = function_5f516f9d(#"hash_68046b0858420412", 1);
-  level.var_4ac5338a = function_5f516f9d(#"hash_3caeae083fb50ceb", 1);
+  level.var_c30109f4 = function_5f516f9d(#"weapon_class_kills_smg", 1);
+  level.var_4ac5338a = function_5f516f9d(#"weapon_class_kills_lmg", 1);
   level.var_26d708d7 = function_5f516f9d(#"hash_4d4a62396c1ec8", 1);
   level.var_92dc2d7c = function_5f516f9d(#"weapon_class_kills_sniper", 1);
 }
@@ -523,8 +523,8 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     if(isDefined(weapon.isheroweapon) && weapon.isheroweapon || isDefined(weapon.var_76ce72e8) && weapon.var_76ce72e8 || weapon == getweapon(#"sig_buckler_turret") || weapon == getweapon(#"sig_buckler_dw") || weapon == getweapon(#"dog_ai_defaultmelee")) {
-      if(attacker newvalueoptions(#"hash_513bb5302a850f1c") < level.var_94b2e2da) {
-        attacker function_9401373f(#"hash_513bb5302a850f1c", 1);
+      if(attacker newvalueoptions(#"eq_ability_kills") < level.var_94b2e2da) {
+        attacker function_9401373f(#"eq_ability_kills", 1);
       }
     }
 
@@ -551,8 +551,8 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 
         break;
       case # "weapon_smg":
-        if(attacker newvalueoptions(#"hash_68046b0858420412") < level.var_c30109f4) {
-          attacker function_9401373f(#"hash_68046b0858420412", 1);
+        if(attacker newvalueoptions(#"weapon_class_kills_smg") < level.var_c30109f4) {
+          attacker function_9401373f(#"weapon_class_kills_smg", 1);
         }
 
         break;
@@ -563,8 +563,8 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 
         break;
       case # "weapon_lmg":
-        if(attacker newvalueoptions(#"hash_3caeae083fb50ceb") < level.var_4ac5338a) {
-          attacker function_9401373f(#"hash_3caeae083fb50ceb", 1);
+        if(attacker newvalueoptions(#"weapon_class_kills_lmg") < level.var_4ac5338a) {
+          attacker function_9401373f(#"weapon_class_kills_lmg", 1);
         }
 
         break;
@@ -591,7 +591,7 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 }
 
-function_8e22d234() {
+check_leaderboard() {
   level notify(#"check_leaderboard");
   level endon(#"check_leaderboard");
   a_players = getplayers();
@@ -625,7 +625,7 @@ function_b4ebcd8a() {
   for(i = 0; i < var_40682b3d; i++) {
     fields = getcharacterfields(i, mode);
 
-    if(isDefined(fields) && isDefined(fields.var_49a55967) && fields.var_49a55967) {
+    if(isDefined(fields) && isDefined(fields.iscombattrainingenabled) && fields.iscombattrainingenabled) {
       var_3e22bae5[var_3e22bae5.size] = i;
     }
   }
@@ -712,7 +712,7 @@ function_78a17c00() {
     b_complete = 0;
   }
 
-  if(self newvalueoptions(#"hash_513bb5302a850f1c") < level.var_94b2e2da) {
+  if(self newvalueoptions(#"eq_ability_kills") < level.var_94b2e2da) {
     b_complete = 0;
   }
 
@@ -728,11 +728,11 @@ function_78a17c00() {
     b_complete = 0;
   }
 
-  if(self newvalueoptions(#"hash_3caeae083fb50ceb") < level.var_4ac5338a) {
+  if(self newvalueoptions(#"weapon_class_kills_lmg") < level.var_4ac5338a) {
     b_complete = 0;
   }
 
-  if(self newvalueoptions(#"hash_68046b0858420412") < level.var_c30109f4) {
+  if(self newvalueoptions(#"weapon_class_kills_smg") < level.var_c30109f4) {
     b_complete = 0;
   }
 

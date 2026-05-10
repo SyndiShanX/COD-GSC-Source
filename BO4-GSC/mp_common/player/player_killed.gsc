@@ -1057,7 +1057,7 @@ function_caabcf70(victim, callbackparams, laststandparams, var_a1d415ee) {
   var_f53d817d = isDefined(laststandparams) ? laststandparams : callbackparams;
   var_ee2f4691 = isDefined(var_a1d415ee) ? var_a1d415ee : callbackparams;
   function_ad11630f(victim, var_f53d817d.victimorigin, var_f53d817d.victimangles, var_f53d817d.victimweapon, var_f53d817d.attacker, var_f53d817d.attackerorigin, var_f53d817d.attackerangles, var_f53d817d.sweapon, var_f53d817d.matchtime, var_f53d817d.shitloc, var_f53d817d.smeansofdeath, var_ee2f4691.attacker, var_ee2f4691.attackerorigin, var_ee2f4691.attackerangles, var_ee2f4691.sweapon, var_ee2f4691.matchtime, var_ee2f4691.shitloc, var_ee2f4691.smeansofdeath);
-  lifeindex = victim match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+  lifeindex = victim match_record::get_player_stat(#"current_life_index");
 
   if(isDefined(lifeindex) && isDefined(victim) && isPlayer(victim)) {
     victimindex = victim match_record::get_player_index();
@@ -1544,7 +1544,7 @@ function_f632c17e(weapon) {
     case # "hash_17df39d53492b0bf":
     case # "tank_robot_launcher_turret":
     case # "ac130_chaingun":
-    case # "hash_7b24d0d0d2823bca":
+    case # "ac130_autocannon":
       return true;
   }
 

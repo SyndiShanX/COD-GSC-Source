@@ -14,7 +14,7 @@ init() {
   clientfield::register("missile", "" + #"chaos_bolt_fx", 16000, 2, "int", &function_6e3ecc82, 0, 0);
   clientfield::register("scriptmover", "" + #"pegasus_emerge", 16000, 1, "counter", &pegasus_emerge, 0, 0);
   clientfield::register("scriptmover", "" + #"pegasus_storm", 16000, 1, "int", &function_272aa016, 0, 0);
-  clientfield::register("allplayers", "" + #"hash_73e309ffb25bf63d", 16000, 1, "int", &function_a27b945a, 0, 0);
+  clientfield::register("allplayers", "" + #"boss_lightning_bolt", 16000, 1, "int", &function_a27b945a, 0, 0);
   clientfield::register("toplayer", "" + #"hash_3bb8b5cda11eecc6", 16000, 1, "counter", &function_b9329291, 0, 0);
   clientfield::register("scriptmover", "" + #"lightning_impact_fx", 16000, 1, "int", &function_ed1d0231, 0, 0);
   clientfield::register("scriptmover", "" + #"lightning_arc_fx", 16000, 1, "int", &function_37d1ee2e, 0, 0);
@@ -172,7 +172,7 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
 
   if(newval == 1) {
-    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"hash_206a58239ffb5e0f"], self, str_fx_tag);
+    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"viper_bite_attack"], self, str_fx_tag);
 
     if(!isDefined(self.var_6450813b)) {
       self playSound(localclientnum, #"hash_76feff9b8f93c3d9");

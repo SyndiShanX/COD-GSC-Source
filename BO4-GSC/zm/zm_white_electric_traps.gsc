@@ -128,7 +128,7 @@ function_d12e5ff9(e_player) {
     return 1;
   }
 
-  self sethintstring(#"hash_23c1c09e94181fdb", 1000);
+  self sethintstring(#"zombie/button_buy_trap", 1000);
   return 1;
 }
 
@@ -399,7 +399,7 @@ electrocute_player(e_trigger) {
     self.var_58538bef = 0;
   }
 
-  shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  shock_status_effect = getstatuseffect(#"shock_zm_trap");
 
   if(e_trigger zm_traps::function_3f401e8d(self)) {
     return;

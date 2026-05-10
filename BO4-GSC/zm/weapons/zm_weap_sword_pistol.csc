@@ -31,7 +31,7 @@ __init__() {
   level._effect[#"hash_72dcd3be23419b87"] = #"hash_597abd90e7ff80e0";
   level._effect[#"hash_2cce5c832c2c19be"] = #"hash_358368e2fa3ca4f1";
   level._effect[#"hash_6890c4ba9ae61d0b"] = #"hash_28918c31efbce546";
-  level._effect[#"hash_206a58239ffb5e0f"] = #"hash_73d097f983d47f3c";
+  level._effect[#"viper_bite_attack"] = #"hash_73d097f983d47f3c";
   level._effect[#"viper_bite_projectile"] = #"hash_2ecc9e78037c5407";
   level._effect[#"viper_bite_projectile_impact"] = #"hash_571fb567ca3d4add";
   level._effect[#"hash_b784dd4d224f7e"] = #"hash_90808e1ff32f322";
@@ -82,7 +82,7 @@ viper_bite_projectile_impact(localclientnum, oldval, newval, bnewent, binitialsn
 
 viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"hash_206a58239ffb5e0f"], self, "j_spine4");
+    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"viper_bite_attack"], self, "j_spine4");
 
     if(!isDefined(self.var_6450813b)) {
       self playSound(localclientnum, #"hash_76feff9b8f93c3d9");

@@ -42,7 +42,7 @@ __init__() {
   killstreaks::register_killstreak("killstreak_ac130", &activatemaingunner);
   killstreaks::register_alt_weapon("ac130", getweapon(#"killstreak_remote"));
   killstreaks::register_alt_weapon("ac130", getweapon(#"hash_17df39d53492b0bf"));
-  killstreaks::register_alt_weapon("ac130", getweapon(#"hash_7b24d0d0d2823bca"));
+  killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_autocannon"));
   killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_chaingun"));
   killstreaks::set_team_kill_penalty_scale("ac130", level.teamkillreducedpenalty);
   player::function_cf3aa03d(&function_d45a1f8d, 1);
@@ -309,7 +309,7 @@ waitforvtolshutdownthread(ac130) {
     attacker = waitresult.attacker;
 
     if(isDefined(attacker)) {
-      luinotifyevent(#"player_callout", 2, #"hash_20aa28bee9cfdd61", attacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"killstreak/destroyed_helicopter_gunner", attacker.entnum);
     }
 
     if(target_istarget(ac130)) {
@@ -628,7 +628,7 @@ hidecompassafterwait(waittime) {
 }
 
 mainturretdestroyed(ac130, eattacker, weapon) {
-  ac130.owner iprintlnbold(#"hash_bbc64fd3a1e88d");
+  ac130.owner iprintlnbold(#"killstreak/helicopter_gunner_damaged");
 
   if(target_istarget(ac130)) {
     target_remove(ac130);
@@ -642,7 +642,7 @@ mainturretdestroyed(ac130, eattacker, weapon) {
   eattacker = self[[level.figure_out_attacker]](eattacker);
 
   if(isDefined(eattacker) && (!isDefined(ac130.owner) || ac130.owner util::isenemyplayer(eattacker))) {
-    luinotifyevent(#"player_callout", 2, #"hash_bbc64fd3a1e88d", eattacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"killstreak/helicopter_gunner_damaged", eattacker.entnum);
     challenges::destroyedaircraft(eattacker, weapon, 1, 1);
     eattacker challenges::addflyswatterstat(weapon, ac130);
     ac130 killstreaks::function_73566ec7(eattacker, weapon, ac130.owner);
@@ -737,7 +737,7 @@ function_c4aa4bb2() {
     radius = 500;
     v_pos = ac130.origin;
     earthquake(magnitude, duration, org, 500);
-    ac130 playSound(#"hash_5314ffef2464b607");
+    ac130 playSound(#"exp_damage_ac130");
   }
 }
 
@@ -793,7 +793,7 @@ function_dea7ec6a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
     if(!isDefined(ac130.destroyscoreeventgiven) && isDefined(eattacker) && (!isDefined(ac130.owner) || ac130.owner util::isenemyplayer(eattacker))) {
       eattacker = self[[level.figure_out_attacker]](eattacker);
-      luinotifyevent(#"player_callout", 2, #"hash_bbc64fd3a1e88d", eattacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"killstreak/helicopter_gunner_damaged", eattacker.entnum);
       ac130 killstreaks::play_destroyed_dialog_on_owner("ac130", ac130.killstreak_id);
       eattacker battlechatter::function_dd6a6012("ac130", weapon);
       challenges::destroyedaircraft(eattacker, weapon, 1, 1);
@@ -1170,7 +1170,7 @@ function_d45a1f8d(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(einflictor.owner == attacker && (weapon == getweapon(#"hash_17df39d53492b0bf") || weapon == getweapon(#"hash_7b24d0d0d2823bca"))) {
+  if(einflictor.owner == attacker && (weapon == getweapon(#"hash_17df39d53492b0bf") || weapon == getweapon(#"ac130_autocannon"))) {
     isprimaryweapon = weapon == getweapon(#"hash_17df39d53492b0bf") ? 1 : 0;
     level.ac130 function_631f02c5(isprimaryweapon);
   }
@@ -1262,8 +1262,8 @@ function_cd29787b() {
   bundle = level.killstreaks[#"ac130"].script_bundle;
   playFXOnTag(bundle.ksexplosionfx, self, "tag_body_animate");
 
-  if(isDefined(bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
-    playFXOnTag(bundle.var_bb6c29b4, self, "tag_body_animate");
+  if(isDefined(bundle.shockrifledestructionfx) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
+    playFXOnTag(bundle.shockrifledestructionfx, self, "tag_body_animate");
   }
 
   self playSound("exp_ac130");

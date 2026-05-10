@@ -606,7 +606,7 @@ function_dac3a61d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 skullquest_ritual_(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self thread postfx::playpostfxbundle(#"hash_1c4bae784c38419");
+    self thread postfx::playpostfxbundle(#"pstfx_zm_frozen");
     self function_116b95e5(#"hash_349a56ada2bc0bc8", "Reveal Threshold", 1);
 
     if(self zm_utility::function_f8796df3(localclientnum)) {
@@ -627,7 +627,7 @@ skullquest_ritual_(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   }
 
   self function_116b95e5(#"hash_349a56ada2bc0bc8", "Reveal Threshold", 0);
-  self thread postfx::exitpostfxbundle(#"hash_1c4bae784c38419");
+  self thread postfx::exitpostfxbundle(#"pstfx_zm_frozen");
 }
 
 function_eb5c7406(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -679,7 +679,7 @@ function_b415e676(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_e3c6c272(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self notify(#"hash_7541447588c20db8");
+  self notify(#"boss_end_breath_fx");
 
   if(isDefined(self.var_c605c611) && self zm_utility::function_f8796df3(localclientnum)) {
     deletefx(localclientnum, self.var_c605c611);
@@ -701,7 +701,7 @@ function_e3c6c272(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_ae2a3a29(localclientnum) {
-  self endon(#"hash_7541447588c20db8", #"death");
+  self endon(#"boss_end_breath_fx", #"death");
 
   while(true) {
     if(!isalive(self)) {

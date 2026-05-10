@@ -34,7 +34,7 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-#namespace namespace_a35b43eb;
+#namespace zm_traps_firegates;
 
 autoexec __init__system__() {
   system::register(#"zm_trap_firegate", &__init__, &__main__, undefined);
@@ -259,7 +259,7 @@ function_9026cbcd(player) {
       self sethintstring(#"hash_6e8ef1b690e98e51", self.stub.e_trap.zombie_cost);
       return true;
     } else {
-      self sethintstring(#"hash_23c1c09e94181fdb", self.stub.e_trap.zombie_cost);
+      self sethintstring(#"zombie/button_buy_trap", self.stub.e_trap.zombie_cost);
       return true;
     }
   } else if(zm_utility::is_standard()) {

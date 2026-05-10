@@ -34,8 +34,8 @@ __init__() {
   level._effect[#"hash_720f204e4406ddbf"] = #"hash_59cdb0226e644934";
   level._effect[#"hash_15593b3f860346f5"] = #"hash_1e957556dba822e6";
   level._effect[#"hash_5f9bb382a47d637d"] = #"hash_68100f653a5baf2f";
-  level._effect[#"hash_6dca5478f1baf5ce"] = #"hash_1ff88e4b147015b2";
-  level._effect[#"hash_3364e81f269deca0"] = #"hash_656272f0184ae1fc";
+  level._effect[#"chakram_throw_trail"] = #"hash_1ff88e4b147015b2";
+  level._effect[#"chakram_throw_impact"] = #"hash_656272f0184ae1fc";
   level._effect[#"hash_5c2ba805602ea484"] = #"hash_3904517ed3636935";
   level._effect[#"hash_455a47023bc1da46"] = #"hash_2109d3278a7b54fa";
   level._effect[#"hash_bc1e5225071e47d"] = #"hash_2ca473741924f0c";
@@ -76,7 +76,7 @@ chakram_head_pop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
 chakram_throw_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.fx_trail = util::playFXOnTag(localclientnum, level._effect[#"hash_6dca5478f1baf5ce"], self, "tag_fx");
+    self.fx_trail = util::playFXOnTag(localclientnum, level._effect[#"chakram_throw_trail"], self, "tag_fx");
 
     if(!isDefined(self.snd_looper)) {
       self.snd_looper = self playLoopSound(#"hash_3cd6bae1469848f1", 1);
@@ -97,14 +97,14 @@ chakram_throw_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 chakram_throw_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playFX(localclientnum, level._effect[#"hash_3364e81f269deca0"], self.origin, anglesToForward(self.angles));
+    playFX(localclientnum, level._effect[#"chakram_throw_impact"], self.origin, anglesToForward(self.angles));
     playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
   }
 }
 
 chakram_throw_special_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_3364e81f269deca0"], self, "j_spine4");
+    util::playFXOnTag(localclientnum, level._effect[#"chakram_throw_impact"], self, "j_spine4");
     playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
   }
 }

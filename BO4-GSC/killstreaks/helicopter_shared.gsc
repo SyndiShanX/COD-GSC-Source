@@ -309,9 +309,9 @@ heli_update_global_dvars(debug_refresh) {
       level.var_a41ff83e = getdvarint(#"hash_26f6fa23a134bc05", 6);
       level.var_78bf9902 = getdvarint(#"hash_27120423a14b94bb", 8);
       level.heli_protect_radius = getdvarint(#"scr_heli_protect_radius", 1500);
-      level.var_17076139 = getdvarint(#"hash_5681be4514516b7a", 1400);
-      level.var_c2bbc18f = getdvarint(#"hash_569da8451469c0d0", 1600);
-      level.var_d9c77d70 = getdvarint(#"hash_7e0189d9c55ba919", 350);
+      level.var_17076139 = getdvarint(#"scr_helicopter_height_min", 1400);
+      level.var_c2bbc18f = getdvarint(#"scr_helicopter_height_max", 1600);
+      level.var_d9c77d70 = getdvarint(#"scr_helicopter_height_offset", 350);
     } else {
       level.heli_protect_time = getDvar(#"scr_heli_protect_time", 75);
       level.heli_protect_pos_time = getDvar(#"scr_heli_protect_pos_time", 8);
@@ -1321,7 +1321,7 @@ heli_damage_monitor(hardpointtype) {
         case # "helicopter_comlink":
         case # "helicopter":
         case # "inventory_helicopter_comlink":
-          notifystring = #"hash_286f843fea185e5";
+          notifystring = #"killstreak/destroyed_helicopter";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
         case # "supply_drop":

@@ -59,8 +59,8 @@ function_344f8c02() {
 
 function_60c9a9e1() {
   while(true) {
-    if(getdvarint(#"hash_9fd3c7ff85dca2c", 0)) {
-      setDvar(#"hash_9fd3c7ff85dca2c", 0);
+    if(getdvarint(#"scr_clear_item_drops", 0)) {
+      setDvar(#"scr_clear_item_drops", 0);
       function_8a5fd783();
     }
 
@@ -73,8 +73,8 @@ function private function_3b2b6383(origin, angles, normal, itementry, var_ba40b4
   angles = combineangles(angles, (0, angleclamp180(origin[0] + origin[1] + origin[2]), 0));
 
   if(isDefined(itementry)) {
-    if(var_ba40b4c1 && isDefined(itementry.var_32ceba33) && itementry.var_32ceba33) {
-      angles = combineangles(angles, (isDefined(itementry.var_d1f348db) ? itementry.var_d1f348db : 0, isDefined(itementry.var_cc1bbd2c) ? itementry.var_cc1bbd2c : 0, isDefined(itementry.var_ae6581c0) ? itementry.var_ae6581c0 : 0));
+    if(var_ba40b4c1 && isDefined(itementry.overrideorientation) && itementry.overrideorientation) {
+      angles = combineangles(angles, (isDefined(itementry.dropangleoffsetx) ? itementry.dropangleoffsetx : 0, isDefined(itementry.dropangleoffsety) ? itementry.dropangleoffsety : 0, isDefined(itementry.dropangleoffsetz) ? itementry.dropangleoffsetz : 0));
     } else {
       angles = combineangles(angles, (isDefined(itementry.angleoffsetx) ? itementry.angleoffsetx : 0, isDefined(itementry.angleoffsety) ? itementry.angleoffsety : 0, isDefined(itementry.angleoffsetz) ? itementry.angleoffsetz : 0));
     }
@@ -87,8 +87,8 @@ function_feb1473(itementry, var_ba40b4c1) {
   origin = (0, 0, 0);
 
   if(isDefined(itementry)) {
-    if(var_ba40b4c1 && isDefined(itementry.var_32ceba33) && itementry.var_32ceba33) {
-      origin = (isDefined(itementry.var_8a122876) ? itementry.var_8a122876 : 0, isDefined(itementry.var_7c4c8ceb) ? itementry.var_7c4c8ceb : 0, isDefined(itementry.var_ee67711f) ? itementry.var_ee67711f : 0);
+    if(var_ba40b4c1 && isDefined(itementry.overrideorientation) && itementry.overrideorientation) {
+      origin = (isDefined(itementry.droppositionoffsetx) ? itementry.droppositionoffsetx : 0, isDefined(itementry.droppositionoffsety) ? itementry.droppositionoffsety : 0, isDefined(itementry.droppositionoffsetz) ? itementry.droppositionoffsetz : 0);
     } else {
       origin = (isDefined(itementry.positionoffsetx) ? itementry.positionoffsetx : 0, isDefined(itementry.positionoffsety) ? itementry.positionoffsety : 0, isDefined(itementry.positionoffsetz) ? itementry.positionoffsetz : 0);
     }
@@ -784,7 +784,7 @@ drop_inventory(player) {
       continue;
     }
 
-    if(isDefined(inventoryitem.itementry.var_6b5d0aaa) && inventoryitem.itementry.var_6b5d0aaa) {
+    if(isDefined(inventoryitem.itementry.dontdropondeath) && inventoryitem.itementry.dontdropondeath) {
       continue;
     }
 
@@ -974,7 +974,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
     return;
   }
 
-  if(isDefined(item.itementry.var_340eac1f) && item.itementry.var_340eac1f) {
+  if(isDefined(item.itementry.istacticalweapon) && item.itementry.istacticalweapon) {
     originalattachments = item.attachments;
     item.attachments = attachments;
 

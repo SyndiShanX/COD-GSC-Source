@@ -34,7 +34,7 @@ init() {
 }
 
 init_fx() {
-  level._effect[#"hash_7866a63fde6b972d"] = #"hash_2edb406c045a5b80";
+  level._effect[#"perk_fire_trail"] = #"hash_2edb406c045a5b80";
   level._effect[#"perk_marker"] = #"hash_2eb17822848d1484";
   level._effect[#"perk_marker_flare"] = #"hash_4d4ecfd7d55314e9";
 }
@@ -61,11 +61,11 @@ function_68792ab6() {
   var_c43b94a8[4] = randomintrange(20, 25);
   level waittill(#"all_players_spawned");
 
-  level.var_e8d9c0d1 = 0;
+  level.spawn_all_perks = 0;
 
   for(i = 0; i < 5; i++) {
     while(level.round_number < var_c43b94a8[i]) {
-      if(level.var_e8d9c0d1) {
+      if(level.spawn_all_perks) {
         break;
       }
 

@@ -52,8 +52,8 @@ main() {
   level flag::init("facility_flinger_fixed");
   level flag::init(#"edge_launched");
   level flag::init(#"edge_of_the_world_complete");
-  zm_sq::register(#"jump_scare_lighthouse", #"step_1", #"hash_5986bb2ab1879d84", &function_30ed45c9, &function_960f84d7);
-  zm_sq::register(#"jump_scare_note", #"step_1", #"hash_2572fbc6efde23a8", &function_48a634b7, &function_ee63b8a7);
+  zm_sq::register(#"jump_scare_lighthouse", #"step_1", #"hash_5986bb2ab1879d84", &jump_scare_lighthouse, &function_960f84d7);
+  zm_sq::register(#"jump_scare_note", #"step_1", #"hash_2572fbc6efde23a8", &jump_scare_note, &function_ee63b8a7);
   zm_sq::register(#"hash_729a1e4eb041be9b", #"step_1", #"trinket_quest", &trinket_quest, &trinket_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_1", #"edge_quest", &edge_quest, &edge_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_2", #"edge_quest", &function_8bc27fd3, &security_balcony_time_);
@@ -114,7 +114,7 @@ trinket_quest(var_a276c861) {
 }
 
 trinket_think() {
-  level endon(#"end_game", #"hell_on_earth", #"hash_198bc172b5af7f25", #"trinkets_placed");
+  level endon(#"end_game", #"hell_on_earth", #"trials_hell_on_earth", #"trinkets_placed");
   self endon(#"death");
   pap_lock = undefined;
 
@@ -141,7 +141,7 @@ trinket_think() {
 }
 
 function_abf8d5ce() {
-  level endon(#"end_game", #"hell_on_earth", #"trinkets_placed", #"hash_198bc172b5af7f25");
+  level endon(#"end_game", #"hell_on_earth", #"trinkets_placed", #"trials_hell_on_earth");
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
@@ -556,20 +556,20 @@ function_6ad0e23f() {
 
 on_player_connect() {
   if(zm_utility::is_trials() !== 1) {
-    self thread function_dbb49281();
-    self thread function_b6b24d3a();
+    self thread track_player_eyes_lighthouse();
+    self thread track_player_eyes_note();
   }
 }
 
-function_30ed45c9(var_a276c861) {
+jump_scare_lighthouse(var_a276c861) {
   foreach(player in level.players) {
-    player thread function_dbb49281();
+    player thread track_player_eyes_lighthouse();
   }
 
   callback::on_connect(&on_player_connect);
 }
 
-function_dbb49281() {
+track_player_eyes_lighthouse() {
   self notify(#"track_player_eyes_lighthouse");
   self endon(#"disconnect", #"track_player_eyes_lighthouse");
   b_saw_the_wth = 0;
@@ -602,15 +602,15 @@ function_dbb49281() {
 
 function_960f84d7(var_a276c861, var_19e802fa) {}
 
-function_48a634b7(var_a276c861) {
+jump_scare_note(var_a276c861) {
   foreach(player in level.players) {
-    player thread function_b6b24d3a();
+    player thread track_player_eyes_note();
   }
 
   callback::on_connect(&on_player_connect);
 }
 
-function_b6b24d3a() {
+track_player_eyes_note() {
   self notify(#"track_player_eyes_note");
   self endon(#"disconnect", #"track_player_eyes_note");
   var_11dc5e9d = 144;
@@ -707,7 +707,7 @@ function_bc1ff036() {
 }
 
 function_8bc27fd3(var_5ea5c94d) {
-  level endon(#"end_game", #"hell_on_earth", #"hash_198bc172b5af7f25");
+  level endon(#"end_game", #"hell_on_earth", #"trials_hell_on_earth");
 
   if(!var_5ea5c94d) {
     if(getplayers().size == 1) {
@@ -736,7 +736,7 @@ security_balcony_time_(var_5ea5c94d, ended_early) {
 
   level flag::set(#"edge_of_the_world_complete");
   s_exit = struct::get("edge_exit", "targetname");
-  player = s_exit zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_2f168c7542029caa", #"hash_71bb91d3e3e956ee"));
+  player = s_exit zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"zm_orange/edge_exit", #"hash_71bb91d3e3e956ee"));
   player notify(#"edge_exit");
 }
 

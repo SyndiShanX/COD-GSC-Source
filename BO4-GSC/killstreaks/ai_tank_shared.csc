@@ -80,12 +80,12 @@ missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
 function_aedc4c37(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self postfx::playpostfxbundle(#"hash_68b6dee9bf4fbfbe");
+    self postfx::playpostfxbundle(#"pstfx_disrupted_mantis");
     return;
   }
 
   if(newval == 0) {
-    self postfx::stoppostfxbundle(#"hash_68b6dee9bf4fbfbe");
+    self postfx::stoppostfxbundle(#"pstfx_disrupted_mantis");
   }
 }
 

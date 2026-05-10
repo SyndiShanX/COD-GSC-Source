@@ -32,7 +32,7 @@
 init() {
   clientfield::register("scriptmover", "" + #"dynamite_explosion_fx", 24000, 1, "counter");
   clientfield::register("actor", "" + #"hash_6adfdd12c9656e1c", 24000, 1, "int");
-  clientfield::register("actor", "" + #"hash_147a734966a62e10", 24000, 1, "counter");
+  clientfield::register("actor", "" + #"dynamite_zombie_explosion_fx", 24000, 1, "counter");
 }
 
 main() {
@@ -217,7 +217,7 @@ function_8427e524() {
     } else {
       if(self.b_cleaned_up !== 1) {
         gibserverutils::annihilate(self);
-        self clientfield::increment("" + #"hash_147a734966a62e10", 1);
+        self clientfield::increment("" + #"dynamite_zombie_explosion_fx", 1);
         level function_d8f300c3(self.origin);
         playsoundatposition(#"hash_7b838586b7ef0d9d", self.origin);
       } else {
@@ -324,7 +324,7 @@ dynamite_bomb_place_init() {
 
 function_2a27ccb9(e_player) {
   if(level.var_518d6e34) {
-    str_hint = zm_utility::function_d6046228(#"hash_619666ebfb26ad4", #"hash_cb4301a3d4b0ff8");
+    str_hint = zm_utility::function_d6046228(#"zm_orange/dynamite_bomb_place", #"hash_cb4301a3d4b0ff8");
     self sethintstring(str_hint);
     return true;
   }

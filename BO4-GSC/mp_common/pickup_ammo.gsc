@@ -47,7 +47,7 @@ function_4827d817(weapon) {
 
   weapindex = self.pers[#"dynamic_loadout"].clientfields[slot].val - 1;
   package = struct::get_script_bundle("bountyhunterpackage", level.bountypackagelist[weapindex]);
-  var_e6e3de63 = package.var_ef921c3c;
+  var_e6e3de63 = package.refillpickup;
   maxammo = package.refillammo;
 
   if(!isDefined(maxammo) || maxammo == 0) {
@@ -109,7 +109,7 @@ function_5bb13b48(player) {
         self thread function_7a80944d(player);
       }
     } else {
-      player iprintlnbold(#"hash_2ea29b19d0e205e7");
+      player iprintlnbold(#"mpui/ammo_full");
       self playsoundtoplayer(#"uin_unavailable_charging", player);
     }
   }

@@ -39,7 +39,7 @@ function_b53c3ad2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self notify(#"hash_16c59bda348653cd");
+  self notify(#"stop_static_postfx");
 
   if(isDefined(self.var_2d39c392) && self.var_2d39c392) {
     filter::disable_filter_vehicle_hijack_oor(self, 0);
@@ -52,7 +52,7 @@ function_d765daa4(localclientnum) {
   self endon("214105bf7d36e37f");
   self endon(#"death");
   self endon(#"exit_vehicle");
-  self endon(#"hash_16c59bda348653cd");
+  self endon(#"stop_static_postfx");
 
   while(true) {
     vehicle = getplayervehicle(self);

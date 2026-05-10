@@ -21,7 +21,7 @@ __init__() {
     level.var_a3e209ba = &function_321f8eb5;
   }
 
-  level.var_ba13fb7a = getdvarint(#"hash_40fe9055da22add4", 0);
+  level.debug_team_assignment = getdvarint(#"debug_team_assignment", 0);
 }
 
 get_assigned_team() {
@@ -571,7 +571,7 @@ function_a9822793() {
   distribution = function_7d93567f();
   var_ed0a1ecc = function_94478182(distribution);
 
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     println("<dev string:x38>" + "<dev string:xab>");
     function_a9bfa6d6();
     println("<dev string:x38>" + "<dev string:xbf>");
@@ -616,14 +616,14 @@ function_a9822793() {
     }
   }
 
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     println("<dev string:x38>" + "<dev string:x111>");
     function_a9bfa6d6();
   }
 }
 
 function_a9bfa6d6() {
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     foreach(team in level.teams) {
       self thread function_6c66cc64(team);
     }

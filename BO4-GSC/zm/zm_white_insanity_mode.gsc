@@ -533,7 +533,7 @@ function_e16c950d(weapon) {
     self takeweapon(weapon);
     weapon_upgrade = self zm_weapons::give_build_kit_weapon(weapon_upgrade);
     self thread aat::remove(weapon_upgrade);
-    self zm_weapons::function_7c5dd4bd(weapon_upgrade);
+    self zm_weapons::give_full_ammo(weapon_upgrade);
 
     if(isDefined(level.aat_in_use) && level.aat_in_use && zm_weapons::weapon_supports_aat(weapon_upgrade)) {
       self thread aat::acquire(weapon_upgrade);

@@ -10,7 +10,7 @@
 preload() {
   level._effect[#"trials_lighthouse_beam"] = #"hash_7249b8c6a93aa3a3";
   clientfield::register("scriptmover", "" + #"blood_buff_aura", 24000, 1, "int", &function_8532d13f, 0, 0);
-  clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int", &function_804015d2, 0, 0);
+  clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int", &lighthouse_beam_fx, 0, 0);
 }
 
 function_8532d13f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -31,7 +31,7 @@ function_8532d13f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_804015d2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+lighthouse_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"trials_lighthouse_beam"], self, "tag_origin");
     return;

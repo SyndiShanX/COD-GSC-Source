@@ -21,7 +21,7 @@ __init__() {
 }
 
 on_localclient_connect(localclientnum) {
-  if(isDefined(getgametypesetting(#"wzenablebountyhuntervehicles")) && getgametypesetting(#"wzenablebountyhuntervehicles") || isDefined(getgametypesetting(#"hash_23e09b48546a7e3b")) && getgametypesetting(#"hash_23e09b48546a7e3b")) {
+  if(isDefined(getgametypesetting(#"wzenablebountyhuntervehicles")) && getgametypesetting(#"wzenablebountyhuntervehicles") || isDefined(getgametypesetting(#"wzheavymetalheroesvehicles")) && getgametypesetting(#"wzheavymetalheroesvehicles")) {
     level thread function_53d906fd(localclientnum);
     return;
   }

@@ -472,7 +472,7 @@ function_b53212e5() {
 
 sams_box_step6_setup(var_5ea5c94d) {
   level.var_79260935.w_music_box = getweapon(#"music_box");
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_disconnect(&on_disconnect);
 
   if(!var_5ea5c94d) {
@@ -539,7 +539,7 @@ on_disconnect() {
   }
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "take_weapon" && s_event.weapon === level.var_79260935.w_music_box && self.var_3b55baa1 !== level.var_79260935.w_music_box) {
     iprintln("<dev string:x38>");
 

@@ -29,7 +29,7 @@
 #namespace zm_pap_util;
 
 function_a81f02e5() {
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
 }
 
 init_parameters() {
@@ -390,7 +390,7 @@ function_6d45375a(weapon) {
   return n_multiplier;
 }
 
-function_33f0ddd3(s_event) {
+on_player_loadout_changed(s_event) {
   if(s_event.event === "take_weapon" && isDefined(s_event.weapon)) {
     self function_c01d9f22(s_event.weapon);
   }

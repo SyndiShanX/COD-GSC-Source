@@ -49,7 +49,7 @@ lowermessagethink() {
 }
 
 setlowermessage(text, time) {
-  self notify(#"hash_6ceeeb477ece797b");
+  self notify(#"change_lower_message");
 
   if(!isDefined(level.lower_message)) {
     return;
@@ -67,7 +67,7 @@ setlowermessage(text, time) {
 }
 
 clearlowermessage() {
-  self endon(#"hash_6ceeeb477ece797b");
+  self endon(#"change_lower_message");
 
   if(!isDefined(level.lower_message) || !isPlayer(self)) {
     return;
@@ -78,7 +78,7 @@ clearlowermessage() {
 }
 
 function_fa47c5af() {
-  self endon(#"hash_6ceeeb477ece797b", #"disconnect");
+  self endon(#"change_lower_message", #"disconnect");
   wait 1;
   level.lower_message lower_message::set_message(self, #"");
   level.lower_message lower_message::set_countdowntimeseconds(self, 0);

@@ -796,7 +796,7 @@ class csceneobject: cscriptbundleobjectbase {
       if(isDefined(_s.issiege) && _s.issiege) {
         _e_array[clientnum] animation::play_siege(animation, str_siege_shot, n_rate, loop);
       } else {
-        if(isDefined(loop) && loop && isDefined(_s.var_69db1665) && _s.var_69db1665) {
+        if(isDefined(loop) && loop && isDefined(_s.loopbacktostart) && _s.loopbacktostart) {
           n_start_time = undefined;
         }
 
@@ -2799,7 +2799,7 @@ function_c802b491(s_tracker, str_mode) {
 }
 
 function_46546b5c(s_tracker, str_scenedef) {
-  if(getdvarint(#"hash_862358d532e674c", 0) === 1) {
+  if(getdvarint(#"scr_scene_skip_custom_games", 0) === 1) {
     var_41c1a1b7 = getscriptbundle(str_scenedef);
 
     if(isDefined(var_41c1a1b7.var_2af733c9) && var_41c1a1b7.var_2af733c9) {

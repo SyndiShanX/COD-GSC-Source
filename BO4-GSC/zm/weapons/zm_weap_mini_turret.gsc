@@ -417,20 +417,20 @@ turretscanning() {
           fire_time = 0.33 > 0.33 ? 0.33 : randomfloatrange(0.33, 0.33);
           var_fc9f290e = veh.enemy;
           veh vehicle_ai::fire_for_time(fire_time, 0, veh.enemy);
-          var_afae28e0 = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
+          enemy_died = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
 
-          if(0.34 > 0 && !var_afae28e0) {
+          if(0.34 > 0 && !enemy_died) {
             pause_time = 0.34 > 0.34 ? 0.34 : randomfloatrange(0.34, 0.34);
             waitresult = veh.turret_target waittilltimeout(pause_time, #"death", #"disconnect");
-            var_afae28e0 = waitresult._notify === "death";
+            enemy_died = waitresult._notify === "death";
           }
         } else {
           var_fc9f290e = veh.enemy;
           veh vehicle_ai::fire_for_rounds(10, 0, veh.enemy);
-          var_afae28e0 = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
+          enemy_died = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
         }
 
-        if(var_afae28e0 && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
+        if(enemy_died && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
           veh.owner playsoundtoplayer(#"mpl_turret_kill", veh.owner);
           veh.turretrotscale = 1;
           wait randomfloatrange(0.05, 0.2);

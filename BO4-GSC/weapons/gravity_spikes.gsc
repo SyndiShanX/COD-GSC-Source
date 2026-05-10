@@ -24,8 +24,8 @@ function_263a039() {
   while(true) {
     waitresult = self waittill(#"projectile_impact");
     self clientfield::increment("sndRattle", 1);
-    scoreevents::processscoreevent(#"hash_5814e5b2ee30cc5a", self, undefined, waitresult.weapon);
-    self notify(#"hash_5814e5b2ee30cc5a");
+    scoreevents::processscoreevent(#"gravity_slam_impact", self, undefined, waitresult.weapon);
+    self notify(#"gravity_slam_impact");
     waitframe(1);
   }
 }

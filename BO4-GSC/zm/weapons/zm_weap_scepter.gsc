@@ -809,7 +809,7 @@ function_717a1af2() {
   self thread reset_after_bleeding_out();
 
   do {
-    s_waitresult = self waittill(#"hash_4078956b159dd0f3");
+    s_waitresult = self waittill(#"new_slot_weapon");
   }
   while(s_waitresult.weapon != w_beacon);
 

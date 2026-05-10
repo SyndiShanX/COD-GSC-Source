@@ -167,7 +167,7 @@ function_116b413e(local_client_num, newval) {
 function_765b7c63(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!(isDefined(self.var_33b61b6f) && self.var_33b61b6f)) {
-      self.var_8e7f416f = self playLoopSound(#"hash_a93a3bf58dbd89d");
+      self.var_8e7f416f = self playLoopSound(#"fly_thermal_scope");
       self.var_33b61b6f = 1;
     }
   } else if(isDefined(self.var_33b61b6f) && self.var_33b61b6f) {

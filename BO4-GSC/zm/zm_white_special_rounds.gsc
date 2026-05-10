@@ -799,9 +799,9 @@ function_b990c084() {
 }
 
 function_bd2bb73a() {
-  level.var_8200dc81 zm_hms_util::function_6a0d675d(#"hash_66d4e14752453ba5", 0, 0);
+  level.var_8200dc81 zm_hms_util::function_6a0d675d(#"vox_air_vent_repaired_0", 0, 0);
   level zm_hms_util::function_3c173d37();
-  level.var_8200dc81 zm_hms_util::function_6a0d675d(#"hash_66d4e047524539f2", 0, 0, 1);
+  level.var_8200dc81 zm_hms_util::function_6a0d675d(#"vox_air_vent_repaired_1", 0, 0, 1);
   level zm_hms_util::function_3c173d37();
   level zm_hms_util::function_fd24e47f("vox_air_vent_repaired_react", -1, 0, 1);
 }

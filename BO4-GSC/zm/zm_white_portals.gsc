@@ -325,7 +325,7 @@ function_26ddb915() {
 }
 
 cooldown_portal_timer(e_user) {
-  self endon(#"death", #"hash_3c91bf90cecbe758");
+  self endon(#"death", #"kill_portal_cooldown");
   e_user endon(#"death");
 
   if(!isDefined(self.a_e_users)) {
@@ -982,7 +982,7 @@ function_3566160b(str_location, n_newval) {
 
 disable_teleporter() {
   self.var_cd2f1fed = 1;
-  self notify(#"hash_3c91bf90cecbe758");
+  self notify(#"kill_portal_cooldown");
   self.a_e_users = [];
 
   foreach(e_player in getplayers()) {

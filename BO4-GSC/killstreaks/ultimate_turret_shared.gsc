@@ -985,20 +985,20 @@ turretscanning() {
           fire_time = min_burst_time > max_burst_time ? min_burst_time : randomfloatrange(min_burst_time, max_burst_time);
           var_fc9f290e = veh.enemy;
           veh vehicle_ai::fire_for_time(fire_time, 0, veh.enemy);
-          var_afae28e0 = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
+          enemy_died = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
 
-          if(min_pause_time > 0 && !var_afae28e0) {
+          if(min_pause_time > 0 && !enemy_died) {
             pause_time = min_pause_time > max_pause_time ? min_pause_time : randomfloatrange(min_pause_time, max_pause_time);
             waitresult = veh.turret_target waittilltimeout(pause_time, #"death", #"disconnect");
-            var_afae28e0 = waitresult._notify === "death";
+            enemy_died = waitresult._notify === "death";
           }
         } else {
           var_fc9f290e = veh.enemy;
           veh vehicle_ai::fire_for_rounds(10, 0, veh.enemy);
-          var_afae28e0 = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
+          enemy_died = !isDefined(var_fc9f290e) || !isalive(var_fc9f290e);
         }
 
-        if(var_afae28e0 && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
+        if(enemy_died && isDefined(veh.turret_target) && isDefined(veh.turret_target.var_e78602fc) && veh.turret_target.var_e78602fc == veh) {
           if(isDefined(veh.owner)) {
             veh.owner luinotifyevent(#"mini_turret_kill");
             veh.owner playsoundtoplayer(#"mpl_turret_kill", veh.owner);
@@ -1156,8 +1156,8 @@ function_59ce22f9(attacker, callback_data) {
   self playSound("mpl_turret_exp");
   bundle = level.killstreakbundle[#"ultimate_turret"];
 
-  if(isDefined(bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
-    playFX(bundle.var_bb6c29b4, self.origin);
+  if(isDefined(bundle.shockrifledestructionfx) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
+    playFX(bundle.shockrifledestructionfx, self.origin);
   }
 
   self stoploopsound(0.5);

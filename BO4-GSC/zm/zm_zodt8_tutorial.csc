@@ -19,7 +19,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("zbarrier", "tutorial_keyline_fx", 1, 2, "int", &function_a9c8f9d2, 0, 0);
   clientfield::register("item", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
   clientfield::register("scriptmover", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
-  clientfield::register("scriptmover", "" + #"path_blocker_fx", 1, 1, "int", &function_7c8084eb, 0, 0);
+  clientfield::register("scriptmover", "" + #"path_blocker_fx", 1, 1, "int", &path_blocker_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"symbol_blocker_fx", 1, 1, "int", &symbol_blocker_fx, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showLocation", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showPerks", 1, 1, "int", undefined, 0, 0);
@@ -105,7 +105,7 @@ function_a9c8f9d2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_7c8084eb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+path_blocker_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(self.var_293d9904)) {
     stopfx(localclientnum, self.var_293d9904);
     self.var_293d9904 = undefined;

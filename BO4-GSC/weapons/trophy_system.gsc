@@ -346,7 +346,7 @@ function_3170d645(projectile, trophy) {
   }
 
   if(var_48b7bfeb) {
-    scoreevents::processscoreevent(#"hash_1ed8a05490cfe606", player, projectile.owner, trophy.weapon);
+    scoreevents::processscoreevent(#"trophy_system_shielded", player, projectile.owner, trophy.weapon);
   }
 
   if(isDefined(level.flags)) {

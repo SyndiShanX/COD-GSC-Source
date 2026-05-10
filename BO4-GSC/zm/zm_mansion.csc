@@ -46,9 +46,9 @@ autoexec opt_in() {
 event_handler[level_init] main(eventstruct) {
   clientfield::register("clientuimodel", "player_lives", 8000, 2, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.ammoModifierActive", 8000, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "" + #"hash_42e03f9ae74a1070", 8000, 1, "int", &function_64968a3c, 0, 0);
-  clientfield::register("vehicle", "" + #"power_on_projectile_fx", 8000, 1, "int", &function_94cf8d37, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_4bd91c5285da0899", 8000, 1, "counter", &function_cb417790, 0, 0);
+  clientfield::register("world", "" + #"special_round_postfx", 8000, 1, "int", &special_round_postfx, 0, 0);
+  clientfield::register("vehicle", "" + #"power_on_projectile_fx", 8000, 1, "int", &power_on_projectile_fx, 0, 0);
+  clientfield::register("vehicle", "" + #"power_on_projectile_end_fx", 8000, 1, "counter", &power_on_projectile_end_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"soul_fx", 8000, 1, "int", &mansion_pap::soul_release, 0, 0);
   clientfield::register("scriptmover", "" + #"stone_pickup", 8000, 1, "int", &function_39b69f3f, 0, 0);
   clientfield::register("actor", "" + #"clock_zombie", 8000, 1, "int", &clock_zombie_fx, 0, 0);
@@ -59,8 +59,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"hash_487e544e29aa8e45", 8000, 1, "int", &function_97aef6ef, 0, 0);
   clientfield::register("scriptmover", "" + #"activate_mansion_artifact", 8000, getminbitcountfornum(3), "int", &function_be42dd6a, 0, 0);
   clientfield::register("scriptmover", "" + #"activate_mansion_artifact_card", 8000, 1, "int", &function_9e061782, 0, 0);
-  clientfield::register("toplayer", "" + #"silver_bullet_weapon_fx", 8000, 1, "int", &function_dba1f701, 0, 0);
-  clientfield::register("world", "" + #"hash_7fcdc47572bdbafa", 8000, 1, "int", &function_ce859d3a, 0, 0);
+  clientfield::register("toplayer", "" + #"silver_bullet_weapon_fx", 8000, 1, "int", &silver_bullet_weapon_fx, 0, 0);
+  clientfield::register("world", "" + #"outro_igc_visgroup", 8000, 1, "int", &outro_igc_visgroup, 0, 0);
   clientfield::register("scriptmover", "" + #"force_stream_model", 8000, 1, "int", &force_stream_model, 0, 0);
   clientfield::register("world", "" + #"hash_458d10e70473adfd", 8000, 1, "int", &function_8f06f775, 0, 0);
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
@@ -77,7 +77,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"wisp_impact"] = #"zm_weapons/fx8_equip_mltv_fire_human_torso_loop_zm";
   level._effect[#"stone_pickup"] = #"zombie/fx8_wallbuy_reveal";
   level._effect[#"zone_lockdown"] = #"hash_425c28d5fded81f2";
-  level._effect[#"hash_1a4566b6595544b4"] = #"zombie/fx8_power_door_amb_quest";
+  level._effect[#"special_door_blocker"] = #"zombie/fx8_power_door_amb_quest";
   level._effect[#"hash_1a46c58a5032bb15"] = #"zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
   level._effect[#"ww_pickup"] = #"hash_4b275679ef930b50";
   level._effect[#"hash_3e78192d5d719b68"] = #"hash_13ca5cb4f81f0469";
@@ -142,7 +142,7 @@ function_8f06f775(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   stopforcestreamingmaterial("t8_dirt_rocky_03_dark_rvl");
 }
 
-function_ce859d3a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+outro_igc_visgroup(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   function_a5777754(localclientnum, "visgroup_mov");
 }
 
@@ -157,7 +157,7 @@ on_entity_shutdown(localclientnum) {
   }
 }
 
-function_64968a3c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
+special_round_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval == 1) {
     e_player = getlocalplayers()[localclientnum];
     e_player postfx::playpostfxbundle(#"hash_1d8a81ef0f5306db");
@@ -199,7 +199,7 @@ function_8f945669(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   util::playFXOnTag(localclientnum, level._effect[#"zone_lockdown"], self, "tag_origin");
 }
 
-function_94cf8d37(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+power_on_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_4b7a5b1b)) {
       self.var_4b7a5b1b = util::playFXOnTag(localclientnum, level._effect[#"power_on_projectile"], self, "tag_origin");
@@ -223,7 +223,7 @@ function_94cf8d37(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_cb417790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+power_on_projectile_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     util::playFXOnTag(localclientnum, level._effect[#"power_on_projectile_end"], self, "tag_origin");
     playSound(localclientnum, #"hash_6da145d367ec64b2", self.origin);
@@ -371,7 +371,7 @@ function_8048af7e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_328d64bd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     v_forward = anglesToForward(self.angles);
-    self.blocker_fx = playFX(localclientnum, level._effect[#"hash_1a4566b6595544b4"], self.origin, v_forward);
+    self.blocker_fx = playFX(localclientnum, level._effect[#"special_door_blocker"], self.origin, v_forward);
     a_trace = bulletTrace(self.origin, self.origin - (0, 0, 512), 0, self);
     self.var_3fc27ef3 = playFX(localclientnum, level._effect[#"hash_1a46c58a5032bb15"], a_trace[#"position"], v_forward);
 
@@ -510,7 +510,7 @@ function_9e061782(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self stoprenderoverridebundle(#"hash_798166dc35b7e58");
 }
 
-function_dba1f701(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+silver_bullet_weapon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self notify(#"hash_5ca1805634bbfe66");
 
   if(isDefined(self.var_f89c3040)) {

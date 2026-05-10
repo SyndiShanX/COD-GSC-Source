@@ -122,10 +122,10 @@ function_12e09509(localclientnum = 0) {
     function_783a1c07(previs_weapon);
 
     settings = level.mute_smoke_custom_settings;
-    var_91f40e9 = max(isDefined(settings.var_91f40e9) ? settings.var_91f40e9 : 1, 0.01);
-    var_46e1fb08 setscale(var_91f40e9);
-    var_37b85cb5 setscale(var_91f40e9);
-    var_618fb067 setscale(var_91f40e9);
+    previs_scale = max(isDefined(settings.previs_scale) ? settings.previs_scale : 1, 0.01);
+    var_46e1fb08 setscale(previs_scale);
+    var_37b85cb5 setscale(previs_scale);
+    var_618fb067 setscale(previs_scale);
     var_a19445f = isads(localclientnum);
     var_de0fa6f1 = isDefined(settings.var_de0fa6f1) ? settings.var_de0fa6f1 : var_a19445f ? isDefined(settings.fx_done) ? settings.fx_done : 0 : 0;
     var_46f48578 = max(isDefined(settings.var_46f48578) ? settings.var_46f48578 : var_a19445f ? isDefined(settings.var_bdb59983) ? settings.var_bdb59983 : 0 : 0, 0.1);

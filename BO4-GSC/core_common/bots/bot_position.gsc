@@ -24,10 +24,10 @@ __init__() {
   function_e9e03d6f(#"default", &handle_default);
   function_e9e03d6f(#"in_combat", &function_567289f);
   function_e9e03d6f(#"hash_156be21f04d01350", &function_d2161ccd);
-  function_e9e03d6f(#"hash_c0bcf7fa0d58e5", &function_b94f5770);
+  function_e9e03d6f(#"not_in_combat", &function_b94f5770);
   function_e9e03d6f(#"revive_player", &function_8adaa75f);
   function_e9e03d6f(#"gameobject_interact", &function_daab6847);
-  function_e9e03d6f(#"hash_797d652ff338b7d4", &function_90ff35fc);
+  function_e9e03d6f(#"vehicle_gameobject_interact", &function_90ff35fc);
   function_e9e03d6f(#"visible_enemy", &handle_visible_enemy);
   function_e9e03d6f(#"find_best_cover", &function_7ed3ada6);
   function_aa8c6854(#"goal", &get_goal_center);
@@ -123,7 +123,7 @@ update(tacbundle) {
     return;
   }
 
-  self.bot.var_18fa994c = bot::function_7aeb27f1(self.bot.tacbundle.var_1f8a6a2, self.bot.tacbundle.var_2fc77943);
+  self.bot.var_18fa994c = bot::function_7aeb27f1(self.bot.tacbundle.nextpositiontimemin, self.bot.tacbundle.nextpositiontimemax);
 }
 
 function_e027100a() {
@@ -998,12 +998,12 @@ function_de626503(center) {
   return undefined;
 }
 
-function_52aa1fd5(center, var_f181b86b) {
-  if(!isDefined(var_f181b86b)) {
+function_52aa1fd5(center, seedquery) {
+  if(!isDefined(seedquery)) {
     return undefined;
   }
 
-  tacpoints = tacticalquery(var_f181b86b, center);
+  tacpoints = tacticalquery(seedquery, center);
 
   if(tacpoints.size == 0) {
     return undefined;

@@ -17,7 +17,7 @@
 #namespace mansion_ley_line;
 
 init_clientfields() {
-  clientfield::register("allplayers", "" + #"hash_5370f4bc9fc25d13", 8000, 1, "int", &function_bdecc239, 0, 1);
+  clientfield::register("allplayers", "" + #"shield_elec_fx", 8000, 1, "int", &shield_elec_fx, 0, 1);
   clientfield::register("scriptmover", "" + #"ley_lines", 8000, 2, "int", &ley_lines, 0, 0);
   clientfield::register("scriptmover", "" + #"power_beam", 8000, 2, "int", &power_beam, 0, 0);
   clientfield::register("scriptmover", "" + #"red_ray", 8000, 2, "int", &red_ray, 0, 0);
@@ -26,8 +26,8 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + #"stone_glow", 8000, 1, "int", &function_b75c6b4f, 0, 0);
   clientfield::register("scriptmover", "" + #"stone_despawn", 8000, 1, "counter", &function_dea9fad1, 0, 0);
   clientfield::register("scriptmover", "" + #"stone_soul", 8000, 1, "int", &function_6628d887, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_34c5ab29531f15f0", 8000, 1, "int", &crystal_fx, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_546e7612359187c3", 8000, 1, "counter", &function_a0d4ae11, 0, 0);
+  clientfield::register("scriptmover", "" + #"atlas_crystal_fx", 8000, 1, "int", &crystal_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"coil_hit_fx", 8000, 1, "counter", &coil_hit_fx, 0, 0);
   clientfield::register("toplayer", "" + #"mansion_mq_rumble", 8000, 1, "counter", &mansion_mq_rumble, 0, 0);
   clientfield::register("world", "" + #"skybox_stream", 8000, 1, "int", &function_bca55d4e, 0, 0);
   level._effect[#"red_ray"] = #"hash_7046110ad3c65161";
@@ -41,7 +41,7 @@ init_clientfields() {
   level._effect[#"hash_52d7eebc9f404616"] = #"hash_1e74733cdbc57252";
 }
 
-function_a0d4ae11(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+coil_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self util::playFXOnTag(localclientnum, #"hash_71f448e1a71c505d", self, "tag_origin");
   }
@@ -342,7 +342,7 @@ power_beam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
   }
 }
 
-function_bdecc239(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+shield_elec_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!isDefined(self.var_22364243)) {
       if(zm_utility::function_f8796df3(localclientnum)) {

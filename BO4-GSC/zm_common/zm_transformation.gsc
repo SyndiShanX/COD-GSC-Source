@@ -209,13 +209,13 @@ function_d2374144(entity, id) {
   }
 
   level.var_b175714d[id].var_2939a01a[level.var_b175714d[id].var_2939a01a.size] = entity;
-  entity thread function_525526be(id);
+  entity thread clean_up_transformation(id);
 }
 
 function_1afce5aa(entity) {
   assert(isDefined(entity.var_d41ca76d));
   assert(isinarray(level.var_b175714d[entity.var_d41ca76d].var_2939a01a, entity));
-  entity notify(#"hash_610e5a8c0ec1a4b6");
+  entity notify(#"clean_up_transformation");
 }
 
 function_331869(entity) {
@@ -227,7 +227,7 @@ function_e95ec8df(clear_active = 0) {
     transformation.var_33e393a7 = 0;
 
     foreach(var_d41ca76d in transformation.var_2939a01a) {
-      var_d41ca76d notify(#"hash_610e5a8c0ec1a4b6");
+      var_d41ca76d notify(#"clean_up_transformation");
     }
   }
 }
@@ -286,8 +286,8 @@ function_a261938f(entity) {
   return entity.var_982f937 !== 1;
 }
 
-function_525526be(id) {
-  waitresult = self waittill(#"death", #"transformation_started", #"hash_610e5a8c0ec1a4b6");
+clean_up_transformation(id) {
+  waitresult = self waittill(#"death", #"transformation_started", #"clean_up_transformation");
 
   if(waitresult._notify != "death") {
     self.var_d41ca76d = undefined;
@@ -452,7 +452,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
         foreach(var_127d3a7a in settingsbundle.var_d354164e) {
           if(self.model === var_127d3a7a.var_a3c9023c) {
             self.no_gib = 1;
-            self setModel(var_127d3a7a.var_cdf1f53d);
+            self setModel(var_127d3a7a.splitmdl);
             break;
           }
         }
@@ -660,13 +660,13 @@ devgui() {
 
   while(true) {
     wait 0.2;
-    cmd = getdvarstring(#"hash_439ed91bbc9ac4c0", "<dev string:x103>");
+    cmd = getdvarstring(#"transformation_devgui_cmd", "<dev string:x103>");
 
     if(cmd == "<dev string:x103>") {
       continue;
     }
 
-    setDvar(#"hash_439ed91bbc9ac4c0", "<dev string:x103>");
+    setDvar(#"transformation_devgui_cmd", "<dev string:x103>");
     cmd = strtok(cmd, "<dev string:x5db>");
 
     switch (cmd[0]) {

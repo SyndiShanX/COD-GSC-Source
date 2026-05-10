@@ -72,7 +72,7 @@ reset_ammo(var_f2c84b6b) {
   }
 
   if(isDefined(self.var_9b0383f5) && self.var_9b0383f5) {
-    self waittill(#"hash_1ac4338b0d419091");
+    self waittill(#"pap_use_finished");
   }
 
   a_weapons = self getweaponslist(0);
@@ -127,7 +127,7 @@ reset_loadout(var_96288bc8 = 0) {
   }
 
   if(isDefined(self.var_9b0383f5) && self.var_9b0383f5) {
-    self waittill(#"hash_1ac4338b0d419091");
+    self waittill(#"pap_use_finished");
   }
 
   if(level flag::get("round_reset")) {

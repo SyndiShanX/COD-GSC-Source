@@ -1259,7 +1259,7 @@ function_86270cca(planner, constant) {
     var_41ecbdf4 = array();
 
     if(!isDefined(target) || !isarray(validsquads) || validsquads.size <= 0) {
-      planner::setblackboardattribute(planner, #"hash_1a25f2c4feaf60cf", var_41ecbdf4);
+      planner::setblackboardattribute(planner, #"pathable_valid_squads", var_41ecbdf4);
       return spawnStruct();
     }
 
@@ -1308,7 +1308,7 @@ function_86270cca(planner, constant) {
       }
     }
 
-    planner::setblackboardattribute(planner, #"hash_1a25f2c4feaf60cf", var_41ecbdf4);
+    planner::setblackboardattribute(planner, #"pathable_valid_squads", var_41ecbdf4);
   } else {
     var_41ecbdf4 = array();
 
@@ -1318,7 +1318,7 @@ function_86270cca(planner, constant) {
       var_41ecbdf4[var_41ecbdf4.size] = var_3703551e;
     }
 
-    planner::setblackboardattribute(planner, #"hash_1a25f2c4feaf60cf", var_41ecbdf4);
+    planner::setblackboardattribute(planner, #"pathable_valid_squads", var_41ecbdf4);
   }
 
   return spawnStruct();
@@ -1343,7 +1343,7 @@ function_14c766b3(planner, constant) {
   var_f75536ec = !hasplayers || target[#"strategy"].("companionsinteractions") == #"first come first served";
   airvehicles = strategiccommandutility::function_698a5382(target[#"strategy"]);
   groundvehicles = strategiccommandutility::function_54032f13(target[#"strategy"]);
-  var_eda803e5 = groundvehicles;
+  onfoot = groundvehicles;
   validsquads = [];
 
   foreach(squad in possiblesquads) {
@@ -1372,7 +1372,7 @@ function_14c766b3(planner, constant) {
         break;
       }
 
-      if(var_eda803e5 && member[#"type"] == "bot") {
+      if(onfoot && member[#"type"] == "bot") {
         validsquads[validsquads.size] = squad;
         break;
       }
@@ -1815,7 +1815,7 @@ function_d58b0781(planner, constants) {
 }
 
 function_45f841ea(planner, constants) {
-  return function_faa6dd57(planner, constants, #"hash_1a25f2c4feaf60cf");
+  return function_faa6dd57(planner, constants, #"pathable_valid_squads");
 }
 
 function_faa6dd57(planner, constants, var_92812a91) {

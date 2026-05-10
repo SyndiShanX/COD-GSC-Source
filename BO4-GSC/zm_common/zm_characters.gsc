@@ -213,16 +213,16 @@ get_characters() {
     if(!isDefined(fields) || !isDefined(fields.zmcharacters)) {
       for(i = 1; i <= 4; i++) {
         fields = getplayerrolefields(i, currentsessionmode());
-        var_2a42c5e0 = fields.var_2a42c5e0;
-        level.characters[var_2a42c5e0] = [];
+        globalcharacterindex = fields.globalcharacterindex;
+        level.characters[globalcharacterindex] = [];
 
-        if(!isDefined(level.characters[var_2a42c5e0])) {
-          level.characters[var_2a42c5e0] = [];
-        } else if(!isarray(level.characters[var_2a42c5e0])) {
-          level.characters[var_2a42c5e0] = array(level.characters[var_2a42c5e0]);
+        if(!isDefined(level.characters[globalcharacterindex])) {
+          level.characters[globalcharacterindex] = [];
+        } else if(!isarray(level.characters[globalcharacterindex])) {
+          level.characters[globalcharacterindex] = array(level.characters[globalcharacterindex]);
         }
 
-        level.characters[var_2a42c5e0][level.characters[var_2a42c5e0].size] = i;
+        level.characters[globalcharacterindex][level.characters[globalcharacterindex].size] = i;
 
         if(!isDefined(level.validcharacters)) {
           level.validcharacters = [];
@@ -240,10 +240,10 @@ get_characters() {
     assert(isDefined(fields.zmcharacters));
 
     for(i = 0; i < fields.zmcharacters.size; i++) {
-      var_2a42c5e0 = function_d35e4c92(fields.zmcharacters[i].characterindex, 1);
+      globalcharacterindex = function_d35e4c92(fields.zmcharacters[i].characterindex, 1);
 
-      if(!isDefined(level.characters[var_2a42c5e0])) {
-        level.characters[var_2a42c5e0] = [];
+      if(!isDefined(level.characters[globalcharacterindex])) {
+        level.characters[globalcharacterindex] = [];
       }
 
       if(!isDefined(level.validcharacters)) {
@@ -254,13 +254,13 @@ get_characters() {
 
       level.validcharacters[level.validcharacters.size] = fields.zmcharacters[i].characterindex;
 
-      if(!isDefined(level.characters[var_2a42c5e0])) {
-        level.characters[var_2a42c5e0] = [];
-      } else if(!isarray(level.characters[var_2a42c5e0])) {
-        level.characters[var_2a42c5e0] = array(level.characters[var_2a42c5e0]);
+      if(!isDefined(level.characters[globalcharacterindex])) {
+        level.characters[globalcharacterindex] = [];
+      } else if(!isarray(level.characters[globalcharacterindex])) {
+        level.characters[globalcharacterindex] = array(level.characters[globalcharacterindex]);
       }
 
-      level.characters[var_2a42c5e0][level.characters[var_2a42c5e0].size] = fields.zmcharacters[i].characterindex;
+      level.characters[globalcharacterindex][level.characters[globalcharacterindex].size] = fields.zmcharacters[i].characterindex;
     }
   }
 
@@ -284,14 +284,14 @@ function_d35e4c92(characterindex, var_fdf0f13d = 0) {
   if(isDefined(characterindex)) {
     if(var_fdf0f13d || player_role::is_valid(characterindex)) {
       fields = getplayerrolefields(characterindex, currentsessionmode());
-      return fields.var_2a42c5e0;
+      return fields.globalcharacterindex;
     }
   } else if(isDefined(self) && isPlayer(self)) {
     characterindex = player_role::get();
 
     if(player_role::is_valid(characterindex)) {
       fields = getplayerrolefields(player_role::get(), currentsessionmode());
-      return fields.var_2a42c5e0;
+      return fields.globalcharacterindex;
     }
   }
 
@@ -340,7 +340,7 @@ is_character(character) {
 }
 
 function_50b1ae32() {
-  if(is_character(array(#"hash_68255d9ce2a09382", #"hash_1a427f842f175b3c"))) {
+  if(is_character(array(#"prt_zm_scarlett", #"hash_1a427f842f175b3c"))) {
     self.revivevox = "scar";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_scar";
@@ -349,7 +349,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"))) {
+  if(is_character(array(#"prt_zm_bruno", #"hash_14e91ceb9a7b3eb6"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "brun";
@@ -360,7 +360,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_f531a8c2df891cc", #"hash_26072a3b34719d22"))) {
+  if(is_character(array(#"prt_zm_diego", #"hash_26072a3b34719d22"))) {
     self.revivevox = "dieg";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_dieg";
@@ -378,7 +378,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
+  if(is_character(array(#"prt_zm_richtofen", #"prt_zm_richtofen_ofc", #"prt_zm_richtofen_whi_novials"))) {
     self.revivevox = "rich";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_rich";
@@ -387,7 +387,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_1aa57ef704f24fa5", #"hash_36bc80636f0fdac4"))) {
+  if(is_character(array(#"prt_zm_dempsey", #"prt_zm_dempsey_ofc"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "demp";
@@ -398,7 +398,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_22e6f7e13c3a99ef", #"hash_46b92e1337b43236"))) {
+  if(is_character(array(#"prt_zm_nikolai", #"prt_zm_nikolai_ofc"))) {
     self.revivevox = "niko";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_niko";
@@ -407,7 +407,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_305f156156d37e34", #"hash_6df0037e3f390b15"))) {
+  if(is_character(array(#"prt_zm_takeo", #"prt_zm_takeo_ofc"))) {
     self.revivevox = "take";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_take";
@@ -416,7 +416,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_73d71ff1e886bbe9"))) {
+  if(is_character(array(#"prt_zm_richtofen_whi"))) {
     self.revivevox = "uric";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_uric";
@@ -425,7 +425,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_4cb4663e341a940"))) {
+  if(is_character(array(#"prt_zm_dempsey_whi"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "udem";
@@ -436,7 +436,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_78aa6812c38263ba"))) {
+  if(is_character(array(#"prt_zm_nikolai_whi"))) {
     self.revivevox = "unik";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_unik";
@@ -445,7 +445,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_1fd4157dcafc6e45"))) {
+  if(is_character(array(#"prt_zm_takeo_whi"))) {
     self.revivevox = "utak";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_utak";
@@ -454,7 +454,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_3c0932fa55ee6e5b"))) {
+  if(is_character(array(#"prt_zm_brigadier"))) {
     self.revivevox = "brig";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_brig";
@@ -463,7 +463,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_5ebf024e1559c04a"))) {
+  if(is_character(array(#"prt_zm_butler"))) {
     self.revivevox = "butl";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_butl";
@@ -472,7 +472,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_4e8f51ec275a4a38"))) {
+  if(is_character(array(#"prt_zm_gunslinger"))) {
     self.revivevox = "guns";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_guns";
@@ -490,7 +490,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_8d5bc4a77c74f69"))) {
+  if(is_character(array(#"prt_zm_russman"))) {
     self.revivevox = "russ";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_russ";
@@ -499,7 +499,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_291943ac9ed00ebc"))) {
+  if(is_character(array(#"prt_zm_misty"))) {
     self.revivevox = "mist";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_mist";
@@ -508,7 +508,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_7ba62675ab75df69"))) {
+  if(is_character(array(#"prt_zm_marlton"))) {
     self.revivevox = "marl";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_marl";
@@ -517,7 +517,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_447b3c77b73aa2a9"))) {
+  if(is_character(array(#"prt_zm_stuhlinger"))) {
     self.revivevox = "stuh";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_stuh";

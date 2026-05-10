@@ -180,7 +180,7 @@ function_10c80e10(eventstruct) {
   level zm_trial::function_cd75b690(1);
 }
 
-function_33f0ddd3(eventstruct) {
+on_player_loadout_changed(eventstruct) {
   self thread function_6a8979c9();
 }
 
@@ -379,11 +379,11 @@ on_begin(var_e097dc07, var_f5300808) {
       }
 
       player enableoffhandweapons();
-      callback::function_33f0ddd3(&function_10c80e10);
+      callback::on_player_loadout_changed(&function_10c80e10);
     }
   }
 
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
   zm_traps::disable_all_traps();
   self function_e20ebcfd();
@@ -425,7 +425,7 @@ on_end(round_reset) {
   }
 
   level.b_special_weapons = undefined;
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
   challenge = zm_trial::function_a36e8c38(#"restrict_loadout");
 
