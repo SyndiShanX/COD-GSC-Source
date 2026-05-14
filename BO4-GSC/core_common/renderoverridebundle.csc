@@ -20,7 +20,7 @@ __init__() {
     #local_clients: [], #var_383fe4d6: []
   };
   callback::on_localclient_connect(&function_d7ae6bbb);
-  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_6803f977);
+  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_6803f977);
   function_f72f089c(#"hash_16bdbd0b3de5c91a", #"hash_71fbf1094f57b910", &function_fac25f84);
 }
 

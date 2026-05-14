@@ -298,7 +298,7 @@ function onendgame(var_c1e98979) {
         level.enddefeatreasontext = #"hash_34d0ee5d4c21542d";
       } else {
         level.endvictoryreasontext = #"hash_7cafa946822ee652";
-        level.enddefeatreasontext = #"hash_5235bbca93844647";
+        level.enddefeatreasontext = #"mpui/ctf_overtime_defeat_did_not_defend";
       }
     } else {
       winningteam = game.outcome.var_aefc8b8d.team;
@@ -474,7 +474,7 @@ function createflaghint(team, origin) {
   radius = 128;
   height = 64;
   trigger = spawn("trigger_radius", origin, 0, radius, height);
-  trigger sethintstring(#"hash_479e7adbf3e4f211");
+  trigger sethintstring(#"mp/ctf_cant_capture_flag");
   trigger setcursorhint("HINT_NOICON");
   trigger.original_origin = origin;
   trigger turn_off();
@@ -647,8 +647,8 @@ function ondrop(player) {
 
   if(isDefined(player)) {
     util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
-    level thread popups::displayteammessagetoteam(#"hash_3118e621ec8d35b8", player, team, undefined, undefined, 4, 1);
-    level thread popups::displayteammessagetoteam(#"hash_6730bd6c7d8d0567", player, otherteam, undefined, undefined, 4, 2);
+    level thread popups::displayteammessagetoteam(#"mp/friendly_flag_dropped", player, team, undefined, undefined, 4, 1);
+    level thread popups::displayteammessagetoteam(#"mp/enemy_flag_dropped", player, otherteam, undefined, undefined, 4, 2);
   } else {
     util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
   }
@@ -731,15 +731,15 @@ function onpickup(player) {
     demo::bookmark(#"event", gettime(), player);
     potm::bookmark(#"event", gettime(), player);
     player stats::function_bb7eedf0(#"returns", 1);
-    level thread popups::displayteammessagetoteam(#"hash_347504f7414c2861", player, team, undefined, undefined, 4, 1, 1);
-    level thread popups::displayteammessagetoteam(#"hash_565752dc258425f0", player, otherteam, undefined, undefined, 4, 2, 1);
+    level thread popups::displayteammessagetoteam(#"mp/friendly_flag_returned", player, team, undefined, undefined, 4, 1, 1);
+    level thread popups::displayteammessagetoteam(#"mp/enemy_flag_returned", player, otherteam, undefined, undefined, 4, 2, 1);
     self.visuals[0] clientfield::set("ctf_flag_away", 0);
     self gameobjects::set_flags(0);
     self function_ef8d5fb5();
     bb::function_95a5b5c2("ctf_flagreturn", undefined, team, player.origin);
     player recordgameevent("return");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: player, #eventtype: # "return"});
+      #player: player, #eventtype: #"return"});
     [[level.var_37d62931]](player, 1);
     self returnflag();
 
@@ -756,14 +756,14 @@ function onpickup(player) {
   bb::function_95a5b5c2("ctf_flagpickup", undefined, team, player.origin);
   player recordgameevent("pickup");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #player: player, #eventtype: # "pickup"});
+    #player: player, #eventtype: #"pickup"});
   util::function_a3f7de13(9, player.team, player getentitynumber());
   scoreevents::processscoreevent(#"flag_grab", player, undefined, undefined);
   demo::bookmark(#"event", gettime(), player);
   potm::bookmark(#"event", gettime(), player);
   util::printandsoundoneveryone(otherteam, undefined, #"", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
-  level thread popups::displayteammessagetoteam(#"hash_6b94e754d048dae9", player, team, undefined, undefined, 4, 1);
-  level thread popups::displayteammessagetoteam(#"hash_25ed0737f009ca72", player, otherteam, undefined, undefined, 4, 2);
+  level thread popups::displayteammessagetoteam(#"mp/friendly_flag_taken", player, team, undefined, undefined, 4, 1);
+  level thread popups::displayteammessagetoteam(#"mp/enemy_flag_taken", player, otherteam, undefined, undefined, 4, 2);
   globallogic_audio::leader_dialog("ctfFriendlyFlagTaken", team, "ctf_flag");
   globallogic_audio::leader_dialog("ctfEnemyFlagTaken", otherteam, "ctf_flag_enemy");
   player.isflagcarrier = 1;
@@ -935,8 +935,8 @@ function oncapture(player) {
   player stats::function_bb7eedf0(#"captures_in_capture_area", 1);
   player contracts::increment_contract(#"contract_mp_objective_capture");
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
-  level thread popups::displayteammessagetoteam(#"hash_97b6e279104e355", player, team, undefined, undefined, 4, 1, 1);
-  level thread popups::displayteammessagetoteam(#"hash_352c694daa4f9440", player, enemyteam, undefined, undefined, 4, 2, 1);
+  level thread popups::displayteammessagetoteam(#"mp/enemy_flag_captured", player, team, undefined, undefined, 4, 1, 1);
+  level thread popups::displayteammessagetoteam(#"mp/friendly_flag_captured", player, enemyteam, undefined, undefined, 4, 2, 1);
   globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_enemy", enemyteam);
   globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_friend", team);
   player giveflagcapturexp(player);
@@ -977,7 +977,7 @@ function giveflagcapturexp(player) {
   scoreevents::processscoreevent(#"flag_capture", player, undefined, undefined);
   player recordgameevent("capture");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #player: player, #eventtype: # "capture"});
+    #player: player, #eventtype: #"capture"});
   util::function_a3f7de13(10, player.team, player getentitynumber());
 }
 
@@ -1076,7 +1076,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
           }
 
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-            #player: self, #var_bdc4bbd2: # "assaulting"});
+            #player: self, #var_bdc4bbd2: #"assaulting"});
         }
 
         if(offendedflag) {
@@ -1092,7 +1092,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
           }
 
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-            #player: self, #var_bdc4bbd2: # "defending"});
+            #player: self, #var_bdc4bbd2: #"defending"});
         }
       }
     }
@@ -1140,9 +1140,9 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
     psoffsettime recordgameevent("kill_carrier");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: psoffsettime, #eventtype: # "kill_carrier"});
+      #player: psoffsettime, #eventtype: #"kill_carrier"});
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-      #player: self, #var_bdc4bbd2: # "carrying"});
+      #player: self, #var_bdc4bbd2: #"carrying"});
   }
 }
 

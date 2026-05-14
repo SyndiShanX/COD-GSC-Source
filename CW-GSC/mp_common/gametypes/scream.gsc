@@ -881,7 +881,7 @@ function function_6573eeeb() {
     return;
   }
 
-  execution = level.var_2a029538 && self.var_4adf3a85 === 1 ? # "execution_198" : self function_7683b07();
+  execution = level.var_2a029538 && self.var_4adf3a85 === 1 ? #"execution_198" : self function_7683b07();
 
   if(execution != "") {
     self giveexecution(execution);
@@ -1206,7 +1206,7 @@ function function_beb69c9(dialogkey, var_89cfcebd) {
     case #"startscreamdeathmatch":
     case #"screamorders":
     case #"screamSlasherKilled":
-      return # "hash_6ee97311fb9fac80";
+      return #"hash_6ee97311fb9fac80";
     default:
       return var_89cfcebd;
   }

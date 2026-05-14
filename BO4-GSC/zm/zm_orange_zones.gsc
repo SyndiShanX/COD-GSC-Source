@@ -333,7 +333,7 @@ function_8e0b371() {
   while(true) {
     if(isalive(self)) {
       str_location = get_location_string(self);
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
     } else {
       self zm_hud::function_29780fb5(#"");
     }

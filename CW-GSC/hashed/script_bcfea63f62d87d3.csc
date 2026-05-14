@@ -5,7 +5,7 @@
 
 #using scripts\core_common\clientfield_shared;
 #using scripts\core_common\util_shared;
-#namespace namespace_77b8863;
+#namespace elephant_dust_ball;
 
 function autoexec main() {
   clientfield::register("scriptmover", "towers_boss_dust_ball_fx", 1, getminbitcountfornum(4), "int", &function_72955447, 0, 0);

@@ -95,7 +95,7 @@ function private zombiespawninit() {
   self.am_i_valid = 1;
   self.cant_move_cb = &zombiebehavior::function_22762653;
   self ai::set_behavior_attribute("use_attackable", 1);
-  self callback::function_d8abfc3d(#"hash_1eda827ff5e6895b", &function_ff987791);
+  self callback::function_d8abfc3d(#"on_ai_stunned", &function_ff987791);
   self callback::function_d8abfc3d(#"hash_210adcf09e99fba1", &function_618ab591);
   self callback::function_d8abfc3d(#"hash_1518febf00439d5", &function_8b5bbd69);
   self callback::function_d8abfc3d(#"hash_34b65342cbfdadac", &function_c35ce53f);
@@ -392,8 +392,8 @@ function private initzmbehaviorsandasm() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiegrappleactionstart", &zombiegrappleactionstart);
   assert(isscriptfunctionptr(&zombieknockdownactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionstart", &zombieknockdownactionstart);
-  assert(isscriptfunctionptr(&function_c8939973));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_a6273a84b4237ce", &function_c8939973);
+  assert(isscriptfunctionptr(&zombieknockdownactionterminate));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionterminate", &zombieknockdownactionterminate);
   assert(isscriptfunctionptr(&zombiepushedactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiepushedactionstart", &zombiepushedactionstart);
   assert(isscriptfunctionptr(&zombiepushedactionterminate));
@@ -437,8 +437,8 @@ function private initzmbehaviorsandasm() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_52ef96cc6c0bfb77", &function_fae6123, 20);
   assert(isscriptfunctionptr(&zombieattackableobjectservice));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieattackableobjectservice", &zombieattackableobjectservice, 4);
-  assert(isscriptfunctionptr(&function_fb814207));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiefindfleshservice", &function_fb814207, 3);
+  assert(isscriptfunctionptr(&findfleshservice));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiefindfleshservice", &findfleshservice, 3);
   assert(isscriptfunctionptr(&function_f637b05d));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_712f0844b14c72fe", &function_f637b05d, 1);
   assert(isscriptfunctionptr(&function_483766be));
@@ -642,7 +642,7 @@ function zmzombieshouldmelee(entity) {
   return false;
 }
 
-function function_fb814207(behaviortreeentity) {
+function findfleshservice(behaviortreeentity) {
   if(is_true(behaviortreeentity.ai.var_870d0893)) {
     return;
   }
@@ -1454,7 +1454,7 @@ function zombieknockdownactionstart(behaviortreeentity) {
   behaviortreeentity.blockingpain = 1;
 }
 
-function private function_c8939973(behaviortreeentity) {
+function private zombieknockdownactionterminate(behaviortreeentity) {
   behaviortreeentity.knockdown = 0;
   behaviortreeentity collidewithactors(1);
   behaviortreeentity.blockingpain = 0;
@@ -1488,7 +1488,7 @@ function zombieshouldstun(behaviortreeentity) {
 
 function zombiestunstart(behaviortreeentity) {
   behaviortreeentity pathmode("dont move", 1);
-  callback::callback(#"hash_1eda827ff5e6895b");
+  callback::callback(#"on_ai_stunned");
 }
 
 function function_c377438f(behaviortreeentity) {
@@ -2269,7 +2269,7 @@ function notetrackboardmelee(animationentity) {
         heightdiff = abs(animationentity.player_targets[i].origin[2] - animationentity.first_node.trigger_location.origin[2]);
 
         if(playertriggerdistsq < triggerdistsq && heightdiff * heightdiff < triggerdistsq) {
-          animationentity.player_targets[i] playsoundtoplayer(#"hash_75318bcffca7ff06", animationentity.player_targets[i]);
+          animationentity.player_targets[i] playsoundtoplayer(#"evt_player_swiped_victim", animationentity.player_targets[i]);
           animationentity.player_targets[i] dodamage(animationentity.meleeweapon.meleedamage, animationentity.origin, self, self, "none", "MOD_MELEE");
           break;
         }

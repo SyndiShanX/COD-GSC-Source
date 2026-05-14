@@ -63,7 +63,7 @@ function private function_eaba72c9() {
       setDvar(#"wz_flare_drop", 0);
     }
 
-    if(getdvarint(#"hash_5dc24c61c66f6fee", 0) > 0) {
+    if(getdvarint(#"wz_debug_supply_drop", 0) > 0) {
       debug_supply_drop();
     }
 
@@ -789,7 +789,7 @@ function private function_924a11ff(itemspawnlist, var_93fe96a6 = 0, s_instance) 
   self clientfield::set("supply_drop_fx", 1);
   self setModel("wpn_t9_streak_care_package_friendly_world_nosight");
   self.anglesoffset = (0, 90, 0);
-  items = self namespace_65181344::function_5eada592(itemspawnlist, 1);
+  items = self item_spawn_groups_util::function_5eada592(itemspawnlist, 1);
   wait 60;
 
   if(isDefined(self)) {

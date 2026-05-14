@@ -546,7 +546,7 @@ function function_ae65820c(delay) {
   wait delay;
 
   if(isDefined(self)) {
-    self playLoopSound(#"hash_6e9ee0f0f9ecd8d7");
+    self playLoopSound(#"exp_artillery_barrage_incoming");
   }
 }
 

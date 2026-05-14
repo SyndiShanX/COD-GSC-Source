@@ -41,7 +41,7 @@ function private on_end(round_reset) {
 }
 
 function function_4172344e() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     level.var_70135c38 = level.exterior_goals.size;

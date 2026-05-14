@@ -761,7 +761,7 @@ function function_466d8a4b(var_b66879ad, team) {
 
 function function_6f6c29e(var_b66879ad) {
   params = {
-    #team: # "spectator", #var_b66879ad: var_b66879ad
+    #team: #"spectator", #var_b66879ad: var_b66879ad
   };
   self notify(#"joined_spectator", params);
   level notify(#"joined_spectator");
@@ -814,7 +814,7 @@ function function_38de2d5a(notification) {
 
 function init_heal(var_cd7b9255, var_e9c4ebeb) {
   var_84d04e6 = {
-    #enabled: var_cd7b9255, #rate: 0, #var_bc840360: 0, #var_c8777194: var_e9c4ebeb, #var_b8c7d886: 0, #var_a1cac2f1: 0
+    #enabled: var_cd7b9255, #rate: 0, #var_bc840360: 0, #var_c8777194: var_e9c4ebeb, #uninterruptible: 0, #var_a1cac2f1: 0
   };
 
   if(!isDefined(self.heal)) {
@@ -951,13 +951,13 @@ function function_d36b6597() {
 
 function private function_c70c4c93(party) {
   max_players = function_d36b6597();
-  assert(max_players == 0 || party.var_a15e4438 <= max_players);
+  assert(max_players == 0 || party.party_member_count <= max_players);
 
   if(isDefined(level.var_7d3ed2bf) && level.var_7d3ed2bf && !party.fill) {
     return max_players;
   }
 
-  return party.var_a15e4438;
+  return party.party_member_count;
 }
 
 function function_1cec6cba(players) {
@@ -970,7 +970,7 @@ function function_1cec6cba(players) {
     var_ab9e77bf[party.party_id] = function_c70c4c93(party);
 
     if(var_f8896168) {
-      var_ab9e77bf[party.party_id] = party.var_a15e4438;
+      var_ab9e77bf[party.party_id] = party.party_member_count;
     }
   }
 

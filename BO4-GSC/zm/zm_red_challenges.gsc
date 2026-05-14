@@ -277,7 +277,7 @@ on_ai_killed(s_params) {
     }
 
     if(is_challenge_active(13)) {
-      if(means_of_death == "MOD_MELEE" || isDefined(weapon) && # "zhield_zpear_dw" === weapon.name && "MOD_IMPACT" === means_of_death) {
+      if(means_of_death == "MOD_MELEE" || isDefined(weapon) && #"zhield_zpear_dw" === weapon.name && "MOD_IMPACT" === means_of_death) {
         level notify(#"player_melees_zombie", {
           #e_player: e_player
         });
@@ -301,7 +301,7 @@ function_4ca8c034(attacker, weapon, hit_loc, means_of_death) {
   }
 
   if(is_challenge_active(13)) {
-    if(means_of_death == "MOD_MELEE" || isDefined(weapon) && # "zhield_zpear_dw" === weapon.name && "MOD_IMPACT" === means_of_death) {
+    if(means_of_death == "MOD_MELEE" || isDefined(weapon) && #"zhield_zpear_dw" === weapon.name && "MOD_IMPACT" === means_of_death) {
       level notify(#"player_melees_zombie", {
         #e_player: attacker
       });

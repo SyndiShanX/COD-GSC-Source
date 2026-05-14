@@ -28,7 +28,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   clientfield::register("scriptmover", "" + #"nightingale_deployed", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_7c2ee5bfa7cad803", 1, 1, "int");
-  weapon_name = sessionmodeiszombiesgame() ? # "nightingale_zm" : # "nightingale";
+  weapon_name = sessionmodeiszombiesgame() ? #"nightingale_zm" : #"nightingale";
   weapon = getweapon(weapon_name);
   level.var_432fa05c = {
     #var_402a4207: [], #var_558ae5bc: sqr(500)

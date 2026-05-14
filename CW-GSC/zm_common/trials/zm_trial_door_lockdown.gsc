@@ -55,13 +55,13 @@ function is_active() {
 }
 
 function function_58fc4e38(n_delay = 0) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait n_delay;
   a_s_blockers = struct::get_array("trials_door_lockdown_clip");
 
   foreach(s_blocker in a_s_blockers) {
     if(!isDefined(s_blocker.mdl_blocker)) {
-      s_blocker.mdl_blocker = util::spawn_model(isDefined(s_blocker.model) ? s_blocker.model : # "collision_player_wall_128x128x10", s_blocker.origin, s_blocker.angles);
+      s_blocker.mdl_blocker = util::spawn_model(isDefined(s_blocker.model) ? s_blocker.model : #"collision_player_wall_128x128x10", s_blocker.origin, s_blocker.angles);
     }
 
     s_blocker.mdl_blocker ghost();
@@ -71,7 +71,7 @@ function function_58fc4e38(n_delay = 0) {
 }
 
 function function_92f23ef0(n_delay = 0) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait n_delay;
   a_s_blockers = struct::get_array("trials_door_lockdown_clip");
 

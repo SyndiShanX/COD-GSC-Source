@@ -87,7 +87,7 @@ function function_d92e3c5a(attacker, ai_zone, itemlist, var_e927082a = 0, n_powe
   }
 
   v_origin = self.origin;
-  items = self namespace_65181344::function_fd87c780(itemlist, self.itemdropcount, 1);
+  items = self item_spawn_groups_util::function_fd87c780(itemlist, self.itemdropcount, 1);
 
   if(!isDefined(self)) {
     return;

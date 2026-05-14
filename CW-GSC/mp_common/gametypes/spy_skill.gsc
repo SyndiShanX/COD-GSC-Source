@@ -32,7 +32,7 @@ function private preinit() {
 }
 
 function function_d999c676() {
-  return # "hash_7845745ea9a615cd";
+  return #"hash_7845745ea9a615cd";
 }
 
 function function_30e98aee() {

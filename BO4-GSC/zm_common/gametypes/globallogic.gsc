@@ -616,9 +616,9 @@ getendreasontext() {
 
   if(level.forcedend) {
     if(level.hostforcedend) {
-      return # "mp/host_ended_game";
+      return #"mp/host_ended_game";
     } else {
-      return # "mp/ended_game";
+      return #"mp/ended_game";
     }
   }
 

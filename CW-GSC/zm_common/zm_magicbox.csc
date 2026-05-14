@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   level._effect[#"hash_63f729c169af0c3e"] = #"hash_43a26488c9e5ce57";
   level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_5f376e9395e16666";
+  level._effect[#"t8_leave_fx"] = #"hash_5f376e9395e16666";
   level._effect[#"fire_runner"] = #"hash_409439bf8b3dd862";
   level._effect[#"hash_6778cbcf34bfebef"] = #"hash_43a26488c9e5ce57";
   level._effect[#"hash_5f2da0ff081c1699"] = #"hash_43a26488c9e5ce57";

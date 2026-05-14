@@ -401,7 +401,7 @@ function get_target_ent(entity) {
 function function_80fc1a78(time) {
   self notify("1a2a01405b0af7f6");
   self endon("1a2a01405b0af7f6");
-  self endon(#"death", #"hash_7d29584dcbbe7d67");
+  self endon(#"death", #"kill_avogadro_reveal");
   self show();
   wait time;
 }
@@ -479,7 +479,7 @@ function private function_7e5905cd(entity) {
 
   if(isDefined(enemy)) {
     self.shield = 1;
-    self notify(#"hash_7d29584dcbbe7d67");
+    self notify(#"kill_avogadro_reveal");
     self show();
   }
 
@@ -1260,7 +1260,7 @@ function function_1ad43460(entity) {
 function function_de781d41(entity) {
   if(!isDefined(entity.var_e8a7f45d)) {
     entity.var_e8a7f45d = {
-      #state: # "hash_24e69bf779de4940", #var_a5afe5a1: gettime()
+      #state: #"hash_24e69bf779de4940", #var_a5afe5a1: gettime()
     };
   }
 

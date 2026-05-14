@@ -136,7 +136,7 @@ function spawnlootitem(origin, angles, lootname, radius, context) {
     }
 
     def = {
-      #modelname: fate.model, #type: 7, #data: fate, #locked: 0, #name: # "fate", #var_d6118311: 4
+      #modelname: fate.model, #type: 7, #data: fate, #locked: 0, #name: #"fate", #var_d6118311: 4
     };
   } else {
     def = function_9acb7d7a(lootname);

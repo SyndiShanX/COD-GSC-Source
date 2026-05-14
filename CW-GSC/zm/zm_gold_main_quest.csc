@@ -123,7 +123,7 @@ function function_78d36eb1(localclientnum, oldval, newval, bnewent, binitialsnap
     self function_60212003(1);
     self function_a5edb367(#"death_ring");
     self.var_2c8e49d2 = util::spawn_model(fieldname, #"p8_big_cylinder", self.origin);
-    self.var_2c8e49d2 playrenderoverridebundle(#"hash_75168376918f5ab7");
+    self.var_2c8e49d2 playrenderoverridebundle(#"rob_wz_boundary");
     self.var_2c8e49d2 linkto(self);
     self thread function_1fd7d1f6();
     return;
@@ -137,7 +137,7 @@ function private function_1fd7d1f6() {
 
   while(isDefined(self.scale)) {
     if(isDefined(self.var_2c8e49d2)) {
-      self.var_2c8e49d2 function_78233d29(#"hash_75168376918f5ab7", "", "Scale", self.scale / 10);
+      self.var_2c8e49d2 function_78233d29(#"rob_wz_boundary", "", "Scale", self.scale / 10);
     }
 
     self function_5e00861(self.scale * 15000 * 2, 1);
@@ -147,7 +147,7 @@ function private function_1fd7d1f6() {
 
 function private function_ea1d7a10(str_notify) {
   if(isDefined(self.var_2c8e49d2)) {
-    self.var_2c8e49d2 stoprenderoverridebundle(#"hash_75168376918f5ab7");
+    self.var_2c8e49d2 stoprenderoverridebundle(#"rob_wz_boundary");
     self.var_2c8e49d2 delete();
   }
 }

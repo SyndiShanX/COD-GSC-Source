@@ -471,7 +471,7 @@ function function_71db2f7c(vehicle, var_31cac59e) {
   defuseobject gameobjects::allow_use(#"group_enemy");
   defuseobject gameobjects::set_use_time(level.defusetime);
   defuseobject gameobjects::set_use_text(#"mp/defusing_explosive");
-  defuseobject gameobjects::set_use_hint_text(#"hash_754b795109a2bbba");
+  defuseobject gameobjects::set_use_hint_text(#"platform/hold_to_defuse_explosives");
   defuseobject.useweapon = getweapon(#"briefcase_bomb_defuse");
   defuseobject.vehicle = var_31cac59e;
   defuseobject.onbeginuse = &function_a8c87bae;

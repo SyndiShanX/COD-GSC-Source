@@ -726,15 +726,15 @@ function function_b4ab53c4(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_efa02c97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    if(!function_148ccc79(fieldname, #"hash_1c4bae784c38419")) {
-      function_a837926b(fieldname, #"hash_1c4bae784c38419");
+    if(!function_148ccc79(fieldname, #"pstfx_zm_frozen")) {
+      function_a837926b(fieldname, #"pstfx_zm_frozen");
     }
 
     return;
   }
 
-  if(function_148ccc79(fieldname, #"hash_1c4bae784c38419")) {
-    function_24cd4cfb(fieldname, #"hash_1c4bae784c38419");
+  if(function_148ccc79(fieldname, #"pstfx_zm_frozen")) {
+    function_24cd4cfb(fieldname, #"pstfx_zm_frozen");
   }
 }
 

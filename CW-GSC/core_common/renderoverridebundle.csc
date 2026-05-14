@@ -20,7 +20,7 @@ function private preinit() {
     #local_clients: [], #var_383fe4d6: []
   };
   callback::on_localclient_connect(&function_d7ae6bbb);
-  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_6803f977);
+  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_6803f977);
   function_f72f089c(#"hash_2476e7ae62469f70", #"hash_39109749d54991e4", &function_9216f2c3);
   function_f72f089c(#"hash_2476eaae6246a489", #"hash_39109a49d54996fd", &function_9216f2c3);
 }
@@ -76,7 +76,7 @@ function function_2dbeddb5(local_client_num, var_166900a8) {
 
 function function_e04728e4(local_client_num) {
   while(true) {
-    result = level waittill(#"demo_jump", #"killcam_begin", #"killcam_end", #"player_switch", #"joined_team", #"localplayer_spawned", #"hash_7f642789ed08aae0", #"thermal_toggle", #"hacked");
+    result = level waittill(#"demo_jump", #"killcam_begin", #"killcam_end", #"player_switch", #"joined_team", #"localplayer_spawned", #"vision_pulse_toggle", #"thermal_toggle", #"hacked");
 
     if(result._notify == "killcam_end") {
       function_9129cbe3(local_client_num);

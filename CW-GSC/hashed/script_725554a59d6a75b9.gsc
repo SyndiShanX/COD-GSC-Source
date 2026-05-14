@@ -72,7 +72,7 @@ function pain_vox(meansofdeath, weapon) {
 
     if(isDefined(weapon)) {
       if(weapon.doesfiredamage) {
-        var_1f2bdb96 = playerbundle.var_c3b67de0;
+        var_1f2bdb96 = playerbundle.exertpainburn;
       }
     } else {
       var_1f2bdb96 = playerbundle.exertpaindamagetick;
@@ -84,13 +84,13 @@ function pain_vox(meansofdeath, weapon) {
 
     var_1f2bdb96 = playerbundle.exertpainfalling;
   } else if(meansofdeath == "MOD_BURNED") {
-    var_1f2bdb96 = playerbundle.var_c3b67de0;
+    var_1f2bdb96 = playerbundle.exertpainburn;
   } else if(meansofdeath == "MOD_ELECTROCUTED") {
-    var_1f2bdb96 = playerbundle.var_68bb30c1;
+    var_1f2bdb96 = playerbundle.exertpainstun;
   } else if(self isplayerunderwater()) {
     var_1f2bdb96 = playerbundle.exertpainunderwater;
   } else if(weapons::ismeleemod(meansofdeath)) {
-    var_1f2bdb96 = playerbundle.var_b801796c;
+    var_1f2bdb96 = playerbundle.exertpainpunched;
   } else if(weapons::isexplosivedamage(meansofdeath)) {
     if(weapon.name === #"eq_flash_grenade") {
       var_1f2bdb96 = playerbundle.var_af97fe9b;
@@ -182,7 +182,7 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
   }
 
   if(self weapons::isexplosivedamage(meansofdeath)) {
-    var_1f2bdb96 = playerbundle.var_44d86dec;
+    var_1f2bdb96 = playerbundle.exertexplosive;
   }
 
   if(isDefined(meansofdeath)) {
@@ -198,18 +198,18 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
         var_1f2bdb96 = playerbundle.var_53f25688;
         break;
       case #"mod_head_shot":
-        var_1f2bdb96 = playerbundle.var_207908de;
+        var_1f2bdb96 = playerbundle.exertdeathheadshot;
         break;
       case #"mod_trigger_hurt":
         if(self getvelocity()[2] < -100) {
-          var_1f2bdb96 = playerbundle.var_1dfcabbd;
+          var_1f2bdb96 = playerbundle.exertdeathfalling;
         } else {
           var_1f2bdb96 = playerbundle.exertdeath;
         }
 
         break;
       case #"mod_falling":
-        var_1f2bdb96 = playerbundle.var_1dfcabbd;
+        var_1f2bdb96 = playerbundle.exertdeathfalling;
         break;
       case #"mod_drown":
         var_1f2bdb96 = playerbundle.exertdeathdrowned;
@@ -222,7 +222,7 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
           if(is_true(self.suicide)) {
             var_1f2bdb96 = playerbundle.var_48305ed9;
           } else {
-            var_1f2bdb96 = playerbundle.var_f8b4bcc1;
+            var_1f2bdb96 = playerbundle.exertdeathradiation;
           }
         } else if(weapon == getweapon(#"tear_gas")) {
           var_1f2bdb96 = playerbundle.var_7a45f37b;

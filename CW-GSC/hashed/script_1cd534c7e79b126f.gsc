@@ -1070,7 +1070,7 @@ function private function_6bee2a79(v_loc, v_angles) {
   dropstruct = {
     #origin: v_loc, #angles: v_angles
   };
-  dropstruct namespace_65181344::function_fd87c780(#"sr_harvesting_zombie_essence_small_infinite", 5, 3);
+  dropstruct item_spawn_groups_util::function_fd87c780(#"sr_harvesting_zombie_essence_small_infinite", 5, 3);
 
   if(getdvarint(#"hash_730311c63805303a", 0)) {
     return;

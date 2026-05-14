@@ -26,7 +26,7 @@ function preinit() {
     return;
   }
 
-  level.var_7bd7bdc8 = [1: # "hash_6a04f899ab555f22", 2: # "hash_2964f82e2c05c8b8", 3: # "hash_54da2f2da5752d99"];
+  level.var_7bd7bdc8 = [1: #"hash_6a04f899ab555f22", 2: #"hash_2964f82e2c05c8b8", 3: #"hash_54da2f2da5752d99"];
   level.var_6e62d281 = #"hash_289962ed0e76921d";
   var_ac22a760 = struct::get_array(#"hash_3460aae6bb799a99", "content_key");
 

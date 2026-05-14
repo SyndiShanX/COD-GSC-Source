@@ -1031,7 +1031,7 @@ function function_96155e4f() {
 
 function clean_traps(all, skipto = undefined, flag = undefined) {
   if(all) {
-    level notify(#"hash_6bd910abadea6345");
+    level notify(#"traps_clean_all");
   }
 
   if(isDefined(skipto)) {
@@ -1087,7 +1087,7 @@ function function_8f66239f(flags) {
 }
 
 function function_f6ea9af9(flag) {
-  level endon(#"hash_6bd910abadea6345");
+  level endon(#"traps_clean_all");
   level notify("traps_clean" + "_" + flag);
   level endon("traps_clean" + "_" + flag);
   level flag::wait_till(flag);

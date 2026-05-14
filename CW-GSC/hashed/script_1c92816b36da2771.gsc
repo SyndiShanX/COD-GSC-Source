@@ -764,7 +764,7 @@ function function_9215d4c0(s_params) {
 
   if(attacker === level.klaus && isPlayer(level.klaus.leader)) {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
-      #attacker: level.klaus.leader, #scoreevent: # "hash_7a2b38dbc394a3e1", #enemy: self
+      #attacker: level.klaus.leader, #scoreevent: #"hash_7a2b38dbc394a3e1", #enemy: self
     });
     level.klaus.leader zm_stats::increment_challenge_stat(#"hash_708cbf9c621c9597");
   }

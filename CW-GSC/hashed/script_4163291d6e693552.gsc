@@ -333,7 +333,7 @@ function function_8eafd734() {
 
     if(isPlayer(s_result.attacker) && isalive(s_result.attacker)) {
       s_result.attacker damagefeedback::update(s_result.mod, s_result.inflictor, undefined, s_result.weapon, self);
-      self playsoundtoplayer(#"hash_2ce81d103e923201", s_result.attacker);
+      self playsoundtoplayer(#"mpl_hit_vehicle", s_result.attacker);
     }
   }
 }

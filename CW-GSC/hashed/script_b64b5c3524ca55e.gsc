@@ -1109,7 +1109,7 @@ function function_223f7204(var_75a7d6, var_b39864d6) {
         }
 
         level thread function_f83c329c(var_75a7d6, str_vo, 0, 0, undefined, {
-          #str_id: # "damage", #n_time: randomfloatrange(6, 9)
+          #str_id: #"damage", #n_time: randomfloatrange(6, 9)
         });
       }
 
@@ -1714,7 +1714,7 @@ function function_a831c582(str_ai) {
       }
 
       return {
-        #str_flag: # "mechz_disabled", #n_time: n_time
+        #str_flag: #"mechz_disabled", #n_time: n_time
       };
     case #"disciple":
       switch (n_players) {
@@ -1733,7 +1733,7 @@ function function_a831c582(str_ai) {
       }
 
       return {
-        #str_flag: # "hash_25f8eaaceeb93d67", #n_time: n_time
+        #str_flag: #"hash_25f8eaaceeb93d67", #n_time: n_time
       };
     case #"tempest":
       switch (n_players) {
@@ -1752,7 +1752,7 @@ function function_a831c582(str_ai) {
       }
 
       return {
-        #str_flag: # "tempest_disabled", #n_time: n_time
+        #str_flag: #"tempest_disabled", #n_time: n_time
       };
     case #"raz":
       switch (n_players) {
@@ -1771,7 +1771,7 @@ function function_a831c582(str_ai) {
       }
 
       return {
-        #str_flag: # "hash_88667c18a4cff07", #n_time: n_time
+        #str_flag: #"hash_88667c18a4cff07", #n_time: n_time
       };
   }
 }
@@ -1825,7 +1825,7 @@ function function_544d0383(var_75a7d6) {
 
         if(isstruct(s_spawn)) {
           return {
-            #str_ai: # "mechz", #s_spawn: s_spawn
+            #str_ai: #"mechz", #s_spawn: s_spawn
           };
         }
       }
@@ -1857,7 +1857,7 @@ function function_544d0383(var_75a7d6) {
 
         if(isstruct(s_spawn)) {
           return {
-            #str_ai: # "disciple", #s_spawn: s_spawn
+            #str_ai: #"disciple", #s_spawn: s_spawn
           };
         }
       }
@@ -1889,7 +1889,7 @@ function function_544d0383(var_75a7d6) {
 
         if(isstruct(s_spawn)) {
           return {
-            #str_ai: # "tempest", #s_spawn: s_spawn
+            #str_ai: #"tempest", #s_spawn: s_spawn
           };
         }
       }
@@ -1921,7 +1921,7 @@ function function_544d0383(var_75a7d6) {
 
         if(isstruct(s_spawn)) {
           return {
-            #str_ai: # "raz", #s_spawn: s_spawn
+            #str_ai: #"raz", #s_spawn: s_spawn
           };
         }
       }
@@ -1935,7 +1935,7 @@ function function_544d0383(var_75a7d6) {
 
     if(isstruct(s_spawn)) {
       return {
-        #str_ai: # "zombie", #s_spawn: s_spawn
+        #str_ai: #"zombie", #s_spawn: s_spawn
       };
     }
   }

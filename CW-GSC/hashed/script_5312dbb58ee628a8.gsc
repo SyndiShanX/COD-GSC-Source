@@ -1243,7 +1243,7 @@ function function_5a5ec846(e_target) {
 
   e_target.var_48be9ae2 = 1;
   s_params = {
-    #spawnid: getplayerspawnid(self.owner), #gametime: function_f8d53445(), #var_72801c4f: # "", #var_6d6e5eea: 0
+    #spawnid: getplayerspawnid(self.owner), #gametime: function_f8d53445(), #var_72801c4f: #"", #var_6d6e5eea: 0
   };
 
   if(e_target.isplayervehicle === 1) {

@@ -841,16 +841,16 @@ function function_399a3c34() {
   }
 
   var_b33f9bc7 = {
-    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_4bba939c7b77a314", #complete_callback: &interactive_map::function_fabe437a, #var_be77841a: 0
+    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_4bba939c7b77a314", #complete_callback: &interactive_map::function_fabe437a, #var_be77841a: 0
   };
   level.var_a7c109a9 = {
-    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_77bbd9b01cf5911d", #complete_callback: &function_1b3bebea, #var_be77841a: 0
+    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_77bbd9b01cf5911d", #complete_callback: &function_1b3bebea, #var_be77841a: 0
   };
   var_384bed55 = {
-    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_77bbd9b01cf5911d", #complete_callback: &function_eab15e43, #var_be77841a: 0
+    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_77bbd9b01cf5911d", #complete_callback: &function_eab15e43, #var_be77841a: 0
   };
   level.var_ac82c4c6 = {
-    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_77bbd9b01cf5911d", #complete_callback: &function_5a785465, #var_be77841a: 0
+    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_77bbd9b01cf5911d", #complete_callback: &function_5a785465, #var_be77841a: 0
   };
 
   if(level flag::get("flag_start_finding_ways")) {

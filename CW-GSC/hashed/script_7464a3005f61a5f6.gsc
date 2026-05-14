@@ -83,7 +83,7 @@ function burn(str_type, e_attacker, weapon, var_477abb8f) {
 
 function private function_8aefaae3(s_burn) {
   level endon(#"end_game");
-  self endoncallback(&function_fc2a294, #"death");
+  self endoncallback(&stop_burn_fx, #"death");
 
   if(isDefined(self.archetype)) {
     if(isDefined(s_burn.var_f472bfc)) {
@@ -153,7 +153,7 @@ function private function_8aefaae3(s_burn) {
     }
 
     if(!self.var_88421cc2.size) {
-      self function_fc2a294();
+      self stop_burn_fx();
       return;
     }
   }
@@ -163,7 +163,7 @@ function function_5e9ef773() {
   self.var_38255de6 = 1;
 }
 
-function private function_fc2a294(var_c34665fc) {
+function private stop_burn_fx(var_c34665fc) {
   if(isDefined(self.archetype)) {
     if(isDefined(self.var_a2bceb12)) {
       self clientfield::set(self.var_a2bceb12, 0);

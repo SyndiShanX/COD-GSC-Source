@@ -68,8 +68,8 @@ function function_2750bb69(weapon) {
   });
 }
 
-function function_6e6149a6(func, obj) {
-  add_callback(#"hash_1eda827ff5e6895b", func, obj);
+function on_ai_stunned(func, obj) {
+  add_callback(#"on_ai_stunned", func, obj);
 }
 
 function function_823e7181(func, obj) {

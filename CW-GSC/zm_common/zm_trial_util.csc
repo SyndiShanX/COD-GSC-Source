@@ -105,7 +105,7 @@ function private function_686840b2(localclientnum, oldval, newval, bnewent, bini
 
   if(level.var_a2859227 != 0) {
     waittillframeend();
-    level notify(#"hash_7646638df88a3656");
+    level notify(#"trial_round_end");
   }
 }
 
@@ -140,7 +140,7 @@ function private function_c3febfe1(local_client_num) {
 
 function private on_challenge_end(local_client_num) {
   if(isDefined(level.var_1420e3f6)) {
-    level notify(#"hash_7646638df88a3656");
+    level notify(#"trial_round_end");
 
     for(i = 0; i < level.var_1420e3f6.challenges.size; i++) {
       challenge = level.var_1420e3f6.challenges[i];

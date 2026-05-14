@@ -117,7 +117,7 @@ function tryusepredatormissile(killstreaktype) {
   waterdepth = self depthofplayerinwater();
 
   if(!self isonground() || self util::isusingremote() || waterdepth > 2) {
-    self iprintlnbold(#"hash_3f750164757cd400");
+    self iprintlnbold(#"killstreak/remote_missile_not_usable");
     return 0;
   }
 
@@ -244,7 +244,7 @@ function _fire(killstreaktype, player, team, killstreak_id) {
   }
 
   if(isDefined(player)) {
-    player callback::callback(#"hash_247d67dbf83dbc1a");
+    player callback::callback(#"remote_missile_started");
   }
 
   if(isDefined(level.var_d41618f6)) {
@@ -586,7 +586,7 @@ function waitthendelete(waittime) {
 
 function function_71f4cd34() {
   rocket = self;
-  var_d0c52d0b = getweapon(#"hash_33be4792feeabece");
+  var_d0c52d0b = getweapon(#"remote_missile_mini");
   mini_missile = magicbullet(var_d0c52d0b, rocket.origin, rocket.origin + anglesToForward(rocket.angles) * 1000, rocket.owner);
 }
 
@@ -709,7 +709,7 @@ function function_97f822ec(rocket, performplayerkillstreakend, unlink, team, kil
     self killstreaks::thermal_glow(0);
     self enableweaponcycling();
     killstreakrules::killstreakstop(killstreaktype, team, killstreak_id);
-    self callback::callback(#"hash_72a7670db71677f");
+    self callback::callback(#"remote_missile_ended");
 
     if(isDefined(level.var_adc813e2)) {
       level[[level.var_adc813e2]](self);
@@ -777,7 +777,7 @@ function missile_sound_play(player) {
   self.snd_first linkto(self);
   self.snd_first setinvisibletoall();
   self.snd_first setvisibletoplayer(player);
-  player playlocalsound(#"hash_520c69ce78db3657");
+  player playlocalsound(#"wpn_remote_missile_launch_plr");
   self.snd_first playLoopSound(#"wpn_remote_missile_loop_plr", 0.5);
   self thread stopondeath(self.snd_first);
   self.snd_third = spawn("script_model", self.origin);

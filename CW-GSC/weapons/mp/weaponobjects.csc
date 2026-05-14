@@ -17,7 +17,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  init_shared(sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", #"rob_sonar_set_enemyequip");
+  init_shared(sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", #"rob_sonar_set_enemyequip");
   level setupscriptmovercompassicons();
   level setupmissilecompassicons();
 }

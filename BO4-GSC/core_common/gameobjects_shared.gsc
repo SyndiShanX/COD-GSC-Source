@@ -87,7 +87,7 @@ class cinteractobj {
       return;
     }
 
-    str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : # "none";
+    str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : #"none";
 
     for(var_fb20e730 = util::get_players(m_str_team); var_fb20e730.size; var_fb20e730 = util::get_players(m_str_team)) {
       foreach(e_player in var_fb20e730) {
@@ -4128,18 +4128,18 @@ get_relative_team(team) {
   team = util::get_team_mapping(team);
 
   if(self.ownerteam == #"any") {
-    return # "friendly";
+    return #"friendly";
   }
 
   if(team == self.ownerteam) {
-    return # "friendly";
+    return #"friendly";
   }
 
   if(team == get_enemy_team(self.ownerteam)) {
-    return # "enemy";
+    return #"enemy";
   }
 
-  return # "neutral";
+  return #"neutral";
 }
 
 is_friendly_team(team) {
@@ -4314,11 +4314,11 @@ get_enemy_team(team) {
 
   switch (team) {
     case #"neutral":
-      return # "none";
+      return #"none";
     case #"allies":
-      return # "axis";
+      return #"axis";
     default:
-      return # "allies";
+      return #"allies";
   }
 }
 

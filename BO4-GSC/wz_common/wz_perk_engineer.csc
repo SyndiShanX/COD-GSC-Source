@@ -16,7 +16,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  renderoverridebundle::function_f72f089c(#"hash_f5de00feee70c13", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_8550d243);
+  renderoverridebundle::function_f72f089c(#"hash_f5de00feee70c13", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_8550d243);
   renderoverridebundle::function_f72f089c(#"hash_77f7418d2f2a7890", #"rob_sonar_set_enemyequip", &function_62888a11);
   renderoverridebundle::function_f72f089c(#"hash_61c696df3d5a1765", #"hash_44adc567f9f60d61", &function_b52a94e5);
   callback::on_localplayer_spawned(&on_localplayer_spawned);

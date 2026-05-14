@@ -2781,7 +2781,7 @@ function function_1b3d1df9(var_72aa02d6, var_6ae3683f, item_key) {
 function function_bc7dee45(s_instance, var_72aa02d6) {
   level endon(#"end_game");
   s_entry = {
-    #weapon_name: # "hash_2f22ef3b917ab0ac", #item_name: # "sr_hulk_interest_goal"};
+    #weapon_name: #"hash_2f22ef3b917ab0ac", #item_name: #"sr_hulk_interest_goal"};
 
   if(!isDefined(level.var_d385a742)) {
     level.var_d385a742 = [];
@@ -3951,7 +3951,7 @@ function function_bd97d87e(var_72aa02d6, var_eef0aa31) {
       };
 
       while(true) {
-        a_items = var_e8b254f5 namespace_65181344::function_fd87c780(var_cc1fb2d0, 1, var_98d110e6);
+        a_items = var_e8b254f5 item_spawn_groups_util::function_fd87c780(var_cc1fb2d0, 1, var_98d110e6);
         var_f3c7bdd = a_items[0];
 
         if(isDefined(var_f3c7bdd)) {
@@ -5120,17 +5120,17 @@ function function_31aa1903(s_instance) {
   level zm_vo::function_d6f8bbd9(#"hash_2a80b288016e01c5", undefined, getplayers());
   level zm_vo::function_d6f8bbd9(#"hash_2a80b188016e0012", undefined, getplayers());
   a_s_lines = [{
-    #var_7ddb4474: 30, #var_33e81c58: # "hash_609b191b5e728016"}, {
-    #var_7ddb4474: 10, #var_33e81c58: # "hash_c15ace851c6b900"}, {
-    #var_7ddb4474: 9, #var_33e81c58: # "hash_c15ade851c6bab3"}, {
-    #var_7ddb4474: 8, #var_33e81c58: # "hash_c15aee851c6bc66"}, {
-    #var_7ddb4474: 7, #var_33e81c58: # "hash_c15afe851c6be19"}, {
-    #var_7ddb4474: 6, #var_33e81c58: # "hash_c15b0e851c6bfcc"}, {
-    #var_7ddb4474: 5, #var_33e81c58: # "hash_c15b1e851c6c17f"}, {
-    #var_7ddb4474: 4, #var_33e81c58: # "hash_c15b2e851c6c332"}, {
-    #var_7ddb4474: 3, #var_33e81c58: # "hash_c15b3e851c6c4e5"}, {
-    #var_7ddb4474: 2, #var_33e81c58: # "hash_c15b4e851c6c698"}, {
-    #var_7ddb4474: 1, #var_33e81c58: # "hash_c15b5e851c6c84b"}];
+    #var_7ddb4474: 30, #var_33e81c58: #"hash_609b191b5e728016"}, {
+    #var_7ddb4474: 10, #var_33e81c58: #"hash_c15ace851c6b900"}, {
+    #var_7ddb4474: 9, #var_33e81c58: #"hash_c15ade851c6bab3"}, {
+    #var_7ddb4474: 8, #var_33e81c58: #"hash_c15aee851c6bc66"}, {
+    #var_7ddb4474: 7, #var_33e81c58: #"hash_c15afe851c6be19"}, {
+    #var_7ddb4474: 6, #var_33e81c58: #"hash_c15b0e851c6bfcc"}, {
+    #var_7ddb4474: 5, #var_33e81c58: #"hash_c15b1e851c6c17f"}, {
+    #var_7ddb4474: 4, #var_33e81c58: #"hash_c15b2e851c6c332"}, {
+    #var_7ddb4474: 3, #var_33e81c58: #"hash_c15b3e851c6c4e5"}, {
+    #var_7ddb4474: 2, #var_33e81c58: #"hash_c15b4e851c6c698"}, {
+    #var_7ddb4474: 1, #var_33e81c58: #"hash_c15b5e851c6c84b"}];
 
   while(a_s_lines.size > 0) {
     wait 0.1;
@@ -5453,22 +5453,22 @@ function function_c5021764(var_b4488d57, n_total_time) {
   var_b4488d57 endon(#"defeated");
   level thread zm_vo::function_d6f8bbd9(#"hash_2927a8560eece519", undefined, getplayers());
   a_s_lines = [{
-    #var_7ddb4474: 300, #var_33e81c58: # "hash_554487f97b3b2e5d", #var_587381ce: # "hash_73d406cdb079e626"}, {
-    #var_7ddb4474: 240, #var_33e81c58: # "hash_5c43ce1da5774d76"}, {
-    #var_7ddb4474: 180, #var_33e81c58: # "hash_3ddd66fa47ae9d9b", #var_587381ce: # "hash_797df0dbff72babc"}, {
-    #var_7ddb4474: 120, #var_33e81c58: # "hash_48e838216e6ae9bc"}, {
-    #var_7ddb4474: 60, #var_33e81c58: # "hash_6805f41751646fb1", #var_587381ce: # "hash_46a88c20ad7807f5"}, {
-    #var_7ddb4474: 30, #var_33e81c58: # "hash_67028e2fe1c8128c"}, {
-    #var_7ddb4474: 10, #var_33e81c58: # "hash_c15ace851c6b900"}, {
-    #var_7ddb4474: 9, #var_33e81c58: # "hash_c15ade851c6bab3"}, {
-    #var_7ddb4474: 8, #var_33e81c58: # "hash_c15aee851c6bc66"}, {
-    #var_7ddb4474: 7, #var_33e81c58: # "hash_c15afe851c6be19"}, {
-    #var_7ddb4474: 6, #var_33e81c58: # "hash_c15b0e851c6bfcc"}, {
-    #var_7ddb4474: 5, #var_33e81c58: # "hash_c15b1e851c6c17f"}, {
-    #var_7ddb4474: 4, #var_33e81c58: # "hash_c15b2e851c6c332"}, {
-    #var_7ddb4474: 3, #var_33e81c58: # "hash_c15b3e851c6c4e5"}, {
-    #var_7ddb4474: 2, #var_33e81c58: # "hash_c15b4e851c6c698"}, {
-    #var_7ddb4474: 1, #var_33e81c58: # "hash_c15b5e851c6c84b"}];
+    #var_7ddb4474: 300, #var_33e81c58: #"hash_554487f97b3b2e5d", #var_587381ce: #"hash_73d406cdb079e626"}, {
+    #var_7ddb4474: 240, #var_33e81c58: #"hash_5c43ce1da5774d76"}, {
+    #var_7ddb4474: 180, #var_33e81c58: #"hash_3ddd66fa47ae9d9b", #var_587381ce: #"hash_797df0dbff72babc"}, {
+    #var_7ddb4474: 120, #var_33e81c58: #"hash_48e838216e6ae9bc"}, {
+    #var_7ddb4474: 60, #var_33e81c58: #"hash_6805f41751646fb1", #var_587381ce: #"hash_46a88c20ad7807f5"}, {
+    #var_7ddb4474: 30, #var_33e81c58: #"hash_67028e2fe1c8128c"}, {
+    #var_7ddb4474: 10, #var_33e81c58: #"hash_c15ace851c6b900"}, {
+    #var_7ddb4474: 9, #var_33e81c58: #"hash_c15ade851c6bab3"}, {
+    #var_7ddb4474: 8, #var_33e81c58: #"hash_c15aee851c6bc66"}, {
+    #var_7ddb4474: 7, #var_33e81c58: #"hash_c15afe851c6be19"}, {
+    #var_7ddb4474: 6, #var_33e81c58: #"hash_c15b0e851c6bfcc"}, {
+    #var_7ddb4474: 5, #var_33e81c58: #"hash_c15b1e851c6c17f"}, {
+    #var_7ddb4474: 4, #var_33e81c58: #"hash_c15b2e851c6c332"}, {
+    #var_7ddb4474: 3, #var_33e81c58: #"hash_c15b3e851c6c4e5"}, {
+    #var_7ddb4474: 2, #var_33e81c58: #"hash_c15b4e851c6c698"}, {
+    #var_7ddb4474: 1, #var_33e81c58: #"hash_c15b5e851c6c84b"}];
   n_time_start = gettime();
 
   while(a_s_lines.size > 0) {
@@ -5531,7 +5531,7 @@ function beast_failed(s_instance, var_b4488d57) {
   wait 3;
   level.var_2e73af9b = #"beast_failed";
   level notify(#"end_game", {
-    #reason: # "hash_4e5756202af6ae94"});
+    #reason: #"hash_4e5756202af6ae94"});
 }
 
 function function_81881f85(var_b4488d57) {
@@ -6454,7 +6454,7 @@ function beast_defeated(var_b4488d57, var_5beedbc3) {
   }
 
   level notify(#"end_game", {
-    #reason: # "main_quest_completed"});
+    #reason: #"main_quest_completed"});
 }
 
 function function_d55fcc73(a_ents) {

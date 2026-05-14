@@ -224,7 +224,7 @@ function function_e3871553(var_4d2ad93e) {
     }
 
     if(isDefined(point.itementry.random_attachments)) {
-      weapon = namespace_65181344::function_67456242(point.itementry);
+      weapon = item_spawn_groups_util::function_67456242(point.itementry);
       dropitem = item_drop::drop_item(0, weapon, 1, weapon.maxammo, point.id, self.origin, self.angles);
       dropitem.hidetime = 1;
       dropitem hide();

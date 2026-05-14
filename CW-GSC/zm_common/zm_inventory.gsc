@@ -23,7 +23,7 @@ function private function_cb96f01d(mappingname, internalname, var_2972a1c0, numb
   }
 
   level.var_a16c38d9[mappingname].var_cd35dfb2 = internalname;
-  level.var_a16c38d9[mappingname].var_a88efd0b = ispersonal ? # "hash_1d3ddede734994d8" : # "zm_inventory";
+  level.var_a16c38d9[mappingname].var_a88efd0b = ispersonal ? #"hash_1d3ddede734994d8" : #"zm_inventory";
   level.var_a16c38d9[mappingname].var_2972a1c0 = var_2972a1c0;
   level.var_a16c38d9[mappingname].numbits = numbits;
   level.var_a16c38d9[mappingname].ispersonal = ispersonal;
@@ -40,9 +40,9 @@ function function_c7c05a13() {
   var_21249230 = getscriptbundle(fields.zm_inventory);
   level.var_a16c38d9 = [];
 
-  if(isDefined(var_21249230.challenges) && isDefined(var_21249230.var_5a90928f)) {
+  if(isDefined(var_21249230.challenges) && isDefined(var_21249230.challengesclientfield)) {
     clientfield = "ChallengesInfo" + "." + "stage";
-    function_cb96f01d(var_21249230.var_5a90928f, clientfield, [#"challengesinfo", #"stage"], 5, 1);
+    function_cb96f01d(var_21249230.challengesclientfield, clientfield, [#"challengesinfo", #"stage"], 5, 1);
 
     if(isDefined(var_21249230.var_f7d932ea)) {
       clientfield = "ChallengesInfo" + "." + "currentProgress";
@@ -55,7 +55,7 @@ function function_c7c05a13() {
     function_cb96f01d(var_21249230.var_88c17f11, clientfield, [#"objproginfo", #"eye", #"stage"], 2, var_21249230.var_f3d39d90);
   }
 
-  if(is_true(var_21249230.var_38b9613)) {
+  if(is_true(var_21249230.isobjprogressnonlinear)) {
     if(isDefined(var_21249230.objnonlinearprogitems)) {
       for(i = 0; i < var_21249230.objnonlinearprogitems.size; i++) {
         item = var_21249230.objnonlinearprogitems[i];
@@ -77,7 +77,7 @@ function function_c7c05a13() {
 
       if(isDefined(item.clientfield)) {
         clientfield = "PaPItems" + "." + i + 1 + "." + "stage";
-        function_cb96f01d(item.clientfield, clientfield, [#"papitems", hash(isDefined(i + 1) ? "" + i + 1 : ""), #"stage"], 2, item.var_7db3435c);
+        function_cb96f01d(item.clientfield, clientfield, [#"papitems", hash(isDefined(i + 1) ? "" + i + 1 : ""), #"stage"], 2, item.ispersonalitem);
       }
     }
   }
@@ -100,12 +100,12 @@ function function_c7c05a13() {
 
         if(isDefined(component.clientfield)) {
           var_2641997d = "WonderWeaponItems" + "." + index + "." + "stage";
-          function_cb96f01d(component.clientfield, var_2641997d, [#"wonderweaponitems", hash(isDefined(index) ? "" + index : ""), #"stage"], 3, component.var_7db3435c);
+          function_cb96f01d(component.clientfield, var_2641997d, [#"wonderweaponitems", hash(isDefined(index) ? "" + index : ""), #"stage"], 3, component.ispersonalitem);
         }
 
         if(isDefined(component.var_9f618001)) {
           var_9f618001 = "WonderWeaponItems" + "." + index + "." + "numAcquired";
-          function_cb96f01d(component.var_9f618001, var_9f618001, [#"wonderweaponitems", hash(isDefined(index) ? "" + index : ""), #"numacquired"], 2, component.var_7db3435c);
+          function_cb96f01d(component.var_9f618001, var_9f618001, [#"wonderweaponitems", hash(isDefined(index) ? "" + index : ""), #"numacquired"], 2, component.ispersonalitem);
         }
 
         index++;
@@ -117,7 +117,7 @@ function function_c7c05a13() {
     for(p = 0; p < var_21249230.shieldpieces.size; p++) {
       if(isDefined(var_21249230.shieldpieces[p].clientfield)) {
         clientfield = "ShieldPieces" + "." + p + 1 + "." + "stage";
-        function_cb96f01d(var_21249230.shieldpieces[p].clientfield, clientfield, [#"shieldpieces", hash(isDefined(p + 1) ? "" + p + 1 : ""), #"stage"], 1, var_21249230.shieldpieces[p].var_7db3435c);
+        function_cb96f01d(var_21249230.shieldpieces[p].clientfield, clientfield, [#"shieldpieces", hash(isDefined(p + 1) ? "" + p + 1 : ""), #"stage"], 1, var_21249230.shieldpieces[p].ispersonalitem);
       }
     }
   }
@@ -128,7 +128,7 @@ function function_c7c05a13() {
 
       if(isDefined(quest.var_a0ebe517)) {
         var_e7e5896d = "QuestPhaseInfos" + "." + q + 1 + "." + "phase";
-        function_cb96f01d(var_21249230.quests[q].var_a0ebe517, var_e7e5896d, [#"questphaseinfos", hash(isDefined(q + 1) ? "" + q + 1 : ""), #"phase"], 2, var_21249230.quests[q].var_7db3435c);
+        function_cb96f01d(var_21249230.quests[q].var_a0ebe517, var_e7e5896d, [#"questphaseinfos", hash(isDefined(q + 1) ? "" + q + 1 : ""), #"phase"], 2, var_21249230.quests[q].ispersonalitem);
       }
 
       var_d4cb13fd = "Quest" + q + 1;
@@ -140,7 +140,7 @@ function function_c7c05a13() {
         for(i = 0; i < phase.items.size; i++) {
           if(isDefined(phase.items[i].clientfield)) {
             var_2641997d = var_d4cb13fd + "." + index + "." + "stage";
-            function_cb96f01d(phase.items[i].clientfield, var_2641997d, [#"quest" + q + 1, hash(isDefined(index) ? "" + index : ""), #"stage"], 3, phase.items[i].var_7db3435c);
+            function_cb96f01d(phase.items[i].clientfield, var_2641997d, [#"quest" + q + 1, hash(isDefined(index) ? "" + index : ""), #"stage"], 3, phase.items[i].ispersonalitem);
           }
 
           index++;

@@ -16,7 +16,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
-#namespace namespace_c1466447;
+#namespace zm_trial_damage_during_movement;
 
 function private autoexec __init__system__() {
   system::register(#"hash_2c983afcd92a9970", &preinit, undefined, undefined, undefined);
@@ -34,7 +34,7 @@ function private preinit() {
 }
 
 function private on_begin(str_style) {
-  level.var_4ecf5754 = isDefined(str_style) ? str_style : # "silent_film";
+  level.var_4ecf5754 = isDefined(str_style) ? str_style : #"silent_film";
 
   switch (level.var_4ecf5754) {
     case #"silent_film":
@@ -110,7 +110,7 @@ function private on_player_spawned() {
 }
 
 function function_40c7a8fd() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   wait 3.5;
 
   foreach(player in getplayers()) {
@@ -125,7 +125,7 @@ function function_40c7a8fd() {
 
 function private function_69fa75f8() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     self clientfield::set_to_player("" + #"hash_1b9477ddcf30191f", 1);
@@ -147,7 +147,7 @@ function private function_69fa75f8() {
 
 function function_6d8cf829() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
 
   while(true) {
     n_perks = self.var_67ba1237.size + self.var_466b927f.size;
@@ -160,7 +160,7 @@ function private function_ad641569() {
   self notify("3d0a827cbf03ae74");
   self endon("3d0a827cbf03ae74");
   self endon(#"disconnect");
-  level endoncallback(&function_1a109202, #"hash_7646638df88a3656", #"host_migration_begin");
+  level endoncallback(&function_1a109202, #"trial_round_end", #"host_migration_begin");
 
   while(true) {
     wait randomintrangeinclusive(5, 15);
@@ -200,7 +200,7 @@ function function_1a109202(str_notify) {
 }
 
 function private function_604ff1eb() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   wait 5;
 
   foreach(player in getplayers()) {

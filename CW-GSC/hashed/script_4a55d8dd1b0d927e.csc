@@ -280,11 +280,11 @@ function private function_b6937957(var_365b725e, bomb_id) {
 function private function_bb229046(var_d27e5654) {
   switch (var_d27e5654) {
     case 1:
-      return # "hash_7c7ec5df89677b85";
+      return #"hash_7c7ec5df89677b85";
     case 2:
-      return # "hash_63b124245343a63b";
+      return #"hash_63b124245343a63b";
     case 3:
-      return # "hash_7cc89aaafecf74c7";
+      return #"hash_7cc89aaafecf74c7";
   }
 
   return undefined;
@@ -391,11 +391,11 @@ function function_ce46473d(var_668494d8, var_9b867835, var_b98754b) {
 function private function_30f7f6f8(var_d27e5654) {
   switch (var_d27e5654) {
     case 1:
-      return # "hash_6ba53a7edd3e9e8f";
+      return #"hash_6ba53a7edd3e9e8f";
     case 2:
-      return # "hash_30aa21feb2c3d1b1";
+      return #"hash_30aa21feb2c3d1b1";
     case 3:
-      return # "hash_6faacb106ef0ae85";
+      return #"hash_6faacb106ef0ae85";
     default:
       return undefined;
   }

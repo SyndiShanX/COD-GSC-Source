@@ -228,7 +228,7 @@ function private function_691948bf(cf) {
     elapsedtime = float(elapsedtime) / 1000;
   }
 
-  sound = cf == "hudItems.ammoCooldowns.equipment.lethal" ? # "hash_6d4b6b0490117874" : # "hash_23df0ddc8d4048a2";
+  sound = cf == "hudItems.ammoCooldowns.equipment.lethal" ? #"hash_6d4b6b0490117874" : #"hash_23df0ddc8d4048a2";
   self playsoundtoplayer(sound, self);
   self clientfield::set_player_uimodel(cf, 1);
   return true;

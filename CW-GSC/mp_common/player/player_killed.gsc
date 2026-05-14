@@ -606,7 +606,7 @@ function private function_42862f77(death_params, attacker, deathtimeoffset, psof
     self killcam::killcam(var_c547267e, self getentitynumber(), killcam_entity_info, death_params.weapon, death_params.smeansofdeath, self.deathtime, deathtimeoffset, psoffsettime, willrespawnimmediately, globallogic_utils::timeuntilroundend(), perks, killstreaks, death_params.attacker, keep_deathcam);
 
     if(sessionmodeiswarzonegame()) {
-      self luinotifyevent(#"hash_5b2d65a026de792d", 0);
+      self luinotifyevent(#"quick_fade_up", 0);
     }
   } else if(self.cancelkillcam) {
     if(isDefined(self.killcamsskipped)) {
@@ -842,7 +842,7 @@ function private function_4a762be0(var_c391d0a8, var_a44c7fd8, weapon_at_time_of
   if(var_c391d0a8.assisted_suicide) {
     scoreevents::processscoreevent(#"assisted_suicide", var_c391d0a8.attacker, self, var_c391d0a8.weapon);
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-      #player: self, #var_bdc4bbd2: # "assistedsuicide"});
+      #player: self, #var_bdc4bbd2: #"assistedsuicide"});
   }
 
   if(countdeath) {
@@ -1204,7 +1204,7 @@ function private function_caabcf70(victim, callbackparams, laststandparams, var_
   var_f53d817d = isDefined(laststandparams) ? laststandparams : callbackparams;
   var_ee2f4691 = isDefined(var_a1d415ee) ? var_a1d415ee : callbackparams;
   function_ad11630f(victim, var_f53d817d.victimorigin, var_f53d817d.victimangles, var_f53d817d.victimweapon, var_f53d817d.attacker, var_f53d817d.attackerorigin, var_f53d817d.attackerangles, var_f53d817d.weapon, var_f53d817d.matchtime, var_f53d817d.shitloc, var_f53d817d.smeansofdeath, var_ee2f4691.attacker, var_ee2f4691.attackerorigin, var_ee2f4691.attackerangles, var_ee2f4691.weapon, var_ee2f4691.matchtime, var_ee2f4691.shitloc, var_ee2f4691.smeansofdeath);
-  lifeindex = victim match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+  lifeindex = victim match_record::get_player_stat(#"current_life_index");
 
   if(isDefined(lifeindex) && isDefined(victim) && isPlayer(victim)) {
     victimindex = victim match_record::get_player_index();
@@ -1417,7 +1417,7 @@ function private update_weapon_stats(attacker, weapon, smeansofdeath, inflictor)
 
       self stats::function_eec52333(victim_weapon, #"deathsduringuse", 1, self.class_num, victimweaponpickedup);
       level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-        #player: self, #weapon: victim_weapon, #statname: # "deathsduringuse", #value: 1, #weaponpickedup: victimweaponpickedup
+        #player: self, #weapon: victim_weapon, #statname: #"deathsduringuse", #value: 1, #weaponpickedup: victimweaponpickedup
       });
     }
 
@@ -1437,14 +1437,14 @@ function private update_weapon_stats(attacker, weapon, smeansofdeath, inflictor)
 
         attacker stats::function_eec52333(inflictor.ownerweaponatlaunch, #"kills", 1, attacker.class_num, inflictorownerweaponatlaunchpickedup, 1);
         level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-          #player: attacker, #weapon: inflictor.ownerweaponatlaunch, #statname: # "kills", #value: 1, #weaponpickedup: inflictorownerweaponatlaunchpickedup
+          #player: attacker, #weapon: inflictor.ownerweaponatlaunch, #statname: #"kills", #value: 1, #weaponpickedup: inflictorownerweaponatlaunchpickedup
         });
       } else {
         attacker stats::function_eec52333(weapon, #"kills", 1, attacker.class_num, attackerweaponpickedup);
         attacker stats::function_80099ca1(weapon.name, #"best_kills");
         attacker stats::function_e24eec31(weapon, #"hash_49b586d05aaa0209", 1);
         level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-          #player: attacker, #weapon: weapon, #statname: # "kills", #value: 1, #weaponpickedup: attackerweaponpickedup
+          #player: attacker, #weapon: weapon, #statname: #"kills", #value: 1, #weaponpickedup: attackerweaponpickedup
         });
       }
     }
@@ -1457,7 +1457,7 @@ function private update_weapon_stats(attacker, weapon, smeansofdeath, inflictor)
       }
 
       level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-        #player: attacker, #weapon: weapon, #statname: # "headshots", #value: 1, #weaponpickedup: attackerweaponpickedup
+        #player: attacker, #weapon: weapon, #statname: #"headshots", #value: 1, #weaponpickedup: attackerweaponpickedup
       });
     }
 
@@ -1731,7 +1731,7 @@ function function_f632c17e(weapon) {
     case #"hash_17df39d53492b0bf":
     case #"tank_robot_launcher_turret":
     case #"ac130_chaingun":
-    case #"hash_7b24d0d0d2823bca":
+    case #"ac130_autocannon":
       return true;
   }
 
@@ -2531,7 +2531,7 @@ function updatekillstreak(einflictor, attacker, weapon) {
           }
 
           var_dbaa74e2 = {
-            #notificationtype: # "streak", #var_c874a8ab: var_c874a8ab
+            #notificationtype: #"streak", #var_c874a8ab: var_c874a8ab
           };
 
           if(var_6456e8ec <= 30) {
@@ -2557,7 +2557,7 @@ function updatekillstreak(einflictor, attacker, weapon) {
               }
 
               attacker.var_ea1458aa.var_2bad4cbb++;
-              attacker challenges::function_a4db0a4c();
+              attacker challenges::multikill_2_killstreak_5();
             }
           }
         }

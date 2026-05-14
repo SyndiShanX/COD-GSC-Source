@@ -637,7 +637,7 @@ function function_90185171(totaltimeplayed, iswinner) {
 
   if(var_e521cb78 > 0) {
     if((sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) && getdvarint(#"hash_2f8caf73a89c7179", 1)) {
-      var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 1);
+      var_ae857992 = getdvarint(#"loot_season_number", 1);
       var_f406f7e3 = getdvarstring(#"hash_714f877764f473ea", "");
       total_time = int(var_e521cb78 * getdvarfloat(#"hash_4a9ebeef00abd6cb", 1));
 
@@ -678,8 +678,8 @@ function private function_d6f929d6(winner) {
   level.var_4f654f3a = 1;
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
-      var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
+    if(isDefined(player.pers[#"first_connect_time"])) {
+      var_28ee869a = gettime() - player.pers[#"first_connect_time"];
       iswinner = player iswinner(winner);
       player function_659f7dc(var_28ee869a, iswinner);
     }
@@ -821,7 +821,7 @@ function controllerparticipationcheck() {
     if(var_b06a954d < level.var_b6752258) {
       if(!self.pers[#"controllerparticipationinactivitywarnings"]) {
         self.pers[#"controllerparticipationinactivitywarnings"]++;
-        self iprintlnbold(#"hash_59bd89e170a924ac");
+        self iprintlnbold(#"game/inactivedropwarning");
       } else {
         self.pers[#"controllerparticipationendgameresult"] = -2;
 
@@ -850,7 +850,7 @@ function function_57d8515c() {
 
   var_37c0d246 = 25;
   level.var_5b7e9056 = isDefined(getgametypesetting(#"hash_410c5c7c1e60b534")) ? getgametypesetting(#"hash_410c5c7c1e60b534") : 0;
-  level.var_df437ed2 = isDefined(getgametypesetting(#"hash_451245a24412d90f")) ? getgametypesetting(#"hash_451245a24412d90f") : 0;
+  level.controllerparticipationcheckinterval = isDefined(getgametypesetting(#"controllerparticipationcheckinterval")) ? getgametypesetting(#"controllerparticipationcheckinterval") : 0;
   level.var_42dca1dd = isDefined(getgametypesetting(#"hash_6ae29c8144cb7659")) ? getgametypesetting(#"hash_6ae29c8144cb7659") : 0;
   level.var_8e1c2aa1 = isDefined(getgametypesetting(#"hash_35e9fc8eee6881e0")) ? getgametypesetting(#"hash_35e9fc8eee6881e0") : 0;
   level.var_5d96cc20 = isDefined(getgametypesetting(#"hash_7adb62a64c6d963")) ? getgametypesetting(#"hash_7adb62a64c6d963") : 0;
@@ -861,7 +861,7 @@ function function_57d8515c() {
   level waittill(#"game_playing");
 
   for(;;) {
-    wait level.var_df437ed2;
+    wait level.controllerparticipationcheckinterval;
     playerschecked = 0;
     players = getplayers();
 
@@ -1401,7 +1401,7 @@ function multikill(killcount, weapon) {
     }
 
     self.var_ea1458aa.var_e0bfa611++;
-    self function_a4db0a4c();
+    self multikill_2_killstreak_5();
   }
 
   if(isDefined(level.var_c8de519d.multikill)) {
@@ -1409,7 +1409,7 @@ function multikill(killcount, weapon) {
   }
 }
 
-function function_a4db0a4c() {
+function multikill_2_killstreak_5() {
   if(!isDefined(self.var_ea1458aa.var_e0bfa611)) {
     return;
   }
@@ -1419,7 +1419,7 @@ function function_a4db0a4c() {
   }
 
   if(self.var_ea1458aa.var_e0bfa611 > 0 && self.var_ea1458aa.var_2bad4cbb > 0) {
-    self stats::function_dad108fa(#"hash_5803a1b332accd42", 1);
+    self stats::function_dad108fa(#"multikill_2_killstreak_5", 1);
     self.var_ea1458aa.var_e0bfa611 = undefined;
     self.var_ea1458aa.var_2bad4cbb = undefined;
   }
@@ -1515,7 +1515,7 @@ function multi_rcbomb_kill() {
 }
 
 function function_46754062() {
-  self stats::function_dad108fa(#"hash_709699a31c8f89f7", 1);
+  self stats::function_dad108fa(#"multikill_2_rcxd", 1);
 }
 
 function multi_remotemissile_kill() {
@@ -2003,7 +2003,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
           var_f09a5f22 = 1;
           break;
         case #"gadget_supplypod":
-          var_5e93fb70 = sqr(isDefined(level.var_934fb97.bundle.var_366f43e9) ? level.var_934fb97.bundle.var_366f43e9 : 512);
+          var_5e93fb70 = sqr(isDefined(level.var_934fb97.bundle.kstriggerradius) ? level.var_934fb97.bundle.kstriggerradius : 512);
           var_f09a5f22 = 1;
           break;
         case #"trophy_system":

@@ -804,7 +804,7 @@ function function_31125f54() {
       }
 
       player zm_stats::increment_challenge_stat(#"hash_1a7ff6d1e1ff03b0");
-      level.var_7c7c6c35 zm_game_over::set_state(player, isDefined(level.var_9f6064a4) ? level.var_9f6064a4 : # "hash_4677c7e6d02d1a65");
+      level.var_7c7c6c35 zm_game_over::set_state(player, isDefined(level.var_9f6064a4) ? level.var_9f6064a4 : #"hash_4677c7e6d02d1a65");
       player zm_stats::function_9daadcaa("survivalOutcome", isDefined(level.var_73677dfc) ? level.var_73677dfc : 1);
       player function_3a488e53(0);
       player function_8cf53a19();
@@ -887,7 +887,7 @@ function function_31125f54() {
         player playerstreamerrequest("clear", player.var_231881b1[level.var_8bb7479c]);
       }
 
-      level.var_7c7c6c35 zm_game_over::set_state(player, isDefined(level.var_9f6064a4) ? level.var_9f6064a4 : # "hash_5f1b73095bbb3a7a");
+      level.var_7c7c6c35 zm_game_over::set_state(player, isDefined(level.var_9f6064a4) ? level.var_9f6064a4 : #"hash_5f1b73095bbb3a7a");
       player zm_stats::function_9daadcaa("survivalOutcome", isDefined(level.var_73677dfc) ? level.var_73677dfc : 2);
 
       if(is_true(player.var_1bee6f4b)) {

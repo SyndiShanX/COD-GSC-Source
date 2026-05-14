@@ -174,7 +174,7 @@ function function_b3964dc9() {
 
   player = self;
   player function_3f65d5d3();
-  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_ee32e40c182320b");
+  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"downbutnotout_transition");
 }
 
 function function_f4c03c3b() {
@@ -183,7 +183,7 @@ function function_f4c03c3b() {
   }
 
   self.var_58f00ca2 = 1;
-  self thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
+  self thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"team_elimination_transition");
 }
 
 function function_1caf5c87(team) {
@@ -193,13 +193,13 @@ function function_1caf5c87(team) {
   foreach(player in players) {
     if(player != self) {
       player.var_58f00ca2 = 1;
-      player thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
+      player thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"team_elimination_transition");
     }
   }
 
   if(self.team == team) {
     self.var_58f00ca2 = 1;
-    self function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
+    self function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"team_elimination_transition");
   }
 }
 
@@ -267,15 +267,15 @@ function private function_8feabee3(transition, outcome) {}
 function private function_a3c90acf(transition, outcome) {}
 
 function private function_26bbb839(transition, outcome) {
-  thread function_b8e20f5f(transition, outcome, transition.slowdown, transition.var_d7f20c92, &function_9185f489);
+  thread function_b8e20f5f(transition, outcome, transition.slowdown, transition.slowdowntimestart, &function_9185f489);
   thread function_b8e20f5f(transition, outcome, transition.freezeplayers, transition.freezetime, &function_a3b4d41d);
-  thread function_b8e20f5f(transition, outcome, transition.var_b0bc6ae0, transition.var_8d7c57a2, &function_8feabee3);
+  thread function_b8e20f5f(transition, outcome, transition.announcehalftime, transition.var_8d7c57a2, &function_8feabee3);
   thread function_b8e20f5f(transition, outcome, transition.var_738bf790, transition.var_8dc11094, &function_a3c90acf);
-  thread function_b8e20f5f(transition, outcome, transition.var_619875ca, transition.var_73f860db, &function_b7fec738);
-  thread function_b8e20f5f(transition, outcome, transition.var_7a712c7, transition.var_a803fe51, &function_66713ac);
-  thread function_b8e20f5f(transition, outcome, transition.var_93a95648, transition.var_de820e2d, &function_654c0030);
+  thread function_b8e20f5f(transition, outcome, transition.announceencouragement, transition.var_73f860db, &function_b7fec738);
+  thread function_b8e20f5f(transition, outcome, transition.announceroundswitchsides, transition.var_a803fe51, &function_66713ac);
+  thread function_b8e20f5f(transition, outcome, transition.announceendgame, transition.var_de820e2d, &function_654c0030);
   thread function_b8e20f5f(transition, outcome, transition.var_f9995c63, transition.var_41fc87a8, &function_d9d842b2);
-  thread function_b8e20f5f(transition, outcome, transition.pickup_message, transition.var_5026a297, &function_e22f5208);
+  thread function_b8e20f5f(transition, outcome, transition.pickup_message, transition.playerintermissiontime, &function_e22f5208);
 }
 
 function checkroundswitch() {
@@ -378,7 +378,7 @@ function function_752a920f() {
 
 function function_d7b5082e() {
   if(isDefined(self.pers[#"totalmatchbonus"])) {
-    self luinotifyevent(#"hash_9dfc8d44ea4547e", 1, self.pers[#"totalmatchbonus"]);
+    self luinotifyevent(#"match_bonus_notify", 1, self.pers[#"totalmatchbonus"]);
   }
 }
 
@@ -402,7 +402,7 @@ function function_40a46b5b(transition, outcome) {
     return true;
   }
 
-  if(is_true(transition.var_b5dabc6b)) {
+  if(is_true(transition.skipfinalround)) {
     if(util::waslastround() || util::isoneround()) {
       return true;
     }
@@ -487,7 +487,7 @@ function round_end_wait(time) {
     return;
   }
 
-  level waittilltimeout(time * level.var_49d9aa70, #"hash_197c640e2f684a74");
+  level waittilltimeout(time * level.var_49d9aa70, #"force_end_transition");
 }
 
 function function_ad717b18(var_c139bfe2) {

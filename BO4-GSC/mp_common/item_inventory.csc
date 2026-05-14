@@ -969,10 +969,10 @@ function_d2f05352() {
 
 function_fe189514(itementry) {
   if(isDefined(itementry) && isDefined(itementry.weapon)) {
-    return (isDefined(itementry.weapon.name) ? itementry.weapon.name : # "");
+    return (isDefined(itementry.weapon.name) ? itementry.weapon.name : #"");
   }
 
-  return # "";
+  return #"";
 }
 
 function_1a99656a(localclientnum, inventoryitem, networkid, itemid, count, totalcount, availableaction, var_e35261f6 = 1, var_189fcf49 = 0, var_1204dfe9 = 1) {
@@ -1077,7 +1077,7 @@ function_1a99656a(localclientnum, inventoryitem, networkid, itemid, count, total
     function_442857e2(localclientnum, var_1c54cff7);
   } else {
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "name"), item_world::get_item_name(item.itementry));
-    setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "icon"), isDefined(item.itementry.icon) ? item.itementry.icon : # "blacktransparent");
+    setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "icon"), isDefined(item.itementry.icon) ? item.itementry.icon : #"blacktransparent");
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "rarity"), isDefined(item.itementry.rarity) ? item.itementry.rarity : "None");
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "assetName"), function_fe189514(item.itementry));
     armormax = 0;
@@ -1087,12 +1087,12 @@ function_1a99656a(localclientnum, inventoryitem, networkid, itemid, count, total
     }
 
     setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "armorMax"), armormax);
-    description = isDefined(item.itementry.description) ? item.itementry.description : # "";
+    description = isDefined(item.itementry.description) ? item.itementry.description : #"";
 
     if(getDvar(#"wz_mp_character_unlocks_outfits", 0) == 1) {
       if(isDefined(item.itementry.unlockableitemref)) {
         if(isDefined(item.itementry.outfitunlockdescription)) {
-          description = isDefined(item.itementry.outfitunlockdescription) ? item.itementry.outfitunlockdescription : # "";
+          description = isDefined(item.itementry.outfitunlockdescription) ? item.itementry.outfitunlockdescription : #"";
         }
       }
     }
@@ -2933,7 +2933,7 @@ function_9116bb0e(localclientnum, closed = 0) {
       }
 
       if(ispc()) {
-        description = isDefined(itemdef.itementry.description) ? itemdef.itementry.description : # "";
+        description = isDefined(itemdef.itementry.description) ? itemdef.itementry.description : #"";
 
         if(description == #"" && isDefined(itemdef.itementry.weapon)) {
           itemindex = getitemindexfromref(itemdef.itementry.weapon.name);
@@ -2944,12 +2944,12 @@ function_9116bb0e(localclientnum, closed = 0) {
           }
         }
 
-        setuimodelvalue(createuimodel(itemmodel, "description"), isDefined(description) ? description : # "");
+        setuimodelvalue(createuimodel(itemmodel, "description"), isDefined(description) ? description : #"");
       }
 
       pickupicon = isDefined(itemdef.itementry.pickupicon) ? itemdef.itementry.pickupicon : itemdef.itementry.icon;
       stashicon = isDefined(itemdef.itementry.stashicon) ? itemdef.itementry.stashicon : pickupicon;
-      setuimodelvalue(createuimodel(itemmodel, "icon"), isDefined(stashicon) ? stashicon : # "blacktransparent");
+      setuimodelvalue(createuimodel(itemmodel, "icon"), isDefined(stashicon) ? stashicon : #"blacktransparent");
       setuimodelvalue(createuimodel(itemmodel, "rarity"), itemdef.itementry.rarity);
       setuimodelvalue(createuimodel(itemmodel, "name"), item_world::get_item_name(itemdef.itementry));
       setuimodelvalue(createuimodel(itemmodel, "claimsInventorySlot"), is_inventory_item(localclientnum, itemdef.itementry) && !function_a4a6f064(localclientnum, itemdef.itementry));

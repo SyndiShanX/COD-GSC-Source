@@ -56,7 +56,7 @@ function function_6e084fd3(var_37ecca7, taacombundle) {
       bundlename = taacombundle.var_4129b7a;
       break;
     case #"drone_squadron":
-      bundlename = taacombundle.var_69a9ca12;
+      bundlename = taacombundle.dronesquadrondialogbundle;
       break;
     case #"sig_bow_flame":
       bundlename = taacombundle.var_82cefc8c;
@@ -66,7 +66,7 @@ function function_6e084fd3(var_37ecca7, taacombundle) {
       break;
     case #"ac130":
     case #"inventory_ac130":
-      bundlename = taacombundle.var_71693229;
+      bundlename = taacombundle.gunnershipdialogbundle;
       break;
     case #"hero_pineapplegun":
       bundlename = taacombundle.var_dcfac86e;
@@ -118,7 +118,7 @@ function function_6e084fd3(var_37ecca7, taacombundle) {
       bundlename = taacombundle.supplydropdialogbundle;
       break;
     case #"swat_team":
-      bundlename = taacombundle.var_d93fd150;
+      bundlename = taacombundle.swatteamdialogbundle;
       break;
     case #"uav":
       bundlename = taacombundle.uavdialogbundle;

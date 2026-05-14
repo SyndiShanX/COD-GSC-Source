@@ -73,8 +73,8 @@ function initscoreinfo() {
       var_b6cc2245 = tablelookupcolumnforrow(scoreinfotablename, row, 12);
       is_deprecated = tablelookupcolumnforrow(scoreinfotablename, row, 21);
       bounty_reward = tablelookupcolumnforrow(scoreinfotablename, row, 22);
-      var_65181181 = int(isDefined(tablelookupcolumnforrow(scoreinfotablename, row, 24)) ? tablelookupcolumnforrow(scoreinfotablename, row, 24) : 0);
-      registerscoreinfo(type, row, lp, xp, sp, hs, res, dp, is_objective, label, medalname, var_b6cc2245, is_deprecated, bounty_reward, var_65181181);
+      mark2_bonus_xp = int(isDefined(tablelookupcolumnforrow(scoreinfotablename, row, 24)) ? tablelookupcolumnforrow(scoreinfotablename, row, 24) : 0);
+      registerscoreinfo(type, row, lp, xp, sp, hs, res, dp, is_objective, label, medalname, var_b6cc2245, is_deprecated, bounty_reward, mark2_bonus_xp);
 
       if(!isDefined(game.scoreinfoinitialized)) {
         setddlstat = var_b6cc2245;
@@ -92,7 +92,7 @@ function initscoreinfo() {
           ismedal = 1;
         }
 
-        registerxp(type, xp, addplayerstat, ismedal, dp, row, var_65181181);
+        registerxp(type, xp, addplayerstat, ismedal, dp, row, mark2_bonus_xp);
       }
     }
   }
@@ -100,7 +100,7 @@ function initscoreinfo() {
   game.scoreinfoinitialized = 1;
 }
 
-function registerscoreinfo(type, row, lp, xp, sp, hs, res, dp, is_obj, label, medalname, var_b6cc2245, is_deprecated, bounty_reward, var_65181181) {
+function registerscoreinfo(type, row, lp, xp, sp, hs, res, dp, is_obj, label, medalname, var_b6cc2245, is_deprecated, bounty_reward, mark2_bonus_xp) {
   overridedvar = "scr_" + level.gametype + "_score_" + type;
 
   if(getdvarstring(overridedvar) != "") {
@@ -172,8 +172,8 @@ function registerscoreinfo(type, row, lp, xp, sp, hs, res, dp, is_obj, label, me
       level.scoreinfo[type][#"bounty_reward"] = bounty_reward;
     }
 
-    if(is_true(var_65181181)) {
-      level.scoreinfo[type][#"hash_691aeaca4a1866e3"] = var_65181181;
+    if(is_true(mark2_bonus_xp)) {
+      level.scoreinfo[type][#"mark2_bonus_xp"] = mark2_bonus_xp;
     }
 
     return;
@@ -209,8 +209,8 @@ function getscoreinfovalue(type) {
       assert(isint(n_score));
     }
 
-    var_1eb7c454 = getdvarfloat(#"hash_eae9a8ee387705d", 1);
-    n_score = int(n_score * var_1eb7c454);
+    dev_score_multiplier = getdvarfloat(#"dev_score_multiplier", 1);
+    n_score = int(n_score * dev_score_multiplier);
 
     return n_score;
   }
@@ -230,7 +230,7 @@ function getscoreinfoposition(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_pos = isDefined(level.scoreinfo[type][#"hash_7c1f7c7897445706"]) ? level.scoreinfo[type][#"hash_7c1f7c7897445706"] : 0;
+    n_pos = isDefined(level.scoreinfo[type][#"role_defining"]) ? level.scoreinfo[type][#"role_defining"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_pos)) {
       n_resource = [[level.scoremodifiercallback]](type, n_pos);

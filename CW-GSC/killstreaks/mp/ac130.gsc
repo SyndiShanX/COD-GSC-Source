@@ -51,7 +51,7 @@ function function_d45a1f8d(einflictor, attacker, idamage, smeansofdeath, weapon,
   if(shitloc.owner == psoffsettime && deathanimduration.statname == "ac130") {
     if(deathanimduration == getweapon(#"hash_17df39d53492b0bf")) {
       var_f9e67747 = 0;
-    } else if(deathanimduration == getweapon(#"hash_7b24d0d0d2823bca")) {
+    } else if(deathanimduration == getweapon(#"ac130_autocannon")) {
       var_f9e67747 = 1;
     } else {
       var_f9e67747 = 2;

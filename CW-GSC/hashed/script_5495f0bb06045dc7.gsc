@@ -138,7 +138,7 @@ function on_start_game_type() {
   level.displayroundendtext = 0;
   level.var_992e9235 = [];
   level thread spawn::function_e93291ff();
-  level callback::add_callback(#"hash_774be40ec06d5212", &function_bcde1e07);
+  level callback::add_callback(#"player_insertion_force_drop", &function_bcde1e07);
   level flag::clear(#"spawning_allowed");
   laststand_mp::function_414115a0(90, 150);
   laststand_mp::function_414115a0(25, 150);
@@ -172,7 +172,7 @@ function function_3b0db3c2() {
   }
 
   level.prematchperiod = max(level.prematchperiod, 5);
-  level waittill(#"hash_78e53817cafb5265");
+  level waittill(#"start_warzone_button");
   println("<dev string:x3c>");
 
   if(level.var_b02808b6) {
@@ -199,7 +199,7 @@ function start_warzone() {
   teams::function_344e464d();
 
   if(is_true(level.spawnsystem.deathcirclerespawn)) {
-    level callback::add_callback(#"hash_3057417db7f8acdd", &function_77319881);
+    level callback::add_callback(#"death_circle_moving", &function_77319881);
   }
 
   function_65469e2e();
@@ -881,7 +881,7 @@ function function_73b0f715(player) {
     }
   }
 
-  level notify(#"hash_78e53817cafb5265");
+  level notify(#"start_warzone_button");
 }
 
 function function_a3e209ba() {
@@ -990,7 +990,7 @@ function function_77319881() {
 
   if(!util::function_47851c07()) {
     player_reinsertion::function_8ea9be1c();
-    level callback::remove_callback(#"hash_3057417db7f8acdd", &function_77319881);
+    level callback::remove_callback(#"death_circle_moving", &function_77319881);
   }
 }
 
@@ -1006,7 +1006,7 @@ function function_1f93e91f(params) {
 function private function_293cd859(ent) {
   if(isPlayer(ent)) {
     data = {
-      #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: # "player"};
+      #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: #"player"};
     function_92d1707f(#"hash_5820ed7a498888c4", data);
     return;
   }

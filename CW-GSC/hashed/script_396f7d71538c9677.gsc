@@ -125,7 +125,7 @@ function function_5d15920e(dialogkey, playerbundle) {
     return "MOD_DROWN";
   }
 
-  if(dialogkey === playerbundle.var_44d86dec) {
+  if(dialogkey === playerbundle.exertexplosive) {
     return "MOD_EXPLOSIVE";
   }
 
@@ -133,11 +133,11 @@ function function_5d15920e(dialogkey, playerbundle) {
     return "MOD_BURNED";
   }
 
-  if(dialogkey === playerbundle.var_207908de) {
+  if(dialogkey === playerbundle.exertdeathheadshot) {
     return "MOD_HEAD_SHOT";
   }
 
-  if(dialogkey === playerbundle.var_1dfcabbd) {
+  if(dialogkey === playerbundle.exertdeathfalling) {
     return "MOD_FALLING";
   }
 
@@ -149,7 +149,7 @@ function function_5d15920e(dialogkey, playerbundle) {
     return "MOD_DOT_SELF";
   }
 
-  if(dialogkey === playerbundle.var_f8b4bcc1) {
+  if(dialogkey === playerbundle.exertdeathradiation) {
     return "MOD_DOT";
   }
 

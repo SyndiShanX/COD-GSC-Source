@@ -236,8 +236,8 @@ function private function_2d28a3b3(data) {
     primary_weapon = self.weapon_array_primary[0];
   }
 
-  playerdata.var_4f84f11f = isDefined(primary_weapon.statname) ? primary_weapon.statname : # "";
-  playerdata.var_1fc74cc3 = hash(isDefined(var_4e4f65c9.itementry.rarity) ? var_4e4f65c9.itementry.rarity : # "");
+  playerdata.var_4f84f11f = isDefined(primary_weapon.statname) ? primary_weapon.statname : #"";
+  playerdata.var_1fc74cc3 = hash(isDefined(var_4e4f65c9.itementry.rarity) ? var_4e4f65c9.itementry.rarity : #"");
   playerdata.var_7acc0bf9 = [];
 
   if(isDefined(primary_weapon.attachments) && primary_weapon.attachments.size > 0) {
@@ -270,8 +270,8 @@ function private function_2d28a3b3(data) {
     secondary_weapon = self.weapon_array_primary[1];
   }
 
-  playerdata.var_e6cbc2be = isDefined(secondary_weapon.statname) ? secondary_weapon.statname : # "";
-  playerdata.var_882c8428 = hash(isDefined(var_ec323ef9.itementry.rarity) ? var_ec323ef9.itementry.rarity : # "");
+  playerdata.var_e6cbc2be = isDefined(secondary_weapon.statname) ? secondary_weapon.statname : #"";
+  playerdata.var_882c8428 = hash(isDefined(var_ec323ef9.itementry.rarity) ? var_ec323ef9.itementry.rarity : #"");
   playerdata.var_a76d2c9b = [];
 
   if(isDefined(secondary_weapon.attachments) && secondary_weapon.attachments.size > 0) {
@@ -304,8 +304,8 @@ function private function_2d28a3b3(data) {
     var_5b871ec1 = self.weapon_array_primary[2];
   }
 
-  playerdata.var_a1806a93 = isDefined(var_5b871ec1.statname) ? var_5b871ec1.statname : # "";
-  playerdata.var_de02c9bb = hash(isDefined(var_b8061637.itementry.rarity) ? var_b8061637.itementry.rarity : # "");
+  playerdata.var_a1806a93 = isDefined(var_5b871ec1.statname) ? var_5b871ec1.statname : #"";
+  playerdata.var_de02c9bb = hash(isDefined(var_b8061637.itementry.rarity) ? var_b8061637.itementry.rarity : #"");
   playerdata.var_561e72d = [];
 
   if(isDefined(var_5b871ec1.attachments) && var_5b871ec1.attachments.size > 0) {
@@ -362,7 +362,7 @@ function private function_4bd3e96c() {
 
       if(isDefined(var_fa5921b6) && var_fa5921b6 > 0) {
         var_cad81941 = {
-          #weapon_name: weapon_name, #time_used_s: isDefined(weapon_struct[#"timeused"]) ? weapon_struct[#"timeused"] : 0, #kills: isDefined(weapon_struct[#"kills"]) ? weapon_struct[#"kills"] : 0, #shots: isDefined(weapon_struct[#"shots"]) ? weapon_struct[#"shots"] : 0, #hits: isDefined(weapon_struct[#"hits"]) ? weapon_struct[#"hits"] : 0, #var_fa5921b6: isDefined(weapon_struct[#"xpearned"]) ? weapon_struct[#"xpearned"] : 0, #game_type: hash(isDefined(level.gametype) ? level.gametype : # ""), #round_number: zm_utility::get_round_number(), #star_level: zm_utility::function_e3025ca5(), #flourish_count: isDefined(weapon_struct[#"flourish_count"]) ? weapon_struct[#"flourish_count"] : 0
+          #weapon_name: weapon_name, #time_used_s: isDefined(weapon_struct[#"timeused"]) ? weapon_struct[#"timeused"] : 0, #kills: isDefined(weapon_struct[#"kills"]) ? weapon_struct[#"kills"] : 0, #shots: isDefined(weapon_struct[#"shots"]) ? weapon_struct[#"shots"] : 0, #hits: isDefined(weapon_struct[#"hits"]) ? weapon_struct[#"hits"] : 0, #var_fa5921b6: isDefined(weapon_struct[#"xpearned"]) ? weapon_struct[#"xpearned"] : 0, #game_type: hash(isDefined(level.gametype) ? level.gametype : #""), #round_number: zm_utility::get_round_number(), #star_level: zm_utility::function_e3025ca5(), #flourish_count: isDefined(weapon_struct[#"flourish_count"]) ? weapon_struct[#"flourish_count"] : 0
         };
         self function_678f57c8(#"hash_2da62e026250c65e", var_cad81941);
       }
@@ -737,7 +737,7 @@ function private function_8a38be09(params) {
   }
 
   var_bdad1c21 = {
-    #var_579fb993: level.script, #var_e4ca5a4b: level.var_7cb19409, #var_c2b4f8d0: level.var_b48509f9, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : # "")
+    #var_579fb993: level.script, #var_e4ca5a4b: level.var_7cb19409, #var_c2b4f8d0: level.var_b48509f9, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
   };
   function_92d1707f(#"hash_424c5668eaeebb31", var_bdad1c21);
 }
@@ -759,7 +759,7 @@ function private function_e89b1c3f(params) {
   }
 
   var_bdad1c21 = {
-    #var_579fb993: isDefined(level.script) ? level.script : "", #var_e4ca5a4b: isDefined(level.var_7cb19409) ? level.var_7cb19409 : 0, #var_44bf1770: function_f8d53445(), #var_395efa0a: isDefined(var_199a2a04) ? var_199a2a04 : 0, #var_c2b4f8d0: isDefined(var_b48509f9) ? var_b48509f9 : 0, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : # "")
+    #var_579fb993: isDefined(level.script) ? level.script : "", #var_e4ca5a4b: isDefined(level.var_7cb19409) ? level.var_7cb19409 : 0, #var_44bf1770: function_f8d53445(), #var_395efa0a: isDefined(var_199a2a04) ? var_199a2a04 : 0, #var_c2b4f8d0: isDefined(var_b48509f9) ? var_b48509f9 : 0, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
   };
   level.var_7cb19409 = undefined;
   function_92d1707f(#"hash_424c5668eaeebb31", var_bdad1c21);
@@ -884,7 +884,7 @@ function private on_ai_killed(params) {
   }
 
   var_f374c9b5 = {
-    #archetype: isDefined(self.archetype) ? self.archetype : # "", #death_type: isDefined(death_type) ? death_type : # "", #meansofdeath: isDefined(params.smeansofdeath) ? params.smeansofdeath : "", #var_39872854: isDefined(var_39872854) ? var_39872854 : 0, #damage_dealt: int(isDefined(self.telemetry.damage_dealt) ? self.telemetry.damage_dealt : 0), #weapon: isDefined(params.weapon.statname) ? params.weapon.statname : # "", #var_da2dc026: int(isDefined(var_da2dc026) ? var_da2dc026 : 0), #var_b968cd78: float(isDefined(var_b968cd78) ? var_b968cd78 : 0), #round_number: int(zm_utility::get_round_number()), #star_level: int(zm_utility::function_e3025ca5()), #targetname: isDefined(self.targetname) ? self.targetname : "", #gametype: hash(isDefined(level.gametype) ? level.gametype : # ""), #mapname: hash(isDefined(util::get_map_name()) ? util::get_map_name() : # "")
+    #archetype: isDefined(self.archetype) ? self.archetype : #"", #death_type: isDefined(death_type) ? death_type : #"", #meansofdeath: isDefined(params.smeansofdeath) ? params.smeansofdeath : "", #var_39872854: isDefined(var_39872854) ? var_39872854 : 0, #damage_dealt: int(isDefined(self.telemetry.damage_dealt) ? self.telemetry.damage_dealt : 0), #weapon: isDefined(params.weapon.statname) ? params.weapon.statname : #"", #var_da2dc026: int(isDefined(var_da2dc026) ? var_da2dc026 : 0), #var_b968cd78: float(isDefined(var_b968cd78) ? var_b968cd78 : 0), #round_number: int(zm_utility::get_round_number()), #star_level: int(zm_utility::function_e3025ca5()), #targetname: isDefined(self.targetname) ? self.targetname : "", #gametype: hash(isDefined(level.gametype) ? level.gametype : #""), #mapname: hash(isDefined(util::get_map_name()) ? util::get_map_name() : #"")
   };
   var_b850e84d = undefined;
 
@@ -905,7 +905,7 @@ function private on_ai_killed(params) {
 
 function function_882720b2(data) {
   struct = {
-    #var_454ec645: isDefined(data.spot[0]) ? data.spot[0] : 0, #var_ef461a45: isDefined(data.spot[1]) ? data.spot[1] : 0, #var_d3ace313: isDefined(data.spot[2]) ? data.spot[2] : 0, #mapname: hash(isDefined(util::get_map_name()) ? util::get_map_name() : # ""), #gametype: hash(isDefined(level.gametype) ? level.gametype : # ""), #var_88277fd8: isDefined(level.var_9678e62d.size) ? level.var_9678e62d.size : 0
+    #var_454ec645: isDefined(data.spot[0]) ? data.spot[0] : 0, #var_ef461a45: isDefined(data.spot[1]) ? data.spot[1] : 0, #var_d3ace313: isDefined(data.spot[2]) ? data.spot[2] : 0, #mapname: hash(isDefined(util::get_map_name()) ? util::get_map_name() : #""), #gametype: hash(isDefined(level.gametype) ? level.gametype : #""), #var_88277fd8: isDefined(level.var_9678e62d.size) ? level.var_9678e62d.size : 0
   };
 
   if(isDefined(data.player)) {
@@ -916,7 +916,7 @@ function function_882720b2(data) {
 function function_9cac835e(data) {
   if(isDefined(data.weapon)) {
     update_weapon_stats({
-      #player: self, #weapon: data.weapon, #statname: # "flourish_count", #value: 1, #weaponpickedup: 0
+      #player: self, #weapon: data.weapon, #statname: #"flourish_count", #value: 1, #weaponpickedup: 0
     });
   }
 }

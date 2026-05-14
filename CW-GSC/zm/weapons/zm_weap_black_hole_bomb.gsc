@@ -329,7 +329,7 @@ function function_f7e9dfd7() {
 }
 
 function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vortex_time, svortex, eattacker, weapon) {
-  team = isDefined(level.zombie_team) ? level.zombie_team : # "axis";
+  team = isDefined(level.zombie_team) ? level.zombie_team : #"axis";
 
   for(n_currtime = 0; n_currtime <= n_vortex_time; n_currtime = gettime() - n_start_time) {
     a_ai_zombies = function_72d3bca6(getaiteamarray(team), v_vortex_origin, undefined, undefined, n_vortex_radius);

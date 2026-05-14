@@ -61,8 +61,8 @@ class csceneplayer: csceneobject {
       return;
     }
 
-    self notify(#"hash_30095f69ee804b7e");
-    self endon(#"hash_30095f69ee804b7e");
+    self notify(#"scene_player_on_death");
+    self endon(#"scene_player_on_death");
     _o_scene endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_3168dab591a18b9b");
     s_waitresult = _e waittill(#"death");
     var_1f97724a = 1;
@@ -151,7 +151,7 @@ class csceneplayer: csceneobject {
         player dontinterpolate();
       }
 
-      player flag::set(#"hash_7cddd51e45d3ff3e");
+      player flag::set(#"non_shared_igc");
     }
 
     csceneobject::function_a04fb5f4();
@@ -213,7 +213,7 @@ class csceneplayer: csceneobject {
     }
 
     if(isDefined(player)) {
-      player flag::clear(#"hash_7cddd51e45d3ff3e");
+      player flag::clear(#"non_shared_igc");
     }
 
     if(!isDefined(player) || !player isplayinganimscripted()) {
@@ -341,8 +341,8 @@ class csceneplayer: csceneobject {
       return;
     }
 
-    player notify(#"hash_375ad02201949a8d");
-    player endon(#"camanimscripted", #"hash_375ad02201949a8d", #"disconnect");
+    player notify(#"start_delay_end_camera");
+    player endon(#"camanimscripted", #"start_delay_end_camera", #"disconnect");
 
     if(!scene::function_6a0b0afe(_o_scene._str_mode)) {
       _o_scene waittilltimeout(0.1, #"scene_done", #"scene_stop", #"scene_skip_completed");
@@ -426,7 +426,7 @@ class csceneplayer: csceneobject {
       return;
     }
 
-    if(csceneobject::is_shared_player() && player flag::get(#"hash_7cddd51e45d3ff3e")) {
+    if(csceneobject::is_shared_player() && player flag::get(#"non_shared_igc")) {
       return;
     }
 
@@ -434,7 +434,7 @@ class csceneplayer: csceneobject {
       printtoprightln("<dev string:x167>");
     }
 
-    player notify(#"hash_7ba9e3058f933eb");
+    player notify(#"stop_interactive_shot");
     player.disable_last_stand = undefined;
     player.scene_set_visible_time = level.time;
     player setvisibletoall();
@@ -597,7 +597,7 @@ class csceneplayer: csceneobject {
   function check_input(player, var_ec50a0d3, var_966ea21d) {
     if(isbot(player) && function_c503dca9(player, var_ec50a0d3)) {
       if(player scene::function_268bfc72() && var_966ea21d) {
-        if(player flag::get(#"hash_6ce14241f77af1e7")) {
+        if(player flag::get(#"interactive_shot_in_combat")) {
           return "combat";
         } else if(var_ec50a0d3.var_9532f6db == "move_up" || var_ec50a0d3.var_9532f6db == "move_right") {
           if(player scene::function_6d361d2d()) {
@@ -627,7 +627,7 @@ class csceneplayer: csceneobject {
       return 0;
     }
 
-    if(player flag::get(#"hash_6ce14241f77af1e7") && !is_true(var_ec50a0d3.var_441cbab8) && var_966ea21d) {
+    if(player flag::get(#"interactive_shot_in_combat") && !is_true(var_ec50a0d3.disablecombat) && var_966ea21d) {
       return "combat";
     }
 
@@ -653,7 +653,7 @@ class csceneplayer: csceneobject {
       case #"melee":
         return (player meleeButtonPressed() ? 1 : 0);
       case #"attack":
-        return (!player flag::get(#"hash_6ce14241f77af1e7") && var_966ea21d ? 1 : 0);
+        return (!player flag::get(#"interactive_shot_in_combat") && var_966ea21d ? 1 : 0);
       case #"dpad_up":
         return (player actionslotonebuttonPressed() ? 1 : 0);
       case #"dpad_down":
@@ -681,8 +681,8 @@ class csceneplayer: csceneobject {
       return;
     }
 
-    player notify(#"hash_7ba9e3058f933eb");
-    player endon(#"hash_7ba9e3058f933eb", #"death");
+    player notify(#"stop_interactive_shot");
+    player endon(#"stop_interactive_shot", #"death");
     b_movement = 1;
     var_1c45c7f8 = 0;
     var_966ea21d = 0;
@@ -796,7 +796,7 @@ class csceneplayer: csceneobject {
           thread function_9a7dd9f2(player);
           return;
         }
-      } else if(result === "combat" && !is_true(var_ec50a0d3.var_441cbab8)) {
+      } else if(result === "combat" && !is_true(var_ec50a0d3.disablecombat)) {
         if(isarray(player.var_8826a030) && player.var_8826a030.size) {
           var_c09527fe = arraygetclosest(player.origin, player.var_8826a030);
           v_to_target = var_c09527fe.origin - player.origin;
@@ -827,7 +827,7 @@ class csceneplayer: csceneobject {
 
         player notify(#"hash_feb654ece8faa3d");
 
-        while(player flag::get(#"hash_6ce14241f77af1e7")) {
+        while(player flag::get(#"interactive_shot_in_combat")) {
           waitframe(1);
         }
 
@@ -1008,9 +1008,9 @@ class csceneplayer: csceneobject {
   function _stop(b_dont_clear_anim, b_finished) {
     if(isalive(_e)) {
       _e notify(#"scene_stop");
-      _e notify(#"hash_7ba9e3058f933eb");
+      _e notify(#"stop_interactive_shot");
       stop_camera(_e);
-      _e flag::clear(#"hash_7cddd51e45d3ff3e");
+      _e flag::clear(#"non_shared_igc");
 
       if(!is_true(_s.diewhenfinished) || !b_finished) {
         _e animation::stop(0.2);
@@ -1303,7 +1303,7 @@ class csceneplayer: csceneobject {
     if(isPlayer(player) && [[_o_scene]] - > is_scene_shared() && (var_2bb59a6a || scene::function_46546b5c(_o_scene._str_name)) && !csceneobject::is_skipping_scene()) {
       player thread scene::function_a4ad0308(_o_scene);
 
-      if(var_2bb59a6a && getdvarint(#"hash_44f3b54c25dfae3b", 0)) {
+      if(var_2bb59a6a && getdvarint(#"scr_scene_postfx_cateye", 0)) {
         player clientfield::set_to_player("postfx_cateye", 1);
       }
     }
@@ -1391,7 +1391,7 @@ class csceneplayer: csceneobject {
     player notify(#"hash_940a817baf9765e", {
       #str_input: var_a0332034
     });
-    s_waitresult = player waittill(#"hash_7ba9e3058f933eb", #"hash_feb654ece8faa3d", #"death");
+    s_waitresult = player waittill(#"stop_interactive_shot", #"hash_feb654ece8faa3d", #"death");
 
     if(isDefined(player) && level.interactive_shot interactive_shot::is_open(player)) {
       level.interactive_shot interactive_shot::close(player);
@@ -1518,7 +1518,7 @@ class csceneplayer: csceneobject {
   }
 
   function function_d4446494(player) {
-    player endon(#"hash_7ba9e3058f933eb", #"hash_feb654ece8faa3d", #"death");
+    player endon(#"stop_interactive_shot", #"hash_feb654ece8faa3d", #"death");
 
     while(true) {
       s_waitresult = player waittill(#"hash_940a817baf9765e");
@@ -1938,7 +1938,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
     foreach(player in a_players) {
       player show();
 
-      if(!player flag::get(#"hash_7cddd51e45d3ff3e")) {
+      if(!player flag::get(#"non_shared_igc")) {
         player setinvisibletoall();
       }
     }

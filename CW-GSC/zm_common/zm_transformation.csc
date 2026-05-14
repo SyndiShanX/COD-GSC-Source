@@ -16,7 +16,7 @@ function private preinit() {
 }
 
 function function_201c2cb7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : # "hash_435832b390f73dff");
+  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : #"hash_435832b390f73dff");
 }
 
 function function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -26,8 +26,8 @@ function function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap
     if(isDefined(settingsbundle) && isDefined(settingsbundle.var_d354164e)) {
       foreach(var_127d3a7a in settingsbundle.var_d354164e) {
         if(self.model === var_127d3a7a.var_a3c9023c) {
-          util::lock_model(var_127d3a7a.var_cdf1f53d);
-          self thread function_8a817bd6(var_127d3a7a.var_cdf1f53d);
+          util::lock_model(var_127d3a7a.splitmdl);
+          self thread function_8a817bd6(var_127d3a7a.splitmdl);
           break;
         }
       }

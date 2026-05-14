@@ -198,7 +198,7 @@ function setupfordefusing() {
   self gameobjects::allow_use(#"group_friendly");
   self gameobjects::set_use_time(level.defusetime);
   self gameobjects::set_use_text(#"mp/defusing_explosive");
-  self gameobjects::set_use_hint_text(#"hash_754b795109a2bbba");
+  self gameobjects::set_use_hint_text(#"platform/hold_to_defuse_explosives");
   self gameobjects::set_visible(#"group_all");
 }
 
@@ -412,12 +412,12 @@ function onuseobject(player) {
       player stats::function_dad108fa(#"plants_defuses", 1);
       player recordgameevent("plant");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "plant"});
+        #player: player, #eventtype: #"plant"});
     } else {
       player iprintlnbold("<dev string:xde>");
     }
 
-    level thread popups::displayteammessagetoall(#"hash_12473d7e6ed6e752", player);
+    level thread popups::displayteammessagetoall(#"mp/explosives_planted_by", player);
     globallogic_audio::leader_dialog("bombPlanted");
     return;
   }
@@ -444,7 +444,7 @@ function onuseobject(player) {
     player stats::function_dad108fa(#"plants_defuses", 1);
     player recordgameevent("defuse");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: player, #eventtype: # "defuse"});
+      #player: player, #eventtype: #"defuse"});
   } else {
     player iprintlnbold("<dev string:x136>");
   }

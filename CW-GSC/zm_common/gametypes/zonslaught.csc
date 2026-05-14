@@ -39,7 +39,7 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::register("scriptmover", "bot_claim_fx", 1, 2, "int", &bot_claim_fx, 0, 0);
   clientfield::register("actor", "orb_soul_capture_fx", 1, 3, "int", &orb_soul_capture_fx, 0, 0);
   clientfield::register("actor", "zombie_aether_spawn_cf", 1, 1, "int", &function_ace38635, 0, 0);
-  level.var_7bd7bdc8 = [1: # "hash_6a04f899ab555f22", 2: # "hash_2964f82e2c05c8b8", 3: # "hash_54da2f2da5752d99"];
+  level.var_7bd7bdc8 = [1: #"hash_6a04f899ab555f22", 2: #"hash_2964f82e2c05c8b8", 3: #"hash_54da2f2da5752d99"];
   level.var_6e62d281 = #"hash_289962ed0e76921d";
   onslaught_hud::register();
   level.var_12da60e6 = 1;

@@ -257,7 +257,7 @@ function activate_elixir(n_index) {
         has_succeeded = self function_5d618bb4(str_bgb, n_index);
 
         if(has_succeeded) {
-          self notify(#"hash_27b238d082f65849", str_bgb);
+          self notify(#"bgb_gumball_anim_activate", str_bgb);
           self bgb::activation_start();
           self thread bgb::run_activation_func(str_bgb);
         }
@@ -841,7 +841,7 @@ function private function_c1091a8f(str_cmd, key) {
     case #"hash_972ca08eb9fbf0c":
       level.var_4af38aa3 = 0;
       break;
-    case #"hash_628ffe45aab5f07":
+    case #"dev_cooldowns_on":
       level.var_7c3d4959 = 1;
       break;
     case #"default_cooldowns":

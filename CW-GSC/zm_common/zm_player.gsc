@@ -575,7 +575,7 @@ function function_8ef51109(var_fb6fa3e1, var_bbbf9a69) {
     assert(getdvarint(#"hash_6d3c5317001d4fc6", 0) == 0, "<dev string:x139>");
     level flag::set(#"hash_4e5756202af6ae94");
     level notify(#"end_game", {
-      #reason: # "hash_4e5756202af6ae94"});
+      #reason: #"hash_4e5756202af6ae94"});
   }
 }
 
@@ -1982,7 +1982,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
 
   level flag::set(#"hash_4e5756202af6ae94");
   level notify(#"end_game", {
-    #reason: # "last_player_died"});
+    #reason: #"last_player_died"});
   return 0;
 }
 

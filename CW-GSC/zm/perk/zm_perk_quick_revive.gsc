@@ -126,7 +126,7 @@ function function_3037364a(e_revivee) {
   e_revivee endon(#"hash_4d93608c4b0fd45a", #"player_revived");
   e_revivee.var_6fc48a11 = 0;
   revivetime = 3;
-  e_revivee thread laststand::revive_hud_show_n_fade(#"hash_12e2c5e29f8ce6ad", 3, self);
+  e_revivee thread laststand::revive_hud_show_n_fade(#"zombie/player_is_reviving_you", 3, self);
   e_revivee startrevive(self);
 
   while(true) {

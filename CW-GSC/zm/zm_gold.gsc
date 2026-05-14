@@ -1320,8 +1320,8 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case #"hash_50d92ca3c6c7c2a8":
-      function_71a6c3ea();
+    case #"super_open_sesame":
+      super_open_sesame();
       break;
     case #"hash_1faf9b6b2b3c3575":
       setDvar(#"hash_11a7075c2b20fe1d", 1);
@@ -1345,8 +1345,8 @@ function cmd(cmd) {
   }
 }
 
-function function_71a6c3ea() {
-  level notify(#"hash_50d92ca3c6c7c2a8");
+function super_open_sesame() {
+  level notify(#"super_open_sesame");
   level.var_f925c697 = 1;
   zm_devgui::zombie_devgui_open_sesame();
   zm_power::turn_power_on_and_open_doors(1);

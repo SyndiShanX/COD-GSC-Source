@@ -29,7 +29,7 @@ function preinit() {
   }
 
   clientfield::register("scriptmover", "" + #"reward_fx", 1, 1, "int", &reward_fx, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 1, 3, "int", &function_9ed71eeb, 0, 0);
+  clientfield::register("scriptmover", "" + #"tribute_flame_fx", 1, 3, "int", &tribute_flame_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_3dbe7851af541017", 1, 1, "int", &function_7cae1028, 0, 0);
   clientfield::register("toplayer", "" + #"hash_31bea9cf1e6f76a0", 1, getminbitcountfornum(level.var_957b495e), "int", &function_bb753058, 0, 1);
   clientfield::register("toplayer", "" + #"hash_216c75103f478671", 1, 4, "int", &function_b5557b14, 0, 0);
@@ -48,7 +48,7 @@ function function_dbc7fe67(localclientnum, oldval, newval, bnewent, binitialsnap
   level.var_806707ab[level.var_806707ab.size] = self;
 }
 
-function function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function tribute_flame_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self.var_9c32107c)) {
     stopfx(fieldname, self.var_9c32107c);
     self.var_9c32107c = undefined;
@@ -163,7 +163,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
     case 5:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");
       str_model = zm_intel::function_12e3769(var_d5fa8477);
-      str_model = isDefined(str_model) ? str_model : # "hash_51840445e2753066";
+      str_model = isDefined(str_model) ? str_model : #"hash_51840445e2753066";
 
       iprintlnbold("<dev string:x38>");
 
@@ -174,7 +174,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
     case 7:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d", #"audiolog");
       str_model = zm_intel::function_12e3769(var_d5fa8477);
-      str_model = isDefined(str_model) ? str_model : # "p9_sur_machine_computer_screen_no_play_prog";
+      str_model = isDefined(str_model) ? str_model : #"p9_sur_machine_computer_screen_no_play_prog";
 
       iprintlnbold("<dev string:x4f>");
 
@@ -185,7 +185,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
     case 9:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");
       str_model = zm_intel::function_12e3769(var_d5fa8477);
-      str_model = isDefined(str_model) ? str_model : # "hash_30acea553928ba42";
+      str_model = isDefined(str_model) ? str_model : #"hash_30acea553928ba42";
 
       iprintlnbold("<dev string:x64>");
 

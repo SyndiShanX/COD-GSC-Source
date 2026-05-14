@@ -55,7 +55,7 @@ setlowermessage(text, time) {
     return;
   }
 
-  level.lower_message lower_message::set_message(self, isDefined(text) ? text : # "");
+  level.lower_message lower_message::set_message(self, isDefined(text) ? text : #"");
 
   if(isDefined(time) && time > 0) {
     level.lower_message lower_message::set_countdowntimeseconds(self, int(time));

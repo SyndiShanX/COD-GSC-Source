@@ -97,7 +97,7 @@ function function_5e443ed1() {
   setDvar(#"ik_terrain_vel_max", 150);
   var_4a3ec1d1 = getgametypesetting(#"hash_72a2919d2ac65850");
   setDvar(#"hash_7188be5be867a9ba", var_4a3ec1d1);
-  setDvar(#"hash_862358d532e674c", var_4a3ec1d1);
+  setDvar(#"scr_scene_skip_custom_games", var_4a3ec1d1);
   level.aitriggerspawnflags = getaitriggerflags();
   level.vehicletriggerspawnflags = getvehicletriggerflags();
   level flag::init("wait_and_revive");

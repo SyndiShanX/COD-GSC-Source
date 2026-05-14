@@ -233,7 +233,7 @@ function_8b87e57c(timer_label, grace_period, timer_value, var_1215371f) {
   }
 
   wait grace_period;
-  timer_label = isDefined(timer_label) ? timer_label : # "";
+  timer_label = isDefined(timer_label) ? timer_label : #"";
   level thread function_14a98a41(timer_label, timer_value);
 
   foreach(player in getplayers()) {

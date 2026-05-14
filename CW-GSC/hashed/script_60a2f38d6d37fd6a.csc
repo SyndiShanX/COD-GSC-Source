@@ -35,149 +35,149 @@ function init() {
   level.doa.var_f5ac1256 = array({
     #id: 0, #audio: undefined, #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 1, #audio: # "hash_5e6e1452ec83a970", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 1, #audio: #"hash_5e6e1452ec83a970", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 2, #audio: # "hash_2eb0dc04b23c744d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 2, #audio: #"hash_2eb0dc04b23c744d", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 3, #audio: # "hash_7e54ced7572851c2", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 3, #audio: #"hash_7e54ced7572851c2", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 4, #audio: # "hash_651f3b290bc84446", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 4, #audio: #"hash_651f3b290bc84446", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 5, #audio: # "hash_1fc99b8da3b17545", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 5, #audio: #"hash_1fc99b8da3b17545", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 6, #audio: # "hash_28b747b591669a5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 6, #audio: #"hash_28b747b591669a5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 7, #audio: # "hash_7c7a787a24f593b9", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 7, #audio: #"hash_7c7a787a24f593b9", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 8, #audio: # "hash_2e05ff4b6268eb8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 8, #audio: #"hash_2e05ff4b6268eb8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 9, #audio: # "hash_6e6f540341ffa63e", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 9, #audio: #"hash_6e6f540341ffa63e", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 10, #audio: # "hash_43afff6856f17323", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 10, #audio: #"hash_43afff6856f17323", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 11, #audio: # "hash_1b1aedb93f9470ac", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 11, #audio: #"hash_1b1aedb93f9470ac", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 12, #audio: # "hash_2ee1c63f7404a4d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 12, #audio: #"hash_2ee1c63f7404a4d", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 13, #audio: # "hash_2c81ef7c33bb5cf8", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 13, #audio: #"hash_2c81ef7c33bb5cf8", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 14, #audio: # "hash_3dc9e95c1bb57e9b", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 14, #audio: #"hash_3dc9e95c1bb57e9b", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 15, #audio: # "hash_7d54a35ebdfd55bd", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 15, #audio: #"hash_7d54a35ebdfd55bd", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 16, #audio: # "hash_3a54bd27d22124f0", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 16, #audio: #"hash_3a54bd27d22124f0", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 17, #audio: # "hash_5b52ce536f868c5e", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 17, #audio: #"hash_5b52ce536f868c5e", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 18, #audio: # "hash_1f86f42144bb9e8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 18, #audio: #"hash_1f86f42144bb9e8f", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 19, #audio: # "hash_1241db745382fb45", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 19, #audio: #"hash_1241db745382fb45", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 20, #audio: # "hash_160facb2f210d511", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 20, #audio: #"hash_160facb2f210d511", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 21, #audio: # "hash_6ced3e7dc041cd89", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 21, #audio: #"hash_6ced3e7dc041cd89", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 22, #audio: # "hash_77520fd1edf0a38a", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 22, #audio: #"hash_77520fd1edf0a38a", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 23, #audio: # "hash_1bf394b62878774b", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 23, #audio: #"hash_1bf394b62878774b", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 24, #audio: # "hash_5067551b940e90b5", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 24, #audio: #"hash_5067551b940e90b5", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 25, #audio: # "hash_3d81295463455fe", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 25, #audio: #"hash_3d81295463455fe", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 26, #audio: # "hash_19ff2f6b0c853b6", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 26, #audio: #"hash_19ff2f6b0c853b6", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 27, #audio: # "hash_622c69a771466aae", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 27, #audio: #"hash_622c69a771466aae", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 28, #audio: # "hash_46f6b3325650d2db", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 28, #audio: #"hash_46f6b3325650d2db", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 29, #audio: # "hash_38c6db33d9b9bb6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 29, #audio: #"hash_38c6db33d9b9bb6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 30, #audio: # "hash_6c635274e16696bd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 30, #audio: #"hash_6c635274e16696bd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 31, #audio: # "hash_4d2fd562754a4f01", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 31, #audio: #"hash_4d2fd562754a4f01", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 32, #audio: # "hash_670e9e1a3893d870", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 32, #audio: #"hash_670e9e1a3893d870", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 33, #audio: # "hash_2b25bf7cb60724a1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 33, #audio: #"hash_2b25bf7cb60724a1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 34, #audio: # "hash_91466a80e98968f", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 34, #audio: #"hash_91466a80e98968f", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 35, #audio: # "hash_72a785fee3fe1546", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 35, #audio: #"hash_72a785fee3fe1546", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 36, #audio: # "hash_5dcdc3449e3d853c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 36, #audio: #"hash_5dcdc3449e3d853c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 37, #audio: # "hash_70176ca9d7eadea2", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 37, #audio: #"hash_70176ca9d7eadea2", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 38, #audio: # "hash_17c7fe1f6f3a34f0", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 38, #audio: #"hash_17c7fe1f6f3a34f0", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 39, #audio: # "hash_4dc16a7fdcca84cc", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 39, #audio: #"hash_4dc16a7fdcca84cc", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 40, #audio: # "hash_5db798a7f60563d7", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 40, #audio: #"hash_5db798a7f60563d7", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 41, #audio: # "hash_459e9ed04815fe9c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 41, #audio: #"hash_459e9ed04815fe9c", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 42, #audio: # "hash_9274c6731fb7feb", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 42, #audio: #"hash_9274c6731fb7feb", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 43, #audio: # "hash_5bf27744a0b10d1e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 43, #audio: #"hash_5bf27744a0b10d1e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 44, #audio: # "hash_1958839e85f66720", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 44, #audio: #"hash_1958839e85f66720", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 45, #audio: # "hash_1997e34d69a45b73", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 45, #audio: #"hash_1997e34d69a45b73", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 46, #audio: # "hash_113008b2061dab6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 46, #audio: #"hash_113008b2061dab6b", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 47, #audio: # "hash_2427c3aea88f9fd1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 47, #audio: #"hash_2427c3aea88f9fd1", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 48, #audio: # "hash_6175054f39a3e1dd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 48, #audio: #"hash_6175054f39a3e1dd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 49, #audio: # "hash_37d228f1a7b7933d", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 49, #audio: #"hash_37d228f1a7b7933d", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 50, #audio: # "hash_3058c912ba06ce02", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 50, #audio: #"hash_3058c912ba06ce02", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 51, #audio: # "hash_6f7330fa470cb5e8", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 51, #audio: #"hash_6f7330fa470cb5e8", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 52, #audio: # "hash_5f4f49fa863187fd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 52, #audio: #"hash_5f4f49fa863187fd", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 53, #audio: # "hash_5be1c74545ae242a", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 53, #audio: #"hash_5be1c74545ae242a", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 54, #audio: # "hash_18d7c7d333aa151e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 54, #audio: #"hash_18d7c7d333aa151e", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 55, #audio: # "hash_7742a96850eaf496", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 55, #audio: #"hash_7742a96850eaf496", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 56, #audio: # "hash_7522904a63119317", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 56, #audio: #"hash_7522904a63119317", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 57, #audio: # "hash_43c91102fff01c96", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 57, #audio: #"hash_43c91102fff01c96", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 58, #audio: # "hash_4a892234ff034660", #cooldown: 120000, #var_2c036085: 0, #roll: 5
+    #id: 58, #audio: #"hash_4a892234ff034660", #cooldown: 120000, #var_2c036085: 0, #roll: 5
   }, {
-    #id: 59, #audio: # "hash_7286e11306aa412f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 59, #audio: #"hash_7286e11306aa412f", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 60, #audio: # "hash_31e0e727b7ea0fcb", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 60, #audio: #"hash_31e0e727b7ea0fcb", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 61, #audio: # "hash_680b8403f9f66646", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 61, #audio: #"hash_680b8403f9f66646", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 62, #audio: # "hash_15428efb31882884", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 62, #audio: #"hash_15428efb31882884", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 63, #audio: # "hash_7fb87667c443733d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 63, #audio: #"hash_7fb87667c443733d", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 64, #audio: # "hash_2ff2890b37cb4b5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 64, #audio: #"hash_2ff2890b37cb4b5d", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 65, #audio: # "hash_175054f8f6fc7dde", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 65, #audio: #"hash_175054f8f6fc7dde", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 66, #audio: # "hash_4eb136f9afa3e768", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 66, #audio: #"hash_4eb136f9afa3e768", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 67, #audio: # "hash_7708cf29dde5f73a", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 67, #audio: #"hash_7708cf29dde5f73a", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 68, #audio: # "hash_1aaf39243ecd3c87", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 68, #audio: #"hash_1aaf39243ecd3c87", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 69, #audio: # "hash_5bf427da9381b39f", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 69, #audio: #"hash_5bf427da9381b39f", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 70, #audio: # "hash_6838acfd05bcf2ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 70, #audio: #"hash_6838acfd05bcf2ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 71, #audio: # "hash_340c9ca061a5fde2", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 71, #audio: #"hash_340c9ca061a5fde2", #cooldown: 0, #var_2c036085: 0, #roll: 100
   }, {
-    #id: 72, #audio: # "hash_6020f714caec40ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
+    #id: 72, #audio: #"hash_6020f714caec40ab", #cooldown: 0, #var_2c036085: 0, #roll: 100
   });
   function_32d5e898();
 }

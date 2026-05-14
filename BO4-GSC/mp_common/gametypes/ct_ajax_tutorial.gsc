@@ -604,7 +604,7 @@ function_9d1bba67() {
   ct_vo::function_3ca1b77d();
   a_str_vo = array(#"hash_4e9d7116bf0098eb", #"hash_4e9d7216bf009a9e");
   e_player = getplayers()[0];
-  var_9bc42298 = e_player gamepadusedlast() ? # "hash_137d47e2a7f7225c" : # "hash_4894195236e0698";
+  var_9bc42298 = e_player gamepadusedlast() ? #"hash_137d47e2a7f7225c" : #"hash_4894195236e0698";
   e_player thread ct_utils::function_61c3d59c(var_9bc42298, a_str_vo);
   a_str_vo = array(#"hash_622d320255f505fa");
   level thread ct_vo::function_14b08e49(a_str_vo, "shield_deployed");
@@ -1219,7 +1219,7 @@ function_e9b5de80() {
     level.var_e72728b8 = array(#"sig_buckler_dw", #"eq_swat_grenade");
     e_player thread function_a9e6b1aa();
     e_player = getplayers()[0];
-    var_f89d1864 = e_player gamepadusedlast() ? # "hash_4ebfe875c2651663" : # "hash_39ef32192475cedd";
+    var_f89d1864 = e_player gamepadusedlast() ? #"hash_4ebfe875c2651663" : #"hash_39ef32192475cedd";
     e_player thread ct_utils::function_61c3d59c(var_f89d1864, undefined);
     e_player thread ct_vo::function_261ed63c("vox_tvoi_tutor_ajax_final_event_3_active_nag", 30, 20);
 

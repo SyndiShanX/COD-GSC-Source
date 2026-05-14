@@ -44,7 +44,7 @@ function clearirtarget() {
     clientnum = self getentitynumber();
 
     if((self.stingertarget.locked_on & 1 << clientnum) != 0) {
-      self notify(#"hash_41e93a518427847c");
+      self notify(#"locked_on_lost");
     }
 
     self lockingon(self.stingertarget, 0);
@@ -421,7 +421,7 @@ function displaylockoncanceledmessage() {
   self.lockoncanceledmessage.hidewheninmenu = 1;
   self.lockoncanceledmessage.archived = 0;
   self.lockoncanceledmessage.alpha = 1;
-  self.lockoncanceledmessage settext(#"hash_31537402e7b1c369");
+  self.lockoncanceledmessage settext(#"mp/cannot_lockon_to_target");
 }
 
 function private function_d656e945(team) {

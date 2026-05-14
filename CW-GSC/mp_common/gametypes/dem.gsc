@@ -132,22 +132,22 @@ function getbetterteam() {
   }
 
   if(kills[#"allies"] > kills[#"axis"]) {
-    return # "allies";
+    return #"allies";
   } else if(kills[#"axis"] > kills[#"allies"]) {
-    return # "axis";
+    return #"axis";
   }
 
   if(deaths[#"allies"] < deaths[#"axis"]) {
-    return # "allies";
+    return #"allies";
   } else if(deaths[#"axis"] < deaths[#"allies"]) {
-    return # "axis";
+    return #"axis";
   }
 
   if(randomint(2) == 0) {
-    return # "allies";
+    return #"allies";
   }
 
-  return # "axis";
+  return #"axis";
 }
 
 function onstartgametype() {
@@ -252,7 +252,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         attacker thread challenges::killedbasedefender(bombzone.trigger);
         scoreevents::processscoreevent("killed_defender", attacker, self, weapon);
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: self, #var_bdc4bbd2: # "defending"});
+          #player: self, #var_bdc4bbd2: #"defending"});
         attacker challenges::function_2f462ffd(self, weapon, einflictor, bombzone.trigger);
         attacker.pers[#"objectiveekia"]++;
         attacker.objectiveekia = attacker.pers[#"objectiveekia"];
@@ -278,7 +278,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         attacker thread challenges::killedbaseoffender(bombzone.trigger, weapon, einflictor);
         scoreevents::processscoreevent("killed_attacker", attacker, self, weapon);
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: self, #var_bdc4bbd2: # "assaulting"});
+          #player: self, #var_bdc4bbd2: #"assaulting"});
         attacker challenges::function_2f462ffd(self, weapon, einflictor, bombzone.trigger);
         attacker.pers[#"objectiveekia"]++;
         attacker.objectiveekia = attacker.pers[#"objectiveekia"];
@@ -292,12 +292,12 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
   if(self.isplanting == 1) {
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-      #player: self, #var_bdc4bbd2: # "planting"});
+      #player: self, #var_bdc4bbd2: #"planting"});
   }
 
   if(self.isdefusing == 1) {
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-      #player: self, #var_bdc4bbd2: # "defusing"});
+      #player: self, #var_bdc4bbd2: #"defusing"});
   }
 }
 
@@ -729,12 +729,12 @@ function onuseobject(player) {
       scoreevents::processscoreevent("planted_bomb", player, undefined, undefined);
       player recordgameevent("plant");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "plant"});
+        #player: player, #eventtype: #"plant"});
     } else {
       player iprintlnbold("<dev string:xde>");
     }
 
-    level thread popups::displayteammessagetoall(#"hash_12473d7e6ed6e752", player);
+    level thread popups::displayteammessagetoall(#"mp/explosives_planted_by", player);
     globallogic_audio::leader_dialog("bombPlanted");
     return;
   }
@@ -763,7 +763,7 @@ function onuseobject(player) {
     scoreevents::processscoreevent("defused_bomb", player, undefined, undefined);
     player recordgameevent("defuse");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: player, #eventtype: # "defuse"});
+      #player: player, #eventtype: #"defuse"});
   } else {
     player iprintlnbold("<dev string:x136>");
   }
@@ -944,7 +944,7 @@ function bombplanted(destroyedobj, player) {
 
     player recordgameevent("destroy");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: player, #eventtype: # "destroy"});
+      #player: player, #eventtype: #"destroy"});
   } else {
     destroyedobj.visuals[0] radiusdamage(explosionorigin, 512, 200, 20, undefined, "MOD_EXPLOSIVE", getweapon(#"briefcase_bomb"));
   }

@@ -264,22 +264,22 @@ function function_339b84ba(attachment) {
 function function_7ff60ccf(star_level = 1) {
   switch (star_level) {
     case 1:
-      return # "level_1_resource_list";
+      return #"level_1_resource_list";
     case 2:
-      return # "level_2_resource_list";
+      return #"level_2_resource_list";
     case 3:
-      return # "level_3_resource_list";
+      return #"level_3_resource_list";
     case 4:
-      return # "level_4_resource_list";
+      return #"level_4_resource_list";
     case 5:
-      return # "level_5_resource_list";
+      return #"level_5_resource_list";
     case 6:
-      return # "level_6_resource_list";
+      return #"level_6_resource_list";
     default:
-      return # "level_6_resource_list";
+      return #"level_6_resource_list";
   }
 
-  return # "level_1_resource_list";
+  return #"level_1_resource_list";
 }
 
 function function_2394df30(s_params) {
@@ -343,7 +343,7 @@ function function_2394df30(s_params) {
   dropstruct = {
     #origin: var_4aeae769, #angles: var_3ecf13fe, #var_738dfc81: 20
   };
-  var_5bb8af3f = dropstruct namespace_65181344::function_fd87c780(var_ec6368f9, 20, 2);
+  var_5bb8af3f = dropstruct item_spawn_groups_util::function_fd87c780(var_ec6368f9, 20, 2);
 
   if(!isDefined(var_5bb8af3f)) {
     var_5bb8af3f = [];
@@ -381,7 +381,7 @@ function function_2394df30(s_params) {
         dropstruct = {
           #origin: var_4aeae769, #angles: var_3ecf13fe, #var_738dfc81: 10
         };
-        var_5bb8af3f = dropstruct namespace_65181344::function_fd87c780(#"zm_equipment_parent_list", 1, 2);
+        var_5bb8af3f = dropstruct item_spawn_groups_util::function_fd87c780(#"zm_equipment_parent_list", 1, 2);
       }
 
       if(var_5bb8af3f.size <= 0) {
@@ -390,7 +390,7 @@ function function_2394df30(s_params) {
           dropstruct = {
             #origin: var_4aeae769, #angles: var_3ecf13fe, #var_738dfc81: 10
           };
-          var_5bb8af3f = dropstruct namespace_65181344::function_fd87c780(list, 1, 2);
+          var_5bb8af3f = dropstruct item_spawn_groups_util::function_fd87c780(list, 1, 2);
         }
       }
     } else if(var_8be3ada4) {
@@ -400,7 +400,7 @@ function function_2394df30(s_params) {
         dropstruct = {
           #origin: var_4aeae769, #angles: var_3ecf13fe, #var_738dfc81: 10
         };
-        var_5bb8af3f = dropstruct namespace_65181344::function_fd87c780(#"zm_equipment_parent_list", 1, 2);
+        var_5bb8af3f = dropstruct item_spawn_groups_util::function_fd87c780(#"zm_equipment_parent_list", 1, 2);
       }
     } else if(var_311d223d) {
       var_515ea3b6 = function_339b84ba(var_544f5f81);
@@ -410,7 +410,7 @@ function function_2394df30(s_params) {
         dropstruct = {
           #origin: var_4aeae769, #angles: var_3ecf13fe, #var_738dfc81: 10
         };
-        var_5bb8af3f = dropstruct namespace_65181344::function_fd87c780(list, 1, 2);
+        var_5bb8af3f = dropstruct item_spawn_groups_util::function_fd87c780(list, 1, 2);
       }
     }
   }
@@ -422,7 +422,7 @@ function function_2394df30(s_params) {
   wait 0.2;
 
   if(isDefined(var_2e6f77db) && issubstr(var_2e6f77db, "hvt")) {
-    a_items = dropstruct namespace_65181344::function_fd87c780(#"hvt_bonus_drop_list", 1, 2);
+    a_items = dropstruct item_spawn_groups_util::function_fd87c780(#"hvt_bonus_drop_list", 1, 2);
 
     if(isarray(a_items)) {
       var_5bb8af3f = arraycombine(var_5bb8af3f, a_items, 0, 0);
@@ -430,7 +430,7 @@ function function_2394df30(s_params) {
   }
 
   if(var_ed185014 === "hulk_zombie" && math::cointoss(33)) {
-    a_items = dropstruct namespace_65181344::function_fd87c780(#"sr_zombie_drop_ammo", 1, 2);
+    a_items = dropstruct item_spawn_groups_util::function_fd87c780(#"sr_zombie_drop_ammo", 1, 2);
 
     if(isarray(a_items)) {
       var_5bb8af3f = arraycombine(var_5bb8af3f, a_items, 0, 0);
@@ -438,7 +438,7 @@ function function_2394df30(s_params) {
   }
 
   if(isPlayer(s_params.eattacker) && s_params.eattacker namespace_e86ffa8::function_30a8ed81(2) && math::cointoss(5)) {
-    a_items = dropstruct namespace_65181344::function_fd87c780(#"sr_zombie_drop_ammo", 1, 2);
+    a_items = dropstruct item_spawn_groups_util::function_fd87c780(#"sr_zombie_drop_ammo", 1, 2);
 
     if(isarray(a_items)) {
       var_5bb8af3f = arraycombine(var_5bb8af3f, a_items, 0, 0);
@@ -483,7 +483,7 @@ function function_257d7203(type = #"normal", var_59364773) {
     return level.var_b048b7e[type][var_b48509f9];
   }
 
-  return # "normal_zombie_level1_parent_list";
+  return #"normal_zombie_level1_parent_list";
 }
 
 function function_fd5e77fa(type = #"small") {
@@ -499,7 +499,7 @@ function function_fd5e77fa(type = #"small") {
     return level.var_6fff281a[type][var_b48509f9];
   }
 
-  return # "small_chest_level_1";
+  return #"small_chest_level_1";
 }
 
 function function_6e72c1e2(instance) {
@@ -1021,7 +1021,7 @@ function function_f82f361c(struct, var_cc1fb2d0, var_98d110e6 = 1, var_5b57dd9 =
   dropstruct = {
     #origin: reward_origin, #angles: dropangles + var_e784014f, #var_738dfc81: n_count
   };
-  a_items = dropstruct namespace_65181344::function_fd87c780(var_cc1fb2d0, n_count, var_98d110e6);
+  a_items = dropstruct item_spawn_groups_util::function_fd87c780(var_cc1fb2d0, n_count, var_98d110e6);
 
   if(var_cc1fb2d0 === #"loot_pod_level_1" || var_cc1fb2d0 === #"loot_pod_level_2" || var_cc1fb2d0 === #"loot_pod_level_3" || var_cc1fb2d0 === #"loot_pod_level_4" || var_cc1fb2d0 === #"loot_pod_level_5" || var_cc1fb2d0 === #"loot_pod_level_6") {
     foreach(item in a_items) {
@@ -1264,16 +1264,16 @@ function function_cff40da3() {
     if((isDefined(player.maxarmor) ? player.maxarmor : 0) != 0) {
       level.var_20b35e7a = 1;
       var_add423b7 = 1;
-      return # "armor_shard_item_sr";
+      return #"armor_shard_item_sr";
     }
   }
 
   if(!var_add423b7 && !is_true(level.var_20b35e7a)) {
     level.var_20b35e7a = 1;
-    return # "armor_item_lv1_t9_sr";
+    return #"armor_item_lv1_t9_sr";
   }
 
-  return # "armor_shard_item_sr";
+  return #"armor_shard_item_sr";
 }
 
 function function_e15f0669() {
@@ -1298,11 +1298,11 @@ function function_e15f0669() {
   }
 
   if(var_eceee3fa == players.size || level.var_a68449d2 > level.var_102e4ee5) {
-    return # "scrap_rare_item_sr";
+    return #"scrap_rare_item_sr";
   }
 
   level.var_a68449d2++;
-  return # "self_revive_sr_item";
+  return #"self_revive_sr_item";
 }
 
 function init_devgui() {

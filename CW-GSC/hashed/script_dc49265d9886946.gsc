@@ -392,11 +392,11 @@ function function_f2eab818() {
 
   switch (var_7f595ed0) {
     case 1:
-      return # "green";
+      return #"green";
     case 2:
-      return # "blue";
+      return #"blue";
     case 3:
-      return # "purple";
+      return #"purple";
     default:
       break;
   }

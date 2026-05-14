@@ -2822,9 +2822,9 @@ function_317ab257(localclientnum, menu_name, var_83a11058) {
   var_2ae2bfde = function_b52a94ae(var_83a11058);
 
   if(isDefined(var_2ae2bfde)) {
-    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : # "hash_521de69029125f63";
-    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : # "hash_521de69029125f63";
-    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : # "hash_4c04b62047703a60";
+    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : #"hash_521de69029125f63";
+    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : #"hash_521de69029125f63";
+    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : #"hash_4c04b62047703a60";
   }
 
   self function_ca43d336(localclientnum);

@@ -277,7 +277,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
           }
 
           level scoreevents::doscoreeventcallback("scoreEventZM", {
-            #attacker: self.owner, #scoreevent: # "hash_56aa82cbbc11009b"});
+            #attacker: self.owner, #scoreevent: #"hash_56aa82cbbc11009b"});
           self.owner stats::function_622feb0d(#"ring_of_fire", #"hash_5c5c962a0971316a", 1);
 
           if(missile.weapon.name === #"hash_2b47921791da6f0" || missile.weapon.name === #"hash_67307aa00ad6f686") {

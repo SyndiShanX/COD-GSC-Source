@@ -95,8 +95,8 @@ function private preinit() {
 function function_b4f41a02() {
   level endon(#"game_ended");
   aitypes = function_19df1c1c();
-  setDvar(#"hash_70cb00491d863294", "<dev string:x38>");
-  setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
+  setDvar(#"devgui_wz_ai", "<dev string:x38>");
+  setDvar(#"wz_ai_devgui_cmd", "<dev string:x38>");
 
   foreach(type in aitypes) {
     if(function_e949cfd7(type)) {
@@ -112,7 +112,7 @@ function function_b4f41a02() {
 
   while(true) {
     wait 0.1;
-    cmd = getdvarstring(#"hash_209287456d55fca1", "<dev string:x38>");
+    cmd = getdvarstring(#"wz_ai_devgui_cmd", "<dev string:x38>");
 
     if(cmd == "<dev string:x38>") {
       continue;
@@ -121,7 +121,7 @@ function function_b4f41a02() {
     cmd_tokens = strtok(cmd, "<dev string:x1ce>");
 
     switch (cmd_tokens[0]) {
-      case #"hash_c0b89e8d4a71cff":
+      case #"debug_spawn_ai":
         player = level.players[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward(direction);
@@ -145,7 +145,7 @@ function function_b4f41a02() {
         break;
     }
 
-    setDvar(#"hash_209287456d55fca1", "<dev string:x38>");
+    setDvar(#"wz_ai_devgui_cmd", "<dev string:x38>");
   }
 }
 
@@ -651,7 +651,7 @@ function function_bf357ddf(spawnpt, itemlist) {
 
   if(isDefined(spawnpt.target)) {
     var_10508147 = struct::get(spawnpt.target, "targetname");
-    items = self namespace_65181344::function_fd87c780(itemlist, 1);
+    items = self item_spawn_groups_util::function_fd87c780(itemlist, 1);
 
     for(i = 0; i < items.size; i++) {
       item = items[i];
@@ -952,11 +952,11 @@ function function_16e2f075(params) {
     return;
   }
 
-  if(!is_true(self.var_85c3882d)) {
+  if(!is_true(self.inconcertinawire)) {
     self.var_1b5e8136 = gettime();
   }
 
-  self.var_85c3882d = 1;
+  self.inconcertinawire = 1;
 
   if(!is_true(self.var_a9d9d11b) || self.var_a9d9d11b < gettime()) {
     self.var_a9d9d11b = gettime() + 500;
@@ -1013,13 +1013,13 @@ function function_7a87d2a7(damageduration) {
       timesincestart = gettime() - ai.var_1b5e8136;
 
       if(timesincestart > 1000) {
-        ai.var_85c3882d = undefined;
+        ai.inconcertinawire = undefined;
       }
 
       timesincelast = gettime() - ai.var_cd7665dd;
 
       if(timesincelast > 250) {
-        ai.var_85c3882d = undefined;
+        ai.inconcertinawire = undefined;
         ai.var_1b5e8136 = undefined;
         var_202d087b[var_202d087b.size] = ai;
       }
@@ -1372,11 +1372,11 @@ function event_handler[event_9673dc9a] function_3981d015(eventstruct) {
 
     if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[var_16a4afdc])) {
       newstate = bundle.dynentstates[var_16a4afdc];
-      var_a852a7dd = isDefined(bundle.var_a852a7dd) ? bundle.var_a852a7dd : isDefined(newstate.var_b272e331) ? newstate.var_b272e331 : 0;
+      interpolationsec = isDefined(bundle.interpolationsec) ? bundle.interpolationsec : isDefined(newstate.var_b272e331) ? newstate.var_b272e331 : 0;
 
-      if(var_a852a7dd > 0) {
+      if(interpolationsec > 0) {
         dynent.var_e3efbaaa = 1;
-        dynent thread function_397c3081(var_a852a7dd);
+        dynent thread function_397c3081(interpolationsec);
       }
     }
   }
@@ -1950,7 +1950,7 @@ function function_924c0c6f(attackable) {
   }
 }
 
-function function_68cc8bce(params) {
+function on_turret_placed(params) {
   owner = params.owner;
   turret = params.turret;
   owner endon(#"death");
@@ -1986,7 +1986,7 @@ function function_cf065988(params) {
   cover = params.cover;
   owner endon(#"death");
   cover endon(#"death");
-  slots = function_bdb2b85b(cover, owner.smartcover.lastvalid.origin, owner.smartcover.lastvalid.angles, owner.smartcover.lastvalid.width / 2 + 12, 6, level.smartcoversettings.bundle.var_b345c668);
+  slots = function_bdb2b85b(cover, owner.smartcover.lastvalid.origin, owner.smartcover.lastvalid.angles, owner.smartcover.lastvalid.width / 2 + 12, 6, level.smartcoversettings.bundle.microwaveradius);
 
   if(!isDefined(slots) || slots.size <= 0) {
     return;
@@ -3085,7 +3085,7 @@ function function_c2be61f2() {
 }
 
 function function_ae04fa3e(origin, angles, targetname) {
-  var_2e6f77db = isDefined(level.zombie_spawners[0].aitype) ? level.zombie_spawners[0].aitype : # "hash_7cba8a05511ceedf";
+  var_2e6f77db = isDefined(level.zombie_spawners[0].aitype) ? level.zombie_spawners[0].aitype : #"hash_7cba8a05511ceedf";
   ai_spawned = spawnactor(var_2e6f77db, origin, angles, targetname, 1);
 
   if(isDefined(ai_spawned)) {

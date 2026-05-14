@@ -1159,20 +1159,20 @@ mission_result(str_winning_team, var_db3d629e = #"hash_6ef5bcff7fb1d1ab", var_95
 
     if(str_winning_team == #"allies") {
       voiceparams = {
-        #team: # "allies", #side: # "allies", #targetname: level.mission_name
+        #team: #"allies", #side: #"allies", #targetname: level.mission_name
       };
       voiceevent("mssn_succ", undefined, voiceparams);
       voiceparams = {
-        #team: # "axis", #side: # "axis", #targetname: level.mission_name
+        #team: #"axis", #side: #"axis", #targetname: level.mission_name
       };
       voiceevent("mssn_fail", undefined, voiceparams);
     } else {
       voiceparams = {
-        #team: # "axis", #side: # "axis", #targetname: level.mission_name
+        #team: #"axis", #side: #"axis", #targetname: level.mission_name
       };
       voiceevent("mssn_succ", undefined, voiceparams);
       voiceparams = {
-        #team: # "allies", #side: # "allies", #targetname: level.mission_name
+        #team: #"allies", #side: #"allies", #targetname: level.mission_name
       };
       voiceevent("mssn_fail", undefined, voiceparams);
     }

@@ -967,7 +967,7 @@ function function_e2a25377(str_weapon_name, b_upgraded, str_item_name) {
     }
 
     if(isDefined(point.itementry.random_attachments)) {
-      weapon = namespace_65181344::function_67456242(point.itementry);
+      weapon = item_spawn_groups_util::function_67456242(point.itementry);
       dropitem = item_drop::drop_item(0, weapon, 1, weapon.maxammo, point.id, self.origin, self.angles, 1);
       dropitem.var_519e776c = 1;
       dropitem.hidetime = 1;
@@ -1291,7 +1291,7 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
 
   if(isPlayer(self) && isDefined(self.var_642ed51a)) {
     if(isDefined(self.var_642ed51a.var_f693bf0b) && isDefined(self.var_9e09931e)) {
-      self.var_642ed51a.var_f693bf0b clientfield::set("" + #"hash_21f5fab6a3d22093", self.var_9e09931e);
+      self.var_642ed51a.var_f693bf0b clientfield::set("" + #"tribute_flame_fx", self.var_9e09931e);
     }
 
     if(isDefined(self.var_9e09931e) && self.var_9e09931e != 0) {
@@ -1302,7 +1302,7 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
 
 function function_56c888ce(a_str_rewards) {
   if(!a_str_rewards.size) {
-    return # "empty";
+    return #"empty";
   }
 
   a_str_rewards = array::randomize(a_str_rewards);
@@ -1722,7 +1722,7 @@ function function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, var_d1bb6924
   }
 
   self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 0);
-  self notify(#"hash_358f065cca50b2a7");
+  self notify(#"challenge_reward_cleanup");
 
   if(is_true(b_timeout)) {
     return false;
@@ -1840,7 +1840,7 @@ function function_57b8a4e9(e_pickup) {
 }
 
 function function_545834dc(var_16c042b8) {
-  self endon(#"death", #"hash_358f065cca50b2a7");
+  self endon(#"death", #"challenge_reward_cleanup");
 
   while(true) {
     if(self function_e5039011(var_16c042b8)) {

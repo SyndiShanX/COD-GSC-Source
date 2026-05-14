@@ -45,7 +45,7 @@ function on_connecting() {
   self arenabeginmatch();
 
   if(function_945560bf() == 0) {
-    self.pers[#"hash_1b5251cc167039c8"] = self function_a200171d();
+    self.pers[#"arenaleagueid"] = self function_a200171d();
   }
 
   self.pers[#"arenainit"] = 1;
@@ -67,7 +67,7 @@ function on_connect() {
   self arenabeginmatch();
 
   if(function_945560bf() == 0) {
-    self.pers[#"hash_1b5251cc167039c8"] = self function_a200171d();
+    self.pers[#"arenaleagueid"] = self function_a200171d();
     uploadstats(self);
   }
 
@@ -88,7 +88,7 @@ function on_game_playing() {
           if(!gamestate::is_game_over() && level.playercount[player.team] <= function_7a0dc792()) {
             if(!isDefined(player.pers[#"hash_6dbbb195b62e0dd3"])) {
               if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
-                if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+                if(isDefined(player.pers[#"arenaleagueid"])) {
                   player function_ca53535e(penalty);
                   player.pers[#"hash_6dbbb195b62e0dd3"] = 1;
                 }
@@ -110,7 +110,7 @@ function function_b856a952(team) {
 
       if(isDefined(player.team) && player.team == team && !isDefined(player.pers[#"hash_6dbbb195b62e0dd3"])) {
         if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
-          if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+          if(isDefined(player.pers[#"arenaleagueid"])) {
             player function_ca53535e(penalty);
             player.pers[#"hash_6dbbb195b62e0dd3"] = 1;
           }
@@ -139,7 +139,7 @@ function function_77151fd1() {
 
       if(!isDefined(player.pers[#"hash_6dbbb195b62e0dd3"])) {
         if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
-          if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+          if(isDefined(player.pers[#"arenaleagueid"])) {
             player function_ca53535e(penalty);
             player.pers[#"hash_6dbbb195b62e0dd3"] = 1;
           }
@@ -202,14 +202,14 @@ function match_end() {
           }
         }
 
-        if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+        if(isDefined(player.pers[#"arenaleagueid"])) {
           if(isDefined(matchresult)) {
             if(var_74386ffc != -1) {
-              player function_cce105c8(#"hash_4e13b2889185a48d", 1, player.pers[#"hash_1b5251cc167039c8"], 2, matchresult, 3, var_74386ffc, 4, level.var_ba92f0a8, 5, getdvarint(#"hash_6e07431d7a79d00f", 0));
+              player function_cce105c8(#"hash_4e13b2889185a48d", 1, player.pers[#"arenaleagueid"], 2, matchresult, 3, var_74386ffc, 4, level.var_ba92f0a8, 5, getdvarint(#"hash_6e07431d7a79d00f", 0));
               continue;
             }
 
-            player function_cce105c8(#"hash_4e13b2889185a48d", 1, player.pers[#"hash_1b5251cc167039c8"], 2, matchresult, 4, level.var_ba92f0a8, 5, getdvarint(#"hash_6e07431d7a79d00f", 0));
+            player function_cce105c8(#"hash_4e13b2889185a48d", 1, player.pers[#"arenaleagueid"], 2, matchresult, 4, level.var_ba92f0a8, 5, getdvarint(#"hash_6e07431d7a79d00f", 0));
           }
         }
       }
@@ -235,7 +235,7 @@ function update_arena_challenge_seasons() {
       eventstate = #"leagueplaystats";
       break;
     case 4:
-      eventstate = #"hash_4986c748eb81d3c5";
+      eventstate = #"scrimsstats";
       break;
     default:
       return;

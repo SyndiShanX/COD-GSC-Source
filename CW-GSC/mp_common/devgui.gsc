@@ -54,10 +54,10 @@ function private preinit() {
   level thread dev::devgui_test_chart_think();
   level thread devgui_player_spawn_think();
   level thread devgui_vehicle_spawn_think();
-  level thread function_7bef8d25();
+  level thread devgui_health_think();
   level thread function_be0f9897();
   level thread dev::function_487bf571();
-  level thread function_46b22d99();
+  level thread devgui_end_round_think();
   level thread function_6a24e58f();
   level thread function_57edec18();
   thread init_debug_center_screen();
@@ -987,9 +987,9 @@ function function_6a24e58f() {
   }
 }
 
-function function_7bef8d25() {
-  level notify(#"hash_6a8b1c9e1485919d");
-  level endon(#"hash_6a8b1c9e1485919d");
+function devgui_health_think() {
+  level notify(#"devgui_health_think");
+  level endon(#"devgui_health_think");
   wait 5;
   function_e4b86469();
   wait 1;
@@ -1019,9 +1019,9 @@ function function_7bef8d25() {
   }
 }
 
-function function_46b22d99() {
-  level notify(#"hash_4c09c9d01060d7ad");
-  level endon(#"hash_4c09c9d01060d7ad");
+function devgui_end_round_think() {
+  level notify(#"devgui_end_round_think");
+  level endon(#"devgui_end_round_think");
   wait 2;
   function_9fb69cba();
   wait 0.5;

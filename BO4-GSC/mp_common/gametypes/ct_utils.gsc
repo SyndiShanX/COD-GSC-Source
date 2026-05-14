@@ -2173,7 +2173,7 @@ function_d25bd3c9(v_target, var_368c41b6, var_7f71c337) {
 
 onboarding_complete() {
   e_player = get_player();
-  e_player thread function_61c3d59c(function_8b1a219a() ? # "hash_1f9e1f03abf80100" : # "hash_2599a874a6af5e44", undefined);
+  e_player thread function_61c3d59c(function_8b1a219a() ? #"hash_1f9e1f03abf80100" : #"hash_2599a874a6af5e44", undefined);
   e_player thread function_84181d75(1, e_player.origin);
 
   while(!e_player primarybuttonpressedlocal()) {
@@ -2603,7 +2603,7 @@ function_c3e647e2(str_weapon, attachments) {
 
 function_84adcd1f() {
   var_e6b5e0d7 = getDvar(#"hash_3fb2952874e511c2");
-  hands_weapon = getweapon(isDefined(var_e6b5e0d7) ? var_e6b5e0d7 : # "bare_hands_ct");
+  hands_weapon = getweapon(isDefined(var_e6b5e0d7) ? var_e6b5e0d7 : #"bare_hands_ct");
   return hands_weapon;
 }
 

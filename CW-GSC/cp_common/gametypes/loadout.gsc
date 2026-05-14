@@ -117,7 +117,7 @@ function setclass(newclass) {
 }
 
 function event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
-  self callback::callback(#"hash_39bf72fd97e248a0", eventstruct);
+  self callback::callback(#"on_player_loadout_changed", eventstruct);
 }
 
 function isexplosivedamage(meansofdeath) {

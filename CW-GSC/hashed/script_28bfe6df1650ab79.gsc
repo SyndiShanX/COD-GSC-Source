@@ -8,10 +8,10 @@
 #using scripts\zm_common\zm;
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
-#namespace namespace_e01afe67;
+#namespace zm_trial_death_from_above;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_993ee8bedbddc19", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_trial_death_from_above", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {

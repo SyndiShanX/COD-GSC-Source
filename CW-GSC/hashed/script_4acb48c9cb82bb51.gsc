@@ -447,7 +447,7 @@ function private function_547ca9df() {
     team = #"none";
   } else if(level.gameobjectscontestedmajoritywins === 1 || numallies == 0 || var_794d4493 == 0) {
     state = numallies < var_794d4493 ? 2 : 1;
-    team = numallies < var_794d4493 ? # "axis" : # "allies";
+    team = numallies < var_794d4493 ? #"axis" : #"allies";
   } else {
     state = 3;
     team = #"none";
@@ -778,7 +778,7 @@ function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing,
   time.objectives = time.pers[#"objectives"];
   time recordgameevent("capture");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #player: time, #eventtype: # "capture"});
+    #player: time, #eventtype: #"capture"});
   demo::bookmark(#"event", gettime(), time);
   potm::bookmark(#"event", gettime(), time);
   time challenges::capturedobjective(var_a84f97bf, self.trigger);

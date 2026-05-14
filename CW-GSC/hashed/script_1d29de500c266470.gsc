@@ -3,7 +3,7 @@
  * Script: hashed\script_1d29de500c266470.gsc
 ***********************************************/
 
-#namespace namespace_eb06e24d;
+#namespace player_free_fall_util;
 
 function get_jumpkits() {
   if(!isDefined(level.var_aadba305)) {
@@ -41,7 +41,7 @@ function function_aa3a05b1(index) {
 
 function function_6452f9c5(index) {
   kit = function_550c6257(index);
-  return getscriptbundle(kit.var_4fa85a25);
+  return getscriptbundle(kit.dropfxtrail);
 }
 
 function private function_c72eb508() {

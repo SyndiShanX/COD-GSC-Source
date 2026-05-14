@@ -19,7 +19,7 @@ __init__() {
 }
 
 function_201c2cb7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : # "hash_435832b390f73dff");
+  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : #"hash_435832b390f73dff");
 }
 
 function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

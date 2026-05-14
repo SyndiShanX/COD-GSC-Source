@@ -1446,7 +1446,7 @@ function function_39da6c3c(entity) {
   var_b9dab425 = zm_ai_utility::function_825317c(entity);
 
   if(var_bd871069 && !function_2bc424fd(entity, var_b9dab425)) {
-    set_state(entity, isDefined(entity.var_78f5fd91) ? entity.var_78f5fd91 : # "wander");
+    set_state(entity, isDefined(entity.var_78f5fd91) ? entity.var_78f5fd91 : #"wander");
     return;
   }
 

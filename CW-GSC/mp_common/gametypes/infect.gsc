@@ -900,7 +900,7 @@ function setfirstinfected() {
   level thread popups::displayteammessagetoall(#"mp/got_infected", self);
   scoreevents::processscoreevent("first_infected", self);
   sound::play_on_players("mpl_infection_zombie_created_stinger");
-  self thread infection::function_da08f4d0();
+  self thread infection::ambient_sound();
   level.infect_allowsuicide = 1;
   level.infect_chosefirstinfected = 1;
   self.infect_isbeingchosen = undefined;

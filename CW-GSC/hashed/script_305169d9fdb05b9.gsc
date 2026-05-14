@@ -520,7 +520,7 @@ function function_597bc742() {
   e_tag linkto(level.adler, "j_neck");
   level.adler.var_5fedded0 = e_tag;
   e_tag prompts::function_c97a48c7(#"use_tap", {
-    #var_de6f0004: 0, #var_4ac77177: 0, #var_5e83875a: 270, #var_87c991f3: 128, #var_8ce60046: 0, #var_be77841a: 0
+    #var_de6f0004: 0, #var_4ac77177: 0, #var_5e83875a: 270, #var_87c991f3: 128, #requires_line_of_sight: 0, #var_be77841a: 0
   });
   e_tag prompts::function_44d7831a(#"use_tap", 2, 0);
 

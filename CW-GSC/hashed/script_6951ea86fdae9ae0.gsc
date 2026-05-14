@@ -28,7 +28,7 @@ function private preinit() {
 
 function private on_begin(var_c8a36f90, var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f) {
   level.var_e91491fb = isDefined(var_c8a36f90) ? var_c8a36f90 : "movement";
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
   if(level.var_e91491fb === #"prone") {
@@ -41,7 +41,7 @@ function private on_begin(var_c8a36f90, var_a9dd1993, var_2953986a, var_3790b4e4
 }
 
 function private on_end(round_reset) {
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
   if(level.var_e91491fb === #"prone") {
@@ -58,7 +58,7 @@ function is_active() {
 
 function private function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   if(isDefined(var_a9dd1993)) {
     var_3b058622 = getweapon(var_a9dd1993);
@@ -192,7 +192,7 @@ function function_26f124d8() {
   return false;
 }
 
-function private function_33f0ddd3(s_event) {
+function private on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(!self function_26f124d8() && !zm_loadout::function_2ff6913(s_event.weapon)) {
       self lockweapon(s_event.weapon, 1, 1);

@@ -183,7 +183,7 @@ function function_ae0208d3(s_params) {
 
   if(isinarray(level.var_d94359b, attacker) && isPlayer(attacker.owner)) {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
-      #attacker: attacker.owner, #scoreevent: # "hash_748d4479ffd0521e", #enemy: self
+      #attacker: attacker.owner, #scoreevent: #"hash_748d4479ffd0521e", #enemy: self
     });
   }
 }

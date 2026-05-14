@@ -74,7 +74,7 @@ function_959bac94() {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function_ba459d03(team) {

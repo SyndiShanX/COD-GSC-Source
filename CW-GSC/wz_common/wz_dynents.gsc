@@ -108,8 +108,8 @@ function private function_724a2fa5(eventstruct) {
     return;
   }
 
-  var_a852a7dd = dynent_use::use_dynent(dynent);
-  dynent.var_a548ec11 = gettime() + var_a852a7dd * 1000;
+  interpolationsec = dynent_use::use_dynent(dynent);
+  dynent.var_a548ec11 = gettime() + interpolationsec * 1000;
 }
 
 function function_8cc4432b(params) {

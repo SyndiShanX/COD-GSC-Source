@@ -105,8 +105,8 @@ function function_31980089(params) {
   distance = 1000;
   name = "<dev string:x24e>";
 
-  if(isDefined(params.var_1d978d3)) {
-    numitems = int(params.var_1d978d3);
+  if(isDefined(params.num_items)) {
+    numitems = int(params.num_items);
   }
 
   if(isDefined(params.distance)) {

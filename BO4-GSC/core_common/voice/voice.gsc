@@ -314,7 +314,7 @@ function_7924f3ca() {
 }
 
 mask_sound(soundent, params, var_17ee4803) {
-  mask = isDefined(params) ? params.mask : # "all";
+  mask = isDefined(params) ? params.mask : #"all";
 
   if(mask == #"all") {
     if(isDefined(self.var_54d07407)) {

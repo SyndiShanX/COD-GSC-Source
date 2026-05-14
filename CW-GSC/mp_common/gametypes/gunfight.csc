@@ -22,10 +22,10 @@ function event_handler[gametype_init] main(eventstruct) {
   level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   fields = getmapfields();
   level.var_117b4a3a = [];
-  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : # "hash_280d5153e1276d";
-  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : # "hash_4b1a3a0285bea14d";
-  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : # "hash_36a94457406aea0e";
-  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : # "hash_5a60154937b01557";
+  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : #"hash_280d5153e1276d";
+  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : #"hash_4b1a3a0285bea14d";
+  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : #"hash_36a94457406aea0e";
+  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : #"hash_5a60154937b01557";
 }
 
 function function_f923f745(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -52,8 +52,8 @@ function private function_b72cd4c9(localclientnum) {
   var_fd9bf390 = function_9b3f0ed1(localclientnum);
 
   if(self.team !== var_fd9bf390 && game.state === #"pregame") {
-    if(!self function_d2503806(#"hash_1dced6114b72a678")) {
-      self playrenderoverridebundle(#"hash_1dced6114b72a678");
+    if(!self function_d2503806(#"rob_sonar_set_enemy_mp")) {
+      self playrenderoverridebundle(#"rob_sonar_set_enemy_mp");
     }
   }
 }
@@ -66,8 +66,8 @@ function private function_f4497937(localclientnum) {
     return;
   }
 
-  if(self function_d2503806(#"hash_1dced6114b72a678")) {
-    self stoprenderoverridebundle(#"hash_1dced6114b72a678");
+  if(self function_d2503806(#"rob_sonar_set_enemy_mp")) {
+    self stoprenderoverridebundle(#"rob_sonar_set_enemy_mp");
   }
 }
 

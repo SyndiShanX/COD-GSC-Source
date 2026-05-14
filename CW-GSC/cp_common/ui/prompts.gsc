@@ -24,35 +24,35 @@ function private autoexec __init__system__() {
 
 function private preload() {
   level.prompts[#"use"] = {
-    #button_text: # "hash_5797cba717dc64d5", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "trigger"};
+    #button_text: #"hash_5797cba717dc64d5", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "trigger"};
   level.prompts[#"use_tap"] = {
-    #button_action: # "hash_100ec99123fe5092", #button_text: # "hash_5797cba717dc64d5", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "trigger"};
+    #button_action: #"hash_100ec99123fe5092", #button_text: #"hash_5797cba717dc64d5", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "trigger"};
   level.prompts[#"melee"] = {
-    #button_text: # "hash_18d0a7d5aff08dd8", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "damage"};
+    #button_text: #"hash_18d0a7d5aff08dd8", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "damage"};
   level.prompts[#"melee_hold"] = {
-    #button_action: # "hash_2d1efe88663d0c48", #button_text: # "hash_18d0a7d5aff08dd8", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "grab"};
+    #button_action: #"hash_2d1efe88663d0c48", #button_text: #"hash_18d0a7d5aff08dd8", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "grab"};
   level.prompts[#"attack"] = {
-    #button_text: # "hash_3c124085ee45de36", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "attack"};
+    #button_text: #"hash_3c124085ee45de36", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "attack"};
   level.prompts[#"reload"] = {
-    #button_text: # "hash_27324f18b09b7a6d", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "reload"};
+    #button_text: #"hash_27324f18b09b7a6d", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "reload"};
   level.prompts[#"frag"] = {
-    #button_text: # "hash_c7de853806860ce", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "frag"};
+    #button_text: #"hash_c7de853806860ce", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "frag"};
   level.prompts[#"stance"] = {
-    #button_text: # "hash_34ccc944003048fe", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "stance", #var_b753c5a5: "BUTTON_BIT_ANY_DOWN"};
+    #button_text: #"hash_34ccc944003048fe", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "stance", #var_b753c5a5: "BUTTON_BIT_ANY_DOWN"};
   level.prompts[#"weapnext"] = {
-    #button_text: # "hash_4b3f0bed118eaaf1", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "weapnext"};
+    #button_text: #"hash_4b3f0bed118eaaf1", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "weapnext"};
   level.prompts[#"ads"] = {
-    #button_text: # "hash_41f7ff5095b74d02", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "aim"};
+    #button_text: #"hash_41f7ff5095b74d02", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "aim"};
   level.prompts[#"vehicle_attack"] = {
-    #button_text: # "hash_6a2aef10bb120a0d", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "attack"};
+    #button_text: #"hash_6a2aef10bb120a0d", #var_92bb1cb1: &function_99bb5bbe, #var_9a98e590: &function_ab46a161, #notify_string: "attack"};
   level.prompts[#"confirm"] = {
-    #button_text: # "hash_686cc531969c8555", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "select", #var_e4c7b05f: # "hash_7179662091387b23"};
+    #button_text: #"hash_686cc531969c8555", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "select", #var_e4c7b05f: #"hash_7179662091387b23"};
   level.prompts[#"cancel"] = {
-    #button_text: # "hash_2ac0a4c8c1d0c8d", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "cancel", #var_e4c7b05f: # "hash_2eb2f3b39714ea5f"};
+    #button_text: #"hash_2ac0a4c8c1d0c8d", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "cancel", #var_e4c7b05f: #"hash_2eb2f3b39714ea5f"};
   level.prompts[#"alt1"] = {
-    #button_text: # "hash_1fb4a5c9d34c7339", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "alt1", #var_e4c7b05f: # "hash_7179672091387cd6", #lui_button: 7, #var_b35ba5c: "MOUSE2"};
+    #button_text: #"hash_1fb4a5c9d34c7339", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "alt1", #var_e4c7b05f: #"hash_7179672091387cd6", #lui_button: 7, #var_b35ba5c: "MOUSE2"};
   level.prompts[#"alt2"] = {
-    #button_text: # "hash_7b5f7a069d7cd3a", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "alt2", #var_e4c7b05f: # "hash_7179682091387e89", #lui_button: 8, #var_b35ba5c: "MOUSE3"};
+    #button_text: #"hash_7b5f7a069d7cd3a", #var_92bb1cb1: &function_eee54dd8, #var_9a98e590: &function_ab46a161, #notify_string: "alt2", #var_e4c7b05f: #"hash_7179682091387e89", #lui_button: 8, #var_b35ba5c: "MOUSE3"};
   level.var_a8ea96e8 = [];
   level.var_6a7fb742 = &function_c97a48c7;
   level.var_a29d8d23 = &function_a4cf2cde;
@@ -112,9 +112,9 @@ function register(prompt, var_92bb1cb1, button_text, notify_string, var_9a98e590
   };
 }
 
-function create(prompt = #"use", prompt_text, complete_callback, var_531201f1, notify_string, offset, tag, var_754bedbb, var_de6f0004, var_4ac77177, var_71b9f0c0, var_87c991f3, var_5e83875a, var_8ce60046, var_9a27c4ee, var_be77841a, flags, var_c9643122) {
+function create(prompt = #"use", prompt_text, complete_callback, var_531201f1, notify_string, offset, tag, var_754bedbb, var_de6f0004, var_4ac77177, var_71b9f0c0, var_87c991f3, var_5e83875a, requires_line_of_sight, var_9a27c4ee, var_be77841a, flags, var_c9643122) {
   prompt_struct = {
-    #prompt_text: prompt_text, #complete_callback: complete_callback, #var_531201f1: var_531201f1, #notify_string: notify_string, #offset: offset, #tag: tag, #var_754bedbb: var_754bedbb, #var_de6f0004: var_de6f0004, #var_4ac77177: var_4ac77177, #var_71b9f0c0: var_71b9f0c0, #var_87c991f3: var_87c991f3, #var_5e83875a: var_5e83875a, #var_8ce60046: var_8ce60046, #var_9a27c4ee: var_9a27c4ee, #var_be77841a: var_be77841a, #flags: flags, #var_c9643122: var_c9643122
+    #prompt_text: prompt_text, #complete_callback: complete_callback, #var_531201f1: var_531201f1, #notify_string: notify_string, #offset: offset, #tag: tag, #var_754bedbb: var_754bedbb, #var_de6f0004: var_de6f0004, #var_4ac77177: var_4ac77177, #var_71b9f0c0: var_71b9f0c0, #var_87c991f3: var_87c991f3, #var_5e83875a: var_5e83875a, #requires_line_of_sight: requires_line_of_sight, #var_9a27c4ee: var_9a27c4ee, #var_be77841a: var_be77841a, #flags: flags, #var_c9643122: var_c9643122
   };
   self function_c97a48c7(prompt, prompt_struct);
 }
@@ -174,8 +174,8 @@ function function_c97a48c7(prompt, prompt_struct) {
     prompt_struct.var_7faab93d = undefined;
   }
 
-  if(prompt_struct.var_8ce60046 === 1) {
-    prompt_struct.var_8ce60046 = undefined;
+  if(prompt_struct.requires_line_of_sight === 1) {
+    prompt_struct.requires_line_of_sight = undefined;
   }
 
   if(prompt_struct.var_9a27c4ee === 1) {
@@ -549,13 +549,13 @@ function function_1a5e1da6(prompt, var_3c8a8153, var_c8a53909) {
   self.var_3e95b88f.prompts[prompt].var_88ceabd = var_c8a53909;
 }
 
-function function_4cb5d3a1(prompt, var_8ce60046) {
+function function_4cb5d3a1(prompt, requires_line_of_sight) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
   assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
-  self.var_3e95b88f.prompts[prompt].var_8ce60046 = var_8ce60046;
+  self.var_3e95b88f.prompts[prompt].requires_line_of_sight = requires_line_of_sight;
 
-  if(self.var_3e95b88f.prompts[prompt].var_8ce60046 === 1) {
-    self.var_3e95b88f.prompts[prompt].var_8ce60046 = undefined;
+  if(self.var_3e95b88f.prompts[prompt].requires_line_of_sight === 1) {
+    self.var_3e95b88f.prompts[prompt].requires_line_of_sight = undefined;
   }
 }
 
@@ -753,7 +753,7 @@ function private function_d626d354(prompt, player, dist) {
     }
 
     self.var_3e95b88f.var_98fa5077 = 1;
-    require_los = isDefined(var_62bce5b6.var_8ce60046) ? var_62bce5b6.var_8ce60046 : 1;
+    require_los = isDefined(var_62bce5b6.requires_line_of_sight) ? var_62bce5b6.requires_line_of_sight : 1;
 
     if(level.var_a48f9f79[#"hash_3cdd945161669bf5"] >= 0) {
       require_los = level.var_a48f9f79[#"hash_3cdd945161669bf5"] > 0;

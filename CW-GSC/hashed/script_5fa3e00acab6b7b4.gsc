@@ -795,7 +795,7 @@ function function_6c95006e(data) {
 function function_9cac835e(data) {
   if(isDefined(data.weapon)) {
     update_weapon_stats({
-      #player: self, #weapon: data.weapon, #statname: # "flourish_count", #value: 1, #weaponpickedup: 0
+      #player: self, #weapon: data.weapon, #statname: #"flourish_count", #value: 1, #weaponpickedup: 0
     });
   }
 }

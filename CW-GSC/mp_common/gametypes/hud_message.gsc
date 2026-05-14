@@ -11,17 +11,17 @@
 #namespace hud_message;
 
 function init() {
-  game.strings[#"draw"] = #"hash_18114ebf7e352c55";
-  game.strings[#"round_draw"] = #"hash_68d9a667406d9e2e";
-  game.strings[#"round_win"] = #"hash_3f72c8cf61961fb2";
-  game.strings[#"round_loss"] = #"hash_70e6b03f0ea9b11d";
-  game.strings[#"victory"] = #"hash_31e1e88e88ba263f";
-  game.strings[#"defeat"] = #"hash_141c79e0a2e1383e";
+  game.strings[#"draw"] = #"mp/draw_caps";
+  game.strings[#"round_draw"] = #"mp/round_draw_caps";
+  game.strings[#"round_win"] = #"mp/round_win_caps";
+  game.strings[#"round_loss"] = #"mp/round_loss_caps";
+  game.strings[#"victory"] = #"mp/victory_caps";
+  game.strings[#"defeat"] = #"mp/defeat_caps";
   game.strings[#"game_over"] = #"hash_ddc319addc8bcb2";
-  game.strings[#"halftime"] = #"hash_4403919077b48aaf";
-  game.strings[#"overtime"] = #"hash_19d325d8d1bfd3de";
-  game.strings[#"roundend"] = #"hash_62af47ae5592dbf8";
-  game.strings[#"intermission"] = #"hash_24bb668f17a9cc67";
+  game.strings[#"halftime"] = #"mp/halftime_caps";
+  game.strings[#"overtime"] = #"mp/overtime_caps";
+  game.strings[#"roundend"] = #"mp/roundend_caps";
+  game.strings[#"intermission"] = #"mp/intermission_caps";
   game.strings[#"match_bonus"] = #"mp/match_bonus_is";
   game.strings[#"codpoints_match_bonus"] = #"mp_codpoints_match_bonus_is";
   game.strings[#"cod_caster_team_wins"] = #"mp/wins";
@@ -267,7 +267,7 @@ function teamoutcomenotify(outcome) {
   self luinotifyevent(#"show_outcome", 5, var_14f94126, outcometext, int(matchbonus), winnerenum, var_277c7d47);
 
   if(var_277c7d47 && game.roundsplayed < level.roundlimit) {
-    self luinotifyevent(#"hash_84895967cf4425c");
+    self luinotifyevent(#"show_switching_sides");
     wait 1;
   }
 }

@@ -446,7 +446,7 @@ function private function_a259ab2b(localclientnum) {
 }
 
 function private function_c3f05233() {
-  rob = #"hash_1dced6114b72a678";
+  rob = #"rob_sonar_set_enemy_mp";
 
   if(self.team !== #"axis") {
     rob = #"hash_44adc567f9f60d61";

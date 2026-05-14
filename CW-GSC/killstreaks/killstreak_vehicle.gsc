@@ -407,7 +407,7 @@ function function_584fb7a3() {
   vehicle endon(#"death");
 
   if(!is_true(vehicle.remote_weapon_end)) {
-    vehicle waittill(#"remote_weapon_end", #"hash_59b25025ce93a142");
+    vehicle waittill(#"remote_weapon_end", #"remote_weapon_shutdown_watch_death");
   }
 
   attacker = isDefined(vehicle.owner) ? vehicle.owner : undefined;
@@ -477,12 +477,12 @@ function on_death(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, s
   var_2105be53 = isDefined(vehicle.var_20c65a3e) ? vehicle.var_20c65a3e : vehicle.died_by_emp === 1 ? 0.2 : 0.2;
 
   if(isDefined(player)) {
-    player val::set(#"hash_7412aa1ce117e2a5", "freezecontrols");
+    player val::set(#"killstreak_vehicle_on_death", "freezecontrols");
     vehicle thread function_de865657(var_2105be53);
     wait 0.2;
 
     if(isDefined(player)) {
-      player val::reset(#"hash_7412aa1ce117e2a5", "freezecontrols");
+      player val::reset(#"killstreak_vehicle_on_death", "freezecontrols");
     }
   } else {
     vehicle thread function_de865657(var_2105be53);
@@ -563,8 +563,8 @@ function explode(attacker, weapon) {
     self.owner killstreaks::function_e9873ef7(bundle.kstype, self.killstreak_id, #"hash_7e23b3e299f4835b");
   }
 
-  if(isDefined(bundle) && isDefined(bundle.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    playFX(bundle.var_bb6c29b4, self.origin);
+  if(isDefined(bundle) && isDefined(bundle.shockrifledestructionfx) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFX(bundle.shockrifledestructionfx, self.origin);
   }
 
   return destroyedbyenemy;

@@ -13,7 +13,7 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
-#namespace namespace_841de7df;
+#namespace zm_trial_pack_a_punch_sacrifice;
 
 function private autoexec __init__system__() {
   system::register(#"hash_4ef9c479ac8da304", &preinit, undefined, undefined, undefined);
@@ -27,7 +27,7 @@ function private preinit() {
   clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
   level._effect[#"hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
   level._effect[#"hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
-  zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
+  zm_trial::register_challenge(#"pack_a_punch_sacrifice", &on_begin, &on_end);
 }
 
 function private on_begin(localclientnum, a_params) {}
@@ -35,7 +35,7 @@ function private on_begin(localclientnum, a_params) {}
 function private on_end(localclientnum) {}
 
 function is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_28d1b9857e2ca681");
+  challenge = zm_trial::function_a36e8c38(#"pack_a_punch_sacrifice");
   return isDefined(challenge);
 }
 

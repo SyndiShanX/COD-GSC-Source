@@ -890,14 +890,14 @@ function event_handler[weapon_change] function_6846a2b7(eventstruct) {
 
 function event_handler[event_41480c76] function_c33f3471(eventstruct) {
   if(self function_21c0fa55()) {
-    level callback(#"hash_4152cf6a61494581", eventstruct);
+    level callback(#"offhand_weapon_change", eventstruct);
   }
 
-  self callback(#"hash_4152cf6a61494581", eventstruct);
+  self callback(#"offhand_weapon_change", eventstruct);
 }
 
 function event_handler[event_6e84b1b1] function_ff9acfac(eventstruct) {
-  level callback(#"hash_2fc4cfecaed47583", eventstruct);
+  level callback(#"localclientusingoffhand", eventstruct);
 }
 
 function event_handler[event_2a48d8d7] function_c0a2fad1(eventstruct) {

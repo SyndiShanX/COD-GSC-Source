@@ -53,7 +53,7 @@ function init() {
   level.var_cc43b632 = struct::get_array("control_point_pos", "targetname");
   level.var_547f9dd5 = [];
   level.dont_unset_perk_when_machine_paused = 1;
-  level.zone_occupied_func = &function_cc984236;
+  level.zone_occupied_func = &zone_occupied_func;
   array::thread_all(level.var_cc43b632, &function_e199d168);
   level thread function_ef4139d1();
   callback::add_callback(#"hash_594217387367ebb4", &function_d81240c3);
@@ -63,7 +63,7 @@ function init() {
   level thread function_37597f29();
 }
 
-function function_cc984236(str_zone) {
+function zone_occupied_func(str_zone) {
   foreach(var_32f76af8 in level.var_cc43b632) {
     if(var_32f76af8.var_269ad176 === 1 && var_32f76af8.script_string === str_zone) {
       return 1;

@@ -91,16 +91,16 @@ function private on_begin(var_44c4c23d, var_bd332e71) {
 }
 
 function take_player_weapons(n_interval, e_player) {
-  e_player notify(#"hash_c1ae406f049058a");
-  e_player endon(#"disconnect", #"hash_c1ae406f049058a");
-  level endon(#"hash_7646638df88a3656");
+  e_player notify(#"end_take_player_weapons");
+  e_player endon(#"disconnect", #"end_take_player_weapons");
+  level endon(#"trial_round_end");
 
   if(!e_player zm_laststand::laststand_has_players_weapons_returned()) {
     e_player waittill(#"hash_9b426cce825928d");
   }
 
   if(is_true(e_player.var_9b0383f5)) {
-    e_player waittill(#"hash_1ac4338b0d419091");
+    e_player waittill(#"pap_use_finished");
   }
 
   a_weap = e_player getweaponslistprimaries();
@@ -189,7 +189,7 @@ function private return_weapon(o_trial) {
 
 function private function_413cffae(n_interval, e_player) {
   e_player notify(#"hash_14795fd12c6dae32");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   e_player endon(#"disconnect", #"hash_14795fd12c6dae32");
 
   while(true) {
@@ -228,7 +228,7 @@ function private function_413cffae(n_interval, e_player) {
 function function_579553d8(n_interval) {
   self notify("<dev string:x38>");
   self endon("<dev string:x38>");
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
 
   while(true) {
     debug2dtext((8, 400, 0), "<dev string:x4c>" + n_interval, undefined, undefined, undefined, 1);
@@ -240,7 +240,7 @@ function function_579553d8(n_interval) {
 
 function function_27cd9d6(var_41f1a085 = 0) {
   self endon(#"disconnect", #"hash_14795fd12c6dae32");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   n_time = 0;
 
   while(!isalive(self) || self laststand::player_is_in_laststand() || self isusingoffhand() || self function_55acff10() || self zm_laststand::is_reviving_any() || n_time < var_41f1a085) {

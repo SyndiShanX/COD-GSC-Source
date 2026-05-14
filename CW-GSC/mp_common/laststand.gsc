@@ -233,7 +233,7 @@ function event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 function on_player_damage(params) {
   if(self is_reviving_any()) {
     if(isDefined(self.reviving_player) && isDefined(self.reviving_player.var_d75a6ff5)) {
-      self.reviving_player.var_d75a6ff5.var_d733f8d7 += params.idamage;
+      self.reviving_player.var_d75a6ff5.reviver_damage += params.idamage;
 
       if(self.health <= params.idamage) {
         self.reviving_player.var_d75a6ff5.var_bb36e277 = 1;
@@ -709,7 +709,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   if(!player::function_faf77690(vdir, idamage, smeansofdeath)) {
     overrideentitycamera = player::function_c0f28ff9(smeansofdeath, vdir);
     var_50d1e41a = potm::function_775b9ad1(vdir, var_fd90b0bb);
-    potm::function_66d09fea(#"hash_11588f7b0737f095", smeansofdeath, self, idamage, var_50d1e41a, overrideentitycamera);
+    potm::function_66d09fea(#"bh_downed", smeansofdeath, self, idamage, var_50d1e41a, overrideentitycamera);
   }
 
   self thread laststand::function_d4c9e1b5();
@@ -1095,9 +1095,9 @@ function revive_trigger_think() {
 
       if(players[i] can_revive(self)) {
         if(!is_true(getgametypesetting("enableSpyModeLaststandTeamOverride"))) {
-          self.revivetrigger setrevivehintstring(#"hash_51a0f083a5566a3", self.team);
+          self.revivetrigger setrevivehintstring(#"coop/button_to_revive_player", self.team);
         } else {
-          self.revivetrigger setrevivehintstring(#"hash_51a0f083a5566a3");
+          self.revivetrigger setrevivehintstring(#"coop/button_to_revive_player");
         }
 
         break;
@@ -1178,7 +1178,7 @@ function function_356caede(team) {
   }
 
   players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
-  height = getdvarint(#"hash_48068f92d21e2a64", 15);
+  height = getdvarint(#"finisher_trigger_height", 15);
 
   foreach(player in players) {
     if(player can_revive(self, 1, height)) {
@@ -1482,7 +1482,7 @@ function revive_do_revive(playerbeingrevived) {
   self.is_reviving_any++;
 
   if(isDefined(playerbeingrevived.var_d75a6ff5)) {
-    playerbeingrevived.var_d75a6ff5.var_d10f3b9a++;
+    playerbeingrevived.var_d75a6ff5.revive_attempts++;
   }
 
   self.reviving_player = playerbeingrevived;
@@ -1528,7 +1528,7 @@ function revive_do_revive(playerbeingrevived) {
       }
     }
 
-    playerbeingrevived.revivetrigger sethintstring(#"hash_51a0f083a5566a3");
+    playerbeingrevived.revivetrigger sethintstring(#"coop/button_to_revive_player");
     playerbeingrevived.revivetrigger.beingrevived = 0;
 
     if(is_true(revived) && isDefined(level.var_f80fdd3f)) {
@@ -1610,7 +1610,7 @@ function function_73d6c609() {
   self thread laststand_clean_up_on_interrupt(self);
 
   if(isDefined(self.var_d75a6ff5)) {
-    self.var_d75a6ff5.var_d10f3b9a++;
+    self.var_d75a6ff5.revive_attempts++;
   }
 
   self.reviving_player = self;
@@ -1654,7 +1654,7 @@ function function_73d6c609() {
   }
 
   if(isDefined(self.revivetrigger)) {
-    self.revivetrigger sethintstring(#"hash_51a0f083a5566a3");
+    self.revivetrigger sethintstring(#"coop/button_to_revive_player");
     self.revivetrigger.beingrevived = 0;
 
     if(is_true(revived) && isDefined(level.var_f80fdd3f)) {
@@ -1839,7 +1839,7 @@ function revive_hud_think() {
 }
 
 function faderevivemessageover(playertorevive, time) {
-  self thread laststand::revive_hud_show_n_fade(#"hash_14cc93f11ba8334a", time, playertorevive);
+  self thread laststand::revive_hud_show_n_fade(#"coop/player_needs_to_be_revived", time, playertorevive);
 }
 
 function function_ecdd4b27() {
@@ -1848,7 +1848,7 @@ function function_ecdd4b27() {
   }
 
   self.var_d75a6ff5 = {
-    #player_xuid: int(self getxuid(1)), #start_time: gettime(), #end_time: 0, #damage: 0, #death: 0, #bleed_out: 0, #var_d10f3b9a: 0, #var_d733f8d7: 0, #var_35b89428: 0
+    #player_xuid: int(self getxuid(1)), #start_time: gettime(), #end_time: 0, #damage: 0, #death: 0, #bleed_out: 0, #revive_attempts: 0, #reviver_damage: 0, #reviver_death: 0
   };
 }
 

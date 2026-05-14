@@ -45,7 +45,7 @@ function private preinit() {
 function private postinit() {}
 
 function function_cfc02934() {
-  var_88846d2d = getDvar(#"hash_4a5fd7d94cfc9dfd", 0) != 0 || getdvarint(#"hash_4a5fd7d94cfc9dfd", 0) != 0;
+  var_88846d2d = getDvar(#"wz_mp_character_unlocks_outfits", 0) != 0 || getdvarint(#"wz_mp_character_unlocks_outfits", 0) != 0;
 
   if(isPlayer(self) && !isbot(self) && var_88846d2d) {
     player = self;
@@ -118,8 +118,8 @@ function function_2c8aac6() {
 
   var_3e32dc53 = 0;
 
-  if(isDefined(self.pers[#"hash_150795bee4d46ce4"])) {
-    var_3e32dc53 = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - var_c06441ec, 0);
+  if(isDefined(self.pers[#"first_connect_time"])) {
+    var_3e32dc53 = max(gettime() - self.pers[#"first_connect_time"] - var_c06441ec, 0);
   }
 
   player contracts::function_78083139();
@@ -183,7 +183,7 @@ function private function_6a7970fe() {
   player stats::function_d40764f3(#"hash_5e9a745460a10f80", 1);
 
   if(is_true(player.avenger)) {
-    player stats::function_d40764f3(#"hash_5387d5e6f15c6b55", 1);
+    player stats::function_d40764f3(#"top_5_avenger", 1);
   }
 
   if(isDefined(player.items_picked_up) && player.items_picked_up.size <= 1) {
@@ -209,11 +209,11 @@ function team_eliminated(params) {
   println("<dev string:x123>" + (isDefined(team) ? team : "<dev string:x146>") + "<dev string:x156>" + team_placement + "<dev string:x16b>");
 
   foreach(player in a_players) {
-    if(!isDefined(player.pers) || is_true(player.pers[#"hash_2283e9384383a6e9"])) {
+    if(!isDefined(player.pers) || is_true(player.pers[#"placement_finalized"])) {
       continue;
     }
 
-    player.pers[#"hash_2283e9384383a6e9"] = 1;
+    player.pers[#"placement_finalized"] = 1;
     player.pers[#"teameliminatedtime"] = gettime();
     player.pers[#"placement_team"] = team_placement;
     player match_record::set_player_stat(#"team_placement", team_placement);
@@ -242,11 +242,11 @@ function function_5648f82(team) {
         continue;
       }
 
-      if(!isDefined(player.pers) || is_true(player.pers[#"hash_2283e9384383a6e9"])) {
+      if(!isDefined(player.pers) || is_true(player.pers[#"placement_finalized"])) {
         continue;
       }
 
-      player.pers[#"hash_2283e9384383a6e9"] = 1;
+      player.pers[#"placement_finalized"] = 1;
       player.pers[#"placement_team"] = 1;
       player.pers[#"placement_player"] = 1;
       player function_a0fea1a9();
@@ -506,7 +506,7 @@ function private function_a117c988() {
     attacker = self.laststandparams.attacker;
 
     if(isDefined(attacker) && isDefined(attacker.var_121392a1) && isarray(attacker.var_121392a1)) {
-      if(isDefined(attacker.var_121392a1[#"blind_base"]) || isDefined(attacker.var_121392a1[#"swat_grenade"]) || isDefined(attacker.var_121392a1[#"hash_1527a22d8a6fdc21"])) {
+      if(isDefined(attacker.var_121392a1[#"blind_base"]) || isDefined(attacker.var_121392a1[#"swat_grenade"]) || isDefined(attacker.var_121392a1[#"stunned_slow_grenade"])) {
         self.laststandparams.var_6314a3a3 = 1;
       }
     }
@@ -547,7 +547,7 @@ function function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
       attacker stats::function_d40764f3(#"kills_after_revive", 1);
     }
 
-    var_2fba6abe = attacker.var_37ef8626;
+    var_2fba6abe = attacker.deployment_land_time;
     currenttime = gettime();
 
     if(isDefined(var_2fba6abe) && currenttime - var_2fba6abe <= 60000) {
@@ -597,7 +597,7 @@ function function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
               attacker stats::function_d40764f3(#"hash_46971a941d93cbb4", 1);
 
               if(maxteamplayers == 2) {
-                scoreevents::processscoreevent(#"hash_36b13ed6e99e6f06", attacker, undefined, var_c5948a69.weapon);
+                scoreevents::processscoreevent(#"squad_wipe_duo", attacker, undefined, var_c5948a69.weapon);
               }
 
               break;
@@ -607,7 +607,7 @@ function function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
             case 4:
               attacker stats::function_d40764f3(#"hash_736fa2bcc0b0bf62", 1);
               attacker stats::function_d40764f3(#"squads_eliminated_unassisted", 1);
-              attacker stats::function_dad108fa(#"hash_6f41f79a13199c79", 1);
+              attacker stats::function_dad108fa(#"squad_wipe_quad", 1);
               break;
             default:
               break;
@@ -678,7 +678,7 @@ function function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
       height = var_c5948a69.attackerorigin[2] - var_c5948a69.victimorigin[2];
 
       if(height >= 240) {
-        attacker stats::function_dad108fa(#"hash_35020c395a89befb", 1);
+        attacker stats::function_dad108fa(#"kills_high_ground", 1);
         attacker callback::callback(#"hash_7a9bdd3ee0ae95af");
       }
 

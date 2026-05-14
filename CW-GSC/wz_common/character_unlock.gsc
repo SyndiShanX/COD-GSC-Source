@@ -324,5 +324,5 @@ function function_d2294476(var_2ab9d3bd, replacementcount, var_3afaa57b) {
     replacementcount = 1;
   }
 
-  namespace_3d2704b3::function_f0297225(var_2ab9d3bd, replacementcount, var_3afaa57b);
+  item_supply_drop_system::function_f0297225(var_2ab9d3bd, replacementcount, var_3afaa57b);
 }

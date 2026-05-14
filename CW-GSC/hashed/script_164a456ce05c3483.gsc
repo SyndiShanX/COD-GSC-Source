@@ -124,7 +124,7 @@ function function_5b373dae() {
     self.doa.respawning = 0;
   }
 
-  outcome = is_true(self.doa.var_5598fe58) ? # "win" : # "loss";
+  outcome = is_true(self.doa.var_5598fe58) ? #"win" : #"loss";
   self.pers[#"outcome"] = outcome;
 }
 
@@ -324,7 +324,7 @@ function function_bb0408ca() {
     }
 
     if(lastlevel < var_af82a000 && self.doa.var_8f47d882 >= var_af82a000) {
-      self iprintlnbold(#"hash_59bd89e170a924ac");
+      self iprintlnbold(#"game/inactivedropwarning");
       namespace_1e25ad94::debugmsg("<dev string:x38>" + self.name);
     }
 

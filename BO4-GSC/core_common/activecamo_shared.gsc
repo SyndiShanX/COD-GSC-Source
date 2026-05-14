@@ -414,19 +414,19 @@ function_c0fa0ecb(weapon) {
 function_c1f96c48(weapon) {
   switch (weapon.statname) {
     case #"ar_accurate_t8":
-      return # "camo_active_headshot_base_headshots";
+      return #"camo_active_headshot_base_headshots";
     case #"ar_fastfire_t8":
-      return # "hash_9da725fe15aa048";
+      return #"hash_9da725fe15aa048";
     case #"lmg_standard_t8":
-      return # "hash_5cf945d7954a39e0";
+      return #"hash_5cf945d7954a39e0";
     case #"pistol_standard_t8":
-      return # "hash_1ffb9d5647330a52";
+      return #"hash_1ffb9d5647330a52";
     case #"shotgun_semiauto_t8":
-      return # "hash_6ed19b98000fb441";
+      return #"hash_6ed19b98000fb441";
     case #"smg_accurate_t8":
-      return # "hash_4b703056e870752e";
+      return #"hash_4b703056e870752e";
     case #"smg_standard_t8":
-      return # "hash_207f20afd71816c";
+      return #"hash_207f20afd71816c";
     default:
       break;
   }

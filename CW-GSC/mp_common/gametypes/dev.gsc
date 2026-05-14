@@ -468,7 +468,7 @@ function updatedevsettings() {
       }
 
       setDvar(#"scr_devgui_spawn", "<dev string:x38>");
-    } else if(getdvarstring(#"hash_c9f8ff06a656024") != "<dev string:x38>") {
+    } else if(getdvarstring(#"scr_devgui_spawninspection") != "<dev string:x38>") {
       if(!isDefined(level.var_31922da4)) {
         level.var_31922da4 = 0;
       }
@@ -486,7 +486,7 @@ function updatedevsettings() {
         player setactionslot(3, "<dev string:x24b>");
       }
 
-      setDvar(#"hash_c9f8ff06a656024", "<dev string:x38>");
+      setDvar(#"scr_devgui_spawninspection", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_ammo") != "<dev string:x38>") {
       players = getplayers();
 
@@ -531,9 +531,9 @@ function updatedevsettings() {
     } else if(getdvarstring(#"scr_give_player_score") != "<dev string:x38>") {
       level thread devgui_increase_momentum(getdvarint(#"scr_give_player_score", 0));
       setDvar(#"scr_give_player_score", "<dev string:x38>");
-    } else if(getdvarstring(#"hash_7d7add0fb8d419c8") != "<dev string:x38>") {
+    } else if(getdvarstring(#"scr_reset_player_score") != "<dev string:x38>") {
       level thread function_e88bdbcf();
-      setDvar(#"hash_7d7add0fb8d419c8", "<dev string:x38>");
+      setDvar(#"scr_reset_player_score", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_zero_ammo") != "<dev string:x38>") {
       players = getplayers();
 

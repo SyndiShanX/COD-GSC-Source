@@ -52,7 +52,7 @@ function private preinit() {
   level.var_c8de519d.var_ec391d55 = &function_3ee91387;
   level.var_7897141a = [];
   level.var_7897141a[getweapon(#"hash_66401df7cd6bf292")] = 1;
-  level.var_7897141a[getweapon(#"hash_3f62a872201cd1ce")] = 1;
+  level.var_7897141a[getweapon(#"swat_grenade_payload")] = 1;
   level.var_ca4ce464 = [];
   level.var_ca4ce464[getweapon(#"ability_smart_cover")] = 1;
   level.var_1d971504 = &function_7007692f;
@@ -670,7 +670,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
               switch (effect.var_3d1ed4bd.name) {
                 case #"ability_smart_cover":
                 case #"eq_swat_grenade":
-                case #"hash_3f62a872201cd1ce":
+                case #"swat_grenade_payload":
                 case #"eq_seeker_mine":
                 case #"eq_concertina_wire":
                 case #"eq_slow_grenade":
@@ -1212,7 +1212,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
           case #"shock_rifle":
           case #"ability_smart_cover":
           case #"eq_swat_grenade":
-          case #"hash_3f62a872201cd1ce":
+          case #"swat_grenade_payload":
           case #"eq_seeker_mine":
           case #"eq_concertina_wire":
           case #"hero_flamethrower":
@@ -1684,7 +1684,7 @@ function challengekills(data) {
           player.pers[#"kill_enemy_one_bullet_sniper"]++;
 
           if(player.pers[#"kill_enemy_one_bullet_sniper"] % 10 == 0) {
-            player stats::function_dad108fa(#"hash_2ebd387ffb67e1dc", 1);
+            player stats::function_dad108fa(#"kill_enemy_one_bullet_sniper_10", 1);
           }
         }
       }
@@ -3102,13 +3102,13 @@ function function_223ff464() {
     self force_challenge_stat(#"mastery_marksman", 0);
     marksmanarray = [];
     array::add(marksmanarray, #"hash_4075f20007923416");
-    array::add(marksmanarray, #"hash_72d1952fced05f40");
+    array::add(marksmanarray, #"gold_any_smg");
     array::add(marksmanarray, #"hash_70cd6c54d1c07272");
-    array::add(marksmanarray, #"hash_6b828c2fcb0e8df5");
-    array::add(marksmanarray, #"hash_2ea8a6bab2364c58");
-    array::add(marksmanarray, #"hash_7ecfcae46143397c");
+    array::add(marksmanarray, #"gold_any_lmg");
+    array::add(marksmanarray, #"gold_any_sniper");
+    array::add(marksmanarray, #"gold_any_pistol");
     array::add(marksmanarray, #"hash_3b30f98820bc20cf");
-    array::add(marksmanarray, #"hash_18816731b999fbfb");
+    array::add(marksmanarray, #"gold_any_launcher");
     array::add(marksmanarray, #"hash_6c1c399dcbe1af97");
     array::add(marksmanarray, #"hash_5630ec40181e1db3");
     array::add(marksmanarray, #"hash_354bfe5c140365bf");
@@ -3835,7 +3835,7 @@ function function_2f462ffd(victim, weapon, inflictor, objective) {
         break;
       case #"recon_car":
       case #"inventory_recon_car":
-        self stats::function_dad108fa(#"hash_7daf653f5e86b75", 1);
+        self stats::function_dad108fa(#"rcxd_objective_ekia", 1);
       case #"ultimate_turret":
       case #"inventory_ultimate_turret":
       case #"tank_robot":
@@ -3847,9 +3847,9 @@ function function_2f462ffd(victim, weapon, inflictor, objective) {
     }
   } else {
     if(level.hardcoremode) {
-      self stats::function_dad108fa(#"hash_753f02ea48b19cd", 1);
+      self stats::function_dad108fa(#"objective_ekia_hc", 1);
     } else if(!level.arenamatch) {
-      self stats::function_dad108fa(#"hash_45fca5cee12d8bdb", 1);
+      self stats::function_dad108fa(#"objective_ekia_core", 1);
     }
 
     self stats::function_dad108fa(#"objective_ekia", 1);
@@ -3858,7 +3858,7 @@ function function_2f462ffd(victim, weapon, inflictor, objective) {
     var_8a4cfbd = objective.var_76ce72e8 && isDefined(scoreevents) && scoreevents.var_fcd2ff3a === 1;
 
     if(var_8a4cfbd) {
-      self stats::function_dad108fa(#"hash_d4a989a2da3fa72", 1);
+      self stats::function_dad108fa(#"objective_ekia_specialized_equipment", 1);
     } else if(objective.issignatureweapon) {
       self stats::function_dad108fa(#"hash_6c3172682467122", 1);
     }
@@ -3872,7 +3872,7 @@ function function_2f462ffd(victim, weapon, inflictor, objective) {
 
       if(gear === #"gear_medicalinjectiongun") {
         if(var_d72bd991.var_46a82df0 === 1) {
-          self stats::function_dad108fa(#"hash_47c5c8af0f105c71", 1);
+          self stats::function_dad108fa(#"objective_ekia_full_heal_medicalinjectiongun", 1);
         }
       } else if(gear === #"gear_equipmentcharge") {
         if(var_8a4cfbd) {
@@ -3997,11 +3997,11 @@ function killedbaseoffender(objective, weapon, inflictor) {
         break;
       case #"swat_team":
       case #"inventory_swat_team":
-        self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
+        self stats::function_dad108fa(#"ground_assault_defender", 1);
         break;
       case #"ultimate_turret":
       case #"inventory_ultimate_turret":
-        self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
+        self stats::function_dad108fa(#"ground_assault_defender", 1);
 
         if(isDefined(inflictor)) {
           if(!isDefined(inflictor.var_d6489fb6)) {
@@ -4032,7 +4032,7 @@ function killedbaseoffender(objective, weapon, inflictor) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_offenderkillcount > 1) {
-    self stats::function_dad108fa(#"hash_4b3049ba027dd495", 1);
+    self stats::function_dad108fa(#"double_kill_attackers_defenders", 1);
   }
 
   self.challenge_offenderkillcount = 0;
@@ -4059,7 +4059,7 @@ function killedbasedefender(objective) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_defenderkillcount > 1) {
-    self stats::function_dad108fa(#"hash_4b3049ba027dd495", 1);
+    self stats::function_dad108fa(#"double_kill_attackers_defenders", 1);
   }
 
   self.challenge_defenderkillcount = 0;

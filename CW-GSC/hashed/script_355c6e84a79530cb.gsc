@@ -426,7 +426,7 @@ function private function_98715738(instance) {
 
       if(isalive(player) && player getstance() === "prone" && weapon !== player getcurrentweapon()) {
         s_ee.angles += (0, 90, 0);
-        s_ee thread namespace_65181344::function_fd87c780(#"survival_ee_special_drops", 1, 2);
+        s_ee thread item_spawn_groups_util::function_fd87c780(#"survival_ee_special_drops", 1, 2);
       }
     }
   }

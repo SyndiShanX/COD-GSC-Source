@@ -160,7 +160,7 @@ function function_e983f15a() {
 
 function function_d5d67561() {
   level notify(#"end_game", {
-    #reason: # "main_quest_completed"});
+    #reason: #"main_quest_completed"});
 }
 
 function function_e9c07a3d() {
@@ -3559,7 +3559,7 @@ function function_f44b304b() {
 
   wait 3;
   level notify(#"end_game", {
-    #reason: # "hash_4e5756202af6ae94"});
+    #reason: #"hash_4e5756202af6ae94"});
 }
 
 function private screen_fade_out() {
@@ -4048,8 +4048,8 @@ function function_d8b93021() {
   level.klaus.var_dd562be5 enablelinkto();
   level.klaus.var_dd562be5 linkto(level.klaus, "tag_weapon_right");
   level.klaus.var_dd562be5 util::delay(0.5, #"hash_152b0c9d34d5c670", &clientfield::set, "" + #"hash_6f292901e2fcaeb3", 2);
-  level.klaus namespace_ca8676a3::function_8996b315(1);
-  level.klaus namespace_ca8676a3::function_92157e49(getnode("klaus_portal_goal", "targetname").origin);
+  level.klaus zm_ai_mannequin_ally::function_8996b315(1);
+  level.klaus zm_ai_mannequin_ally::function_92157e49(getnode("klaus_portal_goal", "targetname").origin);
   level.klaus clientfield::set("" + #"hash_3e4641a9ea00d061", 0);
   level.klaus.health = 1200;
   level.klaus.var_ccefa6dd = 1;
@@ -4195,7 +4195,7 @@ function function_691f2d8() {
       return level.zombie_spawners[2].aitype;
     }
   } else if(var_87e4f82c <= 30) {
-    return # "hash_51edd7595ecda822";
+    return #"hash_51edd7595ecda822";
   }
 
   return level.zombie_spawners[6].aitype;
@@ -4279,14 +4279,14 @@ function function_e5c625d2() {
   var_a0ac4011 = randomintrange(0, 100);
 
   if(var_a0ac4011 <= 20) {
-    return # "spawner_bo5_avogadro_sr";
+    return #"spawner_bo5_avogadro_sr";
   }
 
   if(var_a0ac4011 <= 70) {
-    return # "spawner_bo5_mimic";
+    return #"spawner_bo5_mimic";
   }
 
-  return # "hash_4f87aa2a203d37d0";
+  return #"hash_4f87aa2a203d37d0";
 }
 
 function function_ccba157(e_player) {

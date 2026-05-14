@@ -150,18 +150,18 @@ function setuppropplayernames(localclientnum) {
 
 function highlightprop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 0) {
-    self notify(#"hash_3fe34dcd29fd6a0f");
+    self notify(#"highlightpropteamchange");
     return;
   }
 
-  self thread function_15e0dfb8(fieldname, bwastimejump);
+  self thread highlightpropteamchange(fieldname, bwastimejump);
 }
 
-function function_15e0dfb8(localclientnum, var_dc9f0c39) {
+function highlightpropteamchange(localclientnum, var_dc9f0c39) {
   self endon(#"entityshutdown");
   level endon(#"disconnect");
-  self notify(#"hash_3fe34dcd29fd6a0f");
-  self endon(#"hash_3fe34dcd29fd6a0f");
+  self notify(#"highlightpropteamchange");
+  self endon(#"highlightpropteamchange");
 
   while(true) {
     localplayer = function_5c10bd79(localclientnum);
@@ -176,17 +176,17 @@ function function_15e0dfb8(localclientnum, var_dc9f0c39) {
 
 function highlightplayer(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 0) {
-    self notify(#"hash_3fe34dcd29fd6a0f");
+    self notify(#"highlightpropteamchange");
     return;
   }
 
-  self thread function_29561f83(fieldname, bwastimejump);
+  self thread highlightplayerteamchange(fieldname, bwastimejump);
 }
 
-function function_29561f83(localclientnum, var_dc9f0c39) {
+function highlightplayerteamchange(localclientnum, var_dc9f0c39) {
   self endon(#"entityshutdown");
-  self notify(#"hash_3f606627f154954b");
-  self endon(#"hash_3f606627f154954b");
+  self notify(#"highlightplayerteamchange");
+  self endon(#"highlightplayerteamchange");
 
   while(true) {
     localplayer = function_5c10bd79(var_dc9f0c39);

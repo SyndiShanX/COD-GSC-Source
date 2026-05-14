@@ -67,7 +67,7 @@ function preinit() {
   }
 
   clientfield::register("scriptmover", "" + #"reward_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 1, 3, "int");
+  clientfield::register("scriptmover", "" + #"tribute_flame_fx", 1, 3, "int");
   clientfield::register("scriptmover", "" + #"hash_3dbe7851af541017", 1, 1, "int");
   clientfield::register("toplayer", "" + #"hash_31bea9cf1e6f76a0", 1, getminbitcountfornum(level.var_957b495e), "int");
   clientfield::register("toplayer", "" + #"hash_216c75103f478671", 1, 4, "int");
@@ -1560,7 +1560,7 @@ function game_over() {
 
 function function_2bf355c2() {
   if(isDefined(self.var_642ed51a.var_f693bf0b)) {
-    self.var_642ed51a.var_f693bf0b clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
+    self.var_642ed51a.var_f693bf0b clientfield::set("" + #"tribute_flame_fx", 0);
     self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 0);
     self namespace_f999c142::function_2ae77bb7(undefined, 0);
   }

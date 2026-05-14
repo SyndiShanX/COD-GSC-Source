@@ -172,7 +172,7 @@ function private function_19534163() {
     #var_aad36d51: 0, #fieldvalue: 1
   }, #"hash_72a5fe161eb7a0ce");
   level notify(#"hash_1c978bceb82ac69e", {
-    #event: # "hash_43d27ac2611ccdc2"});
+    #event: #"hash_43d27ac2611ccdc2"});
 }
 
 function private function_bc29dab9(var_2503a21f) {

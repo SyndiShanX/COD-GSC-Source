@@ -99,9 +99,9 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_ce802423 = 1;
   level.var_a8b23f5a = 1;
   level.mission_bundle = getscriptbundle("mission_settings_control");
-  game.strings[#"hash_bab7f2001813aa7"] = #"hash_15294f07ee519376";
+  game.strings[#"all_zones_captured_winner"] = #"hash_15294f07ee519376";
   game.strings[#"hash_5db475ae2d5164e1"] = #"hash_3a9b595d0bf81f13";
-  hud_message::function_36419c2(1, game.strings[#"hash_bab7f2001813aa7"], game.strings[#"hash_5db475ae2d5164e1"]);
+  hud_message::function_36419c2(1, game.strings[#"all_zones_captured_winner"], game.strings[#"hash_5db475ae2d5164e1"]);
   level.audioplaybackthrottle = int(level.mission_bundle.msaudioplaybackthrottle);
 
   if(!isDefined(level.audioplaybackthrottle)) {
@@ -300,9 +300,9 @@ function function_d58274e5() {
     var_d0f35ab1[#"axis"] = game.stat[#"hash_2d36f0ab06fb245e"][#"axis"];
 
     if(var_d0f35ab1[#"allies"] > var_d0f35ab1[#"axis"]) {
-      return # "allies";
+      return #"allies";
     } else if(var_d0f35ab1[#"axis"] > var_d0f35ab1[#"allies"]) {
-      return # "axis";
+      return #"axis";
     }
   }
 
@@ -310,18 +310,18 @@ function function_d58274e5() {
   totaldeaths[#"axis"] = game.stat[#"hash_ed468051aee466"][#"axis"];
 
   if(totaldeaths[#"allies"] < totaldeaths[#"axis"]) {
-    return # "allies";
+    return #"allies";
   }
 
   if(totaldeaths[#"axis"] < totaldeaths[#"allies"]) {
-    return # "axis";
+    return #"axis";
   }
 
   if(randomint(2) == 0) {
-    return # "allies";
+    return #"allies";
   }
 
-  return # "axis";
+  return #"axis";
 }
 
 function function_d126ce1b() {
@@ -1225,7 +1225,7 @@ function private on_zone_capture(sentient) {
   if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: sentient, #eventtype: # "hardpoint_captured"});
+      #player: sentient, #eventtype: #"hardpoint_captured"});
     bb::function_95a5b5c2("exited_control_point_captured", self.zoneindex, sentient.team, sentient.origin, sentient);
     self notify(#"hash_68e3332f714afbbc");
   }
@@ -1336,7 +1336,7 @@ function private on_zone_capture_neutral(sentient) {
   if(isPlayer(sentient)) {
     sentient recordgameevent("hardpoint_captured");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: sentient, #eventtype: # "hardpoint_captured"});
+      #player: sentient, #eventtype: #"hardpoint_captured"});
   }
 
   sentient notify("event_ended" + self.owningzone.zone_index);
@@ -1416,7 +1416,7 @@ function private credit_player(player, string, capturetime, capture_team, lastca
     string contracts::increment_contract(#"hash_afec1ad46ac353");
     string recordgameevent("capture");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: string, #eventtype: # "capture"});
+      #player: string, #eventtype: #"capture"});
 
     if(var_a84f97bf) {
       level thread popups::displayteammessagetoall(capturetime, string);
@@ -1808,7 +1808,7 @@ function on_decay_complete() {
           continue;
         }
 
-        scoreevents::processscoreevent(#"hash_abbc936bf9059a6", player_from_touchlist, undefined, undefined);
+        scoreevents::processscoreevent(#"control_zone_depletion", player_from_touchlist, undefined, undefined);
       }
     }
   }

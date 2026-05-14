@@ -133,7 +133,7 @@ function on_player_score(new_score, delta_score) {
   var_2c74fba6 = level.var_9d6b3096[gametype].var_9a5a8dcf;
 
   if(old_score < var_2c74fba6 && new_score >= var_2c74fba6) {
-    player function_ccf82192(#"hash_1075c38287814aa0");
+    player function_ccf82192(#"contract_wl_score_per_mode_hard");
   }
 }
 
@@ -261,7 +261,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -270,7 +270,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self stats::get_stat_global(#"time_played_total") - self.pers[#"hash_5651f00c6c1790a4"] + var_9d12108c;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
+      self luinotifyevent(#"loot_contract_complete", 1, level.contract_ids[var_38280f2f]);
     }
   }
 
@@ -327,7 +327,7 @@ function function_a4c8ce2a(data) {
   }
 
   arenaslot = arenagetslot();
-  var_67d27328 = player stats::get_stat(#"arenastats", arenaslot, #"leagueplaystats", #"hash_36cd820c1ff6c16b");
+  var_67d27328 = player stats::get_stat(#"arenastats", arenaslot, #"leagueplaystats", #"aarsubdivisionpoints");
 
   if(var_67d27328 > 0) {
     player increment_contract(#"hash_35e52e40ab6d1223", var_67d27328);
@@ -339,7 +339,7 @@ function function_a4c8ce2a(data) {
 
 function contract_win(winner) {
   winner function_ccf82192(#"hash_4e903e32da421b17");
-  winner function_ccf82192(#"hash_2809e14b0f3b4c5e");
+  winner function_ccf82192(#"contract_wl_win_games_hard");
 
   switch (level.gametype) {
     case #"hash_35a6541d081acef5":
@@ -361,7 +361,7 @@ function contract_win(winner) {
     }
 
     if(var_283195f2 % 2 == 0) {
-      winner function_ccf82192(#"hash_4a14b348f01ad76d");
+      winner function_ccf82192(#"contract_wl_win_streak");
     }
   }
 }

@@ -1041,7 +1041,7 @@ take() {
 
   self bgb_clear_monitors_and_clientfields();
   self notify(#"bgb_update", {
-    #to_bgb: # "none", #var_826ddd38: self.bgb
+    #to_bgb: #"none", #var_826ddd38: self.bgb
   });
   self notify("bgb_update_take_" + self.bgb);
   self.bgb = #"none";
@@ -1052,7 +1052,7 @@ get_enabled() {
     return self.bgb;
   }
 
-  return # "none";
+  return #"none";
 }
 
 is_enabled(name) {

@@ -82,10 +82,10 @@ function function_89e748a7() {
   }
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
+    clientfield::register("world", "" + #"zeus_bird_fx", 1, 1, "int", &zeus_bird_fx, 0, 0);
     clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
     clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
-    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
+    clientfield::register("toplayer", "" + #"perk_totem_rob", 1, 1, "counter", &perk_totem_rob, 0, 0);
   }
 
   level thread perk_init_code_callbacks();
@@ -226,7 +226,7 @@ function play_perk_fx_on_client(client_num, fx_light, duration) {
   fxobj delete();
 }
 
-function function_ccbdf992(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function perk_totem_rob(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     self playrenderoverridebundle(#"hash_4659ecede94f0b38", "tag_accessory_left");
   }
@@ -290,7 +290,7 @@ function private function_be3ae9c5(n_value, var_51e3f61d = 0) {
   return true;
 }
 
-function function_9b4bc8e7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function zeus_bird_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon(#"demo_jump");
 
   if(bwastimejump) {
@@ -299,7 +299,7 @@ function function_9b4bc8e7(localclientnum, oldval, newval, bnewent, binitialsnap
       level.var_aaf8da70 = getent(fieldname, "zeus_bird_head", "targetname");
     }
 
-    util::playFXOnTag(fieldname, level._effect[#"hash_46334db9e3c76275"], level.var_aaf8da70, "bird_follow_jnt");
+    util::playFXOnTag(fieldname, level._effect[#"zeus_bird_fx"], level.var_aaf8da70, "bird_follow_jnt");
     level.var_aaf8da70 thread function_6a0a572d(fieldname);
   }
 }

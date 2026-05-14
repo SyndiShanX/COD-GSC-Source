@@ -428,7 +428,7 @@ function apply_damage(weapon, damage, smeansofdeath, eattacker, shitloc) {
     self.var_e6c1bab8 = gettime();
     self playsoundtoplayer(#"prj_bullet_impact_armor_broken", self);
     self thread function_386de852();
-    self removetalent(#"hash_6be738527a4213aa");
+    self removetalent(#"gear_armor_mp");
 
     if(perks::perk_hasperk(#"specialty_armor")) {
       self perks::perk_unsetperk(#"specialty_armor");

@@ -57,7 +57,7 @@ event_handler[level_init] main(eventstruct) {
 
   var_80b6eb8c = int(var_80b6eb8c * 1000);
   item_world::function_cbc32e1b(var_80b6eb8c);
-  level thread namespace_3d2704b3::start(3, 15, array(20, 20, 20));
+  level thread item_supply_drop_system::start(3, 15, array(20, 20, 20));
 }
 
 function_d075b84e() {

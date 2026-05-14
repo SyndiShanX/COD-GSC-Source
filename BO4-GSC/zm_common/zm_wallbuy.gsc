@@ -591,10 +591,10 @@ reset_wallbuys() {
 
 get_weapon_hint_ammo() {
   if(function_8b1a219a()) {
-    return # "hash_2791ecebb85142c4";
+    return #"hash_2791ecebb85142c4";
   }
 
-  return # "zombie/weaponcostonly_cfill";
+  return #"zombie/weaponcostonly_cfill";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {

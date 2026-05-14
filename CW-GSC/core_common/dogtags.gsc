@@ -60,7 +60,7 @@ function private function_bf06b7aa(victim, attacker, on_use_function, var_f75dca
     trigger.var_a865c2cd = 0;
   }
 
-  objectivename = isDefined(level.var_febab1ea) ? level.var_febab1ea : # "conf_dogtags";
+  objectivename = isDefined(level.var_febab1ea) ? level.var_febab1ea : #"conf_dogtags";
   dogtag = gameobjects::create_use_object(attacker.team, trigger, visuals, (0, 0, 0), objectivename);
   trigger.dogtag = dogtag;
   dogtag gameobjects::set_use_time(0);
@@ -301,7 +301,7 @@ function onuse(player) {
       player stats::function_dad108fa(#"killsdenied", 1);
       player recordgameevent("return");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "return"});
+        #player: player, #eventtype: #"return"});
       event = "kill_denied";
 
       if(self.victim == player) {
@@ -326,7 +326,7 @@ function onuse(player) {
       player stats::function_dad108fa(#"killsconfirmed", 1);
       player recordgameevent("capture");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "capture"});
+        #player: player, #eventtype: #"capture"});
 
       if(isDefined(self.attacker) && self.attacker != player && !util::function_fbce7263(player.team, self.attacker.team)) {
         self.attacker onpickup("teammate_kill_confirmed");

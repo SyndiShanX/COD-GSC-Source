@@ -484,10 +484,10 @@ function function_45efe0ab(itementry) {
     if(itementry.itemtype != #"ammo") {
       var_caafaa25 = itementry.weapon.displayname;
     } else {
-      var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+      var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
     }
   } else {
-    var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+    var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
   }
 
   return var_caafaa25;

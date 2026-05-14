@@ -316,11 +316,11 @@ class class_7da27482 {
   }
 
   function function_8144231c() {
-    if(!var_c31e86ed && # "female" === getherogender(var_1d73bad9, _i_mode)) {
-      return # "pb_fem_frontend_default";
+    if(!var_c31e86ed && #"female" === getherogender(var_1d73bad9, _i_mode)) {
+      return #"pb_fem_frontend_default";
     }
 
-    return # "pb_male_frontend_default";
+    return #"pb_male_frontend_default";
   }
 
   function function_47ad026() {
@@ -546,7 +546,7 @@ class class_7da27482 {
 
     if(function_bf7bce05()) {
       base_model = function_d5e754c6();
-      attached_models = [#"head": function_ccc149f(params), #"outfit_head": function_8c6b7af7(params), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
+      attached_models = [#"head": function_ccc149f(params), #"outfit_head": function_8c6b7af7(params), #"outfit_headgear": #"tag_origin", #"outfit_legs": #"tag_origin", #"outfit_torso": #"tag_origin"];
     } else {
       base_model = function_b06080fb();
       attached_models = [#"head": function_ccc149f(params), #"outfit_head": function_8c6b7af7(params), #"outfit_headgear": function_1978bfeb(), #"outfit_legs": function_cdc02b18(), #"outfit_torso": function_d5e754c6()];
@@ -608,10 +608,10 @@ class class_7da27482 {
 
         if(function_bf7bce05()) {
           var_867954ad = character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, 0, _i_mode);
-          var_89610e9c = [#"head": character_customization::function_6bca50af(&getcharacterheadmodel, 0, _i_mode), #"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, 0, _i_mode), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
+          var_89610e9c = [#"head": character_customization::function_6bca50af(&getcharacterheadmodel, 0, _i_mode), #"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, 0, _i_mode), #"outfit_headgear": #"tag_origin", #"outfit_legs": #"tag_origin", #"outfit_torso": #"tag_origin"];
         } else {
           var_867954ad = character_customization::function_6bca50af(&function_5d23af5b, var_1d73bad9, outfit_index, var_d92aad5c, _i_mode);
-          var_89610e9c = [#"head": isDefined(getcharacterheadmodel(0, _i_mode)) ? getcharacterheadmodel(0, _i_mode) : # "tag_origin", #"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, var_2f1dcdbb, _i_mode), #"outfit_headgear": character_customization::function_6bca50af(&function_6b7000e, var_1d73bad9, outfit_index, var_cb9bcfe7, _i_mode), #"outfit_legs": character_customization::function_6bca50af(&function_cde23658, var_1d73bad9, outfit_index, var_173f7170, _i_mode), #"outfit_torso": character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, var_1f170bc0, _i_mode)];
+          var_89610e9c = [#"head": isDefined(getcharacterheadmodel(0, _i_mode)) ? getcharacterheadmodel(0, _i_mode) : #"tag_origin", #"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, var_2f1dcdbb, _i_mode), #"outfit_headgear": character_customization::function_6bca50af(&function_6b7000e, var_1d73bad9, outfit_index, var_cb9bcfe7, _i_mode), #"outfit_legs": character_customization::function_6bca50af(&function_cde23658, var_1d73bad9, outfit_index, var_173f7170, _i_mode), #"outfit_torso": character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, var_1f170bc0, _i_mode)];
         }
 
         var_cf2f5fb7 = array(var_867954ad);
@@ -744,7 +744,7 @@ class class_7da27482 {
 
   function function_d5e754c6() {
     if(var_c31e86ed) {
-      return # "c_t8_mp_swatbuddy_body2";
+      return #"c_t8_mp_swatbuddy_body2";
     }
 
     return character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, var_cf55444c, var_f5c0467b[6], _i_mode);
@@ -752,7 +752,7 @@ class class_7da27482 {
 
   function function_cdc02b18() {
     if(var_c31e86ed) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     return character_customization::function_6bca50af(&function_cde23658, var_1d73bad9, var_cf55444c, var_f5c0467b[4], _i_mode);
@@ -760,7 +760,7 @@ class class_7da27482 {
 
   function function_1978bfeb() {
     if(var_c31e86ed) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     return character_customization::function_6bca50af(&function_6b7000e, var_1d73bad9, var_cf55444c, var_f5c0467b[3], _i_mode);
@@ -768,11 +768,11 @@ class class_7da27482 {
 
   function function_8c6b7af7(params) {
     if(var_c31e86ed) {
-      return # "c_t8_mp_swatbuddy_head2";
+      return #"c_t8_mp_swatbuddy_head2";
     }
 
     if(!function_ef6f931f(params)) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     return character_customization::function_6bca50af(&startquantity, var_1d73bad9, var_cf55444c, var_f5c0467b[2], _i_mode);
@@ -780,7 +780,7 @@ class class_7da27482 {
 
   function function_b06080fb() {
     if(var_c31e86ed) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     return character_customization::function_6bca50af(&function_5d23af5b, var_1d73bad9, var_cf55444c, var_f5c0467b[0], _i_mode);
@@ -788,11 +788,11 @@ class class_7da27482 {
 
   function function_ccc149f(params) {
     if(var_c31e86ed) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     if(!function_f941c5de(params)) {
-      return # "tag_origin";
+      return #"tag_origin";
     }
 
     return getcharacterheadmodel(var_db113baf, _i_mode);
@@ -932,10 +932,10 @@ class class_7da27482 {
     if(gesture_index == -1) {
       if(#"female" === getherogender(var_1d73bad9, _i_mode)) {
         return {
-          #animation: # "pb_rifle_fem_stand_spray_fb"};
+          #animation: #"pb_rifle_fem_stand_spray_fb"};
       } else {
         return {
-          #animation: # "pb_rifle_male_stand_spray_fb"};
+          #animation: #"pb_rifle_male_stand_spray_fb"};
       }
     }
 
@@ -1133,7 +1133,7 @@ function_6bca50af(fn, character_index, outfit_index, var_e1daa8d9, mode) {
     }
   }
 
-  return isDefined(model) ? model : # "tag_origin";
+  return isDefined(model) ? model : #"tag_origin";
 }
 
 function_6aee5a4e(character) {

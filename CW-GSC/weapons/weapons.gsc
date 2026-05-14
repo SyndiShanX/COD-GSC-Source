@@ -327,7 +327,7 @@ function update_last_held_weapon_timings(newtime, var_d75fdbe3 = self.currentwea
 
       self stats::function_eec52333(var_d75fdbe3, #"timeused", totaltime, self.class_num, weaponpickedup);
       level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-        #player: self, #weapon: var_d75fdbe3, #statname: # "timeused", #value: totaltime, #weaponpickedup: weaponpickedup
+        #player: self, #weapon: var_d75fdbe3, #statname: #"timeused", #value: totaltime, #weaponpickedup: weaponpickedup
       });
       self.currentweaponstarttime = newtime;
     }
@@ -867,10 +867,10 @@ function track_fire(curweapon) {
     weaponpickedup = 1;
   } else {
     level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-      #player: self, #weapon: curweapon, #statname: # "shots", #value: shotsfired, #weaponpickedup: weaponpickedup
+      #player: self, #weapon: curweapon, #statname: #"shots", #value: shotsfired, #weaponpickedup: weaponpickedup
     });
     level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-      #player: self, #weapon: curweapon, #statname: # "hits", #value: isDefined(self.hits) ? self.hits : 0, #weaponpickedup: weaponpickedup
+      #player: self, #weapon: curweapon, #statname: #"hits", #value: isDefined(self.hits) ? self.hits : 0, #weaponpickedup: weaponpickedup
     });
   }
 
@@ -1232,7 +1232,7 @@ function event_handler[offhand_fire] function_97023fdf(eventstruct) {
 }
 
 function event_handler[grenade_launcher_fire] function_aa7da3a(eventstruct) {
-  self callback::callback(#"hash_198a389d6b65f68d", eventstruct);
+  self callback::callback(#"grenade_launcher_fired", eventstruct);
 }
 
 function function_43ec7f33(str_notify) {
@@ -1369,9 +1369,9 @@ function turn_grenade_into_a_dud(weapon, isthrowngrenade, player) {
       }
 
       if(isthrowngrenade) {
-        player iprintlnbold(#"hash_10012bedb9f60e99", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+        player iprintlnbold(#"mp/grenade_unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
       } else {
-        player iprintlnbold(#"hash_255050263c8cd26d", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+        player iprintlnbold(#"mp/launcher_unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
       }
 
       self makegrenadedud();

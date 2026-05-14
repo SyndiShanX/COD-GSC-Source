@@ -83,7 +83,7 @@ function hit_alert_sfx_cp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     }
 
     if(isvehicle(psoffsettime)) {
-      hitalias = #"hash_2ce81d103e923201";
+      hitalias = #"mpl_hit_vehicle";
     }
   }
 
@@ -98,7 +98,7 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
   }
 
   if(isDefined(inflictor) && inflictor === "MOD_EXECUTION") {
-    return # "hash_58d3709b34454b17";
+    return #"hash_58d3709b34454b17";
   }
 
   if(is_true(fatal) && victim.name == #"inventory_hero_flamethrower") {
@@ -127,16 +127,16 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     } else if(victim.name == #"snowball") {
       hitalias = #"mpl_hit_alert_snow";
     } else if(victim.name == #"waterballoon") {
-      hitalias = #"hash_1fd605562fb1fd3a";
+      hitalias = #"mpl_hit_alert_waterball";
     } else if(isvehicle(psoffsettime)) {
-      hitalias = #"hash_2ce81d103e923201";
+      hitalias = #"mpl_hit_vehicle";
     } else if(isDefined(psoffsettime) && isDefined(psoffsettime.victimsoundmod)) {
       switch (psoffsettime.victimsoundmod) {
         case #"safeguard_robot":
           hitalias = #"mpl_hit_alert_escort";
           break;
         case #"vehicle":
-          hitalias = #"hash_2ce81d103e923201";
+          hitalias = #"mpl_hit_vehicle";
           break;
         default:
           hitalias = #"mpl_hit_alert";
@@ -258,7 +258,7 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
     if(isDefined(victim.hitsound) && victim.hitsound != "") {
       hitalias = victim.hitsound;
     } else if(isvehicle(psoffsettime)) {
-      hitalias = #"hash_2ce81d103e923201";
+      hitalias = #"mpl_hit_vehicle";
     } else if(isDefined(weapon) && isDefined(weapon.soundmod)) {
       switch (weapon.soundmod) {
         case #"player":

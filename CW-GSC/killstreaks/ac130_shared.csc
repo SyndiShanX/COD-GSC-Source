@@ -27,7 +27,7 @@ function private function_2c2bf9dc(localclientnum, uimodel, weapon_name) {
 
 function on_localclient_connect(localclientnum) {
   function_2c2bf9dc(localclientnum, "maincannonClipSize", #"hash_17df39d53492b0bf");
-  function_2c2bf9dc(localclientnum, "autocannonClipSize", #"hash_7b24d0d0d2823bca");
+  function_2c2bf9dc(localclientnum, "autocannonClipSize", #"ac130_autocannon");
   function_2c2bf9dc(localclientnum, "chaingunClipSize", #"ac130_chaingun");
 }
 

@@ -549,7 +549,7 @@ function_8e0b371() {
         str_location = self get_location_string(level.s_bird_loc.script_string);
       }
 
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
     } else {
       self zm_hud::function_29780fb5(#"");
     }

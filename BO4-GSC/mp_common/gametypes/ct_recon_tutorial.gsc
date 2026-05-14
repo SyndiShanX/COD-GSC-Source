@@ -250,7 +250,7 @@ function_86c058b() {
 
   ct_vo::function_831e0584(array(#"hash_339eb8312fdc25d4"), 1);
   e_player = getplayers()[0];
-  var_fb96a3d0 = e_player gamepadusedlast() ? # "hash_5fc4460a0ad75031" : # "hash_c06fe0229fb1557";
+  var_fb96a3d0 = e_player gamepadusedlast() ? #"hash_5fc4460a0ad75031" : #"hash_c06fe0229fb1557";
   e_player thread ct_utils::function_61c3d59c(var_fb96a3d0, undefined);
   level.var_66b3c127 = struct::get_array("s_vision_pulse_axis", "targetname");
   level.var_9f073b4 = 0;
@@ -778,7 +778,7 @@ function_39f9d433() {
   level notify(#"hash_3a0d770bcea202fd");
   level.var_e72728b8 = undefined;
   e_player = getplayers()[0];
-  var_c0b8e10c = e_player gamepadusedlast() ? # "hash_42fb522d8067c039" : # "hash_29d476be9b1e85f";
+  var_c0b8e10c = e_player gamepadusedlast() ? #"hash_42fb522d8067c039" : #"hash_29d476be9b1e85f";
   e_player thread ct_utils::function_61c3d59c(var_c0b8e10c, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_dd77a0770d28e66"), "stop_nag");
   e_player = getplayers()[0];
@@ -992,7 +992,7 @@ zombie_death_watcher() {
 function_79d4c106() {
   level endon(#"combattraining_logic_finished");
   e_player = getplayers()[0];
-  var_7d5a0f5e = e_player gamepadusedlast() ? # "hash_1c41d4b9d00defa5" : # "hash_7a1505df3fd0ed5b";
+  var_7d5a0f5e = e_player gamepadusedlast() ? #"hash_1c41d4b9d00defa5" : #"hash_7a1505df3fd0ed5b";
   e_player thread ct_utils::function_61c3d59c(var_7d5a0f5e, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_2613f24ad4fa5cbc"), "stop_nag");
   setDvar(#"hash_3e06b14c41136e95", 0);

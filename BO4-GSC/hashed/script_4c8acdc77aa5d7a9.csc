@@ -6,7 +6,7 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-#namespace namespace_6fe6fb00;
+#namespace zm_ai_dog_electric;
 
 autoexec __init__system__() {
   system::register(#"zm_ai_dog_electric", &__init__, undefined, #"zombie_dog_util");

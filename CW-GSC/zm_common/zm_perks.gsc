@@ -1494,10 +1494,10 @@ function function_89e748a7() {
   }
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int");
+    clientfield::register("world", "" + #"zeus_bird_fx", 1, 1, "int");
     clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int");
     clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int");
-    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter");
+    clientfield::register("toplayer", "" + #"perk_totem_rob", 1, 1, "counter");
   }
 }
 
@@ -2046,7 +2046,7 @@ function function_c210fc2e(n_index, a_structs) {
 
 function function_b7f2c635(player) {
   n_slot = self.stub.script_int;
-  perk = player.var_47654123[n_slot] ? # "specialty_mystery" : player.var_c27f1e90[n_slot];
+  perk = player.var_47654123[n_slot] ? #"specialty_mystery" : player.var_c27f1e90[n_slot];
 
   if(self.stub.var_36d60c16 !== 1 && player getstance() === "prone" && distancesquared(self.origin, player.origin) < 9216) {
     self.stub.var_36d60c16 = 1;
@@ -2125,7 +2125,7 @@ function function_b7f2c635(player) {
       n_cost -= player.talisman_perk_reducecost_4;
     }
 
-    n_cost = player namespace_e38c57c1::function_863dc0ef(n_cost);
+    n_cost = player zm_faction_buffs::function_863dc0ef(n_cost);
     n_cost = int(max(n_cost, 0));
 
     if(isDefined(var_c591876d) && var_c591876d !== " ") {
@@ -2156,7 +2156,7 @@ function function_f5da744e() {
       continue;
     }
 
-    perk = player.var_47654123[n_slot] ? # "specialty_mystery" : player.var_c27f1e90[n_slot];
+    perk = player.var_47654123[n_slot] ? #"specialty_mystery" : player.var_c27f1e90[n_slot];
 
     if(!isDefined(player.var_c27f1e90) || player.var_c27f1e90.size <= n_slot) {
       return;
@@ -2210,7 +2210,7 @@ function function_f5da744e() {
       current_cost -= player.talisman_perk_reducecost_4;
     }
 
-    current_cost = player namespace_e38c57c1::function_863dc0ef(current_cost);
+    current_cost = player zm_faction_buffs::function_863dc0ef(current_cost);
     current_cost = int(max(current_cost, 0));
 
     if(!player zm_score::can_player_purchase(current_cost)) {
@@ -2271,7 +2271,7 @@ function taking_cover_tanks_(player, perk, n_slot, s_vapor_altar) {
       player thread function_ef7f9ab0(n_slot);
     }
 
-    player thread function_9bdf581f(perk, n_slot, 1);
+    player thread give_perk_vapor(perk, n_slot, 1);
 
     if(isDefined(level.perk_bought_func)) {
       player[[level.perk_bought_func]](perk);
@@ -2382,10 +2382,10 @@ function function_b2ac6ee7() {
   self.hint_parm1 = self.cost;
 }
 
-function function_9bdf581f(perk, n_slot, b_bought = 0) {
+function give_perk_vapor(perk, n_slot, b_bought = 0) {
   self endon(#"player_downed", #"disconnect", #"perk_abort_drinking");
   level endon(#"end_game");
-  level notify(#"hash_4e566c83cdfabe44", {
+  level notify(#"give_perk_vapor", {
     #e_player: self, #perk: perk
   });
   self perks::perk_setperk(perk);
@@ -2694,7 +2694,7 @@ function function_cc24f525() {
         self.var_47654123[n_slot] = 0;
       }
 
-      self thread function_9bdf581f(var_16c042b8, n_slot);
+      self thread give_perk_vapor(var_16c042b8, n_slot);
     }
   }
 }
@@ -2723,7 +2723,7 @@ function function_29387491(var_16c042b8, n_slot) {
       self.var_47654123[n_slot] = 0;
     }
 
-    self thread function_9bdf581f(var_16c042b8, n_slot);
+    self thread give_perk_vapor(var_16c042b8, n_slot);
     return;
   }
 
@@ -2819,7 +2819,7 @@ function private function_7723353c() {
       self function_f9385a02(str_perk, n_slot);
     }
 
-    self function_9bdf581f(str_perk, n_slot);
+    self give_perk_vapor(str_perk, n_slot);
   }
 }
 
@@ -2851,7 +2851,7 @@ function function_8b413937(s_vapor_altar) {
   } else {
     s_vapor_altar function_a30c73b9("on");
     waitframe(1);
-    s_vapor_altar.mdl_altar clientfield::set("" + #"hash_cf74c35ecc5a49", 1);
+    s_vapor_altar.mdl_altar clientfield::set("" + #"init_perk_altar_icon", 1);
   }
 
   s_vapor_altar function_a1bad730();
@@ -3069,7 +3069,7 @@ function function_fb633f9d(n_slot, n_state) {
 function function_ba56adf1(var_c188cf87, var_59ad3e22) {
   level endon(#"end_game");
   level flag::wait_till("all_players_spawned");
-  level clientfield::set("" + #"hash_46334db9e3c76275", 1);
+  level clientfield::set("" + #"zeus_bird_fx", 1);
 
   while(true) {
     a_e_players = arraysortclosest(level.players, var_c188cf87, undefined, 0, 750);
@@ -3115,7 +3115,7 @@ function function_df87281a(var_16c042b8, b_extra = 0) {
     self function_a7ae070c(var_16c042b8);
   } else {
     self.var_c27f1e90[4] = var_16c042b8;
-    self function_9bdf581f(var_16c042b8, 4);
+    self give_perk_vapor(var_16c042b8, 4);
     self function_b8c12b0f(3, 1);
   }
 
@@ -3228,7 +3228,7 @@ function function_2babacc2() {
     n_slot = function_c1efcc57(var_16c042b8);
 
     if(n_slot >= 0) {
-      self function_9bdf581f(var_16c042b8, n_slot, 0);
+      self give_perk_vapor(var_16c042b8, n_slot, 0);
 
       if(!isDefined(var_8cf447e1)) {
         var_8cf447e1 = [];
@@ -3338,7 +3338,7 @@ function function_b2dfd295(perk, var_8c7df7fc) {
       self thread function_f9385a02(perk, var_c3f41835);
     }
 
-    self thread function_9bdf581f(perk, var_c3f41835);
+    self thread give_perk_vapor(perk, var_c3f41835);
     return;
   }
 

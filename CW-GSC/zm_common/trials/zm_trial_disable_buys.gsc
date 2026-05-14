@@ -305,7 +305,7 @@ function private hide_traps() {
 
 function private show_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = #"hash_23c1c09e94181fdb";
+  str_text = #"zombie/button_buy_trap";
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);

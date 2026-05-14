@@ -484,11 +484,11 @@ function remove_on_offhand_fire(func, obj) {
 }
 
 function function_4b7977fe(func, obj) {
-  add_callback(#"hash_198a389d6b65f68d", func, obj);
+  add_callback(#"grenade_launcher_fired", func, obj);
 }
 
 function function_61583a71(func, obj) {
-  remove_callback(#"hash_198a389d6b65f68d", func, obj);
+  remove_callback(#"grenade_launcher_fired", func, obj);
 }
 
 function on_detonate(func, obj) {
@@ -543,12 +543,12 @@ function remove_on_trigger_once(func, obj) {
   function_52ac9652(#"on_trigger_once", func, obj);
 }
 
-function function_33f0ddd3(func, obj) {
-  add_callback(#"hash_39bf72fd97e248a0", func, obj);
+function on_player_loadout_changed(func, obj) {
+  add_callback(#"on_player_loadout_changed", func, obj);
 }
 
 function function_824d206(func, obj) {
-  remove_callback(#"hash_39bf72fd97e248a0", func, obj);
+  remove_callback(#"on_player_loadout_changed", func, obj);
 }
 
 function on_boast(func, obj) {
@@ -559,12 +559,12 @@ function remove_on_boast(func, obj) {
   remove_callback(#"on_boast", func, obj);
 }
 
-function function_5753ac6e(func, obj) {
-  add_callback(#"hash_4a9c56bba76da754", func, obj);
+function on_boast_end(func, obj) {
+  add_callback(#"on_boast_end", func, obj);
 }
 
 function function_16046baa(func, obj) {
-  remove_callback(#"hash_4a9c56bba76da754", func, obj);
+  remove_callback(#"on_boast_end", func, obj);
 }
 
 function on_ping(func, obj) {
@@ -861,7 +861,7 @@ function event_handler[player_boast] function_3b159f77(eventstruct) {
 
 function event_handler[event_8451509a] function_e35aeddd(eventstruct) {
   self endon(#"disconnect");
-  callback(#"hash_4a9c56bba76da754");
+  callback(#"on_boast_end");
 }
 
 function event_handler[event_7602f48e] function_1a49689c(eventstruct, var_22c15896) {
@@ -1265,7 +1265,7 @@ function event_handler[underwater] codecallback_underwater(eventstruct) {
 }
 
 function event_handler[event_d6f9e6ad] function_8877d89(eventstruct) {
-  self callback(#"hash_42aa89b2a0951308", eventstruct);
+  self callback(#"player_grapple_failed", eventstruct);
 }
 
 function event_handler[player_callout] function_c91ebb30(eventstruct) {

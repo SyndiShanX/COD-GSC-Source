@@ -30,7 +30,7 @@
 #namespace zm_pap_util;
 
 function function_a81f02e5() {
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
 }
 
 function init_parameters() {
@@ -101,7 +101,7 @@ function update_hint_string(player) {
         return false;
       }
     } else {
-      self sethintstring(#"hash_5b77a8f33d352c37");
+      self sethintstring(#"zombie/perk_packapunch_busy");
       return true;
     }
   }
@@ -171,18 +171,18 @@ function update_hint_string(player) {
       if(player function_8b1a219a()) {
         self sethintstring(#"hash_7f57747f6802bc18", current_cost);
       } else {
-        self sethintstring(#"hash_673794817f9c09b4", current_cost);
+        self sethintstring(#"zombie/perk_packapunch_aat", current_cost);
       }
     } else if(player function_8b1a219a()) {
       self sethintstring(#"hash_4ded27bb7bc35a8d", current_cost);
     } else {
-      self sethintstring(#"hash_4c9d507af46126af", current_cost);
+      self sethintstring(#"zombie/perk_packapunch_damage", current_cost);
     }
   } else if(is_true(level.var_e4e8d300)) {
     if(player function_8b1a219a()) {
       self sethintstring(#"hash_12517f2f23bd1966");
     } else {
-      self sethintstring(#"hash_6c8cfa12133d4a58");
+      self sethintstring(#"zombie/perk_packapunch_free");
     }
   } else if(player function_8b1a219a()) {
     self sethintstring(#"hash_4b18cdd522ca58f7", current_cost);
@@ -407,7 +407,7 @@ function function_6d45375a(weapon) {
   return n_multiplier;
 }
 
-function private function_33f0ddd3(s_event) {
+function private on_player_loadout_changed(s_event) {
   if(s_event.event === "take_weapon" && isDefined(s_event.weapon)) {
     self function_c01d9f22(s_event.weapon);
   }

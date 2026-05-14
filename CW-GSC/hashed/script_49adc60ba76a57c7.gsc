@@ -239,7 +239,7 @@ function function_67525edc(dustball) {
       distsq = distancesquared(dustball.origin, target.origin);
 
       if(distsq <= sqr(150)) {
-        params = getstatuseffect(#"hash_12a64221f4d27f9b");
+        params = getstatuseffect(#"elephant_spear_fire");
         weapon = getweapon(#"eq_molotov");
         target status_effect::status_effect_apply(params, weapon, dustball, 0, 3000, undefined, dustball.origin);
       }
@@ -333,7 +333,7 @@ function function_4b28fc8c(entity) {
     self playSound(#"hash_62894125ab280b62");
   }
 
-  self notify(#"hash_79e095919e415a70");
+  self notify(#"head_launch_done");
 
   if(isDefined(entity.ai.var_502d9d0d)) {
     [[entity.ai.var_502d9d0d]](entity, headproj);

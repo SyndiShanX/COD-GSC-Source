@@ -252,14 +252,14 @@ function function_cb436f32(object) {
   medpack setCanDamage(1);
   medpack.builttime = gettime();
   medpack.uniqueid = function_530817e7();
-  playcommanderaudio(level.var_c9404b0a.bundle.var_69b1ff7);
+  playcommanderaudio(level.var_c9404b0a.bundle.deployedfriendly);
 
   if(isDefined(level.var_c9404b0a.bundle.ambientaudio)) {
     medpack playLoopSound(level.var_c9404b0a.bundle.ambientaudio);
   }
 
-  triggerradius = level.var_c9404b0a.bundle.var_366f43e9;
-  triggerheight = level.var_c9404b0a.bundle.var_2f1567fb;
+  triggerradius = level.var_c9404b0a.bundle.kstriggerradius;
+  triggerheight = level.var_c9404b0a.bundle.kstriggerheight;
   var_b1a6d849 = level.var_c9404b0a.bundle.var_2d890f85;
   usetrigger = spawn("trigger_radius_use", object.origin - (0, 0, 50), 0, triggerradius, triggerheight);
   usetrigger usetriggerrequirelookat();
@@ -374,7 +374,7 @@ function private function_a1434496(team, player, result) {
 
 function watchfordeath() {
   level endon(#"game_ended");
-  self endon(#"hash_523ddcbd662010e5");
+  self endon(#"end_damage_watcher");
   waitresult = self waittill(#"death");
 
   if(!isDefined(self)) {
@@ -387,7 +387,7 @@ function watchfordeath() {
 function watchfordamage() {
   self endon(#"death");
   level endon(#"game_ended");
-  self endon(#"hash_523ddcbd662010e5");
+  self endon(#"end_damage_watcher");
   medpack = self;
   medpack endon(#"death");
   medpack.health = level.var_c9404b0a.bundle.kshealth;
@@ -421,7 +421,7 @@ function function_134ae768() {
 }
 
 function function_e6d37a78(destroyedbyenemy, var_7497ba51 = 1) {
-  self notify(#"hash_523ddcbd662010e5");
+  self notify(#"end_damage_watcher");
   self.var_ab0875aa = 1;
 
   if(isDefined(self.var_1ba7e28e) && self.var_1ba7e28e) {
@@ -477,8 +477,8 @@ function function_897b13a9() {
     playdeathfx();
   }
 
-  if(isDefined(level.var_c9404b0a.bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
-    playFX(level.var_c9404b0a.bundle.var_bb6c29b4, self.origin);
+  if(isDefined(level.var_c9404b0a.bundle.shockrifledestructionfx) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
+    playFX(level.var_c9404b0a.bundle.shockrifledestructionfx, self.origin);
   }
 
   deployable::function_81598103(self);

@@ -363,13 +363,13 @@ function_e43bea18(var_11975e15) {
 
 function_e162fac3(weapon, str_vo_line) {
   if(weapon === getweapon(#"ww_tesla_sniper_t8")) {
-    return # "tempest";
+    return #"tempest";
   } else if(weapon === getweapon(#"thundergun")) {
-    return # "thundergun";
+    return #"thundergun";
   } else if(weapon === getweapon(#"tundragun")) {
-    return # "tundragun";
+    return #"tundragun";
   } else if(weapon === getweapon(#"eq_nesting_doll_grenade")) {
-    return # "matryoshka";
+    return #"matryoshka";
   }
 
   return str_vo_line;

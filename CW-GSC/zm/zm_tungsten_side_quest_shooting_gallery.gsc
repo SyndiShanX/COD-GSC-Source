@@ -229,7 +229,7 @@ function function_db3d8ac(mdl_target, var_d8f1c196) {
 function function_3018008e(e_player, e_trigger) {
   if(isPlayer(e_player)) {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
-      #attacker: e_player, #scoreevent: # "hash_93c1524520f5882", #enemy: self
+      #attacker: e_player, #scoreevent: #"hash_93c1524520f5882", #enemy: self
     });
   }
 
@@ -505,7 +505,7 @@ function function_5eb556a3(e_player, a_params) {
   self notify(#"hash_171ccedffc06b5e");
   self notify(#"hash_7eaa0599b7552fad");
   level scoreevents::doscoreeventcallback("scoreEventZM", {
-    #attacker: a_params, #scoreevent: # "hash_93c1524520f5882", #enemy: self
+    #attacker: a_params, #scoreevent: #"hash_93c1524520f5882", #enemy: self
   });
   level flag::set(#"hash_4fb85514c23b64ac");
   a_params val::set("shooting_gallery_ignore", "ignoreme", 1);
@@ -827,7 +827,7 @@ function function_95b8c137(e_player, a_params) {
     self notify(#"hash_171ccedffc06b5e");
     self notify(#"hash_7eaa0599b7552fad");
     level scoreevents::doscoreeventcallback("scoreEventZM", {
-      #attacker: a_params, #scoreevent: # "hash_93c1524520f5882", #enemy: self
+      #attacker: a_params, #scoreevent: #"hash_93c1524520f5882", #enemy: self
     });
     a_params val::set("shooting_gallery_ignore", "ignoreme", 1);
     wait 3;
@@ -1228,7 +1228,7 @@ function function_af0fa53c(e_player, a_params) {
   self notify(#"hash_171ccedffc06b5e");
   self notify(#"hash_7eaa0599b7552fad");
   level scoreevents::doscoreeventcallback("scoreEventZM", {
-    #attacker: a_params, #scoreevent: # "hash_93c1524520f5882", #enemy: self
+    #attacker: a_params, #scoreevent: #"hash_93c1524520f5882", #enemy: self
   });
   level flag::set(#"hash_51bc8a36bd7e5d27");
   self flag::set(#"hash_5422d37665a74906");

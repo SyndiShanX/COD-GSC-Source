@@ -509,7 +509,7 @@ function function_f0ba2044(player) {
 
   if([[lui_menu]] - > function_7bfd10e6(player)) {
     player notify(#"menuresponse", {
-      #menu: # "full_screen_movie", #response: # "finished_movie_playback", #value: 1
+      #menu: #"full_screen_movie", #response: #"finished_movie_playback", #value: 1
     });
   }
 

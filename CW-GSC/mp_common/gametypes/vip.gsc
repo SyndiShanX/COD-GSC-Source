@@ -306,7 +306,7 @@ function function_9c92aa49() {
   var_b181c82d = function_31d859f2();
 
   for(i = 0; i < var_b181c82d.size; i++) {
-    objectivename = i == 1 ? # "vip_exfil_b" : # "hash_4d535c16887e2feb";
+    objectivename = i == 1 ? #"vip_exfil_b" : #"hash_4d535c16887e2feb";
     var_8e875f24 = function_89d3faf4(var_b181c82d[i], objectivename);
     var_7ea33249[var_7ea33249.size] = var_8e875f24;
   }
@@ -1175,7 +1175,7 @@ function private function_b2b03432(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, #"switched_pathing");
         }
       }
     }
@@ -1535,7 +1535,7 @@ function private function_656691ab() {
         self function_9ffc1856(self.heligoalpos, 1);
       }
 
-      self notify(#"hash_340ab3c2b94ff86a");
+      self notify(#"switched_pathing");
       break;
     }
 

@@ -69,7 +69,7 @@ function function_8b038048() {
   self.var_32c5c724 = 1;
   self.zombie_move_speed = "walk";
   self.maxhealth = self.health;
-  self.shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
+  self.shock_status_effect = getstatuseffect(#"shock_zm_trap");
   self thread damagewatch();
   self thread function_79445831();
 

@@ -604,7 +604,7 @@ function function_af235cd2() {
             wait 0.1;
             player globallogic_ui::function_9ed5232e("OperationChaos.floppyEntry.authenticate", 1, undefined, 1, undefined, undefined, 1);
             result = player waittillmatch({
-              #menu: # "ScriptedHudWidgetMenu", #response: # "authentication"}, #"menuresponse");
+              #menu: #"ScriptedHudWidgetMenu", #response: #"authentication"}, #"menuresponse");
 
             if(result.intpayload == 0) {
               player playSound(#"hash_3582a6ca8d3b7d86");
@@ -704,7 +704,7 @@ function private function_5b15c4b3() {
 function private function_7cfb600() {
   self endon(#"death", #"ui_cancel");
   self waittillmatch({
-    #menu: # "ScriptedHudWidgetMenu", #response: # "hash_260e4568c570b4ba"}, #"menuresponse");
+    #menu: #"ScriptedHudWidgetMenu", #response: #"hash_260e4568c570b4ba"}, #"menuresponse");
   self playSound(#"hash_4bf3fb6e8fee5573");
   return true;
 }

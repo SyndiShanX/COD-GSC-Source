@@ -27,11 +27,11 @@ function private registerclientfields() {
 }
 
 function function_c73ec9a(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  isplaying = postfx::function_556665f2(#"hash_1e4c3120a3e08628");
+  isplaying = postfx::function_556665f2(#"pstfx_wz_loss");
 
   if(bwastimejump == 1) {
     if(!isplaying) {
-      self codeplaypostfxbundle(#"hash_1e4c3120a3e08628");
+      self codeplaypostfxbundle(#"pstfx_wz_loss");
     }
 
     return;
@@ -39,7 +39,7 @@ function function_c73ec9a(local_client_num, oldval, newval, bnewent, binitialsna
 
   if(bwastimejump == 0) {
     if(isplaying) {
-      self postfx::stoppostfxbundle(#"hash_1e4c3120a3e08628");
+      self postfx::stoppostfxbundle(#"pstfx_wz_loss");
     }
   }
 }

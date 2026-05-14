@@ -58,7 +58,7 @@ function is_active() {
 
 function private movement_watcher(var_93fc795f, var_98de1f93) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     var_197c85d1 = self getvelocity();
@@ -148,7 +148,7 @@ function private function_26f124d8() {
 
 function private function_9c988cd8(var_93fc795f, var_98de1f93, var_e898f976 = 0) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   if(!var_e898f976) {
     wait 12;

@@ -16,7 +16,7 @@ function function_9f47471() {
     return;
   }
 
-  var_94237d8 = array(#"hash_20deab97abbf7b12", #"hash_764a5fc3ba8820d2", #"hash_647ebc7d24425fee", #"tcmgoal");
+  var_94237d8 = array(#"classicpact_tasks", #"rushpact_tasks", #"tcmpact_tasks", #"tcmgoal");
   i = 0;
 
   foreach(var_acbd7392 in var_94237d8) {
@@ -44,7 +44,7 @@ function function_1d4f22e4(cmd) {
     str = strreplace(cmd, "<dev string:x54>", "<dev string:x154>");
     var_762ca590 = hash(str);
 
-    if(!getdvarint(#"hash_11da02ca40639de5", 0)) {
+    if(!getdvarint(#"faction_callings_enabled_zm", 0)) {
       iprintln("<dev string:x15d>" + self.name);
     } else if(!getdvarint(#"hash_66c8247d6d84d328", 0) || !getdvarint(#"hash_5341de25cb0d6f66", 0) || !getdvarint(#"hash_47067c5d4fe9075e", 0)) {
       iprintln("<dev string:x183>");
@@ -74,7 +74,7 @@ function function_1d4f22e4(cmd) {
     interval = arr[0];
     interval = int(interval);
 
-    if(!getdvarint(#"hash_11da02ca40639de5", 0)) {
+    if(!getdvarint(#"faction_callings_enabled_zm", 0)) {
       iprintln("<dev string:x15d>" + self.name);
       return;
     }

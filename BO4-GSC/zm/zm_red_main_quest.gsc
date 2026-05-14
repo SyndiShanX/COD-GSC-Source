@@ -4042,7 +4042,7 @@ function_93e711a6(s_params) {
 
   e_player = s_params.eattacker;
   level notify(#"hash_285de4ce79135552", {
-    #str_reason: # "no_ww", #e_player: e_player
+    #str_reason: #"no_ww", #e_player: e_player
   });
 }
 
@@ -4246,13 +4246,13 @@ function_86d3bb1(str_ww) {
   }
 
   level notify(#"hash_285de4ce79135552", {
-    #str_reason: # "dropped_ww", #e_player: self
+    #str_reason: #"dropped_ww", #e_player: self
   });
 }
 
 function_b0457d15() {
   level notify(#"hash_285de4ce79135552", {
-    #str_reason: # "rezzed", #e_player: self
+    #str_reason: #"rezzed", #e_player: self
   });
 }
 
@@ -4771,7 +4771,7 @@ function_9cb5a6ac(str_ww, str_task, n_act, n_spotlight, var_d8d4faff) {
 
     if(s_waitresult._notify != #"play_task_completed") {
       level notify(#"hash_285de4ce79135552", {
-        #str_reason: # "late_kills", #e_player: self
+        #str_reason: #"late_kills", #e_player: self
       });
       return;
     }
@@ -4855,7 +4855,7 @@ function_4f45dd3c() {
   }
 
   level notify(#"hash_285de4ce79135552", {
-    #str_reason: # "left_stage", #e_player: self
+    #str_reason: #"left_stage", #e_player: self
   });
 }
 
@@ -4880,7 +4880,7 @@ function_ad68de97() {
   }
 
   level notify(#"hash_285de4ce79135552", {
-    #str_reason: # "left_backstage", #e_player: self
+    #str_reason: #"left_backstage", #e_player: self
   });
 }
 

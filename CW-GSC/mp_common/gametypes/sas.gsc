@@ -200,7 +200,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(isDefined(shitloc) && isPlayer(shitloc) && shitloc != self) {
     if(weapons::ismeleemod(psoffsettime) || psoffsettime === "MOD_EXECUTION") {
       shitloc globallogic_score::givepointstowin(level.pointspermeleekill);
-      scoreevents::processscoreevent(#"hash_6c8030eb05b53d5a", shitloc, self, deathanimduration);
+      scoreevents::processscoreevent(#"melee_kill_sas", shitloc, self, deathanimduration);
     } else if(deathanimduration == level.weapon_sas_primary_weapon) {
       shitloc.killswithprimary++;
 
@@ -209,7 +209,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       }
 
       shitloc globallogic_score::givepointstowin(level.pointsperprimarykill);
-      scoreevents::processscoreevent(#"hash_614b27b37ccee280", shitloc, self, deathanimduration);
+      scoreevents::processscoreevent(#"crossbow_kill_sas", shitloc, self, deathanimduration);
     } else if(deathanimduration == level.weapon_sas_primary_grenade_weapon) {
       shitloc globallogic_score::givepointstowin(level.pointsperprimarygrenadekill);
     } else {
@@ -220,7 +220,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
           shitloc.killswithbothawarded = 1;
         }
 
-        scoreevents::processscoreevent(#"hash_25ec47f9609803a9", shitloc, self, deathanimduration);
+        scoreevents::processscoreevent(#"ballistic_knife_kill_sas", shitloc, self, deathanimduration);
       }
 
       shitloc globallogic_score::givepointstowin(level.pointspersecondarykill);

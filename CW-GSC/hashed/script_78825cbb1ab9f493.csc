@@ -198,7 +198,7 @@ function function_a1aaf8c0() {
   self endon("7e59a2bbe2559c76");
 
   while(isDefined(self)) {
-    waitresult = level waittill(#"hash_5af34d08eac79f88");
+    waitresult = level waittill(#"teammateindex_change");
     function_2dba6c5(waitresult.localclientnum, waitresult.teammateindex);
   }
 }

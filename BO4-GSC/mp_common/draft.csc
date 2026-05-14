@@ -111,7 +111,7 @@ function_c4dfe16e(localclientnum) {
   isteambased = isgametypeteambased();
 
   if(!isteambased && localplayer.team != #"free") {
-    return # "allies";
+    return #"allies";
   }
 
   return localplayer.team;

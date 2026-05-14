@@ -188,19 +188,19 @@ function function_30d4f8c4(attacker, smeansofdeath, weapon) {
 function function_bd53fa92(attacker, mod, weapon) {
   if(isDefined(mod)) {
     if(mod === "MOD_EXECUTION") {
-      return # "execution";
+      return #"execution";
     }
 
     if(mod === "MOD_EXPLOSIVE" || mod === "MOD_GRENADE" || mod === "MOD_GRENADE_SPLASH") {
-      return # "explosive";
+      return #"explosive";
     }
 
     if(mod === "MOD_GAS") {
-      return # "gas";
+      return #"gas";
     }
 
     if(mod === "MOD_BULLET" || mod === "MOD_RIFLE_BULLET" || mod === "MOD_PISTOL_BULLET" || mod === "MOD_HEAD_SHOT") {
-      return # "bullet";
+      return #"bullet";
     }
 
     if(mod === "MOD_SUICIDE") {
@@ -210,7 +210,7 @@ function function_bd53fa92(attacker, mod, weapon) {
 
   if(isDefined(weapon)) {
     if(weapon.name === "tear_gas") {
-      return # "gas";
+      return #"gas";
     }
   }
 

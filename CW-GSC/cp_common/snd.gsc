@@ -56,7 +56,7 @@ function function_a74b8be1(msg, players) {
   state = "";
 
   if(ishash(players)) {
-    state = "# " + players;
+    state = "#" + players;
   } else if(isstring(players)) {
     if(function_81fac19d(players.size > 16, "snd: client_msg > 16 chars " + function_783b69(players, "'"))) {
       if(function_f984063f()) {

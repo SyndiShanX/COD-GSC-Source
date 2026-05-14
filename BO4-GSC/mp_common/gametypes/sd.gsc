@@ -158,22 +158,22 @@ getbetterteam() {
   }
 
   if(kills[#"allies"] > kills[#"axis"]) {
-    return # "allies";
+    return #"allies";
   } else if(kills[#"axis"] > kills[#"allies"]) {
-    return # "axis";
+    return #"axis";
   }
 
   if(deaths[#"allies"] < deaths[#"axis"]) {
-    return # "allies";
+    return #"allies";
   } else if(deaths[#"axis"] < deaths[#"allies"]) {
-    return # "axis";
+    return #"axis";
   }
 
   if(randomint(2) == 0) {
-    return # "allies";
+    return #"allies";
   }
 
-  return # "axis";
+  return #"axis";
 }
 
 function_a8da260c() {

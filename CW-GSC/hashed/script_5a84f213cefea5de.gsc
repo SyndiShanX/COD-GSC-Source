@@ -34,10 +34,10 @@ function private preinit() {
 
 function private function_116fd9a7() {
   item_world::function_861f348d(#"hash_1f0d729dc6dd1202", &function_898628ef);
-  item_world::function_861f348d(#"hash_50375e5de228e9fc", &function_a712496a);
-  item_world::function_861f348d(#"hash_2cbf15cbb314c93e", &function_2eebeff5);
+  item_world::function_861f348d(#"generic_weapon_pickup", &function_a712496a);
+  item_world::function_861f348d(#"generic_equipment_pickup", &function_2eebeff5);
   item_world::function_861f348d(#"hash_20ffbe34a3390916", &function_6598f0a0);
-  item_world::function_861f348d(#"hash_9ed0c30684ca35a", &function_d045e83b);
+  item_world::function_861f348d(#"generic_ammo_pickup", &function_d045e83b);
   item_world::function_861f348d(#"hash_3a90f48f62134d29", &function_8c369ecb);
 }
 

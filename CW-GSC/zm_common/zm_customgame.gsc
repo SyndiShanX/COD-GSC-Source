@@ -1150,7 +1150,7 @@ function private function_74b79f63() {
       break;
     case 2:
       level flag::set("power_on");
-      level flag::set(#"hash_3e80d503318a5674");
+      level flag::set(#"artifact_picked_up");
 
       if(function_901b751c(#"zmpowerdoorstate") == 1) {
         a_zombie_doors = getEntArray("zombie_door", "targetname");
@@ -1389,8 +1389,8 @@ function private function_34c2aeb5() {
 }
 
 function private drain_health(var_c454f44e) {
-  self notify(#"hash_13fcb28a561bd5fe");
-  self endon(#"disconnect", #"hash_13fcb28a561bd5fe");
+  self notify(#"end_drain_health");
+  self endon(#"disconnect", #"end_drain_health");
   level endon(#"game_ended");
   self val::set(#"custom_games", "health_regen", 0);
 
@@ -1876,437 +1876,437 @@ function private function_401f18e6() {
 
 function private function_a8e9a6c7() {
   return array({
-    #name: # "startround", #default_val: 1
+    #name: #"startround", #default_val: 1
   }, {
-    #name: # "headshotsonly", #default_val: 0
+    #name: #"headshotsonly", #default_val: 0
   }, {
-    #name: # "zmroundcap", #default_val: 0
+    #name: #"zmroundcap", #default_val: 0
   }, {
-    #name: # "zmtimecap", #default_val: 0
+    #name: #"zmtimecap", #default_val: 0
   }, {
-    #name: # "zmshowtimer", #default_val: 0
+    #name: #"zmshowtimer", #default_val: 0
   }, {
-    #name: # "zmkillcap", #default_val: 0
+    #name: #"zmkillcap", #default_val: 0
   }, {
-    #name: # "zmdoorstate", #default_val: 1
+    #name: #"zmdoorstate", #default_val: 1
   }, {
-    #name: # "zmspecialroundsenabled", #default_val: 1
+    #name: #"zmspecialroundsenabled", #default_val: 1
   }, {
-    #name: # "zmendonquest", #default_val: 0
+    #name: #"zmendonquest", #default_val: 0
   }, {
-    #name: # "zmmysteryboxstate", #default_val: 2
+    #name: #"zmmysteryboxstate", #default_val: 2
   }, {
-    #name: # "hash_5d65c0983698a539", #default_val: 0
+    #name: #"hash_5d65c0983698a539", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimitmove", #default_val: 0
+    #name: #"zmmysteryboxlimitmove", #default_val: 0
   }, {
-    #name: # "hash_23fe21eb92ffbc2c", #default_val: 0
+    #name: #"hash_23fe21eb92ffbc2c", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimit", #default_val: 0
+    #name: #"zmmysteryboxlimit", #default_val: 0
   }, {
-    #name: # "hash_751384283abde22c", #default_val: 0
+    #name: #"hash_751384283abde22c", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimitround", #default_val: 0
+    #name: #"zmmysteryboxlimitround", #default_val: 0
   }, {
-    #name: # "zmpowerstate", #default_val: 1
+    #name: #"zmpowerstate", #default_val: 1
   }, {
-    #name: # "zmpowerdoorstate", #default_val: 1
+    #name: #"zmpowerdoorstate", #default_val: 1
   }, {
-    #name: # "zmperksactive", #default_val: 1
+    #name: #"zmperksactive", #default_val: 1
   }, {
-    #name: # "zmperksjuggernaut", #default_val: 1
+    #name: #"zmperksjuggernaut", #default_val: 1
   }, {
-    #name: # "zmperksspeed", #default_val: 1
+    #name: #"zmperksspeed", #default_val: 1
   }, {
-    #name: # "zmperksquickrevive", #default_val: 1
+    #name: #"zmperksquickrevive", #default_val: 1
   }, {
-    #name: # "zmperkswidowswail", #default_val: 1
+    #name: #"zmperkswidowswail", #default_val: 1
   }, {
-    #name: # "zmperksstaminup", #default_val: 1
+    #name: #"zmperksstaminup", #default_val: 1
   }, {
-    #name: # "zmperksmulekick", #default_val: 1
+    #name: #"zmperksmulekick", #default_val: 1
   }, {
-    #name: # "zmperkselectricburst", #default_val: 1
+    #name: #"zmperkselectricburst", #default_val: 1
   }, {
-    #name: # "zmperksdeadshot", #default_val: 1
+    #name: #"zmperksdeadshot", #default_val: 1
   }, {
-    #name: # "zmperkscooldown", #default_val: 1
+    #name: #"zmperkscooldown", #default_val: 1
   }, {
-    #name: # "zmperksdyingwish", #default_val: 1
+    #name: #"zmperksdyingwish", #default_val: 1
   }, {
-    #name: # "zmpapenabled", #default_val: 1
+    #name: #"zmpapenabled", #default_val: 1
   }, {
-    #name: # "zmsuperpapenabled", #default_val: 1
+    #name: #"zmsuperpapenabled", #default_val: 1
   }, {
-    #name: # "zmpowerupsactive", #default_val: 1
+    #name: #"zmpowerupsactive", #default_val: 1
   }, {
-    #name: # "zmpowerupnuke", #default_val: 1
+    #name: #"zmpowerupnuke", #default_val: 1
   }, {
-    #name: # "zmpowerupdouble", #default_val: 1
+    #name: #"zmpowerupdouble", #default_val: 1
   }, {
-    #name: # "zmpowerupinstakill", #default_val: 1
+    #name: #"zmpowerupinstakill", #default_val: 1
   }, {
-    #name: # "zmpowerupchaospoints", #default_val: 1
+    #name: #"zmpowerupchaospoints", #default_val: 1
   }, {
-    #name: # "zmpowerupfiresale", #default_val: 1
+    #name: #"zmpowerupfiresale", #default_val: 1
   }, {
-    #name: # "zmpowerupspecialweapon", #default_val: 1
+    #name: #"zmpowerupspecialweapon", #default_val: 1
   }, {
-    #name: # "zmpowerupfreeperk", #default_val: 1
+    #name: #"zmpowerupfreeperk", #default_val: 1
   }, {
-    #name: # "zmpowerupmaxammo", #default_val: 1
+    #name: #"zmpowerupmaxammo", #default_val: 1
   }, {
-    #name: # "zmpowerupcarpenter", #default_val: 1
+    #name: #"zmpowerupcarpenter", #default_val: 1
   }, {
-    #name: # "zmpowerupsislimitedround", #default_val: 0
+    #name: #"zmpowerupsislimitedround", #default_val: 0
   }, {
-    #name: # "zmpowerupslimitround", #default_val: 1
+    #name: #"zmpowerupslimitround", #default_val: 1
   }, {
-    #name: # "zmpowerupsharing", #default_val: 1
+    #name: #"zmpowerupsharing", #default_val: 1
   }, {
-    #name: # "zmwallbuysenabled", #default_val: 1
+    #name: #"zmwallbuysenabled", #default_val: 1
   }, {
-    #name: # "zmrandomwallbuys", #default_val: 0
+    #name: #"zmrandomwallbuys", #default_val: 0
   }, {
-    #name: # "zmelixirsenabled", #default_val: 1
+    #name: #"zmelixirsenabled", #default_val: 1
   }, {
-    #name: # "zmelixirscooldown", #default_val: 1
+    #name: #"zmelixirscooldown", #default_val: 1
   }, {
-    #name: # "zmelixirsindividual", #default_val: 1
+    #name: #"zmelixirsindividual", #default_val: 1
   }, {
-    #name: # "zmelixirsdurables", #default_val: 1
+    #name: #"zmelixirsdurables", #default_val: 1
   }, {
-    #name: # "zmelixirscommon", #default_val: 1
+    #name: #"zmelixirscommon", #default_val: 1
   }, {
-    #name: # "zmelixirsrare", #default_val: 1
+    #name: #"zmelixirsrare", #default_val: 1
   }, {
-    #name: # "zmelixirslegendary", #default_val: 1
+    #name: #"zmelixirslegendary", #default_val: 1
   }, {
-    #name: # "zmelixirsepic", #default_val: 1
+    #name: #"zmelixirsepic", #default_val: 1
   }, {
-    #name: # "zmtalismansenabled", #default_val: 1
+    #name: #"zmtalismansenabled", #default_val: 1
   }, {
-    #name: # "zmtalismansindividual", #default_val: 1
+    #name: #"zmtalismansindividual", #default_val: 1
   }, {
-    #name: # "zmtalismanscommon", #default_val: 1
+    #name: #"zmtalismanscommon", #default_val: 1
   }, {
-    #name: # "zmtalismansrare", #default_val: 1
+    #name: #"zmtalismansrare", #default_val: 1
   }, {
-    #name: # "zmtalismanslegendary", #default_val: 1
+    #name: #"zmtalismanslegendary", #default_val: 1
   }, {
-    #name: # "zmtalismansepic", #default_val: 1
+    #name: #"zmtalismansepic", #default_val: 1
   }, {
-    #name: # "zmweaponspistol", #default_val: 1
+    #name: #"zmweaponspistol", #default_val: 1
   }, {
-    #name: # "zmweaponsshotgun", #default_val: 1
+    #name: #"zmweaponsshotgun", #default_val: 1
   }, {
-    #name: # "zmweaponssmg", #default_val: 1
+    #name: #"zmweaponssmg", #default_val: 1
   }, {
-    #name: # "zmweaponsar", #default_val: 1
+    #name: #"zmweaponsar", #default_val: 1
   }, {
-    #name: # "zmweaponstr", #default_val: 1
+    #name: #"zmweaponstr", #default_val: 1
   }, {
-    #name: # "zmweaponslmg", #default_val: 1
+    #name: #"zmweaponslmg", #default_val: 1
   }, {
-    #name: # "zmweaponssniper", #default_val: 1
+    #name: #"zmweaponssniper", #default_val: 1
   }, {
-    #name: # "zmweaponsknife", #default_val: 1
+    #name: #"zmweaponsknife", #default_val: 1
   }, {
-    #name: # "zmweaponsmelee", #default_val: 1
+    #name: #"zmweaponsmelee", #default_val: 1
   }, {
-    #name: # "zmspecweaponisenabled", #default_val: 1
+    #name: #"zmspecweaponisenabled", #default_val: 1
   }, {
-    #name: # "zmspecweaponchargerate", #default_val: 1
+    #name: #"zmspecweaponchargerate", #default_val: 1
   }, {
-    #name: # "zmwonderweaponisenabled", #default_val: 1
+    #name: #"zmwonderweaponisenabled", #default_val: 1
   }, {
-    #name: # "zmequipmentisenabled", #default_val: 1
+    #name: #"zmequipmentisenabled", #default_val: 1
   }, {
-    #name: # "zmequipmentchargerate", #default_val: 1
+    #name: #"zmequipmentchargerate", #default_val: 1
   }, {
-    #name: # "zmshieldisenabled", #default_val: 1
+    #name: #"zmshieldisenabled", #default_val: 1
   }, {
-    #name: # "zmshielddurability", #default_val: 1
+    #name: #"zmshielddurability", #default_val: 1
   }, {
-    #name: # "zmheadshotsonly", #default_val: 0
+    #name: #"zmheadshotsonly", #default_val: 0
   }, {
-    #name: # "zmrunnerstate", #default_val: 0
+    #name: #"zmrunnerstate", #default_val: 0
   }, {
-    #name: # "zmwalkerstate", #default_val: 0
+    #name: #"zmwalkerstate", #default_val: 0
   }, {
-    #name: # "zmcrawlerstate", #default_val: 1
+    #name: #"zmcrawlerstate", #default_val: 1
   }, {
-    #name: # "zmzombiespread", #default_val: 1
+    #name: #"zmzombiespread", #default_val: 1
   }, {
-    #name: # "zmzombieminspeed", #default_val: 0
+    #name: #"zmzombieminspeed", #default_val: 0
   }, {
-    #name: # "zmzombiemaxspeed", #default_val: 3
+    #name: #"zmzombiemaxspeed", #default_val: 3
   }, {
-    #name: # "zmzombiedamagemult", #default_val: 1
+    #name: #"zmzombiedamagemult", #default_val: 1
   }, {
-    #name: # "zmzombiehealthmult", #default_val: 1
+    #name: #"zmzombiehealthmult", #default_val: 1
   }, {
-    #name: # "zmcrawlerdamagemult", #default_val: 1
+    #name: #"zmcrawlerdamagemult", #default_val: 1
   }, {
-    #name: # "zmcrawlerhealthmult", #default_val: 1
+    #name: #"zmcrawlerhealthmult", #default_val: 1
   }, {
-    #name: # "zmcrawleraggro", #default_val: 1
+    #name: #"zmcrawleraggro", #default_val: 1
   }, {
-    #name: # "hash_69262a31e0f8f91c", #default_val: 1
+    #name: #"hash_69262a31e0f8f91c", #default_val: 1
   }, {
-    #name: # "hash_47683a928d3b5c50", #default_val: 1
+    #name: #"hash_47683a928d3b5c50", #default_val: 1
   }, {
-    #name: # "hash_260fe4ac4d0ee7c7", #default_val: 1
+    #name: #"hash_260fe4ac4d0ee7c7", #default_val: 1
   }, {
-    #name: # "hash_2f2281537f0463f7", #default_val: 1
+    #name: #"hash_2f2281537f0463f7", #default_val: 1
   }, {
-    #name: # "hash_4269e873a0c207c", #default_val: 1
+    #name: #"hash_4269e873a0c207c", #default_val: 1
   }, {
-    #name: # "hash_407d7afcff755230", #default_val: 1
+    #name: #"hash_407d7afcff755230", #default_val: 1
   }, {
-    #name: # "hash_3e1334207938d6a7", #default_val: 1
+    #name: #"hash_3e1334207938d6a7", #default_val: 1
   }, {
-    #name: # "hash_4a23f5a8d8193e57", #default_val: 1
+    #name: #"hash_4a23f5a8d8193e57", #default_val: 1
   }, {
-    #name: # "zmhealthstartingbars", #default_val: 3
+    #name: #"zmhealthstartingbars", #default_val: 3
   }, {
-    #name: # "zmhealthregendelay", #default_val: 1
+    #name: #"zmhealthregendelay", #default_val: 1
   }, {
-    #name: # "zmhealthregenrate", #default_val: 2
+    #name: #"zmhealthregenrate", #default_val: 2
   }, {
-    #name: # "zmhealthonkill", #default_val: 0
+    #name: #"zmhealthonkill", #default_val: 0
   }, {
-    #name: # "zmhealthdrain", #default_val: 0
+    #name: #"zmhealthdrain", #default_val: 0
   }, {
-    #name: # "zmpointsfixed", #default_val: 0
+    #name: #"zmpointsfixed", #default_val: 0
   }, {
-    #name: # "zmpointsstarting", #default_val: 5
+    #name: #"zmpointsstarting", #default_val: 5
   }, {
-    #name: # "hash_5566698b97a6282e", #default_val: 0
+    #name: #"hash_5566698b97a6282e", #default_val: 0
   }, {
-    #name: # "zmpointslosstype", #default_val: 0
+    #name: #"zmpointslosstype", #default_val: 0
   }, {
-    #name: # "zmpointslosspercent", #default_val: 1
+    #name: #"zmpointslosspercent", #default_val: 1
   }, {
-    #name: # "zmpointslossvalue", #default_val: 100
+    #name: #"zmpointslossvalue", #default_val: 100
   }, {
-    #name: # "zmlaststandduration", #default_val: 2
+    #name: #"zmlaststandduration", #default_val: 2
   }, {
-    #name: # "hash_12f776f6bc579bb4", #default_val: 0
+    #name: #"hash_12f776f6bc579bb4", #default_val: 0
   }, {
-    #name: # "zmlimiteddownsamount", #default_val: 0
+    #name: #"zmlimiteddownsamount", #default_val: 0
   }, {
-    #name: # "zmbarricadestate", #default_val: 1
+    #name: #"zmbarricadestate", #default_val: 1
   }, {
-    #name: # "hash_3c5363541b97ca3e", #default_val: 1
+    #name: #"hash_3c5363541b97ca3e", #default_val: 1
   }, {
-    #name: # "zmpowerupfrequency", #default_val: 1
+    #name: #"zmpowerupfrequency", #default_val: 1
   }, {
-    #name: # "zmtalismanboxguaranteeboxonly", #default_val: 1
+    #name: #"zmtalismanboxguaranteeboxonly", #default_val: 1
   }, {
-    #name: # "zmtalismanboxguaranteelmg", #default_val: 1
+    #name: #"zmtalismanboxguaranteelmg", #default_val: 1
   }, {
-    #name: # "hash_61695e52556ff2d1", #default_val: 1
+    #name: #"hash_61695e52556ff2d1", #default_val: 1
   }, {
-    #name: # "zmtalismancoagulant", #default_val: 1
+    #name: #"zmtalismancoagulant", #default_val: 1
   }, {
-    #name: # "zmtalismanextraclaymore", #default_val: 1
+    #name: #"zmtalismanextraclaymore", #default_val: 1
   }, {
-    #name: # "zmtalismanextrafrag", #default_val: 1
+    #name: #"zmtalismanextrafrag", #default_val: 1
   }, {
-    #name: # "zmtalismanextraminiturret", #default_val: 1
+    #name: #"zmtalismanextraminiturret", #default_val: 1
   }, {
-    #name: # "zmtalismanextramolotov", #default_val: 1
+    #name: #"zmtalismanextramolotov", #default_val: 1
   }, {
-    #name: # "zmtalismanextrasemtex", #default_val: 1
+    #name: #"zmtalismanextrasemtex", #default_val: 1
   }, {
-    #name: # "zmtalismanimpatient", #default_val: 1
+    #name: #"zmtalismanimpatient", #default_val: 1
   }, {
-    #name: # "zmtalismanperkmodsingle", #default_val: 1
+    #name: #"zmtalismanperkmodsingle", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent1", #default_val: 1
+    #name: #"zmtalismanperkpermanent1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent2", #default_val: 1
+    #name: #"zmtalismanperkpermanent2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent3", #default_val: 1
+    #name: #"zmtalismanperkpermanent3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent4", #default_val: 1
+    #name: #"zmtalismanperkpermanent4", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost1", #default_val: 1
+    #name: #"zmtalismanperkreducecost1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost2", #default_val: 1
+    #name: #"zmtalismanperkreducecost2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost3", #default_val: 1
+    #name: #"zmtalismanperkreducecost3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost4", #default_val: 1
+    #name: #"zmtalismanperkreducecost4", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart1", #default_val: 1
+    #name: #"zmtalismanperkstart1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart2", #default_val: 1
+    #name: #"zmtalismanperkstart2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart3", #default_val: 1
+    #name: #"zmtalismanperkstart3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart4", #default_val: 1
+    #name: #"zmtalismanperkstart4", #default_val: 1
   }, {
-    #name: # "zmtalismanshielddurabilitylegendary", #default_val: 1
+    #name: #"zmtalismanshielddurabilitylegendary", #default_val: 1
   }, {
-    #name: # "zmtalismanshielddurabilityrare", #default_val: 1
+    #name: #"zmtalismanshielddurabilityrare", #default_val: 1
   }, {
-    #name: # "zmtalismanshieldprice", #default_val: 1
+    #name: #"zmtalismanshieldprice", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialstartlvl2", #default_val: 1
+    #name: #"zmtalismanspecialstartlvl2", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialstartlvl3", #default_val: 1
+    #name: #"zmtalismanspecialstartlvl3", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialxprate", #default_val: 1
+    #name: #"zmtalismanspecialxprate", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponar", #default_val: 1
+    #name: #"zmtalismanstartweaponar", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponlmg", #default_val: 1
+    #name: #"zmtalismanstartweaponlmg", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponsmg", #default_val: 1
+    #name: #"zmtalismanstartweaponsmg", #default_val: 1
   }, {
-    #name: # "zmtalismanreducepapcost", #default_val: 1
+    #name: #"zmtalismanreducepapcost", #default_val: 1
   }, {
-    #name: # "zmtalismansultra", #default_val: 1
+    #name: #"zmtalismansultra", #default_val: 1
   }, {
-    #name: # "zmelixiralwaysdoneswiftly", #default_val: 1
+    #name: #"zmelixiralwaysdoneswiftly", #default_val: 1
   }, {
-    #name: # "zmelixiranywherebuthere", #default_val: 1
+    #name: #"zmelixiranywherebuthere", #default_val: 1
   }, {
-    #name: # "zmelixirarsenalaccelerator", #default_val: 1
+    #name: #"zmelixirarsenalaccelerator", #default_val: 1
   }, {
-    #name: # "zmelixirdangerclosest", #default_val: 1
+    #name: #"zmelixirdangerclosest", #default_val: 1
   }, {
-    #name: # "zmelixirinplainsight", #default_val: 1
+    #name: #"zmelixirinplainsight", #default_val: 1
   }, {
-    #name: # "zmelixirnewtoniannegation", #default_val: 1
+    #name: #"zmelixirnewtoniannegation", #default_val: 1
   }, {
-    #name: # "zmelixirnowyouseeme", #default_val: 1
+    #name: #"zmelixirnowyouseeme", #default_val: 1
   }, {
-    #name: # "zmelixirstockoption", #default_val: 1
+    #name: #"zmelixirstockoption", #default_val: 1
   }, {
-    #name: # "zmelixirboardgames", #default_val: 1
+    #name: #"zmelixirboardgames", #default_val: 1
   }, {
-    #name: # "zmelixirburnedout", #default_val: 1
+    #name: #"zmelixirburnedout", #default_val: 1
   }, {
-    #name: # "zmelixircrawlspace", #default_val: 1
+    #name: #"zmelixircrawlspace", #default_val: 1
   }, {
-    #name: # "zmelixirpopshocks", #default_val: 1
+    #name: #"zmelixirpopshocks", #default_val: 1
   }, {
-    #name: # "zmelixirtemporalgift", #default_val: 1
+    #name: #"zmelixirtemporalgift", #default_val: 1
   }, {
-    #name: # "zmelixirpointdrops", #default_val: 1
+    #name: #"zmelixirpointdrops", #default_val: 1
   }, {
-    #name: # "zmelixiralchemicalantithesis", #default_val: 1
+    #name: #"zmelixiralchemicalantithesis", #default_val: 1
   }, {
-    #name: # "zmelixirswordflay", #default_val: 1
+    #name: #"zmelixirswordflay", #default_val: 1
   }, {
-    #name: # "zmelixirdeadofnuclearwinter", #default_val: 1
+    #name: #"zmelixirdeadofnuclearwinter", #default_val: 1
   }, {
-    #name: # "zmelixirlicensedcontractor", #default_val: 1
+    #name: #"zmelixirlicensedcontractor", #default_val: 1
   }, {
-    #name: # "zmelixirundeadmanwalking", #default_val: 1
+    #name: #"zmelixirundeadmanwalking", #default_val: 1
   }, {
-    #name: # "zmelixirwhoskeepingscore", #default_val: 1
+    #name: #"zmelixirwhoskeepingscore", #default_val: 1
   }, {
-    #name: # "zmelixiraftertaste", #default_val: 1
+    #name: #"zmelixiraftertaste", #default_val: 1
   }, {
-    #name: # "zmelixirextracredit", #default_val: 1
+    #name: #"zmelixirextracredit", #default_val: 1
   }, {
-    #name: # "zmelixirkilljoy", #default_val: 1
+    #name: #"zmelixirkilljoy", #default_val: 1
   }, {
-    #name: # "zmelixirsodafountain", #default_val: 1
+    #name: #"zmelixirsodafountain", #default_val: 1
   }, {
-    #name: # "zmelixirctrlz", #default_val: 1
+    #name: #"zmelixirctrlz", #default_val: 1
   }, {
-    #name: # "zmelixirfreefire", #default_val: 1
+    #name: #"zmelixirfreefire", #default_val: 1
   }, {
-    #name: # "zmelixircacheback", #default_val: 1
+    #name: #"zmelixircacheback", #default_val: 1
   }, {
-    #name: # "zmelixirimmolationliquidation", #default_val: 1
+    #name: #"zmelixirimmolationliquidation", #default_val: 1
   }, {
-    #name: # "zmelixirphoenixup", #default_val: 1
+    #name: #"zmelixirphoenixup", #default_val: 1
   }, {
-    #name: # "zmelixirpowerkeg", #default_val: 1
+    #name: #"zmelixirpowerkeg", #default_val: 1
   }, {
-    #name: # "zmelixirblooddebt", #default_val: 1
+    #name: #"zmelixirblooddebt", #default_val: 1
   }, {
-    #name: # "zmelixirneardeathexperience", #default_val: 1
+    #name: #"zmelixirneardeathexperience", #default_val: 1
   }, {
-    #name: # "zmelixirperkaholic", #default_val: 1
+    #name: #"zmelixirperkaholic", #default_val: 1
   }, {
-    #name: # "zmelixirwallpower", #default_val: 1
+    #name: #"zmelixirwallpower", #default_val: 1
   }, {
-    #name: # "hash_429b520a87274afb", #default_val: 0
+    #name: #"hash_429b520a87274afb", #default_val: 0
   }, {
-    #name: # "zmtrapsenabled", #default_val: 1
+    #name: #"zmtrapsenabled", #default_val: 1
   }, {
-    #name: # "zmstartingweaponenabled", #default_val: 1
+    #name: #"zmstartingweaponenabled", #default_val: 1
   }, {
-    #name: # "hash_35ac79d2ca5673c8", #default_val: 1
+    #name: #"hash_35ac79d2ca5673c8", #default_val: 1
   }, {
-    #name: # "hash_443cfbf2a6fbc040", #default_val: 1
+    #name: #"hash_443cfbf2a6fbc040", #default_val: 1
   }, {
-    #name: # "zmselfreviveamount", #default_val: 0
+    #name: #"zmselfreviveamount", #default_val: 0
   }, {
-    #name: # "hash_4035c12ee5837454", #default_val: 1
+    #name: #"hash_4035c12ee5837454", #default_val: 1
   }, {
-    #name: # "hash_2d0db902620447a8", #default_val: 1
+    #name: #"hash_2d0db902620447a8", #default_val: 1
   }, {
-    #name: # "hash_29b057ccce3ee75f", #default_val: 1
+    #name: #"hash_29b057ccce3ee75f", #default_val: 1
   }, {
-    #name: # "hash_35ac79d2ca5673c8", #default_val: 1
+    #name: #"hash_35ac79d2ca5673c8", #default_val: 1
   }, {
-    #name: # "zmretainweapons", #default_val: 1
+    #name: #"zmretainweapons", #default_val: 1
   }, {
-    #name: # "zmperkdecay", #default_val: 1
+    #name: #"zmperkdecay", #default_val: 1
   }, {
-    #name: # "zmcraftingkeyline", #default_val: 0
+    #name: #"zmcraftingkeyline", #default_val: 0
   }, {
-    #name: # "zmpointlossondown", #default_val: 0
+    #name: #"zmpointlossondown", #default_val: 0
   }, {
-    #name: # "zmpointlossondeath", #default_val: 0
+    #name: #"zmpointlossondeath", #default_val: 0
   }, {
-    #name: # "zmpointlossonteammatedeath", #default_val: 0
+    #name: #"zmpointlossonteammatedeath", #default_val: 0
   }, {
-    #name: # "zmelixirantientrapment", #default_val: 1
+    #name: #"zmelixirantientrapment", #default_val: 1
   }, {
-    #name: # "zmelixirequipmint", #default_val: 1
+    #name: #"zmelixirequipmint", #default_val: 1
   }, {
-    #name: # "zmelixirheadscan", #default_val: 1
+    #name: #"zmelixirheadscan", #default_val: 1
   }, {
-    #name: # "zmelixirjointheparty", #default_val: 1
+    #name: #"zmelixirjointheparty", #default_val: 1
   }, {
-    #name: # "zmelixirnowherebutthere", #default_val: 1
+    #name: #"zmelixirnowherebutthere", #default_val: 1
   }, {
-    #name: # "zmelixirphantomreload", #default_val: 1
+    #name: #"zmelixirphantomreload", #default_val: 1
   }, {
-    #name: # "zmelixirshieldsup", #default_val: 1
+    #name: #"zmelixirshieldsup", #default_val: 1
   }, {
-    #name: # "zmelixirwalltowall", #default_val: 1
+    #name: #"zmelixirwalltowall", #default_val: 1
   }, {
-    #name: # "zmperksbandolier", #default_val: 1
+    #name: #"zmperksbandolier", #default_val: 1
   }, {
-    #name: # "zmperksdeathperception", #default_val: 1
+    #name: #"zmperksdeathperception", #default_val: 1
   }, {
-    #name: # "zmperksphdslider", #default_val: 1
+    #name: #"zmperksphdslider", #default_val: 1
   }, {
-    #name: # "zmperkssecretsauce", #default_val: 1
+    #name: #"zmperkssecretsauce", #default_val: 1
   }, {
-    #name: # "zmperksstonecold", #default_val: 1
+    #name: #"zmperksstonecold", #default_val: 1
   }, {
-    #name: # "zmperkswolfprotector", #default_val: 1
+    #name: #"zmperkswolfprotector", #default_val: 1
   }, {
-    #name: # "zmperksvictorious", #default_val: 1
+    #name: #"zmperksvictorious", #default_val: 1
   }, {
-    #name: # "zmfriendlyfiretype", #default_val: 0
+    #name: #"zmfriendlyfiretype", #default_val: 0
   }, {
-    #name: # "zmelixirconflagrationliquidation", #default_val: 1
+    #name: #"zmelixirconflagrationliquidation", #default_val: 1
   }, {
-    #name: # "zmelixirperkup", #default_val: 1
+    #name: #"zmelixirperkup", #default_val: 1
   }, {
-    #name: # "zmelixirrefreshmint", #default_val: 1
+    #name: #"zmelixirrefreshmint", #default_val: 1
   });
 }
 

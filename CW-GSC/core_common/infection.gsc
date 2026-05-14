@@ -21,7 +21,7 @@ function __init__() {
 
 function initialize() {
   level.infection = {
-    #perks: [], #bodies: [], #primary_weapon: undefined, #offhand_weapon: undefined, #team: # "none", #var_c4b373ef: []
+    #perks: [], #bodies: [], #primary_weapon: undefined, #offhand_weapon: undefined, #team: #"none", #var_c4b373ef: []
   };
 }
 
@@ -110,10 +110,10 @@ function give_body() {
 
   body_index = self getplayergendertype() == "male" ? 0 : 1;
   self player_role::set(level.infection.bodies[body_index], 1);
-  self thread function_da08f4d0();
+  self thread ambient_sound();
 }
 
-function function_da08f4d0() {
+function ambient_sound() {
   self endon(#"death");
 
   while(true) {

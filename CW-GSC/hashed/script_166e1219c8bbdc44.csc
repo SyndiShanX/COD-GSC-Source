@@ -216,10 +216,10 @@ function function_ba2d251(localclientnum, target, val) {
 
   switch (val) {
     case 1:
-      fxname = distance > 200 ? # "hash_4b01f025eb7e47d8" : # "hash_16c7c4d7f14d97a3";
+      fxname = distance > 200 ? #"hash_4b01f025eb7e47d8" : #"hash_16c7c4d7f14d97a3";
       break;
     case 2:
-      fxname = distance > 200 ? # "hash_402f9042dc87f055" : # "hash_4381a516acca3cfa";
+      fxname = distance > 200 ? #"hash_402f9042dc87f055" : #"hash_4381a516acca3cfa";
       break;
     case 3:
       fxname = #"hash_794f3c866e2f2c33";
@@ -337,16 +337,16 @@ function function_97f75611(localclientnum, oldval, newval, bnewent, binitialsnap
 
     switch (bwastimejump) {
       case 1:
-        var_51bf08db = var_f8796df3 ? # "hash_54388e35e14b68e5" : # "hash_543f9a35e1519bf7";
+        var_51bf08db = var_f8796df3 ? #"hash_54388e35e14b68e5" : #"hash_543f9a35e1519bf7";
         break;
       case 2:
-        var_51bf08db = var_f8796df3 ? # "hash_38586b2eb5ef5caa" : # "hash_38515f2eb5e92998";
+        var_51bf08db = var_f8796df3 ? #"hash_38586b2eb5ef5caa" : #"hash_38515f2eb5e92998";
         break;
       case 3:
-        var_51bf08db = var_f8796df3 ? # "hash_1c2d03ee3e4b2130" : # "hash_1c340fee3e515442";
+        var_51bf08db = var_f8796df3 ? #"hash_1c2d03ee3e4b2130" : #"hash_1c340fee3e515442";
         break;
       case 4:
-        var_51bf08db = var_f8796df3 ? # "hash_3ab7539c0b05dba9" : # "hash_3abe5f9c0b0c0ebb";
+        var_51bf08db = var_f8796df3 ? #"hash_3ab7539c0b05dba9" : #"hash_3abe5f9c0b0c0ebb";
         break;
       case 5:
       default:

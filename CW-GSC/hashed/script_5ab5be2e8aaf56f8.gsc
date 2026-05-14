@@ -1178,7 +1178,7 @@ function function_5efbdd83(instance) {
       item = self function_97379a52(dropstruct);
     }
   } else {
-    items = dropstruct namespace_65181344::function_fd87c780(#"secure_bonus_drop_list", 1, 0);
+    items = dropstruct item_spawn_groups_util::function_fd87c780(#"secure_bonus_drop_list", 1, 0);
 
     if(isDefined(items) && isDefined(items[0])) {
       item = items[0];

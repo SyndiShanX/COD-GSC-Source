@@ -562,7 +562,7 @@ function function_726c99a5(fade_out_time) {
   level thread lui::screen_fade_out(fade_out_time, "black");
   wait fade_out_time;
   level.player notify(#"menuresponse", {
-    #menu: # "full_screen_movie", #response: # "finished_movie_playback", #value: 1
+    #menu: #"full_screen_movie", #response: #"finished_movie_playback", #value: 1
   });
   level thread lui::screen_fade_in(0, "black");
 }

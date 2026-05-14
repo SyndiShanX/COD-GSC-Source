@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   callback::on_killcam_begin(&function_330a13a6);
   callback::on_killcam_end(&function_330a13a6);
-  callback::add_callback(#"hash_2fc4cfecaed47583", &function_bd054816);
+  callback::add_callback(#"localclientusingoffhand", &function_bd054816);
   clientfield::register("missile", "tripwire_state", 1, 2, "int", &function_6868fab3, 1, 1);
   clientfield::register("scriptmover", "tripwire_solo_beam_fx", 1, 1, "int", &function_9233eb94, 0, 0);
   level.tripwireweapon = getweapon("eq_tripwire");

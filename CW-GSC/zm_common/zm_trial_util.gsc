@@ -327,7 +327,7 @@ function function_d37a769(var_806e2de0) {
       }
 
       self zm_perks::function_81bc6765(slot, level._custom_perks[vapor].alias);
-      self zm_perks::function_9bdf581f(vapor, slot);
+      self zm_perks::give_perk_vapor(vapor, slot);
     }
   }
 
@@ -350,7 +350,7 @@ function function_7f999aa0(var_806e2de0) {
   if((var_4493e3e1 || slot != -1) && (var_4493e3e1 || var_806e2de0.a_b_vapors[slot] || zm_perks::function_e56d8ef4(#"specialty_additionalprimaryweapon")) && isDefined(var_806e2de0.additional_primary_weapon)) {
     if(var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) {
       if(self hasweapon(var_806e2de0.additional_primary_weapon)) {
-        self notify(#"hash_29c66728ccd27f03", {
+        self notify(#"restore_additional_primary_weapon", {
           #weapon: var_806e2de0.additional_primary_weapon
         });
       }
@@ -648,7 +648,7 @@ function function_9c71b46f() {
 
       if(!player hasperk(perk) && !player zm_perks::has_perk_paused(perk)) {
         n_index = player zm_perks::function_c1efcc57(perk);
-        player zm_perks::function_9bdf581f(perk, n_index);
+        player zm_perks::give_perk_vapor(perk, n_index);
       }
     }
   }

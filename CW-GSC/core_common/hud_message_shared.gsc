@@ -32,7 +32,7 @@ function playnotifyloop(duration) {
 }
 
 function setlowermessage(text, time) {
-  self notify(#"hash_6ceeeb477ece797b");
+  self notify(#"change_lower_message");
 
   if(isDefined(time) && time > 0) {
     self luinotifyevent(#"hash_424b9c54c8bf7a82", 2, text, int(time));
@@ -43,7 +43,7 @@ function setlowermessage(text, time) {
 }
 
 function clearlowermessage() {
-  self endon(#"hash_6ceeeb477ece797b");
+  self endon(#"change_lower_message");
 
   if(!isPlayer(self)) {
     return;

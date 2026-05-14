@@ -68,7 +68,7 @@ function private preinit() {
     level.var_624588d5 = [];
   }
 
-  level thread namespace_65181344::init_spawn_system();
+  level thread item_spawn_groups_util::init_spawn_system();
 }
 
 function private function_2777823f() {
@@ -165,7 +165,7 @@ function function_9116bb0e(localclientnum, closed = 0) {
         setuimodelvalue(createuimodel(itemmodel, "inventoryFull"), 0);
       }
 
-      description = isDefined(itemdef.itementry.description) ? itemdef.itementry.description : # "";
+      description = isDefined(itemdef.itementry.description) ? itemdef.itementry.description : #"";
 
       if(description == #"" && isDefined(itemdef.itementry.weapon)) {
         itemindex = getitemindexfromref(itemdef.itementry.weapon.name);
@@ -176,10 +176,10 @@ function function_9116bb0e(localclientnum, closed = 0) {
         }
       }
 
-      setuimodelvalue(createuimodel(itemmodel, "description"), isDefined(description) ? description : # "");
+      setuimodelvalue(createuimodel(itemmodel, "description"), isDefined(description) ? description : #"");
       pickupicon = isDefined(itemdef.itementry.pickupicon) ? itemdef.itementry.pickupicon : itemdef.itementry.icon;
       stashicon = isDefined(itemdef.itementry.stashicon) ? itemdef.itementry.stashicon : pickupicon;
-      setuimodelvalue(createuimodel(itemmodel, "icon"), isDefined(stashicon) ? stashicon : # "blacktransparent");
+      setuimodelvalue(createuimodel(itemmodel, "icon"), isDefined(stashicon) ? stashicon : #"blacktransparent");
       setuimodelvalue(createuimodel(itemmodel, "rarity"), itemdef.itementry.rarity);
       setuimodelvalue(createuimodel(itemmodel, "name"), get_item_name(itemdef.itementry));
       claimsinventoryslot = item_inventory::is_inventory_item(localclientnum, itemdef.itementry) && !item_inventory::function_a303c8ef(localclientnum, itemdef.itementry);
@@ -306,7 +306,7 @@ function private function_cdd9b388() {
   while(true) {
     waitframe(1);
 
-    if(getdvarint(#"hash_3fdd3b60f349d462", 0)) {
+    if(getdvarint(#"wz_item_world_items", 0)) {
       if(isDefined(self)) {
         origin = self.origin;
         var_f4b807cb = function_2e3efdda(origin, undefined, 128, 2000);
@@ -559,7 +559,7 @@ function function_84964a9e(localclientnum, itementry, model, networkid) {
     if(!isDefined(var_95b3bee0) || isDefined(var_95b3bee0)) {
       model.modelfx = [];
 
-      if(!isDefined(itementry.var_22d128f2) && !isDefined(itementry.var_22d128f2) && !isDefined(itementry.var_22d128f2)) {
+      if(!isDefined(itementry.fxpositionoffsetx) && !isDefined(itementry.fxpositionoffsetx) && !isDefined(itementry.fxpositionoffsetx)) {
         foreach(var_a6f47d78 in itementry.worldfx) {
           model.modelfx[model.modelfx.size] = util::playFXOnTag(localclientnum, var_a6f47d78.worldfx, model, "tag_origin");
         }
@@ -567,10 +567,10 @@ function function_84964a9e(localclientnum, itementry, model, networkid) {
         return;
       }
 
-      originoffset = (isDefined(itementry.var_5dc4470b) ? itementry.var_5dc4470b : 0, isDefined(itementry.var_54a3b4ca) ? itementry.var_54a3b4ca : 0, isDefined(itementry.var_3e688854) ? itementry.var_3e688854 : 0);
+      originoffset = (isDefined(itementry.modeloffsetx) ? itementry.modeloffsetx : 0, isDefined(itementry.modeloffsety) ? itementry.modeloffsety : 0, isDefined(itementry.modeloffsetz) ? itementry.modeloffsetz : 0);
       originoffset = rotatepoint(originoffset * -1, model.angles);
-      originoffset += rotatepoint((isDefined(itementry.var_22d128f2) ? itementry.var_22d128f2 : 0, isDefined(itementry.var_48907470) ? itementry.var_48907470 : 0, isDefined(itementry.var_702943a1) ? itementry.var_702943a1 : 0), model.angles);
-      angles = combineangles(model.angles, (isDefined(itementry.var_15b88fde) ? itementry.var_15b88fde : 0, isDefined(itementry.var_8c9a7dc8) ? itementry.var_8c9a7dc8 : 0, isDefined(itementry.var_7a51d937) ? itementry.var_7a51d937 : 0));
+      originoffset += rotatepoint((isDefined(itementry.fxpositionoffsetx) ? itementry.fxpositionoffsetx : 0, isDefined(itementry.fxpositionoffsety) ? itementry.fxpositionoffsety : 0, isDefined(itementry.fxpositionoffsetz) ? itementry.fxpositionoffsetz : 0), model.angles);
+      angles = combineangles(model.angles, (isDefined(itementry.fxangleoffsetx) ? itementry.fxangleoffsetx : 0, isDefined(itementry.fxangleoffsety) ? itementry.fxangleoffsety : 0, isDefined(itementry.fxangleoffsetz) ? itementry.fxangleoffsetz : 0));
       forward = anglesToForward(angles);
       up = anglestoup(angles);
 
@@ -774,7 +774,7 @@ function private _draw(localclientnum, draworigin) {
           function_2990e5f(localclientnum, model);
         }
 
-        originoffset = (isDefined(item.itementry.var_5dc4470b) ? item.itementry.var_5dc4470b : 0, isDefined(item.itementry.var_54a3b4ca) ? item.itementry.var_54a3b4ca : 0, isDefined(item.itementry.var_3e688854) ? item.itementry.var_3e688854 : 0);
+        originoffset = (isDefined(item.itementry.modeloffsetx) ? item.itementry.modeloffsetx : 0, isDefined(item.itementry.modeloffsety) ? item.itementry.modeloffsety : 0, isDefined(item.itementry.modeloffsetz) ? item.itementry.modeloffsetz : 0);
         model.origin += rotatepoint(originoffset, model.angles);
 
         if(item_world_util::function_da09de95(item.networkid)) {
@@ -1750,7 +1750,7 @@ function private function_802915bc(localclientnum) {
 
     if(var_1ba7b9c8.size > 0) {
       isdeathstash = var_1ba7b9c8[0].stash_type === 2;
-      hinttext = isdeathstash ? # "wz/death_stash" : # "wz/supply_drop";
+      hinttext = isdeathstash ? #"wz/death_stash" : #"wz/supply_drop";
     } else {
       var_1ba7b9c8 = arraysortclosest(level.item_spawn_stashes, self.var_9b882d22.origin, 1, 0, 12);
 
@@ -2355,7 +2355,7 @@ function private function_48ca0bbb(localclientnum) {
         objstate = 1;
       }
 
-      pickupicon = isDefined(itementry.pickupicon) ? itementry.pickupicon : is_true(level.var_abaea458[self.var_9b882d22.networkid]) ? # "" : itementry.icon;
+      pickupicon = isDefined(itementry.pickupicon) ? itementry.pickupicon : is_true(level.var_abaea458[self.var_9b882d22.networkid]) ? #"" : itementry.icon;
 
       if(self.var_54d9f4a6) {
         var_77055f15 = 16;
@@ -2386,7 +2386,7 @@ function private function_48ca0bbb(localclientnum) {
 
       if(getuimodelvalue(level.var_d42ffee1[localclientnum]) !== 10) {
         if(isDefined(level.var_19cf0be9[localclientnum]) && isDefined(getuimodelvalue(level.var_19cf0be9[localclientnum]))) {
-          setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : # "blacktransparent");
+          setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : #"blacktransparent");
         }
       }
 
@@ -2402,7 +2402,7 @@ function private function_48ca0bbb(localclientnum) {
         } else if(isDefined(itementry.weapon)) {
           var_d1fce876 = itementry.weapon.displayname;
         } else {
-          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
         }
 
         if(var_d1fce876 == hintstring) {
@@ -2743,7 +2743,7 @@ function function_7571fda9(item) {
   }
 
   itementry = item.itementry;
-  originoffset = (isDefined(itementry.var_5dc4470b) ? itementry.var_5dc4470b : 0, isDefined(itementry.var_54a3b4ca) ? itementry.var_54a3b4ca : 0, isDefined(itementry.var_3e688854) ? itementry.var_3e688854 : 0);
+  originoffset = (isDefined(itementry.modeloffsetx) ? itementry.modeloffsetx : 0, isDefined(itementry.modeloffsety) ? itementry.modeloffsety : 0, isDefined(itementry.modeloffsetz) ? itementry.modeloffsetz : 0);
   originoffset = rotatepoint(originoffset * -1, item.angles);
   return originoffset;
 }
@@ -2759,7 +2759,7 @@ function function_118d052e(item) {
     return item.angles;
   }
 
-  angles = combineangles(item.angles, (isDefined(itementry.var_15b88fde) ? itementry.var_15b88fde : 0, isDefined(itementry.var_8c9a7dc8) ? itementry.var_8c9a7dc8 : 0, isDefined(itementry.var_7a51d937) ? itementry.var_7a51d937 : 0));
+  angles = combineangles(item.angles, (isDefined(itementry.fxangleoffsetx) ? itementry.fxangleoffsetx : 0, isDefined(itementry.fxangleoffsety) ? itementry.fxangleoffsety : 0, isDefined(itementry.fxangleoffsetz) ? itementry.fxangleoffsetz : 0));
   return angles;
 }
 
@@ -2790,7 +2790,7 @@ function get_item_name(item) {
     }
   }
 
-  return isDefined(item.displayname) ? item.displayname : # "";
+  return isDefined(item.displayname) ? item.displayname : #"";
 }
 
 function function_6fe428b3(item) {
@@ -2798,7 +2798,7 @@ function function_6fe428b3(item) {
     return item.pickupicon;
   }
 
-  return isDefined(item.icon) ? item.icon : # "";
+  return isDefined(item.icon) ? item.icon : #"";
 }
 
 function function_c59d8d2b(item) {

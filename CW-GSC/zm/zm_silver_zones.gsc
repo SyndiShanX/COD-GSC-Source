@@ -133,7 +133,7 @@ function function_a74dcd0a(player) {
   }
 
   if(player.cached_zone.name === #"zone_proto_exterior_rear2" || player.cached_zone.name === #"zone_proto_exterior_rear") {
-    return # "zone_proto_exterior_rear";
+    return #"zone_proto_exterior_rear";
   }
 
   return player zm_zonemgr::get_player_zone();

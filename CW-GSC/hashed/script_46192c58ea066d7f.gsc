@@ -263,8 +263,8 @@ function function_657c0cbf(container, var_b0d9d129) {
     return;
   }
 
-  if(isDefined(var_b0d9d129.var_81e77cec[0].itemlistbundle.var_7fb0967b)) {
-    var_b9ea4e83 = sqr(var_b0d9d129.var_81e77cec[0].itemlistbundle.var_7fb0967b);
+  if(isDefined(var_b0d9d129.var_81e77cec[0].itemlistbundle.distributiondistance)) {
+    var_b9ea4e83 = sqr(var_b0d9d129.var_81e77cec[0].itemlistbundle.distributiondistance);
 
     for(var_8017ce8 = 0; var_8017ce8 < var_b0d9d129.var_81e77cec.size; var_8017ce8++) {
       var_da1a8a8a = var_b0d9d129.var_81e77cec[var_8017ce8];

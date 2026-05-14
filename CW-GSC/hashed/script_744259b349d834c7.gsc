@@ -606,7 +606,7 @@ function function_d01b93a(entity) {
 }
 
 function set_head_model(entity, damaged = self.var_c07d2388 === #"c_t9_zmb_son_of_orda_head2", var_12db14c5 = self.var_c07d2388, var_6faf2e31) {
-  var_bfabd025 = damaged ? # "c_t9_zmb_son_of_orda_head2" : # "c_t9_zmb_son_of_orda_head1";
+  var_bfabd025 = damaged ? #"c_t9_zmb_son_of_orda_head2" : #"c_t9_zmb_son_of_orda_head1";
 
   if(var_bfabd025 === #"c_t9_zmb_son_of_orda_head2") {
     if(is_true(var_6faf2e31)) {

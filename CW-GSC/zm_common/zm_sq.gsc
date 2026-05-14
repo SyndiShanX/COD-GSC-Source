@@ -15,7 +15,7 @@
 #namespace zm_sq;
 
 function private autoexec init() {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     adddebugcommand("<dev string:x38>");
   }
 
@@ -61,7 +61,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   assert(ishash(var_e788cdd7), "<dev string:xb4>");
 
   if(!isDefined(name)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:xd4>");
       println("<dev string:xd4>");
     }
@@ -70,7 +70,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(step_name)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x118>");
       println("<dev string:x118>");
     }
@@ -79,7 +79,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(setup_func)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x161>");
       println("<dev string:x161>");
     }
@@ -88,7 +88,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(!isDefined(cleanup_func)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x1ab>");
       println("<dev string:x1ab>");
     }
@@ -97,7 +97,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   if(isDefined(self._ee) && isDefined(self._ee[name]) && isDefined(var_d6ca4caf) && isDefined(self._ee[name].record_stat)) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x1f7>");
       println("<dev string:x1f7>");
     }
@@ -166,7 +166,7 @@ function start(name, var_9d8cf7f = 0) {
   assert(isDefined(self._ee[name]), "<dev string:x253>" + hashtostring(name) + "<dev string:x25a>");
 
   if(self._ee[name].started) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x253>" + hashtostring(name) + "<dev string:x276>");
       println("<dev string:x253>" + hashtostring(name) + "<dev string:x276>");
     }
@@ -220,7 +220,7 @@ function private run_step(ee, step, var_5ea5c94d) {
 
   self endon(#"game_ended");
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x2dd>");
     println(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x2dd>");
   }
@@ -233,7 +233,7 @@ function private run_step(ee, step, var_5ea5c94d) {
     waitresult = self waittill(step.var_e788cdd7 + "_setup_completed", step.var_e788cdd7 + "_ended_early");
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x2f0>");
     println(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x2f0>");
   }
@@ -245,7 +245,7 @@ function private run_step(ee, step, var_5ea5c94d) {
   ended_early = isDefined(waitresult) && waitresult._notify == step.var_e788cdd7 + "_ended_early";
   [[step.cleanup_func]](var_5ea5c94d, ended_early);
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x306>");
     println(hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step.name) + "<dev string:x306>");
   }
@@ -328,7 +328,7 @@ function private run_step(ee, step, var_5ea5c94d) {
     zm_stats::function_ea5b4947();
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x253>" + hashtostring(ee.name) + "<dev string:x31e>");
     println("<dev string:x253>" + hashtostring(ee.name) + "<dev string:x31e>");
   }
@@ -359,7 +359,7 @@ function private function_3f795dc3(ee, step, var_5ea5c94d) {
 }
 
 function private function_df365859(notifyhash) {
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold(hashtostring(self.ee.name) + "<dev string:x2d8>" + hashtostring(self.name) + "<dev string:x32f>");
     println(hashtostring(self.ee.name) + "<dev string:x2d8>" + hashtostring(self.name) + "<dev string:x32f>");
   }
@@ -901,7 +901,7 @@ function function_f09763fd(ee_name, step_name) {
   index = get_step_index(ee_name, step_name);
 
   if(index == -1) {
-    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+    if(getdvarint(#"zm_debug_ee_system", 0)) {
       iprintlnbold("<dev string:x253>" + hashtostring(ee_name) + "<dev string:x439>" + hashtostring(step_name));
       println("<dev string:x253>" + hashtostring(ee_name) + "<dev string:x439>" + hashtostring(step_name));
     }
@@ -989,7 +989,7 @@ function function_614612f(ee_name) {
     return;
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x542>" + hashtostring(ee_name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x559>");
     println("<dev string:x542>" + hashtostring(ee_name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x559>");
   }
@@ -1011,7 +1011,7 @@ function function_f2dd8601(ee_name, var_f2c264bb) {
       waitresult = self waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x577>");
 
       if(waitresult._notify == #"timeout") {
-        if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+        if(getdvarint(#"zm_debug_ee_system", 0)) {
           iprintlnbold("<dev string:x583>" + hashtostring(ee_name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name));
           println("<dev string:x583>" + hashtostring(ee_name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name));
         }
@@ -1023,7 +1023,7 @@ function function_f2dd8601(ee_name, var_f2c264bb) {
     wait 1;
   }
 
-  if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+  if(getdvarint(#"zm_debug_ee_system", 0)) {
     iprintlnbold("<dev string:x5ae>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5bd>");
     println("<dev string:x5ae>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5bd>");
   }
@@ -1037,8 +1037,8 @@ function devgui_think() {
 
   while(true) {
     wait 1;
-    cmd = getdvarstring(#"hash_319d902ea18eb39");
-    setDvar(#"hash_319d902ea18eb39", "<dev string:x5c4>");
+    cmd = getdvarstring(#"devgui_ee_cmd");
+    setDvar(#"devgui_ee_cmd", "<dev string:x5c4>");
     cmd = strtok(cmd, "<dev string:x2d8>");
 
     if(cmd.size == 0) {
@@ -1073,17 +1073,17 @@ function devgui_think() {
         step_name = ee.steps[var_f2c264bb].name;
 
         if(var_f2c264bb < ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x5c8>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5f9>" + targetval);
             println("<dev string:x5c8>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5f9>" + targetval);
           }
         } else if(var_f2c264bb == ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x602>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step_name) + "<dev string:x5f9>" + targetval);
             println("<dev string:x602>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step_name) + "<dev string:x5f9>" + targetval);
           }
         } else {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x616>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step_name) + "<dev string:x5f9>" + targetval + "<dev string:x5bd>");
             println("<dev string:x616>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(step_name) + "<dev string:x5f9>" + targetval + "<dev string:x5bd>");
           }
@@ -1102,7 +1102,7 @@ function devgui_think() {
         var_f2c264bb = int(cmd[3]);
 
         if(var_f2c264bb < ee.current_step) {
-          if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+          if(getdvarint(#"zm_debug_ee_system", 0)) {
             iprintlnbold("<dev string:x626>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5f9>" + targetval);
             println("<dev string:x626>" + hashtostring(ee.name) + "<dev string:x2d8>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x5f9>" + targetval);
           }

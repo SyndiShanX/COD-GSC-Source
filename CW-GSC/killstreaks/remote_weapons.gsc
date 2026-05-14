@@ -98,7 +98,7 @@ function watchremoveremotecontrolledweapon() {
   waitresult = weapon waittill(#"death", #"remote_weapon_shutdown");
 
   if(weapon.watch_remote_weapon_death === 1 && isDefined(waitresult._notify) && waitresult._notify == "remote_weapon_shutdown") {
-    weapon notify(#"hash_59b25025ce93a142");
+    weapon notify(#"remote_weapon_shutdown_watch_death");
   }
 
   weapon endremotecontrolweaponuse(0);
@@ -209,7 +209,7 @@ function watchremotetriggeruse() {
 
     if(isDefined(weapon.hackertrigger) && isDefined(weapon.hackertrigger.progressbar)) {
       if(weapon.remotename == "killstreak_remote_turret") {
-        weapon.remoteowner iprintlnbold(#"hash_7b4c84d5307fea60");
+        weapon.remoteowner iprintlnbold(#"killstreak/auto_turret_not_available");
       }
 
       continue;

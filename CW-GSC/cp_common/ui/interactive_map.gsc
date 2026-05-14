@@ -577,9 +577,9 @@ function function_fabe437a(prompt_struct) {
     level.interactive_map.objects[#"map_waypoint"] notify(#"hash_7c1f9e1214f47b4e");
     level.interactive_map.objects[#"map_waypoint"] = waypoint;
     waypoint thread function_9dfe141f(#"map_waypoint");
-    function_d0243e5b(#"map_waypoint", "image", isDefined(waypoint.interactive_map.image) ? waypoint.interactive_map.image : # "uie_map_lubyanka_marker_waypoint");
+    function_d0243e5b(#"map_waypoint", "image", isDefined(waypoint.interactive_map.image) ? waypoint.interactive_map.image : #"uie_map_lubyanka_marker_waypoint");
   } else {
-    waypoint add_object(#"map_waypoint", isDefined(waypoint.interactive_map.image) ? waypoint.interactive_map.image : # "uie_map_lubyanka_marker_waypoint", 0);
+    waypoint add_object(#"map_waypoint", isDefined(waypoint.interactive_map.image) ? waypoint.interactive_map.image : #"uie_map_lubyanka_marker_waypoint", 0);
   }
 
   thread function_5cab7397();

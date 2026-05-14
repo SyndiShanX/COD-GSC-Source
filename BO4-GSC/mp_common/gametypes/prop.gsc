@@ -1271,8 +1271,8 @@ propwatchcleanupondisconnect() {
 }
 
 propwatchcleanuponroundend() {
-  self notify(#"hash_23d745b724b7c0bd");
-  self endon(#"hash_23d745b724b7c0bd", #"disconnect");
+  self notify(#"propwatchdeleteroundend");
+  self endon(#"propwatchdeleteroundend", #"disconnect");
   level waittill(#"round_end_done");
   self propcleanup();
   self propclonecleanup();

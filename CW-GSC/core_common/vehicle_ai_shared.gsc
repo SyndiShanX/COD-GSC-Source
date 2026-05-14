@@ -1765,7 +1765,7 @@ function private function_4ab1a63a(goal) {
     var_20b5eeff = 150;
   }
 
-  var_3069c020 = isDefined(self.settings.var_2ade16ee) ? self.settings.var_2ade16ee : 450;
+  var_3069c020 = isDefined(self.settings.preferredengagementdistance) ? self.settings.preferredengagementdistance : 450;
   maxradius = goal.goalradius;
   minradius = min(self.radius * 2, maxradius / 3);
   innerspacing = mapfloat(1000, 3000, self.radius, self.radius * 3, goal.goalradius);
@@ -1828,7 +1828,7 @@ function function_1e0d693b(goal, enemy) {
     var_20b5eeff = 150;
   }
 
-  var_3069c020 = isDefined(self.settings.var_2ade16ee) ? self.settings.var_2ade16ee : 450;
+  var_3069c020 = isDefined(self.settings.preferredengagementdistance) ? self.settings.preferredengagementdistance : 450;
   enemypos = enemy.origin;
 
   if(function_ffa5b184(enemy)) {

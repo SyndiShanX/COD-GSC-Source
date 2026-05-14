@@ -60,7 +60,7 @@ function private preinit() {
   ir_strobe::init_shared();
   level.crateownerusetime = 500;
   level.cratenonownerusetime = int(getgametypesetting(#"cratecapturetime") * 1000);
-  level.supplydropdisarmcrate = #"hash_20071ab3686e8d58";
+  level.supplydropdisarmcrate = #"killstreak/supply_drop_disarm_hint";
   level.var_f90e0e29 = &cratedelete;
   clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int");
   clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int");
@@ -110,7 +110,7 @@ function function_7422bd1e(var_b27d6a17) {
   while(true) {
     wait var_b27d6a17;
     context = {
-      #var_9fc6cfe9: 1, #dist_from_boundary: 50, #var_8741accb: # "airdrop_supplydrop", #droptag: "tag_cargo_attach", #perform_physics_trace: 1, #max_dist_from_location: 16, #radius: 30, #tracemask: 5
+      #var_9fc6cfe9: 1, #dist_from_boundary: 50, #var_8741accb: #"airdrop_supplydrop", #droptag: "tag_cargo_attach", #perform_physics_trace: 1, #max_dist_from_location: 16, #radius: 30, #tracemask: 5
     };
 
     for(origin = function_2dcf7a5f(var_8cf55682, context); !isDefined(origin); origin = function_2dcf7a5f(var_8cf55682, context)) {
@@ -477,15 +477,15 @@ function givecratekillstreak(killstreak) {
 function givespecializedcrateweapon(weapon) {
   switch (weapon.name) {
     case #"minigun":
-      level thread popups::displayteammessagetoall(#"hash_3b566d06e5a482e1", self);
+      level thread popups::displayteammessagetoall(#"killstreak/minigun_inbound", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
     case #"m32":
-      level thread popups::displayteammessagetoall(#"hash_25ae9096a4ce050c", self);
+      level thread popups::displayteammessagetoall(#"killstreak/m32_inbound", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
     case #"m220_tow":
-      level thread popups::displayteammessagetoall(#"hash_51751eb890739762", self);
+      level thread popups::displayteammessagetoall(#"killstreak/m220_tow_inbound", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
     case #"mp40_blinged":
@@ -738,7 +738,7 @@ function use_killstreak_death_machine(killstreak) {
     return true;
   }
 
-  level thread popups::displayteammessagetoall(#"hash_3b566d06e5a482e1", self);
+  level thread popups::displayteammessagetoall(#"killstreak/minigun_inbound", self);
   level weapons::add_limited_weapon(weapon, self, 3);
   self takeweapon(currentweapon);
   self giveweapon(weapon);
@@ -2419,7 +2419,7 @@ function destroyhelicopter(var_fec7078b) {
   }
 
   self scene::stop(1);
-  self notify(#"hash_525537be2de4c159", {
+  self notify(#"drop_crate_on_death", {
     #position: self.origin, #direction: self.angles, #owner: self.owner
   });
   lbexplode();
@@ -3123,12 +3123,12 @@ function helidropcrate(killstreak, originalowner, offset, killcament, killstreak
   }
 
   team = self.team;
-  waitresult = helicopter waittill(#"drop_crate", #"hash_525537be2de4c159");
+  waitresult = helicopter waittill(#"drop_crate", #"drop_crate_on_death");
   chopperowner = waitresult.owner;
   origin = waitresult.position;
   angles = waitresult.direction;
 
-  if(waitresult._notify == #"hash_525537be2de4c159") {
+  if(waitresult._notify == #"drop_crate_on_death") {
     self.crate.var_da439787 = 1;
     self.crate.angles = (0, self.crate.angles[1], 0);
   }

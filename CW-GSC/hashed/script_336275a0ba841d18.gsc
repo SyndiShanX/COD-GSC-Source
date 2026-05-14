@@ -113,7 +113,7 @@ function function_2ce126c4() {
     level.var_7e2af8d5 = [#"spawner_zm_steiner", #"hash_4f87aa2a203d37d0", #"spawner_bo5_mimic"];
   }
 
-  level.custom_end_screen = &function_77805e8;
+  level.custom_end_screen = &custom_end_screen;
   spawner::add_archetype_spawn_function(#"zombie", &zombiespawnsetup);
   spawner::function_89a2cd87(#"zombie", &function_a9b7dc57);
   spawner::add_archetype_spawn_function(#"zombie_dog", &function_6a89f900);
@@ -357,7 +357,7 @@ function function_ec2b3302() {
       return level.var_70b6f044[#"hash_5f22ecce894282fa"];
     }
 
-    return # "hash_5f22ecce894282fa";
+    return #"hash_5f22ecce894282fa";
   }
 
   rand = randomint(100);
@@ -368,14 +368,14 @@ function function_ec2b3302() {
     }
 
     level.var_8f8a58c2++;
-    return # "hash_12a17ab3df5889eb";
+    return #"hash_12a17ab3df5889eb";
   }
 
   if(isDefined(level.var_70b6f044) && isDefined(level.var_70b6f044[#"hash_5f22ecce894282fa"])) {
     return level.var_70b6f044[#"hash_5f22ecce894282fa"];
   }
 
-  return # "hash_5f22ecce894282fa";
+  return #"hash_5f22ecce894282fa";
 }
 
 function function_2f6706d2() {
@@ -1276,7 +1276,7 @@ function game_over() {
   level.var_94048a02 = undefined;
 }
 
-function function_77805e8(params) {
+function custom_end_screen(params) {
   level thread zm::function_6c369691();
   wait 10;
   level lui::screen_fade_out(1);
@@ -2924,7 +2924,7 @@ function function_69e5b9b() {
   level endon(#"end_game");
   level.total_zombies_killed = 0;
   level.var_9b7bd0e8 = 0;
-  level.var_3e67b08d = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"hash_7d5a25e2463f7fc5");
+  level.var_3e67b08d = isDefined(zombie_utility::get_zombie_var(#"zombie_spawn_delay")) ? zombie_utility::get_zombie_var(#"zombie_spawn_delay") : zombie_utility::get_zombie_var(#"zombie_spawn_delay_base");
   level zombie_utility::set_zombie_var(#"zombie_move_speed_multiplier", 6);
   level.var_d5dc0bf2 = (0, 0, 0);
   level thread function_b504f826();

@@ -12,7 +12,7 @@
 function init() {
   clientfield::register("toplayer", "RGB_keyboard_manager", 1, 3, "int", &function_f5866497, 0, 0);
 
-  if(function_8b1a219a() && getdvarint(#"hash_cca6902a7ce5273", 0) == 1) {
+  if(function_8b1a219a() && getdvarint(#"aura_activate_switch", 0) == 1) {
     callback::on_localclient_connect(&localclient_connect);
     callback::on_gameplay_started(&function_9b08184);
   }

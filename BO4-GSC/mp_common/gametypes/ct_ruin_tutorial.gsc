@@ -281,7 +281,7 @@ function_53ef16ed(var_b6acc0c9, var_5563d1e7, var_8b1294a8, var_20d50849, var_4d
       level thread ct_vo::function_831e0584(array(var_4dc9e63c));
     }
 
-    ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_142e78a1bcbd104d" : # "hash_43778cd6dfd4c233");
+    ct_utils::function_a61ebb46(function_8b1a219a() ? #"hash_142e78a1bcbd104d" : #"hash_43778cd6dfd4c233");
     ct_utils::function_79957328(undefined);
 
     if(isDefined(str_objective)) {
@@ -359,7 +359,7 @@ function_bc194310() {
         waitframe(1);
       }
 
-      ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_4e50694e1653efaf" : # "hash_71cd040e856d2d69");
+      ct_utils::function_a61ebb46(function_8b1a219a() ? #"hash_4e50694e1653efaf" : #"hash_71cd040e856d2d69");
 
       if(b_respawn_player) {
         ct_utils::function_79957328();
@@ -633,7 +633,7 @@ function_d08e9d7f() {
     level notify(#"stop_nag");
     ct_utils::function_e9ab1003("s_grapple_hook_chasm_start_2_obj");
     ct_utils::function_79957328();
-    ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_142e78a1bcbd104d" : # "hash_43778cd6dfd4c233");
+    ct_utils::function_a61ebb46(function_8b1a219a() ? #"hash_142e78a1bcbd104d" : #"hash_43778cd6dfd4c233");
   }
 
   level notify(#"stop_nag");
@@ -693,7 +693,7 @@ function_fecd2528() {
   ct_vo::function_831e0584(array(#"hash_2559f328a2274691"), 1);
   level.var_eb5015e6 = 1;
   e_player = getplayers()[0];
-  var_8e5c536e = function_8b1a219a() ? # "hash_4fb346435e061201" : # "hash_75c2aca845270377";
+  var_8e5c536e = function_8b1a219a() ? #"hash_4fb346435e061201" : #"hash_75c2aca845270377";
   e_player thread ct_utils::function_61c3d59c(var_8e5c536e, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_7e4f395a02d8ed35"), "grav_slam_complete");
   ct_utils::function_654280be();
@@ -927,7 +927,7 @@ function_8678055f() {
     e_player = getplayers()[0];
     n_slot = e_player ct_gadgets::get_slot(#"eq_gravityslam");
     level thread ct_gadgets::function_144e61da(n_slot, "stop_grav_slam_charge");
-    var_5c76e8d = e_player gamepadusedlast() ? # "hash_69996f3f10b734ca" : # "hash_94c2bd8b788ebca";
+    var_5c76e8d = e_player gamepadusedlast() ? #"hash_69996f3f10b734ca" : #"hash_94c2bd8b788ebca";
     e_player thread ct_utils::function_61c3d59c(var_5c76e8d, array(#"hash_73601b890c77f89c"));
 
     if(var_6a9e5fbd) {}
@@ -991,7 +991,7 @@ function_8678055f() {
     if(isDefined(b_timeout) && b_timeout) {
       level notify(#"start_ajax_area_collision");
       level thread ct_vo::function_831e0584(array(#"hash_145ce02b6c792baa"), 1);
-      var_582efb48 = e_player gamepadusedlast() ? # "hash_46f0440233c88e09" : # "hash_308fca0b5c54c70f";
+      var_582efb48 = e_player gamepadusedlast() ? #"hash_46f0440233c88e09" : #"hash_308fca0b5c54c70f";
       ct_utils::function_a61ebb46(var_582efb48);
       level.var_e72728b8 = array(#"eq_gravityslam");
       ct_utils::function_79957328(undefined);
@@ -1482,7 +1482,7 @@ function_bbdd4fa9() {
       e_player killstreaks::add_to_notification_queue(killstreaks::get_menu_name(#"remote_missile"), killstreakquantity, #"remote_missile", undefined, 0);
     }
 
-    var_f445a007 = e_player gamepadusedlast() ? # "hash_5baa07d86c0f300a" : # "hash_3f9bcf3d2fe5da0a";
+    var_f445a007 = e_player gamepadusedlast() ? #"hash_5baa07d86c0f300a" : #"hash_3f9bcf3d2fe5da0a";
     e_player thread ct_utils::function_61c3d59c(var_f445a007);
     e_player waittill(#"remote_missile_fired");
     a_s_player_hellstorm_safe = struct::get_array("s_player_hellstorm_safe", "targetname");
@@ -1497,7 +1497,7 @@ function_bbdd4fa9() {
     function_22720795("s_enemy_event3");
     e_player thread ct_utils::ingame_objective_close();
     level thread function_a9e139d7();
-    ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_7bc7eb557d98f163" : # "hash_76bd8e89161df2ad");
+    ct_utils::function_a61ebb46(function_8b1a219a() ? #"hash_7bc7eb557d98f163" : #"hash_76bd8e89161df2ad");
     level.var_e891c5ba = undefined;
     level notify(#"hellstorm_fired");
     ct_vo::function_831e0584(array("vox_tvoi_tutor_ruin_final_3_active"), 0);

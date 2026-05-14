@@ -33,7 +33,7 @@ function on_player_connect() {
   if(isDefined(level.var_462ca9bb)) {
     self.pers[level.var_bc01f047] = level.var_462ca9bb;
   } else {
-    self.pers[level.var_bc01f047] = level.var_bc01f047 === "srtaacom" ? # "blops_taacom" : "zm_taacom";
+    self.pers[level.var_bc01f047] = level.var_bc01f047 === "srtaacom" ? #"blops_taacom" : "zm_taacom";
   }
 
   if(isDefined(level.var_e2f95698)) {

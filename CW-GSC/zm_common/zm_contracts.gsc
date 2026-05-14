@@ -78,7 +78,7 @@ function function_74872db6() {
       }
     }
 
-    level notify(#"hash_786860db94bcc0f3");
+    level notify(#"contract_zm_no_pap_complete");
   }
 
   if(level.round_number == 30) {
@@ -200,7 +200,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -210,7 +210,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self zm_stats::function_fbce465a(#"hash_777766b99c35007f");
       zm_stats::function_ea5b4947(0);
-      self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
+      self luinotifyevent(#"loot_contract_complete", 1, level.contract_ids[var_38280f2f]);
     }
   }
 
@@ -289,7 +289,7 @@ function function_ac03f21e() {
 }
 
 function function_677a89c8() {
-  level endon(#"hash_786860db94bcc0f3");
+  level endon(#"contract_zm_no_pap_complete");
   self endon(#"disconnect");
 
   while(true) {

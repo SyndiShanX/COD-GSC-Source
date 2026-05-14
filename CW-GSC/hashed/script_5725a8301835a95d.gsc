@@ -56,7 +56,7 @@ function private function_871649b9(instance, var_eece1f6a, var_f8dfa2cf, n_spawn
 
   for(i = 0; i < n_spawns; i++) {
     if(isDefined(a_spawns[i])) {
-      var_7acb5180 = a_spawns[i] namespace_65181344::function_fd87c780(var_f8dfa2cf, 1);
+      var_7acb5180 = a_spawns[i] item_spawn_groups_util::function_fd87c780(var_f8dfa2cf, 1);
 
       if(isDefined(var_7acb5180[0])) {
         var_1a517f12 = getscriptbundle(var_7acb5180[0].itementry.name);

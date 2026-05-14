@@ -147,7 +147,7 @@ function_8b87e57c(timer_label, grace_period, timer_value) {
   }
 
   wait grace_period;
-  timer_label = isDefined(timer_label) ? timer_label : # "";
+  timer_label = isDefined(timer_label) ? timer_label : #"";
 
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);

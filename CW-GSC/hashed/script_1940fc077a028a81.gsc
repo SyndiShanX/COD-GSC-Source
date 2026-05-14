@@ -107,8 +107,8 @@ function private function_7ff2a0fc() {
   behaviortreenetworkutility::registerbehaviortreeaction(#"hash_5bd00a38dffd47e", &function_7c8e35e8, &function_fee7d867, &function_3f71b9c2);
   assert(isscriptfunctionptr(&zombieknockdownactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieknockdownactionstart", &zombieknockdownactionstart);
-  assert(isscriptfunctionptr(&function_c8939973));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a21325931f5ca2f", &function_c8939973);
+  assert(isscriptfunctionptr(&zombieknockdownactionterminate));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a21325931f5ca2f", &zombieknockdownactionterminate);
   assert(isscriptfunctionptr(&zombiegetupactionterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiegetupactionterminate", &zombiegetupactionterminate);
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
@@ -296,7 +296,7 @@ function function_1ca9d31b(entity) {
 }
 
 function zombieshouldmelee(entity) {
-  if(is_true(entity.var_8a96267d) || is_true(entity.var_8ba6ede3)) {
+  if(is_true(entity.var_8a96267d) || is_true(entity.shoulddigup)) {
     return false;
   }
 
@@ -484,7 +484,7 @@ function private zombieshouldknockdown(entity) {
 }
 
 function private function_2a7b4aab(entity) {
-  return entity.var_85c3882d === 1;
+  return entity.inconcertinawire === 1;
 }
 
 function private function_931b615f(entity) {
@@ -743,7 +743,7 @@ function zombieknockdownactionstart(behaviortreeentity) {
   behaviortreeentity val::set(#"zombie_knockdown", "blockingpain", 1);
 }
 
-function private function_c8939973(behaviortreeentity) {
+function private zombieknockdownactionterminate(behaviortreeentity) {
   behaviortreeentity.knockdown = 0;
   behaviortreeentity collidewithactors(1);
   behaviortreeentity clearpath();
@@ -758,7 +758,7 @@ function private zombiegetupactionterminate(behaviortreeentity) {
 }
 
 function private function_78106a79(entity, asmstatename) {
-  if(asmstatename ai::is_stunned() || is_true(asmstatename.var_85c3882d)) {
+  if(asmstatename ai::is_stunned() || is_true(asmstatename.inconcertinawire)) {
     return 5;
   }
 

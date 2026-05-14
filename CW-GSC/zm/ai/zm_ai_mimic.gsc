@@ -515,21 +515,21 @@ function function_218c4ce8() {
   }
 
   var_8e76d54d = [{
-    #name: # "ammo_cache", #type: 0
+    #name: #"ammo_cache", #type: 0
   }, {
-    #name: # "armor_machine", #type: 0
+    #name: #"armor_machine", #type: 0
   }, {
-    #name: # "crafting_table", #type: 0
+    #name: #"crafting_table", #type: 0
   }, {
-    #name: # "perk_machine_choice", #type: 0
+    #name: #"perk_machine_choice", #type: 0
   }, {
-    #name: # "weapon_machine", #type: 0
+    #name: #"weapon_machine", #type: 0
   }, {
-    #name: # "explore_chests", #type: 0
+    #name: #"explore_chests", #type: 0
   }, {
-    #name: # "explore_chests_large", #type: 0
+    #name: #"explore_chests_large", #type: 0
   }, {
-    #name: # "explore_chests_small", #type: 0
+    #name: #"explore_chests_small", #type: 0
   }];
   mapdestinations = struct::get_array(#"content_destination", "variantname");
 

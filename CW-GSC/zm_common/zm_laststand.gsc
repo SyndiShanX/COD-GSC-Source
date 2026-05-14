@@ -304,7 +304,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   }
 
   self.n_downs += 1;
-  bleedout_time = getdvarfloat(#"hash_1116ba0f929df636", isDefined(self.var_b92e42da) ? self.var_b92e42da : getdvarfloat(#"player_laststandbleedouttime", 0));
+  bleedout_time = getdvarfloat(#"player_laststandbleedouttimeoverride", isDefined(self.var_b92e42da) ? self.var_b92e42da : getdvarfloat(#"player_laststandbleedouttime", 0));
 
   if(zm_custom::function_901b751c(#"zmlimiteddownsamount") && self.n_downs > zm_custom::function_901b751c(#"zmlimiteddownsamount")) {
     bleedout_time = 0;
@@ -1053,8 +1053,8 @@ function function_b7c101fa() {
   self endon(#"disconnect");
   self.var_72249004 = 0;
   self.var_308dc243 = 0;
-  self.var_d66589da = int(zombie_utility::get_zombie_var(#"hash_67ae1b8cbb7c985"));
-  self.var_5d4c5daf = int(zombie_utility::get_zombie_var(#"hash_3098c53bba6402d3"));
+  self.var_d66589da = int(zombie_utility::get_zombie_var(#"self_revive_count_solo"));
+  self.var_5d4c5daf = int(zombie_utility::get_zombie_var(#"self_revive_count_coop"));
   level thread function_4d3cb10();
   self waittill(#"spawned");
 
@@ -1248,7 +1248,7 @@ function revive_trigger_think(t_secondary) {
 
       if(isDefined(t_secondary)) {
         if(e_player can_revive(self, 1, 1) && e_player istouching(t_revive) || n_depth > 20) {
-          t_revive setrevivehintstring(#"hash_12272c5573321d90", self.team);
+          t_revive setrevivehintstring(#"zombie/button_to_revive_player", self.team);
           break;
         }
 
@@ -1256,7 +1256,7 @@ function revive_trigger_think(t_secondary) {
       }
 
       if(e_player can_revive_via_override(self) || e_player can_revive(self) || n_depth > 20) {
-        t_revive setrevivehintstring(#"hash_12272c5573321d90", self.team);
+        t_revive setrevivehintstring(#"zombie/button_to_revive_player", self.team);
         break;
       }
     }
@@ -1489,7 +1489,7 @@ function revive_do_revive(e_revivee, t_secondary) {
   e_revivee.revivetrigger.beingrevived = 1;
 
   if(isPlayer(e_revivee)) {
-    e_revivee thread laststand::revive_hud_show_n_fade(#"hash_12e2c5e29f8ce6ad", 3, self);
+    e_revivee thread laststand::revive_hud_show_n_fade(#"zombie/player_is_reviving_you", 3, self);
   }
 
   e_revivee.revivetrigger sethintstring("");
@@ -1545,7 +1545,7 @@ function revive_do_revive(e_revivee, t_secondary) {
   }
 
   if(isDefined(e_revivee.revivetrigger)) {
-    e_revivee.revivetrigger sethintstring(#"hash_12272c5573321d90");
+    e_revivee.revivetrigger sethintstring(#"zombie/button_to_revive_player");
     e_revivee.revivetrigger.beingrevived = 0;
   }
 
@@ -1849,7 +1849,7 @@ function revive_hud_think() {
           }
         }
 
-        players[i] thread laststand::revive_hud_show_n_fade(#"hash_453f3038b87fbc77", 3, playertorevive);
+        players[i] thread laststand::revive_hud_show_n_fade(#"zombie/player_needs_to_be_revived", 3, playertorevive);
       }
 
       playertorevive.revivetrigger.createtime = undefined;

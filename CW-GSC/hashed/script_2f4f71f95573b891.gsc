@@ -278,7 +278,7 @@ function private function_a5d5b89c(var_d562fbb8, var_14a42c6d) {
     var_3c0b220f thread function_91520ec4();
     veh_turret.var_5deea171 = var_3c0b220f;
     level.var_dae3084a = spawn("script_origin", level.player.origin);
-    level.var_dae3084a function_2baad8fc();
+    level.var_dae3084a makesentienttarget();
     level.var_dae3084a setteam(#"neutral");
     veh_turret turret::set_target(level.var_dae3084a, undefined, 0);
     veh_turret turret::function_49c3b892(level.var_dae3084a);

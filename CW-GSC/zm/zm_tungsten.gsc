@@ -2254,7 +2254,7 @@ function function_749d2cfc(str_item_name, var_27751b99) {
   }
 
   if(isDefined(point.itementry.random_attachments)) {
-    weapon = namespace_65181344::function_67456242(point.itementry);
+    weapon = item_spawn_groups_util::function_67456242(point.itementry);
     dropitem = item_drop::drop_item(0, weapon, 1, weapon.maxammo, point.id, self.origin, self.angles, 1);
     dropitem.var_519e776c = 1;
     dropitem.hidetime = 1;
@@ -2752,8 +2752,8 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case #"hash_50d92ca3c6c7c2a8":
-      function_71a6c3ea();
+    case #"super_open_sesame":
+      super_open_sesame();
       break;
     case #"hash_41ed3803afaf6e4a":
       zm_tungsten_pap_quest::function_1d310878();
@@ -2765,7 +2765,7 @@ function cmd(cmd) {
       level.var_4da195fc = 0;
       break;
     case #"hash_57b9473a38039ff0":
-      function_71a6c3ea();
+      super_open_sesame();
       level thread zm_tungsten_main_quest::function_2f0a2ce2();
       break;
     default:
@@ -2773,8 +2773,8 @@ function cmd(cmd) {
   }
 }
 
-function function_71a6c3ea() {
-  level notify(#"hash_50d92ca3c6c7c2a8");
+function super_open_sesame() {
+  level notify(#"super_open_sesame");
   level.var_f925c697 = 1;
   zm_devgui::zombie_devgui_open_sesame();
   level thread zm_sq::function_f2dd8601(#"pap_quest", zm_sq::get_step_index(#"pap_quest", #"release_lockdown"));
@@ -2783,7 +2783,7 @@ function function_71a6c3ea() {
 }
 
 function function_5a3997b4() {
-  level endon(#"end_game", #"hash_50d92ca3c6c7c2a8");
+  level endon(#"end_game", #"super_open_sesame");
   level waittill(#"open_sesame");
   zm_tungsten_pap_quest::function_8ac7a154();
   zm_power::turn_power_on_and_open_doors(1, 0);

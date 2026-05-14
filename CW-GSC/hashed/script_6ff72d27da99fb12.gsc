@@ -11,10 +11,10 @@
 #using scripts\zm_common\zm_score;
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
-#namespace namespace_8cefe82f;
+#namespace zm_trial_fast_travel_rush;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_71a1297844fdf28e", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_trial_fast_travel_rush", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
@@ -22,7 +22,7 @@ function private preinit() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_163077e21e01f4a7", &on_begin, &on_end);
+  zm_trial::register_challenge(#"fast_travel_rush", &on_begin, &on_end);
 }
 
 function private on_begin(n_timer) {
@@ -48,7 +48,7 @@ function private on_end(round_reset) {
 
 function private function_7650d9fb(n_timer, var_f97d1a30) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hash_6223843ef1e3c6de", #"host_migration_begin");
+  level endon(#"trial_round_end", #"hash_6223843ef1e3c6de", #"host_migration_begin");
 
   if(!is_true(var_f97d1a30)) {
     wait 12;
@@ -100,7 +100,7 @@ function function_a0f0109f(timeout, var_f97d1a30) {
   }
 
   self endon(#"disconnect", #"hash_2a79adac1fd03c09");
-  level endon(#"hash_7646638df88a3656", #"end_game", #"host_migration_begin");
+  level endon(#"trial_round_end", #"end_game", #"host_migration_begin");
 
   if(!isDefined(self.n_time_remaining)) {
     self.n_time_remaining = timeout;

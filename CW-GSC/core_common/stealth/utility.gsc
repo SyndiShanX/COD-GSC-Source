@@ -366,13 +366,13 @@ function set_patrol_style(style, allowreact, reactposition, magnitude) {
   self.stealth.var_458bda8 = style;
 
   if(style == "cqb") {
-    var_68c74e4f = 60;
+    huntspeed = 60;
 
     if(isDefined(self.stealth.hunt_speed)) {
-      var_68c74e4f = self.stealth.hunt_speed;
+      huntspeed = self.stealth.hunt_speed;
     }
 
-    self set_movement_speed(var_68c74e4f);
+    self set_movement_speed(huntspeed);
   }
 
   if(is_true(allowreact)) {

@@ -264,12 +264,12 @@ function function_e9e14905(localclientnum) {
 
 function function_4a82368f(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self postfx::playpostfxbundle(#"hash_68b6dee9bf4fbfbe");
+    self postfx::playpostfxbundle(#"pstfx_disrupted_mantis");
     return;
   }
 
-  if(bwastimejump == 0 && self postfx::function_556665f2(#"hash_68b6dee9bf4fbfbe")) {
-    self postfx::stoppostfxbundle(#"hash_68b6dee9bf4fbfbe");
+  if(bwastimejump == 0 && self postfx::function_556665f2(#"pstfx_disrupted_mantis")) {
+    self postfx::stoppostfxbundle(#"pstfx_disrupted_mantis");
   }
 }
 

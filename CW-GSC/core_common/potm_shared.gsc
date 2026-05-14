@@ -235,26 +235,26 @@ function function_b5433e55(bookmark) {
     return;
   }
 
-  var_cef89b92 = {};
-  var_cef89b92.round = game.var_fb8365e0;
-  var_cef89b92.name = bookmark.bookmarkname;
-  var_cef89b92.time = bookmark.time;
-  var_cef89b92.isfirstperson = bookmark.isfirstperson;
-  var_cef89b92.infoindex = bookmark.var_900768bc.index;
-  var_cef89b92.info_id = bookmark.var_900768bc.id;
-  var_cef89b92.mainclientnum = bookmark.mainclientnum;
-  var_cef89b92.var_9b2cab54 = getclientname(bookmark.var_81538b15);
-  var_cef89b92.otherclientnum = bookmark.otherclientnum;
-  var_cef89b92.var_3b8a36fd = getclientname(bookmark.var_f28fb772);
-  var_cef89b92.scoreaddition = bookmark.scoreaddition;
-  var_cef89b92.scoremultiplier = bookmark.scoremultiplier;
-  var_cef89b92.scoreeventpriority = bookmark.scoreeventpriority;
-  var_cef89b92.inflictorentnum = bookmark.inflictorentnum;
-  var_cef89b92.inflictorenttype = bookmark.inflictorenttype;
-  var_cef89b92.overrideentitycamera = bookmark.overrideentitycamera;
-  var_cef89b92.tableindex = bookmark.eventdata.tableindex;
-  var_cef89b92.event_info = bookmark.eventdata.event_info;
-  function_92d1707f(#"hash_4782850b19da4089", var_cef89b92);
+  potm_bookmarks = {};
+  potm_bookmarks.round = game.var_fb8365e0;
+  potm_bookmarks.name = bookmark.bookmarkname;
+  potm_bookmarks.time = bookmark.time;
+  potm_bookmarks.isfirstperson = bookmark.isfirstperson;
+  potm_bookmarks.infoindex = bookmark.var_900768bc.index;
+  potm_bookmarks.info_id = bookmark.var_900768bc.id;
+  potm_bookmarks.mainclientnum = bookmark.mainclientnum;
+  potm_bookmarks.mainclientname = getclientname(bookmark.var_81538b15);
+  potm_bookmarks.otherclientnum = bookmark.otherclientnum;
+  potm_bookmarks.otherclientname = getclientname(bookmark.var_f28fb772);
+  potm_bookmarks.scoreaddition = bookmark.scoreaddition;
+  potm_bookmarks.scoremultiplier = bookmark.scoremultiplier;
+  potm_bookmarks.scoreeventpriority = bookmark.scoreeventpriority;
+  potm_bookmarks.inflictorentnum = bookmark.inflictorentnum;
+  potm_bookmarks.inflictorenttype = bookmark.inflictorenttype;
+  potm_bookmarks.overrideentitycamera = bookmark.overrideentitycamera;
+  potm_bookmarks.tableindex = bookmark.eventdata.tableindex;
+  potm_bookmarks.event_info = bookmark.eventdata.event_info;
+  function_92d1707f(#"hash_4782850b19da4089", potm_bookmarks);
 }
 
 function function_b5633c73(preparinginformation) {
@@ -359,7 +359,7 @@ function function_f909006c(currentevent) {
           }
 
           if(!isDefined(label)) {
-            label = #"hash_480234a872bd64ac";
+            label = #"score/blank";
           }
 
           if(!isDefined(score)) {
@@ -381,7 +381,7 @@ function function_f909006c(currentevent) {
           tier = var_e0aa3530.eventdata.tier;
 
           if(!isDefined(label)) {
-            label = #"hash_480234a872bd64ac";
+            label = #"score/blank";
           }
 
           if(!isDefined(score)) {
@@ -1050,7 +1050,7 @@ function function_d1cb3471() {}
 
 function private waitthennotifyplaypotm() {
   setDvar(#"scr_force_potm", 0);
-  setDvar(#"hash_2428eb9c3d05eee0", 0);
+  setDvar(#"scr_force_potm_fancy", 0);
   level function_b6a5e7fa(1);
 }
 
@@ -2193,7 +2193,7 @@ function private updatedebugmenudata(forceupdate) {
   hostplayer setluimenudata(menu, #"eventduration", int(duration));
   hostplayer setluimenudata(menu, #"scoreeventpriority", int(priority));
   hostplayer setluimenudata(menu, #"hash_752b983964003a68", int(var_e567d17));
-  hostplayer setluimenudata(menu, #"hash_5935b658727b020c", var_1be0f2c3);
+  hostplayer setluimenudata(menu, #"eventkillcamparams", var_1be0f2c3);
   hostplayer setluimenudata(menu, #"hash_33d80b75d9c6d88d", var_4775155a);
 }
 
@@ -2225,7 +2225,7 @@ function debugupdate() {
     level thread waitthennotifyplaypotm();
   }
 
-  if(getdvarint(#"hash_2428eb9c3d05eee0", 0) == 1) {
+  if(getdvarint(#"scr_force_potm_fancy", 0) == 1) {
     level thread waitthennotifyplaypotm();
   }
 

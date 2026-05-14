@@ -53,7 +53,7 @@ function function_959bac94() {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function function_712e3ba6(score) {
@@ -148,7 +148,7 @@ function function_20cfd8b5(team) {
 }
 
 function private function_ba459d03(team) {
-  if(is_true(level.var_ba13fb7a)) {
+  if(is_true(level.debug_team_assignment)) {
     team_str = string(team);
 
     if(isDefined(level.teams[team])) {
@@ -171,7 +171,7 @@ function function_a9d594a0(party) {
   foreach(party_member in party.party_members) {
     var_2798314b = party_member getparty();
 
-    if(var_2798314b.var_a15e4438 != party.var_a15e4438) {
+    if(var_2798314b.party_member_count != party.party_member_count) {
       assertmsg("<dev string:xb6>");
     }
   }

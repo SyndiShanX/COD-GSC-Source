@@ -40,7 +40,7 @@ function function_319c73b1(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(!isDefined(self.objectiveid) && util::get_game_type() !== #"spy") {
-    objectivename = isDefined(level.var_febab1ea) ? level.var_febab1ea : # "conf_dogtags";
+    objectivename = isDefined(level.var_febab1ea) ? level.var_febab1ea : #"conf_dogtags";
     self.objectiveid = util::getnextobjid(fieldname);
     objective_add(fieldname, self.objectiveid, "active", objectivename, self.origin, self.team);
     objective_onentity(fieldname, self.objectiveid, self, 1, 1, 0);
@@ -62,7 +62,7 @@ function function_319c73b1(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(!isDefined(fxtoplay)) {
       characterindex = isDefined(self function_ef9de5ae()) ? self function_ef9de5ae() : 0;
-      fxtoplay = isDefined(getcharacterfields(characterindex, currentsessionmode()).var_c7d6b0c1) ? getcharacterfields(characterindex, currentsessionmode()).var_c7d6b0c1 : # "hash_30f231c126644dc2";
+      fxtoplay = isDefined(getcharacterfields(characterindex, currentsessionmode()).var_c7d6b0c1) ? getcharacterfields(characterindex, currentsessionmode()).var_c7d6b0c1 : #"hash_30f231c126644dc2";
     }
 
     self.var_c7d6b0c1 = util::playFXOnTag(fieldname, fxtoplay, self.var_47b256ef, "tag_origin");

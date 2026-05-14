@@ -291,7 +291,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       var_8d552f67 = spawnStruct();
-      var_8d552f67.text = bwastimejump == 11 ? # "hash_f123d93fac4c288" : txt;
+      var_8d552f67.text = bwastimejump == 11 ? #"hash_f123d93fac4c288" : txt;
       assert(isDefined(var_8d552f67.text));
       var_8d552f67.y = 280;
       var_8d552f67.timeout = 9999;
@@ -680,27 +680,27 @@ function function_5a3210ac() {
 function function_4d2e3eaa(roomtype) {
   switch (roomtype) {
     case 26:
-      return # "hash_4c5468285fb9d826";
+      return #"hash_4c5468285fb9d826";
     case 27:
-      return # "hash_5e61aab055d1b3c1";
+      return #"hash_5e61aab055d1b3c1";
     case 17:
-      return # "hash_ced2d169408f6d5";
+      return #"hash_ced2d169408f6d5";
     case 18:
-      return # "hash_388c4f923d12c58";
+      return #"hash_388c4f923d12c58";
     case 19:
-      return # "hash_53308d4150e5d0ac";
+      return #"hash_53308d4150e5d0ac";
     case 20:
-      return # "hash_7ae05eb6a354227d";
+      return #"hash_7ae05eb6a354227d";
     case 21:
-      return # "hash_48de9f961f66cd70";
+      return #"hash_48de9f961f66cd70";
     case 22:
-      return # "hash_4b89013f738a43";
+      return #"hash_4b89013f738a43";
     case 23:
-      return # "hash_124bdd4cf5c7dbac";
+      return #"hash_124bdd4cf5c7dbac";
     case 24:
-      return # "hash_7f3ef33a21a4f457";
+      return #"hash_7f3ef33a21a4f457";
     case 28:
-      return # "hash_5eb6f5fa54080cbe";
+      return #"hash_5eb6f5fa54080cbe";
   }
 }
 
@@ -734,33 +734,33 @@ function function_59dbb042(roomtype) {
 function function_b6e2bc81(roomtype) {
   switch (roomtype) {
     case 32:
-      return # "hash_365152316e8cfc0";
+      return #"hash_365152316e8cfc0";
     case 42:
-      return # "hash_542d0557fc360dd2";
+      return #"hash_542d0557fc360dd2";
     case 30:
-      return # "hash_3fbcd19e60d8cb42";
+      return #"hash_3fbcd19e60d8cb42";
     case 31:
-      return # "hash_16de0c0160ea3d28";
+      return #"hash_16de0c0160ea3d28";
     case 33:
-      return # "hash_170e061a597a50cd";
+      return #"hash_170e061a597a50cd";
     case 34:
-      return # "hash_19f4fc7186e4d11";
+      return #"hash_19f4fc7186e4d11";
     case 35:
-      return # "hash_2330795898a1425c";
+      return #"hash_2330795898a1425c";
     case 36:
-      return # "hash_25bc2216bde1b571";
+      return #"hash_25bc2216bde1b571";
     case 37:
-      return # "hash_370a31e0d0d75fdb";
+      return #"hash_370a31e0d0d75fdb";
     case 38:
-      return # "hash_32dc81d6bb8c98e9";
+      return #"hash_32dc81d6bb8c98e9";
     case 39:
-      return # "hash_76e31dedd78dbc8d";
+      return #"hash_76e31dedd78dbc8d";
     case 40:
-      return # "hash_3f343b77c7c30e0a";
+      return #"hash_3f343b77c7c30e0a";
     case 41:
-      return # "hash_59f4c2a2c01c4b98";
+      return #"hash_59f4c2a2c01c4b98";
     case 43:
-      return # "hash_6bbf84b01f5e560c";
+      return #"hash_6bbf84b01f5e560c";
   }
 }
 

@@ -352,15 +352,15 @@ function function_7b4387e1(rewardxp, maxval, row, tablenumber, challengetype, it
   if(getdvarint(#"debugchallenges", 0) != 0) {
     var_c4e9517b = tablenumber + 1;
     tablename = #"gamedata/stats/cp/statsmilestones" + var_c4e9517b + "<dev string:xae>";
-    var_eb67c133 = tablelookupcolumnforrow(tablename, row, 5);
+    challengenamehash = tablelookupcolumnforrow(tablename, row, 5);
 
-    if(var_eb67c133 === #"hash_4a80d584aac2e7d0") {
+    if(challengenamehash === #"challenge/empty_string") {
       return;
     }
 
-    challengestring = makelocalizedstring(var_eb67c133);
+    challengestring = makelocalizedstring(challengenamehash);
     challengetier = int(tablelookupcolumnforrow(tablename, row, 1));
-    matchrecordlogchallengecomplete(self, var_c4e9517b, challengetier, itemindex, var_eb67c133);
+    matchrecordlogchallengecomplete(self, var_c4e9517b, challengetier, itemindex, challengenamehash);
     challengetiernext = int(tablelookupcolumnforrow(tablename, row + 1, 1));
     tiertext = challengetier + 1;
     var_33b913f5 = "<dev string:xb6>";

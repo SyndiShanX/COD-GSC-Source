@@ -629,7 +629,7 @@ function function_81f5c0fe(statname, value) {
 
   gametype = level.var_12323003;
   map = util::get_map_name();
-  mapstats = gamemodeisarena() ? # "mapstatsarena" : # "mapstats";
+  mapstats = gamemodeisarena() ? #"mapstatsarena" : #"mapstats";
   return self inc_stat(mapstats, map, #"permode", gametype, statname, value);
 }
 

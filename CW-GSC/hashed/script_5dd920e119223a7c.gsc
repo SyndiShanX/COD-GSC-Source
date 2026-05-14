@@ -2459,39 +2459,39 @@ function private function_a810bd2f() {
 function private get_spawner(str_ai_type = "") {
   switch (str_ai_type) {
     default:
-      return # "hash_7cba8a05511ceedf";
+      return #"hash_7cba8a05511ceedf";
     case #"spawner_bo5_mimic":
-      return # "spawner_bo5_mimic";
+      return #"spawner_bo5_mimic";
     case #"hash_338eb4103e0ed797":
     case #"zombie_lv2":
-      return # "hash_338eb4103e0ed797";
+      return #"hash_338eb4103e0ed797";
     case #"hash_46c917a1b5ed91e7":
     case #"zombie_lv3":
-      return # "hash_46c917a1b5ed91e7";
+      return #"hash_46c917a1b5ed91e7";
     case #"spawner_bo5_avogadro_sr":
     case #"avogadro":
-      return # "spawner_bo5_avogadro_sr";
+      return #"spawner_bo5_avogadro_sr";
     case #"mechz":
     case #"hash_60d7855358ceb53d":
-      return # "hash_60d7855358ceb53d";
+      return #"hash_60d7855358ceb53d";
     case #"hash_469e4baceeaf38f5":
     case #"abom":
-      return # "hash_469e4baceeaf38f5";
+      return #"hash_469e4baceeaf38f5";
     case #"mimic":
     case #"hash_4a900af3fc47cdd5":
-      return # "hash_4a900af3fc47cdd5";
+      return #"hash_4a900af3fc47cdd5";
     case #"steiner":
     case #"hash_acac3fe7a341329":
-      return # "hash_acac3fe7a341329";
+      return #"hash_acac3fe7a341329";
     case #"hash_12a17ab3df5889eb":
     case #"plaguehound":
-      return # "hash_12a17ab3df5889eb";
+      return #"hash_12a17ab3df5889eb";
     case #"hellhound":
     case #"hash_7a8b592728eec95d":
-      return # "hash_7a8b592728eec95d";
+      return #"hash_7a8b592728eec95d";
     case #"raz":
     case #"hash_3ff43755c44e6d3d":
-      return # "hash_3ff43755c44e6d3d";
+      return #"hash_3ff43755c44e6d3d";
   }
 }
 

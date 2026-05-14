@@ -226,7 +226,7 @@ function function_9d9892d2(master_switch) {
 }
 
 function artifact_mind_on(master_switch, fx_pos, user) {
-  level notify(#"hash_3e80d503318a5674", {
+  level notify(#"artifact_picked_up", {
     #player: user
   });
 }

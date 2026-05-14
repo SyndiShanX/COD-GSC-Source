@@ -26,7 +26,7 @@ function private preinit() {
   level thread devgui_think();
 
   callback::on_spawned(&on_player_spawned);
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_game_playing(&function_9cc82a74);
 
   if(is_true(level.teambased) && !isDefined(game.boostplayerspicked)) {
@@ -70,7 +70,7 @@ function on_player_spawned() {
   self callback::add_callback("weapon_melee", &function_90cedf5b);
 }
 
-function function_33f0ddd3(eventstruct) {
+function on_player_loadout_changed(eventstruct) {
   self.var_d853c1af = function_58c93260(self).var_d853c1af;
 }
 

@@ -60,14 +60,14 @@ function on_player_connect() {
 
 function devgui_notif_getgunleveltablename() {
   if(sessionmodeiscampaigngame()) {
-    return # "gamedata/weapons/cp/cp_gunlevels.csv";
+    return #"gamedata/weapons/cp/cp_gunlevels.csv";
   }
 
   if(sessionmodeiszombiesgame()) {
-    return # "gamedata/weapons/zm/zm_gunlevels.csv";
+    return #"gamedata/weapons/zm/zm_gunlevels.csv";
   }
 
-  return # "gamedata/weapons/mp/mp_gunlevels.csv";
+  return #"gamedata/weapons/mp/mp_gunlevels.csv";
 }
 
 function devgui_notif_getchallengestablecount() {
@@ -91,7 +91,7 @@ function devgui_notif_getchallengestablename(tableid) {
     return (#"gamedata/stats/zm/statsmilestones" + tableid + "<dev string:x38>");
   }
 
-  return # "gamedata/stats/mp/statsmilestones" + tableid + "<dev string:x38>";
+  return #"gamedata/stats/mp/statsmilestones" + tableid + "<dev string:x38>";
 }
 
 function devgui_create_weapon_levels_table() {
@@ -520,7 +520,7 @@ function popupsfromconsole() {
         player = level.players[1];
       }
 
-      level.players[0] displayteammessagetoall(#"hash_286f843fea185e5", player);
+      level.players[0] displayteammessagetoall(#"killstreak/destroyed_helicopter", player);
     }
 
     reset = getdvarint(#"scr_popupreset", 1);
@@ -671,7 +671,7 @@ function private function_bed391aa(notifyhash, message, player, team, var_fd2145
     cur_player.teammessagequeue[size].var_1dd0326a = var_1dd0326a;
     cur_player.teammessagequeue[size].var_265441a6 = var_265441a6;
     cur_player.teammessagequeue[size].var_8fa431fa = var_8fa431fa;
-    callback::callback(#"hash_41781454d98b676a", cur_player.teammessagequeue[size]);
+    callback::callback(#"popups_team_message", cur_player.teammessagequeue[size]);
     cur_player function_eb9328f3();
   }
 }

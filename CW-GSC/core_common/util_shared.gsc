@@ -2465,7 +2465,7 @@ function function_ed82a8a(weapon) {
 
     weaponinfo = getunlockableiteminfofromindex(baseweaponindex, 1);
     level.var_8cf87874[weapon.name] = {
-      #itemgroupname: isDefined(weaponinfo.itemgroupname) ? weaponinfo.itemgroupname : # "", #loadoutslotname: isDefined(weaponinfo.loadoutslotname) ? weaponinfo.loadoutslotname : # ""};
+      #itemgroupname: isDefined(weaponinfo.itemgroupname) ? weaponinfo.itemgroupname : #"", #loadoutslotname: isDefined(weaponinfo.loadoutslotname) ? weaponinfo.loadoutslotname : #""};
   }
 
   return level.var_8cf87874[weapon.name];
@@ -2798,7 +2798,7 @@ function auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_
     return;
   }
 
-  self endon(#"death", #"hash_375a9d48dd6a9427");
+  self endon(#"death", #"cancel_auto_delete");
   self notify(#"__auto_delete__");
   self endon(#"__auto_delete__");
   level flag::wait_till("all_players_spawned");
@@ -3500,11 +3500,11 @@ function getotherteam(team) {
   team = get_team_mapping(team);
 
   if(team == #"allies") {
-    return # "axis";
+    return #"axis";
   } else if(team == #"axis") {
-    return # "allies";
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:xa87>" + team);
@@ -3803,7 +3803,7 @@ function get_enemy_team(team) {
     return level.team_enemy_mapping[team];
   }
 
-  return # "none";
+  return #"none";
 }
 
 function get_game_type() {
@@ -3966,11 +3966,11 @@ function private _show_hit_marker(var_554cb812, var_1ed250ec) {
 function function_5d36c37a(str_tag = "tag_aim_target") {
   if(!issentient(self) && !function_ffa5b184(self)) {
     if(isDefined(self gettagorigin(str_tag))) {
-      self function_2baad8fc(str_tag);
+      self makesentienttarget(str_tag);
       return;
     }
 
-    self function_2baad8fc();
+    self makesentienttarget();
   }
 }
 
@@ -4110,7 +4110,7 @@ function is_spectating() {
 }
 
 function function_8570168d() {
-  if(getDvar(#"hash_49e94b7aefac4f49", 0)) {
+  if(getDvar(#"ui_simulatect", 0)) {
     return true;
   }
 

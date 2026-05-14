@@ -966,7 +966,7 @@ function commitstats(gameover) {
         namespace_1e25ad94::debugmsg("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         namespace_1e25ad94::debugmsg("DOA Battle Pass XP (" + self.name + "): reported time played: " + var_d362196a + ", XP Modifier: " + var_90f98f51 + ", Xp Earned: " + xpearned);
         namespace_1e25ad94::debugmsg("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 0);
+        var_ae857992 = getdvarint(#"loot_season_number", 0);
         self function_cce105c8(hash(var_f406f7e3), 1, int(var_ae857992), 2, var_d362196a, 3, var_90f98f51, 4, xpearned, 5, var_d0a27bc3, 6, var_524ab934, 7, var_68441d6f);
       }
     }
@@ -996,7 +996,7 @@ function function_47498d07(gameover = 0, var_87786b84 = 0, var_5262eeaf = 0) {
 
 function function_d717ee7b() {
   self.doa.var_e46a9e57 = {
-    #round_number: 0, #var_89e0691d: self rank::getrankxp(), #var_967bd40d: 0, #var_832beab2: 0, #var_dded67ba: 0, #var_8f4c7e23: 0, #total_points: 0, #var_4b3c11c6: gettime(), #var_4b01218: 0, #lives: 0, #keys: 0, #var_e519217b: 0, #var_3ff9fc8: # "", #var_9a5b8400: # "", #var_827195e5: 0, #var_920f0053: 0, #var_52df118f: 0
+    #round_number: 0, #var_89e0691d: self rank::getrankxp(), #var_967bd40d: 0, #var_832beab2: 0, #var_dded67ba: 0, #var_8f4c7e23: 0, #total_points: 0, #var_4b3c11c6: gettime(), #var_4b01218: 0, #lives: 0, #keys: 0, #var_e519217b: 0, #var_3ff9fc8: #"", #var_9a5b8400: #"", #var_827195e5: 0, #var_920f0053: 0, #var_52df118f: 0
   };
 }
 

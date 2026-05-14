@@ -22,19 +22,19 @@ function private autoexec __init__system__() {
 function private init_postload() {
   level.var_7b32679c = [];
   level.var_7b32679c[getweapon(#"frag_grenade")] = {
-    #str_hint: # "hash_3211ac4e9118211f", #var_9c0ef0ca: "frag_"};
+    #str_hint: #"hash_3211ac4e9118211f", #var_9c0ef0ca: "frag_"};
   level.var_7b32679c[getweapon(#"hatchet")] = {
-    #str_hint: # "hash_492213f4afcbea1e", #var_9c0ef0ca: "hatchet_"};
+    #str_hint: #"hash_492213f4afcbea1e", #var_9c0ef0ca: "hatchet_"};
   level.var_7b32679c[getweapon(#"eq_molotov")] = {
-    #str_hint: # "hash_1e02ff8dfeec0303", #var_9c0ef0ca: "molotov_"};
+    #str_hint: #"hash_1e02ff8dfeec0303", #var_9c0ef0ca: "molotov_"};
   level.var_7b32679c[getweapon(#"land_mine_cp")] = {
-    #str_hint: # "hash_58f8d39b06c60ed0", #var_9c0ef0ca: "mine_"};
+    #str_hint: #"hash_58f8d39b06c60ed0", #var_9c0ef0ca: "mine_"};
   level.var_7b32679c[getweapon(#"eq_flash_grenade")] = {
-    #str_hint: # "hash_1488b8b01aeb103b", #var_9c0ef0ca: "flash_"};
+    #str_hint: #"hash_1488b8b01aeb103b", #var_9c0ef0ca: "flash_"};
   level.var_7b32679c[getweapon(#"willy_pete")] = {
-    #str_hint: # "hash_24bc2d8182caba04", #var_9c0ef0ca: "smoke_"};
+    #str_hint: #"hash_24bc2d8182caba04", #var_9c0ef0ca: "smoke_"};
   level.var_7b32679c[getweapon(#"eq_stimshot")] = {
-    #str_hint: # "hash_1a78feacd6c51ab6", #var_9c0ef0ca: "stim_"};
+    #str_hint: #"hash_1a78feacd6c51ab6", #var_9c0ef0ca: "stim_"};
   var_2611f92b = getEntArray("grenade_ammo_box", "targetname");
   level flag::wait_till("all_players_connected");
   array::thread_all(var_2611f92b, &function_fcd7744f);

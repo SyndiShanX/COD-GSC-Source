@@ -35,7 +35,7 @@ function private function_6c73be30() {
   level.killstreakweapons[getweapon(#"inventory_hero_annihilator")] = "inventory_hero_annihilator";
   level.killstreakweapons[getweapon(#"hero_annihilator")] = "hero_annihilator";
   level.killstreakweapons[getweapon(#"ultimate_turret_deploy")] = "ultimate_turret";
-  level.killstreakweapons[getweapon(#"hash_33be4792feeabece")] = "remote_missile";
+  level.killstreakweapons[getweapon(#"remote_missile_mini")] = "remote_missile";
   level.killstreakweapons[getweapon(#"remote_missile_bomblet")] = "remote_missile";
   level.killstreakweapons[getweapon(#"hash_3f33adcbed7f6c86")] = "planemortar";
   level.killstreakweapons[getweapon(#"inventory_hero_flamethrower")] = "inventory_hero_flamethrower";

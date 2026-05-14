@@ -26,7 +26,7 @@ function create(name, owner, change_notify = "change_state") {
 
   state_machine.owner.state_machines[state_machine.name] = state_machine;
 
-  owner thread function_acc83382();
+  owner thread debugdrawstate();
 
   return state_machine;
 }
@@ -245,7 +245,7 @@ function debugon() {
   return dvarval > 0;
 }
 
-function function_acc83382() {
+function debugdrawstate() {
   owner = self;
 
   if(!isDefined(owner)) {
@@ -256,8 +256,8 @@ function function_acc83382() {
     return;
   }
 
-  owner notify(#"hash_616497f187c816cf");
-  owner endon(#"death", #"hash_616497f187c816cf");
+  owner notify(#"debugdrawstate");
+  owner endon(#"death", #"debugdrawstate");
   heightstart = owner getmaxs()[2];
 
   if(!isDefined(heightstart)) {

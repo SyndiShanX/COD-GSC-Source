@@ -381,8 +381,8 @@ function function_bddd882e(player) {
 }
 
 function function_9c9d3652() {
-  function_c484a9be(#"forcedobjective", #"category", isDefined(level.var_edb2bb69) ? level.var_edb2bb69 : # "");
-  function_c484a9be(#"forcedobjective", #"variant", isDefined(level.var_1b2466fe) ? level.var_1b2466fe : # "");
+  function_c484a9be(#"forcedobjective", #"category", isDefined(level.var_edb2bb69) ? level.var_edb2bb69 : #"");
+  function_c484a9be(#"forcedobjective", #"variant", isDefined(level.var_1b2466fe) ? level.var_1b2466fe : #"");
 
   if(isDefined(level.contentmanager)) {
     function_c5655189(level.contentmanager.var_dc858a58);

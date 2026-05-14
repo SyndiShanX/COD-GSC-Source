@@ -282,11 +282,11 @@ function function_88a55cb8(localclientnum, weapon, var_bb894354 = 0) {
 function function_d64a2c25(localclientnum, enable = 0, is_upgraded = 0) {
   if(enable && self zm_utility::function_f8796df3(localclientnum) && viewmodelhastag(localclientnum, "tag_missile_ri_fx1") && viewmodelhastag(localclientnum, "tag_missile_le_fx1")) {
     if(!isDefined(self.var_6ccae77f)) {
-      self.var_6ccae77f = playviewmodelfx(localclientnum, is_upgraded ? # "hash_58dea3d4f20164fe" : # "hash_4c9c7c4f5b319ca5", "tag_missile_ri_fx1");
+      self.var_6ccae77f = playviewmodelfx(localclientnum, is_upgraded ? #"hash_58dea3d4f20164fe" : #"hash_4c9c7c4f5b319ca5", "tag_missile_ri_fx1");
     }
 
     if(!isDefined(self.var_86290a61)) {
-      self.var_86290a61 = playviewmodelfx(localclientnum, is_upgraded ? # "hash_7b19173c4cd204c2" : # "hash_5d4a11460d001591", "tag_missile_le_fx1");
+      self.var_86290a61 = playviewmodelfx(localclientnum, is_upgraded ? #"hash_7b19173c4cd204c2" : #"hash_5d4a11460d001591", "tag_missile_le_fx1");
     }
 
     return;
@@ -473,7 +473,7 @@ function function_2fa08804(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_61987d28(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self.var_accb4770)) {
-    util::playFXOnTag(bwastimejump, self.var_accb4770.var_515e20e6 ? # "hash_77e7d9c6c1c5cb2b" : # "hash_52f32fbd7a1126ba", self.var_accb4770, "tag_flash");
+    util::playFXOnTag(bwastimejump, self.var_accb4770.var_515e20e6 ? #"hash_77e7d9c6c1c5cb2b" : #"hash_52f32fbd7a1126ba", self.var_accb4770, "tag_flash");
   }
 }
 
@@ -488,7 +488,7 @@ function function_53bb1917(localclientnum, oldval, newval, bnewent, binitialsnap
       var_accb4770 thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", var_accb4770);
       var_accb4770 thread function_2ed768c7(self, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle");
       var_accb4770 playrenderoverridebundle(#"hash_225a66106179e9bb");
-      util::playFXOnTag(fieldname, var_accb4770.var_515e20e6 ? # "hash_2eabcf6f328bb46b" : # "hash_2ac49f49b148a4fa", var_accb4770, "tag_flash");
+      util::playFXOnTag(fieldname, var_accb4770.var_515e20e6 ? #"hash_2eabcf6f328bb46b" : #"hash_2ac49f49b148a4fa", var_accb4770, "tag_flash");
       self.var_accb4770 = var_accb4770;
     }
 

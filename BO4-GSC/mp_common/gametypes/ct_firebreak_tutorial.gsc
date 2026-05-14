@@ -373,7 +373,7 @@ function_d0815f2e() {
   level notify(#"colbounds_tut_puf_1_on");
   level notify(#"colbounds_tut_puf_1_front_on");
   self ct_vo::function_3ca1b77d();
-  var_22feb79f = self gamepadusedlast() ? # "hash_3557e6f234c8594b" : # "hash_35bff554b9fd5865";
+  var_22feb79f = self gamepadusedlast() ? #"hash_3557e6f234c8594b" : #"hash_35bff554b9fd5865";
   self thread ct_utils::function_61c3d59c(var_22feb79f, undefined);
   self function_b512a9bf(2);
   var_43b8f3ab = getweapon(#"hero_flamethrower");
@@ -616,7 +616,7 @@ function_f5f15107() {
   wpn_current = self getcurrentweapon();
 
   if(wpn_current !== var_43b8f3ab) {
-    var_ba75e424 = self gamepadusedlast() ? # "hash_3557e6f234c8594b" : # "hash_35bff554b9fd5865";
+    var_ba75e424 = self gamepadusedlast() ? #"hash_3557e6f234c8594b" : #"hash_35bff554b9fd5865";
     self thread ct_utils::function_61c3d59c(var_ba75e424);
   }
 
@@ -1483,7 +1483,7 @@ function_bfebe12d() {
   level.var_51ff7a58 = 1;
   self ct_utils::ingame_objective_close();
   wait 1;
-  var_7cfb8d51 = self gamepadusedlast() ? # "hash_67a58d84d0f91968" : # "hash_4f0b2e3958c55f94";
+  var_7cfb8d51 = self gamepadusedlast() ? #"hash_67a58d84d0f91968" : #"hash_4f0b2e3958c55f94";
   self thread ct_utils::function_61c3d59c(var_7cfb8d51, array("vox_tvoi_tutor_fire_score_earned_0", "vox_tvoi_tutor_fire_score_earned_1"));
   s_notify = self waittill(#"killstreak_used");
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_score_activate"));
@@ -1667,7 +1667,7 @@ function_9f1d8637(var_f54b52b3) {
   self endon(#"hash_639559ceed491430");
   level endon(#"combattraining_logic_finished");
   a_str_objective = [];
-  a_str_objective[2] = self gamepadusedlast() ? # "hash_3557e6f234c8594b" : # "hash_35bff554b9fd5865";
+  a_str_objective[2] = self gamepadusedlast() ? #"hash_3557e6f234c8594b" : #"hash_35bff554b9fd5865";
   a_str_objective[0] = #"hash_1415d0b5ec85168b";
   var_3a6cd253 = [];
   var_3a6cd253[2] = "purifier_depleted";
@@ -1764,7 +1764,7 @@ function_344aee09(_hash) {
         e_player ct_vo::play_vo_end(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_gas_gauge_00"));
         setslowmotion(1, 0.1, 0.5);
-        e_player ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_6d618a9f705ba66" : # "hash_5168ae1a4907adb6");
+        e_player ct_utils::function_a61ebb46(function_8b1a219a() ? #"hash_6d618a9f705ba66" : #"hash_5168ae1a4907adb6");
         setslowmotion(0.1, 1, 0.25);
         str_respawn = "s_tut_purifier_3_respawn";
         n_wait = 0.1;

@@ -76,7 +76,7 @@ function function_5a68cb9f() {
   level flag::clear("spawn_zombies");
   level.disable_nuke_delay_spawning = 1;
   level notify(#"disable_nuke_delay_spawning");
-  level waittill(#"hash_7646638df88a3656", #"hash_715188521b564b16", #"end_game");
+  level waittill(#"trial_round_end", #"player_reached_defend_area", #"end_game");
   level flag::set("spawn_zombies");
   level.disable_nuke_delay_spawning = undefined;
 }
@@ -105,7 +105,7 @@ function private on_end(round_reset) {
 }
 
 function private function_492f4c79() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 12;
   zm_utility::function_75fd65f9(self.var_f7f308cd, 1);
 }
@@ -134,7 +134,7 @@ function private function_2191cc5d() {
 
 function private function_1802ad1e(challenge, var_2d5ebf67, var_530e040f, timeout) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
+  level endon(#"trial_round_end", #"host_migration_begin");
   self.var_e5cde66 = {
     #start_time: level.time, #timeout: timeout, #challenge: challenge, #var_2d5ebf67: var_2d5ebf67, #var_530e040f: var_530e040f
   };
@@ -145,7 +145,7 @@ function private function_1802ad1e(challenge, var_2d5ebf67, var_530e040f, timeou
     zone_valid = self function_2191cc5d();
 
     if(zone_valid) {
-      level notify(#"hash_715188521b564b16", {
+      level notify(#"player_reached_defend_area", {
         #player: self
       });
       self.var_4cb0b91f = 1;
@@ -173,7 +173,7 @@ function private function_1802ad1e(challenge, var_2d5ebf67, var_530e040f, timeou
 
 function private zone_watcher(challenge, var_2d5ebf67, var_530e040f) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_4cb0b91f = 0;
   self zm_utility::function_ba39d198(challenge.var_df62490a, 0);
   wait 12;
@@ -190,7 +190,7 @@ function private zone_watcher(challenge, var_2d5ebf67, var_530e040f) {
 
 function private damage_watcher(var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
+  level endon(#"trial_round_end", #"host_migration_begin");
 
   if(is_true(var_a4a28ac7)) {
     wait 12;
@@ -249,7 +249,7 @@ function private function_ff66b979() {
 
 function private function_dae80de6() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 5;
   s_challenge = zm_trial::function_a36e8c38(#"defend_area");
   s_defend_area = struct::get(s_challenge.var_f7f308cd);

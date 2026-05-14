@@ -61,7 +61,7 @@ function function_8be02874(drop_item, player) {
     players = [[level._get_game_module_players]](player);
   }
 
-  level notify(#"hash_41ccd6a10f7370cc");
+  level notify(#"zmb_small_ammo_level");
 
   foreach(player in players) {
     if(isDefined(level.check_player_is_ready_for_ammo)) {
@@ -158,7 +158,7 @@ function give_clip_of_ammo(w_weapon) {
     return;
   }
 
-  self notify(#"hash_64f02bb4452a4bd7");
+  self notify(#"give_small_ammo");
   var_df670713 = self getammocount(w_weapon);
   var_96ec8ce1 = self getweaponammostock(w_weapon);
 

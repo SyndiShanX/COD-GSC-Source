@@ -3161,11 +3161,11 @@ getotherteam(team) {
   team = get_team_mapping(team);
 
   if(team == #"allies") {
-    return # "axis";
+    return #"axis";
   } else if(team == #"axis") {
-    return # "allies";
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:x9c8>" + team);
@@ -3528,7 +3528,7 @@ get_enemy_team(team) {
     return level.team_enemy_mapping[team];
   }
 
-  return # "none";
+  return #"none";
 }
 
 get_game_type() {

@@ -58,11 +58,11 @@ event_handler[level_init] main(eventstruct) {
 
   if(isDefined(getgametypesetting(#"wzheavymetalheroes")) && getgametypesetting(#"wzheavymetalheroes")) {
     level.var_2089aa11 = #"supply_drop_stash_parent_dlc1_heroes";
-    namespace_3d2704b3::function_f0297225(#"supply_drop_stash_parent_dlc1_flare_gun_heroes", 2, 4);
+    item_supply_drop_system::function_f0297225(#"supply_drop_stash_parent_dlc1_flare_gun_heroes", 2, 4);
   }
 
   if(util::get_game_type() == "warzone_pandemic_quad") {
-    namespace_3d2704b3::function_f0297225(#"supply_drop_stash_parent_pandemic", 2147483647, 100);
+    item_supply_drop_system::function_f0297225(#"supply_drop_stash_parent_pandemic", 2147483647, 100);
     level function_5725bc63();
   }
 

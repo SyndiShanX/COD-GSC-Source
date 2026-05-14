@@ -181,7 +181,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
 
       if(var_de0c8b34 > 0) {
         level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-          #player: player, #weapon: weapon, #statname: # "xpearned", #value: var_de0c8b34, #weaponpickedup: pickedup
+          #player: player, #weapon: weapon, #statname: #"xpearned", #value: var_de0c8b34, #weaponpickedup: pickedup
         });
       }
     }
@@ -576,14 +576,14 @@ function function_2b96d7dc() {
     }
   }
 
-  function function_31eb1b07(player, statname, var_26568428, timetoplay, weapon, inflictor) {
+  function function_31eb1b07(player, statname, statweight, timetoplay, weapon, inflictor) {
     attackerentnum = player getentitynumber();
     var_46604f00 = level.var_648e79b7[attackerentnum];
 
     if(isDefined(var_46604f00)) {
       var_30ffb0d9 = isDefined(level.var_42648a02[var_46604f00.statname][0]) ? level.var_42648a02[var_46604f00.statname][0] : 0;
 
-      if(var_26568428 >= var_30ffb0d9) {
+      if(statweight >= var_30ffb0d9) {
         level.var_648e79b7[attackerentnum] = {
           #statname: statname, #timestamp: gettime() + timetoplay, #weapon: weapon, #einflictor: inflictor
         };

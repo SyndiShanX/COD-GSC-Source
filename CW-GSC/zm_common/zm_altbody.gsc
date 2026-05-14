@@ -341,7 +341,7 @@ function register_kiosk_triggers(name, kiosk_name, trigger_hint, notrigger_hint)
     register_kiosk_unitrigger(kiosk, name, trigger_hint, notrigger_hint);
   }
 
-  level notify(#"hash_3cf24457a0015f72", name);
+  level notify(#"altbody_kiosks_registered", name);
 }
 
 function register_kiosk_unitrigger(kiosk, name, trigger_hint, notrigger_hint) {

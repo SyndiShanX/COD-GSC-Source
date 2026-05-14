@@ -446,11 +446,11 @@ function_d2f0197a() {
 function_659633d8(var_31e314e8) {
   switch (var_31e314e8.name) {
     case #"gear_armor_tier_two":
-      return # "specialty_armor_tier_two";
+      return #"specialty_armor_tier_two";
     case #"gear_armor_tier_three":
-      return # "specialty_armor_tier_three";
+      return #"specialty_armor_tier_three";
     default:
-      return # "specialty_armor";
+      return #"specialty_armor";
   }
 }
 

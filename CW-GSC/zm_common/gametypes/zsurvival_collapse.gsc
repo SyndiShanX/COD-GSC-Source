@@ -130,7 +130,7 @@ function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
   if(!isDefined(var_e2062f3)) {
     assertmsg("<dev string:x38>" + (isDefined(level.script) ? level.script : "<dev string:x4e>") + "<dev string:x52>");
     level notify(#"end_game", {
-      #reason: # "exfil_fail"});
+      #reason: #"exfil_fail"});
     return;
   }
 

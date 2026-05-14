@@ -85,7 +85,7 @@ function get_winning_team(outcome) {
     return outcome.players[0].team;
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_b5f4c9d8(outcome) {

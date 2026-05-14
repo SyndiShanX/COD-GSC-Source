@@ -157,7 +157,7 @@ function on_tripwire_spawn(watcher, player) {
   self.entityenemyinfluencer = self influencers::create_entity_enemy_influencer("claymore", player.team);
   self.destroyablebytrophysystem = 0;
   self.detonating = 0;
-  wait level.var_c72e8c51.var_e14f5fca;
+  wait level.var_c72e8c51.tripwireactivationdelay;
   player notify(#"tripwire_spawn", {
     #tripwire: self
   });
@@ -542,7 +542,7 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       var_2f6adbe3.detonating = 1;
     }
 
-    wait level.var_c72e8c51.var_7f1fc1ee;
+    wait level.var_c72e8c51.tripwiredetonationdelay;
 
     if(!isDefined(self)) {
       return;
@@ -558,8 +558,8 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       explosiondist = isDefined(level.var_c72e8c51.var_13e9ceba) ? level.var_c72e8c51.var_13e9ceba : 0;
       nearradius = isDefined(level.var_c72e8c51.var_d0a598a5) ? level.var_c72e8c51.var_d0a598a5 : 0;
       farradius = isDefined(level.var_c72e8c51.var_fcb3348e) ? level.var_c72e8c51.var_fcb3348e : 0;
-      maxdamage = isDefined(level.var_c72e8c51.var_aebac5e5) ? level.var_c72e8c51.var_aebac5e5 : 0;
-      mindamage = isDefined(level.var_c72e8c51.var_69bf01c2) ? level.var_c72e8c51.var_69bf01c2 : 0;
+      maxdamage = isDefined(level.var_c72e8c51.tripwiremaxdamage) ? level.var_c72e8c51.tripwiremaxdamage : 0;
+      mindamage = isDefined(level.var_c72e8c51.tripwiremindamage) ? level.var_c72e8c51.tripwiremindamage : 0;
     }
 
     explosiondir = self.hitnormal;
@@ -682,11 +682,11 @@ function function_9b3a657f(weapon) {
   self clientfield::set("friendlyequip", 1);
   playFX(#"hash_65c5042becfbaa7d", self.origin);
 
-  if(isDefined(level.var_c72e8c51.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    playFX(level.var_c72e8c51.var_bb6c29b4, self.origin);
+  if(isDefined(level.var_c72e8c51.shockrifledestructionfx) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFX(level.var_c72e8c51.shockrifledestructionfx, self.origin);
   }
 
-  playsoundatposition(#"hash_5a530df2bd2b027c", self.origin);
+  playsoundatposition(#"wpn_tripwire_remove", self.origin);
   self stoploopsound(0.5);
   arrayremovevalue(level.tripwires, self);
   var_886bd8dc = self.var_886bd8dc;

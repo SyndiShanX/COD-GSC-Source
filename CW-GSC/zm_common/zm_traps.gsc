@@ -235,7 +235,7 @@ function function_783f63e9(var_1c9c3123 = 1) {
     return;
   }
 
-  if(zm_utility::is_standard() || namespace_b28d86fd::is_active()) {
+  if(zm_utility::is_standard() || zm_trial_trap_kills_only::is_active()) {
     cheat_too_friendly_s_ = #"hash_24a438482954901";
     self trap_set_string(cheat_too_friendly_s_);
 
@@ -246,7 +246,7 @@ function function_783f63e9(var_1c9c3123 = 1) {
     return;
   }
 
-  cheat_too_friendly_s_ = #"hash_23c1c09e94181fdb";
+  cheat_too_friendly_s_ = #"zombie/button_buy_trap";
   self trap_set_string(cheat_too_friendly_s_, self.zombie_cost);
 
   if(var_1c9c3123) {
@@ -280,7 +280,7 @@ function trap_use_think(trap) {
 }
 
 function trap_purchase(e_player, n_cost) {
-  if(namespace_b28d86fd::is_active()) {
+  if(zm_trial_trap_kills_only::is_active()) {
     return 1;
   }
 
@@ -879,7 +879,7 @@ function trap_disable(var_ccf895cc = #"zombie/trap_locked") {
   self trap_set_string(var_ccf895cc);
 }
 
-function trap_enable(var_f9afc2b3, var_b8c50025 = #"hash_23c1c09e94181fdb") {
+function trap_enable(var_f9afc2b3, var_b8c50025 = #"zombie/button_buy_trap") {
   if(!is_true(self.var_b3166dc1)) {
     return;
   }
@@ -905,7 +905,7 @@ function disable_all_traps(var_ccf895cc = #"zombie/trap_locked") {
   level.var_4f7df1ac = 1;
 }
 
-function function_9d0c9706(var_f9afc2b3 = #"hash_23c1c09e94181fdb", var_b8c50025 = #"hash_6e8ef1b690e98e51") {
+function function_9d0c9706(var_f9afc2b3 = #"zombie/button_buy_trap", var_b8c50025 = #"hash_6e8ef1b690e98e51") {
   a_t_traps = getEntArray("zombie_trap", "targetname");
 
   foreach(t_trap in a_t_traps) {

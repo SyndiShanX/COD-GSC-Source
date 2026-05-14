@@ -647,7 +647,7 @@ function function_ece62582() {
     radius = 500;
     v_pos = self.origin;
     earthquake(magnitude, duration, org, 500);
-    self playSound(#"hash_5314ffef2464b607");
+    self playSound(#"exp_damage_ac130");
   }
 }
 

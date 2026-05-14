@@ -436,11 +436,11 @@ function function_3bafd088(var_a572f325) {
       var_a572f325 = spawnStruct();
     }
 
-    var_a572f325.drawbig = getdvarint(#"hash_13d62f4d290ef671", 0);
+    var_a572f325.drawbig = getdvarint(#"cg_drawxcaminfobig", 0);
     var_a572f325.var_2640d68e = getdvarint(#"scr_show_shot_info_for_igcs", 0);
     var_a572f325.drawfps = getdvarint(#"cg_drawfps", 1);
     level.var_a572f325 = var_a572f325;
-    setDvar(#"hash_13d62f4d290ef671", 1);
+    setDvar(#"cg_drawxcaminfobig", 1);
     setDvar(#"scr_show_shot_info_for_igcs", 1);
     setDvar(#"cg_drawfps", 0);
     adddebugcommand(0, "<dev string:x22e>");
@@ -468,7 +468,7 @@ function function_d2785094(var_a572f325) {
       }
     }
 
-    setDvar(#"hash_13d62f4d290ef671", drawbig);
+    setDvar(#"cg_drawxcaminfobig", drawbig);
     setDvar(#"scr_show_shot_info_for_igcs", var_2640d68e);
     setDvar(#"cg_drawfps", drawfps);
     adddebugcommand(0, "<dev string:x23d>");

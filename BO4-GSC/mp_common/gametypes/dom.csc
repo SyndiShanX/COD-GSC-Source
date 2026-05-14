@@ -73,9 +73,9 @@ monitor_flag_fx(localclientnum, flag_objective, flag_name) {
         var_4e8c1813 = serverobjective_getobjectivegamemodeflags(localclientnum, flag_objective);
 
         if(var_4e8c1813 == 2) {
-          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? # "axis" : # "allies";
+          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? #"axis" : #"allies";
         } else if(var_4e8c1813 == 1) {
-          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? # "allies" : # "axis";
+          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? #"allies" : #"axis";
         }
       } else if(shoutcaster::is_shoutcaster(localclientnum)) {
         var_76587cfe = util::get_other_team(var_76587cfe);

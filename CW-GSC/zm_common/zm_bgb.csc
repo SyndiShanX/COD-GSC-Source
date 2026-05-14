@@ -102,7 +102,7 @@ function private bgb_finalize() {
       v.consumable = 1;
     }
 
-    v.camo_index = var_5415dfb9.var_daefc551;
+    v.camo_index = var_5415dfb9.bgbcamoindex;
     v.flying_gumball_tag = "tag_gumball_" + v.limit_type;
     v.give_gumball_tag = "tag_gumball_" + v.limit_type + "_" + level.var_afb8293c[v.rarity];
     level.bgb_item_index_to_name[v.item_index] = v.name;

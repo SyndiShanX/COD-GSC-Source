@@ -557,12 +557,12 @@ function givetalents(talents, var_1c89585f, var_285151c1) {
 
   if(var_1c89585f === 1) {
     talents[talents.size] = {
-      #talent: # "hash_7716cb3888f5dd8a"};
+      #talent: #"hash_7716cb3888f5dd8a"};
   }
 
   if(var_285151c1 === 1) {
     talents[talents.size] = {
-      #talent: # "hash_2c3a32e6e2afd1f2"};
+      #talent: #"hash_2c3a32e6e2afd1f2"};
   }
 
   foreach(talent in talents) {

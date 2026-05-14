@@ -27,7 +27,7 @@ function private preinit() {
 
 function function_50634409(params) {
   player = util::gethostplayerforbots();
-  team = player.team == #"allies" ? # "axis" : # "allies";
+  team = player.team == #"allies" ? #"axis" : #"allies";
   bot = level bot::add_bot(team);
 
   if(isDefined(bot)) {

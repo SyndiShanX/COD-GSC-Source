@@ -33,7 +33,7 @@ function function_76a18acc(var_8fb24641) {
   var_571293f = [];
 
   foreach(var_8ad31d96 in var_e1a8ec1c) {
-    team = isDefined(var_8ad31d96.team) ? var_8ad31d96.team : # "none";
+    team = isDefined(var_8ad31d96.team) ? var_8ad31d96.team : #"none";
 
     if(team == #"none") {
       continue;

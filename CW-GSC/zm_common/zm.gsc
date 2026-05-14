@@ -363,7 +363,7 @@ function function_bdf9485e() {
   var_34451a50 = self.pers[#"hash_4a01db5796cf12b1"] === #"failure";
 
   if(var_34451a50) {
-    var_c069e1cd = self.pers[#"hash_3b7fc8c62a7d4420"] * level.var_df437ed2;
+    var_c069e1cd = self.pers[#"hash_3b7fc8c62a7d4420"] * level.controllerparticipationcheckinterval;
     self.var_c069e1cd = var_c069e1cd;
 
     if(!self ishost()) {
@@ -381,7 +381,7 @@ function function_bdf9485e() {
       if(var_c069e1cd >= var_dccfc12 - warning_time) {
         if(!self.pers[#"controllerparticipationinactivitywarnings"]) {
           self.pers[#"controllerparticipationinactivitywarnings"]++;
-          self iprintlnbold(#"hash_59bd89e170a924ac");
+          self iprintlnbold(#"game/inactivedropwarning");
         }
       }
 
@@ -422,7 +422,7 @@ function function_21e4b1c2() {
   if(isDefined(self.var_11eebcd3)) {
     var_57e7a401 = float(gettime() - self.var_11eebcd3) / 1000;
 
-    if(var_57e7a401 < level.var_df437ed2) {
+    if(var_57e7a401 < level.controllerparticipationcheckinterval) {
       if(isDefined(self.var_97a988e7) && namespace_1b527536::function_841bae20(self.var_97a988e7.statname) === #"toxic_growth") {
         return false;
       }
@@ -851,13 +851,13 @@ function init_shellshocks() {
 
 function init_strings() {
   zm_utility::add_zombie_hint("undefined", #"zombie/undefined");
-  zm_utility::add_zombie_hint("default_treasure_chest", #"hash_40a3bd4c33eac8cc");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"hash_1c189b8ad7ec73a1");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"hash_1c1c218ad7ef8d2a");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"hash_1c26138ad7f7c9e5");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"hash_2a43ddece6c85f63");
-  zm_utility::add_zombie_hint("default_reward_barrier_piece", #"hash_6a8e67597b680da2");
-  zm_utility::add_zombie_hint("default_buy_area", #"hash_cc45440fbd070dc");
+  zm_utility::add_zombie_hint("default_treasure_chest", #"zombie/random_weapon_cost");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"zombie/button_buy_back_barrier_10");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"zombie/button_buy_back_barrier_20");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"zombie/button_buy_back_barrier_50");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"zombie/button_buy_back_barrier_100");
+  zm_utility::add_zombie_hint("default_reward_barrier_piece", #"zombie/button_reward_barrier");
+  zm_utility::add_zombie_hint("default_buy_area", #"zombie/button_buy_open_area_cost");
 }
 
 function init_sounds() {
@@ -999,7 +999,7 @@ function function_1442d44f() {
   zombie_utility::set_zombie_var(#"zombie_health_start", zmsettings.difficultysettings[level.gamedifficulty].var_d2a37ad0, 0);
   zombie_utility::set_zombie_var(#"zombie_health_increase", zmsettings.difficultysettings[level.gamedifficulty].var_2defce07, 0);
   zombie_utility::set_zombie_var(#"zombie_health_increase_multiplier", zmsettings.difficultysettings[level.gamedifficulty].var_68f07704, 0);
-  zombie_utility::set_zombie_var(#"hash_7d5a25e2463f7fc5", zmsettings.difficultysettings[level.gamedifficulty].var_75236df1, 0);
+  zombie_utility::set_zombie_var(#"zombie_spawn_delay_base", zmsettings.difficultysettings[level.gamedifficulty].var_75236df1, 0);
   zombie_utility::set_zombie_var(#"zombie_new_runner_interval", zmsettings.difficultysettings[level.gamedifficulty].var_8cb6013d, 0);
   zombie_utility::set_zombie_var(#"zombie_max_ai", zmsettings.difficultysettings[level.gamedifficulty].var_e134c623, 0);
   zombie_utility::set_zombie_var(#"zombie_ai_per_player", zmsettings.difficultysettings[level.gamedifficulty].var_8c9f998a);
@@ -1017,19 +1017,19 @@ function function_1442d44f() {
   zombie_utility::set_zombie_var(#"penalty_died", zmsettings.difficultysettings[level.gamedifficulty].var_a93b7e4f, 0);
   zombie_utility::set_zombie_var(#"penalty_downed", zmsettings.difficultysettings[level.gamedifficulty].var_415b24aa, 0);
   zombie_utility::set_zombie_var(#"hash_3037a1f286b662e6", zmsettings.difficultysettings[level.gamedifficulty].var_b84141ad, 0);
-  zombie_utility::set_zombie_var(#"hash_3098c53bba6402d3", zmsettings.difficultysettings[level.gamedifficulty].var_6de8fcc4, 0);
-  zombie_utility::set_zombie_var(#"hash_67ae1b8cbb7c985", zmsettings.difficultysettings[level.gamedifficulty].var_e8996012, 0);
-  zombie_utility::set_zombie_var(#"hash_cc85b961f25c2ff", zmsettings.difficultysettings[level.gamedifficulty].var_4a94ab75, 0);
+  zombie_utility::set_zombie_var(#"self_revive_count_coop", zmsettings.difficultysettings[level.gamedifficulty].var_6de8fcc4, 0);
+  zombie_utility::set_zombie_var(#"self_revive_count_solo", zmsettings.difficultysettings[level.gamedifficulty].var_e8996012, 0);
+  zombie_utility::set_zombie_var(#"shield_damage_mult", zmsettings.difficultysettings[level.gamedifficulty].var_4a94ab75, 0);
   zombie_utility::set_zombie_var(#"retain_weapons", zmsettings.difficultysettings[level.gamedifficulty].var_3c177b07, 0);
   zombie_utility::set_zombie_var(#"perks_decay", zmsettings.difficultysettings[level.gamedifficulty].var_792e5fa0, 0);
   zombie_utility::set_zombie_var(#"hash_1ab42b4d7db4cb3c", zmsettings.difficultysettings[level.gamedifficulty].var_539d49a1, 0);
   zombie_utility::set_zombie_var(#"highlight_craftables", zmsettings.difficultysettings[level.gamedifficulty].var_93820904, 0);
   zombie_utility::set_zombie_var(#"zombie_point_scalar", zmsettings.difficultysettings[level.gamedifficulty].var_5a60ae8, 0, 1);
-  zombie_utility::set_zombie_var(#"hash_3a4a041c1d674898", zmsettings.difficultysettings[level.gamedifficulty].var_dd67fc96, 0);
+  zombie_utility::set_zombie_var(#"mixed_start_round", zmsettings.difficultysettings[level.gamedifficulty].var_dd67fc96, 0);
   zombie_utility::set_zombie_var(#"hash_762b7db4166c70aa", zmsettings.difficultysettings[level.gamedifficulty].var_f40fa2be, 0);
-  zombie_utility::set_zombie_var(#"hash_6eb9b2d60babd5aa", zmsettings.difficultysettings[level.gamedifficulty].var_e97877db, 0);
+  zombie_utility::set_zombie_var(#"catalyst_start_round", zmsettings.difficultysettings[level.gamedifficulty].var_e97877db, 0);
   zombie_utility::set_zombie_var(#"hash_376905ad360fc2e8", zmsettings.difficultysettings[level.gamedifficulty].var_5e295f7d, 0);
-  zombie_utility::set_zombie_var(#"hash_3b4ad7449c039d1b", zmsettings.difficultysettings[level.gamedifficulty].var_38e75b4c, 0);
+  zombie_utility::set_zombie_var(#"stoker_start_round", zmsettings.difficultysettings[level.gamedifficulty].var_38e75b4c, 0);
   zombie_utility::set_zombie_var(#"hash_2374f3ef775ac2c3", zmsettings.difficultysettings[level.gamedifficulty].var_bc2d6211, 0);
   level flag::set(#"zombie_vars_init");
 }
@@ -1864,7 +1864,7 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
     if(isDefined(self.archetype) && (self.archetype == #"tiger" || self.archetype == #"brutus" || self.archetype == #"zombie_dog" || self.archetype == #"catalyst" || self.archetype == #"stoker" || self.archetype == #"blight_father")) {
       bookmarkname = #"hash_1553fcea4f6a00e";
     } else {
-      bookmarkname = #"hash_37300d83d8e6f1fc";
+      bookmarkname = #"actor_kill_single";
     }
 
     if(bookmarkname == #"hash_1553fcea4f6a00e") {
@@ -2080,7 +2080,7 @@ function function_51133aa1() {
 function function_d723e40() {
   level endon(#"resume_end_game");
   wait 1;
-  luinotifyevent(#"hash_1fc4832b89307895", 0);
+  luinotifyevent(#"begin_restart_prompt", 0);
   wait zombie_utility::get_zombie_var(#"hash_6bae95928bbe8f1");
   level notify(#"resume_end_game");
 }
@@ -2094,7 +2094,7 @@ function restart_prompt() {
 
   level thread function_d723e40();
   level waittill(#"resume_end_game");
-  luinotifyevent(#"hash_3aa743d9ad6c8e19", 0);
+  luinotifyevent(#"end_restart_prompt", 0);
 }
 
 function private function_70171add() {
@@ -2122,7 +2122,7 @@ function function_6c369691() {
 
 function function_2a49523d(winner) {
   outcome = {
-    #var_c1e98979: 0, #var_68c25772: 1, #var_7d5c2c5f: 0, #var_277c7d47: 1, #var_14f94126: game.strings[#"defeat"], #team: # "axis", #players: []
+    #var_c1e98979: 0, #var_68c25772: 1, #var_7d5c2c5f: 0, #var_277c7d47: 1, #var_14f94126: game.strings[#"defeat"], #team: #"axis", #players: []
   };
 
   if(isDefined(winner) && winner == #"allies") {
@@ -2230,7 +2230,7 @@ function end_game() {
     player closeingamemenu();
     player closemenu("StartMenu_Main");
 
-    if(!isDefined(player.pers[#"hash_76fbbcf94dab5536"])) {
+    if(!isDefined(player.pers[#"recent_stat_index"])) {
       player persistence::function_acac764e();
     }
 
@@ -2804,7 +2804,7 @@ function player_too_many_players_check() {
 
   if(getplayers().size > max_players) {
     foreach(player in getplayers()) {
-      player val::set(#"hash_1a88595aedca8cc4", "freezecontrols");
+      player val::set(#"too_many_players", "freezecontrols");
     }
 
     level notify(#"end_game");
@@ -2919,7 +2919,7 @@ function function_2c96cf0e(event) {
 
 function function_d3113f01(var_bfe774a8) {
   var_ee65a0a8 = isDefined(level.var_acd0f67e) ? level.var_acd0f67e : 0;
-  var_931577c = isDefined(getgametypescriptbundle().var_4f7d48d7) ? getgametypescriptbundle().var_4f7d48d7 : # "gamedata/tables/zm/zm_perroundxp.csv";
+  var_931577c = isDefined(getgametypescriptbundle().var_4f7d48d7) ? getgametypescriptbundle().var_4f7d48d7 : #"gamedata/tables/zm/zm_perroundxp.csv";
 
   assert(isDefined(var_931577c), "<dev string:x1b7>");
   assert(tablelookupcolumnforrow(var_931577c, 0, 0) == 1, "<dev string:x1f6>");

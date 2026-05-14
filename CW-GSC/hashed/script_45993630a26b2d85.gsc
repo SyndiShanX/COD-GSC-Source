@@ -47,7 +47,7 @@ function private on_weapon_fired(params) {
 
 function private function_a5a431f6() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     s_waitresult = self waittill(#"ammo_reduction", #"lightning_ball_created");

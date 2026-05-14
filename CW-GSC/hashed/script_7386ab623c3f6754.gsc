@@ -48,12 +48,12 @@ function private preinit() {
   weaponobjects::function_e6400478(#"toxic_growth_3", &function_464ccb73, 1);
   weaponobjects::function_e6400478(#"toxic_growth_4", &function_464ccb73, 1);
   weaponobjects::function_e6400478(#"toxic_growth_5", &function_464ccb73, 1);
-  deployable::register_deployable(getweapon(#"toxic_growth"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
-  deployable::register_deployable(getweapon(#"toxic_growth_1"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
-  deployable::register_deployable(getweapon(#"toxic_growth_2"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
-  deployable::register_deployable(getweapon(#"toxic_growth_3"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
-  deployable::register_deployable(getweapon(#"toxic_growth_4"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
-  deployable::register_deployable(getweapon(#"toxic_growth_5"), &function_c355b189, &function_c66c2af4, undefined, #"hash_37605398dce96965", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth_1"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth_2"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth_3"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth_4"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
+  deployable::register_deployable(getweapon(#"toxic_growth_5"), &function_c355b189, &function_c66c2af4, undefined, #"weapon/cant_plant_equipment", 1);
   callback::add_callback(#"hash_6dc96d04d1ba7f5a", &function_2ca4337c);
   namespace_9ff9f642::register_slowdown(#"toxic_growth", 0.6, 3);
   namespace_9ff9f642::register_slowdown(#"toxic_growth_1", 0.6, 3);
@@ -143,7 +143,7 @@ function function_464ccb73(watcher) {
 
 function function_2ca4337c(params) {
   if(function_ef5cde9f(params.weapon.name)) {
-    self thread zm_equipment::show_hint_text(#"hash_37605398dce96965", 1);
+    self thread zm_equipment::show_hint_text(#"weapon/cant_plant_equipment", 1);
   }
 }
 

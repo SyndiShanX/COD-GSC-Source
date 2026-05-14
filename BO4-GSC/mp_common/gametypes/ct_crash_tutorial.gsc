@@ -245,7 +245,7 @@ function_5ac0441c() {
   level thread ct_vo::play_vo(#"hash_66f25a8f7113d138", 0);
   wait 2.5;
   level thread ct_vo::function_14b08e49(array(#"hash_3fbd29645b774ffa"), "stop_heal_nag");
-  var_5bddeb93 = player gamepadusedlast() ? # "hash_64d49e1e2e7c63e3" : # "hash_6e680b15656b935d";
+  var_5bddeb93 = player gamepadusedlast() ? #"hash_64d49e1e2e7c63e3" : #"hash_6e680b15656b935d";
   player thread ct_utils::function_61c3d59c(var_5bddeb93, undefined);
   level.var_e72728b8 = array(#"gadget_supplypod");
   level waittill(#"hash_4acf6588b40fe941");
@@ -493,7 +493,7 @@ function_8ab81320() {
   level thread ct_vo::play_vo(#"hash_746bbb3099ae8d4b", 0);
 
   while(!level flag::get("scorestreak_done")) {
-    var_c6847598 = level.players[0] gamepadusedlast() ? # "hash_6294dadea114ab41" : # "hash_57872bdaf9640a47";
+    var_c6847598 = level.players[0] gamepadusedlast() ? #"hash_6294dadea114ab41" : #"hash_57872bdaf9640a47";
     level.players[0] ct_utils::function_61c3d59c(var_c6847598, undefined);
     level.players[0] ct_utils::function_49e0c5bc(0);
     level.players[0] thread function_667b9fbc();
@@ -539,7 +539,7 @@ function_8ab81320() {
 
     level thread ct_vo::play_vo(#"hash_6d4d58453e122b30");
     level thread ct_vo::function_14b08e49(array(#"hash_786dd82792eda658"), "stop_mantis_nag");
-    var_fc51cece = level.players[0] gamepadusedlast() ? # "hash_4015899fc4930e7d" : # "hash_6731f4ac7ebfc213";
+    var_fc51cece = level.players[0] gamepadusedlast() ? #"hash_4015899fc4930e7d" : #"hash_6731f4ac7ebfc213";
     level.players[0] ct_utils::function_61c3d59c(var_fc51cece, undefined);
     s_result = level.mantis waittill(#"enter_vehicle", #"death");
     level.players[0] ct_utils::function_61c3d59c(#"hash_6d973e1934818fdc", undefined);
@@ -1575,7 +1575,7 @@ slo_mo() {
   self endon(#"death");
   level flag::wait_till("slo_mo");
   level.var_e72728b8 = array(#"gadget_supplypod");
-  var_e9cfe36e = self gamepadusedlast() ? # "hash_262142273aedf81a" : # "hash_2a38a94893bab6ba";
+  var_e9cfe36e = self gamepadusedlast() ? #"hash_262142273aedf81a" : #"hash_2a38a94893bab6ba";
   self thread ct_utils::function_61c3d59c(var_e9cfe36e, undefined);
   level thread ct_vo::play_vo(#"hash_4ab0ccbfd177602f");
   setslowmotion(1, 0.2, 2);
@@ -1799,7 +1799,7 @@ function_a929047f() {
   level flag::wait_till_any(array("supply_drop", "tak5_done"));
 
   if(level flag::get("supply_drop")) {
-    var_8c977127 = self gamepadusedlast() ? # "hash_1c4ac6e9a0d267e4" : # "hash_24b56919b50565e0";
+    var_8c977127 = self gamepadusedlast() ? #"hash_1c4ac6e9a0d267e4" : #"hash_24b56919b50565e0";
     self thread ct_utils::function_61c3d59c(var_8c977127, undefined);
     level flag::wait_till("tak5_done");
   } else {

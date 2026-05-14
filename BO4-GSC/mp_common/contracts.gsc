@@ -280,15 +280,15 @@ function_90a854d2(slot) {
     switch (slot) {
       case 0:
         return {
-          #var_38280f2f: # "contract_mp_headshot", #contract_id: 10011, #target_value: 100, #var_59cb904f: 98
+          #var_38280f2f: #"contract_mp_headshot", #contract_id: 10011, #target_value: 100, #var_59cb904f: 98
         };
       case 1:
         return {
-          #var_38280f2f: # "hash_2173bc0bfcbdf90f", #contract_id: 10004, #target_value: 200, #var_59cb904f: 195
+          #var_38280f2f: #"hash_2173bc0bfcbdf90f", #contract_id: 10004, #target_value: 200, #var_59cb904f: 195
         };
       case 2:
         return {
-          #var_38280f2f: # "hash_250c2d8ef2261723", #contract_id: 10009, #target_value: 50, #var_59cb904f: 48
+          #var_38280f2f: #"hash_250c2d8ef2261723", #contract_id: 10009, #target_value: 50, #var_59cb904f: 48
         };
       default:
         break;

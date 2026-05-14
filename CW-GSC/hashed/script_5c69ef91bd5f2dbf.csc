@@ -629,11 +629,11 @@ function private abom_beam_rumble(localclientnum) {
 function private function_b13b14f5(tier) {
   switch (tier) {
     case 1:
-      return # "hash_3b3bffcad5f6bde1";
+      return #"hash_3b3bffcad5f6bde1";
     case 2:
-      return # "hash_31397fe5e7837982";
+      return #"hash_31397fe5e7837982";
     case 3:
-      return # "hash_6256853949b1bfba";
+      return #"hash_6256853949b1bfba";
   }
 
   return undefined;

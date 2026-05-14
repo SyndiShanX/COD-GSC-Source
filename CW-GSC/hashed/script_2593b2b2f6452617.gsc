@@ -317,7 +317,7 @@ function function_c64d2826() {
   self.var_2941a093 = 1;
   level notify(#"head_pickup");
   callback::on_weapon_change(&function_2c951177);
-  callback::function_33f0ddd3(&function_2056cd79);
+  callback::on_player_loadout_changed(&function_2056cd79);
   self thread function_50d04ccb();
   self val::reset(#"carry_head", "disable_weapon_cycling");
   self thread zm_equipment::show_hint_text(#"hash_303616f97ddfb53e", 10);

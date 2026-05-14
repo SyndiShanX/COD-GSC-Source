@@ -328,7 +328,7 @@ function autoexec ignore_systems() {
   system::ignore(#"zm_devgui");
   system::ignore(#"zm_equipment");
   system::ignore(#"zm_escape_util");
-  system::ignore(#"hash_7576c66086ab62aa");
+  system::ignore(#"zm_faction_buffs");
   system::ignore(#"hash_13a43d760497b54d");
   system::ignore(#"hash_62a392bb15b68ccd");
   system::ignore(#"hash_36a2cb0be45d9374");
@@ -430,7 +430,7 @@ function autoexec ignore_systems() {
   system::ignore(#"zm_trial_reset_loadout");
   system::ignore(#"zm_trial_restrict_loadout");
   system::ignore(#"zm_trial_special_enemy");
-  system::ignore(#"hash_41cb195ec280085c");
+  system::ignore(#"zm_trial_trap_kills_only");
   system::ignore(#"zm_trial_util");
   system::ignore(#"zm_ui_inventory");
   system::ignore(#"zm_unitrigger");

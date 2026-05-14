@@ -26,7 +26,7 @@ function private preinit() {
 }
 
 function private on_begin(n_max_zombies, var_2ec39966, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef) {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   a_str_zones = array(str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef);
   arrayremovevalue(a_str_zones, undefined);
 
@@ -55,7 +55,7 @@ function private on_end(round_reset) {
 }
 
 function private function_65e6d40c(a_str_zones, n_max_zombies = 0) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   level waittill(#"zombie_total_set");
   a_s_locs = zm_utility::get_spawn_locs("zombie_location", a_str_zones, 0);
 

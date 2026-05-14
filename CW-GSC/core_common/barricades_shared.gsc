@@ -61,7 +61,7 @@ class cbarricade: cdoor {
 
     if(is_true(m_s_bundle.var_ccc6dafc)) {
       m_e_door setCanDamage(1);
-      m_e_door val::set(#"hash_25bedd86747e41e1", "allowdeath", 0);
+      m_e_door val::set(#"c_door_damage", "allowdeath", 0);
       thread function_b4a1f06a();
     }
 
@@ -120,7 +120,7 @@ class cbarricade: cdoor {
     m_e_door endon(#"delete", #"barricade_removed");
 
     while(true) {
-      m_e_door waittill(#"hash_7166c13e79b73f9");
+      m_e_door waittill(#"player_opened_door");
 
       if(isDefined(var_a2f96f78.target)) {
         var_59746f25 = struct::get_array(var_a2f96f78.target, "targetname");

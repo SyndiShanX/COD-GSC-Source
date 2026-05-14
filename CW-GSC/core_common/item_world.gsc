@@ -41,20 +41,20 @@ function private preinit() {
   level.var_d89ef54a = getgametypesetting(#"hash_2f0beae14bf17810");
   level.var_9cddbf4e = [];
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_01_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: #"evt_supply_stash_open", #var_b9492c6: #"hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_04_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: #"evt_supply_stash_open", #var_b9492c6: #"hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_death_stash_mod"] = {
-    #open_sound: # "hash_5e8b0f6cade25ff6", #var_b9492c6: # "hash_70fb2ee1b706a28a"};
+    #open_sound: #"evt_death_stash_open", #var_b9492c6: #"hash_70fb2ee1b706a28a"};
   level.var_9cddbf4e[#"hash_1dcbe8021fb16344"] = {
-    #open_sound: # "hash_56b5b65c141f4629", #var_b9492c6: # "hash_6fcb29cae6678d93"};
+    #open_sound: #"hash_56b5b65c141f4629", #var_b9492c6: #"hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_ammo_mod"] = {
-    #open_sound: # "hash_f743d336f8b7764", #var_b9492c6: # "hash_3e62bcbd6460ff44"};
+    #open_sound: #"hash_f743d336f8b7764", #var_b9492c6: #"hash_3e62bcbd6460ff44"};
   level.var_9cddbf4e[#"hash_574076754776e003"] = {
-    #open_sound: # "hash_36e23ce3e5f7e4c0", #var_b9492c6: # "hash_22f426a8593609e8"};
+    #open_sound: #"hash_36e23ce3e5f7e4c0", #var_b9492c6: #"hash_22f426a8593609e8"};
   callback::on_connect(&_on_player_connect);
   callback::on_disconnect(&_on_player_disconnect);
-  callback::add_callback(#"hash_41781454d98b676a", &function_9aefb438);
+  callback::add_callback(#"popups_team_message", &function_9aefb438);
   level thread function_f7fb8a17();
   level thread function_e1965ae1();
   level.var_703d32de = 0;
@@ -62,7 +62,7 @@ function private preinit() {
   level.nullprimaryoffhand = getweapon(#"null_offhand_primary");
   level.nullsecondaryoffhand = getweapon(#"null_offhand_secondary");
   level.var_3488e988 = getweapon(#"hash_5a7fd1af4a1d5c9");
-  level thread namespace_65181344::init_spawn_system();
+  level thread item_spawn_groups_util::init_spawn_system();
 
   if(!isDefined(level.var_227b9e91)) {
     level.var_227b9e91 = new throttle();
@@ -500,7 +500,7 @@ function private function_b962721d(scriptbundlename, itemcount, falling, delay =
     wait delay;
   }
 
-  self thread namespace_65181344::function_fd87c780(scriptbundlename, itemcount, falling);
+  self thread item_spawn_groups_util::function_fd87c780(scriptbundlename, itemcount, falling);
 }
 
 function private function_ad7ad6ce(trigger_struct) {
@@ -604,7 +604,7 @@ function private function_eb900758(stash) {
   self endon(#"disconnect");
   self childthread function_d87c50ae(stash);
   self childthread function_6266f448();
-  self waittill(#"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self waittill(#"death", #"entering_last_stand", #"close_multi_item_pickup");
   self clientfield::set_player_uimodel("hudItems.multiItemPickup.status", 0);
   self.var_c4462112 = 1;
 }
@@ -612,7 +612,7 @@ function private function_eb900758(stash) {
 function private function_6266f448() {
   self notify("54aa3c9d2a650c2");
   self endon("54aa3c9d2a650c2");
-  self endon(#"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self endon(#"death", #"entering_last_stand", #"close_multi_item_pickup");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -622,13 +622,13 @@ function private function_6266f448() {
     }
   }
 
-  self notify(#"hash_2781407e327b42ee");
+  self notify(#"close_multi_item_pickup");
 }
 
 function private function_d87c50ae(stash) {
   self notify("a8a6e23c71cdd5f");
   self endon("a8a6e23c71cdd5f");
-  self endon(#"death", #"entering_last_stand", #"hash_2781407e327b42ee");
+  self endon(#"death", #"entering_last_stand", #"close_multi_item_pickup");
 
   while(true) {
     waitframe(1);
@@ -667,7 +667,7 @@ function private function_d87c50ae(stash) {
     function_35c26e09(stash);
   }
 
-  self notify(#"hash_2781407e327b42ee");
+  self notify(#"close_multi_item_pickup");
 }
 
 function function_f9da222a(identifier) {
@@ -809,7 +809,7 @@ function function_a54d07e6(item, activator) {
           succeeded = stash[[stash.onuse]](activator, state, 2);
         }
 
-        stash notify(#"hash_4c78fc894646853d");
+        stash notify(#"stash_is_empty");
 
         if(isDefined(activator)) {
           activator notify(#"open_stash");
@@ -1205,18 +1205,18 @@ function private function_7c84312d(origin, angles) {
           } else if(isDefined(itementry.weapon)) {
             var_caafaa25 = itementry.weapon.displayname;
           } else {
-            var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "weapon/pickupnewweapon";
+            var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"weapon/pickupnewweapon";
           }
 
           usetrigger sethintstring(var_caafaa25);
         } else {
           usetrigger setcursorhint("HINT_3D");
-          var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+          var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
           usetrigger sethintstring(var_caafaa25);
         }
       } else {
         usetrigger setcursorhint("HINT_3D");
-        var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+        var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
         usetrigger sethintstring(var_caafaa25);
       }
     }
@@ -1689,7 +1689,7 @@ function function_1a46c8ae(player, var_a1ca235e, var_3d1f9df4, var_7089b458, var
   }
 
   data = {
-    #game_time: function_f8d53445(), #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0, #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0, #var_5b8ff5e9: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0, #var_6789038: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0, #var_d1f97c0f: isDefined(var_381f3b39) ? var_381f3b39 : 0
+    #game_time: function_f8d53445(), #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0, #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0, #dropped_amount: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0, #given_item: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0, #given_amount: isDefined(var_381f3b39) ? var_381f3b39 : 0
   };
 
   if(isDefined(var_a1ca235e)) {

@@ -82,8 +82,8 @@ function function_447e6858() {
   callback::on_joined_team(&on_joined_team);
 }
 
-function function_b5b6ef3e(func, obj) {
-  callback::add_callback(#"hash_45f35669076bc317", func, obj);
+function on_init_killstreaks(func, obj) {
+  callback::add_callback(#"on_init_killstreaks", func, obj);
 }
 
 function private register_ui(killstreak_type, killstreak_menu) {
@@ -146,7 +146,7 @@ function private register_vehicle(killstreak_type, vehicle) {
 
 function private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function, isinventoryweapon) {
   killstreak_init(type);
-  menukey = bundle.var_a99ef6da;
+  menukey = bundle.ksmenukey;
 
   if(!isDefined(menukey)) {
     menukey = type;
@@ -175,7 +175,7 @@ function private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use
   level.killstreaks[type].script_bundle = bundle;
   killstreak_dialog::function_1110a5de(type);
 
-  if(is_true(bundle.var_1bc9830d) && is_true(isinventoryweapon)) {
+  if(is_true(bundle.ksregisterdvars) && is_true(isinventoryweapon)) {
     register_dev_dvars(type);
   }
 
@@ -1094,10 +1094,10 @@ function function_aa56f6a0(killstreaktype, isfrominventory) {
   }
 
   if(is_true(level.usingscorestreaks)) {
-    var_ad8ae78f = {
+    scorestreakdata = {
       #gametime: function_f8d53445(), #killstreak: killstreaktype, #activatedby: getplayerspawnid(self)
     };
-    function_92d1707f(#"hash_1aa07f199266e0c7", var_ad8ae78f);
+    function_92d1707f(#"hash_1aa07f199266e0c7", scorestreakdata);
 
     if(is_true(isfrominventory)) {
       remove_used_killstreak(killstreaktype);
@@ -1525,7 +1525,7 @@ function display_unavailable_time() {
     timeleft = 1;
   }
 
-  self iprintlnbold(#"hash_55a79f95e07a10bc", " " + timeleft + " ", #"hash_79a58948c3b976f5");
+  self iprintlnbold(#"mp/unavailable_for_n", " " + timeleft + " ", #"exe/seconds");
 }
 
 function trigger_killstreak(killstreaktype, isfrominventory) {

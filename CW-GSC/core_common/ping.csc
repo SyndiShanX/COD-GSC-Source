@@ -31,19 +31,19 @@ function private preinit() {
   callback::on_killcam_end(&function_2dd58893);
   level.ping = spawnStruct();
   level.ping.types = [{
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "teammate_waypoint"}, {
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "enemy_waypoint"}, {
-    #sound: # "uin_ping_enemy", #objective: # "enemy_waypoint"}, {
-    #sound: # "uin_ping_enemy", #objective: # "hash_6ee59c4b375ac2ae"}, {
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "hash_614502911ac7d29"}, {
-    #sound: # "hash_1a0de47f7204a9d6"}, {
-    #sound: # "uin_ping_enemy", #objective: # "hash_4aacdcc1899f9c59"}, {
-    #sound: # "uin_ping_enemy", #objective: # "hash_4aacdcc1899f9c59"}, {
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "hash_19b425c37cb9f718"}, {
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "hash_19b425c37cb9f718"}, {
-    #sound: # "uin_ping_enemy", #objective: # "hash_6618dbd21e3a5068"}, {
-    #sound: # "uin_ping_enemy", #objective: # "hash_4aacdcc1899f9c59"}, {
-    #sound: # "hash_1a0de47f7204a9d6", #objective: # "teammate_waypoint"}];
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"teammate_waypoint"}, {
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"enemy_waypoint"}, {
+    #sound: #"uin_ping_enemy", #objective: #"enemy_waypoint"}, {
+    #sound: #"uin_ping_enemy", #objective: #"hash_6ee59c4b375ac2ae"}, {
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"hash_614502911ac7d29"}, {
+    #sound: #"hash_1a0de47f7204a9d6"}, {
+    #sound: #"uin_ping_enemy", #objective: #"hash_4aacdcc1899f9c59"}, {
+    #sound: #"uin_ping_enemy", #objective: #"hash_4aacdcc1899f9c59"}, {
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"hash_19b425c37cb9f718"}, {
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"hash_19b425c37cb9f718"}, {
+    #sound: #"uin_ping_enemy", #objective: #"hash_6618dbd21e3a5068"}, {
+    #sound: #"uin_ping_enemy", #objective: #"hash_4aacdcc1899f9c59"}, {
+    #sound: #"hash_1a0de47f7204a9d6", #objective: #"teammate_waypoint"}];
   assert(level.ping.types.size == 13);
   level.ping.var_19e1f40d = isDefined(getgametypesetting(#"hash_196e997a082443a9")) ? getgametypesetting(#"hash_196e997a082443a9") : 0;
   level.ping.var_1220e585 = isDefined(getgametypesetting(#"hash_3ccd8e1bf3864fa1")) ? getgametypesetting(#"hash_3ccd8e1bf3864fa1") : 0;
@@ -296,7 +296,7 @@ function private on_ping(params) {
       item = function_b1702735(itemworld.id);
 
       if(isDefined(item.itementry)) {
-        originoffset = (isDefined(item.itementry.var_5dc4470b) ? item.itementry.var_5dc4470b : 0, isDefined(item.itementry.var_54a3b4ca) ? item.itementry.var_54a3b4ca : 0, isDefined(item.itementry.var_3e688854) ? item.itementry.var_3e688854 : 0);
+        originoffset = (isDefined(item.itementry.modeloffsetx) ? item.itementry.modeloffsetx : 0, isDefined(item.itementry.modeloffsety) ? item.itementry.modeloffsety : 0, isDefined(item.itementry.modeloffsetz) ? item.itementry.modeloffsetz : 0);
         loc -= rotatepoint(originoffset, itemworld.angles);
       }
     }
@@ -489,9 +489,9 @@ function private function_85bffd7c(local_client_num, event_type, location, clien
   setuimodelvalue(getuimodel(model, "remove"), (isDefined(var_d09a35d4) ? var_d09a35d4 : 0) != 0);
   setuimodelvalue(getuimodel(model, "locationX"), isDefined(location[0]) ? location[0] : 0);
   setuimodelvalue(getuimodel(model, "locationY"), isDefined(location[1]) ? location[1] : 0);
-  setuimodelvalue(getuimodel(model, "customText"), isDefined(var_fc97ceec) ? var_fc97ceec : # "");
+  setuimodelvalue(getuimodel(model, "customText"), isDefined(var_fc97ceec) ? var_fc97ceec : #"");
   setuimodelvalue(getuimodel(model, "offsetZ"), isDefined(offsetz) ? offsetz : 0);
-  setuimodelvalue(getuimodel(model, "customImage"), isDefined(var_c039614d) ? var_c039614d : # "");
+  setuimodelvalue(getuimodel(model, "customImage"), isDefined(var_c039614d) ? var_c039614d : #"");
   forcenotifyuimodel(getuimodel(model, "notify"));
 }
 
@@ -714,9 +714,9 @@ function private function_d5a244dc(local_client_num, unique_id, event_type, loca
     }
 
     if(event_type == 2 || event_type == 1) {
-      var_3695f891 = isDefined(zonename) ? zonename : # "hash_1e32ad8efd3bd291";
+      var_3695f891 = isDefined(zonename) ? zonename : #"hash_1e32ad8efd3bd291";
     } else {
-      var_3695f891 = isDefined(zonename) ? zonename : # "hash_18b0d1618dc96364";
+      var_3695f891 = isDefined(zonename) ? zonename : #"hash_18b0d1618dc96364";
     }
 
     objective = undefined;

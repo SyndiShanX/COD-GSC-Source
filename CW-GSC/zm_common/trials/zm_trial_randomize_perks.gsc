@@ -42,7 +42,7 @@ function private on_end(round_reset) {
 
 function private function_83fa47e8() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self bgb_pack::function_59004002(#"zm_bgb_perk_up", 1);
   self bgb_pack::function_59004002(#"zm_bgb_perkaholic", 1);
   wait 8;
@@ -73,7 +73,7 @@ function private function_83fa47e8() {
     var_de5c852b = zm_perks::function_5ea0c6cf(var_52bb1366);
     self.var_c27f1e90[n_slot] = var_de5c852b;
     self zm_perks::function_81bc6765(n_slot, level._custom_perks[var_de5c852b].alias);
-    self zm_perks::function_9bdf581f(var_de5c852b, n_slot, 0);
+    self zm_perks::give_perk_vapor(var_de5c852b, n_slot, 0);
   }
 
   if(isarray(self.var_5046ea5e.var_724d826b)) {

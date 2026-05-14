@@ -477,14 +477,14 @@ ctf() {
   var_786a6f75 = getent("ctf_flag_allies_base", "targetname");
 
   if(isDefined(var_786a6f75)) {
-    var_786a6f75.team = isDefined(game.switchedsides) && game.switchedsides ? # "axis" : # "allies";
+    var_786a6f75.team = isDefined(game.switchedsides) && game.switchedsides ? #"axis" : #"allies";
     playFXOnTag("ui/fx8_ctf_flag_base_team", var_786a6f75, "tag_origin");
   }
 
   var_846ab111 = getent("ctf_flag_axis_base", "targetname");
 
   if(isDefined(var_846ab111)) {
-    var_846ab111.team = isDefined(game.switchedsides) && game.switchedsides ? # "allies" : # "axis";
+    var_846ab111.team = isDefined(game.switchedsides) && game.switchedsides ? #"allies" : #"axis";
     playFXOnTag("ui/fx8_ctf_flag_base_team", var_846ab111, "tag_origin");
   }
 }

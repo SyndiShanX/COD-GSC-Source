@@ -128,7 +128,7 @@ function_ccb3bc7a() {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function_b919f6aa(status) {
@@ -150,7 +150,7 @@ function_b919f6aa(status) {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function_5c389625() {

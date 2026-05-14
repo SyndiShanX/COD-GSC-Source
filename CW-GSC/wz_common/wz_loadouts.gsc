@@ -177,7 +177,7 @@ function private function_58190f52() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == #"gametype_wz_weapons_test") {
     function_f56a5599();
   }
 }
@@ -199,7 +199,7 @@ function private function_6667abef() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == #"gametype_wz_weapons_test") {
     function_f56a5599();
   }
 }
@@ -221,7 +221,7 @@ function private function_7376c60d() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == #"gametype_wz_weapons_test") {
     function_f56a5599();
   }
 }
@@ -246,7 +246,7 @@ function private function_1f091d2f() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == #"gametype_wz_weapons_test") {
     function_f56a5599();
   }
 }
@@ -272,7 +272,7 @@ function private function_2d31b980() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == #"gametype_wz_weapons_test") {
     function_f56a5599();
   }
 }

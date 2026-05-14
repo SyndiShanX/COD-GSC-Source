@@ -967,7 +967,7 @@ function update_inspection_character(localclientnum, var_41c3f35b, menu_name, fo
     [[var_d0b01271]] - > function_c4baf89b(showcase_weapon);
     [[var_d0b01271]] - > set_xuid(xuid);
     params = {
-      #var_401d9a1: 1, #var_c76f3e47: 1, #scene: # "scene_frontend_t9_lobby_inspection", #var_a68ab9c2: "idle", #activeweapon: showcase_weapon.weapon, #var_b8f20727: showcase_weapon.renderoptionsweapon, #var_452aa9c0: showcase_weapon.var_fd90b0bb, #var_a34c858c: 1, #scene_target: level, #var_b1e821c5: {
+      #var_401d9a1: 1, #var_c76f3e47: 1, #scene: #"scene_frontend_t9_lobby_inspection", #var_a68ab9c2: "idle", #activeweapon: showcase_weapon.weapon, #var_b8f20727: showcase_weapon.renderoptionsweapon, #var_452aa9c0: showcase_weapon.var_fd90b0bb, #var_a34c858c: 1, #scene_target: level, #var_b1e821c5: {
         #blend: 0
       }
     };
@@ -1195,7 +1195,7 @@ function function_db3c4c69(localclientnum) {
     adddebugcommand(localclientnum, "<dev string:x1da>" + var_ee63b362 + "<dev string:x1ea>" + "<dev string:x1f5>" + "<dev string:xd4>" + name + "<dev string:x209>");
   }
 
-  setDvar(#"hash_1311d7636a782655", "<dev string:x192>");
+  setDvar(#"weap_render_name", "<dev string:x192>");
   setDvar(#"weap_render", "<dev string:x192>");
   var_c11ba901 = ["<dev string:x131>", "<dev string:x140>", "<dev string:x148>", "<dev string:x150>", "<dev string:x20f>", "<dev string:x219>", "<dev string:x225>"];
   var_ae05dc1b = ["<dev string:x22e>", "<dev string:x100>"];
@@ -1205,8 +1205,8 @@ function function_db3c4c69(localclientnum) {
   while(true) {
     wait 0.1;
 
-    if(getdvarstring(#"hash_1311d7636a782655", weapon_name) != weapon_name) {
-      weapon_name = getdvarstring(#"hash_1311d7636a782655");
+    if(getdvarstring(#"weap_render_name", weapon_name) != weapon_name) {
+      weapon_name = getdvarstring(#"weap_render_name");
 
       if(weapon_name != "<dev string:x192>") {
         foreach(weapon in a_weapons) {
@@ -2129,7 +2129,7 @@ function function_45827126() {
   level endon(#"disconnect");
 
   while(true) {
-    waitresult = level waittill(#"hash_6f2435126950e914");
+    waitresult = level waittill(#"positiondraft_characterselected");
 
     if(waitresult.var_90d2372c && ![[level.var_1c43dd3e]] - > function_1d4afc32()) {
       [[level.var_1c43dd3e]] - > function_4a209fe9(1);

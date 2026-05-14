@@ -27,27 +27,27 @@ function function_f210e027() {
 
   if(level.gametype === #"dom") {
     array::add(level.spawnentitytypes, {
-      #team: # "allies", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 1
+      #team: #"allies", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 1
     });
     array::add(level.spawnentitytypes, {
-      #team: # "axis", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 2
+      #team: #"axis", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 2
     });
   }
 
   array::add(level.spawnentitytypes, {
-    #team: # "allies", #entityname: "mp_t8_spawn_point_allies", #spawntype: 1, #group_index: 1
+    #team: #"allies", #entityname: "mp_t8_spawn_point_allies", #spawntype: 1, #group_index: 1
   });
   array::add(level.spawnentitytypes, {
-    #team: # "axis", #entityname: "mp_t8_spawn_point_axis", #spawntype: 1, #group_index: 2
+    #team: #"axis", #entityname: "mp_t8_spawn_point_axis", #spawntype: 1, #group_index: 2
   });
   array::add(level.spawnentitytypes, {
-    #team: # "axis", #entityname: "mp_tdm_spawn_axis_start", #spawntype: 0, #group_index: 2, #isstartspawn: 1
+    #team: #"axis", #entityname: "mp_tdm_spawn_axis_start", #spawntype: 0, #group_index: 2, #isstartspawn: 1
   });
   array::add(level.spawnentitytypes, {
-    #team: # "allies", #entityname: "mp_tdm_spawn_allies_start", #spawntype: 0, #group_index: 1, #isstartspawn: 1
+    #team: #"allies", #entityname: "mp_tdm_spawn_allies_start", #spawntype: 0, #group_index: 1, #isstartspawn: 1
   });
   array::add(level.spawnentitytypes, {
-    #team: # "axis", #entityname: "mp_tdm_spawn", #spawntype: 0, #group_index: 0, #isstartspawn: 0
+    #team: #"axis", #entityname: "mp_tdm_spawn", #spawntype: 0, #group_index: 0, #isstartspawn: 0
   });
 }
 

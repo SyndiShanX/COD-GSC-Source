@@ -20,10 +20,10 @@
 #using scripts\zm_common\zm_player;
 #using scripts\zm_common\zm_powerups;
 #using scripts\zm_common\zm_spawner;
-#namespace namespace_ca8676a3;
+#namespace zm_ai_mannequin_ally;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_217942543a3e669b", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_ai_mannequin_ally", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {

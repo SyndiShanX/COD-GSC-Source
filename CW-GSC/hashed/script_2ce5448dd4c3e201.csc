@@ -16,10 +16,10 @@ function init() {
   clientfield::register("scriptmover", "zone_state", 1, 3, "int", &function_cb737c49, 0, 0);
   fields = getmapfields();
   level.var_117b4a3a = [];
-  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : # "hash_280d5153e1276d";
-  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : # "hash_4b1a3a0285bea14d";
-  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : # "hash_36a94457406aea0e";
-  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : # "hash_5a60154937b01557";
+  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : #"hash_280d5153e1276d";
+  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : #"hash_4b1a3a0285bea14d";
+  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : #"hash_36a94457406aea0e";
+  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : #"hash_5a60154937b01557";
   callback::on_spawned(&function_df78674f);
   callback::on_killcam_begin(&function_330a13a6);
   callback::on_killcam_end(&function_330a13a6);

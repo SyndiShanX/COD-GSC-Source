@@ -34,17 +34,17 @@
 
 function init() {
   level.doa.var_fe92efd8 = array({
-    #model: # "zombietron_fate_rock_fury", #var_3831681e: # "zombietron_fate_fury", #var_c8386627: 1, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 2, #var_d75b5b21: (0, 0, 0), #announce: 3
+    #model: #"zombietron_fate_rock_fury", #var_3831681e: #"zombietron_fate_fury", #var_c8386627: 1, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 2, #var_d75b5b21: (0, 0, 0), #announce: 3
   }, {
-    #model: # "zombietron_fate_rock_fortune", #var_3831681e: # "zombietron_fate_ruby", #var_c8386627: 2, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 4, #var_d75b5b21: (0, 0, 0), #announce: 4
+    #model: #"zombietron_fate_rock_fortune", #var_3831681e: #"zombietron_fate_ruby", #var_c8386627: 2, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 4, #var_d75b5b21: (0, 0, 0), #announce: 4
   }, {
-    #model: # "zombietron_fate_rock_feet", #var_3831681e: # "zombietron_fate_boots", #var_c8386627: 8, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 5, #var_d75b5b21: (0, 0, 0), #announce: 2
+    #model: #"zombietron_fate_rock_feet", #var_3831681e: #"zombietron_fate_boots", #var_c8386627: 8, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 5, #var_d75b5b21: (0, 0, 0), #announce: 2
   }, {
-    #model: # "zombietron_fate_rock_friend", #var_3831681e: # "zombietron_fate_friendship", #var_c8386627: 4, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 3, #var_d75b5b21: (-70, 80, 0), #announce: 5
+    #model: #"zombietron_fate_rock_friend", #var_3831681e: #"zombietron_fate_friendship", #var_c8386627: 4, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 3, #var_d75b5b21: (-70, 80, 0), #announce: 5
   }, {
-    #model: # "zombietron_fate_rock_shield", #var_3831681e: # "zombietron_fate_shield", #var_c8386627: 16, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 6, #var_d75b5b21: (-70, 80, 0), #announce: 6
+    #model: #"zombietron_fate_rock_shield", #var_3831681e: #"zombietron_fate_shield", #var_c8386627: 16, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 6, #var_d75b5b21: (-70, 80, 0), #announce: 6
   }, {
-    #model: # "zombietron_fate_rock_medic", #var_3831681e: # "zombietron_fate_medic", #var_c8386627: 32, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 7, #var_d75b5b21: (0, 0, 0), #announce: 7
+    #model: #"zombietron_fate_rock_medic", #var_3831681e: #"zombietron_fate_medic", #var_c8386627: 32, #fx: "wild_portal_radial_burst", #sfx: "evt_doa_teleporter_wilds_burst", #var_af104f33: 7, #var_d75b5b21: (0, 0, 0), #announce: 7
   });
   objective_add(14 + 0, "invisible", (0, 0, 0), #"hash_793a72598916f307");
   objective_add(14 + 1, "invisible", (0, 0, 0), #"hash_793a72598916f307");

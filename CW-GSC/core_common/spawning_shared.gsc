@@ -306,7 +306,7 @@ function private function_99ca1277(player, predictedspawn) {
 
   if(!predictedspawn && sessionmodeismultiplayergame()) {
     mpspawnpointsused = {
-      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2], #var_50641dd5: 0
+      #reason: "point used", #spawninstanceid: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2], #var_50641dd5: 0
     };
     function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
   }
@@ -320,17 +320,17 @@ function private function_99ca1277(player, predictedspawn) {
 function on_player_spawned() {
   self endon(#"disconnect");
   waitframe(1);
-  var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+  current_life_index = self match_record::get_player_stat(#"current_life_index");
 
   if(isDefined(self.spawn.var_a9914487)) {
-    if(isDefined(var_f8e6b703)) {
-      self match_record::set_stat(#"lives", var_f8e6b703, #"spawn_type", self.spawn.var_a9914487);
+    if(isDefined(current_life_index)) {
+      self match_record::set_stat(#"lives", current_life_index, #"spawn_type", self.spawn.var_a9914487);
     }
   }
 
   if(isDefined(self.spawn.var_4db23b)) {
-    if(isDefined(var_f8e6b703)) {
-      self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4b3e577f8ed51943", self.spawn.var_4db23b);
+    if(isDefined(current_life_index)) {
+      self match_record::set_stat(#"lives", current_life_index, #"hash_4b3e577f8ed51943", self.spawn.var_4db23b);
     }
   }
 }

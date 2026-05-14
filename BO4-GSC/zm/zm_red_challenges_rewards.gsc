@@ -370,7 +370,7 @@ set_tribute(n_amount) {
 
 function_56c888ce(a_str_rewards) {
   if(!a_str_rewards.size) {
-    return # "empty";
+    return #"empty";
   }
 
   n_max = a_str_rewards.size;

@@ -84,7 +84,7 @@ function function_acac764e() {
   }
 
   newindex = (index + 1) % 10;
-  self.pers[#"hash_76fbbcf94dab5536"] = newindex;
+  self.pers[#"recent_stat_index"] = newindex;
   self stats::set_stat(#"playerstatsbygametype", stats::function_8921af36(), #"prevscoreindex", newindex);
 }
 
@@ -253,7 +253,7 @@ function challenge_complete(eventstruct) {
 
       if(var_a05af556 === #"") {
         return;
-      } else if(getdvarint(#"hash_730fab929626f598", 0) == 0) {
+      } else if(getdvarint(#"ui_zmenablemasterycamos", 0) == 0) {
         if(var_a05af556 === #"camo_gold" || var_a05af556 === #"camo_diamond" || var_a05af556 === #"camo_darkmatter") {
           return;
         }
@@ -263,9 +263,9 @@ function challenge_complete(eventstruct) {
     tablename = #"gamedata/stats/mp/statsmilestones" + var_c4e9517b + ".csv";
   }
 
-  var_eb67c133 = tablelookupcolumnforrow(tablename, row, 5);
+  challengenamehash = tablelookupcolumnforrow(tablename, row, 5);
 
-  if(isDefined(var_eb67c133) && (var_eb67c133 == #"hash_5a619f94abe000b" || var_eb67c133 == #"hash_4a80d584aac2e7d0")) {
+  if(isDefined(challengenamehash) && (challengenamehash == #"hash_5a619f94abe000b" || challengenamehash == #"challenge/empty_string")) {
     return;
   }
 
@@ -293,15 +293,15 @@ function challenge_complete(eventstruct) {
   self luinotifyevent(#"challenge_complete", 7, challengeindex, itemindex, challengetype, tablenumber, row, maxval, rewardxp);
   self function_8ba40d2f(#"challenge_complete", 7, challengeindex, itemindex, challengetype, tablenumber, row, maxval, rewardxp);
   challengetier = int(tablelookupcolumnforrow(tablename, row, 1));
-  matchrecordlogchallengecomplete(self, var_c4e9517b, challengetier, itemindex, var_eb67c133);
-  var_c710a35a = level.var_faccd7d4[var_eb67c133];
+  matchrecordlogchallengecomplete(self, var_c4e9517b, challengetier, itemindex, challengenamehash);
+  var_c710a35a = level.var_faccd7d4[challengenamehash];
 
   if(isDefined(var_c710a35a)) {
     self[[var_c710a35a]](eventstruct);
   }
 
   if(getdvarint(#"debugchallenges", 0) != 0) {
-    challengestring = makelocalizedstring(var_eb67c133);
+    challengestring = makelocalizedstring(challengenamehash);
     tiertext = challengetier + 1;
     var_33b913f5 = "<dev string:x3c>";
 

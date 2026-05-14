@@ -609,14 +609,14 @@ function_144a052b(archetype) {
   switch (archetype) {
     case #"catalyst":
     case #"zombie":
-      return # "hash_664a130410d3fd9a";
+      return #"hash_664a130410d3fd9a";
     case #"tiger":
-      return # "hash_2607a6ffde83b4a7";
+      return #"hash_2607a6ffde83b4a7";
     case #"stoker":
     case #"gladiator":
-      return # "hash_3a067a5eb7a19857";
+      return #"hash_3a067a5eb7a19857";
     case #"blight_father":
-      return # "hash_280fa271c70412cd";
+      return #"hash_280fa271c70412cd";
   }
 }
 

@@ -90,7 +90,7 @@ get_winning_team(outcome) {
     return outcome.players[0].team;
   }
 
-  return # "free";
+  return #"free";
 }
 
 function_b5f4c9d8(outcome) {

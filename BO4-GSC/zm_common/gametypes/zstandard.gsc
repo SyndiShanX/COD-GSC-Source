@@ -1390,9 +1390,9 @@ function_75ebd926(e_player) {
     return true;
   } else if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(e_player.player_shield_reset_health) && isDefined(e_player.var_d3345483) && e_player.var_d3345483 || !e_player zm_crafting::function_2d53738e(self.blueprint.w_result) && (isDefined(self.blueprint.firstonefree) && self.blueprint.firstonefree && !e_player zm_crafting::function_48ce9379(self.blueprint.w_result) || isDefined(level.var_905507c3) && level.var_905507c3)) {
     if(function_8b1a219a()) {
-      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : # "hash_40987a3e6d86b097";
+      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : #"hash_40987a3e6d86b097";
     } else {
-      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : # "zombie/grab_shield_free";
+      self.hint_string = isDefined(self.blueprint.purchasepromptfree) ? self.blueprint.purchasepromptfree : #"zombie/grab_shield_free";
     }
 
     self.cost = undefined;

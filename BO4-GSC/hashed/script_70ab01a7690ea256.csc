@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_begin(localclientnum, a_params) {
-  level.var_4ecf5754 = isDefined(a_params[0]) ? a_params[0] : # "silent_film";
+  level.var_4ecf5754 = isDefined(a_params[0]) ? a_params[0] : #"silent_film";
 
   switch (level.var_4ecf5754) {
     case #"silent_film":

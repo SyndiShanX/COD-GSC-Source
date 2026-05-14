@@ -153,7 +153,7 @@ function function_33d5b9a6(var_26b2b1bb, eattacker, arc_source, arc_source_origi
     return false;
   }
 
-  if(!target damageconetrace(self.origin + (0, 0, 10), self) && is_true(eattacker.var_8ce60046)) {
+  if(!target damageconetrace(self.origin + (0, 0, 10), self) && is_true(eattacker.requires_line_of_sight)) {
     return false;
   }
 

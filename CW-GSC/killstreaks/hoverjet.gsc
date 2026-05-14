@@ -156,7 +156,7 @@ function function_f3dff78b() {
     radius = 500;
     v_pos = jet.origin;
     earthquake(magnitude, duration, org, 500);
-    jet playSound(#"hash_5314ffef2464b607");
+    jet playSound(#"exp_damage_ac130");
   }
 }
 

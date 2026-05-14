@@ -567,7 +567,7 @@ function function_b20199e0(var_57ade5da) {
   rand = randomint(100);
 
   if(rand <= 10) {
-    self namespace_65181344::function_fd87c780(#"special_ammo_drop", 1, 2);
+    self item_spawn_groups_util::function_fd87c780(#"special_ammo_drop", 1, 2);
   }
 
   if(var_57ade5da === #"hash_3ff43755c44e6d3d" || var_57ade5da === #"hash_4a900af3fc47cdd5" || var_57ade5da === #"hash_60d7855358ceb53d") {
@@ -577,7 +577,7 @@ function function_b20199e0(var_57ade5da) {
       dropstruct = {
         #origin: self.origin, #angles: self.angles + (0, 180, 0), #var_738dfc81: self.var_738dfc81
       };
-      a_items = dropstruct namespace_65181344::function_fd87c780(var_de297ab3, 20, 2);
+      a_items = dropstruct item_spawn_groups_util::function_fd87c780(var_de297ab3, 20, 2);
       return a_items;
     }
   }

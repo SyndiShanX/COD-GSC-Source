@@ -174,7 +174,7 @@ function private dom_start() {
 
       foreach(objective in objectives) {
         team = objective.team;
-        order = team == ownerteam ? # "defend" : # "capture";
+        order = team == ownerteam ? #"defend" : #"capture";
 
         if(objective.var_a1980fcb != order) {
           level remove_objective(objective);

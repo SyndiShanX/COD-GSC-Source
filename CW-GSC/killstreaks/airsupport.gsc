@@ -387,7 +387,7 @@ function gethelipath(start, goal) {
 }
 
 function function_a43d04ef(goalorigin) {
-  self endon(#"death", #"hash_41aaa8d75d168e0a");
+  self endon(#"death", #"stop_fallback_goal");
   distthresholdsq = 40000;
   wait 20;
 
@@ -404,7 +404,7 @@ function function_a43d04ef(goalorigin) {
 }
 
 function function_fabf8bc5(goalorigin) {
-  self endon(#"death", #"hash_41aaa8d75d168e0a");
+  self endon(#"death", #"stop_fallback_goal");
   distthresholdsq = 10000;
 
   if(isDefined(self.var_f766e12d)) {
@@ -506,7 +506,7 @@ function function_f1b7b432(path, donenotify, stopatgoal, var_135dc5d1, var_96e5d
     self notify(donenotify);
   }
 
-  self notify(#"hash_41aaa8d75d168e0a");
+  self notify(#"stop_fallback_goal");
   self notify(#"hash_78e76e8d9370e349");
 }
 

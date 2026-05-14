@@ -7,7 +7,7 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-#namespace namespace_3d0f1be7;
+#namespace wz_blast_door_light;
 
 autoexec __init__system__() {
   system::register(#"wz_blast_door_light", &__init__, undefined, undefined);

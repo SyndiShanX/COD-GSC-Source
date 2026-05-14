@@ -29,21 +29,21 @@ function private preinit() {
 }
 
 function private function_116fd9a7() {
-  item_world::function_861f348d(#"hash_9ed0c30684ca35a", &function_d045e83b);
+  item_world::function_861f348d(#"generic_ammo_pickup", &function_d045e83b);
   item_world::function_861f348d(#"hash_76a324a4d6073913", &function_2e5b5858);
   item_world::function_861f348d(#"hash_3bfb97e39d67e5f9", &function_cb9b4dd7);
-  item_world::function_861f348d(#"hash_788c59214ead02af", &function_14b2eddf);
+  item_world::function_861f348d(#"generic_attachment_pickup", &function_14b2eddf);
   item_world::function_861f348d(#"hash_6247ea34d3b1ddb6", &function_42ffe9b2);
-  item_world::function_861f348d(#"hash_2cbf15cbb314c93e", &function_2eebeff5);
+  item_world::function_861f348d(#"generic_equipment_pickup", &function_2eebeff5);
   item_world::function_861f348d(#"hash_51b30f6e7331e136", &function_349d4c26);
   item_world::function_861f348d(#"hash_2b4dff2e0db72d06", &function_670cce3f);
   item_world::function_861f348d(#"generic_pickup", &function_41a52251);
-  item_world::function_861f348d(#"hash_5c844f5c1207159c", &function_2b2e9302);
+  item_world::function_861f348d(#"generic_quest_pickup", &function_2b2e9302);
   item_world::function_861f348d(#"hash_57df81951e3bc37c", &function_7de52ecc);
   item_world::function_861f348d(#"hash_1f0d729dc6dd1202", &function_898628ef);
   item_world::function_861f348d(#"hash_31380667bf69d3a0", &function_a240798a);
   item_world::function_861f348d(#"hash_29f7ad396d214a52", &function_d46c2559);
-  item_world::function_861f348d(#"hash_50375e5de228e9fc", &function_a712496a);
+  item_world::function_861f348d(#"generic_weapon_pickup", &function_a712496a);
   item_world::function_861f348d(#"hash_ff2bc61e2c18f43", &function_80ef3ea5);
   item_world::function_861f348d(#"hash_4213c4725d9f115", &function_753fb11f);
   item_world::function_861f348d(#"hash_68c089ceb01f806b", &function_2650d5c6);
@@ -328,7 +328,7 @@ function private function_2650d5c6(item, player, networkid, itemid, itemcount, i
   inventoryitem = slotid.inventory.items[6];
 
   if(isDefined(inventoryitem)) {
-    var_2cacdde7 = isDefined(inventoryitem.itementry.var_a3aa1ca2) ? inventoryitem.itementry.var_a3aa1ca2 : 50;
+    var_2cacdde7 = isDefined(inventoryitem.itementry.shardrepair) ? inventoryitem.itementry.shardrepair : 50;
 
     if(isDefined(level.var_8cc294a7)) {
       var_2cacdde7 = [[level.var_8cc294a7]](var_2cacdde7);

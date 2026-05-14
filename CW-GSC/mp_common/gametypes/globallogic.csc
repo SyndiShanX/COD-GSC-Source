@@ -169,8 +169,8 @@ function play_plant_sound(param1, param2) {
 
 function updateenemyequipment(local_client_num, newval) {
   if(codcaster::function_b8fe9b52(newval)) {
-    var_7eda7144 = self codcaster::is_friendly(newval) ? # "friendly" : # "enemy";
-    robkey = self codcaster::is_friendly(newval) ? # "hash_2476e7ae62469f70" : # "hash_2476eaae6246a489";
+    var_7eda7144 = self codcaster::is_friendly(newval) ? #"friendly" : #"enemy";
+    robkey = self codcaster::is_friendly(newval) ? #"hash_2476e7ae62469f70" : #"hash_2476eaae6246a489";
     self renderoverridebundle::function_c8d97b8e(newval, var_7eda7144, robkey);
     return;
   }
@@ -193,7 +193,7 @@ function function_116b413e(local_client_num, newval) {
 function function_765b7c63(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!is_true(self.var_33b61b6f)) {
-      self.var_8e7f416f = self playLoopSound(#"hash_a93a3bf58dbd89d");
+      self.var_8e7f416f = self playLoopSound(#"fly_thermal_scope");
       self.var_33b61b6f = 1;
     }
   } else if(is_true(self.var_33b61b6f)) {

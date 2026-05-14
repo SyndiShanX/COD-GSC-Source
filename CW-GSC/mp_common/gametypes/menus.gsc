@@ -107,7 +107,7 @@ function on_menu_response(params) {
       }
 
       if(sessionmodeiswarzonegame()) {
-        level notify(#"hash_197c640e2f684a74");
+        level notify(#"force_end_transition");
         return;
       }
 
@@ -255,8 +255,8 @@ function function_2d1eb0ec(intpayload) {
     if(!var_2cf49821 && self function_7cadec11() && !self isinfreefall() && !self isparachuting() && !self inlaststand() && isalive(self)) {
       gesture = undefined;
 
-      if(isDefined(callout.var_17d07d2d) && var_f4cd8d56 == 1) {
-        gesture = self gestures::function_c77349d4(callout.var_17d07d2d);
+      if(isDefined(callout.gestablecalloutalt) && var_f4cd8d56 == 1) {
+        gesture = self gestures::function_c77349d4(callout.gestablecalloutalt);
       } else if(isDefined(callout.gestablecallout)) {
         gesture = self gestures::function_c77349d4(callout.gestablecallout);
       }

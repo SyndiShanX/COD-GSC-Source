@@ -134,7 +134,7 @@ function init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = #"hash_54b0f0ec952ddba8";
+  level.halftimesubcaption = #"mp/switching_sides_caps";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -1792,7 +1792,7 @@ function callback_startgametype() {
 
     gamestate::set_state(#"playing");
     setDvar(#"cg_thirdpersonangle", 354);
-    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"platform/press_to_spawn";
 
     if(level.teambased) {
       game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
@@ -1802,15 +1802,15 @@ function callback_startgametype() {
       game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"match_starting_in"] = #"mp/match_starting_in";
     game.strings[#"spawn_next_round"] = #"hash_5659065fae9d42fb";
     game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
-    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"waiting_to_spawn_ss"] = #"mp/waiting_to_spawn_ss";
+    game.strings[#"you_will_spawn"] = #"mp/you_will_respawn";
     game.strings[#"match_starting"] = #"mp/match_starting";
-    game.strings[#"item_on_respawn"] = #"hash_220160808c99fe71";
+    game.strings[#"item_on_respawn"] = #"mp/item_on_respawn";
     game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
-    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"last_stand"] = #"mpui/last_stand";
     game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
     game.strings[#"tie"] = #"mp/match_tie";
     game.strings[#"round_draw"] = #"mp/round_draw";

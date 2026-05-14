@@ -1721,7 +1721,7 @@ function_8e0b371() {
 
   while(true) {
     str_location = get_location_string(self);
-    str_location = isDefined(str_location) ? str_location : # "";
+    str_location = isDefined(str_location) ? str_location : #"";
 
     if(isalive(self) && !(isDefined(self.var_16735873) && self.var_16735873)) {
       self zm_hud::function_29780fb5(str_location);
@@ -1738,7 +1738,7 @@ get_location_string(e_player) {
 
   if(!isDefined(str_zone)) {
     if(e_player.var_16735873 !== 1 && level flag::get(#"hash_280d10a2ac060edb")) {
-      return # "hash_51b7577e1fe8e0da";
+      return #"hash_51b7577e1fe8e0da";
     }
 
     return undefined;

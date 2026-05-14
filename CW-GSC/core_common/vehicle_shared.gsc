@@ -3424,7 +3424,7 @@ function function_93844822(e_player, b_skip_scene, b_enter = 1) {
 
   if(!b_skip_scene) {
     if(b_enter) {
-      debug_scene = getdvarstring(#"hash_56b164d8150f9e8d", "");
+      debug_scene = getdvarstring(#"debug_vehiclescene", "");
 
       if(debug_scene != "") {
         str_scene = debug_scene;
@@ -3454,7 +3454,7 @@ function function_93844822(e_player, b_skip_scene, b_enter = 1) {
         str_shot = var_664b49b8 + var_40a72df6;
       }
     } else {
-      debug_scene = getdvarstring(#"hash_56b164d8150f9e8d", "");
+      debug_scene = getdvarstring(#"debug_vehiclescene", "");
 
       if(debug_scene != "") {
         str_scene = debug_scene;
@@ -4132,7 +4132,7 @@ function function_1bb979ca(n_cooldown_time, e_player, var_a18a512) {
 function function_78cfd053() {
   self endon(#"death");
   var_c56865cf = self.healthdefault;
-  var_c96543ab = self.var_7812fce8;
+  var_c96543ab = self.healthpools;
   var_70fdf0cb = self.healthpoolsize;
   var_8ac0fa8 = [];
 

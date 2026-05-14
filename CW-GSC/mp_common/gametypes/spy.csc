@@ -67,11 +67,11 @@ function event_handler[gametype_init] main(eventstruct) {
 
 function function_f2d68e02(event_type) {
   if(event_type == 0) {
-    return # "hash_5f78d5e3552127e2";
+    return #"hash_5f78d5e3552127e2";
   }
 
   if(event_type == 1) {
-    return # "hash_3c0503b74cf2909a";
+    return #"hash_3c0503b74cf2909a";
   }
 
   return level.ping.types[event_type].objective;
@@ -260,11 +260,11 @@ function function_5051595f(local_client_num, client_num) {
 function function_30f7f6f8(var_d27e5654) {
   switch (var_d27e5654) {
     case 1:
-      return # "hash_6ba53a7edd3e9e8f";
+      return #"hash_6ba53a7edd3e9e8f";
     case 2:
-      return # "hash_30aa21feb2c3d1b1";
+      return #"hash_30aa21feb2c3d1b1";
     case 3:
-      return # "hash_6faacb106ef0ae85";
+      return #"hash_6faacb106ef0ae85";
     default:
       return undefined;
   }

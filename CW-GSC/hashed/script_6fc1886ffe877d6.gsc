@@ -295,7 +295,7 @@ function vehicle_emp(params) {
 
   if(is_true(self.var_52e23e90)) {
     self vehicle::function_7f0bbde3();
-    self playSound(#"hash_d6643b88d0186ae");
+    self playSound(#"veh_dmg_emp");
   }
 
   self.var_52e23e90 = undefined;
@@ -505,7 +505,7 @@ function function_1387144c() {
       dropstruct = {
         #origin: var_e58f5a09.origin, #angles: var_e58f5a09.angles, #var_738dfc81: 1
       };
-      dropstruct namespace_65181344::function_fd87c780(#"zm_food_pizza_burger_list", 1, 1);
+      dropstruct item_spawn_groups_util::function_fd87c780(#"zm_food_pizza_burger_list", 1, 1);
     }
   }
 }

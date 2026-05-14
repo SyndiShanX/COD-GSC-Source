@@ -216,7 +216,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
             if(var_1cfdf798) {
               attacker thread challenges::killedbasedefender(trigger);
               level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-                #player: idamage, #var_bdc4bbd2: # "defending"});
+                #player: idamage, #var_bdc4bbd2: #"defending"});
             }
 
             if(!scoreeventprocessed) {
@@ -255,11 +255,11 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
               attacker.defends = attacker.pers[#"defends"];
               attacker recordgameevent("return");
               level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-                #player: attacker, #eventtype: # "return"});
+                #player: attacker, #eventtype: #"return"});
               attacker thread challenges::killedbaseoffender(trigger, weapon, victim);
               attacker challenges::killedzoneattacker(weapon);
               level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-                #player: idamage, #var_bdc4bbd2: # "assaulting"});
+                #player: idamage, #var_bdc4bbd2: #"assaulting"});
             }
 
             if(!scoreeventprocessed) {
@@ -473,9 +473,9 @@ function function_1609a882(var_c1e98979) {
       averagetime = var_9669dd4c / domflag.var_249009fd.size;
     }
 
-    var_93746b40 = {
-      #gametime: function_f8d53445(), #round: game.roundsplayed, #label: domflag gameobjects::get_label(), #var_afd986ce: isDefined(averagetime) ? averagetime : 0
+    flagcapturedata = {
+      #gametime: function_f8d53445(), #round: game.roundsplayed, #label: domflag gameobjects::get_label(), #averagetimeheld: isDefined(averagetime) ? averagetime : 0
     };
-    function_92d1707f(#"hash_4b747d11b8ad1b23", var_93746b40);
+    function_92d1707f(#"hash_4b747d11b8ad1b23", flagcapturedata);
   }
 }

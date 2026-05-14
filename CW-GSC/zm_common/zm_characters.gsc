@@ -245,7 +245,7 @@ function function_d35e4c92(characterindex, var_fdf0f13d = 0) {
       fields = getplayerrolefields(characterindex, currentsessionmode());
 
       if(isDefined(fields)) {
-        return fields.var_2a42c5e0;
+        return fields.globalcharacterindex;
       }
     }
   } else if(isDefined(self) && isPlayer(self)) {
@@ -255,7 +255,7 @@ function function_d35e4c92(characterindex, var_fdf0f13d = 0) {
       fields = getplayerrolefields(player_role::get(), currentsessionmode());
 
       if(isDefined(fields)) {
-        return fields.var_2a42c5e0;
+        return fields.globalcharacterindex;
       }
     }
   }

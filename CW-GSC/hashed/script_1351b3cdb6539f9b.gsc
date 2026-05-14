@@ -1160,7 +1160,7 @@ function function_feb24b1d() {
   }
 
   struct = {
-    #name: # "hash_3ccd60d85ae08cb5", #value: getDvar(#"hash_3ccd60d85ae08cb5")
+    #name: #"hash_3ccd60d85ae08cb5", #value: getDvar(#"hash_3ccd60d85ae08cb5")
   };
   function_83641a8a(struct);
   function_cd140ee9("<dev string:xe7>", &function_83641a8a);
@@ -1384,7 +1384,7 @@ function function_d20966e6() {
   }
 
   struct = {
-    #name: # "hash_127da39afb1a835c", #value: getDvar(#"hash_127da39afb1a835c")
+    #name: #"hash_127da39afb1a835c", #value: getDvar(#"hash_127da39afb1a835c")
   };
   function_df5f0267(struct);
   function_cd140ee9("<dev string:x1114>", &function_df5f0267);
@@ -1411,7 +1411,7 @@ function function_ad51e9d4() {
   if(isDefined(getDvar(#"hash_74ce220f2ffe031d")) && getDvar(#"hash_74ce220f2ffe031d") == 2) {
     level.var_5d170909 = 1;
     struct = {
-      #name: # "hash_74ce220f2ffe031d", #value: getDvar(#"hash_74ce220f2ffe031d")
+      #name: #"hash_74ce220f2ffe031d", #value: getDvar(#"hash_74ce220f2ffe031d")
     };
     function_7826a351(struct);
   }

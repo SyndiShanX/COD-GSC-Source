@@ -36,7 +36,7 @@ function init() {
   function_447e6858();
   level.var_b0dc03c7 = &function_395f82d0;
   level.var_19a15e42 = &function_daabc818;
-  callback::callback(#"hash_45f35669076bc317");
+  callback::callback(#"on_init_killstreaks");
   function_f1707039();
   level thread function_d3106952();
   function_1f7e617a();

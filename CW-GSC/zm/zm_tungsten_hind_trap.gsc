@@ -658,7 +658,7 @@ function function_8004c21d(s_params) {
 
   if(attacker === level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.var_f49a9bc1 && isDefined(level.var_6f8aa603)) {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
-      #attacker: level.var_6f8aa603, #scoreevent: # "hash_748d4479ffd0521e", #enemy: self
+      #attacker: level.var_6f8aa603, #scoreevent: #"hash_748d4479ffd0521e", #enemy: self
     });
   }
 }

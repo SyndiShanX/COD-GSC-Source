@@ -39,7 +39,7 @@ function private preinit() {
   forcestreamxmodel(#"p8_zm_wall_buy_symbol_01");
   forcestreamxmodel(#"p8_zm_wall_buy_symbol_01_middle");
   forcestreamxmodel(#"p8_zm_wall_buy_symbol_01_reverse");
-  forcestreamxmodel(#"hash_38b107b1b645837d");
+  forcestreamxmodel(#"p8_zm_wall_buy_symbol_01_loop");
 }
 
 function private on_begin(local_client_num, params) {}

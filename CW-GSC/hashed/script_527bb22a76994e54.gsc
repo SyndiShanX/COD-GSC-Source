@@ -167,7 +167,7 @@ function function_a69227f8(var_f587343a) {
   }
 
   var_96b6affa = {
-    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_6c7bb285599937ba", #complete_callback: &function_12259d55, #var_be77841a: 0, #var_531201f1: &function_efa71f22
+    #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_6c7bb285599937ba", #complete_callback: &function_12259d55, #var_be77841a: 0, #var_531201f1: &function_efa71f22
   };
 
   foreach(trigger in var_f587343a.a_triggers) {

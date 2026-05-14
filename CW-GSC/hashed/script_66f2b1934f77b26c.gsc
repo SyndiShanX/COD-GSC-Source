@@ -1259,7 +1259,7 @@ function function_c64d2826(e_player) {
   e_player switchtoweapon(level.var_e4731251, 1);
   e_player waittill(#"weapon_change_complete");
   callback::on_weapon_change(&function_2c951177);
-  callback::function_33f0ddd3(&function_2056cd79);
+  callback::on_player_loadout_changed(&function_2056cd79);
   e_player thread function_8ee22ffd();
   e_player val::reset(#"carry_head", "disable_weapon_cycling");
   e_player thread zm_equipment::show_hint_text(#"hash_b6c7be4cc64df9c", 10);

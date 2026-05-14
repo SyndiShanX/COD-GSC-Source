@@ -701,10 +701,10 @@ function give_capture_credit(touchlist, string, capturetime, capture_team, lastc
       scoreevents::processscoreevent(#"koth_secure", player, undefined, undefined);
       player recordgameevent("capture");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "capture"});
+        #player: player, #eventtype: #"capture"});
       player recordgameevent("hardpoint_captured");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player, #eventtype: # "hardpoint_captured"});
+        #player: player, #eventtype: #"hardpoint_captured"});
       battlechatter::function_924699f4(player, self);
 
       if(level.var_bc5a3eed !== 1) {
@@ -742,7 +742,7 @@ function function_32b7bf67() {
   self.iscontested = 0;
   self recordgameeventnonplayer("hardpoint_empty");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #eventtype: # "capture"});
+    #eventtype: #"capture"});
   resume_time();
   self.mustmaintainclaim = 0;
 }
@@ -753,7 +753,7 @@ function function_e4bd126f() {
   self.iscontested = 1;
   self recordgameeventnonplayer("hardpoint_contested");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #eventtype: # "hardpoint_contested"});
+    #eventtype: #"hardpoint_contested"});
   resume_time();
   util::function_a3f7de13(8, #"none");
 
@@ -776,7 +776,7 @@ function function_2a6caaff(lastclaimteam) {
   self recordgameeventnonplayer("hardpoint_uncontested");
   level notify(#"hardpoint_uncontested");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #eventtype: # "hardpoint_uncontested"});
+    #eventtype: #"hardpoint_uncontested"});
 }
 
 function function_4a415293(time) {
@@ -829,7 +829,7 @@ function function_4a415293(time) {
   }
 
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-    #eventtype: # "hardpoint_moved"});
+    #eventtype: #"hardpoint_moved"});
   playsoundatposition(#"mpl_hardpoint_move", (0, 0, 0));
 
   foreach(zone in level.active_zones) {
@@ -1348,7 +1348,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
           attacker function_5493affc(idamage, weapon, zone);
           var_47f09325 = 1;
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-            #player: idamage, #var_bdc4bbd2: # "defending"});
+            #player: idamage, #var_bdc4bbd2: #"defending"});
         }
 
         scoreeventprocessed = 1;
@@ -1364,7 +1364,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
             attacker thread challenges::killedbasedefender(zone.trig);
             attacker recordgameevent("defending");
             level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-              #player: attacker, #eventtype: # "defending"});
+              #player: attacker, #eventtype: #"defending"});
           }
 
           attacker challenges::function_2f462ffd(idamage, weapon, victim, zone.gameobject);
@@ -1388,7 +1388,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
         scoreeventprocessed = 1;
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: idamage, #var_bdc4bbd2: # "assaulting"});
+          #player: idamage, #var_bdc4bbd2: #"assaulting"});
       }
     }
   }
@@ -1431,7 +1431,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
             attacker thread challenges::killedbasedefender(zone.trig);
             attacker recordgameevent("defending");
             level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-              #player: attacker, #eventtype: # "defending"});
+              #player: attacker, #eventtype: #"defending"});
           }
 
           medalgiven = 1;
@@ -1447,7 +1447,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
             var_47f09325 = 1;
             level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-              #player: idamage, #var_bdc4bbd2: # "assaulting"});
+              #player: idamage, #var_bdc4bbd2: #"assaulting"});
           }
 
           attacker challenges::function_2f462ffd(idamage, weapon, victim, zone.gameobject);
@@ -1471,7 +1471,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
             var_47f09325 = 1;
             level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-              #player: idamage, #var_bdc4bbd2: # "defending"});
+              #player: idamage, #var_bdc4bbd2: #"defending"});
           }
 
           attacker challenges::function_2f462ffd(idamage, weapon, victim, zone.gameobject);

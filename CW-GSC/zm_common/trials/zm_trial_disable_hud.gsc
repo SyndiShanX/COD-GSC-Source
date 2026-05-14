@@ -26,7 +26,7 @@ function private on_begin() {
 }
 
 function function_afe4a356() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   wait 12;
   level.var_dc60105c = 1;
   level clientfield::set_world_uimodel("ZMHudGlobal.trials.hudDeactivated", 1);

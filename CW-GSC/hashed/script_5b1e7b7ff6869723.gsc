@@ -253,7 +253,7 @@ function private function_a1ce8017(var_85c920d0) {
       dropstruct = {
         #origin: var_85c920d0 gettagorigin("j_spineupper"), #angles: var_85c920d0.angles, #var_738dfc81: 3
       };
-      dropstruct thread namespace_65181344::function_fd87c780(var_ec6368f9, 3, 2);
+      dropstruct thread item_spawn_groups_util::function_fd87c780(var_ec6368f9, 3, 2);
       a_players = function_a1ef346b(undefined, dropstruct.origin, 2000);
 
       foreach(player in a_players) {

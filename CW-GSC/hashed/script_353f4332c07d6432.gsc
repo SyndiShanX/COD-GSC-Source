@@ -1309,7 +1309,7 @@ function function_23cef26a(var_a276c861, var_19e802fa) {
   dropstruct = {
     #origin: s_struct.origin, #angles: s_struct.angles, #var_738dfc81: n_count
   };
-  a_items = dropstruct namespace_65181344::function_fd87c780(#"hash_57d0cc12ced6ab79", n_count, var_98d110e6);
+  a_items = dropstruct item_spawn_groups_util::function_fd87c780(#"hash_57d0cc12ced6ab79", n_count, var_98d110e6);
 
   if(level.var_d3450438 < 3) {
     level thread function_aa9d9702();

@@ -385,7 +385,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
 
   if(zombie.archetype === #"zombie") {
     if(mod == "MOD_MELEE") {
-      return # "melee";
+      return #"melee";
     } else if(isDefined(zombie.missinglegs) && zombie.missinglegs) {
       return "crawler";
     }
@@ -449,19 +449,19 @@ function_350fc8cc(weapon, zombie, mod, player) {
           if(mod == "MOD_RIFLE_BULLET" && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return # "novox";
+            return #"novox";
           }
 
           break;
         case #"scepter":
           if(!(isDefined(zombie.var_4857363e) && zombie.var_4857363e)) {
-            return # "novox";
+            return #"novox";
           }
 
           break;
         case #"flamethrower":
           if(mod == "MOD_IMPACT") {
-            return # "novox";
+            return #"novox";
           } else if(mod == "MOD_BURNED" && !(isDefined(zombie.var_d9e7a08a) && zombie.var_d9e7a08a) && player function_6049efce(str_weapon)) {
             return str_weapon;
           }
@@ -469,7 +469,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
           break;
         case #"gravityspikes":
           if(!(isDefined(zombie.var_46d39f48) && zombie.var_46d39f48)) {
-            return # "novox";
+            return #"novox";
           }
 
           break;
@@ -477,7 +477,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
           if(mod == "MOD_MELEE" && !player flagsys::get("katana_dash") && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return # "novox";
+            return #"novox";
           }
 
           break;
@@ -486,7 +486,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
             if(player function_6049efce(str_weapon)) {
               return str_weapon;
             } else {
-              return # "novox";
+              return #"novox";
             }
           }
 
@@ -504,10 +504,10 @@ function_350fc8cc(weapon, zombie, mod, player) {
           if(player function_6049efce(str_weapon, 3, 0.75)) {
             str_weapon = #"chakram_multi";
           } else {
-            return # "novox";
+            return #"novox";
           }
         } else {
-          return # "novox";
+          return #"novox";
         }
       }
 
@@ -516,10 +516,10 @@ function_350fc8cc(weapon, zombie, mod, player) {
           if(player function_6049efce(str_weapon)) {
             str_weapon = #"sword";
           } else {
-            return # "novox";
+            return #"novox";
           }
         } else if(mod == "MOD_UNKNOWN" || mod == "MOD_PROJECTILE" || isDefined(zombie.var_8c8102a5) && zombie.var_8c8102a5) {
-          return # "novox";
+          return #"novox";
         } else if(player function_6049efce(str_weapon)) {
           str_weapon = #"pistol";
         }
@@ -658,35 +658,35 @@ function_fa4dfde0(w_weapon) {
     case #"hero_scepter_lv3":
     case #"hero_scepter_lv2":
     case #"hero_scepter_lv1":
-      return # "scepter";
+      return #"scepter";
     case #"hero_hammer_lv3":
     case #"hero_hammer_lv2":
     case #"hero_hammer_lv1":
-      return # "hammer";
+      return #"hammer";
     case #"hero_chakram_lv2":
     case #"hero_chakram_lv3":
     case #"hero_chakram_lv1":
-      return # "chakram";
+      return #"chakram";
     case #"hero_sword_pistol_lv2":
     case #"hero_sword_pistol_lv3":
     case #"hero_sword_pistol_lv1":
-      return # "sword_pistol";
+      return #"sword_pistol";
     case #"hero_flamethrower_t8_lv1":
     case #"hero_flamethrower_t8_lv2":
     case #"hero_flamethrower_t8_lv3":
-      return # "flamethrower";
+      return #"flamethrower";
     case #"hero_minigun_t8_lv1":
     case #"hero_minigun_t8_lv3":
     case #"hero_minigun_t8_lv2":
-      return # "minigun";
+      return #"minigun";
     case #"hero_katana_t8_lv1":
     case #"hero_katana_t8_lv2":
     case #"hero_katana_t8_lv3":
-      return # "katana";
+      return #"katana";
     case #"hero_gravityspikes_t8_lv3":
     case #"hero_gravityspikes_t8_lv2":
     case #"hero_gravityspikes_t8_lv1":
-      return # "gravityspikes";
+      return #"gravityspikes";
   }
 }
 

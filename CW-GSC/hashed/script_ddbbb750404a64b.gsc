@@ -8,10 +8,10 @@
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
-#namespace namespace_287e05a2;
+#namespace zm_trial_round_ending_zone;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_73d9e3978f860555", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_trial_round_ending_zone", &preinit, undefined, undefined, undefined);
 }
 
 function preinit() {
@@ -68,7 +68,7 @@ function private on_end(round_reset) {
 
 function private function_c465c67f() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.b_in_zone = 0;
   self zm_trial_util::function_63060af4(0);
 

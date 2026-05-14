@@ -62,7 +62,7 @@ function private on_begin(weapon_name, var_eaa7f0ba, var_957937ee, var_9c56c5a9,
         }
       }
     }
-  } else if(weapon_name == #"hash_74285cd06483f6da") {
+  } else if(weapon_name == #"re_upgraded_weapon") {
     assert(isDefined(level.zombie_weapons_upgraded));
     level.var_ab9d0ec6 = [];
 
@@ -245,7 +245,7 @@ function setup_objective(str_weapon, s_challenge) {
 
 function private monitor_objective(s_challenge, a_weapons) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   foreach(n_objective_id in s_challenge.a_n_objective_ids) {
     objective_setinvisibletoplayer(n_objective_id, self);
@@ -270,7 +270,7 @@ function private monitor_objective(s_challenge, a_weapons) {
 }
 
 function private function_fa5e5e08() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   var_629c4c4a = 0;
   zm_trial_util::function_7d32b7d0(0);
 
@@ -349,7 +349,7 @@ function private function_46feb36d() {
 
 function private function_e73fbbf7() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_4ced1fcf = 0;
   var_fa5d7ea0 = 0;
 

@@ -256,7 +256,7 @@ function function_daaba5b0(insertion, var_3e6673cb, var_cf46aa72) {
   fadeintime = level.var_b28c6a29;
   insertion thread function_1b105d5b(insertion, fadeouttime, blacktime, fadeintime, 1);
   wait fadeouttime + 0.1;
-  level callback::add_callback(#"hash_774be40ec06d5212", &function_bcde1e07, insertion);
+  level callback::add_callback(#"player_insertion_force_drop", &function_bcde1e07, insertion);
   insertion thread globallogic_audio::function_85818e24("matchstart");
   insertion thread function_a4deb676();
   insertion flag::set(#"hash_122f326d72f4c884");
@@ -293,7 +293,7 @@ function function_35742117(insertion) {
   insertion flag::set(#"hash_122f326d72f4c884");
   function_dd34168c(insertion, #"hash_60fcdd11812a0134");
   function_dd34168c(insertion, #"insertion_teleport_completed");
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
@@ -303,7 +303,7 @@ function function_35742117(insertion) {
 
     player setorigin(player.resurrect_origin);
     player setplayerangles(player.resurrect_angles);
-    level callback::callback(#"hash_74b19f5972b0ee52", {
+    level callback::callback(#"player_insertion_drop", {
       #player: player
     });
   }
@@ -432,7 +432,7 @@ function function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
     function_a5fd9aa8(startorigin);
 
     foreach(player in startorigin.players) {
-      player function_bc82f900(#"hash_233b436a07cd091a");
+      player function_bc82f900(#"infiltration_camera_rumble");
     }
 
     wait 0.2;
@@ -450,7 +450,7 @@ function function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
         continue;
       }
 
-      player function_bc82f900(#"hash_62ba49f452a20378");
+      player function_bc82f900(#"infiltration_rumble_lg");
     }
 
     wait 2;
@@ -922,7 +922,7 @@ function function_d9dfa25() {
 
   a_formations[a_formations.size] = s_formation;
 
-  index = getdvarint(#"hash_5293cadde39a7ceb", -1);
+  index = getdvarint(#"dev_formation_index", -1);
 
   if(index > -1) {
     if(isDefined(a_formations[index])) {
@@ -1012,7 +1012,7 @@ function function_700e474f(startorigin, endorigin, var_872f085f, goal, index) {
   offset = (dist / 2, math::sign(goal) * 1000, -1000);
   var_9fa20618 = firstgoal + rotatepoint(offset, var_872f085f);
 
-  if(getdvarint(#"hash_5bbd3d044e1ec1b8", 0)) {
+  if(getdvarint(#"dev_draw_goals", 0)) {
     self thread function_84898b3f(firstgoal, var_9fa20618, endorigin, index);
   }
 
@@ -1048,7 +1048,7 @@ function function_71da60d1() {
 function function_84898b3f(firstgoal, var_9fa20618, endorigin, index) {
   self endon(#"death");
 
-  while(getdvarint(#"hash_5bbd3d044e1ec1b8", 0)) {
+  while(getdvarint(#"dev_draw_goals", 0)) {
     color = index < 0 ? (0, 0, 1) : (1, 0, 0);
     sphere(firstgoal, 700, color);
     sphere(var_9fa20618, 700, color);
@@ -1138,7 +1138,7 @@ function private function_afdad0c8(insertion, plane, startpoint, endpoint, var_6
 
   debug_sphere(plane.origin, 75, (0, 1, 1));
 
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
@@ -1266,7 +1266,7 @@ function function_b80277f7() {
 function function_1c06c249(plane) {
   if(isPlayer(self) && isDefined(plane)) {
     self match_record::function_ded5f5b6(#"hash_1657e02fb5073e4a", plane.origin);
-    self match_record::set_player_stat(#"hash_16618233fdac5c29", gettime());
+    self match_record::set_player_stat(#"deployment_jump_time", gettime());
     self match_record::set_player_stat(#"hash_63b95d780b2bd355", self flag::get(#"hash_224cb97b8f682317"));
   }
 }
@@ -1361,9 +1361,9 @@ function function_5b3ac9f2(aircraft) {
   }
 
   self hide_postfx();
-  self stoprumble(#"hash_233b436a07cd091a");
+  self stoprumble(#"infiltration_camera_rumble");
   self val::reset(#"player_insertion", "show_weapon_hud");
-  level callback::callback(#"hash_74b19f5972b0ee52", {
+  level callback::callback(#"player_insertion_drop", {
     #player: self
   });
 }
@@ -1396,7 +1396,7 @@ function function_598b7862(aircraft) {
     }
   }
 
-  self playsoundtoplayer(#"hash_214da797e3f63ec5", self);
+  self playsoundtoplayer(#"evt_deploy_plr", self);
   self.var_df1a9210 animation::play(anim, aircraft, "tag_player_spawn");
   self unlink();
   self setorigin(self.var_df1a9210.origin - (0, 0, 215));
@@ -1425,7 +1425,7 @@ function start_freefall(velocity, height) {
   self function_8a945c0e(0);
   self callback::function_d8abfc3d(#"freefall", &function_3b9bcf85);
   self player_free_fall::function_7705a7fc(0, height);
-  self playsoundtoplayer(#"hash_214da797e3f63ec5", self);
+  self playsoundtoplayer(#"evt_deploy_plr", self);
   self.var_97b0977 = 1;
   self hud_message::clearlowermessage();
   self val::set(#"player_insertion", "disable_oob", 0);
@@ -1436,8 +1436,8 @@ function start_freefall(velocity, height) {
 function function_4630bf0a() {
   if(isPlayer(self)) {
     self match_record::function_ded5f5b6(#"hash_7d9d379ecba10793", self.origin);
-    self match_record::set_player_stat(#"hash_1469faf3180d8b7a", gettime());
-    self.var_37ef8626 = gettime();
+    self match_record::set_player_stat(#"deployment_land_time", gettime());
+    self.deployment_land_time = gettime();
   }
 }
 
@@ -1582,7 +1582,7 @@ function private function_943c98fb(insertion) {
 
   while(true) {
     waitframe(1);
-    string = getdvarstring(#"hash_683dafe2da41b42e", "<dev string:x24e>");
+    string = getdvarstring(#"insertion_devgui_cmd", "<dev string:x24e>");
     start_insertion = 0;
 
     switch (string) {
@@ -1599,7 +1599,7 @@ function private function_943c98fb(insertion) {
       level function_8dcd8623();
     }
 
-    setDvar(#"hash_683dafe2da41b42e", "<dev string:x24e>");
+    setDvar(#"insertion_devgui_cmd", "<dev string:x24e>");
 
     if(getdvarint(#"hash_5566ccc7de522a4a", 0)) {
       setDvar(#"hash_5566ccc7de522a4a", 0);

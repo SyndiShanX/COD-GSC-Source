@@ -112,7 +112,7 @@ function function_d1852e75(n_aat_index) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function get_string(n_aat_index) {

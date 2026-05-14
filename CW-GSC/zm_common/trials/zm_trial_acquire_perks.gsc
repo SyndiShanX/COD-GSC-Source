@@ -74,7 +74,7 @@ function private function_c9934172() {
 
 function private function_2a5b280f(challenge) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   self.var_a53b9221 = 0;
   var_fa5d7ea0 = 0;
   self zm_trial_util::function_63060af4(0);

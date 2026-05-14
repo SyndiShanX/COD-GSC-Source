@@ -27,7 +27,7 @@ function private preinit() {
 
 function private on_begin() {
   callback::on_weapon_fired(&on_weapon_fired);
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
 
   foreach(player in getplayers()) {
@@ -40,7 +40,7 @@ function private on_begin() {
 
 function private on_end(round_reset) {
   callback::remove_on_weapon_fired(&on_weapon_fired);
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
 
   foreach(player in getplayers()) {
@@ -51,7 +51,7 @@ function private on_end(round_reset) {
   level zm_trial::function_25ee130(0);
 }
 
-function private function_33f0ddd3(s_event) {
+function private on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     if(zm_loadout::is_melee_weapon(s_event.weapon) || zm_loadout::is_lethal_grenade(s_event.weapon) || zm_loadout::is_tactical_grenade(s_event.weapon, 1)) {
       self lockweapon(s_event.weapon, 1, 1);
@@ -94,7 +94,7 @@ function private function_29ee24dd(weapon) {
 
   if(n_stock_ammo > 0) {
     while(true) {
-      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
+      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"give_full_ammo", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
       w_current = self getcurrentweapon();
 
       if(s_waitresult._notify == "reload" && weapon != w_current) {

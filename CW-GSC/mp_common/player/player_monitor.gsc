@@ -91,7 +91,7 @@ function private function_43e771ee(died = 0) {
 
     if(self.var_3dc66299.shots > 0 || timeused >= 2000) {
       longesthitdist = 0;
-      currentlifeindex = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
+      currentlifeindex = self match_record::get_player_stat(#"current_life_index");
 
       if(isDefined(currentlifeindex)) {
         longesthitdist = self match_record::get_stat(#"lives", currentlifeindex, "longest_hit_distance");

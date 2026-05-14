@@ -231,11 +231,11 @@ function_a26057ee() {
 
 function_de2b637d(winner) {
   if(!isDefined(winner)) {
-    return # "none";
+    return #"none";
   }
 
   if(isentity(winner)) {
-    return (isDefined(winner.team) ? winner.team : # "none");
+    return (isDefined(winner.team) ? winner.team : #"none");
   }
 
   return winner;

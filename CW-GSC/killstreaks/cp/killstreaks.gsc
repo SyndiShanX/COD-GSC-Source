@@ -23,7 +23,7 @@ function init() {
   thread debug_ricochet_protection();
 
   function_447e6858();
-  callback::callback(#"hash_45f35669076bc317");
+  callback::callback(#"on_init_killstreaks");
   killstreakrules::init();
 
   level.killstreak_init_end_time = getmillisecondsraw();

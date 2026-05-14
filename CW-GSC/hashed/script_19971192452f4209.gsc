@@ -2651,15 +2651,15 @@ function function_58eff8e() {
   level flag::wait_till("level_is_go");
   var_e6a5b638 = [];
   var_e6a5b638[#"hint_1"] = {
-    #title: # "hash_6999ee32eef23c98", #desc: # "hash_3b2cc0edd97965df"};
+    #title: #"hash_6999ee32eef23c98", #desc: #"hash_3b2cc0edd97965df"};
   var_e6a5b638[#"hint_2"] = {
-    #title: # "hash_1f5edbea689845f5", #desc: # "hash_6022086c49a7af24"};
+    #title: #"hash_1f5edbea689845f5", #desc: #"hash_6022086c49a7af24"};
   var_e6a5b638[#"hint_3"] = {
-    #title: # "hash_662a51ae3cdc2d66", #desc: # "hash_72cbbdedfa805101"};
+    #title: #"hash_662a51ae3cdc2d66", #desc: #"hash_72cbbdedfa805101"};
   var_e6a5b638[#"hint_list"] = {
-    #title: # "hash_308fd3e60f92b51f", #desc: # "hash_618b20752e4790a2"};
+    #title: #"hash_308fd3e60f92b51f", #desc: #"hash_618b20752e4790a2"};
   var_e6a5b638[#"park_paper"] = {
-    #desc: # "hash_2a6bf1525f1590cd"};
+    #desc: #"hash_2a6bf1525f1590cd"};
   level.var_31c52203 = getEntArray("translate_trig", "targetname");
 
   for(i = 0; i < level.var_31c52203.size; i++) {

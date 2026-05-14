@@ -2019,7 +2019,7 @@ function function_1283ff24(player) {
 
   if(isDefined(self.objectiveid)) {
     objective_setgamemodeflags(self.objectiveid, 1);
-    objective_setteam(self.objectiveid, isDefined(player.team) ? player.team : # "hash_34db99d80fb3607f");
+    objective_setteam(self.objectiveid, isDefined(player.team) ? player.team : #"hash_34db99d80fb3607f");
     objective_setprogress(self.objectiveid, 0);
   }
 

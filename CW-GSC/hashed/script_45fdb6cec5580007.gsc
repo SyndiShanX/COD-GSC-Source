@@ -47,7 +47,7 @@ function function_43a7bead() {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_59396fe8(squad) {
@@ -71,7 +71,7 @@ function function_fc04a299(party) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_c98289a5(team) {
@@ -87,7 +87,7 @@ function function_c98289a5(team) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_faeb0876() {
@@ -125,7 +125,7 @@ function function_a65e2082(squad) {
   available_spots = function_46edfa55(var_74578e76);
   party = self getparty();
 
-  if(party.var_a15e4438 > available_spots) {
+  if(party.party_member_count > available_spots) {
     return false;
   }
 
@@ -139,7 +139,7 @@ function function_4f237b02() {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_33843308(status) {
@@ -157,7 +157,7 @@ function function_33843308(status) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_b0c92599(party) {
@@ -219,7 +219,7 @@ function function_c70b26ea(squad = self function_4c9d66b1()) {
       squad = #"none";
       party = self getparty();
 
-      if(isDefined(party) && party.var_a15e4438 > 1) {
+      if(isDefined(party) && party.party_member_count > 1) {
         squad = function_fc04a299(party);
 
         if(squad == #"none") {

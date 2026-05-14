@@ -38,8 +38,8 @@ function function_ea3ce28b(killstreaktype) {
     return 0;
   }
 
-  self callback::function_d8abfc3d(#"hash_247d67dbf83dbc1a", &function_903cf6aa);
-  self callback::function_d8abfc3d(#"hash_72a7670db71677f", &function_3e6a41b7);
+  self callback::function_d8abfc3d(#"remote_missile_started", &function_903cf6aa);
+  self callback::function_d8abfc3d(#"remote_missile_ended", &function_3e6a41b7);
   return tryusepredatormissile(killstreaktype);
 }
 

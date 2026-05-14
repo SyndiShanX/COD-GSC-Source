@@ -178,7 +178,7 @@ function private function_f5dde44(substate) {
     return false;
   }
 
-  return substate == #"melee" || substate == #"charge_melee" || substate == #"hash_48dda7ed88efe32f";
+  return substate == #"melee" || substate == #"charge_melee" || substate == #"charge_melee_attack";
 }
 
 function private function_9d9508f(localclientnum) {

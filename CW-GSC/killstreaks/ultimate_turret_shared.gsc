@@ -439,7 +439,7 @@ function function_7f9eb7f() {
     arrayremovevalue(owner.var_85988a58, undefined);
   } else if(self.damagetaken > self.health) {
     arrayremovevalue(owner.var_85988a58, self);
-    self.owner luinotifyevent(#"hash_126effa63f6e04bd");
+    self.owner luinotifyevent(#"mini_turret_destroyed");
   }
 
   owner clientfield::set_player_uimodel("hudItems.ultimateTurretCount", owner.var_85988a58.size);
@@ -549,7 +549,7 @@ function onplaceturret(turret) {
     turret.vehicle.killstreak_end_time = starttimeoverride + turret.vehicle.killstreak_duration;
     turret.vehicle thread killstreaks::function_b86397ae("ultimate_turret", turret.vehicle.killstreak_duration, starttimeoverride, &function_be04d904, "delete", "death");
     turret.vehicle.maxsightdistsqrd = 1;
-    callback::callback(#"hash_6d9bdacc6c29cfa5", {
+    callback::callback(#"on_turret_placed", {
       #turret: turret, #owner: self
     });
   }
@@ -1283,7 +1283,7 @@ function function_16ccb771(e_target) {
   if(var_2da97dc2) {
     if(e_target.var_e78602fc === self) {
       self.owner luinotifyevent(#"mini_turret_kill");
-      self.owner playsoundtoplayer(#"hash_7ea486136cd776c", self.owner);
+      self.owner playsoundtoplayer(#"mpl_turret_kill", self.owner);
     }
 
     self.turretrotscale = 1;
@@ -1458,8 +1458,8 @@ function function_59ce22f9(attacker, callback_data) {
 
   self playSound("mpl_turret_exp");
 
-  if(isDefined(bundle.var_bb6c29b4) && self.var_d02ddb8e === getweapon(#"shock_rifle")) {
-    playFX(bundle.var_bb6c29b4, self.origin);
+  if(isDefined(bundle.shockrifledestructionfx) && self.var_d02ddb8e === getweapon(#"shock_rifle")) {
+    playFX(bundle.shockrifledestructionfx, self.origin);
   }
 
   self stoploopsound(0.5);

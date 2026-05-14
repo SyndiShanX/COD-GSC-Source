@@ -43,7 +43,7 @@ function private function_321bb79b(localclientnum, value) {
   }
 
   if(!isDefined(value)) {
-    setting = gamepadusedlast(localclientnum) ? # "armor_plate_behavior_gpad" : # "armor_plate_behavior_kbm";
+    setting = gamepadusedlast(localclientnum) ? #"armor_plate_behavior_gpad" : #"armor_plate_behavior_kbm";
     value = isDefined(function_ab88dbd2(localclientnum, setting)) ? function_ab88dbd2(localclientnum, setting) : 0;
   }
 

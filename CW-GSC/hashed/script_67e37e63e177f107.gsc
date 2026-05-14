@@ -14,10 +14,10 @@
 #using scripts\core_common\values_shared;
 #using scripts\core_common\vehicle_ai_shared;
 #using scripts\core_common\vehicle_shared;
-#namespace namespace_77b8863;
+#namespace elephant_dust_ball;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_60e9e594b4389b03", &preinit, undefined, undefined, undefined);
+  system::register(#"elephant_dust_ball", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
@@ -101,7 +101,7 @@ function function_e452a40c(params) {
       continue;
     }
 
-    self setspeed(self.settings.var_9eff22ee);
+    self setspeed(self.settings.seekspeed);
     self setbrake(0);
     self function_a57c34b7(self.ai.var_a38db64f, 1, 1);
     self waittilltimeout(30, #"near_goal");
@@ -154,7 +154,7 @@ function function_3e16dec3(params) {
       self.current_pathto_pos = self function_f2fd92d1();
 
       if(isDefined(self.current_pathto_pos)) {
-        self setspeed(self.settings.var_9eff22ee);
+        self setspeed(self.settings.seekspeed);
         self setbrake(0);
         self function_a57c34b7(self.current_pathto_pos, 1, 1);
         self waittill_pathing_done(1);

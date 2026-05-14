@@ -104,9 +104,9 @@ function function_39193e3a() {
     if(isDefined(waitresult.weapon) && isDefined(waitresult.player)) {
       player = waitresult.player;
 
-      if(isDefined(player.pers[#"hash_53919d92ff1d039"])) {
-        scoreevents::function_6f51d1e9("battle_command_ultimate_command", player.pers[#"hash_53919d92ff1d039"], undefined, undefined);
-        player.pers[#"hash_53919d92ff1d039"] = undefined;
+      if(isDefined(player.pers[#"combat_efficiency_suppliers"])) {
+        scoreevents::function_6f51d1e9("battle_command_ultimate_command", player.pers[#"combat_efficiency_suppliers"], undefined, undefined);
+        player.pers[#"combat_efficiency_suppliers"] = undefined;
       }
     }
   }
@@ -145,8 +145,8 @@ function function_984a57ca(player) {
 function function_78e7b549(scale, outcome) {
   player = self;
 
-  if(isDefined(player) && isDefined(player.pers) && scoreevents::shouldaddrankxp(player) && isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
-    var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
+  if(isDefined(player) && isDefined(player.pers) && scoreevents::shouldaddrankxp(player) && isDefined(player.pers[#"first_connect_time"])) {
+    var_28ee869a = gettime() - player.pers[#"first_connect_time"];
     var_7f4c0762 = min(var_28ee869a / 1000 / 60, 30);
     score = int(getdvarint(#"hash_3cccb7d9e336696a", 0) * var_7f4c0762 * scale * level.var_b4320b5b[#"hash_31b5b9e273560fa9"] + 0.5);
     player addrankxpvalue(outcome, score, 3);
@@ -515,7 +515,7 @@ function giveplayermomentum(event, player, victim, descvalue, weapon, playersaff
   }
 
   if(!isDefined(label)) {
-    player giveplayermomentumnotification(score, #"hash_480234a872bd64ac", descvalue, weapon, 0, eventindex, event, playersaffected, var_dbaa74e2);
+    player giveplayermomentumnotification(score, #"score/blank", descvalue, weapon, 0, eventindex, event, playersaffected, var_dbaa74e2);
     return;
   }
 
@@ -696,7 +696,7 @@ function function_3172cf59(player, newscore, weapon, mpplayerscore) {
 }
 
 function function_a85339ff(event) {
-  if(event == #"golden_kill_bonus" || event == #"hash_7b62ccbe655dc08a" || event == #"hash_131b23d720fc82c3") {
+  if(event == #"golden_kill_bonus" || event == #"hash_7b62ccbe655dc08a" || event == #"golden_ammo_assist") {
     return 1;
   }
 
@@ -773,10 +773,10 @@ function function_17a678b7(player, scoresub) {
 }
 
 function function_889ed975(player, score_add, var_252f7989, var_f8258842) {
-  var_1eb7c454 = getdvarfloat(#"hash_eae9a8ee387705d", 1);
-  score_add = int(score_add * var_1eb7c454);
-  var_252f7989 = int(var_252f7989 * var_1eb7c454);
-  var_f8258842 = int(var_f8258842 * var_1eb7c454);
+  dev_score_multiplier = getdvarfloat(#"dev_score_multiplier", 1);
+  score_add = int(score_add * dev_score_multiplier);
+  var_252f7989 = int(var_252f7989 * dev_score_multiplier);
+  var_f8258842 = int(var_f8258842 * dev_score_multiplier);
 
   if(!isDefined(score_add)) {
     return;
@@ -2356,7 +2356,7 @@ function givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
 
       if(isDefined(evictim)) {
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: evictim, #var_bdc4bbd2: # "headshot"});
+          #player: evictim, #var_bdc4bbd2: #"headshot"});
       }
 
       if(attacker.headshots % 5 == 0) {
@@ -2487,15 +2487,15 @@ function function_b1a3b359(killedplayer, damagedone, weapon, assist_level) {
 
   if(!level.var_724cf71) {
     switch (weapon.name) {
-      case #"hash_577b41452577c37f":
+      case #"concussion_grenade_l2":
       case #"concussion_grenade":
         assist_level = "assist_concussion";
         break;
-      case #"hash_af1a40bb1375dab":
+      case #"flash_grenade_l2":
       case #"flash_grenade":
         assist_level = "assist_flash";
         break;
-      case #"hash_4cd586d22c20b3cf":
+      case #"emp_grenade_l2":
       case #"emp_grenade":
         assist_level = "assist_emp";
         break;
@@ -2597,7 +2597,7 @@ function function_e7b4c25c(nemesis_name, value, nemesis_rank, var_15574043, neme
 function function_30ab51a4(params) {
   if(isDefined(self) && isDefined(self.pers)) {
     self.pers[#"hash_49e7469988944ecf"] = undefined;
-    self.pers[#"hash_53919d92ff1d039"] = undefined;
+    self.pers[#"combat_efficiency_suppliers"] = undefined;
   }
 }
 

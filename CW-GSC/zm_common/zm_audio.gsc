@@ -359,7 +359,7 @@ function get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
 
   if(zombie.archetype === #"zombie") {
     if(mod == "MOD_MELEE") {
-      return # "melee";
+      return #"melee";
     } else if(is_true(zombie.missinglegs)) {
       return "crawler";
     }
@@ -423,19 +423,19 @@ function function_350fc8cc(weapon, zombie, mod, player) {
           if(mod == "MOD_RIFLE_BULLET" && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return # "novox";
+            return #"novox";
           }
 
           break;
         case #"scepter":
           if(!is_true(zombie.var_4857363e)) {
-            return # "novox";
+            return #"novox";
           }
 
           break;
         case #"flamethrower":
           if(mod == "MOD_IMPACT") {
-            return # "novox";
+            return #"novox";
           } else if(mod == "MOD_BURNED" && !is_true(zombie.var_d9e7a08a) && player function_6049efce(str_weapon)) {
             return str_weapon;
           }
@@ -443,7 +443,7 @@ function function_350fc8cc(weapon, zombie, mod, player) {
           break;
         case #"gravityspikes":
           if(!is_true(zombie.var_46d39f48)) {
-            return # "novox";
+            return #"novox";
           }
 
           break;
@@ -451,7 +451,7 @@ function function_350fc8cc(weapon, zombie, mod, player) {
           if(mod == "MOD_MELEE" && !player flag::get("katana_dash") && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return # "novox";
+            return #"novox";
           }
 
           break;
@@ -460,7 +460,7 @@ function function_350fc8cc(weapon, zombie, mod, player) {
             if(player function_6049efce(str_weapon)) {
               return str_weapon;
             } else {
-              return # "novox";
+              return #"novox";
             }
           }
 
@@ -478,10 +478,10 @@ function function_350fc8cc(weapon, zombie, mod, player) {
           if(player function_6049efce(str_weapon, 3, 0.75)) {
             str_weapon = #"chakram_multi";
           } else {
-            return # "novox";
+            return #"novox";
           }
         } else {
-          return # "novox";
+          return #"novox";
         }
       }
 
@@ -490,10 +490,10 @@ function function_350fc8cc(weapon, zombie, mod, player) {
           if(player function_6049efce(str_weapon)) {
             str_weapon = #"sword";
           } else {
-            return # "novox";
+            return #"novox";
           }
         } else if(mod == "MOD_UNKNOWN" || mod == "MOD_PROJECTILE" || is_true(zombie.var_8c8102a5)) {
-          return # "novox";
+          return #"novox";
         } else if(player function_6049efce(str_weapon)) {
           str_weapon = #"pistol";
         }
@@ -605,35 +605,35 @@ function function_fa4dfde0(w_weapon) {
     case #"hero_scepter_lv3":
     case #"hero_scepter_lv2":
     case #"hero_scepter_lv1":
-      return # "scepter";
+      return #"scepter";
     case #"hero_hammer_lv3":
     case #"hero_hammer_lv2":
     case #"hero_hammer_lv1":
-      return # "hammer";
+      return #"hammer";
     case #"hero_chakram_lv2":
     case #"hero_chakram_lv3":
     case #"hero_chakram_lv1":
-      return # "chakram";
+      return #"chakram";
     case #"hero_sword_pistol_lv2":
     case #"hero_sword_pistol_lv3":
     case #"hero_sword_pistol_lv1":
-      return # "sword_pistol";
+      return #"sword_pistol";
     case #"hero_flamethrower_t8_lv1":
     case #"hero_flamethrower_t8_lv2":
     case #"hero_flamethrower_t8_lv3":
-      return # "flamethrower";
+      return #"flamethrower";
     case #"hero_minigun_t8_lv1":
     case #"hero_minigun_t8_lv3":
     case #"hero_minigun_t8_lv2":
-      return # "minigun";
+      return #"minigun";
     case #"hero_katana_t8_lv1":
     case #"hero_katana_t8_lv2":
     case #"hero_katana_t8_lv3":
-      return # "katana";
+      return #"katana";
     case #"hero_gravityspikes_t8_lv3":
     case #"hero_gravityspikes_t8_lv2":
     case #"hero_gravityspikes_t8_lv1":
-      return # "gravityspikes";
+      return #"gravityspikes";
   }
 }
 
@@ -1892,21 +1892,21 @@ function sndannouncer_init() {
     level.zmannouncerprefix = "zmba";
   }
 
-  sndannouncervoxadd(#"carpenter", #"hash_4d495ea70e8796d2");
-  sndannouncervoxadd(#"insta_kill", #"hash_4c409b9a3baca485");
-  sndannouncervoxadd(#"double_points", #"hash_1ee1ecb2bf07589c");
-  sndannouncervoxadd(#"nuke", #"hash_61ee7a1e5b4c68c7");
-  sndannouncervoxadd(#"full_ammo", #"hash_773c07eb3a67a793");
-  sndannouncervoxadd(#"fire_sale", #"hash_3cf43f66b71287e5");
-  sndannouncervoxadd(#"minigun", #"hash_7e30cbacaffa9676");
-  sndannouncervoxadd(#"bonus_points_team", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player_shared", #"hash_5540d7f63941a8b3");
+  sndannouncervoxadd(#"carpenter", #"vox_powerup_carpenter");
+  sndannouncervoxadd(#"insta_kill", #"vox_powerup_instakill");
+  sndannouncervoxadd(#"double_points", #"vox_powerup_doublepoints");
+  sndannouncervoxadd(#"nuke", #"vox_powerup_nuke");
+  sndannouncervoxadd(#"full_ammo", #"vox_powerup_max_ammo");
+  sndannouncervoxadd(#"fire_sale", #"vox_powerup_firesale");
+  sndannouncervoxadd(#"minigun", #"vox_powerup_death_machine");
+  sndannouncervoxadd(#"bonus_points_team", #"vox_powerup_bonus_points_team");
+  sndannouncervoxadd(#"bonus_points_player", #"vox_powerup_bonus_points_team");
+  sndannouncervoxadd(#"bonus_points_player_shared", #"vox_powerup_bonus_points_team");
   sndannouncervoxadd(#"hero_weapon_power", #"hash_49a75f92b85c0f95");
   sndannouncervoxadd(#"zombie_blood", #"hash_2f095e1811169fc7");
   sndannouncervoxadd(#"bonfire_sale", #"hash_554659b1fbc7a5bd");
-  sndannouncervoxadd(#"boxmove", #"hash_523d2f6c8930a8ee");
-  sndannouncervoxadd(#"dogstart", #"hash_12ca8e434ec4d884");
+  sndannouncervoxadd(#"boxmove", #"vox_event_magicbox");
+  sndannouncervoxadd(#"dogstart", #"vox_event_dogstart");
   sndannouncervoxadd(#"shield_upgrade", #"hash_1853f3e031b48c22");
 
   if(zm_utility::is_standard()) {
@@ -1944,7 +1944,7 @@ function sndannouncer_init() {
     sndannouncervoxadd(#"incoming_mini_boss", #"hash_50e18452b9e9f79c");
     sndannouncervoxadd(#"incoming_heavy", #"hash_162307bf1d9cd28a");
     sndannouncervoxadd(#"power_activated", #"hash_1903816aeeed7cdb");
-    sndannouncervoxadd(#"rush_zone_nag", #"hash_643588a5ac2630e9");
+    sndannouncervoxadd(#"rush_zone_nag", #"vox_rush_zone_nag");
     sndannouncervoxadd(#"defend_start", #"hash_52b5e94b0f834e89");
     sndannouncervoxadd(#"defend_complete", #"hash_54ce3eea0889438");
     sndannouncervoxadd(#"player_out", #"hash_46140c2ff7ed0028");
@@ -1968,9 +1968,9 @@ function sndannouncer_init() {
     sndannouncervoxadd(#"dropped_to_last_place", #"hash_c085a88269ae2cf");
     sndannouncervoxadd(#"player_down", #"hash_3dca2528566ddf10");
     sndannouncervoxadd(#"pap_avail", #"hash_67b680cea28e5157");
-    sndannouncervoxadd(#"hash_77e06980e2fc1567", #"hash_5100f8a2b1c77bd4");
-    sndannouncervoxadd(#"hash_79b3b9e8ed3f0631", #"hash_1f56554135705816");
-    sndannouncervoxadd(#"hash_3acd6d72567def3a", #"hash_4a4a214d167991b");
+    sndannouncervoxadd(#"door_open_single", #"hash_5100f8a2b1c77bd4");
+    sndannouncervoxadd(#"door_open_mult", #"hash_1f56554135705816");
+    sndannouncervoxadd(#"door_open_all", #"hash_4a4a214d167991b");
     sndannouncervoxadd(#"carpenter", #"hash_642d1c987098b98a");
     sndannouncervoxadd(#"insta_kill", #"hash_709765ed03192a2d");
     sndannouncervoxadd(#"double_points", #"hash_660aab11b5d4ebe4");
@@ -1998,10 +1998,10 @@ function sndannouncer_init() {
     sndannouncervoxadd(#"wardens", #"hash_5f87c10f7c1ad814");
     sndannouncervoxadd(#"werewolf", #"hash_23c5292237128e03");
     sndannouncervoxadd(#"nosferatu", #"hash_38bb4e0a7dfc9a1d");
-    sndannouncervoxadd(#"hash_e5dacec7371220e", #"hash_6e2246878a31d24d");
+    sndannouncervoxadd(#"crim_nosferatu", #"hash_6e2246878a31d24d");
     sndannouncervoxadd(#"lightning_hounds", #"hash_2fabde0f1747632a");
     sndannouncervoxadd(#"bombers", #"hash_5bfc95be3db89d7e");
-    sndannouncervoxadd(#"hash_6acb03a0373891c1", #"hash_2629e8b3b9215214");
+    sndannouncervoxadd(#"jolting_jacks", #"hash_2629e8b3b9215214");
   }
 }
 

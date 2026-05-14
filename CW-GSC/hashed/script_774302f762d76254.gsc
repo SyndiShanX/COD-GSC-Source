@@ -150,7 +150,7 @@ function function_32d5e898() {
   level.doa.var_997a0313 = 0;
   level.doa.var_6c58d51 = 0;
   level.doa.var_b456a02b = 0;
-  level.doa.var_afae28e0 = 0;
+  level.doa.enemy_died = 0;
   level.doa.var_3e7292fc = 100;
   level.doa.var_9f7a910d = undefined;
   level.doa.var_8be900a6 = undefined;

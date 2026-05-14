@@ -727,11 +727,11 @@ server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
 
 get_other_team(str_team) {
   if(str_team == #"allies") {
-    return # "axis";
+    return #"axis";
   } else if(str_team == #"axis") {
-    return # "allies";
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:x1c9>" + str_team);
@@ -1385,7 +1385,7 @@ get_enemy_team(team) {
     return level.team_enemy_mapping[team];
   }
 
-  return # "none";
+  return #"none";
 }
 
 function_35aed314(teama, teamb) {

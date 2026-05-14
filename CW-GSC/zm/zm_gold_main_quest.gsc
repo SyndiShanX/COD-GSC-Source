@@ -112,7 +112,7 @@ function function_e983f15a() {
 function function_d5d67561() {
   level flag::set(#"main_quest_completed");
   level notify(#"end_game", {
-    #reason: # "main_quest_completed"});
+    #reason: #"main_quest_completed"});
 }
 
 function function_e9c07a3d() {

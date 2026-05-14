@@ -107,13 +107,13 @@ function function_1d4d3034() {
 }
 
 function function_ae56fb1a(b_pause, str_perk, str_result, n_slot) {
-  self notify(#"hash_6939dd7af68cec");
+  self notify(#"stop_slide_watcher");
   self notify(#"hash_19d583212e9b3200");
 }
 
 function function_dc9a257a() {
-  self notify(#"hash_6939dd7af68cec");
-  self endon(#"disconnect", #"hash_6939dd7af68cec");
+  self notify(#"stop_slide_watcher");
+  self endon(#"disconnect", #"stop_slide_watcher");
   self.var_287f4e8 = undefined;
 
   while(true) {
@@ -135,7 +135,7 @@ function function_dc9a257a() {
 }
 
 function function_d2991c92(v_start_position) {
-  self endon(#"death", #"hash_6939dd7af68cec");
+  self endon(#"death", #"stop_slide_watcher");
 
   while(self issliding()) {
     n_distance = distance(v_start_position, self.origin);

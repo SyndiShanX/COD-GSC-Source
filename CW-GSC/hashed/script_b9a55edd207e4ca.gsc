@@ -59,7 +59,7 @@ function init() {
   callback::add_callback(#"hash_740a58650e79dbfd", &function_c3623479);
   callback::add_callback(#"hash_40cd438036ae13df", &function_1f93e91f);
   callback::on_player_killed(&on_player_killed);
-  callback::add_callback(#"hash_3be1213f454fa90e", &function_a4740127);
+  callback::add_callback(#"wave_spawn_triggered", &function_a4740127);
   level.var_61d4f517 = getgametypesetting(#"hash_3513cf8b4287cdd7");
   level.var_5c49de55 = getgametypesetting(#"hash_6eef7868c4f5ddbc");
 
@@ -571,7 +571,7 @@ function function_4212369d() {
     }
 
     if(vehicles.size > 0) {
-      level thread namespace_3d2704b3::function_add63876(vehicles, 2147483647, 120, 120, 180, 2, 45, struct::get_array("vehicle_drop", "targetname"), 6000);
+      level thread item_supply_drop_system::function_add63876(vehicles, 2147483647, 120, 120, 180, 2, 45, struct::get_array("vehicle_drop", "targetname"), 6000);
     }
   }
 }
@@ -580,16 +580,16 @@ function function_20d09030() {
   if(is_true(getgametypesetting(#"hash_7eb0bbf9b8410462"))) {
     switch (level.basegametype) {
       case #"fireteam_dirty_bomb":
-        level thread namespace_3d2704b3::function_7fc18ad5(#"hash_27bac84003da7795", 2147483647, 80, 90, 180);
+        level thread item_supply_drop_system::function_7fc18ad5(#"hash_27bac84003da7795", 2147483647, 80, 90, 180);
         break;
       case #"fireteam_koth":
-        level thread namespace_3d2704b3::function_7fc18ad5(#"hash_1a0411d6007279fe", 2147483647, 80, 90, 180);
+        level thread item_supply_drop_system::function_7fc18ad5(#"hash_1a0411d6007279fe", 2147483647, 80, 90, 180);
         break;
       case #"fireteam_elimination":
-        level thread namespace_3d2704b3::function_7fc18ad5(#"hash_c09c4ba8509f91b", 2147483647, 38, 90, 180);
+        level thread item_supply_drop_system::function_7fc18ad5(#"hash_c09c4ba8509f91b", 2147483647, 38, 90, 180);
         break;
       case #"fireteam_satlink":
-        level thread namespace_3d2704b3::function_7fc18ad5(#"hash_4b59ee69b4c70996", 2147483647, 80, 90, 180);
+        level thread item_supply_drop_system::function_7fc18ad5(#"hash_4b59ee69b4c70996", 2147483647, 80, 90, 180);
         break;
     }
   }

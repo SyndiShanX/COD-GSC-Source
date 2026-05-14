@@ -29,10 +29,10 @@ init() {
 
 get_draft_struct() {
   if(currentsessionmode() == 0) {
-    return # "zm_lobby_struct";
+    return #"zm_lobby_struct";
   }
 
-  return # "draft_team_struct_allies";
+  return #"draft_team_struct_allies";
 }
 
 function_75442e78(index) {

@@ -311,7 +311,7 @@ function function_5bac75b6(behaviortreeentity) {
 }
 
 function function_4cc712c8(behaviortreeentity) {
-  return is_true(self.var_8ba6ede3);
+  return is_true(self.shoulddigup);
 }
 
 function function_e393f5fe(behaviortreeentity) {
@@ -379,7 +379,7 @@ function function_a5c4f83b(behaviortreeentity) {
 
 function function_47e1bdeb(behaviortreeentity) {
   behaviortreeentity solid();
-  behaviortreeentity.var_8ba6ede3 = undefined;
+  behaviortreeentity.shoulddigup = undefined;
 }
 
 function function_a5103696(behaviortreeentity) {
@@ -389,7 +389,7 @@ function function_a5103696(behaviortreeentity) {
 function private function_1980a07a(behaviortreeentity) {
   behaviortreeentity endon(#"death");
   behaviortreeentity pathmode("move allowed");
-  behaviortreeentity.var_8ba6ede3 = undefined;
+  behaviortreeentity.shoulddigup = undefined;
   behaviortreeentity notify(#"not_underground");
 }
 

@@ -241,51 +241,51 @@ function function_8183be86() {
 
     if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
       if(var_b48509f9 == 1) {
-        return # "green";
+        return #"green";
       } else if(var_b48509f9 == 2) {
         if(n_roll >= var_8ec9324e) {
-          return # "blue";
+          return #"blue";
         } else if(n_roll >= var_7d403093) {
-          return # "blue";
+          return #"blue";
         } else if(n_roll >= var_83ed455f) {
-          return # "blue";
+          return #"blue";
         } else if(n_roll >= var_31890740) {
-          return # "green";
+          return #"green";
         } else {
-          return # "green";
+          return #"green";
         }
       } else if(var_b48509f9 == 3) {
         if(n_roll >= var_8ec9324e) {
-          return # "purple";
+          return #"purple";
         } else if(n_roll >= var_7d403093) {
-          return # "purple";
+          return #"purple";
         } else if(n_roll >= var_83ed455f) {
-          return # "blue";
+          return #"blue";
         } else if(n_roll >= var_31890740) {
-          return # "green";
+          return #"green";
         } else {
-          return # "green";
+          return #"green";
         }
       }
     }
 
     if(n_roll >= var_8ec9324e) {
-      return # "orange";
+      return #"orange";
     }
 
     if(n_roll >= var_7d403093) {
-      return # "purple";
+      return #"purple";
     }
 
     if(n_roll >= var_83ed455f) {
-      return # "blue";
+      return #"blue";
     }
 
     if(n_roll >= var_31890740) {
-      return # "green";
+      return #"green";
     }
 
-    return # "green";
+    return #"green";
   }
 }
 
@@ -295,23 +295,23 @@ function function_6e93c5b2(str_rarity) {
     case #"none":
     case #"white":
     case #"loadout":
-      return # "hash_673212f5cf031080";
+      return #"hash_673212f5cf031080";
     case #"green":
     case #"uncommon":
-      return # "hash_478525848719f211";
+      return #"hash_478525848719f211";
     case #"blue":
     case #"rare":
-      return # "hash_1bf794b5f3fd1b53";
+      return #"hash_1bf794b5f3fd1b53";
     case #"purple":
     case #"epic":
-      return # "hash_71b7197253e518d6";
+      return #"hash_71b7197253e518d6";
     case #"yellow":
     case #"ultra":
     case #"gold":
     case #"orange":
     case #"named":
     case #"legendary":
-      return # "hash_6d88d5ee982a7896";
+      return #"hash_6d88d5ee982a7896";
   }
 
   return 0;
@@ -1015,7 +1015,7 @@ function wall_weapon_update_prompt(player) {
       if(player function_8b1a219a()) {
         self.stub.hint_string = #"hash_7778a99e3a7d47";
       } else {
-        self.stub.hint_string = #"hash_18379e4e114fabf9";
+        self.stub.hint_string = #"zombie/weaponcostonly_cfill_bgb_secret_shopper";
       }
 
       if(self.stub.var_8d306e51) {
@@ -1039,7 +1039,7 @@ function wall_weapon_update_prompt(player) {
       if(player function_8b1a219a()) {
         self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = #"hash_60606b68e93a29c8";
+        self.stub.hint_string = #"zombie/weaponcostonly_cfill";
       }
 
       if(self.stub.var_8d306e51) {
@@ -1120,7 +1120,7 @@ function reset_wallbuys() {
 }
 
 function get_weapon_hint_ammo() {
-  return # "hash_60606b68e93a29c8";
+  return #"zombie/weaponcostonly_cfill";
 }
 
 function weapon_set_first_time_hint(cost, ammo_cost) {
@@ -1251,7 +1251,7 @@ function weapon_spawn_think() {
     }
 
     if(zm_utility::function_e05ac4ad(player, cost)) {
-      rarity = isDefined(self.rarity) ? self.rarity : # "white";
+      rarity = isDefined(self.rarity) ? self.rarity : #"white";
 
       if(self.first_time_triggered == 0) {
         self show_all_weapon_buys(player, cost, ammo_cost, is_grenade, var_4ee4441d);
@@ -1311,7 +1311,7 @@ function weapon_spawn_think() {
           point = function_4ba8fde(item_name);
 
           if(isDefined(point.itementry.random_attachments)) {
-            weapon = namespace_65181344::function_67456242(point.itementry);
+            weapon = item_spawn_groups_util::function_67456242(point.itementry);
             dropitem = item_drop::drop_item(0, weapon, 1, weapon.maxammo, point.id, self.origin, self.angles, 1);
             dropitem.wallbuy_weapon = 1;
             dropitem.hidetime = 1;

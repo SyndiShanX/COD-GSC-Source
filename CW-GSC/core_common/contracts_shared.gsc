@@ -88,7 +88,7 @@ function get_contract_stat(slot, stat_name) {
 function function_d17bcd3c(slot) {
   player = self;
   var_5ceb23d0 = spawnStruct();
-  var_5ceb23d0.var_38280f2f = #"hash_6a1133003efe7380";
+  var_5ceb23d0.var_38280f2f = #"undefined_contract_name";
   var_5ceb23d0.var_59cb904f = 0;
   var_5ceb23d0.var_c3e2bb05 = 0;
   var_38280f2f = player stats::function_ff8f4f17(#"loot_contracts", slot, #"contracthash");
@@ -155,7 +155,7 @@ function setup_player_contracts(max_contract_slots, var_1b3f5772) {
 
     var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-    if(var_38280f2f == #"hash_6a1133003efe7380") {
+    if(var_38280f2f == #"undefined_contract_name") {
       continue;
     }
 
@@ -200,7 +200,7 @@ function function_5e1c4d33(var_5ceb23d0) {
 
   var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-  if(var_38280f2f == #"hash_6a1133003efe7380") {
+  if(var_38280f2f == #"undefined_contract_name") {
     player.pers[#"contracts"][var_38280f2f] = undefined;
     return;
   }
@@ -500,14 +500,14 @@ function private function_bcd04944() {
 
     if(var_bdda3cb2 != 0) {
       var_de346b65 = getdvarint(#"hash_7f76338a68a9ef7f", 0);
-      player luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, var_bdda3cb2, var_de346b65);
+      player luinotifyevent(#"loot_contract_progress", 2, var_bdda3cb2, var_de346b65);
       setDvar(#"hash_177b745fc9a917dd", 0);
     }
 
     var_2047a89d = getdvarint(#"hash_52370a459bac6981", 0);
 
     if(var_2047a89d != 0) {
-      player luinotifyevent(#"hash_1739c4bd5baf83bc", 1, var_2047a89d);
+      player luinotifyevent(#"loot_contract_complete", 1, var_2047a89d);
       setDvar(#"hash_52370a459bac6981", 0);
     }
 

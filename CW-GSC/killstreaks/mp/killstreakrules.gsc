@@ -243,7 +243,7 @@ function function_65739e7b(hardpointtype, team, isemped) {
       self globallogic_audio::play_taacom_dialog("groundspaceFull");
     }
 
-    if(level.killstreaks[team].script_bundle.var_65d707d0 === 1 && isemped == 0) {
+    if(level.killstreaks[team].script_bundle.ksutilizesairspace === 1 && isemped == 0) {
       self globallogic_audio::play_taacom_dialog("airspaceFull");
     }
   }

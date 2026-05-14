@@ -22,7 +22,7 @@ function private preinit() {
     level.var_a3e209ba = &function_321f8eb5;
   }
 
-  level.var_ba13fb7a = getdvarint(#"hash_40fe9055da22add4", 1);
+  level.debug_team_assignment = getdvarint(#"debug_team_assignment", 1);
 }
 
 function get_assigned_team() {
@@ -68,7 +68,7 @@ function function_efe5a681(team) {
   available_spots = function_ee150fcc(team_players);
   party = self getparty();
 
-  if(party.var_a15e4438 > available_spots) {
+  if(party.party_member_count > available_spots) {
     return false;
   }
 
@@ -90,7 +90,7 @@ function function_ccb3bc7a(teams) {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function function_b919f6aa(status) {
@@ -112,7 +112,7 @@ function function_b919f6aa(status) {
     }
   }
 
-  return # "spectator";
+  return #"spectator";
 }
 
 function function_5c389625() {
@@ -136,7 +136,7 @@ function function_5d02dd86(party) {
     return undefined;
   }
 
-  if(party.var_a15e4438 <= 1) {
+  if(party.party_member_count <= 1) {
     println("<dev string:x38>" + "<dev string:x95>" + self.name + "<dev string:xdb>");
     return undefined;
   }
@@ -238,7 +238,7 @@ function function_b55ab4b3(comingfrommenu, var_4c542e39) {
   }
 
   if(isDefined(level.var_4614c421) && [[level.var_4614c421]]()) {
-    return # "spectator";
+    return #"spectator";
   }
 
   clientnum = self getentitynumber();
@@ -441,7 +441,7 @@ function function_a3e209ba(teamname, comingfrommenu) {
 
 function function_567994de() {
   if(!isDefined(level.teams[self.pers[#"team"]]) || level.var_c58668ea) {
-    return # "none";
+    return #"none";
   }
 
   return self.pers[#"team"];
@@ -554,7 +554,7 @@ function private function_5e84fc28(var_68253610) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function private function_8c162ba0(var_8de04fca, var_68253610) {
@@ -583,7 +583,7 @@ function function_344e464d() {
   distribution = function_7d93567f();
   var_f36ce5dd = function_a119c7ef(distribution);
 
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     println("<dev string:x38>" + "<dev string:x339>");
     function_a9bfa6d6();
     println("<dev string:x38>" + "<dev string:x34f>");
@@ -630,14 +630,14 @@ function function_344e464d() {
     }
   }
 
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     println("<dev string:x38>" + "<dev string:x3a5>");
     function_a9bfa6d6();
   }
 }
 
 function private function_a9bfa6d6() {
-  if(level.var_ba13fb7a) {
+  if(level.debug_team_assignment) {
     foreach(team in level.teams) {
       self thread function_6c66cc64(team);
     }
@@ -685,7 +685,7 @@ function private function_6c66cc64(team) {
     }
 
     party = player getparty();
-    println("<dev string:x38>" + "<dev string:x16e>" + player.name + "<dev string:x3ff>" + squad_name + "<dev string:x40d>" + (party.fill ? "<dev string:x419>" : "<dev string:x420>") + "<dev string:x426>" + party.var_a15e4438);
+    println("<dev string:x38>" + "<dev string:x16e>" + player.name + "<dev string:x3ff>" + squad_name + "<dev string:x40d>" + (party.fill ? "<dev string:x419>" : "<dev string:x420>") + "<dev string:x426>" + party.party_member_count);
   }
 }
 

@@ -147,7 +147,7 @@ function function_e983f15a() {
 
 function function_d5d67561() {
   level notify(#"end_game", {
-    #reason: # "main_quest_completed"});
+    #reason: #"main_quest_completed"});
 }
 
 function on_player_spawn() {
@@ -1632,13 +1632,13 @@ function function_5939f21c() {
 
 function function_72dc9adc() {
   vehicle::add_main_callback("vehicle_t9_rcxd_racing_mq", &recon_car::function_d1661ada);
-  callback::add_callback(#"hash_1eda827ff5e6895b", &function_6e6149a6);
+  callback::add_callback(#"on_ai_stunned", &on_ai_stunned);
   callback::add_callback(#"hash_210adcf09e99fba1", &function_4b58e5ab);
   level.var_9b69599b = struct::get("gp_machine");
   level.var_ef566585 = undefined;
 }
 
-function function_6e6149a6() {
+function on_ai_stunned() {
   if(!is_true(level.var_f2d324b1) && distance2dsquared(self.origin, level.var_9b69599b.origin) <= 32400) {
     level.var_f2d324b1 = 1;
     self.is_powered = 1;
@@ -4309,7 +4309,7 @@ function function_cd7a3de4() {
 }
 
 function cmd(cmd) {
-  zm_tungsten::function_71a6c3ea();
+  zm_tungsten::super_open_sesame();
 
   switch (cmd) {
     case #"hash_390016349056b819":

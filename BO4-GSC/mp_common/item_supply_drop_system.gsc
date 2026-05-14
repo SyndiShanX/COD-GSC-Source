@@ -7,7 +7,7 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_supply_drop;
-#namespace namespace_3d2704b3;
+#namespace item_supply_drop_system;
 
 autoexec __init__system__() {
   system::register(#"item_supply_drop_system", &__init__, undefined, #"item_supply_drop");

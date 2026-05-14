@@ -47,7 +47,7 @@ function shield_charge_powerup(item, player) {
   inventoryitem = player.inventory.items[6];
 
   if(isDefined(inventoryitem)) {
-    var_2cacdde7 = isDefined(inventoryitem.itementry.var_a3aa1ca2) ? inventoryitem.itementry.var_a3aa1ca2 : 50;
+    var_2cacdde7 = isDefined(inventoryitem.itementry.shardrepair) ? inventoryitem.itementry.shardrepair : 50;
 
     if(var_2cacdde7 == 0) {
       var_2cacdde7 = 50;

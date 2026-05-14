@@ -38,7 +38,7 @@ function private on_begin() {
   str_targetname = "trials_shoot_from_location";
   level.var_7f31a12d = getEntArray(str_targetname, "targetname");
   assert(level.var_7f31a12d.size, "<dev string:x38>");
-  callback::function_33f0ddd3(&function_33f0ddd3);
+  callback::on_player_loadout_changed(&on_player_loadout_changed);
 
   foreach(player in getplayers()) {
     player thread function_3658663();
@@ -46,7 +46,7 @@ function private on_begin() {
 }
 
 function private on_end(round_reset) {
-  callback::function_824d206(&function_33f0ddd3);
+  callback::function_824d206(&on_player_loadout_changed);
 
   if(util::get_map_name() == "zm_office") {
     elevator1 = getent("elevator1", "targetname");
@@ -68,7 +68,7 @@ function private on_end(round_reset) {
 
 function private function_3658663() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   b_locked_weapons = 0;
 
   while(true) {
@@ -93,7 +93,7 @@ function private function_3658663() {
   }
 }
 
-function private function_33f0ddd3(s_event) {
+function private on_player_loadout_changed(s_event) {
   if(s_event.event === "give_weapon") {
     var_f2b6fe6e = 0;
 

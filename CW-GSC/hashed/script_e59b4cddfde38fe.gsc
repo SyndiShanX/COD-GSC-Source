@@ -11,10 +11,10 @@
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
 #using scripts\zm_common\zm_zonemgr;
-#namespace namespace_5f342394;
+#namespace zm_trial_kill_in_area;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_6c9de9db7f3e44a3", &preinit, undefined, undefined, undefined);
+  system::register(#"kill_in_area", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
@@ -22,7 +22,7 @@ function private preinit() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_6c9de9db7f3e44a3", &on_begin, &on_end);
+  zm_trial::register_challenge(#"kill_in_area", &on_begin, &on_end);
 }
 
 function private on_begin(var_a84ac7c8, str_archetype, n_kill_count, str_destination, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9) {
@@ -82,7 +82,7 @@ function private on_ai_killed(params) {
 }
 
 function private function_492f4c79() {
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 12;
   zm_utility::function_75fd65f9(self.var_f7f308cd, 1);
 }

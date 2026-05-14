@@ -95,7 +95,7 @@ function set_blops_dialog(teamindex) {
 
   if(level.var_7ee6af9f === "mpcommander") {
     factionlist = map::function_596f8772();
-    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : # "");
+    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : #"");
     self.pers[level.var_7ee6af9f] = isDefined(faction.var_ccc3e5ba) ? faction.var_ccc3e5ba : "blops_commander";
     return;
   }
@@ -116,7 +116,7 @@ function set_cdp_dialog(teamindex) {
   }
 
   factionlist = map::function_596f8772();
-  faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : # "");
+  faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : #"");
   self.pers[level.var_7ee6af9f] = isDefined(faction.var_ccc3e5ba) ? faction.var_ccc3e5ba : "cdp_commander";
 }
 

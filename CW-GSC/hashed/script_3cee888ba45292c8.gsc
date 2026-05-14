@@ -254,7 +254,7 @@ function private function_d2e99333(entity) {
       var_b9dab425 = zm_ai_utility::function_825317c(entity);
 
       if(!awareness::function_2bc424fd(entity, var_b9dab425)) {
-        awareness::set_state(entity, isDefined(entity.var_78f5fd91) ? entity.var_78f5fd91 : # "wander");
+        awareness::set_state(entity, isDefined(entity.var_78f5fd91) ? entity.var_78f5fd91 : #"wander");
         return;
       }
 

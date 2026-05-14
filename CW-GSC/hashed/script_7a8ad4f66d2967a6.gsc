@@ -47,15 +47,15 @@ function preinit() {
   level thread function_24111b5e();
 
   level.var_6ec3a820 = getdvarint(#"hash_1300f6ba32e8d68c", 512);
-  level.var_aaa4273e = getdvarint(#"hash_163c95340307e3aa", 320);
-  level.var_3851f0df = getdvarint(#"hash_16579f34031ebc60", 512);
+  level.var_aaa4273e = getdvarint(#"scr_overwatch_height_min", 320);
+  level.var_3851f0df = getdvarint(#"scr_overwatch_height_max", 512);
   level.var_46574a81 = getdvarint(#"hash_26f6fa23a134bc05", 4);
   level.var_eacd8867 = getdvarint(#"hash_27120423a14b94bb", 6);
   level.var_324af044 = getdvarint(#"scr_heli_protect_time", 20);
   level.heli_targeting_delay = getDvar(#"scr_heli_targeting_delay", 1);
-  level.var_17076139 = getdvarint(#"hash_5681be4514516b7a", 320);
-  level.var_c2bbc18f = getdvarint(#"hash_569da8451469c0d0", 512);
-  level.var_d9c77d70 = getdvarint(#"hash_7e0189d9c55ba919", 350);
+  level.var_17076139 = getdvarint(#"scr_helicopter_height_min", 320);
+  level.var_c2bbc18f = getdvarint(#"scr_helicopter_height_max", 512);
+  level.var_d9c77d70 = getdvarint(#"scr_helicopter_height_offset", 350);
   level.heli_debug = getDvar(#"scr_heli_debug", 0);
   level.heli_turretreloadtime = getDvar(#"scr_heli_turretreloadtime", 0.5);
   level.heli_turretclipsize = getDvar(#"scr_heli_turretclipsize", 60);
@@ -269,15 +269,15 @@ function spawn_chopper(start_node) {
   chopper vehicle::toggle_sounds(1);
   chopper vehicle::lights_on();
   chopper setrotorspeed(1);
-  var_4301b21d = vehicle::function_999240f5(chopper);
+  numseats = vehicle::function_999240f5(chopper);
 
-  if(var_4301b21d < 0) {
-    var_4301b21d = 0;
-  } else if(var_4301b21d > 4) {
-    var_4301b21d = 4;
+  if(numseats < 0) {
+    numseats = 0;
+  } else if(numseats > 4) {
+    numseats = 4;
   }
 
-  for(i = 0; i < var_4301b21d; i++) {
+  for(i = 0; i < numseats; i++) {
     rider = spawnactor("spawner_bo5_human_allies_us_army_ar", chopper.origin, (0, 0, 0), "killstreak_chopper_passenger");
 
     if(i == 0) {

@@ -122,7 +122,7 @@ function player_init_shield_health(weapon, var_cd9d17e0 = 0) {
       break;
   }
 
-  var_2aaf6cdb = zombie_utility::get_zombie_var(#"hash_cc85b961f25c2ff");
+  var_2aaf6cdb = zombie_utility::get_zombie_var(#"shield_damage_mult");
 
   if(isDefined(var_2aaf6cdb)) {
     level.var_7bcfc873 *= var_2aaf6cdb;
@@ -303,7 +303,7 @@ function player_damage_shield(idamage, bheld, fromcode, smod = 0, var_4e0da269 =
 }
 
 function function_d24e0d61() {
-  var_41f4ea3c = self.var_9c2026aa + namespace_e38c57c1::function_cbf286b0();
+  var_41f4ea3c = self.var_9c2026aa + zm_faction_buffs::function_cbf286b0();
   return 1 - var_41f4ea3c;
 }
 

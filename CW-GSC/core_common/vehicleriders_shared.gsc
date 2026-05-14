@@ -20,7 +20,7 @@ class class_358332cc {
   var doorstatus;
   var riders;
   var var_3acc1a95;
-  var var_4301b21d;
+  var numseats;
   var var_709c0a6f;
   var var_9e2a2132;
   var var_cc0d1da;
@@ -28,7 +28,7 @@ class class_358332cc {
 
   constructor() {
     riders = [];
-    var_4301b21d = 0;
+    numseats = 0;
     var_3acc1a95 = 0;
     var_9e2a2132 = 0;
     var_709c0a6f = 0;
@@ -97,10 +97,10 @@ function private function_810a3de5(vehicle) {}
 
 function private function_41cf7b1d(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = getscriptbundle(vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(issubstr(position, "driver")) {
@@ -113,10 +113,10 @@ function private function_41cf7b1d(vehicle) {
 
 function private function_f7ce77b(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = getscriptbundle(vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(position == "passenger1") {
@@ -129,10 +129,10 @@ function private function_f7ce77b(vehicle) {
 
 function private function_2453a4a2(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = getscriptbundle(vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(position == "gunner1") {
@@ -145,10 +145,10 @@ function private function_2453a4a2(vehicle) {
 
 function private function_6fd51bb0(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   bundle = getscriptbundle(vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(position == "gunner2") {
@@ -161,11 +161,11 @@ function private function_6fd51bb0(vehicle) {
 
 function private function_72b503cc(vehicle) {
   assert(isvehicle(vehicle));
-  var_4301b21d = function_999240f5(vehicle);
+  numseats = function_999240f5(vehicle);
   var_3acc1a95 = 0;
   bundle = getscriptbundle(vehicle.vehicleridersbundle);
 
-  for(seat = 0; seat < var_4301b21d; seat++) {
+  for(seat = 0; seat < numseats; seat++) {
     position = bundle.objects[seat].position;
 
     if(issubstr(position, "crew")) {
@@ -184,10 +184,10 @@ function function_999240f5(vehicle) {
   }
 
   assert(isDefined(vehicle.vehicleridersbundle));
-  var_4301b21d = getscriptbundle(vehicle.vehicleridersbundle).var_4301b21d;
+  numseats = getscriptbundle(vehicle.vehicleridersbundle).numseats;
 
-  if(isDefined(var_4301b21d)) {
-    return var_4301b21d;
+  if(isDefined(numseats)) {
+    return numseats;
   }
 
   return 0;
@@ -234,15 +234,15 @@ function private on_vehicle_spawned() {
 
   function_810a3de5(self);
   self thread function_8160dc33();
-  var_4301b21d = function_999240f5(self);
+  numseats = function_999240f5(self);
 
-  if(!isDefined(var_4301b21d) || var_4301b21d <= 0) {
+  if(!isDefined(numseats) || numseats <= 0) {
     return;
   }
 
   self.var_761c973 = new class_358332cc();
   self.var_761c973.riders = [];
-  self.var_761c973.var_4301b21d = var_4301b21d;
+  self.var_761c973.numseats = numseats;
   self flag::init("driver_occupied", 0);
   self flag::init("passenger1_occupied", 0);
   self flag::init("gunner1_occupied", 0);
@@ -566,8 +566,8 @@ function unload(seat) {
     return;
   }
 
-  var_4301b21d = self.var_761c973.var_4301b21d;
-  assert(var_4301b21d > 0);
+  numseats = self.var_761c973.numseats;
+  assert(numseats > 0);
   self.var_761c973.var_e30918cc = [];
 
   switch (seat) {
@@ -699,7 +699,7 @@ function private function_da0917a4(vehicle) {
 }
 
 function private function_2ca26543(vehicle) {
-  assert(isDefined(vehicle.var_761c973.var_4301b21d) && vehicle.var_761c973.var_4301b21d > 0);
+  assert(isDefined(vehicle.var_761c973.numseats) && vehicle.var_761c973.numseats > 0);
 
   if(!isDefined(vehicle.var_761c973.var_3acc1a95)) {
     return;

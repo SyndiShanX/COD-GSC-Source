@@ -39,14 +39,14 @@ function event_handler[gametype_init] main(eventstruct) {
   level.othervisuals = [];
   fields = getmapfields();
   level.var_117b4a3a = [];
-  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : # "hash_280d5153e1276d";
-  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : # "hash_4b1a3a0285bea14d";
-  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : # "hash_36a94457406aea0e";
-  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : # "hash_5a60154937b01557";
-  level.var_117b4a3a[4] = isDefined(fields.var_cd9dabc7) ? fields.var_cd9dabc7 : # "hash_c102abd4eb802c2";
-  level.var_117b4a3a[5] = isDefined(fields.var_66b704d1) ? fields.var_66b704d1 : # "hash_1f6942044733abd";
-  level.var_117b4a3a[6] = isDefined(fields.var_43647dc0) ? fields.var_43647dc0 : # "hash_5a5907512d97c7dc";
-  level.var_117b4a3a[7] = isDefined(fields.var_f605c142) ? fields.var_f605c142 : # "hash_1ebd257fc3bf9843";
+  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : #"hash_280d5153e1276d";
+  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : #"hash_4b1a3a0285bea14d";
+  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : #"hash_36a94457406aea0e";
+  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : #"hash_5a60154937b01557";
+  level.var_117b4a3a[4] = isDefined(fields.var_cd9dabc7) ? fields.var_cd9dabc7 : #"hash_c102abd4eb802c2";
+  level.var_117b4a3a[5] = isDefined(fields.var_66b704d1) ? fields.var_66b704d1 : #"hash_1f6942044733abd";
+  level.var_117b4a3a[6] = isDefined(fields.var_43647dc0) ? fields.var_43647dc0 : #"hash_5a5907512d97c7dc";
+  level.var_117b4a3a[7] = isDefined(fields.var_f605c142) ? fields.var_f605c142 : #"hash_1ebd257fc3bf9843";
   callback::on_spawned(&function_df78674f);
   callback::add_callback(#"server_objective", &function_3022f6ba);
 }
@@ -205,9 +205,9 @@ function monitor_flag_fx(localclientnum, flag_objective, flag_name) {
         var_4e8c1813 = serverobjective_getobjectivegamemodeflags(localclientnum, flag_objective);
 
         if(var_4e8c1813 == 2) {
-          var_76587cfe = codcaster::function_b8fe9b52(localclientnum) ? # "axis" : # "allies";
+          var_76587cfe = codcaster::function_b8fe9b52(localclientnum) ? #"axis" : #"allies";
         } else if(var_4e8c1813 == 1) {
-          var_76587cfe = codcaster::function_b8fe9b52(localclientnum) ? # "allies" : # "axis";
+          var_76587cfe = codcaster::function_b8fe9b52(localclientnum) ? #"allies" : #"axis";
         }
       } else if(codcaster::function_b8fe9b52(localclientnum)) {
         var_76587cfe = util::get_other_team(var_76587cfe);

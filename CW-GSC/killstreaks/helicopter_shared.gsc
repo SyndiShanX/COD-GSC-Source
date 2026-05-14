@@ -1367,7 +1367,7 @@ function heli_damage_monitor(hardpointtype) {
         case #"helicopter_comlink":
         case #"helicopter":
         case #"inventory_helicopter_comlink":
-          notifystring = #"hash_286f843fea185e5";
+          notifystring = #"killstreak/destroyed_helicopter";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
         case #"supply_drop":
@@ -2032,7 +2032,7 @@ function function_656691ab() {
         self set_goal_pos(self.heligoalpos, 1);
       }
 
-      self notify(#"hash_340ab3c2b94ff86a");
+      self notify(#"switched_pathing");
       break;
     }
 

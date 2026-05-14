@@ -115,7 +115,7 @@ function debug_vehicle_spawn() {
 }
 
 function function_f42944c7() {
-  if(!getdvarint(#"hash_57a9b32c8a8503f1", 0) || !self function_1221d304()) {
+  if(!getdvarint(#"dev_draw_vehicles", 0) || !self function_1221d304()) {
     return;
   }
 
@@ -142,7 +142,7 @@ function function_f42944c7() {
   str_type = hashtostring(self.vehicletype);
   v_color = self function_b2775b52();
 
-  while(getdvarint(#"hash_57a9b32c8a8503f1", 0)) {
+  while(getdvarint(#"dev_draw_vehicles", 0)) {
     var_91d1913b = distance2d(level.players[0].origin, self.origin);
     n_radius = 0.015 * var_91d1913b;
 
@@ -171,7 +171,7 @@ function function_f567f0cd() {
   level notify(#"hash_79845fe0e187bb22");
   level endon(#"hash_79845fe0e187bb22");
 
-  while(getdvarint(#"hash_57a9b32c8a8503f1", 0)) {
+  while(getdvarint(#"dev_draw_vehicles", 0)) {
     n_total = 0;
     var_bd9acc19 = 176;
 
@@ -193,7 +193,7 @@ function function_f567f0cd() {
 }
 
 function function_1221d304() {
-  a_str_types = array(#"veh_quad_player_wz_blk", #"hash_232abda4e81275f4", #"veh_quad_player_wz_grn", #"hash_2f8d60a5381870ee", #"veh_quad_player_wz_tan", #"veh_mil_ru_fav_heavy", #"vehicle_t9_mil_fav_light", #"hash_42b91f3544c1a9e1", #"hash_6595f5efe62a4ec", #"hash_17e868e0ebf3c1d6", #"vehicle_motorcycle_mil_us_offroad", #"hash_2c0e11a1e87bbcd5", #"vehicle_t9_mil_snowmobile", #"hash_28d512b739c9d9c1", #"hash_2d32c08b862baa46", #"vehicle_t9_mil_ru_truck_light_player", #"hash_2a245bf3738fed8b", #"vehicle_t9_civ_ru_sedan_80s_player", #"hash_dd63f34c77a725e");
+  a_str_types = array(#"veh_quad_player_wz_blk", #"veh_quad_player_wz_blu", #"veh_quad_player_wz_grn", #"veh_quad_player_wz_red", #"veh_quad_player_wz_tan", #"veh_mil_ru_fav_heavy", #"vehicle_t9_mil_fav_light", #"hash_42b91f3544c1a9e1", #"hash_6595f5efe62a4ec", #"hash_17e868e0ebf3c1d6", #"vehicle_motorcycle_mil_us_offroad", #"hash_2c0e11a1e87bbcd5", #"vehicle_t9_mil_snowmobile", #"hash_28d512b739c9d9c1", #"hash_2d32c08b862baa46", #"vehicle_t9_mil_ru_truck_light_player", #"hash_2a245bf3738fed8b", #"vehicle_t9_civ_ru_sedan_80s_player", #"hash_dd63f34c77a725e");
 
   foreach(str_type in a_str_types) {
     if(self.vehicletype == str_type) {
@@ -238,8 +238,8 @@ function function_b2775b52() {
       return (1, 0, 1);
     case #"veh_quad_player_wz_tan":
     case #"veh_quad_player_wz_blk":
-    case #"hash_232abda4e81275f4":
-    case #"hash_2f8d60a5381870ee":
+    case #"veh_quad_player_wz_blu":
+    case #"veh_quad_player_wz_red":
     case #"veh_quad_player_wz_grn":
       return (1, 0, 1);
     default:

@@ -30,7 +30,7 @@ function private preinit() {
   level.var_11d9ab7c = new class_c6c0e94();
   [[level.var_11d9ab7c]] - > initialize(#"ultimate_turret_zm", 1, float(function_60d95f53()) / 1000);
   init_shared();
-  deployable::register_deployable(getweapon("ultimate_turret"), &function_53028023, undefined, #"mp/sentry_deploy", #"hash_37605398dce96965");
+  deployable::register_deployable(getweapon("ultimate_turret"), &function_53028023, undefined, #"mp/sentry_deploy", #"weapon/cant_plant_equipment");
   callback::on_vehicle_spawned(&function_bf97d10);
   callback::on_deleted(&function_634677dd);
 }

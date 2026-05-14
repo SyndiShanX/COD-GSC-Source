@@ -650,7 +650,7 @@ function function_f807c679(e_attacker, e_inflictor) {
         e_attacker function_d6b32ad3(w_damage, #"specialkills", 1);
         e_attacker stats::inc_stat(#"item_stats", w_damage.name, #"specialkills", #"statvalue", 1);
         e_attacker thread activecamo::function_896ac347(w_damage, #"special_kills", 1);
-        e_attacker thread activecamo::function_896ac347(w_damage, #"hash_39ab7cda18fd5c74", 1);
+        e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"contract_zm_special_kills");
 
         if(var_a0345f37.archetype === #"raz" && var_a0345f37.str_damagemod === "MOD_MELEE") {
@@ -676,7 +676,7 @@ function function_f807c679(e_attacker, e_inflictor) {
         e_attacker function_d6b32ad3(w_damage, #"hash_20806ac72acd7d15", 1);
         e_attacker stats::inc_stat(#"item_stats", w_damage.name, #"hash_20806ac72acd7d15", #"statvalue", 1);
         e_attacker thread activecamo::function_896ac347(w_damage, #"hash_45814ac55657fc62", 1);
-        e_attacker thread activecamo::function_896ac347(w_damage, #"hash_39ab7cda18fd5c74", 1);
+        e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"hash_1bbcbc1ef268d554");
         break;
       case #"normal":
@@ -686,7 +686,7 @@ function function_f807c679(e_attacker, e_inflictor) {
         e_attacker function_d6b32ad3(w_damage, #"verminkills", 1);
         e_attacker stats::inc_stat(#"item_stats", w_damage.name, #"verminkills", #"statvalue", 1);
         e_attacker thread activecamo::function_896ac347(w_damage, #"vermin_kills", 1);
-        e_attacker thread activecamo::function_896ac347(w_damage, #"hash_39ab7cda18fd5c74", 1);
+        e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"contract_zm_vermin_kills");
         break;
     }
@@ -2246,7 +2246,7 @@ function is_challenge(n_challenge_index) {
 function function_9a9ab6f6(var_1c48b665) {
   self zm_stats::increment_challenge_stat(var_1c48b665);
 
-  foreach(var_6c7a7f72 in array(#"darkops_zod_ee", #"hash_6d5340d9e43ed73d", #"hash_ad3a508a80a0e6e")) {
+  foreach(var_6c7a7f72 in array(#"darkops_zod_ee", #"hash_6d5340d9e43ed73d", #"darkops_escape_ee")) {
     if(!self stats::get_stat_global(var_6c7a7f72)) {
       return;
     }

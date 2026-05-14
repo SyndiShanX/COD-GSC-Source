@@ -221,14 +221,14 @@ function gameover_snapshot() {
 
 function sndzmblaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    playSound(fieldname, #"hash_5e980fdf2497d9a1", (0, 0, 0));
+    playSound(fieldname, #"zmb_laststand_enter_plr", (0, 0, 0));
     self.var_63de16a = self playLoopSound(#"hash_7b41cf42e1b9847b");
     self.inlaststand = 1;
     return;
   }
 
   if(is_true(self.inlaststand)) {
-    playSound(fieldname, #"hash_1526662237d7780f", (0, 0, 0));
+    playSound(fieldname, #"zmb_laststand_exit_plr", (0, 0, 0));
     self stoploopsound(self.var_63de16a);
     self.inlaststand = 0;
   }

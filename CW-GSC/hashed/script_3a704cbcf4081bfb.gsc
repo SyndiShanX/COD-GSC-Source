@@ -276,7 +276,7 @@ function function_c4504c49(spawn_loc, var_75f9ae2d) {
 
   if(!isDefined(bundle)) {
     return {
-      #prop_name: # "barrel_rust_01_green", #pos_offset: (0, 0, 0), #angle_offset: (0, 0, 0), #rattle_sound: "amb_rattle_barrel"};
+      #prop_name: #"barrel_rust_01_green", #pos_offset: (0, 0, 0), #angle_offset: (0, 0, 0), #rattle_sound: "amb_rattle_barrel"};
   }
 
   model_entry = bundle.var_e451a3f7[randomint(bundle.var_e451a3f7.size)];

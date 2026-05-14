@@ -352,7 +352,7 @@ function function_c88b8726(index) {
   level.doa.var_182fb75a = index;
   profilestop();
   namespace_ec06fe4a::function_de70888a();
-  namespace_1e25ad94::debugmsg("Creating a new Dungeon! Instance# " + level.doa.var_a354a42f);
+  namespace_1e25ad94::debugmsg("Creating a new Dungeon! Instance#" + level.doa.var_a354a42f);
   level.doa.var_a354a42f++;
   level clientfield::set("world_dungeon_set", index);
   util::wait_network_frame();

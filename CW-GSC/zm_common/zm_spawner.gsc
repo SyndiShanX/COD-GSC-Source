@@ -1384,7 +1384,7 @@ function zombie_death_event(zombie) {
       attacker zm_camos::function_7b29c2d2(zombie.damageweapon);
       attacker zm_stats::function_ef7d5199(zombie, zombie.damageweapon);
       level thread telemetry::function_18135b72(#"hash_b88b6d2e0028e13", {
-        #player: attacker, #weapon: zombie.damageweapon, #statname: # "kills", #value: 1
+        #player: attacker, #weapon: zombie.damageweapon, #statname: #"kills", #value: 1
       });
 
       if(zombie.damageweapon.statname === #"planemortar") {

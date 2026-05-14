@@ -460,7 +460,7 @@ function private function_92d262c6(angle_offset) {
   dropstruct = {
     #origin: self.origin, #angles: self.angles + angle_offset, #var_738dfc81: count
   };
-  dropstruct namespace_65181344::function_fd87c780(#"hash_335d72a3810450f7", count, 3);
+  dropstruct item_spawn_groups_util::function_fd87c780(#"hash_335d72a3810450f7", count, 3);
 }
 
 function get_player_tactical_grenade() {

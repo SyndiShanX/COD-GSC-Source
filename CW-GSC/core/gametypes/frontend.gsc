@@ -381,10 +381,10 @@ function function_41cd078d() {
 }
 
 function function_e4ea0153() {
-  setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x8c>");
+  setDvar(#"scr_aar_devgui_cmd", "<dev string:x8c>");
 
   while(true) {
-    aarcmd = getdvarstring(#"hash_3319d0fd07c9ead8", "<dev string:x8c>");
+    aarcmd = getdvarstring(#"scr_aar_devgui_cmd", "<dev string:x8c>");
 
     if(aarcmd == "<dev string:x8c>") {
       waitframe(1);
@@ -404,7 +404,7 @@ function function_e4ea0153() {
       function_9eac333e();
     }
 
-    setDvar(#"hash_3319d0fd07c9ead8", "<dev string:x8c>");
+    setDvar(#"scr_aar_devgui_cmd", "<dev string:x8c>");
     wait 0.25;
   }
 }

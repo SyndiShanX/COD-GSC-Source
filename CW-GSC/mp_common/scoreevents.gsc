@@ -230,10 +230,10 @@ function scoreeventplayerkill(data, time) {
         if(isDefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
           processscoreevent(#"kill_enemy_who_killed_teammate", attacker, victim, weapon);
           attacker activecamo::function_896ac347(weapon, #"avenger", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
           attacker stats::function_dad108fa(#"hash_47c20b0aa74ca0c", 1);
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-            #player: victim, #var_bdc4bbd2: # "avenger"});
+            #player: victim, #var_bdc4bbd2: #"avenger"});
         }
       }
 
@@ -265,7 +265,7 @@ function scoreeventplayerkill(data, time) {
 
             challenges::function_3f57a5b(attacker, weapon);
             level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-              #player: victim, #var_bdc4bbd2: # "defender"});
+              #player: victim, #var_bdc4bbd2: #"defender"});
           }
         }
       }
@@ -302,7 +302,7 @@ function scoreeventplayerkill(data, time) {
 
       if(isDefined(sensor)) {
         if(function_9aef690a(weapon)) {
-          processscoreevent(#"hash_1f661efe5e6707ad", var_78056843, victim, weapon);
+          processscoreevent(#"sensor_dart_assist_unique", var_78056843, victim, weapon);
         } else {
           processscoreevent(#"sensor_dart_assist", var_78056843, victim, weapon);
         }
@@ -353,7 +353,7 @@ function scoreeventplayerkill(data, time) {
     if(challenges::ishighestscoringplayer(victim)) {
       processscoreevent(#"kill_enemy_who_has_high_score", attacker, victim, weapon);
       attacker activecamo::function_896ac347(weapon, #"kingslayer", 1);
-      attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+      attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
       attacker contracts::increment_contract(#"hash_47ca0c4002f709e5");
       attacker contracts::increment_contract(#"hash_30ea14a4ce0e5d04");
     }
@@ -386,9 +386,9 @@ function scoreeventplayerkill(data, time) {
 
       if(isDefined(var_7006e4f4) && var_504c7a2f == 1) {
         if(var_7006e4f4 == attacker) {
-          processscoreevent(#"hash_3d3467f13cf43727", attacker, victim, getweapon(#"mute_smoke"));
+          processscoreevent(#"mute_smoke_kill", attacker, victim, getweapon(#"mute_smoke"));
         } else {
-          processscoreevent(#"hash_5a52344f66f68864", var_7006e4f4, victim, weapon);
+          processscoreevent(#"mute_smoke_assist", var_7006e4f4, victim, weapon);
         }
       }
     }
@@ -443,7 +443,7 @@ function scoreeventplayerkill(data, time) {
       }
 
       level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-        #player: victim, #var_bdc4bbd2: # "firstblood"});
+        #player: victim, #var_bdc4bbd2: #"firstblood"});
       level.var_8a3a9ca4.firstblood = gettime();
       attacker contracts::increment_contract(#"hash_61c7d530de491c8d");
       globallogic::function_3305e557(attacker, "firstBlood", 0);
@@ -464,9 +464,9 @@ function scoreeventplayerkill(data, time) {
           attacker stats::function_dad108fa(#"hash_73a57f5f2565ac51", 1);
           attacker contracts::increment_contract(#"hash_be7f654734e0ee5");
           attacker activecamo::function_896ac347(weapon, #"revenge", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
           level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-            #player: victim, #var_bdc4bbd2: # "revenge"});
+            #player: victim, #var_bdc4bbd2: #"revenge"});
           attacker.lastkilledby = undefined;
           data.results.var_905bd140 = 1;
         }
@@ -476,9 +476,9 @@ function scoreeventplayerkill(data, time) {
         level.globalbuzzkills++;
         processscoreevent(#"stop_enemy_killstreak", attacker, victim, weapon);
         attacker activecamo::function_896ac347(weapon, #"buzzkill", 1);
-        attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+        attacker activecamo::function_896ac347(weapon, #"take_it_personally", 1);
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: victim, #var_bdc4bbd2: # "buzzkill"});
+          #player: victim, #var_bdc4bbd2: #"buzzkill"});
       }
 
       if(isDefined(victim.lastmansd) && victim.lastmansd == 1) {
@@ -508,7 +508,7 @@ function scoreeventplayerkill(data, time) {
         attacker contracts::increment_contract(#"contract_mp_longshot");
         attacker.pers[#"longshots"]++;
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-          #player: victim, #var_bdc4bbd2: # "longshot"});
+          #player: victim, #var_bdc4bbd2: #"longshot"});
         data.results.var_91b86b21 = 1;
 
         if(isDefined(attacker.var_ea1458aa)) {
@@ -570,14 +570,14 @@ function scoreeventplayerkill(data, time) {
       level.globalafterlifes++;
       processscoreevent(#"kill_enemy_after_death", attacker, victim, weapon);
       level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-        #player: victim, #var_bdc4bbd2: # "posthumous"});
+        #player: victim, #var_bdc4bbd2: #"posthumous"});
     }
 
     if(isDefined(attacker.cur_death_streak) && attacker.cur_death_streak >= 3) {
       level.globalcomebacks++;
       processscoreevent(#"comeback_from_deathstreak", attacker, victim, weapon);
       level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-        #player: victim, #var_bdc4bbd2: # "comeback"});
+        #player: victim, #var_bdc4bbd2: #"comeback"});
     }
 
     if(isDefined(victim.lastmicrowavedby)) {
@@ -941,7 +941,7 @@ function scoreeventplayerkill(data, time) {
   if(isDefined(killstreak)) {
     attacker thread updatemultikills(weapon, weaponclass, killstreak, victim, time, meansofdeath);
     level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
-      #player: victim, #var_bdc4bbd2: # "killstreak"});
+      #player: victim, #var_bdc4bbd2: #"killstreak"});
   }
 
   attacker.cur_death_streak = 0;
@@ -990,11 +990,11 @@ function heavyweaponkill(attacker, victim, weapon) {
     case #"sig_minigun_alt":
     case #"sig_minigun":
     case #"sig_minigun_turret_28":
-    case #"hash_5a34aef4b8c72a24":
+    case #"sig_minigun_turret_24":
     case #"sig_minigun_turret_32":
-    case #"hash_5a3832f4b8ca4047":
-    case #"hash_5a492ef4b8d8acae":
-    case #"hash_5a4932f4b8d8b37a":
+    case #"sig_minigun_turret_36":
+    case #"sig_minigun_turret_40":
+    case #"sig_minigun_turret_44":
       if(attacker function_a867284b() && attacker playerads() == 1) {
         event = "mounted_kill";
       } else {
@@ -1545,7 +1545,7 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
     processscoreevent(#"lightninggun_multikill", self, time, weaponclass);
     self multikillmedalachievement();
   } else if(self.recentlightningguncount == 2) {
-    processscoreevent(#"hash_1ff9cffb9d62d81a", self, time, weaponclass);
+    processscoreevent(#"tempest_multikill_2", self, time, weaponclass);
     self multikillmedalachievement();
   }
 
@@ -1721,7 +1721,7 @@ function updateoneshotmultikills(victim, weapon, firsttimedamaged, meansofdeath,
 
   if(self.oneshotmultikills > 1) {
     processscoreevent(#"kill_enemies_one_bullet", self, victim, weapon);
-    self contracts::increment_contract(#"hash_45b74ebf1ab2fd47");
+    self contracts::increment_contract(#"contract_mp_collateral");
   } else if(weapon.statindex != level.weapon_hero_annihilator.statindex) {
     processscoreevent(#"kill_enemy_one_bullet", self, victim, weapon);
     self stats::function_561716e6(weapon.name, #"hash_1253a442c652a94d", 1);

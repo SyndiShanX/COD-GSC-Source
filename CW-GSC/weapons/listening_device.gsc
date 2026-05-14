@@ -205,8 +205,8 @@ function function_d993c135() {
   self endon("53dba4f7fa8e966f");
   level endon(#"game_ended");
   pass = 0;
-  var_af989ae4 = sqr(level.var_8ddf6d3d.var_293163bd);
-  var_84dbcde7 = sqr(level.var_96492769.var_293163bd);
+  var_af989ae4 = sqr(level.var_8ddf6d3d.detectionminspeed);
+  var_84dbcde7 = sqr(level.var_96492769.detectionminspeed);
   var_24fcb2d = min(var_af989ae4, var_84dbcde7);
   var_24bfde42 = sqr(level.var_8ddf6d3d.var_9b69c823);
   var_46638976 = sqr(level.var_96492769.var_9b69c823);

@@ -42,42 +42,42 @@ function private preinit() {
   switch (level.basegametype) {
     case #"koth":
       level.var_ab8dd45a = {
-        #var_284ea17f: # "hash_75fa0382e49cdd2f", #data_function: &function_99b4929d
+        #var_284ea17f: #"hash_75fa0382e49cdd2f", #data_function: &function_99b4929d
       };
       level.var_86d47028 = {
-        #var_284ea17f: # "hash_4f85fe047c18a6f2", #data_function: &function_6607b43f
+        #var_284ea17f: #"hash_4f85fe047c18a6f2", #data_function: &function_6607b43f
       };
       level.var_8d67cbd8 = {
-        #var_284ea17f: # "hash_57af555874ed0050", #data_function: &function_712f816a
+        #var_284ea17f: #"hash_57af555874ed0050", #data_function: &function_712f816a
       };
       level.var_46fc4fdb = &function_4dc75f1b;
       level.var_e1206cfc = &function_f2282b8b;
       break;
     case #"sd":
       level.var_ab8dd45a = {
-        #var_284ea17f: # "hash_d9870c3e6c1e3c5", #data_function: &function_39e8afcf
+        #var_284ea17f: #"hash_d9870c3e6c1e3c5", #data_function: &function_39e8afcf
       };
       level.var_86d47028 = {
-        #var_284ea17f: # "hash_63c6c30aa3ff880", #data_function: &function_9555b8d2
+        #var_284ea17f: #"hash_63c6c30aa3ff880", #data_function: &function_9555b8d2
       };
       level.var_8d67cbd8 = {
-        #var_284ea17f: # "hash_628978e8b4daa872", #data_function: &function_150786f3
+        #var_284ea17f: #"hash_628978e8b4daa872", #data_function: &function_150786f3
       };
       level.var_46fc4fdb = &function_86398c9c;
       level.var_e1206cfc = &function_ceb40ef4;
       break;
     case #"control":
       level.var_ab8dd45a = {
-        #var_284ea17f: # "hash_22a8e3365d654f5b", #data_function: &function_91a0716f
+        #var_284ea17f: #"hash_22a8e3365d654f5b", #data_function: &function_91a0716f
       };
       level.var_86d47028 = {
-        #var_284ea17f: # "hash_740ef2b9ec63f1fe", #data_function: &function_b16086a1
+        #var_284ea17f: #"hash_740ef2b9ec63f1fe", #data_function: &function_b16086a1
       };
       level.var_8d67cbd8 = {
-        #var_284ea17f: # "hash_145e373d3b0196c4", #data_function: &function_cdce904b
+        #var_284ea17f: #"hash_145e373d3b0196c4", #data_function: &function_cdce904b
       };
       level.var_88531f89 = {
-        #var_284ea17f: # "hash_2880dbfd80bebbb2", #data_function: &function_2b1314ec
+        #var_284ea17f: #"hash_2880dbfd80bebbb2", #data_function: &function_2b1314ec
       };
       level.var_46fc4fdb = &function_979f0cb4;
       level.var_e1206cfc = &function_a9b19a49;
@@ -199,16 +199,16 @@ function function_d757edb5() {
 
   if(winning_team == game.attackers) {
     return {
-      #side: # "attack", #var_9bfeafed: winning_team, #var_c7a20fbb: game.defenders
+      #side: #"attack", #var_9bfeafed: winning_team, #var_c7a20fbb: game.defenders
     };
   } else if(winning_team == game.defenders) {
     return {
-      #side: # "defense", #var_9bfeafed: winning_team, #var_c7a20fbb: game.attackers
+      #side: #"defense", #var_9bfeafed: winning_team, #var_c7a20fbb: game.attackers
     };
   }
 
   return {
-    #side: # "none", #var_9bfeafed: winning_team, #var_c7a20fbb: # "none"};
+    #side: #"none", #var_9bfeafed: winning_team, #var_c7a20fbb: #"none"};
 }
 
 function function_ddf02547() {

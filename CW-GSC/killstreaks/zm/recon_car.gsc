@@ -34,14 +34,14 @@ function private preinit() {
 
   killstreak_detect::init_shared();
   remote_weapons::init_shared();
-  killstreaks::function_b5b6ef3e(&init_killstreak);
+  killstreaks::on_init_killstreaks(&init_killstreak);
   clientfield::register("vehicle", "" + #"hash_5b4b44738e08c9b9", 28000, 1, "counter");
 }
 
 function init_killstreak() {
   bundle = getscriptbundle("killstreak_recon_car_zm");
   killstreak_vehicle::init_killstreak(bundle);
-  deployable::register_deployable(getweapon(#"recon_car_zm"), &function_b5006cfa, undefined, undefined, #"hash_37605398dce96965");
+  deployable::register_deployable(getweapon(#"recon_car_zm"), &function_b5006cfa, undefined, undefined, #"weapon/cant_plant_equipment");
   callback::on_weapon_change(&function_93426c92);
   vehicle::add_main_callback("vehicle_t9_rcxd_racing_zm", &function_d1661ada);
 }
@@ -230,7 +230,7 @@ function private function_584fb7a3() {
   vehicle endon(#"death");
 
   if(!is_true(vehicle.remote_weapon_end)) {
-    vehicle waittill(#"remote_weapon_end", #"hash_59b25025ce93a142");
+    vehicle waittill(#"remote_weapon_end", #"remote_weapon_shutdown_watch_death");
   }
 
   attacker = isDefined(vehicle.owner) ? vehicle.owner : undefined;

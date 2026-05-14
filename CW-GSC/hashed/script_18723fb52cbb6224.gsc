@@ -183,10 +183,10 @@ function function_ba971eed(instance) {
   dropstruct = {
     #origin: instance.s_start.origin, #angles: instance.s_start.angles + (0, -45, 0), #var_738dfc81: 8
   };
-  dropstruct namespace_65181344::function_fd87c780(#"survival_resource_list", 8, 3);
+  dropstruct item_spawn_groups_util::function_fd87c780(#"survival_resource_list", 8, 3);
 
   if(!is_true(instance.var_8ba71ca4)) {
-    var_4d16dab7 = dropstruct namespace_65181344::function_fd87c780(#"sr_radio_tuning_music_drop", 1, 3);
+    var_4d16dab7 = dropstruct item_spawn_groups_util::function_fd87c780(#"sr_radio_tuning_music_drop", 1, 3);
 
     if(isDefined(var_4d16dab7) && isDefined(var_4d16dab7[0])) {
       var_976623c6 = var_4d16dab7[0].itementry.name;
@@ -198,7 +198,7 @@ function function_ba971eed(instance) {
   var_ef68496e = int(isDefined(instance.var_2b4467a7) ? instance.var_2b4467a7 : 1);
 
   if(isstring(var_1c81dd7a) && var_1c81dd7a != "") {
-    dropstruct namespace_65181344::function_fd87c780(var_1c81dd7a, var_ef68496e, 3);
+    dropstruct item_spawn_groups_util::function_fd87c780(var_1c81dd7a, var_ef68496e, 3);
   }
 
   instance thread function_a3780cd3();

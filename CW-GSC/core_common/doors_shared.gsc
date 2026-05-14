@@ -96,7 +96,7 @@ class cdoor {
 
   function open(opener) {
     if(m_str_type === "breach" && !is_true(var_9bc2acd6)) {
-      self notify(#"hash_722c5466076f75cf");
+      self notify(#"breach_door_setup");
       var_9bc2acd6 = 1;
     } else {
       set_player_who_opened(opener);
@@ -607,7 +607,7 @@ class cdoor {
       e_player thread doors::player_door_gesture(gesture);
     }
 
-    m_e_door notify(#"hash_7166c13e79b73f9");
+    m_e_door notify(#"player_opened_door");
   }
 
   function set_door_paths(n_door_connect_paths) {
@@ -617,9 +617,9 @@ class cdoor {
   function function_85fe0c35(b_reverse, var_e9da1d4e = 0) {
     if(var_e9da1d4e) {
       if(b_reverse) {
-        return (m_s_bundle.var_f2943dab * -1);
+        return (m_s_bundle.door_swing_angle_barricaded * -1);
       } else {
-        return m_s_bundle.var_f2943dab;
+        return m_s_bundle.door_swing_angle_barricaded;
       }
     }
 
@@ -1556,7 +1556,7 @@ function setup_door_info(s_door_bundle, s_door_instance, c_door) {
     s_door_bundle.door_open_time = s_door_instance.door_open_time;
     s_door_bundle.door_slide_open_units = s_door_instance.door_slide_open_units;
     s_door_bundle.door_swing_angle = s_door_instance.door_swing_angle;
-    s_door_bundle.var_f2943dab = s_door_instance.var_f2943dab;
+    s_door_bundle.door_swing_angle_barricaded = s_door_instance.door_swing_angle_barricaded;
     s_door_bundle.door_closes = s_door_instance.door_closes;
     s_door_bundle.var_d37e8f3e = s_door_instance.var_d37e8f3e;
     s_door_bundle.door_start_open = s_door_instance.door_start_open;
@@ -1578,7 +1578,7 @@ function setup_door_info(s_door_bundle, s_door_instance, c_door) {
     s_door_instance.door_open_time = undefined;
     s_door_instance.door_slide_open_units = undefined;
     s_door_instance.door_swing_angle = undefined;
-    s_door_instance.var_f2943dab = undefined;
+    s_door_instance.door_swing_angle_barricaded = undefined;
     s_door_instance.door_closes = undefined;
     s_door_instance.var_d37e8f3e = undefined;
     s_door_instance.door_start_open = undefined;
@@ -1668,8 +1668,8 @@ function setup_door_info(s_door_bundle, s_door_instance, c_door) {
     c_door.m_s_bundle.door_swing_angle = 0;
   }
 
-  if(!isDefined(c_door.m_s_bundle.var_f2943dab)) {
-    c_door.m_s_bundle.var_f2943dab = 0;
+  if(!isDefined(c_door.m_s_bundle.door_swing_angle_barricaded)) {
+    c_door.m_s_bundle.door_swing_angle_barricaded = 0;
   }
 
   if(is_true(c_door.m_s_bundle.door_closes)) {
@@ -2304,8 +2304,8 @@ function function_dc98f943(c_door) {
   level notify(#"hash_9db88375ef038b", {
     #c_door: c_door, #player: waitresult.player
   });
-  e_door val::set(#"hash_25bedd86747e41e1", "takedamage", 1);
-  e_door val::set(#"hash_25bedd86747e41e1", "allowdeath", 1);
+  e_door val::set(#"c_door_damage", "takedamage", 1);
+  e_door val::set(#"c_door_damage", "allowdeath", 1);
 
   if(isDefined(c_door.m_s_bundle.registersidestepshouldstun)) {
     e_door.health = c_door.m_s_bundle.registersidestepshouldstun;
@@ -2333,8 +2333,8 @@ function function_dc98f943(c_door) {
     e_door function_dfee3dec();
   }
 
-  e_door val::reset(#"hash_25bedd86747e41e1", "takedamage");
-  e_door val::reset(#"hash_25bedd86747e41e1", "allowdeath");
+  e_door val::reset(#"c_door_damage", "takedamage");
+  e_door val::reset(#"c_door_damage", "allowdeath");
   e_door.health = 0;
 
   if(isDefined(c_door.m_s_bundle.var_ffb77aca)) {
@@ -3385,7 +3385,7 @@ function private function_1e18148c() {
   s_minigame.var_42c5101 = self.var_42c5101;
   s_minigame.var_5ebe1cc1 = 0;
   s_minigame.var_3b6bc456 = self.var_3b6bc456;
-  s_minigame.script_team = isDefined(self.script_team) ? self.script_team : # "any";
+  s_minigame.script_team = isDefined(self.script_team) ? self.script_team : #"any";
   s_minigame.scriptbundlename = #"minigame_lockpick";
   s_minigame.var_5350598b = self;
   s_minigame.ent = self.c_door.m_e_door;
@@ -3431,7 +3431,7 @@ function function_191c5a63() {
 
   var_754bedbb = offset[2] <= 0;
   var_c29308f4 = {
-    #var_71b9f0c0: 240, #var_5e83875a: 30, #var_3c8a8153: 1, #var_be77841a: 0, #var_8ce60046: 1, #var_9a27c4ee: 1, #groups: # "doors", #var_531201f1: &function_82f0f91b
+    #var_71b9f0c0: 240, #var_5e83875a: 30, #var_3c8a8153: 1, #var_be77841a: 0, #requires_line_of_sight: 1, #var_9a27c4ee: 1, #groups: #"doors", #var_531201f1: &function_82f0f91b
   };
 
   if(isDefined(self.var_d1c4f848.c_door.m_e_door)) {

@@ -26,7 +26,7 @@ function event_handler[gametype_init] main(eventstruct) {
   spawning::function_adbbb58a(&spawning::function_c24e290c);
   spawning::addsupportedspawnpointtype("fireteam");
   callback::add_callback(#"hash_1019ab4b81d07b35", &on_team_eliminated);
-  callback::add_callback(#"hash_7912e21750e4010d", &function_b057aee2);
+  callback::add_callback(#"death_circle_locked", &function_b057aee2);
   callback::on_player_killed(&on_player_killed);
   callback::on_disconnect(&on_player_disconnect);
   level.alwaysusestartspawns = 1;

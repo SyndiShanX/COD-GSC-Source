@@ -1218,7 +1218,7 @@ crafting() {
   function_269d9f82("barrier_pick_up_shield");
   function_269d9f82("barrier_post_revive", 0);
   function_68da8e33(#"hash_12dc4515e217ec24", 0.5);
-  var_1d1ba5d3 = self gamepadusedlast() ? # "hash_5de9dee0c0a470e5" : # "hash_9ddd3cf7cbddf5b";
+  var_1d1ba5d3 = self gamepadusedlast() ? #"hash_5de9dee0c0a470e5" : #"hash_9ddd3cf7cbddf5b";
   self thread function_3e1e39f8(var_1d1ba5d3, "zm_inventory_menu_opened", undefined, 9999);
   self waittill(#"zm_inventory_menu_opened");
   function_269d9f82("barrier_pre_shield", 0);

@@ -1886,10 +1886,10 @@ function private function_3c494a14() {
   self forceteleport(waitresult.origin, waitresult.angles);
   waitframe(1);
   self show();
-  animation = is_true(waitresult.var_188c5348) ? # "ai_t9_zm_steiner_left_com_pain_split_01" : is_true(waitresult.var_c0bfa8c2) ? # "hash_4f7125d4a1219db1" : # "ai_t9_zm_steiner_left_com_pain_split_01_wide";
+  animation = is_true(waitresult.var_188c5348) ? #"ai_t9_zm_steiner_left_com_pain_split_01" : is_true(waitresult.var_c0bfa8c2) ? #"hash_4f7125d4a1219db1" : #"ai_t9_zm_steiner_left_com_pain_split_01_wide";
 
   if(self function_ba878b50()) {
-    animation = is_true(waitresult.var_188c5348) ? # "ai_t9_zm_steiner_right_com_pain_split_01" : is_true(waitresult.var_c0bfa8c2) ? # "hash_6703e70213b1b7e4" : # "ai_t9_zm_steiner_right_com_pain_split_01_wide";
+    animation = is_true(waitresult.var_188c5348) ? #"ai_t9_zm_steiner_right_com_pain_split_01" : is_true(waitresult.var_c0bfa8c2) ? #"hash_6703e70213b1b7e4" : #"ai_t9_zm_steiner_right_com_pain_split_01_wide";
   }
 
   self.var_3a51c5dc = animation;

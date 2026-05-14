@@ -230,11 +230,11 @@ function getotherteam(str_team) {
   str_team = get_team_mapping(str_team);
 
   if(str_team == #"allies") {
-    return # "axis";
+    return #"axis";
   } else if(str_team == #"axis") {
-    return # "allies";
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:x38>" + str_team);
@@ -1401,7 +1401,7 @@ function create_cursor_hint(tag, originoffset = (0, 0, 0), hintstring, var_2b3af
   prompt_struct.var_754bedbb = var_754bedbb;
   prompt_struct.var_71b9f0c0 = var_42dabd79;
   prompt_struct.var_5e83875a = var_b42660a4;
-  prompt_struct.var_8ce60046 = var_3a0702cc;
+  prompt_struct.requires_line_of_sight = var_3a0702cc;
   prompt_struct.var_9a27c4ee = ignorecollision;
   prompt_struct.var_be77841a = var_a9618cc5;
   prompt_struct.var_531201f1 = validatefunc;
@@ -1759,18 +1759,18 @@ function function_de500b59() {
   mapname = get_map_name();
 
   if(mapname === #"cp_takedown" || mapname === #"cp_rus_yamantau" || mapname === #"cp_sidemission_takedown" || mapname === #"cp_sidemission_tundra") {
-    return # "hash_4d5f6c0e8d8bec20";
+    return #"hash_4d5f6c0e8d8bec20";
   }
 
   if(mapname === #"cp_rus_kgb") {
     if(getplayers()[0].var_4fc36735 === 1) {
-      return # "hash_40c037a247e8b24f";
+      return #"hash_40c037a247e8b24f";
     } else {
-      return # "hash_59ecd456f45762d4";
+      return #"hash_59ecd456f45762d4";
     }
   }
 
-  return # "hash_40c037a247e8b24f";
+  return #"hash_40c037a247e8b24f";
 }
 
 function function_62e48a() {

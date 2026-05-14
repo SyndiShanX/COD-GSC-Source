@@ -42,7 +42,7 @@ function private on_begin(var_2e5ed433, var_1532dab3, var_94d24883) {
 
 function private on_end(round_reset) {
   level.var_2e5ed433 = undefined;
-  level notify(#"hash_2669c6e7b1eb2e4b");
+  level notify(#"stop_watching_points");
 }
 
 function is_active() {
@@ -51,7 +51,7 @@ function is_active() {
 }
 
 function private point_watcher(var_1532dab3 = 1, var_94d24883 = 0.9) {
-  level endon(#"hash_2669c6e7b1eb2e4b", #"end_game", #"hash_7646638df88a3656");
+  level endon(#"stop_watching_points", #"end_game", #"trial_round_end");
   self endon(#"disconnect");
   wait 15;
 

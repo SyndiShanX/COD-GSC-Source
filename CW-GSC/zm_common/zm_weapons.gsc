@@ -363,7 +363,7 @@ function function_8fdfe5e4(weapon, item, var_d97184db, rarity = #"white", clipsi
     var_51fbc989 = getcamoindex(var_c5bee8b6);
 
     if(isDefined(point.itementry.random_attachments)) {
-      new_weapon = namespace_65181344::function_67456242(point.itementry);
+      new_weapon = item_spawn_groups_util::function_67456242(point.itementry);
 
       if(!isDefined(new_weapon)) {
         self val::reset(#"hash_55af237178580523", "disable_weapon_cycling");
@@ -1175,7 +1175,7 @@ function add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, wea
   struct.weapon = weapon;
   struct.upgrade = upgrade;
   struct.weapon_classname = weapon_class;
-  struct.hint = #"hash_60606b68e93a29c8";
+  struct.hint = #"zombie/weaponcostonly_cfill";
   struct.cost = cost;
   struct.vox = weaponvo;
   struct.vox_response = weaponvoresp;
@@ -1961,7 +1961,7 @@ function get_player_weapon_with_same_base(weapon) {
 }
 
 function get_weapon_hint_ammo() {
-  return # "hash_60606b68e93a29c8";
+  return #"zombie/weaponcostonly_cfill";
 }
 
 function weapon_set_first_time_hint(cost, ammo_cost) {
@@ -2092,27 +2092,27 @@ function function_cab9277e() {
     round = level.round_number;
 
     if(round >= 10 && round < 20) {
-      return # "green";
+      return #"green";
     } else if(round >= 20 && round < 25) {
-      return # "blue";
+      return #"blue";
     } else if(round >= 25 && round < 30) {
-      return # "purple";
+      return #"purple";
     } else if(round >= 30) {
-      return # "orange";
+      return #"orange";
     }
   } else if(zm_utility::is_survival()) {
     star_level = level.var_b48509f9;
 
     if(star_level >= 2 && star_level < 3) {
-      return # "blue";
+      return #"blue";
     } else if(star_level >= 3 && star_level < 4) {
-      return # "purple";
+      return #"purple";
     } else if(star_level >= 4) {
-      return # "orange";
+      return #"orange";
     }
   }
 
-  return # "white";
+  return #"white";
 }
 
 function function_7df0d6b2(item, weapon, weaponoptions, var_e91aba42, var_908f65ca) {
@@ -2483,7 +2483,7 @@ function ammo_give(weapon, b_purchased = 1) {
       self zm_utility::play_sound_on_ent("purchase");
     }
 
-    self function_7c5dd4bd(weapon);
+    self give_full_ammo(weapon);
     return 1;
   }
 
@@ -2865,7 +2865,7 @@ function set_stowed_weapon(weapon) {
 }
 
 function clear_stowed_weapon() {
-  self notify(#"hash_70957a1035bda74b");
+  self notify(#"change_stowed_weapon");
   self.weapon_stowed = undefined;
   self clearstowedweapon();
 }
@@ -3041,7 +3041,7 @@ function function_f5a0899d(weapon, var_d921715f = 1) {
   return false;
 }
 
-function function_7c5dd4bd(w_weapon) {
+function give_full_ammo(w_weapon) {
   if(zm_loadout::function_2ff6913(w_weapon)) {
     return;
   }
@@ -3051,7 +3051,7 @@ function function_7c5dd4bd(w_weapon) {
   }
 
   self setweaponammoclip(w_weapon, w_weapon.clipsize);
-  self notify(#"hash_278526d0bbdb4ce7");
+  self notify(#"give_full_ammo");
 
   if(zm_trial_reset_loadout::is_active(1)) {
     self function_7f7c1226(w_weapon);

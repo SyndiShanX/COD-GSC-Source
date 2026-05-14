@@ -74,7 +74,7 @@ function_8fa6561f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_d9dea06b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     if(self flag::exists(#"friendly")) {
-      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", 0);
+      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", 0);
     }
   }
 }

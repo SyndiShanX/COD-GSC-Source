@@ -11,7 +11,7 @@
 #using scripts\core_common\territory;
 #using scripts\core_common\territory_util;
 #using scripts\core_common\vehicles\player_vehicle;
-#namespace namespace_65181344;
+#namespace item_spawn_groups_util;
 
 function private function_2c4d3d40() {
   function_4233b851();
@@ -488,7 +488,7 @@ function private function_216a69d6(spawnchance) {
     level.var_d0676b07 = getrealtime();
   }
 
-  maxspawns = isDefined(self.itemlistbundle.var_9b009839) ? self.itemlistbundle.var_9b009839 : 0;
+  maxspawns = isDefined(self.itemlistbundle.supplystashmaxspawns) ? self.itemlistbundle.supplystashmaxspawns : 0;
   var_418a2e03 = [];
 
   foreach(dynent in dynents) {
@@ -549,8 +549,8 @@ function private function_216a69d6(spawnchance) {
       continue;
     }
 
-    if(isDefined(self.itemlistbundle.var_7fb0967b) && !var_a9826383) {
-      var_1ba7b9c8 = arraysortclosest(level.var_5ce07338, point.origin, 1, 0, self.itemlistbundle.var_7fb0967b);
+    if(isDefined(self.itemlistbundle.distributiondistance) && !var_a9826383) {
+      var_1ba7b9c8 = arraysortclosest(level.var_5ce07338, point.origin, 1, 0, self.itemlistbundle.distributiondistance);
 
       if(var_1ba7b9c8.size > 0) {
         continue;
@@ -1058,7 +1058,7 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
     } else {
       itemspawnpoint = function_b1702735(var_8107154f[var_a1b91de4[pointindex]]);
 
-      if(isDefined(self.itemlistbundle.var_7fb0967b) && !var_a9826383) {
+      if(isDefined(self.itemlistbundle.distributiondistance) && !var_a9826383) {
         var_8822f354 = 0;
         itemtype = undefined;
 
@@ -1072,7 +1072,7 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
 
         if(isDefined(self.itemlistbundle.var_dc7ffbef) && isDefined(itemtype)) {
           if(itemtype == #"vehicle") {} else {
-            var_f4b807cb = function_abaeb170(itemspawnpoint.origin, undefined, undefined, self.itemlistbundle.var_7fb0967b, -1, 1, -2147483647);
+            var_f4b807cb = function_abaeb170(itemspawnpoint.origin, undefined, undefined, self.itemlistbundle.distributiondistance, -1, 1, -2147483647);
 
             for(var_55879fe2 = 0; var_55879fe2 < var_f4b807cb.size; var_55879fe2++) {
               if(isDefined(var_f4b807cb[var_55879fe2]) && isDefined(var_f4b807cb[var_55879fe2].itementry) && var_f4b807cb[var_55879fe2].itementry.itemtype == itemtype) {
@@ -1084,7 +1084,7 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
             var_f4b807cb = [];
           }
         } else {
-          var_8822f354 = function_6de8969b(itemspawnpoint.origin, undefined, self.itemlistbundle.var_7fb0967b, -1, 1, -2147483647);
+          var_8822f354 = function_6de8969b(itemspawnpoint.origin, undefined, self.itemlistbundle.distributiondistance, -1, 1, -2147483647);
         }
 
         if(var_8822f354 > 0) {
@@ -1279,10 +1279,10 @@ function function_50a2c746(&var_f38d5b52, var_87e9f374 = 0) {
     }
 
     if(var_87e9f374) {
-      if(!is_true(itemlistbundle.var_dc91e192) || !is_true(itemlistbundle.supplystash)) {
+      if(!is_true(itemlistbundle.prioritizedspawning) || !is_true(itemlistbundle.supplystash)) {
         continue;
       }
-    } else if(is_true(itemlistbundle.var_dc91e192) && is_true(itemlistbundle.supplystash)) {
+    } else if(is_true(itemlistbundle.prioritizedspawning) && is_true(itemlistbundle.supplystash)) {
       continue;
     }
 

@@ -294,7 +294,7 @@ function function_296cde87(aat_name) {
     }
   }
 
-  return # "none";
+  return #"none";
 }
 
 function function_70c0e823(aat_name) {

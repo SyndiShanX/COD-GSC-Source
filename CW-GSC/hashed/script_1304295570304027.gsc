@@ -199,7 +199,7 @@ function function_229b384c(zone) {
 
   switch (label) {
     case #"_a":
-      data.var_1629d8a0 = #"hash_3ff1c88b4360ea84";
+      data.var_1629d8a0 = #"mp/dom_flag_a_neutralized_by";
       data.var_44e9bd00 = #"hash_5b47de31c97a49ff";
       data.spawnlist = "spl1";
       data.var_bd674032 = 1;
@@ -214,21 +214,21 @@ function function_229b384c(zone) {
       data.var_95afd88f = "dom_b_cam";
       break;
     case #"_c":
-      data.var_1629d8a0 = #"hash_25a2a0aff40c76aa";
+      data.var_1629d8a0 = #"mp/dom_flag_c_neutralized_by";
       data.var_44e9bd00 = #"hash_6a0c2383d37849bd";
       data.spawnlist = "spl3";
       data.var_bd674032 = 3;
       data.var_95afd88f = "dom_c_cam";
       break;
     case #"_d":
-      data.var_1629d8a0 = #"hash_2bcd7171f9aae4a5";
+      data.var_1629d8a0 = #"mp/dom_flag_d_neutralized_by";
       data.var_44e9bd00 = #"hash_5079687d6a87790c";
       data.spawnlist = "spl4";
       data.var_bd674032 = 4;
       data.var_95afd88f = "dom_d_cam";
       break;
     case #"_e":
-      data.var_1629d8a0 = #"hash_5334d65b46b55660";
+      data.var_1629d8a0 = #"mp/dom_flag_e_neutralized_by";
       data.var_44e9bd00 = #"hash_78e2a90cf85daa3b";
       data.spawnlist = "spl5";
       data.var_bd674032 = 5;
@@ -694,7 +694,7 @@ function function_91cdcd1e(enemy_players, var_24672ed6, var_b4950c2b) {
     function_ef42f0bd();
   } else {
     if(!var_24672ed6) {
-      var_56fa1097 = randomint(2) ? "lost" + self.label : # "enemy" + self.label;
+      var_56fa1097 = randomint(2) ? "lost" + self.label : #"enemy" + self.label;
     } else {
       var_56fa1097 = #"enemy" + self.label;
     }
@@ -784,7 +784,7 @@ function give_neutralized_credit(touchlist, string, var_24672ed6) {
       scoreevents::processscoreevent(#"dom_point_neutralized_neutralizing", player_from_touchlist, undefined, undefined);
       player_from_touchlist recordgameevent("neutralized");
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-        #player: player_from_touchlist, #eventtype: # "neutralized"});
+        #player: player_from_touchlist, #eventtype: #"neutralized"});
 
       if(isDefined(player_from_touchlist.pers[#"neutralizes"])) {
         player_from_touchlist.pers[#"neutralizes"]++;
@@ -841,7 +841,7 @@ function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing,
     self.hasbeencaptured = 1;
     player recordgameevent("capture");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
-      #player: player, #eventtype: # "capture"});
+      #player: player, #eventtype: #"capture"});
 
     if(var_81b74b24) {
       level notify(#"hash_3809ea07643ef10e", {
@@ -1084,7 +1084,7 @@ function function_1932f845() {
 
   var_bac44d7f = level.teamscoreperkill ? 0 : 1;
 
-  if(getdvarint(#"hash_697b325da5b79b83", 0) > 0) {
+  if(getdvarint(#"no_early_end_round", 0) > 0) {
     var_bac44d7f = 0;
   }
 

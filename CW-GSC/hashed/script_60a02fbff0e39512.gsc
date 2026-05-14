@@ -121,7 +121,7 @@ function function_160e40a2() {
             }
 
             bundle = function_489009c1(dynent);
-            v_offset = (isDefined(bundle.var_aa0fba03) ? bundle.var_aa0fba03 : 0, isDefined(bundle.var_f8525687) ? bundle.var_f8525687 : 0, isDefined(bundle.var_54b28eee) ? bundle.var_54b28eee : 0);
+            v_offset = (isDefined(bundle.use_trigger_offset_x) ? bundle.use_trigger_offset_x : 0, isDefined(bundle.use_trigger_offset_y) ? bundle.use_trigger_offset_y : 0, isDefined(bundle.use_trigger_offset_z) ? bundle.use_trigger_offset_z : 0);
             v_offset = rotatepoint(v_offset, dynent.angles);
             var_dea242aa = dynent.origin + v_offset;
             playerdir = var_dea242aa - playerorigin;
@@ -190,13 +190,13 @@ function function_160e40a2() {
                 var_bb075e98 = {
                   #origin: var_dea242aa
                 };
-                var_a852a7dd = var_bb075e98 dynent_use::use_dynent(dynent, player, overridestate, 1, 1);
+                interpolationsec = var_bb075e98 dynent_use::use_dynent(dynent, player, overridestate, 1, 1);
                 player gestures::play_gesture("ges_t9_door_shove", undefined, 0);
                 player function_bc82f900("door_shove");
                 playsoundatposition("evt_door_bash", dynent.origin);
                 playFX("debris/fx9_door_bash", dynent.origin, anglesToForward(dynent.angles), anglestoup(dynent.angles));
                 var_a548ec11 = 1;
-                dynent.var_a548ec11 = gettime() + int(var_a852a7dd * 1000) + int(var_a548ec11 * 1000);
+                dynent.var_a548ec11 = gettime() + int(interpolationsec * 1000) + int(var_a548ec11 * 1000);
 
                 if(isDefined(level.var_83c46567)) {
                   [[level.var_83c46567]](dynent);
@@ -252,10 +252,10 @@ function function_c743094d(eventstruct) {
         }
       }
 
-      var_a852a7dd = eventstruct.attacker.var_8a022726 dynent_use::use_dynent(dynent, eventstruct.attacker, overridestate, 1, 1);
+      interpolationsec = eventstruct.attacker.var_8a022726 dynent_use::use_dynent(dynent, eventstruct.attacker, overridestate, 1, 1);
       playsoundatposition("evt_door_bash", dynent.origin);
       playFX("debris/fx9_door_bash", dynent.origin, anglesToForward(dynent.angles), anglestoup(dynent.angles));
-      dynent.var_a548ec11 = gettime() + var_a852a7dd * 1000;
+      dynent.var_a548ec11 = gettime() + interpolationsec * 1000;
     }
 
     return;
@@ -412,8 +412,8 @@ function private function_724a2fa5(eventstruct) {
     return;
   }
 
-  var_a852a7dd = dynent_use::use_dynent(dynent);
-  dynent.var_a548ec11 = gettime() + var_a852a7dd * 1000;
+  interpolationsec = dynent_use::use_dynent(dynent);
+  dynent.var_a548ec11 = gettime() + interpolationsec * 1000;
 }
 
 function private function_5d409a7b(eventstruct) {

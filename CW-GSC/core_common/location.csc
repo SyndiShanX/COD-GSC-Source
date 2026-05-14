@@ -64,7 +64,7 @@ function function_f6ad2be6(localclientnum) {
     if(isDefined(self)) {
       str_location = get_current_zone();
       str_location = get_location_string(str_location);
-      setuimodelvalue(uimodel, isDefined(str_location) ? str_location : # "");
+      setuimodelvalue(uimodel, isDefined(str_location) ? str_location : #"");
     }
 
     waitframe(1);

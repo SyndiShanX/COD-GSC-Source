@@ -236,7 +236,7 @@ function function_c83b8450() {
 
   party = self getparty();
 
-  if(isDefined(party) && party.var_a15e4438 > 1) {
+  if(isDefined(party) && party.party_member_count > 1) {
     teams = [];
     self allowspectateallteams(0);
     aliveplayers = array::filter(party.party_members, 0, &isalive);
@@ -477,7 +477,7 @@ function onendround(var_c1e98979) {
     objective_delete(objectiveid);
   }
 
-  namespace_65181344::reset_items();
+  item_spawn_groups_util::reset_items();
 }
 
 function onendgame(var_c1e98979) {
@@ -1014,8 +1014,8 @@ function function_6a1d53f3() {
 }
 
 function private function_effcb5d1(player) {
-  var_20ad403d = player.spyRole === 1 ? # "hash_7f0c9c0ec4410623" : # "hash_14b3ab2971ce1112";
-  var_4bf709a4 = player.spyRole === 1 ? # "hash_14b3ab2971ce1112" : # "hash_7f0c9c0ec4410623";
+  var_20ad403d = player.spyRole === 1 ? #"hash_7f0c9c0ec4410623" : #"hash_14b3ab2971ce1112";
+  var_4bf709a4 = player.spyRole === 1 ? #"hash_14b3ab2971ce1112" : #"hash_7f0c9c0ec4410623";
   globallogic_audio::function_abf21f69(var_20ad403d, function_3919b452(1));
   globallogic_audio::function_abf21f69(var_4bf709a4, function_3919b452(2));
   globallogic_audio::function_abf21f69(var_4bf709a4, function_3919b452(3));
@@ -1309,13 +1309,13 @@ function function_f9935e6c() {
     var_5609c166 = 0;
   }
 
-  level namespace_65181344::function_ae93ad7b(weaponslist, spawns, 6);
+  level item_spawn_groups_util::function_ae93ad7b(weaponslist, spawns, 6);
 
   if(var_5609c166) {
     spawns = struct::get_array("spy_launcher_weapon_spawn", "targetname");
 
     if(spawns.size > 0) {
-      level namespace_65181344::function_ae93ad7b("t9_spy_launcher", spawns, 6);
+      level item_spawn_groups_util::function_ae93ad7b("t9_spy_launcher", spawns, 6);
     }
   }
 }
@@ -1441,7 +1441,7 @@ function function_61b78a16(role) {
       }
 
       playerroletemplatecount = getplayerroletemplatecount(currentsessionmode());
-      var_1dd54192 = self getplayergendertype() == "male" ? # "hash_79c2c831cc0403a7" : # "hash_184b76adf81ff4de";
+      var_1dd54192 = self getplayergendertype() == "male" ? #"hash_79c2c831cc0403a7" : #"hash_184b76adf81ff4de";
 
       for(i = 0; i < playerroletemplatecount; i++) {
         prtname = function_b14806c6(i, currentsessionmode());

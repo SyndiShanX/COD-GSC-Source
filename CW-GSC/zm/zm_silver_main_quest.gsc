@@ -1521,7 +1521,7 @@ function function_7acfbb3a(e_player) {
   e_player thread function_f4b436d5();
   e_player waittill(#"weapon_change_complete");
   callback::on_weapon_change(&function_e9df7768);
-  callback::function_33f0ddd3(&function_7904960c);
+  callback::on_player_loadout_changed(&function_7904960c);
   e_player thread function_50d04ccb();
   e_player val::reset(#"carry_container", "disable_weapon_cycling");
   e_player thread zm_equipment::show_hint_text(#"hash_5b87d46ce24aa2cf", 10);

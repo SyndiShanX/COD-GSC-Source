@@ -58,7 +58,7 @@ function init_clientfields() {
 }
 
 function function_c6c7166a() {
-  if(util::get_game_type() !== "dropkick" && getdvarint(#"hash_774f95460ca50d49", 1) && !getdvarint(#"hash_269852f320baca83", 0) && !getdvarint(#"hash_435b3a7c7c2f2c07", 0)) {
+  if(util::get_game_type() !== "dropkick" && getdvarint(#"nuketown_end_movie", 1) && !getdvarint(#"hash_269852f320baca83", 0) && !getdvarint(#"hash_435b3a7c7c2f2c07", 0)) {
     level.end_game_video = hash("MP_NUKETOWN6_ENDGAME_MOVIE");
     level.var_48ea0e8c = 8;
   }

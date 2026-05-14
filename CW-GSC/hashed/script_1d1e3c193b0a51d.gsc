@@ -11,10 +11,10 @@
 #using scripts\zm_common\zm_trial;
 #using scripts\zm_common\zm_trial_util;
 #using scripts\zm_common\zm_utility;
-#namespace namespace_c1466447;
+#namespace zm_trial_damage_during_movement;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_2f326252a6b5175", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_trial_damage_during_movement", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
@@ -40,7 +40,7 @@ function private on_end(round_reset) {
 
 function private function_1633056a(var_16e6b8ea = 10) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     if(isalive(self) && !self laststand::player_is_in_laststand() && self function_c81cdba2()) {

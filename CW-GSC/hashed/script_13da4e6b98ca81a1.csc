@@ -246,7 +246,7 @@ function function_471909d9(localclientnum, entity, settings, localplayerteam) {
     }
 
     if(!function_9e39e246(localclientnum)) {
-      var_7a7c5b7d = is_friendly(localclientnum, #"allies") ? # "allies" : # "axis";
+      var_7a7c5b7d = is_friendly(localclientnum, #"allies") ? #"allies" : #"axis";
     } else if(localplayerteam == #"spectator" || localplayerteam == #"allies") {
       var_7a7c5b7d = #"allies";
     } else {
@@ -330,7 +330,7 @@ function function_995e01b6(localclientnum, player) {
     return;
   }
 
-  rob = player is_friendly(localclientnum) ? # "hash_17daa1d16cd73cd2" : # "hash_17daa0d16cd73b1f";
+  rob = player is_friendly(localclientnum) ? #"hash_17daa1d16cd73cd2" : #"hash_17daa0d16cd73b1f";
   postfx = #"hash_2e3ec8882293a18f" + (player is_friendly(localclientnum) ? "_team1" : "_team2");
   var_1762ffa = util::spawn_model(localclientnum, #"hash_445c4aedaf62d3b9", player.origin, player.angles - (90, 0, 0));
   teamcolor = get_team_color(localclientnum, player.team, 3);

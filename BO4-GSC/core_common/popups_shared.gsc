@@ -60,14 +60,14 @@ on_player_connect() {
 
 devgui_notif_getgunleveltablename() {
   if(sessionmodeiscampaigngame()) {
-    return # "gamedata/weapons/cp/cp_gunlevels.csv";
+    return #"gamedata/weapons/cp/cp_gunlevels.csv";
   }
 
   if(sessionmodeiszombiesgame()) {
-    return # "gamedata/weapons/zm/zm_gunlevels.csv";
+    return #"gamedata/weapons/zm/zm_gunlevels.csv";
   }
 
-  return # "gamedata/weapons/mp/mp_gunlevels.csv";
+  return #"gamedata/weapons/mp/mp_gunlevels.csv";
 }
 
 devgui_notif_getchallengestablecount() {
@@ -91,7 +91,7 @@ devgui_notif_getchallengestablename(tableid) {
     return (#"gamedata/stats/zm/statsmilestones" + tableid + "<dev string:x38>");
   }
 
-  return # "gamedata/stats/mp/statsmilestones" + tableid + "<dev string:x38>";
+  return #"gamedata/stats/mp/statsmilestones" + tableid + "<dev string:x38>";
 }
 
 devgui_create_weapon_levels_table() {

@@ -1178,7 +1178,7 @@ function private devgui() {
 
   while(true) {
     waitframe(1);
-    str_command = getdvarstring(#"hash_5996494c7608f933", "<dev string:x589>");
+    str_command = getdvarstring(#"round_spawning_devgui_cmd", "<dev string:x589>");
 
     switch (str_command) {
       case #"summary":
@@ -1211,7 +1211,7 @@ function private devgui() {
         break;
     }
 
-    setDvar(#"hash_5996494c7608f933", "<dev string:x589>");
+    setDvar(#"round_spawning_devgui_cmd", "<dev string:x589>");
   }
 }
 

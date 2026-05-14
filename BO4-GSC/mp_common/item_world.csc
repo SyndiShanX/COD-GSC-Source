@@ -1453,7 +1453,7 @@ function_802915bc(localclientnum) {
 
     if(var_1ba7b9c8.size > 0) {
       isdeathstash = var_1ba7b9c8[0].stash_type === 2;
-      hinttext = isdeathstash ? # "wz/death_stash" : # "wz/supply_drop";
+      hinttext = isdeathstash ? #"wz/death_stash" : #"wz/supply_drop";
     } else {
       var_1ba7b9c8 = arraysortclosest(level.item_spawn_stashes, self.var_9b882d22.origin, 1, 0, 12);
 
@@ -1714,7 +1714,7 @@ function_48ca0bbb(localclientnum) {
 
       setuimodelvalue(level.var_7e2f5883[localclientnum], isDefined(var_fa3df96) ? var_fa3df96 : -1);
       setuimodelvalue(level.var_ce95aace[localclientnum], var_77055f15);
-      setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : # "blacktransparent");
+      setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : #"blacktransparent");
 
       if(self.var_9b882d22.var_5d97fed1) {
         function_b21002cb(localclientnum, level.var_383edf80, self.var_9b882d22, objstate);
@@ -1726,7 +1726,7 @@ function_48ca0bbb(localclientnum) {
         if(isDefined(itementry.weapon)) {
           var_d1fce876 = itementry.weapon.displayname;
         } else {
-          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
         }
 
         if(var_d1fce876 == hintstring) {
@@ -2094,7 +2094,7 @@ get_item_name(item) {
     }
   }
 
-  return isDefined(item.displayname) ? item.displayname : # "";
+  return isDefined(item.displayname) ? item.displayname : #"";
 }
 
 function_2e3efdda(origin, dir, maxitems, maxdistance, dot, var_653b55e5 = 0) {

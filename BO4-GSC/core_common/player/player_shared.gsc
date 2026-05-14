@@ -607,7 +607,7 @@ function_466d8a4b(var_b66879ad, team) {
 
 function_6f6c29e(var_b66879ad) {
   params = {
-    #team: # "spectator", #var_b66879ad: var_b66879ad
+    #team: #"spectator", #var_b66879ad: var_b66879ad
   };
   self notify(#"joined_spectator", params);
   level notify(#"joined_spectator");

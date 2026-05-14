@@ -201,7 +201,7 @@ function updateminimapsetting() {
           setDvar(#"r_umbranumthreads", 1);
           setDvar(#"r_umbradistancescale", 0.1);
           setDvar(#"r_uselensfov", 0);
-          setDvar(#"hash_5ee9a4ac16993e50", 1);
+          setDvar(#"r_developer", 1);
           setDvar(#"debug_show_viewpos", 0);
           thread drawminimapbounds(viewpos, mincorner, maxcorner);
         } else {

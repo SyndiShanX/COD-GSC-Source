@@ -18,8 +18,8 @@ function event_handler[event_9673dc9a] function_3981d015(eventstruct) {
 
     if(var_16a4afdc == var_59102aec) {
       if(var_eb7c2031 && !function_8a8a409b(dynent)) {
-        if(isDefined(newstate.var_55c3fa1)) {
-          playSound(0, newstate.var_55c3fa1, dynent.origin);
+        if(isDefined(newstate.dynent_sound)) {
+          playSound(0, newstate.dynent_sound, dynent.origin);
         }
 
         return;
@@ -30,28 +30,28 @@ function event_handler[event_9673dc9a] function_3981d015(eventstruct) {
     var_718063b0 = eventstruct.rootorigin;
     var_c286a1ae = eventstruct.rootangles;
 
-    if(!is_true(bundle.var_f710132b)) {
+    if(!is_true(bundle.skiptransformation)) {
       pos = (isDefined(newstate.pos_x) ? newstate.pos_x : 0, isDefined(newstate.pos_y) ? newstate.pos_y : 0, isDefined(newstate.pos_z) ? newstate.pos_z : 0);
       pos = rotatepoint(pos, var_c286a1ae);
       neworigin = var_718063b0 + pos;
-      pitch = var_c286a1ae[0] + (isDefined(newstate.var_9d1a4684) ? newstate.var_9d1a4684 : 0);
-      yaw = var_c286a1ae[1] + (isDefined(newstate.var_d81008de) ? newstate.var_d81008de : 0);
-      roll = var_c286a1ae[2] + (isDefined(newstate.var_774f5d57) ? newstate.var_774f5d57 : 0);
+      pitch = var_c286a1ae[0] + (isDefined(newstate.rot_pitch) ? newstate.rot_pitch : 0);
+      yaw = var_c286a1ae[1] + (isDefined(newstate.rot_yaw) ? newstate.rot_yaw : 0);
+      roll = var_c286a1ae[2] + (isDefined(newstate.rot_roll) ? newstate.rot_roll : 0);
       newangles = (absangleclamp360(pitch), absangleclamp360(yaw), absangleclamp360(roll));
-      var_a852a7dd = isDefined(bundle.var_a852a7dd) ? bundle.var_a852a7dd : isDefined(newstate.var_b272e331) ? newstate.var_b272e331 : 0;
+      interpolationsec = isDefined(bundle.interpolationsec) ? bundle.interpolationsec : isDefined(newstate.var_b272e331) ? newstate.var_b272e331 : 0;
       var_72e281d4 = isDefined(bundle.var_72e281d4) ? bundle.var_72e281d4 : isDefined(newstate.var_f5cff1c7) ? newstate.var_f5cff1c7 : 0;
 
-      if(!teleport && var_a852a7dd > 0) {
-        dynent function_49ed8678(neworigin, var_a852a7dd);
-        dynent function_7622f013(newangles, var_a852a7dd, var_72e281d4);
+      if(!teleport && interpolationsec > 0) {
+        dynent function_49ed8678(neworigin, interpolationsec);
+        dynent function_7622f013(newangles, interpolationsec, var_72e281d4);
       } else {
         dynent.origin = neworigin;
         dynent.angles = newangles;
       }
     }
 
-    if(!is_true(bundle.var_fd4bc8dd) && !teleport && isDefined(newstate.var_55c3fa1)) {
-      playSound(0, newstate.var_55c3fa1, dynent.origin);
+    if(!is_true(bundle.var_fd4bc8dd) && !teleport && isDefined(newstate.dynent_sound)) {
+      playSound(0, newstate.dynent_sound, dynent.origin);
     }
 
     if(isDefined(newstate.overridemodel)) {

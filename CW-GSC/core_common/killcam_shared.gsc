@@ -192,7 +192,7 @@ function deathcam(victim) {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.spectatekillcam = 0;
-  self luinotifyevent(#"hash_5b2d65a026de792d", 0);
+  self luinotifyevent(#"quick_fade_up", 0);
   self clientfield::set_player_uimodel("hudItems.killcamActive", 0);
   self.var_e5681505 = undefined;
 
@@ -251,11 +251,11 @@ function function_a26057ee() {
 
 function function_de2b637d(winner) {
   if(!isDefined(winner)) {
-    return # "none";
+    return #"none";
   }
 
   if(isentity(winner)) {
-    return (isDefined(winner.team) ? winner.team : # "none");
+    return (isDefined(winner.team) ? winner.team : #"none");
   }
 
   return winner;

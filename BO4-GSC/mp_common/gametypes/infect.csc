@@ -22,7 +22,7 @@ function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       foreach(player in getplayers(localclientnum)) {
         if(player.team !== self.team && !player function_21c0fa55()) {
           if(player flag::exists(#"friendly")) {
-            player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendly_cp" : # "rob_sonar_set_friendly_mp", 0);
+            player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", 0);
           }
         }
       }
@@ -31,7 +31,7 @@ function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(self flag::exists(#"friendly")) {
-      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendly_cp" : # "rob_sonar_set_friendly_mp", 0);
+      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", 0);
     }
   }
 }

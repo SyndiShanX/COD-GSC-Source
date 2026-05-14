@@ -48,7 +48,7 @@ function function_51c5f95f(insertion) {
   }
 
   wait var_990e3011;
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   callback::remove_on_spawned(&function_aa3a20fb);
   player_insertion::function_a5fd9aa8(insertion);
 
@@ -199,7 +199,7 @@ function private function_adc8cff4(reinserting = 0) {
   self val::set(#"player_insertion", "disable_oob", 0);
   self clientfield::set_to_player("realtime_multiplay", 1);
   self thread function_7bf9c38f(reinserting);
-  level callback::callback(#"hash_74b19f5972b0ee52", {
+  level callback::callback(#"player_insertion_drop", {
     #player: self
   });
 }

@@ -2807,16 +2807,16 @@ function function_434c0676(weapon_name) {
   switch (weapon_name) {
     case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
     case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
-      return # "ww_mega_barrel_fullauto_diffusion_beam_t9";
+      return #"ww_mega_barrel_fullauto_diffusion_beam_t9";
     case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
     case #"ww_mega_barrel_fullauto_copycat_t9":
-      return # "ww_mega_barrel_fullauto_copycat_t9";
+      return #"ww_mega_barrel_fullauto_copycat_t9";
     case #"ww_mega_barrel_fullauto_blazer_beam_t9":
     case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-      return # "ww_mega_barrel_fullauto_blazer_beam_t9";
+      return #"ww_mega_barrel_fullauto_blazer_beam_t9";
     case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
     case #"ww_mega_barrel_fullauto_micro_missile_t9":
-      return # "ww_mega_barrel_fullauto_micro_missile_t9";
+      return #"ww_mega_barrel_fullauto_micro_missile_t9";
     default:
       return weapon_name;
   }
@@ -2944,7 +2944,7 @@ function function_a58f5f81(weapon) {
     self magicmissile(weapon, v_point + self getplayercamerapos(), anglesToForward(v_angles) * 3200);
 
     if(isDefined(self.var_accb4770.var_4d66ae56)) {
-      playFXOnTag(self.var_accb4770.var_515e20e6 ? # "hash_77e7d9c6c1c5cb2b" : # "hash_52f32fbd7a1126ba", self.var_accb4770.var_4d66ae56, "tag_flash");
+      playFXOnTag(self.var_accb4770.var_515e20e6 ? #"hash_77e7d9c6c1c5cb2b" : #"hash_52f32fbd7a1126ba", self.var_accb4770.var_4d66ae56, "tag_flash");
     }
   }
 
@@ -2987,7 +2987,7 @@ function function_51b7e176() {
   var_4d66ae56 linkto(self, "tag_origin");
   var_4d66ae56 linktoupdateoffset(self getplayercamerapos(), self.angles);
   var_4d66ae56 thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", var_4d66ae56);
-  playFXOnTag(var_accb4770.var_515e20e6 ? # "hash_2eabcf6f328bb46b" : # "hash_2ac49f49b148a4fa", var_4d66ae56, "tag_flash");
+  playFXOnTag(var_accb4770.var_515e20e6 ? #"hash_2eabcf6f328bb46b" : #"hash_2ac49f49b148a4fa", var_4d66ae56, "tag_flash");
   var_accb4770.var_4d66ae56 = var_4d66ae56;
   var_accb4770 thread util::delete_on_death(var_4d66ae56);
   self thread util::delete_on_death(var_accb4770);

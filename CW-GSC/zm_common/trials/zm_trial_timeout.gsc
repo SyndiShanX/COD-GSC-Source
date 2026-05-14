@@ -136,7 +136,7 @@ function function_d3eb9969() {
 
 function private function_28663a8f() {
   self endon(#"death");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
   wait 1;
 
   if(!is_true(self.completed_emerging_into_playable_area) && self.archetype === #"zombie") {
@@ -222,7 +222,7 @@ function private function_f22cd3f0(s_wait_location, ai_zombie) {
 }
 
 function private function_8b87e57c(timer_label, grace_period, timer_value, var_1215371f) {
-  level endon(#"end_of_round", #"host_migration_begin", #"hash_7646638df88a3656", #"end_game");
+  level endon(#"end_of_round", #"host_migration_begin", #"trial_round_end", #"end_game");
 
   if(!isDefined(level.var_489d6aa2)) {
     level.var_489d6aa2 = timer_label;
@@ -233,7 +233,7 @@ function private function_8b87e57c(timer_label, grace_period, timer_value, var_1
   }
 
   wait grace_period;
-  timer_label = isDefined(timer_label) ? timer_label : # "";
+  timer_label = isDefined(timer_label) ? timer_label : #"";
   level thread function_14a98a41(timer_label, timer_value);
 
   foreach(player in getplayers()) {

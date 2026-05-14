@@ -72,7 +72,7 @@ function private reset_ammo(var_f2c84b6b) {
   }
 
   if(is_true(self.var_9b0383f5)) {
-    self waittill(#"hash_1ac4338b0d419091");
+    self waittill(#"pap_use_finished");
   }
 
   a_weapons = self getweaponslist(0);
@@ -127,7 +127,7 @@ function private reset_loadout(var_96288bc8 = 0) {
   }
 
   if(is_true(self.var_9b0383f5)) {
-    self waittill(#"hash_1ac4338b0d419091");
+    self waittill(#"pap_use_finished");
   }
 
   if(level flag::get("round_reset")) {
@@ -142,7 +142,7 @@ function private reset_loadout(var_96288bc8 = 0) {
     self zm_weapons::weapon_give(level.weaponzmfists, 1);
 
     if(isDefined(level.var_7f7fd2ac)) {
-      level waittill(#"enable_equipment", #"hash_7646638df88a3656");
+      level waittill(#"enable_equipment", #"trial_round_end");
     }
   }
 
@@ -163,7 +163,7 @@ function private on_end(round_reset) {
 }
 
 function private function_d1dabace(n_time = 30) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"trial_round_end", #"end_game");
   level.var_236b9f7a = &function_37fe3e07;
   level.func_override_wallbuy_prompt = &function_3d4fea64;
   level.func_magicbox_update_prompt_use_override = &function_bf591b5a;

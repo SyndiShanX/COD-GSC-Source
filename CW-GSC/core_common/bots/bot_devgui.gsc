@@ -548,7 +548,7 @@ function private function_bd48ef10(team, count, origin, yaw, roleindex) {
 
 function private function_881d3aa(host, botarg) {
   if(botarg == "all") {
-    return # "none";
+    return #"none";
   }
 
   if(isDefined(level.teams[botarg])) {
@@ -988,7 +988,7 @@ function private function_263ca697() {
   var_e91aba42 = self function_8cbd254d(weapon);
 
   setDvar(#"bot_spawn_weapon", getweaponname(weapon.rootweapon));
-  setDvar(#"hash_c6e51858c88a5ee", util::function_2146bd83(weapon));
+  setDvar(#"bot_spawn_weapon_attachments", util::function_2146bd83(weapon));
 
   bots = get_bots();
 
@@ -1001,7 +1001,7 @@ function private function_78a14db2() {
   weapon = undefined;
 
   if(getdvarstring(#"bot_spawn_weapon", "") != "") {
-    weapon = util::get_weapon_by_name(getdvarstring(#"bot_spawn_weapon"), getdvarstring(#"hash_c6e51858c88a5ee"));
+    weapon = util::get_weapon_by_name(getdvarstring(#"bot_spawn_weapon"), getdvarstring(#"bot_spawn_weapon_attachments"));
 
     if(isDefined(weapon)) {
       self function_35e77034(weapon);

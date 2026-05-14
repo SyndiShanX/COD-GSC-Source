@@ -1033,7 +1033,7 @@ function function_716add58() {
     level.var_fe6ca5e8 = undefined;
     level flag::clear("in_dark_side");
     level thread function_5ea16763("off", waitresult.dest_ent);
-    level notify(#"hash_40cd2e6f2c496d75");
+    level notify(#"disable_lightning_fx");
     turrets = getaiarchetypearray(#"turret");
 
     if(isDefined(turrets)) {
@@ -1136,7 +1136,7 @@ function function_2ad61161(e_player) {
 }
 
 function function_b1b484d() {
-  level endon(#"hash_40cd2e6f2c496d75", #"end_game");
+  level endon(#"disable_lightning_fx", #"end_game");
   self endon(#"disconnect");
   var_f3b29ae8 = 0;
 
@@ -1301,7 +1301,7 @@ function private function_bde52114(cmd) {
       }
 
       break;
-    case #"hash_50d92ca3c6c7c2a8":
+    case #"super_open_sesame":
       zm_devgui::zombie_devgui_open_sesame();
       wait 6;
       level flag::set("<dev string:xca>");

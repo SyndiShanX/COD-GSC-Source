@@ -1508,7 +1508,7 @@ function_de2b637d(winner) {
   }
 
   if(isentity(winner)) {
-    return (isDefined(winner.team) ? winner.team : # "none");
+    return (isDefined(winner.team) ? winner.team : #"none");
   }
 
   return winner;

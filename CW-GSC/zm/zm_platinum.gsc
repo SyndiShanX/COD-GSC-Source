@@ -1682,16 +1682,16 @@ function function_2fea91a2() {
   switch (level.var_19a4a8bb) {
     case 1:
     default:
-      return # "avogadro";
+      return #"avogadro";
     case 2:
     case 3:
-      return # "soa";
+      return #"soa";
     case 4:
-      return # "avogadro";
+      return #"avogadro";
     case 5:
-      return # "soa";
+      return #"soa";
     case 6:
-      return # "avogadro";
+      return #"avogadro";
   }
 }
 
@@ -2736,7 +2736,7 @@ function function_749d2cfc(str_weapon_name, str_item_name, var_27751b99) {
     }
 
     if(isDefined(point.itementry.random_attachments)) {
-      weapon = namespace_65181344::function_67456242(point.itementry);
+      weapon = item_spawn_groups_util::function_67456242(point.itementry);
       dropitem = item_drop::drop_item(0, weapon, 1, weapon.maxammo, point.id, self.origin, self.angles, 1);
       dropitem.var_519e776c = 1;
       dropitem.hidetime = 1;

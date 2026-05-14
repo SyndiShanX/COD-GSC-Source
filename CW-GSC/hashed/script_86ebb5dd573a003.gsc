@@ -1829,11 +1829,11 @@ function function_ec76072d(initialwait, var_38d138fb, var_25941f2e, ender, var_4
 }
 
 function function_c15079c5(animation) {
-  self setanimknobrestart(isDefined(animation) ? animation : # "hash_680228261864fe24");
+  self setanimknobrestart(isDefined(animation) ? animation : #"hash_680228261864fe24");
 }
 
 function function_a44394f7(animation) {
-  self setanimknobrestart(isDefined(animation) ? animation : # "hash_52ac61c625d5d151");
+  self setanimknobrestart(isDefined(animation) ? animation : #"hash_52ac61c625d5d151");
 }
 
 function function_d0551a1b(from_vol, retreat_vol, delay_min, delay_max) {
@@ -1909,7 +1909,7 @@ function function_e8e2095b() {
       self function_1f24a0cc();
     }
 
-    var_b71fa9e7 = var_72834f62 ? # "hash_7d3611ef4bd2af93" : # "uie_ui_hud_cp_actionslot_icon_black_light";
+    var_b71fa9e7 = var_72834f62 ? #"hash_7d3611ef4bd2af93" : #"uie_ui_hud_cp_actionslot_icon_black_light";
     self util::function_5b2f930e(3, var_b71fa9e7);
     waitframe(1);
   }

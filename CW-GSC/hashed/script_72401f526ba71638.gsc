@@ -120,21 +120,21 @@ function function_460882e2(var_4e20aeca = 0) {
 function function_94d18799(var_40e28ba) {
   switch (var_40e28ba) {
     case #"frost_blast_tier":
-      return # "frost_blast";
+      return #"frost_blast";
     case #"heal_aoe_tier":
-      return # "heal_aoe";
+      return #"heal_aoe";
     case #"energy_mine_tier":
-      return # "energy_mine";
+      return #"energy_mine";
     case #"aether_shroud_tier":
-      return # "aether_shroud";
+      return #"aether_shroud";
     case #"ring_of_fire_tier":
-      return # "ring_of_fire";
+      return #"ring_of_fire";
     case #"hash_1bb7d8d0caf94859":
-      return # "hash_55569355da0f0f68";
+      return #"hash_55569355da0f0f68";
     case #"toxic_growth_tier":
-      return # "toxic_growth";
+      return #"toxic_growth";
     case #"lightning_links_tier":
-      return # "lightning_links";
+      return #"lightning_links";
   }
 }
 
@@ -150,13 +150,13 @@ function function_e41a11bf(var_40e28ba, tier) {
   var_50846129 = level.var_d98fc25e[base_name];
 
   if(!isDefined(var_50846129)) {
-    return # "weapon_null";
+    return #"weapon_null";
   }
 
   field_upgrade = var_50846129[tier];
 
   if(!isDefined(field_upgrade)) {
-    return # "weapon_null";
+    return #"weapon_null";
   }
 
   return field_upgrade;
@@ -727,35 +727,35 @@ function function_53ca9662(item_name) {
   foreach(i, value in level.var_5b46d961) {
     if(value == item_name) {
       if(isinarray(level.var_d98fc25e[#"aether_shroud"], i)) {
-        return # "aether_shroud";
+        return #"aether_shroud";
       }
 
       if(isinarray(level.var_d98fc25e[#"frost_blast"], i)) {
-        return # "frost_blast";
+        return #"frost_blast";
       }
 
       if(isinarray(level.var_d98fc25e[#"energy_mine"], i)) {
-        return # "energy_mine";
+        return #"energy_mine";
       }
 
       if(isinarray(level.var_d98fc25e[#"heal_aoe"], i)) {
-        return # "heal_aoe";
+        return #"heal_aoe";
       }
 
       if(isinarray(level.var_d98fc25e[#"ring_of_fire"], i)) {
-        return # "ring_of_fire";
+        return #"ring_of_fire";
       }
 
       if(isinarray(level.var_d98fc25e[#"hash_55569355da0f0f68"], i)) {
-        return # "hash_55569355da0f0f68";
+        return #"hash_55569355da0f0f68";
       }
 
       if(isinarray(level.var_d98fc25e[#"toxic_growth"], i)) {
-        return # "toxic_growth";
+        return #"toxic_growth";
       }
 
       if(isinarray(level.var_d98fc25e[#"lightning_links"], i)) {
-        return # "lightning_links";
+        return #"lightning_links";
       }
     }
   }

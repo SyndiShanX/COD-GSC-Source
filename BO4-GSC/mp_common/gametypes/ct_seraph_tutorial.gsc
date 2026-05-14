@@ -309,7 +309,7 @@ function_6cfeee53() {
   ct_vo::function_831e0584(array(#"hash_5aafec95295f15a1", #"hash_5aafea95295f123b"), 1);
   level.var_e72728b8 = array(#"gadget_spawnbeacon");
   e_player = ct_utils::get_player();
-  var_f4ae3365 = e_player gamepadusedlast() ? # "hash_35f37327f50369b4" : # "hash_625da864ae1f050";
+  var_f4ae3365 = e_player gamepadusedlast() ? #"hash_35f37327f50369b4" : #"hash_625da864ae1f050";
   e_player thread ct_utils::function_61c3d59c(var_f4ae3365, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_17674b4f74a1fbc7"), "stop_nag");
   wpn_annihilator = getweapon(#"hero_annihilator");
@@ -422,7 +422,7 @@ function_9f3fe320() {
     e_player = ct_utils::get_player();
 
     if(e_player getcurrentweapon() !== wpn_annihilator) {
-      var_8131dc5a = e_player gamepadusedlast() ? # "hash_35f37327f50369b4" : # "hash_625da864ae1f050";
+      var_8131dc5a = e_player gamepadusedlast() ? #"hash_35f37327f50369b4" : #"hash_625da864ae1f050";
       e_player thread ct_utils::function_61c3d59c(var_8131dc5a, undefined);
       level thread ct_vo::function_14b08e49(array(#"hash_17674b4f74a1fbc7"), "stop_nag");
       wpn_annihilator = getweapon(#"hero_annihilator");
@@ -821,8 +821,8 @@ function_c8e681c8() {
   level.var_f3fb470f = 1;
   e_player = getplayers()[0];
   e_player thread function_b23a52d(2.25, 1);
-  var_f1f44cd4 = e_player gamepadusedlast() ? # "hash_6704e759add72c61" : # "hash_5d01463c800741a7";
-  var_8193e12c = e_player gamepadusedlast() ? # "hash_51ec0cddcf9bf540" : # "hash_39b5d3b515e5b36c";
+  var_f1f44cd4 = e_player gamepadusedlast() ? #"hash_6704e759add72c61" : #"hash_5d01463c800741a7";
+  var_8193e12c = e_player gamepadusedlast() ? #"hash_51ec0cddcf9bf540" : #"hash_39b5d3b515e5b36c";
   level thread function_9d45d90a(#"hash_3daf240f47b72da9", var_8193e12c, var_f1f44cd4);
   e_player = ct_utils::get_player();
   e_player val::set(#"tak5", "freezecontrols");
@@ -881,8 +881,8 @@ function_c8e681c8() {
   ct_utils::function_e9ab1003("s_seraph_soldier_loc_5_2");
   e_player = getplayers()[0];
   e_player thread function_b23a52d(2.25, 0);
-  var_5140744e = function_8b1a219a() ? # "hash_10c1ccd08be6e1f9" : # "hash_50a34cf1332e24f";
-  var_eb32d4fd = e_player gamepadusedlast() ? # "hash_4b8f067f2ba3cf59" : # "hash_4a0ed54a946ba43f";
+  var_5140744e = function_8b1a219a() ? #"hash_10c1ccd08be6e1f9" : #"hash_50a34cf1332e24f";
+  var_eb32d4fd = e_player gamepadusedlast() ? #"hash_4b8f067f2ba3cf59" : #"hash_4a0ed54a946ba43f";
   level thread function_9d45d90a(#"hash_3e9e530155c75666", var_5140744e, var_eb32d4fd);
   level thread ct_vo::function_831e0584(array(#"hash_3e7cf98a7379a29c"), 1);
   wait 6;
@@ -1515,7 +1515,7 @@ function_c43189cd() {
     }
 
     e_player = ct_utils::get_player();
-    var_9947490d = e_player gamepadusedlast() ? # "hash_7033e3cd667fe69" : # "hash_7bbd382da03b8aaf";
+    var_9947490d = e_player gamepadusedlast() ? #"hash_7033e3cd667fe69" : #"hash_7bbd382da03b8aaf";
     e_player thread ct_utils::function_61c3d59c(var_9947490d, undefined);
     globallogic_score::_setplayermomentum(e_player, 0);
 
@@ -1558,7 +1558,7 @@ function_c43189cd() {
       ct_vo::function_831e0584(array(#"hash_3053b3416c2f8275"), 1);
       ct_utils::function_a61ebb46(#"hash_1c76f35cdadb1a92");
       e_player = ct_utils::get_player();
-      var_2332091b = e_player gamepadusedlast() ? # "hash_7033e3cd667fe69" : # "hash_7bbd382da03b8aaf";
+      var_2332091b = e_player gamepadusedlast() ? #"hash_7033e3cd667fe69" : #"hash_7bbd382da03b8aaf";
       e_player thread ct_utils::function_61c3d59c(var_2332091b, undefined);
       ct_utils::function_e44c5b8e(#"ac130", 0);
       wait 0.1;
@@ -1633,7 +1633,7 @@ gunship_event() {
   ct_vo::function_b86d3b7d();
   ct_vo::function_3ca1b77d();
   level thread ct_vo::function_5df1a850(level.ac130, array(#"hash_4de7f76e35d2df28"));
-  var_257a5d2d = e_player gamepadusedlast() ? # "hash_4d62965b3d78662" : # "hash_3e1c84f20dbc93c2";
+  var_257a5d2d = e_player gamepadusedlast() ? #"hash_4d62965b3d78662" : #"hash_3e1c84f20dbc93c2";
   e_player thread ct_utils::function_61c3d59c(var_257a5d2d, undefined);
   b_cycle = 0;
   b_fire = 0;

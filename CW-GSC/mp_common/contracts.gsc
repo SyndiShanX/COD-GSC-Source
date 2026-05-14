@@ -118,7 +118,7 @@ function function_a7a24a36(weaponname) {
     case #"blind_swat_grenade":
       attacker increment_contract(#"hash_42bc58cf2628c9ea");
       break;
-    case #"hash_1527a22d8a6fdc21":
+    case #"stunned_slow_grenade":
       attacker increment_contract(#"hash_48b83e73148056f6");
       break;
     case #"gadget_supplypod":
@@ -552,7 +552,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
-      self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
+      self luinotifyevent(#"loot_contract_progress", 2, level.contract_ids[var_38280f2f], new_progress);
     }
   }
 
@@ -563,7 +563,7 @@ function private function_902ef0de(var_38280f2f, delta) {
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self stats::function_dad108fa(#"hash_4c27fd1e8308d82b", 1);
       self stats::function_42277145(#"hash_777766b99c35007f", 1);
-      self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
+      self luinotifyevent(#"loot_contract_complete", 1, level.contract_ids[var_38280f2f]);
     }
   }
 
@@ -579,20 +579,20 @@ function private function_902ef0de(var_38280f2f, delta) {
 
 function function_90a854d2(slot) {
   if(getdvarint(#"hash_657185da33fd5f8", 0) > 0) {
-    var_38280f2f = #"hash_6a1133003efe7380";
+    var_38280f2f = #"undefined_contract_name";
 
     switch (slot) {
       case 0:
         return {
-          #var_38280f2f: # "contract_mp_headshot", #contract_id: 10011, #target_value: 100, #var_59cb904f: 98
+          #var_38280f2f: #"contract_mp_headshot", #contract_id: 10011, #target_value: 100, #var_59cb904f: 98
         };
       case 1:
         return {
-          #var_38280f2f: # "hash_2173bc0bfcbdf90f", #contract_id: 10004, #target_value: 200, #var_59cb904f: 195
+          #var_38280f2f: #"hash_2173bc0bfcbdf90f", #contract_id: 10004, #target_value: 200, #var_59cb904f: 195
         };
       case 2:
         return {
-          #var_38280f2f: # "hash_250c2d8ef2261723", #contract_id: 10009, #target_value: 50, #var_59cb904f: 48
+          #var_38280f2f: #"hash_250c2d8ef2261723", #contract_id: 10009, #target_value: 50, #var_59cb904f: 48
         };
       default:
         break;

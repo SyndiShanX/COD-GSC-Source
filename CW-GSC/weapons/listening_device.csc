@@ -263,7 +263,7 @@ function function_bc3e2f11(awareness_action, bundle) {
       return bundle.var_6ae8117c;
     case #"doublejump_boosted":
       return bundle.var_37bac39d;
-    case #"hash_589eac8b592bcb4d":
+    case #"melee_missed":
       return bundle.var_3b22f5be;
     case #"weapon_fired":
       return bundle.var_abea5dd8;
@@ -526,7 +526,7 @@ function private function_60b0e73f(device, params) {
       var_d6ff0766 = bundle.var_c26d14da * params.range;
       var_7aeac1e7 = 1;
     }
-  } else if(params.speed >= bundle.var_293163bd) {
+  } else if(params.speed >= bundle.detectionminspeed) {
     movement_type = sixthsenseent getmovementtype();
 
     if(isPlayer(sixthsenseent) && sixthsenseent function_d76efdcc()) {
@@ -687,13 +687,13 @@ function function_c2b5b27c() {
     }
 
     if(isDefined(waitresult.var_53714565)) {
-      var_9f19a239 = waitresult.var_53714565;
+      performer = waitresult.var_53714565;
 
-      if(!isDefined(var_9f19a239.var_629d0f94)) {
-        var_9f19a239.var_629d0f94 = [];
+      if(!isDefined(performer.var_629d0f94)) {
+        performer.var_629d0f94 = [];
       }
 
-      var_9f19a239.var_629d0f94[waitresult.action] = gettime();
+      performer.var_629d0f94[waitresult.action] = gettime();
     }
   }
 }

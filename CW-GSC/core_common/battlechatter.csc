@@ -108,17 +108,17 @@ function get_death_vox(playerbundle, meansofdeath) {
       case #"mod_melee_weapon_butt":
         return playerbundle.var_53f25688;
       case #"mod_head_shot":
-        return playerbundle.var_207908de;
+        return playerbundle.exertdeathheadshot;
       case #"mod_falling":
-        return playerbundle.var_1dfcabbd;
+        return playerbundle.exertdeathfalling;
       case #"mod_drown":
         return playerbundle.exertdeathdrowned;
       case #"mod_explosive":
-        return playerbundle.var_44d86dec;
+        return playerbundle.exertexplosive;
       case #"mod_dot_self":
         return playerbundle.var_48305ed9;
       case #"mod_dot":
-        return playerbundle.var_f8b4bcc1;
+        return playerbundle.exertdeathradiation;
       case #"mod_melee_assassinate":
         return playerbundle.exertdeathstabbed;
       case #"mod_gas":
@@ -170,8 +170,8 @@ function function_d2f35e13(localclientnum, successplayer, weapon, var_6ac148bc, 
     return;
   }
 
-  var_81485093 = var_9f84e4a9 + var_5c238c21.var_48b8bd2c;
-  var_8a6b001a function_4b126e4c(localclientnum, var_81485093, seed);
+  responsealias = var_9f84e4a9 + var_5c238c21.var_48b8bd2c;
+  var_8a6b001a function_4b126e4c(localclientnum, responsealias, seed);
 }
 
 function function_50e36ba7(attacker, weapon, var_5d738b56, seed) {
@@ -277,8 +277,8 @@ function function_29f600fe(localclientnum, attacker, var_eefecef8, var_d1927bab,
     return;
   }
 
-  var_81485093 = var_9f84e4a9 + var_eefecef8;
-  var_8a6b001a function_4b126e4c(localclientnum, var_81485093, seed);
+  responsealias = var_9f84e4a9 + var_eefecef8;
+  var_8a6b001a function_4b126e4c(localclientnum, responsealias, seed);
 }
 
 function game_end_vox(player, eventid) {
@@ -315,10 +315,10 @@ function game_end_vox(player, eventid) {
   }
 
   if(teamindex % 2) {
-    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : # "");
+    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : #"");
     commander = isDefined(faction.var_ccc3e5ba) ? faction.var_ccc3e5ba : "blops_commander";
   } else {
-    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : # "");
+    faction = getscriptbundle(isDefined(factionlist.faction[teamindex].var_d2446fa0) ? factionlist.faction[teamindex].var_d2446fa0 : #"");
     commander = isDefined(faction.var_ccc3e5ba) ? faction.var_ccc3e5ba : "cdp_commander";
   }
 
@@ -342,11 +342,11 @@ function game_end_vox(player, eventid) {
     return;
   }
 
-  var_81485093 = playerbundle.voiceprefix + playerbundle.(var_135807f9);
-  thread function_cc6f6e09(player, var_81485093, var_b7095947);
+  responsealias = playerbundle.voiceprefix + playerbundle.(var_135807f9);
+  thread function_cc6f6e09(player, responsealias, var_b7095947);
 }
 
-function function_cc6f6e09(player, var_81485093, var_b7095947) {
+function function_cc6f6e09(player, responsealias, var_b7095947) {
   while(isDefined(var_b7095947) && soundplaying(var_b7095947)) {
     waitframe(1);
   }
@@ -357,7 +357,7 @@ function function_cc6f6e09(player, var_81485093, var_b7095947) {
     return;
   }
 
-  player playSound(0, var_81485093);
+  player playSound(0, responsealias);
 }
 
 function function_c8663dbc(weapon, player) {

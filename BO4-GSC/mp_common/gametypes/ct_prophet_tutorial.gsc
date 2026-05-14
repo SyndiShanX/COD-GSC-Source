@@ -511,7 +511,7 @@ function_8b563364(var_8f2a3132 = 0) {
       level.var_9d47488.tunables.prompttime = 1000000;
       level.var_9d47488.tunables.perceptiontime = 1000000;
     } else {
-      var_a4ffa394 = self gamepadusedlast() ? # "hash_3d13389ee2095bf" : # "hash_60940c2522225649";
+      var_a4ffa394 = self gamepadusedlast() ? #"hash_3d13389ee2095bf" : #"hash_60940c2522225649";
       self thread ct_utils::function_61c3d59c(var_a4ffa394, undefined);
     }
 
@@ -530,7 +530,7 @@ function_8b563364(var_8f2a3132 = 0) {
     }
 
     self thread ct_utils::function_c2a10fc();
-    var_72bbe2b0 = self gamepadusedlast() ? # "hash_36aa5bc9601b470e" : # "hash_3b73ae98e19d3d9e";
+    var_72bbe2b0 = self gamepadusedlast() ? #"hash_36aa5bc9601b470e" : #"hash_3b73ae98e19d3d9e";
     self thread ct_utils::function_61c3d59c(var_72bbe2b0, undefined);
     self ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_remove_dart_fail"));
     return 0;
@@ -571,7 +571,7 @@ function_70bb5ca7() {
 
 function_c1ddd9e7() {
   level endoncallback(&function_ab099b85, #"combattraining_logic_finished");
-  var_c2a31444 = self gamepadusedlast() ? # "hash_19823bb31bcf0522" : # "hash_6a5f7a1ee19f5882";
+  var_c2a31444 = self gamepadusedlast() ? #"hash_19823bb31bcf0522" : #"hash_6a5f7a1ee19f5882";
   self thread ct_utils::function_61c3d59c(var_c2a31444, undefined);
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_remove_dart_0"));
 
@@ -707,7 +707,7 @@ function_7536db69() {
   level notify(#"colbounds_tempest1_nobacktrack_on");
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_one_enemy_0", "vox_tvoi_tutor_prop_one_enemy_1"));
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_one_enemy_nag");
-  var_83c760a3 = self gamepadusedlast() ? # "hash_ddfc98dd869c791" : # "hash_1050c60b070c0477";
+  var_83c760a3 = self gamepadusedlast() ? #"hash_ddfc98dd869c791" : #"hash_1050c60b070c0477";
   self thread ct_utils::function_61c3d59c(var_83c760a3, undefined);
   level.var_e72728b8 = array(#"eq_seeker_mine");
   var_539244d1 = getweapon(#"shock_rifle");
@@ -837,7 +837,7 @@ function_67483f8c() {
   var_539244d1 = getweapon(#"shock_rifle");
   self function_b512a9bf(2);
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_one_enemy_nag");
-  var_8c3d9081 = self gamepadusedlast() ? # "hash_ddfc98dd869c791" : # "hash_1050c60b070c0477";
+  var_8c3d9081 = self gamepadusedlast() ? #"hash_ddfc98dd869c791" : #"hash_1050c60b070c0477";
   self thread ct_utils::function_61c3d59c(var_8c3d9081, undefined);
 
   do {
@@ -1720,7 +1720,7 @@ function_f99e791d() {
       level.var_51ff7a58 = 1;
     }
 
-    var_92efd918 = self gamepadusedlast() ? # "hash_1188ebb7df5ffca" : # "hash_65f8372f2ae484ca";
+    var_92efd918 = self gamepadusedlast() ? #"hash_1188ebb7df5ffca" : #"hash_65f8372f2ae484ca";
     self thread ct_utils::function_61c3d59c(var_92efd918);
     self function_cf621509();
     self function_6ccd49e4();

@@ -189,8 +189,8 @@ function registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieshouldknockdown", &zombieshouldknockdown);
   assert(isscriptfunctionptr(&zombieknockdownactionstart));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionstart", &zombieknockdownactionstart);
-  assert(isscriptfunctionptr(&function_c8939973));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_a6273a84b4237ce", &function_c8939973);
+  assert(isscriptfunctionptr(&zombieknockdownactionterminate));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombieknockdownactionterminate", &zombieknockdownactionterminate);
   assert(isscriptfunctionptr(&zombiegetupactionterminate));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiegetupactionterminate", &zombiegetupactionterminate);
   assert(isscriptfunctionptr(&shouldstun));
@@ -1520,7 +1520,7 @@ function function_21ef174b(s_params) {
     }
   }
 
-  level.doa.var_afae28e0++;
+  level.doa.enemy_died++;
   attacker = s_params.eattacker;
 
   if(isDefined(attacker) && isDefined(attacker.owner)) {
@@ -1610,7 +1610,7 @@ function function_cf2c9af() {
 
 function stunstart(behaviortreeentity) {
   behaviortreeentity pathmode("dont move", 1);
-  callback::callback(#"hash_1eda827ff5e6895b");
+  callback::callback(#"on_ai_stunned");
 }
 
 function function_de68bf47(behaviortreeentity) {
@@ -1650,7 +1650,7 @@ function function_dbce9550(behaviortreeentity) {
 }
 
 function private function_e90927b7(entity) {
-  return entity.var_85c3882d === 1;
+  return entity.inconcertinawire === 1;
 }
 
 function shouldstun(entity) {
@@ -2124,7 +2124,7 @@ function zombieknockdownactionstart(behaviortreeentity) {
   behaviortreeentity.blockingpain = 1;
 }
 
-function private function_c8939973(behaviortreeentity) {
+function private zombieknockdownactionterminate(behaviortreeentity) {
   behaviortreeentity.knockdown = 0;
   behaviortreeentity collidewithactors(1);
   behaviortreeentity.blockingpain = 0;

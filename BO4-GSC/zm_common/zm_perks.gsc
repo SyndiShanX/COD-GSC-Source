@@ -2030,7 +2030,7 @@ function_c210fc2e(n_index, a_structs) {
 
 function_b7f2c635(player) {
   n_slot = self.stub.script_int;
-  perk = player.var_47654123[n_slot] ? # "specialty_mystery" : player.var_c27f1e90[n_slot];
+  perk = player.var_47654123[n_slot] ? #"specialty_mystery" : player.var_c27f1e90[n_slot];
 
   if(self.stub.var_36d60c16 !== 1 && player getstance() === "prone" && distancesquared(self.origin, player.origin) < 9216) {
     self.stub.var_36d60c16 = 1;
@@ -2145,7 +2145,7 @@ function_f5da744e() {
       continue;
     }
 
-    perk = player.var_47654123[n_slot] ? # "specialty_mystery" : player.var_c27f1e90[n_slot];
+    perk = player.var_47654123[n_slot] ? #"specialty_mystery" : player.var_c27f1e90[n_slot];
 
     if(!isDefined(player.var_c27f1e90) || player.var_c27f1e90.size <= n_slot) {
       return;

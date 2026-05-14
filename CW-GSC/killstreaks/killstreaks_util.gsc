@@ -398,7 +398,7 @@ function function_eb52ba7(killstreaktype, team, killstreak_id) {
   }
 
   session = {
-    #spawnid: getplayerspawnid(self), #name: var_88dc634d, #starttime: function_f8d53445(), #endtime: 0, #team: team, #kills: 0, #var_e72137e8: # "streak_ended", #var_6e1d768e: # ""};
+    #spawnid: getplayerspawnid(self), #name: var_88dc634d, #starttime: function_f8d53445(), #endtime: 0, #team: team, #kills: 0, #var_e72137e8: #"streak_ended", #var_6e1d768e: #""};
   weapon = get_killstreak_weapon(killstreaktype);
 
   if(weapon.iscarriedkillstreak === 1) {

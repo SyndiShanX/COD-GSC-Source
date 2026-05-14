@@ -636,7 +636,7 @@ function private function_bdf71927(params) {
     player interactive_map::function_23036faa(#"cursor", "missionState", -1);
     player interactive_map::function_59b2a130(blackboard.var_3c3d8c0b);
     var_96b6affa = {
-      #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: # "hash_6c7bb285599937ba", #complete_callback: &function_fb5a7ab1, #var_be77841a: 0, #var_531201f1: &function_4b717253
+      #var_4ac77177: 0, #var_de6f0004: 0, #prompt_text: #"hash_6c7bb285599937ba", #complete_callback: &function_fb5a7ab1, #var_be77841a: 0, #var_531201f1: &function_4b717253
     };
 
     foreach(trigger in blackboard.var_3c3d8c0b) {
@@ -763,7 +763,7 @@ function private function_e976f5d3() {
   interactive_map::function_23036faa(#"cursor", "year", evidence.var_2200aced);
 
   if(function_1447e257(evidence)) {
-    interactive_map::function_23036faa(#"cursor", "player", isDefined(evidence.var_fcfeae68) ? evidence.var_fcfeae68 : # "");
+    interactive_map::function_23036faa(#"cursor", "player", isDefined(evidence.var_fcfeae68) ? evidence.var_fcfeae68 : #"");
   } else {
     interactive_map::function_23036faa(#"cursor", "player", evidence.LevelPresence);
   }
@@ -1186,7 +1186,7 @@ function private function_35a396ee(params) {
 
   while(true) {
     result = player waittillmatch({
-      #menu: # "ScriptedHudWidgetMenu"}, #"menuresponse");
+      #menu: #"ScriptedHudWidgetMenu"}, #"menuresponse");
 
     if(!namespace_61e6d095::exists(#"hash_34f10865afcf9af7")) {
       continue;
@@ -1313,7 +1313,7 @@ function private function_d4497273(params) {
 
   while(true) {
     result = player waittillmatch({
-      #menu: # "ScriptedHudWidgetMenu", #response: # "hash_79587d9fe84f7a23"}, #"menuresponse");
+      #menu: #"ScriptedHudWidgetMenu", #response: #"hash_79587d9fe84f7a23"}, #"menuresponse");
 
     if(blackboard.var_9b52b1bf) {
       player thread function_85113485();
@@ -1503,7 +1503,7 @@ function private function_109f3f2(params) {
 
   while(true) {
     result = player waittillmatch({
-      #menu: # "ScriptedHudWidgetMenu"}, #"menuresponse");
+      #menu: #"ScriptedHudWidgetMenu"}, #"menuresponse");
 
     if(!namespace_61e6d095::exists(#"hash_afc09dfd34bcde0")) {
       continue;

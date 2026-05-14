@@ -106,8 +106,8 @@ function registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d96f193711e7602", &function_61e7d5f5);
   assert(isscriptfunctionptr(&function_6bbfa1a0));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_753bdf09b9b21d9a", &function_6bbfa1a0);
-  assert(isscriptfunctionptr(&function_dd674e3c));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_649ab6146cce9955", &function_dd674e3c);
+  assert(isscriptfunctionptr(&gladiatorisrunning));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatorisrunning", &gladiatorisrunning);
   assert(isscriptfunctionptr(&function_7468904d));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_19966227fe912af8", &function_7468904d);
   assert(isscriptfunctionptr(&gladiatorshouldreact));
@@ -122,8 +122,8 @@ function registerbehaviorscriptfunctions() {
   behaviorstatemachine::registerbsmscriptapiinternal(#"gladiatorpickaxe", &gladiatorpickaxe);
   assert(isscriptfunctionptr(&function_7891bd9b));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2ec3db12905e5ef2", &function_7891bd9b);
-  assert(isscriptfunctionptr(&function_490a290d));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_324b5266aa732357", &function_490a290d);
+  assert(isscriptfunctionptr(&gladiatormeleeend));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatormeleeend", &gladiatormeleeend);
   assert(isscriptfunctionptr(&function_6719445a));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7a99cf7ed75b85d4", &function_6719445a);
   assert(isscriptfunctionptr(&function_fced00e1));
@@ -461,7 +461,7 @@ function private function_7891bd9b(entity) {
   entity pathmode("dont move", 1);
 }
 
-function private function_490a290d(entity) {
+function private gladiatormeleeend(entity) {
   entity pathmode("move allowed");
 }
 
@@ -481,7 +481,7 @@ function private function_6bbfa1a0(entity) {
   return false;
 }
 
-function private function_dd674e3c(entity) {
+function private gladiatorisrunning(entity) {
   locomotionspeed = entity getblackboardattribute("_locomotion_speed");
 
   if(locomotionspeed === "locomotion_speed_run") {
@@ -1148,7 +1148,7 @@ function private function_88d65504(axe, var_7900b267, move_pos) {
 
   if(trace[#"fraction"] < 1) {
     hit_ent = trace[#"entity"];
-    level notify(#"hash_435816ec8f13c19b", {
+    level notify(#"gladiator_axe_hit", {
       #var_f1445bd6: trace, #ai_gladiator: self, #mdl_axe: var_7900b267, #hit_ent: hit_ent
     });
 

@@ -240,7 +240,7 @@ function private function_9927587f() {
   if(!is_true(var_f4f28ccb)) {
     level.player spy_camera::function_f785d9e9(self);
     self prompts::function_c97a48c7(#"ads", {
-      #var_87c991f3: 0, #var_531201f1: &function_77c45a55, #image: # "hash_68735dcf818e801c"});
+      #var_87c991f3: 0, #var_531201f1: &function_77c45a55, #image: #"hash_68735dcf818e801c"});
 
     while(distance2dsquared(level.player getplayercamerapos(), self.origin) > 1000000) {
       wait 1;
@@ -328,7 +328,7 @@ function private function_6adedc3f() {
 
       if(is_true(var_f4f28ccb)) {
         e_location util::delay_notify(0.2, "photo_taken", undefined, {
-          #source: # "save_restore"});
+          #source: #"save_restore"});
       }
     }
   }

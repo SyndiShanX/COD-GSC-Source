@@ -1147,7 +1147,7 @@ function function_9d903a8e(index) {
 
   wait 0.5;
   var_55033b92 function_a7642f50(#"hash_423ce4528e7aaf1f", "upgrade_outro_" + level.var_7c745515);
-  var_55033b92 namespace_ca8676a3::function_94fde0c0();
+  var_55033b92 zm_ai_mannequin_ally::function_94fde0c0();
 
   iprintlnbold("<dev string:x15a>");
 
@@ -1257,7 +1257,7 @@ function cmd(cmd) {
       var_55033b92 namespace_6fb22263::function_73367fa9();
       var_55033b92 clientfield::set("<dev string:x4d0>" + #"hash_703543ca871a0f75", 1);
       wait 1;
-      var_55033b92 namespace_ca8676a3::function_94fde0c0();
+      var_55033b92 zm_ai_mannequin_ally::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_88672174, 0, 0);
       break;
     case #"hash_7fa0510f463f22b2":
@@ -1267,7 +1267,7 @@ function cmd(cmd) {
       var_55033b92 namespace_6fb22263::function_73367fa9();
       var_55033b92 clientfield::set("<dev string:x4d0>" + #"hash_703543ca871a0f75", 1);
       wait 1;
-      var_55033b92 namespace_ca8676a3::function_94fde0c0();
+      var_55033b92 zm_ai_mannequin_ally::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_5b8c6c9b, 0, 0);
       break;
     case #"hash_2a5a3d4fd5a02048":
@@ -1277,7 +1277,7 @@ function cmd(cmd) {
       var_55033b92 namespace_6fb22263::function_73367fa9();
       var_55033b92 clientfield::set("<dev string:x4d0>" + #"hash_703543ca871a0f75", 1);
       wait 1;
-      var_55033b92 namespace_ca8676a3::function_94fde0c0();
+      var_55033b92 zm_ai_mannequin_ally::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_f1662fe9, 0, 0);
       break;
     case #"hash_1c3b84bbe061a573":
@@ -1287,7 +1287,7 @@ function cmd(cmd) {
       var_55033b92 namespace_6fb22263::function_73367fa9();
       var_55033b92 clientfield::set("<dev string:x4d0>" + #"hash_703543ca871a0f75", 1);
       wait 1;
-      var_55033b92 namespace_ca8676a3::function_94fde0c0();
+      var_55033b92 zm_ai_mannequin_ally::function_94fde0c0();
       var_55033b92 function_99f76fa4(0, 0, 0);
       break;
     case #"hash_593067b88bb64850":

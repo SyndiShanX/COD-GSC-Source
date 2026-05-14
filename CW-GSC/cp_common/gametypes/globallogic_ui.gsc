@@ -930,7 +930,7 @@ function private function_36e939c(var_4146002e = 1, var_d76d90ac = 0) {
   waittillframeend();
   level notify(#"chyron_menu_open");
   self waittillmatchtimeout(15, {
-    #menu: # "cp_chyron", #response: # "closed"}, #"menuresponse");
+    #menu: #"cp_chyron", #response: #"closed"}, #"menuresponse");
   cp_chyron.var_779239b4 = 0;
   self notify(#"chyron_menu_closed");
   level notify(#"chyron_menu_closed");

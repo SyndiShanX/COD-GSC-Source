@@ -1776,7 +1776,7 @@ function_1e150a0b(player) {
 function_293cd859(ent) {
   if(isPlayer(ent)) {
     data = {
-      #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: # "player"};
+      #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: #"player"};
     function_92d1707f(#"hash_5820ed7a498888c4", data);
     return;
   }

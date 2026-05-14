@@ -78,12 +78,12 @@ function private function_b4bc7751(entity) {
     entity.node.var_31c05612 = 1;
     var_54d06303 = struct::get(entity.node.target);
     var_54d06303 scene::play(entity);
-    var_54d06303 notify(#"hash_4d2293524fe1c94c", {
+    var_54d06303 notify(#"interactable_done", {
       #ai_interactable: entity
     });
 
     if(isalive(entity)) {
-      entity notify(#"hash_4d2293524fe1c94c", {
+      entity notify(#"interactable_done", {
         #s_interactable: var_54d06303, #var_c17a3b30: entity.node
       });
     }

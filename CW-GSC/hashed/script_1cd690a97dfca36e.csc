@@ -258,10 +258,10 @@ function set_pitch(soundobject, pitch, timeinseconds, curve, callbackfunc) {
 
 function function_ccb932f2() {
   if(is_true(level._snd.var_2dd09170)) {
-    return # "gentity";
+    return #"gentity";
   }
 
-  return # "centity";
+  return #"centity";
 }
 
 function function_34595a23() {

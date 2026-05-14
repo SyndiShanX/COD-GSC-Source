@@ -22,13 +22,13 @@ function private preinit() {
     return;
   }
 
-  level.var_ef215639 = [1: # "hash_1483048e184df991", 2: # "hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
+  level.var_ef215639 = [1: #"evt_death_circle_weak", 2: #"evt_death_circle_med", 3: "evt_death_circle_strong"];
   level.var_cb450873 = #"hash_313f1d0b4ff27caa";
 
   if(isDefined(level.var_7bd7bdc8)) {
     level.var_f6795a59 = level.var_7bd7bdc8;
   } else {
-    level.var_f6795a59 = [1: # "hash_7c7ea03189fe65d8", 2: # "hash_5c64e89ab323857a", 3: # "hash_3fc5123369b4c59f"];
+    level.var_f6795a59 = [1: #"hash_7c7ea03189fe65d8", 2: #"hash_5c64e89ab323857a", 3: #"hash_3fc5123369b4c59f"];
   }
 
   clientfield::register("scriptmover", "deathcircleflag", 1, 1, "int", &function_a380fe5, 0, 0);
@@ -56,7 +56,7 @@ function private function_4df027f2() {
   }
 
   if(!isDefined(level.var_74017fd2)) {
-    level.var_74017fd2 = #"hash_75168376918f5ab7";
+    level.var_74017fd2 = #"rob_wz_boundary";
   }
 }
 
@@ -254,7 +254,7 @@ function private function_d69170b(localclientnum, intensity = 0) {
   }
 }
 
-function private function_63d6411e() {
+function private death_circle_clear() {
   self setcompassicon("");
 }
 

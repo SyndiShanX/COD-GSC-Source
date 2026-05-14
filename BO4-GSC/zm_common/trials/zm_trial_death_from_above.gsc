@@ -10,7 +10,7 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-#namespace namespace_e01afe67;
+#namespace zm_trial_death_from_above;
 
 autoexec __init__system__() {
   system::register(#"zm_trial_death_from_above", &__init__, undefined, undefined);

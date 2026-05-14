@@ -144,7 +144,7 @@ function private function_a19d7104(settingsbundle) {
     }
 
     level.var_532264f5[settingsbundle.name][var_e8d7c6d7.weaponid] = {
-      #var_c6cc6205: var_e8d7c6d7.damagescale, #var_fff93f95: var_e8d7c6d7.weakpointdamagescale, #var_8e22aa87: var_e8d7c6d7.instakilldamagescale, #var_fac896db: var_e8d7c6d7.var_97b22faa
+      #var_c6cc6205: var_e8d7c6d7.damagescale, #var_fff93f95: var_e8d7c6d7.weakpointdamagescale, #var_8e22aa87: var_e8d7c6d7.instakilldamagescale, #var_fac896db: var_e8d7c6d7.instakillweakpointdamagescale
     };
   }
 
@@ -483,7 +483,7 @@ function function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point
   } else if(var_201ce857 && !var_30362eca) {
     var_b1c1c5cf = isDefined(var_cee56a92) ? var_cee56a92 : entity ai::function_9139c839().instakilldamagescale;
   } else {
-    var_b1c1c5cf = isDefined(var_e008ecea) ? var_e008ecea : entity ai::function_9139c839().var_97b22faa;
+    var_b1c1c5cf = isDefined(var_e008ecea) ? var_e008ecea : entity ai::function_9139c839().instakillweakpointdamagescale;
   }
 
   if(var_8d3f5b7d) {

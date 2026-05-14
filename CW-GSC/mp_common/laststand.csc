@@ -116,7 +116,7 @@ function function_766ed49(localclientnum, shouldplay) {
 }
 
 function laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", #"hash_7698972484f247e8");
+  self endon(#"death", #"end_bleed_fx");
 
   if(bwastimejump != fieldname && bwastimejump) {
     self util::waittill_dobj(binitialsnap);
@@ -128,7 +128,7 @@ function laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, 
     stopfx(binitialsnap, self.var_63796ff0);
   }
 
-  self notify(#"hash_7698972484f247e8");
+  self notify(#"end_bleed_fx");
 }
 
 function function_8960f852(oldval, newval) {

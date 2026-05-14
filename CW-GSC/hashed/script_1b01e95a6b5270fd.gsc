@@ -193,13 +193,13 @@ function function_7495bd30() {
   level endon(#"game_over", #"hash_40a4d01c20db352c");
   level thread function_c617d577();
   level.doa.var_2ad97fac = 0;
-  level.doa.var_afae28e0 = 0;
+  level.doa.enemy_died = 0;
 
   while(true) {
-    last = level.doa.var_afae28e0;
+    last = level.doa.enemy_died;
     wait 1;
 
-    if(last == level.doa.var_afae28e0) {
+    if(last == level.doa.enemy_died) {
       if(level.doa.var_2ad97fac < 30) {
         level.doa.var_2ad97fac++;
       }

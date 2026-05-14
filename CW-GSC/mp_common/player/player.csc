@@ -25,7 +25,7 @@ function private preinit() {
   callback::on_weapon_change(&on_player_weapon_change);
   callback::on_localclient_connect(&codcaster::function_57a6b7b0);
   level.var_15ab9bbd = 1;
-  renderoverridebundle::function_f72f089c(#"hash_27554b8df2b9e92b", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", &function_6803f977, undefined, undefined, 1);
+  renderoverridebundle::function_f72f089c(#"hash_27554b8df2b9e92b", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", &function_6803f977, undefined, undefined, 1);
   renderoverridebundle::function_f72f089c(#"hash_48a9d99bb016fbd3", #"hash_39109749d54991e4", &function_c451ab29);
   renderoverridebundle::function_f72f089c(#"hash_2fff175ca0ba28b2", #"hash_39109a49d54996fd", &function_c451ab29);
   renderoverridebundle::function_f72f089c(#"hash_b049550966eccb3", #"hash_17daa1d16cd73cd2", &function_9216f2c3);
@@ -81,10 +81,10 @@ function on_player_corpse(localclientnum, params) {
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
   self function_a25e8ff(localclientnum, 1);
-  self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", 0);
+  self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", 0);
 
   if(codcaster::function_b8fe9b52(localclientnum)) {
-    rob = self codcaster::is_friendly(localclientnum) ? # "hash_39109749d54991e4" : # "hash_39109a49d54996fd";
+    rob = self codcaster::is_friendly(localclientnum) ? #"hash_39109749d54991e4" : #"hash_39109a49d54996fd";
 
     if(isDefined(params.playernum) && function_b3cde530(localclientnum, params.playernum)) {
       self renderoverridebundle::start_bundle(#"hash_7e51b929877df918", rob);

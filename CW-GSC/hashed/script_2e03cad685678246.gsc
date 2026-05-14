@@ -328,7 +328,7 @@ function private function_d41f7e0e() {
       if(isDefined(e_player)) {
         e_player.is_ziplining = 0;
         e_player function_aaeede4e(1);
-        e_player notify(#"hash_3726f5b254bceb00");
+        e_player notify(#"player_zipline_complete");
 
         if(is_true(self.var_23f866eb)) {
           level notify(#"hash_3ede0d97e45af550");
@@ -370,7 +370,7 @@ function private function_d41f7e0e() {
 }
 
 function function_4a7a6dd7() {
-  self endon(#"hash_3726f5b254bceb00", #"death");
+  self endon(#"player_zipline_complete", #"death");
   wait 0.25;
 
   while(true) {
@@ -381,7 +381,7 @@ function function_4a7a6dd7() {
 }
 
 function function_b6764a75(var_88dc621c) {
-  self endon(#"hash_3726f5b254bceb00", #"death");
+  self endon(#"player_zipline_complete", #"death");
   var_f5558cea = var_88dc621c.n_distance * var_88dc621c.n_distance;
   n_time = 0;
   wait 0.25;

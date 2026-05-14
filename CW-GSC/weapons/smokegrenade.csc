@@ -58,7 +58,7 @@ function function_709fad19() {
   }
 
   var_b0b958b3 = getscriptbundle(weapon.customsettings);
-  return isDefined(var_b0b958b3.var_40dfefd1) ? var_b0b958b3.var_40dfefd1 : 128;
+  return isDefined(var_b0b958b3.smokegrenaderadius) ? var_b0b958b3.smokegrenaderadius : 128;
 }
 
 function monitor_smoke(local_client_num) {

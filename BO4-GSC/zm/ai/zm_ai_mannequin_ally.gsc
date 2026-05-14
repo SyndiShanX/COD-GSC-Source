@@ -11,7 +11,7 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
-#namespace namespace_ca8676a3;
+#namespace zm_ai_mannequin_ally;
 
 autoexec __init__system__() {
   system::register(#"zm_ai_mannequin_ally", &__init__, &__main__, undefined);

@@ -433,7 +433,7 @@ function private function_d82de95f(entity) {
         player = entity.locked_enemy;
 
         if(isPlayer(player)) {
-          player status_effect::status_effect_apply(getstatuseffect(#"hash_706608d269d2fefc"), undefined, entity, undefined, 2000);
+          player status_effect::status_effect_apply(getstatuseffect(#"gegenees_spear_hit"), undefined, entity, undefined, 2000);
           player thread function_60164697();
           player clientfield::increment_to_player("gegenees_damage_cf");
 

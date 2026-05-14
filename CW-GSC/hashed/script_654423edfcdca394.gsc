@@ -1809,7 +1809,7 @@ function function_990585f(params) {
 
   if(is_true(self.var_52e23e90)) {
     self vehicle::function_7f0bbde3();
-    self playSound(#"hash_d6643b88d0186ae");
+    self playSound(#"veh_dmg_emp");
   }
 
   self.var_52e23e90 = undefined;
@@ -2974,7 +2974,7 @@ function vehicle_emp(params) {
 
   if(is_true(self.var_52e23e90)) {
     self vehicle::function_7f0bbde3();
-    self playSound(#"hash_d6643b88d0186ae");
+    self playSound(#"veh_dmg_emp");
   }
 
   self.var_52e23e90 = undefined;

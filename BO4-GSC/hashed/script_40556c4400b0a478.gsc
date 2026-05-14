@@ -7,7 +7,7 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\ai\zm_ai_brutus;
 #include scripts\zm_common\zm_devgui;
-#namespace namespace_9d28c60;
+#namespace zm_ai_brutus_special;
 
 autoexec __init__system__() {
   system::register(#"zm_ai_brutus_special", &__init__, undefined, undefined);

@@ -815,7 +815,7 @@ function function_8422dabd(origin, trace, position, customsettings, attacker, ex
   self endon(#"death");
   timer = 0;
 
-  if(candofiredamage(self, customsettings.var_90bd7d92)) {
+  if(candofiredamage(self, customsettings.molotov_damage_interval)) {
     if(!isDefined(self.var_84e41b20)) {
       self.var_84e41b20 = [];
     }

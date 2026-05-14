@@ -1598,7 +1598,7 @@ function function_98198f98(str_archetype) {
     }
 
     if(!b_wait) {
-      level notify(#"hash_3a4456148ade383a");
+      level notify(#"special_ai_type_completed");
       return;
     }
   }

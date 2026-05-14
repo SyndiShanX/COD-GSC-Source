@@ -1947,7 +1947,7 @@ blocker_trigger_think() {
     if(isDefined(level.var_aef7f7d5) && level.var_aef7f7d5) {
       if(isDefined(self.unitrigger_stub) && !isDefined(self.unitrigger_stub.var_88312f4)) {
         self.unitrigger_stub.var_88312f4 = self.unitrigger_stub.hint_string;
-        self.unitrigger_stub.hint_string = isDefined(level.var_b0612462) ? level.var_b0612462 : # "";
+        self.unitrigger_stub.hint_string = isDefined(level.var_b0612462) ? level.var_b0612462 : #"";
       }
 
       continue;

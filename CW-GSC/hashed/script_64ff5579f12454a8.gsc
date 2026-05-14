@@ -587,8 +587,8 @@ function private function_4cb97b84(eventstruct) {
     dropstruct = {
       #origin: level.var_2c678640.origin + (0, 0, 24), #angles: level.var_2c678640.angles, #var_738dfc81: n_items
     };
-    dropstruct thread namespace_65181344::function_fd87c780(var_cc1fb2d0, n_items, 4);
-    dropstruct thread namespace_65181344::function_fd87c780(#"sr_mq4_bunny_intel_drop", 1, 4);
+    dropstruct thread item_spawn_groups_util::function_fd87c780(var_cc1fb2d0, n_items, 4);
+    dropstruct thread item_spawn_groups_util::function_fd87c780(#"sr_mq4_bunny_intel_drop", 1, 4);
 
     iprintlnbold("<dev string:x4d>");
 

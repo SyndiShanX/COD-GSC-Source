@@ -227,7 +227,7 @@ class cinteractobj {
     m_n_trigger_height = m_s_bundle.n_trigger_height;
     m_n_trigger_radius = m_s_bundle.n_trigger_radius;
     m_str_team = m_s_bundle.str_team;
-    var_426bccfd = m_s_bundle.var_ce7dda5f;
+    var_426bccfd = m_s_bundle.str_vo_type;
     var_15547ed4 = is_true(m_s_bundle.b_play_vo);
     m_str_player_scene_anim = m_s_bundle.playerscenebundle;
     m_b_scene_use_time_override = m_s_bundle.playerscenebundletimeoverride;
@@ -338,7 +338,7 @@ class cinteractobj {
       return;
     }
 
-    str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : # "group_none";
+    str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : #"group_none";
 
     for(var_fb20e730 = getplayers(m_str_team); var_fb20e730.size; var_fb20e730 = getplayers(m_str_team)) {
       foreach(e_player in var_fb20e730) {
@@ -4069,16 +4069,16 @@ function get_relative_team(team) {
   team = util::get_team_mapping(team);
 
   if(self.ownerteam == #"any") {
-    return # "group_friendly";
+    return #"group_friendly";
   }
 
   if(team == self.ownerteam) {
-    return # "group_friendly";
+    return #"group_friendly";
   } else if(team != self.ownerteam && team != #"neutral") {
-    return # "group_enemy";
+    return #"group_enemy";
   }
 
-  return # "group_none";
+  return #"group_none";
 }
 
 function can_touch(sentient) {

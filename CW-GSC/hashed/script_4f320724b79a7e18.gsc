@@ -852,7 +852,7 @@ function function_1e0d693b(goal, enemy) {
     var_20b5eeff = 150;
   }
 
-  var_3069c020 = isDefined(self.settings.var_2ade16ee) ? self.settings.var_2ade16ee : 450;
+  var_3069c020 = isDefined(self.settings.preferredengagementdistance) ? self.settings.preferredengagementdistance : 450;
   enemypos = enemy.origin;
 
   if(function_ffa5b184(enemy)) {

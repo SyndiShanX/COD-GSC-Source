@@ -582,7 +582,7 @@ function private function_6c92ebda(behaviortreeentity, asmstatename) {
 }
 
 function private function_e137506e(electriccatalyst) {
-  self endon(#"death", #"disconnect", #"hash_7283e5f17e4fa10a");
+  self endon(#"death", #"disconnect", #"electric_shock_finished");
   electriccatalyst waittill(#"death");
   self notify(#"killed_electric_catalyst");
 }
@@ -600,7 +600,7 @@ function private function_73961a38(notifyhash) {
   }
 
   self.var_6b8f84c7 = undefined;
-  self notify(#"hash_7283e5f17e4fa10a");
+  self notify(#"electric_shock_finished");
 }
 
 function private function_e7a0424c(behaviortreeentity) {
@@ -911,8 +911,8 @@ function private function_75070c6() {
 }
 
 function function_e5e8cbd2(b_respawn) {
-  self notify(#"hash_25ca29da51a78702");
-  self endon(#"hash_25ca29da51a78702");
+  self notify(#"update_purified_fx");
+  self endon(#"update_purified_fx");
   self.var_5c8ac43e = 1;
 
   if(isDefined(level.var_e1ade08)) {
@@ -1338,9 +1338,9 @@ function private function_1a0ae193() {
   while(true) {
     waitframe(1);
 
-    if(getdvarstring(#"hash_403368b958977fcb", "<dev string:x208>") != "<dev string:x208>") {
-      function_fa69f8d2(int(getdvarstring(#"hash_403368b958977fcb")));
-      setDvar(#"hash_403368b958977fcb", "<dev string:x208>");
+    if(getdvarstring(#"spawn_catalyst_type", "<dev string:x208>") != "<dev string:x208>") {
+      function_fa69f8d2(int(getdvarstring(#"spawn_catalyst_type")));
+      setDvar(#"spawn_catalyst_type", "<dev string:x208>");
     }
   }
 }

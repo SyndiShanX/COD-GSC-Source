@@ -288,11 +288,11 @@ _playlocalsound(soundalias) {
 
 getotherteam(team) {
   if(team == #"allies") {
-    return # "axis";
+    return #"axis";
   } else if(team == #"axis") {
-    return # "allies";
+    return #"allies";
   } else {
-    return # "allies";
+    return #"allies";
   }
 
   assertmsg("<dev string:x38>" + team);

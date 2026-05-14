@@ -433,7 +433,7 @@ function function_e8c63c15(player, var_da4747b7, index = 0) {
     var_8e313b1c = getdvarint(#"hash_1317b91cdefa1238", 0);
 
     if(!var_8e313b1c) {
-      dropitems = dropstruct namespace_65181344::function_fd87c780(#"zm_fishing_parent_list", 1, 0);
+      dropitems = dropstruct item_spawn_groups_util::function_fd87c780(#"zm_fishing_parent_list", 1, 0);
     }
 
     if(!isDefined(dropitems) || dropitems.size === 0 || var_8e313b1c) {

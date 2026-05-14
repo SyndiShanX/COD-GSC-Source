@@ -7,10 +7,10 @@
 #using scripts\core_common\callbacks_shared;
 #using scripts\core_common\system_shared;
 #using scripts\zm_common\zm_trial;
-#namespace namespace_7499819f;
+#namespace zm_trial_no_player_death;
 
 function private autoexec __init__system__() {
-  system::register(#"hash_3887e77731340f48", &preinit, undefined, undefined, undefined);
+  system::register(#"zm_trial_no_player_death", &preinit, undefined, undefined, undefined);
 }
 
 function private preinit() {
@@ -18,7 +18,7 @@ function private preinit() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_b143bd998abdd27", &on_begin, &on_end);
+  zm_trial::register_challenge(#"no_player_death", &on_begin, &on_end);
 }
 
 function private on_begin() {

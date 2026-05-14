@@ -34,7 +34,7 @@ __init__() {
 }
 
 on_begin(str_style) {
-  level.var_4ecf5754 = isDefined(str_style) ? str_style : # "silent_film";
+  level.var_4ecf5754 = isDefined(str_style) ? str_style : #"silent_film";
 
   switch (level.var_4ecf5754) {
     case #"silent_film":

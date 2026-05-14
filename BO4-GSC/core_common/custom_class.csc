@@ -522,7 +522,7 @@ update_weapon_script_model(localclientnum, newweaponstring, var_f020955, should_
   assert(isDefined(newweaponstring), "<dev string:x38>");
   assert(isDefined(var_f020955), "<dev string:x84>");
 
-  level.last_weapon_name[localclientnum] = isDefined(newweaponstring) ? newweaponstring : # "ar_accurate_t8";
+  level.last_weapon_name[localclientnum] = isDefined(newweaponstring) ? newweaponstring : #"ar_accurate_t8";
   level.var_8ad413c[localclientnum] = isDefined(var_f020955) ? var_f020955 : "";
   var_571f2574 = function_52145a0d(localclientnum);
 

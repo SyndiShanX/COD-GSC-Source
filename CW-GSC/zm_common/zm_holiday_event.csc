@@ -90,7 +90,7 @@ function function_3b11146f(localclientnum, oldval, newval, bnewent, binitialsnap
       createdynentandlaunch(bwastimejump, self.var_6ffc5953, self gettagorigin(self.var_dee85a7a), self gettagangles(self.var_dee85a7a), v_hit_pos, v_force);
     }
 
-    var_297c3a3d = isDefined(self.var_fbfc64db) ? self.var_fbfc64db : # "hash_2990c4a0be6af31e";
+    var_297c3a3d = isDefined(self.var_fbfc64db) ? self.var_fbfc64db : #"hash_2990c4a0be6af31e";
     var_ea8a7e41 = self gettagorigin(self.var_dee85a7a);
 
     if(isDefined(var_ea8a7e41)) {

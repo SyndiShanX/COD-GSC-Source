@@ -145,7 +145,7 @@ function private function_cc775529(s_instance) {
           dropstruct = {
             #origin: mdl_orb.origin + var_a758131a, #angles: mdl_orb.angles, #var_738dfc81: var_4a6e5d8a
           };
-          dropstruct thread namespace_65181344::function_fd87c780(#"survival_resource_list", var_4a6e5d8a, 3, #"hash_3b44370452dc91f8");
+          dropstruct thread item_spawn_groups_util::function_fd87c780(#"survival_resource_list", var_4a6e5d8a, 3, #"hash_3b44370452dc91f8");
           var_e81e0492 += var_4a6e5d8a;
 
           if(!isDefined(var_1b519b48)) {
@@ -166,7 +166,7 @@ function private function_cc775529(s_instance) {
               dropstruct = {
                 #origin: mdl_orb.origin, #angles: mdl_orb.angles, #var_738dfc81: var_206de304
               };
-              dropstruct thread namespace_65181344::function_fd87c780(#"sr_world_list_scorestreak_legendary", var_206de304, 2);
+              dropstruct thread item_spawn_groups_util::function_fd87c780(#"sr_world_list_scorestreak_legendary", var_206de304, 2);
               level scoreevents::doscoreeventcallback("scoreEventSR", {
                 #scoreevent: "destroy_aether_orb_zm", #allplayers: 1
               });
@@ -195,7 +195,7 @@ function private function_cc775529(s_instance) {
 
         if(var_1a8b690d > 0) {
           dropstruct.origin -= var_a758131a;
-          dropstruct thread namespace_65181344::function_fd87c780(namespace_58949729::function_fd5e77fa(#"large"), var_1a8b690d, 2);
+          dropstruct thread item_spawn_groups_util::function_fd87c780(namespace_58949729::function_fd5e77fa(#"large"), var_1a8b690d, 2);
         }
 
         if(isDefined(var_206de304)) {

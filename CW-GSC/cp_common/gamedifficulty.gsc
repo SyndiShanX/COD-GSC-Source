@@ -697,7 +697,7 @@ function function_4ba867b() {
   var_8f59489c = level.var_21347b32[level.gameskill].var_e3e8d3a1;
   var_880dfe56 = level.var_21347b32[level.gameskill].var_7b55ea2b;
   setDvar(#"player_laststandbleedouttime", var_938ce325);
-  setDvar(#"hash_7036719f41a78d54", var_4cfdf1fc);
+  setDvar(#"player_laststandrevivehealth", var_4cfdf1fc);
   setDvar(#"player_laststandsuicidedelay", var_22e7a516);
   setDvar(#"hash_6e3f1e26256fe0b5", var_33682ca0);
   setDvar(#"player_respawndelay", var_fd9d63a8);

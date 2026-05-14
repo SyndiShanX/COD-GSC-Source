@@ -1713,9 +1713,9 @@ function_d7a2c2f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 start_stun_fx(localclientnum) {
-  stunfx = isDefined(self.global_zm_specialty_staminup_drankdie) ? self.global_zm_specialty_staminup_drankdie : # "killstreaks/fx_agr_emp_stun";
+  stunfx = isDefined(self.global_zm_specialty_staminup_drankdie) ? self.global_zm_specialty_staminup_drankdie : #"killstreaks/fx_agr_emp_stun";
   _exp_special_web_dissolve = isDefined(self.stunfxtag) ? self.stunfxtag : "tag_origin";
-  var_6dc7131c = isDefined(self.var_c254489e) ? self.var_c254489e : # "veh_talon_shutdown";
+  var_6dc7131c = isDefined(self.var_c254489e) ? self.var_c254489e : #"veh_talon_shutdown";
   self.stun_fx = util::playFXOnTag(localclientnum, stunfx, self, _exp_special_web_dissolve);
   playSound(localclientnum, var_6dc7131c, self.origin);
 }

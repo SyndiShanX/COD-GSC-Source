@@ -21,10 +21,10 @@ function __init__() {
   if(level.wave_spawn) {
     level.takelivesondeath = 1;
     level.var_a5f54d9f = 1;
-    level callback::add_callback(#"hash_3be1213f454fa90e", &function_301b775b);
+    level callback::add_callback(#"wave_spawn_triggered", &function_301b775b);
     level callback::add_callback(#"hash_7fc21de2eaebdb3b", &function_832ecb3d);
-    level callback::add_callback(#"hash_405e46788e83af41", &function_1540761c);
-    level callback::add_callback(#"hash_7912e21750e4010d", &function_a27362d0);
+    level callback::add_callback(#"death_circle_start", &function_1540761c);
+    level callback::add_callback(#"death_circle_locked", &function_a27362d0);
     level callback::on_player_killed(&function_14a68e0b);
   }
 }

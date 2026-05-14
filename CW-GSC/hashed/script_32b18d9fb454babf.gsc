@@ -661,24 +661,24 @@ function function_e97f828e() {
 
 function function_3cdae979() {
   maps = [{
-    #name: "wz_forest", #gts: # "hash_45f866da7af3a609", #prioritized: 0
+    #name: "wz_forest", #gts: #"hash_45f866da7af3a609", #prioritized: 0
   }, {
-    #name: "wz_golova", #gts: # "hash_d9c18f112ff4552", #prioritized: 0
+    #name: "wz_golova", #gts: #"hash_d9c18f112ff4552", #prioritized: 0
   }, {
-    #name: "wz_sanatorium", #gts: # "hash_4eabe0978dc92ef7", #prioritized: 0
+    #name: "wz_sanatorium", #gts: #"hash_4eabe0978dc92ef7", #prioritized: 0
   }, {
-    #name: "wz_duga", #gts: # "hash_444f9d0410b85ddf", #prioritized: 0
+    #name: "wz_duga", #gts: #"hash_444f9d0410b85ddf", #prioritized: 0
   }, {
-    #name: "wz_ski_slopes", #gts: # "hash_15e3cdab677aed", #prioritized: 0
+    #name: "wz_ski_slopes", #gts: #"hash_15e3cdab677aed", #prioritized: 0
   }];
   maps[maps.size] = {
-    #name: "wz_zoo", #gts: # "hash_3a16dccdcb82e664", #prioritized: 0
+    #name: "wz_zoo", #gts: #"hash_3a16dccdcb82e664", #prioritized: 0
   };
   maps[maps.size] = {
-    #name: "mp_dune", #gts: # "hash_4437cd0410a41d8e", #prioritized: 0
+    #name: "mp_dune", #gts: #"hash_4437cd0410a41d8e", #prioritized: 0
   };
   maps[maps.size] = {
-    #name: "mp_black_sea", #gts: # "hash_5164b603aedfbe2a", #prioritized: 0
+    #name: "mp_black_sea", #gts: #"hash_5164b603aedfbe2a", #prioritized: 0
   };
   return maps;
 }

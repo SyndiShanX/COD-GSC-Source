@@ -90,7 +90,7 @@ function function_49f4b6ee() {
   }
 }
 
-function add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"hash_2082da6662372184") {
+function add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"zmb_armor_receive") {
   var_4812bba2 = 0;
 
   if(isDefined(var_28066539)) {
@@ -159,7 +159,7 @@ function damage(n_damage, mod_type, e_attacker) {
     }
 
     self.armor = 0;
-    self playSound(#"hash_2817ca3f96127e62");
+    self playSound(#"zmb_armor_break");
     return (n_damage - var_ee47fd1b);
   }
 
@@ -189,7 +189,7 @@ function damage(n_damage, mod_type, e_attacker) {
       self remove(str_armor);
 
       if(self.armor <= 0) {
-        self playSound(#"hash_2817ca3f96127e62");
+        self playSound(#"zmb_armor_break");
       }
 
       n_index++;

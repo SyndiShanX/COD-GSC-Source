@@ -19,6 +19,6 @@ autoexec __init__system__() {
 __init__() {
   if(isDefined(getgametypesetting(#"hash_6fb11b1e304d533c")) ? getgametypesetting(#"hash_6fb11b1e304d533c") : 0) {
     item_world_fixup::function_e70fa91c(#"supply_stash_parent", #"world_hw_event_tags_supply_drop", 3);
-    namespace_3d2704b3::function_f0297225(#"world_hw_event_tags_supply_drop", 1, 3);
+    item_supply_drop_system::function_f0297225(#"world_hw_event_tags_supply_drop", 1, 3);
   }
 }

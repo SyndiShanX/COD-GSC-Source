@@ -200,7 +200,7 @@ function private function_a47e049d(localclientnum) {
       waitframe(1);
     }
 
-    self playrenderoverridebundle(#"hash_1cbf6d26721c59a7");
+    self playrenderoverridebundle(#"rob_sonar_set_friendly_cp");
   }
 }
 
@@ -208,7 +208,7 @@ function private function_ac5dfb21(localclientnum) {
   localclient = function_5c10bd79(localclientnum);
 
   if(isDefined(self) && localclient != self) {
-    self stoprenderoverridebundle(#"hash_1cbf6d26721c59a7");
+    self stoprenderoverridebundle(#"rob_sonar_set_friendly_cp");
   }
 }
 
@@ -261,11 +261,11 @@ function function_39273849(b_disabled) {
   }
 
   if(b_disabled) {
-    self stoprenderoverridebundle(#"hash_1cbf6d26721c59a7");
+    self stoprenderoverridebundle(#"rob_sonar_set_friendly_cp");
     self.var_d676dcaa = 1;
     return;
   }
 
-  self playrenderoverridebundle(#"hash_1cbf6d26721c59a7");
+  self playrenderoverridebundle(#"rob_sonar_set_friendly_cp");
   self.var_d676dcaa = undefined;
 }

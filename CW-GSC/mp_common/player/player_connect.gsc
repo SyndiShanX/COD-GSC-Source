@@ -660,10 +660,10 @@ function private function_efa6e25f() {
   self globallogic_score::initpersstat(#"downs");
   self globallogic_score::initpersstat(#"revives");
   self globallogic_score::initpersstat(#"cleanups");
-  self globallogic_score::initpersstat(#"hash_150795bee4d46ce4");
+  self globallogic_score::initpersstat(#"first_connect_time");
 
-  if(self.pers[#"hash_150795bee4d46ce4"] === 0) {
-    self.pers[#"hash_150795bee4d46ce4"] = gettime();
+  if(self.pers[#"first_connect_time"] === 0) {
+    self.pers[#"first_connect_time"] = gettime();
   }
 
   if(level.resetplayerscoreeveryround) {

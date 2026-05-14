@@ -52,10 +52,10 @@ function event_handler[gametype_init] main(eventstruct) {
   callback::add_callback(#"server_objective", &function_3022f6ba);
   fields = getmapfields();
   level.var_117b4a3a = [];
-  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : # "hash_280d5153e1276d";
-  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : # "hash_4b1a3a0285bea14d";
-  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : # "hash_36a94457406aea0e";
-  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : # "hash_5a60154937b01557";
+  level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : #"hash_280d5153e1276d";
+  level.var_117b4a3a[1] = isDefined(fields.var_e1ef0bf1) ? fields.var_e1ef0bf1 : #"hash_4b1a3a0285bea14d";
+  level.var_117b4a3a[2] = isDefined(fields.var_97278b57) ? fields.var_97278b57 : #"hash_36a94457406aea0e";
+  level.var_117b4a3a[3] = isDefined(fields.var_29209af9) ? fields.var_29209af9 : #"hash_5a60154937b01557";
 }
 
 function function_c3ac47f5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

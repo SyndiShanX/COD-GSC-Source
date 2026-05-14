@@ -28,7 +28,7 @@ function private preinit() {
 }
 
 function private on_begin(localclientnum, a_params) {
-  level.var_4ecf5754 = isDefined(a_params[0]) ? a_params[0] : # "silent_film";
+  level.var_4ecf5754 = isDefined(a_params[0]) ? a_params[0] : #"silent_film";
 
   switch (level.var_4ecf5754) {
     case #"silent_film":
@@ -56,7 +56,7 @@ function function_777d7ba2() {
   self notify("1da5c1009913aa99");
   self endon("1da5c1009913aa99");
   setDvar(#"slide_blur_enabled", 0);
-  level waittill(#"end_game", #"hash_7646638df88a3656");
+  level waittill(#"end_game", #"trial_round_end");
   setDvar(#"slide_blur_enabled", 1);
 }
 
@@ -100,7 +100,7 @@ function function_b5ea67f1(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_9cf0edbf(localclientnum, b_show) {
   self notify(#"hash_3dec19d02cb07e9b");
   self endon(#"hash_3dec19d02cb07e9b", #"death");
-  level endon(#"hash_7646638df88a3656");
+  level endon(#"trial_round_end");
 
   while(true) {
     a_ai = getentarraybytype(localclientnum, 15);

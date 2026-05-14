@@ -36,19 +36,19 @@ __init__() {
 
   level.var_9cddbf4e = [];
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_01_mod"] = {
-    #open_sound: # "evt_supply_stash_open", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: #"evt_supply_stash_open", #var_b9492c6: #"hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_04_mod"] = {
-    #open_sound: # "evt_supply_stash_open", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
+    #open_sound: #"evt_supply_stash_open", #var_b9492c6: #"hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[#"p8_fxanim_wz_death_stash_mod"] = {
-    #open_sound: # "evt_death_stash_open", #var_b9492c6: # "hash_70fb2ee1b706a28a"};
+    #open_sound: #"evt_death_stash_open", #var_b9492c6: #"hash_70fb2ee1b706a28a"};
   level.var_9cddbf4e[#"hash_1dcbe8021fb16344"] = {
-    #open_sound: # "hash_56b5b65c141f4629", #var_b9492c6: # "hash_6fcb29cae6678d93"};
+    #open_sound: #"hash_56b5b65c141f4629", #var_b9492c6: #"hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_ammo_mod"] = {
-    #open_sound: # "hash_f743d336f8b7764", #var_b9492c6: # "hash_3e62bcbd6460ff44"};
+    #open_sound: #"hash_f743d336f8b7764", #var_b9492c6: #"hash_3e62bcbd6460ff44"};
   level.var_9cddbf4e[#"hash_574076754776e003"] = {
-    #open_sound: # "hash_36e23ce3e5f7e4c0", #var_b9492c6: # "hash_22f426a8593609e8"};
+    #open_sound: #"hash_36e23ce3e5f7e4c0", #var_b9492c6: #"hash_22f426a8593609e8"};
   level.var_9cddbf4e[#"wpn_t7_drop_box_wz"] = {
-    #open_sound: # "evt_supply_drop_open", #var_b9492c6: # "hash_2b751d50426093db"};
+    #open_sound: #"evt_supply_drop_open", #var_b9492c6: #"hash_2b751d50426093db"};
   callback::on_connect(&_on_player_connect);
   callback::on_spawned(&_on_player_spawned);
   callback::on_disconnect(&_on_player_disconnect);
@@ -1377,18 +1377,18 @@ function_7c84312d(origin, angles) {
           if(isDefined(itementry.weapon)) {
             var_caafaa25 = itementry.weapon.displayname;
           } else {
-            var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "weapon/pickupnewweapon";
+            var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"weapon/pickupnewweapon";
           }
 
           usetrigger sethintstring(var_caafaa25);
         } else {
           usetrigger setcursorhint("HINT_3D");
-          var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+          var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
           usetrigger sethintstring(var_caafaa25);
         }
       } else {
         usetrigger setcursorhint("HINT_3D");
-        var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
+        var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
         usetrigger sethintstring(var_caafaa25);
       }
     }

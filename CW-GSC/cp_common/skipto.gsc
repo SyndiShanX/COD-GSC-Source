@@ -1854,7 +1854,7 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
     level thread lui::play_outro_movie(outromovie);
     snd::client_msg("outro_movie");
     player notify(#"menuresponse", {
-      #menu: # "full_screen_movie", #response: # "skippable", #value: 1
+      #menu: #"full_screen_movie", #response: #"skippable", #value: 1
     });
     level flag::wait_till_clear("playing_outro_movie");
   }

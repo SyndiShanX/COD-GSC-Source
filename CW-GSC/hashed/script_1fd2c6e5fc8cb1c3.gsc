@@ -819,7 +819,7 @@ function function_50de5cd0(poi) {
       return function_9ce18e97(#"hash_7b2a4129e4987ff0");
   }
 
-  return # "hash_bf89fcd37dbdd7e";
+  return #"hash_bf89fcd37dbdd7e";
 }
 
 function function_aa042bc7(model_str, tag, count, struct) {
