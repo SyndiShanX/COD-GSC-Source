@@ -37,7 +37,7 @@ init_fx() {
   level._effect[#"pap_projectile"] = #"hash_59977c4c851916e0";
   level._effect[#"pap_projectile_end"] = #"hash_1a06427eff8dfe13";
   level._effect[#"fx_steam_lab_dry_ice"] = "_t7/steam/fx_steam_lab_dry_ice";
-  level._effect[#"hash_675f4b19e646ca6c"] = #"hash_4310e1cb3f897c7c";
+  level._effect[#"fx8_elemental_shard_glow"] = #"hash_4310e1cb3f897c7c";
   level._effect[#"fx8_power_wisp_lg"] = "maps/zm_white/fx8_power_wisp_lg";
   level._effect[#"fx8_quest_mannequin_initial_sparks"] = "maps/zm_white/fx8_quest_mannequin_initial_sparks";
   level._effect[#"fx8_quest_mannequin_charging"] = "maps/zm_white/fx8_quest_mannequin_charging";
@@ -125,7 +125,7 @@ function_9bc657a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 registerooze_gate_colcontrolrobotmelee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_675f4b19e646ca6c"], self, "tag_origin");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[#"fx8_elemental_shard_glow"], self, "tag_origin");
     return;
   }
 

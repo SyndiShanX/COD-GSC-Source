@@ -237,8 +237,8 @@ function_56db9cdc() {
       playsoundatposition(#"hash_1172b7ba38df5cd4", (-105, -3451, 607));
       s_notify = level waittilltimeout(120, #"hash_39b6629ce957cce9");
 
-      if(level flag::get(#"hash_2923f30473421396")) {
-        level waittill(#"hash_355e5e0bbf3760db");
+      if(level flag::get(#"island_event_active")) {
+        level waittill(#"island_event_complete");
       }
 
       if(isDefined(level.var_ab11c23d.b_blue) && level.var_ab11c23d.b_blue) {
@@ -369,7 +369,7 @@ function_1556161f() {
 
 function_50779c1f() {
   level endon(#"hash_7cbd2282015eb30a");
-  level flag::wait_till(#"hash_2923f30473421396");
+  level flag::wait_till(#"island_event_active");
   level thread function_ec4984c3();
 }
 
@@ -390,8 +390,8 @@ function_ec4984c3() {
   level.a_func_score_events[#"damage_points"] = undefined;
   level.a_func_score_events[#"death"] = undefined;
   level.var_382a24b0 = undefined;
-  level flag::clear(#"hash_2923f30473421396");
-  level notify(#"hash_355e5e0bbf3760db");
+  level flag::clear(#"island_event_active");
+  level notify(#"island_event_complete");
   level.var_7d8bf93f flag::wait_till("pap_waiting_for_user");
   level flag::wait_till(#"pap_machines_off");
   wait 3;

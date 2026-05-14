@@ -760,7 +760,7 @@ function_b8dfa139(str_event) {
     case # "hash_4122108abe671eb7":
       var_9c93ba8f = -25;
       break;
-    case # "hash_7d48d521481272cf":
+    case # "player_shoots_crowd":
       var_9c93ba8f = -2;
       break;
     case # "player_down":
@@ -1445,7 +1445,7 @@ function_e0bb973(cmd) {
     case # "player_death":
     case # "hash_74fc45698491be88":
     case # "miniboss_kill":
-    case # "hash_7d48d521481272cf":
+    case # "player_shoots_crowd":
       foreach(player in level.activeplayers) {
         var_d80019d9 = hash(cmd);
         player function_b8dfa139(var_d80019d9);

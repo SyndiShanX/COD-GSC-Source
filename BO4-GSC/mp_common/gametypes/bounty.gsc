@@ -1028,10 +1028,10 @@ function_f878f4bf(var_fa5724d5, context) {
   }
 
   level.var_ad7774db thread function_acf3ff19();
-  waitresult = level.var_ad7774db waittill(#"hash_5677d0c5246418e5");
+  waitresult = level.var_ad7774db waittill(#"bounty_deposit_made");
 
   for(prevprogress = 0; waitresult._notify == "timeout" && level.var_ad7774db.curprogress > prevprogress; prevprogress = level.var_ad7774db.curprogress) {
-    waitresult = level.var_ad7774db waittilltimeout(0.25, #"hash_5677d0c5246418e5");
+    waitresult = level.var_ad7774db waittilltimeout(0.25, #"bounty_deposit_made");
   }
 
   if(!isDefined(level.var_ad7774db)) {
@@ -1452,7 +1452,7 @@ function_37e1bbbf(player) {
   }
 
   useobj = self;
-  useobj notify(#"hash_5677d0c5246418e5");
+  useobj notify(#"bounty_deposit_made");
   useobj function_572ce431();
   player playsoundtoplayer(#"hash_19f756f885db9bb8", player);
   [[level.var_37d62931]](player, 1);

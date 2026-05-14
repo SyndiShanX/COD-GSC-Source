@@ -88,7 +88,7 @@ defcon_sign_setup() {
       level.defcon_level++;
 
       if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0) {
-        level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
+        level thread zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
       }
 
       level thread defcon_sign_lights();
@@ -97,9 +97,9 @@ defcon_sign_setup() {
 
       if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("bonfire_reset")) {
         if(level flag::get(#"hash_38f45c699c5d5d63")) {
-          level thread namespace_8f53e87b::function_777b7961(user);
+          level thread zm_office_vo_hooks::function_777b7961(user);
         } else {
-          level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
+          level thread zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
         }
       }
 
@@ -115,7 +115,7 @@ defcon_sign_setup() {
     level waittill(#"pack_room_reset");
 
     if(!level flag::get("bonfire_reset")) {
-      level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_55967e6191de36d2");
+      level thread zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_55967e6191de36d2");
     }
 
     if(isDefined(self.lights)) {
@@ -444,7 +444,7 @@ function_d2f6cecb() {
   level.defcon_level = 5;
 
   if(level.zombie_vars[#"zombie_powerup_bonfire_sale_on"] == 0 || !level flag::get("<dev string:x43>")) {
-    level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
+    level thread zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", level.defcon_level);
   }
 
   level thread defcon_sign_lights();
@@ -458,7 +458,7 @@ function_d2f6cecb() {
   level waittill(#"pack_room_reset");
 
   if(!level flag::get("<dev string:x43>")) {
-    level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_55967e6191de36d2");
+    level thread zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_55967e6191de36d2");
   }
 
   if(isDefined(self.lights)) {

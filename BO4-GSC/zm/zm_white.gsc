@@ -133,8 +133,8 @@ event_handler[level_init] main(eventstruct) {
   level zm_white_portals::init_clientfields();
   level zm_white_mee::preload();
   level zm_white_toast::preload();
-  level namespace_a01a2431::preload();
-  level namespace_87b5173f::preload();
+  level zm_white_ww_quest_weapon::preload();
+  level zm_white_security_measures::preload();
   level namespace_ca03bbb4::preload();
   level namespace_3b2b9e06::preload();
   level namespace_825eac6b::preload();
@@ -181,8 +181,8 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_white_audio_interactables::init();
   level thread zm_white_computer_system::init();
   level thread zm_white_mee::init();
-  level thread namespace_a01a2431::init();
-  level thread namespace_87b5173f::init();
+  level thread zm_white_ww_quest_weapon::init();
+  level thread zm_white_security_measures::init();
   level thread zm_white_ww_quest_modkit::init();
   level thread namespace_ca03bbb4::init();
   level thread namespace_3b2b9e06::init();

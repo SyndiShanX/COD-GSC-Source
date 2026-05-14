@@ -67,7 +67,7 @@ __init__() {
   clientfield::register("scriptmover", "" + #"hash_7dc9331ef45ed81f", 1, getminbitcountfornum(10), "int");
   clientfield::register("scriptmover", "" + #"hash_7dc9341ef45ed9d2", 1, getminbitcountfornum(10), "int");
   clientfield::register("scriptmover", "" + #"hash_7dc9351ef45edb85", 1, getminbitcountfornum(10), "int");
-  clientfield::register("actor", "" + #"hash_7a8eab5597b25400", 1, 1, "int");
+  clientfield::register("actor", "" + #"ghost_death_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"ghost_spoon_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_7f7790ca43a7fffe", 1, 1, "int");
   clientfield::register("world", "" + #"hash_437bd1912fc36607", 9000, 1, "int");
@@ -1590,7 +1590,7 @@ function_2992f8fe(e_ghost, var_5b9ba5a5) {
     if(var_da2705ac && (var_8924ba8b || var_383e18aa)) {
       if(!(isDefined(level.var_9cb7c32e) && level.var_9cb7c32e)) {
         level.var_9cb7c32e = 1;
-        level function_629fa2c8(#"hash_57e9c23bed1bd753", self);
+        level function_629fa2c8(#"ghost_first_spotted", self);
         wait 0.5;
       }
 
@@ -1841,7 +1841,7 @@ function_f8da844f(var_aa11c23c) {
       wait 1.6;
       level.var_acc853e7 val::reset(#"ai_ghost", "allowdeath");
       level.var_acc853e7 setCanDamage(1);
-      level.var_acc853e7 clientfield::set("" + #"hash_7a8eab5597b25400", 1);
+      level.var_acc853e7 clientfield::set("" + #"ghost_death_fx", 1);
       playsoundatposition("zmb_spoon_ghost_annihilate", level.var_acc853e7.origin);
       gibserverutils::annihilate(level.var_acc853e7);
       level.var_acc853e7 dodamage(level.var_acc853e7.health + 1000, self.origin, undefined, self);
@@ -3001,7 +3001,7 @@ function_629fa2c8(var_5b9ba5a5, e_player) {
   }
 
   switch (var_5b9ba5a5) {
-    case # "hash_57e9c23bed1bd753":
+    case # "ghost_first_spotted":
       str_vo_line = #"hash_e6dbc38573eb591";
       break;
     case # "ghost_disappears":
@@ -3118,7 +3118,7 @@ function_29d29761(e_ghost, var_5b9ba5a5) {
     if(self zm_utility::is_player_looking_at(e_ghost getcentroid()) && self clientfield::get("" + #"afterlife_vision_play")) {
       if(!(isDefined(level.var_9cb7c32e) && level.var_9cb7c32e)) {
         level.var_9cb7c32e = 1;
-        level function_629fa2c8(#"hash_57e9c23bed1bd753", self);
+        level function_629fa2c8(#"ghost_first_spotted", self);
         wait 0.5;
       }
 

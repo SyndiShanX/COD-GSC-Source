@@ -107,7 +107,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int");
   clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int");
   zm_escape_catwalk_event::init_clientfields();
-  namespace_9d58c1cd::init_clientfields();
+  zm_escape_weap_quest_spoon::init_clientfields();
   zm_escape_util::init_clientfields();
   namespace_1063645::init_clientfields();
   namespace_b99141ed::init_clientfields();
@@ -178,7 +178,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_2141ca97();
   level thread function_8d0c655f();
   level thread function_11794ed8();
-  level thread namespace_9d58c1cd::main();
+  level thread zm_escape_weap_quest_spoon::main();
   level thread namespace_1063645::function_fb0bd6b9();
   level.var_6f6cc58 = &zm_escape_util::function_34b291c3;
 
@@ -212,7 +212,7 @@ event_handler[level_init] main(eventstruct) {
 function_246a0760() {
   level endon(#"end_game");
   level.dog_round_count = 1;
-  level waittill(#"hash_7bf357f5c916ca4e");
+  level waittill(#"catwalk_event_cleanup");
   level.next_dog_round = level.round_number + 1;
 
   if(level.next_dog_round === 9) {
@@ -1021,8 +1021,8 @@ function_91d91b76(cmd) {
 
 super_open_sesame() {
   zm_devgui::zombie_devgui_open_sesame();
-  level thread zm_escape_catwalk_event::function_e11ac4f5();
-  namespace_9d58c1cd::function_7101d54f();
+  level thread zm_escape_catwalk_event::catwalk_event_cleanup();
+  zm_escape_weap_quest_spoon::function_7101d54f();
   var_ccc575d7 = getent("<dev string:x3be>", "<dev string:x3ce>");
   var_ccc575d7 notify(#"blast_attack");
   level.var_af325495 = 1;
@@ -1079,7 +1079,7 @@ function_4b511c76() {
 
 open_sesame_watcher() {
   level waittill(#"open_sesame");
-  level thread zm_escape_catwalk_event::function_e11ac4f5();
+  level thread zm_escape_catwalk_event::catwalk_event_cleanup();
 }
 
 function_215297db() {

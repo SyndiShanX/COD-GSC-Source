@@ -33,7 +33,7 @@ shock_apply(var_756fda07, weapon, applicant) {
   if(self.var_52b189ce) {
     self.owner setelectrifiedstate(1);
     self thread shock_rumble_loop(float(self.duration) / 1000);
-    self.owner playSound(#"hash_7d53dd7b886b60ae");
+    self.owner playSound(#"mpl_electrical_surge");
   }
 }
 

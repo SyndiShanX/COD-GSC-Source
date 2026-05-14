@@ -559,7 +559,7 @@ function_72cf5db2() {
 }
 
 function_ec9ac3b2(e_player, current_weapon) {
-  if(e_player namespace_e38c57c1::function_3da195ec(current_weapon)) {
+  if(e_player zm_faction_buffs::function_3da195ec(current_weapon)) {
     return true;
   }
 

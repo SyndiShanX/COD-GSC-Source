@@ -2966,7 +2966,7 @@ function_4e74bed7(params) {
       self function_d929b41();
     }
 
-    self playSound(#"hash_d6643b88d0186ae");
+    self playSound(#"veh_dmg_emp");
   }
 
   self function_388973e4(1);
@@ -3028,7 +3028,7 @@ function_c9620f20(params) {
 
   if(isDefined(self.var_52e23e90) && self.var_52e23e90) {
     self vehicle::function_7f0bbde3();
-    self playSound(#"hash_d6643b88d0186ae");
+    self playSound(#"veh_dmg_emp");
   }
 
   self function_388973e4(1);

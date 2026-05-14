@@ -245,7 +245,7 @@ function_2772480a() {
     return false;
   }
 
-  if(namespace_b28d86fd::is_active()) {
+  if(zm_trial_trap_kills_only::is_active()) {
     return false;
   }
 

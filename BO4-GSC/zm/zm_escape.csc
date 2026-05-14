@@ -67,7 +67,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
   clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int", &gondola_light, 0, 1);
   zm_escape_catwalk_event::init_clientfields();
-  namespace_9d58c1cd::init_clientfields();
+  zm_escape_weap_quest_spoon::init_clientfields();
   zm_escape_util::init_clientfields();
   paschal::init();
   namespace_1063645::init_clientfields();
@@ -91,7 +91,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"magic_box_leave"] = #"hash_2b008afec3e70add";
   level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
   level.var_5603a802 = "pstfx_zm_hellhole";
-  namespace_9d58c1cd::init();
+  zm_escape_weap_quest_spoon::init();
   pap_quest::init();
   load::main();
   level thread setup_personality_character_exerts();

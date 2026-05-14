@@ -1807,7 +1807,7 @@ function_9fa09d36(mdl_flare) {
   }
 
   mdl_flare moveto(mdl_flare.s_launcher.var_f0bbde5.origin, 1.5);
-  mdl_flare playSound(#"hash_7cccfcd334265ea5");
+  mdl_flare playSound(#"zmb_flare_launch");
   mdl_flare thread function_9a6d950f();
   mdl_flare flare_fx(mdl_flare.str_color);
   mdl_flare playSound(#"hash_3abb70f0e8764ecc");

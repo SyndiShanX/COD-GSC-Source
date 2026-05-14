@@ -851,7 +851,7 @@ weapon_spawn_think() {
           if(var_47834995) {
             player zm_stats::increment_client_stat("upgraded_ammo_purchased");
             player zm_stats::increment_player_stat("upgraded_ammo_purchased");
-            player namespace_e38c57c1::function_183814d3();
+            player zm_faction_buffs::function_183814d3();
           } else {
             player zm_stats::increment_client_stat("ammo_purchased");
             player zm_stats::increment_player_stat("ammo_purchased");

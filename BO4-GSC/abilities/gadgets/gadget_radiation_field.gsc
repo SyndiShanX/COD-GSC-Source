@@ -379,7 +379,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
             player playlocalsound(#"mpl_rad_hit_notify");
 
             if(isPlayer(var_a3ca7cb2)) {
-              var_a3ca7cb2 playlocalsound(#"hash_7890710107740214");
+              var_a3ca7cb2 playlocalsound(#"mpl_exert_burn_dmg");
               function_7e96addd("exertRadiationSelfStart", var_a3ca7cb2);
             }
           }

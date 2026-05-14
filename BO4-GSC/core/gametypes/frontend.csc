@@ -1096,7 +1096,7 @@ function_ea9a5e69(localclientnum) {
   assert(isDefined(getent(localclientnum, "<dev string:x43f>", "<dev string:xb6>")));
   assert(isDefined(struct::get(#"fx_trail_start")));
   assert(isDefined(struct::get(#"fx_trail_end")));
-  jumpkits = namespace_eb06e24d::get_jumpkits();
+  jumpkits = player_free_fall_util::get_jumpkits();
 
   foreach(i, jumpkit in jumpkits) {
     name = hashtostring(jumpkit);
@@ -1142,7 +1142,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
 
   if(jumpkit == -1) {
     var_d4e4e3a8 = 0;
-    var_dcb0ef67 = namespace_eb06e24d::function_3045dd71() - 1;
+    var_dcb0ef67 = player_free_fall_util::function_3045dd71() - 1;
   } else {
     var_d4e4e3a8 = jumpkit;
     var_dcb0ef67 = jumpkit;
@@ -1170,11 +1170,11 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
     }
 
     for(i = var_d4e4e3a8; i <= var_dcb0ef67; i++) {
-      kit_name = namespace_eb06e24d::get_jumpkits()[i];
+      kit_name = player_free_fall_util::get_jumpkits()[i];
 
       switch (type) {
         case 1:
-          trail = namespace_eb06e24d::function_6452f9c5(i);
+          trail = player_free_fall_util::function_6452f9c5(i);
 
           if(!isDefined(trail) || !isDefined(trail.body_trail)) {
             continue;

@@ -33,8 +33,8 @@ __init__() {
   level._effect[#"upgraded_charged_eyes"] = #"hash_7a37d99aaa7057cf";
   level._effect[#"firestorm_1p"] = #"hash_5a45cca38c2dd6c8";
   level._effect[#"firestorm_3p"] = #"hash_5a4cd8a38c3409da";
-  level._effect[#"hash_7f665a0db122bf39"] = #"hash_2c36c10b1ca1f825";
-  level._effect[#"hash_7f6c660db1273f4b"] = #"hash_9dd3174f1e4d47b";
+  level._effect[#"upgraded_firestorm_1p"] = #"hash_2c36c10b1ca1f825";
+  level._effect[#"upgraded_firestorm_3p"] = #"hash_9dd3174f1e4d47b";
   level._effect[#"hash_75cfc1cd4cd9154"] = #"hash_2eeb08ff15dbd6b1";
   level._effect[#"hash_75cff1cd4cd966d"] = #"hash_5a07c709253f930e";
   level._effect[#"hash_75cfe1cd4cd94ba"] = #"hash_75bbd0f87c4680f";
@@ -53,8 +53,8 @@ __init__() {
 
 firestorm_shot_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self.weapon == getweapon(#"zhield_zword_turret_upgraded")) {
-    var_27aa6343 = level._effect[#"hash_7f665a0db122bf39"];
-    var_a1f103c8 = level._effect[#"hash_7f6c660db1273f4b"];
+    var_27aa6343 = level._effect[#"upgraded_firestorm_1p"];
+    var_a1f103c8 = level._effect[#"upgraded_firestorm_3p"];
   } else {
     var_27aa6343 = level._effect[#"firestorm_1p"];
     var_a1f103c8 = level._effect[#"firestorm_3p"];

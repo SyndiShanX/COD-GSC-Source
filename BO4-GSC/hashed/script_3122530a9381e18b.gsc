@@ -24,7 +24,7 @@
 #namespace namespace_ca03bbb4;
 
 preload() {
-  namespace_bd74bbd2::register(#"sc_mk2v", 20000, "sc_mk2v", &function_a66f0de2, &function_17f3e9e2);
+  zm_white_defend_soul_capture::register(#"sc_mk2v", 20000, "sc_mk2v", &function_a66f0de2, &function_17f3e9e2);
   clientfield::register("scriptmover", "" + #"hash_7b37fadc13d402a3", 20000, 1, "int");
 }
 
@@ -140,7 +140,7 @@ function_9d66ea6f(e_item, e_player) {
   }
 
   level.var_9eccff99.e_player = e_player;
-  namespace_a01a2431::function_605e5c25(e_player);
+  zm_white_ww_quest_weapon::function_605e5c25(e_player);
   e_player.var_9c20e2c9 = 1;
   e_player playSound("evt_canister_pickup");
   zm_ui_inventory::function_7df6bb60("zm_white_ww_mod_phase", 0, e_player);
@@ -258,7 +258,7 @@ function_195e54c() {
     if(function_18a1849f(level.var_9eccff99.e_player)) {
       level.var_9eccff99.var_fead3ae9 = util::spawn_model("p8_zm_whi_fuse_pickup_fluid_yellow_half", self.origin, self.angles);
       level.var_9eccff99.var_fead3ae9.in_zone = "zone_culdesac_yellow";
-      namespace_bd74bbd2::start(#"sc_mk2v");
+      zm_white_defend_soul_capture::start(#"sc_mk2v");
       level notify(#"hash_2df7109d3c756d8e");
       zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
       break;
@@ -267,7 +267,7 @@ function_195e54c() {
 }
 
 function_a66f0de2() {
-  namespace_bd74bbd2::end(#"sc_mk2v");
+  zm_white_defend_soul_capture::end(#"sc_mk2v");
   s_unitrigger = level.var_9eccff99.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_e90f6026, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_9eccff99.var_fead3ae9 setModel("p8_zm_whi_fuse_pickup_fluid_yellow");
@@ -335,7 +335,7 @@ function_2ac1278b() {
     e_player = s_notify.e_who;
 
     if(function_18a1849f(e_player)) {
-      namespace_bd74bbd2::start(#"sc_mk2v");
+      zm_white_defend_soul_capture::start(#"sc_mk2v");
       zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
       break;
     }
@@ -346,7 +346,7 @@ cleanup_step_3() {
   function_e09a7418();
 
   if(isDefined(level.var_9eccff99.var_fead3ae9)) {
-    namespace_bd74bbd2::end(#"sc_mk2v");
+    zm_white_defend_soul_capture::end(#"sc_mk2v");
     level.var_9eccff99.var_fead3ae9 delete();
     return;
   }

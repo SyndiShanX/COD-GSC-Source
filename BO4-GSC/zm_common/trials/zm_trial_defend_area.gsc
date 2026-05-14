@@ -80,7 +80,7 @@ function_5a68cb9f() {
   level flag::clear("spawn_zombies");
   level.disable_nuke_delay_spawning = 1;
   level notify(#"disable_nuke_delay_spawning");
-  level waittill(#"trial_round_end", #"hash_715188521b564b16", #"end_game");
+  level waittill(#"trial_round_end", #"player_reached_defend_area", #"end_game");
   level flag::set("spawn_zombies");
   level.disable_nuke_delay_spawning = undefined;
 }
@@ -149,7 +149,7 @@ function_1802ad1e(challenge, var_2d5ebf67, var_530e040f, timeout) {
     zone_valid = self function_2191cc5d();
 
     if(zone_valid) {
-      level notify(#"hash_715188521b564b16", {
+      level notify(#"player_reached_defend_area", {
         #player: self
       });
       self.var_4cb0b91f = 1;

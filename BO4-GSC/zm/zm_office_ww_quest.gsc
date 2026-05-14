@@ -220,7 +220,7 @@ function_ddc86041(e_player) {
   }
 
   playsoundatposition(#"hash_2ff8d043c3a03206", level.s_code_machine.origin);
-  level thread namespace_8f53e87b::function_d7b93e68(e_player, n_index);
+  level thread zm_office_vo_hooks::function_d7b93e68(e_player, n_index);
   self.var_8e3c257e = 0;
 }
 
@@ -270,7 +270,7 @@ function_9257b202(e_player) {
     waitframe(1);
   }
 
-  namespace_8f53e87b::play_pentagon_announcer_vox(#"hash_d846ade61fd0c15");
+  zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_d846ade61fd0c15");
 
   if(zm_vo::is_player_valid(e_player)) {
     e_player zm_vo::function_a2bd5a0c(#"hash_7fe91aa83c27c4b8", undefined, 1);

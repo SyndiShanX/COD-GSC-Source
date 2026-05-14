@@ -305,7 +305,7 @@ player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN", var_4e0
 }
 
 function_d24e0d61() {
-  var_41f4ea3c = self.var_9c2026aa + namespace_e38c57c1::function_cbf286b0();
+  var_41f4ea3c = self.var_9c2026aa + zm_faction_buffs::function_cbf286b0();
   return 1 - var_41f4ea3c;
 }
 

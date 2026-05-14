@@ -78,7 +78,7 @@ play_electrical_sound(trap) {
 
   while(true) {
     wait randomfloatrange(0.1, 0.5);
-    playsoundatposition(#"hash_6b9160d5f97e5ecb", self.origin);
+    playsoundatposition(#"wpn_electric_trap_sparks", self.origin);
   }
 }
 

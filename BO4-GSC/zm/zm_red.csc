@@ -61,7 +61,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"fasttravel_rail_3p"] = #"hash_51fd09e47e0cd679";
   level._effect[#"fasttravel_rail_travel"] = #"hash_51fd09e47e0cd679";
   zm_red_trap_boiling_bath::init();
-  namespace_f2050961::init();
+  zm_red_trap_venom_spray::init();
   zm_red_ww_quests::init();
   zm_red_pap_quest::init_clientfield();
   zm_red_power_quest::init();

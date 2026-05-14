@@ -63,8 +63,8 @@ function_78c32556(cmd) {
     case # "give_flare_blue":
       give_flare("<dev string:x575>");
       return 1;
-    case # "hash_59b568ce3fe548b6":
-      level thread function_649d5f75();
+    case # "craft_distiller":
+      level thread craft_distiller();
       return 1;
     case # "hash_be17a68845640e4":
       level thread function_a368f5ed("<dev string:x57c>");
@@ -167,7 +167,7 @@ function_853d8116() {
   zm_zodt8::change_water_height_fore(1);
 }
 
-function_649d5f75() {
+craft_distiller() {
   a_e_players = getplayers();
   namespace_4a807bff::function_8498110e(a_e_players[0]);
 }

@@ -174,8 +174,8 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_1f7511354d1e7631"] = #"hash_153992962fe6f3d7";
   level._effect[#"maelstrom_initiate"] = #"hash_223c6a623adb13fb";
   level._effect[#"maelstrom_conduct_elbow"] = #"hash_26b672f2c1c8a570";
-  level._effect[#"hash_2cf77bcee904664d"] = #"hash_50ce930e4dd4bc12";
-  level._effect[#"hash_2cf75dcee9043353"] = #"hash_50c7bb0e4dcee15c";
+  level._effect[#"maelstrom_conduct_elbow_l"] = #"hash_50ce930e4dd4bc12";
+  level._effect[#"maelstrom_conduct_elbow_r"] = #"hash_50c7bb0e4dcee15c";
   level._effect[#"hash_4a9ad8ec06102c34"] = #"hash_4d91ce766ebeda81";
   level._effect[#"hash_4a9abeec06100006"] = #"hash_4db3c6766edbb34f";
   level._effect[#"hash_59efd6cf7ca11195"] = #"hash_35d31a887a79e68e";
@@ -565,14 +565,14 @@ toggle_sentinel_artifact_mist_fx(localclientnum, oldval, newval, bnewent, biniti
 
 function_5eaabec(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    forcestreamxmodel(#"hash_7046550bbfeaf740");
-    forcestreamxmodel(#"hash_7c166ef26a8ce946");
+    forcestreamxmodel(#"c_t8_zmb_dlc0_tiger_head1_decapitated");
+    forcestreamxmodel(#"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated");
     forcestreamxmodel(#"c_t8_zmb_dlc0_zombie_marauder_decapitated_head1");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_7046550bbfeaf740");
-  stopforcestreamingxmodel(#"hash_7c166ef26a8ce946");
+  stopforcestreamingxmodel(#"c_t8_zmb_dlc0_tiger_head1_decapitated");
+  stopforcestreamingxmodel(#"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated");
   stopforcestreamingxmodel(#"c_t8_zmb_dlc0_zombie_marauder_decapitated_head1");
 }
 

@@ -400,7 +400,7 @@ function_30e4da9a(var_4d4513ee) {
   var_c03b0783[1] = 2;
   var_c03b0783[2] = 2;
   var_ec102dab = var_c03b0783[var_4d4513ee];
-  level waittill(#"hash_7fb8a9f892ea26f9");
+  level waittill(#"hardpoint_download_started");
   level thread function_d485c784();
   level.var_42a4603 = &function_42a4603;
   str_node_name = "warlord_spawn_point_" + var_4d4513ee + 1;
@@ -437,7 +437,7 @@ function_62e9842e(var_4d4513ee) {
   var_e8d6f89[1] = 4;
   var_e8d6f89[2] = 4;
   var_7f5c713a = var_e8d6f89[var_4d4513ee];
-  level waittill(#"hash_7fb8a9f892ea26f9");
+  level waittill(#"hardpoint_download_started");
   n_start_time = gettime() / 1000;
 
   while(true) {

@@ -1484,7 +1484,7 @@ function_5dec7b34(str_warning, a_str_vo) {
 
 function_3915e4f9() {
   self endoncallback(&ct_warning_end, #"ct_warning_end");
-  self endon(#"hash_76ffabe3ed35bd68");
+  self endon(#"playing_end_movie");
 
   while(true) {
     self function_f05e5477(hash(self.var_ef34d22c[#"cycle1"]));

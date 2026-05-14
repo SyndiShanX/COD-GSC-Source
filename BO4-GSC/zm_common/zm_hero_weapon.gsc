@@ -168,7 +168,7 @@ function_29f19e9a(var_deaf10fb, n_points) {
       var_f032086a += 0.15;
     }
 
-    if(self namespace_e38c57c1::function_6a7a1533(5)) {
+    if(self zm_faction_buffs::function_6a7a1533(5)) {
       var_f032086a += -0.2;
     }
 
@@ -823,9 +823,9 @@ function_cab29b9f() {
     return;
   }
 
-  self val::set(#"hash_558d809e7921fa79", "takedamage", 0);
+  self val::set(#"hero_weapon_damage_immunity", "takedamage", 0);
   wait 0.5;
-  self val::reset(#"hash_558d809e7921fa79", "takedamage");
+  self val::reset(#"hero_weapon_damage_immunity", "takedamage");
 }
 
 function_c2dea172(player, w_hero) {

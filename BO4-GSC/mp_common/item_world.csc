@@ -76,7 +76,7 @@ __init__() {
     level.var_624588d5 = [];
   }
 
-  level thread namespace_65181344::init_spawn_system();
+  level thread item_spawn_groups_util::init_spawn_system();
 }
 
 function_3d7c12a6(localclientnum, poolsize) {

@@ -501,7 +501,7 @@ function_82c73974(insertion) {
 
   insertion thread function_c71552d0(insertion, 2, 2, 5, 1);
   wait 2 + 0.1;
-  level callback::add_callback(#"hash_774be40ec06d5212", &function_bcde1e07, insertion);
+  level callback::add_callback(#"player_insertion_force_drop", &function_bcde1e07, insertion);
   insertion thread globallogic_audio::function_85818e24("matchstart");
   insertion thread function_a4deb676();
   insertion flagsys::set(#"hash_122f326d72f4c884");
@@ -550,7 +550,7 @@ function_35742117(insertion) {
   insertion flagsys::set(#"hash_122f326d72f4c884");
   function_dd34168c(insertion, #"hash_60fcdd11812a0134");
   function_dd34168c(insertion, #"insertion_teleport_completed");
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
@@ -604,7 +604,7 @@ function_51c5f95f(insertion) {
   }
 
   wait var_990e3011;
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   callback::remove_on_spawned(&function_aa3a20fb);
   function_a5fd9aa8(insertion);
 
@@ -1845,7 +1845,7 @@ function_afdad0c8(insertion, plane, startpoint, endpoint, var_671fc488) {
 
   debug_sphere(plane.origin, 75, (0, 1, 1));
 
-  level callback::callback(#"hash_774be40ec06d5212");
+  level callback::callback(#"player_insertion_force_drop");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {

@@ -130,7 +130,7 @@ event_handler[level_init] main(eventstruct) {
   level zm_orange_ee_misc::preload();
   level zm_orange_ee_dynamite::init();
   level zm_orange_ee_tundragun::init();
-  level namespace_5449c7ba::init();
+  level zm_orange_ee_sams_box::init();
   level zm_orange_ee_yellow_snow::preload();
   level zm_orange_fasttravel_ziplines::init();
   level zm_orange_fasttravel_flinger::init();
@@ -170,7 +170,7 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_orange_ee_misc::main();
   level thread zm_orange_ee_dynamite::main();
   level thread zm_orange_ee_tundragun::main();
-  level thread namespace_5449c7ba::main();
+  level thread zm_orange_ee_sams_box::main();
   level thread zm_orange_ee_freeze_mode::main();
   level thread zm_orange_fasttravel_flinger::main();
   level thread zm_orange_fasttravel_ziplines::main();

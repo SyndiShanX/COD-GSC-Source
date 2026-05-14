@@ -2110,7 +2110,7 @@ function_b7f2c635(player) {
       n_cost -= player.talisman_perk_reducecost_4;
     }
 
-    n_cost = player namespace_e38c57c1::function_863dc0ef(n_cost);
+    n_cost = player zm_faction_buffs::function_863dc0ef(n_cost);
     n_cost = int(max(n_cost, 0));
 
     if(isDefined(var_c591876d) && var_c591876d !== " ") {
@@ -2200,7 +2200,7 @@ function_f5da744e() {
       current_cost -= player.talisman_perk_reducecost_4;
     }
 
-    current_cost = player namespace_e38c57c1::function_863dc0ef(current_cost);
+    current_cost = player zm_faction_buffs::function_863dc0ef(current_cost);
     current_cost = int(max(current_cost, 0));
 
     if(!player zm_score::can_player_purchase(current_cost)) {

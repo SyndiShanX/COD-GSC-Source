@@ -41,7 +41,7 @@ __init__() {
   clientfield::register("scriptmover", "" + #"hash_7dc9331ef45ed81f", 1, getminbitcountfornum(10), "int", &function_2380f2d5, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7dc9341ef45ed9d2", 1, getminbitcountfornum(10), "int", &function_5a22e018, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7dc9351ef45edb85", 1, getminbitcountfornum(10), "int", &function_8db3d8a, 0, 0);
-  clientfield::register("actor", "" + #"hash_7a8eab5597b25400", 1, 1, "int", &function_5cb2858d, 0, 0);
+  clientfield::register("actor", "" + #"ghost_death_fx", 1, 1, "int", &ghost_death_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"ghost_spoon_fx", 1, 1, "int", &ghost_spoon_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7f7790ca43a7fffe", 1, 1, "int", &function_5fbccf1d, 0, 0);
   clientfield::register("world", "" + #"hash_437bd1912fc36607", 9000, 1, "int", &function_6c3e8bde, 0, 0);
@@ -63,9 +63,9 @@ __init__() {
   level._effect[#"shower_circle_128"] = #"hash_7a93943684d3b2b0";
   level._effect[#"generator_sparks"] = #"hash_274f915858a5ba54";
   level._effect[#"hash_45f8b28452411669"] = #"light/fx_light_headlight_generic";
-  level._effect[#"hash_7a8eab5597b25400"] = #"hash_680b356c3283464f";
+  level._effect[#"ghost_death_fx"] = #"hash_680b356c3283464f";
   level._effect[#"ghost_spawn_fx"] = #"hash_7c6c9fc790a994bb";
-  level._effect[#"hash_55bcc76865d0c844"] = #"hash_652d04bb8b685664";
+  level._effect[#"ghost_despawn_fx"] = #"hash_652d04bb8b685664";
   level._effect[#"ghost_spoon_fx"] = #"hash_4f551af60c2eb5d";
 }
 
@@ -247,7 +247,7 @@ function_58397147(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(!var_9094730f) {
       if(newval == 2 && self isai() && self.archetype == #"ghost") {
-        util::playFXOnTag(localclientnum, level._effect[#"hash_55bcc76865d0c844"], self, "j_spinelower");
+        util::playFXOnTag(localclientnum, level._effect[#"ghost_despawn_fx"], self, "j_spinelower");
 
         if(isDefined(self.var_f2d4633f)) {
           self playSound(localclientnum, #"hash_1b352bed4ab85497");
@@ -785,7 +785,7 @@ ghost_spoon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 }
 
-function_5cb2858d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+ghost_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(self.n_death_fx)) {
     deletefx(localclientnum, self.n_death_fx, 1);
     self.n_death_fx = undefined;
@@ -798,7 +798,7 @@ function_5cb2858d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       str_tag = "j_spine1";
     }
 
-    self.n_death_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_7a8eab5597b25400"], self, str_tag);
+    self.n_death_fx = util::playFXOnTag(localclientnum, level._effect[#"ghost_death_fx"], self, str_tag);
   }
 }
 

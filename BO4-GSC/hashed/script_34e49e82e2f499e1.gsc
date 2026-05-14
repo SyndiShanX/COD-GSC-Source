@@ -207,7 +207,7 @@ function_55b32a83() {
   }
 
   if(isDefined(spawn_pos)) {
-    items = self namespace_65181344::function_fd87c780("zombie_raygun_mk2_itemlist", 1);
+    items = self item_spawn_groups_util::function_fd87c780("zombie_raygun_mk2_itemlist", 1);
 
     for(i = 0; i < items.size; i++) {
       item = items[i];

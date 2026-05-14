@@ -73,7 +73,7 @@ defend_areas() {
   level endon(#"end_game");
   function_84139b27();
   level flag::init(#"hash_1643995c3d7501b0");
-  level flag::init(#"hash_40856b65dff0f6eb");
+  level flag::init(#"power_room_event_complete");
   level flag::init(#"hash_50990d5b9376f50d");
   level flag::init(#"hash_3bb140702c2b1323");
   level.defend_spawns = 0;
@@ -172,7 +172,7 @@ defend_areas() {
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, 45);
   level flag::set("power_on3");
   level flag::set("bunker_power_event");
-  level flag::set(#"hash_40856b65dff0f6eb");
+  level flag::set(#"power_room_event_complete");
   level flag::set(#"hash_1643995c3d7501b0");
   level.var_bcaf8591 = 3;
   zm_utility::function_fef4b36a(str_next_defend);

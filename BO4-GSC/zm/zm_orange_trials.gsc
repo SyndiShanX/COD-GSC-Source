@@ -353,7 +353,7 @@ function_b93ad88d() {
 
 function_53a1ecb9() {
   level endon(#"trial_round_end");
-  level waittill(#"hash_715188521b564b16");
+  level waittill(#"player_reached_defend_area");
   ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], undefined);
 
   if(isDefined(ai)) {

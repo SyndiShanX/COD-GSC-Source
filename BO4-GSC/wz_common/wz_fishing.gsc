@@ -187,10 +187,10 @@ function_e8c63c15(player) {
 
   if(isDefined(buoy)) {
     v_origin = buoy.origin;
-    items = buoy namespace_65181344::function_fd87c780("fishing_hole_items", 1);
+    items = buoy item_spawn_groups_util::function_fd87c780("fishing_hole_items", 1);
   } else {
     v_origin = self.origin;
-    items = self namespace_65181344::function_fd87c780("fishing_hole_items", 1);
+    items = self item_spawn_groups_util::function_fd87c780("fishing_hole_items", 1);
   }
 
   for(i = 0; i < items.size; i++) {

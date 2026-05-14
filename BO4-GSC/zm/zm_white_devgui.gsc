@@ -30,7 +30,7 @@ function_2639784() {
 }
 
 function_3db5079() {
-  if(!level flag::get(#"hash_40856b65dff0f6eb")) {
+  if(!level flag::get(#"power_room_event_complete")) {
     function_2639784();
   }
 
@@ -68,7 +68,7 @@ devgui() {
         break;
       case # "skip3":
         function_3db5079();
-        namespace_a01a2431::function_256cc56e();
+        zm_white_ww_quest_weapon::function_256cc56e();
         break;
       case # "cheat1":
         iprintlnbold("<dev string:x368>" + level.var_276bd207[0] + level.var_276bd207[1] + level.var_276bd207[2] + level.var_276bd207[3]);

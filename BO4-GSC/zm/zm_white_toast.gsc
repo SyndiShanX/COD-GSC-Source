@@ -744,7 +744,7 @@ function_c6c9b014(e_player) {
     }
 
     player zm_score::minus_to_player_score(self.stub.var_534571f);
-    playsoundatposition(#"hash_6b9160d5f97e5ecb", self.origin);
+    playsoundatposition(#"wpn_electric_trap_sparks", self.origin);
     player thread shock_player();
     waitframe(1);
     self.stub thread[[self.stub.unlock_func]]();

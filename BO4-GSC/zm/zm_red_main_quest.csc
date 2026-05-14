@@ -81,7 +81,7 @@ init() {
   var_995dd8bf = getminbitcountfornum(9);
   clientfield::register("world", "" + #"play_fanfare", 16000, var_995dd8bf, "int", &play_fanfare, 0, 0);
   clientfield::register("scriptmover", "" + #"blood_teleport", 16000, 1, "counter", &blood_teleport, 0, 0);
-  clientfield::register("allplayers", "" + #"hash_67b317587e795ec2", 16000, 1, "int", &function_bb7443e, 0, 0);
+  clientfield::register("allplayers", "" + #"blood_disable_keyline", 16000, 1, "int", &blood_disable_keyline, 0, 0);
   clientfield::register("allplayers", "" + #"blood_graphic_content", 16000, 1, "int", &blood_graphic_content, 0, 0);
   clientfield::register("toplayer", "" + #"hash_49068d48a9eb7b89", 16000, 2, "int", &function_9b5699b4, 0, 0);
   clientfield::register("world", "" + #"hash_51e28147388ee3d8", 16000, 1, "int", &function_59ea1144, 0, 0);
@@ -1292,7 +1292,7 @@ blood_teleport(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   playFX(localclientnum, level._effect[#"blood_teleport"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 }
 
-function_bb7443e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+blood_disable_keyline(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.var_74b9b03b = 1;
   } else {

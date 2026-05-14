@@ -35,7 +35,7 @@ function_6aac1790(var_dbb94a) {
 }
 
 function_a43054a8() {
-  parachute = self namespace_eb06e24d::get_parachute();
+  parachute = self player_free_fall_util::get_parachute();
   var_dbb94a = parachute.("parachuteLit");
 
   if(isDefined(var_dbb94a)) {
@@ -44,7 +44,7 @@ function_a43054a8() {
 }
 
 function_1c10540b() {
-  parachute = self namespace_eb06e24d::get_parachute();
+  parachute = self player_free_fall_util::get_parachute();
   var_dbb94a = parachute.("parachuteLit");
 
   if(isDefined(var_dbb94a)) {
@@ -65,7 +65,7 @@ function_26d46af3(eventstruct) {
   }
 
   println(self.name + "<dev string:x38>" + eventstruct.parachute);
-  parachute = self namespace_eb06e24d::get_parachute();
+  parachute = self player_free_fall_util::get_parachute();
   var_dbb94a = parachute.("parachuteLit");
 
   if(eventstruct.parachute) {
@@ -247,7 +247,7 @@ function_e8a9e948(localclientnum, var_695a7111) {
         continue;
       }
 
-      contrail_fx = namespace_eb06e24d::get_trailfx();
+      contrail_fx = player_free_fall_util::get_trailfx();
 
       if(isDefined(self.var_ba907ef1) && self.angles[2] < -20) {
         stopfx(localclientnum, self.var_ba907ef1);
@@ -283,7 +283,7 @@ function_a993866(localclientnum, var_9a17b15c) {
   }
 
   println(self.name + "<dev string:xdf>" + var_9a17b15c);
-  trail_fx = namespace_eb06e24d::get_trailfx();
+  trail_fx = player_free_fall_util::get_trailfx();
 
   if(self function_21c0fa55()) {
     if(isDefined(trail_fx.("body_trail"))) {
@@ -444,7 +444,7 @@ function_fb8d00bf() {
   local_client_num = self.localclientnum;
 
   if(level.add_trails) {
-    trail_fx = self namespace_eb06e24d::get_trailfx();
+    trail_fx = self player_free_fall_util::get_trailfx();
 
     if(isDefined(trail_fx.("dropoff"))) {
       playFX(local_client_num, trail_fx.("dropoff"), self.origin);
@@ -454,7 +454,7 @@ function_fb8d00bf() {
 
 parachute_detach() {
   local_client_num = self.localclientnum;
-  chute = self namespace_eb06e24d::get_parachute();
+  chute = self player_free_fall_util::get_parachute();
   parachute = util::spawn_model(local_client_num, chute.parachutelit, self.origin, self.angles);
 
   if(isDefined(parachute)) {

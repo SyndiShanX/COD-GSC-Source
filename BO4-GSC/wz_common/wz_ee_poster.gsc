@@ -99,7 +99,7 @@ function_79c8b708(var_b721e8a9) {
   spawn_point = struct::get(var_b721e8a9, "targetname");
 
   if(isDefined(spawn_point)) {
-    a_items = spawn_point namespace_65181344::function_fd87c780(#"zombie_poster_ee_list", 5);
+    a_items = spawn_point item_spawn_groups_util::function_fd87c780(#"zombie_poster_ee_list", 5);
 
     foreach(item in a_items) {
       if(isDefined(item)) {

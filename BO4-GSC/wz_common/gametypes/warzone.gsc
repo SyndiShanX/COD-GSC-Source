@@ -474,7 +474,7 @@ on_start_game_type() {
   level.var_992e9235 = [];
   level thread spawn::function_e93291ff();
   level.var_86513cd0 = &function_3b0db3c2;
-  level callback::add_callback(#"hash_774be40ec06d5212", &function_bcde1e07);
+  level callback::add_callback(#"player_insertion_force_drop", &function_bcde1e07);
   level flagsys::clear(#"spawning_allowed");
   function_414115a0();
   voice_events::register_handler(#"warzombiestart", &function_8076d591);

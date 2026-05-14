@@ -886,7 +886,7 @@ function_ba182aaa(var_5ea5c94d, ended_early) {
     zm_sq_modules::function_2a94055d(#"hash_400a481490a4e390");
     zm_sq_modules::function_2a94055d(#"hash_5562e324d230f057");
     zm_sq_modules::function_2a94055d(#"hash_41fae186552f1259");
-    level notify(#"hash_7b7d380d73a2ba58");
+    level notify(#"main_quest_step_4_ended_early");
   }
 
   exploder::exploder("exp_lgt_boiler_overheat");
@@ -942,7 +942,7 @@ function_40744a4() {
 }
 
 function_1c841015() {
-  level endon(#"hash_7b7d380d73a2ba58");
+  level endon(#"main_quest_step_4_ended_early");
 
   a_flags = array(#"hash_515a88d1cbabc18e", #"hash_1322dd3a3d7411a5", #"hash_2f5be8d749b4e88e", #"hash_33a5d8dd1204080e");
 
@@ -1113,7 +1113,7 @@ function_3965c201(s_struct) {
   util::delay("end_of_round", undefined, &flag::clear, #"hash_27a2746eb30e61c");
   s_portal = struct::get(s_struct.target);
   streamermodelhint(#"p8_zm_zod_teleport_symbol", 10);
-  streamermodelhint(#"hash_15e8ba772c745d63", 10);
+  streamermodelhint(#"p8_zm_zod_teleport_symbol_dimmed", 10);
   wait 3;
   level thread function_4d356dc0(s_struct, s_portal);
   level thread function_8a0679e4(s_struct, s_portal);
@@ -1123,7 +1123,7 @@ function_4d356dc0(s_struct, s_portal) {
   s_struct.var_b7273b77 = 1;
   v_offset = (0, 0, 2);
   n_scale = 0.1;
-  mdl_portal = util::spawn_model(#"hash_15e8ba772c745d63", s_portal.origin + v_offset, s_portal.angles);
+  mdl_portal = util::spawn_model(#"p8_zm_zod_teleport_symbol_dimmed", s_portal.origin + v_offset, s_portal.angles);
   s_portal.mdl_portal = mdl_portal;
   mdl_portal playSound(#"hash_2333d58ae8bcec49");
   mdl_portal playLoopSound(#"hash_7519aa807bfee90f");
@@ -2917,7 +2917,7 @@ function_8ec70b18(var_5ea5c94d) {
     util::delay(3.5, undefined, &function_53802e89, #"hash_4ba720f616544675", struct::get(#"sun_coyote").origin, array(4, 3, 2, 1));
     level flag::wait_till(#"hash_349bc60cedc7491e");
     streamermodelhint(#"p8_zm_zod_teleport_symbol", 10);
-    streamermodelhint(#"hash_15e8ba772c745d63", 10);
+    streamermodelhint(#"p8_zm_zod_teleport_symbol_dimmed", 10);
     level thread main_quest_screen_flash();
     music::setmusicstate("none");
     level.musicsystemoverride = 0;
@@ -4014,7 +4014,7 @@ function_45c58b56(s_portal) {
 
     while(1 && isDefined(s_portal.mdl_portal)) {
       streamermodelhint(#"p8_zm_zod_teleport_symbol", 0.5);
-      streamermodelhint(#"hash_15e8ba772c745d63", 0.5);
+      streamermodelhint(#"p8_zm_zod_teleport_symbol_dimmed", 0.5);
 
       if(s_portal.mdl_portal.b_can_activate === 1) {
         b_activate = 1;
@@ -4036,8 +4036,8 @@ function_45c58b56(s_portal) {
               self sethintstring(#"hash_6d663dca450595ef");
             }
           }
-        } else if(s_portal.mdl_portal.model !== #"hash_15e8ba772c745d63") {
-          s_portal.mdl_portal setModel(#"hash_15e8ba772c745d63");
+        } else if(s_portal.mdl_portal.model !== #"p8_zm_zod_teleport_symbol_dimmed") {
+          s_portal.mdl_portal setModel(#"p8_zm_zod_teleport_symbol_dimmed");
           s_portal.mdl_portal playSound(#"hash_68f60cc0248fcc9b");
           s_portal.mdl_portal clientfield::set("" + #"teleport_sigil", 1);
           self sethintstring("");

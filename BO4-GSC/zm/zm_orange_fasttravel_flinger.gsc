@@ -47,7 +47,7 @@ init_clientfields() {
 init_flags() {
   level flag::init(#"hash_5102447bf4bd73fa");
   level flag::init(#"hash_21de703d81d1bcc3");
-  level flag::init(#"hash_2923f30473421396");
+  level flag::init(#"island_event_active");
   level flag::init(#"hash_b0eb2954517bcc0");
   level flag::init(#"hash_4b098ade9fc33501");
   level flag::init(#"hash_352e983079eccab6");
@@ -390,7 +390,7 @@ function_4578fdfd() {
           level flag::set(#"hash_f14d343f59fc897");
         }
 
-        level flag::set(#"hash_2923f30473421396");
+        level flag::set(#"island_event_active");
         self function_ceb5bc97();
         self thread function_5fb97eb1();
         self notify(#"launcher_activated");
@@ -793,7 +793,7 @@ function_9b196e4f() {
     }
   }
 
-  self playSound(#"hash_7f9983381e1b2921");
+  self playSound(#"evt_flinger_fling");
   self.var_28a430ac flinger_launch();
 
   foreach(var_2c9017c8 in self.var_12d831a6) {

@@ -365,7 +365,7 @@ function_f9a03171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   foreach(e_player in a_e_players) {
     if(!e_player util::function_50ed1561(localclientnum)) {
-      e_player notify(#"hash_52e05d0e2370536d");
+      e_player notify(#"stop_shield_flash_fx");
     }
   }
 
@@ -383,7 +383,7 @@ function_f9a03171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"hash_52e05d0e2370536d");
+        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"stop_shield_flash_fx");
       }
     }
 
@@ -404,7 +404,7 @@ function_f9a03171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"hash_52e05d0e2370536d");
+        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"stop_shield_flash_fx");
       }
     }
   }

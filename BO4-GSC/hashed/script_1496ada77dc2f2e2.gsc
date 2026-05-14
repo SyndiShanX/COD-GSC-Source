@@ -16,7 +16,7 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_c1466447;
+#namespace zm_trial_damage_during_movement;
 
 autoexec __init__system__() {
   system::register(#"hash_2c983afcd92a9970", &__init__, undefined, undefined);

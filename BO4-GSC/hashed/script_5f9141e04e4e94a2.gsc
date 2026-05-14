@@ -25,7 +25,7 @@
 #namespace namespace_825eac6b;
 
 preload() {
-  namespace_bd74bbd2::register(#"sc_mk2y", 20000, "sc_mk2y", &function_a66f0de2, &function_17f3e9e2);
+  zm_white_defend_soul_capture::register(#"sc_mk2y", 20000, "sc_mk2y", &function_a66f0de2, &function_17f3e9e2);
   clientfield::register("scriptmover", "" + #"hash_70251001fe8c4abe", 20000, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_b0298e980bd8da0", 20000, 1, "int");
   clientfield::register("scriptmover", "" + #"hash_1e4555a911a24ab7", 20000, 1, "int");
@@ -162,7 +162,7 @@ function_9d66ea6f(e_item, e_player) {
   }
 
   level.var_23674b8f.e_player = e_player;
-  namespace_a01a2431::function_605e5c25(e_player);
+  zm_white_ww_quest_weapon::function_605e5c25(e_player);
   e_player.var_9c20e2c9 = 1;
   e_player playSound("evt_canister_pickup");
   zm_ui_inventory::function_7df6bb60("zm_white_ww_mod_phase", 2, e_player);
@@ -357,7 +357,7 @@ start_step_3() {
   level.var_23674b8f.var_fead3ae9 = util::spawn_model(var_3d7dfe05.model, var_3d7dfe05.origin, var_3d7dfe05.angles);
   level.var_23674b8f.var_fead3ae9 thread function_2b0060b8();
   playsoundatposition("evt_rgun_frame_putback", (1046, -1606, -259));
-  namespace_bd74bbd2::start(#"sc_mk2y");
+  zm_white_defend_soul_capture::start(#"sc_mk2y");
 }
 
 function_2b0060b8() {
@@ -378,7 +378,7 @@ function_2b0060b8() {
 }
 
 function_a66f0de2() {
-  namespace_bd74bbd2::end(#"sc_mk2y");
+  zm_white_defend_soul_capture::end(#"sc_mk2y");
   s_unitrigger = level.var_23674b8f.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_b9a31cb, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_23674b8f.var_fead3ae9 setModel(#"hash_7b9a3cdf5dd8b4d7");
@@ -432,7 +432,7 @@ function_2ac1278b() {
     e_player = s_notify.e_who;
 
     if(function_18a1849f(e_player)) {
-      namespace_bd74bbd2::start(#"sc_mk2y");
+      zm_white_defend_soul_capture::start(#"sc_mk2y");
       zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
       break;
     }
@@ -443,7 +443,7 @@ cleanup_step_3() {
   function_631ca480();
 
   if(isDefined(level.var_23674b8f.var_fead3ae9)) {
-    namespace_bd74bbd2::end(#"sc_mk2y");
+    zm_white_defend_soul_capture::end(#"sc_mk2y");
     level.var_23674b8f.var_fead3ae9 delete();
     return;
   }

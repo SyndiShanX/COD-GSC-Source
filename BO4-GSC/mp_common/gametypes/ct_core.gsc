@@ -417,7 +417,7 @@ function_a1fb023a(ismaturecontent) {
 }
 
 function_95e72b33(moviefile) {
-  self notify(#"hash_76ffabe3ed35bd68");
+  self notify(#"playing_end_movie");
   self val::set(#"hash_61f16f3175b9a96f", "freezecontrols", 1);
   self thread lui::play_movie(hash(moviefile), "fullscreen", 1, 0, 1);
   level waittill(#"movie_done");

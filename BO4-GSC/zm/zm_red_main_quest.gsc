@@ -136,7 +136,7 @@ init_clientfield() {
   var_995dd8bf = getminbitcountfornum(9);
   clientfield::register("world", "" + #"play_fanfare", 16000, var_995dd8bf, "int");
   clientfield::register("scriptmover", "" + #"blood_teleport", 16000, 1, "counter");
-  clientfield::register("allplayers", "" + #"hash_67b317587e795ec2", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"blood_disable_keyline", 16000, 1, "int");
   clientfield::register("allplayers", "" + #"blood_graphic_content", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_49068d48a9eb7b89", 16000, 2, "int");
   clientfield::register("world", "" + #"hash_51e28147388ee3d8", 16000, 1, "int");
@@ -5800,7 +5800,7 @@ mid_igc_setup(b_skipped) {
     mdl_fx = util::spawn_model(#"tag_origin", e_actor gettagorigin("j_spine4"), e_actor gettagangles("j_spine4"));
     mdl_fx clientfield::increment("" + #"blood_teleport");
     mdl_fx thread util::delayed_delete(1);
-    e_actor clientfield::set("" + #"hash_67b317587e795ec2", 1);
+    e_actor clientfield::set("" + #"blood_disable_keyline", 1);
     e_actor setinvisibletoall();
     e_actor val::set(#"blood_disable_weapons", "disable_weapons", 1);
     e_actor thread lui::screen_fade_out(0.5);
@@ -5964,7 +5964,7 @@ mid_igc_cleanup(b_skipped, var_19e802fa) {
       e_stanton val::reset(#"blood_takedamage", "takedamage");
       e_stanton val::reset(#"blood_ignoreme", "ignoreme");
       e_stanton val::reset(#"blood_ignoreall", "ignoreall");
-      e_stanton util::delay(float(function_60d95f53()) / 1000, undefined, &clientfield::set, "" + #"hash_67b317587e795ec2", 0);
+      e_stanton util::delay(float(function_60d95f53()) / 1000, undefined, &clientfield::set, "" + #"blood_disable_keyline", 0);
       e_stanton clientfield::set("" + #"blood_graphic_content", 0);
 
       if(!b_skipped && !var_19e802fa) {
@@ -5999,7 +5999,7 @@ mid_igc_cleanup(b_skipped, var_19e802fa) {
       e_bruno val::reset(#"blood_takedamage", "takedamage");
       e_bruno val::reset(#"blood_ignoreme", "ignoreme");
       e_bruno val::reset(#"blood_ignoreall", "ignoreall");
-      e_bruno util::delay(float(function_60d95f53()) / 1000, undefined, &clientfield::set, "" + #"hash_67b317587e795ec2", 0);
+      e_bruno util::delay(float(function_60d95f53()) / 1000, undefined, &clientfield::set, "" + #"blood_disable_keyline", 0);
       e_bruno clientfield::set("" + #"blood_graphic_content", 0);
 
       if(!b_skipped && !var_19e802fa) {

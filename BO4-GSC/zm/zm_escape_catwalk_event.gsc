@@ -34,7 +34,7 @@ init_clientfields() {
 }
 
 function_4989fd7e() {
-  level flag::init(#"hash_6019aeb57ae7e6b5");
+  level flag::init(#"catwalk_event_in_progress");
   level flag::init(#"catwalk_event_completed");
   level flag::init(#"catwalk_door_open");
   var_40762d8a = getent("t_catwalk_door_open", "targetname");
@@ -62,7 +62,7 @@ function_4989fd7e() {
 }
 
 function_84f1c310() {
-  level endon(#"hash_7bf357f5c916ca4e");
+  level endon(#"catwalk_event_cleanup");
 
   if(zm_custom::function_901b751c(#"zmpowerdoorstate") != 2) {
     if(zm_utility::is_standard()) {
@@ -141,7 +141,7 @@ function_84f1c310() {
 
   level.var_e120ae98 = &function_82a43802;
   trigger::wait_till("t_catwalk_event_00");
-  level flag::set(#"hash_6019aeb57ae7e6b5");
+  level flag::set(#"catwalk_event_in_progress");
 
   foreach(s_powerup in level.zombie_powerups) {
     s_powerup.var_4428eab7 = s_powerup.func_should_drop_with_regular_powerups;
@@ -180,7 +180,7 @@ function_1646f141(var_e8ba54a2 = 0) {
   }
 
   level flag::wait_till_timeout(61, "trig_catwalk_event_completed");
-  level thread function_e11ac4f5();
+  level thread catwalk_event_cleanup();
 }
 
 function_dc212e9f() {
@@ -235,7 +235,7 @@ function_1b943b6c(str_catwalk_spawner) {
       s_spot thread function_9d553a8();
     }
 
-    level flag::wait_till_clear(#"hash_6019aeb57ae7e6b5");
+    level flag::wait_till_clear(#"catwalk_event_in_progress");
 
     foreach(s_spot in a_spots) {
       s_spot notify(#"restore");
@@ -603,9 +603,9 @@ function_21ccdb36() {
   first_floor_lookup_handler thread scene::play("Shot 2");
 }
 
-function_e11ac4f5() {
-  level notify(#"hash_7bf357f5c916ca4e");
-  level endon(#"hash_7bf357f5c916ca4e");
+catwalk_event_cleanup() {
+  level notify(#"catwalk_event_cleanup");
+  level endon(#"catwalk_event_cleanup");
   a_t_catwalk_event = getEntArray("catwalk_event_triggers", "script_noteworthy");
 
   foreach(t_catwalk_event in a_t_catwalk_event) {
@@ -614,7 +614,7 @@ function_e11ac4f5() {
     }
   }
 
-  level flag::clear(#"hash_6019aeb57ae7e6b5");
+  level flag::clear(#"catwalk_event_in_progress");
   level.var_e120ae98 = undefined;
 
   foreach(s_powerup in level.zombie_powerups) {

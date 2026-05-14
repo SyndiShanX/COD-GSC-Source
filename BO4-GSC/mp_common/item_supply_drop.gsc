@@ -626,7 +626,7 @@ function_924a11ff(itemspawnlist) {
   self.origin = neworigin - anglestoup(self.angles) * 27.5;
   self dontinterpolate();
   self setModel("p8_fxanim_wz_supply_stash_04_mod");
-  items = self namespace_65181344::function_5eada592(itemspawnlist, 1);
+  items = self item_spawn_groups_util::function_5eada592(itemspawnlist, 1);
   wait 60;
 
   if(isDefined(self)) {

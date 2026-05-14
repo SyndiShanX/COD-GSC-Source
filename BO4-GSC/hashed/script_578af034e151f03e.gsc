@@ -3,7 +3,7 @@
  * Script: hashed\script_578af034e151f03e.gsc
 ***********************************************/
 
-#namespace namespace_6a81d072;
+#namespace zm_office_magicbox_screens;
 
 init_pentagon_box_screens() {
   level._pentagon_fire_sale = array("p8_zm_off_monitor_security_screen_sale_01", "p8_zm_off_monitor_security_screen_sale_02");

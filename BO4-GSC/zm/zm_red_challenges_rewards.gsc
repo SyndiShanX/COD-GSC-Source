@@ -34,7 +34,7 @@ init() {
   }
 
   function_a8243f37();
-  namespace_c8efdadc::init();
+  zm_red_challenges_apollo::init();
   level.var_6463d67c = 100;
   level.var_48e2ab90 = 0.3;
   level.var_b4ff4ec = &function_529e8585;
@@ -144,7 +144,7 @@ function_2c76782d() {
       continue;
     }
 
-    if(!namespace_5c5619de::is_active() && e_player.var_9e09931e != 0) {
+    if(!zm_trial_red_oracle_boon::is_active() && e_player.var_9e09931e != 0) {
       e_player function_123bcbcf();
       e_player function_53a333a8(undefined);
       continue;
@@ -192,7 +192,7 @@ function_3165516b(var_1e2067f4, n_phase) {
   self clientfield::set("" + #"hash_47490b879090eb55", 0);
   self clientfield::set("" + #"hash_7b1dd5c08e2585c", 0);
   wait 1.3;
-  level thread namespace_c8efdadc::function_9c8540b4(self, var_a3f33bc5);
+  level thread zm_red_challenges_apollo::function_9c8540b4(self, var_a3f33bc5);
 }
 
 function_123bcbcf() {

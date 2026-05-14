@@ -83,7 +83,7 @@ main() {
       level.e_avogadro kill();
     }
 
-    if(level flag::get(#"hash_639e8274a1b57729") && !level flag::get(#"hash_40856b65dff0f6eb") && level flag::get("round_reset")) {
+    if(level flag::get(#"hash_639e8274a1b57729") && !level flag::get(#"power_room_event_complete") && level flag::get("round_reset")) {
       level zm_white_special_rounds::function_6acd363d(0);
     }
   }
@@ -169,7 +169,7 @@ spawn_boss() {
   var_1c91a56e = struct::get("apd_door_scene", "targetname");
   level waittill(#"zombie_total_set");
   n_threshold = level.total_zombies_killed - level.zombie_total_subtract + level.zombie_total;
-  s_notify = level waittill(#"hash_715188521b564b16");
+  s_notify = level waittill(#"player_reached_defend_area");
   var_1c91a56e scene::play("open");
   zm_white_toast::spawn_boss();
 

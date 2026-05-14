@@ -1224,14 +1224,14 @@ function_9d1a26f1(entity, var_8a713db5, var_3e06882e) {
   entity endon(#"death", #"stop_grapple_attempt");
   entity.var_54c1950f.beamend endoncallback(&function_31963d63, #"death", #"movedone");
 
-  if(getdvarint(#"hash_692fb9cc4cff6541", 0)) {
+  if(getdvarint(#"zm_grappler_debug_radius", 0)) {
     var_1b97aa47 = sqrt(var_8a713db5);
     debug_origins = [];
   }
 
   while(true) {
     if(!isDefined(entity.e_grapplee)) {
-      if(getdvarint(#"hash_692fb9cc4cff6541", 0)) {
+      if(getdvarint(#"zm_grappler_debug_radius", 0)) {
         if(!isDefined(debug_origins)) {
           debug_origins = [];
         } else if(!isarray(debug_origins)) {

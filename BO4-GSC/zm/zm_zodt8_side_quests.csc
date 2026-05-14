@@ -39,9 +39,9 @@ init_flags() {}
 init_fx() {
   level._effect[#"safe_fx"] = #"hash_4bf40208439d50d6";
   level._effect[#"flare_launch_fx"] = #"hash_4b6b503d842bc415";
-  level._effect[#"hash_21893413efec355e"] = #"hash_cf3c06e4368bbb1";
+  level._effect[#"flare_launch_fx_red"] = #"hash_cf3c06e4368bbb1";
   level._effect[#"hash_55ab46637a8fbcb3"] = #"hash_5508b1d8864ee2d2";
-  level._effect[#"hash_2377de258e66b4ce"] = #"hash_33da19858ee59385";
+  level._effect[#"flare_launch_fx_green"] = #"hash_33da19858ee59385";
   level._effect[#"red_fireworks_fx"] = #"hash_1b5b754131008f70";
   level._effect[#"green_fireworks_fx"] = #"hash_770af2dde4a0938c";
   level._effect[#"blue_fireworks_fx"] = #"hash_41eac18dc72dac23";
@@ -57,8 +57,8 @@ init_fx() {
   level._effect[#"hash_1c0ed73a9b21a882"] = #"hash_cc7196a44e2fbe3";
   level._effect[#"hash_704d3c12d59fb5d7"] = #"hash_2aabc11b07ad74d8";
   level._effect[#"hash_4ec5da9e09256102"] = #"hash_3063115f97c18abf";
-  level._effect[#"hash_133983d2bb8a160"] = #"hash_51ca82e6f2c21354";
-  level._effect[#"hash_13aa43d2bbed472"] = #"hash_51d16ee6f2c81006";
+  level._effect[#"vomit_blade_fx_1p"] = #"hash_51ca82e6f2c21354";
+  level._effect[#"vomit_blade_fx_3p"] = #"hash_51d16ee6f2c81006";
 }
 
 function_f99ce12b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -89,10 +89,10 @@ function_bfdd6659(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(self zm_utility::function_f8796df3(localclientnum)) {
       if(viewmodelhastag(localclientnum, "tag_fx")) {
-        self.var_37649f83 = playviewmodelfx(localclientnum, level._effect[#"hash_133983d2bb8a160"], "tag_fx");
+        self.var_37649f83 = playviewmodelfx(localclientnum, level._effect[#"vomit_blade_fx_1p"], "tag_fx");
       }
     } else {
-      self.var_37649f83 = util::playFXOnTag(localclientnum, level._effect[#"hash_13aa43d2bbed472"], self, "tag_fx");
+      self.var_37649f83 = util::playFXOnTag(localclientnum, level._effect[#"vomit_blade_fx_3p"], self, "tag_fx");
     }
 
     return;
@@ -233,7 +233,7 @@ flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwast
 
     if(newval == 1) {
       if(!isDefined(self.fx)) {
-        self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_21893413efec355e"], self, "tag_origin");
+        self.fx = util::playFXOnTag(localclientnum, level._effect[#"flare_launch_fx_red"], self, "tag_origin");
         wait 1.5;
 
         if(isDefined(self)) {
@@ -242,7 +242,7 @@ flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwast
       }
     } else if(newval == 2) {
       if(!isDefined(self.fx)) {
-        self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_2377de258e66b4ce"], self, "tag_origin");
+        self.fx = util::playFXOnTag(localclientnum, level._effect[#"flare_launch_fx_green"], self, "tag_origin");
         wait 1.5;
 
         if(isDefined(self)) {

@@ -477,7 +477,7 @@ function_17ac86f7() {
   self thread zm_audio::function_713192b1(#"hash_335d7ee067ac0e68", #"ship_cargo");
   self thread zm_audio::function_713192b1(#"hash_520e403cdf1ae8", #"facility_main");
   self thread zm_audio::function_713192b1(#"hash_12750e3f1d3659e4", #"facility_specimen");
-  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", #"hash_2781f0de96fa6e4e");
+  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", #"facility_decont");
   self thread zm_audio::function_713192b1(#"hash_46ef5a594e42c371", #"facility_infusion");
   self thread zm_audio::function_713192b1(#"hash_65457ae6fbfe6c32", #"facility_infusion");
   self thread zm_audio::function_713192b1(#"hash_21450c4a4a6646d6", #"facility_geological");

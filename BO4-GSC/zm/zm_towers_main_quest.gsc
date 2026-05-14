@@ -199,7 +199,7 @@ function_64c8ff91() {
   level flag::init(#"hash_cad6742c753621");
   level flag::init(#"hash_6b64093194524df3");
   level flag::init(#"flag_defend_combat_started");
-  level flag::init(#"hash_277d03629ade12e8");
+  level flag::init(#"flag_defend_combat_finished");
 }
 
 function_a3cd497c(b_skipped) {
@@ -3632,7 +3632,7 @@ event_handler[weapon_fired] debug_trilane(event_struct) {
   level flag::clear(#"hash_cad6742c753621");
   level flag::clear(#"hash_6b64093194524df3");
   level flag::clear(#"flag_defend_combat_started");
-  level flag::clear(#"hash_277d03629ade12e8");
+  level flag::clear(#"flag_defend_combat_finished");
   level notify(#"stop_debug_spawn");
   setDvar(#"zm_debug_trilane", 1);
 }
@@ -3753,7 +3753,7 @@ defend_timer() {
   }
 
   function_c12ff921();
-  level flag::set(#"hash_277d03629ade12e8");
+  level flag::set(#"flag_defend_combat_finished");
 }
 
 key_glint() {
@@ -3780,7 +3780,7 @@ function_59e60f33() {
 
   mdl_water stoploopsound();
   mdl_water playSound(#"hash_7fe5636b1fde99aa");
-  level flag::wait_till(#"hash_277d03629ade12e8");
+  level flag::wait_till(#"flag_defend_combat_finished");
   level thread function_b06cc4d9();
 }
 
@@ -3978,13 +3978,13 @@ function_faee09d2() {
     #time: 180 + var_3cb006b6 * 12.5, #archetype: # "normal", #quantity: 4, #lanes: array(1, 2, 3), #minplayers: 3
   });
 
-  while(!level flag::get(#"hash_277d03629ade12e8")) {
+  while(!level flag::get(#"flag_defend_combat_finished")) {
     level waittill(#"defend_spawn_next");
     s_next_spawn = array::pop_front(level.var_34a4aede, 0);
     level thread defend_spawn(s_next_spawn);
 
     if(!level.var_34a4aede.size) {
-      level flag::wait_till(#"hash_277d03629ade12e8");
+      level flag::wait_till(#"flag_defend_combat_finished");
     }
   }
 }
@@ -4115,7 +4115,7 @@ function_aa67baee() {
   });
   s_loc = struct::get(#"hash_74b68c7b7af8e368");
 
-  while(!level flag::get(#"hash_277d03629ade12e8")) {
+  while(!level flag::get(#"flag_defend_combat_finished")) {
     level waittill(#"hash_68337916c80885b2");
     s_next_spawn = array::pop_front(level.var_e7f6d6dd, 0);
 

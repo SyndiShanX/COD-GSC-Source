@@ -151,7 +151,7 @@ event_handler[level_init] main(eventstruct) {
   zm_red_achievement::init();
   zm_red_fasttravel::init();
   zm_red_trap_boiling_bath::init();
-  namespace_f2050961::init();
+  zm_red_trap_venom_spray::init();
   zm_red_ww_quests::init();
   zm_red_pap_quest::init();
   zm_red_power_quest::init();
@@ -1057,7 +1057,7 @@ play_outro() {
     }
   }
 
-  namespace_c8efdadc::function_53bac096(1);
+  zm_red_challenges_apollo::function_53bac096(1);
 
   foreach(e_player in util::get_active_players()) {
     e_player val::set(#"outro", "freezecontrols", 1);

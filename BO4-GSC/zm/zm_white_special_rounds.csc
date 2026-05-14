@@ -226,6 +226,6 @@ function_88991669(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 play_generator_sound_sweetner(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  audio::playloopat(#"hash_3f579b3632b29a2", (-158, -352, -379));
-  audio::playloopat(#"hash_3f579b3632b29a2", (86, -345, -367));
+  audio::playloopat(#"amb_bunker_generator_fans", (-158, -352, -379));
+  audio::playloopat(#"amb_bunker_generator_fans", (86, -345, -367));
 }

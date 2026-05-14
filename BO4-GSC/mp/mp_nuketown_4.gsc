@@ -53,7 +53,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread function_2cdcf5c3();
 
-  if(getdvarint(#"hash_774f95460ca50d49", 1)) {
+  if(getdvarint(#"nuketown_end_movie", 1)) {
     level.end_game_video = hash("mp_nuketown_4_outro");
     level.var_48ea0e8c = 8;
   }

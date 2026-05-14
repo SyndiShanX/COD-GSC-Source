@@ -677,7 +677,7 @@ function_d92e3c5a(attacker, ai_zone, itemlist) {
   }
 
   v_origin = self.origin;
-  items = self namespace_65181344::function_fd87c780(itemlist, self.itemdropcount);
+  items = self item_spawn_groups_util::function_fd87c780(itemlist, self.itemdropcount);
 
   if(!isDefined(self)) {
     return;
@@ -954,7 +954,7 @@ function_bf357ddf(spawnpt, itemlist) {
 
   if(isDefined(spawnpt.target)) {
     var_10508147 = struct::get(spawnpt.target, "targetname");
-    items = self namespace_65181344::function_fd87c780(itemlist, 1);
+    items = self item_spawn_groups_util::function_fd87c780(itemlist, 1);
 
     for(i = 0; i < items.size; i++) {
       item = items[i];

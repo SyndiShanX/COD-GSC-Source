@@ -232,9 +232,9 @@ on_spawn_player(predictedspawn) {
 }
 
 function_ea62f5af() {
-  var_a56604c5 = namespace_eb06e24d::get_parachute_kit().lootid;
-  var_c9b1d229 = namespace_eb06e24d::function_4a39b434().lootid;
-  var_42b02106 = namespace_eb06e24d::get_wingsuit_kit().lootid;
+  var_a56604c5 = player_free_fall_util::get_parachute_kit().lootid;
+  var_c9b1d229 = player_free_fall_util::function_4a39b434().lootid;
+  var_42b02106 = player_free_fall_util::get_wingsuit_kit().lootid;
   current_life_index = self match_record::get_player_stat(#"current_life_index");
 
   if(isDefined(current_life_index)) {

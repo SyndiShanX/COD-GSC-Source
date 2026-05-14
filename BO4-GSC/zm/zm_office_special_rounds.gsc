@@ -231,7 +231,7 @@ function_6b3512d() {
 
   level flag::wait_till(#"hash_429b6157c77015a2");
   callback::remove_on_ai_killed(&function_8c040be2);
-  e_player = namespace_8f53e87b::function_d62aaf66();
+  e_player = zm_office_vo_hooks::function_d62aaf66();
 
   if(isDefined(e_player)) {
     e_player thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");

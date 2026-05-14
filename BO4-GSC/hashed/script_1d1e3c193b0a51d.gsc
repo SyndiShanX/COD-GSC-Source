@@ -11,10 +11,10 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_c1466447;
+#namespace zm_trial_damage_during_movement;
 
 autoexec __init__system__() {
-  system::register(#"hash_2f326252a6b5175", &__init__, undefined, undefined);
+  system::register(#"zm_trial_damage_during_movement", &__init__, undefined, undefined);
 }
 
 __init__() {

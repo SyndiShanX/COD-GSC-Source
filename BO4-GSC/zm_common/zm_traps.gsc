@@ -237,7 +237,7 @@ function_783f63e9(var_1c9c3123 = 1) {
     return;
   }
 
-  if(zm_utility::is_standard() || namespace_b28d86fd::is_active()) {
+  if(zm_utility::is_standard() || zm_trial_trap_kills_only::is_active()) {
     cheat_too_friendly_s_ = zm_utility::function_d6046228(#"hash_24a438482954901", #"hash_61d85c966dd9e83f");
     self trap_set_string(cheat_too_friendly_s_);
 
@@ -282,7 +282,7 @@ trap_use_think(trap) {
 }
 
 trap_purchase(e_player, n_cost) {
-  if(namespace_b28d86fd::is_active()) {
+  if(zm_trial_trap_kills_only::is_active()) {
     return 1;
   }
 

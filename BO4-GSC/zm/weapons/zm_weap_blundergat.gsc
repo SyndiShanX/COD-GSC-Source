@@ -107,7 +107,7 @@ function_2b03f05f() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon === getweapon(#"hash_3de0926b89369160") || s_result.weapon === getweapon(#"hash_127bb24f68b5df27")) {
+    if(s_result.weapon === getweapon(#"hash_3de0926b89369160") || s_result.weapon === getweapon(#"blundergat_fire_bullet")) {
       a_grenades = getEntArray("grenade", "classname");
 
       foreach(e_grenade in a_grenades) {

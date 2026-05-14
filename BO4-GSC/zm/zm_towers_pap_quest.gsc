@@ -679,13 +679,13 @@ drop_head(v_origin, str_tower, var_5570d8de) {
 
   switch (str_encounter) {
     case # "destroyer":
-      str_head = #"hash_7c166ef26a8ce946";
+      str_head = #"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated";
       break;
     case # "marauder":
       str_head = #"c_t8_zmb_dlc0_zombie_marauder_decapitated_head1";
       break;
     case # "tigers":
-      str_head = #"hash_7046550bbfeaf740";
+      str_head = #"c_t8_zmb_dlc0_tiger_head1_decapitated";
       break;
   }
 
@@ -990,7 +990,7 @@ function_f3c4aeac() {
   switch (str_encounter) {
     case # "destroyer":
       str_fx_tag = undefined;
-      self setModel(#"hash_7c166ef26a8ce946");
+      self setModel(#"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated");
       break;
     case # "marauder":
       str_fx_tag = undefined;
@@ -998,7 +998,7 @@ function_f3c4aeac() {
       break;
     case # "tigers":
       str_fx_tag = undefined;
-      self setModel(#"hash_7046550bbfeaf740");
+      self setModel(#"c_t8_zmb_dlc0_tiger_head1_decapitated");
       break;
   }
 

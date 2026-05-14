@@ -3,7 +3,7 @@
  * Script: hashed\script_f7824ece5b80614.gsc
 ***********************************************/
 
-#namespace namespace_eb06e24d;
+#namespace player_free_fall_util;
 
 get_jumpkits() {
   if(!isDefined(level.var_aadba305)) {

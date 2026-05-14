@@ -1605,7 +1605,7 @@ on_decay_complete() {
           continue;
         }
 
-        scoreevents::processscoreevent(#"hash_abbc936bf9059a6", player_from_touchlist, undefined, undefined);
+        scoreevents::processscoreevent(#"control_zone_depletion", player_from_touchlist, undefined, undefined);
       }
     }
   }

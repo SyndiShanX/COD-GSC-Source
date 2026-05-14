@@ -154,7 +154,7 @@ function_76e94d52() {
       }
     } else {
       if(self.var_3b55baa1 == getweapon(#"music_box")) {
-        namespace_5449c7ba::function_96d95cf5();
+        zm_orange_ee_sams_box::function_96d95cf5();
       }
 
       self.var_3b55baa1 = undefined;

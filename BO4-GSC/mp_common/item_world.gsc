@@ -65,7 +65,7 @@ __init__() {
   level.var_17c7288a = &function_23b313bd;
   level.nullprimaryoffhand = getweapon(#"null_offhand_primary");
   level.nullsecondaryoffhand = getweapon(#"null_offhand_secondary");
-  level thread namespace_65181344::init_spawn_system();
+  level thread item_spawn_groups_util::init_spawn_system();
 
   if(!isDefined(level.var_227b9e91)) {
     level.var_227b9e91 = new throttle();
@@ -1074,7 +1074,7 @@ function_116fd9a7() {
   function_937ea9e(#"hash_3bfb97e39d67e5f9", &function_cb9b4dd7);
   function_937ea9e(#"generic_attachment_pickup", &function_14b2eddf);
   function_937ea9e(#"hash_6247ea34d3b1ddb6", &function_42ffe9b2);
-  function_937ea9e(#"hash_2cbf15cbb314c93e", &function_2eebeff5);
+  function_937ea9e(#"generic_equipment_pickup", &function_2eebeff5);
   function_937ea9e(#"hash_51b30f6e7331e136", &function_349d4c26);
   function_937ea9e(#"hash_2b4dff2e0db72d06", &function_670cce3f);
   function_937ea9e(#"generic_pickup", &function_41a52251);

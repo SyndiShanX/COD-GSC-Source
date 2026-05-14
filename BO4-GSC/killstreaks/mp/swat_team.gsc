@@ -2641,7 +2641,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
   foreach(swat in attacker.swat_team) {
     if(isDefined(swat) && isDefined(swat.enemy) && swat.enemy == victim && swat attackedrecently(victim, 3)) {
-      scoreevents::processscoreevent(#"hash_1f0ecf369a09e682", attacker, victim, getweapon(#"swat_team"));
+      scoreevents::processscoreevent(#"swat_team_focus_fire", attacker, victim, getweapon(#"swat_team"));
       return;
     }
   }

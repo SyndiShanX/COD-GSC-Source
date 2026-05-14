@@ -18,7 +18,7 @@ __init__() {
 }
 
 function_61a426a5() {
-  debug_pos = getdvarint(#"hash_79ed3a19e0cdd3c5", -1);
+  debug_pos = getdvarint(#"homunculus_debug_pos", -1);
 
   if(debug_pos < 0) {
     debug_pos = undefined;

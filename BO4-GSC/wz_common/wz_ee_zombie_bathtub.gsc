@@ -139,7 +139,7 @@ function_1deb2b38(var_b721e8a9) {
   level.var_e91bcfae = 1;
 
   if(isDefined(var_b721e8a9)) {
-    a_items = var_b721e8a9 namespace_65181344::function_fd87c780(#"zombie_bathtub_ee_list", 1);
+    a_items = var_b721e8a9 item_spawn_groups_util::function_fd87c780(#"zombie_bathtub_ee_list", 1);
 
     foreach(item in a_items) {
       if(isDefined(item)) {
@@ -163,14 +163,14 @@ function_7eabf705() {
   self notify("<dev string:x89>");
   self endon("<dev string:x89>");
   level endon(#"game_ended");
-  level endon(#"hash_671b150516dd9870");
+  level endon(#"golden_spork_debugged");
 
   while(true) {
     if(getdvarint(#"hash_7e7b9e2edcf6d1ee", 0)) {
       players = getplayers();
       bathtub = struct::get(#"zombie_bathub", "<dev string:x9c>");
       function_613448ed(players[0], bathtub);
-      level notify(#"hash_671b150516dd9870");
+      level notify(#"golden_spork_debugged");
       break;
     }
 

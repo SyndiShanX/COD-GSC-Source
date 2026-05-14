@@ -87,7 +87,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"power_on_projectile"] = #"hash_6009053e911b946a";
   level._effect[#"power_on_projectile_end"] = #"hash_6c0eb029adb5f6c6";
   level._effect[#"hash_55cc40c5ca8b259d"] = #"zombie/fx_ritual_sacrafice_glow_head_zod_zmb";
-  level._effect[#"hash_679e221c06d83988"] = #"hash_3c61e7e3069ee8a7";
+  level._effect[#"ghost_zombie_fire_torso"] = #"hash_3c61e7e3069ee8a7";
   level._effect[#"hash_85d57de38b76cc7"] = #"hash_10efddc69fbb6a0e";
   level._effect[#"hash_2568ad8792cec77f"] = #"hash_6596b5a56f027114";
   level._effect[#"hash_23cfdebb55c60d4f"] = #"hash_451dfa68b22333f2";
@@ -289,7 +289,7 @@ function_8048af7e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         self.var_d2ec7fbb = array(self.var_d2ec7fbb);
       }
 
-      self.var_d2ec7fbb[self.var_d2ec7fbb.size] = util::playFXOnTag(localclientnum, level._effect[#"hash_679e221c06d83988"], self, "j_spine4");
+      self.var_d2ec7fbb[self.var_d2ec7fbb.size] = util::playFXOnTag(localclientnum, level._effect[#"ghost_zombie_fire_torso"], self, "j_spine4");
 
       if(!isDefined(self.var_d2ec7fbb)) {
         self.var_d2ec7fbb = [];
