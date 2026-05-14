@@ -252,26 +252,26 @@ perk_totem_rob(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 init_perk_altar_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     switch (self.model) {
-      case # "p8_fxanim_zm_vapor_altar_danu_mod":
-      case # "p8_fxanim_zm_perk_vending_brew_mod":
+      case #"p8_fxanim_zm_vapor_altar_danu_mod":
+      case #"p8_fxanim_zm_perk_vending_brew_mod":
         n_slot = 0;
         var_fe826f11 = level._effect[#"danu_ledge_fx"];
         var_7ad76c54 = 3;
         break;
-      case # "p8_fxanim_zm_red_vapor_altar_ra_mod":
-      case # "p8_fxanim_zm_vapor_altar_ra_mod":
-      case # "p8_fxanim_zm_perk_vending_cola_mod":
+      case #"p8_fxanim_zm_red_vapor_altar_ra_mod":
+      case #"p8_fxanim_zm_vapor_altar_ra_mod":
+      case #"p8_fxanim_zm_perk_vending_cola_mod":
         n_slot = 1;
         var_fe826f11 = level._effect[#"ra_ledge_fx"];
         var_7ad76c54 = 5;
         break;
-      case # "p8_fxanim_zm_vapor_altar_zeus_mod":
-      case # "p8_fxanim_zm_perk_vending_soda_mod":
+      case #"p8_fxanim_zm_vapor_altar_zeus_mod":
+      case #"p8_fxanim_zm_perk_vending_soda_mod":
         n_slot = 2;
         var_fe826f11 = level._effect[#"zeus_ledge_fx"];
         break;
-      case # "p8_fxanim_zm_perk_vending_tonic_mod":
-      case # "p8_fxanim_zm_vapor_altar_odin_mod":
+      case #"p8_fxanim_zm_perk_vending_tonic_mod":
+      case #"p8_fxanim_zm_vapor_altar_odin_mod":
         n_slot = 3;
         var_fe826f11 = level._effect[#"odin_ledge_fx"];
         var_7ad76c54 = 2;

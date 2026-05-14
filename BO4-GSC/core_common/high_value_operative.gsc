@@ -50,7 +50,7 @@ function_2ce5cb7e() {
         }
 
         switch (stat.stattype) {
-          case # "playerstatslist":
+          case #"playerstatslist":
             if(!isDefined(stat.playerstatsliststatname)) {
               break;
             }
@@ -58,17 +58,17 @@ function_2ce5cb7e() {
             self.pers[#"hvo"][#"base"][stat.playerstatsliststatname] = self stats::get_stat_global(stat.playerstatsliststatname);
             self.pers[#"hvo"][#"current"][stat.playerstatsliststatname] = self stats::get_stat_global(stat.playerstatsliststatname);
             break;
-          case # "razorwireekia":
+          case #"razorwireekia":
             razorwireekia = self stats::get_stat_global(#"stats_concertina_wire_snared_kill") + self stats::get_stat_global(#"stats_concertina_wire_kill");
             self.pers[#"hvo"][#"base"][stat.stattype] = razorwireekia;
             self.pers[#"hvo"][#"current"][stat.stattype] = razorwireekia;
             break;
-          case # "highestkillstreak":
-          case # "objectivescore":
-          case # "objectivetime":
-          case # "damagedone":
-          case # "highestmultikill":
-          case # "objectiveekia":
+          case #"highestkillstreak":
+          case #"objectivescore":
+          case #"objectivetime":
+          case #"damagedone":
+          case #"highestmultikill":
+          case #"objectiveekia":
           default:
             self.pers[#"hvo"][#"base"][stat.stattype] = 0;
             self.pers[#"hvo"][#"current"][stat.stattype] = 0;
@@ -118,7 +118,7 @@ function_59d3154f() {
       }
 
       switch (stat.stattype) {
-        case # "playerstatslist":
+        case #"playerstatslist":
           if(!isDefined(stat.playerstatsliststatname)) {
             break;
           }
@@ -126,19 +126,19 @@ function_59d3154f() {
           var_6fda3763 = self function_d0c02a50(stat, var_aa1fbd8c, stat.stattype);
           var_d6155829[stat.playerstatsliststatname] = var_6fda3763;
           break;
-        case # "razorwireekia":
+        case #"razorwireekia":
           razorwireekia = self stats::get_stat_global(#"stats_concertina_wire_snared_kill") + self stats::get_stat_global(#"stats_concertina_wire_kill");
           self function_b535c32e(stat, razorwireekia, var_aa1fbd8c);
           var_d6155829[stat.stattype] = razorwireekia;
           break;
-        case # "objectivescore":
-        case # "objectivetime":
-        case # "damagedone":
-        case # "objectiveekia":
+        case #"objectivescore":
+        case #"objectivetime":
+        case #"damagedone":
+        case #"objectiveekia":
           var_6fda3763 = self function_b535c32e(stat, self.pers[stat.stattype], var_aa1fbd8c);
           var_d6155829[stat.stattype] = var_6fda3763;
           break;
-        case # "highestkillstreak":
+        case #"highestkillstreak":
           var_6fda3763 = self.pers[#"cur_kill_streak"] - self.pers[#"hvo"][#"current"][#"highestkillstreak"];
           self function_be94d98b(stat, var_6fda3763, var_aa1fbd8c);
           break;
@@ -204,20 +204,20 @@ function_323c6715() {
         }
 
         switch (stat.stattype) {
-          case # "playerstatslist":
+          case #"playerstatslist":
             score = player function_cd851b02(stat, var_9b4eeccc, stat.stattype);
             break;
-          case # "razorwireekia":
+          case #"razorwireekia":
             razorwireekia = player stats::get_stat_global(#"stats_concertina_wire_snared_kill") + player stats::get_stat_global(#"stats_concertina_wire_kill");
             score = player function_1fa30a47(stat, razorwireekia, var_9b4eeccc);
             break;
-          case # "objectivescore":
-          case # "objectivetime":
-          case # "damagedone":
-          case # "objectiveekia":
+          case #"objectivescore":
+          case #"objectivetime":
+          case #"damagedone":
+          case #"objectiveekia":
             score = player function_1fa30a47(stat, player.pers[stat.stattype], var_9b4eeccc);
             break;
-          case # "highestkillstreak":
+          case #"highestkillstreak":
             if(isDefined(stat.var_233a23b6) && stat.var_233a23b6) {
               score = player.pers[#"cur_kill_streak"] < player.pers[#"best_kill_streak"] ? player.pers[#"best_kill_streak"] : player.pers[#"cur_kill_streak"];
             } else {
@@ -229,7 +229,7 @@ function_323c6715() {
             }
 
             break;
-          case # "highestmultikill":
+          case #"highestmultikill":
             score = isDefined(player.pers[stat.stattype]) ? player.pers[stat.stattype] : 0;
             break;
           default:

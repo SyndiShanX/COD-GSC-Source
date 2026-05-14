@@ -276,10 +276,10 @@ function precache_mp_leaderboards() {
   careerleaderboard = "";
 
   switch (level.gametype) {
-    case # "sas":
-    case # "oic":
-    case # "shrp":
-    case # "gun":
+    case #"sas":
+    case #"oic":
+    case #"shrp":
+    case #"gun":
       break;
     default:
       careerleaderboard = " LB_MP_GB_SCOREPERMINUTE";

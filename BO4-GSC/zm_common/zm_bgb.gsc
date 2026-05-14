@@ -595,7 +595,7 @@ bgb_limit_monitor() {
   self playsoundtoplayer(#"hash_56cc165edb993de8", self);
 
   switch (level.bgb[self.bgb].limit_type) {
-    case # "activated":
+    case #"activated":
       for(i = level.bgb[self.bgb].limit; i > 0; i--) {
         if(i != level.bgb[self.bgb].limit) {
           self playsoundtoplayer(#"hash_7bb31f4a25cf34a", self);
@@ -635,7 +635,7 @@ bgb_limit_monitor() {
       }
 
       break;
-    case # "time":
+    case #"time":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -643,7 +643,7 @@ bgb_limit_monitor() {
       self waittill(#"bgb_run_timer_cleared");
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case # "rounds":
+    case #"rounds":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -660,7 +660,7 @@ bgb_limit_monitor() {
 
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case # "event":
+    case #"event":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -907,15 +907,15 @@ register(name, limit_type, limit, enable_func, disable_func, validation_func, ac
   assert(!isDefined(disable_func) || isfunctionptr(disable_func), "<dev string:x279>" + name + "<dev string:x326>");
 
   switch (limit_type) {
-    case # "activated":
+    case #"activated":
       assert(!isDefined(validation_func) || isfunctionptr(validation_func), "<dev string:x279>" + name + "<dev string:x360>" + limit_type + "<dev string:x3ae>");
       assert(isDefined(activation_func), "<dev string:x279>" + name + "<dev string:x3b2>" + limit_type + "<dev string:x3ae>");
       assert(isfunctionptr(activation_func), "<dev string:x279>" + name + "<dev string:x3e8>" + limit_type + "<dev string:x3ae>");
-    case # "time":
-    case # "rounds":
+    case #"time":
+    case #"rounds":
       assert(isint(limit), "<dev string:x279>" + name + "<dev string:x429>" + limit + "<dev string:x436>" + limit_type + "<dev string:x3ae>");
       break;
-    case # "event":
+    case #"event":
       assert(isfunctionptr(limit), "<dev string:x279>" + name + "<dev string:x45a>" + limit_type + "<dev string:x3ae>");
       break;
     default:

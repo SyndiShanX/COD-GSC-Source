@@ -124,27 +124,27 @@ command_parser() {
         value = float(tokens[3]);
 
         switch (value_name) {
-          case # "volumemin":
+          case #"volumemin":
             level.helisoundvalues[heli_type][heli_part].volumemin = value;
             println("<dev string:x2fe>" + value);
             break;
-          case # "volumemax":
+          case #"volumemax":
             level.helisoundvalues[heli_type][heli_part].volumemax = value;
             println("<dev string:x316>" + value);
             break;
-          case # "pitchmin":
+          case #"pitchmin":
             level.helisoundvalues[heli_type][heli_part].pitchmin = value;
             println("<dev string:x32e>" + value);
             break;
-          case # "pitchmax":
+          case #"pitchmax":
             level.helisoundvalues[heli_type][heli_part].pitchmax = value;
             println("<dev string:x345>" + value);
             break;
-          case # "speedvolumemax":
+          case #"speedvolumemax":
             level.helisoundvalues[heli_type][heli_part].speedvolumemax = value;
             println("<dev string:x35c>" + value);
             break;
-          case # "speedpitchmax":
+          case #"speedpitchmax":
             level.helisoundvalues[heli_type][heli_part].speedpitchmax = value;
             println("<dev string:x379>" + value);
             break;
@@ -293,17 +293,17 @@ start_helicopter_sounds(localclientnum) {
     self.idle_run_trans_speed = 5;
 
     switch (self.sounddef) {
-      case # "veh_heli_ai_mp":
+      case #"veh_heli_ai_mp":
         break;
-      case # "veh_heli_guard_mp":
+      case #"veh_heli_guard_mp":
         break;
-      case # "veh_heli_supplydrop_mp":
+      case #"veh_heli_supplydrop_mp":
         break;
-      case # "veh_heli_gunner_mp":
+      case #"veh_heli_gunner_mp":
         break;
-      case # "veh_heli_player_gunner_mp":
+      case #"veh_heli_player_gunner_mp":
         break;
-      case # "veh_drn_qrdrone_mp":
+      case #"veh_drn_qrdrone_mp":
         break;
       default:
         println("<dev string:x3f1>" + self.vehicletype + "<dev string:x407>");
@@ -336,10 +336,10 @@ heli_linkto_sound_ents_delete(localclientnum, entity) {
 
 heli_sound_play(heli_bone) {
   switch (heli_bone.sound_type) {
-    case # "engine":
+    case #"engine":
       heli_bone.run playLoopSound(heli_bone.run.alias, 2);
       break;
-    case # "wind":
+    case #"wind":
       break;
     default:
       println("<dev string:x492>" + heli_bone.type + "<dev string:x4b1>");

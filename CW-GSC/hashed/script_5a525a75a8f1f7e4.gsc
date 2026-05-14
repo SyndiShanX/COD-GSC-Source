@@ -338,17 +338,17 @@ function function_5eeaa168() {
 function function_ef9d58d0(item) {
   if(isDefined(item.itementry.name)) {
     switch (item.itementry.name) {
-      case # "ww_ieu_shockwave_t9_upgraded_item_sr":
-      case # "ww_ieu_gas_t9_item_sr":
-      case # "ww_ieu_plasma_t9_item_sr":
-      case # "ww_ieu_gas_t9_upgraded_item_sr":
-      case # "ww_ieu_acid_t9_upgraded_item_sr":
-      case # "ww_ieu_shockwave_t9_item_sr":
-      case # "ww_ieu_electric_t9_item_sr":
-      case # "hash_3dff7d94b9ae5c97":
-      case # "ww_ieu_acid_t9_item_sr":
-      case # "ww_ieu_electric_t9_upgraded_item_sr":
-      case # "ww_ieu_plasma_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_upgraded_item_sr":
+      case #"ww_ieu_gas_t9_item_sr":
+      case #"ww_ieu_plasma_t9_item_sr":
+      case #"ww_ieu_gas_t9_upgraded_item_sr":
+      case #"ww_ieu_acid_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_item_sr":
+      case #"ww_ieu_electric_t9_item_sr":
+      case #"hash_3dff7d94b9ae5c97":
+      case #"ww_ieu_acid_t9_item_sr":
+      case #"ww_ieu_electric_t9_upgraded_item_sr":
+      case #"ww_ieu_plasma_t9_upgraded_item_sr":
         return true;
     }
   }

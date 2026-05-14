@@ -198,15 +198,15 @@ class cdoor {
     str_slide_dir = isDefined(var_3c6838bc) ? var_3c6838bc : var_f770af7e;
 
     switch (str_slide_dir) {
-      case # "x":
+      case #"x":
         v_offset = (n_slide_amount, 0, 0);
         var_3c6838bc = "X";
         break;
-      case # "y":
+      case #"y":
         v_offset = (0, n_slide_amount, 0);
         var_3c6838bc = "Y";
         break;
-      case # "z":
+      case #"z":
         v_offset = (0, 0, n_slide_amount);
         var_3c6838bc = "Z";
         break;
@@ -609,13 +609,13 @@ class cdoor {
       }
 
       switch (var_3c6838bc) {
-        case # "x":
+        case #"x":
           v_offset = (var_42cf6fbd, 0, 0);
           break;
-        case # "y":
+        case #"y":
           v_offset = (0, var_42cf6fbd, 0);
           break;
-        case # "z":
+        case #"z":
           v_offset = (0, 0, var_42cf6fbd);
           break;
         default:

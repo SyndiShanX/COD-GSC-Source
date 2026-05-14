@@ -417,19 +417,19 @@ function_2e6238c0(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case # "tank_robot":
-    case # "inventory_tank_robot":
-    case # "ai_tank_marker":
+    case #"tank_robot":
+    case #"inventory_tank_robot":
+    case #"ai_tank_marker":
       taacomdialog = "aiTankJammedStart";
       leaderdialog = "aiTankJammedStart";
       break;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedStart";
       leaderdialog = "ultTurretJammedStart";
       break;
-    case # "ability_smart_cover":
-    case # "gadget_smart_cover":
+    case #"ability_smart_cover":
+    case #"gadget_smart_cover":
       taacomdialog = "smartCoverJammedStart";
       break;
   }
@@ -456,19 +456,19 @@ function_2eb0a933(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case # "tank_robot":
-    case # "inventory_tank_robot":
-    case # "ai_tank_marker":
+    case #"tank_robot":
+    case #"inventory_tank_robot":
+    case #"ai_tank_marker":
       taacomdialog = "aiTankJammedEnd";
       leaderdialog = "aiTankJammedEnd";
       break;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedEnd";
       leaderdialog = "ultTurretJammedEnd";
       break;
-    case # "ability_smart_cover":
-    case # "gadget_smart_cover":
+    case #"ability_smart_cover":
+    case #"gadget_smart_cover":
       taacomdialog = "smartCoverJammedEnd";
       break;
   }

@@ -201,13 +201,13 @@ updatecarryqrdroneplacement(carryqrdrone) {
     heightoffset = 18;
 
     switch (self getstance()) {
-      case # "stand":
+      case #"stand":
         heightoffset = 40;
         break;
-      case # "crouch":
+      case #"crouch":
         heightoffset = 25;
         break;
-      case # "prone":
+      case #"prone":
         heightoffset = 10;
         break;
     }

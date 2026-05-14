@@ -37,43 +37,43 @@ function function_214fe607(localclientnum, state, oldstate) {
   var_8c7054cc = undefined;
 
   switch (oldstate) {
-    case # "unlocksrmus_01":
+    case #"unlocksrmus_01":
       var_8c7054cc = #"musictrack_sr_lullaby";
       break;
-    case # "unlocksrmus_02":
+    case #"unlocksrmus_02":
       var_8c7054cc = #"musictrack_sr_theone";
       break;
-    case # "unlocksrmus_03":
+    case #"unlocksrmus_03":
       var_8c7054cc = #"musictrack_sr_abra";
       break;
-    case # "unlocksrmus_04":
+    case #"unlocksrmus_04":
       var_8c7054cc = #"musictrack_sr_brave";
       break;
-    case # "unlocksrmus_05":
+    case #"unlocksrmus_05":
       var_8c7054cc = #"musictrack_sr_aminfil";
       break;
-    case # "unlocksrmus_06":
+    case #"unlocksrmus_06":
       var_8c7054cc = #"musictrack_zm_silver_ee";
       break;
-    case # "unlocksrmus_07":
+    case #"unlocksrmus_07":
       var_8c7054cc = #"musictrack_zm_gold_ee";
       break;
-    case # "unlocksrmus_08":
+    case #"unlocksrmus_08":
       var_8c7054cc = #"musictrack_sr_generation";
       break;
-    case # "unlocksrmus_09":
+    case #"unlocksrmus_09":
       var_8c7054cc = #"musictrack_sr_avogadro";
       break;
-    case # "unlocksrmus_10":
+    case #"unlocksrmus_10":
       var_8c7054cc = #"musictrack_sr_frequency";
       break;
-    case # "unlocksrmus_11":
+    case #"unlocksrmus_11":
       var_8c7054cc = #"musictrack_sr_boa";
       break;
-    case # "unlocksrmus_12":
+    case #"unlocksrmus_12":
       var_8c7054cc = #"musictrack_sr_pareidolia";
       break;
-    case # "unlocksrmus_13":
+    case #"unlocksrmus_13":
       var_8c7054cc = #"musictrack_sr_tribes";
       break;
   }

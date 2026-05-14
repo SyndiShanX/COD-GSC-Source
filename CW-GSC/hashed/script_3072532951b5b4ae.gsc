@@ -643,13 +643,13 @@ function updatesightstate(sightstate) {
 
   if(!var_839ed558) {
     switch (self.stealth.threat_sight_state) {
-      case # "combat_hunt":
+      case #"combat_hunt":
         var_839ed558 = sightstate != "hunt" && sightstate != "combat_hunt";
         break;
-      case # "spotted":
+      case #"spotted":
         var_839ed558 = sightstate != "combat" && sightstate != "spotted";
         break;
-      case # "hidden":
+      case #"hidden":
         var_839ed558 = sightstate != "idle" && sightstate != "unaware" && sightstate != "hidden";
         break;
       default:
@@ -1145,7 +1145,7 @@ function investigate_move_init(behaviortreeentity) {
   hashtype = hash(self.stealth.investigateevent.type);
 
   switch (hashtype) {
-    case # "investigate":
+    case #"investigate":
       style = self.awarenesslevelcurrent == "unaware" ? "patrol" : "alert";
       self namespace_979752dc::set_patrol_style(style);
       break;
@@ -1178,11 +1178,11 @@ function investigate_move_setaimtarget(instancedata, targetpos, eventtype) {
 
   if(isDefined(eventtype)) {
     switch (eventtype) {
-      case # "sight":
+      case #"sight":
         t = 1000;
         break;
-      case # "light_killed":
-      case # "glass_destroyed":
+      case #"light_killed":
+      case #"glass_destroyed":
         t = 3000;
         break;
     }
@@ -2694,7 +2694,7 @@ function setstealthstate(statename, e) {
   }
 
   switch (statename) {
-    case # "idle":
+    case #"idle":
       self.dontattackme = 1;
       self.diequietly = 1;
 
@@ -2708,7 +2708,7 @@ function setstealthstate(statename, e) {
       self enterstealthstate(0, e);
       self notify(#"stealth_idle");
       break;
-    case # "investigate":
+    case #"investigate":
       e endon(#"entitydeleted");
 
       if(e.type == "cover_blown") {
@@ -2772,13 +2772,13 @@ function setstealthstate(statename, e) {
       }
 
       break;
-    case # "hunt":
+    case #"hunt":
       self.stealth.bcoverhasbeenblown = 1;
       stealth_group::group_eventhunt(self.script_stealthgroup, self);
       self enterstealthstate(2, e);
       self notify(#"stealth_hunt");
       break;
-    case # "combat":
+    case #"combat":
       if(self.stealth.bsmstate != 3) {
         var_d6b5966 = isDefined(e) && e.typeorig == "damage" && self.allowpain && !self isinscriptedstate();
 
@@ -2787,23 +2787,23 @@ function setstealthstate(statename, e) {
           var_bed01a48 = hash(e.typeorig);
 
           switch (var_bed01a48) {
-            case # "proximity":
+            case #"proximity":
               magnitude = "small_medium";
               break;
-            case # "projectile_impact":
-            case # "ally_damaged":
-            case # "bulletwhizby":
-            case # "ally_killed":
-            case # "gunshot":
+            case #"projectile_impact":
+            case #"ally_damaged":
+            case #"bulletwhizby":
+            case #"ally_killed":
+            case #"gunshot":
               magnitude = "medium";
               break;
-            case # "explode":
-            case # "grenade danger":
+            case #"explode":
+            case #"grenade danger":
               magnitude = "large";
               break;
-            case # "light_killed":
-            case # "attack":
-            case # "combat":
+            case #"light_killed":
+            case #"attack":
+            case #"combat":
               if(distancesquared(e.investigate_pos, self.origin) < 40000) {
                 magnitude = "medium";
               }

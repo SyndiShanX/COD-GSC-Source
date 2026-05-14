@@ -255,19 +255,19 @@ function function_3edf2cf8(dist_sq, var_73491815, var_47435b6f) {
 
 function function_bc3e2f11(awareness_action, bundle) {
   switch (awareness_action) {
-    case # "slide_start":
+    case #"slide_start":
       return bundle.var_146483e7;
-    case # "landing":
+    case #"landing":
       return bundle.var_fe0aa1d2;
-    case # "damage_landing":
+    case #"damage_landing":
       return bundle.var_6ae8117c;
-    case # "doublejump_boosted":
+    case #"doublejump_boosted":
       return bundle.var_37bac39d;
-    case # "hash_589eac8b592bcb4d":
+    case #"hash_589eac8b592bcb4d":
       return bundle.var_3b22f5be;
-    case # "weapon_fired":
+    case #"weapon_fired":
       return bundle.var_abea5dd8;
-    case # "silenced_weapon_fired":
+    case #"silenced_weapon_fired":
       return bundle.var_301350af;
   }
 
@@ -534,8 +534,8 @@ function private function_60b0e73f(device, params) {
     }
 
     switch (movement_type) {
-      case # "run":
-      case # "walk":
+      case #"run":
+      case #"walk":
         stance = sixthsenseent getstance();
 
         if(stance == "stand" && sixthsenseent isplayerads()) {
@@ -550,7 +550,7 @@ function private function_60b0e73f(device, params) {
         }
 
         break;
-      case # "sprint":
+      case #"sprint":
         var_d6ff0766 = bundle.var_a8e88375 * params.range;
         var_7aeac1e7 = 1;
         break;

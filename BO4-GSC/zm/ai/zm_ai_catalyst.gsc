@@ -181,19 +181,19 @@ function_47fdbfbb() {
   health_multiplier = 1;
 
   switch (self.subarchetype) {
-    case # "catalyst_corrosive":
+    case #"catalyst_corrosive":
       health_multiplier = self ai::function_9139c839().var_51ce117f;
       self.var_17a22c08 = self ai::function_9139c839().var_57140ac3;
       break;
-    case # "catalyst_electric":
+    case #"catalyst_electric":
       health_multiplier = self ai::function_9139c839().var_6e7acfb4;
       self.var_17a22c08 = self ai::function_9139c839().var_fe586e50;
       break;
-    case # "catalyst_plasma":
+    case #"catalyst_plasma":
       health_multiplier = self ai::function_9139c839().var_33236cb0;
       self.var_17a22c08 = self ai::function_9139c839().var_145b14e6;
       break;
-    case # "catalyst_water":
+    case #"catalyst_water":
       health_multiplier = self ai::function_9139c839().var_bacb0199;
       self.var_17a22c08 = self ai::function_9139c839().var_ead9d81d;
       break;
@@ -1173,9 +1173,9 @@ function_3f664506(e_catalyst, player, v_loc) {
   b_stun = 0;
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       var_103da188 = self.health;
 
       if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
@@ -1183,15 +1183,15 @@ function_3f664506(e_catalyst, player, v_loc) {
       }
 
       break;
-    case # "heavy":
+    case #"heavy":
       var_103da188 = self.maxhealth * 0.5;
       b_stun = 1;
       break;
-    case # "miniboss":
+    case #"miniboss":
       var_103da188 = self.maxhealth * 0.2;
       b_stun = 1;
       break;
-    case # "boss":
+    case #"boss":
       var_103da188 = 2700;
       break;
     default:

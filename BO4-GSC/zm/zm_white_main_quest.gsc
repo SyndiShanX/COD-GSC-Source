@@ -1393,14 +1393,14 @@ function_2b5d562e(str_choice) {
   self hidepart("tag_all_screens", "p8_zm_whi_freestanding_1960_tv_screen_vfx", 1);
 
   switch (str_choice) {
-    case # "off":
+    case #"off":
       self stoploopsound();
       break;
-    case # "static":
+    case #"static":
       self showpart("tag_static");
       self playLoopSound(#"hash_10527c78b7bb294a");
       break;
-    case # "standby":
+    case #"standby":
       self showpart("tag_standby");
       break;
   }
@@ -3889,32 +3889,32 @@ function_dd76c634() {
 
 function_bf75d5a6(str_sc) {
   switch (str_sc) {
-    case # "sc_green":
+    case #"sc_green":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_green_house");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_green_house");
       break;
-    case # "sc_yellow":
+    case #"sc_yellow":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_yellow_house");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_yellow_house");
       break;
-    case # "sc_lounge":
+    case #"sc_lounge":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_lounge");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_lounge");
       break;
-    case # "sc_diner":
+    case #"sc_diner":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_diner");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_diner");
       break;
-    case # "sc_hoggat":
+    case #"sc_hoggat":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_transfusion");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_transfusion");
       break;
-    case # "sc_hammond":
+    case #"sc_hammond":
       exploder::exploder("fxexp_mannequin_defend_reveal_smoke_prison");
       wait 3;
       exploder::stop_exploder("fxexp_mannequin_defend_reveal_smoke_prison");
@@ -4816,34 +4816,34 @@ function_5f6e4e8f(var_cb672d5f, var_8208d890) {
   var_64460018 = self.scene_ents[#"whi_server"];
 
   switch (var_cb672d5f) {
-    case # "init":
+    case #"init":
       self thread scene::play("init");
       break;
-    case # "opening_withpart":
+    case #"opening_withpart":
       self thread scene::play("opening_withpart");
       break;
-    case # "removepart_close":
+    case #"removepart_close":
       self thread scene::play("removepart_close");
       break;
-    case # "closed_nopart":
+    case #"closed_nopart":
       self thread scene::play("closed_nopart");
       break;
-    case # "open_nopart":
+    case #"open_nopart":
       self thread scene::play("open_nopart");
       break;
-    case # "addpart_close":
+    case #"addpart_close":
       self thread scene::play("addpart_close");
       break;
-    case # "closed_withpart":
+    case #"closed_withpart":
       self thread scene::play("closed_withpart");
       break;
-    case # "open_withpart":
+    case #"open_withpart":
       self thread scene::play("open_withpart");
       break;
-    case # "opening_nopart":
+    case #"opening_nopart":
       self thread scene::play("opening_nopart");
       break;
-    case # "closing_nopart":
+    case #"closing_nopart":
       self thread scene::play("closing_nopart");
       break;
     default:
@@ -4851,10 +4851,10 @@ function_5f6e4e8f(var_cb672d5f, var_8208d890) {
   }
 
   switch (var_8208d890) {
-    case # "lights_timer_off":
+    case #"lights_timer_off":
       var_64460018 function_368d1b4d();
       break;
-    case # "lights_timer_start":
+    case #"lights_timer_start":
       var_64460018 function_f83e4a7d();
       break;
     default:

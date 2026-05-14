@@ -613,19 +613,19 @@ getdomflagusestring(label, neutralized) {
 
   if(neutralized) {
     switch (label) {
-      case # "_a":
+      case #"_a":
         string = #"mp/dom_flag_a_neutralized_by";
         break;
-      case # "_b":
+      case #"_b":
         string = #"hash_dd6191acefd6847";
         break;
-      case # "_c":
+      case #"_c":
         string = #"mp/dom_flag_c_neutralized_by";
         break;
-      case # "_d":
+      case #"_d":
         string = #"mp/dom_flag_d_neutralized_by";
         break;
-      case # "_e":
+      case #"_e":
         string = #"mp/dom_flag_e_neutralized_by";
         break;
       default:
@@ -633,19 +633,19 @@ getdomflagusestring(label, neutralized) {
     }
   } else {
     switch (label) {
-      case # "_a":
+      case #"_a":
         string = #"hash_5b47de31c97a49ff";
         break;
-      case # "_b":
+      case #"_b":
         string = #"hash_481e5e34f798331e";
         break;
-      case # "_c":
+      case #"_c":
         string = #"hash_6a0c2383d37849bd";
         break;
-      case # "_d":
+      case #"_d":
         string = #"hash_5079687d6a87790c";
         break;
-      case # "_e":
+      case #"_e":
         string = #"hash_78e2a90cf85daa3b";
         break;
       default:

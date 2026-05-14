@@ -392,16 +392,16 @@ function combat() {
     objectives::function_6a43edf3(var_f95b722f, guy);
 
     switch (guy.targetname) {
-      case # "ambush_hero_woods":
+      case #"ambush_hero_woods":
         objectives::function_67f87f80(var_f95b722f, guy, #"hash_19b8d38e0f3b4a7b");
         break;
-      case # "ambush_hero_mason":
+      case #"ambush_hero_mason":
         objectives::function_67f87f80(var_f95b722f, guy, #"hash_6406649fc8fbed87");
         break;
-      case # "hash_479849dc827c578b":
+      case #"hash_479849dc827c578b":
         objectives::function_67f87f80(var_f95b722f, guy, #"hash_6d82fbc8379ff4a7");
         break;
-      case # "hash_26630c1ef7708da5":
+      case #"hash_26630c1ef7708da5":
         objectives::function_67f87f80(var_f95b722f, guy, #"hash_1ce5d2e21e8f8b51");
         break;
     }

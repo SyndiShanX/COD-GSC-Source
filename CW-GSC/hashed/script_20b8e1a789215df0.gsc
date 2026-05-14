@@ -158,14 +158,14 @@ function function_9bd924c1() {
   }
 
   switch (self.script_noteworthy) {
-    case # "kraus":
+    case #"kraus":
       level.var_49a292bb = self;
       self.animname = "kraus";
       self.var_22f5613a = 1;
       self.var_c5553760 = 1;
       self namespace_979752dc::function_57972217(0.34, 0.01);
       break;
-    case # "wife":
+    case #"wife":
       level.var_3559e9e = self;
       self.animname = "wife";
       self.var_22f5613a = 1;
@@ -391,10 +391,10 @@ function function_15c263da(var_763776e6) {
   self namespace_979752dc::set_event_override("combat", &function_620b79a);
 
   switch (var_763776e6) {
-    case # "front_door":
+    case #"front_door":
       self thread function_13d3b6eb();
       break;
-    case # "office_skip":
+    case #"office_skip":
       self thread function_1709dcd();
       break;
     default:
@@ -985,9 +985,9 @@ function function_b66c66e(var_763776e6) {
   self thread function_3b4254ca();
 
   switch (var_763776e6) {
-    case # "front_door":
+    case #"front_door":
       break;
-    case # "office_skip":
+    case #"office_skip":
       self thread function_6bae0a9();
       break;
     default:
@@ -1476,13 +1476,13 @@ function function_d07f9e90() {
   self waittill(#"trigger");
 
   switch (self.script_parameters) {
-    case # "hash_275dda2f7b704c76":
+    case #"hash_275dda2f7b704c76":
       self thread function_db844d6d();
       break;
-    case # "hash_155ebc163a242dd6":
+    case #"hash_155ebc163a242dd6":
       self thread function_a971060e();
       break;
-    case # "2f_bedroom_drawer":
+    case #"2f_bedroom_drawer":
       self thread function_a3233bf5();
       break;
     default:

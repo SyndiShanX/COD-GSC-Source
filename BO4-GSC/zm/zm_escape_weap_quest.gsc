@@ -435,13 +435,13 @@ function_74c96a90(e_activator) {
   var_8114dab6 = 0;
 
   switch (self.script_noteworthy) {
-    case # "rune_1":
+    case #"rune_1":
       var_e251bafa = "zone_broadway_floor_2";
       break;
-    case # "rune_2":
+    case #"rune_2":
       var_e251bafa = "zone_warden_house_exterior";
       break;
-    case # "rune_3":
+    case #"rune_3":
       var_e251bafa = "zone_new_industries";
       break;
     default:

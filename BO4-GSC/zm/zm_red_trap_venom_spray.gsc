@@ -104,17 +104,17 @@ trap_damage(t_trap) {
   b_stun = 0;
 
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       n_percent = 50;
       break;
-    case # "catalyst":
+    case #"catalyst":
       n_percent = 50;
       break;
-    case # "gegenees":
+    case #"gegenees":
       b_stun = 1;
       n_percent = 5;
       break;
-    case # "blight_father":
+    case #"blight_father":
       b_stun = 1;
       n_percent = 5;
       break;

@@ -91,7 +91,7 @@ function entityspawned(localclientnum) {
     }
 
     switch (self.weapon.name) {
-      case # "sticky_grenade":
+      case #"sticky_grenade":
         break;
     }
 

@@ -76,80 +76,80 @@ function private function_40dbe923(dvarstr) {
   host = util::gethostplayerforbots();
 
   switch (args[0]) {
-    case # "spawn_enemy":
+    case #"spawn_enemy":
       level function_5aef57f5(host, #"enemy");
       break;
-    case # "spawn_friendly":
+    case #"spawn_friendly":
       level function_5aef57f5(host, #"friendly");
       break;
-    case # "add":
+    case #"add":
       level devgui_add_bots(host, args[1], int(args[2]));
       break;
-    case # "remove":
+    case #"remove":
       level devgui_remove_bots(host, args[1]);
       break;
-    case # "kill":
+    case #"kill":
       level devgui_kill_bots(host, args[1]);
       break;
-    case # "invulnerable":
+    case #"invulnerable":
       level devgui_invulnerable(host, args[1], args[2]);
       break;
-    case # "ignoreall":
+    case #"ignoreall":
       level devgui_ignoreall(host, args[1], int(args[2]));
       break;
-    case # "force_press_button":
+    case #"force_press_button":
       level devgui_force_button(host, args[1], int(args[2]), 0);
       break;
-    case # "force_toggle_button":
+    case #"force_toggle_button":
       level devgui_force_button(host, args[1], int(args[2]), 1);
       break;
-    case # "clear_forced_buttons":
+    case #"clear_forced_buttons":
       level function_baee1142(host, args[1]);
       break;
-    case # "force_offhand_primary":
+    case #"force_offhand_primary":
       level function_8bb94cab(host, args[1], #"offhand", #"lethal grenade");
       break;
-    case # "force_offhand_secondary":
+    case #"force_offhand_secondary":
       level function_8bb94cab(host, args[1], #"offhand", #"tactical grenade");
       break;
-    case # "force_offhand_special":
+    case #"force_offhand_special":
       level function_8bb94cab(host, args[1], "ability", #"special");
       break;
-    case # "force_scorestreak":
+    case #"force_scorestreak":
       level function_9a65e59a(host, args[1]);
       break;
-    case # "tpose":
+    case #"tpose":
       level devgui_tpose(host, args[1]);
       break;
   }
 
   if(isDefined(host)) {
     switch (args[0]) {
-      case # "add_fixed_spawn":
+      case #"add_fixed_spawn":
         host devgui_add_fixed_spawn_bots(args[1], args[2], args[3]);
         break;
-      case # "hash_218217dc7d667f07":
+      case #"hash_218217dc7d667f07":
         host function_57d0759d(args[1], undefined, args[2], (float(args[3]), float(args[4]), float(args[5])), float(args[6]));
         break;
-      case # "set_target":
+      case #"set_target":
         host devgui_set_target(args[1], args[2]);
         break;
-      case # "goal":
+      case #"goal":
         host devgui_goal(args[1], args[2]);
         break;
-      case # "force_aim_copy":
+      case #"force_aim_copy":
         host function_30f27f9f(args[1]);
         break;
-      case # "force_aim_freeze":
+      case #"force_aim_freeze":
         host function_b037d12d(args[1]);
         break;
-      case # "force_aim_clear":
+      case #"force_aim_clear":
         host function_f419ffae(args[1]);
         break;
-      case # "give_player_weapon":
+      case #"give_player_weapon":
         host function_263ca697();
         break;
-      case # "warp":
+      case #"warp":
         host function_fbdf36c1(args[1]);
         break;
     }
@@ -607,13 +607,13 @@ function private devgui_set_target(botarg, cmdarg) {
   target = undefined;
 
   switch (cmdarg) {
-    case # "crosshair":
+    case #"crosshair":
       target = self function_59842621();
       break;
-    case # "me":
+    case #"me":
       target = self;
       break;
-    case # "clear":
+    case #"clear":
       break;
     default:
       return;
@@ -637,22 +637,22 @@ function private devgui_set_target(botarg, cmdarg) {
 
 function private devgui_goal(botarg, cmdarg) {
   switch (cmdarg) {
-    case # "set":
+    case #"set":
       self set_goal(botarg, 0);
       return;
-    case # "set_region":
+    case #"set_region":
       self function_417ef9e7(botarg);
       return;
-    case # "force":
+    case #"force":
       self set_goal(botarg, 1);
       return;
-    case # "add_forced":
+    case #"add_forced":
       self function_93996ae6(botarg);
       return;
-    case # "me":
+    case #"me":
       self set_goal_ent(botarg, self);
       return;
-    case # "clear":
+    case #"clear":
       self function_be8f790e(botarg);
       return;
   }

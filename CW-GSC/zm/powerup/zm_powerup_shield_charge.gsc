@@ -70,10 +70,10 @@ function shield_devgui_callback(cmd) {
   retval = 0;
 
   switch (cmd) {
-    case # "shield_charge":
+    case #"shield_charge":
       zm_devgui::zombie_devgui_give_powerup(cmd, 1);
       break;
-    case # "next_shield_charge":
+    case #"next_shield_charge":
       zm_devgui::zombie_devgui_give_powerup(getsubstr(cmd, 5), 0);
       break;
   }

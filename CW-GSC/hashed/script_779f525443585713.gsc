@@ -1632,14 +1632,14 @@ function function_7042f8ce(str_scenename, str_location) {
 
 function function_f2359063(str_area) {
   switch (str_area) {
-    case # "atrium":
+    case #"atrium":
       level.var_f83c3b53.locations[#"atrium"].var_a4ec1473 = [];
       break;
-    case # "lobby_and_checkpoint":
+    case #"lobby_and_checkpoint":
       level.var_f83c3b53.locations[#"lobby"].var_a4ec1473 = [];
       level.var_f83c3b53.locations[#"mailroom"].var_a4ec1473 = [];
       break;
-    case # "west_hall":
+    case #"west_hall":
       level.var_f83c3b53.locations[#"breakroom"].var_a4ec1473 = [];
       break;
   }

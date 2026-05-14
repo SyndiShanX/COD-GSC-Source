@@ -141,10 +141,10 @@ function on_menu_response(params) {
       self.var_77d6602a = response;
     } else {
       switch (response) {
-        case # "autoassign":
+        case #"autoassign":
           self[[level.autoassign]](1, undefined);
           break;
-        case # "spectator":
+        case #"spectator":
           self[[level.spectator]]();
           break;
         default:

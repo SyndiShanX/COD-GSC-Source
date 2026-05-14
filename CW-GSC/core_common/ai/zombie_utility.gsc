@@ -623,8 +623,8 @@ function getnodeoffset(node) {
   forward = anglesToForward(node.angles);
 
   switch (node.type) {
-    case # "cover left wide":
-    case # "cover left":
+    case #"cover left wide":
+    case #"cover left":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
       } else {
@@ -632,8 +632,8 @@ function getnodeoffset(node) {
       }
 
       break;
-    case # "cover right":
-    case # "cover right wide":
+    case #"cover right":
+    case #"cover right wide":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
       } else {
@@ -641,14 +641,14 @@ function getnodeoffset(node) {
       }
 
       break;
-    case # "conceal stand":
-    case # "turret":
-    case # "cover stand":
+    case #"conceal stand":
+    case #"turret":
+    case #"cover stand":
       nodeoffset = calculatenodeoffset(right, forward, cover_stand_offset);
       break;
-    case # "conceal crouch":
-    case # "cover crouch window":
-    case # "cover crouch":
+    case #"conceal crouch":
+    case #"cover crouch window":
+    case #"cover crouch":
       nodeoffset = calculatenodeoffset(right, forward, cover_crouch_offset);
       break;
   }
@@ -1476,19 +1476,19 @@ function function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_43fb4347)) {
     switch (level.var_43fb4347) {
-      case # "run":
+      case #"run":
         if(var_a598c292 == "walk") {
           var_70b46d1c = "run";
         }
 
         break;
-      case # "sprint":
+      case #"sprint":
         if(var_a598c292 == "walk" || var_a598c292 == "run") {
           var_70b46d1c = "sprint";
         }
 
         break;
-      case # "super_sprint":
+      case #"super_sprint":
         if(var_a598c292 != "super_sprint") {
           var_70b46d1c = "super_sprint";
         }
@@ -1499,19 +1499,19 @@ function function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_102b1301)) {
     switch (level.var_102b1301) {
-      case # "walk":
+      case #"walk":
         if(var_a598c292 != "walk") {
           var_70b46d1c = "walk";
         }
 
         break;
-      case # "run":
+      case #"run":
         if(var_a598c292 == "sprint" || var_a598c292 == "super_sprint") {
           var_70b46d1c = "run";
         }
 
         break;
-      case # "sprint":
+      case #"sprint":
         if(var_a598c292 == "super_sprint") {
           var_70b46d1c = "sprint";
         }
@@ -1619,11 +1619,11 @@ function function_f9c50a93(move_speed, is_easy) {
 
 function function_9e46a191(speed) {
   switch (speed) {
-    case # "walk":
+    case #"walk":
       return "run";
-    case # "run":
+    case #"run":
       return "sprint";
-    case # "sprint":
+    case #"sprint":
       return "super_sprint";
     default:
       return "super_sprint";
@@ -1779,25 +1779,25 @@ function zombie_gib(amount, attacker, direction_vec, point, type, tagname, model
     var_c3317960 = gibserverutils::function_de4d9d(weapon, var_fd90b0bb);
 
     switch (self.damagelocation) {
-      case # "right_arm_lower":
-      case # "right_arm_upper":
-      case # "right_hand":
+      case #"right_arm_lower":
+      case #"right_arm_upper":
+      case #"right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self, var_c3317960);
         }
 
         break;
-      case # "left_arm_lower":
-      case # "left_arm_upper":
-      case # "left_hand":
+      case #"left_arm_lower":
+      case #"left_arm_upper":
+      case #"left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self, var_c3317960);
         }
 
         break;
-      case # "right_leg_upper":
-      case # "right_leg_lower":
-      case # "right_foot":
+      case #"right_leg_upper":
+      case #"right_leg_lower":
+      case #"right_foot":
         if(is_true(self.nocrawler) || is_true(level.var_41259f0d) || isDefined(level.var_9b91564e) && (isDefined(level.num_crawlers) ? level.num_crawlers : 0) >= level.var_9b91564e || gibserverutils::isgibbed(self, 16) || gibserverutils::isgibbed(self, 32)) {
           break;
         }
@@ -1810,9 +1810,9 @@ function zombie_gib(amount, attacker, direction_vec, point, type, tagname, model
 
         self function_df5afb5e(1);
         break;
-      case # "left_leg_lower":
-      case # "left_foot":
-      case # "left_leg_upper":
+      case #"left_leg_lower":
+      case #"left_foot":
+      case #"left_leg_upper":
         if(is_true(self.nocrawler) || is_true(level.var_41259f0d) || isDefined(level.var_9b91564e) && (isDefined(level.num_crawlers) ? level.num_crawlers : 0) >= level.var_9b91564e || gibserverutils::isgibbed(self, 16) || gibserverutils::isgibbed(self, 32)) {
           break;
         }
@@ -1998,14 +1998,14 @@ function zombie_should_gib(amount, attacker, type, weapon) {
   }
 
   switch (type) {
-    case # "mod_telefrag":
-    case # "mod_unknown":
-    case # "mod_burned":
-    case # "mod_trigger_hurt":
-    case # "mod_suicide":
-    case # "mod_falling":
+    case #"mod_telefrag":
+    case #"mod_unknown":
+    case #"mod_burned":
+    case #"mod_trigger_hurt":
+    case #"mod_suicide":
+    case #"mod_falling":
       return 0;
-    case # "mod_melee":
+    case #"mod_melee":
       dogibbing = 0;
 
       if(isPlayer(attacker)) {

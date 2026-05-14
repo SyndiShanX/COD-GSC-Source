@@ -82,7 +82,7 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
   }
 
   switch (destructible_event) {
-    case # "destructible_car_explosion":
+    case #"destructible_car_explosion":
       self car_explosion(attacker);
 
       if(isDefined(weapon)) {
@@ -90,7 +90,7 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case # "destructible_car_fire":
+    case #"destructible_car_fire":
       level thread battlechatter::on_player_near_explodable(self, "car");
       self thread car_fire_think(attacker);
 
@@ -99,14 +99,14 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case # "explode":
+    case #"explode":
       self thread simple_explosion(attacker);
       break;
-    case # "explode_complex":
+    case #"explode_complex":
       self thread complex_explosion(attacker, explosion_radius);
       break;
-    case # "destructible_explosive_incendiary_large":
-    case # "destructible_explosive_incendiary_small":
+    case #"destructible_explosive_incendiary_large":
+    case #"destructible_explosive_incendiary_small":
       self explosive_incendiary_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -114,8 +114,8 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case # "destructible_explosive_electrical_small":
-    case # "destructible_explosive_electrical_large":
+    case #"destructible_explosive_electrical_small":
+    case #"destructible_explosive_electrical_large":
       self explosive_electrical_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -123,8 +123,8 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case # "destructible_explosive_concussive_large":
-    case # "destructible_explosive_concussive_small":
+    case #"destructible_explosive_concussive_large":
+    case #"destructible_explosive_concussive_small":
       self explosive_concussive_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {

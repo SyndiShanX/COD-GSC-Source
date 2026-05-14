@@ -44,55 +44,55 @@ function_255e9614(command, key) {
   self endon(command + "_" + key);
 
   switch (key) {
-    case # "+attack":
+    case #"+attack":
       function_9024fce3(&attackbuttonpressed, command);
       break;
-    case # "+toggleads_throw":
+    case #"+toggleads_throw":
       function_9024fce3(&adsbuttonpressed, command);
       break;
-    case # "+changeseat":
+    case #"+changeseat":
       function_9024fce3(&changeseatbuttonpressed, command);
       break;
-    case # "+usereload":
+    case #"+usereload":
       function_9024fce3(&usebuttonpressed, command);
       break;
-    case # "+smoke":
+    case #"+smoke":
       function_9024fce3(&secondaryoffhandbuttonpressed, command);
       break;
-    case # "+frag":
+    case #"+frag":
       function_9024fce3(&fragbuttonpressed, command);
       break;
-    case # "+actionslot 1":
+    case #"+actionslot 1":
       function_9024fce3(&actionslotonebuttonpressed, command);
       break;
-    case # "+actionslot 2":
+    case #"+actionslot 2":
       function_9024fce3(&actionslottwobuttonpressed, command);
       break;
-    case # "+actionslot 3":
+    case #"+actionslot 3":
       function_9024fce3(&actionslotthreebuttonpressed, command);
       break;
-    case # "+actionslot 4":
+    case #"+actionslot 4":
       function_9024fce3(&actionslotfourbuttonpressed, command);
       break;
-    case # "-actionslot 1":
+    case #"-actionslot 1":
       function_21e5a72f(&actionslotonebuttonpressed, command);
       break;
-    case # "-actionslot 2":
+    case #"-actionslot 2":
       function_21e5a72f(&actionslottwobuttonpressed, command);
       break;
-    case # "-actionslot 3":
+    case #"-actionslot 3":
       function_21e5a72f(&actionslotthreebuttonpressed, command);
       break;
-    case # "-actionslot 4":
+    case #"-actionslot 4":
       function_21e5a72f(&actionslotfourbuttonpressed, command);
       break;
-    case # "+stance":
+    case #"+stance":
       function_21e5a72f(&stancebuttonpressed, command);
       break;
-    case # "+breath_sprint":
+    case #"+breath_sprint":
       function_21e5a72f(&sprintbuttonpressed, command);
       break;
-    case # "+melee":
+    case #"+melee":
       function_21e5a72f(&meleebuttonpressed, command);
       break;
   }
@@ -1037,7 +1037,7 @@ propcamerazoom() {
 
 setnewabilityhud() {
   switch (self.currentability) {
-    case # "flash":
+    case #"flash":
       self.abilitykey.label = #"mp_ph_flash";
       break;
     default:
@@ -1048,14 +1048,14 @@ setnewabilityhud() {
 
 setnewabilitycount(var_8c8fd413, count) {
   switch (var_8c8fd413) {
-    case # "flash":
+    case #"flash":
       if(!isDefined(count)) {
         count = level.phsettings.propnumflashes;
       }
 
       propsetflashesleft(count);
       break;
-    case # "CLONE":
+    case #"CLONE":
       if(!isDefined(count)) {
         count = level.phsettings.propnumclones;
       }

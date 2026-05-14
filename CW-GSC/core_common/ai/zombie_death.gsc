@@ -109,25 +109,25 @@ function do_gib() {
   }
 
   switch (self.a.gib_ref) {
-    case # "right_arm":
+    case #"right_arm":
       gibserverutils::gibrightarm(self, 0);
       break;
-    case # "left_arm":
+    case #"left_arm":
       gibserverutils::gibleftarm(self, 0);
       break;
-    case # "right_leg":
+    case #"right_leg":
       gibserverutils::gibrightleg(self, 0);
       break;
-    case # "left_leg":
+    case #"left_leg":
       gibserverutils::gibleftleg(self, 0);
       break;
-    case # "no_legs":
+    case #"no_legs":
       gibserverutils::giblegs(self, 0);
       break;
-    case # "head":
+    case #"head":
       gibserverutils::gibhead(self, 0);
       break;
-    case # "guts":
+    case #"guts":
       break;
     default:
       assertmsg("<dev string:x176>" + self.a.gib_ref + "<dev string:x18b>");

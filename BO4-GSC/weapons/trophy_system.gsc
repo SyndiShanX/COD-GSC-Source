@@ -233,7 +233,7 @@ trophyactive(owner) {
       }
 
       switch (grenade.model) {
-        case # "t6_wpn_grenade_supply_projectile":
+        case #"t6_wpn_grenade_supply_projectile":
           continue;
       }
 

@@ -80,13 +80,13 @@ function private _objective(objective) {
   level thread function_6fa4a52();
 
   switch (objective) {
-    case # "train":
+    case #"train":
       level thread function_a20133bd();
       function_818cbaa9();
       level thread function_cc419f00();
       thread function_ae5a068d();
       break;
-    case # "ghost_station":
+    case #"ghost_station":
       level thread function_a20133bd();
       snd::client_msg(#"hash_5a65194efa8dcb0f");
       level thread function_11cd4580();
@@ -95,10 +95,10 @@ function private _objective(objective) {
       level thread function_f6a3d7df();
       level thread guard_room_train_occlusion();
       break;
-    case # "ghost_station_exit":
+    case #"ghost_station_exit":
       level thread function_a20133bd();
       break;
-    case # "wall":
+    case #"wall":
       level thread function_a20133bd();
       thread function_bb969e94();
       thread function_36cc557();
@@ -107,12 +107,12 @@ function private _objective(objective) {
       level flag::wait_till("move_wall_allies_01a");
       snd::client_msg("rooftop_start");
       break;
-    case # "rooftop":
+    case #"rooftop":
       level thread function_a20133bd();
       thread function_bb969e94();
       thread function_36cc557();
       break;
-    case # "street":
+    case #"street":
       level thread function_a20133bd();
       thread function_bb969e94();
       thread function_36cc557();
@@ -121,11 +121,11 @@ function private _objective(objective) {
       thread function_115e410e();
       snd::client_msg("street");
       break;
-    case # "bar":
+    case #"bar":
       level thread function_a20133bd();
       level flag::wait_till("player_in_bar");
       break;
-    case # "hash_7c9606c7fc0bc2c6":
+    case #"hash_7c9606c7fc0bc2c6":
       level thread function_a20133bd();
       thread function_bb969e94();
       thread function_36cc557();
@@ -133,7 +133,7 @@ function private _objective(objective) {
       wait 1;
       snd::client_msg("police_build_up_bar");
       break;
-    case # "hash_7c9605c7fc0bc113":
+    case #"hash_7c9605c7fc0bc113":
       level thread function_a20133bd();
       level thread stealth_music();
       thread function_bb969e94();
@@ -141,39 +141,39 @@ function private _objective(objective) {
       doors::waittill_door_opened("alley_2_end_door");
       thread function_2ef70099();
       break;
-    case # "alley_3":
+    case #"alley_3":
       level thread function_a20133bd();
       level thread stealth_music();
       thread function_bb969e94();
       thread function_36cc557();
       thread function_2ef70099();
       break;
-    case # "meetup":
+    case #"meetup":
       level thread function_a20133bd();
       level thread function_3eec13f8("9.0_informant_safehouse");
       thread function_bb969e94();
       thread function_36cc557();
       break;
-    case # "apt_street":
+    case #"apt_street":
       level thread function_a20133bd();
       level thread function_3eec13f8("13.0_apartment");
       thread function_bb969e94();
       thread function_36cc557();
       break;
-    case # "hash_5316a2a443ccd594":
+    case #"hash_5316a2a443ccd594":
       function_4b193e02();
       break;
-    case # "hash_5316a5a443ccdaad":
+    case #"hash_5316a5a443ccdaad":
       function_4b193e02();
       break;
-    case # "warehouse_intro":
+    case #"warehouse_intro":
       function_4b193e02();
       snd::client_msg("warehouse_intro");
       snd::play("evt_warehouse_wake_up");
       thread function_a4a301cb();
       thread warehouse_guns_start();
       break;
-    case # "warehouse":
+    case #"warehouse":
       function_4b193e02();
       snd::client_msg("warehouse");
       thread warehouse_guns_start();
@@ -181,11 +181,11 @@ function private _objective(objective) {
       level notify(#"warehouse_guns_start");
       thread function_a4a301cb();
       break;
-    case # "hash_48642c08eff0a94c":
+    case #"hash_48642c08eff0a94c":
       function_4b193e02();
       thread function_a4a301cb();
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 
@@ -202,43 +202,43 @@ function music(str_msg, n_delay = 0) {
 
 function function_7edafa59(str_msg, n_delay) {
   switch (str_msg) {
-    case # "8.0_low_profile":
-    case # "9.0_informant_safehouse":
-    case # "6.0_incoming":
-    case # "14.0_find_briefcase":
-    case # "hash_19e6ebac6ad70854":
-    case # "hash_1acc529b509e310e":
-    case # "hash_1e0888670e800fc6":
-    case # "1.0_train":
-    case # "10.0_informant_combat":
-    case # "hash_2c7e72eef7c943cd":
-    case # "hash_38e044116cdb55fd":
-    case # "9.0_informant_safehouse_2":
-    case # "6.0_incoming_skipto":
-    case # "4.0_rooftops":
-    case # "hash_4bcc9fef87077870":
-    case # "13.0_apartment":
-    case # "9.0_informant_safehouse_stinger":
-    case # "hash_4f417dd0d24a9d04":
-    case # "hash_51e60bc34c1efac4":
-    case # "hash_5867d18cd788d96e":
-    case # "hash_6bc99a264a7eb868":
-    case # "12.0_company":
-    case # "5.0_kraus":
+    case #"8.0_low_profile":
+    case #"9.0_informant_safehouse":
+    case #"6.0_incoming":
+    case #"14.0_find_briefcase":
+    case #"hash_19e6ebac6ad70854":
+    case #"hash_1acc529b509e310e":
+    case #"hash_1e0888670e800fc6":
+    case #"1.0_train":
+    case #"10.0_informant_combat":
+    case #"hash_2c7e72eef7c943cd":
+    case #"hash_38e044116cdb55fd":
+    case #"9.0_informant_safehouse_2":
+    case #"6.0_incoming_skipto":
+    case #"4.0_rooftops":
+    case #"hash_4bcc9fef87077870":
+    case #"13.0_apartment":
+    case #"9.0_informant_safehouse_stinger":
+    case #"hash_4f417dd0d24a9d04":
+    case #"hash_51e60bc34c1efac4":
+    case #"hash_5867d18cd788d96e":
+    case #"hash_6bc99a264a7eb868":
+    case #"12.0_company":
+    case #"5.0_kraus":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "hash_13bb4e260ce73d4":
+    case #"hash_13bb4e260ce73d4":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "4.0_rooftops_stinger_2":
-    case # "4.0_rooftops_stinger_1":
-    case # "13.0_apartment_stinger":
+    case #"4.0_rooftops_stinger_2":
+    case #"4.0_rooftops_stinger_1":
+    case #"13.0_apartment_stinger":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "deactivate_1.0_train":
-    case # "deactivate_5.0_kraus":
-    case # "deactivate_6.0_incoming":
-    case # "deactivate_14.0_find_briefcase":
+    case #"deactivate_1.0_train":
+    case #"deactivate_5.0_kraus":
+    case #"deactivate_6.0_incoming":
+    case #"deactivate_14.0_find_briefcase":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -251,16 +251,16 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "1.0_train":
+    case #"1.0_train":
       snd::client_msg(#"musictrack_cp_stakeout_1");
       break;
-    case # "5.0_kraus":
+    case #"5.0_kraus":
       snd::client_msg(#"musictrack_cp_stakeout_2");
       break;
-    case # "14.0_find_briefcase":
+    case #"14.0_find_briefcase":
       snd::client_msg(#"musictrack_cp_stakeout_3");
       break;
-    case # "hash_5867d18cd788d96e":
+    case #"hash_5867d18cd788d96e":
       snd::client_msg(#"musictrack_cp_stakeout_4");
       break;
   }

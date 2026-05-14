@@ -40,11 +40,11 @@ function private function_f1218e92() {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       self setstance("stand");
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       self setstance("stand");
       wait 1;
       break;

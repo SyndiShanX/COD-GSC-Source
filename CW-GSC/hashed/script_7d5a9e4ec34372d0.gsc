@@ -767,16 +767,16 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_72c32e4ea9754a5a":
+    case #"hash_72c32e4ea9754a5a":
       function_950cdfda();
       break;
-    case # "hash_2b88edba72ea664":
+    case #"hash_2b88edba72ea664":
       function_5167738a();
       break;
-    case # "hash_17ddb3f9b9346fba":
+    case #"hash_17ddb3f9b9346fba":
       function_d0a8abf7();
       break;
-    case # "hash_52e9b6c047dfc7":
+    case #"hash_52e9b6c047dfc7":
       function_d5c28d2b();
       break;
     default:

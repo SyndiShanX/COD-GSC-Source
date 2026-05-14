@@ -143,13 +143,13 @@ status_effects_devgui_think() {
     pid = getdvarint(#"scr_status_effects_devgui_player", 0);
 
     switch (cmd) {
-      case # "set_active":
+      case #"set_active":
         status_effects_set_active_effect(pid);
         break;
-      case # "give_grenade":
+      case #"give_grenade":
         status_effects_give_grenade(pid);
         break;
-      case # "clear_all":
+      case #"clear_all":
         function_64ba1c7e(pid);
       default:
         break;

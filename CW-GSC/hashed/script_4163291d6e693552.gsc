@@ -256,7 +256,7 @@ function function_df51a2e8(var_5314bd63, nd_path_start, var_384528, str_notify, 
 
     if(self isstanceallowed("stand")) {
       switch (str_stance) {
-        case # "crouch":
+        case #"crouch":
           self setstance("stand");
 
           if(var_1605b07a) {
@@ -264,7 +264,7 @@ function function_df51a2e8(var_5314bd63, nd_path_start, var_384528, str_notify, 
           }
 
           break;
-        case # "prone":
+        case #"prone":
           self setstance("stand");
 
           if(var_1605b07a) {

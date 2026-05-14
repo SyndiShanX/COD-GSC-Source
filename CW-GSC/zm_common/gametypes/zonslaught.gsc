@@ -90,61 +90,61 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_b48509f9 = 1;
 
   switch (level.var_8de4d059) {
-    case # "mp_cartel":
+    case #"mp_cartel":
       zm_intel::function_88645994(#"zmintel_list_mp_cartel_document_drops");
       break;
-    case # "mp_kgb":
+    case #"mp_kgb":
       zm_intel::function_88645994(#"zmintel_list_mp_kgb_document_drops");
       break;
-    case # "mp_miami":
+    case #"mp_miami":
       zm_intel::function_88645994(#"zmintel_list_mp_miami_document_drops");
       break;
-    case # "mp_moscow":
+    case #"mp_moscow":
       zm_intel::function_88645994(#"zmintel_list_mp_moscow_document_drops");
       break;
-    case # "mp_satellite":
+    case #"mp_satellite":
       zm_intel::function_88645994(#"zmintel_list_mp_satellite_document_drops");
       break;
-    case # "mp_tank":
+    case #"mp_tank":
       zm_intel::function_88645994(#"zmintel_list_mp_tank_document_drops");
       break;
-    case # "mp_tundra":
+    case #"mp_tundra":
       zm_intel::function_88645994(#"zmintel_list_mp_tundra_document_drops");
       break;
-    case # "mp_nuketown6":
+    case #"mp_nuketown6":
       zm_intel::function_88645994(#"zmintel_list_mp_nuketown_document_drops");
       break;
-    case # "mp_mall":
+    case #"mp_mall":
       zm_intel::function_88645994(#"zmintel_list_mp_s1_m_document_drops");
       break;
-    case # "mp_raid_rm":
+    case #"mp_raid_rm":
       zm_intel::function_88645994(#"zmintel_list_mp_s1_r_document_drops");
       break;
-    case # "mp_express_rm":
+    case #"mp_express_rm":
       zm_intel::function_88645994(#"zmintel_list_mp_express_rm_document_drops");
       break;
-    case # "mp_apocalypse":
+    case #"mp_apocalypse":
       zm_intel::function_88645994(#"zmintel_list_mp_apocalypse_document_drops");
       break;
-    case # "mp_cliffhanger":
+    case #"mp_cliffhanger":
       zm_intel::function_88645994(#"zmintel_list_mp_cliffhanger_document_drops");
       break;
-    case # "mp_village_rm":
+    case #"mp_village_rm":
       zm_intel::function_88645994(#"zmintel_list_mp_village_rm_document_drops");
       break;
-    case # "mp_dune":
+    case #"mp_dune":
       zm_intel::function_88645994(#"zmintel_list_mp_dune_document_drops");
       break;
-    case # "mp_paintball_rm":
+    case #"mp_paintball_rm":
       zm_intel::function_88645994(#"zmintel_list_mp_paintball_document_drops");
       break;
-    case # "mp_echelon":
+    case #"mp_echelon":
       zm_intel::function_88645994(#"zmintel_list_mp_echelon_document_drops");
       break;
-    case # "mp_drivein_rm":
+    case #"mp_drivein_rm":
       zm_intel::function_88645994(#"zmintel_list_mp_drivein_rm_document_drops");
       break;
-    case # "mp_firebase":
+    case #"mp_firebase":
       zm_intel::function_88645994(#"zmintel_list_mp_firebase_document_drops");
       break;
     default:
@@ -232,7 +232,7 @@ function function_d2211917() {
 function function_8f3357bd() {
   if(isDefined(level.var_8de4d059)) {
     switch (level.var_8de4d059) {
-      case # "mp_mall":
+      case #"mp_mall":
         array::delete_all(getEntArray("hide_vent", "targetname"));
         var_4dd3dfa8 = struct::get_array("onslaught_blocker", "targetname");
 
@@ -760,73 +760,73 @@ function function_e88957df(var_a0168ed5 = 0) {
 
     if(is_true(var_77acb6b1)) {
       switch (level.var_8de4d059) {
-        case # "mp_cartel":
+        case #"mp_cartel":
           self zm_stats::increment_challenge_stat(#"hash_768a330ec53898c9", undefined, 1);
           break;
-        case # "mp_kgb":
+        case #"mp_kgb":
           self zm_stats::increment_challenge_stat(#"hash_2adda7cd2b43ffaa", undefined, 1);
           break;
-        case # "mp_miami":
+        case #"mp_miami":
           self zm_stats::increment_challenge_stat(#"hash_77fdc1340a34667d", undefined, 1);
           break;
-        case # "mp_moscow":
+        case #"mp_moscow":
           self zm_stats::increment_challenge_stat(#"hash_6dee1f7a2cf24f0a", undefined, 1);
           break;
-        case # "mp_satellite":
+        case #"mp_satellite":
           self zm_stats::increment_challenge_stat(#"hash_174eca25428cfdd3", undefined, 1);
           break;
-        case # "mp_tank":
+        case #"mp_tank":
           self zm_stats::increment_challenge_stat(#"hash_66ee2888bd7ddb12", undefined, 1);
           break;
-        case # "mp_tundra":
+        case #"mp_tundra":
           self zm_stats::increment_challenge_stat(#"hash_3aecbf73ceecadaa", undefined, 1);
           break;
-        case # "mp_nuketown6":
+        case #"mp_nuketown6":
           self zm_stats::increment_challenge_stat(#"hash_39310ccdb302c15b", undefined, 1);
           break;
-        case # "mp_mall":
+        case #"mp_mall":
           self zm_stats::increment_challenge_stat(#"hash_49d075d62f45e274", undefined, 1);
           break;
-        case # "mp_raid_rm":
+        case #"mp_raid_rm":
           self zm_stats::increment_challenge_stat(#"hash_7b7db9592bf8ce56", undefined, 1);
           break;
-        case # "mp_express_rm":
+        case #"mp_express_rm":
           self zm_stats::increment_challenge_stat(#"hash_7d8ee900ddefa146", undefined, 1);
           break;
-        case # "mp_apocalypse":
+        case #"mp_apocalypse":
           self zm_stats::increment_challenge_stat(#"hash_666f9063a85fcd9", undefined, 1);
           break;
-        case # "mp_cliffhanger":
+        case #"mp_cliffhanger":
           self zm_stats::increment_challenge_stat(#"hash_e128de9fe167bdf", undefined, 1);
           break;
-        case # "mp_village_rm":
+        case #"mp_village_rm":
           self zm_stats::increment_challenge_stat(#"hash_a57523eeb5e616e", undefined, 1);
           break;
-        case # "mp_dune":
+        case #"mp_dune":
           self zm_stats::increment_challenge_stat(#"hash_516a5f0ca98a6fc4", undefined, 1);
           break;
-        case # "mp_paintball_rm":
+        case #"mp_paintball_rm":
           self zm_stats::increment_challenge_stat(#"hash_721e9724b59755a7", undefined, 1);
           break;
-        case # "mp_echelon":
+        case #"mp_echelon":
           self zm_stats::increment_challenge_stat(#"hash_22670e78a2fecea", undefined, 1);
           break;
-        case # "mp_drivein_rm":
+        case #"mp_drivein_rm":
           self zm_stats::increment_challenge_stat(#"hash_ca318f6e8260fe1", undefined, 1);
           break;
-        case # "mp_firebase":
+        case #"mp_firebase":
           self zm_stats::increment_challenge_stat(#"hash_2d74918796164e23", undefined, 1);
           break;
-        case # "mp_sm_finance":
+        case #"mp_sm_finance":
           self zm_stats::increment_challenge_stat(#"hash_6b4fded9783baabb", undefined, 1);
           break;
-        case # "mp_sm_central":
+        case #"mp_sm_central":
           self zm_stats::increment_challenge_stat(#"hash_2643c82ae6e4649c", undefined, 1);
           break;
-        case # "mp_sm_berlin_tunnel":
+        case #"mp_sm_berlin_tunnel":
           self zm_stats::increment_challenge_stat(#"hash_740fbcb881407c22", undefined, 1);
           break;
-        case # "mp_sm_game_show":
+        case #"mp_sm_game_show":
           self zm_stats::increment_challenge_stat(#"hash_2509e6ed81b9096b", undefined, 1);
           break;
         default:
@@ -855,73 +855,73 @@ function function_e88957df(var_a0168ed5 = 0) {
 
     if(is_true(var_77acb6b1)) {
       switch (level.var_8de4d059) {
-        case # "mp_cartel":
+        case #"mp_cartel":
           self zm_stats::increment_challenge_stat(#"hash_e7080a2e314b310", undefined, 1);
           break;
-        case # "mp_kgb":
+        case #"mp_kgb":
           self zm_stats::increment_challenge_stat(#"hash_1404f61a3c181b21", undefined, 1);
           break;
-        case # "mp_miami":
+        case #"mp_miami":
           self zm_stats::increment_challenge_stat(#"hash_78912627d043be", undefined, 1);
           break;
-        case # "mp_moscow":
+        case #"mp_moscow":
           self zm_stats::increment_challenge_stat(#"hash_5e2d0a6005f8bb7f", undefined, 1);
           break;
-        case # "mp_satellite":
+        case #"mp_satellite":
           self zm_stats::increment_challenge_stat(#"hash_37ff3a21d194b40c", undefined, 1);
           break;
-        case # "mp_tank":
+        case #"mp_tank":
           self zm_stats::increment_challenge_stat(#"hash_7e1412cacb1d2d6b", undefined, 1);
           break;
-        case # "mp_tundra":
+        case #"mp_tundra":
           self zm_stats::increment_challenge_stat(#"hash_149f5861932281df", undefined, 1);
           break;
-        case # "mp_nuketown6":
+        case #"mp_nuketown6":
           self zm_stats::increment_challenge_stat(#"hash_1328a9a4fc66d61a", undefined, 1);
           break;
-        case # "mp_mall":
+        case #"mp_mall":
           self zm_stats::increment_challenge_stat(#"hash_6cde4583797a1e4d", undefined, 1);
           break;
-        case # "mp_raid_rm":
+        case #"mp_raid_rm":
           self zm_stats::increment_challenge_stat(#"hash_677d29dcb0c038a7", undefined, 1);
           break;
-        case # "mp_express_rm":
+        case #"mp_express_rm":
           self zm_stats::increment_challenge_stat(#"hash_4f8679e10c170ac9", undefined, 1);
           break;
-        case # "mp_apocalypse":
+        case #"mp_apocalypse":
           self zm_stats::increment_challenge_stat(#"hash_61b15880248761c8", undefined, 1);
           break;
-        case # "mp_cliffhanger":
+        case #"mp_cliffhanger":
           self zm_stats::increment_challenge_stat(#"hash_63ea17009520197c", undefined, 1);
           break;
-        case # "mp_village_rm":
+        case #"mp_village_rm":
           self zm_stats::increment_challenge_stat(#"hash_4fe158e23ff60c71", undefined, 1);
           break;
-        case # "mp_dune":
+        case #"mp_dune":
           self zm_stats::increment_challenge_stat(#"hash_6a767447a03e9b21", undefined, 1);
           break;
-        case # "mp_paintball_rm":
+        case #"mp_paintball_rm":
           self zm_stats::increment_challenge_stat(#"hash_555ecf047c4d0aa4", undefined, 1);
           break;
-        case # "mp_echelon":
+        case #"mp_echelon":
           self zm_stats::increment_challenge_stat(#"hash_503b908f2a98419d", undefined, 1);
           break;
-        case # "mp_drivein_rm":
+        case #"mp_drivein_rm":
           self zm_stats::increment_challenge_stat(#"hash_45b12633e87eb866", undefined, 1);
           break;
-        case # "mp_firebase":
+        case #"mp_firebase":
           self zm_stats::increment_challenge_stat(#"hash_56ed77cdf639564e", undefined, 1);
           break;
-        case # "mp_sm_finance":
+        case #"mp_sm_finance":
           self zm_stats::increment_challenge_stat(#"hash_5f78704720a048b2", undefined, 1);
           break;
-        case # "mp_sm_central":
+        case #"mp_sm_central":
           self zm_stats::increment_challenge_stat(#"hash_2e23bde8d7a24fc5", undefined, 1);
           break;
-        case # "mp_sm_berlin_tunnel":
+        case #"mp_sm_berlin_tunnel":
           self zm_stats::increment_challenge_stat(#"hash_2c19b26a825c1467", undefined, 1);
           break;
-        case # "mp_sm_game_show":
+        case #"mp_sm_game_show":
           self zm_stats::increment_challenge_stat(#"hash_1c907a3cbd04a346", undefined, 1);
           break;
         default:
@@ -957,73 +957,73 @@ function function_e88957df(var_a0168ed5 = 0) {
 
     if(is_true(var_77acb6b1)) {
       switch (level.var_8de4d059) {
-        case # "mp_cartel":
+        case #"mp_cartel":
           self zm_stats::increment_challenge_stat(#"hash_43c2b3a0dfc9bab3", undefined, 1);
           break;
-        case # "mp_kgb":
+        case #"mp_kgb":
           self zm_stats::increment_challenge_stat(#"hash_5014636a724f5c14", undefined, 1);
           break;
-        case # "mp_miami":
+        case #"mp_miami":
           self zm_stats::increment_challenge_stat(#"hash_15a7d102d2edb893", undefined, 1);
           break;
-        case # "mp_moscow":
+        case #"mp_moscow":
           self zm_stats::increment_challenge_stat(#"hash_567e99c4a5fb9fc8", undefined, 1);
           break;
-        case # "mp_satellite":
+        case #"mp_satellite":
           self zm_stats::increment_challenge_stat(#"hash_40199f1bfb79141d", undefined, 1);
           break;
-        case # "mp_tank":
+        case #"mp_tank":
           self zm_stats::increment_challenge_stat(#"hash_525fc5df1c43afe4", undefined, 1);
           break;
-        case # "mp_tundra":
+        case #"mp_tundra":
           self zm_stats::increment_challenge_stat(#"hash_4fb345ddd49a654c", undefined, 1);
           break;
-        case # "mp_nuketown6":
+        case #"mp_nuketown6":
           self zm_stats::increment_challenge_stat(#"hash_17c6d5faa49457e1", undefined, 1);
           break;
-        case # "mp_mall":
+        case #"mp_mall":
           self zm_stats::increment_challenge_stat(#"hash_80f17b0b548e17e", undefined, 1);
           break;
-        case # "mp_raid_rm":
+        case #"mp_raid_rm":
           self zm_stats::increment_challenge_stat(#"hash_65ed7b0fe5ddfe4c", undefined, 1);
           break;
-        case # "mp_express_rm":
+        case #"mp_express_rm":
           self zm_stats::increment_challenge_stat(#"hash_54df583b05e784c0", undefined, 1);
           break;
-        case # "mp_apocalypse":
+        case #"mp_apocalypse":
           self zm_stats::increment_challenge_stat(#"hash_1ada6297a317cb2f", undefined, 1);
           break;
-        case # "mp_cliffhanger":
+        case #"mp_cliffhanger":
           self zm_stats::increment_challenge_stat(#"hash_690bf214175428d", undefined, 1);
           break;
-        case # "mp_village_rm":
+        case #"mp_village_rm":
           self zm_stats::increment_challenge_stat(#"hash_138e156dd57f9824", undefined, 1);
           break;
-        case # "mp_dune":
+        case #"mp_dune":
           self zm_stats::increment_challenge_stat(#"hash_3cdbf06308503032", undefined, 1);
           break;
-        case # "mp_paintball_rm":
+        case #"mp_paintball_rm":
           self zm_stats::increment_challenge_stat(#"hash_203003e51c5621d", undefined, 1);
           break;
-        case # "mp_echelon":
+        case #"mp_echelon":
           self zm_stats::increment_challenge_stat(#"hash_43ea4e7159b99b9c", undefined, 1);
           break;
-        case # "mp_drivein_rm":
+        case #"mp_drivein_rm":
           self zm_stats::increment_challenge_stat(#"hash_5af7140c7463d733", undefined, 1);
           break;
-        case # "mp_firebase":
+        case #"mp_firebase":
           self zm_stats::increment_challenge_stat(#"hash_6f05f4cee5d4d81d", undefined, 1);
           break;
-        case # "mp_sm_finance":
+        case #"mp_sm_finance":
           self zm_stats::increment_challenge_stat(#"hash_72b597c540b86d8d", undefined, 1);
           break;
-        case # "mp_sm_central":
+        case #"mp_sm_central":
           self zm_stats::increment_challenge_stat(#"hash_7b4e9ebeabbe183a", undefined, 1);
           break;
-        case # "mp_sm_berlin_tunnel":
+        case #"mp_sm_berlin_tunnel":
           self zm_stats::increment_challenge_stat(#"hash_4b9152a0994640e4", undefined, 1);
           break;
-        case # "mp_sm_game_show":
+        case #"mp_sm_game_show":
           self zm_stats::increment_challenge_stat(#"hash_41333e39d398c7e1", undefined, 1);
           break;
         default:
@@ -1068,27 +1068,27 @@ function function_d400d613(targetname, typesarray) {
 
 function function_82ca1565(spawnpoint, gametype) {
   switch (gametype) {
-    case # "ctf":
+    case #"ctf":
       return (isDefined(spawnpoint.ctf) && spawnpoint.ctf);
-    case # "tdm":
+    case #"tdm":
       return (isDefined(spawnpoint.tdm) && spawnpoint.tdm);
-    case # "war":
+    case #"war":
       return is_true(spawnpoint.war);
-    case # "war_zone_0":
+    case #"war_zone_0":
       return is_true(spawnpoint.war_zone_0);
-    case # "war_zone_1":
+    case #"war_zone_1":
       return is_true(spawnpoint.war_zone_1);
-    case # "war_zone_2":
+    case #"war_zone_2":
       return is_true(spawnpoint.war_zone_2);
-    case # "war_zone_3":
+    case #"war_zone_3":
       return is_true(spawnpoint.war_zone_3);
-    case # "war_zone_4":
+    case #"war_zone_4":
       return is_true(spawnpoint.war_zone_4);
-    case # "hash_35b3b60f0a291417":
+    case #"hash_35b3b60f0a291417":
       return is_true(spawnpoint.var_3cb82e5e);
-    case # "hash_450dd6aacc69e524":
+    case #"hash_450dd6aacc69e524":
       return is_true(spawnpoint.var_d8e690f8);
-    case # "hash_42f07692f7d48364":
+    case #"hash_42f07692f7d48364":
       return is_true(spawnpoint.var_3d72e6da);
     default:
       assertmsg("<dev string:x7d>" + gametype + "<dev string:x8c>" + spawnpoint.origin[0] + "<dev string:xb8>" + spawnpoint.origin[1] + "<dev string:xc0>" + spawnpoint.origin[2]);

@@ -88,11 +88,11 @@ function private _on_player_connect() {
 
 function private function_6daf57e7(type) {
   switch (type) {
-    case # "rare":
+    case #"rare":
       return 1;
-    case # "epic":
+    case #"epic":
       return 2;
-    case # "legendary":
+    case #"legendary":
       return 3;
   }
 }
@@ -681,99 +681,99 @@ function function_4f5dff62(starlevel = 1, type = #"rare") {
   switch (starlevel) {
     case 1:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 1;
-        case # "epic":
+        case #"epic":
           return 0;
-        case # "legendary":
+        case #"legendary":
           return 0;
       }
 
       break;
     case 2:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 1;
-        case # "epic":
+        case #"epic":
           return 1;
-        case # "legendary":
+        case #"legendary":
           return 0;
       }
 
       break;
     case 3:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 1;
-        case # "epic":
+        case #"epic":
           return 1;
-        case # "legendary":
+        case #"legendary":
           return 1;
       }
 
       break;
     case 4:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 1;
-        case # "epic":
+        case #"epic":
           return 1;
-        case # "legendary":
+        case #"legendary":
           return 1;
       }
 
       break;
     case 5:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 2;
-        case # "epic":
+        case #"epic":
           return 1;
-        case # "legendary":
+        case #"legendary":
           return 1;
       }
 
       break;
     case 6:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 2;
-        case # "epic":
+        case #"epic":
           return 2;
-        case # "legendary":
+        case #"legendary":
           return 1;
       }
 
       break;
     case 7:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 3;
-        case # "epic":
+        case #"epic":
           return 2;
-        case # "legendary":
+        case #"legendary":
           return 2;
       }
 
       break;
     case 8:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 3;
-        case # "epic":
+        case #"epic":
           return 2;
-        case # "legendary":
+        case #"legendary":
           return 2;
       }
 
       break;
     case 9:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 4;
-        case # "epic":
+        case #"epic":
           return 3;
-        case # "legendary":
+        case #"legendary":
           return 2;
       }
 
@@ -781,11 +781,11 @@ function function_4f5dff62(starlevel = 1, type = #"rare") {
     case 10:
     default:
       switch (type) {
-        case # "rare":
+        case #"rare":
           return 4;
-        case # "epic":
+        case #"epic":
           return 3;
-        case # "legendary":
+        case #"legendary":
           return 2;
       }
 
@@ -1015,13 +1015,13 @@ function on_item_pickup(params) {
       if(item.itementry.itemtype === #"hash_6a8c9b279aa1c2c5") {
         if(isDefined(item.itementry.rarity)) {
           switch (item.itementry.rarity) {
-            case # "rare":
+            case #"rare":
               self function_d59d7b74();
               break;
-            case # "epic":
+            case #"epic":
               self function_89a45cd4();
               break;
-            case # "legendary":
+            case #"legendary":
               self function_74f5b460();
               break;
           }

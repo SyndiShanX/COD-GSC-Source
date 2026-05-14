@@ -1145,49 +1145,49 @@ set_pap_zbarrier_state(state) {
 
 process_pap_zbarrier_state(state) {
   switch (state) {
-    case # "initial":
+    case #"initial":
       self showzbarrierpiece(0);
       self thread pap_initial();
       self.state = "initial";
       break;
-    case # "power_off":
+    case #"power_off":
       self showzbarrierpiece(0);
       self thread pap_power_off();
       self.state = "power_off";
       break;
-    case # "power_on":
+    case #"power_on":
       self showzbarrierpiece(0);
       self thread pap_power_on();
       self.state = "power_on";
       break;
-    case # "powered":
+    case #"powered":
       self showzbarrierpiece(4);
       self thread pap_powered();
       self.state = "powered";
       break;
-    case # "take_gun":
+    case #"take_gun":
       self showzbarrierpiece(1);
       self showzbarrierpiece(3);
       self thread pap_take_gun();
       self.state = "take_gun";
       break;
-    case # "eject_gun":
+    case #"eject_gun":
       self showzbarrierpiece(1);
       self showzbarrierpiece(3);
       self thread pap_eject_gun();
       self.state = "eject_gun";
       break;
-    case # "leaving":
+    case #"leaving":
       self showzbarrierpiece(5);
       self thread pap_leaving();
       self.state = "leaving";
       break;
-    case # "arriving":
+    case #"arriving":
       self showzbarrierpiece(0);
       self thread pap_arriving();
       self.state = "arriving";
       break;
-    case # "hidden":
+    case #"hidden":
       self.state = "hidden";
       break;
     default:
@@ -1201,14 +1201,14 @@ process_pap_zbarrier_state(state) {
 
 function_bdbf43e6(str_state) {
   switch (str_state) {
-    case # "powered":
+    case #"powered":
       self thread function_ea57e209();
       break;
-    case # "take_gun":
+    case #"take_gun":
       self showzbarrierpiece(2);
       self setzbarrierpiecestate(2, "opening");
       break;
-    case # "eject_gun":
+    case #"eject_gun":
       self showzbarrierpiece(2);
       self setzbarrierpiecestate(2, "closing");
       break;
@@ -1228,25 +1228,25 @@ function_ea57e209() {
 
 function_41cd6368(str_state) {
   switch (str_state) {
-    case # "take_gun":
+    case #"take_gun":
       self thread function_7c1b15f2();
       self.state = "take_gun";
       return false;
-    case # "eject_gun":
+    case #"eject_gun":
       self thread function_2bb87d58();
       self.state = "eject_gun";
       return false;
-    case # "arriving":
+    case #"arriving":
       self showzbarrierpiece(4);
       self thread function_e0fbd38a();
       self.state = "arriving";
       return false;
-    case # "leaving":
+    case #"leaving":
       self showzbarrierpiece(4);
       self thread function_d896758();
       self.state = "leaving";
       return false;
-    case # "powered":
+    case #"powered":
       self setzbarrierpiecestate(3, "closed");
       self setzbarrierpiecestate(5, "closed");
       return true;
@@ -1278,9 +1278,9 @@ function_acd31f7d() {
   }
 
   switch (self.unitrigger_stub.current_weapon.weapclass) {
-    case # "smg":
-    case # "rocketlauncher":
-    case # "pistol":
+    case #"smg":
+    case #"rocketlauncher":
+    case #"pistol":
       if(!isDefined(level.var_aaeee81e) || isDefined(level.var_aaeee81e) && !isinarray(level.var_aaeee81e, var_d2fd7259.name)) {
         self zbarrierpieceuseattachweapon(5);
         return 5;

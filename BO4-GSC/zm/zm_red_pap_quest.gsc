@@ -2310,13 +2310,13 @@ function_3e5c42f5(e_holder, w_item) {
   zm_crafting::function_d1f16587(#"zblueprint_red_strike", &function_7250e6b9);
 
   switch (w_item.name) {
-    case # "zitem_red_strike_part_1":
+    case #"zitem_red_strike_part_1":
       zm_ui_inventory::function_7df6bb60(#"hash_770d4d2226eb79", 1);
       break;
-    case # "zitem_red_strike_part_2":
+    case #"zitem_red_strike_part_2":
       zm_ui_inventory::function_7df6bb60(#"hash_770a4d2226e660", 1);
       break;
-    case # "zitem_red_strike_part_3":
+    case #"zitem_red_strike_part_3":
       zm_ui_inventory::function_7df6bb60(#"hash_770b4d2226e813", 1);
       break;
   }

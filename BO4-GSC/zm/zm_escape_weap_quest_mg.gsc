@@ -1035,7 +1035,7 @@ function_78ca248c() {
 
 function_6f4823a9(cmd) {
   switch (cmd) {
-    case # "hash_2406dff55d52785a":
+    case #"hash_2406dff55d52785a":
       foreach(mdl_skull in level.var_8e6fc65e) {
         mdl_skull setModel("<dev string:x169>");
         mdl_skull clientfield::set("<dev string:x185>" + #"magma_fireplace_skull_fx", 1);
@@ -1043,7 +1043,7 @@ function_6f4823a9(cmd) {
 
       level flag::set(#"hash_3fb7d58b07b04333");
       break;
-    case # "hash_384ee6deba35ca28":
+    case #"hash_384ee6deba35ca28":
       level flag::set(#"magma_forge_completed");
       break;
   }

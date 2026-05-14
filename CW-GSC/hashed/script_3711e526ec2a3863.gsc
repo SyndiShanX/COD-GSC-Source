@@ -178,23 +178,23 @@ function music(str_msg, n_delay = 0, var_37a6c96) {
 
 function function_7edafa59(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
-    case # "hash_6d6826a83750847":
-    case # "hash_6d6826a83750847":
-    case # "2.0_briefing":
-    case # "hash_2c622a30dc731207":
-    case # "hash_35d3f2d1bf79eb35":
-    case # "hash_4c5ac549022188d4":
-    case # "12.0_turret":
-    case # "hash_572e961104184b52":
-    case # "5.0_village_combat":
-    case # "hash_63ee253a845cbefd":
+    case #"hash_6d6826a83750847":
+    case #"hash_6d6826a83750847":
+    case #"2.0_briefing":
+    case #"hash_2c622a30dc731207":
+    case #"hash_35d3f2d1bf79eb35":
+    case #"hash_4c5ac549022188d4":
+    case #"12.0_turret":
+    case #"hash_572e961104184b52":
+    case #"5.0_village_combat":
+    case #"hash_63ee253a845cbefd":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
 
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "hash_15d512eeb8abc51e":
+    case #"hash_15d512eeb8abc51e":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
@@ -203,25 +203,25 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
       wait 1;
       music::setmusicstate("12.0_turret");
       break;
-    case # "hash_2375b08205562389":
+    case #"hash_2375b08205562389":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
 
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "hash_3c930a111db30f46":
+    case #"hash_3c930a111db30f46":
       music::setmusicstate(str_msg, undefined, n_delay);
       wait 5;
       music::setmusicstate("5.0_village_combat");
       break;
-    case # "hash_7a72528b9f2c2f90":
+    case #"hash_7a72528b9f2c2f90":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "hash_2193c42e21ea2e63":
+    case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "hash_4c4e6fe764aec250":
+    case #"hash_4c4e6fe764aec250":
       music::setmusicstate("explo_stinger", undefined, n_delay);
       break;
     default:
@@ -234,19 +234,19 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "2.0_briefing":
+    case #"2.0_briefing":
       snd::client_msg(#"musictrack_cp_armada_1");
       waitframe(1);
       snd::client_msg(#"musictrack_cp_armada_2");
       break;
-    case # "hash_3c930a111db30f46":
-    case # "5.0_village_combat":
+    case #"hash_3c930a111db30f46":
+    case #"5.0_village_combat":
       snd::client_msg(#"musictrack_cp_armada_3");
       break;
-    case # "hash_6d6826a83750847":
+    case #"hash_6d6826a83750847":
       snd::client_msg(#"musictrack_cp_armada_4");
       break;
-    case # "hash_4c5ac549022188d4":
+    case #"hash_4c5ac549022188d4":
       snd::client_msg(#"musictrack_cp_armada_5");
       break;
   }

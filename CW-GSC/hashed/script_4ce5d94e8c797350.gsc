@@ -563,16 +563,16 @@ function function_e1dd6a53(state = #"off") {
 
   if(state == #"no_reward") {
     switch (self.str_color) {
-      case # "purple":
+      case #"purple":
         self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_static_purple", "tag_origin");
         break;
-      case # "orange":
+      case #"orange":
         self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_static_orange", "tag_origin");
         break;
-      case # "green":
+      case #"green":
         self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_static_green", "tag_origin");
         break;
-      case # "blue":
+      case #"blue":
         self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_static_blue", "tag_origin");
         break;
     }
@@ -581,19 +581,19 @@ function function_e1dd6a53(state = #"off") {
   }
 
   switch (self.str_color) {
-    case # "purple":
+    case #"purple":
       self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_purple", "tag_origin");
       self playLoopSound("amb_dac_happy_happy");
       break;
-    case # "orange":
+    case #"orange":
       self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_orange", "tag_origin");
       self playLoopSound("amb_dac_happy_happy");
       break;
-    case # "green":
+    case #"green":
       self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_green", "tag_origin");
       self playLoopSound("amb_dac_happy_happy");
       break;
-    case # "blue":
+    case #"blue":
       self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_blue", "tag_origin");
       self playLoopSound("amb_dac_happy_happy");
       break;
@@ -997,15 +997,15 @@ function function_34b03961(var_851cec80 = 0) {
     self.var_207f01b0 = 0;
 
     switch (var_19a3087c.var_9be0526e) {
-      case # "hash_daeb8129dc8e394":
+      case #"hash_daeb8129dc8e394":
         var_3e22312c = 4;
         var_2a2ba09f = 5;
         break;
-      case # "audiolog":
+      case #"audiolog":
         var_3e22312c = 6;
         var_2a2ba09f = 7;
         break;
-      case # "hash_20ea75a25d912949":
+      case #"hash_20ea75a25d912949":
         var_3e22312c = 8;
         var_2a2ba09f = 9;
         break;
@@ -1391,19 +1391,19 @@ function function_9ffc76ea(str_notify) {
 
     if(is_challenge_active(#"hash_63791b9ae55043b5")) {
       switch (waitresult.scoreevent) {
-        case # "multikillstreak_5_zm":
+        case #"multikillstreak_5_zm":
           var_41f9c5ff = 100;
           break;
-        case # "multikillstreak_10_zm":
+        case #"multikillstreak_10_zm":
           var_41f9c5ff = 125;
           break;
-        case # "multikillstreak_15_zm":
+        case #"multikillstreak_15_zm":
           var_41f9c5ff = 150;
           break;
-        case # "multikillstreak_20_zm":
+        case #"multikillstreak_20_zm":
           var_41f9c5ff = 200;
           break;
-        case # "multikillstreak_25_zm":
+        case #"multikillstreak_25_zm":
           var_41f9c5ff = 300;
           break;
         default:
@@ -1740,16 +1740,16 @@ function private function_e6f97362(params) {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_c56ce3c06931cbb":
+    case #"hash_c56ce3c06931cbb":
       function_d938cbd8();
       break;
-    case # "hash_1f6dfb788a3261dc":
+    case #"hash_1f6dfb788a3261dc":
       function_df5afb5e();
       break;
-    case # "hash_7cdc8834ffee5ac":
+    case #"hash_7cdc8834ffee5ac":
       function_5e613eb7();
       break;
-    case # "hash_625423e17a0da5e2":
+    case #"hash_625423e17a0da5e2":
       if(getdvarint(#"hash_1ca7459bb8b222dd", 0)) {
         setDvar(#"hash_1ca7459bb8b222dd", 0);
 
@@ -1761,7 +1761,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_44c3c9e92dca8184":
+    case #"hash_44c3c9e92dca8184":
       if(getdvarint(#"hash_48742331833b658f", 0)) {
         setDvar(#"hash_48742331833b658f", 0);
         level notify(#"hash_1b63b0a9d74c5852");
@@ -1782,7 +1782,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_352c0ab76fcca647":
+    case #"hash_352c0ab76fcca647":
       if(getdvarint(#"hash_292f44858fd468da", 0)) {
         setDvar(#"hash_292f44858fd468da", 0);
         level notify(#"hash_32f12c135823837");
@@ -1792,7 +1792,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_5e917a17463426aa":
+    case #"hash_5e917a17463426aa":
       if(isDefined(level.var_107cca82)) {
         if(level.var_107cca82.n_sequence === 2) {
           level.var_107cca82.n_sequence = 1;

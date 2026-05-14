@@ -1113,24 +1113,24 @@ function devstraferunpathdebugdraw() {
           textscale = 10;
 
           switch (node.script_noteworthy) {
-            case # "strafe_start":
+            case #"strafe_start":
               textcolor = green;
               textalpha = 1;
               break;
-            case # "strafe_stop":
+            case #"strafe_stop":
               textcolor = red;
               textalpha = 1;
               break;
-            case # "strafe_leave":
+            case #"strafe_leave":
               textcolor = white;
               textalpha = 1;
               break;
           }
 
           switch (node.script_noteworthy) {
-            case # "strafe_stop":
-            case # "strafe_leave":
-            case # "strafe_start":
+            case #"strafe_stop":
+            case #"strafe_leave":
+            case #"strafe_start":
               sides = 10;
               radius = 100;
 
@@ -1186,22 +1186,22 @@ function devhelipathdebugdraw() {
       foreach(ent in script_origins) {
         if(isDefined(ent.targetname)) {
           switch (ent.targetname) {
-            case # "heli_start":
+            case #"heli_start":
               textcolor = blue;
               textalpha = 1;
               textscale = 3;
               break;
-            case # "heli_loop_start":
+            case #"heli_loop_start":
               textcolor = green;
               textalpha = 1;
               textscale = 3;
               break;
-            case # "heli_attack_area":
+            case #"heli_attack_area":
               textcolor = red;
               textalpha = 1;
               textscale = 3;
               break;
-            case # "heli_leave":
+            case #"heli_leave":
               textcolor = white;
               textalpha = 1;
               textscale = 3;
@@ -1209,10 +1209,10 @@ function devhelipathdebugdraw() {
           }
 
           switch (ent.targetname) {
-            case # "heli_leave":
-            case # "heli_attack_area":
-            case # "heli_start":
-            case # "heli_loop_start":
+            case #"heli_leave":
+            case #"heli_attack_area":
+            case #"heli_start":
+            case #"heli_loop_start":
               if(drawtime == maxdrawtime) {
                 ent thread drawpath(textcolor, white, textalpha, textscale, origintextoffset, drawtime, endonmsg);
               }

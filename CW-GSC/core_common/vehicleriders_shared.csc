@@ -86,29 +86,29 @@ function play_vehicle_anim(localclientnum, oldval, newval, bnewent, binitialsnap
   foreach(s_rider in s_bundle.objects) {
     if(s_rider.position == str_pos) {
       switch (str_action) {
-        case # "enter":
+        case #"enter":
           str_vh_anim = s_rider.vehicleenteranim;
           break;
-        case # "exit":
+        case #"exit":
           str_vh_anim = s_rider.vehicleexitanim;
           break;
-        case # "exit_combat":
+        case #"exit_combat":
           str_vh_anim = s_rider.var_cbf50c1d;
           break;
-        case # "close":
+        case #"close":
           str_vh_anim = s_rider.vehiclecloseanim;
           break;
-        case # "close_combat":
+        case #"close_combat":
           str_vh_anim = s_rider.var_b7605392;
           break;
-        case # "death":
+        case #"death":
           str_vh_anim = s_rider.vehicleriderdeathanim;
           break;
-        case # "exit_restore":
+        case #"exit_restore":
           str_vh_anim = s_rider.vehicleexitanim;
           var_73ba4ab0 = 1;
           break;
-        case # "exit_combat_restore":
+        case #"exit_combat_restore":
           str_vh_anim = s_rider.var_cbf50c1d;
           var_73ba4ab0 = 1;
           break;

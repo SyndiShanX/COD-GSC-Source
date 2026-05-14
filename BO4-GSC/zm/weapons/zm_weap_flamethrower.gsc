@@ -278,10 +278,10 @@ function_e296efef(w_flamethrower, e_player) {
 
 function_31a142a2(w_flamethrower) {
   switch (w_flamethrower.name) {
-    case # "hero_flamethrower_t8_lv2":
+    case #"hero_flamethrower_t8_lv2":
       var_c4d00e65 = 0.75;
       break;
-    case # "hero_flamethrower_t8_lv3":
+    case #"hero_flamethrower_t8_lv3":
       var_c4d00e65 = 1;
       break;
     default:

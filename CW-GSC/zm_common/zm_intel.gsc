@@ -257,15 +257,15 @@ function function_aa317cfe() {
     }
 
     switch (var_41c6d68b.faction) {
-      case # "requiem":
+      case #"requiem":
         var_bed5445b = #"p9_zm_ndu_radio_transmissions_r";
         var_32edbef9 = #"hash_405e81feb85c5162";
         break;
-      case # "maxis":
+      case #"maxis":
         var_bed5445b = #"p9_zm_ndu_radio_transmissions";
         var_32edbef9 = #"hash_6fec31948ca2058c";
         break;
-      case # "omega":
+      case #"omega":
         var_bed5445b = #"p9_zm_ndu_radio_transmissions_o";
         var_32edbef9 = #"hash_28fec49f37a535b9";
         break;
@@ -1165,11 +1165,11 @@ function private function_bd78aea0(var_19a3087c, e_player) {
 
   if(isDefined(var_19a3087c.var_348b91fd)) {
     switch (var_19a3087c.var_348b91fd) {
-      case # "tape":
+      case #"tape":
         var_27c5b5a9 = #"hash_ea30fff000de600";
         var_42e4e060 = #"hash_aa0fa647067d823";
         break;
-      case # "radio":
+      case #"radio":
         var_27c5b5a9 = #"hash_5c60481ce158163d";
         var_42e4e060 = #"hash_274981480733b7d0";
         break;
@@ -1197,10 +1197,10 @@ function private function_8f6791a4(var_19a3087c, e_player) {
 
   if(isDefined(var_19a3087c.var_348b91fd)) {
     switch (var_19a3087c.var_348b91fd) {
-      case # "tape":
+      case #"tape":
         var_37b08e30 = #"hash_f315a8d18c2e535";
         break;
-      case # "radio":
+      case #"radio":
         var_37b08e30 = #"hash_203997b7ca5c0dd4";
         break;
       default:
@@ -1226,19 +1226,19 @@ function function_2bcfd899(var_f84ece9f, player) {
   }
 
   switch (var_f84ece9f) {
-    case # "hash_76270a10851f51d8":
+    case #"hash_76270a10851f51d8":
       var_bf0df48d = level.var_9ff51719;
       break;
-    case # "hash_71c51f24f7f3037d":
+    case #"hash_71c51f24f7f3037d":
       var_bf0df48d = level.var_64d3d5c4;
       break;
-    case # "hash_405e81feb85c5162":
+    case #"hash_405e81feb85c5162":
       var_bf0df48d = level.var_13ebf509;
       break;
-    case # "hash_6fec31948ca2058c":
+    case #"hash_6fec31948ca2058c":
       var_bf0df48d = level.var_1e898375;
       break;
-    case # "hash_28fec49f37a535b9":
+    case #"hash_28fec49f37a535b9":
       var_bf0df48d = level.var_b131552c;
       break;
     default:
@@ -1283,19 +1283,19 @@ function function_2bcfd899(var_f84ece9f, player) {
 function function_a3e4f9a1(var_f84ece9f) {
   if(isDefined(var_f84ece9f)) {
     switch (var_f84ece9f) {
-      case # "hash_76270a10851f51d8":
+      case #"hash_76270a10851f51d8":
         var_bf0df48d = level.var_9ff51719;
         break;
-      case # "hash_71c51f24f7f3037d":
+      case #"hash_71c51f24f7f3037d":
         var_bf0df48d = level.var_64d3d5c4;
         break;
-      case # "hash_405e81feb85c5162":
+      case #"hash_405e81feb85c5162":
         var_bf0df48d = level.var_13ebf509;
         break;
-      case # "hash_6fec31948ca2058c":
+      case #"hash_6fec31948ca2058c":
         var_bf0df48d = level.var_1e898375;
         break;
-      case # "hash_28fec49f37a535b9":
+      case #"hash_28fec49f37a535b9":
         var_bf0df48d = level.var_b131552c;
         break;
       default:
@@ -1493,7 +1493,7 @@ function function_2ced1cf7(params) {
   }
 
   switch (params.name) {
-    case # "hash_6aad5d3866085387":
+    case #"hash_6aad5d3866085387":
       if(int(params.value)) {
         iprintlnbold("<dev string:x2df>");
       } else {
@@ -1501,13 +1501,13 @@ function function_2ced1cf7(params) {
       }
 
       break;
-    case # "hash_82bcb0445b8db9":
+    case #"hash_82bcb0445b8db9":
       foreach(player in getplayers()) {
         player thread collect_intel(params.value);
       }
 
       break;
-    case # "hash_10552bfd7317e7d1":
+    case #"hash_10552bfd7317e7d1":
       foreach(s_intel in level.var_238bd723) {
         if(s_intel.scriptbundlename === params.value) {
           v_pos = s_intel.origin;
@@ -1535,7 +1535,7 @@ function function_2ced1cf7(params) {
       }
 
       break;
-    case # "hash_4bb23fc5179a1812":
+    case #"hash_4bb23fc5179a1812":
       if(function_1a594d26(params.value)) {
         iprintlnbold("<dev string:x349>" + params.value);
       } else {

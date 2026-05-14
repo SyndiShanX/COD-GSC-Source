@@ -55,15 +55,15 @@ function function_44cea26f(str_msg, n_delay = 0) {
 
 function function_30d9d43(str_msg, n_delay) {
   switch (n_delay) {
-    case # "hash_5bad1025f0cf747e":
+    case #"hash_5bad1025f0cf747e":
       level util::clientnotify("term1");
       level util::clientnotify("term2");
       break;
-    case # "hash_7dbdd94b1b1e6829":
+    case #"hash_7dbdd94b1b1e6829":
       playsoundatposition(#"hash_191f00f5f707e4ca", (1616, 741, -270));
       level util::clientnotify("term1");
       break;
-    case # "hash_7dbdd64b1b1e6310":
+    case #"hash_7dbdd64b1b1e6310":
       level util::clientnotify("term2");
       break;
     default:

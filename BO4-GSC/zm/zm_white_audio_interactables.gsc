@@ -669,11 +669,11 @@ function_35e95fba() {
 
 function_74174ce1(str_state) {
   switch (str_state) {
-    case # "screen_off":
+    case #"screen_off":
       self function_35e95fba();
       self showpart("tag_screen_on_play");
       break;
-    case # "screen_on":
+    case #"screen_on":
       self function_35e95fba();
       self showpart("tag_screen_on_noise");
       wait 30;
@@ -683,11 +683,11 @@ function_74174ce1(str_state) {
       self hidepart("tag_screen_on_tone");
       self showpart("tag_screen_off");
       break;
-    case # "screen_on_noise":
+    case #"screen_on_noise":
       self function_35e95fba();
       self showpart("tag_screen_on_noise");
       break;
-    case # "screen_on_tone":
+    case #"screen_on_tone":
       self function_35e95fba();
       self showpart("tag_screen_on_tone");
       break;

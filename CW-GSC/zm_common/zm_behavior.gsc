@@ -2556,8 +2556,8 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
           n_tier = vdir namespace_b61a349a::function_998f8321(boneindex);
 
           switch (weapclass) {
-            case # "launcher":
-            case # "special":
+            case #"launcher":
+            case #"special":
               if(n_tier >= 2 && n_tier < 5) {
                 var_3cddb028 += var_3cddb028 * 0.1;
               } else if(n_tier >= 5) {
@@ -2625,17 +2625,17 @@ function function_c5a2dbe5(entity, weapon, eattacker) {
       n_tier = eattacker namespace_b61a349a::function_998f8321(weapon);
 
       switch (weapclass) {
-        case # "lmg":
-        case # "sniper":
-        case # "launcher":
-        case # "special":
+        case #"lmg":
+        case #"sniper":
+        case #"launcher":
+        case #"special":
           if(n_tier >= 2) {
             damage_mod = n_tier >= 4 ? 1.25 : 1.1;
           }
 
           break;
-        case # "pistol":
-        case # "shotgun":
+        case #"pistol":
+        case #"shotgun":
           if(n_tier >= 3) {
             damage_mod = 1.1;
           }
@@ -2981,12 +2981,12 @@ function function_cea9ab47(entity) {
   self.no_powerups = zm_utility::is_survival();
 
   switch (entity.subarchetype) {
-    case # "zombie_medium_armor":
+    case #"zombie_medium_armor":
       entity attach("c_t9_zmb_zombie_medium_helmet");
       entity attach("c_t9_zmb_zombie_medium_armor");
       self function_2d4173a8(1);
       break;
-    case # "hash_7a778318514578f7":
+    case #"hash_7a778318514578f7":
       if(isDefined(level.var_eea9f85a)) {
         entity attach(level.var_eea9f85a);
       } else {

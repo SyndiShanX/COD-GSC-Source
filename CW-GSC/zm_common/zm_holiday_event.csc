@@ -32,13 +32,13 @@ function function_675f0963(localclientnum) {
 
   if(isDefined(self.archetype) && self.team === "axis") {
     switch (self.archetype) {
-      case # "tormentor":
-      case # "zombie":
-      case # "avogadro":
+      case #"tormentor":
+      case #"zombie":
+      case #"avogadro":
         self.var_6ffc5953 = array::random([#"hash_3b9bc9fd7d3450e8", #"hash_3b9bccfd7d345601", #"hash_3b9bcbfd7d34544e"]);
         self.var_dee85a7a = "j_head";
         break;
-      case # "zombie_dog":
+      case #"zombie_dog":
         if(self.subarchetype === #"hash_2a5479b83161cb35") {
           self.var_6ffc5953 = #"hash_2d158c5af72b951c";
         } else {
@@ -47,27 +47,27 @@ function function_675f0963(localclientnum) {
 
         self.var_dee85a7a = "j_head";
         break;
-      case # "raz":
+      case #"raz":
         self.var_6ffc5953 = #"hash_279687d633e3788b";
         self.var_dee85a7a = "j_head";
         self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
-      case # "mimic":
+      case #"mimic":
         self.var_6ffc5953 = #"hash_577e281da25751ae";
         self.var_dee85a7a = "j_head";
         self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
-      case # "mechz":
+      case #"mechz":
         self.var_6ffc5953 = #"hash_36be37cb09a62a29";
         self.var_dee85a7a = "j_head";
         self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
-      case # "hash_7c0d83ac1e845ac2":
+      case #"hash_7c0d83ac1e845ac2":
         self.var_6ffc5953 = #"hash_208ba71db2a5843e";
         self.var_dee85a7a = "j_head";
         self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
-      case # "soa":
+      case #"soa":
         self.var_6ffc5953 = #"hash_73aa050fa52a8f98";
         self.var_dee85a7a = "j_head";
         wait 1.416;
@@ -138,7 +138,7 @@ function private function_5f56213c(params) {
   }
 
   switch (params.name) {
-    case # "hash_4cf563ada0725f21":
+    case #"hash_4cf563ada0725f21":
       level flag::toggle(#"hash_63e59d16907d2aab");
 
       if(level flag::get(#"hash_63e59d16907d2aab")) {

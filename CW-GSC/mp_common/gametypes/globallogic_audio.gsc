@@ -462,9 +462,9 @@ function function_2685981b() {
   str_gametype = util::get_game_type();
 
   switch (str_gametype) {
-    case # "control":
-    case # "fireteam_dirty_bomb":
-    case # "vip":
+    case #"control":
+    case #"fireteam_dirty_bomb":
+    case #"vip":
       var_5d9df74c = 1;
       break;
   }

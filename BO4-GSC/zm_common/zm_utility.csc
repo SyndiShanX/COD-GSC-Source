@@ -290,13 +290,13 @@ function_467efa7b(var_9f3fb329 = 0) {
   }
 
   switch (self.archetype) {
-    case # "stoker":
-    case # "catalyst":
-    case # "gladiator":
-    case # "nova_crawler":
-    case # "zombie":
-    case # "ghost":
-    case # "brutus":
+    case #"stoker":
+    case #"catalyst":
+    case #"gladiator":
+    case #"nova_crawler":
+    case #"zombie":
+    case #"ghost":
+    case #"brutus":
       if(var_9f3fb329) {
         str_tag = "j_spine4";
       } else {
@@ -304,9 +304,9 @@ function_467efa7b(var_9f3fb329 = 0) {
       }
 
       break;
-    case # "blight_father":
-    case # "tiger":
-    case # "elephant":
+    case #"blight_father":
+    case #"tiger":
+    case #"elephant":
       str_tag = "j_head";
       break;
     default:

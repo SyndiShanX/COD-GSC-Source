@@ -62,27 +62,27 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
 
     if(isDefined(itementry)) {
       switch (itementry.rarity) {
-        case # "none":
+        case #"none":
           break;
-        case # "resource":
+        case #"resource":
           renderbundle = "rob_sr_item_white_dp";
           break;
-        case # "uncommon":
+        case #"uncommon":
           renderbundle = "rob_sr_item_green_dp";
           break;
-        case # "rare":
+        case #"rare":
           renderbundle = "rob_sr_item_blue_dp";
           break;
-        case # "epic":
+        case #"epic":
           renderbundle = "rob_sr_item_purple_dp";
           break;
-        case # "legendary":
+        case #"legendary":
           renderbundle = "rob_sr_item_orange_dp";
           break;
-        case # "ultra":
+        case #"ultra":
           renderbundle = "rob_sr_item_gold_dp";
           break;
-        case # "loadout":
+        case #"loadout":
           renderbundle = "rob_sr_item_red_dp";
           break;
       }
@@ -113,27 +113,27 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
 
   if(isDefined(itementry)) {
     switch (itementry.rarity) {
-      case # "none":
+      case #"none":
         break;
-      case # "resource":
+      case #"resource":
         renderbundle = #"hash_312ceb838675b80";
         break;
-      case # "uncommon":
+      case #"uncommon":
         renderbundle = #"hash_70c807782a37573e";
         break;
-      case # "rare":
+      case #"rare":
         renderbundle = #"hash_5b08235c0b55a003";
         break;
-      case # "epic":
+      case #"epic":
         renderbundle = #"rob_sr_item_purple";
         break;
-      case # "legendary":
+      case #"legendary":
         renderbundle = #"hash_64261dabb4df88cd";
         break;
-      case # "ultra":
+      case #"ultra":
         renderbundle = #"rob_sr_item_gold";
         break;
-      case # "loadout":
+      case #"loadout":
         renderbundle = #"hash_3088f081654a720e";
         break;
     }

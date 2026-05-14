@@ -134,7 +134,7 @@ function_d67bafb5(stub, category) {
   }
 
   switch (category) {
-    case # "lockdown_stub_type_wallbuys":
+    case #"lockdown_stub_type_wallbuys":
       if(!isDefined(level.var_f17bdf53)) {
         level.var_f17bdf53 = [];
       }
@@ -150,7 +150,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case # "lockdown_stub_type_pap":
+    case #"lockdown_stub_type_pap":
       if(!isDefined(level.pap_lockdown_stubs)) {
         level.pap_lockdown_stubs = [];
       }
@@ -166,7 +166,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case # "lockdown_stub_type_perks":
+    case #"lockdown_stub_type_perks":
       if(!isDefined(level.var_9235b607)) {
         level.var_9235b607 = [];
       }
@@ -182,7 +182,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case # "lockdown_stub_type_crafting_tables":
+    case #"lockdown_stub_type_crafting_tables":
       if(!isDefined(level.var_16cfe3ef)) {
         level.var_16cfe3ef = [];
       }
@@ -285,10 +285,10 @@ function_dab6d796(entity, stub) {
     maxs = stub.maxs;
   } else {
     switch (stub.script_unitrigger_type) {
-      case # "unitrigger_box_use":
+      case #"unitrigger_box_use":
         maxs = (stub.script_width / 2, stub.script_height / 2, stub.script_length / 2);
         break;
-      case # "unitrigger_radius_use":
+      case #"unitrigger_radius_use":
         maxs = (stub.radius, stub.script_height / 2, stub.radius);
         break;
     }
@@ -774,19 +774,19 @@ function_d2ce5ac1(entity, &registerlotus_right, range) {
 
 function_22aeb4e9(lockdowntype) {
   switch (lockdowntype) {
-    case # "lockdown_stub_type_pap":
+    case #"lockdown_stub_type_pap":
       return "PAP";
-    case # "lockdown_stub_type_magic_box":
+    case #"lockdown_stub_type_magic_box":
       return "MAGIC_BOX";
-    case # "lockdown_stub_type_boards":
+    case #"lockdown_stub_type_boards":
       return "BOARDS";
-    case # "lockdown_stub_type_wallbuys":
+    case #"lockdown_stub_type_wallbuys":
       return "WALLBUY";
-    case # "lockdown_stub_type_crafting_tables":
+    case #"lockdown_stub_type_crafting_tables":
       return "CRAFTING_TABLE";
-    case # "lockdown_stub_type_perks":
+    case #"lockdown_stub_type_perks":
       return "PERK";
-    case # "lockdown_stub_type_traps":
+    case #"lockdown_stub_type_traps":
       return "TRAP";
   }
 
@@ -923,22 +923,22 @@ function_b5dd9241(stub) {
 
 function_c9105448(entity, stub) {
   switch (stub.lockdowntype) {
-    case # "lockdown_stub_type_boards":
+    case #"lockdown_stub_type_boards":
       return function_809ae5cb(entity, stub);
-    case # "lockdown_stub_type_crafting_tables":
+    case #"lockdown_stub_type_crafting_tables":
       current_zone = entity zm_utility::get_current_zone();
       return function_ea677a9a(entity, stub, current_zone);
-    case # "lockdown_stub_type_magic_box":
+    case #"lockdown_stub_type_magic_box":
       return function_95250640(entity, stub);
-    case # "lockdown_stub_type_pap":
+    case #"lockdown_stub_type_pap":
       return function_790e3eb0(entity, stub);
-    case # "lockdown_stub_type_perks":
+    case #"lockdown_stub_type_perks":
       current_zone = entity zm_utility::get_current_zone();
       return function_fea6f0c0(entity, stub, current_zone);
-    case # "lockdown_stub_type_wallbuys":
+    case #"lockdown_stub_type_wallbuys":
       current_zone = entity zm_utility::get_current_zone();
       return function_d3fbb5ec(entity, stub, current_zone);
-    case # "lockdown_stub_type_traps":
+    case #"lockdown_stub_type_traps":
       return function_387fd27e(entity, stub);
     default:
       return true;
@@ -1116,7 +1116,7 @@ function_946bb116() {
 
 function_2765c63(cmd) {
   switch (cmd) {
-    case # "hash_619d20b906a39230":
+    case #"hash_619d20b906a39230":
       level.var_cd20e41b = !(isDefined(level.var_cd20e41b) && level.var_cd20e41b);
 
       if(isDefined(level.var_cd20e41b) && level.var_cd20e41b) {

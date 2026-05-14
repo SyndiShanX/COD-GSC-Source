@@ -298,13 +298,13 @@ function_eb112701() {
   mdl_stone = undefined;
 
   switch (s_result._notify) {
-    case # "bedroom_charged":
+    case #"bedroom_charged":
       mdl_stone = getent("gazing_stone_main_hall", "targetname");
       break;
-    case # "library_charged":
+    case #"library_charged":
       mdl_stone = getent("gazing_stone_library", "targetname");
       break;
-    case # "cellar_charged":
+    case #"cellar_charged":
       mdl_stone = getent("gazing_stone_cellar", "targetname");
       break;
   }

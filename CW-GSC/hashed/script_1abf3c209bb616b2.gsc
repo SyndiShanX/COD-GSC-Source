@@ -37,15 +37,15 @@ function function_a8f7fa5b() {
     }
 
     switch (ent.script_noteworthy) {
-      case # "trigger_disable":
+      case #"trigger_disable":
         self.trigs[#"hack"] = ent;
         self thread function_2dc6261d();
         break;
-      case # "trigger_damage":
+      case #"trigger_damage":
         self.trigs[#"dmg"] = ent;
         self thread function_47de2d14();
         break;
-      case # "light":
+      case #"light":
         self.lights[self.lights.size] = ent;
         self.var_bb4a3b9 = ent.model;
         ent.idle_fx = spawnfx(level.g_effect[#"alarm_idle"], ent.origin);
@@ -95,7 +95,7 @@ function function_7e4779a4() {
     self notify(state);
 
     switch (state) {
-      case # "disabled":
+      case #"disabled":
         if(self.state == "alarm_on") {
           self thread function_fc2bc4ba();
         }
@@ -105,7 +105,7 @@ function function_7e4779a4() {
         self.active = 0;
         self.trigs[#"hack"] delete();
         break;
-      case # "destroyed":
+      case #"destroyed":
         if(self.state == "alarm_on") {
           self thread function_fc2bc4ba();
         }
@@ -115,7 +115,7 @@ function function_7e4779a4() {
         self.active = 0;
         self.trigs[#"hack"] delete();
         break;
-      case # "alarm_on":
+      case #"alarm_on":
         if(self.state == "alarm_on") {
           break;
         }
@@ -123,7 +123,7 @@ function function_7e4779a4() {
         self.state = state;
         self thread alarm_on();
         break;
-      case # "idle":
+      case #"idle":
         if(self.state == "idle") {
           break;
         }

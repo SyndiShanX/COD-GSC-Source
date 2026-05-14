@@ -33,16 +33,16 @@ init() {
 
 function_65b179f4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (self.model) {
-    case # "c_t8_zmb_concentrated_catalyst_foot":
+    case #"c_t8_zmb_concentrated_catalyst_foot":
       util::playFXOnTag(localclientnum, level._effect[#"hash_619321730ebe1b49"], self, "tag_origin");
       break;
-    case # "c_t8_zmb_concentrated_catalyst_heart":
+    case #"c_t8_zmb_concentrated_catalyst_heart":
       util::playFXOnTag(localclientnum, level._effect[#"hash_3547af665773df36"], self, "tag_origin");
       break;
-    case # "c_t8_zmb_concentrated_catalyst_hand":
+    case #"c_t8_zmb_concentrated_catalyst_hand":
       util::playFXOnTag(localclientnum, level._effect[#"hash_e24c17449fcb2f6"], self, "tag_origin");
       break;
-    case # "c_t8_zmb_concentrated_catalyst_skull":
+    case #"c_t8_zmb_concentrated_catalyst_skull":
       util::playFXOnTag(localclientnum, level._effect[#"hash_39f5cccf6d3254d0"], self, "tag_origin");
       break;
   }

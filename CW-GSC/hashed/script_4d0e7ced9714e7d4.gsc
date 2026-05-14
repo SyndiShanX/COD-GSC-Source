@@ -74,7 +74,7 @@ function private function_5aed5305() {
 function function_6f94ced5(a_ents, str_shot) {
   if(isDefined(level.var_deda09e)) {
     switch (level.var_deda09e) {
-      case # "lazar":
+      case #"lazar":
         if(isDefined(str_shot[#"park"]) && isalive(str_shot[#"park"])) {
           str_shot[#"park"] delete();
         }
@@ -84,7 +84,7 @@ function function_6f94ced5(a_ents, str_shot) {
         }
 
         break;
-      case # "park":
+      case #"park":
         if(isDefined(str_shot[#"lazar"]) && isalive(str_shot[#"lazar"])) {
           str_shot[#"lazar"] delete();
         }

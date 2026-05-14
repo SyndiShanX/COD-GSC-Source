@@ -194,12 +194,12 @@ function private locomotionshouldlooponstairs(behaviortreeentity) {
 
   if(direction == "staircase_up") {
     switch (exittype) {
-      case # "staircase_up_exit_l_3_stairs":
-      case # "staircase_up_exit_r_3_stairs":
+      case #"staircase_up_exit_l_3_stairs":
+      case #"staircase_up_exit_r_3_stairs":
         numoutsteps = 3;
         break;
-      case # "staircase_up_exit_r_4_stairs":
-      case # "staircase_up_exit_l_4_stairs":
+      case #"staircase_up_exit_r_4_stairs":
+      case #"staircase_up_exit_l_4_stairs":
         numoutsteps = 4;
         break;
     }

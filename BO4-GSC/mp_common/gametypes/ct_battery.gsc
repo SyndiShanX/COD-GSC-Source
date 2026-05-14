@@ -234,9 +234,9 @@ spawn_attack_wave(n_count, var_2c6e8cfe = 0, a_parms, var_1b783b8b = 0) {
 
 registerstart_killstreak_collision_rounds(s_veh) {
   switch (s_veh.script_noteworthy) {
-    case # "ct_mini_quadtank":
+    case #"ct_mini_quadtank":
       return s_veh function_4c8f915a("enemy_mini_quadtank", #"axis");
-    case # "ct_attack_helicopter":
+    case #"ct_attack_helicopter":
       return s_veh spawn_attack_helicopter("enemy_attack_chopper", #"axis");
   }
 }
@@ -1094,7 +1094,7 @@ devgui_ct_battery() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "hash_3a7f84f30eb3613e":
+      case #"hash_3a7f84f30eb3613e":
         if(isDefined(level.var_ae0bbaac) && level.var_ae0bbaac.size > 0) {
           while(level.var_ae0bbaac.size > 0) {
             var_c95e2891 = level.var_ae0bbaac[0];
@@ -1108,15 +1108,15 @@ devgui_ct_battery() {
         }
 
         break;
-      case # "spawn_chopper":
+      case #"spawn_chopper":
         a_s_chopper = struct::get_array("<dev string:x309>", "<dev string:x320>");
         registerstart_killstreak_collision_rounds(a_s_chopper[0]);
         break;
-      case # "hash_3336321eb0a42dd":
+      case #"hash_3336321eb0a42dd":
         var_e62f2b3d = struct::get_array("<dev string:x334>", "<dev string:x320>");
         e_player spawn_attack_wave(var_e62f2b3d.size, 1);
         break;
-      case # "hash_20f84a451b85817":
+      case #"hash_20f84a451b85817":
         if(level flag::get("<dev string:x6d>")) {
           iprintlnbold("<dev string:x347>");
           level flag::clear("<dev string:x6d>");
@@ -1126,7 +1126,7 @@ devgui_ct_battery() {
         }
 
         break;
-      case # "keylines_on":
+      case #"keylines_on":
         if(!(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe)) {
           level.var_d6d98fbe = 1;
 
@@ -1146,7 +1146,7 @@ devgui_ct_battery() {
         }
 
         break;
-      case # "keylines_off":
+      case #"keylines_off":
         if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
           level.var_d6d98fbe = 0;
 

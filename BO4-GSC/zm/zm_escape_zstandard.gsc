@@ -203,12 +203,12 @@ defend_areas() {
   str_next_defend = array::random(array(#"cd_street", #"times_square", #"michigan_avenue", #"cafeteria"));
 
   switch (str_next_defend) {
-    case # "cd_street":
-    case # "michigan_avenue":
-    case # "times_square":
+    case #"cd_street":
+    case #"michigan_avenue":
+    case #"times_square":
       var_420e4589 = array("cellblock_east_door", "cellblock_start_door");
       break;
-    case # "cafeteria":
+    case #"cafeteria":
       var_420e4589 = array("cellblock_east_door", "cellblock_start_door", "door_cafeteria_to_times_square");
       break;
   }
@@ -463,55 +463,55 @@ function_b356f6ae() {
 
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
-        case # "activate_west_side_exterior":
+        case #"activate_west_side_exterior":
           var_ff20f7d3 = #"hash_48b098165e01518e";
           break;
-        case # "activate_new_industries":
+        case #"activate_new_industries":
           var_ff20f7d3 = #"hash_50e05912992c7bc3";
           break;
-        case # "activate_west_side_exterior_lower":
+        case #"activate_west_side_exterior_lower":
           var_ff20f7d3 = #"hash_4ddad8473f8f44cd";
           break;
-        case # "activate_west_side_exterior_tunnel":
+        case #"activate_west_side_exterior_tunnel":
           var_ff20f7d3 = #"hash_3f684b6336ac27e7";
           break;
-        case # "activate_cellblock_ca":
+        case #"activate_cellblock_ca":
           var_ff20f7d3 = #"hash_4766f082bbf2cbf0";
           break;
-        case # "activate_cafeteria":
+        case #"activate_cafeteria":
           var_ff20f7d3 = #"hash_4f024ba2f12a1e8";
           break;
-        case # "activate_infirmary":
+        case #"activate_infirmary":
           var_ff20f7d3 = #"hash_2525f49ae61a9065";
           break;
-        case # "activate_cellblock_infirmary":
+        case #"activate_cellblock_infirmary":
           var_ff20f7d3 = #"hash_18077f7c3b49f099";
           break;
-        case # "activate_wa_h":
+        case #"activate_wa_h":
           var_ff20f7d3 = #"hash_a15209027c6a477";
           break;
-        case # "activate_cellblock_library":
+        case #"activate_cellblock_library":
           var_ff20f7d3 = #"hash_2d2fbe4505249056";
           break;
-        case # "activate_cellblock_gondola":
+        case #"activate_cellblock_gondola":
           var_ff20f7d3 = #"hash_7a8ad982bdebf31";
           break;
-        case # "activate_basement_gondola":
+        case #"activate_basement_gondola":
           var_ff20f7d3 = #"hash_50679632c0929ef5";
           break;
-        case # "activate_basement_building":
+        case #"activate_basement_building":
           var_ff20f7d3 = #"hash_7b6541d8fb121048";
           break;
-        case # "activate_dock_sally":
+        case #"activate_dock_sally":
           var_ff20f7d3 = #"hash_22b9577531ef397d";
           break;
-        case # "activate_citadel_stair":
+        case #"activate_citadel_stair":
           var_ff20f7d3 = #"hash_4febfe746d3a53b1";
           break;
-        case # "activate_cellblock_citadel":
+        case #"activate_cellblock_citadel":
           var_ff20f7d3 = #"hash_11d4351c92a0261";
           break;
-        case # "activate_shower_citadel":
+        case #"activate_shower_citadel":
           var_ff20f7d3 = #"hash_41102abe52b5027";
           break;
         default:

@@ -368,7 +368,7 @@ function function_b0952594(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
       switch (item.itementry.name) {
-        case # "ww_mega_barrel_fullauto_copycat_t9_item_sr":
+        case #"ww_mega_barrel_fullauto_copycat_t9_item_sr":
 
           iprintlnbold("<dev string:x7f>");
 

@@ -579,10 +579,10 @@ function_6cbea0ea() {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case # "crouch":
+      case #"crouch":
         self setstance("stand");
         break;
-      case # "prone":
+      case #"prone":
         self setstance("stand");
         break;
     }

@@ -269,67 +269,67 @@ devgui_wz_ai() {
       players[0] givestartammo(weapon);
     } else {
       switch (cmd) {
-        case # "debug_spawn_ai":
+        case #"debug_spawn_ai":
           spawn_a_zombie();
           break;
-        case # "debug_on":
+        case #"debug_on":
           level.var_e066667d = 1;
           break;
-        case # "debug_off":
+        case #"debug_off":
           level.var_e066667d = 0;
           break;
-        case # "debug_zone_on":
+        case #"debug_zone_on":
           level.var_e12ea40c = 1;
           break;
-        case # "debug_zone_off":
+        case #"debug_zone_off":
           level.var_e12ea40c = 0;
           break;
-        case # "instakill_on":
+        case #"instakill_on":
           level.var_85a39c96 = 1;
           break;
-        case # "instakill_off":
+        case #"instakill_off":
           level.var_85a39c96 = 0;
           break;
-        case # "hash_4ed816315358d362":
+        case #"hash_4ed816315358d362":
           level.var_e649db79 = 1;
           break;
-        case # "hash_521be9d0a005a914":
+        case #"hash_521be9d0a005a914":
           level.var_e649db79 = 0;
           break;
-        case # "hash_c015abbb44bc09d":
+        case #"hash_c015abbb44bc09d":
           level.var_76325c03 = 1;
           break;
-        case # "hash_31f2f7f35ca1d139":
+        case #"hash_31f2f7f35ca1d139":
           level.var_76325c03 = 0;
           break;
-        case # "hash_7c3e7cf0cb94bbda":
+        case #"hash_7c3e7cf0cb94bbda":
           level.var_5a8c9c14 = 1;
           break;
-        case # "hash_32ced929eda3e72c":
+        case #"hash_32ced929eda3e72c":
           level.var_5a8c9c14 = 0;
           break;
-        case # "hash_788a81597d5838b8":
+        case #"hash_788a81597d5838b8":
           level.var_c2c5f852 = 1;
           break;
-        case # "hash_2b77790ffcd187f2":
+        case #"hash_2b77790ffcd187f2":
           level.var_c2c5f852 = 0;
           break;
-        case # "event1_on":
+        case #"event1_on":
           level.var_add70a3e = 1;
           break;
-        case # "event1_off":
+        case #"event1_off":
           level.var_add70a3e = 0;
           break;
-        case # "hash_7d71521eb78e5a1e":
+        case #"hash_7d71521eb78e5a1e":
           level.var_3140c814 = 1;
           break;
-        case # "hash_35cdd231e6cca0a0":
+        case #"hash_35cdd231e6cca0a0":
           level.var_3140c814 = 0;
           break;
-        case # "hash_11b3aaf9fb27ee13":
+        case #"hash_11b3aaf9fb27ee13":
           level.var_5e8121a = 1;
           break;
-        case # "hash_3c54ebc5c4f0dd57":
+        case #"hash_3c54ebc5c4f0dd57":
           level.var_5e8121a = 0;
           break;
       }

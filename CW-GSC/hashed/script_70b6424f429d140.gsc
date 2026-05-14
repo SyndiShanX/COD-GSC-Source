@@ -629,12 +629,12 @@ function function_ccfab96() {
     waitresult = self waittill(["head_swap_none", "head_swap_normal", "head_swap_flappy"]);
 
     switch (waitresult._notify) {
-      case # "head_swap_none":
+      case #"head_swap_none":
         self detach(curr);
         curr = var_7e34c54c;
         self attach(curr);
         break;
-      case # "head_swap_normal":
+      case #"head_swap_normal":
         var_35d2e273++;
 
         if(var_35d2e273 == 1) {
@@ -652,7 +652,7 @@ function function_ccfab96() {
         }
 
         break;
-      case # "head_swap_flappy":
+      case #"head_swap_flappy":
         if(curr != flappy_head) {
           self detach(curr);
           curr = flappy_head;

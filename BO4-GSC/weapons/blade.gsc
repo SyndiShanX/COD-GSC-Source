@@ -98,10 +98,10 @@ function_c5c8d661(weapon) {
     ret = self waittill(#"swimming_begin", #"swimming_end");
 
     switch (ret._notify) {
-      case # "swimming_begin":
+      case #"swimming_begin":
         self function_d6805ff5(weapon);
         break;
-      case # "swimming_end":
+      case #"swimming_end":
         self function_efa90c79(weapon);
         break;
     }

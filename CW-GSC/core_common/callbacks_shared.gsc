@@ -1138,22 +1138,22 @@ function event_handler[event_195cc461] function_52d32e5b(eventstruct) {
 
   if(is_true(eventstruct.enable) && isDefined(player)) {
     switch (eventstruct.type) {
-      case # "hash_d85822f3fe3ff26":
+      case #"hash_d85822f3fe3ff26":
         actor lookatentity(player, 0, 0, 0, eventstruct.blend, eventstruct.weight);
         break;
-      case # "head_torso":
+      case #"head_torso":
         actor lookatentity(player, 0, 0, 1, eventstruct.blend, eventstruct.weight);
         break;
-      case # "head":
+      case #"head":
         actor lookatentity(player, 1, 0, 1, eventstruct.blend, eventstruct.weight);
         break;
-      case # "eyes":
+      case #"eyes":
         actor lookatentity(player, 1, 1, 0, eventstruct.blend, eventstruct.weight);
         break;
-      case # "aim":
+      case #"aim":
         actor aimatentityik(player, eventstruct.blend, eventstruct.weight);
         break;
-      case # "head_eyes":
+      case #"head_eyes":
       default:
         actor lookatentity(player, 1, 0, 0, eventstruct.blend, eventstruct.weight);
         break;

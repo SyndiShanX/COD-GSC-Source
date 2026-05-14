@@ -161,9 +161,9 @@ function function_ddce43b3(var_5f654ba8) {
 
 function function_bf9f3492(var_d4c489c0) {
   switch (var_d4c489c0) {
-    case # "primarygrenade":
+    case #"primarygrenade":
       return # "hash_6148898d5ac59179";
-    case # "secondarygrenade":
+    case #"secondarygrenade":
       return # "hash_777a08527f2da4e1";
   }
 
@@ -201,7 +201,7 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
   v_ang_offset = s_info.angles;
 
   switch (var_d4c489c0) {
-    case # "primary":
+    case #"primary":
     default:
       if(function_cc770c92(var_1d35315f)) {
         if(function_4dcbc16b(localclientnum, var_d4c489c0, var_1d35315f)) {
@@ -214,7 +214,7 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
       }
 
       break;
-    case # "secondary":
+    case #"secondary":
       if(function_cc770c92(var_1d35315f)) {
         s_location = level.weapon_position[#"secondary_oversized"];
       } else {
@@ -222,19 +222,19 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
       }
 
       break;
-    case # "primarygrenade":
+    case #"primarygrenade":
       s_location = level.weapon_position[#"primarygrenade"];
       break;
-    case # "hash_6148898d5ac59179":
+    case #"hash_6148898d5ac59179":
       s_location = level.weapon_position[#"hash_6148898d5ac59179"];
       break;
-    case # "secondarygrenade":
+    case #"secondarygrenade":
       s_location = level.weapon_position[#"secondarygrenade"];
       break;
-    case # "hash_777a08527f2da4e1":
+    case #"hash_777a08527f2da4e1":
       s_location = level.weapon_position[#"hash_777a08527f2da4e1"];
       break;
-    case # "specialgrenade":
+    case #"specialgrenade":
       if(sessionmodeiszombiesgame()) {
         s_location = level.weapon_position[#"specialgrenade_zm"];
       } else {
@@ -242,40 +242,40 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
       }
 
       break;
-    case # "talent":
+    case #"talent":
       s_location = level.weapon_position[#"perks_zm"];
       break;
-    case # "specialgrenade_canister":
+    case #"specialgrenade_canister":
       s_location = level.weapon_position[#"canister_zm"];
       break;
-    case # "specialty":
+    case #"specialty":
       s_location = level.weapon_position[#"ammo_zm"];
       break;
-    case # "weaponcategories":
+    case #"weaponcategories":
       s_location = level.weapon_position[#"weapon_categories_zm"];
       break;
-    case # "talent3":
-    case # "talent2":
-    case # "talent1":
-    case # "talent6":
-    case # "talent5":
-    case # "talent4":
-    case # "talents":
-    case # "perk1":
-    case # "perk3":
-    case # "perk2":
+    case #"talent3":
+    case #"talent2":
+    case #"talent1":
+    case #"talent6":
+    case #"talent5":
+    case #"talent4":
+    case #"talents":
+    case #"perk1":
+    case #"perk3":
+    case #"perk2":
       s_location = function_3ca8f346(var_85d87aca, var_d4c489c0, localclientnum);
       break;
-    case # "bonuscard1":
+    case #"bonuscard1":
       s_location = level.weapon_position[#"bonuscard1"];
       break;
-    case # "gunsmith":
-    case # "charm":
-    case # "hash_2fda3f64c5caa89e":
-    case # "stickers":
+    case #"gunsmith":
+    case #"charm":
+    case #"hash_2fda3f64c5caa89e":
+    case #"stickers":
       s_location = level.weapon_position[#"gunsmith"];
       break;
-    case # "wrist_accessory":
+    case #"wrist_accessory":
       s_location = level.weapon_position[#"wrist_accessory"];
       break;
   }
@@ -289,7 +289,7 @@ function function_1cd1374d(var_1d35315f, var_d4c489c0 = #"primary", var_e81ceea 
 
 function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_info) {
   switch (var_8a4ba442) {
-    case # "primary":
+    case #"primary":
       var_35be18f5 = getEntArray(localclientnum, "hooks_primary_weapon", "script_noteworthy");
 
       foreach(var_bc94f6f in var_35be18f5) {
@@ -299,19 +299,19 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
 
         if(isDefined(var_bc94f6f.targetname)) {
           switch (var_bc94f6f.targetname) {
-            case # "hooks_primary_weapon_hook_left":
+            case #"hooks_primary_weapon_hook_left":
               var_bc94f6f.origin = var_bc94f6f.var_a4fadd7e + s_info.var_a5946026;
               break;
-            case # "hooks_primary_weapon_hook_right":
+            case #"hooks_primary_weapon_hook_right":
               var_bc94f6f.origin = var_bc94f6f.var_a4fadd7e + s_info.var_36859b17;
               break;
-            case # "hooks_primary_weapon_middle":
+            case #"hooks_primary_weapon_middle":
               var_bc94f6f.origin = var_bc94f6f.var_a4fadd7e + s_info.var_a7adf514;
               break;
-            case # "hooks_primary_weapon_plate_left":
+            case #"hooks_primary_weapon_plate_left":
               var_bc94f6f.origin = var_bc94f6f.var_a4fadd7e + (0, s_info.var_a5946026[1], s_info.var_a5946026[2]);
               break;
-            case # "hooks_primary_weapon_plate_right":
+            case #"hooks_primary_weapon_plate_right":
               var_bc94f6f.origin = var_bc94f6f.var_a4fadd7e + (0, s_info.var_36859b17[1], s_info.var_36859b17[2]);
               break;
           }
@@ -337,10 +337,10 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
       }
 
       break;
-    case # "secondary":
+    case #"secondary":
       function_3a0a9f01(localclientnum, s_info, b_show, weapon, var_8a4ba442);
       break;
-    case # "primarygrenade":
+    case #"primarygrenade":
       var_f33b540a = getEntArray(localclientnum, "shelves_primary_grenade", "script_noteworthy");
 
       foreach(var_6f552f36 in var_f33b540a) {
@@ -350,19 +350,19 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
 
         if(isDefined(var_6f552f36.targetname)) {
           switch (var_6f552f36.targetname) {
-            case # "hooks_primary_grenade_hook_left":
+            case #"hooks_primary_grenade_hook_left":
               var_6f552f36.origin = var_6f552f36.var_a4fadd7e + s_info.var_a5946026;
               break;
-            case # "hooks_primary_grenade_hook_right":
+            case #"hooks_primary_grenade_hook_right":
               var_6f552f36.origin = var_6f552f36.var_a4fadd7e + s_info.var_36859b17;
               break;
-            case # "shelf_primary_grenade_middle":
+            case #"shelf_primary_grenade_middle":
               var_6f552f36.origin = var_6f552f36.var_a4fadd7e + s_info.var_a7adf514;
               break;
-            case # "hooks_primary_grenade_plate_left":
+            case #"hooks_primary_grenade_plate_left":
               var_6f552f36.origin = var_6f552f36.var_a4fadd7e + (0, s_info.var_a5946026[1], s_info.var_a5946026[2]);
               break;
-            case # "hooks_primary_grenade_plate_right":
+            case #"hooks_primary_grenade_plate_right":
               var_6f552f36.origin = var_6f552f36.var_a4fadd7e + (0, s_info.var_36859b17[1], s_info.var_36859b17[2]);
               break;
           }
@@ -388,7 +388,7 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
       }
 
       break;
-    case # "secondarygrenade":
+    case #"secondarygrenade":
       var_b74cf891 = getEntArray(localclientnum, "shelves_secondary_grenade", "script_noteworthy");
 
       foreach(var_3878ec49 in var_b74cf891) {
@@ -409,34 +409,34 @@ function function_3de4843(localclientnum, var_8a4ba442, b_show = 0, weapon, s_in
       }
 
       break;
-    case # "hash_6148898d5ac59179":
+    case #"hash_6148898d5ac59179":
       break;
-    case # "hash_777a08527f2da4e1":
+    case #"hash_777a08527f2da4e1":
       break;
-    case # "specialgrenade":
+    case #"specialgrenade":
       if(sessionmodeiszombiesgame()) {
         function_3a0a9f01(localclientnum, s_info, b_show, weapon, var_8a4ba442);
       }
 
       break;
-    case # "talent3":
-    case # "talent2":
-    case # "talent1":
-    case # "talent6":
-    case # "talent5":
-    case # "talent4":
-    case # "talents":
-    case # "perk5":
-    case # "perk4":
-    case # "perk6":
-    case # "perk1":
-    case # "perk3":
-    case # "perk2":
+    case #"talent3":
+    case #"talent2":
+    case #"talent1":
+    case #"talent6":
+    case #"talent5":
+    case #"talent4":
+    case #"talents":
+    case #"perk5":
+    case #"perk4":
+    case #"perk6":
+    case #"perk1":
+    case #"perk3":
+    case #"perk2":
       break;
-    case # "bonuscard1":
+    case #"bonuscard1":
       break;
-    case # "gunsmith":
-    case # "hash_2fda3f64c5caa89e":
+    case #"gunsmith":
+    case #"hash_2fda3f64c5caa89e":
       break;
   }
 }
@@ -451,19 +451,19 @@ function function_3a0a9f01(localclientnum, s_info, b_show = 0, weapon, var_8a4ba
 
     if(isDefined(var_72ff5fa4.targetname)) {
       switch (var_72ff5fa4.targetname) {
-        case # "hooks_secondary_weapon_hook_left":
+        case #"hooks_secondary_weapon_hook_left":
           var_72ff5fa4.origin = var_72ff5fa4.var_a4fadd7e + s_info.var_a5946026;
           break;
-        case # "hooks_secondary_weapon_middle":
+        case #"hooks_secondary_weapon_middle":
           var_72ff5fa4.origin = var_72ff5fa4.var_a4fadd7e + s_info.var_a7adf514;
           break;
-        case # "hooks_secondary_weapon_hook_right":
+        case #"hooks_secondary_weapon_hook_right":
           var_72ff5fa4.origin = var_72ff5fa4.var_a4fadd7e + s_info.var_36859b17;
           break;
-        case # "hooks_secondary_weapon_plate_left":
+        case #"hooks_secondary_weapon_plate_left":
           var_72ff5fa4.origin = var_72ff5fa4.var_a4fadd7e + (0, s_info.var_a5946026[1], s_info.var_a5946026[2]);
           break;
-        case # "hooks_secondary_weapon_plate_right":
+        case #"hooks_secondary_weapon_plate_right":
           var_72ff5fa4.origin = var_72ff5fa4.var_a4fadd7e + (0, s_info.var_36859b17[1], s_info.var_36859b17[2]);
           break;
       }
@@ -548,26 +548,26 @@ function function_13c748a(localclientnum) {
 
 function function_4aa0a8f6(var_ccf52c44) {
   switch (var_ccf52c44) {
-    case # "primary":
-    case # "specialgrenade":
-    case # "secondary":
-    case # "primarygrenade":
-    case # "secondarygrenade":
+    case #"primary":
+    case #"specialgrenade":
+    case #"secondary":
+    case #"primarygrenade":
+    case #"secondarygrenade":
       var_d8ebd573 = 1;
       break;
-    case # "talent3":
-    case # "talent2":
-    case # "talent1":
-    case # "talent6":
-    case # "talent5":
-    case # "talent4":
-    case # "talent":
+    case #"talent3":
+    case #"talent2":
+    case #"talent1":
+    case #"talent6":
+    case #"talent5":
+    case #"talent4":
+    case #"talent":
       var_d8ebd573 = 5;
       break;
-    case # "bonuscard1":
+    case #"bonuscard1":
       var_d8ebd573 = 6;
       break;
-    case # "specialty":
+    case #"specialty":
       var_d8ebd573 = 3;
     default:
       var_d8ebd573 = 0;
@@ -600,13 +600,13 @@ function function_902cfbde(var_85d87aca, var_8a4ba442) {
   }
 
   switch (var_8a4ba442) {
-    case # "talent4":
+    case #"talent4":
       var_8a4ba442 = #"talent1";
       break;
-    case # "talent5":
+    case #"talent5":
       var_8a4ba442 = #"talent2";
       break;
-    case # "talent6":
+    case #"talent6":
       var_8a4ba442 = #"talent3";
       break;
   }
@@ -637,26 +637,26 @@ function function_60663bf8(var_85d87aca) {
 function function_3ca8f346(var_85d87aca, var_c7d83c08, localclientnum) {
   if(var_c7d83c08 === #"talents" || function_902cfbde(var_85d87aca, var_c7d83c08)) {
     switch (var_c7d83c08) {
-      case # "talent1":
-      case # "talents":
-      case # "perk1":
+      case #"talent1":
+      case #"talents":
+      case #"perk1":
         s_location = level.weapon_position[#"perk1"];
         break;
-      case # "talent4":
+      case #"talent4":
         s_location = level.weapon_position[#"perk4"];
         break;
-      case # "talent2":
-      case # "perk2":
+      case #"talent2":
+      case #"perk2":
         s_location = level.weapon_position[#"perk2"];
         break;
-      case # "talent5":
+      case #"talent5":
         s_location = level.weapon_position[#"perk5"];
         break;
-      case # "talent3":
-      case # "perk3":
+      case #"talent3":
+      case #"perk3":
         s_location = level.weapon_position[#"perk3"];
         break;
-      case # "talent6":
+      case #"talent6":
         s_location = level.weapon_position[#"perk6"];
         break;
     }
@@ -767,26 +767,26 @@ function function_3ca8f346(var_85d87aca, var_c7d83c08, localclientnum) {
 
   if(!isDefined(s_location)) {
     switch (var_c7d83c08) {
-      case # "talent1":
-      case # "talents":
-      case # "perk1":
+      case #"talent1":
+      case #"talents":
+      case #"perk1":
         s_location = level.weapon_position[#"perk1"];
         break;
-      case # "talent4":
+      case #"talent4":
         s_location = level.weapon_position[#"perk4"];
         break;
-      case # "talent2":
-      case # "perk2":
+      case #"talent2":
+      case #"perk2":
         s_location = level.weapon_position[#"perk2"];
         break;
-      case # "talent5":
+      case #"talent5":
         s_location = level.weapon_position[#"perk5"];
         break;
-      case # "talent3":
-      case # "perk3":
+      case #"talent3":
+      case #"perk3":
         s_location = level.weapon_position[#"perk3"];
         break;
-      case # "talent6":
+      case #"talent6":
         s_location = level.weapon_position[#"perk6"];
         break;
     }
@@ -935,12 +935,12 @@ function function_370fbe8f(localclientnum, fxname) {
 
 function private function_eeb5c6a3(localclientnum, var_73cd9b6e, var_8a4ba442) {
   switch (var_8a4ba442) {
-    case # "talent":
+    case #"talent":
       model_name = #"wpn_t9_zm_perk_can_juggernog_world";
       var_95970e62 = 0.65;
       weapon = level.weaponnone;
       break;
-    case # "specialgrenade_canister":
+    case #"specialgrenade_canister":
       itemindex = getloadoutitem(localclientnum, var_73cd9b6e, #"specialgrenade");
       var_82e23366 = getunlockableiteminfofromindex(itemindex, function_4aa0a8f6(#"specialgrenade"));
 
@@ -953,12 +953,12 @@ function private function_eeb5c6a3(localclientnum, var_73cd9b6e, var_8a4ba442) {
       model_name = #"";
       var_95970e62 = 0.9;
       break;
-    case # "specialty":
+    case #"specialty":
       model_name = #"attach_t9_ammo_mod_napalm_burst_view";
       var_95970e62 = 1.8;
       weapon = level.weaponnone;
       break;
-    case # "weaponcategories":
+    case #"weaponcategories":
       model_name = #"hash_3935e5f9f62638a9";
       var_95970e62 = 1;
       weapon = level.weaponnone;
@@ -1058,19 +1058,19 @@ function function_f1216c02(localclientnum, var_8a4ba442, str_rarity) {
   if(isDefined(level.var_5caba701)) {
     if(var_8a4ba442 === #"hash_2fda3f64c5caa89e" && isDefined(str_rarity)) {
       switch (str_rarity) {
-        case # "common":
+        case #"common":
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_common");
           break;
-        case # "rare":
+        case #"rare":
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_rare");
           break;
-        case # "epic":
+        case #"epic":
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_epic");
           break;
-        case # "legendary":
+        case #"legendary":
           level.var_5caba701 setModel(#"p9_core_frontend_weapon_inspect_legendary");
           break;
-        case # "ultra":
+        case #"ultra":
           level.var_5caba701 setModel(#"hash_6e1193289746f2cc");
           break;
         default:
@@ -1452,7 +1452,7 @@ function function_9aba5d9(localclientnum, var_c70fb4f3, var_297c7602, var_2463e2
 
   if(var_297c7602 === var_2463e2c7) {
     switch (var_2463e2c7) {
-      case # "talent1":
+      case #"talent1":
         var_db816009 = level.weapon_script_model[localclientnum][#"talent2"];
 
         if(isDefined(var_db816009) && function_9b2f2702(localclientnum, #"talent1") <= 1 && function_3ca8f346(var_db816009.model, var_297c7602, localclientnum) === level.weapon_position[#"perk1"]) {
@@ -1466,7 +1466,7 @@ function function_9aba5d9(localclientnum, var_c70fb4f3, var_297c7602, var_2463e2
         }
 
         break;
-      case # "talent2":
+      case #"talent2":
         var_db816009 = level.weapon_script_model[localclientnum][#"talent1"];
 
         if(isDefined(var_db816009) && function_9b2f2702(localclientnum, #"talent2") <= 1 && function_3ca8f346(var_db816009.model, var_297c7602, localclientnum) === level.weapon_position[#"perk2"]) {
@@ -1480,7 +1480,7 @@ function function_9aba5d9(localclientnum, var_c70fb4f3, var_297c7602, var_2463e2
         }
 
         break;
-      case # "talent3":
+      case #"talent3":
         var_db816009 = level.weapon_script_model[localclientnum][#"talent1"];
 
         if(isDefined(var_db816009) && function_9b2f2702(localclientnum, #"talent3") <= 1 && function_3ca8f346(var_db816009.model, var_297c7602, localclientnum) === level.weapon_position[#"perk3"]) {
@@ -1551,7 +1551,7 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
     }
 
     switch (var_8a4ba442) {
-      case # "primary":
+      case #"primary":
         if(function_cc770c92(weapon)) {
           if(function_4dcbc16b(localclientnum, var_8a4ba442, weapon)) {
             var_23f6420e = "primary";
@@ -1563,7 +1563,7 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "secondary":
+      case #"secondary":
         if(function_cc770c92(weapon)) {
           var_23f6420e = "secondary_alt";
         } else {
@@ -1571,16 +1571,16 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "primarygrenade":
+      case #"primarygrenade":
         var_23f6420e = "lethal";
         break;
-      case # "secondarygrenade":
+      case #"secondarygrenade":
         var_23f6420e = "tactical";
         break;
-      case # "tacticalgear":
+      case #"tacticalgear":
         var_23f6420e = "tactical";
         break;
-      case # "specialgrenade":
+      case #"specialgrenade":
         if(sessionmodeiszombiesgame()) {
           var_23f6420e = "fieldupgrade_zm";
         } else {
@@ -1588,23 +1588,23 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "talent":
+      case #"talent":
         var_23f6420e = "perks_zm";
         break;
-      case # "specialgrenade_canister":
+      case #"specialgrenade_canister":
         var_23f6420e = "canister_zm";
         break;
-      case # "specialty":
+      case #"specialty":
         var_23f6420e = "ammo_zm";
         break;
-      case # "weaponcategories":
+      case #"weaponcategories":
         var_23f6420e = "weapon_categories_zm";
         break;
-      case # "talents":
+      case #"talents":
         var_23f6420e = "perks";
         break;
-      case # "talent1":
-      case # "talent4":
+      case #"talent1":
+      case #"talent4":
         if(is_true(level.var_311aa2a1)) {
           var_e79e336c = function_9b2f2702(localclientnum, var_8a4ba442);
 
@@ -1628,8 +1628,8 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "talent2":
-      case # "talent5":
+      case #"talent2":
+      case #"talent5":
         if(is_true(level.var_311aa2a1)) {
           var_e79e336c = function_9b2f2702(localclientnum, var_8a4ba442);
 
@@ -1653,8 +1653,8 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "talent3":
-      case # "talent6":
+      case #"talent3":
+      case #"talent6":
         if(is_true(level.var_311aa2a1)) {
           var_e79e336c = function_9b2f2702(localclientnum, var_8a4ba442);
 
@@ -1678,10 +1678,10 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         }
 
         break;
-      case # "bonuscard1":
+      case #"bonuscard1":
         var_23f6420e = "wildcard";
         break;
-      case # "wrist_accessory":
+      case #"wrist_accessory":
         var_23f6420e = "wrist_accessories";
         break;
       default:
@@ -1754,28 +1754,28 @@ function function_f87ec9a8(var_e81ceea = "", str_weapon, var_f2af4049 = 0, var_2
     }
 
     switch (var_e81ceea) {
-      case # "optic":
+      case #"optic":
         var_7dae7df8 = "optic";
         break;
-      case # "muzzle":
+      case #"muzzle":
         var_7dae7df8 = "muzzle";
         break;
-      case # "barrel":
+      case #"barrel":
         var_7dae7df8 = "barrel";
         break;
-      case # "underbarrel":
+      case #"underbarrel":
         var_7dae7df8 = "underbarrel";
         break;
-      case # "body":
+      case #"body":
         var_7dae7df8 = "body";
         break;
-      case # "stock":
+      case #"stock":
         var_7dae7df8 = "stock";
         break;
-      case # "magazine":
+      case #"magazine":
         var_7dae7df8 = "magazine";
         break;
-      case # "handle":
+      case #"handle":
         var_7dae7df8 = "handle";
         break;
       default:
@@ -2314,19 +2314,19 @@ function function_7164981d(localclientnum) {
   self playrenderoverridebundle(self.var_5f9b027b);
 
   switch (self.model) {
-    case # "attach_t9_ammo_mod_brain_rot_view":
+    case #"attach_t9_ammo_mod_brain_rot_view":
       self.var_635b9513 = util::playFXOnTag(localclientnum, #"hash_6503886d9ce9b3c3", self, "tag_fx1");
       break;
-    case # "attach_t9_ammo_mod_cryo_freeze_view":
+    case #"attach_t9_ammo_mod_cryo_freeze_view":
       self.var_635b9513 = util::playFXOnTag(localclientnum, #"hash_2a75b9442177bdb5", self, "tag_fx1");
       break;
-    case # "attach_t9_ammo_mod_dead_wire_view":
+    case #"attach_t9_ammo_mod_dead_wire_view":
       self.var_635b9513 = util::playFXOnTag(localclientnum, #"hash_67f713a84c242ff3", self, "tag_fx1");
       break;
-    case # "attach_t9_ammo_mod_napalm_burst_view":
+    case #"attach_t9_ammo_mod_napalm_burst_view":
       self.var_635b9513 = util::playFXOnTag(localclientnum, #"hash_4a932c53210cf7b6", self, "tag_fx1");
       break;
-    case # "attach_t9_ammo_mod_shatter_blast_view":
+    case #"attach_t9_ammo_mod_shatter_blast_view":
       self.var_635b9513 = util::playFXOnTag(localclientnum, #"hash_5779b89695d2c70a", self, "tag_fx1");
       break;
   }
@@ -2348,19 +2348,19 @@ function function_7a6db01f(localclientnum, str_ammo_mod) {
   n_tier = 0;
 
   switch (str_ammo_mod) {
-    case # "attach_t9_ammo_mod_brain_rot_view":
+    case #"attach_t9_ammo_mod_brain_rot_view":
       n_tier = stats::get_stat(localclientnum, #"cacloadouts", #"upgrade_tiers", #"ammomod_brainrot_tier");
       break;
-    case # "attach_t9_ammo_mod_cryo_freeze_view":
+    case #"attach_t9_ammo_mod_cryo_freeze_view":
       n_tier = stats::get_stat(localclientnum, #"cacloadouts", #"upgrade_tiers", #"hash_63114aea3939d941");
       break;
-    case # "attach_t9_ammo_mod_dead_wire_view":
+    case #"attach_t9_ammo_mod_dead_wire_view":
       n_tier = stats::get_stat(localclientnum, #"cacloadouts", #"upgrade_tiers", #"ammomod_deadwire_tier");
       break;
-    case # "attach_t9_ammo_mod_napalm_burst_view":
+    case #"attach_t9_ammo_mod_napalm_burst_view":
       n_tier = stats::get_stat(localclientnum, #"cacloadouts", #"upgrade_tiers", #"ammomod_napalmburst_tier");
       break;
-    case # "attach_t9_ammo_mod_shatter_blast_view":
+    case #"attach_t9_ammo_mod_shatter_blast_view":
       n_tier = stats::get_stat(localclientnum, #"cacloadouts", #"upgrade_tiers", #"hash_38f1aae51e2d5f58");
       break;
     default:
@@ -2401,75 +2401,75 @@ function function_75af31e2(localclientnum, var_addf3c2f) {
   self setscale(0.9);
 
   switch (var_addf3c2f) {
-    case # "aether_shroud_1":
-    case # "aether_shroud_3":
-    case # "aether_shroud_2":
-    case # "aether_shroud_5":
-    case # "aether_shroud_4":
-    case # "aether_shroud":
+    case #"aether_shroud_1":
+    case #"aether_shroud_3":
+    case #"aether_shroud_2":
+    case #"aether_shroud_5":
+    case #"aether_shroud_4":
+    case #"aether_shroud":
       self setModel(#"hash_31c57957830a468b");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_63a413ea4517d35e", self, "tag_origin");
       break;
-    case # "energy_mine":
-    case # "energy_mine_4":
-    case # "energy_mine_5":
-    case # "energy_mine_2":
-    case # "energy_mine_3":
-    case # "energy_mine_1":
+    case #"energy_mine":
+    case #"energy_mine_4":
+    case #"energy_mine_5":
+    case #"energy_mine_2":
+    case #"energy_mine_3":
+    case #"energy_mine_1":
       self setModel(#"wpn_t9_zm_wand_cannister_energy_mine_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_4c6295e27b772b3f", self, "tag_origin");
       break;
-    case # "frost_blast":
-    case # "frost_blast_1":
-    case # "frost_blast_3":
-    case # "frost_blast_2":
-    case # "frost_blast_5":
-    case # "frost_blast_4":
+    case #"frost_blast":
+    case #"frost_blast_1":
+    case #"frost_blast_3":
+    case #"frost_blast_2":
+    case #"frost_blast_5":
+    case #"frost_blast_4":
       self setModel(#"wpn_t9_zm_wand_cannister_frost_blast_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_367649ac4b1edb9e", self, "tag_origin");
       break;
-    case # "heal_aoe_1":
-    case # "heal_aoe":
-    case # "heal_aoe_2":
-    case # "heal_aoe_3":
-    case # "heal_aoe_4":
-    case # "heal_aoe_5":
+    case #"heal_aoe_1":
+    case #"heal_aoe":
+    case #"heal_aoe_2":
+    case #"heal_aoe_3":
+    case #"heal_aoe_4":
+    case #"heal_aoe_5":
       self setModel(#"wpn_t9_zm_wand_cannister_healing_aura_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_4d31e7e4f8d118ff", self, "tag_origin");
       break;
-    case # "ring_of_fire_4":
-    case # "ring_of_fire_5":
-    case # "ring_of_fire_3":
-    case # "ring_of_fire_2":
-    case # "ring_of_fire_1":
-    case # "ring_of_fire":
+    case #"ring_of_fire_4":
+    case #"ring_of_fire_5":
+    case #"ring_of_fire_3":
+    case #"ring_of_fire_2":
+    case #"ring_of_fire_1":
+    case #"ring_of_fire":
       self setModel(#"wpn_t9_zm_wand_cannister_ring_fire_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_49b58dc6c3e5fea0", self, "tag_origin");
       break;
-    case # "hash_43e323396554dc73":
-    case # "hash_43e326396554e18c":
-    case # "hash_43e328396554e4f2":
-    case # "hash_43e329396554e6a5":
-    case # "hash_55569355da0f0f68":
-    case # "hash_43e322396554dac0":
+    case #"hash_43e323396554dc73":
+    case #"hash_43e326396554e18c":
+    case #"hash_43e328396554e4f2":
+    case #"hash_43e329396554e6a5":
+    case #"hash_55569355da0f0f68":
+    case #"hash_43e322396554dac0":
       self setModel(#"wpn_t9_zm_wand_cannister_frenzied_guard_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_ee6b19d96021cce", self, "tag_origin");
       break;
-    case # "toxic_growth_5":
-    case # "toxic_growth_4":
-    case # "toxic_growth_3":
-    case # "toxic_growth_2":
-    case # "toxic_growth_1":
-    case # "toxic_growth":
+    case #"toxic_growth_5":
+    case #"toxic_growth_4":
+    case #"toxic_growth_3":
+    case #"toxic_growth_2":
+    case #"toxic_growth_1":
+    case #"toxic_growth":
       self setModel(#"wpn_t9_zm_wand_cannister_toxic_growth_view");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_25ed7ba8507500d0", self, "tag_origin");
       break;
-    case # "lightning_links_1":
-    case # "lightning_links_2":
-    case # "lightning_links_3":
-    case # "lightning_links_4":
-    case # "lightning_links_5":
-    case # "lightning_links":
+    case #"lightning_links_1":
+    case #"lightning_links_2":
+    case #"lightning_links_3":
+    case #"lightning_links_4":
+    case #"lightning_links_5":
+    case #"lightning_links":
       self setModel(#"hash_49ac5305b1f71eba");
       self.var_125d962d = util::playFXOnTag(localclientnum, #"hash_69585875feada15d", self, "tag_origin");
       break;
@@ -2616,42 +2616,42 @@ function function_5f70d1c8(weapon, var_e81ceea = "") {
     var_31d7e562 = (0, 0, 0);
 
     switch (var_e81ceea) {
-      case # "optic":
+      case #"optic":
         var_639f35c4 = (isDefined(settings.var_679ca3b5) ? settings.var_679ca3b5 : 0, isDefined(settings.var_bc194cb1) ? settings.var_bc194cb1 : 0, isDefined(settings.var_67a5a3cb) ? settings.var_67a5a3cb : 0);
         var_31d7e562 = (isDefined(settings.var_80cb53e7) ? settings.var_80cb53e7 : 0, isDefined(settings.var_9294f77a) ? settings.var_9294f77a : 0, isDefined(settings.var_5d408cd2) ? settings.var_5d408cd2 : 0);
         var_3245d5de = isDefined(settings.var_2685ca21) ? settings.var_2685ca21 : 0;
         break;
-      case # "muzzle":
+      case #"muzzle":
         var_639f35c4 = (isDefined(settings.var_89849ace) ? settings.var_89849ace : 0, isDefined(settings.var_f73a7638) ? settings.var_f73a7638 : 0, isDefined(settings.var_77edf7a1) ? settings.var_77edf7a1 : 0);
         var_31d7e562 = (isDefined(settings.var_390d2d1) ? settings.var_390d2d1 : 0, isDefined(settings.var_19bdff2b) ? settings.var_19bdff2b : 0, isDefined(settings.var_e7ef1b8e) ? settings.var_e7ef1b8e : 0);
         var_3245d5de = isDefined(settings.var_b3516d45) ? settings.var_b3516d45 : 0;
         break;
-      case # "barrel":
+      case #"barrel":
         var_639f35c4 = (isDefined(settings.var_7c3d339b) ? settings.var_7c3d339b : 0, isDefined(settings.var_6e029726) ? settings.var_6e029726 : 0, isDefined(settings.var_a0bffca0) ? settings.var_a0bffca0 : 0);
         var_31d7e562 = (isDefined(settings.var_8ca3e332) ? settings.var_8ca3e332 : 0, isDefined(settings.var_7ee247af) ? settings.var_7ee247af : 0, isDefined(settings.var_47f3d9d3) ? settings.var_47f3d9d3 : 0);
         var_3245d5de = isDefined(settings.var_ad8114a5) ? settings.var_ad8114a5 : 0;
         break;
-      case # "underbarrel":
+      case #"underbarrel":
         var_639f35c4 = (isDefined(settings.var_98adab76) ? settings.var_98adab76 : 0, isDefined(settings.var_74056226) ? settings.var_74056226 : 0, isDefined(settings.var_66bec799) ? settings.var_66bec799 : 0);
         var_31d7e562 = (isDefined(settings.var_d03599ea) ? settings.var_d03599ea : 0, isDefined(settings.var_9258bc1) ? settings.var_9258bc1 : 0, isDefined(settings.var_2e65d641) ? settings.var_2e65d641 : 0);
         var_3245d5de = isDefined(settings.var_c8287774) ? settings.var_c8287774 : 0;
         break;
-      case # "body":
+      case #"body":
         var_639f35c4 = (isDefined(settings.var_d0af4d25) ? settings.var_d0af4d25 : 0, isDefined(settings.var_e2ea719b) ? settings.var_e2ea719b : 0, isDefined(settings.var_b75b1a7d) ? settings.var_b75b1a7d : 0);
         var_31d7e562 = (isDefined(settings.var_807fd135) ? settings.var_807fd135 : 0, isDefined(settings.var_66581c7a) ? settings.var_66581c7a : 0, isDefined(settings.var_5beb080c) ? settings.var_5beb080c : 0);
         var_3245d5de = isDefined(settings.var_ca6cd5d0) ? settings.var_ca6cd5d0 : 0;
         break;
-      case # "stock":
+      case #"stock":
         var_639f35c4 = (isDefined(settings.var_933f2ee0) ? settings.var_933f2ee0 : 0, isDefined(settings.var_7d95038c) ? settings.var_7d95038c : 0, isDefined(settings.var_210b4a7a) ? settings.var_210b4a7a : 0);
         var_31d7e562 = (isDefined(settings.var_14141efc) ? settings.var_14141efc : 0, isDefined(settings.var_3a32eb39) ? settings.var_3a32eb39 : 0, isDefined(settings.var_2858c785) ? settings.var_2858c785 : 0);
         var_3245d5de = isDefined(settings.var_72fa56e9) ? settings.var_72fa56e9 : 0;
         break;
-      case # "magazine":
+      case #"magazine":
         var_639f35c4 = (isDefined(settings.var_c1b38db7) ? settings.var_c1b38db7 : 0, isDefined(settings.var_f5f1f633) ? settings.var_f5f1f633 : 0, isDefined(settings.var_e42f52ae) ? settings.var_e42f52ae : 0);
         var_31d7e562 = (isDefined(settings.var_91fc7515) ? settings.var_91fc7515 : 0, isDefined(settings.var_80a5d268) ? settings.var_80a5d268 : 0, isDefined(settings.var_5ed38ec4) ? settings.var_5ed38ec4 : 0);
         var_3245d5de = isDefined(settings.var_b41f3012) ? settings.var_b41f3012 : 0;
         break;
-      case # "handle":
+      case #"handle":
         var_639f35c4 = (isDefined(settings.var_41ebb7d) ? settings.var_41ebb7d : 0, isDefined(settings.var_ab648ac) ? settings.var_ab648ac : 0, isDefined(settings.var_18806440) ? settings.var_18806440 : 0);
         var_31d7e562 = (isDefined(settings.var_59c4fda9) ? settings.var_59c4fda9 : 0, isDefined(settings.var_ebd421b9) ? settings.var_ebd421b9 : 0, isDefined(settings.var_5983fd1b) ? settings.var_5983fd1b : 0);
         var_3245d5de = isDefined(settings.var_52846704) ? settings.var_52846704 : 0;
@@ -2790,16 +2790,16 @@ function function_82f74dec(weapon) {
 function function_ae73f57f(localclientnum, var_8a4ba442, var_e81ceea) {
   if(isDefined(var_8a4ba442)) {
     switch (var_8a4ba442) {
-      case # "gunsmith":
+      case #"gunsmith":
         s_info = function_5f70d1c8(level.current_weapon[localclientnum], var_e81ceea);
         break;
-      case # "hash_2fda3f64c5caa89e":
+      case #"hash_2fda3f64c5caa89e":
         s_info = function_fa001ebb(level.current_weapon[localclientnum]);
         break;
-      case # "charm":
+      case #"charm":
         s_info = function_add95f58(level.current_weapon[localclientnum]);
         break;
-      case # "stickers":
+      case #"stickers":
         s_info = function_82f74dec(level.current_weapon[localclientnum]);
         break;
       default:

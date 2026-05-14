@@ -103,7 +103,7 @@ function event_handler[bulletwhizby] function_e77b4f15(eventstruct) {
     }
 
     switch (source.currentweapon.name) {
-      case # "hero_annihilator":
+      case #"hero_annihilator":
         dialogkey = playerbundle.var_93ef961;
         break;
     }

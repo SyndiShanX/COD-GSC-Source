@@ -3713,10 +3713,10 @@ function_f9af3d43(time) {
 
 is_party_gamemode() {
   switch (level.gametype) {
-    case # "sas":
-    case # "oic":
-    case # "shrp":
-    case # "gun":
+    case #"sas":
+    case #"oic":
+    case #"shrp":
+    case #"gun":
       return true;
   }
 

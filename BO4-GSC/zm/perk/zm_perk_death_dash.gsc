@@ -306,13 +306,13 @@ function_c1c51837(e_player) {
     n_damage = 1700;
 
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         n_damage = 0.2 * self.maxhealth;
         break;
-      case # "miniboss":
+      case #"miniboss":
         n_damage = 0.1 * self.maxhealth;
         break;
-      case # "boss":
+      case #"boss":
         n_damage = 0.05 * self.maxhealth;
         break;
     }

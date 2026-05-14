@@ -476,19 +476,19 @@ function givecratekillstreak(killstreak) {
 
 function givespecializedcrateweapon(weapon) {
   switch (weapon.name) {
-    case # "minigun":
+    case #"minigun":
       level thread popups::displayteammessagetoall(#"hash_3b566d06e5a482e1", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
-    case # "m32":
+    case #"m32":
       level thread popups::displayteammessagetoall(#"hash_25ae9096a4ce050c", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
-    case # "m220_tow":
+    case #"m220_tow":
       level thread popups::displayteammessagetoall(#"hash_51751eb890739762", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
-    case # "mp40_blinged":
+    case #"mp40_blinged":
       level thread popups::displayteammessagetoall(#"killstreak_mp40_inbound", self);
       level weapons::add_limited_weapon(weapon, self, 3);
       break;
@@ -1180,25 +1180,25 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
   }
 
   switch (killstreak) {
-    case # "turret_drop":
+    case #"turret_drop":
       crate.cratetype = level.cratetypes[killstreak][#"autoturret"];
       break;
-    case # "tow_turret_drop":
+    case #"tow_turret_drop":
       crate.cratetype = level.cratetypes[killstreak][#"auto_tow"];
       break;
-    case # "m220_tow_drop":
+    case #"m220_tow_drop":
       crate.cratetype = level.cratetypes[killstreak][#"m220_tow"];
       break;
-    case # "tank_robot":
-    case # "inventory_tank_robot":
+    case #"tank_robot":
+    case #"inventory_tank_robot":
       crate.cratetype = level.cratetypes[killstreak][#"tank_robot"];
       break;
-    case # "inventory_minigun_drop":
-    case # "minigun_drop":
+    case #"inventory_minigun_drop":
+    case #"minigun_drop":
       crate.cratetype = level.cratetypes[killstreak][#"minigun"];
       break;
-    case # "m32_drop":
-    case # "inventory_m32_drop":
+    case #"m32_drop":
+    case #"inventory_m32_drop":
       crate.cratetype = level.cratetypes[killstreak][#"m32"];
       break;
     default:
@@ -2585,34 +2585,34 @@ function inccratekillstreakusagestat(weapon, killstreak_id) {
   }
 
   switch (weapon.name) {
-    case # "turret_drop":
+    case #"turret_drop":
       self killstreak_dialog::play_killstreak_start_dialog("turret_drop", self.pers[#"team"], killstreak_id);
       break;
-    case # "tow_turret_drop":
+    case #"tow_turret_drop":
       self killstreak_dialog::play_killstreak_start_dialog("tow_turret_drop", self.pers[#"team"], killstreak_id);
       break;
-    case # "supplydrop_marker":
-    case # "inventory_supplydrop_marker":
+    case #"supplydrop_marker":
+    case #"inventory_supplydrop_marker":
       self killstreak_dialog::play_killstreak_start_dialog("supply_drop", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("supply_drop", self);
       self challenges::calledincarepackage();
       self stats::function_e24eec31(getweapon(#"supplydrop"), #"used", 1);
       break;
-    case # "tank_robot":
-    case # "inventory_tank_robot":
+    case #"tank_robot":
+    case #"inventory_tank_robot":
       self killstreak_dialog::play_killstreak_start_dialog("tank_robot", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("tank_robot", self);
       self stats::function_e24eec31(getweapon(#"tank_robot"), #"used", 1);
       break;
-    case # "inventory_minigun_drop":
-    case # "minigun_drop":
+    case #"inventory_minigun_drop":
+    case #"minigun_drop":
       self killstreak_dialog::play_killstreak_start_dialog("minigun", self.pers[#"team"], killstreak_id);
       break;
-    case # "m32_drop":
-    case # "inventory_m32_drop":
+    case #"m32_drop":
+    case #"inventory_m32_drop":
       self killstreak_dialog::play_killstreak_start_dialog("m32", self.pers[#"team"], killstreak_id);
       break;
-    case # "combat_robot_drop":
+    case #"combat_robot_drop":
       level thread popups::displaykillstreakteammessagetoall("combat_robot", self);
       break;
   }

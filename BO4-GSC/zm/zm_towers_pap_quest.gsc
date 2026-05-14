@@ -188,19 +188,19 @@ function_3effad88(str_tower) {
   str_prompt = zm_utility::function_d6046228(#"hash_2a4860e40142bac5", #"hash_7c465ea7da6991fb");
 
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       var_e362d075 = getent("t_pap_quest_danu_encounter", "targetname");
       level flag::clear(#"hash_18134dc5b9b39a96");
       break;
-    case # "ra":
+    case #"ra":
       var_e362d075 = getent("t_pap_quest_ra_encounter", "targetname");
       level flag::clear(#"hash_582eea77824b014d");
       break;
-    case # "odin":
+    case #"odin":
       var_e362d075 = getent("t_pap_quest_odin_encounter", "targetname");
       level flag::clear(#"hash_5cc500f9282cd290");
       break;
-    case # "zeus":
+    case #"zeus":
       var_e362d075 = getent("t_pap_quest_zeus_encounter", "targetname");
       level flag::clear(#"hash_20c64c155f7a0065");
       break;
@@ -302,7 +302,7 @@ function_199b1814(str_tower, str_encounter) {
   level endon(#"pap_quest_completed", #"pap_quest_restart", str_tower + "_pap_quest_restart");
 
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       str_trigger = "t_pap_quest_danu_encounter";
       var_31e5b512 = #"hash_18134dc5b9b39a96";
       var_def2a519 = #"hash_589679a12150767a";
@@ -312,7 +312,7 @@ function_199b1814(str_tower, str_encounter) {
       var_a0529e1b = struct::get_array("s_pap_encounter_scenes_danu_tiger");
       s_spawn = struct::get("s_pap_encounter_spawn_danu");
       break;
-    case # "ra":
+    case #"ra":
       str_trigger = "t_pap_quest_ra_encounter";
       var_31e5b512 = #"hash_582eea77824b014d";
       var_def2a519 = #"hash_4abb12b14a38d2e9";
@@ -322,7 +322,7 @@ function_199b1814(str_tower, str_encounter) {
       var_a0529e1b = struct::get_array("s_pap_encounter_scenes_ra_tiger");
       s_spawn = struct::get("s_pap_encounter_spawn_ra");
       break;
-    case # "odin":
+    case #"odin":
       str_trigger = "t_pap_quest_odin_encounter";
       var_31e5b512 = #"hash_5cc500f9282cd290";
       var_def2a519 = #"hash_15f5946d4968f144";
@@ -332,7 +332,7 @@ function_199b1814(str_tower, str_encounter) {
       var_a0529e1b = struct::get_array("s_pap_encounter_scenes_odin_tiger");
       s_spawn = struct::get("s_pap_encounter_spawn_odin");
       break;
-    case # "zeus":
+    case #"zeus":
       str_trigger = "t_pap_quest_zeus_encounter";
       var_31e5b512 = #"hash_20c64c155f7a0065";
       var_def2a519 = #"hash_355567a6fa6d44d1";
@@ -366,22 +366,22 @@ function_199b1814(str_tower, str_encounter) {
   level flag::set(#"hash_798d51388d6e10f4");
 
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       str_encounter = level.var_58e06b5b;
       str_exploder = "fxexp_gong_danu";
       var_38e7a8be = #"hash_18134dc5b9b39a96";
       break;
-    case # "ra":
+    case #"ra":
       str_encounter = level.var_b941799e;
       str_exploder = "fxexp_gong_ra";
       var_38e7a8be = #"hash_582eea77824b014d";
       break;
-    case # "odin":
+    case #"odin":
       str_encounter = level.var_34bb868f;
       str_exploder = "fxexp_gong_odin";
       var_38e7a8be = #"hash_5cc500f9282cd290";
       break;
-    case # "zeus":
+    case #"zeus":
       str_encounter = level.var_c90f6df9;
       str_exploder = "fxexp_gong_zeus";
       var_38e7a8be = #"hash_20c64c155f7a0065";
@@ -392,7 +392,7 @@ function_199b1814(str_tower, str_encounter) {
   zm_towers_util::function_afd37143(var_38e7a8be);
 
   switch (str_encounter) {
-    case # "marauder":
+    case #"marauder":
       if(!level.var_4118581a) {
         var_e482422a = array(#"marauder");
       } else {
@@ -410,7 +410,7 @@ function_199b1814(str_tower, str_encounter) {
       }
 
       break;
-    case # "destroyer":
+    case #"destroyer":
       if(!level.var_4118581a) {
         var_e482422a = array(#"destroyer");
       } else {
@@ -428,10 +428,10 @@ function_199b1814(str_tower, str_encounter) {
       }
 
       break;
-    case # "both":
+    case #"both":
       var_e482422a = array(#"marauder", #"destroyer");
       break;
-    case # "tigers":
+    case #"tigers":
       if(!level.var_4118581a) {
         var_e482422a = array(#"tiger", #"tiger", #"tiger", #"tiger");
       } else {
@@ -462,7 +462,7 @@ function_199b1814(str_tower, str_encounter) {
 
   foreach(i, str_enemy in var_e482422a) {
     switch (str_enemy) {
-      case # "destroyer":
+      case #"destroyer":
         if(str_encounter != #"both") {
           if(var_1f8676e3.size == 0) {
             var_1f8676e3 = array::randomize(var_33a5ad52);
@@ -472,23 +472,23 @@ function_199b1814(str_tower, str_encounter) {
           arrayremoveindex(var_1f8676e3, 0);
         } else {
           switch (str_tower) {
-            case # "danu":
+            case #"danu":
               s_scene = struct::get("danu_destroyer", "script_pap_encounter_scene_both");
               break;
-            case # "ra":
+            case #"ra":
               s_scene = struct::get("ra_destroyer", "script_pap_encounter_scene_both");
               break;
-            case # "odin":
+            case #"odin":
               s_scene = struct::get("odin_destroyer", "script_pap_encounter_scene_both");
               break;
-            case # "zeus":
+            case #"zeus":
               s_scene = struct::get("zeus_destroyer", "script_pap_encounter_scene_both");
               break;
           }
         }
 
         break;
-      case # "marauder":
+      case #"marauder":
         if(str_encounter != #"both") {
           if(var_1b55c253.size == 0) {
             var_1b55c253 = array::randomize(var_b994877d);
@@ -498,23 +498,23 @@ function_199b1814(str_tower, str_encounter) {
           arrayremoveindex(var_1b55c253, 0);
         } else {
           switch (str_tower) {
-            case # "danu":
+            case #"danu":
               s_scene = struct::get("danu_marauder", "script_pap_encounter_scene_both");
               break;
-            case # "ra":
+            case #"ra":
               s_scene = struct::get("ra_marauder", "script_pap_encounter_scene_both");
               break;
-            case # "odin":
+            case #"odin":
               s_scene = struct::get("odin_marauder", "script_pap_encounter_scene_both");
               break;
-            case # "zeus":
+            case #"zeus":
               s_scene = struct::get("zeus_marauder", "script_pap_encounter_scene_both");
               break;
           }
         }
 
         break;
-      case # "tiger":
+      case #"tiger":
         if(var_6e280451.size == 0) {
           var_6e280451 = array::randomize(var_a0529e1b);
         }
@@ -552,16 +552,16 @@ function_199b1814(str_tower, str_encounter) {
   function_f18e2775();
 
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       var_38e7a8be = #"hash_589679a12150767a";
       break;
-    case # "ra":
+    case #"ra":
       var_38e7a8be = #"hash_4abb12b14a38d2e9";
       break;
-    case # "odin":
+    case #"odin":
       var_38e7a8be = #"hash_15f5946d4968f144";
       break;
-    case # "zeus":
+    case #"zeus":
       var_38e7a8be = #"hash_355567a6fa6d44d1";
       break;
   }
@@ -574,13 +574,13 @@ function_79071b9a(str_enemy, s_spawn, s_scene) {
 
   while(!isDefined(ai_enemy)) {
     switch (str_enemy) {
-      case # "marauder":
+      case #"marauder":
         ai_enemy = zombie_gladiator_util::function_c9cd31(1, s_spawn);
         break;
-      case # "destroyer":
+      case #"destroyer":
         ai_enemy = zombie_gladiator_util::function_2efc00db(1, s_spawn);
         break;
-      case # "tiger":
+      case #"tiger":
         ai_enemy = zombie_tiger_util::spawn_single(1, s_spawn);
         break;
     }
@@ -678,13 +678,13 @@ drop_head(v_origin, str_tower, var_5570d8de) {
   }
 
   switch (str_encounter) {
-    case # "destroyer":
+    case #"destroyer":
       str_head = #"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated";
       break;
-    case # "marauder":
+    case #"marauder":
       str_head = #"c_t8_zmb_dlc0_zombie_marauder_decapitated_head1";
       break;
-    case # "tigers":
+    case #"tigers":
       str_head = #"c_t8_zmb_dlc0_tiger_head1_decapitated";
       break;
   }
@@ -694,16 +694,16 @@ drop_head(v_origin, str_tower, var_5570d8de) {
 
   if(!var_5570d8de) {
     switch (str_tower) {
-      case # "danu":
+      case #"danu":
         str_backup = "s_danu_encounter_back_up_head_spawn";
         break;
-      case # "ra":
+      case #"ra":
         str_backup = "s_ra_encounter_back_up_head_spawn";
         break;
-      case # "odin":
+      case #"odin":
         str_backup = "s_odin_encounter_back_up_head_spawn";
         break;
-      case # "zeus":
+      case #"zeus":
         str_backup = "s_zeus_encounter_back_up_head_spawn";
         break;
     }
@@ -754,16 +754,16 @@ function_499b080d(str_tower, str_encounter) {
   }
 
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       str_flag = #"hash_3d833ecc64915d8d";
       break;
-    case # "ra":
+    case #"ra":
       str_flag = #"hash_d38ff215be3a4fc";
       break;
-    case # "odin":
+    case #"odin":
       str_flag = #"hash_4142472dec557d03";
       break;
-    case # "zeus":
+    case #"zeus":
       str_flag = #"hash_45b6b1ee5d5038b4";
       break;
   }
@@ -988,15 +988,15 @@ function_f3c4aeac() {
   }
 
   switch (str_encounter) {
-    case # "destroyer":
+    case #"destroyer":
       str_fx_tag = undefined;
       self setModel(#"c_t8_zmb_dlc0_zombie_destroyer_head_decapitated");
       break;
-    case # "marauder":
+    case #"marauder":
       str_fx_tag = undefined;
       self setModel(#"c_t8_zmb_dlc0_zombie_marauder_decapitated_head1");
       break;
-    case # "tigers":
+    case #"tigers":
       str_fx_tag = undefined;
       self setModel(#"c_t8_zmb_dlc0_tiger_head1_decapitated");
       break;
@@ -1010,16 +1010,16 @@ function_f3c4aeac() {
 
 get_encounter(str_tower) {
   switch (str_tower) {
-    case # "danu":
+    case #"danu":
       str_encounter = level.var_58e06b5b;
       break;
-    case # "ra":
+    case #"ra":
       str_encounter = level.var_b941799e;
       break;
-    case # "odin":
+    case #"odin":
       str_encounter = level.var_34bb868f;
       break;
-    case # "zeus":
+    case #"zeus":
       str_encounter = level.var_c90f6df9;
       break;
   }
@@ -1029,16 +1029,16 @@ get_encounter(str_tower) {
 
 function_1191a919(str_encounter) {
   switch (str_encounter) {
-    case # "destroyer":
+    case #"destroyer":
       str_clientfield = #"hash_4fce42c559430ff9";
       break;
-    case # "marauder":
+    case #"marauder":
       str_clientfield = #"hash_6257a73f22800e57";
       break;
-    case # "both":
+    case #"both":
       str_clientfield = #"hash_61f69ed4cbd8f2f5";
       break;
-    case # "tigers":
+    case #"tigers":
       str_clientfield = #"zm_towers_pap_quest_tiger_head";
       break;
     default:
@@ -1079,27 +1079,27 @@ function_d7c092b9() {
 
 function_438a415(str_head) {
   switch (str_head) {
-    case # "danu":
+    case #"danu":
       var_31e5b512 = #"hash_18134dc5b9b39a96";
       var_def2a519 = #"hash_589679a12150767a";
       var_ce6f7a4c = #"hash_3d833ecc64915d8d";
       break;
-    case # "ra":
+    case #"ra":
       var_31e5b512 = #"hash_582eea77824b014d";
       var_def2a519 = #"hash_4abb12b14a38d2e9";
       var_ce6f7a4c = #"hash_d38ff215be3a4fc";
       break;
-    case # "odin":
+    case #"odin":
       var_31e5b512 = #"hash_5cc500f9282cd290";
       var_def2a519 = #"hash_15f5946d4968f144";
       var_ce6f7a4c = #"hash_4142472dec557d03";
       break;
-    case # "zeus":
+    case #"zeus":
       var_31e5b512 = #"hash_20c64c155f7a0065";
       var_def2a519 = #"hash_355567a6fa6d44d1";
       var_ce6f7a4c = #"hash_45b6b1ee5d5038b4";
       break;
-    case # "all":
+    case #"all":
       function_438a415(#"danu");
       function_438a415(#"ra");
       function_438a415(#"odin");
@@ -1128,21 +1128,21 @@ function_883e88be(str_enemy) {
   level.var_4118581a = 1;
 
   switch (str_enemy) {
-    case # "destroyers":
+    case #"destroyers":
       level.var_58e06b5b = #"destroyer";
       level.var_b941799e = #"destroyer";
       level.var_34bb868f = #"destroyer";
       level.var_c90f6df9 = #"destroyer";
       iprintlnbold("<dev string:x73>");
       break;
-    case # "marauders":
+    case #"marauders":
       level.var_58e06b5b = #"marauder";
       level.var_b941799e = #"marauder";
       level.var_34bb868f = #"marauder";
       level.var_c90f6df9 = #"marauder";
       iprintlnbold("<dev string:x99>");
       break;
-    case # "tigers":
+    case #"tigers":
       level.var_58e06b5b = #"tigers";
       level.var_b941799e = #"tigers";
       level.var_34bb868f = #"tigers";

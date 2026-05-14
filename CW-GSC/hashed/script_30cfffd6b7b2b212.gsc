@@ -114,17 +114,17 @@ function function_53531f27(key, val = "targetname") {
 
 function setup_objectives(var_567f1ddd) {
   switch (var_567f1ddd) {
-    case # "tkdn_heli_intro":
+    case #"tkdn_heli_intro":
       level waittill(#"hash_428d72621587561a");
-    case # "tkdn_heli_trailer_park":
-    case # "tkdn_heli_convoy_aslt":
-    case # "hash_75cfe0319f9e4615":
+    case #"tkdn_heli_trailer_park":
+    case #"tkdn_heli_convoy_aslt":
+    case #"hash_75cfe0319f9e4615":
       level thread function_ea61a18();
       break;
-    case # "tkdn_heli_hotel_breach":
+    case #"tkdn_heli_hotel_breach":
       level thread function_ea61a18();
       break;
-    case # "tkdn_heli_exfil":
+    case #"tkdn_heli_exfil":
     default:
       break;
   }

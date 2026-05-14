@@ -218,11 +218,11 @@ function function_d8235fb0(params) {
 
 function function_f771a3f8(params) {
   switch (params.smeansofdeath) {
-    case # "mod_explosive":
-    case # "mod_grenade":
-    case # "mod_projectile":
-    case # "mod_grenade_splash":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_grenade":
+    case #"mod_projectile":
+    case #"mod_grenade_splash":
+    case #"mod_projectile_splash":
       if(!is_true(params.weapon.dostun) && function_84b43711(params.weapon)) {
         self zombie_utility::setup_zombie_knockdown(params.vdamageorigin);
       }
@@ -1073,11 +1073,11 @@ function zombiejuke(entity) {
         entity.jukedistance = "long";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 122;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 129;
             break;
         }
@@ -1090,11 +1090,11 @@ function zombiejuke(entity) {
         entity.jukedistance = "short";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 127;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 148;
             break;
         }
@@ -1161,13 +1161,13 @@ function zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime,
 
   if(isDefined(mocompanim.zombie_move_speed)) {
     switch (mocompanim.zombie_move_speed) {
-      case # "walk":
+      case #"walk":
         speed = 5;
         break;
-      case # "run":
+      case #"run":
         speed = 6;
         break;
-      case # "sprint":
+      case #"sprint":
         speed = 7;
         break;
     }

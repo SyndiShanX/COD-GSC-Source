@@ -139,16 +139,16 @@ function_4967eb5a(activator) {
   }
 
   switch (self.var_ee7ff721) {
-    case # "asylum":
+    case #"asylum":
       value = 1;
       break;
-    case # "moon":
+    case #"moon":
       value = 2;
       break;
-    case # "titanic":
+    case #"titanic":
       value = 3;
       break;
-    case # "tranzit":
+    case #"tranzit":
       value = 4;
       break;
     default:

@@ -585,19 +585,19 @@ function function_fd5dfc25() {
       if(isDefined(self.var_444b2634)) {
         if(gettime() - self.var_444b2634 > 90000) {
           switch (var_43dfbfaf.rootweapon.name) {
-            case # "launcher_standard":
+            case #"launcher_standard":
               if(self.var_83f25fdb < 5) {
                 self util::show_hint_text(#"hash_3d4165067dc18a6b");
               }
 
               break;
-            case # "spike_launcher":
+            case #"spike_launcher":
               if(self.var_83f25fdb < 10) {
                 self util::show_hint_text(#"hash_9b1201effcb0c57");
               }
 
               break;
-            case # "hash_7549b2fcdf36145a":
+            case #"hash_7549b2fcdf36145a":
               if(self.var_83f25fdb < 10) {
                 self util::show_hint_text(#"hash_50d6975fce35fa60");
               }

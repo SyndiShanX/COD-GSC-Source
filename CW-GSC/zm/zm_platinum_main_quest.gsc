@@ -4438,31 +4438,31 @@ function on_item_pickup(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry.name)) {
       switch (item.itementry.name) {
-        case # "item_zmquest_platinum_rico_card":
+        case #"item_zmquest_platinum_rico_card":
           level flag::set(#"hash_40ce269b267d7a50");
           array::thread_all(getplayers(), &zm_intel::collect_intel, #"zmintel_platinum_requiem_artifact_04");
           break;
-        case # "item_zmquest_platinum_nuke_warhead":
+        case #"item_zmquest_platinum_nuke_warhead":
           level zm_ui_inventory::function_7df6bb60(#"hash_37b4a47a5369363", 1);
           array::thread_all(getplayers(), &zm_intel::collect_intel, #"zmintel_platinum_requiem_artifact_03");
           level flag::set(#"hash_7e548bf90d76ee5e");
           break;
-        case # "item_zmquest_platinum_helm_component_antenna":
+        case #"item_zmquest_platinum_helm_component_antenna":
           level zm_ui_inventory::function_7df6bb60(#"hash_173db580493ec8a", 1);
           zm_items::player_pick_up(self, zm_crafting::get_component("zitem_platinum_klaus_helm_part_1_zm"));
           level flag::set(#"hash_626f1d4ed92a66d9");
           break;
-        case # "item_zmquest_platinum_helm_component_board":
+        case #"item_zmquest_platinum_helm_component_board":
           level zm_ui_inventory::function_7df6bb60(#"hash_4749f9e54d740283", 1);
           zm_items::player_pick_up(self, zm_crafting::get_component("zitem_platinum_klaus_helm_part_2_zm"));
           level flag::set(#"hash_626f1d4ed92a66d9");
           break;
-        case # "item_zmquest_platinum_helm_component_transistor":
+        case #"item_zmquest_platinum_helm_component_transistor":
           level zm_ui_inventory::function_7df6bb60(#"hash_405c5ffdf1a21f59", 1);
           zm_items::player_pick_up(self, zm_crafting::get_component("zitem_platinum_klaus_helm_part_3_zm"));
           level flag::set(#"hash_626f1d4ed92a66d9");
           break;
-        case # "item_zmintel_platinum_omega_artifact_1":
+        case #"item_zmintel_platinum_omega_artifact_1":
           array::thread_all(getplayers(), &zm_intel::collect_intel, #"zmintel_platinum_omega_artifact_02");
           break;
         default:
@@ -4588,7 +4588,7 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_738c5e6d53b6b2c5":
+    case #"hash_738c5e6d53b6b2c5":
       if(!isDefined(level.var_48d07d1f.var_ec0d861e[#"train"])) {
         if(isDefined(level.klaus)) {
           level.klaus zodcompanionutility::function_fc67b7ed(&function_e97a3826);
@@ -4598,7 +4598,7 @@ function cmd(cmd) {
         level thread function_c015b2c1(45, 1);
         break;
       }
-    case # "hash_20bb7f03866471ed":
+    case #"hash_20bb7f03866471ed":
       var_8841c4a7 = getent("<dev string:x5e3>", "<dev string:x5f6>");
       level clientfield::set("<dev string:x604>" + #"hash_42e33e65c5c15242", 1);
 
@@ -4607,22 +4607,22 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_42d9625a4f272463":
+    case #"hash_42d9625a4f272463":
       foreach(player in function_a1ef346b()) {
         player thread function_1bba593c(undefined, 1);
       }
 
       break;
-    case # "hash_404ab756594b28c4":
+    case #"hash_404ab756594b28c4":
       foreach(player in function_a1ef346b()) {
         player notify(#"hash_7f73ee803b60b7aa");
       }
 
       break;
-    case # "test_vo":
+    case #"test_vo":
       level zm_vo::function_7622cb70("<dev string:x63f>");
       break;
-    case # "hash_7f88d25958b36eb5":
+    case #"hash_7f88d25958b36eb5":
       level zm_ui_inventory::function_7df6bb60(#"hash_173db580493ec8a", 1);
 
       foreach(player in getplayers()) {
@@ -4631,7 +4631,7 @@ function cmd(cmd) {
 
       level flag::set(#"hash_626f1d4ed92a66d9");
       break;
-    case # "collect_board":
+    case #"collect_board":
       level zm_ui_inventory::function_7df6bb60(#"hash_4749f9e54d740283", 1);
 
       foreach(player in getplayers()) {
@@ -4640,7 +4640,7 @@ function cmd(cmd) {
 
       level flag::set(#"hash_626f1d4ed92a66d9");
       break;
-    case # "hash_744b2d417a70e285":
+    case #"hash_744b2d417a70e285":
       level zm_ui_inventory::function_7df6bb60(#"hash_405c5ffdf1a21f59", 1);
 
       foreach(player in getplayers()) {

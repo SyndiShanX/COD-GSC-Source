@@ -234,13 +234,13 @@ function_828749d4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_817d52ab)) {
       switch (self.model) {
-        case # "p8_zm_man_pap_gazing_stone_01_full":
+        case #"p8_zm_man_pap_gazing_stone_01_full":
           str_effect = level._effect[#"hash_59f382e0eb4cd8ae"];
           break;
-        case # "p8_zm_man_pap_gazing_stone_02_full":
+        case #"p8_zm_man_pap_gazing_stone_02_full":
           str_effect = level._effect[#"hash_2e59763a88bb2bd4"];
           break;
-        case # "p8_zm_man_pap_gazing_stone_03_full":
+        case #"p8_zm_man_pap_gazing_stone_03_full":
           str_effect = level._effect[#"hash_9ac3900bb7115d"];
           break;
       }
@@ -268,13 +268,13 @@ function_9d797e21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_306bf925)) {
       switch (self.model) {
-        case # "p8_zm_man_pap_gazing_stone_01_full":
+        case #"p8_zm_man_pap_gazing_stone_01_full":
           str_effect = level._effect[#"hash_229bf68ca0edaadb"];
           break;
-        case # "p8_zm_man_pap_gazing_stone_02_full":
+        case #"p8_zm_man_pap_gazing_stone_02_full":
           str_effect = level._effect[#"stone_blue_glow"];
           break;
-        case # "p8_zm_man_pap_gazing_stone_03_full":
+        case #"p8_zm_man_pap_gazing_stone_03_full":
           str_effect = level._effect[#"stone_green_glow"];
           break;
       }
@@ -294,13 +294,13 @@ function_9d797e21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_306bf925 = undefined;
 
     switch (self.model) {
-      case # "p8_zm_man_pap_gazing_stone_01_full":
+      case #"p8_zm_man_pap_gazing_stone_01_full":
         str_effect = level._effect[#"hash_82b00d6eafcaeb2"];
         break;
-      case # "p8_zm_man_pap_gazing_stone_02_full":
+      case #"p8_zm_man_pap_gazing_stone_02_full":
         str_effect = level._effect[#"hash_38b6a9869169d0e4"];
         break;
-      case # "p8_zm_man_pap_gazing_stone_03_full":
+      case #"p8_zm_man_pap_gazing_stone_03_full":
         str_effect = level._effect[#"hash_43c55f8b435b5b5d"];
         break;
     }

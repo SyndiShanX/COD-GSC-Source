@@ -618,8 +618,8 @@ getnodeoffset(node) {
   forward = anglesToForward(node.angles);
 
   switch (node.type) {
-    case # "cover left wide":
-    case # "cover left":
+    case #"cover left wide":
+    case #"cover left":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
       } else {
@@ -627,8 +627,8 @@ getnodeoffset(node) {
       }
 
       break;
-    case # "cover right":
-    case # "cover right wide":
+    case #"cover right":
+    case #"cover right wide":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
       } else {
@@ -636,14 +636,14 @@ getnodeoffset(node) {
       }
 
       break;
-    case # "conceal stand":
-    case # "turret":
-    case # "cover stand":
+    case #"conceal stand":
+    case #"turret":
+    case #"cover stand":
       nodeoffset = calculatenodeoffset(right, forward, cover_stand_offset);
       break;
-    case # "conceal crouch":
-    case # "cover crouch window":
-    case # "cover crouch":
+    case #"conceal crouch":
+    case #"cover crouch window":
+    case #"cover crouch":
       nodeoffset = calculatenodeoffset(right, forward, cover_crouch_offset);
       break;
   }
@@ -1625,19 +1625,19 @@ function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_43fb4347)) {
     switch (level.var_43fb4347) {
-      case # "run":
+      case #"run":
         if(var_a598c292 == "walk") {
           var_70b46d1c = "run";
         }
 
         break;
-      case # "sprint":
+      case #"sprint":
         if(var_a598c292 == "walk" || var_a598c292 == "run") {
           var_70b46d1c = "sprint";
         }
 
         break;
-      case # "super_sprint":
+      case #"super_sprint":
         if(var_a598c292 != "super_sprint") {
           var_70b46d1c = "super_sprint";
         }
@@ -1648,19 +1648,19 @@ function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_102b1301)) {
     switch (level.var_102b1301) {
-      case # "walk":
+      case #"walk":
         if(var_a598c292 != "walk") {
           var_70b46d1c = "walk";
         }
 
         break;
-      case # "run":
+      case #"run":
         if(var_a598c292 == "sprint" || var_a598c292 == "super_sprint") {
           var_70b46d1c = "run";
         }
 
         break;
-      case # "sprint":
+      case #"sprint":
         if(var_a598c292 == "super_sprint") {
           var_70b46d1c = "sprint";
         }
@@ -1900,35 +1900,35 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     b_gibbed = 1;
 
     switch (self.damagelocation) {
-      case # "torso_upper":
-      case # "torso_lower":
+      case #"torso_upper":
+      case #"torso_lower":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "right_arm_lower":
-      case # "right_arm_upper":
-      case # "right_hand":
+      case #"right_arm_lower":
+      case #"right_arm_upper":
+      case #"right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "left_arm_lower":
-      case # "left_arm_upper":
-      case # "left_hand":
+      case #"left_arm_lower":
+      case #"left_arm_upper":
+      case #"left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self);
         }
 
         break;
-      case # "right_leg_upper":
-      case # "left_leg_lower":
-      case # "right_leg_lower":
-      case # "left_foot":
-      case # "right_foot":
-      case # "left_leg_upper":
+      case #"right_leg_upper":
+      case #"left_leg_lower":
+      case #"right_leg_lower":
+      case #"left_foot":
+      case #"right_foot":
+      case #"left_leg_upper":
         b_gibbed = 0;
         break;
       default:
@@ -2109,14 +2109,14 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   switch (type) {
-    case # "mod_telefrag":
-    case # "mod_unknown":
-    case # "mod_burned":
-    case # "mod_trigger_hurt":
-    case # "mod_suicide":
-    case # "mod_falling":
+    case #"mod_telefrag":
+    case #"mod_unknown":
+    case #"mod_burned":
+    case #"mod_trigger_hurt":
+    case #"mod_suicide":
+    case #"mod_falling":
       return false;
-    case # "mod_melee":
+    case #"mod_melee":
       return false;
   }
 

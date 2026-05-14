@@ -307,34 +307,34 @@ function notif_devgui_gun_rank() {
     }
 
     switch (weapon[#"group"]) {
-      case # "weapon_pistol":
+      case #"weapon_pistol":
         if(weapon[#"reference"] != "<dev string:x6de>") {
           arrayinsert(a_weapons[#"pistol"], gun, 0);
         }
 
         break;
-      case # "weapon_launcher":
+      case #"weapon_launcher":
         arrayinsert(a_weapons[#"launcher"], gun, 0);
         break;
-      case # "weapon_assault":
+      case #"weapon_assault":
         arrayinsert(a_weapons[#"assault"], gun, 0);
         break;
-      case # "weapon_tactical":
+      case #"weapon_tactical":
         arrayinsert(a_weapons[#"tactical"], gun, 0);
         break;
-      case # "weapon_smg":
+      case #"weapon_smg":
         arrayinsert(a_weapons[#"smg"], gun, 0);
         break;
-      case # "weapon_lmg":
+      case #"weapon_lmg":
         arrayinsert(a_weapons[#"lmg"], gun, 0);
         break;
-      case # "weapon_cqb":
+      case #"weapon_cqb":
         arrayinsert(a_weapons[#"shotgun"], gun, 0);
         break;
-      case # "weapon_sniper":
+      case #"weapon_sniper":
         arrayinsert(a_weapons[#"sniper"], gun, 0);
         break;
-      case # "weapon_knife":
+      case #"weapon_knife":
         arrayinsert(a_weapons[#"knife"], gun, 0);
         break;
       default:

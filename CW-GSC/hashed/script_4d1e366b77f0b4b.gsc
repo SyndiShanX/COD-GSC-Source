@@ -361,10 +361,10 @@ function private function_1d9f7b18() {
 
 function private function_15677aa0(cmd) {
   switch (cmd) {
-    case # "hash_fb30e673c6ed7ed":
-    case # "hash_3710ddeafb2df7df":
-    case # "hash_7791897f03cdc3bf":
-    case # "steiner_spawn":
+    case #"hash_fb30e673c6ed7ed":
+    case #"hash_3710ddeafb2df7df":
+    case #"hash_7791897f03cdc3bf":
+    case #"steiner_spawn":
       player = getplayers()[0];
       v_direction = player getplayerangles();
       v_direction = anglesToForward(v_direction) * 8000;
@@ -398,7 +398,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_7168487d1ca40ace":
+    case #"hash_7168487d1ca40ace":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
 
       foreach(steiner in steiners) {
@@ -406,7 +406,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_56fe56d42aeaae84":
+    case #"hash_56fe56d42aeaae84":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
 
       foreach(steiner in steiners) {
@@ -416,7 +416,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_6c5505a13bdeb727":
+    case #"hash_6c5505a13bdeb727":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
 
       foreach(steiner in steiners) {
@@ -428,7 +428,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_359a6fc8ff117087":
+    case #"hash_359a6fc8ff117087":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
 
       foreach(steiner in steiners) {
@@ -440,7 +440,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_24ad0cbc87557614":
+    case #"hash_24ad0cbc87557614":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
 
       foreach(steiner in steiners) {
@@ -450,7 +450,7 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_2359be32da56aa21":
+    case #"hash_2359be32da56aa21":
       steiners = getaiarchetypearray(#"hash_7c0d83ac1e845ac2");
       split_blast = undefined;
       split_bomb = undefined;
@@ -473,10 +473,10 @@ function private function_15677aa0(cmd) {
       }
 
       break;
-    case # "hash_108d247458cb597b":
+    case #"hash_108d247458cb597b":
       function_bbb547de(250);
       break;
-    case # "hash_77e4b4a0f4904933":
+    case #"hash_77e4b4a0f4904933":
       function_32af84be(level.players[0]);
       break;
     default:

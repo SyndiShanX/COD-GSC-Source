@@ -326,19 +326,19 @@ function function_57ba1474(var_648a2ef0) {
     var_89694459 = getdvarstring(#"overridedifficulty", "<dev string:x18d>");
 
     switch (tolower(var_89694459)) {
-      case # "recruit":
+      case #"recruit":
         level.gameskill = 0;
         break;
-      case # "regular":
+      case #"regular":
         level.gameskill = 1;
         break;
-      case # "hardened":
+      case #"hardened":
         level.gameskill = 2;
         break;
-      case # "veteran":
+      case #"veteran":
         level.gameskill = 3;
         break;
-      case # "realistic":
+      case #"realistic":
         level.gameskill = 4;
         break;
     }

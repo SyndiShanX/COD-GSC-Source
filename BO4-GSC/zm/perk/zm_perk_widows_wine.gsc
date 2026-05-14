@@ -116,15 +116,15 @@ widows_wine_contact_explosion() {
     }
 
     switch (ai_target.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         var_3e5502b5 = #"hash_6b28a9e80349ad7e";
         var_ca6267ad = 6;
         break;
-      case # "miniboss":
+      case #"miniboss":
         var_3e5502b5 = #"hash_fa4899571ae8dbd";
         var_ca6267ad = 3;
         break;
-      case # "boss":
+      case #"boss":
         continue;
       default:
         var_3e5502b5 = #"widows_wine_slowdown";
@@ -173,15 +173,15 @@ function_c6366dbe() {
       }
 
       switch (ai.zm_ai_category) {
-        case # "heavy":
+        case #"heavy":
           var_3e5502b5 = #"hash_6b28a9e80349ad7e";
           var_ca6267ad = 6;
           break;
-        case # "miniboss":
+        case #"miniboss":
           var_3e5502b5 = #"hash_fa4899571ae8dbd";
           var_ca6267ad = 3;
           break;
-        case # "boss":
+        case #"boss":
           continue;
         default:
           var_3e5502b5 = #"widows_wine_slowdown";

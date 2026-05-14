@@ -58,7 +58,7 @@ ai_killed(s_params) {
 function_198818fe() {
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case # "brutus":
+      case #"brutus":
         n_delay = 5;
         break;
     }
@@ -445,7 +445,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
       str_weapon = str_weapon_name;
 
       switch (str_weapon) {
-        case # "minigun":
+        case #"minigun":
           if(mod == "MOD_RIFLE_BULLET" && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
@@ -453,13 +453,13 @@ function_350fc8cc(weapon, zombie, mod, player) {
           }
 
           break;
-        case # "scepter":
+        case #"scepter":
           if(!(isDefined(zombie.var_4857363e) && zombie.var_4857363e)) {
             return # "novox";
           }
 
           break;
-        case # "flamethrower":
+        case #"flamethrower":
           if(mod == "MOD_IMPACT") {
             return # "novox";
           } else if(mod == "MOD_BURNED" && !(isDefined(zombie.var_d9e7a08a) && zombie.var_d9e7a08a) && player function_6049efce(str_weapon)) {
@@ -467,13 +467,13 @@ function_350fc8cc(weapon, zombie, mod, player) {
           }
 
           break;
-        case # "gravityspikes":
+        case #"gravityspikes":
           if(!(isDefined(zombie.var_46d39f48) && zombie.var_46d39f48)) {
             return # "novox";
           }
 
           break;
-        case # "katana":
+        case #"katana":
           if(mod == "MOD_MELEE" && !player flagsys::get("katana_dash") && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
@@ -481,7 +481,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
           }
 
           break;
-        case # "hammer":
+        case #"hammer":
           if(mod == "MOD_MELEE") {
             if(player function_6049efce(str_weapon)) {
               return str_weapon;
@@ -527,27 +527,27 @@ function_350fc8cc(weapon, zombie, mod, player) {
     } else {
       if(zm_weapons::is_wonder_weapon(weapon)) {
         switch (weapon.name) {
-          case # "ray_gun_upgraded":
-          case # "ray_gun":
+          case #"ray_gun_upgraded":
+          case #"ray_gun":
             if(player function_6049efce(weapon.name)) {
               str_weapon = #"raygun";
             }
 
             break;
-          case # "ray_gun_mk2":
-          case # "ray_gun_mk2_upgraded":
+          case #"ray_gun_mk2":
+          case #"ray_gun_mk2_upgraded":
             if(player function_6049efce(weapon.name)) {
               str_weapon = #"raygun_mk2";
             }
 
             break;
-          case # "ww_tesla_sniper_t8":
+          case #"ww_tesla_sniper_t8":
             if(player function_6049efce(weapon.name)) {
               str_weapon = #"tempest";
             }
 
             break;
-          case # "thundergun":
+          case #"thundergun":
             if(player function_6049efce(weapon.name)) {
               str_weapon = #"thundergun";
             } else {
@@ -555,7 +555,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
             }
 
             break;
-          case # "tundragun":
+          case #"tundragun":
             if(player function_6049efce(weapon.name)) {
               str_weapon = #"tundragun";
             } else {
@@ -563,7 +563,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
             }
 
             break;
-          case # "ww_freezegun_t8":
+          case #"ww_freezegun_t8":
             if(zombie.archetype === #"zombie_dog") {
               break;
             }
@@ -586,17 +586,17 @@ function_350fc8cc(weapon, zombie, mod, player) {
   }
 
   switch (zombie.damageweapon.name) {
-    case # "homunculus":
-    case # "cymbal_monkey":
+    case #"homunculus":
+    case #"cymbal_monkey":
       str_weapon = #"homunculus";
       break;
-    case # "bowie_knife_story_1":
-    case # "bowie_knife":
-    case # "knife":
+    case #"bowie_knife_story_1":
+    case #"bowie_knife":
+    case #"knife":
       str_weapon = #"melee";
       break;
-    case # "special_ballisticknife_t8_dw_upgraded":
-    case # "special_ballisticknife_t8_dw":
+    case #"special_ballisticknife_t8_dw_upgraded":
+    case #"special_ballisticknife_t8_dw":
       if(mod == "MOD_MELEE") {
         str_weapon = #"melee";
       } else {
@@ -604,18 +604,18 @@ function_350fc8cc(weapon, zombie, mod, player) {
       }
 
       break;
-    case # "galvaknuckles_t8":
+    case #"galvaknuckles_t8":
       str_weapon = #"galva";
       break;
-    case # "eq_wraith_fire":
-    case # "molotov_fire":
-    case # "eq_molotov_extra":
-    case # "wraith_fire_fire":
-    case # "eq_molotov":
-    case # "eq_wraith_fire_extra":
+    case #"eq_wraith_fire":
+    case #"molotov_fire":
+    case #"eq_molotov_extra":
+    case #"wraith_fire_fire":
+    case #"eq_molotov":
+    case #"eq_wraith_fire_extra":
       str_weapon = #"molotov";
       break;
-    case # "mini_turret":
+    case #"mini_turret":
       str_weapon = undefined;
       break;
   }
@@ -655,37 +655,37 @@ function_2d93d659(w_weapon) {
 
 function_fa4dfde0(w_weapon) {
   switch (w_weapon.name) {
-    case # "hero_scepter_lv3":
-    case # "hero_scepter_lv2":
-    case # "hero_scepter_lv1":
+    case #"hero_scepter_lv3":
+    case #"hero_scepter_lv2":
+    case #"hero_scepter_lv1":
       return # "scepter";
-    case # "hero_hammer_lv3":
-    case # "hero_hammer_lv2":
-    case # "hero_hammer_lv1":
+    case #"hero_hammer_lv3":
+    case #"hero_hammer_lv2":
+    case #"hero_hammer_lv1":
       return # "hammer";
-    case # "hero_chakram_lv2":
-    case # "hero_chakram_lv3":
-    case # "hero_chakram_lv1":
+    case #"hero_chakram_lv2":
+    case #"hero_chakram_lv3":
+    case #"hero_chakram_lv1":
       return # "chakram";
-    case # "hero_sword_pistol_lv2":
-    case # "hero_sword_pistol_lv3":
-    case # "hero_sword_pistol_lv1":
+    case #"hero_sword_pistol_lv2":
+    case #"hero_sword_pistol_lv3":
+    case #"hero_sword_pistol_lv1":
       return # "sword_pistol";
-    case # "hero_flamethrower_t8_lv1":
-    case # "hero_flamethrower_t8_lv2":
-    case # "hero_flamethrower_t8_lv3":
+    case #"hero_flamethrower_t8_lv1":
+    case #"hero_flamethrower_t8_lv2":
+    case #"hero_flamethrower_t8_lv3":
       return # "flamethrower";
-    case # "hero_minigun_t8_lv1":
-    case # "hero_minigun_t8_lv3":
-    case # "hero_minigun_t8_lv2":
+    case #"hero_minigun_t8_lv1":
+    case #"hero_minigun_t8_lv3":
+    case #"hero_minigun_t8_lv2":
       return # "minigun";
-    case # "hero_katana_t8_lv1":
-    case # "hero_katana_t8_lv2":
-    case # "hero_katana_t8_lv3":
+    case #"hero_katana_t8_lv1":
+    case #"hero_katana_t8_lv2":
+    case #"hero_katana_t8_lv3":
       return # "katana";
-    case # "hero_gravityspikes_t8_lv3":
-    case # "hero_gravityspikes_t8_lv2":
-    case # "hero_gravityspikes_t8_lv1":
+    case #"hero_gravityspikes_t8_lv3":
+    case #"hero_gravityspikes_t8_lv2":
+    case #"hero_gravityspikes_t8_lv1":
       return # "gravityspikes";
   }
 }
@@ -728,10 +728,10 @@ function_d2429d4f(str_weapon) {
   var_300d3c47 = 0;
 
   switch (str_weapon) {
-    case # "gravityspikes":
-    case # "flamethrower":
-    case # "katana":
-    case # "minigun":
+    case #"gravityspikes":
+    case #"flamethrower":
+    case #"katana":
+    case #"minigun":
       var_300d3c47 = 1;
       break;
   }
@@ -2391,12 +2391,12 @@ checkforvalidmod(str_meansofdeath) {
   }
 
   switch (str_meansofdeath) {
-    case # "mod_melee_weapon_butt":
-    case # "mod_crush":
-    case # "mod_hit_by_object":
-    case # "mod_grenade_splash":
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_weapon_butt":
+    case #"mod_crush":
+    case #"mod_hit_by_object":
+    case #"mod_grenade_splash":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
   }
 
@@ -2407,16 +2407,16 @@ checkforvalidweapon(weapon) {
   b_isvalid = 1;
 
   switch (weapon.name) {
-    case # "zhield_spectral_dw":
-    case # "zhield_spectral_dw_upgraded":
+    case #"zhield_spectral_dw":
+    case #"zhield_spectral_dw_upgraded":
       b_isvalid = 0;
       break;
-    case # "hero_flamethrower_t8_lv1":
-    case # "hero_flamethrower_t8_lv2":
-    case # "hero_flamethrower_t8_lv3":
-    case # "hero_scepter_lv3":
-    case # "hero_scepter_lv2":
-    case # "hero_scepter_lv1":
+    case #"hero_flamethrower_t8_lv1":
+    case #"hero_flamethrower_t8_lv2":
+    case #"hero_flamethrower_t8_lv3":
+    case #"hero_scepter_lv3":
+    case #"hero_scepter_lv2":
+    case #"hero_scepter_lv1":
       b_isvalid = 0;
       break;
   }
@@ -2445,7 +2445,7 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else if(isDefined(self.bgb_quacknarok) && self.bgb_quacknarok) {
@@ -2455,26 +2455,26 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
       }
 
       break;
-    case # "pain":
+    case #"pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "behind":
+    case #"behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "electrocute":
+    case #"electrocute":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "attack_melee_notetrack":
+    case #"attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case # "sprint":
-    case # "ambient":
-    case # "crawler":
-    case # "teardown":
-    case # "taunt":
+    case #"sprint":
+    case #"ambient":
+    case #"crawler":
+    case #"teardown":
+    case #"taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);
@@ -2669,13 +2669,13 @@ zombie_behind_vox() {
 
       if(isDefined(zombs[i].zombie_move_speed)) {
         switch (zombs[i].zombie_move_speed) {
-          case # "walk":
+          case #"walk":
             dist = 150;
             break;
-          case # "run":
+          case #"run":
             dist = 175;
             break;
-          case # "sprint":
+          case #"sprint":
             dist = 200;
             break;
         }
@@ -2715,15 +2715,15 @@ play_ambient_zombie_vocals() {
 
     if(isDefined(self.zombie_move_speed)) {
       switch (self.zombie_move_speed) {
-        case # "walk":
+        case #"walk":
           type = "ambient";
           float = 3;
           break;
-        case # "run":
+        case #"run":
           type = "sprint";
           float = 3;
           break;
-        case # "sprint":
+        case #"sprint":
           type = "sprint";
           float = 3;
           break;

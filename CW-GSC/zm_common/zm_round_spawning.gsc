@@ -1181,25 +1181,25 @@ function private devgui() {
     str_command = getdvarstring(#"hash_5996494c7608f933", "<dev string:x589>");
 
     switch (str_command) {
-      case # "summary":
+      case #"summary":
         level.var_89976878 = !level.var_89976878;
         break;
-      case # "intro_rounds":
+      case #"intro_rounds":
         level.var_64675235 = !level.var_64675235;
         break;
-      case # "special_rounds":
+      case #"special_rounds":
         level.var_48babc04 = !level.var_48babc04;
         break;
-      case # "hash_4c928e124b9db907":
+      case #"hash_4c928e124b9db907":
         level.var_1bf0ebc1 = !level.var_1bf0ebc1;
         break;
-      case # "point_distribution":
+      case #"point_distribution":
         level.var_465f07b = !level.var_465f07b;
         break;
-      case # "ai_composition":
+      case #"ai_composition":
         level.var_25a6031 = !level.var_25a6031;
         break;
-      case # "all_off":
+      case #"all_off":
         level.var_89976878 = 0;
         level.var_64675235 = 0;
         level.var_48babc04 = 0;

@@ -65,67 +65,67 @@ init() {
 
 function_6df0d3b6(zone_name) {
   switch (zone_name) {
-    case # "asylum":
+    case #"asylum":
       if(isDefined(level.var_243ebed2) && level.var_243ebed2) {
         return true;
       }
 
       break;
-    case # "cemetary":
+    case #"cemetary":
       if(isDefined(level.var_34d42591) && level.var_34d42591) {
         return true;
       }
 
       break;
-    case # "diner":
+    case #"diner":
       if(isDefined(level.var_8a023320) && level.var_8a023320) {
         return true;
       }
 
       break;
-    case # "boxinggym":
+    case #"boxinggym":
       if(isDefined(level.var_31c1a07f) && level.var_31c1a07f) {
         return true;
       }
 
       break;
-    case # "lighthouse":
+    case #"lighthouse":
       if(isDefined(level.var_524d0ac5) && level.var_524d0ac5) {
         return true;
       }
 
       break;
-    case # "nuketowncrater":
+    case #"nuketowncrater":
       if(isDefined(level.var_d224ae55) && level.var_d224ae55) {
         return true;
       }
 
       break;
-    case # "nuketownbunker":
+    case #"nuketownbunker":
       if(isDefined(level.var_ac94a871) && level.var_ac94a871) {
         return true;
       }
 
       break;
-    case # "farmnorth":
+    case #"farmnorth":
       if(isDefined(level.var_56a1f858) && level.var_56a1f858) {
         return true;
       }
 
       break;
-    case # "farmsouth":
+    case #"farmsouth":
       if(isDefined(level.var_2f8e7ed7) && level.var_2f8e7ed7) {
         return true;
       }
 
       break;
-    case # "farmwest":
+    case #"farmwest":
       if(isDefined(level.var_97d3cd33) && level.var_97d3cd33) {
         return true;
       }
 
       break;
-    case # "buried":
+    case #"buried":
       if(isDefined(level.var_66626ce3) && level.var_66626ce3) {
         return true;
       }

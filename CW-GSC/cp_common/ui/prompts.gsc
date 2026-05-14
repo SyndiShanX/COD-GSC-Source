@@ -875,25 +875,25 @@ function private function_99bb5bbe(prompt_struct) {
   }
 
   switch (prompt_struct.prompt) {
-    case # "use":
-    case # "use_tap":
+    case #"use":
+    case #"use_tap":
       return prompt_struct.player useButtonPressed();
-    case # "melee_hold":
-    case # "melee":
+    case #"melee_hold":
+    case #"melee":
       return prompt_struct.player meleeButtonPressed();
-    case # "attack":
+    case #"attack":
       return prompt_struct.player attackButtonPressed();
-    case # "reload":
+    case #"reload":
       return prompt_struct.player reloadbuttonPressed();
-    case # "frag":
+    case #"frag":
       return prompt_struct.player fragButtonPressed();
-    case # "stance":
+    case #"stance":
       return prompt_struct.player stancebuttonPressed();
-    case # "weapnext":
+    case #"weapnext":
       return prompt_struct.player weaponswitchbuttonPressed();
-    case # "ads":
+    case #"ads":
       return prompt_struct.player adsButtonPressed();
-    case # "vehicle_attack":
+    case #"vehicle_attack":
       return prompt_struct.player vehicleattackButtonPressed();
   }
 
@@ -902,13 +902,13 @@ function private function_99bb5bbe(prompt_struct) {
 
 function private function_eee54dd8(prompt_struct) {
   switch (prompt_struct.prompt) {
-    case # "confirm":
+    case #"confirm":
       return prompt_struct.player namespace_61e6d095::function_affb1af1();
-    case # "cancel":
+    case #"cancel":
       return prompt_struct.player namespace_61e6d095::function_57fbd346();
-    case # "alt1":
+    case #"alt1":
       return prompt_struct.player namespace_61e6d095::function_e4d62f9a();
-    case # "alt2":
+    case #"alt2":
       return prompt_struct.player namespace_61e6d095::function_728aec47();
     default:
       model = undefined;
@@ -1431,8 +1431,8 @@ function private function_f619081c(prompt, var_62bce5b6) {
   player = getplayers()[0];
 
   switch (prompt) {
-    case # "use":
-    case # "use_tap":
+    case #"use":
+    case #"use_tap":
       player val::set(var_62bce5b6.uid, "disable_usability", 1);
       player val::set(var_62bce5b6.uid, "disable_weapon_pickup", 1);
 
@@ -1442,14 +1442,14 @@ function private function_f619081c(prompt, var_62bce5b6) {
       }
 
       break;
-    case # "melee_hold":
-    case # "melee":
+    case #"melee_hold":
+    case #"melee":
       player val::set(var_62bce5b6.uid, "allow_melee", 0);
       break;
-    case # "attack":
+    case #"attack":
       player val::set(var_62bce5b6.uid, "disable_weapon_fire", 1);
       break;
-    case # "reload":
+    case #"reload":
       player val::set(var_62bce5b6.uid, "disable_weapon_reload", 1);
       self thread function_6d9e6b7d(player, prompt, var_62bce5b6.uid);
 
@@ -1459,10 +1459,10 @@ function private function_f619081c(prompt, var_62bce5b6) {
       }
 
       break;
-    case # "frag":
+    case #"frag":
       player val::set(var_62bce5b6.uid, "disable_offhand_weapons", 1);
       break;
-    case # "stance":
+    case #"stance":
       stance = player getstance();
 
       if(stance == "stand") {
@@ -1480,10 +1480,10 @@ function private function_f619081c(prompt, var_62bce5b6) {
       }
 
       break;
-    case # "weapnext":
+    case #"weapnext":
       player val::set(var_62bce5b6.uid, "disable_weapon_cycling", 1);
       break;
-    case # "ads":
+    case #"ads":
       player val::set(var_62bce5b6.uid, "allow_ads", 0);
       break;
   }
@@ -1500,8 +1500,8 @@ function private function_17578ab7(prompt, var_62bce5b6, uid = var_62bce5b6.uid)
     }
 
     switch (prompt) {
-      case # "use":
-      case # "use_tap":
+      case #"use":
+      case #"use_tap":
         player val::reset(uid, "disable_usability");
         player val::reset(uid, "disable_weapon_pickup");
 
@@ -1510,14 +1510,14 @@ function private function_17578ab7(prompt, var_62bce5b6, uid = var_62bce5b6.uid)
         }
 
         break;
-      case # "melee_hold":
-      case # "melee":
+      case #"melee_hold":
+      case #"melee":
         player val::reset(uid, "allow_melee");
         break;
-      case # "attack":
+      case #"attack":
         player val::reset(uid, "disable_weapon_fire");
         break;
-      case # "reload":
+      case #"reload":
         player val::reset(uid, "disable_weapon_reload");
 
         if(player gamepadusedlast()) {
@@ -1526,10 +1526,10 @@ function private function_17578ab7(prompt, var_62bce5b6, uid = var_62bce5b6.uid)
         }
 
         break;
-      case # "frag":
+      case #"frag":
         player val::reset(uid, "disable_offhand_weapons");
         break;
-      case # "stance":
+      case #"stance":
         stance = player getstance();
 
         if(stance == "stand") {
@@ -1547,10 +1547,10 @@ function private function_17578ab7(prompt, var_62bce5b6, uid = var_62bce5b6.uid)
         }
 
         break;
-      case # "weapnext":
+      case #"weapnext":
         player val::reset(uid, "disable_weapon_cycling");
         break;
-      case # "ads":
+      case #"ads":
         player val::reset(uid, "allow_ads");
         break;
     }

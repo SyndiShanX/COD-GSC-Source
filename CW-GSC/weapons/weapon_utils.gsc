@@ -31,11 +31,11 @@ function ismeleemod(mod) {
 
 function isexplosivedamage(meansofdeath) {
   switch (meansofdeath) {
-    case # "mod_explosive":
-    case # "mod_grenade":
-    case # "mod_projectile":
-    case # "mod_grenade_splash":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_grenade":
+    case #"mod_projectile":
+    case #"mod_grenade_splash":
+    case #"mod_projectile_splash":
       return true;
   }
 

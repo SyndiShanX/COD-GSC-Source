@@ -99,15 +99,15 @@ function function_690ab87a(str_objective, b_starting) {
     var_ae9e693 = str_objective + "_obey";
   } else {
     switch (str_objective) {
-      case # "memory_2":
-      case # "memory_1":
+      case #"memory_2":
+      case #"memory_1":
         level.player districts::function_930f8c81("bunker");
         level thread namespace_d9b153b9::function_49b8435c();
         break;
-      case # "memory_3":
+      case #"memory_3":
         level.player districts::function_a7d79fcb("lab");
         break;
-      case # "memory_4":
+      case #"memory_4":
         level.player districts::function_930f8c81("lab");
         break;
       default:

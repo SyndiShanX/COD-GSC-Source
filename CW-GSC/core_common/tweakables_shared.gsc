@@ -50,28 +50,28 @@ function private preinit() {
 
 function gettweakabledvarvalue(category, name) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       dvar = level.rules[name].dvar;
       break;
-    case # "game":
+    case #"game":
       dvar = level.gametweaks[name].dvar;
       break;
-    case # "team":
+    case #"team":
       dvar = level.teamtweaks[name].dvar;
       break;
-    case # "player":
+    case #"player":
       dvar = level.playertweaks[name].dvar;
       break;
-    case # "class":
+    case #"class":
       dvar = level.classtweaks[name].dvar;
       break;
-    case # "weapon":
+    case #"weapon":
       dvar = level.weapontweaks[name].dvar;
       break;
-    case # "killstreak":
+    case #"killstreak":
       dvar = level.hardpointtweaks[name].dvar;
       break;
-    case # "hud":
+    case #"hud":
       dvar = level.hudtweaks[name].dvar;
       break;
     default:
@@ -86,28 +86,28 @@ function gettweakabledvarvalue(category, name) {
 
 function gettweakabledvar(category, name) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       value = level.rules[name].dvar;
       break;
-    case # "game":
+    case #"game":
       value = level.gametweaks[name].dvar;
       break;
-    case # "team":
+    case #"team":
       value = level.teamtweaks[name].dvar;
       break;
-    case # "player":
+    case #"player":
       value = level.playertweaks[name].dvar;
       break;
-    case # "class":
+    case #"class":
       value = level.classtweaks[name].dvar;
       break;
-    case # "weapon":
+    case #"weapon":
       value = level.weapontweaks[name].dvar;
       break;
-    case # "killstreak":
+    case #"killstreak":
       value = level.hardpointtweaks[name].dvar;
       break;
-    case # "hud":
+    case #"hud":
       value = level.hudtweaks[name].dvar;
       break;
     default:
@@ -121,28 +121,28 @@ function gettweakabledvar(category, name) {
 
 function gettweakablevalue(category, name) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       value = level.rules[name].value;
       break;
-    case # "game":
+    case #"game":
       value = level.gametweaks[name].value;
       break;
-    case # "team":
+    case #"team":
       value = level.teamtweaks[name].value;
       break;
-    case # "player":
+    case #"player":
       value = level.playertweaks[name].value;
       break;
-    case # "class":
+    case #"class":
       value = level.classtweaks[name].value;
       break;
-    case # "weapon":
+    case #"weapon":
       value = level.weapontweaks[name].value;
       break;
-    case # "killstreak":
+    case #"killstreak":
       value = level.hardpointtweaks[name].value;
       break;
-    case # "hud":
+    case #"hud":
       value = level.hudtweaks[name].value;
       break;
     default:
@@ -162,28 +162,28 @@ function gettweakablevalue(category, name) {
 
 function gettweakablelastvalue(category, name) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       value = level.rules[name].lastvalue;
       break;
-    case # "game":
+    case #"game":
       value = level.gametweaks[name].lastvalue;
       break;
-    case # "team":
+    case #"team":
       value = level.teamtweaks[name].lastvalue;
       break;
-    case # "player":
+    case #"player":
       value = level.playertweaks[name].lastvalue;
       break;
-    case # "class":
+    case #"class":
       value = level.classtweaks[name].lastvalue;
       break;
-    case # "weapon":
+    case #"weapon":
       value = level.weapontweaks[name].lastvalue;
       break;
-    case # "killstreak":
+    case #"killstreak":
       value = level.hardpointtweaks[name].lastvalue;
       break;
-    case # "hud":
+    case #"hud":
       value = level.hudtweaks[name].lastvalue;
       break;
     default:
@@ -197,28 +197,28 @@ function gettweakablelastvalue(category, name) {
 
 function settweakablevalue(category, name, value) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       dvar = level.rules[name].dvar;
       break;
-    case # "game":
+    case #"game":
       dvar = level.gametweaks[name].dvar;
       break;
-    case # "team":
+    case #"team":
       dvar = level.teamtweaks[name].dvar;
       break;
-    case # "player":
+    case #"player":
       dvar = level.playertweaks[name].dvar;
       break;
-    case # "class":
+    case #"class":
       dvar = level.classtweaks[name].dvar;
       break;
-    case # "weapon":
+    case #"weapon":
       dvar = level.weapontweaks[name].dvar;
       break;
-    case # "killstreak":
+    case #"killstreak":
       dvar = level.hardpointtweaks[name].dvar;
       break;
-    case # "hud":
+    case #"hud":
       dvar = level.hudtweaks[name].dvar;
       break;
     default:
@@ -231,28 +231,28 @@ function settweakablevalue(category, name, value) {
 
 function settweakablelastvalue(category, name, value) {
   switch (category) {
-    case # "rule":
+    case #"rule":
       level.rules[name].lastvalue = value;
       break;
-    case # "game":
+    case #"game":
       level.gametweaks[name].lastvalue = value;
       break;
-    case # "team":
+    case #"team":
       level.teamtweaks[name].lastvalue = value;
       break;
-    case # "player":
+    case #"player":
       level.playertweaks[name].lastvalue = value;
       break;
-    case # "class":
+    case #"class":
       level.classtweaks[name].lastvalue = value;
       break;
-    case # "weapon":
+    case #"weapon":
       level.weapontweaks[name].lastvalue = value;
       break;
-    case # "killstreak":
+    case #"killstreak":
       level.hardpointtweaks[name].lastvalue = value;
       break;
-    case # "hud":
+    case #"hud":
       level.hudtweaks[name].lastvalue = value;
       break;
     default:
@@ -274,7 +274,7 @@ function registertweakable(category, name, dvar, value) {
   }
 
   switch (category) {
-    case # "rule":
+    case #"rule":
       if(!isDefined(level.rules[name])) {
         level.rules[name] = spawnStruct();
       }
@@ -283,7 +283,7 @@ function registertweakable(category, name, dvar, value) {
       level.rules[name].lastvalue = value;
       level.rules[name].dvar = dvar;
       break;
-    case # "game":
+    case #"game":
       if(!isDefined(level.gametweaks[name])) {
         level.gametweaks[name] = spawnStruct();
       }
@@ -292,7 +292,7 @@ function registertweakable(category, name, dvar, value) {
       level.gametweaks[name].lastvalue = value;
       level.gametweaks[name].dvar = dvar;
       break;
-    case # "team":
+    case #"team":
       if(!isDefined(level.teamtweaks[name])) {
         level.teamtweaks[name] = spawnStruct();
       }
@@ -301,7 +301,7 @@ function registertweakable(category, name, dvar, value) {
       level.teamtweaks[name].lastvalue = value;
       level.teamtweaks[name].dvar = dvar;
       break;
-    case # "player":
+    case #"player":
       if(!isDefined(level.playertweaks[name])) {
         level.playertweaks[name] = spawnStruct();
       }
@@ -310,7 +310,7 @@ function registertweakable(category, name, dvar, value) {
       level.playertweaks[name].lastvalue = value;
       level.playertweaks[name].dvar = dvar;
       break;
-    case # "class":
+    case #"class":
       if(!isDefined(level.classtweaks[name])) {
         level.classtweaks[name] = spawnStruct();
       }
@@ -319,7 +319,7 @@ function registertweakable(category, name, dvar, value) {
       level.classtweaks[name].lastvalue = value;
       level.classtweaks[name].dvar = dvar;
       break;
-    case # "weapon":
+    case #"weapon":
       if(!isDefined(level.weapontweaks[name])) {
         level.weapontweaks[name] = spawnStruct();
       }
@@ -328,7 +328,7 @@ function registertweakable(category, name, dvar, value) {
       level.weapontweaks[name].lastvalue = value;
       level.weapontweaks[name].dvar = dvar;
       break;
-    case # "killstreak":
+    case #"killstreak":
       if(!isDefined(level.hardpointtweaks[name])) {
         level.hardpointtweaks[name] = spawnStruct();
       }
@@ -337,7 +337,7 @@ function registertweakable(category, name, dvar, value) {
       level.hardpointtweaks[name].lastvalue = value;
       level.hardpointtweaks[name].dvar = dvar;
       break;
-    case # "hud":
+    case #"hud":
       if(!isDefined(level.hudtweaks[name])) {
         level.hudtweaks[name] = spawnStruct();
       }

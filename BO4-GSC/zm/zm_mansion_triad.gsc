@@ -529,7 +529,7 @@ function_2aa04f9f() {
       self thread function_8c4357b4("blue", 1);
 
       switch (self.script_noteworthy) {
-        case # "kp_fireplace_main_hall":
+        case #"kp_fireplace_main_hall":
           if(self.script_int == level.var_835c3546) {
             if(self.script_int == 0) {
               self thread function_82dc0664(e_player);
@@ -548,7 +548,7 @@ function_2aa04f9f() {
           }
 
           break;
-        case # "kp_fireplace_cemetery":
+        case #"kp_fireplace_cemetery":
           if(self.script_int == level.var_2ba64f64) {
             if(self.script_int == 0) {
               self thread function_82dc0664(e_player);
@@ -567,7 +567,7 @@ function_2aa04f9f() {
           }
 
           break;
-        case # "kp_fireplace_greenhouse":
+        case #"kp_fireplace_greenhouse":
           if(self.script_int == level.var_94c6e50c) {
             if(self.script_int == 0) {
               self thread function_82dc0664(e_player);
@@ -640,13 +640,13 @@ function_82dc0664(e_player) {
   self endon(self.script_noteworthy + "_done");
 
   switch (self.script_noteworthy) {
-    case # "kp_fireplace_main_hall":
+    case #"kp_fireplace_main_hall":
       level.var_dc3a898e = 0;
       break;
-    case # "kp_fireplace_cemetery":
+    case #"kp_fireplace_cemetery":
       level.var_ded69395 = 0;
       break;
-    case # "kp_fireplace_greenhouse":
+    case #"kp_fireplace_greenhouse":
       level.var_5f9f8ce8 = 0;
       break;
   }
@@ -654,15 +654,15 @@ function_82dc0664(e_player) {
   self waittilltimeout(36, #"fire_end");
 
   switch (self.script_noteworthy) {
-    case # "kp_fireplace_main_hall":
+    case #"kp_fireplace_main_hall":
       level.var_dc3a898e = 1;
       level.var_835c3546 = 0;
       break;
-    case # "kp_fireplace_cemetery":
+    case #"kp_fireplace_cemetery":
       level.var_ded69395 = 1;
       level.var_2ba64f64 = 0;
       break;
-    case # "kp_fireplace_greenhouse":
+    case #"kp_fireplace_greenhouse":
       level.var_5f9f8ce8 = 1;
       level.var_94c6e50c = 0;
       break;
@@ -767,19 +767,19 @@ function_265858d6() {
 
     if(zm_utility::can_use(player)) {
       switch (self.stub.script_string) {
-        case # "main_hall":
+        case #"main_hall":
           var_64403099 = getent("knight_model_main_hall", "targetname");
           var_64403099 thread function_30fe35b("tag_stone_02", "p8_zm_man_statue_kisa_stone_02", 1.5);
           var_64403099 util::delay(1.5, undefined, &scene::play, #"p8_fxanim_zm_man_ka01_bundle", "crumble", var_64403099);
           level flag::set(#"hash_775ff2ad49f494a7");
           break;
-        case # "cemetery":
+        case #"cemetery":
           var_64403099 = getent("knight_model_cemetery", "targetname");
           var_64403099 thread function_30fe35b("tag_stone_01", "p8_zm_man_statue_kisa_stone_01", 1.5);
           var_64403099 util::delay(1.5, undefined, &scene::play, #"p8_fxanim_zm_man_ka03_bundle", "crumble", var_64403099);
           level flag::set(#"hash_7583b516d2aab62e");
           break;
-        case # "greenhouse":
+        case #"greenhouse":
           var_64403099 = getent("knight_model_greenhouse", "targetname");
           var_64403099 thread function_30fe35b("tag_stone_03", "p8_zm_man_statue_kisa_stone_03", 1.5);
           var_64403099 util::delay(1.5, undefined, &scene::play, #"p8_fxanim_zm_man_ka02_bundle", "crumble", var_64403099);
@@ -809,7 +809,7 @@ function_4490aa7d() {
   s_spawn = struct::get("knight_spawnpt_" + self.script_string);
 
   switch (self.script_string) {
-    case # "main_hall":
+    case #"main_hall":
       var_ca0ae05d = "knight_main_hall_stationed";
       s_loc = struct::get("kp_1", "script_noteworthy");
       mdl_symbol = getent("kp_mark_lion", "script_noteworthy");
@@ -817,7 +817,7 @@ function_4490aa7d() {
       e_wisp = util::spawn_model(#"p8_zm_man_statue_kisa_stone_02", s_spawn.origin, s_spawn.angles);
       level.var_fbcb1d5b = e_wisp;
       break;
-    case # "cemetery":
+    case #"cemetery":
       var_ca0ae05d = "knight_cemetery_stationed";
       s_loc = struct::get("kp_2", "script_noteworthy");
       mdl_symbol = getent("kp_mark_cobra", "script_noteworthy");
@@ -825,7 +825,7 @@ function_4490aa7d() {
       e_wisp = util::spawn_model(#"p8_zm_man_statue_kisa_stone_01", s_spawn.origin, s_spawn.angles);
       level.var_abe1b67c = e_wisp;
       break;
-    case # "greenhouse":
+    case #"greenhouse":
       var_ca0ae05d = "knight_greenhouse_stationed";
       s_loc = struct::get("kp_3", "script_noteworthy");
       mdl_symbol = getent("kp_mark_wolf", "script_noteworthy");
@@ -898,13 +898,13 @@ function_d409a74f(mdl_symbol) {
   level flag::wait_till_all(array(#"knight_main_hall_stationed", #"knight_cemetery_stationed", #"knight_greenhouse_stationed"));
 
   switch (mdl_symbol.script_noteworthy) {
-    case # "kp_mark_lion":
+    case #"kp_mark_lion":
       mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
-    case # "kp_mark_wolf":
+    case #"kp_mark_wolf":
       mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
-    case # "kp_mark_cobra":
+    case #"kp_mark_cobra":
       mdl_symbol clientfield::set("" + #"knight_sigil_fx", 0);
       break;
   }
@@ -1165,13 +1165,13 @@ function_90cc31c4(s_goal, var_ea62e3e9, str_flag) {
   self stopanimscripted();
 
   switch (self.str_model) {
-    case # "hash_2fd7d12881613ff1":
+    case #"hash_2fd7d12881613ff1":
       self setModel(#"p8_zm_man_statue_kisa_stone_01");
       break;
-    case # "hash_485dabee10eddd9a":
+    case #"hash_485dabee10eddd9a":
       self setModel(#"p8_zm_man_statue_kisa_stone_02");
       break;
-    case # "hash_1e5559d9a4922ce7":
+    case #"hash_1e5559d9a4922ce7":
       self setModel(#"p8_zm_man_statue_kisa_stone_03");
       break;
   }

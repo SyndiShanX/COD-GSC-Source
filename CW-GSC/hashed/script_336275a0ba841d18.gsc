@@ -614,12 +614,12 @@ function function_6c40ff50() {
   }
 
   switch (level.var_2812b9f5) {
-    case # "hash_43b8d4f24851653e":
-    case # "spawner_zm_steiner":
+    case #"hash_43b8d4f24851653e":
+    case #"spawner_zm_steiner":
       self.var_8d1d18aa = 1;
       break;
-    case # "hash_acac3fe7a341329":
-    case # "hash_156c697af81feaf9":
+    case #"hash_acac3fe7a341329":
+    case #"hash_156c697af81feaf9":
       self.var_8d1d18aa = 1;
 
       if(is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
@@ -629,7 +629,7 @@ function function_6c40ff50() {
       }
 
       break;
-    case # "hash_60d7855358ceb53d":
+    case #"hash_60d7855358ceb53d":
       if(is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
         var_e63bba0e = 0.8;
       } else {
@@ -637,7 +637,7 @@ function function_6c40ff50() {
       }
 
       break;
-    case # "hash_3ff43755c44e6d3d":
+    case #"hash_3ff43755c44e6d3d":
       if(is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
         var_e63bba0e = 0.8;
       } else {
@@ -645,7 +645,7 @@ function function_6c40ff50() {
       }
 
       break;
-    case # "hash_4a900af3fc47cdd5":
+    case #"hash_4a900af3fc47cdd5":
       if(is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
         var_e63bba0e = 1;
       } else {
@@ -653,7 +653,7 @@ function function_6c40ff50() {
       }
 
       break;
-    case # "spawner_bo5_abom":
+    case #"spawner_bo5_abom":
       if(is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
         var_e63bba0e = 1.2;
       }
@@ -920,13 +920,13 @@ function function_33ac9c9e() {
     self thread zm_powerups::specific_powerup_drop("free_perk", self.origin);
   } else if(isDefined(level.var_361db66b)) {
     switch (level.var_361db66b) {
-      case # "hero_weapon_power":
+      case #"hero_weapon_power":
         self thread zm_powerups::specific_powerup_drop("full_ammo", self.origin);
         break;
-      case # "full_ammo":
+      case #"full_ammo":
         self thread zm_powerups::specific_powerup_drop("insta_kill", self.origin);
         break;
-      case # "insta_kill":
+      case #"insta_kill":
         self thread zm_powerups::specific_powerup_drop("hero_weapon_power", self.origin);
         break;
     }
@@ -1038,13 +1038,13 @@ function function_b33a5cf4(var_ba65b6cb) {
       self thread zm_powerups::specific_powerup_drop("free_perk", self.origin);
     } else if(isDefined(level.var_361db66b)) {
       switch (level.var_361db66b) {
-        case # "hero_weapon_power":
+        case #"hero_weapon_power":
           self thread zm_powerups::specific_powerup_drop("full_ammo", self.origin);
           break;
-        case # "full_ammo":
+        case #"full_ammo":
           self thread zm_powerups::specific_powerup_drop("insta_kill", self.origin);
           break;
-        case # "insta_kill":
+        case #"insta_kill":
           self thread zm_powerups::specific_powerup_drop("hero_weapon_power", self.origin);
           break;
       }
@@ -2660,8 +2660,8 @@ function function_f19e31a2() {
     level.var_6d24574d = 1;
 
     switch (level.var_2812b9f5) {
-      case # "hash_4f87aa2a203d37d0":
-      case # "spawner_bo5_mimic":
+      case #"hash_4f87aa2a203d37d0":
+      case #"spawner_bo5_mimic":
         wait 2;
         break;
       default:
@@ -2699,8 +2699,8 @@ function function_f19e31a2() {
       level.boss_ai thread function_a371376();
     } else {
       switch (level.var_2812b9f5) {
-        case # "hash_4f87aa2a203d37d0":
-        case # "spawner_bo5_mimic":
+        case #"hash_4f87aa2a203d37d0":
+        case #"spawner_bo5_mimic":
           level.var_693d250e = 2;
           break;
         default:
@@ -3036,7 +3036,7 @@ function event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       if(is_true(self.bgb_tone_death)) {
         level thread zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else if(is_true(self.bgb_quacknarok)) {
@@ -3046,26 +3046,26 @@ function event_handler[bhtn_action_start] function_320145f7(eventstruct) {
       }
 
       break;
-    case # "pain":
+    case #"pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "behind":
+    case #"behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "electrocute":
+    case #"electrocute":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "attack_melee_notetrack":
+    case #"attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case # "sprint":
-    case # "ambient":
-    case # "crawler":
-    case # "teardown":
-    case # "taunt":
+    case #"sprint":
+    case #"ambient":
+    case #"crawler":
+    case #"teardown":
+    case #"taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);
@@ -3292,13 +3292,13 @@ function zombie_behind_vox() {
 
       if(isDefined(zombs[i].zombie_move_speed)) {
         switch (zombs[i].zombie_move_speed) {
-          case # "walk":
+          case #"walk":
             dist = 150;
             break;
-          case # "run":
+          case #"run":
             dist = 175;
             break;
-          case # "sprint":
+          case #"sprint":
             dist = 200;
             break;
         }
@@ -3338,15 +3338,15 @@ function play_ambient_zombie_vocals() {
 
     if(isDefined(self.zombie_move_speed)) {
       switch (self.zombie_move_speed) {
-        case # "walk":
+        case #"walk":
           type = "ambient";
           float = 3;
           break;
-        case # "run":
+        case #"run":
           type = "sprint";
           float = 3;
           break;
-        case # "sprint":
+        case #"sprint":
           type = "sprint";
           float = 3;
           break;

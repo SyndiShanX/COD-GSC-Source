@@ -251,8 +251,8 @@ function function_88a55cb8(localclientnum, weapon, var_bb894354 = 0) {
   if(self.var_42662764 !== weapon.name) {
     if(isDefined(self.var_42662764)) {
       switch (self.var_42662764) {
-        case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-        case # "ww_mega_barrel_fullauto_micro_missile_t9":
+        case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+        case #"ww_mega_barrel_fullauto_micro_missile_t9":
           self function_d64a2c25(localclientnum);
           break;
         default:
@@ -268,10 +268,10 @@ function function_88a55cb8(localclientnum, weapon, var_bb894354 = 0) {
   }
 
   switch (weapon.name) {
-    case # "ww_mega_barrel_fullauto_micro_missile_t9":
+    case #"ww_mega_barrel_fullauto_micro_missile_t9":
       self function_d64a2c25(localclientnum, var_bb894354 > 0, 0);
       break;
-    case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+    case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
       self function_d64a2c25(localclientnum, var_bb894354 > 0, 1);
       break;
     default:
@@ -306,14 +306,14 @@ function function_d64a2c25(localclientnum, enable = 0, is_upgraded = 0) {
 function function_3efc58e4(weapon) {
   if(isDefined(weapon)) {
     switch (weapon.name) {
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9":
         return true;
     }
   }

@@ -584,7 +584,7 @@ function function_a6308ec9() {
 
 function function_7bb4a5d7(state) {
   switch (state) {
-    case # "snowfall_fade_in":
+    case #"snowfall_fade_in":
       if(!level flag::get("dog_round")) {
         level flag::set(#"snowfall_fade_in");
         level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 1);
@@ -594,7 +594,7 @@ function function_7bb4a5d7(state) {
       }
 
       break;
-    case # "snowfall_loop":
+    case #"snowfall_loop":
       if(!level flag::get("dog_round") && level flag::get(#"snowfall_fade_in")) {
         level flag::clear(#"snowfall_fade_in");
         level flag::set(#"snowfall_loop");
@@ -603,7 +603,7 @@ function function_7bb4a5d7(state) {
       }
 
       break;
-    case # "snowfall_fade_out":
+    case #"snowfall_fade_out":
       if(!level flag::get("dog_round") && level flag::get(#"snowfall_loop")) {
         level flag::clear(#"snowfall_loop");
         level flag::set(#"snowfall_fade_out");
@@ -614,7 +614,7 @@ function function_7bb4a5d7(state) {
       }
 
       break;
-    case # "snowfall_clear":
+    case #"snowfall_clear":
       if(level flag::get(#"snowfall_fade_out")) {
         level flag::clear(#"snowfall_fade_in");
         level flag::clear(#"hash_2751dc07d8287c1");
@@ -622,7 +622,7 @@ function function_7bb4a5d7(state) {
       }
 
       break;
-    case # "dog_round":
+    case #"dog_round":
       level flag::clear(#"snowfall_fade_in");
       level flag::clear(#"snowfall_loop");
       level flag::clear(#"snowfall_fade_out");
@@ -745,7 +745,7 @@ function private function_ec9000ea() {
 
 function private function_3ab942cb(cmd) {
   switch (cmd) {
-    case # "hash_fc3b784a3c0b31d":
+    case #"hash_fc3b784a3c0b31d":
       level.var_61a89694 = 1;
       break;
     default:

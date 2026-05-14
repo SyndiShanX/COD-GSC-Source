@@ -1203,9 +1203,9 @@ function function_beb69c9(dialogkey, var_89cfcebd) {
   }
 
   switch (dialogkey) {
-    case # "startscreamdeathmatch":
-    case # "screamorders":
-    case # "screamSlasherKilled":
+    case #"startscreamdeathmatch":
+    case #"screamorders":
+    case #"screamSlasherKilled":
       return # "hash_6ee97311fb9fac80";
     default:
       return var_89cfcebd;

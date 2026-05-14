@@ -450,10 +450,10 @@ zone_init(zone_name, zone_tag) {
 
       foreach(token in tokens) {
         switch (token) {
-          case # "custom_spawner_entry":
-          case # "spawn_location":
-          case # "riser_location":
-          case # "faller_location":
+          case #"custom_spawner_entry":
+          case #"spawn_location":
+          case #"riser_location":
+          case #"faller_location":
             spot.spawned_timestamp = gettime();
 
             if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
@@ -559,11 +559,11 @@ reinit_zone_spawners() {
 
         foreach(token in tokens) {
           switch (token) {
-            case # "custom_spawner_entry":
-            case # "spawn_location":
-            case # "riser_location":
-            case # "spawner_location":
-            case # "faller_location":
+            case #"custom_spawner_entry":
+            case #"spawn_location":
+            case #"riser_location":
+            case #"spawner_location":
+            case #"faller_location":
               if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
                 zone.a_loc_types[#"zombie_location"] = [];
               } else if(!isarray(zone.a_loc_types[#"zombie_location"])) {
@@ -1063,10 +1063,10 @@ function create_spawner_list(zkeys) {
 
           foreach(token in loc.tokens) {
             switch (token) {
-              case # "custom_spawner_entry":
-              case # "spawn_location":
-              case # "riser_location":
-              case # "faller_location":
+              case #"custom_spawner_entry":
+              case #"spawn_location":
+              case #"riser_location":
+              case #"faller_location":
                 if(!isDefined(level.zm_loc_types[#"zombie_location"])) {
                   level.zm_loc_types[#"zombie_location"] = [];
                 } else if(!isarray(level.zm_loc_types[#"zombie_location"])) {

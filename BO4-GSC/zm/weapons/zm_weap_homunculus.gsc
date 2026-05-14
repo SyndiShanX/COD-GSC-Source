@@ -380,9 +380,9 @@ function_2c022ba8(e_player, e_grenade) {
   var_5d7b4163 = zm_equipment::function_379f6b5d(500, var_b1c1c5cf, 1, 4, 50);
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       self playSound(#"hash_3a99f739009a77fa");
 
       if(math::cointoss() && math::cointoss()) {
@@ -396,8 +396,8 @@ function_2c022ba8(e_player, e_grenade) {
       }
 
       break;
-    case # "heavy":
-    case # "miniboss":
+    case #"heavy":
+    case #"miniboss":
       self playSound(#"hash_3a99f739009a77fa");
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus);
       self ai::stun(1.5);
@@ -431,13 +431,13 @@ function_45eb4c80() {
   self.var_8ea10940 = 1;
 
   switch (self.zm_ai_category) {
-    case # "heavy":
+    case #"heavy":
       n_cooldown_time = 3;
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_cooldown_time = 6;
       break;
-    case # "boss":
+    case #"boss":
       n_cooldown_time = 10;
       break;
     default:

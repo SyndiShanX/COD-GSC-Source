@@ -329,7 +329,7 @@ function function_4513f006(machine, trigger) {
 
     if(menu == #"sr_perk_machine_choice") {
       switch (waitresult.response) {
-        case # "hash_5c8984efe0e105db":
+        case #"hash_5c8984efe0e105db":
           var_82e23366 = getunlockableiteminfofromindex(intpayload, 5);
           var_438da649 = function_b143666d(intpayload, 5);
           talent = function_5d21ed88(var_82e23366);
@@ -366,7 +366,7 @@ function function_4513f006(machine, trigger) {
           }
 
           break;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           self notify(#"hash_2a909cd1a72f625b");
           self function_6c71e778(machine, trigger);
           return;

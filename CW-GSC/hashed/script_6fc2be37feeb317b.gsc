@@ -343,25 +343,25 @@ function function_ef9d58d0(item, weapon) {
 
   if(isDefined(item.itementry.name)) {
     switch (item.itementry.name) {
-      case # "ww_ieu_shockwave_t9_upgraded_item_sr":
-      case # "ww_ieu_gas_t9_item_sr":
-      case # "ww_ieu_plasma_t9_item_sr":
-      case # "ww_ieu_gas_t9_upgraded_item_sr":
-      case # "ww_ieu_acid_t9_upgraded_item_sr":
-      case # "ww_ieu_shockwave_t9_item_sr":
-      case # "ww_mega_barrel_fullauto_copycat_t9_item_sr":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded_item_sr":
-      case # "ww_ieu_electric_t9_item_sr":
-      case # "hash_3dff7d94b9ae5c97":
-      case # "ww_ieu_acid_t9_item_sr":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_item_sr":
-      case # "ww_ieu_electric_t9_upgraded_item_sr":
-      case # "ww_mega_barrel_fullauto_copycat_t9_upgraded_item_sr":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_item_sr":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_item_sr":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded_item_sr":
-      case # "ww_ieu_plasma_t9_upgraded_item_sr":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_upgraded_item_sr":
+      case #"ww_ieu_gas_t9_item_sr":
+      case #"ww_ieu_plasma_t9_item_sr":
+      case #"ww_ieu_gas_t9_upgraded_item_sr":
+      case #"ww_ieu_acid_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_item_sr":
+      case #"ww_mega_barrel_fullauto_copycat_t9_item_sr":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded_item_sr":
+      case #"ww_ieu_electric_t9_item_sr":
+      case #"hash_3dff7d94b9ae5c97":
+      case #"ww_ieu_acid_t9_item_sr":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_item_sr":
+      case #"ww_ieu_electric_t9_upgraded_item_sr":
+      case #"ww_mega_barrel_fullauto_copycat_t9_upgraded_item_sr":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_item_sr":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_item_sr":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded_item_sr":
+      case #"ww_ieu_plasma_t9_upgraded_item_sr":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded_item_sr":
         return true;
     }
   }
@@ -496,7 +496,7 @@ function function_4609e67c(machine, trigger) {
 
     if(menu == #"sr_weapon_upgrade_menu") {
       switch (waitresult.response) {
-        case # "hash_6235f4ca625f415":
+        case #"hash_6235f4ca625f415":
           if(var_9684b86c) {
             self function_6c71e778(machine, trigger);
             return;
@@ -523,16 +523,16 @@ function function_4609e67c(machine, trigger) {
 
               if(zm_weapons::function_89e5e7dd(var_4f0c684c)) {
                 switch (var_4f0c684c) {
-                  case # "ammomod_napalmburst":
+                  case #"ammomod_napalmburst":
                     self playlocalsound(#"hash_51ce55cb5e478c26");
                     break;
-                  case # "ammomod_cryofreeze":
+                  case #"ammomod_cryofreeze":
                     self playlocalsound(#"hash_110bd5fceb403850");
                     break;
-                  case # "ammomod_brainrot":
+                  case #"ammomod_brainrot":
                     self playlocalsound(#"hash_26a2938f2f36ad31");
                     break;
-                  case # "ammomod_deadwire":
+                  case #"ammomod_deadwire":
                     self playlocalsound(#"hash_55e994939fce271b");
                     break;
                 }
@@ -556,7 +556,7 @@ function function_4609e67c(machine, trigger) {
           }
 
           break;
-        case # "pap_purchase":
+        case #"pap_purchase":
           if(self isswitchingweapons() || is_true(self.var_c685a4c6) || isDefined(item.paplv) && item.paplv >= 3 || item.paplv === intpayload) {
             machine playsoundtoplayer(#"uin_default_action_denied", self);
           } else {
@@ -597,7 +597,7 @@ function function_4609e67c(machine, trigger) {
           }
 
           break;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           self notify(#"hash_213991f4845a7f0f");
           self function_6c71e778(machine, trigger);
           return;

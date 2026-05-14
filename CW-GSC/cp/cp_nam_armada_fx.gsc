@@ -108,10 +108,10 @@ function function_a9a0debb(params) {
       var_102cf4ae = strtok(arg, "=");
 
       switch (var_102cf4ae[0]) {
-        case # "f_fstop":
+        case #"f_fstop":
           f_fstop = float(var_102cf4ae[1]);
           break;
-        case # "f_fstop_time":
+        case #"f_fstop_time":
           f_fstop_time = float(var_102cf4ae[1]);
           break;
       }

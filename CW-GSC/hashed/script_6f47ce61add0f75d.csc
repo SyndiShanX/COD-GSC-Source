@@ -42,12 +42,12 @@ function function_4999d3f6() {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "player":
+    case #"player":
       level.player = ent;
       level.player waittill(#"death", #"disconnect");
       level.player = undefined;
       break;
-    case # "veh_escape_vehicle":
+    case #"veh_escape_vehicle":
       level.veh_escape_vehicle = ent;
       ent waittill(#"death");
       level.escape_vehicle = undefined;
@@ -63,19 +63,19 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
-    case # "hash_2c9d4ec293d7e4e":
-    case # "hash_c205d7dcba49ef1":
-    case # "hash_17e91a001ef73783":
-    case # "hash_19ec6f609219919d":
-    case # "hash_1e6f9008500856d2":
-    case # "hash_2a286a23dcd8c8e0":
-    case # "hash_3b88d5b7f1e5c437":
-    case # "kgb_atrium":
-    case # "hash_6a021f99de04f76a":
-    case # "hash_76fa75b94c82dabe":
-    case # "hash_790a9135c7f2630d":
+    case #"hash_2c9d4ec293d7e4e":
+    case #"hash_c205d7dcba49ef1":
+    case #"hash_17e91a001ef73783":
+    case #"hash_19ec6f609219919d":
+    case #"hash_1e6f9008500856d2":
+    case #"hash_2a286a23dcd8c8e0":
+    case #"hash_3b88d5b7f1e5c437":
+    case #"kgb_atrium":
+    case #"hash_6a021f99de04f76a":
+    case #"hash_76fa75b94c82dabe":
+    case #"hash_790a9135c7f2630d":
       snd::set_element(trigger, trigger_name);
       break;
     default:
@@ -88,164 +88,164 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "hash_7527c0556d529822":
+    case #"hash_7527c0556d529822":
       break;
-    case # "atrium_reveal":
+    case #"atrium_reveal":
       level notify(#"atrium_reveal");
       break;
-    case # "map_submix_on":
+    case #"map_submix_on":
       function_5ea2c6e3("cp_rus_kgb_map", 0.3, 1);
       break;
-    case # "map_submix_off":
+    case #"map_submix_off":
       function_ed62c9c2("cp_rus_kgb_map", 0.15);
       break;
-    case # "hash_695d2aba2d66c4b2":
+    case #"hash_695d2aba2d66c4b2":
       thread function_f115b891();
       break;
-    case # "hash_4b5a6716aab86d8e":
+    case #"hash_4b5a6716aab86d8e":
       thread function_4f6ed87();
       break;
-    case # "hash_72fda24008633c70":
+    case #"hash_72fda24008633c70":
       thread function_8d03afce();
       break;
-    case # "hash_3d26d1914456dcbe":
+    case #"hash_3d26d1914456dcbe":
       level notify(#"hash_2bc6846f8274a4c4");
       break;
-    case # "hash_3398664455247bac":
+    case #"hash_3398664455247bac":
       thread function_3c3d7227();
       break;
-    case # "hash_441b6b70aae75c67":
+    case #"hash_441b6b70aae75c67":
       wait 3.7;
       thread function_6186bcc6();
       break;
-    case # "hash_43c1a41f59a490d6":
+    case #"hash_43c1a41f59a490d6":
       thread function_4df52367();
       break;
-    case # "hash_2d4abae990c4399":
+    case #"hash_2d4abae990c4399":
       thread function_9c460fd();
       break;
-    case # "hash_4ec9a2c1432e46bb":
+    case #"hash_4ec9a2c1432e46bb":
       level notify(#"hash_173e440cd550970f");
       break;
-    case # "hash_c1613dbfb7218d0":
+    case #"hash_c1613dbfb7218d0":
       level notify(#"hash_39ef84876415aee7");
       thread function_359db1e6();
       break;
-    case # "hash_68f5c5f77549c363":
+    case #"hash_68f5c5f77549c363":
       function_672403ca("cp_rus_kgb_briefing", 2, 0.5);
       break;
-    case # "hash_4784d9dbd4d07023":
+    case #"hash_4784d9dbd4d07023":
       function_ed62c9c2("cp_rus_kgb_briefing", 1);
       break;
-    case # "hash_4692f2d7c81a7c95":
+    case #"hash_4692f2d7c81a7c95":
       thread function_1dd0dad7();
       break;
-    case # "hash_645d2b3398bf399c":
+    case #"hash_645d2b3398bf399c":
       thread function_dfe73855();
       break;
-    case # "hash_1a618ec692a1e9e3":
+    case #"hash_1a618ec692a1e9e3":
       thread function_6ad4463a();
       break;
-    case # "hash_3e2a2b64b78567ad":
+    case #"hash_3e2a2b64b78567ad":
       thread function_6ec08763();
       break;
-    case # "hash_9db8f264f5d0a4c":
+    case #"hash_9db8f264f5d0a4c":
       thread function_2f2c3cdf();
       break;
-    case # "hash_1d5a01df795ac3d2":
+    case #"hash_1d5a01df795ac3d2":
       thread function_48779979();
       break;
-    case # "hash_df2f3038c7a4515":
+    case #"hash_df2f3038c7a4515":
       thread function_b9840();
       break;
-    case # "hash_24e50b51fc3d3d2d":
+    case #"hash_24e50b51fc3d3d2d":
       thread function_c416f75a();
       break;
-    case # "hash_2582bdd148041a03":
+    case #"hash_2582bdd148041a03":
       thread function_acc47dc2();
       break;
-    case # "hash_810337327e9b45d":
+    case #"hash_810337327e9b45d":
       thread function_71130ea6();
       break;
-    case # "hash_2ef69949c5586784":
+    case #"hash_2ef69949c5586784":
       thread function_b568c231();
       break;
-    case # "hash_2520e050afad6b28":
+    case #"hash_2520e050afad6b28":
       thread function_535461fd();
       break;
-    case # "hash_134c64c3689b26d8":
+    case #"hash_134c64c3689b26d8":
       thread function_b9d77749();
       break;
-    case # "hash_8fb789398a122bf":
+    case #"hash_8fb789398a122bf":
       thread function_d005c58b();
       break;
-    case # "hash_13de9c8b5a620fc3":
+    case #"hash_13de9c8b5a620fc3":
       thread function_3555a373();
       break;
-    case # "hash_326d7039d6caf74":
+    case #"hash_326d7039d6caf74":
       thread function_a8eb2830();
       break;
-    case # "hash_6c7e5d8f2665fc0c":
+    case #"hash_6c7e5d8f2665fc0c":
       thread function_7ebfde85();
       break;
-    case # "hash_50da385a52268cf2":
+    case #"hash_50da385a52268cf2":
       thread function_126bd5a3();
       break;
-    case # "hash_305096503618cca":
+    case #"hash_305096503618cca":
       thread function_1954faa8();
       break;
-    case # "hash_1d0a63220c75a83c":
+    case #"hash_1d0a63220c75a83c":
       thread function_a44bdb37();
       break;
-    case # "hash_7573f73261e72989":
+    case #"hash_7573f73261e72989":
       thread function_7b1d476b();
       break;
-    case # "hash_66f0b482b018f16c":
+    case #"hash_66f0b482b018f16c":
       thread function_e9a2d784();
       break;
-    case # "hash_260009c64f919000":
+    case #"hash_260009c64f919000":
       level notify(#"hash_260009c64f919000");
       break;
-    case # "hash_2b37662433e62e4a":
+    case #"hash_2b37662433e62e4a":
       level notify(#"hash_2b37662433e62e4a");
       break;
-    case # "hash_562e2588670856dc":
+    case #"hash_562e2588670856dc":
       thread function_952fa759();
       break;
-    case # "hash_284e37a8f41f8182":
+    case #"hash_284e37a8f41f8182":
       thread function_aeb5c3be();
       break;
-    case # "hash_4a58b7be1af1818c":
+    case #"hash_4a58b7be1af1818c":
       thread function_c8547f0b();
       break;
-    case # "hash_182e794f60a3848b":
+    case #"hash_182e794f60a3848b":
       level notify(#"hash_182e794f60a3848b");
       break;
-    case # "hash_2b88d5deda9b0cb8":
+    case #"hash_2b88d5deda9b0cb8":
       thread function_6e29bca9();
       break;
-    case # "hash_71b18c4ea1c4cea2":
+    case #"hash_71b18c4ea1c4cea2":
       thread function_7ae3098e();
       break;
-    case # "hash_2705a705c011de47":
+    case #"hash_2705a705c011de47":
       thread function_a3b23b0f();
       break;
-    case # "hash_2d7e4cbd73ad29fb":
+    case #"hash_2d7e4cbd73ad29fb":
       level notify(#"hash_10c1d2c0d2f43070");
       break;
-    case # "exfil_car_pullup":
+    case #"exfil_car_pullup":
       exfil_car_pullup();
       break;
-    case # "exfil_car_enter":
+    case #"exfil_car_enter":
       thread exfil_car_enter();
       thread function_1f99f8ec();
       break;
-    case # "musictrack_cp_kgb_1":
-    case # "musictrack_cp_kgb_3":
-    case # "musictrack_cp_kgb_2":
-    case # "musictrack_cp_kgb_4":
-    case # "musictrack_cp_kgb_6":
-    case # "musictrack_cp_kgb_5":
+    case #"musictrack_cp_kgb_1":
+    case #"musictrack_cp_kgb_3":
+    case #"musictrack_cp_kgb_2":
+    case #"musictrack_cp_kgb_4":
+    case #"musictrack_cp_kgb_6":
+    case #"musictrack_cp_kgb_5":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -258,48 +258,48 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "kgb_ins_activation":
+    case #"kgb_ins_activation":
       break;
-    case # "kgb_ins_briefing":
+    case #"kgb_ins_briefing":
       thread function_4fb5552e();
       thread function_6186bcc6();
       break;
-    case # "kgb_ins_tutorial":
+    case #"kgb_ins_tutorial":
       thread function_4df52367();
       break;
-    case # "kgb_ins_prepare":
+    case #"kgb_ins_prepare":
       thread function_4df52367();
       break;
-    case # "kgb_ins_rv":
+    case #"kgb_ins_rv":
       thread function_4df52367();
       break;
-    case # "kgb_aslt_entry":
+    case #"kgb_aslt_entry":
       thread function_de171641();
       break;
-    case # "kgb_aslt_elev_down":
+    case #"kgb_aslt_elev_down":
       thread function_de171641();
       break;
-    case # "kgb_aslt_bunker":
+    case #"kgb_aslt_bunker":
       break;
-    case # "kgb_aslt_vault_approach":
+    case #"kgb_aslt_vault_approach":
       break;
-    case # "kgb_aslt_vault_breach":
+    case #"kgb_aslt_vault_breach":
       break;
-    case # "kgb_aslt_vault":
+    case #"kgb_aslt_vault":
       break;
-    case # "kgb_aslt_bunker_escape":
+    case #"kgb_aslt_bunker_escape":
       break;
-    case # "kgb_aslt_escape_lights_out":
+    case #"kgb_aslt_escape_lights_out":
       break;
-    case # "kgb_aslt_escape_deploy_gas":
+    case #"kgb_aslt_escape_deploy_gas":
       break;
-    case # "kgb_aslt_exfil":
+    case #"kgb_aslt_exfil":
       thread function_478dc292();
       thread function_95b3471f();
       break;
-    case # "kgb_aslt_exfil_escape":
+    case #"kgb_aslt_exfil_escape":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

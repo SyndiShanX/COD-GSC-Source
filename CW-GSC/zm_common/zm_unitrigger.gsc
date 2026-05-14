@@ -165,8 +165,8 @@ function private register_unitrigger_internal(unitrigger_stub, trigger_func) {
   }
 
   switch (unitrigger_stub.script_unitrigger_type) {
-    case # "unitrigger_radius":
-    case # "unitrigger_radius_use":
+    case #"unitrigger_radius":
+    case #"unitrigger_radius_use":
       if(!isDefined(unitrigger_stub.radius)) {
         unitrigger_stub.radius = 32;
       }
@@ -177,8 +177,8 @@ function private register_unitrigger_internal(unitrigger_stub, trigger_func) {
 
       unitrigger_stub.test_radius_sq = (unitrigger_stub.radius + 15) * (unitrigger_stub.radius + 15);
       break;
-    case # "unitrigger_box_use":
-    case # "unitrigger_box":
+    case #"unitrigger_box_use":
+    case #"unitrigger_box":
       if(!isDefined(unitrigger_stub.script_width)) {
         unitrigger_stub.script_width = 64;
       }
@@ -953,16 +953,16 @@ function private build_trigger_from_unitrigger_stub(s_stub, player) {
   }
 
   switch (s_stub.script_unitrigger_type) {
-    case # "unitrigger_radius":
+    case #"unitrigger_radius":
       trigger = spawn("trigger_radius", origin, 0, radius, script_height);
       break;
-    case # "unitrigger_radius_use":
+    case #"unitrigger_radius_use":
       trigger = spawn("trigger_radius_use", origin, 0, radius, script_height);
       break;
-    case # "unitrigger_box":
+    case #"unitrigger_box":
       trigger = spawn("trigger_box", origin, 0, script_width, script_length, script_height);
       break;
-    case # "unitrigger_box_use":
+    case #"unitrigger_box_use":
       trigger = spawn("trigger_box_use", origin, 0, script_width, script_length, script_height);
       break;
   }
@@ -1079,8 +1079,8 @@ function debug_unitriggers() {
         }
 
         switch (triggerstub.script_unitrigger_type) {
-          case # "unitrigger_radius":
-          case # "unitrigger_radius_use":
+          case #"unitrigger_radius":
+          case #"unitrigger_radius_use":
             if(triggerstub.radius) {
               circle(origin, triggerstub.radius, color, 0, 0, 1);
             }
@@ -1090,8 +1090,8 @@ function debug_unitriggers() {
             }
 
             break;
-          case # "unitrigger_box_use":
-          case # "unitrigger_box":
+          case #"unitrigger_box_use":
+          case #"unitrigger_box":
             vec = (triggerstub.script_width / 2, triggerstub.script_length / 2, triggerstub.script_height / 2);
             box(origin, vec * -1, vec, triggerstub.angles[1], color, 1, 0, 1);
             break;
@@ -1121,11 +1121,11 @@ function debug_trigger(trigger, var_5ca10e3c, color) {
     box(torigin, tmins, tmaxs, tangles[1], color, 1, 0, 1);
 
     switch (trigger.classname) {
-      case # "trigger_radius":
-      case # "trigger_radius_use":
+      case #"trigger_radius":
+      case #"trigger_radius_use":
         break;
-      case # "trigger_box_use":
-      case # "trigger_box":
+      case #"trigger_box_use":
+      case #"trigger_box":
         break;
     }
   }

@@ -233,13 +233,13 @@ function private function_8e7c24bc(type, var_b48509f9, list) {
 
 function function_b764d7c6(attachment) {
   switch (attachment) {
-    case # "suppressed":
+    case #"suppressed":
       return 8;
-    case # "suppressed2":
+    case #"suppressed2":
       return 10;
-    case # "mixmuzzle":
+    case #"mixmuzzle":
       return 8;
-    case # "mixmuzzle2":
+    case #"mixmuzzle2":
       return 10;
   }
 
@@ -248,13 +248,13 @@ function function_b764d7c6(attachment) {
 
 function function_339b84ba(attachment) {
   switch (attachment) {
-    case # "light":
+    case #"light":
       return 5;
-    case # "light2":
+    case #"light2":
       return 8;
-    case # "mixbody":
+    case #"mixbody":
       return 3;
-    case # "mixbody2":
+    case #"mixbody2":
       return 10;
   }
 
@@ -506,23 +506,23 @@ function function_6e72c1e2(instance) {
   destination = instance.location.destination;
 
   switch (destination.targetname) {
-    case # "hash_5f2517807d00a883":
+    case #"hash_5f2517807d00a883":
       return 5;
-    case # "hash_1f2ae7320559ce18":
+    case #"hash_1f2ae7320559ce18":
       return 5;
-    case # "destination_duga":
+    case #"destination_duga":
       return 5;
-    case # "destination_forest":
+    case #"destination_forest":
       return 5;
-    case # "destination_golova":
+    case #"destination_golova":
       return 5;
-    case # "destination_sanatorium":
+    case #"destination_sanatorium":
       return 5;
-    case # "destination_ski":
+    case #"destination_ski":
       return 5;
-    case # "hash_d373079cb7e775e":
+    case #"hash_d373079cb7e775e":
       return 5;
-    case # "destination_zoo":
+    case #"destination_zoo":
       return 5;
     default:
       return 5;
@@ -533,23 +533,23 @@ function function_933f4c09(instance) {
   destination = instance.location.destination;
 
   switch (destination.targetname) {
-    case # "hash_5f2517807d00a883":
+    case #"hash_5f2517807d00a883":
       return 10;
-    case # "hash_1f2ae7320559ce18":
+    case #"hash_1f2ae7320559ce18":
       return 10;
-    case # "destination_duga":
+    case #"destination_duga":
       return 10;
-    case # "destination_forest":
+    case #"destination_forest":
       return 10;
-    case # "destination_golova":
+    case #"destination_golova":
       return 10;
-    case # "destination_sanatorium":
+    case #"destination_sanatorium":
       return 10;
-    case # "destination_ski":
+    case #"destination_ski":
       return 10;
-    case # "hash_d373079cb7e775e":
+    case #"hash_d373079cb7e775e":
       return 10;
-    case # "destination_zoo":
+    case #"destination_zoo":
       return 10;
     default:
       return 10;
@@ -560,23 +560,23 @@ function function_7cd90066(instance) {
   destination = instance.location.destination;
 
   switch (destination.targetname) {
-    case # "hash_5f2517807d00a883":
+    case #"hash_5f2517807d00a883":
       return 10;
-    case # "hash_1f2ae7320559ce18":
+    case #"hash_1f2ae7320559ce18":
       return 10;
-    case # "destination_duga":
+    case #"destination_duga":
       return 10;
-    case # "destination_forest":
+    case #"destination_forest":
       return 10;
-    case # "destination_golova":
+    case #"destination_golova":
       return 10;
-    case # "destination_sanatorium":
+    case #"destination_sanatorium":
       return 10;
-    case # "destination_ski":
+    case #"destination_ski":
       return 10;
-    case # "hash_d373079cb7e775e":
+    case #"hash_d373079cb7e775e":
       return 10;
-    case # "destination_zoo":
+    case #"destination_zoo":
       return 10;
     default:
       return 10;

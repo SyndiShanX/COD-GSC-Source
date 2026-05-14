@@ -70,17 +70,17 @@ function function_de7fb95(var_c904ca7c, context = 0) {
     assert(toks.size > 0);
 
     switch (toks[0]) {
-      case # "elevator_brushmodel":
+      case #"elevator_brushmodel":
         action = 3;
         var_41157a40 = &function_92bae57c;
         var_4af56c19 = &function_2efb907a;
         break;
-      case # "elevator":
+      case #"elevator":
         action = 1;
         var_41157a40 = &function_9592df27;
         var_4af56c19 = &function_2efb907a;
         break;
-      case # "door":
+      case #"door":
         action = 2;
         var_41157a40 = &function_8a173823;
         var_4af56c19 = &function_1e0322f;
@@ -112,7 +112,7 @@ function function_de7fb95(var_c904ca7c, context = 0) {
 
       if(toks.size > 3) {
         switch (toks[3]) {
-          case # "loot":
+          case #"loot":
             assert(isDefined(target.target), "<dev string:xde>");
             target.lootitems = struct::get_array(target.target, "targetname");
             assert(target.lootitems.size, "<dev string:x112>");
@@ -122,7 +122,7 @@ function function_de7fb95(var_c904ca7c, context = 0) {
 
       if(toks.size > 4) {
         switch (toks[4]) {
-          case # "hash_6b07679758a7acc":
+          case #"hash_6b07679758a7acc":
             if(target.lootitems.size > 1) {
               item = target.lootitems[randomint(target.lootitems.size)];
               target.lootitems = [];
@@ -163,7 +163,7 @@ function function_9592df27() {
       assert(isDefined(item.script_noteworthy), "<dev string:x14c>");
 
       switch (item.script_noteworthy) {
-        case # "pickup_item":
+        case #"pickup_item":
           if(!isDefined(self.var_152b081b)) {
             self.var_152b081b = [];
           }
@@ -223,7 +223,7 @@ function function_92bae57c() {
       assert(isDefined(item.script_noteworthy), "<dev string:x14c>");
 
       switch (item.script_noteworthy) {
-        case # "pickup_item":
+        case #"pickup_item":
           if(!isDefined(self.var_152b081b)) {
             self.var_152b081b = [];
           }

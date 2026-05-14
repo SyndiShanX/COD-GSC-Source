@@ -677,19 +677,19 @@ function function_c943b729(action, takedown, player) {
   }
 
   switch (blackboard::getstructblackboardattribute(self, "_stance")) {
-    case # "stand":
+    case #"stand":
       if(!is_true(takedown.stancestand)) {
         return false;
       }
 
       break;
-    case # "crouch":
+    case #"crouch":
       if(!is_true(takedown.stancecrouch)) {
         return false;
       }
 
       break;
-    case # "prone":
+    case #"prone":
       if(!is_true(takedown.stanceprone)) {
         return false;
       }

@@ -691,72 +691,72 @@ function_628c5b1f(str_group, str_transition, var_55a37c48) {
   var_55a37c48 = isDefined(var_55a37c48) ? var_55a37c48 : randomfloatrange(0.75, 1);
 
   switch (str_transition) {
-    case # "seated_to_angry":
+    case #"seated_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_angry_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 1.733 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated_to_neutral":
+    case #"seated_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 1.733 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated_to_cheer":
+    case #"seated_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_cheer_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 2.033 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_seated":
+    case #"angry_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.8333 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_neutral":
+    case #"angry_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_cheer":
+    case #"angry_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_seated":
+    case #"neutral_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.9 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_angry":
+    case #"neutral_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_angry_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_cheer":
+    case #"neutral_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_cheer_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.333 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_seated":
+    case #"cheer_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 2.7 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_angry":
+    case #"cheer_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_neutral":
+    case #"cheer_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated":
+    case #"seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry":
+    case #"angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral":
+    case #"neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer":
+    case #"cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
   }
@@ -769,72 +769,72 @@ function_1e3bd96a(str_group, str_transition, var_55a37c48) {
   var_55a37c48 = isDefined(var_55a37c48) ? var_55a37c48 : randomfloatrange(0.75, 1);
 
   switch (str_transition) {
-    case # "seated_to_angry":
+    case #"seated_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_angry_1")), "set_playback_speed", var_55a37c48);
       wait 2.7;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated_to_neutral":
+    case #"seated_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       wait 2.7 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated_to_cheer":
+    case #"seated_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       wait 2.7 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_seated":
+    case #"angry_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_seatd_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_neutral":
+    case #"angry_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       wait 8.333 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry_to_cheer":
+    case #"angry_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_seated":
+    case #"neutral_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_seatd_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_angry":
+    case #"neutral_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_angry_1")), "set_playback_speed", var_55a37c48);
       wait 8.333 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral_to_cheer":
+    case #"neutral_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       wait 8.333 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_seated":
+    case #"cheer_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_seatd_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_angry":
+    case #"cheer_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer_to_neutral":
+    case #"cheer_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       wait 6.666 / var_55a37c48;
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "seated":
+    case #"seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_seatd_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "angry":
+    case #"angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_angry_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "neutral":
+    case #"neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_neutral_1")), "set_playback_speed", var_55a37c48);
       break;
-    case # "cheer":
+    case #"cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"grp27_ch_vign_tplt_prebtl_zm_crowd_stand_cheer_1")), "set_playback_speed", var_55a37c48);
       break;
   }

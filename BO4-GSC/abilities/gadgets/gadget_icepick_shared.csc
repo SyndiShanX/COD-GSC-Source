@@ -46,26 +46,26 @@ function_b2755499(weapon, entity) {
   returnweapon = weapon;
 
   switch (weapon.name) {
-    case # "cobra_20mm_comlink":
+    case #"cobra_20mm_comlink":
       returnweapon = getweapon("helicopter_comlink");
       break;
-    case # "gun_ultimate_turret":
+    case #"gun_ultimate_turret":
       returnweapon = getweapon("ultimate_turret");
       break;
-    case # "hash_17df39d53492b0bf":
+    case #"hash_17df39d53492b0bf":
       returnweapon = getweapon("ac130");
       break;
-    case # "straferun_gun":
+    case #"straferun_gun":
       returnweapon = getweapon("straferun");
       break;
-    case # "drone_squadron_turret":
+    case #"drone_squadron_turret":
       returnweapon = getweapon("drone_squadron");
       break;
-    case # "player_air_vehicle1_main_turret_3rd_person":
+    case #"player_air_vehicle1_main_turret_3rd_person":
       returnweapon = function_b53fa4ba(entity);
       break;
-    case # "hash_61b88900b127386a":
-    case # "hash_71088fcd3aaa23fb":
+    case #"hash_61b88900b127386a":
+    case #"hash_71088fcd3aaa23fb":
       returnweapon = getweapon("eq_hawk");
       break;
   }

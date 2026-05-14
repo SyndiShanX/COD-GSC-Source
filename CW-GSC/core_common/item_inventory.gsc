@@ -880,27 +880,27 @@ function private function_9d805044(itemtype, var_ab9610ad = undefined) {
   }
 
   switch (itemtype) {
-    case # "backpack":
+    case #"backpack":
       function_2e10e66e(var_ab9610ad);
       break;
-    case # "equipment":
+    case #"equipment":
       function_283a29c8(var_ab9610ad);
       break;
-    case # "field_upgrade":
+    case #"field_upgrade":
       function_bf956054(var_ab9610ad);
       break;
-    case # "tactical":
+    case #"tactical":
       function_cd5393a9(var_ab9610ad);
       break;
-    case # "health":
+    case #"health":
       function_a7d62e18(var_ab9610ad);
       break;
-    case # "scorestreak":
+    case #"scorestreak":
       function_986801b8(var_ab9610ad);
       break;
-    case # "perk_tier_3":
-    case # "perk_tier_2":
-    case # "perk_tier_1":
+    case #"perk_tier_3":
+    case #"perk_tier_2":
+    case #"perk_tier_1":
       function_714fce55(hash(itemtype), var_ab9610ad);
       break;
     default:
@@ -912,10 +912,10 @@ function private function_d08934c6(equipment) {
   var_b74300d3 = undefined;
 
   switch (equipment) {
-    case # "satchel_charge":
+    case #"satchel_charge":
       var_b74300d3 = sessionmodeiszombiesgame() ? # "satchel_charge_t9_item_sr" : # "satchel_charge_t9_item";
       break;
-    case # "hatchet":
+    case #"hatchet":
       var_b74300d3 = #"hatchet_t9_item";
 
       if(sessionmodeiszombiesgame()) {
@@ -925,19 +925,19 @@ function private function_d08934c6(equipment) {
       }
 
       break;
-    case # "tomahawk_t8":
+    case #"tomahawk_t8":
       var_b74300d3 = #"tomahawk_t8_wz_item";
       break;
-    case # "basketball":
+    case #"basketball":
       var_b74300d3 = #"wz_ball";
       break;
-    case # "cymbal_monkey":
+    case #"cymbal_monkey":
       var_b74300d3 = sessionmodeiszombiesgame() ? # "cymbal_monkey_t9_item_sr" : # "cymbal_monkey_wz_item";
       break;
-    case # "trophy_system":
+    case #"trophy_system":
       var_b74300d3 = #"trophy_system_wz_item";
       break;
-    case # "gadget_jammer":
+    case #"gadget_jammer":
       var_b74300d3 = sessionmodeiszombiesgame() ? # "hash_5aeb970e93a31c17" : # "hash_3f154f45479130ed";
       break;
   }
@@ -1221,10 +1221,10 @@ function private function_ee9ce1c4(itementry, var_dfe6c7e5) {
   var_cbdeb265 = level.nullprimaryoffhand;
 
   switch (var_dfe6c7e5.itemtype) {
-    case # "tactical":
+    case #"tactical":
       var_cbdeb265 = level.nullsecondaryoffhand;
       break;
-    case # "field_upgrade":
+    case #"field_upgrade":
       var_cbdeb265 = level.var_3488e988;
       break;
   }
@@ -1857,11 +1857,11 @@ function function_e66dcff5(item, var_662e1704 = 0) {
   }
 
   switch (item.itementry.itemtype) {
-    case # "ammo":
+    case #"ammo":
       return undefined;
-    case # "armor_shard":
+    case #"armor_shard":
       return 11;
-    case # "weapon":
+    case #"weapon":
       foreach(slotid in item_inventory_util::function_4905dddf()) {
         if(self.inventory.items[slotid].networkid === 32767) {
           return slotid;
@@ -1875,59 +1875,59 @@ function function_e66dcff5(item, var_662e1704 = 0) {
       }
 
       return function_b246c573(weaponitem.networkid);
-    case # "backpack":
+    case #"backpack":
       return 8;
-    case # "armor":
+    case #"armor":
       return 6;
-    case # "resource":
+    case #"resource":
       if(item_world_util::function_41f06d9d(item.itementry)) {
         return 9;
       }
 
       return 10;
-    case # "equipment":
+    case #"equipment":
       if(var_662e1704 || self.inventory.items[7].networkid === 32767) {
         return 7;
       }
 
       break;
-    case # "field_upgrade":
+    case #"field_upgrade":
       if(var_662e1704 || self.inventory.items[12].networkid === 32767) {
         return 12;
       }
 
       break;
-    case # "tactical":
+    case #"tactical":
       if(var_662e1704 || self.inventory.items[13].networkid === 32767) {
         return 13;
       }
 
       break;
-    case # "health":
+    case #"health":
       if(var_662e1704 || self.inventory.items[5].networkid === 32767) {
         return 5;
       }
 
       break;
-    case # "perk_tier_1":
+    case #"perk_tier_1":
       if(var_662e1704 || self.inventory.items[14].networkid === 32767) {
         return 14;
       }
 
       break;
-    case # "perk_tier_2":
+    case #"perk_tier_2":
       if(var_662e1704 || self.inventory.items[15].networkid === 32767) {
         return 15;
       }
 
       break;
-    case # "perk_tier_3":
+    case #"perk_tier_3":
       if(var_662e1704 || self.inventory.items[16].networkid === 32767) {
         return 16;
       }
 
       break;
-    case # "scorestreak":
+    case #"scorestreak":
       if(var_662e1704 || self.inventory.items[17].networkid === 32767) {
         return 17;
       }
@@ -2335,10 +2335,10 @@ function equip_equipment(item) {
   itemslotid = 7;
 
   switch (item.itementry.itemtype) {
-    case # "field_upgrade":
+    case #"field_upgrade":
       itemslotid = 12;
       break;
-    case # "tactical":
+    case #"tactical":
       itemslotid = 13;
       break;
   }
@@ -2395,10 +2395,10 @@ function equip_equipment(item) {
     var_cbdeb265 = level.nullprimaryoffhand;
 
     switch (item.itementry.itemtype) {
-      case # "tactical":
+      case #"tactical":
         var_cbdeb265 = level.nullsecondaryoffhand;
         break;
-      case # "field_upgrade":
+      case #"field_upgrade":
         var_cbdeb265 = level.var_3488e988;
         break;
     }
@@ -2641,13 +2641,13 @@ function equip_item(networkid, quickequip = 0, weaponid = 0) {
     itemtype = item.itementry.itemtype;
 
     switch (itemtype) {
-      case # "ammo":
+      case #"ammo":
         self equip_ammo(item);
         break;
-      case # "armor":
+      case #"armor":
         self equip_armor(item);
         break;
-      case # "attachment":
+      case #"attachment":
         if(weaponid == 0) {
           self equip_attachment(item, function_ec087745(), undefined, !quickequip, 1);
         } else {
@@ -2655,32 +2655,32 @@ function equip_item(networkid, quickequip = 0, weaponid = 0) {
         }
 
         break;
-      case # "backpack":
+      case #"backpack":
         self equip_backpack(item);
         break;
-      case # "tactical":
-      case # "equipment":
-      case # "field_upgrade":
+      case #"tactical":
+      case #"equipment":
+      case #"field_upgrade":
         self equip_equipment(item);
         break;
-      case # "perk_tier_3":
-      case # "perk_tier_2":
-      case # "perk_tier_1":
+      case #"perk_tier_3":
+      case #"perk_tier_2":
+      case #"perk_tier_1":
         self function_854cf2c3(item);
         break;
-      case # "scorestreak":
+      case #"scorestreak":
         self function_1ac37022(item);
         break;
-      case # "generic":
-      case # "cash":
+      case #"generic":
+      case #"cash":
         break;
-      case # "health":
+      case #"health":
         self equip_health(item);
         break;
-      case # "killstreak":
+      case #"killstreak":
         self use_killstreak(networkid, item);
         break;
-      case # "weapon":
+      case #"weapon":
         self equip_weapon(item);
         break;
       default:
@@ -3631,29 +3631,29 @@ function function_db2abc4(item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         break;
-      case # "ammo":
+      case #"ammo":
         break;
-      case # "health":
+      case #"health":
         break;
-      case # "equipment":
+      case #"equipment":
         break;
-      case # "field_upgrade":
+      case #"field_upgrade":
         break;
-      case # "tactical":
+      case #"tactical":
         break;
-      case # "armor":
+      case #"armor":
         break;
-      case # "backpack":
+      case #"backpack":
         break;
-      case # "attachment":
+      case #"attachment":
         if(isDefined(item.itementry.equipsound)) {
           self playsoundtoplayer(item.itementry.equipsound, self);
         }
 
         break;
-      case # "generic":
+      case #"generic":
         break;
     }
   }
@@ -3927,37 +3927,37 @@ function function_fba4a353(item) {
     slotid = undefined;
 
     switch (item.itementry.itemtype) {
-      case # "armor":
+      case #"armor":
         slotid = 6;
         break;
-      case # "backpack":
+      case #"backpack":
         slotid = 8;
         break;
-      case # "equipment":
+      case #"equipment":
         slotid = 7;
         break;
-      case # "field_upgrade":
+      case #"field_upgrade":
         slotid = 12;
         break;
-      case # "tactical":
+      case #"tactical":
         slotid = 13;
         break;
-      case # "health":
+      case #"health":
         slotid = 5;
         break;
-      case # "weapon":
+      case #"weapon":
         slotid = item_inventory_util::function_4905dddf();
         break;
-      case # "perk_tier_1":
+      case #"perk_tier_1":
         slotid = 14;
         break;
-      case # "perk_tier_2":
+      case #"perk_tier_2":
         slotid = 15;
         break;
-      case # "perk_tier_3":
+      case #"perk_tier_3":
         slotid = 16;
         break;
-      case # "scorestreak":
+      case #"scorestreak":
         slotid = 17;
         break;
     }

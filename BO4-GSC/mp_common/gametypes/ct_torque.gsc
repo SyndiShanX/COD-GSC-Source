@@ -1209,55 +1209,55 @@ devgui_ct_torque() {
     e_player = ct_utils::get_player();
 
     switch (cmd) {
-      case # "hash_1ce8d5f5a390a03e":
+      case #"hash_1ce8d5f5a390a03e":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::set("<dev string:x9fd>", "<dev string:xa0f>", 1);
         }
 
         break;
-      case # "hash_3028b864eea95c40":
+      case #"hash_3028b864eea95c40":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::reset("<dev string:x9fd>", "<dev string:xa0f>");
         }
 
         break;
-      case # "hash_2a604c8957a7a557":
+      case #"hash_2a604c8957a7a557":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::set("<dev string:xa1b>", "<dev string:xa2c>", 1);
         }
 
         break;
-      case # "hash_292c4e5ff1c705bb":
+      case #"hash_292c4e5ff1c705bb":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::reset("<dev string:xa1b>", "<dev string:xa2c>");
         }
 
         break;
-      case # "hash_12348115d7e7bfac":
+      case #"hash_12348115d7e7bfac":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield = 1;
         }
 
         break;
-      case # "hash_5712121ddee190c6":
+      case #"hash_5712121ddee190c6":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield = 0;
         }
 
         break;
-      case # "vip_move_stop":
+      case #"vip_move_stop":
         if(isalive(level.ai_vip)) {
           function_6fc5325c();
         }
 
         break;
-      case # "hash_2000f929025eaeae":
+      case #"hash_2000f929025eaeae":
         if(isDefined(level.ai_vip.var_1d6b3936)) {
           function_5f4dc2fe();
         }
 
         break;
-      case # "zombies_kill_all":
+      case #"zombies_kill_all":
         if(isDefined(level.a_ai_zombies) && level.a_ai_zombies.size > 0) {
           while(level.a_ai_zombies.size > 0) {
             ai_zombie = level.a_ai_zombies[0];
@@ -1272,46 +1272,46 @@ devgui_ct_torque() {
         }
 
         break;
-      case # "hash_22419681259c1f7e":
+      case #"hash_22419681259c1f7e":
         e_player thread function_f7cf3a9b(10, 1);
         break;
-      case # "hash_50fe7f44449540a4":
+      case #"hash_50fe7f44449540a4":
         e_player thread function_f7cf3a9b(10, 0);
         break;
-      case # "hash_5d55e8e48b20f80d":
+      case #"hash_5d55e8e48b20f80d":
         ct_utils::get_player() thread function_f7cf3a9b(20, 1);
         break;
-      case # "hash_4e6e57e708e66599":
+      case #"hash_4e6e57e708e66599":
         ct_utils::get_player() thread function_f7cf3a9b(20, 0);
         break;
-      case # "hash_584d089de37eb272":
+      case #"hash_584d089de37eb272":
         e_player thread function_944278fd(10, 1, 1000, 2000);
         break;
-      case # "hash_584a029de37c7269":
+      case #"hash_584a029de37c7269":
         e_player thread function_944278fd(20, 1, 1000, 2000);
         break;
-      case # "hash_2789437bec32487c":
+      case #"hash_2789437bec32487c":
         e_player thread function_db21e968(10, 1);
         break;
-      case # "hash_2793557bec3abb97":
+      case #"hash_2793557bec3abb97":
         e_player thread function_db21e968(20, 1);
         break;
-      case # "hash_5892e5a92d7dc8cd":
+      case #"hash_5892e5a92d7dc8cd":
         e_player notify(#"hash_3bd66153d302d5e3");
         break;
-      case # "hash_3849a968028039ac":
+      case #"hash_3849a968028039ac":
         level.ai_vip thread function_db21e968(10, 1);
         break;
-      case # "hash_3853bb680288acc7":
+      case #"hash_3853bb680288acc7":
         level.ai_vip thread function_db21e968(20, 1);
         break;
-      case # "hash_4e4dc106db86a01d":
+      case #"hash_4e4dc106db86a01d":
         level.ai_vip notify(#"hash_3bd66153d302d5e3");
         break;
-      case # "hash_2f5364716bda85ac":
+      case #"hash_2f5364716bda85ac":
         level thread spawn_zombies(ct_utils::get_player(), 10, 1);
         break;
-      case # "hash_6ab57ee2387c029f":
+      case #"hash_6ab57ee2387c029f":
         level thread spawn_zombies(ct_utils::get_player(), 20, 1);
         break;
     }

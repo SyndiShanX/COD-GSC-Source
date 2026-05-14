@@ -607,11 +607,11 @@ set_team_radar(team, value) {
 
 is_objective_game(game_type) {
   switch (game_type) {
-    case # "dm":
-    case # "conf":
-    case # "gun":
-    case # "tdm":
-    case # "clean":
+    case #"dm":
+    case #"conf":
+    case #"gun":
+    case #"tdm":
+    case #"clean":
       return 0;
     default:
       return 1;
@@ -664,10 +664,10 @@ function_5a68c330(var_e0dd85aa, s_team, n_clientnum, extradata = 0) {
   }
 
   switch (s_team) {
-    case # "axis":
+    case #"axis":
       n_team = 2;
       break;
-    case # "allies":
+    case #"allies":
       n_team = 1;
       break;
     default:

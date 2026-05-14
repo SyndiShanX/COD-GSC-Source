@@ -1078,13 +1078,13 @@ safe_init() {
 
   foreach(struct in a_structs) {
     switch (struct.script_noteworthy) {
-      case # "hash_3e8f0dc79ba8ae20":
+      case #"hash_3e8f0dc79ba8ae20":
         self.var_3abff2c8[self.var_3abff2c8.size] = struct;
         break;
-      case # "hash_238372761f11df6b":
+      case #"hash_238372761f11df6b":
         self.gadget_lgt_exp_train_canals_debug = struct;
         break;
-      case # "s_bn_sp":
+      case #"s_bn_sp":
         self.var_6f76e7b0 = struct;
         break;
     }
@@ -1145,16 +1145,16 @@ function_ae4e9016() {
 
     if(isDefined(e_player.mdl_bone)) {
       switch (e_player.mdl_bone.script_noteworthy) {
-        case # "hash_1038ceaeafe155b3":
-        case # "hash_798f4232dfe03b8c":
+        case #"hash_1038ceaeafe155b3":
+        case #"hash_798f4232dfe03b8c":
           v_dest = self.var_6f76e7b0.origin;
           e_player.mdl_bone.angles = self.var_6f76e7b0.angles;
           break;
-        case # "hash_516e96f51e5bb4b3":
+        case #"hash_516e96f51e5bb4b3":
           v_dest = self.var_6f76e7b0.origin + (0, 0, 0.5);
           e_player.mdl_bone.angles = self.var_6f76e7b0.angles;
           break;
-        case # "hash_12aa5802889224df":
+        case #"hash_12aa5802889224df":
           v_dest = self.var_6f76e7b0.origin + (0, 0, 1);
           e_player.mdl_bone.angles = self.var_6f76e7b0.angles + (0, 75, -90);
           break;
@@ -1621,10 +1621,10 @@ function_a68ce358() {
 
 init_flare(v_origin, v_angles, str_color) {
   switch (str_color) {
-    case # "green":
+    case #"green":
       str_model = #"hash_182d806f8f8bd7bf";
       break;
-    case # "blue":
+    case #"blue":
       str_model = #"hash_4f89af3e6c667d42";
       break;
     default:
@@ -1684,21 +1684,21 @@ function function_e01b477f(var_2cb1cbce, var_46a3f206) {
   level.var_252b49cc[level.var_252b49cc.size] = var_46a3f206;
 
   switch (self.str_color) {
-    case # "red":
+    case #"red":
       if(getdvarint(#"zm_debug_ee_system", 0)) {
         iprintlnbold("<dev string:xf3>");
         println("<dev string:xf3>");
       }
 
       break;
-    case # "green":
+    case #"green":
       if(getdvarint(#"zm_debug_ee_system", 0)) {
         iprintlnbold("<dev string:x109>");
         println("<dev string:x109>");
       }
 
       break;
-    case # "blue":
+    case #"blue":
       if(getdvarint(#"zm_debug_ee_system", 0)) {
         iprintlnbold("<dev string:x121>");
         println("<dev string:x121>");
@@ -1830,13 +1830,13 @@ function_9a6d950f() {
       self linkto(mdl_car);
 
       switch (self.str_color) {
-        case # "red":
+        case #"red":
           self clientfield::set("" + #"flare_on_car", 1);
           break;
-        case # "green":
+        case #"green":
           self clientfield::set("" + #"flare_on_car", 2);
           break;
-        case # "blue":
+        case #"blue":
           self clientfield::set("" + #"flare_on_car", 3);
           break;
       }
@@ -1870,13 +1870,13 @@ flare_fx(str_color) {
   level endon(#"end_game");
 
   switch (str_color) {
-    case # "red":
+    case #"red":
       self clientfield::set("" + #"flare_fx", 1);
       break;
-    case # "green":
+    case #"green":
       self clientfield::set("" + #"flare_fx", 2);
       break;
-    case # "blue":
+    case #"blue":
       self clientfield::set("" + #"flare_fx", 3);
       break;
   }
@@ -1939,13 +1939,13 @@ fireworks_vo() {
 
 fireworks_fx(str_color) {
   switch (str_color) {
-    case # "red":
+    case #"red":
       level clientfield::increment("" + #"fireworks_fx", 1);
       break;
-    case # "green":
+    case #"green":
       level clientfield::increment("" + #"fireworks_fx", 2);
       break;
-    case # "blue":
+    case #"blue":
       level clientfield::increment("" + #"fireworks_fx", 3);
       break;
   }
@@ -2437,20 +2437,20 @@ function_281b6803(zbarrier_magicbox) {
   v_float = anglestoup(self.angles) * 40;
 
   switch (zbarrier_magicbox.weapon.name) {
-    case # "hero_hammer_lv3":
-    case # "hero_hammer_lv2":
-    case # "hero_hammer_lv1":
+    case #"hero_hammer_lv3":
+    case #"hero_hammer_lv2":
+    case #"hero_hammer_lv1":
       self.origin += vectornormalize(anglesToForward(zbarrier_magicbox.angles)) * 8;
       self.angles += (90, 0, 0);
       break;
-    case # "hero_scepter_lv3":
-    case # "hero_scepter_lv2":
-    case # "hero_scepter_lv1":
+    case #"hero_scepter_lv3":
+    case #"hero_scepter_lv2":
+    case #"hero_scepter_lv1":
       self.origin += vectornormalize(anglesToForward(zbarrier_magicbox.angles)) * 24;
       break;
-    case # "hero_sword_pistol_lv2":
-    case # "hero_sword_pistol_lv3":
-    case # "hero_sword_pistol_lv1":
+    case #"hero_sword_pistol_lv2":
+    case #"hero_sword_pistol_lv3":
+    case #"hero_sword_pistol_lv1":
       if(self.model === #"wpn_t8_zm_melee_dw_hand_cannon_lvl1_world" || self.model === #"wpn_t8_zm_melee_dw_hand_cannon_lvl2_world" || self.model === #"wpn_t8_zm_melee_dw_hand_cannon_lvl3_world") {
         self.origin += vectornormalize(anglesToForward(zbarrier_magicbox.angles)) * 10;
         self.origin += vectornormalize(anglestoup(zbarrier_magicbox.angles)) * 4;

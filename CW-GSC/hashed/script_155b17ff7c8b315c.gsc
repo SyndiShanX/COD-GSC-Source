@@ -917,16 +917,16 @@ function function_e3e98e84(var_5b07db82) {
   var_d9dd9165[4] = hms_util::function_e1449992(level.woods, "vox_cp_amrk_02800_wood_ohilovethisnext_de");
 
   switch (var_5b07db82) {
-    case # "hash_2d5df218d441759a":
+    case #"hash_2d5df218d441759a":
       hms_util::vo_knockout_manager("arcade_woods_play_music_sexy_dialogue", var_3a7c2adf, 0, 0);
       break;
-    case # "hash_bc60e911959a7fc":
+    case #"hash_bc60e911959a7fc":
       hms_util::vo_knockout_manager("arcade_woods_play_music_cool_dialogue", var_b090758f, 0, 0);
       break;
-    case # "suck":
+    case #"suck":
       hms_util::vo_knockout_manager("arcade_woods_play_music_suck_dialogue", var_1c658538, 0, 0);
       break;
-    case # "hash_49267ce28db47b91":
+    case #"hash_49267ce28db47b91":
       hms_util::vo_knockout_manager("arcade_woods_play_music_badass_dialogue", var_d9dd9165, 0, 0);
       break;
     default:

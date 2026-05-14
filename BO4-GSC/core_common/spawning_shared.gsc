@@ -1160,7 +1160,7 @@ spawnpoint_debug() {
     spawnsystem_debug_command = getdvarstring(#"spawnsystem_debug_command");
 
     switch (spawnsystem_debug_command) {
-      case # "next_best":
+      case #"next_best":
         selectedplayerindex = getdvarint(#"spawnsystem_debug_current_player", 0);
 
         foreach(player in level.players) {
@@ -1188,7 +1188,7 @@ spawnpoint_debug() {
         selectedplayer setorigin(nextbestspawnpoint[#"origin"]);
         selectedplayer setplayerangles(nextbestspawnpoint[#"angles"]);
         break;
-      case # "refresh":
+      case #"refresh":
         level flagsys::set(#"spawnpoints_dirty");
         break;
     }

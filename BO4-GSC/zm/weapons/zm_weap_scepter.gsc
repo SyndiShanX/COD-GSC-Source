@@ -222,7 +222,7 @@ function_eae0296b(str_level, b_postfx = 0) {
   self notify(#"hash_11d4cfae418fcfe1");
 
   switch (str_level) {
-    case # "hero_scepter_lv3":
+    case #"hero_scepter_lv3":
       self.var_5762241e = 35;
       break;
     default:
@@ -277,18 +277,18 @@ chop_actor(e_target, weapon = level.weaponnone) {
   }
 
   switch (e_target.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       n_damage = e_target.health;
       break;
-    case # "heavy":
+    case #"heavy":
       n_damage = int(e_target.maxhealth * 0.25);
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_damage = int(e_target.maxhealth * 0.15);
       break;
-    case # "boss":
+    case #"boss":
       n_damage = 3000;
       break;
   }
@@ -379,11 +379,11 @@ function_be8ae52f(w_curr) {
   self endon(#"death", #"stop_damage");
 
   switch (w_curr.name) {
-    case # "hero_scepter_lv2":
+    case #"hero_scepter_lv2":
       n_base_damage = 150;
       var_c4d00e65 = 0.07;
       break;
-    case # "hero_scepter_lv3":
+    case #"hero_scepter_lv3":
       n_base_damage = 200;
       var_c4d00e65 = 0.1;
       break;
@@ -426,8 +426,8 @@ function_be8ae52f(w_curr) {
         }
 
         switch (e_last_target.zm_ai_category) {
-          case # "heavy":
-          case # "miniboss":
+          case #"heavy":
+          case #"miniboss":
             if(isalive(e_last_target) &!(isDefined(e_last_target.var_25cb9682) && e_last_target.var_25cb9682)) {
               if(!isDefined(e_last_target.var_1b6dab30)) {
                 e_last_target.var_1b6dab30 = self;
@@ -438,10 +438,10 @@ function_be8ae52f(w_curr) {
 
             n_damage = e_last_target.maxhealth * 0.02;
             break;
-          case # "boss":
+          case #"boss":
             n_damage = 100;
             break;
-          case # "popcorn":
+          case #"popcorn":
             n_damage = e_last_target.health + 100;
             break;
           default:
@@ -465,11 +465,11 @@ function_be8ae52f(w_curr) {
       var_24bae834 = 0;
 
       switch (a_trace[#"surfacetype"]) {
-        case # "glasscar":
-        case # "rock":
-        case # "metal":
-        case # "metalcar":
-        case # "glass":
+        case #"glasscar":
+        case #"rock":
+        case #"metal":
+        case #"metalcar":
+        case #"glass":
           var_24bae834 = 1;
           var_7a585212 = "reflective_geo";
           break;
@@ -1002,13 +1002,13 @@ beacon_smash(player) {
 
     if(isDefined(zombie.zm_ai_category)) {
       switch (zombie.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           player thread function_b67b2aff(zombie, zombie.health, self.origin, level.hero_weapon[#"scepter"][2], launch);
           break;
-        case # "heavy":
-        case # "miniboss":
+        case #"heavy":
+        case #"miniboss":
           if(isalive(zombie) &!(isDefined(zombie.var_25cb9682) && zombie.var_25cb9682)) {
             if(!isDefined(zombie.var_1b6dab30)) {
               zombie.var_1b6dab30 = player;
@@ -1133,14 +1133,14 @@ beacon_check(e_player, var_a7e57ef9, n_loop_time) {
 
   if(isalive(self) && isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
+      case #"heavy":
+      case #"miniboss":
         n_damage = self.maxhealth * 0.08 * n_loop_time;
         break;
-      case # "boss":
+      case #"boss":
         n_damage = 100;
         break;
-      case # "popcorn":
+      case #"popcorn":
         n_damage = self.health + 100;
         break;
       default:

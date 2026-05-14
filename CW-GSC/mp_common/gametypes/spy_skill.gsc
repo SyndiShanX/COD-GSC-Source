@@ -318,13 +318,13 @@ function function_c59f835(skill) {
 function function_5648ed56(var_41d6bb00) {
   if(isstring(var_41d6bb00)) {
     switch (var_41d6bb00) {
-      case # "+actionslot 1":
+      case #"+actionslot 1":
         return 0;
-      case # "+actionslot 2":
+      case #"+actionslot 2":
         return 1;
-      case # "+actionslot 3":
+      case #"+actionslot 3":
         return 2;
-      case # "+actionslot 4":
+      case #"+actionslot 4":
         return 3;
     }
   }
@@ -1178,31 +1178,31 @@ function function_255e9614(command, key) {
   self endon(var_17b7891d);
 
   switch (key) {
-    case # "+weapoffhandspecial":
+    case #"+weapoffhandspecial":
       function_9024fce3(&offhandspecialbuttonpressed, command);
       break;
-    case # "+actionslot 1":
+    case #"+actionslot 1":
       function_9024fce3(&actionslotonebuttonpressed, command);
       break;
-    case # "+actionslot 2":
+    case #"+actionslot 2":
       function_9024fce3(&actionslottwobuttonpressed, command);
       break;
-    case # "+actionslot 3":
+    case #"+actionslot 3":
       function_9024fce3(&actionslotthreebuttonpressed, command);
       break;
-    case # "+actionslot 4":
+    case #"+actionslot 4":
       function_9024fce3(&actionslotfourbuttonpressed, command);
       break;
-    case # "-actionslot 1":
+    case #"-actionslot 1":
       function_21e5a72f(&actionslotonebuttonpressed, command);
       break;
-    case # "-actionslot 2":
+    case #"-actionslot 2":
       function_21e5a72f(&actionslottwobuttonpressed, command);
       break;
-    case # "-actionslot 3":
+    case #"-actionslot 3":
       function_21e5a72f(&actionslotthreebuttonpressed, command);
       break;
-    case # "-actionslot 4":
+    case #"-actionslot 4":
       function_21e5a72f(&actionslotfourbuttonpressed, command);
       break;
   }

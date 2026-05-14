@@ -73,15 +73,15 @@ function on_ai_killed(s_params) {
       var_b25755cf = 20;
     } else {
       switch (self.archetype) {
-        case # "avogadro":
+        case #"avogadro":
           var_b25755cf = 50;
           break;
-        case # "raz":
-        case # "brutus":
+        case #"raz":
+        case #"brutus":
           var_b25755cf = 100;
           break;
-        case # "mechz":
-        case # "blight_father":
+        case #"mechz":
+        case #"blight_father":
           var_b25755cf = 250;
           break;
       }

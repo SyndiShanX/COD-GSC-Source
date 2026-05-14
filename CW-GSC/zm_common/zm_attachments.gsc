@@ -25,13 +25,13 @@ function private preinit() {
 function function_9f8d8c38() {
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "normal":
+      case #"normal":
         var_3e5502b5 = #"hash_1c9af7bb427952d";
         break;
-      case # "special":
+      case #"special":
         var_3e5502b5 = #"hash_1d07249a2211a81d";
         break;
-      case # "elite":
+      case #"elite":
         var_3e5502b5 = #"hash_721bfbe781c0d680";
         break;
     }

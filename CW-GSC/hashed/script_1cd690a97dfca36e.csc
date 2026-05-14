@@ -286,18 +286,18 @@ function type_string(soundtype) {
 
   switch (soundtype) {
     case 0:
-    case # "entity":
-    case # "e":
-    case # "ent":
+    case #"entity":
+    case #"e":
+    case #"ent":
       snd_type = #"gentity";
       break;
     case 1:
-    case # "centity":
-    case # "c":
-    case # "cent":
+    case #"centity":
+    case #"c":
+    case #"cent":
       snd_type = #"centity";
       break;
-    case # "emitter":
+    case #"emitter":
       snd_type = #"emitter";
       break;
     default:
@@ -317,8 +317,8 @@ function private function_aaee1de3(snd_type, snd_key, item) {
     default:
       assert(0, "<dev string:xab>");
       break;
-    case # "centity":
-    case # "gentity":
+    case #"centity":
+    case #"gentity":
       level._snd.var_3cc765a3[snd_key] = item;
       break;
   }
@@ -332,8 +332,8 @@ function private function_7e9752b7(snd_type, snd_key, item) {
     default:
       assert(0, "<dev string:xab>");
       break;
-    case # "centity":
-    case # "gentity":
+    case #"centity":
+    case #"gentity":
       assert(isinarray(level._snd.var_3cc765a3, item), "<dev string:xbf>");
       level._snd.var_3cc765a3[snd_key] = undefined;
       break;
@@ -541,7 +541,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
       default:
         assert(0, "<dev string:x11f>");
         break;
-      case # "gentity":
+      case #"gentity":
         soundobject = namespace_afa8e18b::function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e);
 
         if(isentity(soundobject)) {
@@ -551,7 +551,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
         }
 
         break;
-      case # "centity":
+      case #"centity":
         soundobject = namespace_afa8e18b::function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e);
 
         if(isentity(soundobject)) {
@@ -565,11 +565,11 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
 
     if(isDefined(soundobject) && function_a6779cbd(soundobject)) {
       switch (soundtype) {
-        case # "gentity":
+        case #"gentity":
         default:
           soundobject thread namespace_afa8e18b::function_2dde45d9(soundobject, soundalias, initialvolume, delaytime);
           break;
-        case # "centity":
+        case #"centity":
           soundobject thread namespace_afa8e18b::function_bb749fc3(soundobject, soundalias, initialvolume, delaytime);
           break;
       }
@@ -639,11 +639,11 @@ function private function_f937a6f7(soundobject, fadeoutseconds) {
   }
 
   switch (soundtype) {
-    case # "gentity":
+    case #"gentity":
     default:
       namespace_afa8e18b::function_9f156b27(soundobject, fadeoutseconds);
       break;
-    case # "centity":
+    case #"centity":
       namespace_afa8e18b::function_273d939b(soundobject, fadeoutseconds);
       break;
   }
@@ -1007,29 +1007,29 @@ function function_13b51154(curve, size) {
       default:
         assert(0);
         break;
-      case # "default_vfcurve":
-      case # "linear":
+      case #"default_vfcurve":
+      case #"linear":
         lut[0] = 0;
         lut[1] = 1;
         return lut;
-      case # "sine":
+      case #"sine":
         y = 0.5 + cos(x * 180) * -0.5;
-      case # "easein":
+      case #"easein":
         y = 1 - cos(x * 90);
         break;
-      case # "easeout":
+      case #"easeout":
         y = sin(x * 90);
         break;
-      case # "easeinout":
+      case #"easeinout":
         y = 3 * pow(x, 2) - 2 * pow(x, 3);
         break;
-      case # "circularin":
+      case #"circularin":
         y = 1 - sqrt(1 - x * x);
         break;
-      case # "circularout":
+      case #"circularout":
         y = sqrt(1 - (1 - x) * (1 - x));
         break;
-      case # "exponential_40db":
+      case #"exponential_40db":
         lut[0] = 0;
         lut[1] = 0.0158489;
         lut[2] = 0.0251189;
@@ -1042,7 +1042,7 @@ function function_13b51154(curve, size) {
         lut[9] = 0.630957;
         lut[10] = 1;
         return lut;
-      case # "exponential_60db":
+      case #"exponential_60db":
         lut[0] = 0;
         lut[1] = 1.97531e-05;
         lut[2] = 0.000316049;
@@ -1089,7 +1089,7 @@ function private function_d3f407d6(alias) {
   }
 
   switch (alias) {
-    case # "xfade":
+    case #"xfade":
       return "easeout";
   }
 

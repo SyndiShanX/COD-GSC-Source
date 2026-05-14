@@ -40,7 +40,7 @@ function private preinit() {
   telemetry::add_callback(#"hash_7de173a0523c27c9", &function_d5aacfd7);
 
   switch (level.basegametype) {
-    case # "koth":
+    case #"koth":
       level.var_ab8dd45a = {
         #var_284ea17f: # "hash_75fa0382e49cdd2f", #data_function: &function_99b4929d
       };
@@ -53,7 +53,7 @@ function private preinit() {
       level.var_46fc4fdb = &function_4dc75f1b;
       level.var_e1206cfc = &function_f2282b8b;
       break;
-    case # "sd":
+    case #"sd":
       level.var_ab8dd45a = {
         #var_284ea17f: # "hash_d9870c3e6c1e3c5", #data_function: &function_39e8afcf
       };
@@ -66,7 +66,7 @@ function private preinit() {
       level.var_46fc4fdb = &function_86398c9c;
       level.var_e1206cfc = &function_ceb40ef4;
       break;
-    case # "control":
+    case #"control":
       level.var_ab8dd45a = {
         #var_284ea17f: # "hash_22a8e3365d654f5b", #data_function: &function_91a0716f
       };

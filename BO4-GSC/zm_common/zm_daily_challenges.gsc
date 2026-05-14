@@ -132,13 +132,13 @@ death_check_for_challenge_updates(e_attacker) {
 
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_heavy");
 
         debug_print("<dev string:x112>");
 
         break;
-      case # "miniboss":
+      case #"miniboss":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_miniboss");
 
         debug_print("<dev string:x128>");
@@ -148,13 +148,13 @@ death_check_for_challenge_updates(e_attacker) {
   }
 
   switch (self.archetype) {
-    case # "blight_father":
+    case #"blight_father":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_blightfather");
 
       debug_print("<dev string:x141>");
 
       break;
-    case # "catalyst":
+    case #"catalyst":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_catalyst");
 
       debug_print("<dev string:x15e>");
@@ -166,19 +166,19 @@ death_check_for_challenge_updates(e_attacker) {
       }
 
       break;
-    case # "gladiator":
+    case #"gladiator":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_gladiator");
 
       debug_print("<dev string:x1a9>");
 
       break;
-    case # "stoker":
+    case #"stoker":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_stoker");
 
       debug_print("<dev string:x1c3>");
 
       break;
-    case # "tiger":
+    case #"tiger":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_tiger");
 
       debug_print("<dev string:x1da>");
@@ -246,43 +246,43 @@ death_check_for_challenge_updates(e_attacker) {
 
   if(isDefined(level.zombie_weapons[w_stat])) {
     switch (level.zombie_weapons[w_stat].weapon_classname) {
-      case # "ar":
+      case #"ar":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_rifle");
 
         debug_print("<dev string:x2d8>");
 
         break;
-      case # "lmg":
+      case #"lmg":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_mg");
 
         debug_print("<dev string:x2ee>");
 
         break;
-      case # "pistol":
+      case #"pistol":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_pistol");
 
         debug_print("<dev string:x301>");
 
         break;
-      case # "shotgun":
+      case #"shotgun":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_shotgun");
 
         debug_print("<dev string:x318>");
 
         break;
-      case # "smg":
+      case #"smg":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_smg");
 
         debug_print("<dev string:x330>");
 
         break;
-      case # "sniper":
+      case #"sniper":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_sniper");
 
         debug_print("<dev string:x344>");
 
         break;
-      case # "tr":
+      case #"tr":
         e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_tactical_rifle");
 
         debug_print("<dev string:x35b>");
@@ -292,11 +292,11 @@ death_check_for_challenge_updates(e_attacker) {
   }
 
   switch (str_damagemod) {
-    case # "mod_explosive":
-    case # "mod_grenade":
-    case # "mod_projectile":
-    case # "mod_grenade_splash":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_grenade":
+    case #"mod_projectile":
+    case #"mod_grenade_splash":
+    case #"mod_projectile_splash":
       e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_explosive");
 
       debug_print("<dev string:x37a>");

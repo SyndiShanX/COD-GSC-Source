@@ -300,11 +300,11 @@ function private function_340128cf(v_launch, vehicle) {
   }
 
   switch (vehicle.scriptvehicletype) {
-    case # "player_motorcycle_2wd":
+    case #"player_motorcycle_2wd":
       return (v_launch * 0.25);
-    case # "player_fav_light":
+    case #"player_fav_light":
       return (v_launch * 0.9);
-    case # "player_truck_transport":
+    case #"player_truck_transport":
       return (v_launch * 1.8);
     default:
       return v_launch;

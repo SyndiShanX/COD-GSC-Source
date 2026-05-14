@@ -2656,8 +2656,8 @@ function_837446a8(localclientnum, menu_name, state) {
   level notify("end_character_rotating" + localclientnum);
 
   switch (state) {
-    case # "character":
-    case # "gesture":
+    case #"character":
+    case #"gesture":
       [[var_d0b01271]] - > function_4240a39a(1, (0, 90, 0));
       level thread character_customization::rotation_thread_spawner(localclientnum, var_d0b01271, "end_character_rotating" + localclientnum);
       [[var_d0b01271]] - > function_4240a39a(0);
@@ -2665,7 +2665,7 @@ function_837446a8(localclientnum, menu_name, state) {
       weapon_model hide();
       scene = #"scene_frontend_quartermaster_character";
       break;
-    case # "character_full":
+    case #"character_full":
       [[var_d0b01271]] - > function_4240a39a(1, (0, 90, 0));
       level thread character_customization::rotation_thread_spawner(localclientnum, var_d0b01271, "end_character_rotating" + localclientnum);
       [[var_d0b01271]] - > function_4240a39a(0);
@@ -2673,7 +2673,7 @@ function_837446a8(localclientnum, menu_name, state) {
       weapon_model hide();
       scene = #"scene_frontend_quartermaster_character_full";
       break;
-    case # "character_face":
+    case #"character_face":
       [[var_d0b01271]] - > function_4240a39a(1, (0, 90, 0));
       level thread character_customization::rotation_thread_spawner(localclientnum, var_d0b01271, "end_character_rotating" + localclientnum);
       [[var_d0b01271]] - > function_4240a39a(0);
@@ -2681,12 +2681,12 @@ function_837446a8(localclientnum, menu_name, state) {
       weapon_model hide();
       scene = #"scene_frontend_quartermaster_character_face";
       break;
-    case # "weapon":
+    case #"weapon":
       [[var_d0b01271]] - > hide_model();
       weapon_model show();
       scene = #"scene_frontend_quartermaster_weapon";
       break;
-    case # "crate":
+    case #"crate":
       [[var_d0b01271]] - > hide_model();
       weapon_model hide();
       season = getdvarstring(#"mtx_seasonal_exploder");
@@ -2776,14 +2776,14 @@ function_914198cd(localclientnum, var_d0b01271, menu_name) {
     waitresult = level waittill("deathfx_update_" + localclientnum);
 
     switch (waitresult.event_name) {
-      case # "updatecharacter":
+      case #"updatecharacter":
         var_d0b01271 function_79c881da(localclientnum, waitresult.mode);
         break;
-      case # "previewdeathfx":
+      case #"previewdeathfx":
         var_d0b01271 notify(#"cancel_deathfx");
         var_d0b01271 thread function_317ab257(localclientnum, menu_name, waitresult.deathfxindex);
         break;
-      case # "stopdeathfx":
+      case #"stopdeathfx":
         var_d0b01271 function_ca43d336(localclientnum);
         break;
     }

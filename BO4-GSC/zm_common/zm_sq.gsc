@@ -411,7 +411,7 @@ devgui_think() {
     }
 
     switch (cmd[0]) {
-      case # "skip_to":
+      case #"skip_to":
         ee = level._ee[cmd[1]];
 
         if(!isDefined(ee)) {
@@ -441,7 +441,7 @@ devgui_think() {
         }
 
         break;
-      case # "complete":
+      case #"complete":
         ee = level._ee[cmd[1]];
 
         if(!isDefined(ee)) {
@@ -460,13 +460,13 @@ devgui_think() {
         }
 
         break;
-      case # "start":
+      case #"start":
         if(isDefined(level._ee[cmd[1]])) {
           start(hash(cmd[1]));
         }
 
         break;
-      case # "show_status":
+      case #"show_status":
         if(isDefined(level.var_7f2ca392) && level.var_7f2ca392) {
           function_c1d3567c();
         } else {
@@ -475,7 +475,7 @@ devgui_think() {
         }
 
         break;
-      case # "outro":
+      case #"outro":
         if(cmd.size < 2 || !isDefined(level._ee[cmd[1]])) {
           break;
         }

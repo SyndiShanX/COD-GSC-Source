@@ -28,9 +28,9 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 
@@ -47,37 +47,37 @@ function music(str_msg, n_delay = 0) {
 
 function function_7edafa59(str_msg, n_delay) {
   switch (str_msg) {
-    case # "1.0_reveal":
+    case #"1.0_reveal":
       music::setmusicstate("1.0_reveal");
       wait 3.5;
       music::setmusicstate("2.0_infiltrate");
       break;
-    case # "2.0_infiltrate":
+    case #"2.0_infiltrate":
       music::setmusicstate("2.0_infiltrate");
       break;
-    case # "hash_3aa13d9b3e84a5e":
-    case # "3.0_caught":
-    case # "4.0_inside":
-    case # "hash_295b43f1ba4d8a85":
-    case # "hash_2eeeec22953a0720":
-    case # "hash_59962f70d8fcb45c":
-    case # "12.1_exit":
+    case #"hash_3aa13d9b3e84a5e":
+    case #"3.0_caught":
+    case #"4.0_inside":
+    case #"hash_295b43f1ba4d8a85":
+    case #"hash_2eeeec22953a0720":
+    case #"hash_59962f70d8fcb45c":
+    case #"12.1_exit":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "7.0_juggernaut":
+    case #"7.0_juggernaut":
       music::setmusicstate("7.0_juggernaut_stinger");
       waitframe(1);
       music::setmusicstate("7.0_juggernaut");
       break;
-    case # "hash_13bb4e260ce73d4":
+    case #"hash_13bb4e260ce73d4":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "hash_5349acae0cf9701c":
+    case #"hash_5349acae0cf9701c":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "hash_27b12368b44b3734":
-    case # "hash_658daa8929a955ab":
-    case # "deactivate_12.1_exit":
+    case #"hash_27b12368b44b3734":
+    case #"hash_658daa8929a955ab":
+    case #"deactivate_12.1_exit":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -90,19 +90,19 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "1.0_reveal":
+    case #"1.0_reveal":
       snd::client_msg(#"musictrack_cp_amerika_1");
       break;
-    case # "hash_295b43f1ba4d8a85":
+    case #"hash_295b43f1ba4d8a85":
       snd::client_msg(#"musictrack_cp_amerika_2");
       break;
-    case # "hash_3aa13d9b3e84a5e":
+    case #"hash_3aa13d9b3e84a5e":
       snd::client_msg(#"musictrack_cp_amerika_3");
       break;
-    case # "12.1_exit":
+    case #"12.1_exit":
       snd::client_msg(#"musictrack_cp_amerika_4");
       break;
-    case # "deactivate_12.1_exit":
+    case #"deactivate_12.1_exit":
       snd::client_msg(#"musictrack_cp_amerika_5");
       break;
   }

@@ -29,7 +29,7 @@ event_handler[level_init] main(eventstruct) {
 
 dom_flag_base_fx_override(flag, team) {
   switch (flag.name) {
-    case # "a":
+    case #"a":
       if(team == #"neutral") {
         return "ui/fx_dom_marker_neutral_r120";
       } else {
@@ -37,7 +37,7 @@ dom_flag_base_fx_override(flag, team) {
       }
 
       break;
-    case # "b":
+    case #"b":
       if(team == #"neutral") {
         return "ui/fx_dom_marker_neutral_r120";
       } else {
@@ -45,7 +45,7 @@ dom_flag_base_fx_override(flag, team) {
       }
 
       break;
-    case # "c":
+    case #"c":
       if(team == #"neutral") {
         return "ui/fx_dom_marker_neutral_r120";
       } else {
@@ -58,7 +58,7 @@ dom_flag_base_fx_override(flag, team) {
 
 dom_flag_cap_fx_override(flag, team) {
   switch (flag.name) {
-    case # "a":
+    case #"a":
       if(team == #"neutral") {
         return "ui/fx_dom_cap_indicator_neutral_r120";
       } else {
@@ -66,7 +66,7 @@ dom_flag_cap_fx_override(flag, team) {
       }
 
       break;
-    case # "b":
+    case #"b":
       if(team == #"neutral") {
         return "ui/fx_dom_cap_indicator_neutral_r120";
       } else {
@@ -74,7 +74,7 @@ dom_flag_cap_fx_override(flag, team) {
       }
 
       break;
-    case # "c":
+    case #"c":
       if(team == #"neutral") {
         return "ui/fx_dom_cap_indicator_neutral_r120";
       } else {

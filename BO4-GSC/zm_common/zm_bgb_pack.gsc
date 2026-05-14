@@ -319,11 +319,11 @@ function_579411ff() {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       self allowstand(0);
       self allowprone(0);
       break;
-    case # "prone":
+    case #"prone":
       self allowstand(0);
       self allowcrouch(0);
       break;
@@ -832,28 +832,28 @@ function_c1091a8f(str_cmd, key) {
   var_6c522f60 = 0;
 
   switch (str_cmd) {
-    case # "hash_2f68979bf97ad43a":
+    case #"hash_2f68979bf97ad43a":
       level.var_4af38aa3 = 1;
       break;
-    case # "hash_972ca08eb9fbf0c":
+    case #"hash_972ca08eb9fbf0c":
       level.var_4af38aa3 = 0;
       break;
-    case # "dev_cooldowns_on":
+    case #"dev_cooldowns_on":
       level.var_7c3d4959 = 1;
       break;
-    case # "default_cooldowns":
+    case #"default_cooldowns":
       level.var_7c3d4959 = 0;
       break;
-    case # "slot0":
+    case #"slot0":
       level.var_c20342bc = 0;
       break;
-    case # "slot1":
+    case #"slot1":
       level.var_c20342bc = 1;
       break;
-    case # "slot2":
+    case #"slot2":
       level.var_c20342bc = 2;
       break;
-    case # "slot3":
+    case #"slot3":
       level.var_c20342bc = 3;
       break;
   }

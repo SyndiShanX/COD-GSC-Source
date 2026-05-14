@@ -218,12 +218,12 @@ function_7127bd6c(var_8c79ac3f) {
 
 function_3bc828f8(weapon_type) {
   switch (weapon_type.name) {
-    case # "ww_blundergat_fire_t8":
-    case # "ww_blundergat_fire_t8_upgraded":
-    case # "ww_blundergat_acid_t8":
-    case # "hash_3de0926b89369160":
-    case # "hash_494f5501b3f8e1e9":
-    case # "ww_blundergat_acid_t8_upgraded":
+    case #"ww_blundergat_fire_t8":
+    case #"ww_blundergat_fire_t8_upgraded":
+    case #"ww_blundergat_acid_t8":
+    case #"hash_3de0926b89369160":
+    case #"hash_494f5501b3f8e1e9":
+    case #"ww_blundergat_acid_t8_upgraded":
       return true;
     default:
       return false;
@@ -365,10 +365,10 @@ function_d987ffa1() {
 
 function_2ad53df2(cmd) {
   switch (cmd) {
-    case # "hash_7ecd9429ad1bc7c7":
+    case #"hash_7ecd9429ad1bc7c7":
       level thread function_45d8a460();
       return 1;
-    case # "hash_3e92494695e7803f":
+    case #"hash_3e92494695e7803f":
       level thread function_3dfa5598();
       return 1;
   }

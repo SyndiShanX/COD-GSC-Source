@@ -586,10 +586,10 @@ function function_e94c2667() {
   startheight = 50;
 
   switch (self getstance()) {
-    case # "crouch":
+    case #"crouch":
       startheight = 30;
       break;
-    case # "prone":
+    case #"prone":
       startheight = 15;
       break;
   }

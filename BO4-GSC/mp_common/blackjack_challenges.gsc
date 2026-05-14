@@ -196,27 +196,27 @@ get_hero_weapon_mask(attacker, weapon) {
   }
 
   switch (weapon.name) {
-    case # "hero_minigun":
+    case #"hero_minigun":
       return 1;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       return 2;
-    case # "hero_lightninggun":
-    case # "hero_lightninggun_arc":
+    case #"hero_lightninggun":
+    case #"hero_lightninggun_arc":
       return 4;
-    case # "hero_firefly_swarm":
-    case # "hero_chemicalgelgun":
+    case #"hero_firefly_swarm":
+    case #"hero_chemicalgelgun":
       return 8;
-    case # "hero_pineapple_grenade":
-    case # "hero_pineapplegun":
+    case #"hero_pineapple_grenade":
+    case #"hero_pineapplegun":
       return 16;
-    case # "hero_bowlauncher2":
-    case # "hero_bowlauncher3":
-    case # "hero_bowlauncher4":
-    case # "hero_bowlauncher":
+    case #"hero_bowlauncher2":
+    case #"hero_bowlauncher3":
+    case #"hero_bowlauncher4":
+    case #"hero_bowlauncher":
       return 64;
-    case # "hero_gravityspikes":
+    case #"hero_gravityspikes":
       return 128;
-    case # "hero_annihilator":
+    case #"hero_annihilator":
       return 256;
     default:
       return 0;
@@ -229,21 +229,21 @@ get_hero_ability_mask(ability) {
   }
 
   switch (ability.name) {
-    case # "gadget_clone":
+    case #"gadget_clone":
       return 1;
-    case # "gadget_heat_wave":
+    case #"gadget_heat_wave":
       return 2;
-    case # "gadget_resurrect":
+    case #"gadget_resurrect":
       return 8;
-    case # "gadget_armor":
+    case #"gadget_armor":
       return 16;
-    case # "gadget_camo":
+    case #"gadget_camo":
       return 32;
-    case # "gadget_vision_pulse":
+    case #"gadget_vision_pulse":
       return 64;
-    case # "gadget_speed_burst":
+    case #"gadget_speed_burst":
       return 128;
-    case # "gadget_combat_efficiency":
+    case #"gadget_combat_efficiency":
       return 256;
     default:
       return 0;

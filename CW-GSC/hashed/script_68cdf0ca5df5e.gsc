@@ -2077,13 +2077,13 @@ function function_7802d126() {
 
 function function_d60e0e9a(side) {
   switch (side) {
-    case # "top":
+    case #"top":
       return "bottom";
-    case # "bottom":
+    case #"bottom":
       return "top";
-    case # "left":
+    case #"left":
       return "right";
-    case # "right":
+    case #"right":
       return "left";
   }
 }
@@ -2391,13 +2391,13 @@ function function_32d53491() {
 
 function function_a30ab289(side) {
   switch (side) {
-    case # "top":
+    case #"top":
       return 1;
-    case # "left":
+    case #"left":
       return 2;
-    case # "right":
+    case #"right":
       return 4;
-    case # "bottom":
+    case #"bottom":
       return 8;
   }
 

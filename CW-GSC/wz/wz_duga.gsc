@@ -200,36 +200,36 @@ function function_1221d304() {
 
 function function_b2775b52() {
   switch (self.vehicletype) {
-    case # "hash_6595f5efe62a4ec":
+    case #"hash_6595f5efe62a4ec":
       return (1, 0, 0);
-    case # "hash_17e868e0ebf3c1d6":
+    case #"hash_17e868e0ebf3c1d6":
       return (1, 0, 0);
-    case # "hash_2c0e11a1e87bbcd5":
+    case #"hash_2c0e11a1e87bbcd5":
       return (1, 0, 0);
-    case # "hash_dd63f34c77a725e":
-    case # "hash_2a245bf3738fed8b":
+    case #"hash_dd63f34c77a725e":
+    case #"hash_2a245bf3738fed8b":
       return (1, 1, 1);
-    case # "veh_mil_ru_fav_heavy":
+    case #"veh_mil_ru_fav_heavy":
       return (1, 0.5, 0);
-    case # "hash_28d512b739c9d9c1":
+    case #"hash_28d512b739c9d9c1":
       return (1, 1, 0);
-    case # "vehicle_t9_mil_fav_light":
+    case #"vehicle_t9_mil_fav_light":
       return (0, 1, 0);
-    case # "hash_42b91f3544c1a9e1":
+    case #"hash_42b91f3544c1a9e1":
       return (0, 1, 1);
-    case # "hash_2d32c08b862baa46":
-    case # "vehicle_t9_mil_ru_truck_light_player":
-    case # "vehicle_t9_civ_ru_sedan_80s_player":
+    case #"hash_2d32c08b862baa46":
+    case #"vehicle_t9_mil_ru_truck_light_player":
+    case #"vehicle_t9_civ_ru_sedan_80s_player":
       return (0, 1, 1);
-    case # "vehicle_t9_mil_snowmobile":
+    case #"vehicle_t9_mil_snowmobile":
       return (0, 0, 1);
-    case # "vehicle_motorcycle_mil_us_offroad":
+    case #"vehicle_motorcycle_mil_us_offroad":
       return (1, 0, 1);
-    case # "veh_quad_player_wz_tan":
-    case # "veh_quad_player_wz_blk":
-    case # "hash_232abda4e81275f4":
-    case # "hash_2f8d60a5381870ee":
-    case # "veh_quad_player_wz_grn":
+    case #"veh_quad_player_wz_tan":
+    case #"veh_quad_player_wz_blk":
+    case #"hash_232abda4e81275f4":
+    case #"hash_2f8d60a5381870ee":
+    case #"veh_quad_player_wz_grn":
       return (1, 0, 1);
     default:
       return (0, 0, 0);

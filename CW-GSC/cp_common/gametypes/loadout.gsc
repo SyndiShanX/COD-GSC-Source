@@ -122,10 +122,10 @@ function event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
 
 function isexplosivedamage(meansofdeath) {
   switch (meansofdeath) {
-    case # "mod_explosive":
-    case # "mod_grenade":
-    case # "mod_grenade_splash":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_grenade":
+    case #"mod_grenade_splash":
+    case #"mod_projectile_splash":
       return true;
   }
 

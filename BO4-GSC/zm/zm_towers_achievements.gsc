@@ -81,16 +81,16 @@ function_7b7ba154(s_params) {
   }
 
   switch (e_attacker.script_string) {
-    case # "hash_7ebf57684b9746dc":
+    case #"hash_7ebf57684b9746dc":
       var_378e29b9 = "towers_acid_trap_built_ra";
       break;
-    case # "hash_7eae57684b88d3a9":
+    case #"hash_7eae57684b88d3a9":
       var_378e29b9 = "towers_acid_trap_built_danu";
       break;
-    case # "hash_7ebf49684b972f12":
+    case #"hash_7ebf49684b972f12":
       var_378e29b9 = "towers_acid_trap_built_odin";
       break;
-    case # "hash_7eae45684b88b513":
+    case #"hash_7eae45684b88b513":
       var_378e29b9 = "towers_acid_trap_built_zeus";
       break;
     default:

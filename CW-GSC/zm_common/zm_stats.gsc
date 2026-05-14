@@ -1230,53 +1230,53 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
 
   if(isPlayer(entity) && isDefined(weapon.archetype)) {
     switch (weapon.archetype) {
-      case # "blight_father":
+      case #"blight_father":
         entity increment_client_stat("killed_by_blightfather");
         entity increment_player_stat("killed_by_blightfather");
         entity function_8f10788e("boas_killed_by_blightfather");
         break;
-      case # "brutus":
+      case #"brutus":
         entity increment_client_stat("killed_by_brutus");
         entity increment_player_stat("killed_by_brutus");
         entity function_8f10788e("boas_killed_by_brutus");
         break;
-      case # "gladiator":
+      case #"gladiator":
         entity increment_client_stat("killed_by_gladiator");
         entity increment_player_stat("killed_by_gladiator");
         entity function_8f10788e("boas_killed_by_gladiator");
         break;
-      case # "stoker":
+      case #"stoker":
         entity increment_client_stat("killed_by_stoker");
         entity increment_player_stat("killed_by_stoker");
         entity function_8f10788e("boas_killed_by_stoker");
         break;
-      case # "tiger":
+      case #"tiger":
         entity increment_client_stat("killed_by_tiger");
         entity increment_player_stat("killed_by_tiger");
         entity function_8f10788e("boas_killed_by_tiger");
         break;
-      case # "catalyst":
+      case #"catalyst":
         entity increment_client_stat("killed_by_catalyst");
         entity increment_player_stat("killed_by_catalyst");
         entity function_8f10788e("boas_killed_by_catalyst");
 
         switch (weapon.subarchetype) {
-          case # "catalyst_electric":
+          case #"catalyst_electric":
             entity increment_client_stat("killed_by_catalyst_electric");
             entity increment_player_stat("killed_by_catalyst_electric");
             entity function_8f10788e("boas_killed_by_catalyst_electric");
             break;
-          case # "catalyst_water":
+          case #"catalyst_water":
             entity increment_client_stat("killed_by_catalyst_water");
             entity increment_player_stat("killed_by_catalyst_water");
             entity function_8f10788e("boas_killed_by_catalyst_water");
             break;
-          case # "catalyst_plasma":
+          case #"catalyst_plasma":
             entity increment_client_stat("killed_by_catalyst_plasma");
             entity increment_player_stat("killed_by_catalyst_plasma");
             entity function_8f10788e("boas_killed_by_catalyst_plasma");
             break;
-          case # "catalyst_corrosive":
+          case #"catalyst_corrosive":
             entity increment_client_stat("killed_by_catalyst_corrosive");
             entity increment_player_stat("killed_by_catalyst_corrosive");
             entity function_8f10788e("boas_killed_by_catalyst_corrosive");
@@ -1284,17 +1284,17 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "nova_crawler":
+      case #"nova_crawler":
         entity increment_client_stat("killed_by_nova_crawler");
         entity increment_player_stat("killed_by_nova_crawler");
         entity function_8f10788e("boas_killed_by_nova_crawler");
         break;
-      case # "zombie_dog":
+      case #"zombie_dog":
         entity increment_client_stat("killed_by_zdog");
         entity increment_player_stat("killed_by_zdog");
         entity function_8f10788e("boas_killed_by_zdog");
         break;
-      case # "nosferatu":
+      case #"nosferatu":
         if(weapon.subarchetype === #"crimson_nosferatu") {
           entity increment_client_stat("killed_by_crimson_nosferatu");
           entity increment_player_stat("killed_by_crimson_nosferatu");
@@ -1306,7 +1306,7 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "werewolf":
+      case #"werewolf":
         entity increment_client_stat("killed_by_werewolf");
         entity increment_player_stat("killed_by_werewolf");
         entity function_8f10788e("boas_killed_by_werewolf");
@@ -1319,53 +1319,53 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
   if(isPlayer(weapon)) {
     if(isDefined(entity.archetype)) {
       switch (entity.archetype) {
-        case # "blight_father":
+        case #"blight_father":
           weapon increment_client_stat("blightfathers_killed");
           weapon increment_player_stat("blightfathers_killed");
           weapon function_8f10788e("boas_blightfathers_killed");
           break;
-        case # "brutus":
+        case #"brutus":
           weapon increment_client_stat("brutuses_killed");
           weapon increment_player_stat("brutuses_killed");
           weapon function_8f10788e("boas_brutuses_killed");
           break;
-        case # "gladiator":
+        case #"gladiator":
           weapon increment_client_stat("gladiators_killed");
           weapon increment_player_stat("gladiators_killed");
           weapon function_8f10788e("boas_gladiators_killed");
           break;
-        case # "stoker":
+        case #"stoker":
           weapon increment_client_stat("stokers_killed");
           weapon increment_player_stat("stokers_killed");
           weapon function_8f10788e("boas_stokers_killed");
           break;
-        case # "tiger":
+        case #"tiger":
           weapon increment_client_stat("tigers_killed");
           weapon increment_player_stat("tigers_killed");
           weapon function_8f10788e("boas_tigers_killed");
           break;
-        case # "catalyst":
+        case #"catalyst":
           weapon increment_client_stat("catalysts_killed");
           weapon increment_player_stat("catalysts_killed");
           weapon function_8f10788e("boas_catalysts_killed");
 
           switch (entity.subarchetype) {
-            case # "catalyst_electric":
+            case #"catalyst_electric":
               weapon increment_client_stat("catalyst_electrics_killed");
               weapon increment_player_stat("catalyst_electrics_killed");
               weapon function_8f10788e("boas_catalyst_electrics_killed");
               break;
-            case # "catalyst_water":
+            case #"catalyst_water":
               weapon increment_client_stat("catalyst_waters_killed");
               weapon increment_player_stat("catalyst_waters_killed");
               weapon function_8f10788e("boas_catalyst_waters_killed");
               break;
-            case # "catalyst_plasma":
+            case #"catalyst_plasma":
               weapon increment_client_stat("catalyst_plasmas_killed");
               weapon increment_player_stat("catalyst_plasmas_killed");
               weapon function_8f10788e("boas_catalyst_plasmas_killed");
               break;
-            case # "catalyst_corrosive":
+            case #"catalyst_corrosive":
               weapon increment_client_stat("catalyst_corrosives_killed");
               weapon increment_player_stat("catalyst_corrosives_killed");
               weapon function_8f10788e("boas_catalyst_corrosives_killed");
@@ -1373,17 +1373,17 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "nova_crawler":
+        case #"nova_crawler":
           weapon increment_client_stat("nova_crawlers_killed");
           weapon increment_player_stat("nova_crawlers_killed");
           weapon function_8f10788e("boas_nova_crawlers_killed");
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           weapon increment_client_stat("zdogs_killed");
           weapon increment_player_stat("zdogs_killed");
           weapon function_8f10788e("boas_zdogs_killed");
           break;
-        case # "nosferatu":
+        case #"nosferatu":
           if(entity.subarchetype === #"crimson_nosferatu") {
             weapon increment_client_stat("crimson_nosferatus_killed");
             weapon increment_player_stat("crimson_nosferatus_killed");
@@ -1395,12 +1395,12 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "werewolf":
+        case #"werewolf":
           weapon increment_client_stat("werewolves_killed");
           weapon increment_player_stat("werewolves_killed");
           weapon function_8f10788e("boas_werewolves_killed");
           break;
-        case # "bat":
+        case #"bat":
           weapon increment_client_stat("bats_killed");
           weapon increment_player_stat("bats_killed");
           weapon function_8f10788e("boas_bats_killed");
@@ -2064,74 +2064,74 @@ function function_12b698fa(statname) {
 function function_1a222bee(params) {
   if(isDefined(params.item.itementry.weapon.statname) && !killstreaks::is_killstreak_weapon(params.item.itementry.weapon)) {
     switch (params.item.itementry.weapon.statname) {
-      case # "energy_mine_5":
-      case # "energy_mine_4":
-      case # "energy_mine":
-      case # "energy_mine_2":
-      case # "energy_mine_3":
-      case # "energy_mine_1":
+      case #"energy_mine_5":
+      case #"energy_mine_4":
+      case #"energy_mine":
+      case #"energy_mine_2":
+      case #"energy_mine_3":
+      case #"energy_mine_1":
         self stats::function_622feb0d(#"energy_mine", #"uses", 1);
         break;
-      case # "frost_blast_4":
-      case # "frost_blast_5":
-      case # "frost_blast":
-      case # "frost_blast_1":
-      case # "frost_blast_3":
-      case # "frost_blast_2":
+      case #"frost_blast_4":
+      case #"frost_blast_5":
+      case #"frost_blast":
+      case #"frost_blast_1":
+      case #"frost_blast_3":
+      case #"frost_blast_2":
         self stats::function_622feb0d(#"frost_blast", #"uses", 1);
         break;
-      case # "heal_aoe_1":
-      case # "heal_aoe_2":
-      case # "heal_aoe_3":
-      case # "heal_aoe_5":
-      case # "heal_aoe_4":
-      case # "heal_aoe":
+      case #"heal_aoe_1":
+      case #"heal_aoe_2":
+      case #"heal_aoe_3":
+      case #"heal_aoe_5":
+      case #"heal_aoe_4":
+      case #"heal_aoe":
         self stats::function_622feb0d(#"heal_aoe", #"uses", 1);
         break;
-      case # "ring_of_fire_4":
-      case # "ring_of_fire_5":
-      case # "ring_of_fire_3":
-      case # "ring_of_fire_2":
-      case # "ring_of_fire_1":
-      case # "ring_of_fire":
+      case #"ring_of_fire_4":
+      case #"ring_of_fire_5":
+      case #"ring_of_fire_3":
+      case #"ring_of_fire_2":
+      case #"ring_of_fire_1":
+      case #"ring_of_fire":
         self stats::function_622feb0d(#"ring_of_fire", #"uses", 1);
         break;
-      case # "aether_shroud":
-      case # "aether_shroud_1":
-      case # "aether_shroud_3":
-      case # "aether_shroud_2":
-      case # "aether_shroud_5":
-      case # "aether_shroud_4":
+      case #"aether_shroud":
+      case #"aether_shroud_1":
+      case #"aether_shroud_3":
+      case #"aether_shroud_2":
+      case #"aether_shroud_5":
+      case #"aether_shroud_4":
         self stats::function_622feb0d(#"aether_shroud", #"uses", 1);
         break;
-      case # "hash_43e322396554dac0":
-      case # "hash_43e323396554dc73":
-      case # "hash_43e326396554e18c":
-      case # "hash_43e328396554e4f2":
-      case # "hash_43e329396554e6a5":
-      case # "hash_55569355da0f0f68":
+      case #"hash_43e322396554dac0":
+      case #"hash_43e323396554dc73":
+      case #"hash_43e326396554e18c":
+      case #"hash_43e328396554e4f2":
+      case #"hash_43e329396554e6a5":
+      case #"hash_55569355da0f0f68":
         self stats::function_622feb0d(#"hash_55569355da0f0f68", #"uses", 1);
         break;
-      case # "toxic_growth":
-      case # "toxic_growth_5":
-      case # "toxic_growth_4":
-      case # "toxic_growth_3":
-      case # "toxic_growth_2":
-      case # "toxic_growth_1":
+      case #"toxic_growth":
+      case #"toxic_growth_5":
+      case #"toxic_growth_4":
+      case #"toxic_growth_3":
+      case #"toxic_growth_2":
+      case #"toxic_growth_1":
         self stats::function_622feb0d(#"toxic_growth", #"uses", 1);
         break;
-      case # "lightning_links_5":
-      case # "lightning_links":
-      case # "lightning_links_1":
-      case # "lightning_links_2":
-      case # "lightning_links_3":
-      case # "lightning_links_4":
+      case #"lightning_links_5":
+      case #"lightning_links":
+      case #"lightning_links_1":
+      case #"lightning_links_2":
+      case #"lightning_links_3":
+      case #"lightning_links_4":
         self stats::function_622feb0d(#"lightning_links", #"uses", 1);
         break;
-      case # "frag_grenade":
+      case #"frag_grenade":
         self stats::function_622feb0d(#"eq_frag_grenade", #"uses", 1);
         break;
-      case # "nightingale_zm":
+      case #"nightingale_zm":
         self stats::function_622feb0d(#"nightingale", #"uses", 1);
         break;
       default:

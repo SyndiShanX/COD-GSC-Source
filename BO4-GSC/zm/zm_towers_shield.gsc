@@ -415,8 +415,8 @@ function_2a9a30bb(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
   self namespace_9ff9f642::burn(#"zhield_zword_turret", attacker, weapon, var_bb6709b6);
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
+    case #"popcorn":
+    case #"basic":
       if(level.round_number >= 30) {
         n_damage = self.maxhealth * 0.75;
       } else {
@@ -428,13 +428,13 @@ function_2a9a30bb(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
       }
 
       break;
-    case # "heavy":
+    case #"heavy":
       n_damage = self.maxhealth * 0.3;
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_damage = self.maxhealth * 0.15;
       break;
-    case # "boss":
+    case #"boss":
       n_damage = self.maxhealth * 0.05;
       break;
   }
@@ -462,8 +462,8 @@ function_3c6df289(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
   n_damage = damage;
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
+    case #"popcorn":
+    case #"basic":
       if(level.round_number >= 30) {
         n_damage = self.maxhealth * 0.5;
       } else {
@@ -471,13 +471,13 @@ function_3c6df289(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
       }
 
       break;
-    case # "heavy":
+    case #"heavy":
       n_damage = self.maxhealth * 0.05;
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_damage = self.maxhealth * 0.035;
       break;
-    case # "boss":
+    case #"boss":
       n_damage = self.maxhealth * 0.003;
       break;
   }
@@ -505,15 +505,15 @@ function_693527ec(str_piece) {
   self endon(#"death");
 
   switch (str_piece) {
-    case # "lower":
+    case #"lower":
       var_f4c9f09a = #"hash_4752663d0689d2c2";
       var_f00b4f9f = #"hash_4246a36eeaccdedb";
       break;
-    case # "katar":
+    case #"katar":
       var_f4c9f09a = #"hash_3c5ef4492a237f89";
       var_f00b4f9f = #"hash_1e11ea0627c40424";
       break;
-    case # "upper":
+    case #"upper":
       var_f4c9f09a = #"hash_5be88bdaaf36eedf";
       var_f00b4f9f = #"hash_15ea02b45ed633fa";
       break;
@@ -765,7 +765,7 @@ function_3624f8c8(str_piece) {
   self endon(#"disconnect");
 
   switch (str_piece) {
-    case # "lower":
+    case #"lower":
       var_4f1671d8 = "" + #"hash_dc971935944f005";
       var_73f25fd = "" + #"hash_6b725eefec5d09d1";
       var_3299d066 = "" + #"hash_73e9280f74528e8f";
@@ -774,7 +774,7 @@ function_3624f8c8(str_piece) {
       var_f00b4f9f = #"hash_4246a36eeaccdedb";
       n_drop_time = 1;
       break;
-    case # "katar":
+    case #"katar":
       var_4f1671d8 = "" + #"hash_21ff5b4eccea85ff";
       var_73f25fd = "" + #"hash_64a830301c1adbf3";
       var_3299d066 = "" + #"hash_4f32455c6a0286cd";
@@ -783,7 +783,7 @@ function_3624f8c8(str_piece) {
       var_f00b4f9f = #"hash_1e11ea0627c40424";
       n_drop_time = 0;
       break;
-    case # "upper":
+    case #"upper":
       var_4f1671d8 = "" + #"hash_32ef1785f4e55e5c";
       var_73f25fd = "" + #"hash_2cd1bb15f71aedb8";
       var_3299d066 = "" + #"hash_1769e95fdb10dfae";

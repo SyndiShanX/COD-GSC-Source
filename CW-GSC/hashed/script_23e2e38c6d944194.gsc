@@ -56,28 +56,28 @@ function function_93b6095f(s_notify, origin) {
   var_18acfe18 = s_notify.amount;
 
   switch (var_947d01ee) {
-    case # "pistol":
+    case #"pistol":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "rifle":
+    case #"rifle":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "mg":
+    case #"mg":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "spread":
+    case #"spread":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "smg":
+    case #"smg":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "grenade":
+    case #"grenade":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "rocketlauncher":
+    case #"rocketlauncher":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "turret":
+    case #"turret":
       n_magnitude = var_18acfe18 * 0.02;
       break;
     default:
@@ -116,28 +116,28 @@ function function_83da8e07(s_notify, origin) {
   var_18acfe18 = s_notify.amount;
 
   switch (var_947d01ee) {
-    case # "pistol":
+    case #"pistol":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "rifle":
+    case #"rifle":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "mg":
+    case #"mg":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "spread":
+    case #"spread":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "smg":
+    case #"smg":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "grenade":
+    case #"grenade":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "rocketlauncher":
+    case #"rocketlauncher":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "turret":
+    case #"turret":
       n_magnitude = var_18acfe18 * 0.025;
       break;
     default:
@@ -178,28 +178,28 @@ function function_c59775f7(s_notify, origin) {
   var_18acfe18 = s_notify.amount;
 
   switch (var_947d01ee) {
-    case # "pistol":
+    case #"pistol":
       n_magnitude = var_18acfe18 * 0.02;
       break;
-    case # "rifle":
+    case #"rifle":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "mg":
+    case #"mg":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "spread":
+    case #"spread":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "smg":
+    case #"smg":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "grenade":
+    case #"grenade":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "rocketlauncher":
+    case #"rocketlauncher":
       n_magnitude = var_18acfe18 * 0.025;
       break;
-    case # "turret":
+    case #"turret":
       n_magnitude = var_18acfe18 * 0.025;
       break;
     default:

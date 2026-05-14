@@ -1402,13 +1402,13 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
     waitresult = level waittill(notifyname + localclientnum);
 
     switch (waitresult.event_name) {
-      case # "update_lcn":
+      case #"update_lcn":
         [[var_d0b01271]] - > function_e08bf4f2(waitresult.local_client_num);
         break;
-      case # "update_locked":
+      case #"update_locked":
         [[var_d0b01271]] - > function_7792df22(waitresult.locked);
         break;
-      case # "refresh":
+      case #"refresh":
         [[var_d0b01271]] - > function_e08bf4f2(waitresult.local_client_num);
         [[var_d0b01271]] - > set_character_mode(waitresult.mode);
         [[var_d0b01271]] - > function_225b6e07();
@@ -1422,7 +1422,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "refresh_anim":
+      case #"refresh_anim":
         params = {};
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
         params.var_99a89f83 = 1;
@@ -1433,7 +1433,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changehero":
+      case #"changehero":
         [[var_d0b01271]] - > set_character_mode(waitresult.mode);
         [[var_d0b01271]] - > set_character_index(waitresult.character_index);
         [[var_d0b01271]] - > function_77e3be08();
@@ -1446,7 +1446,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changegender":
+      case #"changegender":
         bodyindex = getfirstheroofgender(waitresult.gender, waitresult.mode);
         headindex = getfirstheadofgender(waitresult.gender, waitresult.mode);
         [[var_d0b01271]] - > set_character_mode(waitresult.mode);
@@ -1457,19 +1457,19 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changehead":
+      case #"changehead":
         [[var_d0b01271]] - > function_617a9ce4(waitresult.mode);
         [[var_d0b01271]] - > set_character_head(waitresult.head);
         params = {};
         [[var_d0b01271]] - > update(params);
         break;
-      case # "resetcharacter":
+      case #"resetcharacter":
         [[var_d0b01271]] - > function_77e3be08();
         params = {};
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changeoutfit":
+      case #"changeoutfit":
         [[var_d0b01271]] - > set_character_outfit(waitresult.outfit_index);
         [[var_d0b01271]] - > function_10b0cbea();
         [[var_d0b01271]] - > function_59d1302f();
@@ -1482,7 +1482,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changewarpaintoutfit":
+      case #"changewarpaintoutfit":
         [[var_d0b01271]] - > function_72be01b9();
         [[var_d0b01271]] - > function_158505aa(waitresult.outfit_index);
         [[var_d0b01271]] - > function_59d1302f();
@@ -1495,7 +1495,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "changeoutfititem":
+      case #"changeoutfititem":
         [[var_d0b01271]] - > set_character_outfit_item(waitresult.item_index, waitresult.item_type);
         params = {};
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
@@ -1506,7 +1506,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "hash_220546ce38834f4c":
+      case #"hash_220546ce38834f4c":
         [[var_d0b01271]] - > function_ac9cc79d(waitresult.item_type);
         params = {};
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
@@ -1517,12 +1517,12 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "updateface":
+      case #"updateface":
         [[var_d0b01271]] - > function_617a9ce4(waitresult.mode);
         thread[[var_d0b01271]] - > function_81d84c71();
         break;
-      case # "previewshop":
-      case # "previewshopface":
+      case #"previewshop":
+      case #"previewshopface":
         [[var_d0b01271]] - > set_character_mode(waitresult.mode);
         [[var_d0b01271]] - > set_character_index(waitresult.character_index);
         [[var_d0b01271]] - > set_character_outfit(waitresult.outfit_index);
@@ -1546,7 +1546,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "loadpreset":
+      case #"loadpreset":
         outfititems = strtok(waitresult.presets, ";");
 
         foreach(type, item in outfititems) {
@@ -1564,7 +1564,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "previewshopgesture":
+      case #"previewshopgesture":
         [[var_d0b01271]] - > set_character_mode(waitresult.mode);
         [[var_d0b01271]] - > set_character_index(waitresult.character_index);
         [[var_d0b01271]] - > function_22039feb();
@@ -1577,16 +1577,16 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
 
         [[var_d0b01271]] - > update(params);
         break;
-      case # "previewgesture":
+      case #"previewgesture":
         thread[[var_d0b01271]] - > play_gesture(waitresult.gesture_index, waitresult.wait_until_model_steam_ends, waitresult.replay_if_already_playing, waitresult.ignore_if_already_playing);
         break;
-      case # "stopgesture":
+      case #"stopgesture":
         var_d0b01271 notify(#"cancel_gesture");
         break;
-      case # "hide":
+      case #"hide":
         [[var_d0b01271]] - > hide_model();
         break;
-      case # "show":
+      case #"show":
         [[var_d0b01271]] - > show_model();
         break;
     }

@@ -328,9 +328,9 @@ function function_7b4387e1(rewardxp, maxval, row, tablenumber, challengetype, it
       challengename = function_f752d6a9(challengeindex);
 
       switch (challengename) {
-        case # "hash_20faf480b8f9146a":
+        case #"hash_20faf480b8f9146a":
           break;
-        case # "hash_381ccf00b363923d":
+        case #"hash_381ccf00b363923d":
           self givedecoration("cp_medal_all_calling_cards");
           break;
       }
@@ -428,13 +428,13 @@ function function_18b65152() {
               var_f220a4fb = var_c603a6cc[16];
 
               switch (var_f220a4fb) {
-                case # "missions":
+                case #"missions":
                   self stats::function_dad108fa(#"hash_13eb46cb3c4c5613", 1);
                   break;
-                case # "tott":
+                case #"tott":
                   self stats::function_dad108fa(#"hash_34e0fb49ecfca3e4", 1);
                   break;
-                case # "career":
+                case #"career":
                   self stats::function_dad108fa(#"career_mastery", 1);
                   break;
               }

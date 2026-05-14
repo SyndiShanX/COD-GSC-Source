@@ -174,65 +174,65 @@ function_40eb02fc(response, intpayload) {
   package = struct::get_script_bundle("bountyhunterpackage", level.bountypackagelist[intpayload - 1]);
 
   switch (response) {
-    case # "buy_package_primary":
+    case #"buy_package_primary":
       clientfield = "luielement.BountyHunterLoadout.primary";
       slot = 0;
       break;
-    case # "buy_package_secondary":
+    case #"buy_package_secondary":
       clientfield = "luielement.BountyHunterLoadout.secondary";
       slot = 1;
       break;
-    case # "hash_390a1acd2edcd5b7":
+    case #"hash_390a1acd2edcd5b7":
       var_e120a933 = 1;
       clientfield = "luielement.BountyHunterLoadout.primaryAttachmentTrack.tierPurchased";
       slot = 11;
       break;
-    case # "hash_390a1bcd2edcd76a":
+    case #"hash_390a1bcd2edcd76a":
       var_e120a933 = 2;
       clientfield = "luielement.BountyHunterLoadout.primaryAttachmentTrack.tierPurchased";
       slot = 11;
       break;
-    case # "hash_390a1ccd2edcd91d":
+    case #"hash_390a1ccd2edcd91d":
       var_e120a933 = 3;
       clientfield = "luielement.BountyHunterLoadout.primaryAttachmentTrack.tierPurchased";
       slot = 11;
       break;
-    case # "hash_2acbda1102e614f7":
+    case #"hash_2acbda1102e614f7":
       var_e120a933 = 1;
       clientfield = "luielement.BountyHunterLoadout.secondaryAttachmentTrack.tierPurchased";
       slot = 12;
       break;
-    case # "hash_2acbdb1102e616aa":
+    case #"hash_2acbdb1102e616aa":
       var_e120a933 = 2;
       clientfield = "luielement.BountyHunterLoadout.secondaryAttachmentTrack.tierPurchased";
       slot = 12;
       break;
-    case # "hash_2acbdc1102e6185d":
+    case #"hash_2acbdc1102e6185d":
       var_e120a933 = 3;
       clientfield = "luielement.BountyHunterLoadout.secondaryAttachmentTrack.tierPurchased";
       slot = 12;
       break;
-    case # "buy_package_armor":
+    case #"buy_package_armor":
       clientfield = "luielement.BountyHunterLoadout.armor";
       slot = 5;
       break;
-    case # "buy_package_mobility":
+    case #"buy_package_mobility":
       clientfield = "luielement.BountyHunterLoadout.mobilityTrack.tierPurchased";
       slot = 6;
       break;
-    case # "buy_package_recon":
+    case #"buy_package_recon":
       clientfield = "luielement.BountyHunterLoadout.reconTrack.tierPurchased";
       slot = 7;
       break;
-    case # "buy_package_assault":
+    case #"buy_package_assault":
       clientfield = "luielement.BountyHunterLoadout.assaultTrack.tierPurchased";
       slot = 8;
       break;
-    case # "buy_package_support":
+    case #"buy_package_support":
       clientfield = "luielement.BountyHunterLoadout.supportTrack.tierPurchased";
       slot = 9;
       break;
-    case # "buy_package_ammo":
+    case #"buy_package_ammo":
       isammo = 1;
 
       if(function_2b402d5d(package)) {
@@ -242,12 +242,12 @@ function_40eb02fc(response, intpayload) {
       }
 
       break;
-    case # "buy_package_scorestreak":
+    case #"buy_package_scorestreak":
       isscorestreak = 1;
       clientfield = "luielement.BountyHunterLoadout.scorestreak";
       slot = 10;
       break;
-    case # "buy_package_equipment":
+    case #"buy_package_equipment":
       clientfield = "luielement.BountyHunterLoadout.equipment";
       slot = 2;
       break;
@@ -445,9 +445,9 @@ function_d2f0197a() {
 
 function_659633d8(var_31e314e8) {
   switch (var_31e314e8.name) {
-    case # "gear_armor_tier_two":
+    case #"gear_armor_tier_two":
       return # "specialty_armor_tier_two";
-    case # "gear_armor_tier_three":
+    case #"gear_armor_tier_three":
       return # "specialty_armor_tier_three";
     default:
       return # "specialty_armor";
@@ -460,9 +460,9 @@ function_51a2c3b3(var_31e314e8) {
   }
 
   switch (var_31e314e8.name) {
-    case # "gear_armor_tier_two":
+    case #"gear_armor_tier_two":
       playFXOnTag(#"hash_56c8182de62c1c6", self, "j_spineupper");
-    case # "gear_armor_tier_three":
+    case #"gear_armor_tier_three":
       playFXOnTag(#"hash_3c6a01bd4394d4f3", self, "j_spineupper");
     default:
       playFXOnTag(#"hash_4a955131370a3720", self, "j_spineupper");

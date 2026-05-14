@@ -652,10 +652,10 @@ devgui_ct_seraph() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "spawn_chopper":
+      case #"spawn_chopper":
         a_s_chopper = struct::get_array("<dev string:xaa>", "<dev string:xc1>");
         break;
-      case # "kill_player":
+      case #"kill_player":
         e_player dodamage(1000, e_player.origin);
         break;
     }

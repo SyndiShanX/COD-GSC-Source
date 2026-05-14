@@ -630,13 +630,13 @@ function_9d805044(itemtype, var_ab9610ad = undefined) {
   }
 
   switch (itemtype) {
-    case # "backpack":
+    case #"backpack":
       function_2e10e66e(var_ab9610ad);
       break;
-    case # "equipment":
+    case #"equipment":
       function_283a29c8(var_ab9610ad);
       break;
-    case # "health":
+    case #"health":
       function_a7d62e18(var_ab9610ad);
       break;
     default:
@@ -648,19 +648,19 @@ function_d08934c6(equipment) {
   var_b74300d3 = undefined;
 
   switch (equipment) {
-    case # "hatchet":
+    case #"hatchet":
       var_b74300d3 = #"hatchet_wz_item";
       break;
-    case # "tomahawk_t8":
+    case #"tomahawk_t8":
       var_b74300d3 = #"tomahawk_t8_wz_item";
       break;
-    case # "basketball":
+    case #"basketball":
       var_b74300d3 = #"wz_ball";
       break;
-    case # "cymbal_monkey":
+    case #"cymbal_monkey":
       var_b74300d3 = #"cymbal_monkey_wz_item";
       break;
-    case # "trophy_system":
+    case #"trophy_system":
       var_b74300d3 = #"trophy_system_wz_item";
       break;
   }
@@ -2023,13 +2023,13 @@ equip_item(networkid, quickequip = 0, weaponid = 0) {
     itemtype = item.itementry.itemtype;
 
     switch (itemtype) {
-      case # "ammo":
+      case #"ammo":
         self equip_ammo(item);
         break;
-      case # "armor":
+      case #"armor":
         self equip_armor(item);
         break;
-      case # "attachment":
+      case #"attachment":
         if(weaponid == 0) {
           self equip_attachment(item, function_ec087745(), undefined, !quickequip, 1);
         } else {
@@ -2037,22 +2037,22 @@ equip_item(networkid, quickequip = 0, weaponid = 0) {
         }
 
         break;
-      case # "backpack":
+      case #"backpack":
         self equip_backpack(item);
         break;
-      case # "equipment":
+      case #"equipment":
         self equip_equipment(item);
         break;
-      case # "generic":
-      case # "cash":
+      case #"generic":
+      case #"cash":
         break;
-      case # "health":
+      case #"health":
         self equip_health(item);
         break;
-      case # "killstreak":
+      case #"killstreak":
         self use_killstreak(networkid, item);
         break;
-      case # "weapon":
+      case #"weapon":
         self equip_weapon(item);
         break;
       default:
@@ -2872,25 +2872,25 @@ function_db2abc4(item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         break;
-      case # "ammo":
+      case #"ammo":
         break;
-      case # "health":
+      case #"health":
         break;
-      case # "equipment":
+      case #"equipment":
         break;
-      case # "armor":
+      case #"armor":
         break;
-      case # "backpack":
+      case #"backpack":
         break;
-      case # "attachment":
+      case #"attachment":
         if(isDefined(item.itementry.equipsound)) {
           self playsoundtoplayer(item.itementry.equipsound, self);
         }
 
         break;
-      case # "generic":
+      case #"generic":
         break;
     }
   }
@@ -3089,19 +3089,19 @@ function_fba4a353(item) {
     slotid = undefined;
 
     switch (item.itementry.itemtype) {
-      case # "armor":
+      case #"armor":
         slotid = 11;
         break;
-      case # "backpack":
+      case #"backpack":
         slotid = 13;
         break;
-      case # "equipment":
+      case #"equipment":
         slotid = 12;
         break;
-      case # "health":
+      case #"health":
         slotid = 10;
         break;
-      case # "weapon":
+      case #"weapon":
         slotid = array(16 + 1, 16 + 1 + 6 + 1);
         break;
     }

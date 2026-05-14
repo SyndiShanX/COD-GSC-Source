@@ -130,27 +130,27 @@ function private function_1cbc22b0(weapon, n_radius) {
   self flag::increment("zm_field_upgrade_in_use");
 
   switch (weapon.name) {
-    case # "ring_of_fire":
+    case #"ring_of_fire":
       var_3889eb68 thread function_64a3f9c6();
       break;
-    case # "ring_of_fire_1":
+    case #"ring_of_fire_1":
       var_3889eb68.var_5b61dff6 = 0.04;
       var_3889eb68 thread function_64a3f9c6();
       break;
-    case # "ring_of_fire_2":
+    case #"ring_of_fire_2":
       var_3889eb68.var_5b61dff6 = 0.04;
       var_3889eb68 thread function_64a3f9c6(1);
       break;
-    case # "ring_of_fire_3":
+    case #"ring_of_fire_3":
       var_3889eb68.var_5b61dff6 = 0.04;
       var_3889eb68 thread function_64a3f9c6(1, 1);
       break;
-    case # "ring_of_fire_4":
+    case #"ring_of_fire_4":
       var_3889eb68.var_5b61dff6 = 0.04;
       var_3889eb68 thread function_64a3f9c6(1, 1);
       var_3889eb68.var_bb41cf71 = 1;
       break;
-    case # "ring_of_fire_5":
+    case #"ring_of_fire_5":
       var_3889eb68.var_5b61dff6 = 0.04;
       var_3889eb68 thread function_64a3f9c6(1, 1, 1);
       var_3889eb68.var_bb41cf71 = 1;

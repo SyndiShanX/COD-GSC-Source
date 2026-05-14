@@ -586,13 +586,13 @@ _reclaimescortparameters(commander, &blackboard) {
         }
 
         switch (order) {
-          case # "order_escort_mainguard":
+          case #"order_escort_mainguard":
             player[#"escortmainguard"] = arraycombine(player[#"escortmainguard"], squadbots, 1, 0);
             break;
-          case # "order_escort_rearguard":
+          case #"order_escort_rearguard":
             player[#"escortrearguard"] = arraycombine(player[#"escortrearguard"], squadbots, 1, 0);
             break;
-          case # "order_escort_vanguard":
+          case #"order_escort_vanguard":
             player[#"escortvanguard"] = arraycombine(player[#"escortvanguard"], squadbots, 1, 0);
             break;
         }

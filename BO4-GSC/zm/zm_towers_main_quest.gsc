@@ -1143,10 +1143,10 @@ spawn_ra_destroyer(var_95f17a69, str_zone = "") {
     str_tower = "odin_ground";
 
     switch (str_zone) {
-      case # "zone_odin_top_floor":
+      case #"zone_odin_top_floor":
         str_tower = "odin_top";
         break;
-      case # "zone_odin_zeus_bridge":
+      case #"zone_odin_zeus_bridge":
         str_tower = "zeus";
         break;
     }
@@ -1495,28 +1495,28 @@ function_df18663(str_key) {
   }
 
   switch (str_key) {
-    case # "spawner_zm_gladiator_marauder":
+    case #"spawner_zm_gladiator_marauder":
       str_ai = "<dev string:x69>";
       break;
-    case # "spawner_zm_gladiator_destroyer":
+    case #"spawner_zm_gladiator_destroyer":
       str_ai = "<dev string:x74>";
       break;
-    case # "spawner_zm_blight_father":
+    case #"spawner_zm_blight_father":
       str_ai = "<dev string:x80>";
       break;
-    case # "spawner_zm_catalyst_plasma":
+    case #"spawner_zm_catalyst_plasma":
       str_ai = "<dev string:x90>";
       break;
-    case # "spawner_zm_catalyst_corrosive":
+    case #"spawner_zm_catalyst_corrosive":
       str_ai = "<dev string:x99>";
       break;
-    case # "spawner_zm_catalyst_water":
+    case #"spawner_zm_catalyst_water":
       str_ai = "<dev string:xa5>";
       break;
-    case # "spawner_zm_catalyst_electric":
+    case #"spawner_zm_catalyst_electric":
       str_ai = "<dev string:xae>";
       break;
-    case # "spawner_zm_tiger":
+    case #"spawner_zm_tiger":
       str_ai = "<dev string:xb9>";
       break;
   }
@@ -1637,7 +1637,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
   s_spawn = array::random(a_s_spawns);
 
   switch (str_spawner) {
-    case # "spawner_zm_gladiator_marauder":
+    case #"spawner_zm_gladiator_marauder":
       var_1c62893d = getspawnerarray("zombie_spawner_marauder", "targetname")[0];
       ai = undefined;
 
@@ -1653,7 +1653,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
       ai.var_dd6fe31f = 1;
       ai.no_powerups = 1;
       break;
-    case # "spawner_zm_gladiator_destroyer":
+    case #"spawner_zm_gladiator_destroyer":
       var_1c62893d = getspawnerarray("zombie_spawner_destroyer", "targetname")[0];
       ai = undefined;
 
@@ -1669,7 +1669,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
       ai.var_dd6fe31f = 1;
       ai.no_powerups = 1;
       break;
-    case # "spawner_zm_tiger":
+    case #"spawner_zm_tiger":
       var_1c62893d = getspawnerarray("zombie_spawner_tiger", "targetname")[0];
       ai = undefined;
 
@@ -1685,7 +1685,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
       ai.var_dd6fe31f = 1;
       ai.no_powerups = 1;
       break;
-    case # "spawner_zm_blight_father":
+    case #"spawner_zm_blight_father":
       ai = undefined;
 
       while(!isDefined(ai)) {
@@ -1706,7 +1706,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
 
       zm_transform::function_9acf76e6(ai, #"blight_father", &function_663fbdcd);
       break;
-    case # "spawner_zm_catalyst_plasma":
+    case #"spawner_zm_catalyst_plasma":
       ai = undefined;
 
       while(!isDefined(ai)) {
@@ -1727,7 +1727,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
 
       zm_transform::function_9acf76e6(ai, #"catalyst_plasma", &function_663fbdcd);
       break;
-    case # "spawner_zm_catalyst_corrosive":
+    case #"spawner_zm_catalyst_corrosive":
       ai = undefined;
 
       while(!isDefined(ai)) {
@@ -1748,7 +1748,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
 
       zm_transform::function_9acf76e6(ai, #"catalyst_corrosive", &function_663fbdcd);
       break;
-    case # "spawner_zm_catalyst_water":
+    case #"spawner_zm_catalyst_water":
       ai = undefined;
 
       while(!isDefined(ai)) {
@@ -1769,7 +1769,7 @@ function_bf12114b(str_spawner, a_s_spawns) {
 
       zm_transform::function_9acf76e6(ai, #"catalyst_water", &function_663fbdcd);
       break;
-    case # "spawner_zm_catalyst_electric":
+    case #"spawner_zm_catalyst_electric":
       ai = undefined;
 
       while(!isDefined(ai)) {
@@ -1995,35 +1995,35 @@ function_53f96a9e(str_aitype) {
   }
 
   switch (str_aitype) {
-    case # "spawner_zm_gladiator_marauder":
+    case #"spawner_zm_gladiator_marauder":
       self showpart("tag_m_glyph");
       self showpart("tag_m_glow");
       return self;
-    case # "spawner_zm_gladiator_destroyer":
+    case #"spawner_zm_gladiator_destroyer":
       self showpart("tag_d_glyph");
       self showpart("tag_d_glow");
       return self;
-    case # "spawner_zm_blight_father":
+    case #"spawner_zm_blight_father":
       self showpart("tag_b_glyph");
       self showpart("tag_b_glow");
       return self;
-    case # "spawner_zm_catalyst_plasma":
+    case #"spawner_zm_catalyst_plasma":
       self showpart("tag_p_glyph");
       self showpart("tag_p_glow");
       return self;
-    case # "spawner_zm_catalyst_corrosive":
+    case #"spawner_zm_catalyst_corrosive":
       self showpart("tag_c_glyph");
       self showpart("tag_c_glow");
       return self;
-    case # "spawner_zm_catalyst_water":
+    case #"spawner_zm_catalyst_water":
       self showpart("tag_w_glyph");
       self showpart("tag_w_glow");
       return self;
-    case # "spawner_zm_catalyst_electric":
+    case #"spawner_zm_catalyst_electric":
       self showpart("tag_r_glyph");
       self showpart("tag_r_glow");
       return self;
-    case # "spawner_zm_tiger":
+    case #"spawner_zm_tiger":
       self showpart("tag_t_glyph");
       self showpart("tag_t_glow");
       return self;
@@ -2420,12 +2420,12 @@ function_af7564d9(s_params) {
   n_charges = 1;
 
   switch (str_archetype) {
-    case # "blight_father":
+    case #"blight_father":
       var_d6241ccb = 1;
       v_fx_origin = v_origin;
       n_charges = 9;
       break;
-    case # "gladiator":
+    case #"gladiator":
       var_d6241ccb = 1;
       n_charges = 5;
       break;
@@ -3107,13 +3107,13 @@ function_ba568d37(str_enemy, a_s_spawns) {
 
   while(!isDefined(ai_enemy)) {
     switch (str_enemy) {
-      case # "marauder":
+      case #"marauder":
         ai_enemy = zombie_gladiator_util::function_bfa79e98(undefined, s_spawn, "melee");
         break;
-      case # "destroyer":
+      case #"destroyer":
         ai_enemy = zombie_gladiator_util::function_bfa79e98(undefined, s_spawn, "ranged");
         break;
-      case # "tiger":
+      case #"tiger":
         ai_enemy = zombie_tiger_util::spawn_single(1, s_spawn);
         break;
     }
@@ -3274,10 +3274,10 @@ init_rune() {
 
   foreach(s_part in a_s_parts) {
     switch (s_part.script_noteworthy) {
-      case # "anchor":
+      case #"anchor":
         self.s_anchor = s_part;
         break;
-      case # "fx":
+      case #"fx":
         self.mdl_fx = util::spawn_model("tag_origin", s_part.origin, s_part.angles);
         s_part struct::delete();
         break;
@@ -4018,13 +4018,13 @@ defend_spawn(var_4bf95f4c) {
       s_random_spawn = array::random(var_97f729b);
 
       switch (var_4bf95f4c.archetype) {
-        case # "normal":
+        case #"normal":
           for(ai = undefined; !isDefined(ai); ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], "defend_trilane_fill", s_random_spawn, function_92d8f779())) {
             wait 0.5;
           }
 
           break;
-        case # "plasma":
+        case #"plasma":
           ai = undefined;
 
           while(!isDefined(ai)) {
@@ -4041,7 +4041,7 @@ defend_spawn(var_4bf95f4c) {
           }
 
           break;
-        case # "corrosive":
+        case #"corrosive":
           ai = undefined;
 
           while(!isDefined(ai)) {
@@ -4058,13 +4058,13 @@ defend_spawn(var_4bf95f4c) {
           }
 
           break;
-        case # "glad_m":
+        case #"glad_m":
           zombie_gladiator_util::function_69f309b(1, "melee", undefined, 1, s_random_spawn);
           break;
-        case # "glad_r":
+        case #"glad_r":
           zombie_gladiator_util::function_69f309b(1, "ranged", undefined, 1, s_random_spawn);
           break;
-        case # "blight":
+        case #"blight":
           ai = undefined;
 
           while(!isDefined(ai)) {
@@ -4081,7 +4081,7 @@ defend_spawn(var_4bf95f4c) {
           }
 
           break;
-        case # "tiger":
+        case #"tiger":
           var_1c62893d = getspawnerarray("zombie_spawner_tiger", "targetname")[0];
           ai = undefined;
 
@@ -5035,8 +5035,8 @@ function_a2e1777c() {
 
     foreach(e_symbol in a_e_symbols) {
       switch (e_symbol.objectid) {
-        case # "symbol_front_power":
-        case # "symbol_front":
+        case #"symbol_front_power":
+        case #"symbol_front":
           var_ace72b0e = array(e_symbol.origin, e_symbol.angles);
 
           if(!isDefined(e_door.var_bdb8b028)) {
@@ -5047,8 +5047,8 @@ function_a2e1777c() {
 
           e_door.var_bdb8b028[e_door.var_bdb8b028.size] = var_ace72b0e;
           break;
-        case # "symbol_back":
-        case # "symbol_back_power":
+        case #"symbol_back":
+        case #"symbol_back_power":
           var_ace72b0e = array(e_symbol.origin, e_symbol.angles);
 
           if(!isDefined(e_door.var_d7553777)) {
@@ -5144,8 +5144,8 @@ function_41c15ae9(a_str_script_flags) {
 
         foreach(mdl_part in a_mdl_parts) {
           switch (mdl_part.objectid) {
-            case # "symbol_back":
-            case # "symbol_front":
+            case #"symbol_back":
+            case #"symbol_front":
               if(!(isDefined(mdl_part.var_381e124d) && mdl_part.var_381e124d)) {
                 mdl_locked = util::spawn_model("p8_zm_power_door_symbol_01", mdl_part.origin, mdl_part.angles);
                 mdl_locked clientfield::set("power_door_ambient_fx", 1);
@@ -5251,8 +5251,8 @@ function_1efe04ba(a_str_script_flags) {
 
         foreach(mdl_part in a_mdl_parts) {
           switch (mdl_part.objectid) {
-            case # "symbol_back":
-            case # "symbol_front":
+            case #"symbol_back":
+            case #"symbol_front":
               if(isDefined(mdl_part.var_381e124d) && mdl_part.var_381e124d) {
                 mdl_part.origin += (0, 0, 2048);
                 waitframe(1);

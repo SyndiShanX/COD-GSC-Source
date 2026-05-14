@@ -8,34 +8,34 @@
 
 function handlenotetrack(note, flagname, customfunction, var1) {
   switch (flagname) {
-    case # "undefined":
-    case # "end":
-    case # "finish":
+    case #"undefined":
+    case #"end":
+    case #"finish":
       return flagname;
-    case # "swish small":
+    case #"swish small":
       self thread sound::play_in_space("fly_gear_enemy", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "swish large":
+    case #"swish large":
       self thread sound::play_in_space("fly_gear_enemy_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "no death":
+    case #"no death":
       self.a.nodeath = 1;
       break;
-    case # "no pain":
+    case #"no pain":
       self.allowpain = 0;
       break;
-    case # "allow pain":
+    case #"allow pain":
       self.allowpain = 1;
       break;
-    case # "anim_melee = right":
-    case # "hash_39ec7b0969bab796":
+    case #"anim_melee = right":
+    case #"hash_39ec7b0969bab796":
       self.a.meleestate = "right";
       break;
-    case # "anim_melee = left":
-    case # "hash_6b554a9080ec8b07":
+    case #"anim_melee = left":
+    case #"hash_6b554a9080ec8b07":
       self.a.meleestate = "left";
       break;
-    case # "swap taghelmet to tagleft":
+    case #"swap taghelmet to tagleft":
       if(isDefined(self.hatmodel)) {
         if(isDefined(self.helmetsidemodel)) {
           self detach(self.helmetsidemodel, "TAG_HELMETSIDE");

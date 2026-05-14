@@ -644,8 +644,8 @@ isheadshot(shitloc, smeansofdeath) {
   }
 
   switch (smeansofdeath) {
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
   }
 

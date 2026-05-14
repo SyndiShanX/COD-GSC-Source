@@ -239,16 +239,16 @@ function function_20df51b5() {
     s_waitresult = self waittill(#"hash_5db01607981fb0ea", #"hash_5db01507981faf37", #"hash_5db01407981fad84", #"hash_5db01307981fabd1");
 
     switch (s_waitresult._notify) {
-      case # "hash_5db01607981fb0ea":
+      case #"hash_5db01607981fb0ea":
         self.var_c92e501c = "interrupt_p1";
         break;
-      case # "hash_5db01507981faf37":
+      case #"hash_5db01507981faf37":
         self.var_c92e501c = "interrupt_p2";
         break;
-      case # "hash_5db01407981fad84":
+      case #"hash_5db01407981fad84":
         self.var_c92e501c = "interrupt_p3";
         break;
-      case # "hash_5db01307981fabd1":
+      case #"hash_5db01307981fabd1":
       default:
         self.var_c92e501c = "interrupt_p4";
         break;
@@ -401,13 +401,13 @@ function function_65937665() {
   level endon(#"end_game");
 
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_d0767760 = #"hash_359dc466218eb0ff";
       break;
-    case # "carver":
+    case #"carver":
       var_d0767760 = #"hash_359dd466218ecc2f";
       break;
-    case # "grey":
+    case #"grey":
       var_d0767760 = #"hash_359dd066218ec563";
       break;
     default:
@@ -465,13 +465,13 @@ function private function_543f9e02() {
     s_waitresult = level waittill(#"hash_6d7ff9f9ff07619c");
 
     switch (level.var_85422c0e) {
-      case # "strauss":
+      case #"strauss":
         var_b3b54a4 = #"hash_66dcd6a30312f825";
         break;
-      case # "carver":
+      case #"carver":
         var_b3b54a4 = #"hash_5b02401fdc592601";
         break;
-      case # "grey":
+      case #"grey":
         var_b3b54a4 = #"hash_4c3eea3dc6d2104a";
         break;
       default:
@@ -517,13 +517,13 @@ function private function_a6c9ee49() {
   level waittill(#"hash_3eb4c19472384f5b");
 
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_4b8c1ea7 = #"hash_4271010934d7ff16";
       break;
-    case # "carver":
+    case #"carver":
       var_4b8c1ea7 = #"hash_7e3a0e811e6347d2";
       break;
-    case # "grey":
+    case #"grey":
       var_4b8c1ea7 = #"hash_5688a462847552b9";
       break;
     default:
@@ -539,13 +539,13 @@ function private function_a6c9ee49() {
 function private on_actor_killed(params) {
   if(self.archetype === #"mimic" && self.team === level.zombie_team) {
     switch (level.var_85422c0e) {
-      case # "strauss":
+      case #"strauss":
         var_b3b54a4 = #"hash_74270a8581b4849a";
         break;
-      case # "carver":
+      case #"carver":
         var_b3b54a4 = #"hash_12a4b90943442c86";
         break;
-      case # "grey":
+      case #"grey":
         var_b3b54a4 = #"hash_3f74c72c2033c1c5";
         break;
       default:
@@ -564,13 +564,13 @@ function on_ai_spawned() {
 
   if(self.archetype === #"raz" && self.team === level.zombie_team) {
     switch (level.var_85422c0e) {
-      case # "strauss":
+      case #"strauss":
         var_b3b54a4 = #"hash_62001c8ac133172a";
         break;
-      case # "carver":
+      case #"carver":
         var_b3b54a4 = #"hash_6cc8aa06ce7cc5d6";
         break;
-      case # "grey":
+      case #"grey":
         var_b3b54a4 = #"hash_32dd8255ea06555";
         break;
       default:
@@ -616,13 +616,13 @@ function function_421f7a59() {
   wait 0.75;
 
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = array::random([#"hash_4b1d5badb2764a84", #"hash_4b1d5eadb2764f9d", #"hash_4b1d5dadb2764dea"]);
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = array::random([#"hash_4b53dbadb2a4b374", #"hash_4b53deadb2a4b88d", #"hash_4b53ddadb2a4b6da"]);
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = array::random([#"hash_4b4643adb29926d0", #"hash_4b4646adb2992be9", #"hash_4b4645adb2992a36"]);
       break;
     default:
@@ -635,13 +635,13 @@ function function_421f7a59() {
 
 function function_f314c888() {
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = #"hash_e353adc2878fc33";
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = #"hash_e354adc28791763";
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = #"hash_e354edc28791e2f";
       break;
     default:
@@ -739,13 +739,13 @@ function function_c732de82(e_player) {
 
 function function_68c6149e() {
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = array::random([#"hash_1b5b23733cdc4178", #"hash_1b5b26733cdc4691", #"hash_1b5b25733cdc44de"]);
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = array::random([#"hash_1b91a3733d0aaa68", #"hash_1b91a6733d0aaf81", #"hash_1b91a5733d0aadce"]);
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = array::random([#"hash_1b9f1b733d1600ac", #"hash_1b9f1e733d1605c5", #"hash_1b9f1d733d160412"]);
       break;
     default:
@@ -758,13 +758,13 @@ function function_68c6149e() {
 
 function function_a71f7322() {
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = #"hash_4a84679c88de5a62";
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = #"hash_4a84579c88de3f32";
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = #"hash_4a84539c88de3866";
       break;
     default:
@@ -779,13 +779,13 @@ function private function_d50a530() {
   level flag::wait_till_all([#"hash_1dc3d47b1604d916", #"hash_2651a51980ef57ee"]);
 
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = #"hash_4b8ddfd962701e2e";
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = #"hash_4b8dcfd9627002fe";
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = #"hash_4b8dd3d9627009ca";
       break;
     default:
@@ -798,13 +798,13 @@ function private function_d50a530() {
 
 function function_7930927d() {
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_b3b54a4 = #"hash_7c4c4f063a9db5b8";
       break;
-    case # "carver":
+    case #"carver":
       var_b3b54a4 = #"hash_7c4c5f063a9dd0e8";
       break;
-    case # "grey":
+    case #"grey":
       var_b3b54a4 = #"hash_7c4c63063a9dd7b4";
       break;
     default:
@@ -822,13 +822,13 @@ function function_3c870e42() {
 
 function function_8cc97115() {
   switch (level.var_85422c0e) {
-    case # "strauss":
+    case #"strauss":
       var_3e86fd2e = #"hash_6dc5d7d4efbfbfa9";
       break;
-    case # "carver":
+    case #"carver":
       var_3e86fd2e = #"hash_6dfc97d4efee9559";
       break;
-    case # "grey":
+    case #"grey":
       var_3e86fd2e = #"hash_6dee97d4efe257fd";
       break;
     default:

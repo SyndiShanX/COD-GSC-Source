@@ -450,22 +450,22 @@ function function_724dafb1(destination) {
 
   foreach(spawn in a_spawns) {
     switch (spawn.targetname) {
-      case # "mp_map_wide_fav_spawn":
+      case #"mp_map_wide_fav_spawn":
         var_22e1dc7 = "vehicle_t9_mil_fav_light";
         break;
-      case # "mp_map_wide_jetski_spawn":
+      case #"mp_map_wide_jetski_spawn":
         var_22e1dc7 = "veh_boct_mil_jetski";
         break;
-      case # "mp_map_wide_motorcycle_spawn":
+      case #"mp_map_wide_motorcycle_spawn":
         var_22e1dc7 = "vehicle_motorcycle_mil_us_offroad";
         break;
-      case # "mp_map_wide_pbr_spawn":
+      case #"mp_map_wide_pbr_spawn":
         var_22e1dc7 = "vehicle_boct_mil_boat_pbr";
         break;
-      case # "mp_map_wide_snowmobile_spawn":
+      case #"mp_map_wide_snowmobile_spawn":
         var_22e1dc7 = "vehicle_t9_mil_snowmobile";
         break;
-      case # "mp_map_wide_uaz_spawn":
+      case #"mp_map_wide_uaz_spawn":
         var_22e1dc7 = "vehicle_t9_mil_ru_truck_light_player";
         break;
       default:

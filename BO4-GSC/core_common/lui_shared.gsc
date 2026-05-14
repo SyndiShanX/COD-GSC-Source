@@ -269,8 +269,8 @@ _play_movie_for_player(str_movie, str_type, show_black_screen, b_looping, b_skip
   str_menu = undefined;
 
   switch (str_type) {
-    case # "fullscreen_additive":
-    case # "fullscreen":
+    case #"fullscreen_additive":
+    case #"fullscreen":
       str_menu = "full_screen_movie";
       break;
     default:
@@ -504,10 +504,10 @@ _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_close_menu,
 
   if(isstring(v_color)) {
     switch (v_color) {
-      case # "black":
+      case #"black":
         v_color = (0, 0, 0);
         break;
-      case # "white":
+      case #"white":
         v_color = (1, 1, 1);
         break;
     }

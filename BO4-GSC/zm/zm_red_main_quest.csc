@@ -165,28 +165,28 @@ function_dee06e64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_70f269cd(localclientnum, newval, str_step) {
   switch (str_step) {
-    case # "oil":
+    case #"oil":
       a_s_points = function_cc7e9fc3(#"s_progress_oil");
       break;
-    case # "reflect":
+    case #"reflect":
       a_s_points = function_cc7e9fc3(#"s_progress_reflect", #"s_progress_oil");
       break;
-    case # "split_prophecy":
+    case #"split_prophecy":
       a_s_points = function_cc7e9fc3(#"s_progress_split_prophecy", #"s_progress_reflect");
       break;
-    case # "split_light":
+    case #"split_light":
       a_s_points = function_cc7e9fc3(#"s_progress_split_light", #"s_progress_reflect");
       break;
-    case # "prophecy":
+    case #"prophecy":
       a_s_points = function_cc7e9fc3(#"s_progress_prophecy", #"s_progress_split_prophecy");
       break;
-    case # "light":
+    case #"light":
       a_s_points = function_cc7e9fc3(#"s_progress_light", #"s_progress_split_light");
       break;
-    case # "play":
+    case #"play":
       a_s_points = function_cc7e9fc3(#"s_progress_play");
       break;
-    case # "blood":
+    case #"blood":
       a_s_points = function_cc7e9fc3(#"s_progress_blood", #"s_progress_play");
       break;
   }
@@ -964,19 +964,19 @@ function_b750bd91(localclientnum, newval, str_ww) {
   if(!isDefined(n_fx) && !isDefined(mdl_rune)) {
     if(newval == 1) {
       switch (str_ww) {
-        case # "death":
+        case #"death":
           s_pos = struct::get(#"hash_11302005e130b7eb");
           str_fx = level._effect[#"hash_579a1ad0a61119fc"];
           break;
-        case # "earth":
+        case #"earth":
           s_pos = struct::get(#"hash_2b292979020933aa");
           str_fx = level._effect[#"hash_79910e1d73c43922"];
           break;
-        case # "air":
+        case #"air":
           s_pos = struct::get(#"hash_286a392e24892dee");
           str_fx = level._effect[#"hash_2b1f96b3ed3451d2"];
           break;
-        case # "light":
+        case #"light":
           s_pos = struct::get(#"hash_5ae30fa5823821ee");
           str_fx = level._effect[#"hash_151f6238e261520a"];
           break;
@@ -1002,16 +1002,16 @@ function_b750bd91(localclientnum, newval, str_ww) {
       }
 
       switch (str_ww) {
-        case # "death":
+        case #"death":
           str_fx = level._effect[#"hash_257185644d8c28b0"];
           break;
-        case # "earth":
+        case #"earth":
           str_fx = level._effect[#"hash_3d71b8c8036f8a4e"];
           break;
-        case # "air":
+        case #"air":
           str_fx = level._effect[#"hash_1caa39c10fd546be"];
           break;
-        case # "light":
+        case #"light":
           str_fx = level._effect[#"hash_5c18b169297a5116"];
           break;
       }
@@ -1036,16 +1036,16 @@ function_b750bd91(localclientnum, newval, str_ww) {
 
 function_985f4598(str_ww) {
   switch (str_ww) {
-    case # "death":
+    case #"death":
       var_cfc545ad = #"p8_zm_red_rune_circle_charron";
       break;
-    case # "earth":
+    case #"earth":
       var_cfc545ad = #"p8_zm_red_rune_circle_gaia";
       break;
-    case # "air":
+    case #"air":
       var_cfc545ad = #"p8_zm_red_rune_circle_ouranos";
       break;
-    case # "light":
+    case #"light":
       var_cfc545ad = #"hash_31a411dafa5678e2";
       break;
   }
@@ -1072,16 +1072,16 @@ function_4f14ca28(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_67b43987(localclientnum, newval, str_ww) {
   if(newval) {
     switch (str_ww) {
-      case # "death":
+      case #"death":
         str_fx = level._effect[#"hash_257185644d8c28b0"];
         break;
-      case # "earth":
+      case #"earth":
         str_fx = level._effect[#"hash_3d71b8c8036f8a4e"];
         break;
-      case # "air":
+      case #"air":
         str_fx = level._effect[#"hash_1caa39c10fd546be"];
         break;
-      case # "light":
+      case #"light":
         str_fx = level._effect[#"hash_5c18b169297a5116"];
         break;
     }
@@ -1257,13 +1257,13 @@ function_180e26e2() {
     str_type = s_pos.script_noteworthy;
 
     switch (str_type) {
-      case # "center":
+      case #"center":
         str_array = #"center";
         break;
-      case # "close":
+      case #"close":
         str_array = #"close";
         break;
-      case # "far":
+      case #"far":
         str_array = #"far";
         break;
     }

@@ -1393,16 +1393,16 @@ actor_killed_override(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
 
     if(isDefined(self.animname)) {
       switch (self.animname) {
-        case # "quad_zombie":
+        case #"quad_zombie":
           type = "quadkill";
           break;
-        case # "ape_zombie":
+        case #"ape_zombie":
           type = "apekill";
           break;
-        case # "zombie":
+        case #"zombie":
           type = "zombiekill";
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           type = "dogkill";
           break;
       }

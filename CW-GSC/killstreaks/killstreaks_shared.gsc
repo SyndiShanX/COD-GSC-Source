@@ -180,13 +180,13 @@ function private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use
   }
 
   switch (bundle.var_c36eb69b) {
-    case # "none":
+    case #"none":
       level.killstreaks[type].teamkillpenaltyscale = 0;
       break;
-    case # "reduced":
+    case #"reduced":
       level.killstreaks[type].teamkillpenaltyscale = level.teamkillreducedpenalty;
       break;
-    case # "default":
+    case #"default":
     default:
       level.killstreaks[type].teamkillpenaltyscale = 1;
       break;
@@ -783,10 +783,10 @@ function give_weapon(killstreaktype, usestoredammo) {
       return self.pers[#"held_killstreak_ammo_count"][weapon];
     } else {
       switch (level.killstreaks[killstreaktype].script_bundle.var_514a90ee) {
-        case # "clip":
+        case #"clip":
           delta = weapon.clipsize;
           break;
-        case # "one":
+        case #"one":
           delta = 1;
           break;
         default:
@@ -1781,7 +1781,7 @@ function killstreak_debug_think() {
     cmd = getdvarstring(#"debug_killstreak");
 
     switch (cmd) {
-      case # "data_dump":
+      case #"data_dump":
         killstreak_data_dump();
         break;
     }
@@ -2055,10 +2055,10 @@ function function_73566ec7(attacker, weapon, owner) {
   attacker contracts::increment_contract(#"hash_317a8b8df3aa8838");
 
   switch (self.killstreaktype) {
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
-    case # "recon_car":
-    case # "inventory_recon_car":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
+    case #"recon_car":
+    case #"inventory_recon_car":
       attacker contracts::increment_contract(#"hash_3c21dc0c4de41bec");
       break;
   }
@@ -2198,8 +2198,8 @@ function ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon
 
 function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damage_scalar) {
   switch (type) {
-    case # "mod_rifle_bullet":
-    case # "mod_pistol_bullet":
+    case #"mod_rifle_bullet":
+    case #"mod_pistol_bullet":
       if(!allow_bullet_damage) {
         damage = 0;
         break;
@@ -2218,9 +2218,9 @@ function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bul
       }
 
       break;
-    case # "mod_explosive":
-    case # "mod_projectile":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_projectile":
+    case #"mod_projectile_splash":
       if(weapon.statindex === level.weaponpistolenergy.statindex || weapon.statindex !== level.weaponshotgunenergy.statindex || weapon.statindex === level.weaponspecialcrossbow.statindex) {
         break;
       }
@@ -2953,10 +2953,10 @@ function function_975d45c3() {
   startheight = 200;
 
   switch (self getstance()) {
-    case # "crouch":
+    case #"crouch":
       startheight = 30;
       break;
-    case # "prone":
+    case #"prone":
       startheight = 15;
       break;
   }

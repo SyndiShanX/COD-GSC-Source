@@ -143,15 +143,15 @@ function init() {
 
 function function_f9f3607b(name) {
   switch (name) {
-    case # "slideways":
-    case # "slideways2":
-    case # "slideways3":
-    case # "slideways4":
-    case # "slideways5":
+    case #"slideways":
+    case #"slideways2":
+    case #"slideways3":
+    case #"slideways4":
+    case #"slideways5":
       return 4500;
-    case # "eggxit_1":
+    case #"eggxit_1":
       return 3600;
-    case # "roj":
+    case #"roj":
       return 9999999;
   }
 
@@ -229,19 +229,19 @@ function function_879f2ed0() {
 
 function function_19e7d0fc(name) {
   switch (name) {
-    case # "slideways":
-    case # "slideways2":
-    case # "slideways3":
-    case # "slideways4":
-    case # "slideways5":
+    case #"slideways":
+    case #"slideways2":
+    case #"slideways3":
+    case #"slideways4":
+    case #"slideways5":
       return &function_4d16b7a9;
-    case # "snaketemple":
+    case #"snaketemple":
       return &function_ab6edfa3;
-    case # "warstore":
+    case #"warstore":
       return &function_7cbb4f99;
-    case # "roj":
+    case #"roj":
       return &function_b2706226;
-    case # "eggxit_1":
+    case #"eggxit_1":
       return &function_2ee246a7;
   }
 
@@ -290,37 +290,37 @@ function function_d52d06ee(id) {
 
 function function_b3411080(name) {
   switch (name) {
-    case # "armory":
+    case #"armory":
       return 1;
-    case # "coop":
+    case #"coop":
       return 2;
-    case # "treasure":
+    case #"treasure":
       return 3;
-    case # "tradingpost":
+    case #"tradingpost":
       return 4;
-    case # "nukebunker":
+    case #"nukebunker":
       return 5;
-    case # "snaketemple":
+    case #"snaketemple":
       return 6;
-    case # "crypt":
+    case #"crypt":
       return 7;
-    case # "cellar":
+    case #"cellar":
       return 8;
-    case # "slideways":
+    case #"slideways":
       return 9;
-    case # "slideways2":
+    case #"slideways2":
       return 10;
-    case # "slideways3":
+    case #"slideways3":
       return 11;
-    case # "slideways4":
+    case #"slideways4":
       return 12;
-    case # "slideways5":
+    case #"slideways5":
       return 13;
-    case # "eggxit_1":
+    case #"eggxit_1":
       return 16;
-    case # "warstore":
+    case #"warstore":
       return 14;
-    case # "roj":
+    case #"roj":
       return 15;
     default:
       assert(0, "<dev string:x5d>");
@@ -330,33 +330,33 @@ function function_b3411080(name) {
 
 function function_d496f180(name) {
   switch (name) {
-    case # "armory":
+    case #"armory":
       return 26;
-    case # "coop":
+    case #"coop":
       return 27;
-    case # "treasure":
+    case #"treasure":
       return 17;
-    case # "tradingpost":
+    case #"tradingpost":
       return 18;
-    case # "nukebunker":
+    case #"nukebunker":
       return 19;
-    case # "snaketemple":
+    case #"snaketemple":
       return 20;
-    case # "crypt":
+    case #"crypt":
       return 21;
-    case # "cellar":
+    case #"cellar":
       return 22;
-    case # "slideways":
-    case # "slideways2":
-    case # "slideways3":
-    case # "slideways4":
-    case # "slideways5":
+    case #"slideways":
+    case #"slideways2":
+    case #"slideways3":
+    case #"slideways4":
+    case #"slideways5":
       return 23;
-    case # "eggxit_1":
+    case #"eggxit_1":
       return 28;
-    case # "warstore":
+    case #"warstore":
       return 24;
-    case # "roj":
+    case #"roj":
       return 52;
     default:
       assert(0, "<dev string:x72>");

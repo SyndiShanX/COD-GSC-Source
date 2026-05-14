@@ -11,19 +11,19 @@ function autoexec __init__() {
   gametype = function_be90acca(getdvarstring(#"g_gametype"));
 
   switch (gametype) {
-    case # "fireteam_dirty_bomb":
+    case #"fireteam_dirty_bomb":
       function_cbbf16a4();
       break;
-    case # "hash_6463dea5fa2dbea5":
+    case #"hash_6463dea5fa2dbea5":
       function_e5d1b704();
       break;
-    case # "fireteam_elimination":
+    case #"fireteam_elimination":
       function_574dc51f();
       break;
-    case # "fireteam_koth":
+    case #"fireteam_koth":
       function_1ed4cf79();
       break;
-    case # "zsurvival":
+    case #"zsurvival":
       function_bcd11f83();
       break;
     default:

@@ -352,22 +352,22 @@ function_2345b68a() {
   level.stick_player thread function_c5c7d880();
 
   switch (level.stick_player.str_name) {
-    case # "pic_gypsy":
+    case #"pic_gypsy":
       s_loc = var_6adbf325.s_loc;
       s_trig = struct::get(s_loc.target);
       mdl_pic = var_6adbf325;
       break;
-    case # "pic_brigadier":
+    case #"pic_brigadier":
       s_loc = var_1b2ca394.s_loc;
       s_trig = struct::get(s_loc.target);
       mdl_pic = var_1b2ca394;
       break;
-    case # "pic_butler":
+    case #"pic_butler":
       s_loc = var_3c9ce3a9.s_loc;
       s_trig = struct::get(s_loc.target);
       mdl_pic = var_3c9ce3a9;
       break;
-    case # "pic_gunslinger":
+    case #"pic_gunslinger":
       s_loc = var_36ebb951.s_loc;
       s_trig = struct::get(s_loc.target);
       mdl_pic = var_36ebb951;

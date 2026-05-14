@@ -28,19 +28,19 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "tundra_intro":
+    case #"tundra_intro":
       level thread intro();
       break;
-    case # "tundra_combat":
+    case #"tundra_combat":
       level thread function_eb09e7df();
       break;
-    case # "dev_vip_active":
+    case #"dev_vip_active":
       level thread function_eb09e7df();
       break;
-    case # "tundra_outro":
+    case #"tundra_outro":
       level thread outro();
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

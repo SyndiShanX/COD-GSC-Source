@@ -56,13 +56,13 @@ rotating_object_think() {
 
   while(true) {
     switch (axis) {
-      case # "roll":
+      case #"roll":
         self rotateroll(direction * revolutions, rotate_time * revolutions);
         break;
-      case # "pitch":
+      case #"pitch":
         self rotatepitch(direction * revolutions, rotate_time * revolutions);
         break;
-      case # "yaw":
+      case #"yaw":
       default:
         self rotateyaw(direction * revolutions, rotate_time * revolutions);
         break;

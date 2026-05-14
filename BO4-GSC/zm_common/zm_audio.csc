@@ -150,9 +150,9 @@ playerexert(localclientnum, exert) {
 function_42e50d5() {
   if(isDefined(self.weapon)) {
     switch (self.weapon.name) {
-      case # "hero_scepter_lv3":
-      case # "hero_scepter_lv2":
-      case # "hero_scepter_lv1":
+      case #"hero_scepter_lv3":
+      case #"hero_scepter_lv2":
+      case #"hero_scepter_lv1":
         return true;
     }
   }

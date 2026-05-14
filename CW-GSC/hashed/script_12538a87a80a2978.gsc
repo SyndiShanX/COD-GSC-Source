@@ -373,47 +373,47 @@ function private function_410c380(list, var_523adf97, var_5fe37ae8) {
 
 function private function_219cb8bb(itementry) {
   switch (itementry) {
-    case # "ar_accurate_t9_orange_item_sr":
-    case # "ar_accurate_t9_item_sr":
-    case # "hash_5b2d331d596e0292":
+    case #"ar_accurate_t9_orange_item_sr":
+    case #"ar_accurate_t9_item_sr":
+    case #"hash_5b2d331d596e0292":
       return 0;
-    case # "hash_5b1db5e03f5e110":
-    case # "ar_slowhandling_t9_item_sr":
-    case # "ar_slowhandling_t9_orange_item_sr":
+    case #"hash_5b1db5e03f5e110":
+    case #"ar_slowhandling_t9_item_sr":
+    case #"ar_slowhandling_t9_orange_item_sr":
       return 1;
-    case # "launcher_standard_t9_item_sr":
+    case #"launcher_standard_t9_item_sr":
       return 2;
-    case # "lmg_fastfire_t9_item_sr":
-    case # "hash_591cbfbc064e6c05":
-    case # "lmg_fastfire_t9_orange_item_sr":
+    case #"lmg_fastfire_t9_item_sr":
+    case #"hash_591cbfbc064e6c05":
+    case #"lmg_fastfire_t9_orange_item_sr":
       return 3;
-    case # "lmg_slowfire_t9_orange_item_sr":
-    case # "hash_19e050fa878481ae":
-    case # "lmg_slowfire_t9_item_sr":
+    case #"lmg_slowfire_t9_orange_item_sr":
+    case #"hash_19e050fa878481ae":
+    case #"lmg_slowfire_t9_item_sr":
       return 4;
-    case # "smg_spray_t9_item_sr":
-    case # "smg_spray_t9_orange_item_sr":
-    case # "hash_2116e38be200ebf7":
+    case #"smg_spray_t9_item_sr":
+    case #"smg_spray_t9_orange_item_sr":
+    case #"hash_2116e38be200ebf7":
       return 5;
-    case # "smg_standard_t9_orange_item_sr":
-    case # "smg_standard_t9_item_sr":
-    case # "hash_551ca3818f740355":
+    case #"smg_standard_t9_orange_item_sr":
+    case #"smg_standard_t9_item_sr":
+    case #"hash_551ca3818f740355":
       return 6;
-    case # "tr_longburst_t9_orange_item_sr":
-    case # "tr_longburst_t9_item_sr":
-    case # "hash_7b49122756d14edb":
+    case #"tr_longburst_t9_orange_item_sr":
+    case #"tr_longburst_t9_item_sr":
+    case #"hash_7b49122756d14edb":
       return 7;
-    case # "hash_304d190e0d3d0fcb":
-    case # "tr_fastburst_t9_item_sr":
-    case # "tr_fastburst_t9_orange_item_sr":
+    case #"hash_304d190e0d3d0fcb":
+    case #"tr_fastburst_t9_item_sr":
+    case #"tr_fastburst_t9_orange_item_sr":
       return 8;
-    case # "hash_39cfa9ec04309821":
-    case # "sniper_cannon_t9_orange_item_sr":
-    case # "sniper_cannon_t9_item_sr":
+    case #"hash_39cfa9ec04309821":
+    case #"sniper_cannon_t9_orange_item_sr":
+    case #"sniper_cannon_t9_item_sr":
       return 9;
-    case # "sniper_quickscope_t9_orange_item_sr":
-    case # "sniper_quickscope_t9_item_sr":
-    case # "hash_4cf361d49f792fed":
+    case #"sniper_quickscope_t9_orange_item_sr":
+    case #"sniper_quickscope_t9_item_sr":
+    case #"hash_4cf361d49f792fed":
       return 10;
   }
 }

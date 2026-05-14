@@ -1344,9 +1344,9 @@ function_d8b20bcd(s_loc) {
       }
 
       switch (self.e_target.var_d1da3a83) {
-        case # "bot":
-        case # "cover_wire":
-        case # "cover_barricade":
+        case #"bot":
+        case #"cover_wire":
+        case #"cover_barricade":
           self.bot.var_b2b8f0b6 = 200;
           self.bot.var_e8c941d6 = 400;
           break;

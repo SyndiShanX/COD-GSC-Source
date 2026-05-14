@@ -91,12 +91,12 @@ function private function_bb2f717e(localclientnum) {
 function private function_e99f251a(localclientnum, itementry) {
   if(itementry.itemtype == #"generic") {
     switch (itementry.name) {
-      case # "armor_pouch_item_t9":
+      case #"armor_pouch_item_t9":
         return (self clientfield::get_player_uimodel("hudItems.armorPlateMaxCarry") != 10);
-      case # "hash_b8b2580ac5556e1":
+      case #"hash_b8b2580ac5556e1":
         return (self clientfield::get_player_uimodel("hud_items.selfReviveAvailable") == 0);
-      case # "hash_2ec97717fa7f8ee":
-      case # "hash_6ebec4f42d4b01c":
+      case #"hash_2ec97717fa7f8ee":
+      case #"hash_6ebec4f42d4b01c":
         return false;
     }
   } else if(itementry.itemtype == #"armor_shard") {
@@ -109,8 +109,8 @@ function private function_e99f251a(localclientnum, itementry) {
 function private function_218c0417(localclientnum, itementry) {
   if(itementry.itemtype == #"generic") {
     switch (itementry.name) {
-      case # "hash_2ec97717fa7f8ee":
-      case # "hash_6ebec4f42d4b01c":
+      case #"hash_2ec97717fa7f8ee":
+      case #"hash_6ebec4f42d4b01c":
         return true;
     }
 

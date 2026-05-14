@@ -358,93 +358,93 @@ function function_27028b8e(str_zone) {
   }
 
   switch (str_zone) {
-    case # "zone_rooftops_start":
+    case #"zone_rooftops_start":
       str_display = #"hash_2c209ce1cd9bd3ce";
       break;
-    case # "zone_rooftops_interior":
+    case #"zone_rooftops_interior":
       str_display = #"hash_5e96e2ef2c8950d2";
       break;
-    case # "zone_destroyed_upper_floors":
+    case #"zone_destroyed_upper_floors":
       str_display = #"hash_1a8c74e3aeacbefc";
       break;
-    case # "zone_east_berlin_hotel_1":
-    case # "zone_east_berlin_hotel_2":
+    case #"zone_east_berlin_hotel_1":
+    case #"zone_east_berlin_hotel_2":
       str_display = #"hash_3b15d4ce09e80704";
       break;
-    case # "zone_east_berlin_hotel_4":
-    case # "zone_east_berlin_hotel_3":
+    case #"zone_east_berlin_hotel_4":
+    case #"zone_east_berlin_hotel_3":
       str_display = #"hash_5b0cd266588cd410";
       break;
-    case # "zone_korber_roof2":
-    case # "zone_korber_roof":
+    case #"zone_korber_roof2":
+    case #"zone_korber_roof":
       str_display = #"hash_40f2768ae57e622a";
       break;
-    case # "zone_korber_stairs":
+    case #"zone_korber_stairs":
       str_display = #"hash_1218344774c0d52d";
       break;
-    case # "zone_korber_sewing_room":
+    case #"zone_korber_sewing_room":
       str_display = #"hash_31277f2032fd4275";
       break;
-    case # "zone_east_berlin_street_alley":
+    case #"zone_east_berlin_street_alley":
       str_display = #"hash_663a898d9c4368d2";
       break;
-    case # "zone_east_berlin_street_4":
-    case # "zone_east_berlin_street_2":
-    case # "zone_east_berlin_street_3":
-    case # "zone_east_berlin_street_1":
+    case #"zone_east_berlin_street_4":
+    case #"zone_east_berlin_street_2":
+    case #"zone_east_berlin_street_3":
+    case #"zone_east_berlin_street_1":
       str_display = #"hash_366de72e1c7f10e3";
       break;
-    case # "zone_bar":
+    case #"zone_bar":
       str_display = #"hash_5f70123180ddedbf";
       break;
-    case # "zone_market":
+    case #"zone_market":
       str_display = #"hash_6bbc9c396cab4166";
       break;
-    case # "zone_electronics_store":
+    case #"zone_electronics_store":
       str_display = #"hash_c517c13dd73a87f";
       break;
-    case # "zone_ghost_station":
-    case # "zone_ghost_station_3":
-    case # "zone_ghost_station_2":
-    case # "zone_ghost_station_4":
+    case #"zone_ghost_station":
+    case #"zone_ghost_station_3":
+    case #"zone_ghost_station_2":
+    case #"zone_ghost_station_4":
       str_display = #"hash_3354615b6b73090a";
       break;
-    case # "zone_basement_1":
-    case # "zone_basement_2":
+    case #"zone_basement_1":
+    case #"zone_basement_2":
       str_display = #"hash_10f6d2cdd4e18f44";
       break;
-    case # "zone_safe_house":
+    case #"zone_safe_house":
       str_display = #"hash_5e16c141529c6a38";
       break;
-    case # "zone_sewers_and_escape_tunnel2":
-    case # "zone_sewers_and_escape_tunnel":
-    case # "zone_sewers_stairs":
+    case #"zone_sewers_and_escape_tunnel2":
+    case #"zone_sewers_and_escape_tunnel":
+    case #"zone_sewers_stairs":
       str_display = #"hash_1ed5ed99b953f70f";
       break;
-    case # "zone_power_substation":
-    case # "zone_power_substation2":
+    case #"zone_power_substation":
+    case #"zone_power_substation2":
       str_display = #"hash_503c96cc7237c4f";
       break;
-    case # "zone_hidden_lab":
+    case #"zone_hidden_lab":
       str_display = #"hash_128f08319d9463fd";
       break;
-    case # "zone_american_sector_street":
+    case #"zone_american_sector_street":
       str_display = #"hash_7d30c2e28970d40f";
       break;
-    case # "zone_american_sector_right_building":
+    case #"zone_american_sector_right_building":
       str_display = #"hash_1d8344d97c9165a";
       break;
-    case # "zone_american_sector_left_building":
+    case #"zone_american_sector_left_building":
       str_display = #"hash_383b8711d6edd6bd";
       break;
-    case # "zone_no_mans_land_1":
+    case #"zone_no_mans_land_1":
       str_display = #"hash_6f4cc791adc72201";
       break;
-    case # "zone_no_mans_land_3":
-    case # "zone_no_mans_land_2":
+    case #"zone_no_mans_land_3":
+    case #"zone_no_mans_land_2":
       str_display = #"hash_75adba86a5dd13c1";
       break;
-    case # "zone_control_room":
+    case #"zone_control_room":
       str_display = #"hash_3e9e52ed3360a871";
       break;
     default:

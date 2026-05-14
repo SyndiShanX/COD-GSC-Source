@@ -141,7 +141,7 @@ function private devgui_loop() {
     args = strtok(dvarstr, "<dev string:x85>");
 
     switch (args[0]) {
-      case # "reset":
+      case #"reset":
         resetdynents();
         break;
     }

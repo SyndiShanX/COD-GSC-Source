@@ -36,13 +36,13 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "audio_srv_heli":
+    case #"audio_srv_heli":
       level.var_ebbd5cf8 = ent;
       thread function_f2ee7a27(ent);
       ent waittill(#"death");
       level.var_ebbd5cf8 = undefined;
       break;
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
     default:
 
@@ -56,47 +56,47 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_mountainside_half_open":
+    case #"yam_mountainside_half_open":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_sat_room_half_open":
+    case #"yam_sat_room_half_open":
       thread function_5e62b956();
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_tight":
+    case #"yam_dark_hall_tight":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_tight_wind":
+    case #"yam_dark_hall_tight_wind":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_med_wind":
+    case #"yam_dark_hall_med_wind":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_stairwell":
+    case #"yam_dark_hall_stairwell":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_conference_room":
+    case #"yam_dark_hall_conference_room":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_dark_hall_office_room":
+    case #"yam_dark_hall_office_room":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_half_open_tight":
+    case #"yam_half_open_tight":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_half_open_med":
+    case #"yam_half_open_med":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_destroyed_room_open":
+    case #"yam_destroyed_room_open":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_server_overlook_room":
+    case #"yam_server_overlook_room":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "yam_server_room":
+    case #"yam_server_room":
       snd::set_element(trigger, trigger_name);
       break;
     default:
@@ -109,39 +109,39 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "audio_level_begin_duck_start":
+    case #"audio_level_begin_duck_start":
       thread function_563a791();
       break;
-    case # "audio_level_begin_duck_stop":
+    case #"audio_level_begin_duck_stop":
       thread function_1cfbed4a();
       break;
-    case # "hash_42ab199f7f0a951a":
+    case #"hash_42ab199f7f0a951a":
       thread function_d27488d();
       break;
-    case # "audio_level_triton_verb_disable":
+    case #"audio_level_triton_verb_disable":
       audio::function_21f8b7c3();
       break;
-    case # "audio_level_triton_verb_enable":
+    case #"audio_level_triton_verb_enable":
       audio::function_d3790fe();
       break;
-    case # "hash_5fdce3012e88ffac":
+    case #"hash_5fdce3012e88ffac":
       thread function_58caa4cd();
       break;
-    case # "hash_48b5a2ae2037fea":
+    case #"hash_48b5a2ae2037fea":
       waitframe(1);
       level notify(#"hash_6dde5f256f8081a8");
       break;
-    case # "outro_movie":
+    case #"outro_movie":
       audio::snd_set_snapshot("cmn_duck_all_but_movie");
       break;
-    case # "musictrack_cp_yamantau_1":
-    case # "musictrack_cp_yamantau_3":
-    case # "musictrack_cp_yamantau_2":
-    case # "musictrack_cp_yamantau_5":
-    case # "musictrack_cp_yamantau_4":
+    case #"musictrack_cp_yamantau_1":
+    case #"musictrack_cp_yamantau_3":
+    case #"musictrack_cp_yamantau_2":
+    case #"musictrack_cp_yamantau_5":
+    case #"musictrack_cp_yamantau_4":
       function_2cca7b47(0, msg);
       break;
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
     default:
 
@@ -153,9 +153,9 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

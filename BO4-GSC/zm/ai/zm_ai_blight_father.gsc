@@ -1985,20 +1985,20 @@ function_a0edafd0(entity) {
     }
 
     switch (stub.lockdowntype) {
-      case # "lockdown_stub_type_perks":
+      case #"lockdown_stub_type_perks":
         var_680c2eca = 2;
         var_8354cf7d = zm_lockdown_util::function_da72073(stub);
         break;
-      case # "lockdown_stub_type_magic_box":
+      case #"lockdown_stub_type_magic_box":
         var_680c2eca = 3;
         var_8354cf7d = zm_lockdown_util::function_da72073(stub);
         break;
-      case # "lockdown_stub_type_crafting_tables":
+      case #"lockdown_stub_type_crafting_tables":
         var_680c2eca = 4;
         var_8354cf7d = zm_lockdown_util::function_da72073(stub);
         break;
-      case # "lockdown_stub_type_pap":
-      case # "lockdown_stub_type_wallbuys":
+      case #"lockdown_stub_type_pap":
+      case #"lockdown_stub_type_wallbuys":
         var_8354cf7d = zm_lockdown_util::function_da72073(stub);
       default:
         var_680c2eca = 1;
@@ -2789,28 +2789,28 @@ function_a2751530() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn":
+        case #"spawn":
           function_4d72a4a6();
           break;
-        case # "kill":
+        case #"kill":
           function_d420b133();
           break;
-        case # "destroy_weakpoint":
+        case #"destroy_weakpoint":
           function_cab68577(cmd[1]);
           break;
-        case # "debug_purchase_lockdown":
+        case #"debug_purchase_lockdown":
           setDvar(#"hash_3ec02cda135af40f", !getdvarint(#"hash_3ec02cda135af40f", 0));
           break;
-        case # "debug_dmg":
+        case #"debug_dmg":
           level.var_482766d7 = !(isDefined(level.var_482766d7) && level.var_482766d7);
           break;
-        case # "hash_3170107749934609":
+        case #"hash_3170107749934609":
           foreach(blight_father in getaiarchetypearray(#"blight_father")) {
             blight_father ai::set_behavior_attribute("<dev string:x51f>", !blight_father ai::get_behavior_attribute("<dev string:x51f>"));
           }
 
           break;
-        case # "toggle_lockdown":
+        case #"toggle_lockdown":
           foreach(blight_father in getaiarchetypearray(#"blight_father")) {
             blight_father ai::set_behavior_attribute("<dev string:x535>", !blight_father ai::get_behavior_attribute("<dev string:x535>"));
           }

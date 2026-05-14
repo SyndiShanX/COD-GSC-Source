@@ -1804,32 +1804,32 @@ function private function_4b06b46e() {
 
 function private function_dfe8c2c1(cmd) {
   switch (cmd) {
-    case # "hash_73ad7937c802d48e":
+    case #"hash_73ad7937c802d48e":
       setDvar(#"hash_186066f95083b691", 1);
       break;
-    case # "hash_312a5d140fb23817":
+    case #"hash_312a5d140fb23817":
       array::thread_all(getplayers(), &function_4bb7eb36);
       level thread function_97d80e41();
       break;
-    case # "hash_4e8ee4f2c08fdf6b":
+    case #"hash_4e8ee4f2c08fdf6b":
       level thread function_8d749d26(0);
       break;
-    case # "hash_1f0b8dc93909a49a":
+    case #"hash_1f0b8dc93909a49a":
       level flag::set(#"pap_quest_completed");
       break;
-    case # "hash_195b99ea080e0f20":
+    case #"hash_195b99ea080e0f20":
       setDvar(#"hash_195b99ea080e0f20", 1);
       break;
-    case # "hash_24b5b1c043d9b141":
+    case #"hash_24b5b1c043d9b141":
       level thread function_e1e8a6d9();
       break;
-    case # "hash_e72e898751a21e3":
+    case #"hash_e72e898751a21e3":
       level thread function_54c0bf00();
       break;
-    case # "hash_500437a64a5f81ff":
+    case #"hash_500437a64a5f81ff":
       level thread function_58fea01e();
       break;
-    case # "hash_618a6bfc726419ff":
+    case #"hash_618a6bfc726419ff":
       level thread function_735d02f6();
       break;
     default:

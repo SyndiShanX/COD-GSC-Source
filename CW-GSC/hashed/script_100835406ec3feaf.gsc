@@ -249,10 +249,10 @@ function function_63a18814() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4121f85b9490b08c":
+    case #"hash_4121f85b9490b08c":
       function_9fa3d0d(0);
       break;
-    case # "hash_4121f95b9490b23f":
+    case #"hash_4121f95b9490b23f":
       function_9fa3d0d(1);
       break;
     default:

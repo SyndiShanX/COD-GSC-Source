@@ -399,25 +399,25 @@ function_fa621ff5(e_destructible) {
 
 function_4186be5f() {
   switch (self.model) {
-    case # "p8_fxanim_zm_red_ww_vase_mod":
+    case #"p8_fxanim_zm_red_ww_vase_mod":
       n_trigger_radius = 9;
       n_trigger_height = 23;
       break;
-    case # "p8_fxanim_zm_red_ww_shell_mound_dks_mod":
+    case #"p8_fxanim_zm_red_ww_shell_mound_dks_mod":
       n_trigger_radius = 22;
       n_trigger_height = 13;
       b_spawn_trigger = 1;
       break;
-    case # "p8_fxanim_zm_red_ww_shell_mound_mod":
+    case #"p8_fxanim_zm_red_ww_shell_mound_mod":
       n_trigger_radius = 22;
       n_trigger_height = 13;
       b_spawn_trigger = 1;
       break;
-    case # "p8_fxanim_zm_red_ww_shell_chaos_mod":
+    case #"p8_fxanim_zm_red_ww_shell_chaos_mod":
       n_trigger_radius = 7;
       n_trigger_height = 24;
       break;
-    case # "p8_fxanim_zm_red_ww_shell_rubble_mod":
+    case #"p8_fxanim_zm_red_ww_shell_rubble_mod":
       n_trigger_radius = 15;
       n_trigger_height = 19;
       b_spawn_trigger = 1;
@@ -525,7 +525,7 @@ function_809767d(str_hand) {
   level.var_d225ea18[str_hand] = s_quest;
 
   switch (str_hand) {
-    case # "light":
+    case #"light":
       var_16ba625b = #"hash_6efbb1ed3ba548d9";
       var_55661332 = #"hash_90bc5de7964eaa0";
       var_c2f7f323 = #"hash_5827ff8b059b77f3";
@@ -569,7 +569,7 @@ function_809767d(str_hand) {
       var_6486fc00 = 3;
       var_ad816fb3 = 2;
       break;
-    case # "death":
+    case #"death":
       var_16ba625b = #"hash_16fccc5d2de6233b";
       var_55661332 = #"hash_7459df6b9257ed66";
       var_c2f7f323 = #"hash_786c9a9f60b254f5";
@@ -612,7 +612,7 @@ function_809767d(str_hand) {
       var_6486fc00 = 3;
       var_ad816fb3 = 2;
       break;
-    case # "air":
+    case #"air":
       var_16ba625b = #"hash_1e77360750691961";
       var_55661332 = #"hash_7ebdb2c972023c18";
       var_c2f7f323 = #"hash_3b7c39d9b76689fb";
@@ -656,7 +656,7 @@ function_809767d(str_hand) {
       var_6486fc00 = 60;
       var_ad816fb3 = 12;
       break;
-    case # "earth":
+    case #"earth":
       var_16ba625b = #"hash_694c6a1b6b8ea901";
       var_55661332 = #"hash_7798eb2a7d389438";
       var_c2f7f323 = #"hash_29ac8ec32d2a389b";
@@ -1041,28 +1041,28 @@ function_37c18ffd(str_hand) {
 
   if(isDefined(e_player)) {
     switch (s_quest.targetname) {
-      case # "death":
+      case #"death":
         if(!(isDefined(e_player.var_937e7a3c) && e_player.var_937e7a3c)) {
           e_player.var_937e7a3c = 1;
           b_played = 0;
         }
 
         break;
-      case # "earth":
+      case #"earth":
         if(!(isDefined(e_player.var_49b1b563) && e_player.var_49b1b563)) {
           e_player.var_49b1b563 = 1;
           b_played = 0;
         }
 
         break;
-      case # "air":
+      case #"air":
         if(!(isDefined(e_player.var_c634a22d) && e_player.var_c634a22d)) {
           e_player.var_c634a22d = 1;
           b_played = 0;
         }
 
         break;
-      case # "light":
+      case #"light":
         if(!(isDefined(e_player.var_25199339) && e_player.var_25199339)) {
           e_player.var_25199339 = 1;
           b_played = 0;
@@ -1197,7 +1197,7 @@ function_2a513082(weapon) {
   self endon(#"disconnect");
 
   switch (weapon.name) {
-    case # "ww_hand_c_uncharged":
+    case #"ww_hand_c_uncharged":
       if(!(isDefined(self.var_69544bb1) && self.var_69544bb1)) {
         self.var_69544bb1 = 1;
         var_50188067 = "vox_charon_hand_kill_first";
@@ -1205,7 +1205,7 @@ function_2a513082(weapon) {
       }
 
       break;
-    case # "ww_hand_h_uncharged":
+    case #"ww_hand_h_uncharged":
       if(!(isDefined(self.var_7e6931b) && self.var_7e6931b)) {
         self.var_7e6931b = 1;
         var_50188067 = "vox_hemera_hand_kill_first";
@@ -1213,7 +1213,7 @@ function_2a513082(weapon) {
       }
 
       break;
-    case # "ww_hand_o_uncharged":
+    case #"ww_hand_o_uncharged":
       if(!(isDefined(self.var_9a5009ab) && self.var_9a5009ab)) {
         self.var_9a5009ab = 1;
         var_50188067 = "vox_ouranos_hand_kill_first";
@@ -1221,7 +1221,7 @@ function_2a513082(weapon) {
       }
 
       break;
-    case # "ww_hand_g_uncharged":
+    case #"ww_hand_g_uncharged":
       if(!(isDefined(self.var_cdcc7c1c) && self.var_cdcc7c1c)) {
         self.var_cdcc7c1c = 1;
         var_50188067 = "vox_gaia_hand_kill_first";
@@ -1246,16 +1246,16 @@ function_2a513082(weapon) {
   }
 
   switch (weapon.name) {
-    case # "ww_hand_c_uncharged":
+    case #"ww_hand_c_uncharged":
       self.var_69544bb1 = 0;
       break;
-    case # "ww_hand_h_uncharged":
+    case #"ww_hand_h_uncharged":
       self.var_7e6931b = 0;
       break;
-    case # "ww_hand_o_uncharged":
+    case #"ww_hand_o_uncharged":
       self.var_9a5009ab = 0;
       break;
-    case # "ww_hand_g_uncharged":
+    case #"ww_hand_g_uncharged":
       self.var_cdcc7c1c = 0;
       break;
   }
@@ -2244,15 +2244,15 @@ function_79a8a785(var_542837e6, e_player) {
   var_542837e6 flag::clear("light_source_brazier_lit");
 
   switch (var_542837e6.script_noteworthy) {
-    case # "h_bathouse":
+    case #"h_bathouse":
       str_clientfield = "" + #"hash_1b4d6dabd35ebdf2";
       n_countdown = 15;
       break;
-    case # "h_road":
+    case #"h_road":
       str_clientfield = "" + #"hash_11e36d278c735869";
       n_countdown = 12.5;
       break;
-    case # "h_temple":
+    case #"h_temple":
       str_clientfield = "" + #"hash_e683dccc6a8e152";
       n_countdown = 20;
       break;
@@ -2626,15 +2626,15 @@ function_479cad97(e_target, registerzmb_pod_play_preferred) {
 
 function_759247cd(str_loc) {
   switch (str_loc) {
-    case # "hash_2ffae388c1cf246e":
+    case #"hash_2ffae388c1cf246e":
       str_scene = #"p8_fxanim_zm_red_apollo_arrow_dmg_01_bundle";
       s_fletching = level.var_46c8296a;
       break;
-    case # "hash_4634a6e71b6a75e7":
+    case #"hash_4634a6e71b6a75e7":
       str_scene = #"p8_fxanim_zm_red_apollo_arrow_dmg_02_bundle";
       s_fletching = level.var_d162b086;
       break;
-    case # "hash_3a4532026857cf6":
+    case #"hash_3a4532026857cf6":
       str_scene = #"p8_fxanim_zm_red_apollo_arrow_dmg_03_bundle";
       s_fletching = level.var_90ac03cc;
       break;
@@ -2685,19 +2685,19 @@ function_6d466962(var_8290a028, s_original, mdl_feather, e_player = undefined) {
     s_quest.var_267d1e6++;
 
     switch (s_original.targetname) {
-      case # "s_ww_ouranos_arrow_center":
+      case #"s_ww_ouranos_arrow_center":
         var_511277e5 = #"p8_fxanim_zm_red_apollo_arrow_dmg_01_bundle";
         var_e3ed6c41 = #"p8_fxanim_zm_red_ouranos_feather_01_bundle";
         var_8806d469 = "feather01_slot01";
         var_adcf0d98 = "tag_feather_01";
         break;
-      case # "s_ww_ouranos_arrow_cliff":
+      case #"s_ww_ouranos_arrow_cliff":
         var_511277e5 = #"p8_fxanim_zm_red_apollo_arrow_dmg_02_bundle";
         var_e3ed6c41 = #"p8_fxanim_zm_red_ouranos_feather_02_bundle";
         var_8806d469 = "feather02_slot02";
         var_adcf0d98 = "tag_feather_02";
         break;
-      case # "s_ww_ouranos_arrow_serpent":
+      case #"s_ww_ouranos_arrow_serpent":
         var_511277e5 = #"p8_fxanim_zm_red_apollo_arrow_dmg_03_bundle";
         var_e3ed6c41 = #"p8_fxanim_zm_red_ouranos_feather_03_bundle";
         var_8806d469 = "feather03_slot03";
@@ -2924,13 +2924,13 @@ function_1775f520() {
   self hide();
 
   switch (self.model) {
-    case # "hash_17ff8b184015c0d0":
+    case #"hash_17ff8b184015c0d0":
       str_tag = "tag_center_01";
       break;
-    case # "hash_17ff8e184015c5e9":
+    case #"hash_17ff8e184015c5e9":
       str_tag = "tag_center_02";
       break;
-    case # "hash_17ff8d184015c436":
+    case #"hash_17ff8d184015c436":
       str_tag = "tag_center_03";
       break;
   }
@@ -3203,10 +3203,10 @@ function_6161ce9a(e_player) {
   str_stance = e_player getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       wait 1;
       break;
   }
@@ -3261,28 +3261,28 @@ function_6161ce9a(e_player) {
 
   if(isDefined(e_player)) {
     switch (self.targetname) {
-      case # "death":
+      case #"death":
         if(!(isDefined(e_player.var_76c97d24) && e_player.var_76c97d24)) {
           e_player.var_76c97d24 = 1;
           b_played = 0;
         }
 
         break;
-      case # "earth":
+      case #"earth":
         if(!(isDefined(e_player.var_2cecc840) && e_player.var_2cecc840)) {
           e_player.var_2cecc840 = 1;
           b_played = 0;
         }
 
         break;
-      case # "air":
+      case #"air":
         if(!(isDefined(e_player.var_bd326f1e) && e_player.var_bd326f1e)) {
           e_player.var_bd326f1e = 1;
           b_played = 0;
         }
 
         break;
-      case # "light":
+      case #"light":
         if(!(isDefined(e_player.var_596d8add) && e_player.var_596d8add)) {
           e_player.var_596d8add = 1;
           b_played = 0;
@@ -3801,16 +3801,16 @@ function_ec538ada() {
 
 is_soul_capture(var_88206a50, e_zombie) {
   switch (var_88206a50.script_objective) {
-    case # "e":
+    case #"e":
       str_archetype = #"catalyst_plasma";
       break;
-    case # "d":
+    case #"d":
       str_archetype = #"catalyst_corrosive";
       break;
-    case # "l":
+    case #"l":
       str_archetype = #"catalyst_electric";
       break;
-    case # "a":
+    case #"a":
       str_archetype = #"catalyst_water";
       break;
   }
@@ -3835,7 +3835,7 @@ is_soul_capture(var_88206a50, e_zombie) {
 
 soul_captured(var_f0e6c7a2, ent) {
   switch (var_f0e6c7a2.script_objective) {
-    case # "e":
+    case #"e":
       level.var_50a078bd++;
 
       if(level.var_50a078bd >= 10) {
@@ -3849,7 +3849,7 @@ soul_captured(var_f0e6c7a2, ent) {
       }
 
       break;
-    case # "d":
+    case #"d":
       level.var_626adbe3++;
 
       if(level.var_626adbe3 >= 10) {
@@ -3863,7 +3863,7 @@ soul_captured(var_f0e6c7a2, ent) {
       }
 
       break;
-    case # "l":
+    case #"l":
       level.var_2eadf8bc++;
 
       if(level.var_2eadf8bc >= 10) {
@@ -3877,7 +3877,7 @@ soul_captured(var_f0e6c7a2, ent) {
       }
 
       break;
-    case # "a":
+    case #"a":
       level.var_a08be993++;
 
       if(level.var_a08be993 >= 10) {
@@ -4720,13 +4720,13 @@ function_681ce100() {
 
     foreach(mdl_chaos in a_mdl_chaos) {
       switch (mdl_chaos.model) {
-        case # "hash_17ff8b184015c0d0":
+        case #"hash_17ff8b184015c0d0":
           v_tag_pos = mdl_chaos gettagorigin("<dev string:xdf>");
           break;
-        case # "hash_17ff8e184015c5e9":
+        case #"hash_17ff8e184015c5e9":
           v_tag_pos = mdl_chaos gettagorigin("<dev string:xef>");
           break;
-        case # "hash_17ff8d184015c436":
+        case #"hash_17ff8d184015c436":
           v_tag_pos = mdl_chaos gettagorigin("<dev string:xff>");
           break;
       }
@@ -4901,13 +4901,13 @@ function_37deb555() {
   mdl_arrow = arraygetclosest(level.players[0].origin, a_mdl_arrows);
 
   switch (mdl_arrow.targetname) {
-    case # "mdl_ww_ouranos_arrow_serpent":
+    case #"mdl_ww_ouranos_arrow_serpent":
       var_511277e5 = "<dev string:x244>";
       break;
-    case # "mdl_ww_ouranos_arrow_center":
+    case #"mdl_ww_ouranos_arrow_center":
       var_511277e5 = "<dev string:x272>";
       break;
-    case # "mdl_ww_ouranos_arrow_cliff":
+    case #"mdl_ww_ouranos_arrow_cliff":
       var_511277e5 = "<dev string:x2a0>";
       break;
   }

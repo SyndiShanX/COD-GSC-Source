@@ -266,15 +266,15 @@ function_b9cbdac6(e_holder, w_item) {
   s_machine = struct::get("s_pr_mach");
 
   switch (w_item.name) {
-    case # "hash_5dba850c6ed3ebee":
+    case #"hash_5dba850c6ed3ebee":
       level zm_ui_inventory::function_7df6bb60(#"ww_p1_2", 2);
       level flag::set("flag_player_grabbed_werewolf_prima");
       break;
-    case # "zitem_chaos_lvl3_part_1":
+    case #"zitem_chaos_lvl3_part_1":
       level zm_ui_inventory::function_7df6bb60(#"ww_p2_2", 2);
       level flag::set("flag_player_grabbed_bat_prima");
       break;
-    case # "zitem_chaos_lvl3_part_2":
+    case #"zitem_chaos_lvl3_part_2":
       level zm_ui_inventory::function_7df6bb60(#"ww_p2_3", 5);
       level flag::set("flag_player_grabbed_nosferatu_prima");
       break;

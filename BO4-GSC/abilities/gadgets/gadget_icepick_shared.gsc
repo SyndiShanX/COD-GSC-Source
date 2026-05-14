@@ -327,7 +327,7 @@ function_39d1ce95(entity, entityweapon) {
   }
 
   switch (entityweapon.name) {
-    case # "supplydrop":
+    case #"supplydrop":
       if(isDefined(level.cratemodelfriendly)) {
         streamermodelhint(level.cratemodelfriendly, 10);
       }
@@ -939,7 +939,7 @@ function_6b9d6894(player) {
     waitresult = player waittill(#"menuresponse");
 
     switch (waitresult.response) {
-      case # "id":
+      case #"id":
         if(!(isDefined(player.var_c1911c44) ? player.var_c1911c44 : 0) && waitresult.intpayload === 1) {
           if(isDefined(level.var_fdb0a658) && level.var_fdb0a658) {
             player iprintlnbold(#"weapon/icepick_unavailable");
@@ -960,7 +960,7 @@ function_6b9d6894(player) {
         }
 
         break;
-      case # "back":
+      case #"back":
         if(waitresult.intpayload == 1) {
           player switchtoweapon();
         }
@@ -1016,29 +1016,29 @@ function_42bb8ac1(weapon, originalowner, newowner, var_53c10ed8) {
   }
 
   switch (weapon.name) {
-    case # "gadget_spawnbeacon":
+    case #"gadget_spawnbeacon":
       leaderdialog = "enemySpawnBeaconHack";
       break;
-    case # "cobra_20mm_comlink":
-    case # "helicopter_comlink":
-    case # "inventory_helicopter_comlink":
+    case #"cobra_20mm_comlink":
+    case #"helicopter_comlink":
+    case #"inventory_helicopter_comlink":
       leaderdialog = "enemyAttackChopperHack";
       break;
-    case # "counteruav":
+    case #"counteruav":
       leaderdialog = "enemyCUAVHack";
       break;
-    case # "drone_squadron":
-    case # "inventory_drone_squadron":
+    case #"drone_squadron":
+    case #"inventory_drone_squadron":
       leaderdialog = "enemyDroneSquadronHack";
       break;
-    case # "supplydrop":
+    case #"supplydrop":
       leaderdialog = "enemyCarePackageHack";
       break;
-    case # "uav":
+    case #"uav":
       leaderdialog = "enemyUAVHack";
       break;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
       leaderdialog = "enemySentryHack";
       break;
   }
@@ -1056,78 +1056,78 @@ function_42bb8ac1(weapon, originalowner, newowner, var_53c10ed8) {
 
 function_d545fd0a(player, weapon) {
   switch (weapon.name) {
-    case # "supplydrop":
+    case #"supplydrop":
       var_d975dd49 = "hacked_care_package";
       break;
-    case # "counteruav":
+    case #"counteruav":
       var_d975dd49 = "hacked_cuav";
       break;
-    case # "uav":
+    case #"uav":
       var_d975dd49 = "hacked_uav";
       break;
-    case # "gadget_spawnbeacon":
+    case #"gadget_spawnbeacon":
       var_d975dd49 = "hacked_spawn_beacon";
       break;
-    case # "planemortar":
-    case # "inventory_planemortar":
+    case #"planemortar":
+    case #"inventory_planemortar":
       var_d975dd49 = "hacked_planemortar";
       break;
-    case # "inventory_remote_missile":
-    case # "remote_missile":
+    case #"inventory_remote_missile":
+    case #"remote_missile":
       var_d975dd49 = "hacked_hellstorm";
       break;
-    case # "inventory_straferun":
-    case # "straferun":
+    case #"inventory_straferun":
+    case #"straferun":
       var_d975dd49 = "hacked_warthog";
       break;
-    case # "dart":
-    case # "inventory_dart":
+    case #"dart":
+    case #"inventory_dart":
       var_d975dd49 = "hacked_dart";
       break;
-    case # "inventory_drone_squadron":
-    case # "drone_squadron":
+    case #"inventory_drone_squadron":
+    case #"drone_squadron":
       var_d975dd49 = "hacked_drone_squad";
       break;
-    case # "inventory_helicopter_comlink":
-    case # "cobra_20mm_comlink":
-    case # "helicopter_comlink":
+    case #"inventory_helicopter_comlink":
+    case #"cobra_20mm_comlink":
+    case #"helicopter_comlink":
       var_d975dd49 = "hacked_attack_chopper";
       break;
-    case # "overwatch_helicopter":
-    case # "inventory_overwatch_helicopter":
+    case #"overwatch_helicopter":
+    case #"inventory_overwatch_helicopter":
       var_d975dd49 = "hacked_sniper_chopper";
       break;
-    case # "ac130":
-    case # "inventory_ac130":
+    case #"ac130":
+    case #"inventory_ac130":
       var_d975dd49 = "hacked_ac130";
       break;
-    case # "tank_robot":
-    case # "inventory_tank_robot":
-    case # "ai_tank_marker":
+    case #"tank_robot":
+    case #"inventory_tank_robot":
+    case #"ai_tank_marker":
       var_d975dd49 = "hacked_mantis";
       break;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
       var_d975dd49 = "hacked_ult_turret";
       break;
-    case # "recon_car":
-    case # "inventory_recon_car":
+    case #"recon_car":
+    case #"inventory_recon_car":
       var_d975dd49 = "hacked_rcxd";
       break;
-    case # "gadget_supplypod":
+    case #"gadget_supplypod":
       var_d975dd49 = "hacked_supplypod";
       break;
-    case # "gadget_smart_cover":
-    case # "ability_smart_cover":
+    case #"gadget_smart_cover":
+    case #"ability_smart_cover":
       var_d975dd49 = "hacked_barricade";
       break;
-    case # "eq_sensor":
+    case #"eq_sensor":
       var_d975dd49 = "hacked_sensor_dart";
       break;
-    case # "eq_seeker_mine":
+    case #"eq_seeker_mine":
       var_d975dd49 = "hacked_seeker";
       break;
-    case # "trophy_system":
+    case #"trophy_system":
       var_d975dd49 = "hacked_trophy";
       break;
   }

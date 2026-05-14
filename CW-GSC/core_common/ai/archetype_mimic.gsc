@@ -777,58 +777,58 @@ function function_c19802(dvar) {
   tokens = strtok(dvar.value, "<dev string:x630>");
 
   switch (isDefined(tokens[0]) ? tokens[0] : "<dev string:x10b>") {
-    case # "hash_31323c2655b560b7":
+    case #"hash_31323c2655b560b7":
       level thread function_f543fa16();
       break;
-    case # "hash_601090df5cf5a69a":
+    case #"hash_601090df5cf5a69a":
       level thread function_fa613511();
       break;
-    case # "hash_252ab6031286d4fb":
+    case #"hash_252ab6031286d4fb":
       level thread function_a42f6839();
       break;
-    case # "hash_7369a81a09f4035":
+    case #"hash_7369a81a09f4035":
       level thread function_d70b96a8();
       break;
-    case # "hash_ae178db3a20b85":
+    case #"hash_ae178db3a20b85":
       level thread function_5b9e63e6();
       break;
-    case # "hash_43a02611d9b79ced":
+    case #"hash_43a02611d9b79ced":
       level thread function_3bd29cb8();
       break;
-    case # "hash_68817045e64df700":
+    case #"hash_68817045e64df700":
       level thread function_d312cd2c();
       break;
-    case # "hash_22d6e20b320c956b":
+    case #"hash_22d6e20b320c956b":
       level.var_bce8fb65 = !is_true(level.var_bce8fb65);
       break;
-    case # "hash_721abb229b429d1d":
+    case #"hash_721abb229b429d1d":
       level thread function_37c34605();
       break;
-    case # "hash_10ab0e022e9a6697":
+    case #"hash_10ab0e022e9a6697":
       mimic_prop_spawn::function_fd24f982();
       break;
-    case # "hash_21d6880dde085ff6":
+    case #"hash_21d6880dde085ff6":
       level.var_72a9fe4c = !is_true(level.var_72a9fe4c);
       break;
-    case # "disable_hide":
+    case #"disable_hide":
       level.var_8861a2c7 = !is_true(level.var_8861a2c7);
       break;
-    case # "reveal_all":
+    case #"reveal_all":
       level notify(#"hash_7fd40fb3202e52db");
       break;
-    case # "hash_3c03579da902b40e":
+    case #"hash_3c03579da902b40e":
       level.var_ec72eeae = !is_true(level.var_ec72eeae);
       break;
-    case # "hash_1cb34c5ebb1662de":
+    case #"hash_1cb34c5ebb1662de":
       level thread function_6469c221();
       break;
-    case # "hash_2bed8c55c06b6d52":
+    case #"hash_2bed8c55c06b6d52":
       level.var_dc3159ff = tokens[1];
       break;
-    case # "hash_15242ba18dadcfca":
+    case #"hash_15242ba18dadcfca":
       level thread function_bc75224c();
       break;
-    case # "hash_8c4454ea8f84335":
+    case #"hash_8c4454ea8f84335":
       level thread function_7f6a5e14();
       break;
     default:

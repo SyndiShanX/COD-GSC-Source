@@ -871,35 +871,35 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     }
 
     switch (self.damagelocation) {
-      case # "torso_upper":
-      case # "torso_lower":
+      case #"torso_upper":
+      case #"torso_lower":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "right_arm_lower":
-      case # "right_arm_upper":
-      case # "right_hand":
+      case #"right_arm_lower":
+      case #"right_arm_upper":
+      case #"right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case # "left_arm_lower":
-      case # "left_arm_upper":
-      case # "left_hand":
+      case #"left_arm_lower":
+      case #"left_arm_upper":
+      case #"left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self);
         }
 
         break;
-      case # "right_leg_upper":
-      case # "left_leg_lower":
-      case # "right_leg_lower":
-      case # "left_foot":
-      case # "right_foot":
-      case # "left_leg_upper":
+      case #"right_leg_upper":
+      case #"left_leg_lower":
+      case #"right_leg_lower":
+      case #"left_foot":
+      case #"right_foot":
+      case #"left_leg_upper":
         break;
       default:
         if(self.damagelocation == "none") {
@@ -1048,14 +1048,14 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   switch (type) {
-    case # "mod_telefrag":
-    case # "mod_unknown":
-    case # "mod_burned":
-    case # "mod_trigger_hurt":
-    case # "mod_suicide":
-    case # "mod_falling":
+    case #"mod_telefrag":
+    case #"mod_unknown":
+    case #"mod_burned":
+    case #"mod_trigger_hurt":
+    case #"mod_suicide":
+    case #"mod_falling":
       return false;
-    case # "mod_melee":
+    case #"mod_melee":
       return false;
   }
 
@@ -1180,29 +1180,29 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       level thread zmbaivox_playvox(self, notify_string, 1, 4);
       break;
-    case # "pain":
+    case #"pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "behind":
+    case #"behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "attack_melee_notetrack":
+    case #"attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case # "chase_state_start":
+    case #"chase_state_start":
       level thread zmbaivox_playvox(self, "sprint", 1, 2);
       break;
-    case # "sprint":
-    case # "ambient":
-    case # "crawler":
-    case # "teardown":
-    case # "taunt":
+    case #"sprint":
+    case #"ambient":
+    case #"crawler":
+    case #"teardown":
+    case #"taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);

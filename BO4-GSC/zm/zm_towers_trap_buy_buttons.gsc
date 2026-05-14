@@ -77,13 +77,13 @@ function_eac89317() {
 
     if(isDefined(s_notify.var_be3f58a)) {
       switch (s_notify._notify) {
-        case # "traps_activated":
+        case #"traps_activated":
           function_81badccf(s_notify.var_be3f58a);
           break;
-        case # "traps_available":
+        case #"traps_available":
           function_6087ebc2(s_notify.var_be3f58a);
           break;
-        case # "traps_cooldown":
+        case #"traps_cooldown":
           function_1b229077(s_notify.var_be3f58a);
           break;
       }

@@ -93,7 +93,7 @@ get_location_string(e_player) {
   }
 
   switch (str_zone) {
-    case # "conference_level1":
+    case #"conference_level1":
       var_dd0ed16d = getent("file_hallway_zone", "targetname");
 
       if(e_player istouching(var_dd0ed16d)) {
@@ -103,47 +103,47 @@ get_location_string(e_player) {
       }
 
       break;
-    case # "hallway_level1":
+    case #"hallway_level1":
       str_display = #"hash_23e7b86056327ad8";
       break;
-    case # "file_room_level1":
+    case #"file_room_level1":
       str_display = #"hash_43e992b83f837d3e";
       break;
-    case # "offices_level1":
+    case #"offices_level1":
       str_display = #"hash_179368775ecfafa9";
       break;
-    case # "war_room_zone_south":
-    case # "war_room_zone_north":
-    case # "war_room_zone_elevator":
+    case #"war_room_zone_south":
+    case #"war_room_zone_north":
+    case #"war_room_zone_elevator":
       str_display = #"hash_25854f4ac1fdadf5";
       break;
-    case # "war_room_server_room":
+    case #"war_room_server_room":
       str_display = #"hash_7d3cd67fea75827c";
       break;
-    case # "war_room_zone_top":
+    case #"war_room_zone_top":
       str_display = #"hash_572f6dd3e58ede79";
       break;
-    case # "conference_level2":
+    case #"conference_level2":
       str_display = #"hash_2960e07ca313a6e9";
       break;
-    case # "labs_elevator":
-    case # "labs_hallway1":
+    case #"labs_elevator":
+    case #"labs_hallway1":
       str_display = #"hash_48fce08911acd38a";
       break;
-    case # "labs_hallway2":
+    case #"labs_hallway2":
       str_display = #"hash_48fcdf8911acd1d7";
       break;
-    case # "labs_zone1":
+    case #"labs_zone1":
       str_display = #"hash_6e0edea58f326450";
       break;
-    case # "labs_zone2":
+    case #"labs_zone2":
       str_display = #"hash_6e0ee1a58f326969";
       break;
-    case # "labs_zone3":
+    case #"labs_zone3":
       str_display = #"hash_6e0ee0a58f3267b6";
       break;
-    case # "cage_upper":
-    case # "cage":
+    case #"cage_upper":
+    case #"cage":
       str_display = #"hash_62b9f4974de13b76";
       break;
     default:

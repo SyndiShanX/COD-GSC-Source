@@ -729,17 +729,17 @@ function processassist(killedplayer, damagedone, weapon, assist_level = undefine
   self.assists = self getpersstat(#"assists");
 
   switch (weapon.name) {
-    case # "concussion_grenade":
+    case #"concussion_grenade":
       assist_level = "assist_concussion";
       break;
-    case # "flash_grenade":
+    case #"flash_grenade":
       assist_level = "assist_flash";
       break;
-    case # "emp_grenade":
+    case #"emp_grenade":
       assist_level = "assist_emp";
       break;
-    case # "proximity_grenade":
-    case # "proximity_grenade_aoe":
+    case #"proximity_grenade":
+    case #"proximity_grenade_aoe":
       assist_level = "assist_proximity";
       break;
   }

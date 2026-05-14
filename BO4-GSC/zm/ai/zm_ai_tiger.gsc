@@ -317,10 +317,10 @@ function_9808e44f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
 function_8fc19416(notetrack) {
   switch (notetrack) {
-    case # "tiger_melee_left":
+    case #"tiger_melee_left":
       self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 2);
       break;
-    case # "tiger_melee_right":
+    case #"tiger_melee_right":
       self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 1);
       break;
   }

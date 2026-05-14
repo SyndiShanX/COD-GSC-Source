@@ -377,20 +377,20 @@ function private function_bd2d5a8e(killstreakweaponname) {
   }
 
   switch (killstreakweaponname) {
-    case # "inventory_ac130":
-    case # "ac130":
+    case #"inventory_ac130":
+    case #"ac130":
       bundle = getscriptbundle("killstreak_ac130");
       break;
-    case # "inventory_chopper_gunner":
-    case # "chopper_gunner":
+    case #"inventory_chopper_gunner":
+    case #"chopper_gunner":
       bundle = getscriptbundle("killstreak_chopper_gunner");
       break;
-    case # "recon_car":
-    case # "inventory_recon_car":
+    case #"recon_car":
+    case #"inventory_recon_car":
       bundle = getscriptbundle("killstreak_recon_car");
       break;
-    case # "remote_missile":
-    case # "inventory_remote_missile":
+    case #"remote_missile":
+    case #"inventory_remote_missile":
       bundle = getscriptbundle("killstreak_remote_missile");
       break;
     default:

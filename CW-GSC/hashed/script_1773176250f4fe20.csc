@@ -61,17 +61,17 @@ function function_7431f6cc(localclientnum, oldval, newval, bnewent, binitialsnap
 
       if(isDefined(self.archetype)) {
         switch (self.archetype) {
-          case # "mechz":
-          case # "hash_7c0d83ac1e845ac2":
+          case #"mechz":
+          case #"hash_7c0d83ac1e845ac2":
             str_fx = #"hash_1f5c7f941d1cd4cd";
             break;
-          case # "raz":
-          case # "mimic":
-          case # "zombie_dog":
+          case #"raz":
+          case #"mimic":
+          case #"zombie_dog":
             str_fx = #"hash_1f5f62941d1ed95d";
             break;
-          case # "zombie":
-          case # "avogadro":
+          case #"zombie":
+          case #"avogadro":
             str_fx = #"hash_1f8f75941d481d68";
             break;
           default:
@@ -105,18 +105,18 @@ function function_7431f6cc(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case # "mechz":
-      case # "hash_7c0d83ac1e845ac2":
+      case #"mechz":
+      case #"hash_7c0d83ac1e845ac2":
         var_37cec89a = #"hash_d17ba387ed58333";
         break;
-      case # "raz":
-      case # "mimic":
-      case # "zombie_dog":
+      case #"raz":
+      case #"mimic":
+      case #"zombie_dog":
         var_37cec89a = #"hash_704b1e9eda987ea3";
         break;
-      case # "soa":
-      case # "zombie":
-      case # "avogadro":
+      case #"soa":
+      case #"zombie":
+      case #"avogadro":
         var_37cec89a = #"hash_787176da22ad853a";
         break;
       default:

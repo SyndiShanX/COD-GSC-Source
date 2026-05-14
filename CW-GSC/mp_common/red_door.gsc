@@ -484,19 +484,19 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
     foreach(ent in door_struct.linked_ents) {
       if(isDefined(ent.script_noteworthy)) {
         switch (ent.script_noteworthy) {
-          case # "door_left":
+          case #"door_left":
             door_struct.door_left = ent;
             break;
-          case # "door_right":
+          case #"door_right":
             door_struct.door_right = ent;
             break;
-          case # "hash_474cd81e3615d473":
+          case #"hash_474cd81e3615d473":
             door_struct.door_frame = ent;
             break;
-          case # "hash_7d5f05ba8b4de0a4":
+          case #"hash_7d5f05ba8b4de0a4":
             door_struct.var_113d9d43 = ent;
             break;
-          case # "hash_1d188472b888f844":
+          case #"hash_1d188472b888f844":
             if(isDefined(var_f1096822)) {
               if(isDefined(ent.script_parameters) && ent.script_parameters == "door_light_script_model") {
                 ent delete();
@@ -519,11 +519,11 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
             }
 
             break;
-          case # "door_interact":
+          case #"door_interact":
             door_struct.door_interact = ent;
             door_struct thread function_736b8a03(1);
             break;
-          case # "hash_4e931f37285562af":
+          case #"hash_4e931f37285562af":
             if(isDefined(var_f1096822)) {
               if(isDefined(ent)) {
                 ent delete();
@@ -610,11 +610,11 @@ function function_e1544483(var_10d5f200) {
 
     if(self isstanceallowed("stand")) {
       switch (str_stance) {
-        case # "crouch":
+        case #"crouch":
           self setstance("stand");
           wait 0.2;
           break;
-        case # "prone":
+        case #"prone":
           self setstance("stand");
           wait 1;
           break;

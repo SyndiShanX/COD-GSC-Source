@@ -249,13 +249,13 @@ soul_captured(var_f0e6c7a2, ent) {
 
 function_a66f0de2() {
   switch (self.script_noteworthy) {
-    case # "little_bird_1":
+    case #"little_bird_1":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_2");
       break;
-    case # "little_bird_2":
+    case #"little_bird_2":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_3");
       break;
-    case # "little_bird_3":
+    case #"little_bird_3":
       level exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_base_1");
       break;
   }

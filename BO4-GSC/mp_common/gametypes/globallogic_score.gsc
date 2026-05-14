@@ -1766,20 +1766,20 @@ function_b1a3b359(killedplayer, damagedone, weapon, assist_level = undefined) {
 
   if(!level.var_724cf71) {
     switch (weapon.name) {
-      case # "concussion_grenade_l2":
-      case # "concussion_grenade":
+      case #"concussion_grenade_l2":
+      case #"concussion_grenade":
         assist_level = "assist_concussion";
         break;
-      case # "flash_grenade_l2":
-      case # "flash_grenade":
+      case #"flash_grenade_l2":
+      case #"flash_grenade":
         assist_level = "assist_flash";
         break;
-      case # "emp_grenade_l2":
-      case # "emp_grenade":
+      case #"emp_grenade_l2":
+      case #"emp_grenade":
         assist_level = "assist_emp";
         break;
-      case # "proximity_grenade":
-      case # "proximity_grenade_aoe":
+      case #"proximity_grenade":
+      case #"proximity_grenade_aoe":
         assist_level = "assist_proximity";
         break;
     }

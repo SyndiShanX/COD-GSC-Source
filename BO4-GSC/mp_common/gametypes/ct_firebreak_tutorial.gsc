@@ -81,27 +81,27 @@ function_c9ff0dce() {
         level.var_aae2a361 = 1;
 
         switch (level.var_b7fa636e) {
-          case # "tut_fin1_fight1":
+          case #"tut_fin1_fight1":
             self.bot.var_b2b8f0b6 = 700;
             self.bot.var_e8c941d6 = 1200;
             self thread function_32739e2();
             break;
-          case # "tut_fin1_fight2":
+          case #"tut_fin1_fight2":
             self.bot.var_b2b8f0b6 = 350;
             self.bot.var_e8c941d6 = 500;
             self thread function_e5272e23();
             break;
-          case # "tut_fin1_fight3":
+          case #"tut_fin1_fight3":
             self.bot.var_b2b8f0b6 = 300;
             self.bot.var_e8c941d6 = 500;
             self thread function_2d28530();
             break;
-          case # "tut_fin1_fight4":
+          case #"tut_fin1_fight4":
             self.bot.var_b2b8f0b6 = 200;
             self.bot.var_e8c941d6 = 400;
             self thread function_56e61719();
             break;
-          case # "tut_fin1_fight5":
+          case #"tut_fin1_fight5":
             self.bot.var_b2b8f0b6 = 200;
             self.bot.var_e8c941d6 = 500;
             self thread function_42e85cab();
@@ -174,19 +174,19 @@ function_c9ff0dce() {
       if(level.var_8ca3c62 == 7) {
         if(isDefined(level.var_b7fa636e)) {
           switch (level.var_b7fa636e) {
-            case # "tut_fin1_fight1":
+            case #"tut_fin1_fight1":
               self thread ct_utils::function_61d750d4("s_tut_fin1_fight1_respawn");
               break;
-            case # "tut_fin1_fight2":
+            case #"tut_fin1_fight2":
               self thread ct_utils::function_61d750d4("s_tut_fin1_fight2_respawn");
               break;
-            case # "tut_fin1_fight3":
+            case #"tut_fin1_fight3":
               self thread ct_utils::function_61d750d4("s_tut_fin1_fight3_respawn");
               break;
-            case # "tut_fin1_fight4":
+            case #"tut_fin1_fight4":
               self thread ct_utils::function_61d750d4("s_tut_fin1_fight4_respawn");
               break;
-            case # "tut_fin1_fight5":
+            case #"tut_fin1_fight5":
               self thread ct_utils::function_61d750d4("s_tut_fin1_fight5_respawn");
               break;
           }
@@ -1861,46 +1861,46 @@ function_41dcd216() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "kill_player":
+      case #"kill_player":
         e_player dodamage(1000, e_player.origin);
         break;
-      case # "lowready_on":
+      case #"lowready_on":
         e_player setlowready(1);
         break;
-      case # "lowready_off":
+      case #"lowready_off":
         e_player setlowready(0);
         break;
-      case # "restart_tutorial":
+      case #"restart_tutorial":
         level notify(#"combattraining_logic_finished", {
           #success: 1
         });
         break;
-      case # "hash_5db424be8b8d04a8":
+      case #"hash_5db424be8b8d04a8":
         e_player thread ct_utils::function_329f9ba6(#"hash_6d1f5359302a862c", 10, "<dev string:x3f6>", 2, 1);
         break;
-      case # "vo_test_1a":
+      case #"vo_test_1a":
         a_str_vo = array("<dev string:x3fe>", "<dev string:x41e>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "vo_test_2a":
+      case #"vo_test_2a":
         a_str_vo = array("<dev string:x43e>", "<dev string:x462>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "vo_test_1b":
+      case #"vo_test_1b":
         a_str_vo = array("<dev string:x3fe>", "<dev string:x41e>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "vo_test_2b":
+      case #"vo_test_2b":
         a_str_vo = array("<dev string:x43e>", "<dev string:x462>");
         e_player thread function_7d10f455(a_str_vo);
         break;
-      case # "vo_test_1":
+      case #"vo_test_1":
         self ct_vo::function_831e0584(array("<dev string:x43e>", "<dev string:x462>"));
         break;
-      case # "vo_test_2":
+      case #"vo_test_2":
         self thread ct_vo::function_831e0584(array("<dev string:x43e>", "<dev string:x462>"));
         break;
-      case # "vo_test_3":
+      case #"vo_test_3":
         e_player function_53e140e6();
         break;
     }

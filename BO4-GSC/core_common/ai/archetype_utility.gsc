@@ -719,11 +719,11 @@ bb_getlocomotionfaceenemyquadrant() {
   walkstring = getdvarstring(#"tacticalwalkdirection");
 
   switch (walkstring) {
-    case # "right":
+    case #"right":
       return "<dev string:x8f>";
-    case # "left":
+    case #"left":
       return "<dev string:xad>";
-    case # "back":
+    case #"back":
       return "<dev string:xca>";
   }
 
@@ -2020,9 +2020,9 @@ isinphalanxstance(entity) {
   currentstance = entity getblackboardattribute("_stance");
 
   switch (phalanxstance) {
-    case # "stand":
+    case #"stand":
       return (currentstance == "stand");
-    case # "crouch":
+    case #"crouch":
       return (currentstance == "crouch");
   }
 
@@ -2033,10 +2033,10 @@ togglephalanxstance(entity) {
   phalanxstance = entity ai::get_behavior_attribute("phalanx_force_stance");
 
   switch (phalanxstance) {
-    case # "stand":
+    case #"stand":
       entity setblackboardattribute("_desired_stance", "stand");
       break;
-    case # "crouch":
+    case #"crouch":
       entity setblackboardattribute("_desired_stance", "crouch");
       break;
   }
@@ -2077,7 +2077,7 @@ shouldattackobject(entity) {
 
 meleeattributescallback(entity, attribute, oldvalue, value) {
   switch (attribute) {
-    case # "can_melee":
+    case #"can_melee":
       if(value) {
         entity.canmelee = 1;
       } else {
@@ -2085,7 +2085,7 @@ meleeattributescallback(entity, attribute, oldvalue, value) {
       }
 
       break;
-    case # "can_be_meleed":
+    case #"can_be_meleed":
       if(value) {
         entity.canbemeleed = 1;
       } else {
@@ -2098,7 +2098,7 @@ meleeattributescallback(entity, attribute, oldvalue, value) {
 
 arrivalattributescallback(entity, attribute, oldvalue, value) {
   switch (attribute) {
-    case # "disablearrivals":
+    case #"disablearrivals":
       if(value) {
         entity.ai.disablearrivals = 1;
       } else {

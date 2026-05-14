@@ -626,7 +626,7 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4f52dabbc7c7806b":
+    case #"hash_4f52dabbc7c7806b":
       level flag::set(#"hash_20afa38b1f1c339e");
       level clientfield::set("<dev string:x90>" + #"pap_portal_fx", 0);
       var_b9deb373 = struct::get_script_bundle_instances("<dev string:x94>", ["<dev string:x9d>", "<dev string:xb7>"]);

@@ -270,15 +270,15 @@ function_9799924f(e_target, weapon = level.weaponnone, var_3e3892a7, v_to_target
     }
 
     switch (e_target.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         n_damage = e_target.health;
         break;
-      case # "heavy":
+      case #"heavy":
         n_damage = int(e_target.maxhealth * 0.25);
         break;
-      case # "miniboss":
+      case #"miniboss":
         n_damage = int(e_target.maxhealth * 0.15);
         break;
     }
@@ -479,16 +479,16 @@ storm_check(player) {
 
     if(isalive(self)) {
       switch (self.zm_ai_category) {
-        case # "heavy":
-        case # "miniboss":
-        case # "basic":
-        case # "enhanced":
+        case #"heavy":
+        case #"miniboss":
+        case #"basic":
+        case #"enhanced":
           self thread function_97429d68();
           break;
-        case # "boss":
+        case #"boss":
           self dodamage(1, var_75ccefac, player, player);
           break;
-        case # "popcorn":
+        case #"popcorn":
           self.var_bc973222 = 1;
           self dodamage(self.health + 100, var_75ccefac, player, player);
           break;
@@ -644,8 +644,8 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
     if(isalive(e_target) && isDefined(e_source)) {
       switch (e_target.zm_ai_category) {
-        case # "basic":
-        case # "enhanced":
+        case #"basic":
+        case #"enhanced":
           if(e_target.archetype != #"tiger" && e_target.archetype != #"catalyst") {
             e_target thread zombie_shock_eyes();
           }

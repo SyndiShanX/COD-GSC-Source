@@ -1137,35 +1137,35 @@ function_615d8c38(params) {
   }
 
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       self.allowdeath = 1;
 
       switch (str_hitloc) {
-        case # "left_leg_lower":
-        case # "left_foot":
-        case # "left_leg_upper":
+        case #"left_leg_lower":
+        case #"left_foot":
+        case #"left_leg_upper":
           gibserverutils::gibleftleg(self);
           self thread function_9a05e3c2(e_player, e_bolt, str_hitloc, str_meansofdeath);
           break;
-        case # "right_leg_upper":
-        case # "right_leg_lower":
-        case # "right_foot":
+        case #"right_leg_upper":
+        case #"right_leg_lower":
+        case #"right_foot":
           gibserverutils::gibrightleg(self);
           self thread function_9a05e3c2(e_player, e_bolt, str_hitloc, str_meansofdeath);
           break;
-        case # "left_arm_lower":
-        case # "left_arm_upper":
-        case # "left_hand":
+        case #"left_arm_lower":
+        case #"left_arm_upper":
+        case #"left_hand":
           gibserverutils::gibleftarm(self);
           break;
-        case # "right_arm_lower":
-        case # "right_arm_upper":
-        case # "right_hand":
+        case #"right_arm_lower":
+        case #"right_arm_upper":
+        case #"right_hand":
           gibserverutils::gibrightarm(self);
           break;
-        case # "head":
-        case # "helmet":
-        case # "neck":
+        case #"head":
+        case #"helmet":
+        case #"neck":
           gibserverutils::gibhead(self);
           self crossbow_kill(self.health, e_player, e_bolt, str_hitloc, str_meansofdeath);
           break;
@@ -1179,11 +1179,11 @@ function_615d8c38(params) {
       }
 
       break;
-    case # "catalyst":
+    case #"catalyst":
       switch (str_hitloc) {
-        case # "head":
-        case # "helmet":
-        case # "neck":
+        case #"head":
+        case #"helmet":
+        case #"neck":
           gibserverutils::gibhead(self);
           self crossbow_kill(self.health, e_player, e_bolt, str_hitloc, str_meansofdeath);
           break;
@@ -1197,7 +1197,7 @@ function_615d8c38(params) {
       }
 
       break;
-    case # "nosferatu":
+    case #"nosferatu":
       self zombie_utility::gib_random_parts();
       gibserverutils::annihilate(self);
       self crossbow_kill(self.health, e_player, e_bolt, str_hitloc, str_meansofdeath);

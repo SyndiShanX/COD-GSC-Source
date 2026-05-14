@@ -397,16 +397,16 @@ function function_a291d0f(str_skipto, b_starting, var_fcf2c706 = 0) {
 
   if(b_starting) {
     switch (str_skipto) {
-      case # "player_controlled_huey_01":
+      case #"player_controlled_huey_01":
         str_script_noteworthy = #"hash_44b941c1984f5dc6";
         break;
-      case # "player_controlled_huey_02":
+      case #"player_controlled_huey_02":
         str_script_noteworthy = #"hash_651a32ffba7e27b4";
         break;
-      case # "defend_firebase_ripcord":
+      case #"defend_firebase_ripcord":
         str_script_noteworthy = #"hash_1668bd06b3baa8e2";
         break;
-      case # "secure_the_nuke":
+      case #"secure_the_nuke":
         str_script_noteworthy = #"hash_8f14f3cf9fd498a";
         break;
     }
@@ -1084,15 +1084,15 @@ function function_a0d52507(var_a485bd2b, s_params) {
     switch (var_a485bd2b.vehicletype) {
       default:
         return;
-      case # "hash_64eb6f83a98f9b6":
-      case # "hash_331dac1d7450a6ed":
-      case # "hash_57f7c02f5db425b9":
+      case #"hash_64eb6f83a98f9b6":
+      case #"hash_331dac1d7450a6ed":
+      case #"hash_57f7c02f5db425b9":
         var_d1bcfb0f = 250;
         var_88814cc1 = 300;
         break;
-      case # "hash_2bf574cefe3e6d9e":
-      case # "hash_3677daa34d36098a":
-      case # "hash_3cdadb03ee525329":
+      case #"hash_2bf574cefe3e6d9e":
+      case #"hash_3677daa34d36098a":
+      case #"hash_3cdadb03ee525329":
         var_d1bcfb0f = 1100;
         var_88814cc1 = 1200;
         break;
@@ -1876,7 +1876,7 @@ function function_d7c5193b(var_ff72be84, var_5986bd6d = 0, var_c6034837 = 0, var
     str_choice = array::random(var_55804cd3);
 
     switch (str_choice) {
-      case # "ar":
+      case #"ar":
         str_spawner = "sp_pch_convoy_01_ar";
         var_b82f118--;
 
@@ -1885,7 +1885,7 @@ function function_d7c5193b(var_ff72be84, var_5986bd6d = 0, var_c6034837 = 0, var
         }
 
         break;
-      case # "lmg":
+      case #"lmg":
         str_spawner = "sp_pch_convoy_01_lmg";
         var_50ad5cf2--;
 
@@ -1894,7 +1894,7 @@ function function_d7c5193b(var_ff72be84, var_5986bd6d = 0, var_c6034837 = 0, var
         }
 
         break;
-      case # "rpg":
+      case #"rpg":
         str_spawner = "sp_pch_convoy_01_rpg";
         var_51702fb9--;
 
@@ -4736,7 +4736,7 @@ function function_cffa5653() {
 
   foreach(struct in struct::get_array(self.target)) {
     switch (struct.script_noteworthy) {
-      case # "muzzle":
+      case #"muzzle":
         if(!isDefined(self.var_972f9755)) {
           self.var_972f9755 = [];
         } else if(!isarray(self.var_972f9755)) {
@@ -4745,7 +4745,7 @@ function function_cffa5653() {
 
         self.var_972f9755[self.var_972f9755.size] = struct;
         break;
-      case # "explosion":
+      case #"explosion":
         self.var_85e471f5 = struct;
         break;
     }

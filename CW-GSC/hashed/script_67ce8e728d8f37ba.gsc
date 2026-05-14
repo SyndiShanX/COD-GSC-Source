@@ -375,10 +375,10 @@ function function_b906539e() {
     }
 
     switch (player.var_77d6602a) {
-      case # "autoassign":
+      case #"autoassign":
         player[[level.autoassign]](1, undefined);
         break;
-      case # "spectator":
+      case #"spectator":
         player[[level.spectator]]();
         break;
       default:
@@ -569,21 +569,21 @@ function function_cf2c009a(team) {
     return level.var_2efdea7.var_704cf864;
   } else {
     switch (team) {
-      case # "team3":
+      case #"team3":
         return level.var_2efdea7.var_5f68ebf7;
-      case # "team4":
+      case #"team4":
         return level.var_2efdea7.var_78449dae;
-      case # "team5":
+      case #"team5":
         return level.var_2efdea7.var_79fda120;
-      case # "team6":
+      case #"team6":
         return level.var_2efdea7.var_93e854f5;
-      case # "team7":
+      case #"team7":
         return level.var_2efdea7.var_a5aa7879;
-      case # "team8":
+      case #"team8":
         return level.var_2efdea7.var_de866a34;
-      case # "team9":
+      case #"team9":
         return level.var_2efdea7.var_b1448fb1;
-      case # "team10":
+      case #"team10":
         return level.var_2efdea7.var_e39afb68;
     }
   }

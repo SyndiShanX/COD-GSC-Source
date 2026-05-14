@@ -207,12 +207,12 @@ shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshotwait) {
   self.start_duration_comp = 0;
 
   switch (mode) {
-    case # "normal":
+    case #"normal":
       break;
-    case # "shoot_until_target_dead":
+    case #"shoot_until_target_dead":
       duration = -1;
       break;
-    case # "kill_within_time":
+    case #"kill_within_time":
       target damagemode("next_shot_kills");
       break;
   }

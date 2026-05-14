@@ -179,14 +179,14 @@ function_b87894c1(str_flag) {
 
 function_45489835(str_flag) {
   switch (str_flag) {
-    case # "power_on1":
+    case #"power_on1":
       playsoundatposition(#"hash_5f9ff903d1e07acb", (0, 0, 0));
       break;
-    case # "power_on2":
+    case #"power_on2":
       playsoundatposition(#"hash_7bb9774ddb11bc9f", (0, 0, 0));
       playsoundatposition(#"hash_957e90e703a238a", (1311, -1971, 1102));
       break;
-    case # "power_on3":
+    case #"power_on3":
       playsoundatposition(#"hash_4760ffee46ef7f74", (0, 0, 0));
       break;
   }
@@ -248,13 +248,13 @@ function_1f29d511() {
 
 function_1baa684c(str_flag) {
   switch (str_flag) {
-    case # "power_on1":
+    case #"power_on1":
       level.var_3428b470 = struct::get("power_intro_1");
       break;
-    case # "power_on2":
+    case #"power_on2":
       level.var_3428b470 = struct::get("power_intro_2");
       break;
-    case # "power_on3":
+    case #"power_on3":
       level.var_3428b470 = struct::get("power_intro_3");
       break;
   }
@@ -746,13 +746,13 @@ devgui() {
     str_command = getdvarstring(#"zm_orange_lighthouse_cmd", "<dev string:x260>");
 
     switch (str_command) {
-      case # "hash_2e5bdb11c6bc0cd":
+      case #"hash_2e5bdb11c6bc0cd":
         getplayers()[0] function_2ad3b642(level.var_10f86d56[0]);
         break;
-      case # "hash_2e5bab11c6bbbb4":
+      case #"hash_2e5bab11c6bbbb4":
         getplayers()[0] function_2ad3b642(level.var_10f86d56[1]);
         break;
-      case # "hash_2e5bbb11c6bbd67":
+      case #"hash_2e5bbb11c6bbd67":
         getplayers()[0] function_2ad3b642(level.var_10f86d56[2]);
         break;
     }

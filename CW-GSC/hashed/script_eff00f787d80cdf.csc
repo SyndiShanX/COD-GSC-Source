@@ -61,7 +61,7 @@ function function_3b0ca643(e_ai) {
 
   if(isDefined(e_ai.archetype)) {
     switch (e_ai.archetype) {
-      case # "avogadro":
+      case #"avogadro":
         var_1510a94a = #"hash_33e62839d84aaec7";
         var_e31a323c = #"hash_621285559daed3af";
         var_fd89f5fb = #"hash_123425d677b928fa";
@@ -70,7 +70,7 @@ function function_3b0ca643(e_ai) {
         var_6e38d21c = #"hash_39c41891747dabba";
         v_offset = (0, 0, 45);
         break;
-      case # "zombie_dog":
+      case #"zombie_dog":
         if(self.subarchetype === #"hash_2a5479b83161cb35") {
           var_1510a94a = #"hash_2991459f20df3789";
           var_e31a323c = #"hash_2daacd7b15881d1d";

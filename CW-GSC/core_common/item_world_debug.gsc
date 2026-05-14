@@ -135,40 +135,40 @@ function private function_10b50848() {
 
         if(isDefined(the_item[0].itementry) && isDefined(the_item[0].itementry.itemtype)) {
           switch (the_item[0].itementry.itemtype) {
-            case # "survival_essence":
+            case #"survival_essence":
               type = "<dev string:x2d5>";
               break;
-            case # "survival_scrap":
+            case #"survival_scrap":
               type = "<dev string:x2e0>";
               break;
-            case # "survival_armor_shard":
+            case #"survival_armor_shard":
               type = "<dev string:x2e9>";
               break;
-            case # "survival_scorestreak":
+            case #"survival_scorestreak":
               type = "<dev string:x2f8>";
               break;
-            case # "survival_perk":
+            case #"survival_perk":
               type = "<dev string:x307>";
               break;
-            case # "survival_ammo":
+            case #"survival_ammo":
               type = "<dev string:x30f>";
               break;
-            case # "armor":
+            case #"armor":
               type = "<dev string:x317>";
               break;
-            case # "equipment":
+            case #"equipment":
               type = "<dev string:x320>";
               break;
-            case # "field_upgrade":
+            case #"field_upgrade":
               type = "<dev string:x32d>";
               break;
-            case # "tactical":
+            case #"tactical":
               type = "<dev string:x33e>";
               break;
-            case # "attachment":
+            case #"attachment":
               type = "<dev string:x34a>";
               break;
-            case # "resource":
+            case #"resource":
               type = "<dev string:x358>";
               break;
             default:
@@ -220,43 +220,43 @@ function private function_b6ea080() {
 
         if(isDefined(the_item[0].itementry) && isDefined(the_item[0].itementry.itemtype)) {
           switch (the_item[0].itementry.itemtype) {
-            case # "ammo":
+            case #"ammo":
               type = "<dev string:x30f>";
               break;
-            case # "weapon":
+            case #"weapon":
               type = "<dev string:x440>";
               break;
-            case # "health":
+            case #"health":
               type = "<dev string:x44a>";
               break;
-            case # "armor":
+            case #"armor":
               type = "<dev string:x317>";
               break;
-            case # "equipment":
+            case #"equipment":
               type = "<dev string:x320>";
               break;
-            case # "field_upgrade":
+            case #"field_upgrade":
               type = "<dev string:x32d>";
               break;
-            case # "tactical":
+            case #"tactical":
               type = "<dev string:x33e>";
               break;
-            case # "backpack":
+            case #"backpack":
               type = "<dev string:x454>";
               break;
-            case # "generic":
+            case #"generic":
               type = "<dev string:x460>";
               break;
-            case # "cash":
+            case #"cash":
               type = "<dev string:x46b>";
               break;
-            case # "killstreak":
+            case #"killstreak":
               type = "<dev string:x473>";
               break;
-            case # "attachment":
+            case #"attachment":
               type = "<dev string:x34a>";
               break;
-            case # "resource":
+            case #"resource":
               type = "<dev string:x358>";
               break;
             default:
@@ -444,19 +444,19 @@ function private function_f0d72128() {
 
 function function_78931318(str_button) {
   switch (str_button) {
-    case # "down":
+    case #"down":
       str_btn = "<dev string:x6e3>";
       var_7a00db94 = "<dev string:x6f0>";
       break;
-    case # "left":
+    case #"left":
       str_btn = "<dev string:x6fd>";
       var_7a00db94 = "<dev string:x70a>";
       break;
-    case # "right":
+    case #"right":
       str_btn = "<dev string:x717>";
       var_7a00db94 = "<dev string:x725>";
       break;
-    case # "up":
+    case #"up":
       str_btn = "<dev string:x733>";
       var_7a00db94 = "<dev string:x73e>";
       break;
@@ -674,16 +674,16 @@ function private function_f4c71526(origin) {
       color = (1, 1, 1);
 
       switch (vehicle.scriptvehicletype) {
-        case # "player_atv":
+        case #"player_atv":
           color = (0, 1, 1);
           break;
-        case # "cargo_truck_wz":
+        case #"cargo_truck_wz":
           color = (1, 1, 0);
           break;
-        case # "tactical_raft_wz":
+        case #"tactical_raft_wz":
           color = (1, 0.5, 0);
           break;
-        case # "helicopter_light":
+        case #"helicopter_light":
           color = (1, 0, 1);
           break;
       }
@@ -996,16 +996,16 @@ function private function_cdd9b388() {
         foreach(item in var_f4b807cb) {
           if(isDefined(item.itementry) && isDefined(item.itementry.rarity)) {
             switch (item.itementry.rarity) {
-              case # "common":
+              case #"common":
                 color = (0, 1, 0);
                 break;
-              case # "rare":
+              case #"rare":
                 color = (0, 0, 1);
                 break;
-              case # "legendary":
+              case #"legendary":
                 color = (1, 0.5, 0);
                 break;
-              case # "epic":
+              case #"epic":
                 color = (1, 0, 1);
                 break;
               default:
@@ -1193,13 +1193,13 @@ function private function_cdd9b388() {
 
             if(stash_items.size > 0) {
               switch (stash_items[0].targetname) {
-                case # "world_dynent_stash_health":
+                case #"world_dynent_stash_health":
                   color = (1, 0, 0);
                   break;
-                case # "world_dynent_stash_supply":
+                case #"world_dynent_stash_supply":
                   color = (0, 1, 0);
                   break;
-                case # "hash_ea6664e89a0bff6":
+                case #"hash_ea6664e89a0bff6":
                   color = (0.501961, 0.501961, 0);
                   break;
               }
@@ -1218,16 +1218,16 @@ function private function_cdd9b388() {
         foreach(item in var_f4b807cb) {
           if(isDefined(item.itementry) && isDefined(item.itementry.rarity)) {
             switch (item.itementry.rarity) {
-              case # "common":
+              case #"common":
                 color = (0, 1, 0);
                 break;
-              case # "rare":
+              case #"rare":
                 color = (0, 0, 1);
                 break;
-              case # "legendary":
+              case #"legendary":
                 color = (1, 0.5, 0);
                 break;
-              case # "epic":
+              case #"epic":
                 color = (1, 0, 1);
                 break;
               default:
@@ -1439,7 +1439,7 @@ function function_91ef342() {
     r = level waittill(#"devgui_bot");
 
     switch (r.args[0]) {
-      case # "hash_29f59f6b62fdbf94":
+      case #"hash_29f59f6b62fdbf94":
         function_c07eae4e();
         break;
     }
@@ -1590,10 +1590,10 @@ function function_9cc59537() {
             }
 
             switch (itemlistbundle.name) {
-              case # "hash_102716229ce6474b":
+              case #"hash_102716229ce6474b":
                 color = (1, 1, 0);
                 break;
-              case # "hash_102715229ce64598":
+              case #"hash_102715229ce64598":
                 color = (1, 0, 1);
                 break;
               default:

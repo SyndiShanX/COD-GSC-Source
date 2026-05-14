@@ -229,20 +229,20 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
 
           if(isDefined(inventoryitem)) {
             switch (inventoryitem.itementry.itemtype) {
-              case # "tactical":
-              case # "equipment":
-              case # "field_upgrade":
+              case #"tactical":
+              case #"equipment":
+              case #"field_upgrade":
                 player item_inventory::equip_equipment(inventoryitem);
                 break;
-              case # "health":
+              case #"health":
                 player item_inventory::equip_health(inventoryitem);
                 break;
-              case # "perk_tier_3":
-              case # "perk_tier_2":
-              case # "perk_tier_1":
+              case #"perk_tier_3":
+              case #"perk_tier_2":
+              case #"perk_tier_1":
                 player item_inventory::function_854cf2c3(inventoryitem);
                 break;
-              case # "scorestreak":
+              case #"scorestreak":
                 player item_inventory::function_1ac37022(inventoryitem);
                 break;
             }

@@ -203,105 +203,105 @@ on_begin(var_e097dc07, var_f5300808) {
   allowed_weapons = [];
 
   switch (var_e097dc07) {
-    case # "equipment":
+    case #"equipment":
       allowed_weapons = array(#"eq_acid_bomb", #"eq_acid_bomb_extra", #"homunculus", #"tomahawk_t8", #"tomahawk_t8_upgraded", #"claymore", #"claymore_extra", #"eq_molotov", #"eq_molotov_extra", #"eq_frag_grenade", #"eq_frag_grenade_extra", #"eq_wraith_fire", #"eq_wraith_fire_extra", #"mini_turret", #"proximity_grenade", #"sticky_grenade", #"sticky_grenade_extra");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       break;
-    case # "melee":
+    case #"melee":
       allowed_weapons = zm_weapons::function_ed29dde5("melee", 0, 1);
       level zm_trial::function_cdcce681(1);
       break;
-    case # "bowie_knife":
+    case #"bowie_knife":
       allowed_weapons = array(#"bowie_knife", #"bowie_knife_story_1", #"bowie_knife_widows_wine");
       var_fda63ae3[0] = struct::get("bowie_knife", "zombie_weapon_upgrade").origin;
       level zm_trial::function_25ee130(1);
       break;
-    case # "leveraction":
+    case #"leveraction":
       allowed_weapons = array(#"tr_leveraction_t8", #"tr_leveraction_t8_upgraded");
       objective_struct = struct::get("tr_leveraction_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
       break;
-    case # "longburst":
+    case #"longburst":
       allowed_weapons = array(#"tr_longburst_t8", #"tr_longburst_t8_upgraded");
       objective_struct = struct::get("tr_longburst_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_33380540d3ae5004":
+    case #"hash_33380540d3ae5004":
       allowed_weapons = array(#"shotgun_pump_t8", #"shotgun_pump_t8_upgraded");
       level zm_trial::function_25ee130(1);
       objective_struct = struct::get("shotgun_pump_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       break;
-    case # "burst_pistol":
+    case #"burst_pistol":
       allowed_weapons = array(#"pistol_burst_t8", #"pistol_burst_t8_upgraded");
       objective_struct = struct::get("pistol_burst_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
       break;
-    case # "any_pistol":
+    case #"any_pistol":
       allowed_weapons = zm_weapons::function_ed29dde5("pistol", 1, 1);
       var_fda63ae3 = function_f1dd7bf8(array("pistol_standard_t8", "pistol_burst_t8", "pistol_revolver_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_7416cabf26f52c5f":
+    case #"hash_7416cabf26f52c5f":
       allowed_weapons = zm_weapons::function_ed29dde5("pistol", 0, 1);
       allowed_weapons = arraycombine(allowed_weapons, array(#"ww_random_ray_gun1", #"ww_random_ray_gun2", #"ww_random_ray_gun2_charged", #"ww_random_ray_gun3", #"ww_random_ray_gun3_charged", #"ray_gun"), 0, 0);
       var_fda63ae3 = function_f1dd7bf8(array("pistol_standard_t8", "pistol_burst_t8", "pistol_revolver_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_14468aadde60f9e1":
+    case #"hash_14468aadde60f9e1":
       allowed_weapons = zm_weapons::function_ed29dde5("smg", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("smg_fastfire_t8", "smg_handling_t8", "smg_drum_pistol_t8", "smg_standard_t8", "smg_accurate_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_2d7ec445ba288abf":
+    case #"hash_2d7ec445ba288abf":
       allowed_weapons = zm_weapons::function_ed29dde5("ar", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("ar_accurate_t8", "ar_damage_t8", "ar_fastfire_t8", "ar_galil_t8", "ar_mg1909_t8", "ar_modular_t8", "ar_standard_t8", "ar_stealth_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_44dcc4dbf2ce47de":
+    case #"hash_44dcc4dbf2ce47de":
       allowed_weapons = zm_weapons::function_ed29dde5("tr", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("tr_leveraction_t8", "tr_powersemi_t8", "tr_longburst_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_1dd9431fbe7472b7":
+    case #"hash_1dd9431fbe7472b7":
       allowed_weapons = zm_weapons::function_ed29dde5("sniper", 0, 1);
       allowed_weapons = arraycombine(allowed_weapons, array(#"ww_tesla_sniper_t8"), 0, 0);
       var_fda63ae3 = function_f1dd7bf8(array("sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_powerbolt_t8", "sniper_powersemi_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_54d4bc51239254b8":
+    case #"hash_54d4bc51239254b8":
       allowed_weapons = zm_weapons::function_ed29dde5("lmg", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("lmg_double_t8", "lmg_heavy_t8", "lmg_spray_t8", "lmg_standard_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "hash_706c2575a1c4f65e":
+    case #"hash_706c2575a1c4f65e":
       allowed_weapons = zm_weapons::function_ed29dde5("shotgun", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("shotgun_pump_t8", "shotgun_trenchgun_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "stake_knife":
+    case #"stake_knife":
       allowed_weapons = array(#"stake_knife", #"zhield_dw", #"knife", #"bowie_knife");
       level zm_trial::function_25ee130(1);
       break;
-    case # "galvaknuckles":
+    case #"galvaknuckles":
       allowed_weapons = array(#"galvaknuckles_t8");
       var_fda63ae3 = function_f1dd7bf8(array("galvaknuckles_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case # "special":
+    case #"special":
       allowed_weapons = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hero_chakram_lh_lv1", #"hero_chakram_lh_lv2", #"hero_chakram_lh_lv3", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hero_scepter_lv1", #"hero_scepter_lv2", #"hero_scepter_lv3", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hero_sword_pistol_lh_lv1", #"hero_sword_pistol_lh_lv2", #"hero_sword_pistol_lh_lv3", #"hero_flamethrower_t8_lv1", #"hero_flamethrower_t8_lv2", #"hero_flamethrower_t8_lv3", #"hero_gravityspikes_t8_lv1", #"hero_gravityspikes_t8_lv2", #"hero_gravityspikes_t8_lv3", #"hero_katana_t8_lv1", #"hero_katana_t8_lv2", #"hero_katana_t8_lv3", #"hero_minigun_t8_lv1", #"hero_minigun_t8_lv2", #"hero_minigun_t8_lv3");
       level.b_special_weapons = 1;
       level zm_trial::function_cdcce681(1);
       break;
-    case # "shield":
+    case #"shield":
       allowed_weapons = array(#"zhield_zword_dw", #"zhield_zword_dw_upgraded", #"zhield_zword_lh", #"zhield_zword_lh_upgraded", #"zhield_zword_turret", #"zhield_zword_turret_upgraded");
       level zm_trial::function_25ee130(1);
       break;
-    case # "sniper_powersemi":
+    case #"sniper_powersemi":
       allowed_weapons = array(#"sniper_powersemi_t8");
       objective_struct = struct::get("sniper_powersemi_t8", "zombie_weapon_upgrade");
 
@@ -311,18 +311,18 @@ on_begin(var_e097dc07, var_f5300808) {
 
       level zm_trial::function_25ee130(1);
       break;
-    case # "spoon":
+    case #"spoon":
       allowed_weapons = array(#"spoon_alcatraz", #"spork_alcatraz", #"zhield_spectral_dw", #"zhield_spectral_lh", #"zhield_spectral_lh_upgraded", #"zhield_spectral_dw_upgraded", #"zhield_spectral_turret", #"zhield_spectral_turret_upgraded", "tomahawk_t8", "tomahawk_t8_upgraded");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       break;
-    case # "spear_only":
+    case #"spear_only":
       allowed_weapons = array(#"zhield_zpear_dw", #"zhield_zpear_turret", #"zhield_zpear_lh");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       level zm_trial::function_cd75b690(1);
       break;
-    case # "mozu":
+    case #"mozu":
       allowed_weapons = array(#"pistol_revolver_t8", #"pistol_revolver_t8_upgraded");
       objective_struct = struct::get("pistol_revolver_t8", "zombie_weapon_upgrade");
 
@@ -332,7 +332,7 @@ on_begin(var_e097dc07, var_f5300808) {
 
       level zm_trial::function_25ee130(1);
       break;
-    case # "tommy_gun":
+    case #"tommy_gun":
       allowed_weapons = array(#"smg_thompson_t8", #"smg_thompson_t8_upgraded");
       objective_struct = struct::get("smg_thompson_t8", "zombie_weapon_upgrade");
 
@@ -342,11 +342,11 @@ on_begin(var_e097dc07, var_f5300808) {
 
       level zm_trial::function_25ee130(1);
       break;
-    case # "no_attachments":
+    case #"no_attachments":
       level.var_4400c4f7 = 1;
       level.b_special_weapons = 1;
       break;
-    case # "snowballs":
+    case #"snowballs":
       allowed_weapons = array(#"snowball", #"snowball_upgraded", #"snowball_yellow", #"snowball_yellow_upgraded");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);

@@ -145,15 +145,15 @@ function updateattachedweaponmodels() {
 
 function gettagforpos(position) {
   switch (position) {
-    case # "chest":
+    case #"chest":
       return "tag_weapon_chest";
-    case # "back":
+    case #"back":
       return "tag_stowed_back";
-    case # "left":
+    case #"left":
       return "tag_weapon_left";
-    case # "right":
+    case #"right":
       return "tag_weapon_right";
-    case # "hand":
+    case #"hand":
       return "tag_inhand";
     default:
       assertmsg("<dev string:x5a>" + position);

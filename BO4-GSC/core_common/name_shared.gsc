@@ -33,7 +33,7 @@ initialize_nationality(str_nationality) {
 
 add_nationality_names(str_nationality) {
   switch (str_nationality) {
-    case # "american":
+    case #"american":
       american_names();
       break;
     default:
@@ -362,22 +362,22 @@ getrankfromname(name) {
   shortrank = tokens[0];
 
   switch (shortrank) {
-    case # "pvt.":
+    case #"pvt.":
       self.airank = "private";
       break;
-    case # "pfc.":
+    case #"pfc.":
       self.airank = "private";
       break;
-    case # "cpl.":
+    case #"cpl.":
       self.airank = "corporal";
       break;
-    case # "sgt.":
+    case #"sgt.":
       self.airank = "sergeant";
       break;
-    case # "lt.":
+    case #"lt.":
       self.airank = "lieutenant";
       break;
-    case # "cpt.":
+    case #"cpt.":
       self.airank = "captain";
       break;
     default:

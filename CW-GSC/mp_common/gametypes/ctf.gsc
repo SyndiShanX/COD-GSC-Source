@@ -585,10 +585,10 @@ function removeinfluencers() {
 
 function function_d1b40f6e(flagteam, var_f1930417) {
   switch (flagteam) {
-    case # "allies":
+    case #"allies":
       level clientfield::set_world_uimodel("CTFLevelInfo.flagStateAllies", var_f1930417);
       break;
-    case # "axis":
+    case #"axis":
     default:
       level clientfield::set_world_uimodel("CTFLevelInfo.flagStateAxis", var_f1930417);
       break;
@@ -603,10 +603,10 @@ function function_18d7960(flagteam, player) {
   }
 
   switch (flagteam) {
-    case # "allies":
+    case #"allies":
       level clientfield::set_world_uimodel("CTFLevelInfo.flagCarrierAllies", entnum);
       break;
-    case # "axis":
+    case #"axis":
     default:
       level clientfield::set_world_uimodel("CTFLevelInfo.flagCarrierAxis", entnum);
       break;

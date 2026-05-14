@@ -55,14 +55,14 @@ function function_913fe266(params) {
   var_53a5b34d = 400;
 
   switch (params.weapon.name) {
-    case # "lightning_links":
-    case # "lightning_links_1":
+    case #"lightning_links":
+    case #"lightning_links_1":
       var_91a257a3 = 10;
       break;
-    case # "lightning_links_2":
-    case # "lightning_links_3":
-    case # "lightning_links_4":
-    case # "lightning_links_5":
+    case #"lightning_links_2":
+    case #"lightning_links_3":
+    case #"lightning_links_4":
+    case #"lightning_links_5":
       var_91a257a3 = 15;
       break;
   }
@@ -225,18 +225,18 @@ function function_165a06f0(player_source, var_2b003a39, var_5baceff5, weapon) {
       return false;
     } else if(self.zm_ai_category === #"elite") {
       switch (weapon.name) {
-        case # "lightning_links":
-        case # "lightning_links_1":
-        case # "lightning_links_2":
-        case # "lightning_links_3":
-        case # "lightning_links_4":
+        case #"lightning_links":
+        case #"lightning_links_1":
+        case #"lightning_links_2":
+        case #"lightning_links_3":
+        case #"lightning_links_4":
           return false;
       }
     } else if(self.zm_ai_category === #"special") {
       switch (weapon.name) {
-        case # "lightning_links":
-        case # "lightning_links_1":
-        case # "lightning_links_2":
+        case #"lightning_links":
+        case #"lightning_links_1":
+        case #"lightning_links_2":
           return false;
       }
     }
@@ -302,24 +302,24 @@ function function_c79f4bd7(weapon, player_source, var_15625d6b) {
 
   if(!self flag::get(#"hash_6ab8e3db32b20d33")) {
     switch (weapon.name) {
-      case # "lightning_links":
+      case #"lightning_links":
         var_da4a3267 = self.maxhealth * 0.1;
         break;
-      case # "lightning_links_1":
+      case #"lightning_links_1":
         var_da4a3267 = self.maxhealth * 0.2;
         break;
-      case # "lightning_links_2":
+      case #"lightning_links_2":
         var_da4a3267 = self.maxhealth * 0.2;
         break;
-      case # "lightning_links_3":
-        var_da4a3267 = self.maxhealth * 0.2;
-        var_34e3b3f7 = self.maxhealth * 0.1;
-        break;
-      case # "lightning_links_4":
+      case #"lightning_links_3":
         var_da4a3267 = self.maxhealth * 0.2;
         var_34e3b3f7 = self.maxhealth * 0.1;
         break;
-      case # "lightning_links_5":
+      case #"lightning_links_4":
+        var_da4a3267 = self.maxhealth * 0.2;
+        var_34e3b3f7 = self.maxhealth * 0.1;
+        break;
+      case #"lightning_links_5":
         var_da4a3267 = self.maxhealth * 0.2;
         var_34e3b3f7 = self.maxhealth * 0.1;
         var_19ba813e = self.maxhealth * 0.05;

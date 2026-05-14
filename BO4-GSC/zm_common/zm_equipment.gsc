@@ -726,11 +726,11 @@ function_7d948481(n_boss = 0.1, n_miniboss = 0.25, n_heavy = 0.5, n_basic = 1) {
   }
 
   switch (self.zm_ai_category) {
-    case # "boss":
+    case #"boss":
       return n_boss;
-    case # "miniboss":
+    case #"miniboss":
       return n_miniboss;
-    case # "heavy":
+    case #"heavy":
       return n_heavy;
     default:
       return n_basic;

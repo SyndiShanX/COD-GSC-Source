@@ -128,8 +128,8 @@ function function_4ba529a7(weapon) {
     var_1236db9d = zm_weapons::function_386dacbc(weapon).name;
 
     switch (var_1236db9d) {
-      case # "ww_ray_rifle_t9_upgraded":
-      case # "hash_493fc891e20b4f8a":
+      case #"ww_ray_rifle_t9_upgraded":
+      case #"hash_493fc891e20b4f8a":
         return true;
       default:
         return false;
@@ -160,8 +160,8 @@ function function_cbd0f11(weapon) {
     var_1236db9d = zm_weapons::function_386dacbc(weapon).name;
 
     switch (var_1236db9d) {
-      case # "ww_ray_rifle_t9_upgraded":
-      case # "ww_ray_rifle_t9":
+      case #"ww_ray_rifle_t9_upgraded":
+      case #"ww_ray_rifle_t9":
         return true;
       default:
         return false;
@@ -176,8 +176,8 @@ function function_4f6da2be(weapon) {
     var_1236db9d = zm_weapons::function_386dacbc(weapon).name;
 
     switch (var_1236db9d) {
-      case # "hash_ac86d29509a8939":
-      case # "hash_493fc891e20b4f8a":
+      case #"hash_ac86d29509a8939":
+      case #"hash_493fc891e20b4f8a":
         return true;
       default:
         return false;

@@ -372,11 +372,11 @@ function function_417ec8b9(itementry) {
   }
 
   switch (itementry.itemtype) {
-    case # "perk_tier_1":
+    case #"perk_tier_1":
       return 14;
-    case # "perk_tier_2":
+    case #"perk_tier_2":
       return 15;
-    case # "perk_tier_3":
+    case #"perk_tier_3":
       return 16;
     default:
       assert(0);

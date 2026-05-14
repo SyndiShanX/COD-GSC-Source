@@ -518,7 +518,7 @@ function challengeroundend(data) {
   }
 
   switch (level.gametype) {
-    case # "sd":
+    case #"sd":
       if(player.team == winner) {
         if(game.challenge[winner][#"allalive"]) {
           player stats::function_d40764f3(#"round_win_no_deaths", 1);
@@ -1435,13 +1435,13 @@ function totaldomination(team) {
 
 function holdflagentirematch(team, label) {
   switch (label) {
-    case # "_a":
+    case #"_a":
       event = "hold_a_entire_match";
       break;
-    case # "_b":
+    case #"_b":
       event = "hold_b_entire_match";
       break;
-    case # "_c":
+    case #"_c":
       event = "hold_c_entire_match";
       break;
     default:
@@ -1990,23 +1990,23 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
       var_f09a5f22 = 0;
 
       switch (data.var_525172df.name) {
-        case # "listening_device":
+        case #"listening_device":
           var_5e93fb70 = sqr(isDefined(level.var_8ddf6d3d.var_151e2c9b) ? level.var_8ddf6d3d.var_151e2c9b : 512);
           var_f09a5f22 = 1;
           break;
-        case # "gadget_jammer":
+        case #"gadget_jammer":
           var_5e93fb70 = level.var_578f7c6d.radiussqr;
           var_f09a5f22 = 1;
           break;
-        case # "missile_turret":
+        case #"missile_turret":
           var_5e93fb70 = sqr(512);
           var_f09a5f22 = 1;
           break;
-        case # "gadget_supplypod":
+        case #"gadget_supplypod":
           var_5e93fb70 = sqr(isDefined(level.var_934fb97.bundle.var_366f43e9) ? level.var_934fb97.bundle.var_366f43e9 : 512);
           var_f09a5f22 = 1;
           break;
-        case # "trophy_system":
+        case #"trophy_system":
           var_5e93fb70 = 262144;
           var_f09a5f22 = 1;
           break;
@@ -2294,7 +2294,7 @@ function eventreceived(eventname) {
   util::waittillslowprocessallowed();
 
   switch (level.gametype) {
-    case # "tdm":
+    case #"tdm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2310,7 +2310,7 @@ function eventreceived(eventname) {
       }
 
       break;
-    case # "dm":
+    case #"dm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2322,7 +2322,7 @@ function eventreceived(eventname) {
       }
 
       break;
-    case # "sd":
+    case #"sd":
       if(eventname == "defused_bomb_last_man_alive") {
         self stats::function_d40764f3(#"defused_bomb_last_man_alive", 1);
       } else if(eventname == "elimination_and_last_player_alive") {
@@ -2334,7 +2334,7 @@ function eventreceived(eventname) {
       }
 
       break;
-    case # "ctf":
+    case #"ctf":
       if(eventname == "kill_flag_carrier") {
         self stats::function_d40764f3(#"kill_flag_carrier", 1);
       } else if(eventname == "defend_flag_carrier") {
@@ -2342,7 +2342,7 @@ function eventreceived(eventname) {
       }
 
       break;
-    case # "dem":
+    case #"dem":
       if(eventname == "killed_bomb_planter") {
         self stats::function_d40764f3(#"killed_bomb_planter", 1);
       } else if(eventname == "killed_bomb_defuser") {

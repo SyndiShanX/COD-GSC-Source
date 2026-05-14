@@ -101,9 +101,7 @@ main() {
   missionSettings addLevel("launchfacility_a", true, undefined, true, "THE_ULTIMATUM");
   missionSettings addLevel("launchfacility_b", true, undefined, true, "THE_ULTIMATUM");
   missionSettings addLevel("jeepride", false, "WIN_THE_WAR", true, "THE_FOURTH_HORSEMAN");
-  missionSettings addLevel("airplane", false, undefined, undefined, "MILE_HIGH_CLUB"); **
-  **
-  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** /
+  missionSettings addLevel("airplane", false, undefined, undefined, "MILE_HIGH_CLUB");
 
   level.missionSettings = missionSettings;
 

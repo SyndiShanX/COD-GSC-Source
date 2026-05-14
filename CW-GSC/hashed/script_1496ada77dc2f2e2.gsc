@@ -37,22 +37,22 @@ function private on_begin(str_style) {
   level.var_4ecf5754 = isDefined(str_style) ? str_style : # "silent_film";
 
   switch (level.var_4ecf5754) {
-    case # "silent_film":
+    case #"silent_film":
       level thread function_40c7a8fd();
       break;
-    case # "hash_5a202c5d6f53d672":
+    case #"hash_5a202c5d6f53d672":
       foreach(player in getplayers()) {
         player thread function_69fa75f8();
       }
 
       break;
-    case # "perk_drunk":
+    case #"perk_drunk":
       foreach(player in getplayers()) {
         player thread function_6d8cf829();
       }
 
       break;
-    case # "random_blindness":
+    case #"random_blindness":
       callback::add_callback(#"on_host_migration_end", &function_604ff1eb);
 
       foreach(player in getplayers()) {
@@ -67,7 +67,7 @@ function private on_begin(str_style) {
 
 function private on_end(round_reset) {
   switch (level.var_4ecf5754) {
-    case # "silent_film":
+    case #"silent_film":
       foreach(player in getplayers()) {
         player thread clientfield::set_to_player("" + #"hash_b905d796914b710", 0);
       }
@@ -79,7 +79,7 @@ function private on_end(round_reset) {
       }
 
       break;
-    case # "hash_5a202c5d6f53d672":
+    case #"hash_5a202c5d6f53d672":
       if(!round_reset) {
         foreach(player in getplayers()) {
           player showcrosshair(1);
@@ -88,13 +88,13 @@ function private on_end(round_reset) {
       }
 
       break;
-    case # "perk_drunk":
+    case #"perk_drunk":
       foreach(player in getplayers()) {
         player clientfield::set_to_player("" + #"hash_52347bec3f1339fd", 0);
       }
 
       break;
-    case # "random_blindness":
+    case #"random_blindness":
       callback::remove_callback(#"on_host_migration_end", &function_604ff1eb);
       break;
   }

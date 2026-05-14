@@ -951,13 +951,13 @@ function private function_cf9ffac7() {
 
 function private function_5d55f3c9(combatstate) {
   switch (combatstate) {
-    case # "combat_state_in_combat":
+    case #"combat_state_in_combat":
       return (1, 0, 0);
-    case # "combat_state_has_visible_enemy":
+    case #"combat_state_has_visible_enemy":
       return (1, 0.5, 0);
-    case # "combat_state_aware_of_enemies":
+    case #"combat_state_aware_of_enemies":
       return (1, 1, 0);
-    case # "combat_state_idle":
+    case #"combat_state_idle":
       return (0, 1, 0);
   }
 

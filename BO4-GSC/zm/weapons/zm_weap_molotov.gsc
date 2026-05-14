@@ -25,13 +25,13 @@ __main__() {
 function_32766bb7(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(isweapon(weapon)) {
     switch (weapon.name) {
-      case # "molotov_fire_tall":
-      case # "molotov_fire":
-      case # "eq_molotov_extra":
-      case # "molotov_fire_wall":
-      case # "molotov_fire_small":
-      case # "eq_molotov":
-      case # "molotov_steam":
+      case #"molotov_fire_tall":
+      case #"molotov_fire":
+      case #"eq_molotov_extra":
+      case #"molotov_fire_wall":
+      case #"molotov_fire_small":
+      case #"eq_molotov":
+      case #"molotov_steam":
         if(meansofdeath === "MOD_GRENADE") {
           if(self.archetype == #"zombie" && damage <= self.health) {
             return self.health;

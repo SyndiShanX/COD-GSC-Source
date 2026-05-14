@@ -292,10 +292,10 @@ function function_27b4c2be(var_35200797 = 1) {
     foreach(var_6c61edec in var_ba3135be) {
       if(isDefined(var_6c61edec.objectid)) {
         switch (var_6c61edec.objectid) {
-          case # "symbol_back_debris":
-          case # "symbol_back":
-          case # "symbol_front":
-          case # "symbol_front_debris":
+          case #"symbol_back_debris":
+          case #"symbol_back":
+          case #"symbol_front":
+          case #"symbol_front_debris":
             var_6c61edec thread function_214563e(var_35200797, var_6c61edec.objectid);
             break;
           default:
@@ -1314,62 +1314,62 @@ function function_9b7bc715(str_archetype, var_f6e469ad = 1) {
   }
 
   switch (str_archetype) {
-    case # "brutus":
+    case #"brutus":
       level function_e64ac3b6(9, #"hash_512b6a89a741df7e");
       level thread zm_audio::sndannouncerplayvox(#"warden", undefined, undefined, undefined, 1);
       break;
-    case # "catalyst":
+    case #"catalyst":
       level function_e64ac3b6(1, #"hash_451da0cb46417560");
       level thread zm_audio::sndannouncerplayvox(#"catalyst", undefined, undefined, undefined, 1);
       break;
-    case # "catalyst_corrosive":
+    case #"catalyst_corrosive":
       level function_e64ac3b6(1, #"hash_7641ba4524584595");
       level thread zm_audio::sndannouncerplayvox(#"catalyst", undefined, undefined, undefined, 1);
       break;
-    case # "catalyst_electric":
+    case #"catalyst_electric":
       level function_e64ac3b6(1, #"hash_70c3cc5975b6ae66");
       level thread zm_audio::sndannouncerplayvox(#"catalyst", undefined, undefined, undefined, 1);
       break;
-    case # "catalyst_plasma":
+    case #"catalyst_plasma":
       level function_e64ac3b6(1, #"hash_462ab08cca184367");
       level thread zm_audio::sndannouncerplayvox(#"catalyst", undefined, undefined, undefined, 1);
       break;
-    case # "catalyst_water":
+    case #"catalyst_water":
       level function_e64ac3b6(1, #"hash_44038d25e4255a68");
       level thread zm_audio::sndannouncerplayvox(#"catalyst", undefined, undefined, undefined, 1);
       break;
-    case # "stoker":
+    case #"stoker":
       level function_e64ac3b6(2, #"hash_602a33d6118f86cd");
       var_fe5fbf66 = array::random(array(#"stoker", #"incoming_stoker"));
       level thread zm_audio::sndannouncerplayvox(var_fe5fbf66, undefined, undefined, undefined, 1);
       break;
-    case # "blight_father":
+    case #"blight_father":
       level function_e64ac3b6(3, #"hash_32d0a8ef63f997f0");
       var_62af6f1 = array::random(array(#"incoming_blight_father", #"blightfather"));
       level thread zm_audio::sndannouncerplayvox(var_62af6f1, undefined, undefined, undefined, 1);
       break;
-    case # "gladiator":
+    case #"gladiator":
       level function_e64ac3b6(6, #"hash_5883640bac1406cc");
       level thread zm_audio::sndannouncerplayvox(#"incoming_heavy", undefined, undefined, undefined, 1);
       break;
-    case # "gladiator_destroyer":
+    case #"gladiator_destroyer":
       level function_e64ac3b6(6, #"hash_63690aa1bddde5a");
       level thread zm_audio::sndannouncerplayvox(#"destroyer", undefined, undefined, undefined, 1);
       break;
-    case # "gladiator_marauder":
+    case #"gladiator_marauder":
       level function_e64ac3b6(5, #"hash_33dd4b2b1f843b78");
       level thread zm_audio::sndannouncerplayvox(#"marauder", undefined, undefined, undefined, 1);
       break;
-    case # "tiger":
+    case #"tiger":
       level function_e64ac3b6(4, #"hash_767128c196a4a356");
       var_68f478a5 = array::random(array(#"zmb_tigers", #"tigers"));
       level thread zm_audio::sndannouncerplayvox(var_68f478a5, undefined, undefined, undefined, 1);
       break;
-    case # "zombie_dog":
+    case #"zombie_dog":
       level function_e64ac3b6(7, #"hash_75a75e4d68452af4");
       level thread zm_audio::sndannouncerplayvox(#"hellhound", undefined, undefined, undefined, 1);
       break;
-    case # "nova_crawler":
+    case #"nova_crawler":
       level function_e64ac3b6(8, #"hash_60c4c04f5603c612");
       level thread zm_audio::sndannouncerplayvox(#"nova_6", undefined, undefined, undefined, 1);
       break;

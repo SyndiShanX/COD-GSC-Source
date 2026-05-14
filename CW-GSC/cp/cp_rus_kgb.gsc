@@ -165,32 +165,32 @@ function function_39e4a7a9() {
   outfit = "inside_man";
 
   switch (level.skipto_current_objective[0]) {
-    case # "kgb_aslt_entry":
-    case # "kgb_aslt_elev_down":
+    case #"kgb_aslt_entry":
+    case #"kgb_aslt_elev_down":
       outfit = "kgb_officer";
-    case # "kgb_ins_briefing":
-    case # "hash_779fbd44d1ba455":
-    case # "kgb_ins_rv":
-    case # "kgb_ins_prepare":
-    case # "kgb_ins_activation":
-    case # "kgb_ins_tutorial":
-    case # "hash_49b0ecdad010a134":
+    case #"kgb_ins_briefing":
+    case #"hash_779fbd44d1ba455":
+    case #"kgb_ins_rv":
+    case #"kgb_ins_prepare":
+    case #"kgb_ins_activation":
+    case #"kgb_ins_tutorial":
+    case #"hash_49b0ecdad010a134":
       function_9ebc1f37(outfit);
       break;
-    case # "kgb_aslt_bunker_escape":
-    case # "kgb_aslt_vault_breach":
-    case # "kgb_aslt_exfil":
-    case # "kgb_aslt_vault":
-    case # "kgb_aslt_escape_lights_out":
-    case # "kgb_aslt_bunker":
-    case # "kgb_aslt_escape_deploy_gas":
-    case # "kgb_aslt_vault_approach":
+    case #"kgb_aslt_bunker_escape":
+    case #"kgb_aslt_vault_breach":
+    case #"kgb_aslt_exfil":
+    case #"kgb_aslt_vault":
+    case #"kgb_aslt_escape_lights_out":
+    case #"kgb_aslt_bunker":
+    case #"kgb_aslt_escape_deploy_gas":
+    case #"kgb_aslt_vault_approach":
       function_69e3b754(undefined, "kgb_officer_exfil");
       break;
-    case # "kgb_aslt_exfil_escape":
+    case #"kgb_aslt_exfil_escape":
       function_69e3b754(undefined, "kgb_officer_exfil", 1, 1);
       break;
-    case # "hash_798e519e29335c89":
+    case #"hash_798e519e29335c89":
       function_9ebc1f37();
       break;
     default:
@@ -318,17 +318,17 @@ function function_e876a652(var_18cf1709, var_79a934ad = 1) {
   var_6fa12df4 = 0;
 
   switch (var_18cf1709) {
-    case # "inside_man":
+    case #"inside_man":
       self setcharacteroutfit(24);
       var_f846e9bf = 0;
       break;
-    case # "civilian":
+    case #"civilian":
       var_6fa12df4 = 2;
       break;
-    case # "kgb_officer":
+    case #"kgb_officer":
       var_6fa12df4 = 0;
       break;
-    case # "kgb_officer_exfil":
+    case #"kgb_officer_exfil":
       var_6fa12df4 = 1;
       break;
   }

@@ -182,9 +182,9 @@ function function_5ebe8eba(action_name) {
 
   if(self.takedown.body_shield.health > 0) {
     switch (action_name) {
-      case # "body_shield_kill":
+      case #"body_shield_kill":
         return self action_utility::function_fdff1cf3();
-      case # "body_shield_grenade":
+      case #"body_shield_grenade":
         return (self action_utility::function_fdff1cf3() && self function_a02c0e4f(self.var_edbc8698));
     }
   }

@@ -2070,8 +2070,8 @@ function on_ai_spawned() {
   }
 
   switch (self.aitype) {
-    case # "spawner_zm_steiner_split_radiation_bomb":
-    case # "spawner_zm_steiner_split_radiation_blast":
+    case #"spawner_zm_steiner_split_radiation_bomb":
+    case #"spawner_zm_steiner_split_radiation_blast":
       self.var_126d7bef = 1;
       self.ignore_round_spawn_failsafe = 1;
       self.b_ignore_cleanup = 1;

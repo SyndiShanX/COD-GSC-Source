@@ -168,49 +168,49 @@ function_4b227faf() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case # "open_skyscraper_vehicles_arav":
+      case #"open_skyscraper_vehicles_arav":
         var_d5d9cd1 = group;
         break;
-      case # "open_skyscraper_vehicles_atv":
+      case #"open_skyscraper_vehicles_atv":
         var_96bc77ce = group;
         break;
-      case # "open_skyscraper_vehicles_cargo_truck":
+      case #"open_skyscraper_vehicles_cargo_truck":
         var_208aaa54 = group;
         break;
-      case # "open_skyscraper_vehicles_cargo_truck_clearing":
+      case #"open_skyscraper_vehicles_cargo_truck_clearing":
         var_25dfca32 = group;
         break;
-      case # "open_skyscraper_vehicles_heli":
+      case #"open_skyscraper_vehicles_heli":
         var_4b606147 = group;
         break;
-      case # "open_skyscraper_vehicles_heli_clearing":
+      case #"open_skyscraper_vehicles_heli_clearing":
         var_d6662d66 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac":
+      case #"open_skyscraper_vehicles_zodiac":
         var_dc1ea650 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_docks":
+      case #"open_skyscraper_vehicles_zodiac_docks":
         var_707ce24b = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_nuketown":
+      case #"open_skyscraper_vehicles_zodiac_nuketown":
         var_e3ab2d7f = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_hydro_dam":
+      case #"open_skyscraper_vehicles_zodiac_hydro_dam":
         var_169219e9 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_skyscraper":
+      case #"open_skyscraper_vehicles_zodiac_skyscraper":
         var_4bf01581 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_hijacked":
+      case #"open_skyscraper_vehicles_zodiac_hijacked":
         var_993b03f = group;
         break;
-      case # "open_skyscraper_vehicles_muscle_car_hot_pursuit":
+      case #"open_skyscraper_vehicles_muscle_car_hot_pursuit":
         var_5864ac74 = group;
         break;
-      case # "open_skyscraper_vehicles_pbr":
+      case #"open_skyscraper_vehicles_pbr":
         var_25e0e288 = group;
         break;
-      case # "open_skyscraper_vehicles_suv_base":
+      case #"open_skyscraper_vehicles_suv_base":
         var_284a1b99 = group;
         break;
       default:
@@ -346,49 +346,49 @@ function_eef7849() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case # "open_skyscraper_vehicles_arav":
+      case #"open_skyscraper_vehicles_arav":
         var_d5d9cd1 = group;
         break;
-      case # "open_skyscraper_vehicles_atv":
+      case #"open_skyscraper_vehicles_atv":
         var_96bc77ce = group;
         break;
-      case # "open_skyscraper_vehicles_cargo_truck":
+      case #"open_skyscraper_vehicles_cargo_truck":
         var_208aaa54 = group;
         break;
-      case # "open_skyscraper_vehicles_cargo_truck_clearing":
+      case #"open_skyscraper_vehicles_cargo_truck_clearing":
         var_25dfca32 = group;
         break;
-      case # "open_skyscraper_vehicles_heli":
+      case #"open_skyscraper_vehicles_heli":
         var_4b606147 = group;
         break;
-      case # "open_skyscraper_vehicles_heli_clearing":
+      case #"open_skyscraper_vehicles_heli_clearing":
         var_d6662d66 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac":
+      case #"open_skyscraper_vehicles_zodiac":
         var_dc1ea650 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_docks":
+      case #"open_skyscraper_vehicles_zodiac_docks":
         var_707ce24b = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_nuketown":
+      case #"open_skyscraper_vehicles_zodiac_nuketown":
         var_e3ab2d7f = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_hydro_dam":
+      case #"open_skyscraper_vehicles_zodiac_hydro_dam":
         var_169219e9 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_skyscraper":
+      case #"open_skyscraper_vehicles_zodiac_skyscraper":
         var_4bf01581 = group;
         break;
-      case # "open_skyscraper_vehicles_zodiac_hijacked":
+      case #"open_skyscraper_vehicles_zodiac_hijacked":
         var_993b03f = group;
         break;
-      case # "open_skyscraper_vehicles_muscle_car_hot_pursuit":
+      case #"open_skyscraper_vehicles_muscle_car_hot_pursuit":
         var_5864ac74 = group;
         break;
-      case # "open_skyscraper_vehicles_pbr":
+      case #"open_skyscraper_vehicles_pbr":
         var_25e0e288 = group;
         break;
-      case # "open_skyscraper_vehicles_suv_base":
+      case #"open_skyscraper_vehicles_suv_base":
         var_284a1b99 = group;
         break;
       default:
@@ -489,22 +489,22 @@ function_eef7849() {
 
 function_df930125(str_type) {
   switch (str_type) {
-    case # "atv_spawn":
+    case #"atv_spawn":
       return (0, 0, 1);
-    case # "cargo_truck_spawn":
-    case # "cargo_truck_clearing_spawn":
+    case #"cargo_truck_spawn":
+    case #"cargo_truck_clearing_spawn":
       return (1, 0, 1);
-    case # "heli_spawn":
-    case # "heli_clearing_spawn":
+    case #"heli_spawn":
+    case #"heli_clearing_spawn":
       return (1, 0, 0);
-    case # "arav_clearing_spawn":
-    case # "arav_spawn":
+    case #"arav_clearing_spawn":
+    case #"arav_spawn":
       return (0, 1, 1);
-    case # "pbr_spawn":
+    case #"pbr_spawn":
       return (0, 1, 0);
-    case # "muscle_car_spawn":
+    case #"muscle_car_spawn":
       return (1, 1, 0);
-    case # "suv_spawn":
+    case #"suv_spawn":
       return (1, 0, 1);
     default:
       return (1, 0.5, 0);
@@ -603,66 +603,66 @@ function_1221d304() {
 
 function_b2775b52() {
   switch (self.vehicletype) {
-    case # "veh_quad_player_wz_blk":
-    case # "veh_quad_player_wz_blu":
-    case # "veh_quad_player_wz_grn":
-    case # "veh_quad_player_wz_tan":
-    case # "veh_quad_player_wz_red":
+    case #"veh_quad_player_wz_blk":
+    case #"veh_quad_player_wz_blu":
+    case #"veh_quad_player_wz_grn":
+    case #"veh_quad_player_wz_tan":
+    case #"veh_quad_player_wz_red":
       return (0, 0, 1);
-    case # "vehicle_boct_mil_truck_cargo_wz_tan":
-    case # "vehicle_boct_mil_truck_cargo_wz_dark":
-    case # "vehicle_boct_mil_truck_cargo_wz_green":
+    case #"vehicle_boct_mil_truck_cargo_wz_tan":
+    case #"vehicle_boct_mil_truck_cargo_wz_dark":
+    case #"vehicle_boct_mil_truck_cargo_wz_green":
       return (1, 0, 1);
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_grey":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_black":
-    case # "hash_482e864157620248":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_green":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_dark":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_grey":
-    case # "hash_1d37af413f257377":
-    case # "hash_1d37bc413f25898e":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_black":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_grey":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_black":
+    case #"hash_482e864157620248":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_green":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_grey":
+    case #"hash_1d37af413f257377":
+    case #"hash_1d37bc413f25898e":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_black":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_dark":
       return (1, 0, 0);
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_blk":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_gry":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_odg":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_blk":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_gry":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_odg":
       return (1, 0.5, 0);
-    case # "veh_fav_player_wz_blk":
-    case # "veh_fav_player_wz_tan":
-    case # "veh_fav_player_wz_grn":
-    case # "hash_79bf6a7491c80c7":
-    case # "hash_22d9b5a7a0d9dd73":
-    case # "hash_32e4c0a7619f03a9":
+    case #"veh_fav_player_wz_blk":
+    case #"veh_fav_player_wz_tan":
+    case #"veh_fav_player_wz_grn":
+    case #"hash_79bf6a7491c80c7":
+    case #"hash_22d9b5a7a0d9dd73":
+    case #"hash_32e4c0a7619f03a9":
       return (0.501961, 0.501961, 0);
-    case # "vehicle_boct_mil_boat_pbr_wz_tan":
-    case # "vehicle_boct_mil_boat_pbr_wz_grey":
-    case # "vehicle_boct_mil_boat_pbr_wz_green":
-    case # "vehicle_boct_mil_boat_pbr_wz_police":
-    case # "vehicle_boct_mil_boat_pbr_wz_black":
+    case #"vehicle_boct_mil_boat_pbr_wz_tan":
+    case #"vehicle_boct_mil_boat_pbr_wz_grey":
+    case #"vehicle_boct_mil_boat_pbr_wz_green":
+    case #"vehicle_boct_mil_boat_pbr_wz_police":
+    case #"vehicle_boct_mil_boat_pbr_wz_black":
       return (0, 1, 0);
-    case # "veh_suv_player_wz_blk":
-    case # "veh_suv_player_wz_met_gry":
-    case # "veh_suv_player_wz_wht":
-    case # "veh_suv_player_wz_gry":
-    case # "veh_suv_player_private_security_wz":
-    case # "veh_suv_player_police_wz":
+    case #"veh_suv_player_wz_blk":
+    case #"veh_suv_player_wz_met_gry":
+    case #"veh_suv_player_wz_wht":
+    case #"veh_suv_player_wz_gry":
+    case #"veh_suv_player_private_security_wz":
+    case #"veh_suv_player_police_wz":
       return (0, 1, 1);
-    case # "veh_muscle_car_convertible_player_wz_wht":
-    case # "veh_muscle_car_convertible_player_wz_replacer":
-    case # "veh_muscle_car_convertible_player_wz_grn":
-    case # "veh_muscle_car_convertible_player_wz_red":
-    case # "veh_muscle_car_convertible_player_wz_org":
-    case # "veh_muscle_car_convertible_player_wz_blk":
-    case # "veh_muscle_car_convertible_player_wz_bandit_blk":
-    case # "veh_muscle_car_convertible_player_wz_racing_grn":
-    case # "veh_muscle_car_convertible_player_wz_blu":
-    case # "veh_muscle_car_convertible_player_wz_ylw":
-    case # "veh_muscle_car_convertible_player_wz_phantom":
+    case #"veh_muscle_car_convertible_player_wz_wht":
+    case #"veh_muscle_car_convertible_player_wz_replacer":
+    case #"veh_muscle_car_convertible_player_wz_grn":
+    case #"veh_muscle_car_convertible_player_wz_red":
+    case #"veh_muscle_car_convertible_player_wz_org":
+    case #"veh_muscle_car_convertible_player_wz_blk":
+    case #"veh_muscle_car_convertible_player_wz_bandit_blk":
+    case #"veh_muscle_car_convertible_player_wz_racing_grn":
+    case #"veh_muscle_car_convertible_player_wz_blu":
+    case #"veh_muscle_car_convertible_player_wz_ylw":
+    case #"veh_muscle_car_convertible_player_wz_phantom":
       return (0, 1, 1);
-    case # "veh_quad_player_wz_police":
+    case #"veh_quad_player_wz_police":
       return (0.545098, 0.270588, 0.0745098);
     default:
       return (1, 0, 1);

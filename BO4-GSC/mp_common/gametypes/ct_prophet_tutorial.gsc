@@ -1965,33 +1965,33 @@ function_324c6d8c() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "dont_end_off":
+      case #"dont_end_off":
         level.var_94d65b52 = 0;
         break;
-      case # "dont_end_on":
+      case #"dont_end_on":
         level.var_94d65b52 = 1;
         break;
-      case # "kill_player":
+      case #"kill_player":
         e_player dodamage(1000, e_player.origin);
         break;
-      case # "kill_seeker":
+      case #"kill_seeker":
         if(isalive(level.e_seeker_mine)) {
           level.e_seeker_mine dodamage(1000, level.e_seeker_mine.origin);
         }
 
         break;
-      case # "restart_tutorial":
+      case #"restart_tutorial":
         level notify(#"combattraining_logic_finished", {
           #success: 1
         });
         break;
-      case # "hash_71b971bd91ce117a":
+      case #"hash_71b971bd91ce117a":
         e_player function_ede7a778();
         break;
-      case # "hash_71b96fbd91ce0e14":
+      case #"hash_71b96fbd91ce0e14":
         e_player function_969b78e1();
         break;
-      case # "hash_78981e17bb8d3a9d":
+      case #"hash_78981e17bb8d3a9d":
         e_player function_7536db69();
         break;
     }

@@ -288,12 +288,12 @@ function_c40f70df(var_21c1ba1) {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case # "crouch":
+      case #"crouch":
         self setstance("stand");
         println("<dev string:x20d>" + var_21c1ba1 + "<dev string:x248>");
         wait 0.2;
         break;
-      case # "prone":
+      case #"prone":
         self setstance("stand");
         println("<dev string:x20d>" + var_21c1ba1 + "<dev string:x273>");
         wait 1;

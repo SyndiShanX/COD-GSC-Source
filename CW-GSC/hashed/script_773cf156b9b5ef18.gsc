@@ -74,7 +74,7 @@ function function_1f4ed1b4(var_8ced85ea) {
   a_mdls = [];
 
   switch (var_8ced85ea) {
-    case # "post_takedown":
+    case #"post_takedown":
       a_mdls = level function_23128418(a_mdls);
       mdl = getent("hub_mdl_maptable_briefcase_01", "script_noteworthy");
       array::add(a_mdls, mdl);
@@ -129,7 +129,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "post_armada":
+    case #"post_armada":
       a_mdls = level function_23128418(a_mdls);
       mdl = getent("hub_mdl_puddle_01", "script_noteworthy");
       array::add(a_mdls, mdl);
@@ -164,7 +164,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       a_mdls = level function_31d12195(a_mdls);
       post_yamantau_only_models = getEntArray("post_yamantau_only_models", "script_noteworthy");
       a_mdls = arraycombine(a_mdls, post_yamantau_only_models);
@@ -197,7 +197,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_off_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       a_mdls = level function_31d12195(a_mdls);
       hub_mdl_van_01_clip = getEntArray("hub_mdl_van_01_clip", "script_noteworthy");
       a_mdls = arraycombine(a_mdls, hub_mdl_van_01_clip);
@@ -224,7 +224,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       a_mdls = level function_31d12195(a_mdls);
       mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       array::add(a_mdls, mdl);
@@ -249,7 +249,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       a_mdls = level function_31d12195(a_mdls);
       mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       array::add(a_mdls, mdl);
@@ -274,7 +274,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
       array::add(a_mdls, mdl);
       break;
-    case # "dev_burn_safehouse":
+    case #"dev_burn_safehouse":
       a_mdls = level function_31d12195(a_mdls);
       mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       array::add(a_mdls, mdl);

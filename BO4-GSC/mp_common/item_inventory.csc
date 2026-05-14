@@ -797,10 +797,10 @@ function_d1e6731e(localclientnum) {
       data = item_world::function_a7e98a1a(localclientnum);
 
       switch (currentitem.itementry.itemtype) {
-        case # "equipment":
+        case #"equipment":
           swap = 1;
           break;
-        case # "health":
+        case #"health":
           swap = 1;
           break;
         default:
@@ -815,11 +815,11 @@ function_d1e6731e(localclientnum) {
       continue;
     } else {
       switch (currentitem.itementry.itemtype) {
-        case # "equipment":
+        case #"equipment":
           equipdata = 1;
-        case # "health":
+        case #"health":
           equipdata = 1;
-        case # "weapon":
+        case #"weapon":
           equipdata = 1;
           break;
       }
@@ -1814,7 +1814,7 @@ function_a243ddd6(localclientnum, itementry) {
   data = item_world::function_a7e98a1a(localclientnum);
 
   switch (itementry.itemtype) {
-    case # "attachment":
+    case #"attachment":
       slotid = function_1415f8f1(localclientnum, itementry);
 
       if(!isDefined(slotid)) {
@@ -1822,20 +1822,20 @@ function_a243ddd6(localclientnum, itementry) {
       }
 
       return (data.inventory.items[slotid].networkid == 32767);
-    case # "armor":
+    case #"armor":
       return (data.inventory.items[11].networkid == 32767);
-    case # "backpack":
+    case #"backpack":
       return (data.inventory.items[13].networkid == 32767);
-    case # "equipment":
+    case #"equipment":
       return (data.inventory.items[12].networkid == 32767);
-    case # "health":
+    case #"health":
       return (data.inventory.items[10].networkid == 32767);
-    case # "weapon":
+    case #"weapon":
       return (data.inventory.items[16 + 1].networkid == 32767 || data.inventory.items[16 + 1 + 6 + 1].networkid == 32767);
-    case # "ammo":
-    case # "generic":
-    case # "killstreak":
-    case # "cash":
+    case #"ammo":
+    case #"generic":
+    case #"killstreak":
+    case #"cash":
     default:
       return false;
   }
@@ -1866,23 +1866,23 @@ function_78ed4455(localclientnum, itementry) {
   data = item_world::function_a7e98a1a(localclientnum);
 
   switch (itementry.itemtype) {
-    case # "armor":
+    case #"armor":
       return 11;
-    case # "backpack":
+    case #"backpack":
       return 13;
-    case # "equipment":
+    case #"equipment":
       if(data.inventory.items[12].networkid == 32767) {
         return 12;
       }
 
       break;
-    case # "health":
+    case #"health":
       if(data.inventory.items[10].networkid == 32767) {
         return 10;
       }
 
       break;
-    case # "weapon":
+    case #"weapon":
       if(data.inventory.items[16 + 1].networkid == 32767) {
         return (16 + 1);
       } else if(data.inventory.items[16 + 1 + 6 + 1].networkid == 32767) {
@@ -2637,34 +2637,34 @@ function_b1136fc8(localclientnum, item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         playSound(localclientnum, #"fly_drop_weapon", item.origin);
         break;
-      case # "ammo":
+      case #"ammo":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "health":
+      case #"health":
         playSound(localclientnum, #"fly_drop_health", item.origin);
         break;
-      case # "equipment":
+      case #"equipment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "armor":
+      case #"armor":
         playSound(localclientnum, #"fly_drop_armor", item.origin);
         break;
-      case # "backpack":
+      case #"backpack":
         playSound(localclientnum, #"fly_drop_backpack", item.origin);
         break;
-      case # "attachment":
+      case #"attachment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "quest":
+      case #"quest":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "generic":
+      case #"generic":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "cash":
+      case #"cash":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
     }
@@ -2679,34 +2679,34 @@ function_31868137(localclientnum, item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         playSound(localclientnum, #"fly_pickup_weapon", item.origin);
         break;
-      case # "ammo":
+      case #"ammo":
         playSound(localclientnum, #"fly_pickup_ammo", item.origin);
         break;
-      case # "health":
+      case #"health":
         playSound(localclientnum, #"fly_pickup_health", item.origin);
         break;
-      case # "equipment":
+      case #"equipment":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "armor":
+      case #"armor":
         playSound(localclientnum, #"fly_pickup_armor", item.origin);
         break;
-      case # "backpack":
+      case #"backpack":
         playSound(localclientnum, #"fly_pickup_backpack", item.origin);
         break;
-      case # "attachment":
+      case #"attachment":
         playSound(localclientnum, #"fly_pickup_attachment", item.origin);
         break;
-      case # "quest":
+      case #"quest":
         playSound(localclientnum, #"hash_5738a0fcb2e4efca", item.origin);
         break;
-      case # "generic":
+      case #"generic":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "cash":
+      case #"cash":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
     }

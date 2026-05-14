@@ -248,7 +248,7 @@ function function_3adc69b0(localclientnum = 0) {
     waitresult = level waittill("CollectibleInspect" + localclientnum, #"collectibleinspect");
 
     switch (waitresult.event_name) {
-      case # "start":
+      case #"start":
         if(isDefined(waitresult.origin) && isstring(waitresult.origin)) {
           waitresult.origin = function_5128ed40(waitresult.origin);
         }
@@ -259,10 +259,10 @@ function function_3adc69b0(localclientnum = 0) {
 
         function_98095ab5(localclientnum, waitresult.origin, waitresult.angle, waitresult.var_447b7d9b, waitresult.var_4c987939);
         break;
-      case # "update_model":
+      case #"update_model":
         function_159ea549(waitresult.var_53008658, waitresult.is_hidden);
         break;
-      case # "update_settings":
+      case #"update_settings":
         if(isDefined(waitresult.origin) && isstring(waitresult.origin)) {
           waitresult.origin = function_5128ed40(waitresult.origin);
         }
@@ -273,7 +273,7 @@ function function_3adc69b0(localclientnum = 0) {
 
         function_24de0369(waitresult.origin, waitresult.angle, waitresult.var_447b7d9b, waitresult.var_4c987939);
         break;
-      case # "stop":
+      case #"stop":
         function_fdff8886();
         break;
     }

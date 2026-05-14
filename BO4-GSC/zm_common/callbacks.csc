@@ -94,10 +94,10 @@ entityspawned(localclientnum) {
     }
 
     switch (self.weapon.name) {
-      case # "eq_acid_bomb":
+      case #"eq_acid_bomb":
         self thread acid_bomb::spawned(localclientnum);
         break;
-      case # "sticky_grenade":
+      case #"sticky_grenade":
         self thread sticky_grenade::spawned(localclientnum);
         break;
     }

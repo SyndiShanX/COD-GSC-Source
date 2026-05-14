@@ -1093,31 +1093,31 @@ function function_d24432a4(state) {
   str_alias = undefined;
 
   switch (state) {
-    case # "cap_war_percent_0":
+    case #"cap_war_percent_0":
       str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
-    case # "cap_war_percent_25":
+    case #"cap_war_percent_25":
       str_alias = #"hash_1c5192b85675532d";
       n_waittime = 2.5;
       break;
-    case # "cap_war_percent_50":
+    case #"cap_war_percent_50":
       str_alias = #"hash_1c5192b85675532d";
       n_waittime = 1.25;
       break;
-    case # "cap_war_percent_75":
+    case #"cap_war_percent_75":
       str_alias = #"hash_1c5191b85675517a";
       n_waittime = 1.25;
       break;
-    case # "cap_war_percent_90":
+    case #"cap_war_percent_90":
       str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
-    case # "cap_war_draining":
+    case #"cap_war_draining":
       str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
-    case # "cap_war_contested":
+    case #"cap_war_contested":
       str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;

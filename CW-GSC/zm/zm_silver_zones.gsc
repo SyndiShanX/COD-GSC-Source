@@ -192,59 +192,59 @@ function function_27028b8e(str_zone) {
   }
 
   switch (str_zone) {
-    case # "zone_proto_start2":
-    case # "zone_proto_start":
+    case #"zone_proto_start2":
+    case #"zone_proto_start":
       str_display = #"hash_5dec24fd79fe88e4";
       break;
-    case # "zone_proto_upstairs":
+    case #"zone_proto_upstairs":
       str_display = #"hash_1883157e3a8c1bcf";
       break;
-    case # "zone_proto_interior_cave":
+    case #"zone_proto_interior_cave":
       str_display = #"hash_3b12520037a181";
       break;
-    case # "zone_proto_interior_lower":
+    case #"zone_proto_interior_lower":
       str_display = #"hash_48fcaccdc583f88a";
       break;
-    case # "zone_proto_upstairs_2":
+    case #"zone_proto_upstairs_2":
       str_display = #"hash_58e5493c26a40efd";
       break;
-    case # "zone_proto_roof_plane":
-    case # "zone_proto_roof_center":
+    case #"zone_proto_roof_plane":
+    case #"zone_proto_roof_center":
       str_display = #"hash_29459d2873e524e";
       break;
-    case # "zone_proto_plane_exterior":
-    case # "zone_proto_plane_exterior2":
+    case #"zone_proto_plane_exterior":
+    case #"zone_proto_plane_exterior2":
       str_display = #"hash_621ea24bd69a239";
       break;
-    case # "zone_proto_exterior_rear":
-    case # "zone_proto_exterior_rear2":
+    case #"zone_proto_exterior_rear":
+    case #"zone_proto_exterior_rear2":
       str_display = #"hash_3b327c1463ec9f8d";
       break;
-    case # "zone_tunnel_interior":
+    case #"zone_tunnel_interior":
       str_display = #"hash_32b5142fe11acb26";
       break;
-    case # "zone_power_room":
-    case # "zone_power_room_outside":
-    case # "zone_power_trans_north":
-    case # "zone_power_trans_south":
+    case #"zone_power_room":
+    case #"zone_power_room_outside":
+    case #"zone_power_trans_north":
+    case #"zone_power_trans_south":
       str_display = #"hash_3f356cdd2bb6e576";
       break;
-    case # "zone_trans_north_pap_room":
-    case # "zone_trans_north":
+    case #"zone_trans_north_pap_room":
+    case #"zone_trans_north":
       str_display = #"hash_3e51b8ba7a93fbe";
       break;
-    case # "zone_trans_south_pap_room":
-    case # "zone_trans_south":
-    case # "zone_trans_south_tunnel":
+    case #"zone_trans_south_pap_room":
+    case #"zone_trans_south":
+    case #"zone_trans_south_tunnel":
       str_display = #"hash_7988e17f66389e69";
       break;
-    case # "zone_center_upper_west":
-    case # "zone_center_lower":
-    case # "zone_center_upper_north":
-    case # "zone_center_upper":
+    case #"zone_center_upper_west":
+    case #"zone_center_lower":
+    case #"zone_center_upper_north":
+    case #"zone_center_upper":
       str_display = #"hash_57edcb7278524c75";
       break;
-    case # "zone_power_tunnel":
+    case #"zone_power_tunnel":
       str_display = #"hash_75f7127232f283bb";
       break;
     default:

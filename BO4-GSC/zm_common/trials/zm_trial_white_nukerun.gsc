@@ -87,10 +87,10 @@ nuke_loop() {
     str_zone = zone.name;
 
     switch (str_zone) {
-      case # "zone_street_start":
+      case #"zone_street_start":
         str_zone = "zone_street2";
         break;
-      case # "zone_street_mid":
+      case #"zone_street_mid":
         str_zone = "zone_street1";
         break;
     }

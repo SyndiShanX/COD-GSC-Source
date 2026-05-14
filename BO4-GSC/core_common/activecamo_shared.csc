@@ -281,12 +281,12 @@ update_active_camo(localclientnum, weapon, tagname, stagenum, impulse, var_d71e8
 
         if(isDefined(weapon)) {
           switch (weapon.weapclass) {
-            case # "rocketlauncher":
-            case # "mg":
-            case # "rifle":
+            case #"rocketlauncher":
+            case #"mg":
+            case #"rifle":
               fx = stage.var_69896523;
               break;
-            case # "pistol":
+            case #"pistol":
               fx = stage.var_bafc7841;
               break;
             default:

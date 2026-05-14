@@ -371,25 +371,25 @@ function function_4b09eae1() {
   self val::set("chopper_attack", "ignoreme", 1);
 
   switch (self.script_noteworthy) {
-    case # "hash_194f7fca3276c659":
+    case #"hash_194f7fca3276c659":
       self thread function_7538985e();
       self thread function_d559f227("village_heli_kill_guy_01");
       break;
-    case # "hash_194f7cca3276c140":
+    case #"hash_194f7cca3276c140":
       self thread function_7538985e();
       self thread function_d559f227("village_heli_kill_guy_02");
       break;
-    case # "hash_194f7dca3276c2f3":
+    case #"hash_194f7dca3276c2f3":
       self thread function_7538985e();
       self thread function_d559f227("village_heli_kill_guy_03");
       break;
-    case # "hash_194f82ca3276cb72":
+    case #"hash_194f82ca3276cb72":
       self thread function_d559f227("village_heli_kill_guy_04");
       break;
-    case # "hash_194f83ca3276cd25":
+    case #"hash_194f83ca3276cd25":
       self thread function_d559f227("village_heli_kill_guy_05");
       break;
-    case # "hash_194f80ca3276c80c":
+    case #"hash_194f80ca3276c80c":
       self thread function_7538985e();
       self thread function_d559f227("village_heli_kill_guy_06");
       break;

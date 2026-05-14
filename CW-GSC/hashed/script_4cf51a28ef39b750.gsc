@@ -98,22 +98,22 @@ function function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
   } else {
     switch (self.stub.script_string) {
-      case # "hash_63156dac534aede7":
+      case #"hash_63156dac534aede7":
         hint_string = #"hash_1b5d024264e26e98";
         break;
-      case # "hash_15d6fece382a5cbe":
+      case #"hash_15d6fece382a5cbe":
         hint_string = #"hash_19ae69436c39da09";
         break;
-      case # "fasttravel_loc_crash_site_down":
+      case #"fasttravel_loc_crash_site_down":
         hint_string = #"hash_3be004aaa3ef2edd";
         break;
-      case # "hash_2b732b2cff505c84":
+      case #"hash_2b732b2cff505c84":
         hint_string = #"hash_5a1913d1fec350f9";
         break;
-      case # "hash_5af6096260ab857c":
+      case #"hash_5af6096260ab857c":
         hint_string = #"hash_5c514164da699bed";
         break;
-      case # "fasttravel_loc_pond_down":
+      case #"fasttravel_loc_pond_down":
         hint_string = #"hash_5de92cc1bf44a38a";
         break;
       default:

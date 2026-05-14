@@ -85,10 +85,10 @@ function function_47b8b88() {
   self thread namespace_78e9b80::function_15eaa2db(undefined, undefined, "flg_player_approach_flashback_tv", "flg_player_not_near_flashback_tv", "flashback_tv_lookat", "flashback_tv_screen", "flashback_tv_light", #"hash_1dbc4e0cabb8c63f");
 
   switch (level.var_b28c2c3a) {
-    case # "ride":
-    case # "church":
-    case # "no_game":
-    case # "plaza":
+    case #"ride":
+    case #"church":
+    case #"no_game":
+    case #"plaza":
       self hms_util::function_2e7c81f6(#"sniper_standard_t9", #"pistol_semiauto_t9", #"frag_grenade", #"eq_flash_grenade");
       break;
     default:

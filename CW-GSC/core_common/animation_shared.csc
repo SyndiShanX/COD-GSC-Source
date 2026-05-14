@@ -271,16 +271,16 @@ function handle_notetracks() {
 
 function cracks_on(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       cf_cracks_on(self.localclientnum, 0, 1);
       break;
-    case # "green":
+    case #"green":
       cf_cracks_on(self.localclientnum, 0, 3);
       break;
-    case # "blue":
+    case #"blue":
       cf_cracks_on(self.localclientnum, 0, 2);
       break;
-    case # "all":
+    case #"all":
       cf_cracks_on(self.localclientnum, 0, 4);
       break;
   }
@@ -288,16 +288,16 @@ function cracks_on(str_type) {
 
 function cracks_off(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       cf_cracks_off(self.localclientnum, 0, 1);
       break;
-    case # "green":
+    case #"green":
       cf_cracks_off(self.localclientnum, 0, 3);
       break;
-    case # "blue":
+    case #"blue":
       cf_cracks_off(self.localclientnum, 0, 2);
       break;
-    case # "all":
+    case #"all":
       cf_cracks_off(self.localclientnum, 0, 4);
       break;
   }

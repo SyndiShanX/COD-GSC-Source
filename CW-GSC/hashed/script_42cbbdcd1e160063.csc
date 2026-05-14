@@ -505,43 +505,43 @@ function function_d8c789b8(localclientnum, name, tag) {
   self thread function_a65eebe3(name);
 
   switch (tag) {
-    case # "annhilate":
+    case #"annhilate":
       self annihilate(name);
       break;
-    case # "gut_explode":
+    case #"gut_explode":
       self zombie_gut_explosion(name);
       break;
-    case # "saw_explode":
+    case #"saw_explode":
       self function_e5d3c2b4(name);
       break;
-    case # "boost_explode":
+    case #"boost_explode":
       self function_96d7f2e2(name);
       break;
-    case # "delay_explode":
+    case #"delay_explode":
       self zombie_wait_explode(name);
       break;
-    case # "burn_zombie":
+    case #"burn_zombie":
       self function_8fd3b08d(name, undefined);
       break;
-    case # "zombie_chunk":
+    case #"zombie_chunk":
       self zombie_chunk(name);
       break;
-    case # "ai_blood_riser":
+    case #"ai_blood_riser":
       playFX(name, level._effect[#"hash_2ba7079a15be757c"], self.origin);
       wait 0.25;
       playFX(name, level._effect[#"hash_7207b019e119bc7d"], self.origin);
       break;
-    case # "ai_zombie_riser":
+    case #"ai_zombie_riser":
       playFX(name, level._effect[#"hash_4dd7773ae2a48977"], self.origin);
       wait 0.25;
       playFX(name, level._effect[#"hash_4f9dc73a09ccac6c"], self.origin);
       break;
-    case # "pole_zombie_elecburst":
+    case #"pole_zombie_elecburst":
       currentangle = randomint(360);
       var_5ccd914d = rotatepointaroundaxis((1, 0, 0), (0, 0, 1), currentangle);
       playFX(name, level._effect[#"pole_zombie_elecburst"], self.origin, var_5ccd914d, (0, 0, 1));
       break;
-    case # "hash_2488c7de86684bbd":
+    case #"hash_2488c7de86684bbd":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);
@@ -555,17 +555,17 @@ function function_d8c789b8(localclientnum, name, tag) {
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_wrist_le");
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = util::playFXOnTag(name, level._effect[#"hash_2fbce616d1238481"], self, "j_wrist_ri");
       break;
-    case # "shadow_appear":
+    case #"shadow_appear":
       playFX(name, level._effect[#"shadow_appear"], self.origin);
       playFX(name, level._effect[#"shadow_rez_in"], self.origin);
       playFX(name, level._effect[#"shadow_emerge"], self.origin);
       break;
-    case # "shadow_die":
+    case #"shadow_die":
       playFX(name, level._effect[#"shadow_fade"], self.origin);
       playFX(name, level._effect[#"heart_explode"], self.origin);
       playFX(name, level._effect[#"hash_7fb19df63df2dd4c"], self.origin);
       break;
-    case # "hazard_electric_trap_active":
+    case #"hazard_electric_trap_active":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);
@@ -576,8 +576,8 @@ function function_d8c789b8(localclientnum, name, tag) {
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = playFX(name, level._effect[tag], self.origin + (0, 0, 100));
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = playFX(name, level._effect[#"hash_4c83639bb82942d8"], self.origin + (0, 0, 124));
       break;
-    case # "hazard_electric_trap_red":
-    case # "hazard_electric_trap_green":
+    case #"hazard_electric_trap_red":
+    case #"hazard_electric_trap_green":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);
@@ -587,7 +587,7 @@ function function_d8c789b8(localclientnum, name, tag) {
       self.var_a7bcf699[tag] = [];
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = playFX(name, level._effect[tag], self.origin + (0, 0, 124));
       break;
-    case # "skel_stomp_impact":
+    case #"skel_stomp_impact":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);
@@ -597,7 +597,7 @@ function function_d8c789b8(localclientnum, name, tag) {
       self.var_a7bcf699[tag] = [];
       self.var_a7bcf699[tag][self.var_a7bcf699[tag].size] = playFX(name, level._effect[tag], self gettagorigin("j_ball_ri"));
       break;
-    case # "crab_bubbles":
+    case #"crab_bubbles":
       if(isDefined(self.var_a7bcf699[tag])) {
         foreach(fx in self.var_a7bcf699[tag]) {
           stopfx(name, fx);

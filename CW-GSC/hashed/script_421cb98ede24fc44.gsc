@@ -54,19 +54,19 @@ function function_a8fc3bf1(s_info) {
       assert(isDefined(self.str_location), "<dev string:x38>");
 
       switch (self.str_location) {
-        case # "hash_615b4319c8177682":
+        case #"hash_615b4319c8177682":
           e_player clientfield::set_to_player("ice_slide_looping_fx", 1);
           e_player thread clientfield::set_to_player("ice_slide_dof", 1);
           break;
-        case # "server_reveal":
+        case #"server_reveal":
           e_player clientfield::set_to_player("ice_slide_looping_fx", 1);
           e_player thread clientfield::set_to_player("ice_slide_dof", 1);
           break;
-        case # "server_descent":
+        case #"server_descent":
           e_player clientfield::set_to_player("ice_slide_looping_fx", 1);
           e_player thread clientfield::set_to_player("ice_slide_dof", 2);
           break;
-        case # "amerika":
+        case #"amerika":
           e_player clientfield::set_to_player("ice_slide_looping_fx", 2);
           e_player thread clientfield::set_to_player("ice_slide_dof", 2);
           break;
@@ -93,12 +93,12 @@ function function_a8fc3bf1(s_info) {
         e_player thread clientfield::set_to_player("ice_slide_fov", 0);
 
         switch (self.str_location) {
-          case # "server_reveal":
+          case #"server_reveal":
             e_player thread clientfield::set_to_player("ice_slide_dof", 3);
             break;
-          case # "hash_615b4319c8177682":
-          case # "server_descent":
-          case # "amerika":
+          case #"hash_615b4319c8177682":
+          case #"server_descent":
+          case #"amerika":
             e_player thread clientfield::set_to_player("ice_slide_dof", 4);
             break;
           default:
@@ -108,10 +108,10 @@ function function_a8fc3bf1(s_info) {
 
         if(is_true(self.var_5739c21f) && isDefined(self.var_51e34a4e)) {
           switch (self.var_51e34a4e) {
-            case # "ice":
+            case #"ice":
               exploder::exploder("first_slide_impact");
               break;
-            case # "dirt":
+            case #"dirt":
               e_player clientfield::increment_to_player("ice_slide_landing_fx_dirt", 1);
               break;
             default:
@@ -149,11 +149,11 @@ function function_803405ff() {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case # "stand":
+    case #"stand":
       self setstance("crouch");
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       self setstance("crouch");
       wait 1;
       break;

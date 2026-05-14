@@ -2515,13 +2515,13 @@ function function_eedaefc(attacker, einflictor, weapon, smeansofdeath, shitloc) 
   }
 
   switch (weapon.name) {
-    case # "dog_bite":
+    case #"dog_bite":
       smeansofdeath = "MOD_PISTOL_BULLET";
       break;
-    case # "destructible_car":
+    case #"destructible_car":
       smeansofdeath = "MOD_EXPLOSIVE";
       break;
-    case # "explodable_barrel":
+    case #"explodable_barrel":
       smeansofdeath = "MOD_EXPLOSIVE";
       break;
   }

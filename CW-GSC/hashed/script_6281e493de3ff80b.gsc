@@ -261,13 +261,13 @@ function private margwashouldshowpain(entity) {
     headinfo = entity.head[entity.headdestroyed];
 
     switch (headinfo.cf) {
-      case # "margwa_head_left":
+      case #"margwa_head_left":
         self setblackboardattribute("_margwa_head", "left");
         break;
-      case # "margwa_head_mid":
+      case #"margwa_head_mid":
         self setblackboardattribute("_margwa_head", "middle");
         break;
-      case # "margwa_head_right":
+      case #"margwa_head_right":
         self setblackboardattribute("_margwa_head", "right");
         break;
     }
@@ -378,16 +378,16 @@ function private margwatraverseactionstart(entity) {
   if(isDefined(entity.traversestartnode.animscript)) {
     if(entity function_b92d6daa()) {
       switch (entity.traversestartnode.animscript) {
-        case # "jump_down_36":
+        case #"jump_down_36":
           entity clientfield::set("margwa_jaw", 21);
           break;
-        case # "jump_down_96":
+        case #"jump_down_96":
           entity clientfield::set("margwa_jaw", 22);
           break;
-        case # "jump_up_36":
+        case #"jump_up_36":
           entity clientfield::set("margwa_jaw", 24);
           break;
-        case # "jump_up_96":
+        case #"jump_up_96":
           entity clientfield::set("margwa_jaw", 25);
           break;
       }
@@ -402,13 +402,13 @@ function private margwapainstart(entity) {
     head = self getblackboardattribute("_margwa_head");
 
     switch (head) {
-      case # "left":
+      case #"left":
         entity clientfield::set("margwa_jaw", 3);
         break;
-      case # "middle":
+      case #"middle":
         entity clientfield::set("margwa_jaw", 4);
         break;
-      case # "right":
+      case #"right":
         entity clientfield::set("margwa_jaw", 5);
         break;
     }
@@ -563,7 +563,7 @@ function private function_195ee8be(headmodel, var_755136c1) {
   self.head[model].smash = 3;
 
   switch (headmodel) {
-    case # "c_zom_margwa_chunks_le":
+    case #"c_zom_margwa_chunks_le":
       self.head[model].cf = "margwa_head_left";
       self.head[model].var_2d048cdf = "margwa_head_left_hit";
       self.head[model].gore = "c_zom_margwa_gore_le";
@@ -575,7 +575,7 @@ function private function_195ee8be(headmodel, var_755136c1) {
       self.head[model].var_d3879c8e = 1;
       self.var_94be3b8e = model;
       break;
-    case # "c_zom_margwa_chunks_mid":
+    case #"c_zom_margwa_chunks_mid":
       self.head[model].cf = "margwa_head_mid";
       self.head[model].var_2d048cdf = "margwa_head_mid_hit";
       self.head[model].gore = "c_zom_margwa_gore_mid";
@@ -587,7 +587,7 @@ function private function_195ee8be(headmodel, var_755136c1) {
       self.head[model].var_d3879c8e = 2;
       self.var_a0986652 = model;
       break;
-    case # "c_zom_margwa_chunks_ri":
+    case #"c_zom_margwa_chunks_ri":
       self.head[model].cf = "margwa_head_right";
       self.head[model].var_2d048cdf = "margwa_head_right_hit";
       self.head[model].gore = "c_zom_margwa_gore_ri";
@@ -835,14 +835,14 @@ function function_239ee36(inflictor, attacker, damage, dflags, mod, weapon, var_
 
 function private function_102d7140(entity, partname) {
   switch (partname) {
-    case # "j_chunk_head_bone_le":
-    case # "j_jaw_lower_1_le":
+    case #"j_chunk_head_bone_le":
+    case #"j_jaw_lower_1_le":
       return self.var_94be3b8e;
-    case # "j_jaw_lower_1":
-    case # "j_chunk_head_bone":
+    case #"j_jaw_lower_1":
+    case #"j_chunk_head_bone":
       return self.var_a0986652;
-    case # "j_chunk_head_bone_ri":
-    case # "j_jaw_lower_1_ri":
+    case #"j_chunk_head_bone_ri":
+    case #"j_jaw_lower_1_ri":
       return self.var_a285d7da;
   }
 

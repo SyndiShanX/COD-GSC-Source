@@ -140,10 +140,10 @@ death_check_for_challenge_updates(e_attacker) {
   var_7050de53 = w_damage.inventorytype;
 
   switch (w_damage.inventorytype) {
-    case # "dwlefthand":
+    case #"dwlefthand":
       w_damage = w_damage.dualwieldweapon;
       break;
-    case # "primary":
+    case #"primary":
       if(!e_attacker playerads()) {
         e_attacker contracts::increment_zm_contract(#"hash_35f2db5e4f5935be");
       }
@@ -155,7 +155,7 @@ death_check_for_challenge_updates(e_attacker) {
 
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
 
         e_attacker debug_print("<dev string:x134>");
 
@@ -166,7 +166,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"contract_zm_heavy_kills");
         break;
-      case # "miniboss":
+      case #"miniboss":
 
         e_attacker debug_print("<dev string:x158>");
 
@@ -177,7 +177,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"contract_zm_miniboss_kills");
         break;
-      case # "popcorn":
+      case #"popcorn":
 
         e_attacker debug_print("<dev string:x17f>");
 
@@ -187,7 +187,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker contracts::increment_zm_contract(#"contract_zm_vermin_kills");
         break;
-      case # "enhanced":
+      case #"enhanced":
         e_attacker thread activecamo::function_896ac347(w_damage, #"take_it_personally", 1);
         e_attacker thread activecamo::function_896ac347(w_damage, #"enhanced_kills", 1);
         break;
@@ -195,7 +195,7 @@ death_check_for_challenge_updates(e_attacker) {
   }
 
   switch (self.archetype) {
-    case # "catalyst":
+    case #"catalyst":
 
       e_attacker debug_print("<dev string:x1a4>");
 
@@ -297,7 +297,7 @@ death_check_for_challenge_updates(e_attacker) {
 
   if(isDefined(level.zombie_weapons[w_stat])) {
     switch (level.zombie_weapons[w_stat].weapon_classname) {
-      case # "ar":
+      case #"ar":
 
         e_attacker debug_print("<dev string:x364>");
 
@@ -305,7 +305,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker zm_stats::function_c0c6ab19(#"kills_ar");
         e_attacker contracts::increment_zm_contract(#"contract_zm_ar_kills");
         break;
-      case # "lmg":
+      case #"lmg":
 
         e_attacker debug_print("<dev string:x385>");
 
@@ -313,7 +313,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker zm_stats::function_c0c6ab19(#"kills_lmg");
         e_attacker contracts::increment_zm_contract(#"contract_zm_lmg_kills");
         break;
-      case # "pistol":
+      case #"pistol":
 
         e_attacker debug_print("<dev string:x3a7>");
 
@@ -321,10 +321,10 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker zm_stats::function_c0c6ab19(#"kills_pistol");
         e_attacker contracts::increment_zm_contract(#"contract_zm_pistol_kills");
         break;
-      case # "shotgun":
+      case #"shotgun":
         e_attacker shotgun_kill();
         break;
-      case # "smg":
+      case #"smg":
 
         e_attacker debug_print("<dev string:x3cc>");
 
@@ -332,7 +332,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker zm_stats::function_c0c6ab19(#"kills_smg");
         e_attacker contracts::increment_zm_contract(#"contract_zm_smg_kills");
         break;
-      case # "sniper":
+      case #"sniper":
 
         e_attacker debug_print("<dev string:x3ee>");
 
@@ -340,7 +340,7 @@ death_check_for_challenge_updates(e_attacker) {
         e_attacker zm_stats::function_c0c6ab19(#"hash_2333d2f2b7271a56");
         e_attacker contracts::increment_zm_contract(#"contract_zm_sniper_kills");
         break;
-      case # "tr":
+      case #"tr":
 
         e_attacker debug_print("<dev string:x413>");
 

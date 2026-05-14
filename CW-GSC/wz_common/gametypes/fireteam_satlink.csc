@@ -124,11 +124,11 @@ function private function_bb2f717e(localclientnum) {
 function private function_e99f251a(localclientnum, itementry) {
   if(itementry.itemtype == #"generic") {
     switch (itementry.name) {
-      case # "armor_pouch_item_t9":
+      case #"armor_pouch_item_t9":
         return (self clientfield::get_player_uimodel("hudItems.armorPlateMaxCarry") != 10);
-      case # "hash_b8b2580ac5556e1":
+      case #"hash_b8b2580ac5556e1":
         return (self clientfield::get_player_uimodel("hud_items.selfReviveAvailable") == 0);
-      case # "satlink_battery_large_item_t9":
+      case #"satlink_battery_large_item_t9":
         return (self clientfield::get_player_uimodel("hudItems.carryingLargeBattery") == 0);
     }
 

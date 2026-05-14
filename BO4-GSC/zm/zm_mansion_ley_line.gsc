@@ -499,20 +499,20 @@ ring_rotate(str_pos, s_ring, b_starting = 1) {
   }
 
   switch (str_pos) {
-    case # "outer":
+    case #"outer":
       level.mdl_ring_inner.e_linkto rotatepitch(var_6c4c2561, n_move_time);
       level.mdl_ring_middle.e_linkto rotateroll(n_rot, n_move_time);
       level.mdl_ring_outer.e_linkto rotatepitch(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aff0a0342673");
       level.mdl_ring_outer.e_linkto waittilltimeout(n_move_time, #"rotatedone");
       break;
-    case # "middle":
+    case #"middle":
       level.mdl_ring_outer.e_linkto rotatepitch(var_6c4c2561, n_move_time);
       level.mdl_ring_middle.e_linkto rotateroll(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aef0a03424c0");
       level.mdl_ring_middle.e_linkto waittilltimeout(n_move_time, #"rotatedone");
       break;
-    case # "inner":
+    case #"inner":
       level.mdl_ring_middle.e_linkto rotateroll(var_6c4c2561, n_move_time);
       level.mdl_ring_inner.e_linkto rotatepitch(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aef0a03424c0");

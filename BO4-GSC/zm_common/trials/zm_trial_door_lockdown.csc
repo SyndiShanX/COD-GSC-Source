@@ -36,13 +36,13 @@ zm_trial_door_lockdown(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     v_forward = anglesToForward(self.angles);
 
     switch (self.model) {
-      case # "collision_player_wall_64x64x10":
+      case #"collision_player_wall_64x64x10":
         var_b1e1a2db = level._effect[#"door_blocker_64"];
         break;
-      case # "collision_player_wall_128x128x10":
+      case #"collision_player_wall_128x128x10":
         var_b1e1a2db = level._effect[#"door_blocker_128"];
         break;
-      case # "collision_player_wall_256x256x10":
+      case #"collision_player_wall_256x256x10":
         var_b1e1a2db = level._effect[#"door_blocker_256"];
         break;
       default:

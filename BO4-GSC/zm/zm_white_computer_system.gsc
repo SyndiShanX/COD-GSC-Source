@@ -252,7 +252,7 @@ function_f359c8a0(s_key, e_player) {
   level.var_f13364b4.var_12633dc5 = e_player;
 
   switch (s_key.script_string) {
-    case # "number":
+    case #"number":
       if(level.var_f13364b4.var_b1e1ac14 >= 4) {
         iprintlnbold("<dev string:x38>");
 
@@ -273,7 +273,7 @@ function_f359c8a0(s_key, e_player) {
       level.var_18f1ca6e thread function_450060dd();
       level.var_18f1ca6e.is_idling = 0;
       break;
-    case # "enter":
+    case #"enter":
       if(level.var_f13364b4.var_b1e1ac14 < 4) {
         iprintlnbold("<dev string:x75>" + level.var_f13364b4.var_d7813dfd[0] + level.var_f13364b4.var_d7813dfd[1] + level.var_f13364b4.var_d7813dfd[2] + level.var_f13364b4.var_d7813dfd[3]);
 
@@ -287,7 +287,7 @@ function_f359c8a0(s_key, e_player) {
       function_cd7e0989(n_code);
       level thread reset_computer();
       break;
-    case # "clear":
+    case #"clear":
       level thread reset_computer();
 
       iprintlnbold("<dev string:xad>");
@@ -676,20 +676,20 @@ function_52838f02(str_display = "both", b_show = 1) {
   }
 
   switch (str_display) {
-    case # "both":
+    case #"both":
       for(i = 0; i < 4; i++) {
         level.var_1e220e78[i][[func_visibility]]();
         level.var_17ff2d5e[i][[func_visibility]]();
       }
 
       break;
-    case # "keypad":
+    case #"keypad":
       for(i = 0; i < 4; i++) {
         level.var_1e220e78[i][[func_visibility]]();
       }
 
       break;
-    case # "large":
+    case #"large":
       for(i = 0; i < 4; i++) {
         level.var_17ff2d5e[i][[func_visibility]]();
       }
@@ -991,7 +991,7 @@ function_45822b7e() {
 
 function_a3442c46(s_stage) {
   switch (s_stage) {
-    case # "0":
+    case #"0":
       level.var_cb1cac73 hidepart("tag_lights");
       level.var_cb1cac73 hidepart("tag_stage_01");
       level.var_cb1cac73 hidepart("tag_stage_02");
@@ -1000,21 +1000,21 @@ function_a3442c46(s_stage) {
       level.var_cb1cac73 hidepart("tag_stage_05");
       exploder::stop_exploder("fxexp_script_computersystem_screen");
       break;
-    case # "1":
+    case #"1":
       level.var_cb1cac73 showpart("tag_stage_01");
       level.var_cb1cac73 showpart("tag_lights");
       exploder::exploder("fxexp_script_computersystem_screen");
       break;
-    case # "2":
+    case #"2":
       level.var_cb1cac73 showpart("tag_stage_02");
       break;
-    case # "3":
+    case #"3":
       level.var_cb1cac73 showpart("tag_stage_03");
       break;
-    case # "4":
+    case #"4":
       level.var_cb1cac73 showpart("tag_stage_04");
       break;
-    case # "5":
+    case #"5":
       level.var_cb1cac73 showpart("tag_stage_05");
       break;
   }
@@ -1022,42 +1022,42 @@ function_a3442c46(s_stage) {
 
 function_6ef53601(var_7e123df8) {
   switch (var_7e123df8) {
-    case # "blink":
+    case #"blink":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;
       self function_a196c54b();
       self showpart("tag_blink_cycle_all");
       break;
-    case # "dynamic":
+    case #"dynamic":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;
       self function_a196c54b();
       self showpart("tag_dynamic");
       break;
-    case # "glitch":
+    case #"glitch":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;
       self function_a196c54b();
       self showpart("tag_glitch");
       break;
-    case # "style1":
+    case #"style1":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;
       self function_a196c54b();
       self showpart("tag_style1");
       break;
-    case # "style2":
+    case #"style2":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;
       self function_a196c54b();
       self showpart("tag_style2");
       break;
-    case # "vector":
+    case #"vector":
       self function_a196c54b();
       self showpart("tag_glitch");
       wait 0.2;

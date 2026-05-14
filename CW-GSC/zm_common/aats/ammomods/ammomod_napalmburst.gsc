@@ -38,18 +38,18 @@ function init_napalmburst() {
 
 function private function_e8018847(aat_name = "ammomod_napalmburst") {
   switch (aat_name) {
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
     default:
       return 0;
-    case # "ammomod_napalmburst_1":
+    case #"ammomod_napalmburst_1":
       return 1;
-    case # "ammomod_napalmburst_2":
+    case #"ammomod_napalmburst_2":
       return 2;
-    case # "ammomod_napalmburst_3":
+    case #"ammomod_napalmburst_3":
       return 3;
-    case # "ammomod_napalmburst_4":
+    case #"ammomod_napalmburst_4":
       return 4;
-    case # "ammomod_napalmburst_5":
+    case #"ammomod_napalmburst_5":
       return 5;
   }
 

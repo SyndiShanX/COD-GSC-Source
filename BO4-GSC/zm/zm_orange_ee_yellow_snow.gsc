@@ -202,13 +202,13 @@ function_37507fb7(var_a276c861) {
       s_campfire.e_fire setModel("p8_zm_gla_nor_fire_pit_01_wood_pile_emissive");
 
       switch (s_campfire.script_noteworthy) {
-        case # "snowball_campfire_1":
+        case #"snowball_campfire_1":
           exploder::exploder("fxexp_campfire_house_blue");
           break;
-        case # "snowball_campfire_2":
+        case #"snowball_campfire_2":
           exploder::exploder("fxexp_campfire_crevasse_blue");
           break;
-        case # "snowball_campfire_3":
+        case #"snowball_campfire_3":
           exploder::exploder("fxexp_campfire_beach_blue");
           break;
       }
@@ -220,13 +220,13 @@ function_37507fb7(var_a276c861) {
       s_campfire.e_fire setModel("p8_zm_gla_nor_fire_pit_01_wood_pile");
 
       switch (s_campfire.script_noteworthy) {
-        case # "snowball_campfire_1":
+        case #"snowball_campfire_1":
           exploder::stop_exploder("fxexp_campfire_house_blue");
           break;
-        case # "snowball_campfire_2":
+        case #"snowball_campfire_2":
           exploder::stop_exploder("fxexp_campfire_crevasse_blue");
           break;
-        case # "snowball_campfire_3":
+        case #"snowball_campfire_3":
           exploder::stop_exploder("fxexp_campfire_beach_blue");
           break;
       }

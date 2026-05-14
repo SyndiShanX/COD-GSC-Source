@@ -204,26 +204,26 @@ function try_to_draw_line_to_node() {
 
 function _get_debug_color(str_color) {
   switch (str_color) {
-    case # "red":
-    case # "r":
+    case #"red":
+    case #"r":
       return (1, 0, 0);
-    case # "green":
-    case # "g":
+    case #"green":
+    case #"g":
       return (0, 1, 0);
-    case # "b":
-    case # "blue":
+    case #"b":
+    case #"blue":
       return (0, 0, 1);
-    case # "yellow":
-    case # "y":
+    case #"yellow":
+    case #"y":
       return (1, 1, 0);
-    case # "orange":
-    case # "o":
+    case #"orange":
+    case #"o":
       return (1, 0.5, 0);
-    case # "c":
-    case # "cyan":
+    case #"c":
+    case #"cyan":
       return (0, 1, 1);
-    case # "purple":
-    case # "p":
+    case #"purple":
+    case #"p":
       return (1, 0, 1);
     default:
       println("<dev string:x42>" + str_color + "<dev string:x52>");
@@ -561,13 +561,13 @@ function trigger_auto_disable() {
 
 function activate_color_trigger(var_cc966c56) {
   switch (var_cc966c56) {
-    case # "allies":
+    case #"allies":
       str_color = self.script_color_allies;
       break;
-    case # "axis":
+    case #"axis":
       str_color = self.script_color_axis;
       break;
-    case # "team3":
+    case #"team3":
       str_color = self.script_color_team3;
       break;
     default:
@@ -650,13 +650,13 @@ function same_color_code_as_last_time(team, color) {
 
 function function_f06ea88(node, var_f9350db6, var_cc966c56) {
   switch (var_cc966c56) {
-    case # "allies":
+    case #"allies":
       str_color = node.script_color_allies;
       break;
-    case # "axis":
+    case #"axis":
       str_color = node.script_color_axis;
       break;
-    case # "team3":
+    case #"team3":
       str_color = node.script_color_team3;
       break;
     default:
@@ -1226,13 +1226,13 @@ function left_color_node() {
 
 function removespawnerfromcolornumberarray() {
   switch (self.team) {
-    case # "allies":
+    case #"allies":
       str_color = self.script_color_allies;
       break;
-    case # "axis":
+    case #"axis":
       str_color = self.script_color_axis;
       break;
-    case # "team3":
+    case #"team3":
       str_color = self.script_color_team3;
       break;
     default:

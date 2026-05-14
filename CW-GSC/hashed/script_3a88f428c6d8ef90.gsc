@@ -123,25 +123,25 @@ function function_998f8321(weapon) {
 
   if(isDefined(level.zombie_weapons[w_base].weapon_classname)) {
     switch (level.zombie_weapons[w_base].weapon_classname) {
-      case # "ar":
+      case #"ar":
         return self zm_stats::function_12b698fa(#"hash_e4ec67369bdd326");
-      case # "lmg":
+      case #"lmg":
         return self zm_stats::function_12b698fa(#"weapon_lmg_tier");
-      case # "pistol":
+      case #"pistol":
         return self zm_stats::function_12b698fa(#"weapon_pistol_tier");
-      case # "shotgun":
+      case #"shotgun":
         return self zm_stats::function_12b698fa(#"hash_1f78483ef16f84d5");
-      case # "smg":
+      case #"smg":
         return self zm_stats::function_12b698fa(#"weapon_smg_tier");
-      case # "sniper":
+      case #"sniper":
         return self zm_stats::function_12b698fa(#"weapon_sniper_tier");
-      case # "tr":
+      case #"tr":
         return self zm_stats::function_12b698fa(#"weapon_tactical_tier");
-      case # "melee":
+      case #"melee":
         return self zm_stats::function_12b698fa(#"weapon_knife_tier");
-      case # "launcher":
+      case #"launcher":
         return self zm_stats::function_12b698fa(#"weapon_launcher_tier");
-      case # "special":
+      case #"special":
         return self zm_stats::function_12b698fa(#"weapon_special_tier");
     }
   }
@@ -207,7 +207,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
 
   if(isDefined(level.zombie_weapons[w_base]) && isDefined(n_tier)) {
     switch (level.zombie_weapons[w_base].weapon_classname) {
-      case # "ar":
+      case #"ar":
         switch (n_tier) {
           case 1:
           case 2:
@@ -231,7 +231,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
         }
 
         break;
-      case # "pistol":
+      case #"pistol":
         var_9b4953c = 0;
 
         switch (n_tier) {
@@ -255,7 +255,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
         }
 
         break;
-      case # "shotgun":
+      case #"shotgun":
         var_9b4953c = 0;
 
         switch (n_tier) {
@@ -279,7 +279,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
         }
 
         break;
-      case # "smg":
+      case #"smg":
         var_9b4953c = 0;
 
         switch (n_tier) {
@@ -303,7 +303,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
         }
 
         break;
-      case # "tr":
+      case #"tr":
         switch (n_tier) {
           case 1:
           case 2:
@@ -327,8 +327,8 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
         }
 
         break;
-      case # "launcher":
-      case # "special":
+      case #"launcher":
+      case #"special":
         switch (n_tier) {
           case 1:
           case 2:
@@ -397,7 +397,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
 
   if(isDefined(level.zombie_weapons[w_base].weapon_classname)) {
     switch (level.zombie_weapons[w_base].weapon_classname) {
-      case # "ar":
+      case #"ar":
         switch (n_tier) {
           case 2:
           case 3:
@@ -412,7 +412,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "smg":
+      case #"smg":
         switch (n_tier) {
           case 2:
           case 3:
@@ -427,7 +427,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "lmg":
+      case #"lmg":
         switch (n_tier) {
           case 2:
           case 3:
@@ -442,7 +442,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "sniper":
+      case #"sniper":
         switch (n_tier) {
           case 2:
           case 3:
@@ -457,7 +457,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "shotgun":
+      case #"shotgun":
         switch (n_tier) {
           case 2:
           case 3:
@@ -472,7 +472,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "tr":
+      case #"tr":
         switch (n_tier) {
           case 2:
           case 3:
@@ -487,7 +487,7 @@ function function_817f0439(damage, weapon, vpoint, shitloc) {
         }
 
         break;
-      case # "pistol":
+      case #"pistol":
         switch (n_tier) {
           case 2:
           case 3:

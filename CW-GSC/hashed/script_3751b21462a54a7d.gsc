@@ -293,12 +293,12 @@ function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = #"") {
   });
 
   switch (talent) {
-    case # "hash_504b40f717f89167":
-    case # "hash_504b3ff717f88fb4":
-    case # "hash_504b41f717f8931a":
-    case # "hash_504b3ef717f88e01":
-    case # "hash_504b3df717f88c4e":
-    case # "talent_quickrevive":
+    case #"hash_504b40f717f89167":
+    case #"hash_504b3ff717f88fb4":
+    case #"hash_504b41f717f8931a":
+    case #"hash_504b3ef717f88e01":
+    case #"hash_504b3df717f88c4e":
+    case #"talent_quickrevive":
       var_6d3b160e = self.var_7341f980[self.var_7341f980.size - 1];
 
       if(var_6d3b160e != #"talent_quickrevive" || var_6d3b160e != #"hash_504b41f717f8931a" || var_6d3b160e != #"hash_504b40f717f89167" || var_6d3b160e != #"hash_504b3ff717f88fb4" || var_6d3b160e != #"hash_504b3ef717f88e01" || var_6d3b160e != #"hash_504b3df717f88c4e") {
@@ -311,112 +311,112 @@ function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = #"") {
       }
 
       break;
-    case # "talent_speedcola":
-    case # "hash_520b5db0216b778a":
-    case # "hash_520b5cb0216b75d7":
-    case # "hash_520b5bb0216b7424":
-    case # "hash_520b5ab0216b7271":
-    case # "hash_520b59b0216b70be":
+    case #"talent_speedcola":
+    case #"hash_520b5db0216b778a":
+    case #"hash_520b5cb0216b75d7":
+    case #"hash_520b5bb0216b7424":
+    case #"hash_520b5ab0216b7271":
+    case #"hash_520b59b0216b70be":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_speedcola");
       }
 
       break;
-    case # "hash_1f95b28e4a49dbe4":
-    case # "hash_1f95b08e4a49d87e":
-    case # "hash_1f95b18e4a49da31":
-    case # "hash_1f95b38e4a49dd97":
-    case # "hash_1f95b48e4a49df4a":
-    case # "talent_deadshot":
+    case #"hash_1f95b28e4a49dbe4":
+    case #"hash_1f95b08e4a49d87e":
+    case #"hash_1f95b18e4a49da31":
+    case #"hash_1f95b38e4a49dd97":
+    case #"hash_1f95b48e4a49df4a":
+    case #"talent_deadshot":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_deadshot");
       }
 
       break;
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_doubletap");
       }
 
       break;
-    case # "hash_47d7a8105237c88":
-    case # "hash_afdc57f440fb620":
-    case # "hash_afdc67f440fb7d3":
-    case # "hash_afdc97f440fbcec":
-    case # "hash_afdcb7f440fc052":
-    case # "hash_afdcc7f440fc205":
+    case #"hash_47d7a8105237c88":
+    case #"hash_afdc57f440fb620":
+    case #"hash_afdc67f440fb7d3":
+    case #"hash_afdc97f440fbcec":
+    case #"hash_afdcb7f440fc052":
+    case #"hash_afdcc7f440fc205":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"hash_47d7a8105237c88");
       }
 
       healthoverlay::function_d2880c8f();
       break;
-    case # "hash_17ccbcee64daa3c1":
-    case # "hash_17ccbdee64daa574":
-    case # "hash_17ccbeee64daa727":
-    case # "hash_17ccbbee64daa20e":
-    case # "hash_17ccbaee64daa05b":
-    case # "talent_staminup":
+    case #"hash_17ccbcee64daa3c1":
+    case #"hash_17ccbdee64daa574":
+    case #"hash_17ccbeee64daa727":
+    case #"hash_17ccbbee64daa20e":
+    case #"hash_17ccbaee64daa05b":
+    case #"talent_staminup":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_staminup");
       }
 
       break;
-    case # "talent_elemental_pop":
-    case # "talent_elemental_pop_2":
-    case # "talent_elemental_pop_3":
-    case # "talent_elemental_pop_1":
-    case # "talent_elemental_pop_4":
-    case # "talent_elemental_pop_5":
+    case #"talent_elemental_pop":
+    case #"talent_elemental_pop_2":
+    case #"talent_elemental_pop_3":
+    case #"talent_elemental_pop_1":
+    case #"talent_elemental_pop_4":
+    case #"talent_elemental_pop_5":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_elemental_pop");
       }
 
       break;
-    case # "hash_38c08136902fd553":
-    case # "hash_59dbe8f72baaa2a3":
-    case # "hash_59dbecf72baaa96f":
-    case # "hash_59dbedf72baaab22":
-    case # "hash_59dbeef72baaacd5":
-    case # "hash_59dbe7f72baaa0f0":
+    case #"hash_38c08136902fd553":
+    case #"hash_59dbe8f72baaa2a3":
+    case #"hash_59dbecf72baaa96f":
+    case #"hash_59dbedf72baaab22":
+    case #"hash_59dbeef72baaacd5":
+    case #"hash_59dbe7f72baaa0f0":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"hash_38c08136902fd553");
       }
 
       break;
-    case # "talent_mulekick_5":
-    case # "talent_mulekick_4":
-    case # "talent_mulekick_3":
-    case # "talent_mulekick_2":
-    case # "talent_mulekick_1":
-    case # "talent_mulekick":
+    case #"talent_mulekick_5":
+    case #"talent_mulekick_4":
+    case #"talent_mulekick_3":
+    case #"talent_mulekick_2":
+    case #"talent_mulekick_1":
+    case #"talent_mulekick":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_mulekick");
       }
 
       break;
-    case # "talent_deathperception":
-    case # "talent_deathperception_2":
-    case # "talent_deathperception_3":
-    case # "talent_deathperception_4":
-    case # "talent_deathperception_5":
-    case # "talent_deathperception_1":
+    case #"talent_deathperception":
+    case #"talent_deathperception_2":
+    case #"talent_deathperception_3":
+    case #"talent_deathperception_4":
+    case #"talent_deathperception_5":
+    case #"talent_deathperception_1":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_deathperception");
       }
 
       break;
-    case # "talent_phdslider_3":
-    case # "talent_phdslider_2":
-    case # "talent_phdslider_5":
-    case # "talent_phdslider_4":
-    case # "talent_phdslider":
-    case # "talent_phdslider_1":
+    case #"talent_phdslider_3":
+    case #"talent_phdslider_2":
+    case #"talent_phdslider_5":
+    case #"talent_phdslider_4":
+    case #"talent_phdslider":
+    case #"talent_phdslider_1":
       if(var_6e2cc6cb) {
         self perk_give_bottle_begin(#"talent_phdslider");
       }
@@ -473,37 +473,37 @@ function perk_give_bottle_begin(str_perk) {
 
 function get_perk_weapon(str_perk) {
   switch (str_perk) {
-    case # "talent_quickrevive":
+    case #"talent_quickrevive":
       weapon = getweapon(#"zombie_perk_bottle_revive");
       return weapon;
-    case # "talent_speedcola":
+    case #"talent_speedcola":
       weapon = getweapon(#"zombie_perk_bottle_sleight");
       return weapon;
-    case # "talent_deadshot":
+    case #"talent_deadshot":
       weapon = getweapon(#"zombie_perk_bottle_deadshot");
       return weapon;
-    case # "talent_doubletap":
+    case #"talent_doubletap":
       weapon = getweapon(#"zombie_perk_bottle_doubletap");
       return weapon;
-    case # "hash_47d7a8105237c88":
+    case #"hash_47d7a8105237c88":
       weapon = getweapon(#"zombie_perk_bottle_jugg");
       return weapon;
-    case # "talent_staminup":
+    case #"talent_staminup":
       weapon = getweapon(#"zombie_perk_bottle_marathon");
       return weapon;
-    case # "talent_elemental_pop":
+    case #"talent_elemental_pop":
       weapon = getweapon(#"zombie_perk_bottle_elemental_pop");
       return weapon;
-    case # "hash_38c08136902fd553":
+    case #"hash_38c08136902fd553":
       weapon = getweapon(#"zombie_perk_bottle_tombstone");
       return weapon;
-    case # "talent_mulekick":
+    case #"talent_mulekick":
       weapon = getweapon(#"zombie_perk_bottle_mulekick");
       return weapon;
-    case # "talent_deathperception":
+    case #"talent_deathperception":
       weapon = getweapon(#"zombie_perk_bottle_death_perception");
       return weapon;
-    case # "talent_phdslider":
+    case #"talent_phdslider":
       weapon = getweapon(#"zombie_perk_bottle_slider");
       return weapon;
   }
@@ -639,34 +639,34 @@ function function_381f04ca() {
 
   if(isDefined(self.targetname)) {
     switch (self.targetname) {
-      case # "vending_revive":
+      case #"vending_revive":
         str_alias = "mus_perks_revive_jingle";
         break;
-      case # "vending_sleight":
+      case #"vending_sleight":
         str_alias = "mus_perks_speed_jingle";
         break;
-      case # "vending_marathon":
+      case #"vending_marathon":
         str_alias = "mus_perks_stamin_jingle";
         break;
-      case # "vending_deadshot":
+      case #"vending_deadshot":
         str_alias = "mus_perks_deadshot_jingle";
         break;
-      case # "vending_elemental_pop":
+      case #"vending_elemental_pop":
         str_alias = "mus_perks_elementalpop_jingle";
         break;
-      case # "vending_jugg":
+      case #"vending_jugg":
         str_alias = "mus_perks_jugganog_jingle";
         break;
-      case # "vending_tombstone":
+      case #"vending_tombstone":
         str_alias = "mus_perks_tombstone_jingle";
         break;
-      case # "vending_mulekick":
+      case #"vending_mulekick":
         str_alias = "mus_perks_mulekick_jingle";
         break;
-      case # "vending_deathperception":
+      case #"vending_deathperception":
         str_alias = "mus_perks_deathperception_jingle";
         break;
-      case # "vending_divetonuke":
+      case #"vending_divetonuke":
         str_alias = "mus_perks_phd_jingle";
         break;
     }
@@ -685,76 +685,76 @@ function function_3e9d8a8e(var_11868f5d) {
   str_alias = undefined;
 
   switch (var_11868f5d) {
-    case # "hash_47d7a8105237c88":
-    case # "hash_afdc57f440fb620":
-    case # "hash_afdc67f440fb7d3":
-    case # "hash_afdc97f440fbcec":
-    case # "hash_afdcb7f440fc052":
-    case # "hash_afdcc7f440fc205":
+    case #"hash_47d7a8105237c88":
+    case #"hash_afdc57f440fb620":
+    case #"hash_afdc67f440fb7d3":
+    case #"hash_afdc97f440fbcec":
+    case #"hash_afdcb7f440fc052":
+    case #"hash_afdcc7f440fc205":
       str_alias = #"mus_perks_jugganog_sting";
       break;
-    case # "hash_504b41f717f8931a":
-    case # "talent_quickrevive":
-    case # "hash_504b40f717f89167":
-    case # "hash_504b3ff717f88fb4":
-    case # "hash_504b3ef717f88e01":
-    case # "hash_504b3df717f88c4e":
+    case #"hash_504b41f717f8931a":
+    case #"talent_quickrevive":
+    case #"hash_504b40f717f89167":
+    case #"hash_504b3ff717f88fb4":
+    case #"hash_504b3ef717f88e01":
+    case #"hash_504b3df717f88c4e":
       str_alias = #"mus_perks_revive_sting";
       break;
-    case # "talent_speedcola":
-    case # "hash_520b59b0216b70be":
-    case # "hash_520b5ab0216b7271":
-    case # "hash_520b5bb0216b7424":
-    case # "hash_520b5cb0216b75d7":
-    case # "hash_520b5db0216b778a":
+    case #"talent_speedcola":
+    case #"hash_520b59b0216b70be":
+    case #"hash_520b5ab0216b7271":
+    case #"hash_520b5bb0216b7424":
+    case #"hash_520b5cb0216b75d7":
+    case #"hash_520b5db0216b778a":
       str_alias = #"mus_perks_speed_sting";
       break;
-    case # "hash_1f95b48e4a49df4a":
-    case # "talent_deadshot":
-    case # "hash_1f95b28e4a49dbe4":
-    case # "hash_1f95b08e4a49d87e":
-    case # "hash_1f95b18e4a49da31":
-    case # "hash_1f95b38e4a49dd97":
+    case #"hash_1f95b48e4a49df4a":
+    case #"talent_deadshot":
+    case #"hash_1f95b28e4a49dbe4":
+    case #"hash_1f95b08e4a49d87e":
+    case #"hash_1f95b18e4a49da31":
+    case #"hash_1f95b38e4a49dd97":
       str_alias = #"mus_perks_deadshot_sting";
       break;
-    case # "hash_17ccbbee64daa20e":
-    case # "hash_17ccbaee64daa05b":
-    case # "talent_staminup":
-    case # "hash_17ccbeee64daa727":
-    case # "hash_17ccbdee64daa574":
-    case # "hash_17ccbcee64daa3c1":
+    case #"hash_17ccbbee64daa20e":
+    case #"hash_17ccbaee64daa05b":
+    case #"talent_staminup":
+    case #"hash_17ccbeee64daa727":
+    case #"hash_17ccbdee64daa574":
+    case #"hash_17ccbcee64daa3c1":
       str_alias = #"mus_perks_stamin_sting";
       break;
-    case # "talent_elemental_pop":
-    case # "talent_elemental_pop_2":
-    case # "talent_elemental_pop_3":
-    case # "talent_elemental_pop_1":
-    case # "talent_elemental_pop_4":
-    case # "talent_elemental_pop_5":
+    case #"talent_elemental_pop":
+    case #"talent_elemental_pop_2":
+    case #"talent_elemental_pop_3":
+    case #"talent_elemental_pop_1":
+    case #"talent_elemental_pop_4":
+    case #"talent_elemental_pop_5":
       str_alias = #"mus_perks_elementalpop_sting";
       break;
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
       str_alias = #"hash_25791821a46525d9";
       break;
-    case # "hash_59dbe8f72baaa2a3":
-    case # "hash_59dbecf72baaa96f":
-    case # "hash_59dbedf72baaab22":
-    case # "hash_59dbeef72baaacd5":
-    case # "hash_59dbe7f72baaa0f0":
-    case # "hash_38c08136902fd553":
+    case #"hash_59dbe8f72baaa2a3":
+    case #"hash_59dbecf72baaa96f":
+    case #"hash_59dbedf72baaab22":
+    case #"hash_59dbeef72baaacd5":
+    case #"hash_59dbe7f72baaa0f0":
+    case #"hash_38c08136902fd553":
       str_alias = #"mus_perks_tombstone_sting";
       break;
-    case # "talent_mulekick_5":
-    case # "talent_mulekick_4":
-    case # "talent_mulekick_3":
-    case # "talent_mulekick_2":
-    case # "talent_mulekick_1":
-    case # "talent_mulekick":
+    case #"talent_mulekick_5":
+    case #"talent_mulekick_4":
+    case #"talent_mulekick_3":
+    case #"talent_mulekick_2":
+    case #"talent_mulekick_1":
+    case #"talent_mulekick":
       if(self.targetname === "wonderfizz") {
         str_alias = #"mus_perks_mulekick_sting";
       } else {
@@ -762,20 +762,20 @@ function function_3e9d8a8e(var_11868f5d) {
       }
 
       break;
-    case # "talent_deathperception":
-    case # "talent_deathperception_2":
-    case # "talent_deathperception_3":
-    case # "talent_deathperception_4":
-    case # "talent_deathperception_5":
-    case # "talent_deathperception_1":
+    case #"talent_deathperception":
+    case #"talent_deathperception_2":
+    case #"talent_deathperception_3":
+    case #"talent_deathperception_4":
+    case #"talent_deathperception_5":
+    case #"talent_deathperception_1":
       str_alias = #"mus_perks_deathperception_sting";
       break;
-    case # "talent_phdslider_5":
-    case # "talent_phdslider":
-    case # "talent_phdslider_1":
-    case # "talent_phdslider_3":
-    case # "talent_phdslider_2":
-    case # "talent_phdslider_4":
+    case #"talent_phdslider_5":
+    case #"talent_phdslider":
+    case #"talent_phdslider_1":
+    case #"talent_phdslider_3":
+    case #"talent_phdslider_2":
+    case #"talent_phdslider_4":
       str_alias = #"mus_perks_phd_sting";
       break;
   }
@@ -794,118 +794,118 @@ function function_cc0055e9(talent) {
   }
 
   switch (talent) {
-    case # "hash_47d7a8105237c88":
-    case # "hash_afdc57f440fb620":
-    case # "hash_afdc67f440fb7d3":
-    case # "hash_afdc97f440fbcec":
-    case # "hash_afdcb7f440fc052":
-    case # "hash_afdcc7f440fc205":
+    case #"hash_47d7a8105237c88":
+    case #"hash_afdc57f440fb620":
+    case #"hash_afdc67f440fb7d3":
+    case #"hash_afdc97f440fbcec":
+    case #"hash_afdcb7f440fc052":
+    case #"hash_afdcc7f440fc205":
       if(!is_true(getgametypesetting(#"hash_350adc73849f66ad"))) {
         return false;
       }
 
       break;
-    case # "hash_504b41f717f8931a":
-    case # "talent_quickrevive":
-    case # "hash_504b40f717f89167":
-    case # "hash_504b3ff717f88fb4":
-    case # "hash_504b3ef717f88e01":
-    case # "hash_504b3df717f88c4e":
+    case #"hash_504b41f717f8931a":
+    case #"talent_quickrevive":
+    case #"hash_504b40f717f89167":
+    case #"hash_504b3ff717f88fb4":
+    case #"hash_504b3ef717f88e01":
+    case #"hash_504b3df717f88c4e":
       if(!is_true(getgametypesetting(#"hash_790760c24def02df"))) {
         return false;
       }
 
       break;
-    case # "talent_speedcola":
-    case # "hash_520b59b0216b70be":
-    case # "hash_520b5ab0216b7271":
-    case # "hash_520b5bb0216b7424":
-    case # "hash_520b5cb0216b75d7":
-    case # "hash_520b5db0216b778a":
+    case #"talent_speedcola":
+    case #"hash_520b59b0216b70be":
+    case #"hash_520b5ab0216b7271":
+    case #"hash_520b5bb0216b7424":
+    case #"hash_520b5cb0216b75d7":
+    case #"hash_520b5db0216b778a":
       if(!is_true(getgametypesetting(#"hash_3ad94f36f9fe01c3"))) {
         return false;
       }
 
       break;
-    case # "hash_1f95b48e4a49df4a":
-    case # "talent_deadshot":
-    case # "hash_1f95b28e4a49dbe4":
-    case # "hash_1f95b08e4a49d87e":
-    case # "hash_1f95b18e4a49da31":
-    case # "hash_1f95b38e4a49dd97":
+    case #"hash_1f95b48e4a49df4a":
+    case #"talent_deadshot":
+    case #"hash_1f95b28e4a49dbe4":
+    case #"hash_1f95b08e4a49d87e":
+    case #"hash_1f95b18e4a49da31":
+    case #"hash_1f95b38e4a49dd97":
       if(!is_true(getgametypesetting(#"hash_6c0eea959e1beea9"))) {
         return false;
       }
 
       break;
-    case # "hash_17ccbbee64daa20e":
-    case # "hash_17ccbaee64daa05b":
-    case # "talent_staminup":
-    case # "hash_17ccbeee64daa727":
-    case # "hash_17ccbdee64daa574":
-    case # "hash_17ccbcee64daa3c1":
+    case #"hash_17ccbbee64daa20e":
+    case #"hash_17ccbaee64daa05b":
+    case #"talent_staminup":
+    case #"hash_17ccbeee64daa727":
+    case #"hash_17ccbdee64daa574":
+    case #"hash_17ccbcee64daa3c1":
       if(!is_true(getgametypesetting(#"hash_1eae2946efd5fc50"))) {
         return false;
       }
 
       break;
-    case # "talent_elemental_pop":
-    case # "talent_elemental_pop_2":
-    case # "talent_elemental_pop_3":
-    case # "talent_elemental_pop_1":
-    case # "talent_elemental_pop_4":
-    case # "talent_elemental_pop_5":
+    case #"talent_elemental_pop":
+    case #"talent_elemental_pop_2":
+    case #"talent_elemental_pop_3":
+    case #"talent_elemental_pop_1":
+    case #"talent_elemental_pop_4":
+    case #"talent_elemental_pop_5":
       if(!is_true(getgametypesetting(#"hash_4a821fd3ce297dbb"))) {
         return false;
       }
 
       break;
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
-    case # "talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
+    case #"talent_doubletap":
       return false;
-    case # "hash_59dbe8f72baaa2a3":
-    case # "hash_59dbecf72baaa96f":
-    case # "hash_59dbedf72baaab22":
-    case # "hash_59dbeef72baaacd5":
-    case # "hash_59dbe7f72baaa0f0":
-    case # "hash_38c08136902fd553":
+    case #"hash_59dbe8f72baaa2a3":
+    case #"hash_59dbecf72baaa96f":
+    case #"hash_59dbedf72baaab22":
+    case #"hash_59dbeef72baaacd5":
+    case #"hash_59dbe7f72baaa0f0":
+    case #"hash_38c08136902fd553":
       if(!is_true(getgametypesetting(#"hash_21f347fcb9fbef2a"))) {
         return false;
       }
 
       break;
-    case # "talent_mulekick_5":
-    case # "talent_mulekick_4":
-    case # "talent_mulekick_3":
-    case # "talent_mulekick_2":
-    case # "talent_mulekick_1":
-    case # "talent_mulekick":
+    case #"talent_mulekick_5":
+    case #"talent_mulekick_4":
+    case #"talent_mulekick_3":
+    case #"talent_mulekick_2":
+    case #"talent_mulekick_1":
+    case #"talent_mulekick":
       if(!is_true(getgametypesetting(#"hash_616a22c5c1ebe5b8"))) {
         return false;
       }
 
       break;
-    case # "talent_deathperception":
-    case # "talent_deathperception_2":
-    case # "talent_deathperception_3":
-    case # "talent_deathperception_4":
-    case # "talent_deathperception_5":
-    case # "talent_deathperception_1":
+    case #"talent_deathperception":
+    case #"talent_deathperception_2":
+    case #"talent_deathperception_3":
+    case #"talent_deathperception_4":
+    case #"talent_deathperception_5":
+    case #"talent_deathperception_1":
       if(!is_true(getgametypesetting(#"hash_45fa8995b51490e8"))) {
         return false;
       }
 
       break;
-    case # "talent_phdslider_5":
-    case # "talent_phdslider":
-    case # "talent_phdslider_1":
-    case # "talent_phdslider_3":
-    case # "talent_phdslider_2":
-    case # "talent_phdslider_4":
+    case #"talent_phdslider_5":
+    case #"talent_phdslider":
+    case #"talent_phdslider_1":
+    case #"talent_phdslider_3":
+    case #"talent_phdslider_2":
+    case #"talent_phdslider_4":
       if(!is_true(getgametypesetting(#"hash_4b8929fb898a9e80"))) {
         return false;
       }
@@ -950,22 +950,22 @@ function function_1d36527d(params) {
   foreach(player in getplayers()) {
     if(tokens[0] === #"hash_6149e7b90451c6cd") {
       switch (tokens[1]) {
-        case # "0":
+        case #"0":
           level.var_6f4eb990 = "<dev string:x38>";
           break;
-        case # "1":
+        case #"1":
           level.var_6f4eb990 = "<dev string:x5c6>";
           break;
-        case # "2":
+        case #"2":
           level.var_6f4eb990 = "<dev string:x5cc>";
           break;
-        case # "3":
+        case #"3":
           level.var_6f4eb990 = "<dev string:x5d2>";
           break;
-        case # "4":
+        case #"4":
           level.var_6f4eb990 = "<dev string:x5d8>";
           break;
-        case # "5":
+        case #"5":
           level.var_6f4eb990 = "<dev string:x5de>";
           break;
       }

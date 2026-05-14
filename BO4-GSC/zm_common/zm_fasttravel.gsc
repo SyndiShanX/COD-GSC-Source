@@ -340,7 +340,7 @@ function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
   var_12230d08.used = 1;
 
   switch (var_4500bf3f) {
-    case # "traverse":
+    case #"traverse":
       if(var_829a20a8) {
         if(str_start_loc === "dropout") {
           n_idx = self.var_85c91ccc;
@@ -365,8 +365,8 @@ function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
       var_5314bd63 = getent("veh_fasttravel_cam", "targetname");
       self function_66d020b0(var_5314bd63, nd_path_start, undefined, str_notify, undefined, var_12230d08, undefined, undefined);
       break;
-    case # "flinger":
-    case # "teleport":
+    case #"flinger":
+    case #"teleport":
       n_idx = function_de173abb(str_start_loc);
 
       if(!isDefined(n_idx)) {
@@ -538,11 +538,11 @@ function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365
     str_stance = self getstance();
 
     switch (str_stance) {
-      case # "crouch":
+      case #"crouch":
         self setstance("stand");
         wait 0.2;
         break;
-      case # "prone":
+      case #"prone":
         self setstance("stand");
         wait 1;
         break;
@@ -677,7 +677,7 @@ function_e61d152a() {
 
 function_79766c56(str_notify) {
   switch (str_notify) {
-    case # "bled_out":
+    case #"bled_out":
       self function_e61d152a();
       self val::reset(#"fasttravel", "freezecontrols");
       self allowcrouch(1);
@@ -1092,20 +1092,20 @@ function_672d56c7() {
 
 function_dd6276f3(cmd) {
   switch (cmd) {
-    case # "start_looping":
+    case #"start_looping":
       if(!(isDefined(level.var_2a40310c) && level.var_2a40310c)) {
         level.var_2a40310c = 1;
         level thread function_8d419972(0);
       }
 
       break;
-    case # "stop_looping":
+    case #"stop_looping":
       if(isDefined(level.var_2a40310c) && level.var_2a40310c) {
         level.var_2a40310c = 0;
       }
 
       break;
-    case # "play_once":
+    case #"play_once":
       if(!(isDefined(level.var_2a40310c) && level.var_2a40310c)) {
         level.var_2a40310c = 1;
         level thread function_8d419972(1);

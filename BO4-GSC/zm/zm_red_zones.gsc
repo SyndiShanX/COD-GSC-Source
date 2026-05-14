@@ -293,97 +293,97 @@ function_27028b8e(str_zone) {
   }
 
   switch (str_zone) {
-    case # "zone_amphitheater":
+    case #"zone_amphitheater":
       str_display = #"hash_654702bdca18105";
       break;
-    case # "zone_amphitheater_backstage":
+    case #"zone_amphitheater_backstage":
       str_display = #"hash_10a873392c5d4565";
       break;
-    case # "zone_cliff_tombs_lower":
-    case # "zone_cliff_tombs_forge":
-    case # "zone_cliff_tombs_center":
-    case # "zone_cliff_tombs_bridge":
-    case # "zone_cliff_tombs_upper":
+    case #"zone_cliff_tombs_lower":
+    case #"zone_cliff_tombs_forge":
+    case #"zone_cliff_tombs_center":
+    case #"zone_cliff_tombs_bridge":
+    case #"zone_cliff_tombs_upper":
       str_display = #"hash_50916c74fe22e63b";
       break;
-    case # "zone_drakaina_arena":
+    case #"zone_drakaina_arena":
       str_display = #"hash_78d4c8eb48aabd66";
       break;
-    case # "zone_eastern_plaza":
+    case #"zone_eastern_plaza":
       str_display = #"hash_65a67d1c5af364c7";
       break;
-    case # "zone_bathhouse_outside":
-    case # "zone_bathhouse_inside":
+    case #"zone_bathhouse_outside":
+    case #"zone_bathhouse_inside":
       str_display = #"hash_27a6b15e094c02f1";
       break;
-    case # "zone_spartan_east_to_treasuries":
-    case # "zone_intersection_of_treasuries_upper":
-    case # "zone_intersection_of_treasuries_lower":
+    case #"zone_spartan_east_to_treasuries":
+    case #"zone_intersection_of_treasuries_upper":
+    case #"zone_intersection_of_treasuries_lower":
       str_display = #"hash_4785d4d350f36326";
       break;
-    case # "zone_monument_of_craterus_lower":
-    case # "zone_monument_of_craterus_upper":
+    case #"zone_monument_of_craterus_lower":
+    case #"zone_monument_of_craterus_upper":
       str_display = #"hash_70363674b3e9a47c";
       break;
-    case # "zone_river_lower":
-    case # "zone_river_upper":
+    case #"zone_river_lower":
+    case #"zone_river_upper":
       str_display = #"hash_3a319fea8f608182";
       break;
-    case # "zone_serpent_pass_upper":
-    case # "zone_serpent_pass_bridge":
-    case # "zone_serpent_pass_center":
-    case # "zone_serpent_pass_lower":
+    case #"zone_serpent_pass_upper":
+    case #"zone_serpent_pass_bridge":
+    case #"zone_serpent_pass_center":
+    case #"zone_serpent_pass_lower":
       str_display = #"hash_4f55839413fe0046";
       break;
-    case # "zone_stoa_of_athenians_to_spartan_upper":
-    case # "zone_spartan_monument_west":
-    case # "zone_spartan_monument_east":
-    case # "zone_spartan_monument_upper":
+    case #"zone_stoa_of_athenians_to_spartan_upper":
+    case #"zone_spartan_monument_west":
+    case #"zone_spartan_monument_east":
+    case #"zone_spartan_monument_upper":
       str_display = #"hash_303ce0aa4cf6a23e";
       break;
-    case # "zone_stoa_of_the_athenians_east":
-    case # "zone_stoa_of_the_athenians_west":
+    case #"zone_stoa_of_the_athenians_east":
+    case #"zone_stoa_of_the_athenians_west":
       str_display = #"hash_12a9743a3b9f2236";
       break;
-    case # "zone_temple_to_stoa_of_the_athenians":
+    case #"zone_temple_to_stoa_of_the_athenians":
       str_display = #"hash_2910970920dd3ee3";
       break;
-    case # "zone_temple_of_apollo_left_path":
-    case # "zone_temple_of_apollo_right_path":
-    case # "zone_temple_of_apollo_back":
-    case # "zone_temple_of_apollo":
+    case #"zone_temple_of_apollo_left_path":
+    case #"zone_temple_of_apollo_right_path":
+    case #"zone_temple_of_apollo_back":
+    case #"zone_temple_of_apollo":
       str_display = #"hash_106d425e41e8c240";
       break;
-    case # "zone_offering":
+    case #"zone_offering":
       str_display = #"hash_6268d50ff53b29d4";
       break;
-    case # "zone_upper_road_west":
-    case # "zone_upper_road_east":
-    case # "zone_portico":
+    case #"zone_upper_road_west":
+    case #"zone_upper_road_east":
+    case #"zone_portico":
       str_display = #"hash_32a859886bcbfb10";
       break;
-    case # "zone_western_plaza":
+    case #"zone_western_plaza":
       str_display = #"hash_187fe3987a160b42";
       break;
-    case # "zone_boss_plateau_1":
+    case #"zone_boss_plateau_1":
       str_display = #"hash_63b3c5fb5611240f";
       break;
-    case # "zone_boss_plateau_2":
+    case #"zone_boss_plateau_2":
       str_display = #"hash_63b3c4fb5611225c";
       break;
-    case # "zone_boss_plateau_3":
+    case #"zone_boss_plateau_3":
       str_display = #"hash_63b3c6fb561125c2";
       break;
-    case # "zone_ww_quest_earth":
+    case #"zone_ww_quest_earth":
       str_display = #"hash_4903463b3bfd1f8f";
       break;
-    case # "zone_ww_quest_death":
+    case #"zone_ww_quest_death":
       str_display = #"hash_77ea88b9440ad045";
       break;
-    case # "zone_ww_quest_light":
+    case #"zone_ww_quest_light":
       str_display = #"hash_5e05f18694a561c7";
       break;
-    case # "zone_ww_quest_air":
+    case #"zone_ww_quest_air":
       str_display = #"hash_286cefa4bc6e994f";
       break;
     default:

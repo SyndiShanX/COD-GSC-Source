@@ -201,7 +201,7 @@ door_classify(parent_trig) {
     }
 
     switch (self.script_string) {
-      case # "anim":
+      case #"anim":
         assert(isDefined(self.script_animname), "<dev string:x38>" + self.targetname);
         assert(isDefined(level.scr_anim[self.script_animname]), "<dev string:x70>" + self.script_animname);
         assert(isDefined(level.blocker_anim_func), "<dev string:xb5>");
@@ -429,7 +429,7 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
   }
 
   switch (self.script_string) {
-    case # "rotate":
+    case #"rotate":
       if(isDefined(self.script_angles)) {
         rot_angle = self.script_angles;
 
@@ -447,8 +447,8 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "move":
-    case # "slide_apart":
+    case #"move":
+    case #"slide_apart":
       if(isDefined(self.script_vector)) {
         vector = vectorscale(self.script_vector, scale);
 
@@ -467,16 +467,16 @@ door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "anim":
+    case #"anim":
       self[[level.blocker_anim_func]](self.script_animname);
       self thread door_solid_thread_anim();
       wait randomfloat(0.15);
       break;
-    case # "physics":
+    case #"physics":
       self thread physics_launch_door(self);
       wait 0.1;
       break;
-    case # "zbarrier":
+    case #"zbarrier":
       self thread door_zbarrier_move();
       break;
   }
@@ -611,7 +611,7 @@ waittill_door_can_close() {
   a_trigs = getEntArray(self.target, "target");
 
   switch (self.script_noteworthy) {
-    case # "local_electric_door":
+    case #"local_electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_local_power_off(trigger, a_trigs);
         self thread kill_trapped_zombies(trigger);
@@ -623,7 +623,7 @@ waittill_door_can_close() {
       }
 
       return;
-    case # "electric_door":
+    case #"electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_global_power_off(trigger, a_trigs);
 
@@ -649,7 +649,7 @@ door_think() {
 
   while(true) {
     switch (self.script_noteworthy) {
-      case # "local_electric_door":
+      case #"local_electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -687,7 +687,7 @@ door_think() {
         self sethintstring(#"zombie/need_local_power");
         wait 3;
         continue;
-      case # "electric_door":
+      case #"electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -729,7 +729,7 @@ door_think() {
         self thread function_dafd2e5a();
         wait 3;
         continue;
-      case # "electric_buyable_door":
+      case #"electric_buyable_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
           return;
         }
@@ -745,7 +745,7 @@ door_think() {
         }
 
         break;
-      case # "delay_door":
+      case #"delay_door":
         if(!self door_buy()) {
           continue;
         }
@@ -1433,20 +1433,20 @@ function_bf35870e() {
   util::wait_network_frame();
 
   switch (self.objectid) {
-    case # "symbol_front_power":
-    case # "symbol_back_power":
+    case #"symbol_front_power":
+    case #"symbol_back_power":
       self clientfield::set("power_door_ambient_fx", 1);
       return;
-    case # "symbol_front_power_debris":
-    case # "symbol_back_power_debris":
+    case #"symbol_front_power_debris":
+    case #"symbol_back_power_debris":
       self clientfield::set("power_debris_ambient_fx", 1);
       return;
-    case # "symbol_back_debris":
-    case # "symbol_front_debris":
+    case #"symbol_back_debris":
+    case #"symbol_front_debris":
       self clientfield::set("debrisbuy_ambient_fx", 1);
       return;
-    case # "symbol_back":
-    case # "symbol_front":
+    case #"symbol_back":
+    case #"symbol_front":
       self clientfield::set("doorbuy_ambient_fx", 1);
       return;
     default:
@@ -1460,26 +1460,26 @@ function_f2f6ce12() {
   foreach(var_6c61edec in var_ba3135be) {
     if(isDefined(var_6c61edec.objectid) && !var_6c61edec zm_utility::function_1a4d2910()) {
       switch (var_6c61edec.objectid) {
-        case # "symbol_front_power":
-        case # "symbol_back_power":
+        case #"symbol_front_power":
+        case #"symbol_back_power":
           var_6c61edec clientfield::set("power_door_ambient_fx", 0);
           var_6c61edec clientfield::set("power_door_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_front_power_debris":
-        case # "symbol_back_power_debris":
+        case #"symbol_front_power_debris":
+        case #"symbol_back_power_debris":
           var_6c61edec clientfield::set("power_debris_ambient_fx", 0);
           var_6c61edec clientfield::set("power_debris_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_back_debris":
-        case # "symbol_front_debris":
+        case #"symbol_back_debris":
+        case #"symbol_front_debris":
           var_6c61edec clientfield::set("debrisbuy_ambient_fx", 0);
           var_6c61edec clientfield::set("debrisbuy_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();
           break;
-        case # "symbol_back":
-        case # "symbol_front":
+        case #"symbol_back":
+        case #"symbol_front":
           var_6c61edec clientfield::set("doorbuy_ambient_fx", 0);
           var_6c61edec clientfield::set("doorbuy_bought_fx", 1);
           var_6c61edec thread function_f070c4b8();

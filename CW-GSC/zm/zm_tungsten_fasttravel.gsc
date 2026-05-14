@@ -83,21 +83,21 @@ function function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a92d1b24) && !level flag::get_all(self.stub.var_a92d1b24)) {
     switch (self.stub.script_string) {
-      case # "helipads_to_main_street":
+      case #"helipads_to_main_street":
         if(level flag::get(#"hash_5981a23fdea21f78")) {
           self.hint_string[n_player_index] = #"hash_5d6c42a597323f3c";
           b_result = 1;
         }
 
         break;
-      case # "anytown_usa_to_bunker":
+      case #"anytown_usa_to_bunker":
         if(!level flag::get(#"hash_bc6e6c4a2ea3f60")) {
           self.hint_string[n_player_index] = #"hash_116dced27129125c";
           b_result = 1;
         }
 
         break;
-      case # "observation_to_helipads":
+      case #"observation_to_helipads":
         if(!level flag::get(#"power_on1")) {
           self.hint_string[n_player_index] = #"hash_793db3dc20917334";
           b_result = 1;
@@ -125,30 +125,30 @@ function function_c52e8ba(player, var_8d5d092c) {
     }
   } else {
     switch (self.stub.script_string) {
-      case # "main_street_to_helipads":
-      case # "observation_to_helipads":
+      case #"main_street_to_helipads":
+      case #"observation_to_helipads":
         self.hint_string[n_player_index] = #"hash_304d3a663d56e57f";
         break;
-      case # "helipads_to_main_street":
+      case #"helipads_to_main_street":
         self.hint_string[n_player_index] = #"hash_44a5bc69db5e0ee7";
         break;
-      case # "anytown_usa_to_main_street":
+      case #"anytown_usa_to_main_street":
         self.hint_string[n_player_index] = #"hash_423e9a8e530ed95a";
         break;
-      case # "main_street_to_anytown_usa":
+      case #"main_street_to_anytown_usa":
         self.hint_string[n_player_index] = #"hash_29eee6d6112fe209";
         break;
-      case # "bunker_to_anytown_usa":
+      case #"bunker_to_anytown_usa":
         self.hint_string[n_player_index] = #"hash_6250636afaff2f8b";
         break;
-      case # "anytown_usa_to_bunker":
+      case #"anytown_usa_to_bunker":
         self.hint_string[n_player_index] = #"hash_4c57d5cff43d2407";
         break;
-      case # "observation_to_bunker":
+      case #"observation_to_bunker":
         self.hint_string[n_player_index] = #"hash_656093d7320c2914";
         break;
-      case # "helipads_to_observation":
-      case # "bunker_to_observation":
+      case #"helipads_to_observation":
+      case #"bunker_to_observation":
         self.hint_string[n_player_index] = #"hash_3b286335feef3751";
         break;
       default:

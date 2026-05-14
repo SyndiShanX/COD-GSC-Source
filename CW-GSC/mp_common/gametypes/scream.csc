@@ -242,11 +242,11 @@ function private function_dbd63244() {
     stance = self getstance();
 
     switch (stance) {
-      case # "prone":
+      case #"prone":
         return (self.origin + (0, 0, 11));
-      case # "crouch":
+      case #"crouch":
         return (self.origin + (0, 0, 40));
-      case # "stand":
+      case #"stand":
         return (self.origin + (0, 0, 60));
       default:
         return (self.origin + (0, 0, 60));

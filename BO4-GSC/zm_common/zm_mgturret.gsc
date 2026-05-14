@@ -26,16 +26,16 @@ set_difficulty(difficulty) {
   for(index = 0; index < turrets.size; index++) {
     if(isDefined(turrets[index].script_skilloverride)) {
       switch (turrets[index].script_skilloverride) {
-        case # "easy":
+        case #"easy":
           difficulty = "easy";
           break;
-        case # "medium":
+        case #"medium":
           difficulty = "medium";
           break;
-        case # "hard":
+        case #"hard":
           difficulty = "hard";
           break;
-        case # "fu":
+        case #"fu":
           difficulty = "fu";
           break;
         default:

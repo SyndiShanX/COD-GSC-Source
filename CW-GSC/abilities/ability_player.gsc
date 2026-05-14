@@ -751,23 +751,23 @@ function gadget_checkheroabilitykill(attacker) {
 
   if(isDefined(attacker.heroability)) {
     switch (attacker.heroability.name) {
-      case # "gadget_clone":
-      case # "gadget_heat_wave":
-      case # "gadget_armor":
-      case # "gadget_speed_burst":
+      case #"gadget_clone":
+      case #"gadget_heat_wave":
+      case #"gadget_armor":
+      case #"gadget_speed_burst":
         if(isDefined(attacker.heroabilityactive) || isDefined(attacker.heroabilitydectivatetime) && attacker.heroabilitydectivatetime > gettime() - 100) {
           heroabilitystat = 1;
         }
 
         break;
-      case # "gadget_resurrect":
-      case # "gadget_camo":
+      case #"gadget_resurrect":
+      case #"gadget_camo":
         if(isDefined(attacker.heroabilityactive) || isDefined(attacker.heroabilitydectivatetime) && attacker.heroabilitydectivatetime > gettime() - 6000) {
           heroabilitystat = 1;
         }
 
         break;
-      case # "gadget_vision_pulse":
+      case #"gadget_vision_pulse":
         if(isDefined(attacker.visionpulsespottedenemytime)) {
           timecutoff = gettime();
 
@@ -784,7 +784,7 @@ function gadget_checkheroabilitykill(attacker) {
             }
           }
         }
-      case # "gadget_combat_efficiency":
+      case #"gadget_combat_efficiency":
         if(isDefined(attacker._gadget_combat_efficiency) && attacker._gadget_combat_efficiency == 1) {
           heroabilitystat = 1;
           break;
@@ -1394,28 +1394,28 @@ function abilities_devgui_think() {
     }
 
     switch (cmd) {
-      case # "power_f":
+      case #"power_f":
         abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_fill);
         break;
-      case # "power_t_af":
+      case #"power_t_af":
         abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_toggle_auto_fill);
         break;
-      case # "ability_power_f":
+      case #"ability_power_f":
         abilities_devgui_handle_player_command(cmd, &function_3db3dc4f, arg);
         break;
-      case # "hash_5b8a32e219f9ae64":
+      case #"hash_5b8a32e219f9ae64":
         abilities_devgui_handle_player_command(cmd, &function_626f2cd1, arg);
         break;
-      case # "hash_2d2f6f2bb98a38b3":
+      case #"hash_2d2f6f2bb98a38b3":
         abilities_devgui_handle_player_command(cmd, &function_9a0f80b1, arg);
         break;
-      case # "hash_5ddbad8870b98e93":
+      case #"hash_5ddbad8870b98e93":
         abilities_devgui_handle_player_command(cmd, &function_ce4e80a7, arg);
         break;
-      case # "hash_5515835378aa90c8":
+      case #"hash_5515835378aa90c8":
         abilities_devgui_handle_player_command(cmd, &function_4f50aea3, arg);
         break;
-      case # "hash_67d528f29bfc7c97":
+      case #"hash_67d528f29bfc7c97":
         abilities_devgui_handle_player_command(cmd, &function_b4f43681, arg);
         break;
       case 0:

@@ -421,7 +421,7 @@ function_fb9f1f3b(entity) {
   nextstate = "engage_center";
 
   switch (entity.ai.var_5cb410bc.currentstate) {
-    case # "engage_center":
+    case #"engage_center":
       random = randomint(100);
 
       if(random < 33) {
@@ -431,8 +431,8 @@ function_fb9f1f3b(entity) {
       }
 
       break;
-    case # "engage_left":
-    case # "engage_right":
+    case #"engage_left":
+    case #"engage_right":
       nextstate = "engage_center";
       break;
     default:
@@ -1732,12 +1732,12 @@ function_2765a1f0(meansofdeath) {
     vo_type = "stab_pain";
   } else if(isDefined(self.var_40543c03)) {
     switch (self.var_40543c03) {
-      case # "fire":
+      case #"fire":
         vo_type = "fire_pain";
         break;
-      case # "flash":
-      case # "emp":
-      case # "electrical":
+      case #"flash":
+      case #"emp":
+      case #"electrical":
         vo_type = "flash_pain";
         break;
     }
@@ -1785,21 +1785,21 @@ registerrein_amb(type) {
   }
 
   switch (type) {
-    case # "swat_arrive":
+    case #"swat_arrive":
       self playSound("vox_swa" + self.voxid + "_ult_swat_arrive");
       break;
-    case # "swat_destroyed":
+    case #"swat_destroyed":
       self playSound("vox_swa" + self.voxid + "_ult_swat_destroyed");
       break;
-    case # "swat_engaging":
+    case #"swat_engaging":
       self playSound("vox_swa" + self.voxid + "_ult_swat_engaging");
       break;
-    case # "swat_kill":
+    case #"swat_kill":
       self playSound("vox_swa" + self.voxid + "_ult_swat_kill");
       break;
-    case # "swat_ready":
+    case #"swat_ready":
       self playSound("vox_swa" + self.voxid + "_ult_swat_ready");
-    case # "generic_pain":
+    case #"generic_pain":
       if(self.voxid == 1) {
         self playSound(array::random(level.var_bf13c7cf));
       } else if(self.voxid == 2) {
@@ -1811,7 +1811,7 @@ registerrein_amb(type) {
       }
 
       break;
-    case # "flash_pain":
+    case #"flash_pain":
       if(randomint(100) > 50) {
         self playSound("vox_swa" + self.voxid + "_ult_swat_electro");
       } else {
@@ -1819,10 +1819,10 @@ registerrein_amb(type) {
       }
 
       break;
-    case # "fire_pain":
+    case #"fire_pain":
       self playSound("vox_swa" + self.voxid + "_ult_swat_burn_dead");
       break;
-    case # "stab_pain":
+    case #"stab_pain":
       self playSound("vox_swa" + self.voxid + "_ult_swat_stabbed");
       break;
     default:

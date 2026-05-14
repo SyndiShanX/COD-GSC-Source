@@ -3062,41 +3062,41 @@ function function_95de83c0() {
 
 function function_f895e0b0(dvar) {
   switch (dvar.value) {
-    case # "hash_3d3ff098d35dcb64":
+    case #"hash_3d3ff098d35dcb64":
       level thread function_3bd44cc0();
       break;
-    case # "hash_5da8b927b9a8507c":
+    case #"hash_5da8b927b9a8507c":
       function_1344db5f();
       break;
-    case # "hash_6d4c9fdc42c82755":
+    case #"hash_6d4c9fdc42c82755":
       function_36420ae4();
       break;
-    case # "hash_340aa006a74a3adc":
+    case #"hash_340aa006a74a3adc":
       array::run_all(getaiarchetypearray(#"hulk"), &function_231f9a1b, "<dev string:x5d0>");
       break;
-    case # "hash_3abe11c8218dfbba":
+    case #"hash_3abe11c8218dfbba":
       array::run_all(getaiarchetypearray(#"hulk"), &function_70c9d091);
       array::run_all(getaiarchetypearray(#"hulk"), &function_231f9a1b, "<dev string:x5e8>");
       break;
-    case # "hash_659f8d8927268eb":
+    case #"hash_659f8d8927268eb":
       array::thread_all(getaiarchetypearray(#"hulk"), &function_571ce384);
       break;
-    case # "spawn_path_node":
+    case #"spawn_path_node":
       function_36bbd77f();
       break;
-    case # "hash_3138f56d26a151b":
+    case #"hash_3138f56d26a151b":
       function_444a834b();
       break;
-    case # "hash_1915a9b7f9cf77e7":
+    case #"hash_1915a9b7f9cf77e7":
       function_c70dab2a();
       break;
-    case # "toggle_ignoreall":
+    case #"toggle_ignoreall":
       toggle_ignore_all();
       break;
-    case # "hash_59119573fdc81de2":
+    case #"hash_59119573fdc81de2":
       level.var_84508d4d = [];
       break;
-    case # "hash_5f3b847c90ceefdd":
+    case #"hash_5f3b847c90ceefdd":
       function_91f14f2();
       break;
     case 0:

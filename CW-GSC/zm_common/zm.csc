@@ -1398,10 +1398,10 @@ function function_f73c3352() {
 
   foreach(struct in var_5caa3d5b.assets) {
     switch (struct.type) {
-      case # "character":
+      case #"character":
         var_2d9402be = &function_47dd41e8;
         break;
-      case # "xmodel":
+      case #"xmodel":
         var_2d9402be = &forcestreamxmodel;
         break;
       default:

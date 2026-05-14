@@ -644,66 +644,66 @@ function_1221d304() {
 
 function_b2775b52() {
   switch (self.vehicletype) {
-    case # "veh_quad_player_wz_blk":
-    case # "veh_quad_player_wz_blu":
-    case # "veh_quad_player_wz_grn":
-    case # "veh_quad_player_wz_tan":
-    case # "veh_quad_player_wz_red":
+    case #"veh_quad_player_wz_blk":
+    case #"veh_quad_player_wz_blu":
+    case #"veh_quad_player_wz_grn":
+    case #"veh_quad_player_wz_tan":
+    case #"veh_quad_player_wz_red":
       return (0, 0, 1);
-    case # "vehicle_boct_mil_truck_cargo_wz_tan":
-    case # "vehicle_boct_mil_truck_cargo_wz_dark":
-    case # "vehicle_boct_mil_truck_cargo_wz_green":
+    case #"vehicle_boct_mil_truck_cargo_wz_tan":
+    case #"vehicle_boct_mil_truck_cargo_wz_dark":
+    case #"vehicle_boct_mil_truck_cargo_wz_green":
       return (1, 0, 1);
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_grey":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_black":
-    case # "hash_482e864157620248":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_green":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_dark":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_tan":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_grey":
-    case # "hash_1d37af413f257377":
-    case # "hash_1d37bc413f25898e":
-    case # "vehicle_t8_mil_helicopter_light_gunner_wz_black":
-    case # "vehicle_t8_mil_helicopter_light_transport_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_grey":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_black":
+    case #"hash_482e864157620248":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_green":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_dark":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_tan":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_grey":
+    case #"hash_1d37af413f257377":
+    case #"hash_1d37bc413f25898e":
+    case #"vehicle_t8_mil_helicopter_light_gunner_wz_black":
+    case #"vehicle_t8_mil_helicopter_light_transport_wz_dark":
       return (1, 0, 0);
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_blk":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_gry":
-    case # "vehicle_boct_mil_boat_tactical_raft_wz_odg":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_blk":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_gry":
+    case #"vehicle_boct_mil_boat_tactical_raft_wz_odg":
       return (1, 0.5, 0);
-    case # "veh_fav_player_wz_blk":
-    case # "veh_fav_player_wz_tan":
-    case # "veh_fav_player_wz_grn":
-    case # "hash_79bf6a7491c80c7":
-    case # "hash_22d9b5a7a0d9dd73":
-    case # "hash_32e4c0a7619f03a9":
+    case #"veh_fav_player_wz_blk":
+    case #"veh_fav_player_wz_tan":
+    case #"veh_fav_player_wz_grn":
+    case #"hash_79bf6a7491c80c7":
+    case #"hash_22d9b5a7a0d9dd73":
+    case #"hash_32e4c0a7619f03a9":
       return (0.501961, 0.501961, 0);
-    case # "vehicle_boct_mil_boat_pbr_wz_tan":
-    case # "vehicle_boct_mil_boat_pbr_wz_grey":
-    case # "vehicle_boct_mil_boat_pbr_wz_green":
-    case # "vehicle_boct_mil_boat_pbr_wz_police":
-    case # "vehicle_boct_mil_boat_pbr_wz_black":
+    case #"vehicle_boct_mil_boat_pbr_wz_tan":
+    case #"vehicle_boct_mil_boat_pbr_wz_grey":
+    case #"vehicle_boct_mil_boat_pbr_wz_green":
+    case #"vehicle_boct_mil_boat_pbr_wz_police":
+    case #"vehicle_boct_mil_boat_pbr_wz_black":
       return (0, 1, 0);
-    case # "veh_suv_player_wz_blk":
-    case # "veh_suv_player_wz_met_gry":
-    case # "veh_suv_player_wz_wht":
-    case # "veh_suv_player_wz_gry":
-    case # "veh_suv_player_private_security_wz":
-    case # "veh_suv_player_police_wz":
+    case #"veh_suv_player_wz_blk":
+    case #"veh_suv_player_wz_met_gry":
+    case #"veh_suv_player_wz_wht":
+    case #"veh_suv_player_wz_gry":
+    case #"veh_suv_player_private_security_wz":
+    case #"veh_suv_player_police_wz":
       return (0, 1, 1);
-    case # "veh_muscle_car_convertible_player_wz_wht":
-    case # "veh_muscle_car_convertible_player_wz_replacer":
-    case # "veh_muscle_car_convertible_player_wz_grn":
-    case # "veh_muscle_car_convertible_player_wz_red":
-    case # "veh_muscle_car_convertible_player_wz_org":
-    case # "veh_muscle_car_convertible_player_wz_blk":
-    case # "veh_muscle_car_convertible_player_wz_bandit_blk":
-    case # "veh_muscle_car_convertible_player_wz_racing_grn":
-    case # "veh_muscle_car_convertible_player_wz_blu":
-    case # "veh_muscle_car_convertible_player_wz_ylw":
-    case # "veh_muscle_car_convertible_player_wz_phantom":
+    case #"veh_muscle_car_convertible_player_wz_wht":
+    case #"veh_muscle_car_convertible_player_wz_replacer":
+    case #"veh_muscle_car_convertible_player_wz_grn":
+    case #"veh_muscle_car_convertible_player_wz_red":
+    case #"veh_muscle_car_convertible_player_wz_org":
+    case #"veh_muscle_car_convertible_player_wz_blk":
+    case #"veh_muscle_car_convertible_player_wz_bandit_blk":
+    case #"veh_muscle_car_convertible_player_wz_racing_grn":
+    case #"veh_muscle_car_convertible_player_wz_blu":
+    case #"veh_muscle_car_convertible_player_wz_ylw":
+    case #"veh_muscle_car_convertible_player_wz_phantom":
       return (0, 1, 1);
-    case # "veh_quad_player_wz_police":
+    case #"veh_quad_player_wz_police":
       return (0.545098, 0.270588, 0.0745098);
     default:
       return (1, 0, 1);
@@ -719,7 +719,7 @@ function_4b227faf() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case # "wz_escape_zodiac":
+      case #"wz_escape_zodiac":
         var_dc1ea650 = group;
         break;
       default:
@@ -758,7 +758,7 @@ function_4b227faf() {
 
 function_df930125(str_type) {
   switch (str_type) {
-    case # "raft_items":
+    case #"raft_items":
       return (1, 0, 0);
     default:
       return (1, 0.5, 0);

@@ -990,11 +990,11 @@ robotlocomotionspeed() {
 
   if(robotismindcontrolled() == "mind_controlled") {
     switch (ai::getaiattribute(entity, "rogue_control_speed")) {
-      case # "walk":
+      case #"walk":
         return "locomotion_speed_walk";
-      case # "run":
+      case #"run":
         return "locomotion_speed_run";
-      case # "sprint":
+      case #"sprint":
         return "locomotion_speed_sprint";
     }
   } else if(ai::getaiattribute(entity, "sprint")) {
@@ -2062,13 +2062,13 @@ robottryreacquireservice(entity) {
 
 takeoverinitialize(entity, asmstatename) {
   switch (entity ai::get_behavior_attribute("rogue_control")) {
-    case # "level_1":
+    case #"level_1":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel1();
       break;
-    case # "level_2":
+    case #"level_2":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel2();
       break;
-    case # "level_3":
+    case #"level_3":
       entity robotsoldierserverutils::forcerobotsoldiermindcontrollevel3();
       break;
   }
@@ -2079,8 +2079,8 @@ takeoverinitialize(entity, asmstatename) {
 
 takeoverterminate(entity, asmstatename) {
   switch (entity ai::get_behavior_attribute("rogue_control")) {
-    case # "level_2":
-    case # "level_3":
+    case #"level_2":
+    case #"level_3":
       entity thread shared::dropaiweapon();
       break;
   }
@@ -2434,10 +2434,10 @@ robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, weapon, p
 
   if(weapon.name == #"sticky_grenade") {
     switch (meansofdamage) {
-      case # "mod_impact":
+      case #"mod_impact":
         entity.stuckwithstickygrenade = 1;
         break;
-      case # "mod_grenade_splash":
+      case #"mod_grenade_splash":
         if(isDefined(entity.stuckwithstickygrenade) && entity.stuckwithstickygrenade) {
           damage = entity.health;
         }
@@ -2730,13 +2730,13 @@ randomgibroguerobot(entity) {
 
 roguecontrolattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "forced_level_1":
+    case #"forced_level_1":
       if(entity.controllevel <= 0) {
         forcerobotsoldiermindcontrollevel1();
       }
 
       break;
-    case # "forced_level_2":
+    case #"forced_level_2":
       if(entity.controllevel <= 1) {
         forcerobotsoldiermindcontrollevel2();
         destructserverutils::togglespawngibs(entity, 0);
@@ -2747,7 +2747,7 @@ roguecontrolattributecallback(entity, attribute, oldvalue, value) {
       }
 
       break;
-    case # "forced_level_3":
+    case #"forced_level_3":
       if(entity.controllevel <= 2) {
         forcerobotsoldiermindcontrollevel3();
         destructserverutils::togglespawngibs(entity, 0);
@@ -2770,16 +2770,16 @@ robotmovemodeattributecallback(entity, attribute, oldvalue, value) {
   }
 
   switch (value) {
-    case # "normal":
+    case #"normal":
       break;
-    case # "rambo":
+    case #"rambo":
       entity.ignorepathenemyfightdist = 1;
       break;
-    case # "marching":
+    case #"marching":
       entity.ignorepathenemyfightdist = 1;
       entity setblackboardattribute("_move_mode", "marching");
       break;
-    case # "rusher":
+    case #"rusher":
       if(!entity ai::get_behavior_attribute("can_become_rusher")) {
         entity ai::set_behavior_attribute("move_mode", oldvalue);
       }
@@ -2798,13 +2798,13 @@ robotforcecrawler(entity, attribute, oldvalue, value) {
   }
 
   switch (value) {
-    case # "normal":
+    case #"normal":
       return;
-    case # "gib_legs":
+    case #"gib_legs":
       gibserverutils::togglespawngibs(entity, 1);
       destructserverutils::togglespawngibs(entity, 1);
       break;
-    case # "remove_legs":
+    case #"remove_legs":
       gibserverutils::togglespawngibs(entity, 0);
       destructserverutils::togglespawngibs(entity, 0);
       break;
@@ -2855,13 +2855,13 @@ roguecontrolforcegoalattributecallback(entity, attribute, oldvalue, value) {
 
 roguecontrolspeedattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "walk":
+    case #"walk":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
       break;
-    case # "run":
+    case #"run":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
       break;
-    case # "sprint":
+    case #"sprint":
       entity setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
       break;
   }
@@ -2869,10 +2869,10 @@ roguecontrolspeedattributecallback(entity, attribute, oldvalue, value) {
 
 robottraversalattributecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "normal":
+    case #"normal":
       entity.manualtraversemode = 0;
       break;
-    case # "procedural":
+    case #"procedural":
       entity.manualtraversemode = 1;
       break;
   }

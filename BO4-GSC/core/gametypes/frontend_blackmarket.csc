@@ -48,27 +48,27 @@ function_8aff1931(localclientnum, menu_data) {
     }
 
     switch (waitresult.status) {
-      case # "opencrate":
+      case #"opencrate":
         if(waitresult.result) {
           switch (hash(waitresult.crateid)) {
-            case # "1000":
+            case #"1000":
               level thread function_f559e439(localclientnum, menu_data, "loot_case");
               break;
-            case # "1001":
+            case #"1001":
               level thread function_f559e439(localclientnum, menu_data, "loot_crate");
               break;
           }
         }
 
         break;
-      case # "playsound":
+      case #"playsound":
         level.var_ca61b442 = playSound(localclientnum, waitresult.soundalias);
         break;
-      case # "stopplaysound":
+      case #"stopplaysound":
         stopsound(level.var_ca61b442);
         level.var_ca61b442 = playSound(localclientnum, waitresult.soundalias);
         break;
-      case # "stopsound":
+      case #"stopsound":
         stopsound(level.var_ca61b442);
         level.var_ca61b442 = undefined;
         break;
@@ -128,17 +128,17 @@ function_f559e439(localclientnum, menu_data, state) {
   level.s_blackmarket.var_5a133766 = 0;
 
   switch (hash(state)) {
-    case # "welcome_case_multi":
-    case # "welcome_empty":
-    case # "welcome_case_avail":
-    case # "welcome_case_special":
-    case # "welcome_case_notavail":
+    case #"welcome_case_multi":
+    case #"welcome_empty":
+    case #"welcome_case_avail":
+    case #"welcome_case_special":
+    case #"welcome_case_notavail":
       level.s_blackmarket.var_5a133766 = 1;
       level.s_blackmarket.var_46d8e7d1 = hash(state) != #"welcome_empty";
       var_f56984dc = "idle";
       break;
-    case # "loot_case_open":
-    case # "loot_case":
+    case #"loot_case_open":
+    case #"loot_case":
       var_ce1b87cf = #"scene_frontend_blackjack_case";
 
       if(state == "loot_case_open") {
@@ -154,8 +154,8 @@ function_f559e439(localclientnum, menu_data, state) {
       }
 
       break;
-    case # "loot_crate":
-    case # "loot_crate_open":
+    case #"loot_crate":
+    case #"loot_crate_open":
       var_ce1b87cf = #"scene_frontend_blackjack_crate";
 
       if(state == "loot_crate_open") {
@@ -245,13 +245,13 @@ function_fa73161a(localclientnum, menu_data, state) {
         default:
           level.s_blackmarket.var_82406a05 = #"cin_black_market_greeting";
           break;
-        case # "welcome_case_avail":
+        case #"welcome_case_avail":
           level.s_blackmarket.var_82406a05 = #"cin_black_market_case_avail";
           break;
-        case # "welcome_case_multi":
+        case #"welcome_case_multi":
           level.s_blackmarket.var_82406a05 = #"cin_black_market_mult_case";
           break;
-        case # "welcome_case_special":
+        case #"welcome_case_special":
           level.s_blackmarket.var_82406a05 = #"cin_black_market_spec_offer";
           break;
       }
@@ -290,7 +290,7 @@ function_feaafe07(localclientnum, state) {
   var_24282d8c = [];
 
   switch (hash(state)) {
-    case # "loot_case":
+    case #"loot_case":
       if(!isDefined(var_24282d8c)) {
         var_24282d8c = [];
       } else if(!isarray(var_24282d8c)) {
@@ -302,7 +302,7 @@ function_feaafe07(localclientnum, state) {
       }
 
       break;
-    case # "loot_crate":
+    case #"loot_crate":
       if(!isDefined(var_24282d8c)) {
         var_24282d8c = [];
       } else if(!isarray(var_24282d8c)) {
@@ -341,10 +341,10 @@ function_2f3c1d65(localclientnum, menu_data, state) {
   }
 
   switch (hash(state)) {
-    case # "loot_case":
+    case #"loot_case":
       function_f559e439(localclientnum, menu_data, "loot_case_open");
       break;
-    case # "loot_crate":
+    case #"loot_crate":
       function_f559e439(localclientnum, menu_data, "loot_crate_open");
       break;
   }

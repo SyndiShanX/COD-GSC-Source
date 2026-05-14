@@ -2952,16 +2952,16 @@ function private function_8fc96d1b(var_cfeeef61, var_2f3f4731, a_ents, n_blend) 
 
     foreach(var_db087283 in a_ents.var_d6cfa700) {
       switch (var_db087283.name) {
-        case # "death":
+        case #"death":
           foreach(ent in self.scene_ents) {
             s_tracker thread function_100bb0ad(var_db087283, ent);
           }
 
           break;
-        case # "react_r":
-        case # "react_l":
-        case # "react_b":
-        case # "react_f":
+        case #"react_r":
+        case #"react_l":
+        case #"react_b":
+        case #"react_f":
           foreach(ent in self.scene_ents) {
             s_tracker thread function_ac41a9e4(var_db087283, ent);
           }

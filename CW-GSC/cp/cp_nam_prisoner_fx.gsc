@@ -20,42 +20,42 @@ function function_e5b8c5f(var_e5c02698) {
   array = level.var_731c10af.paths[var_e5c02698].var_97ee53a9;
 
   switch (var_e5c02698) {
-    case # "intro":
+    case #"intro":
       break;
-    case # "rice_paddies":
+    case #"rice_paddies":
       array[array.size] = "AmbFx_Rice_Paddies";
       array[array.size] = "AmbFx_Rice_Paddies_Fire";
       array[array.size] = "AmbFx_Mountain_Vista_West";
       array[array.size] = "AmbFx_Rice_Paddies_Heli_Fire";
       break;
-    case # "jungle_path":
+    case #"jungle_path":
       array[array.size] = "AmbFx_Jungle_Path";
       break;
-    case # "waterfall_path":
+    case #"waterfall_path":
       array[array.size] = "AmbFx_Waterfall_Path";
       break;
-    case # "hash_37049c08cb142cc7":
+    case #"hash_37049c08cb142cc7":
       array[array.size] = "AmbFx_Creek_Path";
       array[array.size] = "AmbFx_Creek_Path_Waterfall";
       break;
-    case # "hash_5a141a81a5112819":
+    case #"hash_5a141a81a5112819":
       array[array.size] = "AmbFx_River_Path";
       break;
-    case # "hash_40947083f371555e":
+    case #"hash_40947083f371555e":
       break;
-    case # "sniper_overlook":
+    case #"sniper_overlook":
       array[array.size] = "AmbFx_Sniper_Overlook";
       array[array.size] = "AmbFx_Mountain_Vista_West";
       break;
-    case # "village":
+    case #"village":
       array[array.size] = "AmbFx_Village";
       array[array.size] = "AmbFx_Village_Night";
       break;
-    case # "caves":
+    case #"caves":
       array[array.size] = "AmbFx_Caves";
       array[array.size] = "AmbFx_Caves_Dust";
       break;
-    case # "rat_tunnels":
+    case #"rat_tunnels":
       array[array.size] = "AmbFx_Tunnels";
       break;
     default:

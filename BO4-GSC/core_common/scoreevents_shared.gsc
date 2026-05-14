@@ -409,7 +409,7 @@ function_2b96d7dc() {
       }
 
       switch (weapon.statname) {
-        case # "ultimate_turret":
+        case #"ultimate_turret":
           event = "automated_turret_vehicle_destruction";
           break;
         default:

@@ -106,15 +106,15 @@ zombie_entered_water() {
 
 zombie_water_move_slow() {
   switch (self.zombie_move_speed) {
-    case # "walk":
+    case #"walk":
       break;
-    case # "run":
+    case #"run":
       self thread zombie_utility::set_zombie_run_cycle("walk");
       break;
-    case # "sprint":
+    case #"sprint":
       self thread zombie_utility::set_zombie_run_cycle("run");
       break;
-    case # "super_sprint":
+    case #"super_sprint":
       self thread zombie_utility::set_zombie_run_cycle("sprint");
       break;
   }
@@ -177,16 +177,16 @@ zombie_exited_water() {
 
 zombie_water_move_normal() {
   switch (self.zombie_move_speed) {
-    case # "walk":
+    case #"walk":
       self thread zombie_utility::set_zombie_run_cycle("run");
       break;
-    case # "run":
+    case #"run":
       self thread zombie_utility::set_zombie_run_cycle("sprint");
       break;
-    case # "sprint":
+    case #"sprint":
       self thread zombie_utility::set_zombie_run_cycle("super_sprint");
       break;
-    case # "super_sprint":
+    case #"super_sprint":
       break;
   }
 }
@@ -652,11 +652,11 @@ function_e22d95bc() {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case # "crouch":
+      case #"crouch":
         self setstance("stand");
         wait 0.2;
         break;
-      case # "prone":
+      case #"prone":
         self setstance("stand");
         wait 1;
         break;

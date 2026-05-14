@@ -115,37 +115,37 @@ function_b6ea080() {
 
         if(isDefined(the_item[0].itementry) && isDefined(the_item[0].itementry.itemtype)) {
           switch (the_item[0].itementry.itemtype) {
-            case # "ammo":
+            case #"ammo":
               type = "<dev string:x5e0>";
               break;
-            case # "weapon":
+            case #"weapon":
               type = "<dev string:x5e7>";
               break;
-            case # "health":
+            case #"health":
               type = "<dev string:x5f0>";
               break;
-            case # "armor":
+            case #"armor":
               type = "<dev string:x5f9>";
               break;
-            case # "equipment":
+            case #"equipment":
               type = "<dev string:x601>";
               break;
-            case # "backpack":
+            case #"backpack":
               type = "<dev string:x60d>";
               break;
-            case # "generic":
+            case #"generic":
               type = "<dev string:x618>";
               break;
-            case # "cash":
+            case #"cash":
               type = "<dev string:x622>";
               break;
-            case # "killstreak":
+            case #"killstreak":
               type = "<dev string:x629>";
               break;
-            case # "attachment":
+            case #"attachment":
               type = "<dev string:x636>";
               break;
-            case # "resource":
+            case #"resource":
               type = "<dev string:x643>";
               break;
             default:
@@ -199,13 +199,13 @@ function_938d798a() {
     v_stand = getclosestpointonnavmesh(v_origin, 192);
 
     switch (var_4e94b449[2]) {
-      case # "overlaps":
+      case #"overlaps":
         var_e45e8f33 = (0, 0, 1);
         var_6f08946b = fgetarg(file, 3);
         var_dd52f0fe = fgetarg(file, 4);
         var_d8aec942 = (float(var_4e94b449[6]), float(var_6f08946b), float(var_dd52f0fe));
         break;
-      case # "is":
+      case #"is":
         var_e45e8f33 = (1, 0, 0);
         var_d8aec942 = undefined;
         break;
@@ -364,19 +364,19 @@ function_f0d72128() {
 
 function_78931318(str_button) {
   switch (str_button) {
-    case # "down":
+    case #"down":
       str_btn = "<dev string:x89e>";
       var_7a00db94 = "<dev string:x8aa>";
       break;
-    case # "left":
+    case #"left":
       str_btn = "<dev string:x8b6>";
       var_7a00db94 = "<dev string:x8c2>";
       break;
-    case # "right":
+    case #"right":
       str_btn = "<dev string:x8ce>";
       var_7a00db94 = "<dev string:x8db>";
       break;
-    case # "up":
+    case #"up":
       str_btn = "<dev string:x8e8>";
       var_7a00db94 = "<dev string:x8f2>";
       break;
@@ -819,16 +819,16 @@ function_cdd9b388() {
             color = (1, 1, 1);
 
             switch (vehicle.scriptvehicletype) {
-              case # "player_atv":
+              case #"player_atv":
                 color = (0, 1, 1);
                 break;
-              case # "cargo_truck_wz":
+              case #"cargo_truck_wz":
                 color = (1, 1, 0);
                 break;
-              case # "tactical_raft_wz":
+              case #"tactical_raft_wz":
                 color = (1, 0.5, 0);
                 break;
-              case # "helicopter_light":
+              case #"helicopter_light":
                 color = (1, 0, 1);
                 break;
             }
@@ -855,13 +855,13 @@ function_cdd9b388() {
 
             if(stash_items.size > 0) {
               switch (stash_items[0].targetname) {
-                case # "world_dynent_stash_health":
+                case #"world_dynent_stash_health":
                   color = (1, 0, 0);
                   break;
-                case # "world_dynent_stash_supply":
+                case #"world_dynent_stash_supply":
                   color = (0, 1, 0);
                   break;
-                case # "hash_ea6664e89a0bff6":
+                case #"hash_ea6664e89a0bff6":
                   color = (0.501961, 0.501961, 0);
                   break;
               }
@@ -899,16 +899,16 @@ function_cdd9b388() {
         foreach(item in var_f4b807cb) {
           if(isDefined(item.itementry) && isDefined(item.itementry.rarity)) {
             switch (item.itementry.rarity) {
-              case # "common":
+              case #"common":
                 color = (0, 1, 0);
                 break;
-              case # "rare":
+              case #"rare":
                 color = (0, 0, 1);
                 break;
-              case # "legendary":
+              case #"legendary":
                 color = (1, 0, 1);
                 break;
-              case # "epic":
+              case #"epic":
                 color = (1, 0.5, 0);
                 break;
               default:
@@ -1093,7 +1093,7 @@ function_91ef342() {
     r = level waittill(#"devgui_bot");
 
     switch (r.args[0]) {
-      case # "hash_29f59f6b62fdbf94":
+      case #"hash_29f59f6b62fdbf94":
         function_c07eae4e();
         break;
     }

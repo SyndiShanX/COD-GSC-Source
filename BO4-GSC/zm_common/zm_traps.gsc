@@ -74,10 +74,10 @@ trap_init() {
       self._trap_activate_func = level._custom_traps[self.script_noteworthy].activate;
     } else {
       switch (self.script_noteworthy) {
-        case # "rotating":
+        case #"rotating":
           self._trap_activate_func = &trap_activate_rotating;
           break;
-        case # "flipper":
+        case #"flipper":
           self._trap_activate_func = &trap_activate_flipper;
           break;
         default:
@@ -103,22 +103,22 @@ trap_init() {
   for(i = 0; i < components.size; i++) {
     if(isDefined(components[i].script_noteworthy)) {
       switch (components[i].script_noteworthy) {
-        case # "counter_1s":
+        case #"counter_1s":
           self.counter_1s = components[i];
           continue;
-        case # "counter_10s":
+        case #"counter_10s":
           self.counter_10s = components[i];
           continue;
-        case # "counter_100s":
+        case #"counter_100s":
           self.counter_100s = components[i];
           continue;
-        case # "mover":
+        case #"mover":
           self._trap_movers[self._trap_movers.size] = components[i];
           continue;
-        case # "switch":
+        case #"switch":
           self._trap_switches[self._trap_switches.size] = components[i];
           continue;
-        case # "light":
+        case #"light":
           self._trap_lights[self._trap_lights.size] = components[i];
           continue;
       }
@@ -126,37 +126,37 @@ trap_init() {
 
     if(isDefined(components[i].script_string)) {
       switch (components[i].script_string) {
-        case # "flipper1":
+        case #"flipper1":
           self.flipper1 = components[i];
           continue;
-        case # "flipper2":
+        case #"flipper2":
           self.flipper2 = components[i];
           continue;
-        case # "flipper1_radius_check":
+        case #"flipper1_radius_check":
           self.flipper1_radius_check = components[i];
           continue;
-        case # "flipper2_radius_check":
+        case #"flipper2_radius_check":
           self.flipper2_radius_check = components[i];
           continue;
-        case # "target1":
+        case #"target1":
           self.target1 = components[i];
           continue;
-        case # "target2":
+        case #"target2":
           self.target2 = components[i];
           continue;
-        case # "target3":
+        case #"target3":
           self.target3 = components[i];
           continue;
       }
     }
 
     switch (components[i].classname) {
-      case # "trigger_use_new":
-      case # "trigger_use":
+      case #"trigger_use_new":
+      case #"trigger_use":
         self._trap_use_trigs[self._trap_use_trigs.size] = components[i];
         components[i]._trap = self;
         break;
-      case # "script_model":
+      case #"script_model":
         if(components[i].model == self._trap_light_model_off) {
           self._trap_lights[self._trap_lights.size] = components[i];
         } else if(components[i].model == self._trap_switch_model) {
@@ -530,10 +530,10 @@ trap_damage() {
         ent thread[[level._custom_traps[self._trap_type].player_damage]](self);
       } else {
         switch (self._trap_type) {
-          case # "rocket":
+          case #"rocket":
             ent thread player_fire_damage();
             break;
-          case # "rotating":
+          case #"rotating":
             if(ent getstance() == "stand") {
               ent dodamage(50, ent.origin + (0, 0, 20));
               ent setstance("crouch");
@@ -557,13 +557,13 @@ trap_damage() {
       }
 
       switch (self._trap_type) {
-        case # "rocket":
+        case #"rocket":
           ent thread zombie_trap_death(self, 100);
           break;
-        case # "rotating":
+        case #"rotating":
           ent thread zombie_trap_death(self, 200);
           break;
-        case # "werewolfer":
+        case #"werewolfer":
           ent thread zombie_trap_death(self, 100);
           break;
         default:
@@ -661,7 +661,7 @@ zombie_trap_death(e_trap, param) {
   self.marked_for_death = 1;
 
   switch (e_trap._trap_type) {
-    case # "rocket":
+    case #"rocket":
       if(isDefined(self.animname) && self.animname != "zombie_dog") {
         if(param > 90 && level.burning_zombies.size < 6) {
           level.burning_zombies[level.burning_zombies.size] = self;
@@ -695,8 +695,8 @@ zombie_trap_death(e_trap, param) {
       }
 
       break;
-    case # "rotating":
-    case # "centrifuge":
+    case #"rotating":
+    case #"centrifuge":
       ang = vectortoangles(e_trap.origin - self.origin);
       direction_vec = vectorscale(anglestoright(ang), param);
 
@@ -923,13 +923,13 @@ trap_model_type_init() {
   }
 
   switch (self.script_parameters) {
-    case # "pentagon_electric":
+    case #"pentagon_electric":
       self._trap_light_model_off = "zombie_trap_switch_light";
       self._trap_light_model_green = "zombie_trap_switch_light_on_green";
       self._trap_light_model_red = "zombie_trap_switch_light_on_red";
       self._trap_switch_model = "zombie_trap_switch_handle";
       break;
-    case # "default":
+    case #"default":
     default:
       self._trap_light_model_off = "zombie_zapper_cagelight";
       self._trap_light_model_green = "zombie_zapper_cagelight";

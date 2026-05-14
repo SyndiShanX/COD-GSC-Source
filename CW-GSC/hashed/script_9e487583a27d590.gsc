@@ -346,16 +346,16 @@ function function_89f6dfa8() {
   self flag::set("flag_in_scene");
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level scene::play("scene_hub_post_takedown_dialog_lazar", "amb_enter_front");
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       level scene::play("scene_hub_post_takedown_dialog_lazar", "amb_enter_behind");
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level scene::play("scene_hub_post_takedown_dialog_lazar", "amb_enter_left");
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level scene::play("scene_hub_post_takedown_dialog_lazar", "amb_enter_right");
       break;
   }

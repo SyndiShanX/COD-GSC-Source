@@ -62,7 +62,7 @@ function function_8b014c60(trap, var_7c56394 = 0) {
   }
 
   switch (args[0]) {
-    case # "velocity":
+    case #"velocity":
       assert(args.size >= 4, "<dev string:x57>");
       trap.velocityvector = (float(args[1]), float(args[2]), float(args[3]));
       trap.type = 0;

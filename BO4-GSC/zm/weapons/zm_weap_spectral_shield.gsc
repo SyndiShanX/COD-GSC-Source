@@ -844,8 +844,8 @@ function_d1a7390b(w_curr) {
           }
         } else if(isDefined(e_last_target.zm_ai_category)) {
           switch (e_last_target.zm_ai_category) {
-            case # "basic":
-            case # "enhanced":
+            case #"basic":
+            case #"enhanced":
               if(!isDefined(e_last_target.var_455d573e)) {
                 e_last_target.var_455d573e = e_last_target function_81947c70();
               }
@@ -871,9 +871,9 @@ function_d1a7390b(w_curr) {
               }
 
               break;
-            case # "heavy":
-            case # "miniboss":
-            case # "boss":
+            case #"heavy":
+            case #"miniboss":
+            case #"boss":
               e_last_target dodamage(e_last_target.maxhealth * 0.01, e_last_target getcentroid(), self, self, "torso_lower", "MOD_ELECTROCUTED");
 
               if(!(isDefined(e_last_target.var_5bf7575e) && e_last_target.var_5bf7575e)) {
@@ -881,7 +881,7 @@ function_d1a7390b(w_curr) {
               }
 
               break;
-            case # "popcorn":
+            case #"popcorn":
               if(!isDefined(e_last_target.var_455d573e)) {
                 e_last_target.var_455d573e = e_last_target function_81947c70();
               }
@@ -915,11 +915,11 @@ function_d1a7390b(w_curr) {
       var_24bae834 = 0;
 
       switch (a_trace[#"surfacetype"]) {
-        case # "glasscar":
-        case # "rock":
-        case # "metal":
-        case # "metalcar":
-        case # "glass":
+        case #"glasscar":
+        case #"rock":
+        case #"metal":
+        case #"metalcar":
+        case #"glass":
           var_24bae834 = 1;
           var_7a585212 = "reflective_geo";
           break;
@@ -1378,7 +1378,7 @@ function_3a6ee2ea() {
 
 function_6da92963(cmd) {
   switch (cmd) {
-    case # "hash_2346833eb7280698":
+    case #"hash_2346833eb7280698":
       foreach(e_player in level.players) {
         if(e_player hasweapon(level.var_4e845c84)) {
           e_player.var_9fd623ed = math::clamp(e_player.var_f7c822b5 * 3, 0, e_player.var_f7c822b5 * 3);
@@ -1397,7 +1397,7 @@ function_6da92963(cmd) {
       }
 
       break;
-    case # "hash_5a13ac5a96bb700c":
+    case #"hash_5a13ac5a96bb700c":
       foreach(e_player in level.players) {
         if(e_player hasweapon(level.var_4e845c84)) {
           e_player.var_9fd623ed = math::clamp(e_player.var_f7c822b5 * 3, 0, e_player.var_f7c822b5 * 3);

@@ -629,16 +629,16 @@ function function_20daf01(localclientnum, state, oldstate) {
   var_8c7054cc = undefined;
 
   switch (oldstate) {
-    case # "unlockdia1":
+    case #"unlockdia1":
       var_8c7054cc = #"musictrack_zm_platinum_berlin";
       break;
-    case # "unlocksqueak":
+    case #"unlocksqueak":
       var_8c7054cc = #"musictrack_zm_platinum_acidbunny";
       break;
-    case # "unlockdia2":
+    case #"unlockdia2":
       var_8c7054cc = #"musictrack_zm_platinum_whatawaits";
       break;
-    case # "unlockshatter":
+    case #"unlockshatter":
       var_8c7054cc = #"musictrack_zm_platinum_wrath";
       break;
   }

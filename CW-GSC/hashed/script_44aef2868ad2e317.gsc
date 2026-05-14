@@ -240,31 +240,31 @@ function function_16e85ca5() {
     if(isDefined(level.var_1b4de43)) {
       foreach(room in level.var_1b4de43) {
         switch (room) {
-          case # "office":
+          case #"office":
             function_dfb343c2("charkov_office");
             function_34b04d5f("charkov_office", "generalsOfficeState");
             break;
-          case # "data":
+          case #"data":
             function_dfb343c2(room);
             function_34b04d5f(room, "technologiesRoomState");
             break;
-          case # "checkpoint":
+          case #"checkpoint":
             function_dfb343c2(room);
             function_34b04d5f(room, "securityState");
             break;
-          case # "interrogation":
+          case #"interrogation":
             function_dfb343c2(room);
             function_34b04d5f(room, "interrogationState");
             break;
-          case # "camera":
+          case #"camera":
             function_dfb343c2(room);
             function_34b04d5f(room, "cameraRoomState");
             break;
-          case # "prison":
+          case #"prison":
             function_dfb343c2(room);
             function_34b04d5f(room, "kravchenkoOfficeState");
             break;
-          case # "informant":
+          case #"informant":
             if(namespace_94c47ce5::function_11b2b847()) {
               function_34b04d5f(room, "kravchenkoOfficeState");
             }
@@ -287,25 +287,25 @@ function function_16e85ca5() {
 
 function function_337cace2(location) {
   switch (location) {
-    case # "office":
+    case #"office":
       if(level.quest_objectives[#"poison_tea"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
-    case # "data":
+    case #"data":
       if(level.quest_objectives[#"key_reprogram"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
-    case # "checkpoint":
+    case #"checkpoint":
       if(level.quest_objectives[#"making_a_mole"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
-    case # "interrogation":
+    case #"interrogation":
       if(level.quest_objectives[#"prisoner_persuasion"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
@@ -380,31 +380,31 @@ function function_3b309153() {
     model_name = undefined;
 
     switch (point.script_noteworthy) {
-      case # "charkov_office":
+      case #"charkov_office":
         point.var_d9b5c896 = #"hash_2a572dd82dffa737";
         model_name = "generalsOfficeState";
         function_2c60d1ba(point);
         break;
-      case # "data":
+      case #"data":
         point.var_d9b5c896 = #"hash_2bb6f605c5e7b52a";
         model_name = "technologiesRoomState";
         function_4ca4fd23(point);
         break;
-      case # "camera":
+      case #"camera":
         point.var_d9b5c896 = #"hash_1f3fb2e195d67274";
         function_7733f229(point);
         break;
-      case # "checkpoint":
+      case #"checkpoint":
         point.var_d9b5c896 = #"hash_795ca66f92406381";
         model_name = "securityState";
         function_ef7b8da7(point);
         break;
-      case # "interrogation":
+      case #"interrogation":
         point.var_d9b5c896 = #"hash_17ba8a94dd34cf9b";
         model_name = "interrogationState";
         function_731ece55(point);
         break;
-      case # "informant":
+      case #"informant":
         if(namespace_94c47ce5::function_11b2b847()) {
           point.var_d9b5c896 = #"hash_531400ca1362803f";
           model_name = "kravchenkoOfficeState";
@@ -427,12 +427,12 @@ function function_60e6f656() {
 
   foreach(point in level.var_6d758088) {
     switch (point.script_noteworthy) {
-      case # "charkov_office":
+      case #"charkov_office":
         point.var_d9b5c896 = #"hash_2a572dd82dffa737";
         model_name = "generalsOfficeState";
         function_2c60d1ba(point);
         break;
-      case # "informant":
+      case #"informant":
         if(namespace_94c47ce5::function_11b2b847()) {
           point.var_d9b5c896 = #"hash_531400ca1362803f";
           model_name = "kravchenkoOfficeState";
@@ -440,17 +440,17 @@ function function_60e6f656() {
         }
 
         break;
-      case # "data":
+      case #"data":
         point.var_d9b5c896 = #"hash_2bb6f605c5e7b52a";
         model_name = "technologiesRoomState";
         function_4ca4fd23(point);
         break;
-      case # "checkpoint":
+      case #"checkpoint":
         point.var_d9b5c896 = #"hash_795ca66f92406381";
         model_name = "securityState";
         function_ef7b8da7(point);
         break;
-      case # "interrogation":
+      case #"interrogation":
         point.var_d9b5c896 = #"hash_17ba8a94dd34cf9b";
         model_name = "interrogationState";
         function_731ece55(point);
@@ -472,22 +472,22 @@ function function_73f90a7f() {
     model_name = undefined;
 
     switch (point.script_noteworthy) {
-      case # "charkov_office":
+      case #"charkov_office":
         model_name = "generalsOfficeState";
         break;
-      case # "data":
+      case #"data":
         model_name = "technologiesRoomState";
         break;
-      case # "checkpoint":
+      case #"checkpoint":
         model_name = "securityState";
         break;
-      case # "interrogation":
+      case #"interrogation":
         model_name = "interrogationState";
         break;
-      case # "camera":
+      case #"camera":
         model_name = "cameraRoomState";
         break;
-      case # "informant":
+      case #"informant":
         if(namespace_94c47ce5::function_11b2b847()) {}
 
         break;
@@ -868,7 +868,7 @@ function function_399a3c34() {
 
     foreach(hotspot in hotspots) {
       switch (hotspot.script_noteworthy) {
-        case # "camera":
+        case #"camera":
           hotspot.var_d9b5c896 = #"hash_1f3fb2e195d67274";
           model_name = "cameraRoomState";
           hotspot.var_94ca2a30 = #"hash_658c76bc4bf5be3e";
@@ -926,7 +926,7 @@ function function_bd719400() {
 
   if(isDefined(location)) {
     switch (location) {
-      case # "charkov_office":
+      case #"charkov_office":
         if(!level flag::get("track_poison_quest")) {
           function_3baa92ca();
           level flag::set("track_poison_quest");
@@ -934,7 +934,7 @@ function function_bd719400() {
         }
 
         break;
-      case # "checkpoint":
+      case #"checkpoint":
         if(!level flag::get("track_mole_quest")) {
           function_3baa92ca();
           level flag::set("track_mole_quest");
@@ -942,7 +942,7 @@ function function_bd719400() {
         }
 
         break;
-      case # "interrogation":
+      case #"interrogation":
         if(!level flag::get("track_persuade_quest")) {
           function_3baa92ca();
           level flag::set("track_persuade_quest");
@@ -950,7 +950,7 @@ function function_bd719400() {
         }
 
         break;
-      case # "data":
+      case #"data":
         if(!level flag::get("track_reprogram_quest")) {
           function_3baa92ca();
           level flag::set("track_reprogram_quest");
@@ -4884,20 +4884,20 @@ function function_1b3bebea(prompt_struct) {
 
   if(isDefined(location)) {
     switch (location) {
-      case # "hash_215b2b6854de7388":
-      case # "charkov_office":
+      case #"hash_215b2b6854de7388":
+      case #"charkov_office":
         objective_name = "poison_tea";
         break;
-      case # "checkpoint":
-      case # "server":
+      case #"checkpoint":
+      case #"server":
         objective_name = "making_a_mole";
         break;
-      case # "interrogation":
-      case # "records":
+      case #"interrogation":
+      case #"records":
         objective_name = "prisoner_persuasion";
         break;
-      case # "data":
-      case # "armory":
+      case #"data":
+      case #"armory":
         objective_name = "key_reprogram";
         break;
       default:
@@ -4986,31 +4986,31 @@ function function_3a103505() {
     hotspots[i] interactive_map::function_4b1a5235(#"confirm");
 
     switch (hotspots[i].script_noteworthy) {
-      case # "charkov_office":
+      case #"charkov_office":
         if(!level.quest_objectives[#"poison_tea"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
-      case # "checkpoint":
+      case #"checkpoint":
         if(!level.quest_objectives[#"making_a_mole"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
-      case # "interrogation":
+      case #"interrogation":
         if(!level.quest_objectives[#"prisoner_persuasion"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
-      case # "data":
+      case #"data":
         if(!level.quest_objectives[#"key_reprogram"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
-      case # "informant":
+      case #"informant":
         if(namespace_94c47ce5::function_11b2b847() && !level flag::get("flag_informant_killed")) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_ac82c4c6);
         }
@@ -5143,18 +5143,18 @@ function function_240afef6(objective_name) {
   objectives_ui::function_278c15e6(objective_name, undefined, 0);
 
   switch (msg._notify) {
-    case # "flag_poi_interrogation_file":
+    case #"flag_poi_interrogation_file":
       loc = struct::get("prisoner_chat", "targetname");
       objectives::update_position(objective_name, loc.origin);
       level flag::wait_till("flag_poi_interrogation_leverage");
       break;
-    case # "hash_3757a56b6dde424":
-    case # "flag_poi_records_file":
+    case #"hash_3757a56b6dde424":
+    case #"flag_poi_records_file":
       loc = struct::get("prisoner_chat", "targetname");
       objectives::update_position(objective_name, loc.origin);
       level flag::wait_till("flag_poi_interrogation_leverage");
       break;
-    case # "flag_poi_interrogation_leverage":
+    case #"flag_poi_interrogation_leverage":
       break;
     default:
       break;

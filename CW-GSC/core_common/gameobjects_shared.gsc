@@ -101,18 +101,18 @@ class cinteractobj {
     }
 
     switch (m_str_type) {
-      case # "carry":
+      case #"carry":
         assert(isDefined(m_a_keyline_objects[0]), "<dev string:x431>");
         mdl_gameobject = gameobjects::create_carry_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70);
         break;
-      case # "pack":
+      case #"pack":
         assert(isDefined(m_a_keyline_objects[0]), "<dev string:x431>");
         mdl_gameobject = gameobjects::create_pack_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70);
         break;
-      case # "generic":
+      case #"generic":
         mdl_gameobject = gameobjects::create_generic_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0));
         break;
-      case # "use":
+      case #"use":
       default:
         mdl_gameobject = gameobjects::create_use_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70, 0, e_object.script_enable_on_start);
         break;
@@ -358,18 +358,18 @@ class cinteractobj {
   function is_valid_gameobject_trigger(t_override) {
     if(m_str_trigger_type === "proximity") {
       switch (t_override.classname) {
-        case # "trigger_box":
-        case # "trigger_once":
-        case # "trigger_radius":
-        case # "trigger_multiple":
+        case #"trigger_box":
+        case #"trigger_once":
+        case #"trigger_radius":
+        case #"trigger_multiple":
           return true;
         default:
           return false;
       }
     } else {
       switch (t_override.classname) {
-        case # "trigger_radius_use":
-        case # "trigger_use":
+        case #"trigger_radius_use":
+        case #"trigger_use":
           return true;
         default:
           return false;
@@ -902,13 +902,13 @@ function defaultuseratescalercallback(player) {
 
   if(isDefined(playerrole) && isDefined(useobj.bundle)) {
     switch (playerrole) {
-      case # "prc_mp_slayer":
+      case #"prc_mp_slayer":
         scaler = useobj.bundle.slayer_userate_scaler;
         break;
-      case # "prc_mp_objective":
+      case #"prc_mp_objective":
         scaler = useobj.bundle.objective_userate_scaler;
         break;
-      case # "prc_mp_support":
+      case #"prc_mp_support":
         scaler = useobj.bundle.support_userate_scaler;
         break;
     }
@@ -929,11 +929,11 @@ function defaultallowweaponscallback(object) {
 
   if(isDefined(playerrole) && isDefined(object.bundle)) {
     switch (playerrole) {
-      case # "prc_mp_slayer":
+      case #"prc_mp_slayer":
         return is_true(object.bundle.slayer_allow_weapons);
-      case # "prc_mp_objective":
+      case #"prc_mp_objective":
         return is_true(object.bundle.objective_allow_weapons);
-      case # "prc_mp_support":
+      case #"prc_mp_support":
         return is_true(object.bundle.support_allow_weapons);
     }
   }
@@ -4157,17 +4157,17 @@ function can_interact_with(sentient) {
   }
 
   switch (self.interactteam) {
-    case # "group_none":
+    case #"group_none":
       return 0;
-    case # "group_all":
+    case #"group_all":
       return 1;
-    case # "group_friendly":
+    case #"group_friendly":
       if(team == self.ownerteam) {
         return 1;
       } else {
         return 0;
       }
-    case # "group_enemy":
+    case #"group_enemy":
       if(team != self.ownerteam) {
         return 1;
       } else if(isDefined(self.decayprogress) && self.decayprogress && self.curprogress > 0 && (!isDefined(self.decayprogressmin) || self.curprogress > self.decayprogressmin)) {
@@ -4183,10 +4183,10 @@ function can_interact_with(sentient) {
 
 function is_relative_team(relativeteam) {
   switch (relativeteam) {
-    case # "group_friendly":
-    case # "group_none":
-    case # "group_enemy":
-    case # "group_all":
+    case #"group_friendly":
+    case #"group_none":
+    case #"group_enemy":
+    case #"group_all":
       return 1;
     default:
       return 0;

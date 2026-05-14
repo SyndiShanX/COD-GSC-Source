@@ -66,7 +66,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
     explosion_radius = 300;
 
     switch (damage_type) {
-      case # "concussive":
+      case #"concussive":
         if(explosion_radius_type == "large") {
           explosion_radius = 280;
         } else {
@@ -74,7 +74,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
         }
 
         break;
-      case # "electrical":
+      case #"electrical":
         if(explosion_radius_type == "large") {
           explosion_radius = 60;
         } else {
@@ -82,7 +82,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
         }
 
         break;
-      case # "incendiary":
+      case #"incendiary":
         if(explosion_radius_type == "large") {
           explosion_radius = 250;
         } else {
@@ -99,7 +99,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
   }
 
   switch (destructible_event) {
-    case # "destructible_car_explosion":
+    case #"destructible_car_explosion":
       self destructible_car_explosion(attacker);
 
       if(isDefined(weapon)) {
@@ -107,7 +107,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case # "destructible_car_fire":
+    case #"destructible_car_fire":
       self thread destructible_car_fire_think(attacker);
 
       if(isDefined(weapon)) {
@@ -115,14 +115,14 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case # "explode":
+    case #"explode":
       self thread simple_explosion(attacker);
       break;
-    case # "explode_complex":
+    case #"explode_complex":
       self thread complex_explosion(attacker, explosion_radius);
       break;
-    case # "destructible_explosive_incendiary_large":
-    case # "destructible_explosive_incendiary_small":
+    case #"destructible_explosive_incendiary_large":
+    case #"destructible_explosive_incendiary_small":
       self explosive_incendiary_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -130,8 +130,8 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case # "destructible_explosive_electrical_small":
-    case # "destructible_explosive_electrical_large":
+    case #"destructible_explosive_electrical_small":
+    case #"destructible_explosive_electrical_large":
       self explosive_electrical_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -139,8 +139,8 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case # "destructible_explosive_concussive_large":
-    case # "destructible_explosive_concussive_small":
+    case #"destructible_explosive_concussive_large":
+    case #"destructible_explosive_concussive_small":
       self explosive_concussive_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {

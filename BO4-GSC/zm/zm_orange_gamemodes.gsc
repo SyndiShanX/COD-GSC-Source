@@ -15,7 +15,7 @@ event_handler[level_finalizeinit] main(eventstruct) {
   gametype = hash(util::get_game_type());
 
   switch (gametype) {
-    case # "zstandard":
+    case #"zstandard":
       zm_orange_zstandard::main();
       break;
   }

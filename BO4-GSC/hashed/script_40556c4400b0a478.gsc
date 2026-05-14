@@ -35,7 +35,7 @@ function_f2cc1ec() {
 
 function_5162a3de(cmd) {
   switch (cmd) {
-    case # "hash_3b5a33d5b7ae4e80":
+    case #"hash_3b5a33d5b7ae4e80":
       spawners = getspawnerarray();
 
       foreach(spawner in spawners) {
@@ -46,7 +46,7 @@ function_5162a3de(cmd) {
       }
 
       break;
-    case # "hash_2e229b658a79d09f":
+    case #"hash_2e229b658a79d09f":
       brutuses = getaiarchetypearray(#"brutus");
 
       foreach(brutus in brutuses) {

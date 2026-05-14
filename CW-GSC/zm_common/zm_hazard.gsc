@@ -220,10 +220,10 @@ function function_eccc5dbd() {
 
 function function_2499fe1b(cmd) {
   switch (cmd) {
-    case # "hash_1a5bda29acd157fd":
+    case #"hash_1a5bda29acd157fd":
       function_eccc5dbd();
       break;
-    case # "hash_55c4e53689e598c3":
+    case #"hash_55c4e53689e598c3":
       function_9e3de60();
       level notify(#"hash_7e539f4178c9c27c");
       break;

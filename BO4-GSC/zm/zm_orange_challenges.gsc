@@ -110,30 +110,30 @@ function_d3fc7131() {
   self.a_s_challenges = [];
 
   switch (self.script_location) {
-    case # "beach":
+    case #"beach":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(1, 13, 25, #"hash_1eff75043dd3a914", &function_f0f0f5f3, &function_20f477f2, "bonus_points_team", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(2, 15, 30, #"hash_1eff78043dd3ae2d", &function_b1c46dce, &function_b0d19ce9, "insta_kill", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(3, 3, 3, #"hash_1eff77043dd3ac7a", &function_e960fbf3, &function_35f6e838, "break_freeze_faster", #"hash_4394f0fdb2267af1");
       self function_33f591cf();
       break;
-    case # "forecastle":
+    case #"forecastle":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(4, 25, 50, #"hash_4e74f8eb1bd5b367", &function_63ed3839, &function_d9dffba1, "carpenter", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(5, 10, 20, #"hash_4e74f9eb1bd5b51a", &function_6d225067, &function_6d50f216, "fire_sale", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(6, 3, 3, #"hash_4e74faeb1bd5b6cd", &function_2ae162bf, &function_1de4dc2b, "armor", #"hash_3192e2687f3a2667");
       self function_be80cd37();
       break;
-    case # "frozen_crevasse":
+    case #"frozen_crevasse":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(7, 20, 40, #"hash_d9f2cedb84b8d66", &function_658f9053, &function_5ba49bb9, "bonus_points_team", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(8, 6, 12, #"hash_d9f2bedb84b8bb3", &function_8885885d, &function_b0848cf7, "full_ammo", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(9, 5, 5, #"hash_d9f2aedb84b8a00", &function_39ca7654, &function_a0ebbf07, "extra_snowballs", #"hash_607ea24c3576c5b2");
       self init_bells();
       break;
-    case # "lighthouse_station":
+    case #"lighthouse_station":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(10, 25, 50, #"hash_3f452857bdecf44e", &function_6384ebfd, &function_fd31e27b, "carpenter", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(11, 20, 40, #"hash_3f452757bdecf29b", &function_6639d547, &function_50961fa5, "hero_weapon_power", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(12, 3, 5, #"hash_3f452657bdecf0e8", &function_bb6ca008, &function_a9598dd1, "self_revives", #"hash_72d97680741c869d");
       break;
-    case # "specimen_storage":
+    case #"specimen_storage":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(13, 15, 25, #"hash_6ded98ee1bc95925", &function_b40fed60, &function_a4b66a2b, "insta_kill", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(14, 10, 15, #"hash_6ded95ee1bc9540c", &registersplicestarttraverse, &function_7d030c3d, "hero_weapon_power", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(15, 3, 3, #"hash_6ded96ee1bc955bf", &function_a36ace8b, &function_6884e5b8, "half_price_traps", #"hash_1374108085ffeb9d");
@@ -187,37 +187,37 @@ function_848a8225(e_player) {
 
 function_9f2ab302() {
   switch (self.var_d6578e1f.str_reward) {
-    case # "bonus_points_team":
+    case #"bonus_points_team":
       var_289d3f49 = #"hash_33e97cafe9a6ce11";
       return var_289d3f49;
-    case # "insta_kill":
+    case #"insta_kill":
       var_289d3f49 = #"hash_5f22e6bba160236";
       return var_289d3f49;
-    case # "fire_sale":
+    case #"fire_sale":
       var_289d3f49 = #"hash_5979dcb633c28888";
       return var_289d3f49;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       var_289d3f49 = #"hash_649852d17720d7f9";
       return var_289d3f49;
-    case # "carpenter":
+    case #"carpenter":
       var_289d3f49 = #"hash_3f3c0bdcb88cacfa";
       return var_289d3f49;
-    case # "full_ammo":
+    case #"full_ammo":
       var_289d3f49 = #"hash_1c356afe160c9b7a";
       return var_289d3f49;
-    case # "self_revives":
+    case #"self_revives":
       var_289d3f49 = #"hash_189972b46e07775";
       return var_289d3f49;
-    case # "extra_snowballs":
+    case #"extra_snowballs":
       var_289d3f49 = #"hash_1c6212f5aff79380";
       return var_289d3f49;
-    case # "half_price_traps":
+    case #"half_price_traps":
       var_289d3f49 = #"hash_6875903d42d6d8ba";
       return var_289d3f49;
-    case # "break_freeze_faster":
+    case #"break_freeze_faster":
       var_289d3f49 = #"hash_1cc63d50dbd08da7";
       return var_289d3f49;
-    case # "armor":
+    case #"armor":
       var_289d3f49 = #"hash_6c9edec0976eeca1";
       return var_289d3f49;
   }
@@ -1253,16 +1253,16 @@ function_3fbb4390(var_d6578e1f) {
 
 function_77044d02() {
   switch (self zm_vo::function_82f9bc9f()) {
-    case # "marl":
+    case #"marl":
       self thread zm_hms_util::function_51b752a9(#"vox_oh_shit", 2);
       break;
-    case # "mist":
+    case #"mist":
       self thread zm_hms_util::function_51b752a9(#"vox_generic_responses_positive", 8);
       break;
-    case # "russ":
+    case #"russ":
       self thread zm_hms_util::function_51b752a9(#"vox_kill_streak", 4);
       break;
-    case # "stuh":
+    case #"stuh":
       self thread zm_hms_util::function_51b752a9(#"vox_crawler_kill", 4);
       break;
   }
@@ -1270,16 +1270,16 @@ function_77044d02() {
 
 function_10e9c8b5() {
   switch (self zm_vo::function_82f9bc9f()) {
-    case # "marl":
+    case #"marl":
       self thread zm_hms_util::function_51b752a9(#"vox_kill_melee", 4);
       break;
-    case # "mist":
+    case #"mist":
       self thread zm_hms_util::function_51b752a9(#"vox_generic_wall_buy", 4);
       break;
-    case # "russ":
+    case #"russ":
       self thread zm_hms_util::function_51b752a9(#"vox_generic_wall_buy", 8);
       break;
-    case # "stuh":
+    case #"stuh":
       self thread zm_hms_util::function_51b752a9(#"vox_generic_responses_negative", 4);
       break;
   }
@@ -1613,59 +1613,59 @@ function_11001794() {
   str_reward = self.str_reward;
 
   switch (str_reward) {
-    case # "self_revives":
+    case #"self_revives":
       self.var_f7d17867 = (0, 0, 0);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = #"p8_zm_gla_heart_zombie";
       a_e_players = getplayers();
       a_e_players[0] clientfield::set("zm_orange_force_challenge_model", 1);
       break;
-    case # "full_ammo":
+    case #"full_ammo":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_max_ammo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_firesale";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       self.var_f7d17867 = (0, 0, 12);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_insta_kill";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p8_zm_powerup_full_power";
       break;
-    case # "bonus_points_team":
+    case #"bonus_points_team":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "zombie_z_money_icon";
       break;
-    case # "carpenter":
+    case #"carpenter":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_carpenter";
       break;
-    case # "extra_snowballs":
+    case #"extra_snowballs":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p8_zm_ora_snowball_power_up";
       break;
-    case # "armor":
+    case #"armor":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p8_zm_ora_challenge_armor_power_up";
       break;
-    case # "half_price_traps":
+    case #"half_price_traps":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p8_zm_ora_trap_power_up";
       break;
-    case # "break_freeze_faster":
+    case #"break_freeze_faster":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p8_zm_ora_ice_picker_power_up";
@@ -1806,7 +1806,7 @@ function_816f228f(e_who) {
   str_reward = self.var_d6578e1f.str_reward;
 
   switch (str_reward) {
-    case # "self_revives":
+    case #"self_revives":
       foreach(e_player in getplayers()) {
         e_player zm_laststand::function_3a00302e();
       }
@@ -1814,15 +1814,15 @@ function_816f228f(e_who) {
       a_e_players = getplayers();
       a_e_players[0] clientfield::set("zm_orange_force_challenge_model", 0);
       break;
-    case # "carpenter":
-    case # "full_ammo":
-    case # "bonus_points_team":
-    case # "fire_sale":
-    case # "insta_kill":
+    case #"carpenter":
+    case #"full_ammo":
+    case #"bonus_points_team":
+    case #"fire_sale":
+    case #"insta_kill":
       self.var_59bf6fe2 = 1;
       level[[level._custom_powerups[str_reward].grab_powerup]](e_who);
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       self.var_59bf6fe2 = 1;
 
       foreach(e_player in getplayers()) {
@@ -1832,7 +1832,7 @@ function_816f228f(e_who) {
       }
 
       break;
-    case # "extra_snowballs":
+    case #"extra_snowballs":
       level flag::set(#"extra_snowballs");
 
       foreach(e_player in getplayers()) {
@@ -1840,7 +1840,7 @@ function_816f228f(e_who) {
       }
 
       break;
-    case # "armor":
+    case #"armor":
       foreach(player in getplayers()) {
         if(!player laststand::player_is_in_laststand() && isalive(player)) {
           player zm_armor::add(#"challenge_reward_armor", 100, 100);
@@ -1848,10 +1848,10 @@ function_816f228f(e_who) {
       }
 
       break;
-    case # "half_price_traps":
+    case #"half_price_traps":
       level flag::set(#"half_price_traps");
       break;
-    case # "break_freeze_faster":
+    case #"break_freeze_faster":
       level flag::set(#"break_freeze_faster");
       break;
   }

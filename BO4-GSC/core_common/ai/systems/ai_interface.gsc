@@ -13,19 +13,19 @@ _checkvalue(archetype, attributename, value) {
   attribute = level.__ai_interface[archetype][attributename];
 
   switch (attribute[#"type"]) {
-    case # "_interface_entity":
+    case #"_interface_entity":
       break;
-    case # "_interface_match":
+    case #"_interface_match":
       possiblevalues = attribute[#"values"];
       assert(!isarray(possiblevalues) || isinarray(possiblevalues, value), "<dev string:x38>" + value + "<dev string:x40>" + attributename + "<dev string:x75>");
       break;
-    case # "_interface_numeric":
+    case #"_interface_numeric":
       maxvalue = attribute[#"max_value"];
       minvalue = attribute[#"min_value"];
       assert(isint(value) || isfloat(value), "<dev string:x7a>" + attributename + "<dev string:x8c>" + value + "<dev string:xaf>");
       assert(!isDefined(maxvalue) && !isDefined(minvalue) || value <= maxvalue && value >= minvalue, "<dev string:x38>" + value + "<dev string:xc5>" + minvalue + "<dev string:xeb>" + maxvalue + "<dev string:xef>");
       break;
-    case # "_interface_vector":
+    case #"_interface_vector":
       if(isDefined(value)) {
         assert(isvec(value), "<dev string:x7a>" + attributename + "<dev string:xf4>" + value + "<dev string:xaf>");
       }

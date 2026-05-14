@@ -131,16 +131,16 @@ function private function_5e7b3f16(localclientnum, time) {
   }
 
   switch (level.bgb[self.bgb].limit_type) {
-    case # "activated":
+    case #"activated":
       color = (25, 0, 50) / 255;
       break;
-    case # "event":
+    case #"event":
       color = (100, 50, 0) / 255;
       break;
-    case # "rounds":
+    case #"rounds":
       color = (1, 149, 244) / 255;
       break;
-    case # "time":
+    case #"time":
       color = (19, 244, 20) / 255;
       break;
     default:

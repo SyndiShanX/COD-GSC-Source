@@ -890,25 +890,25 @@ function_b42ce622(var_4b3a6521) {
     self notify(#"hash_3cc1d9808679e79e");
 
     switch (var_4b3a6521) {
-      case # "awaitingconnection":
+      case #"awaitingconnection":
         self thread function_7b72086e(#"awaitingconnection", #"awaitingconnection1", 1);
         break;
-      case # "connection_lost":
+      case #"connection_lost":
         self thread function_7b72086e(#"connection_lost", #"connection_lost1", 1);
         break;
-      case # "downloading":
+      case #"downloading":
         self thread function_7b72086e(#"downloading", #"downloading1", 1);
         break;
-      case # "download_complete":
+      case #"download_complete":
         level.ct_progressbar_status ct_progressbar_status::set_state(self, #"download_complete");
         wait 3;
         level.ct_progressbar_status ct_progressbar_status::close(self);
         self.var_4ee078d = undefined;
         break;
-      case # "sabotagedata":
+      case #"sabotagedata":
         self thread function_7b72086e(#"sabotagedata", #"sabotagedata1", 1);
         break;
-      case # "sabotagedata_complete":
+      case #"sabotagedata_complete":
         level.ct_progressbar_status ct_progressbar_status::set_state(self, #"sabotagedata_complete");
         wait 3;
         level.ct_progressbar_status ct_progressbar_status::close(self);
@@ -1343,16 +1343,16 @@ function_80540e80(var_64ef1697 = "BUTTON_A", var_2ee3d6f5 = 0.5) {
 
 is_button_pressed(var_64ef1697 = "BUTTON_A") {
   switch (var_64ef1697) {
-    case # "button_a":
+    case #"button_a":
       b_check = self primarybuttonpressedlocal();
       break;
-    case # "button_lshdr":
+    case #"button_lshdr":
       b_check = self secondaryoffhandbuttonPressed();
       break;
-    case # "button_rshdr":
+    case #"button_rshdr":
       b_check = self fragButtonPressed();
       break;
-    case # "button_square":
+    case #"button_square":
       b_check = self reloadbuttonPressed();
       break;
     default:
@@ -3322,35 +3322,35 @@ function_95f28639(str_id) {
         if(isDefined(e_coll.radius)) {
           switch (e_coll.radius) {
             case 128:
-            case # "128":
+            case #"128":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b128";
               break;
             case 150:
-            case # "150":
+            case #"150":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b150";
               break;
             case 170:
-            case # "170":
+            case #"170":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b170";
               break;
             case 180:
-            case # "180":
+            case #"180":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b180";
               break;
             case 500:
-            case # "500":
+            case #"500":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b500";
               break;
             case 750:
-            case # "750":
+            case #"750":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b750";
               break;
             case 1000:
-            case # "1000":
+            case #"1000":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b1000";
               break;
             case 350:
-            case # "350":
+            case #"350":
             default:
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b350";
               break;
@@ -3360,35 +3360,35 @@ function_95f28639(str_id) {
         if(isDefined(s_loc.radius)) {
           switch (s_loc.radius) {
             case 128:
-            case # "128":
+            case #"128":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b128";
               break;
             case 150:
-            case # "150":
+            case #"150":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b150";
               break;
             case 170:
-            case # "170":
+            case #"170":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b170";
               break;
             case 180:
-            case # "180":
+            case #"180":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b180";
               break;
             case 500:
-            case # "500":
+            case #"500":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b500";
               break;
             case 750:
-            case # "750":
+            case #"750":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b750";
               break;
             case 1000:
-            case # "1000":
+            case #"1000":
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b1000";
               break;
             case 350:
-            case # "350":
+            case #"350":
             default:
               str_effect = "ui/fx8_ui_ct_plane_marker_team_b350";
               break;
@@ -4079,43 +4079,43 @@ function_dfd7add4() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "hash_1c8ad6210820416d":
+      case #"hash_1c8ad6210820416d":
         e_player function_c314f6b1(60);
         break;
-      case # "hash_476db23e31dd540a":
+      case #"hash_476db23e31dd540a":
         e_player function_c314f6b1(-60);
         break;
-      case # "hash_7c58a6c0f16e8d5a":
+      case #"hash_7c58a6c0f16e8d5a":
         e_player function_5149c890(0);
         break;
-      case # "hash_51931fabb2df3ec0":
+      case #"hash_51931fabb2df3ec0":
         e_player function_5149c890(1);
         break;
-      case # "timer_freeze":
+      case #"timer_freeze":
         level thread timer_freeze();
         break;
-      case # "timer_unfreeze":
+      case #"timer_unfreeze":
         level notify(#"timer_freeze_end");
         break;
-      case # "ingame_objective_close":
+      case #"ingame_objective_close":
         e_player ingame_objective_close();
         break;
-      case # "ingame_objective_open":
+      case #"ingame_objective_open":
         e_player swampslashersounds();
         break;
-      case # "kill_player":
+      case #"kill_player":
         e_player dodamage(1000, e_player.origin);
         break;
-      case # "hash_11689149cd7381a5":
+      case #"hash_11689149cd7381a5":
         level.var_5d40bf7e = 0;
         break;
-      case # "hash_84bd3681b5c97a1":
+      case #"hash_84bd3681b5c97a1":
         level.var_5d40bf7e = 1;
         break;
-      case # "weapon_watch_on":
+      case #"weapon_watch_on":
         e_player thread function_bb58b6f4();
         break;
-      case # "weapon_watch_off":
+      case #"weapon_watch_off":
         e_player notify(#"hash_665982d72456ad87");
         break;
     }

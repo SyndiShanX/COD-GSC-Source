@@ -1030,9 +1030,9 @@ function private function_3f63e44f(item) {
 
   if(item.itementry.itemtype == #"generic") {
     switch (item.itementry.name) {
-      case # "armor_pouch_item_t9":
+      case #"armor_pouch_item_t9":
         return !namespace_234f0efc::function_d912fa6e(self);
-      case # "signal_booster_item_t9":
+      case #"signal_booster_item_t9":
         var_e3483afe = self clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
         canpickup = 5 > var_e3483afe;
         self thread function_c50d8500(canpickup);
@@ -1106,13 +1106,13 @@ function private function_18f58ab2(item, player, networkid, itemid, itemcount, i
   pickup = 0;
 
   switch (item.itementry.name) {
-    case # "armor_pouch_item_t9":
+    case #"armor_pouch_item_t9":
       pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
-    case # "satlink_battery_large_item_t9":
+    case #"satlink_battery_large_item_t9":
       pickup = function_a22bb806(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
-    case # "signal_booster_item_t9":
+    case #"signal_booster_item_t9":
       pickup = function_60d1226(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
   }

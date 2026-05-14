@@ -1320,24 +1320,24 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_50d92ca3c6c7c2a8":
+    case #"hash_50d92ca3c6c7c2a8":
       function_71a6c3ea();
       break;
-    case # "hash_1faf9b6b2b3c3575":
+    case #"hash_1faf9b6b2b3c3575":
       setDvar(#"hash_11a7075c2b20fe1d", 1);
       array::thread_all(getplayers(), &function_23c31b4e);
       break;
-    case # "hash_37da2a13ec5047be":
+    case #"hash_37da2a13ec5047be":
       setDvar(#"hash_11a7075c2b20fe1d", 0);
       array::thread_all(getplayers(), &function_23c31b4e);
       break;
-    case # "hash_df871245c70fbe7":
+    case #"hash_df871245c70fbe7":
       function_ed6d34fb();
       break;
-    case # "hash_564106a8aa366208":
+    case #"hash_564106a8aa366208":
       function_8946bb7a();
       break;
-    case # "hash_363948df64c05e49":
+    case #"hash_363948df64c05e49":
       function_d349e956();
       break;
     default:

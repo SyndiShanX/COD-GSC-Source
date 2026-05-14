@@ -374,8 +374,8 @@ function_9c1450b8(mdl_pegasus, n_player_index) {
   self.var_45bfef99 = 1;
 
   switch (self.zm_ai_category) {
-    case # "heavy":
-    case # "miniboss":
+    case #"heavy":
+    case #"miniboss":
       var_b1c1c5cf = zm_equipment::function_7d948481(0.1, 0.25, 0.25, 1);
       var_5d7b4163 = zm_equipment::function_379f6b5d(500, var_b1c1c5cf, 1, 4, 50);
       self thread function_7c333a0f(mdl_pegasus, var_5d7b4163, n_player_index);

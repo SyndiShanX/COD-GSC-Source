@@ -232,10 +232,10 @@ function private _screen_fade(localclientnum, n_time, n_target_alpha, n_start_al
 
   if(isstring(v_color)) {
     switch (v_color) {
-      case # "black":
+      case #"black":
         v_color = (0, 0, 0);
         break;
-      case # "white":
+      case #"white":
         v_color = (1, 1, 1);
         break;
       default:

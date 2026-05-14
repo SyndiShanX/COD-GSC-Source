@@ -210,16 +210,16 @@ function private function_decf2123(cur_idx, var_16f87bfa, cycle_option) {
     cur_idx = 0;
 
     switch (cycle_option) {
-      case # "hash_c8920743575bcda":
+      case #"hash_c8920743575bcda":
         cur_idx = 1;
         break;
-      case # "repeat_last":
+      case #"repeat_last":
         cur_idx = last_idx;
         break;
-      case # "randomize":
+      case #"randomize":
         cur_idx = randomint(var_16f87bfa);
         break;
-      case # "randomize_skip_first":
+      case #"randomize_skip_first":
         cur_idx = randomint(var_16f87bfa - 1) + 1;
         break;
     }
@@ -274,17 +274,17 @@ function private function_a92530c0(ai_actor, anim_struct) {
 
     if(isDefined(closest_pos.stance)) {
       switch (closest_pos.stance) {
-        case # "stand":
+        case #"stand":
           self.activator val::set(#"dialog_tree", "allow_crouch", 0);
           self.activator val::set(#"dialog_tree", "allow_prone", 0);
           self.activator val::set(#"dialog_tree", "allow_stand", 1);
           break;
-        case # "crouch":
+        case #"crouch":
           self.activator val::set(#"dialog_tree", "allow_crouch", 1);
           self.activator val::set(#"dialog_tree", "allow_prone", 0);
           self.activator val::set(#"dialog_tree", "allow_stand", 0);
           break;
-        case # "prone":
+        case #"prone":
           self.activator val::set(#"dialog_tree", "allow_crouch", 0);
           self.activator val::set(#"dialog_tree", "allow_prone", 1);
           self.activator val::set(#"dialog_tree", "allow_stand", 0);

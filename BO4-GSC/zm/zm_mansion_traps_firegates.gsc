@@ -483,22 +483,22 @@ function_7d9e84f9(str_color = "red") {
   }
 
   switch (self.script_string) {
-    case # "firegate_entrance_hall":
+    case #"firegate_entrance_hall":
       self.str_exploder = "fxexp_tf_" + str_color + "_mh";
       break;
-    case # "firegate_cellar":
+    case #"firegate_cellar":
       self.str_exploder = "fxexp_tf_" + str_color + "_clr";
       break;
-    case # "firegate_bedroom":
+    case #"firegate_bedroom":
       self.str_exploder = "fxexp_tf_" + str_color + "_br";
       break;
-    case # "firegate_library":
+    case #"firegate_library":
       self.str_exploder = "fxexp_tf_" + str_color + "_lb";
       break;
-    case # "firegate_cemetery":
+    case #"firegate_cemetery":
       self.str_exploder = "fxexp_tf_" + str_color + "_msm";
       break;
-    case # "firegate_greenhouse":
+    case #"firegate_greenhouse":
       self.str_exploder = "fxexp_tf_" + str_color + "_gh";
       break;
   }
@@ -631,18 +631,18 @@ blue_fire() {
 
 function_e714e3a8(str_state = "off") {
   switch (str_state) {
-    case # "off":
+    case #"off":
       self hidepart("light_green");
       self hidepart("light_red");
       self showpart("light_off");
       break;
-    case # "green":
+    case #"green":
       self clientfield::set("" + #"trap_light", 1);
       self hidepart("light_off");
       self hidepart("light_red");
       self showpart("light_green");
       break;
-    case # "red":
+    case #"red":
       self clientfield::set("" + #"trap_light", 2);
       self hidepart("light_green");
       self hidepart("light_off");

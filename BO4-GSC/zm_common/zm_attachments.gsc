@@ -26,19 +26,19 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isPlayer(attacker) && isDefined(weapon) && meansofdeath !== "MOD_UNKNOWN") {
     if(weaponhasattachment(weapon, "uber")) {
       switch (weapon.rootweapon.name) {
-        case # "lmg_standard_t8_upgraded":
-        case # "lmg_standard_t8":
+        case #"lmg_standard_t8_upgraded":
+        case #"lmg_standard_t8":
           self function_9f8d8c38();
           break;
-        case # "shotgun_pump_t8_upgraded":
-        case # "shotgun_pump_t8":
+        case #"shotgun_pump_t8_upgraded":
+        case #"shotgun_pump_t8":
           if(meansofdeath !== "MOD_BURNED") {
             damage = self dragons_breath(attacker, damage, weapon);
           }
 
           break;
-        case # "shotgun_semiauto_t8":
-        case # "shotgun_semiauto_t8_upgraded":
+        case #"shotgun_semiauto_t8":
+        case #"shotgun_semiauto_t8_upgraded":
           self function_82bca1c7(attacker);
           break;
       }
@@ -51,15 +51,15 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 function_9f8d8c38() {
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         var_3e5502b5 = #"hash_1c9af7bb427952d";
         break;
-      case # "heavy":
+      case #"heavy":
         var_3e5502b5 = #"hash_1d07249a2211a81d";
         break;
-      case # "miniboss":
+      case #"miniboss":
         var_3e5502b5 = #"hash_721bfbe781c0d680";
         break;
     }

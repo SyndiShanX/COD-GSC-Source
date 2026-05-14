@@ -143,30 +143,30 @@ function function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "double_points":
+        case #"double_points":
           self thread function_d36fb590("double_points", 3, 1);
           break;
-        case # "carpenter":
+        case #"carpenter":
           self thread function_d36fb590("carpenter", 3, 1);
           break;
-        case # "extra_life":
+        case #"extra_life":
           self thread function_d36fb590("self_revive", 3, 1);
           self.var_82464dfe = 1;
           self.var_3703202a++;
           break;
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(1, 3);
           break;
-        case # "equipment":
+        case #"equipment":
           self thread function_d7d8834f(1, 3);
           break;
-        case # "knife_loadout":
+        case #"knife_loadout":
           self thread give_weapon_reward(1, 3, 0, #"knife_loadout");
           break;
-        case # "scrap":
+        case #"scrap":
           self thread function_c2e444e6(str_reward, 500, undefined, 0);
           break;
-        case # "essence":
+        case #"essence":
           self thread function_c2e444e6(str_reward, 1000, undefined, 2);
           break;
       }
@@ -184,22 +184,22 @@ function function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "full_ammo":
+        case #"full_ammo":
           self thread function_d36fb590("full_ammo", 5, 1);
           break;
-        case # "fire_sale":
+        case #"fire_sale":
           self thread function_d36fb590("fire_sale", 5, 1);
           break;
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(2, 5, 0, undefined);
           break;
-        case # "equipment":
+        case #"equipment":
           self thread function_d7d8834f(2, 5);
           break;
-        case # "scrap":
+        case #"scrap":
           self thread function_c2e444e6(str_reward, 500, 50, 0);
           break;
-        case # "essence":
+        case #"essence":
           self thread function_c2e444e6(str_reward, 2000, undefined, 4);
           break;
       }
@@ -222,13 +222,13 @@ function function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "aat":
+        case #"aat":
           self thread function_7dc3dfdb(7);
           break;
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(3, 7, 0, undefined);
           break;
-        case # "equipment":
+        case #"equipment":
           self thread function_d7d8834f(3, 7);
           break;
       }
@@ -282,18 +282,18 @@ function function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(4, 10, 1, undefined);
           break;
-        case # "extra_life":
+        case #"extra_life":
           self thread function_d36fb590("self_revive", 10, 1);
           self.var_17d719b9 = 1;
           self.var_3703202a++;
           break;
-        case # "shockwave":
+        case #"shockwave":
           self thread give_weapon_reward(5, 10, 0, var_4e8c90d2.name);
           break;
-        case # "free_perk":
+        case #"free_perk":
           var_142bcb06 = self function_8665509b(10);
 
           if(var_142bcb06) {
@@ -1365,110 +1365,110 @@ function function_955b59b2(var_38f795c7, var_893baaf) {
   n_amount = 0;
 
   switch (var_38f795c7) {
-    case # "hash_6105e103a3189287":
+    case #"hash_6105e103a3189287":
       n_amount = level.var_8b7ab859 * 0.01;
       break;
-    case # "hash_97ec7cda4d126e":
-    case # "hash_10eb3850b26d48c":
-    case # "hash_2b478144197ed6a6":
-    case # "hash_7e17eba37f893fb4":
-    case # "hash_2c457fb4d5c4a3b9":
-    case # "hash_30c036366e17895":
-    case # "hash_39e9787c0de0daf1":
-    case # "hash_1f416069b6f9a5e6":
-    case # "hash_7e80a8ea892ec8c4":
-    case # "hash_3e9969bc134d9826":
-    case # "hash_2272d4303498d425":
-    case # "hash_184d4b8beb6f528b":
-    case # "hash_363ccc9296a0bb43":
-    case # "hash_aee5cb4bd88c4ee":
-    case # "hash_33b83c4a38a3bdca":
-    case # "hash_beba8c495ad1123":
-    case # "hash_24ddbd878df00902":
-    case # "hash_105665bf3108e0b7":
-    case # "hash_39c9629b7028ed5d":
-    case # "hash_7f0be97960376eb0":
-    case # "hash_1677444e91d1c67b":
-    case # "hash_26e32893218f3cc2":
-    case # "hash_402b667a503d4ccb":
-    case # "hash_453a742eed680932":
-    case # "hash_47d7bcdc94e2be1c":
-    case # "hash_4d9891e9a69464ea":
-    case # "hash_56e1564956312dad":
-    case # "hash_5a916e5585f562bb":
-    case # "hash_5df8fa6c4c17d16e":
-    case # "hash_6cda1bb2296c5334":
-    case # "hash_6f2d55d2d3f4d404":
-    case # "hash_6f756be1d18c8aa2":
-    case # "hash_7469b8c6c972754c":
-    case # "hash_756817dc68da56e9":
-    case # "hash_795ccb5ead8f853e":
-    case # "hash_7cb657a5f657cbbe":
+    case #"hash_97ec7cda4d126e":
+    case #"hash_10eb3850b26d48c":
+    case #"hash_2b478144197ed6a6":
+    case #"hash_7e17eba37f893fb4":
+    case #"hash_2c457fb4d5c4a3b9":
+    case #"hash_30c036366e17895":
+    case #"hash_39e9787c0de0daf1":
+    case #"hash_1f416069b6f9a5e6":
+    case #"hash_7e80a8ea892ec8c4":
+    case #"hash_3e9969bc134d9826":
+    case #"hash_2272d4303498d425":
+    case #"hash_184d4b8beb6f528b":
+    case #"hash_363ccc9296a0bb43":
+    case #"hash_aee5cb4bd88c4ee":
+    case #"hash_33b83c4a38a3bdca":
+    case #"hash_beba8c495ad1123":
+    case #"hash_24ddbd878df00902":
+    case #"hash_105665bf3108e0b7":
+    case #"hash_39c9629b7028ed5d":
+    case #"hash_7f0be97960376eb0":
+    case #"hash_1677444e91d1c67b":
+    case #"hash_26e32893218f3cc2":
+    case #"hash_402b667a503d4ccb":
+    case #"hash_453a742eed680932":
+    case #"hash_47d7bcdc94e2be1c":
+    case #"hash_4d9891e9a69464ea":
+    case #"hash_56e1564956312dad":
+    case #"hash_5a916e5585f562bb":
+    case #"hash_5df8fa6c4c17d16e":
+    case #"hash_6cda1bb2296c5334":
+    case #"hash_6f2d55d2d3f4d404":
+    case #"hash_6f756be1d18c8aa2":
+    case #"hash_7469b8c6c972754c":
+    case #"hash_756817dc68da56e9":
+    case #"hash_795ccb5ead8f853e":
+    case #"hash_7cb657a5f657cbbe":
       n_amount = level.var_8b7ab859 * 0.03;
       break;
-    case # "hash_25a76ab3d0a73b03":
+    case #"hash_25a76ab3d0a73b03":
       n_amount = level.var_8b7ab859 * 0.03;
       break;
-    case # "hash_11b4177e0f079bb6":
+    case #"hash_11b4177e0f079bb6":
       n_frac = var_893baaf / self.maxhealth;
       n_amount = level.var_8b7ab859 * 0.25 * n_frac;
       break;
-    case # "hash_1db5106df3c3c0c4":
+    case #"hash_1db5106df3c3c0c4":
       n_amount = level.var_8b7ab859 * 0.05;
       break;
-    case # "hash_4b4ab7b6cf4d87c":
+    case #"hash_4b4ab7b6cf4d87c":
       n_amount = level.var_8b7ab859 * 0.02;
       break;
-    case # "hash_2f4a7e5da228eead":
-    case # "hash_3359139601088551":
-    case # "hash_346b7588b58a9ac5":
-    case # "hash_3501cad613848806":
-    case # "hash_3b5a9c328640c84f":
-    case # "hash_3e868812f1167436":
-    case # "hash_3f88531b59d4cc0b":
-    case # "hash_173296fcc26f103":
-    case # "hash_403956d6660b774e":
-    case # "hash_449daf451df68085":
-    case # "hash_30b2182903bf4a9":
-    case # "hash_30b2482903bf9c2":
-    case # "hash_49b405ab99ad6f84":
-    case # "hash_3182b997bb45c5b":
-    case # "hash_52a6d61d1d8e570c":
-    case # "hash_3f393a7be6cf192":
-    case # "hash_57c709d0608e925f":
-    case # "hash_580e3a81d3b46e59":
-    case # "hash_748d52da3b04b32":
-    case # "hash_5bf8e83a711797f4":
-    case # "hash_864f13f723d7f76":
-    case # "hash_5e2bac25865464f2":
-    case # "hash_609e7b937084ee81":
-    case # "hash_60b2f29696c25fc4":
-    case # "hash_b5ed710fa19696b":
-    case # "hash_64cc9ec22d551ae5":
-    case # "hash_db5019e43406bdd":
-    case # "hash_6d988452168d217a":
-    case # "hash_6e9cc81a9a529f18":
-    case # "hash_1417cb50f78e17e3":
-    case # "hash_14d4a43db0399d79":
-    case # "hash_864f03f723d7dc3":
-    case # "hash_749eb9a0557be48d":
-    case # "hash_74a84c9fc7762dce":
-    case # "hash_1cc52d72244f1eda":
-    case # "hash_77344bcb8a308c09":
-    case # "hash_78b5818aca0414eb":
-    case # "hash_7912ea609d3670e4":
-    case # "hash_1e33eea8d4400452":
-    case # "hash_79a18115e7a94cdd":
-    case # "hash_79ec66f63fc093c6":
-    case # "hash_7bd66f77ab96b799":
-    case # "hash_7bfe0d876e389ddc":
-    case # "hash_1f16e513ff381c18":
-    case # "hash_2274efc6b68c164b":
-    case # "hash_23841799ddb023fe":
-    case # "hash_257a005f64e8c41e":
+    case #"hash_2f4a7e5da228eead":
+    case #"hash_3359139601088551":
+    case #"hash_346b7588b58a9ac5":
+    case #"hash_3501cad613848806":
+    case #"hash_3b5a9c328640c84f":
+    case #"hash_3e868812f1167436":
+    case #"hash_3f88531b59d4cc0b":
+    case #"hash_173296fcc26f103":
+    case #"hash_403956d6660b774e":
+    case #"hash_449daf451df68085":
+    case #"hash_30b2182903bf4a9":
+    case #"hash_30b2482903bf9c2":
+    case #"hash_49b405ab99ad6f84":
+    case #"hash_3182b997bb45c5b":
+    case #"hash_52a6d61d1d8e570c":
+    case #"hash_3f393a7be6cf192":
+    case #"hash_57c709d0608e925f":
+    case #"hash_580e3a81d3b46e59":
+    case #"hash_748d52da3b04b32":
+    case #"hash_5bf8e83a711797f4":
+    case #"hash_864f13f723d7f76":
+    case #"hash_5e2bac25865464f2":
+    case #"hash_609e7b937084ee81":
+    case #"hash_60b2f29696c25fc4":
+    case #"hash_b5ed710fa19696b":
+    case #"hash_64cc9ec22d551ae5":
+    case #"hash_db5019e43406bdd":
+    case #"hash_6d988452168d217a":
+    case #"hash_6e9cc81a9a529f18":
+    case #"hash_1417cb50f78e17e3":
+    case #"hash_14d4a43db0399d79":
+    case #"hash_864f03f723d7dc3":
+    case #"hash_749eb9a0557be48d":
+    case #"hash_74a84c9fc7762dce":
+    case #"hash_1cc52d72244f1eda":
+    case #"hash_77344bcb8a308c09":
+    case #"hash_78b5818aca0414eb":
+    case #"hash_7912ea609d3670e4":
+    case #"hash_1e33eea8d4400452":
+    case #"hash_79a18115e7a94cdd":
+    case #"hash_79ec66f63fc093c6":
+    case #"hash_7bd66f77ab96b799":
+    case #"hash_7bfe0d876e389ddc":
+    case #"hash_1f16e513ff381c18":
+    case #"hash_2274efc6b68c164b":
+    case #"hash_23841799ddb023fe":
+    case #"hash_257a005f64e8c41e":
       n_amount = level.var_8b7ab859 * 0.015;
       break;
-    case # "hash_4cc252a7609d289":
+    case #"hash_4cc252a7609d289":
       n_amount = level.var_8b7ab859 * 0.02;
       break;
     default:
@@ -1675,19 +1675,19 @@ function function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_d1bb6924 = 1) {
 
 function function_ed4a5d52(var_f0de9b92) {
   switch (var_f0de9b92) {
-    case # "double_points":
+    case #"double_points":
       mdl_powerup = #"p7_zm_power_up_double_points";
       break;
-    case # "carpenter":
+    case #"carpenter":
       mdl_powerup = #"p7_zm_power_up_carpenter";
       break;
-    case # "full_ammo":
+    case #"full_ammo":
       mdl_powerup = #"p7_zm_power_up_max_ammo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       mdl_powerup = #"p7_zm_power_up_firesale";
       break;
-    case # "self_revive":
+    case #"self_revive":
       mdl_powerup = #"p9_lat_equipment_bag_first_aid_lrg";
       break;
   }

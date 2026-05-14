@@ -535,40 +535,40 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     switch (var_947d01ee) {
-      case # "weapon_knife":
-      case # "weapon_pistol":
-      case # "weapon_launcher":
-      case # "weapon_cqb":
+      case #"weapon_knife":
+      case #"weapon_pistol":
+      case #"weapon_launcher":
+      case #"weapon_cqb":
         if(attacker newvalueoptions(#"secondary_weapon_kills") < level.var_924497ca) {
           attacker function_9401373f(#"secondary_weapon_kills", 1);
         }
 
         break;
-      case # "weapon_assault":
+      case #"weapon_assault":
         if(attacker newvalueoptions(#"hash_683d7dfc8782d6b9") < level.var_b7ad6f5b) {
           attacker function_9401373f(#"hash_683d7dfc8782d6b9", 1);
         }
 
         break;
-      case # "weapon_smg":
+      case #"weapon_smg":
         if(attacker newvalueoptions(#"weapon_class_kills_smg") < level.var_c30109f4) {
           attacker function_9401373f(#"weapon_class_kills_smg", 1);
         }
 
         break;
-      case # "weapon_tactical":
+      case #"weapon_tactical":
         if(attacker newvalueoptions(#"hash_4d4a62396c1ec8") < level.var_26d708d7) {
           attacker function_9401373f(#"hash_4d4a62396c1ec8", 1);
         }
 
         break;
-      case # "weapon_lmg":
+      case #"weapon_lmg":
         if(attacker newvalueoptions(#"weapon_class_kills_lmg") < level.var_4ac5338a) {
           attacker function_9401373f(#"weapon_class_kills_lmg", 1);
         }
 
         break;
-      case # "weapon_sniper":
+      case #"weapon_sniper":
         if(attacker newvalueoptions("#weapon_class_kills_sniper") < level.var_92dc2d7c) {
           attacker function_9401373f(#"weapon_class_kills_sniper", 1);
         }

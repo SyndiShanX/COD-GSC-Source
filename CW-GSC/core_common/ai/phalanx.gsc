@@ -176,79 +176,79 @@ class phalanx {
 
   function private _getphalanxpositions(phalanxtype, tier) {
     switch (phalanxtype) {
-      case # "phanalx_wedge":
+      case #"phanalx_wedge":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (-64, -48, 0), (64, -48, 0), (-128, -96, 0), (128, -96, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((-32, -96, 0), (32, -96, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 
         break;
-      case # "phalanx_reverse_wedge":
+      case #"phalanx_reverse_wedge":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((-32, 0, 0), (32, 0, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((0, -96, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 
         break;
-      case # "phalanx_diagonal_left":
+      case #"phalanx_diagonal_left":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (-48, -64, 0), (-96, -128, 0), (-144, -192, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((64, 0, 0), (16, -64, 0), (-48, -128, 0), (-112, -192, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 
         break;
-      case # "phalanx_diagonal_right":
+      case #"phalanx_diagonal_right":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (48, -64, 0), (96, -128, 0), (144, -192, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((-64, 0, 0), (-16, -64, 0), (48, -128, 0), (112, -192, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 
         break;
-      case # "phalanx_forward":
+      case #"phalanx_forward":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (64, 0, 0), (128, 0, 0), (192, 0, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((-32, -64, 0), (32, -64, 0), (96, -64, 0), (160, -64, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 
         break;
-      case # "phalanx_column":
+      case #"phalanx_column":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (-64, 0, 0), (0, -64, 0), (-64, -64, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array((0, -128, 0), (-64, -128, 0), (0, -192, 0), (-64, -192, 0));
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array((64, 0, 0), (64, -64, 0), (64, -128, 0), (64, -192, 0));
         }
 
         break;
-      case # "phalanx_column_right":
+      case #"phalanx_column_right":
         switch (tier) {
-          case # "phalanx_tier1":
+          case #"phalanx_tier1":
             return array((0, 0, 0), (0, -64, 0), (0, -128, 0), (0, -192, 0));
-          case # "phalanx_tier2":
+          case #"phalanx_tier2":
             return array();
-          case # "phalanx_tier3":
+          case #"phalanx_tier3":
             return array();
         }
 

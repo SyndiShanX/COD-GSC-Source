@@ -25,11 +25,11 @@ on_grenade_fired(params) {
   weapon = params.weapon;
 
   switch (weapon.name) {
-    case # "flare_gun":
+    case #"flare_gun":
       grenade function_4861487f(weapon, self);
       grenade thread function_cd8ee3c5();
       break;
-    case # "flare_gun_veh":
+    case #"flare_gun_veh":
       grenade function_4861487f(weapon, self);
       grenade thread function_f3edce9a();
     default:

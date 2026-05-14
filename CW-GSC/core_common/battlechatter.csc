@@ -97,35 +97,35 @@ function function_f1d27638(var_f7f4481f) {
 function get_death_vox(playerbundle, meansofdeath) {
   if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
-      case # "mod_unknown":
+      case #"mod_unknown":
         return playerbundle.exertdeath;
-      case # "mod_burned":
+      case #"mod_burned":
         if(function_fc261b83()) {
           return "";
         } else {
           return playerbundle.exertdeathburned;
         }
-      case # "mod_melee_weapon_butt":
+      case #"mod_melee_weapon_butt":
         return playerbundle.var_53f25688;
-      case # "mod_head_shot":
+      case #"mod_head_shot":
         return playerbundle.var_207908de;
-      case # "mod_falling":
+      case #"mod_falling":
         return playerbundle.var_1dfcabbd;
-      case # "mod_drown":
+      case #"mod_drown":
         return playerbundle.exertdeathdrowned;
-      case # "mod_explosive":
+      case #"mod_explosive":
         return playerbundle.var_44d86dec;
-      case # "mod_dot_self":
+      case #"mod_dot_self":
         return playerbundle.var_48305ed9;
-      case # "mod_dot":
+      case #"mod_dot":
         return playerbundle.var_f8b4bcc1;
-      case # "mod_melee_assassinate":
+      case #"mod_melee_assassinate":
         return playerbundle.exertdeathstabbed;
-      case # "mod_gas":
+      case #"mod_gas":
         return playerbundle.var_7a45f37b;
-      case # "mod_electrocuted":
+      case #"mod_electrocuted":
         return playerbundle.exertdeathelectrocuted;
-      case # "mod_crush":
+      case #"mod_crush":
         return playerbundle.var_35f92256;
     }
   }
@@ -368,100 +368,100 @@ function function_c8663dbc(weapon, player) {
   }
 
   switch (weapon.name) {
-    case # "eq_emp_grenade":
+    case #"eq_emp_grenade":
       taacomdialog = "jammerWeaponHacked";
       break;
-    case # "eq_tripwire":
+    case #"eq_tripwire":
       taacomdialog = "meshMineWeaponHacked";
       break;
-    case # "eq_seeker_mine":
+    case #"eq_seeker_mine":
       taacomdialog = "seekerMineWeaponHacked";
       break;
-    case # "eq_sensor":
+    case #"eq_sensor":
       taacomdialog = "sensorDartHacked";
       break;
-    case # "ability_smart_cover":
-    case # "gadget_smart_cover":
+    case #"ability_smart_cover":
+    case #"gadget_smart_cover":
       taacomdialog = "smartCoverHacked";
       break;
-    case # "gadget_spawnbeacon":
+    case #"gadget_spawnbeacon":
       taacomdialog = "spawnBeaconHacked";
       break;
-    case # "gadget_supplypod":
+    case #"gadget_supplypod":
       taacomdialog = "supplyPodHacked";
       break;
-    case # "trophy_system":
+    case #"trophy_system":
       taacomdialog = "trophyWeaponHacked";
       break;
-    case # "ac130":
-    case # "inventory_ac130":
+    case #"ac130":
+    case #"inventory_ac130":
       taacomdialog = "ac130Hacked";
       break;
-    case # "inventory_chopper_gunner":
-    case # "chopper_gunner":
+    case #"inventory_chopper_gunner":
+    case #"chopper_gunner":
       taacomdialog = "chopperGunnerHacked";
       break;
-    case # "inventory_tank_robot":
-    case # "tank_robot":
-    case # "ai_tank_marker":
+    case #"inventory_tank_robot":
+    case #"tank_robot":
+    case #"ai_tank_marker":
       taacomdialog = "aiTankHacked";
       break;
-    case # "cobra_20mm_comlink":
-    case # "helicopter_comlink":
-    case # "inventory_helicopter_comlink":
+    case #"cobra_20mm_comlink":
+    case #"helicopter_comlink":
+    case #"inventory_helicopter_comlink":
       taacomdialog = "attackChopperHacked";
       break;
-    case # "inventory_helicopter_guard":
-    case # "helicopter_guard":
+    case #"inventory_helicopter_guard":
+    case #"helicopter_guard":
       taacomdialog = "heavyAttackChopperHacked";
       break;
-    case # "counteruav":
+    case #"counteruav":
       taacomdialog = "cuavHacked";
       break;
-    case # "dart":
-    case # "inventory_dart":
+    case #"dart":
+    case #"inventory_dart":
       taacomdialog = "dartHacked";
       break;
-    case # "inventory_drone_squadron":
-    case # "drone_squadron":
+    case #"inventory_drone_squadron":
+    case #"drone_squadron":
       taacomdialog = "droneSquadHacked";
       break;
-    case # "hoverjet":
-    case # "inventory_hoverjet":
+    case #"hoverjet":
+    case #"inventory_hoverjet":
       taacomdialog = "hoverJetHacked";
       break;
-    case # "recon_car":
-    case # "inventory_recon_car":
+    case #"recon_car":
+    case #"inventory_recon_car":
       taacomdialog = "reconCarHacked";
       break;
-    case # "recon_plane":
-    case # "inventory_recon_plane":
+    case #"recon_plane":
+    case #"inventory_recon_plane":
       taacomdialog = "reconPlaneHacked";
       break;
-    case # "remote_missile":
-    case # "inventory_remote_missile":
+    case #"remote_missile":
+    case #"inventory_remote_missile":
       taacomdialog = "hellstormHacked";
       break;
-    case # "inventory_planemortar":
-    case # "planemortar":
+    case #"inventory_planemortar":
+    case #"planemortar":
       taacomdialog = "lightningStrikeHacked";
       break;
-    case # "overwatch_helicopter":
-    case # "inventory_overwatch_helicopter":
+    case #"overwatch_helicopter":
+    case #"inventory_overwatch_helicopter":
       taacomdialog = "overwatchHelicopterHacked";
       break;
-    case # "straferun":
-    case # "inventory_straferun":
+    case #"straferun":
+    case #"inventory_straferun":
       taacomdialog = "strafeRunHacked";
       break;
-    case # "supplydrop":
+    case #"supplydrop":
       taacomdialog = "supplyDropHacked";
       break;
-    case # "uav":
+    case #"uav":
       taacomdialog = "uavHacked";
       break;
-    case # "inventory_ultimate_turret":
-    case # "ultimate_turret":
+    case #"inventory_ultimate_turret":
+    case #"ultimate_turret":
       taacomdialog = "sentryHacked";
       break;
   }

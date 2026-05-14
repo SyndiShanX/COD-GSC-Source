@@ -12,20 +12,20 @@ saygenericdialogue(typestring) {
   }
 
   switch (typestring) {
-    case # "attack":
+    case #"attack":
       importance = 0.5;
       break;
-    case # "swing":
+    case #"swing":
       importance = 0.5;
       typestring = "attack";
       break;
-    case # "flashbang":
+    case #"flashbang":
       importance = 0.7;
       break;
-    case # "pain_small":
+    case #"pain_small":
       importance = 0.4;
       break;
-    case # "pain_bullet":
+    case #"pain_bullet":
       wait 0.01;
       importance = 0.4;
       break;

@@ -667,7 +667,7 @@ function private devgui() {
     cmd = strtok(cmd, "<dev string:x5fb>");
 
     switch (cmd[0]) {
-      case # "toggle_status":
+      case #"toggle_status":
         registershack_walla = !registershack_walla;
 
         if(!registershack_walla) {
@@ -677,7 +677,7 @@ function private devgui() {
         }
 
         break;
-      case # "force":
+      case #"force":
         var_167b5341 = level.var_b175714d[cmd[1]];
 
         if(!isDefined(var_167b5341)) {
@@ -686,7 +686,7 @@ function private devgui() {
 
         level thread function_3d080ace(cmd[1]);
         break;
-      case # "spawn":
+      case #"spawn":
         var_167b5341 = level.var_b175714d[cmd[1]];
 
         if(!isDefined(var_167b5341)) {
@@ -697,18 +697,18 @@ function private devgui() {
         level notify(#"force_transformations");
         level thread function_2f40be20(cmd[1]);
         break;
-      case # "queue":
+      case #"queue":
         level.var_78acec0a = 1;
         level notify(#"force_transformations");
         function_bdd8aba6(cmd[1]);
         break;
-      case # "pause":
+      case #"pause":
         function_4da8230b(#"hash_7a79688cef85b533");
         break;
-      case # "resume":
+      case #"resume":
         function_6b183c78(#"hash_7a79688cef85b533");
         break;
-      case # "hash_5893e94d64f92905":
+      case #"hash_5893e94d64f92905":
         function_6bcb49b5();
         break;
     }

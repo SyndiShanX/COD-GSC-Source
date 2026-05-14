@@ -188,27 +188,27 @@ function_c213f1b5(var_31c68e48) {
   }
 
   switch (var_e4204b3) {
-    case # "open_areas":
+    case #"open_areas":
       function_fdabbb8a();
       break;
-    case # "boxing_gym_final_circle":
-    case # "turbine_final_circle":
-    case # "construction_final_circle":
-    case # "array_final_circle":
-    case # "fracking_final_circle":
-    case # "asylum_final_circle":
-    case # "estates_final_circle":
-    case # "firing_range_final_circle":
-    case # "lighthouse_final_circle":
-    case # "hydro_final_circle":
-    case # "ghost_town_final_circle":
-    case # "diner_final_circle":
-    case # "factory_final_circle":
-    case # "nuketown_island_final_circle":
-    case # "clearing_final_circle":
-    case # "docks_final_circle":
-    case # "hijacked_final_circle":
-    case # "graveyard_final_circle":
+    case #"boxing_gym_final_circle":
+    case #"turbine_final_circle":
+    case #"construction_final_circle":
+    case #"array_final_circle":
+    case #"fracking_final_circle":
+    case #"asylum_final_circle":
+    case #"estates_final_circle":
+    case #"firing_range_final_circle":
+    case #"lighthouse_final_circle":
+    case #"hydro_final_circle":
+    case #"ghost_town_final_circle":
+    case #"diner_final_circle":
+    case #"factory_final_circle":
+    case #"nuketown_island_final_circle":
+    case #"clearing_final_circle":
+    case #"docks_final_circle":
+    case #"hijacked_final_circle":
+    case #"graveyard_final_circle":
       function_69e60a10(var_e4204b3);
       break;
     default:

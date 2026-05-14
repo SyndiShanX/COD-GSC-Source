@@ -33,17 +33,17 @@ function_b3681acb() {
 
 function_d89ef6af(unlock_name) {
   switch (unlock_name) {
-    case # "hash_178221dd8299137b":
+    case #"hash_178221dd8299137b":
       return true;
-    case # "hash_8c7045e78561cf4":
+    case #"hash_8c7045e78561cf4":
       return true;
-    case # "hash_3532d912b12917c9":
+    case #"hash_3532d912b12917c9":
       return true;
-    case # "hash_517bb26004a9c12b":
+    case #"hash_517bb26004a9c12b":
       return true;
-    case # "hash_263de5e9fa6d16ea":
+    case #"hash_263de5e9fa6d16ea":
       return true;
-    case # "hash_74709eb5a08139fb":
+    case #"hash_74709eb5a08139fb":
       return true;
   }
 

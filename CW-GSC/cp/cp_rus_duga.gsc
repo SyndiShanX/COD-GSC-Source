@@ -141,13 +141,13 @@ function on_spawned() {
   wait 0.2;
 
   switch (level.skipto_current_objective[0]) {
-    case # "comprimised":
+    case #"comprimised":
       self thread namespace_ac5221d7::function_292592aa(1);
       break;
-    case # "ambush":
+    case #"ambush":
       self thread namespace_ac5221d7::function_292592aa(1);
       break;
-    case # "loose_ends":
+    case #"loose_ends":
       self thread namespace_ac5221d7::function_a22db743(1);
       break;
     default:

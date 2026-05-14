@@ -158,10 +158,10 @@ function_9170df8e(cmd) {
   b_return = 0;
 
   switch (cmd) {
-    case # "zombie_blood":
+    case #"zombie_blood":
       zm_devgui::zombie_devgui_give_powerup("<dev string:x12d>", 1);
       break;
-    case # "next_zombie_blood":
+    case #"next_zombie_blood":
       zm_devgui::zombie_devgui_give_powerup(getsubstr(cmd, 5), 0);
       break;
   }

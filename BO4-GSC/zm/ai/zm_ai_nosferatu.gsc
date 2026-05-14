@@ -739,7 +739,7 @@ function_201862b(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zm_audio::zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else {
@@ -747,19 +747,19 @@ function_201862b(eventstruct) {
       }
 
       break;
-    case # "pain":
+    case #"pain":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "scream":
+    case #"scream":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
       break;
-    case # "leap":
-    case # "attack_melee":
-    case # "attack_bite":
+    case #"leap":
+    case #"attack_melee":
+    case #"attack_bite":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 2, 1);
       break;
-    case # "sprint":
-    case # "ambient":
+    case #"sprint":
+    case #"ambient":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 1);
       break;
     default:

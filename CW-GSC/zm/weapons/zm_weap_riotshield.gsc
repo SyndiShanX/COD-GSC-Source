@@ -498,7 +498,7 @@ function riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_
     }
 
     switch (e_target.zm_ai_category) {
-      case # "normal":
+      case #"normal":
         if(test_range_squared < fling_range_squared) {
           if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
             break;
@@ -528,8 +528,8 @@ function riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_
         }
 
         break;
-      case # "special":
-      case # "elite":
+      case #"special":
+      case #"elite":
         if(self hasperk(#"specialty_mod_shield")) {
           level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
           level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 0;
@@ -599,9 +599,9 @@ function riotshield_melee(weapon, riotshield_knockdown_range, riotshield_gib_ran
 
   foreach(ai_enemy in level.var_21ffc192) {
     switch (ai_enemy.zm_ai_category) {
-      case # "boss":
-      case # "special":
-      case # "elite":
+      case #"boss":
+      case #"special":
+      case #"elite":
         var_d3f92d4d = zombie_utility::get_zombie_var(#"hash_bfdf728041b626a");
         break;
       default:

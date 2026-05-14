@@ -223,18 +223,18 @@ startfx(localclientnum) {
     prop_fx = undefined;
 
     switch (self.vehicletype) {
-      case # "heli_ai_mp":
+      case #"heli_ai_mp":
         light_fx = "heli_comlink_light";
         break;
-      case # "heli_player_gunner_mp":
+      case #"heli_player_gunner_mp":
         self.vtolleftfxid = util::playFXOnTag(localclientnum, level._effect[#"heli_gunner"][#"vtol_fx"], self, "tag_engine_left");
         self.vtolrightfxid = util::playFXOnTag(localclientnum, level._effect[#"heli_gunner"][#"vtol_fx_ft"], self, "tag_engine_right");
         light_fx = "heli_gunner_light";
         break;
-      case # "heli_guard_mp":
+      case #"heli_guard_mp":
         light_fx = "heli_guard_light";
         break;
-      case # "qrdrone_mp":
+      case #"qrdrone_mp":
         prop_fx = "qrdrone_prop";
         break;
     }

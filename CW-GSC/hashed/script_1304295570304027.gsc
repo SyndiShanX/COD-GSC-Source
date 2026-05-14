@@ -198,14 +198,14 @@ function function_229b384c(zone) {
   label = zone gameobjects::get_label();
 
   switch (label) {
-    case # "_a":
+    case #"_a":
       data.var_1629d8a0 = #"hash_3ff1c88b4360ea84";
       data.var_44e9bd00 = #"hash_5b47de31c97a49ff";
       data.spawnlist = "spl1";
       data.var_bd674032 = 1;
       data.var_95afd88f = "dom_a_cam";
       break;
-    case # "_b":
+    case #"_b":
       data.var_1629d8a0 = #"hash_dd6191acefd6847";
       data.var_44e9bd00 = #"hash_481e5e34f798331e";
       data.var_bd674032 = 2;
@@ -213,28 +213,28 @@ function function_229b384c(zone) {
       data.var_ecee1402 = 1;
       data.var_95afd88f = "dom_b_cam";
       break;
-    case # "_c":
+    case #"_c":
       data.var_1629d8a0 = #"hash_25a2a0aff40c76aa";
       data.var_44e9bd00 = #"hash_6a0c2383d37849bd";
       data.spawnlist = "spl3";
       data.var_bd674032 = 3;
       data.var_95afd88f = "dom_c_cam";
       break;
-    case # "_d":
+    case #"_d":
       data.var_1629d8a0 = #"hash_2bcd7171f9aae4a5";
       data.var_44e9bd00 = #"hash_5079687d6a87790c";
       data.spawnlist = "spl4";
       data.var_bd674032 = 4;
       data.var_95afd88f = "dom_d_cam";
       break;
-    case # "_e":
+    case #"_e":
       data.var_1629d8a0 = #"hash_5334d65b46b55660";
       data.var_44e9bd00 = #"hash_78e2a90cf85daa3b";
       data.spawnlist = "spl5";
       data.var_bd674032 = 5;
       data.var_95afd88f = "dom_d_cam";
       break;
-    case # "_f":
+    case #"_f":
       data.var_1629d8a0 = #"hash_6848900356c78b93";
       data.var_44e9bd00 = #"hash_cd72c0a5ba856da";
       data.spawnlist = "spl6";
@@ -1540,23 +1540,23 @@ function function_d24432a4(state) {
   str_alias = undefined;
 
   switch (state) {
-    case # "cap_low":
+    case #"cap_low":
       str_alias = #"hash_1c5192b85675532d";
       n_waittime = 1.25;
       break;
-    case # "cap_mid":
+    case #"cap_mid":
       str_alias = #"hash_1c5191b85675517a";
       n_waittime = 1.25;
       break;
-    case # "cap_high":
+    case #"cap_high":
       str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
-    case # "cap_drain":
+    case #"cap_drain":
       str_alias = #"hash_1c518fb856754e14";
       n_waittime = 1.25;
       break;
-    case # "cap_contested":
+    case #"cap_contested":
       str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;

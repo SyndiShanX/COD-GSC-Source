@@ -76,13 +76,13 @@ function function_d3b68b9b(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump) {
     if(isDefined(self.archetype)) {
       switch (self.archetype) {
-        case # "zombie_dog":
+        case #"zombie_dog":
           self.var_d1ed81ee = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_ball_mid_le");
           self.var_c4f4d1e5 = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_ball_mid_ri");
           self.var_62025f88 = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_palm_mid_le");
           self.var_3a23707d = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_palm_mid_ri");
           break;
-        case # "zombie":
+        case #"zombie":
           self.var_d1ed81ee = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_ball_le");
           self.var_c4f4d1e5 = function_239993de(fieldname, "zm_weapons/fx9_fld_frenzied_guard_lvl5_enemy_slow", self, "j_ball_ri");
           break;

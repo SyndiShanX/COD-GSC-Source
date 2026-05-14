@@ -105,19 +105,19 @@ function function_cab722a1(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     switch (var_2c1da7e7.var_4c0e0325) {
-      case # "hash_1bee8af55491a868":
+      case #"hash_1bee8af55491a868":
         var_2c1da7e7.var_6cbfcdad = ["cull_outside_bunkerint"];
         var_2c1da7e7.var_cfae744e = [];
         break;
-      case # "hash_33cc3c1845ad73e1":
+      case #"hash_33cc3c1845ad73e1":
         var_2c1da7e7.var_6cbfcdad = [];
         var_2c1da7e7.var_cfae744e = ["cull_outside_bunkerint"];
         break;
-      case # "hash_72014c9749d23264":
+      case #"hash_72014c9749d23264":
         var_2c1da7e7.var_6cbfcdad = ["cull_inside_excavation", "cull_inside_finale"];
         var_2c1da7e7.var_cfae744e = ["cull_inside_satcom", "cull_inside_bunkerext"];
         break;
-      case # "hash_455ae4f9edd2adbc":
+      case #"hash_455ae4f9edd2adbc":
         var_2c1da7e7.var_6cbfcdad = ["cull_inside_satcom", "cull_inside_bunkerext"];
         var_2c1da7e7.var_cfae744e = ["cull_inside_excavation", "cull_inside_finale"];
         break;

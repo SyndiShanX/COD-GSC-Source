@@ -482,34 +482,34 @@ add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_with_regular
   }
 
   switch (powerup_name) {
-    case # "small_ammo":
-    case # "full_ammo":
+    case #"small_ammo":
+    case #"full_ammo":
       str_rule = "zmPowerupMaxAmmo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       str_rule = "zmPowerupFireSale";
       break;
-    case # "bonus_points_player_shared":
-    case # "bonus_points_player":
-    case # "bonus_points_team":
+    case #"bonus_points_player_shared":
+    case #"bonus_points_player":
+    case #"bonus_points_team":
       str_rule = "zmPowerupChaosPoints";
       break;
-    case # "free_perk":
+    case #"free_perk":
       str_rule = "zmPowerupFreePerk";
       break;
-    case # "nuke":
+    case #"nuke":
       str_rule = "zmPowerupNuke";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       str_rule = "zmPowerupSpecialWeapon";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       str_rule = "zmPowerupInstakill";
       break;
-    case # "double_points":
+    case #"double_points":
       str_rule = "zmPowerupDouble";
       break;
-    case # "carpenter":
+    case #"carpenter":
       str_rule = "zmPowerupCarpenter";
       break;
     default:
@@ -788,33 +788,33 @@ specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay 
   }
 
   switch (var_5a63971) {
-    case # "full_ammo":
+    case #"full_ammo":
       str_rule = "zmPowerupMaxAmmo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       str_rule = "zmPowerupFireSale";
       break;
-    case # "bonus_points_player_shared":
-    case # "bonus_points_player":
-    case # "bonus_points_team":
+    case #"bonus_points_player_shared":
+    case #"bonus_points_player":
+    case #"bonus_points_team":
       str_rule = "zmPowerupChaosPoints";
       break;
-    case # "free_perk":
+    case #"free_perk":
       str_rule = "zmPowerupFreePerk";
       break;
-    case # "nuke":
+    case #"nuke":
       str_rule = "zmPowerupNuke";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       str_rule = "zmPowerupSpecialWeapon";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       str_rule = "zmPowerupInstakill";
       break;
-    case # "double_points":
+    case #"double_points":
       str_rule = "zmPowerupDouble";
       break;
-    case # "carpenter":
+    case #"carpenter":
       str_rule = "zmPowerupCarpenter";
       break;
     default:
@@ -1126,7 +1126,7 @@ powerup_grab(powerup_team) {
           }
         } else {
           switch (self.powerup_name) {
-            case # "teller_withdrawl":
+            case #"teller_withdrawl":
               level thread teller_withdrawl(self, player);
               break;
             default:
@@ -1706,12 +1706,12 @@ get_powerups(origin, radius) {
 
 should_award_stat(powerup_name) {
   switch (powerup_name) {
-    case # "blue_monkey":
-    case # "bonus_points_player_shared":
-    case # "teller_withdrawl":
-    case # "wolf_bonus_hero_power":
-    case # "wolf_bonus_ammo":
-    case # "wolf_bonus_points":
+    case #"blue_monkey":
+    case #"bonus_points_player_shared":
+    case #"teller_withdrawl":
+    case #"wolf_bonus_hero_power":
+    case #"wolf_bonus_ammo":
+    case #"wolf_bonus_points":
       return false;
   }
 

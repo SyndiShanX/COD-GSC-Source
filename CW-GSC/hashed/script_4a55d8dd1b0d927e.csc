@@ -51,19 +51,19 @@ function function_b324ff43() {
 
   if(isDefined(mapname)) {
     switch (mapname) {
-      case # "mp_tundra":
+      case #"mp_tundra":
         level.var_8ddf6d3d.var_151e2c9b = 1100;
         level.var_96492769.var_151e2c9b = 1100;
         break;
-      case # "mp_nuketown6":
+      case #"mp_nuketown6":
         level.var_8ddf6d3d.var_151e2c9b = 1000;
         level.var_96492769.var_151e2c9b = 1000;
         break;
-      case # "mp_cliffhanger":
+      case #"mp_cliffhanger":
         level.var_8ddf6d3d.var_151e2c9b = 900;
         level.var_96492769.var_151e2c9b = 900;
         break;
-      case # "mp_apocalypse":
+      case #"mp_apocalypse":
         level.var_8ddf6d3d.var_151e2c9b = 850;
         level.var_96492769.var_151e2c9b = 850;
         break;

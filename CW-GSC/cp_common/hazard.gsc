@@ -309,13 +309,13 @@ function do_damage(str_name, n_damage, e_ent, disable_ui) {
   }
 
   switch (str_name) {
-    case # "o2":
+    case #"o2":
       str_mod = "MOD_DROWN";
       break;
-    case # "heat":
+    case #"heat":
       str_mod = "MOD_BURNED";
       break;
-    case # "gas":
+    case #"gas":
       str_mod = "MOD_GAS";
       n_delay = 3.5;
       break;

@@ -144,10 +144,10 @@ clone_actor_animate(animtype) {
   wait 0.1;
 
   switch (animtype) {
-    case # "laststand":
+    case #"laststand":
       self setanimstatefromasd("laststand");
       break;
-    case # "idle":
+    case #"idle":
     default:
       self setanimstatefromasd("idle");
       break;
@@ -158,19 +158,19 @@ clone_mover_animate(animtype) {
   self useanimtree("generic");
 
   switch (animtype) {
-    case # "laststand":
+    case #"laststand":
       self setanim(#"pb_laststand_idle");
       break;
-    case # "afterlife":
+    case #"afterlife":
       self setanim(#"pb_afterlife_laststand_idle");
       break;
-    case # "chair":
+    case #"chair":
       self setanim(#"ai_actor_elec_chair_idle");
       break;
-    case # "falling":
+    case #"falling":
       self setanim(#"pb_falling_loop");
       break;
-    case # "idle":
+    case #"idle":
     default:
       self setanim(#"pb_stand_alert");
       break;

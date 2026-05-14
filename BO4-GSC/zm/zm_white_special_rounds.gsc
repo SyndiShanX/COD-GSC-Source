@@ -372,27 +372,27 @@ function_7b706d1d(str_identifier) {
 
 function_a5b37c69(str_identifier) {
   switch (str_identifier) {
-    case # "green_house":
+    case #"green_house":
       exploder::exploder("fxexp_toxic_gas_house_green");
       wait 0.1;
       break;
-    case # "yellow_house":
+    case #"yellow_house":
       exploder::exploder("fxexp_toxic_gas_house_yellow");
       wait 0.1;
       break;
-    case # "obrien_house":
+    case #"obrien_house":
       exploder::exploder("fxexp_toxic_gas_house_obrien");
       wait 0.1;
       break;
-    case # "reinsel_house":
+    case #"reinsel_house":
       exploder::exploder("fxexp_toxic_gas_house_reinsel");
       wait 0.1;
       break;
-    case # "hammond_house":
+    case #"hammond_house":
       exploder::exploder("fxexp_toxic_gas_house_hammond");
       wait 0.1;
       break;
-    case # "hoggatt_house":
+    case #"hoggatt_house":
       exploder::exploder("fxexp_toxic_gas_house_hoggatt");
       wait 0.1;
       break;
@@ -406,22 +406,22 @@ function_3be5a506(str_identifier) {
   clientfield::set("portal_map_gas_indicator_" + str_identifier, 0);
 
   switch (str_identifier) {
-    case # "green_house":
+    case #"green_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_green");
       break;
-    case # "yellow_house":
+    case #"yellow_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_yellow");
       break;
-    case # "obrien_house":
+    case #"obrien_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_obrien");
       break;
-    case # "reinsel_house":
+    case #"reinsel_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_reinsel");
       break;
-    case # "hammond_house":
+    case #"hammond_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_hammond");
       break;
-    case # "hoggatt_house":
+    case #"hoggatt_house":
       exploder::stop_exploder("fxexp_toxic_gas_house_hoggatt");
       break;
   }
@@ -559,17 +559,17 @@ function_778aec95() {
 
 function_b822e13(str_identifier) {
   switch (str_identifier) {
-    case # "yellow_house":
+    case #"yellow_house":
       return "Yellow House";
-    case # "green_house":
+    case #"green_house":
       return "Green House";
-    case # "hoggatt_house":
+    case #"hoggatt_house":
       return "Transfusion Facility";
-    case # "hammond_house":
+    case #"hammond_house":
       return "Prisoner Holding";
-    case # "reinsel_house":
+    case #"reinsel_house":
       return "APD Interrogation";
-    case # "obrien_house":
+    case #"obrien_house":
       return "Broken Arrow Operations";
   }
 }
@@ -2397,32 +2397,32 @@ function_ff5c24a8() {
 
 function_ccc74648(var_f9dc3b9d) {
   switch (var_f9dc3b9d) {
-    case # "string_01":
+    case #"string_01":
       self function_1bce0fd();
       self showpart("tag_string_01");
       exploder::exploder("fxexp_script_power_room_monitor_red");
       break;
-    case # "string_02":
+    case #"string_02":
       self function_1bce0fd();
       self showpart("tag_string_02");
       exploder::exploder("fxexp_script_power_room_monitor_yellow");
       break;
-    case # "string_03":
+    case #"string_03":
       self function_1bce0fd();
       self showpart("tag_string_03");
       exploder::exploder("fxexp_script_power_room_monitor_white");
       break;
-    case # "string_04":
+    case #"string_04":
       self function_1bce0fd();
       self showpart("tag_string_04");
       exploder::exploder("fxexp_script_power_room_monitor_red");
       break;
-    case # "string_05":
+    case #"string_05":
       self function_1bce0fd();
       self showpart("tag_string_05");
       exploder::exploder("fxexp_script_power_room_monitor_yellow");
       break;
-    case # "string_06":
+    case #"string_06":
       self function_1bce0fd();
       self showpart("tag_string_06");
       exploder::exploder("fxexp_script_power_room_monitor_green");

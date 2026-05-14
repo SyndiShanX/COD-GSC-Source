@@ -539,7 +539,7 @@ function function_970a97b2(params) {
     if(is_equipment(params.weapon)) {
       if(isDefined(params.weapon.statname)) {
         switch (params.weapon.statname) {
-          case # "frag_grenade":
+          case #"frag_grenade":
             params.eattacker stats::function_622feb0d(#"eq_frag_grenade", #"kills", 1);
             break;
           default:
@@ -567,16 +567,16 @@ function function_970a97b2(params) {
       processscoreevent(scoreevent, params.eattacker, var_a0345f37, params.weapon, undefined, params);
     } else if(isDefined(params.weapon.name)) {
       switch (params.weapon.name) {
-        case # "ww_ieu_gas_t9_upgraded":
-        case # "ww_ieu_plasma_t9_upgraded":
-        case # "ww_ieu_acid_t9_upgraded":
-        case # "ww_ieu_shockwave_t9_upgraded":
-        case # "ww_ieu_shockwave_t9":
-        case # "ww_ieu_electric_t9_upgraded":
-        case # "ww_ieu_electric_t9":
-        case # "ww_ieu_acid_t9":
-        case # "ww_ieu_gas_t9":
-        case # "ww_ieu_plasma_t9":
+        case #"ww_ieu_gas_t9_upgraded":
+        case #"ww_ieu_plasma_t9_upgraded":
+        case #"ww_ieu_acid_t9_upgraded":
+        case #"ww_ieu_shockwave_t9_upgraded":
+        case #"ww_ieu_shockwave_t9":
+        case #"ww_ieu_electric_t9_upgraded":
+        case #"ww_ieu_electric_t9":
+        case #"ww_ieu_acid_t9":
+        case #"ww_ieu_gas_t9":
+        case #"ww_ieu_plasma_t9":
           if(is_true(params.enemy.var_49fdad6a) && params.enemy.zm_ai_category === #"elite" && (!isDefined(var_a0345f37.var_e293f8ac) || isDefined(var_a0345f37.var_e293f8ac) && var_a0345f37.var_e293f8ac.size === 0)) {
             params.eattacker zm_stats::increment_challenge_stat(#"hash_3969fa6c05de12ef");
             processscoreevent("kill_steiner_caught_with_ieu_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -691,7 +691,7 @@ function function_970a97b2(params) {
   if(isDefined(params.enemy.enemy_override)) {
     if(zm_utility::is_player_valid(params.enemy.enemy_override.owner, 0, 0)) {
       switch (params.enemy.enemy_override.item.name) {
-        case # "nightingale_zm":
+        case #"nightingale_zm":
           if(zm_utility::is_player_valid(params.eattacker, 0, 0)) {
             if(var_a0345f37.damagemod === "MOD_MELEE") {
               params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"hash_1f451bc4d664e2ad", 1);
@@ -841,7 +841,7 @@ function function_f2ce8b86(params) {
         if(is_equipment(var_c2dcab66.weapon)) {
           if(isDefined(var_c2dcab66.weapon.statname)) {
             switch (var_c2dcab66.weapon.statname) {
-              case # "frag_grenade":
+              case #"frag_grenade":
                 var_c2dcab66.player stats::function_6fb0b113(#"eq_frag_grenade", #"best_ekia");
                 break;
               default:
@@ -851,21 +851,21 @@ function function_f2ce8b86(params) {
           }
         } else if(isDefined(var_c2dcab66.weapon.name)) {
           switch (var_c2dcab66.weapon.name) {
-            case # "energy_mine":
-            case # "energy_mine_4":
-            case # "energy_mine_5":
-            case # "energy_mine_2":
-            case # "energy_mine_3":
-            case # "energy_mine_1":
-            case # "hash_7e4053e6965bafa7":
+            case #"energy_mine":
+            case #"energy_mine_4":
+            case #"energy_mine_5":
+            case #"energy_mine_2":
+            case #"energy_mine_3":
+            case #"energy_mine_1":
+            case #"hash_7e4053e6965bafa7":
               var_c2dcab66.player stats::function_6fb0b113(#"energy_mine", #"best_ekia");
               break;
-            case # "frost_blast":
-            case # "frost_blast_1":
-            case # "frost_blast_3":
-            case # "frost_blast_2":
-            case # "frost_blast_5":
-            case # "frost_blast_4":
+            case #"frost_blast":
+            case #"frost_blast_1":
+            case #"frost_blast_3":
+            case #"frost_blast_2":
+            case #"frost_blast_5":
+            case #"frost_blast_4":
               var_c2dcab66.player stats::function_6fb0b113(#"frost_blast", #"best_ekia");
               break;
           }
@@ -966,13 +966,13 @@ function function_f2ce8b86(params) {
           killstreak_item = var_c2dcab66.einflictor.item;
 
           switch (var_c2dcab66.weapon.statname) {
-            case # "remote_missile":
-            case # "remote_missile_bomblet":
-            case # "remote_missile_missile":
+            case #"remote_missile":
+            case #"remote_missile_bomblet":
+            case #"remote_missile_missile":
               var_c2dcab66.player stats::function_8fb23f94(#"remote_missile_zm", #"kills", 1);
               var_c2dcab66.player stats::function_b04e7184(#"remote_missile_zm", #"best_kills");
               break;
-            case # "recon_car":
+            case #"recon_car":
               var_c2dcab66.player stats::function_8fb23f94(#"recon_car_zm", #"kills", 1);
               var_c2dcab66.player stats::function_b04e7184(#"recon_car_zm", #"best_kills");
             default:
@@ -1112,7 +1112,7 @@ function function_4ffff5df(attacker, weapon, var_9c448324, enemy) {
     if(is_equipment(weapon)) {
       if(isDefined(weapon.statname)) {
         switch (weapon.statname) {
-          case # "frag_grenade":
+          case #"frag_grenade":
             attacker stats::function_622feb0d(#"eq_frag_grenade", #"assists", 1);
             break;
           default:
@@ -1144,14 +1144,14 @@ function is_equipment(weapon) {
   }
 
   switch (weapon.name) {
-    case # "molotov_fire":
-    case # "frag_grenade":
-    case # "hatchet":
-    case # "eq_sticky_grenade":
-    case # "eq_slow_grenade":
-    case # "hash_6a4dd5ed56f6e3f6":
-    case # "satchel_charge":
-    case # "cymbal_monkey":
+    case #"molotov_fire":
+    case #"frag_grenade":
+    case #"hatchet":
+    case #"eq_sticky_grenade":
+    case #"eq_slow_grenade":
+    case #"hash_6a4dd5ed56f6e3f6":
+    case #"satchel_charge":
+    case #"cymbal_monkey":
       return true;
     default:
       return false;
@@ -1175,7 +1175,7 @@ function updatemultikill(params) {
   if(isDefined(params.enemy.enemy_override)) {
     if(zm_utility::is_player_valid(params.enemy.enemy_override.owner, 0, 0)) {
       switch (params.enemy.enemy_override.item.name) {
-        case # "nightingale_zm":
+        case #"nightingale_zm":
           if(isDefined(params.eattacker.var_4927d3d[#"nightengale"])) {
             if(params.eattacker.var_4927d3d[#"nightengale"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"nightengale"].on_cooldown === 0) {
               params.eattacker.var_4927d3d[#"nightengale"].multikills++;
@@ -1514,9 +1514,9 @@ function updatemultikill(params) {
 
           if(params.eattacker.var_4927d3d[params.weapon.name].oneshotmultikills === 5 && isDefined(params.weapon.statname)) {
             switch (params.weapon.statname) {
-              case # "special_grenadelauncher_t9":
-              case # "launcher_freefire_t9":
-              case # "launcher_standard_t9":
+              case #"special_grenadelauncher_t9":
+              case #"launcher_freefire_t9":
+              case #"launcher_standard_t9":
                 processscoreevent("oneshot_explosive_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker stats::function_561716e6(params.weapon.statname, #"hash_7bf29fa438d54aad", 1);
                 params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"bigbang", 1);
@@ -1546,12 +1546,12 @@ function updatemultikill(params) {
       if(params.eattacker.var_4927d3d[params.weapon.name].time > gettime() - 2000 && params.eattacker.var_4927d3d[params.weapon.name].on_cooldown === 0) {
         if(isDefined(params.weapon.name)) {
           switch (params.weapon.name) {
-            case # "frost_blast":
-            case # "frost_blast_1":
-            case # "frost_blast_3":
-            case # "frost_blast_2":
-            case # "frost_blast_5":
-            case # "frost_blast_4":
+            case #"frost_blast":
+            case #"frost_blast_1":
+            case #"frost_blast_3":
+            case #"frost_blast_2":
+            case #"frost_blast_5":
+            case #"frost_blast_4":
               if(isDefined(params.eattacker.var_4927d3d[#"frost_blast"])) {
                 if(params.eattacker.var_4927d3d[#"frost_blast"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"frost_blast"].on_cooldown === 0) {
                   params.eattacker.var_4927d3d[#"frost_blast"].multikills++;
@@ -1609,13 +1609,13 @@ function updatemultikill(params) {
 
         if(isDefined(params.weapon.name)) {
           switch (params.weapon.name) {
-            case # "energy_mine":
-            case # "energy_mine_4":
-            case # "energy_mine_5":
-            case # "energy_mine_2":
-            case # "energy_mine_3":
-            case # "energy_mine_1":
-            case # "hash_7e4053e6965bafa7":
+            case #"energy_mine":
+            case #"energy_mine_4":
+            case #"energy_mine_5":
+            case #"energy_mine_2":
+            case #"energy_mine_3":
+            case #"energy_mine_1":
+            case #"hash_7e4053e6965bafa7":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 params.eattacker stats::function_622feb0d(#"energy_mine", #"hash_7bf29fa438d54aad", 1);
                 processscoreevent("energy_mine_multikill_zm", params.eattacker, undefined, params.weapon);
@@ -1632,7 +1632,7 @@ function updatemultikill(params) {
 
         if(isDefined(params.weapon.name) && killstreaks::is_killstreak_weapon(params.weapon) && params.enemy.damagemod !== "MOD_MELEE") {
           switch (params.weapon.name) {
-            case # "gun_ultimate_turret":
+            case #"gun_ultimate_turret":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 params.eattacker stats::function_8fb23f94(#"ultimate_turret", #"hash_7bf29fa438d54aad", 1);
                 processscoreevent("sentry_turret_multikill_zm", params.eattacker, undefined, params.weapon);
@@ -1642,7 +1642,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "sig_lmg":
+            case #"sig_lmg":
               if(getdvarint(#"hash_5c49df97f4f82e12", 0) && params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 processscoreevent("soa_death_machine_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker zm_stats::function_17ee4529(#"hash_122768477016f4e5", 1, #"hash_5c49df97f4f82e12");
@@ -1662,7 +1662,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "hero_annihilator":
+            case #"hero_annihilator":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 processscoreevent("hand_cannon_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_7f2cbf48327c2513");
@@ -1672,7 +1672,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "hero_flamethrower":
+            case #"hero_flamethrower":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 processscoreevent("flamethrower_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_1f555a384246b0de");
@@ -1683,9 +1683,9 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "remote_missile":
-            case # "remote_missile_bomblet":
-            case # "remote_missile_missile":
+            case #"remote_missile":
+            case #"remote_missile_bomblet":
+            case #"remote_missile_missile":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 processscoreevent("cruise_missile_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_1a6125474b0d46e1");
@@ -1695,7 +1695,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "hero_pineapplegun":
+            case #"hero_pineapplegun":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 processscoreevent("grenade_launcher_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_77c4f06d1c02d2d7");
@@ -1705,7 +1705,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "sig_bow_flame":
+            case #"sig_bow_flame":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 processscoreevent("combat_bow_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_1bdaa70759b87110");
@@ -1716,7 +1716,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "planemortar":
+            case #"planemortar":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3) {
                 processscoreevent("artillery_strike_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker zm_stats::increment_challenge_stat(#"hash_152390f1e6352547");
@@ -1727,7 +1727,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "napalm_strike":
+            case #"napalm_strike":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 params.eattacker contracts::increment_zm_contract(#"hash_fc717066caec57c");
                 processscoreevent("napalm_strike_multikill_zm", params.eattacker, undefined, params.weapon);
@@ -1739,7 +1739,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "hash_1734871fef9c0549":
+            case #"hash_1734871fef9c0549":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 processscoreevent("chopper_gunner_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker stats::function_8fb23f94(#"chopper_gunner", #"hash_7bf29fa438d54aad", 1);
@@ -1748,7 +1748,7 @@ function updatemultikill(params) {
               }
 
               break;
-            case # "recon_car_zm":
+            case #"recon_car_zm":
               if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 5) {
                 processscoreevent("arcxd_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker stats::function_8fb23f94(#"recon_car_zm", #"hash_7bf29fa438d54aad", 1);
@@ -1768,7 +1768,7 @@ function updatemultikill(params) {
 
         if(params.eattacker.var_4927d3d[params.weapon.name].multikills === 3 && isDefined(params.weapon.name)) {
           switch (params.weapon.name) {
-            case # "eq_sticky_grenade":
+            case #"eq_sticky_grenade":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               processscoreevent("semtex_multikill_zm", params.eattacker, undefined, params.weapon);
               params.eattacker stats::function_622feb0d(#"eq_sticky_grenade", #"hash_7bf29fa438d54aad", 1);
@@ -1776,7 +1776,7 @@ function updatemultikill(params) {
               params.eattacker function_5fb97568();
               reset_values = 1;
               break;
-            case # "satchel_charge":
+            case #"satchel_charge":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               processscoreevent("satchel_charge_multikill_zm", params.eattacker, undefined, params.weapon);
               params.eattacker stats::function_622feb0d(#"satchel_charge", #"hash_7bf29fa438d54aad", 1);
@@ -1784,7 +1784,7 @@ function updatemultikill(params) {
               params.eattacker function_5fb97568();
               reset_values = 1;
               break;
-            case # "frag_grenade":
+            case #"frag_grenade":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               processscoreevent("frag_multikill_zm", params.eattacker, undefined, params.weapon);
               params.eattacker stats::function_622feb0d(#"eq_frag_grenade", #"hash_7bf29fa438d54aad", 1);
@@ -1792,14 +1792,14 @@ function updatemultikill(params) {
               params.eattacker function_5fb97568();
               reset_values = 1;
               break;
-            case # "cymbal_monkey":
+            case #"cymbal_monkey":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               processscoreevent("monkey_bomb_multikill_zm", params.eattacker, undefined, params.weapon);
               params.eattacker stats::function_622feb0d(#"cymbal_monkey", #"hash_7bf29fa438d54aad", 1);
               params.eattacker contracts::increment_zm_contract(#"hash_331f341976ba7749");
               reset_values = 1;
               break;
-            case # "molotov_fire":
+            case #"molotov_fire":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               params.eattacker contracts::increment_zm_contract(#"hash_57299228edd7d8ad");
               params.eattacker stats::function_622feb0d(#"eq_molotov", #"hash_7bf29fa438d54aad", 1);
@@ -1808,14 +1808,14 @@ function updatemultikill(params) {
               params.eattacker function_5fb97568();
               reset_values = 1;
               break;
-            case # "eq_slow_grenade":
+            case #"eq_slow_grenade":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               params.eattacker contracts::increment_zm_contract(#"hash_3b1aea9829803ac1");
               params.eattacker stats::function_622feb0d(#"eq_slow_grenade", #"hash_7bf29fa438d54aad", 1);
               processscoreevent("concussion_grenade_multikill_zm", params.eattacker, undefined, params.weapon);
               reset_values = 1;
               break;
-            case # "hatchet":
+            case #"hatchet":
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               params.eattacker stats::function_622feb0d(#"hatchet", #"hash_7bf29fa438d54aad", 1);
               params.eattacker function_5fb97568();
@@ -1829,40 +1829,40 @@ function updatemultikill(params) {
 
               reset_values = 1;
               break;
-            case # "hash_6a4dd5ed56f6e3f6":
+            case #"hash_6a4dd5ed56f6e3f6":
               params.eattacker stats::function_622feb0d(#"hash_6a4dd5ed56f6e3f6", #"hash_7bf29fa438d54aad", 1);
               params.eattacker zm_stats::increment_challenge_stat(#"hash_60594d8f8bc8764b");
               params.eattacker zm_stats::increment_challenge_stat(#"hash_7ae5fe673f863826");
               processscoreevent("lt53_kazimir_multikill_zm", params.eattacker, undefined, params.weapon);
               reset_values = 1;
               break;
-            case # "ww_ieu_gas_t9_upgraded":
-            case # "ww_ieu_plasma_t9_upgraded":
-            case # "ww_ieu_acid_t9_upgraded":
-            case # "ww_ieu_shockwave_t9_upgraded":
-            case # "ww_ieu_shockwave_t9":
-            case # "ww_ieu_electric_t9_upgraded":
-            case # "ww_ieu_electric_t9":
-            case # "ww_ieu_acid_t9":
-            case # "ww_ieu_gas_t9":
-            case # "ww_ieu_plasma_t9":
+            case #"ww_ieu_gas_t9_upgraded":
+            case #"ww_ieu_plasma_t9_upgraded":
+            case #"ww_ieu_acid_t9_upgraded":
+            case #"ww_ieu_shockwave_t9_upgraded":
+            case #"ww_ieu_shockwave_t9":
+            case #"ww_ieu_electric_t9_upgraded":
+            case #"ww_ieu_electric_t9":
+            case #"ww_ieu_acid_t9":
+            case #"ww_ieu_gas_t9":
+            case #"ww_ieu_plasma_t9":
               processscoreevent("ieu_multikill_zm", params.eattacker, undefined, params.weapon);
               reset_values = 1;
               break;
-            case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
-            case # "ww_mega_barrel_fullauto_copycat_t9":
+            case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
+            case #"ww_mega_barrel_fullauto_copycat_t9":
               params.eattacker notify(#"hash_44abe1c14b998f86", {
                 #weapon_name: params.weapon.name
               });
               processscoreevent("crbrs_multikill_zm", params.eattacker, undefined, params.weapon);
               reset_values = 1;
               break;
-            case # "ww_mega_barrel_fullauto_blazer_beam_t9":
-            case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-            case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
-            case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-            case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-            case # "ww_mega_barrel_fullauto_micro_missile_t9":
+            case #"ww_mega_barrel_fullauto_blazer_beam_t9":
+            case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+            case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
+            case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+            case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+            case #"ww_mega_barrel_fullauto_micro_missile_t9":
               processscoreevent("crbrs_variants_multikill_zm", params.eattacker, undefined, params.weapon);
               params.eattacker notify(#"hash_44abe1c14b998f86", {
                 #weapon_name: params.weapon.name
@@ -2222,28 +2222,28 @@ function get_distance_for_weapon(weapon, weaponclass = util::getweaponclass(weap
   }
 
   switch (weaponclass) {
-    case # "weapon_smg":
+    case #"weapon_smg":
       distance = 1960000;
       break;
-    case # "weapon_assault":
+    case #"weapon_assault":
       distance = 2560000;
       break;
-    case # "weapon_tactical":
+    case #"weapon_tactical":
       distance = 2560000;
       break;
-    case # "weapon_lmg":
+    case #"weapon_lmg":
       distance = 2560000;
       break;
-    case # "weapon_sniper":
+    case #"weapon_sniper":
       distance = 4000000;
       break;
-    case # "weapon_pistol":
+    case #"weapon_pistol":
       distance = 1000000;
       break;
-    case # "weapon_cqb":
+    case #"weapon_cqb":
       distance = 302500;
       break;
-    case # "weapon_special":
+    case #"weapon_special":
       baseweapon = weapon.rootweapon;
 
       if(weapon.isballisticknife || baseweapon == level.weaponspecialcrossbow) {
@@ -2251,7 +2251,7 @@ function get_distance_for_weapon(weapon, weaponclass = util::getweaponclass(weap
       }
 
       break;
-    case # "weapon_grenade":
+    case #"weapon_grenade":
       if(weapon.rootweapon.name == "hatchet") {
         distance = 2250000;
       }

@@ -138,29 +138,29 @@ function private function_d773f2e(params) {
   }
 
   switch (params.weapon.name) {
-    case # "ray_gun_mk2":
-    case # "ray_gun":
+    case #"ray_gun_mk2":
+    case #"ray_gun":
       var_64edfc97 = #"hash_47911e56b3253861";
       break;
-    case # "ww_ray_rifle_t9":
+    case #"ww_ray_rifle_t9":
       var_64edfc97 = #"hash_6d5b8296c64bfe35";
       break;
-    case # "ww_ieu_shockwave_t9":
-    case # "ww_ieu_electric_t9":
-    case # "ww_ieu_acid_t9":
-    case # "ww_ieu_gas_t9":
-    case # "ww_ieu_plasma_t9":
+    case #"ww_ieu_shockwave_t9":
+    case #"ww_ieu_electric_t9":
+    case #"ww_ieu_acid_t9":
+    case #"ww_ieu_gas_t9":
+    case #"ww_ieu_plasma_t9":
       var_64edfc97 = #"hash_763fd19c812336";
       break;
-    case # "sig_bow_flame":
+    case #"sig_bow_flame":
       return;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       return;
-    case # "hero_annihilator":
+    case #"hero_annihilator":
       return;
-    case # "sig_lmg":
+    case #"sig_lmg":
       return;
-    case # "hero_pineapplegun":
+    case #"hero_pineapplegun":
       return;
     default:
       if(zm_weapons::is_wonder_weapon(params.weapon)) {
@@ -219,7 +219,7 @@ function private on_item_pickup(params) {
     var_64edfc97 = #"hash_761fd0a07d2e04f";
   } else if(isDefined(item) && isDefined(weapon)) {
     switch (item.itementry.itemtype) {
-      case # "scorestreak":
+      case #"scorestreak":
         if(is_true(item.var_14948fd)) {
           if(weapon.name == #"chopper_gunner" || weapon.name == #"inventory_napalm_strike_zm") {
             var_64edfc97 = #"hash_1451a78cbf91a4e3";
@@ -234,8 +234,8 @@ function private on_item_pickup(params) {
         }
 
         break;
-      case # "tactical":
-      case # "equipment":
+      case #"tactical":
+      case #"equipment":
         if(is_true(item.var_14948fd)) {
           var_64edfc97 = #"hash_7ae658278829f860";
           item.var_14948fd = undefined;
@@ -243,7 +243,7 @@ function private on_item_pickup(params) {
 
         n_timeout = 3;
         break;
-      case # "weapon":
+      case #"weapon":
         if(is_true(item.var_5b4ae99d)) {} else if(function_5fef4201(weapon) || weapon.name === #"ww_ray_rifle_t9" || weapon.name === #"hash_ac86d29509a8939") {
           if(self function_2d3f319c()) {
             var_64edfc97 = #"hash_62aba8e16a728e4";
@@ -254,13 +254,13 @@ function private on_item_pickup(params) {
 
           if(is_true(item.var_14948fd) || is_true(item.wallbuy_weapon) || is_true(item.var_519e776c)) {
             switch (weapon.weapclass) {
-              case # "mg":
+              case #"mg":
                 var_64edfc97 = #"hash_52e3a2e29f0f0544";
                 break;
-              case # "spread":
+              case #"spread":
                 var_64edfc97 = #"hash_245da60fd43ac21a";
                 break;
-              case # "pistol":
+              case #"pistol":
                 if(weapon.name == #"ray_gun" || weapon.name == #"ray_gun_mk2") {
                   if(self function_2d3f319c()) {
                     var_64edfc97 = #"hash_56d268fc5786455e";
@@ -271,13 +271,13 @@ function private on_item_pickup(params) {
                 }
 
                 break;
-              case # "rocketlauncher":
+              case #"rocketlauncher":
                 var_64edfc97 = #"hash_1f9d617af9161090";
                 break;
-              case # "smg":
+              case #"smg":
                 var_64edfc97 = #"hash_103dc1e2c2034ff1";
                 break;
-              case # "rifle":
+              case #"rifle":
                 if(weapon.issniperweapon) {
                   var_64edfc97 = #"hash_6f77ec873d50a5a3";
                 } else if(zm_weapons::is_tactical_rifle(weapon)) {
@@ -316,11 +316,11 @@ function function_5fef4201(weapon) {
     w_root = zm_weapons::function_386dacbc(weapon);
 
     switch (w_root.name) {
-      case # "ww_ieu_shockwave_t9":
-      case # "ww_ieu_electric_t9":
-      case # "ww_ieu_acid_t9":
-      case # "ww_ieu_gas_t9":
-      case # "ww_ieu_plasma_t9":
+      case #"ww_ieu_shockwave_t9":
+      case #"ww_ieu_electric_t9":
+      case #"ww_ieu_acid_t9":
+      case #"ww_ieu_gas_t9":
+      case #"ww_ieu_plasma_t9":
         return true;
     }
   }
@@ -350,470 +350,470 @@ function function_99262cf3() {
 
 function function_d1711916(var_332276f2, dialogkey) {
   switch (dialogkey) {
-    case # "hash_1561254978f7d1ed":
+    case #"hash_1561254978f7d1ed":
       return var_332276f2.var_a18357b0;
-    case # "hash_d6e9cf445a840a":
+    case #"hash_d6e9cf445a840a":
       return var_332276f2.var_7197146;
-    case # "hash_4d97a2cf6c712d4e":
+    case #"hash_4d97a2cf6c712d4e":
       return var_332276f2.var_b75d6820;
-    case # "hash_7e2f32f691207aca":
+    case #"hash_7e2f32f691207aca":
       return var_332276f2.var_c6a87967;
-    case # "hash_56bc9b3d6947b8b6":
+    case #"hash_56bc9b3d6947b8b6":
       return var_332276f2.var_2a0d1f09;
-    case # "se_vehiclekill":
+    case #"se_vehiclekill":
       return var_332276f2.se_vehiclekill;
-    case # "hash_28808125fce8c8e7":
+    case #"hash_28808125fce8c8e7":
       return var_332276f2.var_2ede36b7;
-    case # "hash_4bd8ffae8d5281c9":
+    case #"hash_4bd8ffae8d5281c9":
       return var_332276f2.var_a7cd67b9;
-    case # "hash_3449e69a233e305f":
+    case #"hash_3449e69a233e305f":
       return var_332276f2.var_79d2f568;
-    case # "hash_3449e19a233e27e0":
+    case #"hash_3449e19a233e27e0":
       return var_332276f2.var_30a9e317;
-    case # "hash_343f749a23351a24":
+    case #"hash_343f749a23351a24":
       return var_332276f2.var_8c5b9bd9;
-    case # "hash_343f719a2335150b":
+    case #"hash_343f719a2335150b":
       return var_332276f2.var_e70f5143;
-    case # "hash_406609dcd40a348e":
+    case #"hash_406609dcd40a348e":
       return var_332276f2.var_b63eeb6b;
-    case # "hash_31d075ffaf2c230a":
+    case #"hash_31d075ffaf2c230a":
       return var_332276f2.var_3a42c1d5;
-    case # "hash_68d4ef9c937aa223":
+    case #"hash_68d4ef9c937aa223":
       return var_332276f2.var_113e7d50;
-    case # "hash_6b704db2e152d216":
+    case #"hash_6b704db2e152d216":
       return var_332276f2.var_546b28ea;
-    case # "hash_3e454dbd28a162b0":
+    case #"hash_3e454dbd28a162b0":
       return var_332276f2.var_c00403c2;
-    case # "hash_2af4d13403d833e5":
+    case #"hash_2af4d13403d833e5":
       return var_332276f2.var_730dde6b;
-    case # "hash_2d45724fc1a86740":
+    case #"hash_2d45724fc1a86740":
       return var_332276f2.var_f306595c;
-    case # "hash_684963f03f8a86a5":
+    case #"hash_684963f03f8a86a5":
       return var_332276f2.var_9ff5cdcc;
-    case # "hash_5dc5c0d8c259c02d":
+    case #"hash_5dc5c0d8c259c02d":
       return var_332276f2.var_72e8c256;
-    case # "hash_541ae7332eba41be":
+    case #"hash_541ae7332eba41be":
       return var_332276f2.var_b7835026;
-    case # "hash_6e779060a26706e1":
+    case #"hash_6e779060a26706e1":
       return var_332276f2.var_87dee9d8;
-    case # "hash_35b4f1037b7d4ed1":
+    case #"hash_35b4f1037b7d4ed1":
       return var_332276f2.var_f122552;
-    case # "hash_394f4a59df1d0c17":
+    case #"hash_394f4a59df1d0c17":
       return var_332276f2.var_dfbf98e1;
-    case # "hash_7e50fb36129dc24b":
+    case #"hash_7e50fb36129dc24b":
       return var_332276f2.var_bf6e4ac;
-    case # "hash_7ae658278829f860":
+    case #"hash_7ae658278829f860":
       return var_332276f2.var_2cecf015;
-    case # "hash_761fd0a07d2e04f":
+    case #"hash_761fd0a07d2e04f":
       return var_332276f2.var_66209010;
-    case # "hash_1451a78cbf91a4e3":
+    case #"hash_1451a78cbf91a4e3":
       return var_332276f2.var_f4cd0e25;
-    case # "hash_61917b06ef391bae":
+    case #"hash_61917b06ef391bae":
       return var_332276f2.var_87c03899;
-    case # "hash_6b760a9e97d27ca3":
+    case #"hash_6b760a9e97d27ca3":
       return var_332276f2.var_b4d315f0;
-    case # "hash_17608d93085cc567":
+    case #"hash_17608d93085cc567":
       return var_332276f2.var_d6081434;
-    case # "hash_54d519e96ca368ad":
+    case #"hash_54d519e96ca368ad":
       return var_332276f2.var_93a555d;
-    case # "hash_1f9d617af9161090":
+    case #"hash_1f9d617af9161090":
       return var_332276f2.var_6d143dab;
-    case # "hash_52e3a2e29f0f0544":
+    case #"hash_52e3a2e29f0f0544":
       return var_332276f2.var_11bab4ea;
-    case # "hash_e36abf6446d1c67":
+    case #"hash_e36abf6446d1c67":
       return var_332276f2.var_d3bc2ad1;
-    case # "hash_245da60fd43ac21a":
+    case #"hash_245da60fd43ac21a":
       return var_332276f2.var_3f0128df;
-    case # "hash_103dc1e2c2034ff1":
+    case #"hash_103dc1e2c2034ff1":
       return var_332276f2.var_ff9ef39;
-    case # "hash_6f77ec873d50a5a3":
+    case #"hash_6f77ec873d50a5a3":
       return var_332276f2.var_33d6065e;
-    case # "hash_65a5f39e9b407c79":
+    case #"hash_65a5f39e9b407c79":
       return var_332276f2.var_ae6aac16;
-    case # "hash_56d268fc5786455e":
+    case #"hash_56d268fc5786455e":
       return var_332276f2.var_63cacd8;
-    case # "hash_62aba8e16a728e4":
+    case #"hash_62aba8e16a728e4":
       return var_332276f2.var_981c7b13;
-    case # "hash_97e18b450a8ee6c":
+    case #"hash_97e18b450a8ee6c":
       return var_332276f2.var_4167c49f;
-    case # "hash_3db45a32611292d9":
+    case #"hash_3db45a32611292d9":
       return var_332276f2.var_2bd61d23;
-    case # "hash_3db46b326112afbc":
+    case #"hash_3db46b326112afbc":
       return var_332276f2.var_8fc7e499;
-    case # "hash_290cd5d81be48f4e":
+    case #"hash_290cd5d81be48f4e":
       return var_332276f2.var_7b9a379a;
-    case # "hash_28201f7edff3dce6":
+    case #"hash_28201f7edff3dce6":
       return var_332276f2.var_e656ac85;
-    case # "hash_17f91747a02fd957":
+    case #"hash_17f91747a02fd957":
       return var_332276f2.var_ee428cd2;
-    case # "hash_15ca4dea4f166f7f":
+    case #"hash_15ca4dea4f166f7f":
       return var_332276f2.var_1a961cee;
-    case # "hash_6c397b7fc04e50e8":
+    case #"hash_6c397b7fc04e50e8":
       return var_332276f2.var_d8459fc5;
-    case # "hash_7dcb4fc78a4f1b59":
+    case #"hash_7dcb4fc78a4f1b59":
       return var_332276f2.var_9b022db3;
-    case # "hash_5cf6ca680b92367e":
+    case #"hash_5cf6ca680b92367e":
       return var_332276f2.var_97b15249;
-    case # "hash_24cdd0678cac5169":
+    case #"hash_24cdd0678cac5169":
       return var_332276f2.var_a359c69c;
-    case # "hash_792e587a5f0a0c6e":
+    case #"hash_792e587a5f0a0c6e":
       return var_332276f2.var_e0da7061;
-    case # "hash_4e60623e376d0aaf":
+    case #"hash_4e60623e376d0aaf":
       return var_332276f2.var_cb9bea7e;
-    case # "hash_5931f6d8a41cbb82":
+    case #"hash_5931f6d8a41cbb82":
       return var_332276f2.var_4ffec500;
-    case # "hash_7beb683fd1b089cb":
+    case #"hash_7beb683fd1b089cb":
       return var_332276f2.var_535a32a5;
-    case # "hash_48b9fc7637fbd1bd":
+    case #"hash_48b9fc7637fbd1bd":
       return var_332276f2.var_ade00a2;
-    case # "hash_64548a5004b0f44a":
+    case #"hash_64548a5004b0f44a":
       return var_332276f2.var_805c2248;
-    case # "hash_41278a4ac5aae0af":
+    case #"hash_41278a4ac5aae0af":
       return var_332276f2.var_7d24c591;
-    case # "hash_6f557d811bbead82":
+    case #"hash_6f557d811bbead82":
       return var_332276f2.var_c9f0371e;
-    case # "hash_6eb2904c5fee5fcb":
+    case #"hash_6eb2904c5fee5fcb":
       return var_332276f2.var_712ac879;
-    case # "hash_12c12be7b517df26":
+    case #"hash_12c12be7b517df26":
       return var_332276f2.var_4b8f6dd6;
-    case # "hash_578c414ebe6e097":
+    case #"hash_578c414ebe6e097":
       return var_332276f2.var_1591b920;
-    case # "hash_47911e56b3253861":
+    case #"hash_47911e56b3253861":
       return var_332276f2.var_7c47cc4f;
-    case # "hash_763fd19c812336":
+    case #"hash_763fd19c812336":
       return var_332276f2.var_c097847f;
-    case # "hash_6d5b8296c64bfe35":
+    case #"hash_6d5b8296c64bfe35":
       return var_332276f2.var_4d7d1d3a;
-    case # "hash_523f5d72ee488db1":
+    case #"hash_523f5d72ee488db1":
       return var_332276f2.var_a7daf1b2;
-    case # "hash_361fef4fda618ebe":
+    case #"hash_361fef4fda618ebe":
       return var_332276f2.var_5bf416db;
-    case # "hash_5c81d3724f900e7":
+    case #"hash_5c81d3724f900e7":
       return var_332276f2.var_673f0ab3;
   }
 }
 
 function function_58a8c5ba(var_a6e45682, dialogkey) {
   switch (dialogkey) {
-    case # "infil":
+    case #"infil":
       return var_a6e45682.infil;
-    case # "matchstart":
+    case #"matchstart":
       return var_a6e45682.matchstart;
-    case # "hash_1c2b56fb48ce36fa":
+    case #"hash_1c2b56fb48ce36fa":
       return var_a6e45682.var_5293f361;
-    case # "matchendlose":
+    case #"matchendlose":
       return var_a6e45682.matchendlose;
-    case # "hash_5575881191efb302":
+    case #"hash_5575881191efb302":
       return var_a6e45682.var_d67228c2;
-    case # "hash_2788496d7ed6f0ef":
+    case #"hash_2788496d7ed6f0ef":
       return var_a6e45682.var_540835ef;
-    case # "hash_2a4c39d0533e577d":
+    case #"hash_2a4c39d0533e577d":
       return var_a6e45682.var_b1a8e60d;
-    case # "hash_684b542bf103e4fe":
+    case #"hash_684b542bf103e4fe":
       return var_a6e45682.var_9a18d1d3;
-    case # "hash_42e688981c992280":
+    case #"hash_42e688981c992280":
       return var_a6e45682.var_50041482;
-    case # "hash_4e85c1603ed42114":
+    case #"hash_4e85c1603ed42114":
       return var_a6e45682.var_3df5fd3f;
-    case # "hash_362860f460a29841":
+    case #"hash_362860f460a29841":
       return var_a6e45682.var_5f3898a;
-    case # "hash_6fdeb623f1cd8f6":
+    case #"hash_6fdeb623f1cd8f6":
       return var_a6e45682.var_af695653;
-    case # "hash_3c826fece0b3646c":
+    case #"hash_3c826fece0b3646c":
       return var_a6e45682.var_cd47f341;
-    case # "hash_785b3e9905f6511d":
+    case #"hash_785b3e9905f6511d":
       return var_a6e45682.var_53b98c2c;
-    case # "hash_2aeb990c0cb76e97":
+    case #"hash_2aeb990c0cb76e97":
       return var_a6e45682.var_b8155728;
-    case # "hash_eab292e698335c7":
+    case #"hash_eab292e698335c7":
       return var_a6e45682.var_64248d62;
-    case # "hash_6779beacf80a7a26":
+    case #"hash_6779beacf80a7a26":
       return var_a6e45682.var_36c4edc0;
-    case # "hash_2bfa170c2577a2c0":
+    case #"hash_2bfa170c2577a2c0":
       return var_a6e45682.var_3c57a507;
-    case # "hash_2c86ec42e4ab7ef6":
+    case #"hash_2c86ec42e4ab7ef6":
       return var_a6e45682.var_35526bc7;
-    case # "hash_1224d15cf609ed6":
+    case #"hash_1224d15cf609ed6":
       return var_a6e45682.var_75de98a4;
-    case # "hash_26e569fb2e7fabe":
+    case #"hash_26e569fb2e7fabe":
       return var_a6e45682.var_746b6118;
-    case # "hash_477a4a51045495a0":
+    case #"hash_477a4a51045495a0":
       return var_a6e45682.var_7f50ff2b;
-    case # "hash_1f327a042fd14498":
+    case #"hash_1f327a042fd14498":
       return var_a6e45682.var_d17a7aac;
-    case # "hash_7ca80ff4ecb29f8e":
+    case #"hash_7ca80ff4ecb29f8e":
       return var_a6e45682.var_4dc2d12;
-    case # "hash_37fac4fc5c027a69":
+    case #"hash_37fac4fc5c027a69":
       return var_a6e45682.var_2536fc80;
-    case # "hash_55bd8afbd48fb16e":
+    case #"hash_55bd8afbd48fb16e":
       return var_a6e45682.var_43be8abf;
-    case # "hash_534a8eea154bbf18":
+    case #"hash_534a8eea154bbf18":
       return var_a6e45682.var_f23e58fa;
-    case # "hash_514a3b399c691364":
+    case #"hash_514a3b399c691364":
       return var_a6e45682.var_6b494f06;
-    case # "hash_2e75932f6eedc934":
+    case #"hash_2e75932f6eedc934":
       return var_a6e45682.var_b4cbe0e0;
-    case # "hash_22531ed3b67a2a77":
+    case #"hash_22531ed3b67a2a77":
       return var_a6e45682.var_dec4416b;
-    case # "hash_482f677bdbe28fd1":
+    case #"hash_482f677bdbe28fd1":
       return var_a6e45682.var_8ef0b73a;
-    case # "hash_83f9a444e5f5963":
+    case #"hash_83f9a444e5f5963":
       return var_a6e45682.var_e2a2bb;
-    case # "hash_586699a0dc62b981":
+    case #"hash_586699a0dc62b981":
       return var_a6e45682.var_9a3a8c93;
-    case # "hash_42f1b5c3d59fbf0a":
+    case #"hash_42f1b5c3d59fbf0a":
       return var_a6e45682.var_bfc2fbeb;
-    case # "objectivekillhvtapproach":
+    case #"objectivekillhvtapproach":
       return var_a6e45682.objectivekillhvtapproach;
-    case # "objectivekillhvtapproachresponse":
+    case #"objectivekillhvtapproachresponse":
       return var_a6e45682.objectivekillhvtapproachresponse;
-    case # "objectivekillhvtstart":
+    case #"objectivekillhvtstart":
       return var_a6e45682.objectivekillhvtstart;
-    case # "objectivekillhvtmoves":
+    case #"objectivekillhvtmoves":
       return var_a6e45682.objectivekillhvtmoves;
-    case # "objectivekillhvtspotted":
+    case #"objectivekillhvtspotted":
       return var_a6e45682.objectivekillhvtspotted;
-    case # "objectivekillhvtspottedresponse":
+    case #"objectivekillhvtspottedresponse":
       return var_a6e45682.objectivekillhvtspottedresponse;
-    case # "objectivekillhvtendsuccess":
+    case #"objectivekillhvtendsuccess":
       return var_a6e45682.objectivekillhvtendsuccess;
-    case # "objectivekillhvtendsuccessresponse":
+    case #"objectivekillhvtendsuccessresponse":
       return var_a6e45682.objectivekillhvtendsuccessresponse;
-    case # "objectivekillhvtmegatonsplit":
+    case #"objectivekillhvtmegatonsplit":
       return var_a6e45682.objectivekillhvtmegatonsplit;
-    case # "objectivekillhvttargetnorth":
+    case #"objectivekillhvttargetnorth":
       return var_a6e45682.objectivekillhvttargetnorth;
-    case # "objectivekillhvttargetnortheast":
+    case #"objectivekillhvttargetnortheast":
       return var_a6e45682.objectivekillhvttargetnortheast;
-    case # "objectivekillhvttargetnorthwest":
+    case #"objectivekillhvttargetnorthwest":
       return var_a6e45682.objectivekillhvttargetnorthwest;
-    case # "objectivekillhvttargeteast":
+    case #"objectivekillhvttargeteast":
       return var_a6e45682.objectivekillhvttargeteast;
-    case # "objectivekillhvttargetsoutheast":
+    case #"objectivekillhvttargetsoutheast":
       return var_a6e45682.objectivekillhvttargetsoutheast;
-    case # "objectivekillhvttargetsouthwest":
+    case #"objectivekillhvttargetsouthwest":
       return var_a6e45682.objectivekillhvttargetsouthwest;
-    case # "objectivekillhvttargetsouth":
+    case #"objectivekillhvttargetsouth":
       return var_a6e45682.objectivekillhvttargetsouth;
-    case # "objectivekillhvttargetwest":
+    case #"objectivekillhvttargetwest":
       return var_a6e45682.objectivekillhvttargetwest;
-    case # "hash_37d8017a04a1565d":
+    case #"hash_37d8017a04a1565d":
       return var_a6e45682.var_3de3b9b7;
-    case # "hash_447deedfb079840a":
+    case #"hash_447deedfb079840a":
       return var_a6e45682.var_66563c5f;
   }
 }
 
 function function_e5ba46e0(var_a6e45682, dialogkey) {
   switch (dialogkey) {
-    case # "hash_536a2c98440e4182":
+    case #"hash_536a2c98440e4182":
       return var_a6e45682.var_cffcf9ba;
-    case # "hash_73cc12d03789ad3f":
+    case #"hash_73cc12d03789ad3f":
       return var_a6e45682.var_41c83546;
-    case # "hash_50ec2bacc50d8363":
+    case #"hash_50ec2bacc50d8363":
       return var_a6e45682.var_fd1d8944;
-    case # "hash_410d84fbae567967":
+    case #"hash_410d84fbae567967":
       return var_a6e45682.var_c653c561;
-    case # "hash_14f76b27d54494b":
+    case #"hash_14f76b27d54494b":
       return var_a6e45682.var_613e6426;
-    case # "hash_804a63ecb41614":
+    case #"hash_804a63ecb41614":
       return var_a6e45682.var_d151963a;
-    case # "hash_31288740d17d78d2":
+    case #"hash_31288740d17d78d2":
       return var_a6e45682.var_5686ab6c;
-    case # "hash_221eb61e78fea147":
+    case #"hash_221eb61e78fea147":
       return var_a6e45682.var_1e94b3c6;
-    case # "hash_5dcf562ff3f5cc61":
+    case #"hash_5dcf562ff3f5cc61":
       return var_a6e45682.var_8f0b8b61;
-    case # "hash_126c527875ac2725":
+    case #"hash_126c527875ac2725":
       return var_a6e45682.var_20a8f9b4;
-    case # "hash_4ec8db10c8c4d7e6":
+    case #"hash_4ec8db10c8c4d7e6":
       return var_a6e45682.var_2dec4f66;
-    case # "hash_377f1b72d8b2059f":
+    case #"hash_377f1b72d8b2059f":
       return var_a6e45682.var_397b5d17;
-    case # "hash_44b56c4f38f7a3d":
+    case #"hash_44b56c4f38f7a3d":
       return var_a6e45682.var_6daff7ef;
-    case # "hash_29a97799810191f2":
+    case #"hash_29a97799810191f2":
       return var_a6e45682.var_252cce96;
-    case # "hash_38a21b9cce47391c":
+    case #"hash_38a21b9cce47391c":
       return var_a6e45682.var_5206420d;
-    case # "hash_399fbba4d9cee56c":
+    case #"hash_399fbba4d9cee56c":
       return var_a6e45682.var_f4d5d9ae;
-    case # "hash_39bd346fa50b356f":
+    case #"hash_39bd346fa50b356f":
       return var_a6e45682.var_77f75a13;
-    case # "hash_2c29d5e7d1b21ca1":
+    case #"hash_2c29d5e7d1b21ca1":
       return var_a6e45682.var_ffd45054;
-    case # "hash_23a67f3c7ed2779f":
+    case #"hash_23a67f3c7ed2779f":
       return var_a6e45682.var_53ef4307;
-    case # "hash_54a6f55a5cb443ff":
+    case #"hash_54a6f55a5cb443ff":
       return var_a6e45682.var_d2395646;
-    case # "hash_330e06d2732bf307":
+    case #"hash_330e06d2732bf307":
       return var_a6e45682.var_72d40b0a;
-    case # "hash_7b6f43280f5fc701":
+    case #"hash_7b6f43280f5fc701":
       return var_a6e45682.var_7f6a4590;
-    case # "hash_19781c91142b66b9":
+    case #"hash_19781c91142b66b9":
       return var_a6e45682.var_e5d58bf8;
-    case # "hash_c662fbf1fce1777":
+    case #"hash_c662fbf1fce1777":
       return var_a6e45682.var_ad909ba2;
-    case # "hash_6b68eeb911f07ece":
+    case #"hash_6b68eeb911f07ece":
       return var_a6e45682.var_93c5c4b3;
-    case # "hash_6a290793842890d7":
+    case #"hash_6a290793842890d7":
       return var_a6e45682.var_6765ed01;
-    case # "hash_53ec390fc9a8b639":
+    case #"hash_53ec390fc9a8b639":
       return var_a6e45682.var_d6770e90;
-    case # "hash_27a62b517cc8c55":
+    case #"hash_27a62b517cc8c55":
       return var_a6e45682.var_293214d9;
-    case # "hash_5a475357d9efcbc5":
+    case #"hash_5a475357d9efcbc5":
       return var_a6e45682.var_16e8ad6f;
-    case # "hash_4f0b86cd5b9bf77c":
+    case #"hash_4f0b86cd5b9bf77c":
       return var_a6e45682.var_a0eda6f3;
-    case # "hash_1440fff0c80bfb96":
+    case #"hash_1440fff0c80bfb96":
       return var_a6e45682.var_a1e29b0e;
-    case # "hash_5ae7ce1fcd2554b8":
+    case #"hash_5ae7ce1fcd2554b8":
       return var_a6e45682.var_f34c57;
-    case # "hash_5a1f8d481d0cb526":
+    case #"hash_5a1f8d481d0cb526":
       return var_a6e45682.var_36736399;
-    case # "hash_2ba0db40dddbef93":
+    case #"hash_2ba0db40dddbef93":
       return var_a6e45682.var_3c069068;
-    case # "hash_5deb9fb0966dbadb":
+    case #"hash_5deb9fb0966dbadb":
       return var_a6e45682.var_5b48a348;
-    case # "hash_ddeeb5d7ab7d53a":
+    case #"hash_ddeeb5d7ab7d53a":
       return var_a6e45682.var_522f1f4c;
-    case # "hash_70ffa115c0f25013":
+    case #"hash_70ffa115c0f25013":
       return var_a6e45682.var_f7fac7c7;
-    case # "hash_502241ddc21df285":
+    case #"hash_502241ddc21df285":
       return var_a6e45682.var_6eeaa2d;
-    case # "hash_5972f731c699ad68":
+    case #"hash_5972f731c699ad68":
       return var_a6e45682.var_293a08a0;
-    case # "hash_2e8af7e400912221":
+    case #"hash_2e8af7e400912221":
       return var_a6e45682.var_963b68c8;
-    case # "hash_e18650567a2accb":
+    case #"hash_e18650567a2accb":
       return var_a6e45682.var_3654aec5;
-    case # "hash_621cf38b396dae6a":
+    case #"hash_621cf38b396dae6a":
       return var_a6e45682.var_dca1309e;
-    case # "hash_5d49718d002bc0d4":
+    case #"hash_5d49718d002bc0d4":
       return var_a6e45682.var_e12c80fc;
-    case # "hash_25a861604ea5bc8b":
+    case #"hash_25a861604ea5bc8b":
       return var_a6e45682.var_acc1056c;
-    case # "hash_1791f8a4a5744090":
+    case #"hash_1791f8a4a5744090":
       return var_a6e45682.var_596a17f7;
-    case # "hash_5a5dfc9395514a5e":
+    case #"hash_5a5dfc9395514a5e":
       return var_a6e45682.var_9b5581c0;
-    case # "hash_47e1c08d6f5e6f47":
+    case #"hash_47e1c08d6f5e6f47":
       return var_a6e45682.var_c549da4;
-    case # "hash_1ffc49ef5d4c176":
+    case #"hash_1ffc49ef5d4c176":
       return var_a6e45682.var_ca2b01a7;
-    case # "hash_2c11c1da3045be88":
+    case #"hash_2c11c1da3045be88":
       return var_a6e45682.var_dfdffcd;
-    case # "hash_7d5ab9e9713ab0f5":
+    case #"hash_7d5ab9e9713ab0f5":
       return var_a6e45682.var_9e7d6ed9;
-    case # "hash_1d290eb8175cbc25":
+    case #"hash_1d290eb8175cbc25":
       return var_a6e45682.var_f4b88602;
   }
 }
 
 function function_c0e744e6(var_a6e45682, dialogkey) {
   switch (dialogkey) {
-    case # "hash_5c84693aff05762d":
+    case #"hash_5c84693aff05762d":
       return var_a6e45682.var_74a0459d;
-    case # "hash_7a50325a21c1a7be":
+    case #"hash_7a50325a21c1a7be":
       return var_a6e45682.var_2332818a;
-    case # "hash_5971b5080788658a":
+    case #"hash_5971b5080788658a":
       return var_a6e45682.var_b335c3cd;
-    case # "hash_2e81687ead844b46":
+    case #"hash_2e81687ead844b46":
       return var_a6e45682.var_1f1903ad;
-    case # "hash_494b5d69e5841732":
+    case #"hash_494b5d69e5841732":
       return var_a6e45682.var_c9f6cb59;
-    case # "hash_3c3caf9539baa95f":
+    case #"hash_3c3caf9539baa95f":
       return var_a6e45682.var_8c0c835e;
-    case # "hash_40d436bd2a40b2fd":
+    case #"hash_40d436bd2a40b2fd":
       return var_a6e45682.var_1c550ed1;
-    case # "hash_4632285c00ea5266":
+    case #"hash_4632285c00ea5266":
       return var_a6e45682.var_c46f3226;
-    case # "hash_6ed8423425372e90":
+    case #"hash_6ed8423425372e90":
       return var_a6e45682.var_1fb468a;
-    case # "hash_1d24265c8082ec7c":
+    case #"hash_1d24265c8082ec7c":
       return var_a6e45682.var_58da336f;
-    case # "hash_5cf2305ad75e6ad9":
+    case #"hash_5cf2305ad75e6ad9":
       return var_a6e45682.var_71f78f57;
-    case # "hash_504b5e2a6915e35e":
+    case #"hash_504b5e2a6915e35e":
       return var_a6e45682.var_9b469873;
-    case # "hash_14ff9e99547f5e94":
+    case #"hash_14ff9e99547f5e94":
       return var_a6e45682.var_dec5fe86;
-    case # "hash_6e985d1bb5a48cdd":
+    case #"hash_6e985d1bb5a48cdd":
       return var_a6e45682.var_13b6038e;
-    case # "hash_1a98e9336d503347":
+    case #"hash_1a98e9336d503347":
       return var_a6e45682.var_d66ac8ee;
-    case # "hash_258caac0dd2b4157":
+    case #"hash_258caac0dd2b4157":
       return var_a6e45682.var_1b1bc929;
-    case # "hash_4a223e341ab25d6e":
+    case #"hash_4a223e341ab25d6e":
       return var_a6e45682.var_7ad7dec6;
-    case # "hash_10632cbe319c4ad0":
+    case #"hash_10632cbe319c4ad0":
       return var_a6e45682.var_33e7945e;
-    case # "hash_5ae0cac21a5b695e":
+    case #"hash_5ae0cac21a5b695e":
       return var_a6e45682.var_138654be;
-    case # "hash_3a5e2058ba53c57e":
+    case #"hash_3a5e2058ba53c57e":
       return var_a6e45682.var_8ce5e1fd;
-    case # "hash_42ccef1808d13c26":
+    case #"hash_42ccef1808d13c26":
       return var_a6e45682.var_cdeb45c6;
-    case # "hash_348ff6425e068a70":
+    case #"hash_348ff6425e068a70":
       return var_a6e45682.var_64c1ba5e;
-    case # "hash_12538c462627c368":
+    case #"hash_12538c462627c368":
       return var_a6e45682.var_69e2c246;
-    case # "hash_4ae262b9095b49d6":
+    case #"hash_4ae262b9095b49d6":
       return var_a6e45682.var_7df59090;
-    case # "hash_845cc69d42ce761":
+    case #"hash_845cc69d42ce761":
       return var_a6e45682.var_31fd12fb;
-    case # "hash_a2551c842419476":
+    case #"hash_a2551c842419476":
       return var_a6e45682.var_25611034;
-    case # "hash_68a374fc3a11c5e8":
+    case #"hash_68a374fc3a11c5e8":
       return var_a6e45682.var_11b48f85;
-    case # "hash_20b30c760183a5ec":
+    case #"hash_20b30c760183a5ec":
       return var_a6e45682.var_8eb3d1;
-    case # "hash_7012b7b27baa195c":
+    case #"hash_7012b7b27baa195c":
       return var_a6e45682.var_c0958c6f;
-    case # "hash_519b078eb72a3ae7":
+    case #"hash_519b078eb72a3ae7":
       return var_a6e45682.var_2d6b54f0;
-    case # "hash_7a22c0026ec53c9":
+    case #"hash_7a22c0026ec53c9":
       return var_a6e45682.var_b6dea6d4;
-    case # "hash_1ffa21a8ad4bf14b":
+    case #"hash_1ffa21a8ad4bf14b":
       return var_a6e45682.var_d0d3a2a4;
-    case # "hash_5c56ed4cee5f5e19":
+    case #"hash_5c56ed4cee5f5e19":
       return var_a6e45682.var_7f78f3f8;
-    case # "hash_27b2d8007be6a3a":
+    case #"hash_27b2d8007be6a3a":
       return var_a6e45682.var_5aec0335;
-    case # "hash_39e173e82c1a2a02":
+    case #"hash_39e173e82c1a2a02":
       return var_a6e45682.var_82992411;
-    case # "hash_1692e45c1b361305":
+    case #"hash_1692e45c1b361305":
       return var_a6e45682.var_57040d51;
-    case # "hash_1695d1e0b08bf7ba":
+    case #"hash_1695d1e0b08bf7ba":
       return var_a6e45682.var_e850993b;
-    case # "hash_63ceecbbf5c10d1c":
+    case #"hash_63ceecbbf5c10d1c":
       return var_a6e45682.var_4221c8a8;
-    case # "hash_210819a59aaa00bb":
+    case #"hash_210819a59aaa00bb":
       return var_a6e45682.var_c5040dfb;
-    case # "hash_43e8c77c4568ff50":
+    case #"hash_43e8c77c4568ff50":
       return var_a6e45682.var_7b4ffaa3;
-    case # "hash_e3951a426b235b2":
+    case #"hash_e3951a426b235b2":
       return var_a6e45682.var_82d14e90;
-    case # "hash_2997045383dac335":
+    case #"hash_2997045383dac335":
       return var_a6e45682.var_d218b07b;
-    case # "hash_4d238b6500f2101f":
+    case #"hash_4d238b6500f2101f":
       return var_a6e45682.var_3b935b21;
-    case # "hash_785e82c6743fed72":
+    case #"hash_785e82c6743fed72":
       return var_a6e45682.var_19becf0;
-    case # "hash_5667a214ce6350c3":
+    case #"hash_5667a214ce6350c3":
       return var_a6e45682.var_5d13110e;
-    case # "hash_6f3aca1ffddc27b1":
+    case #"hash_6f3aca1ffddc27b1":
       return var_a6e45682.var_33f735f8;
-    case # "hash_1ba3888825db8c66":
+    case #"hash_1ba3888825db8c66":
       return var_a6e45682.var_5b10ae5a;
-    case # "hash_15f68cc8693182e9":
+    case #"hash_15f68cc8693182e9":
       return var_a6e45682.var_633c6bfc;
-    case # "hash_e3bec212c4df9b":
+    case #"hash_e3bec212c4df9b":
       return var_a6e45682.var_a6771c69;
-    case # "hash_75ccbaaea375ab4c":
+    case #"hash_75ccbaaea375ab4c":
       return var_a6e45682.var_b2365;
-    case # "hash_2467d91e7bcc637c":
+    case #"hash_2467d91e7bcc637c":
       return var_a6e45682.var_d0cb679a;
   }
 }
@@ -1036,32 +1036,32 @@ function function_b47e0399(var_7382ea8b, attacker, weapon, victim, einflictor) {
 
 function function_384269f(var_7382ea8b) {
   switch (var_7382ea8b) {
-    case # "se_semtexmultikill":
-    case # "se_concussiongrenademultikill":
-    case # "se_nightingalemultikill":
-    case # "hash_28808125fce8c8e7":
-    case # "hash_2af4d13403d833e5":
-    case # "hash_2af4d13403d833e5":
-    case # "hash_2d45724fc1a86740":
-    case # "hash_31d075ffaf2c230a":
-    case # "hash_343f719a2335150b":
-    case # "hash_343f749a23351a24":
-    case # "hash_3449e19a233e27e0":
-    case # "hash_3449e69a233e305f":
-    case # "se_satchelchargemultikill":
-    case # "hash_394f4a59df1d0c17":
-    case # "hash_3e454dbd28a162b0":
-    case # "hash_406609dcd40a348e":
-    case # "hash_4bd8ffae8d5281c9":
-    case # "hash_541ae7332eba41be":
-    case # "hash_5dc5c0d8c259c02d":
-    case # "hash_62579373c5d67ce0":
-    case # "se_fragmultikill":
-    case # "hash_684963f03f8a86a5":
-    case # "hash_68d4ef9c937aa223":
-    case # "hash_6b704db2e152d216":
-    case # "hash_6e779060a26706e1":
-    case # "se_molotovcocktailmultikill":
+    case #"se_semtexmultikill":
+    case #"se_concussiongrenademultikill":
+    case #"se_nightingalemultikill":
+    case #"hash_28808125fce8c8e7":
+    case #"hash_2af4d13403d833e5":
+    case #"hash_2af4d13403d833e5":
+    case #"hash_2d45724fc1a86740":
+    case #"hash_31d075ffaf2c230a":
+    case #"hash_343f719a2335150b":
+    case #"hash_343f749a23351a24":
+    case #"hash_3449e19a233e27e0":
+    case #"hash_3449e69a233e305f":
+    case #"se_satchelchargemultikill":
+    case #"hash_394f4a59df1d0c17":
+    case #"hash_3e454dbd28a162b0":
+    case #"hash_406609dcd40a348e":
+    case #"hash_4bd8ffae8d5281c9":
+    case #"hash_541ae7332eba41be":
+    case #"hash_5dc5c0d8c259c02d":
+    case #"hash_62579373c5d67ce0":
+    case #"se_fragmultikill":
+    case #"hash_684963f03f8a86a5":
+    case #"hash_68d4ef9c937aa223":
+    case #"hash_6b704db2e152d216":
+    case #"hash_6e779060a26706e1":
+    case #"se_molotovcocktailmultikill":
       return true;
   }
 

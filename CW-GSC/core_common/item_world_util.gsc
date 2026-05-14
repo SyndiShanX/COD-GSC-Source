@@ -581,28 +581,28 @@ function function_c62ad9a7(vehicle) {
 
   if(isDefined(vehicle) && isDefined(vehicle.scriptvehicletype)) {
     switch (vehicle.scriptvehicletype) {
-      case # "player_atv":
+      case #"player_atv":
         hinttext = #"wz/player_atv";
         break;
-      case # "helicopter_light":
+      case #"helicopter_light":
         hinttext = #"wz/helicopter";
         break;
-      case # "cargo_truck_wz":
+      case #"cargo_truck_wz":
         hinttext = #"wz/cargo_truck";
         break;
-      case # "tactical_raft_wz":
+      case #"tactical_raft_wz":
         hinttext = #"hash_602556b5bd4f952d";
         break;
-      case # "player_fav":
+      case #"player_fav":
         hinttext = #"wz/arav";
         break;
-      case # "player_suv":
+      case #"player_suv":
         hinttext = #"wz/suv";
         break;
-      case # "player_muscle":
+      case #"player_muscle":
         hinttext = #"wz/muscle_car";
         break;
-      case # "pbr_boat_wz":
+      case #"pbr_boat_wz":
         hinttext = #"wz/pbr";
         break;
     }

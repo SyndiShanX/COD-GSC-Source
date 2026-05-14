@@ -263,16 +263,16 @@ class csceneplayer: csceneobject {
 
     if(isDefined(var_55b4f21e.var_6eb7f9a0)) {
       switch (var_55b4f21e.var_6eb7f9a0) {
-        case # "bank1":
+        case #"bank1":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 0);
           break;
-        case # "bank2":
+        case #"bank2":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 1);
           break;
-        case # "bank3":
+        case #"bank3":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 2);
           break;
-        case # "bank4":
+        case #"bank4":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 3);
           break;
       }
@@ -503,8 +503,8 @@ class csceneplayer: csceneobject {
       }
 
       switch (s_waitresult.str_input) {
-        case # "move_up":
-        case # "move_down":
+        case #"move_up":
+        case #"move_down":
           if(s_waitresult.str_input == "move_up") {
             if(player gamepadusedlast()) {
               level.interactive_shot interactive_shot::set_text(player, #"hash_66ac13c66930481e");
@@ -518,8 +518,8 @@ class csceneplayer: csceneobject {
           }
 
           break;
-        case # "move_right":
-        case # "move_left":
+        case #"move_right":
+        case #"move_left":
           if(s_waitresult.str_input == "move_right") {
             if(player gamepadusedlast()) {
               level.interactive_shot interactive_shot::set_text(player, #"hash_b89e8fe23b5a6ff");
@@ -533,19 +533,19 @@ class csceneplayer: csceneobject {
           }
 
           break;
-        case # "jump":
+        case #"jump":
           level.interactive_shot interactive_shot::set_text(player, #"hash_5b57ca9476df902b");
           break;
-        case # "stance":
+        case #"stance":
           level.interactive_shot interactive_shot::set_text(player, #"hash_30214ec564c2c09b");
           break;
-        case # "use":
+        case #"use":
           level.interactive_shot interactive_shot::set_text(player, #"hash_1c489083f5cdb3f6");
           break;
-        case # "weapon_switch":
+        case #"weapon_switch":
           level.interactive_shot interactive_shot::set_text(player, #"hash_5d8ce20bafb14fec");
           break;
-        case # "sprint":
+        case #"sprint":
           if(player gamepadusedlast()) {
             level.interactive_shot interactive_shot::set_text(player, #"hash_6b873520c198df93");
           } else {
@@ -553,21 +553,21 @@ class csceneplayer: csceneobject {
           }
 
           break;
-        case # "melee":
+        case #"melee":
           level.interactive_shot interactive_shot::set_text(player, #"hash_6c4731677fa269b1");
           break;
-        case # "attack":
+        case #"attack":
           break;
-        case # "dpad_up":
+        case #"dpad_up":
           level.interactive_shot interactive_shot::set_text(player, #"hash_327b92f099f4b62e");
           break;
-        case # "dpad_down":
+        case #"dpad_down":
           level.interactive_shot interactive_shot::set_text(player, #"hash_51f4288480f483f7");
           break;
-        case # "dpad_left":
+        case #"dpad_left":
           level.interactive_shot interactive_shot::set_text(player, #"hash_2f8bb64325eeac62");
           break;
-        case # "dpad_right":
+        case #"dpad_right":
           level.interactive_shot interactive_shot::set_text(player, #"hash_2c841879f1d933ef");
           break;
         default:
@@ -635,35 +635,35 @@ class csceneplayer: csceneobject {
     }
 
     switch (var_ec50a0d3.var_9532f6db) {
-      case # "move_up":
-      case # "move_down":
+      case #"move_up":
+      case #"move_down":
         v_movement = player getnormalizedmovement();
         return v_movement[0];
-      case # "move_right":
-      case # "move_left":
+      case #"move_right":
+      case #"move_left":
         v_movement = player getnormalizedmovement();
         return v_movement[1];
-      case # "jump":
+      case #"jump":
         return (player actionbuttonPressed() ? 1 : 0);
-      case # "stance":
+      case #"stance":
         return (player stancebuttonPressed() ? 1 : 0);
-      case # "use":
+      case #"use":
         return (player useButtonPressed() ? 1 : 0);
-      case # "weapon_switch":
+      case #"weapon_switch":
         return (player weaponswitchbuttonPressed() ? 1 : 0);
-      case # "sprint":
+      case #"sprint":
         return (player sprintbuttonPressed() ? 1 : 0);
-      case # "melee":
+      case #"melee":
         return (player meleeButtonPressed() ? 1 : 0);
-      case # "attack":
+      case #"attack":
         return (!player flagsys::get(#"interactive_shot_in_combat") && var_966ea21d ? 1 : 0);
-      case # "dpad_up":
+      case #"dpad_up":
         return (player actionslotonebuttonPressed() ? 1 : 0);
-      case # "dpad_down":
+      case #"dpad_down":
         return (player actionslottwobuttonPressed() ? 1 : 0);
-      case # "dpad_left":
+      case #"dpad_left":
         return (player actionslotthreebuttonPressed() ? 1 : 0);
-      case # "dpad_right":
+      case #"dpad_right":
         return (player actionslotfourbuttonPressed() ? 1 : 0);
       default:
         v_movement = player getnormalizedmovement();
@@ -998,16 +998,16 @@ class csceneplayer: csceneobject {
 
     if(isDefined(var_55b4f21e.var_143deeac)) {
       switch (var_55b4f21e.var_143deeac) {
-        case # "bank1":
+        case #"bank1":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 0);
           break;
-        case # "bank2":
+        case #"bank2":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 1);
           break;
-        case # "bank3":
+        case #"bank3":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 2);
           break;
-        case # "bank4":
+        case #"bank4":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 3);
           break;
       }

@@ -232,8 +232,8 @@ function function_565c848a(weapon) {
     var_1236db9d = zm_weapons::function_386dacbc(weapon).name;
 
     switch (var_1236db9d) {
-      case # "ww_axe_gun_melee_t9_upgraded":
-      case # "ww_axe_gun_melee_t9":
+      case #"ww_axe_gun_melee_t9_upgraded":
+      case #"ww_axe_gun_melee_t9":
         return true;
       default:
         return false;
@@ -248,8 +248,8 @@ function function_1b662278(weapon) {
     var_1236db9d = zm_weapons::function_386dacbc(weapon).name;
 
     switch (var_1236db9d) {
-      case # "hash_7eab88123b09e2c":
-      case # "hash_18696150427f2efb":
+      case #"hash_7eab88123b09e2c":
+      case #"hash_18696150427f2efb":
         return true;
       default:
         return false;
@@ -281,13 +281,13 @@ function function_e339e720(s_params) {
       }
 
       switch (self.zm_ai_category) {
-        case # "normal":
+        case #"normal":
           var_161794b5 = 2 + player.var_2501c648;
           break;
-        case # "special":
+        case #"special":
           var_161794b5 = 10 + player.var_2501c648;
           break;
-        case # "elite":
+        case #"elite":
           var_161794b5 = 25 + player.var_2501c648;
           break;
         default:
@@ -1061,13 +1061,13 @@ function function_e711fec1() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4fd39fa505917bb8":
+    case #"hash_4fd39fa505917bb8":
       function_4e036cff(#"axe_gun_volatile_crystal_item_t9");
       break;
-    case # "hash_3282d077fe3c9d0c":
+    case #"hash_3282d077fe3c9d0c":
       function_4e036cff(#"axe_gun_energetic_shard_item_t9");
       break;
-    case # "hash_2bbefdbbe0dcca8":
+    case #"hash_2bbefdbbe0dcca8":
       function_c1fdd154();
       break;
     default:

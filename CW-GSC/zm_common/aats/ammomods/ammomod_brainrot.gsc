@@ -40,18 +40,18 @@ function init_brainrot() {
 
 function private function_76ade8b5(aat_name = "ammomod_brainrot") {
   switch (aat_name) {
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
     default:
       return 0;
-    case # "ammomod_brainrot_1":
+    case #"ammomod_brainrot_1":
       return 1;
-    case # "ammomod_brainrot_2":
+    case #"ammomod_brainrot_2":
       return 2;
-    case # "ammomod_brainrot_3":
+    case #"ammomod_brainrot_3":
       return 3;
-    case # "ammomod_brainrot_4":
+    case #"ammomod_brainrot_4":
       return 4;
-    case # "ammomod_brainrot_5":
+    case #"ammomod_brainrot_5":
       return 5;
   }
 

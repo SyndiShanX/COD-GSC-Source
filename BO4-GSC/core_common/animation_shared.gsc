@@ -492,16 +492,16 @@ handle_notetracks(animation) {
 
 cracks_on(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       clientfield::set("cracks_on", 1);
       break;
-    case # "green":
+    case #"green":
       clientfield::set("cracks_on", 3);
       break;
-    case # "blue":
+    case #"blue":
       clientfield::set("cracks_on", 2);
       break;
-    case # "all":
+    case #"all":
       clientfield::set("cracks_on", 4);
       break;
   }
@@ -509,16 +509,16 @@ cracks_on(str_type) {
 
 cracks_off(str_type) {
   switch (str_type) {
-    case # "red":
+    case #"red":
       clientfield::set("cracks_off", 1);
       break;
-    case # "green":
+    case #"green":
       clientfield::set("cracks_off", 3);
       break;
-    case # "blue":
+    case #"blue":
       clientfield::set("cracks_off", 2);
       break;
-    case # "all":
+    case #"all":
       clientfield::set("cracks_off", 4);
       break;
   }

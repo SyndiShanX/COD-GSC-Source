@@ -103,9 +103,9 @@ electrocute_actor(ai) {
   ai thread arc_damage_init(self);
 
   switch (ai.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       ai thread tesla_death(self);
       break;
   }

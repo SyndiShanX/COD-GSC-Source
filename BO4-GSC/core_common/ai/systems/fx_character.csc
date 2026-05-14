@@ -95,15 +95,15 @@ _gibhandler(localclientnum, entity, gibflag) {
 _gibpartnametogibflag(gibpartname) {
   if(isDefined(gibpartname)) {
     switch (gibpartname) {
-      case # "head":
+      case #"head":
         return 8;
-      case # "right arm":
+      case #"right arm":
         return 16;
-      case # "left arm":
+      case #"left arm":
         return 32;
-      case # "right leg":
+      case #"right leg":
         return 128;
-      case # "left leg":
+      case #"left leg":
         return 256;
     }
   }

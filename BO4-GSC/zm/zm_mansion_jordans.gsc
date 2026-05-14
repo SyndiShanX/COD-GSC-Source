@@ -149,27 +149,27 @@ function_21334921() {
     s_waitresult = level waittill(var_519cd38c);
 
     switch (s_waitresult._notify) {
-      case # "connect_main_hall_to_forest_entrance":
+      case #"connect_main_hall_to_forest_entrance":
         var_4ef73a79 = function_54765bde(0, 0);
         s_candle = function_54765bde(0, 1);
         break;
-      case # "connect_ground_floor_to_cellar":
+      case #"connect_ground_floor_to_cellar":
         var_4ef73a79 = function_54765bde(1, 0);
         s_candle = function_54765bde(1, 1);
         break;
-      case # "connect_main_hall_to_library":
+      case #"connect_main_hall_to_library":
         var_4ef73a79 = function_54765bde(2, 0);
         s_candle = function_54765bde(2, 1);
         break;
-      case # "connect_main_hall_to_dining_room":
+      case #"connect_main_hall_to_dining_room":
         var_4ef73a79 = function_54765bde(3, 0);
         s_candle = function_54765bde(3, 1);
         break;
-      case # "connect_library_to_cemetery_entrance":
+      case #"connect_library_to_cemetery_entrance":
         var_4ef73a79 = function_54765bde(4, 0);
         s_candle = function_54765bde(4, 1);
         break;
-      case # "connect_dining_room_to_greenhouse_entrance":
+      case #"connect_dining_room_to_greenhouse_entrance":
         var_4ef73a79 = function_54765bde(5, 0);
         s_candle = function_54765bde(5, 1);
         break;

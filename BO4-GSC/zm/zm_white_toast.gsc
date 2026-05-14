@@ -1319,19 +1319,19 @@ function_a6a4a162() {
   zm_hms_util::function_2ba419ee(0);
 
   switch (self.script_string) {
-    case # "sc_toast_diner":
+    case #"sc_toast_diner":
       function_12a92019("diner");
       level.var_f8fdb172 function_f757dba3();
       break;
-    case # "sc_toast_lounge":
+    case #"sc_toast_lounge":
       function_12a92019("lounge");
       level.var_f8fdb172 function_47550faa();
       break;
-    case # "sc_toast_storage":
+    case #"sc_toast_storage":
       function_12a92019("storage");
       level.var_f8fdb172 function_8c41f9de();
       break;
-    case # "sc_toast_beds":
+    case #"sc_toast_beds":
       function_12a92019("beds");
       level.var_f8fdb172 function_d0dd97c4();
       break;
@@ -1343,7 +1343,7 @@ function_a6a4a162() {
   var_703d991b = undefined;
 
   switch (self.script_string) {
-    case # "sc_toast_diner":
+    case #"sc_toast_diner":
       var_703d991b = struct::get("cp_toast_apd_diner", "script_noteworthy");
       level function_594dae();
       var_703d991b thread function_8c2bda65(3, 0);
@@ -1353,7 +1353,7 @@ function_a6a4a162() {
       wait 5;
       exploder::exploder("fxexp_elec_diner");
       break;
-    case # "sc_toast_lounge":
+    case #"sc_toast_lounge":
       var_703d991b = struct::get("cp_toast_apd_lounge", "script_noteworthy");
       level function_6fd6c18f();
       var_703d991b thread function_8c2bda65(3, 0);
@@ -1363,7 +1363,7 @@ function_a6a4a162() {
       wait 5;
       exploder::exploder("fxexp_elec_lounge");
       break;
-    case # "sc_toast_storage":
+    case #"sc_toast_storage":
       var_703d991b = struct::get("cp_toast_apd", "script_noteworthy");
       level function_6f083d9c();
       var_703d991b thread function_8c2bda65(3, 0);
@@ -1373,7 +1373,7 @@ function_a6a4a162() {
       wait 5;
       exploder::exploder("fxexp_elec_storage");
       break;
-    case # "sc_toast_beds":
+    case #"sc_toast_beds":
       var_703d991b = struct::get("cp_toast_apd_beds", "script_noteworthy");
       level function_8ba67fdc();
       var_703d991b thread function_8c2bda65(3, 0);

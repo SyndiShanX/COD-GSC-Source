@@ -117,29 +117,29 @@ function function_2675a176() {
   self.var_9d386cb9 = "Mason";
 
   switch (level.skipto_current_objective[0]) {
-    case # "mountain_summit":
-    case # "intro_heli":
-    case # "zipline_intro":
-    case # "ice_slide":
-    case # "satcom_approach":
-    case # "satcom":
-    case # "catwalks":
-    case # "zipline_fall":
+    case #"mountain_summit":
+    case #"intro_heli":
+    case #"zipline_intro":
+    case #"ice_slide":
+    case #"satcom_approach":
+    case #"satcom":
+    case #"catwalks":
+    case #"zipline_fall":
       w_primary = getweapon(#"sniper_standard_t9", "suppressed2");
       w_secondary = getweapon(#"pistol_burst_t9", "suppressed2");
       var_deeb6741 = getweapon(#"frag_grenade");
       var_2586eb45 = getweapon(#"eq_flash_grenade");
       hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
       break;
-    case # "bunker_explore":
-    case # "bunker_encounter":
+    case #"bunker_explore":
+    case #"bunker_encounter":
       w_primary = getweapon(#"knife_loadout");
       var_deeb6741 = getweapon(#"frag_grenade");
       var_2586eb45 = getweapon(#"eq_flash_grenade");
       hms_util::function_2e7c81f6(w_primary, undefined, var_deeb6741, var_2586eb45);
       break;
-    case # "woods_regroup":
-    case # "excavation":
+    case #"woods_regroup":
+    case #"excavation":
       var_6bacd91d = #"smg_standard_t9";
       w_secondary = getweapon(#"pistol_semiauto_t9");
 
@@ -158,9 +158,9 @@ function function_2675a176() {
       var_2586eb45 = getweapon(#"eq_flash_grenade");
       hms_util::function_2e7c81f6(w_primary, w_secondary, var_deeb6741, var_2586eb45);
       break;
-    case # "excavation_finale":
-    case # "server_reveal":
-    case # "server_ascent":
+    case #"excavation_finale":
+    case #"server_reveal":
+    case #"server_ascent":
       w_primary = getweapon(#"smg_heavy_t9", "extclip2", "grip");
       w_secondary = getweapon(#"pistol_semiauto_t9");
 

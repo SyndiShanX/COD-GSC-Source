@@ -809,12 +809,12 @@ function function_b01adf41() {
   foreach(player in function_a1ef346b()) {
     if(isDefined(player.var_87f72f8)) {
       switch (player.var_87f72f8) {
-        case # "field_upgrade_heal_aoe_5_item_sr":
-        case # "field_upgrade_heal_aoe_4_item_sr":
-        case # "field_upgrade_heal_aoe_item_sr":
-        case # "field_upgrade_heal_aoe_3_item_sr":
-        case # "field_upgrade_heal_aoe_1_item_sr":
-        case # "field_upgrade_heal_aoe_2_item_sr":
+        case #"field_upgrade_heal_aoe_5_item_sr":
+        case #"field_upgrade_heal_aoe_4_item_sr":
+        case #"field_upgrade_heal_aoe_item_sr":
+        case #"field_upgrade_heal_aoe_3_item_sr":
+        case #"field_upgrade_heal_aoe_1_item_sr":
+        case #"field_upgrade_heal_aoe_2_item_sr":
           return true;
       }
     }

@@ -107,17 +107,17 @@ function init_deadwire() {
 
 function private function_832f84f6(aat_name = "ammomod_deadwire") {
   switch (aat_name) {
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       return 0;
-    case # "ammomod_deadwire_1":
+    case #"ammomod_deadwire_1":
       return 1;
-    case # "ammomod_deadwire_2":
+    case #"ammomod_deadwire_2":
       return 2;
-    case # "ammomod_deadwire_3":
+    case #"ammomod_deadwire_3":
       return 3;
-    case # "ammomod_deadwire_4":
+    case #"ammomod_deadwire_4":
       return 4;
-    case # "ammomod_deadwire_5":
+    case #"ammomod_deadwire_5":
       return 5;
   }
 

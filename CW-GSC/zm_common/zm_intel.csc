@@ -47,15 +47,15 @@ function function_7bd1ca93(localclientnum, str_targetname, player) {
 
     if(s_intel.mdl_intel.var_2b372cf6 === #"audiolog") {
       switch (s_intel.mdl_intel.str_faction) {
-        case # "maxis":
+        case #"maxis":
           s_intel.mdl_intel setModel(#"p9_zm_ndu_audiolog_player");
           s_intel.mdl_intel.str_client_scene = #"p9_zm_ndu_audiolog_player_bundle";
           break;
-        case # "requiem":
+        case #"requiem":
           s_intel.mdl_intel setModel(#"p9_zm_ndu_audiolog_player_requiem");
           s_intel.mdl_intel.str_client_scene = #"p9_zm_ndu_audiolog_player_requiem_bundle";
           break;
-        case # "omega":
+        case #"omega":
           s_intel.mdl_intel setModel(#"p9_zm_ndu_reel_to_reel_audio_recorder_01");
           s_intel.mdl_intel.str_client_scene = #"p9_zm_ndu_reel_to_reel_audio_recorder_01_bundle";
           break;
@@ -132,9 +132,9 @@ function function_3a2dd570(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(isDefined(s_intel.model) && (self function_8e51b4f(3) || self function_8e51b4f(5))) {
       switch (s_intel.model) {
-        case # "p9_zm_ndu_reel_to_reel_audio_recorder_01":
-        case # "p9_zm_ndu_audiolog_player":
-        case # "p9_zm_ndu_audiolog_player_requiem":
+        case #"p9_zm_ndu_reel_to_reel_audio_recorder_01":
+        case #"p9_zm_ndu_audiolog_player":
+        case #"p9_zm_ndu_audiolog_player_requiem":
           if(!isDefined(s_intel.mdl_intel)) {
             s_intel function_7bd1ca93(fieldname, undefined, self);
 
@@ -163,9 +163,9 @@ function function_3a2dd570(localclientnum, oldval, newval, bnewent, binitialsnap
           }
 
           break;
-        case # "p9_zm_ndu_radio_transmissions":
-        case # "p9_zm_ndu_radio_transmissions_o":
-        case # "p9_zm_ndu_radio_transmissions_r":
+        case #"p9_zm_ndu_radio_transmissions":
+        case #"p9_zm_ndu_radio_transmissions_o":
+        case #"p9_zm_ndu_radio_transmissions_r":
           if(!isDefined(s_intel.mdl_intel)) {
             s_intel.mdl_intel = util::spawn_anim_model(fieldname, #"tag_origin", s_intel.origin, s_intel.angles);
 
@@ -227,19 +227,19 @@ function function_2bcfd899(localclientnum, var_f84ece9f, var_2b372cf6) {
   }
 
   switch (var_2b372cf6) {
-    case # "hash_76270a10851f51d8":
+    case #"hash_76270a10851f51d8":
       var_bf0df48d = level.var_9ff51719;
       break;
-    case # "hash_71c51f24f7f3037d":
+    case #"hash_71c51f24f7f3037d":
       var_bf0df48d = level.var_64d3d5c4;
       break;
-    case # "hash_405e81feb85c5162":
+    case #"hash_405e81feb85c5162":
       var_bf0df48d = level.var_13ebf509;
       break;
-    case # "hash_6fec31948ca2058c":
+    case #"hash_6fec31948ca2058c":
       var_bf0df48d = level.var_1e898375;
       break;
-    case # "hash_28fec49f37a535b9":
+    case #"hash_28fec49f37a535b9":
       var_bf0df48d = level.var_b131552c;
       break;
     default:
@@ -336,7 +336,7 @@ function function_fd0c6ab2(params) {
   }
 
   switch (params.name) {
-    case # "hash_42041dee5640342d":
+    case #"hash_42041dee5640342d":
       s_bundle = getscriptbundle(params.value);
       var_e915a27 = getent(0, "<dev string:x19c>", "<dev string:x1b5>");
 
@@ -345,7 +345,7 @@ function function_fd0c6ab2(params) {
       }
 
       break;
-    case # "hash_472c425964c7d41e":
+    case #"hash_472c425964c7d41e":
       if(function_1a594d26(0, params.value)) {
         iprintlnbold("<dev string:x1c3>" + params.value);
       } else {

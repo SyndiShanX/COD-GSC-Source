@@ -180,15 +180,15 @@ chop_actor(ai, leftswing, weapon = level.weaponnone) {
   }
 
   switch (ai.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       n_damage = ai.health;
       break;
-    case # "heavy":
+    case #"heavy":
       n_damage = int(ai.maxhealth * 0.25);
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_damage = int(ai.maxhealth * 0.15);
       break;
     default:
@@ -481,15 +481,15 @@ function_698ddbd9(weapon) {
       }
 
       switch (e_target.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           n_damage = e_target.health;
           break;
-        case # "heavy":
+        case #"heavy":
           n_damage = int(e_target.maxhealth * 0.2);
           break;
-        case # "miniboss":
+        case #"miniboss":
           n_damage = int(e_target.maxhealth * 0.1);
           break;
         default:
@@ -564,15 +564,15 @@ function_698ddbd9(weapon) {
       }
 
       switch (e_target.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           n_damage = e_target.health;
           break;
-        case # "heavy":
+        case #"heavy":
           n_damage = int(e_target.maxhealth * 0.2);
           break;
-        case # "miniboss":
+        case #"miniboss":
           n_damage = int(e_target.maxhealth * 0.1);
           break;
         default:
@@ -818,9 +818,9 @@ function_e29f395c(e_zombie, weapon) {
 
   if(isalive(e_zombie)) {
     switch (e_zombie.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         n_damage = e_zombie.health;
         break;
       default:
@@ -885,9 +885,9 @@ function_37106789(player, weapon) {
   waitframe(1);
 
   switch (self.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       n_damage = self.health;
       break;
     default:
@@ -951,9 +951,9 @@ function_3295542a(player, weapon) {
     }
 
     switch (ai_zombie.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         n_damage = ai_zombie.health;
         break;
       default:

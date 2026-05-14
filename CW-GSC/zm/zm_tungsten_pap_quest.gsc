@@ -466,19 +466,19 @@ function on_item_pickup(params) {
   }
 
   switch (name) {
-    case # "hash_74d379a1496a3d22":
+    case #"hash_74d379a1496a3d22":
       level thread function_3ddd0bcb("a");
       level zm_ui_inventory::function_7df6bb60(#"hash_689d93f2ecc4ae51", 1);
       break;
-    case # "hash_74d378a1496a3b6f":
+    case #"hash_74d378a1496a3b6f":
       level thread function_3ddd0bcb("b");
       level zm_ui_inventory::function_7df6bb60(#"hash_689d90f2ecc4a938", 1);
       break;
-    case # "hash_74d377a1496a39bc":
+    case #"hash_74d377a1496a39bc":
       level thread function_3ddd0bcb("c");
       level zm_ui_inventory::function_7df6bb60(#"hash_689d91f2ecc4aaeb", 1);
       break;
-    case # "hash_74d376a1496a3809":
+    case #"hash_74d376a1496a3809":
       level thread function_3ddd0bcb("d");
       level zm_ui_inventory::function_7df6bb60(#"hash_689d96f2ecc4b36a", 1);
       break;

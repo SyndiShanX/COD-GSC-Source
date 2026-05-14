@@ -788,9 +788,9 @@ in_combat() {
   }
 
   switch (self.combatstate) {
-    case # "combat_state_aware_of_enemies":
-    case # "combat_state_in_combat":
-    case # "combat_state_has_visible_enemy":
+    case #"combat_state_aware_of_enemies":
+    case #"combat_state_in_combat":
+    case #"combat_state_has_visible_enemy":
       return true;
   }
 
@@ -1050,62 +1050,62 @@ devgui_bot_loop() {
     host = util::gethostplayerforbots();
 
     switch (args[0]) {
-      case # "add":
+      case #"add":
         level devgui_add_bots(host, args[1], int(args[2]));
         break;
-      case # "spawn_enemy":
+      case #"spawn_enemy":
         level devgui_add_bots(host, #"enemy", 1);
         break;
-      case # "remove":
+      case #"remove":
         level devgui_remove_bots(host, args[1]);
         break;
-      case # "kill":
+      case #"kill":
         level devgui_kill_bots(host, args[1]);
         break;
-      case # "invulnerable":
+      case #"invulnerable":
         level devgui_invulnerable(host, args[1], args[2]);
         break;
-      case # "ignoreall":
+      case #"ignoreall":
         level devgui_ignoreall(host, args[1], int(args[2]));
         break;
-      case # "primaryoffhand":
+      case #"primaryoffhand":
         level devgui_attribute(host, "<dev string:x1bc>", args[1], int(args[2]));
         break;
-      case # "secondaryoffhand":
+      case #"secondaryoffhand":
         level devgui_attribute(host, "<dev string:x1d2>", args[1], int(args[2]));
         break;
-      case # "specialoffhand":
+      case #"specialoffhand":
         level devgui_attribute(host, "<dev string:x1ea>", args[1], int(args[2]));
         break;
-      case # "scorestreak":
+      case #"scorestreak":
         level devgui_attribute(host, "<dev string:x200>", args[1], int(args[2]));
         break;
-      case # "usegadget":
+      case #"usegadget":
         level devgui_use_gadget(host, args[1], int(args[2]));
         break;
-      case # "usekillstreak":
+      case #"usekillstreak":
         level function_8042b78a(host, args[1]);
         break;
-      case # "tpose":
+      case #"tpose":
         level devgui_tpose(host, args[1]);
         break;
     }
 
     if(isDefined(host)) {
       switch (args[0]) {
-        case # "add_fixed_spawn":
+        case #"add_fixed_spawn":
           host devgui_add_fixed_spawn_bots(args[1], args[2], args[3]);
           break;
-        case # "set_target":
+        case #"set_target":
           host devgui_set_target(args[1], args[2]);
           break;
-        case # "goal":
+        case #"goal":
           host devgui_goal(args[1], args[2]);
           break;
-        case # "companion":
+        case #"companion":
           host function_5524bfd5(args[1]);
           break;
-        case # "give_player_weapon":
+        case #"give_player_weapon":
           host function_263ca697();
           break;
       }
@@ -1367,13 +1367,13 @@ devgui_set_target(botarg, cmdarg) {
   target = undefined;
 
   switch (cmdarg) {
-    case # "crosshair":
+    case #"crosshair":
       target = self function_7090aa98();
       break;
-    case # "me":
+    case #"me":
       target = self;
       break;
-    case # "clear":
+    case #"clear":
       break;
     default:
       return;
@@ -1396,16 +1396,16 @@ devgui_set_target(botarg, cmdarg) {
 
 devgui_goal(botarg, cmdarg) {
   switch (cmdarg) {
-    case # "set":
+    case #"set":
       self function_bbc3f17e(botarg, 0);
       return;
-    case # "me":
+    case #"me":
       self devgui_goal_me(botarg);
       return;
-    case # "force":
+    case #"force":
       self function_bbc3f17e(botarg, 1);
       return;
-    case # "clear":
+    case #"clear":
       self devgui_goal_clear(botarg);
       return;
   }

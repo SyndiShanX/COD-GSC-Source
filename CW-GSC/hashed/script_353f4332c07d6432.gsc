@@ -1053,20 +1053,20 @@ function function_ea45ba4c(n_time_remaining = 10) {
 
 function function_bbc799ae(str_state) {
   switch (str_state) {
-    case # "off":
+    case #"off":
     default:
       var_6a25fa7 = 0;
       var_d0b16504 = 0;
       break;
-    case # "dance":
+    case #"dance":
       var_6a25fa7 = 1;
       var_d0b16504 = 0;
       break;
-    case # "attack":
+    case #"attack":
       var_6a25fa7 = 2;
       var_d0b16504 = 1;
       break;
-    case # "prize":
+    case #"prize":
       var_6a25fa7 = 3;
       var_d0b16504 = 0;
       break;
@@ -1114,19 +1114,19 @@ function cmd(cmd) {
   var_22e48c9c = getEntArray("<dev string:x1d7>", "<dev string:x1e3>");
 
   switch (cmd) {
-    case # "hash_2555bbb92d1fe771":
+    case #"hash_2555bbb92d1fe771":
       foreach(e_part in var_22e48c9c) {
         e_part thread function_35393ef2(1);
       }
 
       break;
-    case # "hash_27e8451459a42bde":
+    case #"hash_27e8451459a42bde":
       foreach(e_part in var_22e48c9c) {
         e_part thread function_35393ef2(0);
       }
 
       break;
-    case # "hash_ee6d09286bb442d":
+    case #"hash_ee6d09286bb442d":
       level flag::set(#"hash_7cc4347161a79b86");
       break;
   }

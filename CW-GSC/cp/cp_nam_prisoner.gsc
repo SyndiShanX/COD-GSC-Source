@@ -389,16 +389,16 @@ function function_b78161a2(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_89a69212(str_objective) {
   switch (level.var_731c10af.var_d8a772da) {
-    case # "caves":
+    case #"caves":
       level flag::set("flag_caves");
       break;
-    case # "village":
+    case #"village":
       level flag::set("flag_village");
       break;
-    case # "sniper_overlook":
+    case #"sniper_overlook":
       level flag::set("flag_sniper_overlook");
       break;
-    case # "rat_tunnels":
+    case #"rat_tunnels":
       level flag::set("flag_rat_tunnels");
       break;
   }
@@ -411,27 +411,27 @@ function function_1f911b89(str_objective, b_starting) {
   var_ad715f38 = undefined;
 
   switch (level.var_731c10af.var_d8a772da) {
-    case # "caves":
+    case #"caves":
       level thread namespace_bf7b1fb2::caves();
       var_4ddb3cd5 = ["village", "sniper_overlook_entrance", "sniper_overlook", "rat_tunnels_entrance", "rat_tunnels", "rice_paddies", "jungle_path", "middle_paths", "memory_2_obey", "memory_2_disobey", "memory_2_jungle_path_fork_right", "memory_2_jungle_path_fork_left", "memory_3"];
       var_ad715f38 = "flag_caves1_room3_start_vo";
       level thread namespace_d9b153b9::function_f8c7740b("bunker_door_start_function_end", ["caves"], 0, 3);
       break;
-    case # "village":
+    case #"village":
       level thread namespace_dfa5ee23::village();
       var_4ddb3cd5 = ["caves_entrance", "caves", "sniper_overlook_entrance", "sniper_overlook", "rat_tunnels_entrance", "rat_tunnels", "rice_paddies"];
       level thread namespace_d9b153b9::function_f8c7740b("flag_village_start_wave_04", ["memory_2_obey", "memory_2_disobey", "memory_2_jungle_path_fork_right", "memory_2_jungle_path_fork_left", "memory_3"], 0);
       var_ad715f38 = "flag_village_start_wave_06";
       level thread namespace_d9b153b9::function_f8c7740b("bunker_door_start_function_end", ["jungle_path", "middle_paths", "village"], 0, 3);
       break;
-    case # "sniper_overlook":
+    case #"sniper_overlook":
       level thread namespace_d12540d8::sniper_overlook();
       var_4ddb3cd5 = ["caves_entrance", "caves", "rat_tunnels_entrance", "rat_tunnels", "rice_paddies"];
       level thread namespace_d9b153b9::function_f8c7740b("flag_sniper_overlook_district_cleanup", ["village", "middle_paths", "jungle_path", "memory_2_obey", "memory_2_disobey", "memory_2_jungle_path_fork_right", "memory_2_jungle_path_fork_left", "memory_3"], 0);
       var_ad715f38 = "flag_sniper_in_strike";
       level thread namespace_d9b153b9::function_f8c7740b("bunker_door_start_function_end", ["sniper_overlook_entrance", "sniper_overlook"], 0, 3);
       break;
-    case # "rat_tunnels":
+    case #"rat_tunnels":
       level thread cp_nam_prisoner_rat_tunnels::rat_tunnels();
       var_4ddb3cd5 = ["caves", "sniper_overlook_entrance", "sniper_overlook", "rice_paddies", "jungle_path"];
       level thread namespace_d9b153b9::function_f8c7740b("flag_rat_tunnels_entrance_progression", ["caves_entrance", "middle_paths", "village", "memory_2_obey", "memory_2_disobey", "memory_2_jungle_path_fork_right", "memory_2_jungle_path_fork_left", "memory_3"], 0);
@@ -538,16 +538,16 @@ function function_aa96d24b(str_objective, b_starting, var_aa1a6455, player) {
 
   if(isDefined(var_c79d614f)) {
     switch (var_c79d614f) {
-      case # "caves":
+      case #"caves":
         level thread namespace_bf7b1fb2::cleanup();
         break;
-      case # "village":
+      case #"village":
         level thread namespace_dfa5ee23::cleanup();
         break;
-      case # "sniper_overlook":
+      case #"sniper_overlook":
         level thread namespace_d12540d8::cleanup();
         break;
-      case # "rat_tunnels":
+      case #"rat_tunnels":
         level thread cp_nam_prisoner_rat_tunnels::cleanup();
         break;
       default:
@@ -1035,36 +1035,36 @@ function function_767a5911() {
   }
 
   switch (level.skipto_current_objective[0]) {
-    case # "intro":
+    case #"intro":
       break;
-    case # "dev_rice_paddies_1_all_districts":
-    case # "rice_paddies_1":
+    case #"dev_rice_paddies_1_all_districts":
+    case #"rice_paddies_1":
       break;
-    case # "jungle_path_1":
+    case #"jungle_path_1":
       level flag::set("flag_rice_paddies");
       level function_e5c19f38(1, "jungle_path_1");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths"], 1);
       break;
-    case # "dev_waterfall_path":
-    case # "dev_creek_path":
-    case # "middle_paths_1":
+    case #"dev_waterfall_path":
+    case #"dev_creek_path":
+    case #"middle_paths_1":
       level flag::set("flag_rice_paddies");
       level flag::set("flag_jungle_path");
       level function_e5c19f38(1, "dev_waterfall_path");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "village", "caves_entrance", "rat_tunnels_entrance"], 1);
       break;
-    case # "dev_river_path":
+    case #"dev_river_path":
       level flag::set("flag_rice_paddies");
       level flag::set("flag_jungle_path");
       level function_e5c19f38(1, "dev_river_path");
       break;
-    case # "dev_bridge_path":
+    case #"dev_bridge_path":
       level flag::set("flag_rice_paddies");
       level flag::set("flag_jungle_path");
       level function_e5c19f38(1, "dev_bridge_path");
       break;
-    case # "path_end_1":
-    case # "hash_57932fa2a5147f7d":
+    case #"path_end_1":
+    case #"hash_57932fa2a5147f7d":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "caves";
       }
@@ -1072,50 +1072,50 @@ function function_767a5911() {
       level function_e5c19f38(1, "path_end_1");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "sniper_overlook", "village", "caves_entrance", "caves", "rat_tunnels_entrance", "rat_tunnels"], 1);
       break;
-    case # "dev_village":
+    case #"dev_village":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "village";
       }
 
       level function_e5c19f38(1, "dev_village");
       break;
-    case # "dev_sniper_overlook":
+    case #"dev_sniper_overlook":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "sniper_overlook";
       }
 
       level function_e5c19f38(1, "dev_sniper_overlook");
       break;
-    case # "dev_memory_2_disobey":
+    case #"dev_memory_2_disobey":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "sniper_overlook";
       }
 
       level function_e5c19f38(2, "dev_memory_2_disobey");
       break;
-    case # "dev_memory_3_disobey":
-    case # "dev_memory_3_disobey_end":
+    case #"dev_memory_3_disobey":
+    case #"dev_memory_3_disobey_end":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "caves";
       }
 
       level function_e5c19f38(3, "dev_memory_3_disobey");
       break;
-    case # "dev_rat_tunnels":
+    case #"dev_rat_tunnels":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "rat_tunnels";
       }
 
       level function_e5c19f38(1, "path_end_1");
       break;
-    case # "dev_memory_1_disobey":
+    case #"dev_memory_1_disobey":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "rat_tunnels";
       }
 
       level function_e5c19f38(1, "dev_memory_1_disobey");
       break;
-    case # "memory_1":
+    case #"memory_1":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "caves";
       }
@@ -1123,22 +1123,22 @@ function function_767a5911() {
       level function_e5c19f38(1, "memory_1");
       level districts::function_a7d79fcb(["bunker", "lab"], 1);
       break;
-    case # "hash_33d35e99f904418":
-    case # "rice_paddies_2":
+    case #"hash_33d35e99f904418":
+    case #"rice_paddies_2":
       level function_e5c19f38(2, "rice_paddies_2");
       break;
-    case # "jungle_path_2":
+    case #"jungle_path_2":
       level flag::set("flag_rice_paddies");
       level function_e5c19f38(2, "jungle_path_2");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths"], 1);
       break;
-    case # "middle_paths_2":
+    case #"middle_paths_2":
       level flag::set("flag_rice_paddies");
       level flag::set("flag_jungle_path");
       level function_e5c19f38(2, "middle_paths_2");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "village", "caves_entrance", "rat_tunnels_entrance"], 1);
       break;
-    case # "path_end_2":
+    case #"path_end_2":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "village";
       }
@@ -1146,7 +1146,7 @@ function function_767a5911() {
       level function_e5c19f38(2, "path_end_2");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "sniper_overlook", "village", "caves_entrance", "caves", "rat_tunnels_entrance", "rat_tunnels"], 1);
       break;
-    case # "memory_2":
+    case #"memory_2":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "village";
       }
@@ -1154,21 +1154,21 @@ function function_767a5911() {
       level function_e5c19f38(2, "memory_2");
       level districts::function_a7d79fcb(["bunker", "lab"], 1);
       break;
-    case # "rice_paddies_3":
+    case #"rice_paddies_3":
       level function_e5c19f38(3, "rice_paddies_3");
       break;
-    case # "jungle_path_3":
+    case #"jungle_path_3":
       level flag::set("flag_rice_paddies");
       level function_e5c19f38(3, "jungle_path_3");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "memory_3"], 1);
       break;
-    case # "middle_paths_3":
+    case #"middle_paths_3":
       level flag::set("flag_rice_paddies");
       level flag::set("flag_jungle_path");
       level function_e5c19f38(3, "middle_paths_3");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "village", "caves_entrance", "rat_tunnels_entrance", "memory_3"], 1);
       break;
-    case # "path_end_3":
+    case #"path_end_3":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "sniper_overlook";
       }
@@ -1176,7 +1176,7 @@ function function_767a5911() {
       level function_e5c19f38(3, "path_end_3");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "sniper_overlook", "village", "caves_entrance", "caves", "rat_tunnels_entrance", "rat_tunnels", "memory_3"], 1);
       break;
-    case # "memory_3":
+    case #"memory_3":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "sniper_overlook";
       }
@@ -1184,22 +1184,22 @@ function function_767a5911() {
       level function_e5c19f38(3, "memory_3");
       level districts::function_a7d79fcb(["bunker", "lab"], 1);
       break;
-    case # "hash_3c53d27e3038e7ca":
-    case # "hash_38adaba11a0b5d14":
-    case # "hash_38adaaa11a0b5b61":
-    case # "dev_infinite_hallway_loop_2":
-    case # "dev_memory_3_end":
-    case # "hash_6f9002fa3e695a0c":
+    case #"hash_3c53d27e3038e7ca":
+    case #"hash_38adaba11a0b5d14":
+    case #"hash_38adaaa11a0b5b61":
+    case #"dev_infinite_hallway_loop_2":
+    case #"dev_memory_3_end":
+    case #"hash_6f9002fa3e695a0c":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "sniper_overlook";
       }
 
       level function_e5c19f38(3, "memory_3");
       break;
-    case # "rice_paddies_4":
+    case #"rice_paddies_4":
       level function_e5c19f38(4, "rice_paddies_4");
       break;
-    case # "middle_paths_4":
+    case #"middle_paths_4":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "exit";
       }
@@ -1209,7 +1209,7 @@ function function_767a5911() {
       level function_e5c19f38(4, "middle_paths_4");
       level districts::function_a7d79fcb(["rice_paddies", "jungle_path", "middle_paths", "sniper_overlook_entrance", "village", "caves_entrance", "rat_tunnels_entrance", "memory_3"], 1);
       break;
-    case # "memory_4":
+    case #"memory_4":
       if(!isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_731c10af.var_d8a772da = "exit";
       }

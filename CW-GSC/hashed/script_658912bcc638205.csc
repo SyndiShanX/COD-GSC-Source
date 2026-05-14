@@ -40,12 +40,12 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "player":
+    case #"player":
       player = ent;
       player waittill(#"death", #"disconnect");
       player = undefined;
       break;
-    case # "perseus":
+    case #"perseus":
       level.perseus = ent;
       ent waittill(#"death");
       level.perseus = undefined;
@@ -62,7 +62,7 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
     default:
 
@@ -76,7 +76,7 @@ function private function_2733af4e(player, trigger, var_ec80d14b) {
   var_e3462120 = snd::function_ea2f17d1(var_ec80d14b.script_noteworthy, "");
 
   switch (var_e3462120) {
-    case # "hash_42ccbe8fe4a4c00":
+    case #"hash_42ccbe8fe4a4c00":
       function_5ea2c6e3("cp_pris_bridge_walk", 0.5, 1);
       function_5ea2c6e3("cp_pris_bridge_run", 0.5, 1);
       function_5ea2c6e3("cp_pris_bridge_sprint", 0.5, 1);
@@ -100,221 +100,221 @@ function function_66f72926() {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "global_submix":
+    case #"global_submix":
       function_5ea2c6e3("cp_nam_prisoner_global_submix", 0, 1);
       function_5ea2c6e3("cp_nam_prisoner_exploration", 0, 1);
       break;
-    case # "exploration_mix_on":
+    case #"exploration_mix_on":
       function_5ea2c6e3("cp_nam_prisoner_exploration", 3, 1);
       break;
-    case # "exploration_mix_off":
+    case #"exploration_mix_off":
       function_ed62c9c2("cp_nam_prisoner_exploration", 3);
       break;
-    case # "intro_scene":
+    case #"intro_scene":
       thread intro_scene();
       break;
-    case # "intro_mix_3":
+    case #"intro_mix_3":
       thread intro_mix_3();
       break;
-    case # "intro_mix_4":
+    case #"intro_mix_4":
       thread intro_mix_4();
       break;
-    case # "intro_mix_5":
+    case #"intro_mix_5":
       thread intro_mix_5();
       break;
-    case # "rice_paddies_1_start":
+    case #"rice_paddies_1_start":
       function_5ea2c6e3("cp_nam_prisoner_rice_paddies_battle");
       break;
-    case # "hash_3453089a606822fb":
+    case #"hash_3453089a606822fb":
       break;
-    case # "rice_paddies_3_start":
+    case #"rice_paddies_3_start":
       function_5ea2c6e3("cp_nam_prisoner_rice_paddies_battle");
       break;
-    case # "rice_paddies_bc_1":
+    case #"rice_paddies_bc_1":
       level.rice_paddies_bc_1 = snd::emitter("vox_rice_paddies_vtn_distant_bc", (-1064, -4632, 223), [0.5, 7], [200, 800]);
       break;
-    case # "rice_paddies_bc_2":
+    case #"rice_paddies_bc_2":
       level.rice_paddies_bc_2 = snd::emitter("vox_rice_paddies_vtn_distant_bc", (-1064, -4632, 223), [0.5, 7], [200, 800]);
       break;
-    case # "rice_paddies_bc_3":
+    case #"rice_paddies_bc_3":
       level.rice_paddies_bc_3 = snd::emitter("vox_rice_paddies_adlr_distant_bc", (-1064, -4632, 223), [2, 8], [200, 800]);
       break;
-    case # "rice_paddies_1_end":
+    case #"rice_paddies_1_end":
       function_ed62c9c2("cp_nam_prisoner_rice_paddies_battle");
       snd::stop(level.rice_paddies_bc_1);
       break;
-    case # "rice_paddies_2_end":
+    case #"rice_paddies_2_end":
       snd::stop(level.rice_paddies_bc_2);
       break;
-    case # "rice_paddies_3_end":
+    case #"rice_paddies_3_end":
       snd::stop(level.rice_paddies_bc_3);
       function_ed62c9c2("cp_nam_prisoner_rice_paddies_battle");
       break;
-    case # "waterfall_kill_right":
+    case #"waterfall_kill_right":
       thread waterfall_kill("right");
       break;
-    case # "waterfall_kill_left":
+    case #"waterfall_kill_left":
       thread waterfall_kill("left");
       break;
-    case # "waterfall_slowmo_start":
+    case #"waterfall_slowmo_start":
       thread waterfall_slowmo_start();
       break;
-    case # "waterfall_slowmo_stop":
+    case #"waterfall_slowmo_stop":
       thread waterfall_slowmo_stop();
       break;
-    case # "waterfall_throw_knife":
+    case #"waterfall_throw_knife":
       thread waterfall_throw_knife();
       break;
-    case # "mkultra_sound_on":
+    case #"mkultra_sound_on":
       level notify(#"mkultra_sound_on");
       break;
-    case # "mkultra_sound_off":
+    case #"mkultra_sound_off":
       level notify(#"mkultra_sound_off");
       break;
-    case # "start_frozen_battle":
+    case #"start_frozen_battle":
       thread function_20018404();
       break;
-    case # "stop_frozen_battle":
+    case #"stop_frozen_battle":
       level notify(#"hash_135069eaafe77dc0");
       break;
-    case # "hash_559e7c9c03da213b":
+    case #"hash_559e7c9c03da213b":
       level notify(#"hash_559e7c9c03da213b");
       break;
-    case # "timeofday_day":
+    case #"timeofday_day":
       setsoundcontext("timeofday", "day");
       break;
-    case # "timeofday_night":
+    case #"timeofday_night":
       setsoundcontext("timeofday", "night");
       break;
-    case # "emi_allruns_play":
+    case #"emi_allruns_play":
       emi_allruns_play();
       thread function_42a7819b();
       thread function_8b66fcd3();
       function_66f72926();
       break;
-    case # "emi_allruns_stop":
+    case #"emi_allruns_stop":
       emi_allruns_stop();
       level notify(#"hash_555ba3576c3cbf50");
       break;
-    case # "emi_day_play":
+    case #"emi_day_play":
       emi_day_play();
       break;
-    case # "hash_4ef8030b21c8f964":
+    case #"hash_4ef8030b21c8f964":
       break;
-    case # "emi_night_play":
+    case #"emi_night_play":
       emi_night_play();
       break;
-    case # "hash_d74c565087804b0":
+    case #"hash_d74c565087804b0":
       break;
-    case # "hash_57530adbd77d1885":
+    case #"hash_57530adbd77d1885":
       break;
-    case # "pre_injection_hallway_sfx":
+    case #"pre_injection_hallway_sfx":
       thread pre_injection_hallway_sfx();
       break;
-    case # "arcade_start":
+    case #"arcade_start":
       function_5ea2c6e3("cp_nam_prisoner_arcade", 2, 1);
       break;
-    case # "arcade_exit":
+    case #"arcade_exit":
       function_ed62c9c2("cp_nam_prisoner_arcade", 2);
       break;
-    case # "hallway_voice_1":
+    case #"hallway_voice_1":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_whyisbellrepeat_f9");
       }
 
       break;
-    case # "hallway_voice_2":
+    case #"hallway_voice_2":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_whyisbellrepeat_fa");
       }
 
       break;
-    case # "hallway_voice_3":
+    case #"hallway_voice_3":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_whyisbellrepeat_56");
       }
 
       break;
-    case # "hallway_voice_4":
+    case #"hallway_voice_4":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_bellstopspeakin_2d");
       }
 
       break;
-    case # "hallway_voice_5":
+    case #"hallway_voice_5":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_stopwastingmyti_8c");
       }
 
       break;
-    case # "hallway_voice_6":
+    case #"hallway_voice_6":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_turnaroundbell_4b");
       }
 
       break;
-    case # "hallway_voice_7":
+    case #"hallway_voice_7":
       if(level.var_dc404c80 == 1) {
         snd::play("vox_cp_prsn_09000_adlr_bellgothroughad_38");
       }
 
       break;
-    case # "rat_tunnels_amb_zombies":
+    case #"rat_tunnels_amb_zombies":
       thread rat_tunnels_amb_zombies();
       break;
-    case # "rat_tunnels_throb_low":
+    case #"rat_tunnels_throb_low":
       thread function_488e467();
       break;
-    case # "rat_tunnels_throb_medium":
+    case #"rat_tunnels_throb_medium":
       level notify(#"rat_tunnels_throb_medium");
       break;
-    case # "rat_tunnels_throb_high":
+    case #"rat_tunnels_throb_high":
       level notify(#"rat_tunnels_throb_high");
       break;
-    case # "rat_tunnels_ambience_fade_out":
+    case #"rat_tunnels_ambience_fade_out":
       level notify(#"rat_tunnels_ambience_fade_out");
       function_ed62c9c2("cp_nam_prisoner_rat_tunnels");
       break;
-    case # "cave_entry":
+    case #"cave_entry":
       thread function_a159adc3();
       break;
-    case # "projector_room_enter":
+    case #"projector_room_enter":
       audio::snd_set_snapshot("cp_nam_prisoner_projector_room");
       function_b6407dd4(0);
       break;
-    case # "projector_room_exit":
+    case #"projector_room_exit":
       audio::snd_set_snapshot("default");
       function_b6407dd4(1);
       break;
-    case # "cave_footsteps":
+    case #"cave_footsteps":
       thread cave_footsteps();
       break;
-    case # "infinite_hallway_ambience_1":
+    case #"infinite_hallway_ambience_1":
       level.var_ad3afa08 = 1;
       level.var_c635eb23 = 1;
       thread function_c635eb23();
       level notify(#"hash_df4e0488c76955a");
       break;
-    case # "infinite_hallway_ambience_2":
+    case #"infinite_hallway_ambience_2":
       level.var_c635eb23 = 2;
       level notify(#"hash_df4e0488c76955a");
       break;
-    case # "infinite_hallway_ambience_3":
+    case #"infinite_hallway_ambience_3":
       level.var_c635eb23 = 3;
       level notify(#"hash_df4e0488c76955a");
       break;
-    case # "infinite_hallway_ambience_4":
+    case #"infinite_hallway_ambience_4":
       level.var_c635eb23 = 4;
       level notify(#"hash_df4e0488c76955a");
       break;
-    case # "infinite_hallway_ambience_end":
+    case #"infinite_hallway_ambience_end":
       level.var_ad3afa08 = 0;
       level notify(#"hash_df4e0488c76955a");
       break;
-    case # "stop_hallway_sfx":
+    case #"stop_hallway_sfx":
       level notify(#"stop_hallway_sfx");
       break;
-    case # "shrinking_hallway1_hide":
+    case #"shrinking_hallway1_hide":
       level.var_1a702ee5 = 1;
 
       if(level.var_948f8ad5 == 1 && level.var_f346a11f == 1 && level.var_743d2803 == 1) {
@@ -322,7 +322,7 @@ function private function_f2a2832d(player, msg) {
       }
 
       break;
-    case # "shrinking_hallway2_hide":
+    case #"shrinking_hallway2_hide":
       level.var_948f8ad5 = 1;
 
       if(level.var_1a702ee5 == 1 && level.var_f346a11f == 1 && level.var_743d2803 == 1) {
@@ -330,7 +330,7 @@ function private function_f2a2832d(player, msg) {
       }
 
       break;
-    case # "shrinking_hallway3_hide":
+    case #"shrinking_hallway3_hide":
       level.var_f346a11f = 1;
 
       if(level.var_1a702ee5 == 1 && level.var_948f8ad5 == 1 && level.var_743d2803 == 1) {
@@ -338,7 +338,7 @@ function private function_f2a2832d(player, msg) {
       }
 
       break;
-    case # "shrinking_hallway4_hide":
+    case #"shrinking_hallway4_hide":
       level.var_743d2803 = 1;
 
       if(level.var_1a702ee5 == 1 && level.var_948f8ad5 == 1 && level.var_f346a11f == 1) {
@@ -346,70 +346,70 @@ function private function_f2a2832d(player, msg) {
       }
 
       break;
-    case # "shrinking_hallway1_unhide":
+    case #"shrinking_hallway1_unhide":
       level.var_1a702ee5 = 0;
       level.var_dc404c80 = 0;
       break;
-    case # "shrinking_hallway2_unhide":
+    case #"shrinking_hallway2_unhide":
       level.var_948f8ad5 = 0;
       level.var_dc404c80 = 0;
       break;
-    case # "shrinking_hallway3_unhide":
+    case #"shrinking_hallway3_unhide":
       level.var_f346a11f = 0;
       level.var_dc404c80 = 0;
       break;
-    case # "shrinking_hallway4_unhide":
+    case #"shrinking_hallway4_unhide":
       level.var_743d2803 = 0;
       level.var_dc404c80 = 0;
       break;
-    case # "shrinking_hallway_start":
+    case #"shrinking_hallway_start":
       thread function_4422f3fe();
       break;
-    case # "shrinking_hallway_end":
+    case #"shrinking_hallway_end":
       level notify(#"shrinking_hallway_end");
       level.var_dc404c80 = 1;
       break;
-    case # "infinite_hallway_loop_start":
+    case #"infinite_hallway_loop_start":
       level.var_4b36b09 = "start";
       thread function_670b73d1();
       break;
-    case # "infinite_hallway_loop_low":
+    case #"infinite_hallway_loop_low":
       level.var_4b36b09 = "low";
       thread function_670b73d1();
       break;
-    case # "infinite_hallway_loop_mid":
+    case #"infinite_hallway_loop_mid":
       level.var_4b36b09 = "mid";
       thread function_670b73d1();
       break;
-    case # "infinite_hallway_loop_high":
+    case #"infinite_hallway_loop_high":
       level.var_4b36b09 = "high";
       thread function_670b73d1();
       break;
-    case # "hash_4fef8a23b1544f54":
+    case #"hash_4fef8a23b1544f54":
       voice = snd::play("vox_cp_prsn_13000_pers_theunitedstates_9f", [level.perseus, "j_head"]);
       wait 3;
       snd::set_pitch(voice, 0.01, 3);
       wait 2;
       snd::stop(voice, 0.1);
       break;
-    case # "bunker_door_used":
+    case #"bunker_door_used":
       level notify(#"bunker_door_used");
       break;
-    case # "bunker_room_final":
+    case #"bunker_room_final":
       forceambientroom("int_bunker_end");
       break;
-    case # "cinematic_duck_start":
+    case #"cinematic_duck_start":
       function_5ea2c6e3("cp_nam_prisoner_cin", 1, 1);
       break;
-    case # "cinematic_duck_end":
+    case #"cinematic_duck_end":
       function_ed62c9c2("cp_nam_prisoner_cin");
       break;
-    case # "musictrack_cp_prisoner_2":
-    case # "musictrack_cp_prisoner_3":
-    case # "musictrack_cp_prisoner_1":
-    case # "musictrack_cp_prisoner_6":
-    case # "musictrack_cp_prisoner_4":
-    case # "musictrack_cp_prisoner_5":
+    case #"musictrack_cp_prisoner_2":
+    case #"musictrack_cp_prisoner_3":
+    case #"musictrack_cp_prisoner_1":
+    case #"musictrack_cp_prisoner_6":
+    case #"musictrack_cp_prisoner_4":
+    case #"musictrack_cp_prisoner_5":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -422,9 +422,9 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "intro":
+    case #"intro":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

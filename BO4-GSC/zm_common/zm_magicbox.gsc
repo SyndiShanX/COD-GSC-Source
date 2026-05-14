@@ -1960,22 +1960,22 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
     }
   } else {
     switch (weapon.weapclass) {
-      case # "mg":
+      case #"mg":
         str_vo_line = #"lmg";
         break;
-      case # "spread":
+      case #"spread":
         str_vo_line = #"shotgun";
         break;
-      case # "pistol":
+      case #"pistol":
         str_vo_line = #"pistol";
         break;
-      case # "rocketlauncher":
+      case #"rocketlauncher":
         str_vo_line = #"launcher";
         break;
-      case # "smg":
+      case #"smg":
         str_vo_line = #"smg";
         break;
-      case # "rifle":
+      case #"rifle":
         if(weapon.issniperweapon) {
           str_vo_line = #"sniper";
         } else if(zm_weapons::is_tactical_rifle(weapon)) {
@@ -2303,33 +2303,33 @@ set_magic_box_zbarrier_state(state) {
 
 process_magic_box_zbarrier_state(state) {
   switch (state) {
-    case # "away":
+    case #"away":
       self showzbarrierpiece(0);
       self thread function_15cd8d85();
       self.state = "away";
       break;
-    case # "arriving":
+    case #"arriving":
       self showzbarrierpiece(1);
       self thread function_24ce1c91();
       self.state = "arriving";
       break;
-    case # "initial":
+    case #"initial":
       self showzbarrierpiece(1);
       self thread function_f6a827d1();
       thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &magicbox_unitrigger_think);
       self.state = "initial";
       break;
-    case # "open":
+    case #"open":
       self showzbarrierpiece(2);
       self thread function_12804472();
       self.state = "open";
       break;
-    case # "close":
+    case #"close":
       self showzbarrierpiece(2);
       self thread function_cd5d65b0();
       self.state = "close";
       break;
-    case # "leaving":
+    case #"leaving":
       self showzbarrierpiece(1);
       self thread function_65b1adcb();
       self.state = "leaving";
@@ -2345,7 +2345,7 @@ process_magic_box_zbarrier_state(state) {
 
 function_35c66b27(str_state) {
   switch (str_state) {
-    case # "away":
+    case #"away":
       self.state = "away";
 
       if(!isDefined(self.var_8cab0622)) {
@@ -2357,7 +2357,7 @@ function_35c66b27(str_state) {
 
       self.var_8cab0622 scene::play();
       break;
-    case # "arriving":
+    case #"arriving":
       if(!isDefined(self.var_8cab0622)) {
         a_str_tokens = strtok2(self.script_noteworthy, "zbarrier");
         var_72fa2dd1 = a_str_tokens[0] + "plinth";

@@ -403,7 +403,7 @@ function function_aba20851(b_force_stream = 1) {
     foreach(var_ff94d594 in level.var_9a5dfa7e) {
       if(isDefined(var_ff94d594.str_asset) && isDefined(var_ff94d594.str_type)) {
         switch (var_ff94d594.str_type) {
-          case # "xmodel":
+          case #"xmodel":
             if(b_force_stream) {
               func = &forcestreamxmodel;
             } else {
@@ -411,7 +411,7 @@ function function_aba20851(b_force_stream = 1) {
             }
 
             break;
-          case # "material":
+          case #"material":
             if(b_force_stream) {
               func = &forcestreammaterial;
             } else {
@@ -419,7 +419,7 @@ function function_aba20851(b_force_stream = 1) {
             }
 
             break;
-          case # "bundle":
+          case #"bundle":
             if(b_force_stream) {
               func = &forcestreambundle;
             } else {
@@ -427,7 +427,7 @@ function function_aba20851(b_force_stream = 1) {
             }
 
             break;
-          case # "fx":
+          case #"fx":
             if(b_force_stream) {
               func = &function_3385d776;
             } else {
@@ -2040,20 +2040,20 @@ function function_f00765ad(localclientnum, xuid, ccobject, index, var_3f0e790b, 
 function function_c033e4cc(localclientnum, var_2451e8ac, ccobject, index, var_7f395102, xuid) {
   if(isDefined(var_2451e8ac)) {
     switch (var_2451e8ac) {
-      case # "character_change":
+      case #"character_change":
         if(lui_camera::is_current_menu(localclientnum, "PressStart")) {
           level thread function_90cad834(localclientnum, 0, var_7f395102);
         }
 
         break;
-      case # "lobby_intro":
+      case #"lobby_intro":
         if(isDefined(var_7f395102)) {
           [[ccobject]] - > function_15a8906a(var_7f395102);
         }
 
         level thread function_c47e078a(1, index, ccobject, localclientnum, xuid);
         break;
-      case # "lobby_idle":
+      case #"lobby_idle":
       default:
         if(isDefined(var_7f395102)) {
           [[ccobject]] - > function_15a8906a(var_7f395102);
@@ -3263,12 +3263,12 @@ function function_97b4eb2c(localclientnum, var_2a4208a4, str_state = #"lobby_pos
   level endon(#"disconnect");
 
   switch (str_state) {
-    case # "mode_select":
-    case # "directorselect":
+    case #"mode_select":
+    case #"directorselect":
       return;
-    case # "private_lobby_pose":
-    case # "cdl_hub":
-    case # "lobby_pose":
+    case #"private_lobby_pose":
+    case #"cdl_hub":
+    case #"lobby_pose":
     default:
       if(!(getdvarint(#"hash_7f0099222a51b5f6", 7) == 3) && !(getdvarint(#"hash_7f0099222a51b5f6", 7) == 4) && !(getdvarint(#"hash_7f0099222a51b5f6", 7) == 5) && !(getdvarint(#"hash_7f0099222a51b5f6", 7) == 6) && !(getdvarint(#"hash_7f0099222a51b5f6", 7) == 7)) {
         str_rumble = #"hash_795b2f3495784147";
@@ -3282,7 +3282,7 @@ function function_97b4eb2c(localclientnum, var_2a4208a4, str_state = #"lobby_pos
       } else {
         return;
       }
-    case # "loadout_room":
+    case #"loadout_room":
       str_rumble = #"hash_4830baac0547b450";
       var_58b22097 = 15;
       var_685248c4 = 20;
@@ -3291,7 +3291,7 @@ function function_97b4eb2c(localclientnum, var_2a4208a4, str_state = #"lobby_pos
       str_fxanim = #"p9_fxanim_mp_frontend_plane_station_guns_bundle";
       var_df4e70cd = #"hash_20e4410e7a619aab";
       break;
-    case # "character_room":
+    case #"character_room":
       str_rumble = #"hash_4a7c098220c7b9be";
       var_58b22097 = 10;
       var_685248c4 = 15;
@@ -3369,10 +3369,10 @@ function function_49efdec6(localclientnum, menu_name, str_state) {
   }
 
   switch (str_state) {
-    case # "room2":
-    case # "room1":
-    case # "mode_select":
-    case # "directorselect":
+    case #"room2":
+    case #"room1":
+    case #"mode_select":
+    case #"directorselect":
     default:
       function_672403ca("amb_frontend_armory", 0.25, 1);
       function_672403ca("amb_frontend_lobby", 0.25, 1);
@@ -3391,13 +3391,13 @@ function function_49efdec6(localclientnum, menu_name, str_state) {
       }
 
       break;
-    case # "armory":
-    case # "medium_vol":
-    case # "scorestreaks":
-    case # "zmskills":
-    case # "character_room":
-    case # "loadout_room":
-    case # "accessories":
+    case #"armory":
+    case #"medium_vol":
+    case #"scorestreaks":
+    case #"zmskills":
+    case #"character_room":
+    case #"loadout_room":
+    case #"accessories":
       function_672403ca("amb_frontend_armory", 0.25, 0);
       function_672403ca("amb_frontend_lobby", 0.25, 1);
       function_672403ca("amb_frontend_mtx", 0.25, 1);
@@ -3415,9 +3415,9 @@ function function_49efdec6(localclientnum, menu_name, str_state) {
       }
 
       break;
-    case # "private_lobby_pose":
-    case # "cdl_hub":
-    case # "lobby_pose":
+    case #"private_lobby_pose":
+    case #"cdl_hub":
+    case #"lobby_pose":
       function_672403ca("amb_frontend_armory", 0.25, 1);
       function_672403ca("amb_frontend_lobby", 0.25, 0);
       function_672403ca("amb_frontend_mtx", 0.25, 1);
@@ -3435,10 +3435,10 @@ function function_49efdec6(localclientnum, menu_name, str_state) {
       }
 
       break;
-    case # "cp_story":
-    case # "cp_evidence":
-    case # "hash_3262189f972fcd0e":
-    case # "hash_56527b57d58c2c6a":
+    case #"cp_story":
+    case #"cp_evidence":
+    case #"hash_3262189f972fcd0e":
+    case #"hash_56527b57d58c2c6a":
       function_672403ca("amb_frontend_armory", 0.25, 1);
       function_672403ca("amb_frontend_lobby", 0.25, 1);
       function_672403ca("amb_frontend_mtx", 0.25, 0);

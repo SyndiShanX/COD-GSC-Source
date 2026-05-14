@@ -47,9 +47,9 @@ add_to_player_score_override(n_points, str_awarded_by, zm_scr_spawner_location_d
   }
 
   switch (str_awarded_by) {
-    case # "reviver":
-    case # "bonus_points_powerup_shared":
-    case # "magicbox_bear":
+    case #"reviver":
+    case #"bonus_points_powerup_shared":
+    case #"magicbox_bear":
       return n_points;
     default:
       break;

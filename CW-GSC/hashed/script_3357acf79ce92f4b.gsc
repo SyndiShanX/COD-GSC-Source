@@ -311,26 +311,26 @@ function private function_4645d5f8(params) {
     }
 
     switch (waitresult._notify) {
-      case # "gunshot":
+      case #"gunshot":
         self callback::callback(#"awareness_event", {
           #type: 4, #entity: waitresult.suppressor, #position: waitresult.position
         });
         break;
-      case # "explode":
+      case #"explode":
         self callback::callback(#"awareness_event", {
           #type: 2, #entity: waitresult.owner, #position: waitresult.position, #params: {
             #radius: 1024
           }
         });
         break;
-      case # "radio_event":
+      case #"radio_event":
         self callback::callback(#"awareness_event", {
           #type: 3, #entity: waitresult.originator, #position: waitresult.originator.origin, #params: {
             #enemy: waitresult.originator.enemy
           }
         });
         break;
-      case # "alert":
+      case #"alert":
         if(!self.ignoreall) {
           self.var_1033fa72 = 1;
         }
@@ -347,7 +347,7 @@ function private function_fc45f7e2(params) {
     waitresult = self waittill(#"hash_4f3c0b937432f8b0");
 
     switch (waitresult._notify) {
-      case # "hash_4f3c0b937432f8b0":
+      case #"hash_4f3c0b937432f8b0":
         self callback::callback(#"hash_4f3c0b937432f8b0", {
           #attacker: waitresult.attacker, #victim: waitresult.victim
         });
@@ -1681,13 +1681,13 @@ function function_c6b1009e() {
   wait 0.2;
 
   switch (self.current_state.name) {
-    case # "wander":
+    case #"wander":
       self clientfield::set("sndAwarenessChange", 1);
       break;
-    case # "investigate":
+    case #"investigate":
       self clientfield::set("sndAwarenessChange", 2);
       break;
-    case # "chase":
+    case #"chase":
       self clientfield::set("sndAwarenessChange", 3);
       break;
     default:

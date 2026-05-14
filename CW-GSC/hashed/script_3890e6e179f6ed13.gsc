@@ -555,16 +555,16 @@ function function_b7a8db11(var_6e20f48) {
   e_light = undefined;
 
   switch (var_6e20f48) {
-    case # "tag_headlight_left_d0":
+    case #"tag_headlight_left_d0":
       e_light = self.var_68f755af[#"front_left"];
       break;
-    case # "tag_headlight_right_d0":
+    case #"tag_headlight_right_d0":
       e_light = self.var_68f755af[#"front_right"];
       break;
-    case # "tag_fx_tail_light_left":
+    case #"tag_fx_tail_light_left":
       e_light = self.var_68f755af[#"back_left"];
       break;
-    case # "tag_fx_tail_light_right":
+    case #"tag_fx_tail_light_right":
       e_light = self.var_68f755af[#"back_right"];
       break;
   }
@@ -603,12 +603,12 @@ function function_ccfab96() {
     waitresult = self waittill(["head_swap_none", "head_swap_normal", "head_swap_flappy"]);
 
     switch (waitresult._notify) {
-      case # "head_swap_none":
+      case #"head_swap_none":
         self detach(curr);
         curr = var_7e34c54c;
         self attach(curr);
         break;
-      case # "head_swap_normal":
+      case #"head_swap_normal":
         var_35d2e273++;
 
         if(var_35d2e273 == 1) {
@@ -626,7 +626,7 @@ function function_ccfab96() {
         }
 
         break;
-      case # "head_swap_flappy":
+      case #"head_swap_flappy":
         if(curr != flappy_head) {
           self detach(curr);
           curr = flappy_head;

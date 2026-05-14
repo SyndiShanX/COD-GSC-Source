@@ -371,10 +371,10 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
   }
 
   switch (smeansofdeath) {
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
-    case # "mod_impact":
+    case #"mod_impact":
       baseweapon = weapons::getbaseweapon(weapon);
 
       if(!weapon.isballisticknife && baseweapon != level.weaponspecialcrossbow && baseweapon != level.weaponflechette) {
@@ -395,29 +395,29 @@ isheadshot(weapon, shitloc, smeansofdeath, einflictor) {
 
 gethitlocheight(shitloc) {
   switch (shitloc) {
-    case # "head":
-    case # "helmet":
-    case # "neck":
+    case #"head":
+    case #"helmet":
+    case #"neck":
       return 60;
-    case # "left_arm_lower":
-    case # "left_arm_upper":
-    case # "torso_upper":
-    case # "right_arm_lower":
-    case # "left_hand":
-    case # "right_arm_upper":
-    case # "gun":
-    case # "right_hand":
+    case #"left_arm_lower":
+    case #"left_arm_upper":
+    case #"torso_upper":
+    case #"right_arm_lower":
+    case #"left_hand":
+    case #"right_arm_upper":
+    case #"gun":
+    case #"right_hand":
       return 48;
-    case # "torso_lower":
+    case #"torso_lower":
       return 40;
-    case # "right_leg_upper":
-    case # "left_leg_upper":
+    case #"right_leg_upper":
+    case #"left_leg_upper":
       return 32;
-    case # "left_leg_lower":
-    case # "right_leg_lower":
+    case #"left_leg_lower":
+    case #"right_leg_lower":
       return 10;
-    case # "left_foot":
-    case # "right_foot":
+    case #"left_foot":
+    case #"right_foot":
       return 5;
   }
 

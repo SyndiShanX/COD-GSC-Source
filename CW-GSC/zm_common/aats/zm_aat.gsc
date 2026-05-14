@@ -158,17 +158,17 @@ function function_ec7953fa() {
 
 function function_4b36d8a(aat_name = "none") {
   switch (aat_name) {
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
       return 1;
-    case # "ammomod_cryofreeze_1":
+    case #"ammomod_cryofreeze_1":
       return 2;
-    case # "ammomod_cryofreeze_2":
+    case #"ammomod_cryofreeze_2":
       return 3;
-    case # "ammomod_cryofreeze_3":
+    case #"ammomod_cryofreeze_3":
       return 4;
-    case # "ammomod_cryofreeze_4":
+    case #"ammomod_cryofreeze_4":
       return 5;
-    case # "ammomod_cryofreeze_5":
+    case #"ammomod_cryofreeze_5":
       return 6;
   }
 
@@ -177,17 +177,17 @@ function function_4b36d8a(aat_name = "none") {
 
 function function_9022de1(aat_name = "none") {
   switch (aat_name) {
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
       return 1;
-    case # "ammomod_napalmburst_1":
+    case #"ammomod_napalmburst_1":
       return 2;
-    case # "ammomod_napalmburst_2":
+    case #"ammomod_napalmburst_2":
       return 3;
-    case # "ammomod_napalmburst_3":
+    case #"ammomod_napalmburst_3":
       return 4;
-    case # "ammomod_napalmburst_4":
+    case #"ammomod_napalmburst_4":
       return 5;
-    case # "ammomod_napalmburst_5":
+    case #"ammomod_napalmburst_5":
       return 6;
   }
 
@@ -196,17 +196,17 @@ function function_9022de1(aat_name = "none") {
 
 function function_8bd7087d(aat_name = "none") {
   switch (aat_name) {
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
       return 1;
-    case # "ammomod_brainrot_1":
+    case #"ammomod_brainrot_1":
       return 2;
-    case # "ammomod_brainrot_2":
+    case #"ammomod_brainrot_2":
       return 3;
-    case # "ammomod_brainrot_3":
+    case #"ammomod_brainrot_3":
       return 4;
-    case # "ammomod_brainrot_4":
+    case #"ammomod_brainrot_4":
       return 5;
-    case # "ammomod_brainrot_5":
+    case #"ammomod_brainrot_5":
       return 6;
   }
 
@@ -215,17 +215,17 @@ function function_8bd7087d(aat_name = "none") {
 
 function function_eb854b26(aat_name = "none") {
   switch (aat_name) {
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       return 1;
-    case # "ammomod_deadwire_1":
+    case #"ammomod_deadwire_1":
       return 2;
-    case # "ammomod_deadwire_2":
+    case #"ammomod_deadwire_2":
       return 3;
-    case # "ammomod_deadwire_3":
+    case #"ammomod_deadwire_3":
       return 4;
-    case # "ammomod_deadwire_4":
+    case #"ammomod_deadwire_4":
       return 5;
-    case # "ammomod_deadwire_5":
+    case #"ammomod_deadwire_5":
       return 6;
   }
 
@@ -234,17 +234,17 @@ function function_eb854b26(aat_name = "none") {
 
 function function_ef10106(aat_name = "none") {
   switch (aat_name) {
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
       return 1;
-    case # "ammomod_shatterblast_1":
+    case #"ammomod_shatterblast_1":
       return 2;
-    case # "ammomod_shatterblast_2":
+    case #"ammomod_shatterblast_2":
       return 3;
-    case # "ammomod_shatterblast_3":
+    case #"ammomod_shatterblast_3":
       return 4;
-    case # "ammomod_shatterblast_4":
+    case #"ammomod_shatterblast_4":
       return 5;
-    case # "ammomod_shatterblast_5":
+    case #"ammomod_shatterblast_5":
       return 6;
   }
 
@@ -254,42 +254,42 @@ function function_ef10106(aat_name = "none") {
 function function_296cde87(aat_name) {
   if(isDefined(aat_name)) {
     switch (aat_name) {
-      case # "ammomod_cryofreeze":
-      case # "ammomod_cryofreeze_5":
-      case # "ammomod_cryofreeze_4":
-      case # "ammomod_cryofreeze_1":
-      case # "ammomod_cryofreeze_3":
-      case # "ammomod_cryofreeze_2":
+      case #"ammomod_cryofreeze":
+      case #"ammomod_cryofreeze_5":
+      case #"ammomod_cryofreeze_4":
+      case #"ammomod_cryofreeze_1":
+      case #"ammomod_cryofreeze_3":
+      case #"ammomod_cryofreeze_2":
         return "ammomod_cryofreeze";
-      case # "ammomod_napalmburst":
-      case # "ammomod_napalmburst_1":
-      case # "ammomod_napalmburst_2":
-      case # "ammomod_napalmburst_3":
-      case # "ammomod_napalmburst_4":
-      case # "ammomod_napalmburst_5":
+      case #"ammomod_napalmburst":
+      case #"ammomod_napalmburst_1":
+      case #"ammomod_napalmburst_2":
+      case #"ammomod_napalmburst_3":
+      case #"ammomod_napalmburst_4":
+      case #"ammomod_napalmburst_5":
         return "ammomod_napalmburst";
-      case # "ammomod_brainrot_4":
-      case # "ammomod_brainrot_5":
-      case # "ammomod_brainrot_1":
-      case # "ammomod_brainrot_2":
-      case # "ammomod_brainrot_3":
-      case # "ammomod_brainrot":
+      case #"ammomod_brainrot_4":
+      case #"ammomod_brainrot_5":
+      case #"ammomod_brainrot_1":
+      case #"ammomod_brainrot_2":
+      case #"ammomod_brainrot_3":
+      case #"ammomod_brainrot":
         return "ammomod_brainrot";
-      case # "ammomod_deadwire_2":
-      case # "ammomod_deadwire_3":
-      case # "ammomod_deadwire_1":
-      case # "ammomod_deadwire_4":
-      case # "ammomod_deadwire_5":
-      case # "ammomod_deadwire":
+      case #"ammomod_deadwire_2":
+      case #"ammomod_deadwire_3":
+      case #"ammomod_deadwire_1":
+      case #"ammomod_deadwire_4":
+      case #"ammomod_deadwire_5":
+      case #"ammomod_deadwire":
         return "ammomod_deadwire";
-      case # "ammomod_shatterblast":
-      case # "ammomod_shatterblast_4":
-      case # "ammomod_shatterblast_5":
-      case # "ammomod_shatterblast_1":
-      case # "ammomod_shatterblast_2":
-      case # "ammomod_shatterblast_3":
+      case #"ammomod_shatterblast":
+      case #"ammomod_shatterblast_4":
+      case #"ammomod_shatterblast_5":
+      case #"ammomod_shatterblast_1":
+      case #"ammomod_shatterblast_2":
+      case #"ammomod_shatterblast_3":
         return "ammomod_shatterblast";
-      case # "ammomod_electriccherry":
+      case #"ammomod_electriccherry":
         return "ammomod_electriccherry";
     }
   }
@@ -334,11 +334,11 @@ function function_3ac3c47e(name, now, attacker) {
 
 function function_6b15092(aat_name, damage, victim) {
   switch (aat_name) {
-    case # "ammomod_cryofreeze_5":
-    case # "ammomod_cryofreeze_4":
-    case # "ammomod_cryofreeze_1":
-    case # "ammomod_cryofreeze_3":
-    case # "ammomod_cryofreeze_2":
+    case #"ammomod_cryofreeze_5":
+    case #"ammomod_cryofreeze_4":
+    case #"ammomod_cryofreeze_1":
+    case #"ammomod_cryofreeze_3":
+    case #"ammomod_cryofreeze_2":
       if(is_true(victim.var_958cf9c5)) {
         damage += damage * 0.25;
       }
@@ -363,15 +363,15 @@ function function_14ccd92a(str_name) {
   }
 
   switch (str_name) {
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
       return self zm_stats::function_12b698fa(#"hash_63114aea3939d941");
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
       return self zm_stats::function_12b698fa(#"ammomod_napalmburst_tier");
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
       return self zm_stats::function_12b698fa(#"ammomod_brainrot_tier");
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       return self zm_stats::function_12b698fa(#"ammomod_deadwire_tier");
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
       return self zm_stats::function_12b698fa(#"hash_38f1aae51e2d5f58");
   }
 }
@@ -381,7 +381,7 @@ function function_f4f4730f(str_name) {
   tier = function_14ccd92a(str_name);
 
   switch (str_name) {
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
       switch (tier) {
         case 1:
           var_c1da9bb4 = "ammomod_brainrot_1";
@@ -401,7 +401,7 @@ function function_f4f4730f(str_name) {
       }
 
       break;
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
       switch (tier) {
         case 1:
           var_c1da9bb4 = "ammomod_cryofreeze_1";
@@ -421,7 +421,7 @@ function function_f4f4730f(str_name) {
       }
 
       break;
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       switch (tier) {
         case 1:
           var_c1da9bb4 = "ammomod_deadwire_1";
@@ -441,7 +441,7 @@ function function_f4f4730f(str_name) {
       }
 
       break;
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
       switch (tier) {
         case 1:
           var_c1da9bb4 = "ammomod_napalmburst_1";
@@ -461,7 +461,7 @@ function function_f4f4730f(str_name) {
       }
 
       break;
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
       switch (tier) {
         case 1:
           var_c1da9bb4 = "ammomod_shatterblast_1";

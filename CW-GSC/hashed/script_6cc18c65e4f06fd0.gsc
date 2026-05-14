@@ -624,24 +624,24 @@ function function_aa6f0550(str_state, var_a013c644) {
   }
 
   switch (str_state) {
-    case # "idle":
+    case #"idle":
     default:
       self.ai_state = "idle";
       self function_133bf8a7();
       break;
-    case # "slam":
+    case #"slam":
       self.ai_state = str_state;
       self function_c37dfa52(var_a013c644);
       break;
-    case # "swarm":
+    case #"swarm":
       self.ai_state = str_state;
       self function_75edf7ba();
       break;
-    case # "launcher":
+    case #"launcher":
       self.ai_state = str_state;
       self function_6afb3f4b();
       break;
-    case # "hit":
+    case #"hit":
       self.ai_state = str_state;
       self function_fee76e8f();
       break;
@@ -1008,13 +1008,13 @@ function function_386e82a(var_f6cc9550, var_25febefa) {
 function get_weapon_damage(inflictor, attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(killstreaks::is_killstreak_weapon(weapon) && isDefined(weapon.name)) {
     switch (weapon.name) {
-      case # "remote_missile_missile":
+      case #"remote_missile_missile":
         damage = 50000;
         break;
-      case # "napalm_strike":
+      case #"napalm_strike":
         damage = 10000;
         break;
-      case # "planemortar":
+      case #"planemortar":
         damage = 7000;
         break;
     }
@@ -1643,25 +1643,25 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_213591a3df24967d":
+    case #"hash_213591a3df24967d":
       level.var_cc4817d7 = "<dev string:x2dd>";
       break;
-    case # "hash_7b914ebf5b57c696":
+    case #"hash_7b914ebf5b57c696":
       level.var_cc4817d7 = "<dev string:x2e5>";
       break;
-    case # "hash_f72e94a26490fd7":
+    case #"hash_f72e94a26490fd7":
       level.var_cc4817d7 = "<dev string:x2ee>";
       break;
-    case # "hash_12274633230d3eb4":
+    case #"hash_12274633230d3eb4":
       level.var_cc4817d7 = "<dev string:x2fa>";
       break;
-    case # "hash_5de2ff5967070ea8":
+    case #"hash_5de2ff5967070ea8":
       level.var_cc4817d7 = "<dev string:x302>";
       break;
-    case # "hash_6ee66ab56d6217f6":
+    case #"hash_6ee66ab56d6217f6":
       level.var_cc4817d7 = undefined;
       break;
-    case # "hash_264ec163f16c435b":
+    case #"hash_264ec163f16c435b":
       level notify(#"hash_38f29f9cb03586ea");
       level notify(#"hash_3807e7b1086e4aa0");
       break;

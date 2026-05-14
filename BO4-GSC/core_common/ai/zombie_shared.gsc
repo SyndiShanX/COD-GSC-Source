@@ -224,34 +224,34 @@ handlenotetrack(note, flagname, customfunction, var1) {
   }
 
   switch (note) {
-    case # "undefined":
-    case # "end":
-    case # "finish":
+    case #"undefined":
+    case #"end":
+    case #"finish":
       return note;
-    case # "swish small":
+    case #"swish small":
       self thread sound::play_in_space("fly_gear_enemy", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "swish large":
+    case #"swish large":
       self thread sound::play_in_space("fly_gear_enemy_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "no death":
+    case #"no death":
       self.a.nodeath = 1;
       break;
-    case # "no pain":
+    case #"no pain":
       self.allowpain = 0;
       break;
-    case # "allow pain":
+    case #"allow pain":
       self.allowpain = 1;
       break;
-    case # "anim_melee = right":
-    case # "anim_melee = right":
+    case #"anim_melee = right":
+    case #"anim_melee = right":
       self.a.meleestate = "right";
       break;
-    case # "anim_melee = left":
-    case # "anim_melee = "left ":
+    case #"anim_melee = left":
+    case #"anim_melee = "left ":
     self.a.meleestate = "left";
     break;
-    case # "swap taghelmet to tagleft":
+    case #"swap taghelmet to tagleft":
       if(isDefined(self.hatmodel)) {
         if(isDefined(self.helmetsidemodel)) {
           self detach(self.helmetsidemodel, "TAG_HELMETSIDE");

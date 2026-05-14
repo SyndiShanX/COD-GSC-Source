@@ -418,10 +418,10 @@ function private function_44456e3f(var_e83c664a) {
 
   while(true) {
     switch (var_e83c664a) {
-      case # "top_rotor":
+      case #"top_rotor":
         self rotateyaw(self.rotate_speed, float(function_60d95f53()) / 1000);
         break;
-      case # "tail_rotor":
+      case #"tail_rotor":
         target_yaw = level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.angles[1];
 
         if(absangleclamp180(self.angles[1] - target_yaw) < 3) {
@@ -454,10 +454,10 @@ function private function_c60c6664(var_e83c664a) {
 
   while(self.rotate_speed > 0) {
     switch (var_e83c664a) {
-      case # "top_rotor":
+      case #"top_rotor":
         self rotateyaw(self.rotate_speed, float(function_60d95f53()) / 1000);
         break;
-      case # "tail_rotor":
+      case #"tail_rotor":
         target_yaw = level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.angles[1];
 
         if(absangleclamp180(self.angles[1] - target_yaw) < 3) {
@@ -707,14 +707,14 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_1f54a283b6613f19":
+    case #"hash_1f54a283b6613f19":
       if(!level flag::get(#"hash_3b32dd943e760a34")) {
         level.var_81aa2a00 array::thread_all(level.var_81aa2a00, &function_4eaecff9);
         level function_795e2881(function_a1ef346b()[0]);
       }
 
       break;
-    case # "hash_2ca5e689627176a0":
+    case #"hash_2ca5e689627176a0":
       if(level flag::get(#"hash_3b32dd943e760a34")) {
         level notify(#"hash_579f5585446dafb2");
         level flag::clear(#"hash_3b32dd943e760a34");

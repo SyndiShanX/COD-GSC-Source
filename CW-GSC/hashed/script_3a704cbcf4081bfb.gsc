@@ -388,28 +388,28 @@ function spawn_prop(spawn_loc, var_75f9ae2d, var_18840a20, var_1690a7c1 = 0) {
     }
 
     switch (itemspawnentry.rarity) {
-      case # "off":
+      case #"off":
         var_9bed58c1 = 0;
         break;
-      case # "resource":
+      case #"resource":
         var_9bed58c1 = 1;
         break;
-      case # "uncommon":
+      case #"uncommon":
         var_9bed58c1 = 2;
         break;
-      case # "rare":
+      case #"rare":
         var_9bed58c1 = 3;
         break;
-      case # "epic":
+      case #"epic":
         var_9bed58c1 = 4;
         break;
-      case # "legendary":
+      case #"legendary":
         var_9bed58c1 = 5;
         break;
-      case # "ultra":
+      case #"ultra":
         var_9bed58c1 = 6;
         break;
-      case # "loadout":
+      case #"loadout":
         var_9bed58c1 = 7;
         break;
       default:

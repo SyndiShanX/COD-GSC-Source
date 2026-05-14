@@ -584,16 +584,16 @@ office_devgui() {
     str_command = getdvarstring(#"zm_office_devgui_cmd", "<dev string:x1a9>");
 
     switch (str_command) {
-      case # "go_defcon5":
+      case #"go_defcon5":
         level thread zm_office_defcon::function_d2f6cecb();
         break;
-      case # "hash_721e1a59dcdbed92":
+      case #"hash_721e1a59dcdbed92":
         zm_office_groom_lake_quest::function_5642f347();
         break;
-      case # "hash_3b41cd4492082280":
+      case #"hash_3b41cd4492082280":
         zm_office_groom_lake_quest::function_f33d3ab5();
         break;
-      case # "enable_ww_crate":
+      case #"enable_ww_crate":
         level.s_ww_quest_reward zm_office_ww_quest::function_68f68bb4();
         break;
     }

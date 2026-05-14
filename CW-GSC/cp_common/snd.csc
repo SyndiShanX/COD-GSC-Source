@@ -66,14 +66,14 @@ function private function_8610d024(localclientnum, _cmd) {
     cmd = args[0];
 
     switch (cmd) {
-      case # "#":
-      case # "m":
+      case #"#":
+      case #"m":
         level thread function_21d71e38(player, cmd, args);
         break;
-      case # "t":
+      case #"t":
         level thread function_6d366059(player, cmd, args);
         break;
-      case # "v":
+      case #"v":
         level thread function_cc4bf5ee(player, cmd, args);
         break;
       default:
@@ -744,22 +744,22 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
   scalestring = undefined;
 
   switch (scalewhat) {
-    case # "volume":
-    case # "volume":
-    case # "v":
-    case # "v":
-    case # "vol":
-    case # "vol":
+    case #"volume":
+    case #"volume":
+    case #"v":
+    case #"v":
+    case #"vol":
+    case #"vol":
       curve = function_ea2f17d1(curve, "easeout");
       scalefunc = &function_5803da43;
       scalestring = "volume";
       var_e127d44f = math::clamp(value, var_7a9a68cb, var_69111be2);
       function_81fac19d(value != var_e127d44f, "snd_scale: clamped volume " + value + " -> " + var_e127d44f);
       break;
-    case # "p":
-    case # "p":
-    case # "pitch":
-    case # "pitch":
+    case #"p":
+    case #"p":
+    case #"pitch":
+    case #"pitch":
       curve = function_ea2f17d1(curve, "linear");
       scalefunc = &function_d7b79aea;
       scalestring = "pitch";

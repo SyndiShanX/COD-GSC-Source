@@ -42,25 +42,25 @@ function function_d500905a(localclientnum, oldval, newval, bnewent, binitialsnap
     if(!gibclientutils::isgibbed(fieldname, self, 8)) {
       if(isDefined(self.archetype)) {
         switch (self.archetype) {
-          case # "raz":
+          case #"raz":
             if(isDefined(self gettagorigin("j_head"))) {
               self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_raz_eye", self, "j_head");
             }
 
             break;
-          case # "avogadro":
+          case #"avogadro":
             if(isDefined(self gettagorigin("j_head"))) {
               self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_avo_eye", self, "j_head");
             }
 
             break;
-          case # "mimic":
+          case #"mimic":
             if(isDefined(self gettagorigin("j_head"))) {
               self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_mimic_eye", self, "j_head");
             }
 
             break;
-          case # "zombie_dog":
+          case #"zombie_dog":
             if(isDefined(self gettagorigin("j_eyeball_le"))) {
               if(self.subarchetype === #"hash_28e36e7b7d5421f") {
                 self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_hound_hell_eye", self, "j_eyeball_le");

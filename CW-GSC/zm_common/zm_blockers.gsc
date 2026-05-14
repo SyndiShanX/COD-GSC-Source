@@ -334,7 +334,7 @@ function door_classify(parent_trig) {
     }
 
     switch (self.script_string) {
-      case # "anim":
+      case #"anim":
         assert(isDefined(self.script_animname), "<dev string:x38>" + self.targetname);
         assert(isDefined(level.scr_anim[self.script_animname]), "<dev string:x71>" + self.script_animname);
         assert(isDefined(level.blocker_anim_func), "<dev string:xb7>");
@@ -611,7 +611,7 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
   }
 
   switch (self.script_string) {
-    case # "rotate":
+    case #"rotate":
       if(isDefined(self.script_angles)) {
         self setforcenocull();
         rot_angle = self.script_angles;
@@ -632,8 +632,8 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "move":
-    case # "slide_apart":
+    case #"move":
+    case #"slide_apart":
       if(isDefined(self.script_vector)) {
         vector = vectorscale(self.script_vector, scale);
 
@@ -652,19 +652,19 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
 
       wait randomfloat(0.15);
       break;
-    case # "anim":
+    case #"anim":
       self[[level.blocker_anim_func]](self.script_animname);
       self thread door_solid_thread_anim();
       wait randomfloat(0.15);
       break;
-    case # "physics":
+    case #"physics":
       self thread physics_launch_door(self);
       wait 0.1;
       break;
-    case # "zbarrier":
+    case #"zbarrier":
       self thread door_zbarrier_move();
       break;
-    case # "dynamite":
+    case #"dynamite":
       if(is_true(self.var_4ef01794) && open) {
         bomb = util::spawn_model(#"p9_fxanim_zm_ndu_essence_bomb_body_mod", self.origin, self.angles);
         bomb playSound(#"hash_1c30789401e4a67a");
@@ -915,7 +915,7 @@ function waittill_door_can_close() {
   a_trigs = getEntArray(self.target, "target");
 
   switch (self.script_noteworthy) {
-    case # "local_electric_door":
+    case #"local_electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_local_power_off(trigger, a_trigs);
         self thread kill_trapped_zombies(trigger);
@@ -927,7 +927,7 @@ function waittill_door_can_close() {
       }
 
       return;
-    case # "electric_door":
+    case #"electric_door":
       if(isDefined(trigger) || isDefined(a_trigs)) {
         self waittill_door_trigger_clear_global_power_off(trigger, a_trigs);
 
@@ -953,7 +953,7 @@ function door_think() {
 
   while(true) {
     switch (self.script_noteworthy) {
-      case # "local_electric_door":
+      case #"local_electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") === 0) {
           return;
         }
@@ -991,7 +991,7 @@ function door_think() {
         self sethintstring(#"hash_671e980430950a22");
         wait 3;
         continue;
-      case # "electric_door":
+      case #"electric_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") === 0) {
           return;
         }
@@ -1034,7 +1034,7 @@ function door_think() {
         self thread function_dafd2e5a();
         wait 3;
         continue;
-      case # "electric_buyable_door":
+      case #"electric_buyable_door":
         if(zm_custom::function_901b751c(#"zmpowerdoorstate") === 0) {
           return;
         }
@@ -1050,7 +1050,7 @@ function door_think() {
         }
 
         break;
-      case # "delay_door":
+      case #"delay_door":
         if(!self door_buy()) {
           continue;
         }

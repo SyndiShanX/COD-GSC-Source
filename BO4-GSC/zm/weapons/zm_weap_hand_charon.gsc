@@ -451,9 +451,9 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
     [[level.var_844d377c]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         if(isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 666;
         }
@@ -471,10 +471,10 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
         }
 
         break;
-      case # "heavy":
+      case #"heavy":
         e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
         break;
-      case # "miniboss":
+      case #"miniboss":
         e_target clientfield::increment("" + #"charon_zombie_impact");
         n_damage = int(n_damage * 0.3);
         e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
@@ -488,7 +488,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
         }
 
         break;
-      case # "boss":
+      case #"boss":
         if(!isactor(e_target)) {
           e_target clientfield::set("" + #"charon_impact", 1);
         }
@@ -704,19 +704,19 @@ function_249b5556(n_damage) {
           }
 
           switch (ai_zombie.zm_ai_category) {
-            case # "popcorn":
-            case # "basic":
-            case # "enhanced":
+            case #"popcorn":
+            case #"basic":
+            case #"enhanced":
               ai_zombie.var_47d982a1 = 1;
               ai_zombie thread function_ccd87945(self);
               ai_zombie thread namespace_9ff9f642::slowdown(#"charon_slowdown_time");
               break;
-            case # "heavy":
+            case #"heavy":
               ai_zombie.var_47d982a1 = 1;
               self thread charon_slow(ai_zombie, n_damage);
               ai_zombie thread function_da454404();
               break;
-            case # "miniboss":
+            case #"miniboss":
               ai_zombie.var_47d982a1 = 1;
               self thread charon_slow(ai_zombie, n_damage);
               ai_zombie thread function_da454404();

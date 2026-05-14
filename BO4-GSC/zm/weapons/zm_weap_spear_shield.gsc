@@ -107,9 +107,9 @@ function_dcdaf81c(weapon, riotshield_knockdown_range, riotshield_gib_range, riot
     }
 
     switch (ai_enemy.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         var_d3f92d4d = 30;
         break;
       default:
@@ -228,9 +228,9 @@ function_376cd4f6(weapon) {
 
   foreach(ai_enemy in level.var_21ffc192) {
     switch (ai_enemy.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         var_d3f92d4d = zombie_utility::get_zombie_var(#"hash_bfdf728041b626a");
         break;
       default:

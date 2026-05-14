@@ -99,16 +99,16 @@ function function_8eabba5() {
 
       foreach(value in values) {
         switch (value) {
-          case # "permanent":
+          case #"permanent":
             self.permanent = 1;
             break;
-          case # "start_active":
+          case #"start_active":
             self.start_active = 1;
             break;
-          case # "hash_4ce8ffa2208104d1":
+          case #"hash_4ce8ffa2208104d1":
             self.var_8c524d0b = 1;
             break;
-          case # "hash_6bc7f996db1c551e":
+          case #"hash_6bc7f996db1c551e":
             self.var_43db0d3e = 1;
             break;
           default:
@@ -674,7 +674,7 @@ function function_6410533e(obj_struct) {
 
   foreach(token in obj_struct.var_3803ef1e) {
     switch (token) {
-      case # "search_area":
+      case #"search_area":
         obj_struct.var_dffd37e7 = 1;
 
         if(isDefined(obj_struct.target)) {
@@ -686,16 +686,16 @@ function function_6410533e(obj_struct) {
         }
 
         break;
-      case # "optional":
+      case #"optional":
         obj_struct.optional_obj = 1;
         break;
-      case # "on_ai":
+      case #"on_ai":
         obj_struct.on_ai = 1;
         break;
-      case # "hash_56311e749da142f":
+      case #"hash_56311e749da142f":
         obj_struct.var_262caa7f = 1;
         break;
-      case # "force_remove":
+      case #"force_remove":
         obj_struct.force_remove = 1;
         break;
       default:

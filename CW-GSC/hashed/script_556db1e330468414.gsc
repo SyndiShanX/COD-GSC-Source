@@ -259,16 +259,16 @@ function function_fc37bb4f(str_type) {
   self endon(#"death");
 
   switch (str_type) {
-    case # "active":
+    case #"active":
       self playSound(#"hash_1b7654f4f0a7838");
       self playLoopSound(#"hash_1b70ba6d6b31bb21");
       break;
-    case # "break":
+    case #"break":
       self stoploopsound();
       waitframe(1);
       self playSound(#"hash_4edec6e285df4ad8");
       break;
-    case # "inactive":
+    case #"inactive":
       self stoploopsound();
       waitframe(1);
       self playSound(#"hash_48c691f36c44892c");

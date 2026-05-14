@@ -2328,10 +2328,10 @@ function_943c98fb(insertion) {
     start_insertion = 0;
 
     switch (string) {
-      case # "start_insertion":
+      case #"start_insertion":
         start_insertion = 1;
         break;
-      case # "repath_flight":
+      case #"repath_flight":
         insertion on_finalize_initialization();
       default:
         break;

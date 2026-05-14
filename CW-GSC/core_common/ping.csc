@@ -1087,13 +1087,13 @@ function private function_b7306aa(local_client_num, unique_id, event_type, locat
 
         if(isDefined(category)) {
           switch (category) {
-            case # "boss":
+            case #"boss":
               var_52c78c2c = #"hash_2238f6ae2f9c8847";
               break;
-            case # "elite":
+            case #"elite":
               var_52c78c2c = #"hash_75c2910f28185f25";
               break;
-            case # "special":
+            case #"special":
               var_52c78c2c = #"hash_34a0c6f7267b8ba5";
               break;
           }

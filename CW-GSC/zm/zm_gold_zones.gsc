@@ -452,97 +452,97 @@ function function_27028b8e(str_zone) {
   }
 
   switch (str_zone) {
-    case # "zone_village3":
-    case # "zone_village2":
-    case # "zone_village":
+    case #"zone_village3":
+    case #"zone_village2":
+    case #"zone_village":
       str_display = #"hash_1a784c62f3f40a7c";
       break;
-    case # "zone_village_house":
+    case #"zone_village_house":
       str_display = #"hash_712a00f5a89f306c";
       break;
-    case # "zone_portal_transfer":
+    case #"zone_portal_transfer":
       str_display = #"hash_435a0098fb8df5e4";
       break;
-    case # "zone_atrium":
+    case #"zone_atrium":
       str_display = #"hash_7f333ea55aeef7fe";
       break;
-    case # "zone_scientist":
+    case #"zone_scientist":
       str_display = #"hash_6e2fe33d2742e702";
       break;
-    case # "zone_peck_quarters":
+    case #"zone_peck_quarters":
       str_display = #"hash_475dca43d660d1cb";
       break;
-    case # "zone_firebase":
-    case # "zone_firebase3":
-    case # "zone_firebase2":
+    case #"zone_firebase":
+    case #"zone_firebase3":
+    case #"zone_firebase2":
       str_display = #"hash_5c666bba11ef5ae5";
       break;
-    case # "zone_lot":
+    case #"zone_lot":
       str_display = #"hash_4e1d8a30f4ea2f2b";
       break;
-    case # "zone_armory2":
-    case # "zone_armory":
+    case #"zone_armory2":
+    case #"zone_armory":
       str_display = #"hash_3cc28115aef8d6f6";
       break;
-    case # "zone_chopper_gunner":
+    case #"zone_chopper_gunner":
       str_display = #"hash_3a39c1a8fe2b4634";
       break;
-    case # "zone_chopper_gunner2":
+    case #"zone_chopper_gunner2":
       str_display = #"hash_6a4e6de3fc04ec43";
       break;
-    case # "zone_chopper_gunner3":
+    case #"zone_chopper_gunner3":
       str_display = #"hash_11c2394ea2e2d131";
       break;
-    case # "zone_trenches":
+    case #"zone_trenches":
       str_display = #"hash_5194b7f4cbf03b5e";
       break;
-    case # "zone_trenches_office":
+    case #"zone_trenches_office":
       str_display = #"hash_2b4cf31f8f6bf7e6";
       break;
-    case # "zone_trenches_garage":
+    case #"zone_trenches_garage":
       str_display = #"hash_452e2000b54dc76f";
       break;
-    case # "zone_tents2":
-    case # "zone_tents":
+    case #"zone_tents2":
+    case #"zone_tents":
       str_display = #"hash_7c1689ac620afc8a";
       break;
-    case # "zone_tents_a":
+    case #"zone_tents_a":
       str_display = #"hash_481096036403fa63";
       break;
-    case # "zone_tents_b":
+    case #"zone_tents_b":
       str_display = #"hash_481097036403fc16";
       break;
-    case # "zone_artillery_strike2":
-    case # "zone_artillery_strike":
+    case #"zone_artillery_strike2":
+    case #"zone_artillery_strike":
       str_display = #"hash_6412a219d050bd95";
       break;
-    case # "zone_rocky_slope_defend":
+    case #"zone_rocky_slope_defend":
       str_display = #"hash_6b7c9e9fcdc2d4f5";
       break;
-    case # "zone_napalm_strike":
-    case # "zone_napalm_strike2":
+    case #"zone_napalm_strike":
+    case #"zone_napalm_strike2":
       str_display = #"hash_2c0516d13ededf0c";
       break;
-    case # "hash_3dcad3b850818581":
+    case #"hash_3dcad3b850818581":
       str_display = #"hash_3020c93a3f65deed";
       break;
-    case # "zone_burnt_forest_defend":
+    case #"zone_burnt_forest_defend":
       str_display = #"hash_49e45240b857b096";
       break;
-    case # "zone_hillside_road_defend":
+    case #"zone_hillside_road_defend":
       str_display = #"hash_1159d5e7f96b57cc";
       break;
-    case # "zone_opc":
-    case # "zone_opc_room":
+    case #"zone_opc":
+    case #"zone_opc_room":
       str_display = #"hash_67b0f231034932d8";
       break;
-    case # "zone_field_hospital":
+    case #"zone_field_hospital":
       str_display = #"hash_5387a0350fe7780b";
       break;
-    case # "zone_walkway":
+    case #"zone_walkway":
       str_display = #"hash_2aa69d05c4cff89c";
       break;
-    case # "zone_weapon_lab":
+    case #"zone_weapon_lab":
       str_display = #"hash_42192a6d158c852c";
       break;
     default:

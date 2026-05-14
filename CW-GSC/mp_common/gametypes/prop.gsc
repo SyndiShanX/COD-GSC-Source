@@ -1609,19 +1609,19 @@ function getpropsize(propsizetext) {
   propsize = 0;
 
   switch (propsizetext) {
-    case # "xsmall":
+    case #"xsmall":
       propsize = 50;
       break;
-    case # "small":
+    case #"small":
       propsize = 75;
       break;
-    case # "medium":
+    case #"medium":
       propsize = 150;
       break;
-    case # "large":
+    case #"large":
       propsize = 250;
       break;
-    case # "xlarge":
+    case #"xlarge":
       propsize = 350;
       break;
     default:

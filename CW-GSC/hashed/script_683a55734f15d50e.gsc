@@ -442,7 +442,7 @@ function function_389aad25(item, type) {
 
 function function_d2c582ec(origin, var_9e20508c, radius, reward, flag) {
   switch (flag) {
-    case # "treasure_horde_plus":
+    case #"treasure_horde_plus":
       namespace_dfc652ee::function_d06cbfe8(var_9e20508c, radius >> 1, reward);
 
       if(randomint(100) < 20) {
@@ -452,32 +452,32 @@ function function_d2c582ec(origin, var_9e20508c, radius, reward, flag) {
       if(randomint(100) < 10) {
         namespace_dfc652ee::function_ad7ac41b(var_9e20508c, 1, 32, 14, 1);
       }
-    case # "treasure_horde":
+    case #"treasure_horde":
       namespace_dfc652ee::function_68442ee7(var_9e20508c, radius, reward, 1);
       namespace_dfc652ee::function_d06cbfe8(var_9e20508c, radius >> 2, reward);
-    case # "treasure":
+    case #"treasure":
       namespace_dfc652ee::function_68442ee7(var_9e20508c, radius, reward);
       break;
-    case # "extralife":
+    case #"extralife":
       namespace_dfc652ee::function_ad7ac41b(var_9e20508c, radius, 32, 16, 1);
       break;
-    case # "boost":
+    case #"boost":
       namespace_dfc652ee::function_ad7ac41b(var_9e20508c, radius, 32, 9, 1);
       break;
-    case # "nuke":
+    case #"nuke":
       namespace_dfc652ee::function_ad7ac41b(var_9e20508c, radius, 32, 8, 1);
       break;
-    case # "chickens":
+    case #"chickens":
       namespace_dfc652ee::function_ad7ac41b(var_9e20508c, radius, 32, 15, 1);
       break;
-    case # "items":
+    case #"items":
       while(radius) {
         radius--;
         function_e2b14b6(var_9e20508c + (randomintrange(-60, 60), randomintrange(-60, 60), 0), (0, 0, 0));
       }
 
       break;
-    case # "weapon_cache":
+    case #"weapon_cache":
       var_d7d0ebdd = namespace_dfc652ee::function_57160cba(6);
       namespace_dfc652ee::itemspawn(var_d7d0ebdd, var_9e20508c + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
       namespace_dfc652ee::itemspawn(var_d7d0ebdd, var_9e20508c + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);

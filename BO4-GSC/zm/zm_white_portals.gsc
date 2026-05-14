@@ -634,82 +634,82 @@ portal_init() {
   }
 
   switch (self.script_noteworthy) {
-    case # "portal_yellow_backyard":
+    case #"portal_yellow_backyard":
       self.var_7b89ada3 = 0;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_yellow_house":
+    case #"portal_yellow_house":
       self.var_7b89ada3 = 1;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_red_house":
+    case #"portal_red_house":
       self.var_7b89ada3 = 2;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_green_house":
+    case #"portal_green_house":
       self.var_7b89ada3 = 3;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_green_backyard":
+    case #"portal_green_backyard":
       self.var_7b89ada3 = 4;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_street_mid":
+    case #"portal_street_mid":
       self.var_7b89ada3 = 5;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_street_start":
+    case #"portal_street_start":
       self.var_7b89ada3 = 6;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_prisoner_holding":
+    case #"portal_prisoner_holding":
       self.var_7b89ada3 = 7;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_operations":
+    case #"portal_operations":
       self.var_7b89ada3 = 8;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_transfusion_facility":
+    case #"portal_transfusion_facility":
       self.var_7b89ada3 = 9;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_apd_interrogation":
+    case #"portal_apd_interrogation":
       self.var_7b89ada3 = 10;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case # "portal_diner":
+    case #"portal_diner":
       self.var_7b89ada3 = 11;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case # "portal_beds":
+    case #"portal_beds":
       self.var_7b89ada3 = 12;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case # "portal_lounge":
+    case #"portal_lounge":
       self.var_7b89ada3 = 13;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case # "portal_power":
+    case #"portal_power":
       self.var_7b89ada3 = 14;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case # "portal_storage":
+    case #"portal_storage":
       self.var_7b89ada3 = 15;
       self.n_floor = 2;
       self.e_model hide();
@@ -945,34 +945,34 @@ function_3566160b(str_location, n_newval) {
   str_clientfield = "";
 
   switch (str_location) {
-    case # "portal_yellow_house":
+    case #"portal_yellow_house":
       str_clientfield = "portal_map_indicator_yellow_house";
       break;
-    case # "portal_red_house":
+    case #"portal_red_house":
       str_clientfield = "portal_map_indicator_red_house";
       break;
-    case # "portal_green_backyard":
+    case #"portal_green_backyard":
       str_clientfield = "portal_map_indicator_green_house_backyard";
       break;
-    case # "portal_street_mid":
+    case #"portal_street_mid":
       str_clientfield = "portal_map_indicator_street_middle";
       break;
-    case # "portal_prisoner_holding":
+    case #"portal_prisoner_holding":
       str_clientfield = "portal_map_indicator_prisoner_holding";
       break;
-    case # "portal_transfusion_facility":
+    case #"portal_transfusion_facility":
       str_clientfield = "portal_map_indicator_transfusion_facility";
       break;
-    case # "portal_diner":
+    case #"portal_diner":
       str_clientfield = "portal_map_indicator_diner";
       break;
-    case # "portal_beds":
+    case #"portal_beds":
       str_clientfield = "portal_map_indicator_beds";
       break;
-    case # "portal_power":
+    case #"portal_power":
       str_clientfield = "portal_map_indicator_power";
       break;
-    case # "portal_storage":
+    case #"portal_storage":
       str_clientfield = "portal_map_indicator_storage";
       break;
   }

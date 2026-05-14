@@ -111,11 +111,11 @@ function function_df36a02d(attacker, weapon, mod) {
     weaponclass = util::getweaponclass(weapon);
 
     switch (weaponclass) {
-      case # "weapon_knife":
+      case #"weapon_knife":
         var_f2c36eba = #"hash_49b586d05aaa0209";
         var_22938e87 = #"kills";
         break;
-      case # "weapon_launcher":
+      case #"weapon_launcher":
         var_f2c36eba = #"hash_67536f932f6aeb36";
         var_22938e87 = #"hash_497df827743010c3";
         break;
@@ -1306,11 +1306,11 @@ function private function_b029639e(attacker, weapon, smeansofdeath, shitloc) {
   }
 
   switch (weapon.name) {
-    case # "dog_bite":
+    case #"dog_bite":
       return "MOD_PISTOL_BULLET";
-    case # "destructible_car":
+    case #"destructible_car":
       return "MOD_EXPLOSIVE";
-    case # "explodable_barrel":
+    case #"explodable_barrel":
       return "MOD_EXPLOSIVE";
   }
 
@@ -1727,11 +1727,11 @@ function function_f632c17e(weapon) {
   }
 
   switch (weapon.name) {
-    case # "ar_accurate_t8_swat":
-    case # "hash_17df39d53492b0bf":
-    case # "tank_robot_launcher_turret":
-    case # "ac130_chaingun":
-    case # "hash_7b24d0d0d2823bca":
+    case #"ar_accurate_t8_swat":
+    case #"hash_17df39d53492b0bf":
+    case #"tank_robot_launcher_turret":
+    case #"ac130_chaingun":
+    case #"hash_7b24d0d0d2823bca":
       return true;
   }
 

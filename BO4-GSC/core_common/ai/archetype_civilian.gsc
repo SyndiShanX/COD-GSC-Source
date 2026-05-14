@@ -77,17 +77,17 @@ function_686ab596() {
 
     foreach(ai in ais) {
       switch (debug_civ_mode) {
-        case # "riot":
+        case #"riot":
           ai::setaiattribute(ai, #"_civ_mode", "riot");
           ai setteam(#"team3");
           break;
-        case # "panic":
+        case #"panic":
           ai::setaiattribute(ai, #"_civ_mode", "panic");
           break;
-        case # "calm":
+        case #"calm":
           ai::setaiattribute(ai, #"_civ_mode", "calm");
           break;
-        case # "run":
+        case #"run":
           ai::setaiattribute(ai, #"_civ_mode", "run");
           break;
         default:

@@ -28,9 +28,9 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 
@@ -47,31 +47,31 @@ function music(str_msg, n_delay = 0) {
 
 function function_7edafa59(str_msg, n_delay) {
   switch (str_msg) {
-    case # "hash_2ee5843b582dba8":
-    case # "hash_e896bbfc4467554":
-    case # "7.0_combat_3":
-    case # "hash_168af7f88044b6ce":
-    case # "hash_3298180a203dc742":
-    case # "8.0_ireadyou":
-    case # "hash_58f346e277c63b97":
-    case # "hash_5905b34ca4b2af82":
-    case # "hash_5b9d3c7755ed2641":
-    case # "6.0_tunnel":
-    case # "10.0_surveying":
-    case # "11.0_dig_site":
-    case # "9.0_reunited":
-    case # "11.2_airlift":
-    case # "hash_7f14e478924d3d3f":
+    case #"hash_2ee5843b582dba8":
+    case #"hash_e896bbfc4467554":
+    case #"7.0_combat_3":
+    case #"hash_168af7f88044b6ce":
+    case #"hash_3298180a203dc742":
+    case #"8.0_ireadyou":
+    case #"hash_58f346e277c63b97":
+    case #"hash_5905b34ca4b2af82":
+    case #"hash_5b9d3c7755ed2641":
+    case #"6.0_tunnel":
+    case #"10.0_surveying":
+    case #"11.0_dig_site":
+    case #"9.0_reunited":
+    case #"11.2_airlift":
+    case #"hash_7f14e478924d3d3f":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "hash_ce25a6502e59743":
-    case # "hash_356eaedb9f6c3dc3":
+    case #"hash_ce25a6502e59743":
+    case #"hash_356eaedb9f6c3dc3":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "hash_2193c42e21ea2e63":
+    case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "hash_77247bb51de4a650":
+    case #"hash_77247bb51de4a650":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -84,19 +84,19 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "hash_58f346e277c63b97":
+    case #"hash_58f346e277c63b97":
       snd::client_msg(#"musictrack_cp_yamantau_1");
       break;
-    case # "hash_7f14e478924d3d3f":
+    case #"hash_7f14e478924d3d3f":
       snd::client_msg(#"musictrack_cp_yamantau_2");
       break;
-    case # "6.0_tunnel":
+    case #"6.0_tunnel":
       snd::client_msg(#"musictrack_cp_yamantau_3");
       break;
-    case # "10.0_surveying":
+    case #"10.0_surveying":
       snd::client_msg(#"musictrack_cp_yamantau_4");
       break;
-    case # "11.0_dig_site":
+    case #"11.0_dig_site":
       snd::client_msg(#"musictrack_cp_yamantau_5");
       break;
   }

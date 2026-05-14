@@ -104,13 +104,13 @@ function_4dc96e66() {
 
 function_13febd4b(e_holder, w_item) {
   switch (w_item.name) {
-    case # "zitem_orange_zipline_crank_part_1":
+    case #"zitem_orange_zipline_crank_part_1":
       level.var_1537d233++;
       level flag::set(#"hash_7d230fa8f283c105");
       level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_crank_1", 1);
       self playSound(#"hash_3ec95ad193e1c377");
       break;
-    case # "zitem_orange_zipline_crank_part_2":
+    case #"zitem_orange_zipline_crank_part_2":
       level.var_1537d233++;
       level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_crank_2", 1);
       self playSound(#"hash_3ec95ad193e1c377");
@@ -390,27 +390,27 @@ function_d41f7e0e() {
     }
 
     switch (self.str_location) {
-      case # "aft_to_beach":
+      case #"aft_to_beach":
         if(!level flag::get(#"hash_7def3e555eba842c")) {
           continue;
         } else {
           break;
         }
-      case # "lighthouse_to_fore":
+      case #"lighthouse_to_fore":
         if(!level flag::get(#"hash_e29d662bb90e4bc")) {
           continue;
         } else {
           break;
         }
-      case # "station_to_sun_deck":
+      case #"station_to_sun_deck":
         if(!level flag::get(#"zipline_handle_picked_up")) {
           continue;
         } else {
           break;
         }
-      case # "dock":
-      case # "lighthouse_to_facility":
-      case # "fore":
+      case #"dock":
+      case #"lighthouse_to_facility":
+      case #"fore":
         if(!level flag::get(#"zipline_handle_picked_up")) {
           continue;
         } else {
@@ -604,11 +604,11 @@ function_fc9707f4(vnd_start, s_zipline_use) {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case # "crouch":
+      case #"crouch":
         self setstance("stand");
         wait 0.2;
         break;
-      case # "prone":
+      case #"prone":
         self setstance("stand");
         wait 1;
         break;

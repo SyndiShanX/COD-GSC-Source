@@ -203,10 +203,10 @@ function_f118c57a(e_player) {
     }
 
     switch (self.script_string) {
-      case # "sequential":
+      case #"sequential":
         self function_193dbfbb();
         break;
-      case # "moving":
+      case #"moving":
         self function_6ae39b5();
         break;
     }

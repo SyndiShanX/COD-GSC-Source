@@ -976,30 +976,30 @@ white_devgui() {
     str_command = getdvarstring(#"zm_white_devgui_cmd", "<dev string:x413>");
 
     switch (str_command) {
-      case # "spawn_all_perks":
+      case #"spawn_all_perks":
         level.spawn_all_perks = 1;
         break;
-      case # "start_lgt_exp":
+      case #"start_lgt_exp":
         level flag::set("<dev string:x416>");
         break;
-      case # "hash_121e505482adfe21":
+      case #"hash_121e505482adfe21":
         level flag::set("<dev string:x427>");
         break;
-      case # "hash_51413ff43d5ac5eb":
+      case #"hash_51413ff43d5ac5eb":
         level flag::set("<dev string:x437>");
         break;
-      case # "hash_3a77444633569cdc":
+      case #"hash_3a77444633569cdc":
         level flag::clear("<dev string:x437>");
         break;
-      case # "enable_soul_fill":
+      case #"enable_soul_fill":
         iprintln("<dev string:x444>");
         level flag::set(#"soul_fill");
         break;
-      case # "disable_soul_fill":
+      case #"disable_soul_fill":
         iprintln("<dev string:x462>");
         level flag::clear(#"soul_fill");
         break;
-      case # "start_insanity_mode":
+      case #"start_insanity_mode":
         if(zm_utility::is_ee_enabled()) {
           zm_sq::function_87306f8a(#"insanity_mode", #"step_6");
         } else {
@@ -1007,11 +1007,11 @@ white_devgui() {
         }
 
         break;
-      case # "hash_ab401b43ac65b13":
+      case #"hash_ab401b43ac65b13":
         iprintln("<dev string:x481>");
         level flag::set(#"keypad_debug");
         break;
-      case # "hash_310aefbe028b9475":
+      case #"hash_310aefbe028b9475":
         iprintln("<dev string:x49e>");
         zm_white_population_count::function_3134b684();
         break;

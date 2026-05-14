@@ -79,11 +79,11 @@ electric_switch() {
         master_switch = ent;
 
         switch (ent.script_noteworthy) {
-          case # "elec_switch":
+          case #"elec_switch":
             break;
-          case # "hash_47bde376753a03c9":
+          case #"hash_47bde376753a03c9":
             break;
-          case # "artifact_mind":
+          case #"artifact_mind":
             break;
         }
       }
@@ -99,7 +99,7 @@ electric_switch() {
   while(isDefined(self)) {
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy) && !(isDefined(self.var_1d2fecd6) && self.var_1d2fecd6)) {
       switch (master_switch.script_noteworthy) {
-        case # "elec_switch":
+        case #"elec_switch":
           if(function_8b1a219a()) {
             self sethintstring(#"hash_5c4125d53451e888");
           } else {
@@ -107,7 +107,7 @@ electric_switch() {
           }
 
           break;
-        case # "hash_47bde376753a03c9":
+        case #"hash_47bde376753a03c9":
           if(function_8b1a219a()) {
             self sethintstring(#"hash_5c4125d53451e888");
           } else {
@@ -115,7 +115,7 @@ electric_switch() {
           }
 
           break;
-        case # "artifact_mind":
+        case #"artifact_mind":
           level waittill(#"player_spawned");
 
           if(function_8b1a219a()) {
@@ -149,13 +149,13 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case # "elec_switch":
+        case #"elec_switch":
           elec_switch_on(master_switch, fx_pos);
           break;
-        case # "hash_47bde376753a03c9":
+        case #"hash_47bde376753a03c9":
           function_9d9892d2(master_switch);
           break;
-        case # "artifact_mind":
+        case #"artifact_mind":
           artifact_mind_on(master_switch, fx_pos, user);
           break;
       }
@@ -179,7 +179,7 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case # "elec_switch":
+        case #"elec_switch":
           self sethintstring(#"zombie/electric_switch_off");
           break;
       }
@@ -193,7 +193,7 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case # "elec_switch":
+        case #"elec_switch":
           elec_switch_off(master_switch);
           break;
       }

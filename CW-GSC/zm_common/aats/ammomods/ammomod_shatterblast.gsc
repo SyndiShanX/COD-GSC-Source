@@ -39,18 +39,18 @@ function init_shatterblast() {
 
 function private function_93e5316a(aat_name = "ammomod_shatterblast") {
   switch (aat_name) {
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
     default:
       return 0;
-    case # "ammomod_shatterblast_1":
+    case #"ammomod_shatterblast_1":
       return 1;
-    case # "ammomod_shatterblast_2":
+    case #"ammomod_shatterblast_2":
       return 2;
-    case # "ammomod_shatterblast_3":
+    case #"ammomod_shatterblast_3":
       return 3;
-    case # "ammomod_shatterblast_4":
+    case #"ammomod_shatterblast_4":
       return 4;
-    case # "ammomod_shatterblast_5":
+    case #"ammomod_shatterblast_5":
       return 5;
   }
 

@@ -486,14 +486,14 @@ function function_a6b0904f() {
   self.flashlightoverride = 1;
 
   switch (self.script_noteworthy) {
-    case # "hash_7d70595d438ed901":
+    case #"hash_7d70595d438ed901":
       level.var_59b550c1 = self;
       self thread function_f2f99070();
       break;
-    case # "hash_7d70565d438ed3e8":
+    case #"hash_7d70565d438ed3e8":
       level.var_9872ce3b = self;
       break;
-    case # "hash_7d70575d438ed59b":
+    case #"hash_7d70575d438ed59b":
       level.var_a7316bb8 = self;
       break;
   }
@@ -585,22 +585,22 @@ function function_7219a1eb() {
   self.goalradius = 1;
 
   switch (self.targetname) {
-    case # "hash_375eddf303f2f9c5":
+    case #"hash_375eddf303f2f9c5":
       level.var_da677ee8 = self;
       self thread function_4e03739a();
       self thread function_da677ee8();
       self thread function_5eb57821();
       break;
-    case # "left_platform_guy_3":
+    case #"left_platform_guy_3":
       level.var_a8b99b8d = self;
       self thread function_a8b99b8d();
       break;
-    case # "left_platform_guy_1":
+    case #"left_platform_guy_1":
       level.var_f3608e6d = self;
       self.var_c681e4c1 = 1;
       self flag::set("push_immune");
       break;
-    case # "left_platform_guy_2":
+    case #"left_platform_guy_2":
       level.var_247ff0ab = self;
       self.var_c681e4c1 = 1;
       self flag::set("push_immune");
@@ -863,13 +863,13 @@ function function_78d10ca2() {
     result = level waittill(#"hash_a52424b9eaac1c5");
 
     switch (result.bundle) {
-      case # "hash_ac30731e7561675":
+      case #"hash_ac30731e7561675":
         level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_conduit_bundle");
         break;
-      case # "wires":
+      case #"wires":
         level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_wires_bundle");
         break;
-      case # "bottles":
+      case #"bottles":
         level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_bottles_bundle");
         break;
     }

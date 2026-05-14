@@ -473,9 +473,9 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
     [[level.var_9295b8ef]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         if(isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 666;
         }
@@ -493,11 +493,11 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
         }
 
         break;
-      case # "heavy":
+      case #"heavy":
         e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         e_target.var_61768419 = 0;
         break;
-      case # "miniboss":
+      case #"miniboss":
         if(!isDefined(b_charged)) {
           e_target clientfield::increment("" + #"gaia_impact_zombie");
         }
@@ -511,7 +511,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
         }
 
         break;
-      case # "boss":
+      case #"boss":
         if(!isactor(e_target)) {
           e_target clientfield::increment("" + #"gaia_impact");
         }
@@ -784,15 +784,15 @@ gaia_slow(e_target) {
   }
 
   switch (e_target.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       e_target thread namespace_9ff9f642::slowdown(#"gaia_slowdown_time");
       break;
-    case # "heavy":
+    case #"heavy":
       e_target thread namespace_9ff9f642::slowdown(#"hash_2b068d1172ea957");
       break;
-    case # "miniboss":
+    case #"miniboss":
       e_target thread namespace_9ff9f642::slowdown(#"hash_315cdbcb170fa2c4");
       break;
   }

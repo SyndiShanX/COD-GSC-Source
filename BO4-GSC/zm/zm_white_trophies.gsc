@@ -102,7 +102,7 @@ function_2c104547(s_params) {
   }
 
   switch (e_attacker._trap_type) {
-    case # "electric":
+    case #"electric":
       if(level.n_electric_trap_kills < 12) {
         level.n_electric_trap_kills++;
 
@@ -110,7 +110,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case # "rotating":
+    case #"rotating":
       if(level.var_36067f1f < 12) {
         level.var_36067f1f++;
 
@@ -118,7 +118,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case # "acid":
+    case #"acid":
       if(level.var_8265e44f < 12) {
         level.var_8265e44f++;
 
@@ -126,7 +126,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case # "fire":
+    case #"fire":
       if(level.var_4b81bb64 < 12) {
         level.var_4b81bb64++;
 
@@ -134,7 +134,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case # "soul":
+    case #"soul":
       if(level.var_9e22ff45 < 12) {
         level.var_9e22ff45++;
 

@@ -129,13 +129,13 @@ function function_270a48e0() {
   var_ea95c1e7 = namespace_31c67f6d::function_c9dc0e79();
 
   switch (var_ea95c1e7) {
-    case # "park":
+    case #"park":
       level.str_scene_name = "scene_hub_post_prisoner_dialog_park_survived";
       break;
-    case # "lazar":
+    case #"lazar":
       level.str_scene_name = "scene_hub_post_prisoner_dialog_lazar_survived";
       break;
-    case # "sims":
+    case #"sims":
       level.str_scene_name = "scene_hub_post_prisoner_dialog_no_survivor";
       break;
   }

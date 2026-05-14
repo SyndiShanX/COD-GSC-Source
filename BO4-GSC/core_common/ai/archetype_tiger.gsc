@@ -997,13 +997,13 @@ function_1e4eb5f0() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn":
+        case #"spawn":
           zm_devgui::spawn_archetype("<dev string:x189>");
           break;
-        case # "kill":
+        case #"kill":
           function_21c73eb5();
           break;
-        case # "pounce":
+        case #"pounce":
           function_88b22921();
           break;
         default:

@@ -291,22 +291,22 @@ function private razstartdeath(entity) {
       destructserverutils::function_8475c53a(self, weakpoint.var_f371ebb0);
 
       switch (weakpoint.var_f371ebb0) {
-        case # "helmet":
+        case #"helmet":
           self namespace_eb2895::function_2eb802f5(undefined);
           break;
-        case # "body_armor":
+        case #"body_armor":
           self namespace_eb2895::function_50c2a59e(undefined);
           break;
-        case # "left_arm_armor":
+        case #"left_arm_armor":
           self namespace_eb2895::function_597f31c9(undefined);
           break;
-        case # "right_leg_armor":
+        case #"right_leg_armor":
           self namespace_eb2895::function_578362e9(undefined);
           break;
-        case # "left_leg_armor":
+        case #"left_leg_armor":
           self namespace_eb2895::function_50f53d3b(undefined);
           break;
-        case # "right_arm_armor":
+        case #"right_arm_armor":
           self namespace_eb2895::function_afcd63e1(undefined, undefined, undefined);
           break;
         default:
@@ -917,42 +917,42 @@ function function_2869a8ae(eventstruct) {
   var_c8109157 = 0;
 
   switch (notify_string) {
-    case # "summon":
-    case # "ambient_line":
+    case #"summon":
+    case #"ambient_line":
       self thread function_6f9720f9(notify_string);
       return;
-    case # "death":
+    case #"death":
       var_6281c93d = 1;
       n_priority = 4;
       break;
-    case # "pain":
-    case # "land":
-    case # "weapon_fire":
-    case # "idle_anim":
-    case # "pre_weapon_fire":
+    case #"pain":
+    case #"land":
+    case #"weapon_fire":
+    case #"idle_anim":
+    case #"pre_weapon_fire":
       var_6281c93d = 1;
       n_priority = 3;
       break;
-    case # "enrage":
-    case # "melee_notetrack_2":
+    case #"enrage":
+    case #"melee_notetrack_2":
       var_6281c93d = 1;
       n_priority = 3;
       var_c8109157 = 1;
       break;
-    case # "alerted":
-    case # "melee_notetrack":
-    case # "jump":
-    case # "lose_enemy":
+    case #"alerted":
+    case #"melee_notetrack":
+    case #"jump":
+    case #"lose_enemy":
       var_6281c93d = 1;
       n_priority = 2;
       var_c8109157 = 1;
       break;
-    case # "ambient":
-    case # "ambient_enraged":
-    case # "ambient_alert":
+    case #"ambient":
+    case #"ambient_enraged":
+    case #"ambient_alert":
       n_priority = 1;
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       return;
     default:
       n_priority = 2;

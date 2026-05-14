@@ -552,10 +552,10 @@ function_7cb78bcd() {
   if(isDefined(a_e_zombie_doors)) {
     foreach(var_6620353d in a_e_zombie_doors) {
       switch (var_6620353d.script_flag) {
-        case # "green_backyard_to_green_house":
-        case # "culdesac_to_yellow_house_f1":
-        case # "culdesac_to_green_house":
-        case # "yellow_backyard_to_yellow_house":
+        case #"green_backyard_to_green_house":
+        case #"culdesac_to_yellow_house_f1":
+        case #"culdesac_to_green_house":
+        case #"yellow_backyard_to_yellow_house":
           if(!(isDefined(var_6620353d.has_been_opened) && var_6620353d.has_been_opened)) {
             a_e_players = getplayers();
             var_6620353d notify(#"trigger", {

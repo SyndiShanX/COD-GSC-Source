@@ -203,16 +203,16 @@ establish_gondola_door_definition(mdl_door) {
   str_identifier = mdl_door.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.door_roof_left = mdl_door;
       break;
-    case # "roof right":
+    case #"roof right":
       self.door_roof_right = mdl_door;
       break;
-    case # "docks left":
+    case #"docks left":
       self.door_docks_left = mdl_door;
       break;
-    case # "docks right":
+    case #"docks right":
       self.door_docks_right = mdl_door;
       break;
   }
@@ -223,16 +223,16 @@ establish_gondola_gate_definition(mdl_gate) {
   str_identifier = mdl_gate.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.gate_roof_left = mdl_gate;
       break;
-    case # "roof right":
+    case #"roof right":
       self.gate_roof_right = mdl_gate;
       break;
-    case # "docks left":
+    case #"docks left":
       self.gate_docks_left = mdl_gate;
       break;
-    case # "docks right":
+    case #"docks right":
       self.gate_docks_right = mdl_gate;
       break;
   }
@@ -242,16 +242,16 @@ establish_gondola_landing_door_definition(mdl_door) {
   str_identifier = mdl_door.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.landing_door_roof_left = mdl_door;
       break;
-    case # "roof right":
+    case #"roof right":
       self.landing_door_roof_right = mdl_door;
       break;
-    case # "docks left":
+    case #"docks left":
       self.landing_door_docks_left = mdl_door;
       break;
-    case # "docks right":
+    case #"docks right":
       self.landing_door_docks_right = mdl_door;
       break;
   }
@@ -261,16 +261,16 @@ establish_gondola_landing_gate_definition(mdl_gate) {
   str_identifier = mdl_gate.script_noteworthy;
 
   switch (str_identifier) {
-    case # "roof left":
+    case #"roof left":
       self.landing_gate_roof_left = mdl_gate;
       break;
-    case # "roof right":
+    case #"roof right":
       self.landing_gate_roof_right = mdl_gate;
       break;
-    case # "docks left":
+    case #"docks left":
       self.landing_gate_docks_left = mdl_gate;
       break;
-    case # "docks right":
+    case #"docks right":
       self.landing_gate_docks_right = mdl_gate;
       break;
   }

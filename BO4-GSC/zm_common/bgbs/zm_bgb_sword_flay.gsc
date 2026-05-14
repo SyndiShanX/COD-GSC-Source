@@ -30,9 +30,9 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(meansofdeath === "MOD_MELEE" && weapon != level.weaponnone) {
     if(isalive(self)) {
       switch (self.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           damage = self.health + damage * 5;
           break;
         default:

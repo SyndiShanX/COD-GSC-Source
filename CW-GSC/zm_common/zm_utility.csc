@@ -277,13 +277,13 @@ function function_467efa7b(var_9f3fb329 = 0) {
   }
 
   switch (self.archetype) {
-    case # "stoker":
-    case # "catalyst":
-    case # "gladiator":
-    case # "nova_crawler":
-    case # "zombie":
-    case # "ghost":
-    case # "brutus":
+    case #"stoker":
+    case #"catalyst":
+    case #"gladiator":
+    case #"nova_crawler":
+    case #"zombie":
+    case #"ghost":
+    case #"brutus":
       if(var_9f3fb329) {
         str_tag = "j_spine4";
       } else {
@@ -291,9 +291,9 @@ function function_467efa7b(var_9f3fb329 = 0) {
       }
 
       break;
-    case # "blight_father":
-    case # "tiger":
-    case # "elephant":
+    case #"blight_father":
+    case #"tiger":
+    case #"elephant":
       str_tag = "j_head";
       break;
     default:
@@ -422,34 +422,34 @@ function model_rarity_rob(localclientnum, oldval, newval, bnewent, binitialsnap,
 function set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     switch (self.model) {
-      case # "p9_zm_platinum_radio_call_boxes_on":
+      case #"p9_zm_platinum_radio_call_boxes_on":
         str_objective = #"hash_4542aa212012068";
         break;
-      case # "p8_wz_ep_fishing_pole":
+      case #"p8_wz_ep_fishing_pole":
         str_objective = #"hash_249d888e2d3c6aed";
         break;
-      case # "hash_94b3a8b935248d0":
+      case #"hash_94b3a8b935248d0":
         str_objective = #"hash_669c000075d7222";
         break;
-      case # "p9_fxanim_zm_gold_control_point_collector_mod":
+      case #"p9_fxanim_zm_gold_control_point_collector_mod":
         str_objective = #"hash_1da886c89c2e4073";
         break;
-      case # "p9_fxanim_zm_gold_control_point_crystal_mod":
+      case #"p9_fxanim_zm_gold_control_point_crystal_mod":
         str_objective = #"hash_73705646f7ccc79c";
         break;
-      case # "hash_3d3aeedc296addd":
+      case #"hash_3d3aeedc296addd":
         str_objective = #"hash_5ae3492cc261d9c9";
         break;
-      case # "p9_zm_gold_teleporter_b":
+      case #"p9_zm_gold_teleporter_b":
         str_objective = #"hash_48c296f58e75bbc7";
         break;
-      case # "p9_zm_gold_jumppads_machine_mod":
+      case #"p9_zm_gold_jumppads_machine_mod":
         str_objective = #"hash_7ccf11b4a680682a";
         break;
-      case # "p9_zm_gold_jumppads_machine_sub":
+      case #"p9_zm_gold_jumppads_machine_sub":
         str_objective = #"hash_7f5d2d61a6f36e5d";
         break;
-      case # "p8_zm_off_trap_switch_box":
+      case #"p8_zm_off_trap_switch_box":
         str_objective = #"hash_6906420c98a0ea37";
         break;
       default:

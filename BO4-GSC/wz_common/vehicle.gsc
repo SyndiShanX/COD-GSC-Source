@@ -288,7 +288,7 @@ on_vehicle_collision(params) {
   }
 
   switch (self.scriptvehicletype) {
-    case # "player_atv":
+    case #"player_atv":
       var_1fdf316c = getdvarfloat(#"hash_3c9cb797fd1a7f8b", 30);
       var_a7796a79 = getdvarfloat(#"hash_67059652c5fc1945", 60);
       mindamage = getdvarfloat(#"atv_min_damage", 50);
@@ -296,7 +296,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 1;
       var_a1805d6e = 0.7;
       break;
-    case # "cargo_truck_wz":
+    case #"cargo_truck_wz":
       var_1fdf316c = getdvarfloat(#"hash_4bbc02727c5ebc00", 30);
       var_a7796a79 = getdvarfloat(#"hash_7d04949e6e62380e", 60);
       mindamage = getdvarfloat(#"cargo_truck_min_damage", 30);
@@ -304,7 +304,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 2;
       var_a1805d6e = 0.9;
       break;
-    case # "player_fav":
+    case #"player_fav":
       var_1fdf316c = getdvarfloat(#"hash_21e0e2bc88bf5eee", 30);
       var_a7796a79 = getdvarfloat(#"hash_7584662ee854d540", 60);
       mindamage = getdvarfloat(#"arav_min_damage", 40);
@@ -312,7 +312,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 2;
       var_a1805d6e = 0.9;
       break;
-    case # "player_muscle":
+    case #"player_muscle":
       var_1fdf316c = getdvarfloat(#"hash_46ffe025ec0e29a3", 30);
       var_a7796a79 = getdvarfloat(#"hash_1cf739db893af58d", 60);
       mindamage = getdvarfloat(#"muscle_min_damage", 40);
@@ -320,7 +320,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 2;
       var_a1805d6e = 0.9;
       break;
-    case # "player_suv":
+    case #"player_suv":
       var_1fdf316c = getdvarfloat(#"hash_31bcf3ba672e011a", 30);
       var_a7796a79 = getdvarfloat(#"hash_6205883210ae5f44", 60);
       mindamage = getdvarfloat(#"suv_min_damage", 40);
@@ -328,7 +328,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 2;
       var_a1805d6e = 0.9;
       break;
-    case # "player_tank":
+    case #"player_tank":
       var_1fdf316c = getdvarfloat(#"hash_c5ad19a486bd60a", 30);
       var_a7796a79 = getdvarfloat(#"hash_4f511bbff314c254", 60);
       mindamage = getdvarfloat(#"tank_min_damage", 0);
@@ -336,7 +336,7 @@ on_vehicle_collision(params) {
       var_1831f049 = 2;
       var_a1805d6e = 0.9;
       break;
-    case # "player_motorcycle":
+    case #"player_motorcycle":
       var_1fdf316c = getdvarfloat(#"hash_2b5bc92dcb8ebcf9", 30);
       var_a7796a79 = getdvarfloat(#"hash_201167604d4407b7", 60);
       mindamage = getdvarfloat(#"moto_min_damage", 20);
@@ -597,11 +597,11 @@ on_vehicle_damage(params) {
     if(isDefined(occupants) && occupants.size > 0) {
       foreach(occupant in occupants) {
         switch (params.smeansofdeath) {
-          case # "mod_projectile":
+          case #"mod_projectile":
             self playsoundtoplayer(#"hash_4cf0470b5276e61a", occupant);
             break;
-          case # "mod_rifle_bullet":
-          case # "mod_pistol_bullet":
+          case #"mod_rifle_bullet":
+          case #"mod_pistol_bullet":
             self playsoundtoplayer(#"prj_bullet_impact_player_vehicle", occupant);
             break;
         }
@@ -630,7 +630,7 @@ on_vehicle_damage(params) {
             damageparts[damageparts.size] = var_251a3d58;
 
             switch (params.smeansofdeath) {
-              case # "mod_projectile":
+              case #"mod_projectile":
                 damage = params.idamage / var_204c6da4;
 
                 if(damage < 0) {
@@ -642,8 +642,8 @@ on_vehicle_damage(params) {
                 vehicle.var_96c0f900[1] -= damage;
                 vehicle function_902cf00a(damageparts, int(damage));
                 break;
-              case # "mod_rifle_bullet":
-              case # "mod_pistol_bullet":
+              case #"mod_rifle_bullet":
+              case #"mod_pistol_bullet":
                 vehicle.var_96c0f900[1] -= params.idamage / var_b522a590;
                 vehicle function_902cf00a(damageparts, int(params.idamage / var_b522a590));
                 break;
@@ -688,16 +688,16 @@ on_player_damage(params) {
 
         if(isDefined(vehicle.scriptvehicletype)) {
           switch (vehicle.scriptvehicletype) {
-            case # "player_atv":
+            case #"player_atv":
               vehicle playSound("veh_atv_wall_imp");
               break;
-            case # "cargo_truck_wz":
+            case #"cargo_truck_wz":
               vehicle playSound("veh_truck_wall_imp");
               break;
-            case # "helicopter_light":
+            case #"helicopter_light":
               vehicle playSound("veh_heli_wall_imp");
               break;
-            case # "tactical_raft_wz":
+            case #"tactical_raft_wz":
               vehicle playSound("veh_zodiac_wall_imp");
               break;
           }
@@ -3107,7 +3107,7 @@ function_33a25ecf(owner) {
       }
 
       switch (grenade.model) {
-        case # "t6_wpn_grenade_supply_projectile":
+        case #"t6_wpn_grenade_supply_projectile":
           continue;
       }
 

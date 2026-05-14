@@ -461,19 +461,19 @@ function function_91c383b1(chapter) {
   level.var_58ccee4 = [];
 
   switch (chapter) {
-    case # "post_takedown":
+    case #"post_takedown":
       var_959954b3 = ["adler", "park", "lazar", "sims"];
       break;
-    case # "post_armada":
+    case #"post_armada":
       var_959954b3 = ["adler", "park", "lazar", "sims"];
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       var_959954b3 = ["adler", "park", "lazar", "sims", "hudson"];
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       var_959954b3 = ["hudson", "woods", "mason"];
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       level.var_ea95c1e7 = function_c9dc0e79();
 
       if(level.var_ea95c1e7 != "sims") {
@@ -483,7 +483,7 @@ function function_91c383b1(chapter) {
       }
 
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       level.var_ea95c1e7 = function_c9dc0e79();
 
       if(level.var_ea95c1e7 != "sims") {
@@ -558,7 +558,7 @@ function function_1f4ed1b4(var_8ced85ea) {
   level thread scene::play("scene_hub_env_fan_box");
 
   switch (var_8ced85ea) {
-    case # "post_takedown":
+    case #"post_takedown":
       level thread scene::stop("scene_hub_env_desk_fan");
       function_23128418();
       var_23917641 = getEntArray("post_takedown_desk_set", "script_noteworthy");
@@ -598,7 +598,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       break;
-    case # "post_armada":
+    case #"post_armada":
       function_23128418();
       var_491e6125 = getent("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
       var_491e6125 delete();
@@ -644,7 +644,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       level thread scene::play("scene_hub_env_desk_fan");
       function_31d12195();
       post_yamantau_only_models = getEntArray("post_yamantau_only_models", "script_noteworthy");
@@ -698,7 +698,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       mdl = getent("hub_mdl_post_yamantau_table_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       function_31d12195();
       hub_mdl_van_01_clip = getEntArray("hub_mdl_van_01_clip", "script_noteworthy");
 
@@ -740,7 +740,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       hidemiscmodels("hub_office_blinds");
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       level thread scene::play("scene_hub_env_desk_fan");
       function_31d12195();
       mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
@@ -771,7 +771,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       level thread scene::play("scene_hub_env_desk_fan");
       hidemiscmodels("sr_office_chair_02");
       function_31d12195();
@@ -807,7 +807,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
-    case # "dev_burn_safehouse":
+    case #"dev_burn_safehouse":
       hidemiscmodels("hub_mdl_gun_rack");
       function_31d12195();
       mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
@@ -1316,16 +1316,16 @@ function function_875a5bea() {
   }
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level thread scene::play("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_dialog_player", "talk_" + self.animname + "_" + self.var_ba1eee16.str_location + "_front");
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       level thread scene::play("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_dialog_player", "talk_" + self.animname + "_" + self.var_ba1eee16.str_location + "_behind");
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level thread scene::play("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_dialog_player", "talk_" + self.animname + "_" + self.var_ba1eee16.str_location + "_right");
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level thread scene::play("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_dialog_player", "talk_" + self.animname + "_" + self.var_ba1eee16.str_location + "_left");
       break;
     default:
@@ -1340,16 +1340,16 @@ function function_29699066() {
   var_ffb43fb8 = "enter_forward";
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       var_ffb43fb8 = "enter_forward";
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       var_ffb43fb8 = "enter_behind";
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       var_ffb43fb8 = "enter_right";
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       var_ffb43fb8 = "enter_left";
       break;
     default:
@@ -1447,16 +1447,16 @@ function function_7b9b6d21() {
 
 function function_4075cc31(str_checkpoint, var_7a2bd824) {
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level exploder::stop_exploder("exp_" + str_checkpoint + "_" + var_7a2bd824 + "_dialog_front");
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       level exploder::stop_exploder("exp_" + str_checkpoint + "_" + var_7a2bd824 + "_dialog_back");
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level exploder::stop_exploder("exp_" + str_checkpoint + "_" + var_7a2bd824 + "_dialog_right");
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level exploder::stop_exploder("exp_" + str_checkpoint + "_" + var_7a2bd824 + "_dialog_left");
       break;
     default:
@@ -1472,16 +1472,16 @@ function function_8c594bc7() {
   level util::delay(3, undefined, &flag::clear, "flag_player_in_dialog");
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level scene::play(self.var_ba1eee16.var_f2190d3d, "exit_forward");
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       level scene::play(self.var_ba1eee16.var_f2190d3d, "exit_behind");
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level scene::play(self.var_ba1eee16.var_f2190d3d, "exit_right");
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level scene::play(self.var_ba1eee16.var_f2190d3d, "exit_left");
       break;
     default:
@@ -2032,27 +2032,27 @@ function function_c59f3e2f() {
 
 function function_3f03464(var_8ced85ea) {
   switch (var_8ced85ea) {
-    case # "post_armada":
+    case #"post_armada":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topics");
       level flag::set("unlock_recent_topic1");
       setDvar(#"hash_dfcfdb3bf28da5e", "02:16:12 02/24/81");
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topic_adler4");
       setDvar(#"hash_dfcfdb3bf28da5e", "15:29:00 03/14/81");
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topic_adler4");
       setDvar(#"hash_dfcfdb3bf28da5e", "14:34:00 03/14/81");
       break;
-    case # "dev_burn_safehouse":
+    case #"dev_burn_safehouse":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topic_adler4");
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topics");
       level flag::set("unlock_recent_topic1");
@@ -2061,7 +2061,7 @@ function function_3f03464(var_8ced85ea) {
       level flag::set("unlock_recent_topic4");
       setDvar(#"hash_dfcfdb3bf28da5e", "04:02:00 03/07/81");
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       level flag::set("unlock_kgb_archives");
       level flag::set("unlock_recent_topics");
       level flag::set("unlock_recent_topic1");
@@ -2330,27 +2330,27 @@ function pstfx_teleport(var_5d5112e8, short, fade, var_68001b81, fadetime) {
 
 function function_29279de1(var_8ced85ea) {
   switch (var_8ced85ea) {
-    case # "post_takedown":
+    case #"post_takedown":
       var_ec670c03 = "cp_safehouse_reagan_inauguration";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
-    case # "post_armada":
+    case #"post_armada":
       var_ec670c03 = "cp_safehouse_stakeout_security_camera_footage";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       var_ec670c03 = "cp_safehouse_russian_military_propagnda";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       var_ec670c03 = "cp_safehouse_us_hostages_released";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       var_ec670c03 = "cp_safehouse_us_hostages_released";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       var_ec670c03 = "cp_safehouse_russian_military_propagnda";
       var_46f9f605 = "cp_shared_vietnam_brainwash";
       break;
@@ -2913,22 +2913,22 @@ function function_77a7721() {
     var_c564fe97 = level waittill(#"hash_24aefb38c6bd8236", #"hash_10d521d9edbeb091", #"hash_7730e9e72bc8c4b2", #"hash_620e399c26081cc5", #"hash_98ecabf687c31a0", #"hash_7e2afe32d900fa23", #"hash_4559bc6bde09c1f0", #"hash_3af2de6bab0e3202");
 
     switch (var_c564fe97._notify) {
-      case # "hash_24aefb38c6bd8236":
+      case #"hash_24aefb38c6bd8236":
         level.player playrumbleonentity("damage_light");
         break;
-      case # "hash_10d521d9edbeb091":
+      case #"hash_10d521d9edbeb091":
         level.player playrumbleonentity("damage_heavy");
         break;
-      case # "hash_7730e9e72bc8c4b2":
+      case #"hash_7730e9e72bc8c4b2":
         level.player playrumblelooponentity("damage_light");
         break;
-      case # "hash_620e399c26081cc5":
+      case #"hash_620e399c26081cc5":
         level.player playrumblelooponentity("damage_heavy");
         break;
-      case # "hash_98ecabf687c31a0":
+      case #"hash_98ecabf687c31a0":
         level.player stoprumble("damage_light");
         break;
-      case # "hash_7e2afe32d900fa23":
+      case #"hash_7e2afe32d900fa23":
         level.player stoprumble("damage_heavy");
         break;
     }

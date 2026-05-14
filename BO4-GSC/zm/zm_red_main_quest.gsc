@@ -2025,21 +2025,21 @@ function_4c903aa5() {
 
   foreach(str_ring, mdl_ring in a_mdl_sundial) {
     switch (str_ring) {
-      case # "outer":
+      case #"outer":
         var_dcc2eee3 = 0.5;
         var_ef2b4932 = 0.5;
         str_scene = #"p8_fxanim_zm_red_sundial_outer_doors_bundle";
         str_shots = "outer";
         str_letter = "a";
         break;
-      case # "middle":
+      case #"middle":
         var_dcc2eee3 = 0.5;
         var_ef2b4932 = 0.25;
         str_scene = #"p8_fxanim_zm_red_sundial_middle_doors_bundle";
         str_shots = "mid";
         str_letter = "b";
         break;
-      case # "inner":
+      case #"inner":
         var_dcc2eee3 = 0.25;
         var_ef2b4932 = 0.25;
         str_scene = #"p8_fxanim_zm_red_sundial_inner_doors_bundle";
@@ -2127,13 +2127,13 @@ function_4c903aa5() {
 
         if(zm_utility::is_player_valid(e_player)) {
           switch (str_ring) {
-            case # "outer":
+            case #"outer":
               level thread function_590ba57a(e_player);
               break;
-            case # "middle":
+            case #"middle":
               e_player thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
               break;
-            case # "inner":
+            case #"inner":
               level thread function_ca906c66(e_player);
               break;
           }
@@ -3128,13 +3128,13 @@ function_6af7dacb() {
       var_8e22b0cb = 0;
 
       switch (e_victim.archetype) {
-        case # "zombie":
+        case #"zombie":
           var_dee5880d = 1;
           break;
-        case # "catalyst":
+        case #"catalyst":
           var_dee5880d = 1;
           break;
-        case # "gegenees":
+        case #"gegenees":
           var_8e22b0cb = 1;
           n_damage_percent = 0.1;
           break;
@@ -3842,34 +3842,34 @@ play_think() {
 
     if(isDefined(str_reason)) {
       switch (str_reason) {
-        case # "late_mark":
+        case #"late_mark":
           iprintlnbold("<dev string:x9d>");
           break;
-        case # "late_backstage":
+        case #"late_backstage":
           iprintlnbold("<dev string:xb6>");
           break;
-        case # "late_kills":
+        case #"late_kills":
           iprintlnbold("<dev string:xcb>");
           break;
-        case # "left_stage":
+        case #"left_stage":
           iprintlnbold("<dev string:xe9>");
           break;
-        case # "left_backstage":
+        case #"left_backstage":
           iprintlnbold("<dev string:xf6>");
           break;
-        case # "no_ww":
+        case #"no_ww":
           iprintlnbold("<dev string:x107>");
           break;
-        case # "downed":
+        case #"downed":
           iprintlnbold("<dev string:x122>");
           break;
-        case # "rezzed":
+        case #"rezzed":
           iprintlnbold("<dev string:x132>");
           break;
-        case # "dropped_ww":
+        case #"dropped_ww":
           iprintlnbold("<dev string:x147>");
           break;
-        case # "hash_a3d841d32682b30":
+        case #"hash_a3d841d32682b30":
           iprintlnbold("<dev string:x154>");
           break;
       }
@@ -4258,16 +4258,16 @@ function_b0457d15() {
 
 function_36afae35(str_ww = "") {
   switch (str_ww) {
-    case # "death":
+    case #"death":
       a_w_charged = array(level.w_hand_charon, level.w_hand_charon_charged, level.w_hand_charon_upgraded);
       break;
-    case # "earth":
+    case #"earth":
       a_w_charged = array(level.w_hand_gaia, level.w_hand_gaia_charged, level.w_hand_gaia_upgraded);
       break;
-    case # "air":
+    case #"air":
       a_w_charged = array(level.w_hand_ouranos, level.w_hand_ouranos_charged, level.w_hand_ouranos_upgraded);
       break;
-    case # "light":
+    case #"light":
       a_w_charged = array(level.w_hand_hemera, level.w_hand_hemera_charged, level.w_hand_hemera_upgraded);
       break;
     default:
@@ -4286,16 +4286,16 @@ function_36afae35(str_ww = "") {
 
 function_a67dc10(str_ww) {
   switch (str_ww) {
-    case # "death":
+    case #"death":
       w_uncharged = level.w_hand_charon_uncharged;
       break;
-    case # "earth":
+    case #"earth":
       w_uncharged = level.w_hand_gaia_uncharged;
       break;
-    case # "air":
+    case #"air":
       w_uncharged = level.w_hand_ouranos_uncharged;
       break;
-    case # "light":
+    case #"light":
       w_uncharged = level.w_hand_hemera_uncharged;
       break;
     default:
@@ -4890,16 +4890,16 @@ function_4462d56a(e_player, str_ww) {
   var_65adf081 = util::spawn_model(#"tag_origin", e_player.origin);
 
   switch (str_ww) {
-    case # "death":
+    case #"death":
       str_cf = "" + #"hash_155f8a4473c5849f";
       break;
-    case # "earth":
+    case #"earth":
       str_cf = "" + #"hash_4400550c9847a1c5";
       break;
-    case # "air":
+    case #"air":
       str_cf = "" + #"hash_1f0dd5bf6862e335";
       break;
-    case # "light":
+    case #"light":
       str_cf = "" + #"hash_ab97fcf2b12187d";
       break;
   }
@@ -4980,7 +4980,7 @@ function_542a6ee4(e_player, str_ww, str_task, n_spotlight, var_d8d4faff) {
     }
 
     switch (str_ww) {
-      case # "death":
+      case #"death":
         var_8959ce50 = array(#"hash_75db9afbf4e59ab7", #"hash_75db9bfbf4e59c6a");
         str_group = array::random(var_8959ce50);
 
@@ -4993,19 +4993,19 @@ function_542a6ee4(e_player, str_ww, str_task, n_spotlight, var_d8d4faff) {
         var_d8d4faff = 0;
         level function_37411f7e(a_s_spawns, str_ww, 0, 1, var_d8d4faff);
         break;
-      case # "earth":
+      case #"earth":
         var_8959ce50 = array(#"hash_56c60404554c8d15", #"hash_56c60104554c87fc");
         str_group = array::random(var_8959ce50);
         a_s_spawns = struct::get_array(str_group);
         n_to_kill += a_s_spawns.size;
         level function_37411f7e(a_s_spawns, str_ww, 0, 1, var_d8d4faff);
         break;
-      case # "air":
+      case #"air":
         a_s_spawns = struct::get_array(#"s_play_clouded");
         n_to_kill += a_s_spawns.size;
         level function_37411f7e(a_s_spawns, str_ww, 0, 1, var_d8d4faff);
         break;
-      case # "light":
+      case #"light":
         var_8959ce50 = array(#"hash_5a3fbb7f6ef6cdb8", #"hash_5a3fbe7f6ef6d2d1");
         str_group = array::random(var_8959ce50);
         a_s_spawns = struct::get_array(str_group);
@@ -5069,16 +5069,16 @@ function_6cdf4b0(str_ww, b_uncharged, b_stationary, var_d8d4faff) {
   ai_zombie.var_2e4247bc = 1;
 
   switch (str_ww) {
-    case # "death":
+    case #"death":
       ai_zombie.var_2e4247bc = undefined;
       break;
-    case # "earth":
+    case #"earth":
       ai_zombie.var_5a3ebaa3 = undefined;
       break;
-    case # "air":
+    case #"air":
       ai_zombie.var_827f6f4a = undefined;
       break;
-    case # "light":
+    case #"light":
       ai_zombie.var_aea6e035 = undefined;
       break;
   }
@@ -5093,10 +5093,10 @@ function_6cdf4b0(str_ww, b_uncharged, b_stationary, var_d8d4faff) {
     ai_zombie.var_339655cf = undefined;
 
     switch (str_ww) {
-      case # "death":
+      case #"death":
         ai_zombie thread function_a9398fd4();
         break;
-      case # "earth":
+      case #"earth":
         ai_zombie thread function_9364cb64();
         break;
     }
@@ -5144,7 +5144,7 @@ function_7b08eb2c(notifyhash) {
 
 function_790e49a5(str_ww, b_uncharged) {
   switch (str_ww) {
-    case # "death":
+    case #"death":
       if(b_uncharged) {
         var_84c10792 = "" + #"hash_415416bf220de94";
       } else {
@@ -5152,7 +5152,7 @@ function_790e49a5(str_ww, b_uncharged) {
       }
 
       break;
-    case # "earth":
+    case #"earth":
       if(b_uncharged) {
         var_84c10792 = "" + #"hash_24b5302c2f39ebc2";
       } else {
@@ -5160,7 +5160,7 @@ function_790e49a5(str_ww, b_uncharged) {
       }
 
       break;
-    case # "air":
+    case #"air":
       if(b_uncharged) {
         var_84c10792 = "" + #"hash_4feb66128e57d092";
       } else {
@@ -5168,7 +5168,7 @@ function_790e49a5(str_ww, b_uncharged) {
       }
 
       break;
-    case # "light":
+    case #"light":
       if(b_uncharged) {
         var_84c10792 = "" + #"hash_4e1b58f05f69a65a";
       } else {
@@ -6196,10 +6196,10 @@ cleanse_setup(b_skipped) {
         default:
           str_move = #"hash_18cccc85670ce70e";
           break;
-        case # "gegenees_location":
+        case #"gegenees_location":
           str_move = #"hash_6c2f8e1ec515638";
           break;
-        case # "blight_father_location":
+        case #"blight_father_location":
           str_move = #"hash_37ed662e10c50b79";
           break;
       }

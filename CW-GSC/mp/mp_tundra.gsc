@@ -127,22 +127,22 @@ function function_559de4b9(str_gametype) {
   a_tokens = strtok(str_gametype, "_");
 
   switch (a_tokens[0]) {
-    case # "koth":
-    case # "sas":
-    case # "spy":
-    case # "prop":
-    case # "control":
-    case # "dm":
-    case # "sd":
-    case # "conf":
-    case # "scream":
-    case # "oic":
-    case # "dom":
-    case # "dropkick":
-    case # "gun":
-    case # "tdm":
-    case # "clean":
-    case # "infect":
+    case #"koth":
+    case #"sas":
+    case #"spy":
+    case #"prop":
+    case #"control":
+    case #"dm":
+    case #"sd":
+    case #"conf":
+    case #"scream":
+    case #"oic":
+    case #"dom":
+    case #"dropkick":
+    case #"gun":
+    case #"tdm":
+    case #"clean":
+    case #"infect":
       var_f710be30 = 1;
       break;
     default:

@@ -111,21 +111,21 @@ function_3fcb1e5e() {
 
   foreach(s_nixie_tube in a_s_nixie_tubes) {
     switch (s_nixie_tube.script_string) {
-      case # "nixie_tube_trigger_1":
+      case #"nixie_tube_trigger_1":
         s_nixie_tube.var_825e7054 = var_8171dd3a;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_01";
         var_49d93843 = #"hash_30683ab79a855d68";
         str_clientfield_name = "p_w_o_num_01";
         break;
-      case # "nixie_tube_trigger_2":
+      case #"nixie_tube_trigger_2":
         s_nixie_tube.var_825e7054 = var_8dfff656;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_02";
         var_49d93843 = #"hash_30683db79a856281";
         str_clientfield_name = "p_w_o_num_02";
         break;
-      case # "nixie_tube_trigger_3":
+      case #"nixie_tube_trigger_3":
         s_nixie_tube.var_825e7054 = var_44e1e41b;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_03";
@@ -546,18 +546,18 @@ function_a860e46e() {
 
 function_97be15e3(cmd) {
   switch (cmd) {
-    case # "hash_42dce9e99181c0bc":
+    case #"hash_42dce9e99181c0bc":
       function_7101d54f();
       break;
-    case # "hash_22d60bf8b1f181a7":
+    case #"hash_22d60bf8b1f181a7":
       level flag::set(#"hash_ed90925c898d1b0");
       break;
-    case # "hash_32e9365d47a4194":
+    case #"hash_32e9365d47a4194":
       level flag::set(#"hash_ed90925c898d1b0");
       level flag::set(#"hash_66f358c0066d77d8");
       function_ac52c6f1();
       break;
-    case # "hash_6959afd9d36f38b8":
+    case #"hash_6959afd9d36f38b8":
       if(zm_utility::is_ee_enabled()) {
         var_4f5b63ea = struct::get("<dev string:x307>");
         var_83aecc80 = struct::get("<dev string:x316>");
@@ -569,13 +569,13 @@ function_97be15e3(cmd) {
       }
 
       break;
-    case # "hash_6f5ba9c8e47bde8b":
+    case #"hash_6f5ba9c8e47bde8b":
       level.var_38e38e53 = 1;
       break;
-    case # "hash_7ed9eae4551e92d3":
+    case #"hash_7ed9eae4551e92d3":
       level.var_18d2e3aa = 1;
       break;
-    case # "hash_6a0c48ca2516a0a3":
+    case #"hash_6a0c48ca2516a0a3":
       level.var_64f95ac4 = 1;
       break;
   }

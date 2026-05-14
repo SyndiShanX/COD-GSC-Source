@@ -33,37 +33,37 @@ function private function_72b9b674() {
   }
 
   switch (level.gametype) {
-    case # "conf":
-    case # "conf_hc":
+    case #"conf":
+    case #"conf_hc":
       return &function_13821498;
-    case # "control":
-    case # "control_hc":
-    case # "control_cdlpro":
-    case # "hash_594c4ab1d31aa150":
+    case #"control":
+    case #"control_hc":
+    case #"control_cdlpro":
+    case #"hash_594c4ab1d31aa150":
       return &control_start;
-    case # "dm":
-    case # "dm_hc":
-    case # "dm_bots":
+    case #"dm":
+    case #"dm_hc":
+    case #"dm_bots":
       return &function_13821498;
-    case # "dom_hc":
-    case # "dom":
-    case # "dom_bots":
+    case #"dom_hc":
+    case #"dom":
+    case #"dom_bots":
       return &dom_start;
-    case # "dropkick":
+    case #"dropkick":
       return &function_35d61d4;
-    case # "gun":
+    case #"gun":
       return &function_13821498;
-    case # "gunfight_3v3":
-    case # "gunfight":
+    case #"gunfight_3v3":
+    case #"gunfight":
       return &function_8d249e99;
-    case # "koth":
-    case # "hash_156594d96f8a6568":
-    case # "hash_35a6541d081acef5":
-    case # "koth_hc":
+    case #"koth":
+    case #"hash_156594d96f8a6568":
+    case #"hash_35a6541d081acef5":
+    case #"koth_hc":
       return &koth_start;
-    case # "tdm_bots":
-    case # "tdm_hc":
-    case # "tdm":
+    case #"tdm_bots":
+    case #"tdm_hc":
+    case #"tdm":
       return &function_13821498;
   }
 

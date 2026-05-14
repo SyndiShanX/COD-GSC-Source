@@ -295,13 +295,13 @@ function function_ec609754(n_difficulty) {
 
         if(math::cointoss(n_chance)) {
           switch (chalk.trigger.rarity) {
-            case # "green":
+            case #"green":
               new_rarity = "blue";
               break;
-            case # "blue":
+            case #"blue":
               new_rarity = "purple";
               break;
-            case # "purple":
+            case #"purple":
             default:
               new_rarity = "orange";
               break;
@@ -327,13 +327,13 @@ function function_1bcf260b() {
 
 function function_877c8d9c(var_b2825a6f, var_bee6a2c9, var_eb773ad6, n_delay) {
   switch (level.var_20c6962b) {
-    case # "strauss":
+    case #"strauss":
       level zm_vo::function_7622cb70(var_b2825a6f, n_delay);
       break;
-    case # "grey":
+    case #"grey":
       level zm_vo::function_7622cb70(var_bee6a2c9, n_delay);
       break;
-    case # "carver":
+    case #"carver":
       level zm_vo::function_7622cb70(var_eb773ad6, n_delay);
       break;
   }

@@ -176,19 +176,19 @@ function function_7b83d7d() {
     thread scene::stop();
 
     switch (var_c564fe97._notify) {
-      case # "nagra_play":
+      case #"nagra_play":
         namespace_4ed3ce47::function_8f4b8ec9();
         thread scene::play("scene_hub_post_armada_dialog_mixer", "playing");
         break;
-      case # "nagra_rew":
+      case #"nagra_rew":
         namespace_4ed3ce47::function_12b07b90();
         thread scene::play("scene_hub_post_armada_dialog_mixer", "rewind");
         break;
-      case # "nagra_stop":
+      case #"nagra_stop":
         namespace_4ed3ce47::function_a6bc28c4();
         thread scene::play("scene_hub_post_armada_dialog_mixer", "stop_playing");
         break;
-      case # "nagra_ff":
+      case #"nagra_ff":
         namespace_4ed3ce47::function_326eae5c();
         break;
     }
@@ -353,16 +353,16 @@ function function_6a63db65() {
   level flag::wait_till("adler_take_call");
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level.adler scene::play_from_time("scene_hub_post_armada_dialog_adler", "Amb_enter_front", undefined, var_8ed19362, 0, 1);
       break;
-    case # "player_in_back":
+    case #"player_in_back":
       level.adler scene::play_from_time("scene_hub_post_armada_dialog_adler", "Amb_enter_behind", undefined, var_8ed19362, 0, 1);
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level.adler scene::play_from_time("scene_hub_post_armada_dialog_adler", "Amb_enter_left", undefined, var_8ed19362, 0, 1);
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level.adler scene::play_from_time("scene_hub_post_armada_dialog_adler", "Amb_enter_right", undefined, var_8ed19362, 0, 1);
       break;
   }
@@ -381,13 +381,13 @@ function function_88338e2d() {
   waitframe(1);
 
   switch (level.var_4d1402c5) {
-    case # "player_in_front":
+    case #"player_in_front":
       level thread scene::play("scene_hub_post_armada_dialog_sims", "Amb_enter_front");
       break;
-    case # "player_to_left":
+    case #"player_to_left":
       level thread scene::play("scene_hub_post_armada_dialog_sims", "Amb_enter_left");
       break;
-    case # "player_to_right":
+    case #"player_to_right":
       level thread scene::play("scene_hub_post_armada_dialog_sims", "Amb_enter_right");
       break;
   }

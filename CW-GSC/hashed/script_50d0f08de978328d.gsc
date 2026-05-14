@@ -1789,27 +1789,27 @@ function function_a38cc2d7(state) {
   str_alias = undefined;
 
   switch (state) {
-    case # "cap_low":
+    case #"cap_low":
       str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
-    case # "hash_736eee50e5b4b564":
+    case #"hash_736eee50e5b4b564":
       str_alias = #"hash_1c5192b85675532d";
       n_waittime = 2.5;
       break;
-    case # "cap_mid":
+    case #"cap_mid":
       str_alias = #"hash_1c5191b85675517a";
       n_waittime = 2.5;
       break;
-    case # "hash_3b47899904bb9c9e":
+    case #"hash_3b47899904bb9c9e":
       str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 2.5;
       break;
-    case # "cap_high":
+    case #"cap_high":
       str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
-    case # "cap_contested":
+    case #"cap_contested":
       str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;

@@ -293,19 +293,19 @@ function devgui_player_weapons() {
 
       if(isDefined(var_c8570f9.loadoutslotname)) {
         switch (var_c8570f9.loadoutslotname) {
-          case # "primary":
+          case #"primary":
             arrayinsert(var_b4bc030d, weapon, 0);
             continue;
-          case # "secondary":
+          case #"secondary":
             arrayinsert(var_179cce42, weapon, 0);
             continue;
-          case # "primarygrenade":
+          case #"primarygrenade":
             arrayinsert(var_5046ba65, weapon, 0);
             continue;
-          case # "secondarygrenade":
+          case #"secondarygrenade":
             arrayinsert(var_dce9ec82, weapon, 0);
             continue;
-          case # "specialgrenade":
+          case #"specialgrenade":
             arrayinsert(var_a327f68, weapon, 0);
             continue;
         }

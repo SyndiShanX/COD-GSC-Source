@@ -279,14 +279,14 @@ function function_a668e580(str_objective, b_starting) {
   level thread function_13cde8e();
 
   switch (str_objective) {
-    case # "apc_townsquare":
+    case #"apc_townsquare":
       level thread function_979f55f7();
       level thread function_448bf40();
       level thread function_d209720a();
       level thread function_eae2816b();
       level thread function_50940288();
       level namespace_4bd68414::function_c836a913();
-    case # "apc_mall":
+    case #"apc_mall":
       savegame::checkpoint_save(1);
       snd::client_msg("flg_cricket_stop");
       level thread function_7da5f37f();
@@ -384,14 +384,14 @@ function function_24b65377(str_objective) {
   level.var_de187b4e thread function_8e8eaada();
 
   switch (str_objective) {
-    case # "apc_townsquare":
+    case #"apc_townsquare":
       if(!level flag::get("flg_apc_ride_apc_destroyed")) {
         var_b6d2feca[#"apc"] = level.vh_escape_apc;
         var_b6d2feca[#"enemy_apc"] = level.vh_town_square_apc;
         var_b6d2feca[#"gate"] = getent("e_motor_pool_gate_anim", "targetname");
         level scene::play("scene_amk_7020_apc_townsquare", var_b6d2feca);
       }
-    case # "apc_mall":
+    case #"apc_mall":
       if(!level flag::get("flg_apc_ride_apc_destroyed")) {
         var_59c98490[#"apc"] = level.vh_escape_apc;
         var_59c98490[#"hash_612be37238f9b689"] = level.var_170f6d3b;
@@ -436,10 +436,10 @@ function function_c137b56e(var_1d966281 = #"damage") {
   level flag::set("flg_apc_ride_apc_destroyed");
 
   switch (var_1d966281) {
-    case # "hash_3513ed862f9af2bd":
+    case #"hash_3513ed862f9af2bd":
       level scene::stop(#"scene_amk_7020_apc_townsquare");
       break;
-    case # "hash_3003875db1c127f6":
+    case #"hash_3003875db1c127f6":
       level scene::stop(#"scene_amk_7050_apc_mall");
       break;
     default:
@@ -1038,11 +1038,11 @@ function private function_ee7f0031(str_objective) {
   var_e851262d = undefined;
 
   switch (str_objective) {
-    case # "apc_townsquare":
+    case #"apc_townsquare":
       var_e851262d = #"flg_apc_ride_town_square_start";
       snd::client_msg("flg_audio_apc_ride_town_square_start");
       break;
-    case # "apc_mall":
+    case #"apc_mall":
       var_e851262d = #"flg_apc_ride_mall_transition_start";
       snd::client_msg("flg_audio_apc_ride_mall_transition_start");
       break;

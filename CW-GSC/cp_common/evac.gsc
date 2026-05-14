@@ -204,10 +204,10 @@ function private helicopter(var_eb954041, var_edfdb06f, var_d12d84db) {
 
   if(isDefined(lz.script_parameters)) {
     switch (lz.script_parameters) {
-      case # "hover":
+      case #"hover":
         self function_b064c2b3(0, var_b4a49886);
         break;
-      case # "land":
+      case #"land":
       default:
         self function_f724246e(var_b4a49886, lz);
         break;

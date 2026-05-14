@@ -599,7 +599,7 @@ set_perk_random_machine_state(state) {
 
 process_perk_random_machine_state(state) {
   switch (state) {
-    case # "arrive":
+    case #"arrive":
       self showzbarrierpiece(0);
       self showzbarrierpiece(1);
       self setzbarrierpiecestate(0, "opening");
@@ -608,7 +608,7 @@ process_perk_random_machine_state(state) {
       self thread perk_random_arrive();
       self.state = "arrive";
       break;
-    case # "idle":
+    case #"idle":
       self showzbarrierpiece(5);
       self showzbarrierpiece(2);
       self setzbarrierpiecestate(2, "opening");
@@ -616,13 +616,13 @@ process_perk_random_machine_state(state) {
       self.state = "idle";
       self thread perk_random_idle();
       break;
-    case # "power_off":
+    case #"power_off":
       self showzbarrierpiece(2);
       self setzbarrierpiecestate(2, "closing");
       self clientfield::set("set_client_light_state", 0);
       self.state = "power_off";
       break;
-    case # "vending":
+    case #"vending":
       self showzbarrierpiece(5);
       self showzbarrierpiece(3);
       self showzbarrierpiece(4);
@@ -630,7 +630,7 @@ process_perk_random_machine_state(state) {
       self.state = "vending";
       self thread perk_random_vending();
       break;
-    case # "leaving":
+    case #"leaving":
       self showzbarrierpiece(1);
       self showzbarrierpiece(0);
       self setzbarrierpiecestate(0, "closing");
@@ -639,13 +639,13 @@ process_perk_random_machine_state(state) {
       self thread perk_random_leaving();
       self.state = "leaving";
       break;
-    case # "away":
+    case #"away":
       self showzbarrierpiece(2);
       self setzbarrierpiecestate(2, "closing");
       self clientfield::set("set_client_light_state", 3);
       self.state = "away";
       break;
-    case # "initial":
+    case #"initial":
       self showzbarrierpiece(3);
       self setzbarrierpiecestate(3, "opening");
       self showzbarrierpiece(5);
@@ -704,26 +704,26 @@ wunderfizz_devgui_callback(cmd) {
   e_wunderfizz = arraygetclosest(getplayers()[0].origin, a_e_wunderfizzes);
 
   switch (cmd) {
-    case # "wunderfizz_leaving":
+    case #"wunderfizz_leaving":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x5e>");
       break;
-    case # "wunderfizz_arriving":
+    case #"wunderfizz_arriving":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x68>");
       break;
-    case # "wunderfizz_vending":
+    case #"wunderfizz_vending":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x71>");
       e_wunderfizz notify(#"bottle_spawned");
       break;
-    case # "wunderfizz_idle":
+    case #"wunderfizz_idle":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x7b>");
       break;
-    case # "wunderfizz_power_off":
+    case #"wunderfizz_power_off":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x82>");
       break;
-    case # "wunderfizz_initial":
+    case #"wunderfizz_initial":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x8e>");
       break;
-    case # "wunderfizz_away":
+    case #"wunderfizz_away":
       e_wunderfizz thread set_perk_random_machine_state("<dev string:x98>");
       break;
   }

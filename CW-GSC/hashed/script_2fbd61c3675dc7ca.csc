@@ -588,16 +588,16 @@ function function_ab0de377(localclientnum, oldval, newval, bnewent, binitialsnap
           var_2fd02f35 = undefined;
 
           switch (s_wall.fx) {
-            case # "a":
+            case #"a":
               var_2fd02f35 = #"hash_303939bfec2470d3";
               break;
-            case # "b":
+            case #"b":
               var_2fd02f35 = #"hash_30393abfec247286";
               break;
-            case # "c":
+            case #"c":
               var_2fd02f35 = #"hash_30393bbfec247439";
               break;
-            case # "d":
+            case #"d":
               var_2fd02f35 = #"hash_30393cbfec2475ec";
               break;
           }

@@ -647,13 +647,13 @@ function_66bf3a98(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_251065bc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     switch (self.model) {
-      case # "hash_17ff8b184015c0d0":
+      case #"hash_17ff8b184015c0d0":
         str_tag = "tag_center_01";
         break;
-      case # "hash_17ff8e184015c5e9":
+      case #"hash_17ff8e184015c5e9":
         str_tag = "tag_center_02";
         break;
-      case # "hash_17ff8d184015c436":
+      case #"hash_17ff8d184015c436":
         str_tag = "tag_center_03";
         break;
     }
@@ -677,13 +677,13 @@ function_251065bc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 gaia_chaos_destroy(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     switch (self.model) {
-      case # "hash_17ff8b184015c0d0":
+      case #"hash_17ff8b184015c0d0":
         str_tag = "tag_center_01";
         break;
-      case # "hash_17ff8e184015c5e9":
+      case #"hash_17ff8e184015c5e9":
         str_tag = "tag_center_02";
         break;
-      case # "hash_17ff8d184015c436":
+      case #"hash_17ff8d184015c436":
         str_tag = "tag_center_03";
         break;
     }

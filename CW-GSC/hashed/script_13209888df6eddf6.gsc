@@ -434,36 +434,36 @@ function add_dialogue_line(name, msg, var_733709e8, duration = 8) {
 
   if(isDefined(var_733709e8)) {
     switch (var_733709e8) {
-      case # "red":
-      case # "r":
+      case #"red":
+      case #"r":
         color = "<dev string:x3e>";
         break;
-      case # "green":
-      case # "g":
+      case #"green":
+      case #"g":
         color = "<dev string:x44>";
         break;
-      case # "yellow":
-      case # "y":
+      case #"yellow":
+      case #"y":
         color = "<dev string:x38>";
         break;
-      case # "b":
-      case # "blue":
+      case #"b":
+      case #"blue":
         color = "<dev string:x4a>";
         break;
-      case # "c":
-      case # "cyan":
+      case #"c":
+      case #"cyan":
         color = "<dev string:x50>";
         break;
-      case # "purple":
-      case # "p":
+      case #"purple":
+      case #"p":
         color = "<dev string:x56>";
         break;
-      case # "w":
-      case # "white":
+      case #"w":
+      case #"white":
         color = "<dev string:x5c>";
         break;
-      case # "bl":
-      case # "black":
+      case #"bl":
+      case #"black":
         color = "<dev string:x62>";
         break;
     }

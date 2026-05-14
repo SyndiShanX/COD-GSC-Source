@@ -102,19 +102,19 @@ class cinteractobj {
             voiceevent("mini_hint_itct", undefined, voiceparams);
           } else if(isDefined(var_426bccfd)) {
             switch (var_426bccfd) {
-              case # "door":
+              case #"door":
                 voiceevent("door_hint_itct", undefined, voiceparams);
                 break;
-              case # "panel":
+              case #"panel":
                 voiceevent("panl_hint_itct", undefined, voiceparams);
                 break;
-              case # "radio":
+              case #"radio":
                 voiceevent("rdio_hint_itct", undefined, voiceparams);
                 break;
-              case # "console":
+              case #"console":
                 voiceevent("cnsl_hint_itct", undefined, voiceparams);
                 break;
-              case # "climb":
+              case #"climb":
                 voiceevent("clmb_hint_itct", undefined, voiceparams);
                 break;
               default:
@@ -135,24 +135,24 @@ class cinteractobj {
   function is_valid_gameobject_trigger(t_override) {
     if(m_str_trigger_type === "proximity") {
       switch (t_override.classname) {
-        case # "trigger_once_new":
-        case # "trigger_box":
-        case # "trigger_once":
-        case # "trigger_radius":
-        case # "trigger_box_new":
-        case # "trigger_multiple":
-        case # "trigger_radius_new":
-        case # "trigger_multiple_new":
+        case #"trigger_once_new":
+        case #"trigger_box":
+        case #"trigger_once":
+        case #"trigger_radius":
+        case #"trigger_box_new":
+        case #"trigger_multiple":
+        case #"trigger_radius_new":
+        case #"trigger_multiple_new":
           return true;
         default:
           return false;
       }
     } else {
       switch (t_override.classname) {
-        case # "trigger_use_new":
-        case # "trigger_radius_use":
-        case # "trigger_radius_use_new":
-        case # "trigger_use":
+        case #"trigger_use_new":
+        case #"trigger_radius_use":
+        case #"trigger_radius_use_new":
+        case #"trigger_use":
           return true;
         default:
           return false;
@@ -196,18 +196,18 @@ class cinteractobj {
     }
 
     switch (m_str_type) {
-      case # "carry":
+      case #"carry":
         assert(isDefined(m_a_keyline_objects[0]), "<dev string:x3e6>");
         mdl_gameobject = gameobjects::create_carry_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70);
         break;
-      case # "pack":
+      case #"pack":
         assert(isDefined(m_a_keyline_objects[0]), "<dev string:x3e6>");
         mdl_gameobject = gameobjects::create_pack_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70);
         break;
-      case # "generic":
+      case #"generic":
         mdl_gameobject = gameobjects::create_generic_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0));
         break;
-      case # "use":
+      case #"use":
       default:
         mdl_gameobject = gameobjects::create_use_object(m_str_team, m_t_interact, m_a_keyline_objects, (0, 0, 0), m_str_objective, var_26a01d70, 0, e_object.script_enable_on_start);
         break;
@@ -911,13 +911,13 @@ defaultuseratescalercallback(player) {
 
   if(isDefined(playerrole) && isDefined(useobj.bundle)) {
     switch (playerrole) {
-      case # "prc_mp_slayer":
+      case #"prc_mp_slayer":
         scaler = useobj.bundle.slayer_userate_scaler;
         break;
-      case # "prc_mp_objective":
+      case #"prc_mp_objective":
         scaler = useobj.bundle.objective_userate_scaler;
         break;
-      case # "prc_mp_support":
+      case #"prc_mp_support":
         scaler = useobj.bundle.support_userate_scaler;
         break;
     }
@@ -938,11 +938,11 @@ defaultallowweaponscallback(object) {
 
   if(isDefined(playerrole) && isDefined(object.bundle)) {
     switch (playerrole) {
-      case # "prc_mp_slayer":
+      case #"prc_mp_slayer":
         return (isDefined(object.bundle.slayer_allow_weapons) && object.bundle.slayer_allow_weapons);
-      case # "prc_mp_objective":
+      case #"prc_mp_objective":
         return (isDefined(object.bundle.objective_allow_weapons) && object.bundle.objective_allow_weapons);
-      case # "prc_mp_support":
+      case #"prc_mp_support":
         return (isDefined(object.bundle.support_allow_weapons) && object.bundle.support_allow_weapons);
     }
   }
@@ -4242,13 +4242,13 @@ can_interact_with(sentient) {
   }
 
   switch (self.interactteam) {
-    case # "none":
+    case #"none":
       return false;
-    case # "any":
+    case #"any":
       return true;
-    case # "free":
+    case #"free":
       return false;
-    case # "friendly":
+    case #"friendly":
       if(level.teambased) {
         if(team == self.ownerteam) {
           return true;
@@ -4260,7 +4260,7 @@ can_interact_with(sentient) {
       } else {
         return false;
       }
-    case # "enemy":
+    case #"enemy":
       if(level.teambased) {
         if(team != self.ownerteam) {
           return true;
@@ -4284,9 +4284,9 @@ is_team(team) {
   team = util::get_team_mapping(team);
 
   switch (team) {
-    case # "none":
-    case # "neutral":
-    case # "any":
+    case #"none":
+    case #"neutral":
+    case #"any":
       return true;
   }
 
@@ -4299,10 +4299,10 @@ is_team(team) {
 
 is_relative_team(relativeteam) {
   switch (relativeteam) {
-    case # "friendly":
-    case # "none":
-    case # "enemy":
-    case # "any":
+    case #"friendly":
+    case #"none":
+    case #"enemy":
+    case #"any":
       return 1;
     default:
       return 0;
@@ -4313,9 +4313,9 @@ get_enemy_team(team) {
   team = util::get_team_mapping(team);
 
   switch (team) {
-    case # "neutral":
+    case #"neutral":
       return # "none";
-    case # "allies":
+    case #"allies":
       return # "axis";
     default:
       return # "allies";

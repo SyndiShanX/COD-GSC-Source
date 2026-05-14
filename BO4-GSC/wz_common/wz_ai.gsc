@@ -150,7 +150,7 @@ function_c5fad73b(type) {
   items = [];
 
   switch (type) {
-    case # "hash_33ccea7be2e5f439":
+    case #"hash_33ccea7be2e5f439":
       break;
     default:
       break;

@@ -487,7 +487,7 @@ registerblinkingshouldshowpain(e_player) {
     n_cost = function_9b8016f1(var_9102824b);
 
     switch (e_player.var_b6ddf07f) {
-      case # "decay":
+      case #"decay":
         if(var_9102824b.name == #"ww_tricannon_earth_t8" || var_9102824b.name == #"ww_tricannon_earth_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
@@ -513,7 +513,7 @@ registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "plasma":
+      case #"plasma":
         if(var_9102824b.name == #"ww_tricannon_fire_t8" || var_9102824b.name == #"ww_tricannon_fire_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
@@ -539,7 +539,7 @@ registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "purity":
+      case #"purity":
         if(var_9102824b.name == #"ww_tricannon_water_t8" || var_9102824b.name == #"ww_tricannon_water_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
@@ -565,7 +565,7 @@ registerblinkingshouldshowpain(e_player) {
         }
 
         break;
-      case # "radiance":
+      case #"radiance":
         if(var_9102824b.name == #"ww_tricannon_air_t8" || var_9102824b.name == #"ww_tricannon_air_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
@@ -649,19 +649,19 @@ function_e00eae6(e_player) {
     e_player takeweapon(var_9102824b);
 
     switch (e_player.var_b6ddf07f) {
-      case # "decay":
+      case #"decay":
         var_be9badbc = #"ww_tricannon_earth_t8";
         var_73d97896 = 2;
         break;
-      case # "plasma":
+      case #"plasma":
         var_be9badbc = #"ww_tricannon_fire_t8";
         var_73d97896 = 3;
         break;
-      case # "purity":
+      case #"purity":
         var_be9badbc = #"ww_tricannon_water_t8";
         var_73d97896 = 1;
         break;
-      case # "radiance":
+      case #"radiance":
         var_be9badbc = #"ww_tricannon_air_t8";
         var_73d97896 = 4;
         break;
@@ -725,23 +725,23 @@ function_4facba35(str_drop, v_origin, v_spawn) {
   var_a071ccba setcursorhint("HINT_NOICON");
 
   switch (str_drop) {
-    case # "concentrated_decay":
+    case #"concentrated_decay":
       str_prompt = zm_utility::function_d6046228(#"hash_1fe854f6441b337e", #"hash_1b7e2d2bbc1de36a");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_heart");
       v_origin += (0, 0, 5);
       break;
-    case # "concentrated_plasma":
+    case #"concentrated_plasma":
       str_prompt = zm_utility::function_d6046228(#"hash_1da4ec6fc5b6b9e6", #"hash_2eb14d935f8e39c2");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_skull");
       break;
-    case # "concentrated_purity":
+    case #"concentrated_purity":
       str_prompt = zm_utility::function_d6046228(#"hash_7ee0d1946efa3d21", #"hash_669c0c5deaada19f");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_foot");
       break;
-    case # "concentrated_radiance":
+    case #"concentrated_radiance":
       str_prompt = zm_utility::function_d6046228(#"hash_1b1948d30c6b8ec9", #"hash_29b72f36c8ee8557");
       var_a071ccba sethintstring(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_hand");
@@ -764,16 +764,16 @@ function_3ef485b1(t_trig) {
   e_player = waitresult.activator;
 
   switch (t_trig.str_drop) {
-    case # "concentrated_decay":
+    case #"concentrated_decay":
       function_ca37502d(e_player);
       break;
-    case # "concentrated_plasma":
+    case #"concentrated_plasma":
       function_1b182e8c(e_player);
       break;
-    case # "concentrated_purity":
+    case #"concentrated_purity":
       function_b9b7b8c(e_player);
       break;
-    case # "concentrated_radiance":
+    case #"concentrated_radiance":
       function_b3695700(e_player);
       break;
   }
@@ -860,16 +860,16 @@ has_tricannon() {
 
   foreach(weapon in a_weapons) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return true;
     }
   }
@@ -882,16 +882,16 @@ function_8f59b576() {
 
   foreach(weapon in a_weapons) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return weapon;
     }
   }
@@ -902,16 +902,16 @@ function_8f59b576() {
 is_tricannon(weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
     switch (weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         return 1;
       default:
         return 0;
@@ -926,11 +926,11 @@ is_tricannon(weapon) {
 function_81d8403b(weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
     switch (weapon.name) {
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
         return 1;
       default:
         return 0;

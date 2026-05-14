@@ -569,16 +569,16 @@ function menu_onmenuresponse() {
 
     if(menu == game.menu[#"menu_team"] && level.allow_teamchange) {
       switch (response) {
-        case # "allies":
+        case #"allies":
           self[[level.allies]]();
           break;
-        case # "axis":
+        case #"axis":
           self[[level.teammenu]](response);
           break;
-        case # "autoassign":
+        case #"autoassign":
           self[[level.autoassign]](1);
           break;
-        case # "spectator":
+        case #"spectator":
           self[[level.spectator]]();
           break;
       }

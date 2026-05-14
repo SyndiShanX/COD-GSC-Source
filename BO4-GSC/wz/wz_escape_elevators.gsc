@@ -166,25 +166,25 @@ function_777e012d(t_damage) {
     if(isDefined(device) && device istouching(t_damage)) {
       if(is_equipment(device)) {
         switch (device.weapon.name) {
-          case # "eq_tripwire":
+          case #"eq_tripwire":
             device[[level.var_2e06b76a]]();
             break;
-          case # "trophy_system":
+          case #"trophy_system":
             device[[level.var_4f3822f4]]();
             break;
-          case # "cymbal_monkey":
+          case #"cymbal_monkey":
             device[[level.var_7c5c96dc]]();
             break;
-          case # "homunculus":
+          case #"homunculus":
             device[[level.var_cc310d06]]();
             break;
-          case # "eq_sensor":
+          case #"eq_sensor":
             device[[level.var_9911d36f]]();
             break;
-          case # "eq_concertina_wire":
+          case #"eq_concertina_wire":
             device[[level.var_94029383]]();
             break;
-          case # "gadget_supplypod":
+          case #"gadget_supplypod":
             device notify(#"death");
             break;
           default:

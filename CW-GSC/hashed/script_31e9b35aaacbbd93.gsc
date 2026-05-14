@@ -33,54 +33,54 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "tkdn_raid_bar":
+    case #"tkdn_raid_bar":
       snd::client_msg("triton_on");
       level thread function_a20133bd();
       break;
-    case # "tkdn_raid_gearup":
+    case #"tkdn_raid_gearup":
       snd::client_msg("triton_on");
       break;
-    case # "tkdn_raid_apt":
+    case #"tkdn_raid_apt":
       snd::client_msg("triton_on");
       level notify(#"hash_7ad75056b30c451a");
       level notify(#"hash_63850bb43dbc38de");
       break;
-    case # "tkdn_raid_rooftops":
+    case #"tkdn_raid_rooftops":
       snd::client_msg("triton_on");
       break;
-    case # "tkdn_raid_slide":
+    case #"tkdn_raid_slide":
       snd::client_msg("triton_on");
       break;
-    case # "tkdn_raid_capture":
+    case #"tkdn_raid_capture":
       snd::client_msg("triton_on");
       break;
-    case # "hash_7db5c2bb92c102ae":
+    case #"hash_7db5c2bb92c102ae":
       snd::client_msg("triton_on");
       break;
-    case # "tkdn_af_intro":
+    case #"tkdn_af_intro":
       snd::client_msg("triton_off");
       break;
-    case # "tkdn_af_hill":
+    case #"tkdn_af_hill":
       snd::client_msg("triton_off");
       break;
-    case # "tkdn_af_tarmac":
+    case #"tkdn_af_tarmac":
       snd::client_msg("triton_off");
       break;
-    case # "tkdn_af_chase":
+    case #"tkdn_af_chase":
       snd::client_msg("triton_off");
       snd::client_msg(#"plane_chase");
       break;
-    case # "tkdn_af_rc_chase":
+    case #"tkdn_af_rc_chase":
       snd::client_msg("triton_off");
       break;
-    case # "tkdn_af_skid":
+    case #"tkdn_af_skid":
       snd::client_msg("triton_off");
       break;
-    case # "tkdn_af_wreck":
+    case #"tkdn_af_wreck":
       snd::client_msg("triton_off");
       break;
-    case # "no_game":
-    case # "hash_6e531fb9475df744":
+    case #"no_game":
+    case #"hash_6e531fb9475df744":
       break;
     default:
 

@@ -208,23 +208,23 @@ function_66051772() {
     debug2dtext((35, 80, 0), "<dev string:x455>" + level.var_49f26c00.var_3e14626f, (1, 1, 1), 1, (0, 0, 0), 1, 1, 1);
 
     switch (level.var_49f26c00.var_8a28a9a) {
-      case # "blue":
+      case #"blue":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (0, 0, 1), 1, (0, 0, 0), 1, 1, 1);
         break;
-      case # "gold":
+      case #"gold":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (1, 1, 0), 1, (0, 0, 0), 1, 1, 1);
         break;
-      case # "grey":
+      case #"grey":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (0.75, 0.75, 0.75), 1, (0, 0, 0), 1, 1, 1);
         break;
-      case # "orange":
+      case #"orange":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (1, 0.5, 0), 1, (0, 0, 0), 1, 1, 1);
         break;
-      case # "purple":
+      case #"purple":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (1, 0, 1), 1, (0, 0, 0), 1, 1, 1);
         break;
-      case # "green":
-      case # "white":
+      case #"green":
+      case #"white":
         debug2dtext((35, 110, 0), "<dev string:x469>" + level.var_49f26c00.var_8a28a9a, (1, 1, 1), 1, (0, 0, 0), 1, 1, 1);
         break;
     }
@@ -308,37 +308,37 @@ function_d940763b(localclientnum) {
     waitresult = level waittill(#"init_controller_model", #"invalidate_controller_model", #"np_item_focus_changed", #"np_item_play_anim", #"lab_set_rewards", #"talisman_show_label", #"bottle1_fill_complete", #"bottle1_leave", #"skip_to_reveal", #"timed_out_popup_closed");
 
     switch (waitresult._notify) {
-      case # "init_controller_model":
+      case #"init_controller_model":
         level.var_49f26c00.controller_model = getuimodelforcontroller(waitresult.controller);
         break;
-      case # "invalidate_controller_model":
+      case #"invalidate_controller_model":
         level.var_49f26c00.controller_model = undefined;
         break;
-      case # "np_item_focus_changed":
+      case #"np_item_focus_changed":
         if(!(isDefined(level.var_ee871019) && level.var_ee871019)) {
           level thread function_7ee5e3a2(localclientnum, waitresult.var_800db6bf, waitresult.var_aba5d0f5, waitresult.b_debug);
         }
 
         break;
-      case # "np_item_play_anim":
+      case #"np_item_play_anim":
         level thread function_365bef4(localclientnum);
         break;
-      case # "bottle1_fill_complete":
+      case #"bottle1_fill_complete":
         function_ef574f9c(localclientnum);
         break;
-      case # "bottle1_leave":
+      case #"bottle1_leave":
         function_f0252f42(localclientnum);
         break;
-      case # "lab_set_rewards":
+      case #"lab_set_rewards":
         lab_set_rewards(localclientnum);
         break;
-      case # "talisman_show_label":
+      case #"talisman_show_label":
         talisman_show_label(localclientnum);
         break;
-      case # "skip_to_reveal":
+      case #"skip_to_reveal":
         level thread skip_to_reveal(localclientnum);
         break;
-      case # "timed_out_popup_closed":
+      case #"timed_out_popup_closed":
         break;
     }
   }
@@ -1882,22 +1882,22 @@ function_879fc3ee(var_4deff3fa) {
 
 function_a05c4ea5(str_color) {
   switch (str_color) {
-    case # "green":
+    case #"green":
       var_1467a3fb = -1;
       break;
-    case # "white":
+    case #"white":
       var_1467a3fb = -1;
       break;
-    case # "orange":
+    case #"orange":
       var_1467a3fb = 0;
       break;
-    case # "gold":
+    case #"gold":
       var_1467a3fb = 1;
       break;
-    case # "purple":
+    case #"purple":
       var_1467a3fb = 3;
       break;
-    case # "blue":
+    case #"blue":
       var_1467a3fb = 2;
       break;
     default:

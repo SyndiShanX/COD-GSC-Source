@@ -126,9 +126,6 @@ func_5320() {
     self.var_9106[3] = [];
   }
 
-  **
-  **
-  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** /
 func_6A64(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = spawnStruct();
   var_06.var_9A2E = param_00;

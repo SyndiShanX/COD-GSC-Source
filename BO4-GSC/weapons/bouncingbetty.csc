@@ -60,13 +60,13 @@ watchforexplosionnotetracks(localclientnum, up, forward) {
     notetrack = self waittill(#"explode_1st", #"explode_2nd", #"explode_main");
 
     switch (notetrack._notify) {
-      case # "explode_1st":
+      case #"explode_1st":
         playFX(localclientnum, level._effect[#"fx_betty_exp"], self.origin + up * level.explode_1st_offset, up, forward);
         break;
-      case # "explode_2nd":
+      case #"explode_2nd":
         playFX(localclientnum, level._effect[#"fx_betty_exp"], self.origin + up * level.explode_2nd_offset, up, forward);
         break;
-      case # "explode_main":
+      case #"explode_main":
         playFX(localclientnum, level._effect[#"fx_betty_exp"], self.origin + up * level.explode_main_offset, up, forward);
         playFX(localclientnum, level._effect[#"fx_betty_exp_death"], self.origin, up, forward);
         break;

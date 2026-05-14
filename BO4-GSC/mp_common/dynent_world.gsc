@@ -427,7 +427,7 @@ devgui_loop() {
     args = strtok(dvarstr, "<dev string:x11e>");
 
     switch (args[0]) {
-      case # "reset":
+      case #"reset":
         resetdynents();
         break;
     }

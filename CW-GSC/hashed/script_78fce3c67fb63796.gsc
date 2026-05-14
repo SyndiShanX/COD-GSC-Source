@@ -26,13 +26,13 @@ function function_dbeb79a6() {
     s_notify = self waittill(#"player_zipline_start", #"bunker_stealth_successful", #"hash_5612e889a163033a");
 
     switch (s_notify._notify) {
-      case # "player_zipline_start":
+      case #"player_zipline_start":
         bb::function_cd497743(s_notify.var_14af458a + "_used", self);
         break;
-      case # "bunker_stealth_successful":
+      case #"bunker_stealth_successful":
         bb::function_cd497743("bunker_stealth_successful", self);
         break;
-      case # "hash_5612e889a163033a":
+      case #"hash_5612e889a163033a":
         bb::function_cd497743("survey_equipment_zoom_used", self);
         break;
     }
@@ -48,28 +48,28 @@ function function_5043d668() {
     s_notify = level waittill(#"hash_7e64e93d8fd00029", #"flg_bunker_optional_key_found", #"flg_bunker_optional_objective_completed", #"survey_equipment_bunker_located", #"survey_equipment_loading_dock_located", #"hash_6b2091e6c001e49a", #"survey_equipment_exit", #"hash_389991321cecac89");
 
     switch (s_notify._notify) {
-      case # "hash_7e64e93d8fd00029":
+      case #"hash_7e64e93d8fd00029":
         bb::function_cd497743("found_safe_before_key", e_player);
         break;
-      case # "flg_bunker_optional_key_found":
+      case #"flg_bunker_optional_key_found":
         bb::function_cd497743("found_safe_key", e_player);
         break;
-      case # "flg_bunker_optional_objective_completed":
+      case #"flg_bunker_optional_objective_completed":
         bb::function_cd497743("optional_objective_complete", e_player);
         break;
-      case # "survey_equipment_bunker_located":
+      case #"survey_equipment_bunker_located":
         bb::function_cd497743("survey_bunker_located", e_player);
         break;
-      case # "survey_equipment_loading_dock_located":
+      case #"survey_equipment_loading_dock_located":
         bb::function_cd497743("survey_loading_dock_located", e_player);
         break;
-      case # "hash_6b2091e6c001e49a":
+      case #"hash_6b2091e6c001e49a":
         bb::function_248394b9("survey_crane_building_located", s_notify.var_d69de23d);
         break;
-      case # "survey_equipment_exit":
+      case #"survey_equipment_exit":
         bb::function_248394b9("survey_equipment_exit", s_notify.var_d69de23d);
         break;
-      case # "hash_389991321cecac89":
+      case #"hash_389991321cecac89":
         if(s_notify.var_b128c445 === "damage") {
           if(level flag::get("flg_woods_regroup_radio_destroyed_early")) {
             bb::function_cd497743("radio_destroyed_early", e_player);

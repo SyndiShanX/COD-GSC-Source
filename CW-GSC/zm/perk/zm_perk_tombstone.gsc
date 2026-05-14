@@ -203,7 +203,7 @@ function function_314e7dbf(stash) {
   if(isDefined(level.var_45030deb)) {
     foreach(var_d20236ab in level.var_45030deb) {
       switch (var_d20236ab.slot) {
-        case # "tactical":
+        case #"tactical":
           var_be84ec96 = stash.tactical;
 
           if(isDefined(var_be84ec96.itementry)) {
@@ -215,7 +215,7 @@ function function_314e7dbf(stash) {
           }
 
           break;
-        case # "lethal":
+        case #"lethal":
           var_60d9ce9d = stash.lethal;
 
           if(isDefined(var_60d9ce9d.itementry)) {
@@ -227,7 +227,7 @@ function function_314e7dbf(stash) {
           }
 
           break;
-        case # "weapon":
+        case #"weapon":
           var_9f785cff = stash.weapon1;
 
           if(isDefined(var_9f785cff.itementry)) {

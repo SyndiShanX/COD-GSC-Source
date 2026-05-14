@@ -494,8 +494,8 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
     }
 
     switch (e_target.zm_ai_category) {
-      case # "basic":
-      case # "enhanced":
+      case #"basic":
+      case #"enhanced":
         if(test_range_squared < fling_range_squared) {
           if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
             break;
@@ -525,8 +525,8 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
         }
 
         break;
-      case # "heavy":
-      case # "miniboss":
+      case #"heavy":
+      case #"miniboss":
         if(self hasperk(#"specialty_mod_shield")) {
           level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
           level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 0;
@@ -542,7 +542,7 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
         }
 
         break;
-      case # "popcorn":
+      case #"popcorn":
         if(test_range_squared < fling_range_squared) {
           if(!isDefined(level.var_21ffc192)) {
             level.var_21ffc192 = [];
@@ -609,9 +609,9 @@ riotshield_melee(weapon, riotshield_knockdown_range, riotshield_gib_range, riots
 
   foreach(ai_enemy in level.var_21ffc192) {
     switch (ai_enemy.zm_ai_category) {
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         var_d3f92d4d = zombie_utility::get_zombie_var(#"hash_bfdf728041b626a");
         break;
       default:

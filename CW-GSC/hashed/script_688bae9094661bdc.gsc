@@ -101,16 +101,16 @@ function threat_sight_set_state_parameters(statename) {
   var_bb0a10d2 = min(200, var_218126c3 * 0.33);
 
   switch (statename) {
-    case # "hash_5689f41e8c0ad00":
-    case # "investigate":
+    case #"hash_5689f41e8c0ad00":
+    case #"investigate":
       self.threatsightratemin = 0.6 * var_8c0a9bbb;
       self.threatsightratemax = 0.5 * var_8c0a9bbb;
       break;
-    case # "investigate_grace_period":
+    case #"investigate_grace_period":
       self.threatsightratemin = 1 * var_8c0a9bbb;
       self.threatsightratemax = 0.8 * var_8c0a9bbb;
       break;
-    case # "combat_hunt":
+    case #"combat_hunt":
       self.threatsightratemin = 1 * var_8c0a9bbb;
       self.threatsightratemax = 0.8 * var_8c0a9bbb;
       break;
@@ -276,8 +276,8 @@ function addeventplaybcs(eventaction, eventtype, modifier, delay, eventstruct, f
   responses = undefined;
 
   switch (force) {
-    case # "idle":
-    case # "idle_alert":
+    case #"idle":
+    case #"idle_alert":
       self.stealth.investigatecallin = 0;
       var_9c201ccd = "callin";
 
@@ -292,9 +292,9 @@ function addeventplaybcs(eventaction, eventtype, modifier, delay, eventstruct, f
       }
 
       break;
-    case # "radio":
+    case #"radio":
       break;
-    case # "investigate":
+    case #"investigate":
       var_9c201ccd = "update";
 
       if(!is_true(self.stealth.investigatecallin)) {
@@ -306,7 +306,7 @@ function addeventplaybcs(eventaction, eventtype, modifier, delay, eventstruct, f
       }
 
       break;
-    case # "hunt":
+    case #"hunt":
       self.stealth.investigatecallin = 0;
       break;
   }

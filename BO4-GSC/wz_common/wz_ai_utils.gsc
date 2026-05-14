@@ -90,7 +90,7 @@ function_b4f41a02() {
     cmd_tokens = strtok(cmd, "<dev string:xea>");
 
     switch (cmd_tokens[0]) {
-      case # "debug_spawn_ai":
+      case #"debug_spawn_ai":
         player = level.players[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward(direction);

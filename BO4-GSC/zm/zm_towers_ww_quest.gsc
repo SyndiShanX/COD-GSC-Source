@@ -128,16 +128,16 @@ knock_brazier_cleanup(b_skipped, var_19e802fa) {
   wait 1;
 
   switch (level.var_9f950fe2) {
-    case # "danu":
+    case #"danu":
       str_clientfield = "" + #"ww_quest_scorpio_danu";
       break;
-    case # "ra":
+    case #"ra":
       str_clientfield = "" + #"ww_quest_scorpio_ra";
       break;
-    case # "odin":
+    case #"odin":
       str_clientfield = "" + #"ww_quest_scorpio_odin";
       break;
-    case # "zeus":
+    case #"zeus":
       str_clientfield = "" + #"ww_quest_scorpio_zeus";
       break;
   }
@@ -194,10 +194,10 @@ function_a58dfad4() {
 
   foreach(s_part in a_s_parts) {
     switch (s_part.script_noteworthy) {
-      case # "rough_statue":
+      case #"rough_statue":
         self.var_9ce49aba = s_part;
         break;
-      case # "serket_spile":
+      case #"serket_spile":
         self.var_b56f9e01 = s_part;
         break;
     }
@@ -764,9 +764,9 @@ function_f250013e() {
     n_index = array::find(level.chests, self.owner);
 
     switch (str_state) {
-      case # "close":
-      case # "arriving":
-      case # "initial":
+      case #"close":
+      case #"arriving":
+      case #"initial":
         if(level.chest_index === n_index) {
           self thread function_1da98a12();
         }
@@ -796,34 +796,34 @@ function_9c9af843() {
   str_targetname = self.targetname;
 
   switch (str_targetname) {
-    case # "tower_a_chest":
+    case #"tower_a_chest":
       str_loc = "odin_top_floor";
       break;
-    case # "tower_b_chest":
+    case #"tower_b_chest":
       str_loc = "zeus_top_floor";
       break;
-    case # "tower_c_chest":
+    case #"tower_c_chest":
       str_loc = "danu_top_floor";
       break;
-    case # "tower_d_chest":
+    case #"tower_d_chest":
       str_loc = "ra_top_floor";
       break;
-    case # "tower_a_lower_chest":
+    case #"tower_a_lower_chest":
       str_loc = "odin_basement";
       break;
-    case # "tower_b_lower_chest":
+    case #"tower_b_lower_chest":
       str_loc = "zeus_basement";
       break;
-    case # "tower_c_lower_chest":
+    case #"tower_c_lower_chest":
       str_loc = "danu_basement";
       break;
-    case # "tower_d_lower_chest":
+    case #"tower_d_lower_chest":
       str_loc = "ra_basement";
       break;
-    case # "ra_odin_tunnel_chest":
+    case #"ra_odin_tunnel_chest":
       str_loc = "ra_odin_tunnel";
       break;
-    case # "danu_zeus_tunnel_chest":
+    case #"danu_zeus_tunnel_chest":
       str_loc = "danu_zeus_tunnel";
       break;
   }

@@ -233,9 +233,9 @@ covercleanuptothrowgrenade(entity) {
 
 canchangestanceatcovercondition(entity) {
   switch (entity getblackboardattribute("_stance")) {
-    case # "stand":
+    case #"stand":
       return aiutility::isstanceallowedatnode("crouch", entity.node);
-    case # "crouch":
+    case #"crouch":
       return aiutility::isstanceallowedatnode("stand", entity.node);
   }
 
@@ -376,10 +376,10 @@ coverchangestanceactionstart(entity, asmstatename) {
   aiutility::keepclaimnode(entity);
 
   switch (entity getblackboardattribute("_stance")) {
-    case # "stand":
+    case #"stand":
       entity setblackboardattribute("_desired_stance", "crouch");
       break;
-    case # "crouch":
+    case #"crouch":
       entity setblackboardattribute("_desired_stance", "stand");
       break;
   }

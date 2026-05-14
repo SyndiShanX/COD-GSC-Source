@@ -389,41 +389,41 @@ function function_4fa636c5(start_node, var_212b9b37 = 0, var_2747d300) {
 
 function function_6a03d24d(str_skipto) {
   switch (str_skipto) {
-    case # "armada_intro":
-    case # "armada_flyin":
+    case #"armada_intro":
+    case #"armada_flyin":
       function_27e76b4c("heli_spawn_airbase", undefined, 0);
       function_14a42357(0, struct::get("spawn_vip_intro", "targetname"));
       function_e1635dfe(0, struct::get("spawn_vip_intro", "targetname"));
       function_ed68628c(0, struct::get("spawn_vip_intro", "targetname"));
       function_882e6973(0, struct::get("spawn_vip_intro", "targetname"), 0);
       break;
-    case # "hash_303b184d24152e6a":
+    case #"hash_303b184d24152e6a":
       function_27e76b4c("heli_spawn_airbase", 2);
       function_14a42357(1);
       function_e1635dfe(1);
       function_ed68628c(1);
       break;
-    case # "hash_1884fe67d203defa":
+    case #"hash_1884fe67d203defa":
       function_27e76b4c("heli_spawn_airbase", 2);
       function_d5d40694();
       function_ed68628c(1);
       break;
-    case # "hash_24f8004f04e29031":
+    case #"hash_24f8004f04e29031":
       function_27e76b4c("heli_spawn_firebase_checkin", 2);
       function_d5d40694();
       function_ed68628c(0, struct::get("spawn_vip_intro", "targetname"));
       break;
-    case # "hash_5ba1cebca2018024":
+    case #"hash_5ba1cebca2018024":
       function_27e76b4c("heli_spawn_fly_to_branch", 0);
       function_d5d40694();
       function_ed68628c(1);
       break;
-    case # "hash_6397100038fc0825":
+    case #"hash_6397100038fc0825":
       function_27e76b4c("heli_spawn_fly_to_branch_reached", 0);
       function_d5d40694();
       function_ed68628c(1);
       break;
-    case # "hash_77a0b655f39c2bd0":
+    case #"hash_77a0b655f39c2bd0":
       function_27e76b4c("heli_spawn_fly_to_branch_mortar", 0);
       function_14a42357(1);
       function_e1635dfe(1);
@@ -431,76 +431,76 @@ function function_6a03d24d(str_skipto) {
       function_882e6973(1);
       vehicle::get_in(level.vip, level.var_7466d419, "crew");
       break;
-    case # "armada_mortar_orbit":
+    case #"armada_mortar_orbit":
       function_27e76b4c("heli_spawn_mortar");
       function_14a42357(1);
       function_e1635dfe(1);
       function_ed68628c(1);
       level.buddy swap_hat_model(1);
       break;
-    case # "armada_mortar_start":
+    case #"armada_mortar_start":
       function_27e76b4c("heli_spawn_mortar", 2);
       function_14a42357(1);
       function_e1635dfe(1);
       function_ed68628c(1);
       break;
-    case # "armada_mortar_exfil":
+    case #"armada_mortar_exfil":
       function_ed68628c(0, struct::get("mortar_exfil_sim_spawn_loc", "targetname"));
       break;
-    case # "hash_5beb082ca4e77486":
+    case #"hash_5beb082ca4e77486":
       function_27e76b4c("heli_spawn_mortar_exit_to_bamboo", 0);
       function_d5d40694();
       function_ed68628c(1);
       break;
-    case # "hash_7b186002f3b2a8d2":
+    case #"hash_7b186002f3b2a8d2":
       function_27e76b4c("heli_spawn_bamboo_exit", 0);
       function_d5d40694();
       function_ed68628c(1);
       function_882e6973(1);
       break;
-    case # "armada_bamboo_orbit":
+    case #"armada_bamboo_orbit":
       function_27e76b4c("heli_spawn_bamboo", 2);
       function_d5d40694();
       function_ed68628c(1);
       break;
-    case # "hash_18e570d80fb44818":
-    case # "hash_23a89628ff715703":
+    case #"hash_18e570d80fb44818":
+    case #"hash_23a89628ff715703":
       function_27e76b4c("heli_spawn_bamboo");
       function_d5d40694();
       function_ed68628c(0);
       function_882e6973(0);
       break;
-    case # "hash_1883c7f222b5148a":
+    case #"hash_1883c7f222b5148a":
       function_27e76b4c("heli_spawn_bamboo");
       function_d5d40694();
       function_ed68628c(0, getent("bamboo_vip_end_spawn", "targetname"));
       function_882e6973(0, getent("bamboo_buddy_end_spawn", "targetname"));
       break;
-    case # "hash_d9f7dbd88b82743":
+    case #"hash_d9f7dbd88b82743":
       function_27e76b4c("heli_spawn_mortar_exit_to_firebase", 0);
       function_d5d40694();
       function_ed68628c(1);
       function_882e6973(1);
       break;
-    case # "hash_1d34f56e80987e86":
+    case #"hash_1d34f56e80987e86":
       function_27e76b4c("heli_spawn_bamboo_exit", 0);
       function_d5d40694();
       function_ed68628c(1);
       function_882e6973(1);
       break;
-    case # "hash_e6b8714bb3258c2":
+    case #"hash_e6b8714bb3258c2":
       function_27e76b4c("heli_spawn_firebase_defend");
       function_d5d40694();
       function_ed68628c(1);
       function_882e6973(1);
       break;
-    case # "hash_463da5a40abee8ee":
+    case #"hash_463da5a40abee8ee":
       function_27e76b4c("heli_spawn_firebase_orbit", 2);
       function_d5d40694();
       function_ed68628c(1);
       function_882e6973(1);
       break;
-    case # "armada_crash_start":
+    case #"armada_crash_start":
       function_27e76b4c("heli_spawn_crash", 2, 1);
       function_14a42357(0);
       function_e1635dfe(0);
@@ -698,19 +698,19 @@ function function_3af72756(chopper, rider, seat, var_16b12a45 = 1, immediate = 1
 
   if(isDefined(chopper) && isalive(chopper)) {
     switch (seat) {
-      case # "driver":
+      case #"driver":
         chopper flag::clear("driver_occupied");
         break;
-      case # "passenger1":
+      case #"passenger1":
         chopper flag::clear("passenger1_occupied");
         break;
-      case # "gunner1":
+      case #"gunner1":
         chopper flag::clear("gunner1_occupied");
         break;
-      case # "gunner2":
+      case #"gunner2":
         chopper flag::clear("gunner2_occupied");
         break;
-      case # "crew":
+      case #"crew":
         seat = rider.var_5574287b;
         flag = seat + "_occupied";
         chopper flag::clear(flag);
@@ -1286,34 +1286,34 @@ function function_ed1b0fb(params) {
       var_102cf4ae = strtok(arg, "=");
 
       switch (var_102cf4ae[0]) {
-        case # "pitch":
+        case #"pitch":
           var_e1f655e4 = float(var_102cf4ae[1]);
           break;
-        case # "pitchmin":
+        case #"pitchmin":
           pitchmin = float(var_102cf4ae[1]);
           break;
-        case # "pitchmax":
+        case #"pitchmax":
           pitchmax = float(var_102cf4ae[1]);
           break;
-        case # "yaw":
+        case #"yaw":
           var_35c7ad6e = float(var_102cf4ae[1]);
           break;
-        case # "yawmin":
+        case #"yawmin":
           yawmin = float(var_102cf4ae[1]);
           break;
-        case # "yawmax":
+        case #"yawmax":
           yawmax = float(var_102cf4ae[1]);
           break;
-        case # "roll":
+        case #"roll":
           roll = float(var_102cf4ae[1]);
           break;
-        case # "duration":
+        case #"duration":
           duration = float(var_102cf4ae[1]);
           break;
-        case # "freqpitch":
+        case #"freqpitch":
           freqpitch = float(var_102cf4ae[1]);
           break;
-        case # "freqyaw":
+        case #"freqyaw":
           freqyaw = float(var_102cf4ae[1]);
           break;
       }

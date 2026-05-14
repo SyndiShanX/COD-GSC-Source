@@ -149,11 +149,11 @@ function_34a75fed(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   }
 
   switch (weapon.name) {
-    case # "hero_minigun_t8_lv2_grenade":
+    case #"hero_minigun_t8_lv2_grenade":
       if(isalive(self)) {
         switch (self.zm_ai_category) {
-          case # "basic":
-          case # "enhanced":
+          case #"basic":
+          case #"enhanced":
             if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {
               self.no_gib = 1;
             }
@@ -163,26 +163,26 @@ function_34a75fed(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
             }
 
             return self.health;
-          case # "popcorn":
+          case #"popcorn":
             return self.health;
         }
       }
 
       break;
-    case # "hero_minigun_t8_lv3_grenade":
+    case #"hero_minigun_t8_lv3_grenade":
       if(isalive(self)) {
         switch (self.zm_ai_category) {
-          case # "popcorn":
-          case # "basic":
-          case # "enhanced":
+          case #"popcorn":
+          case #"basic":
+          case #"enhanced":
             return 0;
         }
       }
 
       break;
-    case # "hero_minigun_t8_lv1":
-    case # "hero_minigun_t8_lv3":
-    case # "hero_minigun_t8_lv2":
+    case #"hero_minigun_t8_lv1":
+    case #"hero_minigun_t8_lv3":
+    case #"hero_minigun_t8_lv2":
       if(meansofdeath === "MOD_RIFLE_BULLET") {
         if(isDefined(level.headshots_only) && level.headshots_only && !(isDefined(self zm_utility::is_headshot(weapon, shitloc, meansofdeath)) && self zm_utility::is_headshot(weapon, shitloc, meansofdeath))) {
           return 0;
@@ -259,10 +259,10 @@ function_6fa9af0e(w_minigun) {
 
 function_bce04a11(w_minigun) {
   switch (w_minigun.name) {
-    case # "hero_minigun_t8_lv2":
+    case #"hero_minigun_t8_lv2":
       var_c4d00e65 = 0.12;
       break;
-    case # "hero_minigun_t8_lv3":
+    case #"hero_minigun_t8_lv3":
       var_c4d00e65 = 0.15;
       break;
     default:

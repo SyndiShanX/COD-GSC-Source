@@ -46,57 +46,57 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "evt_audio_vig_forest_flyby":
+    case #"evt_audio_vig_forest_flyby":
       vh_heli = ent;
       thread function_a5ecad0d(ent);
       ent waittill(#"death");
       vh_heli = undefined;
       break;
-    case # "audio_perimeter_apc_driveby":
+    case #"audio_perimeter_apc_driveby":
       vh_perimeter_vig_apc_driveby = ent;
       thread function_30189650(ent);
       ent waittill(#"death");
       vh_perimeter_vig_apc_driveby = undefined;
       break;
-    case # "audio_perimeter_apc_threat":
+    case #"audio_perimeter_apc_threat":
       vh_perimeter_vig_apc_threat = ent;
       thread function_7258f7f4(ent);
       ent waittill(#"death");
       vh_perimeter_vig_apc_threat = undefined;
       break;
-    case # "audio_side_door_apc_go":
+    case #"audio_side_door_apc_go":
       var_127d9a14 = ent;
       thread audio_side_door_apc_go(ent);
       ent waittill(#"death");
       level notify(#"hash_74a73f5954822211");
       var_f712b673 = undefined;
       break;
-    case # "audio_side_door_apc_stop":
+    case #"audio_side_door_apc_stop":
       var_127d9a14 = ent;
       thread audio_side_door_apc_stop(ent);
       ent waittill(#"death");
       level notify(#"hash_74a73f5954822211");
       var_f712b673 = undefined;
       break;
-    case # "evt_audio_main_street_truck_drive_up":
+    case #"evt_audio_main_street_truck_drive_up":
       var_4e65d853 = ent;
       thread function_db555295(ent);
       ent waittill(#"death");
       var_4e65d853 = undefined;
       break;
-    case # "evt_tower_elevator_audio":
+    case #"evt_tower_elevator_audio":
       var_d5535d9a = ent;
       thread function_845469bf(ent);
       ent waittill(#"death");
       var_d5535d9a = undefined;
       break;
-    case # "evt_tower_elevator_up_audio":
+    case #"evt_tower_elevator_up_audio":
       var_d5535d9a = ent;
       thread function_1a0fd7ea(ent);
       ent waittill(#"death");
       var_d5535d9a = undefined;
       break;
-    case # "evt_ai_open_terminal_door_audio":
+    case #"evt_ai_open_terminal_door_audio":
       e_terminal_entrance_door_org = ent;
       thread evt_ai_open_terminal_door_audio(ent);
       ent waittill(#"death");
@@ -114,33 +114,33 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "hash_f14cb3bf30d26a3":
+    case #"hash_f14cb3bf30d26a3":
       thread function_bda0d0f7();
       break;
-    case # "hash_2ef3e4f4d4afaed3":
+    case #"hash_2ef3e4f4d4afaed3":
       level flag::set("exterior_sounds_cleanup");
       break;
-    case # "facility_tunnels":
+    case #"facility_tunnels":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "tunnels_side_room":
+    case #"tunnels_side_room":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "hallway_to_arcade":
+    case #"hallway_to_arcade":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "arcade":
+    case #"arcade":
       snd::set_element(trigger, trigger_name);
       thread function_329bafc9();
       break;
-    case # "video_store":
+    case #"video_store":
       level notify(#"hash_cead01409a49817");
       level notify(#"hash_c67feccc2a013c6");
       break;
-    case # "hash_42a59392492195ac":
+    case #"hash_42a59392492195ac":
       snd::set_element(trigger, trigger_name);
       thread function_8656b058();
       break;
@@ -154,104 +154,104 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "audio_level_begin_duck_start":
+    case #"audio_level_begin_duck_start":
       thread function_563a791();
       break;
-    case # "audio_level_begin_duck_stop":
+    case #"audio_level_begin_duck_stop":
       thread function_1cfbed4a();
       break;
-    case # "flg_audio_perimeter_heli_spawned":
+    case #"flg_audio_perimeter_heli_spawned":
       level notify(#"perimeter_heli_spawned");
       break;
-    case # "audio_perimeter_apc_stop":
+    case #"audio_perimeter_apc_stop":
       level notify(#"hash_77ea555910abea0f");
       break;
-    case # "audio_watch_your_head":
+    case #"audio_watch_your_head":
       thread function_75f2707c();
       break;
-    case # "audio_tunnels_alarm":
+    case #"audio_tunnels_alarm":
       thread function_545dfe3b();
       break;
-    case # "flg_audio_tunnel_generator_off":
+    case #"flg_audio_tunnel_generator_off":
       level notify(#"hash_7881749038062387");
       break;
-    case # "audio_muffled_arcade_music":
+    case #"audio_muffled_arcade_music":
       thread function_c0af2104();
       break;
-    case # "flg_arcade_audio_emitters_start":
+    case #"flg_arcade_audio_emitters_start":
       thread function_7547ed65();
       break;
-    case # "flg_arcade_emulator_start":
+    case #"flg_arcade_emulator_start":
       thread function_b18c414e();
       break;
-    case # "flg_arcade_emulator_stop":
+    case #"flg_arcade_emulator_stop":
       level notify(#"flg_arcade_emulator_stop");
       break;
-    case # "flg_heli_rappel_alarm":
+    case #"flg_heli_rappel_alarm":
       thread evt_heli_rappel_alarm();
       break;
-    case # "audio_main_street_music_started":
+    case #"audio_main_street_music_started":
       level notify(#"audio_main_street_music_started");
       break;
-    case # "flg_audio_truck_engine_idle_stop":
+    case #"flg_audio_truck_engine_idle_stop":
       level notify(#"flg_audio_truck_engine_idle_stop");
       break;
-    case # "flg_main_street_elevator_reached_ground":
+    case #"flg_main_street_elevator_reached_ground":
       level notify(#"flg_main_street_elevator_reached_ground");
       break;
-    case # "flg_control_tower_elevator_at_top":
+    case #"flg_control_tower_elevator_at_top":
       level notify(#"flg_control_tower_elevator_at_top");
       break;
-    case # "flg_audio_servers_spool_up":
+    case #"flg_audio_servers_spool_up":
       thread function_8f849679();
       break;
-    case # "flg_audio_servers_stop":
+    case #"flg_audio_servers_stop":
       level notify(#"hash_3abf20f78c8facb5");
       break;
-    case # "audio_start_terminal_computer_duck":
+    case #"audio_start_terminal_computer_duck":
       thread function_dc569745();
       break;
-    case # "audio_stop_terminal_computer_duck":
+    case #"audio_stop_terminal_computer_duck":
       function_ed62c9c2("cp_rus_amerika_terminal_computer_duck", 0.3);
       break;
-    case # "flg_audio_terminal_alarm_start":
+    case #"flg_audio_terminal_alarm_start":
       thread function_b676524d();
       thread function_747d0cf3();
       break;
-    case # "audio_stop_terminal_alarms":
+    case #"audio_stop_terminal_alarms":
       level flag::set("flg_audio_stop_terminal_alarms");
       break;
-    case # "audio_motor_pool_rollup_door":
+    case #"audio_motor_pool_rollup_door":
       thread function_c8cd1f84();
       break;
-    case # "audio_motorpool_alarms":
+    case #"audio_motorpool_alarms":
       level notify(#"hash_4867a529b7eb5c2d");
       break;
-    case # "flg_audio_motorpool_huge_door_close":
+    case #"flg_audio_motorpool_huge_door_close":
       thread function_5a5419bb();
       break;
-    case # "flg_audio_apc_ride_town_square_start":
+    case #"flg_audio_apc_ride_town_square_start":
       thread function_85f15df8();
       break;
-    case # "flg_audio_apc_ride_mall_transition_start":
+    case #"flg_audio_apc_ride_mall_transition_start":
       thread function_4c2bbef4();
       break;
-    case # "outro_movie":
+    case #"outro_movie":
       level notify(#"hash_6163ece11287ae21");
       function_ed62c9c2("cp_rus_amerika_apc_ride_scene", 1);
       audio::snd_set_snapshot("cmn_duck_all_but_movie");
       break;
-    case # "sfx_explode_reaction":
+    case #"sfx_explode_reaction":
       thread function_9bb82dae();
       break;
-    case # "flg_cricket_stop":
+    case #"flg_cricket_stop":
       level flag::set("flg_cricket_stop");
       break;
-    case # "musictrack_cp_amerika_1":
-    case # "musictrack_cp_amerika_3":
-    case # "musictrack_cp_amerika_2":
-    case # "musictrack_cp_amerika_5":
-    case # "musictrack_cp_amerika_4":
+    case #"musictrack_cp_amerika_1":
+    case #"musictrack_cp_amerika_3":
+    case #"musictrack_cp_amerika_2":
+    case #"musictrack_cp_amerika_5":
+    case #"musictrack_cp_amerika_4":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -264,66 +264,66 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "forest":
+    case #"forest":
       thread function_7ecccb98();
       break;
-    case # "perimeter":
+    case #"perimeter":
       thread function_bda0d0f7();
       thread function_7ecccb98();
       break;
-    case # "helipad":
+    case #"helipad":
       thread function_bda0d0f7();
       thread function_7ecccb98();
       break;
-    case # "side_door":
+    case #"side_door":
       thread function_bda0d0f7();
       break;
-    case # "lockpick":
+    case #"lockpick":
       break;
-    case # "tunnels":
+    case #"tunnels":
       thread function_4190b630();
       thread function_ace83e8e();
       break;
-    case # "arcade":
+    case #"arcade":
       thread function_4190b630();
       thread function_ace83e8e();
       break;
-    case # "video_store":
+    case #"video_store":
       break;
-    case # "main_street":
+    case #"main_street":
       thread function_55f97b00();
       break;
-    case # "elevator_fight":
+    case #"elevator_fight":
       thread function_55f97b00();
       break;
-    case # "elevator":
+    case #"elevator":
       break;
-    case # "terminal":
+    case #"terminal":
       level flag::set("elevator_generators_off");
       break;
-    case # "Observation":
+    case #"Observation":
       level flag::set("elevator_generators_off");
       thread function_b676524d();
       thread function_747d0cf3();
       break;
-    case # "Facades":
+    case #"Facades":
       level flag::set("elevator_generators_off");
       break;
-    case # "Rooftops":
+    case #"Rooftops":
       level flag::set("elevator_generators_off");
       break;
-    case # "storage":
+    case #"storage":
       level flag::set("elevator_generators_off");
       break;
-    case # "motor_pool":
+    case #"motor_pool":
       break;
-    case # "apc_turret":
+    case #"apc_turret":
       break;
-    case # "apc_townsquare":
+    case #"apc_townsquare":
       break;
-    case # "apc_mall":
+    case #"apc_mall":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

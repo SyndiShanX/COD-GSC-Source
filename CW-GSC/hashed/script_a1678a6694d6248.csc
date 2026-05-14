@@ -122,10 +122,10 @@ function on_weapon_change(params) {
 function function_58d581b6(weapon) {
   if(isDefined(weapon)) {
     switch (weapon.name) {
-      case # "hash_7eab88123b09e2c":
-      case # "hash_18696150427f2efb":
-      case # "ww_axe_gun_melee_t9_upgraded":
-      case # "ww_axe_gun_melee_t9":
+      case #"hash_7eab88123b09e2c":
+      case #"hash_18696150427f2efb":
+      case #"ww_axe_gun_melee_t9_upgraded":
+      case #"ww_axe_gun_melee_t9":
         return true;
     }
   }
@@ -136,8 +136,8 @@ function function_58d581b6(weapon) {
 function function_17a14a22(weapon) {
   if(isDefined(weapon)) {
     switch (weapon.name) {
-      case # "ww_axe_gun_melee_t9_upgraded":
-      case # "ww_axe_gun_melee_t9":
+      case #"ww_axe_gun_melee_t9_upgraded":
+      case #"ww_axe_gun_melee_t9":
         return true;
     }
   }
@@ -148,8 +148,8 @@ function function_17a14a22(weapon) {
 function function_cb769ba9(weapon) {
   if(isDefined(weapon)) {
     switch (weapon.name) {
-      case # "hash_7eab88123b09e2c":
-      case # "hash_18696150427f2efb":
+      case #"hash_7eab88123b09e2c":
+      case #"hash_18696150427f2efb":
         return true;
     }
   }
@@ -160,8 +160,8 @@ function function_cb769ba9(weapon) {
 function function_2da7c1b7(weapon) {
   if(isDefined(weapon)) {
     switch (weapon.name) {
-      case # "hash_7eab88123b09e2c":
-      case # "ww_axe_gun_melee_t9_upgraded":
+      case #"hash_7eab88123b09e2c":
+      case #"ww_axe_gun_melee_t9_upgraded":
         return true;
     }
   }

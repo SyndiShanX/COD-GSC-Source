@@ -61,25 +61,25 @@ spawn_special_ai() {
 
 function_6df0d3b6(zone_name) {
   switch (zone_name) {
-    case # "paradegrounds":
+    case #"paradegrounds":
       if(isDefined(level.var_f8f715a7) && level.var_f8f715a7) {
         return true;
       }
 
       break;
-    case # "cellhouse":
+    case #"cellhouse":
       if(isDefined(level.var_81d13d70) && level.var_81d13d70) {
         return true;
       }
 
       break;
-    case # "newindustries":
+    case #"newindustries":
       if(isDefined(level.var_c62c0fea) && level.var_c62c0fea) {
         return true;
       }
 
       break;
-    case # "global":
+    case #"global":
       if(isDefined(level.var_3195c89b) && level.var_3195c89b) {
         return true;
       }

@@ -1242,12 +1242,12 @@ function function_d734bafd() {
   }
 
   switch (self.model) {
-    case # "p7_zm_power_up_max_ammo":
-    case # "p7_zm_power_up_double_points":
+    case #"p7_zm_power_up_max_ammo":
+    case #"p7_zm_power_up_double_points":
       self setscale(0.8);
       break;
-    case # "p7_zm_power_up_insta_kill":
-    case # "zombie_z_money_icon":
+    case #"p7_zm_power_up_insta_kill":
+    case #"zombie_z_money_icon":
       self setscale(0.75);
       break;
     default:
@@ -1262,27 +1262,27 @@ function function_5ebfd8cc() {
   }
 
   switch (self.model) {
-    case # "veh_t9_mil_us_air_napalm_strike_pickup":
+    case #"veh_t9_mil_us_air_napalm_strike_pickup":
       self.origin += (0, 0, 4);
       break;
-    case # "veh_t9_mil_remote_missile_pickup":
+    case #"veh_t9_mil_remote_missile_pickup":
       self.origin += (0, 0, 4);
       break;
-    case # "wpn_t9_eqp_ultimate_turret_pickup":
+    case #"wpn_t9_eqp_ultimate_turret_pickup":
       self.origin += (0, 0, -2);
       break;
-    case # "attach_t9_ammo_mod_napalm_burst_view":
-    case # "attach_t9_ammo_mod_shatter_blast_view":
-    case # "attach_t9_ammo_mod_brain_rot_view":
-    case # "attach_t9_ammo_mod_cryo_freeze_view":
-    case # "attach_t9_ammo_mod_dead_wire_view":
+    case #"attach_t9_ammo_mod_napalm_burst_view":
+    case #"attach_t9_ammo_mod_shatter_blast_view":
+    case #"attach_t9_ammo_mod_brain_rot_view":
+    case #"attach_t9_ammo_mod_cryo_freeze_view":
+    case #"attach_t9_ammo_mod_dead_wire_view":
       self.origin += (0, 0, -2);
       self.angles += (0, 90, 0);
       break;
-    case # "p9_m114_155mm_artillery_gun_01_pickup":
+    case #"p9_m114_155mm_artillery_gun_01_pickup":
       self.origin -= vectornormalize(anglesToForward(self.angles)) * 10;
       break;
-    case # "p9_zm_ndu_pegboard_tools_wrench_01":
+    case #"p9_zm_ndu_pegboard_tools_wrench_01":
       self.origin += (0, 0, -4);
       break;
   }

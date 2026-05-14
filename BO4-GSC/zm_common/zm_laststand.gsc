@@ -498,9 +498,9 @@ function_6155752d() {
     }
 
     switch (s_result.weapon.weapclass) {
-      case # "pistol spread":
-      case # "pistolspread":
-      case # "pistol":
+      case #"pistol spread":
+      case #"pistolspread":
+      case #"pistol":
         if(isDefined(level.var_d3cfc0c0) && level.var_d3cfc0c0 && zm_weapons::is_weapon_upgraded(s_result.weapon)) {
           continue;
         } else {

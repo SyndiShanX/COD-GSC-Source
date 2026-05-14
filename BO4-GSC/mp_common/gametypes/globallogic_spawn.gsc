@@ -83,75 +83,75 @@ getmpspawnpoints() {
 
 function_82ca1565(spawnpoint, gametype) {
   switch (gametype) {
-    case # "ffa":
+    case #"ffa":
       return (isDefined(spawnpoint.ffa) && spawnpoint.ffa);
-    case # "sd":
+    case #"sd":
       return (isDefined(spawnpoint.sd) && spawnpoint.sd);
-    case # "ctf":
+    case #"ctf":
       return (isDefined(spawnpoint.ctf) && spawnpoint.ctf);
-    case # "dom":
+    case #"dom":
       return (isDefined(spawnpoint.domination) && spawnpoint.domination);
-    case # "dem":
+    case #"dem":
       return (isDefined(spawnpoint.demolition) && spawnpoint.demolition);
-    case # "gg":
+    case #"gg":
       return (isDefined(spawnpoint.gg) && spawnpoint.gg);
-    case # "tdm":
+    case #"tdm":
       return (isDefined(spawnpoint.tdm) && spawnpoint.tdm);
-    case # "infil":
+    case #"infil":
       return (isDefined(spawnpoint.infiltration) && spawnpoint.infiltration);
-    case # "control":
+    case #"control":
       return (isDefined(spawnpoint.control) && spawnpoint.control);
-    case # "uplink":
+    case #"uplink":
       return (isDefined(spawnpoint.uplink) && spawnpoint.uplink);
-    case # "kc":
+    case #"kc":
       return (isDefined(spawnpoint.kc) && spawnpoint.kc);
-    case # "koth":
+    case #"koth":
       return (isDefined(spawnpoint.hardpoint) && spawnpoint.hardpoint);
-    case # "frontline":
+    case #"frontline":
       return (isDefined(spawnpoint.frontline) && spawnpoint.frontline);
-    case # "dom_flag_a":
+    case #"dom_flag_a":
       return (isDefined(spawnpoint.domination_flag_a) && spawnpoint.domination_flag_a);
-    case # "dom_flag_b":
+    case #"dom_flag_b":
       return (isDefined(spawnpoint.domination_flag_b) && spawnpoint.domination_flag_b);
-    case # "dom_flag_c":
+    case #"dom_flag_c":
       return (isDefined(spawnpoint.domination_flag_c) && spawnpoint.domination_flag_c);
-    case # "dem_attacker_a":
+    case #"dem_attacker_a":
       return (isDefined(spawnpoint.demolition_attacker_a) && spawnpoint.demolition_attacker_a);
-    case # "dem_attacker_b":
+    case #"dem_attacker_b":
       return (isDefined(spawnpoint.demolition_attacker_b) && spawnpoint.demolition_attacker_b);
-    case # "dem_remove_a":
+    case #"dem_remove_a":
       return (isDefined(spawnpoint.demolition_remove_a) && spawnpoint.demolition_remove_a);
-    case # "dem_remove_b":
+    case #"dem_remove_b":
       return (isDefined(spawnpoint.demolition_remove_b) && spawnpoint.demolition_remove_b);
-    case # "dem_overtime":
+    case #"dem_overtime":
       return (isDefined(spawnpoint.demolition_overtime) && spawnpoint.demolition_overtime);
-    case # "dem_start_spawn":
+    case #"dem_start_spawn":
       return (isDefined(spawnpoint.demolition_start_spawn) && spawnpoint.demolition_start_spawn);
-    case # "dem_defender_a":
+    case #"dem_defender_a":
       return (isDefined(spawnpoint.demolition_defender_a) && spawnpoint.demolition_defender_a);
-    case # "dem_defender_b":
+    case #"dem_defender_b":
       return (isDefined(spawnpoint.demolition_defender_b) && spawnpoint.demolition_defender_b);
-    case # "control_attack_add_0":
+    case #"control_attack_add_0":
       return (isDefined(spawnpoint.control_attack_add_a) && spawnpoint.control_attack_add_a);
-    case # "control_attack_add_1":
+    case #"control_attack_add_1":
       return (isDefined(spawnpoint.control_attack_add_b) && spawnpoint.control_attack_add_b);
-    case # "control_attack_remove_0":
+    case #"control_attack_remove_0":
       return (isDefined(spawnpoint.control_attack_remove_a) && spawnpoint.control_attack_remove_a);
-    case # "control_attack_remove_1":
+    case #"control_attack_remove_1":
       return (isDefined(spawnpoint.control_attack_remove_b) && spawnpoint.control_attack_remove_b);
-    case # "control_defend_add_0":
+    case #"control_defend_add_0":
       return (isDefined(spawnpoint.registerlast_mapshouldstun) && spawnpoint.registerlast_mapshouldstun);
-    case # "control_defend_add_1":
+    case #"control_defend_add_1":
       return (isDefined(spawnpoint.control_defend_add_b) && spawnpoint.control_defend_add_b);
-    case # "control_defend_remove_0":
+    case #"control_defend_remove_0":
       return (isDefined(spawnpoint.control_defend_remove_a) && spawnpoint.control_defend_remove_a);
-    case # "control_defend_remove_1":
+    case #"control_defend_remove_1":
       return (isDefined(spawnpoint.control_defend_remove_b) && spawnpoint.control_defend_remove_b);
-    case # "ct":
+    case #"ct":
       return (isDefined(spawnpoint.ct) && spawnpoint.ct);
-    case # "escort":
+    case #"escort":
       return (isDefined(spawnpoint.escort) && spawnpoint.escort);
-    case # "bounty":
+    case #"bounty":
       return (isDefined(spawnpoint.bounty) && spawnpoint.bounty);
     default:
       assertmsg("<dev string:x38>" + gametype + "<dev string:x46>" + spawnpoint.origin[0] + "<dev string:x71>" + spawnpoint.origin[1] + "<dev string:x78>" + spawnpoint.origin[2]);

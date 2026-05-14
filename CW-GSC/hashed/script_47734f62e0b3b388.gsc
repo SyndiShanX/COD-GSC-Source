@@ -283,7 +283,7 @@ function function_9e8ed6b4() {
       arrayremovevalue(var_fc1d94f8, var_1b008e47);
 
       switch (location) {
-        case # "hash_29430aa710cd437c":
+        case #"hash_29430aa710cd437c":
           var_515424a3 = "flag_player_near_elevator";
           break;
         default:

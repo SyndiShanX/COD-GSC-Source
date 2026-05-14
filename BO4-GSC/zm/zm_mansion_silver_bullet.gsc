@@ -160,25 +160,25 @@ function_eb7664aa(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   if(isalive(attacker) && isPlayer(attacker) && isalive(inflictor) && isPlayer(inflictor) && meansofdeath != "MOD_UNKNOWN" && meansofdeath != "MOD_MELEE" && meansofdeath != "MOD_AAT" && attacker zm_utility::function_aa45670f(weapon, 0)) {
     if(isDefined(self) && isDefined(self.archetype)) {
       switch (self.archetype) {
-        case # "zombie":
+        case #"zombie":
           n_multi += 0.25;
           break;
-        case # "werewolf":
+        case #"werewolf":
           n_multi += 1;
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           n_multi += 0.5;
           break;
-        case # "blight_father":
+        case #"blight_father":
           n_multi += 0.25;
           break;
-        case # "catalyst":
+        case #"catalyst":
           n_multi += 0.25;
           break;
-        case # "bat":
+        case #"bat":
           n_multi += 0.25;
           break;
-        case # "nosferatu":
+        case #"nosferatu":
           n_multi += 0.5;
           break;
       }

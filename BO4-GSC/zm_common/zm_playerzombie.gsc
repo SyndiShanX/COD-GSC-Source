@@ -246,19 +246,19 @@ can_do_input(inputtype) {
   cando = 0;
 
   switch (inputtype) {
-    case # "use":
+    case #"use":
       if(gettime() >= self.usesound_nexttime && !self.buttonpressed_use) {
         cando = 1;
       }
 
       break;
-    case # "attack":
+    case #"attack":
       if(gettime() >= self.attacksound_nexttime && !self.buttonpressed_attack) {
         cando = 1;
       }
 
       break;
-    case # "ads":
+    case #"ads":
       if(gettime() >= self.usesound_nexttime && !self.buttonpressed_ads) {
         cando = 1;
       }

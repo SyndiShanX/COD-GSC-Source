@@ -31,20 +31,20 @@ function private _objective(objective) {
   player = snd::function_da785aa8()[0];
 
   switch (objective) {
-    case # "comprimised":
+    case #"comprimised":
       snd::client_msg("compromised_init");
       break;
-    case # "ambush":
+    case #"ambush":
       snd::client_msg("start_combat");
       break;
-    case # "loose_ends":
+    case #"loose_ends":
       break;
-    case # "safehouse_burns":
+    case #"safehouse_burns":
       break;
-    case # "hash_fde5a9c153fb103":
+    case #"hash_fde5a9c153fb103":
       break;
-    case # "no_game":
-    case # "hash_6e531fb9475df744":
+    case #"no_game":
+    case #"hash_6e531fb9475df744":
       break;
     default:
 
@@ -61,30 +61,30 @@ function music(str_msg, n_delay = 0, var_37a6c96) {
 
 function function_7edafa59(str_msg, n_delay, var_37a6c96) {
   switch (str_msg) {
-    case # "4.1_adler_attack":
-    case # "5.0_comrade":
-    case # "1.5_times_up":
-    case # "2.0_ambush":
-    case # "4.0_adler":
-    case # "4.2_adler_fail":
-    case # "1.0_intro":
-    case # "1.6_not_surprised":
+    case #"4.1_adler_attack":
+    case #"5.0_comrade":
+    case #"1.5_times_up":
+    case #"2.0_ambush":
+    case #"4.0_adler":
+    case #"4.2_adler_fail":
+    case #"1.0_intro":
+    case #"1.6_not_surprised":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
 
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "4.0_adler_shoot":
+    case #"4.0_adler_shoot":
       snd::client_msg(#"hash_14488fae2db8c286");
       break;
-    case # "hash_581c2b78798ae4fb":
+    case #"hash_581c2b78798ae4fb":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "hash_2193c42e21ea2e63":
+    case #"hash_2193c42e21ea2e63":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "deactivate_2.0_ambush":
+    case #"deactivate_2.0_ambush":
       if(isDefined(var_37a6c96)) {
         flag::wait_till(var_37a6c96);
       }
@@ -101,10 +101,10 @@ function function_7edafa59(str_msg, n_delay, var_37a6c96) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "1.0_intro":
+    case #"1.0_intro":
       snd::client_msg(#"musictrack_cp_duga_1");
       break;
-    case # "5.0_comrade":
+    case #"5.0_comrade":
       snd::client_msg(#"musictrack_cp_duga_2");
       break;
   }

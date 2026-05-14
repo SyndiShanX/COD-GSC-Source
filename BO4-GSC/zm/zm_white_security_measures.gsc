@@ -830,25 +830,25 @@ function_af613bbf(a_weapons) {
   self.var_45c57fa5 = array::random(a_weapons);
 
   switch (self.var_45c57fa5.script_string) {
-    case # "tr":
+    case #"tr":
       self.var_af561b1f = #"hash_4176883a68b00090";
       self.var_a794d091 = #"hash_2fa3f09f73bf523c";
       self.var_636a8bf7 = #"tr_longburst_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
-    case # "lmg":
+    case #"lmg":
       self.var_af561b1f = #"hash_4e543dd90408cd76";
       self.var_a794d091 = #"hash_2e3938a646e43352";
       self.var_636a8bf7 = #"lmg_standard_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
-    case # "ar":
+    case #"ar":
       self.var_af561b1f = #"hash_6dd7b677c74ebba9";
       self.var_a794d091 = #"hash_24f2c78de733d877";
       self.var_636a8bf7 = #"ar_accurate_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
-    case # "shotgun":
+    case #"shotgun":
       self.var_af561b1f = #"hash_58eff35154ec1990";
       self.var_a794d091 = #"hash_670dd9efc63b2d3c";
       self.var_636a8bf7 = #"shotgun_pump_t8_upgraded";

@@ -238,12 +238,12 @@ function private function_e1b6707f(localclientnum, weapon, exitstage, enterstage
     fx = undefined;
 
     switch (weapon.weapclass) {
-      case # "rocketlauncher":
-      case # "mg":
-      case # "rifle":
+      case #"rocketlauncher":
+      case #"mg":
+      case #"rifle":
         fx = enterstage.var_69896523;
         break;
-      case # "pistol":
+      case #"pistol":
         fx = enterstage.var_bafc7841;
         break;
       default:

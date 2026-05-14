@@ -154,14 +154,14 @@ get_archetype() {
 
 spawn_archetype(str_archetype) {
   switch (str_archetype) {
-    case # "zombie":
+    case #"zombie":
       spawner = array::random(level.zombie_spawners);
       ai = zombie_utility::spawn_zombie(spawner);
       break;
-    case # "zombie_dog":
+    case #"zombie_dog":
       ai = zombie_dog_util::function_62db7b1c();
       break;
-    case # "nova_crawler":
+    case #"nova_crawler":
       ai = namespace_df88241c::spawn_nova_crawler();
       break;
     default:

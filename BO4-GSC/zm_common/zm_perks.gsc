@@ -724,7 +724,7 @@ function_a7ae070c(var_16c042b8, var_b169f6df = 0) {
 
 vending_set_hintstring(perk) {
   switch (perk) {
-    case # "specialty_armorvest":
+    case #"specialty_armorvest":
       break;
   }
 }
@@ -3572,274 +3572,274 @@ function_545a79c() {
     var_c4819a86 = undefined;
 
     switch (cmd) {
-      case # "hash_a687f7ed9396339":
-      case # "hash_2b731e891eadd00a":
-      case # "hash_714bd7d5b19367cb":
-      case # "hash_47e87df26f2bb654":
+      case #"hash_a687f7ed9396339":
+      case #"hash_2b731e891eadd00a":
+      case #"hash_714bd7d5b19367cb":
+      case #"hash_47e87df26f2bb654":
         str_perk = #"specialty_shield";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_22db822f8cebba1f":
-      case # "hash_3547aac06cbbd656":
-      case # "hash_2c6e9bd17e4c70e5":
-      case # "hash_1fc0acc0b9c31200":
+      case #"hash_22db822f8cebba1f":
+      case #"hash_3547aac06cbbd656":
+      case #"hash_2c6e9bd17e4c70e5":
+      case #"hash_1fc0acc0b9c31200":
         str_perk = #"specialty_berserker";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_59dfac7d036a7f11":
-      case # "hash_5fdbbc96a07023ea":
-      case # "hash_72cd05a9f7096d18":
-      case # "hash_696b25a08319319f":
+      case #"hash_59dfac7d036a7f11":
+      case #"hash_5fdbbc96a07023ea":
+      case #"hash_72cd05a9f7096d18":
+      case #"hash_696b25a08319319f":
         str_perk = #"specialty_awareness";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_20e1f2a12f575ad":
-      case # "hash_1067d35a903aa090":
-      case # "hash_60a8ca620122ce03":
-      case # "hash_37f041c2ceccaa32":
+      case #"hash_20e1f2a12f575ad":
+      case #"hash_1067d35a903aa090":
+      case #"hash_60a8ca620122ce03":
+      case #"hash_37f041c2ceccaa32":
         str_perk = #"specialty_camper";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_4d8a429ced485336":
-      case # "hash_451695d8096ae1b8":
-      case # "hash_4e334d102e76aa39":
-      case # "hash_3797acd439d9338b":
+      case #"hash_4d8a429ced485336":
+      case #"hash_451695d8096ae1b8":
+      case #"hash_4e334d102e76aa39":
+      case #"hash_3797acd439d9338b":
         str_perk = #"specialty_mystery";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_582c07780b2a70d7":
-      case # "hash_2ad319babe68ddd9":
-      case # "hash_7a8b3d3703b1d56e":
-      case # "hash_460157accd31661c":
+      case #"hash_582c07780b2a70d7":
+      case #"hash_2ad319babe68ddd9":
+      case #"hash_7a8b3d3703b1d56e":
+      case #"hash_460157accd31661c":
         str_perk = #"specialty_phdflopper";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_7237eda7099e624d":
-      case # "hash_b5286c82d1f26c3":
-      case # "hash_7b790d5f36b4c12":
-      case # "hash_3fe4509a2ac36a60":
+      case #"hash_7237eda7099e624d":
+      case #"hash_b5286c82d1f26c3":
+      case #"hash_7b790d5f36b4c12":
+      case #"hash_3fe4509a2ac36a60":
         str_perk = #"specialty_cooldown";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_17377d35be324020":
-      case # "hash_4d0551e8fc1a3eaa":
-      case # "hash_1e0b58a0910c3247":
-      case # "hash_52f021b5af5b6f01":
+      case #"hash_17377d35be324020":
+      case #"hash_4d0551e8fc1a3eaa":
+      case #"hash_1e0b58a0910c3247":
+      case #"hash_52f021b5af5b6f01":
         str_perk = #"specialty_additionalprimaryweapon";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_215605bc01af2e0":
-      case # "hash_77c9ba94611f14a7":
-      case # "hash_3c2392a146da0ca1":
-      case # "hash_272741eeae13ac9a":
+      case #"hash_215605bc01af2e0":
+      case #"hash_77c9ba94611f14a7":
+      case #"hash_3c2392a146da0ca1":
+      case #"hash_272741eeae13ac9a":
         str_perk = #"specialty_deadshot";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_6650c5a8596d4707":
-      case # "hash_4b97c729fbbb68e5":
-      case # "hash_12b3c2d6eb971006":
-      case # "hash_2ad8c584d069c098":
+      case #"hash_6650c5a8596d4707":
+      case #"hash_4b97c729fbbb68e5":
+      case #"hash_12b3c2d6eb971006":
+      case #"hash_2ad8c584d069c098":
         str_perk = #"specialty_staminup";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_1f2e309303a233e8":
-      case # "hash_77bfaaec70d8daa":
-      case # "hash_591f1871abf8a417":
-      case # "hash_30bfdad9100956cd":
+      case #"hash_1f2e309303a233e8":
+      case #"hash_77bfaaec70d8daa":
+      case #"hash_591f1871abf8a417":
+      case #"hash_30bfdad9100956cd":
         str_perk = #"specialty_quickrevive";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_3985b954c5d57fd7":
-      case # "hash_4dd9c0937255fe1a":
-      case # "hash_2b9b74bc8b7a95b9":
-      case # "hash_338cf8868ad12888":
+      case #"hash_3985b954c5d57fd7":
+      case #"hash_4dd9c0937255fe1a":
+      case #"hash_2b9b74bc8b7a95b9":
+      case #"hash_338cf8868ad12888":
         str_perk = #"specialty_electriccherry";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_73cbb686dc065831":
-      case # "hash_3e92ee8a1f94e218":
-      case # "hash_6bc1e0d615f04132":
-      case # "hash_400b86629283f29f":
+      case #"hash_73cbb686dc065831":
+      case #"hash_3e92ee8a1f94e218":
+      case #"hash_6bc1e0d615f04132":
+      case #"hash_400b86629283f29f":
         str_perk = #"specialty_widowswine";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_3419add8481e7fa1":
-      case # "hash_4d21953ef7610b73":
-      case # "hash_5cebc01e01fc9e18":
-      case # "hash_74a3737c1fa820fa":
+      case #"hash_3419add8481e7fa1":
+      case #"hash_4d21953ef7610b73":
+      case #"hash_5cebc01e01fc9e18":
+      case #"hash_74a3737c1fa820fa":
         str_perk = #"specialty_extraammo";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_572d09f7e8a7b929":
-      case # "hash_5d8694f5297752a4":
-      case # "hash_31f8545325031336":
-      case # "hash_4c6b49a740457f87":
+      case #"hash_572d09f7e8a7b929":
+      case #"hash_5d8694f5297752a4":
+      case #"hash_31f8545325031336":
+      case #"hash_4c6b49a740457f87":
         str_perk = #"specialty_etherealrazor";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_5ffd9216593e9fb":
-      case # "hash_23b50d4339535dd5":
-      case # "hash_6e7de8150825b688":
-      case # "hash_6e080192e412f0e6":
+      case #"hash_5ffd9216593e9fb":
+      case #"hash_23b50d4339535dd5":
+      case #"hash_6e7de8150825b688":
+      case #"hash_6e080192e412f0e6":
         str_perk = #"specialty_zombshell";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_2bc2dabec1637ab7":
-      case # "hash_7a33b4202b9ebdc8":
-      case # "hash_42ed16109e9963d6":
-      case # "hash_3eb60ad87ca70645":
+      case #"hash_2bc2dabec1637ab7":
+      case #"hash_7a33b4202b9ebdc8":
+      case #"hash_42ed16109e9963d6":
+      case #"hash_3eb60ad87ca70645":
         str_perk = #"specialty_wolf_protector";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_bdedb98e101b1af":
-      case # "hash_57394397497fc4ae":
-      case # "hash_2ea5f415373bd890":
-      case # "hash_6c0c3fd6f9785c85":
+      case #"hash_bdedb98e101b1af":
+      case #"hash_57394397497fc4ae":
+      case #"hash_2ea5f415373bd890":
+      case #"hash_6c0c3fd6f9785c85":
         str_perk = #"specialty_death_dash";
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_36d28b98c683b0ed":
-      case # "hash_122b73a9059c70bc":
-      case # "hash_796b16a6e51d3223":
-      case # "hash_2621dbc67d96d6b6":
+      case #"hash_36d28b98c683b0ed":
+      case #"hash_122b73a9059c70bc":
+      case #"hash_796b16a6e51d3223":
+      case #"hash_2621dbc67d96d6b6":
         var_f79903dc = 0;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_122b76a9059c75d5":
-      case # "hash_36d28898c683abd4":
-      case # "hash_796b17a6e51d33d6":
-      case # "hash_2621dac67d96d503":
+      case #"hash_122b76a9059c75d5":
+      case #"hash_36d28898c683abd4":
+      case #"hash_796b17a6e51d33d6":
+      case #"hash_2621dac67d96d503":
         var_f79903dc = 1;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_796b18a6e51d3589":
-      case # "hash_36d28998c683ad87":
-      case # "hash_122b75a9059c7422":
-      case # "hash_2621d9c67d96d350":
+      case #"hash_796b18a6e51d3589":
+      case #"hash_36d28998c683ad87":
+      case #"hash_122b75a9059c7422":
+      case #"hash_2621d9c67d96d350":
         var_f79903dc = 2;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_122b70a9059c6ba3":
-      case # "hash_36d28698c683a86e":
-      case # "hash_2621e0c67d96df35":
-      case # "hash_796b19a6e51d373c":
+      case #"hash_122b70a9059c6ba3":
+      case #"hash_36d28698c683a86e":
+      case #"hash_2621e0c67d96df35":
+      case #"hash_796b19a6e51d373c":
         var_f79903dc = 3;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_63368be670c1631":
-      case # "hash_4e75f62ab878637a":
-      case # "hash_2227c4347bf7aff7":
-      case # "hash_56baf79467fa8098":
+      case #"hash_63368be670c1631":
+      case #"hash_4e75f62ab878637a":
+      case #"hash_2227c4347bf7aff7":
+      case #"hash_56baf79467fa8098":
         var_f79903dc = 4;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_5c050766529e83a8":
-      case # "hash_2a94a682beedaf35":
-      case # "hash_4205942f3e57758a":
-      case # "hash_75d5e1ee4bb9b063":
+      case #"hash_5c050766529e83a8":
+      case #"hash_2a94a682beedaf35":
+      case #"hash_4205942f3e57758a":
+      case #"hash_75d5e1ee4bb9b063":
         var_4ee327af = 0;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_2a94a382beedaa1c":
-      case # "hash_4205932f3e5773d7":
-      case # "hash_5c050a66529e88c1":
-      case # "hash_75d5e2ee4bb9b216":
+      case #"hash_2a94a382beedaa1c":
+      case #"hash_4205932f3e5773d7":
+      case #"hash_5c050a66529e88c1":
+      case #"hash_75d5e2ee4bb9b216":
         var_4ee327af = 1;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_2a94a482beedabcf":
-      case # "hash_5c050966529e870e":
-      case # "hash_4205922f3e577224":
-      case # "hash_75d5e3ee4bb9b3c9":
+      case #"hash_2a94a482beedabcf":
+      case #"hash_5c050966529e870e":
+      case #"hash_4205922f3e577224":
+      case #"hash_75d5e3ee4bb9b3c9":
         var_4ee327af = 2;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_4205912f3e577071":
-      case # "hash_2a94a182beeda6b6":
-      case # "hash_5c050c66529e8c27":
-      case # "hash_75d5e4ee4bb9b57c":
+      case #"hash_4205912f3e577071":
+      case #"hash_2a94a182beeda6b6":
+      case #"hash_5c050c66529e8c27":
+      case #"hash_75d5e4ee4bb9b57c":
         var_4ee327af = 3;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_e3aea524ee28666":
-      case # "hash_19d7dd5f676b170c":
-      case # "hash_5a852048c409f6b7":
-      case # "hash_20102f0482e5bdb9":
+      case #"hash_e3aea524ee28666":
+      case #"hash_19d7dd5f676b170c":
+      case #"hash_5a852048c409f6b7":
+      case #"hash_20102f0482e5bdb9":
         var_4ee327af = 4;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_37e9f4522a62290f":
-      case # "hash_6fa3e37013c04980":
-      case # "hash_21a07f54e2de98fe":
-      case # "hash_57ed1fb7940f33b5":
+      case #"hash_37e9f4522a62290f":
+      case #"hash_6fa3e37013c04980":
+      case #"hash_21a07f54e2de98fe":
+      case #"hash_57ed1fb7940f33b5":
         var_dfa7102 = 0;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_57ed1cb7940f2e9c":
-      case # "hash_6fa3e67013c04e99":
-      case # "hash_37e9f5522a622ac2":
-      case # "hash_21a07e54e2de974b":
+      case #"hash_57ed1cb7940f2e9c":
+      case #"hash_6fa3e67013c04e99":
+      case #"hash_37e9f5522a622ac2":
+      case #"hash_21a07e54e2de974b":
         var_dfa7102 = 1;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_57ed1db7940f304f":
-      case # "hash_37e9f6522a622c75":
-      case # "hash_21a07d54e2de9598":
-      case # "hash_6fa3e57013c04ce6":
+      case #"hash_57ed1db7940f304f":
+      case #"hash_37e9f6522a622c75":
+      case #"hash_21a07d54e2de9598":
+      case #"hash_6fa3e57013c04ce6":
         var_dfa7102 = 2;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_57ed1ab7940f2b36":
-      case # "hash_37e9ef522a622090":
-      case # "hash_21a08454e2dea17d":
-      case # "hash_6fa3e87013c051ff":
+      case #"hash_57ed1ab7940f2b36":
+      case #"hash_37e9ef522a622090":
+      case #"hash_21a08454e2dea17d":
+      case #"hash_6fa3e87013c051ff":
         var_dfa7102 = 3;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_11bcb93b01611b04":
-      case # "hash_58bb5da598842e39":
-      case # "hash_78960bd8157b64e2":
-      case # "hash_79a3bb05585eb7fb":
+      case #"hash_11bcb93b01611b04":
+      case #"hash_58bb5da598842e39":
+      case #"hash_78960bd8157b64e2":
+      case #"hash_79a3bb05585eb7fb":
         var_dfa7102 = 4;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;
         break;
-      case # "hash_560a015fd8fc8f56":
-      case # "hash_4a38f3e91e628364":
-      case # "hash_1f66bfabd16987cb":
-      case # "hash_5eee967ea5d92169":
+      case #"hash_560a015fd8fc8f56":
+      case #"hash_4a38f3e91e628364":
+      case #"hash_1f66bfabd16987cb":
+      case #"hash_5eee967ea5d92169":
         var_c4819a86 = 1;
         var_8d1a1acc = strtok(cmd, "<dev string:x16a3>");
         var_eb4c64e8 = int(var_8d1a1acc[1]) - 1;

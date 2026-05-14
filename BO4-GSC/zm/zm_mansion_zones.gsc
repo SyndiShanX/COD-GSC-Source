@@ -143,108 +143,108 @@ get_location_string(e_player) {
   }
 
   switch (str_zone) {
-    case # "zone_floor2_bedroom":
+    case #"zone_floor2_bedroom":
       str_display = #"hash_5b174f0e82a56362";
       break;
-    case # "zone_floor2_trophy_room":
+    case #"zone_floor2_trophy_room":
       str_display = #"hash_799f29c8059bb492";
       break;
-    case # "zone_hallway_to_bedroom":
+    case #"zone_hallway_to_bedroom":
       str_display = #"hash_39314f35659fff4b";
       break;
-    case # "zone_cellar":
+    case #"zone_cellar":
       str_display = #"hash_5d4530599612a24a";
       break;
-    case # "zone_cemetery_path_right":
-    case # "zone_cemetery_entrance":
-    case # "zone_cemetery_path_left":
+    case #"zone_cemetery_path_right":
+    case #"zone_cemetery_entrance":
+    case #"zone_cemetery_path_left":
       str_display = #"hash_5141bcb2e5b72c28";
       break;
-    case # "zone_cemetery_graveyard":
+    case #"zone_cemetery_graveyard":
       str_display = #"hash_b91dba12f5681cb";
       break;
-    case # "zone_cemetery_mausoleum":
+    case #"zone_cemetery_mausoleum":
       str_display = #"hash_336573cc6209fb70";
       break;
-    case # "zone_entrance_hall":
+    case #"zone_entrance_hall":
       str_display = #"hash_294db47b299baf9f";
       break;
-    case # "zone_dining_hallway":
+    case #"zone_dining_hallway":
       str_display = #"hash_cc69f561c03e329";
       break;
-    case # "zone_trophy_to_dining_stairs":
+    case #"zone_trophy_to_dining_stairs":
       str_display = #"hash_7085496da10debc3";
       break;
-    case # "zone_dining_room":
+    case #"zone_dining_room":
       str_display = #"zm_mansion/location_dining_room";
       break;
-    case # "zone_foyer_east":
+    case #"zone_foyer_east":
       str_display = #"hash_2d30bd945675677f";
       break;
-    case # "zone_foyer_eastend":
+    case #"zone_foyer_eastend":
       str_display = #"hash_2b19c9a3e37c977c";
       break;
-    case # "zone_foyer_west":
+    case #"zone_foyer_west":
       str_display = #"hash_fc698faab2e9a15";
       break;
-    case # "zone_foyer_westend":
+    case #"zone_foyer_westend":
       str_display = #"hash_47b54639df53d26e";
       break;
-    case # "zone_forest_entrance":
+    case #"zone_forest_entrance":
       str_display = #"hash_4d0468edce809e3b";
       break;
-    case # "zone_forest_center":
-    case # "zone_forest_n":
-    case # "zone_forest_s":
+    case #"zone_forest_center":
+    case #"zone_forest_n":
+    case #"zone_forest_s":
       str_display = #"hash_1b96528add0fc9c0";
       break;
-    case # "zone_greenhouse_entrance":
+    case #"zone_greenhouse_entrance":
       str_display = #"hash_3ea748d6a647de7b";
       break;
-    case # "zone_greenhouse_lab":
+    case #"zone_greenhouse_lab":
       str_display = #"hash_4fa0217a1bf4ccdc";
       break;
-    case # "zone_sidegarden_right":
+    case #"zone_sidegarden_right":
       str_display = #"hash_14a22fcc9cae07e";
       break;
-    case # "zone_library":
+    case #"zone_library":
       str_display = #"hash_430969697efda742";
       break;
-    case # "zone_library_upper":
+    case #"zone_library_upper":
       str_display = #"hash_75a8495d302e976f";
       break;
-    case # "zone_library_hallway_lower":
+    case #"zone_library_hallway_lower":
       str_display = #"hash_4c90c8d92a3dcb37";
       break;
-    case # "zone_library_hallway_upper":
+    case #"zone_library_hallway_upper":
       str_display = #"hash_4e4c72cec577f4b6";
       break;
-    case # "zone_main_hall":
+    case #"zone_main_hall":
       str_display = #"hash_41d4a90493982b62";
       break;
-    case # "zone_main_hall_north":
+    case #"zone_main_hall_north":
       str_display = #"hash_2bad94e7d912ccc6";
       break;
-    case # "zone_grand_staircase":
+    case #"zone_grand_staircase":
       str_display = #"hash_7a3ea6bcf44cfc17";
       break;
-    case # "zone_start_east":
-    case # "zone_start_west":
+    case #"zone_start_east":
+    case #"zone_start_west":
       str_display = #"hash_1ac770988eda8b85";
       break;
-    case # "zone_start_corner_east":
+    case #"zone_start_corner_east":
       str_display = #"hash_2dbd7524c1dc4b3f";
       break;
-    case # "zone_start_corner_west":
+    case #"zone_start_corner_west":
       str_display = #"hash_3d345090017751d5";
       break;
-    case # "zone_start_room_west":
+    case #"zone_start_room_west":
       str_display = #"hash_1da61d307197c763";
       break;
-    case # "zone_arena":
+    case #"zone_arena":
       str_display = #"hash_517224645b7ac008";
       break;
-    case # "zone_underground":
+    case #"zone_underground":
       str_display = #"hash_ce97d364ff4b9c6";
       break;
     default:

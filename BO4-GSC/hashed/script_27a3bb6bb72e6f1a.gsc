@@ -350,9 +350,9 @@ function_a29b80e8(e_victim) {
       e_victim thread function_ccfc8bde();
 
       switch (e_victim.archetype) {
-        case # "zombie":
+        case #"zombie":
           break;
-        case # "gladiator":
+        case #"gladiator":
           break;
       }
     }

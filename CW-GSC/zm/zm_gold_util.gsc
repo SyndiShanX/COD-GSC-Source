@@ -72,10 +72,10 @@ function function_e76968e1(show) {
 
 function function_72c803d3(cmd) {
   switch (cmd) {
-    case # "hash_2c0a3e57a006c81d":
+    case #"hash_2c0a3e57a006c81d":
       function_e76968e1(1);
       break;
-    case # "hash_3a2f14069605556a":
+    case #"hash_3a2f14069605556a":
       function_e76968e1(0);
       break;
     default:

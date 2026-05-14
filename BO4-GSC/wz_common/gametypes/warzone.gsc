@@ -248,7 +248,7 @@ function_c2a75696() {
     string = getdvarstring(#"warzone_devgui_cmd", "<dev string:x38>");
 
     switch (string) {
-      case # "start":
+      case #"start":
         function_73b0f715();
         break;
       default:

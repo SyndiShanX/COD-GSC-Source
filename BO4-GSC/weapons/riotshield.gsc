@@ -417,9 +417,9 @@ event_handler[grenade_fire] function_4f975761(eventstruct) {
   }
 
   switch (weapon.name) {
-    case # "explosive_bolt":
-    case # "proximity_grenade":
-    case # "sticky_grenade":
+    case #"explosive_bolt":
+    case #"proximity_grenade":
+    case #"sticky_grenade":
       grenade thread check_stuck_to_shield();
       break;
   }

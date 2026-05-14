@@ -1212,28 +1212,28 @@ function function_58084b96(hitloc, weapon, var_fd90b0bb) {
 
   if(isDefined(hitloc)) {
     switch (hitloc) {
-      case # "head":
-      case # "helmet":
+      case #"head":
+      case #"helmet":
         gibserverutils::gibhead(self, var_c3317960);
         break;
-      case # "right_arm_lower":
-      case # "right_arm_upper":
-      case # "right_hand":
+      case #"right_arm_lower":
+      case #"right_arm_upper":
+      case #"right_hand":
         gibserverutils::gibrightarm(self, var_c3317960);
         break;
-      case # "left_arm_lower":
-      case # "left_arm_upper":
-      case # "left_hand":
+      case #"left_arm_lower":
+      case #"left_arm_upper":
+      case #"left_hand":
         gibserverutils::gibleftarm(self, var_c3317960);
         break;
-      case # "right_leg_upper":
-      case # "right_leg_lower":
-      case # "right_foot":
+      case #"right_leg_upper":
+      case #"right_leg_lower":
+      case #"right_foot":
         gibserverutils::gibrightleg(self, var_c3317960);
         break;
-      case # "left_leg_lower":
-      case # "left_foot":
-      case # "left_leg_upper":
+      case #"left_leg_lower":
+      case #"left_foot":
+      case #"left_leg_upper":
         gibserverutils::gibleftleg(self, var_c3317960);
         break;
     }
@@ -2071,13 +2071,13 @@ function zombie_rise_dust_fx(ai_zombie) {
     str_fx = "rise_dust";
   } else {
     switch (self.script_string) {
-      case # "in_water":
+      case #"in_water":
         str_fx = "rise_dust_water";
         break;
-      case # "in_snow":
+      case #"in_snow":
         str_fx = "rise_dust_snow";
         break;
-      case # "in_foliage":
+      case #"in_foliage":
         str_fx = "rise_dust_foliage";
         break;
       default:

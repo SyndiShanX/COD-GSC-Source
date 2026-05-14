@@ -48,13 +48,13 @@ function preinit() {
 function function_a233f763(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self.model)) {
     switch (self.model) {
-      case # "sr_ee_hulk_wild_thing":
+      case #"sr_ee_hulk_wild_thing":
         self.targetname = "sr_ee_hulk_wild_thing";
         break;
-      case # "hash_7b7cbb4eb2fd70e3":
+      case #"hash_7b7cbb4eb2fd70e3":
         self.targetname = "sr_ee_hulk_interest";
         break;
-      case # "p9_fxanim_zm_gold_essence_trap_mod":
+      case #"p9_fxanim_zm_gold_essence_trap_mod":
         self.targetname = "sr_ee_hulk_interest_fake";
         break;
     }
@@ -346,7 +346,7 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(str_model)) {
     switch (str_model) {
-      case # "hash_46cb6387fd2006a7":
+      case #"hash_46cb6387fd2006a7":
         switch (bwastimejump) {
           case 1:
             var_b4488d57.var_5beedbc3 = self;
@@ -388,16 +388,16 @@ function function_54098fb4(localclientnum, oldval, newval, bnewent, binitialsnap
         }
 
         break;
-      case # "hash_bc01edf8191a2b1":
+      case #"hash_bc01edf8191a2b1":
         self renderoverridebundle::function_f4eab437(fieldname, 1, #"hash_1a1e90e909359ce0");
         break;
-      case # "hash_7f6a9e056951dafb":
+      case #"hash_7f6a9e056951dafb":
         if(bwastimejump) {
           level thread function_7da52bb6(fieldname, self);
         }
 
         break;
-      case # "tag_origin":
+      case #"tag_origin":
         switch (bwastimejump) {
           case 1:
             var_b4488d57.var_47e634f = self;

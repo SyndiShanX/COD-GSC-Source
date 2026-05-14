@@ -1170,13 +1170,13 @@ function private devgui_loop() {
     args = strtok(dvarstr, "<dev string:x69e>");
 
     switch (args[0]) {
-      case # "clear":
+      case #"clear":
         devgui_clear();
         break;
-      case # "shuffle":
+      case #"shuffle":
         level thread devgui_shuffle(args[1]);
         break;
-      case # "hash_5d7130ece48ceb02":
+      case #"hash_5d7130ece48ceb02":
         level thread function_e4f60619(args[1]);
         break;
     }
@@ -1257,8 +1257,8 @@ function private debug_loop() {
         label = trace[#"surfacetype"];
 
         switch (label) {
-          case # "water":
-          case # "watershallow":
+          case #"water":
+          case #"watershallow":
             var_95341914 = (1, 0, 0);
             break;
         }

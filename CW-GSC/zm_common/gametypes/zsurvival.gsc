@@ -1412,19 +1412,19 @@ function private function_d48a4cc6(itemname, rarity) {
   currenthealth = self.health;
 
   switch (rarity) {
-    case # "uncommon":
+    case #"uncommon":
       self.health += 50;
       self.health = math::clamp(self.health, 0, self.var_66cb03ad);
       break;
-    case # "rare":
+    case #"rare":
       self.health += 100;
       self.health = math::clamp(self.health, 0, self.var_66cb03ad);
       break;
-    case # "epic":
+    case #"epic":
       self.health += 150;
       self.health = math::clamp(self.health, 0, self.var_66cb03ad);
       break;
-    case # "legendary":
+    case #"legendary":
       self.health += 200;
       self.health = math::clamp(self.health, 0, self.var_66cb03ad);
       self thread function_7990b88f();
@@ -1531,7 +1531,7 @@ function private function_2531fcc8() {
 
 function function_447a93ab(params) {
   switch (params.value) {
-    case # "spawn_safehouse":
+    case #"spawn_safehouse":
       namespace_ce1f29cc::function_368a7cde();
       wait 1;
       level flag::set(#"spawn_safehouse");
@@ -1539,7 +1539,7 @@ function function_447a93ab(params) {
         #completed: 1
       });
       break;
-    case # "hash_579280d018cff87a":
+    case #"hash_579280d018cff87a":
       function_2531fcc8();
       break;
     default:

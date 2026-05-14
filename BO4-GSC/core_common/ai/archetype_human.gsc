@@ -239,9 +239,9 @@ movemodeattributecallback(entity, attribute, oldvalue, value) {
   entity.ignorepathenemyfightdist = 0;
 
   switch (value) {
-    case # "normal":
+    case #"normal":
       break;
-    case # "rambo":
+    case #"rambo":
       entity.ignorepathenemyfightdist = 1;
       break;
   }
@@ -276,21 +276,21 @@ forcesprintcallback(entity, attribute, oldvalue, value) {
 
 vignettemodecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "off":
+    case #"off":
       entity.pushable = 1;
       entity collidewithactors(0);
       entity pushplayer(0);
       entity setavoidancemask("avoid all");
       entity setsteeringmode("normal steering");
       break;
-    case # "slow":
+    case #"slow":
       entity.pushable = 0;
       entity collidewithactors(0);
       entity pushplayer(1);
       entity setavoidancemask("avoid ai");
       entity setsteeringmode("vignette steering");
       break;
-    case # "fast":
+    case #"fast":
       entity.pushable = 0;
       entity collidewithactors(1);
       entity pushplayer(1);

@@ -68,13 +68,13 @@ class class_9e71c1a2 {
     var_9e3fdeff = s_minigame.script_difficulty;
 
     switch (tolower(s_minigame.var_4e0f62f3)) {
-      case # "open":
+      case #"open":
         var_8b53fab0 = 0;
         break;
-      case # "exclusive":
+      case #"exclusive":
         var_8b53fab0 = 1;
         break;
-      case # "hash_65a466c611c44a94":
+      case #"hash_65a466c611c44a94":
         var_8b53fab0 = 2;
         break;
     }

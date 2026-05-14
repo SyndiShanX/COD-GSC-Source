@@ -231,115 +231,115 @@ function function_3c3d4f17(var_1a988176) {
   }
 
   switch (var_1a988176) {
-    case # "decoy_t9_item_sr":
+    case #"decoy_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_22e96504754e8375"))) {
         return false;
       }
 
       break;
-    case # "stimshot_t9_item_sr":
+    case #"stimshot_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_52f19cd89938e56a"))) {
         return false;
       }
 
       break;
-    case # "concussion_t9_item_sr":
+    case #"concussion_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_6a5453075de4b0b3"))) {
         return false;
       }
 
       break;
-    case # "cymbal_monkey_t9_item_sr":
+    case #"cymbal_monkey_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_240adf6a97ca2bdc"))) {
         return false;
       }
 
       break;
-    case # "frag_t9_item_sr":
+    case #"frag_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_55a58334a47dd0cb"))) {
         return false;
       }
 
       break;
-    case # "hatchet_t9_item_sr":
+    case #"hatchet_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_76986c7749f63b9a"))) {
         return false;
       }
 
       break;
-    case # "semtex_t9_item_sr":
+    case #"semtex_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_5d8dd9151ffe3c3f"))) {
         return false;
       }
 
       break;
-    case # "molotov_t9_item_sr":
+    case #"molotov_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_f8c884a70b46f1f"))) {
         return false;
       }
 
       break;
-    case # "satchel_charge_t9_item_sr":
+    case #"satchel_charge_t9_item_sr":
       if(!is_true(getgametypesetting(#"hash_1ab1a89d032f7080"))) {
         return false;
       }
 
       break;
-    case # "self_revive_sr_item":
+    case #"self_revive_sr_item":
       if(!is_true(getgametypesetting(#"hash_3e70ce2c501807dc"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_ultimate_turret":
+    case #"item_survival_scorestreak_ultimate_turret":
       if(!is_true(getgametypesetting(#"hash_7edbf65b1ef09118"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_chopper_gunner":
+    case #"item_survival_scorestreak_chopper_gunner":
       if(!is_true(getgametypesetting(#"hash_6a0b096c6bbfd5eb"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_deathmachine":
+    case #"item_survival_scorestreak_deathmachine":
       if(!is_true(getgametypesetting(#"hash_58c821bc828f5ebe"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_flamethrower":
+    case #"item_survival_scorestreak_flamethrower":
       if(!is_true(getgametypesetting(#"hash_72ad1c2b51381a57"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_bow":
+    case #"item_survival_scorestreak_bow":
       if(!is_true(getgametypesetting(#"hash_115a6ae50a238213"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_napalm_strike":
+    case #"item_survival_scorestreak_napalm_strike":
       if(!is_true(getgametypesetting(#"zmenablescorestreaknapalmstrike"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_pineapple_gun":
+    case #"item_survival_scorestreak_pineapple_gun":
       if(!is_true(getgametypesetting(#"hash_3c47218eb5aa98c9"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_hand_cannon":
+    case #"item_survival_scorestreak_hand_cannon":
       if(!is_true(getgametypesetting(#"hash_4cec0e29a8901e65"))) {
         return false;
       }
 
       break;
-    case # "item_survival_scorestreak_arcxd":
+    case #"item_survival_scorestreak_arcxd":
       if(!is_true(getgametypesetting(#"hash_45aec06707484fef"))) {
         return false;
       }
@@ -380,7 +380,7 @@ function function_4b23ad31(machine, trigger) {
 
     if(menu == #"sr_crafting_table_menu") {
       switch (waitresult.response) {
-        case # "hash_300cd920d1c2290e":
+        case #"hash_300cd920d1c2290e":
           var_82e23366 = getunlockableiteminfofromindex(intpayload, 1);
           var_438da649 = function_b143666d(intpayload, 1);
           var_1a988176 = function_3d272dc5(var_438da649);
@@ -448,31 +448,31 @@ function function_4b23ad31(machine, trigger) {
               }
 
               switch (var_1a988176) {
-                case # "cymbal_monkey_t9_item_sr":
-                case # "black_hole_bomb_item_t9_sr":
-                case # "molotov_t9_item_sr":
-                case # "frag_t9_item_sr":
-                case # "hatchet_t9_item_sr":
-                case # "satchel_charge_t9_item_sr":
-                case # "semtex_t9_item_sr":
-                case # "stimshot_t9_item_sr":
-                case # "concussion_t9_item_sr":
-                case # "decoy_t9_item_sr":
+                case #"cymbal_monkey_t9_item_sr":
+                case #"black_hole_bomb_item_t9_sr":
+                case #"molotov_t9_item_sr":
+                case #"frag_t9_item_sr":
+                case #"hatchet_t9_item_sr":
+                case #"satchel_charge_t9_item_sr":
+                case #"semtex_t9_item_sr":
+                case #"stimshot_t9_item_sr":
+                case #"concussion_t9_item_sr":
+                case #"decoy_t9_item_sr":
                   self stats::function_622feb0d(var_82e23366.namehash, #"crafted", 1);
                   self contracts::increment_zm_contract(#"hash_5db7e053c5f4765f");
                   break;
-                case # "item_survival_scorestreak_pineapple_gun":
-                case # "item_survival_scorestreak_deathmachine":
-                case # "item_survival_scorestreak_ultimate_turret":
-                case # "item_survival_scorestreak_bow":
-                case # "item_survival_scorestreak_hand_cannon":
-                case # "item_survival_scorestreak_flamethrower":
-                case # "self_revive_sr_item":
-                case # "item_survival_scorestreak_remote_missile":
-                case # "item_survival_scorestreak_arcxd":
-                case # "item_survival_scorestreak_chopper_gunner":
-                case # "item_survival_scorestreak_napalm_strike":
-                case # "item_survival_scorestreak_artillery_strike":
+                case #"item_survival_scorestreak_pineapple_gun":
+                case #"item_survival_scorestreak_deathmachine":
+                case #"item_survival_scorestreak_ultimate_turret":
+                case #"item_survival_scorestreak_bow":
+                case #"item_survival_scorestreak_hand_cannon":
+                case #"item_survival_scorestreak_flamethrower":
+                case #"self_revive_sr_item":
+                case #"item_survival_scorestreak_remote_missile":
+                case #"item_survival_scorestreak_arcxd":
+                case #"item_survival_scorestreak_chopper_gunner":
+                case #"item_survival_scorestreak_napalm_strike":
+                case #"item_survival_scorestreak_artillery_strike":
                   self contracts::increment_zm_contract(#"hash_2ee6ab7ed0517a10");
                   self stats::function_8fb23f94(var_82e23366.namehash, #"crafted", 1);
                   break;
@@ -502,7 +502,7 @@ function function_4b23ad31(machine, trigger) {
           }
 
           break;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           self notify(#"hash_8a8d04156e14d76");
           self function_6c71e778(machine, trigger);
           return;

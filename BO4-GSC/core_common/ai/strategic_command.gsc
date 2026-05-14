@@ -171,14 +171,14 @@ function_65b80a10(commander, member, vehicle = undefined) {
 
 function_41c81572(var_78caba27) {
   switch (var_78caba27) {
-    case # "bot chain":
-    case # "spline":
+    case #"bot chain":
+    case #"spline":
       return (0, 1, 0);
-    case # "scripted":
+    case #"scripted":
       return (1, 0, 0);
-    case # "commander":
-    case # "player":
-    case # "vehicle":
+    case #"commander":
+    case #"player":
+    case #"vehicle":
       return (1, 0.5, 0);
   }
 
@@ -187,11 +187,11 @@ function_41c81572(var_78caba27) {
 
 function_741d9796(member, vehicle, commander, var_78caba27) {
   switch (var_78caba27) {
-    case # "bot chain":
+    case #"bot chain":
       if(isDefined(member.bot.var_53ffa4c4.startstruct)) {
         return ("<dev string:x98>" + member.bot.var_53ffa4c4.startstruct.targetname + "<dev string:xa2>");
       }
-    case # "commander":
+    case #"commander":
       foreach(squad in commander.squads) {
         bots = plannersquadutility::getblackboardattribute(squad, "<dev string:xa6>");
 
@@ -223,7 +223,7 @@ function_741d9796(member, vehicle, commander, var_78caba27) {
 
   if(isDefined(vehicle)) {
     switch (var_78caba27) {
-      case # "spline":
+      case #"spline":
         return vehicle.attachedpath.targetname;
     }
 
@@ -231,7 +231,7 @@ function_741d9796(member, vehicle, commander, var_78caba27) {
   }
 
   switch (var_78caba27) {
-    case # "vehicle":
+    case #"vehicle":
       vehicle = member getvehicleoccupied();
 
       if(isDefined(vehicle)) {
@@ -811,10 +811,10 @@ function_704d5fbd(bot, component) {
   }
 
   switch (component.m_str_type) {
-    case # "goto":
+    case #"goto":
       break;
-    case # "destroy":
-    case # "defend":
+    case #"destroy":
+    case #"defend":
       if(function_778568e2(bot)) {
         return calculatepathtotrigger(bot, component.var_6bc907c4);
       } else {
@@ -822,7 +822,7 @@ function_704d5fbd(bot, component) {
       }
 
       break;
-    case # "capturearea":
+    case #"capturearea":
       return calculatepathtotrigger(bot, component.var_cc67d976);
   }
 }
@@ -1181,9 +1181,9 @@ function_4b0c469d(vehicle) {
   assert(isDefined(vehicle) && isvehicle(vehicle));
 
   switch (vehicle.vehicleclass) {
-    case # "helicopter":
+    case #"helicopter":
       return "air";
-    case # "4 wheel":
+    case #"4 wheel":
       return "ground";
   }
 
@@ -1213,14 +1213,14 @@ function_5c2c9542(entity, component) {
   assert(isDefined(component));
 
   switch (component.m_str_type) {
-    case # "destroy":
-    case # "defend":
+    case #"destroy":
+    case #"defend":
       if(function_778568e2(entity)) {
         return component.var_6bc907c4;
       }
 
       return component.var_2956bff4;
-    case # "capturearea":
+    case #"capturearea":
       return component.var_cc67d976;
   }
 }
@@ -1317,7 +1317,7 @@ function_208c970d(gpbundle, var_832340f2) {
   type = gpbundle.classname;
 
   switch (type) {
-    case # "hash_1c67b29f3576b10d":
+    case #"hash_1c67b29f3576b10d":
       if(!isDefined(bundle.var_27726d51)) {
         return false;
       }
@@ -1363,11 +1363,11 @@ function_f867cce0(missioncomponent, commanderteam) {
   type = missioncomponent.scriptbundlename;
 
   switch (type) {
-    case # "missioncomponent_destroy":
+    case #"missioncomponent_destroy":
       break;
-    case # "missioncomponent_capturearea":
+    case #"missioncomponent_capturearea":
       break;
-    case # "missioncomponent_goto":
+    case #"missioncomponent_goto":
       break;
     default:
       return false;
@@ -1561,35 +1561,35 @@ function_f4921cb3(var_6d1ae0e2) {
   focuses = array();
 
   switch (var_6d1ae0e2) {
-    case # "hash_617966a33a6bad2b":
+    case #"hash_617966a33a6bad2b":
       focuses[focuses.size] = #"hash_617966a33a6bad2b";
       break;
-    case # "follow player":
+    case #"follow player":
       focuses[focuses.size] = #"follow player";
       break;
-    case # "hash_a465dbf9320e821":
+    case #"hash_a465dbf9320e821":
       focuses[focuses.size] = #"hash_617966a33a6bad2b";
       focuses[focuses.size] = #"follow player";
       break;
-    case # "hash_964e75ec7937916":
+    case #"hash_964e75ec7937916":
       focuses[focuses.size] = #"hash_964e75ec7937916";
       break;
-    case # "hash_64a01d6e814c8dc":
+    case #"hash_64a01d6e814c8dc":
       focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
-    case # "hash_584bf5a5b6fe57ca":
+    case #"hash_584bf5a5b6fe57ca":
       focuses[focuses.size] = #"hash_964e75ec7937916";
       focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
-    case # "hash_833af17ffa224fe":
+    case #"hash_833af17ffa224fe":
       focuses[focuses.size] = #"hash_617966a33a6bad2b";
       focuses[focuses.size] = #"hash_964e75ec7937916";
       break;
-    case # "hash_692e498c8008c994":
+    case #"hash_692e498c8008c994":
       focuses[focuses.size] = #"follow player";
       focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
-    case # "objective":
+    case #"objective":
       focuses[focuses.size] = #"objective";
       break;
   }

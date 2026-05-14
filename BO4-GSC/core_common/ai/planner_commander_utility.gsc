@@ -351,7 +351,7 @@ function_816f4052(planner, doppelbots, bundles) {
     escort = undefined;
 
     switch (bundle.m_str_type) {
-      case # "escortbiped":
+      case #"escortbiped":
         escort = bundle.var_27726d51;
         break;
       default:
@@ -454,13 +454,13 @@ function_77cd4593(planner, doppelbots, components) {
     trigger = undefined;
 
     switch (component.m_str_type) {
-      case # "goto":
+      case #"goto":
         break;
-      case # "destroy":
-      case # "defend":
+      case #"destroy":
+      case #"defend":
         trigger = var_80e29ead ? component.var_6bc907c4 : component.var_2956bff4;
         break;
-      case # "capturearea":
+      case #"capturearea":
         trigger = component.var_cc67d976;
         break;
       default:
@@ -970,7 +970,7 @@ function_e6443602(commander) {
       var_5f31ab8b = array();
 
       switch (type) {
-        case # "hash_1c67b29f3576b10d":
+        case #"hash_1c67b29f3576b10d":
           var_5f31ab8b[#"type"] = "escortbiped";
           break;
         default:
@@ -1022,16 +1022,16 @@ function_7706a6fa(commander) {
       var_b313868d = array();
 
       switch (type) {
-        case # "missioncomponent_defend":
+        case #"missioncomponent_defend":
           var_b313868d[#"type"] = "defend";
           break;
-        case # "missioncomponent_destroy":
+        case #"missioncomponent_destroy":
           var_b313868d[#"type"] = "destroy";
           break;
-        case # "missioncomponent_capturearea":
+        case #"missioncomponent_capturearea":
           var_b313868d[#"type"] = "capturearea";
           break;
-        case # "missioncomponent_goto":
+        case #"missioncomponent_goto":
           if(isDefined(component.var_c68dc48c) || isDefined(component.var_b95bcdc6)) {
             var_b313868d[#"type"] = "goto";
           } else {
@@ -1408,13 +1408,13 @@ function_52012b78(planner, constant) {
   }
 
   switch (distribution) {
-    case # "evenly":
+    case #"evenly":
       arrayremoveindex(targets[priority], 0);
       targets[priority][targets.size] = target;
       break;
-    case # "greedy":
+    case #"greedy":
       break;
-    case # "uniquely":
+    case #"uniquely":
       arrayremoveindex(targets[priority], 0);
       break;
     default:
@@ -1444,7 +1444,7 @@ function_34464159(planner, constant) {
   }
 
   switch (bundle.m_str_type) {
-    case # "escortbiped":
+    case #"escortbiped":
       entity = bundle.var_27726d51;
       break;
   }

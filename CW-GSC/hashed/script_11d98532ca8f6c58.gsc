@@ -159,7 +159,7 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
     foreach(ent in linkedents) {
       if(isDefined(ent.script_noteworthy)) {
         switch (ent.script_noteworthy) {
-          case # "damage_trigger":
+          case #"damage_trigger":
             if(ent.script_parameters === "do_damage") {
               if(!isDefined(ent.original_origin)) {
                 ent.original_origin = ent.origin;
@@ -179,7 +179,7 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
             }
 
             break;
-          case # "clip":
+          case #"clip":
             if(ent.script_parameters === "do_damage") {
               if(!isDefined(ent.original_origin)) {
                 ent.original_origin = ent.origin;
@@ -295,10 +295,10 @@ function function_d0b79cca(var_49360986, var_403c008b, var_12e2a31c, speed = 600
     if(var_403c008b.targetname !== "train_car_03" && isDefined(point.script_noteworthy)) {
       if(issubstr(point.script_noteworthy, "vfx")) {} else {
         switch (point.script_noteworthy) {
-          case # "hash_4f6e67d0d79e009d":
+          case #"hash_4f6e67d0d79e009d":
             level.var_2c3f2c7d += 1;
             break;
-          case # "hash_6b37faebe309d06a":
+          case #"hash_6b37faebe309d06a":
             level.var_2c3f2c7d -= 1;
             break;
         }

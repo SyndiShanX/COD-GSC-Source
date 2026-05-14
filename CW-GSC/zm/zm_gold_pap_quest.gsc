@@ -60,13 +60,13 @@ function function_34427db() {
     waitresult = level waittill(#"power_on1", #"power_on2", #"power_on3");
 
     switch (waitresult._notify) {
-      case # "power_on1":
+      case #"power_on1":
         str_models = "mdl_env_omega_defence_01";
         break;
-      case # "power_on2":
+      case #"power_on2":
         str_models = "mdl_env_omega_defence_02";
         break;
-      case # "power_on3":
+      case #"power_on3":
         str_models = "mdl_env_omega_defence_03";
         break;
     }

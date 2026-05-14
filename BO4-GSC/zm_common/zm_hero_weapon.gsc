@@ -599,10 +599,10 @@ function_3fe4a02e(e_player, n_points, str_event) {
 
   if(isDefined(str_event) && !(isDefined(level.var_f03084a6) && level.var_f03084a6)) {
     switch (str_event) {
-      case # "carpenter_powerup":
-      case # "nuke_powerup":
-      case # "bonus_points_powerup_shared":
-      case # "bonus_points_powerup":
+      case #"carpenter_powerup":
+      case #"nuke_powerup":
+      case #"bonus_points_powerup_shared":
+      case #"bonus_points_powerup":
         return;
     }
   }

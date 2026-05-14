@@ -41,25 +41,25 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "hash_5dc1860bc6361a4f":
+    case #"hash_5dc1860bc6361a4f":
       var_bd11e136 = ent;
       thread function_22eb52f1(ent);
       ent waittill(#"death");
       var_bd11e136 = undefined;
       break;
-    case # "audio_escape_double_door_open":
+    case #"audio_escape_double_door_open":
       mdl_door = ent;
       thread function_44d9c5d6(ent);
       ent waittill(#"death");
       mdl_door = undefined;
       break;
-    case # "audio_escape_heli_flyby_scene":
+    case #"audio_escape_heli_flyby_scene":
       var_d68cf643 = ent;
       thread function_82923c77(ent);
       ent waittill(#"death");
       var_d68cf643 = undefined;
       break;
-    case # "audio_scaffolding_truck_early":
+    case #"audio_scaffolding_truck_early":
       var_3e7640be = ent;
       thread function_6d1b5ca8(ent);
       ent waittill(#"death");
@@ -77,32 +77,32 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
-    case # "rev_church":
+    case #"rev_church":
       snd::set_element(trigger, trigger_name);
       break;
-    case # "hash_6faee8855385fdd":
+    case #"hash_6faee8855385fdd":
       thread function_1b4cd940();
       break;
-    case # "hash_4ceeb995c5173348":
+    case #"hash_4ceeb995c5173348":
       break;
-    case # "hash_45e3459aba1a8e44":
+    case #"hash_45e3459aba1a8e44":
       thread function_1b4cd940();
       break;
-    case # "hash_19a6ae873920999c":
+    case #"hash_19a6ae873920999c":
       thread function_1b4cd940();
       break;
-    case # "hash_514984330c55ea42":
+    case #"hash_514984330c55ea42":
       thread function_1b4cd940();
       break;
-    case # "hash_13e5f87e2bdb4522":
+    case #"hash_13e5f87e2bdb4522":
       thread function_1b4cd940();
       break;
-    case # "hash_4090bff003f29d3d":
+    case #"hash_4090bff003f29d3d":
       thread function_1b4cd940();
       break;
-    case # "hash_8d5a53bd1de8c8b":
+    case #"hash_8d5a53bd1de8c8b":
       level notify(#"hash_45857b1e602daa65");
       break;
     default:
@@ -115,81 +115,81 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "audio_level_begin_duck_start":
+    case #"audio_level_begin_duck_start":
       thread function_563a791();
       break;
-    case # "audio_level_begin_duck_stop":
+    case #"audio_level_begin_duck_stop":
       thread function_1cfbed4a();
       break;
-    case # "audio_bird_spook_upper":
+    case #"audio_bird_spook_upper":
       thread function_24ff6bbb();
       break;
-    case # "audio_bird_spook_lower":
+    case #"audio_bird_spook_lower":
       thread function_86a08556();
       break;
-    case # "church_explosion_event":
+    case #"church_explosion_event":
       thread church_explosion_event();
       thread function_a1111031();
       break;
-    case # "audio_table_flip":
+    case #"audio_table_flip":
       thread function_a18572ae();
       break;
-    case # "audio_courtyard_side_doors_open":
+    case #"audio_courtyard_side_doors_open":
       thread function_c70ec914();
       break;
-    case # "rpg_vs_pillar":
+    case #"rpg_vs_pillar":
       thread rpg_vs_pillar();
       break;
-    case # "hash_66c5b8239714abe3":
+    case #"hash_66c5b8239714abe3":
       thread function_66d66e0d();
       break;
-    case # "flg_cctv_cam_swap_audio":
+    case #"flg_cctv_cam_swap_audio":
       thread function_e80187e0();
       break;
-    case # "hash_1a924faa8856a242":
+    case #"hash_1a924faa8856a242":
       level notify(#"hash_4c8029ada7b314e8");
       break;
-    case # "audio_cctv_dining_room_duck":
+    case #"audio_cctv_dining_room_duck":
       thread function_cacf9f06();
       break;
-    case # "audio_cctv_nuke_room_duck":
+    case #"audio_cctv_nuke_room_duck":
       thread function_f80880e0();
       break;
-    case # "hash_78689cff8e101ca3":
+    case #"hash_78689cff8e101ca3":
       level notify(#"hash_11cf1c7d4187ce0b");
       break;
-    case # "hash_3f39fdf09fc1c4cf":
+    case #"hash_3f39fdf09fc1c4cf":
       thread function_2a63d46a();
       break;
-    case # "hash_45e98cb8ee510b06":
+    case #"hash_45e98cb8ee510b06":
       thread function_824188b9();
       break;
-    case # "audio_start_disinfectant_spray":
+    case #"audio_start_disinfectant_spray":
       thread function_3f00de2d();
       break;
-    case # "audio_stop_disinfectant_spray":
+    case #"audio_stop_disinfectant_spray":
       level notify(#"hash_24e6b47fcba7f75");
       break;
-    case # "audio_escape_hallway_glass":
+    case #"audio_escape_hallway_glass":
       thread function_bd21b731();
       break;
-    case # "audio_escape_heli_flyby_started":
+    case #"audio_escape_heli_flyby_started":
       level notify(#"heli_flyby_started");
       break;
-    case # "audio_ac130_started":
+    case #"audio_ac130_started":
       thread function_c84e23dc();
       break;
-    case # "audio_ac130_stopped":
+    case #"audio_ac130_stopped":
       level notify(#"ac130_stopped");
       break;
-    case # "audio_rpg_aftermath_debris_fires":
+    case #"audio_rpg_aftermath_debris_fires":
       thread function_e27bd56b();
       break;
-    case # "musictrack_cp_cuba_2":
-    case # "musictrack_cp_cuba_3":
-    case # "musictrack_cp_cuba_1":
-    case # "musictrack_cp_cuba_4":
-    case # "musictrack_cp_cuba_5":
+    case #"musictrack_cp_cuba_2":
+    case #"musictrack_cp_cuba_3":
+    case #"musictrack_cp_cuba_1":
+    case #"musictrack_cp_cuba_4":
+    case #"musictrack_cp_cuba_5":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -202,32 +202,32 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "ride":
+    case #"ride":
       level flag::set("flg_audio_cicada_ambience");
       break;
-    case # "church":
+    case #"church":
       level flag::set("flg_audio_cicada_ambience");
       break;
-    case # "plaza":
+    case #"plaza":
       break;
-    case # "1st_floor":
+    case #"1st_floor":
       break;
-    case # "1st_floor_cctv":
+    case #"1st_floor_cctv":
       thread function_f0f5eef2();
       break;
-    case # "2nd_floor":
+    case #"2nd_floor":
       break;
-    case # "vip_room":
+    case #"vip_room":
       break;
-    case # "escape":
+    case #"escape":
       break;
-    case # "rooftop":
+    case #"rooftop":
       break;
-    case # "rooftop_defend_1":
+    case #"rooftop_defend_1":
       break;
-    case # "exfil":
+    case #"exfil":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

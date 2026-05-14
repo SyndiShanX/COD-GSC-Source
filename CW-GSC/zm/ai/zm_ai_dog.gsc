@@ -2291,7 +2291,7 @@ function function_db4f75e() {
 
 function function_4072bc4d(dvar) {
   switch (dvar.value) {
-    case # "hash_71dc780eee2bf889":
+    case #"hash_71dc780eee2bf889":
       level thread function_a8cde6e0();
       break;
     case 0:

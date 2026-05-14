@@ -854,25 +854,25 @@ function showonradar() {
   icon_index = undefined;
 
   switch (self.radartype) {
-    case # "basic_zombie":
+    case #"basic_zombie":
       icon_index = 2;
       break;
-    case # "skeleton":
+    case #"skeleton":
       icon_index = 7;
       break;
-    case # "brutus":
+    case #"brutus":
       icon_index = 3;
       break;
-    case # "bat":
+    case #"bat":
       icon_index = 4;
       break;
-    case # "demon":
+    case #"demon":
       icon_index = 5;
       break;
-    case # "wolf_hellhound":
+    case #"wolf_hellhound":
       icon_index = 6;
       break;
-    case # "crawler_zombie":
+    case #"crawler_zombie":
       icon_index = 8;
       break;
   }

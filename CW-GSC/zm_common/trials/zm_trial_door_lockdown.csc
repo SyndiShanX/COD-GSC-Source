@@ -36,13 +36,13 @@ function private zm_trial_door_lockdown(localclientnum, oldval, newval, bnewent,
     v_forward = anglesToForward(self.angles);
 
     switch (self.model) {
-      case # "collision_player_wall_64x64x10":
+      case #"collision_player_wall_64x64x10":
         var_b1e1a2db = level._effect[#"hash_351debe7af1f588b"];
         break;
-      case # "collision_player_wall_128x128x10":
+      case #"collision_player_wall_128x128x10":
         var_b1e1a2db = level._effect[#"hash_257bf4ae70b5a852"];
         break;
-      case # "collision_player_wall_256x256x10":
+      case #"collision_player_wall_256x256x10":
         var_b1e1a2db = level._effect[#"hash_3ea271ae7eb7fdce"];
         break;
       default:

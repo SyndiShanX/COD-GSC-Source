@@ -156,7 +156,7 @@ ambient_fakefire_think(point) {
   }
 
   switch (point.weaponinfo) {
-    case # "allies_assault":
+    case #"allies_assault":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_bar_fire";
       } else {
@@ -172,7 +172,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "assault";
       break;
-    case # "axis_assault":
+    case #"axis_assault":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp44_fire";
       } else {
@@ -188,7 +188,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "assault";
       break;
-    case # "allies_rifle":
+    case #"allies_rifle":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_m1garand_fire";
       } else {
@@ -204,7 +204,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "rifle";
       break;
-    case # "axis_rifle":
+    case #"axis_rifle":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_kar98k_fire";
       } else {
@@ -220,7 +220,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "rifle";
       break;
-    case # "allies_smg":
+    case #"allies_smg":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_thompson_fire";
       } else {
@@ -236,7 +236,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "smg";
       break;
-    case # "axis_smg":
+    case #"axis_smg":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp40_fire";
       } else {
@@ -252,7 +252,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "smg";
       break;
-    case # "allies_turret":
+    case #"allies_turret":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_30cal_fire";
       } else {
@@ -268,7 +268,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "turret";
       break;
-    case # "axis_turret":
+    case #"axis_turret":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_bar_fire";
       } else {
@@ -411,46 +411,46 @@ clock_run(time_values) {
     curr_time = getsystemtime(1);
 
     switch (tolower(self.script_noteworthy)) {
-      case # "honolulu":
+      case #"honolulu":
         hour = curr_time[0] - 10;
         break;
-      case # "alaska":
+      case #"alaska":
         hour = curr_time[0] - 9;
         break;
-      case # "los angeles":
+      case #"los angeles":
         hour = curr_time[0] - 8;
         break;
-      case # "denver":
+      case #"denver":
         hour = curr_time[0] - 7;
         break;
-      case # "chicago":
+      case #"chicago":
         hour = curr_time[0] - 6;
         break;
-      case # "new york":
+      case #"new york":
         hour = curr_time[0] - 5;
         break;
-      case # "halifax":
+      case #"halifax":
         hour = curr_time[0] - 4;
         break;
-      case # "greenland":
+      case #"greenland":
         hour = curr_time[0] - 3;
         break;
-      case # "london":
+      case #"london":
         hour = curr_time[0];
         break;
-      case # "paris":
+      case #"paris":
         hour = curr_time[0] + 1;
         break;
-      case # "helsinki":
+      case #"helsinki":
         hour = curr_time[0] + 2;
         break;
-      case # "moscow":
+      case #"moscow":
         hour = curr_time[0] + 3;
         break;
-      case # "vietnam":
+      case #"vietnam":
         hour = curr_time[0] + 7;
         break;
-      case # "china":
+      case #"china":
         hour = curr_time[0] + 8;
         break;
     }

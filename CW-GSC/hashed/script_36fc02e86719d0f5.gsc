@@ -1106,7 +1106,7 @@ function spawnitem(item) {
   }
 
   switch (item.script_noteworthy) {
-    case # "world_door":
+    case #"world_door":
       namespace_f63bdb08::function_2a1e5c1f(item.origin, item.angles, item.model, isDefined(item.script_int) ? int(item.script_int) : undefined, isDefined(item.script_objective) ? int(item.script_objective) : undefined, 1, item.script_parameters);
 
       if(is_true(level.doa.var_318aa67a)) {
@@ -1114,13 +1114,13 @@ function spawnitem(item) {
       }
 
       break;
-    case # "world_loot":
+    case #"world_loot":
       namespace_41f5b853::spawnlootitem(item.origin, item.angles, item.script_string, item.radius, 1);
       break;
-    case # "treasure_blob":
+    case #"treasure_blob":
       namespace_dfc652ee::function_68442ee7(item.origin, 20, isDefined(item.radius) ? item.radius : 200);
       break;
-    case # "hash_6b07679758a7acc":
+    case #"hash_6b07679758a7acc":
       assert(isDefined(item.parameters), "<dev string:x1b0>");
       def = namespace_dfc652ee::function_6265bde4(item.parameters[randomint(item.parameters.size)]);
     default:
@@ -1249,11 +1249,11 @@ function function_e5488243(npc) {
   }
 
   switch (mode) {
-    case # "none":
+    case #"none":
       return;
-    case # "patrol":
+    case #"patrol":
       break;
-    case # "guard":
+    case #"guard":
     default:
       self thread namespace_250e9486::ai_guard(npc.radius);
       break;

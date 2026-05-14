@@ -129,15 +129,15 @@ function function_7df588f1() {
 
     if(isDefined(ai.script_noteworthy)) {
       switch (ai.script_noteworthy) {
-        case # "intro_hit_player_1":
+        case #"intro_hit_player_1":
           var_e37ea03f = ai;
           var_f1a8db84 = vh;
           break;
-        case # "intro_hit_player_2":
+        case #"intro_hit_player_2":
           var_8933ebaf = ai;
           var_71c65bbd = vh;
           break;
-        case # "intro_hit_player_3":
+        case #"intro_hit_player_3":
           var_79c24ccc = ai;
           var_8300fe32 = vh;
           break;

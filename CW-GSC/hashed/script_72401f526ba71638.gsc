@@ -119,21 +119,21 @@ function function_460882e2(var_4e20aeca = 0) {
 
 function function_94d18799(var_40e28ba) {
   switch (var_40e28ba) {
-    case # "frost_blast_tier":
+    case #"frost_blast_tier":
       return # "frost_blast";
-    case # "heal_aoe_tier":
+    case #"heal_aoe_tier":
       return # "heal_aoe";
-    case # "energy_mine_tier":
+    case #"energy_mine_tier":
       return # "energy_mine";
-    case # "aether_shroud_tier":
+    case #"aether_shroud_tier":
       return # "aether_shroud";
-    case # "ring_of_fire_tier":
+    case #"ring_of_fire_tier":
       return # "ring_of_fire";
-    case # "hash_1bb7d8d0caf94859":
+    case #"hash_1bb7d8d0caf94859":
       return # "hash_55569355da0f0f68";
-    case # "toxic_growth_tier":
+    case #"toxic_growth_tier":
       return # "toxic_growth";
-    case # "lightning_links_tier":
+    case #"lightning_links_tier":
       return # "lightning_links";
   }
 }
@@ -328,68 +328,68 @@ function function_5f81a103(weapon, b_killed = 0) {
 
 function private function_9a67c8c7(str_name) {
   switch (str_name) {
-    case # "frost_blast_4":
-    case # "frost_blast":
-    case # "frost_blast_1":
-    case # "frost_blast_3":
-    case # "frost_blast_2":
-    case # "frost_blast_5":
+    case #"frost_blast_4":
+    case #"frost_blast":
+    case #"frost_blast_1":
+    case #"frost_blast_3":
+    case #"frost_blast_2":
+    case #"frost_blast_5":
       var_45d28da0 = 1;
       break;
-    case # "heal_aoe_1":
-    case # "heal_aoe_2":
-    case # "heal_aoe_3":
-    case # "heal_aoe_4":
-    case # "heal_aoe_5":
-    case # "heal_aoe":
+    case #"heal_aoe_1":
+    case #"heal_aoe_2":
+    case #"heal_aoe_3":
+    case #"heal_aoe_4":
+    case #"heal_aoe_5":
+    case #"heal_aoe":
       var_45d28da0 = 2;
       break;
-    case # "energy_mine_1":
-    case # "energy_mine_3":
-    case # "energy_mine_2":
-    case # "energy_mine_4":
-    case # "energy_mine_5":
-    case # "energy_mine":
+    case #"energy_mine_1":
+    case #"energy_mine_3":
+    case #"energy_mine_2":
+    case #"energy_mine_4":
+    case #"energy_mine_5":
+    case #"energy_mine":
       var_45d28da0 = 3;
       break;
-    case # "ring_of_fire_4":
-    case # "ring_of_fire":
-    case # "ring_of_fire_5":
-    case # "ring_of_fire_3":
-    case # "ring_of_fire_2":
-    case # "ring_of_fire_1":
+    case #"ring_of_fire_4":
+    case #"ring_of_fire":
+    case #"ring_of_fire_5":
+    case #"ring_of_fire_3":
+    case #"ring_of_fire_2":
+    case #"ring_of_fire_1":
       var_45d28da0 = 4;
       break;
-    case # "aether_shroud_3":
-    case # "aether_shroud":
-    case # "aether_shroud_1":
-    case # "aether_shroud_4":
-    case # "aether_shroud_5":
-    case # "aether_shroud_2":
+    case #"aether_shroud_3":
+    case #"aether_shroud":
+    case #"aether_shroud_1":
+    case #"aether_shroud_4":
+    case #"aether_shroud_5":
+    case #"aether_shroud_2":
       var_45d28da0 = 5;
       break;
-    case # "hash_43e323396554dc73":
-    case # "hash_43e326396554e18c":
-    case # "hash_43e328396554e4f2":
-    case # "hash_43e329396554e6a5":
-    case # "hash_55569355da0f0f68":
-    case # "hash_43e322396554dac0":
+    case #"hash_43e323396554dc73":
+    case #"hash_43e326396554e18c":
+    case #"hash_43e328396554e4f2":
+    case #"hash_43e329396554e6a5":
+    case #"hash_55569355da0f0f68":
+    case #"hash_43e322396554dac0":
       var_45d28da0 = 6;
       break;
-    case # "toxic_growth_5":
-    case # "toxic_growth_4":
-    case # "toxic_growth_3":
-    case # "toxic_growth_2":
-    case # "toxic_growth_1":
-    case # "toxic_growth":
+    case #"toxic_growth_5":
+    case #"toxic_growth_4":
+    case #"toxic_growth_3":
+    case #"toxic_growth_2":
+    case #"toxic_growth_1":
+    case #"toxic_growth":
       var_45d28da0 = 7;
       break;
-    case # "lightning_links_2":
-    case # "lightning_links_3":
-    case # "lightning_links_4":
-    case # "lightning_links_5":
-    case # "lightning_links_1":
-    case # "lightning_links":
+    case #"lightning_links_2":
+    case #"lightning_links_3":
+    case #"lightning_links_4":
+    case #"lightning_links_5":
+    case #"lightning_links_1":
+    case #"lightning_links":
       var_45d28da0 = 8;
       break;
   }
@@ -504,89 +504,89 @@ function private function_fe8d21ed(var_7df0eb27 = 0) {
 
 function function_4f8cb6fd(item_name) {
   switch (item_name) {
-    case # "field_upgrade_aether_shroud_1_item_sr":
-    case # "field_upgrade_aether_shroud_2_item_sr":
-    case # "field_upgrade_aether_shroud_item_sr":
-    case # "field_upgrade_aether_shroud_3_item_sr":
-    case # "field_upgrade_aether_shroud_4_item_sr":
-    case # "field_upgrade_aether_shroud_5_item_sr":
+    case #"field_upgrade_aether_shroud_1_item_sr":
+    case #"field_upgrade_aether_shroud_2_item_sr":
+    case #"field_upgrade_aether_shroud_item_sr":
+    case #"field_upgrade_aether_shroud_3_item_sr":
+    case #"field_upgrade_aether_shroud_4_item_sr":
+    case #"field_upgrade_aether_shroud_5_item_sr":
       if(!is_true(getgametypesetting(#"hash_26dc68686741b223"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_frost_blast_2_item_sr":
-    case # "field_upgrade_frost_blast_5_item_sr":
-    case # "field_upgrade_frost_blast_4_item_sr":
-    case # "field_upgrade_frost_blast_3_item_sr":
-    case # "field_upgrade_frost_blast_1_item_sr":
-    case # "field_upgrade_frost_blast_item_sr":
+    case #"field_upgrade_frost_blast_2_item_sr":
+    case #"field_upgrade_frost_blast_5_item_sr":
+    case #"field_upgrade_frost_blast_4_item_sr":
+    case #"field_upgrade_frost_blast_3_item_sr":
+    case #"field_upgrade_frost_blast_1_item_sr":
+    case #"field_upgrade_frost_blast_item_sr":
       if(!is_true(getgametypesetting(#"hash_af8083f7ea1c28b"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_heal_aoe_1_item_sr":
-    case # "field_upgrade_heal_aoe_5_item_sr":
-    case # "field_upgrade_heal_aoe_4_item_sr":
-    case # "field_upgrade_heal_aoe_item_sr":
-    case # "field_upgrade_heal_aoe_3_item_sr":
-    case # "field_upgrade_heal_aoe_2_item_sr":
+    case #"field_upgrade_heal_aoe_1_item_sr":
+    case #"field_upgrade_heal_aoe_5_item_sr":
+    case #"field_upgrade_heal_aoe_4_item_sr":
+    case #"field_upgrade_heal_aoe_item_sr":
+    case #"field_upgrade_heal_aoe_3_item_sr":
+    case #"field_upgrade_heal_aoe_2_item_sr":
       if(!is_true(getgametypesetting(#"hash_77e5bcb82c95cf00"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_energy_mine_item_sr":
-    case # "field_upgrade_energy_mine_5_item_sr":
-    case # "field_upgrade_energy_mine_2_item_sr":
-    case # "field_upgrade_energy_mine_3_item_sr":
-    case # "field_upgrade_energy_mine_1_item_sr":
-    case # "field_upgrade_energy_mine_4_item_sr":
+    case #"field_upgrade_energy_mine_item_sr":
+    case #"field_upgrade_energy_mine_5_item_sr":
+    case #"field_upgrade_energy_mine_2_item_sr":
+    case #"field_upgrade_energy_mine_3_item_sr":
+    case #"field_upgrade_energy_mine_1_item_sr":
+    case #"field_upgrade_energy_mine_4_item_sr":
       if(!is_true(getgametypesetting(#"hash_4230e2ce569b5e48"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_ring_of_fire_4_item_sr":
-    case # "field_upgrade_ring_of_fire_2_item_sr":
-    case # "field_upgrade_ring_of_fire_5_item_sr":
-    case # "field_upgrade_ring_of_fire_1_item_sr":
-    case # "field_upgrade_ring_of_fire_item_sr":
-    case # "field_upgrade_ring_of_fire_3_item_sr":
+    case #"field_upgrade_ring_of_fire_4_item_sr":
+    case #"field_upgrade_ring_of_fire_2_item_sr":
+    case #"field_upgrade_ring_of_fire_5_item_sr":
+    case #"field_upgrade_ring_of_fire_1_item_sr":
+    case #"field_upgrade_ring_of_fire_item_sr":
+    case #"field_upgrade_ring_of_fire_3_item_sr":
       if(!is_true(getgametypesetting(#"hash_2015355bc530a7e8"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_frenzied_guard_item_sr":
-    case # "field_upgrade_frenzied_guard_2_item_sr":
-    case # "field_upgrade_frenzied_guard_4_item_sr":
-    case # "field_upgrade_frenzied_guard_3_item_sr":
-    case # "field_upgrade_frenzied_guard_1_item_sr":
-    case # "field_upgrade_frenzied_guard_5_item_sr":
+    case #"field_upgrade_frenzied_guard_item_sr":
+    case #"field_upgrade_frenzied_guard_2_item_sr":
+    case #"field_upgrade_frenzied_guard_4_item_sr":
+    case #"field_upgrade_frenzied_guard_3_item_sr":
+    case #"field_upgrade_frenzied_guard_1_item_sr":
+    case #"field_upgrade_frenzied_guard_5_item_sr":
       if(!is_true(getgametypesetting(#"hash_6e7905f68c5d7bdd"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_toxic_growth_5_item_sr":
-    case # "field_upgrade_toxic_growth_item_sr":
-    case # "field_upgrade_toxic_growth_2_item_sr":
-    case # "field_upgrade_toxic_growth_4_item_sr":
-    case # "field_upgrade_toxic_growth_1_item_sr":
-    case # "field_upgrade_toxic_growth_3_item_sr":
+    case #"field_upgrade_toxic_growth_5_item_sr":
+    case #"field_upgrade_toxic_growth_item_sr":
+    case #"field_upgrade_toxic_growth_2_item_sr":
+    case #"field_upgrade_toxic_growth_4_item_sr":
+    case #"field_upgrade_toxic_growth_1_item_sr":
+    case #"field_upgrade_toxic_growth_3_item_sr":
       if(!is_true(getgametypesetting(#"hash_5cedd3fe49a8b4e1"))) {
         return true;
       }
 
       break;
-    case # "field_upgrade_lightning_links_3_item_sr":
-    case # "field_upgrade_lightning_links_4_item_sr":
-    case # "field_upgrade_lightning_links_5_item_sr":
-    case # "field_upgrade_lightning_links_1_item_sr":
-    case # "field_upgrade_lightning_links_2_item_sr":
-    case # "field_upgrade_lightning_links_item_sr":
+    case #"field_upgrade_lightning_links_3_item_sr":
+    case #"field_upgrade_lightning_links_4_item_sr":
+    case #"field_upgrade_lightning_links_5_item_sr":
+    case #"field_upgrade_lightning_links_1_item_sr":
+    case #"field_upgrade_lightning_links_2_item_sr":
+    case #"field_upgrade_lightning_links_item_sr":
       if(!is_true(getgametypesetting(#"hash_1fc262f0136c2814"))) {
         return true;
       }
@@ -845,7 +845,7 @@ function function_35216077(params) {
   }
 
   switch (params.name) {
-    case # "hash_3ce5890428b398f1":
+    case #"hash_3ce5890428b398f1":
       if(int(params.value)) {
         iprintlnbold("<dev string:x1467>");
       } else {
@@ -853,13 +853,13 @@ function function_35216077(params) {
       }
 
       break;
-    case # "hash_6ace867d48136ede":
+    case #"hash_6ace867d48136ede":
       foreach(player in getplayers()) {
         player function_6457e4cd(hash(params.value));
       }
 
       break;
-    case # "hash_31bd3f1a2ffb2b7":
+    case #"hash_31bd3f1a2ffb2b7":
       foreach(player in getplayers()) {
         if(isalive(player) && isDefined(player.var_8da24ed0) && isDefined(player.inventory) && isDefined(player.var_fc8023b4)) {
           player.var_8da24ed0 = player.var_fc8023b4;
@@ -868,7 +868,7 @@ function function_35216077(params) {
       }
 
       break;
-    case # "hash_78ea4420d95a6213":
+    case #"hash_78ea4420d95a6213":
       foreach(player in getplayers()) {
         if(params.value == 1) {
           player function_7a0afa38();

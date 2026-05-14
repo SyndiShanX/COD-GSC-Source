@@ -132,17 +132,17 @@ function function_d240d5de() {
 
   if(isDefined(self.script_noteworthy)) {
     switch (self.script_noteworthy) {
-      case # "meatball_large":
+      case #"meatball_large":
         var_64ae47e = "zmb_doa_ai_meatball_lrg_spawn";
         var_9c464736 = "zmb_doa_ai_meatball_lrg_lp";
         self.var_8de8630 = sqr(50);
         break;
-      case # "meatball_medium":
+      case #"meatball_medium":
         var_64ae47e = "zmb_doa_ai_meatball_med_spawn";
         var_9c464736 = "zmb_doa_ai_meatball_med_lp";
         self.var_8de8630 = sqr(40);
         break;
-      case # "meatball_small":
+      case #"meatball_small":
         var_64ae47e = "zmb_doa_ai_meatball_sml_spawn";
         var_9c464736 = "zmb_doa_ai_meatball_sml_lp";
         self.var_8de8630 = sqr(30);

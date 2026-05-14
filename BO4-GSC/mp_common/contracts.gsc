@@ -89,22 +89,22 @@ contract_kills(data) {
 
   if(iskillstreak || iskillstreakweapon === 1) {
     switch (weapon.statname) {
-      case # "dart":
+      case #"dart":
         player function_fd9fb79b(#"contract_mp_dart_kills");
         break;
-      case # "ac130":
+      case #"ac130":
         player function_fd9fb79b(#"contract_mp_gunship_kills");
         break;
-      case # "recon_car":
+      case #"recon_car":
         player function_fd9fb79b(#"contract_mp_rcxd_kills");
         break;
-      case # "planemortar":
+      case #"planemortar":
         player function_fd9fb79b(#"contract_mp_lightning_strike");
         break;
-      case # "remote_missile":
+      case #"remote_missile":
         player function_fd9fb79b(#"contract_mp_hellstorm_kills");
         break;
-      case # "ai_tank_marker":
+      case #"ai_tank_marker":
         player function_fd9fb79b(#"contract_mp_mantis_kills");
         break;
       default:
@@ -146,25 +146,25 @@ on_ekia(weapon) {
   }
 
   switch (weaponclass) {
-    case # "weapon_assault":
+    case #"weapon_assault":
       var_6b9aa5a0 = #"hash_1005918e22a7865b";
       break;
-    case # "weapon_lmg":
+    case #"weapon_lmg":
       var_6b9aa5a0 = #"hash_151c8e7a35e1e380";
       break;
-    case # "weapon_pistol":
+    case #"weapon_pistol":
       var_6b9aa5a0 = #"hash_250c2d8ef2261723";
       break;
-    case # "weapon_cqb":
+    case #"weapon_cqb":
       var_6b9aa5a0 = #"hash_5262d5b92e0fdc2";
       break;
-    case # "weapon_smg":
+    case #"weapon_smg":
       var_6b9aa5a0 = #"hash_2173bc0bfcbdf90f";
       break;
-    case # "weapon_sniper":
+    case #"weapon_sniper":
       var_6b9aa5a0 = #"hash_21762ab1513fddf";
       break;
-    case # "weapon_tactical":
+    case #"weapon_tactical":
       var_6b9aa5a0 = #"hash_1a4fe101c7aab2d";
       break;
     default:
@@ -323,78 +323,78 @@ function_c5958b54() {
   var_c421e6b = undefined;
 
   switch (level.var_12323003) {
-    case # "ball":
-    case # "ball_hc":
+    case #"ball":
+    case #"ball_hc":
       var_c421e6b = #"contract_mp_play_uplink";
       break;
-    case # "bounty":
-    case # "bounty_hc":
+    case #"bounty":
+    case #"bounty_hc":
       var_c421e6b = #"contract_mp_play_heist";
       break;
-    case # "clean":
-    case # "clean_hc":
+    case #"clean":
+    case #"clean_hc":
       var_c421e6b = #"contract_mp_play_stockpile";
       break;
-    case # "conf":
-    case # "conf_hc":
+    case #"conf":
+    case #"conf_hc":
       var_c421e6b = #"hash_2156d88add08f25f";
       break;
-    case # "control":
-    case # "control_hc":
+    case #"control":
+    case #"control_hc":
       var_c421e6b = #"contract_mp_play_control";
       break;
-    case # "ctf":
-    case # "ctf_hc":
+    case #"ctf":
+    case #"ctf_hc":
       var_c421e6b = #"hash_42b7ebc5926b0008";
       break;
-    case # "dem_hc":
-    case # "dem":
+    case #"dem_hc":
+    case #"dem":
       var_c421e6b = #"contract_mp_play_demolition";
       break;
-    case # "dm_hc":
-    case # "dm":
+    case #"dm_hc":
+    case #"dm":
       var_c421e6b = #"hash_5dbf89f59ac323e3";
       break;
-    case # "dom":
-    case # "dom_hc":
+    case #"dom":
+    case #"dom_hc":
       var_c421e6b = #"contract_mp_play_domination";
       break;
-    case # "escort_hc":
-    case # "escort":
+    case #"escort_hc":
+    case #"escort":
       var_c421e6b = #"contract_mp_play_safeguard";
       break;
-    case # "gun":
-    case # "gun_hc":
+    case #"gun":
+    case #"gun_hc":
       var_c421e6b = #"hash_f916a0b9718fb8";
       break;
-    case # "infect_hc":
-    case # "infect":
+    case #"infect_hc":
+    case #"infect":
       var_c421e6b = #"contract_mp_play_infection";
       break;
-    case # "koth":
-    case # "koth_hc":
+    case #"koth":
+    case #"koth_hc":
       var_c421e6b = #"contract_mp_play_hardpoint";
       break;
-    case # "prop":
-    case # "prop_hc":
+    case #"prop":
+    case #"prop_hc":
       var_c421e6b = #"contract_mp_play_prop_hunt";
       break;
-    case # "sas":
-    case # "sas_hc":
+    case #"sas":
+    case #"sas_hc":
       var_c421e6b = #"contract_mp_play_sticks_and_stones";
       break;
-    case # "sd":
-    case # "sd_hc":
+    case #"sd":
+    case #"sd_hc":
       var_c421e6b = #"contract_mp_play_search";
       break;
-    case # "svz":
-    case # "svz_hc":
+    case #"svz":
+    case #"svz_hc":
       var_c421e6b = #"hash_1d7bdd403c90dda6";
       break;
-    case # "tdm":
+    case #"tdm":
       var_c421e6b = #"contract_mp_play_team_deathmatch";
       break;
-    case # "tdm_hc":
+    case #"tdm_hc":
       var_c421e6b = #"contract_mp_play_hardcore_team_deathmatch";
       break;
     default:

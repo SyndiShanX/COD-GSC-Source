@@ -366,8 +366,8 @@ function function_3a083565(s_chest) {
 
 function function_882a650f(str_rarity, var_e1669514 = 0) {
   switch (str_rarity) {
-    case # "green":
-    case # "uncommon":
+    case #"green":
+    case #"uncommon":
       if(var_e1669514) {
         return # "hash_2446e535f851a299";
       } else {
@@ -375,8 +375,8 @@ function function_882a650f(str_rarity, var_e1669514 = 0) {
       }
 
       break;
-    case # "blue":
-    case # "rare":
+    case #"blue":
+    case #"rare":
       if(var_e1669514) {
         return # "hash_4dff3909af1f4fbf";
       } else {
@@ -384,8 +384,8 @@ function function_882a650f(str_rarity, var_e1669514 = 0) {
       }
 
       break;
-    case # "purple":
-    case # "epic":
+    case #"purple":
+    case #"epic":
       if(var_e1669514) {
         return # "hash_40895d69c438082e";
       } else {
@@ -393,8 +393,8 @@ function function_882a650f(str_rarity, var_e1669514 = 0) {
       }
 
       break;
-    case # "orange":
-    case # "legendary":
+    case #"orange":
+    case #"legendary":
       if(var_e1669514) {
         return # "hash_3e7473705b8922c";
       } else {
@@ -402,14 +402,14 @@ function function_882a650f(str_rarity, var_e1669514 = 0) {
       }
 
       break;
-    case # "yellow":
-    case # "ultra":
-    case # "gold":
-    case # "named":
-    case # "resource":
-    case # "none":
-    case # "white":
-    case # "loadout":
+    case #"yellow":
+    case #"ultra":
+    case #"gold":
+    case #"named":
+    case #"resource":
+    case #"none":
+    case #"white":
+    case #"loadout":
       if(var_e1669514) {
         return # "hash_4a972ee1265d60a";
       } else {
@@ -2421,25 +2421,25 @@ function function_a6d171f4(str_rarity) {
   }
 
   switch (str_rarity) {
-    case # "none":
+    case #"none":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 1);
       break;
-    case # "resource":
+    case #"resource":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 2);
       break;
-    case # "uncommon":
+    case #"uncommon":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 3);
       break;
-    case # "rare":
+    case #"rare":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 4);
       break;
-    case # "epic":
+    case #"epic":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 5);
       break;
-    case # "legendary":
+    case #"legendary":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 6);
       break;
-    case # "ultra":
+    case #"ultra":
       self clientfield::set("" + #"hash_66b8b96e588ce1ac", 7);
       break;
     default:
@@ -2736,32 +2736,32 @@ function set_magic_box_zbarrier_state(state) {
 
 function process_magic_box_zbarrier_state(state) {
   switch (state) {
-    case # "away":
+    case #"away":
       self showzbarrierpiece(0);
       self thread function_15cd8d85();
       self.state = "away";
       break;
-    case # "arriving":
+    case #"arriving":
       self showzbarrierpiece(1);
       self thread function_24ce1c91();
       self.state = "arriving";
       break;
-    case # "initial":
+    case #"initial":
       self showzbarrierpiece(1);
       self thread function_f6a827d1();
       self.state = "initial";
       break;
-    case # "open":
+    case #"open":
       self showzbarrierpiece(2);
       self thread function_12804472();
       self.state = "open";
       break;
-    case # "close":
+    case #"close":
       self showzbarrierpiece(2);
       self thread function_cd5d65b0();
       self.state = "close";
       break;
-    case # "leaving":
+    case #"leaving":
       self showzbarrierpiece(1);
       self thread function_65b1adcb();
       self.state = "leaving";

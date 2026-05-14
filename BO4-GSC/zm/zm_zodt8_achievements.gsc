@@ -239,16 +239,16 @@ function_46c56964() {
 function_e7750e06(params) {
   if(zm_weapons::is_wonder_weapon(params.weapon)) {
     switch (params.weapon.name) {
-      case # "ww_tricannon_fire_t8":
-      case # "ww_tricannon_earth_t8":
-      case # "ww_tricannon_t8_upgraded":
-      case # "ww_tricannon_air_t8_upgraded":
-      case # "ww_tricannon_earth_t8_upgraded":
-      case # "ww_tricannon_fire_t8_upgraded":
-      case # "ww_tricannon_water_t8_upgraded":
-      case # "ww_tricannon_water_t8":
-      case # "ww_tricannon_t8":
-      case # "ww_tricannon_air_t8":
+      case #"ww_tricannon_fire_t8":
+      case #"ww_tricannon_earth_t8":
+      case #"ww_tricannon_t8_upgraded":
+      case #"ww_tricannon_air_t8_upgraded":
+      case #"ww_tricannon_earth_t8_upgraded":
+      case #"ww_tricannon_fire_t8_upgraded":
+      case #"ww_tricannon_water_t8_upgraded":
+      case #"ww_tricannon_water_t8":
+      case #"ww_tricannon_t8":
+      case #"ww_tricannon_air_t8":
         if(self.var_574b5261 >= 0) {
           self.var_574b5261++;
         }

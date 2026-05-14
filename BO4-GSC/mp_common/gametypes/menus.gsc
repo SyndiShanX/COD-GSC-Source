@@ -137,10 +137,10 @@ on_menu_response(params) {
 
   if(menu == game.menu[#"menu_team"] && level.allow_teamchange) {
     switch (response) {
-      case # "autoassign":
+      case #"autoassign":
         self[[level.autoassign]](1, undefined);
         break;
-      case # "spectator":
+      case #"spectator":
         self[[level.spectator]]();
         break;
       default:

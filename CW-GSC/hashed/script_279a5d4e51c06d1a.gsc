@@ -755,7 +755,7 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
 
   if(player_loc.script_noteworthy == "north" || player_loc.script_noteworthy == "middle") {
     switch (var_f8da3f2c.script_noteworthy) {
-      case # "north":
+      case #"north":
         self setgoal(var_789316a3);
         break;
       default:
@@ -768,10 +768,10 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
 
   if(player_loc.script_noteworthy == "east") {
     switch (var_f8da3f2c.script_noteworthy) {
-      case # "north":
+      case #"north":
         self setgoal(var_789316a3);
         break;
-      case # "east":
+      case #"east":
         if(self istouching(var_46921b42)) {
           if(player istouching(var_46921b42)) {
             self setgoal(var_46921b42);
@@ -793,10 +793,10 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
 
   if(player_loc.script_noteworthy == "west") {
     switch (var_f8da3f2c.script_noteworthy) {
-      case # "north":
+      case #"north":
         self setgoal(var_789316a3);
         break;
-      case # "west":
+      case #"west":
         if(self istouching(var_b7deadbf)) {
           if(player istouching(var_b7deadbf)) {
             self setgoal(var_b7deadbf);
@@ -817,7 +817,7 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
   }
 
   switch (var_f8da3f2c.script_noteworthy) {
-    case # "north":
+    case #"north":
       num = randomint(3);
 
       if(num == 0) {

@@ -197,13 +197,13 @@ function get_stealth_state() {
 
 function set_stealth_state(msg) {
   switch (msg) {
-    case # "attack":
+    case #"attack":
       num = 3;
       break;
-    case # "warning2":
+    case #"warning2":
       num = 2;
       break;
-    case # "warning1":
+    case #"warning1":
       num = 1;
       break;
     default:
@@ -280,14 +280,14 @@ function set_min_detect_range_darkness(hidden, spotted) {
 
 function do_stealth() {
   switch (self.team) {
-    case # "axis":
-    case # "team3":
+    case #"axis":
+    case #"team3":
       self thread stealth_enemy::main();
       break;
-    case # "allies":
+    case #"allies":
       self thread namespace_32a4062b::main();
       break;
-    case # "neutral":
+    case #"neutral":
       self thread namespace_578db516::main();
       break;
   }
@@ -337,13 +337,13 @@ function set_default_patrol_style(style) {
 
 function get_patrol_react_magnitude_int(style) {
   switch (style) {
-    case # "small":
+    case #"small":
       return 0;
-    case # "small_medium":
+    case #"small_medium":
       return 1;
-    case # "medium":
+    case #"medium":
       return 2;
-    case # "large":
+    case #"large":
       return 3;
   }
 

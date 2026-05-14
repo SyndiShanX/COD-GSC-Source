@@ -2405,13 +2405,13 @@ function on_item_pickup(params) {
       var_12a61de4 = undefined;
 
       switch (item.itementry.name) {
-        case # "mega_barrel_modkit_blazer_beam_item_t9":
+        case #"mega_barrel_modkit_blazer_beam_item_t9":
           var_12a61de4 = #"ww_mega_barrel_fullauto_blazer_beam_t9";
           break;
-        case # "mega_barrel_modkit_diffusion_beam_item_t9":
+        case #"mega_barrel_modkit_diffusion_beam_item_t9":
           var_12a61de4 = #"ww_mega_barrel_fullauto_diffusion_beam_t9";
           break;
-        case # "mega_barrel_modkit_micro_missile_item_t9":
+        case #"mega_barrel_modkit_micro_missile_item_t9":
           var_12a61de4 = #"ww_mega_barrel_fullauto_micro_missile_t9";
           break;
         default:
@@ -2546,14 +2546,14 @@ function function_3efc58e4(weapon) {
     w_root = zm_weapons::function_386dacbc(weapon);
 
     switch (w_root.name) {
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9":
         return true;
     }
   }
@@ -2566,10 +2566,10 @@ function function_98e73a50(weapon) {
     w_root = zm_weapons::function_386dacbc(weapon);
 
     switch (w_root.name) {
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
         return true;
     }
   }
@@ -2609,22 +2609,22 @@ function function_425c8feb(params) {
       w_root = zm_weapons::function_386dacbc(params.weapon);
 
       switch (w_root.name) {
-        case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-        case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-        case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-        case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
+        case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+        case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+        case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+        case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
           var_6233e1ed = 5;
           break;
-        case # "ww_mega_barrel_fullauto_copycat_t9":
+        case #"ww_mega_barrel_fullauto_copycat_t9":
           var_6233e1ed = 1;
           break;
-        case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
+        case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
           var_6233e1ed = 2;
           break;
-        case # "ww_mega_barrel_fullauto_blazer_beam_t9":
+        case #"ww_mega_barrel_fullauto_blazer_beam_t9":
           var_6233e1ed = 3;
           break;
-        case # "ww_mega_barrel_fullauto_micro_missile_t9":
+        case #"ww_mega_barrel_fullauto_micro_missile_t9":
           var_6233e1ed = 4;
           break;
         default:
@@ -2655,13 +2655,13 @@ function function_e5b5756e() {
     }
 
     switch (self.zm_ai_category) {
-      case # "normal":
+      case #"normal":
         var_e39660fa = 2 + level.var_b96c6e68;
         break;
-      case # "special":
+      case #"special":
         var_e39660fa = 10 + level.var_b96c6e68;
         break;
-      case # "elite":
+      case #"elite":
         var_e39660fa = 25 + level.var_b96c6e68;
         break;
       default:
@@ -2805,17 +2805,17 @@ function function_53b759f3(weapon) {
 
 function function_434c0676(weapon_name) {
   switch (weapon_name) {
-    case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-    case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
+    case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+    case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
       return # "ww_mega_barrel_fullauto_diffusion_beam_t9";
-    case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
-    case # "ww_mega_barrel_fullauto_copycat_t9":
+    case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
+    case #"ww_mega_barrel_fullauto_copycat_t9":
       return # "ww_mega_barrel_fullauto_copycat_t9";
-    case # "ww_mega_barrel_fullauto_blazer_beam_t9":
-    case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+    case #"ww_mega_barrel_fullauto_blazer_beam_t9":
+    case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
       return # "ww_mega_barrel_fullauto_blazer_beam_t9";
-    case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-    case # "ww_mega_barrel_fullauto_micro_missile_t9":
+    case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+    case #"ww_mega_barrel_fullauto_micro_missile_t9":
       return # "ww_mega_barrel_fullauto_micro_missile_t9";
     default:
       return weapon_name;
@@ -3248,13 +3248,13 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_624c20b760e6e5c6":
+    case #"hash_624c20b760e6e5c6":
       function_a7c4f468(#"mega_barrel_modkit_diffusion_beam_item_t9");
       break;
-    case # "hash_1a395c3a23b52adf":
+    case #"hash_1a395c3a23b52adf":
       function_a7c4f468(#"mega_barrel_modkit_blazer_beam_item_t9");
       break;
-    case # "hash_165b5f12f006ed46":
+    case #"hash_165b5f12f006ed46":
       function_a7c4f468(#"mega_barrel_modkit_micro_missile_item_t9");
       break;
     default:

@@ -828,8 +828,8 @@ give_weapon(weapon, isinventory, usestoredammo) {
       }
 
       switch (carriedweapon.name) {
-        case # "m32":
-        case # "minigun":
+        case #"m32":
+        case #"minigun":
           continue;
       }
 
@@ -864,13 +864,13 @@ give_weapon(weapon, isinventory, usestoredammo) {
         return weapon.maxammo;
       } else if(isDefined(usestoredammo) && usestoredammo && self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size - 1] > 0) {
         switch (weapon.name) {
-          case # "inventory_minigun":
+          case #"inventory_minigun":
             if(isDefined(self.minigunactive) && self.minigunactive) {
               return self.pers[#"held_killstreak_ammo_count"][weapon];
             }
 
             break;
-          case # "inventory_m32":
+          case #"inventory_m32":
             if(isDefined(self.m32active) && self.m32active) {
               return self.pers[#"held_killstreak_ammo_count"][weapon];
             }
@@ -891,26 +891,26 @@ give_weapon(weapon, isinventory, usestoredammo) {
       return self.pers[#"held_killstreak_ammo_count"][weapon];
     } else {
       switch (weapon.statname) {
-        case # "dart":
-        case # "ultimate_turret":
-        case # "counteruav":
-        case # "combat_robot_marker":
-        case # "remote_missile":
-        case # "swat_team":
-        case # "supplydrop_marker":
-        case # "m32_drop":
-        case # "drone_squadron":
-        case # "overwatch_helicopter":
-        case # "straferun":
-        case # "recon_car":
-        case # "uav":
-        case # "ac130":
-        case # "helicopter_comlink":
-        case # "swat_helicopter":
-        case # "ai_tank_marker":
-        case # "planemortar":
-        case # "minigun_drop":
-        case # "missile_drone":
+        case #"dart":
+        case #"ultimate_turret":
+        case #"counteruav":
+        case #"combat_robot_marker":
+        case #"remote_missile":
+        case #"swat_team":
+        case #"supplydrop_marker":
+        case #"m32_drop":
+        case #"drone_squadron":
+        case #"overwatch_helicopter":
+        case #"straferun":
+        case #"recon_car":
+        case #"uav":
+        case #"ac130":
+        case #"helicopter_comlink":
+        case #"swat_helicopter":
+        case #"ai_tank_marker":
+        case #"planemortar":
+        case #"minigun_drop":
+        case #"missile_drone":
           delta = 1;
           break;
         default:
@@ -1755,40 +1755,40 @@ print_killstreak_start_text(killstreaktype, owner, team, targetpos, dangerradius
 play_killstreak_ready_sfx(killstreaktype) {
   if(!isDefined(level.gameended) || !level.gameended) {
     switch (killstreaktype) {
-      case # "uav":
+      case #"uav":
         var_426d4c5d = "uin_kls_uav";
         break;
-      case # "counteruav":
+      case #"counteruav":
         var_426d4c5d = "uin_kls_counteruav";
         break;
-      case # "remote_missile":
+      case #"remote_missile":
         var_426d4c5d = "uin_kls_remote_missile";
         break;
-      case # "ultimate_turret":
+      case #"ultimate_turret":
         var_426d4c5d = "uin_kls_ultimate_turret";
         break;
-      case # "helicopter_comlink":
+      case #"helicopter_comlink":
         var_426d4c5d = "uin_kls_helicopter_comlink";
         break;
-      case # "tank_robot":
+      case #"tank_robot":
         var_426d4c5d = "uin_kls_tank_robot";
         break;
-      case # "swat_team":
+      case #"swat_team":
         var_426d4c5d = "uin_kls_swat_team";
         break;
-      case # "ac130":
+      case #"ac130":
         var_426d4c5d = "uin_kls_ac130";
         break;
-      case # "recon_car":
+      case #"recon_car":
         var_426d4c5d = "uin_kls_rcbomb";
         break;
-      case # "supply_drop":
+      case #"supply_drop":
         var_426d4c5d = "uin_kls_supply_drop";
         break;
-      case # "planemortar":
+      case #"planemortar":
         var_426d4c5d = "uin_kls_airstrike";
         break;
-      case # "straferun":
+      case #"straferun":
         var_426d4c5d = "uin_kls_straferun";
         break;
     }
@@ -1988,7 +1988,7 @@ killstreak_debug_think() {
     cmd = getdvarstring(#"debug_killstreak");
 
     switch (cmd) {
-      case # "data_dump":
+      case #"data_dump":
         killstreak_data_dump();
         break;
     }
@@ -2320,8 +2320,8 @@ ondamageperweapon(killstreak_ref, attacker, damage, flags, type, weapon, max_hea
 
 get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damage_scalar) {
   switch (type) {
-    case # "mod_rifle_bullet":
-    case # "mod_pistol_bullet":
+    case #"mod_rifle_bullet":
+    case #"mod_pistol_bullet":
       if(!allow_bullet_damage) {
         damage = 0;
         break;
@@ -2340,9 +2340,9 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
       }
 
       break;
-    case # "mod_explosive":
-    case # "mod_projectile":
-    case # "mod_projectile_splash":
+    case #"mod_explosive":
+    case #"mod_projectile":
+    case #"mod_projectile_splash":
       if(weapon.statindex == level.weaponpistolenergy.statindex || weapon.statindex != level.weaponshotgunenergy.statindex || weapon.statindex == level.weaponspecialcrossbow.statindex) {
         break;
       }
@@ -2363,8 +2363,8 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
 
 isheldinventorykillstreakweapon(killstreakweapon) {
   switch (killstreakweapon.name) {
-    case # "inventory_m32":
-    case # "inventory_minigun":
+    case #"inventory_m32":
+    case #"inventory_minigun":
       return true;
   }
 
@@ -3425,10 +3425,10 @@ function_975d45c3() {
   startheight = 200;
 
   switch (self getstance()) {
-    case # "crouch":
+    case #"crouch":
       startheight = 30;
       break;
-    case # "prone":
+    case #"prone":
       startheight = 15;
       break;
   }

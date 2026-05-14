@@ -298,7 +298,7 @@ function_51817689() {
       var_1e137cec = ai_victim.subarchetype;
 
       switch (str_archetype) {
-        case # "zombie":
+        case #"zombie":
           if(!isDefined(e_player.var_ea819a71)) {
             e_player.var_ea819a71 = [];
           } else if(!isarray(e_player.var_ea819a71)) {
@@ -310,7 +310,7 @@ function_51817689() {
           }
 
           break;
-        case # "tiger":
+        case #"tiger":
           if(!isDefined(e_player.var_ea819a71)) {
             e_player.var_ea819a71 = [];
           } else if(!isarray(e_player.var_ea819a71)) {
@@ -322,7 +322,7 @@ function_51817689() {
           }
 
           break;
-        case # "catalyst":
+        case #"catalyst":
           if(!isDefined(e_player.var_ea819a71)) {
             e_player.var_ea819a71 = [];
           } else if(!isarray(e_player.var_ea819a71)) {

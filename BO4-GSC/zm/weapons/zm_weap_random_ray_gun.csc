@@ -88,13 +88,13 @@ function_847080fa(localclientnum) {
   playSound(localclientnum, #"hash_1b7646cdadf52c4d", self.origin + (0, 0, 35));
 
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       var_99d5ab4f = #"aib_t8_zm_zombie_base_dth_shrink_ww_wkud";
       break;
-    case # "nosferatu":
+    case #"nosferatu":
       var_99d5ab4f = #"aib_t8_zm_nfrtu_dth_shrink_ww_wkud";
       break;
-    case # "bat":
+    case #"bat":
       var_99d5ab4f = #"aib_t8_zm_bat_dth_shrink_ww_wkud";
       break;
   }

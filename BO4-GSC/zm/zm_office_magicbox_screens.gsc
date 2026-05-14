@@ -50,7 +50,7 @@ magic_box_update() {
     }
 
     switch (box_mode) {
-      case # "no_power":
+      case #"no_power":
         util::setclientsysstate("box_indicator", level._pentagon_no_power);
 
         while(!level flag::get("power_on") && level.zombie_vars[#"zombie_powerup_fire_sale_on"] == 0) {
@@ -58,7 +58,7 @@ magic_box_update() {
         }
 
         break;
-      case # "fire_sale":
+      case #"fire_sale":
         util::setclientsysstate("box_indicator", level._pentagon_fire_sale);
 
         while(level.zombie_vars[#"zombie_powerup_fire_sale_on"] == 1) {
@@ -66,7 +66,7 @@ magic_box_update() {
         }
 
         break;
-      case # "box_available":
+      case #"box_available":
         var_7aa396b9 = get_location_from_chest_index(level.chest_index);
 
         if(isDefined(var_7aa396b9)) {

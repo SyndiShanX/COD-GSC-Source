@@ -66,10 +66,10 @@ event_handler[weapon_change] weapon_changed(eventstruct) {
 
 event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
   switch (eventstruct.event) {
-    case # "give_weapon":
+    case #"give_weapon":
       self function_54cb37a4(eventstruct.weapon);
       break;
-    case # "take_weapon":
+    case #"take_weapon":
       self function_ad4c1664(eventstruct.weapon);
       break;
   }

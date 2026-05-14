@@ -132,17 +132,17 @@ get_gib_ref(direction) {
     refs = [];
 
     switch (direction) {
-      case # "right":
+      case #"right":
         refs[refs.size] = "left_arm";
         refs[refs.size] = "left_leg";
         gib_ref = get_random(refs);
         break;
-      case # "left":
+      case #"left":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "right_leg";
         gib_ref = get_random(refs);
         break;
-      case # "forward":
+      case #"forward":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "left_arm";
         refs[refs.size] = "right_leg";
@@ -151,7 +151,7 @@ get_gib_ref(direction) {
         refs[refs.size] = "no_legs";
         gib_ref = get_random(refs);
         break;
-      case # "back":
+      case #"back":
         refs[refs.size] = "right_arm";
         refs[refs.size] = "left_arm";
         refs[refs.size] = "right_leg";
@@ -191,25 +191,25 @@ do_gib() {
   }
 
   switch (self.a.gib_ref) {
-    case # "right_arm":
+    case #"right_arm":
       gibserverutils::gibrightarm(self);
       break;
-    case # "left_arm":
+    case #"left_arm":
       gibserverutils::gibleftarm(self);
       break;
-    case # "right_leg":
+    case #"right_leg":
       gibserverutils::gibrightleg(self);
       break;
-    case # "left_leg":
+    case #"left_leg":
       gibserverutils::gibleftleg(self);
       break;
-    case # "no_legs":
+    case #"no_legs":
       gibserverutils::giblegs(self);
       break;
-    case # "head":
+    case #"head":
       gibserverutils::gibhead(self);
       break;
-    case # "guts":
+    case #"guts":
       break;
     default:
       assertmsg("<dev string:x174>" + self.a.gib_ref + "<dev string:x188>");

@@ -471,15 +471,15 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
     [[level.var_3aa60558]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         if(isDefined(b_charged) || isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 999;
         }
 
         break;
-      case # "heavy":
+      case #"heavy":
         if(isDefined(b_charged)) {
           self thread function_7a1456c5(e_target);
         } else {
@@ -487,7 +487,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
         }
 
         break;
-      case # "miniboss":
+      case #"miniboss":
         if(isDefined(b_charged)) {
           n_damage = int(n_damage * 0.2);
           self thread function_7a1456c5(e_target);
@@ -501,7 +501,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
         }
 
         break;
-      case # "boss":
+      case #"boss":
         if(!isactor(e_target)) {
           e_target clientfield::increment("ouranos_impact");
         }

@@ -1062,7 +1062,7 @@ function devgui_think() {
     assert(isDefined(target));
 
     switch (cmd[0]) {
-      case # "skip_to":
+      case #"skip_to":
         ee = target._ee[cmd[2]];
 
         if(!isDefined(ee)) {
@@ -1092,7 +1092,7 @@ function devgui_think() {
         }
 
         break;
-      case # "complete":
+      case #"complete":
         ee = target._ee[cmd[2]];
 
         if(!isDefined(ee)) {
@@ -1111,13 +1111,13 @@ function devgui_think() {
         }
 
         break;
-      case # "start":
+      case #"start":
         if(isDefined(target._ee[cmd[2]])) {
           target start(hash(cmd[2]));
         }
 
         break;
-      case # "show_status":
+      case #"show_status":
         if(is_true(level.var_7f2ca392)) {
           function_c1d3567c();
         } else {
@@ -1126,7 +1126,7 @@ function devgui_think() {
         }
 
         break;
-      case # "outro":
+      case #"outro":
         if(cmd.size < 2 || !isDefined(target._ee[cmd[2]])) {
           break;
         }

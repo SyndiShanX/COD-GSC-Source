@@ -72,16 +72,16 @@ function function_f5ccdd88(destination) {
 
 function function_21aca219(cmd) {
   switch (cmd) {
-    case # "hash_d1b4f368cc37b7b":
+    case #"hash_d1b4f368cc37b7b":
       function_546a7089(0);
       break;
-    case # "hash_d1b4e368cc379c8":
+    case #"hash_d1b4e368cc379c8":
       function_546a7089(1);
       break;
-    case # "hash_d1b51368cc37ee1":
+    case #"hash_d1b51368cc37ee1":
       function_546a7089(2);
       break;
-    case # "hash_d1b50368cc37d2e":
+    case #"hash_d1b50368cc37d2e":
       function_546a7089(3);
       break;
   }
@@ -104,19 +104,19 @@ function function_3b0cb5a4(struct) {
 
     if(isDefined(var_e57cfd4a)) {
       switch (var_e57cfd4a) {
-        case # "cryo":
+        case #"cryo":
           str_hint = #"hash_23ffe27517c6140c";
           var_f8fadaec = #"p9_fxanim_zm_contain_crate_cryo_mod";
           break;
-        case # "electric":
+        case #"electric":
           str_hint = #"hash_448d0fa028c30675";
           var_f8fadaec = #"p9_fxanim_zm_contain_crate_electric_mod";
           break;
-        case # "gas":
+        case #"gas":
           str_hint = #"hash_1f88bf6da4e314";
           var_f8fadaec = #"p9_fxanim_zm_contain_crate_gas_mod";
           break;
-        case # "plasma":
+        case #"plasma":
           str_hint = #"hash_3122d671887ef5a5";
           var_f8fadaec = #"p9_fxanim_zm_contain_crate_rust_mod";
           break;
@@ -147,16 +147,16 @@ function function_3b0cb5a4(struct) {
       scriptmodel scene::init(#"p9_fxanim_zm_ndu_contain_crate_rust_bundle", scriptmodel);
     } else {
       switch (var_e57cfd4a) {
-        case # "cryo":
+        case #"cryo":
           scriptmodel thread scene::play(#"p9_fxanim_zm_ndu_contain_crate_cryo_bundle", "chain", scriptmodel);
           break;
-        case # "electric":
+        case #"electric":
           scriptmodel scene::init(#"p9_fxanim_zm_ndu_contain_crate_electric_bundle", scriptmodel);
           break;
-        case # "gas":
+        case #"gas":
           scriptmodel scene::init(#"p9_fxanim_zm_ndu_contain_crate_gas_bundle", scriptmodel);
           break;
-        case # "plasma":
+        case #"plasma":
           scriptmodel scene::init(#"p9_fxanim_zm_ndu_contain_crate_rust_bundle", scriptmodel);
           break;
       }
@@ -196,10 +196,10 @@ function function_fb2bc4ac(eventstruct) {
       model.opening = 1;
 
       switch (var_e57cfd4a) {
-        case # "cryo":
+        case #"cryo":
           model thread function_8d9ddc22(player, "NITROGEN");
           break;
-        case # "electric":
+        case #"electric":
           if(!getdvarint(#"hash_7dae47192308f053", 1)) {
             playFXOnTag(#"hash_7e300a1fb308ae67", model, "tag_electric_01_fx");
             playFXOnTag(#"hash_7e300a1fb308ae67", model, "tag_electric_02_fx");
@@ -208,10 +208,10 @@ function function_fb2bc4ac(eventstruct) {
 
           model thread function_8d9ddc22(player, "BEAM");
           break;
-        case # "gas":
+        case #"gas":
           model thread function_8d9ddc22(player, "GAS");
           break;
-        case # "plasma":
+        case #"plasma":
           model thread function_8d9ddc22(player, "PLASMA");
           break;
         default:
@@ -237,7 +237,7 @@ function function_35eeef70(var_e57cfd4a) {
 
       if(isDefined(itemweapon) && function_165e54c9(itemweapon)) {
         switch (var_e57cfd4a) {
-          case # "cryo":
+          case #"cryo":
             if(itemweapon.itementry.name == #"ww_ieu_acid_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
@@ -245,7 +245,7 @@ function function_35eeef70(var_e57cfd4a) {
             }
 
             break;
-          case # "electric":
+          case #"electric":
             if(itemweapon.itementry.name == #"ww_ieu_electric_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
@@ -253,7 +253,7 @@ function function_35eeef70(var_e57cfd4a) {
             }
 
             break;
-          case # "gas":
+          case #"gas":
             if(itemweapon.itementry.name == #"ww_ieu_gas_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
@@ -261,7 +261,7 @@ function function_35eeef70(var_e57cfd4a) {
             }
 
             break;
-          case # "plasma":
+          case #"plasma":
             if(itemweapon.itementry.name == #"ww_ieu_plasma_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
@@ -287,17 +287,17 @@ function function_35eeef70(var_e57cfd4a) {
 function function_165e54c9(item) {
   if(isDefined(item.itementry.name)) {
     switch (item.itementry.name) {
-      case # "ww_ieu_shockwave_t9_upgraded_item_sr":
-      case # "ww_ieu_gas_t9_item_sr":
-      case # "ww_ieu_plasma_t9_item_sr":
-      case # "ww_ieu_gas_t9_upgraded_item_sr":
-      case # "ww_ieu_acid_t9_upgraded_item_sr":
-      case # "ww_ieu_shockwave_t9_item_sr":
-      case # "ww_ieu_electric_t9_item_sr":
-      case # "hash_3dff7d94b9ae5c97":
-      case # "ww_ieu_acid_t9_item_sr":
-      case # "ww_ieu_electric_t9_upgraded_item_sr":
-      case # "ww_ieu_plasma_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_upgraded_item_sr":
+      case #"ww_ieu_gas_t9_item_sr":
+      case #"ww_ieu_plasma_t9_item_sr":
+      case #"ww_ieu_gas_t9_upgraded_item_sr":
+      case #"ww_ieu_acid_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_item_sr":
+      case #"ww_ieu_electric_t9_item_sr":
+      case #"hash_3dff7d94b9ae5c97":
+      case #"ww_ieu_acid_t9_item_sr":
+      case #"ww_ieu_electric_t9_upgraded_item_sr":
+      case #"ww_ieu_plasma_t9_upgraded_item_sr":
         return true;
     }
   }
@@ -318,7 +318,7 @@ function function_217a625a(a_ents) {
   }
 
   switch (var_e57cfd4a) {
-    case # "cryo":
+    case #"cryo":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -328,7 +328,7 @@ function function_217a625a(a_ents) {
       }
 
       break;
-    case # "gas":
+    case #"gas":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -338,7 +338,7 @@ function function_217a625a(a_ents) {
       }
 
       break;
-    case # "plasma":
+    case #"plasma":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -348,7 +348,7 @@ function function_217a625a(a_ents) {
       }
 
       break;
-    case # "electric":
+    case #"electric":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -381,22 +381,22 @@ function function_8d9ddc22(player, var_e7772c37) {
   level endon(#"end_game");
 
   switch (var_e7772c37) {
-    case # "nitrogen":
+    case #"nitrogen":
       var_6bdde8a3 = getweapon(#"ww_ieu_acid_t9");
       var_39023436 = getweapon(#"ww_ieu_acid_t9_upgraded");
       self.var_37023f0e = "cryo";
       break;
-    case # "gas":
+    case #"gas":
       var_6bdde8a3 = getweapon(#"ww_ieu_gas_t9");
       var_39023436 = getweapon(#"ww_ieu_gas_t9_upgraded");
       self.var_37023f0e = "gas";
       break;
-    case # "plasma":
+    case #"plasma":
       var_6bdde8a3 = getweapon(#"ww_ieu_plasma_t9");
       var_39023436 = getweapon(#"ww_ieu_plasma_t9_upgraded");
       self.var_37023f0e = "rust";
       break;
-    case # "beam":
+    case #"beam":
       var_6bdde8a3 = getweapon(#"ww_ieu_electric_t9");
       var_39023436 = getweapon(#"ww_ieu_electric_t9_upgraded");
       self.var_37023f0e = "electric";
@@ -574,16 +574,16 @@ function function_6d4e1f71(var_d5c2e187, var_e7772c37, var_b0e35c50) {
 
     if(var_b0e35c50) {
       switch (var_e7772c37) {
-        case # "nitrogen":
+        case #"nitrogen":
           level.var_c3accf46 = undefined;
           break;
-        case # "gas":
+        case #"gas":
           level.var_ae002b60 = undefined;
           break;
-        case # "plasma":
+        case #"plasma":
           level.var_42000fd0 = undefined;
           break;
-        case # "beam":
+        case #"beam":
           level.var_c8a2dc28 = undefined;
           break;
       }

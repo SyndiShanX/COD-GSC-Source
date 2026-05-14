@@ -65,12 +65,12 @@ function_b6a3df03() {
   var_e84f96c4 = self.unitrigger_stub;
 
   switch (var_501f80dc) {
-    case # "shower_to_warden_house":
-    case # "warden_house_to_shower":
+    case #"shower_to_warden_house":
+    case #"warden_house_to_shower":
       self.unitrigger_stub.var_8d5d092c = "warden_house_shower";
       break;
-    case # "cafeteria_to_west_side":
-    case # "west_side_to_cafeteria":
+    case #"cafeteria_to_west_side":
+    case #"west_side_to_cafeteria":
       self.unitrigger_stub.var_8d5d092c = "cafeteria_west_side";
       break;
   }
@@ -78,16 +78,16 @@ function_b6a3df03() {
   self.unitrigger_stub.var_67cba496 = struct::get("scene_" + var_501f80dc, "script_string");
 
   switch (var_501f80dc) {
-    case # "warden_house_to_shower":
+    case #"warden_house_to_shower":
       var_e84f96c4.var_374f0c4e = struct::get("scene_shower_to_warden_house", "script_string");
       break;
-    case # "shower_to_warden_house":
+    case #"shower_to_warden_house":
       var_e84f96c4.var_374f0c4e = struct::get("scene_warden_house_to_shower", "script_string");
       break;
-    case # "west_side_to_cafeteria":
+    case #"west_side_to_cafeteria":
       var_e84f96c4.var_374f0c4e = struct::get("scene_cafeteria_to_west_side", "script_string");
       break;
-    case # "cafeteria_to_west_side":
+    case #"cafeteria_to_west_side":
       var_e84f96c4.var_374f0c4e = struct::get("scene_west_side_to_cafeteria", "script_string");
       break;
   }
@@ -130,7 +130,7 @@ function_c52e8ba(player, var_8d5d092c) {
     b_result = 1;
 
     switch (str_loc) {
-      case # "warden_house_to_shower":
+      case #"warden_house_to_shower":
         if(level flag::get(#"hash_76a9f44aee68fe8e") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_300b1d3d5ba4c0fe";
@@ -144,7 +144,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "shower_to_warden_house":
+      case #"shower_to_warden_house":
         if(level flag::get(#"hash_76a9f44aee68fe8e") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_2e77e87570b1c528";
@@ -158,7 +158,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "cafeteria_to_west_side":
+      case #"cafeteria_to_west_side":
         if(level flag::get(#"hash_6a5df83b0716ed39") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_25fef648e85ea908";
@@ -172,7 +172,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "west_side_to_cafeteria":
+      case #"west_side_to_cafeteria":
         if(level flag::get(#"hash_6a5df83b0716ed39") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_2465c3ca09a8650f";
@@ -222,10 +222,10 @@ function_47dec08f(e_unitrigger) {
   }
 
   switch (e_unitrigger.hint_string[n_player_index]) {
-    case # "hash_9fdf28b2277fe11":
-    case # "hash_2465c3ca09a8650f":
-    case # "hash_31a8769c6599d292":
-    case # "hash_3600e293ddc9f9b6":
+    case #"hash_9fdf28b2277fe11":
+    case #"hash_2465c3ca09a8650f":
+    case #"hash_31a8769c6599d292":
+    case #"hash_3600e293ddc9f9b6":
       if(!zm_zonemgr::zone_is_enabled("zone_cafeteria")) {
         zm_zonemgr::enable_zone("zone_cafeteria");
         zm_zonemgr::enable_zone("zone_cafeteria_end");
@@ -234,10 +234,10 @@ function_47dec08f(e_unitrigger) {
       }
 
       break;
-    case # "hash_af863c29e30651d":
-    case # "hash_2e77e87570b1c528":
-    case # "hash_6bfcbf101ce05cc3":
-    case # "hash_751feed02ba9abc4":
+    case #"hash_af863c29e30651d":
+    case #"hash_2e77e87570b1c528":
+    case #"hash_6bfcbf101ce05cc3":
+    case #"hash_751feed02ba9abc4":
       if(!zm_zonemgr::zone_is_enabled("zone_warden_house")) {
         zm_zonemgr::enable_zone("zone_warden_house");
         zm_zonemgr::enable_zone("zone_warden_house_exterior");
@@ -245,19 +245,19 @@ function_47dec08f(e_unitrigger) {
       }
 
       break;
-    case # "hash_2110980a2c8a4dd3":
-    case # "hash_300b1d3d5ba4c0fe":
-    case # "hash_3c4e15b133cbbbfa":
-    case # "hash_6f301212d8bab6f9":
+    case #"hash_2110980a2c8a4dd3":
+    case #"hash_300b1d3d5ba4c0fe":
+    case #"hash_3c4e15b133cbbbfa":
+    case #"hash_6f301212d8bab6f9":
       if(!zm_zonemgr::zone_is_enabled("cellblock_shower")) {
         zm_zonemgr::enable_zone("cellblock_shower");
       }
 
       break;
-    case # "hash_706a38abf5bf863":
-    case # "hash_1db3b05a63943f7d":
-    case # "hash_25fef648e85ea908":
-    case # "hash_5bd2ed18b058d064":
+    case #"hash_706a38abf5bf863":
+    case #"hash_1db3b05a63943f7d":
+    case #"hash_25fef648e85ea908":
+    case #"hash_5bd2ed18b058d064":
       if(!zm_zonemgr::zone_is_enabled("zone_new_industries") || !zm_zonemgr::zone_is_enabled("zone_new_industries_transverse_tunnel")) {
         zm_zonemgr::enable_zone("zone_new_industries");
         zm_zonemgr::enable_zone("zone_new_industries_transverse_tunnel");
@@ -319,10 +319,10 @@ function_d7af842d(e_unitrigger) {
   var_8d5d092c = e_unitrigger.stub.var_8d5d092c;
 
   switch (var_8d5d092c) {
-    case # "warden_house_shower":
+    case #"warden_house_shower":
       var_d5376a79 = #"hash_76a9f44aee68fe8e";
       break;
-    case # "cafeteria_west_side":
+    case #"cafeteria_west_side":
       var_d5376a79 = #"hash_6a5df83b0716ed39";
       break;
   }

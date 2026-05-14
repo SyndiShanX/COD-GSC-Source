@@ -562,7 +562,7 @@ function_3d8879d7(var_97d9fa86) {
 
 function_901c5ffe(str_loc, b_on) {
   switch (str_loc) {
-    case # "eng":
+    case #"eng":
       if(b_on) {
         exploder::exploder("fxexp_er_bf_w_1");
         exploder::exploder("fxexp_er_bf_w_2");
@@ -590,7 +590,7 @@ function_901c5ffe(str_loc, b_on) {
       }
 
       break;
-    case # "st":
+    case #"st":
       if(b_on) {
         level clientfield::set("state_rooms_chillout_decals", 0);
       } else {
@@ -598,7 +598,7 @@ function_901c5ffe(str_loc, b_on) {
       }
 
       break;
-    case # "pro":
+    case #"pro":
       if(b_on) {
         exploder::exploder("fxexp_s_p_bf_w");
         level clientfield::set("promenade_chillout_decals", 0);
@@ -609,7 +609,7 @@ function_901c5ffe(str_loc, b_on) {
       }
 
       break;
-    case # "pd":
+    case #"pd":
       if(b_on) {
         exploder::exploder("fxexp_pd_bf_w");
         level clientfield::set("poop_deck_chillout_decals", 0);
@@ -2943,46 +2943,46 @@ function_5d346946() {
 
 function_d25f8fbc(cmd) {
   switch (cmd) {
-    case # "start_bf":
+    case #"start_bf":
       level thread function_435a7941();
       return 1;
-    case # "start_bf_2":
+    case #"start_bf_2":
       level thread function_435a7941(1);
       return 1;
-    case # "start_bf_3":
+    case #"start_bf_3":
       level thread function_435a7941(2);
       return 1;
-    case # "start_bf_4":
+    case #"start_bf_4":
       level thread function_435a7941(3);
       return 1;
-    case # "start_bf_5":
+    case #"start_bf_5":
       level thread function_435a7941(4);
       return 1;
-    case # "hash_56b003484b719b01":
+    case #"hash_56b003484b719b01":
       level.e_boss thread function_225a4561();
       return 1;
-    case # "do_mst":
+    case #"do_mst":
       level.e_boss thread function_81b39fd3();
       return 1;
-    case # "do_bm":
+    case #"do_bm":
       level.e_boss thread function_6b5e9ead();
       return 1;
-    case # "do_combo":
+    case #"do_combo":
       level.e_boss thread function_da98e094();
       return 1;
-    case # "do_blst":
+    case #"do_blst":
       level.e_boss thread function_c31e58d9();
       return 1;
-    case # "hash_42e3fa83d357e8e0":
+    case #"hash_42e3fa83d357e8e0":
       level.e_boss function_500cb0be(#"hash_678aaf8e37498e9a", #"p8_fxanim_zm_zod_eye_01_bundle");
       return 1;
-    case # "hash_42e3fd83d357edf9":
+    case #"hash_42e3fd83d357edf9":
       level.e_boss function_500cb0be(#"hash_32a51dafb1c7344f", #"p8_fxanim_zm_zod_eye_02_bundle");
       return 1;
-    case # "hash_42e3fc83d357ec46":
+    case #"hash_42e3fc83d357ec46":
       level.e_boss function_500cb0be(#"hash_597bdc83a7c9e8c", #"p8_fxanim_zm_zod_eye_03_bundle");
       return 1;
-    case # "hash_5dad3801740fa24a":
+    case #"hash_5dad3801740fa24a":
       level notify(#"hash_38f29f9cb03586ea");
       return 1;
   }

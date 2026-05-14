@@ -86,52 +86,52 @@ function_6e084fd3(var_37ecca7, taacombundle) {
   bundlename = undefined;
 
   switch (var_37ecca7) {
-    case # "tank_robot":
+    case #"tank_robot":
       bundlename = taacombundle.aitankdialogbundle;
       break;
-    case # "counteruav":
+    case #"counteruav":
       bundlename = taacombundle.counteruavdialogbundle;
       break;
-    case # "dart":
+    case #"dart":
       bundlename = taacombundle.dartdialogbundle;
       break;
-    case # "drone_squadron":
+    case #"drone_squadron":
       bundlename = taacombundle.dronesquadrondialogbundle;
       break;
-    case # "ac130":
+    case #"ac130":
       bundlename = taacombundle.gunnershipdialogbundle;
       break;
-    case # "helicopter_comlink":
+    case #"helicopter_comlink":
       bundlename = taacombundle.helicopterdialogbundle;
       break;
-    case # "overwatch_helicopter":
+    case #"overwatch_helicopter":
       bundlename = taacombundle.overwatchhelicopterdialogbundle;
       break;
-    case # "overwatch_helicopter_snipers":
+    case #"overwatch_helicopter_snipers":
       bundlename = taacombundle.var_4062b33e;
       break;
-    case # "planemortar":
+    case #"planemortar":
       bundlename = taacombundle.planemortardialogbundle;
       break;
-    case # "recon_car":
+    case #"recon_car":
       bundlename = taacombundle.rcbombdialogbundle;
       break;
-    case # "remote_missile":
+    case #"remote_missile":
       bundlename = taacombundle.remotemissiledialogbundle;
       break;
-    case # "straferun":
+    case #"straferun":
       bundlename = taacombundle.straferundialogbundle;
       break;
-    case # "supply_drop":
+    case #"supply_drop":
       bundlename = taacombundle.supplydropdialogbundle;
       break;
-    case # "swat_team":
+    case #"swat_team":
       bundlename = taacombundle.swatteamdialogbundle;
       break;
-    case # "uav":
+    case #"uav":
       bundlename = taacombundle.uavdialogbundle;
       break;
-    case # "ultimate_turret":
+    case #"ultimate_turret":
       bundlename = taacombundle.ultturretdialogbundle;
       break;
     default:
@@ -623,111 +623,111 @@ wait_next_leader_dialog(dialogbuffer) {
 
 dialogkey_priority(dialogkey) {
   switch (dialogkey) {
-    case # "enemydronestrikemultiple":
-    case # "enemyplanemortarmultiple":
-    case # "enemyaitank":
-    case # "enemydronestrike":
-    case # "enemymicrowaveturretmultiple":
-    case # "enemydart":
-    case # "enemydartmultiple":
-    case # "enemyremotemissile":
-    case # "enemyplanemortar":
-    case # "enemycombatrobotmultiple":
-    case # "enemyrcbombmultiple":
-    case # "enemyremotemissilemultiple":
-    case # "enemyrapsmultiple":
-    case # "enemyhelicoptergunner":
-    case # "enemyrcbomb":
-    case # "enemycombatrobot":
-    case # "enemyhelicopter":
-    case # "enemyturret":
-    case # "enemyturretmultiple":
-    case # "enemyhelicoptergunnermultiple":
-    case # "enemyraps":
-    case # "enemyplanemortarused":
-    case # "enemyhelicoptermultiple":
-    case # "enemymicrowaveturret":
-    case # "enemyaitankmultiple":
+    case #"enemydronestrikemultiple":
+    case #"enemyplanemortarmultiple":
+    case #"enemyaitank":
+    case #"enemydronestrike":
+    case #"enemymicrowaveturretmultiple":
+    case #"enemydart":
+    case #"enemydartmultiple":
+    case #"enemyremotemissile":
+    case #"enemyplanemortar":
+    case #"enemycombatrobotmultiple":
+    case #"enemyrcbombmultiple":
+    case #"enemyremotemissilemultiple":
+    case #"enemyrapsmultiple":
+    case #"enemyhelicoptergunner":
+    case #"enemyrcbomb":
+    case #"enemycombatrobot":
+    case #"enemyhelicopter":
+    case #"enemyturret":
+    case #"enemyturretmultiple":
+    case #"enemyhelicoptergunnermultiple":
+    case #"enemyraps":
+    case #"enemyplanemortarused":
+    case #"enemyhelicoptermultiple":
+    case #"enemymicrowaveturret":
+    case #"enemyaitankmultiple":
       return 1;
-    case # "roundencouragelastplayer":
-    case # "gamelosing":
-    case # "nearwinning":
-    case # "gameleadlost":
-    case # "nearlosing":
-    case # "neardrawing":
-    case # "gameleadtaken":
-    case # "gamewinning":
+    case #"roundencouragelastplayer":
+    case #"gamelosing":
+    case #"nearwinning":
+    case #"gameleadlost":
+    case #"nearlosing":
+    case #"neardrawing":
+    case #"gameleadtaken":
+    case #"gamewinning":
       return 1;
-    case # "upltheyuplink":
-    case # "uplorders":
-    case # "sfgrobotneedreboot":
-    case # "domfriendlysecuredall":
-    case # "hubsonline":
-    case # "sfgstarttow":
-    case # "sfgtheyreturn":
-    case # "sfgrobotunderfire":
-    case # "kothonline":
-    case # "bombfriendlytaken":
-    case # "ctffriendlyflagcaptured":
-    case # "sfgrobotrebootedtowdefender":
-    case # "hubmoved":
-    case # "sfgrobotrebootedtowattacker":
-    case # "uplweuplinkremote":
-    case # "bombplanted":
-    case # "uplreset":
-    case # "sfgrobotrebooteddefender":
-    case # "ctfenemyflagdropped":
-    case # "sfgrobotunderfireneutral":
-    case # "ctffriendlyflagdropped":
-    case # "upltheydrop":
-    case # "domenemyhasc":
-    case # "kothcontested":
-    case # "ctfenemyflagtaken":
-    case # "domenemyhasb":
-    case # "uplwedrop":
-    case # "uplweuplink":
-    case # "hubsoffline":
-    case # "domenemysecureda":
-    case # "domenemysecuredb":
-    case # "domenemysecuredc":
-    case # "domenemyhasa":
-    case # "upltransferred":
-    case # "sfgstarthrdefend":
-    case # "upltheyuplinkremote":
-    case # "ctfenemyflagreturned":
-    case # "bombenemytaken":
-    case # "uplwetake":
-    case # "sfgstarthrattack":
-    case # "sfgrobotclosedefender":
-    case # "kothsecured":
-    case # "sfgwereturn":
-    case # "hubsmoved":
-    case # "sfgstartattack":
-    case # "ctfenemyflagcaptured":
-    case # "sfgrobotdisabledattacker":
-    case # "sfgrobotrebootedattacker":
-    case # "hubonline":
-    case # "sfgstartdefend":
-    case # "ctffriendlyflagreturned":
-    case # "ctffriendlyflagtaken":
-    case # "upltheytake":
-    case # "sfgrobotcloseattacker":
-    case # "bombdefused":
-    case # "huboffline":
-    case # "domenemysecuringc":
-    case # "sfgrobotdisableddefender":
-    case # "domfriendlysecuredc":
-    case # "domfriendlysecuredb":
-    case # "domfriendlysecureda":
-    case # "domenemysecuringb":
-    case # "domenemysecuringa":
-    case # "kothcaptured":
-    case # "kothlocated":
-    case # "kothlost":
-    case # "bombfriendlydropped":
-    case # "domfriendlysecuringb":
-    case # "domfriendlysecuringc":
-    case # "domfriendlysecuringa":
+    case #"upltheyuplink":
+    case #"uplorders":
+    case #"sfgrobotneedreboot":
+    case #"domfriendlysecuredall":
+    case #"hubsonline":
+    case #"sfgstarttow":
+    case #"sfgtheyreturn":
+    case #"sfgrobotunderfire":
+    case #"kothonline":
+    case #"bombfriendlytaken":
+    case #"ctffriendlyflagcaptured":
+    case #"sfgrobotrebootedtowdefender":
+    case #"hubmoved":
+    case #"sfgrobotrebootedtowattacker":
+    case #"uplweuplinkremote":
+    case #"bombplanted":
+    case #"uplreset":
+    case #"sfgrobotrebooteddefender":
+    case #"ctfenemyflagdropped":
+    case #"sfgrobotunderfireneutral":
+    case #"ctffriendlyflagdropped":
+    case #"upltheydrop":
+    case #"domenemyhasc":
+    case #"kothcontested":
+    case #"ctfenemyflagtaken":
+    case #"domenemyhasb":
+    case #"uplwedrop":
+    case #"uplweuplink":
+    case #"hubsoffline":
+    case #"domenemysecureda":
+    case #"domenemysecuredb":
+    case #"domenemysecuredc":
+    case #"domenemyhasa":
+    case #"upltransferred":
+    case #"sfgstarthrdefend":
+    case #"upltheyuplinkremote":
+    case #"ctfenemyflagreturned":
+    case #"bombenemytaken":
+    case #"uplwetake":
+    case #"sfgstarthrattack":
+    case #"sfgrobotclosedefender":
+    case #"kothsecured":
+    case #"sfgwereturn":
+    case #"hubsmoved":
+    case #"sfgstartattack":
+    case #"ctfenemyflagcaptured":
+    case #"sfgrobotdisabledattacker":
+    case #"sfgrobotrebootedattacker":
+    case #"hubonline":
+    case #"sfgstartdefend":
+    case #"ctffriendlyflagreturned":
+    case #"ctffriendlyflagtaken":
+    case #"upltheytake":
+    case #"sfgrobotcloseattacker":
+    case #"bombdefused":
+    case #"huboffline":
+    case #"domenemysecuringc":
+    case #"sfgrobotdisableddefender":
+    case #"domfriendlysecuredc":
+    case #"domfriendlysecuredb":
+    case #"domfriendlysecureda":
+    case #"domenemysecuringb":
+    case #"domenemysecuringa":
+    case #"kothcaptured":
+    case #"kothlocated":
+    case #"kothlost":
+    case #"bombfriendlydropped":
+    case #"domfriendlysecuringb":
+    case #"domfriendlysecuringc":
+    case #"domfriendlysecuringa":
       return 1;
   }
 
@@ -879,19 +879,19 @@ sndmusicunlock() {
   unlockname = undefined;
 
   switch (game.musicset) {
-    case # "_01":
+    case #"_01":
       unlockname = "mus_dystopia_intro";
       break;
-    case # "_02":
+    case #"_02":
       unlockname = "mus_filter_intro";
       break;
-    case # "_03":
+    case #"_03":
       unlockname = "mus_immersion_intro";
       break;
-    case # "_04":
+    case #"_04":
       unlockname = "mus_ruin_intro";
       break;
-    case # "_05":
+    case #"_05":
       unlockname = "mus_cod_bites_intro";
       break;
   }

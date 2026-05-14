@@ -510,7 +510,7 @@ jump_pad_player_overrides(st_behavior, int_clean) {
   }
 
   switch (st_behavior) {
-    case # "no_sprint":
+    case #"no_sprint":
       if(!int_clean) {}
 
       break;

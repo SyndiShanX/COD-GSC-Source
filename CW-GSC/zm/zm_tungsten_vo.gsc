@@ -346,13 +346,13 @@ function function_d137d6a0(var_e0c6386f, var_40feefce, var_c4ad7aa9) {
   level endon(#"end_game");
 
   switch (level.var_114b6e35) {
-    case # "strauss":
+    case #"strauss":
       self zm_vo::function_7622cb70(var_e0c6386f);
       break;
-    case # "carver":
+    case #"carver":
       self zm_vo::function_7622cb70(var_40feefce);
       break;
-    case # "grey":
+    case #"grey":
       self zm_vo::function_7622cb70(var_c4ad7aa9);
       break;
   }
@@ -411,7 +411,7 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "test_vo":
+    case #"test_vo":
       level thread zm_vo::function_7622cb70("<dev string:x77>");
       break;
     default:

@@ -123,11 +123,11 @@ function function_bcdd0822(var_faa5f280) {
       }
 
       switch (vol.script_noteworthy) {
-        case # "hash_1552d5a025d14bda":
+        case #"hash_1552d5a025d14bda":
           return (stance == "crouch" || stance == "prone");
-        case # "prone_only":
+        case #"prone_only":
           return (stance == "prone");
-        case # "none":
+        case #"none":
           return true;
       }
     }
@@ -1905,19 +1905,19 @@ function function_7898ea4c(var_61ad3e0, n_delay) {
   }
 
   switch (var_61ad3e0) {
-    case # "start":
+    case #"start":
       level.player playrumbleonentity("anim_med");
       screenshake(level.player.origin, 0.4, 0.1, 0.2, 4, 0.5, 3, 0, 10, 5, 5, 2);
       break;
-    case # "light":
+    case #"light":
       level.player playrumbleonentity("damage_light");
       screenshake(level.player.origin, 0.5, 0.2, 0.3, 0.6, 0, 0.2, 0, 6, 3, 3, 2);
       break;
-    case # "medium":
+    case #"medium":
       level.player playrumbleonentity("damage_heavy");
       screenshake(level.player.origin, 1, 0.5, 0.75, 0.8, 0.05, 0.4, 0, 8, 4, 4, 2);
       break;
-    case # "heavy":
+    case #"heavy":
       level.player playrumbleonentity("grenade_rumble");
       screenshake(level.player.origin, 1.5, 0.75, 1, 1.2, 0.1, 0.6, 0, 10, 5, 5, 2);
       level.player shellshock(#"default", 0.5);
@@ -1930,11 +1930,11 @@ function function_7898ea4c(var_61ad3e0, n_delay) {
       }
 
       break;
-    case # "gate":
+    case #"gate":
       level.player playrumbleonentity("damage_heavy");
       screenshake(level.player.origin, 2, 1, 1.5, 1, 0, 0.5, 0, 8, 4, 4, 2);
       break;
-    case # "crash1":
+    case #"crash1":
       level.player playrumbleonentity("grenade_rumble");
       screenshake(level.player.origin, 8, 3, 4, 1, 0, 0.8, 0, 4, 2, 2, 2);
       a_ai_enemies = getaiteamarray("axis");
@@ -1950,7 +1950,7 @@ function function_7898ea4c(var_61ad3e0, n_delay) {
       }
 
       break;
-    case # "crash2":
+    case #"crash2":
       level.player playrumbleonentity("cp_rus_amerika_apc_crash");
       screenshake(level.player.origin, 12, 4, 6, 1.5, 0, 1, 0, 4, 2, 2, 2);
       level.player playgestureviewmodel(#"hash_5723248289b2a00b");
@@ -1967,7 +1967,7 @@ function function_7898ea4c(var_61ad3e0, n_delay) {
       }
 
       break;
-    case # "uber":
+    case #"uber":
       level.player playrumbleonentity("damage_heavy");
       earthquake(1.5, 1.5, level.player.origin, 200);
       level.player shellshock(#"pain", 1);

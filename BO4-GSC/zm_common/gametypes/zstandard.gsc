@@ -166,22 +166,22 @@ function_6c2b3729() {
 
 function_2f63dc81(cmd) {
   switch (cmd) {
-    case # "hash_196a879b48e37805":
+    case #"hash_196a879b48e37805":
       if(zm_utility::function_880bd896()) {
         zm_utility::drop_key(level.players[0].origin);
       }
 
       break;
-    case # "give_bonus_points_1":
+    case #"give_bonus_points_1":
       zm_devgui::zombie_devgui_give_powerup("<dev string:x211>", undefined, level.players[0].origin);
       break;
-    case # "give_bonus_points_10":
+    case #"give_bonus_points_10":
       for(i = 0; i < 10; i++) {
         zm_devgui::zombie_devgui_give_powerup("<dev string:x211>", undefined, level.players[0].origin);
       }
 
       break;
-    case # "hash_2a785bbd314ac393":
+    case #"hash_2a785bbd314ac393":
       if(isarray(level.var_eaaa1d75) && level.var_eaaa1d75.size) {
         iprintlnbold("<dev string:x227>" + level.var_eaaa1d75[0].origin);
         level.players[0] setorigin(level.var_eaaa1d75[0].origin);
@@ -494,11 +494,11 @@ function_e0c53cf(params) {
 
   if(isalive(self) && isDefined(self.zm_ai_category) && (isPlayer(params.eattacker) || isPlayer(params.einflictor)) && params.idamage < self.health) {
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         var_3b210d82 = self.maxhealth * 0.2;
         break;
-      case # "miniboss":
-      case # "boss":
+      case #"miniboss":
+      case #"boss":
         var_3b210d82 = self.maxhealth * 0.1;
         break;
       default:
@@ -546,22 +546,22 @@ function_45a520db(params) {
 
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case # "enhanced":
+      case #"enhanced":
         if(self.archetype === #"catalyst") {
           var_487ba56d = function_c3a8f243(2);
           playsoundatposition(#"hash_5755957467fab7c0", self.origin);
         }
 
         break;
-      case # "heavy":
+      case #"heavy":
         var_487ba56d = 5;
         playsoundatposition(#"hash_57559c7467fac3a5", self.origin);
         break;
-      case # "miniboss":
+      case #"miniboss":
         var_487ba56d = 10;
         playsoundatposition(#"hash_612ef6ccaf0effeb", self.origin);
         break;
-      case # "boss":
+      case #"boss":
         var_487ba56d = 15;
         break;
     }
@@ -696,23 +696,23 @@ function_e03ea502() {
     str_extra_info = #"zmarcade/blank";
 
     switch (s_waitresult._notify) {
-      case # "bonus_points_player_grabbed":
+      case #"bonus_points_player_grabbed":
         var_96d5f0e8 = float(gettime()) / 1000 - self.var_5d24f421;
         self.var_5d24f421 = float(gettime()) / 1000;
         break;
-      case # "player_grabbed_key":
+      case #"player_grabbed_key":
         self function_3450100a("player_grabbed_key");
         break;
-      case # "zm_arcade_kill":
+      case #"zm_arcade_kill":
         break;
-      case # "timeout":
+      case #"timeout":
         if(self.var_7e008e0c > 0) {
           self thread function_c1ab015e();
         }
 
         break;
-      case # "multiplier_timeout":
-      case # "damage":
+      case #"multiplier_timeout":
+      case #"damage":
         if(isDefined(s_waitresult.mod) && s_waitresult.mod != "MOD_FALLING" || s_waitresult._notify == "multiplier_timeout") {
           str_extra_info = #"hash_68f33faa5abddd73";
 
@@ -754,8 +754,8 @@ function_e03ea502() {
         }
 
         break;
-      case # "player_downed":
-      case # "bled_out":
+      case #"player_downed":
+      case #"bled_out":
         self.var_7e008e0c = 0;
         self.var_30c56c16 = 0;
         break;

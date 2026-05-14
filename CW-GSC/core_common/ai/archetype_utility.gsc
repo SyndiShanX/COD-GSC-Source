@@ -1165,11 +1165,11 @@ function bb_getlocomotionfaceenemyquadrant() {
   walkstring = getdvarstring(#"tacticalwalkdirection");
 
   switch (walkstring) {
-    case # "right":
+    case #"right":
       return "<dev string:x1af>";
-    case # "left":
+    case #"left":
       return "<dev string:x1ce>";
-    case # "back":
+    case #"back":
       return "<dev string:x1ec>";
   }
 
@@ -1301,21 +1301,21 @@ function bb_getweaponclass() {
   weaponclass = isDefined(self.weaponclass) ? self.weaponclass : "rifle";
 
   switch (weaponclass) {
-    case # "rifle":
+    case #"rifle":
       return "rifle";
-    case # "rifle":
+    case #"rifle":
       return "rifle";
-    case # "mg":
+    case #"mg":
       return "mg";
-    case # "smg":
+    case #"smg":
       return "smg";
-    case # "spread":
+    case #"spread":
       return "spread";
-    case # "pistol":
+    case #"pistol":
       return "pistol";
-    case # "grenade":
+    case #"grenade":
       return "grenade";
-    case # "rocketlauncher":
+    case #"rocketlauncher":
       return "rocketlauncher";
     default:
       return "rifle";
@@ -2671,9 +2671,9 @@ function private isinphalanxstance(entity) {
   currentstance = entity getblackboardattribute("_stance");
 
   switch (phalanxstance) {
-    case # "stand":
+    case #"stand":
       return (currentstance == "stand");
-    case # "crouch":
+    case #"crouch":
       return (currentstance == "crouch");
   }
 
@@ -2684,10 +2684,10 @@ function private togglephalanxstance(entity) {
   phalanxstance = entity ai::get_behavior_attribute("phalanx_force_stance");
 
   switch (phalanxstance) {
-    case # "stand":
+    case #"stand":
       entity setblackboardattribute("_desired_stance", "stand");
       break;
-    case # "crouch":
+    case #"crouch":
       entity setblackboardattribute("_desired_stance", "crouch");
       break;
   }
@@ -2728,7 +2728,7 @@ function shouldattackobject(entity) {
 
 function meleeattributescallback(entity, attribute, oldvalue, value) {
   switch (oldvalue) {
-    case # "can_melee":
+    case #"can_melee":
       if(value) {
         attribute.canmelee = 1;
       } else {
@@ -2736,7 +2736,7 @@ function meleeattributescallback(entity, attribute, oldvalue, value) {
       }
 
       break;
-    case # "can_be_meleed":
+    case #"can_be_meleed":
       if(value) {
         attribute.canbemeleed = 1;
       } else {
@@ -2749,7 +2749,7 @@ function meleeattributescallback(entity, attribute, oldvalue, value) {
 
 function arrivalattributescallback(entity, attribute, oldvalue, value) {
   switch (oldvalue) {
-    case # "disablearrivals":
+    case #"disablearrivals":
       if(value) {
         attribute.ai.disablearrivals = 1;
       } else {
@@ -2762,7 +2762,7 @@ function arrivalattributescallback(entity, attribute, oldvalue, value) {
 
 function function_eef4346c(entity, attribute, oldvalue, value) {
   switch (oldvalue) {
-    case # "disablepeek":
+    case #"disablepeek":
       if(value) {
         attribute.ai.disablepeek = 1;
       } else {
@@ -2775,7 +2775,7 @@ function function_eef4346c(entity, attribute, oldvalue, value) {
 
 function function_1cd75f29(entity, attribute, oldvalue, value) {
   switch (oldvalue) {
-    case # "disablelean":
+    case #"disablelean":
       if(value) {
         attribute.ai.disablelean = 1;
       } else {
@@ -2788,7 +2788,7 @@ function function_1cd75f29(entity, attribute, oldvalue, value) {
 
 function function_a626b1a9(entity, attribute, oldvalue, value) {
   switch (oldvalue) {
-    case # "disablereload":
+    case #"disablereload":
       if(value) {
         attribute.ai.disablereload = 1;
       } else {

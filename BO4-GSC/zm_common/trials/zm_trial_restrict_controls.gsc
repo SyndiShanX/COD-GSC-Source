@@ -33,13 +33,13 @@ on_begin(var_bd9d962 = #"invert") {
   level.var_2439365b = var_bd9d962;
 
   switch (level.var_2439365b) {
-    case # "invert":
+    case #"invert":
       foreach(player in getplayers()) {
         player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 1);
       }
 
       break;
-    case # "turret":
+    case #"turret":
       foreach(player in getplayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 1);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 1);
@@ -49,7 +49,7 @@ on_begin(var_bd9d962 = #"invert") {
       callback::on_ai_spawned(&function_a5b02a07);
       callback::on_spawned(&function_eaba7c6f);
       break;
-    case # "half_speed":
+    case #"half_speed":
       foreach(player in getplayers()) {
         player setmovespeedscale(0.5);
         player allowsprint(0);
@@ -62,13 +62,13 @@ on_begin(var_bd9d962 = #"invert") {
 
 on_end(round_reset) {
   switch (level.var_2439365b) {
-    case # "invert":
+    case #"invert":
       foreach(player in getplayers()) {
         player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 0);
       }
 
       break;
-    case # "turret":
+    case #"turret":
       foreach(player in getplayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 0);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 0);
@@ -81,7 +81,7 @@ on_end(round_reset) {
       callback::remove_on_ai_spawned(&function_a5b02a07);
       callback::remove_on_spawned(&function_eaba7c6f);
       break;
-    case # "half_speed":
+    case #"half_speed":
       foreach(player in getplayers()) {
         player setmovespeedscale(1);
         player allowsprint(1);

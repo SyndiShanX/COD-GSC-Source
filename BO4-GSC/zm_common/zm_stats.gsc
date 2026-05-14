@@ -914,53 +914,53 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
 
   if(isPlayer(entity) && isDefined(eattacker.archetype)) {
     switch (eattacker.archetype) {
-      case # "blight_father":
+      case #"blight_father":
         entity increment_client_stat("killed_by_blightfather");
         entity increment_player_stat("killed_by_blightfather");
         entity forced_attachment("boas_killed_by_blightfather");
         break;
-      case # "brutus":
+      case #"brutus":
         entity increment_client_stat("killed_by_brutus");
         entity increment_player_stat("killed_by_brutus");
         entity forced_attachment("boas_killed_by_brutus");
         break;
-      case # "gladiator":
+      case #"gladiator":
         entity increment_client_stat("killed_by_gladiator");
         entity increment_player_stat("killed_by_gladiator");
         entity forced_attachment("boas_killed_by_gladiator");
         break;
-      case # "stoker":
+      case #"stoker":
         entity increment_client_stat("killed_by_stoker");
         entity increment_player_stat("killed_by_stoker");
         entity forced_attachment("boas_killed_by_stoker");
         break;
-      case # "tiger":
+      case #"tiger":
         entity increment_client_stat("killed_by_tiger");
         entity increment_player_stat("killed_by_tiger");
         entity forced_attachment("boas_killed_by_tiger");
         break;
-      case # "catalyst":
+      case #"catalyst":
         entity increment_client_stat("killed_by_catalyst");
         entity increment_player_stat("killed_by_catalyst");
         entity forced_attachment("boas_killed_by_catalyst");
 
         switch (eattacker.subarchetype) {
-          case # "catalyst_electric":
+          case #"catalyst_electric":
             entity increment_client_stat("killed_by_catalyst_electric");
             entity increment_player_stat("killed_by_catalyst_electric");
             entity forced_attachment("boas_killed_by_catalyst_electric");
             break;
-          case # "catalyst_water":
+          case #"catalyst_water":
             entity increment_client_stat("killed_by_catalyst_water");
             entity increment_player_stat("killed_by_catalyst_water");
             entity forced_attachment("boas_killed_by_catalyst_water");
             break;
-          case # "catalyst_plasma":
+          case #"catalyst_plasma":
             entity increment_client_stat("killed_by_catalyst_plasma");
             entity increment_player_stat("killed_by_catalyst_plasma");
             entity forced_attachment("boas_killed_by_catalyst_plasma");
             break;
-          case # "catalyst_corrosive":
+          case #"catalyst_corrosive":
             entity increment_client_stat("killed_by_catalyst_corrosive");
             entity increment_player_stat("killed_by_catalyst_corrosive");
             entity forced_attachment("boas_killed_by_catalyst_corrosive");
@@ -968,17 +968,17 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "nova_crawler":
+      case #"nova_crawler":
         entity increment_client_stat("killed_by_nova_crawler");
         entity increment_player_stat("killed_by_nova_crawler");
         entity forced_attachment("boas_killed_by_nova_crawler");
         break;
-      case # "zombie_dog":
+      case #"zombie_dog":
         entity increment_client_stat("killed_by_zdog");
         entity increment_player_stat("killed_by_zdog");
         entity forced_attachment("boas_killed_by_zdog");
         break;
-      case # "nosferatu":
+      case #"nosferatu":
         if(eattacker.subarchetype === #"crimson_nosferatu") {
           entity increment_client_stat("killed_by_crimson_nosferatu");
           entity increment_player_stat("killed_by_crimson_nosferatu");
@@ -990,7 +990,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         }
 
         break;
-      case # "werewolf":
+      case #"werewolf":
         entity increment_client_stat("killed_by_werewolf");
         entity increment_player_stat("killed_by_werewolf");
         entity forced_attachment("boas_killed_by_werewolf");
@@ -1003,53 +1003,53 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
   if(isPlayer(eattacker)) {
     if(isDefined(entity.archetype)) {
       switch (entity.archetype) {
-        case # "blight_father":
+        case #"blight_father":
           eattacker increment_client_stat("blightfathers_killed");
           eattacker increment_player_stat("blightfathers_killed");
           eattacker forced_attachment("boas_blightfathers_killed");
           break;
-        case # "brutus":
+        case #"brutus":
           eattacker increment_client_stat("brutuses_killed");
           eattacker increment_player_stat("brutuses_killed");
           eattacker forced_attachment("boas_brutuses_killed");
           break;
-        case # "gladiator":
+        case #"gladiator":
           eattacker increment_client_stat("gladiators_killed");
           eattacker increment_player_stat("gladiators_killed");
           eattacker forced_attachment("boas_gladiators_killed");
           break;
-        case # "stoker":
+        case #"stoker":
           eattacker increment_client_stat("stokers_killed");
           eattacker increment_player_stat("stokers_killed");
           eattacker forced_attachment("boas_stokers_killed");
           break;
-        case # "tiger":
+        case #"tiger":
           eattacker increment_client_stat("tigers_killed");
           eattacker increment_player_stat("tigers_killed");
           eattacker forced_attachment("boas_tigers_killed");
           break;
-        case # "catalyst":
+        case #"catalyst":
           eattacker increment_client_stat("catalysts_killed");
           eattacker increment_player_stat("catalysts_killed");
           eattacker forced_attachment("boas_catalysts_killed");
 
           switch (entity.subarchetype) {
-            case # "catalyst_electric":
+            case #"catalyst_electric":
               eattacker increment_client_stat("catalyst_electrics_killed");
               eattacker increment_player_stat("catalyst_electrics_killed");
               eattacker forced_attachment("boas_catalyst_electrics_killed");
               break;
-            case # "catalyst_water":
+            case #"catalyst_water":
               eattacker increment_client_stat("catalyst_waters_killed");
               eattacker increment_player_stat("catalyst_waters_killed");
               eattacker forced_attachment("boas_catalyst_waters_killed");
               break;
-            case # "catalyst_plasma":
+            case #"catalyst_plasma":
               eattacker increment_client_stat("catalyst_plasmas_killed");
               eattacker increment_player_stat("catalyst_plasmas_killed");
               eattacker forced_attachment("boas_catalyst_plasmas_killed");
               break;
-            case # "catalyst_corrosive":
+            case #"catalyst_corrosive":
               eattacker increment_client_stat("catalyst_corrosives_killed");
               eattacker increment_player_stat("catalyst_corrosives_killed");
               eattacker forced_attachment("boas_catalyst_corrosives_killed");
@@ -1057,17 +1057,17 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "nova_crawler":
+        case #"nova_crawler":
           eattacker increment_client_stat("nova_crawlers_killed");
           eattacker increment_player_stat("nova_crawlers_killed");
           eattacker forced_attachment("boas_nova_crawlers_killed");
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           eattacker increment_client_stat("zdogs_killed");
           eattacker increment_player_stat("zdogs_killed");
           eattacker forced_attachment("boas_zdogs_killed");
           break;
-        case # "nosferatu":
+        case #"nosferatu":
           if(entity.subarchetype === #"crimson_nosferatu") {
             eattacker increment_client_stat("crimson_nosferatus_killed");
             eattacker increment_player_stat("crimson_nosferatus_killed");
@@ -1079,12 +1079,12 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           }
 
           break;
-        case # "werewolf":
+        case #"werewolf":
           eattacker increment_client_stat("werewolves_killed");
           eattacker increment_player_stat("werewolves_killed");
           eattacker forced_attachment("boas_werewolves_killed");
           break;
-        case # "bat":
+        case #"bat":
           eattacker increment_client_stat("bats_killed");
           eattacker increment_player_stat("bats_killed");
           eattacker forced_attachment("boas_bats_killed");

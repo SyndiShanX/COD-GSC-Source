@@ -407,28 +407,28 @@ function_86a8adbe() {
       foreach(s_magic_box in level.chests) {
         if(!(isDefined(s_magic_box.hidden) && s_magic_box.hidden) && isDefined(s_magic_box.script_noteworthy)) {
           switch (s_magic_box.script_noteworthy) {
-            case # "promenade_chest":
+            case #"promenade_chest":
               mdl_map showpart("j_promenade");
               break;
-            case # "cargo_chest":
+            case #"cargo_chest":
               mdl_map showpart("j_cargo");
               break;
-            case # "engine_room_chest":
+            case #"engine_room_chest":
               mdl_map showpart("j_engine_room");
               break;
-            case # "grand_stair_lower_chest":
+            case #"grand_stair_lower_chest":
               mdl_map showpart("j_grand_stair_lower");
               break;
-            case # "lounge_chest":
+            case #"lounge_chest":
               mdl_map showpart("j_lounge");
               break;
-            case # "hash_23cfa652ecaa206e":
+            case #"hash_23cfa652ecaa206e":
               mdl_map showpart("j_grand_stair_upper");
               break;
-            case # "bridge_chest":
+            case #"bridge_chest":
               mdl_map showpart("j_bridge");
               break;
-            case # "dining_hall_chest":
+            case #"dining_hall_chest":
               mdl_map showpart("j_dining_hall");
               break;
           }
@@ -1125,8 +1125,8 @@ zone_init() {
 
 function_18f12f69(str_zone_name) {
   switch (str_zone_name) {
-    case # "zone_zipline_fore":
-    case # "zone_zipline_aft":
+    case #"zone_zipline_fore":
+    case #"zone_zipline_aft":
       foreach(e_player in getplayers()) {
         if(isDefined(e_player.var_16735873) && e_player.var_16735873) {
           if(e_player.var_5817f611 === "aft_to_fore" && str_zone_name == "zone_zipline_fore") {
@@ -1745,84 +1745,84 @@ get_location_string(e_player) {
   }
 
   switch (str_zone) {
-    case # "zone_forecastle_upper":
-    case # "zone_forecastle_lower":
+    case #"zone_forecastle_upper":
+    case #"zone_forecastle_lower":
       str_display = #"hash_4800ed4f22425bbb";
       break;
-    case # "zone_state_rooms_front":
-    case # "zone_state_rooms_rear":
+    case #"zone_state_rooms_front":
+    case #"zone_state_rooms_rear":
       str_display = #"hash_69ebb1abe1e2d695";
       break;
-    case # "millionaire_suite_zone":
+    case #"millionaire_suite_zone":
       str_display = #"hash_302fc7a8b597825c";
       break;
-    case # "zone_bridge":
+    case #"zone_bridge":
       str_display = #"hash_6e14395e9fafcfb8";
       break;
-    case # "zone_grand_stairs_c_deck":
-    case # "zone_grand_stairs_d_deck":
-    case # "zone_grand_stairs_bottom":
+    case #"zone_grand_stairs_c_deck":
+    case #"zone_grand_stairs_d_deck":
+    case #"zone_grand_stairs_bottom":
       str_display = #"hash_40db3f8450c1cdd1";
       break;
-    case # "zone_grand_stairs_a_deck":
-    case # "zone_grand_stairs_b_deck":
+    case #"zone_grand_stairs_a_deck":
+    case #"zone_grand_stairs_b_deck":
       str_display = #"hash_23a9baa5b7fb1b8";
       break;
-    case # "zone_lounge":
+    case #"zone_lounge":
       str_display = #"hash_21aaa58eff63ee6f";
       break;
-    case # "zone_dining_hall_aft":
-    case # "zone_dining_hall_fore":
+    case #"zone_dining_hall_aft":
+    case #"zone_dining_hall_fore":
       str_display = #"hash_3325f6b80c910400";
       break;
-    case # "zone_galley":
+    case #"zone_galley":
       str_display = #"hash_1b6d24a149bb4863";
       break;
-    case # "zone_promenade_deck":
+    case #"zone_promenade_deck":
       str_display = #"hash_4254e25038a56598";
       break;
-    case # "zone_lounge_aft_deck":
+    case #"zone_lounge_aft_deck":
       str_display = #"hash_577acc33401ccf26";
       break;
-    case # "zone_aft_deck_lower":
-    case # "zone_aft_deck":
+    case #"zone_aft_deck_lower":
+    case #"zone_aft_deck":
       str_display = #"hash_64c435d9bd0cdd9e";
       break;
-    case # "zone_sun_deck_stbd":
+    case #"zone_sun_deck_stbd":
       str_display = #"hash_38887942b83c8cbb";
       break;
-    case # "zone_fore_deck":
+    case #"zone_fore_deck":
       str_display = #"hash_5c9be164190cf031";
       break;
-    case # "zone_sun_deck_port":
-    case # "zone_mid_deck":
+    case #"zone_sun_deck_port":
+    case #"zone_mid_deck":
       str_display = #"hash_7361752642f5d7cf";
       break;
-    case # "zone_poop_deck":
-    case # "zone_poop_deck_lower":
+    case #"zone_poop_deck":
+    case #"zone_poop_deck_lower":
       str_display = #"hash_788531c390c09f9";
       break;
-    case # "zone_berths":
-    case # "zone_berths_subdeck":
+    case #"zone_berths":
+    case #"zone_berths_subdeck":
       str_display = #"hash_1f322078edfcfba3";
       break;
-    case # "zone_provisions":
+    case #"zone_provisions":
       str_display = #"hash_4e21f45a939d9031";
       break;
-    case # "zone_upper_engine_room":
-    case # "zone_engine":
+    case #"zone_upper_engine_room":
+    case #"zone_engine":
       str_display = #"hash_118b4d5763e21783";
       break;
-    case # "zone_boiler_room":
+    case #"zone_boiler_room":
       str_display = #"hash_21f25d50ac7b1ae0";
       break;
-    case # "zone_turbine_room":
+    case #"zone_turbine_room":
       str_display = #"hash_5479cc9d545c2adc";
       break;
-    case # "zone_cargo":
+    case #"zone_cargo":
       str_display = #"hash_35000bfda3024a1f";
       break;
-    case # "zone_mail_room":
+    case #"zone_mail_room":
       str_display = #"hash_79da5cb2d068ceb6";
       break;
     default:
@@ -1995,10 +1995,10 @@ function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
-      case # "connect_provisions_to_engine_room":
+      case #"connect_provisions_to_engine_room":
         self.hint_string[n_player_index] = #"hash_6134f96bfd8584b9";
         break;
-      case # "connect_mail_rooms_to_cargo":
+      case #"connect_mail_rooms_to_cargo":
         self.hint_string[n_player_index] = #"hash_2bdcee65a214c377";
         break;
       default:
@@ -2015,7 +2015,7 @@ function_c52e8ba(player, var_8d5d092c) {
     b_result = 1;
   } else {
     switch (str_loc) {
-      case # "aft_to_fore":
+      case #"aft_to_fore":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_7593a2ebe8fc0b3";
@@ -2029,7 +2029,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "fore_to_aft":
+      case #"fore_to_aft":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_12fc562d9ab4bf38";
@@ -2043,7 +2043,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "smoke_stack_top":
+      case #"smoke_stack_top":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_6ccb25e6c862372d";
@@ -2057,7 +2057,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "smoke_stack_bottom":
+      case #"smoke_stack_bottom":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_781dafec4ac0550f";
@@ -2071,7 +2071,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "cargo":
+      case #"cargo":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_d7db45a21cdc530";
@@ -2085,7 +2085,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "engine_room":
+      case #"engine_room":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_30a5377271b52fa1";
@@ -2099,7 +2099,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "boiler_room":
+      case #"boiler_room":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_3a812772e47fb401";
@@ -2113,7 +2113,7 @@ function_c52e8ba(player, var_8d5d092c) {
         }
 
         break;
-      case # "suites":
+      case #"suites":
         if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
             self.hint_string[n_player_index] = #"hash_224468183fc02d71";
@@ -2140,20 +2140,20 @@ function_c52e8ba(player, var_8d5d092c) {
 
 function_ae5d684b() {
   switch (self.unitrigger_stub.script_string) {
-    case # "smoke_stack_bottom":
-    case # "smoke_stack_top":
+    case #"smoke_stack_bottom":
+    case #"smoke_stack_top":
       self.unitrigger_stub.var_8d5d092c = "smoke_stack";
       break;
-    case # "engine_room":
-    case # "cargo":
+    case #"engine_room":
+    case #"cargo":
       self.unitrigger_stub.var_8d5d092c = "engine_room";
       break;
-    case # "fore_to_aft":
-    case # "aft_to_fore":
+    case #"fore_to_aft":
+    case #"aft_to_fore":
       self.unitrigger_stub.var_8d5d092c = "top_deck";
       break;
-    case # "boiler_room":
-    case # "suites":
+    case #"boiler_room":
+    case #"suites":
       self.unitrigger_stub.var_8d5d092c = "mid_ship";
       break;
   }

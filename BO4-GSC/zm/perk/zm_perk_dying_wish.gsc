@@ -181,16 +181,16 @@ function_ab41c8ab(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
     }
 
     switch (self.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         self zombie_utility::gib_random_parts();
         gibserverutils::annihilate(self);
         damage = self.health;
         break;
-      case # "heavy":
-      case # "miniboss":
-      case # "boss":
+      case #"heavy":
+      case #"miniboss":
+      case #"boss":
         damage += 7000;
         break;
     }

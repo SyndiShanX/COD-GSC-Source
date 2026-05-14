@@ -32,22 +32,22 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "heli":
+    case #"heli":
       ent thread heli();
       break;
-    case # "truck":
+    case #"truck":
       ent thread truck();
       break;
-    case # "ai_truck":
+    case #"ai_truck":
       ent thread ai_truck();
       break;
-    case # "hash_5c1cf640998f4b32":
+    case #"hash_5c1cf640998f4b32":
       ent thread function_4ada6bd4();
       break;
-    case # "missile":
+    case #"missile":
       ent thread missile();
       break;
-    case # "smoke_grenade":
+    case #"smoke_grenade":
       var_b6d070fb = snd::play("wpn_smoke_hiss_lp", ent);
       snd::function_f4f3a2a(var_b6d070fb, ent, 1);
       break;
@@ -63,9 +63,9 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
-    case # "hash_52c986eea5204cd3":
+    case #"hash_52c986eea5204cd3":
       break;
     default:
 
@@ -77,20 +77,20 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "hash_685e0be4fd449fb7":
+    case #"hash_685e0be4fd449fb7":
       break;
-    case # "hash_a6672e4b395e2b8":
+    case #"hash_a6672e4b395e2b8":
       thread function_f65bf20a();
       thread function_23f249d1();
       break;
-    case # "hash_1b35e000cf122d8e":
+    case #"hash_1b35e000cf122d8e":
       thread function_641ef2a8();
       break;
-    case # "hash_5c7e1a43ba45c2b4":
+    case #"hash_5c7e1a43ba45c2b4":
       thread function_1477a4b9();
       thread function_58c7f87f();
       break;
-    case # "hash_305dcf2b80864ec":
+    case #"hash_305dcf2b80864ec":
       thread function_f9003ea1();
       break;
     default:
@@ -103,24 +103,24 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "tundra_intro":
+    case #"tundra_intro":
       thread function_f65bf20a();
       break;
-    case # "tundra_combat":
+    case #"tundra_combat":
       level notify(#"hash_d0fb1042d2d6aa");
       thread function_bca722a8();
       thread function_ac9af666();
       break;
-    case # "dev_vip_active":
+    case #"dev_vip_active":
       level notify(#"hash_d0fb1042d2d6aa");
       thread function_ac9af666();
       break;
-    case # "tundra_outro":
+    case #"tundra_outro":
       level notify(#"hash_d0fb1042d2d6aa");
       thread function_bca722a8();
       thread function_ac9af666();
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

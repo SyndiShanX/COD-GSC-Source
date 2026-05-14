@@ -916,10 +916,10 @@ devgui_loop() {
     args = strtok(dvarstr, "<dev string:x51c>");
 
     switch (args[0]) {
-      case # "clear":
+      case #"clear":
         devgui_clear();
         break;
-      case # "shuffle":
+      case #"shuffle":
         level thread devgui_shuffle(args[1]);
         break;
     }
@@ -975,8 +975,8 @@ debug_loop() {
 
           if(trace[#"fraction"] < 1) {
             switch (trace[#"surfacetype"]) {
-              case # "water":
-              case # "watershallow":
+              case #"water":
+              case #"watershallow":
                 var_95341914 = (1, 0, 0);
                 break;
             }

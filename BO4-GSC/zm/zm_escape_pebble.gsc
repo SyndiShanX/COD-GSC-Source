@@ -1898,7 +1898,7 @@ function_5bae5249() {
 
 function_d71846cd(cmd) {
   switch (cmd) {
-    case # "hash_8a61bbec91098c":
+    case #"hash_8a61bbec91098c":
       var_64de1b5a = struct::get_array("<dev string:x146>");
 
       foreach(s_glyph in var_64de1b5a) {
@@ -1920,7 +1920,7 @@ function_6d6b192() {
 
 function_1bab20ac(cmd) {
   switch (cmd) {
-    case # "hash_3a594b9ac3dcfcb3":
+    case #"hash_3a594b9ac3dcfcb3":
       if(!isDefined(level.var_a0ddc1d0)) {
         level.var_a0ddc1d0 = 1;
       } else {

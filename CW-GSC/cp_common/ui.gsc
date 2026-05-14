@@ -57,7 +57,7 @@ function countdown_timer(var_753cb060, var_3b192471 = "mission_fail_timer", str_
 
   if(var_f27011e3) {
     switch (level.var_ef4974d7[var_3b192471].str_team) {
-      case # "allies":
+      case #"allies":
         if(is_true(var_72f304a8)) {
           clientfield::set_world_uimodel("hudItems.cpObjective.allies.hardpoint.progress", 0);
         } else {
@@ -66,7 +66,7 @@ function countdown_timer(var_753cb060, var_3b192471 = "mission_fail_timer", str_
 
         clientfield::set_world_uimodel("hudItems.cpObjective.allies.progressType", var_edf9778a);
         break;
-      case # "axis":
+      case #"axis":
         if(is_true(var_72f304a8)) {
           clientfield::set_world_uimodel("hudItems.cpObjective.axis.hardpoint.progress", 0);
         } else {
@@ -115,10 +115,10 @@ function countdown_timer(var_753cb060, var_3b192471 = "mission_fail_timer", str_
 
     if(is_true(var_72f304a8)) {
       switch (level.var_ef4974d7[var_3b192471].str_team) {
-        case # "allies":
+        case #"allies":
           clientfield::set_world_uimodel("hudItems.cpObjective.allies.hardpoint.progress", var_d7b76468);
           break;
-        case # "axis":
+        case #"axis":
           clientfield::set_world_uimodel("hudItems.cpObjective.axis.hardpoint.progress", var_d7b76468);
           break;
         default:
@@ -182,10 +182,10 @@ function private function_c01d14b6(var_3b192471, n_time_left) {
   function_ba6cfb59(var_3b192471, 1, !is_true(level.var_ef4974d7[var_3b192471].var_c215d29e));
 
   switch (level.var_ef4974d7[var_3b192471].str_team) {
-    case # "allies":
+    case #"allies":
       setbombtimer("A", var_1c0820a1);
       break;
-    case # "axis":
+    case #"axis":
       setbombtimer("B", var_1c0820a1);
       break;
     default:
@@ -203,10 +203,10 @@ function private function_ba6cfb59(var_3b192471, b_enable = 1, var_96dc7504 = 1)
   str_team = level.var_ef4974d7[var_3b192471].str_team;
 
   switch (str_team) {
-    case # "allies":
+    case #"allies":
       setmatchflag("bomb_timer_a", is_true(b_enable && var_96dc7504));
       break;
-    case # "axis":
+    case #"axis":
       setmatchflag("bomb_timer_b", is_true(b_enable && var_96dc7504));
       break;
     default:
@@ -217,10 +217,10 @@ function private function_ba6cfb59(var_3b192471, b_enable = 1, var_96dc7504 = 1)
 
   if(!b_enable) {
     switch (str_team) {
-      case # "allies":
+      case #"allies":
         clientfield::set_world_uimodel("hudItems.cpObjective.allies.progressType", 0);
         break;
-      case # "axis":
+      case #"axis":
         clientfield::set_world_uimodel("hudItems.cpObjective.axis.progressType", 0);
         break;
       default:
@@ -325,13 +325,13 @@ function private devgui_loop() {
     }
 
     switch (args[0]) {
-      case # "comms":
+      case #"comms":
         host function_97f309cb(args[1]);
         break;
-      case # "specialist_comms":
+      case #"specialist_comms":
         host function_97f309cb(args[1], args[2]);
         break;
-      case # "prompt":
+      case #"prompt":
         host function_f29c45f6(args[1]);
         break;
     }

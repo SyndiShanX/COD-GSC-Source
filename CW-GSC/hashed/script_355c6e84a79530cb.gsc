@@ -271,7 +271,7 @@ function function_5bc27bd2() {
 
 function function_ae44cb3d(instance, var_eece1f6a) {
   switch (var_eece1f6a) {
-    case # "perk_machine_choice":
+    case #"perk_machine_choice":
       if(zm_utility::is_survival()) {
         var_78a3e26a = #"hash_6e47d6576612543c";
       } else {
@@ -280,16 +280,16 @@ function function_ae44cb3d(instance, var_eece1f6a) {
 
       namespace_82b4c2d1::function_999594fe(instance.contentgroups[#"perk_machine_choice"], #"hash_4af85251966549b8", var_78a3e26a, #"hash_3eac5ec7a888ddfb", 0);
       break;
-    case # "armor_machine":
+    case #"armor_machine":
       namespace_dd7e54e3::function_1cbc3614(instance.contentgroups[#"armor_machine"]);
       break;
-    case # "crafting_table":
+    case #"crafting_table":
       namespace_1cc7b406::function_7dddb953(instance.contentgroups[#"crafting_table"]);
       break;
-    case # "weapon_machine":
+    case #"weapon_machine":
       namespace_4b9fccd8::function_cb9d309b(instance.contentgroups[#"weapon_machine"]);
       break;
-    case # "beacon":
+    case #"beacon":
       namespace_dbb31ff3::function_67dce9cd(instance.contentgroups[#"beacon"]);
       break;
   }

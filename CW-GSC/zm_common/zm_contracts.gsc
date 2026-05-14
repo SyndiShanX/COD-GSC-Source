@@ -92,31 +92,31 @@ function function_74872db6() {
 
 function on_round_end() {
   switch (level.script) {
-    case # "zm_zodt8":
+    case #"zm_zodt8":
       var_c5440c34 = #"contract_zm_zodt8_rounds";
       break;
-    case # "zm_towers":
+    case #"zm_towers":
       var_c5440c34 = #"contract_zm_towers_rounds";
       break;
-    case # "zm_escape":
+    case #"zm_escape":
       var_c5440c34 = #"contract_zm_escape_rounds";
       break;
-    case # "zm_office":
+    case #"zm_office":
       var_c5440c34 = #"contract_zm_office_rounds";
       break;
-    case # "zm_mansion":
+    case #"zm_mansion":
       var_c5440c34 = #"contract_zm_mansion_rounds";
       break;
-    case # "zm_red":
+    case #"zm_red":
       var_c5440c34 = #"contract_zm_red_rounds";
       break;
   }
 
   switch (level.var_837aa533) {
-    case # "zclassic":
+    case #"zclassic":
       var_fc80b645 = #"contract_zm_classic_rounds";
       break;
-    case # "ztrials":
+    case #"ztrials":
       var_fc80b645 = #"contract_zm_gauntlet_rounds";
       break;
   }

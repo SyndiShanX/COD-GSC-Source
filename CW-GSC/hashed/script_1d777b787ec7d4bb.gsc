@@ -1180,16 +1180,16 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4d05810932ce7723":
+    case #"hash_4d05810932ce7723":
       function_2ecb6786();
       break;
-    case # "hash_5076e04551545ed9":
+    case #"hash_5076e04551545ed9":
       function_b2d9913a();
       break;
-    case # "hash_69d305bb8a491ab8":
+    case #"hash_69d305bb8a491ab8":
       function_c4d7b0f0();
       break;
-    case # "hash_3cc8f8a1ca5d7c9b":
+    case #"hash_3cc8f8a1ca5d7c9b":
       function_353c005c();
       break;
     default:

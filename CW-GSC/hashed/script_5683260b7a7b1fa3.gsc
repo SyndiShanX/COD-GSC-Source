@@ -52,16 +52,16 @@ function function_c090ac9c() {
 
 function private function_8df2fc68(cmd) {
   switch (cmd) {
-    case # "hash_21b5fc9db9accec7":
+    case #"hash_21b5fc9db9accec7":
       level thread function_4e9f972a(1);
       break;
-    case # "hash_35aacbfc1cc6d1b0":
+    case #"hash_35aacbfc1cc6d1b0":
       level thread function_4e9f972a(3);
       break;
-    case # "hash_25a40277684d32ee":
+    case #"hash_25a40277684d32ee":
       level thread function_4e9f972a(6);
       break;
-    case # "hash_26a37be826de2ef6":
+    case #"hash_26a37be826de2ef6":
       level thread function_4e9f972a(10);
       break;
   }
@@ -326,15 +326,15 @@ function function_4bac897(var_4d2ad93e) {
 
 function function_525c846d(ammomod) {
   switch (ammomod) {
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
       return 6;
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
       return 1;
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       return 4;
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
       return 3;
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
       return 7;
   }
 

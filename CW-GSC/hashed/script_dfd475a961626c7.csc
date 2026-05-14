@@ -34,56 +34,56 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "tkdn_raid_bar":
+    case #"tkdn_raid_bar":
       function_b6407dd4(1);
       break;
-    case # "tkdn_raid_gearup":
+    case #"tkdn_raid_gearup":
       function_b6407dd4(1);
       break;
-    case # "tkdn_raid_apt":
+    case #"tkdn_raid_apt":
       function_b6407dd4(1);
       break;
-    case # "tkdn_raid_capture":
+    case #"tkdn_raid_capture":
       function_b6407dd4(1);
       break;
-    case # "hash_7db5c2bb92c102ae":
+    case #"hash_7db5c2bb92c102ae":
       function_b6407dd4(1);
       break;
-    case # "tkdn_af_intro":
+    case #"tkdn_af_intro":
       function_b6407dd4(0);
       break;
-    case # "tkdn_af_hill":
+    case #"tkdn_af_hill":
       function_b6407dd4(0);
       level thread function_955f4842();
       level thread function_a43c0d2c();
       level notify(#"hash_50385173feb854f0");
       break;
-    case # "tkdn_af_tarmac":
+    case #"tkdn_af_tarmac":
       function_b6407dd4(0);
       level thread function_2d8bbe54(0.1);
       level thread function_a43c0d2c();
       break;
-    case # "tkdn_af_chase":
+    case #"tkdn_af_chase":
       function_b6407dd4(0);
       function_5ea2c6e3("cp_tkdn_af_chase_mix", 0, 1);
       function_5ea2c6e3("cp_tkdn_af_rc_chase_tires", 0, 1);
       level thread cargo_plane_takeoff();
       level thread function_d1b165f5();
       break;
-    case # "tkdn_af_rc_chase":
+    case #"tkdn_af_rc_chase":
       function_b6407dd4(0);
       function_5ea2c6e3("cp_tkdn_af_chase_mix", 0, 1);
       level thread function_d1b165f5();
       level thread function_e8df4c70();
       break;
-    case # "tkdn_af_skid":
+    case #"tkdn_af_skid":
       function_b6407dd4(0);
       break;
-    case # "tkdn_af_wreck":
+    case #"tkdn_af_wreck":
       function_b6407dd4(0);
       break;
-    case # "no_game":
-    case # "hash_6e531fb9475df744":
+    case #"no_game":
+    case #"hash_6e531fb9475df744":
       break;
     default:
 
@@ -95,57 +95,57 @@ function private _objective(objective) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "adler":
+    case #"adler":
       level.adler = ent;
       ent waittill(#"death");
       level.adler = undefined;
       break;
-    case # "woods":
+    case #"woods":
       level.woods = ent;
       ent waittill(#"death");
       level.woods = undefined;
       break;
-    case # "af_flyover":
+    case #"af_flyover":
       plane = ent;
       var_d776868d = snd::play("veh_tkd_airstrip_flyover", plane);
       snd::function_f4f3a2a(var_d776868d, plane, 9);
       break;
-    case # "cargo_plane":
+    case #"cargo_plane":
       level.cargo_plane = ent;
       ent waittill(#"death");
       level.cargo_plane = undefined;
       break;
-    case # "cargo_plane_mover":
+    case #"cargo_plane_mover":
       level.cargo_plane_mover = ent;
       ent waittill(#"death");
       level.cargo_plane_mover = undefined;
       break;
-    case # "af_truck_plr":
+    case #"af_truck_plr":
       level.var_5acf72ee = ent;
       function_b3fdcb06(level.var_5acf72ee, "tag_axel_front_up", "veh_tkd_chase_plr_jeep_high_lp");
       function_244835ac(level.var_5acf72ee, "veh_tkd_rcxd_deploy_tires_lp");
       ent waittill(#"death");
       level.var_5acf72ee = undefined;
       break;
-    case # "rc_car_plr":
+    case #"rc_car_plr":
       level.rc_car_plr = ent;
       level thread function_e8df4c70();
       ent waittill(#"death");
       level.rc_car_plr = undefined;
       break;
-    case # "af_enemy_chase_veh":
+    case #"af_enemy_chase_veh":
       level.af_enemy_chase_veh = snd::function_4b879845(level.af_enemy_chase_veh, ent);
       function_b3fdcb06(ent, "tag_axel_front_up", "veh_tkd_chase_npc_jeeps_high_lp");
       function_244835ac(ent, "veh_tkd_rcxd_deploy_tires_lp");
       ent waittill(#"death");
       level.af_enemy_chase_veh = snd::function_16b5f116(level.af_enemy_chase_veh, ent);
       break;
-    case # "skid_veh":
+    case #"skid_veh":
       function_b3fdcb06(ent, "tag_axel_front_up", "veh_tkd_skid_veh_high_lp");
       function_244835ac(ent, "veh_tkd_skid_veh_tires_skid_lp");
       level thread function_7142e76c(ent);
       break;
-    case # "cargo_debris":
+    case #"cargo_debris":
       level thread cargo_debris(ent);
       break;
     default:
@@ -160,27 +160,27 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
-    case # "hash_1be9f27129ae7a62":
+    case #"hash_1be9f27129ae7a62":
       break;
-    case # "hash_4b729aa87d03cd":
-    case # "hash_11867574383ac22a":
-    case # "hash_1912faafb2f99437":
+    case #"hash_4b729aa87d03cd":
+    case #"hash_11867574383ac22a":
+    case #"hash_1912faafb2f99437":
       break;
-    case # "hash_52c6ce5cc7e45cd":
-    case # "hash_137e57cafd9e1316":
-    case # "hash_34a277e453b641df":
-    case # "hash_3f3ff833c7fba2e7":
-    case # "hash_50ea2a1178720bb6":
-    case # "hash_5836480b992bf337":
-    case # "hash_6da66622baceb34e":
-    case # "hash_7cf32b3e3b7bd98b":
+    case #"hash_52c6ce5cc7e45cd":
+    case #"hash_137e57cafd9e1316":
+    case #"hash_34a277e453b641df":
+    case #"hash_3f3ff833c7fba2e7":
+    case #"hash_50ea2a1178720bb6":
+    case #"hash_5836480b992bf337":
+    case #"hash_6da66622baceb34e":
+    case #"hash_7cf32b3e3b7bd98b":
       break;
-    case # "hash_431834d37daaaf40":
-    case # "hash_5f996c7d961a6374":
+    case #"hash_431834d37daaaf40":
+    case #"hash_5f996c7d961a6374":
       break;
-    case # "hash_d19cd1aa24166b3":
+    case #"hash_d19cd1aa24166b3":
       break;
     default:
 
@@ -192,85 +192,85 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "triton_on":
+    case #"triton_on":
       function_b6407dd4(1);
       break;
-    case # "triton_off":
+    case #"triton_off":
       function_b6407dd4(0);
       break;
-    case # "intro_trans_out":
+    case #"intro_trans_out":
       level notify(#"intro_trans_out");
       break;
-    case # "hash_443db59c2d746e0f":
+    case #"hash_443db59c2d746e0f":
       function_5ea2c6e3("cp_takedown_bar_intro");
       break;
-    case # "hash_1ef4e0d9441579d":
+    case #"hash_1ef4e0d9441579d":
       function_ed62c9c2("cp_takedown_bar_intro");
       break;
-    case # "cp_takedown_raid_af_transition":
+    case #"cp_takedown_raid_af_transition":
       function_5ea2c6e3("cp_takedown_raid_af_transition");
       break;
-    case # "cp_takedown_raid_af_transition_complete":
+    case #"cp_takedown_raid_af_transition_complete":
       function_ed62c9c2("cp_takedown_raid_af_transition");
       break;
-    case # "hit3_fadein":
+    case #"hit3_fadein":
       thread function_8881654();
       break;
-    case # "af_intro_camera_whoosh":
+    case #"af_intro_camera_whoosh":
       snd::play("evt_tkd_af_intro_camera_whoosh");
       break;
-    case # "af_intro_done":
+    case #"af_intro_done":
       wait 5;
       level notify(#"hash_50385173feb854f0");
       break;
-    case # "af_init":
+    case #"af_init":
       break;
-    case # "snd_overlook_scene":
+    case #"snd_overlook_scene":
       thread function_2f088c3f();
       thread function_9c9fad4e();
       break;
-    case # "start_sniping":
+    case #"start_sniping":
       level notify(#"start_sniping");
       break;
-    case # "hash_1533b6e574c5cfe7":
+    case #"hash_1533b6e574c5cfe7":
       thread function_204b1d87();
       thread function_2d5baabb();
       break;
-    case # "hash_3620fe1626778dde":
+    case #"hash_3620fe1626778dde":
       level notify(#"hash_2501fef6c47895fa");
       break;
-    case # "hash_1e58e46360c0a83b":
+    case #"hash_1e58e46360c0a83b":
       level notify(#"hash_1e58e46360c0a83b");
       function_5ea2c6e3("cp_tkdn_af_tarmac_combat", 1, 1);
       break;
-    case # "af_truck_plr_in":
+    case #"af_truck_plr_in":
       function_ed62c9c2("cp_tkdn_af_tarmac_combat", 4);
       function_5ea2c6e3("cp_tkdn_af_chase_mix", 4, 1);
       snd::play([4, "evt_tkd_chase_start_peel_out"], [level.var_5acf72ee, "tag_axel_front_up"]);
       break;
-    case # "plane_chase":
+    case #"plane_chase":
       function_5ea2c6e3("cp_tkdn_af_hill_plane", 0, 1);
       break;
-    case # "hash_1bdccb03a5e24d52":
+    case #"hash_1bdccb03a5e24d52":
       function_ed62c9c2("cp_tkdn_af_hill_plane", 2);
       break;
-    case # "hash_706ce4bbfd6f3342":
+    case #"hash_706ce4bbfd6f3342":
       break;
-    case # "af_skid":
+    case #"af_skid":
       break;
-    case # "af_skid_starting":
+    case #"af_skid_starting":
       thread function_41798e8d();
       break;
-    case # "af_skid_complete":
+    case #"af_skid_complete":
       function_ed62c9c2("cp_tkdn_af_chase_mix", 3);
       level notify(#"hash_accff44c369c030");
       break;
-    case # "plane_idle":
+    case #"plane_idle":
       thread function_2d8bbe54(0.5);
       break;
-    case # "start_plane_rev":
+    case #"start_plane_rev":
       break;
-    case # "hash_164bf872d25545af":
+    case #"hash_164bf872d25545af":
       level notify(#"hash_2b1ea816682de37d");
       level notify(#"hash_6f65948492627624");
       thread function_b5f89c52(level.cargo_plane);
@@ -279,18 +279,18 @@ function private function_f2a2832d(player, msg) {
       function_ed62c9c2("cp_tkdn_af_chase_rcxd_mix", 0.25);
       level thread function_721eb243();
       break;
-    case # "af_wreck":
+    case #"af_wreck":
       break;
-    case # "af_wreck_amb":
+    case #"af_wreck_amb":
       level thread af_wreck_amb();
       break;
-    case # "af_wreck_amb_end":
+    case #"af_wreck_amb_end":
       level notify(#"af_wreck_amb_end");
       break;
-    case # "end_fadeout":
+    case #"end_fadeout":
       thread function_4df43a5e();
       break;
-    case # "unlock_all_takedownmus":
+    case #"unlock_all_takedownmus":
       function_2cca7b47(0, #"musictrack_cp_takedown_1");
       function_2cca7b47(0, #"musictrack_cp_takedown_2");
       function_2cca7b47(0, #"musictrack_cp_takedown_3");

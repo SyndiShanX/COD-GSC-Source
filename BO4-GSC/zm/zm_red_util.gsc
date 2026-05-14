@@ -266,82 +266,82 @@ function_a94baf7b() {
 
 function function_8916aa62(str_line) {
   switch (str_line) {
-    case # "hash_61b0d833df7fb2c3":
+    case #"hash_61b0d833df7fb2c3":
       str_vo_line = #"hash_1afab8875f1342bc";
       break;
-    case # "hash_13833567991bf57f":
+    case #"hash_13833567991bf57f":
       str_vo_line = #"hash_6602f6ff55aea604";
       break;
-    case # "mural_acrisius":
+    case #"mural_acrisius":
       str_vo_line = #"hash_1afd1c392812ecf3";
       break;
-    case # "mural_bellerophon":
+    case #"mural_bellerophon":
       str_vo_line = #"hash_45da578907c2942c";
       break;
-    case # "mural_hesperides":
+    case #"mural_hesperides":
       str_vo_line = #"hash_19881d774c4bb8ae";
       break;
-    case # "mural_andromeda":
+    case #"mural_andromeda":
       str_vo_line = #"hash_60a1b31d1e49dfef";
       break;
-    case # "urn_herakles":
+    case #"urn_herakles":
       str_vo_line = #"hash_33c6fcca57aca8d";
       break;
-    case # "mural_bellerophon_fall":
+    case #"mural_bellerophon_fall":
       str_vo_line = #"hash_497d4298ff17357a";
       break;
-    case # "urn_erinyes":
+    case #"urn_erinyes":
       str_vo_line = #"hash_6ef7ae2fd8250179";
       break;
-    case # "hash_50e280aeaa829e6c":
+    case #"hash_50e280aeaa829e6c":
       str_vo_line = #"hash_62abf8f91f119ead";
       break;
-    case # "urn_talos":
+    case #"urn_talos":
       str_vo_line = #"hash_3a5e26183d8b51c1";
       break;
-    case # "hash_e2cf00499808431":
+    case #"hash_e2cf00499808431":
       str_vo_line = #"hash_499d5f58bb808122";
       break;
-    case # "interact_automaton":
+    case #"interact_automaton":
       str_vo_line = #"hash_48e9f010df79bf6b";
       break;
-    case # "hash_7004febf4258ee7c":
+    case #"hash_7004febf4258ee7c":
       str_vo_line = #"hash_4ca81ffc1793c4fd";
       break;
-    case # "hash_4439679b1d9196dc":
+    case #"hash_4439679b1d9196dc":
       str_vo_line = #"hash_390aa4c8a2db661d";
       break;
-    case # "hash_156a2e99360d81da":
+    case #"hash_156a2e99360d81da":
       str_vo_line = #"hash_26935699e93f1db7";
       break;
-    case # "interact_sandals":
+    case #"interact_sandals":
       str_vo_line = #"hash_13ae4ec246717759";
       break;
-    case # "interact_treasure_chest":
+    case #"interact_treasure_chest":
       str_vo_line = #"hash_4125f996df00a018";
       break;
-    case # "interact_forge":
+    case #"interact_forge":
       str_vo_line = #"hash_10cbb1b8573a0040";
       break;
-    case # "hash_5eff508aba7e72bf":
+    case #"hash_5eff508aba7e72bf":
       str_vo_line = #"hash_3675fc89d07c4c0c";
       break;
-    case # "hash_59cedc66fd5105d2":
+    case #"hash_59cedc66fd5105d2":
       str_vo_line = #"hash_1ca7575800b7ff57";
       break;
-    case # "statue_pedestal":
+    case #"statue_pedestal":
       str_vo_line = #"hash_5e56b7fe2e124bbd";
       break;
-    case # "hash_4ea1d73b4539f362":
+    case #"hash_4ea1d73b4539f362":
       str_vo_line = #"hash_42068e9344b63c57";
       break;
-    case # "hash_7d5051b5c30af3ff":
+    case #"hash_7d5051b5c30af3ff":
       str_vo_line = #"hash_3c592afca5126028";
       break;
-    case # "statue_pygmalion":
+    case #"statue_pygmalion":
       str_vo_line = #"hash_3d675b5319c334b7";
       break;
-    case # "statue_female":
+    case #"statue_female":
       str_vo_line = #"hash_60fc5081c4fd6b7";
       break;
     default:
@@ -353,39 +353,39 @@ function function_8916aa62(str_line) {
 
 function_eb6f144(str_line, mdl_collectible) {
   switch (str_line) {
-    case # "scroll_1":
+    case #"scroll_1":
       str_vo_line = #"hash_53d277c8b1114728";
       var_bfdd8441 = #"hash_c7f396aed80374b";
       break;
-    case # "scroll_2":
+    case #"scroll_2":
       str_vo_line = #"hash_e3e70858f5614e3";
       var_bfdd8441 = #"hash_c7f396aed80374b";
       break;
-    case # "scroll_3":
+    case #"scroll_3":
       str_vo_line = #"hash_748ebfa215a02be6";
       var_bfdd8441 = #"hash_3d24b9655233513d";
       break;
-    case # "scroll_4":
+    case #"scroll_4":
       str_vo_line = #"hash_52c2f244c43714a9";
       var_bfdd8441 = #"hash_29c7b1f9e28de2ee";
       break;
-    case # "scroll_5":
+    case #"scroll_5":
       str_vo_line = #"hash_2d2ebb39be31994c";
       var_bfdd8441 = #"hash_22dbce472ee3015b";
       break;
-    case # "scroll_6":
+    case #"scroll_6":
       str_vo_line = #"hash_7cd8582798401757";
       var_bfdd8441 = #"hash_29c7b0f9e28de13b";
       break;
-    case # "scroll_7":
+    case #"scroll_7":
       str_vo_line = #"hash_4081f86f16c90f9a";
       var_bfdd8441 = #"hash_29c7aff9e28ddf88";
       break;
-    case # "scroll_8":
+    case #"scroll_8":
       str_vo_line = #"hash_e902c086e6a174d";
       var_bfdd8441 = #"hash_73ae4e30dfdf732d";
       break;
-    case # "scroll_9":
+    case #"scroll_9":
       str_vo_line = "";
       var_bfdd8441 = "";
       break;

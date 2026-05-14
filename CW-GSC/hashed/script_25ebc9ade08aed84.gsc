@@ -139,7 +139,7 @@ function function_679a29cd(player) {
       return 1;
     } else {
       switch (self.stub.var_90ddceac.script_string) {
-        case # "napalm_strike":
+        case #"napalm_strike":
           hint_string = player zm_utility::function_d6046228(#"hash_1c38e0fdb20ef055", #"hash_52a497d7fdd2698b");
           self sethintstringforplayer(player, hint_string, level.var_d99df9f9);
 
@@ -148,7 +148,7 @@ function function_679a29cd(player) {
           }
 
           break;
-        case # "data_center":
+        case #"data_center":
           hint_string = player zm_utility::function_d6046228(#"hash_306dab4c836b1026", #"hash_2771ace3aa8dfe02");
           self sethintstringforplayer(player, hint_string, level.var_d99df9f9);
 
@@ -157,7 +157,7 @@ function function_679a29cd(player) {
           }
 
           break;
-        case # "chopper_gunner":
+        case #"chopper_gunner":
           hint_string = player zm_utility::function_d6046228(#"hash_61ac30cb1d0b9c0", #"hash_6d2d30daf8cd1ec");
           self sethintstringforplayer(player, hint_string, level.var_d99df9f9);
 
@@ -576,10 +576,10 @@ function devgui_setup() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_3785a966b663fa40":
+    case #"hash_3785a966b663fa40":
       function_de5992a1();
       break;
-    case # "hash_627810dd51e05760":
+    case #"hash_627810dd51e05760":
       function_f4d4dc3b();
       break;
     default:

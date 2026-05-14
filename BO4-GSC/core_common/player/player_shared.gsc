@@ -471,17 +471,17 @@ allow_stance_change(b_allow = 1) {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case # "prone":
+    case #"prone":
       self allowprone(1);
       self allowcrouch(0);
       self allowstand(0);
       break;
-    case # "crouch":
+    case #"crouch":
       self allowprone(0);
       self allowcrouch(1);
       self allowstand(0);
       break;
-    case # "stand":
+    case #"stand":
       self allowprone(0);
       self allowcrouch(0);
       self allowstand(1);

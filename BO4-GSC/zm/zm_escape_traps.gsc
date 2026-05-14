@@ -1047,15 +1047,15 @@ zapper_light_red() {
   level flag::wait_till("start_zombie_round_logic");
 
   switch (self.script_noteworthy) {
-    case # "zm_spinning_trap":
+    case #"zm_spinning_trap":
       exploder::exploder("fxexp_spinning_trap_light_red");
       exploder::kill_exploder("fxexp_spinning_trap_light_green");
       break;
-    case # "zm_fan_trap":
+    case #"zm_fan_trap":
       exploder::exploder("fxexp_fan_trap_light_red");
       exploder::kill_exploder("fxexp_fan_trap_light_green");
       break;
-    case # "zm_acid_trap":
+    case #"zm_acid_trap":
       exploder::exploder("fxexp_acid_trap_light_red");
       exploder::kill_exploder("fxexp_acid_trap_light_green");
       break;
@@ -1070,15 +1070,15 @@ zapper_light_green() {
   }
 
   switch (self.script_noteworthy) {
-    case # "zm_spinning_trap":
+    case #"zm_spinning_trap":
       exploder::kill_exploder("fxexp_spinning_trap_light_red");
       exploder::exploder("fxexp_spinning_trap_light_green");
       break;
-    case # "zm_fan_trap":
+    case #"zm_fan_trap":
       exploder::kill_exploder("fxexp_fan_trap_light_red");
       exploder::exploder("fxexp_fan_trap_light_green");
       break;
-    case # "zm_acid_trap":
+    case #"zm_acid_trap":
       exploder::kill_exploder("fxexp_acid_trap_light_red");
       exploder::exploder("fxexp_acid_trap_light_green");
       break;

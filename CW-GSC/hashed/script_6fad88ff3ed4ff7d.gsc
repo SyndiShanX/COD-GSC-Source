@@ -29,21 +29,21 @@
 function function_2683ec5d() {
   if(isDefined(level.skipto_current_objective[0])) {
     switch (level.skipto_current_objective[0]) {
-      case # "excavation_finale":
-      case # "mountain_summit":
-      case # "intro_heli":
-      case # "server_reveal":
-      case # "server_ascent":
-      case # "zipline_intro":
-      case # "bunker_explore":
-      case # "ice_slide":
-      case # "satcom_approach":
-      case # "bunker_encounter":
-      case # "satcom":
-      case # "catwalks":
-      case # "woods_regroup":
-      case # "zipline_fall":
-      case # "excavation":
+      case #"excavation_finale":
+      case #"mountain_summit":
+      case #"intro_heli":
+      case #"server_reveal":
+      case #"server_ascent":
+      case #"zipline_intro":
+      case #"bunker_explore":
+      case #"ice_slide":
+      case #"satcom_approach":
+      case #"bunker_encounter":
+      case #"satcom":
+      case #"catwalks":
+      case #"woods_regroup":
+      case #"zipline_fall":
+      case #"excavation":
         var_5b7b93ad = getspawnerarray("woods_ar", "script_noteworthy");
         break;
       default:
@@ -70,16 +70,16 @@ function function_2341d661() {
 function function_d432b47b() {
   if(isDefined(level.skipto_current_objective[0])) {
     switch (level.skipto_current_objective[0]) {
-      case # "mountain_summit":
-      case # "intro_heli":
-      case # "zipline_intro":
-      case # "bunker_explore":
-      case # "ice_slide":
-      case # "satcom_approach":
-      case # "bunker_encounter":
-      case # "satcom":
-      case # "catwalks":
-      case # "zipline_fall":
+      case #"mountain_summit":
+      case #"intro_heli":
+      case #"zipline_intro":
+      case #"bunker_explore":
+      case #"ice_slide":
+      case #"satcom_approach":
+      case #"bunker_encounter":
+      case #"satcom":
+      case #"catwalks":
+      case #"zipline_fall":
         w_primary = getweapon(#"ar_standard_t9", "reflex", "suppressed2");
         w_secondary = getweapon(#"pistol_semiauto_t9", "suppressed");
         self aiutility::setcurrentweapon(w_primary);
@@ -87,11 +87,11 @@ function function_d432b47b() {
         self aiutility::setsecondaryweapon(w_secondary);
         self shared::placeweaponon(w_primary, "right");
         break;
-      case # "excavation_finale":
-      case # "server_reveal":
-      case # "server_ascent":
-      case # "woods_regroup":
-      case # "excavation":
+      case #"excavation_finale":
+      case #"server_reveal":
+      case #"server_ascent":
+      case #"woods_regroup":
+      case #"excavation":
         w_primary = getweapon(#"ar_standard_t9", "reflex");
         w_secondary = getweapon(#"pistol_semiauto_t9");
         self aiutility::setcurrentweapon(w_primary);

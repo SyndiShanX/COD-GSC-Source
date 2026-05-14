@@ -26,12 +26,12 @@ should_play_sound(mod) {
   }
 
   switch (mod) {
-    case # "mod_melee_weapon_butt":
-    case # "mod_crush":
-    case # "mod_hit_by_object":
-    case # "mod_grenade_splash":
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_weapon_butt":
+    case #"mod_crush":
+    case #"mod_hit_by_object":
+    case #"mod_grenade_splash":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       return false;
   }
 
@@ -105,10 +105,10 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
       hitalias = #"mpl_hit_vehicle";
     } else if(isDefined(victim) && isDefined(victim.victimsoundmod)) {
       switch (victim.victimsoundmod) {
-        case # "safeguard_robot":
+        case #"safeguard_robot":
           hitalias = #"mpl_hit_alert_escort";
           break;
-        case # "vehicle":
+        case #"vehicle":
           hitalias = #"mpl_hit_vehicle";
           break;
         default:
@@ -117,7 +117,7 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
       }
     } else if(isDefined(inflictor) && isDefined(inflictor.soundmod)) {
       switch (inflictor.soundmod) {
-        case # "player":
+        case #"player":
           if(isDefined(idflags) && idflags & 2048 && isDefined(victim)) {
             if(isDefined(victim.var_426947c4)) {
               hitalias = #"mpl_hit_alert_armor_broke";
@@ -151,34 +151,34 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
           }
 
           break;
-        case # "heatwave":
+        case #"heatwave":
           hitalias = #"mpl_hit_alert_heatwave";
           break;
-        case # "heli":
+        case #"heli":
           hitalias = #"mpl_hit_alert_air";
           break;
-        case # "hpm":
+        case #"hpm":
           hitalias = #"mpl_hit_alert_hpm";
           break;
-        case # "taser_spike":
+        case #"taser_spike":
           hitalias = #"mpl_hit_alert_taser_spike";
           break;
-        case # "straferun":
-        case # "dog":
+        case #"straferun":
+        case #"dog":
           break;
-        case # "firefly":
+        case #"firefly":
           hitalias = #"mpl_hit_alert_firefly";
           break;
-        case # "drone_land":
+        case #"drone_land":
           hitalias = #"mpl_hit_alert_air";
           break;
-        case # "mini_turret":
+        case #"mini_turret":
           hitalias = #"mpl_hit_alert_quiet";
           break;
-        case # "raps":
+        case #"raps":
           hitalias = #"mpl_hit_alert_air";
           break;
-        case # "default_loud":
+        case #"default_loud":
           hitalias = #"mpl_hit_heli_gunner";
           break;
         default:
@@ -327,13 +327,13 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
   if(isDefined(perkfeedback)) {
     if(isDefined(self.hud_damagefeedback_additional)) {
       switch (perkfeedback) {
-        case # "flakjacket":
+        case #"flakjacket":
           self.hud_damagefeedback_additional setshader(#"damage_feedback_flak", 24, 48);
           break;
-        case # "tacticalmask":
+        case #"tacticalmask":
           self.hud_damagefeedback_additional setshader(#"damage_feedback_tac", 24, 48);
           break;
-        case # "armor":
+        case #"armor":
           self.hud_damagefeedback_additional setshader(#"damage_feedback_armor", 24, 48);
           break;
       }

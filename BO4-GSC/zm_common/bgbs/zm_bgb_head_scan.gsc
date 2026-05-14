@@ -34,13 +34,13 @@ function_ce76fa9f(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   }
 
   switch (shitloc) {
-    case # "head":
-    case # "helmet":
-    case # "neck":
+    case #"head":
+    case #"helmet":
+    case #"neck":
       switch (self.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           if(math::cointoss(11)) {
             gibserverutils::gibhead(self);
             attacker zm_stats::increment_challenge_stat(#"hash_5d098efca02f7c99");

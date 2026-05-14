@@ -154,27 +154,27 @@ function function_5e3127a5(var_75e87d7f, var_6ea1719d = undefined) {
 
 function function_914016fe(var_75e87d7f) {
   switch (var_75e87d7f) {
-    case # "arena":
+    case #"arena":
       min = 0;
       max = 8;
       str_prefix = "arena_0";
       break;
-    case # "overworld":
+    case #"overworld":
       min = 0;
       max = 2;
       str_prefix = "overworld_0";
       break;
-    case # "dungeon":
+    case #"dungeon":
       min = 0;
       max = 2;
       str_prefix = "dungeon_0";
       break;
-    case # "bossfight":
+    case #"bossfight":
       min = 0;
       max = 0;
       str_prefix = "bossfight_0";
       break;
-    case # "bonusroom":
+    case #"bonusroom":
       min = 0;
       max = 1;
       str_prefix = "bonusroom_0";

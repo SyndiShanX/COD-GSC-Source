@@ -1132,40 +1132,40 @@ function function_cc1eeb91(hex) {
     var_59c6ddd3 = 0;
 
     switch (nib) {
-      case # "5":
-      case # "4":
-      case # "7":
-      case # "6":
-      case # "1":
-      case # "0":
-      case # "3":
-      case # "2":
-      case # "9":
-      case # "8":
+      case #"5":
+      case #"4":
+      case #"7":
+      case #"6":
+      case #"1":
+      case #"0":
+      case #"3":
+      case #"2":
+      case #"9":
+      case #"8":
         var_59c6ddd3 = int(nib);
         break;
-      case # "a":
-      case # "a":
+      case #"a":
+      case #"a":
         var_59c6ddd3 = 10;
         break;
-      case # "b":
-      case # "b":
+      case #"b":
+      case #"b":
         var_59c6ddd3 = 11;
         break;
-      case # "c":
-      case # "c":
+      case #"c":
+      case #"c":
         var_59c6ddd3 = 12;
         break;
-      case # "d":
-      case # "d":
+      case #"d":
+      case #"d":
         var_59c6ddd3 = 13;
         break;
-      case # "e":
-      case # "e":
+      case #"e":
+      case #"e":
         var_59c6ddd3 = 14;
         break;
-      case # "f":
-      case # "f":
+      case #"f":
+      case #"f":
         var_59c6ddd3 = 15;
         break;
     }

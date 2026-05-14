@@ -2047,49 +2047,49 @@ function_5d346946() {
 
 function_51d480c9(cmd) {
   switch (cmd) {
-    case # "gear_up":
+    case #"gear_up":
       level thread gear_up();
       return 1;
-    case # "boss_start_bf":
+    case #"boss_start_bf":
       level thread function_e7520565();
       return 1;
-    case # "hash_3426f6de3d18b749":
+    case #"hash_3426f6de3d18b749":
       level thread function_1ac7cc62();
       return 1;
-    case # "hash_170242bf39c8ece5":
+    case #"hash_170242bf39c8ece5":
       level thread function_f3f10a38(1);
       return 1;
-    case # "hash_170240bf39c8e97f":
+    case #"hash_170240bf39c8e97f":
       level thread function_f3f10a38(3);
       return 1;
-    case # "hash_17d72dc427ff372c":
+    case #"hash_17d72dc427ff372c":
       level thread function_1ca1a249(1);
       return 1;
-    case # "hash_b4e0e8767c9d1ae":
+    case #"hash_b4e0e8767c9d1ae":
       level thread function_b7ed6bce();
       return 1;
-    case # "hash_3572c57f52ea57e5":
+    case #"hash_3572c57f52ea57e5":
       level thread function_aa31f6af();
       return 1;
-    case # "boss_intro":
+    case #"boss_intro":
       level thread function_b9ca419b();
       return 1;
-    case # "hash_56e2d0157b43c96e":
+    case #"hash_56e2d0157b43c96e":
       level thread function_84f320f1(0);
       return 1;
-    case # "hash_5b84f16a656b80c":
+    case #"hash_5b84f16a656b80c":
       level thread function_84f320f1(1);
       return 1;
-    case # "hash_5b85216a656bd25":
+    case #"hash_5b85216a656bd25":
       level thread function_84f320f1(2);
       return 1;
-    case # "hash_5b85116a656bb72":
+    case #"hash_5b85116a656bb72":
       level thread function_84f320f1(3);
       return 1;
-    case # "hash_5dad3801740fa24a":
+    case #"hash_5dad3801740fa24a":
       level notify(#"hash_38f29f9cb03586ea");
       return 1;
-    case # "boss_play_outro":
+    case #"boss_play_outro":
       level thread function_abdd578e();
       return 1;
   }

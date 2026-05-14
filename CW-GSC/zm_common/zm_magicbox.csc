@@ -162,13 +162,13 @@ function function_b4b9937(localclientnum, newval, str_state) {
 
       if(newval) {
         switch (str_state) {
-          case # "opened":
+          case #"opened":
             str_fx = level._effect[#"hash_63f729c169af0c3e"];
             var_4c5fde13 = self.var_7e616d59[localclientnum];
             str_tag = "tag_origin";
             audio::playloopat(#"hash_1b59c1bfb1aa5d37", self.origin);
             break;
-          case # "closed":
+          case #"closed":
             str_fx = level._effect[#"chest_light_closed"];
             var_4c5fde13 = self.var_93e0dfa9[localclientnum];
             str_tag = "tag_origin";

@@ -364,16 +364,16 @@ _scene_list_settext(strings, n_selected, str_title, var_444abf97) {
   str_mode = tolower(getdvarstring(#"scene_menu_mode", "<dev string:x3b>"));
 
   switch (str_mode) {
-    case # "default":
+    case #"default":
       debug2dtext((150, 362.5, 0), "<dev string:x176>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case # "loop":
+    case #"loop":
       debug2dtext((150, 362.5, 0), "<dev string:x186>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case # "capture_single":
+    case #"capture_single":
       debug2dtext((150, 362.5, 0), "<dev string:x193>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case # "capture_series":
+    case #"capture_series":
       debug2dtext((150, 362.5, 0), "<dev string:x1aa>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
   }

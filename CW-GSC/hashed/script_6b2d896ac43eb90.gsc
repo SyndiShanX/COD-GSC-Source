@@ -363,17 +363,17 @@ function function_21ba74a1(machine, trigger) {
 
     if(menu == #"sr_beacon_menu") {
       switch (waitresult.response) {
-        case # "hash_4d6bf94bcefe50c0":
+        case #"hash_4d6bf94bcefe50c0":
           self notify(#"hash_11ed79645f6768e1");
           self function_6c71e778(machine, trigger, 1);
           self thread warp(machine);
           return;
-        case # "hash_a1f795a11ddf7be":
+        case #"hash_a1f795a11ddf7be":
           self notify(#"hash_11ed79645f6768e1");
           self function_6c71e778(machine, trigger, 1);
           self thread call_exfil(machine);
           return;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           self notify(#"hash_11ed79645f6768e1");
           self function_6c71e778(machine, trigger);
           return;

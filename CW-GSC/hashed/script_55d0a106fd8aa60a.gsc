@@ -418,11 +418,11 @@ function server_attach_interact() {
   str_stance = level.player getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       level.player setstance("stand");
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       level.player setstance("stand");
       wait 1;
       break;
@@ -616,16 +616,16 @@ function function_8627ac91() {
     waitframe(1);
 
     switch (s_notify._notify) {
-      case # "woods_stumble_left":
+      case #"woods_stumble_left":
         self scene::play("scene_yam_8020_sra_server_ascent_woods_stumble", "woods_stumble_left", self);
         break;
-      case # "woods_stumble_right":
+      case #"woods_stumble_right":
         self scene::play("scene_yam_8020_sra_server_ascent_woods_stumble", "woods_stumble_right", self);
         break;
-      case # "woods_stumble_forward":
+      case #"woods_stumble_forward":
         self scene::play("scene_yam_8020_sra_server_ascent_woods_stumble", "woods_stumble_forward", self);
         break;
-      case # "woods_stumble_back":
+      case #"woods_stumble_back":
         self scene::play("scene_yam_8020_sra_server_ascent_woods_stumble", "woods_stumble_back", self);
         break;
       default:

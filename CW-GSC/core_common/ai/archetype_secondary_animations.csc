@@ -292,9 +292,9 @@ function private function_909a3089(localclientnum) {
     forcenewanim = 0;
 
     switch (asmstatus) {
-      case # "asm_status_terminated":
+      case #"asm_status_terminated":
         return;
-      case # "asm_status_inactive":
+      case #"asm_status_inactive":
         if(isDefined(animoverride)) {
           scriptedanim = self getprimarydeltaanim();
 

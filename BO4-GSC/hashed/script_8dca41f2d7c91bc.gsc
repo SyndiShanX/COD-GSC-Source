@@ -158,10 +158,10 @@ function_109ebdc3(e_player) {
   str_stance = e_player getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       wait 1;
       break;
   }

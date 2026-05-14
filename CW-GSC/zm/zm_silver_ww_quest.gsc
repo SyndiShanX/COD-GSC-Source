@@ -1353,13 +1353,13 @@ function function_b39ee43f(a_ents) {
     flag_return = level waittill(#"receptacle_1_powered", #"receptacle_2_powered", #"receptacle_3_powered");
 
     switch (flag_return._notify) {
-      case # "receptacle_1_powered":
+      case #"receptacle_1_powered":
         var_bf71a40b clientfield::set("" + #"hash_5a932b901b9a5d0d", 1);
         break;
-      case # "receptacle_2_powered":
+      case #"receptacle_2_powered":
         var_bf71a40b clientfield::set("" + #"hash_5a932b901b9a5d0d", 2);
         break;
-      case # "receptacle_3_powered":
+      case #"receptacle_3_powered":
         var_bf71a40b clientfield::set("" + #"hash_5a932b901b9a5d0d", 3);
         break;
     }
@@ -1376,25 +1376,25 @@ function function_8d9ddc22(var_e7772c37) {
   level endon(#"end_game");
 
   switch (var_e7772c37) {
-    case # "nitrogen":
+    case #"nitrogen":
       var_6bdde8a3 = getweapon(#"ww_ieu_acid_t9");
       var_39023436 = getweapon(#"ww_ieu_acid_t9_upgraded");
       var_339168c3 = self zm_unitrigger::create(&function_91807eb1, (128, 128, 128));
       self.var_37023f0e = "cryo";
       break;
-    case # "gas":
+    case #"gas":
       var_6bdde8a3 = getweapon(#"ww_ieu_gas_t9");
       var_39023436 = getweapon(#"ww_ieu_gas_t9_upgraded");
       var_339168c3 = self zm_unitrigger::create(&function_4d97eda3, (128, 128, 128));
       self.var_37023f0e = "gas";
       break;
-    case # "plasma":
+    case #"plasma":
       var_6bdde8a3 = getweapon(#"ww_ieu_plasma_t9");
       var_39023436 = getweapon(#"ww_ieu_plasma_t9_upgraded");
       var_339168c3 = self zm_unitrigger::create(&function_b75d50b5, (128, 128, 128));
       self.var_37023f0e = "rust";
       break;
-    case # "beam":
+    case #"beam":
       var_6bdde8a3 = getweapon(#"ww_ieu_electric_t9");
       var_39023436 = getweapon(#"ww_ieu_electric_t9_upgraded");
       var_339168c3 = self zm_unitrigger::create(&function_8a172c28, (128, 128, 128));
@@ -1577,16 +1577,16 @@ function function_6d4e1f71(var_d5c2e187, var_e7772c37, var_b0e35c50) {
 
     if(var_b0e35c50) {
       switch (var_e7772c37) {
-        case # "nitrogen":
+        case #"nitrogen":
           level.var_c3accf46 = undefined;
           break;
-        case # "gas":
+        case #"gas":
           level.var_ae002b60 = undefined;
           break;
-        case # "plasma":
+        case #"plasma":
           level.var_42000fd0 = undefined;
           break;
-        case # "beam":
+        case #"beam":
           level.var_c8a2dc28 = undefined;
           break;
       }
@@ -1598,7 +1598,7 @@ function function_217a625a(a_ents) {
   var_bf71a40b = a_ents[#"weapon_crate"];
 
   switch (var_bf71a40b.model) {
-    case # "p9_fxanim_zm_contain_crate_cryo_mod":
+    case #"p9_fxanim_zm_contain_crate_cryo_mod":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -1608,7 +1608,7 @@ function function_217a625a(a_ents) {
 
       var_bf71a40b clientfield::set("" + #"hash_7aeee79e85f9273c", 1);
       break;
-    case # "p9_fxanim_zm_contain_crate_gas_mod":
+    case #"p9_fxanim_zm_contain_crate_gas_mod":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -1618,7 +1618,7 @@ function function_217a625a(a_ents) {
 
       var_bf71a40b clientfield::set("" + #"hash_7aeee79e85f9273c", 2);
       break;
-    case # "p9_fxanim_zm_contain_crate_rust_mod":
+    case #"p9_fxanim_zm_contain_crate_rust_mod":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -1628,7 +1628,7 @@ function function_217a625a(a_ents) {
 
       var_bf71a40b clientfield::set("" + #"hash_7aeee79e85f9273c", 3);
       break;
-    case # "p9_fxanim_zm_contain_crate_electric_mod":
+    case #"p9_fxanim_zm_contain_crate_electric_mod":
       if(level flag::get("exchange_base_back")) {
         var_2faa8624 = util::spawn_model(#"attach_t9_zm_silver_ww_mag_04_world", var_bf71a40b gettagorigin("tag_tank"), var_bf71a40b gettagangles("tag_tank"));
         level flag::clear("exchange_base_back");
@@ -1776,7 +1776,7 @@ function on_item_pickup(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
       switch (item.itementry.name) {
-        case # "item_zmintel_silver_requiem_artifact_2":
+        case #"item_zmintel_silver_requiem_artifact_2":
           if(self function_1d89280c()) {
             var_4e4f65c9 = self item_inventory::function_2e711614(17 + 1);
             primary_weapon = self item_inventory_util::function_2b83d3ff(var_4e4f65c9);
@@ -1807,33 +1807,33 @@ function on_item_pickup(params) {
           level.var_516c02a2 = self;
           level flag::set(#"hash_15f3e07d50195cb9");
           break;
-        case # "hash_37f8e99ab49c109":
+        case #"hash_37f8e99ab49c109":
           level flag::set("player_got_card");
           level zm_ui_inventory::function_7df6bb60(#"hash_6de5cab1fba28d40", 1);
           break;
-        case # "item_zmintel_silver_requiem_artifact_1":
+        case #"item_zmintel_silver_requiem_artifact_1":
           level flag::set("player_got_remote");
           array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_silver_requiem_artifact_1");
           level zm_ui_inventory::function_7df6bb60(#"hash_1ec8e7f21f81afb0", 1);
           break;
-        case # "hash_16ea992ec682d37":
+        case #"hash_16ea992ec682d37":
           level flag::set("player_got_the_flask");
           level zm_ui_inventory::function_7df6bb60(#"hash_2e341f321b2ab3da", 1);
           break;
-        case # "hash_22d1a49f2c1d1c80":
+        case #"hash_22d1a49f2c1d1c80":
           level flag::set("player_got_the_filled_flask");
           array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_silver_darkaether_artifact_1");
           level zm_ui_inventory::function_7df6bb60(#"hash_2e341f321b2ab3da", 2);
           break;
-        case # "hash_70dc74e571a35a75":
+        case #"hash_70dc74e571a35a75":
           level flag::set("player_got_the_fuse");
           level zm_ui_inventory::function_7df6bb60(#"hash_7b8f7131712d7564", 1);
           break;
-        case # "hash_5d1c62463e73e906":
+        case #"hash_5d1c62463e73e906":
           level flag::set("player_got_the_canister");
           level zm_ui_inventory::function_7df6bb60(#"hash_240dcac486ef946a", 1);
           break;
-        case # "item_zmintel_silver_darkaether_artifact_2":
+        case #"item_zmintel_silver_darkaether_artifact_2":
           level flag::set("full_canister_picked_up");
           array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_silver_darkaether_artifact_2");
           level zm_ui_inventory::function_7df6bb60(#"hash_240dcac486ef946a", 2);
@@ -1850,15 +1850,15 @@ function on_item_pickup(params) {
 function function_505c0acb(var_13167ed3) {
   if(isDefined(var_13167ed3)) {
     switch (var_13167ed3) {
-      case # "ww_ieu_shockwave_t9":
+      case #"ww_ieu_shockwave_t9":
         return (self hasweapon(level.var_652bc5ed, 1) || self hasweapon(level.var_b6956429, 1));
-      case # "ww_ieu_acid_t9":
+      case #"ww_ieu_acid_t9":
         return (self hasweapon(level.var_810eda2b, 1) || self hasweapon(level.var_a7de843a, 1));
-      case # "ww_ieu_gas_t9":
+      case #"ww_ieu_gas_t9":
         return (self hasweapon(level.var_fb37bf51, 1) || self hasweapon(level.var_970f9313, 1));
-      case # "ww_ieu_plasma_t9":
+      case #"ww_ieu_plasma_t9":
         return (self hasweapon(level.var_12b450dc, 1) || self hasweapon(level.var_6b41a8a1, 1));
-      case # "ww_ieu_electric_t9":
+      case #"ww_ieu_electric_t9":
         return (self hasweapon(level.var_e0be56c0, 1) || self hasweapon(level.var_e80744aa, 1));
       default:
         return false;
@@ -1879,16 +1879,16 @@ function private function_233ed9b4() {
 
 function private function_98af2074(cmd) {
   switch (cmd) {
-    case # "hash_58dc6f7eb86ecf83":
+    case #"hash_58dc6f7eb86ecf83":
       level.var_a1b709cb thread function_8d9ddc22("<dev string:x210>");
       break;
-    case # "hash_45e13a127a63e1f5":
+    case #"hash_45e13a127a63e1f5":
       level.var_74ec088f thread function_8d9ddc22("<dev string:x21c>");
       break;
-    case # "hash_42477421da15ff00":
+    case #"hash_42477421da15ff00":
       level.var_267fe17e thread function_8d9ddc22("<dev string:x223>");
       break;
-    case # "hash_1c88a4f3e72d4479":
+    case #"hash_1c88a4f3e72d4479":
       level.var_a6639798 thread function_8d9ddc22("<dev string:x22d>");
       zm_intel::function_23255935("<dev string:x235>");
       var_410e2bb5 = getent("<dev string:x24a>", "<dev string:x25b>");

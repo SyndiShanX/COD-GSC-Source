@@ -227,32 +227,32 @@ function function_600da5f9() {
 function function_c421c41c() {
   foreach(var_82018b7b in level.var_56a47a6d) {
     switch (var_82018b7b.script_noteworthy) {
-      case # "hash_35c71e67afe0f613":
+      case #"hash_35c71e67afe0f613":
         var_82018b7b.ent = util::spawn_model(#"hash_3f79700b4c8b327", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 0, 0);
         break;
-      case # "hash_40a6adb2c1c40c2e":
+      case #"hash_40a6adb2c1c40c2e":
         var_82018b7b.ent = util::spawn_model(#"usa_duffel_bag_01", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 0, 0);
         break;
-      case # "hash_3281dab5a1b18571":
+      case #"hash_3281dab5a1b18571":
         var_82018b7b.ent = util::spawn_model(#"p9_tool_box_small_01", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 90, 0);
         break;
-      case # "hash_4addf532891d92fd":
+      case #"hash_4addf532891d92fd":
         var_82018b7b.ent = util::spawn_model(#"p9_lat_ammo_crate_01_grime", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 0, 0);
         break;
-      case # "hash_6e14e020492b407e":
+      case #"hash_6e14e020492b407e":
         var_82018b7b.ent = util::spawn_model(#"p9_spy_ashtray_tall", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
         angle_offset = (0, 90, 0);
         break;
-      case # "hash_1e7660df795b3996":
+      case #"hash_1e7660df795b3996":
       default:
         var_82018b7b.ent = util::spawn_model(#"p9_spy_ashtray_tall", var_82018b7b.origin, var_82018b7b.angles);
         offsets = (0, 0, 0);
@@ -1878,10 +1878,10 @@ function function_70b57ee6() {
   var_9ce63abb = util::get_map_name();
 
   switch (var_9ce63abb) {
-    case # "mp_apocalypse":
+    case #"mp_apocalypse":
       goalpath.start = (16384, 0, -2560);
       break;
-    case # "mp_raid_rm":
+    case #"mp_raid_rm":
       goalpath.start = (-7639, 20761, -483);
       break;
   }
@@ -2724,25 +2724,25 @@ function function_83abdf0f() {
   map_name = util::get_map_name();
 
   switch (map_name) {
-    case # "mp_raid_rm":
-    case # "mp_kgb":
-    case # "mp_cliffhanger":
-    case # "mp_village_rm":
-    case # "mp_slums_rm":
-    case # "mp_tundra":
+    case #"mp_raid_rm":
+    case #"mp_kgb":
+    case #"mp_cliffhanger":
+    case #"mp_village_rm":
+    case #"mp_slums_rm":
+    case #"mp_tundra":
       level.var_d18d7655 = 3000;
       level.var_67432513 = 3200;
       break;
-    case # "mp_nuketown6":
+    case #"mp_nuketown6":
       level.var_d18d7655 = 2400;
       level.var_67432513 = 2600;
       level.var_60693fca = 700;
       break;
-    case # "mp_moscow":
+    case #"mp_moscow":
       level.var_1424a0f7 = 10;
       level.var_d18d7655 = 3000;
       level.var_67432513 = 3200;
-    case # "mp_zoo_rm":
+    case #"mp_zoo_rm":
       level.var_d18d7655 = 2600;
       level.var_67432513 = 2800;
       break;

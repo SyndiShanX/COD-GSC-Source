@@ -344,16 +344,16 @@ function_e43bea18(var_11975e15) {
   str_weapon = undefined;
 
   switch (var_11975e15) {
-    case # "snowball_upgraded":
-    case # "snowball":
-    case # "snowball_yellow_upgraded":
-    case # "snowball_yellow":
+    case #"snowball_upgraded":
+    case #"snowball":
+    case #"snowball_yellow_upgraded":
+    case #"snowball_yellow":
       str_weapon = #"snowball";
       break;
-    case # "hash_a2556a2905fd952":
+    case #"hash_a2556a2905fd952":
       str_weapon = #"matryoshka";
       break;
-    case # "music_box":
+    case #"music_box":
       str_weapon = #"music_box";
       break;
   }

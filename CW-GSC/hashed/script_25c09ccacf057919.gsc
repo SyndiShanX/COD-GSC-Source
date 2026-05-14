@@ -103,28 +103,28 @@ function function_51acf127() {
 
 function function_ddb1f662(params) {
   switch (params.name) {
-    case # "hash_68eef81d0a2a76ed":
+    case #"hash_68eef81d0a2a76ed":
       level.var_59a2c772 = params.value;
       break;
-    case # "hash_130bfa97ce58483d":
+    case #"hash_130bfa97ce58483d":
       teleport_player(params.value);
       break;
-    case # "hash_3c4a113ed57cc120":
+    case #"hash_3c4a113ed57cc120":
       level.var_acfca739 = params.value;
       break;
-    case # "hash_236d76abc8b15698":
+    case #"hash_236d76abc8b15698":
       thread function_e099a386(params.value);
       setDvar(#"hash_236d76abc8b15698", "<dev string:x66>");
       break;
-    case # "hash_69bc1ab1b58a4dd9":
+    case #"hash_69bc1ab1b58a4dd9":
       function_d6a44f15(params.value);
       setDvar(#"hash_69bc1ab1b58a4dd9", "<dev string:x66>");
       break;
-    case # "hash_4adbfcef4bba8e12":
+    case #"hash_4adbfcef4bba8e12":
       function_5f0fa6bb(params.value);
       setDvar(#"hash_4adbfcef4bba8e12", "<dev string:x66>");
       break;
-    case # "hash_2fd7846bcf2b3161":
+    case #"hash_2fd7846bcf2b3161":
       function_cad382ca();
       break;
   }
@@ -690,7 +690,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
   v_ang = s_instance.e_rotator.angles + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].v_ang_offset;
 
   switch (str_type) {
-    case # "playeroutfit":
+    case #"playeroutfit":
       s_instance.var_906f7138 = function_ff217e96(isDefined(var_b9701a73) ? var_b9701a73 : var_9eb2d2aa, v_pos, v_ang, s_instance, var_2ceba174);
 
       if(!isDefined(s_instance.var_906f7138)) {
@@ -699,18 +699,18 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
       }
 
       break;
-    case # "vehicle":
+    case #"vehicle":
       s_instance.var_906f7138 = spawnvehicle(var_9eb2d2aa, v_pos, v_ang);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5e7>", 1);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5f4>", 1);
       break;
-    case # "aitype":
+    case #"aitype":
       s_instance.var_906f7138 = spawnactor(var_9eb2d2aa, v_pos, v_ang, undefined, 1);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5e7>", 1);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5f4>", 1);
       break;
-    case # "character":
-    case # "xmodel":
+    case #"character":
+    case #"xmodel":
       if(is_true(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_417ff571)) {
         s_instance.var_906f7138 = util::spawn_anim_player_model(var_9eb2d2aa, v_pos, v_ang);
       } else {
@@ -718,7 +718,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
       }
 
       break;
-    case # "fx":
+    case #"fx":
       s_instance.var_906f7138 = util::spawn_model(isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_e33b5953) ? s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_e33b5953 : "<dev string:x548>", v_pos, v_ang);
       s_instance.var_906f7138 fx::play(var_9eb2d2aa, v_pos, v_ang, undefined, 1, isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_fx_tag) ? s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_fx_tag : "<dev string:x548>", 1);
       s_instance.var_906f7138.var_769f97fc = 1;

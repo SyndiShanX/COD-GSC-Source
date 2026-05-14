@@ -28,21 +28,21 @@ function private event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "tkdn_heli_intro":
+    case #"tkdn_heli_intro":
       level thread heli_intro();
       break;
-    case # "tkdn_heli_trailer_park":
-    case # "tkdn_heli_hotel_parking_lot":
-    case # "tkdn_heli_convoy_aslt":
+    case #"tkdn_heli_trailer_park":
+    case #"tkdn_heli_hotel_parking_lot":
+    case #"tkdn_heli_convoy_aslt":
       music("combat");
       break;
-    case # "tkdn_heli_hotel_breach":
+    case #"tkdn_heli_hotel_breach":
       music("");
       break;
-    case # "tkdn_heli_exfil":
+    case #"tkdn_heli_exfil":
       music("");
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

@@ -1548,13 +1548,13 @@ function_f95a14a0() {
   var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
 
   switch (self.subarchetype) {
-    case # "skeleton_helmet_sword_and_shield":
+    case #"skeleton_helmet_sword_and_shield":
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_bundle";
       break;
-    case # "skeleton_spear":
+    case #"skeleton_spear":
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
       break;
-    case # "skeleton_helmet_spear":
+    case #"skeleton_helmet_spear":
       var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_bundle";
       break;
   }

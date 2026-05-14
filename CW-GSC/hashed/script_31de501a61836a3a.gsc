@@ -447,15 +447,15 @@ function function_98da33e1() {
     s_result = self.var_b8ca9d7 waittill(#"state_change");
 
     switch (s_result.state) {
-      case # "calm":
+      case #"calm":
         str_shot = "Shot 1";
         n_wait = 6.05;
         break;
-      case # "stressed":
+      case #"stressed":
         str_shot = "Shot 2";
         n_wait = 6.2;
         break;
-      case # "agitated":
+      case #"agitated":
         str_shot = "Shot 3";
         n_wait = 6.7;
         break;

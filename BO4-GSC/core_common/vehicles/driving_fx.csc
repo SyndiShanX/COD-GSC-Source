@@ -198,10 +198,10 @@ function_b6f1b2f1() {
 
 function_73e08cca(surface) {
   switch (surface) {
-    case # "dirt":
+    case #"dirt":
       return # "hash_69a53e8913317ecf";
-    case # "water":
-    case # "watershallow":
+    case #"water":
+    case #"watershallow":
       return # "pstfx_sprite_rain_loop";
   }
 

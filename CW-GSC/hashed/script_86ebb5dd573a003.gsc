@@ -1022,7 +1022,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
   }
 
   switch (self.var_61d3da92.script_animation) {
-    case # "harass_check_papers":
+    case #"harass_check_papers":
       if(math::cointoss()) {
         var_f430b579 = [];
         voline = spawnStruct();
@@ -1090,7 +1090,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       }
 
       break;
-    case # "harass_check_car":
+    case #"harass_check_car":
       if(math::cointoss()) {
         var_f430b579 = [];
         voline = spawnStruct();
@@ -1173,7 +1173,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       }
 
       break;
-    case # "harass_pat_down":
+    case #"harass_pat_down":
       if(math::cointoss()) {
         var_f430b579 = [];
         voline = spawnStruct();
@@ -1241,7 +1241,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       }
 
       break;
-    case # "harass_wall_frisk":
+    case #"harass_wall_frisk":
       if(math::cointoss()) {
         var_f430b579 = [];
         voline = spawnStruct();
@@ -1309,7 +1309,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       }
 
       break;
-    case # "hash_77b63742dcc86dd1":
+    case #"hash_77b63742dcc86dd1":
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09350_gmc1_whyareyoudoingt_dd";
@@ -1342,7 +1342,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
-    case # "harass_question_woman":
+    case #"harass_question_woman":
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09300_gms2_whatareyoudoing_61";
@@ -1390,7 +1390,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       voline.postdelay = 0.5;
       var_f430b579[var_f430b579.size] = voline;
       break;
-    case # "hash_7e475cfa9440fc89":
+    case #"hash_7e475cfa9440fc89":
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09310_gmc2_jonasisthatreal_bf";
@@ -1418,7 +1418,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
-    case # "hash_44cdda7d905a1bda":
+    case #"hash_44cdda7d905a1bda":
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_09330_gms1_explainitagaino_62";
@@ -1451,7 +1451,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
-    case # "alley_2_intro":
+    case #"alley_2_intro":
       var_f430b579 = [];
       voline = spawnStruct();
       voline.alias = "vox_cp_stkt_07120_gmc2_iwasnttryingany_f1";
@@ -1484,7 +1484,7 @@ function function_77fe8bb5(vo_guard, var_2020cd93, var_e1b2a82b, var_6b1c6e7d) {
       voline.postdelay = 1;
       var_f430b579[var_f430b579.size] = voline;
       break;
-    case # "harass_ask_questions":
+    case #"harass_ask_questions":
     default:
       var_f430b579 = [];
       voline = spawnStruct();
@@ -1945,28 +1945,28 @@ function private function_1f24a0cc(on) {
       rob = undefined;
 
       switch (var_fd5e9fef.script_parameters) {
-        case # "hash_7cfa2ec31028648a":
+        case #"hash_7cfa2ec31028648a":
           rob = 1;
           break;
-        case # "hash_7cfa2dc3102862d7":
+        case #"hash_7cfa2dc3102862d7":
           rob = 2;
           break;
-        case # "hash_7cfa2cc310286124":
+        case #"hash_7cfa2cc310286124":
           rob = 3;
           break;
-        case # "hash_7cfa2bc310285f71":
+        case #"hash_7cfa2bc310285f71":
           rob = 4;
           break;
-        case # "hash_7cfa2ac310285dbe":
+        case #"hash_7cfa2ac310285dbe":
           rob = 5;
           break;
-        case # "hash_7cfa29c310285c0b":
+        case #"hash_7cfa29c310285c0b":
           rob = 6;
           break;
-        case # "hash_7cfa28c310285a58":
+        case #"hash_7cfa28c310285a58":
           rob = 7;
           break;
-        case # "hash_7cfa27c3102858a5":
+        case #"hash_7cfa27c3102858a5":
           rob = 8;
           break;
       }

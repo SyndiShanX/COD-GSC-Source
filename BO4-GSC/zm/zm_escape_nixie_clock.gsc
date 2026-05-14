@@ -243,13 +243,13 @@ function_bad2e505(player) {
     self setvisibletoplayer(player);
 
     switch (self.targetname) {
-      case # "nixie_tube_trigger_1":
+      case #"nixie_tube_trigger_1":
         self sethintstring(#"");
         break;
-      case # "nixie_tube_trigger_2":
+      case #"nixie_tube_trigger_2":
         self sethintstring(#"");
         break;
-      case # "nixie_tube_trigger_3":
+      case #"nixie_tube_trigger_3":
         self sethintstring(#"");
         break;
     }
@@ -379,13 +379,13 @@ function_a5d20d9b(str_code) {
   });
 
   switch (str_code) {
-    case # "115":
+    case #"115":
       level thread music_ee();
       break;
-    case # "872":
+    case #"872":
       level thread function_f2f53f97();
       break;
-    case # "666":
+    case #"666":
       level thread function_15aa00e7();
       break;
     default:

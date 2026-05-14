@@ -32,15 +32,15 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "park":
+    case #"park":
       ent setsoundentcontext("npc_gender", "female");
       ent playSound(0, "vox_takedowns_exert_muffled_struggle_short");
       break;
-    case # "lazar":
+    case #"lazar":
       break;
-    case # "woods":
+    case #"woods":
       break;
-    case # "mason":
+    case #"mason":
       break;
     default:
 
@@ -54,7 +54,7 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       break;
     default:
 
@@ -66,30 +66,30 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "hash_770e0c1bde319120":
+    case #"hash_770e0c1bde319120":
       level thread function_cd797f90();
       break;
-    case # "hash_5cc6be68301e650c":
+    case #"hash_5cc6be68301e650c":
       level notify(#"hash_5cc6be68301e650c");
       break;
-    case # "hash_37663b49458855e1":
+    case #"hash_37663b49458855e1":
       thread function_fe5617ab();
       break;
-    case # "start_combat":
+    case #"start_combat":
       thread function_cae705ff();
       break;
-    case # "hash_4e12ae023e25690a":
+    case #"hash_4e12ae023e25690a":
       level notify(#"hash_7ffd70d5d215f896");
       break;
-    case # "hash_14488fae2db8c286":
+    case #"hash_14488fae2db8c286":
       function_5ea2c6e3("cp_duga_fadeout_adler_mus", 15);
       break;
-    case # "ending_fade_out":
+    case #"ending_fade_out":
       wait 0.5;
       function_5ea2c6e3("cp_mute_amb", 4.5);
       break;
-    case # "musictrack_cp_duga_1":
-    case # "musictrack_cp_duga_2":
+    case #"musictrack_cp_duga_1":
+    case #"musictrack_cp_duga_2":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -102,20 +102,20 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "comprimised":
+    case #"comprimised":
       level thread function_cd797f90();
       break;
-    case # "ambush":
+    case #"ambush":
       break;
-    case # "loose_ends":
+    case #"loose_ends":
       thread function_85ebb65();
       break;
-    case # "safehouse_burns":
+    case #"safehouse_burns":
       break;
-    case # "hash_fde5a9c153fb103":
+    case #"hash_fde5a9c153fb103":
       break;
-    case # "no_game":
-    case # "hash_6e531fb9475df744":
+    case #"no_game":
+    case #"hash_6e531fb9475df744":
       break;
     default:
 

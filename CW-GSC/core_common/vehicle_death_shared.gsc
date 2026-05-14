@@ -591,7 +591,7 @@ function play_crashing_loop() {
 
   if(isDefined(self.vehicletype)) {
     switch (self.vehicletype) {
-      case # "hash_10e49116dd0a922f":
+      case #"hash_10e49116dd0a922f":
         var_cc04d521 = #"hash_4b5b2baa68a0e53b";
         break;
     }

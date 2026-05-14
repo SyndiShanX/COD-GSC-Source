@@ -128,46 +128,46 @@ function function_b524c30d() {
 
 function function_1e72a624(music) {
   switch (music) {
-    case # "apt_transition":
+    case #"apt_transition":
       wait 10;
       wait 20;
       break;
-    case # "lobby_musak":
+    case #"lobby_musak":
       break;
-    case # "stop_lobby_musak":
+    case #"stop_lobby_musak":
       break;
-    case # "drone1":
+    case #"drone1":
       level flag::wait_till("flag_see_kraus_shadow");
       break;
-    case # "drone3":
+    case #"drone3":
       level flag::wait_till("flag_see_kraus_shadow");
       level flag::wait_till("flag_start_betrayal");
       break;
-    case # "stinger_wife":
+    case #"stinger_wife":
       level flag::wait_till("flag_1st_entry_front_door");
       level.var_1ab56aba = 1.7;
       wait 1.2;
       break;
-    case # "wife_darted":
+    case #"wife_darted":
       level.var_3559e9e waittill(#"darted", #"death");
       level.var_1ab56aba = 1.3;
       break;
-    case # "stinger_shadow_1":
+    case #"stinger_shadow_1":
       level flag::wait_till("flag_see_kraus_shadow");
       level.var_1ab56aba = 0.9;
       thread function_3a85df46();
       wait 1.5;
       break;
-    case # "stinger_shadow_2":
+    case #"stinger_shadow_2":
       level flag::wait_till("flag_see_kraus_shadow_2");
       level.var_1ab56aba = 0.5;
       break;
-    case # "stinger_use_briefcase":
+    case #"stinger_use_briefcase":
       level flag::wait_till("flag_start_betrayal");
       wait 1;
       level flag::set("flag_stop_timer_audio");
       break;
-    case # "stinger_betrayal":
+    case #"stinger_betrayal":
       getplayers()[0] waittill(#"hash_1c40b84cb7816a58", #"death");
       break;
   }

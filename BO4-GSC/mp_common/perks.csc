@@ -431,19 +431,19 @@ function_3edf2cf8(dist_sq, var_73491815, var_47435b6f) {
 
 function_365c39ef(awareness_action, bundle) {
   switch (awareness_action) {
-    case # "slide_start":
+    case #"slide_start":
       return bundle.var_146483e7;
-    case # "landing":
+    case #"landing":
       return bundle.var_fe0aa1d2;
-    case # "damage_landing":
+    case #"damage_landing":
       return bundle.var_6ae8117c;
-    case # "doublejump_boosted":
+    case #"doublejump_boosted":
       return bundle.var_37bac39d;
-    case # "melee_missed":
+    case #"melee_missed":
       return bundle.var_3b22f5be;
-    case # "weapon_fired":
+    case #"weapon_fired":
       return bundle.var_abea5dd8;
-    case # "silenced_weapon_fired":
+    case #"silenced_weapon_fired":
       return bundle.var_301350af;
   }
 
@@ -570,8 +570,8 @@ monitor_detectnearbyenemies(local_client_num) {
           }
 
           switch (movement_type) {
-            case # "run":
-            case # "walk":
+            case #"run":
+            case #"walk":
               if(sixthsenseent isplayerads()) {
                 var_d6ff0766 = bundle.var_2b6e9133 * range;
                 var_7aeac1e7 = 1;
@@ -588,7 +588,7 @@ monitor_detectnearbyenemies(local_client_num) {
               }
 
               break;
-            case # "sprint":
+            case #"sprint":
               var_d6ff0766 = bundle.var_a8e88375 * range;
               var_7aeac1e7 = 1;
               break;

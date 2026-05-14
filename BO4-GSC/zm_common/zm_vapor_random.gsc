@@ -223,7 +223,7 @@ function_6842bdd7(player) {
     return true;
   } else if(isDefined(s_altar.var_46fe01e2) && s_altar.var_46fe01e2 && s_altar.var_125b20f8 === player && isDefined(s_altar.var_62fef0f1)) {
     switch (s_altar.var_62fef0f1) {
-      case # "specialty_additionalprimaryweapon":
+      case #"specialty_additionalprimaryweapon":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_7a82d19279cc6daf";
         } else {
@@ -231,7 +231,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_armorvest":
+      case #"specialty_armorvest":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_58febf66d0aaf436";
         } else {
@@ -239,7 +239,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_cooldown":
+      case #"specialty_cooldown":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_279db126c954111";
         } else {
@@ -247,7 +247,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_deadshot":
+      case #"specialty_deadshot":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_2f89c70e07ddab1c";
         } else {
@@ -255,7 +255,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_electriccherry":
+      case #"specialty_electriccherry":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_5fc8f9fbce3e5074";
         } else {
@@ -263,7 +263,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_fastreload":
+      case #"specialty_fastreload":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_1589f4207559932b";
         } else {
@@ -271,7 +271,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_quickrevive":
+      case #"specialty_quickrevive":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_1c6b895369b478b4";
         } else {
@@ -279,7 +279,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_staminup":
+      case #"specialty_staminup":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_307615269eadecab";
         } else {
@@ -287,7 +287,7 @@ function_6842bdd7(player) {
         }
 
         break;
-      case # "specialty_widowswine":
+      case #"specialty_widowswine":
         if(function_8b1a219a()) {
           var_5137b086 = #"hash_4d8ca83f86b22f28";
         } else {
@@ -515,7 +515,7 @@ function_5d55ce5f() {
     setDvar(#"hash_655adfd9dc05d377", "<dev string:xb8>");
 
     switch (cmd) {
-      case # "cycle_altar":
+      case #"cycle_altar":
         function_44481969();
         wait 1;
         break;

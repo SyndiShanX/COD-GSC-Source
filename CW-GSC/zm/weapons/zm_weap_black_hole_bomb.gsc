@@ -359,7 +359,7 @@ function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vor
       ai_zombie thread function_fb7c4f41();
 
       switch (ai_zombie.zm_ai_category) {
-        case # "normal":
+        case #"normal":
           if(ai_zombie.archetype === #"zombie_dog") {
             ai_zombie thread namespace_9ff9f642::slowdown(#"bhb_slowdown");
 
@@ -395,7 +395,7 @@ function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vor
           }
 
           break;
-        case # "special":
+        case #"special":
           ai_zombie thread namespace_9ff9f642::slowdown(#"hash_2c88ef7895dccf65");
 
           if(!isDefined(ai_zombie.var_56912e22) || time >= ai_zombie.var_56912e22) {
@@ -414,7 +414,7 @@ function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vor
           }
 
           break;
-        case # "elite":
+        case #"elite":
           if(is_true(ai_zombie.var_8576e0be)) {
             ai_zombie namespace_9ff9f642::function_520f4da5(#"hash_2c88ef7895dccf65");
           } else {

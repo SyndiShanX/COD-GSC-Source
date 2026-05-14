@@ -140,7 +140,7 @@ function function_26f124d8() {
   }
 
   switch (level.var_e91491fb) {
-    case # "ads":
+    case #"ads":
       var_389b3ef1 = self playerads();
 
       if(self adsButtonPressed() && var_389b3ef1 > 0) {
@@ -148,37 +148,37 @@ function function_26f124d8() {
       }
 
       return false;
-    case # "jump":
+    case #"jump":
       if(self zm_utility::is_jumping()) {
         return true;
       }
 
       return false;
-    case # "slide":
+    case #"slide":
       if(self issliding()) {
         return true;
       }
 
       return false;
-    case # "hash_6c6c8f6b349b8751":
+    case #"hash_6c6c8f6b349b8751":
       if(self zm_utility::is_jumping() || self issliding()) {
         return true;
       }
 
       return false;
-    case # "crouch":
+    case #"crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case # "prone":
+    case #"prone":
       if(self getstance() === "prone") {
         return true;
       }
 
       return false;
-    case # "movement":
+    case #"movement":
     default:
       v_velocity = self getvelocity();
 

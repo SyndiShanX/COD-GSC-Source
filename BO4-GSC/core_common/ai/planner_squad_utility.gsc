@@ -681,7 +681,7 @@ strategyclearareatoattackobjectupdate(planner, params) {
     }
   } else if(isDefined(params.bundle)) {
     switch (params.bundle.m_str_type) {
-      case # "escortbiped":
+      case #"escortbiped":
         entity = params.bundle.var_27726d51;
         break;
     }
@@ -1058,17 +1058,17 @@ function_2083115a(planner, constants) {
 
   if(isDefined(target)) {
     switch (target[#"type"]) {
-      case # "gameobject":
+      case #"gameobject":
         return true;
-      case # "goto":
+      case #"goto":
         return true;
-      case # "destroy":
+      case #"destroy":
         return true;
-      case # "defend":
+      case #"defend":
         return true;
-      case # "capturearea":
+      case #"capturearea":
         return true;
-      case # "escortbiped":
+      case #"escortbiped":
         return true;
     }
   }

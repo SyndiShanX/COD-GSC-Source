@@ -1196,10 +1196,10 @@ function_e79ce40a() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn":
+        case #"spawn":
           zm_devgui::spawn_archetype("<dev string:x30e>");
           break;
-        case # "spawn_hallion":
+        case #"spawn_hallion":
           spawners = getspawnerarray();
 
           foreach(spawner in spawners) {
@@ -1210,19 +1210,19 @@ function_e79ce40a() {
           }
 
           break;
-        case # "kill":
+        case #"kill":
           zm_devgui::kill_archetype(#"werewolf");
           break;
-        case # "patrol":
+        case #"patrol":
           function_39671958();
           break;
-        case # "summon_wolves":
+        case #"summon_wolves":
           function_bb9fe466();
           break;
-        case # "destroy_weakpoint":
+        case #"destroy_weakpoint":
           function_5ffd8dd3(cmd[1]);
           break;
-        case # "debug_dmg":
+        case #"debug_dmg":
           level.var_abe0b71d = !level.var_abe0b71d;
           break;
         default:
@@ -1238,7 +1238,7 @@ function function_96640dc5(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zm_audio::zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else {
@@ -1246,23 +1246,23 @@ function function_96640dc5(eventstruct) {
       }
 
       break;
-    case # "pain":
-    case # "shake":
+    case #"pain":
+    case #"shake":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
       break;
-    case # "howl":
+    case #"howl":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
       break;
-    case # "growl_anim":
+    case #"growl_anim":
       level thread zm_audio::zmbaivox_playvox(self, "growl", 1, 3, 1);
       break;
-    case # "attack_leap":
-    case # "attack_melee":
+    case #"attack_leap":
+    case #"attack_melee":
       level thread zm_audio::zmbaivox_playvox(self, "attack", 1, 2, 1);
       break;
-    case # "sprint":
-    case # "ambient":
-    case # "growl":
+    case #"sprint":
+    case #"ambient":
+    case #"growl":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 1);
       break;
     default:

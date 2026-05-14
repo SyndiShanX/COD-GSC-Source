@@ -432,51 +432,51 @@ function_7569c0fb() {
   self stats::function_81f5c0fe(#"gamesplayed", 1);
 
   switch (level.gametype) {
-    case # "dom_hc":
-    case # "svz":
-    case # "control":
-    case # "dom_bb":
-    case # "sd":
-    case # "dom_snipe_bb":
-    case # "control_bb":
-    case # "control_hc":
-    case # "escort":
-    case # "ctf_bb_hc":
-    case # "dom":
-    case # "bounty":
-    case # "control_cwl":
-    case # "sd_cwl":
-    case # "dom_bb_hc":
-    case # "escort_bb":
-    case # "clean":
-    case # "clean_bb":
-    case # "ctf":
-    case # "sd_bb":
-    case # "sd_hc":
-    case # "ctf_hc":
-    case # "ctf_bb":
+    case #"dom_hc":
+    case #"svz":
+    case #"control":
+    case #"dom_bb":
+    case #"sd":
+    case #"dom_snipe_bb":
+    case #"control_bb":
+    case #"control_hc":
+    case #"escort":
+    case #"ctf_bb_hc":
+    case #"dom":
+    case #"bounty":
+    case #"control_cwl":
+    case #"sd_cwl":
+    case #"dom_bb_hc":
+    case #"escort_bb":
+    case #"clean":
+    case #"clean_bb":
+    case #"ctf":
+    case #"sd_bb":
+    case #"sd_hc":
+    case #"ctf_hc":
+    case #"ctf_bb":
       self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivescore"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case # "koth":
-    case # "koth_cwl":
-    case # "koth_bb":
+    case #"koth":
+    case #"koth_cwl":
+    case #"koth_bb":
       self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivetime"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case # "oic":
-    case # "tdm_bb":
-    case # "tdm_hc":
-    case # "conf_hc":
-    case # "tdm_bb_hc":
-    case # "conf_bb":
-    case # "dm_bb":
-    case # "sas":
-    case # "tdm_snipe_bb":
-    case # "dm":
-    case # "conf":
-    case # "tdm":
-    case # "infect":
+    case #"oic":
+    case #"tdm_bb":
+    case #"tdm_hc":
+    case #"conf_hc":
+    case #"tdm_bb_hc":
+    case #"conf_bb":
+    case #"dm_bb":
+    case #"sas":
+    case #"tdm_snipe_bb":
+    case #"dm":
+    case #"conf":
+    case #"tdm":
+    case #"infect":
       self stats::function_81f5c0fe(#"stat1", self.ekia);
       self stats::function_81f5c0fe(#"stat2", self.deaths);
       break;

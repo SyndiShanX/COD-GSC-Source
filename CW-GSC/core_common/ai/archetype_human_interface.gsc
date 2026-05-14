@@ -38,19 +38,19 @@ function useanimationoverridecallback(entity, attribute, oldvalue, value) {
 
 function vignettemodecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case # "off":
+    case #"off":
       oldvalue.pushable = 1;
       oldvalue collidewithactors(0);
       oldvalue pushplayer(0);
       oldvalue setavoidancemask("avoid all");
       break;
-    case # "slow":
+    case #"slow":
       oldvalue.pushable = 0;
       oldvalue collidewithactors(0);
       oldvalue pushplayer(1);
       oldvalue setavoidancemask("avoid ai");
       break;
-    case # "fast":
+    case #"fast":
       oldvalue.pushable = 0;
       oldvalue collidewithactors(1);
       oldvalue pushplayer(1);
@@ -69,16 +69,16 @@ function function_20fdb709(entity, attribute, oldvalue, value) {
   attribute setblackboardattribute("_human_prev_demeanor", oldvalue);
 
   switch (value) {
-    case # "combat":
+    case #"combat":
       attribute setblackboardattribute("_human_demeanor", "COMBAT");
       break;
-    case # "patrol":
+    case #"patrol":
       attribute setblackboardattribute("_human_demeanor", "PATROL");
       break;
-    case # "cqb":
+    case #"cqb":
       attribute setblackboardattribute("_human_demeanor", "CQB");
       break;
-    case # "alert":
+    case #"alert":
       attribute setblackboardattribute("_human_demeanor", "ALERT");
       break;
     default:
@@ -93,16 +93,16 @@ function function_beabbc97(entity, attribute, oldvalue, value) {
   }
 
   switch (value) {
-    case # "ads":
+    case #"ads":
       attribute setblackboardattribute("_aim_overlay", "ADS");
       break;
-    case # "up":
+    case #"up":
       attribute setblackboardattribute("_aim_overlay", "UP");
       break;
-    case # "down":
+    case #"down":
       attribute setblackboardattribute("_aim_overlay", "DOWN");
       break;
-    case # "none":
+    case #"none":
     default:
       attribute setblackboardattribute("_aim_overlay", "NONE");
       break;

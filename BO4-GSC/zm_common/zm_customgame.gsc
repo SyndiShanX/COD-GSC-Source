@@ -139,205 +139,205 @@ function_ff4557dc(s_talisman) {
   }
 
   switch (s_talisman.name) {
-    case # "talisman_box_guarantee_box_only":
+    case #"talisman_box_guarantee_box_only":
       if(!function_901b751c(#"zmtalismanboxguaranteeboxonly") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case # "talisman_box_guarantee_lmg":
+    case #"talisman_box_guarantee_lmg":
       if(!function_901b751c(#"zmtalismanboxguaranteelmg") || !function_901b751c(#"zmweaponslmg") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case # "talisman_coagulant":
+    case #"talisman_coagulant":
       if(!function_901b751c(#"zmtalismancoagulant")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_claymore":
+    case #"talisman_extra_claymore":
       if(!function_901b751c(#"zmtalismanextraclaymore")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_frag":
+    case #"talisman_extra_frag":
       if(!function_901b751c(#"zmtalismanextrafrag")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_miniturret":
+    case #"talisman_extra_miniturret":
       if(!function_901b751c(#"zmtalismanextraminiturret")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_molotov":
+    case #"talisman_extra_molotov":
       if(!function_901b751c(#"zmtalismanextramolotov")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_semtex":
+    case #"talisman_extra_semtex":
       if(!function_901b751c(#"zmtalismanextrasemtex")) {
         return false;
       }
 
       break;
-    case # "talisman_impatient":
+    case #"talisman_impatient":
       if(!function_901b751c(#"zmtalismanimpatient")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_mod_single":
+    case #"talisman_perk_mod_single":
       if(!function_901b751c(#"zmtalismanperkmodsingle")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_permanent_1":
+    case #"talisman_perk_permanent_1":
       if(!function_901b751c(#"zmtalismanperkpermanent1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_permanent_2":
+    case #"talisman_perk_permanent_2":
       if(!function_901b751c(#"zmtalismanperkpermanent2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_permanent_3":
+    case #"talisman_perk_permanent_3":
       if(!function_901b751c(#"zmtalismanperkpermanent3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_permanent_4":
+    case #"talisman_perk_permanent_4":
       if(!function_901b751c(#"zmtalismanperkpermanent4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_reducecost_1":
+    case #"talisman_perk_reducecost_1":
       if(!function_901b751c(#"zmtalismanperkreducecost1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_reducecost_2":
+    case #"talisman_perk_reducecost_2":
       if(!function_901b751c(#"zmtalismanperkreducecost2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_reducecost_3":
+    case #"talisman_perk_reducecost_3":
       if(!function_901b751c(#"zmtalismanperkreducecost3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_reducecost_4":
+    case #"talisman_perk_reducecost_4":
       if(!function_901b751c(#"zmtalismanperkreducecost4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_start_1":
+    case #"talisman_perk_start_1":
       if(!function_901b751c(#"zmtalismanperkstart1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_start_2":
+    case #"talisman_perk_start_2":
       if(!function_901b751c(#"zmtalismanperkstart2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_start_3":
+    case #"talisman_perk_start_3":
       if(!function_901b751c(#"zmtalismanperkstart3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_perk_start_4":
+    case #"talisman_perk_start_4":
       if(!function_901b751c(#"zmtalismanperkstart4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "talisman_shield_durability_legendary":
+    case #"talisman_shield_durability_legendary":
       if(!function_901b751c(#"zmtalismanshielddurabilitylegendary") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case # "talisman_shield_durability_rare":
+    case #"talisman_shield_durability_rare":
       if(!function_901b751c(#"zmtalismanshielddurabilityrare") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case # "talisman_shield_price":
+    case #"talisman_shield_price":
       if(!function_901b751c(#"zmtalismanshieldprice") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case # "talisman_special_startlv2":
+    case #"talisman_special_startlv2":
       if(!function_901b751c(#"zmtalismanspecialstartlvl2")) {
         return false;
       }
 
       break;
-    case # "talisman_special_startlv3":
+    case #"talisman_special_startlv3":
       if(!function_901b751c(#"zmtalismanspecialstartlvl3")) {
         return false;
       }
 
       break;
-    case # "talisman_special_xp_rate":
+    case #"talisman_special_xp_rate":
       if(!function_901b751c(#"zmtalismanspecialxprate")) {
         return false;
       }
 
       break;
-    case # "talisman_start_weapon_ar":
+    case #"talisman_start_weapon_ar":
       if(!function_901b751c(#"zmtalismanstartweaponar")) {
         return false;
       }
 
       break;
-    case # "talisman_start_weapon_lmg":
+    case #"talisman_start_weapon_lmg":
       if(!function_901b751c(#"zmtalismanstartweaponlmg")) {
         return false;
       }
 
       break;
-    case # "talisman_start_weapon_smg":
+    case #"talisman_start_weapon_smg":
       if(!function_901b751c(#"zmtalismanstartweaponsmg")) {
         return false;
       }
 
       break;
-    case # "talisman_weapon_reducepapcost":
+    case #"talisman_weapon_reducepapcost":
       if(!function_901b751c(#"zmtalismanreducepapcost")) {
         return false;
       }
 
       break;
-    case # "talisman_permanent_heroweap_armor":
+    case #"talisman_permanent_heroweap_armor":
       if(!function_901b751c(#"zmtalismanpermanentheroweaparmor")) {
         return false;
       }
 
       break;
-    case # "talisman_extra_self_revive":
+    case #"talisman_extra_self_revive":
       if(!function_901b751c(#"zmtalismanextraselfrevive")) {
         return false;
       }
@@ -404,349 +404,349 @@ function_3ac936c6(str_elixir) {
   }
 
   switch (str_elixir) {
-    case # "zm_bgb_always_done_swiftly":
+    case #"zm_bgb_always_done_swiftly":
       if(!function_901b751c(#"zmelixiralwaysdoneswiftly")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_anywhere_but_here":
+    case #"zm_bgb_anywhere_but_here":
       if(!function_901b751c(#"zmelixiranywherebuthere")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_arsenal_accelerator":
+    case #"zm_bgb_arsenal_accelerator":
       if(!function_901b751c(#"zmelixirarsenalaccelerator") || !function_901b751c(#"zmspecweaponisenabled")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_danger_closest":
+    case #"zm_bgb_danger_closest":
       if(!function_901b751c(#"zmelixirdangerclosest")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_in_plain_sight":
+    case #"zm_bgb_in_plain_sight":
       if(!function_901b751c(#"zmelixirinplainsight")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_newtonian_negation":
+    case #"zm_bgb_newtonian_negation":
       if(!function_901b751c(#"zmelixirnewtoniannegation")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_now_you_see_me":
+    case #"zm_bgb_now_you_see_me":
       if(!function_901b751c(#"zmelixirnowyouseeme")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_stock_option":
+    case #"zm_bgb_stock_option":
       if(!function_901b751c(#"zmelixirstockoption")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_board_games":
+    case #"zm_bgb_board_games":
       if(!function_901b751c(#"zmelixirboardgames") || !function_901b751c(#"zmbarricadestate")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_burned_out":
+    case #"zm_bgb_burned_out":
       if(!function_901b751c(#"zmelixirburnedout")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_crawl_space":
+    case #"zm_bgb_crawl_space":
       if(!function_901b751c(#"zmelixircrawlspace") || function_901b751c(#"zmcrawlerstate") == 0) {
         return false;
       }
 
       break;
-    case # "zm_bgb_pop_shocks":
+    case #"zm_bgb_pop_shocks":
       if(!function_901b751c(#"zmelixirpopshocks")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_temporal_gift":
+    case #"zm_bgb_temporal_gift":
       if(!function_901b751c(#"zmelixirtemporalgift") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_point_drops":
+    case #"zm_bgb_point_drops":
       if(!function_901b751c(#"zmelixirpointdrops") || !function_901b751c(#"zmpowerupchaospoints") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_alchemical_antithesis":
+    case #"zm_bgb_alchemical_antithesis":
       if(!function_901b751c(#"zmelixiralchemicalantithesis") || function_901b751c(#"zmpointsfixed")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_sword_flay":
+    case #"zm_bgb_sword_flay":
       if(!function_901b751c(#"zmelixirswordflay") || !function_901b751c(#"zmweaponsmelee")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_dead_of_nuclear_winter":
+    case #"zm_bgb_dead_of_nuclear_winter":
       if(!function_901b751c(#"zmelixirdeadofnuclearwinter") || !function_901b751c(#"zmpowerupnuke") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_licensed_contractor":
+    case #"zm_bgb_licensed_contractor":
       if(!function_901b751c(#"zmelixirlicensedcontractor") || !function_901b751c(#"zmpowerupcarpenter") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_undead_man_walking":
+    case #"zm_bgb_undead_man_walking":
       if(!function_901b751c(#"zmelixirundeadmanwalking")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_whos_keeping_score":
+    case #"zm_bgb_whos_keeping_score":
       if(!function_901b751c(#"zmelixirwhoskeepingscore") || !function_901b751c(#"zmpowerupdouble") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_aftertaste":
+    case #"zm_bgb_aftertaste":
       if(!function_901b751c(#"zmelixiraftertaste")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_extra_credit":
+    case #"zm_bgb_extra_credit":
       if(!function_901b751c(#"zmelixirextracredit") || !function_901b751c(#"zmpowerupchaospoints") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_kill_joy":
+    case #"zm_bgb_kill_joy":
       if(!function_901b751c(#"zmelixirkilljoy") || !function_901b751c(#"zmpowerupinstakill") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_soda_fountain":
+    case #"zm_bgb_soda_fountain":
       if(!function_901b751c(#"zmelixirsodafountain") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_ctrl_z":
+    case #"zm_bgb_ctrl_z":
       if(!function_901b751c(#"zmelixirctrlz")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_free_fire":
+    case #"zm_bgb_free_fire":
       if(!function_901b751c(#"zmelixirfreefire")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_cache_back":
+    case #"zm_bgb_cache_back":
       if(!function_901b751c(#"zmelixircacheback") || !function_901b751c(#"zmpowerupmaxammo") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_immolation_liquidation":
+    case #"zm_bgb_immolation_liquidation":
       if(!function_901b751c(#"zmelixirimmolationliquidation") || !function_901b751c(#"zmpowerupfiresale") || !function_901b751c(#"zmpowerupsactive") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case # "zm_bgb_phoenix_up":
+    case #"zm_bgb_phoenix_up":
       if(!function_901b751c(#"zmelixirphoenixup") || !function_901b751c(#"zmlaststandduration")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_power_keg":
+    case #"zm_bgb_power_keg":
       if(!function_901b751c(#"zmelixirpowerkeg") || !function_901b751c(#"zmspecweaponisenabled") || !function_901b751c(#"zmpowerupspecialweapon") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_blood_debt":
+    case #"zm_bgb_blood_debt":
       if(!function_901b751c(#"zmelixirblooddebt")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_near_death_experience":
+    case #"zm_bgb_near_death_experience":
       if(!function_901b751c(#"zmelixirneardeathexperience")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_perkaholic":
+    case #"zm_bgb_perkaholic":
       if(!function_901b751c(#"zmelixirperkaholic") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_wall_power":
+    case #"zm_bgb_wall_power":
       if(!function_901b751c(#"zmelixirwallpower") || function_901b751c(#"zmpapenabled") == 0) {
         return false;
       }
 
       break;
-    case # "zm_bgb_anti_entrapment":
+    case #"zm_bgb_anti_entrapment":
       if(!function_901b751c(#"zmelixirantientrapment")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_equip_mint":
+    case #"zm_bgb_equip_mint":
       if(!function_901b751c(#"zmelixirequipmint")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_head_scan":
+    case #"zm_bgb_head_scan":
       if(!function_901b751c(#"zmelixirheadscan")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_join_the_party":
+    case #"zm_bgb_join_the_party":
       if(!function_901b751c(#"zmelixirjointheparty")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_nowhere_but_there":
+    case #"zm_bgb_nowhere_but_there":
       if(!function_901b751c(#"zmelixirnowherebutthere")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_phantom_reload":
+    case #"zm_bgb_phantom_reload":
       if(!function_901b751c(#"zmelixirphantomreload")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_shields_up":
+    case #"zm_bgb_shields_up":
       if(!function_901b751c(#"zmelixirshieldsup") || !function_901b751c("zmShieldIsEnabled")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_wall_to_wall_clearance":
+    case #"zm_bgb_wall_to_wall_clearance":
       if(!function_901b751c(#"zmelixirwalltowall")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_conflagration_liquidation":
+    case #"zm_bgb_conflagration_liquidation":
       if(!function_901b751c(#"zmelixirconflagrationliquidation") || function_901b751c(#"zmpapenabled") == 0) {
         return false;
       }
 
       break;
-    case # "zm_bgb_perk_up":
+    case #"zm_bgb_perk_up":
       if(!function_901b751c(#"zmelixirperkup") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_refresh_mint":
+    case #"zm_bgb_refresh_mint":
       if(!function_901b751c(#"zmelixirrefreshmint") || !function_901b751c(#"zmequipmentisenabled") && !function_901b751c(#"zmspecweaponisenabled")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_dividend_yield":
+    case #"zm_bgb_dividend_yield":
       if(!function_901b751c(#"zmelixirdividendyield")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_suit_up":
+    case #"zm_bgb_suit_up":
       if(!function_901b751c(#"zmelixirsuitup")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_talkin_bout_regeneration":
+    case #"zm_bgb_talkin_bout_regeneration":
       if(!function_901b751c(#"zmelixirtalkinboutregeneration")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_bullet_boost":
+    case #"zm_bgb_bullet_boost":
       if(!function_901b751c(#"zmelixirbulletboost")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_quacknarok":
+    case #"zm_bgb_quacknarok":
       if(!function_901b751c(#"zmelixirquacknarok")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_near_death_experience":
+    case #"zm_bgb_near_death_experience":
       if(!function_901b751c(#"zmelixirneardeathexperience")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_shopping_free":
+    case #"zm_bgb_shopping_free":
       if(!function_901b751c(#"zmelixirshoppingfree")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_phoenix_up":
+    case #"zm_bgb_phoenix_up":
       if(!function_901b751c(#"zmelixirphoenixup")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_perkaholic":
+    case #"zm_bgb_perkaholic":
       if(!function_901b751c(#"zmelixirperkaholic")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_reign_drops":
+    case #"zm_bgb_reign_drops":
       if(!function_901b751c(#"zmelixirreigndrops") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_head_drama":
+    case #"zm_bgb_head_drama":
       if(!function_901b751c(#"zmelixirheaddrama")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_power_vacuum":
+    case #"zm_bgb_power_vacuum":
       if(!function_901b751c(#"zmelixirpowervacuum") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case # "zm_bgb_secret_shopper":
+    case #"zm_bgb_secret_shopper":
       if(!function_901b751c(#"zmelixirsecretshopper") || !function_901b751c(#"zmwallbuysenabled")) {
         return false;
       }
@@ -808,121 +808,121 @@ function_d9f0defb(str_perk) {
   }
 
   switch (str_perk) {
-    case # "specialty_armorvest":
+    case #"specialty_armorvest":
       if(!function_901b751c(#"zmperksjuggernaut")) {
         return false;
       }
 
       break;
-    case # "specialty_fastreload":
+    case #"specialty_fastreload":
       if(!function_901b751c(#"zmperksspeed")) {
         return false;
       }
 
       break;
-    case # "specialty_quickrevive":
+    case #"specialty_quickrevive":
       if(!function_901b751c(#"zmperksquickrevive")) {
         return false;
       }
 
       break;
-    case # "specialty_widowswine":
+    case #"specialty_widowswine":
       if(!function_901b751c(#"zmperkswidowswail")) {
         return false;
       }
 
       break;
-    case # "specialty_staminup":
+    case #"specialty_staminup":
       if(!function_901b751c(#"zmperksstaminup")) {
         return false;
       }
 
       break;
-    case # "specialty_additionalprimaryweapon":
+    case #"specialty_additionalprimaryweapon":
       if(!function_901b751c(#"zmperksmulekick")) {
         return false;
       }
 
       break;
-    case # "specialty_electriccherry":
+    case #"specialty_electriccherry":
       if(!function_901b751c(#"zmperkselectricburst")) {
         return false;
       }
 
       break;
-    case # "specialty_deadshot":
+    case #"specialty_deadshot":
       if(!function_901b751c(#"zmperksdeadshot")) {
         return false;
       }
 
       break;
-    case # "specialty_cooldown":
+    case #"specialty_cooldown":
       if(!function_901b751c(#"zmperkscooldown")) {
         return false;
       }
 
       break;
-    case # "specialty_berserker":
+    case #"specialty_berserker":
       if(!function_901b751c(#"zmperksdyingwish")) {
         return false;
       }
 
       break;
-    case # "specialty_phdflopper":
+    case #"specialty_phdflopper":
       if(!function_901b751c(#"zmperksphdslider")) {
         return false;
       }
 
       break;
-    case # "specialty_camper":
+    case #"specialty_camper":
       if(!function_901b751c(#"zmperksstonecold")) {
         return false;
       }
 
       break;
-    case # "specialty_extraammo":
+    case #"specialty_extraammo":
       if(!function_901b751c(#"zmperksbandolier")) {
         return false;
       }
 
       break;
-    case # "specialty_awareness":
+    case #"specialty_awareness":
       if(!function_901b751c(#"zmperksdeathperception")) {
         return false;
       }
 
       break;
-    case # "specialty_shield":
+    case #"specialty_shield":
       if(!function_901b751c(#"zmperksvictorious")) {
         return false;
       }
 
       break;
-    case # "specialty_mystery":
+    case #"specialty_mystery":
       if(!function_901b751c(#"zmperkssecretsauce")) {
         return false;
       }
 
       break;
-    case # "specialty_etherealrazor":
+    case #"specialty_etherealrazor":
       if(!function_901b751c(#"zmperksetherealrazor")) {
         return false;
       }
 
       break;
-    case # "specialty_zombshell":
+    case #"specialty_zombshell":
       if(!function_901b751c(#"zmperkszombshell")) {
         return false;
       }
 
       break;
-    case # "specialty_wolf_protector":
+    case #"specialty_wolf_protector":
       if(!function_901b751c(#"zmperkswolfprotector")) {
         return false;
       }
 
       break;
-    case # "specialty_death_dash":
+    case #"specialty_death_dash":
       if(!function_901b751c(#"zmperksdeathdash")) {
         return false;
       }

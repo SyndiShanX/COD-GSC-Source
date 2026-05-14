@@ -120,19 +120,19 @@ function player_add_points(event, mod, hit_location, e_target, zombie_team, dama
     player_points = [[level.a_func_score_events[event]]](event, mod, hit_location, zombie_team, damage_weapon);
   } else {
     switch (event) {
-      case # "rebuild_board":
-      case # "carpenter_powerup":
-      case # "nuke_powerup":
-      case # "reviver":
-      case # "oracle_boon":
-      case # "bonus_points_powerup":
+      case #"rebuild_board":
+      case #"carpenter_powerup":
+      case #"nuke_powerup":
+      case #"reviver":
+      case #"oracle_boon":
+      case #"bonus_points_powerup":
         player_points = mod;
         break;
-      case # "bonus_points_powerup_shared":
+      case #"bonus_points_powerup_shared":
         player_points = mod;
         multiplier = 1;
         break;
-      case # "damage_points":
+      case #"damage_points":
         switch (mod) {
           case 10:
           case 20:
@@ -168,7 +168,7 @@ function player_add_points(event, mod, hit_location, e_target, zombie_team, dama
         }
 
         break;
-      case # "death":
+      case #"death":
         player_points = e_target.var_f256a4d9;
 
         if(!isDefined(player_points)) {
@@ -204,7 +204,7 @@ function player_add_points(event, mod, hit_location, e_target, zombie_team, dama
         }
 
         break;
-      case # "riotshield_fling":
+      case #"riotshield_fling":
         player_points = mod;
 
         if(!var_e6e61503) {
@@ -212,7 +212,7 @@ function player_add_points(event, mod, hit_location, e_target, zombie_team, dama
         }
 
         break;
-      case # "transform_kill":
+      case #"transform_kill":
         self score_cf_increment_info("transform_kill", var_e6e61503);
 
         if(!var_e6e61503) {
@@ -315,9 +315,9 @@ function player_add_points_kill_bonus(mod, hit_location, weapon, player_points =
 
   if(isDefined(hit_location)) {
     switch (hit_location) {
-      case # "head":
-      case # "helmet":
-      case # "neck":
+      case #"head":
+      case #"helmet":
+      case #"neck":
         self score_cf_increment_info("death_head", var_e6e61503);
         score = zombie_utility::get_zombie_var(#"zombie_score_bonus_head");
         break;
@@ -337,16 +337,16 @@ function player_reduce_points(event, n_amount) {
   points = 0;
 
   switch (event) {
-    case # "take_all":
+    case #"take_all":
       points = self.score;
       break;
-    case # "take_half":
+    case #"take_half":
       points = int(self.score / 2);
       break;
-    case # "take_specified":
+    case #"take_specified":
       points = n_amount;
       break;
-    case # "no_revive_penalty":
+    case #"no_revive_penalty":
       if(zm_custom::function_901b751c(#"zmpointlossonteammatedeath")) {
         percent = zm_custom::function_901b751c(#"zmpointlossonteammatedeath") / 100;
         points = self.score * percent;
@@ -356,7 +356,7 @@ function player_reduce_points(event, n_amount) {
       }
 
       break;
-    case # "died":
+    case #"died":
       if(zm_custom::function_901b751c(#"zmpointlossondeath")) {
         percent = zm_custom::function_901b751c(#"zmpointlossondeath") / 100;
         points = self.score * percent;
@@ -366,7 +366,7 @@ function player_reduce_points(event, n_amount) {
       }
 
       break;
-    case # "downed":
+    case #"downed":
       if(level.round_number < 50 && !zm_custom::function_901b751c(#"zmpointlossondown")) {
         percent = 0;
       } else if(zm_custom::function_901b751c(#"zmpointlossondown")) {
@@ -388,10 +388,10 @@ function player_reduce_points(event, n_amount) {
       points = self.score * percent;
       self.score_lost_when_downed = zm_utility::round_up_to_ten(int(points));
       break;
-    case # "points_lost_on_hit_percent":
+    case #"points_lost_on_hit_percent":
       points = self.score * n_amount;
       break;
-    case # "points_lost_on_hit_value":
+    case #"points_lost_on_hit_value":
       points = n_amount;
       break;
     default:
@@ -578,12 +578,12 @@ function on_item_pickup(s_params) {
     }
 
     switch (itementry.name) {
-      case # "resource_item_medium_harvesting_sr":
+      case #"resource_item_medium_harvesting_sr":
         level scoreevents::doscoreeventcallback("scoreEventZM", {
           #attacker: e_player, #scoreevent: "essence_pickup_medium"});
         break;
-      case # "resource_item_harvesting_sr":
-      case # "hash_69a628368f8263f":
+      case #"resource_item_harvesting_sr":
+      case #"hash_69a628368f8263f":
         level scoreevents::doscoreeventcallback("scoreEventZM", {
           #attacker: e_player, #scoreevent: "essence_pickup_large"});
         break;

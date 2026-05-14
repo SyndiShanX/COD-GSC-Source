@@ -308,21 +308,21 @@ function_78bf134c(localclientnum, clientdata, networkid, model, itementry) {
 
   if(isDefined(itementry)) {
     switch (itementry.rarity) {
-      case # "none":
+      case #"none":
         if(isDefined(itementry.unlockableitemref) && itementry.itemtype != #"weapon") {
           renderbundle = #"hash_6f1ab68ac78ac2ea";
           break;
         }
-      case # "common":
+      case #"common":
         renderbundle = #"hash_29dbf9ddda64fc5a";
         break;
-      case # "rare":
+      case #"rare":
         renderbundle = #"hash_6e89d52c60dd7fc3";
         break;
-      case # "epic":
+      case #"epic":
         renderbundle = #"hash_4cf701d23a7301d2";
         break;
-      case # "legendary":
+      case #"legendary":
         renderbundle = #"hash_4368c406e6a21060";
         break;
     }

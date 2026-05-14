@@ -247,54 +247,54 @@ get_location_string(e_player) {
   }
 
   switch (str_zone) {
-    case # "zone_starting_area_center":
+    case #"zone_starting_area_center":
       str_display = #"hash_4a67009994e6a476";
       break;
-    case # "zone_starting_area_tunnel":
-    case # "zone_starting_area_odin":
-    case # "zone_starting_area_ra":
-    case # "zone_starting_area_danu":
-    case # "zone_starting_area_zeus":
+    case #"zone_starting_area_tunnel":
+    case #"zone_starting_area_odin":
+    case #"zone_starting_area_ra":
+    case #"zone_starting_area_danu":
+    case #"zone_starting_area_zeus":
       str_display = #"hash_1567549ec3ba97d4";
       break;
-    case # "zone_danu_top_floor":
+    case #"zone_danu_top_floor":
       str_display = #"hash_5c1dcbfe0b5001dd";
       break;
-    case # "zone_danu_ground_floor":
-    case # "zone_danu_hallway":
+    case #"zone_danu_ground_floor":
+    case #"zone_danu_hallway":
       str_display = #"hash_7a9264bacc159479";
       break;
-    case # "zone_danu_basement":
+    case #"zone_danu_basement":
       str_display = #"hash_397ee221838b64ee";
       break;
-    case # "zone_ra_top_floor":
+    case #"zone_ra_top_floor":
       str_display = #"hash_6803828af6a2f994";
       break;
-    case # "zone_ra_hallway":
-    case # "zone_ra_ground_floor":
+    case #"zone_ra_hallway":
+    case #"zone_ra_ground_floor":
       str_display = #"hash_42941b7294416898";
       break;
-    case # "zone_ra_basement":
+    case #"zone_ra_basement":
       str_display = #"hash_f06f1d12b9e06bb";
       break;
-    case # "zone_odin_top_floor":
+    case #"zone_odin_top_floor":
       str_display = #"hash_2a27c4b2d37ac547";
       break;
-    case # "zone_odin_ground_floor":
-    case # "zone_odin_hallway":
+    case #"zone_odin_ground_floor":
+    case #"zone_odin_hallway":
       str_display = #"hash_6edbbd092bc3117f";
       break;
-    case # "zone_odin_basement":
+    case #"zone_odin_basement":
       str_display = #"hash_6182c3f17fbe7e38";
       break;
-    case # "zone_zeus_top_floor":
+    case #"zone_zeus_top_floor":
       str_display = #"hash_9a1707dc944a3bc";
       break;
-    case # "zone_zeus_hallway":
-    case # "zone_zeus_ground_floor":
+    case #"zone_zeus_hallway":
+    case #"zone_zeus_ground_floor":
       str_display = #"hash_2795247ad0a93910";
       break;
-    case # "zone_zeus_basement":
+    case #"zone_zeus_basement":
       if(level flag::get(#"hash_26c0c05d0a3e382f")) {
         str_display = #"hash_1d78b48769eec427";
       } else {
@@ -302,45 +302,45 @@ get_location_string(e_player) {
       }
 
       break;
-    case # "zone_danu_ra_bridge":
+    case #"zone_danu_ra_bridge":
       str_display = #"hash_340eafe8d0baeac2";
       break;
-    case # "zone_odin_zeus_bridge":
+    case #"zone_odin_zeus_bridge":
       str_display = #"hash_3eb632726bcfd3b8";
       break;
-    case # "zone_danu_ra_tunnel":
+    case #"zone_danu_ra_tunnel":
       str_display = #"hash_75825b791d3a7f4d";
       break;
-    case # "zone_danu_tunnel":
+    case #"zone_danu_tunnel":
       str_display = #"hash_384dc630decdd5e5";
       break;
-    case # "zone_ra_tunnel":
+    case #"zone_ra_tunnel":
       str_display = #"hash_1ad73836208cbff4";
       break;
-    case # "zone_fallen_hero":
+    case #"zone_fallen_hero":
       str_display = #"hash_26bd00647976ee13";
       break;
-    case # "zone_odin_tunnel":
+    case #"zone_odin_tunnel":
       str_display = #"hash_2e1e7d63d11c4a1b";
       break;
-    case # "zone_odin_zeus_tunnel":
+    case #"zone_odin_zeus_tunnel":
       str_display = #"hash_553f97cb9500b3bf";
       break;
-    case # "zone_zeus_tunnel":
+    case #"zone_zeus_tunnel":
       str_display = #"hash_622a5e1614b58b7c";
       break;
-    case # "zone_cursed_room":
+    case #"zone_cursed_room":
       str_display = #"hash_68fd9aced4fcdecc";
       break;
-    case # "zone_flooded_crypt":
+    case #"zone_flooded_crypt":
       str_display = #"hash_140d9887b328fc9a";
       break;
-    case # "zone_body_pit":
+    case #"zone_body_pit":
       str_display = #"hash_7a784e915fb4da82";
       break;
-    case # "zone_pap_room":
-    case # "zone_pap_room_balcony_body_pit":
-    case # "zone_pap_room_balcony_flooded_crypt":
+    case #"zone_pap_room":
+    case #"zone_pap_room_balcony_body_pit":
+    case #"zone_pap_room_balcony_flooded_crypt":
       str_display = #"hash_54ab01103f8534bd";
       break;
     default:

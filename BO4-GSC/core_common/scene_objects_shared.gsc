@@ -835,30 +835,30 @@ class csceneobject {
     str_damage_types = (!isDefined(_s.runsceneondmg0) || _s.runsceneondmg0 == "none" ? "" : _s.runsceneondmg0) + (!isDefined(_s.runsceneondmg1) || _s.runsceneondmg1 == "none" ? "" : _s.runsceneondmg1) + (!isDefined(_s.runsceneondmg2) || _s.runsceneondmg2 == "none" ? "" : _s.runsceneondmg2) + (!isDefined(_s.runsceneondmg3) || _s.runsceneondmg3 == "none" ? "" : _s.runsceneondmg3) + (!isDefined(_s.runsceneondmg4) || _s.runsceneondmg4 == "none" ? "" : _s.runsceneondmg4);
 
     switch (str_mod) {
-      case # "mod_rifle_bullet":
-      case # "mod_pistol_bullet":
+      case #"mod_rifle_bullet":
+      case #"mod_pistol_bullet":
         if(issubstr(str_damage_types, "bullet") || isDefined(s_shot.var_163ca9fa) && s_shot.var_163ca9fa || isDefined(s_shot.var_b3dddfd3) && s_shot.var_b3dddfd3) {
           return true;
         }
 
         break;
-      case # "mod_explosive":
-      case # "mod_grenade":
-      case # "mod_grenade_splash":
+      case #"mod_explosive":
+      case #"mod_grenade":
+      case #"mod_grenade_splash":
         if(issubstr(str_damage_types, "explosive") || isDefined(s_shot.var_dbd0fa6f) && s_shot.var_dbd0fa6f || isDefined(s_shot.var_b3dddfd3) && s_shot.var_b3dddfd3) {
           return true;
         }
 
         break;
-      case # "mod_projectile":
-      case # "mod_projectile_splash":
+      case #"mod_projectile":
+      case #"mod_projectile_splash":
         if(issubstr(str_damage_types, "projectile") || isDefined(s_shot.var_650063ca) && s_shot.var_650063ca || isDefined(s_shot.var_b3dddfd3) && s_shot.var_b3dddfd3) {
           return true;
         }
 
         break;
-      case # "mod_melee_weapon_butt":
-      case # "mod_melee":
+      case #"mod_melee_weapon_butt":
+      case #"mod_melee":
         if(issubstr(str_damage_types, "melee") || isDefined(s_shot.var_efd784b6) && s_shot.var_efd784b6 || isDefined(s_shot.var_b3dddfd3) && s_shot.var_b3dddfd3) {
           return true;
         }
@@ -1495,7 +1495,7 @@ class csceneobject {
 
           if(isDefined(entry)) {
             switch (str_entry_type) {
-              case # "cameraswitcher":
+              case #"cameraswitcher":
 
                 if(ishash(entry)) {
                   error(!isassetloaded("<dev string:x4b>", entry), "<dev string:x52>" + hashtostring(entry) + "<dev string:x5a>");
@@ -1506,7 +1506,7 @@ class csceneobject {
                 var_aa49b05f = 1;
                 play_anim(entry, 1, undefined, n_start_time);
                 break;
-              case # "anim":
+              case #"anim":
 
                 if(isDefined(_s.issiege) && _s.issiege) {
                   if(ishash(entry)) {
@@ -2562,7 +2562,7 @@ class cscene {
               }
 
               switch (_s.scenetype) {
-                case # "scene":
+                case #"scene":
                   thread play(var_1a15e649, undefined, _b_testing, _str_mode);
                   break;
                 default:
@@ -3225,10 +3225,10 @@ class cscene {
 
       if(b_test_run) {
         switch (str_shot) {
-          case # "stop":
+          case #"stop":
             n_val = 3;
             break;
-          case # "init":
+          case #"init":
             n_val = 4;
             break;
           default:
@@ -3237,10 +3237,10 @@ class cscene {
         }
       } else {
         switch (str_shot) {
-          case # "stop":
+          case #"stop":
             n_val = 0;
             break;
-          case # "init":
+          case #"init":
             n_val = 1;
             break;
           default:
@@ -3282,27 +3282,27 @@ class cscene {
 
   function new_object(str_type) {
     switch (str_type) {
-      case # "prop":
+      case #"prop":
         return new cscenemodel();
-      case # "model":
+      case #"model":
         return new cscenemodel();
-      case # "vehicle":
+      case #"vehicle":
         return new cscenevehicle();
-      case # "actor":
+      case #"actor":
         return new csceneactor();
-      case # "fakeActor":
+      case #"fakeActor":
         return new cscenefakeactor();
-      case # "playeroutfit":
+      case #"playeroutfit":
         return new class_6572d7cd();
-      case # "player":
+      case #"player":
         return new csceneplayer();
-      case # "sharedplayer":
+      case #"sharedplayer":
         return new cscenesharedplayer();
-      case # "fakeplayer":
+      case #"fakeplayer":
         return new cscenefakeplayer();
-      case # "companion":
+      case #"companion":
         return new cscenecompanion();
-      case # "sharedcompanion":
+      case #"sharedcompanion":
         return new cscenesharedcompanion();
       default:
         error(0, "Unsupported object type '" + str_type + "'.");
@@ -3373,10 +3373,10 @@ class cscene {
     str_type = tolower(s_obj.type);
 
     switch (str_type) {
-      case # "specialist":
+      case #"specialist":
         str_type = "companion";
         break;
-      case # "sharedspecialist":
+      case #"sharedspecialist":
         str_type = "sharedcompanion";
         break;
       default:

@@ -367,16 +367,16 @@ function function_1385b26c(localclientnum, oldval, newval, bnewent, binitialsnap
 function private function_7532a0ff(weapon_name) {
   if(isDefined(weapon_name)) {
     switch (weapon_name) {
-      case # "ww_ieu_gas_t9_upgraded":
-      case # "ww_ieu_plasma_t9_upgraded":
-      case # "ww_ieu_acid_t9_upgraded":
-      case # "ww_ieu_shockwave_t9_upgraded":
-      case # "ww_ieu_shockwave_t9":
-      case # "ww_ieu_electric_t9_upgraded":
-      case # "ww_ieu_electric_t9":
-      case # "ww_ieu_acid_t9":
-      case # "ww_ieu_gas_t9":
-      case # "ww_ieu_plasma_t9":
+      case #"ww_ieu_gas_t9_upgraded":
+      case #"ww_ieu_plasma_t9_upgraded":
+      case #"ww_ieu_acid_t9_upgraded":
+      case #"ww_ieu_shockwave_t9_upgraded":
+      case #"ww_ieu_shockwave_t9":
+      case #"ww_ieu_electric_t9_upgraded":
+      case #"ww_ieu_electric_t9":
+      case #"ww_ieu_acid_t9":
+      case #"ww_ieu_gas_t9":
+      case #"ww_ieu_plasma_t9":
         return true;
       default:
         return false;

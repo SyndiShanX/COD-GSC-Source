@@ -150,11 +150,11 @@ function_22a92b8b() {
   mapname = util::get_map_name();
 
   switch (mapname) {
-    case # "cp_col_journalist":
-    case # "cp_defection":
-    case # "hash_65a6e39408662d48":
-    case # "cp_col_air":
-    case # "cp_newsroom":
+    case #"cp_col_journalist":
+    case #"cp_defection":
+    case #"hash_65a6e39408662d48":
+    case #"cp_col_air":
+    case #"cp_newsroom":
       ignore = 0;
       break;
   }
@@ -162,7 +162,7 @@ function_22a92b8b() {
   gametype = hash(util::get_game_type());
 
   switch (gametype) {
-    case # "download":
+    case #"download":
       ignore = 1;
       break;
   }
@@ -175,8 +175,8 @@ function_c9705ad4() {
   gametype = hash(util::get_game_type());
 
   switch (gametype) {
-    case # "coop":
-    case # "pvp":
+    case #"coop":
+    case #"pvp":
       ignore = 0;
       break;
   }

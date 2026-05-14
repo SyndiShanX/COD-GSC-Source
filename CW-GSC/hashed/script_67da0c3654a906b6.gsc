@@ -32,10 +32,10 @@ function private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
   foreach(player in getplayers()) {
     if(isDefined(var_c8a36f90)) {
       switch (var_c8a36f90) {
-        case # "prone_random":
+        case #"prone_random":
           player thread function_9c988cd8(var_93fc795f, var_a7c52900, 1);
           break;
-        case # "crouch":
+        case #"crouch":
           player thread function_9c988cd8(var_93fc795f, var_a7c52900, 0);
           break;
       }
@@ -99,7 +99,7 @@ function private function_26f124d8() {
   }
 
   switch (level.var_1c8f9eba) {
-    case # "ads":
+    case #"ads":
       var_389b3ef1 = self playerads();
 
       if(self adsButtonPressed() && var_389b3ef1 > 0) {
@@ -107,32 +107,32 @@ function private function_26f124d8() {
       }
 
       return false;
-    case # "jump":
+    case #"jump":
       if(self zm_utility::is_jumping()) {
         return true;
       }
 
       return false;
-    case # "slide":
+    case #"slide":
       if(self issliding()) {
         return true;
       }
 
       return false;
-    case # "crouch":
+    case #"crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case # "prone_random":
-    case # "prone":
+    case #"prone_random":
+    case #"prone":
       if(self getstance() === "prone") {
         return true;
       }
 
       return false;
-    case # "movement":
+    case #"movement":
     default:
       v_velocity = self getvelocity();
 

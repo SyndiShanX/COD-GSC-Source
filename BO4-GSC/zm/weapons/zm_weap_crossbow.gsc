@@ -230,12 +230,12 @@ function_615d8c38(params) {
   }
 
   switch (params.shitloc) {
-    case # "right_leg_upper":
-    case # "left_leg_lower":
-    case # "right_leg_lower":
-    case # "left_foot":
-    case # "right_foot":
-    case # "left_leg_upper":
+    case #"right_leg_upper":
+    case #"left_leg_lower":
+    case #"right_leg_lower":
+    case #"left_foot":
+    case #"right_foot":
+    case #"left_leg_upper":
       if(isalive(self)) {
         if(self.archetype == #"zombie") {
           if(is_crossbow_charged(params.weapon) || self.missinglegs && !(isDefined(self.var_410503e) && self.var_410503e)) {
@@ -607,15 +607,15 @@ function_e1c4ab06(params) {
 
 function_144a052b(archetype) {
   switch (archetype) {
-    case # "catalyst":
-    case # "zombie":
+    case #"catalyst":
+    case #"zombie":
       return # "hash_664a130410d3fd9a";
-    case # "tiger":
+    case #"tiger":
       return # "hash_2607a6ffde83b4a7";
-    case # "stoker":
-    case # "gladiator":
+    case #"stoker":
+    case #"gladiator":
       return # "hash_3a067a5eb7a19857";
-    case # "blight_father":
+    case #"blight_father":
       return # "hash_280fa271c70412cd";
   }
 }
@@ -624,8 +624,8 @@ function_9fa5e527(var_ad86fdba = 5) {
   var_bef9c0f = function_144a052b(self.archetype);
 
   switch (self.archetype) {
-    case # "catalyst":
-    case # "zombie":
+    case #"catalyst":
+    case #"zombie":
       self zombie_utility::set_zombie_run_cycle_override_value("walk");
       break;
   }
@@ -639,16 +639,16 @@ function_9fa5e527(var_ad86fdba = 5) {
 
 function_43f61cad() {
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       self zombie_utility::set_zombie_run_cycle_restore_from_override();
       break;
-    case # "catalyst":
-    case # "tiger":
+    case #"catalyst":
+    case #"tiger":
       self zombie_utility::set_zombie_run_cycle_restore_from_override();
       break;
-    case # "gladiator":
-    case # "blight_father":
-    case # "elephant":
+    case #"gladiator":
+    case #"blight_father":
+    case #"elephant":
       break;
   }
 
@@ -659,25 +659,25 @@ function_43f61cad() {
 
 function_e43d1b24() {
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       str_scene = "aib_t8_zm_zombie_base_dth_ww_xbow";
       break;
-    case # "tiger":
+    case #"tiger":
       str_scene = "aib_t8_zm_tiger_dth_ww_xbow";
       break;
-    case # "catalyst":
+    case #"catalyst":
       str_scene = "aib_t8_zm_zombie_base_dth_ww_xbow";
       break;
-    case # "stoker":
+    case #"stoker":
       str_scene = "aib_t8_zm_stoker_dth_ww_xbow";
       break;
-    case # "gladiator":
+    case #"gladiator":
       str_scene = "aib_t8_zm_gladiator_dth_ww_xbow";
       break;
-    case # "blight_father":
+    case #"blight_father":
       str_scene = "aib_t8_zm_blightfather_dth_ww_xbow";
       break;
-    case # "elephant":
+    case #"elephant":
       str_scene = undefined;
       break;
     default:
@@ -691,28 +691,28 @@ function_e43d1b24() {
 function_b3ac0cab(params) {
   if(!is_crossbow_upgraded(params.weapon)) {
     switch (self.archetype) {
-      case # "zombie":
+      case #"zombie":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "tiger":
+      case #"tiger":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "catalyst":
+      case #"catalyst":
         var_a3abe438 = 0.5;
         var_a7727af5 = 1;
         break;
-      case # "stoker":
-      case # "gladiator":
+      case #"stoker":
+      case #"gladiator":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "blight_father":
+      case #"blight_father":
         var_a3abe438 = 0.2;
         var_a7727af5 = 1;
         break;
-      case # "elephant":
+      case #"elephant":
         var_a3abe438 = 0.1;
         var_a7727af5 = 1;
         break;
@@ -723,28 +723,28 @@ function_b3ac0cab(params) {
     }
   } else {
     switch (self.archetype) {
-      case # "zombie":
+      case #"zombie":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "tiger":
+      case #"tiger":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "catalyst":
+      case #"catalyst":
         var_a3abe438 = 1;
         var_a7727af5 = 2;
         break;
-      case # "stoker":
-      case # "gladiator":
+      case #"stoker":
+      case #"gladiator":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "blight_father":
+      case #"blight_father":
         var_a3abe438 = 0.25;
         var_a7727af5 = 1;
         break;
-      case # "elephant":
+      case #"elephant":
         var_a3abe438 = 0.2;
         var_a7727af5 = 1;
         break;

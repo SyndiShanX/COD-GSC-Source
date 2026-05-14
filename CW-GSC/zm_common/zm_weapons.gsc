@@ -612,20 +612,20 @@ function function_8fdfe5e4(weapon, item, var_d97184db, rarity = #"white", clipsi
 
 function function_d4f870ec(item_rarity) {
   switch (item_rarity) {
-    case # "resource":
-    case # "loadout":
+    case #"resource":
+    case #"loadout":
       rarity = #"white";
       break;
-    case # "uncommon":
+    case #"uncommon":
       rarity = #"green";
       break;
-    case # "rare":
+    case #"rare":
       rarity = #"blue";
       break;
-    case # "epic":
+    case #"epic":
       rarity = #"purple";
       break;
-    case # "legendary":
+    case #"legendary":
       rarity = #"orange";
       break;
     default:
@@ -755,18 +755,18 @@ function function_17e9ed37(rarity = #"white", clipsize, var_9839b3b1, var_7fa2b5
 
         if(!is_true(var_7b1ab4e4)) {
           switch (rarity) {
-            case # "white":
+            case #"white":
               break;
-            case # "green":
+            case #"green":
               var_ee3c60e = #"hash_393b11eaff09fb94";
               break;
-            case # "blue":
+            case #"blue":
               var_ee3c60e = #"hash_77e066ee890f14fe";
               break;
-            case # "purple":
+            case #"purple":
               var_ee3c60e = #"hash_1973a95f411b3bdf";
               break;
-            case # "orange":
+            case #"orange":
               var_ee3c60e = #"hash_5a8770083150213";
               break;
             default:
@@ -881,9 +881,9 @@ function get_guns() {
   foreach(s_weapon in level.zombie_weapons) {
     switch (s_weapon.weapon_classname) {
       case 0:
-      case # "equipment":
-      case # "shield":
-      case # "melee":
+      case #"equipment":
+      case #"shield":
+      case #"melee":
         continue;
     }
 
@@ -1551,26 +1551,26 @@ function get_weapon_cost(weapon) {
 
 function function_5d47055e(str_rarity) {
   switch (str_rarity) {
-    case # "resource":
-    case # "none":
-    case # "white":
-    case # "loadout":
+    case #"resource":
+    case #"none":
+    case #"white":
+    case #"loadout":
       return 0;
-    case # "green":
-    case # "uncommon":
+    case #"green":
+    case #"uncommon":
       return 500;
-    case # "blue":
-    case # "rare":
+    case #"blue":
+    case #"rare":
       return 1500;
-    case # "purple":
-    case # "epic":
+    case #"purple":
+    case #"epic":
       return 2500;
-    case # "yellow":
-    case # "ultra":
-    case # "gold":
-    case # "orange":
-    case # "named":
-    case # "legendary":
+    case #"yellow":
+    case #"ultra":
+    case #"gold":
+    case #"orange":
+    case #"named":
+    case #"legendary":
       return 3500;
   }
 
@@ -2245,11 +2245,11 @@ function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var
     if(isDefined(var_e6a8f11f)) {
       if(isDefined(rarity)) {
         switch (rarity) {
-          case # "green":
-          case # "white":
+          case #"green":
+          case #"white":
             var_62cd846 = var_e6a8f11f;
             break;
-          case # "blue":
+          case #"blue":
             if(var_e6a8f11f != #"green") {
               var_62cd846 = var_e6a8f11f;
             }
@@ -2981,24 +2981,24 @@ function is_wonder_weapon(w_to_check) {
 
   if(isDefined(w_to_check.name)) {
     switch (w_to_check.name) {
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9":
-      case # "ww_ieu_gas_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
-      case # "ww_ieu_plasma_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_diffusion_beam_t9":
-      case # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
-      case # "ww_ieu_acid_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
-      case # "ww_ieu_shockwave_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9_upgraded":
-      case # "ww_mega_barrel_fullauto_copycat_t9":
-      case # "ww_ieu_shockwave_t9":
-      case # "ww_ieu_electric_t9_upgraded":
-      case # "ww_ieu_electric_t9":
-      case # "ww_ieu_acid_t9":
-      case # "ww_ieu_gas_t9":
-      case # "ww_ieu_plasma_t9":
-      case # "ww_mega_barrel_fullauto_micro_missile_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9":
+      case #"ww_ieu_gas_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9_upgraded":
+      case #"ww_ieu_plasma_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_diffusion_beam_t9":
+      case #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded":
+      case #"ww_ieu_acid_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9_upgraded":
+      case #"ww_ieu_shockwave_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9_upgraded":
+      case #"ww_mega_barrel_fullauto_copycat_t9":
+      case #"ww_ieu_shockwave_t9":
+      case #"ww_ieu_electric_t9_upgraded":
+      case #"ww_ieu_electric_t9":
+      case #"ww_ieu_acid_t9":
+      case #"ww_ieu_gas_t9":
+      case #"ww_ieu_plasma_t9":
+      case #"ww_mega_barrel_fullauto_micro_missile_t9":
         return true;
     }
   }
@@ -3264,7 +3264,7 @@ function on_item_pickup(params) {
 
     if(isDefined(item) && isDefined(var_4657c1e0) && isDefined(item.itementry.name)) {
       switch (item.itementry.name) {
-        case # "aether_tool_item_sr":
+        case #"aether_tool_item_sr":
           var_b8a9c6d9 = function_137f88c6(var_4657c1e0.itementry.rarity, 1);
           clipsize = self getweaponammoclip(currentweapon);
           var_9839b3b1 = self getweaponammostock(currentweapon);
@@ -3275,13 +3275,13 @@ function on_item_pickup(params) {
 
           self function_17e9ed37(var_b8a9c6d9, clipsize, var_9839b3b1, var_7fa2b50b);
           break;
-        case # "bronze_chalice_item_sr":
+        case #"bronze_chalice_item_sr":
           if(!isDefined(var_4657c1e0.paplv)) {
             self item_inventory::function_73ae3380(var_4657c1e0, 1);
           }
 
           break;
-        case # "silver_chalice_item_sr":
+        case #"silver_chalice_item_sr":
           if(isDefined(var_4657c1e0.paplv)) {
             self item_inventory::function_73ae3380(var_4657c1e0, 2);
           } else {
@@ -3305,7 +3305,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "gold_chalice_item_sr":
+        case #"gold_chalice_item_sr":
           if(isDefined(var_4657c1e0.paplv)) {
             self item_inventory::function_73ae3380(var_4657c1e0, 3);
           } else {
@@ -3329,7 +3329,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "brainrot_item_sr":
+        case #"brainrot_item_sr":
           var_d4f8d4e = zm_aat::function_f4f4730f("ammomod_brainrot");
           self function_37e9e0cb(var_4657c1e0, currentweapon, var_d4f8d4e, 1);
 
@@ -3342,7 +3342,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "cryofreeze_item_sr":
+        case #"cryofreeze_item_sr":
           var_d4f8d4e = zm_aat::function_f4f4730f("ammomod_cryofreeze");
           self function_37e9e0cb(var_4657c1e0, currentweapon, var_d4f8d4e, 1);
 
@@ -3355,7 +3355,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "deadwire_item_sr":
+        case #"deadwire_item_sr":
           var_d4f8d4e = zm_aat::function_f4f4730f("ammomod_deadwire");
           self function_37e9e0cb(var_4657c1e0, currentweapon, var_d4f8d4e, 1);
 
@@ -3368,7 +3368,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "napalmburst_item_sr":
+        case #"napalmburst_item_sr":
           var_d4f8d4e = zm_aat::function_f4f4730f("ammomod_napalmburst");
           self function_37e9e0cb(var_4657c1e0, currentweapon, var_d4f8d4e, 1);
 
@@ -3381,7 +3381,7 @@ function on_item_pickup(params) {
           }
 
           break;
-        case # "shatterblast_item_sr":
+        case #"shatterblast_item_sr":
           var_d4f8d4e = zm_aat::function_f4f4730f("ammomod_shatterblast");
           self function_37e9e0cb(var_4657c1e0, currentweapon, var_d4f8d4e, 1);
 
@@ -3429,7 +3429,7 @@ function function_106ff01d(item) {
   }
 
   switch (item.itementry.name) {
-    case # "aether_tool_item_sr":
+    case #"aether_tool_item_sr":
       if(rarity == "orange" || is_wonder_weapon(currentweapon)) {
         return false;
       } else {
@@ -3437,7 +3437,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "bronze_chalice_item_sr":
+    case #"bronze_chalice_item_sr":
       if(isDefined(var_4657c1e0.paplv)) {
         return false;
       } else {
@@ -3445,7 +3445,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "silver_chalice_item_sr":
+    case #"silver_chalice_item_sr":
       if(isDefined(var_4657c1e0.paplv) && var_4657c1e0.paplv >= 2) {
         return false;
       } else {
@@ -3453,7 +3453,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "gold_chalice_item_sr":
+    case #"gold_chalice_item_sr":
       if(isDefined(var_4657c1e0.paplv) && var_4657c1e0.paplv >= 3) {
         return false;
       } else {
@@ -3461,7 +3461,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "brainrot_item_sr":
+    case #"brainrot_item_sr":
       if(is_wonder_weapon(currentweapon)) {
         return false;
       } else if(isDefined(var_c3317960)) {
@@ -3475,7 +3475,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "cryofreeze_item_sr":
+    case #"cryofreeze_item_sr":
       if(is_wonder_weapon(currentweapon)) {
         return false;
       } else if(isDefined(var_c3317960)) {
@@ -3489,7 +3489,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "deadwire_item_sr":
+    case #"deadwire_item_sr":
       if(is_wonder_weapon(currentweapon)) {
         return false;
       } else if(isDefined(var_c3317960)) {
@@ -3503,7 +3503,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "napalmburst_item_sr":
+    case #"napalmburst_item_sr":
       if(is_wonder_weapon(currentweapon)) {
         return false;
       } else if(isDefined(var_c3317960)) {
@@ -3517,7 +3517,7 @@ function function_106ff01d(item) {
       }
 
       break;
-    case # "shatterblast_item_sr":
+    case #"shatterblast_item_sr":
       if(is_wonder_weapon(currentweapon)) {
         return false;
       } else if(isDefined(var_c3317960)) {
@@ -3762,8 +3762,8 @@ function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
   rarity = #"white";
 
   switch (var_a0abda6) {
-    case # "resource":
-    case # "loadout":
+    case #"resource":
+    case #"loadout":
       rarity = #"white";
 
       if(var_9a8a7d26) {
@@ -3771,7 +3771,7 @@ function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
       }
 
       break;
-    case # "uncommon":
+    case #"uncommon":
       rarity = #"green";
 
       if(var_9a8a7d26) {
@@ -3779,7 +3779,7 @@ function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
       }
 
       break;
-    case # "rare":
+    case #"rare":
       rarity = #"blue";
 
       if(var_9a8a7d26) {
@@ -3787,7 +3787,7 @@ function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
       }
 
       break;
-    case # "epic":
+    case #"epic":
       rarity = #"purple";
 
       if(var_9a8a7d26) {
@@ -3795,7 +3795,7 @@ function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
       }
 
       break;
-    case # "legendary":
+    case #"legendary":
       rarity = #"orange";
       break;
   }
@@ -3902,37 +3902,37 @@ function on_weapon_change(params) {
 
 function function_89e5e7dd(var_d393ba53) {
   switch (var_d393ba53) {
-    case # "ammomod_napalmburst":
+    case #"ammomod_napalmburst":
       if(!is_true(getgametypesetting(#"hash_10de3b1cea667398"))) {
         return false;
       }
 
       break;
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
       if(!is_true(getgametypesetting(#"hash_54537cc749c2001d"))) {
         return false;
       }
 
       break;
-    case # "ammomod_brainrot":
+    case #"ammomod_brainrot":
       if(!is_true(getgametypesetting(#"hash_7ead02dd6721f46a"))) {
         return false;
       }
 
       break;
-    case # "ammomod_deadwire":
+    case #"ammomod_deadwire":
       if(!is_true(getgametypesetting(#"hash_66cad2a554f4d928"))) {
         return false;
       }
 
       break;
-    case # "ammomod_electriccherry":
+    case #"ammomod_electriccherry":
       if(!is_true(getgametypesetting(#"hash_87dd6c14b668b1d"))) {
         return false;
       }
 
       break;
-    case # "ammomod_shatterblast":
+    case #"ammomod_shatterblast":
       if(!is_true(getgametypesetting(#"hash_2537d92585f4fce2"))) {
         return false;
       }
@@ -3988,26 +3988,26 @@ function function_d85e6c3a(itementry) {
   }
 
   switch (var_bc61fcdc) {
-    case # "uncommon":
+    case #"uncommon":
       if(isDefined(itementry.weapon.var_f9a85dad)) {
         return itementry.weapon.var_f9a85dad;
       }
 
       break;
-    case # "rare":
+    case #"rare":
       if(isDefined(itementry.weapon.var_7993dd86)) {
         return itementry.weapon.var_7993dd86;
       }
 
       break;
-    case # "epic":
+    case #"epic":
       if(isDefined(itementry.weapon.var_2751b903)) {
         return itementry.weapon.var_2751b903;
       }
 
       break;
-    case # "ultra":
-    case # "legendary":
+    case #"ultra":
+    case #"legendary":
       if(isDefined(itementry.weapon.var_3d17e48f)) {
         return itementry.weapon.var_3d17e48f;
       }
@@ -4083,13 +4083,13 @@ function function_404c3ad5(weapon, callback) {
 
 function function_c69910e2(weapon_name, rarity) {
   switch (weapon_name) {
-    case # "pistol_burst_t9":
+    case #"pistol_burst_t9":
       item_name = level.var_29d88fe5[#"pistol_burst_t9_dw"][rarity];
       return item_name;
-    case # "pistol_revolver_t9":
+    case #"pistol_revolver_t9":
       item_name = level.var_29d88fe5[#"pistol_revolver_t9_dw"][rarity];
       return item_name;
-    case # "pistol_semiauto_t9":
+    case #"pistol_semiauto_t9":
       item_name = level.var_29d88fe5[#"pistol_semiauto_t9_dw"][rarity];
       return item_name;
   }

@@ -1121,13 +1121,13 @@ function defaultstate_death_update(params) {
   death_type = isDefined(get_death_type(params)) ? get_death_type(params) : "default";
 
   switch (death_type) {
-    case # "burning":
+    case #"burning":
       burning_death(params);
       break;
-    case # "emped":
+    case #"emped":
       emped_death(params);
       break;
-    case # "gibbed":
+    case #"gibbed":
       gibbed_death(params);
       break;
     default:

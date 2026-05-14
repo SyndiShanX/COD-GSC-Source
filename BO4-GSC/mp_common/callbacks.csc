@@ -181,23 +181,23 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   pos = (x, y, z);
 
   switch (teamfaction) {
-    case # "v":
+    case #"v":
       teamfaction = #"vietcong";
       break;
-    case # "nva":
-    case # "n":
+    case #"nva":
+    case #"n":
       teamfaction = #"nva";
       break;
-    case # "j":
+    case #"j":
       teamfaction = #"japanese";
       break;
-    case # "m":
+    case #"m":
       teamfaction = #"marines";
       break;
-    case # "s":
+    case #"s":
       teamfaction = #"specops";
       break;
-    case # "r":
+    case #"r":
       teamfaction = #"russian";
       break;
     default:
@@ -208,13 +208,13 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   }
 
   switch (team) {
-    case # "x":
+    case #"x":
       team = #"axis";
       break;
-    case # "l":
+    case #"l":
       team = #"allies";
       break;
-    case # "r":
+    case #"r":
       team = #"free";
       break;
     default:

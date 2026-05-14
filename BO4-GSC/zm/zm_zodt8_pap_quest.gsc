@@ -256,16 +256,16 @@ function_668e3f89(e_player) {
     self sethintstring(#"hash_73bbee9df5d3c2b1");
   } else {
     switch (level.s_pap_quest.a_s_locations[level.s_pap_quest.var_4ee2e2ab].prefabname) {
-      case # "stairs_pap_location":
+      case #"stairs_pap_location":
         self sethintstring(#"hash_15783325b3eeefd5");
         break;
-      case # "poop_deck_pap_location":
+      case #"poop_deck_pap_location":
         self sethintstring(#"hash_250613266b9a4223");
         break;
-      case # "engine_room_pap_location":
+      case #"engine_room_pap_location":
         self sethintstring(#"hash_4c5f8e23d8258199");
         break;
-      case # "cargo_pap_location":
+      case #"cargo_pap_location":
         self sethintstring(#"hash_1deb745365a6cfdd");
         break;
       default:
@@ -460,16 +460,16 @@ function_f7dc54d8() {
 
 pap_chunk_big_rune_on() {
   switch (self.prefabname) {
-    case # "engine_room_pap_location":
+    case #"engine_room_pap_location":
       var_81731c8e = 4;
       break;
-    case # "stairs_pap_location":
+    case #"stairs_pap_location":
       var_81731c8e = 2;
       break;
-    case # "cargo_pap_location":
+    case #"cargo_pap_location":
       var_81731c8e = 5;
       break;
-    case # "poop_deck_pap_location":
+    case #"poop_deck_pap_location":
       var_81731c8e = 3;
       break;
   }
@@ -482,16 +482,16 @@ function_a48b2870() {
     foreach(s_loc in level.s_pap_quest.a_s_locations) {
       if(isDefined(s_loc.unitrigger_stub.pap_machine.var_4a7b80c6) && s_loc.unitrigger_stub.pap_machine.var_4a7b80c6) {
         switch (s_loc.prefabname) {
-          case # "engine_room_pap_location":
+          case #"engine_room_pap_location":
             var_e636ead7 = 1;
             break;
-          case # "stairs_pap_location":
+          case #"stairs_pap_location":
             var_942e881a = 1;
             break;
-          case # "cargo_pap_location":
+          case #"cargo_pap_location":
             var_6a69b27 = 1;
             break;
-          case # "poop_deck_pap_location":
+          case #"poop_deck_pap_location":
             var_2380391d = 1;
             break;
         }
@@ -547,16 +547,16 @@ function_a48b2870() {
     }
   } else if(isDefined(level.pap_machine) && !(isDefined(level.var_a5340531) && level.var_a5340531) && !(isDefined(level.var_a8626e72) && level.var_a8626e72)) {
     switch (level.pap_machine.prefabname) {
-      case # "engine_room_pap_location":
+      case #"engine_room_pap_location":
         var_81731c8e = 13;
         break;
-      case # "stairs_pap_location":
+      case #"stairs_pap_location":
         var_81731c8e = 2;
         break;
-      case # "cargo_pap_location":
+      case #"cargo_pap_location":
         var_81731c8e = 15;
         break;
-      case # "poop_deck_pap_location":
+      case #"poop_deck_pap_location":
         var_81731c8e = 9;
         break;
     }
@@ -571,16 +571,16 @@ function_a48b2870() {
 
 pap_machine_rune_on() {
   switch (self.prefabname) {
-    case # "engine_room_pap_location":
+    case #"engine_room_pap_location":
       var_81731c8e = 4;
       break;
-    case # "stairs_pap_location":
+    case #"stairs_pap_location":
       var_81731c8e = 2;
       break;
-    case # "cargo_pap_location":
+    case #"cargo_pap_location":
       var_81731c8e = 5;
       break;
-    case # "poop_deck_pap_location":
+    case #"poop_deck_pap_location":
       var_81731c8e = 3;
       break;
   }

@@ -1612,16 +1612,16 @@ function_24a38427() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn_marauder":
+        case #"spawn_marauder":
           zm_devgui::spawn_archetype("<dev string:x22c>");
           break;
-        case # "spawn_destroyer":
+        case #"spawn_destroyer":
           zm_devgui::spawn_archetype("<dev string:x250>");
           break;
-        case # "kill":
+        case #"kill":
           zm_devgui::kill_archetype(#"gladiator");
           break;
-        case # "spread":
+        case #"spread":
           if(getdvarint(#"ai_debugzigzag", 0)) {
             setDvar(#"ai_debugzigzag", 0);
           } else {
@@ -1629,15 +1629,15 @@ function_24a38427() {
           }
 
           break;
-        case # "attach_left":
+        case #"attach_left":
           break;
-        case # "detach_left":
+        case #"detach_left":
           gladiators[0] hidepart("<dev string:x275>", "<dev string:x287>", 1);
           name = getpartname(gladiators[0], 83);
           break;
-        case # "attach_right":
+        case #"attach_right":
           break;
-        case # "detach_right":
+        case #"detach_right":
           gladiators[0] hidepart("<dev string:x2ae>", "<dev string:x287>", 1);
           break;
         default:

@@ -464,21 +464,21 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_64b8a356ba686f7b":
+    case #"hash_64b8a356ba686f7b":
       level flag::set(#"hash_7d72f2dda7a4104e");
       level flag::set("<dev string:x226>");
       break;
-    case # "hash_4cbd866bd8931c8a":
+    case #"hash_4cbd866bd8931c8a":
       level thread function_ce636e();
       level flag::set(#"player_has_both_fuse");
       break;
-    case # "hash_72b6d8c2e2e976a3":
+    case #"hash_72b6d8c2e2e976a3":
       var_dfe526e8 = function_a1ef346b();
 
       foreach(player in var_dfe526e8) {
         player function_bc82f900(#"hash_19e74997cb877a27");
       }
-    case # "spawn_fuse":
+    case #"spawn_fuse":
       var_dfe526e8 = function_a1ef346b();
 
       foreach(player in var_dfe526e8) {

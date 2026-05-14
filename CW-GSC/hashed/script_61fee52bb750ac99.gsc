@@ -37,9 +37,9 @@ function global_submix() {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "hash_65e6eae762f128ac":
+    case #"hash_65e6eae762f128ac":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 
@@ -70,52 +70,52 @@ function function_7edafa59(str_msg, n_delay) {
   level.var_41fc1341 = str_msg;
 
   switch (str_msg) {
-    case # "23.0_napalm_ending":
-    case # "hash_80d6e8de9a9b724":
-    case # "hash_fa148e8ff49700b":
-    case # "3.0_ruins_1":
-    case # "hash_14551414b13cbe8f":
-    case # "hash_1d1e507e9e90544e":
-    case # "12.0_reset_2":
-    case # "17.0_door_3":
-    case # "11.0_lab":
-    case # "hash_362faeba3d857051":
-    case # "6.0_reset_1":
-    case # "7.0_paddy_2":
-    case # "hash_434ffcd66b6b2766":
-    case # "8.0_ruin_2":
-    case # "hash_50c83da96c91915f":
-    case # "9.0_zombies":
-    case # "1.0_intro":
-    case # "13.0_paddy_3":
-    case # "hash_569fd9d5a21b5d1e":
-    case # "hash_61febcbde8b3db9b":
-    case # "20.0_reset_3":
-    case # "2.0_paddy_1":
-    case # "14.0_ruin_3":
+    case #"23.0_napalm_ending":
+    case #"hash_80d6e8de9a9b724":
+    case #"hash_fa148e8ff49700b":
+    case #"3.0_ruins_1":
+    case #"hash_14551414b13cbe8f":
+    case #"hash_1d1e507e9e90544e":
+    case #"12.0_reset_2":
+    case #"17.0_door_3":
+    case #"11.0_lab":
+    case #"hash_362faeba3d857051":
+    case #"6.0_reset_1":
+    case #"7.0_paddy_2":
+    case #"hash_434ffcd66b6b2766":
+    case #"8.0_ruin_2":
+    case #"hash_50c83da96c91915f":
+    case #"9.0_zombies":
+    case #"1.0_intro":
+    case #"13.0_paddy_3":
+    case #"hash_569fd9d5a21b5d1e":
+    case #"hash_61febcbde8b3db9b":
+    case #"20.0_reset_3":
+    case #"2.0_paddy_1":
+    case #"14.0_ruin_3":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "hash_7b78e5b141bb90d8":
+    case #"hash_7b78e5b141bb90d8":
       music::setmusicstate("6.0_reset_1", undefined, n_delay);
       break;
-    case # "hash_249b49c4ad232fc9":
+    case #"hash_249b49c4ad232fc9":
       music::setmusicstate("12.0_reset_2", undefined, n_delay);
       break;
-    case # "memory_3_end":
+    case #"memory_3_end":
       music::setmusicstate("20.0_reset_3", undefined, n_delay);
       break;
-    case # "hash_47f34399f2eee69b":
+    case #"hash_47f34399f2eee69b":
       break;
-    case # "hash_20f2cf8ecfe3ec4f":
+    case #"hash_20f2cf8ecfe3ec4f":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "11.3_window_stinger_3":
-    case # "11.2_window_stinger_2":
-    case # "11.1_window_stinger_1":
+    case #"11.3_window_stinger_3":
+    case #"11.2_window_stinger_2":
+    case #"11.1_window_stinger_1":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "deactivate_21.0_crazy_doors":
-    case # "deactivate_3.0_ruins_1":
+    case #"deactivate_21.0_crazy_doors":
+    case #"deactivate_3.0_ruins_1":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -128,22 +128,22 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "1.0_intro":
+    case #"1.0_intro":
       snd::client_msg(#"musictrack_cp_prisoner_1");
       break;
-    case # "2.0_paddy_1":
+    case #"2.0_paddy_1":
       snd::client_msg(#"musictrack_cp_prisoner_2");
       break;
-    case # "3.0_ruins_1":
+    case #"3.0_ruins_1":
       snd::client_msg(#"musictrack_cp_prisoner_3");
       break;
-    case # "7.0_paddy_2":
+    case #"7.0_paddy_2":
       snd::client_msg(#"musictrack_cp_prisoner_4");
       break;
-    case # "9.0_zombies":
+    case #"9.0_zombies":
       snd::client_msg(#"musictrack_cp_prisoner_5");
       break;
-    case # "13.0_paddy_3":
+    case #"13.0_paddy_3":
       snd::client_msg(#"musictrack_cp_prisoner_6");
       break;
   }
@@ -155,19 +155,19 @@ function function_62dfea3e(location) {
   emi_allruns_stop();
 
   switch (location) {
-    case # "day":
+    case #"day":
       thread emi_allruns_play();
       thread emi_day_play();
       thread function_b15828b6();
       break;
-    case # "night":
+    case #"night":
       thread emi_allruns_play();
       thread emi_night_play();
       thread function_1ac5a394();
       break;
-    case # "bunker":
+    case #"bunker":
       break;
-    case # "lab":
+    case #"lab":
       break;
     default:
       assertmsg("<dev string:x8d>");
@@ -302,10 +302,10 @@ function function_a632951b(choice) {
   wait 0.5;
 
   switch (choice) {
-    case # "obey":
+    case #"obey":
       snd::play("evt_obey", player);
       break;
-    case # "disobey":
+    case #"disobey":
       snd::play("evt_disobey", player);
       break;
   }
@@ -381,13 +381,13 @@ function rice_paddies_2_end() {
 
 function function_f86833a(visit) {
   switch (visit) {
-    case # "first":
+    case #"first":
       snd::client_msg("rice_paddies_bc_1");
       break;
-    case # "second":
+    case #"second":
       snd::client_msg("rice_paddies_bc_2");
       break;
-    case # "third":
+    case #"third":
       snd::client_msg("rice_paddies_bc_3");
       break;
     default:
@@ -803,25 +803,25 @@ function function_d4255748() {
 
 function function_1302e69b(line) {
   switch (line) {
-    case # "hash_50e76364eb487ee7":
+    case #"hash_50e76364eb487ee7":
       snd::client_msg("hallway_voice_1");
       break;
-    case # "hash_50e70b64eb47e95f":
+    case #"hash_50e70b64eb47e95f":
       snd::client_msg("hallway_voice_2");
       break;
-    case # "hash_52016a64ec381281":
+    case #"hash_52016a64ec381281":
       snd::client_msg("hallway_voice_3");
       break;
-    case # "hash_299931c6bee06b56":
+    case #"hash_299931c6bee06b56":
       snd::client_msg("hallway_voice_4");
       break;
-    case # "hash_6574041af1ef9d8b":
+    case #"hash_6574041af1ef9d8b":
       snd::client_msg("hallway_voice_5");
       break;
-    case # "hash_5c474edbfa219fbb":
+    case #"hash_5c474edbfa219fbb":
       snd::client_msg("hallway_voice_6");
       break;
-    case # "hash_2e9614d78554ddd6":
+    case #"hash_2e9614d78554ddd6":
       snd::client_msg("hallway_voice_7");
       break;
     default:

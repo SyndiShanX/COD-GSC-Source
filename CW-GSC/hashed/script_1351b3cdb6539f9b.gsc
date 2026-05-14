@@ -379,10 +379,10 @@ function function_2d527091(var_a4084657) {
   }
 
   switch (var_a4084657) {
-    case # "flag_caves_backtrack_blocker":
+    case #"flag_caves_backtrack_blocker":
       level flag::set("flag_backtrack_blocker_caves");
       break;
-    case # "flag_village_backtrack_blocker":
+    case #"flag_village_backtrack_blocker":
       foreach(item in level.village_blocker) {
         item show();
         item solid();
@@ -390,7 +390,7 @@ function function_2d527091(var_a4084657) {
 
       level flag::set("flag_backtrack_blocker_village");
       break;
-    case # "flag_sniper_overlook_backtrack_blocker":
+    case #"flag_sniper_overlook_backtrack_blocker":
       foreach(item in level.sniper_overlook_blocker) {
         item show();
         item solid();
@@ -398,7 +398,7 @@ function function_2d527091(var_a4084657) {
 
       level flag::set("flag_backtrack_blocker_sniper_overlook");
       break;
-    case # "flag_rat_tunnels_backtrack_blocker":
+    case #"flag_rat_tunnels_backtrack_blocker":
       a_ents = [];
       a_ents[#"hatch"] = getent("rat_tunnel_hatch", "targetname");
       level thread scene::play("scene_pri_rat_tunnel_hatch_close", a_ents);
@@ -1016,19 +1016,19 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
     foreach(ent in door_struct.linked_ents) {
       if(isDefined(ent.script_noteworthy)) {
         switch (ent.script_noteworthy) {
-          case # "door_left":
+          case #"door_left":
             door_struct.door_left = ent;
             break;
-          case # "door_right":
+          case #"door_right":
             door_struct.door_right = ent;
             break;
-          case # "hash_474cd81e3615d473":
+          case #"hash_474cd81e3615d473":
             door_struct.door_frame = ent;
             break;
-          case # "hash_7d5f05ba8b4de0a4":
+          case #"hash_7d5f05ba8b4de0a4":
             door_struct.var_113d9d43 = ent;
             break;
-          case # "hash_1d188472b888f844":
+          case #"hash_1d188472b888f844":
             if(isDefined(var_f1096822)) {
               if(isDefined(ent.script_parameters) && ent.script_parameters == "door_light_script_model") {
                 ent delete();
@@ -1051,11 +1051,11 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
             }
 
             break;
-          case # "door_interact":
+          case #"door_interact":
             door_struct.door_interact = ent;
             door_struct thread function_736b8a03(1);
             break;
-          case # "hash_4e931f37285562af":
+          case #"hash_4e931f37285562af":
             if(isDefined(var_f1096822)) {
               if(isDefined(ent)) {
                 ent delete();
@@ -1168,13 +1168,13 @@ function function_feb24b1d() {
 
 function function_83641a8a(dvar) {
   switch (dvar.value) {
-    case # "0":
+    case #"0":
       if(isDefined(level.var_86275d63)) {
         function_2ff69488();
       }
 
       break;
-    case # "1":
+    case #"1":
       if(!isDefined(level.var_86275d63)) {
         thread function_dcd92707();
       }
@@ -1421,7 +1421,7 @@ function function_7826a351(dvar) {
   setDvar(#"hash_74ce220f2ffe031d", "<dev string:x1143>");
 
   switch (dvar.value) {
-    case # "0":
+    case #"0":
       world.var_7f7d3c51 = undefined;
 
       if(isDefined(level.skipto_current_objective[0])) {
@@ -1429,7 +1429,7 @@ function function_7826a351(dvar) {
       }
 
       break;
-    case # "1":
+    case #"1":
       world.var_7f7d3c51 = 1;
 
       foreach(struct in level.var_731c10af.paths) {
@@ -1441,7 +1441,7 @@ function function_7826a351(dvar) {
       }
 
       break;
-    case # "2":
+    case #"2":
       world.var_7f7d3c51 = 1;
 
       foreach(struct in level.var_731c10af.paths) {
@@ -1449,7 +1449,7 @@ function function_7826a351(dvar) {
       }
 
       break;
-    case # "3":
+    case #"3":
       break;
     default:
       break;
@@ -1460,9 +1460,9 @@ function function_df5f0267(dvar) {
   setDvar(#"hash_127da39afb1a835c", "<dev string:xe2>");
 
   switch (dvar.value) {
-    case # "0":
+    case #"0":
       break;
-    case # "1":
+    case #"1":
       if(isDefined(world.var_7f7d3c51) && world.var_7f7d3c51 == 1) {
         foreach(struct in level.var_731c10af.paths) {
           function_e106e062(struct.str, world.var_94e99af[struct.str]);
@@ -1617,7 +1617,7 @@ function force_weapon_loadout(area, visit) {
   var_c41ecc2d = getweapon(#"null_offhand_primary");
 
   switch (area) {
-    case # "rice_paddies":
+    case #"rice_paddies":
       if(visit == 0) {
         weapon = getweapon(#"hash_32454fc6213eedd6");
       }
@@ -1634,20 +1634,20 @@ function force_weapon_loadout(area, visit) {
       }
 
       break;
-    case # "rice_paddies_4":
-    case # "rice_paddies_2":
-    case # "rice_paddies_3":
-    case # "rice_paddies_1":
-    case # "intro":
+    case #"rice_paddies_4":
+    case #"rice_paddies_2":
+    case #"rice_paddies_3":
+    case #"rice_paddies_1":
+    case #"intro":
       weapon = getweapon(#"hash_32454fc6213eedd6");
       break;
-    case # "jungle_path":
-    case # "middle_paths_1":
-    case # "middle_paths_2":
-    case # "middle_paths_3":
-    case # "jungle_path_3":
-    case # "jungle_path_2":
-    case # "jungle_path_1":
+    case #"jungle_path":
+    case #"middle_paths_1":
+    case #"middle_paths_2":
+    case #"middle_paths_3":
+    case #"jungle_path_3":
+    case #"jungle_path_2":
+    case #"jungle_path_1":
       if(isDefined(world.mapdata[level.missionid][#"transient"].var_2e7c022f) && !function_9e730655()) {
         savegame::function_7396472d();
         weapons = level.player getweaponslist();
@@ -1663,42 +1663,42 @@ function force_weapon_loadout(area, visit) {
       }
 
       break;
-    case # "sniper_overlook":
+    case #"sniper_overlook":
       weapon = getweapon(#"hash_4ff481a4f55ed901");
       weapon2 = getweapon(#"hash_74399c5b0d6971e1");
       thread function_36b02bca();
       break;
-    case # "village":
+    case #"village":
       weapon = getweapon(#"pistol_semiauto_t9");
       weapon2 = getweapon(#"hash_4ff481a4f55ed901");
       thread function_36b02bca();
       break;
-    case # "caves":
+    case #"caves":
       weapon = getweapon(#"hash_165cf52ce418f5a1");
       weapon2 = getweapon(#"shotgun_pump_t9");
       thread function_36b02bca();
       break;
-    case # "hash_1758bde589c2e32c":
+    case #"hash_1758bde589c2e32c":
       weapon = getweapon(#"hash_32454fc6213eedd6");
       var_3054232d = 1;
       break;
-    case # "rat_tunnels":
+    case #"rat_tunnels":
       weapon = getweapon(#"pistol_semiauto_t9");
       thread function_36b02bca();
       var_3054232d = 1;
       break;
-    case # "dev_memory_2_disobey":
-    case # "dev_memory_3_end":
-    case # "dev_infinite_hallway_loop_2":
-    case # "hash_38adaaa11a0b5b61":
-    case # "hash_38adaba11a0b5d14":
-    case # "dev_memory_3_disobey":
-    case # "memory_3":
-    case # "memory_2":
-    case # "memory_1":
-    case # "memory_4":
-    case # "dev_memory_1_disobey":
-    case # "dev_memory_3_disobey_end":
+    case #"dev_memory_2_disobey":
+    case #"dev_memory_3_end":
+    case #"dev_infinite_hallway_loop_2":
+    case #"hash_38adaaa11a0b5b61":
+    case #"hash_38adaba11a0b5d14":
+    case #"dev_memory_3_disobey":
+    case #"memory_3":
+    case #"memory_2":
+    case #"memory_1":
+    case #"memory_4":
+    case #"dev_memory_1_disobey":
+    case #"dev_memory_3_disobey_end":
       weapon = getweapon(#"hash_32454fc6213eedd6");
       var_3054232d = 1;
       break;
@@ -2045,22 +2045,22 @@ function function_48926a5f(var_142cfe56) {
   var_ee8d70e4 = [];
 
   switch (var_142cfe56) {
-    case # "hash_464e4a9fe80d039b":
+    case #"hash_464e4a9fe80d039b":
       var_ee8d70e4[0] = "vox_cp_prsn_15000_adlr_thisbetterfucki_56";
       var_ee8d70e4[1] = util::function_a1a0fe0c("vox_cp_prsn_15000_park_weredefinitelyi_e2", util::function_3ac6fa36("vox_cp_prsn_15000_lazr_doyouthinkhesus_b6", "vox_cp_prsn_15000_lazr_doyouthinkshesu_29", "vox_cp_prsn_15000_lazr_doyouthinktheys_30"), util::function_3ac6fa36("vox_cp_prsn_15000_sims_iwonderifheshav_b8", "vox_cp_prsn_15000_sims_iwonderifshesha_26", "vox_cp_prsn_15000_sims_iwonderiftheyre_0d"));
       var_ee8d70e4[2] = util::function_3ac6fa36("vox_cp_prsn_15000_adlr_forhissakeisure_2e", "vox_cp_prsn_15000_adlr_fortheirsakeisu_06", "vox_cp_prsn_15000_adlr_fortheirsakeisu_06");
       break;
-    case # "hash_464e4b9fe80d054e":
+    case #"hash_464e4b9fe80d054e":
       var_ee8d70e4[0] = util::function_3ac6fa36("vox_cp_prsn_15100_adlr_howmanyinjectio_de", "vox_cp_prsn_15100_adlr_howmanyinjectio_d9", "vox_cp_prsn_15100_adlr_howmanyinjectio_b6");
       var_ee8d70e4[1] = util::function_a1a0fe0c("vox_cp_prsn_15100_park_theprimatetrial_d3", "vox_cp_prsn_15100_lazr_hereaccordingto_fe", "vox_cp_prsn_15100_sims_idontknowiguess_42");
       var_ee8d70e4[2] = "vox_cp_prsn_15100_adlr_wehavetogetbell_5a";
       break;
-    case # "hash_464e4c9fe80d0701":
+    case #"hash_464e4c9fe80d0701":
       var_ee8d70e4[0] = "vox_cp_prsn_15200_sims_ibroughtyouacof_40";
       var_ee8d70e4[1] = util::function_a1a0fe0c("vox_cp_prsn_15200_park_thankyou_a1", "vox_cp_prsn_15200_lazr_thanks_97", "vox_cp_prsn_15200_adlr_thanks_97");
       var_ee8d70e4[2] = util::function_a1a0fe0c("vox_cp_prsn_15200_park_bellsstablestro_95", "vox_cp_prsn_15200_lazr_bellstoughquite_22", "vox_cp_prsn_15200_adlr_bellsholdingupw_06");
       break;
-    case # "hash_464e4d9fe80d08b4":
+    case #"hash_464e4d9fe80d08b4":
       var_ee8d70e4[0] = util::function_a1a0fe0c("vox_cp_prsn_15300_adlr_parkyouseethat_a4", "vox_cp_prsn_15300_adlr_lazaryouseethat_10", "vox_cp_prsn_15300_adlr_simsyouseethat_b2");
       var_ee8d70e4[1] = util::function_a1a0fe0c("vox_cp_prsn_15300_park_what_d3", "vox_cp_prsn_15300_lazr_what_d3", "vox_cp_prsn_15300_sims_what_d3");
       var_ee8d70e4[2] = "vox_cp_prsn_15300_adlr_bellseyeskeepop_88";

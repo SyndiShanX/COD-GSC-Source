@@ -384,12 +384,12 @@ function function_1c058bc5(weapon, means_of_death) {
   }
 
   switch (weapon.name) {
-    case # "ring_of_fire_5":
-    case # "ring_of_fire_4":
-    case # "ring_of_fire_3":
-    case # "ring_of_fire_2":
-    case # "ring_of_fire_1":
-    case # "ring_of_fire":
+    case #"ring_of_fire_5":
+    case #"ring_of_fire_4":
+    case #"ring_of_fire_3":
+    case #"ring_of_fire_2":
+    case #"ring_of_fire_1":
+    case #"ring_of_fire":
       return 1;
     default:
       return 0;
@@ -439,26 +439,26 @@ function on_item_pickup(params) {
   }
 
   switch (name) {
-    case # "item_zmquest_tungsten_ww_quest_part_a":
+    case #"item_zmquest_tungsten_ww_quest_part_a":
       level flag::set(#"hash_3b34b6b1b8c07116");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3bb1a97e6bcc", 1);
       level thread function_f9447d48(self);
       level clientfield::set("" + #"hash_45b04d88564a1cd", 0);
       array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_tungsten_darkaether_artifact_1");
       break;
-    case # "item_zmquest_tungsten_ww_quest_part_b":
+    case #"item_zmquest_tungsten_ww_quest_part_b":
       level flag::set(#"hash_377409bcba0102a7");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3eb1a97e70e5", 1);
       level thread function_75bec488(self);
       array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_tungsten_darkaether_artifact_2");
       break;
-    case # "item_zmquest_tungsten_ww_quest_part_c":
+    case #"item_zmquest_tungsten_ww_quest_part_c":
       level flag::set(#"hash_6eaa2d1db393bd70");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3db1a97e6f32", 1);
       level thread function_da57dd7c(self);
       array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_tungsten_darkaether_artifact_3");
       break;
-    case # "ww_axe_gun_melee_t9_item_sr":
+    case #"ww_axe_gun_melee_t9_item_sr":
       level thread ww_pickup_vo(params.item, self);
       array::thread_all(function_a1ef346b(), &zm_intel::collect_intel, #"zmintel_tungsten_requiem_artifact_1");
       break;
@@ -831,7 +831,7 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_649635ef22bf36d8":
+    case #"hash_649635ef22bf36d8":
       level flag::set(#"hash_3b34b6b1b8c07116");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3bb1a97e6bcc", 1);
       level thread function_f9447d48(self);
@@ -844,12 +844,12 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_649638ef22bf3bf1":
+    case #"hash_649638ef22bf3bf1":
       level flag::set(#"hash_377409bcba0102a7");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3eb1a97e70e5", 1);
       level thread function_75bec488(self);
       break;
-    case # "hash_649637ef22bf3a3e":
+    case #"hash_649637ef22bf3a3e":
       level flag::set(#"hash_6eaa2d1db393bd70");
       level zm_ui_inventory::function_7df6bb60(#"hash_2d5a3db1a97e6f32", 1);
       level thread function_da57dd7c(self);

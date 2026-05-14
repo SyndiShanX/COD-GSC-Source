@@ -755,10 +755,10 @@ function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
 
           if(isDefined(inventoryitem)) {
             switch (inventoryitem.itementry.itemtype) {
-              case # "equipment":
+              case #"equipment":
                 player item_inventory::equip_equipment(inventoryitem);
                 break;
-              case # "health":
+              case #"health":
                 player item_inventory::equip_health(inventoryitem);
                 break;
             }

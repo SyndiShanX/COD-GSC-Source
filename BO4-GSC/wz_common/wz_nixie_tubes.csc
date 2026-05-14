@@ -319,13 +319,13 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
           foreach(player in players) {
             if(isDefined(var_4da8e55e.targetname)) {
               switch (var_4da8e55e.targetname) {
-                case # "nixie_tube_1":
+                case #"nixie_tube_1":
                   player.tube1 = (player.tube1 + 1) % 10;
                   break;
-                case # "nixie_tube_2":
+                case #"nixie_tube_2":
                   player.tube2 = (player.tube2 + 1) % 10;
                   break;
-                case # "nixie_tube_3":
+                case #"nixie_tube_3":
                   player.tube3 = (player.tube3 + 1) % 10;
                   break;
               }
@@ -409,13 +409,13 @@ function_a5d20d9b(str_code) {
   });
 
   switch (str_code) {
-    case # "115":
+    case #"115":
       self thread music_ee();
       break;
-    case # "872":
+    case #"872":
       self thread fireworks_ee();
       break;
-    case # "420":
+    case #"420":
       self thread function_1451e44e();
     default:
       break;

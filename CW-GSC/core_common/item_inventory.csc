@@ -808,14 +808,14 @@ function private function_53854c4(localclientnum) {
     data = item_world::function_a7e98a1a(localclientnum);
 
     switch (currentitem.itementry.itemtype) {
-      case # "tactical":
-      case # "scorestreak":
-      case # "equipment":
-      case # "field_upgrade":
-      case # "perk_tier_3":
-      case # "perk_tier_2":
-      case # "perk_tier_1":
-      case # "health":
+      case #"tactical":
+      case #"scorestreak":
+      case #"equipment":
+      case #"field_upgrade":
+      case #"perk_tier_3":
+      case #"perk_tier_2":
+      case #"perk_tier_1":
+      case #"health":
         swap = 1;
         break;
       default:
@@ -830,15 +830,15 @@ function private function_53854c4(localclientnum) {
     return 1;
   } else {
     switch (currentitem.itementry.itemtype) {
-      case # "tactical":
-      case # "weapon":
-      case # "scorestreak":
-      case # "equipment":
-      case # "field_upgrade":
-      case # "perk_tier_3":
-      case # "perk_tier_2":
-      case # "perk_tier_1":
-      case # "health":
+      case #"tactical":
+      case #"weapon":
+      case #"scorestreak":
+      case #"equipment":
+      case #"field_upgrade":
+      case #"perk_tier_3":
+      case #"perk_tier_2":
+      case #"perk_tier_1":
+      case #"health":
         equipdata = 1;
         break;
     }
@@ -1973,7 +1973,7 @@ function function_a243ddd6(localclientnum, itementry) {
   }
 
   switch (itementry.itemtype) {
-    case # "attachment":
+    case #"attachment":
       slotid = function_1415f8f1(localclientnum, itementry);
 
       if(!isDefined(slotid)) {
@@ -1981,19 +1981,19 @@ function function_a243ddd6(localclientnum, itementry) {
       }
 
       return (data.inventory.items[slotid].networkid == 32767);
-    case # "armor":
+    case #"armor":
       return (data.inventory.items[6].networkid == 32767);
-    case # "backpack":
+    case #"backpack":
       return (data.inventory.items[8].networkid == 32767);
-    case # "equipment":
+    case #"equipment":
       return (var_662e1704 || data.inventory.items[7].networkid == 32767);
-    case # "field_upgrade":
+    case #"field_upgrade":
       return (var_662e1704 || data.inventory.items[12].networkid == 32767);
-    case # "tactical":
+    case #"tactical":
       return (var_662e1704 || data.inventory.items[13].networkid == 32767);
-    case # "health":
+    case #"health":
       return (var_662e1704 || data.inventory.items[5].networkid == 32767);
-    case # "weapon":
+    case #"weapon":
       foreach(weaponslotid in item_inventory_util::function_4905dddf()) {
         if(data.inventory.items[weaponslotid].networkid == 32767) {
           return true;
@@ -2001,22 +2001,22 @@ function function_a243ddd6(localclientnum, itementry) {
       }
 
       return false;
-    case # "perk_tier_1":
+    case #"perk_tier_1":
       point = function_4ba8fde(#"hash_383a1390efa15e8a");
       return (var_662e1704 || data.inventory.items[14].networkid == point.id);
-    case # "perk_tier_2":
+    case #"perk_tier_2":
       point = function_4ba8fde(#"hash_383a1390efa15e8a");
       return (var_662e1704 || data.inventory.items[15].networkid == point.id);
-    case # "perk_tier_3":
+    case #"perk_tier_3":
       point = function_4ba8fde(#"hash_383a1390efa15e8a");
       return (var_662e1704 || data.inventory.items[16].networkid == point.id);
-    case # "scorestreak":
+    case #"scorestreak":
       point = function_4ba8fde(#"scorestreak_item_t9");
       return (var_662e1704 || data.inventory.items[17].networkid == point.id);
-    case # "ammo":
-    case # "generic":
-    case # "killstreak":
-    case # "cash":
+    case #"ammo":
+    case #"generic":
+    case #"killstreak":
+    case #"cash":
     default:
       return false;
   }
@@ -2054,35 +2054,35 @@ function function_78ed4455(localclientnum, itementry) {
   data = item_world::function_a7e98a1a(localclientnum);
 
   switch (itementry.itemtype) {
-    case # "armor":
+    case #"armor":
       return 6;
-    case # "backpack":
+    case #"backpack":
       return 8;
-    case # "equipment":
+    case #"equipment":
       if(data.inventory.items[7].networkid == 32767) {
         return 7;
       }
 
       break;
-    case # "field_upgrade":
+    case #"field_upgrade":
       if(data.inventory.items[12].networkid == 32767) {
         return 12;
       }
 
       break;
-    case # "tactical":
+    case #"tactical":
       if(data.inventory.items[13].networkid == 32767) {
         return 13;
       }
 
       break;
-    case # "health":
+    case #"health":
       if(data.inventory.items[5].networkid == 32767) {
         return 5;
       }
 
       break;
-    case # "weapon":
+    case #"weapon":
       foreach(weaponslotid in item_inventory_util::function_4905dddf()) {
         if(data.inventory.items[weaponslotid].networkid == 32767) {
           return weaponslotid;
@@ -2090,25 +2090,25 @@ function function_78ed4455(localclientnum, itementry) {
       }
 
       break;
-    case # "scorestreak":
+    case #"scorestreak":
       if(data.inventory.items[17].networkid == 32767) {
         return 17;
       }
 
       break;
-    case # "perk_tier_1":
+    case #"perk_tier_1":
       if(data.inventory.items[14].networkid == 32767) {
         return 14;
       }
 
       break;
-    case # "perk_tier_2":
+    case #"perk_tier_2":
       if(data.inventory.items[15].networkid == 32767) {
         return 15;
       }
 
       break;
-    case # "perk_tier_3":
+    case #"perk_tier_3":
       if(data.inventory.items[16].networkid == 32767) {
         return 16;
       }
@@ -2963,48 +2963,48 @@ function function_b1136fc8(localclientnum, item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         playSound(localclientnum, #"hash_67fed8a52accbb23", item.origin);
         break;
-      case # "ammo":
+      case #"ammo":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "health":
+      case #"health":
         playSound(localclientnum, #"hash_4d393a136d0df945", item.origin);
         break;
-      case # "equipment":
+      case #"equipment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "field_upgrade":
+      case #"field_upgrade":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "tactical":
+      case #"tactical":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "armor":
+      case #"armor":
         playSound(localclientnum, #"hash_6bd51d5a531ff32", item.origin);
         break;
-      case # "backpack":
+      case #"backpack":
         playSound(localclientnum, #"hash_60e9138ddc9660ed", item.origin);
         break;
-      case # "attachment":
+      case #"attachment":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "quest":
+      case #"quest":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "generic":
+      case #"generic":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "cash":
+      case #"cash":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "perk_tier_3":
-      case # "perk_tier_2":
-      case # "perk_tier_1":
+      case #"perk_tier_3":
+      case #"perk_tier_2":
+      case #"perk_tier_1":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
-      case # "scorestreak":
+      case #"scorestreak":
         playSound(localclientnum, #"fly_drop_generic", item.origin);
         break;
     }
@@ -3030,48 +3030,48 @@ function function_31868137(localclientnum, item) {
     }
 
     switch (item.itementry.itemtype) {
-      case # "weapon":
+      case #"weapon":
         playSound(localclientnum, #"hash_62fabedcce13774c", item.origin);
         break;
-      case # "ammo":
+      case #"ammo":
         playSound(localclientnum, #"fly_pickup_ammo", item.origin);
         break;
-      case # "health":
+      case #"health":
         playSound(localclientnum, #"hash_7cb9f9cf7068ccee", item.origin);
         break;
-      case # "equipment":
+      case #"equipment":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "field_upgrade":
+      case #"field_upgrade":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "tactical":
+      case #"tactical":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "armor":
+      case #"armor":
         playSound(localclientnum, #"fly_pickup_armor", item.origin);
         break;
-      case # "backpack":
+      case #"backpack":
         playSound(localclientnum, #"hash_69949bb7db9ef21e", item.origin);
         break;
-      case # "attachment":
+      case #"attachment":
         playSound(localclientnum, #"hash_48ae9b1190e79fc5", item.origin);
         break;
-      case # "quest":
+      case #"quest":
         playSound(localclientnum, #"hash_5738a0fcb2e4efca", item.origin);
         break;
-      case # "generic":
+      case #"generic":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "cash":
+      case #"cash":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "perk_tier_3":
-      case # "perk_tier_2":
-      case # "perk_tier_1":
+      case #"perk_tier_3":
+      case #"perk_tier_2":
+      case #"perk_tier_1":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
-      case # "scorestreak":
+      case #"scorestreak":
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
     }

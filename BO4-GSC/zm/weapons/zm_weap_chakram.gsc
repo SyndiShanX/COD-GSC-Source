@@ -213,18 +213,18 @@ chop_actor(e_target, leftswing, weapon = level.weaponnone) {
   }
 
   switch (e_target.zm_ai_category) {
-    case # "popcorn":
-    case # "basic":
-    case # "enhanced":
+    case #"popcorn":
+    case #"basic":
+    case #"enhanced":
       n_damage = e_target.health;
       break;
-    case # "heavy":
+    case #"heavy":
       n_damage = int(e_target.maxhealth * 0.2);
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_damage = int(e_target.maxhealth * 0.1);
       break;
-    case # "boss":
+    case #"boss":
       n_damage = 2500;
       break;
   }
@@ -647,15 +647,15 @@ function_96835348(e_target) {
 
     if(isDefined(e_target.zm_ai_category)) {
       switch (e_target.zm_ai_category) {
-        case # "popcorn":
-        case # "basic":
-        case # "enhanced":
+        case #"popcorn":
+        case #"basic":
+        case #"enhanced":
           gibserverutils::gibhead(e_target);
           e_target clientfield::set("" + #"chakram_head_pop_fx", 1);
           n_damage = e_target.health;
           break;
-        case # "heavy":
-        case # "miniboss":
+        case #"heavy":
+        case #"miniboss":
           e_target clientfield::increment("" + #"chakram_throw_special_impact_fx", 1);
           n_damage = 1000;
 
@@ -667,7 +667,7 @@ function_96835348(e_target) {
 
           self.e_seeker.var_8d8b7454[self.e_seeker.var_8d8b7454.size] = e_target;
           break;
-        case # "boss":
+        case #"boss":
           n_damage = 1000;
 
           if(!isDefined(self.e_seeker.var_8d8b7454)) {
@@ -678,7 +678,7 @@ function_96835348(e_target) {
 
           self.e_seeker.var_8d8b7454[self.e_seeker.var_8d8b7454.size] = e_target;
           break;
-        case # "inanimate":
+        case #"inanimate":
           if(!(isDefined(e_target.var_f7f67d2c) && e_target.var_f7f67d2c)) {
             e_target thread function_20d19d65(0.5);
           }
@@ -793,20 +793,20 @@ function_481a494b(var_5f94a2e7) {
 
         if(isDefined(e_target.zm_ai_category)) {
           switch (e_target.zm_ai_category) {
-            case # "popcorn":
-            case # "basic":
-            case # "enhanced":
+            case #"popcorn":
+            case #"basic":
+            case #"enhanced":
               n_damage = 3594;
               break;
-            case # "heavy":
-            case # "miniboss":
+            case #"heavy":
+            case #"miniboss":
               n_damage = 1000;
               break;
-            case # "boss":
+            case #"boss":
               n_damage = 1000;
               var_9a7661ba = 0;
               break;
-            case # "inanimate":
+            case #"inanimate":
               n_damage = 3594;
               var_9a7661ba = 0;
             default:

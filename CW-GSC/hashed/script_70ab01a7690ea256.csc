@@ -31,11 +31,11 @@ function private on_begin(localclientnum, a_params) {
   level.var_4ecf5754 = isDefined(a_params[0]) ? a_params[0] : # "silent_film";
 
   switch (level.var_4ecf5754) {
-    case # "silent_film":
+    case #"silent_film":
       break;
-    case # "hash_5a202c5d6f53d672":
+    case #"hash_5a202c5d6f53d672":
       break;
-    case # "perk_drunk":
+    case #"perk_drunk":
       level thread function_777d7ba2();
       break;
   }
@@ -43,9 +43,9 @@ function private on_begin(localclientnum, a_params) {
 
 function private on_end(localclientnum) {
   switch (level.var_4ecf5754) {
-    case # "silent_film":
+    case #"silent_film":
       break;
-    case # "hash_5a202c5d6f53d672":
+    case #"hash_5a202c5d6f53d672":
       break;
   }
 

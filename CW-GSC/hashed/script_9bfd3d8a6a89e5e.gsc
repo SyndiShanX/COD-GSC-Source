@@ -380,23 +380,23 @@ function function_501ef65d(weapon) {
   wait 0.5;
 
   switch (weapon.weapclass) {
-    case # "pistol":
+    case #"pistol":
       snd::play("fly_bodyshield_reload_pistol");
       wait 0.5;
       break;
-    case # "smg":
+    case #"smg":
       snd::play("fly_bodyshield_reload_smg");
       wait 0.7;
       break;
-    case # "rifle":
+    case #"rifle":
       snd::play("fly_bodyshield_reload_rifle");
       wait 0.7;
       break;
-    case # "sniper":
+    case #"sniper":
       snd::play("fly_bodyshield_reload_smg");
       wait 1;
       break;
-    case # "shotgun":
+    case #"shotgun":
       snd::play("fly_bodyshield_reload_shotgun");
       wait 1;
       break;

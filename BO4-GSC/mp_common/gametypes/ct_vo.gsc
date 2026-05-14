@@ -551,7 +551,7 @@ function_dfd7add4() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "stub":
+      case #"stub":
         break;
     }
 

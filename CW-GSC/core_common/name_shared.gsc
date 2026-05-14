@@ -33,7 +33,7 @@ function initialize_nationality(str_nationality) {
 
 function add_nationality_names(str_nationality) {
   switch (str_nationality) {
-    case # "american":
+    case #"american":
       american_names();
       break;
     default:
@@ -362,22 +362,22 @@ function getrankfromname(name) {
   shortrank = tokens[0];
 
   switch (shortrank) {
-    case # "pvt.":
+    case #"pvt.":
       self.airank = "private";
       break;
-    case # "pfc.":
+    case #"pfc.":
       self.airank = "private";
       break;
-    case # "cpl.":
+    case #"cpl.":
       self.airank = "corporal";
       break;
-    case # "hash_1b74eb18c9f1846d":
+    case #"hash_1b74eb18c9f1846d":
       self.airank = "sergeant";
       break;
-    case # "hash_12acac191dfe13b9":
+    case #"hash_12acac191dfe13b9":
       self.airank = "lieutenant";
       break;
-    case # "cpt.":
+    case #"cpt.":
       self.airank = "captain";
       break;
     default:

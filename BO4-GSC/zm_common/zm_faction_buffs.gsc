@@ -206,55 +206,55 @@ devgui() {
     str_command = getdvarstring(#"hash_443a451d4b2f9de2", "<dev string:x2e0>");
 
     switch (str_command) {
-      case # "bf1":
-      case # "fl1":
-      case # "season1":
-      case # "helmets1":
-      case # "tn1":
-      case # "db1":
+      case #"bf1":
+      case #"fl1":
+      case #"season1":
+      case #"helmets1":
+      case #"tn1":
+      case #"db1":
         foreach(e_player in getplayers()) {
           e_player function_9af806be(level.var_8e9d88b6[str_command]);
         }
 
         break;
-      case # "clear":
+      case #"clear":
         foreach(e_player in getplayers()) {
           e_player function_2a94cd59();
         }
 
         break;
-      case # "player_4_tn1":
-      case # "player_4_fl1":
-      case # "hash_138c6bb93906947e":
-      case # "hash_15ba4b3713a7633c":
-      case # "player_4_bf1":
-      case # "player_2_fl1":
-      case # "player_2_tn1":
-      case # "hash_410061a21976fb0d":
-      case # "player_1_bf1":
-      case # "hash_41e44f4b44ea8a50":
-      case # "player_3_fl1":
-      case # "player_1_tn1":
-      case # "hash_478329f218767aab":
-      case # "player_2_db1":
-      case # "player_3_tn1":
-      case # "hash_4ebf4bdbdeca4671":
-      case # "player_1_db1":
-      case # "player_3_db1":
-      case # "hash_546d41eb20e9ed47":
-      case # "hash_5642f90448974736":
-      case # "player_2_bf1":
-      case # "player_1_fl1":
-      case # "player_3_bf1":
-      case # "player_4_db1":
+      case #"player_4_tn1":
+      case #"player_4_fl1":
+      case #"hash_138c6bb93906947e":
+      case #"hash_15ba4b3713a7633c":
+      case #"player_4_bf1":
+      case #"player_2_fl1":
+      case #"player_2_tn1":
+      case #"hash_410061a21976fb0d":
+      case #"player_1_bf1":
+      case #"hash_41e44f4b44ea8a50":
+      case #"player_3_fl1":
+      case #"player_1_tn1":
+      case #"hash_478329f218767aab":
+      case #"player_2_db1":
+      case #"player_3_tn1":
+      case #"hash_4ebf4bdbdeca4671":
+      case #"player_1_db1":
+      case #"player_3_db1":
+      case #"hash_546d41eb20e9ed47":
+      case #"hash_5642f90448974736":
+      case #"player_2_bf1":
+      case #"player_1_fl1":
+      case #"player_3_bf1":
+      case #"player_4_db1":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         var_afaaaae2 = strtok(str_command, "<dev string:x2e3>")[2];
         function_c1ccd7f3(&function_9af806be, n_player, level.var_8e9d88b6[var_afaaaae2]);
         break;
-      case # "player_3_clear":
-      case # "player_2_clear":
-      case # "player_1_clear":
-      case # "player_4_clear":
+      case #"player_3_clear":
+      case #"player_2_clear":
+      case #"player_1_clear":
+      case #"player_4_clear":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         function_c1ccd7f3(&function_2a94cd59, n_player);
         break;

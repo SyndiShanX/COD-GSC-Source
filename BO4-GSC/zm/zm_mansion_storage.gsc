@@ -245,19 +245,19 @@ function_34f6d80a() {
 
 function_4e14c2d7(var_a276c861) {
   switch (level.var_969e8ac2.var_c0ceb69c) {
-    case # "east":
+    case #"east":
       level.var_969e8ac2 thread function_941b297c(#"east");
       level.var_25bdf5fd = level.var_44c19f1a;
       break;
-    case # "west":
+    case #"west":
       level.var_969e8ac2 thread function_941b297c(#"west");
       level.var_25bdf5fd = level.var_d1e98ce7;
       break;
-    case # "hash_2b73105e32379a57":
+    case #"hash_2b73105e32379a57":
       level.var_969e8ac2 thread function_46348c75();
       level.var_25bdf5fd = level.var_d1e98ce7;
       break;
-    case # "hash_1184db7e6252576":
+    case #"hash_1184db7e6252576":
       return;
     default:
       break;
@@ -819,19 +819,19 @@ function_2b75135a(player) {
 
 function_cc012e8d(player) {
   switch (self.stub.str_elixir) {
-    case # "zm_bgb_ctrl_z":
+    case #"zm_bgb_ctrl_z":
       str_prompt = zm_utility::function_d6046228(#"hash_620d7c84d23fd049", #"hash_6daedc8fd5a061d7");
       self sethintstringforplayer(player, str_prompt);
       break;
-    case # "zm_bgb_in_plain_sight":
+    case #"zm_bgb_in_plain_sight":
       str_prompt = zm_utility::function_d6046228(#"hash_1b7e7af38a69fb33", #"hash_47ec1221d6ee9799");
       self sethintstringforplayer(player, str_prompt);
       break;
-    case # "zm_bgb_phantom_reload":
+    case #"zm_bgb_phantom_reload":
       str_prompt = zm_utility::function_d6046228(#"hash_31c6885bdf2cb06", #"hash_6517a92891b8b0a2");
       self sethintstringforplayer(player, str_prompt);
       break;
-    case # "zm_bgb_sword_flay":
+    case #"zm_bgb_sword_flay":
       str_prompt = zm_utility::function_d6046228(#"hash_39b5786a03c2d653", #"hash_ef90f6c4217d879");
       self sethintstringforplayer(player, str_prompt);
       break;

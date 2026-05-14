@@ -36,26 +36,26 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "hash_484b8b723a21da55":
+    case #"hash_484b8b723a21da55":
       level.var_77be18d2 = ent;
       thread function_d9013492(ent);
       ent waittill(#"death");
       level.var_77be18d2 = undefined;
       break;
-    case # "hash_10dca2bc3c2e34e":
+    case #"hash_10dca2bc3c2e34e":
       level.var_77be18d2 = ent;
       level flag::set("flg_audio_fav_started");
       thread function_d9013492(ent);
       ent waittill(#"death");
       level.var_77be18d2 = undefined;
       break;
-    case # "hash_1bc644480960a85":
+    case #"hash_1bc644480960a85":
       level.var_47acec0 = ent;
       thread function_ed98c6a7(ent);
       ent waittill(#"death");
       level.var_47acec0 = undefined;
       break;
-    case # "hash_15f9e8ed7a4588e3":
+    case #"hash_15f9e8ed7a4588e3":
       level.var_47acec0 = ent;
       thread function_a2b0a37d(ent);
       ent waittill(#"death");
@@ -73,8 +73,8 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "hash_4f192f4756c79209":
-    case # "$default":
+    case #"hash_4f192f4756c79209":
+    case #"$default":
       break;
     default:
 
@@ -86,54 +86,54 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "audio_level_begin_duck_start":
+    case #"audio_level_begin_duck_start":
       thread function_563a791();
       break;
-    case # "audio_level_begin_duck_stop":
+    case #"audio_level_begin_duck_stop":
       thread function_1cfbed4a();
       break;
-    case # "hash_10de43eaa1582e98":
+    case #"hash_10de43eaa1582e98":
       function_b6407dd4(0);
       break;
-    case # "hash_5261bc976db253b3":
+    case #"hash_5261bc976db253b3":
       thread function_3478ae35();
       break;
-    case # "hash_6010cf0b59441d62":
+    case #"hash_6010cf0b59441d62":
       thread function_82927216();
       break;
-    case # "hash_390a58cb20fbbde2":
+    case #"hash_390a58cb20fbbde2":
       level notify(#"hash_201c2ab5508a84de");
       break;
-    case # "hash_328de70fe2bffcc1":
+    case #"hash_328de70fe2bffcc1":
       function_b6407dd4(1);
       break;
-    case # "hash_4e1c23615a77bd97":
+    case #"hash_4e1c23615a77bd97":
       thread function_c2a390ee();
       break;
-    case # "hash_6452914c3682f6a6":
+    case #"hash_6452914c3682f6a6":
       thread function_3e4f581();
       break;
-    case # "hash_6b212538d2746abd":
+    case #"hash_6b212538d2746abd":
       thread power_on();
       break;
-    case # "hash_1182c9e90f5942f":
+    case #"hash_1182c9e90f5942f":
       thread function_e45db9b2();
       break;
-    case # "audio_table_flip":
+    case #"audio_table_flip":
       thread function_c40d0905();
       break;
-    case # "ending_fade_out":
+    case #"ending_fade_out":
       function_5ea2c6e3("cp_mute_amb", 3);
       function_5ea2c6e3("cp_mute_player", 3);
       break;
-    case # "hash_2dd0c033ce65b1b0":
+    case #"hash_2dd0c033ce65b1b0":
       function_5ea2c6e3("cp_mute_amb", 0);
       function_5ea2c6e3("cp_mute_fly", 0);
       function_5ea2c6e3("cp_mute_player", 0);
       break;
-    case # "hash_84c238741d1aa2":
+    case #"hash_84c238741d1aa2":
       break;
-    case # "hash_6f5b65f13dc8dc7b":
+    case #"hash_6f5b65f13dc8dc7b":
 
       snd::function_81fac19d(snd::function_d78e3644(), "<dev string:x86>");
 
@@ -153,17 +153,17 @@ function private function_f2a2832d(player, msg) {
       function_672403ca("cp_rus_siege_loose_end", 0.8, 1);
       wait 0.8;
       break;
-    case # "hash_4867b267b477d584":
+    case #"hash_4867b267b477d584":
 
       snd::function_81fac19d(snd::function_d78e3644(), "<dev string:x9c>");
 
       break;
-    case # "hash_4d4f51757e9ecc08":
+    case #"hash_4d4f51757e9ecc08":
 
       snd::function_81fac19d(snd::function_d78e3644(), "<dev string:xaf>");
 
       break;
-    case # "hash_56e4ce1949c3104d":
+    case #"hash_56e4ce1949c3104d":
       snd::play("wpn_loose_ends_pistol_fire");
       snd::play("evt_xfx_drone_hit_heartbeat");
 
@@ -173,8 +173,8 @@ function private function_f2a2832d(player, msg) {
       function_672403ca("cp_rus_siege_loose_end", 0, 1);
       function_5ea2c6e3("cp_mute_amb", 0.1);
       break;
-    case # "musictrack_cp_siege_1":
-    case # "musictrack_cp_siege_2":
+    case #"musictrack_cp_siege_1":
+    case #"musictrack_cp_siege_2":
       function_2cca7b47(0, msg);
       break;
     default:
@@ -187,21 +187,21 @@ function private function_f2a2832d(player, msg) {
 
 function private _objective(objective) {
   switch (objective) {
-    case # "infil":
+    case #"infil":
       break;
-    case # "emp_flash":
+    case #"emp_flash":
       break;
-    case # "Courtyard":
+    case #"Courtyard":
       break;
-    case # "catacombs":
+    case #"catacombs":
       break;
-    case # "graveyard":
+    case #"graveyard":
       break;
-    case # "hash_7433baf853004942":
+    case #"hash_7433baf853004942":
       break;
-    case # "looseends":
+    case #"looseends":
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

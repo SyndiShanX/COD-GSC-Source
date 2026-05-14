@@ -374,10 +374,10 @@ function function_63a18814() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4b0f351e219eb41b":
+    case #"hash_4b0f351e219eb41b":
       function_605ea132();
       break;
-    case # "hash_53a8b6448d2d9f11":
+    case #"hash_53a8b6448d2d9f11":
       function_f4e829d6();
       break;
     default:

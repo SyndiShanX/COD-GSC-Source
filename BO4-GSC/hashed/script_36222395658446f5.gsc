@@ -662,7 +662,7 @@ function_d291665f() {
     waitresult = level waittill(#"spin_trap_kill", #"acid_trap_kill", #"fan_trap_kill");
 
     switch (waitresult._notify) {
-      case # "spin_trap_kill":
+      case #"spin_trap_kill":
         if(isDefined(self.var_8d32f494)) {
           self.var_8d32f494++;
 
@@ -675,7 +675,7 @@ function_d291665f() {
         }
 
         break;
-      case # "acid_trap_kill":
+      case #"acid_trap_kill":
         if(isDefined(self.var_78b705d8)) {
           self.var_78b705d8++;
 
@@ -688,7 +688,7 @@ function_d291665f() {
         }
 
         break;
-      case # "fan_trap_kill":
+      case #"fan_trap_kill":
         if(isDefined(self.var_27738b05)) {
           self.var_27738b05++;
 
@@ -942,7 +942,7 @@ function_666a9223() {
 
 function_d89318a3(var_e818669b, var_13de0d8f) {
   switch (var_13de0d8f) {
-    case # "acid trap":
+    case #"acid trap":
       switch (var_e818669b) {
         case 10:
         case 20:
@@ -959,7 +959,7 @@ function_d89318a3(var_e818669b, var_13de0d8f) {
       }
 
       break;
-    case # "spin trap":
+    case #"spin trap":
       switch (var_e818669b) {
         case 10:
         case 20:
@@ -976,7 +976,7 @@ function_d89318a3(var_e818669b, var_13de0d8f) {
       }
 
       break;
-    case # "fan trap":
+    case #"fan trap":
       switch (var_e818669b) {
         case 10:
         case 20:
@@ -1008,22 +1008,22 @@ function_9562e9c1() {
 
 function_cd9397ea(cmd) {
   switch (cmd) {
-    case # "hash_b30f093de3148f5":
+    case #"hash_b30f093de3148f5":
       level thread function_efd25c9();
       return 1;
-    case # "hash_25b76a136a0ab4c8":
+    case #"hash_25b76a136a0ab4c8":
       level thread function_c3861242();
       return 1;
-    case # "hash_3fe16111be57cd0f":
+    case #"hash_3fe16111be57cd0f":
       level thread function_63a03d53();
       return 1;
-    case # "hash_7683c4d00e818d43":
+    case #"hash_7683c4d00e818d43":
       level thread function_cb9f06fb();
       return 1;
-    case # "hash_8f708281a7f98f4":
+    case #"hash_8f708281a7f98f4":
       level thread function_af78dff9();
       return 1;
-    case # "construction":
+    case #"construction":
       level thread function_cac69c4c();
       return 1;
   }

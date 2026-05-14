@@ -23,11 +23,11 @@ function private function_20705e4c(localclientnum) {
     waitresult = self waittill(#"set_invisible", #"set_visible", #"hash_6ab654a4c018818c");
 
     switch (waitresult._notify) {
-      case # "set_invisible":
+      case #"set_invisible":
         self fxclientutils::function_ae92446(localclientnum, self, self.fxdef);
         break;
-      case # "set_visible":
-      case # "hash_6ab654a4c018818c":
+      case #"set_visible":
+      case #"hash_6ab654a4c018818c":
         self fxclientutils::playfxbundle(localclientnum, self, self.fxdef);
         break;
     }

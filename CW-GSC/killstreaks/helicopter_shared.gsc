@@ -1301,8 +1301,8 @@ function heli_damage_monitor(hardpointtype) {
       self.xpgiven = 1;
 
       switch (hardpointtype) {
-        case # "helicopter_comlink":
-        case # "inventory_helicopter_comlink":
+        case #"helicopter_comlink":
+        case #"inventory_helicopter_comlink":
           event = "attack_chopper_shutdown";
 
           if(self.leaving !== 1) {
@@ -1311,21 +1311,21 @@ function heli_damage_monitor(hardpointtype) {
           }
 
           break;
-        case # "supply_drop":
-        case # "supply_drop_combat_robot":
+        case #"supply_drop":
+        case #"supply_drop_combat_robot":
           if(isDefined(helicopter.killstreakweaponname)) {
             switch (helicopter.killstreakweaponname) {
-              case # "tank_robot":
-              case # "ai_tank_drop_marker":
-              case # "inventory_ai_tank_marker":
-              case # "inventory_tank_robot":
-              case # "ai_tank_marker":
+              case #"tank_robot":
+              case #"ai_tank_drop_marker":
+              case #"inventory_ai_tank_marker":
+              case #"inventory_tank_robot":
+              case #"ai_tank_marker":
                 event = "destroyed_helicopter_agr_drop";
                 break;
-              case # "combat_robot_marker":
-              case # "inventory_combat_robot_marker":
-              case # "combat_robot_drop":
-              case # "inventory_combat_robot_drop":
+              case #"combat_robot_marker":
+              case #"inventory_combat_robot_marker":
+              case #"combat_robot_drop":
+              case #"inventory_combat_robot_drop":
                 event = "destroyed_helicopter_giunit_drop";
                 break;
               default:
@@ -1348,9 +1348,9 @@ function heli_damage_monitor(hardpointtype) {
       weaponstatname = #"destroyed";
 
       switch (weapon.name) {
-        case # "tow_turret":
-        case # "tow_turret_drop":
-        case # "auto_tow":
+        case #"tow_turret":
+        case #"tow_turret_drop":
+        case #"auto_tow":
           weaponstatname = #"kills";
           break;
       }
@@ -1360,21 +1360,21 @@ function heli_damage_monitor(hardpointtype) {
       killstreakreference = undefined;
 
       switch (hardpointtype) {
-        case # "helicopter_player_firstperson":
+        case #"helicopter_player_firstperson":
           killstreakreference = "killstreak_helicopter_player_firstperson";
           break;
-        case # "helicopter_x2":
-        case # "helicopter_comlink":
-        case # "helicopter":
-        case # "inventory_helicopter_comlink":
+        case #"helicopter_x2":
+        case #"helicopter_comlink":
+        case #"helicopter":
+        case #"inventory_helicopter_comlink":
           notifystring = #"hash_286f843fea185e5";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
-        case # "supply_drop":
+        case #"supply_drop":
           notifystring = #"hash_3267fdfd0c2b7fdc";
           killstreakreference = "killstreak_supply_drop";
           break;
-        case # "helicopter_guard":
+        case #"helicopter_guard":
           killstreakreference = "killstreak_helicopter_guard";
           break;
       }
@@ -1631,11 +1631,11 @@ function checkhelicoptertag(tagname) {
   if(isDefined(self.model)) {
     if(self.model == "veh_t8_drone_hunter_mp_light") {
       switch (tagname) {
-        case # "tag_engine_left":
+        case #"tag_engine_left":
           return "tag_fx_exhaust2";
-        case # "tag_engine_right":
+        case #"tag_engine_right":
           return "tag_fx_exhaust1";
-        case # "tail_rotor_jnt":
+        case #"tail_rotor_jnt":
           return "tag_fx_tail";
         default:
           break;

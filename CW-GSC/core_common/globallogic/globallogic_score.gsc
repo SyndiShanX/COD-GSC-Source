@@ -378,8 +378,8 @@ function function_24d66e59(inflictor, meansofdeath, victim, attacker, weapon, va
         scoreevents::processscoreevent(scoreevents.var_170b3630, effect.var_4b22e697, victim, effect.var_3d1ed4bd);
 
         switch (scoreevents.var_170b3630) {
-          case # "hash_24b1201b633590c4":
-          case # "hash_55c0e2f8f8f4f342":
+          case #"hash_24b1201b633590c4":
+          case #"hash_55c0e2f8f8f4f342":
             if(isDefined(level.var_b7bc3c75.var_e2298731)) {
               effect.var_4b22e697[[level.var_b7bc3c75.var_e2298731]]();
             }
@@ -764,17 +764,17 @@ function function_84088ec3(var_f801f37e) {
     }
 
     switch (var_f801f37e.name) {
-      case # "gadget_supplypod":
-      case # "nightingale":
-      case # "frag_grenade":
-      case # "land_mine":
-      case # "gadget_jammer":
-      case # "tear_gas":
-      case # "eq_molotov":
-      case # "satchel_charge":
+      case #"gadget_supplypod":
+      case #"nightingale":
+      case #"frag_grenade":
+      case #"land_mine":
+      case #"gadget_jammer":
+      case #"tear_gas":
+      case #"eq_molotov":
+      case #"satchel_charge":
         self stats::function_622feb0d(var_f801f37e.name, #"hash_7bf29fa438d54aad", 1);
         break;
-      case # "special_grenadelauncher_t9":
+      case #"special_grenadelauncher_t9":
         self stats::function_561716e6(var_f801f37e.name, #"multi_kills", 1);
         break;
       default:

@@ -152,9 +152,9 @@ get_guns() {
   foreach(s_weapon in level.zombie_weapons) {
     switch (s_weapon.weapon_classname) {
       case 0:
-      case # "equipment":
-      case # "shield":
-      case # "melee":
+      case #"equipment":
+      case #"shield":
+      case #"melee":
         continue;
     }
 

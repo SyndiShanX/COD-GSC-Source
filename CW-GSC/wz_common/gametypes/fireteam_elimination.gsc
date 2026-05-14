@@ -704,16 +704,16 @@ function private function_18f58ab2(item, player, networkid, itemid, itemcount, i
   pickup = 0;
 
   switch (item.itementry.name) {
-    case # "hash_6ebec4f42d4b01c":
+    case #"hash_6ebec4f42d4b01c":
       pickup = function_dc3115e2(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
-    case # "hash_2ec97717fa7f8ee":
+    case #"hash_2ec97717fa7f8ee":
       pickup = function_a882bcee(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
-    case # "armor_pouch_item_t9":
+    case #"armor_pouch_item_t9":
       pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
-    case # "hash_583f1687cefbd3f3":
+    case #"hash_583f1687cefbd3f3":
       pickup = namespace_234f0efc::function_98942433(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
   }

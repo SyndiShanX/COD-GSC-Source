@@ -279,10 +279,10 @@ function private function_d228e8b0(var_3f94a5b6) {
 
     if(menu == #"zm_gold_align_satellite_hud") {
       switch (waitresult.response) {
-        case # "hash_72b3080b298c200b":
+        case #"hash_72b3080b298c200b":
           var_3f94a5b6.var_fa7400be[self getentitynumber()][4] = 1;
           break;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           var_3f94a5b6.var_fa7400be[self getentitynumber()][5] = 1;
           break;
       }

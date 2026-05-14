@@ -1846,13 +1846,13 @@ zombie_rise_dust_fx(ai_zombie) {
     str_fx = "rise_dust";
   } else {
     switch (self.script_string) {
-      case # "in_water":
+      case #"in_water":
         str_fx = "rise_dust_water";
         break;
-      case # "in_snow":
+      case #"in_snow":
         str_fx = "rise_dust_snow";
         break;
-      case # "in_foliage":
+      case #"in_foliage":
         str_fx = "rise_dust_foliage";
         break;
       default:

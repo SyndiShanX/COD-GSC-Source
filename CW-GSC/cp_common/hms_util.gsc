@@ -378,10 +378,10 @@ function spawn_targetname(str_targetname) {
 
 function set_demeanor(var_5207b7a8) {
   switch (var_5207b7a8) {
-    case # "alert":
-    case # "patrol":
-    case # "combat":
-    case # "cqb":
+    case #"alert":
+    case #"patrol":
+    case #"combat":
+    case #"cqb":
       self ai::set_behavior_attribute("_human_demeanor", var_5207b7a8);
       break;
     default:
@@ -1013,17 +1013,17 @@ function function_2f50100e(var_ce6e52bd, var_c412903e, var_b7925ab5 = "shutoff_a
   self function_9ae1c50();
 
   switch (var_ce6e52bd) {
-    case # "stay_behind":
+    case #"stay_behind":
       var_9bf924b8 = -250;
       var_889e45c = -650;
       var_e5ba320e = -1050;
       break;
-    case # "stay_even":
+    case #"stay_even":
       var_9bf924b8 = 500;
       var_889e45c = 0;
       var_e5ba320e = -500;
       break;
-    case # "stay_ahead":
+    case #"stay_ahead":
       var_9bf924b8 = 1050;
       var_889e45c = 650;
       var_e5ba320e = 250;
@@ -1161,7 +1161,7 @@ function function_b064d2a4(var_6bb4ec43, var_c412903e, var_b7925ab5 = "shutoff_p
   e_player.var_7cb8999 = var_2b536bb3;
 
   switch (var_6bb4ec43) {
-    case # "walk":
+    case #"walk":
       var_133f0647 = 0.5;
       var_b89dea0e = 0.55;
       var_e7783b69 = 0.6;
@@ -1172,7 +1172,7 @@ function function_b064d2a4(var_6bb4ec43, var_c412903e, var_b7925ab5 = "shutoff_p
       var_3ebb2225 = 100;
       var_d67a7d0a = 125;
       break;
-    case # "jog":
+    case #"jog":
       var_133f0647 = 0.6;
       var_b89dea0e = 0.65;
       var_e7783b69 = 0.7;
@@ -1183,7 +1183,7 @@ function function_b064d2a4(var_6bb4ec43, var_c412903e, var_b7925ab5 = "shutoff_p
       var_3ebb2225 = 170;
       var_d67a7d0a = 205;
       break;
-    case # "run":
+    case #"run":
       var_133f0647 = 0.7;
       var_b89dea0e = 0.75;
       var_e7783b69 = 0.8;
@@ -1194,7 +1194,7 @@ function function_b064d2a4(var_6bb4ec43, var_c412903e, var_b7925ab5 = "shutoff_p
       var_3ebb2225 = 240;
       var_d67a7d0a = 285;
       break;
-    case # "sprint":
+    case #"sprint":
       var_133f0647 = 0.8;
       var_b89dea0e = 0.85;
       var_e7783b69 = 0.9;
@@ -1378,7 +1378,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
   self turret::clear_target(0);
 
   switch (var_a5a6c25b) {
-    case # "scripted":
+    case #"scripted":
       if(isDefined(target)) {
         self turret::set_target(target, (0, 0, 0), 0, 1, 1);
       }
@@ -1392,7 +1392,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_9c04d437(1, 0);
       self turret::function_14223170(0);
       break;
-    case # "suspend":
+    case #"suspend":
       self turret::set_target(level.player, (0, 0, 5), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::set_on_target_angle(0.5, 0);
@@ -1402,7 +1402,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_9c04d437(1, 0);
       self turret::function_14223170(0);
       break;
-    case # "miss_apc":
+    case #"miss_apc":
       self turret::set_target(level.vh_escape_apc, (0, 0, 96), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::function_41c79ce4(0, 0);
@@ -1413,7 +1413,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_21827343(0);
       self turret::function_14223170(0);
       break;
-    case # "shoot_apc":
+    case #"shoot_apc":
       self turret::set_target(level.vh_escape_apc, (0, 0, 96), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::function_41c79ce4(0, 0);
@@ -1424,7 +1424,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_21827343(0);
       self turret::function_14223170(0);
       break;
-    case # "miss_player":
+    case #"miss_player":
       self turret::set_target(level.player, (0, 0, 5), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::function_41c79ce4(0, 0);
@@ -1435,7 +1435,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_21827343(0);
       self turret::function_14223170(0);
       break;
-    case # "kill_player":
+    case #"kill_player":
       self turret::set_target(level.player, (0, 0, 5), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::function_41c79ce4(1, 0);
@@ -1446,7 +1446,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_21827343(0);
       self turret::function_14223170(0);
       break;
-    case # "los_player":
+    case #"los_player":
       self turret::set_target(level.player, (0, 0, 5), 0, 1);
       self turret::function_49c3b892(level.player, 0);
       self turret::function_41c79ce4(0, 0);
@@ -1457,7 +1457,7 @@ function function_c21ef1d8(var_a5a6c25b = "shoot_player", target = undefined) {
       self turret::function_21827343(0);
       self turret::function_14223170(0);
       break;
-    case # "shoot_player":
+    case #"shoot_player":
     default:
       self turret::set_target(level.player, (0, 0, 5), 0, 1);
       self turret::function_49c3b892(level.player, 0);
@@ -1574,23 +1574,23 @@ function function_b5da96ca(var_a6be6a4f, var_94e307c = undefined, var_a9cef3d5 =
 function function_cef95010(v_pos, var_53edfe53) {
   if(isDefined(var_53edfe53)) {
     switch (var_53edfe53) {
-      case # "wood":
+      case #"wood":
         str_vfx = "fx9_bul_impact_wood_50cal_xlrg";
         var_2f4dfc87 = "exp_facade_debris_wood";
         break;
-      case # "concrete":
+      case #"concrete":
         str_vfx = "fx9_bul_impact_concrete_strafe_lg";
         var_2f4dfc87 = "exp_facade_debris_concrete";
         break;
-      case # "metal":
+      case #"metal":
         str_vfx = "fx9_bul_impact_metal_strafe_lg";
         var_2f4dfc87 = "exp_facade_debris_metal";
         break;
-      case # "glass":
+      case #"glass":
         str_vfx = "fx9_bul_impact_glass_lg";
         var_2f4dfc87 = "exp_facade_debris_glass";
         break;
-      case # "mannequin":
+      case #"mannequin":
         str_vfx = "fx9_bul_impact_default_50cal_xlrg";
         var_2f4dfc87 = "exp_facade_debris_mannequin";
         break;

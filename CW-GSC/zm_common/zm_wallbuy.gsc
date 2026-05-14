@@ -177,13 +177,13 @@ function on_round_end() {
 
             if(math::cointoss(n_chance)) {
               switch (chalk.trigger.rarity) {
-                case # "green":
+                case #"green":
                   new_rarity = "blue";
                   break;
-                case # "blue":
+                case #"blue":
                   new_rarity = "purple";
                   break;
-                case # "purple":
+                case #"purple":
                 default:
                   new_rarity = "orange";
                   break;
@@ -291,26 +291,26 @@ function function_8183be86() {
 
 function function_6e93c5b2(str_rarity) {
   switch (str_rarity) {
-    case # "resource":
-    case # "none":
-    case # "white":
-    case # "loadout":
+    case #"resource":
+    case #"none":
+    case #"white":
+    case #"loadout":
       return # "hash_673212f5cf031080";
-    case # "green":
-    case # "uncommon":
+    case #"green":
+    case #"uncommon":
       return # "hash_478525848719f211";
-    case # "blue":
-    case # "rare":
+    case #"blue":
+    case #"rare":
       return # "hash_1bf794b5f3fd1b53";
-    case # "purple":
-    case # "epic":
+    case #"purple":
+    case #"epic":
       return # "hash_71b7197253e518d6";
-    case # "yellow":
-    case # "ultra":
-    case # "gold":
-    case # "orange":
-    case # "named":
-    case # "legendary":
+    case #"yellow":
+    case #"ultra":
+    case #"gold":
+    case #"orange":
+    case #"named":
+    case #"legendary":
       return # "hash_6d88d5ee982a7896";
   }
 
@@ -326,13 +326,13 @@ function function_a1a1d2(weapon_name, var_e9040287, item_name, chalk_model, inde
   chalk_model clientfield::set("set_compass_icon", 1);
 
   switch (weapon.weapclass) {
-    case # "mg":
+    case #"mg":
       var_7f9f4eb = 80;
       break;
-    case # "spread":
+    case #"spread":
       var_7f9f4eb = 70;
       break;
-    case # "rifle":
+    case #"rifle":
       if(weapon.issniperweapon) {
         var_7f9f4eb = 90;
       } else if(zm_weapons::is_tactical_rifle(weapon)) {
@@ -442,190 +442,190 @@ function function_d77fb9ee(s_instance) {
     var_de5dab41 = 0;
 
     switch (weapon_name) {
-      case # "knife_loadout":
+      case #"knife_loadout":
         if(!is_true(getgametypesetting(#"hash_55a71b8eec91f064"))) {
           return;
         }
 
         break;
-      case # "ar_accurate_t9":
+      case #"ar_accurate_t9":
         if(!is_true(getgametypesetting(#"hash_9574295c8d1417e"))) {
           return;
         }
 
         break;
-      case # "ar_standard_t9":
+      case #"ar_standard_t9":
         if(!is_true(getgametypesetting(#"hash_21138fb9940856ed"))) {
           return;
         }
 
         break;
-      case # "ar_damage_t9":
+      case #"ar_damage_t9":
         if(!is_true(getgametypesetting(#"hash_197b8b458c4577b9"))) {
           return;
         }
 
         break;
-      case # "launcher_standard_t9":
+      case #"launcher_standard_t9":
         if(!is_true(getgametypesetting(#"hash_325ba7c748b18956"))) {
           return;
         }
 
         break;
-      case # "pistol_burst_t9":
+      case #"pistol_burst_t9":
         if(!is_true(getgametypesetting(#"hash_7d458c697d0c4966"))) {
           return;
         }
 
         break;
-      case # "pistol_revolver_t9":
+      case #"pistol_revolver_t9":
         if(!is_true(getgametypesetting(#"hash_1456b26ab6d295ef"))) {
           return;
         }
 
         break;
-      case # "pistol_semiauto_t9":
+      case #"pistol_semiauto_t9":
         if(!is_true(getgametypesetting(#"hash_7fd1ff1f0b2dc779"))) {
           return;
         }
 
         break;
-      case # "shotgun_fullauto_t9":
+      case #"shotgun_fullauto_t9":
         if(!is_true(getgametypesetting(#"hash_61b10205e83c5849"))) {
           return;
         }
 
         break;
-      case # "shotgun_pump_t9":
+      case #"shotgun_pump_t9":
         if(!is_true(getgametypesetting(#"hash_36996ba5b37104c9"))) {
           return;
         }
 
         break;
-      case # "shotgun_semiauto_t9":
+      case #"shotgun_semiauto_t9":
         if(!is_true(getgametypesetting(#"hash_1b556d0ef1bd7a36"))) {
           return;
         }
 
         break;
-      case # "smg_burst_t9":
+      case #"smg_burst_t9":
         if(!is_true(getgametypesetting(#"hash_4e946885bf06df52"))) {
           return;
         }
 
         break;
-      case # "smg_fastfire_t9":
+      case #"smg_fastfire_t9":
         if(!is_true(getgametypesetting(#"hash_634569782c55f196"))) {
           return;
         }
 
         break;
-      case # "smg_handling_t9":
+      case #"smg_handling_t9":
         if(!is_true(getgametypesetting(#"hash_46d3411097467f2d"))) {
           return;
         }
 
         break;
-      case # "smg_standard_t9":
+      case #"smg_standard_t9":
         if(!is_true(getgametypesetting(#"hash_7e967deb0d6b9649"))) {
           return;
         }
 
         var_492e21a0 = -0.1;
         break;
-      case # "smg_heavy_t9":
+      case #"smg_heavy_t9":
         if(!is_true(getgametypesetting(#"hash_7880919be865d57b"))) {
           return;
         }
 
         break;
-      case # "tr_damagesemi_t9":
+      case #"tr_damagesemi_t9":
         if(!is_true(getgametypesetting(#"hash_10756ba8dff36e5a"))) {
           return;
         }
 
         var_492e21a0 = -0.2;
         break;
-      case # "tr_longburst_t9":
+      case #"tr_longburst_t9":
         if(!is_true(getgametypesetting(#"hash_fb69584de9657e3"))) {
           return;
         }
 
         var_492e21a0 = -0.13;
         break;
-      case # "tr_powerburst_t9":
+      case #"tr_powerburst_t9":
         if(!is_true(getgametypesetting(#"hash_1a5305df17fdcc40"))) {
           return;
         }
 
         break;
-      case # "tr_precisionsemi_t9":
+      case #"tr_precisionsemi_t9":
         if(!is_true(getgametypesetting(#"hash_4cbfbe5e677ce735"))) {
           return;
         }
 
         break;
-      case # "sniper_standard_t9":
+      case #"sniper_standard_t9":
         if(!is_true(getgametypesetting(#"hash_f75e8d54b6ad799"))) {
           return;
         }
 
         break;
-      case # "sniper_powersemi_t9":
+      case #"sniper_powersemi_t9":
         if(!is_true(getgametypesetting(#"hash_430002f66a3fd19b"))) {
           return;
         }
 
         break;
-      case # "sniper_quickscope_t9":
+      case #"sniper_quickscope_t9":
         if(!is_true(getgametypesetting(#"hash_7db8d2ae05b98ba1"))) {
           return;
         }
 
         break;
-      case # "pistol_revolver_t9":
+      case #"pistol_revolver_t9":
         if(!is_true(getgametypesetting(#"hash_1456b26ab6d295ef"))) {
           return;
         }
 
         break;
-      case # "lmg_accurate_t9":
+      case #"lmg_accurate_t9":
         if(!is_true(getgametypesetting(#"hash_276c762aa3f9fb83"))) {
           return;
         }
 
         break;
-      case # "smg_burst_t9":
+      case #"smg_burst_t9":
         if(!is_true(getgametypesetting(#"hash_4e946885bf06df52"))) {
           return;
         }
 
         break;
-      case # "smg_handling_t9":
+      case #"smg_handling_t9":
         if(!is_true(getgametypesetting(#"hash_46d3411097467f2d"))) {
           return;
         }
 
         break;
-      case # "smg_fastfire_t9":
+      case #"smg_fastfire_t9":
         if(!is_true(getgametypesetting(#"hash_634569782c55f196"))) {
           return;
         }
 
         break;
-      case # "sniper_powersemi_t9":
+      case #"sniper_powersemi_t9":
         if(!is_true(getgametypesetting(#"hash_430002f66a3fd19b"))) {
           return;
         }
 
         break;
-      case # "ar_mobility_t9":
+      case #"ar_mobility_t9":
         if(!is_true(getgametypesetting(#"hash_5428069c26ac7a85"))) {
           return;
         }
 
         break;
-      case # "ar_fastfire_t9":
+      case #"ar_fastfire_t9":
         if(!is_true(getgametypesetting(#"hash_3cd4e4f070668ada"))) {
           return;
         }
@@ -1496,19 +1496,19 @@ function is_wallbuy(w_to_check) {
 
 function function_b5992fb1(str_rarity = #"none") {
   switch (str_rarity) {
-    case # "green":
+    case #"green":
       self clientfield::set("wallbuy_ambient_fx", 3);
       break;
-    case # "blue":
+    case #"blue":
       self clientfield::set("wallbuy_ambient_fx", 4);
       break;
-    case # "purple":
+    case #"purple":
       self clientfield::set("wallbuy_ambient_fx", 5);
       break;
-    case # "orange":
+    case #"orange":
       self clientfield::set("wallbuy_ambient_fx", 6);
       break;
-    case # "gold":
+    case #"gold":
       self clientfield::set("wallbuy_ambient_fx", 7);
       break;
     default:
@@ -1519,19 +1519,19 @@ function function_b5992fb1(str_rarity = #"none") {
 
 function function_36eb0acc(str_rarity = #"none") {
   switch (str_rarity) {
-    case # "green":
+    case #"green":
       self clientfield::set("model_rarity_rob", 3);
       break;
-    case # "blue":
+    case #"blue":
       self clientfield::set("model_rarity_rob", 4);
       break;
-    case # "purple":
+    case #"purple":
       self clientfield::set("model_rarity_rob", 5);
       break;
-    case # "orange":
+    case #"orange":
       self clientfield::set("model_rarity_rob", 6);
       break;
-    case # "gold":
+    case #"gold":
       self clientfield::set("model_rarity_rob", 7);
       break;
     default:
@@ -1610,85 +1610,85 @@ function function_d26435e4(wallbuy, rarity = undefined, weapon_name = undefined)
   }
 
   switch (weapon_name) {
-    case # "ar_accurate_t9":
+    case #"ar_accurate_t9":
       str_model = #"p9_zm_chalk_buy_ar_accurate_t9" + function_db435e40(rarity);
       break;
-    case # "ar_damage_t9":
+    case #"ar_damage_t9":
       str_model = #"p9_zm_chalk_buy_ar_damage_t9" + function_db435e40(rarity);
       break;
-    case # "ar_fastfire_t9":
+    case #"ar_fastfire_t9":
       str_model = #"p9_zm_chalk_buy_ar_fastfire_t9" + function_db435e40(rarity);
       break;
-    case # "ar_mobility_t9":
+    case #"ar_mobility_t9":
       str_model = #"p9_zm_chalk_buy_ar_mobility_t9" + function_db435e40(rarity);
       break;
-    case # "ar_standard_t9":
+    case #"ar_standard_t9":
       str_model = #"p9_zm_chalk_buy_ar_standard_t9" + function_db435e40(rarity);
       break;
-    case # "lmg_accurate_t9":
+    case #"lmg_accurate_t9":
       str_model = #"p9_zm_chalk_buy_lmg_accurate_t9" + function_db435e40(rarity);
       break;
-    case # "lmg_light_t9":
+    case #"lmg_light_t9":
       str_model = #"p9_zm_chalk_buy_lmg_light_t9" + function_db435e40(rarity);
       break;
-    case # "lmg_slowfire_t9":
+    case #"lmg_slowfire_t9":
       str_model = #"p9_zm_chalk_buy_lmg_slowfire_t9" + function_db435e40(rarity);
       break;
-    case # "pistol_burst_t9":
+    case #"pistol_burst_t9":
       str_model = #"p9_zm_chalk_buy_pistol_burst_t9" + function_db435e40(rarity);
       break;
-    case # "pistol_revolver_t9":
+    case #"pistol_revolver_t9":
       str_model = #"p9_zm_chalk_buy_pistol_revolver_t9" + function_db435e40(rarity);
       break;
-    case # "pistol_semiauto_t9":
+    case #"pistol_semiauto_t9":
       str_model = #"p9_zm_chalk_buy_pistol_semiauto_t9" + function_db435e40(rarity);
       break;
-    case # "shotgun_fullauto_t9":
+    case #"shotgun_fullauto_t9":
       str_model = #"p9_zm_chalk_buy_shotgun_fullauto_t9" + function_db435e40(rarity);
       break;
-    case # "shotgun_pump_t9":
+    case #"shotgun_pump_t9":
       str_model = #"p9_zm_chalk_buy_shotgun_pump_t9" + function_db435e40(rarity);
       break;
-    case # "shotgun_semiauto_t9":
+    case #"shotgun_semiauto_t9":
       str_model = #"p9_zm_chalk_buy_shotgun_semiauto_t9" + function_db435e40(rarity);
       break;
-    case # "smg_burst_t9":
+    case #"smg_burst_t9":
       str_model = #"p9_zm_chalk_buy_smg_burst_t9" + function_db435e40(rarity);
       break;
-    case # "smg_capacity_t9":
+    case #"smg_capacity_t9":
       str_model = #"p9_zm_chalk_buy_smg_capacity_t9" + function_db435e40(rarity);
       break;
-    case # "smg_fastfire_t9":
+    case #"smg_fastfire_t9":
       str_model = #"p9_zm_chalk_buy_smg_fastfire_t9" + function_db435e40(rarity);
       break;
-    case # "smg_handling_t9":
+    case #"smg_handling_t9":
       str_model = #"p9_zm_chalk_buy_smg_handling_t9" + function_db435e40(rarity);
       break;
-    case # "smg_heavy_t9":
+    case #"smg_heavy_t9":
       str_model = #"p9_zm_chalk_buy_smg_heavy_t9" + function_db435e40(rarity);
       break;
-    case # "smg_standard_t9":
+    case #"smg_standard_t9":
       str_model = #"p9_zm_chalk_buy_smg_standard_t9" + function_db435e40(rarity);
       break;
-    case # "sniper_powersemi_t9":
+    case #"sniper_powersemi_t9":
       str_model = #"p9_zm_chalk_buy_sniper_powersemi_t9" + function_db435e40(rarity);
       break;
-    case # "sniper_standard_t9":
+    case #"sniper_standard_t9":
       str_model = #"p9_zm_chalk_buy_sniper_standard_t9" + function_db435e40(rarity);
       break;
-    case # "tr_damagesemi_t9":
+    case #"tr_damagesemi_t9":
       str_model = #"p9_zm_chalk_buy_tr_damagesemi_t9" + function_db435e40(rarity);
       break;
-    case # "tr_longburst_t9":
+    case #"tr_longburst_t9":
       str_model = #"p9_zm_chalk_buy_tr_longburst_t9" + function_db435e40(rarity);
       break;
-    case # "tr_powerburst_t9":
+    case #"tr_powerburst_t9":
       str_model = #"p9_zm_chalk_buy_tr_powerburst_t9" + function_db435e40(rarity);
       break;
-    case # "tr_precisionsemi_t9":
+    case #"tr_precisionsemi_t9":
       str_model = #"p9_zm_chalk_buy_tr_precisionsemi_t9" + function_db435e40(rarity);
       break;
-    case # "sniper_quickscope_t9":
+    case #"sniper_quickscope_t9":
       str_model = #"p9_zm_chalk_buy_sniper_quickscope_t9" + function_db435e40(rarity);
       break;
     default:
@@ -1701,15 +1701,15 @@ function function_d26435e4(wallbuy, rarity = undefined, weapon_name = undefined)
 
 function private function_db435e40(str_rarity = "white") {
   switch (str_rarity) {
-    case # "green":
+    case #"green":
       return "_uncommon";
-    case # "purple":
+    case #"purple":
       return "_epic";
-    case # "orange":
+    case #"orange":
       return "_legendary";
-    case # "blue":
+    case #"blue":
       return "_rare";
-    case # "gold":
+    case #"gold":
       return "_ultra";
     default:
       return "";

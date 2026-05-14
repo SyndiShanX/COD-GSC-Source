@@ -1762,15 +1762,15 @@ function_421135df() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case # "kill_player":
+      case #"kill_player":
         e_player dodamage(1000, e_player.origin);
         break;
-      case # "restart_tutorial":
+      case #"restart_tutorial":
         level notify(#"combattraining_logic_finished", {
           #success: 1
         });
         break;
-      case # "hash_47b6ee53b0518710":
+      case #"hash_47b6ee53b0518710":
         e_player ct_utils::function_5160be8c();
         e_player dodamage(1000, e_player.origin);
         break;

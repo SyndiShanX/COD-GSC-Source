@@ -775,11 +775,11 @@ function_c9b2e87f(...) {
   waitframe(1);
 
   switch (self.archetype) {
-    case # "bat":
-    case # "catalyst":
-    case # "zombie_dog":
-    case # "zombie":
-    case # "nosferatu":
+    case #"bat":
+    case #"catalyst":
+    case #"zombie_dog":
+    case #"zombie":
+    case #"nosferatu":
       self val::set(#"hash_16bf0b1b6bc69c97", "ignoreall", 1);
       self val::set(#"hash_7e08001e1389be82", "ignoreme", 1);
       self.marked_for_death = 1;
@@ -883,13 +883,13 @@ function_f724358c(e_attacker) {
   self clientfield::set("" + #"hash_1dd40649a6474f30", 1);
 
   switch (self.archetype) {
-    case # "bat":
-    case # "zombie_dog":
+    case #"bat":
+    case #"zombie_dog":
       self function_61b2f057(e_attacker, level.var_74cf08b1);
       break;
-    case # "catalyst":
-    case # "zombie":
-    case # "nosferatu":
+    case #"catalyst":
+    case #"zombie":
+    case #"nosferatu":
       self thread function_ad3de341(e_attacker);
       break;
     default:
@@ -1055,15 +1055,15 @@ function_e5e6e403(...) {
   }
 
   switch (self.archetype) {
-    case # "bat":
-    case # "zombie_dog":
+    case #"bat":
+    case #"zombie_dog":
       self.marked_for_death = 1;
       wait 0.5;
       self function_61b2f057(e_attacker, level.var_74cf08b1);
       break;
-    case # "catalyst":
-    case # "zombie":
-    case # "nosferatu":
+    case #"catalyst":
+    case #"zombie":
+    case #"nosferatu":
       self thread function_ba22c7e1();
       self thread function_6476c708(e_attacker, e_tornado);
       self thread function_a7fcc7db();
@@ -1301,13 +1301,13 @@ function_886f2b8d(...) {
   self clientfield::set("" + #"hash_2ff818c8cb4c17ba", 1);
 
   switch (self.archetype) {
-    case # "bat":
-    case # "catalyst":
-    case # "zombie_dog":
+    case #"bat":
+    case #"catalyst":
+    case #"zombie_dog":
       self function_61b2f057(e_attacker, level.var_4b14202f);
       break;
-    case # "zombie":
-    case # "nosferatu":
+    case #"zombie":
+    case #"nosferatu":
       self.marked_for_death = 1;
       self thread function_9253dc3e(2.2);
       self thread namespace_9ff9f642::slowdown(#"hash_7f87c0765184088f");

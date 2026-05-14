@@ -370,7 +370,7 @@ function function_300dfb68() {
 
     if(cmd != "<dev string:x38>") {
       switch (cmd) {
-        case # "teleport":
+        case #"teleport":
           function_1ecbcf72();
           break;
       }
@@ -392,7 +392,7 @@ function function_4eaed09d() {
 
     if(cmd != "<dev string:x38>") {
       switch (cmd) {
-        case # "test_float":
+        case #"test_float":
           test_float();
           break;
       }
@@ -431,13 +431,13 @@ function zombie_devgui_validation_commands() {
 
     if(cmd != "<dev string:x38>") {
       switch (cmd) {
-        case # "structs":
+        case #"structs":
           thread bunker_entrance_zoned();
           break;
-        case # "spawner":
+        case #"spawner":
           zombie_spawner_validation();
           break;
-        case # "zone_adj":
+        case #"zone_adj":
           if(!isDefined(level.toggle_zone_adjacencies_validation)) {
             level.toggle_zone_adjacencies_validation = 1;
           } else {
@@ -446,9 +446,9 @@ function zombie_devgui_validation_commands() {
 
           thread zone_adjacencies_validation();
           break;
-        case # "zone_paths":
+        case #"zone_paths":
           break;
-        case # "pathing":
+        case #"pathing":
           thread zombie_pathing_validation();
         default:
           break;
@@ -1294,15 +1294,15 @@ function zombie_devgui_think() {
     cmd = getdvarstring(#"zombie_devgui");
 
     switch (cmd) {
-      case # "money":
+      case #"money":
         players = getplayers();
         array::thread_all(players, &zombie_devgui_give_money);
         break;
-      case # "scrap":
+      case #"scrap":
         players = getplayers();
         array::thread_all(players, &function_6de15bb7);
         break;
-      case # "player1_money":
+      case #"player1_money":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1310,7 +1310,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_money":
+      case #"player2_money":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1318,7 +1318,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_money":
+      case #"player3_money":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1326,7 +1326,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_money":
+      case #"player4_money":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1334,11 +1334,11 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "moneydown":
+      case #"moneydown":
         players = getplayers();
         array::thread_all(players, &zombie_devgui_take_money);
         break;
-      case # "player1_moneydown":
+      case #"player1_moneydown":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1346,7 +1346,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_moneydown":
+      case #"player2_moneydown":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1354,7 +1354,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_moneydown":
+      case #"player3_moneydown":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1362,7 +1362,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_moneydown":
+      case #"player4_moneydown":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1370,11 +1370,11 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "ammodown":
+      case #"ammodown":
         players = getplayers();
         array::thread_all(players, &function_dc7312be);
         break;
-      case # "hash_428dbd0a89fc5d32":
+      case #"hash_428dbd0a89fc5d32":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1382,7 +1382,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_119220b211e16ba9":
+      case #"hash_119220b211e16ba9":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1390,7 +1390,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_6cdf097974c7bcd0":
+      case #"hash_6cdf097974c7bcd0":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1398,7 +1398,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_5e281497ef267e37":
+      case #"hash_5e281497ef267e37":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1406,7 +1406,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_59a96f9816430398":
+      case #"hash_59a96f9816430398":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1414,7 +1414,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_423b4f1fbe6391dd":
+      case #"hash_423b4f1fbe6391dd":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1422,7 +1422,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_50580bf75ed9e65e":
+      case #"hash_50580bf75ed9e65e":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1430,7 +1430,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_4e18caaf131ec443":
+      case #"hash_4e18caaf131ec443":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1438,7 +1438,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_1dec476dd3df3678":
+      case #"hash_1dec476dd3df3678":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1446,7 +1446,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_6e595ff08330f5b7":
+      case #"hash_6e595ff08330f5b7":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1454,7 +1454,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_5f82c3562c428cea":
+      case #"hash_5f82c3562c428cea":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1462,7 +1462,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_52e4da7d7d47cf69":
+      case #"hash_52e4da7d7d47cf69":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1470,10 +1470,10 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "health":
+      case #"health":
         array::thread_all(getplayers(), &zombie_devgui_give_health);
         break;
-      case # "player1_health":
+      case #"player1_health":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1481,7 +1481,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_health":
+      case #"player2_health":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1489,7 +1489,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_health":
+      case #"player3_health":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1497,7 +1497,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_health":
+      case #"player4_health":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1505,10 +1505,10 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "minhealth":
+      case #"minhealth":
         array::thread_all(getplayers(), &zombie_devgui_low_health);
         break;
-      case # "player1_minhealth":
+      case #"player1_minhealth":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1516,7 +1516,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_minhealth":
+      case #"player2_minhealth":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1524,7 +1524,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_minhealth":
+      case #"player3_minhealth":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1532,7 +1532,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_minhealth":
+      case #"player4_minhealth":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1540,13 +1540,13 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "ammo":
+      case #"ammo":
         array::thread_all(getplayers(), &zombie_devgui_toggle_ammo);
         break;
-      case # "ignore":
+      case #"ignore":
         array::thread_all(getplayers(), &zombie_devgui_toggle_ignore);
         break;
-      case # "player1_ignore":
+      case #"player1_ignore":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1554,7 +1554,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_ignore":
+      case #"player2_ignore":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1562,7 +1562,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_ignore":
+      case #"player3_ignore":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1570,7 +1570,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_ignore":
+      case #"player4_ignore":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1578,40 +1578,40 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "invul_on":
+      case #"invul_on":
         zombie_devgui_invulnerable(undefined, 1);
         break;
-      case # "invul_off":
+      case #"invul_off":
         zombie_devgui_invulnerable(undefined, 0);
         break;
-      case # "player1_invul_on":
+      case #"player1_invul_on":
         zombie_devgui_invulnerable(0, 1);
         break;
-      case # "player1_invul_off":
+      case #"player1_invul_off":
         zombie_devgui_invulnerable(0, 0);
         break;
-      case # "player2_invul_on":
+      case #"player2_invul_on":
         zombie_devgui_invulnerable(1, 1);
         break;
-      case # "player2_invul_off":
+      case #"player2_invul_off":
         zombie_devgui_invulnerable(1, 0);
         break;
-      case # "player3_invul_on":
+      case #"player3_invul_on":
         zombie_devgui_invulnerable(2, 1);
         break;
-      case # "player3_invul_off":
+      case #"player3_invul_off":
         zombie_devgui_invulnerable(2, 0);
         break;
-      case # "player4_invul_on":
+      case #"player4_invul_on":
         zombie_devgui_invulnerable(3, 1);
         break;
-      case # "player4_invul_off":
+      case #"player4_invul_off":
         zombie_devgui_invulnerable(3, 0);
         break;
-      case # "revive_all":
+      case #"revive_all":
         array::thread_all(getplayers(), &zombie_devgui_revive);
         break;
-      case # "player1_revive":
+      case #"player1_revive":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1619,7 +1619,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_revive":
+      case #"player2_revive":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1627,7 +1627,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_revive":
+      case #"player3_revive":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1635,7 +1635,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_revive":
+      case #"player4_revive":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1643,7 +1643,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player1_kill":
+      case #"player1_kill":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1651,7 +1651,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player2_kill":
+      case #"player2_kill":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1659,7 +1659,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player3_kill":
+      case #"player3_kill":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1667,7 +1667,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "player4_kill":
+      case #"player4_kill":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1675,14 +1675,14 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_7f4d70c7ded8e94a":
+      case #"hash_7f4d70c7ded8e94a":
         if(zm_utility::get_story() === 2) {
           array::random(getplayers()) giveweapon(getweapon(#"homunculus"));
         }
 
         array::thread_all(getplayers(), &function_8d799ebd);
         break;
-      case # "hash_505efa1825e2cb99":
+      case #"hash_505efa1825e2cb99":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1690,7 +1690,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_15233852e3dc3500":
+      case #"hash_15233852e3dc3500":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1698,7 +1698,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_5cb5edc4858d92f7":
+      case #"hash_5cb5edc4858d92f7":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1706,7 +1706,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_6d57ff86c541a5fe":
+      case #"hash_6d57ff86c541a5fe":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1714,10 +1714,10 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_2c320318aed843b2":
+      case #"hash_2c320318aed843b2":
         array::thread_all(getplayers(), &zm_laststand::function_3d685b5f, 100);
         break;
-      case # "hash_72783b08840a3ab7":
+      case #"hash_72783b08840a3ab7":
         players = getplayers();
 
         if(players.size >= 1) {
@@ -1725,7 +1725,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_447712ef48d6ea0":
+      case #"hash_447712ef48d6ea0":
         players = getplayers();
 
         if(players.size >= 2) {
@@ -1733,7 +1733,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_2a15f60adbba0cf5":
+      case #"hash_2a15f60adbba0cf5":
         players = getplayers();
 
         if(players.size >= 3) {
@@ -1741,7 +1741,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "hash_430eb4715f49a5fe":
+      case #"hash_430eb4715f49a5fe":
         players = getplayers();
 
         if(players.size >= 4) {
@@ -1749,108 +1749,108 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "talent_quickrevive":
+      case #"talent_quickrevive":
         level.solo_lives_given = 0;
-      case # "specialty_electriccherry":
-      case # "talent_doubletap":
-      case # "talent_staminup":
-      case # "talent_deadshot":
-      case # "specialty_phdflopper":
-      case # "specialty_fastmeleerecovery":
-      case # "specialty_widowswine":
-      case # "specialty_vultureaid":
-      case # "specialty_showonradar":
-      case # "hash_38c08136902fd553":
-      case # "specialty_additionalprimaryweapon":
+      case #"specialty_electriccherry":
+      case #"talent_doubletap":
+      case #"talent_staminup":
+      case #"talent_deadshot":
+      case #"specialty_phdflopper":
+      case #"specialty_fastmeleerecovery":
+      case #"specialty_widowswine":
+      case #"specialty_vultureaid":
+      case #"specialty_showonradar":
+      case #"hash_38c08136902fd553":
+      case #"specialty_additionalprimaryweapon":
         zombie_devgui_give_perk(cmd);
         break;
-      case # "remove_perks":
+      case #"remove_perks":
         zombie_devgui_take_perks(cmd);
         break;
-      case # "insta_kill":
-      case # "lose_points_team":
-      case # "hash_6e53cf6d1c583d31":
-      case # "naughty_or_nice":
-      case # "hash_75498ace109f55e9":
-      case # "hero_weapon_power":
-      case # "double_points":
-      case # "minigun":
-      case # "carpenter":
-      case # "zmarcade_key":
-      case # "free_perk":
-      case # "extra_lives":
-      case # "tesla":
-      case # "cranked_pause":
-      case # "pack_a_punch":
-      case # "bonus_points_player":
-      case # "lose_perk":
-      case # "hash_3a780f4f7b791f2c":
-      case # "meat_stink":
-      case # "hash_55b98b6e24a3e48e":
-      case # "full_ammo":
-      case # "empty_clip":
-      case # "bonus_points_team":
-      case # "random_weapon":
-      case # "nuke":
-      case # "fire_sale":
-      case # "bonfire_sale":
+      case #"insta_kill":
+      case #"lose_points_team":
+      case #"hash_6e53cf6d1c583d31":
+      case #"naughty_or_nice":
+      case #"hash_75498ace109f55e9":
+      case #"hero_weapon_power":
+      case #"double_points":
+      case #"minigun":
+      case #"carpenter":
+      case #"zmarcade_key":
+      case #"free_perk":
+      case #"extra_lives":
+      case #"tesla":
+      case #"cranked_pause":
+      case #"pack_a_punch":
+      case #"bonus_points_player":
+      case #"lose_perk":
+      case #"hash_3a780f4f7b791f2c":
+      case #"meat_stink":
+      case #"hash_55b98b6e24a3e48e":
+      case #"full_ammo":
+      case #"empty_clip":
+      case #"bonus_points_team":
+      case #"random_weapon":
+      case #"nuke":
+      case #"fire_sale":
+      case #"bonfire_sale":
         zombie_devgui_give_powerup(cmd, 1);
         break;
-      case # "next_extra_lives":
-      case # "next_random_weapon":
-      case # "next_full_ammo":
-      case # "next_lose_perk":
-      case # "hash_6b6c14b0d315d68f":
-      case # "next_zmarcade_key":
-      case # "hash_49f2171f2a5b4c28":
-      case # "next_nuke":
-      case # "next_fire_sale":
-      case # "next_bonus_points_team":
-      case # "next_lose_points_team":
-      case # "next_free_perk":
-      case # "next_bonus_points_player":
-      case # "next_bonfire_sale":
-      case # "next_minigun":
-      case # "next_empty_clip":
-      case # "next_double_points":
-      case # "next_pack_a_punch":
-      case # "next_insta_kill":
-      case # "next_tesla":
-      case # "next_carpenter":
-      case # "next_hero_weapon_power":
-      case # "next_meat_stink":
+      case #"next_extra_lives":
+      case #"next_random_weapon":
+      case #"next_full_ammo":
+      case #"next_lose_perk":
+      case #"hash_6b6c14b0d315d68f":
+      case #"next_zmarcade_key":
+      case #"hash_49f2171f2a5b4c28":
+      case #"next_nuke":
+      case #"next_fire_sale":
+      case #"next_bonus_points_team":
+      case #"next_lose_points_team":
+      case #"next_free_perk":
+      case #"next_bonus_points_player":
+      case #"next_bonfire_sale":
+      case #"next_minigun":
+      case #"next_empty_clip":
+      case #"next_double_points":
+      case #"next_pack_a_punch":
+      case #"next_insta_kill":
+      case #"next_tesla":
+      case #"next_carpenter":
+      case #"next_hero_weapon_power":
+      case #"next_meat_stink":
         zombie_devgui_give_powerup(getsubstr(cmd, 5), 0);
         break;
-      case # "round":
+      case #"round":
         zombie_devgui_goto_round(getdvarint(#"scr_zombie_round", 0));
         break;
-      case # "round_next":
+      case #"round_next":
         zombie_devgui_goto_round(level.round_number + 1);
         break;
-      case # "round_prev":
+      case #"round_prev":
         zombie_devgui_goto_round(level.round_number - 1);
         break;
-      case # "chest_warp":
+      case #"chest_warp":
         array::thread_all(getplayers(), &function_4bb7eb36);
         break;
-      case # "pap_warp":
+      case #"pap_warp":
         array::thread_all(getplayers(), &function_84f0a909);
         break;
-      case # "chest_move":
+      case #"chest_move":
         if(isDefined(level.chest_accessed)) {
           level notify(#"devgui_chest_end_monitor");
           level.var_401aaa92 = 1;
         }
 
         break;
-      case # "chest_never_move":
+      case #"chest_never_move":
         if(isDefined(level.chest_accessed)) {
           level.var_401aaa92 = 0;
           level thread zombie_devgui_chest_never_move();
         }
 
         break;
-      case # "chest":
+      case #"chest":
         if(isDefined(level.zombie_weapons[getweapon(getdvarstring(#"scr_force_weapon"))])) {
           if(isDefined(level.zombie_weapons[getweapon(getdvarstring(#"scr_force_weapon"))].item_entry)) {
             level.var_f83c8dc2 = level.zombie_weapons[getweapon(getdvarstring(#"scr_force_weapon"))].item_entry;
@@ -1858,109 +1858,109 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "give_claymores":
+      case #"give_claymores":
         array::thread_all(getplayers(), &zombie_devgui_give_placeable_mine, getweapon(#"claymore"));
         break;
-      case # "give_bouncingbetties":
+      case #"give_bouncingbetties":
         array::thread_all(getplayers(), &zombie_devgui_give_placeable_mine, getweapon(#"bouncingbetty"));
         break;
-      case # "give_frags":
+      case #"give_frags":
         array::thread_all(getplayers(), &zombie_devgui_give_frags);
         break;
-      case # "give_sticky":
+      case #"give_sticky":
         array::thread_all(getplayers(), &zombie_devgui_give_sticky);
         break;
-      case # "give_monkey":
+      case #"give_monkey":
         array::thread_all(getplayers(), &zombie_devgui_give_monkey);
         break;
-      case # "give_bhb":
+      case #"give_bhb":
         array::thread_all(getplayers(), &zombie_devgui_give_bhb);
         break;
-      case # "give_quantum":
+      case #"give_quantum":
         array::thread_all(getplayers(), &zombie_devgui_give_qed);
         break;
-      case # "give_dolls":
+      case #"give_dolls":
         array::thread_all(getplayers(), &zombie_devgui_give_dolls);
         break;
-      case # "give_emp_bomb":
+      case #"give_emp_bomb":
         array::thread_all(getplayers(), &zombie_devgui_give_emp_bomb);
         break;
-      case # "dog_round":
+      case #"dog_round":
         zombie_devgui_dog_round(1);
         break;
-      case # "dog_round_skip":
+      case #"dog_round_skip":
         zombie_devgui_dog_round_skip();
         break;
-      case # "print_variables":
+      case #"print_variables":
         zombie_devgui_dump_zombie_vars();
         break;
-      case # "pack_current_weapon":
+      case #"pack_current_weapon":
         zombie_devgui_pack_current_weapon();
         break;
-      case # "hash_f9c9f7dd75a4047":
+      case #"hash_f9c9f7dd75a4047":
         function_8c9f2dea();
         break;
-      case # "hash_5605531ad17b5408":
+      case #"hash_5605531ad17b5408":
         function_b7ef4b8();
         break;
-      case # "hash_2dde14d5c2960aea":
+      case #"hash_2dde14d5c2960aea":
         function_9b4d61fa();
         break;
-      case # "hash_465e01a5b9f4f28e":
+      case #"hash_465e01a5b9f4f28e":
         function_cdc3d061();
         break;
-      case # "repack_current_weapon":
+      case #"repack_current_weapon":
         zombie_devgui_repack_current_weapon();
         break;
-      case # "unpack_current_weapon":
+      case #"unpack_current_weapon":
         zombie_devgui_unpack_current_weapon();
         break;
-      case # "hash_72edcaf35bf3346d":
+      case #"hash_72edcaf35bf3346d":
         function_2a5ce9b1(#"white");
         break;
-      case # "hash_62c70a71f6331428":
+      case #"hash_62c70a71f6331428":
         function_2a5ce9b1(#"green");
         break;
-      case # "hash_7067e48773d50cbe":
+      case #"hash_7067e48773d50cbe":
         function_2a5ce9b1(#"blue");
         break;
-      case # "hash_309cf17674ed6d45":
+      case #"hash_309cf17674ed6d45":
         function_2a5ce9b1(#"purple");
         break;
-      case # "hash_166a522b8358b72b":
+      case #"hash_166a522b8358b72b":
         function_2a5ce9b1(#"orange");
         break;
-      case # "hash_3c2b067b1510118c":
+      case #"hash_3c2b067b1510118c":
         function_c8949116();
         break;
-      case # "hash_769c6d03952dd107":
+      case #"hash_769c6d03952dd107":
         function_9d21f44b();
         break;
-      case # "hash_68e9afed4aa9c0dd":
+      case #"hash_68e9afed4aa9c0dd":
         function_e2a97bab();
         break;
-      case # "hash_3f4888627ed06269":
+      case #"hash_3f4888627ed06269":
         function_1a560cfc();
         break;
-      case # "hash_73ecd8731ecdf6b0":
+      case #"hash_73ecd8731ecdf6b0":
         function_c8ee84ba();
         break;
-      case # "hash_49563ad3930e97e4":
+      case #"hash_49563ad3930e97e4":
         function_c83c6fa();
         break;
-      case # "reopt_current_weapon":
+      case #"reopt_current_weapon":
         zombie_devgui_reopt_current_weapon();
         break;
-      case # "weapon_take_all_fallback":
+      case #"weapon_take_all_fallback":
         zombie_devgui_take_weapons(1);
         break;
-      case # "weapon_take_all":
+      case #"weapon_take_all":
         zombie_devgui_take_weapons(0);
         break;
-      case # "weapon_take_current":
+      case #"weapon_take_current":
         zombie_devgui_take_weapon();
         break;
-      case # "power_on":
+      case #"power_on":
         level flag::set("<dev string:xc63>");
         level clientfield::set("<dev string:xc6f>", 1);
         power_trigs = getEntArray("<dev string:xc82>", "<dev string:xc95>");
@@ -1973,7 +1973,7 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "power_off":
+      case #"power_off":
         level flag::clear("<dev string:xc63>");
         level clientfield::set("<dev string:xca3>", 0);
         power_trigs = getEntArray("<dev string:xc82>", "<dev string:xc95>");
@@ -1986,124 +1986,124 @@ function zombie_devgui_think() {
         }
 
         break;
-      case # "zombie_dpad_none":
+      case #"zombie_dpad_none":
         array::thread_all(getplayers(), &zombie_devgui_dpad_none);
         break;
-      case # "zombie_dpad_damage":
+      case #"zombie_dpad_damage":
         array::thread_all(getplayers(), &zombie_devgui_dpad_damage);
         break;
-      case # "zombie_dpad_kill":
+      case #"zombie_dpad_kill":
         array::thread_all(getplayers(), &zombie_devgui_dpad_death);
         break;
-      case # "zombie_dpad_drink":
+      case #"zombie_dpad_drink":
         array::thread_all(getplayers(), &zombie_devgui_dpad_changeweapon);
         break;
-      case # "director_easy":
+      case #"director_easy":
         zombie_devgui_director_easy();
         break;
-      case # "open_sesame":
+      case #"open_sesame":
         zombie_devgui_open_sesame();
         break;
-      case # "allow_fog":
+      case #"allow_fog":
         zombie_devgui_allow_fog();
         break;
-      case # "disable_kill_thread_toggle":
+      case #"disable_kill_thread_toggle":
         zombie_devgui_disable_kill_thread_toggle();
         break;
-      case # "check_kill_thread_every_frame_toggle":
+      case #"check_kill_thread_every_frame_toggle":
         zombie_devgui_check_kill_thread_every_frame_toggle();
         break;
-      case # "kill_thread_test_mode_toggle":
+      case #"kill_thread_test_mode_toggle":
         zombie_devgui_kill_thread_test_mode_toggle();
         break;
-      case # "zombie_failsafe_debug_flush":
+      case #"zombie_failsafe_debug_flush":
         level notify(#"zombie_failsafe_debug_flush");
         break;
-      case # "rat_navmesh":
+      case #"rat_navmesh":
         level thread rat::derriesezombiespawnnavmeshtest(0, 0);
         break;
-      case # "spawn":
+      case #"spawn":
         devgui_zombie_spawn();
         break;
-      case # "spawn_dummy":
+      case #"spawn_dummy":
         function_6f066ef();
         break;
-      case # "spawn_near":
+      case #"spawn_near":
         function_7c17d00f();
         break;
-      case # "spawn_all":
+      case #"spawn_all":
         devgui_all_spawn();
         break;
-      case # "crawler":
+      case #"crawler":
         devgui_make_crawler();
         break;
-      case # "toggle_show_spawn_locations":
+      case #"toggle_show_spawn_locations":
         devgui_toggle_show_spawn_locations();
         break;
-      case # "toggle_show_exterior_goals":
+      case #"toggle_show_exterior_goals":
         devgui_toggle_show_exterior_goals();
         break;
-      case # "draw_traversals":
+      case #"draw_traversals":
         zombie_devgui_draw_traversals();
         break;
-      case # "dump_traversals":
+      case #"dump_traversals":
         function_bbeaa2da();
         break;
-      case # "debug_hud":
+      case #"debug_hud":
         array::thread_all(getplayers(), &devgui_debug_hud);
         break;
-      case # "reverse_carpenter":
+      case #"reverse_carpenter":
         function_f12b8a34();
         break;
-      case # "keyline_always":
+      case #"keyline_always":
         zombie_devgui_keyline_always();
         break;
-      case # "hash_1e51dfcdbebdf936":
+      case #"hash_1e51dfcdbebdf936":
         robotsupportsovercover_manager_();
         break;
-      case # "debug_counts":
+      case #"debug_counts":
         function_92523b12();
         break;
-      case # "hash_604a84ea1690f781":
+      case #"hash_604a84ea1690f781":
         thread function_3a5618f8();
         break;
-      case # "hash_72a10718318ec7ff":
+      case #"hash_72a10718318ec7ff":
         function_21f1fbf1();
         break;
-      case # "debug_navmesh_zone":
+      case #"debug_navmesh_zone":
         function_e395a714();
         break;
-      case # "hash_28fd3c9a92f22718":
+      case #"hash_28fd3c9a92f22718":
         function_5349e112();
         break;
-      case # "hash_7fafc507d5398c0b":
+      case #"hash_7fafc507d5398c0b":
         function_567ee21f();
         break;
-      case # "hash_3ede275f03a4aa2b":
+      case #"hash_3ede275f03a4aa2b":
         function_1762ff96();
         break;
-      case # "hash_74f6277a8a40911e":
+      case #"hash_74f6277a8a40911e":
         function_e5713258();
         break;
-      case # "hash_3d647b897ae5dca6":
+      case #"hash_3d647b897ae5dca6":
         function_f298dd5c();
         break;
-      case # "hash_3f826ccc785705ba":
+      case #"hash_3f826ccc785705ba":
         function_26417ea7();
         break;
-      case # "hash_683b625d2ace3726":
+      case #"hash_683b625d2ace3726":
         function_fb88b423();
         break;
-      case # "hash_3f9e70ff9f34194a":
+      case #"hash_3f9e70ff9f34194a":
         function_1b531660();
         break;
-      case # "hash_7883eb109c3e6a94":
+      case #"hash_7883eb109c3e6a94":
         array::thread_all(function_a1ef346b(), &function_1bb72156);
         break;
-      case # "draw_wallbuy":
+      case #"draw_wallbuy":
         function_2f0c6f91();
         break;
-      case # "hash_320b004253fe00b8":
+      case #"hash_320b004253fe00b8":
         function_1a4752d0();
         break;
       case 0:

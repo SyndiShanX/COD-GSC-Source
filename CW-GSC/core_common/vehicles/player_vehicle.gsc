@@ -317,11 +317,11 @@ function on_vehicle_damage(params) {
         }
 
         switch (params.smeansofdeath) {
-          case # "mod_projectile":
+          case #"mod_projectile":
             self playsoundtoplayer(#"hash_4cf0470b5276e61a", occupant);
             break;
-          case # "mod_rifle_bullet":
-          case # "mod_pistol_bullet":
+          case #"mod_rifle_bullet":
+          case #"mod_pistol_bullet":
             self playsoundtoplayer(#"prj_bullet_impact_player_vehicle", occupant);
             break;
         }

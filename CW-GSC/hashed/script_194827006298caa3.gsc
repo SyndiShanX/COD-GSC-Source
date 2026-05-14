@@ -728,15 +728,15 @@ function private function_f0abbc8b() {
 
 function private function_4cb6cdb8() {
   switch (self.archetype) {
-    case # "zombie_dog":
+    case #"zombie_dog":
       return # "hash_16fb83823caa867c";
-    case # "mechz":
+    case #"mechz":
       return # "hash_72102974314fff02";
-    case # "hash_7c0d83ac1e845ac2":
+    case #"hash_7c0d83ac1e845ac2":
       return # "hash_502ed36a2535b270";
-    case # "raz":
+    case #"raz":
       return # "hash_351d7331f52be032";
-    case # "avogadro":
+    case #"avogadro":
       return # "hash_1cbbcdbfd528f8e1";
   }
 }

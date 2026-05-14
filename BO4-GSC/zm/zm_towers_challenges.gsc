@@ -156,13 +156,13 @@ function_3e23c5c0(var_2a0eed37 = 1) {
 
 function_7e61f202(mdl_banner) {
   switch (mdl_banner.targetname) {
-    case # "danu_brazier_banner":
+    case #"danu_brazier_banner":
       return "green";
-    case # "ra_brazier_banner":
+    case #"ra_brazier_banner":
       return "red";
-    case # "odin_brazier_banner":
+    case #"odin_brazier_banner":
       return "blue";
-    case # "zeus_brazier_banner":
+    case #"zeus_brazier_banner":
       return "purple";
   }
 }
@@ -219,19 +219,19 @@ function_1583001a(e_player, var_986431d3) {
   e_trig.challenge_struct = var_986431d3.challenge_struct;
 
   switch (e_trig.challenge_struct.targetname) {
-    case # "odin_brazier":
+    case #"odin_brazier":
       level clientfield::set("brazier_fire_blue", 1);
       var_38e7a8be = #"hash_78c79ed7fe5a14e6";
       break;
-    case # "zeus_brazier":
+    case #"zeus_brazier":
       level clientfield::set("brazier_fire_purple", 1);
       var_38e7a8be = #"hash_2865f19fb8f73873";
       break;
-    case # "ra_brazier":
+    case #"ra_brazier":
       level clientfield::set("brazier_fire_red", 1);
       var_38e7a8be = #"hash_260c83bb9470b";
       break;
-    case # "danu_brazier":
+    case #"danu_brazier":
       level clientfield::set("brazier_fire_green", 1);
       var_38e7a8be = #"hash_7ff858c269b8be00";
       break;
@@ -360,19 +360,19 @@ function_702ac990(e_player, e_trig) {
   e_trig sethintstring(#"zm_towers/challenge_complete");
 
   switch (e_trig.challenge_struct.targetname) {
-    case # "odin_brazier":
+    case #"odin_brazier":
       level clientfield::set("brazier_fire_blue", 2);
       var_38e7a8be = #"challenges_odin_completed";
       break;
-    case # "zeus_brazier":
+    case #"zeus_brazier":
       level clientfield::set("brazier_fire_purple", 2);
       var_38e7a8be = #"challenges_zeus_completed";
       break;
-    case # "ra_brazier":
+    case #"ra_brazier":
       level clientfield::set("brazier_fire_red", 2);
       var_38e7a8be = #"challenges_ra_completed";
       break;
-    case # "danu_brazier":
+    case #"danu_brazier":
       level clientfield::set("brazier_fire_green", 2);
       var_38e7a8be = #"challenges_danu_completed";
       break;
@@ -451,16 +451,16 @@ function_c3158242(var_38e7a8be) {
       str_brazier = e_player.challenge_struct.targetname;
 
       switch (str_brazier) {
-        case # "danu_brazier":
+        case #"danu_brazier":
           var_4bceacc8 = #"hash_597c4173f2fd41a4";
           break;
-        case # "ra_brazier":
+        case #"ra_brazier":
           var_4bceacc8 = #"hash_550bed5125d97a89";
           break;
-        case # "odin_brazier":
+        case #"odin_brazier":
           var_4bceacc8 = #"hash_31347fc188da1db6";
           break;
-        case # "zeus_brazier":
+        case #"zeus_brazier":
           var_4bceacc8 = #"hash_6c9a2587a2563721";
           break;
       }
@@ -550,16 +550,16 @@ function_2ae8eabe(n_current_progress, var_8d9da2cd) {
   var_9134e5d2 = self.targetname;
 
   switch (var_9134e5d2) {
-    case # "odin_brazier":
+    case #"odin_brazier":
       var_fe02dade = "head_fire_blue";
       break;
-    case # "danu_brazier":
+    case #"danu_brazier":
       var_fe02dade = "head_fire_green";
       break;
-    case # "zeus_brazier":
+    case #"zeus_brazier":
       var_fe02dade = "head_fire_purple";
       break;
-    case # "ra_brazier":
+    case #"ra_brazier":
       var_fe02dade = "head_fire_red";
       break;
   }
@@ -1307,10 +1307,10 @@ function_4f3835a0(e_attacker) {
 
 function_b3114574(weapon_type) {
   switch (weapon_type.name) {
-    case # "zhield_zword_turret":
-    case # "zhield_zword_dw":
-    case # "zhield_zword_turret_upgraded":
-    case # "zhield_zword_dw_upgraded":
+    case #"zhield_zword_turret":
+    case #"zhield_zword_dw":
+    case #"zhield_zword_turret_upgraded":
+    case #"zhield_zword_dw_upgraded":
       return 1;
     default:
       return 0;
@@ -1837,63 +1837,63 @@ _good_door_opened(e_player, e_trig) {
   e_player clientfield::increment_to_player("" + #"challenge_complete_crowd_react");
 
   switch (var_aa4f9213) {
-    case # "self_revive":
+    case #"self_revive":
       self.var_f7d17867 = (0, 0, 0);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = #"p8_zm_gla_heart_zombie";
       e_player clientfield::set("force_challenge_model", 1);
       break;
-    case # "full_ammo":
+    case #"full_ammo":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_max_ammo";
       break;
-    case # "double_points":
+    case #"double_points":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_double_points";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       self.var_f7d17867 = (0, 0, 12);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "p7_zm_power_up_insta_kill";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       self.var_f7d17867 = (0, 0, 6);
       self.var_14172483 = (0, 0, 0);
       self.var_3ff570f3 = "p8_zm_powerup_full_power";
       break;
-    case # "bonus_points_player":
+    case #"bonus_points_player":
       self.var_f7d17867 = (0, 0, 10);
       self.var_14172483 = var_50ed6de;
       self.var_3ff570f3 = "zombie_z_money_icon";
       break;
-    case # "ar_mg1909_t8":
+    case #"ar_mg1909_t8":
       e_trig.var_f2e7f46a = 1;
       self.var_f7d17867 = (0, 0, 9);
       self.var_14172483 = var_50ed6de;
       break;
-    case # "lmg_standard_t8":
+    case #"lmg_standard_t8":
       e_trig.var_f2e7f46a = 1;
       self.var_f7d17867 = (0, 0, 9);
       self.var_14172483 = var_50ed6de;
       break;
-    case # "tr_midburst_t8":
+    case #"tr_midburst_t8":
       e_trig.var_f2e7f46a = 1;
       self.var_f7d17867 = (0, 0, 9);
       self.var_14172483 = var_50ed6de;
       break;
-    case # "pistol_standard_t8_upgraded":
+    case #"pistol_standard_t8_upgraded":
       e_trig.var_f2e7f46a = 1;
       self.var_f7d17867 = (0, 0, 7);
       self.var_14172483 = var_50ed6de;
       break;
-    case # "lmg_spray_t8_upgraded":
+    case #"lmg_spray_t8_upgraded":
       e_trig.var_f2e7f46a = 1;
       self.var_f7d17867 = (0, 0, 7);
       self.var_14172483 = var_50ed6de;
       break;
-    case # "free_perk":
+    case #"free_perk":
       sound = "evt_bottle_dispense";
       playsoundatposition(sound, self.origin);
       var_62fef0f1 = e_player zm_perks::function_5ea0c6cf();
@@ -1976,11 +1976,11 @@ player_give_reward(e_trig) {
   var_aa4f9213 = level.var_5d1e28ac[self.challenge_struct.var_860b8f1e];
 
   switch (var_aa4f9213) {
-    case # "self_revive":
+    case #"self_revive":
       self zm_laststand::function_3a00302e();
       self clientfield::set("force_challenge_model", 0);
       break;
-    case # "free_perk":
+    case #"free_perk":
       if(isDefined(self.challenge_struct.var_62fef0f1)) {
         self flag::set(#"hash_5a74f9da0718c63d");
 
@@ -1990,18 +1990,18 @@ player_give_reward(e_trig) {
       }
 
       break;
-    case # "hero_weapon_power":
-    case # "bonus_points_player":
-    case # "full_ammo":
-    case # "insta_kill":
-    case # "double_points":
+    case #"hero_weapon_power":
+    case #"bonus_points_player":
+    case #"full_ammo":
+    case #"insta_kill":
+    case #"double_points":
       level thread zm_powerups::specific_powerup_drop(var_aa4f9213, self.origin, undefined, undefined, undefined, undefined, 1, 1);
       break;
-    case # "tr_midburst_t8":
-    case # "pistol_standard_t8_upgraded":
-    case # "lmg_spray_t8_upgraded":
-    case # "ar_mg1909_t8":
-    case # "lmg_standard_t8":
+    case #"tr_midburst_t8":
+    case #"pistol_standard_t8_upgraded":
+    case #"lmg_spray_t8_upgraded":
+    case #"ar_mg1909_t8":
+    case #"lmg_standard_t8":
       if(isDefined(self.challenge_struct.mdl_reward.str_weapon_name)) {
         w_reward = getweapon(self.challenge_struct.mdl_reward.str_weapon_name);
       }

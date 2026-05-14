@@ -308,10 +308,10 @@ function function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
-      case # "connect_provisions_to_engine_room":
+      case #"connect_provisions_to_engine_room":
         self.hint_string[n_player_index] = #"hash_6134f96bfd8584b9";
         break;
-      case # "connect_mail_rooms_to_cargo":
+      case #"connect_mail_rooms_to_cargo":
         self.hint_string[n_player_index] = #"hash_2bdcee65a214c377";
         break;
       default:
@@ -389,40 +389,40 @@ function_a18a0aba() {
 
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
-        case # "connect_forecastle_to_state_rooms":
+        case #"connect_forecastle_to_state_rooms":
           var_ff20f7d3 = #"hash_2b0a7eea7d5837b2";
           break;
-        case # "connect_forecastle_to_bridge":
+        case #"connect_forecastle_to_bridge":
           var_ff20f7d3 = #"hash_1164f7d8857e245";
           break;
-        case # "connect_state_rooms_to_millionaire":
+        case #"connect_state_rooms_to_millionaire":
           var_ff20f7d3 = #"hash_655f56d5efd95945";
           break;
-        case # "connect_grand_stair_lower_to_dining":
+        case #"connect_grand_stair_lower_to_dining":
           var_ff20f7d3 = #"hash_aea2910160f712a";
           break;
-        case # "connect_dining_to_promenade":
+        case #"connect_dining_to_promenade":
           var_ff20f7d3 = #"hash_7e2ebfe7b5099a2e";
           break;
-        case # "connect_promenade_to_poop":
+        case #"connect_promenade_to_poop":
           var_ff20f7d3 = #"hash_34b52b88e2ff0049";
           break;
-        case # "connect_aft_to_poop_deck":
+        case #"connect_aft_to_poop_deck":
           var_ff20f7d3 = #"hash_1970bc2b9acd5bf5";
           break;
-        case # "connect_suites_to_aft":
+        case #"connect_suites_to_aft":
           var_ff20f7d3 = #"hash_2bc3fbaefaa3b764";
           break;
-        case # "connect_grand_stairs_to_lounge":
+        case #"connect_grand_stairs_to_lounge":
           var_ff20f7d3 = #"hash_334ff5daed081f31";
           break;
-        case # "connect_bridge_to_grand_stairs":
+        case #"connect_bridge_to_grand_stairs":
           var_ff20f7d3 = #"hash_7f462ab50be41252";
           break;
-        case # "connect_mail_rooms_to_cargo":
+        case #"connect_mail_rooms_to_cargo":
           var_ff20f7d3 = #"hash_25929136eae0e6ae";
           break;
-        case # "connect_provisions_to_engine_room":
+        case #"connect_provisions_to_engine_room":
           var_ff20f7d3 = #"hash_a8d366608b42172";
           break;
         default:

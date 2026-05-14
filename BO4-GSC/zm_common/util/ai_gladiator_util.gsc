@@ -117,10 +117,10 @@ function_c03b6f46(n_min_dist_sq, n_max_dist_sq) {
 function_bfa79e98(sp_spawner = level.var_4d136b9a[0], s_spot, str_type, n_round) {
   if(isDefined(str_type)) {
     switch (str_type) {
-      case # "melee":
+      case #"melee":
         sp_spawner = level.var_735451fc[0];
         break;
-      case # "ranged":
+      case #"ranged":
         sp_spawner = level.var_fc0d2372[0];
         break;
     }

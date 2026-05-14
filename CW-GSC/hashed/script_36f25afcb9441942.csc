@@ -66,11 +66,11 @@ function function_4f9f7687(roomname, iconname) {
 
 function function_1648f5a1(name = "") {
   switch (name) {
-    case # "jungle_1_dungeon4":
+    case #"jungle_1_dungeon4":
       function_4f9f7687("hall_dirt_2iflogger_exit_1024x1024", "doa_hud_icon_dungeon_hall_straight");
       function_4f9f7687("room_2b_exit_1024x1024", "doa_hud_icon_dungeon_room_octagon");
       function_4f9f7687("room_5_exit_1024x1024", "doa_hud_icon_dungeon_room_octagon");
-    case # "cellar":
+    case #"cellar":
       function_4f9f7687("room_1_exit_1024x1024", "doa_hud_icon_dungeon_room_square");
       function_4f9f7687("room_2i_exit_1024x1024", "doa_hud_icon_dungeon_room_square");
       function_4f9f7687("room_3_exit_1024x1024", "doa_hud_icon_dungeon_room_square");
@@ -415,12 +415,12 @@ function function_a4c07e18(name) {
   var_5d3143fb = math::clamp(7 + playercount, 8, 12);
 
   switch (name) {
-    case # "jungle_1_dungeon4":
+    case #"jungle_1_dungeon4":
       setDvar(#"hash_4c2ff1f11662c879", var_5d3143fb);
       setDvar(#"hash_788fb3bfb03132f", gridsize);
       function_1a3f9fe1(1);
       break;
-    case # "cellar":
+    case #"cellar":
       setDvar(#"hash_4c2ff1f11662c879", var_5d3143fb);
       setDvar(#"hash_788fb3bfb03132f", gridsize);
       function_1a3f9fe1();
@@ -497,8 +497,8 @@ function function_18276de3(name = "") {
 
 function function_ed9ae881(name) {
   switch (name) {
-    case # "jungle_1_dungeon4":
-    case # "cellar":
+    case #"jungle_1_dungeon4":
+    case #"cellar":
       level.var_84c76431 = &function_9a834e27;
       break;
     default:

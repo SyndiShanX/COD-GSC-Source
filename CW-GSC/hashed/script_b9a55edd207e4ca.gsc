@@ -579,16 +579,16 @@ function function_4212369d() {
 function function_20d09030() {
   if(is_true(getgametypesetting(#"hash_7eb0bbf9b8410462"))) {
     switch (level.basegametype) {
-      case # "fireteam_dirty_bomb":
+      case #"fireteam_dirty_bomb":
         level thread namespace_3d2704b3::function_7fc18ad5(#"hash_27bac84003da7795", 2147483647, 80, 90, 180);
         break;
-      case # "fireteam_koth":
+      case #"fireteam_koth":
         level thread namespace_3d2704b3::function_7fc18ad5(#"hash_1a0411d6007279fe", 2147483647, 80, 90, 180);
         break;
-      case # "fireteam_elimination":
+      case #"fireteam_elimination":
         level thread namespace_3d2704b3::function_7fc18ad5(#"hash_c09c4ba8509f91b", 2147483647, 38, 90, 180);
         break;
-      case # "fireteam_satlink":
+      case #"fireteam_satlink":
         level thread namespace_3d2704b3::function_7fc18ad5(#"hash_4b59ee69b4c70996", 2147483647, 80, 90, 180);
         break;
     }
@@ -603,16 +603,16 @@ function function_c3623479(vehicle) {
   globallogic_audio::function_61e17de0("fireteamVehSpawn", getplayers(undefined, vehicle.origin, 6000));
 
   switch (vehicle.vehicletype) {
-    case # "hash_6595f5efe62a4ec":
+    case #"hash_6595f5efe62a4ec":
       objectivetype = "heli_drop";
       break;
-    case # "hash_28d512b739c9d9c1":
+    case #"hash_28d512b739c9d9c1":
       objectivetype = "tank_drop";
       break;
-    case # "vehicle_t9_mil_fav_light":
+    case #"vehicle_t9_mil_fav_light":
       objectivetype = "fav_drop";
       break;
-    case # "vehicle_t9_mil_ru_truck_transport_player":
+    case #"vehicle_t9_mil_ru_truck_transport_player":
       objectivetype = "truck_drop";
       break;
     default:

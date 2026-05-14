@@ -282,17 +282,17 @@ function function_3ba5772b() {
 
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case # "raz":
-      case # "mimic":
-      case # "tormentor":
-      case # "zombie_dog":
-      case # "mechz":
-      case # "zombie":
-      case # "avogadro":
-      case # "hash_7c0d83ac1e845ac2":
+      case #"raz":
+      case #"mimic":
+      case #"tormentor":
+      case #"zombie_dog":
+      case #"mechz":
+      case #"zombie":
+      case #"avogadro":
+      case #"hash_7c0d83ac1e845ac2":
         self.var_4356b0bd = 1;
         break;
-      case # "soa":
+      case #"soa":
         wait 1.4 + float(function_60d95f53()) / 1000;
         self.var_4356b0bd = 1;
         break;
@@ -361,7 +361,7 @@ function private function_5da12481(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry.name)) {
       switch (item.itementry.name) {
-        case # "item_zm_ltm_halloween_jackolantern_01":
+        case #"item_zm_ltm_halloween_jackolantern_01":
           if(math::cointoss(15) || level flag::get(#"hash_6ef5c2fd97dfb8ba")) {
             ai_mimic = spawnactor(#"spawner_bo5_mimic", item.origin, item.angles, "mimic_jackolantern_spawn", 1);
 
@@ -407,7 +407,7 @@ function function_cf4230c2() {
 
 function private function_33572994(cmd) {
   switch (cmd) {
-    case # "hash_e41021f4d82e571":
+    case #"hash_e41021f4d82e571":
       level flag::toggle(#"hash_69ca47ce3a408f31");
 
       if(level flag::get(#"hash_69ca47ce3a408f31")) {
@@ -417,7 +417,7 @@ function private function_33572994(cmd) {
       }
 
       break;
-    case # "hash_68f2deafb75d0499":
+    case #"hash_68f2deafb75d0499":
       level flag::toggle(#"hash_6ef5c2fd97dfb8ba");
 
       if(level flag::get(#"hash_6ef5c2fd97dfb8ba")) {
@@ -427,7 +427,7 @@ function private function_33572994(cmd) {
       }
 
       break;
-    case # "hash_3d3ef40bc9791d4b":
+    case #"hash_3d3ef40bc9791d4b":
       if(level flag::get("<dev string:x1f3>")) {
         level flag::clear("<dev string:x1f3>");
       } else {

@@ -239,13 +239,13 @@ function private function_1201b5da(medal) {
   round = undefined;
 
   switch (medal) {
-    case # "gold":
+    case #"gold":
       round = 30;
       break;
-    case # "silver":
+    case #"silver":
       round = 20;
       break;
-    case # "bronze":
+    case #"bronze":
       round = 10;
       break;
     default:

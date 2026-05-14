@@ -342,17 +342,17 @@ function private function_73e20080(loadoutclass, &var_44518c47, count, bonuses) 
 
 function private function_13aa0d3(bonuscard, bonuses) {
   switch (bonuscard) {
-    case # "hash_44e17bf715d7ac82":
+    case #"hash_44e17bf715d7ac82":
       bonuses.var_1c89585f = 1;
       break;
-    case # "hash_639ebbcda56447e7":
+    case #"hash_639ebbcda56447e7":
       bonuses.var_c38351d8 = 1;
       bonuses.var_3f5d0ded = 1;
       break;
-    case # "bonuscard_primary_gunfighter":
+    case #"bonuscard_primary_gunfighter":
       bonuses.var_e22b188d = 1;
       break;
-    case # "hash_4c417275f7523978":
+    case #"hash_4c417275f7523978":
       bonuses.extraperks = 1;
       break;
   }

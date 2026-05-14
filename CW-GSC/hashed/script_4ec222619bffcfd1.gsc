@@ -45,66 +45,66 @@ function private _objective(objective) {
   player = snd::function_da785aa8()[0];
 
   switch (objective) {
-    case # "kgb_ins_activation":
+    case #"kgb_ins_activation":
       break;
-    case # "kgb_ins_briefing":
+    case #"kgb_ins_briefing":
       thread atrium_reveal();
       thread function_8677372c();
       break;
-    case # "kgb_ins_tutorial":
+    case #"kgb_ins_tutorial":
       thread function_8677372c();
       break;
-    case # "kgb_ins_prepare":
+    case #"kgb_ins_prepare":
       music("4.0_searching_random");
       thread function_8677372c();
       thread function_f9e6c53b();
       break;
-    case # "kgb_ins_rv":
+    case #"kgb_ins_rv":
       music("6.0_basement");
       thread function_8677372c();
       thread function_f9e6c53b();
       break;
-    case # "kgb_aslt_entry":
+    case #"kgb_aslt_entry":
       music("8.0_undercover");
       thread function_3390e801();
       break;
-    case # "kgb_aslt_elev_down":
+    case #"kgb_aslt_elev_down":
       music("9.0_infiltrating");
       thread function_3390e801();
       break;
-    case # "kgb_aslt_bunker":
+    case #"kgb_aslt_bunker":
       level waittill(#"hash_49ad3ddc839a715c");
       player notify(#"hash_7ad75056b30c451a");
       level notify(#"hash_63850bb43dbc38de");
       break;
-    case # "kgb_aslt_vault_approach":
+    case #"kgb_aslt_vault_approach":
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_vault_breach":
+    case #"kgb_aslt_vault_breach":
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_vault":
+    case #"kgb_aslt_vault":
       player notify(#"hash_7ad75056b30c451a");
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_bunker_escape":
+    case #"kgb_aslt_bunker_escape":
       music("13.3_lockdown_tension");
       player notify(#"hash_7ad75056b30c451a");
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_escape_lights_out":
+    case #"kgb_aslt_escape_lights_out":
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_escape_deploy_gas":
+    case #"kgb_aslt_escape_deploy_gas":
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_exfil":
+    case #"kgb_aslt_exfil":
       thread function_abfdd752();
       break;
-    case # "kgb_aslt_exfil_escape":
+    case #"kgb_aslt_exfil_escape":
       player notify(#"hash_7ad75056b30c451a");
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 
@@ -126,58 +126,58 @@ function function_7edafa59(str_msg, n_delay) {
   }
 
   switch (str_msg) {
-    case # "13.3_lockdown_tension":
-    case # "hash_d96dba6e7a99f85":
-    case # "11.3_combat2":
-    case # "11.0_sabotage":
-    case # "13.7_holding_belikov":
-    case # "14.0_knockout":
-    case # "13.5_lockdown":
-    case # "hash_1d433b9a413139d4":
-    case # "hash_2256b0dea87465d2":
-    case # "8.0_undercover":
-    case # "5.0_unlock":
-    case # "hash_2910ae132ebdc558":
-    case # "10.0_combat_intro":
-    case # "6.0_basement":
-    case # "9.0_infiltrating":
-    case # "5.2_kill":
-    case # "hash_2d88f0176ae057fb":
-    case # "14.0b_full_alert":
-    case # "8.1_gate":
-    case # "hash_78d371826c395268":
-    case # "hash_35dacd4322564668":
-    case # "10.2_combat_loop":
-    case # "hash_3f88adcdc052e5b6":
-    case # "7.0_tunnels":
+    case #"13.3_lockdown_tension":
+    case #"hash_d96dba6e7a99f85":
+    case #"11.3_combat2":
+    case #"11.0_sabotage":
+    case #"13.7_holding_belikov":
+    case #"14.0_knockout":
+    case #"13.5_lockdown":
+    case #"hash_1d433b9a413139d4":
+    case #"hash_2256b0dea87465d2":
+    case #"8.0_undercover":
+    case #"5.0_unlock":
+    case #"hash_2910ae132ebdc558":
+    case #"10.0_combat_intro":
+    case #"6.0_basement":
+    case #"9.0_infiltrating":
+    case #"5.2_kill":
+    case #"hash_2d88f0176ae057fb":
+    case #"14.0b_full_alert":
+    case #"8.1_gate":
+    case #"hash_78d371826c395268":
+    case #"hash_35dacd4322564668":
+    case #"10.2_combat_loop":
+    case #"hash_3f88adcdc052e5b6":
+    case #"7.0_tunnels":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "4.0_searching_oneshot_4":
-    case # "4.0_searching_oneshot_2":
-    case # "4.0_searching_oneshot_3":
-    case # "4.0_searching_oneshot_1":
+    case #"4.0_searching_oneshot_4":
+    case #"4.0_searching_oneshot_2":
+    case #"4.0_searching_oneshot_3":
+    case #"4.0_searching_oneshot_1":
       music::setmusicstate(str_msg, undefined, n_delay);
       break;
-    case # "4.0_searching_random":
+    case #"4.0_searching_random":
       level thread function_7a79ff2c();
       break;
-    case # "4.3_tension_stingers":
-    case # "4.2_search_stingers":
-    case # "8.3_cello_stingers_2":
-    case # "8.2_cello_stingers_1":
+    case #"4.3_tension_stingers":
+    case #"4.2_search_stingers":
+    case #"8.3_cello_stingers_2":
+    case #"8.2_cello_stingers_1":
       music::function_2af5f0ec(str_msg);
       break;
-    case # "7.1_attack_sting":
+    case #"7.1_attack_sting":
       music::function_edda155f(str_msg, n_delay);
       break;
-    case # "hash_2966b4a1e4a3a38d":
-    case # "deactivate_11.3_combat2":
-    case # "hash_33d1bd1987cf9ec5":
-    case # "deactivate_6.0_basement":
-    case # "hash_63d49b1407be692c":
-    case # "hash_5a5ac38c04395a49":
-    case # "hash_5cb44079caf0d925":
-    case # "hash_5cde78352f0969e3":
+    case #"hash_2966b4a1e4a3a38d":
+    case #"deactivate_11.3_combat2":
+    case #"hash_33d1bd1987cf9ec5":
+    case #"deactivate_6.0_basement":
+    case #"hash_63d49b1407be692c":
+    case #"hash_5a5ac38c04395a49":
+    case #"hash_5cb44079caf0d925":
+    case #"hash_5cde78352f0969e3":
       music::setmusicstate("none", undefined, n_delay);
       break;
     default:
@@ -190,24 +190,24 @@ function function_7edafa59(str_msg, n_delay) {
 
 function function_e80c0ccf(str_msg) {
   switch (str_msg) {
-    case # "hash_1d433b9a413139d4":
+    case #"hash_1d433b9a413139d4":
       snd::client_msg(#"musictrack_cp_kgb_1");
       break;
-    case # "hash_2256b0dea87465d2":
-    case # "4.0_searching_random":
+    case #"hash_2256b0dea87465d2":
+    case #"4.0_searching_random":
       snd::client_msg(#"musictrack_cp_kgb_2");
       break;
-    case # "8.0_undercover":
+    case #"8.0_undercover":
       snd::client_msg(#"musictrack_cp_kgb_3");
       break;
-    case # "10.2_combat_loop":
-    case # "10.0_combat_intro":
+    case #"10.2_combat_loop":
+    case #"10.0_combat_intro":
       snd::client_msg(#"musictrack_cp_kgb_4");
       break;
-    case # "13.5_lockdown":
+    case #"13.5_lockdown":
       snd::client_msg(#"musictrack_cp_kgb_5");
       break;
-    case # "14.0b_full_alert":
+    case #"14.0b_full_alert":
       snd::client_msg(#"musictrack_cp_kgb_6");
       break;
   }

@@ -226,9 +226,9 @@ function function_ec39f01c(amount, attacker, direction_vec, point, type, tagname
     var_c3317960 = gibserverutils::function_de4d9d(weapon, var_fd90b0bb);
 
     switch (self.damagelocation) {
-      case # "right_leg_upper":
-      case # "right_leg_lower":
-      case # "right_foot":
+      case #"right_leg_upper":
+      case #"right_leg_lower":
+      case #"right_foot":
         if(gibserverutils::isgibbed(self, 16) || gibserverutils::isgibbed(self, 32)) {
           break;
         }
@@ -240,9 +240,9 @@ function function_ec39f01c(amount, attacker, direction_vec, point, type, tagname
         }
 
         break;
-      case # "left_leg_lower":
-      case # "left_foot":
-      case # "left_leg_upper":
+      case #"left_leg_lower":
+      case #"left_foot":
+      case #"left_leg_upper":
         if(gibserverutils::isgibbed(self, 16) || gibserverutils::isgibbed(self, 32)) {
           break;
         }
@@ -1173,30 +1173,30 @@ function function_17be9890(eventstruct) {
   var_c8109157 = 0;
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       var_6281c93d = 1;
       n_priority = 4;
       break;
-    case # "pain":
+    case #"pain":
       var_6281c93d = 1;
       n_priority = 3;
       break;
-    case # "summon":
+    case #"summon":
       var_6281c93d = 1;
       n_priority = 3;
       var_c8109157 = 1;
       break;
-    case # "attack":
-    case # "teleport":
+    case #"attack":
+    case #"teleport":
       var_6281c93d = 1;
       n_priority = 2;
       var_c8109157 = 1;
       break;
-    case # "ambient":
-    case # "ambient_alert":
+    case #"ambient":
+    case #"ambient_alert":
       n_priority = 1;
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       return;
     default:
       n_priority = 2;
@@ -1284,7 +1284,7 @@ function function_598bf886(entity) {
   nextstate = #"hash_24e69bf779de4940";
 
   switch (entity.var_e8a7f45d.state) {
-    case # "hash_24e69bf779de4940":
+    case #"hash_24e69bf779de4940":
       random = randomint(100);
 
       if(random < 33) {
@@ -1294,8 +1294,8 @@ function function_598bf886(entity) {
       }
 
       break;
-    case # "hash_a69905121714d7c":
-    case # "hash_46c85a951b2258a9":
+    case #"hash_a69905121714d7c":
+    case #"hash_46c85a951b2258a9":
       nextstate = #"hash_24e69bf779de4940";
       break;
     default:

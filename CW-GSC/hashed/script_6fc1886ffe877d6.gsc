@@ -1600,37 +1600,37 @@ function function_1c798ee9() {
   self endon(#"objective_ended");
 
   switch (self.targetname) {
-    case # "objective_duga_holdout":
+    case #"objective_duga_holdout":
       str_trigger = "trigger_holdout_duga";
       break;
-    case # "hash_667dbf380c0e0a74":
+    case #"hash_667dbf380c0e0a74":
       self thread function_be1b951c();
       str_trigger = "trigger_holdout_forest";
       break;
-    case # "objective_golova_holdout":
+    case #"objective_golova_holdout":
       self thread function_be1b951c();
       str_trigger = "trigger_holdout_golova";
       break;
-    case # "objective_golova_holdout_farm":
+    case #"objective_golova_holdout_farm":
       self thread function_be1b951c();
       str_trigger = "trigger_holdout_golova_farm";
       break;
-    case # "objective_sanatorium_holdout":
+    case #"objective_sanatorium_holdout":
       str_trigger = "trigger_holdout_sanatorium";
       break;
-    case # "objective_ski_holdout":
+    case #"objective_ski_holdout":
       str_trigger = "trigger_holdout_ski";
       break;
-    case # "objective_ski_holdout_warehouse":
+    case #"objective_ski_holdout_warehouse":
       str_trigger = "trigger_holdout_ski_warehouse";
       break;
-    case # "hash_29783b5c80e9b4c":
+    case #"hash_29783b5c80e9b4c":
       str_trigger = "trigger_holdout_weather_station";
       break;
-    case # "objective_zoo_holdout":
+    case #"objective_zoo_holdout":
       str_trigger = "trigger_holdout_zoo";
       break;
-    case # "objective_dune_holdout":
+    case #"objective_dune_holdout":
       str_trigger = "trigger_holdout_dune";
       break;
   }

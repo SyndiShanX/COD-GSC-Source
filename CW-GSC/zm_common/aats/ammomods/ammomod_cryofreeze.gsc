@@ -40,18 +40,18 @@ function init_cryofreeze() {
 
 function private function_a0c6cb5d(aat_name = "ammomod_cryofreeze") {
   switch (aat_name) {
-    case # "ammomod_cryofreeze":
+    case #"ammomod_cryofreeze":
     default:
       return 0;
-    case # "ammomod_cryofreeze_1":
+    case #"ammomod_cryofreeze_1":
       return 1;
-    case # "ammomod_cryofreeze_2":
+    case #"ammomod_cryofreeze_2":
       return 2;
-    case # "ammomod_cryofreeze_3":
+    case #"ammomod_cryofreeze_3":
       return 3;
-    case # "ammomod_cryofreeze_4":
+    case #"ammomod_cryofreeze_4":
       return 4;
-    case # "ammomod_cryofreeze_5":
+    case #"ammomod_cryofreeze_5":
       return 5;
   }
 

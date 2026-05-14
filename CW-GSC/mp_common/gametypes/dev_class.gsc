@@ -30,22 +30,22 @@ function dev_cac_init() {
       case 0:
         reset = 0;
         break;
-      case # "dpad_body":
+      case #"dpad_body":
         host thread dev_cac_dpad_think("<dev string:x3c>", &dev_cac_cycle_body, "<dev string:x38>");
         break;
-      case # "dpad_head":
+      case #"dpad_head":
         host thread dev_cac_dpad_think("<dev string:x44>", &dev_cac_cycle_head, "<dev string:x38>");
         break;
-      case # "dpad_character":
+      case #"dpad_character":
         host thread dev_cac_dpad_think("<dev string:x4c>", &dev_cac_cycle_character, "<dev string:x38>");
         break;
-      case # "next_player":
+      case #"next_player":
         dev_cac_cycle_player(1);
         break;
-      case # "prev_player":
+      case #"prev_player":
         dev_cac_cycle_player(0);
         break;
-      case # "cac_overlay":
+      case #"cac_overlay":
         level notify(#"dev_cac_overlay_think");
 
         if(!dev_cac_overlay) {
@@ -54,95 +54,95 @@ function dev_cac_init() {
 
         dev_cac_overlay = !dev_cac_overlay;
         break;
-      case # "best_bullet_armor":
+      case #"best_bullet_armor":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x59>");
         break;
-      case # "worst_bullet_armor":
+      case #"worst_bullet_armor":
         dev_cac_set_model_range(&sort_least, "<dev string:x59>");
         break;
-      case # "best_explosive_armor":
+      case #"best_explosive_armor":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x69>");
         break;
-      case # "worst_explosive_armor":
+      case #"worst_explosive_armor":
         dev_cac_set_model_range(&sort_least, "<dev string:x69>");
         break;
-      case # "best_mobility":
+      case #"best_mobility":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x7c>");
         break;
-      case # "worst_mobility":
+      case #"worst_mobility":
         dev_cac_set_model_range(&sort_least, "<dev string:x7c>");
         break;
-      case # "camera":
+      case #"camera":
         dev_cac_camera_on = !dev_cac_camera_on;
         dev_cac_camera(dev_cac_camera_on);
         break;
-      case # "dpad_camo":
+      case #"dpad_camo":
         host thread dev_cac_dpad_think("<dev string:x88>", &dev_cac_cycle_render_options, "<dev string:x88>");
         break;
-      case # "dpad_meleecamo":
+      case #"dpad_meleecamo":
         host thread dev_cac_dpad_think("<dev string:x90>", &dev_cac_cycle_render_options, "<dev string:x90>");
         break;
-      case # "dpad_lens":
+      case #"dpad_lens":
         host thread dev_cac_dpad_think("<dev string:x9d>", &dev_cac_cycle_render_options, "<dev string:x9d>");
         break;
-      case # "dpad_reticle":
+      case #"dpad_reticle":
         host thread dev_cac_dpad_think("<dev string:xa5>", &dev_cac_cycle_render_options, "<dev string:xa5>");
         break;
-      case # "hash_726874ce63e6471c":
+      case #"hash_726874ce63e6471c":
         host thread dev_cac_dpad_think("<dev string:xb0>", &dev_cac_cycle_render_options, "<dev string:xb0>");
         break;
-      case # "hash_175b7e6688ef31a6":
+      case #"hash_175b7e6688ef31a6":
         host thread dev_cac_dpad_think("<dev string:xb9>", &dev_cac_cycle_render_options, "<dev string:xcf>");
         break;
-      case # "hash_4293810c7550f275":
+      case #"hash_4293810c7550f275":
         host thread dev_cac_dpad_think("<dev string:xe5>", &dev_cac_cycle_render_options, "<dev string:xf9>");
         break;
-      case # "hash_69d8a058583621e4":
+      case #"hash_69d8a058583621e4":
         host thread dev_cac_dpad_think("<dev string:x10d>", &dev_cac_cycle_render_options, "<dev string:x127>");
         break;
-      case # "hash_69d8a15858362397":
+      case #"hash_69d8a15858362397":
         host thread dev_cac_dpad_think("<dev string:x140>", &dev_cac_cycle_render_options, "<dev string:x15a>");
         break;
-      case # "hash_69d8a2585836254a":
+      case #"hash_69d8a2585836254a":
         host thread dev_cac_dpad_think("<dev string:x173>", &dev_cac_cycle_render_options, "<dev string:x18d>");
         break;
-      case # "hash_69d8a358583626fd":
+      case #"hash_69d8a358583626fd":
         host thread dev_cac_dpad_think("<dev string:x1a6>", &dev_cac_cycle_render_options, "<dev string:x1c0>");
         break;
-      case # "hash_69d89c5858361b18":
+      case #"hash_69d89c5858361b18":
         host thread dev_cac_dpad_think("<dev string:x1d9>", &dev_cac_cycle_render_options, "<dev string:x1f3>");
         break;
-      case # "hash_69d89d5858361ccb":
+      case #"hash_69d89d5858361ccb":
         host thread dev_cac_dpad_think("<dev string:x20c>", &dev_cac_cycle_render_options, "<dev string:x226>");
         break;
-      case # "hash_69d89e5858361e7e":
+      case #"hash_69d89e5858361e7e":
         host thread dev_cac_dpad_think("<dev string:x23f>", &dev_cac_cycle_render_options, "<dev string:x259>");
         break;
-      case # "hash_69d89f5858362031":
+      case #"hash_69d89f5858362031":
         host thread dev_cac_dpad_think("<dev string:x272>", &dev_cac_cycle_render_options, "<dev string:x28c>");
         break;
-      case # "hash_6197bff71b874ed0":
+      case #"hash_6197bff71b874ed0":
         host thread dev_cac_dpad_think("<dev string:x2a5>", &dev_cac_cycle_render_options, "<dev string:x2b2>");
         break;
-      case # "hash_6197c0f71b875083":
+      case #"hash_6197c0f71b875083":
         host thread dev_cac_dpad_think("<dev string:x2be>", &dev_cac_cycle_render_options, "<dev string:x2cb>");
         break;
-      case # "hash_6197c1f71b875236":
+      case #"hash_6197c1f71b875236":
         host thread dev_cac_dpad_think("<dev string:x2d7>", &dev_cac_cycle_render_options, "<dev string:x2e4>");
         break;
-      case # "hash_6197c2f71b8753e9":
+      case #"hash_6197c2f71b8753e9":
         host thread dev_cac_dpad_think("<dev string:x2f0>", &dev_cac_cycle_render_options, "<dev string:x2fd>");
         break;
-      case # "dpad_reticle_color":
+      case #"dpad_reticle_color":
         host thread dev_cac_dpad_think("<dev string:x309>", &dev_cac_cycle_render_options, "<dev string:x31a>");
         break;
-      case # "dpad_facepaint_pattern":
+      case #"dpad_facepaint_pattern":
         host thread dev_cac_dpad_think("<dev string:x32b>", &dev_cac_cycle_render_options, "<dev string:x340>");
         break;
-      case # "dpad_facepaint_color":
+      case #"dpad_facepaint_color":
         host thread dev_cac_dpad_think("<dev string:x355>", &dev_cac_cycle_render_options, "<dev string:x368>");
         break;
-      case # "dpad_reset":
+      case #"dpad_reset":
         host notify(#"dev_cac_dpad_think");
 
         if(isDefined(level.var_5a507627)) {
@@ -467,19 +467,19 @@ function dev_cac_gdt_update_think() {
     key = keyvalue[0];
 
     switch (key) {
-      case # "armorbullet":
+      case #"armorbullet":
         key = "<dev string:x59>";
         break;
-      case # "armorexplosive":
+      case #"armorexplosive":
         key = "<dev string:x69>";
         break;
-      case # "movespeed":
+      case #"movespeed":
         key = "<dev string:x7c>";
         break;
-      case # "sprinttimetotal":
+      case #"sprinttimetotal":
         key = "<dev string:x541>";
         break;
-      case # "sprinttimecooldown":
+      case #"sprinttimecooldown":
         key = "<dev string:x556>";
         break;
       default:

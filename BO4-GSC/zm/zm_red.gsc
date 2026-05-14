@@ -1314,16 +1314,16 @@ function function_c02e63(var_2753f06a) {
         break;
       case 1:
         switch (str_host) {
-          case # "scar":
+          case #"scar":
             level.host zm_vo::vo_say(#"hash_1da6407e4cd932bf");
             break;
-          case # "dieg":
+          case #"dieg":
             level.host zm_vo::vo_say(#"hash_1cdc8a3e02fcfce3");
             break;
-          case # "brun":
+          case #"brun":
             level.host zm_vo::vo_say(#"hash_590040ddc7032e94");
             break;
-          case # "shaw":
+          case #"shaw":
             level.host zm_vo::vo_say(#"hash_7f40dc2d71347256");
             break;
         }
@@ -1331,16 +1331,16 @@ function function_c02e63(var_2753f06a) {
         break;
       case 2:
         switch (str_host) {
-          case # "scar":
+          case #"scar":
             level.host zm_vo::vo_say(#"hash_6c4dee81df419edc");
             break;
-          case # "dieg":
+          case #"dieg":
             level.host zm_vo::vo_say(#"hash_24d7b7428867b4f0");
             break;
-          case # "brun":
+          case #"brun":
             level.host zm_vo::vo_say(#"hash_42880967b7a32953");
             break;
-          case # "shaw":
+          case #"shaw":
             level.host zm_vo::vo_say(#"hash_5fb3938045de5389");
             break;
         }
@@ -1348,16 +1348,16 @@ function function_c02e63(var_2753f06a) {
         break;
       case 3:
         switch (str_host) {
-          case # "scar":
+          case #"scar":
             level.host zm_vo::vo_say(#"hash_394a9cfe79112d79");
             break;
-          case # "dieg":
+          case #"dieg":
             level.host zm_vo::vo_say(#"hash_2abbc74b0d21d3f9");
             break;
-          case # "brun":
+          case #"brun":
             level.host zm_vo::vo_say(#"hash_171f4130f28f8812");
             break;
-          case # "shaw":
+          case #"shaw":
             level.host zm_vo::vo_say(#"hash_7db0de42b6aa9784");
             break;
         }
@@ -1457,7 +1457,7 @@ function_443f6873(str_weapon) {
 
   if(isDefined(str_weapon)) {
     switch (str_weapon) {
-      case # "zhield_zpear_dw":
+      case #"zhield_zpear_dw":
         var_a7c8ee36 = #"novox";
         break;
     }
@@ -1576,262 +1576,262 @@ function_acb5b0ec() {
 
 function_76dc48b8(cmd) {
   switch (cmd) {
-    case # "hash_6eb30455e9df06a1":
+    case #"hash_6eb30455e9df06a1":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24be>", &function_5b984671, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24be>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24be>");
       return 1;
-    case # "hash_6eb30155e9df0188":
+    case #"hash_6eb30155e9df0188":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24e6>", &function_75ef7b1f, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24e6>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24e6>");
       return 1;
-    case # "hash_6eb30255e9df033b":
+    case #"hash_6eb30255e9df033b":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x2506>", &function_883a1fb8, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x2506>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x2506>");
       return 1;
-    case # "hash_6eb30755e9df0bba":
+    case #"hash_6eb30755e9df0bba":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::play("<dev string:x2526>");
       return 1;
-    case # "play_all":
+    case #"play_all":
       level.var_7652563c = 1;
       function_eeb6a1e7();
       level thread play_outro();
       return 1;
-    case # "super_open_sesame":
+    case #"super_open_sesame":
       level thread super_open_sesame();
       return 1;
-    case # "enable_cave_zone":
+    case #"enable_cave_zone":
       level thread function_f39d0796();
       return 1;
-    case # "force_spawn_gegenees":
+    case #"force_spawn_gegenees":
       level thread force_spawn_gegenees();
       break;
-    case # "force_spawn_spartoi":
+    case #"force_spawn_spartoi":
       level thread force_spawn_spartoi();
       break;
-    case # "hash_23e8dfb7c173d426":
+    case #"hash_23e8dfb7c173d426":
       level thread function_80b73b4();
       break;
-    case # "hash_661d906e81e681a0":
+    case #"hash_661d906e81e681a0":
       level thread function_313ff13();
       return 1;
-    case # "spawn_pegasus":
+    case #"spawn_pegasus":
       level thread spawn_pegasus();
       return 1;
-    case # "ride_pegasus":
+    case #"ride_pegasus":
       level thread ride_pegasus();
       return 1;
-    case # "free_eagles":
+    case #"free_eagles":
       level thread free_eagles();
       return 1;
-    case # "complete_pap":
+    case #"complete_pap":
       level thread complete_pap();
       return 1;
-    case # "hash_6429644808eb1a0e":
+    case #"hash_6429644808eb1a0e":
       level thread zm_red_ww_quests::function_9dc3d269();
       return 1;
-    case # "hash_137588aac1c5e8a4":
+    case #"hash_137588aac1c5e8a4":
       level thread zm_red_ww_quests::function_34c06bf9();
       return 1;
-    case # "hash_78f0de868a955048":
+    case #"hash_78f0de868a955048":
       level thread zm_red_ww_quests::function_e3a8b066(#"light");
       return 1;
-    case # "hash_76f44a33d967751a":
+    case #"hash_76f44a33d967751a":
       level thread zm_red_ww_quests::function_e3a8b066(#"death");
       return 1;
-    case # "hash_76a546919ae7f290":
+    case #"hash_76a546919ae7f290":
       level thread zm_red_ww_quests::function_e3a8b066(#"earth");
       return 1;
-    case # "hash_6ad4284ef1b3e750":
+    case #"hash_6ad4284ef1b3e750":
       level thread zm_red_ww_quests::function_e3a8b066(#"air");
       return 1;
-    case # "hash_3e4ac36ee130ef3c":
+    case #"hash_3e4ac36ee130ef3c":
       level thread zm_red_ww_quests::function_51a8e408(#"light");
       return 1;
-    case # "hash_5890d948dcfe86a6":
+    case #"hash_5890d948dcfe86a6":
       level thread zm_red_ww_quests::function_51a8e408(#"death");
       return 1;
-    case # "hash_3b720308ca9b47d4":
+    case #"hash_3b720308ca9b47d4":
       level thread zm_red_ww_quests::function_51a8e408(#"earth");
       return 1;
-    case # "hash_651e411e90da7f94":
+    case #"hash_651e411e90da7f94":
       level thread zm_red_ww_quests::function_51a8e408(#"air");
       return 1;
-    case # "hash_182705f03ec3d976":
+    case #"hash_182705f03ec3d976":
       level thread zm_red_ww_quests::function_f241b684();
       return 1;
-    case # "hash_4fa27fb98665fe3a":
+    case #"hash_4fa27fb98665fe3a":
       level thread zm_red_ww_quests::function_6bf10cf9();
       return 1;
-    case # "hash_170c2110b1de2872":
+    case #"hash_170c2110b1de2872":
       level thread zm_red_ww_quests::function_11a0f6f8();
       return 1;
-    case # "hash_290820a2a3f4b0b9":
+    case #"hash_290820a2a3f4b0b9":
       level thread zm_red_ww_quests::function_c5d7d69b();
       return 1;
-    case # "hash_16ca21dc88e8049b":
+    case #"hash_16ca21dc88e8049b":
       level thread zm_red_ww_quests::function_681ce100();
       return 1;
-    case # "hash_4cd02ce602240df9":
+    case #"hash_4cd02ce602240df9":
       level thread zm_red_ww_quests::function_9fe8bfeb();
       return 1;
-    case # "hash_4135904306940f66":
+    case #"hash_4135904306940f66":
       level thread zm_red_ww_quests::function_dcfed198();
       return 1;
-    case # "hash_5b980405c2fb2366":
+    case #"hash_5b980405c2fb2366":
       level thread zm_red_ww_quests::function_d6e30032();
       return 1;
-    case # "hash_566accf8fdcd834c":
+    case #"hash_566accf8fdcd834c":
       level thread zm_red_ww_quests::function_ec9bf2a();
       return 1;
-    case # "hash_655e705781bfd2af":
+    case #"hash_655e705781bfd2af":
       level thread zm_red_ww_quests::function_30ecec0c();
       return 1;
-    case # "hash_eef0c3bf29481cd":
+    case #"hash_eef0c3bf29481cd":
       level thread zm_red_ww_quests::function_a5efeb8d();
       return 1;
-    case # "hash_fea23dfe07cc931":
+    case #"hash_fea23dfe07cc931":
       level thread zm_red_ww_quests::function_4594e669();
       return 1;
-    case # "hash_2f8409a9af0b7b4b":
+    case #"hash_2f8409a9af0b7b4b":
       level thread zm_red_ww_quests::function_b8b8845();
       return 1;
-    case # "hash_52a251650604890f":
+    case #"hash_52a251650604890f":
       level thread zm_red_ww_quests::function_318c3039();
       return 1;
-    case # "hash_71a15c94ec8d4c2a":
+    case #"hash_71a15c94ec8d4c2a":
       level thread zm_red_ww_quests::function_37deb555();
       return 1;
-    case # "hash_3046318853a1f0f9":
+    case #"hash_3046318853a1f0f9":
       level thread zm_red_ww_quests::function_d8765f3d();
       return 1;
-    case # "hash_6540cece460115d8":
+    case #"hash_6540cece460115d8":
       level thread zm_red_ww_quests::function_233156e3();
       return 1;
-    case # "hash_46ef6728b784e895":
+    case #"hash_46ef6728b784e895":
       level thread zm_red_ww_quests::function_c4614158();
       return 1;
-    case # "hash_15fba8108df788e7":
+    case #"hash_15fba8108df788e7":
       level thread zm_red_ww_quests::function_d963daa9();
       return 1;
-    case # "hash_522749387ee44839":
+    case #"hash_522749387ee44839":
       level thread zm_red_ww_quests::function_405e6a83();
       return 1;
-    case # "hash_5e2fc595f8d3d7bd":
+    case #"hash_5e2fc595f8d3d7bd":
       level thread zm_red_power_quest::devgui_complete();
       return 1;
-    case # "challenge_shield_and_spear_damage":
+    case #"challenge_shield_and_spear_damage":
       level.var_656c1a37 = 0;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_71fe4179fafd7f3":
+    case #"hash_71fe4179fafd7f3":
       level.var_656c1a37 = 11;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_6ae2b92946638ba0":
+    case #"hash_6ae2b92946638ba0":
       level.var_656c1a37 = 1;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_3b5e1577a3ac05f9":
+    case #"hash_3b5e1577a3ac05f9":
       level.var_656c1a37 = 2;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_72ef3034042f03e2":
+    case #"hash_72ef3034042f03e2":
       level.var_656c1a37 = 3;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_3bc45b4ec610c6ea":
+    case #"hash_3bc45b4ec610c6ea":
       level.var_656c1a37 = 4;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_53ee2bdf0d2847c4":
+    case #"hash_53ee2bdf0d2847c4":
       level.var_656c1a37 = 5;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_2915d280a9091d5d":
+    case #"hash_2915d280a9091d5d":
       level.var_656c1a37 = 6;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_38eb67ea5f4036f3":
+    case #"hash_38eb67ea5f4036f3":
       level.var_656c1a37 = 7;
       level.var_4427ebb1 = zm_red_challenges::function_49e4f4ca(level.var_656c1a37);
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_555ae35b6c19f641":
+    case #"hash_555ae35b6c19f641":
       level.var_656c1a37 = 13;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_2cc5d2651dded199":
+    case #"hash_2cc5d2651dded199":
       level.var_656c1a37 = 10;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "challenge_kill_with_equipment":
+    case #"challenge_kill_with_equipment":
       level.var_656c1a37 = 9;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "challenge_kill_with_hero_weapon":
+    case #"challenge_kill_with_hero_weapon":
       level.var_656c1a37 = 12;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "challenge_kill_with_god_hand":
+    case #"challenge_kill_with_god_hand":
       level.var_656c1a37 = 8;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_359525c5c273d324":
+    case #"hash_359525c5c273d324":
       level.var_656c1a37 = 14;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_8cff6d431ab1efe":
+    case #"hash_8cff6d431ab1efe":
       level.var_656c1a37 = 15;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_45c7d33388c20473":
+    case #"hash_45c7d33388c20473":
       level.var_656c1a37 = 16;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_6d8584607d816e70":
+    case #"hash_6d8584607d816e70":
       level.var_656c1a37 = 17;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_7768dba8fad5836b":
+    case #"hash_7768dba8fad5836b":
       level.var_656c1a37 = 18;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_2793bc8d461b411":
+    case #"hash_2793bc8d461b411":
       level.var_656c1a37 = 19;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_1d8f7ff87b40f80f":
+    case #"hash_1d8f7ff87b40f80f":
       level.var_656c1a37 = 20;
       level thread zm_red_challenges::start_challenge();
       break;
-    case # "hash_2eba8518b711ac1":
+    case #"hash_2eba8518b711ac1":
       foreach(player in getplayers()) {
         player function_7c8b5f27();
       }
 
       break;
-    case # "hash_73599762d232fa70":
+    case #"hash_73599762d232fa70":
       e_player = getplayers()[0];
       e_player function_7c8b5f27();
       break;
-    case # "hash_46d64f2b7aa21161":
+    case #"hash_46d64f2b7aa21161":
       a_players = getplayers();
 
       if(a_players.size >= 2) {
@@ -1839,7 +1839,7 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case # "hash_4ae61e7d270a0f16":
+    case #"hash_4ae61e7d270a0f16":
       a_players = getplayers();
 
       if(a_players.size >= 3) {
@@ -1847,7 +1847,7 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case # "hash_580b4b8b0d03657f":
+    case #"hash_580b4b8b0d03657f":
       a_players = getplayers();
 
       if(a_players.size >= 4) {
@@ -1855,37 +1855,37 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case # "challenge_phase_1":
+    case #"challenge_phase_1":
       level.var_6e5099bb = 1;
       iprintlnbold("<dev string:x2546>");
       break;
-    case # "challenge_phase_2":
+    case #"challenge_phase_2":
       level.var_6e5099bb = 2;
       iprintlnbold("<dev string:x2565>");
       break;
-    case # "challenge_phase_3":
+    case #"challenge_phase_3":
       level.var_6e5099bb = 3;
       iprintlnbold("<dev string:x2584>");
       break;
-    case # "hash_7a9bab3c50ff294d":
+    case #"hash_7a9bab3c50ff294d":
       level flag::set("<dev string:x25a3>");
       break;
-    case # "hash_e3eb39f2ce05aff":
+    case #"hash_e3eb39f2ce05aff":
       level thread zm_red_main_quest::function_69e1a1fc();
       break;
-    case # "hash_6fa14c9cc4ed8317":
+    case #"hash_6fa14c9cc4ed8317":
       level thread function_bb5a8b5e(0);
       break;
-    case # "hash_1226dc3756e1cbe4":
+    case #"hash_1226dc3756e1cbe4":
       level thread function_bb5a8b5e(1);
       break;
-    case # "ignite_shield":
+    case #"ignite_shield":
       level thread zm_red_main_quest::function_25bb4829(0);
       break;
-    case # "greek_fire":
+    case #"greek_fire":
       level thread zm_red_main_quest::function_25bb4829(1);
       break;
-    case # "oracle_boon_reset_all":
+    case #"oracle_boon_reset_all":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;
@@ -1898,56 +1898,56 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case # "hash_7bf7f5b60c83cf1f":
+    case #"hash_7bf7f5b60c83cf1f":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;
       }
 
       break;
-    case # "oracle_boon_reset_ammo":
+    case #"oracle_boon_reset_ammo":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[1].b_available = 1;
       }
 
       break;
-    case # "hash_5151955e310b4ba3":
+    case #"hash_5151955e310b4ba3":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[2].b_available = 1;
       }
 
       break;
-    case # "hash_382a97b59a98fb71":
+    case #"hash_382a97b59a98fb71":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[3].b_available = 1;
       }
 
       break;
-    case # "hash_5e97858955d10c64":
+    case #"hash_5e97858955d10c64":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[4].b_available = 1;
       }
 
       break;
-    case # "hash_5176fcfc9d31845d":
+    case #"hash_5176fcfc9d31845d":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[5].b_available = 1;
       }
 
       break;
-    case # "hash_6b98535cc00fb057":
+    case #"hash_6b98535cc00fb057":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[6].b_available = 1;
       }
 
       break;
-    case # "hash_6502e8f99bd18fcd":
+    case #"hash_6502e8f99bd18fcd":
       level thread zm_red_util::function_a94baf7b();
       return 1;
   }

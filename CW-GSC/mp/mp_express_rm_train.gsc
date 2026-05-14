@@ -139,13 +139,13 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
       var_49360986 playLoopSound("amb_train_lp" + var_d32723ab);
 
       switch (var_d32723ab) {
-        case # "_b":
+        case #"_b":
           var_d32723ab = "_c";
           break;
-        case # "_c":
+        case #"_c":
           var_d32723ab = "_d";
           break;
-        case # "_d":
+        case #"_d":
           var_d32723ab = "";
           break;
         default:

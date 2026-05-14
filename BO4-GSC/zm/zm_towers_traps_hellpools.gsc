@@ -122,7 +122,7 @@ function_55d14d78() {
   var_f6e18b6c = self.script_noteworthy;
 
   switch (var_f6e18b6c) {
-    case # "odin":
+    case #"odin":
       level.var_15783f81 = struct::get("zm_towers_hellpool_odin_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       whippeter = getEntArray("zm_towers_hellpool_odin", "script_noteworthy");
@@ -145,7 +145,7 @@ function_55d14d78() {
       }
 
       break;
-    case # "zeus":
+    case #"zeus":
       level.var_15783f81 = struct::get("zm_towers_hellpool_zeus_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       whippeter = getEntArray("zm_towers_hellpool_zeus", "script_noteworthy");
@@ -168,7 +168,7 @@ function_55d14d78() {
       }
 
       break;
-    case # "danu":
+    case #"danu":
       level.var_15783f81 = struct::get("zm_towers_hellpool_danu_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       whippeter = getEntArray("zm_towers_hellpool_danu", "script_noteworthy");
@@ -191,7 +191,7 @@ function_55d14d78() {
       }
 
       break;
-    case # "ra":
+    case #"ra":
       level.var_15783f81 = struct::get("zm_towers_hellpool_ra_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       whippeter = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");

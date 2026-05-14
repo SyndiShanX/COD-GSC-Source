@@ -225,17 +225,17 @@ function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "double_points":
+        case #"double_points":
           self thread function_d36fb590("double_points", 6, 1);
           break;
-        case # "insta_kill":
+        case #"insta_kill":
           self thread function_d36fb590("insta_kill", 6, 1);
           break;
-        case # "extra_life":
+        case #"extra_life":
           self thread function_d36fb590("self_revive", 6, 1);
           self.var_6482c679 = 1;
           break;
-        case # "bowie_knife":
+        case #"bowie_knife":
           self thread give_weapon_reward(undefined, 6, 0, #"bowie_knife");
           break;
       }
@@ -258,16 +258,16 @@ function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "full_ammo":
+        case #"full_ammo":
           self thread function_d36fb590("full_ammo", 15, 1);
           break;
-        case # "fire_sale":
+        case #"fire_sale":
           self thread function_d36fb590("fire_sale", 15, 1);
           break;
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(1, 15, 1, undefined);
           break;
-        case # "bowie_knife":
+        case #"bowie_knife":
           self thread give_weapon_reward(undefined, 15, 0, #"bowie_knife");
           break;
       }
@@ -288,13 +288,13 @@ function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "aat":
+        case #"aat":
           self thread function_7dc3dfdb(15);
           break;
-        case # "weapon_power":
+        case #"weapon_power":
           self thread function_d36fb590("hero_weapon_power", 15, 2);
           break;
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(2, 15, 1, undefined);
           break;
       }
@@ -335,18 +335,18 @@ function_123bcbcf() {
       str_reward = function_56c888ce(a_str_rewards);
 
       switch (str_reward) {
-        case # "weapon":
+        case #"weapon":
           self thread give_weapon_reward(3, 15, 1, undefined);
           break;
-        case # "free_perk":
+        case #"free_perk":
           self thread function_8665509b(15);
           self.var_123836f9++;
           break;
-        case # "extra_life":
+        case #"extra_life":
           self thread function_d36fb590("self_revive", 15, 1);
           self.var_17d719b9 = 1;
           break;
-        case # "pegasus":
+        case #"pegasus":
           self thread give_weapon_reward(undefined, 15, 0, #"thunderstorm");
           break;
       }
@@ -458,25 +458,25 @@ function_ed4a5d52(var_f0de9b92) {
   var_24a867e4 = undefined;
 
   switch (var_f0de9b92) {
-    case # "double_points":
+    case #"double_points":
       var_24a867e4 = "p7_zm_power_up_double_points";
       break;
-    case # "carpenter":
+    case #"carpenter":
       var_24a867e4 = "p7_zm_power_up_carpenter";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       var_24a867e4 = "p7_zm_power_up_insta_kill";
       break;
-    case # "full_ammo":
+    case #"full_ammo":
       var_24a867e4 = "p7_zm_power_up_max_ammo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       var_24a867e4 = "p7_zm_power_up_firesale";
       break;
-    case # "self_revive":
+    case #"self_revive":
       var_24a867e4 = "p8_zm_gla_heart_zombie";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       var_24a867e4 = "p8_zm_powerup_full_power";
       break;
   }
@@ -1221,11 +1221,11 @@ function_e08e4c9c(str_bgb, var_8b84b3ce) {
   v_angles = (0, 0, 0);
 
   switch (str_bgb) {
-    case # "zm_bgb_shields_up":
+    case #"zm_bgb_shields_up":
       str_model = #"p8_zm_red_powerup_free_shield";
       n_scale = 0.3;
       break;
-    case # "zm_bgb_equip_mint":
+    case #"zm_bgb_equip_mint":
     default:
       str_model = #"p8_zm_red_powerup_free_equiptment";
       n_scale = 0.45;

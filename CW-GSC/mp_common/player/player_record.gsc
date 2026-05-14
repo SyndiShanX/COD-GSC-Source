@@ -445,78 +445,78 @@ function function_7569c0fb() {
   self stats::function_81f5c0fe(#"gamesplayed", 1);
 
   switch (level.gametype) {
-    case # "ctf_bb_hc":
-    case # "control":
-    case # "dem_hc":
-    case # "sd":
-    case # "escort_bb":
-    case # "vip":
-    case # "dom_bb_hc":
-    case # "clean":
-    case # "dem":
-    case # "bounty":
-    case # "sd_cdl":
-    case # "control_bb":
-    case # "control_hc":
-    case # "dom10v10":
-    case # "hash_2561ffe336f1f9e3":
-    case # "hash_26d903aae5afc467":
-    case # "war":
-    case # "war12v12":
-    case # "hash_5a63e4bb11fd4fa8":
-    case # "dom_hc":
-    case # "dom_bb":
-    case # "hash_2dee5072d8b3cbe8":
-    case # "control_cdlpro":
-    case # "dom_snipe_bb":
-    case # "dom":
-    case # "hash_35e9174ce58d5bc2":
-    case # "escort":
-    case # "fireteam_dirty_bomb":
-    case # "hash_594c4ab1d31aa150":
-    case # "hash_55786ad6106fde1c":
-    case # "hash_7020e89c237486d0":
-    case # "clean_bb":
-    case # "ctf":
-    case # "sd_bb":
-    case # "sd_hc":
-    case # "ctf_hc":
-    case # "ctf_bb":
+    case #"ctf_bb_hc":
+    case #"control":
+    case #"dem_hc":
+    case #"sd":
+    case #"escort_bb":
+    case #"vip":
+    case #"dom_bb_hc":
+    case #"clean":
+    case #"dem":
+    case #"bounty":
+    case #"sd_cdl":
+    case #"control_bb":
+    case #"control_hc":
+    case #"dom10v10":
+    case #"hash_2561ffe336f1f9e3":
+    case #"hash_26d903aae5afc467":
+    case #"war":
+    case #"war12v12":
+    case #"hash_5a63e4bb11fd4fa8":
+    case #"dom_hc":
+    case #"dom_bb":
+    case #"hash_2dee5072d8b3cbe8":
+    case #"control_cdlpro":
+    case #"dom_snipe_bb":
+    case #"dom":
+    case #"hash_35e9174ce58d5bc2":
+    case #"escort":
+    case #"fireteam_dirty_bomb":
+    case #"hash_594c4ab1d31aa150":
+    case #"hash_55786ad6106fde1c":
+    case #"hash_7020e89c237486d0":
+    case #"clean_bb":
+    case #"ctf":
+    case #"sd_bb":
+    case #"sd_hc":
+    case #"ctf_hc":
+    case #"ctf_bb":
       self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivescore"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case # "koth10v10":
-    case # "koth":
-    case # "hash_156594d96f8a6568":
-    case # "hash_35a6541d081acef5":
-    case # "hash_111d8ed9a9337f7b":
-    case # "koth_hc":
-    case # "koth_bb":
-    case # "dropkick":
+    case #"koth10v10":
+    case #"koth":
+    case #"hash_156594d96f8a6568":
+    case #"hash_35a6541d081acef5":
+    case #"hash_111d8ed9a9337f7b":
+    case #"koth_hc":
+    case #"koth_bb":
+    case #"dropkick":
       self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivetime"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case # "hash_5a89fd80877a0eaa":
-    case # "tdm_snipe_bb":
-    case # "tdm_bb":
-    case # "fireteam_elimination":
-    case # "oic":
-    case # "tdm10v10":
-    case # "gunfight_3v3":
-    case # "scream":
-    case # "conf":
-    case # "dm":
-    case # "tdm_bb_hc":
-    case # "hash_6f784eb075451055":
-    case # "dm_bb":
-    case # "gunfight":
-    case # "gun_rambo":
-    case # "gun":
-    case # "conf_bb":
-    case # "tdm":
-    case # "conf_hc":
-    case # "tdm_hc":
-    case # "infect":
+    case #"hash_5a89fd80877a0eaa":
+    case #"tdm_snipe_bb":
+    case #"tdm_bb":
+    case #"fireteam_elimination":
+    case #"oic":
+    case #"tdm10v10":
+    case #"gunfight_3v3":
+    case #"scream":
+    case #"conf":
+    case #"dm":
+    case #"tdm_bb_hc":
+    case #"hash_6f784eb075451055":
+    case #"dm_bb":
+    case #"gunfight":
+    case #"gun_rambo":
+    case #"gun":
+    case #"conf_bb":
+    case #"tdm":
+    case #"conf_hc":
+    case #"tdm_hc":
+    case #"infect":
       self stats::function_81f5c0fe(#"stat1", self.ekia);
       self stats::function_81f5c0fe(#"stat2", self.deaths);
       break;

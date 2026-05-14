@@ -105,33 +105,33 @@ init_strategic_command() {
   }
 
   switch (level.gametype) {
-    case # "control":
-    case # "control_hc":
-    case # "control_cwl":
+    case #"control":
+    case #"control_hc":
+    case #"control_cwl":
       foreach(team in level.teams) {
         plannermpcontrolcommander::createcommander(team);
       }
 
       break;
-    case # "dom_cwl":
-    case # "dom_hc":
-    case # "dom":
+    case #"dom_cwl":
+    case #"dom_hc":
+    case #"dom":
       foreach(team in level.teams) {
         plannermpdomcommander::createcommander(team);
       }
 
       break;
-    case # "koth":
-    case # "koth_cwl":
-    case # "koth_hc":
+    case #"koth":
+    case #"koth_cwl":
+    case #"koth_hc":
       foreach(team in level.teams) {
         plannermpkothcommander::createcommander(team);
       }
 
       break;
-    case # "sd":
-    case # "sd_cwl":
-    case # "sd_hc":
+    case #"sd":
+    case #"sd_cwl":
+    case #"sd_hc":
       foreach(team in level.teams) {
         plannermpsdcommander::createcommander(team);
       }
@@ -331,12 +331,12 @@ use_killstreak() {
   killstreak_ref = killstreaks::get_menu_name(killstreak);
 
   switch (killstreak_ref) {
-    case # "killstreak_helicopter_player_gunner":
-    case # "killstreak_uav":
-    case # "killstreak_satellite":
-    case # "killstreak_sentinel":
-    case # "killstreak_counteruav":
-    case # "killstreak_raps":
+    case #"killstreak_helicopter_player_gunner":
+    case #"killstreak_uav":
+    case #"killstreak_satellite":
+    case #"killstreak_sentinel":
+    case #"killstreak_counteruav":
+    case #"killstreak_raps":
       self switchtoweapon(useweapon);
       break;
   }

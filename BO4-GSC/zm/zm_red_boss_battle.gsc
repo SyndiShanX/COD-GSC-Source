@@ -586,13 +586,13 @@ function_9e8c41f4(e_target) {
       var_701a257e = "<dev string:x48a>";
 
       switch (str_target_zone) {
-        case # "zone_boss_plateau_1":
+        case #"zone_boss_plateau_1":
           var_701a257e = "<dev string:x494>";
           break;
-        case # "zone_boss_plateau_2":
+        case #"zone_boss_plateau_2":
           var_701a257e = "<dev string:x49f>";
           break;
-        case # "zone_boss_plateau_3":
+        case #"zone_boss_plateau_3":
           var_701a257e = "<dev string:x4a8>";
           break;
       }
@@ -743,10 +743,10 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
     if(isinarray(level.hero_weapon[#"hammer"], w_weapon)) {
       if(isDefined(s_waitresult.mod)) {
         switch (s_waitresult.mod) {
-          case # "mod_electrocuted":
+          case #"mod_electrocuted":
             var_b7f8cbd8 = 1;
             break;
-          case # "mod_unknown":
+          case #"mod_unknown":
             var_3ae8e8aa = 1;
             break;
         }
@@ -771,7 +771,7 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
   }
 
   switch (str_weapon) {
-    case # "chakram":
+    case #"chakram":
       if(str_notify === "damage") {
         if(isDefined(var_b162218f) && var_b162218f) {
           n_base_damage = 100;
@@ -790,7 +790,7 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
       }
 
       break;
-    case # "scepter":
+    case #"scepter":
       if(str_notify === "hero_weapon_hit") {
         if(isDefined(var_5b0fafb) && var_5b0fafb) {
           n_base_damage = 25;
@@ -812,7 +812,7 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
       }
 
       break;
-    case # "hammer":
+    case #"hammer":
       if(str_notify === "damage") {
         if(isDefined(var_3ae8e8aa) && var_3ae8e8aa) {
           n_base_damage = 6;
@@ -832,7 +832,7 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
       }
 
       break;
-    case # "sword_pistol":
+    case #"sword_pistol":
       if(str_notify === "hero_weapon_hit") {
         if(isDefined(var_99f536ed) && var_99f536ed) {
           n_base_damage = 100;
@@ -967,10 +967,10 @@ function_9d06f858(var_fb8c33cc) {
 
   if(level.s_boss_battle.var_2f02900b > level.s_boss_battle.var_dc656db3) {
     switch (var_fb8c33cc) {
-      case # "hash_1bc4862b9138d947":
+      case #"hash_1bc4862b9138d947":
         level scene::play("fountain_miniboss_ent", "targetname");
         break;
-      case # "hash_3f87a91683ebe8e3":
+      case #"hash_3f87a91683ebe8e3":
         level scene::play("park_miniboss_ent", "targetname");
         break;
     }
@@ -1389,13 +1389,13 @@ function_3c2238ed(str_zone) {
   n_island = 0;
 
   switch (str_zone) {
-    case # "zone_boss_plateau_1":
+    case #"zone_boss_plateau_1":
       n_island = 2;
       break;
-    case # "zone_boss_plateau_2":
+    case #"zone_boss_plateau_2":
       n_island = 3;
       break;
-    case # "zone_boss_plateau_3":
+    case #"zone_boss_plateau_3":
       n_island = 1;
       break;
   }
@@ -1417,13 +1417,13 @@ function_cb86284d(a_ents) {
     }
 
     switch (str_zone) {
-      case # "zone_boss_plateau_1":
+      case #"zone_boss_plateau_1":
         n_isle = 2;
         break;
-      case # "zone_boss_plateau_2":
+      case #"zone_boss_plateau_2":
         n_isle = 3;
         break;
-      case # "zone_boss_plateau_3":
+      case #"zone_boss_plateau_3":
         n_isle = 1;
         break;
     }
@@ -2009,13 +2009,13 @@ function_39dc3a09(e_target) {
 
   if(isDefined(str_zone)) {
     switch (str_zone) {
-      case # "zone_boss_plateau_1":
+      case #"zone_boss_plateau_1":
         v_angles = 200;
         break;
-      case # "zone_boss_plateau_2":
+      case #"zone_boss_plateau_2":
         v_angles = 90;
         break;
-      case # "zone_boss_plateau_3":
+      case #"zone_boss_plateau_3":
         v_angles = 309;
         break;
     }
@@ -2143,7 +2143,7 @@ function_6401a80e() {
     var_2d54d86e = s_notify.var_9fa6220c.var_85e825a7;
 
     switch (s_notify._notify) {
-      case # "player_begin_fasttravel_rail":
+      case #"player_begin_fasttravel_rail":
         if(isDefined(var_2d54d86e)) {
           level flag::set(var_2d54d86e);
         }
@@ -2167,7 +2167,7 @@ function_6401a80e() {
         }
 
         break;
-      case # "fasttravel_finished":
+      case #"fasttravel_finished":
         if(isDefined(var_e1284bee.var_151f9e4b) && var_e1284bee.var_151f9e4b || isDefined(var_f0bbde5.var_151f9e4b) && var_f0bbde5.var_151f9e4b) {
           var_e1284bee.unitrigger_stub thread util::delay_notify(0.1, "cancel_fasttravel_cooldown");
           var_f0bbde5.unitrigger_stub thread util::delay_notify(0.1, "cancel_fasttravel_cooldown");
@@ -2176,7 +2176,7 @@ function_6401a80e() {
         }
 
         break;
-      case # "fasttravel_cooldown_done":
+      case #"fasttravel_cooldown_done":
         if(!(isDefined(var_e1284bee.var_5a099a2d) && var_e1284bee.var_5a099a2d)) {
           self zm_red_fasttravel::function_28deccf1(var_e1284bee, 1);
         }
@@ -2308,21 +2308,21 @@ cleanup_zombie() {
 
 function_27486895(cmd) {
   switch (cmd) {
-    case # "teleport_to_boss":
+    case #"teleport_to_boss":
       level thread zm_red::super_open_sesame();
       level thread function_3a2efd4e(1);
       break;
-    case # "boss_stage_3":
+    case #"boss_stage_3":
       level thread function_290d42b8(1);
       break;
-    case # "hash_7fe81b8551badbeb":
+    case #"hash_7fe81b8551badbeb":
       level.s_boss_battle.var_5de58d03 = 1;
       break;
-    case # "hash_4effcd324e5f7a28":
+    case #"hash_4effcd324e5f7a28":
       setDvar(#"hash_68b9a321eca18c32", 1);
       level thread function_99f0123d();
       break;
-    case # "hash_1c090a7b2c262602":
+    case #"hash_1c090a7b2c262602":
       setDvar(#"hash_68b9a321eca18c32", 0);
       level notify(#"hash_72be9b4e52b943b");
       break;

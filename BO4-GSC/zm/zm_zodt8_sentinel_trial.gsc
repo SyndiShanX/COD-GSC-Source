@@ -1038,16 +1038,16 @@ function_bcdb8fc4(s_spark) {
   str_alias = #"hash_73169d47085b2d";
 
   switch (s_spark.script_noteworthy) {
-    case # "hash_41a5c5168ffb2a97":
+    case #"hash_41a5c5168ffb2a97":
       str_alias = #"hash_73169d47085b2d";
       break;
-    case # "hash_400a481490a4e390":
+    case #"hash_400a481490a4e390":
       str_alias = #"hash_3b2c49194741ffda";
       break;
-    case # "hash_5562e324d230f057":
+    case #"hash_5562e324d230f057":
       str_alias = #"hash_3e9d8c755fa909a5";
       break;
-    case # "hash_41fae186552f1259":
+    case #"hash_41fae186552f1259":
       str_alias = #"hash_3d879b8999812127";
       break;
   }
@@ -1068,25 +1068,25 @@ function_b6db8da0(s_struct, ai_killed) {
   }
 
   switch (s_struct.script_noteworthy) {
-    case # "hash_41a5c5168ffb2a97":
+    case #"hash_41a5c5168ffb2a97":
       if(ai_killed.catalyst_type === 1) {
         break;
       }
 
       return false;
-    case # "hash_400a481490a4e390":
+    case #"hash_400a481490a4e390":
       if(ai_killed.catalyst_type === 4) {
         break;
       }
 
       return false;
-    case # "hash_5562e324d230f057":
+    case #"hash_5562e324d230f057":
       if(ai_killed.catalyst_type === 3) {
         break;
       }
 
       return false;
-    case # "hash_41fae186552f1259":
+    case #"hash_41fae186552f1259":
       if(ai_killed.catalyst_type === 2) {
         break;
       }
@@ -1200,19 +1200,19 @@ function_8a0679e4(s_struct, s_portal) {
   level.var_88de5053 = 3;
 
   switch (s_struct.script_noteworthy) {
-    case # "hash_41a5c5168ffb2a97":
+    case #"hash_41a5c5168ffb2a97":
       level thread function_ad0eee44("earth");
       function_e7615c8c();
       break;
-    case # "hash_400a481490a4e390":
+    case #"hash_400a481490a4e390":
       level thread function_ad0eee44("water");
       function_ab15557a();
       break;
-    case # "hash_5562e324d230f057":
+    case #"hash_5562e324d230f057":
       level thread function_ad0eee44("air");
       function_cacf191b();
       break;
-    case # "hash_41fae186552f1259":
+    case #"hash_41fae186552f1259":
       level thread function_ad0eee44("fire");
       function_818b63da();
       break;
@@ -1246,16 +1246,16 @@ zhide_heart() {
 
 function_999a6c5(var_e02e0cce, b_solid) {
   switch (var_e02e0cce) {
-    case # "hash_41a5c5168ffb2a97":
+    case #"hash_41a5c5168ffb2a97":
       str_blocker = "loc1";
       break;
-    case # "hash_400a481490a4e390":
+    case #"hash_400a481490a4e390":
       str_blocker = "loc2";
       break;
-    case # "hash_5562e324d230f057":
+    case #"hash_5562e324d230f057":
       str_blocker = "loc3";
       break;
-    case # "hash_41fae186552f1259":
+    case #"hash_41fae186552f1259":
       str_blocker = "loc4";
       break;
   }
@@ -1499,16 +1499,16 @@ function_ad0eee44(str_element) {
 
   if(level flag::get(#"hash_511653209a0c8cc5" + str_element + "_completed")) {
     switch (str_element) {
-      case # "earth":
+      case #"earth":
         mdl_artifact clientfield::set("" + #"artifact_element_fx", 1);
         break;
-      case # "water":
+      case #"water":
         mdl_artifact clientfield::set("" + #"artifact_element_fx", 2);
         break;
-      case # "air":
+      case #"air":
         mdl_artifact clientfield::set("" + #"artifact_element_fx", 3);
         break;
-      case # "fire":
+      case #"fire":
         mdl_artifact clientfield::set("" + #"artifact_element_fx", 4);
         break;
     }
@@ -2380,23 +2380,23 @@ function_11df7365(a_zones) {
 
 function_c3e929e8(str_planet_name) {
   switch (str_planet_name) {
-    case # "sun":
+    case #"sun":
       return array("zone_forecastle_upper", "zone_forecastle_lower");
-    case # "saturn":
+    case #"saturn":
       return "zone_bridge";
-    case # "neptune":
+    case #"neptune":
       return "zone_aft_deck";
-    case # "jupiter":
+    case #"jupiter":
       return array("zone_engine", "zone_upper_engine_room");
-    case # "moon":
+    case #"moon":
       return "zone_grand_stairs_c_deck";
-    case # "uranus":
+    case #"uranus":
       return array("zone_state_rooms_rear", "zone_state_rooms_front");
-    case # "mercury":
+    case #"mercury":
       return "zone_mail_room";
-    case # "mars":
+    case #"mars":
       return "zone_boiler_room";
-    case # "venus":
+    case #"venus":
       return "millionaire_suite_zone";
   }
 }
@@ -2449,31 +2449,31 @@ function_996d1a4c(a_glyphs, mdl_light) {
 
 function_f84f44e5(str_planet_name) {
   switch (str_planet_name) {
-    case # "sun":
+    case #"sun":
       self clientfield::set("" + #"planet_light", 1);
       break;
-    case # "mercury":
+    case #"mercury":
       self clientfield::set("" + #"planet_light", 2);
       break;
-    case # "venus":
+    case #"venus":
       self clientfield::set("" + #"planet_light", 3);
       break;
-    case # "moon":
+    case #"moon":
       self clientfield::set("" + #"planet_light", 4);
       break;
-    case # "mars":
+    case #"mars":
       self clientfield::set("" + #"planet_light", 5);
       break;
-    case # "jupiter":
+    case #"jupiter":
       self clientfield::set("" + #"planet_light", 6);
       break;
-    case # "saturn":
+    case #"saturn":
       self clientfield::set("" + #"planet_light", 7);
       break;
-    case # "uranus":
+    case #"uranus":
       self clientfield::set("" + #"planet_light", 8);
       break;
-    case # "neptune":
+    case #"neptune":
       self clientfield::set("" + #"planet_light", 9);
       break;
   }
@@ -2578,31 +2578,31 @@ planet_behavior(mdl_planet) {
     mdl_planet setscale(1.25);
 
     switch (str_planet_name) {
-      case # "uranus":
+      case #"uranus":
         mdl_planet setscale(2);
         mdl_planet clientfield::set("" + #"planet_fx", 8);
         break;
-      case # "saturn":
+      case #"saturn":
         mdl_planet setscale(3);
         mdl_planet clientfield::set("" + #"planet_fx", 7);
         break;
-      case # "jupiter":
+      case #"jupiter":
         mdl_planet setscale(2.5);
         mdl_planet clientfield::set("" + #"planet_fx", 6);
         break;
-      case # "sun":
+      case #"sun":
         mdl_planet clientfield::set("" + #"planet_fx", 1);
         break;
-      case # "mars":
+      case #"mars":
         mdl_planet clientfield::set("" + #"planet_fx", 5);
         break;
-      case # "mercury":
+      case #"mercury":
         mdl_planet clientfield::set("" + #"planet_fx", 2);
         break;
-      case # "venus":
+      case #"venus":
         mdl_planet clientfield::set("" + #"planet_fx", 3);
         break;
-      case # "neptune":
+      case #"neptune":
         mdl_planet clientfield::set("" + #"planet_fx", 9);
         break;
     }
@@ -3737,28 +3737,28 @@ function_6fef3bc3(nd_path) {
 
   if(isDefined(nd_path.targetname)) {
     switch (nd_path.targetname) {
-      case # "orb_path_1":
+      case #"orb_path_1":
         str_model = #"p8_zm_zod_planets_mercury_large";
         break;
-      case # "orb_path_2":
+      case #"orb_path_2":
         str_model = #"p8_zm_zod_planets_venus_large";
         break;
-      case # "orb_path_3":
+      case #"orb_path_3":
         str_model = #"p8_zm_zod_planets_mars_large";
         break;
-      case # "orb_path_4":
+      case #"orb_path_4":
         str_model = #"p8_zm_zod_planets_jupiter_large";
         break;
-      case # "orb_path_5":
+      case #"orb_path_5":
         str_model = #"p8_zm_zod_planets_saturn_large";
         break;
-      case # "orb_path_6":
+      case #"orb_path_6":
         str_model = #"p8_zm_zod_planets_uranus_large";
         break;
-      case # "orb_path_7":
+      case #"orb_path_7":
         str_model = #"p8_zm_zod_planets_neptune_large";
         break;
-      case # "orb_path_0":
+      case #"orb_path_0":
         str_model = #"p8_zm_zod_planets_sun_large";
         break;
     }

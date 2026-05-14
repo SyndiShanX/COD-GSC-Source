@@ -33,43 +33,43 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
 
 function private function_32ab045(ent, name) {
   switch (name) {
-    case # "adler":
+    case #"adler":
       level.adler = ent;
       level.adler thread function_952e21e3(ent, name);
       level.adler waittill(#"death");
       level.adler = undefined;
       break;
-    case # "lazar":
+    case #"lazar":
       level.lazar = ent;
       level.lazar thread function_952e21e3(ent, name);
       level.lazar waittill(#"death");
       level.lazar = undefined;
       break;
-    case # "park":
+    case #"park":
       level.park = ent;
       level.park thread function_952e21e3(ent, name);
       level.park waittill(#"death");
       level.park = undefined;
       break;
-    case # "sims":
+    case #"sims":
       level.sims = ent;
       level.sims thread function_952e21e3(ent, name);
       level.sims waittill(#"death");
       level.sims = undefined;
       break;
-    case # "hudson":
+    case #"hudson":
       level.hudson = ent;
       level.hudson thread function_952e21e3(ent, name);
       level.hudson waittill(#"death");
       level.hudson = undefined;
       break;
-    case # "woods":
+    case #"woods":
       level.woods = ent;
       level.woods thread function_952e21e3(ent, name);
       level.woods waittill(#"death");
       level.woods = undefined;
       break;
-    case # "mason":
+    case #"mason":
       level.mason = ent;
       level.mason thread function_952e21e3(ent, name);
       level.mason waittill(#"death");
@@ -87,7 +87,7 @@ function private _trigger(player, trigger, var_ec80d14b) {
   trigger_name = snd::function_ea2f17d1(var_ec80d14b.script_ambientroom, "$default");
 
   switch (trigger_name) {
-    case # "$default":
+    case #"$default":
       snd::set_element(trigger, trigger_name);
       break;
     default:
@@ -100,108 +100,108 @@ function private _trigger(player, trigger, var_ec80d14b) {
 
 function private function_f2a2832d(player, msg) {
   switch (msg) {
-    case # "post_takedown":
+    case #"post_takedown":
       setsoundcontext("visit", "post_takedown");
       level.var_28b99ea7 = "post_takedown";
       function_a269371b();
       break;
-    case # "post_armada":
+    case #"post_armada":
       setsoundcontext("visit", "post_armada");
       level.var_28b99ea7 = "post_armada";
       function_a269371b();
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       setsoundcontext("visit", "post_kgb");
       level.var_28b99ea7 = "post_kgb";
       function_a269371b();
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       setsoundcontext("visit", "post_cuba");
       level.var_28b99ea7 = "post_cuba";
       function_a269371b();
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       setsoundcontext("visit", "post_prisoner");
       level.var_28b99ea7 = "post_prisoner";
       function_a269371b();
       break;
-    case # "hash_1b78b54c338981ad":
+    case #"hash_1b78b54c338981ad":
       function_5ea2c6e3("cp_ger_hub8_submix", 0, 1);
       break;
-    case # "hash_5c379cf8b486919b":
+    case #"hash_5c379cf8b486919b":
       function_ed62c9c2("cp_ger_hub8_submix", 1);
       break;
-    case # "post_prisoner_burn_scene":
+    case #"post_prisoner_burn_scene":
       setsoundcontext("visit", "post_prisoner_burn_scene");
       level.var_28b99ea7 = "post_prisoner_burn_scene";
       function_a269371b();
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       setsoundcontext("visit", "post_yamantau");
       level.var_28b99ea7 = "yamantau";
       function_a269371b();
       break;
-    case # "hash_774f81b7fe6ee1f6":
+    case #"hash_774f81b7fe6ee1f6":
       audio::snd_set_snapshot("cp_ger_hub_evidenceboard_enter");
       break;
-    case # "hash_3f89f51c820e2ec0":
+    case #"hash_3f89f51c820e2ec0":
       audio::snd_set_snapshot("");
       break;
-    case # "hash_3e89d014789ae73b":
+    case #"hash_3e89d014789ae73b":
       audio::snd_set_snapshot("cp_ger_hub_arcade_machine");
       break;
-    case # "hash_3992190071e0da2f":
+    case #"hash_3992190071e0da2f":
       audio::snd_set_snapshot("");
       break;
-    case # "snd_overlook_scene":
+    case #"snd_overlook_scene":
       thread function_34050dad();
       break;
-    case # "hash_1e58e46360c0a83b":
+    case #"hash_1e58e46360c0a83b":
       level notify(#"hash_1e58e46360c0a83b");
       break;
-    case # "plane_startup":
+    case #"plane_startup":
       thread function_955f4842();
       break;
-    case # "plane_idle":
+    case #"plane_idle":
       thread function_2d8bbe54(0.5);
       break;
-    case # "start_plane_rev":
+    case #"start_plane_rev":
       thread function_e9cf99c1();
       break;
-    case # "ambient_ext_override":
+    case #"ambient_ext_override":
       thread function_26282537();
       break;
-    case # "hash_6e37b7c047667b8e":
+    case #"hash_6e37b7c047667b8e":
       thread function_eeb6e2e1();
       break;
-    case # "ambient_override_return_to_normal":
+    case #"ambient_override_return_to_normal":
       thread ambient_override_return_to_normal();
       break;
-    case # "hash_72dc7d49e5a3096a":
+    case #"hash_72dc7d49e5a3096a":
       thread dia_focus_on();
       break;
-    case # "hash_4f97009133f1b2dc":
+    case #"hash_4f97009133f1b2dc":
       thread dia_focus_off();
       break;
-    case # "hash_3031949ab2125e03":
+    case #"hash_3031949ab2125e03":
       function_5af45515();
       break;
-    case # "amb_armada":
+    case #"amb_armada":
       function_f4c3ff4f();
       break;
-    case # "hash_5b6ae81610d69a78":
+    case #"hash_5b6ae81610d69a78":
       function_d701d197();
       break;
-    case # "hash_2a6c48d5e64b11f4":
+    case #"hash_2a6c48d5e64b11f4":
       function_91962847();
       break;
-    case # "hash_6fbdea34819cb7c5":
+    case #"hash_6fbdea34819cb7c5":
       function_351d940();
       break;
-    case # "amb_prisoner":
+    case #"amb_prisoner":
       function_d3856f8a();
       break;
-    case # "hash_4e3a33825e832ae6":
+    case #"hash_4e3a33825e832ae6":
       function_ef8c9b18();
       break;
     default:
@@ -218,44 +218,44 @@ function private _objective(objective) {
   level thread allies_init();
 
   switch (objective) {
-    case # "chapter_selection":
+    case #"chapter_selection":
       break;
-    case # "post_takedown":
-    case # "post_takedown_skip_briefing":
+    case #"post_takedown":
+    case #"post_takedown_skip_briefing":
       level.var_28b99ea7 = "post_takedown";
       function_a269371b();
       break;
-    case # "post_armada":
-    case # "post_armada_skip_briefing":
+    case #"post_armada":
+    case #"post_armada_skip_briefing":
       level.var_28b99ea7 = "post_armada";
       function_a269371b();
       snd::set_element(player, "thunder_int");
       break;
-    case # "post_yamantau":
-    case # "post_yamantau_skip_briefing":
+    case #"post_yamantau":
+    case #"post_yamantau_skip_briefing":
       level.var_28b99ea7 = "post_yamantau";
       function_a269371b();
       break;
-    case # "post_kgb":
-    case # "post_kgb_skip_briefing":
+    case #"post_kgb":
+    case #"post_kgb_skip_briefing":
       level.var_28b99ea7 = "post_kgb";
       function_a269371b();
       break;
-    case # "post_cuba":
-    case # "hash_6245569317a5039e":
+    case #"post_cuba":
+    case #"hash_6245569317a5039e":
       level.var_28b99ea7 = "post_cuba";
       function_a269371b();
       break;
-    case # "post_prisoner":
-    case # "hash_65bc9e5b3b128daf":
+    case #"post_prisoner":
+    case #"hash_65bc9e5b3b128daf":
       level.var_28b99ea7 = "post_prisoner";
       function_a269371b();
       break;
-    case # "post_prisoner_burn_scene":
+    case #"post_prisoner_burn_scene":
       level.var_28b99ea7 = "post_prisoner_burn_scene";
       function_a269371b();
       break;
-    case # "no_game":
+    case #"no_game":
       break;
     default:
 

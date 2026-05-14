@@ -609,16 +609,16 @@ function_30afd2be(type, stub) {
   var_b8576908 = 2000;
 
   switch (type) {
-    case # "lockdown_stub_type_crafting_tables":
+    case #"lockdown_stub_type_crafting_tables":
       var_491c5d62 = 1;
       break;
-    case # "lockdown_stub_type_magic_box":
+    case #"lockdown_stub_type_magic_box":
       var_491c5d62 = 1;
       break;
-    case # "lockdown_stub_type_pap":
+    case #"lockdown_stub_type_pap":
       var_491c5d62 = 3;
       break;
-    case # "lockdown_stub_type_perks":
+    case #"lockdown_stub_type_perks":
       var_491c5d62 = 3;
       break;
     default:

@@ -109,10 +109,10 @@ function function_4a19b47a() {
   }
 
   switch (self.voiceprefix) {
-    case # "hash_6600f5c535189183":
+    case #"hash_6600f5c535189183":
       self.var_3d0026c9 = randomintrange(1, 3);
       break;
-    case # "hash_6d6e10c538f37ef3":
+    case #"hash_6d6e10c538f37ef3":
       self.var_3d0026c9 = randomintrange(1, 5);
       break;
     default:
@@ -178,11 +178,11 @@ function damage_is_valid_for_friendlyfire_warning(mod) {
   }
 
   switch (mod) {
-    case # "mod_grenade":
-    case # "mod_crush":
-    case # "mod_grenade_splash":
-    case # "mod_impact":
-    case # "mod_melee":
+    case #"mod_grenade":
+    case #"mod_crush":
+    case #"mod_grenade_splash":
+    case #"mod_impact":
+    case #"mod_melee":
       return false;
   }
 

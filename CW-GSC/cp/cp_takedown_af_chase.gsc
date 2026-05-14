@@ -1018,7 +1018,7 @@ function function_35bf824f() {
 
     if(isDefined(ret.veh) && isalive(ret.veh)) {
       switch (ret.veh.script_noteworthy) {
-        case # "af_enemy_chase_veh_r":
+        case #"af_enemy_chase_veh_r":
           level.adler dialogue::queue(var_be9333bc[var_fb6cba84]);
           var_fb6cba84++;
 
@@ -1027,7 +1027,7 @@ function function_35bf824f() {
           }
 
           break;
-        case # "af_enemy_chase_veh_l":
+        case #"af_enemy_chase_veh_l":
           level.adler dialogue::queue(var_539f7582[var_ea3f660f]);
           var_ea3f660f++;
 
@@ -1521,51 +1521,51 @@ function function_db378ce0() {
     var_fa4b90bc = "roll_r1";
 
     switch (self.script_noteworthy) {
-      case # "hash_1326aeed0f386d94":
+      case #"hash_1326aeed0f386d94":
         var_fa4b90bc = "tag_passenger2";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_le_en2";
         break;
-      case # "roll_l2":
+      case #"roll_l2":
         var_fa4b90bc = "tag_passenger3";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_le_en3";
         break;
-      case # "hash_1326b0ed0f3870fa":
+      case #"hash_1326b0ed0f3870fa":
         var_fa4b90bc = "tag_passenger1";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_le_en4";
         break;
-      case # "roll_r1":
+      case #"roll_r1":
         var_fa4b90bc = "tag_passenger2";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_ri_en2";
         break;
-      case # "hash_12c099ed0ee196b3":
+      case #"hash_12c099ed0ee196b3":
         var_fa4b90bc = "tag_passenger3";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_ri_en3";
         break;
-      case # "hash_12c098ed0ee19500":
+      case #"hash_12c098ed0ee19500":
         var_fa4b90bc = "tag_passenger1";
         anim_scene = "scene_tkd_hit3_chase_jeep_rollbar_ri_en4";
         break;
-      case # "hash_48024b666fce275a":
+      case #"hash_48024b666fce275a":
         var_fa4b90bc = "tag_passenger2";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_le_en2";
         break;
-      case # "hard_l2":
+      case #"hard_l2":
         var_fa4b90bc = "tag_passenger3";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_le_en3";
         break;
-      case # "hash_480249666fce23f4":
+      case #"hash_480249666fce23f4":
         var_fa4b90bc = "tag_passenger1";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_le_en4";
         break;
-      case # "hash_47e02f666fb11160":
+      case #"hash_47e02f666fb11160":
         var_fa4b90bc = "tag_passenger2";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_ri_en2";
         break;
-      case # "hash_47e032666fb11679":
+      case #"hash_47e032666fb11679":
         var_fa4b90bc = "tag_passenger3";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_ri_en3";
         break;
-      case # "hash_47e031666fb114c6":
+      case #"hash_47e031666fb114c6":
         var_fa4b90bc = "tag_passenger1";
         anim_scene = "scene_tkd_hit3_chase_jeep_hardtop_ri_en4";
         break;

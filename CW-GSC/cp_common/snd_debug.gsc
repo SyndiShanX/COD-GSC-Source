@@ -580,67 +580,67 @@ function private function_fcbbe789(key, value) {
   switch (key) {
     default:
       break;
-    case # "hash_7bf92664f192f2a2":
-    case # "hash_7bf92664f192f2a2":
+    case #"hash_7bf92664f192f2a2":
+    case #"hash_7bf92664f192f2a2":
       level._snd._debug.debuglevel = int(value);
       break;
-    case # "hash_7f77282fd4f2f35c":
-    case # "hash_7f77282fd4f2f35c":
+    case #"hash_7f77282fd4f2f35c":
+    case #"hash_7f77282fd4f2f35c":
       level._snd._debug.filter = "<dev string:x4b>" + value;
       break;
-    case # "hash_52bc4ee11d186c55":
-    case # "hash_52bc4ee11d186c55":
+    case #"hash_52bc4ee11d186c55":
+    case #"hash_52bc4ee11d186c55":
       level._snd._debug.hud_x = int(value);
       break;
-    case # "hash_52bc4de11d186aa2":
-    case # "hash_52bc4de11d186aa2":
+    case #"hash_52bc4de11d186aa2":
+    case #"hash_52bc4de11d186aa2":
       level._snd._debug.hud_y = int(value);
       break;
-    case # "hash_4b427a4d65f4f4b0":
-    case # "hash_4b427a4d65f4f4b0":
+    case #"hash_4b427a4d65f4f4b0":
+    case #"hash_4b427a4d65f4f4b0":
       level._snd._debug.dist_radius = int(value);
       break;
-    case # "hash_182296346d138cf8":
-    case # "hash_182296346d138cf8":
+    case #"hash_182296346d138cf8":
+    case #"hash_182296346d138cf8":
       level._snd._debug.scale_3d = float(value);
       break;
-    case # "hash_3b9f89c8082a9915":
-    case # "hash_3b9f89c8082a9915":
+    case #"hash_3b9f89c8082a9915":
+    case #"hash_3b9f89c8082a9915":
       if(isstring(value)) {} else if(isvec(value)) {
         level._snd._debug.color_3d = value;
       }
 
       break;
-    case # "hash_3944b771315157c1":
-    case # "hash_3944b771315157c1":
+    case #"hash_3944b771315157c1":
+    case #"hash_3944b771315157c1":
       level._snd._debug.color_scale = float(value);
       break;
-    case # "hash_28da12ba1bad355a":
-    case # "hash_28da12ba1bad355a":
+    case #"hash_28da12ba1bad355a":
+    case #"hash_28da12ba1bad355a":
       level._snd._debug.var_2751db2e = int(value);
       break;
-    case # "hash_7fb5d688966509c9":
-    case # "hash_7fb5d688966509c9":
+    case #"hash_7fb5d688966509c9":
+    case #"hash_7fb5d688966509c9":
       level._snd._debug.distance_max = int(value);
       break;
-    case # "hash_4a9b448151bd0fa9":
-    case # "hash_4a9b448151bd0fa9":
+    case #"hash_4a9b448151bd0fa9":
+    case #"hash_4a9b448151bd0fa9":
       level._snd._debug.dot = float(value);
       break;
-    case # "hash_579325eaa87b4d2f":
-    case # "hash_579325eaa87b4d2f":
+    case #"hash_579325eaa87b4d2f":
+    case #"hash_579325eaa87b4d2f":
       level._snd._debug.draw_limit = int(value);
       break;
-    case # "hash_35a6f662245752fa":
-    case # "hash_35a6f662245752fa":
+    case #"hash_35a6f662245752fa":
+    case #"hash_35a6f662245752fa":
       level._snd._debug.xhair = int(value);
       break;
-    case # "hash_5ba24ffba2d85322":
-    case # "hash_5ba24ffba2d85322":
+    case #"hash_5ba24ffba2d85322":
+    case #"hash_5ba24ffba2d85322":
       level._snd._debug.var_4c5d0455 = float(value);
       break;
-    case # "hash_3d649e7c9abdc358":
-    case # "hash_3d649e7c9abdc358":
+    case #"hash_3d649e7c9abdc358":
+    case #"hash_3d649e7c9abdc358":
       level._snd._debug.var_4b824b64 = int(value);
       break;
   }

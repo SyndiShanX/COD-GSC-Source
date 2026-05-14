@@ -967,25 +967,25 @@ function devgui_think() {
       case 0:
         reset = 0;
         break;
-      case # "debugprints":
+      case #"debugprints":
         setDvar(#"activecamo_debug", !getdvarint(#"activecamo_debug", 0));
         break;
-      case # "reset":
+      case #"reset":
         function_cc5baf7f(&function_58719455);
         break;
-      case # "stage_next":
+      case #"stage_next":
         function_cc5baf7f(&function_3ac4d286, 0);
         break;
-      case # "stage_prev":
+      case #"stage_prev":
         function_cc5baf7f(&function_3ac4d286, 1);
         break;
-      case # "set_camo":
+      case #"set_camo":
         function_cc5baf7f(&function_9c361e56, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case # "give_weapon":
+      case #"give_weapon":
         function_cc5baf7f(&function_cc486b05, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case # "set_stage":
+      case #"set_stage":
         function_cc5baf7f(&function_779a9561, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
     }

@@ -287,7 +287,7 @@ function set_blind(blind, force) {
 
 function set_sight_state(state) {
   switch (state) {
-    case # "blind":
+    case #"blind":
       self stealth_threat_sight::threat_sight_set_state("blind");
       self.fovcosine = 0.98;
       self.fovcosinebusy = 0.98;
@@ -296,9 +296,9 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.99;
       self.fovcosineperiphmaxdistsq = 1;
       break;
-    case # "idle":
-    case # "hidden":
-    case # "unaware":
+    case #"idle":
+    case #"hidden":
+    case #"unaware":
       self stealth_threat_sight::threat_sight_set_state("hidden");
       self.fovcosine = 0.7;
       self.fovcosinebusy = 0.86;
@@ -307,7 +307,7 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.34;
       self.fovcosineperiphmaxdistsq = 90000;
       break;
-    case # "investigate":
+    case #"investigate":
       self stealth_threat_sight::threat_sight_set_state("investigate");
       self.fovcosine = 0.7;
       self.fovcosinebusy = 0.86;
@@ -316,8 +316,8 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.34;
       self.fovcosineperiphmaxdistsq = 90000;
       break;
-    case # "hunt":
-    case # "combat_hunt":
+    case #"hunt":
+    case #"combat_hunt":
       self stealth_threat_sight::threat_sight_set_state("combat_hunt");
       self.fovcosine = 0.7;
       self.fovcosinebusy = 0.86;
@@ -326,8 +326,8 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.01;
       self.fovcosineperiphmaxdistsq = 90000;
       break;
-    case # "combat":
-    case # "spotted":
+    case #"combat":
+    case #"spotted":
       self stealth_threat_sight::threat_sight_set_state("spotted");
       self.fovcosine = 0.01;
       self.fovcosinebusy = 0.574;
@@ -336,13 +336,13 @@ function set_sight_state(state) {
       self.fovcosineperiph = 0.01;
       self.fovcosineperiphmaxdistsq = 16384;
       break;
-    case # "hash_5689f41e8c0ad00":
+    case #"hash_5689f41e8c0ad00":
       assertmsg("<dev string:x6b>");
       break;
-    case # "hash_2689c03316776ffb":
+    case #"hash_2689c03316776ffb":
       assertmsg("<dev string:x6b>");
       break;
-    case # "elevated":
+    case #"elevated":
       assertmsg("<dev string:x6b>");
       break;
   }
@@ -640,11 +640,11 @@ function should_ignore_sprint_footstep(event) {
 function event_override_disguise(event) {
   if(issentient(event.entity)) {
     switch (event.typeorig) {
-      case # "footstep_sprint":
-      case # "footstep":
-      case # "footstep_walk":
-      case # "footstep_run":
-      case # "proximity":
+      case #"footstep_sprint":
+      case #"footstep":
+      case #"footstep_walk":
+      case #"footstep_run":
+      case #"proximity":
         self thread stealth_threat_sight::threat_sight_force_visible(event.entity, 1);
         return true;
     }
@@ -682,7 +682,7 @@ function event_handler_translate_severity(event) {
   }
 
   switch (event.typeorig) {
-    case # "sight":
+    case #"sight":
       if(self.species == "dog") {
         event.type = "investigate";
       } else if(self namespace_979752dc::function_d58e1c1c() && self.alertlevel == "low_alert") {
@@ -704,13 +704,13 @@ function event_handler_translate_severity(event) {
       }
 
       break;
-    case # "grenade danger":
+    case #"grenade danger":
       if(event_anyone_within_radius(event.origin, 128)) {
         event.type = "combat";
       }
 
       break;
-    case # "explode":
+    case #"explode":
       if(event_anyone_within_radius(event.origin, 192)) {
         event.type = "combat";
       } else if(distancesquared(event.origin, self.origin) <= 1048576) {
@@ -718,13 +718,13 @@ function event_handler_translate_severity(event) {
       }
 
       break;
-    case # "gunshot":
+    case #"gunshot":
       if(distancesquared(event.origin, self.origin) < 640000) {
         event.type = "combat";
       }
 
       break;
-    case # "glass_destroyed":
+    case #"glass_destroyed":
       if(self util::has_tac_vis(event.origin, 0) && distance2dsquared(event.origin, self.origin) < 36864) {
         event.type = "combat";
       }
@@ -748,21 +748,21 @@ function react_announce(event) {
   var_bed01a48 = hash(event.type);
 
   switch (var_bed01a48) {
-    case # "investigate":
+    case #"investigate":
       self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "investigate", delaytime);
       println("<dev string:xa3>" + self getentitynumber() + "<dev string:xbe>" + event.typeorig + "<dev string:xf2>");
 
       stealth_debug::function_65b21ab8(self, "<dev string:x115>");
 
       return true;
-    case # "cover_blown":
+    case #"cover_blown":
       self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "coverblown", delaytime);
       println("<dev string:xa3>" + self getentitynumber() + "<dev string:x11d>" + event.typeorig + "<dev string:xf2>");
 
       stealth_debug::function_65b21ab8(self, "<dev string:x151>");
 
       return true;
-    case # "combat":
+    case #"combat":
       self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "combat", 1);
       println("<dev string:xa3>" + self getentitynumber() + "<dev string:x162>" + event.typeorig + "<dev string:xf2>");
 
@@ -781,52 +781,52 @@ function react_announce_specific(event) {
     delaytime = randomfloatrange(0.5, 1);
 
     switch (event.typeorig) {
-      case # "sight":
+      case #"sight":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "sight", delaytime);
         return true;
-      case # "explode":
+      case #"explode":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "explosion", delaytime);
         return true;
-      case # "grenade danger":
+      case #"grenade danger":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "grenade_danger", delaytime);
         return true;
-      case # "seek_backup":
+      case #"seek_backup":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "seek_backup", randomfloatrange(2, 2.5), event);
         return true;
-      case # "saw_corpse":
-      case # "found_corpse":
+      case #"saw_corpse":
+      case #"found_corpse":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", event.typeorig, delaytime);
 
         stealth_debug::function_65b21ab8(self, "<dev string:x19d>");
 
         return true;
-      case # "bulletwhizby":
-      case # "gunshot":
+      case #"bulletwhizby":
+      case #"gunshot":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "gunshot", 0.2, event);
 
         stealth_debug::function_65b21ab8(self, "<dev string:x1b0>");
 
         return true;
-      case # "ally_damaged":
-      case # "gunshot_teammate":
+      case #"ally_damaged":
+      case #"gunshot_teammate":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "gunshot", randomfloatrange(0.8, 1.3), event);
 
         stealth_debug::function_65b21ab8(self, "<dev string:x1c7>");
 
         return true;
-      case # "ally_killed":
+      case #"ally_killed":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "ally_killed", 0.5);
 
         stealth_debug::function_65b21ab8(self, "<dev string:x1dc>");
 
         return true;
-      case # "proximity":
+      case #"proximity":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "proximity", 0.5);
         return true;
-      case # "footstep_sprint":
-      case # "footstep":
-      case # "glass_destroyed":
-      case # "footstep_run":
+      case #"footstep_sprint":
+      case #"footstep":
+      case #"glass_destroyed":
+      case #"footstep_run":
         self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "investigate", delaytime);
         return true;
       default:
@@ -897,13 +897,13 @@ function bt_event_handler_severity(event) {
   var_bed01a48 = hash(event.type);
 
   switch (var_bed01a48) {
-    case # "investigate":
+    case #"investigate":
       self thread bt_event_investigate(event);
       break;
-    case # "cover_blown":
+    case #"cover_blown":
       self thread bt_event_cover_blown(event);
       break;
-    case # "combat":
+    case #"combat":
       self thread bt_event_combat(event);
       break;
   }
@@ -942,9 +942,9 @@ function bt_event_cover_blown(event) {
 
   if(is_true(level.stealth.disguised)) {
     switch (event.typeorig) {
-      case # "explode":
-      case # "silenced_shot":
-      case # "gunshot":
+      case #"explode":
+      case #"silenced_shot":
+      case #"gunshot":
         namespace_979752dc::set_disguised(0);
         level util::delay(20, undefined, &namespace_979752dc::set_disguised, 1);
         break;

@@ -384,26 +384,26 @@ init_stages(activecamo, var_3a8a1e00, isdeath) {
 
 function_c0fa0ecb(weapon) {
   switch (weapon.statname) {
-    case # "tr_midburst_t8":
-    case # "sniper_powersemi_t8":
-    case # "ar_damage_t8":
-    case # "ar_accurate_t8":
-    case # "smg_capacity_t8":
-    case # "sniper_powerbolt_t8":
-    case # "ar_fastfire_t8":
-    case # "sniper_quickscope_t8":
-    case # "lmg_heavy_t8":
-    case # "ar_stealth_t8":
-    case # "tr_longburst_t8":
-    case # "smg_standard_t8":
-    case # "lmg_spray_t8":
-    case # "smg_accurate_t8":
-    case # "ar_modular_t8":
-    case # "smg_fastfire_t8":
-    case # "lmg_standard_t8":
-    case # "sniper_fastrechamber_t8":
-    case # "tr_powersemi_t8":
-    case # "smg_handling_t8":
+    case #"tr_midburst_t8":
+    case #"sniper_powersemi_t8":
+    case #"ar_damage_t8":
+    case #"ar_accurate_t8":
+    case #"smg_capacity_t8":
+    case #"sniper_powerbolt_t8":
+    case #"ar_fastfire_t8":
+    case #"sniper_quickscope_t8":
+    case #"lmg_heavy_t8":
+    case #"ar_stealth_t8":
+    case #"tr_longburst_t8":
+    case #"smg_standard_t8":
+    case #"lmg_spray_t8":
+    case #"smg_accurate_t8":
+    case #"ar_modular_t8":
+    case #"smg_fastfire_t8":
+    case #"lmg_standard_t8":
+    case #"sniper_fastrechamber_t8":
+    case #"tr_powersemi_t8":
+    case #"smg_handling_t8":
       self stats::function_eec52333(weapon, #"hash_4e43a25a3e77ab5f", 1, self.class_num);
       break;
     default:
@@ -413,19 +413,19 @@ function_c0fa0ecb(weapon) {
 
 function_c1f96c48(weapon) {
   switch (weapon.statname) {
-    case # "ar_accurate_t8":
+    case #"ar_accurate_t8":
       return # "camo_active_headshot_base_headshots";
-    case # "ar_fastfire_t8":
+    case #"ar_fastfire_t8":
       return # "hash_9da725fe15aa048";
-    case # "lmg_standard_t8":
+    case #"lmg_standard_t8":
       return # "hash_5cf945d7954a39e0";
-    case # "pistol_standard_t8":
+    case #"pistol_standard_t8":
       return # "hash_1ffb9d5647330a52";
-    case # "shotgun_semiauto_t8":
+    case #"shotgun_semiauto_t8":
       return # "hash_6ed19b98000fb441";
-    case # "smg_accurate_t8":
+    case #"smg_accurate_t8":
       return # "hash_4b703056e870752e";
-    case # "smg_standard_t8":
+    case #"smg_standard_t8":
       return # "hash_207f20afd71816c";
     default:
       break;
@@ -438,25 +438,25 @@ function_938534a8(permanentstatname) {
   var_19ef0b8d = undefined;
 
   switch (permanentstatname) {
-    case # "camo_active_headshot_base_headshots":
+    case #"camo_active_headshot_base_headshots":
       var_19ef0b8d = #"camo_active_ar_accurate_base";
       break;
-    case # "hash_9da725fe15aa048":
+    case #"hash_9da725fe15aa048":
       var_19ef0b8d = #"camo_active_ar_fastfire_base";
       break;
-    case # "hash_5cf945d7954a39e0":
+    case #"hash_5cf945d7954a39e0":
       var_19ef0b8d = #"camo_active_lmg_standard_base";
       break;
-    case # "hash_1ffb9d5647330a52":
+    case #"hash_1ffb9d5647330a52":
       var_19ef0b8d = #"camo_active_pistol_standard_base";
       break;
-    case # "hash_6ed19b98000fb441":
+    case #"hash_6ed19b98000fb441":
       var_19ef0b8d = #"camo_active_shotgun_semiauto_base";
       break;
-    case # "hash_4b703056e870752e":
+    case #"hash_4b703056e870752e":
       var_19ef0b8d = #"camo_active_smg_accurate_base";
       break;
-    case # "hash_207f20afd71816c":
+    case #"hash_207f20afd71816c":
       var_19ef0b8d = #"camo_active_smg_standard_base";
       break;
     default:
@@ -1082,28 +1082,28 @@ devgui_think() {
       case 0:
         reset = 0;
         break;
-      case # "debugprints":
+      case #"debugprints":
         setDvar(#"activecamo_debug", !getdvarint(#"activecamo_debug", 0));
         break;
-      case # "reset":
+      case #"reset":
         function_cc5baf7f(&function_58719455);
         break;
-      case # "impulse":
+      case #"impulse":
         function_cc5baf7f(&function_382462ff);
         break;
-      case # "stage_next":
+      case #"stage_next":
         function_cc5baf7f(&function_3ac4d286, 0);
         break;
-      case # "stage_prev":
+      case #"stage_prev":
         function_cc5baf7f(&function_3ac4d286, 1);
         break;
-      case # "set_camo":
+      case #"set_camo":
         function_cc5baf7f(&function_9c361e56, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case # "give_weapon":
+      case #"give_weapon":
         function_cc5baf7f(&function_cc486b05, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case # "set_stage":
+      case #"set_stage":
         function_cc5baf7f(&function_779a9561, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
     }

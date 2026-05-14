@@ -388,13 +388,13 @@ function function_b66e99f1(localclientnum, oldval, newval, bnewent, binitialsnap
     foreach(s_fx in a_s_fx) {
       if(!isDefined(s_fx.var_bdfdbc4d)) {
         switch (s_fx.str_fx) {
-          case # "sm":
+          case #"sm":
             str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_sm_loop";
             break;
-          case # "md":
+          case #"md":
             str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_md_loop";
             break;
-          case # "lg":
+          case #"lg":
             str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_lg_loop";
             break;
         }

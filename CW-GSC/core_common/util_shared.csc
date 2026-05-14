@@ -694,17 +694,17 @@ function lerp_dvar(str_dvar, n_start_val, n_end_val, n_lerp_time = getdvarfloat(
 
 function is_valid_type_for_callback(type) {
   switch (type) {
-    case # "scriptmover":
-    case # "na":
-    case # "missile":
-    case # "general":
-    case # "player":
-    case # "turret":
-    case # "actor":
-    case # "helicopter":
-    case # "trigger":
-    case # "vehicle":
-    case # "plane":
+    case #"scriptmover":
+    case #"na":
+    case #"missile":
+    case #"general":
+    case #"player":
+    case #"turret":
+    case #"actor":
+    case #"helicopter":
+    case #"trigger":
+    case #"vehicle":
+    case #"plane":
       return 1;
     default:
       return 0;
@@ -1562,7 +1562,7 @@ function function_26489405() {
   mapname = get_map_name();
 
   switch (mapname) {
-    case # "mp_casino":
+    case #"mp_casino":
       isnightmap = 1;
       break;
     default:

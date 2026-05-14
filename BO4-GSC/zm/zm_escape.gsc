@@ -371,7 +371,7 @@ function_7e67379d() {
 
     if(isDefined(str_zone)) {
       switch (str_zone) {
-        case # "zone_powerhouse":
+        case #"zone_powerhouse":
           if(level flag::get("power_on2")) {
             self clientfield::set_to_player("" + #"player_pbg_bank", 1);
           } else {
@@ -379,7 +379,7 @@ function_7e67379d() {
           }
 
           break;
-        case # "zone_studio":
+        case #"zone_studio":
           if(level flag::get("power_on1")) {
             self clientfield::set_to_player("" + #"player_pbg_bank", 1);
           } else {
@@ -575,130 +575,130 @@ get_location_string(str_location) {
   }
 
   switch (str_zone) {
-    case # "zone_model_industries":
+    case #"zone_model_industries":
       str_display = #"hash_1a8cabe1cd38cf05";
       break;
-    case # "zone_model_industries_upper":
+    case #"zone_model_industries_upper":
       str_display = #"hash_5d43e6a30d61f2c2";
       break;
-    case # "zone_west_side_exterior_upper_05":
-    case # "zone_west_side_exterior_upper_04":
-    case # "zone_west_side_exterior_upper_02":
-    case # "zone_west_side_exterior_upper":
+    case #"zone_west_side_exterior_upper_05":
+    case #"zone_west_side_exterior_upper_04":
+    case #"zone_west_side_exterior_upper_02":
+    case #"zone_west_side_exterior_upper":
       str_display = #"hash_1bb116d35c69f7";
       break;
-    case # "zone_west_side_exterior_tunnel":
-    case # "zone_new_industries_transverse_tunnel":
+    case #"zone_west_side_exterior_tunnel":
+    case #"zone_new_industries_transverse_tunnel":
       str_display = #"hash_3487be8c75233a0b";
       break;
-    case # "zone_west_side_exterior_lower":
-    case # "zone_powerhouse":
+    case #"zone_west_side_exterior_lower":
+    case #"zone_powerhouse":
       str_display = #"hash_7806b6b51cd2aed2";
       break;
-    case # "zone_new_industries":
+    case #"zone_new_industries":
       str_display = #"hash_786af67b8225aaf4";
       break;
-    case # "zone_catwalk_02":
-    case # "zone_catwalk_01":
+    case #"zone_catwalk_02":
+    case #"zone_catwalk_01":
       str_display = #"hash_7d83ea134c9fa0e";
       break;
-    case # "zone_catwalk_03":
-    case # "zone_catwalk_04":
+    case #"zone_catwalk_03":
+    case #"zone_catwalk_04":
       str_display = #"hash_5d3ed783f8450d92";
       break;
-    case # "zone_cellblock_entrance":
+    case #"zone_cellblock_entrance":
       str_display = #"hash_9b40009eaa83579";
       break;
-    case # "zone_start":
+    case #"zone_start":
       str_display = #"hash_3f0a132a9ef3cd11";
       break;
-    case # "zone_library":
+    case #"zone_library":
       str_display = #"hash_737ac11c81c21f4c";
       break;
-    case # "zone_cellblock_east":
+    case #"zone_cellblock_east":
       str_display = #"hash_6578f574dddfb02e";
       break;
-    case # "zone_cellblock_west":
+    case #"zone_cellblock_west":
       str_display = #"hash_23dc7787e4d6b8b5";
       break;
-    case # "zone_broadway_floor_2":
+    case #"zone_broadway_floor_2":
       str_display = #"hash_6181016e2d71c94e";
       break;
-    case # "zone_cellblock_jail_1":
-    case # "zone_cellblock_jail_3":
-    case # "zone_cellblock_jail_4":
-    case # "zone_cellblock_jail_2":
-    case # "zone_cellblock_west_gondola":
+    case #"zone_cellblock_jail_1":
+    case #"zone_cellblock_jail_3":
+    case #"zone_cellblock_jail_4":
+    case #"zone_cellblock_jail_2":
+    case #"zone_cellblock_west_gondola":
       str_display = #"hash_53208a43bb33987d";
       break;
-    case # "zone_cellblock_west_gondola_dock":
+    case #"zone_cellblock_west_gondola_dock":
       str_display = #"hash_578cde50a0ed0829";
       break;
-    case # "zone_cellblock_west_barber":
-    case # "zone_cellblock_west_warden":
+    case #"zone_cellblock_west_barber":
+    case #"zone_cellblock_west_warden":
       str_display = #"hash_70fa5ff9f448bc96";
       break;
-    case # "zone_sally_port":
-    case # "zone_sally_port_acid":
+    case #"zone_sally_port":
+    case #"zone_sally_port_acid":
       str_display = #"hash_68ef83a1a918a522";
       break;
-    case # "zone_administration":
+    case #"zone_administration":
       str_display = #"hash_7b3972c143382703";
       break;
-    case # "zone_warden_office":
+    case #"zone_warden_office":
       str_display = #"hash_4c183909b38ae649";
       break;
-    case # "zone_warden_house_exterior":
+    case #"zone_warden_house_exterior":
       str_display = #"hash_6ba6b293ed38ed6e";
       break;
-    case # "zone_warden_house":
+    case #"zone_warden_house":
       str_display = #"hash_3aafbefc77b80ce3";
       break;
-    case # "zone_warden_home":
+    case #"zone_warden_home":
       str_display = #"hash_5da659405984efa3";
       break;
-    case # "zone_cafeteria":
-    case # "zone_cafeteria_end":
+    case #"zone_cafeteria":
+    case #"zone_cafeteria_end":
       str_display = #"hash_f76546edee4a6a1";
       break;
-    case # "zone_infirmary_roof":
-    case # "zone_in_cr":
-    case # "zone_infirmary":
+    case #"zone_infirmary_roof":
+    case #"zone_in_cr":
+    case #"zone_infirmary":
       str_display = #"zm_escape/location_infirmary";
       break;
-    case # "zone_roof":
-    case # "zone_roof_infirmary":
+    case #"zone_roof":
+    case #"zone_roof_infirmary":
       str_display = #"hash_676a058bfe70473";
       break;
-    case # "cellblock_shower":
+    case #"cellblock_shower":
       str_display = #"zm_escape/location_showers";
       break;
-    case # "zone_citadel":
-    case # "zone_citadel_shower":
-    case # "zone_citadel_warden":
+    case #"zone_citadel":
+    case #"zone_citadel_shower":
+    case #"zone_citadel_warden":
       str_display = #"hash_12fef669980586e7";
       break;
-    case # "zone_citadel_stairs":
-    case # "zone_citadel_basement":
+    case #"zone_citadel_stairs":
+    case #"zone_citadel_basement":
       str_display = #"hash_408e00ed0c7af3b3";
       break;
-    case # "zone_citadel_basement_building":
+    case #"zone_citadel_basement_building":
       str_display = #"hash_5e714183f1264faa";
       break;
-    case # "zone_studio":
+    case #"zone_studio":
       str_display = #"hash_68da319819d879ec";
       break;
-    case # "zone_dock":
+    case #"zone_dock":
       str_display = #"hash_4213dc004145588f";
       break;
-    case # "zone_dock_gondola":
+    case #"zone_dock_gondola":
       str_display = #"hash_3b3867cba3ae468a";
       break;
-    case # "zone_gondola_ride":
+    case #"zone_gondola_ride":
       str_display = #"hash_3be34a9bf8a7da9d";
       break;
-    case # "zone_fast_travel_warden_house_to_shower":
-    case # "zone_fast_travel_west_side_tunnel_to_cafeteria":
+    case #"zone_fast_travel_warden_house_to_shower":
+    case #"zone_fast_travel_west_side_tunnel_to_cafeteria":
       str_display = #"hash_4499d5469a09785c";
       break;
     default:
@@ -778,20 +778,20 @@ function_45b0f2f3(str_weapon_name) {
   str_weapon = undefined;
 
   switch (str_weapon_name) {
-    case # "ww_blundergat_t8_upgraded":
-    case # "ww_blundergat_t8":
+    case #"ww_blundergat_t8_upgraded":
+    case #"ww_blundergat_t8":
       str_weapon = "wonder";
       break;
-    case # "ww_blundergat_acid_t8":
-    case # "hash_494f5501b3f8e1e9":
-    case # "ww_blundergat_acid_t8_upgraded":
+    case #"ww_blundergat_acid_t8":
+    case #"hash_494f5501b3f8e1e9":
+    case #"ww_blundergat_acid_t8_upgraded":
       str_weapon = "novox";
       break;
-    case # "tomahawk_t8":
+    case #"tomahawk_t8":
       str_weapon = "novox";
       break;
-    case # "spork_alcatraz":
-    case # "spoon_alcatraz":
+    case #"spork_alcatraz":
+    case #"spoon_alcatraz":
       str_weapon = "melee";
       break;
   }
@@ -989,31 +989,31 @@ function_acb5b0ec() {
 
 function_91d91b76(cmd) {
   switch (cmd) {
-    case # "super_open_sesame":
+    case #"super_open_sesame":
       level thread super_open_sesame();
       return 1;
-    case # "hash_19614ce604c9ce92":
+    case #"hash_19614ce604c9ce92":
       level thread function_2b57b5d6();
       return 1;
-    case # "hash_be933dada1170a":
+    case #"hash_be933dada1170a":
       level thread function_4a3c0c1c("<dev string:x39d>");
       return 1;
-    case # "hash_52c70e592a1e4183":
+    case #"hash_52c70e592a1e4183":
       level thread function_4a3c0c1c("<dev string:x3ac>");
       return 1;
-    case # "hash_55a34e1b7b9aae2c":
+    case #"hash_55a34e1b7b9aae2c":
       level thread function_4b511c76();
       return 1;
-    case # "hash_5fc934c29edaf827":
+    case #"hash_5fc934c29edaf827":
       level thread function_215297db();
       return 1;
-    case # "hash_1eb585e188d312c2":
+    case #"hash_1eb585e188d312c2":
       level thread function_6b733771();
       return 1;
-    case # "hash_11b05ce1cac4119e":
+    case #"hash_11b05ce1cac4119e":
       level.var_a929ea7f = 1;
       break;
-    case # "hash_1662437f1458600a":
+    case #"hash_1662437f1458600a":
       level.var_6764a35e = 1;
       break;
   }

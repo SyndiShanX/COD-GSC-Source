@@ -452,7 +452,7 @@ function_45bb11e4(spot) {
 
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case # "nova_crawler":
+      case #"nova_crawler":
         str_shot_name = "nova_crawler";
         break;
     }
@@ -675,7 +675,7 @@ devgui() {
     str_command = getdvarstring(#"zm_hms_util_cmd", "<dev string:x9d>");
 
     switch (str_command) {
-      case # "give_targets":
+      case #"give_targets":
         zm_devgui::zombie_devgui_goto_round(10);
         level flag::set(#"spawn_zombies");
         level flag::set(#"infinite_round_spawning");

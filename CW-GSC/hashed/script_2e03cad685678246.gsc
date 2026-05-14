@@ -346,11 +346,11 @@ function private function_d41f7e0e() {
 
             if(isDefined(self.var_fc006495)) {
               switch (self.var_fc006495) {
-                case # "snow":
+                case #"snow":
                   e_player clientfield::increment_to_player("zipline_player_landing_fx", 1);
                   snd::play("evt_zip_player_land_snow");
                   break;
-                case # "dirt":
+                case #"dirt":
                   e_player clientfield::increment_to_player("zipline_player_landing_fx", 2);
                   snd::play("evt_zip_player_land_dirt");
                   break;
@@ -424,11 +424,11 @@ function private function_f5ce83f7() {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case # "crouch":
+    case #"crouch":
       self setstance("stand");
       wait 0.2;
       break;
-    case # "prone":
+    case #"prone":
       self setstance("stand");
       wait 1;
       break;
@@ -549,10 +549,10 @@ function private function_b8e9daa0() {
 
   if(isDefined(var_cf56bb8f.var_fc006495)) {
     switch (var_cf56bb8f.var_fc006495) {
-      case # "snow":
+      case #"snow":
         self clientfield::increment("zipline_ai_landing_fx", 1);
         break;
-      case # "dirt":
+      case #"dirt":
         self clientfield::increment("zipline_ai_landing_fx", 2);
         break;
       default:

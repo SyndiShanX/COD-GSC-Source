@@ -3768,7 +3768,7 @@ function function_e64ac3b6(type_id, var_c857a96d) {
 
 function sndswitchannouncervox(who) {
   switch (who) {
-    case # "sam":
+    case #"sam":
       game.zmbdialog[#"prefix"] = "vox_zmba_sam";
       level.zmb_laugh_alias = "zmb_player_outofbounds";
       level.sndannouncerisrich = 0;
@@ -5128,32 +5128,32 @@ function function_10e38d86() {
 
 function function_36eb0acc(str_rarity = #"none") {
   switch (str_rarity) {
-    case # "none":
+    case #"none":
       self clientfield::set("model_rarity_rob", 1);
       break;
-    case # "resource":
-    case # "white":
+    case #"resource":
+    case #"white":
       self clientfield::set("model_rarity_rob", 2);
       break;
-    case # "green":
-    case # "uncommon":
+    case #"green":
+    case #"uncommon":
       self clientfield::set("model_rarity_rob", 3);
       break;
-    case # "blue":
-    case # "rare":
+    case #"blue":
+    case #"rare":
       self clientfield::set("model_rarity_rob", 4);
       break;
-    case # "purple":
-    case # "epic":
+    case #"purple":
+    case #"epic":
       self clientfield::set("model_rarity_rob", 5);
       break;
-    case # "orange":
-    case # "legendary":
+    case #"orange":
+    case #"legendary":
       self clientfield::set("model_rarity_rob", 6);
       break;
-    case # "yellow":
-    case # "ultra":
-    case # "gold":
+    case #"yellow":
+    case #"ultra":
+    case #"gold":
       self clientfield::set("model_rarity_rob", 7);
       break;
     default:

@@ -144,11 +144,11 @@ function_4e81317c(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     return (self.health + 100);
   } else if(self.zm_ai_category == #"heavy" || self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     switch (self.zm_ai_category) {
-      case # "heavy":
+      case #"heavy":
         return (0.2 * self.maxhealth);
-      case # "miniboss":
+      case #"miniboss":
         return (0.1 * self.maxhealth);
-      case # "boss":
+      case #"boss":
         return (0.05 * self.maxhealth);
     }
   }
@@ -304,13 +304,13 @@ function_bbe55589(e_player, w_katana, str_hitloc) {
   }
 
   switch (self.zm_ai_category) {
-    case # "heavy":
+    case #"heavy":
       n_base_damage = 0.2 * self.maxhealth;
       break;
-    case # "miniboss":
+    case #"miniboss":
       n_base_damage = 0.1 * self.maxhealth;
       break;
-    case # "boss":
+    case #"boss":
       n_base_damage = 0.05 * self.maxhealth;
       break;
   }

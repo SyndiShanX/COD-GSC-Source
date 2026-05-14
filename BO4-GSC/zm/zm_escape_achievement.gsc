@@ -167,15 +167,15 @@ function_ce31237b() {
     }
 
     switch (str_zone) {
-      case # "zone_model_industries_upper":
+      case #"zone_model_industries_upper":
         self.var_5b73502a = 1;
         break;
-      case # "zone_gondola_ride":
+      case #"zone_gondola_ride":
         self.var_23d1ca17 = 1;
         break;
-      case # "zone_citadel":
-      case # "zone_citadel_shower":
-      case # "zone_citadel_warden":
+      case #"zone_citadel":
+      case #"zone_citadel_shower":
+      case #"zone_citadel_warden":
         self.var_ba2bd447 = 1;
         break;
     }

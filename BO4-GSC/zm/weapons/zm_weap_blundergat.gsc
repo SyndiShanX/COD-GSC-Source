@@ -863,32 +863,32 @@ function_6901bb20(v_hit_pos) {
   self thread zombie_death::on_fire_timeout();
 
   switch (str_tag) {
-    case # "j_head":
+    case #"j_head":
       n_fx_pos = 1;
       break;
-    case # "j_spinelower":
-    case # "j_spine4":
-    case # "j_spineupper":
+    case #"j_spinelower":
+    case #"j_spine4":
+    case #"j_spineupper":
       n_fx_pos = 2;
       break;
-    case # "j_elbow_le":
-    case # "j_wrist_le":
-    case # "j_shoulder_le":
+    case #"j_elbow_le":
+    case #"j_wrist_le":
+    case #"j_shoulder_le":
       n_fx_pos = 3;
       break;
-    case # "j_elbow_ri":
-    case # "j_wrist_ri":
-    case # "j_shoulder_ri":
+    case #"j_elbow_ri":
+    case #"j_wrist_ri":
+    case #"j_shoulder_ri":
       n_fx_pos = 4;
       break;
-    case # "j_ankle_le":
-    case # "j_knee_le":
-    case # "j_hip_le":
+    case #"j_ankle_le":
+    case #"j_knee_le":
+    case #"j_hip_le":
       n_fx_pos = 5;
       break;
-    case # "j_ankle_ri":
-    case # "j_knee_ri":
-    case # "j_hip_ri":
+    case #"j_ankle_ri":
+    case #"j_knee_ri":
+    case #"j_hip_ri":
       n_fx_pos = 6;
       break;
     default:

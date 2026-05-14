@@ -175,12 +175,12 @@ function_fcf197fa(targetname, b_show) {
           foreach(var_1d6a70e8 in var_6a2895e6) {
             if(isDefined(var_1d6a70e8.objectid) && !var_1d6a70e8 zm_utility::function_1a4d2910()) {
               switch (var_1d6a70e8.objectid) {
-                case # "symbol_back_debris":
-                case # "symbol_front_power":
-                case # "symbol_back":
-                case # "symbol_front":
-                case # "symbol_front_debris":
-                case # "symbol_back_power":
+                case #"symbol_back_debris":
+                case #"symbol_front_power":
+                case #"symbol_back":
+                case #"symbol_front":
+                case #"symbol_front_debris":
+                case #"symbol_back_power":
                   if(b_show) {
                     var_1d6a70e8 show();
                   } else {

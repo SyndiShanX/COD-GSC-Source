@@ -148,8 +148,8 @@ function_dcc8b5d5(name, var_80e51919, var_7bd83b52) {
 
 event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
   switch (eventstruct.event) {
-    case # "give_weapon":
-    case # "give_weapon_dual":
+    case #"give_weapon":
+    case #"give_weapon_dual":
       weapon = eventstruct.weapon;
       self snipinterfaceattributes(weapon);
       break;

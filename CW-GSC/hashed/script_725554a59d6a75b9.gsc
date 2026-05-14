@@ -187,20 +187,20 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
 
   if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
-      case # "mod_rifle_bullet":
-      case # "mod_pistol_bullet":
+      case #"mod_rifle_bullet":
+      case #"mod_pistol_bullet":
         var_1f2bdb96 = playerbundle.exertdeath;
         break;
-      case # "mod_burned":
+      case #"mod_burned":
         var_1f2bdb96 = playerbundle.exertdeathburned;
         break;
-      case # "mod_melee_weapon_butt":
+      case #"mod_melee_weapon_butt":
         var_1f2bdb96 = playerbundle.var_53f25688;
         break;
-      case # "mod_head_shot":
+      case #"mod_head_shot":
         var_1f2bdb96 = playerbundle.var_207908de;
         break;
-      case # "mod_trigger_hurt":
+      case #"mod_trigger_hurt":
         if(self getvelocity()[2] < -100) {
           var_1f2bdb96 = playerbundle.var_1dfcabbd;
         } else {
@@ -208,16 +208,16 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
         }
 
         break;
-      case # "mod_falling":
+      case #"mod_falling":
         var_1f2bdb96 = playerbundle.var_1dfcabbd;
         break;
-      case # "mod_drown":
+      case #"mod_drown":
         var_1f2bdb96 = playerbundle.exertdeathdrowned;
         break;
-      case # "mod_gas":
+      case #"mod_gas":
         var_1f2bdb96 = playerbundle.var_7a45f37b;
         break;
-      case # "mod_dot":
+      case #"mod_dot":
         if(weapon == getweapon(#"gadget_radiation_field")) {
           if(is_true(self.suicide)) {
             var_1f2bdb96 = playerbundle.var_48305ed9;
@@ -233,7 +233,7 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
         }
 
         break;
-      case # "mod_crush":
+      case #"mod_crush":
         stance = self getstance();
 
         if(stance === "prone") {
@@ -248,14 +248,14 @@ function get_death_vox(weapon, playerbundle, meansofdeath) {
 
   if(!isDefined(var_1f2bdb96) && isDefined(weapon) && meansofdeath !== "MOD_MELEE_WEAPON_BUTT") {
     switch (weapon.rootweapon.name) {
-      case # "knife_loadout":
-      case # "hatchet":
+      case #"knife_loadout":
+      case #"hatchet":
         var_1f2bdb96 = playerbundle.exertdeathstabbed;
         break;
-      case # "melee_slaybell_t8":
+      case #"melee_slaybell_t8":
         var_1f2bdb96 = playerbundle.var_53f25688;
         break;
-      case # "shock_rifle":
+      case #"shock_rifle":
         var_1f2bdb96 = playerbundle.exertdeathelectrocuted;
         break;
     }

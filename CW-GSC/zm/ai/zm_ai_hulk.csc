@@ -207,7 +207,7 @@ function private function_7622c629(localclientnum) {
     waitresult = self waittill(#"hs_turn_off_fx");
 
     switch (waitresult._notify) {
-      case # "hs_turn_off_fx":
+      case #"hs_turn_off_fx":
         if(isDefined(self.fxdef)) {
           fxclientutils::stopfxbundle(localclientnum, self, self.fxdef);
         }

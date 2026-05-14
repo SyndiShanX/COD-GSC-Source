@@ -169,22 +169,22 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
   }
 
   switch (str_direction) {
-    case # "forward":
+    case #"forward":
       v_direction = anglesToForward(v_angles);
       break;
-    case # "backward":
+    case #"backward":
       v_direction = anglesToForward(v_angles) * -1;
       break;
-    case # "right":
+    case #"right":
       v_direction = anglestoright(v_angles);
       break;
-    case # "left":
+    case #"left":
       v_direction = anglestoright(v_angles) * -1;
       break;
-    case # "up":
+    case #"up":
       v_direction = anglestoup(v_angles);
       break;
-    case # "down":
+    case #"down":
       v_direction = anglestoup(v_angles) * -1;
       break;
     default:

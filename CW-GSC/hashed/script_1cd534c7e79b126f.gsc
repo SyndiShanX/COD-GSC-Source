@@ -652,13 +652,13 @@ function function_c57d25ff() {
     s_waitresult = var_f9cc146 waittill(#"dragon_side_front", #"dragon_side_left", #"dragon_side_right");
 
     switch (s_waitresult._notify) {
-      case # "dragon_side_front":
+      case #"dragon_side_front":
         self.var_ed23159a = "front";
         break;
-      case # "dragon_side_left":
+      case #"dragon_side_left":
         self.var_ed23159a = "left";
         break;
-      case # "dragon_side_right":
+      case #"dragon_side_right":
         self.var_ed23159a = "right";
         break;
     }
@@ -880,16 +880,16 @@ function function_b2c1743d(ai_zombie) {
     s_waitresult = ai_zombie waittill(#"gib = head", #"gib = arm_left", #"gib = arm_right", #"gib = leg_left");
 
     switch (s_waitresult._notify) {
-      case # "gib = head":
+      case #"gib = head":
         ai_zombie gibserverutils::gibhead(ai_zombie, 0);
         break;
-      case # "gib = arm_left":
+      case #"gib = arm_left":
         ai_zombie gibserverutils::gibleftarm(ai_zombie, 0);
         break;
-      case # "gib = arm_right":
+      case #"gib = arm_right":
         ai_zombie gibserverutils::gibrightarm(ai_zombie, 0);
         break;
-      case # "gib = leg_left":
+      case #"gib = leg_left":
         ai_zombie gibserverutils::gibleftleg(ai_zombie, 0);
         break;
     }

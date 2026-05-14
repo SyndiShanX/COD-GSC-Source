@@ -426,17 +426,17 @@ function function_ae44e21b(action, command) {
   }
 
   switch (command) {
-    case # "melee":
+    case #"melee":
       return self meleeButtonPressed();
-    case # "ads":
+    case #"ads":
       return self adsButtonPressed();
-    case # "use":
+    case #"use":
       return self useButtonPressed();
-    case # "frag":
+    case #"frag":
       return self fragButtonPressed();
-    case # "smoke":
+    case #"smoke":
       return self secondaryoffhandbuttonPressed();
-    case # "stance":
+    case #"stance":
       return (self stancebuttonPressed() || self buttonbitstate("BUTTON_BIT_ANY_DOWN"));
   }
 
@@ -459,27 +459,27 @@ function function_9cb5ca63(action, command) {
   }
 
   switch (command) {
-    case # "melee":
+    case #"melee":
       self notifyonplayercommand(triggername, "+melee");
       self notifyonplayercommand(triggername, "+melee_breath");
       self notifyonplayercommand(triggername, "+melee_zoom");
       self thread function_7ca47b7c(action, triggername);
       break;
-    case # "ads":
+    case #"ads":
       self notifyonplayercommand(triggername, "+ads_akimbo_accessible");
       break;
-    case # "use":
+    case #"use":
       self notifyonplayercommand(triggername, "+usereload");
       break;
-    case # "frag":
+    case #"frag":
       self notifyonplayercommand(triggername, "+frag");
       self notifyonplayercommand(triggername, "+equip_toggle_throw");
       break;
-    case # "smoke":
+    case #"smoke":
       self notifyonplayercommand(triggername, "+smoke");
       self notifyonplayercommand(triggername, "+equip_toggle_throw");
       break;
-    case # "stance":
+    case #"stance":
       self notifyonplayercommand(triggername, "+stance");
       self notifyonplayercommand(triggername, "+movedown");
       self notifyonplayercommand(triggername, "+lowerstance");

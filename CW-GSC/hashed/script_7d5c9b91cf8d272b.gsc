@@ -495,13 +495,13 @@ function private function_a5cc03cf(weakpoint, var_31e96b81, eattacker) {
         }
 
         switch (var_31e96b81.hittags[0]) {
-          case # "tag_fx_jaw_le":
+          case #"tag_fx_jaw_le":
             function_bea34373(self, 0);
             break;
-          case # "tag_fx_jaw_center":
+          case #"tag_fx_jaw_center":
             function_bea34373(self, 1);
             break;
-          case # "tag_fx_jaw_ri":
+          case #"tag_fx_jaw_ri":
             function_bea34373(self, 2);
             break;
         }
@@ -2817,22 +2817,22 @@ function function_25a1aefe(dvar) {
   tokens = strtok(dvar.value, "<dev string:xa43>");
 
   switch (isDefined(tokens[0]) ? tokens[0] : "<dev string:xf9>") {
-    case # "hash_ccd4769d7cd0b67":
+    case #"hash_ccd4769d7cd0b67":
       function_5427626d();
       break;
-    case # "hash_19e4ca4f6a7fcb44":
+    case #"hash_19e4ca4f6a7fcb44":
       function_38b446e();
       break;
-    case # "hash_b5154c650a08666":
+    case #"hash_b5154c650a08666":
       function_3da7e651();
       break;
-    case # "hash_3453da4f31a58dd1":
+    case #"hash_3453da4f31a58dd1":
       function_bf8145a9();
       break;
-    case # "hash_43332ff3554c1df4":
+    case #"hash_43332ff3554c1df4":
       function_dd021803();
       break;
-    case # "launch_ragdoll":
+    case #"launch_ragdoll":
       launch_ragdoll();
       break;
     default:

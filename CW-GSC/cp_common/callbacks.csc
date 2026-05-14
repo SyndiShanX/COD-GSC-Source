@@ -86,7 +86,7 @@ function entityspawned(localclientnum) {
     }
 
     switch (self.weapon.name) {
-      case # "explosive_bolt":
+      case #"explosive_bolt":
         self thread explosive_bolt::spawned(localclientnum);
         break;
     }

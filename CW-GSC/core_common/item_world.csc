@@ -459,27 +459,27 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
 
   if(isDefined(itementry)) {
     switch (itementry.rarity) {
-      case # "none":
+      case #"none":
         break;
-      case # "resource":
+      case #"resource":
         renderbundle = #"hash_312ceb838675b80";
         break;
-      case # "uncommon":
+      case #"uncommon":
         renderbundle = #"hash_70c807782a37573e";
         break;
-      case # "rare":
+      case #"rare":
         renderbundle = #"hash_5b08235c0b55a003";
         break;
-      case # "epic":
+      case #"epic":
         renderbundle = #"rob_sr_item_purple";
         break;
-      case # "legendary":
+      case #"legendary":
         renderbundle = #"hash_64261dabb4df88cd";
         break;
-      case # "ultra":
+      case #"ultra":
         renderbundle = #"rob_sr_item_gold";
         break;
-      case # "loadout":
+      case #"loadout":
         renderbundle = #"hash_3088f081654a720e";
         break;
     }
@@ -2011,10 +2011,10 @@ function private function_cc2f075(localclientnum) {
 
 function private function_3574b1fa(weaponname) {
   switch (weaponname) {
-    case # "ww_ray_rifle_t9_upgraded":
-    case # "ww_ray_rifle_t9":
-    case # "ray_gun_upgraded":
-    case # "ray_gun":
+    case #"ww_ray_rifle_t9_upgraded":
+    case #"ww_ray_rifle_t9":
+    case #"ray_gun_upgraded":
+    case #"ray_gun":
       return true;
   }
 
@@ -2175,7 +2175,7 @@ function private function_48ca0bbb(localclientnum) {
           var_c3317960 = self clientfield::get_player_uimodel("hud_items.gibDismembermentType");
 
           switch (itementry.name) {
-            case # "aether_tool_item_sr":
+            case #"aether_tool_item_sr":
               if(isDefined(weaponitem.itementry.rarity)) {
                 if(weaponitem.itementry.rarity === #"legendary" || weaponitem.itementry.rarity === #"ultra") {
                   var_77055f15 = 131072;
@@ -2183,7 +2183,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "bronze_chalice_item_sr":
+            case #"bronze_chalice_item_sr":
               if(isint(paplv) && paplv >= 1) {
                 var_77055f15 = 131072;
               }
@@ -2193,7 +2193,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "silver_chalice_item_sr":
+            case #"silver_chalice_item_sr":
               if(isint(paplv) && paplv >= 2) {
                 var_77055f15 = 131072;
               }
@@ -2203,7 +2203,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "gold_chalice_item_sr":
+            case #"gold_chalice_item_sr":
               if(isint(paplv) && paplv >= 3) {
                 var_77055f15 = 131072;
               }
@@ -2213,7 +2213,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "brainrot_item_sr":
+            case #"brainrot_item_sr":
               if(var_c3317960 != 0 && var_c3317960 != 6 && var_c3317960 != 8 && var_c3317960 != 16) {
                 var_77055f15 = 65536;
               }
@@ -2229,7 +2229,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "cryofreeze_item_sr":
+            case #"cryofreeze_item_sr":
               if(var_c3317960 != 0 && var_c3317960 != 1) {
                 var_77055f15 = 65536;
               }
@@ -2245,7 +2245,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "deadwire_item_sr":
+            case #"deadwire_item_sr":
               if(var_c3317960 != 0 && var_c3317960 != 4 && var_c3317960 != 14 && var_c3317960 != 15) {
                 var_77055f15 = 65536;
               }
@@ -2261,7 +2261,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "napalmburst_item_sr":
+            case #"napalmburst_item_sr":
               if(var_c3317960 != 0 && var_c3317960 != 3 && var_c3317960 != 10 && var_c3317960 != 12) {
                 var_77055f15 = 65536;
               }
@@ -2277,7 +2277,7 @@ function private function_48ca0bbb(localclientnum) {
               }
 
               break;
-            case # "shatterblast_item_sr":
+            case #"shatterblast_item_sr":
               if(var_c3317960 != 0 && var_c3317960 != 7 && var_c3317960 != 9) {
                 var_77055f15 = 65536;
               }

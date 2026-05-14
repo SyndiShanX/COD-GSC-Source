@@ -55,25 +55,25 @@ function function_bd7cde02(state) {
 
   if(isDefined(state)) {
     switch (state) {
-      case # "turn_all_lights_off":
+      case #"turn_all_lights_off":
         level clientfield::set("helping_hand_room_light", 0);
         break;
-      case # "turn_room_1_light_on":
+      case #"turn_room_1_light_on":
         level clientfield::set("helping_hand_room_light", 1);
         break;
-      case # "turn_room_2_light_on":
+      case #"turn_room_2_light_on":
         level clientfield::set("helping_hand_room_light", 2);
         break;
-      case # "turn_room_3_light_on":
+      case #"turn_room_3_light_on":
         level clientfield::set("helping_hand_room_light", 3);
         break;
-      case # "turn_room_4_light_on":
+      case #"turn_room_4_light_on":
         level clientfield::set("helping_hand_room_light", 4);
         break;
-      case # "turn_room_5_light_on":
+      case #"turn_room_5_light_on":
         level clientfield::set("helping_hand_room_light", 5);
         break;
-      case # "turn_room_5_light_off":
+      case #"turn_room_5_light_off":
         level clientfield::set("helping_hand_room_light", 6);
         break;
     }
@@ -93,25 +93,25 @@ function function_32ba2029(state) {
 
   if(isDefined(state)) {
     switch (state) {
-      case # "eye_corpse_all_lights_off":
+      case #"eye_corpse_all_lights_off":
         level clientfield::set("eye_corpse_light", 0);
         break;
-      case # "hash_4f392103c121e5e8":
+      case #"hash_4f392103c121e5e8":
         level clientfield::set("eye_corpse_light", 1);
         break;
-      case # "hash_2cff279013344d8f":
+      case #"hash_2cff279013344d8f":
         level clientfield::set("eye_corpse_light", 2);
         break;
-      case # "hash_3e957b81e3c5716e":
+      case #"hash_3e957b81e3c5716e":
         level clientfield::set("eye_corpse_light", 3);
         break;
-      case # "hash_5d0f09f0cbf01d75":
+      case #"hash_5d0f09f0cbf01d75":
         level clientfield::set("eye_corpse_light", 4);
         break;
-      case # "hash_10b3c9031d24f9c4":
+      case #"hash_10b3c9031d24f9c4":
         level clientfield::set("eye_corpse_light", 5);
         break;
-      case # "eye_corpse_final_light_on":
+      case #"eye_corpse_final_light_on":
         level clientfield::set("eye_corpse_light", 6);
         break;
     }

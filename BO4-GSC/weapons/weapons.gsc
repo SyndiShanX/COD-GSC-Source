@@ -670,17 +670,17 @@ function_f2c53bb2(curweapon) {
   self.hasdonecombat = 1;
 
   switch (curweapon.weapclass) {
-    case # "smg":
-    case # "pistol spread":
-    case # "mg":
-    case # "spread":
-    case # "pistol":
-    case # "rifle":
+    case #"smg":
+    case #"pistol spread":
+    case #"mg":
+    case #"spread":
+    case #"pistol":
+    case #"rifle":
       self track_fire(curweapon);
       level.globalshotsfired++;
       break;
-    case # "rocketlauncher":
-    case # "grenade":
+    case #"rocketlauncher":
+    case #"grenade":
       self stats::function_eec52333(curweapon, #"shots", 1, self.class_num, 0);
       break;
     default:
@@ -804,7 +804,7 @@ event_handler[missile_fire] function_f075cefa(eventstruct) {
   }
 
   switch (weapon.statname) {
-    case # "sig_bow_quickshot":
+    case #"sig_bow_quickshot":
       missile thread check_stuck_to_player(1, 0, weapon);
       break;
     default:
@@ -978,20 +978,20 @@ begin_grenade_tracking() {
   }
 
   switch (weapon.rootweapon.name) {
-    case # "frag_grenade":
+    case #"frag_grenade":
       level.globalfraggrenadesfired++;
-    case # "sticky_grenade":
+    case #"sticky_grenade":
       self stats::function_e24eec31(weapon, #"used", 1);
       grenade setteam(self.pers[#"team"]);
       grenade setowner(self);
-    case # "explosive_bolt":
+    case #"explosive_bolt":
       grenade.originalowner = self;
       break;
-    case # "satchel_charge":
+    case #"satchel_charge":
       level.globalsatchelchargefired++;
       break;
-    case # "flash_grenade":
-    case # "concussion_grenade":
+    case #"flash_grenade":
+    case #"concussion_grenade":
       self stats::function_e24eec31(weapon, #"used", 1);
       break;
   }
@@ -1030,19 +1030,19 @@ event_handler[grenade_fire] function_e2b6d5a5(eventstruct) {
   }
 
   switch (weapon.rootweapon.name) {
-    case # "tabun_gas":
+    case #"tabun_gas":
       grenade thread tabun::watchtabungrenadedetonation(self);
       break;
-    case # "eq_sticky_grenade":
-    case # "eq_cluster_semtex_grenade":
+    case #"eq_sticky_grenade":
+    case #"eq_cluster_semtex_grenade":
       grenade thread check_stuck_to_player(1, 1, weapon);
       grenade thread riotshield::check_stuck_to_shield();
       break;
-    case # "c4":
-    case # "satchel_charge":
+    case #"c4":
+    case #"satchel_charge":
       grenade thread check_stuck_to_player(1, 0, weapon);
       break;
-    case # "hatchet":
+    case #"hatchet":
       grenade.lastweaponbeforetoss = self function_fe1f5cc();
       grenade thread check_hatchet_bounce();
       grenade thread check_stuck_to_player(0, 0, weapon);
@@ -1391,8 +1391,8 @@ on_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
   }
 
   switch (weapon.statname) {
-    case # "eq_slow_grenade":
-    case # "concussion_grenade":
+    case #"eq_slow_grenade":
+    case #"concussion_grenade":
       self.lastconcussedby = eattacker;
       break;
     default:
@@ -1498,8 +1498,8 @@ on_weapon_change(params) {
 
   for(idx = 0; idx < weaponslist.size; idx++) {
     switch (weaponslist[idx].name) {
-      case # "m32":
-      case # "minigun":
+      case #"m32":
+      case #"minigun":
         continue;
       default:
         break;

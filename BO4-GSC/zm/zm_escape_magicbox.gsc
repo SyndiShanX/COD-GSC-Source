@@ -123,12 +123,12 @@ magic_box_unlocks() {
 
 set_locked_magicbox_state(state) {
   switch (state) {
-    case # "locking":
+    case #"locking":
       self showzbarrierpiece(5);
       self thread magic_box_locks();
       self.state = "locking";
       break;
-    case # "unlocking":
+    case #"unlocking":
       self showzbarrierpiece(5);
       self thread magic_box_unlocks();
       self.state = "close";

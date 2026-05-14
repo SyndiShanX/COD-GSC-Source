@@ -177,16 +177,16 @@ function_a5689564(s_loc) {
 
 function_ae5d684b() {
   switch (self.unitrigger_stub.script_string) {
-    case # "fountain_to_column":
-    case # "column_to_fountain":
+    case #"fountain_to_column":
+    case #"column_to_fountain":
       self.unitrigger_stub.var_8d5d092c = "fountain_to_column_jump_pad";
       break;
-    case # "column_to_park":
-    case # "park_to_column":
+    case #"column_to_park":
+    case #"park_to_column":
       self.unitrigger_stub.var_8d5d092c = "column_to_park_jump_pad";
       break;
-    case # "fountain_to_park":
-    case # "park_to_fountain":
+    case #"fountain_to_park":
+    case #"park_to_fountain":
       self.unitrigger_stub.var_8d5d092c = "fountain_to_park_jump_pad";
       break;
   }
@@ -205,10 +205,10 @@ function_c52e8ba(e_player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
-      case # "pegasus_ride_started":
+      case #"pegasus_ride_started":
         self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         break;
-      case # "hash_718fe784e4ddaa70":
+      case #"hash_718fe784e4ddaa70":
         if(!level flag::get(#"pegasus_ride_started")) {
           self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         } else {
@@ -216,7 +216,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "hash_42322632a02d834d":
+      case #"hash_42322632a02d834d":
         if(!level flag::get(#"pegasus_ride_started")) {
           self.hint_string[n_player_index] = #"hash_5455a9d3a45a75ab";
         } else {
@@ -224,7 +224,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "hash_6a9e3d8abf194ccc":
+      case #"hash_6a9e3d8abf194ccc":
         if(!level flag::get(#"zm_red_fasttravel_open")) {
           self.hint_string[n_player_index] = #"hash_1f91f960f0f25452";
         } else {
@@ -232,7 +232,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "hash_594bc19e3aca5c49":
+      case #"hash_594bc19e3aca5c49":
         if(!level flag::get(#"zm_red_fasttravel_open")) {
           self.hint_string[n_player_index] = #"hash_1f91f960f0f25452";
         } else {
@@ -263,7 +263,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
     b_result = 1;
   } else {
     switch (self.stub.script_string) {
-      case # "spartan_monument":
+      case #"spartan_monument":
         if(zm_utility::is_standard()) {
           self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_42da633feb35d41e", #"hash_2033d0fbd99966ca");
         } else {
@@ -271,7 +271,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "amphitheater":
+      case #"amphitheater":
         if(zm_utility::is_standard()) {
           self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_b24be5d98c741f5", #"hash_10c94d259f6ba46b");
         } else {
@@ -279,7 +279,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "center_of_the_world":
+      case #"center_of_the_world":
         if(zm_utility::is_standard()) {
           self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_6e9395b99bf2f2a1", #"hash_7569a626e8c1a1f");
         } else {
@@ -287,7 +287,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "stoa_of_the_athenians":
+      case #"stoa_of_the_athenians":
         if(zm_utility::is_standard()) {
           self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_114c77bb7d6a22e4", #"hash_56698a0a66eec888");
         } else {
@@ -295,7 +295,7 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "river_of_sorrow":
+      case #"river_of_sorrow":
         if(zm_utility::is_standard()) {
           self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_3d19d8c1006c9a52", #"hash_5818d2dcee06ede6");
         } else {
@@ -303,12 +303,12 @@ function_c52e8ba(e_player, var_8d5d092c) {
         }
 
         break;
-      case # "column_to_park":
-      case # "fountain_to_park":
-      case # "park_to_column":
-      case # "park_to_fountain":
-      case # "fountain_to_column":
-      case # "column_to_fountain":
+      case #"column_to_park":
+      case #"fountain_to_park":
+      case #"park_to_column":
+      case #"park_to_fountain":
+      case #"fountain_to_column":
+      case #"column_to_fountain":
         if(isDefined(self.stub.s_loc.var_5a099a2d) && self.stub.s_loc.var_5a099a2d) {
           return 0;
         }

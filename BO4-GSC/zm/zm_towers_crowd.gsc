@@ -107,10 +107,10 @@ crowd_damage_trigger() {
 
       if(isDefined(s_waitresult.mod)) {
         switch (s_waitresult.mod) {
-          case # "mod_explosive":
-          case # "mod_grenade":
-          case # "mod_grenade_splash":
-          case # "mod_projectile_splash":
+          case #"mod_explosive":
+          case #"mod_grenade":
+          case #"mod_grenade_splash":
+          case #"mod_projectile_splash":
             b_explosive_damage = 1;
             break;
         }
@@ -243,23 +243,23 @@ function_1493a309(e_player) {
 
 function_2d074f7d(params) {
   switch (self.archetype) {
-    case # "stoker":
-    case # "gladiator":
+    case #"stoker":
+    case #"gladiator":
       str_event = #"heavy_kill";
       break;
-    case # "tiger":
+    case #"tiger":
       str_event = #"tiger_kill";
       break;
-    case # "blight_father":
+    case #"blight_father":
       str_event = #"miniboss_kill";
       break;
-    case # "elephant":
+    case #"elephant":
       str_event = #"elephant_kill";
       break;
-    case # "elephant_rider":
+    case #"elephant_rider":
       str_event = #"elephant_rider_kill";
       break;
-    case # "zombie":
+    case #"zombie":
       if(self.missinglegs) {
         str_event = #"crawler_kill";
       }
@@ -614,13 +614,13 @@ crowd_throw_item(var_2bd26cff) {
     e_item.origin = s_target_loc.origin;
 
     switch (var_354ec191) {
-      case # "p8_fxanim_zm_towers_crowd_jar_01_mod":
+      case #"p8_fxanim_zm_towers_crowd_jar_01_mod":
         s_target_loc thread scene::play("p8_fxanim_zm_towers_crowd_jar_01_bundle", e_item);
         break;
-      case # "p8_fxanim_zm_towers_crowd_jar_02_mod":
+      case #"p8_fxanim_zm_towers_crowd_jar_02_mod":
         s_target_loc thread scene::play("p8_fxanim_zm_towers_crowd_jar_02_bundle", e_item);
         break;
-      case # "p8_fxanim_zm_towers_crowd_jar_03_mod":
+      case #"p8_fxanim_zm_towers_crowd_jar_03_mod":
         s_target_loc thread scene::play("p8_fxanim_zm_towers_crowd_jar_03_bundle", e_item);
         break;
     }
@@ -683,23 +683,23 @@ function_b8dfa139(str_event) {
   var_ac39950d = 0;
 
   switch (str_event) {
-    case # "hash_158076998c9b511f":
+    case #"hash_158076998c9b511f":
       var_9c93ba8f = 5;
       break;
-    case # "first_tiger_kill":
+    case #"first_tiger_kill":
       var_9c93ba8f = 3;
       break;
-    case # "crawler_kill":
+    case #"crawler_kill":
       var_9c93ba8f = 1;
       break;
-    case # "first_heavy_kill":
+    case #"first_heavy_kill":
       var_9c93ba8f = 15;
       var_ac39950d = 1;
       break;
-    case # "heavy_kill":
+    case #"heavy_kill":
       var_9c93ba8f = 8;
       break;
-    case # "miniboss_kill":
+    case #"miniboss_kill":
       var_9c93ba8f = 20;
 
       if(!self.var_7df228aa.var_f0c7d50a) {
@@ -708,92 +708,92 @@ function_b8dfa139(str_event) {
       }
 
       break;
-    case # "elephant_kill":
+    case #"elephant_kill":
       var_9c93ba8f = 30;
       var_ac39950d = 1;
       break;
-    case # "elephant_rider_kill":
+    case #"elephant_rider_kill":
       var_9c93ba8f = 10;
       var_ac39950d = 1;
       break;
-    case # "hash_c65bc15b1aeb1bb":
+    case #"hash_c65bc15b1aeb1bb":
       var_9c93ba8f = 5;
       break;
-    case # "hash_c65bd15b1aeb36e":
+    case #"hash_c65bd15b1aeb36e":
       var_9c93ba8f = 5;
       break;
-    case # "hash_c65be15b1aeb521":
+    case #"hash_c65be15b1aeb521":
       var_9c93ba8f = 5;
       break;
-    case # "elephant_weak_point":
+    case #"elephant_weak_point":
       var_9c93ba8f = 5;
       break;
-    case # "trap_activated":
+    case #"trap_activated":
       var_9c93ba8f = 5;
       var_ac39950d = 1;
       break;
-    case # "trap_kill":
+    case #"trap_kill":
       var_9c93ba8f = 1;
       break;
-    case # "crawler_created_ww":
+    case #"crawler_created_ww":
       var_9c93ba8f = 3;
       break;
-    case # "hash_197ae1fc115dc636":
+    case #"hash_197ae1fc115dc636":
       var_9c93ba8f = 7;
       break;
-    case # "hash_5d587a946bd4f958":
+    case #"hash_5d587a946bd4f958":
       var_9c93ba8f = 15;
       var_ac39950d = 1;
       break;
-    case # "hash_5986c925a370e137":
+    case #"hash_5986c925a370e137":
       var_9c93ba8f = 20;
       break;
-    case # "challenge_complete_easy":
+    case #"challenge_complete_easy":
       var_9c93ba8f = 5;
       break;
-    case # "challenge_complete_med":
+    case #"challenge_complete_med":
       var_9c93ba8f = 10;
       break;
-    case # "challenge_complete_hard":
+    case #"challenge_complete_hard":
       var_9c93ba8f = 15;
       break;
-    case # "hash_4122108abe671eb7":
+    case #"hash_4122108abe671eb7":
       var_9c93ba8f = -25;
       break;
-    case # "player_shoots_crowd":
+    case #"player_shoots_crowd":
       var_9c93ba8f = -2;
       break;
-    case # "player_down":
+    case #"player_down":
       var_9c93ba8f = -7;
       break;
-    case # "player_death":
+    case #"player_death":
       var_9c93ba8f = -13;
       break;
-    case # "trap_kill_self":
+    case #"trap_kill_self":
       var_9c93ba8f = -12;
       break;
-    case # "crawler_created":
+    case #"crawler_created":
       var_9c93ba8f = -1;
       break;
-    case # "hash_1ecab55fd270f67b":
+    case #"hash_1ecab55fd270f67b":
       var_9c93ba8f = -20;
       break;
-    case # "hash_1dc206ff31de03eb":
+    case #"hash_1dc206ff31de03eb":
       var_9c93ba8f = -2;
       break;
-    case # "stole_crowd_item":
+    case #"stole_crowd_item":
       var_9c93ba8f = -1;
       break;
-    case # "hash_3d85834be3aff6d2":
+    case #"hash_3d85834be3aff6d2":
       var_9c93ba8f = -15;
       break;
-    case # "broken_shield":
+    case #"broken_shield":
       var_9c93ba8f = -10;
       break;
-    case # "hazard_hit":
+    case #"hazard_hit":
       var_9c93ba8f = -10;
       break;
-    case # "hash_74fc45698491be88":
+    case #"hash_74fc45698491be88":
       var_9c93ba8f = -15;
       break;
     default:
@@ -888,22 +888,22 @@ function_acab98ce(var_82c32aa7, var_9c93ba8f, var_ac39950d = 0, str_event) {
   self.var_7df228aa.var_712856c1 = var_82c32aa7;
 
   switch (var_82c32aa7) {
-    case # "hash_752852f7958f9112":
+    case #"hash_752852f7958f9112":
       var_ee93032f = 0;
       break;
-    case # "hash_1cf3b5099b38de89":
+    case #"hash_1cf3b5099b38de89":
       var_ee93032f = 1;
       break;
-    case # "hash_4977f8aaa598d06c":
+    case #"hash_4977f8aaa598d06c":
       var_ee93032f = 2;
       break;
-    case # "hash_7dc7bbe5b45f4135":
+    case #"hash_7dc7bbe5b45f4135":
       var_ee93032f = 3;
       break;
-    case # "hash_ad45e7c545f8482":
+    case #"hash_ad45e7c545f8482":
       var_ee93032f = 4;
       break;
-    case # "hash_1fe268f088f7e729":
+    case #"hash_1fe268f088f7e729":
       var_ee93032f = 5;
       break;
   }
@@ -959,24 +959,24 @@ function_bdb90d4() {
     }
 
     switch (var_aa1b1bfd) {
-      case # "hash_752852f7958f9112":
+      case #"hash_752852f7958f9112":
         str_category = "negative_terrible";
         break;
-      case # "hash_1cf3b5099b38de89":
+      case #"hash_1cf3b5099b38de89":
         str_category = "negative_poor";
         break;
-      case # "hash_4977f8aaa598d06c":
+      case #"hash_4977f8aaa598d06c":
         str_category = "negative_poor";
         break;
-      case # "hash_7dc7bbe5b45f4135":
+      case #"hash_7dc7bbe5b45f4135":
         b_announcer = 1;
         str_category = "positive_good";
         break;
-      case # "hash_ad45e7c545f8482":
+      case #"hash_ad45e7c545f8482":
         b_announcer = 1;
         str_category = "positive_great";
         break;
-      case # "hash_1fe268f088f7e729":
+      case #"hash_1fe268f088f7e729":
         b_announcer = 1;
         str_category = "positive_immac";
         break;
@@ -1129,22 +1129,22 @@ function_dbe08c92(var_82c32aa7, var_bec704d1) {
 
   if(isDefined(var_82c32aa7)) {
     switch (var_82c32aa7) {
-      case # "hash_752852f7958f9112":
+      case #"hash_752852f7958f9112":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_loathes");
         break;
-      case # "hash_1cf3b5099b38de89":
+      case #"hash_1cf3b5099b38de89":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_hates");
         break;
-      case # "hash_4977f8aaa598d06c":
+      case #"hash_4977f8aaa598d06c":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_no_love");
         break;
-      case # "hash_7dc7bbe5b45f4135":
+      case #"hash_7dc7bbe5b45f4135":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_warm_up");
         break;
-      case # "hash_ad45e7c545f8482":
+      case #"hash_ad45e7c545f8482":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_likes");
         break;
-      case # "hash_1fe268f088f7e729":
+      case #"hash_1fe268f088f7e729":
         level.var_210ce105 zm_towers_crowd_meter::set_state(self, "crowd_loves");
         break;
     }
@@ -1179,7 +1179,7 @@ function_8e83be5d() {
     waitresult = level waittill(#"crawler_created", #"trap_kill", #"trap_activated");
 
     switch (waitresult._notify) {
-      case # "crawler_created":
+      case #"crawler_created":
         e_player = waitresult.player;
 
         if(!isPlayer(e_player)) {
@@ -1193,11 +1193,11 @@ function_8e83be5d() {
         }
 
         break;
-      case # "trap_activated":
+      case #"trap_activated":
         e_player = waitresult.trap_activator;
         str_event = #"trap_activated";
         break;
-      case # "trap_kill":
+      case #"trap_kill":
         if(isPlayer(waitresult.e_victim)) {
           e_player = waitresult.e_victim;
           str_event = #"trap_kill_self";
@@ -1223,13 +1223,13 @@ function_7469866d() {
     waitresult = self waittill(#"player_downed", #"bled_out", #"player_did_a_revive", #"hash_53620e40c7e139b9", #"destroy_riotshield", #"hash_74fc45698491be88", #"hazard_hit");
 
     switch (waitresult._notify) {
-      case # "player_downed":
+      case #"player_downed":
         str_event = #"player_down";
         break;
-      case # "bled_out":
+      case #"bled_out":
         str_event = #"player_death";
         break;
-      case # "player_did_a_revive":
+      case #"player_did_a_revive":
         if(waitresult.revived_player != self) {
           if(waitresult.revived_player.bleedout_time < 5) {
             str_event = #"hash_5d587a946bd4f958";
@@ -1239,16 +1239,16 @@ function_7469866d() {
         }
 
         break;
-      case # "hash_53620e40c7e139b9":
+      case #"hash_53620e40c7e139b9":
         str_event = #"hash_1dc206ff31de03eb";
         break;
-      case # "destroy_riotshield":
+      case #"destroy_riotshield":
         str_event = #"broken_shield";
         break;
-      case # "hazard_hit":
+      case #"hazard_hit":
         str_event = #"hazard_hit";
         break;
-      case # "hash_74fc45698491be88":
+      case #"hash_74fc45698491be88":
         str_event = #"hash_74fc45698491be88";
         break;
     }
@@ -1331,17 +1331,17 @@ function_eb6ff6a5() {
 
 function_e0bb973(cmd) {
   switch (cmd) {
-    case # "crowd_throw_item_immediate_good":
+    case #"crowd_throw_item_immediate_good":
       level flag::set(#"crowd_throw_item_immediate");
       level flag::set(#"hash_1a9f6d0c1e7684b4");
       level flag::clear(#"hash_80fa0541e21f744");
       break;
-    case # "crowd_throw_item_immediate_bad":
+    case #"crowd_throw_item_immediate_bad":
       level flag::set(#"crowd_throw_item_immediate");
       level flag::clear(#"hash_1a9f6d0c1e7684b4");
       level flag::set(#"hash_80fa0541e21f744");
       break;
-    case # "hash_4f715fd76b8686d":
+    case #"hash_4f715fd76b8686d":
       level flag::toggle("<dev string:xf6>");
 
       if(level flag::get("<dev string:xf6>")) {
@@ -1355,10 +1355,10 @@ function_e0bb973(cmd) {
       }
 
       break;
-    case # "hash_f7e831658b8fb28":
+    case #"hash_f7e831658b8fb28":
       level flag::toggle("<dev string:x116>");
       break;
-    case # "hash_4b6ce84335cf00ad":
+    case #"hash_4b6ce84335cf00ad":
       if(!isDefined(level.var_55fdc354)) {
         level.var_55fdc354 = 0;
       }
@@ -1406,7 +1406,7 @@ function_e0bb973(cmd) {
 
       wait 0.5;
       break;
-    case # "hash_1e51753996594cc3":
+    case #"hash_1e51753996594cc3":
       iprintlnbold("<dev string:x1042>");
       level.var_55fdc354 = 3;
       function_8237489a(1);
@@ -1415,37 +1415,37 @@ function_e0bb973(cmd) {
       function_696a8df0(0);
       level thread function_10ef0925();
       break;
-    case # "elephant_kill":
-    case # "hash_c65bc15b1aeb1bb":
-    case # "hash_c65bd15b1aeb36e":
-    case # "hash_c65be15b1aeb521":
-    case # "broken_shield":
-    case # "hash_158076998c9b511f":
-    case # "stole_crowd_item":
-    case # "hash_197ae1fc115dc636":
-    case # "first_tiger_kill":
-    case # "hash_1dc206ff31de03eb":
-    case # "hash_1ecab55fd270f67b":
-    case # "trap_kill_self":
-    case # "crawler_kill":
-    case # "elephant_weak_point":
-    case # "heavy_kill":
-    case # "elephant_rider_kill":
-    case # "hash_3d85834be3aff6d2":
-    case # "hash_4122108abe671eb7":
-    case # "trap_kill":
-    case # "first_heavy_kill":
-    case # "crawler_created_ww":
-    case # "crawler_created":
-    case # "trap_activated":
-    case # "hash_5986c925a370e137":
-    case # "hash_5d587a946bd4f958":
-    case # "hazard_hit":
-    case # "player_down":
-    case # "player_death":
-    case # "hash_74fc45698491be88":
-    case # "miniboss_kill":
-    case # "player_shoots_crowd":
+    case #"elephant_kill":
+    case #"hash_c65bc15b1aeb1bb":
+    case #"hash_c65bd15b1aeb36e":
+    case #"hash_c65be15b1aeb521":
+    case #"broken_shield":
+    case #"hash_158076998c9b511f":
+    case #"stole_crowd_item":
+    case #"hash_197ae1fc115dc636":
+    case #"first_tiger_kill":
+    case #"hash_1dc206ff31de03eb":
+    case #"hash_1ecab55fd270f67b":
+    case #"trap_kill_self":
+    case #"crawler_kill":
+    case #"elephant_weak_point":
+    case #"heavy_kill":
+    case #"elephant_rider_kill":
+    case #"hash_3d85834be3aff6d2":
+    case #"hash_4122108abe671eb7":
+    case #"trap_kill":
+    case #"first_heavy_kill":
+    case #"crawler_created_ww":
+    case #"crawler_created":
+    case #"trap_activated":
+    case #"hash_5986c925a370e137":
+    case #"hash_5d587a946bd4f958":
+    case #"hazard_hit":
+    case #"player_down":
+    case #"player_death":
+    case #"hash_74fc45698491be88":
+    case #"miniboss_kill":
+    case #"player_shoots_crowd":
       foreach(player in level.activeplayers) {
         var_d80019d9 = hash(cmd);
         player function_b8dfa139(var_d80019d9);

@@ -595,7 +595,7 @@ function private bgb_limit_monitor() {
   self playsoundtoplayer(#"hash_56cc165edb993de8", self);
 
   switch (level.bgb[self.bgb].limit_type) {
-    case # "activated":
+    case #"activated":
       for(i = level.bgb[self.bgb].limit; i > 0; i--) {
         if(i != level.bgb[self.bgb].limit) {
           self playsoundtoplayer(#"hash_7bb31f4a25cf34a", self);
@@ -635,7 +635,7 @@ function private bgb_limit_monitor() {
       }
 
       break;
-    case # "time":
+    case #"time":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -643,7 +643,7 @@ function private bgb_limit_monitor() {
       self waittill(#"hash_347d2afccb8337ab");
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case # "rounds":
+    case #"rounds":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -660,7 +660,7 @@ function private bgb_limit_monitor() {
 
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case # "event":
+    case #"event":
 
       self thread bgb_set_debug_text(self.bgb);
 
@@ -907,15 +907,15 @@ function register(name, limit_type, limit, enable_func, disable_func, validation
   assert(!isDefined(disable_func) || isfunctionptr(disable_func), "<dev string:x297>" + name + "<dev string:x349>");
 
   switch (limit_type) {
-    case # "activated":
+    case #"activated":
       assert(!isDefined(validation_func) || isfunctionptr(validation_func), "<dev string:x297>" + name + "<dev string:x384>" + limit_type + "<dev string:x3d3>");
       assert(isDefined(activation_func), "<dev string:x297>" + name + "<dev string:x3d8>" + limit_type + "<dev string:x3d3>");
       assert(isfunctionptr(activation_func), "<dev string:x297>" + name + "<dev string:x40f>" + limit_type + "<dev string:x3d3>");
-    case # "time":
-    case # "rounds":
+    case #"time":
+    case #"rounds":
       assert(isint(limit), "<dev string:x297>" + name + "<dev string:x451>" + limit + "<dev string:x45f>" + limit_type + "<dev string:x3d3>");
       break;
-    case # "event":
+    case #"event":
       assert(isfunctionptr(limit), "<dev string:x297>" + name + "<dev string:x484>" + limit_type + "<dev string:x3d3>");
       break;
     default:

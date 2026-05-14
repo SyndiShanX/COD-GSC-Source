@@ -122,24 +122,24 @@ function threat_sight_set_state(statename) {
   }
 
   switch (statename) {
-    case # "hidden":
+    case #"hidden":
       self.threatsight = 1;
       self.stealth.threat_sight_count = undefined;
       self.stealth.threat_sight_lost = undefined;
       break;
-    case # "investigate":
+    case #"investigate":
       self.threatsight = 1;
       break;
-    case # "hash_5689f41e8c0ad00":
-    case # "combat_hunt":
+    case #"hash_5689f41e8c0ad00":
+    case #"combat_hunt":
       self.threatsight = 1;
       break;
-    case # "blind":
+    case #"blind":
       break;
-    case # "spotted":
+    case #"spotted":
       self.threatsight = 0;
       break;
-    case # "death":
+    case #"death":
       self.threatsight = 0;
       break;
     default:
@@ -290,21 +290,21 @@ function threat_sight_player_entity_state_set(ai, statename) {
   entid = ai getentitynumber();
 
   switch (statename) {
-    case # "hidden":
+    case #"hidden":
       self.stealth.threat_sighted[entid] = undefined;
       break;
-    case # "combat_hunt":
+    case #"combat_hunt":
       ai setthreatsight(self, 0);
       break;
-    case # "investigate":
+    case #"investigate":
       break;
-    case # "death":
+    case #"death":
       ai setthreatsight(self, 0);
       break;
   }
 
   switch (statename) {
-    case # "death":
+    case #"death":
       self.stealth.threat_entities[entid] = undefined;
       self.stealth.threat_sighted[entid] = undefined;
       break;

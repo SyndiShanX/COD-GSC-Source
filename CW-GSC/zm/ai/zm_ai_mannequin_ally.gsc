@@ -164,15 +164,15 @@ function function_92157e49(goal, move_speed = "walk") {
 
   if(isDefined(navmeshpoint)) {
     switch (move_speed) {
-      case # "sprint":
+      case #"sprint":
         self ai::set_behavior_attribute("sprint", 1);
         self setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
         break;
-      case # "run":
+      case #"run":
         self ai::set_behavior_attribute("sprint", 0);
         self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
         break;
-      case # "walk":
+      case #"walk":
       default:
         self ai::set_behavior_attribute("sprint", 0);
         self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
@@ -228,7 +228,7 @@ function private function_851f409b() {
 
 function private function_18227767(cmd) {
   switch (cmd) {
-    case # "hash_31690de1b49c022a":
+    case #"hash_31690de1b49c022a":
       ais = getaiarchetypearray(#"zod_companion");
 
       if(ais.size > 0) {
@@ -238,13 +238,13 @@ function private function_18227767(cmd) {
       }
 
       break;
-    case # "hash_dc11efc5ca22f74":
+    case #"hash_dc11efc5ca22f74":
       function_e3e858b1(250, "<dev string:x1b3>");
       break;
-    case # "hash_35381ef4960cf279":
+    case #"hash_35381ef4960cf279":
       function_e3e858b1(250, "<dev string:x1bd>");
       break;
-    case # "hash_22d1be7a17698c91":
+    case #"hash_22d1be7a17698c91":
       function_e3e858b1(250, "<dev string:x1c4>");
       break;
     default:

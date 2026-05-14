@@ -1153,13 +1153,13 @@ function_b029639e(attacker, einflictor, weapon, smeansofdeath, shitloc) {
   }
 
   switch (weapon.name) {
-    case # "dog_bite":
+    case #"dog_bite":
       smeansofdeath = "MOD_PISTOL_BULLET";
       break;
-    case # "destructible_car":
+    case #"destructible_car":
       smeansofdeath = "MOD_EXPLOSIVE";
       break;
-    case # "explodable_barrel":
+    case #"explodable_barrel":
       smeansofdeath = "MOD_EXPLOSIVE";
       break;
   }
@@ -1540,11 +1540,11 @@ function_f632c17e(weapon) {
   }
 
   switch (weapon.name) {
-    case # "ar_accurate_t8_swat":
-    case # "hash_17df39d53492b0bf":
-    case # "tank_robot_launcher_turret":
-    case # "ac130_chaingun":
-    case # "ac130_autocannon":
+    case #"ar_accurate_t8_swat":
+    case #"hash_17df39d53492b0bf":
+    case #"tank_robot_launcher_turret":
+    case #"ac130_chaingun":
+    case #"ac130_autocannon":
       return true;
   }
 

@@ -721,21 +721,21 @@ portal_init() {
   self thread function_45a968e4();
 
   switch (self.script_noteworthy) {
-    case # "portal_conference_level1":
-    case # "portal_offices_level1":
+    case #"portal_conference_level1":
+    case #"portal_offices_level1":
       self.n_floor = 1;
       break;
-    case # "portal_war_room_server_room":
-    case # "portal_panic_room":
-    case # "portal_war_room":
-    case # "portal_war_room_map":
+    case #"portal_war_room_server_room":
+    case #"portal_panic_room":
+    case #"portal_war_room":
+    case #"portal_war_room_map":
       self.n_floor = 2;
       break;
-    case # "portal_labs_power_room":
-    case # "portal_labs_hall2_west":
-    case # "portal_labs_hall1_east":
-    case # "portal_labs_hall2_east":
-    case # "portal_labs_hall1_west":
+    case #"portal_labs_power_room":
+    case #"portal_labs_hall2_west":
+    case #"portal_labs_hall1_east":
+    case #"portal_labs_hall2_east":
+    case #"portal_labs_hall1_west":
       self.n_floor = 3;
       break;
   }

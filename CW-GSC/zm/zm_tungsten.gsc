@@ -289,25 +289,25 @@ function function_88a42ff9() {
     }
 
     switch (s_magic_box.script_noteworthy) {
-      case # "hash_56d1c62d9d855079":
+      case #"hash_56d1c62d9d855079":
         s_magic_box function_b4abc0a1("map_box_loc_staging_area");
         break;
-      case # "hash_4df315302311fca6":
+      case #"hash_4df315302311fca6":
         s_magic_box function_b4abc0a1("map_box_loc_storage_5");
         break;
-      case # "hash_491b1052ddf51113":
+      case #"hash_491b1052ddf51113":
         s_magic_box function_b4abc0a1("map_box_loc_storage_10");
         break;
-      case # "hash_63575e63c86bf1be":
+      case #"hash_63575e63c86bf1be":
         s_magic_box function_b4abc0a1("map_box_loc_anytown_east");
         break;
-      case # "hash_38c125278e00d34b":
+      case #"hash_38c125278e00d34b":
         s_magic_box function_b4abc0a1("map_box_loc_anytown_west");
         break;
-      case # "hash_367f50ca7e5de64e":
+      case #"hash_367f50ca7e5de64e":
         s_magic_box function_b4abc0a1("map_box_loc_amplifier");
         break;
-      case # "hash_6a534c1571dbef87":
+      case #"hash_6a534c1571dbef87":
         s_magic_box function_b4abc0a1("map_box_loc_tower");
         break;
       default:
@@ -383,24 +383,24 @@ function function_bce9fcbe() {
 
     if(isDefined(str_player_zone)) {
       switch (str_player_zone) {
-        case # "zone_helipads_portal_room":
-        case # "zone_helipads_3":
-        case # "zone_helipads":
+        case #"zone_helipads_portal_room":
+        case #"zone_helipads_3":
+        case #"zone_helipads":
           var_733eb37d = 1;
           break;
-        case # "zone_main_street_bridge":
-        case # "zone_main_street_backlot":
+        case #"zone_main_street_bridge":
+        case #"zone_main_street_backlot":
           var_733eb37d = 2;
           break;
-        case # "zone_video_store_roof":
-        case # "zone_anytown_usa_backlot":
+        case #"zone_video_store_roof":
+        case #"zone_anytown_usa_backlot":
           var_733eb37d = 3;
           break;
-        case # "zone_bunker_entrance_01":
-        case # "zone_service_tunnels_03":
+        case #"zone_bunker_entrance_01":
+        case #"zone_service_tunnels_03":
           var_733eb37d = 4;
           break;
-        case # "zone_observation":
+        case #"zone_observation":
           var_733eb37d = 5;
           break;
       }
@@ -2752,19 +2752,19 @@ function function_37597f29() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_50d92ca3c6c7c2a8":
+    case #"hash_50d92ca3c6c7c2a8":
       function_71a6c3ea();
       break;
-    case # "hash_41ed3803afaf6e4a":
+    case #"hash_41ed3803afaf6e4a":
       zm_tungsten_pap_quest::function_1d310878();
       break;
-    case # "hash_1f1d6a652126f2f":
+    case #"hash_1f1d6a652126f2f":
       level.var_4da195fc = 1;
       break;
-    case # "hash_11cc5cc057abb4a0":
+    case #"hash_11cc5cc057abb4a0":
       level.var_4da195fc = 0;
       break;
-    case # "hash_57b9473a38039ff0":
+    case #"hash_57b9473a38039ff0":
       function_71a6c3ea();
       level thread zm_tungsten_main_quest::function_2f0a2ce2();
       break;

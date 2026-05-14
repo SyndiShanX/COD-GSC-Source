@@ -171,13 +171,13 @@ function private _on_localplayer_spawned(localclientnum) {
 
 function private function_491c852e(item) {
   switch (item) {
-    case # "trip_wire_wz_item":
+    case #"trip_wire_wz_item":
       return 1;
-    case # "concertina_wire_wz_item":
+    case #"concertina_wire_wz_item":
       return 2;
-    case # "cymbal_monkey_wz_item":
+    case #"cymbal_monkey_wz_item":
       return 3;
-    case # "ultimate_turret_wz_item":
+    case #"ultimate_turret_wz_item":
       return 4;
   }
 }

@@ -82,9 +82,9 @@ function_80c4721f(commander) {
 
       if(isDefined(doorblocker.script_noteworthy)) {
         switch (doorblocker.script_noteworthy) {
-          case # "electric_door":
-          case # "local_electric_door":
-          case # "electric_buyable_door":
+          case #"electric_door":
+          case #"local_electric_door":
+          case #"electric_buyable_door":
             continue;
         }
       }

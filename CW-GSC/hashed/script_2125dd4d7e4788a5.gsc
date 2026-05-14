@@ -398,21 +398,21 @@ function function_912eedf3(zombie) {
 function function_b61cfe16(player) {
   if(isDefined(self) && isDefined(self.aitype)) {
     switch (self.aitype) {
-      case # "spawner_bo5_abom":
-      case # "spawner_bo5_mechz_sr":
+      case #"spawner_bo5_abom":
+      case #"spawner_bo5_mechz_sr":
         self function_98139c38(player, 0.25);
         break;
-      case # "spawner_bo5_avogadro_sr":
-      case # "spawner_bo5_soa":
+      case #"spawner_bo5_avogadro_sr":
+      case #"spawner_bo5_soa":
         self function_98139c38(player, 0.6);
         break;
-      case # "spawner_bo5_mimic":
+      case #"spawner_bo5_mimic":
         self function_98139c38(player, 0.6);
         break;
-      case # "hash_4f87aa2a203d37d0":
+      case #"hash_4f87aa2a203d37d0":
         self function_98139c38(player, 0.5);
         break;
-      case # "spawner_zm_steiner":
+      case #"spawner_zm_steiner":
         self function_98139c38(player, 0.4);
         break;
       default:

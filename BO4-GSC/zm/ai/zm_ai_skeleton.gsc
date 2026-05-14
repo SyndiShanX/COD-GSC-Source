@@ -505,7 +505,7 @@ function_946c1972(eventstruct) {
   }
 
   switch (notify_string) {
-    case # "death":
+    case #"death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zm_audio::zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else {
@@ -513,17 +513,17 @@ function_946c1972(eventstruct) {
       }
 
       break;
-    case # "fakedeath":
+    case #"fakedeath":
       level thread zm_audio::zmbaivox_playvox(self, "pain", 1, 3);
       break;
-    case # "pain":
+    case #"pain":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case # "melee_vox":
+    case #"melee_vox":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 2, 1);
       break;
-    case # "sprint":
-    case # "ambient":
+    case #"sprint":
+    case #"ambient":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 1);
       break;
     default:
@@ -544,25 +544,25 @@ function_6d3ecc88() {
 
 function_6ae10cf1(cmd) {
   switch (cmd) {
-    case # "skeleton_spawn":
+    case #"skeleton_spawn":
       zm_devgui::spawn_archetype("<dev string:x2e9>");
       break;
-    case # "skeleton_spawn_spear":
+    case #"skeleton_spawn_spear":
       zm_devgui::spawn_archetype("<dev string:x303>");
       break;
-    case # "skeleton_spawn_helmet":
+    case #"skeleton_spawn_helmet":
       zm_devgui::spawn_archetype("<dev string:x323>");
       break;
-    case # "hash_57892c7b7a106128":
+    case #"hash_57892c7b7a106128":
       zm_devgui::spawn_archetype("<dev string:x344>");
       break;
-    case # "hash_3889ece40febdc1e":
+    case #"hash_3889ece40febdc1e":
       function_2d69eef6("<dev string:x36b>");
       break;
-    case # "hash_1d61c627e61ca434":
+    case #"hash_1d61c627e61ca434":
       function_2d69eef6("<dev string:x372>");
       break;
-    case # "hash_2a2ceb9249805ca7":
+    case #"hash_2a2ceb9249805ca7":
       function_2d69eef6("<dev string:x378>");
       break;
     default:

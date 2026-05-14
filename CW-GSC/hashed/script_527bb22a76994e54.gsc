@@ -587,22 +587,22 @@ function private function_c3f8fae7(selected, var_834d338d) {
 
 function function_85303021(var_8ced85ea) {
   switch (var_8ced85ea) {
-    case # "post_takedown":
+    case #"post_takedown":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 1, "cp_takedown", 1, "cp_nam_armada", 0);
       break;
-    case # "post_armada":
+    case #"post_armada":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 1, "cp_takedown", 1, "cp_nam_armada", 1, "cp_ger_stakeout", 0);
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 1, "cp_takedown", 1, "cp_nam_armada", 1, "cp_ger_stakeout", 1, "cp_rus_amerika", 1, "cp_rus_yamantau", 1, "cp_rus_kgb", 0);
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 0, "cp_takedown", 1, "cp_nam_armada", 1, "cp_ger_stakeout", 1, "cp_rus_amerika", 1, "cp_rus_yamantau", 1, "cp_rus_kgb", 1);
       break;
-    case # "post_cuba":
+    case #"post_cuba":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 0, "cp_takedown", 1, "cp_nam_armada", 1, "cp_ger_stakeout", 1, "cp_rus_amerika", 1, "cp_rus_yamantau", 1, "cp_rus_kgb", 1);
       break;
-    case # "post_prisoner":
+    case #"post_prisoner":
       a_ents = level function_f2f0bdcc("cp_nic_revolucion", 0, "cp_takedown", 1, "cp_nam_armada", 1, "cp_ger_stakeout", 1, "cp_rus_amerika", 1, "cp_rus_yamantau", 1, "cp_rus_kgb", 1);
       break;
     default:
@@ -669,7 +669,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
   }
 
   switch (var_bdf4b952) {
-    case # "cp_takedown":
+    case #"cp_takedown":
       t = getent("cp_takedown", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -702,7 +702,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_nam_armada":
+    case #"cp_nam_armada":
       t = getent("cp_nam_armada", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -747,7 +747,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_ger_stakeout":
+    case #"cp_ger_stakeout":
       t = getent("cp_ger_stakeout", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -796,7 +796,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_rus_amerika":
+    case #"cp_rus_amerika":
       t = getent("cp_rus_amerika", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -833,7 +833,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_rus_yamantau":
+    case #"cp_rus_yamantau":
       t = getent("cp_rus_yamantau", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -869,7 +869,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_rus_kgb":
+    case #"cp_rus_kgb":
       t = getent("cp_rus_kgb", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -907,7 +907,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_nic_revolucion":
+    case #"cp_nic_revolucion":
       if((isDefined(level.var_f5552371) ? level.var_f5552371 : "") == "post_kgb") {
         t = getent("cp_nic_revolucion", "script_noteworthy");
         a_ents[a_ents.size] = t;
@@ -939,7 +939,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       } else {
         break;
       }
-    case # "cp_nam_prisoner":
+    case #"cp_nam_prisoner":
       t = getent("cp_nam_prisoner", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
@@ -1025,19 +1025,19 @@ function function_bc88736c(var_f587343a) {
   level waittill(#"hash_3e8dc841ce47f8fd");
 
   switch (level.var_8d26dee2) {
-    case # "cp_takedown":
+    case #"cp_takedown":
       break;
-    case # "cp_nam_armada":
+    case #"cp_nam_armada":
       break;
-    case # "cp_ger_stakeout":
+    case #"cp_ger_stakeout":
       break;
-    case # "cp_rus_amerika":
+    case #"cp_rus_amerika":
       break;
-    case # "cp_rus_yamantau":
+    case #"cp_rus_yamantau":
       break;
-    case # "cp_rus_kgb":
+    case #"cp_rus_kgb":
       break;
-    case # "cp_nic_revolucion":
+    case #"cp_nic_revolucion":
       break;
   }
 
@@ -1066,13 +1066,13 @@ function function_cd10e6da(var_f587343a) {
 
 function function_9b006527(var_f587343a) {
   switch (isDefined(level.var_f5552371) ? level.var_f5552371 : "") {
-    case # "post_takedown":
+    case #"post_takedown":
       break;
-    case # "post_armada":
+    case #"post_armada":
       break;
-    case # "post_yamantau":
+    case #"post_yamantau":
       break;
-    case # "post_kgb":
+    case #"post_kgb":
       break;
     default:
       break;
@@ -1088,10 +1088,10 @@ function function_a1353526() {
     s_result = level waittill(#"evidence_board_mission_selected", #"hash_3e8dc841ce47f8fd");
 
     switch (s_result._notify) {
-      case # "evidence_board_mission_selected":
+      case #"evidence_board_mission_selected":
         level clientfield::set("eboard_notify_from_server", 1);
         break;
-      case # "hash_3e8dc841ce47f8fd":
+      case #"hash_3e8dc841ce47f8fd":
         level clientfield::set("eboard_notify_from_server", 2);
         break;
     }

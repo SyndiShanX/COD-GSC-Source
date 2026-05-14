@@ -77,15 +77,15 @@ function function_d6863a3(inflictor, attacker, meansofdeath, weapon, aat, item) 
 function function_1b3815a7(element) {
   if(isDefined(element) && isDefined(self.var_19f5037) && is_true(self.var_19f5037[element])) {
     switch (element) {
-      case # "fire":
+      case #"fire":
         return 1;
-      case # "explosive":
+      case #"explosive":
         return 2;
-      case # "toxic":
+      case #"toxic":
         return 3;
-      case # "electrical":
+      case #"electrical":
         return 4;
-      case # "cold":
+      case #"cold":
         return 5;
     }
   }
@@ -169,7 +169,7 @@ function function_977b852e(dvar) {
   tokens = strtok(dvar.value, "<dev string:x34e>");
 
   switch (tokens[0]) {
-    case # "toggle_debug":
+    case #"toggle_debug":
       level.var_a12b24d0 = !is_true(level.var_a12b24d0);
 
       if(!is_true(level.var_a12b24d0)) {
@@ -179,10 +179,10 @@ function function_977b852e(dvar) {
       }
 
       break;
-    case # "hash_8c3f5aa0d2959b8":
+    case #"hash_8c3f5aa0d2959b8":
       level.var_98e71360 = !is_true(level.var_98e71360);
       break;
-    case # "damage_nearby":
+    case #"damage_nearby":
       function_11c1d3c(tokens[1]);
       break;
   }

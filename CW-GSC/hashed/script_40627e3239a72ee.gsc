@@ -298,19 +298,19 @@ function item_pickup(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
       switch (item.itementry.name) {
-        case # "hash_4ad785fc5428f484":
+        case #"hash_4ad785fc5428f484":
           level zm_ui_inventory::function_7df6bb60(#"hash_4a43375d671f2e30", 1);
           level flag::set(#"hash_685bfabd9ce72d7c");
           break;
-        case # "hash_7af2b5eb8d8c6fda":
+        case #"hash_7af2b5eb8d8c6fda":
           level flag::set(#"hash_4c498c40805ec092");
           level.var_3d8c252b++;
           break;
-        case # "hash_54d43da245d6857a":
+        case #"hash_54d43da245d6857a":
           level flag::set(#"hash_11d54d2ecf05cb2");
           level.var_3d8c252b++;
           break;
-        case # "hash_1f8bb9e3c0e5ac10":
+        case #"hash_1f8bb9e3c0e5ac10":
           level flag::set(#"hash_2bd741137c515a48");
           level.var_3d8c252b++;
           break;
@@ -1236,21 +1236,21 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_52e9bd6ba5bfab34":
+    case #"hash_52e9bd6ba5bfab34":
       level flag::set(#"hash_75f07aed08b6bb5e");
       level.var_3d8c252b = 3;
       level flag::set(#"hash_4c498c40805ec092");
       level flag::set(#"hash_11d54d2ecf05cb2");
       level flag::set(#"hash_2bd741137c515a48");
       break;
-    case # "collect_microwave":
+    case #"collect_microwave":
       level flag::set(#"hash_2fea433a677a8531");
       break;
-    case # "hash_2a439dc6ff821f8c":
+    case #"hash_2a439dc6ff821f8c":
       level flag::set(#"hash_73b91a4076d8a5fd");
       playsoundatposition(#"hash_77b21ab51a834aa5", (0, 0, 0));
       break;
-    case # "hash_7f4f450f45fab726":
+    case #"hash_7f4f450f45fab726":
       spawn_loc = level.klaus.origin;
       spawn_angles = level.klaus.angles;
       var_55033b92 = spawnactor("<dev string:x4aa>", spawn_loc, spawn_angles);
@@ -1260,7 +1260,7 @@ function cmd(cmd) {
       var_55033b92 namespace_ca8676a3::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_88672174, 0, 0);
       break;
-    case # "hash_7fa0510f463f22b2":
+    case #"hash_7fa0510f463f22b2":
       spawn_loc = level.klaus.origin;
       spawn_angles = level.klaus.angles;
       var_55033b92 = spawnactor("<dev string:x4d4>", spawn_loc, spawn_angles);
@@ -1270,7 +1270,7 @@ function cmd(cmd) {
       var_55033b92 namespace_ca8676a3::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_5b8c6c9b, 0, 0);
       break;
-    case # "hash_2a5a3d4fd5a02048":
+    case #"hash_2a5a3d4fd5a02048":
       spawn_loc = level.klaus.origin;
       spawn_angles = level.klaus.angles;
       var_55033b92 = spawnactor("<dev string:x4fd>", spawn_loc, spawn_angles);
@@ -1280,7 +1280,7 @@ function cmd(cmd) {
       var_55033b92 namespace_ca8676a3::function_94fde0c0();
       var_55033b92 function_99f76fa4(level.var_f1662fe9, 0, 0);
       break;
-    case # "hash_1c3b84bbe061a573":
+    case #"hash_1c3b84bbe061a573":
       spawn_loc = level.klaus.origin;
       spawn_angles = level.klaus.angles;
       var_55033b92 = spawnactor("<dev string:x526>", spawn_loc, spawn_angles);
@@ -1290,7 +1290,7 @@ function cmd(cmd) {
       var_55033b92 namespace_ca8676a3::function_94fde0c0();
       var_55033b92 function_99f76fa4(0, 0, 0);
       break;
-    case # "hash_593067b88bb64850":
+    case #"hash_593067b88bb64850":
       var_1b22e364 = struct::get("<dev string:x543>", "<dev string:x555>");
       var_44ff9e2 = getEntArray(var_1b22e364.target, "<dev string:x555>");
 

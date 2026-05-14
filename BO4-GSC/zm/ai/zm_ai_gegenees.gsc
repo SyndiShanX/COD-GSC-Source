@@ -951,19 +951,19 @@ function_c03e8d05() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case # "spawn":
+        case #"spawn":
           zm_devgui::spawn_archetype("<dev string:x1b1>");
           break;
-        case # "kill":
+        case #"kill":
           zm_devgui::kill_archetype(#"gegenees");
           break;
-        case # "shield_attack":
+        case #"shield_attack":
           if(isDefined(gegenees[0])) {
             gegenees[0].var_89b5e1e = 1;
           }
 
           break;
-        case # "stop_move":
+        case #"stop_move":
           if(isDefined(gegenees[0])) {
             if(!isDefined(gegenees[0].devgui_stop_move)) {
               gegenees[0].devgui_stop_move = 1;

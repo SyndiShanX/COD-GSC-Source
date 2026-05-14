@@ -195,10 +195,10 @@ function function_84c43da8(params) {
   currentweapon = currentweapon.rootweapon;
 
   switch (weapon.name) {
-    case # "aether_shroud":
+    case #"aether_shroud":
       self thread function_ff022837(5, weapon);
       break;
-    case # "aether_shroud_1":
+    case #"aether_shroud_1":
       self thread function_ff022837(5, weapon);
 
       if(function_4473f9bb(currentweapon)) {
@@ -206,7 +206,7 @@ function function_84c43da8(params) {
       }
 
       break;
-    case # "aether_shroud_2":
+    case #"aether_shroud_2":
       self thread function_ff022837(8, weapon);
 
       if(function_4473f9bb(currentweapon)) {
@@ -214,7 +214,7 @@ function function_84c43da8(params) {
       }
 
       break;
-    case # "aether_shroud_3":
+    case #"aether_shroud_3":
       self thread function_ff022837(8, weapon);
 
       if(function_4473f9bb(currentweapon)) {
@@ -223,8 +223,8 @@ function function_84c43da8(params) {
 
       self thread function_c5e5e928(500);
       break;
-    case # "aether_shroud_5":
-    case # "aether_shroud_4":
+    case #"aether_shroud_5":
+    case #"aether_shroud_4":
       self thread function_ff022837(8, weapon);
 
       if(function_4473f9bb(currentweapon)) {

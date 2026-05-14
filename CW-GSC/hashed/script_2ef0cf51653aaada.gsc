@@ -296,12 +296,12 @@ function function_2e153a87() {
     var_947d01ee = s_results.weapon.weapclass;
 
     switch (var_947d01ee) {
-      case # "grenade":
+      case #"grenade":
         level.player.var_ee4032c4 = (isDefined(level.player.var_ee4032c4) ? level.player.var_ee4032c4 : 0) + 1;
         snd::play("evt_tower_explo", self);
         self function_b1cd831c();
         return;
-      case # "rocketlauncher":
+      case #"rocketlauncher":
         self function_b1cd831c();
         return;
       default:

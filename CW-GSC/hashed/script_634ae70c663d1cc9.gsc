@@ -273,40 +273,40 @@ function function_54f185a() {
 
 function function_3874b272(type, var_2c5f6748) {
   switch (type) {
-    case # "explo_barrel":
+    case #"explo_barrel":
       self thread namespace_fb2125f::function_6e3c8a46();
       return;
-    case # "killbox":
+    case #"killbox":
       self thread namespace_6624770a::function_813ad4cb();
       return;
-    case # "killzone":
+    case #"killzone":
       self thread namespace_538252ab::function_90e65586();
       return;
-    case # "elec_pole":
+    case #"elec_pole":
       self thread namespace_53f73cda::function_97d551b(var_2c5f6748);
       return;
-    case # "pungi":
+    case #"pungi":
       self thread namespace_d20e7d3b::function_433b5718();
       return;
-    case # "pressureplate":
+    case #"pressureplate":
       self thread namespace_9529b92d::function_b2a0e8d2();
       return;
-    case # "flogger":
+    case #"flogger":
       self thread namespace_85f9e33a::function_a76494d5();
       return;
-    case # "logdrop":
+    case #"logdrop":
       self thread namespace_a7c12078::function_237de89e();
       return;
-    case # "dragonhead":
+    case #"dragonhead":
       self thread namespace_3c9cfcff::function_19903280();
       return;
-    case # "fireball":
+    case #"fireball":
       self thread namespace_2a2a39d4::function_3a25f62f();
       return;
-    case # "physicsbox":
+    case #"physicsbox":
       self thread namespace_61052b71::function_8bd713b2();
       return;
-    case # "platform":
+    case #"platform":
       self thread namespace_98036e8c::function_1ba8281d();
       return;
     default:

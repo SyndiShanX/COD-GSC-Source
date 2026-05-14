@@ -553,16 +553,16 @@ function_f1c106b(str_blocker, b_solid) {
 
   if(b_solid) {
     switch (str_blocker) {
-      case # "loc4":
+      case #"loc4":
         str_spawner = "greenhouse_lab_respawns";
         break;
-      case # "loc3":
+      case #"loc3":
         str_spawner = "cemetery_respawns";
         break;
-      case # "loc2":
+      case #"loc2":
         str_spawner = "forest_n_respawns";
         break;
-      case # "loc1":
+      case #"loc1":
         function_5f310cf9();
         break;
     }

@@ -52,29 +52,29 @@ function private evaluate_constant(input_def) {
   val = input_def.constvalue;
 
   switch (input_def.type) {
-    case # "fx":
-    case # "float":
-    case # "weapon":
-    case # "int":
-    case # "variant":
-    case # "scriptbundle":
-    case # "xmodel":
-    case # "xanim":
-    case # "bool":
-    case # "soundalias":
-    case # "vector":
-    case # "string":
+    case #"fx":
+    case #"float":
+    case #"weapon":
+    case #"int":
+    case #"variant":
+    case #"scriptbundle":
+    case #"xmodel":
+    case #"xanim":
+    case #"bool":
+    case #"soundalias":
+    case #"vector":
+    case #"string":
       return val;
-    case # "entityarray":
+    case #"entityarray":
       assert(isstruct(val));
       assert(isDefined(val.value));
       assert(isDefined(val.key));
       return getEntArray(val.value, val.key);
-    case # "pathnode":
-    case # "spawner":
-    case # "ai":
-    case # "entity":
-    case # "vehicle":
+    case #"pathnode":
+    case #"spawner":
+    case #"ai":
+    case #"entity":
+    case #"vehicle":
       assert(isstruct(val) || isstring(val));
 
       if(isstruct(val)) {
@@ -90,11 +90,11 @@ function private evaluate_constant(input_def) {
           return self.target.target;
         }
       }
-    case # "struct":
-    case # "array":
-    case # "class":
-    case # "null":
-    case # "exec":
+    case #"struct":
+    case #"array":
+    case #"class":
+    case #"null":
+    case #"exec":
       assertmsg("<dev string:x77>");
       return undefined;
   }

@@ -807,11 +807,11 @@ function function_eec52333(weapon, statname, value, classnum, pickedup, forceads
   self addweaponstat(weapon, statname, value, classnum, pickedup, forceads);
 
   switch (statname) {
-    case # "shots":
-    case # "used":
+    case #"shots":
+    case #"used":
       self function_f95ea9b6(weapon);
       break;
-    case # "kills":
+    case #"kills":
       if(weapon.var_ff0b00ba) {
         self function_dad108fa(#"kills_equipment", 1);
       }

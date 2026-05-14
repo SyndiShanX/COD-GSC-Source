@@ -1902,13 +1902,13 @@ function function_cbca12b3(a_ents) {
   foreach(ent in a_ents) {
     if(isalive(ent)) {
       switch (ent.anim_debug_name) {
-        case # "actor 1":
+        case #"actor 1":
           nd_cover = a_nodes[0];
           break;
-        case # "actor 2":
+        case #"actor 2":
           nd_cover = a_nodes[1];
           break;
-        case # "actor 3":
+        case #"actor 3":
           nd_cover = a_nodes[2];
           break;
       }
@@ -2797,47 +2797,47 @@ function function_1df2273d(destructible_event, attacker, weapon, piece_index, po
   level.player playrumbleonentity("damage_heavy");
 
   switch (self.script_noteworthy) {
-    case # "hash_ca1398592862981":
+    case #"hash_ca1398592862981":
       level scene::play(#"hash_7d136efada0c9af0");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_06_01_static_mod");
       level function_97bcc0e9(#"hash_7d136efada0c9af0");
       break;
-    case # "hash_ca1368592862468":
+    case #"hash_ca1368592862468":
       level scene::play(#"hash_72f8f56116f32b17");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_06_02_static_mod");
       level function_97bcc0e9(#"hash_72f8f56116f32b17");
       break;
-    case # "hash_ca137859286261b":
+    case #"hash_ca137859286261b":
       level scene::play(#"hash_35db7f3d2c472306");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_06_03_static_mod");
       level function_97bcc0e9(#"hash_35db7f3d2c472306");
       break;
-    case # "hash_65f4d60588e2b888":
+    case #"hash_65f4d60588e2b888":
       level scene::play(#"hash_5e055056aa386e1f");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_14_01_static_mod");
       level function_97bcc0e9(#"hash_5e055056aa386e1f");
       break;
-    case # "hash_65f4d90588e2bda1":
+    case #"hash_65f4d90588e2bda1":
       level scene::play(#"hash_6c7177a6718884b8");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_14_02_static_mod");
       level function_97bcc0e9(#"hash_6c7177a6718884b8");
       break;
-    case # "hash_65f4d80588e2bbee":
+    case #"hash_65f4d80588e2bbee":
       level scene::play(#"hash_1fb12697821542a1");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_14_03_static_mod");
       level function_97bcc0e9(#"hash_1fb12697821542a1");
       break;
-    case # "hash_65f4db0588e2c107":
+    case #"hash_65f4db0588e2c107":
       level scene::play(#"hash_1464d638ee5e23aa");
       showmiscmodels("p9_fxanim_cp_armada_town_bldg_14_04_static_mod");
       level function_97bcc0e9(#"hash_1464d638ee5e23aa");
       break;
-    case # "hash_27d72049793f0ba2":
+    case #"hash_27d72049793f0ba2":
       level scene::play(#"hash_1849fb3a90d16a1");
       showmiscmodels("p9_fxanim_cp_armada_town_court_01_static_mod");
       level function_97bcc0e9(#"hash_1849fb3a90d16a1");
       break;
-    case # "hash_27d71f49793f09ef":
+    case #"hash_27d71f49793f09ef":
       level scene::play(#"hash_60671afc06cb038e");
       showmiscmodels("p9_fxanim_cp_armada_town_court_02_static_mod");
       level function_97bcc0e9(#"hash_60671afc06cb038e");

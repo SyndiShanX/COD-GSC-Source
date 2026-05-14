@@ -167,7 +167,7 @@ function private _planpushvalidparent(planner, childnodeentry, result) {
     assert(isDefined(parentnodeentry));
 
     switch (parentnodeentry.node.type) {
-      case # "sequence":
+      case #"sequence":
         if(result) {
           nextchildnode = _planfindnextsibling(planner, parentnodeentry, childnodeentry.childindex);
 
@@ -182,8 +182,8 @@ function private _planpushvalidparent(planner, childnodeentry, result) {
 
         _planstackpopnode(planner);
         break;
-      case # "selector":
-      case # "planner":
+      case #"selector":
+      case #"planner":
         if(!result) {
           _undoplan(planner, parentnodeentry.planindex);
           _blackboardsapplyundostate(planner, parentnodeentry.undostate);
@@ -218,18 +218,18 @@ function private _planprocessstack(planner) {
     nodeentry = _planstackpeeknode(planner);
 
     switch (nodeentry.node.type) {
-      case # "action":
+      case #"action":
         result = _planexpandaction(planner, nodeentry.node);
         break;
-      case # "postcondition":
+      case #"postcondition":
         result = _planexpandpostcondition(planner, nodeentry.node);
         break;
-      case # "precondition":
+      case #"precondition":
         result = _planexpandprecondition(planner, nodeentry.node);
         break;
-      case # "selector":
-      case # "sequence":
-      case # "planner":
+      case #"selector":
+      case #"sequence":
+      case #"planner":
         _planstackpushnode(planner, nodeentry.node.children[0], 0);
         continue;
       default:
@@ -544,25 +544,25 @@ function createplannerfromasset(assetname) {
       node = htnasset.nodes[nodeindex];
 
       switch (node.type) {
-        case # "action":
+        case #"action":
           plannernodes[nodeindex] = planner::createaction(node.name, node.constants);
           break;
-        case # "postcondition":
+        case #"postcondition":
           plannernodes[nodeindex] = planner::createpostcondition(node.name, node.constants);
           break;
-        case # "precondition":
+        case #"precondition":
           plannernodes[nodeindex] = planner::createprecondition(node.name, node.constants);
           break;
-        case # "planner":
+        case #"planner":
           plannernodes[nodeindex] = planner::createplanner(node.name);
           break;
-        case # "selector":
+        case #"selector":
           plannernodes[nodeindex] = planner::createselector();
           break;
-        case # "sequence":
+        case #"sequence":
           plannernodes[nodeindex] = planner::createsequence();
           break;
-        case # "goto":
+        case #"goto":
           plannernodes[nodeindex] = spawnStruct();
           break;
       }

@@ -68,16 +68,16 @@ trap_damage(t_trap) {
   level thread trap_damage_cooldown(self);
 
   switch (self.archetype) {
-    case # "zombie":
+    case #"zombie":
       n_percent = 35;
       break;
-    case # "catalyst":
+    case #"catalyst":
       n_percent = 35;
       break;
-    case # "gegenees":
+    case #"gegenees":
       n_percent = 5;
       break;
-    case # "blight_father":
+    case #"blight_father":
       n_percent = 5;
       break;
     default:

@@ -200,10 +200,10 @@ function startfx(localclientnum) {
     light_fx = undefined;
 
     switch (self.vehicletype) {
-      case # "heli_ai_mp":
+      case #"heli_ai_mp":
         light_fx = "heli_comlink_light";
         break;
-      case # "heli_guard_mp":
+      case #"heli_guard_mp":
         light_fx = "heli_guard_light";
         break;
     }

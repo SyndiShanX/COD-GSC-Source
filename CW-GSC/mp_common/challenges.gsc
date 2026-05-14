@@ -483,17 +483,17 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
     var_30f88120 = scoreevents::function_c28e2c05(idamage.origin, var_6af452fc.sensordarts, 0);
 
     switch (weapon.statname) {
-      case # "ar_mobility_t9":
-      case # "smg_handling_t9":
+      case #"ar_mobility_t9":
+      case #"smg_handling_t9":
         self stats::function_42277145(#"hash_76bf58f08a08d598", 1);
         break;
-      case # "ar_damage_t9":
-      case # "smg_burst_t9":
-      case # "shotgun_pump_t9":
+      case #"ar_damage_t9":
+      case #"smg_burst_t9":
+      case #"shotgun_pump_t9":
         self stats::function_42277145(#"hash_734f1d49f5395c1", 1);
         break;
-      case # "smg_heavy_t9":
-      case # "ar_standard_t9":
+      case #"smg_heavy_t9":
+      case #"ar_standard_t9":
         self stats::function_42277145(#"hash_777767b99c350232", 1);
         break;
       default:
@@ -501,17 +501,17 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
     }
 
     switch (weapon.statname) {
-      case # "smg_burst_t9":
-      case # "ar_british_t9":
+      case #"smg_burst_t9":
+      case #"ar_british_t9":
         self stats::function_42277145(#"hash_24abaa59aafa466b", 1);
         break;
-      case # "ar_slowhandling_t9":
-      case # "smg_heavy_t9":
-      case # "lmg_light_t9":
+      case #"ar_slowhandling_t9":
+      case #"smg_heavy_t9":
+      case #"lmg_light_t9":
         self stats::function_42277145(#"hash_3d9159bfdb045054", 1);
         break;
-      case # "special_grenadelauncher_t9":
-      case # "smg_standard_t9":
+      case #"special_grenadelauncher_t9":
+      case #"smg_standard_t9":
         self stats::function_42277145(#"hash_3a26c6202d86ed8d", 1);
         break;
       default:
@@ -519,9 +519,9 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
     }
 
     switch (weapon.statname) {
-      case # "pistol_fullauto_t9":
-      case # "ar_british_t9":
-      case # "smg_handling_t9":
+      case #"pistol_fullauto_t9":
+      case #"ar_british_t9":
+      case #"smg_handling_t9":
         self stats::function_42277145(#"hash_7208e21496453ace", 1);
         break;
       default:
@@ -545,12 +545,12 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
 
   if(!var_4e8a56b1 && isDefined(killstreak)) {
     switch (killstreak) {
-      case # "hoverjet":
-      case # "inventory_chopper_gunner":
-      case # "chopper_gunner":
-      case # "inventory_ac130":
-      case # "ac130":
-      case # "inventory_hoverjet":
+      case #"hoverjet":
+      case #"inventory_chopper_gunner":
+      case #"chopper_gunner":
+      case #"inventory_ac130":
+      case #"ac130":
+      case #"inventory_hoverjet":
         var_7ca8dd34 = 1;
         break;
       default:
@@ -668,13 +668,13 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
               }
 
               switch (effect.var_3d1ed4bd.name) {
-                case # "ability_smart_cover":
-                case # "eq_swat_grenade":
-                case # "hash_3f62a872201cd1ce":
-                case # "eq_seeker_mine":
-                case # "eq_concertina_wire":
-                case # "eq_slow_grenade":
-                case # "gadget_radiation_field":
+                case #"ability_smart_cover":
+                case #"eq_swat_grenade":
+                case #"hash_3f62a872201cd1ce":
+                case #"eq_seeker_mine":
+                case #"eq_concertina_wire":
+                case #"eq_slow_grenade":
+                case #"gadget_radiation_field":
                   award = 1;
                   break;
                 default:
@@ -744,13 +744,13 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
 
       if(isDefined(gear)) {
         switch (gear) {
-          case # "gear_armor":
+          case #"gear_armor":
             if(var_6af452fc.var_d7bd6f9b === 1) {
               self stats::function_dad108fa(#"ekia_against_armor_damager", 1);
             }
 
             break;
-          case # "gear_awareness":
+          case #"gear_awareness":
             minimaprange = function_fd82b127() * 0.5;
 
             if(var_6af452fc.var_85997af0 < sqr(minimaprange)) {
@@ -762,7 +762,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
             }
 
             break;
-          case # "gear_equipmentcharge":
+          case #"gear_equipmentcharge":
             scoreevents = globallogic_score::function_3cbc4c6c(weapon.var_2e4a8800);
             baseweapon = weapons::getbaseweapon(weapon);
 
@@ -781,7 +781,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
             }
 
             break;
-          case # "gear_medicalinjectiongun":
+          case #"gear_medicalinjectiongun":
             if(var_6af452fc.var_46a82df0 === 1) {
               self stats::function_dad108fa(#"ekia_full_heal_medicalinjectiongun", 1);
 
@@ -791,7 +791,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
             }
 
             break;
-          case # "weapon_null":
+          case #"weapon_null":
           default:
             break;
         }
@@ -808,22 +808,22 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
 
     if(isDefined(weaponclass)) {
       switch (weaponclass) {
-        case # "weapon_tactical":
+        case #"weapon_tactical":
           if(weapon.name === #"tr_powerburst_t9") {
             break;
           }
-        case # "weapon_pistol":
-        case # "weapon_shotgun":
-        case # "weapon_lmg":
-        case # "weapon_smg":
-        case # "weapon_cqb":
-        case # "weapon_assault":
+        case #"weapon_pistol":
+        case #"weapon_shotgun":
+        case #"weapon_lmg":
+        case #"weapon_smg":
+        case #"weapon_cqb":
+        case #"weapon_assault":
           if(!function_cd84dead(weapon, "optic")) {
             var_b77ad7ec = 1;
           }
 
           break;
-        case # "weapon_sniper":
+        case #"weapon_sniper":
           if(self weaponhasattachmentandunlocked(weapon, "elo")) {
             var_b77ad7ec = 1;
           }
@@ -843,7 +843,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
     }
 
     switch (weapon.firetype) {
-      case # "full auto":
+      case #"full auto":
         if(data.smeansofdeath == "MOD_PISTOL_BULLET" || data.smeansofdeath == "MOD_RIFLE_BULLET" || data.smeansofdeath == "MOD_HEAD_SHOT") {
           self stats::function_dad108fa(#"hash_365e781f4a2d8599", 1);
           self stats::function_dad108fa(#"hash_41d7899e04e68759", 1);
@@ -881,17 +881,17 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
         var_8a4dd851 = 1;
 
         switch (weapon.name) {
-          case # "tr_fastburst_t9":
-          case # "smg_burst_t9":
-          case # "ar_slowfire_t9":
-          case # "tr_powerburst_t9":
-          case # "smg_standard_t9":
-          case # "smg_heavy_t9":
-          case # "smg_fastfire_t9":
-          case # "smg_spray_t9":
-          case # "ar_mobility_t9":
-          case # "smg_handling_t9":
-          case # "shotgun_fullauto_t9":
+          case #"tr_fastburst_t9":
+          case #"smg_burst_t9":
+          case #"ar_slowfire_t9":
+          case #"tr_powerburst_t9":
+          case #"smg_standard_t9":
+          case #"smg_heavy_t9":
+          case #"smg_fastfire_t9":
+          case #"smg_spray_t9":
+          case #"ar_mobility_t9":
+          case #"smg_handling_t9":
+          case #"shotgun_fullauto_t9":
             self contracts::increment_contract(#"hash_6a3f7e63a5f3991f");
 
             if(weaponclass === #"weapon_smg") {
@@ -906,8 +906,8 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
         var_8a4dd851 = 1;
 
         switch (weapon.name) {
-          case # "lmg_accurate_t9":
-          case # "lmg_light_t9":
+          case #"lmg_accurate_t9":
+          case #"lmg_light_t9":
             self contracts::increment_contract(#"hash_6a3f7e63a5f3991f");
             break;
         }
@@ -925,7 +925,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
       if(self weaponhasattachmentandunlocked(weapon, "sprintout")) {
         if(weaponclass === #"weapon_cqb") {
           switch (weapon.name) {
-            case # "shotgun_pump_t9":
+            case #"shotgun_pump_t9":
               break;
             default:
               self stats::function_dad108fa(#"hash_71804c7bbbaad1f6", 1);
@@ -936,20 +936,20 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
 
       if(self weaponhasattachmentandunlocked(weapon, "sprintout2")) {
         switch (weapon.name) {
-          case # "tr_fastburst_t9":
-          case # "sniper_powersemi_t9":
-          case # "ar_fastfire_t9":
-          case # "sniper_quickscope_t9":
-          case # "ar_slowfire_t9":
-          case # "tr_powerburst_t9":
-          case # "tr_longburst_t9":
-          case # "sniper_standard_t9":
-          case # "smg_spray_t9":
-          case # "ar_fasthandling_t9":
-          case # "ar_mobility_t9":
-          case # "sniper_cannon_t9":
-          case # "ar_standard_t9":
-          case # "smg_handling_t9":
+          case #"tr_fastburst_t9":
+          case #"sniper_powersemi_t9":
+          case #"ar_fastfire_t9":
+          case #"sniper_quickscope_t9":
+          case #"ar_slowfire_t9":
+          case #"tr_powerburst_t9":
+          case #"tr_longburst_t9":
+          case #"sniper_standard_t9":
+          case #"smg_spray_t9":
+          case #"ar_fasthandling_t9":
+          case #"ar_mobility_t9":
+          case #"sniper_cannon_t9":
+          case #"ar_standard_t9":
+          case #"smg_handling_t9":
             break;
           default:
             self contracts::increment_contract(#"hash_73b57ed83e48a782");
@@ -984,14 +984,14 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
         }
 
         switch (var_75de4d7b) {
-          case # "ir":
+          case #"ir":
             self stats::function_dad108fa(#"hash_4c52eb020ea39538", 1);
             self contracts::increment_contract(#"hash_24754d0ed68133e3");
             self stats::function_dad108fa(#"hash_4aec80d782b89cf5", 1);
             break;
-          case # "smoothzoom2":
-          case # "dualoptic":
-          case # "smoothzoom":
+          case #"smoothzoom2":
+          case #"dualoptic":
+          case #"smoothzoom":
             self contracts::increment_contract(#"hash_445fb44209fddf36");
             break;
         }
@@ -1209,14 +1209,14 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
         }
 
         switch (effect.var_3d1ed4bd.name) {
-          case # "shock_rifle":
-          case # "ability_smart_cover":
-          case # "eq_swat_grenade":
-          case # "hash_3f62a872201cd1ce":
-          case # "eq_seeker_mine":
-          case # "eq_concertina_wire":
-          case # "hero_flamethrower":
-          case # "gadget_radiation_field":
+          case #"shock_rifle":
+          case #"ability_smart_cover":
+          case #"eq_swat_grenade":
+          case #"hash_3f62a872201cd1ce":
+          case #"eq_seeker_mine":
+          case #"eq_concertina_wire":
+          case #"hero_flamethrower":
+          case #"gadget_radiation_field":
             award = 1;
             break;
           default:
@@ -1298,13 +1298,13 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
 
       switch (weaponclass) {
-        case # "weapon_cqb":
+        case #"weapon_cqb":
           self stats::function_dad108fa(#"hash_496927d497fdf692", 1);
           self stats::function_dad108fa(#"hash_24f356ecf6fb6c0e", 1);
           self stats::function_dad108fa(#"hash_36a1f1959ae7445e", 1);
           self stats::function_dad108fa(#"hash_36a1ef959ae740f8", 1);
           break;
-        case # "weapon_assault":
+        case #"weapon_assault":
           self stats::function_dad108fa(#"hash_64d78a0e86ba8b55", 1);
           self stats::function_dad108fa(#"hash_41393b0369e02954", 1);
           self stats::function_dad108fa(#"hash_3d11f2e0b14e9cac", 1);
@@ -1312,7 +1312,7 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
           self stats::function_dad108fa(#"hash_173e55cb344603c2", 1);
           self stats::function_dad108fa(#"hash_173e54cb3446020f", 1);
           break;
-        case # "weapon_lmg":
+        case #"weapon_lmg":
           self stats::function_dad108fa(#"hash_52aa8f35541651b8", 1);
           self stats::function_dad108fa(#"hash_49b83486e6f9bc38", 1);
           self stats::function_dad108fa(#"hash_1a83f392aff69fc3", 1);
@@ -1320,14 +1320,14 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
           self stats::function_dad108fa(#"hash_10f2c4998c0f004f", 1);
           self stats::function_dad108fa(#"hash_10f2c5998c0f0202", 1);
           break;
-        case # "weapon_pistol":
+        case #"weapon_pistol":
           self stats::function_dad108fa(#"hash_50ce2207b80f9fa5", 1);
           self stats::function_dad108fa(#"hash_48f5753f9361f31", 1);
           self stats::function_dad108fa(#"hash_73d936b41c0e7db3", 1);
 
           switch (optic) {
-            case # "elo":
-            case # "elo2":
+            case #"elo":
+            case #"elo2":
               self stats::function_dad108fa(#"hash_39d29f9c4fe7e54e", 1);
               break;
             default:
@@ -1335,24 +1335,24 @@ function function_a79ea08b(einflictor, victim, idamage, weapon) {
           }
 
           break;
-        case # "weapon_smg":
+        case #"weapon_smg":
           self stats::function_dad108fa(#"hash_26e871c3fec523d3", 1);
           self stats::function_dad108fa(#"hash_54112cceeab59f46", 1);
           self stats::function_dad108fa(#"hash_62c4e16f8e76865", 1);
           self stats::function_dad108fa(#"hash_5004dee0210ef879", 1);
           break;
-        case # "weapon_tactical":
+        case #"weapon_tactical":
           self stats::function_dad108fa(#"hash_94d913babcd584", 1);
           self stats::function_dad108fa(#"hash_4f45ca1828646934", 1);
           self stats::function_dad108fa(#"hash_380d0317d7caf20", 1);
           self stats::function_dad108fa(#"hash_2db210a1cfea8647", 1);
           break;
-        case # "weapon_sniper":
+        case #"weapon_sniper":
           self stats::function_dad108fa(#"hash_5f8a23bbf07a8769", 1);
           self stats::function_dad108fa(#"hash_607598d00d891bd0", 1);
           self stats::function_dad108fa(#"hash_61a2b2e6028a56e8", 1);
           break;
-        case # "weapon_special":
+        case #"weapon_special":
           self stats::function_dad108fa(#"hash_9cb2805c8c9d8fb", 1);
           self contracts::increment_contract(#"hash_5b4412649ebfeba5");
           self stats::function_dad108fa(#"hash_d6e068459b6a04b", 1);
@@ -1836,14 +1836,14 @@ function challengekills(data) {
         }
 
         switch (var_d7742480) {
-          case # "ir":
+          case #"ir":
             if(data.var_4c540e11 === 1) {
               player stats::function_dad108fa(#"hash_17d0d0cb03016ae5", 1);
             }
 
             break;
-          case # "elo":
-          case # "elo2":
+          case #"elo":
+          case #"elo2":
             if(data.var_4c540e11 === 1) {
               player stats::function_dad108fa(#"hash_cce5e38ca00479d", 1);
             }
@@ -2024,10 +2024,10 @@ function challengekills(data) {
 
       if(isDefined(data.var_3d8f6ba2)) {
         switch (weapon.statname) {
-          case # "hatchet":
+          case #"hatchet":
             var_a6957800 = 2250000;
             break;
-          case # "satchel_charge":
+          case #"satchel_charge":
             var_a6957800 = 1440000;
             break;
           default:
@@ -2543,10 +2543,10 @@ function challengekills(data) {
           }
 
           switch (activestreak.killstreaktype) {
-            case # "drone_striked":
-            case # "uav":
-            case # "helicopter_comlink":
-            case # "sentinel":
+            case #"drone_striked":
+            case #"uav":
+            case #"helicopter_comlink":
+            case #"sentinel":
               player stats::function_dad108fa(#"kill_blindeye_ghost_aircraft", 1);
               awarded_kill_blindeye_ghost_aircraft = 1;
               break;
@@ -2972,17 +2972,17 @@ function challengekills(data) {
 
   if(isDefined(baseweapon.statname)) {
     switch (baseweapon.statname) {
-      case # "hash_ed62df533816471":
-      case # "napalm_strike":
-      case # "sig_bow_flame":
-      case # "eq_molotov":
-      case # "hero_flamethrower":
+      case #"hash_ed62df533816471":
+      case #"napalm_strike":
+      case #"sig_bow_flame":
+      case #"eq_molotov":
+      case #"hero_flamethrower":
         attacker stats::function_dad108fa(#"hash_5f4d95085e8f9a1c", 1);
         attacker stats::function_bcf9602(#"hash_513bc9963a91d4b5", 1, #"hash_735ace6b22542a65");
         break;
-      case # "land_mine":
-      case # "tear_gas":
-      case # "satchel_charge":
+      case #"land_mine":
+      case #"tear_gas":
+      case #"satchel_charge":
         if(data.var_b4e7eecb || data.var_fb4d11c6 || data.var_c496a910 || isDefined(data.var_7c5ded5a) && data.var_7c5ded5a + 3000 > time || isDefined(data.var_4a01f856) && data.var_4a01f856 + 3000 > time || isDefined(data.var_a1c9eb28) && data.var_a1c9eb28 + 3000 > time) {
           attacker stats::function_dad108fa(#"hash_9d7fba655e34b0a", 1);
         }
@@ -3577,7 +3577,7 @@ function challengegameendmp(data) {
   }
 
   switch (level.basegametype) {
-    case # "tdm":
+    case #"tdm":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 25) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3586,7 +3586,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "dm":
+    case #"dm":
       if(player == winner) {
         if(level.placement[#"all"].size >= 2) {
           secondplace = level.placement[#"all"][1];
@@ -3601,7 +3601,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "ctf":
+    case #"ctf":
       if(player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"shut_out", 1);
@@ -3609,7 +3609,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "dom":
+    case #"dom":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3618,7 +3618,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "hq":
+    case #"hq":
       if(player.team == winner && winnerscore > 0) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3626,7 +3626,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "koth":
+    case #"koth":
       if(player.team == winner && winnerscore > 0) {
         if(winnerscore >= loserscore + 70) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3641,7 +3641,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "dem":
+    case #"dem":
       if(player.team == game.defenders && player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"shut_out", 1);
@@ -3653,9 +3653,9 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "control":
-    case # "sd":
-    case # "bounty":
+    case #"control":
+    case #"sd":
+    case #"bounty":
       if(player.team == winner) {
         if(loserscore == 0) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3664,7 +3664,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "conf":
+    case #"conf":
       if(player.team == winner) {
         if(winnerscore >= loserscore + 25) {
           player stats::function_d40764f3(#"crush", 1);
@@ -3672,7 +3672,7 @@ function challengegameendmp(data) {
       }
 
       break;
-    case # "gunfight":
+    case #"gunfight":
       if(player.team == winner) {
         player stats::function_dad108fa(#"hash_5072c55850678079", 1);
       }
@@ -3711,45 +3711,45 @@ function function_ea966b4a(killstreak, var_18db7a57, weapon) {
   playercontrolled = 0;
 
   switch (killstreak) {
-    case # "remote_missile":
-    case # "inventory_planemortar":
-    case # "napalm_strike":
-    case # "inventory_remote_missile":
-    case # "inventory_napalm_strike":
-    case # "planemortar":
+    case #"remote_missile":
+    case #"inventory_planemortar":
+    case #"napalm_strike":
+    case #"inventory_remote_missile":
+    case #"inventory_napalm_strike":
+    case #"planemortar":
       var_6616c2ea = 1;
-    case # "dart":
-    case # "hoverjet":
-    case # "inventory_chopper_gunner":
-    case # "chopper_gunner":
-    case # "inventory_dart":
-    case # "inventory_straferun":
-    case # "inventory_ac130":
-    case # "straferun":
-    case # "ac130":
-    case # "inventory_hoverjet":
+    case #"dart":
+    case #"hoverjet":
+    case #"inventory_chopper_gunner":
+    case #"chopper_gunner":
+    case #"inventory_dart":
+    case #"inventory_straferun":
+    case #"inventory_ac130":
+    case #"straferun":
+    case #"ac130":
+    case #"inventory_hoverjet":
       playercontrolled = 1;
-    case # "drone_squadron":
-    case # "inventory_drone_squadron":
-    case # "overwatch_helicopter":
-    case # "helicopter_comlink":
-    case # "inventory_overwatch_helicopter":
-    case # "inventory_helicopter_comlink":
+    case #"drone_squadron":
+    case #"inventory_drone_squadron":
+    case #"overwatch_helicopter":
+    case #"helicopter_comlink":
+    case #"inventory_overwatch_helicopter":
+    case #"inventory_helicopter_comlink":
       self stats::function_dad108fa(#"air_assault_total_kills", 1);
       self stats::function_dad108fa(#"hash_3a2c1b5b8901cb5b", 1);
       self stats::function_dad108fa(#"hash_3837599602e870c", 1);
       self contracts::player_contract_event(#"air_assault_total_kills");
       break;
-    case # "recon_car":
-    case # "inventory_recon_car":
+    case #"recon_car":
+    case #"inventory_recon_car":
       self stats::function_dad108fa(#"hash_7686cce076b616b", 1);
       playercontrolled = 1;
-    case # "ultimate_turret":
-    case # "inventory_ultimate_turret":
-    case # "tank_robot":
-    case # "swat_team":
-    case # "inventory_tank_robot":
-    case # "inventory_swat_team":
+    case #"ultimate_turret":
+    case #"inventory_ultimate_turret":
+    case #"tank_robot":
+    case #"swat_team":
+    case #"inventory_tank_robot":
+    case #"inventory_swat_team":
       self stats::function_dad108fa(#"hash_10b0c56ae630070d", 1);
       self contracts::player_contract_event(#"hash_10b0c56ae630070d");
       break;
@@ -3815,33 +3815,33 @@ function function_2f462ffd(victim, weapon, inflictor, objective) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "dart":
-      case # "remote_missile":
-      case # "inventory_planemortar":
-      case # "drone_squadron":
-      case # "inventory_drone_squadron":
-      case # "overwatch_helicopter":
-      case # "inventory_dart":
-      case # "inventory_straferun":
-      case # "inventory_ac130":
-      case # "inventory_remote_missile":
-      case # "straferun":
-      case # "ac130":
-      case # "helicopter_comlink":
-      case # "planemortar":
-      case # "inventory_overwatch_helicopter":
-      case # "inventory_helicopter_comlink":
+      case #"dart":
+      case #"remote_missile":
+      case #"inventory_planemortar":
+      case #"drone_squadron":
+      case #"inventory_drone_squadron":
+      case #"overwatch_helicopter":
+      case #"inventory_dart":
+      case #"inventory_straferun":
+      case #"inventory_ac130":
+      case #"inventory_remote_missile":
+      case #"straferun":
+      case #"ac130":
+      case #"helicopter_comlink":
+      case #"planemortar":
+      case #"inventory_overwatch_helicopter":
+      case #"inventory_helicopter_comlink":
         self stats::function_dad108fa(#"hash_55a5fc51678a4dde", 1);
         break;
-      case # "recon_car":
-      case # "inventory_recon_car":
+      case #"recon_car":
+      case #"inventory_recon_car":
         self stats::function_dad108fa(#"hash_7daf653f5e86b75", 1);
-      case # "ultimate_turret":
-      case # "inventory_ultimate_turret":
-      case # "tank_robot":
-      case # "swat_team":
-      case # "inventory_tank_robot":
-      case # "inventory_swat_team":
+      case #"ultimate_turret":
+      case #"inventory_ultimate_turret":
+      case #"tank_robot":
+      case #"swat_team":
+      case #"inventory_tank_robot":
+      case #"inventory_swat_team":
         self stats::function_dad108fa(#"hash_1efa6ab922134e1d", 1);
         break;
     }
@@ -3974,33 +3974,33 @@ function killedbaseoffender(objective, weapon, inflictor) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "remote_missile":
-      case # "inventory_planemortar":
-      case # "inventory_straferun":
-      case # "inventory_remote_missile":
-      case # "straferun":
-      case # "planemortar":
+      case #"remote_missile":
+      case #"inventory_planemortar":
+      case #"inventory_straferun":
+      case #"inventory_remote_missile":
+      case #"straferun":
+      case #"planemortar":
         self.challenge_offenderprojectilemultikillcount++;
         break;
-      case # "helicopter_comlink":
-      case # "inventory_helicopter_comlink":
+      case #"helicopter_comlink":
+      case #"inventory_helicopter_comlink":
         self.challenge_offendercomlinkkillcount++;
         break;
-      case # "combat_robot":
-      case # "inventory_combat_robot":
+      case #"combat_robot":
+      case #"inventory_combat_robot":
         self stats::function_dad108fa(#"kill_attacker_with_robot_or_tank", 1);
         break;
-      case # "autoturret":
-      case # "inventory_autoturret":
+      case #"autoturret":
+      case #"inventory_autoturret":
         self.challenge_offendersentryturretkillcount++;
         self stats::function_dad108fa(#"kill_attacker_with_robot_or_tank", 1);
         break;
-      case # "swat_team":
-      case # "inventory_swat_team":
+      case #"swat_team":
+      case #"inventory_swat_team":
         self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
         break;
-      case # "ultimate_turret":
-      case # "inventory_ultimate_turret":
+      case #"ultimate_turret":
+      case #"inventory_ultimate_turret":
         self stats::function_dad108fa(#"hash_103a235d7563069c", 1);
 
         if(isDefined(inflictor)) {
@@ -4715,7 +4715,7 @@ function function_de80e959(data) {
 
   if(isDefined(winningteam) && player.team === winningteam) {
     switch (level.basegametype) {
-      case # "gunfight":
+      case #"gunfight":
         player stats::function_dad108fa(#"hash_5d841dfc6114d2ae", 1);
         break;
     }

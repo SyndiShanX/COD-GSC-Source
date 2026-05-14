@@ -374,43 +374,43 @@ function function_b1aee549(instance, var_976623c6) {
   str_notify = undefined;
 
   switch (var_976623c6) {
-    case # "hash_21cd65c5d1f254be":
+    case #"hash_21cd65c5d1f254be":
       str_soundalias = #"hash_6755c177f50bb3fa";
       break;
-    case # "hash_4b7cc96fc84ad4b1":
+    case #"hash_4b7cc96fc84ad4b1":
       str_soundalias = #"hash_599e14c54d1ea19a";
       break;
-    case # "hash_4b7cc86fc84ad2fe":
+    case #"hash_4b7cc86fc84ad2fe":
       str_soundalias = #"hash_738f7006809f42c5";
       break;
-    case # "hash_4b7ccb6fc84ad817":
+    case #"hash_4b7ccb6fc84ad817":
       str_soundalias = #"hash_37eada309854dffb";
       break;
-    case # "hash_4b7cca6fc84ad664":
+    case #"hash_4b7cca6fc84ad664":
       str_soundalias = #"hash_78c7fa9c089c9381";
       break;
-    case # "item_zmquest_sr_cassette_tape_06":
+    case #"item_zmquest_sr_cassette_tape_06":
       str_soundalias = #"hash_5e33c483e58b6702";
       break;
-    case # "item_zmquest_sr_cassette_tape_07":
+    case #"item_zmquest_sr_cassette_tape_07":
       str_soundalias = #"hash_170ba2307aac7c2d";
       break;
-    case # "item_zmquest_sr_cassette_tape_08":
+    case #"item_zmquest_sr_cassette_tape_08":
       str_soundalias = #"hash_45de3a102350938d";
       break;
-    case # "item_zmquest_sr_cassette_tape_09":
+    case #"item_zmquest_sr_cassette_tape_09":
       str_soundalias = #"hash_35287d8d56302388";
       break;
-    case # "item_zmquest_sr_cassette_tape_10":
+    case #"item_zmquest_sr_cassette_tape_10":
       str_soundalias = #"hash_3eb6b923f3a43bff";
       break;
-    case # "item_zmquest_sr_cassette_tape_11":
+    case #"item_zmquest_sr_cassette_tape_11":
       str_soundalias = #"hash_302e3a9e4c319483";
       break;
-    case # "item_zmquest_sr_cassette_tape_12":
+    case #"item_zmquest_sr_cassette_tape_12":
       str_soundalias = #"hash_60495857d8fa7605";
       break;
-    case # "item_zmquest_sr_cassette_tape_13":
+    case #"item_zmquest_sr_cassette_tape_13":
       str_soundalias = #"hash_7cf9b86388acf946";
       break;
   }
@@ -435,43 +435,43 @@ function function_97d03d85(s_params) {
   str_notify = undefined;
 
   switch (item_name) {
-    case # "hash_21cd65c5d1f254be":
+    case #"hash_21cd65c5d1f254be":
       str_notify = "unlockSRmus_01";
       break;
-    case # "hash_4b7cc96fc84ad4b1":
+    case #"hash_4b7cc96fc84ad4b1":
       str_notify = "unlockSRmus_02";
       break;
-    case # "hash_4b7cc86fc84ad2fe":
+    case #"hash_4b7cc86fc84ad2fe":
       str_notify = "unlockSRmus_03";
       break;
-    case # "hash_4b7ccb6fc84ad817":
+    case #"hash_4b7ccb6fc84ad817":
       str_notify = "unlockSRmus_04";
       break;
-    case # "hash_4b7cca6fc84ad664":
+    case #"hash_4b7cca6fc84ad664":
       str_notify = "unlockSRmus_05";
       break;
-    case # "item_zmquest_sr_cassette_tape_06":
+    case #"item_zmquest_sr_cassette_tape_06":
       str_notify = "unlockSRmus_06";
       break;
-    case # "item_zmquest_sr_cassette_tape_07":
+    case #"item_zmquest_sr_cassette_tape_07":
       str_notify = "unlockSRmus_07";
       break;
-    case # "item_zmquest_sr_cassette_tape_08":
+    case #"item_zmquest_sr_cassette_tape_08":
       str_notify = "unlockSRmus_08";
       break;
-    case # "item_zmquest_sr_cassette_tape_09":
+    case #"item_zmquest_sr_cassette_tape_09":
       str_notify = "unlockSRmus_09";
       break;
-    case # "item_zmquest_sr_cassette_tape_10":
+    case #"item_zmquest_sr_cassette_tape_10":
       str_notify = "unlockSRmus_10";
       break;
-    case # "item_zmquest_sr_cassette_tape_11":
+    case #"item_zmquest_sr_cassette_tape_11":
       str_notify = "unlockSRmus_11";
       break;
-    case # "item_zmquest_sr_cassette_tape_12":
+    case #"item_zmquest_sr_cassette_tape_12":
       str_notify = "unlockSRmus_12";
       break;
-    case # "item_zmquest_sr_cassette_tape_13":
+    case #"item_zmquest_sr_cassette_tape_13":
       str_notify = "unlockSRmus_13";
       break;
     default:

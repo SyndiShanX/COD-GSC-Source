@@ -329,13 +329,13 @@ function function_86df3ee8(str_objective_name) {
   str_override = undefined;
 
   switch (str_objective_name) {
-    case # "holdout":
+    case #"holdout":
       str_override = "survival_objective_hold_0";
       break;
-    case # "secure":
+    case #"secure":
       str_override = "survival_objective_secure_0";
       break;
-    case # "mq4":
+    case #"mq4":
       str_override = "jellyfish_all_around";
       break;
     default:

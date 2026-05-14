@@ -309,13 +309,13 @@ function function_6d378d86(var_ae2e8e1f) {
   while(true) {
     if(randomint(100) <= 1) {
       switch (self.var_2cbcf8e2) {
-        case # "zombie_outro_mood_angry":
+        case #"zombie_outro_mood_angry":
           var_b6373ec2 = 40;
           break;
-        case # "hash_6b71fd0ed387fe82":
+        case #"hash_6b71fd0ed387fe82":
           var_b6373ec2 = 41;
           break;
-        case # "hash_749ca0969fe37f63":
+        case #"hash_749ca0969fe37f63":
           var_b6373ec2 = 42;
           break;
       }

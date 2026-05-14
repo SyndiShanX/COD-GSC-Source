@@ -178,25 +178,25 @@ function_9dc2db01(var_4bef01e6, str_color) {
   e_model = self.scene_ents[#"fluid"];
 
   switch (str_color) {
-    case # "green":
+    case #"green":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_green");
       break;
-    case # "red":
+    case #"red":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_red");
       break;
-    case # "yellow":
+    case #"yellow":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_yellow");
       break;
-    case # "orange":
+    case #"orange":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_orange");
       break;
-    case # "purple":
+    case #"purple":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_purple");
       break;
-    case # "blue":
+    case #"blue":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_blue");
       break;
-    case # "magenta_pink":
+    case #"magenta_pink":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_magenta_pink");
       break;
   }

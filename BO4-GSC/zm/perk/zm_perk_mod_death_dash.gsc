@@ -67,21 +67,21 @@ function_6607df78() {
       }
 
       switch (ai_zombie.zm_ai_category) {
-        case # "heavy":
-        case # "miniboss":
-        case # "enhanced":
+        case #"heavy":
+        case #"miniboss":
+        case #"enhanced":
           if(!(isDefined(ai_zombie.knockdown) && ai_zombie.knockdown)) {
             ai_zombie ai::stun();
           }
 
           break;
-        case # "popcorn":
+        case #"popcorn":
           ai_zombie.var_96d5504c = 1;
           [[self.var_3dd38cd4]] - > waitinqueue(ai_zombie);
           ai_zombie thread zm_perk_death_dash::function_c1c51837(self);
           ai_zombie.var_96d5504c = undefined;
           break;
-        case # "basic":
+        case #"basic":
           ai_zombie zombie_utility::setup_zombie_knockdown(self);
           break;
       }

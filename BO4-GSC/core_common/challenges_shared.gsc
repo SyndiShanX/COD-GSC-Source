@@ -538,7 +538,7 @@ challengeroundend(data) {
   }
 
   switch (level.gametype) {
-    case # "sd":
+    case #"sd":
       if(player.team == winner) {
         if(game.challenge[winner][#"allalive"]) {
           player stats::function_d40764f3(#"round_win_no_deaths", 1);
@@ -1355,13 +1355,13 @@ totaldomination(team) {
 
 holdflagentirematch(team, label) {
   switch (label) {
-    case # "_a":
+    case #"_a":
       event = "hold_a_entire_match";
       break;
-    case # "_b":
+    case #"_b":
       event = "hold_b_entire_match";
       break;
-    case # "_c":
+    case #"_c":
       event = "hold_c_entire_match";
       break;
     default:
@@ -2029,7 +2029,7 @@ eventreceived(eventname) {
   util::waittillslowprocessallowed();
 
   switch (level.gametype) {
-    case # "tdm":
+    case #"tdm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2045,7 +2045,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case # "dm":
+    case #"dm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2057,7 +2057,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case # "sd":
+    case #"sd":
       if(eventname == "defused_bomb_last_man_alive") {
         self stats::function_d40764f3(#"defused_bomb_last_man_alive", 1);
       } else if(eventname == "elimination_and_last_player_alive") {
@@ -2069,7 +2069,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case # "ctf":
+    case #"ctf":
       if(eventname == "kill_flag_carrier") {
         self stats::function_d40764f3(#"kill_flag_carrier", 1);
       } else if(eventname == "defend_flag_carrier") {
@@ -2077,7 +2077,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case # "dem":
+    case #"dem":
       if(eventname == "killed_bomb_planter") {
         self stats::function_d40764f3(#"killed_bomb_planter", 1);
       } else if(eventname == "killed_bomb_defuser") {

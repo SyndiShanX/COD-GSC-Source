@@ -826,7 +826,7 @@ function scoreeventplayerkill(data, time) {
 
     if(getdvarint(#"hash_5c49df97f4f82e12", 0)) {
       switch (weapon.firetype) {
-        case # "full auto":
+        case #"full auto":
           if(attackershotvictim) {
             if(attacker.var_a0c11592.weapon === weapon) {
               var_c5a26e47 = !isDefined(attacker.lastreloadtime) || attacker.lastreloadtime < attacker.var_a0c11592.time;
@@ -872,7 +872,7 @@ function scoreeventplayerkill(data, time) {
   if(isDefined(data.var_c274d62f) && data.var_c274d62f) {}
 
   switch (weapon.rootweapon.name) {
-    case # "hatchet":
+    case #"hatchet":
       attacker.pers[#"tomahawks"]++;
       attacker.tomahawks = attacker.pers[#"tomahawks"];
 
@@ -906,15 +906,15 @@ function scoreeventplayerkill(data, time) {
       }
 
       break;
-    case # "knife_loadout":
+    case #"knife_loadout":
       attacker stats::function_dad108fa(#"hash_1aa963d190a41652", 1);
       attacker stats::function_dad108fa(#"hash_3704dab636d3e04e", 1);
       attacker stats::function_dad108fa(#"hash_3704dbb636d3e201", 1);
       break;
-    case # "supplydrop":
-    case # "inventory_supplydrop":
-    case # "supplydrop_marker":
-    case # "inventory_supplydrop_marker":
+    case #"supplydrop":
+    case #"inventory_supplydrop":
+    case #"supplydrop_marker":
+    case #"inventory_supplydrop_marker":
       if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH") {
         function_2a2e1723(#"kill_enemy_with_care_package_crush", attacker, victim, weapon);
         attacker stats::function_8fb23f94(#"supplydrop_marker", #"hash_5a706fa7c83f5df3", 1);
@@ -962,39 +962,39 @@ function heavyweaponkill(attacker, victim, weapon) {
   }
 
   switch (weapon.name) {
-    case # "hero_minigun":
+    case #"hero_minigun":
       event = "minigun_kill";
       break;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       event = "flamethrower_kill";
       break;
-    case # "hero_lightninggun":
-    case # "hero_lightninggun_arc":
+    case #"hero_lightninggun":
+    case #"hero_lightninggun_arc":
       event = "tempest_kill";
       break;
-    case # "hero_firefly_swarm":
-    case # "hero_chemicalgelgun":
+    case #"hero_firefly_swarm":
+    case #"hero_chemicalgelgun":
       event = "gelgun_kill";
       break;
-    case # "hero_bowlauncher2":
-    case # "hero_bowlauncher3":
-    case # "hero_bowlauncher4":
-    case # "hero_bowlauncher":
-    case # "sig_bow_flame":
-    case # "hash_6653bba8043d03f6":
-    case # "hash_6653bca8043d05a9":
-    case # "hash_6653bda8043d075c":
-    case # "hash_6653bea8043d090f":
+    case #"hero_bowlauncher2":
+    case #"hero_bowlauncher3":
+    case #"hero_bowlauncher4":
+    case #"hero_bowlauncher":
+    case #"sig_bow_flame":
+    case #"hash_6653bba8043d03f6":
+    case #"hash_6653bca8043d05a9":
+    case #"hash_6653bda8043d075c":
+    case #"hash_6653bea8043d090f":
       event = "bowlauncher_kill";
       break;
-    case # "sig_minigun_alt":
-    case # "sig_minigun":
-    case # "sig_minigun_turret_28":
-    case # "hash_5a34aef4b8c72a24":
-    case # "sig_minigun_turret_32":
-    case # "hash_5a3832f4b8ca4047":
-    case # "hash_5a492ef4b8d8acae":
-    case # "hash_5a4932f4b8d8b37a":
+    case #"sig_minigun_alt":
+    case #"sig_minigun":
+    case #"sig_minigun_turret_28":
+    case #"hash_5a34aef4b8c72a24":
+    case #"sig_minigun_turret_32":
+    case #"hash_5a3832f4b8ca4047":
+    case #"hash_5a492ef4b8d8acae":
+    case #"hash_5a4932f4b8d8b37a":
       if(attacker function_a867284b() && attacker playerads() == 1) {
         event = "mounted_kill";
       } else {
@@ -1023,23 +1023,23 @@ function killedheavyweaponenemy(attacker, victim, weapon, victim_weapon, victim_
   }
 
   switch (victim_weapon.name) {
-    case # "hero_minigun":
+    case #"hero_minigun":
       event = "killed_minigun_enemy";
       break;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       event = "killed_flamethrower_enemy";
       break;
-    case # "hero_lightninggun":
-    case # "hero_lightninggun_arc":
+    case #"hero_lightninggun":
+    case #"hero_lightninggun_arc":
       event = "tempest_shutdown";
       break;
-    case # "hero_chemicalgelgun":
+    case #"hero_chemicalgelgun":
       event = "killed_gelgun_enemy";
       break;
-    case # "hero_bowlauncher2":
-    case # "hero_bowlauncher3":
-    case # "hero_bowlauncher4":
-    case # "hero_bowlauncher":
+    case #"hero_bowlauncher2":
+    case #"hero_bowlauncher3":
+    case #"hero_bowlauncher4":
+    case #"hero_bowlauncher":
       event = "killed_bowlauncher_enemy";
       break;
     default:
@@ -1059,15 +1059,15 @@ function specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
   }
 
   switch (switchweapon) {
-    case # "eq_arm_blade":
+    case #"eq_arm_blade":
       event = "blade_kill";
       break;
-    case # "autoturret":
-    case # "inventory_autoturret":
+    case #"autoturret":
+    case #"inventory_autoturret":
       event = "sentry_gun_kill";
       break;
-    case # "tank_robot":
-    case # "tank_robot_launcher_turret":
+    case #"tank_robot":
+    case #"tank_robot_launcher_turret":
       event = "tank_robot_kill";
 
       if(is_true(attacker.var_5f28922a)) {
@@ -1075,37 +1075,37 @@ function specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
       }
 
       break;
-    case # "microwave_turret":
-    case # "microwaveturret":
-    case # "inventory_microwaveturret":
-    case # "inventory_microwave_turret":
+    case #"microwave_turret":
+    case #"microwaveturret":
+    case #"inventory_microwaveturret":
+    case #"inventory_microwave_turret":
       event = "microwave_turret_kill";
       break;
-    case # "combat_robot":
-    case # "inventory_combat_robot":
+    case #"combat_robot":
+    case #"inventory_combat_robot":
       event = "combat_robot_kill";
       break;
-    case # "claymore":
+    case #"claymore":
       event = "claymore_kill";
       break;
-    case # "inventory_rcbomb":
-    case # "rcbomb":
+    case #"inventory_rcbomb":
+    case #"rcbomb":
       event = "hover_rcxd_kill";
       break;
-    case # "incendiary_fire":
+    case #"incendiary_fire":
       event = "thermite_kill";
       break;
-    case # "eq_frag_gun":
+    case #"eq_frag_gun":
       event = "frag_kill";
       break;
-    case # "overwatch_helicopter":
+    case #"overwatch_helicopter":
       event = "overwatch_helicopter_kill";
       break;
-    case # "swat_team":
+    case #"swat_team":
       event = "swat_team_kill";
       break;
-    case # "inventory_sig_lmg":
-    case # "sig_lmg":
+    case #"inventory_sig_lmg":
+    case #"sig_lmg":
       if(getdvarint(#"hash_5c49df97f4f82e12", 0)) {
         event = #"hash_152f120fead67512";
         attacker stats::function_42277145(#"hash_122768477016f4e5", 1);
@@ -1307,29 +1307,29 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "weapon_lmg":
+      case #"weapon_lmg":
         if(self playerads() < 1) {
           self.recent_lmg_smg_killcount++;
         }
 
         break;
-      case # "weapon_smg":
+      case #"weapon_smg":
         if(self playerads() < 1) {
           self.recent_lmg_smg_killcount++;
         }
 
         self.var_26249c54++;
         break;
-      case # "weapon_assault":
+      case #"weapon_assault":
         self.var_412e39cd++;
         break;
-      case # "weapon_grenade":
+      case #"weapon_grenade":
         self.recentlethalcount++;
         break;
-      case # "weapon_knife":
+      case #"weapon_knife":
         self.var_aa2f2279++;
         break;
-      case # "weapon_tactical":
+      case #"weapon_tactical":
         self.var_a6c2c80f++;
         break;
       default:
@@ -1343,12 +1343,12 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
 
   if(isDefined(level.killstreakweapons) && isDefined(level.killstreakweapons[weaponclass])) {
     switch (level.killstreakweapons[weaponclass]) {
-      case # "remote_missile":
-      case # "inventory_remote_missile":
+      case #"remote_missile":
+      case #"inventory_remote_missile":
         self.recentremotemissilecount++;
         break;
-      case # "inventory_rcbomb":
-      case # "rcbomb":
+      case #"inventory_rcbomb":
+      case #"rcbomb":
         self.recentrcbombcount++;
         break;
     }
@@ -1363,31 +1363,31 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
     }
 
     switch (weaponclass.name) {
-      case # "hero_annihilator":
+      case #"hero_annihilator":
         self.recentanihilatorcount++;
         break;
-      case # "hero_minigun":
+      case #"hero_minigun":
         self.recentminiguncount++;
         break;
-      case # "hero_bowlauncher2":
-      case # "hero_bowlauncher3":
-      case # "hero_bowlauncher4":
-      case # "hero_bowlauncher":
+      case #"hero_bowlauncher2":
+      case #"hero_bowlauncher3":
+      case #"hero_bowlauncher4":
+      case #"hero_bowlauncher":
         self.recentbowlaunchercount++;
         break;
-      case # "hero_flamethrower":
+      case #"hero_flamethrower":
         self.recentflamethrowercount++;
         break;
-      case # "hero_lightninggun":
-      case # "hero_lightninggun_arc":
+      case #"hero_lightninggun":
+      case #"hero_lightninggun_arc":
         self.recentlightningguncount++;
         break;
-      case # "hero_pineapple_grenade":
-      case # "hero_pineapplegun":
+      case #"hero_pineapple_grenade":
+      case #"hero_pineapplegun":
         self.recentpineappleguncount++;
         break;
-      case # "hero_firefly_swarm":
-      case # "hero_chemicalgun":
+      case #"hero_firefly_swarm":
+      case #"hero_chemicalgun":
         self.recentgelguncount++;
         break;
     }
@@ -1399,18 +1399,18 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
 
   if(isDefined(victim)) {
     switch (victim) {
-      case # "remote_missile":
+      case #"remote_missile":
         self.recentremotemissilekillcount++;
         break;
-      case # "rcbomb":
+      case #"rcbomb":
         self.recentrcbombkillcount++;
         break;
-      case # "recon_car":
-      case # "inventory_recon_car":
+      case #"recon_car":
+      case #"inventory_recon_car":
         self.var_70845d87++;
         break;
-      case # "m32":
-      case # "inventory_m32":
+      case #"m32":
+      case #"inventory_m32":
         self.recentmglkillcount++;
         break;
     }
@@ -1749,19 +1749,19 @@ function get_distance_for_weapon(weapon, weaponclass) {
   }
 
   switch (weaponclass) {
-    case # "weapon_smg":
+    case #"weapon_smg":
       return 1960000;
-    case # "weapon_lmg":
-    case # "weapon_tactical":
-    case # "weapon_assault":
+    case #"weapon_lmg":
+    case #"weapon_tactical":
+    case #"weapon_assault":
       return 2560000;
-    case # "weapon_sniper":
+    case #"weapon_sniper":
       return 4000000;
-    case # "weapon_pistol":
+    case #"weapon_pistol":
       return 1000000;
-    case # "weapon_cqb":
+    case #"weapon_cqb":
       return 302500;
-    case # "weapon_special":
+    case #"weapon_special":
       baseweapon = challenges::getbaseweapon(weapon);
 
       if(weapon.isballisticknife || baseweapon == level.weaponspecialcrossbow && level.weaponspecialcrossbow != level.weaponnone) {
@@ -1771,7 +1771,7 @@ function get_distance_for_weapon(weapon, weaponclass) {
       } else {
         return 1960000;
       }
-    case # "weapon_grenade":
+    case #"weapon_grenade":
       if(weapon.rootweapon.name == "hatchet") {
         return 2250000;
       }

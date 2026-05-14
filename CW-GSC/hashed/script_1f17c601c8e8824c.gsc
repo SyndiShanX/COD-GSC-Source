@@ -30,42 +30,42 @@ function devgui_think() {
     spacing = getdvarfloat(#"testdialog_spacing", 0.25);
 
     switch (getdvarstring(#"devgui_mpdialog", "<dev string:x38>")) {
-      case # "hash_7912e80189f9c6":
+      case #"hash_7912e80189f9c6":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         player thread test_commander_dialog(2 * spacing);
         break;
-      case # "hash_69c6be086f76a9d4":
+      case #"hash_69c6be086f76a9d4":
         player thread test_player_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case # "hash_3af5f0a904b3f8fa":
+      case #"hash_3af5f0a904b3f8fa":
         player thread test_other_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case # "hash_32945da5f7ac491":
+      case #"hash_32945da5f7ac491":
         player thread test_taacom_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case # "hash_597b27a5c8857d19":
+      case #"hash_597b27a5c8857d19":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case # "hash_74f798193af006b3":
+      case #"hash_74f798193af006b3":
         player thread test_other_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case # "other-self":
+      case #"other-self":
         player thread test_other_dialog(0);
         player thread test_player_dialog(spacing);
         break;
-      case # "hash_4a5a66c89be92eb":
+      case #"hash_4a5a66c89be92eb":
         player thread play_conv_self_other();
         break;
-      case # "hash_18683ef7652f40ed":
+      case #"hash_18683ef7652f40ed":
         player thread play_conv_other_self();
         break;
-      case # "hash_2b559b1a5e81715f":
+      case #"hash_2b559b1a5e81715f":
         player thread play_conv_other_other();
         break;
     }
@@ -119,23 +119,23 @@ function play_test_dialog(dialogkey) {
 
 function response_key() {
   switch (self getmpdialogname()) {
-    case # "spectre":
+    case #"spectre":
       return "<dev string:xa5>";
-    case # "battery":
+    case #"battery":
       return "<dev string:xb0>";
-    case # "outrider":
+    case #"outrider":
       return "<dev string:xbb>";
-    case # "prophet":
+    case #"prophet":
       return "<dev string:xc7>";
-    case # "firebreak":
+    case #"firebreak":
       return "<dev string:xd2>";
-    case # "reaper":
+    case #"reaper":
       return "<dev string:xdf>";
-    case # "ruin":
+    case #"ruin":
       return "<dev string:xe9>";
-    case # "seraph":
+    case #"seraph":
       return "<dev string:xf1>";
-    case # "nomad":
+    case #"nomad":
       return "<dev string:xfb>";
   }
 

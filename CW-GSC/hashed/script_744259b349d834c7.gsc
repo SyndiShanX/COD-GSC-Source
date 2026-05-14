@@ -1151,7 +1151,7 @@ function function_38cf7fb8(entity) {
   var_4d21f369 = function_da71e09a(entity);
 
   switch (var_4d21f369) {
-    case # "chase":
+    case #"chase":
       if(function_3c14ef44(entity)) {
         new_move_speed = "locomotion_speed_walk";
       } else {
@@ -1215,16 +1215,16 @@ function function_38cf7fb8(entity) {
       }
 
       break;
-    case # "hash_6192d8af630c6c07":
+    case #"hash_6192d8af630c6c07":
       new_move_speed = "locomotion_speed_sprint";
       break;
-    case # "hash_685254f9ed0ce346":
+    case #"hash_685254f9ed0ce346":
       new_move_speed = "locomotion_speed_sprint";
       break;
-    case # "command_spot":
+    case #"command_spot":
       new_move_speed = "locomotion_speed_walk";
       break;
-    case # "circle":
+    case #"circle":
       new_move_speed = "locomotion_speed_run";
       break;
   }
@@ -1243,7 +1243,7 @@ function function_38cf7fb8(entity) {
 
   if(!entity flag::get(#"sweeping")) {
     switch (var_4d21f369) {
-      case # "chase":
+      case #"chase":
         if(isDefined(entity.favoriteenemy)) {
           to_enemy = entity.favoriteenemy.origin - entity.origin;
           forward_vec = anglesToForward(entity.angles);
@@ -3217,40 +3217,40 @@ function function_fb306c05(dvar) {
   tokens = strtok(dvar.value, "<dev string:x513>");
 
   switch (isDefined(tokens[0]) ? tokens[0] : "<dev string:x76>") {
-    case # "hash_19c2cf4f6a62ed5d":
+    case #"hash_19c2cf4f6a62ed5d":
       function_c221c3cc();
       break;
-    case # "hash_62d67535f4a81c95":
+    case #"hash_62d67535f4a81c95":
       function_13f1306e();
       break;
-    case # "hash_4234099c2d42ee5c":
+    case #"hash_4234099c2d42ee5c":
       function_b9cd7c51();
       break;
-    case # "hash_63d03f0db09b4345":
+    case #"hash_63d03f0db09b4345":
       function_7c39bab6();
       break;
-    case # "hash_78c342c8c1eabf":
+    case #"hash_78c342c8c1eabf":
       function_6cf38b2c();
       break;
-    case # "hash_5bc5b28458973e4a":
+    case #"hash_5bc5b28458973e4a":
       function_c645776b();
       break;
-    case # "hash_a7dad989049b1e3":
+    case #"hash_a7dad989049b1e3":
       function_eadaa815();
       break;
-    case # "hash_128b5208a9239ce1":
+    case #"hash_128b5208a9239ce1":
       function_f528b32c();
       break;
-    case # "hash_37d6d1f2b822eeae":
+    case #"hash_37d6d1f2b822eeae":
       function_e970dd48();
       break;
-    case # "hash_316fa1a4dcfe9f25":
+    case #"hash_316fa1a4dcfe9f25":
       level thread function_4de3c0c();
       break;
-    case # "hash_3bc103465bc73009":
+    case #"hash_3bc103465bc73009":
       level thread function_b4a17ed2();
       break;
-    case # "hash_45ac54b6f6c62ca8":
+    case #"hash_45ac54b6f6c62ca8":
       level thread function_2e7ab4e5();
       break;
     default:

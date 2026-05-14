@@ -189,73 +189,73 @@ function devgui_think() {
     }
 
     switch (cmd) {
-      case # "health":
+      case #"health":
         devgui_handle_player_command(cmd, &devgui_give_health);
         break;
-      case # "ammo":
+      case #"ammo":
         devgui_handle_player_command(cmd, &devgui_toggle_ammo);
         break;
-      case # "ignore":
+      case #"ignore":
         devgui_handle_player_command(cmd, &devgui_toggle_ignore);
         break;
-      case # "invul_on":
+      case #"invul_on":
         devgui_handle_player_command(cmd, &devgui_invulnerable, 1);
         break;
-      case # "invul_off":
+      case #"invul_off":
         devgui_handle_player_command(cmd, &devgui_invulnerable, 0);
         break;
-      case # "setteam_axis":
+      case #"setteam_axis":
         devgui_handle_player_command(cmd, &function_c60fba82, #"axis");
         break;
-      case # "setteam_allies":
+      case #"setteam_allies":
         devgui_handle_player_command(cmd, &function_c60fba82, #"allies");
         break;
-      case # "kill":
+      case #"kill":
         devgui_handle_player_command(cmd, &devgui_kill);
         break;
-      case # "revive":
+      case #"revive":
         devgui_handle_player_command(cmd, &function_541ccb87);
         break;
-      case # "hash_52845e239e497665":
+      case #"hash_52845e239e497665":
         devgui_handle_player_command(cmd, &function_fa6a74c3, 100);
         break;
-      case # "hash_43a9fbb800953127":
+      case #"hash_43a9fbb800953127":
         devgui_handle_player_command(cmd, &function_fa6a74c3, 1000);
         break;
-      case # "hash_8219fc726384517":
+      case #"hash_8219fc726384517":
         devgui_handle_player_command(cmd, &function_c11f6cfe, 100);
         break;
-      case # "hash_4afdee64ba81c711":
+      case #"hash_4afdee64ba81c711":
         devgui_handle_player_command(cmd, &function_c11f6cfe, 1000);
         break;
-      case # "hash_42b246496512ccba":
+      case #"hash_42b246496512ccba":
         devgui_handle_player_command(cmd, &collectibles::function_a66b8474);
         break;
-      case # "hash_777573ed749058d3":
+      case #"hash_777573ed749058d3":
         devgui_handle_player_command(cmd, &collectibles::function_4e4a7021);
         break;
-      case # "hash_62c2f3a35c11cebf":
+      case #"hash_62c2f3a35c11cebf":
         devgui_handle_player_command(cmd, &function_8c36f50);
         break;
-      case # "hash_3e24fbcff4d4b1eb":
+      case #"hash_3e24fbcff4d4b1eb":
         devgui_handle_player_command(cmd, &function_895ead7c);
         break;
-      case # "hash_7d67399c1e80c90f":
+      case #"hash_7d67399c1e80c90f":
         devgui_handle_player_command(cmd, &function_38ea35b);
         break;
-      case # "hash_67a420615cfa783d":
+      case #"hash_67a420615cfa783d":
         devgui_handle_player_command(cmd, &function_d1f1f7b0);
         break;
-      case # "hash_22e23b36dec9f72e":
+      case #"hash_22e23b36dec9f72e":
         devgui_handle_player_command(cmd, &function_b729c951);
         break;
-      case # "hash_27b8b67661308678":
+      case #"hash_27b8b67661308678":
         devgui_handle_player_command(cmd, &function_fa6a74c3, 1000000);
         break;
-      case # "hash_17ae6e19e0c5fdd2":
+      case #"hash_17ae6e19e0c5fdd2":
         devgui_handle_player_command(cmd, &function_f96938ce);
         break;
-      case # "hash_171c599dfd8645fb":
+      case #"hash_171c599dfd8645fb":
         devgui_handle_player_command(cmd, &function_de31914a, "<dev string:x435>");
         break;
       case 0:
@@ -870,13 +870,13 @@ function function_505cd4da() {
     }
 
     switch (cmd) {
-      case # "hash_12e35667bc66baa9":
+      case #"hash_12e35667bc66baa9":
         ui::function_f7aafb81("<dev string:x868>");
         break;
-      case # "hash_22ed7cc6e9fda6c2":
+      case #"hash_22ed7cc6e9fda6c2":
         ui::function_bb62027a("<dev string:x868>");
         break;
-      case # "hash_679b069e13fed10c":
+      case #"hash_679b069e13fed10c":
         level.var_738bd204 = 1;
 
         foreach(var_fd2ef744 in var_6019e2d9) {
@@ -884,7 +884,7 @@ function function_505cd4da() {
         }
 
         break;
-      case # "hash_421b1673272a4585":
+      case #"hash_421b1673272a4585":
         level.var_738bd204 = undefined;
 
         foreach(var_fd2ef744 in var_6019e2d9) {

@@ -58,26 +58,26 @@ function function_a6da15be(params) {
   var_79e920ac = 1;
 
   switch (weapon.name) {
-    case # "energy_mine":
-    case # "energy_mine_1":
+    case #"energy_mine":
+    case #"energy_mine_1":
       break;
-    case # "energy_mine_2":
+    case #"energy_mine_2":
       var_29030410 = 2;
       var_79e920ac = 2;
       break;
-    case # "energy_mine_3":
+    case #"energy_mine_3":
       var_f61738a0 = 1;
       var_f224b687 = 2;
       var_29030410 = 2;
       var_79e920ac = 3;
       break;
-    case # "energy_mine_4":
+    case #"energy_mine_4":
       var_f61738a0 = 1;
       var_f224b687 = 2;
       var_29030410 = 2;
       var_79e920ac = 3;
       break;
-    case # "energy_mine_5":
+    case #"energy_mine_5":
       var_f61738a0 = 1;
       b_stun = 1;
       var_f224b687 = 3;
@@ -186,12 +186,12 @@ function function_39aea6b8(name) {
   }
 
   switch (name) {
-    case # "energy_mine":
-    case # "energy_mine_4":
-    case # "energy_mine_5":
-    case # "energy_mine_2":
-    case # "energy_mine_3":
-    case # "energy_mine_1":
+    case #"energy_mine":
+    case #"energy_mine_4":
+    case #"energy_mine_5":
+    case #"energy_mine_2":
+    case #"energy_mine_3":
+    case #"energy_mine_1":
       return true;
   }
 

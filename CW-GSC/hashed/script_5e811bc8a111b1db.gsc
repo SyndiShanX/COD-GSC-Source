@@ -596,13 +596,13 @@ function function_3a268da9(params) {
 
     if(waitresult.itemname === "item_zm_ltm_holiday_gift_01" || waitresult.itemname === "item_zm_ltm_holiday_gift_02" || waitresult.itemname === "item_zm_ltm_holiday_gift_03") {
       switch (waitresult.itemname) {
-        case # "item_zm_ltm_holiday_gift_01":
+        case #"item_zm_ltm_holiday_gift_01":
           waitresult.item function_83cb84d3(#"hash_3adefdb432d5b064", 0, 1, waitresult.item.var_7b02ac6a);
           break;
-        case # "item_zm_ltm_holiday_gift_02":
+        case #"item_zm_ltm_holiday_gift_02":
           waitresult.item function_83cb84d3(#"hash_3adefdb432d5b064", 0, 1, waitresult.item.var_7b02ac6a);
           break;
-        case # "item_zm_ltm_holiday_gift_03":
+        case #"item_zm_ltm_holiday_gift_03":
           waitresult.item function_83cb84d3(#"hash_3adefdb432d5b064", 0, 1, waitresult.item.var_7b02ac6a);
           break;
       }

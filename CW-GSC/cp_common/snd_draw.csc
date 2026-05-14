@@ -156,19 +156,19 @@ function function_65bb0ccd(text, x, y, scale, var_6c897a55, color, alpha, shadow
 
   switch (var_6c897a55) {
     case 0:
-    case # "left":
-    case # "l":
+    case #"left":
+    case #"l":
     default:
       break;
     case 1:
-    case # "c":
-    case # "centered":
-    case # "center":
+    case #"c":
+    case #"centered":
+    case #"center":
       offset += (width * -0.5, 0, 0);
       break;
     case 2:
-    case # "r":
-    case # "right":
+    case #"r":
+    case #"right":
       offset += (width * -1, 0, 0);
       break;
   }
@@ -249,19 +249,19 @@ function print3dplus(text, origin, scale, var_6c897a55, color, alpha, shadowcolo
 
   switch (var_6c897a55) {
     case 0:
-    case # "left":
-    case # "l":
+    case #"left":
+    case #"l":
     default:
       break;
     case 1:
-    case # "c":
-    case # "centered":
-    case # "center":
+    case #"c":
+    case #"centered":
+    case #"center":
       centered = 1;
       break;
     case 2:
-    case # "r":
-    case # "right":
+    case #"r":
+    case #"right":
       offset += (width * -1, 0, 0);
       break;
   }

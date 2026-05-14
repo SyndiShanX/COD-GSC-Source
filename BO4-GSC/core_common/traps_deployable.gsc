@@ -177,20 +177,20 @@ register_trap(var_2d727ba0) {
 
   if(isDefined(var_2d727ba0) && isDefined(var_2d727ba0.trap_type)) {
     switch (var_2d727ba0.trap_type) {
-      case # "generic":
+      case #"generic":
         function_2ce21754(var_2d727ba0.trap_type, &lb_color, &function_6ce6a400, &function_2b8baf6d, &function_a879466e, &function_efe68db2, &function_6ef47474, &function_a21e6a22);
         break;
-      case # "fire_bomb":
-      case # "flash_disruptor":
-      case # "mine":
-      case # "claymore":
+      case #"fire_bomb":
+      case #"flash_disruptor":
+      case #"mine":
+      case #"claymore":
         function_2ce21754(var_2d727ba0.trap_type, &function_3c3f30e3, &function_6ce6a400, &function_2b8baf6d, &function_a879466e, &function_4a401677, &function_6ef47474, &function_b501ff0b);
         break;
-      case # "guardian":
-      case # "turret":
+      case #"guardian":
+      case #"turret":
         function_2ce21754(var_2d727ba0.trap_type, &function_a39b7bb6, &function_6ce6a400, &function_69efb3b0, &function_a879466e, &function_612e5ef9, &function_6ef47474, &function_b501ff0b);
         break;
-      case # "vehicle":
+      case #"vehicle":
         function_2ce21754(var_2d727ba0.trap_type, &function_deb3cb22, &function_6ce6a400, &function_51d36222, &function_c66a11d0, &function_5c1d01, &function_6ef47474, &function_b501ff0b);
         break;
       default:
@@ -681,9 +681,9 @@ function_59a79a68(var_3af54106, damage_callback, destroyed_callback, emp_damage,
       weaponstatname = "destroyed";
 
       switch (weapon.name) {
-        case # "tow_turret":
-        case # "tow_turret_drop":
-        case # "auto_tow":
+        case #"tow_turret":
+        case #"tow_turret_drop":
+        case #"auto_tow":
           weaponstatname = "kills";
           break;
       }

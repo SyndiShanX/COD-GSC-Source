@@ -751,19 +751,19 @@ function function_f9ae7957() {
     name = [[self]] - > getname();
 
     switch (name) {
-      case # "zombietron_diamond":
+      case #"zombietron_diamond":
         self.var_4212fdee = "gem_trail_white";
         return "glow_white";
-      case # "zombietron_ruby":
+      case #"zombietron_ruby":
         self.var_4212fdee = "gem_trail_red";
         return "glow_red";
-      case # "zombietron_beryl":
+      case #"zombietron_beryl":
         self.var_4212fdee = "gem_trail_yellow";
         return "glow_yellow";
-      case # "zombietron_sapphire":
+      case #"zombietron_sapphire":
         self.var_4212fdee = "gem_trail_blue";
         return "glow_blue";
-      case # "zombietron_emerald":
+      case #"zombietron_emerald":
         self.var_4212fdee = "gem_trail_green";
         return "glow_green";
     }

@@ -121,7 +121,7 @@ function function_b4f41a02() {
     cmd_tokens = strtok(cmd, "<dev string:x1ce>");
 
     switch (cmd_tokens[0]) {
-      case # "hash_c0b89e8d4a71cff":
+      case #"hash_c0b89e8d4a71cff":
         player = level.players[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward(direction);
@@ -132,7 +132,7 @@ function function_b4f41a02() {
         ai = spawnactor(cmd_tokens[1], trace[#"position"], (0, 0, 0), "<dev string:x1d3>", 1);
         spawner::function_932006d1(&function_df8d461e);
         break;
-      case # "hash_deec03a3269d42":
+      case #"hash_deec03a3269d42":
         player = level.players[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward(direction);
@@ -963,14 +963,14 @@ function function_16e2f075(params) {
 
     if(is_true(level.is_survival)) {
       switch (self.archetype) {
-        case # "zombie":
+        case #"zombie":
           damageamount = randomintrange(20, 60);
           self thread namespace_df7b10e3::slowdown(#"hash_4ec13a63f7786c40");
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           damageamount = self.health;
           break;
-        case # "avogadro":
+        case #"avogadro":
           damageamount = 5;
           break;
       }
@@ -2065,37 +2065,37 @@ function on_ai_damage(params) {
       var_b35e868f = 0;
 
       switch (vh_player.scriptvehicletype) {
-        case # "player_motorcycle_2wd":
+        case #"player_motorcycle_2wd":
           n_damage = 200;
           n_slowdown = 0.05;
           var_e96b9598 = 0.2;
           break;
-        case # "player_uaz":
+        case #"player_uaz":
           n_damage = 75;
           n_slowdown = 0.05;
           var_e96b9598 = 0.55;
           break;
-        case # "player_snowmobile":
+        case #"player_snowmobile":
           n_damage = 100;
           n_slowdown = 0.05;
           var_e96b9598 = 0.25;
           break;
-        case # "player_fav_light":
+        case #"player_fav_light":
           n_damage = 90;
           n_slowdown = 0.05;
           var_e96b9598 = 0.7;
           break;
-        case # "player_sedan":
+        case #"player_sedan":
           n_damage = 95;
           n_slowdown = 0.05;
           var_e96b9598 = 0.7;
           break;
-        case # "player_truck_transport":
+        case #"player_truck_transport":
           n_damage = 15;
           n_slowdown = 0.05;
           var_e96b9598 = 0.85;
           break;
-        case # "player_tank":
+        case #"player_tank":
           n_damage = 10;
           n_slowdown = 0.05;
           var_e96b9598 = 0.85;
@@ -3028,12 +3028,12 @@ function function_625a781d() {
 
     if(isDefined(self.current_state)) {
       switch (self.current_state.name) {
-        case # "investigate":
-        case # "wander":
+        case #"investigate":
+        case #"wander":
           type = "ambient";
           float = 3;
           break;
-        case # "chase":
+        case #"chase":
           type = "sprint";
           float = 3;
           break;

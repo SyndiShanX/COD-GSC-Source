@@ -338,7 +338,7 @@ class cscene: cscriptbundlebase {
 
     if(isDefined(var_1a15e649)) {
       switch (_s.scenetype) {
-        case # "scene":
+        case #"scene":
           thread play(var_1a15e649, _testing, _str_mode);
           break;
         default:
@@ -566,25 +566,25 @@ class cscene: cscriptbundlebase {
 
   function new_object(str_type) {
     switch (str_type) {
-      case # "prop":
+      case #"prop":
         return new csceneobject();
-      case # "model":
+      case #"model":
         return new csceneobject();
-      case # "vehicle":
+      case #"vehicle":
         return new csceneobject();
-      case # "actor":
+      case #"actor":
         return new csceneobject();
-      case # "fakeActor":
+      case #"fakeActor":
         return new csceneobject();
-      case # "player":
+      case #"player":
         return new csceneplayer();
-      case # "sharedplayer":
+      case #"sharedplayer":
         return new csceneplayer();
-      case # "fakeplayer":
+      case #"fakeplayer":
         return new csceneobject();
-      case # "companion":
+      case #"companion":
         return new csceneplayer();
-      case # "sharedcompanion":
+      case #"sharedcompanion":
         return new csceneplayer();
       default:
         cscriptbundlebase::error(0, "Unsupported object type '" + str_type + "'.");
@@ -1130,13 +1130,13 @@ class csceneobject: cscriptbundleobjectbase {
 
         if(isDefined(entry)) {
           switch (str_entry_type) {
-            case # "cameraswitcher":
+            case #"cameraswitcher":
               thread _play_camera_anim(clientnum, entry, n_start_time);
               break;
-            case # "anim":
+            case #"anim":
               _play_anim(clientnum, entry, 1, _n_blend, _s.mainshot, b_looping, n_start_time);
               break;
-            case # "blend":
+            case #"blend":
               _n_blend = entry;
               break;
             default:

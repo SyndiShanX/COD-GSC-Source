@@ -306,13 +306,13 @@ function_c0bc0375() {
   self endon(#"hash_168e8f0e18a79cf8");
 
   switch (self.script_string) {
-    case # "roof":
+    case #"roof":
       var_45827936 = "lgtexp_pap_rooftops_on";
       break;
-    case # "building_64":
+    case #"building_64":
       var_45827936 = "lgtexp_pap_b64_on";
       break;
-    case # "power_house":
+    case #"power_house":
       var_45827936 = "lgtexp_pap_powerhouse_on";
       break;
   }
@@ -333,13 +333,13 @@ function_c0bc0375() {
       self zm_pack_a_punch::function_bb629351(0);
 
       switch (self.script_string) {
-        case # "roof":
+        case #"roof":
           level thread scene::play(#"aib_vign_zm_mob_pap_ghosts_remove");
           break;
-        case # "building_64":
+        case #"building_64":
           level thread scene::play(#"aib_vign_zm_mob_pap_ghosts_remove_b64");
           break;
-        case # "power_house":
+        case #"power_house":
           level thread scene::play(#"aib_vign_zm_mob_pap_ghosts_remove_power_house");
           break;
       }
@@ -355,13 +355,13 @@ function_c0bc0375() {
       wait 5;
 
       switch (e_pack.script_string) {
-        case # "roof":
+        case #"roof":
           level scene::play(#"aib_vign_zm_mob_pap_ghosts");
           break;
-        case # "building_64":
+        case #"building_64":
           level scene::play(#"aib_vign_zm_mob_pap_ghosts_b64");
           break;
-        case # "power_house":
+        case #"power_house":
           level scene::play(#"aib_vign_zm_mob_pap_ghosts_power_house");
           break;
       }

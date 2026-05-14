@@ -1344,41 +1344,41 @@ function function_53f176ae(eventstruct) {
   var_c8109157 = 0;
 
   switch (notify_string) {
-    case # "arrive":
-    case # "death":
+    case #"arrive":
+    case #"death":
       var_6281c93d = 1;
       n_priority = 4;
       break;
-    case # "pain":
-    case # "land":
-    case # "weapon_fire":
+    case #"pain":
+    case #"land":
+    case #"weapon_fire":
       var_6281c93d = 1;
       n_priority = 3;
       break;
-    case # "summon":
-    case # "stun_stunned":
-    case # "enrage":
-    case # "pain_jetpack":
-    case # "melee_notetrack_2":
+    case #"summon":
+    case #"stun_stunned":
+    case #"enrage":
+    case #"pain_jetpack":
+    case #"melee_notetrack_2":
       var_6281c93d = 1;
       n_priority = 3;
       var_c8109157 = 1;
       break;
-    case # "alerted":
-    case # "melee_notetrack":
-    case # "stun_intro":
-    case # "jump":
-    case # "lose_enemy":
+    case #"alerted":
+    case #"melee_notetrack":
+    case #"stun_intro":
+    case #"jump":
+    case #"lose_enemy":
       var_6281c93d = 1;
       n_priority = 2;
       var_c8109157 = 1;
       break;
-    case # "ambient":
-    case # "ambient_enraged":
-    case # "ambient_alert":
+    case #"ambient":
+    case #"ambient_enraged":
+    case #"ambient_alert":
       n_priority = 1;
       break;
-    case # "attack_melee":
+    case #"attack_melee":
       return;
     default:
       n_priority = 2;

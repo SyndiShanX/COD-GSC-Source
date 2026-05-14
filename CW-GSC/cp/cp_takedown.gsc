@@ -169,7 +169,7 @@ function function_8106e2e1() {
   }
 
   switch (level.skipto_current_objective[0]) {
-    case # "tkdn_raid_bar":
+    case #"tkdn_raid_bar":
       var_4f2ba130 = self getweaponslist();
 
       foreach(e_w in var_4f2ba130) {
@@ -177,7 +177,7 @@ function function_8106e2e1() {
       }
 
       break;
-    case # "tkdn_raid_gearup":
+    case #"tkdn_raid_gearup":
       var_4f2ba130 = self getweaponslist();
 
       foreach(e_w in var_4f2ba130) {
@@ -185,18 +185,18 @@ function function_8106e2e1() {
       }
 
       break;
-    case # "tkdn_raid_apt":
+    case #"tkdn_raid_apt":
       function_95b5afc9();
       break;
-    case # "tkdn_raid_capture":
+    case #"tkdn_raid_capture":
       function_95b5afc9();
       break;
-    case # "tkdn_af_tarmac":
-    case # "tkdn_af_chase":
-    case # "tkdn_af_intro":
-    case # "tkdn_af_hill":
-    case # "tkdn_af_wreck":
-    case # "tkdn_af_skid":
+    case #"tkdn_af_tarmac":
+    case #"tkdn_af_chase":
+    case #"tkdn_af_intro":
+    case #"tkdn_af_hill":
+    case #"tkdn_af_wreck":
+    case #"tkdn_af_skid":
       function_43593d7d();
       break;
     default:

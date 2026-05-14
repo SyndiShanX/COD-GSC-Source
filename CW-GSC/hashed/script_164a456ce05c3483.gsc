@@ -1287,13 +1287,13 @@ function function_ebcb2cca() {
 
 function function_5934bbc8() {
   switch (self.doa.color) {
-    case # "green":
+    case #"green":
       return (0, 1, 0);
-    case # "blue":
+    case #"blue":
       return (0, 0, 1);
-    case # "red":
+    case #"red":
       return (1, 0, 0);
-    case # "yellow":
+    case #"yellow":
       return (1, 1, 0);
     default:
       return (1, 1, 1);

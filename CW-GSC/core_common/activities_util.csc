@@ -48,9 +48,9 @@ function private event_handler[systemstatechange] function_406f0371(eventstruct)
     s = strtok(eventstruct.state, ",");
 
     switch (s[0]) {
-      case # "0":
+      case #"0":
         levelname = s[4];
-      case # "1":
+      case #"1":
         task = s[1];
         world.gameskill = int(s[2]);
         var_6dfed201 = int(s[3]);

@@ -186,207 +186,207 @@ function wallbuy_player_connect(localclientnum) {
 
 function private function_86b59fcc(chalk_model) {
   switch (chalk_model) {
-    case # "p9_zm_chalk_buy_ar_accurate_t9_epic":
-    case # "p9_zm_chalk_buy_ar_accurate_t9_ultra":
-    case # "p9_zm_chalk_buy_ar_accurate_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_accurate_t9_rare":
-    case # "p9_zm_chalk_buy_ar_accurate_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_accurate_t9_epic":
+    case #"p9_zm_chalk_buy_ar_accurate_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_accurate_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_accurate_t9_rare":
+    case #"p9_zm_chalk_buy_ar_accurate_t9_legendary":
       type = "ar_accurate_t9";
       break;
-    case # "p9_zm_chalk_buy_ar_fastfire_t9_ultra":
-    case # "p9_zm_chalk_buy_ar_fastfire_t9_epic":
-    case # "p9_zm_chalk_buy_ar_fastfire_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_fastfire_t9_legendary":
-    case # "p9_zm_chalk_buy_ar_fastfire_t9_rare":
+    case #"p9_zm_chalk_buy_ar_fastfire_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_fastfire_t9_epic":
+    case #"p9_zm_chalk_buy_ar_fastfire_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_fastfire_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_fastfire_t9_rare":
       type = "ar_fastfire_t9";
       break;
-    case # "p9_zm_chalk_buy_ar_mobility_t9_epic":
-    case # "p9_zm_chalk_buy_ar_mobility_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_mobility_t9_ultra":
-    case # "p9_zm_chalk_buy_ar_mobility_t9_rare":
-    case # "p9_zm_chalk_buy_ar_mobility_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_mobility_t9_epic":
+    case #"p9_zm_chalk_buy_ar_mobility_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_mobility_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_mobility_t9_rare":
+    case #"p9_zm_chalk_buy_ar_mobility_t9_legendary":
       type = "ar_mobility_t9";
       break;
-    case # "p9_zm_chalk_buy_ar_slowfire_t9_legendary":
-    case # "p9_zm_chalk_buy_ar_slowfire_t9_rare":
-    case # "p9_zm_chalk_buy_ar_slowfire_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_slowfire_t9_epic":
-    case # "p9_zm_chalk_buy_ar_slowfire_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_slowfire_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_slowfire_t9_rare":
+    case #"p9_zm_chalk_buy_ar_slowfire_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_slowfire_t9_epic":
+    case #"p9_zm_chalk_buy_ar_slowfire_t9_ultra":
       type = "ar_slowfire_t9";
       break;
-    case # "p9_zm_chalk_buy_ar_standard_t9_ultra":
-    case # "p9_zm_chalk_buy_ar_standard_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_standard_t9_epic":
-    case # "p9_zm_chalk_buy_ar_standard_t9_legendary":
-    case # "p9_zm_chalk_buy_ar_standard_t9_rare":
+    case #"p9_zm_chalk_buy_ar_standard_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_standard_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_standard_t9_epic":
+    case #"p9_zm_chalk_buy_ar_standard_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_standard_t9_rare":
       type = "ar_standard_t9";
       break;
-    case # "p9_zm_chalk_buy_ar_damage_t9_epic":
-    case # "p9_zm_chalk_buy_ar_damage_t9_rare":
-    case # "p9_zm_chalk_buy_ar_damage_t9_ultra":
-    case # "p9_zm_chalk_buy_ar_damage_t9_uncommon":
-    case # "p9_zm_chalk_buy_ar_damage_t9_legendary":
+    case #"p9_zm_chalk_buy_ar_damage_t9_epic":
+    case #"p9_zm_chalk_buy_ar_damage_t9_rare":
+    case #"p9_zm_chalk_buy_ar_damage_t9_ultra":
+    case #"p9_zm_chalk_buy_ar_damage_t9_uncommon":
+    case #"p9_zm_chalk_buy_ar_damage_t9_legendary":
       type = "ar_damage_t9";
       break;
-    case # "p9_zm_chalk_buy_pistol_burst_t9_legendary":
-    case # "p9_zm_chalk_buy_pistol_burst_t9_uncommon":
-    case # "p9_zm_chalk_buy_pistol_burst_t9_epic":
-    case # "p9_zm_chalk_buy_pistol_burst_t9_rare":
-    case # "p9_zm_chalk_buy_pistol_burst_t9_ultra":
+    case #"p9_zm_chalk_buy_pistol_burst_t9_legendary":
+    case #"p9_zm_chalk_buy_pistol_burst_t9_uncommon":
+    case #"p9_zm_chalk_buy_pistol_burst_t9_epic":
+    case #"p9_zm_chalk_buy_pistol_burst_t9_rare":
+    case #"p9_zm_chalk_buy_pistol_burst_t9_ultra":
       type = "pistol_burst_t9";
       break;
-    case # "p9_zm_chalk_buy_pistol_revolver_t9_epic":
-    case # "p9_zm_chalk_buy_pistol_revolver_t9_legendary":
-    case # "p9_zm_chalk_buy_pistol_revolver_t9_rare":
-    case # "p9_zm_chalk_buy_pistol_revolver_t9_ultra":
-    case # "p9_zm_chalk_buy_pistol_revolver_t9_uncommon":
+    case #"p9_zm_chalk_buy_pistol_revolver_t9_epic":
+    case #"p9_zm_chalk_buy_pistol_revolver_t9_legendary":
+    case #"p9_zm_chalk_buy_pistol_revolver_t9_rare":
+    case #"p9_zm_chalk_buy_pistol_revolver_t9_ultra":
+    case #"p9_zm_chalk_buy_pistol_revolver_t9_uncommon":
       type = "pistol_revolver_t9";
       break;
-    case # "hash_1695732d671ca57a":
-    case # "hash_68c106d81829db40":
-    case # "hash_35066567b4a46dad":
-    case # "hash_1d2a087e061b932d":
-    case # "hash_e9d49629e62c0d2":
+    case #"hash_1695732d671ca57a":
+    case #"hash_68c106d81829db40":
+    case #"hash_35066567b4a46dad":
+    case #"hash_1d2a087e061b932d":
+    case #"hash_e9d49629e62c0d2":
       type = "pistol_standard_t9";
       break;
-    case # "p9_zm_chalk_buy_shotgun_pump_t9_rare":
-    case # "p9_zm_chalk_buy_shotgun_pump_t9_uncommon":
-    case # "p9_zm_chalk_buy_shotgun_pump_t9_legendary":
-    case # "p9_zm_chalk_buy_shotgun_pump_t9_epic":
-    case # "p9_zm_chalk_buy_shotgun_pump_t9_ultra":
+    case #"p9_zm_chalk_buy_shotgun_pump_t9_rare":
+    case #"p9_zm_chalk_buy_shotgun_pump_t9_uncommon":
+    case #"p9_zm_chalk_buy_shotgun_pump_t9_legendary":
+    case #"p9_zm_chalk_buy_shotgun_pump_t9_epic":
+    case #"p9_zm_chalk_buy_shotgun_pump_t9_ultra":
       type = "shotgun_pump_t9";
       break;
-    case # "p9_zm_chalk_buy_shotgun_fullauto_t9_legendary":
-    case # "p9_zm_chalk_buy_shotgun_fullauto_t9_epic":
-    case # "p9_zm_chalk_buy_shotgun_fullauto_t9_rare":
-    case # "p9_zm_chalk_buy_shotgun_fullauto_t9_ultra":
-    case # "p9_zm_chalk_buy_shotgun_fullauto_t9_uncommon":
+    case #"p9_zm_chalk_buy_shotgun_fullauto_t9_legendary":
+    case #"p9_zm_chalk_buy_shotgun_fullauto_t9_epic":
+    case #"p9_zm_chalk_buy_shotgun_fullauto_t9_rare":
+    case #"p9_zm_chalk_buy_shotgun_fullauto_t9_ultra":
+    case #"p9_zm_chalk_buy_shotgun_fullauto_t9_uncommon":
       type = "shotgun_fullauto_t9";
       break;
-    case # "p9_zm_chalk_buy_shotgun_semiauto_t9_rare":
-    case # "p9_zm_chalk_buy_shotgun_semiauto_t9_epic":
-    case # "p9_zm_chalk_buy_shotgun_semiauto_t9_uncommon":
-    case # "p9_zm_chalk_buy_shotgun_semiauto_t9_legendary":
-    case # "p9_zm_chalk_buy_shotgun_semiauto_t9_ultra":
+    case #"p9_zm_chalk_buy_shotgun_semiauto_t9_rare":
+    case #"p9_zm_chalk_buy_shotgun_semiauto_t9_epic":
+    case #"p9_zm_chalk_buy_shotgun_semiauto_t9_uncommon":
+    case #"p9_zm_chalk_buy_shotgun_semiauto_t9_legendary":
+    case #"p9_zm_chalk_buy_shotgun_semiauto_t9_ultra":
       type = "shotgun_semiauto_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_burst_t9_rare":
-    case # "p9_zm_chalk_buy_smg_burst_t9_uncommon":
-    case # "p9_zm_chalk_buy_smg_burst_t9_ultra":
-    case # "p9_zm_chalk_buy_smg_burst_t9_legendary":
-    case # "p9_zm_chalk_buy_smg_burst_t9_epic":
+    case #"p9_zm_chalk_buy_smg_burst_t9_rare":
+    case #"p9_zm_chalk_buy_smg_burst_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_burst_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_burst_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_burst_t9_epic":
       type = "smg_burst_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_capacity_t9_uncommon":
-    case # "p9_zm_chalk_buy_smg_capacity_t9_legendary":
-    case # "p9_zm_chalk_buy_smg_capacity_t9_ultra":
-    case # "p9_zm_chalk_buy_smg_capacity_t9_epic":
-    case # "p9_zm_chalk_buy_smg_capacity_t9_rare":
+    case #"p9_zm_chalk_buy_smg_capacity_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_capacity_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_capacity_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_capacity_t9_epic":
+    case #"p9_zm_chalk_buy_smg_capacity_t9_rare":
       type = "smg_capacity_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_fastfire_t9_legendary":
-    case # "p9_zm_chalk_buy_smg_fastfire_t9_rare":
-    case # "p9_zm_chalk_buy_smg_fastfire_t9_epic":
-    case # "p9_zm_chalk_buy_smg_fastfire_t9_ultra":
-    case # "p9_zm_chalk_buy_smg_fastfire_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_fastfire_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_fastfire_t9_rare":
+    case #"p9_zm_chalk_buy_smg_fastfire_t9_epic":
+    case #"p9_zm_chalk_buy_smg_fastfire_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_fastfire_t9_uncommon":
       type = "smg_fastfire_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_standard_t9_uncommon":
-    case # "p9_zm_chalk_buy_smg_standard_t9_epic":
-    case # "p9_zm_chalk_buy_smg_standard_t9_rare":
-    case # "p9_zm_chalk_buy_smg_standard_t9_ultra":
-    case # "p9_zm_chalk_buy_smg_standard_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_standard_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_standard_t9_epic":
+    case #"p9_zm_chalk_buy_smg_standard_t9_rare":
+    case #"p9_zm_chalk_buy_smg_standard_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_standard_t9_legendary":
       type = "smg_standard_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_heavy_t9_epic":
-    case # "p9_zm_chalk_buy_smg_heavy_t9_rare":
-    case # "p9_zm_chalk_buy_smg_heavy_t9_legendary":
-    case # "p9_zm_chalk_buy_smg_heavy_t9_uncommon":
-    case # "p9_zm_chalk_buy_smg_heavy_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_heavy_t9_epic":
+    case #"p9_zm_chalk_buy_smg_heavy_t9_rare":
+    case #"p9_zm_chalk_buy_smg_heavy_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_heavy_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_heavy_t9_ultra":
       type = "smg_heavy_t9";
       break;
-    case # "p9_zm_chalk_buy_smg_handling_t9_legendary":
-    case # "p9_zm_chalk_buy_smg_handling_t9_epic":
-    case # "p9_zm_chalk_buy_smg_handling_t9_ultra":
-    case # "p9_zm_chalk_buy_smg_handling_t9_uncommon":
-    case # "p9_zm_chalk_buy_smg_handling_t9_rare":
+    case #"p9_zm_chalk_buy_smg_handling_t9_legendary":
+    case #"p9_zm_chalk_buy_smg_handling_t9_epic":
+    case #"p9_zm_chalk_buy_smg_handling_t9_ultra":
+    case #"p9_zm_chalk_buy_smg_handling_t9_uncommon":
+    case #"p9_zm_chalk_buy_smg_handling_t9_rare":
       type = "smg_handling_t9";
       break;
-    case # "p9_zm_chalk_buy_sniper_powersemi_t9_uncommon":
-    case # "p9_zm_chalk_buy_sniper_powersemi_t9_legendary":
-    case # "p9_zm_chalk_buy_sniper_powersemi_t9_epic":
-    case # "p9_zm_chalk_buy_sniper_powersemi_t9_ultra":
-    case # "p9_zm_chalk_buy_sniper_powersemi_t9_rare":
+    case #"p9_zm_chalk_buy_sniper_powersemi_t9_uncommon":
+    case #"p9_zm_chalk_buy_sniper_powersemi_t9_legendary":
+    case #"p9_zm_chalk_buy_sniper_powersemi_t9_epic":
+    case #"p9_zm_chalk_buy_sniper_powersemi_t9_ultra":
+    case #"p9_zm_chalk_buy_sniper_powersemi_t9_rare":
       type = "sniper_powersemi_t9";
       break;
-    case # "p9_zm_chalk_buy_sniper_quickscope_t9_legendary":
-    case # "p9_zm_chalk_buy_sniper_quickscope_t9_epic":
-    case # "p9_zm_chalk_buy_sniper_quickscope_t9_uncommon":
-    case # "p9_zm_chalk_buy_sniper_quickscope_t9_ultra":
-    case # "p9_zm_chalk_buy_sniper_quickscope_t9_rare":
+    case #"p9_zm_chalk_buy_sniper_quickscope_t9_legendary":
+    case #"p9_zm_chalk_buy_sniper_quickscope_t9_epic":
+    case #"p9_zm_chalk_buy_sniper_quickscope_t9_uncommon":
+    case #"p9_zm_chalk_buy_sniper_quickscope_t9_ultra":
+    case #"p9_zm_chalk_buy_sniper_quickscope_t9_rare":
       type = "sniper_quickscope_t9";
       break;
-    case # "p9_zm_chalk_buy_sniper_standard_t9_epic":
-    case # "p9_zm_chalk_buy_sniper_standard_t9_rare":
-    case # "p9_zm_chalk_buy_sniper_standard_t9_ultra":
-    case # "p9_zm_chalk_buy_sniper_standard_t9_uncommon":
-    case # "p9_zm_chalk_buy_sniper_standard_t9_legendary":
+    case #"p9_zm_chalk_buy_sniper_standard_t9_epic":
+    case #"p9_zm_chalk_buy_sniper_standard_t9_rare":
+    case #"p9_zm_chalk_buy_sniper_standard_t9_ultra":
+    case #"p9_zm_chalk_buy_sniper_standard_t9_uncommon":
+    case #"p9_zm_chalk_buy_sniper_standard_t9_legendary":
       type = "sniper_standard_t9";
       break;
-    case # "p9_zm_chalk_buy_tr_damagesemi_t9_epic":
-    case # "p9_zm_chalk_buy_tr_damagesemi_t9_rare":
-    case # "p9_zm_chalk_buy_tr_damagesemi_t9_ultra":
-    case # "p9_zm_chalk_buy_tr_damagesemi_t9_legendary":
-    case # "p9_zm_chalk_buy_tr_damagesemi_t9_uncommon":
+    case #"p9_zm_chalk_buy_tr_damagesemi_t9_epic":
+    case #"p9_zm_chalk_buy_tr_damagesemi_t9_rare":
+    case #"p9_zm_chalk_buy_tr_damagesemi_t9_ultra":
+    case #"p9_zm_chalk_buy_tr_damagesemi_t9_legendary":
+    case #"p9_zm_chalk_buy_tr_damagesemi_t9_uncommon":
       type = "tr_damagesemi_t9";
       break;
-    case # "p9_zm_chalk_buy_tr_fullauto_t9_epic":
-    case # "p9_zm_chalk_buy_tr_fullauto_t9_ultra":
-    case # "p9_zm_chalk_buy_tr_fullauto_t9_rare":
-    case # "p9_zm_chalk_buy_tr_fullauto_t9_uncommon":
-    case # "p9_zm_chalk_buy_tr_fullauto_t9_legendary":
+    case #"p9_zm_chalk_buy_tr_fullauto_t9_epic":
+    case #"p9_zm_chalk_buy_tr_fullauto_t9_ultra":
+    case #"p9_zm_chalk_buy_tr_fullauto_t9_rare":
+    case #"p9_zm_chalk_buy_tr_fullauto_t9_uncommon":
+    case #"p9_zm_chalk_buy_tr_fullauto_t9_legendary":
       type = "tr_fullauto_t9";
       break;
-    case # "p9_zm_chalk_buy_tr_longburst_t9_legendary":
-    case # "p9_zm_chalk_buy_tr_longburst_t9_rare":
-    case # "p9_zm_chalk_buy_tr_longburst_t9_ultra":
-    case # "p9_zm_chalk_buy_tr_longburst_t9_uncommon":
-    case # "p9_zm_chalk_buy_tr_longburst_t9_epic":
+    case #"p9_zm_chalk_buy_tr_longburst_t9_legendary":
+    case #"p9_zm_chalk_buy_tr_longburst_t9_rare":
+    case #"p9_zm_chalk_buy_tr_longburst_t9_ultra":
+    case #"p9_zm_chalk_buy_tr_longburst_t9_uncommon":
+    case #"p9_zm_chalk_buy_tr_longburst_t9_epic":
       type = "tr_longburst_t9";
       break;
-    case # "p9_zm_chalk_buy_tr_powerburst_t9_ultra":
-    case # "p9_zm_chalk_buy_tr_powerburst_t9_epic":
-    case # "p9_zm_chalk_buy_tr_powerburst_t9_legendary":
-    case # "p9_zm_chalk_buy_tr_powerburst_t9_uncommon":
-    case # "p9_zm_chalk_buy_tr_powerburst_t9_rare":
+    case #"p9_zm_chalk_buy_tr_powerburst_t9_ultra":
+    case #"p9_zm_chalk_buy_tr_powerburst_t9_epic":
+    case #"p9_zm_chalk_buy_tr_powerburst_t9_legendary":
+    case #"p9_zm_chalk_buy_tr_powerburst_t9_uncommon":
+    case #"p9_zm_chalk_buy_tr_powerburst_t9_rare":
       type = "tr_powerburst_t9";
       break;
-    case # "hash_27c596b133ab8f6":
-    case # "hash_6600b1d26d7e6591":
-    case # "hash_5c6dc71c4b620f8f":
-    case # "hash_79507506b126feb7":
-    case # "hash_7aac84dfbabbc8c4":
+    case #"hash_27c596b133ab8f6":
+    case #"hash_6600b1d26d7e6591":
+    case #"hash_5c6dc71c4b620f8f":
+    case #"hash_79507506b126feb7":
+    case #"hash_7aac84dfbabbc8c4":
       type = "tr_precisionsemi_t9";
       break;
-    case # "p9_zm_chalk_buy_lmg_accurate_t9_uncommon":
-    case # "p9_zm_chalk_buy_lmg_accurate_t9_rare":
-    case # "p9_zm_chalk_buy_lmg_accurate_t9_epic":
-    case # "p9_zm_chalk_buy_lmg_accurate_t9_ultra":
-    case # "p9_zm_chalk_buy_lmg_accurate_t9_legendary":
+    case #"p9_zm_chalk_buy_lmg_accurate_t9_uncommon":
+    case #"p9_zm_chalk_buy_lmg_accurate_t9_rare":
+    case #"p9_zm_chalk_buy_lmg_accurate_t9_epic":
+    case #"p9_zm_chalk_buy_lmg_accurate_t9_ultra":
+    case #"p9_zm_chalk_buy_lmg_accurate_t9_legendary":
       type = "lmg_accurate_t9";
       break;
-    case # "p9_zm_chalk_buy_lmg_light_t9_epic":
-    case # "p9_zm_chalk_buy_lmg_light_t9_uncommon":
-    case # "p9_zm_chalk_buy_lmg_light_t9_ultra":
-    case # "p9_zm_chalk_buy_lmg_light_t9_legendary":
-    case # "p9_zm_chalk_buy_lmg_light_t9_rare":
+    case #"p9_zm_chalk_buy_lmg_light_t9_epic":
+    case #"p9_zm_chalk_buy_lmg_light_t9_uncommon":
+    case #"p9_zm_chalk_buy_lmg_light_t9_ultra":
+    case #"p9_zm_chalk_buy_lmg_light_t9_legendary":
+    case #"p9_zm_chalk_buy_lmg_light_t9_rare":
       type = "lmg_light_t9";
       break;
-    case # "p9_zm_chalk_buy_lmg_slowfire_t9_ultra":
-    case # "p9_zm_chalk_buy_lmg_slowfire_t9_uncommon":
-    case # "p9_zm_chalk_buy_lmg_slowfire_t9_legendary":
-    case # "p9_zm_chalk_buy_lmg_slowfire_t9_epic":
-    case # "p9_zm_chalk_buy_lmg_slowfire_t9_rare":
+    case #"p9_zm_chalk_buy_lmg_slowfire_t9_ultra":
+    case #"p9_zm_chalk_buy_lmg_slowfire_t9_uncommon":
+    case #"p9_zm_chalk_buy_lmg_slowfire_t9_legendary":
+    case #"p9_zm_chalk_buy_lmg_slowfire_t9_epic":
+    case #"p9_zm_chalk_buy_lmg_slowfire_t9_rare":
       type = "lmg_slowfire_t9";
       break;
     default:
@@ -417,118 +417,118 @@ function function_8f12abec(localclientnum) {
   }
 
   switch (weapon_type) {
-    case # "ar_damage_t9":
+    case #"ar_damage_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_damage_t9_col";
       name_hash = #"hash_4d8398888735db8";
       break;
-    case # "ar_fastfire_t9":
+    case #"ar_fastfire_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_fastfire_t9_col";
       name_hash = #"hash_717baccca4cf03d1";
       break;
-    case # "ar_mobility_t9":
+    case #"ar_mobility_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_mobility_t9_col";
       name_hash = #"hash_7bd4f5716e446b78";
       break;
-    case # "ar_slowfire_t9":
+    case #"ar_slowfire_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_slowfire_t9_col";
       name_hash = #"hash_63e8969bae8c6414";
       break;
-    case # "ar_standard_t9":
+    case #"ar_standard_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_standard_t9_col";
       name_hash = #"hash_67e1bb4dbdf802d8";
       break;
-    case # "ar_accurate_t9":
+    case #"ar_accurate_t9":
       var_254469d1 = #"p9_zm_chalk_buy_ar_accurate_t9_col";
       name_hash = #"hash_4ea07dc5c94ab7f9";
       break;
-    case # "pistol_burst_t9":
+    case #"pistol_burst_t9":
       var_254469d1 = #"p9_zm_chalk_buy_pistol_burst_t9_col";
       name_hash = #"hash_703b41f88b42f343";
       break;
-    case # "pistol_revolver_t9":
+    case #"pistol_revolver_t9":
       var_254469d1 = #"p9_zm_chalk_buy_pistol_revolver_t9_col";
       name_hash = #"hash_5091c4707ec6b942";
       break;
-    case # "pistol_semiauto_t9":
+    case #"pistol_semiauto_t9":
       var_254469d1 = #"p9_zm_chalk_buy_pistol_semiauto_t9_col";
       name_hash = #"hash_2439a2ff4beb86b0";
       break;
-    case # "shotgun_fullauto_t9":
+    case #"shotgun_fullauto_t9":
       var_254469d1 = #"p9_zm_chalk_buy_shotgun_fullauto_t9_col";
       name_hash = #"hash_6df0ff702b2613be";
       break;
-    case # "shotgun_semiauto_t9":
+    case #"shotgun_semiauto_t9":
       var_254469d1 = #"p9_zm_chalk_buy_shotgun_semiauto_t9_col";
       name_hash = #"hash_6dcf0445e7c7257b";
       break;
-    case # "shotgun_pump_t9":
+    case #"shotgun_pump_t9":
       var_254469d1 = #"p9_zm_chalk_buy_shotgun_pump_t9_col";
       name_hash = #"hash_1631ac670b00dbfa";
       break;
-    case # "smg_burst_t9":
+    case #"smg_burst_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_burst_t9_col";
       name_hash = #"hash_2c75287d04644bcb";
       break;
-    case # "smg_capacity_t9":
+    case #"smg_capacity_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_capacity_t9_col";
       name_hash = #"hash_423632bb711a406b";
       break;
-    case # "smg_fastfire_t9":
+    case #"smg_fastfire_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_fastfire_t9_col";
       name_hash = #"hash_6def002686374645";
       break;
-    case # "smg_handling_t9":
+    case #"smg_handling_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_handling_t9_col";
       name_hash = #"hash_410c31e1c403b298";
       break;
-    case # "smg_heavy_t9":
+    case #"smg_heavy_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_heavy_t9_col";
       name_hash = #"hash_42c7bf7c8a2eaad8";
       break;
-    case # "smg_standard_t9":
+    case #"smg_standard_t9":
       var_254469d1 = #"p9_zm_chalk_buy_smg_standard_t9_col";
       name_hash = #"hash_1895010b5180880c";
       break;
-    case # "sniper_powersemi_t9":
+    case #"sniper_powersemi_t9":
       var_254469d1 = #"p9_zm_chalk_buy_sniper_powersemi_t9_col";
       name_hash = #"hash_1fed797b830c9f74";
       break;
-    case # "sniper_quickscope_t9":
+    case #"sniper_quickscope_t9":
       var_254469d1 = #"p9_zm_chalk_buy_sniper_quickscope_t9_col";
       name_hash = #"hash_4cf07e30456d6a24";
       break;
-    case # "sniper_standard_t9":
+    case #"sniper_standard_t9":
       var_254469d1 = #"p9_zm_chalk_buy_sniper_standard_t9_col";
       name_hash = #"hash_755d23459c2344cc";
       break;
-    case # "tr_damagesemi_t9":
+    case #"tr_damagesemi_t9":
       var_254469d1 = #"p9_zm_chalk_buy_tr_damagesemi_t9_col";
       name_hash = #"hash_14e7b988f9459207";
       break;
-    case # "tr_fullauto_t9":
+    case #"tr_fullauto_t9":
       var_254469d1 = #"p9_zm_chalk_buy_tr_fullauto_t9_col";
       break;
-    case # "tr_longburst_t9":
+    case #"tr_longburst_t9":
       var_254469d1 = #"p9_zm_chalk_buy_tr_longburst_t9_col";
       name_hash = #"hash_696d8b6b3a595612";
       break;
-    case # "tr_powerburst_t9":
+    case #"tr_powerburst_t9":
       var_254469d1 = #"p9_zm_chalk_buy_tr_powerburst_t9_col";
       name_hash = #"hash_7e1fb00fccc464b5";
       break;
-    case # "tr_precisionsemi_t9":
+    case #"tr_precisionsemi_t9":
       var_254469d1 = #"p9_zm_chalk_buy_tr_precisionsemi_t9_col";
       name_hash = #"hash_1a652a02b8f8208";
       break;
-    case # "lmg_slowfire_t9":
+    case #"lmg_slowfire_t9":
       var_254469d1 = #"p9_zm_chalk_buy_lmg_slowfire_t9_col";
       name_hash = #"hash_5eca49abef9d89ed";
       break;
-    case # "lmg_light_t9":
+    case #"lmg_light_t9":
       var_254469d1 = #"p9_zm_chalk_buy_lmg_light_t9_col";
       name_hash = #"hash_115345b891f63176";
       break;
-    case # "lmg_accurate_t9":
+    case #"lmg_accurate_t9":
       var_254469d1 = #"p9_zm_chalk_buy_lmg_accurate_t9_col";
       name_hash = #"hash_7eb1b81fdce9b908";
       break;

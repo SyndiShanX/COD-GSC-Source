@@ -655,7 +655,7 @@ function_b8047055(swat_gunner, helicopter) {
     self.script_owner globallogic_audio::flush_leader_dialog_key_on_player("secondaryTargetLost");
 
     switch (event) {
-      case # "found_new_enemy":
+      case #"found_new_enemy":
         if(self.voxid == 0) {
           self.script_owner globallogic_audio::play_taacom_dialog("targetAquired", "overwatch_helicopter_snipers");
         } else {
@@ -663,7 +663,7 @@ function_b8047055(swat_gunner, helicopter) {
         }
 
         break;
-      case # "lost_enemy":
+      case #"lost_enemy":
         if(self.voxid == 0) {
           self.script_owner globallogic_audio::play_taacom_dialog("targetLost", "overwatch_helicopter_snipers");
         } else {

@@ -104,12 +104,12 @@ function private function_ef5cde9f(str_weapon_name) {
   }
 
   switch (str_weapon_name) {
-    case # "toxic_growth":
-    case # "toxic_growth_5":
-    case # "toxic_growth_4":
-    case # "toxic_growth_3":
-    case # "toxic_growth_2":
-    case # "toxic_growth_1":
+    case #"toxic_growth":
+    case #"toxic_growth_5":
+    case #"toxic_growth_4":
+    case #"toxic_growth_3":
+    case #"toxic_growth_2":
+    case #"toxic_growth_1":
       return true;
   }
 
@@ -341,24 +341,24 @@ function function_5276a443(var_9055f9a9, var_f968837d, var_6254bcaf, var_8689013
   }
 
   switch (var_9055f9a9) {
-    case # "toxic_growth":
+    case #"toxic_growth":
       var_da4a3267 = self.maxhealth * 0.2;
       var_34e3b3f7 = self.maxhealth * 0.025;
       var_4471a107 = 50;
       break;
-    case # "toxic_growth_1":
+    case #"toxic_growth_1":
       var_da4a3267 = self.maxhealth * 0.2;
       var_34e3b3f7 = self.maxhealth * 0.025;
       var_4471a107 = 25;
       break;
-    case # "toxic_growth_2":
+    case #"toxic_growth_2":
       var_da4a3267 = self.maxhealth * 0.2;
       var_34e3b3f7 = self.maxhealth * 0.025;
       var_4471a107 = 25;
       break;
-    case # "toxic_growth_5":
-    case # "toxic_growth_4":
-    case # "toxic_growth_3":
+    case #"toxic_growth_5":
+    case #"toxic_growth_4":
+    case #"toxic_growth_3":
       var_da4a3267 = self.maxhealth * 0.4;
       var_34e3b3f7 = self.maxhealth * 0.05;
       var_4471a107 = 25;

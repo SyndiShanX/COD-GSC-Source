@@ -570,19 +570,19 @@ scoreeventplayerkill(data, time) {
       });
 
       switch (victimheroability.name) {
-        case # "gadget_armor":
+        case #"gadget_armor":
           processscoreevent(#"kill_enemy_who_has_powerarmor", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case # "gadget_resurrect":
+        case #"gadget_resurrect":
           processscoreevent(#"kill_enemy_that_used_resurrect", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case # "gadget_camo":
+        case #"gadget_camo":
           processscoreevent(#"kill_enemy_that_is_using_optic_camo", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case # "gadget_clone":
+        case #"gadget_clone":
           processscoreevent(#"end_enemy_psychosis", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
@@ -618,28 +618,28 @@ scoreeventplayerkill(data, time) {
       abilitytocheck = undefined;
 
       switch (attackerheroability.name) {
-        case # "gadget_armor":
+        case #"gadget_armor":
           processscoreevent(#"power_armor_kill", attacker, victim, getweapon(#"gadget_armor"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case # "gadget_resurrect":
+        case #"gadget_resurrect":
           processscoreevent(#"resurrect_kill", attacker, victim, getweapon(#"gadget_resurrect"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case # "gadget_camo":
+        case #"gadget_camo":
           processscoreevent(#"optic_camo_kill", attacker, victim, getweapon(#"gadget_camo"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case # "gadget_clone":
+        case #"gadget_clone":
           processscoreevent(#"kill_enemy_while_using_psychosis", attacker, victim, getweapon(#"gadget_clone"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
@@ -890,7 +890,7 @@ scoreeventplayerkill(data, time) {
   if(isDefined(data.var_c274d62f) && data.var_c274d62f) {}
 
   switch (weapon.rootweapon.name) {
-    case # "hatchet":
+    case #"hatchet":
       attacker.pers[#"tomahawks"]++;
       attacker.tomahawks = attacker.pers[#"tomahawks"];
       processscoreevent(#"hatchet_kill", attacker, victim, weapon);
@@ -903,10 +903,10 @@ scoreeventplayerkill(data, time) {
       }
 
       break;
-    case # "supplydrop":
-    case # "inventory_supplydrop":
-    case # "supplydrop_marker":
-    case # "inventory_supplydrop_marker":
+    case #"supplydrop":
+    case #"inventory_supplydrop":
+    case #"supplydrop_marker":
+    case #"inventory_supplydrop_marker":
       if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH") {
         processscoreevent(#"kill_enemy_with_care_package_crush", attacker, victim, weapon);
       } else {
@@ -939,38 +939,38 @@ heavyweaponkill(attacker, victim, weapon) {
   }
 
   switch (weapon.name) {
-    case # "hero_minigun":
+    case #"hero_minigun":
       event = "minigun_kill";
       break;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       event = "flamethrower_kill";
       break;
-    case # "hero_lightninggun":
-    case # "hero_lightninggun_arc":
+    case #"hero_lightninggun":
+    case #"hero_lightninggun_arc":
       event = "tempest_kill";
       break;
-    case # "hero_firefly_swarm":
-    case # "hero_chemicalgelgun":
+    case #"hero_firefly_swarm":
+    case #"hero_chemicalgelgun":
       event = "gelgun_kill";
       break;
-    case # "hero_bowlauncher2":
-    case # "hero_bowlauncher3":
-    case # "hero_bowlauncher4":
-    case # "sig_bow_quickshot3":
-    case # "sig_bow_quickshot2":
-    case # "sig_bow_quickshot4":
-    case # "sig_bow_quickshot":
-    case # "hero_bowlauncher":
+    case #"hero_bowlauncher2":
+    case #"hero_bowlauncher3":
+    case #"hero_bowlauncher4":
+    case #"sig_bow_quickshot3":
+    case #"sig_bow_quickshot2":
+    case #"sig_bow_quickshot4":
+    case #"sig_bow_quickshot":
+    case #"hero_bowlauncher":
       event = "bowlauncher_kill";
       break;
-    case # "sig_minigun_alt":
-    case # "sig_minigun":
-    case # "sig_minigun_turret_28":
-    case # "sig_minigun_turret_24":
-    case # "sig_minigun_turret_32":
-    case # "sig_minigun_turret_36":
-    case # "sig_minigun_turret_40":
-    case # "sig_minigun_turret_44":
+    case #"sig_minigun_alt":
+    case #"sig_minigun":
+    case #"sig_minigun_turret_28":
+    case #"sig_minigun_turret_24":
+    case #"sig_minigun_turret_32":
+    case #"sig_minigun_turret_36":
+    case #"sig_minigun_turret_40":
+    case #"sig_minigun_turret_44":
       if(attacker function_a867284b() && attacker playerads() == 1) {
         event = "mounted_kill";
       } else {
@@ -999,23 +999,23 @@ killedheavyweaponenemy(attacker, victim, weapon, victim_weapon, victim_gadget_po
   }
 
   switch (victim_weapon.name) {
-    case # "hero_minigun":
+    case #"hero_minigun":
       event = "killed_minigun_enemy";
       break;
-    case # "hero_flamethrower":
+    case #"hero_flamethrower":
       event = "killed_flamethrower_enemy";
       break;
-    case # "hero_lightninggun":
-    case # "hero_lightninggun_arc":
+    case #"hero_lightninggun":
+    case #"hero_lightninggun_arc":
       event = "tempest_shutdown";
       break;
-    case # "hero_chemicalgelgun":
+    case #"hero_chemicalgelgun":
       event = "killed_gelgun_enemy";
       break;
-    case # "hero_bowlauncher2":
-    case # "hero_bowlauncher3":
-    case # "hero_bowlauncher4":
-    case # "hero_bowlauncher":
+    case #"hero_bowlauncher2":
+    case #"hero_bowlauncher3":
+    case #"hero_bowlauncher4":
+    case #"hero_bowlauncher":
       event = "killed_bowlauncher_enemy";
       break;
     default:
@@ -1035,15 +1035,15 @@ specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
   }
 
   switch (switchweapon) {
-    case # "eq_arm_blade":
+    case #"eq_arm_blade":
       event = "blade_kill";
       break;
-    case # "autoturret":
-    case # "inventory_autoturret":
+    case #"autoturret":
+    case #"inventory_autoturret":
       event = "sentry_gun_kill";
       break;
-    case # "tank_robot":
-    case # "tank_robot_launcher_turret":
+    case #"tank_robot":
+    case #"tank_robot_launcher_turret":
       event = "tank_robot_kill";
 
       if(isDefined(attacker.var_5f28922a) && attacker.var_5f28922a) {
@@ -1051,33 +1051,33 @@ specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
       }
 
       break;
-    case # "microwave_turret":
-    case # "microwaveturret":
-    case # "inventory_microwaveturret":
-    case # "inventory_microwave_turret":
+    case #"microwave_turret":
+    case #"microwaveturret":
+    case #"inventory_microwaveturret":
+    case #"inventory_microwave_turret":
       event = "microwave_turret_kill";
       break;
-    case # "combat_robot":
-    case # "inventory_combat_robot":
+    case #"combat_robot":
+    case #"inventory_combat_robot":
       event = "combat_robot_kill";
       break;
-    case # "claymore":
+    case #"claymore":
       event = "claymore_kill";
       break;
-    case # "inventory_rcbomb":
-    case # "rcbomb":
+    case #"inventory_rcbomb":
+    case #"rcbomb":
       event = "hover_rcxd_kill";
       break;
-    case # "incendiary_fire":
+    case #"incendiary_fire":
       event = "thermite_kill";
       break;
-    case # "eq_frag_gun":
+    case #"eq_frag_gun":
       event = "frag_kill";
       break;
-    case # "overwatch_helicopter":
+    case #"overwatch_helicopter":
       event = "overwatch_helicopter_kill";
       break;
-    case # "swat_team":
+    case #"swat_team":
       event = "swat_team_kill";
       break;
     default:
@@ -1282,12 +1282,12 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
 
   if(isDefined(level.killstreakweapons) && isDefined(level.killstreakweapons[weapon])) {
     switch (level.killstreakweapons[weapon]) {
-      case # "remote_missile":
-      case # "inventory_remote_missile":
+      case #"remote_missile":
+      case #"inventory_remote_missile":
         self.recentremotemissilecount++;
         break;
-      case # "inventory_rcbomb":
-      case # "rcbomb":
+      case #"inventory_rcbomb":
+      case #"rcbomb":
         self.recentrcbombcount++;
         break;
     }
@@ -1302,31 +1302,31 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     }
 
     switch (weapon.name) {
-      case # "hero_annihilator":
+      case #"hero_annihilator":
         self.recentanihilatorcount++;
         break;
-      case # "hero_minigun":
+      case #"hero_minigun":
         self.recentminiguncount++;
         break;
-      case # "hero_bowlauncher2":
-      case # "hero_bowlauncher3":
-      case # "hero_bowlauncher4":
-      case # "hero_bowlauncher":
+      case #"hero_bowlauncher2":
+      case #"hero_bowlauncher3":
+      case #"hero_bowlauncher4":
+      case #"hero_bowlauncher":
         self.recentbowlaunchercount++;
         break;
-      case # "hero_flamethrower":
+      case #"hero_flamethrower":
         self.recentflamethrowercount++;
         break;
-      case # "hero_lightninggun":
-      case # "hero_lightninggun_arc":
+      case #"hero_lightninggun":
+      case #"hero_lightninggun_arc":
         self.recentlightningguncount++;
         break;
-      case # "hero_pineapple_grenade":
-      case # "hero_pineapplegun":
+      case #"hero_pineapple_grenade":
+      case #"hero_pineapplegun":
         self.recentpineappleguncount++;
         break;
-      case # "hero_firefly_swarm":
-      case # "hero_chemicalgun":
+      case #"hero_firefly_swarm":
+      case #"hero_chemicalgun":
         self.recentgelguncount++;
         break;
     }
@@ -1349,18 +1349,18 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case # "remote_missile":
+      case #"remote_missile":
         self.recentremotemissilekillcount++;
         break;
-      case # "rcbomb":
+      case #"rcbomb":
         self.recentrcbombkillcount++;
         break;
-      case # "recon_car":
-      case # "inventory_recon_car":
+      case #"recon_car":
+      case #"inventory_recon_car":
         self.var_70845d87++;
         break;
-      case # "m32":
-      case # "inventory_m32":
+      case #"m32":
+      case #"inventory_m32":
         self.recentmglkillcount++;
         break;
     }
@@ -1618,28 +1618,28 @@ get_distance_for_weapon(weapon, weaponclass) {
   }
 
   switch (weaponclass) {
-    case # "weapon_smg":
+    case #"weapon_smg":
       distance = 1960000;
       break;
-    case # "weapon_assault":
+    case #"weapon_assault":
       distance = 2560000;
       break;
-    case # "weapon_tactical":
+    case #"weapon_tactical":
       distance = 2560000;
       break;
-    case # "weapon_lmg":
+    case #"weapon_lmg":
       distance = 2560000;
       break;
-    case # "weapon_sniper":
+    case #"weapon_sniper":
       distance = 4000000;
       break;
-    case # "weapon_pistol":
+    case #"weapon_pistol":
       distance = 1000000;
       break;
-    case # "weapon_cqb":
+    case #"weapon_cqb":
       distance = 302500;
       break;
-    case # "weapon_special":
+    case #"weapon_special":
       if(weapon.isballisticknife) {
         distance = 2250000;
       } else {
@@ -1651,7 +1651,7 @@ get_distance_for_weapon(weapon, weaponclass) {
       }
 
       break;
-    case # "weapon_grenade":
+    case #"weapon_grenade":
       if(weapon.rootweapon.name == "hatchet") {
         distance = 2250000;
       }

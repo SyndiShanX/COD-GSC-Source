@@ -231,25 +231,25 @@ function teleport_players(var_e07fc3c5, var_cdf41f72 = 1) {
   var_ab9bca5f = 0;
 
   switch (var_e07fc3c5) {
-    case # "hash_667e89d9c5124e84":
+    case #"hash_667e89d9c5124e84":
       var_198cd593 = struct::get("arcade_room_dest", "targetname");
       break;
-    case # "waw":
+    case #"waw":
       var_198cd593 = struct::get("waw_player_start_pos", "targetname");
       var_cd594462 = 1;
       break;
-    case # "hash_21c62ac93c4f6615":
+    case #"hash_21c62ac93c4f6615":
       var_198cd593 = struct::get("arcade_room_dest_rcxd", "targetname");
       var_ab9bca5f = 1;
       break;
-    case # "hash_48e09f20b59868fb":
+    case #"hash_48e09f20b59868fb":
       var_198cd593 = struct::get("soul_capture_dest", "targetname");
       break;
-    case # "hash_6c9d0501ba0f8c97":
+    case #"hash_6c9d0501ba0f8c97":
       var_198cd593 = struct::get("arcade_room_dest_waw", "targetname");
       var_ab9bca5f = 1;
       break;
-    case # "rcxd":
+    case #"rcxd":
       var_198cd593 = struct::get("rcxd_dest", "targetname");
       var_cd594462 = 1;
       break;
@@ -540,13 +540,13 @@ function function_9dced9c4(var_9148fa4e) {
 
       if(var_e4da00c4 == a_players.size) {
         switch (var_9148fa4e) {
-          case # "hash_6570ebf5a30c93d":
+          case #"hash_6570ebf5a30c93d":
             function_cb9d983();
             break;
-          case # "hash_299f96da2a2177b8":
+          case #"hash_299f96da2a2177b8":
             level thread function_7e83adbe();
             break;
-          case # "hash_223e2905daf647d0":
+          case #"hash_223e2905daf647d0":
             level thread function_99cd0986();
             break;
         }
@@ -2379,7 +2379,7 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_455d7fe244b8d836":
+    case #"hash_455d7fe244b8d836":
       a_players = function_a1ef346b();
 
       foreach(player in a_players) {
@@ -2389,7 +2389,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_6e7195a08bee9603":
+    case #"hash_6e7195a08bee9603":
       a_players = function_a1ef346b();
 
       foreach(player in a_players) {
@@ -2399,7 +2399,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "reset_rcxd":
+    case #"reset_rcxd":
       a_players = function_a1ef346b();
 
       foreach(player in a_players) {

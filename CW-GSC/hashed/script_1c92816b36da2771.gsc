@@ -90,12 +90,12 @@ function function_d47881a3() {
     goalinfo = self function_4794d6a3();
 
     switch (waitresult._notify) {
-      case # "bad_path":
+      case #"bad_path":
         if(!self function_dd070839()) {
           counters[1]++;
           var_686cf729 = goalinfo.goalpos;
         }
-      case # "goal":
+      case #"goal":
         if(isDefined(var_686cf729) && goalinfo.goalpos === var_686cf729) {
           break;
         }
@@ -415,7 +415,7 @@ function function_9f1d395(a_ents) {
 
 function function_5f47a7c2(var_9b0beac5) {
   switch (var_9b0beac5) {
-    case # "hand_trigger":
+    case #"hand_trigger":
       if(level flag::get(#"hash_20e3ef55ace43370")) {
         zm_unitrigger::unregister_unitrigger(level.var_7030d9f.s_unitrigger);
         level.var_7030d9f zm_unitrigger::create(#"hash_2c3c554b12d5df70", 70, &function_c1de4506);
@@ -424,7 +424,7 @@ function function_5f47a7c2(var_9b0beac5) {
       }
 
       break;
-    case # "battery_trigger":
+    case #"battery_trigger":
       if(level flag::get(#"hash_392c756e6906b2a2")) {
         zm_unitrigger::unregister_unitrigger(level.var_7030d9f.s_unitrigger);
         level.var_7030d9f zm_unitrigger::create(#"hash_2c3c554b12d5df70", 70, &function_c1de4506);
@@ -433,7 +433,7 @@ function function_5f47a7c2(var_9b0beac5) {
       }
 
       break;
-    case # "hash_20aee20bab8b4015":
+    case #"hash_20aee20bab8b4015":
       break;
   }
 }
@@ -942,14 +942,14 @@ function on_item_pickup(params) {
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
       switch (item.itementry.name) {
-        case # "item_zmquest_platinum_klaus_hand":
+        case #"item_zmquest_platinum_klaus_hand":
           level zm_ui_inventory::function_7df6bb60(#"hash_6a83f912cd01808c", 1);
           level flag::set(#"hash_392c756e6906b2a2");
 
           iprintlnbold("<dev string:x74>");
 
           break;
-        case # "item_zmquest_platinum_klaus_battery":
+        case #"item_zmquest_platinum_klaus_battery":
           level zm_ui_inventory::function_7df6bb60(#"hash_4b03961693d6a43a", 1);
           level flag::set(#"hash_20e3ef55ace43370");
           function_5f47a7c2(#"battery_trigger");
@@ -1124,32 +1124,32 @@ function function_cd7a3de4() {
 
 function cmd(cmd) {
   switch (cmd) {
-    case # "hash_4ce575885ab4acea":
+    case #"hash_4ce575885ab4acea":
       level flag::set(#"hash_75f07aed08b6bb5e");
       break;
-    case # "collect_hands":
+    case #"collect_hands":
       level flag::set(#"hash_392c756e6906b2a2");
       level zm_ui_inventory::function_7df6bb60(#"hash_6a83f912cd01808c", 1);
       function_5f47a7c2(#"hand_trigger");
       break;
-    case # "collect_battery":
+    case #"collect_battery":
       level flag::set(#"hash_20e3ef55ace43370");
       level zm_ui_inventory::function_7df6bb60(#"hash_4b03961693d6a43a", 1);
       function_5f47a7c2(#"battery_trigger");
       break;
-    case # "hash_19a215e19189ffcb":
+    case #"hash_19a215e19189ffcb":
       level flag::toggle(#"hash_66eb1b5632f46da8");
       break;
-    case # "hash_46febba823b8b1fc":
+    case #"hash_46febba823b8b1fc":
       level flag::set(#"hash_5f5899aa1acda8de");
       break;
-    case # "hash_21562ac47b7b0515":
+    case #"hash_21562ac47b7b0515":
       if(level flag::get(#"hash_57651acabc979ef4")) {
         level notify(#"hash_567b7d7322c5892b");
         level flag::clear(#"hash_57651acabc979ef4");
         function_b503a4ce(1);
       }
-    case # "hash_54da172330d6643a":
+    case #"hash_54da172330d6643a":
       if(is_true(level.var_5f8aa169)) {
         level notify(#"hash_212022a63900fb38");
       } else {
@@ -1157,7 +1157,7 @@ function cmd(cmd) {
       }
 
       break;
-    case # "hash_3a5dbf52c46ea8de":
+    case #"hash_3a5dbf52c46ea8de":
       if(is_true(level.var_743318e1)) {
         level.var_743318e1 = undefined;
         iprintlnbold("<dev string:x3b8>");

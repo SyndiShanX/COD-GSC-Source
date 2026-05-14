@@ -324,13 +324,13 @@ function function_7feb07bb(str_skipto, b_starting) {
   }
 
   switch (b_starting) {
-    case # "kgb_aslt_bunker":
+    case #"kgb_aslt_bunker":
       level flag::wait_till("bunker_intro_security_cleared");
       objectives::follow("follow_adler", level.adler);
       level flag::wait_till("aslt_bunker_complete");
       objectives::complete("follow_adler", level.adler);
       return;
-    case # "kgb_aslt_vault_approach":
+    case #"kgb_aslt_vault_approach":
       assault_plant_gas_org = struct::get("assault_plant_gas_org", "targetname");
       objectives::goto("obj_goto", assault_plant_gas_org.origin);
       level flag::set("assault_plant_gas_org_obj_created");
@@ -339,7 +339,7 @@ function function_7feb07bb(str_skipto, b_starting) {
       level flag::wait_till("player_planted_gas");
       objectives::follow("follow_adler", level.adler);
       return;
-    case # "kgb_aslt_vault_breach":
+    case #"kgb_aslt_vault_breach":
       while(!isDefined(level.adler)) {
         wait 0.05;
       }
@@ -358,7 +358,7 @@ function function_7feb07bb(str_skipto, b_starting) {
       level flag::wait_till("vault_breach_started");
       objectives::complete("obj_goto");
       return;
-    case # "kgb_aslt_vault":
+    case #"kgb_aslt_vault":
       macguffin_org = struct::get("macguffin_org", "targetname");
       objectives::goto("obj_goto", macguffin_org.origin);
       level flag::set("macguffin_org_obj_created");
@@ -385,7 +385,7 @@ function escape_objective(str_skipto, b_starting) {
   }
 
   switch (b_starting) {
-    case # "kgb_aslt_bunker_escape":
+    case #"kgb_aslt_bunker_escape":
       while(!isDefined(level.adler)) {
         wait 0.05;
       }
@@ -397,7 +397,7 @@ function escape_objective(str_skipto, b_starting) {
       }
 
       return;
-    case # "kgb_aslt_escape_lights_out":
+    case #"kgb_aslt_escape_lights_out":
       while(!isDefined(level.adler)) {
         wait 0.05;
       }
@@ -415,7 +415,7 @@ function escape_objective(str_skipto, b_starting) {
       level flag::wait_till("aslt_bunker_escape_lights_out_complete");
       objectives::complete("obj_goto");
       return;
-    case # "kgb_aslt_escape_deploy_gas":
+    case #"kgb_aslt_escape_deploy_gas":
       while(!isDefined(level.adler)) {
         wait 0.05;
       }
@@ -435,7 +435,7 @@ function escape_objective(str_skipto, b_starting) {
       objectives::follow("follow_adler", level.adler);
       level flag::set("inside_man_rescue_objective_cleaned_up");
       return;
-    case # "kgb_aslt_exfil":
+    case #"kgb_aslt_exfil":
       while(!isDefined(level.adler)) {
         wait 0.05;
       }
@@ -454,7 +454,7 @@ function escape_objective(str_skipto, b_starting) {
       level flag::wait_till("player_grabbed_armor");
       objectives::complete("obj_goto");
       return;
-    case # "kgb_aslt_exfil_escape":
+    case #"kgb_aslt_exfil_escape":
       level flag::wait_till("escape_follow_adler");
       exfil_escape_door_obj_org = struct::get("exfil_escape_door_obj_org", "targetname");
       objectives::goto("obj_goto", exfil_escape_door_obj_org.origin, undefined, undefined, 0);
@@ -787,35 +787,35 @@ function function_50de5cd0(poi) {
   var_a706170a = #"hash_49fdce58155f91e3";
 
   switch (poi.script_noteworthy) {
-    case # "hash_18d800872b06dc78":
+    case #"hash_18d800872b06dc78":
       return [#"hash_bf89fcd37dbdd7e", var_a706170a];
-    case # "hash_69474b7b1e2c98d1":
+    case #"hash_69474b7b1e2c98d1":
       return [#"hash_5ec53fb034c31e3", var_a706170a, 2];
-    case # "hash_687373550dc300ce":
+    case #"hash_687373550dc300ce":
       return [#"hash_3029a65b4a3023cc", var_a706170a, 2];
-    case # "hash_589ccf1c22b789d9":
+    case #"hash_589ccf1c22b789d9":
       return [#"hash_1a19a8fc42fd1e5b", var_a706170a, 2];
-    case # "hash_37631412a3176b69":
+    case #"hash_37631412a3176b69":
       return [#"hash_662c750fc4498163", var_a706170a, 2];
-    case # "hash_33d0a3692293faf5":
+    case #"hash_33d0a3692293faf5":
       return [#"hash_14a60afd57606417", var_a706170a, 2];
-    case # "hash_6f8388bf8f055655":
+    case #"hash_6f8388bf8f055655":
       return [#"hash_6a7f700f0af3ee03", var_a706170a, 2];
-    case # "checkpoint":
+    case #"checkpoint":
       return function_9ce18e97(#"hash_4fbba325ec087684");
-    case # "checkin":
+    case #"checkin":
       return function_9ce18e97(#"hash_2b60ed399e083c9d");
-    case # "hash_17390f0a263e69c3":
+    case #"hash_17390f0a263e69c3":
       return function_9ce18e97(#"hash_6000a9624bf59e7a");
-    case # "prison":
+    case #"prison":
       return function_9ce18e97(#"hash_359608e302c57fbd");
-    case # "hash_3843b248a5c4cbd5":
+    case #"hash_3843b248a5c4cbd5":
       return [#"hash_3fc4aa3e5250d4d0", #"hash_4f172ac25c442ef1", 2];
-    case # "breakroom":
+    case #"breakroom":
       return function_9ce18e97(#"hash_70ab4a44d4c451f6");
-    case # "hash_2f1f3dc2c2b06f6a":
+    case #"hash_2f1f3dc2c2b06f6a":
       return function_9ce18e97(#"hash_7b2a4429e4988509");
-    case # "hash_2f1f3cc2c2b06db7":
+    case #"hash_2f1f3cc2c2b06db7":
       return function_9ce18e97(#"hash_7b2a4129e4987ff0");
   }
 
@@ -832,58 +832,58 @@ function function_aa042bc7(model_str, tag, count, struct) {
   var_a706170a = var_4843b044[0];
 
   switch (model_str) {
-    case # "belikov":
+    case #"belikov":
       var_4843b044 = function_9ce18e97(#"hash_3cd9dc4c98f6c1b7");
       break;
-    case # "hash_42499d06b5b2c6f":
+    case #"hash_42499d06b5b2c6f":
       var_4843b044 = function_9ce18e97(#"hash_4a19f90f2c521912");
       break;
-    case # "armory":
+    case #"armory":
       var_4843b044 = function_9ce18e97(#"hash_80aa6423a7c88a1");
       break;
-    case # "generals_office":
+    case #"generals_office":
       var_4843b044 = [#"hash_37ff45ed9912fbb9", var_a706170a, 2];
       break;
-    case # "interrogation":
+    case #"interrogation":
       var_4843b044 = function_9ce18e97(#"hash_87f830cf1e9423b");
       break;
-    case # "hash_1f5964a2ce98072e":
+    case #"hash_1f5964a2ce98072e":
       var_4843b044 = function_9ce18e97(#"hash_253552a0d5afc38c");
       break;
-    case # "hash_36cbe57b5bdfd2fd":
+    case #"hash_36cbe57b5bdfd2fd":
       var_4843b044 = function_9ce18e97(#"hash_f5589b0a07b3af3");
       break;
-    case # "security_room":
+    case #"security_room":
       var_4843b044 = function_9ce18e97(#"hash_544de4095edc91a5");
       break;
-    case # "hash_4c9bb3622c7037":
+    case #"hash_4c9bb3622c7037":
       var_4843b044 = function_9ce18e97(#"hash_13ac61f9b529bc8e");
       break;
-    case # "surveillance":
+    case #"surveillance":
       var_4843b044 = function_9ce18e97(#"hash_5cfbfb53294091e7");
       break;
-    case # "hash_1ca67e40febfcfba":
+    case #"hash_1ca67e40febfcfba":
       var_4843b044 = function_9ce18e97(#"hash_70ab4a44d4c451f6");
       break;
-    case # "conference_room":
+    case #"conference_room":
       var_4843b044 = function_9ce18e97(#"hash_9cd6829ef3f06bd");
       break;
-    case # "hash_7384a5c9db2004f6":
+    case #"hash_7384a5c9db2004f6":
       var_4843b044 = [#"hash_b6c6b6537e726cb", var_a706170a, 2];
       break;
-    case # "lavatory":
+    case #"lavatory":
       var_4843b044 = function_9ce18e97(#"hash_1049106f475a8ac1");
       break;
-    case # "hash_7a5dd5c637b247f7":
+    case #"hash_7a5dd5c637b247f7":
       var_4843b044 = function_9ce18e97(#"hash_1052bba5d3331092");
       break;
-    case # "war_room":
+    case #"war_room":
       var_4843b044 = [#"hash_34ef3274188fa633", var_a706170a, 2];
       break;
-    case # "recruitment":
+    case #"recruitment":
       var_4843b044 = function_9ce18e97(#"hash_453644f696c82723");
       break;
-    case # "janitor":
+    case #"janitor":
       var_4843b044 = function_9ce18e97(#"hash_1c1d5d19a9da134c");
       break;
   }

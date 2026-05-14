@@ -454,40 +454,40 @@ function_3747b95() {
 
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
-        case # "connect_starting_area_to_danu_hallway":
+        case #"connect_starting_area_to_danu_hallway":
           var_ff20f7d3 = #"hash_756891f8e9b19c50";
           break;
-        case # "connect_starting_area_to_ra_hallway":
+        case #"connect_starting_area_to_ra_hallway":
           var_ff20f7d3 = #"hash_2bf18201f54178a3";
           break;
-        case # "connect_starting_area_to_odin_hallway":
+        case #"connect_starting_area_to_odin_hallway":
           var_ff20f7d3 = #"hash_51ae58346462e5ea";
           break;
-        case # "connect_starting_area_to_zeus_hallway":
+        case #"connect_starting_area_to_zeus_hallway":
           var_ff20f7d3 = #"hash_2a82088dd0b6b42f";
           break;
-        case # "connect_danu_ra_bridge":
+        case #"connect_danu_ra_bridge":
           var_ff20f7d3 = #"hash_25d85717f971c376";
           break;
-        case # "connect_odin_zeus_bridge":
+        case #"connect_odin_zeus_bridge":
           var_ff20f7d3 = #"hash_634e7ac7c0316c00";
           break;
-        case # "connect_danu_basement_to_danu_ra_tunnel":
+        case #"connect_danu_basement_to_danu_ra_tunnel":
           var_ff20f7d3 = #"hash_77bd07afdb58abd9";
           break;
-        case # "connect_ra_basement_to_danu_ra_tunnel":
+        case #"connect_ra_basement_to_danu_ra_tunnel":
           var_ff20f7d3 = #"hash_45d7dc4e4f0b00f4";
           break;
-        case # "connect_odin_basement_to_odin_zeus_tunnel":
+        case #"connect_odin_basement_to_odin_zeus_tunnel":
           var_ff20f7d3 = #"hash_2e9e5b687ffd2e47";
           break;
-        case # "connect_zeus_basement_to_odin_zeus_tunnel":
+        case #"connect_zeus_basement_to_odin_zeus_tunnel":
           var_ff20f7d3 = #"hash_1354af92e864254c";
           break;
-        case # "connect_zeus_tunnel_to_flooded_crypt":
+        case #"connect_zeus_tunnel_to_flooded_crypt":
           var_ff20f7d3 = #"hash_1a0bc9a2403dc1ee";
           break;
-        case # "connect_ra_tunnel_to_body_pit":
+        case #"connect_ra_tunnel_to_body_pit":
           var_ff20f7d3 = #"hash_35fd31a4342c9786";
           break;
         default:

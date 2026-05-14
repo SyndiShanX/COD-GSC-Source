@@ -168,29 +168,29 @@ function main() {
 
 function function_1a010742(name) {
   switch (name) {
-    case # "jungle":
+    case #"jungle":
       return 4;
-    case # "cartel":
+    case #"cartel":
       return 1;
-    case # "graveyard":
+    case #"graveyard":
       return 2;
-    case # "temple":
+    case #"temple":
       return 3;
-    case # "watertemple":
+    case #"watertemple":
       return 5;
-    case # "icecave":
+    case #"icecave":
       return 6;
-    case # "bloodlake":
+    case #"bloodlake":
       return 7;
-    case # "witchwood":
+    case #"witchwood":
       return 8;
-    case # "wintercave":
+    case #"wintercave":
       return 9;
-    case # "geothermal":
+    case #"geothermal":
       return 10;
-    case # "alpine":
+    case #"alpine":
       return 11;
-    case # "boss":
+    case #"boss":
       return 12;
   }
 
@@ -199,29 +199,29 @@ function function_1a010742(name) {
 
 function function_fa798421(name) {
   switch (name) {
-    case # "jungle":
+    case #"jungle":
       return 32;
-    case # "cartel":
+    case #"cartel":
       return 42;
-    case # "graveyard":
+    case #"graveyard":
       return 30;
-    case # "temple":
+    case #"temple":
       return 31;
-    case # "watertemple":
+    case #"watertemple":
       return 33;
-    case # "icecave":
+    case #"icecave":
       return 34;
-    case # "bloodlake":
+    case #"bloodlake":
       return 35;
-    case # "witchwood":
+    case #"witchwood":
       return 36;
-    case # "wintercave":
+    case #"wintercave":
       return 38;
-    case # "geothermal":
+    case #"geothermal":
       return 39;
-    case # "alpine":
+    case #"alpine":
       return 40;
-    case # "boss":
+    case #"boss":
       if(level.doa.var_6c58d51 == 0) {
         return 41;
       } else {

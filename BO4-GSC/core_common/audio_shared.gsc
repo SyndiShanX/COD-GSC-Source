@@ -154,72 +154,72 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
   str_alias = #"hash_6d746e7e1822ad79";
 
   switch (weapon.rootweapon.name) {
-    case # "hero_annihilator":
+    case #"hero_annihilator":
       str_alias = #"hash_5e5050d7f9042fac";
       break;
-    case # "eq_gravityslam":
+    case #"eq_gravityslam":
       str_alias = #"hash_191ff361b2a52032";
       break;
-    case # "molotov_fire":
+    case #"molotov_fire":
       str_alias = #"hash_40a5f428bba291a8";
       break;
-    case # "gadget_radiation_field":
+    case #"gadget_radiation_field":
       str_alias = #"hash_16cc324cc4a290fc";
       break;
-    case # "sig_bow_quickshot5":
+    case #"sig_bow_quickshot5":
       str_alias = #"hash_1732b1323f11b7bf";
       break;
-    case # "sig_lmg":
+    case #"sig_lmg":
       str_alias = #"hash_7b92159573aee640";
       break;
-    case # "sniper_powersemi_t8":
-    case # "sniper_powerbolt_t8":
-    case # "sniper_fastrechamber_t8":
-    case # "sniper_quickscope_t8":
+    case #"sniper_powersemi_t8":
+    case #"sniper_powerbolt_t8":
+    case #"sniper_fastrechamber_t8":
+    case #"sniper_quickscope_t8":
       str_alias = #"hash_9b40eefa77d6446";
       break;
-    case # "ar_damage_t8":
-    case # "ar_accurate_t8":
-    case # "smg_capacity_t8":
-    case # "pistol_burst_t8":
-    case # "ar_fastfire_t8":
-    case # "lmg_heavy_t8":
-    case # "tr_midburst_t8":
-    case # "ar_stealth_t8":
-    case # "tr_longburst_t8":
-    case # "smg_standard_t8":
-    case # "lmg_spray_t8":
-    case # "smg_accurate_t8":
-    case # "ar_modular_t8":
-    case # "smg_fastfire_t8":
-    case # "lmg_standard_t8":
-    case # "smg_handling_t8":
+    case #"ar_damage_t8":
+    case #"ar_accurate_t8":
+    case #"smg_capacity_t8":
+    case #"pistol_burst_t8":
+    case #"ar_fastfire_t8":
+    case #"lmg_heavy_t8":
+    case #"tr_midburst_t8":
+    case #"ar_stealth_t8":
+    case #"tr_longburst_t8":
+    case #"smg_standard_t8":
+    case #"lmg_spray_t8":
+    case #"smg_accurate_t8":
+    case #"ar_modular_t8":
+    case #"smg_fastfire_t8":
+    case #"lmg_standard_t8":
+    case #"smg_handling_t8":
       str_alias = #"hash_669a22b65807ee3b";
       break;
-    case # "pistol_revolver_t8":
-    case # "tr_powersemi_t8":
-    case # "pistol_standard_t8":
+    case #"pistol_revolver_t8":
+    case #"tr_powersemi_t8":
+    case #"pistol_standard_t8":
       str_alias = #"hash_2b81ab20b5e3d199";
       break;
-    case # "shotgun_pump_t8":
-    case # "shotgun_semiauto_t8":
+    case #"shotgun_pump_t8":
+    case #"shotgun_semiauto_t8":
       str_alias = #"hash_10ba93a0930567c5";
       break;
-    case # "eq_sticky_grenade":
+    case #"eq_sticky_grenade":
       str_alias = #"hash_5330d1fc9ae03536";
       break;
-    case # "eq_cluster_semtex_grenade":
+    case #"eq_cluster_semtex_grenade":
       str_alias = #"hash_58d3e2978f41dc59";
       break;
   }
 
   switch (smeansofdeath) {
-    case # "mod_trigger_hurt":
+    case #"mod_trigger_hurt":
       str_alias = #"hash_3f3f94dcb425d73b";
       break;
-    case # "mod_melee_weapon_butt":
-    case # "mod_melee_assassinate":
-    case # "mod_melee":
+    case #"mod_melee_weapon_butt":
+    case #"mod_melee_assassinate":
+    case #"mod_melee":
       if(function_641cec60(weapon)) {
         str_alias = #"hash_5cd2899685b79029";
       } else if(weapon.rootweapon.name == "sig_blade") {
@@ -229,11 +229,11 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       }
 
       break;
-    case # "mod_meta":
-    case # "mod_suicide":
+    case #"mod_meta":
+    case #"mod_suicide":
       str_alias = undefined;
       break;
-    case # "mod_dot":
+    case #"mod_dot":
       if(weapon.doesfiredamage) {
         str_alias = #"hash_40a5f428bba291a8";
         break;

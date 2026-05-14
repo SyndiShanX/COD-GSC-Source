@@ -504,13 +504,13 @@ function cmd(var_acfb518f) {
   var_329d95fb = struct::get_array("<dev string:x115>", "<dev string:x123>");
 
   switch (var_acfb518f) {
-    case # "hash_7acad1e41b4b7af3":
+    case #"hash_7acad1e41b4b7af3":
       foreach(var_f271f008 in var_329d95fb) {
         var_f271f008 thread function_b7549e2f(1);
       }
 
       break;
-    case # "hash_37bd682457b237c8":
+    case #"hash_37bd682457b237c8":
       foreach(var_f271f008 in var_329d95fb) {
         var_f271f008 thread function_b7549e2f(0);
       }

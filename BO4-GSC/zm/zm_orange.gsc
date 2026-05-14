@@ -482,13 +482,13 @@ function_1f712bb1() {
   wait 3;
 
   switch (var_5b117f94) {
-    case # "lighthouse_level_1_chest":
+    case #"lighthouse_level_1_chest":
       level.var_af3a53b2 = function_19a4e7cf(1500, var_e503dc79);
       return;
-    case # "navigation_chest":
+    case #"navigation_chest":
       level.var_af3a53b2 = function_19a4e7cf(300, var_e503dc79);
       return;
-    case # "human_infusion_chest":
+    case #"human_infusion_chest":
       level.var_af3a53b2 = function_19a4e7cf(1100, var_e503dc79);
       return;
     default:
@@ -538,7 +538,7 @@ function_cf95fbb7() {
     var_5b117f94 = level.chests[i].script_noteworthy;
 
     switch (var_5b117f94) {
-      case # "lighthouse_level_1_chest":
+      case #"lighthouse_level_1_chest":
         e_effect = function_19a4e7cf(1500, i);
 
         if(!isDefined(level.var_2a15c034)) {
@@ -549,7 +549,7 @@ function_cf95fbb7() {
 
         level.var_2a15c034[level.var_2a15c034.size] = e_effect;
         break;
-      case # "navigation_chest":
+      case #"navigation_chest":
         e_effect = function_19a4e7cf(300, i);
 
         if(!isDefined(level.var_2a15c034)) {
@@ -560,7 +560,7 @@ function_cf95fbb7() {
 
         level.var_2a15c034[level.var_2a15c034.size] = e_effect;
         break;
-      case # "human_infusion_chest":
+      case #"human_infusion_chest":
         e_effect = function_19a4e7cf(1100, i);
 
         if(!isDefined(level.var_2a15c034)) {

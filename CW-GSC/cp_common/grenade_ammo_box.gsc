@@ -49,25 +49,25 @@ function private function_fcd7744f() {
 
 function private function_1ba6c697(str_grenade) {
   switch (str_grenade) {
-    case # "frag":
+    case #"frag":
       w_grenade = getweapon(#"frag_grenade");
       break;
-    case # "hatchet":
+    case #"hatchet":
       w_grenade = getweapon(#"hatchet");
       break;
-    case # "molotov":
+    case #"molotov":
       w_grenade = getweapon(#"eq_molotov");
       break;
-    case # "mine":
+    case #"mine":
       w_grenade = getweapon(#"land_mine_cp");
       break;
-    case # "flash":
+    case #"flash":
       w_grenade = getweapon(#"eq_flash_grenade");
       break;
-    case # "smoke":
+    case #"smoke":
       w_grenade = getweapon(#"willy_pete");
       break;
-    case # "stim":
+    case #"stim":
       w_grenade = getweapon(#"eq_stimshot");
       break;
     default:

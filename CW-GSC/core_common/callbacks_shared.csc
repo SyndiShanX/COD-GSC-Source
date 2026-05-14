@@ -510,7 +510,7 @@ function event_handler[exit_vehicle] codecallback_exitvehicle(eventstruct) {
 
 function event_handler[sound_notify] codecallback_soundnotify(eventstruct) {
   switch (eventstruct.notetrack) {
-    case # "scr_bomb_beep":
+    case #"scr_bomb_beep":
       if(getgametypesetting(#"silentplant") == 0) {
         self playSound(eventstruct.localclientnum, #"");
       }

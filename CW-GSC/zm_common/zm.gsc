@@ -1891,16 +1891,16 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
 
     if(isDefined(self.animname)) {
       switch (self.animname) {
-        case # "quad_zombie":
+        case #"quad_zombie":
           type = "quadkill";
           break;
-        case # "ape_zombie":
+        case #"ape_zombie":
           type = "apekill";
           break;
-        case # "zombie":
+        case #"zombie":
           type = "zombiekill";
           break;
-        case # "zombie_dog":
+        case #"zombie_dog":
           type = "dogkill";
           break;
       }
@@ -1963,14 +1963,14 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
     attacker function_df94f87e(weapon);
 
     switch (weapon.name) {
-      case # "gun_ultimate_turret":
-      case # "energy_mine":
-      case # "energy_mine_4":
-      case # "energy_mine_5":
-      case # "energy_mine_2":
-      case # "energy_mine_3":
-      case # "energy_mine_1":
-      case # "satchel_charge":
+      case #"gun_ultimate_turret":
+      case #"energy_mine":
+      case #"energy_mine_4":
+      case #"energy_mine_5":
+      case #"energy_mine_2":
+      case #"energy_mine_3":
+      case #"energy_mine_1":
+      case #"satchel_charge":
         attacker zm_stats::increment_challenge_stat(#"trapper_kills");
         break;
     }
@@ -2026,24 +2026,24 @@ function function_df94f87e(weapon) {
 
 function function_9dd8ba0b(weapon_name) {
   switch (weapon_name) {
-    case # "ring_of_fire_5":
-    case # "ring_of_fire_4":
-    case # "ring_of_fire_3":
-    case # "ring_of_fire_2":
-    case # "ring_of_fire_1":
-    case # "frost_blast":
-    case # "ring_of_fire":
-    case # "frost_blast_1":
-    case # "frost_blast_3":
-    case # "frost_blast_2":
-    case # "frost_blast_5":
-    case # "frost_blast_4":
-    case # "energy_mine":
-    case # "energy_mine_4":
-    case # "energy_mine_5":
-    case # "energy_mine_2":
-    case # "energy_mine_3":
-    case # "energy_mine_1":
+    case #"ring_of_fire_5":
+    case #"ring_of_fire_4":
+    case #"ring_of_fire_3":
+    case #"ring_of_fire_2":
+    case #"ring_of_fire_1":
+    case #"frost_blast":
+    case #"ring_of_fire":
+    case #"frost_blast_1":
+    case #"frost_blast_3":
+    case #"frost_blast_2":
+    case #"frost_blast_5":
+    case #"frost_blast_4":
+    case #"energy_mine":
+    case #"energy_mine_4":
+    case #"energy_mine_5":
+    case #"energy_mine_2":
+    case #"energy_mine_3":
+    case #"energy_mine_1":
       self zm_stats::increment_challenge_stat(#"hash_2c0504992b5785f2");
       break;
   }
@@ -3137,7 +3137,7 @@ function private function_85ea1f60(item) {
   }
 
   switch (item.itementry.itemtype) {
-    case # "quest":
+    case #"quest":
       if(isDefined(item.var_d5fa8477) && (self zm_intel::function_f0f36d47(item.var_d5fa8477) || isDefined(item.var_b09e2381) && self.name != item.var_b09e2381)) {
         return 0;
       } else if(is_true(self.var_c8f9547a) && item.itementry.name === "item_zmquest_tungsten_mq_quest_part_shard") {
@@ -3153,7 +3153,7 @@ function private function_85ea1f60(item) {
       }
 
       return 1;
-    case # "armor":
+    case #"armor":
       if(item.itementry.var_4a1a4613 === #"armor_heal") {
         return (!self function_d87329b7() || !self function_1072c231() || self.armortier < (isDefined(item.itementry.armortier) ? item.itementry.armortier : 1));
       } else {
@@ -3161,18 +3161,18 @@ function private function_85ea1f60(item) {
       }
 
       break;
-    case # "weapon":
-    case # "scorestreak":
+    case #"weapon":
+    case #"scorestreak":
       return (!self function_ad7bd142(item) && self zm_weapons::function_2bcaec6f(item.itementry.weapon));
-    case # "survival_ammo":
+    case #"survival_ammo":
       return !self function_be26a3f3(item);
-    case # "survival_armor_shard":
+    case #"survival_armor_shard":
       return !self function_1072c231();
-    case # "survival_perk":
+    case #"survival_perk":
       return !self function_96184f63(item);
-    case # "survival_upgrade_item":
+    case #"survival_upgrade_item":
       return self zm_weapons::function_106ff01d(item);
-    case # "equipment":
+    case #"equipment":
       lethal = self.inventory.items[7];
 
       if(lethal.networkid != 32767) {
@@ -3186,7 +3186,7 @@ function private function_85ea1f60(item) {
       }
 
       break;
-    case # "tactical":
+    case #"tactical":
       tactical = self.inventory.items[13];
 
       if(tactical.networkid != 32767) {

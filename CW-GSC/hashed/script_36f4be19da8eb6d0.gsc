@@ -277,16 +277,16 @@ function function_5fef4201(weapon) {
     w_root = zm_weapons::function_386dacbc(weapon);
 
     switch (w_root.name) {
-      case # "ww_ieu_gas_t9_upgraded":
-      case # "ww_ieu_plasma_t9_upgraded":
-      case # "ww_ieu_acid_t9_upgraded":
-      case # "ww_ieu_shockwave_t9_upgraded":
-      case # "ww_ieu_shockwave_t9":
-      case # "ww_ieu_electric_t9_upgraded":
-      case # "ww_ieu_electric_t9":
-      case # "ww_ieu_acid_t9":
-      case # "ww_ieu_gas_t9":
-      case # "ww_ieu_plasma_t9":
+      case #"ww_ieu_gas_t9_upgraded":
+      case #"ww_ieu_plasma_t9_upgraded":
+      case #"ww_ieu_acid_t9_upgraded":
+      case #"ww_ieu_shockwave_t9_upgraded":
+      case #"ww_ieu_shockwave_t9":
+      case #"ww_ieu_electric_t9_upgraded":
+      case #"ww_ieu_electric_t9":
+      case #"ww_ieu_acid_t9":
+      case #"ww_ieu_gas_t9":
+      case #"ww_ieu_plasma_t9":
         return true;
     }
   }
@@ -299,11 +299,11 @@ function function_7d5e7c71(weapon) {
     w_root = zm_weapons::function_386dacbc(weapon);
 
     switch (w_root.name) {
-      case # "ww_ieu_gas_t9_upgraded":
-      case # "ww_ieu_plasma_t9_upgraded":
-      case # "ww_ieu_acid_t9_upgraded":
-      case # "ww_ieu_shockwave_t9_upgraded":
-      case # "ww_ieu_electric_t9_upgraded":
+      case #"ww_ieu_gas_t9_upgraded":
+      case #"ww_ieu_plasma_t9_upgraded":
+      case #"ww_ieu_acid_t9_upgraded":
+      case #"ww_ieu_shockwave_t9_upgraded":
+      case #"ww_ieu_electric_t9_upgraded":
         return true;
     }
   }
@@ -355,20 +355,20 @@ function function_51986fd2(weapon, means_of_death) {
   w_root = zm_weapons::function_386dacbc(weapon);
 
   switch (w_root.name) {
-    case # "ww_ieu_shockwave_t9_upgraded":
-    case # "ww_ieu_shockwave_t9":
+    case #"ww_ieu_shockwave_t9_upgraded":
+    case #"ww_ieu_shockwave_t9":
       return # "hash_e5fddce96190022";
-    case # "ww_ieu_acid_t9_upgraded":
-    case # "ww_ieu_acid_t9":
+    case #"ww_ieu_acid_t9_upgraded":
+    case #"ww_ieu_acid_t9":
       return # "hash_40ca16d063cdb34f";
-    case # "ww_ieu_electric_t9_upgraded":
-    case # "ww_ieu_electric_t9":
+    case #"ww_ieu_electric_t9_upgraded":
+    case #"ww_ieu_electric_t9":
       return # "hash_1262748e23d5dff8";
-    case # "ww_ieu_gas_t9_upgraded":
-    case # "ww_ieu_gas_t9":
+    case #"ww_ieu_gas_t9_upgraded":
+    case #"ww_ieu_gas_t9":
       return # "hash_37ca44613f9ed8bc";
-    case # "ww_ieu_plasma_t9_upgraded":
-    case # "ww_ieu_plasma_t9":
+    case #"ww_ieu_plasma_t9_upgraded":
+    case #"ww_ieu_plasma_t9":
       return # "hash_a40f7d48ac714db";
   }
 
@@ -383,20 +383,20 @@ function function_3f1cb8ec(weapon, means_of_death) {
   w_root = zm_weapons::function_386dacbc(weapon);
 
   switch (w_root.name) {
-    case # "ww_ieu_shockwave_t9_upgraded":
-    case # "ww_ieu_shockwave_t9":
+    case #"ww_ieu_shockwave_t9_upgraded":
+    case #"ww_ieu_shockwave_t9":
       return 0;
-    case # "ww_ieu_acid_t9_upgraded":
-    case # "ww_ieu_acid_t9":
+    case #"ww_ieu_acid_t9_upgraded":
+    case #"ww_ieu_acid_t9":
       return 5;
-    case # "ww_ieu_electric_t9_upgraded":
-    case # "ww_ieu_electric_t9":
+    case #"ww_ieu_electric_t9_upgraded":
+    case #"ww_ieu_electric_t9":
       return 0;
-    case # "ww_ieu_gas_t9_upgraded":
-    case # "ww_ieu_gas_t9":
+    case #"ww_ieu_gas_t9_upgraded":
+    case #"ww_ieu_gas_t9":
       return 0;
-    case # "ww_ieu_plasma_t9_upgraded":
-    case # "ww_ieu_plasma_t9":
+    case #"ww_ieu_plasma_t9_upgraded":
+    case #"ww_ieu_plasma_t9":
       return 0;
   }
 
@@ -419,16 +419,16 @@ function function_33fb41f6(params) {
 
     if(function_760c0d2d(params.weapon, params.smeansofdeath) && isDefined(self.zm_ai_category)) {
       switch (self.zm_ai_category) {
-        case # "normal":
+        case #"normal":
           var_ab6fadb1 = 0;
           break;
-        case # "special":
+        case #"special":
           var_ab6fadb1 = 0;
           break;
-        case # "elite":
+        case #"elite":
           var_ab6fadb1 = 0;
           break;
-        case # "boss":
+        case #"boss":
           var_ab6fadb1 = 0;
           break;
         default:
@@ -514,16 +514,16 @@ function function_d72b9d03(params) {
 
     if(isDefined(self.zm_ai_category)) {
       switch (self.zm_ai_category) {
-        case # "normal":
+        case #"normal":
           var_ab6fadb1 = 5;
           break;
-        case # "special":
+        case #"special":
           var_ab6fadb1 = 15;
           break;
-        case # "elite":
+        case #"elite":
           var_ab6fadb1 = 30;
           break;
-        case # "boss":
+        case #"boss":
           var_ab6fadb1 = 100;
           break;
         default:
@@ -772,16 +772,16 @@ function function_a712364b(distance, victim) {
 
   if(isDefined(victim.zm_ai_category)) {
     switch (victim.zm_ai_category) {
-      case # "normal":
+      case #"normal":
         var_db379d0e = 0.13;
         break;
-      case # "special":
+      case #"special":
         var_db379d0e = 0.05;
         break;
-      case # "elite":
+      case #"elite":
         var_db379d0e = 0.02;
         break;
-      case # "boss":
+      case #"boss":
         var_db379d0e = 0.01;
         break;
       default:
@@ -1835,7 +1835,7 @@ function function_c3b3603d(weapon, var_98e101b0) {
       }
     } else {
       switch (weapon.name) {
-        case # "ww_ieu_shockwave_t9_upgraded":
+        case #"ww_ieu_shockwave_t9_upgraded":
           switch (var_55687712.paplv) {
             case 1:
               return 1.5;
@@ -1846,7 +1846,7 @@ function function_c3b3603d(weapon, var_98e101b0) {
           }
 
           break;
-        case # "ww_ieu_acid_t9_upgraded":
+        case #"ww_ieu_acid_t9_upgraded":
           switch (var_55687712.paplv) {
             case 1:
               return 1.5;
@@ -1857,7 +1857,7 @@ function function_c3b3603d(weapon, var_98e101b0) {
           }
 
           break;
-        case # "ww_ieu_plasma_t9_upgraded":
+        case #"ww_ieu_plasma_t9_upgraded":
           switch (var_55687712.paplv) {
             case 1:
               return 1.5;
@@ -1868,7 +1868,7 @@ function function_c3b3603d(weapon, var_98e101b0) {
           }
 
           break;
-        case # "ww_ieu_gas_t9_upgraded":
+        case #"ww_ieu_gas_t9_upgraded":
           switch (var_55687712.paplv) {
             case 1:
               return 2;
@@ -1879,7 +1879,7 @@ function function_c3b3603d(weapon, var_98e101b0) {
           }
 
           break;
-        case # "ww_ieu_electric_t9_upgraded":
+        case #"ww_ieu_electric_t9_upgraded":
           switch (var_55687712.paplv) {
             case 1:
               return 1.5;

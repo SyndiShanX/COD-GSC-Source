@@ -298,23 +298,23 @@ function private stealth_noteworthy_priority(eventname) {
   }
 
   switch (eventname) {
-    case # "civilian_kill":
+    case #"civilian_kill":
       return 70;
-    case # "good_kill_double":
+    case #"good_kill_double":
       return 60;
-    case # "good_kill_impressive":
+    case #"good_kill_impressive":
       return 50;
-    case # "good_kill_bullet":
+    case #"good_kill_bullet":
       return 40;
-    case # "good_kill":
+    case #"good_kill":
       return 30;
-    case # "aim":
+    case #"aim":
       return 20;
-    case # "callout_ahead":
-    case # "callout_below":
-    case # "callout_right":
-    case # "callout_left":
-    case # "callout_behind":
+    case #"callout_ahead":
+    case #"callout_below":
+    case #"callout_right":
+    case #"callout_left":
+    case #"callout_behind":
       return 10;
   }
 

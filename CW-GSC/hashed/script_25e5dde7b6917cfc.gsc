@@ -746,16 +746,16 @@ function function_8f9d1155(a_ents) {
     }
 
     switch (index) {
-      case # "vehicle 1":
+      case #"vehicle 1":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1]);
         break;
-      case # "vehicle 2":
+      case #"vehicle 2":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1, 7, 8, 9, 10]);
         break;
-      case # "vehicle 3":
+      case #"vehicle 3":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1, 9, 10]);
         break;
-      case # "hash_5c059a141887868b":
+      case #"hash_5c059a141887868b":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1]);
         break;
     }
@@ -826,53 +826,53 @@ function function_ea6224e(a_ents) {
     }
 
     switch (index) {
-      case # "hash_505d54dd2b523ca3":
+      case #"hash_505d54dd2b523ca3":
         if(!isDefined(level.var_da19489d)) {
           level.var_da19489d = ent;
           level.var_da19489d setrotorspeed(0.23);
         }
 
         break;
-      case # "hash_4441cc1284fe31e6":
+      case #"hash_4441cc1284fe31e6":
         if(!isDefined(level.var_52874eb2)) {
           level.var_52874eb2 = ent;
           level.var_52874eb2 setrotorspeed(0.28);
         }
 
         break;
-      case # "hash_25a9a33c7c596183":
-      case # "hash_25a9a43c7c596336":
-      case # "hash_25a9a53c7c5964e9":
-      case # "hash_25a9a63c7c59669c":
-      case # "hash_25a9a73c7c59684f":
-      case # "hash_25a9a83c7c596a02":
+      case #"hash_25a9a33c7c596183":
+      case #"hash_25a9a43c7c596336":
+      case #"hash_25a9a53c7c5964e9":
+      case #"hash_25a9a63c7c59669c":
+      case #"hash_25a9a73c7c59684f":
+      case #"hash_25a9a83c7c596a02":
         ent thread namespace_b7cfe907::function_80a8e837();
         break;
-      case # "hash_3c898b6644de1c74":
+      case #"hash_3c898b6644de1c74":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1]);
         ent thread function_e0c430cb("flag_intro_player_boarded_chopper");
         break;
-      case # "hash_3c898e6644de218d":
+      case #"hash_3c898e6644de218d":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1, 7, 9, 10]);
         ent thread function_e0c430cb("flag_intro_player_boarded_chopper");
         break;
-      case # "hash_3c898d6644de1fda":
+      case #"hash_3c898d6644de1fda":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1, 7, 9, 10]);
         ent thread function_e0c430cb("flag_play_gear_up_pt02");
         break;
-      case # "hash_3c89876644de15a8":
-      case # "hash_3c89886644de175b":
+      case #"hash_3c89876644de15a8":
+      case #"hash_3c89886644de175b":
         ent thread function_e0c430cb("flag_intro_player_boarded_chopper");
         break;
-      case # "hash_7f1ef323fbb683c9":
+      case #"hash_7f1ef323fbb683c9":
         break;
-      case # "hash_3cd20118e4cb9c68":
+      case #"hash_3cd20118e4cb9c68":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1, 9, 10]);
         break;
-      case # "hash_5f084b741ecc845c":
+      case #"hash_5f084b741ecc845c":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 1]);
         break;
-      case # "hash_25d7fb931fa86afc":
+      case #"hash_25d7fb931fa86afc":
         ent thread namespace_b7cfe907::function_9ac0bc90([0, 7, 9]);
         break;
     }
@@ -921,25 +921,25 @@ function function_b281d751(a_ents) {
     }
 
     switch (index) {
-      case # "hash_505d54dd2b523ca3":
+      case #"hash_505d54dd2b523ca3":
         if(!isDefined(level.var_da19489d)) {
           level.var_da19489d = ent;
         }
 
         break;
-      case # "hash_4441cc1284fe31e6":
+      case #"hash_4441cc1284fe31e6":
         if(!isDefined(level.var_52874eb2)) {
           level.var_52874eb2 = ent;
         }
 
         break;
-      case # "hash_7f1ef323fbb683c9":
+      case #"hash_7f1ef323fbb683c9":
         ent thread function_f9c12ca2();
         ent turretsettargetangles(1, (0, 0, 0));
         break;
-      case # "hash_25d7fb931fa86afc":
-      case # "hash_3cd20118e4cb9c68":
-      case # "hash_5f084b741ecc845c":
+      case #"hash_25d7fb931fa86afc":
+      case #"hash_3cd20118e4cb9c68":
+      case #"hash_5f084b741ecc845c":
         ent thread function_f9c12ca2();
         break;
     }
@@ -1360,13 +1360,13 @@ function function_49aeb63a() {
   foreach(truck in var_3744c167) {
     if(isDefined(truck.script_noteworthy)) {
       switch (truck.script_noteworthy) {
-        case # "hash_5f1c4271b44a354a":
+        case #"hash_5f1c4271b44a354a":
           thread function_5a9f70a0("firebase_arrival_spawner_enemy_road_solider_truck_end_01", "firebase_arrival_road_enemy_truck_01_end");
           break;
-        case # "hash_5f1c4171b44a3397":
+        case #"hash_5f1c4171b44a3397":
           thread function_5a9f70a0("firebase_arrival_spawner_enemy_road_solider_truck_end_02", "firebase_arrival_road_enemy_truck_02_end");
           break;
-        case # "hash_5f1c3f71b44a3031":
+        case #"hash_5f1c3f71b44a3031":
           thread function_5a9f70a0("firebase_arrival_spawner_enemy_road_solider_truck_end_04", "firebase_arrival_road_enemy_truck_04_end");
           break;
       }
@@ -1507,10 +1507,10 @@ function function_f56d55e3() {
 
     if(isDefined(littlebirds.script_noteworthy)) {
       switch (littlebirds.script_noteworthy) {
-        case # "hash_1c366d4d206df5a5":
+        case #"hash_1c366d4d206df5a5":
           littlebirds thread function_903f2e76(var_dd4aa81d, 2.5);
           break;
-        case # "hash_1c366a4d206df08c":
+        case #"hash_1c366a4d206df08c":
           littlebirds thread function_903f2e76(var_af91cca8, 2.5);
           break;
       }
@@ -1628,10 +1628,10 @@ function function_82bec60b() {
 
     if(isDefined(gunship.script_noteworthy)) {
       switch (gunship.script_noteworthy) {
-        case # "hash_4b32ffd1558c840a":
+        case #"hash_4b32ffd1558c840a":
           gunship thread function_c4d91c06(t_gs02_t01, t_gs02_t02, t_gs01_t01, t_gs01_t02);
           break;
-        case # "hash_4b32fed1558c8257":
+        case #"hash_4b32fed1558c8257":
           gunship thread function_c4d91c06(t_gs02_t01, t_gs02_t02, t_gs01_t01, undefined, "gunship_02_road_rockets_complete");
           break;
       }

@@ -913,11 +913,11 @@ zombiejuke(entity) {
         entity.jukedistance = "long";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 122;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 129;
             break;
         }
@@ -930,11 +930,11 @@ zombiejuke(entity) {
         entity.jukedistance = "short";
 
         switch (entity aiutility::function_cc26899f()) {
-          case # "locomotion_speed_run":
-          case # "locomotion_speed_walk":
+          case #"locomotion_speed_run":
+          case #"locomotion_speed_walk":
             forwardoffset = 127;
             break;
-          case # "locomotion_speed_sprint":
+          case #"locomotion_speed_sprint":
             forwardoffset = 148;
             break;
         }
@@ -999,13 +999,13 @@ zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompan
 
   if(isDefined(entity.zombie_move_speed)) {
     switch (entity.zombie_move_speed) {
-      case # "walk":
+      case #"walk":
         speed = 5;
         break;
-      case # "run":
+      case #"run":
         speed = 6;
         break;
-      case # "sprint":
+      case #"sprint":
         speed = 7;
         break;
     }

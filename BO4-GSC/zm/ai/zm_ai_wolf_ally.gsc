@@ -396,13 +396,13 @@ function_f7c7a416(entity) {
 
         if(isDefined(hit_enemy.zm_ai_category)) {
           switch (hit_enemy.zm_ai_category) {
-            case # "heavy":
+            case #"heavy":
               n_base_damage *= 0.2;
               break;
-            case # "miniboss":
+            case #"miniboss":
               n_base_damage *= 0.1;
               break;
-            case # "boss":
+            case #"boss":
               n_base_damage *= 0.05;
               break;
             default:

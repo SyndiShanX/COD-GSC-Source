@@ -489,9 +489,9 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
     [[level.var_ab6fef61]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case # "popcorn":
-      case # "basic":
-      case # "enhanced":
+      case #"popcorn":
+      case #"basic":
+      case #"enhanced":
         if(isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 666;
         }
@@ -509,14 +509,14 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
         }
 
         break;
-      case # "heavy":
+      case #"heavy":
         if(!isDefined(b_charged)) {
           n_damage *= 0.75;
         }
 
         e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         break;
-      case # "miniboss":
+      case #"miniboss":
         if(isDefined(b_charged)) {
           n_damage = int(n_damage * 0.2);
         } else {
@@ -535,7 +535,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
         }
 
         break;
-      case # "boss":
+      case #"boss":
         if(!isactor(e_target)) {
           e_target clientfield::increment("" + #"hemera_impact");
         }

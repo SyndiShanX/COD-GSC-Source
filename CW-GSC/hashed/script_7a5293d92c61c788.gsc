@@ -243,20 +243,20 @@ function function_137f88c6(var_a0abda6 = #"resource") {
   rarity = #"white";
 
   switch (var_a0abda6) {
-    case # "resource":
-    case # "loadout":
+    case #"resource":
+    case #"loadout":
       rarity = #"white";
       break;
-    case # "uncommon":
+    case #"uncommon":
       rarity = #"green";
       break;
-    case # "rare":
+    case #"rare":
       rarity = #"blue";
       break;
-    case # "epic":
+    case #"epic":
       rarity = #"purple";
       break;
-    case # "legendary":
+    case #"legendary":
       rarity = #"orange";
       break;
   }
@@ -266,20 +266,20 @@ function function_137f88c6(var_a0abda6 = #"resource") {
 
 function function_44368952(weapon, rarity = #"white") {
   switch (rarity) {
-    case # "resource":
-    case # "loadout":
+    case #"resource":
+    case #"loadout":
       rarity = #"white";
       break;
-    case # "uncommon":
+    case #"uncommon":
       rarity = #"green";
       break;
-    case # "rare":
+    case #"rare":
       rarity = #"blue";
       break;
-    case # "epic":
+    case #"epic":
       rarity = #"purple";
       break;
-    case # "legendary":
+    case #"legendary":
       rarity = #"orange";
       break;
   }
@@ -315,26 +315,26 @@ function function_1490abe2(weapon) {
 
   if(isDefined(item.itementry.name)) {
     switch (item.itementry.name) {
-      case # "ww_ieu_shockwave_t9_upgraded_item_sr":
-      case # "ww_ieu_gas_t9_item_sr":
-      case # "ww_ieu_plasma_t9_item_sr":
-      case # "ww_ieu_gas_t9_upgraded_item_sr":
-      case # "ww_ieu_acid_t9_upgraded_item_sr":
-      case # "ww_ieu_shockwave_t9_item_sr":
-      case # "ww_ieu_electric_t9_item_sr":
-      case # "hash_3dff7d94b9ae5c97":
-      case # "ww_ieu_acid_t9_item_sr":
-      case # "ww_ieu_electric_t9_upgraded_item_sr":
-      case # "ww_ieu_plasma_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_upgraded_item_sr":
+      case #"ww_ieu_gas_t9_item_sr":
+      case #"ww_ieu_plasma_t9_item_sr":
+      case #"ww_ieu_gas_t9_upgraded_item_sr":
+      case #"ww_ieu_acid_t9_upgraded_item_sr":
+      case #"ww_ieu_shockwave_t9_item_sr":
+      case #"ww_ieu_electric_t9_item_sr":
+      case #"hash_3dff7d94b9ae5c97":
+      case #"ww_ieu_acid_t9_item_sr":
+      case #"ww_ieu_electric_t9_upgraded_item_sr":
+      case #"ww_ieu_plasma_t9_upgraded_item_sr":
         return false;
     }
   }
 
   switch (weapon.name) {
-    case # "ray_gun_mk2":
-    case # "ray_gun_upgraded":
-    case # "ray_gun":
-    case # "ray_gun_mk2_upgraded":
+    case #"ray_gun_mk2":
+    case #"ray_gun_upgraded":
+    case #"ray_gun":
+    case #"ray_gun_mk2_upgraded":
       return false;
   }
 
@@ -377,7 +377,7 @@ function function_cb2d9b9b(machine, trigger) {
       var_bfd531ce = item_inventory::function_d768ea30();
 
       switch (waitresult.response) {
-        case # "armor_purchase":
+        case #"armor_purchase":
           var_1a988176 = level.var_ade77b07[intpayload];
           var_1d1d4a2a = level.var_3a2e321c[intpayload];
 
@@ -416,7 +416,7 @@ function function_cb2d9b9b(machine, trigger) {
           }
 
           break;
-        case # "tier_upgrade":
+        case #"tier_upgrade":
           if(!function_1490abe2(weapon) || self isswitchingweapons()) {
             machine playsoundtoplayer(#"uin_default_action_denied", self);
           } else {
@@ -514,7 +514,7 @@ function function_cb2d9b9b(machine, trigger) {
           }
 
           break;
-        case # "hash_383c519d3bdac984":
+        case #"hash_383c519d3bdac984":
           self notify(#"hash_5e4c1bf6d3ef5df0");
           self function_6c71e778(machine, trigger);
           return;

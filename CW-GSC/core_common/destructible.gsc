@@ -96,7 +96,7 @@ function event_callback(destructible_event, attacker, weapon, piece_index, point
   }
 
   switch (destructible_event) {
-    case # "destructible_car_explosion":
+    case #"destructible_car_explosion":
       self car_explosion(attacker);
 
       if(isDefined(weapon)) {
@@ -104,7 +104,7 @@ function event_callback(destructible_event, attacker, weapon, piece_index, point
       }
 
       break;
-    case # "destructible_car_fire":
+    case #"destructible_car_fire":
       self thread car_fire_think(attacker);
 
       if(isDefined(weapon)) {
@@ -112,16 +112,16 @@ function event_callback(destructible_event, attacker, weapon, piece_index, point
       }
 
       break;
-    case # "explode":
+    case #"explode":
       self thread simple_explosion(attacker);
       break;
-    case # "explode_complex":
+    case #"explode_complex":
       self thread complex_explosion(attacker, explosion_radius);
       break;
-    case # "destructible_explosive_incendiary_large":
-    case # "hash_13b4e4fbd7d961c0":
-    case # "destructible_explosive_incendiary_small":
-    case # "hash_5c6665f5f23b07a4":
+    case #"destructible_explosive_incendiary_large":
+    case #"hash_13b4e4fbd7d961c0":
+    case #"destructible_explosive_incendiary_small":
+    case #"hash_5c6665f5f23b07a4":
       self explosive_incendiary_explosion(attacker, explosion_radius, physics_explosion);
 
       if(isDefined(weapon)) {
@@ -129,10 +129,10 @@ function event_callback(destructible_event, attacker, weapon, piece_index, point
       }
 
       break;
-    case # "hash_30141f23e4fc17c":
-    case # "destructible_explosive_electrical_small":
-    case # "hash_6f46ae8cbb1ddc40":
-    case # "destructible_explosive_electrical_large":
+    case #"hash_30141f23e4fc17c":
+    case #"destructible_explosive_electrical_small":
+    case #"hash_6f46ae8cbb1ddc40":
+    case #"destructible_explosive_electrical_large":
       self explosive_electrical_explosion(attacker, explosion_radius, physics_explosion);
 
       if(isDefined(weapon)) {
@@ -140,10 +140,10 @@ function event_callback(destructible_event, attacker, weapon, piece_index, point
       }
 
       break;
-    case # "hash_321329f9a6ece4e":
-    case # "destructible_explosive_concussive_large":
-    case # "hash_49e6dd192f5f1686":
-    case # "destructible_explosive_concussive_small":
+    case #"hash_321329f9a6ece4e":
+    case #"destructible_explosive_concussive_large":
+    case #"hash_49e6dd192f5f1686":
+    case #"destructible_explosive_concussive_small":
       self explosive_concussive_explosion(attacker, explosion_radius, physics_explosion);
 
       if(isDefined(weapon)) {

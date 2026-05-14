@@ -1312,14 +1312,14 @@ function_f51431a9(elephant) {
     currentstate = elephant.ai.var_112ec817;
 
     switch (currentstate) {
-      case # "hash_8e170ae91588f20":
+      case #"hash_8e170ae91588f20":
         if(function_16096ca1(elephant) || var_e8e6826f) {
           level thread elephantstartdeath(elephant);
           return;
         }
 
         break;
-      case # "elephant_stage_1":
+      case #"elephant_stage_1":
         if(function_d6ae999a(elephant) || var_55fb74b2) {
           elephant function_4d479d22(elephant);
         }
@@ -1336,9 +1336,9 @@ function_2e4487f6(elephant, stage) {
   elephant.ai.var_112ec817 = stage;
 
   switch (stage) {
-    case # "elephant_stage_1":
+    case #"elephant_stage_1":
       break;
-    case # "hash_8e170ae91588f20":
+    case #"hash_8e170ae91588f20":
       break;
     default:
       break;
@@ -1608,12 +1608,12 @@ function_f2c697c7(entity) {
   }
 
   switch (stage) {
-    case # "elephant_stage_1":
+    case #"elephant_stage_1":
       entity.ai.var_a504b9a3.var_6392c3a2 = gettime() + randomintrange(2500, 3000);
       entity.ai.var_a504b9a3.var_190509f3 = 250 * 250;
       entity.ai.var_a504b9a3.var_f84fafb2 = 400 * 400;
       break;
-    case # "hash_8e170ae91588f20":
+    case #"hash_8e170ae91588f20":
       entity.ai.var_a504b9a3.var_6392c3a2 = gettime() + randomintrange(3500, 4000);
       entity.ai.var_a504b9a3.var_190509f3 = 250 * 250;
       entity.ai.var_a504b9a3.var_f84fafb2 = 400 * 400;
@@ -1700,10 +1700,10 @@ function_d3d560e9(entity) {
   }
 
   switch (stage) {
-    case # "elephant_stage_1":
+    case #"elephant_stage_1":
       entity.ai.var_5c1cc6e9 = gettime() + randomintrange(8000, 10000);
       break;
-    case # "hash_8e170ae91588f20":
+    case #"hash_8e170ae91588f20":
       entity.ai.var_5c1cc6e9 = gettime() + randomintrange(6500, 7500);
       break;
     default:
@@ -1802,8 +1802,8 @@ function_2c58bc39(entity) {
   stage = self.ai.var_112ec817;
 
   switch (stage) {
-    case # "hash_8e170ae91588f20":
-    case # "elephant_stage_1":
+    case #"hash_8e170ae91588f20":
+    case #"elephant_stage_1":
       function_ab5aea01(entity);
       break;
     default:
@@ -1902,17 +1902,17 @@ setup_devgui() {
     }
 
     switch (cmd) {
-      case # "spawn_phase1":
+      case #"spawn_phase1":
         level thread spawn_elephant(#"hash_266f53fb994e6120");
         break;
-      case # "spawn_phase2":
+      case #"spawn_phase2":
         level.var_a52a5487 = 1;
         level thread spawn_elephant(#"hash_266f56fb994e6639");
         break;
-      case # "kill":
+      case #"kill":
         function_6c8289fe();
         break;
-      case # "stage_2":
+      case #"stage_2":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1924,7 +1924,7 @@ setup_devgui() {
         }
 
         break;
-      case # "charge_enable":
+      case #"charge_enable":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1932,7 +1932,7 @@ setup_devgui() {
         }
 
         break;
-      case # "charge_disable":
+      case #"charge_disable":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1940,7 +1940,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hide_heart":
+      case #"hide_heart":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1948,7 +1948,7 @@ setup_devgui() {
         }
 
         break;
-      case # "show_heart":
+      case #"show_heart":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1956,7 +1956,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hide_head":
+      case #"hide_head":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1964,7 +1964,7 @@ setup_devgui() {
         }
 
         break;
-      case # "show_head":
+      case #"show_head":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1972,17 +1972,17 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_6f54f417f7b5ac51":
+      case #"hash_6f54f417f7b5ac51":
         level flag::set(#"flag_main_quest_completed");
         setDvar(#"hash_3065419bcba97739", 1);
         break;
-      case # "hash_484a268dfc6c97aa":
+      case #"hash_484a268dfc6c97aa":
         setDvar(#"zombie_default_max", 0);
         setDvar(#"hash_2b64162aa40fe2bb", 1);
         level flag::set(#"flag_main_quest_completed");
         setDvar(#"hash_3065419bcba97739", 1);
         break;
-      case # "hash_1b7f90925f6498e3":
+      case #"hash_1b7f90925f6498e3":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1990,7 +1990,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_503e90ea2aaf5f30":
+      case #"hash_503e90ea2aaf5f30":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -1998,7 +1998,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_5e18a71c0cbda56a":
+      case #"hash_5e18a71c0cbda56a":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -2006,7 +2006,7 @@ setup_devgui() {
         }
 
         break;
-      case # "force_ground_attack":
+      case #"force_ground_attack":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -2016,7 +2016,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_618d48cfd9850a9a":
+      case #"hash_618d48cfd9850a9a":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -2026,7 +2026,7 @@ setup_devgui() {
         }
 
         break;
-      case # "force_projectile_attack":
+      case #"force_projectile_attack":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {
@@ -2036,7 +2036,7 @@ setup_devgui() {
         }
 
         break;
-      case # "hash_69cb3828846de716":
+      case #"hash_69cb3828846de716":
         elephants = getaiarchetypearray(#"elephant");
 
         foreach(elephant in elephants) {

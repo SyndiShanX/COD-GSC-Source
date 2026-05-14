@@ -36,36 +36,36 @@ function add_zombie_powerup(powerup_name, client_field_name, clientfield_version
   }
 
   switch (powerup_name) {
-    case # "full_ammo":
+    case #"full_ammo":
       str_rule = "zmPowerupMaxAmmo";
       break;
-    case # "fire_sale":
+    case #"fire_sale":
       str_rule = "zmPowerupFireSale";
       break;
-    case # "bonus_points_player_shared":
-    case # "bonus_points_player":
-    case # "bonus_points_team":
+    case #"bonus_points_player_shared":
+    case #"bonus_points_player":
+    case #"bonus_points_team":
       str_rule = "zmPowerupChaosPoints";
       break;
-    case # "free_perk":
+    case #"free_perk":
       str_rule = "zmPowerupFreePerk";
       break;
-    case # "nuke":
+    case #"nuke":
       str_rule = "zmPowerupNuke";
       break;
-    case # "hero_weapon_power":
+    case #"hero_weapon_power":
       str_rule = "zmPowerupSpecialWeapon";
       break;
-    case # "insta_kill":
+    case #"insta_kill":
       str_rule = "zmPowerupInstakill";
       break;
-    case # "double_points":
+    case #"double_points":
       str_rule = "zmPowerupDouble";
       break;
-    case # "carpenter":
+    case #"carpenter":
       str_rule = "zmPowerupCarpenter";
       break;
-    case # "cranked_pause":
+    case #"cranked_pause":
       str_rule = "zmPowerupCrankedPause";
       break;
     default:

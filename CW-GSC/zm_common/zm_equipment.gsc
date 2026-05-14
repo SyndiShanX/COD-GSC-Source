@@ -827,11 +827,11 @@ function function_7d948481(n_boss = 0.1, var_5765a72a = 0.25, n_special = 0.5, n
   }
 
   switch (self.zm_ai_category) {
-    case # "boss":
+    case #"boss":
       return n_boss;
-    case # "elite":
+    case #"elite":
       return var_5765a72a;
-    case # "special":
+    case #"special":
       return n_special;
     default:
       return n_basic;
@@ -866,7 +866,7 @@ function function_379f6b5d(n_base_damage, weapon, aicategory = #"normal", maxhea
 
     if(isDefined(maxhealth)) {
       switch (aicategory) {
-        case # "normal":
+        case #"normal":
           var_2f5a8007 = maxhealth * damagestruct.var_aff13429 / 100;
 
           if(var_5d7b4163 > var_2f5a8007) {
@@ -874,7 +874,7 @@ function function_379f6b5d(n_base_damage, weapon, aicategory = #"normal", maxhea
           }
 
           break;
-        case # "special":
+        case #"special":
           var_2f5a8007 = maxhealth * damagestruct.var_e9cf20bf / 100;
 
           if(var_5d7b4163 > var_2f5a8007) {
@@ -882,7 +882,7 @@ function function_379f6b5d(n_base_damage, weapon, aicategory = #"normal", maxhea
           }
 
           break;
-        case # "elite":
+        case #"elite":
           var_2f5a8007 = maxhealth * damagestruct.var_867d16a0 / 100;
 
           if(var_5d7b4163 > var_2f5a8007) {
@@ -890,7 +890,7 @@ function function_379f6b5d(n_base_damage, weapon, aicategory = #"normal", maxhea
           }
 
           break;
-        case # "boss":
+        case #"boss":
           var_2f5a8007 = maxhealth * damagestruct.var_e53a0e14 / 100;
 
           if(var_5d7b4163 > var_2f5a8007) {

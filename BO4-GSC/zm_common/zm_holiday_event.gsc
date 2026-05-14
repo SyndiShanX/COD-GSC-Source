@@ -288,16 +288,16 @@ devgui() {
     str_command = getdvarstring(#"hash_83ca4038b5f2453", "<dev string:x24d>");
 
     switch (str_command) {
-      case # "green_eyes":
+      case #"green_eyes":
         level thread function_705afbf2();
         break;
-      case # "transfer_soul":
+      case #"transfer_soul":
         level thread function_cf9e485();
         break;
-      case # "hash_9411b0f797691e1":
+      case #"hash_9411b0f797691e1":
         level thread function_74441f15();
         break;
-      case # "toggle_debug":
+      case #"toggle_debug":
         if(!isDefined(level.var_fa38e985)) {
           level.var_fa38e985 = 1;
         } else {
