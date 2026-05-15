@@ -40,10 +40,11 @@ main() {
   precacheLevelStuff();
   vehicleScripts();
 
-  if(level.console)
+  if(level.console) {
     level.hint_text_size = 1.6;
-  else
+  } else {
     level.hint_text_size = 1.2;
+  }
 
   precacheShader("dpad_laser_designator");
 
@@ -104,8 +105,9 @@ main() {
 }
 
 gameplay_logic(gametype) {
-  if(!isDefined(gametype))
+  if(!isDefined(gametype)) {
     gametype = "default";
+  }
 
   flag_init("timer_expired");
   flag_init("specop_challenge_completed");
@@ -127,10 +129,11 @@ gameplay_logic(gametype) {
   maps\_ac130::init();
   thread maps\co_hunted_amb::main();
 
-  if(level.player == level.ac130gunner)
+  if(level.player == level.ac130gunner) {
     level.ground_player = level.player2;
-  else
+  } else {
     level.ground_player = level.player;
+  }
 
   level.ground_player thread add_beacon_effect();
   level.ground_player thread hint_timeout();
@@ -202,10 +205,11 @@ move_enemies_to_closest_goal_radius(gametype) {
   spawners = getspawnerarray();
   array_thread(spawners, ::add_spawn_function, ::create_hunter_enemy);
 
-  if(gametype == "specop")
+  if(gametype == "specop") {
     move_deadlier_hunters_to_new_goal(level.current_goal);
-  else
+  } else {
     move_hunters_to_new_goal(level.current_goal);
+  }
 
   while(1) {
     closest_goal = getclosest(level.ground_player.origin, goals);
@@ -213,18 +217,20 @@ move_enemies_to_closest_goal_radius(gametype) {
     if(level.current_goal != closest_goal) {
       level.current_goal = closest_goal;
 
-      if(gametype == "specop")
+      if(gametype == "specop") {
         move_deadlier_hunters_to_new_goal(closest_goal);
-      else
+      } else {
         move_hunters_to_new_goal(closest_goal);
+      }
     }
     wait 1;
   }
 }
 
 create_hunter_enemy() {
-  if(self.team != "axis")
+  if(self.team != "axis") {
     return;
+  }
   level.hunter_enemies[self.unique_id] = self;
   self setgoalpos(level.current_goal.origin);
 
@@ -236,17 +242,19 @@ create_hunter_enemy() {
 move_hunters_to_new_goal(closest_goal) {
   waittillframeend;
 
-  foreach(enemy in level.hunter_enemies)
-  enemy setgoalpos(closest_goal.origin);
+  foreach(enemy in level.hunter_enemies) {
+    enemy setgoalpos(closest_goal.origin);
+  }
 }
 
 move_deadlier_hunters_to_new_goal(closest_goal) {
   waittillframeend;
 
-  if(RandomInt(100) < CONST_specop_difficulty)
+  if(RandomInt(100) < CONST_specop_difficulty) {
     enemy setgoalpos(closest_goal.origin);
-  else
+  } else {
     enemy setgoalentity(level.ground_player);
+  }
 }
 }
 
@@ -263,18 +271,20 @@ hint_timeout() {
 }
 
 ShouldBreakLaserHintPrint() {
-  if(!isDefined(level.ground_player))
+  if(!isDefined(level.ground_player)) {
     return false;
-  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0)
+  } else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0) {
     return true;
-  else
+  } else {
     return level.ground_player ent_flag("player_used_laser");
+  }
 }
 
 ac130_change_weapon_hint() {
   wait 12;
-  if(!flag("player_changed_weapons"))
+  if(!flag("player_changed_weapons")) {
     level.ac130gunner thread display_hint("ac130_changed_weapons");
+  }
 }
 
 hintPrint_coop(string) {
@@ -479,18 +489,20 @@ enemy_monitor() {
 
 spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
-    if(getDvar("no_respawn", 1) == "1")
+    if(getDvar("no_respawn", 1) == "1") {
       return;
-    else
+    } else {
       level.selection = 0;
+    }
   }
   s_name = level.enemy_force[level.selection].name;
   s_number = level.selection;
   level.selection++;
 
   if(level.enemy_force[s_number].type == "one_use_vehicle") {
-    if(level.enemy_force[s_number].drove)
+    if(level.enemy_force[s_number].drove) {
       return;
+    }
     vehicle = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(s_name);
     level.enemy_force[s_number].drove = true;
     return;
@@ -502,8 +514,9 @@ spawn_enemy_group() {
   }
 
   enemy_spawners = getEntArray(s_name, "targetname");
-  for(i = 0; i < enemy_spawners.size; i++)
+  for(i = 0; i < enemy_spawners.size; i++) {
     guy = enemy_spawners[i] spawn_ai();
+  }
 
   wait 1;
 }
@@ -514,14 +527,17 @@ enemy_monitor_loop() {
     total = enemies.size;
     roaming = total;
 
-    for(i = 0; i < enemies.size; i++)
-      if(isDefined(enemies[i].script_noteworthy))
-        if(enemies[i].script_noteworthy == "defender")
+    for(i = 0; i < enemies.size; i++) {
+      if(isDefined(enemies[i].script_noteworthy)) {
+        if(enemies[i].script_noteworthy == "defender") {
           roaming--;
-
-    println("roaming/total: " + roaming + "/" + total);
-    if(roaming < 13)
+        }
+      }
+      println("roaming/total: " + roaming + "/" + total);
+    }
+    if(roaming < 13) {
       spawn_enemy_group();
+    }
     wait 1;
   }
 }
@@ -544,8 +560,9 @@ timer_start(gametype) {
   }
   assert(isDefined(level.challenge_time_limit));
 
-  foreach(player in level.players)
-  player.so_infohud_toggle_state = "none";
+  foreach(player in level.players) {
+    player.so_infohud_toggle_state = "none";
+  }
   enable_challenge_timer("leaving_crash_site", "specop_challenge_completed");
 
   level.ac130player.hud_so_timer_msg.x -= 50;
@@ -628,8 +645,9 @@ threeD_objective_hint(shader, destroyer_msg) {
 
 kill_after_time(time) {
   wait(time);
-  if(isalive(self))
+  if(isalive(self)) {
     self kill();
+  }
 }
 
 set_thermal_LOD() {

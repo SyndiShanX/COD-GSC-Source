@@ -878,13 +878,15 @@ handler_yards_to_house_destroyer() {
   autosave_by_name("yards");
 
   if(isalive(level.worm)) {
-    if(isDefined(level.worm.magic_bullet_shield))
+    if(isDefined(level.worm.magic_bullet_shield)) {
       level.worm thread stop_magic_bullet_shield();
+    }
   }
   level.raptor pushplayer(false);
   level.taco pushplayer(false);
-  if(isalive(level.worm))
+  if(isalive(level.worm)) {
     level.worm pushplayer(false);
+  }
 
   thread enable_water_fx();
 
@@ -978,8 +980,9 @@ handler_crash() {
   activate_trigger_with_targetname("move_to_wells_intro");
 
   bank_nates_attackers = getEntArray("bank_nates_attackers", "targetname");
-  foreach(spawner in bank_nates_attackers)
-  guy = spawner spawn_ai();
+  foreach(spawner in bank_nates_attackers) {
+    guy = spawner spawn_ai();
+  }
 
   flag_wait("crash_objective");
   autosave_by_name("crash_site");
@@ -1014,8 +1017,9 @@ police_car_cover_moment() {
 }
 
 dialog_wells_intro() {
-  if(flag("player_on_roof"))
+  if(flag("player_on_roof")) {
     return;
+  }
   level endon("player_on_roof");
 
   thread battlechatter_off("allies");
@@ -1112,8 +1116,9 @@ handler_crash_to_roof() {
   wait 3;
 
   enemies = getaiarray("axis");
-  foreach(guy in enemies)
-  guy thread rush_restaurant_enemies_setup();
+  foreach(guy in enemies) {
+    guy thread rush_restaurant_enemies_setup();
+  }
 
   level.truck_group_enemies_count_lives = 0;
   level.truck_group_enemies_alive = 0;
@@ -1133,8 +1138,9 @@ handler_crash_to_roof() {
   thread dialog_foot_mobiles();
 
   wait 1;
-  while(level.truck_group_enemies_alive > 5)
+  while(level.truck_group_enemies_alive > 5) {
     wait 1;
+  }
 
   autosave_by_name("trucks_to_north");
   thread handler_roof_north_side();
@@ -1174,8 +1180,9 @@ handler_roof_north_side() {
 
   thread wait_to_spawn_diner_defenders();
 
-  while(level.truck_group_enemies_alive > 5)
+  while(level.truck_group_enemies_alive > 5) {
     wait 1;
+  }
 
   level.obj_direction = "west";
 
@@ -1216,21 +1223,24 @@ handler_roof_north_side() {
 
 handler_roof_to_diner() {
   level.obj_direction = "west";
-  if(isDefined(level.btr80_smash))
+  if(isDefined(level.btr80_smash)) {
     thread btr80_smash();
+  }
 
   thread set_up_predator_drone_control_pickup();
   thread hellfire_attacks();
 
   friendlies = getaiarray("allies");
-  foreach(friend in friendlies)
-  friend cleargoalvolume();
+  foreach(friend in friendlies) {
+    friend cleargoalvolume();
+  }
 
   thread friendlies_try_to_get_off_roof();
 
   taco_scopes_diner = getnode("taco_scopes_diner", "targetname");
-  if(isDefined(taco_scopes_diner))
+  if(isDefined(taco_scopes_diner)) {
     level.taco SetGoalNode(taco_scopes_diner);
+  }
 
   thread dialog_hellfire_attack_reaction();
 
@@ -1291,8 +1301,9 @@ handler_diner_to_burgertown() {
 
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
-  foreach(redshirt in level.redshirts)
-  redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+  foreach(redshirt in level.redshirts) {
+    redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+  }
 
   flag_set("move_president_to_prep");
 
@@ -1338,8 +1349,9 @@ handler_vip_escort() {
 
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
-  foreach(redshirt in level.redshirts)
-  redshirt thread smart_barney_on_raptor(end_goal, end_volume);
+  foreach(redshirt in level.redshirts) {
+    redshirt thread smart_barney_on_raptor(end_goal, end_volume);
+  }
 
   autosave_by_name("defend_prez");
 
@@ -1410,12 +1422,14 @@ handler_defend_BT() {
   thread spawn_rpg_redshirts();
 
   attacker = undefined;
-  if(isalive(level.attack_heli))
+  if(isalive(level.attack_heli)) {
     level.attack_heli waittill("death", attacker);
+  }
   flag_set("first_attack_heli_dead");
 
-  if(isDefined(attacker) && isPlayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker)) {
     thread dialog_shot_down_heli();
+  }
   thread autosave_by_name("heli_death");
 
   flag_wait("second_attack_heli_spawned");
@@ -1428,12 +1442,14 @@ handler_defend_BT() {
   thread dialog_second_attack_heli();
 
   attacker = undefined;
-  if(isalive(level.attack_heli))
+  if(isalive(level.attack_heli)) {
     level.attack_heli waittill("death", attacker);
+  }
   flag_set("second_attack_heli_dead");
 
-  if(isDefined(attacker) && isPlayer(attacker))
+  if(isDefined(attacker) && isPlayer(attacker)) {
     thread dialog_shot_down_heli();
+  }
   thread autosave_by_name("heli_death");
 
   wait 12;
@@ -1472,15 +1488,18 @@ handler_convoy() {
   center_spawner = undefined;
   convoy = getEntArray("convoy", "targetname");
   foreach(member in convoy) {
-    if(!isDefined(member.script_noteworthy))
+    if(!isDefined(member.script_noteworthy)) {
       continue;
-    if(member.script_noteworthy == "obj_vehicle")
+    }
+    if(member.script_noteworthy == "obj_vehicle") {
       center_spawner = member;
+    }
   }
 
   if(isDefined(center_spawner)) {
-    while(player_looking_at(center_spawner.origin, 0, true) && flag("player_on_roof"))
+    while(player_looking_at(center_spawner.origin, 0, true) && flag("player_on_roof")) {
       wait 1;
+    }
   }
 
   thread music_invasion_regroup_and_end();
@@ -1498,8 +1517,9 @@ handler_convoy() {
     vehicle thread setup_brakes();
     if(isDefined(member.script_noteworthy)) {
       humvees[humvees.size] = vehicle;
-      if(member.script_noteworthy == "obj_vehicle")
+      if(member.script_noteworthy == "obj_vehicle") {
         level.convoy = vehicle;
+      }
     }
   }
   flag_set("time_to_goto_convoy");
@@ -1551,13 +1571,14 @@ stinger_hint() {
     level.player waittill("begin_firing");
     weap = level.player GetCurrentWeapon();
     if(weap == "stinger") {
-      if(level.player playerads() == 1.0)
+      if(level.player playerads() == 1.0) {
         return;
-      else {
-        if(is_command_bound("+toggleads_throw"))
+      } else {
+        if(is_command_bound("+toggleads_throw")) {
           display_hint_timeout("hint_toggle_ads_with_stinger", 5);
-        else
+        } else {
           display_hint_timeout("hint_ads_with_stinger", 5);
+        }
       }
     }
   }
@@ -1566,10 +1587,11 @@ stinger_hint() {
 should_break_ads_with_stinger() {
   weap = level.player GetCurrentWeapon();
   if(weap == "stinger") {
-    if(level.player playerads() == 1.0)
+    if(level.player playerads() == 1.0) {
       return true;
-    else
+    } else {
       return false;
+    }
   } else {
     return true;
   }
@@ -1631,8 +1653,9 @@ friendlies_enter_humvees(humvees) {
   humvees_left = humvees.size;
   while(humvees_left) {
     new_guys = spawn_humvee_boarders();
-    foreach(guy in new_guys)
-    thread guy_runtovehicle_load(guy, humvees[humvees_left - 1]);
+    foreach(guy in new_guys) {
+      thread guy_runtovehicle_load(guy, humvees[humvees_left - 1]);
+    }
     humvees_left--;
     wait 3;
   }
@@ -1679,8 +1702,9 @@ dialog_enemies_on_roof() {
     println(other.classname + "" + other.origin);
     level.raptor dialogue_queue(dialog[current_line]);
     current_line++;
-    if(current_line >= dialog.size)
+    if(current_line >= dialog.size) {
       current_line = 0;
+    }
 
     wait 10;
   }
@@ -1695,10 +1719,12 @@ wait_to_spawn_diner_defenders() {
 
 setup_remote_missile_target_guy() {
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "paradrop_guy_left")
+    if(self.script_noteworthy == "paradrop_guy_left") {
       return;
-    if(self.script_noteworthy == "paradrop_guy_right")
+    }
+    if(self.script_noteworthy == "paradrop_guy_right") {
       return;
+    }
   }
   if(isDefined(self.ridingvehicle)) {
     self endon("death");
@@ -1739,8 +1765,9 @@ kill_friendlies_on_roof() {
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
     if(friend istouching(roof_volume)) {
-      if(isDefined(friend.magic_bullet_shield))
+      if(isDefined(friend.magic_bullet_shield)) {
         friend stop_magic_bullet_shield();
+      }
       friend kill();
       wait .5;
     }
@@ -1797,18 +1824,21 @@ friendlies_shift_north() {
 spawn_nates_defenders() {
   flag_wait("leaving_gas_station");
 
-  if(flag("nates_bomb_incoming"))
+  if(flag("nates_bomb_incoming")) {
     return;
+  }
   nates_defenders = getEntArray("nates_defenders", "script_noteworthy");
-  foreach(guy in nates_defenders)
-  guy spawn_ai();
+  foreach(guy in nates_defenders) {
+    guy spawn_ai();
+  }
 }
 
 spawn_nates_attackers_in_alley() {
   flag_wait("spawn_nates_attackers_in_alley");
   alley_nates_attackers = getEntArray("alley_nates_attackers", "script_noteworthy");
-  foreach(guy in alley_nates_attackers)
-  guy spawn_ai();
+  foreach(guy in alley_nates_attackers) {
+    guy spawn_ai();
+  }
 }
 
 spawn_battle_when_in_uav() {
@@ -1879,8 +1909,9 @@ dialog_come_to_convoy() {
 dialog_uav_the_infantry() {
   wait 8;
 
-  if(isDefined(level.player.is_controlling_UAV))
+  if(isDefined(level.player.is_controlling_UAV)) {
     return;
+  }
   level endon("player_is_controlling_UAV");
 
   if(cointoss()) {
@@ -1931,10 +1962,11 @@ dialog_get_stinger() {
   while(1) {
     needs_stinger = true;
     weapons = level.player GetWeaponsListAll();
-    foreach(weap in weapons)
-    if(weap == "stinger")
-      needs_stinger = false;
-
+    foreach(weap in weapons) {
+      if(weap == "stinger") {
+        needs_stinger = false;
+      }
+    }
     if(!needs_stinger) {
       wait 3;
       continue;
@@ -1945,29 +1977,35 @@ dialog_get_stinger() {
       selected_line = diner_dialog[diner_dialog_current];
       radio_dialogue(selected_line);
 
-      if(selected_line == "inv_tco_roofofnates")
+      if(selected_line == "inv_tco_roofofnates") {
         radio_dialogue("inv_tco_roofofnates2");
+      }
 
-      if(selected_line == "inv_tco_killthathelo")
+      if(selected_line == "inv_tco_killthathelo") {
         radio_dialogue("inv_tco_killthathelo2");
+      }
 
       diner_dialog_current++;
-      if(diner_dialog_current >= diner_dialog.size)
+      if(diner_dialog_current >= diner_dialog.size) {
         diner_dialog_current = 0;
+      }
     } else {
       selected_line = nates_dialog[nates_dialog_current];
 
       radio_dialogue(selected_line);
 
-      if(selected_line == "inv_tco_dispatchchopper")
+      if(selected_line == "inv_tco_dispatchchopper") {
         radio_dialogue("inv_tco_dispatchchopper2");
+      }
 
-      if(selected_line == "inv_tco_insidediner")
+      if(selected_line == "inv_tco_insidediner") {
         radio_dialogue("inv_tco_insidediner2");
+      }
 
       nates_dialog_current++;
-      if(nates_dialog_current >= nates_dialog.size)
+      if(nates_dialog_current >= nates_dialog.size) {
         nates_dialog_current = 0;
+      }
     }
     wait 50;
   }
@@ -2036,15 +2074,17 @@ fire_stinger_at_uav() {
   }
   Missile_DeleteAttractor(attractor);
 
-  if(isDefined(newMissile))
+  if(isDefined(newMissile)) {
     newMissile delete();
+  }
   playFX(getfx("uav_explosion"), old_org);
 
   level.uav_is_destroyed = true;
   level.player maps\_remotemissile::remove_uav_weapon();
 
-  if(isDefined(level.uav))
+  if(isDefined(level.uav)) {
     level.uav delete();
+  }
   level notify("uav_destroyed");
 
   wait 2;
@@ -2086,8 +2126,9 @@ spawn_redshirts_during_BT_defend() {
     }
   }
 
-  if(!isDefined(level.redshirts))
+  if(!isDefined(level.redshirts)) {
     level.redshirts = [];
+  }
 
   level endon("time_to_goto_convoy");
 
@@ -2126,8 +2167,9 @@ smart_barney(end_flag, end_goal, end_volume) {
 
   if(!isDefined(self.favoriteenemy)) {
     goal_enemies = end_volume get_ai_touching_volume("axis");
-    if(goal_enemies.size)
+    if(goal_enemies.size) {
       self.favoriteenemy = goal_enemies[0];
+    }
   }
 
   while(!flag(end_flag)) {
@@ -2164,10 +2206,11 @@ smart_roaming_barney() {
   self thread friendly_adjust_movement_speed();
   self.goalheight = 80;
   self.useChokePoints = false;
-  if(!isDefined(self.big_goal))
+  if(!isDefined(self.big_goal)) {
     self.goalradius = 500;
-  else
+  } else {
     self.goalradius = 1000;
+  }
   self.fixednode = false;
 
   nates_roof_goal_volume = getent("nates_roof_goal_volume", "targetname");
@@ -2204,8 +2247,9 @@ smart_roaming_barney() {
 }
 
 enemy_monitor() {
-  if(!isDefined(level.num_of_enemy_forces_spawned))
+  if(!isDefined(level.num_of_enemy_forces_spawned)) {
     level.num_of_enemy_forces_spawned = 0;
+  }
 
   level.enemy_force[0] = "taco_enemies";
   level.enemy_force[1] = "gas_station_enemies";
@@ -2270,16 +2314,19 @@ enemy_monitor() {
         continue;
       }
 
-      if(level.num_of_enemy_forces_spawned >= 2)
+      if(level.num_of_enemy_forces_spawned >= 2) {
         thread fire_stinger_at_uav();
+      }
 
       level.num_of_enemy_forces_spawned++;
       level notify("enemy_group_spawning");
       println(" level.num_of_enemy_forces_spawned: " + level.num_of_enemy_forces_spawned);
-      if(level.num_of_enemy_forces_spawned == 1)
+      if(level.num_of_enemy_forces_spawned == 1) {
         thread dialog_uav_the_infantry();
-      if(level.num_of_enemy_forces_spawned == 2)
+      }
+      if(level.num_of_enemy_forces_spawned == 2) {
         thread dialog_uav_the_infantry();
+      }
 
       spawn_enemy_group();
     }
@@ -2290,23 +2337,29 @@ enemy_monitor() {
 spawn_enemy_group() {
   closest = getclosest(level.player.origin, level.enemy_groups);
 
-  if(closest.target == level.enemy_force[level.selection])
+  if(closest.target == level.enemy_force[level.selection]) {
     level.selection++;
-  if(level.selection >= level.enemy_force.size)
+  }
+  if(level.selection >= level.enemy_force.size) {
     level.selection = 0;
+  }
 
   selection = level.enemy_force[level.selection];
 
   level.selection++;
-  if(level.selection >= level.enemy_force.size)
+  if(level.selection >= level.enemy_force.size) {
     level.selection = 0;
+  }
 
-  if(selection == "bank_enemies")
+  if(selection == "bank_enemies") {
     level.obj_direction = "north";
-  if(selection == "gas_station_enemies")
+  }
+  if(selection == "gas_station_enemies") {
     level.obj_direction = "west";
-  if(selection == "taco_enemies")
+  }
+  if(selection == "taco_enemies") {
     level.obj_direction = "east";
+  }
 
   wait 1;
 
@@ -2329,9 +2382,11 @@ spawn_enemy_group() {
 
   if(!isDefined(level.uavTargetPos)) {
     if(level.num_of_enemy_forces_spawned < 3) {
-      foreach(group in level.enemy_groups)
-      if(group.target == selection)
-        level.uavTargetPos = group.origin;
+      foreach(group in level.enemy_groups) {
+        if(group.target == selection) {
+          level.uavTargetPos = group.origin;
+        }
+      }
     }
   }
 }
@@ -2405,8 +2460,9 @@ bt_locker_door_close() {
   thread radio_dialogue("inv_six_gotthepresident2");
 
   if(isalive(level.president)) {
-    if(isDefined(level.president.being_carried))
+    if(isDefined(level.president.being_carried)) {
       level.president waittill("stop_putdown");
+    }
 
     level.president stop_magic_bullet_shield();
     level.president delete();
@@ -2475,8 +2531,9 @@ bomb_nates() {
   exploder(333);
 
   bomb_center = (257.2, -4669.1, 2381);
-  if(distance(level.player.origin, bomb_center) < 500)
+  if(distance(level.player.origin, bomb_center) < 500) {
     level.player dodamage((level.player.health + 1000), bomb_center);
+  }
 
   delaythread(2, ::falling_debri_on_player);
 
@@ -2495,8 +2552,9 @@ falling_debri_on_player() {
 
 remove_tvs() {
   destructible_tvs = getEntArray("exploder_tv_333", "script_noteworthy");
-  foreach(tvi, tv in destructible_tvs)
-  tv Delete();
+  foreach(tvi, tv in destructible_tvs) {
+    tv Delete();
+  }
 }
 
 enable_water_fx() {
@@ -2510,8 +2568,9 @@ friendlies_try_to_get_off_roof() {
   roof_volume = getent("roof_volume", "targetname");
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
-    if(friend == level.taco)
+    if(friend == level.taco) {
       continue;
+    }
     if(friend istouching(roof_volume)) {
       friend setgoalnode(off_roof_array[pos]);
       pos++;
@@ -2526,10 +2585,11 @@ setup_count_predator_infantry_kills() {
 
   wait .05;
 
-  if(!isDefined(level.enemies_killed))
+  if(!isDefined(level.enemies_killed)) {
     level.enemies_killed = 1;
-  else
+  } else {
     level.enemies_killed++;
+  }
 }
 
 dialog_handle_predator_infantry_kills() {
@@ -2562,8 +2622,9 @@ dialog_handle_predator_infantry_kills() {
 
     wait .1;
 
-    if(isDefined(level.uav_killstats["ai"]))
+    if(isDefined(level.uav_killstats["ai"])) {
       kills = level.uav_killstats["ai"];
+    }
 
     if(kills == 0) {
       continue;
@@ -2586,15 +2647,17 @@ dialog_handle_predator_infantry_kills() {
     if(kills >= 10) {
       radio_dialogue(dialog10[current_dialog10]);
       current_dialog10++;
-      if(current_dialog10 >= dialog10.size)
+      if(current_dialog10 >= dialog10.size) {
         current_dialog10 = 0;
+      }
       continue;
     }
     if(kills >= 5) {
       radio_dialogue(dialog5[current_dialog5]);
       current_dialog5++;
-      if(current_dialog5 >= dialog5.size)
+      if(current_dialog5 >= dialog5.size) {
         current_dialog5 = 0;
+      }
       continue;
     } else {
       if(said_direct_hit) {
@@ -2655,20 +2718,23 @@ prep_prez_for_run() {
 }
 
 wounded_carry_attackers() {
-  while((getaiarray("axis")).size > 4)
+  while((getaiarray("axis")).size > 4) {
     wait 1;
+  }
 
   wounded_carry_attackers_gas = getEntArray("wounded_carry_attackers_gas", "targetname");
   array_thread(wounded_carry_attackers_gas, ::spawn_ai);
 
-  while((getaiarray("axis")).size > 4)
+  while((getaiarray("axis")).size > 4) {
     wait 1;
+  }
 
   wounded_carry_attackers = getEntArray("wounded_carry_attackers_bus", "targetname");
   array_thread(wounded_carry_attackers, ::spawn_ai);
 
-  while((getaiarray("axis")).size > 4)
+  while((getaiarray("axis")).size > 4) {
     wait 1;
+  }
 
   wounded_carry_attackers_TC = getEntArray("wounded_carry_attackers_TC", "targetname");
   array_thread(wounded_carry_attackers_TC, ::spawn_ai);
@@ -2683,8 +2749,9 @@ wells_cover_path() {
 
   current_node = wells_cover_path;
   while(1) {
-    while(distance(level.wells.origin, level.raptor.origin) > 300)
+    while(distance(level.wells.origin, level.raptor.origin) > 300) {
       wait .1;
+    }
 
     if(!isDefined(current_node.target)) {
       break;
@@ -2729,8 +2796,9 @@ dialog_regroup_at_nates_nag() {
   diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
-  if(flag("leaving_diner"))
+  if(flag("leaving_diner")) {
     return;
+  }
   level endon("leaving_diner");
 
   while(1) {
@@ -2747,8 +2815,9 @@ dialog_regroup_at_nates_nag() {
 }
 
 spawn_wells(start_ent) {
-  if(isDefined(level.wells))
+  if(isDefined(level.wells)) {
     return;
+  }
   spawner = getent("wells", "script_noteworthy");
   level.wells = spawner spawn_ai();
 
@@ -2761,8 +2830,9 @@ spawn_wells(start_ent) {
 }
 
 spawn_president() {
-  if(isDefined(level.president))
+  if(isDefined(level.president)) {
     return;
+  }
   president_spawner = getent("president", "script_noteworthy");
   level.president = president_spawner spawn_ai();
 }
@@ -2982,8 +3052,9 @@ dialog_two_bmps_from_north() {
 }
 
 dialog_clear_burgertown_nag() {
-  if(flag("burger_town_lower_cleared"))
+  if(flag("burger_town_lower_cleared")) {
     return;
+  }
   level endon("burger_town_lower_cleared");
   wait 60;
   while(1) {
@@ -3017,10 +3088,11 @@ spawn_rpg_redshirts() {
     guy = farthest_spawner spawn_ai();
     respawns--;
 
-    if(isalive(guy))
+    if(isalive(guy)) {
       guy waittill("death");
-    else
+    } else {
       wait 1;
+    }
   }
 }
 
@@ -3038,26 +3110,30 @@ setup_rpg_redshirts() {
   self thread stop_magic_bullet_shield();
 
   self endon("death");
-  while(!isalive(level.attack_heli))
+  while(!isalive(level.attack_heli)) {
     wait 1;
+  }
   self.combatmode = "no_cover";
   self setentitytarget(level.attack_heli);
   wait 1;
   self.combatmode = "no_cover";
 
-  while(isalive(level.attack_heli))
+  while(isalive(level.attack_heli)) {
     wait 1;
+  }
 
   self clearentitytarget();
 }
 
 spawn_redshirts(desired_num) {
-  if(!isDefined(desired_num))
+  if(!isDefined(desired_num)) {
     desired_num = 3;
-  if(flag("president_in_BT_meat_locker"))
+  }
+  if(flag("president_in_BT_meat_locker")) {
     group = "redshirt_spawn_group_BT";
-  else
+  } else {
     group = "redshirt_spawn_group";
+  }
 
   redshirt_spawn_groups = getStructArray(group, "targetname");
   farthest = getfarthest(level.player.origin, redshirt_spawn_groups);
@@ -3077,13 +3153,15 @@ spawn_redshirts(desired_num) {
 redshirts_respawn(redshirts_desired) {
   current_redshirts = [];
   foreach(redshirt in level.redshirts) {
-    if(isalive(redshirt))
+    if(isalive(redshirt)) {
       current_redshirts[current_redshirts.size] = redshirt;
+    }
   }
   num_desired = redshirts_desired - current_redshirts.size;
   new_guys = [];
-  if(num_desired > 0)
+  if(num_desired > 0) {
     new_guys = spawn_redshirts(num_desired);
+  }
 
   guys = array_merge(current_redshirts, new_guys);
   return guys;
@@ -3102,8 +3180,9 @@ taco_goes_to_BT() {
 
   level.redshirts = redshirts_respawn(redshirts_desired);
 
-  foreach(redshirt in level.redshirts)
-  redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+  foreach(redshirt in level.redshirts) {
+    redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+  }
 }
 
 taco_goes_to_diner() {
@@ -3116,8 +3195,9 @@ taco_goes_to_diner() {
 
   level.taco thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
   level.redshirts = spawn_redshirts(3);
-  foreach(redshirt in level.redshirts)
-  redshirt thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
+  foreach(redshirt in level.redshirts) {
+    redshirt thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
+  }
 }
 
 smart_barney_on_raptor(end_goal, end_volume) {
@@ -3264,8 +3344,9 @@ dialog_pickup_drone_control_nag() {
 }
 
 dialog_nates_bombing_reaction() {
-  if(flag("taco_goes_to_roof"))
+  if(flag("taco_goes_to_roof")) {
     return;
+  }
   level endon("taco_goes_to_roof");
   wait 3;
 
@@ -3337,10 +3418,12 @@ hellfire_attacks() {
   if(flag("player_on_roof")) {
     rocket_target = level.player.origin;
     rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), rocket_target);
-    while(isDefined(rocket))
+    while(isDefined(rocket)) {
       wait .05;
-    if(flag("player_on_roof"))
+    }
+    if(flag("player_on_roof")) {
       level.player dodamage((level.player.health + 1000), rocket_target);
+    }
   }
 }
 
@@ -3354,8 +3437,9 @@ hellfire_attacks_after_player_got_off_roof() {
     rocket_target = level.obj_sentry.origin;
     rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), rocket_target);
     array_thread(ceiling_dust, ::drop_dust);
-    while(isDefined(rocket))
+    while(isDefined(rocket)) {
       wait .05;
+    }
     level.obj_sentry notify("deleted");
     level.obj_sentry delete();
   }
@@ -3372,16 +3456,19 @@ hellfire_attacks_after_player_got_off_roof() {
 }
 
 sentry_is_on_roof() {
-  if(isDefined(level.player.placingSentry))
+  if(isDefined(level.player.placingSentry)) {
     return false;
-  if(!isDefined(level.obj_sentry))
+  }
+  if(!isDefined(level.obj_sentry)) {
     return false;
+  }
 
   roof_volume = getent("roof_volume", "targetname");
-  if(level.obj_sentry isTouching(roof_volume))
+  if(level.obj_sentry isTouching(roof_volume)) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 drop_dust() {
@@ -3405,8 +3492,9 @@ dialog_taco_sees_uav_op() {
 
   flag_set("time_to_go_get_UAV_control");
 
-  if(flag("player_inside_nates"))
+  if(flag("player_inside_nates")) {
     autosave_by_name("go_to_diner2");
+  }
 
   wait 3;
 
@@ -3496,17 +3584,19 @@ move_raptor_wells_and_worm() {
 
 should_break_get_smoke() {
   clipCount = level.player GetWeaponAmmoStock("smoke_grenade_american");
-  if(clipCount < 1)
+  if(clipCount < 1) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 should_break_throw_smoke() {
-  if(flag("threw_smoke"))
+  if(flag("threw_smoke")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 dialog_semtex_that_bmp() {
@@ -3545,8 +3635,9 @@ dialog_semtex_that_bmp() {
 
         level.raptor dialogue_queue(throw_dialog[throw_dialog_start]);
         throw_dialog_start++;
-        if(throw_dialog_start >= throw_dialog.size)
+        if(throw_dialog_start >= throw_dialog.size) {
           throw_dialog_start = 0;
+        }
 
         level.player thread display_hint_timeout("hint_throw_smoke", 5);
       }
@@ -3554,8 +3645,9 @@ dialog_semtex_that_bmp() {
       level.player thread display_hint_timeout("hint_get_smoke", 5);
       level.raptor dialogue_queue(dialog[dialog_start]);
       dialog_start++;
-      if(dialog_start >= dialog.size)
+      if(dialog_start >= dialog.size) {
         dialog_start = 0;
+      }
     }
 
     wait 10;
@@ -3604,27 +3696,31 @@ flag_if_close_to_btr(tracker, smoke_position) {
 
   self waittill("death");
 
-  if(distance(tracker.origin, smoke_position) < 400)
+  if(distance(tracker.origin, smoke_position) < 400) {
     thread dialog_goto_alley();
-  else
+  } else {
     level notify("btr_smoke_too_far");
+  }
 }
 
 hint_if_smoke_too_far() {
-  if(flag("house_destroyer_moving_back"))
+  if(flag("house_destroyer_moving_back")) {
     return;
+  }
   level endon("house_destroyer_moving_back");
 
   level waittill("btr_smoke_too_far");
-  if(!flag("btr_smoke_starting"))
+  if(!flag("btr_smoke_starting")) {
     display_hint_timeout("hint_smoke_too_far", 5);
+  }
 }
 
 should_break_smoke_too_far() {
-  if(flag("btr_smoke_starting"))
+  if(flag("btr_smoke_starting")) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 dialog_goto_alley() {
@@ -3649,8 +3745,9 @@ dialog_goto_alley() {
 
 diner_window_traverses() {
   diner_window_traverses = getent("diner_window_traverses", "targetname");
-  if(!isDefined(diner_window_traverses))
+  if(!isDefined(diner_window_traverses)) {
     return;
+  }
   diner_window_traverses disconnectpaths();
 
   flag_wait("crash_objective");
@@ -3673,15 +3770,17 @@ truck_group_enemies_setup_retreat() {
   self endon("death");
   flag_wait("truck_guys_retreat");
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self setgoalpos(getent(self.target, "targetname").origin);
-  else
+  } else {
     self setgoalpos(getent("truck_guy_retreat_goal", "targetname").origin);
+  }
 
   self.goalradius = 32;
   self waittill("goal");
-  while(self cansee(level.player))
+  while(self cansee(level.player)) {
     wait 1;
+  }
   self kill();
 }
 
@@ -3694,8 +3793,9 @@ bank_enemies_setup_retreat() {
   self.ignoreme = true;
   self.goalradius = 32;
   self waittill("goal");
-  while(self cansee(level.player))
+  while(self cansee(level.player)) {
     wait 1;
+  }
   self kill();
 }
 
@@ -3781,28 +3881,32 @@ aim_predator_drone_at_btrs() {
     level waittill("starting_predator_drone_control");
 
     bmps = [];
-    if(isalive(level.bmp_north_mid))
+    if(isalive(level.bmp_north_mid)) {
       bmps[bmps.size] = level.bmp_north_mid;
-    if(isalive(level.bmp_north_left))
+    }
+    if(isalive(level.bmp_north_left)) {
       bmps[bmps.size] = level.bmp_north_left;
+    }
 
     if(bmps.size == 0) {
       level.uavTargetEnt = undefined;
       return;
     }
 
-    if(bmps.size > 1)
+    if(bmps.size > 1) {
       level.uavTargetEnt = (get_closest_to_player_view(bmps));
-    else
+    } else {
       level.uavTargetEnt = bmps[0];
+    }
   }
 }
 
 save_on_death() {
   self waittill("death");
 
-  if(self ent_flag("spotted_player"))
+  if(self ent_flag("spotted_player")) {
     flag_clear("bmp_has_spotted_player");
+  }
 
   level notify("bmp_died");
   level.bmps_from_north_dead++;
@@ -3829,18 +3933,21 @@ dialog_bmp_spotted_you() {
         break;
     }
     num++;
-    if(num > 2)
+    if(num > 2) {
       num = 0;
+    }
 
     wait 10;
   }
 }
 
 dialog_bmp_spotted_you_action(dialog) {
-  if(flag("player_in_diner"))
+  if(flag("player_in_diner")) {
     return;
-  if(flag("player_in_burgertown"))
+  }
+  if(flag("player_in_burgertown")) {
     return;
+  }
   if(flag("player_on_burgertown_roof")) {
     return;
   }
@@ -3885,19 +3992,25 @@ watch_for_player() {
 
   while(1) {
     wait .05;
-    if(flag("player_inside_nates"))
+    if(flag("player_inside_nates")) {
       continue;
-    if(flag("player_in_diner"))
+    }
+    if(flag("player_in_diner")) {
       continue;
-    if(flag("bmp_has_spotted_player"))
+    }
+    if(flag("bmp_has_spotted_player")) {
       continue;
-    if(distance(self.origin, level.player.origin) > 2400)
+    }
+    if(distance(self.origin, level.player.origin) > 2400) {
       continue;
-    if(distance(self.origin, level.player.origin) < level.min_btr_fighting_range)
+    }
+    if(distance(self.origin, level.player.origin) < level.min_btr_fighting_range) {
       continue;
+    }
     tag_flash_angles = self getTagAngles("tag_flash");
-    if(!within_fov(self.origin, tag_flash_angles, level.player.origin, level.cosine["25"]))
+    if(!within_fov(self.origin, tag_flash_angles, level.player.origin, level.cosine["25"])) {
       continue;
+    }
     if(!can_see_player(level.player)) {
       continue;
     }
@@ -3932,8 +4045,9 @@ new_target_think() {
   while(1) {
     self waittill("trigger", vehicle);
 
-    if(!isalive(vehicle))
+    if(!isalive(vehicle)) {
       return;
+    }
     if(vehicle.turret_busy) {
       continue;
     }
@@ -3979,8 +4093,9 @@ rush_restaurant_enemies_setup() {
 
   self.goalradius = 32;
   self waittill("goal");
-  while(self cansee(level.player))
+  while(self cansee(level.player)) {
     wait 1;
+  }
   self kill();
 }
 
@@ -4055,8 +4170,9 @@ setup_hunter_enemies() {
 }
 
 predator_death_func() {
-  if(isDefined(self.damageMod) && self.damageMod == "MOD_PROJECTILE_SPLASH" && isDefined(self.lastAttacker) && isDefined(self.lastAttacker.fired_hellfire_missile))
+  if(isDefined(self.damageMod) && self.damageMod == "MOD_PROJECTILE_SPLASH" && isDefined(self.lastAttacker) && isDefined(self.lastAttacker.fired_hellfire_missile)) {
     self.skipDeathAnim = true;
+  }
 
   return false;
 }
@@ -4093,8 +4209,9 @@ create_hunter_enemy() {
 move_hunters_to_new_goal(closest_goal) {
   waittillframeend;
 
-  foreach(enemy in level.hunter_enemies)
-  enemy setgoalpos(closest_goal.origin);
+  foreach(enemy in level.hunter_enemies) {
+    enemy setgoalpos(closest_goal.origin);
+  }
 }
 
 wounded_carry_attackers_counter() {
@@ -4183,12 +4300,15 @@ setup_raptor() {
 }
 
 is_west_group(group_name) {
-  if(group_name == "ambient_paradrop3")
+  if(group_name == "ambient_paradrop3") {
     return true;
-  if(group_name == "ambient_west_group3")
+  }
+  if(group_name == "ambient_west_group3") {
     return true;
-  if(group_name == "ambient_west_group2")
+  }
+  if(group_name == "ambient_west_group2") {
     return true;
+  }
   return false;
 }
 
@@ -4241,14 +4361,18 @@ paradrops_ambient() {
     old_selection = undefined;
 
     if(isDefined(level.obj_direction)) {
-      if(level.obj_direction == "east")
+      if(level.obj_direction == "east") {
         dir_selection = east_groups[randomint(east_groups.size)];
-      if(level.obj_direction == "north")
+      }
+      if(level.obj_direction == "north") {
         dir_selection = north_groups[randomint(north_groups.size)];
-      if(level.obj_direction == "south")
+      }
+      if(level.obj_direction == "south") {
         dir_selection = south_groups[randomint(south_groups.size)];
-      if((level.obj_direction == "west") && !flag("player_is_near_houses"))
+      }
+      if((level.obj_direction == "west") && !flag("player_is_near_houses")) {
         dir_selection = west_groups[randomint(west_groups.size)];
+      }
 
       if(isDefined(dir_selection)) {
         planes = getEntArray(dir_selection, "targetname");
@@ -4256,8 +4380,9 @@ paradrops_ambient() {
       }
     }
     if(!isDefined(planes)) {
-      if(selected >= drop_groups.size)
+      if(selected >= drop_groups.size) {
         selected = 0;
+      }
 
       group_name = drop_groups[selected];
 
@@ -4276,8 +4401,9 @@ paradrops_ambient() {
     first_plane = true;
     antonov = false;
     foreach(plane in planes) {
-      if(plane.classname == "script_vehicle_antonov")
+      if(plane.classname == "script_vehicle_antonov") {
         antonov = true;
+      }
 
       if(antonov) {
         if(first_plane) {
@@ -4296,8 +4422,9 @@ paradrops_ambient() {
 
     wait 20;
 
-    if(getDvar("invasion_minspec") == "1")
+    if(getDvar("invasion_minspec") == "1") {
       wait 80;
+    }
   }
 }
 
@@ -4347,8 +4474,9 @@ paradrop(first_plane) {
   assert(isDefined(level.paradropper_right));
 
   airplane = self thread maps\_vehicle::spawn_vehicle_and_gopath();
-  if(isDefined(first_plane))
+  if(isDefined(first_plane)) {
     airplane playLoopSound("veh_jet_passenger_slow");
+  }
   airplane.script_vehicle_selfremove = 1;
   airplane ent_flag_init("start_drop");
   airplane ent_flag_init("stop_drop");
@@ -4356,8 +4484,9 @@ paradrop(first_plane) {
   airplane endon("stop_drop");
 
   drop_time = 16;
-  if(isDefined(self.script_duration))
+  if(isDefined(self.script_duration)) {
     drop_time = self.script_duration;
+  }
 
   airplane ent_flag_wait("start_drop");
 
@@ -4398,8 +4527,9 @@ setup_paradrop_guy_left(paradrop_airplane, drop_time) {
   }
   wait drop_time;
   chute delete();
-  if(isalive(self))
+  if(isalive(self)) {
     self delete();
+  }
   level.droppers--;
   level.dropped++;
 }
@@ -4421,8 +4551,9 @@ setup_paradrop_guy_right(paradrop_airplane, drop_time) {
   }
   wait drop_time;
   chute delete();
-  if(isalive(self))
+  if(isalive(self)) {
     self delete();
+  }
   level.droppers--;
   level.dropped++;
 }
@@ -4515,8 +4646,9 @@ setup_nates_kitchen_ladder_clip() {
     nates_kitchen_ladder_clip notsolid();
 
     flag_wait("player_on_roof");
-    while(level.player istouching(nates_kitchen_ladder_clip))
+    while(level.player istouching(nates_kitchen_ladder_clip)) {
       wait 1;
+    }
 
     nates_kitchen_ladder_clip solid();
 
@@ -4531,8 +4663,9 @@ setup_bt_ktichen_ladder_clip() {
     bt_ktichen_ladder_clip notsolid();
 
     flag_wait("player_on_burgertown_roof");
-    while(level.player istouching(bt_ktichen_ladder_clip))
+    while(level.player istouching(bt_ktichen_ladder_clip)) {
       wait 1;
+    }
 
     bt_ktichen_ladder_clip solid();
 
@@ -4558,12 +4691,14 @@ add_org_to_tank_targets(ent, org, exploder) {
 roof_parachute_landing_guy_humvee() {
   roof_parachute_landing_guy_humvee = getent("humvee_ride_roof_landing", "targetname");
   level.roof_parachute_landing_guy_humvee = roof_parachute_landing_guy_humvee spawn_ai();
-  if(isDefined(level.animated_ride_in))
+  if(isDefined(level.animated_ride_in)) {
     level.roof_parachute_landing_guy_humvee.ignoreme = true;
+  }
   level.roof_parachute_landing_guy_humvee waittill("death");
 
-  if(isDefined(level.animated_ride_in))
+  if(isDefined(level.animated_ride_in)) {
     return;
+  }
   turret = level.humvee_front.mgturret[0];
   target = getent("humvee_destroyer_init_target", "targetname");
   turret_guy = turret getTurretOwner();
@@ -4602,8 +4737,9 @@ humvee_destroyer_action() {
 
   turret_guys = getEntArray("turret_guy", "script_noteworthy");
   foreach(guy in turret_guys) {
-    if(isalive(guy))
+    if(isalive(guy)) {
       guy kill();
+    }
   }
 
   for(j = 0; j < 2; j++) {
@@ -4654,8 +4790,9 @@ humvee_destroyer_fires_at_pillars_and_player() {
     house_destroyer_fire(ent.targets[i]["origin"]);
     Earthquake(0.3, .3, ent.targets[i]["origin"], 850);
 
-    if(ent.targets[i]["exploder"] > 0)
+    if(ent.targets[i]["exploder"] > 0) {
       exploder(ent.targets[i]["exploder"]);
+    }
   }
 
   wait 1;
@@ -4691,8 +4828,9 @@ setup_house_destroyer() {
 
     house_destroyer_fire(ent.targets[i]["origin"]);
 
-    if(ent.targets[i]["exploder"] > 0)
+    if(ent.targets[i]["exploder"] > 0) {
       exploder(ent.targets[i]["exploder"]);
+    }
   }
 
   t = getstruct("cop_car", "targetname");
@@ -4732,8 +4870,9 @@ setup_house_destroyer() {
 
     house_destroyer_fire(ent.targets[i]["origin"]);
 
-    if(ent.targets[i]["exploder"] > 0)
+    if(ent.targets[i]["exploder"] > 0) {
       exploder(ent.targets[i]["exploder"]);
+    }
   }
 
   self endon("stop_shooting");
@@ -4768,10 +4907,10 @@ house_destroyer_shoot_agro_player() {
   self endon("stop_shooting");
 
   while(1) {
-    if(within_fov(self.origin, self.angles, level.player.origin, level.cosine["60"]))
-      if(SightTracePassed((self.origin + (0, 0, 64)), level.player getEye(), false, self)) {
-        break;
-      }
+    if(within_fov(self.origin, self.angles, level.player.origin, level.cosine["60"])) {
+      if(SightTracePassed((self.origin + (0, 0, 64)), level.player getEye(), false, self)) {}
+      break;
+    }
     wait 1;
   }
 
@@ -4834,11 +4973,13 @@ physicsSphere(center) {
 }
 
 bmp_turret_attack_player(end_if_cant_see, no_misses) {
-  if(!isDefined(end_if_cant_see))
+  if(!isDefined(end_if_cant_see)) {
     end_if_cant_see = false;
+  }
 
-  if(!isDefined(no_misses))
+  if(!isDefined(no_misses)) {
     no_misses = false;
+  }
 
   self notify("stop_shooting");
 
@@ -4850,8 +4991,9 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
 
     wait(randomfloatrange(0.8, 1.3));
 
-    while(!can_see_player(player))
+    while(!can_see_player(player)) {
       wait(randomfloatrange(0.2, 0.6));
+    }
 
     if(!no_misses) {
       miss_player(player);
@@ -4883,8 +5025,9 @@ debug_bmp_hit_player() {
   self endon("death");
   while(1) {
     level.player waittill("damage", amount, who);
-    if(who == self)
+    if(who == self) {
       println(" bmp damaged player");
+    }
   }
 }
 
@@ -4916,21 +5059,25 @@ miss_player(player) {
 }
 
 can_see_player(player) {
-  if(flag("player_inside_nates"))
+  if(flag("player_inside_nates")) {
     return false;
+  }
 
-  if(flag("player_in_diner"))
+  if(flag("player_in_diner")) {
     return false;
+  }
 
-  if(distance(self.origin, level.player.origin) < level.min_btr_fighting_range)
+  if(distance(self.origin, level.player.origin) < level.min_btr_fighting_range) {
     return false;
+  }
 
   tag_flash_loc = self getTagOrigin("tag_flash");
 
   player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
-    if(isDefined(level.debug))
+    if(isDefined(level.debug)) {
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
+    }
     return true;
   } else {
     return false;
@@ -4949,8 +5096,9 @@ flag_save(_flag) {
 
 registerObjective(objName, objText, objOrigin) {
   flag_init(objName);
-  if(!isDefined(level.objectives))
+  if(!isDefined(level.objectives)) {
     level.objectives = [];
+  }
   objID = level.objectives.size;
 
   newObjective = spawnStruct();
@@ -4979,8 +5127,9 @@ setObjectiveState(objName, objState) {
     objective_state(objective.id, objective.State);
   }
 
-  if(objective.state == "done")
+  if(objective.state == "done") {
     flag_set(objName);
+  }
 }
 
 setObjectiveString(objName, objString) {
@@ -5016,8 +5165,9 @@ setObjectiveLocation_nearest_enemy(objName) {
       wait 3;
     } else {
       enemy_positions = [];
-      foreach(guy in enemies)
-      enemy_positions[enemy_positions.size] = guy.origin;
+      foreach(guy in enemies) {
+        enemy_positions[enemy_positions.size] = guy.origin;
+      }
       level.obj_pos = AveragePoint(enemy_positions);
       objective_position(objective.id, level.obj_pos + (0, 0, 70));
 
@@ -5028,10 +5178,11 @@ setObjectiveLocation_nearest_enemy(objName) {
 
 setObjectiveWaypoint(objName, text) {
   objective = level.objectives[objName];
-  if(isDefined(text))
+  if(isDefined(text)) {
     Objective_SetPointerTextOverride(objective.id, text);
-  else
+  } else {
     Objective_SetPointerTextOverride(objective.id);
+  }
 }
 
 setObjectiveLocationMoving(objName, objEnt, offset) {
@@ -5047,10 +5198,11 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   objective = level.objectives[objName];
 
-  if(!objRemaining)
+  if(!objRemaining) {
     objective_string(objective.id, objString);
-  else
+  } else {
     objective_string(objective.id, objString, objRemaining);
+  }
 }
 
 set_threatbias_group(group) {
@@ -5068,32 +5220,39 @@ bmps_from_north_dead() {
 
 should_break_use_drone_vs_bmps() {
   break_hint = false;
-  if(isDefined(level.player.is_flying_missile))
+  if(isDefined(level.player.is_flying_missile)) {
     break_hint = true;
-  if(level.player getCurrentWeapon() == "remote_missile_detonator")
+  }
+  if(level.player getCurrentWeapon() == "remote_missile_detonator") {
     break_hint = true;
-  if(flag("bmps_from_north_dead"))
+  }
+  if(flag("bmps_from_north_dead")) {
     break_hint = true;
+  }
 
   return break_hint;
 }
 
 should_break_use_drone() {
   break_hint = false;
-  if(isDefined(level.player.is_flying_missile))
+  if(isDefined(level.player.is_flying_missile)) {
     break_hint = true;
-  if(level.player getCurrentWeapon() == "remote_missile_detonator")
+  }
+  if(level.player getCurrentWeapon() == "remote_missile_detonator") {
     break_hint = true;
+  }
 
   return break_hint;
 }
 
 should_break_steer_drone() {
   break_hint = false;
-  if(level.player getCurrentWeapon() == "remote_missile_detonator")
+  if(level.player getCurrentWeapon() == "remote_missile_detonator") {
     break_hint = true;
-  if((level.hint_steer_drone_time + 5000) < gettime())
+  }
+  if((level.hint_steer_drone_time + 5000) < gettime()) {
     break_hint = true;
+  }
 
   return break_hint;
 }
@@ -5111,12 +5270,13 @@ magic_glass_breaker() {
 UAVRigAiming() {
   level.uav endon("death");
   for(;;) {
-    if(isDefined(level.uavTargetEnt))
+    if(isDefined(level.uavTargetEnt)) {
       targetPos = level.uavTargetEnt.origin;
-    else if(isDefined(level.uavTargetPos))
+    } else if(isDefined(level.uavTargetPos)) {
       targetPos = level.uavTargetPos;
-    else
+    } else {
       targetpos = (-553.753, -2970, 2369.84);
+    }
 
     angles = VectorToAngles(targetPos - level.uav.origin);
 
@@ -5174,20 +5334,25 @@ cleanse_the_world() {
       continue;
     }
 
-    if(ent istouching(volume))
+    if(ent istouching(volume)) {
       ent delete();
+    }
   }
 }
 
 needs_ent_testing() {
-  if(issubstr(self.code_classname, "script_vehicle"))
+  if(issubstr(self.code_classname, "script_vehicle")) {
     return true;
-  if(issubstr(self.code_classname, "script_vehicle_corpse"))
+  }
+  if(issubstr(self.code_classname, "script_vehicle_corpse")) {
     return true;
-  if(issubstr(self.code_classname, "script_brushmodel"))
+  }
+  if(issubstr(self.code_classname, "script_brushmodel")) {
     return true;
-  if(issubstr(self.code_classname, "trigger"))
+  }
+  if(issubstr(self.code_classname, "trigger")) {
     return true;
+  }
   return self.code_classname == "info_volume";
 }
 
@@ -5195,10 +5360,12 @@ delete_house_area_entities() {
   house_area_volume = getent("house_area_volume", "targetname");
   ents = getEntArray();
   foreach(thing in ents) {
-    if(!isDefined(thing))
+    if(!isDefined(thing)) {
       continue;
-    if(thing istouching(house_area_volume))
+    }
+    if(thing istouching(house_area_volume)) {
       thing delete();
+    }
   }
 }
 
@@ -5391,11 +5558,13 @@ setup_stingers() {
   level waittill("attack_heli_spawned");
 
   diner_stinger = getent("diner", "script_noteworthy");
-  if(isDefined(diner_stinger))
+  if(isDefined(diner_stinger)) {
     diner_stinger setModel("weapon_stinger_obj");
+  }
 
-  if(isDefined(nates_stinger))
+  if(isDefined(nates_stinger)) {
     nates_stinger setModel("weapon_stinger_obj");
+  }
 
   while(1) {
     wait 2;
@@ -5404,10 +5573,11 @@ setup_stingers() {
     }
     needs_stinger = true;
     weapons = level.player GetWeaponsListAll();
-    foreach(weap in weapons)
-    if(weap == "stinger")
-      needs_stinger = false;
-
+    foreach(weap in weapons) {
+      if(weap == "stinger") {
+        needs_stinger = false;
+      }
+    }
     if(!needs_stinger) {
       continue;
     }
@@ -5426,10 +5596,11 @@ objective_destroy_helicopter(second_heli) {
   level notify("attack_heli_spawned");
   needs_stinger = true;
   weapons = level.player GetWeaponsListAll();
-  foreach(weap in weapons)
-  if(weap == "stinger")
-    needs_stinger = false;
-
+  foreach(weap in weapons) {
+    if(weap == "stinger") {
+      needs_stinger = false;
+    }
+  }
   if(needs_stinger) {
     stinger_loc = level.nates_stinger["origin"];
 
@@ -5450,8 +5621,9 @@ objective_destroy_helicopter(second_heli) {
   setObjectiveLocation("obj_raptor_defend", origin);
   setObjectiveWaypoint("obj_raptor_defend");
 
-  if(needs_stinger)
+  if(needs_stinger) {
     level.attack_heli waittill_death_or_stinger();
+  }
 
   if(isalive(level.attack_heli)) {
     level notify("moving obj_raptor_defend");
@@ -5505,8 +5677,9 @@ objective_defend_raptor3() {
 objective_convoy() {
   flag_wait("time_to_goto_convoy");
 
-  if(!isDefined(level.convoy))
+  if(!isDefined(level.convoy)) {
     level.convoy = getent("convoy_obj", "targetname");
+  }
 
   registerObjective("obj_convoy", &"INVASION_OBJ_CONVOY", level.convoy.origin);
   thread setObjectiveLocationMoving("obj_convoy", level.convoy, (0, 0, 128));

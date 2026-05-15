@@ -75,8 +75,9 @@ flashBangedLoop(animation, duration) {
   assert(isDefined(duration));
   assert(duration > 0);
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self ExitProneWrapper(1);
+  }
 
   self.a.pose = "stand";
   self.allowdeath = true;

@@ -21,6 +21,7 @@ player_init() {
   waitforclient(0);
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     player = players[i];
+  }
 }

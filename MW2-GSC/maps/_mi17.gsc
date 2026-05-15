@@ -8,8 +8,9 @@
 #using_animtree("vehicles");
 main(model, type, no_death) {
   vehicle_type = "mi17";
-  if(isDefined(type) && type == "mi17_bulletdamage")
+  if(isDefined(type) && type == "mi17_bulletdamage") {
     vehicle_type = "mi17_bulletdamage";
+  }
 
   maps\_mi17_noai::main(model, vehicle_type, no_death);
 
@@ -39,8 +40,9 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
-  for(i = 0; i < positions.size; i++)
+  for(i = 0; i < positions.size; i++) {
     positions[i].vehicle_getoutanim = % mi17_heli_idle;
+  }
 
   return positions;
 }
@@ -53,8 +55,9 @@ setplayer_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 10; i++)
+  for(i = 0; i < 10; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[1].idle = % mi17_1_idle;
   positions[2].idle = % mi17_2_idle;
@@ -207,8 +210,9 @@ set_attached_models() {
 
   strings = getarraykeys(array);
 
-  for(i = 0; i < strings.size; i++)
+  for(i = 0; i < strings.size; i++) {
     precachemodel(array[strings[i]].model);
+  }
 
   return array;
 }

@@ -32,8 +32,9 @@ main() {
 
 remove_all_intel() {
   foreach(index, trigger in level.intel_items) {
-    if(!isDefined(trigger.removed))
+    if(!isDefined(trigger.removed)) {
       trigger remove_intel_item();
+    }
   }
 }
 
@@ -71,16 +72,18 @@ intel_think() {
 poll_for_found() {
   self endon("end_loop_thread");
 
-  while(!self check_item_found())
+  while(!self check_item_found()) {
     wait .1;
+  }
 
   self remove_intel_item();
 }
 
 check_item_found() {
   foreach(player in level.players) {
-    if(!player GetPlayerIntelIsFound(self.num))
+    if(!player GetPlayerIntelIsFound(self.num)) {
       return false;
+    }
   }
   return true;
 }
@@ -102,8 +105,9 @@ create_array_of_origins_from_table() {
     if(isDefined(location) && (location != "undefined")) {
       locArray = strTok(location, ",");
       assert(locArray.size == 3);
-      for(i = 0; i < locArray.size; i++)
+      for(i = 0; i < locArray.size; i++) {
         locArray[i] = int(locArray[i]);
+      }
       origins[num] = (locArray[0], locArray[1], locArray[2]);
     } else {
       origins[num] = undefined;
@@ -175,20 +179,22 @@ intel_feedback(found_by_player) {
 
     intel_found = 0;
 
-    if(found_by_player == player && player GetPlayerIntelIsFound(self.num))
+    if(found_by_player == player && player GetPlayerIntelIsFound(self.num)) {
       remaining_print.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
-    else {
+    } else {
       remaining_print.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
       player give_point();
       intel_found = (player GetLocalPlayerProfileData("cheatPoints"));
       remaining_print setValue(intel_found);
     }
 
-    if(intel_found == 22)
+    if(intel_found == 22) {
       player maps\_utility::player_giveachievement_wrapper("THE_ROAD_LESS_TRAVELED");
+    }
 
-    if(intel_found == 45)
+    if(intel_found == 45) {
       player maps\_utility::player_giveachievement_wrapper("LEAVE_NO_STONE_UNTURNED");
+    }
 
     remaining_print delaycall(delete_time, ::Destroy);
   }
@@ -211,35 +217,44 @@ assert_if_identical_origins() {
     location = tablelookup("maps/_intel_items.csv", 0, i, 4);
     locArray = strTok(location, ",");
 
-    for(i = 0; i < locArray.size; i++)
+    for(i = 0; i < locArray.size; i++) {
       locArray[i] = int(locArray[i]);
+    }
     origins[i] = (locArray[0], locArray[1], locArray[2]);
   }
 
   for(i = 0; i < origins.size; i++) {
-    if(!isDefined(origins[i]))
+    if(!isDefined(origins[i])) {
       continue;
-    if(origins[i] == "undefined")
+    }
+    if(origins[i] == "undefined") {
       continue;
+    }
     for(j = 0; j < origins.size; j++) {
-      if(!isDefined(origins[j]))
+      if(!isDefined(origins[j])) {
         continue;
-      if(origins[j] == "undefined")
+      }
+      if(origins[j] == "undefined") {
         continue;
-      if(i == j)
+      }
+      if(i == j) {
         continue;
-      if(origins[i] == origins[j])
+      }
+      if(origins[i] == origins[j]) {
         assertmsg("intel items in maps/_intel_items.csv with identical origins (" + origins[i] + ") ");
+      }
     }
   }
 }
 
 get_nums_from_origins(origin) {
   for(i = 1; i < level.table_origins.size + 1; i++) {
-    if(!isDefined(level.table_origins[i]))
+    if(!isDefined(level.table_origins[i])) {
       continue;
-    if(distancesquared(origin, level.table_origins[i]) < squared(75))
+    }
+    if(distancesquared(origin, level.table_origins[i]) < squared(75)) {
       return i;
+    }
   }
 
   assertmsg("Add the origin of this intel item ( " + origin + " ) to maps/_intel_items.csv file");

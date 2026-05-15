@@ -194,8 +194,9 @@ playerHasTurretHeadWeapon() {
 
   weapons = self GetWeaponsListPrimaries();
   foreach(weapon in weapons) {
-    if((weapon == "turretheadenergy_mp") || (weapon == "turretheadrocket_mp") || (weapon == "turretheadmg_mp"))
+    if((weapon == "turretheadenergy_mp") || (weapon == "turretheadrocket_mp") || (weapon == "turretheadmg_mp")) {
       return true;
+    }
   }
   return false;
 }

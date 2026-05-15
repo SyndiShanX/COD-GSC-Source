@@ -41,8 +41,9 @@ remove_dyn_ents() {
 
   foreach(ent in ents) {
     foreach(origin in bad_dyn_ents) {
-      if(distancesquared(ent.origin, origin) < 1)
+      if(distancesquared(ent.origin, origin) < 1) {
         setdynentenabled(ent, 0);
+      }
     }
   }
 }

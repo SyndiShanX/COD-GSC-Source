@@ -32,8 +32,9 @@ magicbox_leave_sounds_callback(localclientnum, oldval, newval, bnewent, binitial
 }
 
 magicbox_glow_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(self.glow_obj_array))
+  if(!isDefined(self.glow_obj_array)) {
     self.glow_obj_array = [];
+  }
 
   if(newval && !isDefined(self.glow_obj_array[localclientnum])) {
     fx_obj = spawn(localclientnum, self.origin, "script_model");

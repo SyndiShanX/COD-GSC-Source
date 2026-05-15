@@ -33,8 +33,9 @@ pack_trigger_think() {
     flag_wait("enter_nml");
     self.script_int = -1000;
 
-    while(flag("enter_nml"))
+    while(flag("enter_nml")) {
       wait 1.0;
+    }
   }
 }
 

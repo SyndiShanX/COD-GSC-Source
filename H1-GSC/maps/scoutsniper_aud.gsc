@@ -175,8 +175,9 @@ start_mix_moving_to_town() {
 
   level common_scripts\utility::flag_wait("musicSubmixDelay");
 
-  if(isDefined(level.movingtotownsubmix) && level.movingtotownsubmix)
+  if(isDefined(level.movingtotownsubmix) && level.movingtotownsubmix) {
     soundscripts\_audio_mix_manager::mm_clear_submix("moving_to_town");
+  }
 }
 
 moving_to_town_submix_handler() {
@@ -356,8 +357,9 @@ convoy_node_reached() {
 }
 
 play_additionnal_fs_sfx() {
-  if(self != level.price)
+  if(self != level.price) {
     thread maps\_utility::play_sound_on_entity("scn_scout_convoy_npc_step");
+  }
 }
 
 aud_school_heli_rumble() {

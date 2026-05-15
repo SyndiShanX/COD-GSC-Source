@@ -77,8 +77,9 @@ stop_snow() {
 remove_cloud_cover() {
   var_0 = maps\_utility::getfxarraybyid("cloud_cover");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 }
 
 handle_sunrise3_colors() {
@@ -167,8 +168,9 @@ lerp_sun_color(var_0, var_1) {
   var_2 = level.sunriseinterpcolors[var_0];
   var_2["timePassed"] = var_2["timePassed"] + var_1;
 
-  if(var_2["timePassed"] >= var_2["timeTotal"])
+  if(var_2["timePassed"] >= var_2["timeTotal"]) {
     var_2["timePassed"] = var_2["timeTotal"];
+  }
 
   var_3 = var_2["start"];
   var_4 = var_2["target"];

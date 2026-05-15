@@ -1461,35 +1461,35 @@ delayCall_proc(func, timer, param1, param2, param3, param4, param5, param6, para
   if(isDefined(param9)) {
     self call[[func]](param1, param2, param3, param4, param5, param6, param7, param8, param9);
   } else {
-    if(isDefined(param8))
+    if(isDefined(param8)) {}
   }
   self call[[func]](param1, param2, param3, param4, param5, param6, param7, param8);
   else {
-    if(isDefined(param7))
+    if(isDefined(param7)) {}
   }
   self call[[func]](param1, param2, param3, param4, param5, param6, param7);
   else {
-    if(isDefined(param6))
+    if(isDefined(param6)) {}
   }
   self call[[func]](param1, param2, param3, param4, param5, param6);
   else {
-    if(isDefined(param5))
+    if(isDefined(param5)) {}
   }
   self call[[func]](param1, param2, param3, param4, param5);
   else {
-    if(isDefined(param4))
+    if(isDefined(param4)) {}
   }
   self call[[func]](param1, param2, param3, param4);
   else {
-    if(isDefined(param3))
+    if(isDefined(param3)) {}
   }
   self call[[func]](param1, param2, param3);
   else {
-    if(isDefined(param2))
+    if(isDefined(param2)) {}
   }
   self call[[func]](param1, param2);
   else {
-    if(isDefined(param1))
+    if(isDefined(param1)) {}
   }
   self call[[func]](param1);
   else {
@@ -1508,31 +1508,31 @@ delay_script_call_proc(func, timer, param1, param2, param3, param4, param5, para
   } else if(isDefined(param8)) {
     self[[func]](param1, param2, param3, param4, param5, param6, param7, param8);
   } else {
-    if(isDefined(param7))
+    if(isDefined(param7)) {}
   }
   self[[func]](param1, param2, param3, param4, param5, param6, param7);
   else {
-    if(isDefined(param6))
+    if(isDefined(param6)) {}
   }
   self[[func]](param1, param2, param3, param4, param5, param6);
   else {
-    if(isDefined(param5))
+    if(isDefined(param5)) {}
   }
   self[[func]](param1, param2, param3, param4, param5);
   else {
-    if(isDefined(param4))
+    if(isDefined(param4)) {}
   }
   self[[func]](param1, param2, param3, param4);
   else {
-    if(isDefined(param3))
+    if(isDefined(param3)) {}
   }
   self[[func]](param1, param2, param3);
   else {
-    if(isDefined(param2))
+    if(isDefined(param2)) {}
   }
   self[[func]](param1, param2);
   else {
-    if(isDefined(param1))
+    if(isDefined(param1)) {}
   }
   self[[func]](param1);
   else {
@@ -1549,15 +1549,15 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
   if(isDefined(param4)) {
     call[[func]](param1, param2, param3, param4);
   } else {
-    if(isDefined(param3))
+    if(isDefined(param3)) {}
   }
   call[[func]](param1, param2, param3);
   else {
-    if(isDefined(param2))
+    if(isDefined(param2)) {}
   }
   call[[func]](param1, param2);
   else {
-    if(isDefined(param1))
+    if(isDefined(param1)) {}
   }
   call[[func]](param1);
   else {

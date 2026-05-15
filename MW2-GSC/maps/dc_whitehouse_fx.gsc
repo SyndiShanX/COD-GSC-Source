@@ -93,8 +93,9 @@ lightning_flash(dir) {
   }
   num = randomintrange(1, 4);
 
-  if(!isDefined(dir))
+  if(!isDefined(dir)) {
     dir = (-20, 60, 0);
+  }
 
   for(i = 0; i < num; i++) {
     type = randomint(3);

@@ -30,10 +30,11 @@ doorEnterExitCheck() {
 
   goingInDoor = (doorNode.type == "Door Interior") || self compareNodeDirToPathDir(doorNode);
 
-  if(goingInDoor)
+  if(goingInDoor) {
     self doorEnter(doorNode);
-  else
+  } else {
     self doorExit(doorNode);
+  }
 
   while(1) {
     newDoorNode = self getDoorPathNode();
@@ -58,8 +59,9 @@ teamFlashBangImmune() {
 doDoorGrenadeThrow(node) {
   self thread teamFlashBangImmune();
 
-  if(self.grenadeWeapon == "flash_grenade")
+  if(self.grenadeWeapon == "flash_grenade") {
     self notify("flashbang_thrown");
+  }
 
   self OrientMode("face current");
   node.nextDoorGrenadeTime = gettime() + doorGrenadeInterval;
@@ -89,8 +91,9 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
   throwAnim = % CQB_stand_grenade_throw;
 
   doorForward = anglesToForward(node.angles);
-  if(node.type == "Door Interior" && !(self compareNodeDirToPathDir(node)))
+  if(node.type == "Door Interior" && !(self compareNodeDirToPathDir(node))) {
     doorForward = -1 * doorForward;
+  }
 
   doorPos = (node.origin[0], node.origin[1], node.origin[2] + 64);
   throwPos = doorPos;
@@ -100,10 +103,11 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
     dirToDoor = node.origin - self.origin;
 
     projLength = vectordot(doorPlane, dirToDoor);
-    if(projLength > 20)
+    if(projLength > 20) {
       projLength = 20;
-    else if(projLength < -20)
+    } else if(projLength < -20) {
       projLength = -20;
+    }
 
     throwPos = doorPos + projLength * doorPlane;
   }
@@ -138,8 +142,9 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
 
       if(!safeCheckDone) {
         checkPos = doorPos + (doorForward * 100);
-        if(!(self isGrenadePosSafe(self.enemy, checkPos, 128)))
+        if(!(self isGrenadePosSafe(self.enemy, checkPos, 128))) {
           return;
+        }
       }
 
       safeCheckDone = true;
@@ -154,8 +159,9 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
     wait checkInterval;
 
     newNode = self getDoorPathNode();
-    if(!isDefined(newNode) || newNode != node)
+    if(!isDefined(newNode) || newNode != node) {
       return;
+    }
   }
 }
 
@@ -181,15 +187,17 @@ inDoorCqbToggleCheck() {
 doorEnter_enable_cqbwalk() {
   if(!isDefined(self.neverEnableCQB) && !self.doingAmbush) {
     self.isInDoor = true;
-    if(!isDefined(self.cqbWalking) || !self.cqbWalking)
+    if(!isDefined(self.cqbWalking) || !self.cqbWalking) {
       enable_cqbwalk(true);
+    }
   }
 }
 doorExit_disable_cqbwalk() {
   if(!isDefined(self.cqbEnabled)) {
     self.isInDoor = false;
-    if(isDefined(self.cqbWalking) && self.cqbWalking)
+    if(isDefined(self.cqbWalking) && self.cqbWalking) {
       disable_cqbwalk();
+    }
   }
 }
 

@@ -11,8 +11,9 @@
 addcallback(event, func) {
   assert(isDefined(event), "Trying to set a callback on an undefined event.");
 
-  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event]))
+  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
     level._callbacks[event] = [];
+  }
 
   level._callbacks[event] = add_to_array(level._callbacks[event], func, 0);
 }
@@ -22,8 +23,9 @@ callback(event) {
     for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
 
-      if(isDefined(callback))
+      if(isDefined(callback)) {
         self thread[[callback]]();
+      }
     }
   }
 }
@@ -33,16 +35,19 @@ onfinalizeinitialization_callback(func) {
 }
 
 triggeroff() {
-  if(!isDefined(self.realorigin))
+  if(!isDefined(self.realorigin)) {
     self.realorigin = self.origin;
+  }
 
-  if(self.origin == self.realorigin)
+  if(self.origin == self.realorigin) {
     self.origin = self.origin + vectorscale((0, 0, -1), 10000.0);
+  }
 }
 
 triggeron() {
-  if(isDefined(self.realorigin))
+  if(isDefined(self.realorigin)) {
     self.origin = self.realorigin;
+  }
 }
 
 error(msg) {
@@ -72,8 +77,9 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 }
 
 append_array_struct(dst_s, src_s) {
-  for(i = 0; i < src_s.a.size; i++)
+  for(i = 0; i < src_s.a.size; i++) {
     dst_s.a[dst_s.a.size] = src_s.a[i];
+  }
 }
 
 exploder(num) {
@@ -85,8 +91,9 @@ exploder_stop(num) {
 }
 
 exploder_sound() {
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   self playSound(level.scr_sound[self.script_sound]);
 }
@@ -103,8 +110,9 @@ cannon_effect() {
 
   self exploder_delay();
 
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     self.looper delete();
+  }
 
   self.looper = spawnfx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   triggerfx(self.looper);
@@ -112,20 +120,24 @@ cannon_effect() {
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
 
-  if(isDefined(self.v["delay_min"]))
+  if(isDefined(self.v["delay_min"])) {
     min_delay = self.v["delay_min"];
+  }
 
-  if(isDefined(self.v["delay_max"]))
+  if(isDefined(self.v["delay_max"])) {
     max_delay = self.v["delay_max"];
+  }
 
-  if(min_delay > 0)
+  if(min_delay > 0) {
     wait(randomfloatrange(min_delay, max_delay));
+  }
 }
 
 exploder_playSound() {
@@ -138,10 +150,11 @@ exploder_playSound() {
 brush_delete() {
   num = self.v["exploder"];
 
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  else
+  } else {
     wait 0.05;
+  }
 
   if(!isDefined(self.model)) {
     return;
@@ -162,16 +175,18 @@ brush_delete() {
     return;
   }
 
-  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
     self.v["exploder"] = undefined;
+  }
 
   waittillframeend;
   self.model delete();
 }
 
 brush_show() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
+  }
 
   assert(isDefined(self.model));
   self.model show();
@@ -190,13 +205,15 @@ brush_show() {
 }
 
 brush_throw() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
+  }
 
   ent = undefined;
 
-  if(isDefined(self.v["target"]))
+  if(isDefined(self.v["target"])) {
     ent = getent(self.v["target"], "targetname");
+  }
 
   if(!isDefined(ent)) {
     self.model delete();
@@ -273,8 +290,9 @@ getplant() {
     }
   }
 
-  if(besttracefraction == 1)
+  if(besttracefraction == 1) {
     besttraceposition = self.origin;
+  }
 
   temp = spawnStruct();
   temp.origin = besttraceposition;
@@ -286,8 +304,9 @@ orienttonormal(normal) {
   hor_normal = (normal[0], normal[1], 0);
   hor_length = length(hor_normal);
 
-  if(!hor_length)
+  if(!hor_length) {
     return (0, 0, 0);
+  }
 
   hor_dir = vectornormalize(hor_normal);
   neg_height = normal[2] * -1;
@@ -299,14 +318,16 @@ orienttonormal(normal) {
 array_levelthread(ents, process, var, excluders) {
   exclude = [];
 
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     exclude[i] = 0;
+  }
 
   if(isDefined(excluders)) {
     for(i = 0; i < ents.size; i++) {
       for(p = 0; p < excluders.size; p++) {
-        if(ents[i] == excluders[p])
+        if(ents[i] == excluders[p]) {
           exclude[i] = 1;
+        }
       }
     }
   }
@@ -326,26 +347,30 @@ array_levelthread(ents, process, var, excluders) {
 deleteplacedentity(entity) {
   entities = getEntArray(entity, "classname");
 
-  for(i = 0; i < entities.size; i++)
+  for(i = 0; i < entities.size; i++) {
     entities[i] delete();
+  }
 }
 
 playsoundonplayers(sound, team) {
   assert(isDefined(level.players));
 
   if(level.splitscreen) {
-    if(isDefined(level.players[0]))
+    if(isDefined(level.players[0])) {
       level.players[0] playlocalsound(sound);
+    }
   } else if(isDefined(team)) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+      if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
         player playlocalsound(sound);
+      }
     }
   } else {
-    for(i = 0; i < level.players.size; i++)
+    for(i = 0; i < level.players.size; i++) {
       level.players[i] playlocalsound(sound);
+    }
   }
 }
 
@@ -361,8 +386,9 @@ get_team_alive_players_s(teamname) {
   teamplayers_s = spawn_array_struct();
 
   if(isDefined(teamname) && isDefined(level.aliveplayers) && isDefined(level.aliveplayers[teamname])) {
-    for(i = 0; i < level.aliveplayers[teamname].size; i++)
+    for(i = 0; i < level.aliveplayers[teamname].size; i++) {
       teamplayers_s.a[teamplayers_s.a.size] = level.aliveplayers[teamname][i];
+    }
   }
 
   return teamplayers_s;
@@ -377,8 +403,9 @@ get_all_alive_players_s() {
     for(i = 0; i < keys.size; i++) {
       team = keys[i];
 
-      for(j = 0; j < level.aliveplayers[team].size; j++)
+      for(j = 0; j < level.aliveplayers[team].size; j++) {
         allplayers_s.a[allplayers_s.a.size] = level.aliveplayers[team][j];
+      }
     }
   }
 
@@ -389,8 +416,9 @@ waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
 
-  while(self useButtonPressed() != 1)
+  while(self useButtonPressed() != 1) {
     wait 0.05;
+  }
 }
 
 setlowermessage(text, time, combinemessageandtimer) {
@@ -406,9 +434,9 @@ setlowermessage(text, time, combinemessageandtimer) {
   self.lowermessage settext(text);
 
   if(isDefined(time) && time > 0) {
-    if(!isDefined(combinemessageandtimer) || !combinemessageandtimer)
+    if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
       self.lowertimer.label = &"";
-    else {
+    } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
     }
@@ -419,8 +447,9 @@ setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer.label = &"";
   }
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
+  }
 
   self.lowermessage fadeovertime(0.05);
   self.lowermessage.alpha = 1;
@@ -439,16 +468,18 @@ setlowermessagevalue(text, value, combinemessage) {
 
   self notify("lower_message_set");
 
-  if(!isDefined(combinemessage) || !combinemessage)
+  if(!isDefined(combinemessage) || !combinemessage) {
     self.lowermessage settext(text);
-  else
+  } else {
     self.lowermessage settext("");
+  }
 
   if(isDefined(value) && value > 0) {
-    if(!isDefined(combinemessage) || !combinemessage)
+    if(!isDefined(combinemessage) || !combinemessage) {
       self.lowertimer.label = &"";
-    else
+    } else {
       self.lowertimer.label = text;
+    }
 
     self.lowertimer setvalue(value);
   } else {
@@ -456,8 +487,9 @@ setlowermessagevalue(text, value, combinemessage) {
     self.lowertimer.label = &"";
   }
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
+  }
 
   self.lowermessage fadeovertime(0.05);
   self.lowermessage.alpha = 1;
@@ -471,9 +503,9 @@ clearlowermessage(fadetime) {
   }
   self notify("lower_message_set");
 
-  if(!isDefined(fadetime) || fadetime == 0)
+  if(!isDefined(fadetime) || fadetime == 0) {
     setlowermessage(&"");
-  else {
+  } else {
     self endon("disconnect");
     self endon("lower_message_set");
     self.lowermessage fadeovertime(fadetime);
@@ -491,8 +523,9 @@ printonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintln(text);
+    }
   }
 }
 
@@ -502,8 +535,9 @@ printboldonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text);
+    }
   }
 }
 
@@ -513,8 +547,9 @@ printboldonteamarg(text, team, arg) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text, arg);
+    }
   }
 }
 
@@ -525,8 +560,9 @@ printonplayers(text, team) {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == team)
+      if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
         players[i] iprintln(text);
+      }
 
       continue;
     }
@@ -544,8 +580,9 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
     shoulddoenemysounds = 1;
   }
 
-  if(!isDefined(printarg))
+  if(!isDefined(printarg)) {
     printarg = "";
+  }
 
   if(level.splitscreen || !shoulddosounds) {
     for(i = 0; i < level.players.size; i++) {
@@ -564,8 +601,9 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
             continue;
           }
 
-          if(!isDefined(enemyteam) && playerteam != team)
+          if(!isDefined(enemyteam) && playerteam != team) {
             player iprintln(printenemy, printarg);
+          }
         }
       }
     }
@@ -584,16 +622,18 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != &"")
+            if(isDefined(printfriendly) && printfriendly != &"") {
               player iprintln(printfriendly, printarg);
+            }
 
             player playlocalsound(soundfriendly);
             continue;
           }
 
           if(isDefined(enemyteam) && playerteam == enemyteam || !isDefined(enemyteam) && playerteam != team) {
-            if(isDefined(printenemy) && printenemy != &"")
+            if(isDefined(printenemy) && printenemy != &"") {
               player iprintln(printenemy, printarg);
+            }
 
             player playlocalsound(soundenemy);
           }
@@ -606,8 +646,9 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != &"")
+            if(isDefined(printfriendly) && printfriendly != &"") {
               player iprintln(printfriendly, printarg);
+            }
 
             player playlocalsound(soundfriendly);
             continue;
@@ -619,8 +660,9 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
               continue;
             }
 
-            if(!isDefined(enemyteam) && playerteam != team)
+            if(!isDefined(enemyteam) && playerteam != team) {
               player iprintln(printenemy, printarg);
+            }
           }
         }
       }
@@ -645,12 +687,13 @@ dvarintvalue(dvar, defval, minval, maxval) {
 
   value = getdvarint(dvar);
 
-  if(value > maxval)
+  if(value > maxval) {
     value = maxval;
-  else if(value < minval)
+  } else if(value < minval) {
     value = minval;
-  else
+  } else {
     return value;
+  }
 
   setDvar(dvar, value);
   return value;
@@ -666,12 +709,13 @@ dvarfloatvalue(dvar, defval, minval, maxval) {
 
   value = getdvarfloat(dvar);
 
-  if(value > maxval)
+  if(value > maxval) {
     value = maxval;
-  else if(value < minval)
+  } else if(value < minval) {
     value = minval;
-  else
+  } else {
     return value;
+  }
 
   setDvar(dvar, value);
   return value;
@@ -723,15 +767,17 @@ loop_fx_sound(alias, origin, ender, timeout) {
 }
 
 exploder_damage() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  else
+  } else {
     delay = 0;
+  }
 
-  if(isDefined(self.v["damage_radius"]))
+  if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  else
+  } else {
     radius = 128;
+  }
 
   damage = self.v["damage"];
   origin = self.v["origin"];
@@ -767,11 +813,13 @@ activate_exploder_on_clients(num) {
   if(!isDefined(level._exploder_ids[num])) {
     return;
   }
-  if(!isDefined(level._client_exploders[num]))
+  if(!isDefined(level._client_exploders[num])) {
     level._client_exploders[num] = 1;
+  }
 
-  if(!isDefined(level._client_exploder_ids[num]))
+  if(!isDefined(level._client_exploder_ids[num])) {
     level._client_exploder_ids[num] = 1;
+  }
 
   activateclientexploder(level._exploder_ids[num]);
 }
@@ -794,40 +842,46 @@ activate_individual_exploder() {
   if(level.createfx_enabled || !level.clientscripts || !isDefined(level._exploder_ids[int(self.v["exploder"])]) || isDefined(self.v["exploder_server"])) {
     println("Exploder " + self.v["exploder"] + " created on server.");
 
-    if(isDefined(self.v["firefx"]))
+    if(isDefined(self.v["firefx"])) {
       self thread fire_effect();
+    }
 
-    if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
+    if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
       self thread cannon_effect();
-    else if(isDefined(self.v["soundalias"]))
+    } else if(isDefined(self.v["soundalias"])) {
       self thread sound_effect();
+    }
   }
 
-  if(isDefined(self.v["trailfx"]))
+  if(isDefined(self.v["trailfx"])) {
     self thread trail_effect();
+  }
 
-  if(isDefined(self.v["damage"]))
+  if(isDefined(self.v["damage"])) {
     self thread exploder_damage();
+  }
 
-  if(self.v["exploder_type"] == "exploder")
+  if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
-  else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible")
+  } else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
     self thread brush_throw();
-  else
+  } else {
     self thread brush_delete();
+  }
 }
 
 trail_effect() {
   self exploder_delay();
 
-  if(!isDefined(self.v["trailfxtag"]))
+  if(!isDefined(self.v["trailfxtag"])) {
     self.v["trailfxtag"] = "tag_origin";
+  }
 
   temp_ent = undefined;
 
-  if(self.v["trailfxtag"] == "tag_origin")
+  if(self.v["trailfxtag"] == "tag_origin") {
     playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
-  else {
+  } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
@@ -835,22 +889,25 @@ trail_effect() {
   }
 
   if(isDefined(self.v["trailfxsound"])) {
-    if(!isDefined(temp_ent))
+    if(!isDefined(temp_ent)) {
       self.model playLoopSound(self.v["trailfxsound"]);
-    else
+    } else {
       temp_ent playLoopSound(self.v["trailfxsound"]);
+    }
   }
 
-  if(isDefined(self.v["ender"]) && isDefined(temp_ent))
+  if(isDefined(self.v["ender"]) && isDefined(temp_ent)) {
     level thread trail_effect_ender(temp_ent, self.v["ender"]);
+  }
 
   if(!isDefined(self.v["trailfxtimeout"])) {
     return;
   }
   wait(self.v["trailfxtimeout"]);
 
-  if(isDefined(temp_ent))
+  if(isDefined(temp_ent)) {
     temp_ent delete();
+  }
 }
 
 trail_effect_ender(ent, ender) {
@@ -878,8 +935,9 @@ activate_exploder(num) {
       if(ent.v["exploder"] != num) {
         continue;
       }
-      if(isDefined(ent.v["exploder_server"]))
+      if(isDefined(ent.v["exploder_server"])) {
         client_send = 0;
+      }
 
       ent activate_individual_exploder();
     }
@@ -891,16 +949,18 @@ activate_exploder(num) {
 
   if(isDefined(level.createfxexploders[num])) {
     for(i = 0; i < level.createfxexploders[num].size; i++) {
-      if(client_send && isDefined(level.createfxexploders[num][i].v["exploder_server"]))
+      if(client_send && isDefined(level.createfxexploders[num][i].v["exploder_server"])) {
         client_send = 0;
+      }
 
       level.createfxexploders[num][i] activate_individual_exploder();
     }
   }
 
   if(level.clientscripts) {
-    if(!level.createfx_enabled && client_send == 1)
+    if(!level.createfx_enabled && client_send == 1) {
       activate_exploder_on_clients(num);
+    }
   }
 }
 
@@ -908,8 +968,9 @@ stop_exploder(num) {
   num = int(num);
 
   if(level.clientscripts) {
-    if(!level.createfx_enabled)
+    if(!level.createfx_enabled) {
       delete_exploder_on_clients(num);
+    }
   }
 
   if(isDefined(level.createfxexploders[num])) {
@@ -927,8 +988,9 @@ sound_effect() {
 }
 
 effect_soundalias() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   origin = self.v["origin"];
   alias = self.v["soundalias"];
@@ -939,15 +1001,17 @@ effect_soundalias() {
 play_sound_in_space(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
 
   org.origin = origin;
 
-  if(isDefined(master) && master)
+  if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  else
+  } else {
     org playSound(alias);
+  }
 
   wait 10.0;
   org delete();
@@ -956,8 +1020,9 @@ play_sound_in_space(alias, origin, master) {
 loop_sound_in_space(alias, origin, ender) {
   org = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
 
   org.origin = origin;
   org playLoopSound(alias);
@@ -968,13 +1033,15 @@ loop_sound_in_space(alias, origin, ender) {
 }
 
 fire_effect() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   delay = self.v["delay"];
 
-  if(isDefined(self.v["delay_min"]) && isDefined(self.v["delay_max"]))
+  if(isDefined(self.v["delay_min"]) && isDefined(self.v["delay_max"])) {
     delay = self.v["delay_min"] + randomfloat(self.v["delay_max"] - self.v["delay_min"]);
+  }
 
   forward = self.v["forward"];
   up = self.v["up"];
@@ -984,19 +1051,22 @@ fire_effect() {
   firefx = self.v["firefx"];
   ender = self.v["ender"];
 
-  if(!isDefined(ender))
+  if(!isDefined(ender)) {
     ender = "createfx_effectStopper";
+  }
 
   timeout = self.v["firefxtimeout"];
   firefxdelay = 0.5;
 
-  if(isDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"])) {
     firefxdelay = self.v["firefxdelay"];
+  }
 
   wait(delay);
 
-  if(isDefined(firefxsound))
+  if(isDefined(firefxsound)) {
     level thread loop_fx_sound(firefxsound, origin, ender, timeout);
+  }
 
   playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
@@ -1016,19 +1086,21 @@ createexploder(fxid) {
 }
 
 getotherteam(team) {
-  if(team == "allies")
+  if(team == "allies") {
     return "axis";
-  else if(team == "axis")
+  } else if(team == "axis") {
     return "allies";
-  else
+  } else {
     return "allies";
+  }
 
   assertmsg("getOtherTeam: invalid team " + team);
 }
 
 getteammask(team) {
-  if(!level.teambased || !isDefined(team) || !isDefined(level.spawnsystem.ispawn_teammask[team]))
+  if(!level.teambased || !isDefined(team) || !isDefined(level.spawnsystem.ispawn_teammask[team])) {
     return level.spawnsystem.ispawn_teammask_free;
+  }
 
   return level.spawnsystem.ispawn_teammask[team];
 }
@@ -1049,14 +1121,17 @@ getotherteamsmask(skip_team) {
 wait_endon(waittime, endonstring, endonstring2, endonstring3, endonstring4) {
   self endon(endonstring);
 
-  if(isDefined(endonstring2))
+  if(isDefined(endonstring2)) {
     self endon(endonstring2);
+  }
 
-  if(isDefined(endonstring3))
+  if(isDefined(endonstring3)) {
     self endon(endonstring3);
+  }
 
-  if(isDefined(endonstring4))
+  if(isDefined(endonstring4)) {
     self endon(endonstring4);
+  }
 
   wait(waittime);
   return true;
@@ -1069,17 +1144,21 @@ ismg(weapon) {
 plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
 
-  if(!isDefined(r))
+  if(!isDefined(r)) {
     r = 1;
+  }
 
-  if(!isDefined(g))
+  if(!isDefined(g)) {
     g = 1;
+  }
 
-  if(!isDefined(b))
+  if(!isDefined(b)) {
     b = 1;
+  }
 
-  if(!isDefined(timer))
+  if(!isDefined(timer)) {
     timer = 0.05;
+  }
 
   for(i = 1; i < plotpoints.size; i++) {
     line(lastpoint, plotpoints[i], (r, g, b), 1, timer);
@@ -1088,8 +1167,9 @@ plot_points(plotpoints, r, g, b, timer) {
 }
 
 player_flag_wait(msg) {
-  while(!self.flag[msg])
+  while(!self.flag[msg]) {
     self waittill(msg);
+  }
 }
 
 player_flag_wait_either(flag1, flag2) {
@@ -1105,8 +1185,9 @@ player_flag_wait_either(flag1, flag2) {
 }
 
 player_flag_waitopen(msg) {
-  while(self.flag[msg])
+  while(self.flag[msg]) {
     self waittill(msg);
+  }
 }
 
 player_flag_init(message, trigger) {
@@ -1147,15 +1228,17 @@ player_flag_clear(message) {
 player_flag(message) {
   assert(isDefined(message), "Tried to check flag but the flag was not defined.");
 
-  if(!self.flag[message])
+  if(!self.flag[message]) {
     return false;
+  }
 
   return true;
 }
 
 registerclientsys(ssysname) {
-  if(!isDefined(level._clientsys))
+  if(!isDefined(level._clientsys)) {
     level._clientsys = [];
+  }
 
   if(level._clientsys.size >= 32) {
     error("Max num client systems exceeded.");
@@ -1186,9 +1269,9 @@ setclientsysstate(ssysname, ssysstate, player) {
     return;
   }
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     player clientsyssetstate(level._clientsys[ssysname].sysid, ssysstate);
-  else {
+  } else {
     clientsyssetstate(level._clientsys[ssysname].sysid, ssysstate);
     level._clientsys[ssysname].sysstate = ssysstate;
   }
@@ -1207,18 +1290,20 @@ getclientsysstate(ssysname) {
     return "";
   }
 
-  if(isDefined(level._clientsys[ssysname].sysstate))
+  if(isDefined(level._clientsys[ssysname].sysstate)) {
     return level._clientsys[ssysname].sysstate;
+  }
 
   return "";
 }
 
 clientnotify(event) {
   if(level.clientscripts) {
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       maps\mp\_utility::setclientsysstate("levelNotify", event, self);
-    else
+    } else {
       maps\mp\_utility::setclientsysstate("levelNotify", event);
+    }
   }
 }
 
@@ -1303,19 +1388,23 @@ alphabet_compare(a, b) {
   b = tolower(b);
   val1 = 0;
 
-  if(isDefined(list[a]))
+  if(isDefined(list[a])) {
     val1 = list[a];
+  }
 
   val2 = 0;
 
-  if(isDefined(list[b]))
+  if(isDefined(list[b])) {
     val2 = list[b];
+  }
 
-  if(val1 > val2)
+  if(val1 > val2) {
     return "1st";
+  }
 
-  if(val1 < val2)
+  if(val1 < val2) {
     return "2nd";
+  }
 
   return "same";
 }
@@ -1323,25 +1412,29 @@ alphabet_compare(a, b) {
 is_later_in_alphabet(string1, string2) {
   count = string1.size;
 
-  if(count >= string2.size)
+  if(count >= string2.size) {
     count = string2.size;
+  }
 
   for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
 
-    if(val == "1st")
+    if(val == "1st") {
       return true;
+    }
 
-    if(val == "2nd")
+    if(val == "2nd") {
       return false;
+    }
   }
 
   return string1.size > string2.size;
 }
 
 alphabetize(array) {
-  if(array.size <= 1)
+  if(array.size <= 1) {
     return array;
+  }
 
   count = 0;
 
@@ -1363,8 +1456,9 @@ alphabetize(array) {
       }
     }
 
-    if(!changed)
+    if(!changed) {
       return array;
+    }
   }
 
   return array;
@@ -1405,8 +1499,9 @@ structarray_swaptolast(struct, object) {
 }
 
 structarray_shuffle(struct, shuffle) {
-  for(i = 0; i < shuffle; i++)
+  for(i = 0; i < shuffle; i++) {
     struct structarray_swap(struct.array[i], struct.array[randomint(struct.lastindex)]);
+  }
 }
 
 structarray_swap(object1, object2) {
@@ -1426,14 +1521,17 @@ waittill_either(msg1, msg2) {
 combinearrays(array1, array2) {
   assert(isDefined(array1) || isDefined(array2));
 
-  if(!isDefined(array1) && isDefined(array2))
+  if(!isDefined(array1) && isDefined(array2)) {
     return array2;
+  }
 
-  if(!isDefined(array2) && isDefined(array1))
+  if(!isDefined(array2) && isDefined(array1)) {
     return array1;
+  }
 
-  foreach(elem in array2)
-  array1[array1.size] = elem;
+  foreach(elem in array2) {
+    array1[array1.size] = elem;
+  }
 
   return array1;
 }
@@ -1451,8 +1549,9 @@ getfarthest(org, array, dist) {
 }
 
 comparesizesfx(org, array, dist, comparefunc) {
-  if(!array.size)
+  if(!array.size) {
     return undefined;
+  }
 
   if(isDefined(dist)) {
     distsqr = dist * dist;
@@ -1490,8 +1589,9 @@ comparesizesfx(org, array, dist, comparefunc) {
 }
 
 comparesizes(org, array, dist, comparefunc) {
-  if(!array.size)
+  if(!array.size) {
     return undefined;
+  }
 
   if(isDefined(dist)) {
     distsqr = dist * dist;
@@ -1543,16 +1643,19 @@ fartherfunc(dist1, dist2) {
 }
 
 get_array_of_closest(org, array, excluders, max, maxdist) {
-  if(!isDefined(max))
+  if(!isDefined(max)) {
     max = array.size;
+  }
 
-  if(!isDefined(excluders))
+  if(!isDefined(excluders)) {
     excluders = [];
+  }
 
   maxdists2rd = undefined;
 
-  if(isDefined(maxdist))
+  if(isDefined(maxdist)) {
     maxdists2rd = maxdist * maxdist;
+  }
 
   dist = [];
   index = [];
@@ -1606,18 +1709,21 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
 
   newarray = [];
 
-  if(max > dist.size)
+  if(max > dist.size) {
     max = dist.size;
+  }
 
-  for(i = 0; i < max; i++)
+  for(i = 0; i < max; i++) {
     newarray[i] = array[index[i]];
+  }
 
   return newarray;
 }
 
 set_dvar_if_unset(dvar, value, reset) {
-  if(!isDefined(reset))
+  if(!isDefined(reset)) {
     reset = 0;
+  }
 
   if(reset || getDvar(dvar) == "") {
     setDvar(dvar, value);
@@ -1628,18 +1734,21 @@ set_dvar_if_unset(dvar, value, reset) {
 }
 
 set_dvar_float_if_unset(dvar, value, reset) {
-  if(!isDefined(reset))
+  if(!isDefined(reset)) {
     reset = 0;
+  }
 
-  if(reset || getDvar(dvar) == "")
+  if(reset || getDvar(dvar) == "") {
     setDvar(dvar, value);
+  }
 
   return getdvarfloat(dvar);
 }
 
 set_dvar_int_if_unset(dvar, value, reset) {
-  if(!isDefined(reset))
+  if(!isDefined(reset)) {
     reset = 0;
+  }
 
   if(reset || getDvar(dvar) == "") {
     setDvar(dvar, value);
@@ -1650,15 +1759,17 @@ set_dvar_int_if_unset(dvar, value, reset) {
 }
 
 drawcylinder(pos, rad, height, duration, stop_notify) {
-  if(!isDefined(duration))
+  if(!isDefined(duration)) {
     duration = 0;
+  }
 
   level thread drawcylinder_think(pos, rad, height, duration, stop_notify);
 }
 
 drawcylinder_think(pos, rad, height, seconds, stop_notify) {
-  if(isDefined(stop_notify))
+  if(isDefined(stop_notify)) {
     level endon(stop_notify);
+  }
 
   stop_time = gettime() + seconds * 1000;
   currad = rad;
@@ -1685,8 +1796,9 @@ is_bot() {
 }
 
 add_trigger_to_ent(ent) {
-  if(!isDefined(ent._triggers))
+  if(!isDefined(ent._triggers)) {
     ent._triggers = [];
+  }
 
   ent._triggers[self getentitynumber()] = 1;
 }
@@ -1705,14 +1817,17 @@ remove_trigger_from_ent(ent) {
 }
 
 ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
+  }
 
-  if(!isDefined(self._triggers[trig getentitynumber()]))
+  if(!isDefined(self._triggers[trig getentitynumber()])) {
     return false;
+  }
 
-  if(!self._triggers[trig getentitynumber()])
+  if(!self._triggers[trig getentitynumber()]) {
     return false;
+  }
 
   return true;
 }
@@ -1735,47 +1850,55 @@ trigger_thread(ent, on_enter_payload, on_exit_payload) {
   self thread trigger_thread_death_monitor(ent, ender);
   endon_condition = "leave_trigger_" + self getentitynumber();
 
-  if(isDefined(on_enter_payload))
+  if(isDefined(on_enter_payload)) {
     self thread[[on_enter_payload]](ent, endon_condition);
+  }
 
-  while(isDefined(ent) && ent istouching(self))
+  while(isDefined(ent) && ent istouching(self)) {
     wait 0.01;
+  }
 
   ent notify(endon_condition);
 
-  if(isDefined(ent) && isDefined(on_exit_payload))
+  if(isDefined(ent) && isDefined(on_exit_payload)) {
     self thread[[on_exit_payload]](ent);
+  }
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     self remove_trigger_from_ent(ent);
+  }
 
   self notify(ender);
 }
 
 isoneround() {
-  if(level.roundlimit == 1)
+  if(level.roundlimit == 1) {
     return true;
+  }
 
   return false;
 }
 
 isfirstround() {
-  if(level.roundlimit > 1 && game["roundsplayed"] == 0)
+  if(level.roundlimit > 1 && game["roundsplayed"] == 0) {
     return true;
+  }
 
   return false;
 }
 
 islastround() {
-  if(level.roundlimit > 1 && game["roundsplayed"] >= level.roundlimit - 1)
+  if(level.roundlimit > 1 && game["roundsplayed"] >= level.roundlimit - 1) {
     return true;
+  }
 
   return false;
 }
 
 waslastround() {
-  if(level.forcedend)
+  if(level.forcedend) {
     return true;
+  }
 
   if(isDefined(level.shouldplayovertimeround)) {
     if([[level.shouldplayovertimeround]]()) {
@@ -1785,23 +1908,26 @@ waslastround() {
       return true;
   }
 
-  if(hitroundlimit() || hitscorelimit() || hitroundwinlimit())
+  if(hitroundlimit() || hitscorelimit() || hitroundwinlimit()) {
     return true;
+  }
 
   return false;
 }
 
 hitroundlimit() {
-  if(level.roundlimit <= 0)
+  if(level.roundlimit <= 0) {
     return false;
+  }
 
   return getroundsplayed() >= level.roundlimit;
 }
 
 anyteamhitroundwinlimit() {
   foreach(team in level.teams) {
-    if(getroundswon(team) >= level.roundwinlimit)
+    if(getroundswon(team) >= level.roundwinlimit) {
       return true;
+    }
   }
 
   return false;
@@ -1811,8 +1937,9 @@ anyteamhitroundlimitwithdraws() {
   tie_wins = game["roundswon"]["tie"];
 
   foreach(team in level.teams) {
-    if(getroundswon(team) + tie_wins >= level.roundwinlimit)
+    if(getroundswon(team) + tie_wins >= level.roundwinlimit) {
       return true;
+    }
   }
 
   return false;
@@ -1846,15 +1973,18 @@ getroundwinlimitwinningteam() {
 }
 
 hitroundwinlimit() {
-  if(!isDefined(level.roundwinlimit) || level.roundwinlimit <= 0)
+  if(!isDefined(level.roundwinlimit) || level.roundwinlimit <= 0) {
     return false;
+  }
 
-  if(anyteamhitroundwinlimit())
+  if(anyteamhitroundwinlimit()) {
     return true;
+  }
 
   if(anyteamhitroundlimitwithdraws()) {
-    if(getroundwinlimitwinningteam() != "tie")
+    if(getroundwinlimitwinningteam() != "tie") {
       return true;
+    }
   }
 
   return false;
@@ -1862,29 +1992,34 @@ hitroundwinlimit() {
 
 anyteamhitscorelimit() {
   foreach(team in level.teams) {
-    if(game["teamScores"][team] >= level.scorelimit)
+    if(game["teamScores"][team] >= level.scorelimit) {
       return true;
+    }
   }
 
   return false;
 }
 
 hitscorelimit() {
-  if(isscoreroundbased())
+  if(isscoreroundbased()) {
     return false;
+  }
 
-  if(level.scorelimit <= 0)
+  if(level.scorelimit <= 0) {
     return false;
+  }
 
   if(level.teambased) {
-    if(anyteamhitscorelimit())
+    if(anyteamhitscorelimit()) {
       return true;
+    }
   } else {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pointstowin) && player.pointstowin >= level.scorelimit)
+      if(isDefined(player.pointstowin) && player.pointstowin >= level.scorelimit) {
         return true;
+      }
     }
   }
 
@@ -1917,8 +2052,9 @@ isscoreroundbased() {
 }
 
 isroundbased() {
-  if(level.roundlimit != 1 && level.roundwinlimit != 1)
+  if(level.roundlimit != 1 && level.roundwinlimit != 1) {
     return true;
+  }
 
   return false;
 }
@@ -1929,9 +2065,9 @@ waittillnotmoving() {
     return;
   }
 
-  if(self.classname == "grenade")
+  if(self.classname == "grenade") {
     self waittill("stationary");
-  else {
+  } else {
     for(prevorigin = self.origin; 1; prevorigin = self.origin) {
       wait 0.15;
 
@@ -1951,8 +2087,9 @@ mayapplyscreeneffect() {
 getdvarfloatdefault(dvarname, defaultvalue) {
   value = getDvar(dvarname);
 
-  if(value != "")
+  if(value != "") {
     return float(value);
+  }
 
   return defaultvalue;
 }
@@ -1960,8 +2097,9 @@ getdvarfloatdefault(dvarname, defaultvalue) {
 getdvarintdefault(dvarname, defaultvalue) {
   value = getDvar(dvarname);
 
-  if(value != "")
+  if(value != "") {
     return int(value);
+  }
 
   return defaultvalue;
 }
@@ -1970,10 +2108,11 @@ closestpointonline(point, linestart, lineend) {
   linemagsqrd = lengthsquared(lineend - linestart);
   t = ((point[0] - linestart[0]) * (lineend[0] - linestart[0]) + (point[1] - linestart[1]) * (lineend[1] - linestart[1]) + (point[2] - linestart[2]) * (lineend[2] - linestart[2])) / linemagsqrd;
 
-  if(t < 0.0)
+  if(t < 0.0) {
     return linestart;
-  else if(t > 1.0)
+  } else if(t > 1.0) {
     return lineend;
+  }
 
   start_x = linestart[0] + t * (lineend[0] - linestart[0]);
   start_y = linestart[1] + t * (lineend[1] - linestart[1]);
@@ -2024,18 +2163,20 @@ spread_array_thread(entities, process, var1, var2, var3) {
 freeze_player_controls(boolean) {
   assert(isDefined(boolean), "'freeze_player_controls()' has not been passed an argument properly.");
 
-  if(boolean && isDefined(self))
+  if(boolean && isDefined(self)) {
     self freezecontrols(boolean);
-  else if(!boolean && isDefined(self) && !level.gameended)
+  } else if(!boolean && isDefined(self) && !level.gameended) {
     self freezecontrols(boolean);
+  }
 }
 
 gethostplayer() {
   players = get_players();
 
   for(index = 0; index < players.size; index++) {
-    if(players[index] ishost())
+    if(players[index] ishost()) {
       return players[index];
+    }
   }
 }
 
@@ -2043,8 +2184,9 @@ gethostplayerforbots() {
   players = get_players();
 
   for(index = 0; index < players.size; index++) {
-    if(players[index] ishostforbots())
+    if(players[index] ishostforbots()) {
       return players[index];
+    }
   }
 }
 
@@ -2066,8 +2208,9 @@ playsmokesound(position, duration, startsound, stopsound, loopsound) {
   smokesound playSound(startsound);
   smokesound playLoopSound(loopsound);
 
-  if(duration > 0.5)
+  if(duration > 0.5) {
     wait(duration - 0.5);
+  }
 
   thread playsoundinspace(stopsound, position);
   smokesound stoploopsound(0.5);
@@ -2078,15 +2221,17 @@ playsmokesound(position, duration, startsound, stopsound, loopsound) {
 playsoundinspace(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
 
   org.origin = origin;
 
-  if(isDefined(master) && master)
+  if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  else
+  } else {
     org playSound(alias);
+  }
 
   wait 10.0;
   org delete();
@@ -2103,16 +2248,19 @@ vectoangles(vector) {
   vecx = vector[0];
   vecy = vector[1];
 
-  if(vecx == 0 && vecy == 0)
+  if(vecx == 0 && vecy == 0) {
     return 0;
+  }
 
-  if(vecy < 0.001 && vecy > -0.001)
+  if(vecy < 0.001 && vecy > -0.001) {
     vecy = 0.001;
+  }
 
   yaw = atan(vecx / vecy);
 
-  if(vecy < 0)
+  if(vecy < 0) {
     yaw = yaw + 180;
+  }
 
   return 90 - yaw;
 }
@@ -2131,8 +2279,9 @@ deleteaftertimethread(time) {
 }
 
 setusingremote(remotename) {
-  if(isDefined(self.carryicon))
+  if(isDefined(self.carryicon)) {
     self.carryicon.alpha = 0;
+  }
 
   assert(!self isusingremote());
   self.usingremote = remotename;
@@ -2152,10 +2301,11 @@ isusingremote() {
 getlastweapon() {
   last_weapon = undefined;
 
-  if(self hasweapon(self.lastnonkillstreakweapon))
+  if(self hasweapon(self.lastnonkillstreakweapon)) {
     last_weapon = self.lastnonkillstreakweapon;
-  else if(self hasweapon(self.lastdroppableweapon))
+  } else if(self hasweapon(self.lastdroppableweapon)) {
     last_weapon = self.lastdroppableweapon;
+  }
 
   assert(isDefined(last_weapon));
   return last_weapon;
@@ -2236,22 +2386,25 @@ registernumlives(minvalue, maxvalue) {
 }
 
 getplayerfromclientnum(clientnum) {
-  if(clientnum < 0)
+  if(clientnum < 0) {
     return undefined;
+  }
 
   for(i = 0; i < level.players.size; i++) {
-    if(level.players[i] getentitynumber() == clientnum)
+    if(level.players[i] getentitynumber() == clientnum) {
       return level.players[i];
+    }
   }
 
   return undefined;
 }
 
 setclientfield(field_name, value) {
-  if(self == level)
+  if(self == level) {
     codesetworldclientfield(field_name, value);
-  else
+  } else {
     codesetclientfield(self, field_name, value);
+  }
 }
 
 setclientfieldtoplayer(field_name, value) {
@@ -2259,10 +2412,11 @@ setclientfieldtoplayer(field_name, value) {
 }
 
 getclientfield(field_name) {
-  if(self == level)
+  if(self == level) {
     return codegetworldclientfield(field_name);
-  else
+  } else {
     return codegetclientfield(self, field_name);
+  }
 }
 
 getclientfieldtoplayer(field_name) {
@@ -2272,12 +2426,14 @@ getclientfieldtoplayer(field_name) {
 isenemyplayer(player) {
   assert(isDefined(player));
 
-  if(!isPlayer(player))
+  if(!isPlayer(player)) {
     return false;
+  }
 
   if(level.teambased) {
-    if(player.team == self.team)
+    if(player.team == self.team) {
       return false;
+    }
   } else if(player == self)
     return false;
 
@@ -2287,14 +2443,17 @@ isenemyplayer(player) {
 getweaponclass(weapon) {
   assert(isDefined(weapon));
 
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return undefined;
+  }
 
-  if(!isDefined(level.weaponclassarray))
+  if(!isDefined(level.weaponclassarray)) {
     level.weaponclassarray = [];
+  }
 
-  if(isDefined(level.weaponclassarray[weapon]))
+  if(isDefined(level.weaponclassarray[weapon])) {
     return level.weaponclassarray[weapon];
+  }
 
   baseweaponindex = getbaseweaponitemindex(weapon) + 1;
   weaponclass = tablelookupcolumnforrow("mp/statstable.csv", baseweaponindex, 2);
@@ -2305,8 +2464,9 @@ getweaponclass(weapon) {
 ispressbuild() {
   buildtype = getDvar(#"_id_19B966D7");
 
-  if(isDefined(buildtype) && buildtype == "press")
+  if(isDefined(buildtype) && buildtype == "press") {
     return true;
+  }
 
   return false;
 }
@@ -2323,10 +2483,11 @@ domaxdamage(origin, attacker, inflictor, headshot, mod) {
   if(isDefined(self.damagedtodeath) && self.damagedtodeath) {
     return;
   }
-  if(isDefined(self.maxhealth))
+  if(isDefined(self.maxhealth)) {
     damage = self.maxhealth + 1;
-  else
+  } else {
     damage = self.health + 1;
+  }
 
   self.damagedtodeath = 1;
   self dodamage(damage, origin, attacker, inflictor, headshot, mod);

@@ -6,11 +6,13 @@
 #using_animtree("player");
 
 init_player_rig(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     precachemodel(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     precachemodel(var_1);
+  }
 
   if(isDefined(var_0)) {
     level.scr_animtree["player_rig"] = #animtree;
@@ -44,17 +46,21 @@ get_player_legs() {
 }
 
 link_player_to_arms(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 30;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 30;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 30;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 30;
+  }
 
   var_4 = get_player_rig();
   var_4 show();
@@ -63,8 +69,9 @@ link_player_to_arms(var_0, var_1, var_2, var_3) {
 }
 
 blend_player_to_arms(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.7;
+  }
 
   var_1 = get_player_rig();
   var_1 show();

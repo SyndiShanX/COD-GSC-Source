@@ -33,8 +33,9 @@ enemy_threat_logic() {
       continue;
     }
     if(!self stealth_group_spotted_flag()) {
-      if(!self enemy_alert_level_logic(self.enemy))
+      if(!self enemy_alert_level_logic(self.enemy)) {
         continue;
+      }
     } else {
       self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
     }
@@ -62,8 +63,9 @@ enemy_threat_logic() {
       continue;
     }
 
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       enemy_alert_level_forget(self.enemy, 0);
+    }
 
     self clearenemy();
     self maps\_stealth_threat_enemy::enemy_alert_level_change("reset");
@@ -72,10 +74,11 @@ enemy_threat_logic() {
 
 enemy_alert_level_logic_start_attacking(enemy) {
   if(self ent_flag("_stealth_bad_event_listener") || enemy._stealth.logic.spotted_list[self.unique_id] > self._stealth.logic.alert_level.max_warnings) {
-    if(self ent_flag("_stealth_bad_event_listener"))
+    if(self ent_flag("_stealth_bad_event_listener")) {
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because the reason was a bad_event_listener...ie a gunshot or something equally bad");
-    else
+    } else {
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because " + enemy.unique_id + " had been spotted more than the max_warning amount of " + self._stealth.logic.alert_level.max_warnings);
+    }
 
     self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
     return true;
@@ -87,17 +90,20 @@ enemy_alert_level_logic_start_attacking(enemy) {
 enemy_recheck_time = 500;
 
 enemy_alert_level_logic(enemy) {
-  if(!isDefined(enemy._stealth))
+  if(!isDefined(enemy._stealth)) {
     return true;
+  }
 
-  if(!isDefined(enemy._stealth.logic.spotted_list[self.unique_id]))
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.unique_id])) {
     enemy._stealth.logic.spotted_list[self.unique_id] = 0;
+  }
 
   while(1) {
     enemy._stealth.logic.spotted_list[self.unique_id]++;
 
-    if(enemy_alert_level_logic_start_attacking(enemy))
+    if(enemy_alert_level_logic_start_attacking(enemy)) {
       return true;
+    }
 
     number = enemy._stealth.logic.spotted_list[self.unique_id];
     self maps\_stealth_threat_enemy::enemy_alert_level_change("warning" + number);
@@ -122,8 +128,9 @@ enemy_threat_set_spotted() {
 
   self[[self._stealth.logic.pre_spotted_func]]();
 
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     level._stealth.group.spotted_enemy[self.script_stealthgroup] = enemy;
+  }
 
   self group_flag_set("_stealth_spotted");
 }
@@ -274,12 +281,14 @@ event_awareness_waitclear_ai_proc() {
   waittillframeend;
 
   check1 = false;
-  if(isDefined(self.ent_flag["_stealth_behavior_first_reaction"]))
+  if(isDefined(self.ent_flag["_stealth_behavior_first_reaction"])) {
     check1 = self ent_flag("_stealth_behavior_first_reaction");
+  }
 
   check2 = false;
-  if(isDefined(self.ent_flag["_stealth_behavior_reaction_anim"]))
+  if(isDefined(self.ent_flag["_stealth_behavior_reaction_anim"])) {
     check1 = self ent_flag("_stealth_behavior_reaction_anim");
+  }
 
   if(!check1 && !check2) {
     return;
@@ -298,8 +307,9 @@ event_awareness_waitclear_ai_proc() {
   if(loop) {
     loop = false;
     foreach(actor in allies) {
-      if(distancesquared(self.origin, actor.origin) < distsquared)
+      if(distancesquared(self.origin, actor.origin) < distsquared) {
         continue;
+      }
       loop = true;
     }
     wait 1;
@@ -345,14 +355,18 @@ enemy_event_declare_to_team(type, name) {
   check = int(level._stealth.logic.ai_event[name][level._stealth.logic.detection_level]);
 
   for(i = 0; i < ai.size; i++) {
-    if(!isalive(ai[i]))
+    if(!isalive(ai[i])) {
       continue;
-    if(!isDefined(ai[i]._stealth))
+    }
+    if(!isDefined(ai[i]._stealth)) {
       continue;
-    if(distance(ai[i].origin, self.origin) > check)
+    }
+    if(distance(ai[i].origin, self.origin) > check) {
       continue;
-    if(ai[i] ent_flag_exist("_stealth_behavior_asleep") && ai[i] ent_flag("_stealth_behavior_asleep"))
+    }
+    if(ai[i] ent_flag_exist("_stealth_behavior_asleep") && ai[i] ent_flag("_stealth_behavior_asleep")) {
       continue;
+    }
     ai[i] ent_flag_set("_stealth_bad_event_listener");
   }
 }
@@ -377,8 +391,9 @@ enemy_init() {
   self group_flag_init("_stealth_found_corpse");
 
   self group_add_to_global_list();
-  if(!isDefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup]))
+  if(!isDefined(level._stealth.behavior.sound["spotted"][self.script_stealthgroup])) {
     level._stealth.behavior.sound["spotted"][self.script_stealthgroup] = false;
+  }
 
   self._stealth.logic.alert_level = spawnStruct();
   self._stealth.logic.alert_level.max_warnings = 0;

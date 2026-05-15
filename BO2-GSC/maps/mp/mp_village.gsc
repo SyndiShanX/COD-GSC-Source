@@ -24,8 +24,9 @@ main() {
   destructibles = getEntArray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
-    if(destructible.destructibledef == "dest_propanetank_01")
+    if(destructible.destructibledef == "dest_propanetank_01") {
       destructible thread death_sound_think();
+    }
   }
 
   foreach(destructible in destructibles) {

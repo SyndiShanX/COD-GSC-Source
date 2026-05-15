@@ -13,8 +13,9 @@ main() {
   level.so_compass_zoom = "far";
 
   no_prone_water = getEntArray("no_prone_water", "targetname");
-  foreach(trigger in no_prone_water)
-  trigger.script_specialops = 1;
+  foreach(trigger in no_prone_water) {
+    trigger.script_specialops = 1;
+  }
 
   level.pmc_gametype = "mode_elimination";
   level.pmc_enemies = 40;

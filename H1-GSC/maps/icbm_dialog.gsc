@@ -23,12 +23,14 @@ dialog_intro_h1() {
   var_0[0] = level.price;
   var_0[1] = level.gaz;
 
-  if(isDefined(level.soldier))
+  if(isDefined(level.soldier)) {
     var_0[2] = level.soldier;
+  }
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2.keepnodeduringscriptedanim = 1;
+    }
   }
 
   var_4 = spawn("script_origin", (9037.58, -21616.8, -683.706));
@@ -45,8 +47,9 @@ dialog_intro_h1() {
   level.price waittillmatch("single anim", "dialog");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2.keepnodeduringscriptedanim = 0;
+    }
   }
 
   common_scripts\utility::flag_set("intro_dialog_done");
@@ -84,13 +87,15 @@ dialog_ambush_finished() {
 dialog_post_knife_kill() {
   maps\_utility::trigger_wait("gaz_floor_clear", "targetname");
 
-  if(!common_scripts\utility::flag("house1_cleared"))
+  if(!common_scripts\utility::flag("house1_cleared")) {
     level.gaz maps\_anim::anim_single_queue(level.gaz, "roomclear");
+  }
 
   wait 2;
 
-  if(!common_scripts\utility::flag("house1_cleared"))
+  if(!common_scripts\utility::flag("house1_cleared")) {
     level.gaz maps\_anim::anim_single_queue(level.gaz, "floorsclear");
+  }
 }
 
 dialog_proceed_upstairs() {
@@ -177,8 +182,9 @@ dialog_enemy_vehicle() {
   wait 3;
   common_scripts\utility::flag_wait("intro_dialog_done");
 
-  if(!common_scripts\utility::flag("truckguys dead"))
+  if(!common_scripts\utility::flag("truckguys dead")) {
     level.gaz maps\_anim::anim_single_queue(level.gaz, "enemyvehicle");
+  }
 
   common_scripts\utility::flag_set("truck_spotted");
 }
@@ -186,8 +192,9 @@ dialog_enemy_vehicle() {
 dialog_blow_up_tower() {
   var_0 = getent("tower_dialog", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("trigger");
+  }
 
   wait 0.5;
   level.price maps\_anim::anim_single_queue(level.price, "blowuptower");
@@ -208,8 +215,9 @@ dialog_contacts_in_the_woods() {
   common_scripts\utility::flag_set("contacts_in_the_woods");
   var_0 = maps\icbm_code::get_a_generic_friendly();
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\_anim::anim_single_queue(var_0, "insight");
+  }
 }
 
 dialog_jackson_do_it() {
@@ -222,8 +230,9 @@ dialog_jackson_do_it() {
     if(!isalive(var_1[var_2])) {
       continue;
     }
-    while(distance(var_1[var_2].origin, var_0.origin) < 460)
+    while(distance(var_1[var_2].origin, var_0.origin) < 460) {
       wait 0.5;
+    }
   }
 
   level.price maps\_anim::anim_single_queue(level.price, "doit");
@@ -243,8 +252,9 @@ dialog_tango_down() {
     return;
   }
   if(level.tango_down_dialog) {
-    if(randomint(2) > 0)
+    if(randomint(2) > 0) {
       return;
+    }
   }
 
   dialog_enemy_kills(var_0);

@@ -12,9 +12,9 @@ setup_linked_ent() {
   if(isDefined(self.target)) {
     var_0 = getent(self.target, "targetname");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self linkto(var_0);
-    else {}
+    } else {}
   }
 }
 
@@ -24,15 +24,18 @@ wobbler_setup() {
   var_2 = 2;
   setup_linked_ent();
 
-  if(isDefined(self.script_max_right_angle))
+  if(isDefined(self.script_max_right_angle)) {
     var_0 = self.script_max_right_angle;
+  }
 
-  if(isDefined(self.script_max_left_angle))
+  if(isDefined(self.script_max_left_angle)) {
     var_1 = self.script_max_left_angle;
+  }
 
   if(isDefined(self.script_wheeldirection)) {
-    if(-1 < self.script_wheeldirection && self.script_wheeldirection < 3)
+    if(-1 < self.script_wheeldirection && self.script_wheeldirection < 3) {
       var_2 = self.script_wheeldirection;
+    }
   }
 
   self.axis = var_2;
@@ -51,10 +54,11 @@ wobbler_setup() {
 }
 
 pick_new_target_angle(var_0) {
-  if(var_0 > self.start_angle)
+  if(var_0 > self.start_angle) {
     return randomfloatrange(self.min_angles, self.start_angle);
-  else
+  } else {
     return randomfloatrange(self.start_angle, self.max_angles);
+  }
 }
 
 update_angles_vector_from_axis(var_0, var_1, var_2) {

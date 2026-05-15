@@ -197,8 +197,9 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
       PrintLn("iDamage: ", iDamage);
       PrintLn("sMeansOfDeath: ", sMeansOfDeath);
 
-      if(isDefined(sWeaponOriginal))
+      if(isDefined(sWeaponOriginal)) {
         PrintLn("sWeaponOriginal: ", sWeaponOriginal);
+      }
 
       PrintLn("sWeapon: ", sWeapon);
       PrintLn("sPrimaryWeapon: ", sPrimaryWeapon);
@@ -220,11 +221,13 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
     assertEx(weaponTokens[weaponTokens.size - 1] == "mp", "weaponTokens[weaponTokens.size - 1]: " + weaponTokens[weaponTokens.size - 1]);
     weaponTokens[weaponTokens.size - 1] = undefined;
 
-    if(isDefined(weaponTokens[1]))
+    if(isDefined(weaponTokens[1])) {
       setMatchData("lives", lifeId, "attachments", 0, weaponTokens[1]);
+    }
 
-    if(isDefined(weaponTokens[2]))
+    if(isDefined(weaponTokens[2])) {
       setMatchData("lives", lifeId, "attachments", 1, weaponTokens[2]);
+    }
   } else if(sWeaponType == "item" || sWeaponType == "offhand") {
     weaponName = strip_suffix(sWeapon, "_mp");
     setMatchData("lives", lifeId, "weapon", weaponName);
@@ -232,8 +235,9 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
     setMatchData("lives", lifeId, "weapon", sWeapon);
   }
 
-  if(isKillstreakWeapon(sWeapon))
+  if(isKillstreakWeapon(sWeapon)) {
     setMatchData("lives", lifeId, "modifiers", "killstreak", true);
+  }
 
   setMatchData("lives", lifeId, "mod", sMeansOfDeath);
   if(isPlayer(attacker)) {

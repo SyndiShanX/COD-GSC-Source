@@ -71,6 +71,7 @@ commitweapondata(spawnid, currentweapon, time0) {
 }
 
 bbaddtostat(statname, delta) {
-  if(isDefined(self._bbdata) && isDefined(self._bbdata[statname]))
+  if(isDefined(self._bbdata) && isDefined(self._bbdata[statname])) {
     self._bbdata[statname] = self._bbdata[statname] + delta;
+  }
 }

@@ -42,8 +42,9 @@ damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7["MOD_RIFLE_BULLET"] = 1;
 
     if(isDefined(var_7[var_4])) {
-      if(var_0 <= self.bullet_resistance)
+      if(var_0 <= self.bullet_resistance) {
         return;
+      }
     }
   }
 
@@ -72,8 +73,9 @@ updatedamagefeedback(var_0) {
   self playlocalsound("SP_hit_alert");
   var_1 = 1;
 
-  if(isDefined(level.slowmo.speed_slow))
+  if(isDefined(level.slowmo.speed_slow)) {
     var_1 = level.slowmo.speed_slow;
+  }
 
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeovertime(var_1);

@@ -33,8 +33,9 @@ main() {
 aftermath_style_walking() {
   waittillframeend;
   waittillframeend;
-  if(flag("stop_aftermath_player"))
+  if(flag("stop_aftermath_player")) {
     return;
+  }
   level endon("stop_aftermath_player");
 
   level.ground_ref_ent = spawn("script_model", (0, 0, 0));
@@ -51,8 +52,9 @@ aftermath_style_walking() {
 slowview() {
   while(true) {
     level waittill("slowview", wait_time);
-    if(isDefined(wait_time))
+    if(isDefined(wait_time)) {
       wait(wait_time);
+    }
     childthread restart_slowview();
   }
 }
@@ -84,8 +86,9 @@ player_heartbeat() {
 
     wait(0 + randomfloat(0.1));
 
-    if(randomint(50) > level.player.movespeedscale * 190)
+    if(randomint(50) > level.player.movespeedscale * 190) {
       wait randomfloat(1);
+    }
   }
 }
 
@@ -139,8 +142,9 @@ adjust_swivel_over_time(ent) {
     dif = abs(dif);
 
     time = dif * 0.05;
-    if(time < 0.05)
+    if(time < 0.05) {
       time = 0.05;
+    }
 
     start_time = gettime();
     ent moveto((yaw, 0, 0), time, time * 0.5, time * 0.5);
@@ -222,8 +226,9 @@ swivel() {
 
     pitch = sin(pitch_sin) * 4 * level.unsteady_scale;
 
-    if(!flag("player_limping"))
+    if(!flag("player_limping")) {
       level.ground_ref_ent rotateto((pitch * 0.15, yaw * -1, pitch * 0.85), time, time * 0.5, time * 0.5);
+    }
 
     wait 0.05;
   }
@@ -275,10 +280,11 @@ adjust_roll_ent(roll_ent) {
 
     correct_limp_direction = vectordot(player_forward, forward) >= 0.8;
 
-    if(fast_enough && correct_limp_direction)
+    if(fast_enough && correct_limp_direction) {
       walking_count += 2;
-    else
+    } else {
       walking_count -= 1;
+    }
 
     walking_count = clamp(walking_count, 0, cap);
     if(walking_count < cap) {
@@ -372,8 +378,9 @@ limp_old() {
     speed_multiplier = player_speed / (level.player.movespeedscale * 190);
 
     p = randomfloatrange(3, 5);
-    if(randomint(100) < 20)
+    if(randomint(100) < 20) {
       p *= 1.5;
+    }
 
     stumble_time = randomfloatrange(0.35, 0.45);
     recover_time = randomfloatrange(0.65, 0.8);
@@ -393,8 +400,9 @@ limp_old() {
     stumble_angles = vector_multiply(stumble_angles, speed_multiplier);
 
     stumble++;
-    if(speed_multiplier > 1.3)
+    if(speed_multiplier > 1.3) {
       stumble++;
+    }
 
     flag_set("player_limping");
     childthread stumble(stumble_angles, stumble_time, recover_time);
@@ -434,8 +442,9 @@ player_jump_punishment() {
 
   while(true) {
     wait 0.05;
-    if(level.player isonground())
+    if(level.player isonground()) {
       continue;
+    }
     wait 0.2;
     if(level.player isonground()) {
       continue;
@@ -462,8 +471,9 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   level.ground_ref_ent rotateto(base_angles, recover_time, 0, recover_time / 2);
   level.ground_ref_ent waittill("rotatedone");
 
-  if(!isDefined(no_notify))
+  if(!isDefined(no_notify)) {
     level notify("recovered");
+  }
 }
 
 recover() {

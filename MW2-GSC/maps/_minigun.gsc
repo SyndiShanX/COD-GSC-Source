@@ -71,19 +71,22 @@ minigun_think() {
 player_on_minigun() {
   self endon("death");
   owner = undefined;
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
   if(self.classname == "script_vehicle") {
     owner = self getvehicleowner();
-    if(isDefined(owner) && isPlayer(owner))
+    if(isDefined(owner) && isPlayer(owner)) {
       return true;
-    else
+    } else {
       return false;
+    }
   } else {
-    if(isDefined(self getturretowner()))
+    if(isDefined(self getturretowner())) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 }
 
@@ -112,8 +115,9 @@ minigun_rumble() {
 minigun_fire_sounds() {
   self endon("death");
 
-  if(self.classname != "script_vehicle")
+  if(self.classname != "script_vehicle") {
     return;
+  }
   level endon("player_off_minigun");
   self.playingLoopSound = false;
   while(flag("player_on_minigun")) {
@@ -139,8 +143,9 @@ minigun_fire_loop() {
 }
 
 waittill_player_not_holding_fire_trigger_or_overheat() {
-  while((self.minigunUser attackButtonPressed()) && (self.allowedToFire == true))
+  while((self.minigunUser attackButtonPressed()) && (self.allowedToFire == true)) {
     wait(0.05);
+  }
 }
 
 minigun_fire() {
@@ -152,8 +157,9 @@ minigun_fire() {
   level endon("player_off_minigun");
   while(flag("player_on_minigun")) {
     self waittill("turret_fire");
-    if(self.allowedToFire == false)
+    if(self.allowedToFire == false) {
       continue;
+    }
     self fireWeapon();
     earthquake(0.25, .13, self GetTagOrigin("tag_turret"), 200);
     wait(0.01);
@@ -164,10 +170,11 @@ minigun_used() {
   level endon("player_off_minigun");
   flag_wait("player_on_minigun");
 
-  if(level.console)
+  if(level.console) {
     overheat_time = 6;
-  else
+  } else {
     overheat_time = 10;
+  }
 
   cooldown_time = 4;
   penalty_time = 7;
@@ -274,14 +281,16 @@ minigun_used() {
 
 disable_turret_fire() {
   self.allowedToFire = false;
-  if(self.classname != "script_vehicle")
+  if(self.classname != "script_vehicle") {
     self TurretFireDisable();
+  }
 }
 
 enable_turret_fire() {
   self.allowedToFire = true;
-  if(self.classname != "script_vehicle")
+  if(self.classname != "script_vehicle") {
     self TurretFireEnable();
+  }
 }
 
 minigun_sound_spinup() {

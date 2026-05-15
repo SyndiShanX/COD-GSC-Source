@@ -92,13 +92,15 @@ start_h2_ac130(lifeID) {
   self _visionsetnakedforplayer("black_bw", 0);
   self _visionsetnakedforplayer("", 1);
 
-  if(self getCurrentWeapon() != "ac130_mp" || self isSwitchingWeapon())
+  if(self getCurrentWeapon() != "ac130_mp" || self isSwitchingWeapon()) {
     self setSpawnWeapon("ac130_mp");
+  }
 
   self _disableWeaponSwitch();
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self thread exitAC130OnEntNotify(level.ac130, "death");
   self thread exitAC130OnEntNotify(level, "game_ended");
@@ -159,8 +161,9 @@ start_h2_ac130(lifeID) {
   ac130.plane setContents(0);
   ac130.plane linkTo(ac130, "tag_origin", (0, 0, 0), (0, -90, 0));
 
-  if(isBot(self))
+  if(isBot(self)) {
     self thread scripts\mp\bot_patches::bot_remote_use(ac130);
+  }
 
   self ThermalVisionFOFOverlayOn();
 
@@ -206,8 +209,9 @@ weaponLockThink(ac130) {
     targetsInReticle = [];
 
     /*
-    foreach ( target in targetList )
+    foreach ( target in targetList ) {
     {
+    }
     insideReticle = self WorldPointInReticle_Circle( target.origin, 65, 1200 );
 
     if( !insideReticle ) {
@@ -271,8 +275,9 @@ stingerProximityDetonate(player, missileTeam) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(level.ac130player))
+  if(isDefined(level.ac130player)) {
     level.ac130player playLocalSound("missile_incoming");
+  }
 
   level.ac130.incomingMissile = true;
 
@@ -302,8 +307,9 @@ stingerProximityDetonate(player, missileTeam) {
       self Missile_SetTargetEnt(newTarget);
       missileTarget = newTarget;
 
-      if(isDefined(level.ac130player))
+      if(isDefined(level.ac130player)) {
         level.ac130player stopLocalSound("missile_incoming");
+      }
     }
 
     if(curDist < minDist) {
@@ -311,8 +317,9 @@ stingerProximityDetonate(player, missileTeam) {
       eta = (curDist / speedPerFrame);
 
       if(eta < 1.5 && !didSeatbelts && missileTarget == level.ac130) {
-        if(isDefined(level.ac130player))
+        if(isDefined(level.ac130player)) {
           level.ac130player playLocalSound("fasten_seatbelts");
+        }
 
         didSeatbelts = true;
       }
@@ -327,8 +334,9 @@ stingerProximityDetonate(player, missileTeam) {
       if(isDefined(level.ac130player)) {
         level.ac130player stopLocalSound("missile_incoming");
 
-        if(level.ac130player.team != missileTeam)
+        if(level.ac130player.team != missileTeam) {
           radiusDamage(self.origin, 1000, 1000, 1000, player);
+        }
       }
 
       self hide();
@@ -422,8 +430,9 @@ monitorSmallFire(type) {
   for(;;) {
     wait 0.05;
 
-    while(!self attackButtonPressed())
+    while(!self attackButtonPressed()) {
       wait 0.05;
+    }
 
     if(self.ac130Weapon != type) {
       continue;
@@ -478,10 +487,11 @@ ac130_25mm_sound() {
   level.ac130.soundEnt = soundEnt;
 
   for(;;) {
-    if(self attackButtonPressed() && self.ac130Weapon == "ac130_25mm_mp" && !self.ac130Reloading["ac130_25mm_mp"])
+    if(self attackButtonPressed() && self.ac130Weapon == "ac130_25mm_mp" && !self.ac130Reloading["ac130_25mm_mp"]) {
       soundEnt playLoopSound("ac130_25mm_fire");
-    else
+    } else {
       soundEnt stopLoopSound();
+    }
 
     wait 0.05;
   }
@@ -504,8 +514,9 @@ ac130Reload() {
     if(self.ac130Reloading[self.ac130Weapon]) {
       result = self reloadPopup();
 
-      if(!isDefined(result))
+      if(!isDefined(result)) {
         continue;
+      }
     }
 
     self.ac130ReloadText.alpha = 0;
@@ -565,20 +576,24 @@ exitAC130OnEntNotify(ent, waitfor) {
   self endon("leave_ac130");
   ent waittill(waitfor);
 
-  if(waitfor != "death")
+  if(waitfor != "death") {
     level.ac130 thread fly_away();
+  }
 
   level.ac130InUse = false;
   level.ac130player = undefined;
 
-  if(isDefined(level.ac130.playerView))
+  if(isDefined(level.ac130.playerView)) {
     level.ac130.playerView delete();
+  }
 
-  if(isDefined(level.ac130.plane))
+  if(isDefined(level.ac130.plane)) {
     level.ac130.plane delete();
+  }
 
-  if(isDefined(level.ac130.soundEnt))
+  if(isDefined(level.ac130.soundEnt)) {
     level.ac130.soundEnt delete();
+  }
 
   self thread exitAC130(waitfor == "disconnect");
 }
@@ -596,8 +611,9 @@ exitAC130(disconnected) {
 
     self thread maps\mp\h2_killstreaks\_common::takeKillstreakWeapons();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       self setThirdPersonDOF(true);
+    }
 
     self ThermalVisionOff();
     self ThermalVisionFOFOverlayOff();
@@ -641,15 +657,17 @@ ac130_damage_tracker() {
     if(!maps\mp\gametypes\_weapons::friendlyFireCheck(self.owner, attacker)) {
       continue;
     }
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
       self.wasDamagedFromBulletPenetration = true;
+    }
 
     self.wasDamaged = true;
 
     modifiedDamage = damage;
 
-    if(isPlayer(attacker))
+    if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("ac130");
+    }
 
     if(isDefined(sWeapon)) {
       switch (sWeapon) {

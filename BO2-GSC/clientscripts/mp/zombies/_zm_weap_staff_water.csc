@@ -23,8 +23,9 @@ init() {
 
 attach_model(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    if(isDefined(self.ice_shard_fx))
+    if(isDefined(self.ice_shard_fx)) {
       stopfx(localclientnum, self.ice_shard_fx);
+    }
 
     self.ice_shard_fx = playFXOnTag(localclientnum, level._effect["staff_water_ice_shard"], self, "j_spine4");
     self thread ice_freeze_fx(localclientnum);
@@ -75,8 +76,9 @@ staff_blizzard_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.sndent thread clientscripts\mp\zm_tomb::snddemojumpmonitor();
     }
   } else {
-    if(isDefined(self.ice_fx))
+    if(isDefined(self.ice_fx)) {
       stopfx(localclientnum, self.ice_fx);
+    }
 
     if(isDefined(self.sndent)) {
       self.sndent stoploopsound(1.5);

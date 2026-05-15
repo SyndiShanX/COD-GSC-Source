@@ -69,8 +69,9 @@ levelspawndvars(reset_dvars) {
 }
 
 killstreak_init() {
-  while(!isDefined(level.missile_swarm_flyheight))
+  while(!isDefined(level.missile_swarm_flyheight)) {
     wait 1;
+  }
 
   level.missile_swarm_flyheight = 6000;
 }

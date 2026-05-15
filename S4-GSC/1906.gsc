@@ -5938,8 +5938,9 @@ _id_10C2D() {
     if(scripts\cp\utility::_id_8632(var_0) || issubstr(var_0.basename, "fists") || issubstr(var_0.basename, "heart")) {
       continue;
     }
-    if(var_1 <= 5 && var_1 > 0 && self getweaponammostock(var_0) == 0 || self getweaponammostock(var_0) > 0 && var_1 / self getweaponammostock(var_0) < 0.1) {} else if(var_1 == 0 && (var_0.basename != "iw7_cpbasketball_mp" && !isnullweapon(var_0)))
+    if(var_1 <= 5 && var_1 > 0 && self getweaponammostock(var_0) == 0 || self getweaponammostock(var_0) > 0 && var_1 / self getweaponammostock(var_0) < 0.1) {} else if(var_1 == 0 && (var_0.basename != "iw7_cpbasketball_mp" && !isnullweapon(var_0))) {
       _id_076F::_id_F72D("nag_out_ammo", "zmb_comment_vo", "low", 3, 0, 0, 0, 20);
+    }
 
     if(var_0.basename == "ac130_105mm_mp" || var_0.basename == "ac130_40mm_mp" || var_0.basename == "ac130_25mm_mp") {
       continue;

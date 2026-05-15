@@ -15,8 +15,9 @@ initCredits(type) {
   level.credits_spacing = -120;
 
   set_console_status();
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "all";
+  }
   switch (type) {
     case "iw":
       initIWCredits();
@@ -563,10 +564,11 @@ initIWCredits_music2() {
 
 initIWCredits_add() {
   addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES1");
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES3");
-  else
+  } else {
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES2");
+  }
   addSpaceSmall();
   addSubTitleIW(&"CREDIT_EARBASH_AUDIO_INC");
   addGap();
@@ -690,8 +692,9 @@ initIWCredits_baby() {
 addLeftTitle(title, textscale) {
   precacheString(title);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "lefttitle";
@@ -704,8 +707,9 @@ addLeftTitle(title, textscale) {
 addLeftName(name, textscale) {
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "leftname";
@@ -722,8 +726,9 @@ addSubLeftTitle(title, textscale) {
 addSubLeftName(name, textscale) {
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "subleftname";
@@ -736,8 +741,9 @@ addSubLeftName(name, textscale) {
 addRightTitle(title, textscale) {
   precacheString(title);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "righttitle";
@@ -750,8 +756,9 @@ addRightTitle(title, textscale) {
 addRightName(name, textscale) {
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "rightname";
@@ -764,8 +771,9 @@ addRightName(name, textscale) {
 addCenterHeading(heading, textscale) {
   precacheString(heading);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "centerheading";
@@ -779,8 +787,9 @@ addCastName(name, title, textscale) {
   precacheString(title);
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "castname";
@@ -794,8 +803,9 @@ addCastName(name, title, textscale) {
 addCenterName(name, textscale) {
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "centername";
@@ -809,8 +819,9 @@ addCenterNameDouble(name1, name2, textscale) {
   precacheString(name1);
   precacheString(name2);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "centernamedouble";
@@ -825,8 +836,9 @@ addCenterDual(title, name, textscale) {
   precacheString(title);
   precacheString(name);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "centerdual";
@@ -842,8 +854,9 @@ addCenterTriple(name1, name2, name3, textscale) {
   precacheString(name2);
   precacheString(name3);
 
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
 
   temp = spawnStruct();
   temp.type = "centertriple";
@@ -879,8 +892,9 @@ addCenterImage(image, width, height, delay) {
   temp.height = height;
   temp.sort = 2;
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     temp.delay = delay;
+  }
 
   level.linelist[level.linelist.size] = temp;
 }
@@ -895,8 +909,9 @@ addLeftImage(image, width, height, delay) {
   temp.height = height;
   temp.sort = 2;
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     temp.delay = delay;
+  }
 
   level.linelist[level.linelist.size] = temp;
 }
@@ -939,8 +954,9 @@ playCredits() {
     type = level.linelist[i].type;
 
     if(type == "centerimage") {
-      if(isDefined(mode) && mode != "credits_black")
+      if(isDefined(mode) && mode != "credits_black") {
         flag_wait("atvi_credits_go");
+      }
 
       image = level.linelist[i].image;
       width = level.linelist[i].width;
@@ -959,10 +975,11 @@ playCredits() {
       temp moveOverTime(level.credits_speed);
       temp.y = level.credits_spacing;
 
-      if(isDefined(level.linelist[i].delay))
+      if(isDefined(level.linelist[i].delay)) {
         delay = level.linelist[i].delay;
-      else
+      } else {
         delay = ((0.037 * height));
+      }
     } else if(type == "leftimage") {
       image = level.linelist[i].image;
       width = level.linelist[i].width;
@@ -993,10 +1010,11 @@ playCredits() {
       temp.x = 28;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1019,10 +1037,11 @@ playCredits() {
       temp.x = 60;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1046,10 +1065,11 @@ playCredits() {
       temp1.x = 60;
       temp1.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp1.font = "default";
-      else
+      } else {
         temp1.font = "small";
+      }
 
       temp1.fontScale = textscale;
       temp1.sort = 2;
@@ -1063,10 +1083,11 @@ playCredits() {
       temp2.x = 275;
       temp2.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp2.font = "default";
-      else
+      } else {
         temp2.font = "small";
+      }
 
       temp2.fontScale = textscale;
       temp2.sort = 2;
@@ -1094,10 +1115,11 @@ playCredits() {
       temp.x = 92;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1120,10 +1142,11 @@ playCredits() {
       temp.x = -132;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1144,10 +1167,11 @@ playCredits() {
       temp.x = -100;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1168,10 +1192,11 @@ playCredits() {
       temp.x = 0;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1193,10 +1218,11 @@ playCredits() {
       temp1.x = -8;
       temp1.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp1.font = "default";
-      else
+      } else {
         temp1.font = "small";
+      }
 
       temp1.fontScale = textscale;
       temp1.sort = 2;
@@ -1210,10 +1236,11 @@ playCredits() {
       temp2.x = 8;
       temp2.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp2.font = "default";
-      else
+      } else {
         temp2.font = "small";
+      }
 
       temp2.fontScale = textscale;
       temp2.sort = 2;
@@ -1240,10 +1267,11 @@ playCredits() {
       temp1.x = -160;
       temp1.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp1.font = "default";
-      else
+      } else {
         temp1.font = "small";
+      }
 
       temp1.fontScale = textscale;
       temp1.sort = 2;
@@ -1257,10 +1285,11 @@ playCredits() {
       temp2.x = 0;
       temp2.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp2.font = "default";
-      else
+      } else {
         temp2.font = "small";
+      }
 
       temp2.fontScale = textscale;
       temp2.sort = 2;
@@ -1274,10 +1303,11 @@ playCredits() {
       temp3.x = 160;
       temp3.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp3.font = "default";
-      else
+      } else {
         temp3.font = "small";
+      }
 
       temp3.fontScale = textscale;
       temp3.sort = 2;
@@ -1306,10 +1336,11 @@ playCredits() {
       temp.x = 8;
       temp.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp.font = "default";
-      else
+      } else {
         temp.font = "small";
+      }
 
       temp.fontScale = textscale;
       temp.sort = 2;
@@ -1331,10 +1362,11 @@ playCredits() {
       temp1.x = -80;
       temp1.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp1.font = "default";
-      else
+      } else {
         temp1.font = "small";
+      }
 
       temp1.fontScale = textscale;
       temp1.sort = 2;
@@ -1348,10 +1380,11 @@ playCredits() {
       temp2.x = 80;
       temp2.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         temp2.font = "default";
-      else
+      } else {
         temp2.font = "small";
+      }
 
       temp2.fontScale = textscale;
       temp2.sort = 2;
@@ -1367,8 +1400,9 @@ playCredits() {
       temp2.y = level.credits_spacing;
     } else if(type == "spacesmall")
       delay = 0.1875;
-    else
+    else {
       assert(type == "space");
+    }
 
     wait delay * (level.credits_speed / 22.5);
   }
@@ -1431,24 +1465,27 @@ addSubLeftNameNameName(name1, name2, name3) {
 }
 
 addImageIW(image, width, height, delay) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addLeftImage(image, width, height, delay);
-  else
+  } else {
     addCenterImage(image, width, height, delay);
+  }
 }
 
 addTitleIW(title) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addLeftTitle(title);
-  else
+  } else {
     addCenterHeading(title);
+  }
 }
 
 addSubTitleIW(title) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addSubLeftTitle(title);
-  else
+  } else {
     addCenterHeading(title);
+  }
 }
 
 addTitleNameIW(title, name) {
@@ -1470,31 +1507,35 @@ addSubTitleNameIW(title, name) {
 }
 
 addcastIW(name, title, combo) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addCastName(name, title);
-  else
+  } else {
     addCenterHeading(name);
+  }
 }
 
 addNameIW(name) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addLeftName(name);
-  else
+  } else {
     addCenterName(name);
+  }
 }
 
 addSubNameIW(name) {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addSubLeftName(name);
-  else
+  } else {
     addCenterName(name);
+  }
 }
 
 addSpaceTitle() {
-  if(getDvar("ui_char_museum_mode") != "credits_black")
+  if(getDvar("ui_char_museum_mode") != "credits_black") {
     addSpace();
-  else
+  } else {
     addSpaceSmall();
+  }
 }
 
 addGap() {

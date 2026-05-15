@@ -168,8 +168,9 @@ increase_fov_when_player_is_near() {
 
 player_is_near() {
   foreach(player in level.players) {
-    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint))
+    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint)) {
       return true;
+    }
   }
 
   return false;
@@ -315,14 +316,16 @@ dialog_stealth_spotted() {
     flag_wait("_stealth_spotted");
 
     wait 1;
-    if(flag("_stealth_spotted"))
+    if(flag("_stealth_spotted")) {
       dialog_stealth_throttle(failure[line]);
+    }
 
     level.stealth_broken_time = gettime();
 
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
 
     flag_waitopen("_stealth_spotted");
   }
@@ -344,17 +347,20 @@ dialog_stealth_failure() {
     flag_waitopen("_stealth_spotted");
     wait 1;
 
-    if(!flag("_stealth_spotted"))
+    if(!flag("_stealth_spotted")) {
       dialog_stealth_throttle(failure[line]);
+    }
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
   }
 }
 
 dialog_stealth_throttle(dialog_alias) {
-  if(level.stealth_broken_time + 5000 < gettime())
+  if(level.stealth_broken_time + 5000 < gettime()) {
     radio_dialogue(dialog_alias);
+  }
 }
 
 dialog_unsilenced_weapons() {
@@ -445,13 +451,15 @@ unload_and_attack_if_stealth_broken_and_close() {
 
   while(1) {
     flag_wait("_stealth_spotted");
-    foreach(player in level.players)
-    thread waittill_player_in_range(player);
+    foreach(player in level.players) {
+      thread waittill_player_in_range(player);
+    }
     self waittill("player_in_range");
-    if(!flag("_stealth_spotted"))
+    if(!flag("_stealth_spotted")) {
       continue;
-    else
+    } else {
       break;
+    }
   }
   flag_set("truck_guys_alerted");
 }
@@ -473,8 +481,9 @@ truck_headlights() {
 
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     delete_truck_headlights();
+  }
 }
 
 delete_truck_headlights() {
@@ -508,8 +517,9 @@ dialog_truck_coming() {
 
 waittill_player_in_truck_range() {
   self.close_player = undefined;
-  foreach(player in level.players)
-  player thread watch_for_truck(self);
+  foreach(player in level.players) {
+    player thread watch_for_truck(self);
+  }
 
   level waittill("player_in_truck_range");
 }
@@ -561,8 +571,9 @@ array_thread(level.plant_targets, ::explosive_think);
 waittillframeend;
 
 Objective_Add(1, "current", level.challenge_objective);
-for(i = 0; i < level.plant_targets.size; i++)
+for(i = 0; i < level.plant_targets.size; i++) {
   Objective_AdditionalPosition(1, level.plant_targets[i].id, level.plant_targets[i].origin);
+}
 }
 
 setup_explosive() {
@@ -614,10 +625,11 @@ explosives_planted_monitor() {
 
   while(1) {
     all_planted = true;
-    foreach(plant_target in level.plant_targets)
-    if(plant_target.planted == false)
-      all_planted = false;
-
+    foreach(plant_target in level.plant_targets) {
+      if(plant_target.planted == false) {
+        all_planted = false;
+      }
+    }
     if(all_planted) {
       break;
     }
@@ -634,8 +646,9 @@ explosives_planted_monitor() {
   trigger_on("player_outside_compound", "script_noteworthy");
 }
 animname = "flag_square";
-if(isDefined(self.script_noteworthy))
+if(isDefined(self.script_noteworthy)) {
   animname = self.script_noteworthy;
+}
 waving_flag = spawn_anim_model(animname);
 waving_flag.origin = self.origin;
 waving_flag.angles = self.angles;
@@ -650,8 +663,9 @@ flag_waves() {
   animation = self getanim("flag_waves");
   self SetAnim(animation, 1, 0, 1);
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     flap_rate = RandomFloatRange(0.8, 1.2);
     self SetAnim(animation, 1, 0, flap_rate);
     wait(RandomFloatRange(0.3, 0.7));
@@ -677,16 +691,18 @@ threeD_objective_hint() {
 }
 special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
 test = 0;
-if(!special_case)
+if(!special_case) {
   test = 0;
+}
 
 original_case = self type_spawners();
 return special_case && original_case;
 }
 
 type_vehicle_special() {
-  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap")
+  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap") {
     return false;
+  }
 
   special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "tarmac_snowmobile");
   special_case2 = !(isDefined(self.targetname) && self.targetname == "truck_patrol");
@@ -694,8 +710,9 @@ type_vehicle_special() {
   original_case = self type_vehicle();
 
   test = 0;
-  if(original_case)
+  if(original_case) {
     test = 0;
+  }
 
   return special_case && special_case2 && original_case;
 }

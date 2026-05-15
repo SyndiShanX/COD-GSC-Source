@@ -6,8 +6,9 @@ h2_scavenger_bag() {
     self hide();
 
     foreach(player in level.players) {
-      if(maps\mp\_utility::isReallyAlive(player) && player maps\mp\_utility::_hasPerk("specialty_scavenger"))
+      if(maps\mp\_utility::isReallyAlive(player) && player maps\mp\_utility::_hasPerk("specialty_scavenger")) {
         self showToPlayer(player);
+      }
     }
 
     level waittill("scavenger_update");
@@ -15,8 +16,9 @@ h2_scavenger_bag() {
 }
 
 should_precache(name) {
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     return false;
+  }
 
   switch (name) {
     case "h2m_weapon_c4_mp":
@@ -116,17 +118,21 @@ init() {
       }
     }
 
-    foreach(var_17 in var_12)
-    level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
+    foreach(var_17 in var_12) {
+      level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
+    }
   }
 
   /*
-  if( !isDefined( level.iszombiegame ) || !level.iszombiegame )
+  if( !isDefined( level.iszombiegame ) || !level.iszombiegame ) {
   {
-  foreach ( var_20 in level.weaponlist )
+  }
+  foreach ( var_20 in level.weaponlist ) {
   {
-  if(should_precache(var_20))
+  }
+  if(should_precache(var_20)) {
   precacheitem(var_20);
+  }
   }
   }
   */
@@ -134,8 +140,9 @@ init() {
   thread maps\mp\_flashgrenades::main();
   thread maps\mp\_entityheadicons::init();
 
-  if(!isDefined(level.weapondropfunction))
+  if(!isDefined(level.weapondropfunction)) {
     level.weapondropfunction = ::dropweaponfordeath;
+  }
 
   var_23 = 70;
   level.claymoredetectiondot = cos(var_23);
@@ -184,16 +191,18 @@ bombsquadwaiter() {
     var_2 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     if(var_2 == "h1_c4_mp") {
-      if(!isDefined(level.bombsquadmodelc4))
+      if(!isDefined(level.bombsquadmodelc4)) {
         level.bombsquadmodelc4 = "weapon_c4_bombsquad_mw1";
+      }
 
       var_0 thread createbombsquadmodel(level.bombsquadmodelc4, "tag_origin", self);
       continue;
     }
 
     if(var_2 == "h1_claymore_mp") {
-      if(!isDefined(level.bombsquadmodelclaymore))
+      if(!isDefined(level.bombsquadmodelclaymore)) {
         level.bombsquadmodelclaymore = "weapon_claymore_bombsquad_mw1";
+      }
 
       var_0 thread createbombsquadmodel(level.bombsquadmodelclaymore, "tag_origin", self);
     }
@@ -214,8 +223,9 @@ createbombsquadmodel(var_0, var_1, var_2) {
   var_3 setcontents(0);
   self waittill("death");
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   var_3 delete();
 }
@@ -243,8 +253,9 @@ checkbombsquadvisibility(var_0, var_1) {
       if(!isDefined(var_3.team) || var_3.team == "spectator") {
         continue;
       }
-      if(var_3.team != var_1 && var_3 maps\mp\_utility::_hasperk("specialty_detectexplosive"))
+      if(var_3.team != var_1 && var_3 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
         self showtoplayer(var_3);
+      }
 
       continue;
     }
@@ -316,13 +327,15 @@ onplayerspawned() {
     thread maps\mp\_lasersight::lasersight_think();
     thread watchgrenadegraceperiod();
 
-    if(!maps\mp\_utility::invirtuallobby())
+    if(!maps\mp\_utility::invirtuallobby()) {
       thread watchsentryusage();
+    }
 
     thread watchweaponchange();
 
-    if(isDefined(level.onplayerspawnedweaponsfunc))
+    if(isDefined(level.onplayerspawnedweaponsfunc)) {
       self thread[[level.onplayerspawnedweaponsfunc]]();
+    }
 
     self.lasthittime = [];
     self.droppeddeathweapon = undefined;
@@ -333,8 +346,9 @@ onplayerspawned() {
     self.trophyremainingammo = undefined;
     thread track_damage_info();
 
-    if(!isDefined(self.spawninfo))
+    if(!isDefined(self.spawninfo)) {
       self.spawninfo = spawnStruct();
+    }
 
     self.spawninfo.spawntime = gettime();
     self.spawninfo.damagedealttoofast = 0;
@@ -342,8 +356,9 @@ onplayerspawned() {
     self.spawninfo.badspawn = 0;
     var_0 = self.spawninfo.spawntime;
 
-    if(!isDefined(self.num_lives))
+    if(!isDefined(self.num_lives)) {
       self.num_lives = 0;
+    }
 
     self.num_lives++;
 
@@ -359,14 +374,17 @@ onplayerspawned() {
 
     if(isDefined(self.spawninfo)) {
       if(isDefined(self.spawninfo.spawnpoint)) {
-        if(isDefined(self.spawninfo.spawnpoint.israndom))
+        if(isDefined(self.spawninfo.spawnpoint.israndom)) {
           var_4 = self.spawninfo.spawnpoint.israndom;
+        }
 
-        if(isDefined(self.spawninfo.spawnpoint.numberofpossiblespawnchoices))
+        if(isDefined(self.spawninfo.spawnpoint.numberofpossiblespawnchoices)) {
           var_5 = self.spawninfo.spawnpoint.numberofpossiblespawnchoices;
+        }
 
-        if(isDefined(self.spawninfo.spawnpoint.lastupdatetime))
+        if(isDefined(self.spawninfo.spawnpoint.lastupdatetime)) {
           var_6 = self.spawninfo.spawnpoint.lastupdatetime;
+        }
       }
     }
 
@@ -535,8 +553,9 @@ watchstartweaponchange() {
     self.changingweapon = var_0;
 
     if(var_0 == "none" && isDefined(self.iscapturingcrate) && self.iscapturingcrate) {
-      while(self.iscapturingcrate)
+      while(self.iscapturingcrate) {
         wait 0.05;
+      }
 
       self.changingweapon = undefined;
     }
@@ -583,8 +602,9 @@ watchrangerusage(var_0) {
       var_4 = self getweaponammoclip(var_0, "left");
       var_5 = self getweaponammoclip(var_0, "right");
 
-      if(var_2 != var_4 && var_1 != var_5)
+      if(var_2 != var_4 && var_1 != var_5) {
         self.bothbarrels = 1;
+      }
 
       if(!var_4 || !var_5) {
         return;
@@ -602,32 +622,39 @@ watchrangerusage(var_0) {
 }
 
 maydropweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
-  if(issubstr(var_0, "uav"))
+  if(issubstr(var_0, "uav")) {
     return 0;
+  }
 
-  if(issubstr(var_0, "killstreak"))
+  if(issubstr(var_0, "killstreak")) {
     return 0;
+  }
 
-  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_projectile")
+  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_projectile") {
     return 0;
+  }
 
   var_1 = weaponinventorytype(var_0);
 
-  if(var_1 != "primary")
+  if(var_1 != "primary") {
     return 0;
+  }
 
-  if(issubstr(var_0, "combatknife") || issubstr(var_0, "underwater"))
+  if(issubstr(var_0, "combatknife") || issubstr(var_0, "underwater")) {
     return 0;
+  }
 
   return 1;
 }
 
 dropweaponfordeath(var_0, var_1) {
-  if(!maps\mp\_utility::isusingremote())
+  if(!maps\mp\_utility::isusingremote()) {
     waittillframeend;
+  }
 
   if(isDefined(level.blockweapondrops)) {
     return;
@@ -689,16 +716,18 @@ dropweaponfordeath(var_0, var_1) {
     var_7 = self getweaponammostock(var_2);
     var_8 = weaponmaxammo(var_2);
 
-    if(var_7 > var_8)
+    if(var_7 > var_8) {
       var_7 = var_8;
+    }
 
     var_9 = self dropitem(var_2);
 
     if(!isDefined(var_9)) {
       return;
     }
-    if(maps\mp\_utility::ismeleemod(var_1))
+    if(maps\mp\_utility::ismeleemod(var_1)) {
       var_9.origin = (var_9.origin[0], var_9.origin[1], var_9.origin[2] - 5);
+    }
 
     var_9 itemweaponsetammo(var_5, var_7, var_6);
   } else {
@@ -787,14 +816,16 @@ watchpickup() {
     var_2.pickedupweaponfrom[var_0] = undefined;
     var_2.tookweaponfrom[var_0] = undefined;
 
-    if(isDefined(var_2.pers["weaponPickupsCount"]))
+    if(isDefined(var_2.pers["weaponPickupsCount"])) {
       var_2.pers["weaponPickupsCount"]++;
+    }
 
     if(isDefined(var_1) && var_1 != var_2) {
       var_2.pickedupweaponfrom[var_0] = var_1;
 
-      if(isDefined(self.ownersattacker) && self.ownersattacker == var_2)
+      if(isDefined(self.ownersattacker) && self.ownersattacker == var_2) {
         var_2.tookweaponfrom[var_0] = var_1;
+      }
     }
 
     if(isDefined(var_3)) {
@@ -806,11 +837,13 @@ watchpickup() {
   var_3.targetname = "dropped_weapon";
   var_4 = var_3 getitemweaponname();
 
-  if(isDefined(var_2.primaryweapon) && var_2.primaryweapon == var_4)
+  if(isDefined(var_2.primaryweapon) && var_2.primaryweapon == var_4) {
     var_2.primaryweapon = var_0;
+  }
 
-  if(isDefined(var_2.secondaryweapon) && var_2.secondaryweapon == var_4)
+  if(isDefined(var_2.secondaryweapon) && var_2.secondaryweapon == var_4) {
     var_2.secondaryweapon = var_0;
+  }
 
   if(isDefined(var_2.pickedupweaponfrom[var_4])) {
     var_3.owner = var_2.pickedupweaponfrom[var_4];
@@ -842,16 +875,18 @@ handlescavengerbagpickup() {
   for(;;) {
     self waittill("trigger", destPlayer);
 
-    if(!isDefined(destPlayer) || !isPlayer(destPlayer) || !maps\mp\_utility::isReallyAlive(destPlayer) || !destPlayer maps\mp\_utility::_hasPerk("specialty_scavenger"))
+    if(!isDefined(destPlayer) || !isPlayer(destPlayer) || !maps\mp\_utility::isReallyAlive(destPlayer) || !destPlayer maps\mp\_utility::_hasPerk("specialty_scavenger")) {
       continue;
-    else
+    } else {
       break;
+    }
   }
 
   destPlayer notify("scavenger_pickup");
 
-  if(destPlayer maps\mp\_utility::_hasPerk("specialty_tacticalinsertion") && destPlayer getAmmoCount("flare_mp") < 1)
+  if(destPlayer maps\mp\_utility::_hasPerk("specialty_tacticalinsertion") && destPlayer getAmmoCount("flare_mp") < 1) {
     destPlayer maps\mp\_utility::_setPerk("specialty_tacticalinsertion", 0);
+  }
 
   offhandWeapons = destPlayer getWeaponsListAll();
 
@@ -899,8 +934,9 @@ hud_scavenger() {
   self notify("hud_scavenger");
   self endon("hud_scavenger");
 
-  if(isDefined(self.scavenger_icon))
+  if(isDefined(self.scavenger_icon)) {
     self.scavenger_icon destroy();
+  }
 
   self playlocalsound("h2_scavenger_pack_pickup");
 
@@ -989,8 +1025,9 @@ watchweaponusage() {
     if(!maps\mp\_utility::iscacprimaryweapon(var_1) && !maps\mp\_utility::iscacsecondaryweapon(var_1) && !maps\mp\_utility::iscacmeleeweapon(var_1)) {
       continue;
     }
-    if(isDefined(self.hitsthismag[var_1]))
+    if(isDefined(self.hitsthismag[var_1])) {
       thread updatemagshots(var_1);
+    }
 
     var_2 = maps\mp\gametypes\_persistence::statgetbuffered("totalShots") + 1;
     var_3 = maps\mp\gametypes\_persistence::statgetbuffered("hits");
@@ -1044,8 +1081,9 @@ checkhit(var_0, var_1) {
       if(var_4 == "shotgun") {
         var_5 = getsubstr(var_0, 0, 4);
 
-        if(!isprimaryweapon(var_5) && !issidearm(var_5))
+        if(!isprimaryweapon(var_5) && !issidearm(var_5)) {
           self.hits = 1;
+        }
 
         continue;
       }
@@ -1087,11 +1125,13 @@ checkhit(var_0, var_1) {
 
   waittillframeend;
 
-  if(isDefined(self.hitsthismag[var_0]))
+  if(isDefined(self.hitsthismag[var_0])) {
     thread checkhitsthismag(var_0);
+  }
 
-  if(!isDefined(self.lasthittime[var_0]))
+  if(!isDefined(self.lasthittime[var_0])) {
     self.lasthittime[var_0] = 0;
+  }
 
   if(self.lasthittime[var_0] == gettime()) {
     return;
@@ -1113,29 +1153,36 @@ attackercandamageitem(var_0, var_1) {
 }
 
 friendlyfirecheck(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     return 1;
+  }
 
   var_3 = var_1.team;
   var_4 = level.friendlyfire;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
+  }
 
-  if(var_4 != 0)
+  if(var_4 != 0) {
     return 1;
+  }
 
-  if(var_1 == var_0)
+  if(var_1 == var_0) {
     return 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
-  if(var_3 != var_0.team)
+  if(var_3 != var_0.team) {
     return 1;
+  }
 
   return 0;
 }
@@ -1151,19 +1198,23 @@ watchgrenadeusage() {
   self.gotpullbacknotify = 0;
 
   if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
-    if(isDefined(self.dont_delete_grenades_on_next_spawn))
+    if(isDefined(self.dont_delete_grenades_on_next_spawn)) {
       self.dont_delete_grenades_on_next_spawn = undefined;
-    else
+    } else {
       delete_all_grenades();
+    }
   } else {
-    if(!isDefined(self.manuallydetonatedarray))
+    if(!isDefined(self.manuallydetonatedarray)) {
       self.manuallydetonatedarray = [];
+    }
 
-    if(!isDefined(self.claymorearray))
+    if(!isDefined(self.claymorearray)) {
       self.claymorearray = [];
+    }
 
-    if(!isDefined(self.bouncingbettyarray))
+    if(!isDefined(self.bouncingbettyarray)) {
       self.bouncingbettyarray = [];
+    }
   }
 
   thread watchmanuallydetonatedusage();
@@ -1187,10 +1238,11 @@ watchgrenadeusage() {
     self.throwinggrenade = var_0;
     self.gotpullbacknotify = 1;
 
-    if(var_0 == "h1_c4_mp")
+    if(var_0 == "h1_c4_mp") {
       beginc4tracking();
-    else
+    } else {
       begingrenadetracking();
+    }
 
     self.throwinggrenade = undefined;
   }
@@ -1210,8 +1262,9 @@ begingrenadetracking() {
   if(isDefined(var_1)) {
     var_3 = maps\mp\_utility::strip_suffix(var_2, "_lefthand");
 
-    if(gettime() - var_0 > 1000 && var_3 == "h1_fraggrenade_mp")
+    if(gettime() - var_0 > 1000 && var_3 == "h1_fraggrenade_mp") {
       var_1.iscooked = 1;
+    }
 
     self.changingweapon = undefined;
     var_1.owner = self;
@@ -1235,8 +1288,9 @@ watchoffhandcancel() {
   self endon("grenade_fire");
   self waittill("offhand_end");
 
-  if(isDefined(self.changingweapon) && self.changingweapon != self getcurrentweapon())
+  if(isDefined(self.changingweapon) && self.changingweapon != self getcurrentweapon()) {
     self.changingweapon = undefined;
+  }
 }
 
 watchsmokeexplode() {
@@ -1280,8 +1334,9 @@ waitsmoketime(var_0, var_1, var_2) {
   waittillframeend;
 
   foreach(var_4 in level.players) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4.inplayersmokescreen = undefined;
+    }
   }
 }
 
@@ -1303,8 +1358,9 @@ watchmissileusage() {
     if(isDefined(var_0)) {
       var_0.weaponname = var_1;
 
-      if(isprimaryorsecondaryprojectileweapon(var_1))
+      if(isprimaryorsecondaryprojectileweapon(var_1)) {
         var_0.firedads = self playerads();
+      }
     }
 
     switch (var_1) {
@@ -1380,8 +1436,9 @@ watchhitbymissile() {
     self.body linkto(var_1);
     self.body setcontents(0);
 
-    if(!isDefined(self.switching_teams))
+    if(!isDefined(self.switching_teams)) {
       thread maps\mp\gametypes\_deathicons::adddeathicon(self.body, self, self.team, 5.0, 0);
+    }
 
     self playerhide();
     var_13 = vectornormalize(anglestoup(var_1.angles));
@@ -1395,13 +1452,15 @@ watchhitbymissile() {
     var_17 setcontents(0);
     self cameralinkto(var_17, "tag_origin");
 
-    if(var_8 > var_12)
+    if(var_8 > var_12) {
       var_8 = var_12;
+    }
 
     var_18 = var_1 common_scripts\utility::waittill_notify_or_timeout_return("death", var_8);
 
-    if(isDefined(var_18) && var_18 == "timeout" && isDefined(var_1))
+    if(isDefined(var_18) && var_18 == "timeout" && isDefined(var_1)) {
       var_1 detonate();
+    }
 
     self notify("final_rocket_corpse_death");
     self.body unlink();
@@ -1473,10 +1532,11 @@ flashbangplayer(var_0, var_1, var_2) {
   if(var_8 > var_3) {
     return;
   }
-  if(var_8 <= var_4)
+  if(var_8 <= var_4) {
     var_9 = 1.0;
-  else
+  } else {
     var_9 = 1.0 - (var_8 - var_4) / (var_3 - var_4);
+  }
 
   var_10 = var_0 sightconetrace(var_1);
 
@@ -1514,8 +1574,9 @@ doninebang(var_0, var_1) {
     if(var_3 > 0) {
       playsoundatpos(var_0, "null");
 
-      foreach(var_5 in level.players)
-      flashbangplayer(var_5, var_0, var_1);
+      foreach(var_5 in level.players) {
+        flashbangplayer(var_5, var_0, var_1);
+      }
     }
 
     var_7 = getempdamageents(var_0, 512, 0);
@@ -1589,14 +1650,16 @@ watchmanuallydetonatedusage() {
     var_3 = isweaponmanuallydetonatedbydoubletap(var_1);
 
     if(var_2 || var_3) {
-      if(!self.manuallydetonatedarray.size)
+      if(!self.manuallydetonatedarray.size) {
         thread watchmanuallydetonatedfordoubletap();
+      }
 
       if(self.manuallydetonatedarray.size) {
         self.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
 
-        if(self.manuallydetonatedarray.size >= level.maxperplayerexplosives)
+        if(self.manuallydetonatedarray.size >= level.maxperplayerexplosives) {
           self.manuallydetonatedarray[0][0] detonate();
+        }
       }
 
       var_4 = self.manuallydetonatedarray.size;
@@ -1650,8 +1713,9 @@ watchfriendlyexplosives() {
     if(!isDefined(grn)) {
       continue;
     }
-    if(wn == "h1_c4_mp" || wn == "h1_claymore_mp")
+    if(wn == "h1_c4_mp" || wn == "h1_claymore_mp") {
       self thread updateHudOutline(grn);
+    }
   }
 }
 
@@ -1665,10 +1729,11 @@ updateHudOutline(grn) {
 
     foreach(player in level.players) {
       if(self.team == player.team) {
-        if(self == player)
+        if(self == player) {
           grn hudoutlineenableforclient(player, 1, 0);
-        else if(level.teamBased)
+        } else if(level.teamBased) {
           grn hudoutlineenableforclient(player, 5, 0);
+        }
       }
     }
 
@@ -1740,8 +1805,9 @@ watchtimeout() {
 
   wait 30;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 setmineteamheadicon(var_0) {
@@ -1749,10 +1815,11 @@ setmineteamheadicon(var_0) {
     self endon("death");
     wait 0.05;
 
-    if(level.teambased)
+    if(level.teambased) {
       maps\mp\_entityheadicons::setteamheadicon(var_0, (0.0, 0.0, 20.0));
-    else if(isDefined(self.owner))
+    } else if(isDefined(self.owner)) {
       maps\mp\_entityheadicons::setplayerheadicon(self.owner, (0.0, 0.0, 20.0));
+    }
   }
 }
 
@@ -1775,10 +1842,11 @@ watchclaymores() {
       self.claymorearray = common_scripts\utility::array_removeundefined(self.claymorearray);
 
       if(self.claymorearray.size >= level.maxperplayerexplosives) {
-        if(!maps\mp\_utility::invirtuallobby())
+        if(!maps\mp\_utility::invirtuallobby()) {
           deleteequipment(self.claymorearray[0]);
-        else
+        } else {
           self.claymorearray[0] detonate();
+        }
       }
 
       self.claymorearray[self.claymorearray.size] = var_0;
@@ -1826,12 +1894,13 @@ equipmentenableuse(var_0) {
   self endon("change_owner");
   self.trigger setcursorhint("HINT_NOICON");
 
-  if(self.weaponname == "h1_c4_mp")
+  if(self.weaponname == "h1_c4_mp") {
     self.trigger sethintstring(&"LUA_C4_PICKUP");
-  else if(self.weaponname == "h1_claymore_mp")
+  } else if(self.weaponname == "h1_claymore_mp") {
     self.trigger sethintstring(&"LUA_CLAYMORE_PICKUP");
-  else if(self.weaponname == "bouncingbetty_mp")
+  } else if(self.weaponname == "bouncingbetty_mp") {
     self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
+  }
 
   self.trigger maps\mp\_utility::setselfusable(var_0);
   self.trigger thread maps\mp\_utility::notUsableForJoiningPlayers(var_0);
@@ -1876,8 +1945,9 @@ equipmentwatchuse(var_0, var_1) {
   self.trigger setcursorhint("HINT_NOICON");
   equipmentenableuse(var_0);
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     thread updatetriggerposition();
+  }
 
   for(;;) {
     thread equipmentwatchenabledisableuse(var_0);
@@ -1902,8 +1972,9 @@ updatetriggerposition() {
     if(isDefined(self) && isDefined(self.trigger)) {
       self.trigger.origin = self.origin;
 
-      if(isDefined(self.bombsquadmodel))
+      if(isDefined(self.bombsquadmodel)) {
         self.bombsquadmodel.origin = self.origin;
+      }
     } else
       return;
 
@@ -1932,12 +2003,14 @@ claymoredetonation() {
         if(var_1 == self.owner) {
           continue;
         }
-        if(isDefined(var_1.owner) && var_1.owner == self.owner)
+        if(isDefined(var_1.owner) && var_1.owner == self.owner) {
           continue;
+        }
       }
 
-      if(!friendlyfirecheck(self.owner, var_1, 0))
+      if(!friendlyfirecheck(self.owner, var_1, 0)) {
         continue;
+      }
     }
 
     if(lengthsquared(var_1 getentityvelocity()) < 10) {
@@ -1964,26 +2037,30 @@ claymoredetonation() {
   } else
     wait(level.claymoredetectiongraceperiod);
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
-  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func))
+  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func)) {
     self.owner thread[[level.leaderdialogonplayer_func]]("claymore_destroyed", undefined, undefined, self.origin);
+  }
 
   self detonate();
 }
 
 shouldaffectclaymore(var_0) {
-  if(isDefined(var_0.disabled))
+  if(isDefined(var_0.disabled)) {
     return 0;
+  }
 
   var_1 = self.origin + (0.0, 0.0, 32.0);
   var_2 = var_1 - var_0.origin;
   var_3 = anglesToForward(var_0.angles);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 < level.claymoredetectionmindist)
+  if(var_4 < level.claymoredetectionmindist) {
     return 0;
+  }
 
   var_2 = vectornormalize(var_2);
   var_5 = vectordot(var_2, var_3);
@@ -1995,8 +2072,9 @@ deleteondeath(var_0) {
   wait 0.05;
 
   if(isDefined(var_0)) {
-    if(isDefined(var_0.trigger))
+    if(isDefined(var_0.trigger)) {
       var_0.trigger delete();
+    }
 
     var_0 delete();
   }
@@ -2004,8 +2082,9 @@ deleteondeath(var_0) {
 
 deleteequipment(var_0) {
   if(isDefined(var_0)) {
-    if(isDefined(var_0.trigger))
+    if(isDefined(var_0.trigger)) {
       var_0.trigger delete();
+    }
 
     var_0 delete();
   }
@@ -2073,8 +2152,9 @@ watchmanualdetonationbydoubletap() {
     self waittill("detonate_double_tap");
     var_0 = self getcurrentweapon();
 
-    if(!isweaponmanuallydetonatedbydoubletap(var_0))
+    if(!isweaponmanuallydetonatedbydoubletap(var_0)) {
       manuallydetonateall(2);
+    }
   }
 }
 
@@ -2110,9 +2190,9 @@ manuallydetonateall(var_0) {
     }
   }
 
-  if(var_1)
+  if(var_1) {
     self.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
-  else {
+  } else {
     self.manuallydetonatedarray = var_2;
     self notify("all_detonated");
   }
@@ -2123,10 +2203,11 @@ waitanddetonate(var_0, var_1) {
   wait(var_0);
   waittillenabled();
 
-  if(var_1 == 2)
+  if(var_1 == 2) {
     self detonatebydoubletap();
-  else
+  } else {
     self detonate();
+  }
 
   level.mines = common_scripts\utility::array_removeundefined(level.mines);
 }
@@ -2140,13 +2221,15 @@ deletec4andclaymoresondisconnect() {
   wait 0.05;
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isDefined(var_0[var_2][0]))
+    if(isDefined(var_0[var_2][0])) {
       var_0[var_2][0] delete();
+    }
   }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isDefined(var_1[var_2]))
+    if(isDefined(var_1[var_2])) {
       var_1[var_2] delete();
+    }
   }
 }
 
@@ -2183,10 +2266,11 @@ c4damage(var_0) {
     break;
   }
 
-  if(level.c4explodethisframe)
+  if(level.c4explodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  else
+  } else {
     wait 0.05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -2194,16 +2278,19 @@ c4damage(var_0) {
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if(isDefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE")))
+  if(isDefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE"))) {
     self.waschained = 1;
+  }
 
-  if(isDefined(var_9) && var_9 &level.idflags_penetration)
+  if(isDefined(var_9) && var_9 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
+  }
 
   self.wasdamaged = 1;
 
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("c4");
+  }
 
   var_12 = 0;
 
@@ -2212,8 +2299,9 @@ c4damage(var_0) {
       var_13 = var_1.pers["team"];
       var_14 = self.owner.pers["team"];
 
-      if(isDefined(var_13) && isDefined(var_14) && var_13 != var_14)
+      if(isDefined(var_13) && isDefined(var_14) && var_13 != var_14) {
         var_12 = 1;
+      }
     }
   } else if(isDefined(self.owner) && isDefined(var_1) && var_1 != self.owner)
     var_12 = 1;
@@ -2235,8 +2323,9 @@ c4damage(var_0) {
     }
   }
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   self detonate(var_1);
 }
@@ -2247,8 +2336,9 @@ resetc4explodethisframe() {
 }
 
 saydamaged(var_0, var_1) {
-  for(var_2 = 0; var_2 < 60; var_2++)
+  for(var_2 = 0; var_2 < 60; var_2++) {
     wait 0.05;
+  }
 }
 
 waittillenabled() {
@@ -2261,11 +2351,13 @@ waittillenabled() {
 makeexplosivetargetablebyai(var_0) {
   common_scripts\utility::make_entity_sentient_mp(self.owner.team);
 
-  if(!isDefined(var_0) || !var_0)
+  if(!isDefined(var_0) || !var_0) {
     self makeentitynomeleetarget();
+  }
 
-  if(issentient(self))
+  if(issentient(self)) {
     self setthreatbiasgroup("DogsDontAttack");
+  }
 }
 
 setupbombsquad() {
@@ -2284,8 +2376,9 @@ setupbombsquad() {
       self.bombsquadicons[var_0].detectid = "";
     }
   } else if(!self.detectexplosives) {
-    for(var_0 = 0; var_0 < self.bombsquadicons.size; var_0++)
+    for(var_0 = 0; var_0 < self.bombsquadicons.size; var_0++) {
       self.bombsquadicons[var_0] destroy();
+    }
 
     self.bombsquadicons = [];
   }
@@ -2301,8 +2394,9 @@ showheadicon(var_0) {
     if(var_4 == var_1) {
       return;
     }
-    if(var_4 == "")
+    if(var_4 == "") {
       var_2 = var_3;
+    }
   }
 
   if(var_2 < 0) {
@@ -2316,8 +2410,9 @@ showheadicon(var_0) {
   self.bombsquadicons[var_2].alpha = 1;
   self.bombsquadicons[var_2].detectid = var_0.detectid;
 
-  while(isalive(self) && isDefined(var_0) && self istouching(var_0))
+  while(isalive(self) && isDefined(var_0) && self istouching(var_0)) {
     wait 0.05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -2331,11 +2426,13 @@ showheadicon(var_0) {
 getdamageableents(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_5 = var_1 * var_1;
   var_6 = level.players;
@@ -2347,8 +2444,9 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_8 = maps\mp\_utility::get_damageable_player_pos(var_6[var_7]);
     var_9 = distancesquared(var_0, var_8);
 
-    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_6[var_7])))
+    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_6[var_7]))) {
       var_4[var_4.size] = maps\mp\_utility::get_damageable_player(var_6[var_7], var_8);
+    }
   }
 
   var_10 = getEntArray("grenade", "classname");
@@ -2357,8 +2455,9 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_11 = maps\mp\_utility::get_damageable_grenade_pos(var_10[var_7]);
     var_9 = distancesquared(var_0, var_11);
 
-    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_10[var_7])))
+    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_10[var_7]))) {
       var_4[var_4.size] = maps\mp\_utility::get_damageable_grenade(var_10[var_7], var_11);
+    }
   }
 
   var_12 = getEntArray("destructible", "targetname");
@@ -2419,8 +2518,9 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_11 = var_21.origin + (0.0, 0.0, 32.0);
     var_9 = distancesquared(var_0, var_11);
 
-    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_21)))
+    if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_21))) {
       var_4[var_4.size] = maps\mp\_utility::get_damageable_mine(var_21, var_11);
+    }
   }
 
   return var_4;
@@ -2429,11 +2529,13 @@ getdamageableents(var_0, var_1, var_2, var_3) {
 getempdamageents(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_5 = getEntArray("grenade", "classname");
 
@@ -2441,8 +2543,9 @@ getempdamageents(var_0, var_1, var_2, var_3) {
     var_8 = var_7.origin;
     var_9 = distance(var_0, var_8);
 
-    if(var_9 < var_1 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_7)))
+    if(var_9 < var_1 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_7))) {
       var_4[var_4.size] = var_7;
+    }
   }
 
   var_11 = getEntArray("misc_turret", "classname");
@@ -2451,8 +2554,9 @@ getempdamageents(var_0, var_1, var_2, var_3) {
     var_8 = var_13.origin;
     var_9 = distance(var_0, var_8);
 
-    if(var_9 < var_1 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_13)))
+    if(var_9 < var_1 && (!var_2 || weapondamagetracepassed(var_0, var_8, var_3, var_13))) {
       var_4[var_4.size] = var_13;
+    }
   }
 
   return var_4;
@@ -2462,8 +2566,9 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = var_1 - var_0;
 
-  if(lengthsquared(var_5) < var_2 * var_2)
+  if(lengthsquared(var_5) < var_2 * var_2) {
     return 1;
+  }
 
   var_6 = vectornormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
@@ -2473,15 +2578,16 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
     /*
     thread debugprint( var_0, ".dmg" );
 
-    if( isDefined( var_3 ) )
+    if( isDefined( var_3 ) ) {
     thread debugprint( var_1, "." + var_3.classname );
-    else
+    } else {
     thread debugprint( var_1, ".undefined" );
+    }
     */
 
-    if(var_7["fraction"] == 1)
+    if(var_7["fraction"] == 1) {
       thread debugline(var_4, var_1, (1.0, 1.0, 1.0));
-    else {
+    } else {
       thread debugline(var_4, var_7["position"], (1.0, 0.9, 0.8));
       thread debugline(var_7["position"], var_1, (1.0, 0.4, 0.3));
     }
@@ -2503,13 +2609,15 @@ damageent(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 debugline(var_0, var_1, var_2) {
-  for(var_3 = 0; var_3 < 600; var_3++)
+  for(var_3 = 0; var_3 < 600; var_3++) {
     wait 0.05;
+  }
 }
 
 debugcircle(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 16;
+  }
 
   var_4 = 360 / var_3;
   var_5 = [];
@@ -2527,10 +2635,11 @@ debugcircle(var_0, var_1, var_2, var_3) {
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
     var_13 = var_5[var_6];
 
-    if(var_6 + 1 >= var_5.size)
+    if(var_6 + 1 >= var_5.size) {
       var_14 = var_5[0];
-    else
+    } else {
       var_14 = var_5[var_6 + 1];
+    }
 
     thread debugline(var_13, var_14, var_2);
   }
@@ -2539,8 +2648,9 @@ debugcircle(var_0, var_1, var_2, var_3) {
 /*
 debugprint( var_0, var_1 )
 {
-for( var_2 = 0; var_2 < 600; var_2++ )
+for( var_2 = 0; var_2 < 600; var_2++ ) {
 wait 0.05;
+}
 }
 */
 
@@ -2555,9 +2665,9 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
   var_10 = 40;
   var_11 = 11;
 
-  if(issubstr(var_1, "_uts19_"))
+  if(issubstr(var_1, "_uts19_")) {
     thread uts19shock(var_0);
-  else {
+  } else {
     var_12 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     switch (var_12) {
@@ -2570,32 +2680,37 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
         }
         var_13 = 1;
 
-        if(isDefined(var_0.owner) && var_0.owner == var_4)
+        if(isDefined(var_0.owner) && var_0.owner == var_4) {
           var_13 = 0;
+        }
 
         var_14 = 512;
         var_15 = 1 - distance(self.origin, var_0.origin) / var_14;
 
-        if(var_15 < 0)
+        if(var_15 < 0) {
           var_15 = 0;
+        }
 
         var_16 = 2 + 4 * var_15;
 
-        if(isDefined(self.stunscaler))
+        if(isDefined(self.stunscaler)) {
           var_16 *= self.stunscaler;
+        }
 
         wait 0.05;
         self notify("concussed", var_4);
         self shellshock("concussion_grenade_mp", var_16);
         self.concussionendtime = gettime() + var_16 * 1000;
 
-        if(isDefined(var_4) && var_4 != self)
+        if(isDefined(var_4) && var_4 != self) {
           self.concussionattacker = var_4;
-        else
+        } else {
           self.concussionattacker = undefined;
+        }
 
-        if(var_13 && var_4 != self)
+        if(var_13 && var_4 != self) {
           var_4 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("stun");
+        }
 
         break;
       case "weapon_cobra_mk19_mp":
@@ -2632,24 +2747,28 @@ uts19shock(var_0) {
   var_7 = var_1 + (var_2 - var_1) * var_6;
 
   if(isDefined(self.utsshockqueuedtime)) {
-    if(self.utsshockqueuedtime >= var_7)
+    if(self.utsshockqueuedtime >= var_7) {
       return;
+    }
   }
 
   self.utsshockqueuedtime = var_7;
   self shellshock("uts19_mp", var_7);
   waittillframeend;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.utsshockqueuedtime = undefined;
+  }
 }
 
 isprimaryweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
-  if(weaponinventorytype(var_0) != "primary")
+  if(weaponinventorytype(var_0) != "primary") {
     return 0;
+  }
 
   switch (weaponclass(var_0)) {
     case "spread":
@@ -2667,8 +2786,9 @@ isprimaryweapon(var_0) {
 }
 
 isbulletweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   switch (maps\mp\_utility::getweaponclass(var_0)) {
     case "weapon_smg":
@@ -2691,46 +2811,53 @@ isbeamweapon(var_0) {
 }
 
 isaltmodeweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   return weaponinventorytype(var_0) == "altmode";
 }
 
 isinventoryweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   return weaponinventorytype(var_0) == "item";
 }
 
 isriotshield(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   return weapontype(var_0) == "riotshield";
 }
 
 isoffhandweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   return weaponinventorytype(var_0) == "offhand";
 }
 
 issidearm(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
-  if(weaponinventorytype(var_0) != "primary")
+  if(weaponinventorytype(var_0) != "primary") {
     return 0;
+  }
 
   return weaponclass(var_0) == "pistol";
 }
 
 ismeleeinventoryweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   return weaponinventorytype(var_0) == "melee";
 }
@@ -2739,18 +2866,21 @@ isgrenade(var_0) {
   var_1 = weaponclass(var_0);
   var_2 = weaponinventorytype(var_0);
 
-  if(var_1 != "grenade")
+  if(var_1 != "grenade") {
     return 0;
+  }
 
-  if(var_2 != "offhand")
+  if(var_2 != "offhand") {
     return 0;
+  }
 
   return 1;
 }
 
 isvalidlastweapon(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   var_1 = weaponinventorytype(var_0);
   return var_1 == "primary" || var_1 == "altmode";
@@ -2771,13 +2901,15 @@ updatesavedlastweapon() {
     self waittill("weapon_change", var_1);
     updateweaponusagestats(var_1);
 
-    if(isvalidmovespeedscaleweapon(var_1))
+    if(isvalidmovespeedscaleweapon(var_1)) {
       updatemovespeedscale();
+    }
 
     self.saved_lastweapon = var_0;
 
-    if(isvalidlastweapon(var_1))
+    if(isvalidlastweapon(var_1)) {
       var_0 = var_1;
+    }
   }
 }
 
@@ -2823,12 +2955,14 @@ getweaponheaviestvalue() {
       if(var_3 == 0) {
         continue;
       }
-      if(var_3 < var_0)
+      if(var_3 < var_0) {
         var_0 = var_3;
+      }
     }
 
-    if(var_0 > 10)
+    if(var_0 > 10) {
       var_0 = 10;
+    }
   } else
     var_0 = 8;
 
@@ -2840,8 +2974,9 @@ getweaponweight(var_0) {
   var_1 = undefined;
   var_2 = maps\mp\_utility::getbaseweaponname(var_0);
 
-  if(isDefined(level.weaponweightfunc))
+  if(isDefined(level.weaponweightfunc)) {
     return [[level.weaponweightfunc]](var_2);
+  }
 
   var_1 = int(tablelookup("mp/statstable.csv", 4, var_2, 8));
   return var_1;
@@ -2852,13 +2987,15 @@ clampweaponweightvalue(var_0) {
 }
 
 isvalidmovespeedscaleweapon(var_0) {
-  if(isvalidlastweapon(var_0))
+  if(isvalidlastweapon(var_0)) {
     return 1;
+  }
 
   var_1 = weaponclass(var_0);
 
-  if(var_1 == "ball")
+  if(var_1 == "ball") {
     return 1;
+  }
 
   return 0;
 }
@@ -2868,20 +3005,22 @@ updateMoveSpeedScale(weaponType) {
     return;
   }
 
-  if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary")
+  if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary") {
     weaponType = self.primaryWeapon;
-  else
+  } else {
     weaponType = self.secondaryWeapon;
+  }
 
   if(isDefined(self.primaryWeapon) && self.primaryWeapon == "riotshield_mp") {
     self setMoveSpeedScale(.8 * self.moveSpeedScaler);
     return;
   }
 
-  if(!isDefined(weaponType))
+  if(!isDefined(weaponType)) {
     weapClass = "none";
-  else
+  } else {
     weapClass = weaponClass(weaponType);
+  }
 
   switch (weapClass) {
     case "rifle":
@@ -2932,12 +3071,13 @@ stancerecoiladjuster() {
       var_0 = self getcurrentprimaryweapon();
       var_1 = maps\mp\_utility::getweaponclass(var_0);
 
-      if(var_1 == "weapon_lmg")
+      if(var_1 == "weapon_lmg") {
         maps\mp\_utility::setrecoilscale(0, 40);
-      else if(var_1 == "weapon_sniper")
+      } else if(var_1 == "weapon_sniper") {
         maps\mp\_utility::setrecoilscale(0, 60);
-      else
+      } else {
         maps\mp\_utility::setrecoilscale();
+      }
 
       continue;
     }
@@ -2946,12 +3086,13 @@ stancerecoiladjuster() {
       var_0 = self getcurrentprimaryweapon();
       var_1 = maps\mp\_utility::getweaponclass(var_0);
 
-      if(var_1 == "weapon_lmg")
+      if(var_1 == "weapon_lmg") {
         maps\mp\_utility::setrecoilscale(0, 10);
-      else if(var_1 == "weapon_sniper")
+      } else if(var_1 == "weapon_sniper") {
         maps\mp\_utility::setrecoilscale(0, 30);
-      else
+      } else {
         maps\mp\_utility::setrecoilscale();
+      }
 
       continue;
     }
@@ -2989,8 +3130,9 @@ turret_playerthread(var_0) {
 }
 
 spawnmine(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (0, randomfloat(360), 0);
+  }
 
   var_5 = "projectile_bouncing_betty_grenade";
   var_6 = spawn("script_model", var_0);
@@ -3006,8 +3148,9 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_6.killcament setscriptmoverkillcam("explosive");
   var_1.equipmentmines = common_scripts\utility::array_removeundefined(var_1.equipmentmines);
 
-  if(var_1.equipmentmines.size >= level.maxperplayerexplosives)
+  if(var_1.equipmentmines.size >= level.maxperplayerexplosives) {
     var_1.equipmentmines[0] delete();
+  }
 
   var_1.equipmentmines[var_1.equipmentmines.size] = var_6;
   var_6 thread createbombsquadmodel("projectile_bouncing_betty_grenade_bombsquad", "tag_origin", var_1);
@@ -3017,8 +3160,9 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_6 thread mineproximitytrigger();
   var_7 = self getlinkedparent();
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_6 linkto(var_7);
+  }
 
   var_6 makeexplosivetargetablebyai(!var_4);
   return var_6;
@@ -3064,24 +3208,28 @@ minedamagemonitor() {
 
   self notify("mine_destroyed");
 
-  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
+  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE"))) {
     self.waschained = 1;
+  }
 
-  if(isDefined(var_8) && var_8 &level.idflags_penetration)
+  if(isDefined(var_8) && var_8 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
+  }
 
   self.wasdamaged = 1;
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("bouncing_betty");
+  }
 
   if(level.teambased) {
     if(isDefined(var_0) && isDefined(self.owner)) {
       var_11 = var_0.pers["team"];
       var_12 = self.owner.pers["team"];
 
-      if(isDefined(var_11) && isDefined(var_12) && var_11 != var_12)
+      if(isDefined(var_11) && isDefined(var_12) && var_11 != var_12) {
         var_0 notify("destroyed_explosive");
+      }
     }
   } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner)
     var_0 notify("destroyed_explosive");
@@ -3113,12 +3261,14 @@ mineproximitytrigger() {
         if(var_1 == self.owner) {
           continue;
         }
-        if(isDefined(var_1.owner) && var_1.owner == self.owner)
+        if(isDefined(var_1.owner) && var_1.owner == self.owner) {
           continue;
+        }
       }
 
-      if(!friendlyfirecheck(self.owner, var_1, 0))
+      if(!friendlyfirecheck(self.owner, var_1, 0)) {
         continue;
+      }
     }
 
     if(lengthsquared(var_1 getentityvelocity()) < 10) {
@@ -3160,8 +3310,9 @@ minebounce() {
   self playSound("mine_betty_spin");
   playFX(level.mine_launch, self.origin);
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   var_0 = self.origin + (0.0, 0.0, 64.0);
   self moveto(var_0, 0.7, 0, 0.65);
@@ -3176,8 +3327,9 @@ mineexplode(attacker) {
   if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     attacker = self.owner;
+  }
 
   self playSound("null");
   var_1 = self gettagorigin("tag_fx");
@@ -3190,16 +3342,18 @@ mineexplode(attacker) {
   self hide();
   self radiusdamage(self.origin, level.minedamageradius, level.minedamagemax, level.minedamagemin, attacker, "MOD_EXPLOSIVE");
 
-  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func))
+  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func)) {
     self.owner thread[[level.leaderdialogonplayer_func]]("mine_destroyed", undefined, undefined, self.origin);
+  }
 
   wait 0.2;
 
   if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   self.killcament delete();
   self delete();
@@ -3220,22 +3374,27 @@ minestunend() {
 
 minechangeowner(var_0) {
   if(isDefined(self.weaponname)) {
-    if(isDefined(self.entityheadicon))
+    if(isDefined(self.entityheadicon)) {
       self.entityheadicon destroy();
+    }
 
     if(self.weaponname == "bouncingbetty_mp") {
-      if(isDefined(self.trigger))
+      if(isDefined(self.trigger)) {
         self.trigger delete();
+      }
 
-      if(isDefined(self.effect["friendly"]))
+      if(isDefined(self.effect["friendly"])) {
         self.effect["friendly"] delete();
+      }
 
-      if(isDefined(self.effect["enemy"]))
+      if(isDefined(self.effect["enemy"])) {
         self.effect["enemy"] delete();
+      }
 
       for(var_1 = 0; var_1 < self.owner.equipmentmines.size; var_1++) {
-        if(self.owner.equipmentmines[var_1] == self)
+        if(self.owner.equipmentmines[var_1] == self) {
           self.owner.equipmentmines[var_1] = undefined;
+        }
       }
 
       self.owner.equipmentmines = common_scripts\utility::array_removeundefined(self.owner.equipmentmines);
@@ -3252,12 +3411,14 @@ minechangeowner(var_0) {
       var_0 thread minewatchownerdisconnect(self);
       var_0 thread minewatchownerchangeteams(self);
     } else if(self.weaponname == "h1_claymore_mp") {
-      if(isDefined(self.trigger))
+      if(isDefined(self.trigger)) {
         self.trigger delete();
+      }
 
       for(var_1 = 0; var_1 < self.owner.claymorearray.size; var_1++) {
-        if(self.owner.claymorearray[var_1] == self)
+        if(self.owner.claymorearray[var_1] == self) {
           self.owner.claymorearray[var_1] = undefined;
+        }
       }
 
       self.owner.claymorearray = common_scripts\utility::array_removeundefined(self.owner.claymorearray);
@@ -3319,38 +3480,42 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6[0] = (1.0, 0.0, 0.0);
   var_6[1] = (0.0, 1.0, 0.0);
 
-  if(var_1[2] < var_5)
+  if(var_1[2] < var_5) {
     var_7 = 0;
-  else
+  } else {
     var_7 = 1;
+  }
 
   var_8 = (var_0[0], var_0[1], var_5);
   var_9 = (var_1[0], var_1[1], var_5);
   thread debugcircle(var_8, level.minedamageradius, var_6[var_7], 32);
   var_10 = distancesquared(var_0, var_1);
 
-  if(var_10 > var_2)
+  if(var_10 > var_2) {
     var_7 = 0;
-  else
+  } else {
     var_7 = 1;
+  }
 
   thread debugline(var_8, var_9, var_6[var_7]);
 }
 
 minedamageheightpassed(var_0, var_1) {
-  if(isPlayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing")
+  if(isPlayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
     var_2 = var_1 maps\mp\_utility::getstancecenter();
-  else if(var_1.classname == "misc_turret")
+  } else if(var_1.classname == "misc_turret") {
     var_2 = var_1.origin + (0.0, 0.0, 32.0);
-  else
+  } else {
     var_2 = var_1.origin;
+  }
 
   var_3 = 0;
   var_4 = var_0.origin[2] + var_3 + level.minedamagehalfheight;
   var_5 = var_0.origin[2] + var_3 - level.minedamagehalfheight;
 
-  if(var_2[2] > var_4 || var_2[2] < var_5)
+  if(var_2[2] > var_4 || var_2[2] < var_5) {
     return 0;
+  }
 
   return 1;
 }
@@ -3380,16 +3545,18 @@ watchmineusage() {
 
   if(isDefined(self.equipmentmines)) {
     if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
-      if(isDefined(self.dont_delete_mines_on_next_spawn))
+      if(isDefined(self.dont_delete_mines_on_next_spawn)) {
         self.dont_delete_mines_on_next_spawn = undefined;
-      else
+      } else {
         delete_all_mines();
+      }
     }
   } else
     self.equipmentmines = [];
 
-  if(!isDefined(self.killstreakmines))
+  if(!isDefined(self.killstreakmines)) {
     self.killstreakmines = [];
+  }
 
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
@@ -3439,8 +3606,9 @@ minewatchownerdisconnect(var_0) {
   var_0 endon("change_owner");
   self waittill("disconnect");
 
-  if(isDefined(var_0.trigger))
+  if(isDefined(var_0.trigger)) {
     var_0.trigger delete();
+  }
 
   var_0 delete();
 }
@@ -3451,8 +3619,9 @@ minewatchownerchangeteams(var_0) {
   var_0 endon("change_owner");
   common_scripts\utility::waittill_either("joined_team", "joined_spectators");
 
-  if(isDefined(var_0.trigger))
+  if(isDefined(var_0.trigger)) {
     var_0.trigger delete();
+  }
 
   var_0 delete();
 }
@@ -3483,10 +3652,11 @@ minebeaconteamupdater() {
 
     foreach(var_2 in level.players) {
       if(level.teambased) {
-        if(var_2.team == var_0)
+        if(var_2.team == var_0) {
           self.effect["friendly"] showtoplayer(var_2);
-        else
+        } else {
           self.effect["enemy"] showtoplayer(var_2);
+        }
 
         continue;
       }
@@ -3507,8 +3677,9 @@ delete_all_grenades() {
   if(isDefined(self.manuallydetonatedarray)) {
     for(var_0 = 0; var_0 < self.manuallydetonatedarray.size; var_0++) {
       if(isDefined(self.manuallydetonatedarray[var_0][0])) {
-        if(isDefined(self.manuallydetonatedarray[var_0][0].trigger))
+        if(isDefined(self.manuallydetonatedarray[var_0][0].trigger)) {
           self.manuallydetonatedarray[var_0][0].trigger delete();
+        }
 
         self.manuallydetonatedarray[var_0][0] delete();
       }
@@ -3520,8 +3691,9 @@ delete_all_grenades() {
   if(isDefined(self.claymorearray)) {
     for(var_0 = 0; var_0 < self.claymorearray.size; var_0++) {
       if(isDefined(self.claymorearray[var_0])) {
-        if(isDefined(self.claymorearray[var_0].trigger))
+        if(isDefined(self.claymorearray[var_0].trigger)) {
           self.claymorearray[var_0].trigger delete();
+        }
 
         self.claymorearray[var_0] delete();
       }
@@ -3533,8 +3705,9 @@ delete_all_grenades() {
   if(isDefined(self.bouncingbettyarray)) {
     for(var_0 = 0; var_0 < self.bouncingbettyarray.size; var_0++) {
       if(isDefined(self.bouncingbettyarray[var_0])) {
-        if(isDefined(self.bouncingbettyarray[var_0].trigger))
+        if(isDefined(self.bouncingbettyarray[var_0].trigger)) {
           self.bouncingbettyarray[var_0].trigger delete();
+        }
 
         self.bouncingbettyarray[var_0] delete();
       }
@@ -3549,8 +3722,9 @@ delete_all_mines() {
     self.equipmentmines = common_scripts\utility::array_removeundefined(self.equipmentmines);
 
     foreach(var_1 in self.equipmentmines) {
-      if(isDefined(var_1.trigger))
+      if(isDefined(var_1.trigger)) {
         var_1.trigger delete();
+      }
 
       var_1 delete();
     }
@@ -3561,39 +3735,46 @@ transfer_grenade_ownership(var_0) {
   var_0 delete_all_grenades();
   var_0 delete_all_mines();
 
-  if(isDefined(self.manuallydetonatedarray))
+  if(isDefined(self.manuallydetonatedarray)) {
     var_0.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
-  else
+  } else {
     var_0.manuallydetonatedarray = undefined;
+  }
 
-  if(isDefined(self.claymorearray))
+  if(isDefined(self.claymorearray)) {
     var_0.claymorearray = common_scripts\utility::array_removeundefined(self.claymorearray);
-  else
+  } else {
     var_0.claymorearray = undefined;
+  }
 
-  if(isDefined(self.bouncingbettyarray))
+  if(isDefined(self.bouncingbettyarray)) {
     var_0.bouncingbettyarray = common_scripts\utility::array_removeundefined(self.bouncingbettyarray);
-  else
+  } else {
     var_0.bouncingbettyarray = undefined;
+  }
 
-  if(isDefined(self.equipmentmines))
+  if(isDefined(self.equipmentmines)) {
     var_0.equipmentmines = common_scripts\utility::array_removeundefined(self.equipmentmines);
-  else
+  } else {
     var_0.equipmentmines = undefined;
+  }
 
-  if(isDefined(self.killstreakmines))
+  if(isDefined(self.killstreakmines)) {
     var_0.killstreakmines = common_scripts\utility::array_removeundefined(self.killstreakmines);
-  else
+  } else {
     var_0.killstreakmines = undefined;
+  }
 
   if(isDefined(var_0.manuallydetonatedarray)) {
-    foreach(var_2 in var_0.manuallydetonatedarray)
-    var_2[0].owner = var_0;
+    foreach(var_2 in var_0.manuallydetonatedarray) {
+      var_2[0].owner = var_0;
+    }
   }
 
   if(isDefined(var_0.claymorearray)) {
-    foreach(var_5 in var_0.claymorearray)
-    var_5.owner = var_0;
+    foreach(var_5 in var_0.claymorearray) {
+      var_5.owner = var_0;
+    }
   }
 
   if(isDefined(var_0.bouncingbettyarray)) {
@@ -3653,8 +3834,9 @@ reset_damage_info_when_healed() {
   level endon("game_ended");
 
   for(;;) {
-    if(self.health >= 100 && isDefined(self.damage_info) && self.damage_info.size > 0)
+    if(self.health >= 100 && isDefined(self.damage_info) && self.damage_info.size > 0) {
       self.damage_info = [];
+    }
 
     wait 0.05;
   }
@@ -3663,11 +3845,13 @@ reset_damage_info_when_healed() {
 stickyhandlemovers(var_0, var_1) {
   var_2 = spawnStruct();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2.notifystring = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2.endonstring = var_1;
+  }
 
   var_2.deathoverridecallback = ::stickymovingplatformdetonate;
   thread maps\mp\_movers::handle_moving_platforms(var_2);
@@ -3681,10 +3865,11 @@ stickymovingplatformdetonate(var_0) {
 
   if(isDefined(self)) {
     if(isDefined(var_0.notifystring)) {
-      if(var_0.notifystring == "detonate")
+      if(var_0.notifystring == "detonate") {
         self detonate();
-      else
+      } else {
         self notify(var_0.notifystring);
+      }
     } else
       self delete();
   }
@@ -3693,13 +3878,15 @@ stickymovingplatformdetonate(var_0) {
 getgrenadegraceperiodtimeleft() {
   var_0 = 0;
 
-  if(isDefined(level.grenadegraceperiod))
+  if(isDefined(level.grenadegraceperiod)) {
     var_0 = level.grenadegraceperiod;
+  }
 
   var_1 = 0;
 
-  if(isDefined(level.prematch_done_time))
+  if(isDefined(level.prematch_done_time)) {
     var_1 = (gettime() - level.prematch_done_time) / 1000;
+  }
 
   return var_0 - var_1;
 }
@@ -3709,11 +3896,13 @@ ingrenadegraceperiod() {
 }
 
 isweaponallowedingrenadegraceperiod(var_0) {
-  if(issubstr(var_0, "glmwr"))
+  if(issubstr(var_0, "glmwr")) {
     return 0;
+  }
 
-  if(isendstr(var_0, "_gl"))
+  if(isendstr(var_0, "_gl")) {
     return 0;
+  }
 
   switch (var_0) {
     case "h1_fraggrenade_mp":
@@ -3753,11 +3942,13 @@ watchgrenadegraceperiod() {
       if(!isweaponallowedingrenadegraceperiod(var_3)) {
         var_4 = int(getgrenadegraceperiodtimeleft() + 0.5);
 
-        if(!var_4)
+        if(!var_4) {
           var_4 = 1;
+        }
 
-        if(isPlayer(self))
+        if(isPlayer(self)) {
           self iprintlnbold(&"MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
+        }
       }
 
       continue;
@@ -3771,8 +3962,9 @@ isprimaryorsecondaryprojectileweapon(var_0) {
   var_1 = maps\mp\_utility::getweaponclass(var_0);
   var_2 = maps\mp\_utility::getbaseweaponname(var_0);
 
-  if(var_1 == "weapon_projectile")
+  if(var_1 == "weapon_projectile") {
     return 1;
+  }
 
   return 0;
 }
@@ -3780,8 +3972,9 @@ isprimaryorsecondaryprojectileweapon(var_0) {
 saveweapon(var_0, var_1, var_2) {
   var_3 = self.saveweapons.size;
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     self.firstsaveweapon = var_1;
+  }
 
   self.saveweapons[var_3]["type"] = var_0;
   self.saveweapons[var_3]["use"] = var_2;
@@ -3798,10 +3991,11 @@ getsavedweapon(var_0) {
     }
   }
 
-  if(var_2 >= 0)
+  if(var_2 >= 0) {
     return self.saveweapons[var_2]["use"];
-  else
+  } else {
     return "none";
+  }
 }
 
 restoreweapon(var_0) {
@@ -3831,14 +4025,16 @@ restoreweapon(var_0) {
       self.saveweapons = var_1;
       var_6 = getsavedweapon("underwater");
 
-      if(var_6 == "none")
+      if(var_6 == "none") {
         var_6 = self.saveweapons[0]["use"];
+      }
     }
 
     var_7 = self getcurrentweapon();
 
-    if(var_7 != var_6)
+    if(var_7 != var_6) {
       self switchtoweaponimmediate(var_6);
+    }
   }
 }
 
@@ -3864,23 +4060,26 @@ watchweaponinspection() {
     var_3 = maps\mp\gametypes\_class::isperkequipment(var_0);
     var_4 = getweaponbasename(var_0);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_5 = var_4 == "h1_augsmg_mp";
-    else
+    } else {
       var_5 = 0;
+    }
 
     if(var_2 || var_3 || var_5) {
       var_6 = self getammocount(var_0);
 
-      if(var_6 == 0)
+      if(var_6 == 0) {
         continue;
+      }
     }
 
     self startweaponinspection();
     waitframe();
 
-    while(self isinspectingweapon())
+    while(self isinspectingweapon()) {
       waitframe();
+    }
   }
 }
 
@@ -3898,8 +4097,9 @@ watchmeleeweapon() {
       var_1 = gettime() - self.meleeweaponbloodytime <= 100;
       var_2 = gettime() - self.meleeweaponbloodytime > 4000;
 
-      if(!var_1 && !var_2)
+      if(!var_1 && !var_2) {
         thread playcleanmeleefx();
+      }
     }
 
     maps\mp\gametypes\_gamelogic::sethasdonecombat(self, 1);
@@ -3939,6 +4139,7 @@ playcleanmeleefx() {
   var_2 = anglesToForward(var_1);
   var_3 = bulletTrace(var_0, var_0 + var_2 * 200, 0);
 
-  if(var_3["fraction"] < 1)
+  if(var_3["fraction"] < 1) {
     playFX(level.meleeweaponbloodflick, var_3["position"] - var_2 * 5, -1 * var_2);
+  }
 }

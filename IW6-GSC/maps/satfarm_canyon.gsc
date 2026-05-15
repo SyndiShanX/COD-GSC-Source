@@ -102,19 +102,23 @@ mortar_strikes() {
       var_6 = var_1 + var_3 * 2000;
       var_7 = randomfloatrange(-1000, 1000);
 
-      if(var_7 < 500 && var_7 >= 0)
+      if(var_7 < 500 && var_7 >= 0) {
         var_7 = randomfloatrange(500, 1000);
+      }
 
-      if(var_7 > -500 && var_7 < 0)
+      if(var_7 > -500 && var_7 < 0) {
         var_7 = randomfloatrange(-1000, -500);
+      }
 
       var_8 = randomfloatrange(-1000, 1000);
 
-      if(var_8 < 500 && var_8 >= 0)
+      if(var_8 < 500 && var_8 >= 0) {
         var_8 = randomfloatrange(500, 1000);
+      }
 
-      if(var_8 > -500 && var_8 < 0)
+      if(var_8 > -500 && var_8 < 0) {
         var_8 = randomfloatrange(-1000, -500);
+      }
 
       var_9 = (var_7, var_8, 2000);
       var_10 = common_scripts\utility::spawn_tag_origin();
@@ -168,8 +172,9 @@ ambush_main() {
   level.herotanks[1] thread maps\satfarm_code::tank_relative_speed("complex_big_sat", "chase_checkpoint_hit", -500, 0, -15);
 
   foreach(var_2 in level.allytanks) {
-    if(isDefined(var_2) && var_2.script_friendname == "Bryce" || var_2.script_friendname == "Brick" || var_2.script_friendname == "Babe Ruth")
+    if(isDefined(var_2) && var_2.script_friendname == "Bryce" || var_2.script_friendname == "Brick" || var_2.script_friendname == "Babe Ruth") {
       var_2 thread maps\satfarm_code::tank_relative_speed("complex_big_sat", "chase_checkpoint_hit", 1500, 15, 5);
+    }
   }
 
   common_scripts\utility::flag_wait("satfarm_canyon_end");
@@ -198,8 +203,9 @@ chase_script() {
   level.herotanks[1] thread maps\satfarm_code::tank_relative_speed("complex_big_sat", "chase_checkpoint_hit", -500, 0, -15);
 
   foreach(var_5 in level.allytanks) {
-    if(isDefined(var_5) && var_5.script_friendname == "Bryce" || var_5.script_friendname == "Brick" || var_5.script_friendname == "Babe Ruth")
+    if(isDefined(var_5) && var_5.script_friendname == "Bryce" || var_5.script_friendname == "Brick" || var_5.script_friendname == "Babe Ruth") {
       var_5 thread maps\satfarm_code::tank_relative_speed("complex_big_sat", "chase_dunes_hit", 2500, 30, 30);
+    }
   }
 
   wait 1;
@@ -259,8 +265,9 @@ ambush_script() {
   iprintlnbold("More up ahead.");
   maps\satfarm_code::waittilltanksdead(var_1, 0, 0, "flag_spawn_valley3");
 
-  if(var_4.size == 3)
+  if(var_4.size == 3) {
     maps\satfarm_code::waittilltanksdead(var_4, 1, 0, "flag_spawn_valley3");
+  }
 
   common_scripts\utility::flag_set("player_spawn_valley3");
 
@@ -294,8 +301,9 @@ ambush_kill_ally() {
         if(isDefined(var_1) && var_1.classname != "script_vehicle_corpse") {
           common_scripts\utility::flag_wait("kill_ally_now");
 
-          if(isDefined(var_1) && var_1.classname != "script_vehicle_corpse")
+          if(isDefined(var_1) && var_1.classname != "script_vehicle_corpse") {
             var_1 kill();
+          }
         }
       }
     }

@@ -236,16 +236,18 @@ shepherd_points_at_player() {
 
     weight = 0;
     if(right_dot > 0) {
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 0, 0.2, 1);
       self SetAnim(right_anim, 1, 0.2, 1);
     } else {
       degrees += 10;
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 1, 0.2, 1);

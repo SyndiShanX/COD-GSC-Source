@@ -130,11 +130,13 @@ startNonCombat() {
     dodgeLeft = % civilian_briefcase_walk_dodge_L;
     dodgeRight = % civilian_briefcase_walk_dodge_R;
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_left"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_left"])) {
       dodgeLeft = level.scr_anim[self.animname]["dodge_left"];
+    }
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_right"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_right"])) {
       dodgeRight = level.scr_anim[self.animname]["dodge_right"];
+    }
 
     self animscripts\move::setDodgeAnims(dodgeLeft, dodgeRight);
   }
@@ -206,10 +208,11 @@ checkCombatState() {
   while(1) {
     isInCombat = (self.alertLevelInt > 1);
 
-    if(wasInCombat && !isInCombat)
+    if(wasInCombat && !isInCombat) {
       startNonCombat();
-    else if(!wasInCombat && isInCombat)
+    } else if(!wasInCombat && isInCombat) {
       startCombat();
+    }
 
     wasInCombat = isInCombat;
 

@@ -128,8 +128,9 @@ _nextmission(endgame) {
     return;
   }
 
-  if(!isDefined(endgame))
+  if(!isDefined(endgame)) {
     endgame = false;
+  }
 
   level notify("nextmission");
   level.nextmission = true;
@@ -156,8 +157,9 @@ _nextmission(endgame) {
     return;
   }
 
-  if(level.script != "ending" && !(level.script == "af_chase" && endgame))
+  if(level.script != "ending" && !(level.script == "af_chase" && endgame)) {
     maps\_utility::level_end_save();
+  }
 
   if(level.script != "af_chase" || endgame) {
     level.missionSettings setLevelCompleted(levelIndex);
@@ -178,8 +180,9 @@ _nextmission(endgame) {
       setDvar("ui_debug_setlevel", "");
     }
 
-    if(completion_percentage < level.player GetLocalPlayerProfileData("percentCompleteSP"))
+    if(completion_percentage < level.player GetLocalPlayerProfileData("percentCompleteSP")) {
       PrintLn(">> SP DEBUG: 					[ WARNING! NEW:" + completion_percentage + "% < OLD:" + level.player GetLocalPlayerProfileData("percentCompleteSP") + "% ]\n");
+    }
 
     PrintLn(">> SP DEBUG: 				[ setlevel:" + getdvarint("ui_debug_setlevel") + " clearall:" + getdvarint("ui_debug_clearall") + " ]");
     PrintLn(">> SP PLAYER DIFFICULTY: 		[" + (level.player GetLocalPlayerProfileData("missionHighestDifficulty")) + "]");
@@ -191,22 +194,26 @@ _nextmission(endgame) {
 
     UpdateGamerProfile();
 
-    if(level.missionSettings hasAchievement(levelIndex))
+    if(level.missionSettings hasAchievement(levelIndex)) {
       maps\_utility::giveachievement_wrapper(level.missionSettings getAchievement(levelIndex));
+    }
 
-    if(level.missionSettings hasLevelVeteranAward(levelIndex) && getLevelCompleted(levelIndex) == 4 && level.missionSettings check_other_hasLevelVeteranAchievement(levelIndex))
+    if(level.missionSettings hasLevelVeteranAward(levelIndex) && getLevelCompleted(levelIndex) == 4 && level.missionSettings check_other_hasLevelVeteranAchievement(levelIndex)) {
       maps\_utility::giveachievement_wrapper(level.missionSettings getLevelVeteranAward(levelIndex));
+    }
 
-    if(level.missionSettings hasMissionHardenedAward() && level.missionSettings getLowestSkill() > 2)
+    if(level.missionSettings hasMissionHardenedAward() && level.missionSettings getLowestSkill() > 2) {
       giveachievement_wrapper(level.missionSettings getHardenedAward());
+    }
 
     nextLevelIndex = level.missionSettings.levels.size;
   }
   if(level.script == "af_chase" && endgame) {
     return;
   }
-  if(level.script == "ending" && level.level_mode == "credits_1")
+  if(level.script == "ending" && level.level_mode == "credits_1") {
     flag_wait("af_chase_nextmission");
+  }
 
   if(level.script == "airplane" || level.script == "ending") {
     setsaveddvar("ui_nextMission", "0");
@@ -238,10 +245,11 @@ _nextmission(endgame) {
     }
   }
 
-  if(level.missionSettings skipssuccess(levelIndex))
+  if(level.missionSettings skipssuccess(levelIndex)) {
     changelevel(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
-  else
+  } else {
     missionSuccess(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
+  }
 }
 
 updateSpPercent() {
@@ -301,8 +309,9 @@ getStat_progression(difficulty) {
   skipped = false;
 
   for(i = 0; i < level.missionSettings.levels.size - 1; i++) {
-    if(int(difficulty_string[i]) >= difficulty)
+    if(int(difficulty_string[i]) >= difficulty) {
       levels++;
+    }
   }
 
   completion = (levels / (level.missionsettings.levels.size - 1)) * 100;
@@ -359,35 +368,41 @@ setSoLevelCompleted(levelIndex) {
       continue;
     }
     pre_total_stars = 0;
-    for(i = 0; i < specOpsString.size; i++)
+    for(i = 0; i < specOpsString.size; i++) {
       pre_total_stars += max(0, int(specOpsString[i]) - 1);
+    }
 
-    if(specOpsString.size == 0)
+    if(specOpsString.size == 0) {
       specOpsString = emptyMissionDifficultyStr;
+    }
 
-    while(levelOffset >= specOpsString.size)
+    while(levelOffset >= specOpsString.size) {
       specOpsString += "0";
+    }
 
     assertex(isDefined(level.specops_reward_gameskill), "Game skill not setup correctly for coop.");
     gameskill = level.specops_reward_gameskill;
 
-    if(isDefined(player.forcedGameSkill))
+    if(isDefined(player.forcedGameSkill)) {
       gameskill = player.forcedGameSkill;
+    }
 
     if(int(specOpsString[levelOffset]) > gameskill) {
       continue;
     }
     newString = "";
     for(index = 0; index < specOpsString.size; index++) {
-      if(index != levelOffset)
+      if(index != levelOffset) {
         newString += specOpsString[index];
-      else
+      } else {
         newString += gameskill + 1;
+      }
     }
 
     post_total_stars = 0;
-    for(i = 0; i < newString.size; i++)
+    for(i = 0; i < newString.size; i++) {
       post_total_stars += max(0, int(newString[i]) - 1);
+    }
 
     delta_total_stars = post_total_stars - pre_total_stars;
     if(delta_total_stars > 0) {
@@ -406,8 +421,9 @@ setSoLevelCompleted(levelIndex) {
           player.eog_unlock = true;
           player.eog_unlock_value = group.ref;
 
-          if(getdvarint("solo_play") && (player == level.player))
+          if(getdvarint("solo_play") && (player == level.player)) {
             setDvar("ui_last_opened_group", 0);
+          }
         }
       }
 
@@ -418,24 +434,28 @@ setSoLevelCompleted(levelIndex) {
       }
     }
 
-    if(player maps\_specialops_code::can_save_to_profile() || (isSplitscreen() && level.ps3 && isDefined(level.player2) && player == level.player2))
+    if(player maps\_specialops_code::can_save_to_profile() || (isSplitscreen() && level.ps3 && isDefined(level.player2) && player == level.player2)) {
       player SetLocalPlayerProfileData("missionSOHighestDifficulty", newString);
+    }
   }
 }
 
 is_first_difficulty_star(specOpsString) {
   string_size = specOpsString.size;
-  if(string_size > level.specOpsSettings.levels.size)
+  if(string_size > level.specOpsSettings.levels.size) {
     string_size = level.specOpsSettings.levels.size;
+  }
 
   stars = 0;
   for(i = 0; i < string_size; i++) {
-    if(int(tablelookup("sp/specopstable.csv", 0, i, 14)))
+    if(int(tablelookup("sp/specopstable.csv", 0, i, 14))) {
       stars += max(0, int(specOpsString[i]) - 1);
+    }
   }
 
-  if(int(tablelookup("sp/specOpsTable.csv", 1, level.script, 14)) == 0)
+  if(int(tablelookup("sp/specOpsTable.csv", 1, level.script, 14)) == 0) {
     return false;
+  }
 
   return stars == 1;
 }
@@ -448,10 +468,11 @@ setLevelCompleted(levelIndex) {
     if(index != levelIndex) {
       newString += missionString[index];
     } else {
-      if(level.gameskill + 1 > int(missionString[levelIndex]))
+      if(level.gameskill + 1 > int(missionString[levelIndex])) {
         newString += level.gameskill + 1;
-      else
+      } else {
         newString += missionString[index];
+      }
     }
   }
 
@@ -494,10 +515,11 @@ getLevelSkill(levelIndex) {
 }
 
 getMissionDvarString(missionIndex) {
-  if(missionIndex < 9)
+  if(missionIndex < 9) {
     return ("mis_0" + (missionIndex + 1));
-  else
+  } else {
     return ("mis_" + (missionIndex + 1));
+  }
 }
 
 getLowestSkill() {
@@ -505,8 +527,9 @@ getLowestSkill() {
   lowestSkill = 4;
 
   for(index = 0; index < self.levels.size - 1; index++) {
-    if(int(missionString[index]) < lowestSkill)
+    if(int(missionString[index]) < lowestSkill) {
       lowestSkill = int(missionString[index]);
+    }
   }
   return (lowestSkill);
 }
@@ -542,8 +565,9 @@ addSpecOpLevel(levelName, achievement, veteran_achievement) {
   if(level_group == "") {
     return;
   }
-  if(!isDefined(level.specOpsGroups[level_group].group_members))
+  if(!isDefined(level.specOpsGroups[level_group].group_members)) {
     level.specOpsGroups[level_group].group_members = [];
+  }
 
   member_size = level.specOpsGroups[level_group].group_members.size;
   level.specOpsGroups[level_group].group_members[member_size] = levelName;
@@ -581,35 +605,42 @@ getLevelVeteranAward(levelIndex) {
 }
 
 hasLevelVeteranAward(levelIndex) {
-  if(isDefined(self.levels[levelIndex].veteran_achievement))
+  if(isDefined(self.levels[levelIndex].veteran_achievement)) {
     return (true);
-  else
+  } else {
     return (false);
+  }
 }
 
 hasAchievement(levelIndex) {
-  if(isDefined(self.levels[levelIndex].achievement))
+  if(isDefined(self.levels[levelIndex].achievement)) {
     return (true);
-  else
+  } else {
     return (false);
+  }
 }
 
 check_other_hasLevelVeteranAchievement(levelIndex) {
   for(i = 0; i < self.levels.size; i++) {
-    if(i == levelIndex)
+    if(i == levelIndex) {
       continue;
-    if(!hasLevelVeteranAward(i))
+    }
+    if(!hasLevelVeteranAward(i)) {
       continue;
-    if(self.levels[i].veteran_achievement == self.levels[levelIndex].veteran_achievement)
-      if(getLevelCompleted(i) < 4)
+    }
+    if(self.levels[i].veteran_achievement == self.levels[levelIndex].veteran_achievement) {
+      if(getLevelCompleted(i) < 4) {
         return false;
+      }
+    }
   }
   return true;
 }
 
 skipsSuccess(levelIndex) {
-  if(!isDefined(self.levels[levelIndex].skipsSuccess))
+  if(!isDefined(self.levels[levelIndex].skipsSuccess)) {
     return false;
+  }
   return true;
 }
 
@@ -618,16 +649,18 @@ getHardenedAward() {
 }
 
 hasMissionHardenedAward() {
-  if(isDefined(self.HardenedAward))
+  if(isDefined(self.HardenedAward)) {
     return (true);
-  else
+  } else {
     return (false);
+  }
 }
 
 getNextLevelIndex() {
   for(index = 0; index < self.levels.size; index++) {
-    if(!self getLevelSkill(index))
+    if(!self getLevelSkill(index)) {
       return (index);
+    }
   }
   return (0);
 }
@@ -637,10 +670,11 @@ force_all_complete() {
   missionString = (level.player GetLocalPlayerProfileData("missionHighestDifficulty"));
   newString = "";
   for(index = 0; index < missionString.size; index++) {
-    if(index < 20)
+    if(index < 20) {
       newString += 2;
-    else
+    } else {
       newstring += 0;
+    }
   }
   level.player SetLocalPlayerProfileData("missionHighestDifficulty", newString);
   level.player SetLocalPlayerProfileData("highestMission", 20);
@@ -658,8 +692,9 @@ ui_debug_clearall() {
         player SetLocalPlayerProfileData("percentCompleteSO", 0);
 
         best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
-        if(isDefined(best_time_name) && best_time_name != "")
+        if(isDefined(best_time_name) && best_time_name != "") {
           player SetLocalPlayerProfileData(best_time_name, 0);
+        }
       }
 
       setDvar("ui_debug_clearall", "");
@@ -719,42 +754,53 @@ if(isDefined(level.eog_summary_callback)) {
   [[level.eog_summary_callback]]();
 }
 
-if(isDefined(level.custom_eog_summary) && level.custom_eog_summary)
+if(isDefined(level.custom_eog_summary) && level.custom_eog_summary) {
   setDvar("ui_eog_custom", 1);
-else
+} else {
   setDvar("ui_eog_custom", 0);
+}
 if(is_coop()) {
   reset_eog_popup_dvars();
 
-  if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
+  if(isDefined(level.player.eog_firststar) && level.player.eog_firststar) {
     setDvar("ui_first_star_player1", level.player.eog_firststar);
+  }
 
-  if(isDefined(level.player.eog_newstar) && level.player.eog_newstar)
+  if(isDefined(level.player.eog_newstar) && level.player.eog_newstar) {
     setDvar("ui_eog_player1_stars", level.player.eog_newstar_value);
+  }
 
-  if(isDefined(level.player.eog_unlock) && level.player.eog_unlock)
+  if(isDefined(level.player.eog_unlock) && level.player.eog_unlock) {
     setDvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
+  }
 
-  if(isDefined(level.player.eog_besttime) && level.player.eog_besttime)
+  if(isDefined(level.player.eog_besttime) && level.player.eog_besttime) {
     setDvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
+  }
 
-  if(isDefined(level.player.eog_noreward) && level.player.eog_noreward)
+  if(isDefined(level.player.eog_noreward) && level.player.eog_noreward) {
     setDvar("ui_eog_player1_noreward", level.player.eog_noreward);
+  }
 
-  if(isDefined(level.player2.eog_firststar) && level.player2.eog_firststar)
+  if(isDefined(level.player2.eog_firststar) && level.player2.eog_firststar) {
     setDvar("ui_first_star_player2", level.player2.eog_firststar);
+  }
 
-  if(isDefined(level.player2.eog_newstar) && level.player2.eog_newstar)
+  if(isDefined(level.player2.eog_newstar) && level.player2.eog_newstar) {
     setDvar("ui_eog_player2_stars", level.player2.eog_newstar_value);
+  }
 
-  if(isDefined(level.player2.eog_unlock) && level.player2.eog_unlock)
+  if(isDefined(level.player2.eog_unlock) && level.player2.eog_unlock) {
     setDvar("ui_eog_player2_unlock", level.player2.eog_unlock_value);
+  }
 
-  if(isDefined(level.player2.eog_besttime) && level.player2.eog_besttime)
+  if(isDefined(level.player2.eog_besttime) && level.player2.eog_besttime) {
     setDvar("ui_eog_player2_besttime", level.player2.eog_besttime_value);
+  }
 
-  if(isDefined(level.player2.eog_noreward) && level.player2.eog_noreward)
+  if(isDefined(level.player2.eog_noreward) && level.player2.eog_noreward) {
     setDvar("ui_eog_player2_noreward", level.player2.eog_noreward);
+  }
 
   wait 0.05;
   level.player openpopupmenu("coop_eog_summary");
@@ -762,17 +808,21 @@ if(is_coop()) {
 } else {
   reset_eog_popup_dvars();
 
-  if(isDefined(level.player.eog_firststar) && level.player.eog_firststar)
+  if(isDefined(level.player.eog_firststar) && level.player.eog_firststar) {
     setDvar("ui_first_star_player1", level.player.eog_firststar);
+  }
 
-  if(isDefined(level.player.eog_newstar) && level.player.eog_newstar)
+  if(isDefined(level.player.eog_newstar) && level.player.eog_newstar) {
     setDvar("ui_eog_player1_stars", level.player.eog_newstar_value);
+  }
 
-  if(isDefined(level.player.eog_unlock) && level.player.eog_unlock)
+  if(isDefined(level.player.eog_unlock) && level.player.eog_unlock) {
     setDvar("ui_eog_player1_unlock", level.player.eog_unlock_value);
+  }
 
-  if(isDefined(level.player.eog_besttime) && level.player.eog_besttime)
+  if(isDefined(level.player.eog_besttime) && level.player.eog_besttime) {
     setDvar("ui_eog_player1_besttime", level.player.eog_besttime_value);
+  }
 
   wait 0.05;
   level.player openpopupmenu("sp_eog_summary");
@@ -784,14 +834,17 @@ create_custom_eog_defaults() {
     return;
   }
   foreach(player in level.players) {
-    if(!isDefined(level.custom_eog_no_time) || !level.custom_eog_no_time)
+    if(!isDefined(level.custom_eog_no_time) || !level.custom_eog_no_time) {
       player use_custom_eog_default_time();
+    }
 
-    if(!isDefined(level.custom_eog_no_skill) || !level.custom_eog_no_skill)
+    if(!isDefined(level.custom_eog_no_skill) || !level.custom_eog_no_skill) {
       player use_custom_eog_default_difficulty();
+    }
 
-    if(!isDefined(level.custom_eog_no_kills) || !level.custom_eog_no_kills)
+    if(!isDefined(level.custom_eog_no_kills) || !level.custom_eog_no_kills) {
       player use_custom_eog_default_kills();
+    }
 
     if(is_coop_online()) {
       if(!isDefined(level.custom_eog_no_partner) || !level.custom_eog_no_partner) {

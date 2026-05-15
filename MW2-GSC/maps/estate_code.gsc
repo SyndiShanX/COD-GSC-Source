@@ -503,8 +503,9 @@ ghost_intro_nav() {
 
   starter = getent("ghost_starter", "targetname");
 
-  if(isDefined(starter))
+  if(isDefined(starter)) {
     starter notify("trigger");
+  }
 
   level.ghost allowedstances("crouch", "prone", "stand");
 }
@@ -515,8 +516,9 @@ ghost_intro_interrupt() {
 
   starter = getent("ghost_starter", "targetname");
 
-  if(isDefined(starter))
+  if(isDefined(starter)) {
     starter waittill("trigger");
+  }
 
   level.ghost allowedstances("crouch", "prone", "stand");
 }
@@ -940,8 +942,9 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
 
   wait 0.2;
 
-  if(isDefined(spinner))
+  if(isDefined(spinner)) {
     spinner delete();
+  }
 
   wait 0.5;
 
@@ -1054,13 +1057,15 @@ bouncing_betty_throwplayer(mineOrg) {
 
   wait 0.5;
 
-  if(touchingVol)
+  if(touchingVol) {
     level.player thread endsliding();
+  }
 
   flag_set("bouncing_betty_player_released");
 
-  if(touchingVol)
+  if(touchingVol) {
     wait 3.5;
+  }
 
   level.player freezeControls(false);
 
@@ -1943,8 +1948,9 @@ house_check_upstairs_mainfloor_dialogue() {
       flag_waitopen("dialogue_topfloor_cleared");
       flag_waitopen("dialogue_basement_cleared");
 
-      if(flag("scarecrow_said_upstairs"))
+      if(flag("scarecrow_said_upstairs")) {
         wait 30;
+      }
 
       if(!flag("topfloor_breached")) {
         flag_set("scripted_dialogue_on");
@@ -2667,8 +2673,9 @@ randomStrikePackage(zone) {
   level endon("main_defense_fight_finished");
   level endon("player_is_escaping");
 
-  if(!isDefined(level.strikePackage[zone]))
+  if(!isDefined(level.strikePackage[zone])) {
     return (false);
+  }
 
   if(!level.strikePackage[zone].size) {
     level.strikePackage[zone] = undefined;
@@ -2707,8 +2714,9 @@ randomStrikeComponent(zone) {
   level endon("main_defense_fight_finished");
   level endon("player_is_escaping");
 
-  if(!isDefined(level.strikeComponents[zone]))
+  if(!isDefined(level.strikeComponents[zone])) {
     return (false);
+  }
 
   if(!level.strikeComponents[zone].size) {
     level.strikeComponents[zone] = undefined;
@@ -3439,8 +3447,9 @@ defense_helidrop_rider_deploy(heli, heliName, startNode) {
 
   self endon("death");
 
-  if(isDefined(heli))
+  if(isDefined(heli)) {
     heli waittill("unloaded");
+  }
 
   settings = defense_helidrop_rider_settings(heliName);
 
@@ -3606,10 +3615,11 @@ roaming_nodechain_nav(node, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeC
 
     wait nodeLoiterTime;
 
-    if(isDefined(node.target))
+    if(isDefined(node.target)) {
       node = getnode(node.target, "targetname");
-    else
+    } else {
       break;
+    }
   }
 }
 
@@ -4107,45 +4117,57 @@ download_progress() {
 
   flag_set("download_complete");
 
-  if(!flag("can_save"))
+  if(!flag("can_save")) {
     flag_set("can_save");
+  }
 
   thread download_display_delete();
 }
 
 download_display_delete() {
-  if(isDefined(level.hudelem))
+  if(isDefined(level.hudelem)) {
     level.hudelem destroy();
+  }
 
-  if(isDefined(level.hudelem_status))
+  if(isDefined(level.hudelem_status)) {
     level.hudelem_status destroy();
+  }
 
-  if(isDefined(level.hudelem_status_total))
+  if(isDefined(level.hudelem_status_total)) {
     level.hudelem_status_total destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer))
+  if(isDefined(level.hudelem_dltimer)) {
     level.hudelem_dltimer destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_value))
+  if(isDefined(level.hudelem_dltimer_value)) {
     level.hudelem_dltimer_value destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_heading))
+  if(isDefined(level.hudelem_dltimer_heading)) {
     level.hudelem_dltimer_heading destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_secs))
+  if(isDefined(level.hudelem_dltimer_secs)) {
     level.hudelem_dltimer_secs destroy();
+  }
 
-  if(isDefined(level.hudelem_dlrate_heading))
+  if(isDefined(level.hudelem_dlrate_heading)) {
     level.hudelem_dlrate_heading destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_units))
+  if(isDefined(level.hudelem_dltimer_units)) {
     level.hudelem_dltimer_units destroy();
+  }
 
-  if(isDefined(level.hudelem_dlrate_value))
+  if(isDefined(level.hudelem_dlrate_value)) {
     level.hudelem_dlrate_value destroy();
+  }
 
-  if(isDefined(level.hudelem_dlrate_units))
+  if(isDefined(level.hudelem_dlrate_units)) {
     level.hudelem_dlrate_units destroy();
+  }
 }
 
 download_update(fileSegment, segment, rateTime, marker) {

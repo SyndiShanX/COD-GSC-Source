@@ -147,13 +147,15 @@ skipto_setup() {
   if(str_skipto == "the_escape_route") {
     return;
   }
-  if(str_skipto == "the_landing_zone")
+  if(str_skipto == "the_landing_zone") {
     return;
+  }
 }
 
 loadout_weapons_store() {
-  if(!isDefined(self.loadout_weapons_stored))
+  if(!isDefined(self.loadout_weapons_stored)) {
     self.loadout_weapons_stored = 0;
+  }
 
   if(!self.loadout_weapons_stored) {
     self take_weapons();
@@ -202,34 +204,39 @@ give_menendez_perks(b_for_high_rage) {
 
   assert(a_perks.size < 12, "Max perks exceeded for Menendez. Max perks = " + 12 + ", you have " + a_perks.size);
 
-  for(i = 0; i < a_perks.size; i++)
+  for(i = 0; i < a_perks.size; i++) {
     self setperk(a_perks[i]);
+  }
 }
 
 take_menendez_high_rage_perks() {
-  foreach(str_perk in self.a_high_rage_perks)
-  self unsetperk(str_perk);
+  foreach(str_perk in self.a_high_rage_perks) {
+    self unsetperk(str_perk);
+  }
 
   self.a_high_rage_perks = undefined;
 }
 
 loadout_perks_store() {
-  if(!isDefined(self.loadout_perks_set))
+  if(!isDefined(self.loadout_perks_set)) {
     self.loadout_perks_set = 0;
+  }
 
   if(!self.loadout_perks_set) {
     self.loadout_perk = [];
 
-    for(i = 1; i <= 12; i++)
+    for(i = 1; i <= 12; i++) {
       self.loadout_perk[i] = getloadoutitem("specialty" + i);
+    }
 
     self.loadout_perks_set = 1;
   }
 }
 
 loadout_perks_remove() {
-  if(!isDefined(self.loadout_perks_removed))
+  if(!isDefined(self.loadout_perks_removed)) {
     self.loadout_perks_removed = 0;
+  }
 
   if(!self.loadout_perks_removed) {
     for(i = 1; i <= 12; i++) {
@@ -238,8 +245,9 @@ loadout_perks_remove() {
       if(isDefined(str_perk) && str_perk != "weapon_null" && str_perk != "specialty_null") {
         perk_specialties = strtok(str_perk, "|");
 
-        for(j = 0; j < perk_specialties.size; j++)
+        for(j = 0; j < perk_specialties.size; j++) {
           self unsetperk(perk_specialties[j]);
+        }
       }
     }
 
@@ -248,8 +256,9 @@ loadout_perks_remove() {
 }
 
 loadout_perks_restore() {
-  if(!isDefined(self.loadout_perks_set))
+  if(!isDefined(self.loadout_perks_set)) {
     self loadout_perks_store();
+  }
 
   for(i = 0; i <= 12; i++) {
     str_perk = self.a_low_rage_perks[i];
@@ -257,8 +266,9 @@ loadout_perks_restore() {
     if(isDefined(str_perk) && str_perk != "weapon_null" && str_perk != "specialty_null") {
       perk_specialties = strtok(str_perk, "|");
 
-      for(j = 0; j < perk_specialties.size; j++)
+      for(j = 0; j < perk_specialties.size; j++) {
         self unsetperk(perk_specialties[j]);
+      }
     }
   }
 
@@ -270,8 +280,9 @@ loadout_perks_restore() {
     if(isDefined(str_perk) && str_perk != "specialty_null" && str_perk != "weapon_null") {
       perk_specialties = strtok(str_perk, "|");
 
-      for(j = 0; j < perk_specialties.size; j++)
+      for(j = 0; j < perk_specialties.size; j++) {
         self setperk(perk_specialties[j]);
+      }
     }
   }
 }
@@ -365,8 +376,9 @@ challenge_nodeath(str_notify) {
   self waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0)
+  if(n_deaths == 0) {
     self notify(str_notify);
+  }
 }
 
 challenge_pdf_turret_deaths(str_notify) {
@@ -378,18 +390,21 @@ challenge_pdf_turret_deaths(str_notify) {
 
 global_callback_actor_killed_menendez(e_inflictor, e_attacker, n_damage, str_mod, str_weapon, v_hit_direction, str_hit_location, psoffsettime) {
   if(self.team == "axis") {
-    if(isDefined(e_attacker) && isPlayer(e_attacker) && isDefined(str_weapon) && str_weapon == "civ_pickup_turret")
+    if(isDefined(e_attacker) && isPlayer(e_attacker) && isDefined(str_weapon) && str_weapon == "civ_pickup_turret") {
       level notify("pdf_killed_with_turret");
+    }
 
-    if(isDefined(e_attacker) && isPlayer(e_attacker) && is_shotgun(str_weapon))
+    if(isDefined(e_attacker) && isPlayer(e_attacker) && is_shotgun(str_weapon)) {
       level thread challenge_menendez_shotgun_kills_counter();
+    }
   }
 }
 
 is_shotgun(str_weapon) {
   if(isDefined(str_weapon)) {
-    if(str_weapon == "rottweil72_sp" || str_weapon == "spas_sp" || str_weapon == "spas_menendez_sp")
+    if(str_weapon == "rottweil72_sp" || str_weapon == "spas_sp" || str_weapon == "spas_menendez_sp") {
       return true;
+    }
   }
 
   return false;
@@ -407,8 +422,9 @@ global_callback_actor_killed_mason(e_inflictor, e_attacker, n_damage, str_mod, s
       level notify("mortar_kill_recorded");
     }
 
-    if(isPlayer(e_attacker) && str_weapon == "machete_sp")
+    if(isPlayer(e_attacker) && str_weapon == "machete_sp") {
       level notify("machete_kill_recorded");
+    }
   }
 }
 
@@ -422,8 +438,9 @@ challenge_menendez_speed_run(str_notify) {
   flag_wait("mason_intro_part2_player_started");
   wait 1;
 
-  if(n_time_completed <= 140)
+  if(n_time_completed <= 140) {
     self notify(str_notify);
+  }
 
   flag_set("menendez_speed_run_challenge_updated");
 }
@@ -459,8 +476,9 @@ challenge_menendez_shotgun_kills_counter() {
 }
 
 challenge_mason_molotov_kills(str_notify) {
-  while(level.n_molotov_kills < 12)
+  while(level.n_molotov_kills < 12) {
     level waittill("molotov_kill_recorded");
+  }
 
   self notify(str_notify);
 }
@@ -473,8 +491,9 @@ challenge_mason_machete_kills(str_notify) {
 }
 
 challenge_mason_mortar_kills(str_notify) {
-  while(level.n_mortar_kills < 10)
+  while(level.n_mortar_kills < 10) {
     level waittill("mortar_kill_recorded");
+  }
 
   self notify(str_notify);
 }
@@ -485,20 +504,23 @@ challenge_mason_find_clue(str_notify) {
 }
 
 scene_clear_ai_goals(str_scene_name, delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   a_ai = get_ais_from_scene(str_scene_name);
 
   if(isDefined(a_ai)) {
-    for(i = 0; i < a_ai.size; i++)
+    for(i = 0; i < a_ai.size; i++) {
       a_ai[i] setgoalpos(a_ai[i].origin);
+    }
   }
 }
 
 scene_ai_properties(str_scene_name, delay, ai_invulnerable, turn_off_friendly_fire, ignore_ai) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   a_ai = get_ais_from_scene(str_scene_name);
 
@@ -506,24 +528,29 @@ scene_ai_properties(str_scene_name, delay, ai_invulnerable, turn_off_friendly_fi
     for(i = 0; i < a_ai.size; i++) {
       e_ent = a_ai[i];
 
-      if(isDefined(ai_invulnerable) && ai_invulnerable == 1)
+      if(isDefined(ai_invulnerable) && ai_invulnerable == 1) {
         e_ent.health = 5000;
+      }
 
-      if(isDefined(turn_off_friendly_fire) && turn_off_friendly_fire == 1)
+      if(isDefined(turn_off_friendly_fire) && turn_off_friendly_fire == 1) {
         e_ent.nofriendlyfire = 1;
+      }
 
-      if(isDefined(ignore_ai) && ignore_ai == 1)
+      if(isDefined(ignore_ai) && ignore_ai == 1) {
         e_ent.ignoreme = 1;
+      }
     }
   }
 }
 
 no_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return n_damage;
+  }
 
-  if(e_inflictor == level.player)
+  if(e_inflictor == level.player) {
     n_damage = 0;
+  }
 
   return n_damage;
 }
@@ -545,21 +572,25 @@ global_ai_cleanup_category_clear(str_category) {
 }
 
 add_cleanup_ent(str_category, e_add) {
-  if(!isDefined(level.a_e_cleanup))
+  if(!isDefined(level.a_e_cleanup)) {
     level.a_e_cleanup = [];
+  }
 
-  if(!isDefined(level.a_e_cleanup[str_category]))
+  if(!isDefined(level.a_e_cleanup[str_category])) {
     level.a_e_cleanup[str_category] = [];
+  }
 
   level.a_e_cleanup[str_category][level.a_e_cleanup[str_category].size] = e_add;
 }
 
 cleanup_ents(str_category, n_wait_min, n_wait_max) {
-  if(!isDefined(n_wait_min))
+  if(!isDefined(n_wait_min)) {
     n_wait_min = 0.05;
+  }
 
-  if(!isDefined(n_wait_max))
+  if(!isDefined(n_wait_max)) {
     n_wait_max = 3.5;
+  }
 
   assert(isDefined(level.a_e_cleanup), "level cleanup variable has not been initialized");
   assert(isDefined(level.a_e_cleanup[str_category]), "level cleanup category '" + str_category + "' is missing");
@@ -611,8 +642,9 @@ spawn_with_delay(e_spawner, spawn_fn, param1, param2, param3, param4, param5) {
   delay = e_spawner.script_delay;
   wait(delay);
 
-  if(isDefined(e_spawner))
+  if(isDefined(e_spawner)) {
     simple_spawn_single(e_spawner, spawn_fn, param1, param2, param3, param4, param5);
+  }
 }
 
 spawn_fn_ai_run_to_target(e_spawner, str_cleanup_category, player_favourate_enemy, aggressive_mode, ignore_surpression) {
@@ -664,22 +696,27 @@ spawn_fn_ai_run_to_node_and_die(e_spawner, str_cleanup_category, player_favourat
 }
 
 entity_common_spawn_setup(e_spawner, str_cleanup_category, player_favourate_enemy, ignore_surpression) {
-  if(isDefined(e_spawner))
+  if(isDefined(e_spawner)) {
     self setup_spawner_special_features(e_spawner);
+  }
 
-  if(isDefined(str_cleanup_category))
+  if(isDefined(str_cleanup_category)) {
     spawner_set_cleanup_category(str_cleanup_category);
+  }
 
-  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0)
+  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0) {
     self.favoriteenemy = level.player;
+  }
 
-  if(isDefined(ignore_surpression) && ignore_surpression != 0)
+  if(isDefined(ignore_surpression) && ignore_surpression != 0) {
     self.script_ignore_suppression = 1;
+  }
 }
 
 enemy_damage_override(inflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(isDefined(eattacker) && isDefined(eattacker.i_dont_want_to_hurt_you))
+  if(isDefined(eattacker) && isDefined(eattacker.i_dont_want_to_hurt_you)) {
     idamage = 1;
+  }
 
   return idamage;
 }
@@ -690,19 +727,22 @@ setup_spawner_special_features(e_spawner) {
     iprintlnbold("Overriding Health");
   }
 
-  if(isDefined(e_spawner.script_int))
+  if(isDefined(e_spawner.script_int)) {
     self thread ai_turn_off_hold_node_after_time(e_spawner.script_int);
+  }
 
   if(isDefined(e_spawner.script_float)) {
     self.accuracy = e_spawner.script_float;
     self.script_accuracy = e_spawner.script_float;
   }
 
-  if(isDefined(e_spawner.script_timer) && isDefined(e_spawner.script_string))
+  if(isDefined(e_spawner.script_timer) && isDefined(e_spawner.script_string)) {
     self thread ai_break_holding_node_timer(e_spawner.script_timer, e_spawner.script_string);
+  }
 
-  if(isDefined(e_spawner.script_index))
+  if(isDefined(e_spawner.script_index)) {
     self.grenadeammo = 0;
+  }
 }
 
 ai_turn_off_hold_node_after_time(delay) {
@@ -730,8 +770,9 @@ ai_set_allow_friendly_fire() {
 }
 
 enemy_ai_disable_grenades(disable_grenades, delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   ai = getaiarray("axis");
 
@@ -745,8 +786,9 @@ enemy_ai_disable_grenades(disable_grenades, delay) {
         continue;
       }
 
-      if(isDefined(e_ent.temp_grenade_num))
+      if(isDefined(e_ent.temp_grenade_num)) {
         e_ent.grenadeammo = e_ent.temp_grenade_num;
+      }
     }
   }
 }
@@ -763,8 +805,9 @@ ai_set_enemy_rage_behaviour(set_rage_behaviour) {
         e_ent.aggressivemode = 0;
         e_ent.forcechargedsniperdeath = 0;
 
-        if(isDefined(e_ent.temp_grenade_num))
+        if(isDefined(e_ent.temp_grenade_num)) {
           e_ent.grenadeammo = e_ent.temp_grenade_num;
+        }
 
         continue;
       }
@@ -831,8 +874,9 @@ set_character_menendez() {
 }
 
 set_character_mason(b_restore_loadout) {
-  if(!isDefined(b_restore_loadout))
+  if(!isDefined(b_restore_loadout)) {
     b_restore_loadout = 1;
+  }
 
   update_player_model("c_usa_seal80s_mason_viewhands", "c_usa_seal80s_mason_viewbody");
 
@@ -859,8 +903,9 @@ update_player_model(str_hands_model, str_body_model) {
 debug_print_line(str_text) {
   str_val = getDvar(#"_id_204C4196");
 
-  if(isDefined(str_val) && str_val != "")
+  if(isDefined(str_val) && str_val != "") {
     iprintln(str_text);
+  }
 }
 
 func_on_notify(str_notify, func, param_1, param_2, param_3, param_4, param_5) {
@@ -870,8 +915,9 @@ func_on_notify(str_notify, func, param_1, param_2, param_3, param_4, param_5) {
 }
 
 _func_on_notify(str_notify, func, param_1, param_2, param_3, param_4, param_5) {
-  if(str_notify != "death")
+  if(str_notify != "death") {
     self endon("death");
+  }
 
   self waittill(str_notify);
   single_func(self, func, param_1, param_2, param_3, param_4, param_5);
@@ -882,8 +928,9 @@ spawn_managers_kill_all_active() {
 
   if(a_spawn_managers.size > 0) {
     for(i = 0; i < a_spawn_managers.size; i++) {
-      if(is_spawn_manager_enabled(a_spawn_managers[i].targetname))
+      if(is_spawn_manager_enabled(a_spawn_managers[i].targetname)) {
         spawn_manager_disable(a_spawn_managers[i].targetname);
+      }
     }
   }
 }
@@ -894,11 +941,13 @@ kill_all_ai(n_wait_min, n_wait_max) {
 }
 
 kill_ai_group(str_name, n_wait_min, n_wait_max) {
-  if(!isDefined(n_wait_min))
+  if(!isDefined(n_wait_min)) {
     n_wait_min = 0.5;
+  }
 
-  if(!isDefined(n_wait_max))
+  if(!isDefined(n_wait_max)) {
     n_wait_max = 3.5;
+  }
 
   a_guys = get_ai_group_ai(str_name);
   array_thread(a_guys, ::_kill_ai, n_wait_min, n_wait_max);
@@ -907,31 +956,37 @@ kill_ai_group(str_name, n_wait_min, n_wait_max) {
 _kill_ai(n_wait_min, n_wait_max) {
   self endon("death");
 
-  if(isDefined(n_wait_min) && isDefined(n_wait_max))
+  if(isDefined(n_wait_min) && isDefined(n_wait_max)) {
     wait(randomfloatrange(n_wait_min, n_wait_max));
+  }
 
   self bloody_death();
 }
 
 timescale_tween(start, end, time, delay, step_time) {
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.0;
+  }
 
-  if(!isDefined(step_time))
+  if(!isDefined(step_time)) {
     step_time = 0.1;
+  }
 
-  if(!isDefined(start))
+  if(!isDefined(start)) {
     start = gettimescale();
+  }
 
   num_steps = time / step_time;
   time_scale_range = end - start;
   time_scale_step = 0;
 
-  if(num_steps > 0)
+  if(num_steps > 0) {
     time_scale_step = abs(time_scale_range) / num_steps;
+  }
 
-  if(delay > 0.0)
+  if(delay > 0.0) {
     wait(delay);
+  }
 
   level notify("timescale_tween");
   level endon("timescale_tween");
@@ -941,18 +996,20 @@ timescale_tween(start, end, time, delay, step_time) {
   while(time_scale != end) {
     wait(step_time);
 
-    if(time_scale_range > 0)
+    if(time_scale_range > 0) {
       time_scale = min(time_scale + time_scale_step, end);
-    else if(time_scale_range < 0)
+    } else if(time_scale_range < 0) {
       time_scale = max(time_scale - time_scale_step, end);
+    }
 
     settimescale(time_scale);
   }
 }
 
 mason_fail_condition(b_enabled, n_faildist) {
-  if(!isDefined(b_enabled))
+  if(!isDefined(b_enabled)) {
     b_enabled = 1;
+  }
 
   self notify("fail_disabled");
   self endon("fail_disabled");
@@ -993,8 +1050,9 @@ mason_fail_kill() {
 }
 
 wait_for_scene_to_nearly_complete(str_actor, str_scene, n_time_before_return) {
-  if(!isDefined(n_time_before_return))
+  if(!isDefined(n_time_before_return)) {
     n_time_before_return = 2;
+  }
 
   anim_time_check = level.scr_anim[str_actor][str_scene];
   n_anim_time = getanimlength(anim_time_check);
@@ -1129,8 +1187,9 @@ start_charging_horse(str_horse_name, str_start_node, delay, n_speed, b_has_spawn
 
   e_horse endon("death");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   nd_horse_path_start = getvehiclenode(str_start_node, "targetname");
   e_horse thread go_path(nd_horse_path_start);
@@ -1138,15 +1197,17 @@ start_charging_horse(str_horse_name, str_start_node, delay, n_speed, b_has_spawn
   e_horse.delete_on_death = 1;
   e_horse notify("death");
 
-  if(!isalive(e_horse))
+  if(!isalive(e_horse)) {
     e_horse delete();
+  }
 }
 
 flame_vision_enabled() {
   a_t_triggers = getEntArray("fire_damage_trigger", "script_noteworthy");
 
-  foreach(trigger in a_t_triggers)
-  trigger thread flame_vision_trigger_think();
+  foreach(trigger in a_t_triggers) {
+    trigger thread flame_vision_trigger_think();
+  }
 }
 
 flame_vision_trigger_think() {
@@ -1164,14 +1225,16 @@ flame_vision_trigger_think() {
 }
 
 _ai_use_turret(e_turret, b_teleport, t_trigger) {
-  if(!isDefined(b_teleport))
+  if(!isDefined(b_teleport)) {
     b_teleport = 0;
+  }
 
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(t_trigger))
+  if(isDefined(t_trigger)) {
     self thread _turret_exit_watcher(t_trigger);
+  }
 
   self.goalradius = 32;
   self change_movemode("sprint");
@@ -1180,9 +1243,9 @@ _ai_use_turret(e_turret, b_teleport, t_trigger) {
     e_turret setdefaultdroppitch(0);
 
     if(!e_turret maps\_turret::does_turret_have_user()) {
-      if(isDefined(b_teleport) && b_teleport)
+      if(isDefined(b_teleport) && b_teleport) {
         self maps\_turret::use_turret_teleport(e_turret, 1);
-      else {
+      } else {
         e_turret set_turret_burst_parameters(1.5, 3.5, 2.5, 3.5);
         self thread maps\_turret::use_turret(e_turret, 1);
         self thread reset_turret_drop_pitch(e_turret);
@@ -1195,10 +1258,11 @@ _ai_use_turret(e_turret, b_teleport, t_trigger) {
 reset_turret_drop_pitch(e_turret) {
   self waittill("death");
 
-  if(!isDefined(e_turret.script_int))
+  if(!isDefined(e_turret.script_int)) {
     n_pitch = -90;
-  else
+  } else {
     n_pitch = e_turret.script_int;
+  }
 
   e_turret setdefaultdroppitch(n_pitch);
 }
@@ -1323,8 +1387,9 @@ timebomb(n_min, n_max) {
     return;
   }
   if(isDefined(n_min) && isDefined(n_max)) {
-    if(n_min < n_max)
+    if(n_min < n_max) {
       wait(randomfloatrange(n_min, n_max));
+    }
   }
 
   self bloody_death();
@@ -1333,8 +1398,9 @@ timebomb(n_min, n_max) {
 getmasonallies() {
   a_ai_allies = getaiarray("allies");
 
-  if(a_ai_allies.size == 0)
+  if(a_ai_allies.size == 0) {
     return undefined;
+  }
 
   a_ai_allies = remove_heroes_from_array(a_ai_allies);
   return a_ai_allies;
@@ -1361,8 +1427,9 @@ show_ammo_count() {
 }
 
 brutality_scene(n_anim_set, str_align, str_civ, str_pdf, str_trig_idle, str_trig_react, str_vol_civ, b_ignore_pdf) {
-  if(isDefined(str_trig_idle))
+  if(isDefined(str_trig_idle)) {
     trigger_wait(str_trig_idle);
+  }
 
   add_scene_properties("brutality_civ_idle_" + n_anim_set, str_align);
   add_scene_properties("brutality_pdf_idle_" + n_anim_set, str_align);
@@ -1374,8 +1441,9 @@ brutality_scene(n_anim_set, str_align, str_civ, str_pdf, str_trig_idle, str_trig
   level thread run_scene("brutality_pdf_idle_" + n_anim_set);
   ai_pdf thread brutality_done_by_pdf_death(str_trig_react);
 
-  if(isDefined(b_ignore_pdf) && b_ignore_pdf)
+  if(isDefined(b_ignore_pdf) && b_ignore_pdf) {
     self.ignoreme = 1;
+  }
 
   trigger_wait(str_trig_react);
 
@@ -1399,16 +1467,18 @@ brutality_pdf_final_goal_pos(str_scene, b_ignore_pdf) {
   scene_wait(str_scene);
   self setgoalpos(self.origin);
 
-  if(isDefined(b_ignore_pdf) && b_ignore_pdf)
+  if(isDefined(b_ignore_pdf) && b_ignore_pdf) {
     self.ignoreme = 0;
+  }
 }
 
 brutality_done_by_pdf_death(str_trig_react) {
   self waittill("death");
   t_react = getent(str_trig_react, "targetname");
 
-  if(isDefined(t_react))
+  if(isDefined(t_react)) {
     trigger_use(str_trig_react);
+  }
 }
 
 civ_escape(str_vol) {
@@ -1425,8 +1495,9 @@ civ_escape(str_vol) {
 }
 
 brutality_civ_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(isDefined(e_inflictor.team) && e_inflictor.team == "axis")
+  if(isDefined(e_inflictor.team) && e_inflictor.team == "axis") {
     n_damage = 0;
+  }
 
   return n_damage;
 }
@@ -1435,8 +1506,9 @@ achievement_stop_brutality() {
   level endon("menendez_section_done");
   level.n_civilians_saved = 0;
 
-  while(level.n_civilians_saved < 11)
+  while(level.n_civilians_saved < 11) {
     wait 0.5;
+  }
 
   self giveachievement_wrapper("SP_STORY_99PERCENT");
 }
@@ -1459,8 +1531,9 @@ menendez_spawners_clean_up() {
 delete_spawners_by_classname(str_classname) {
   a_spawners = getEntArray(str_classname, "classname");
 
-  foreach(sp_ai in a_spawners)
-  sp_ai delete();
+  foreach(sp_ai in a_spawners) {
+    sp_ai delete();
+  }
 }
 
 make_friendlies_ignore_grenades() {
@@ -1475,8 +1548,9 @@ random_shuffle(a_items) {
   while(!(isDefined(b_done_shuffling) && b_done_shuffling)) {
     a_items = array_randomize(a_items);
 
-    if(a_items[0] != item)
+    if(a_items[0] != item) {
       b_done_shuffling = 1;
+    }
 
     wait 0.05;
   }
@@ -1504,8 +1578,9 @@ destructibles_in_area(str_area) {
     if(_model_is_exempt(m_script) || !m_script istouching(e_area)) {
       continue;
     }
-    if(isDefined(m_script.destructibledef))
+    if(isDefined(m_script.destructibledef)) {
       m_script thread destructible_damage_logic();
+    }
   }
 }
 
@@ -1517,8 +1592,9 @@ destructible_damage_logic() {
     self waittill("damage", n_damage, e_inflictor);
 
     if(isDefined(e_inflictor) && e_inflictor == level.player) {
-      if(isDefined(self.b_already_damage_by_player) && self.b_already_damage_by_player)
+      if(isDefined(self.b_already_damage_by_player) && self.b_already_damage_by_player) {
         self dodamage(self.health, self.origin);
+      }
 
       self.b_already_damage_by_player = 1;
     }
@@ -1544,8 +1620,9 @@ fxanim_deconstructions_for_menendez_side() {
 fxanim_deconstruction_with_existence_check(str_fxanim_model) {
   a_fxanim_models = getEntArray(str_fxanim_model, "targetname");
 
-  if(a_fxanim_models.size > 0)
+  if(a_fxanim_models.size > 0) {
     fxanim_deconstruct(str_fxanim_model);
+  }
 }
 
 fxanim_deconstructions_for_mason_side1() {

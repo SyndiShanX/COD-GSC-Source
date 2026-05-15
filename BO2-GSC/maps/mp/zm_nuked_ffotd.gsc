@@ -13,8 +13,9 @@ main_start() {
   precachemodel("collision_player_256x256x10");
   precachemodel("collision_wall_64x64x10_standard");
 
-  if(isDefined(level.use_swipe_protection))
+  if(isDefined(level.use_swipe_protection)) {
     onplayerconnect_callback(::claymore_watch_swipes);
+  }
 }
 
 main_end() {
@@ -101,8 +102,9 @@ watch_melee_swipes(weapname) {
           self setweaponammoclip(weapname, ammo - 1);
           primaryweapons = self getweaponslistprimaries();
 
-          if(isDefined(primaryweapons[0]))
+          if(isDefined(primaryweapons[0])) {
             self switchtoweapon(primaryweapons[0]);
+          }
         }
       } else
         self takeweapon(weapname);

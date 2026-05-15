@@ -27,8 +27,9 @@ updateReflectionProbe() {
         self thread reflectionProbeButtons();
       }
     } else if(GetDvarInt("debug_reflection") == 0) {
-      if(isDefined(self.debug_reflectionobject))
+      if(isDefined(self.debug_reflectionobject)) {
         self.debug_reflectionobject delete();
+      }
     }
 
     wait(0.05);
@@ -40,14 +41,18 @@ reflectionProbeButtons() {
   offsetinc = 50;
 
   while(GetDvarInt("debug_reflection") == 1) {
-    if(self buttonPressed("BUTTON_X"))
+    if(self buttonPressed("BUTTON_X")) {
       offset += offsetinc;
-    if(self buttonPressed("BUTTON_Y"))
+    }
+    if(self buttonPressed("BUTTON_Y")) {
       offset -= offsetinc;
-    if(offset > 1000)
+    }
+    if(offset > 1000) {
       offset = 1000;
-    if(offset < 64)
+    }
+    if(offset < 64) {
       offset = 64;
+    }
 
     self.debug_reflectionobject.origin = self getEye() + ((anglesToForward(self GetPlayerAngles()) * offset));
 

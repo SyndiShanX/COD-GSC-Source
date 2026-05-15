@@ -32,10 +32,11 @@ zodiac_preLoad(playerHandModel) {
   flag_init("player_shot_on_zodiac");
   flag_set("player_can_die_on_zodiac");
 
-  if(!isDefined(playerHandModel))
+  if(!isDefined(playerHandModel)) {
     level.zodiac_playerHandModel = "viewhands_player_udt";
-  else
+  } else {
     level.zodiac_playerHandModel = playerHandModel;
+  }
 
   level.zodiac_playerZodiacModel = "vehicle_zodiac_viewmodel";
 
@@ -155,8 +156,9 @@ drive_target_enemy(vehicle) {
     enemy = undefined;
 
     currentguy = self;
-    if(checking == "price")
+    if(checking == "price") {
       currentguy = level.price;
+    }
 
     my_org = currentguy.origin;
 
@@ -174,8 +176,9 @@ drive_target_enemy(vehicle) {
       his_org = guy.origin;
 
       if(isDefined(guy.ridingvehicle)) {
-        if(guy.ridingvehicle == level.enemy_boat)
+        if(guy.ridingvehicle == level.enemy_boat) {
           check_dist = check_dist_for_hargroves_boat[checking];
+        }
         check_dist = check_dist_for_enemy_boat[checking];
       } else
         check_dist = check_dist_for_stationary_guys[checking];
@@ -217,10 +220,11 @@ drive_target_enemy(vehicle) {
 
     wait(0.1);
 
-    if(checking == "price")
+    if(checking == "price") {
       checking = "player";
-    else
+    } else {
       checking = "price";
+    }
   }
 }
 
@@ -249,8 +253,9 @@ drive_crash_slide(vehicle, velocity) {
 
   self BeginSliding(velocity);
 
-  if(flag("player_can_die_on_zodiac"))
+  if(flag("player_can_die_on_zodiac")) {
     self kill_wrapper();
+  }
 
   wait(1.0);
 }
@@ -280,8 +285,9 @@ drive_notetrack_sounds(vehicle, animflag) {
     if(prefix == "ps_") {
       alias = GetSubStr(notetrack, 3);
 
-      if(isDefined(level.zodiac_sound_overrides[alias]))
+      if(isDefined(level.zodiac_sound_overrides[alias])) {
         alias = level.zodiac_sound_overrides[alias];
+      }
 
       vehicle playSound(alias);
       continue;
@@ -333,8 +339,9 @@ shootable_stuff_assist_damage(obj) {
   dont_assist_destructible_destruction_here = getStructArray("dont_assist_destructible_destruction_here", "targetname");
   foreach(spot in dont_assist_destructible_destruction_here) {
     Assert(isDefined(spot.radius));
-    if(Distance(spot.origin, obj.origin) < spot.radius)
+    if(Distance(spot.origin, obj.origin) < spot.radius) {
       return;
+    }
   }
 
   self notify("new_shootable_stuff_assist");
@@ -394,8 +401,9 @@ drive_magic_bullet_get_end(vehicle, start, noshot) {
     return end;
   }
 
-  if(isDefined(noshot))
+  if(isDefined(noshot)) {
     return end;
+  }
 
   angles = vehicle GetTagAngles("tag_flash");
   forward = anglesToForward(angles);
@@ -409,8 +417,9 @@ get_shootable_boatdrivers() {
 
   boatdrivers = [];
   foreach(boat in boats) {
-    if(boat == level.players_boat)
+    if(boat == level.players_boat) {
       continue;
+    }
     if(boat == level.enemy_boat) {
       continue;
     }
@@ -442,18 +451,21 @@ wipeout_when_not_in_fov() {
   self endon("wipeout_when_not_in_fov");
   self endon("death");
 
-  while(within_fov_of_players(self.origin, FOV_FOR_WIPEOUT))
+  while(within_fov_of_players(self.origin, FOV_FOR_WIPEOUT)) {
     wait .05;
+  }
 
   self.wipeout = true;
 }
 
 drive_magic_bullet_trace(obj, start, end) {
   trace = bulletTrace(start, end, false, self);
-  if(!isDefined(trace["entity"]))
+  if(!isDefined(trace["entity"])) {
     return false;
-  if(trace["entity"] != obj)
+  }
+  if(trace["entity"] != obj) {
     return false;
+  }
   return true;
 }
 
@@ -462,10 +474,11 @@ drive_magic_bullet(vehicle) {
 
   end = drive_magic_bullet_get_end(vehicle, start);
 
-  if(flag("player_in_sight_of_boarding"))
+  if(flag("player_in_sight_of_boarding")) {
     MagicBullet(level.zodiac_gun, start, start + (0, 0, 255), self);
-  else
+  } else {
     MagicBullet(level.zodiac_gun, start, end.origin, self);
+  }
 
   playFXOnTag(level.zodiac_gunFlashFx, vehicle, "tag_flash");
   playFXOnTag(level.zodiac_gunShellFx, vehicle, "tag_brass");
@@ -475,8 +488,9 @@ drive_magic_bullet(vehicle) {
   if(!isDefined(end.obj)) {
     return;
   }
-  if(!isai(end.obj))
+  if(!isai(end.obj)) {
     end.obj notify("damage", 50, level.player, self.origin, end.obj.origin, "MOD_PISTOL_BULLET", "", "");
+  }
 
   if(isDefined(end.shootable_driver)) {
     driver_death(end.obj);
@@ -559,10 +573,11 @@ drive_shooting_update_anims(vehicle) {
 
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);
 
-      if(vehicle.zodiacAmmoCount == 1)
+      if(vehicle.zodiacAmmoCount == 1) {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_last_fire"), 1.0, 0.0, 1.0);
-      else
+      } else {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_fire"), 1.0, 0.0, 1.0);
+      }
 
       self drive_magic_bullet(vehicle);
 
@@ -659,15 +674,17 @@ zodiac_anims() {
 }
 
 should_stop_zodiac_attack_hint() {
-  if(!isDefined(level.player.vehicle))
+  if(!isDefined(level.player.vehicle)) {
     return true;
+  }
 
   return flag("player_shot_on_zodiac");
 }
 
 should_stop_zodiac_drive_hint() {
-  if(!isDefined(level.player.vehicle))
+  if(!isDefined(level.player.vehicle)) {
     return true;
+  }
 
   return level.player.vehicle.veh_speed > 10;
 }
@@ -697,14 +714,16 @@ reverse_hint(vehicle) {
 
 wait_for_vehicle_to_move() {
   for(;;) {
-    if(self.veh_speed > 40)
+    if(self.veh_speed > 40) {
       return;
+    }
     wait(1);
   }
 }
 
 should_stop_zodiac_reverse_hint() {
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     return true;
+  }
   return self.vehicle.hint_brake_count < 3;
 }

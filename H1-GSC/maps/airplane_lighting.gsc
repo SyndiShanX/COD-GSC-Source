@@ -40,8 +40,9 @@ toggle_breach_lightset_triggers() {
   var_0 common_scripts\utility::trigger_off();
   var_1 common_scripts\utility::trigger_on();
 
-  if(level.player istouching(var_1))
+  if(level.player istouching(var_1)) {
     wait 0.3;
+  }
 
   var_1 common_scripts\utility::trigger_off();
   var_2 common_scripts\utility::trigger_on();
@@ -80,8 +81,9 @@ override_scriptmodel_lightorigins() {
     var_3 = [var_1, var_2];
 
     foreach(var_5 in var_3) {
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_5 overridelightingorigin(var_0.origin);
+      }
     }
   }
 }
@@ -90,7 +92,8 @@ set_new_lighting_origin() {
   if(isDefined(self.target) && self.target != "") {
     var_0 = getent(self.target, "targetname");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self overridelightingorigin(var_0.origin);
+    }
   }
 }

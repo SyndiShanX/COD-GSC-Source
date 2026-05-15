@@ -100,8 +100,9 @@ apache_factory_hind_parked_on_spawn() {
     maps\_vehicle::godon();
     common_scripts\utility::flag_wait("FLAG_apache_factory_allies_close");
 
-    if(isDefined(self.script_parameters))
+    if(isDefined(self.script_parameters)) {
       wait(float(self.script_parameters));
+    }
 
     self.alwaysrocketdeath = undefined;
     self.enablerocketdeath = undefined;
@@ -143,8 +144,9 @@ apache_factory_ai_roof_on_spawn() {
 }
 
 apache_factory_enemy_on_death() {
-  if(!isDefined(level.apache_factory_enemy_counts))
+  if(!isDefined(level.apache_factory_enemy_counts)) {
     level.apache_factory_enemy_counts = [];
+  }
 
   var_0 = undefined;
   var_1 = undefined;
@@ -160,8 +162,9 @@ apache_factory_enemy_on_death() {
     var_2 = 1;
   }
 
-  if(!isDefined(level.apache_factory_enemy_counts[var_0]))
+  if(!isDefined(level.apache_factory_enemy_counts[var_0])) {
     level.apache_factory_enemy_counts[var_0] = 0;
+  }
 
   level.apache_factory_enemy_counts[var_0]++;
   self waittill("death");

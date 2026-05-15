@@ -31,24 +31,26 @@ watchGrenadeUsage() {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
 
-    if(weaponName == "c4")
+    if(weaponName == "c4") {
       self beginC4Tracking();
-    else if(weaponName == "smoke_grenade_american")
+    } else if(weaponName == "smoke_grenade_american") {
       self beginsmokegrenadetracking();
-
-    else
+    } else {
       self beginGrenadeTracking();
+    }
   }
 }
 
 beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades)) {
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0")
+  }
+  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0") {
     grenade delete();
-  else
+  } else {
     grenade thread smoke_grenade_death();
+  }
 }
 
 begin_semtex_grenade_tracking() {
@@ -64,10 +66,11 @@ begin_semtex_grenade_tracking() {
 track_semtex_grenade(grenade) {
   self.throwingGrenade = false;
 
-  if(!isDefined(level.thrown_semtex_grenades))
+  if(!isDefined(level.thrown_semtex_grenades)) {
     level.thrown_semtex_grenades = 1;
-  else
+  } else {
     level.thrown_semtex_grenades++;
+  }
 
   grenade waittill("death");
 
@@ -110,8 +113,9 @@ beginGrenadeTracking() {
   self endon("death");
 
   self waittill("grenade_fire", grenade, weaponName);
-  if(weaponName == "fraggrenade")
+  if(weaponName == "fraggrenade") {
     grenade thread grenade_earthQuake();
+  }
 
   self.throwingGrenade = false;
 }
@@ -127,12 +131,14 @@ watchC4() {
   while(1) {
     self waittill("grenade_fire", c4, weapname);
     if(weapname == "c4") {
-      if(!self.c4array.size)
+      if(!self.c4array.size) {
         self thread watchC4AltDetonate();
+      }
 
       self.c4array[self.c4array.size] = c4;
-      if(self.c4array.size > 15 && getDvar("player_sustainAmmo") != "0")
+      if(self.c4array.size > 15 && getDvar("player_sustainAmmo") != "0") {
         self.c4array[0] delete();
+      }
       c4.owner = self;
 
       c4 thread c4Damage();
@@ -185,8 +191,9 @@ claymoreDetonation() {
 
   self thread deleteOnDeath(damagearea);
 
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
 
   if(!is_specialop() && level.claymores.size > 15) {
@@ -205,10 +212,11 @@ claymoreDetonation() {
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      } else {
         self detonate(undefined);
+      }
 
       return;
     }
@@ -220,8 +228,9 @@ deleteOnDeath(ent) {
 
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 watchC4Detonation() {
@@ -231,8 +240,9 @@ watchC4Detonation() {
     weap = self getCurrentWeapon();
     if(weap == "c4") {
       for(i = 0; i < self.c4array.size; i++) {
-        if(isDefined(self.c4array[i]))
+        if(isDefined(self.c4array[i])) {
           self.c4array[i] thread waitAndDetonate(0.1);
+        }
       }
       self.c4array = [];
     }
@@ -250,8 +260,9 @@ watchC4AltDetonation() {
       newarray = [];
       for(i = 0; i < self.c4array.size; i++) {
         c4 = self.c4array[i];
-        if(isDefined(self.c4array[i]))
+        if(isDefined(self.c4array[i])) {
           c4 thread waitAndDetonate(0.1);
+        }
       }
       self.c4array = newarray;
       self notify("detonated");
@@ -282,10 +293,11 @@ c4Damage() {
 
   self playSound("claymore_activated_SP");
 
-  if(level.c4explodethisframe)
+  if(level.c4explodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  } else {
     wait .05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -294,10 +306,11 @@ c4Damage() {
 
   thread resetC4ExplodeThisFrame();
 
-  if(isPlayer(attacker))
+  if(isPlayer(attacker)) {
     self detonate(attacker);
-  else
+  } else {
     self detonate();
+  }
 }
 
 resetC4ExplodeThisFrame() {
@@ -335,11 +348,13 @@ clearFXOnDeath(fx) {
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
 
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
+  }
 
-  if(!isDefined(startRadius))
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
 
   for(i = 0; i < level.players.size; i++) {
     if(!isalive(level.players[i]) || level.players[i].sessionstate != "playing") {
@@ -392,8 +407,9 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
 
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
@@ -411,79 +427,78 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   return (trace["fraction"] == 1);
 }
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
-    if(self.isPlayer) {
-      self.damageOrigin = damagepos;
-      self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0
-      }
-      else {
-        if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
-          return;
-        }
-        self.entity notify("damage", iDamage, eAttacker);
-      }
+  if(self.isPlayer) {
+    self.damageOrigin = damagepos;
+    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
+  } else {
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
+      return;
     }
+    self.entity notify("damage", iDamage, eAttacker);
+  }
+}
 
-    debugline(a, b, color) {
-      for(i = 0; i < 30 * 20; i++) {
-        line(a, b, color);
-        wait .05;
-      }
-    }
+debugline(a, b, color) {
+  for(i = 0; i < 30 * 20; i++) {
+    line(a, b, color);
+    wait .05;
+  }
+}
 
-    onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
-      self endon("death");
+onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
+  self endon("death");
 
-      switch (sWeapon) {
-        case "concussion_grenade_mp":
+  switch (sWeapon) {
+    case "concussion_grenade_mp":
 
-          radius = 512;
-          scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
+      radius = 512;
+      scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
 
-          time = 1 + (4 * scale);
+      time = 1 + (4 * scale);
 
-          wait(0.05);
-          self shellShock("concussion_grenade_mp", time);
-          break;
-        default:
+      wait(0.05);
+      self shellShock("concussion_grenade_mp", time);
+      break;
+    default:
 
-          break;
-      }
-    }
+      break;
+  }
+}
 
-    watchC4AltDetonate() {
-      self endon("death");
-      self endon("disconnect");
-      self endon("detonated");
-      level endon("game_ended");
+watchC4AltDetonate() {
+  self endon("death");
+  self endon("disconnect");
+  self endon("detonated");
+  level endon("game_ended");
 
+  buttonTime = 0;
+  for(;;) {
+    if(self useButtonPressed()) {
       buttonTime = 0;
-      for(;;) {
-        if(self useButtonPressed()) {
-          buttonTime = 0;
-          while(self useButtonPressed()) {
-            buttonTime += 0.05;
-            wait(0.05);
-          }
-
-          println("pressTime1: " + buttonTime);
-          if(buttonTime >= 0.5) {
-            continue;
-          }
-          buttonTime = 0;
-          while(!self useButtonPressed() && buttonTime < 0.5) {
-            buttonTime += 0.05;
-            wait(0.05);
-          }
-
-          println("delayTime: " + buttonTime);
-          if(buttonTime >= 0.5) {
-            continue;
-          }
-          if(!self.c4Array.size) {
-            return;
-          }
-          self notify("alt_detonate");
-        }
+      while(self useButtonPressed()) {
+        buttonTime += 0.05;
         wait(0.05);
       }
+
+      println("pressTime1: " + buttonTime);
+      if(buttonTime >= 0.5) {
+        continue;
+      }
+      buttonTime = 0;
+      while(!self useButtonPressed() && buttonTime < 0.5) {
+        buttonTime += 0.05;
+        wait(0.05);
+      }
+
+      println("delayTime: " + buttonTime);
+      if(buttonTime >= 0.5) {
+        continue;
+      }
+      if(!self.c4Array.size) {
+        return;
+      }
+      self notify("alt_detonate");
     }
+    wait(0.05);
+  }
+}

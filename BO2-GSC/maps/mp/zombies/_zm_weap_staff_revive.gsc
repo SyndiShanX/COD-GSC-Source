@@ -54,8 +54,9 @@ staff_revive_impact(v_explode_point) {
     }
     n_dist_sq = distancesquared(v_explode_point, e_player.origin);
 
-    if(n_dist_sq < n_closest_dist_sq)
+    if(n_dist_sq < n_closest_dist_sq) {
       e_closest_player = e_player;
+    }
   }
 
   if(isDefined(e_closest_player)) {

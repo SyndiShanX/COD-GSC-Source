@@ -266,8 +266,9 @@ _id_3FE5() {
     level._effect = [];
   }
 
-  if(getDvar("#x3616d911ec20c3123") == "") {} else if(getDvar("#x3616d911ec20c3123") == level.script)
+  if(getDvar("#x3616d911ec20c3123") == "") {} else if(getDvar("#x3616d911ec20c3123") == level.script) {
     [[level._id_6028]]();
+  }
 
   _id_7F49();
   _id_06CF::_id_7FF2();

@@ -6,8 +6,9 @@
 #include common_scripts\utility;
 #include maps\_utility;
 
-if(!isDefined(level.global_fx))
+if(!isDefined(level.global_fx)) {
   level.global_fx = [];
+}
 
 level._global_fx_ents = [];
 randomStartDelay = randomfloatrange(-20, -15);
@@ -44,8 +45,9 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
   level.global_fx[targetname] = fxName;
 
   ents = getStructArray(targetname, "targetname");
-  if(!isDefined(ents))
+  if(!isDefined(ents)) {
     return;
+  }
   if(ents.size <= 0) {
     return;
   }
@@ -65,17 +67,20 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
 }
 
 global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
-  if(!isDefined(level._effect[fxName]))
+  }
+  if(!isDefined(level._effect[fxName])) {
     level._effect[fxName] = loadfx(fxFile);
+  }
 
   if(isDefined(randomrange)) {
     delay += RandomFloat(randomrange);
   }
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   ent = createOneshotEffect(fxName);
   ent.v["origin"] = (self.origin);
@@ -88,13 +93,15 @@ global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
 
   array = level.struct_class_names["targetname"][self.targetname];
   foreach(index, struct in array) {
-    if(struct == self)
+    if(struct == self) {
       level.struct_class_names["targetname"][self.targetname][index] = undefined;
+    }
   }
 
   foreach(index, struct in level.struct) {
-    if(struct == self)
+    if(struct == self) {
       level.struct[index] = undefined;
+    }
   }
 
   return ent;

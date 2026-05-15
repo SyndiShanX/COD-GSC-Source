@@ -12,6 +12,7 @@ main() {
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
   level._effect["lightning"] = loadfx("weather/lightning_mp_underpass");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_underpass_fx::main();
+  }
 }

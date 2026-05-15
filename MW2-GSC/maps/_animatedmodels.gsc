@@ -13,14 +13,16 @@ main() {
   level.init_animatedmodels_dump = false;
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   animated_models = getEntArray("animated_model", "targetname");
   array_thread(animated_models, ::model_init);
 
-  if(level.init_animatedmodels_dump)
+  if(level.init_animatedmodels_dump) {
     AssertMsg("anims not cached for animated prop model, Repackage Zones and Rebuild Precache Script in Launcher:");
+  }
 
   foreach(model in animated_models) {
     keys = GetArrayKeys(level.anim_prop_models[model.model]);
@@ -32,16 +34,18 @@ main() {
       }
     }
 
-    if(scriptedWind)
+    if(scriptedWind) {
       model thread animateTreeWind();
-    else
+    } else {
       model thread animateModel();
+    }
   }
 }
 
 init_wind_if_uninitialized() {
-  if(isDefined(level.wind))
+  if(isDefined(level.wind)) {
     return;
+  }
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
@@ -49,8 +53,9 @@ init_wind_if_uninitialized() {
 }
 
 model_init() {
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = true;
+  }
 }
 animateModel() {
   self UseAnimTree(#animtree);

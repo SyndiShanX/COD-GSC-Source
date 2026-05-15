@@ -31,17 +31,21 @@ bot_sr_debug() {
       foreach(tag in level.dogtags) {
         if(tag maps\mp\gametypes\_gameobjects::canInteractWith("allies") || tag maps\mp\gametypes\_gameobjects::canInteractWith("axis")) {
           if(isDefined(tag.bot_picking_up)) {
-            if(isDefined(tag.bot_picking_up["allies"]) && IsAlive(tag.bot_picking_up["allies"]))
+            if(isDefined(tag.bot_picking_up["allies"]) && IsAlive(tag.bot_picking_up["allies"])) {
               line(tag.curorigin, tag.bot_picking_up["allies"].origin + (0, 0, 20), (0, 1, 0), 1.0, true);
-            if(isDefined(tag.bot_picking_up["axis"]) && IsAlive(tag.bot_picking_up["axis"]))
+            }
+            if(isDefined(tag.bot_picking_up["axis"]) && IsAlive(tag.bot_picking_up["axis"])) {
               line(tag.curorigin, tag.bot_picking_up["axis"].origin + (0, 0, 20), (0, 1, 0), 1.0, true);
+            }
           }
 
           if(isDefined(tag.bot_camping)) {
-            if(isDefined(tag.bot_camping["allies"]) && IsAlive(tag.bot_camping["allies"]))
+            if(isDefined(tag.bot_camping["allies"]) && IsAlive(tag.bot_camping["allies"])) {
               line(tag.curorigin, tag.bot_camping["allies"].origin + (0, 0, 20), (0, 1, 0), 1.0, true);
-            if(isDefined(tag.bot_camping["axis"]) && IsAlive(tag.bot_camping["axis"]))
+            }
+            if(isDefined(tag.bot_camping["axis"]) && IsAlive(tag.bot_camping["axis"])) {
               line(tag.curorigin, tag.bot_camping["axis"].origin + (0, 0, 20), (0, 1, 0), 1.0, true);
+            }
           }
         }
       }
@@ -59,8 +63,9 @@ bot_sr_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     wait(0.05);
+  }
 
   self.suspend_sd_role = undefined;
 
@@ -107,8 +112,9 @@ sr_pick_up_tag(tag) {
   if(!isDefined(self.role)) {
     return;
   }
-  if(self bot_is_defending())
+  if(self bot_is_defending()) {
     self bot_defend_stop();
+  }
 
   tag.bot_picking_up[self.team] = self;
   tag thread clear_bot_on_reset();
@@ -149,8 +155,9 @@ sr_pick_up_tag(tag) {
 
   if(self BotHasScriptGoal() && isDefined(tag_goal)) {
     script_goal = self BotGetScriptGoal();
-    if(bot_vectors_are_equal(script_goal, tag_goal))
+    if(bot_vectors_are_equal(script_goal, tag_goal)) {
       self BotClearScriptGoal();
+    }
   }
 
   self notify("stop_tag_watcher");
@@ -183,8 +190,9 @@ sr_ally_near_tag(tag) {
   foreach(ally in allies) {
     if(ally != self && isDefined(ally.role) && ally.role != "atk_bomber" && ally.role != "bomb_defuser") {
       ally_dist = Distance(ally.origin, tag.curorigin);
-      if(ally_dist < my_dist_to_tag * 0.5)
+      if(ally_dist < my_dist_to_tag * 0.5) {
         return true;
+      }
     }
   }
 
@@ -225,8 +233,9 @@ sr_camp_tag(tag) {
   if(!isDefined(self.role)) {
     return;
   }
-  if(self bot_is_defending())
+  if(self bot_is_defending()) {
     self bot_defend_stop();
+  }
 
   tag.bot_camping[self.team] = self;
   tag thread clear_bot_camping_on_reset();

@@ -294,8 +294,9 @@ so_showers_update_objective() {
   Objective_SetPointerTextOverride(1, "");
 }
 so_showers_timed_setup_get_spawners(randomize) {
-  if(!isDefined(randomize))
+  if(!isDefined(randomize)) {
     randomize = true;
+  }
 
   level.bathroom_initial = getEntArray("bathroom_initial_spawner", "script_noteworthy");
   level.bathroom_balcony = getEntArray("bathroom_balcony_spawner", "script_noteworthy");
@@ -312,8 +313,9 @@ so_showers_timed_setup_get_spawners(randomize) {
   }
 
   for(i = 0; i < level.riot_shield.size; i++) {
-    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG")
+    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG") {
       level.riot_shield[i] = undefined;
+    }
   }
   array_removeUndefined(level.riot_shield);
 }
@@ -345,8 +347,9 @@ challenge_only_think() {
     return;
   }
 
-  if(self.classname == "script_brushmodel")
+  if(self.classname == "script_brushmodel") {
     self connectpaths();
+  }
 
   self delete();
 }

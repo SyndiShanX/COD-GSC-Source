@@ -17,10 +17,11 @@ flickerLight(color0, color1, minDelay, maxDelay) {
     fromColor = toColor;
     toColor = color0 + (color1 - color0) * randomfloat(1.0);
 
-    if(minDelay != maxDelay)
+    if(minDelay != maxDelay) {
       delay += randomfloatrange(minDelay, maxDelay);
-    else
+    } else {
       delay += minDelay;
+    }
 
     colorDeltaPerTime = (fromColor - toColor) * (1 / delay);
     while(delay > 0) {
@@ -135,8 +136,9 @@ getclosests_flickering_model(origin) {
   array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
-  if(isDefined(model))
+  if(isDefined(model)) {
     return_array[0] = model;
+  }
   return return_array;
 }
 
@@ -178,11 +180,13 @@ generic_flickering() {
     self.linked_models = true;
   }
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     self.linked_things = getEntArray(self.script_noteworthy, "targetname");
+  }
 
-  if((!self.linked_things.size) && (!isDefined(self.linked_prefab_ents)))
+  if((!self.linked_things.size) && (!isDefined(self.linked_prefab_ents))) {
     self.linked_things = getclosests_flickering_model(self.origin);
+  }
 
   for(i = 0; i < self.linked_things.size; i++) {
     if(is_light_entity(self.linked_things[i])) {
@@ -231,16 +235,18 @@ generic_flicker() {
 
       self setLightIntensity(curr);
       if(self.linked_lights) {
-        for(i = 0; i < self.linked_light_ents.size; i++)
+        for(i = 0; i < self.linked_light_ents.size; i++) {
           self.linked_light_ents[i] setLightIntensity(curr);
+        }
       }
       num--;
     }
 
     self setLightIntensity(on);
     if(self.linked_lights) {
-      for(i = 0; i < self.linked_light_ents.size; i++)
+      for(i = 0; i < self.linked_light_ents.size; i++) {
         self.linked_light_ents[i] setLightIntensity(on);
+      }
     }
     if(self.linked_models) {
       self.lit_model show();
@@ -260,10 +266,11 @@ flickerLightIntensity(minDelay, maxDelay) {
     num = randomintrange(1, 10);
     while(num) {
       wait(randomfloatrange(.05, .1));
-      if(curr > .2)
+      if(curr > .2) {
         curr = randomfloatrange(0, .3);
-      else
+      } else {
         curr = on;
+      }
 
       self setLightIntensity(curr);
       num--;
@@ -303,19 +310,23 @@ strobeLight(intensity0, intensity1, period, kill_flag) {
     self setLightIntensity(intensity0 + (intensity1 - intensity0) * interpolation);
     wait 0.05;
     time += 0.05;
-    if(time > period)
+    if(time > period) {
       time -= period;
+    }
     if(isDefined(kill_flag)) {
-      if(flag(kill_flag))
+      if(flag(kill_flag)) {
         return;
+      }
     }
   }
 }
 changeLightColorTo(targetColor, totalTime, accelTime, decelTime) {
-  if(!isDefined(accelTime))
+  if(!isDefined(accelTime)) {
     accelTime = 0;
-  if(!isDefined(decelTime))
+  }
+  if(!isDefined(decelTime)) {
     decelTime = 0;
+  }
   self thread changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime);
 }
 changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {

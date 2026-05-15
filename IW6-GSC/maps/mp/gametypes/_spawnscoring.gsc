@@ -21,11 +21,13 @@ getSpawnpoint_NearTeam(spawnPoints) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_NearTeam(spawnChoices["primary"]);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_NearTeam(spawnChoices["secondary"]);
+  }
 
   logBadspawn("Buddy Spawn");
   return selectBestSpawnPoint(spawnPoints[0], spawnPoints);
@@ -263,8 +265,9 @@ findBuddyPathNode(buddy, playerHeight, cosAngle) {
       dot = VectorDot(buddyDir, directionToNode);
 
       if(getMapName() == "mp_fahrenheit") {
-        if(buddyNode.origin == (1778.9, 171.6, 716) || buddyNode.origin == (1772.1, 271.4, 716) || buddyNode.origin == (1657.2, 259.6, 716) || buddyNode.origin == (1633.7, 333.9, 716) || buddyNode.origin == (1634.4, 415.7, 716) || buddyNode.origin == (1537.3, 419.3, 716) || buddyNode.origin == (1410.9, 420.8, 716) || buddyNode.origin == (1315.6, 416.6, 716) || buddyNode.origin == (1079.4, 414.6, 716) || buddyNode.origin == (982.9, 421.8, 716) || buddyNode.origin == (896.9, 423.8, 716))
+        if(buddyNode.origin == (1778.9, 171.6, 716) || buddyNode.origin == (1772.1, 271.4, 716) || buddyNode.origin == (1657.2, 259.6, 716) || buddyNode.origin == (1633.7, 333.9, 716) || buddyNode.origin == (1634.4, 415.7, 716) || buddyNode.origin == (1537.3, 419.3, 716) || buddyNode.origin == (1410.9, 420.8, 716) || buddyNode.origin == (1315.6, 416.6, 716) || buddyNode.origin == (1079.4, 414.6, 716) || buddyNode.origin == (982.9, 421.8, 716) || buddyNode.origin == (896.9, 423.8, 716)) {
           continue;
+        }
       }
 
       if((dot <= cosAngle) && !positionWouldTelefrag(buddyNode.origin)) {
@@ -445,11 +448,13 @@ getSpawnpoint_DZ(spawnPoints, preferedPointArray) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_DZ(spawnChoices["primary"], preferedPointArray);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_DZ(spawnChoices["secondary"], preferedPointArray);
+  }
 
   return selectBestSpawnPoint(spawnPoints[0], spawnPoints);
 }
@@ -468,11 +473,13 @@ getSpawnpoint_Domination(spawnPoints, perferdDomPointArray) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_Domination(spawnChoices["primary"], perferdDomPointArray);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_Domination(spawnChoices["secondary"], perferdDomPointArray);
+  }
 
   logBadspawn("Buddy Spawn");
   return selectBestSpawnPoint(spawnPoints[0], spawnPoints);
@@ -575,8 +582,9 @@ getStartSpawnpoint_FreeForAll(spawnPoints) {
   activePlayerList = maps\mp\gametypes\_spawnlogic::getActivePlayerList();
   spawnPoints = checkDynamicSpawns(spawnPoints);
 
-  if(!isDefined(activePlayerList) || activePlayerList.size == 0)
+  if(!isDefined(activePlayerList) || activePlayerList.size == 0) {
     return maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
+  }
 
   furthestDistSq = 0;
   foreach(spawnPoint in spawnPoints) {
@@ -596,8 +604,9 @@ getStartSpawnpoint_FreeForAll(spawnPoints) {
     }
   }
 
-  if(!isDefined(selectedSpawnPoint))
+  if(!isDefined(selectedSpawnPoint)) {
     return maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
+  }
 
   return selectedSpawnPoint;
 }
@@ -616,11 +625,13 @@ getSpawnpoint_FreeForAll(spawnPoints) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_FreeForAll(spawnChoices["primary"]);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_FreeForAll(spawnChoices["secondary"]);
+  }
 
   if(GetDvarInt("scr_altFFASpawns") == 1 && spawnChoices["bad"].size) {
     logBadspawn("Bad FFA Spawn");
@@ -690,11 +701,13 @@ getSpawnpoint_SearchAndRescue(spawnPoints) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_SearchAndRescue(spawnChoices["primary"]);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_SearchAndRescue(spawnChoices["secondary"]);
+  }
 
   logBadspawn("Buddy Spawn");
   return selectBestSpawnPoint(spawnPoints[0], spawnPoints);
@@ -735,8 +748,9 @@ scoreFactors_SearchAndRescue(spawnPoint) {
 }
 
 getSpawnpoint_awayFromEnemies(spawnPoints, team, disallowBuddySpawn) {
-  if(!isDefined(disallowBuddySpawn))
+  if(!isDefined(disallowBuddySpawn)) {
     disallowBuddySpawn = false;
+  }
 
   spawnPoints = checkDynamicSpawns(spawnPoints);
   spawnChoices["primary"] = [];
@@ -751,11 +765,13 @@ getSpawnpoint_awayFromEnemies(spawnPoints, team, disallowBuddySpawn) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_awayFromEnemies(spawnChoices["primary"], team);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_awayFromEnemies(spawnChoices["secondary"], team);
+  }
 
   if(disallowBuddySpawn) {
     return undefined;
@@ -822,11 +838,13 @@ getSpawnpoint_Safeguard(spawnPoints) {
     spawnChoices[result][spawnChoices[result].size] = spawnPoint;
   }
 
-  if(spawnChoices["primary"].size)
+  if(spawnChoices["primary"].size) {
     return scoreSpawns_Safeguard(spawnChoices["primary"]);
+  }
 
-  if(spawnChoices["secondary"].size)
+  if(spawnChoices["secondary"].size) {
     return scoreSpawns_Safeguard(spawnChoices["secondary"]);
+  }
 
   logBadspawn("Buddy Spawn");
   return selectBestSpawnPoint(spawnPoints[0], spawnPoints);
@@ -864,10 +882,11 @@ scoreFactors_Safeguard(spawnPoint) {
 }
 
 logBadspawn(typeString) {
-  if(!isDefined(typeString))
+  if(!isDefined(typeString)) {
     typeString = "";
-  else
+  } else {
     typeString = "(" + typeString + ")";
+  }
   println("^1 Spawn Error: Bad spawn used. " + typeString + "\n");
 
   if(isDefined(level.matchRecording_logEventMsg)) {

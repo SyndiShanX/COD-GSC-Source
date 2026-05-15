@@ -41,8 +41,9 @@ main(model, type, no_death) {
 
 init_local() {
   self.clear_anims_on_death = true;
-  if(!isDefined(self.script_allow_rider_deaths))
+  if(!isDefined(self.script_allow_rider_deaths)) {
     self.script_allow_rider_deaths = false;
+  }
 }
 
 set_vehicle_anims(positions) {
@@ -78,8 +79,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

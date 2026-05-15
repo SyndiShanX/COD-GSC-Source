@@ -124,16 +124,17 @@ player_eject_watcher() {
 }
 
 ejected_overrun(trig) {
-  if(!isDefined(trig.ejected))
+  if(!isDefined(trig.ejected)) {
     trig.ejected = 1;
-  else {
+  } else {
     trig.ejected++;
 
     if(trig.ejected >= 3) {
       primaries = self getweaponslistprimaries();
 
-      foreach(weapon in primaries)
-      self takeweapon(weapon);
+      foreach(weapon in primaries) {
+        self takeweapon(weapon);
+      }
 
       lethal = self get_player_lethal_grenade();
 

@@ -21,9 +21,9 @@ _id_6BCC(var_0) {
   var_1._id_9C5F = 1;
   var_1._id_E503 = 1;
 
-  if(scripts\mp\gametypes\br_public::_id_889B(var_0._id_CF22)) {} else if(scripts\mp\gametypes\br_pickups::_id_8879(var_0._id_CF22))
+  if(scripts\mp\gametypes\br_public::_id_889B(var_0._id_CF22)) {} else if(scripts\mp\gametypes\br_pickups::_id_8879(var_0._id_CF22)) {
     var_1._id_61D5 = self._id_61D5;
-  else {
+  } else {
     var_1._id_1B53 = self._id_2A0E;
   }
 

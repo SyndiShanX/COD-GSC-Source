@@ -27,8 +27,9 @@ if(isDefined(flag_start)) {
   flag_wait(flag_start);
 }
 if(isDefined(level.smoke_throttle)) {
-  if(!isDefined(level.smoke_wave_time))
+  if(!isDefined(level.smoke_wave_time)) {
     level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
+  }
 
   time_since = gettime() - level.smoke_wave_time;
   if(time_since <= level.smoke_throttle) {
@@ -39,8 +40,9 @@ if(isDefined(level.smoke_throttle)) {
 
 magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
 array_thread(magic_smoke_grenades, ::smoke_wave_play);
-if(isDefined(dialog_wait))
+if(isDefined(dialog_wait)) {
   thread dialog_smoke_wave_alert(dialog_wait);
+}
 }
 
 smoke_wave_play() {
@@ -61,14 +63,17 @@ if(isDefined(level.btr_init)) {
 level.btr_init = true;
 level.btr80_count = 0;
 
-if(!isDefined(level.btr_min_fighting_range))
+if(!isDefined(level.btr_min_fighting_range)) {
   level.btr_min_fighting_range = 400;
+}
 
-if(!isDefined(level.btr_max_fighting_range))
+if(!isDefined(level.btr_max_fighting_range)) {
   level.btr_max_fighting_range = 2400;
+}
 
-if(!isDefined(level.btr_target_fov))
+if(!isDefined(level.btr_target_fov)) {
   level.btr_target_fov = cos(50);
+}
 
 level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
 
@@ -193,37 +198,45 @@ btr80_find_available_player() {
   p1_ok = btr80_check_player_available(level.player) && btr80_check_player_in_range(level.player);
   p2_ok = btr80_check_player_available(level.player2) && btr80_check_player_in_range(level.player2);
 
-  if(p1_ok && p2_ok)
+  if(p1_ok && p2_ok) {
     return getclosest(self.origin, level.players);
+  }
 
-  if(p1_ok)
+  if(p1_ok) {
     return level.player;
+  }
 
-  if(p2_ok)
+  if(p2_ok) {
     return level.player2;
+  }
 
   return undefined;
 }
 
 btr80_check_player_available(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
-  if(isDefined(player.btr80_attacker_id))
+  if(isDefined(player.btr80_attacker_id)) {
     return false;
+  }
 
   return true;
 }
 
 btr80_check_player_in_range(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
-  if(distance(self.origin, player.origin) > level.btr_max_fighting_range)
+  if(distance(self.origin, player.origin) > level.btr_max_fighting_range) {
     return false;
+  }
 
-  if(distance(self.origin, player.origin) < level.btr_min_fighting_range)
+  if(distance(self.origin, player.origin) < level.btr_min_fighting_range) {
     return false;
+  }
 
   return true;
 }
@@ -233,25 +246,29 @@ btr80_check_player_in_building(player) {
     return;
   }
   foreach(building in level.btr80_building_checks) {
-    if(player istouching(building))
+    if(player istouching(building)) {
       return true;
+    }
   }
 
   return false;
 }
 
 btr80_can_see_player(player) {
-  if(btr80_check_player_in_building(player))
+  if(btr80_check_player_in_building(player)) {
     return false;
+  }
 
-  if(!btr80_check_player_in_range(player))
+  if(!btr80_check_player_in_range(player)) {
     return false;
+  }
 
   tag_flash_loc = self getTagOrigin("tag_flash");
   player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
-    if(isDefined(level.debug))
+    if(isDefined(level.debug)) {
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
+    }
     return true;
   } else {
     return false;
@@ -266,8 +283,9 @@ btr80_new_target_think() {
   while(1) {
     self waittill("trigger", vehicle);
 
-    if(!isalive(vehicle))
+    if(!isalive(vehicle)) {
       return;
+    }
     if(vehicle.turret_busy) {
       continue;
     }
@@ -307,16 +325,18 @@ btr80_register_death() {
 
   self waittill("death", attacker);
 
-  if(attacker_is_p1(attacker))
+  if(attacker_is_p1(attacker)) {
     thread pulse_kill_counter_hud(level.btr_kill_value, 0);
-  else
-  if(attacker_is_p2(attacker))
-    thread pulse_kill_counter_hud(0, level.btr_kill_value);
-
+  } else {
+    if(attacker_is_p2(attacker)) {
+      thread pulse_kill_counter_hud(0, level.btr_kill_value);
+    }
+  }
   if(self ent_flag("spotted_player")) {
     foreach(player in level.players) {
-      if(isDefined(player.btr80_attacker_id) && (my_id == player.btr80_attacker_id))
+      if(isDefined(player.btr80_attacker_id) && (my_id == player.btr80_attacker_id)) {
         player.btr80_attacker_id = undefined;
+      }
     }
   }
 
@@ -324,8 +344,9 @@ btr80_register_death() {
 
   assertex((level.btr80_count >= 0), "Somehow the BTR80 population counter dropped below 0. This should never happen.");
 
-  if(level.btr80_count <= 0)
+  if(level.btr80_count <= 0) {
     level notify("btr80s_all_down");
+  }
 }
 
 btr80_challenge_complete_behavior() {
@@ -361,8 +382,9 @@ dialog_btr80_spotted_you_action() {
   }
 
   if(isDefined(level.btr80_alert_throttle)) {
-    if(!isDefined(level.btr80_alert_time))
+    if(!isDefined(level.btr80_alert_time)) {
       level.btr80_alert_time = gettime() - level.btr80_alert_throttle - 1;
+    }
 
     time_since = gettime() - level.btr80_alert_time;
     if(time_since <= level.btr80_alert_throttle) {
@@ -409,8 +431,9 @@ create_hunter_enemy_group(enemy_tag, flag_start, enemy_count) {
   current_enemies = getEntArray(enemy_tag, "targetname");
   array_thread(current_enemies, ::add_spawn_function, ::create_hunter_enemy);
 
-  if(!isDefined(enemy_count) || (enemy_count > current_enemies.size))
+  if(!isDefined(enemy_count) || (enemy_count > current_enemies.size)) {
     enemy_count = current_enemies.size;
+  }
 
   thread dialog_hunter_enemies(enemy_tag, 2.5);
 
@@ -451,8 +474,9 @@ create_hunter_enemy(wait_for_unload) {
 
   level.hunter_enemies[self.unique_id] = self;
 
-  if(isDefined(wait_for_unload) && wait_for_unload)
+  if(isDefined(wait_for_unload) && wait_for_unload) {
     self waittill("jumpedout");
+  }
 
   thread hunter_enemy_maintain_closest_goal();
 }
@@ -481,24 +505,30 @@ hunter_enemy_maintain_closest_goal() {
 hunter_enemies_refill(refill_at, min_fill, max_fill) {
   level endon("special_op_terminated");
 
-  if(!isDefined(refill_at) || (refill_at < 0))
+  if(!isDefined(refill_at) || (refill_at < 0)) {
     refill_at = 0;
-  if(!isDefined(min_fill) || (min_fill < 1))
+  }
+  if(!isDefined(min_fill) || (min_fill < 1)) {
     min_fill = 1;
-  if(!isDefined(max_fill) || (max_fill <= min_fill))
+  }
+  if(!isDefined(max_fill) || (max_fill <= min_fill)) {
     max_fill = min_fill + 1;
+  }
 
   used_smoke = false;
   last_spawn = "gas";
   while(true) {
     if(!isDefined(level.hunters_active) || (level.hunters_active <= refill_at)) {
       spawn_options = [];
-      if(!flag("so_player_near_bank"))
+      if(!flag("so_player_near_bank")) {
         spawn_options[spawn_options.size] = "bank";
-      if(!flag("so_player_near_gas_station"))
+      }
+      if(!flag("so_player_near_gas_station")) {
         spawn_options[spawn_options.size] = "gas";
-      if(!flag("so_player_near_taco"))
+      }
+      if(!flag("so_player_near_taco")) {
         spawn_options[spawn_options.size] = "taco";
+      }
 
       if(spawn_options.size <= 0) {
         spawn_options[spawn_options.size] = "bank";
@@ -511,8 +541,9 @@ hunter_enemies_refill(refill_at, min_fill, max_fill) {
         i = randomint(spawn_options.size);
         if(spawn_options[i] == last_spawn) {
           i--;
-          if(i < 0)
+          if(i < 0) {
             i = spawn_options.size - 1;
+          }
         }
       }
 
@@ -619,13 +650,15 @@ hunter_register_long_death_finish(my_id) {
     return;
   }
   melee_kill = false;
-  if(isDefined(cause) && (cause == "MOD_MELEE"))
+  if(isDefined(cause) && (cause == "MOD_MELEE")) {
     melee_kill = true;
+  }
 
-  if(melee_kill)
+  if(melee_kill) {
     hunter_register_death_score(my_id, attacker, level.hunter_brutal_value);
-  else
+  } else {
     hunter_register_death_score(my_id, attacker, level.hunter_finish_value);
+  }
 
   hunter_register_death_cleanup(my_id);
 }
@@ -659,18 +692,20 @@ hunter_register_death_score(my_id, attacker, point_value, my_noteworthy, my_birt
     }
 
     if((level.hunter_damage_p1[my_id] > 40) || (level.hunter_damage_p2[my_id] > 40)) {
-      if(level.hunter_damage_p1[my_id] > level.hunter_damage_p2[my_id])
+      if(level.hunter_damage_p1[my_id] > level.hunter_damage_p2[my_id]) {
         thread pulse_kill_counter_hud(point_value, 0);
-      else
+      } else {
         thread pulse_kill_counter_hud(0, point_value);
+      }
     }
   }
 }
 
 dialog_hunter_enemies(enemy_tag, wait_time) {
   if(isDefined(level.hunter_dialog_throttle)) {
-    if(!isDefined(level.hunter_dialog_time))
+    if(!isDefined(level.hunter_dialog_time)) {
       level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
+    }
 
     time_since = gettime() - level.hunter_dialog_time;
     if(time_since <= level.hunter_dialog_throttle) {
@@ -679,8 +714,9 @@ dialog_hunter_enemies(enemy_tag, wait_time) {
     level.hunter_dialog_time = gettime();
   }
 
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait wait_time;
+  }
 
   assertex(isDefined(level.dialog), "dialog_hunter_enemies requires level.dialog to be defined before it can play anything.");
 
@@ -689,8 +725,9 @@ dialog_hunter_enemies(enemy_tag, wait_time) {
 }
 
 dialog_hunter_enemies_setup(enemy_tag, wait_time) {
-  if(!isDefined(level.dialog))
+  if(!isDefined(level.dialog)) {
     level.dialog = [];
+  }
 
   level.dialog["bank_enemies"][0] = "inv_hqr_enemynorth";
 
@@ -837,15 +874,19 @@ hud_create_p2_counter() {
 pulse_kill_counter_hud(points_p1, points_p2) {
   level endon("special_op_terminated");
 
-  if(!isDefined(points_p1))
+  if(!isDefined(points_p1)) {
     points_p1 = 0;
-  if(!isDefined(points_p2))
+  }
+  if(!isDefined(points_p2)) {
     points_p2 = 0;
+  }
 
-  if(points_p1 > 0)
+  if(points_p1 > 0) {
     level.player thread hud_create_kill_splash(points_p1);
-  if(points_p2 > 0)
+  }
+  if(points_p2 > 0) {
     level.player2 thread hud_create_kill_splash(points_p2);
+  }
 
   points = points_p1 + points_p2;
 
@@ -863,8 +904,9 @@ pulse_kill_counter_hud(points_p1, points_p2) {
     level.player playSound("arcademode_2x");
     level.points_counter_display -= level.pulse_requests[0];
 
-    if(level.points_counter_display > 5999)
+    if(level.points_counter_display > 5999) {
       thread so_dialog_counter_update(level.points_counter_display, level.points_max, level.hunter_kill_value);
+    }
 
     level.points_p1_display += level.pulse_requests_p1[0];
     if(level.player.points_combo_unused > 0) {
@@ -940,8 +982,9 @@ hud_create_kill_splash(points) {
     self.hud_kill_splash_msg.y = self.hud_kill_splash_points.y - 10;
   } else {
     self.hud_kill_splash_total += points;
-    if(points > self.hud_kill_splash_max)
+    if(points > self.hud_kill_splash_max) {
       self.hud_kill_splash_max = points;
+    }
 
     if(!isDefined(self.hud_kill_combo_total)) {
       self.hud_kill_combo_total = 2;
@@ -970,8 +1013,9 @@ hud_create_kill_splash(points) {
     self.hud_kill_combo SetValue(self.hud_kill_combo_total);
     self.hud_kill_combo.alpha = 1;
     self.hud_kill_combo.fontScale = 1.0 + (0.1 * self.hud_kill_combo_total);
-    if(self.highest_combo < self.hud_kill_combo_total)
+    if(self.highest_combo < self.hud_kill_combo_total) {
       self.highest_combo = self.hud_kill_combo_total;
+    }
 
     self.hud_kill_combo_points SetValue(self.hud_combo_bonus);
     self.hud_kill_combo_points.alpha = 1;
@@ -980,10 +1024,11 @@ hud_create_kill_splash(points) {
   timer = level.combo_time_window - 0.25;
   while(timer > 0) {
     wait 0.05;
-    if(self isreloading())
+    if(self isreloading()) {
       timer -= 0.025;
-    else
+    } else {
       timer -= 0.05;
+    }
   }
 
   self.hud_kill_splash_points FadeOverTime(0.25);
@@ -1002,30 +1047,38 @@ hud_create_kill_splash(points) {
 
   wait 0.25;
 
-  if(isDefined(self.hud_kill_splash_points))
+  if(isDefined(self.hud_kill_splash_points)) {
     self.hud_kill_splash_points Destroy();
-  if(isDefined(self.hud_kill_splash_msg))
+  }
+  if(isDefined(self.hud_kill_splash_msg)) {
     self.hud_kill_splash_msg Destroy();
+  }
   self.hud_kill_splash_total = undefined;
 
-  if(isDefined(self.hud_kill_combo))
+  if(isDefined(self.hud_kill_combo)) {
     self.hud_kill_combo Destroy();
-  if(isDefined(self.hud_kill_combo_points))
+  }
+  if(isDefined(self.hud_kill_combo_points)) {
     self.hud_kill_combo_points Destroy();
+  }
   self.hud_kill_combo_total = undefined;
 }
 
 hud_splash_destroy() {
   level waittill("special_op_terminated");
 
-  if(isDefined(self.hud_kill_splash_points))
+  if(isDefined(self.hud_kill_splash_points)) {
     self.hud_kill_splash_points Destroy();
-  if(isDefined(self.hud_kill_splash_msg))
+  }
+  if(isDefined(self.hud_kill_splash_msg)) {
     self.hud_kill_splash_msg Destroy();
-  if(isDefined(self.hud_kill_combo))
+  }
+  if(isDefined(self.hud_kill_combo)) {
     self.hud_kill_combo Destroy();
-  if(isDefined(self.hud_kill_combo_points))
+  }
+  if(isDefined(self.hud_kill_combo_points)) {
     self.hud_kill_combo_points Destroy();
+  }
 }
 
 hud_splash_kill_style(points, current_msg) {
@@ -1068,8 +1121,9 @@ hud_create_kill_splash_default(player, message) {
   hudelem.hidewhendead = true;
   hudelem.sort = 2;
   hudelem set_hud_yellow();
-  if(isDefined(message))
+  if(isDefined(message)) {
     hudelem.label = message;
+  }
 
   return hudelem;
 }

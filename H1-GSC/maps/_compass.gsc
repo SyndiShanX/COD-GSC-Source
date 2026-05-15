@@ -9,8 +9,9 @@ setupminimap(var_0, var_1) {
 
   if(!isDefined(level._loadstarted) && !isDefined(var_1)) {}
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "minimap_corner";
+  }
 
   var_2 = getdvarfloat("scr_requiredMapAspectRatio", 1);
   var_3 = getEntArray(var_1, "targetname");

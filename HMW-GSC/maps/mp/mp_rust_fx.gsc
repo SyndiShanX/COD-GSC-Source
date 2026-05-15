@@ -5,6 +5,7 @@ main() {
   level._effect["sand_spray_detail_oriented_runner"] = loadfx("dust/sand_spray_detail_oriented_runner");
   level._effect["sand_spray_cliff_oriented_runner"] = loadfx("dust/sand_spray_cliff_oriented_runner");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_rust_fx::main();
+  }
 }

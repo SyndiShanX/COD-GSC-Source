@@ -11,8 +11,9 @@ init() {
   level.scoreInfo = [];
   level.xpScale = getDvarInt("scr_xpscale");
 
-  if(level.xpScale > 4 || level.xpScale < 0)
+  if(level.xpScale > 4 || level.xpScale < 0) {
     exitLevel(false);
+  }
 
   level.xpScale = min(level.xpScale, 4);
   level.xpScale = max(level.xpScale, 0);
@@ -57,8 +58,9 @@ init() {
   pId = 0;
   rId = 0;
   for(pId = 0; pId <= level.maxPrestige; pId++) {
-    for(rId = 0; rId <= level.maxRank; rId++)
+    for(rId = 0; rId <= level.maxRank; rId++) {
       precacheShader(tableLookup("mp/rankIconTable.csv", 0, rId, pId + 1));
+    }
   }
 
   rankId = 0;
@@ -87,23 +89,27 @@ init() {
 patientZeroWaiter() {
   level endon("game_ended");
 
-  while(!isDefined(level.players) || !level.players.size)
+  while(!isDefined(level.players) || !level.players.size) {
     wait(0.05);
+  }
 
   if(!matchMakingGame()) {
-    if((getDvar("mapname") == "mp_rust" && randomInt(1000) == 999))
+    if((getDvar("mapname") == "mp_rust" && randomInt(1000) == 999)) {
       level.patientZeroName = level.players[0].name;
+    }
   } else {
-    if(getDvar("scr_patientZero") != "")
+    if(getDvar("scr_patientZero") != "") {
       level.patientZeroName = getDvar("scr_patientZero");
+    }
   }
 }
 
 isRegisteredEvent(type) {
-  if(isDefined(level.scoreInfo[type]))
+  if(isDefined(level.scoreInfo[type])) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 registerScoreInfo(type, value) {
@@ -112,10 +118,11 @@ registerScoreInfo(type, value) {
 
 getScoreInfoValue(type) {
   overrideDvar = "scr_" + level.gameType + "_score_" + type;
-  if(getDvar(overrideDvar) != "")
+  if(getDvar(overrideDvar) != "") {
     return getDvarInt(overrideDvar);
-  else
+  } else {
     return (level.scoreInfo[type]["value"]);
+  }
 }
 
 getScoreInfoLabel(type) {
@@ -150,12 +157,14 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    if(getDvarInt("scr_forceSequence"))
+    if(getDvarInt("scr_forceSequence")) {
       player setPlayerData("experience", 145499);
+    }
 
     player.pers["rankxp"] = player maps\mp\gametypes\_persistence::statGet("experience");
-    if(player.pers["rankxp"] < 0)
+    if(player.pers["rankxp"] < 0) {
       player.pers["rankxp"] = 0;
+    }
 
     rankId = player getRankForXp(player getRankXP());
     player.pers["rank"] = rankId;
@@ -202,10 +211,11 @@ onPlayerConnect() {
     player.hud_scorePopup.alignX = "center";
     player.hud_scorePopup.alignY = "middle";
     player.hud_scorePopup.x = 0;
-    if(level.splitScreen)
+    if(level.splitScreen) {
       player.hud_scorePopup.y = -40;
-    else
+    } else {
       player.hud_scorePopup.y = -60;
+    }
     player.hud_scorePopup.font = "hudbig";
     player.hud_scorePopup.fontscale = 0.75;
     player.hud_scorePopup.archived = false;
@@ -246,10 +256,11 @@ onPlayerSpawned() {
 }
 
 roundUp(floatVal) {
-  if(int(floatVal) != floatVal)
+  if(int(floatVal) != floatVal) {
     return int(floatVal + 1);
-  else
+  } else {
     return int(floatVal);
+  }
 }
 
 giveRankXP(type, value) {
@@ -260,16 +271,18 @@ giveRankXP(type, value) {
   if(!self rankingEnabled()) {
     return;
   }
-  if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"]))
+  if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"])) {
     return;
-  else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
+  } else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
     return;
   }
-  if(!isDefined(value))
+  if(!isDefined(value)) {
     value = getScoreInfoValue(type);
+  }
 
-  if(!isDefined(self.xpGains[type]))
+  if(!isDefined(self.xpGains[type])) {
     self.xpGains[type] = 0;
+  }
 
   momentumBonus = 0;
   gotRestXP = false;
@@ -301,8 +314,9 @@ giveRankXP(type, value) {
       restXPAwarded = getRestXPAward(value);
       value += restXPAwarded;
       if(restXPAwarded > 0) {
-        if(isLastRestXPAward(value))
+        if(isLastRestXPAward(value)) {
           thread maps\mp\gametypes\_hud_message::splashNotify("rested_done");
+        }
 
         gotRestXP = true;
       }
@@ -310,8 +324,9 @@ giveRankXP(type, value) {
   }
 
   if(!gotRestXP) {
-    if(self getPlayerData("restXPGoal") > self getRankXP())
+    if(self getPlayerData("restXPGoal") > self getRankXP()) {
       self setPlayerData("restXPGoal", self getPlayerData("restXPGoal") + value);
+    }
   }
 
   oldxp = self getRankXP();
@@ -319,8 +334,9 @@ giveRankXP(type, value) {
 
   self incRankXP(value);
 
-  if(self rankingEnabled() && updateRank(oldxp))
+  if(self rankingEnabled() && updateRank(oldxp)) {
     self thread updateRankAnnounceHUD();
+  }
 
   self syncXPStat();
 
@@ -329,8 +345,9 @@ giveRankXP(type, value) {
       self thread scorePopup(0 - getScoreInfoValue("kill"), 0, (1, 0, 0), 0);
     } else {
       color = (1, 1, 0.5);
-      if(gotRestXP)
+      if(gotRestXP) {
         color = (1, .65, 0);
+      }
       self thread scorePopup(value, momentumBonus, color, 0);
     }
   }
@@ -374,8 +391,9 @@ giveRankXP(type, value) {
 
 updateRank(oldxp) {
   newRankId = self getRank();
-  if(newRankId == self.pers["rank"])
+  if(newRankId == self.pers["rank"]) {
     return false;
+  }
 
   oldRank = self.pers["rank"];
   rankId = self.pers["rank"];
@@ -399,8 +417,9 @@ updateRankAnnounceHUD() {
     return;
   }
 
-  if(!levelFlag("game_over"))
+  if(!levelFlag("game_over")) {
     level waittill_notify_or_timeout("game_over", 0.25);
+  }
 
   newRankName = self getRankInfoFull(self.pers["rank"]);
   rank_char = level.rankTable[self.pers["rank"]][1];
@@ -415,8 +434,9 @@ updateRankAnnounceHUD() {
     player = level.players[i];
     playerteam = player.pers["team"];
     if(isDefined(playerteam) && player != self) {
-      if(playerteam == team)
+      if(playerteam == team) {
         player iPrintLn(&"RANK_PLAYER_WAS_PROMOTED", self, newRankName);
+      }
     }
   }
 }
@@ -441,10 +461,11 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
 
   wait(0.05);
 
-  if(self.xpUpdateTotal < 0)
+  if(self.xpUpdateTotal < 0) {
     self.hud_scorePopup.label = &"";
-  else
+  } else {
     self.hud_scorePopup.label = &"MP_PLUS";
+  }
 
   self.hud_scorePopup.color = hudColor;
   self.hud_scorePopup.glowColor = hudColor;
@@ -483,10 +504,11 @@ getRank() {
   rankXp = self.pers["rankxp"];
   rankId = self.pers["rank"];
 
-  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)))
+  if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  else
+  } else {
     return self getRankForXp(rankXp);
+  }
 }
 
 levelForExperience(experience) {
@@ -499,14 +521,16 @@ getRankForXp(xpVal) {
   assert(isDefined(rankName));
 
   while(isDefined(rankName) && rankName != "") {
-    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
+    if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId)) {
       return rankId;
+    }
 
     rankId++;
-    if(isDefined(level.rankTable[rankId]))
+    if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    else
+    } else {
       rankName = undefined;
+    }
   }
 
   rankId--;
@@ -536,48 +560,55 @@ incRankXP(amount) {
   xp = self getRankXP();
   newXp = (xp + amount);
 
-  if(self.pers["rank"] == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank))
+  if(self.pers["rank"] == level.maxRank && newXp >= getRankInfoMaxXP(level.maxRank)) {
     newXp = getRankInfoMaxXP(level.maxRank);
+  }
 
   self.pers["rankxp"] = newXp;
 }
 
 getRestXPAward(baseXP) {
-  if(!getdvarint("scr_restxp_enable"))
+  if(!getdvarint("scr_restxp_enable")) {
     return 0;
+  }
 
   restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale");
 
   wantGiveRestXP = int(baseXP * restXPAwardRate);
   mayGiveRestXP = self getPlayerData("restXPGoal") - self getRankXP();
 
-  if(mayGiveRestXP <= 0)
+  if(mayGiveRestXP <= 0) {
     return 0;
+  }
 
   return wantGiveRestXP;
 }
 
 isLastRestXPAward(baseXP) {
-  if(!getdvarint("scr_restxp_enable"))
+  if(!getdvarint("scr_restxp_enable")) {
     return false;
+  }
 
   restXPAwardRate = getDvarFloat("scr_restxp_restedAwardScale");
 
   wantGiveRestXP = int(baseXP * restXPAwardRate);
   mayGiveRestXP = self getPlayerData("restXPGoal") - self getRankXP();
 
-  if(mayGiveRestXP <= 0)
+  if(mayGiveRestXP <= 0) {
     return false;
+  }
 
-  if(wantGiveRestXP >= mayGiveRestXP)
+  if(wantGiveRestXP >= mayGiveRestXP) {
     return true;
+  }
 
   return false;
 }
 
 syncXPStat() {
-  if(level.xpScale > 4 || level.xpScale <= 0)
+  if(level.xpScale > 4 || level.xpScale <= 0) {
     exitLevel(false);
+  }
 
   xp = self getRankXP();
 

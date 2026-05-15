@@ -1451,8 +1451,9 @@ func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   var_15 = self;
 
   if(isDefined(self.has_backpack) && isDefined(level.should_drop_pillage)) {
-    if([[level.should_drop_pillage]](var_1, self.origin))
+    if([[level.should_drop_pillage]](var_1, self.origin)) {
       self setscriptablepartstate("backpack", "hide", 1);
+    }
   }
 
   if(isDefined(self.ragdollhitloc)) {

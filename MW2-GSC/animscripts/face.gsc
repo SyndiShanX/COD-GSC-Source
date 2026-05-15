@@ -18,10 +18,11 @@ InitCharacterFace() {
   }
 }
 SayGenericDialogue(typeString) {
-  if((self.voice == "multilingual") || (self.voice == "italian") || (self.voice == "german") || (self.voice == "spanish"))
+  if((self.voice == "multilingual") || (self.voice == "italian") || (self.voice == "german") || (self.voice == "spanish")) {
     voiceString = "russian";
-  else
+  } else {
     voiceString = self.voice;
+  }
 
   ASSERT(isDefined(voiceString));
 
@@ -187,8 +188,9 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     self.faceWaiting[thisEntryNum]["notifyNum"] = thisNotifyNum;
 
     self thread PlayFace_WaitForNotify(("animscript face stop waiting " + self.faceWaiting[thisEntryNum]["notifyNum"]), "Face done waiting", "Face done waiting");
-    if(isDefined(timeToWait))
+    if(isDefined(timeToWait)) {
       self thread PlayFace_WaitForTime(timeToWait, "Face done waiting", "Face done waiting");
+    }
     self waittill("Face done waiting");
 
     thisEntryNum = undefined;

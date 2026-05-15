@@ -94,8 +94,9 @@ init() {
   level.killstreakWeildWeapons["harrier_20mm_mp"] = "harrier_airstrike";
   level.killstreakWeildWeapons["artillery_mp"] = "harrier_airstrike";
 
-  if(isDefined(level.mapCustomKillstreakFunc))
+  if(isDefined(level.mapCustomKillstreakFunc)) {
     [[level.mapCustomKillstreakFunc]]();
+  }
 
   level.killstreakRoundDelay = getIntProperty("scr_game_killstreakdelay", 8);
 

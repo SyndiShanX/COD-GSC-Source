@@ -1651,8 +1651,9 @@ bot_crate_valid(var_0) {
   }
 
   if(isDefined(var_0.boxtype)) {
-    if(isDefined(level.boxsettings[var_0.boxtype]) && ![[level.boxsettings[var_0.boxtype].canusecallback]]())
+    if(isDefined(level.boxsettings[var_0.boxtype]) && ![[level.boxsettings[var_0.boxtype].canusecallback]]()) {
       return 0;
+    }
 
     if(isDefined(var_0.disabled_use_for) && isDefined(var_0.disabled_use_for[self getentitynumber()]) && var_0.disabled_use_for[self getentitynumber()]) {
       return 0;

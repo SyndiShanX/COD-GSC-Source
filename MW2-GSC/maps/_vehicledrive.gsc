@@ -15,26 +15,28 @@ main() {
 }
 
 vehicle_wait(startinvehicle) {
-  if(!isDefined(startinvehicle))
+  if(!isDefined(startinvehicle)) {
     startinvehicle = false;
-  else if(startinvehicle) {
-    if(getDvar("player_vehicle_dismountable") == "off")
+  } else if(startinvehicle) {
+    if(getDvar("player_vehicle_dismountable") == "off") {
       self makeUnusable();
+    }
   }
   self endon("death");
   self endon("stop_vehicle_wait");
   while(self.health > 0) {
-    if(!(startinvehicle))
+    if(!(startinvehicle)) {
       self waittill("trigger");
-    else {
+    } else {
       startinvehicle = false;
       self useby(level.player);
     }
     owner = self getvehicleowner();
-    if(isDefined(owner) && isPlayer(owner))
+    if(isDefined(owner) && isPlayer(owner)) {
       self thread vehicle_enter();
-    else
+    } else {
       self thread vehicle_exit();
+    }
     if(startinvehicle) {
       break;
     }
@@ -52,12 +54,15 @@ vehicle_exit() {
     level.player.oldthreatbias = undefined;
   }
 
-  if(isDefined(level.vehicleHUD))
+  if(isDefined(level.vehicleHUD)) {
     level.vehicleHUD destroy();
-  if(isDefined(level.vehicleHUD2))
+  }
+  if(isDefined(level.vehicleHUD2)) {
     level.vehicleHUD2 destroy();
-  if(isDefined(level.VehicleFireIcon))
+  }
+  if(isDefined(level.VehicleFireIcon)) {
     level.VehicleFireIcon destroy();
+  }
 }
 
 vehicle_enter() {
@@ -77,16 +82,17 @@ setup_vehicle_other() {
 vehicle_giveHealth() {
   skill = getdifficulty();
 
-  if(skill == ("easy"))
+  if(skill == ("easy")) {
     self.health = 3000;
-  else if(skill == ("medium"))
+  } else if(skill == ("medium")) {
     self.health = 2500;
-  else if(skill == ("hard"))
+  } else if(skill == ("hard")) {
     self.health = 2000;
-  else if(skill == ("fu"))
+  } else if(skill == ("fu")) {
     self.health = 1300;
-  else
+  } else {
     self.health = 2000;
+  }
 
   if(isDefined(self.healthbuffer)) {
     self.health += self.healthbuffer;
@@ -103,8 +109,9 @@ Protect_Player() {
   while(isalive(level.player)) {
     level.player waittill("damage", ammount);
 
-    if(self.health <= 0)
+    if(self.health <= 0) {
       level.player kill((0, 0, 0));
+    }
     level.player.health += int(ammount * .2);
   }
 }
@@ -157,21 +164,24 @@ vehicle_ridehandle() {
   regeninctimer = gettime();
   while(1) {
     if(self.damaged) {
-      if(getDvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
+      }
       self.damaged = false;
       regentimer = gettime() + health_regentimer;
     }
 
     time = gettime();
     if(self.health < self.maximumhealth && time > regentimer && time > regeninctimer) {
-      if(self.health + health_regeninc > self.maximumhealth)
+      if(self.health + health_regeninc > self.maximumhealth) {
         self.health = self.maximumhealth;
-      else
+      } else {
         self.health += health_regeninc;
+      }
       regeninctimer = gettime() + 250;
-      if(getDvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
+      }
     }
 
     wait .05;
@@ -209,13 +219,15 @@ vehicle_reloadsound() {
 }
 
 vehicle_hud_tank_fireicon() {
-  if(getDvar("player_vehicle_dismountable") != "off")
+  if(getDvar("player_vehicle_dismountable") != "off") {
     return;
+  }
   level endon("player exited vehicle");
   level.player endon("death");
   self endon("death");
-  if(isDefined(level.VehicleFireIcon))
+  if(isDefined(level.VehicleFireIcon)) {
     level.VehicleFireIcon destroy();
+  }
 
   level.VehicleFireIcon = newHudElem();
   level.VehicleFireIcon.x = -32;

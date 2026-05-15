@@ -190,25 +190,30 @@ jeepride_intro_start() {
 start_scripted_sfx_node() {
   var_0 = [["auto1593", "scn_start_jeep_honk_crash", undefined, undefined, undefined], ["auto1585", "scn_start_car_honk_crash", undefined, undefined, undefined], ["sideswipe_bmp_accelerate_01", "scn_sideswipe_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined], ["auto1721", "scn_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined], ["auto1746", "scn_bmp_accelerate_02", undefined, undefined, "bmp_accelerate_mix"], ["auto63", undefined, undefined, "first_hind_mix", undefined], ["auto3651", undefined, undefined, "tanker_explode_mix", undefined], ["auto3740", undefined, undefined, undefined, "tanker_explode_mix"], ["auto72", undefined, undefined, "car_passby_mix", undefined], ["auto2379", undefined, undefined, undefined, "car_passby_mix"], ["auto2637", undefined, undefined, undefined, "first_hind_mix"], ["auto4115", "scn_uaz_convoy_arrival_01", undefined, undefined, undefined], ["auto4059", "scn_uaz_convoy_arrival_02", undefined, undefined, undefined], ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]];
 
-  foreach(var_2 in var_0)
-  thread handle_scripted_sfx_node(var_2);
+  foreach(var_2 in var_0) {
+    thread handle_scripted_sfx_node(var_2);
+  }
 }
 
 handle_scripted_sfx_node(var_0) {
   var_1 = getvehiclenode(var_0[0], "targetname");
   var_1 waittill("trigger", var_2);
 
-  if(isDefined(var_0[1]))
+  if(isDefined(var_0[1])) {
     var_2 playSound(var_0[1]);
+  }
 
-  if(isDefined(var_0[2]))
+  if(isDefined(var_0[2])) {
     var_2 stopsound(var_0[2]);
+  }
 
-  if(isDefined(var_0[3]))
+  if(isDefined(var_0[3])) {
     soundscripts\_audio_mix_manager::mm_add_submix(var_0[3]);
+  }
 
-  if(isDefined(var_0[4]))
+  if(isDefined(var_0[4])) {
     soundscripts\_audio_mix_manager::mm_clear_submix(var_0[4]);
+  }
 }
 
 presideswipe() {
@@ -254,11 +259,13 @@ passby_sfx() {
       return;
   }
 
-  while(!vehicleisclose(self, level.playersride))
+  while(!vehicleisclose(self, level.playersride)) {
     wait 0.05;
+  }
 
-  if(targetisinfront(level.playersride, self))
+  if(targetisinfront(level.playersride, self)) {
     thread maps\_utility::play_sound_on_entity(passby_get_aliases());
+  }
 }
 
 targetisinfront(var_0, var_1) {
@@ -269,8 +276,9 @@ targetisinfront(var_0, var_1) {
 }
 
 vehicleisclose(var_0, var_1) {
-  if(!targetisinfront(var_0, var_1))
+  if(!targetisinfront(var_0, var_1)) {
     return 0;
+  }
 
   var_2 = distance(var_0.origin, var_1.origin);
   var_3 = 4800;
@@ -384,8 +392,9 @@ play_scripted_sfx_on_vehicle_spawn(var_0, var_1, var_2, var_3) {
 
   foreach(var_6 in var_4) {
     if(var_6.classname == var_1 && isDefined(var_6.script_vehiclespawngroup) && var_6.script_vehiclespawngroup == var_2) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         wait(var_3);
+      }
 
       var_6 thread maps\_utility::play_sound_on_tag_endon_death(var_0);
       return;

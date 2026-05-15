@@ -34,8 +34,9 @@ isFacingEnemy(toleranceCosAngle) {
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
 
-  if(distToEnemy < 1)
+  if(distToEnemy < 1) {
     return true;
+  }
 
   forward = anglesToForward(self.angles);
 
@@ -43,10 +44,11 @@ isFacingEnemy(toleranceCosAngle) {
 }
 
 randomAttackIdle() {
-  if(isFacingEnemy(-0.5))
+  if(isFacingEnemy(-0.5)) {
     self orientmode("face current");
-  else
+  } else {
     self orientmode("face enemy");
+  }
 
   self clearanim(%german_shepherd_attackidle_knob, 0.1);
 
@@ -69,12 +71,13 @@ randomAttackIdle() {
   }
 
   rand = randomInt(100);
-  if(rand < idleChance)
+  if(rand < idleChance) {
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
-  else if(rand < barkChance)
+  } else if(rand < barkChance) {
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
-  else
+  } else {
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
+  }
 }
 
 shouldAttackIdle() {
@@ -82,10 +85,12 @@ shouldAttackIdle() {
 }
 
 should_growl() {
-  if(isDefined(self.script_growl))
+  if(isDefined(self.script_growl)) {
     return true;
-  if(!isalive(self.enemy))
+  }
+  if(!isalive(self.enemy)) {
     return true;
+  }
   return !(self cansee(self.enemy));
 }
 

@@ -14,6 +14,7 @@ main() {
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   level._effect["paper_falling"] = loadfx("misc/paper_falling_dlc");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_strike_fx::main();
+  }
 }

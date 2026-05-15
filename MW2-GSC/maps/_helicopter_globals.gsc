@@ -56,8 +56,9 @@ flares_think(vehicle) {
     flares_fire(vehicle);
 
     wait 0.05;
-    if(!isDefined(vehicle.playercontrolled))
+    if(!isDefined(vehicle.playercontrolled)) {
       wait 3.0;
+    }
   }
 }
 
@@ -71,12 +72,14 @@ flares_fire_burst(vehicle, fxCount, flareCount, flareTime) {
 
     if(isDefined(vehicle.playercontrolled)) {
       level.stats["flares_used"]++;
-      if(getDvar("cobrapilot_sounds_enabled") == "1")
+      if(getDvar("cobrapilot_sounds_enabled") == "1") {
         vehicle.pilot playLocalSound("weap_flares_fire");
+      }
     }
 
-    if(i <= flareCount - 1)
+    if(i <= flareCount - 1) {
       thread flares_redirect_missiles(vehicle, flareTime);
+    }
 
     wait 0.1;
   }
@@ -90,8 +93,9 @@ flares_fire(vehicle) {
     while((vehicle.pilot buttonPressed(level.flareButton1)) || (vehicle.pilot buttonPressed(level.flareButton2))) {
       flares_fire_burst(vehicle, 1, 1, flareTime);
       flareTime = flareTime + 1.0;
-      if(flareTime > 5.0)
+      if(flareTime > 5.0) {
         flareTime = 5.0;
+      }
     }
   } else {
     flares_fire_burst(vehicle, 8, 1, 5.0);
@@ -103,8 +107,9 @@ flares_redirect_missiles(vehicle, flareTime) {
   vehicle endon("death");
   vehicle endon("flares_out");
 
-  if(!isDefined(flareTime))
+  if(!isDefined(flareTime)) {
     flareTime = 5.0;
+  }
 
   vec = flares_get_vehicle_velocity(vehicle);
   flare = spawn("script_origin", vehicle getTagOrigin("tag_flare"));
@@ -114,19 +119,23 @@ flares_redirect_missiles(vehicle, flareTime) {
     return;
   }
 
-  for(i = 0; i < vehicle.incomming_Missiles.size; i++)
+  for(i = 0; i < vehicle.incomming_Missiles.size; i++) {
     vehicle.incomming_Missiles[i] Missile_SetTargetEnt(flare);
+  }
 
   wait flareTime;
 
-  if(!isDefined(vehicle.script_targetoffset_z))
+  if(!isDefined(vehicle.script_targetoffset_z)) {
     vehicle.script_targetoffset_z = 0;
+  }
   offset = (0, 0, vehicle.script_targetoffset_z);
 
-  if(!isDefined(vehicle.incomming_Missiles))
+  if(!isDefined(vehicle.incomming_Missiles)) {
     return;
-  for(i = 0; i < vehicle.incomming_Missiles.size; i++)
+  }
+  for(i = 0; i < vehicle.incomming_Missiles.size; i++) {
     vehicle.incomming_Missiles[i] Missile_SetTargetEnt(vehicle, offset);
+  }
 }
 
 flares_get_vehicle_velocity(vehicle) {
@@ -148,17 +157,21 @@ missile_deathWait(eMissile, eMissile_Target) {
 }
 
 getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders) {
-  if(!isDefined(getAITargets))
+  if(!isDefined(getAITargets)) {
     getAITargets = false;
+  }
 
-  if(!isDefined(doSightTrace))
+  if(!isDefined(doSightTrace)) {
     doSightTrace = false;
+  }
 
-  if(!isDefined(getVehicleTargets))
+  if(!isDefined(getVehicleTargets)) {
     getVehicleTargets = true;
+  }
 
-  if(!isDefined(randomizeTargetArray))
+  if(!isDefined(randomizeTargetArray)) {
     randomizeTargetArray = false;
+  }
 
   eTargets = [];
   eClosestValidTarget = undefined;
@@ -168,15 +181,17 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
 
   if(getVehicleTargets) {
     assert(isDefined(level.vehicles[enemyTeam]));
-    for(i = 0; i < level.vehicles[enemyTeam].size; i++)
+    for(i = 0; i < level.vehicles[enemyTeam].size; i++) {
       possibleTargets[possibleTargets.size] = level.vehicles[enemyTeam][i];
+    }
   }
 
   if(getAITargets) {
     enemyAI = getaiarray(enemyTeam);
     for(i = 0; i < enemyAI.size; i++) {
-      if(isDefined(enemyAI[i].ignored_by_attack_heli))
+      if(isDefined(enemyAI[i].ignored_by_attack_heli)) {
         continue;
+      }
       possibleTargets[possibleTargets.size] = enemyAI[i];
     }
     if(enemyTeam == "allies") {
@@ -186,41 +201,48 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
     }
   }
 
-  if(isDefined(aExcluders))
+  if(isDefined(aExcluders)) {
     possibleTargets = array_exclude(possibleTargets, aExcluders);
+  }
 
-  if(randomizeTargetArray)
+  if(randomizeTargetArray) {
     possibleTargets = array_randomize(possibleTargets);
+  }
 
   forwardvec = anglesToForward(self.angles);
   for(i = 0; i < possibleTargets.size; i++) {
     if((isSentient(possibleTargets[i])) && (isSentient(self)) && (self getThreatBiasGroup() != "")) {
       bias = getThreatBias(possibleTargets[i] getThreatBiasGroup(), self getThreatBiasGroup());
-      if(bias <= -1000000)
+      if(bias <= -1000000) {
         continue;
+      }
     }
 
     if(isDefined(fRadius) && (fRadius > 0)) {
-      if(distance(self.origin, possibleTargets[i].origin) > fRadius)
+      if(distance(self.origin, possibleTargets[i].origin) > fRadius) {
         continue;
+      }
     }
 
     if(isDefined(iFOVcos)) {
       normalvec = vectorNormalize(possibleTargets[i].origin - (self.origin));
       vecdot = vectordot(forwardvec, normalvec);
-      if(vecdot <= iFOVcos)
+      if(vecdot <= iFOVcos) {
         continue;
+      }
     }
 
     if(doSightTrace) {
       sightTracePassed = false;
-      if(isAi(possibleTargets[i]))
+      if(isAi(possibleTargets[i])) {
         TraceZoffset = 48;
-      else
+      } else {
         TraceZoffset = 150;
+      }
       sightTracePassed = sighttracepassed(self.origin, possibleTargets[i].origin + (0, 0, TraceZoffset), false, self);
-      if(!sightTracePassed)
+      if(!sightTracePassed) {
         continue;
+      }
     }
 
     eTargets[eTargets.size] = possibleTargets[i];
@@ -228,11 +250,13 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
 
   self notify("gunner_new_target");
 
-  if(eTargets.size == 0)
+  if(eTargets.size == 0) {
     return eClosestValidTarget;
+  }
 
-  if(eTargets.size == 1)
+  if(eTargets.size == 1) {
     return eTargets[0];
+  }
 
   theTarget = getClosest(self.origin, eTargets);
 
@@ -244,33 +268,38 @@ shootEnemyTarget_Bullets(eTarget) {
   self endon("mg_off");
   eTarget endon("death");
   self endon("gunner_new_target");
-  if(isDefined(self.playercontrolled))
+  if(isDefined(self.playercontrolled)) {
     self endon("gunner_stop_firing");
+  }
 
   eTargetOffset = (0, 0, 0);
-  if(isDefined(eTarget.script_targetoffset_z))
+  if(isDefined(eTarget.script_targetoffset_z)) {
     eTargetOffset += (0, 0, eTarget.script_targetoffset_z);
-  else if(isSentient(eTarget))
+  } else if(isSentient(eTarget)) {
     eTargetOffset = (0, 0, 32);
+  }
 
   self setTurretTargetEnt(eTarget, eTargetOffset);
 
   while(self.health > 0) {
     randomShots = randomintrange(1, 25);
-    if(getDvar("cobrapilot_debug") == "1")
+    if(getDvar("cobrapilot_debug") == "1") {
       iprintln("randomShots = " + randomShots);
+    }
 
     for(i = 0; i < randomShots; i++) {
       if(isDefined(self.playercontrolled)) {
-        if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0))
+        if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0)) {
           self setVehWeapon(level.GunnerWeapon);
+        }
       }
 
       self thread shootEnemyTarget_Bullets_DebugLine(self, "tag_turret", eTarget, eTargetOffset, (1, 1, 0), 0.05);
       self fireWeapon("tag_flash");
 
-      if(isDefined(self.playercontrolled))
+      if(isDefined(self.playercontrolled)) {
         self setVehWeapon(level.cobraWeapon[self.pilot.currentWeapon].v["weapon"]);
+      }
 
       wait 0.05;
     }
@@ -283,16 +312,18 @@ shootEnemyTarget_Bullets_DebugLine(eStartEnt, eStartEntTag, eTarget, eTargetOffs
   if(getDvar("cobrapilot_debug") != "1") {
     return;
   }
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0, 0, 0);
+  }
 
   eTarget endon("death");
   self endon("gunner_new_target");
 
   assert(isDefined(eStartEntTag));
 
-  if(!isDefined(eTargetOffset))
+  if(!isDefined(eTargetOffset)) {
     eTargetOffset = (0, 0, 0);
+  }
 
   if(isDefined(timer)) {
     timer = gettime() + (timer * 1000);
@@ -313,12 +344,15 @@ attachMissiles(weapon1, weapon2, weapon3, weapon4) {
   assert(isDefined(weapon1));
   weapon = [];
   weapon[0] = weapon1;
-  if(isDefined(weapon2))
+  if(isDefined(weapon2)) {
     weapon[1] = weapon2;
-  if(isDefined(weapon3))
+  }
+  if(isDefined(weapon3)) {
     weapon[2] = weapon3;
-  if(isDefined(weapon4))
+  }
+  if(isDefined(weapon4)) {
     weapon[3] = weapon4;
+  }
 
   for(i = 0; i < weapon.size; i++) {
     for(k = 0; k < level.cobra_weapon_tags[weapon[i]].size; k++) {
@@ -328,8 +362,9 @@ attachMissiles(weapon1, weapon2, weapon3, weapon4) {
 }
 
 fire_missile(sMissileType, iShots, eTarget, fDelay) {
-  if(!isDefined(iShots))
+  if(!isDefined(iShots)) {
     iShots = 1;
+  }
   assert(self.health > 0);
 
   weaponName = undefined;
@@ -429,35 +464,42 @@ fire_missile(sMissileType, iShots, eTarget, fDelay) {
   nextMissileTag = -1;
   for(i = 0; i < iShots; i++) {
     nextMissileTag++;
-    if(nextMissileTag >= tags.size)
+    if(nextMissileTag >= tags.size) {
       nextMissileTag = 0;
+    }
 
     if(sMissileType == "ffar_mi28_village_assault") {
       if(isDefined(eTarget) && isDefined(eTarget.origin)) {
         magicBullet(weaponName, self getTagOrigin(tags[nextMissileTag]), eTarget.origin);
-        if(isDefined(level._effect["ffar_mi28_muzzleflash"]))
+        if(isDefined(level._effect["ffar_mi28_muzzleflash"])) {
           playFXOnTag(getfx("ffar_mi28_muzzleflash"), self, tags[nextMissileTag]);
+        }
         thread delayed_earthquake(0.1, 0.5, 0.2, eTarget.origin, 1600);
       }
     } else {
       self setVehWeapon(weaponName);
       if(isDefined(eTarget)) {
         eMissile = self fireWeapon(tags[nextMissileTag], eTarget);
-        if(sMissileType == "ffar")
+        if(sMissileType == "ffar") {
           eMissile thread missileLoseTarget(0.1);
-        if(sMissileType == "ffar_bog_a_lite")
+        }
+        if(sMissileType == "ffar_bog_a_lite") {
           eMissile thread missileLoseTarget(0.1);
-        if(sMissileType == "ffar_airlift")
+        }
+        if(sMissileType == "ffar_airlift") {
           eMissile thread missileLoseTarget(0.1);
+        }
       } else
         eMissile = self fireWeapon(tags[nextMissileTag]);
     }
 
-    if(i < iShots - 1)
+    if(i < iShots - 1) {
       wait weaponShootTime;
+    }
 
-    if(isDefined(fDelay))
+    if(isDefined(fDelay)) {
       wait(fDelay);
+    }
   }
 
   self setVehWeapon(defaultWeapon);
@@ -471,6 +513,7 @@ delayed_earthquake(fDelay, scale, duration, source, fRadius) {
 missileLoseTarget(fDelay) {
   self endon("death");
   wait fDelay;
-  if(isDefined(self))
+  if(isDefined(self)) {
     self Missile_ClearTarget();
+  }
 }

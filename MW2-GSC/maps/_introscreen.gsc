@@ -17,8 +17,9 @@ main() {
   PreCacheShader("black");
   PreCacheShader("white");
 
-  if(getDvar("introscreen") == "")
+  if(getDvar("introscreen") == "") {
     setDvar("introscreen", "1");
+  }
 
   if(isDefined(level.credits_active)) {
     return;
@@ -310,8 +311,9 @@ introscreen_generic_white_fade_in(time, fade_time, fade_in_time) {
 }
 
 introscreen_generic_fade_in(shader, pause_time, fade_out_time, fade_in_time) {
-  if(!isDefined(fade_out_time))
+  if(!isDefined(fade_out_time)) {
     fade_out_time = 1.5;
+  }
 
   introblack = NewHudElem();
   introblack.x = 0;
@@ -330,8 +332,9 @@ introscreen_generic_fade_in(shader, pause_time, fade_out_time, fade_in_time) {
 
   wait pause_time;
 
-  if(fade_out_time > 0)
+  if(fade_out_time > 0) {
     introblack FadeOverTime(fade_out_time);
+  }
 
   introblack.alpha = 0;
 
@@ -343,8 +346,9 @@ introscreen_create_line(string) {
   index = level.introstring.size;
   yPos = (index * 30);
 
-  if(level.console)
+  if(level.console) {
     yPos -= 60;
+  }
 
   level.introstring[index] = NewHudElem();
   level.introstring[index].x = 0;
@@ -370,8 +374,9 @@ introscreen_fadeOutText() {
 
   wait 1.5;
 
-  for(i = 0; i < level.introstring.size; i++)
+  for(i = 0; i < level.introstring.size; i++) {
     level.introstring[i] Destroy();
+  }
 }
 
 introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, timebeforefade) {
@@ -379,8 +384,9 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
   waittillframeend;
 
   skipIntro = !is_default_start();
-  if(GetDebugDvar("introscreen") == "0")
+  if(GetDebugDvar("introscreen") == "0") {
     skipIntro = true;
+  }
 
   if(skipIntro) {
     waittillframeend;
@@ -450,8 +456,9 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
 
   level.introstring = [];
 
-  if(isDefined(string1))
+  if(isDefined(string1)) {
     introscreen_create_line(string1);
+  }
 
   if(isDefined(pausetime1)) {
     wait pausetime1;
@@ -459,10 +466,12 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
     wait 2;
   }
 
-  if(isDefined(string2))
+  if(isDefined(string2)) {
     introscreen_create_line(string2);
-  if(isDefined(string3))
+  }
+  if(isDefined(string3)) {
     introscreen_create_line(string3);
+  }
 
   if(isDefined(string4)) {
     if(isDefined(pausetime2)) {
@@ -472,8 +481,9 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
     }
   }
 
-  if(isDefined(string4))
+  if(isDefined(string4)) {
     introscreen_create_line(string4);
+  }
 
   level notify("finished final intro screen fadein");
 
@@ -499,10 +509,11 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
 _CornerLineThread(string, size, interval, index_key) {
   level notify("new_introscreen_element");
 
-  if(!isDefined(level.intro_offset))
+  if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  else
+  } else {
     level.intro_offset++;
+  }
 
   y = _CornerLineThread_height();
 
@@ -531,12 +542,15 @@ _CornerLineThread(string, size, interval, index_key) {
 
   thread hudelem_destroy(hudelem);
 
-  if(!isDefined(index_key))
+  if(!isDefined(index_key)) {
     return;
-  if(!isstring(index_key))
+  }
+  if(!isstring(index_key)) {
     return;
-  if(index_key != "date")
+  }
+  if(index_key != "date") {
     return;
+  }
 }
 
 _CornerLineThread_height() {
@@ -707,8 +721,9 @@ airport_intro() {
 
   wait 1;
 
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_now_silent();
+  }
 
   level notify("introscreen_complete");
 
@@ -725,8 +740,9 @@ oilrig_intro_dvars() {
 }
 
 oilrig_intro() {
-  if(!level.underwater)
+  if(!level.underwater) {
     return;
+  }
   thread oilrig_intro_dvars();
   level.player FreezeControls(true);
   flag_wait("open_dds_door");
@@ -998,18 +1014,21 @@ flying_intro() {
 
   flying_levels["estate"] = true;
 
-  if(!getdvarint("newintro"))
+  if(!getdvarint("newintro")) {
     flying_levels["roadkill"] = true;
+  }
 
   flying_levels["boneyard"] = true;
 
   override_angles = isDefined(level.customIntroAngles);
 
-  if(!isDefined(flying_levels[level.script]))
+  if(!isDefined(flying_levels[level.script])) {
     return false;
+  }
 
-  if(!isDefined(level.dontReviveHud))
+  if(!isDefined(level.dontReviveHud)) {
     thread revive_ammo_counter();
+  }
 
   thread bog_intro_sound();
   thread weapon_pullout();
@@ -1020,8 +1039,9 @@ flying_intro() {
   zoomHeight = 16000;
   slamzoom = true;
 
-  if(getDvar("slamzoom") != "")
+  if(getDvar("slamzoom") != "") {
     slamzoom = false;
+  }
 
   extra_delay = 0;
   special_save = false;
@@ -1120,9 +1140,8 @@ flying_intro() {
     ent RotateTo((ent.angles[0] - 89, ent.angles[1], 0), 0.5, 0.3, 0.2);
   }
 
-  if(!special_save)
-
-    SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
+  if(!special_save) {}
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
   wait(0.5);
   flag_set("pullup_weapon");
 
@@ -1158,8 +1177,9 @@ weapon_pullout() {
 
 revive_ammo_counter() {
   flag_wait("safe_for_objectives");
-  if(!isDefined(level.nocompass))
+  if(!isDefined(level.nocompass)) {
     SetSavedDvar("compass", 1);
+  }
   SetSavedDvar("ammoCounterHide", "0");
   SetSavedDvar("actionSlotsHide", "0");
   SetSavedDvar("hud_showstance", "1");
@@ -1167,8 +1187,9 @@ revive_ammo_counter() {
 
 ramp_out_sunsample_over_time(time, base_sample_size) {
   sample_size = GetDvarFloat("sm_sunSampleSizeNear");
-  if(!isDefined(base_sample_size))
+  if(!isDefined(base_sample_size)) {
     base_sample_size = 0.25;
+  }
 
   range = sample_size - base_sample_size;
 

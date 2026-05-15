@@ -49,8 +49,9 @@ main_end() {
 
 equipment_safe_to_drop_ffotd(weapon) {
   for(i = 0; i < level.equipment_dead_zone_pos.size; i++) {
-    if(distancesquared(level.equipment_dead_zone_pos[i], weapon.origin) < level.equipment_dead_zone_rad2[i])
+    if(distancesquared(level.equipment_dead_zone_pos[i], weapon.origin) < level.equipment_dead_zone_rad2[i]) {
       return 0;
+    }
   }
 
   return self maps\mp\zm_prison::equipment_safe_to_drop(weapon);
@@ -168,6 +169,7 @@ afterlife_leave_freeze() {
   self freezecontrols(1);
   wait 0.5;
 
-  if(!is_true(self.hostmigrationcontrolsfrozen))
+  if(!is_true(self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
+  }
 }

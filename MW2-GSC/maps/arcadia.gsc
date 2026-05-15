@@ -104,8 +104,9 @@ main() {
 
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
-    if(!isDefined(spawner.script_parameters))
+    if(!isDefined(spawner.script_parameters)) {
       continue;
+    }
     script_parameter_spawners[script_parameter_spawners.size] = spawner;
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
@@ -173,8 +174,9 @@ main() {
   thread undo_culldist_mansion();
 
   friendlies = getaiarray("allies");
-  foreach(friend in friendlies)
-  friend.baseaccuracy = 0.4;
+  foreach(friend in friendlies) {
+    friend.baseaccuracy = 0.4;
+  }
 
   after0 = get_golf_geo("golf_after", 0);
   assert(after0.size > 0);
@@ -368,8 +370,9 @@ startGolf() {
 
   allies = getaiarray("allies");
   locations = getEntArray("start_golf_friendly_teleport", "targetname");
-  foreach(i, guy in allies)
-  guy forceTeleport(locations[i].origin, locations[i].angles);
+  foreach(i, guy in allies) {
+    guy forceTeleport(locations[i].origin, locations[i].angles);
+  }
 
   trig = getent("start_golf_friendly_trigger", "script_noteworthy");
   trig notify("trigger", level.player);
@@ -415,8 +418,9 @@ objective_aa_guns() {
 }
 
 objective_laze_golfcourse() {
-  if(flag("objective_laze_golfcourse"))
+  if(flag("objective_laze_golfcourse")) {
     return;
+  }
   flag_set("objective_laze_golfcourse");
 
   level notify("objective_laze_golfcourse");
@@ -639,12 +643,14 @@ checkpoint_cleared_dialog_ac130() {
   allies = getaiarray("allies");
   assert(allies.size >= 4);
   foreach(guy in allies) {
-    if(guy is_hero())
+    if(guy is_hero()) {
       continue;
-    if(!isDefined(marine1))
+    }
+    if(!isDefined(marine1)) {
       marine1 = guy;
-    else
+    } else {
       marine2 = guy;
+    }
     if(isDefined(marine1) && isDefined(marine2)) {
       break;
     }
@@ -779,8 +785,9 @@ level_ending_sequence() {
   flavorbursts_off("axis");
 
   allies = getaiarray("allies");
-  foreach(friend in allies)
-  friend.baseaccuracy = 100;
+  foreach(friend in allies) {
+    friend.baseaccuracy = 100;
+  }
 
   housenode_foley = getnode("housenode_foley", "targetname");
   housenode_dunn = getnode("housenode_dunn", "targetname");

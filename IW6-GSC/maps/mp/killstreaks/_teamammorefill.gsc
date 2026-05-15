@@ -12,8 +12,9 @@ init() {
 
 tryUseTeamAmmoRefill(lifeId) {
   result = self giveTeamAmmoRefill();
-  if(result)
+  if(result) {
     self maps\mp\_matchdata::logKillstreakEvent("team_ammo_refill", self.origin);
+  }
 
   return (result);
 }
@@ -38,14 +39,16 @@ refillAmmo(refillEquipment) {
   weaponList = self GetWeaponsListAll();
 
   if(refillEquipment) {
-    if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1)
+    if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1) {
       self givePerkOffhand("specialty_tacticalinsertion", false);
+    }
   }
 
   foreach(weaponName in weaponList) {
     if(isSubStr(weaponName, "grenade") || (GetSubStr(weaponName, 0, 2) == "gl")) {
-      if(!refillEquipment || self getAmmoCount(weaponName) >= 1)
+      if(!refillEquipment || self getAmmoCount(weaponName) >= 1) {
         continue;
+      }
     }
 
     self giveMaxAmmo(weaponName);

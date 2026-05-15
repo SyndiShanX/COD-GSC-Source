@@ -36,8 +36,9 @@ UpdateState() {
   while(true) {
     prevState = self.animSubstate;
     nextState = self DetermineState();
-    if(nextState != self.animSubstate)
+    if(nextState != self.animSubstate) {
       self EnterState(nextState);
+    }
 
     self UpdateAngle();
 
@@ -47,16 +48,18 @@ UpdateState() {
         break;
       case "idle_noncombat":
         if(prevState == "none") {
-          if(self.moveMode == "run" || self.moveMode == "sprint")
+          if(self.moveMode == "run" || self.moveMode == "sprint") {
             self PlaySoundOnMovingEnt("alien_minion_idle");
-          else
+          } else {
             self PlaySoundOnMovingEnt("alien_minion_idle");
+          }
         } else {
           if(GetTime() > self.timeOfNextSound) {
-            if(RandomInt(10) < 4)
+            if(RandomInt(10) < 4) {
               self PlaySoundOnMovingEnt("alien_minion_idle");
-            else
+            } else {
               self PlaySoundOnMovingEnt("alien_minion_idle");
+            }
             self SetTimeOfNextSound();
           }
         }
@@ -71,10 +74,11 @@ UpdateState() {
 }
 
 DetermineState() {
-  if(ShouldAttackIdle())
+  if(ShouldAttackIdle()) {
     return "idle_combat";
-  else
+  } else {
     return "idle_noncombat";
+  }
 }
 
 EnterState(state) {
@@ -92,25 +96,28 @@ ExitState(prevState) {
 }
 
 PlayIdleAnim() {
-  if(self.animSubstate == "idle_combat")
+  if(self.animSubstate == "idle_combat") {
     self SetAnimState("attack_idle");
-  else
+  } else {
     self SetAnimState("casual_idle");
+  }
 }
 
 UpdateAngle() {
   faceTarget = undefined;
-  if(isDefined(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1024 * 1024)
+  if(isDefined(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1024 * 1024) {
     faceTarget = self.enemy;
-  else if(isDefined(self.owner))
+  } else if(isDefined(self.owner)) {
     faceTarget = self.owner;
+  }
 
   if(isDefined(faceTarget)) {
     meToTarget = faceTarget.origin - self.origin;
     meToTargetAngles = VectorToAngles(meToTarget);
 
-    if(abs(AngleClamp180(meToTargetAngles[1] - self.angles[1])) > 1)
+    if(abs(AngleClamp180(meToTargetAngles[1] - self.angles[1])) > 1) {
       self TurnToAngle(meToTargetAngles[1]);
+    }
   }
 }
 
@@ -120,19 +127,21 @@ ShouldAttackIdle() {
 
 GetTurnAnimState(angleDiff) {
   if(self ShouldAttackIdle()) {
-    if(angleDiff < -135 || angleDiff > 135)
+    if(angleDiff < -135 || angleDiff > 135) {
       return "attack_turn_180";
-    else if(angleDiff < 0)
+    } else if(angleDiff < 0) {
       return "attack_turn_right_90";
-    else
+    } else {
       return "attack_turn_left_90";
+    }
   } else {
-    if(angleDiff < -135 || angleDiff > 135)
+    if(angleDiff < -135 || angleDiff > 135) {
       return "casual_turn_180";
-    else if(angleDiff < 0)
+    } else if(angleDiff < 0) {
       return "casual_turn_right_90";
-    else
+    } else {
       return "casual_turn_left_90";
+    }
   }
 }
 
@@ -211,8 +220,9 @@ RotateToAngle(desiredAngle, tolerance) {
 
   self ScrAgentSetOrientMode("face angle abs", angles);
 
-  while(AngleClamp180(desiredAngle - self.angles[1]) > tolerance)
+  while(AngleClamp180(desiredAngle - self.angles[1]) > tolerance) {
     wait(0.1);
+  }
 }
 
 SetTimeOfNextSound() {
@@ -226,10 +236,11 @@ DoHitReaction(hitAngle) {
 
   angleDiff = AngleClamp180(hitAngle - self.angles[1]);
 
-  if(angleDiff > 0)
+  if(angleDiff > 0) {
     animIndex = 1;
-  else
+  } else {
     animIndex = 0;
+  }
 
   self notify("cancelidleloop");
 

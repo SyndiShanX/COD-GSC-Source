@@ -34,13 +34,15 @@ updateDamageFeedback(typeHit) {
   x = -12;
   y = -12;
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     yOffset = self GetThirdPersonCrosshairOffset() * 240;
-  else
+  } else {
     yOffset = getdvarfloat("cg_crosshairVerticalOffset") * 240;
+  }
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     yOffset *= 0.5;
+  }
 
   feedbackDurationOverride = 0;
   startAlpha = 1;
@@ -66,17 +68,20 @@ updateDamageFeedback(typeHit) {
   }
 
   self.hud_damagefeedback.alpha = startAlpha;
-  if(feedBackDurationOverride != 0)
+  if(feedBackDurationOverride != 0) {
     self.hud_damagefeedback fadeOverTime(feedbackDurationOverride);
-  else
+  } else {
     self.hud_damagefeedback fadeOverTime(1);
+  }
 
   self.hud_damagefeedback.alpha = 0;
 
-  if(self.hud_damagefeedback.x != x)
+  if(self.hud_damagefeedback.x != x) {
     self.hud_damagefeedback.x = x;
+  }
 
   y = y - int(yOffset);
-  if(self.hud_damagefeedback.y != y)
+  if(self.hud_damagefeedback.y != y) {
     self.hud_damagefeedback.y = y;
+  }
 }

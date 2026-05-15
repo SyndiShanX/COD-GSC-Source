@@ -98,8 +98,9 @@ chicken_achievement() {
   destructible_toy = getEntArray("destructible_toy", "targetname");
   chickens = [];
   foreach(item in destructible_toy) {
-    if(issubstr(item.destructible_type, "toy_chicken"))
+    if(issubstr(item.destructible_type, "toy_chicken")) {
       chickens[chickens.size] = item;
+    }
   }
 
   array_thread(chickens, ::chicken_achievement_think);

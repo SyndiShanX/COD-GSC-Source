@@ -119,7 +119,7 @@ waitforfaceeventcomplete() {
   curridx = self.face_curr_event_idx;
 
   if(getdvarint(#"_id_B5C61264") != 0) {
-    println("Trying to get animation for state " + currevent + " # " + curridx + " for entity " + self getentitynumber());
+    println("Trying to get animation for state " + currevent + " #" + curridx + " for entity " + self getentitynumber());
   }
 
   assert(isDefined(level.facestates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx]));
@@ -140,7 +140,7 @@ waitforfaceeventcomplete() {
   self notify("face_timer_expired");
 
   if(getdvarint(#"_id_B5C61264") != 0) {
-    println("Timing out face state " + currevent + " # " + curridx + " for entity " + self getentitynumber() + " after " + base_time);
+    println("Timing out face state " + currevent + " #" + curridx + " for entity " + self getentitynumber() + " after " + base_time);
   }
 
   self.face_curr_event = undefined;
@@ -253,7 +253,7 @@ processfaceevents(localclientnum) {
             self.face_curr_base_idx = randomint(numanims);
 
             if(getdvarint(#"_id_B5C61264") != 0) {
-              println("New base face anim state " + self.face_curr_base + " anim # " + self.face_curr_base_idx + "for entity " + self getentitynumber());
+              println("New base face anim state " + self.face_curr_base + " anim #" + self.face_curr_base_idx + "for entity " + self getentitynumber());
             }
 
             if(!isDefined(self.face_curr_event)) {
@@ -272,7 +272,7 @@ processfaceevents(localclientnum) {
             self.face_curr_event_idx = randomint(numanims);
 
             if(getdvarint(#"_id_B5C61264") != 0) {
-              println("New face anim event " + self.face_curr_event + " anim # " + self.face_curr_event_idx + " for entity " + self getentitynumber());
+              println("New face anim event " + self.face_curr_event + " anim #" + self.face_curr_event_idx + " for entity " + self getentitynumber());
             }
 
             self setflaggedanimknob("face_event", level.facestates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);

@@ -36,8 +36,9 @@ corner_think(direction, nodeAngleOffset) {
 
   behaviorCallbacks = spawnStruct();
 
-  if(!self.fixedNode)
+  if(!self.fixedNode) {
     behaviorCallbacks.moveToNearByCover = animscripts\cover_behavior::moveToNearbyCover;
+  }
 
   behaviorCallbacks.mainLoopStart = ::mainLoopStart;
   behaviorCallbacks.reload = ::cornerReload;
@@ -71,17 +72,20 @@ set_corner_anim_array() {
 }
 
 shouldChangeStanceForFun() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(!isDefined(self.changeStanceForFunTime))
+  if(!isDefined(self.changeStanceForFunTime)) {
     self.changeStanceForFunTime = gettime() + randomintrange(5000, 20000);
+  }
 
   if(gettime() > self.changeStanceForFunTime) {
     self.changeStanceForFunTime = gettime() + randomintrange(5000, 20000);
 
-    if(isDefined(self.ramboChance) && self.a.pose == "stand")
+    if(isDefined(self.ramboChance) && self.a.pose == "stand") {
       return false;
+    }
 
     self.a.prevAttack = undefined;
     return true;
@@ -96,18 +100,21 @@ mainLoopStart() {
   if(self.a.pose == "crouch") {
     desiredStance = "crouch";
     if(self.coverNode doesNodeAllowStance("stand")) {
-      if(!self.coverNode doesNodeAllowStance("crouch") || shouldChangeStanceForFun())
+      if(!self.coverNode doesNodeAllowStance("crouch") || shouldChangeStanceForFun()) {
         desiredStance = "stand";
+      }
     }
   } else {
     if(self.coverNode doesNodeAllowStance("crouch")) {
-      if(!self.coverNode doesNodeAllowStance("stand") || shouldChangeStanceForFun())
+      if(!self.coverNode doesNodeAllowStance("stand") || shouldChangeStanceForFun()) {
         desiredStance = "crouch";
+      }
     }
   }
 
-  if(getdvarint("scr_cornerforcecrouch") == 1)
+  if(getdvarint("scr_cornerforcecrouch") == 1) {
     desiredStance = "crouch";
+  }
 
   if(self.haveGoneToCover) {
     self transitionToStance(desiredStance);
@@ -134,25 +141,30 @@ printYaws() {
 }
 canSeePointFromExposedAtCorner(point, node) {
   yaw = node GetYawToOrigin(point);
-  if((yaw > 60) || (yaw < -60))
+  if((yaw > 60) || (yaw < -60)) {
     return false;
+  }
 
-  if((node.type == "Cover Left") && yaw > 14)
+  if((node.type == "Cover Left") && yaw > 14) {
     return false;
-  if((node.type == "Cover Right") && yaw < -12)
+  }
+  if((node.type == "Cover Right") && yaw < -12) {
     return false;
+  }
 
   return true;
 }
 
 shootPosOutsideLegalYawRange() {
-  if(!isDefined(self.shootPos))
+  if(!isDefined(self.shootPos)) {
     return false;
+  }
 
   yaw = self.coverNode GetYawToOrigin(self.shootPos);
 
-  if(self.a.cornerMode == "over")
+  if(self.a.cornerMode == "over") {
     return yaw < self.leftAimLimit || self.rightAimLimit < yaw;
+  }
 
   if(self.cornerDirection == "left") {
     if(self.a.cornerMode == "B") {
@@ -179,13 +191,15 @@ getCornerMode(node, point) {
   noStepOut = false;
   yaw = 0;
 
-  if(isDefined(point))
+  if(isDefined(point)) {
     yaw = node GetYawToOrigin(point);
+  }
 
   modes = [];
 
-  if(isDefined(node) && self.a.pose == "crouch" && (yaw > self.leftAimLimit && self.rightAimLimit > yaw))
+  if(isDefined(node) && self.a.pose == "crouch" && (yaw > self.leftAimLimit && self.rightAimLimit > yaw)) {
     modes = node GetValidCoverPeekOuts();
+  }
 
   if(self.cornerDirection == "left") {
     if(canLean(yaw, -40, 0)) {
@@ -194,10 +208,11 @@ getCornerMode(node, point) {
     }
 
     if(!noStepOut && yaw < 14) {
-      if(yaw < 0 - self.ABangleCutoff)
+      if(yaw < 0 - self.ABangleCutoff) {
         modes[modes.size] = "A";
-      else
+      } else {
         modes[modes.size] = "B";
+      }
     }
   } else {
     assert(self.cornerDirection == "right");
@@ -208,10 +223,11 @@ getCornerMode(node, point) {
     }
 
     if(!noStepOut && yaw > -12) {
-      if(yaw > self.ABangleCutoff)
+      if(yaw > self.ABangleCutoff) {
         modes[modes.size] = "A";
-      else
+      } else {
         modes[modes.size] = "B";
+      }
     }
   }
 
@@ -219,36 +235,43 @@ getCornerMode(node, point) {
 }
 getBestStepOutPos() {
   yaw = 0;
-  if(canSuppressEnemy())
+  if(canSuppressEnemy()) {
     yaw = self.coverNode GetYawToOrigin(getEnemySightPos());
-  else if(self.doingAmbush && isDefined(self.shootPos))
+  } else if(self.doingAmbush && isDefined(self.shootPos)) {
     yaw = self.coverNode GetYawToOrigin(self.shootPos);
+  }
 
   dvarval = getDvar("scr_cornerforcestance");
-  if(dvarval == "lean" || dvarval == "a" || dvarval == "b")
+  if(dvarval == "lean" || dvarval == "a" || dvarval == "b") {
     return dvarval;
+  }
 
-  if(self.a.cornerMode == "lean")
+  if(self.a.cornerMode == "lean") {
     return "lean";
-  if(self.a.cornerMode == "over")
+  }
+  if(self.a.cornerMode == "over") {
     return "over";
-  else if(self.a.cornerMode == "B") {
+  } else if(self.a.cornerMode == "B") {
     if(self.cornerDirection == "left") {
-      if(yaw < 0 - self.ABangleCutoff)
+      if(yaw < 0 - self.ABangleCutoff) {
         return "A";
+      }
     } else if(self.cornerDirection == "right") {
-      if(yaw > self.ABangleCutoff)
+      if(yaw > self.ABangleCutoff) {
         return "A";
+      }
     }
     return "B";
   } else if(self.a.cornerMode == "A") {
     positionToSwitchTo = "B";
     if(self.cornerDirection == "left") {
-      if(yaw > 0 - self.ABangleCutoff)
+      if(yaw > 0 - self.ABangleCutoff) {
         return "B";
+      }
     } else if(self.cornerDirection == "right") {
-      if(yaw < self.ABangleCutoff)
+      if(yaw < self.ABangleCutoff) {
         return "B";
+      }
     }
     return "A";
   }
@@ -259,8 +282,9 @@ changeStepOutPos() {
 
   positionToSwitchTo = getBestStepOutPos();
 
-  if(positionToSwitchTo == self.a.cornerMode)
+  if(positionToSwitchTo == self.a.cornerMode) {
     return false;
+  }
 
   assert(self.a.cornerMode != "lean" && positionToSwitchTo != "lean");
   assert(self.a.cornerMode != "over" && positionToSwitchTo != "over");
@@ -273,10 +297,12 @@ changeStepOutPos() {
   switchanim = animArrayPickRandom(animname);
 
   midpoint = getPredictedPathMidpoint();
-  if(!self mayMoveToPoint(midpoint))
+  if(!self mayMoveToPoint(midpoint)) {
     return false;
-  if(!self mayMoveFromPointToPoint(midpoint, getAnimEndPos(switchanim)))
+  }
+  if(!self mayMoveFromPointToPoint(midpoint, getAnimEndPos(switchanim))) {
     return false;
+  }
 
   self endAimIdleThread();
 
@@ -306,8 +332,9 @@ changeStepOutPos() {
   self.coverPosEstablishedTime = gettime();
 
   assert(self.a.pose == "stand" || self.a.pose == "crouch");
-  if(self.a.pose != prev_anim_pose)
+  if(self.a.pose != prev_anim_pose) {
     set_anim_array(self.a.pose);
+  }
 
   self thread ChangeAiming(undefined, true, .3);
 
@@ -315,18 +342,21 @@ changeStepOutPos() {
 }
 
 canLean(yaw, yawMin, yawMax) {
-  if(self.a.neverLean)
+  if(self.a.neverLean) {
     return false;
+  }
 
   return (yawMin <= yaw && yaw <= yawMax);
 }
 
 shouldLean() {
-  if(self.team == "allies")
+  if(self.team == "allies") {
     return true;
+  }
 
-  if(self isPartiallySuppressedWrapper())
+  if(self isPartiallySuppressedWrapper()) {
     return true;
+  }
 
   return false;
 }
@@ -339,20 +369,22 @@ DoNoteTracksWithEndon(animname) {
 StartAiming(spot, fullbody, transtime) {
   assert(!self.cornerAiming);
   self.cornerAiming = true;
-  if(self.a.cornerMode == "lean")
+  if(self.a.cornerMode == "lean") {
     self.a.leanAim = true;
-  else
+  } else {
     self.a.leanAim = undefined;
+  }
 
   self SetAimingParams(spot, fullbody, transTime);
 }
 
 ChangeAiming(spot, fullbody, transtime) {
   assert(self.cornerAiming);
-  if(self.a.cornerMode == "lean")
+  if(self.a.cornerMode == "lean") {
     self.a.leanAim = true;
-  else
+  } else {
     self.a.leanAim = undefined;
+  }
 
   self SetAimingParams(spot, fullbody, transTime);
 }
@@ -377,8 +409,9 @@ SetAimingParams(spot, fullbody, transTime) {
   animscripts\shared::setAnimAimWeight(1, transTime);
 
   leanAnim = undefined;
-  if(isDefined(self.a.array["lean_aim_straight"]))
+  if(isDefined(self.a.array["lean_aim_straight"])) {
     leanAnim = self.a.array["lean_aim_straight"];
+  }
 
   self thread aimIdleThread();
 
@@ -392,8 +425,9 @@ SetAimingParams(spot, fullbody, transTime) {
     self setAnimKnobLimited(animArray("lean_aim_down"), 1, transTime);
   } else if(fullbody) {
     self setAnimLimited(animarray("straight_level"), 1, transTime);
-    if(isDefined(leanAnim))
+    if(isDefined(leanAnim)) {
       self setAnimLimited(leanAnim, 0, 0);
+    }
 
     self setAnimKnobLimited(animArray("add_aim_up"), 1, transTime);
     self setAnimKnobLimited(animArray("add_aim_down"), 1, transTime);
@@ -401,8 +435,9 @@ SetAimingParams(spot, fullbody, transTime) {
     self setAnimKnobLimited(animArray("add_aim_right"), 1, transTime);
   } else {
     self setAnimLimited(animarray("straight_level"), 0, transTime);
-    if(isDefined(leanAnim))
+    if(isDefined(leanAnim)) {
       self setAnimLimited(leanAnim, 0, 0);
+    }
 
     self setAnimKnobLimited(animArray("add_turn_aim_up"), 1, transTime);
     self setAnimKnobLimited(animArray("add_turn_aim_down"), 1, transTime);
@@ -411,8 +446,9 @@ SetAimingParams(spot, fullbody, transTime) {
   }
 }
 stepOutAndHideSpeed() {
-  if(self.a.cornerMode == "over")
+  if(self.a.cornerMode == "over") {
     return 1;
+  }
 
   return randomFasterAnimSpeed();
 }
@@ -420,8 +456,9 @@ stepOutAndHideSpeed() {
 stepOut() {
   self.a.cornerMode = "alert";
 
-  if(self.goalRadius < 64)
+  if(self.goalRadius < 64) {
     self.goalRadius = 64;
+  }
 
   self animMode("zonly_physics");
 
@@ -438,36 +475,42 @@ stepOut() {
   self setDefaultAimLimits();
 
   newCornerMode = "none";
-  if(hasEnemySightPos())
+  if(hasEnemySightPos()) {
     newCornerMode = getCornerMode(self.coverNode, getEnemySightPos());
-  else
+  } else {
     newCornerMode = getCornerMode(self.coverNode);
+  }
 
-  if(!isDefined(newCornerMode))
+  if(!isDefined(newCornerMode)) {
     return false;
+  }
 
   animname = "alert_to_" + newCornerMode;
   assert(animArrayAnyExist(animname));
   switchanim = animArrayPickRandom(animname);
 
-  if(newCornerMode == "lean" && !self isPeekOutPosClear())
+  if(newCornerMode == "lean" && !self isPeekOutPosClear()) {
     return false;
+  }
 
-  if(newCornerMode != "over" && !isPathClear(switchanim, newCornerMode != "lean"))
+  if(newCornerMode != "over" && !isPathClear(switchanim, newCornerMode != "lean")) {
     return false;
+  }
 
   self.a.cornerMode = newCornerMode;
   self.a.prevAttack = newCornerMode;
 
-  if(self.a.cornerMode == "lean")
+  if(self.a.cornerMode == "lean") {
     self setDefaultAimLimits(self.coverNode);
+  }
 
-  if(newCornerMode == "A" || newCornerMode == "B")
+  if(newCornerMode == "A" || newCornerMode == "B") {
     self.a.special = "cover_" + self.cornerDirection + "_" + self.a.pose + "_" + newCornerMode;
-  else if(newCornerMode == "over")
+  } else if(newCornerMode == "over") {
     self.a.special = "cover_crouch_aim";
-  else
+  } else {
     self.a.special = "none";
+  }
 
   self.keepClaimedNodeIfValid = true;
 
@@ -493,8 +536,9 @@ stepOut() {
     self waittillmatch("stepout", "end");
   }
 
-  if(newCornerMode == "B" && coinToss() && self.cornerDirection == "right")
+  if(newCornerMode == "B" && coinToss() && self.cornerDirection == "right") {
     self.a.special = "corner_right_martyrdom";
+  }
 
   set_anim_array_aiming(thisNodePose);
 
@@ -525,12 +569,14 @@ stepOutAndShootEnemy() {
   self.keepClaimedNodeIfValid = true;
 
   if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
-    if(rambo())
+    if(rambo()) {
       return true;
+    }
   }
 
-  if(!StepOut())
+  if(!StepOut()) {
     return false;
+  }
 
   shootAsTold();
 
@@ -538,10 +584,11 @@ stepOutAndShootEnemy() {
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
 
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
-      if(self.a.pose == "stand")
+      if(self.a.pose == "stand") {
         animscripts\shared::throwDownWeapon(%RPG_stand_throw);
-      else
+      } else {
         animscripts\shared::throwDownWeapon(%RPG_crouch_throw);
+      }
 
       self thread runCombat();
       return;
@@ -556,36 +603,42 @@ stepOutAndShootEnemy() {
 }
 
 haventRamboedWithinTime(time) {
-  if(!isDefined(self.lastRamboTime))
+  if(!isDefined(self.lastRamboTime)) {
     return true;
+  }
   return gettime() - self.lastRamboTime > time * 1000;
 }
 
 rambo() {
-  if(!hasEnemySightPos())
+  if(!hasEnemySightPos()) {
     return false;
+  }
 
   ramboAimOffset = 0;
   angle = 90;
   yaw = self.coverNode GetYawToOrigin(getEnemySightPos());
-  if(self.cornerDirection == "left")
+  if(self.cornerDirection == "left") {
     yaw = 0 - yaw;
+  }
   if(yaw > 30) {
     angle = 45;
-    if(self.cornerDirection == "left")
+    if(self.cornerDirection == "left") {
       ramboAimOffset = 45;
-    else
+    } else {
       ramboAimOffset = -45;
+    }
   }
 
   animType = "rambo" + angle;
-  if(!animArrayAnyExist(animType))
+  if(!animArrayAnyExist(animType)) {
     return false;
+  }
 
   ramboAnim = animArrayPickRandom(animType);
   midpoint = getPredictedPathMidpoint(48);
-  if(!self mayMoveToPoint(midpoint))
+  if(!self mayMoveToPoint(midpoint)) {
     return false;
+  }
 
   self.coverPosEstablishedTime = gettime();
 
@@ -628,8 +681,9 @@ shootAsTold() {
 
         self waittill("do_slow_things");
         waittillframeend;
-        if(isDefined(self.shootPos))
+        if(isDefined(self.shootPos)) {
           continue;
+        }
         break;
       }
 
@@ -679,8 +733,9 @@ shootUntilShootBehaviorChangeForTime(time) {
   self notify("stopNotifyStopShootingAfterTime");
 
   timepassed = (gettime() - starttime) / 1000;
-  if(timepassed < time)
+  if(timepassed < time) {
     wait time - timepassed;
+  }
 }
 
 notifyStopShootingAfterTime(time) {
@@ -695,8 +750,9 @@ notifyStopShootingAfterTime(time) {
 shootUntilShootBehaviorChange_corner(runAngleRangeThread) {
   self endon("return_to_cover");
 
-  if(runAngleRangeThread)
+  if(runAngleRangeThread) {
     self thread angleRangeThread();
+  }
   self thread aimIdleThread();
 
   shootUntilShootBehaviorChange();
@@ -733,8 +789,9 @@ canReturnToCover(doMidpointCheck) {
   if(doMidpointCheck) {
     midpoint = getPredictedPathMidpoint();
 
-    if(!self mayMoveToPoint(midpoint))
+    if(!self mayMoveToPoint(midpoint)) {
       return false;
+    }
 
     return self mayMoveFromPointToPoint(midpoint, self.coverNode.origin);
   } else {
@@ -771,14 +828,16 @@ returnToCover() {
   self setFlaggedAnimRestart("hide", switchanim, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("hide");
 
-  if(reloading)
+  if(reloading) {
     self animscripts\weaponList::RefillClip();
+  }
 
   self.changingCoverPos = false;
-  if(self.cornerDirection == "left")
+  if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  else
+  } else {
     self.a.special = "cover_right";
+  }
 
   self.keepClaimedNodeIfValid = false;
 
@@ -786,8 +845,9 @@ returnToCover() {
 }
 
 blindfire() {
-  if(!animArrayAnyExist("blind_fire"))
+  if(!animArrayAnyExist("blind_fire")) {
     return false;
+  }
 
   self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
@@ -801,8 +861,9 @@ blindfire() {
 }
 
 linethread(a, b, col) {
-  if(!isDefined(col))
+  if(!isDefined(col)) {
     col = (1, 1, 1);
+  }
   for(i = 0; i < 100; i++) {
     line(a, b, col);
     wait .05;
@@ -814,25 +875,30 @@ tryThrowingGrenadeStayHidden(throwAt) {
 }
 
 tryThrowingGrenade(throwAt, safe) {
-  if(!self mayMoveToPoint(self getPredictedPathMidpoint()))
+  if(!self mayMoveToPoint(self getPredictedPathMidpoint())) {
     return false;
+  }
 
-  if(isDefined(self.dontEverShoot) || isDefined(throwAt.dontAttackMe))
+  if(isDefined(self.dontEverShoot) || isDefined(throwAt.dontAttackMe)) {
     return false;
+  }
 
   theanim = undefined;
   if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
-    if(isDefined(self.a.array["grenade_rambo"]))
+    if(isDefined(self.a.array["grenade_rambo"])) {
       theanim = animArray("grenade_rambo");
+    }
   }
   if(!isDefined(theanim)) {
     if(isDefined(safe) && safe) {
-      if(!isDefined(self.a.array["grenade_safe"]))
+      if(!isDefined(self.a.array["grenade_safe"])) {
         return false;
+      }
       theanim = animArray("grenade_safe");
     } else {
-      if(!isDefined(self.a.array["grenade_exposed"]))
+      if(!isDefined(self.a.array["grenade_exposed"])) {
         return false;
+      }
       theanim = animArray("grenade_exposed");
     }
   }
@@ -852,22 +918,25 @@ printYawToEnemy() {
 }
 
 lookForEnemy(lookTime) {
-  if(!isDefined(self.a.array["alert_to_look"]))
+  if(!isDefined(self.a.array["alert_to_look"])) {
     return false;
+  }
 
   self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
-  if(!peekOut())
+  if(!peekOut()) {
     return false;
+  }
 
   animscripts\shared::playLookAnimation(animarray("look_idle"), lookTime, ::canStopPeeking);
 
   lookanim = undefined;
-  if(self isSuppressedWrapper())
+  if(self isSuppressedWrapper()) {
     lookanim = animArray("look_to_alert_fast");
-  else
+  } else {
     lookanim = animArray("look_to_alert");
+  }
 
   self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, .1, 1.0);
   animscripts\shared::DoNoteTracks("looking_end");
@@ -886,10 +955,11 @@ isPeekOutPosClear() {
 
   eyePos = self getEye();
   rightDir = anglestoright(self.coverNode.angles);
-  if(self.cornerDirection == "right")
+  if(self.cornerDirection == "right") {
     eyePos = eyePos + (rightDir * PEEKOUT_OFFSET);
-  else
+  } else {
     eyePos = eyePos - (rightDir * PEEKOUT_OFFSET);
+  }
 
   lookAtPos = eyePos + anglesToForward(self.coverNode.angles) * PEEKOUT_OFFSET;
 
@@ -897,11 +967,13 @@ isPeekOutPosClear() {
 }
 
 peekOut() {
-  if(isDefined(self.coverNode.script_dontpeek))
+  if(isDefined(self.coverNode.script_dontpeek)) {
     return false;
+  }
 
-  if(isDefined(self.nextPeekOutAttemptTime) && gettime() < self.nextPeekOutAttemptTime)
+  if(isDefined(self.nextPeekOutAttemptTime) && gettime() < self.nextPeekOutAttemptTime) {
     return false;
+  }
 
   if(!self isPeekOutPosClear()) {
     self.nextPeekOutAttemptTime = gettime() + 3000;
@@ -944,8 +1016,9 @@ isPathClear(stepoutanim, doMidpointCheck) {
   if(doMidpointCheck) {
     midpoint = getPredictedPathMidpoint();
 
-    if(!self maymovetopoint(midpoint))
+    if(!self maymovetopoint(midpoint)) {
       return false;
+    }
 
     return self maymovefrompointtopoint(midpoint, getAnimEndPos(stepoutanim));
   } else {
@@ -956,8 +1029,9 @@ isPathClear(stepoutanim, doMidpointCheck) {
 getPredictedPathMidpoint(dist) {
   angles = self.coverNode.angles;
   right = anglestoright(angles);
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 36;
+  }
   switch (self.script) {
     case "cover_left":
       right = vector_multiply(right, 0 - dist);
@@ -979,18 +1053,20 @@ idle() {
 
   while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("alert_idle_twitch"));
-    if(useTwitch)
+    if(useTwitch) {
       idleanim = animArrayPickRandom("alert_idle_twitch");
-    else
+    } else {
       idleanim = animarray("alert_idle");
+    }
 
     playIdleAnimation(idleAnim, useTwitch);
   }
 }
 
 flinch() {
-  if(!animArrayAnyExist("alert_idle_flinch"))
+  if(!animArrayAnyExist("alert_idle_flinch")) {
     return false;
+  }
 
   playIdleAnimation(animArrayPickRandom("alert_idle_flinch"), true);
 
@@ -998,10 +1074,11 @@ flinch() {
 }
 
 playIdleAnimation(idleAnim, needsRestart) {
-  if(needsRestart)
+  if(needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, .1, 1);
-  else
+  } else {
     self setFlaggedAnimKnobAll("idle", idleAnim, %body, 1, .1, 1);
+  }
 
   self animscripts\shared::DoNoteTracks("idle");
 }
@@ -1051,10 +1128,11 @@ GoToCover(coveranim, transTime, playTime) {
 
   self animMode("zonly_physics");
 
-  if(self.cornerDirection == "left")
+  if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  else
+  } else {
     self.a.special = "cover_right";
+  }
 }
 
 drawoffset() {
@@ -1066,8 +1144,9 @@ drawoffset() {
 }
 
 set_standing_animarray_aiming() {
-  if(!isDefined(self.a.array))
+  if(!isDefined(self.a.array)) {
     assertmsg("set_standing_animarray_aiming_AandC::this function needs to be called after the initial corner set_ functions");
+  }
 
   self.a.array["add_aim_up"] = % exposed_aim_8;
   self.a.array["add_aim_down"] = % exposed_aim_2;
@@ -1102,10 +1181,11 @@ set_standing_animarray_aiming() {
     self.a.array["semi4"] = % exposed_shoot_semi4;
     self.a.array["semi5"] = % exposed_shoot_semi5;
 
-    if(weapon_pump_action_shotgun())
+    if(weapon_pump_action_shotgun()) {
       self.a.array["single"] = array(%shotgun_stand_fire_1A);
-    else
+    } else {
       self.a.array["single"] = array(%exposed_shoot_semi1);
+    }
 
     self.a.array["burst2"] = % exposed_shoot_burst3;
     self.a.array["burst3"] = % exposed_shoot_burst3;
@@ -1117,8 +1197,9 @@ set_standing_animarray_aiming() {
 }
 
 set_crouching_animarray_aiming() {
-  if(!isDefined(self.a.array))
+  if(!isDefined(self.a.array)) {
     assertmsg("set_standing_animarray_aiming_AandC::this function needs to be called after the initial corner set_ functions");
+  }
 
   if(self.a.cornerMode == "over") {
     self.a.array["add_aim_up"] = % covercrouch_aim8_add;
@@ -1139,10 +1220,11 @@ set_crouching_animarray_aiming() {
     anim_array["burst5"] = % exposed_shoot_burst5;
     anim_array["burst6"] = % exposed_shoot_burst6;
 
-    if(weapon_pump_action_shotgun())
+    if(weapon_pump_action_shotgun()) {
       anim_array["single"] = array(%shotgun_crouch_fire);
-    else
+    } else {
       anim_array["single"] = array(%exposed_shoot_semi1);
+    }
 
     self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
     return;
@@ -1171,10 +1253,11 @@ set_crouching_animarray_aiming() {
     self.a.array["semi4"] = % exposed_crouch_shoot_semi4;
     self.a.array["semi5"] = % exposed_crouch_shoot_semi5;
 
-    if(weapon_pump_action_shotgun())
+    if(weapon_pump_action_shotgun()) {
       self.a.array["single"] = array(%shotgun_crouch_fire);
-    else
+    } else {
       self.a.array["single"] = array(%exposed_crouch_shoot_semi1);
+    }
 
     self.a.array["burst2"] = % exposed_crouch_shoot_burst3;
     self.a.array["burst3"] = % exposed_crouch_shoot_burst3;

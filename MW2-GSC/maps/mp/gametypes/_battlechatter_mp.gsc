@@ -58,8 +58,9 @@ claymoreTracking() {
   while(1) {
     self waittill("begin_firing");
     weaponName = self getCurrentWeapon();
-    if(weaponName == "claymore_mp")
+    if(weaponName == "claymore_mp") {
       level thread sayLocalSound(self, "claymore_plant");
+    }
   }
 }
 
@@ -80,16 +81,17 @@ grenadeTracking() {
   for(;;) {
     self waittill("grenade_fire", grenade, weaponName);
 
-    if(weaponName == "frag_grenade_mp")
+    if(weaponName == "frag_grenade_mp") {
       level thread sayLocalSound(self, "frag_out");
-    else if(weaponName == "flash_grenade_mp")
+    } else if(weaponName == "flash_grenade_mp") {
       level thread sayLocalSound(self, "flash_out");
-    else if(weaponName == "concussion_grenade_mp")
+    } else if(weaponName == "concussion_grenade_mp") {
       level thread sayLocalSound(self, "conc_out");
-    else if(weaponName == "smoke_grenade_mp")
+    } else if(weaponName == "smoke_grenade_mp") {
       level thread sayLocalSound(self, "smoke_out");
-    else if(weaponName == "c4_mp")
+    } else if(weaponName == "c4_mp") {
       level thread sayLocalSound(self, "c4_plant");
+    }
   }
 }
 
@@ -141,11 +143,13 @@ isSpeakerInRange(player) {
 
   for(index = 0; index < level.speakers[player.pers["team"]].size; index++) {
     teammate = level.speakers[player.pers["team"]][index];
-    if(teammate == player)
+    if(teammate == player) {
       return true;
+    }
 
-    if(distancesquared(teammate.origin, player.origin) < distSq)
+    if(distancesquared(teammate.origin, player.origin) < distSq) {
       return true;
+    }
   }
 }
 

@@ -10,12 +10,14 @@
 spawn_smoke(smoke_tag, smoke_trigger, smoke_pause) {
   trigger_wait(smoke_trigger, "targetname");
 
-  if(!isDefined(smoke_pause))
+  if(!isDefined(smoke_pause)) {
     smoke_pause = 1.0;
+  }
 
   smoke_spots = getStructArray(smoke_tag, "targetname");
-  foreach(spot in smoke_spots)
-  MagicGrenadeManual("smoke_grenade_american", spot.origin, (0, 0, -1), randomfloat(smoke_pause));
+  foreach(spot in smoke_spots) {
+    MagicGrenadeManual("smoke_grenade_american", spot.origin, (0, 0, -1), randomfloat(smoke_pause));
+  }
 }
 
 shoot_out_glass() {
@@ -42,8 +44,9 @@ enemy_register() {
 }
 
 enemy_override_bc() {
-  while(!isDefined(self.chatinitialized) && !self.chatinitialized)
+  while(!isDefined(self.chatinitialized) && !self.chatinitialized) {
     wait 0.05;
+  }
 
   self.countryid = "RU";
 }
@@ -56,18 +59,21 @@ enemy_seek_player(goalradius, delay) {
   level endon("special_op_terminated");
   self endon("death");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait delay;
+  }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("goal");
+  }
 
   enemy_update_target(get_closest_player_healthy(self.origin));
   self.goalradius = goalradius;
   self.goalheight = 256;
 
-  if(is_coop())
+  if(is_coop()) {
     thread enemy_evaluate_goal();
+  }
 }
 
 enemy_evaluate_goal() {
@@ -114,13 +120,15 @@ enemy_move_to_struct(trig, seek_goal_radius, stay, duration) {
   self.ignoreall = true;
 
   trigger_name = undefined;
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     trigger_name = trig + "_movein_trig";
+  }
 
   thread enemy_move_to_struct_detect_damage(seek_goal_radius, stay, duration, trigger_name);
 
-  if(isDefined(trigger_name))
+  if(isDefined(trigger_name)) {
     trigger_wait(trigger_name, "targetname");
+  }
 
   thread enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration);
 }
@@ -132,11 +140,13 @@ enemy_move_to_struct_detect_damage(seek_goal_radius, stay, duration, trigger_nam
 
   self waittill_any("damage", "death");
 
-  if(isDefined(trigger_name))
+  if(isDefined(trigger_name)) {
     activate_trigger(trigger_name, "targetname");
+  }
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration);
+  }
 }
 
 enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
@@ -144,16 +154,18 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
 
   self.ignoreall = false;
   node = getnode(self.target, "targetname");
-  if(!isDefined(node))
+  if(!isDefined(node)) {
     node = getstruct(self.target, "targetname");
+  }
 
   goal_type = undefined;
 
   if(!isDefined(node.classname)) {
-    if(!isDefined(node.type))
+    if(!isDefined(node.type)) {
       goal_type = "struct";
-    else
+    } else {
       goal_type = "node";
+    }
   } else {
     goal_type = "origin";
   }
@@ -164,10 +176,11 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
   wait 1;
   self enable_exits();
 
-  if(isDefined(stay) && stay && isDefined(duration))
+  if(isDefined(stay) && stay && isDefined(duration)) {
     thread enemy_seek_player(seek_goal_radius, duration);
-  else
+  } else {
     thread enemy_seek_player(seek_goal_radius);
+  }
 }
 
 enemy_prone_to_stand(trig, seek_goal_radius, stay, duration) {
@@ -185,12 +198,14 @@ enemy_prone_to_stand(trig, seek_goal_radius, stay, duration) {
   self thread maps\_anim::anim_generic_custom_animmode(self, "gravity", "pronehide_dive");
 
   trigger_name = undefined;
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     trigger_name = trig + "_movein_trig";
+  }
 
   thread enemy_prone_to_stand_detect_damage(seek_goal_radius, stay, duration, trigger_name);
-  if(isDefined(trigger_name))
+  if(isDefined(trigger_name)) {
     trigger_wait(trigger_name, "targetname");
+  }
 
   thread enemy_prone_to_stand_wakeup(seek_goal_radius, stay, duration);
 }
@@ -202,11 +217,13 @@ enemy_prone_to_stand_detect_damage(seek_goal_radius, stay, duration, trigger_nam
 
   self waittill_any("damage", "death");
 
-  if(isDefined(trigger_name))
+  if(isDefined(trigger_name)) {
     activate_trigger(trigger_name, "targetname");
+  }
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread enemy_prone_to_stand_wakeup(seek_goal_radius, stay, duration);
+  }
 }
 
 enemy_prone_to_stand_wakeup(seek_goal_radius, stay, duration) {
@@ -216,10 +233,11 @@ enemy_prone_to_stand_wakeup(seek_goal_radius, stay, duration) {
   self allowedstances("stand", "crouch", "prone");
   self enable_exits();
 
-  if(isDefined(stay) && stay && isDefined(duration))
+  if(isDefined(stay) && stay && isDefined(duration)) {
     thread enemy_seek_player(seek_goal_radius, duration);
-  else
+  } else {
     thread enemy_seek_player(seek_goal_radius);
+  }
 }
 
 past_enemy_remove(enemy_group, num) {
@@ -227,30 +245,35 @@ past_enemy_remove(enemy_group, num) {
 
   enemy_array = getaiarray("axis");
   guys_to_delete = [];
-  foreach(guy in enemy_array)
-  if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == enemy_group)
-    guys_to_delete[guys_to_delete.size] = guy;
-
+  foreach(guy in enemy_array) {
+    if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == enemy_group) {
+      guys_to_delete[guys_to_delete.size] = guy;
+    }
+  }
   if(isDefined(num) && (num > 0) && (num < guys_to_delete.size)) {
     random_guys_to_delete = array_randomize(guys_to_delete);
     guys_to_delete = [];
 
-    for(i = 0; i < num; i++)
+    for(i = 0; i < num; i++) {
       guys_to_delete[guys_to_delete.size] = random_guys_to_delete[i];
+    }
   }
 
   thread AI_delete_when_out_of_sight(guys_to_delete, 512);
 }
 
 type_script_model_civilian() {
-  if(!isDefined(self.code_classname))
+  if(!isDefined(self.code_classname)) {
     return false;
+  }
 
-  if(!isDefined(self.model))
+  if(!isDefined(self.model)) {
     return false;
+  }
 
-  if(self.code_classname == "script_model" && self.model == "body_complete_civilian_suit_male_1")
+  if(self.code_classname == "script_model" && self.model == "body_complete_civilian_suit_male_1") {
     return true;
+  }
 
   return false;
 }
@@ -260,8 +283,9 @@ hide_destroyed_parts() {
   foreach(pole in poles) {
     pieces = getEntArray(pole.target, "targetname");
 
-    foreach(piece in pieces)
-    piece hide();
+    foreach(piece in pieces) {
+      piece hide();
+    }
 
     pole hide();
   }
@@ -280,8 +304,9 @@ sign_departure_status_eratic() {
 
   while(!flag("stop_board_flipping")) {
     snds = getEntArray("snd_departure_board", "targetname");
-    foreach(member in snds)
-    member playSound(member.script_soundalias);
+    foreach(member in snds) {
+      member playSound(member.script_soundalias);
+    }
 
     array = array_randomize(level.departure_status_array);
     spintime = 0;
@@ -291,8 +316,9 @@ sign_departure_status_eratic() {
     }
 
     wait spintime;
-    if(cointoss())
+    if(cointoss()) {
       wait randomfloatrange(0.5, 6.0);
+    }
   }
 }
 

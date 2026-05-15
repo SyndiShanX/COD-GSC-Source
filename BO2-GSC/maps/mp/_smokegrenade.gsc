@@ -24,8 +24,9 @@ watchsmokegrenadedetonation(owner) {
   self waittill("explode", position, surface);
 
   if(!isDefined(level.water_duds) || level.water_duds == 1) {
-    if(isDefined(surface) && surface == "water")
+    if(isDefined(surface) && surface == "water") {
       return;
+    }
   }
 
   onefoot = vectorscale((0, 0, 1), 12.0);

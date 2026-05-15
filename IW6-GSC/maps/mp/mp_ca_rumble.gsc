@@ -81,8 +81,9 @@ initExtraCollision() {
 
 RUMBLE_MORTARS_WEIGHT = 85;
 rumbleCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -163,14 +164,16 @@ update_mortars() {
 
   level.mortar_sources = getStructArray("rumble_mortar_source", "targetname");
   foreach(source in level.mortar_sources) {
-    if(!isDefined(source.radius))
+    if(!isDefined(source.radius)) {
       source.radius = 300;
+    }
   }
 
   level.mortar_targets = getStructArray("rumble_mortar_target", "targetname");
   foreach(mortart_target in level.mortar_targets) {
-    if(!isDefined(mortart_target.radius))
+    if(!isDefined(mortart_target.radius)) {
       mortart_target.radius = 100;
+    }
   }
 
   while(1) {
@@ -219,11 +222,13 @@ mortar_fire(delay_min, delay_max, mortar_time_sec, owner) {
         continue;
       }
       if(level.teamBased) {
-        if(player.team == level.air_raid_team_called)
+        if(player.team == level.air_raid_team_called) {
           continue;
+        }
       } else {
-        if(isDefined(owner) && player == owner)
+        if(isDefined(owner) && player == owner) {
           continue;
+        }
       }
 
       if(player.spawnTime + 8000 > GetTime()) {
@@ -254,8 +259,9 @@ mortar_fire(delay_min, delay_max, mortar_time_sec, owner) {
       while(mortars_launched < mortars_per_loop) {
         source_struct = source_structs[air_raid_num];
         air_raid_num++;
-        if(air_raid_num >= source_structs.size)
+        if(air_raid_num >= source_structs.size) {
           air_raid_num = 0;
+        }
 
         target_struct = random(level.mortar_targets);
 
@@ -287,10 +293,11 @@ random_mortars_fire(start_org, end_org, air_time, owner, trace_test, play_fx) {
   gravity = (0, 0, -800);
 
   if(!isDefined(air_time)) {
-    if(isDefined(level.ending_flourish) && level.ending_flourish)
+    if(isDefined(level.ending_flourish) && level.ending_flourish) {
       air_time = 2.5;
-    else
+    } else {
       air_time = RandomFloatRange(10.0, 12.0);
+    }
   }
   launch_dir = TrajectoryCalculateInitialVelocity(start_org, end_org, gravity, air_time);
 
@@ -326,8 +333,9 @@ random_mortars_fire_run(start_org, end_org, air_time, owner, launch_dir, play_fx
   mortar_model MoveGravity(launch_dir, air_time - 0.05);
   mortar_model waittill("movedone");
 
-  if(level.createFX_enabled && !isDefined(level.players))
+  if(level.createFX_enabled && !isDefined(level.players)) {
     level.players = [];
+  }
 
   if(isDefined(owner)) {
     mortar_model RadiusDamage(end_org, 250, 750, 500, owner, "MOD_EXPLOSIVE", "warhawk_mortar_mp");
@@ -373,13 +381,15 @@ random_mortars_get_source_structs(owner_team) {
 
   if(level.teamBased) {
     foreach(struct in level.mortar_sources) {
-      if(isDefined(struct.script_team) && struct.script_team == owner_team)
+      if(isDefined(struct.script_team) && struct.script_team == owner_team) {
         source_structs[source_structs.size] = struct;
+      }
     }
   }
 
-  if(source_structs.size == 0)
+  if(source_structs.size == 0) {
     source_structs = level.mortar_sources;
+  }
 
   return source_structs;
 }
@@ -388,12 +398,14 @@ setup_destructibles() {
   orcas = getEntArray("dest_orca", "targetname");
   sharks = getEntArray("dest_shark", "targetname");
   if(sharks.size) {
-    foreach(shark in sharks)
-    shark thread update_destructibles(level._effect["vfx_mp_ca_rumble_shark_hit"], level._effect["vfx_mp_ca_rumble_shark_death"]);
+    foreach(shark in sharks) {
+      shark thread update_destructibles(level._effect["vfx_mp_ca_rumble_shark_hit"], level._effect["vfx_mp_ca_rumble_shark_death"]);
+    }
   }
   if(orcas.size) {
-    foreach(orca in orcas)
-    orca thread update_destructibles(level._effect["vfx_mp_ca_rumble_orca_hit"], level._effect["vfx_mp_ca_rumble_orca_death"]);
+    foreach(orca in orcas) {
+      orca thread update_destructibles(level._effect["vfx_mp_ca_rumble_orca_hit"], level._effect["vfx_mp_ca_rumble_orca_death"]);
+    }
   }
 }
 
@@ -423,10 +435,11 @@ update_destructibles(effect_id, death_effect_id) {
     }
   }
 
-  if(!isDefined(explosionDirection))
+  if(!isDefined(explosionDirection)) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, damage_type);
-  else
+  } else {
     direction_vec = explosionDirection;
+  }
 
   self Hide();
   self setCanDamage(false);
@@ -469,8 +482,9 @@ update_fish() {
 
 setup_metal_detectors() {
   metal_detectors = getEntArray("metal_detector_trigger", "targetname");
-  if(metal_detectors.size > 0)
+  if(metal_detectors.size > 0) {
     array_thread(metal_detectors, ::update_metal_detector);
+  }
 }
 
 update_metal_detector() {
@@ -491,13 +505,15 @@ update_metal_detector() {
 
   self thread metal_detector_monitor_alive(my_devices);
   while(1) {
-    foreach(device in my_devices)
-    device thread metal_detector_on();
+    foreach(device in my_devices) {
+      device thread metal_detector_on();
+    }
 
     self waittill("trigger");
 
-    foreach(device in my_devices)
-    device thread metal_detector_off();
+    foreach(device in my_devices) {
+      device thread metal_detector_off();
+    }
 
     wait 5.0;
   }
@@ -505,8 +521,9 @@ update_metal_detector() {
 
 metal_detector_monitor_alive(my_devices) {
   self waittill("detector_damaged");
-  foreach(device in my_devices)
-  device DoDamage(10000, device.origin);
+  foreach(device in my_devices) {
+    device DoDamage(10000, device.origin);
+  }
 
   self notify("detector_destroyed");
 }
@@ -518,8 +535,9 @@ metal_detector_damage_monitor(metal_detector) {
   self setCanDamage(true);
   while(self.md_health > 0.0) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(isPlayer(attacker))
+    if(isPlayer(attacker)) {
       self.maintain_fx = true;
+    }
     self.md_health -= amount;
   }
 
@@ -537,8 +555,9 @@ metal_detectorpart_damage_monitor(parent) {
 }
 
 metal_detector_on() {
-  if(self.md_health <= 0.0)
+  if(self.md_health <= 0.0) {
     return;
+  }
   self.light_on Show();
   self.light_off Hide();
   self.light_broke Hide();
@@ -546,8 +565,9 @@ metal_detector_on() {
 }
 
 metal_detector_off() {
-  if(self.md_health <= 0.0)
+  if(self.md_health <= 0.0) {
     return;
+  }
   self.light_on Hide();
   self.light_off Show();
   self.light_broke Hide();
@@ -616,8 +636,9 @@ update_dock_boat() {
     tilt = (0.0, 0.0, RandomFloatRange(6.0, 8.0));
     time = Max(2.0, tilt[2] / tilt_rate);
 
-    if(bobbing_down)
+    if(bobbing_down) {
       tilt *= -1.0;
+    }
     bobbing_down = !bobbing_down;
 
     self RotateTo(start_rot + tilt, time, 1.0, 1.0);
@@ -661,8 +682,9 @@ setup_watertanks() {
 
   watertanks = getEntArray("watertank_glass", "targetname");
   if(watertanks.size > 0) {
-    for(i = 0; i < watertanks.size; i++)
+    for(i = 0; i < watertanks.size; i++) {
       watertanks[i] thread update_watertank(i);
+    }
   }
 
   watertanks = getEntArray("watertank_invulnerable", "targetname");
@@ -842,15 +864,17 @@ get_watertank_hit_angle(attacker, direction_vec, hit_point) {
   temp_vec = hit_point - E;
 
   trace = bulletTrace(E, E + 1.5 * temp_vec, false, attacker, false);
-  if(isDefined(trace["normal"]) && isDefined(trace["entity"]) && (trace["entity"] == self))
+  if(isDefined(trace["normal"]) && isDefined(trace["entity"]) && (trace["entity"] == self)) {
     return trace["normal"];
+  }
 
   return undefined;
 }
 
 can_allocate_new_tank_crack() {
-  if(GetTime() < level.next_tank_hitfx_time)
+  if(GetTime() < level.next_tank_hitfx_time) {
     return false;
+  }
   return true;
 }
 
@@ -879,13 +903,15 @@ update_trolley() {
   array_thread(trolley_lights, ::trolley_attach_lights, trolley);
 
   trolley_mesh = getent("moving_trolley_mesh", "targetname");
-  if(isDefined(trolley_mesh))
+  if(isDefined(trolley_mesh)) {
     trolley_mesh linkto(trolley);
+  }
 
   trolley_mesh_extras = getEntArray("moving_trolley_extras", "targetname");
   if(trolley_mesh_extras.size > 0) {
-    foreach(extra in trolley_mesh_extras)
-    extra linkto(trolley);
+    foreach(extra in trolley_mesh_extras) {
+      extra linkto(trolley);
+    }
   }
 
   trolley_wheels = getEntArray("moving_trolley_wheel", "targetname");
@@ -920,8 +946,9 @@ update_trolley() {
   default_speed = 140.0;
   stop_time = 0.0;
   start_time = 0.0;
-  if(isDefined(current_point.script_accel))
+  if(isDefined(current_point.script_accel)) {
     start_time = current_point.script_accel;
+  }
 
   current_point = GetEnt(current_point.target, "targetname");
   while(isDefined(current_point)) {
@@ -931,14 +958,16 @@ update_trolley() {
     }
 
     stop_time = 0.0;
-    if(isDefined(current_point.script_decel))
+    if(isDefined(current_point.script_decel)) {
       stop_time = current_point.script_decel;
+    }
 
     move_speed = default_speed;
     move_speed /= Max(1, GetDvarInt("trolley_throttle", 1));
 
-    if(isDefined(current_point.script_physics))
+    if(isDefined(current_point.script_physics)) {
       move_speed *= current_point.script_physics;
+    }
     move_time = Distance(trolley.origin, current_point.origin) / move_speed;
     move_time = Max(move_time, stop_time + start_time);
 
@@ -946,8 +975,9 @@ update_trolley() {
     trolley RotateTo(current_point.angles, move_time, start_time, stop_time);
 
     wheel_speed = move_speed * 2.1;
-    if(isDefined(current_point.script_anglevehicle) && (current_point.script_anglevehicle == 1))
+    if(isDefined(current_point.script_anglevehicle) && (current_point.script_anglevehicle == 1)) {
       wheel_speed *= -1.0;
+    }
 
     point_angle = current_point.angles[1];
     for(i = 0; i < trolley_wheels.size; i++) {
@@ -955,8 +985,9 @@ update_trolley() {
       trolley_wheels[i] MoveTo(wheel_spot, move_time, start_time, stop_time);
       wheel_turn = (point_angle + wheel_rotations[i][1] - trolley_wheels[i].angles[1]) / move_time;
       specific_wheel_speed = wheel_speed;
-      if(isDefined(trolley_wheels[i].script_index) && (trolley_wheels[i].script_index == 1))
+      if(isDefined(trolley_wheels[i].script_index) && (trolley_wheels[i].script_index == 1)) {
         specific_wheel_speed *= -1.0;
+      }
       trolley_wheels[i] RotateVelocity((0, wheel_turn, specific_wheel_speed), move_time, start_time, stop_time);
     }
 
@@ -977,18 +1008,22 @@ update_trolley() {
       wait(stop_time - 0.2);
     }
 
-    if(isDefined(current_point.script_node_pausetime))
+    if(isDefined(current_point.script_node_pausetime)) {
       wait current_point.script_node_pausetime;
+    }
 
-    for(i = 0; i < trolley_wheels.size; i++)
+    for(i = 0; i < trolley_wheels.size; i++) {
       trolley_wheels[i].angles = (trolley_wheels[i].angles[0], point_angle + wheel_rotations[i][1], trolley_wheels[i].angles[2]);
+    }
 
     start_time = 0.0;
-    if(isDefined(current_point.script_accel))
+    if(isDefined(current_point.script_accel)) {
       start_time = current_point.script_accel;
+    }
 
-    if(isDefined(current_point.script_index))
+    if(isDefined(current_point.script_index)) {
       trolley_mesh PlaySoundOnMovingEnt("trolley_corner");
+    }
 
     current_point = GetEnt(current_point.target, "targetname");
   }
@@ -1049,16 +1084,19 @@ update_destroyer() {
   decel_time = 0.0;
 
   current_point = GetEnt(current_point.target, "targetname");
-  if(isDefined(current_point.script_decel))
+  if(isDefined(current_point.script_decel)) {
     decel_time = current_point.script_decel;
+  }
 
   while(isDefined(current_point)) {
     move_speed = default_speed;
-    if(isDefined(current_point.script_physics))
+    if(isDefined(current_point.script_physics)) {
       move_speed = current_point.script_physics;
+    }
     accel_time = 0.0;
-    if(isDefined(current_point.script_accel))
+    if(isDefined(current_point.script_accel)) {
       accel_time = current_point.script_accel;
+    }
 
     base_move_time = Distance(ship.origin, current_point.origin) / move_speed;
     move_time = Max(base_move_time, accel_time + decel_time);
@@ -1069,11 +1107,13 @@ update_destroyer() {
 
     next_point = GetEnt(current_point.target, "targetname");
     if(isDefined(next_point)) {
-      if(isDefined(next_point.script_node_pausetime))
+      if(isDefined(next_point.script_node_pausetime)) {
         wait next_point.script_node_pausetime;
+      }
       decel_time = 0.0;
-      if(isDefined(next_point.script_decel))
+      if(isDefined(next_point.script_decel)) {
         decel_time = next_point.script_decel;
+      }
     }
 
     current_point = next_point;
@@ -1186,8 +1226,9 @@ update_fountain_fx(fx_pos, fx_delay) {
 
   while(1) {
     level waittill("spawn_stair_fountain_fx");
-    if(isDefined(fx_delay) && (fx_delay > 0.0))
+    if(isDefined(fx_delay) && (fx_delay > 0.0)) {
       wait fx_delay;
+    }
 
     playFX(fx_alias, fx_pos, anglesToForward((0, 0, 0)), AnglesToUp((0, 0, 0)));
 

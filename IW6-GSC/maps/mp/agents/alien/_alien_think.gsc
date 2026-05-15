@@ -72,8 +72,9 @@ MonitorFlash() {
 onDamageFinish(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   self FinishAgentDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, 0.0);
 
-  if(self.health <= 0)
+  if(self.health <= 0) {
     return true;
+  }
 
   trap_damage = self is_trap(eInflictor);
 
@@ -81,11 +82,13 @@ onDamageFinish(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, 
 
   if(isDefined(eAttacker)) {
     if(isPlayer(eAttacker) || (isDefined(eAttacker.owner) && isPlayer(eAttacker.owner))) {
-      if(!trap_damage)
+      if(!trap_damage) {
         eAttacker maps\mp\alien\_damage::check_for_special_damage(self, sWeapon, sMeansOfDeath);
+      }
 
-      if(iDamage > 0)
+      if(iDamage > 0) {
         level.alienBBData["damage_done"] += iDamage;
+      }
     }
   }
 
@@ -97,12 +100,14 @@ onDamageFinish(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, 
     if(sMeansOfDeath != "MOD_MELEE" && belowPainThreshold) {
       return;
     }
-    if(sMeansOfDeath == "MOD_MELEE" && !belowPainThreshold && !should_melee_pushback())
+    if(sMeansOfDeath == "MOD_MELEE" && !belowPainThreshold && !should_melee_pushback()) {
       return;
+    }
   }
 
-  if(!isDefined(vDir))
+  if(!isDefined(vDir)) {
     vDir = anglesToForward(self.angles);
+  }
 
   notifyJumpPain(vDir, sHitLoc, iDamage, is_stun);
   clearDamageHistory();
@@ -128,11 +133,13 @@ onDamageFinish(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, 
 }
 
 should_do_stun_damage(sWeapon, sMeansofDeath, eAttacker) {
-  if(self get_alien_type() == "elite")
+  if(self get_alien_type() == "elite") {
     return false;
+  }
 
-  if(is_true(self.is_burning))
+  if(is_true(self.is_burning)) {
     return false;
+  }
 
   if(isDefined(eAttacker) && isPlayer(eAttacker) && sMeansofDeath != "MOD_MELEE") {
     using_primary = isDefined(sWeapon) && (sWeapon == eAttacker GetCurrentPrimaryWeapon());
@@ -143,8 +150,9 @@ should_do_stun_damage(sWeapon, sMeansofDeath, eAttacker) {
 }
 
 should_melee_pushback() {
-  if(self get_alien_type() == "elite")
+  if(self get_alien_type() == "elite") {
     return false;
+  }
 
   return true;
 }
@@ -166,8 +174,9 @@ registerDamage(iDamage) {
   self.recentDamages[self.damageListIndex] = damageInfo;
   self.damageListIndex++;
 
-  if(self.damageListIndex == level.damageListSize)
+  if(self.damageListIndex == level.damageListSize) {
     self.damageListIndex = 0;
+  }
 }
 
 belowCumulativePainThreshold(eAttacker, sWeapon) {
@@ -186,8 +195,9 @@ getCumulativeDamage() {
   recentCumDamage = 0;
   currentTime = getTime();
   for(i = 0; i < self.recentDamages.size; i++) {
-    if(currentTime - self.recentDamages[i]["time"] < lookBackTime)
+    if(currentTime - self.recentDamages[i]["time"] < lookBackTime) {
       recentCumDamage += self.recentDamages[i]["amount"];
+    }
   }
   return recentCumDamage;
 }
@@ -213,8 +223,9 @@ GetAttackPosition(target, attackDist, timeFromNow) {
 }
 
 AttemptMelee() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
   self ScrAgentBeginMelee(self.enemy);
   return true;
@@ -238,16 +249,18 @@ main() {
   debugTestDome = false;
   debugTestEnvPrototype = false;
 
-  if(should_react_to_downed_enemies())
+  if(should_react_to_downed_enemies()) {
     self thread downed_enemy_monitor();
+  }
 
   while(1) {
-    if(debugTestDome)
+    if(debugTestDome) {
       self alien_test_loop();
-    else if(debugTestEnvPrototype)
+    } else if(debugTestEnvPrototype) {
       self alien_test_jump();
-    else
+    } else {
       self alien_main_loop();
+    }
   }
 }
 
@@ -354,16 +367,18 @@ react_to_attractor_flare() {
     self ScrAgentSetGoalRadius(64.0);
     self waittill("goal_reached");
 
-    while(isDefined(self.attractor_flare))
+    while(isDefined(self.attractor_flare)) {
       wait 0.2;
+    }
   }
 }
 
 get_flare_node() {
   attractNodes = GetNodesInRadius(self.attractor_flare.origin, 300, 50, 128, "path");
 
-  if(attractNodes.size == 0)
+  if(attractNodes.size == 0) {
     return undefined;
+  }
 
   inBetweenNodes = [];
   flareToAlien = VectorNormalize(self.origin - self.attractor_flare.origin);
@@ -376,8 +391,9 @@ get_flare_node() {
     inBetweenNodes[inBetweenNodes.size] = possibleNode;
   }
 
-  if(inBetweenNodes.size == 0)
+  if(inBetweenNodes.size == 0) {
     return attractNodes[RandomInt(attractNodes.size)];
+  }
 
   return inBetweenNodes[RandomInt(inBetweenNodes.size)];
 }
@@ -492,8 +508,9 @@ default_alien_combat(enemy) {
       self alien_attack_enemy(enemy);
       self clear_attacking(enemy);
 
-      if(should_i_retreat(enemy))
+      if(should_i_retreat(enemy)) {
         alien_retreat(enemy);
+      }
     } else {
       alien_wait_for_combat(enemy);
     }
@@ -501,10 +518,11 @@ default_alien_combat(enemy) {
 }
 
 alien_attack_enemy(enemy) {
-  if(use_synched_attack(enemy))
+  if(use_synched_attack(enemy)) {
     self alien_synch_attack_enemy(enemy);
-  else
+  } else {
     self alien_attack_sequence(enemy);
+  }
 }
 
 use_synched_attack(enemy) {
@@ -553,8 +571,9 @@ alien_synch_attack_enemy(enemy) {
 
   hasValidSynchAttacker = (IsAlive(enemy.synch_attack_setup.primary_attacker) && enemy.synch_attack_setup.primary_attacker != self);
   canbeAttacked = true;
-  if(isDefined(enemy.synch_attack_setup.can_synch_attack_func))
+  if(isDefined(enemy.synch_attack_setup.can_synch_attack_func)) {
     canbeAttacked = enemy[[enemy.synch_attack_setup.can_synch_attack_func]]();
+  }
 
   if(!hasValidSynchAttacker && canbeAttacked) {
     enemy.synch_attack_setup.primary_attacker = self;
@@ -656,10 +675,10 @@ alien_attack(enemy, attack_type) {
 
       break;
     default:
-      if(isDefined(level.alien_attack_override_func))
-        if([[level.alien_attack_override_func]](enemy, attack_type)) {
-          break;
-        }
+      if(isDefined(level.alien_attack_override_func)) {
+        if([[level.alien_attack_override_func]](enemy, attack_type)) {}
+        break;
+      }
 
       iprintln("Invalid alien attack_type: " + attack_type);
       wait 1;
@@ -684,8 +703,9 @@ handle_badpath(enemy) {
     return;
   }
   if(self.badpathcount > 3) {
-    if(attempt_bad_path_move_nearby_node(enemy))
+    if(attempt_bad_path_move_nearby_node(enemy)) {
       self.badpathcount = 0;
+    }
 
     return;
   }
@@ -693,19 +713,22 @@ handle_badpath(enemy) {
   if(!should_bad_path_melee()) {
     return;
   }
-  if(self.badpathcount == 1)
+  if(self.badpathcount == 1) {
     moveSuccess = attempt_badpath_move_to_node(enemy, 0, ALIEN_MIN_MELEE_DISTANCE, MAX_BADPATH_SWIPE_HEIGHT_DIFFERENCE);
-  else
+  } else {
     moveSuccess = false;
+  }
 
   if(!moveSuccess) {
     moveSuccess = attempt_badpath_move_to_node(enemy, ALIEN_MIN_MELEE_DISTANCE, MAX_BADPATH_MELEE_NODE_DISTANCE, MAX_BADPATH_JUMP_HEIGHT_DIFFERENCE);
-    if(!moveSuccess)
+    if(!moveSuccess) {
       return;
+    }
   }
 
-  if(attempt_bad_path_melee(enemy))
+  if(attempt_bad_path_melee(enemy)) {
     self.badpathcount = 0;
+  }
 }
 
 can_attempt_badpath_move() {
@@ -732,8 +755,9 @@ attempt_bad_path_move_nearby_node(enemy) {
   MAX_JUMP_NODE_DISTANCE = 512;
 
   nodes = GetNodesInRadius(self.origin, MAX_JUMP_NODE_DISTANCE, MIN_JUMP_NODE_DISTANCE, 256, "node_pathnode");
-  if(nodes.size == 0)
+  if(nodes.size == 0) {
     return false;
+  }
 
   self ScrAgentSetGoalPos(self.origin);
   self ScrAgentSetGoalRadius(2048);
@@ -754,8 +778,9 @@ attempt_bad_path_melee(enemy) {
   heightDifference = abs(self.origin[2] - enemy.origin[2]);
   distanceToEnemy = Distance2D(self.origin, enemy.origin);
 
-  if(distanceToEnemy > MAX_BADPATH_MELEE_NODE_DISTANCE)
+  if(distanceToEnemy > MAX_BADPATH_MELEE_NODE_DISTANCE) {
     return false;
+  }
 
   canSeeEnemy = self AgentCanSeeSentient(enemy);
 
@@ -851,8 +876,9 @@ set_attacking(enemy) {
 }
 
 clear_attacking(enemy) {
-  if(!isDefined(enemy.current_attackers))
+  if(!isDefined(enemy.current_attackers)) {
     enemy.current_attackers = [];
+  }
 
   enemy.current_attackers = array_remove(enemy.current_attackers, self);
   self.attacking_player = false;
@@ -871,8 +897,9 @@ clean_up_attackers() {
 }
 
 should_i_attack(enemy) {
-  if(!is_idle_state_locked() && self.stateLocked)
+  if(!is_idle_state_locked() && self.stateLocked) {
     return false;
+  }
 
   enemy clean_up_attackers();
 
@@ -881,8 +908,9 @@ should_i_attack(enemy) {
 
 should_i_retreat(enemy) {
   if(isDefined(level.dlc_alien_can_retreat_override_func)) {
-    if(![[level.dlc_alien_can_retreat_override_func]](enemy))
+    if(![[level.dlc_alien_can_retreat_override_func]](enemy)) {
       return false;
+    }
   }
 
   switch (get_alien_type()) {
@@ -924,8 +952,9 @@ find_attacker_to_replace(enemy, current_attacker_value) {
 
 get_current_attacker_value(enemy) {
   attackerValue = 0.0;
-  if(!isDefined(enemy.current_attackers))
+  if(!isDefined(enemy.current_attackers)) {
     return attackerValue;
+  }
 
   foreach(attacker in enemy.current_attackers) {
     if(!IsAlive(attacker)) {
@@ -953,8 +982,9 @@ alien_noncombat() {
 
 alien_pet_follow() {
   follow_dist = 768;
-  if(isDefined(self.petFollowDist))
+  if(isDefined(self.petFollowDist)) {
     follow_dist = self.petFollowDist;
+  }
 
   follow_dist_sqr = follow_dist * follow_dist;
 
@@ -1055,10 +1085,12 @@ alien_retreat(enemy) {
   retreat_type = "elevated_delay";
   retreat_direction = "alien_forward";
 
-  if(!isDefined(retreat_type) || retreat_type == "")
+  if(!isDefined(retreat_type) || retreat_type == "") {
     retreat_type = "randomize";
-  if(!isDefined(retreat_direction) || retreat_direction == "")
+  }
+  if(!isDefined(retreat_direction) || retreat_direction == "") {
     retreat_direction = "alien_forward";
+  }
 
   if(retreat_type == "randomize") {
     random_array = ["elevated_delay", "cover", "cover", "cover"];
@@ -1242,10 +1274,11 @@ cover_retreat(enemy, direction) {
 }
 
 get_cover_node(enemy, filters) {
-  if(GetDvarInt("alien_cover_node_retreat") == 1)
+  if(GetDvarInt("alien_cover_node_retreat") == 1) {
     nodes = GetNodesInRadius(enemy.origin, 800, 400, 256, "cover stand");
-  else
+  } else {
     nodes = GetNodesInRadius(enemy.origin, 800, 400, 256);
+  }
 
   if(nodes.size == 0) {
     return undefined;
@@ -1461,15 +1494,17 @@ get_retreat_node_rated(enemy, filters, nodes) {
   not_recently_used_weight = filters["not_recently_used_weight"];
   random_weight = filters["random_weight"];
 
-  if(isDefined(filters["recently_used_time_limit"]))
+  if(isDefined(filters["recently_used_time_limit"])) {
     recently_used_time_limit = filters["recently_used_time_limit"];
-  else
+  } else {
     recently_used_time_limit = RECENT_TIME_LIMIT;
+  }
 
-  if(isDefined(filters["test_offset"]))
+  if(isDefined(filters["test_offset"])) {
     test_offset = filters["test_offset"];
-  else
+  } else {
     test_offset = (0.0, 0.0, 0.0);
+  }
 
   enemy_forward_vector = undefined;
   if(isPlayer(enemy)) {
@@ -1638,8 +1673,9 @@ do_initial_approach(enemy) {
   self thread jogWhenCloseToEnemy(enemy);
 
   approach_node = undefined;
-  if(DistanceSquared(self.origin, enemy.origin) > ALIEN_APPROACH_DIST_SQR)
+  if(DistanceSquared(self.origin, enemy.origin) > ALIEN_APPROACH_DIST_SQR) {
     approach_node = approach_enemy(ALIEN_LEAP_MELEE_DISTANCE_MAX, enemy, 3);
+  }
 
   return approach_node;
 }
@@ -1652,8 +1688,9 @@ jogWhenCloseToEnemy(enemy) {
   enemy endon("disconnect");
   level endon("game_ended");
 
-  if(distanceSquared(self.origin, enemy.origin) >= ALIEN_JOG_CHANGE_DISTANCE * ALIEN_JOG_CHANGE_DISTANCE)
+  if(distanceSquared(self.origin, enemy.origin) >= ALIEN_JOG_CHANGE_DISTANCE * ALIEN_JOG_CHANGE_DISTANCE) {
     self set_alien_movemode("run");
+  }
 
   while(true) {
     wait(1.0);
@@ -1682,10 +1719,11 @@ backToRunOnDamage(whizby) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(whizby) && whizby)
+  if(isDefined(whizby) && whizby) {
     self waittill_any("damage", "start_attack", "bulletwhizby");
-  else
+  } else {
     self waittill_any("damage", "start_attack");
+  }
 
   self set_alien_movemode("run");
   self.moveplaybackrate = self.defaultmoveplaybackrate;
@@ -1710,8 +1748,9 @@ sneak_up_on(enemy) {
 
 in_front_players() {
   foreach(player in level.players) {
-    if(in_front_of(player))
+    if(in_front_of(player)) {
       return true;
+    }
   }
   return false;
 }
@@ -1723,8 +1762,9 @@ in_front_of(enemy) {
   enemy_forward = anglesToForward(enemy.angles);
   dot_product = VectorDot(enemy_to_self, enemy_forward);
 
-  if(dot_product < 0)
+  if(dot_product < 0) {
     return false;
+  }
 
   inside_front_cone = dot_product > CONE_LIMIT;
   return inside_front_cone;
@@ -1732,12 +1772,14 @@ in_front_of(enemy) {
 
 go_for_swipe(enemy, approach_node) {
   melee_distance = GetDvarInt("alien_melee_distance");
-  if(melee_distance < ALIEN_MIN_MELEE_DISTANCE)
+  if(melee_distance < ALIEN_MIN_MELEE_DISTANCE) {
     melee_distance = ALIEN_MIN_MELEE_DISTANCE;
+  }
 
   self run_near_enemy(melee_distance, enemy);
-  if(!self AgentCanSeeSentient(enemy))
+  if(!self AgentCanSeeSentient(enemy)) {
     return "none";
+  }
 
   return "swipe";
 }
@@ -1942,8 +1984,9 @@ HandleInSolid() {
 }
 
 approach_enemy(max_distance, enemy, maxNodeTries) {
-  if(max_distance < 32)
+  if(max_distance < 32) {
     max_distance = 32;
+  }
 
   approachNode = get_approach_node(enemy);
   maxDistanceSq = max_distance * max_distance;
@@ -2033,8 +2076,9 @@ wait_till_distance_from_enemy(max_distance, enemy) {
 }
 
 get_distance_squared_to_enemy(enemy) {
-  if(isPlayer(enemy) && enemy IsOnLadder())
+  if(isPlayer(enemy) && enemy IsOnLadder()) {
     return Distance2DSquared(self.origin, enemy.origin);
+  }
 
   return DistanceSquared(self.origin, enemy.origin);
 }
@@ -2044,26 +2088,30 @@ run_near_enemy(max_distance, enemy, approach_node) {
     max_distance = 32;
   }
 
-  if(!isDefined(approach_node) || !run_to_approach_node(approach_node, max_distance, enemy))
+  if(!isDefined(approach_node) || !run_to_approach_node(approach_node, max_distance, enemy)) {
     run_to_enemy(max_distance, enemy);
+  }
 }
 
 get_offset_location_from_enemy(enemy, minOffsetDistance, maxOffsetDistance, minOffsetYaw, maxOffsetYaw) {
-  if(GetDvarInt("alien_retreat_towards_spawn") == 1)
+  if(GetDvarInt("alien_retreat_towards_spawn") == 1) {
     targetLocation = self.spawnOrigin;
-  else
+  } else {
     targetLocation = self.origin;
+  }
 
   flatEnemyToTarget = VectorNormalize((targetLocation - enemy.origin) * (1, 1, 0));
   yawValue = RandomIntRange(minOffsetYaw, maxOffsetYaw);
-  if(cointoss())
+  if(cointoss()) {
     yawValue *= -1;
+  }
 
   rotateAngles = (0, yawValue, 0);
   offsetDir = RotateVector(flatEnemyToTarget, rotateAngles);
   offsetDistance = minOffsetDistance;
-  if(minOffsetDistance < maxOffsetDistance)
+  if(minOffsetDistance < maxOffsetDistance) {
     offsetDistance = RandomIntRange(minOffsetDistance, maxOffsetDistance);
+  }
 
   return enemy.origin + offsetDir * offsetDistance;
 }
@@ -2073,14 +2121,16 @@ get_approach_node(enemy) {
   MAX_OFFSET_YAW = 30;
 
   approachDistance = GetDvarInt("alien_melee_distance");
-  if(approachDistance < ALIEN_MIN_MELEE_DISTANCE)
+  if(approachDistance < ALIEN_MIN_MELEE_DISTANCE) {
     approachDistance = ALIEN_MIN_MELEE_DISTANCE;
+  }
 
   approachLocation = get_offset_location_from_enemy(enemy, approachDistance, approachDistance, MIN_OFFSET_YAW, MAX_OFFSET_YAW);
   nodes = GetNodesInRadius(approachLocation, 150, 0, 128, "path");
 
-  if(nodes.size == 0)
+  if(nodes.size == 0) {
     nodes = GetNodesInRadius(approachLocation, 300, 150, 128, "path");
+  }
 
   filters = [];
   filters["direction"] = "override";

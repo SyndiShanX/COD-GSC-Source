@@ -253,8 +253,9 @@ _id_AB70(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   if(isDefined(level._id_210A._id_32D5)) {
     if(isDefined(var_1) && isPlayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
-      if(isDefined(var_1._id_2110) && var_12) {} else if(isDefined(var_10._id_2110))
+      if(isDefined(var_1._id_2110) && var_12) {} else if(isDefined(var_10._id_2110)) {
         scripts\mp\gametypes\obj_ball::_id_FD66("neutral", 1, 0);
+      }
 
       if(var_1.pers["team"] == level._id_210A._id_ADAE && var_1 != level._id_210A._id_32D5) {
         var_13 = distancesquared(level._id_210A._id_32D5.origin, var_11);

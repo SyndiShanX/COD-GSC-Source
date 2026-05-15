@@ -737,9 +737,9 @@ _id_C35B(var_0) {
   level endon("game_ended");
   var_0._id_F8FE = self;
 
-  if(isPlayer(var_0) && !var_0 scripts\mp\utility\player::_id_8ACE()) {} else if(isDefined(var_0._id_F904))
+  if(isPlayer(var_0) && !var_0 scripts\mp\utility\player::_id_8ACE()) {} else if(isDefined(var_0._id_F904)) {
     var_0._id_2525 = var_0._id_0094;
-  else if(isDefined(var_0.owner) && isalive(var_0.owner)) {
+  } else if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     var_0.owner thread scripts\mp\rank::_id_CC00("turret_marked_by_remote_uav");
   }
 

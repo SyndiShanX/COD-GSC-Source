@@ -52,8 +52,9 @@ monitorFlash() {
     if(isDefined(self.owner) && isDefined(attacker) && (attacker == self.owner)) {
       continue;
     }
-    if(!isDefined(extraDuration))
+    if(!isDefined(extraDuration)) {
       extraDuration = 0;
+    }
 
     hurtattacker = false;
     hurtvictim = true;
@@ -69,10 +70,11 @@ monitorFlash() {
       continue;
     }
     rumbleduration = undefined;
-    if(duration > 2)
+    if(duration > 2) {
       rumbleduration = 0.75;
-    else
+    } else {
       rumbleduration = 0.25;
+    }
 
     assert(isDefined(self.team));
     if(level.teamBased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
@@ -90,8 +92,9 @@ monitorFlash() {
       }
     } else if(isDefined(attacker)) {
       attacker notify("flash_hit");
-      if(attacker != self)
+      if(attacker != self) {
         attacker maps\mp\gametypes\_missions::processChallenge("ch_indecentexposure");
+      }
     }
 
     if(hurtvictim && isDefined(self)) {
@@ -102,8 +105,9 @@ monitorFlash() {
 
         victim = self;
         if(isPlayer(attacker) && attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) {
-          if(!victim maps\mp\perks\_perkfunctions::isPainted())
+          if(!victim maps\mp\perks\_perkfunctions::isPainted()) {
             attacker maps\mp\gametypes\_missions::processChallenge("ch_paint_pro");
+          }
 
           victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
         }
@@ -116,10 +120,12 @@ monitorFlash() {
 }
 
 applyFlash(duration, rumbleduration) {
-  if(!isDefined(self.flashDuration) || duration > self.flashDuration)
+  if(!isDefined(self.flashDuration) || duration > self.flashDuration) {
     self.flashDuration = duration;
-  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration)
+  }
+  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration) {
     self.flashRumbleDuration = rumbleduration;
+  }
 
   wait .05;
 

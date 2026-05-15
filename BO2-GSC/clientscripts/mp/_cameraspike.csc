@@ -12,14 +12,17 @@ init() {
   level._effect["cameraspike_friendly_light"] = loadfx("misc/fx_equip_light_green");
   level._client_flag_callbacks["scriptmover"][10] = ::spawned;
 
-  if(!isDefined(level.cameraspikes))
+  if(!isDefined(level.cameraspikes)) {
     level.cameraspikes = [];
+  }
 
-  if(!isDefined(level.cameraspikeactive))
+  if(!isDefined(level.cameraspikeactive)) {
     level.cameraspikeactive = [];
+  }
 
-  if(!isDefined(level.cameraspikehandle))
+  if(!isDefined(level.cameraspikehandle)) {
     level.cameraspikehandle = 0;
+  }
 
   level thread updatecameraspikes();
 }
@@ -38,8 +41,9 @@ playerspawned() {
     localplayers = level.localplayers;
 
     for(i = 0; i < localplayers.size; i++) {
-      if(localplayers[i] == self)
+      if(localplayers[i] == self) {
         self resetcameraspikestate(i);
+      }
     }
 
     self waittill("respawn");
@@ -47,8 +51,9 @@ playerspawned() {
 }
 
 setcameraspikeactive(localclientnum, active) {
-  if(!isDefined(level.cameraspikeactive[localclientnum]))
+  if(!isDefined(level.cameraspikeactive[localclientnum])) {
     level.cameraspikeactive[localclientnum] = 0;
+  }
 
   wasactive = level.cameraspikeactive[localclientnum];
   level.cameraspikeactive[localclientnum] = active;
@@ -140,15 +145,17 @@ updatecameraspikes() {
               setextracamorigin(j, level.cameraspikes[i].cameraent gettagorigin("tag_cam"));
               setextracamangles(j, level.cameraspikes[i].cameraent.angles);
 
-              if(isDefined(level.cameraspikes[i].cameraent.stunned) && level.cameraspikes[i].cameraent.stunned)
+              if(isDefined(level.cameraspikes[i].cameraent.stunned) && level.cameraspikes[i].cameraent.stunned) {
                 activatecamerastatic(j, 0.25);
+              }
             }
           }
         }
       }
 
-      for(i = 0; i < localplayers.size; i++)
+      for(i = 0; i < localplayers.size; i++) {
         setcameraspikeactive(i, cameraspikeenabled[i]);
+      }
     }
 
     cameraspikecountprevious = level.cameraspikes.size;

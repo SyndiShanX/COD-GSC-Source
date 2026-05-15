@@ -32,8 +32,9 @@ main() {
 
   weapon_list_debug();
 
-  if(!isDefined(level.visionThermalDefault))
+  if(!isDefined(level.visionThermalDefault)) {
     level.visionThermalDefault = "cheat_bw";
+  }
   VisionSetThermal(level.visionThermalDefault);
 
   VisionSetPain("near_death");
@@ -44,20 +45,25 @@ main() {
 
   star(4 + RandomInt(4));
 
-  if(getDvar("debug") == "")
+  if(getDvar("debug") == "") {
     setDvar("debug", "0");
+  }
 
-  if(getDvar("fallback") == "")
+  if(getDvar("fallback") == "") {
     setDvar("fallback", "0");
+  }
 
-  if(getDvar("angles") == "")
+  if(getDvar("angles") == "") {
     setDvar("angles", "0");
+  }
 
-  if(getDvar("noai") == "")
+  if(getDvar("noai") == "") {
     setDvar("noai", "off");
+  }
 
-  if(getDvar("scr_RequiredMapAspectratio") == "")
+  if(getDvar("scr_RequiredMapAspectratio") == "") {
     setDvar("scr_RequiredMapAspectratio", "1");
+  }
 
   setDvar("ac130_player_num", -1);
 
@@ -85,13 +91,15 @@ main() {
   level.run_noself_call_after_wait_array = [];
   level.do_wait_endons_array = [];
   level.abort_wait_any_func_array = [];
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(getDvar("mapname"));
+  }
 
   maps\_specialops::specialops_remove_unused();
 
-  if(is_specialop() && (IsSplitScreen() || (getDvar("coop") == "1")))
+  if(is_specialop() && (IsSplitScreen() || (getDvar("coop") == "1"))) {
     setDvar("solo_play", "");
+  }
 
   level.dirtEffectMenu["center"] = "dirt_effect_center";
   level.dirtEffectMenu["left"] = "dirt_effect_left";
@@ -115,8 +123,9 @@ main() {
     array_levelthread(flags, ::check_flag_for_stat_tracking);
   }
 
-  if(getDvar("xp_enable", "0") == "")
+  if(getDvar("xp_enable", "0") == "") {
     setDvar("xp_enable", "0");
+  }
 
   if(string_starts_with(level.script, "co_")) {
     setDvar("money_enable", "1");
@@ -129,13 +138,15 @@ main() {
     setDvar("in_game_reward", "0");
   }
 
-  if(getDvar("money_sharing") == "")
+  if(getDvar("money_sharing") == "") {
     setDvar("money_sharing", "1");
+  }
 
   init_level_players();
 
-  if(is_coop())
+  if(is_coop()) {
     maps\_coop::main();
+  }
 
   if(IsSplitScreen()) {
     SetSavedDvar("cg_fovScale", "0.75");
@@ -169,10 +180,12 @@ main() {
   level.dronestruct = [];
 
   foreach(index, struct in level.struct) {
-    if(!isDefined(struct.targetname))
+    if(!isDefined(struct.targetname)) {
       continue;
-    if(struct.targetname == "delete_on_load")
+    }
+    if(struct.targetname == "delete_on_load") {
       level.struct[index] = undefined;
+    }
   }
 
   struct_class_init();
@@ -200,8 +213,9 @@ main() {
   level.getNodeFunction = ::GetNode;
   level.getNodeArrayFunction = ::GetNodeArray;
 
-  if(!isDefined(level._notetrackFX))
+  if(!isDefined(level._notetrackFX)) {
     level._notetrackFX = [];
+  }
 
   foreach(player in level.players) {
     player.maxhealth = level.player.health;
@@ -292,8 +306,9 @@ main() {
   level waittill("eternity");
 }
 
-if(string_starts_with(level.script, "so_") && !is_specialop())
+if(string_starts_with(level.script, "so_") && !is_specialop()) {
   AssertMsg("Attempted to run a Special Op, but not in Special Ops mode. Probably need to add +set specialops 1 to Launcher Custom Command Line Options.");
+}
 
 maps\_names::setup_names();
 
@@ -334,14 +349,16 @@ if(getDvar("g_connectpaths") == "2") {
 PrintLn("level.script: ", level.script);
 
 maps\_autosave::main();
-if(!isDefined(level.animSounds))
+if(!isDefined(level.animSounds)) {
   thread maps\_debug::init_animSounds();
+}
 maps\_anim::init();
 maps\_ambient::init();
 anim.useFacialAnims = false;
 
-if(!isDefined(level.MissionFailed))
+if(!isDefined(level.MissionFailed)) {
   level.MissionFailed = false;
+}
 
 maps\_loadout::init_loadout();
 
@@ -433,13 +450,15 @@ thread load_friendlies();
 
 thread maps\_animatedmodels::main();
 thread maps\_cagedchickens::initChickens();
-if(is_coop())
+if(is_coop()) {
   thread maps\_loadout::coop_gamesetup_menu();
+}
 thread weapon_ammo();
 thread filmy();
 
-if(is_specialop())
+if(is_specialop()) {
   maps\_specialops::specialops_init();
+}
 assert(isDefined(level.missionsettings) && isDefined(level.missionsettings.levels));
 assert(isDefined(level.script));
 
@@ -516,8 +535,9 @@ get_load_trigger_funcs() {
   trigger_funcs["trigger_cansee"] = ::trigger_cansee;
   trigger_funcs["autosave_immediate"] = maps\_autosave::trigger_autosave_immediate;
   trigger_funcs["flag_set"] = ::flag_set_trigger;
-  if(is_coop())
+  if(is_coop()) {
     trigger_funcs["flag_set_coop"] = ::flag_set_coop_trigger;
+  }
   trigger_funcs["flag_set_player"] = ::flag_set_player_trigger;
   trigger_funcs["flag_unset"] = ::flag_unset_trigger;
   trigger_funcs["flag_clear"] = ::flag_unset_trigger;
@@ -566,8 +586,9 @@ init_script_triggers() {
 
   if(level.start_point != "no_game") {
     for(i = 0; i < triggers.size; i++) {
-      if(triggers[i].spawnflags & 32)
+      if(triggers[i].spawnflags & 32) {
         thread maps\_spawner::trigger_spawner(triggers[i]);
+      }
     }
   }
 
@@ -606,50 +627,65 @@ init_script_triggers() {
     triggers = getEntArray(triggertype, "code_classname");
 
     for(i = 0; i < triggers.size; i++) {
-      if(isDefined(triggers[i].script_flag_true))
+      if(isDefined(triggers[i].script_flag_true)) {
         level thread script_flag_true_trigger(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_flag_false))
+      if(isDefined(triggers[i].script_flag_false)) {
         level thread script_flag_false_trigger(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_autosavename) || isDefined(triggers[i].script_autosave))
+      if(isDefined(triggers[i].script_autosavename) || isDefined(triggers[i].script_autosave)) {
         level thread maps\_autosave::autoSaveNameThink(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_fallback))
+      if(isDefined(triggers[i].script_fallback)) {
         level thread maps\_spawner::fallback_think(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_mgTurretauto))
+      if(isDefined(triggers[i].script_mgTurretauto)) {
         level thread maps\_mgturret::mgTurret_auto(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_killspawner))
+      if(isDefined(triggers[i].script_killspawner)) {
         level thread maps\_spawner::kill_spawner(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_kill_vehicle_spawner))
+      if(isDefined(triggers[i].script_kill_vehicle_spawner)) {
         level thread maps\_vehicle::kill_vehicle_spawner(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_emptyspawner))
+      if(isDefined(triggers[i].script_emptyspawner)) {
         level thread maps\_spawner::empty_spawner(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_prefab_exploder))
+      if(isDefined(triggers[i].script_prefab_exploder)) {
         triggers[i].script_exploder = triggers[i].script_prefab_exploder;
+      }
 
-      if(isDefined(triggers[i].script_exploder))
+      if(isDefined(triggers[i].script_exploder)) {
         level thread maps\_load::exploder_load(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].ambient))
+      if(isDefined(triggers[i].ambient)) {
         triggers[i] thread maps\_ambient::ambient_trigger();
+      }
 
-      if(isDefined(triggers[i].script_triggered_playerseek))
+      if(isDefined(triggers[i].script_triggered_playerseek)) {
         level thread triggered_playerseek(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_bctrigger))
+      if(isDefined(triggers[i].script_bctrigger)) {
         level thread bctrigger(triggers[i]);
+      }
 
-      if(isDefined(triggers[i].script_trigger_group))
+      if(isDefined(triggers[i].script_trigger_group)) {
         triggers[i] thread trigger_group();
+      }
 
-      if(isDefined(triggers[i].script_random_killspawner))
+      if(isDefined(triggers[i].script_random_killspawner)) {
         level thread maps\_spawner::random_killspawner(triggers[i]);
+      }
 
       if(isDefined(triggers[i].targetname)) {
         targetname = triggers[i].targetname;
@@ -662,8 +698,9 @@ init_script_triggers() {
 }
 
 trigger_ambient(trigger) {
-  if(!isDefined(trigger.ambient))
+  if(!isDefined(trigger.ambient)) {
     return;
+  }
   trigger thread maps\_ambient::ambient_trigger();
 }
 
@@ -695,8 +732,9 @@ slideTriggerPlayerThink(trig) {
   }
   self endon("death");
 
-  if(SoundExists("SCN_cliffhanger_player_hillslide"))
+  if(SoundExists("SCN_cliffhanger_player_hillslide")) {
     self playSound("SCN_cliffhanger_player_hillslide");
+  }
 
   self BeginSliding();
   while(1) {
@@ -705,8 +743,9 @@ slideTriggerPlayerThink(trig) {
     }
     wait .05;
   }
-  if(isDefined(level.end_slide_delay))
+  if(isDefined(level.end_slide_delay)) {
     wait(level.end_slide_delay);
+  }
   self EndSliding();
 }
 
@@ -771,19 +810,23 @@ weapon_ammo() {
       }
 
       if(change_ammo) {
-        if(!isDefined(clip))
+        if(!isDefined(clip)) {
           AssertMsg("weapon: " + weap.classname + " " + weap.origin + " sets script_ammo_extra but not script_ammo_clip");
-        if(!isDefined(extra))
+        }
+        if(!isDefined(extra)) {
           AssertMsg("weapon: " + weap.classname + " " + weap.origin + " sets script_ammo_clip but not script_ammo_extra");
+        }
 
         weap ItemWeaponSetAmmo(clip, extra);
       }
 
       if(change_alt_ammo) {
-        if(!isDefined(alt_clip))
+        if(!isDefined(alt_clip)) {
           AssertMsg("weapon: " + weap.classname + " " + weap.origin + " sets script_ammo_alt_extra but not script_ammo_alt_clip");
-        if(!isDefined(alt_extra))
+        }
+        if(!isDefined(alt_extra)) {
           AssertMsg("weapon: " + weap.classname + " " + weap.origin + " sets script_ammo_alt_clip but not script_ammo_alt_extra");
+        }
 
         weap ItemWeaponSetAmmo(alt_clip, alt_extra, 0, 1);
       }
@@ -801,8 +844,9 @@ trigger_group() {
 
 trigger_group_remove() {
   level waittill("trigger_group_" + self.script_trigger_group, trigger);
-  if(self != trigger)
+  if(self != trigger) {
     self Delete();
+  }
 }
 
 star(total) {
@@ -810,19 +854,23 @@ star(total) {
   PrintLn(" ");
   PrintLn(" ");
   for(i = 0; i < total; i++) {
-    for(z = total - i; z > 1; z--)
+    for(z = total - i; z > 1; z--) {
       Print(" ");
+    }
     Print(" * ");
-    for(z = 0; z < i; z++)
+    for(z = 0; z < i; z++) {
       Print(" ** ");
+    }
     PrintLn("");
   }
   for(i = total - 2; i > -1; i--) {
-    for(z = total - i; z > 1; z--)
+    for(z = total - i; z > 1; z--) {
       Print(" ");
+    }
     Print(" * ");
-    for(z = 0; z < i; z++)
+    for(z = 0; z < i; z++) {
       Print(" ** ");
+    }
     PrintLn("");
   }
 
@@ -835,8 +883,9 @@ exploder_load(trigger) {
   level endon("killexplodertridgers" + trigger.script_exploder);
   trigger waittill("trigger");
   if(isDefined(trigger.script_chance) && RandomFloat(1) > trigger.script_chance) {
-    if(!trigger script_delay())
+    if(!trigger script_delay()) {
       wait 4;
+    }
 
     level thread exploder_load(trigger);
     return;
@@ -884,14 +933,16 @@ usedAnimations() {
     }
 
     PrintLn("^d -- -- Used animations for ", animname, "^d: ", level.completedAnims[animname].size, "^d -- -- -- -- -- - ");
-    for(i = 0; i < level.completedAnims[animname].size; i++)
+    for(i = 0; i < level.completedAnims[animname].size; i++) {
       PrintLn(level.completedAnims[animname][i]);
+    }
   }
 }
 
 badplace_think(badplace) {
-  if(!isDefined(level.badPlaces))
+  if(!isDefined(level.badPlaces)) {
     level.badPlaces = 0;
+  }
 
   level.badPlaces++;
   BadPlace_Cylinder("badplace" + level.badPlaces, -1, badplace.origin, badplace.radius, 1024);
@@ -904,8 +955,9 @@ setup_individual_exploder(ent) {
   }
 
   targetname = ent.targetname;
-  if(!isDefined(targetname))
+  if(!isDefined(targetname)) {
     targetname = "";
+  }
 
   level.exploders[exploder_num][level.exploders[exploder_num].size] = ent;
   if(exploder_model_starts_hidden(ent)) {
@@ -916,16 +968,18 @@ setup_individual_exploder(ent) {
   if(exploder_model_is_damaged_model(ent)) {
     ent Hide();
     ent NotSolid();
-    if(isDefined(ent.script_disconnectpaths))
+    if(isDefined(ent.script_disconnectpaths)) {
       ent ConnectPaths();
+    }
     return;
   }
 
   if(exploder_model_is_chunk(ent)) {
     ent Hide();
     ent NotSolid();
-    if(isDefined(ent.spawnflags) && (ent.spawnflags & 1))
+    if(isDefined(ent.spawnflags) && (ent.spawnflags & 1)) {
       ent ConnectPaths();
+    }
     return;
   }
 }
@@ -935,12 +989,14 @@ setupExploders() {
 
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
-  for(i = 0; i < smodels.size; i++)
+  for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
+  }
 
   foreach(ent in ents) {
-    if(isDefined(ent.script_prefab_exploder))
+    if(isDefined(ent.script_prefab_exploder)) {
       ent.script_exploder = ent.script_prefab_exploder;
+    }
 
     if(isDefined(ent.script_exploder)) {
       setup_individual_exploder(ent);
@@ -951,33 +1007,40 @@ setupExploders() {
 
   potentialExploders = getEntArray("script_brushmodel", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("script_model", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("item_health", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   acceptableTargetnames = [];
   acceptableTargetnames["exploderchunk visible"] = true;
@@ -1011,15 +1074,17 @@ setupExploders() {
     ent.v["physics"] = exploder.script_physics;
     ent.v["type"] = "exploder";
 
-    if(!isDefined(exploder.script_fxid))
+    if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    else
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
+    }
     ent.v["exploder"] = exploder.script_exploder;
     AssertEx(isDefined(exploder.script_exploder), "Exploder at origin " + exploder.origin + " has no script_exploder");
 
-    if(!isDefined(ent.v["delay"]))
+    if(!isDefined(ent.v["delay"])) {
       ent.v["delay"] = 0;
+    }
 
     if(isDefined(exploder.target)) {
       get_ent = getEntArray(ent.v["target"], "targetname")[0];
@@ -1041,10 +1106,11 @@ setupExploders() {
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
     }
 
-    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname]))
+    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    else
+    } else {
       ent.v["exploder_type"] = "normal";
+    }
 
     ent common_scripts\_createfx::post_entity_creation_function();
   }
@@ -1057,8 +1123,9 @@ setup_flag_exploders() {
   exploder_flags = [];
 
   foreach(ent in level.createFXent) {
-    if(ent.v["type"] != "exploder")
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     theFlag = ent.v["flag"];
 
     if(!isDefined(theFlag)) {
@@ -1078,28 +1145,32 @@ setup_flag_exploders() {
 }
 
 exploder_flag_wait(msg) {
-  if(!flag_exist(msg))
+  if(!flag_exist(msg)) {
     flag_init(msg);
+  }
   flag_wait(msg);
 
   foreach(ent in level.createFXent) {
-    if(ent.v["type"] != "exploder")
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     theFlag = ent.v["flag"];
 
     if(!isDefined(theFlag)) {
       continue;
     }
 
-    if(theFlag != msg)
+    if(theFlag != msg) {
       continue;
+    }
     ent activate_individual_exploder();
   }
 }
 
 nearAIRushesPlayer() {
-  if(IsAlive(level.enemySeekingPlayer))
+  if(IsAlive(level.enemySeekingPlayer)) {
     return;
+  }
   enemy = get_closest_ai(level.player.origin, "bad_guys");
   if(!isDefined(enemy)) {
     return;
@@ -1133,40 +1204,46 @@ playerDamageShellshock() {
       multiplier = level.player.maxhealth / 100;
       scaled_damage = damage * multiplier;
 
-      if(scaled_damage >= 90)
+      if(scaled_damage >= 90) {
         time = 4;
-      else if(scaled_damage >= 50)
+      } else if(scaled_damage >= 50) {
         time = 3;
-      else if(scaled_damage >= 25)
+      } else if(scaled_damage >= 25) {
         time = 2;
-      else if(scaled_damage > 10)
+      } else if(scaled_damage > 10) {
         time = 1;
+      }
 
-      if(time)
+      if(time) {
         level.player ShellShock("default", time);
+      }
     }
   }
 }
 
 map_is_early_in_the_game() {
-  if(isDefined(level.testmap))
+  if(isDefined(level.testmap)) {
     return true;
+  }
 
-  if(isDefined(level.early_level[level.script]))
+  if(isDefined(level.early_level[level.script])) {
     return level.early_level[level.script];
-  else
+  } else {
     return false;
+  }
 }
 
 player_throwgrenade_timer() {
   self endon("death");
   self.lastgrenadetime = 0;
   while(1) {
-    while(!self IsThrowingGrenade())
+    while(!self IsThrowingGrenade()) {
       wait .05;
+    }
     self.lastgrenadetime = GetTime();
-    while(self IsThrowingGrenade())
+    while(self IsThrowingGrenade()) {
       wait .05;
+    }
   }
 }
 
@@ -1174,8 +1251,9 @@ player_special_death_hint() {
   if(is_specialop()) {
     return;
   }
-  if(IsAlive(level.player))
+  if(IsAlive(level.player)) {
     thread maps\_quotes::setDeadQuote();
+  }
 
   level.player thread player_throwgrenade_timer();
 
@@ -1185,13 +1263,15 @@ player_special_death_hint() {
     return;
   }
   if(level.gameskill >= 2) {
-    if(!map_is_early_in_the_game())
+    if(!map_is_early_in_the_game()) {
       return;
+    }
   }
 
   if(cause == "MOD_SUICIDE") {
-    if((level.player.lastgrenadetime - GetTime()) > 3.5 * 1000)
+    if((level.player.lastgrenadetime - GetTime()) > 3.5 * 1000) {
       return;
+    }
     level notify("new_quote_string");
 
     thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
@@ -1208,8 +1288,9 @@ player_special_death_hint() {
     if(level.player vehicle_death(attacker)) {
       return;
     }
-    if(level.player exploding_barrel_death(attacker))
+    if(level.player exploding_barrel_death(attacker)) {
       return;
+    }
   }
 
   if(cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH") {
@@ -1226,11 +1307,13 @@ player_special_death_hint() {
 }
 
 vehicle_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(attacker.code_classname != "script_vehicle")
+  if(attacker.code_classname != "script_vehicle") {
     return false;
+  }
 
   level notify("new_quote_string");
 
@@ -1241,11 +1324,13 @@ vehicle_death(attacker) {
 }
 
 destructible_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.destructible_type))
+  if(!isDefined(attacker.destructible_type)) {
     return false;
+  }
 
   level notify("new_quote_string");
 
@@ -1261,19 +1346,22 @@ destructible_death(attacker) {
 }
 
 exploding_barrel_death_af_chase(attacker) {
-  if(level.script != "af_chase")
+  if(level.script != "af_chase") {
     return false;
+  }
   return exploding_barrel_death(attacker);
 }
 
 exploding_barrel_death(attacker) {
   if(isDefined(level.lastExplodingBarrel)) {
-    if(GetTime() != level.lastExplodingBarrel["time"])
+    if(GetTime() != level.lastExplodingBarrel["time"]) {
       return false;
+    }
 
     d = Distance(self.origin, level.lastExplodingBarrel["origin"]);
-    if(d > level.lastExplodingBarrel["radius"])
+    if(d > level.lastExplodingBarrel["radius"]) {
       return false;
+    }
 
     level notify("new_quote_string");
 
@@ -1356,8 +1444,9 @@ grenade_death_indicator_hudelement() {
 }
 
 special_death_indicator_hudelement(shader, iWidth, iHeight, fDelay) {
-  if(!isDefined(fDelay))
+  if(!isDefined(fDelay)) {
     fDelay = 1.5;
+  }
   wait fDelay;
   overlay = NewHudElem();
   overlay.x = 0;
@@ -1379,8 +1468,9 @@ triggered_playerseek(trig) {
 
   ai = GetAIArray();
   for(i = 0; i < ai.size; i++) {
-    if(!isAlive(ai[i]))
+    if(!isAlive(ai[i])) {
       continue;
+    }
     if((isDefined(ai[i].script_triggered_playerseek)) && (ai[i].script_triggered_playerseek == groupNum)) {
       ai[i].goalradius = 800;
       ai[i] SetGoalEntity(level.player);
@@ -1537,20 +1627,23 @@ waterThink() {
       }
 
       newSpeed = Int(level.default_run_speed - abs(d * 5));
-      if(newSpeed < 50)
+      if(newSpeed < 50) {
         newSpeed = 50;
+      }
       Assert(newSpeed <= 190);
       thread waterThink_rampSpeed(newSpeed);
 
-      if(abs(d) > level.depth_allow_crouch)
+      if(abs(d) > level.depth_allow_crouch) {
         level.player AllowCrouch(false);
-      else
+      } else {
         level.player AllowCrouch(true);
+      }
 
-      if(abs(d) > level.depth_allow_prone)
+      if(abs(d) > level.depth_allow_prone) {
         level.player AllowProne(false);
-      else
+      } else {
         level.player AllowProne(true);
+      }
 
       wait 0.5;
     }
@@ -1569,18 +1662,20 @@ waterThink_rampSpeed(newSpeed) {
   currentSpeed = GetDvarInt("g_speed");
 
   qSlower = false;
-  if(newSpeed < currentSpeed)
+  if(newSpeed < currentSpeed) {
     qSlower = true;
+  }
 
   speedDifference = Int(abs(currentSpeed - newSpeed));
   speedStepSize = Int(speedDifference / numFrames);
 
   for(i = 0; i < numFrames; i++) {
     currentSpeed = GetDvarInt("g_speed");
-    if(qSlower)
+    if(qSlower) {
       SetSavedDvar("g_speed", (currentSpeed - speedStepSize));
-    else
+    } else {
       SetSavedDvar("g_speed", (currentSpeed + speedStepSize));
+    }
     wait 0.05;
   }
   SetSavedDvar("g_speed", newSpeed);
@@ -1596,8 +1691,9 @@ massNodeInitFunctions() {
 
 trigger_unlock(trigger) {
   noteworthy = "not_set";
-  if(isDefined(trigger.script_noteworthy))
+  if(isDefined(trigger.script_noteworthy)) {
     noteworthy = trigger.script_noteworthy;
+  }
 
   target_triggers = getEntArray(trigger.target, "targetname");
 
@@ -1644,10 +1740,12 @@ get_trigger_targs() {
     targets = getEntArray(self.target, "targetname");
     orgs = [];
     foreach(target in targets) {
-      if(target.classname == "script_origin")
+      if(target.classname == "script_origin") {
         orgs[orgs.size] = target;
-      if(IsSubStr(target.classname, "trigger"))
+      }
+      if(IsSubStr(target.classname, "trigger")) {
         triggers[triggers.size] = target;
+      }
     }
 
     targets = getStructArray(self.target, "targetname");
@@ -1660,15 +1758,17 @@ get_trigger_targs() {
     if(orgs.size == 1) {
       org = orgs[0];
       target_origin = org.origin;
-      if(isDefined(org.code_classname))
+      if(isDefined(org.code_classname)) {
         org Delete();
+      }
     }
   }
 
-  if(isDefined(self.targetname))
+  if(isDefined(self.targetname)) {
     AssertEx(isDefined(target_origin), self.targetname + " at " + self.origin + " has no target origin.");
-  else
+  } else {
     AssertEx(isDefined(target_origin), self.classname + " at " + self.origin + " has no target origin.");
+  }
 
   array = [];
   array["triggers"] = triggers;
@@ -1688,8 +1788,9 @@ trigger_visionset_change(trigger) {
   AssertEx(isDefined(trigger.script_visionset), "trigger_multiple_visionset at " + trigger.origin + " has no script_visionset.");
   transition = 3;
 
-  if(isDefined(trigger.script_delay))
+  if(isDefined(trigger.script_delay)) {
     transition = trigger.script_delay;
+  }
 
   while(1) {
     trigger waittill("trigger");
@@ -1715,11 +1816,13 @@ trigger_lookat_think(trigger, endOnFlag) {
 
   if(has_flag) {
     flagName = trigger get_trigger_flag();
-    if(!isDefined(level.flag[flagName]))
+    if(!isDefined(level.flag[flagName])) {
       flag_init(flagName);
+    }
   } else {
-    if(!triggers.size)
+    if(!triggers.size) {
       AssertEx(isDefined(trigger.script_flag) || isDefined(trigger.script_noteworthy), "Trigger_lookat at " + trigger.origin + " has no script_flag! The script_flag is used as a flag that gets set when the trigger is activated.");
+    }
   }
 
   if(endOnFlag && has_flag) {
@@ -1734,8 +1837,9 @@ trigger_lookat_think(trigger, endOnFlag) {
   }
 
   for(;;) {
-    if(has_flag)
+    if(has_flag) {
       flag_clear(flagName);
+    }
 
     trigger waittill("trigger", other);
 
@@ -1744,8 +1848,9 @@ trigger_lookat_think(trigger, endOnFlag) {
 
     while(other IsTouching(trigger)) {
       if(do_sighttrace && !sightTracePassed(other getEye(), target_origin, false, undefined)) {
-        if(has_flag)
+        if(has_flag) {
           flag_clear(flagName);
+        }
         wait(0.5);
         continue;
       }
@@ -1758,21 +1863,25 @@ trigger_lookat_think(trigger, endOnFlag) {
       if(dot >= success_dot) {
         array_thread(triggers, ::send_notify, "trigger");
 
-        if(has_flag)
+        if(has_flag) {
           flag_set(flagName, other);
+        }
 
-        if(endOnFlag)
+        if(endOnFlag) {
           return;
+        }
         wait(2);
       } else {
-        if(has_flag)
+        if(has_flag) {
           flag_clear(flagName);
+        }
       }
 
-      if(do_sighttrace)
+      if(do_sighttrace) {
         wait(0.5);
-      else
+      } else {
         wait 0.05;
+      }
     }
   }
 }
@@ -1790,11 +1899,13 @@ trigger_cansee(trigger) {
 
   if(has_flag) {
     flagName = trigger get_trigger_flag();
-    if(!isDefined(level.flag[flagName]))
+    if(!isDefined(level.flag[flagName])) {
       flag_init(flagName);
+    }
   } else {
-    if(!triggers.size)
+    if(!triggers.size) {
       AssertEx(isDefined(trigger.script_flag) || isDefined(trigger.script_noteworthy), "Trigger_cansee at " + trigger.origin + " has no script_flag! The script_flag is used as a flag that gets set when the trigger is activated.");
+    }
   }
 
   trigger endon("death");
@@ -1809,22 +1920,25 @@ trigger_cansee(trigger) {
   offsets[offsets.size] = (0, 0, range);
 
   for(;;) {
-    if(has_flag)
+    if(has_flag) {
       flag_clear(flagName);
+    }
 
     trigger waittill("trigger", other);
     AssertEx(isPlayer(other), "trigger_cansee currently only supports looking from the player");
 
     while(level.player IsTouching(trigger)) {
       if(!(other cantraceto(target_origin, offsets))) {
-        if(has_flag)
+        if(has_flag) {
           flag_clear(flagName);
+        }
         wait(0.1);
         continue;
       }
 
-      if(has_flag)
+      if(has_flag) {
         flag_set(flagName);
+      }
 
       array_thread(triggers, ::send_notify, "trigger");
       wait(0.5);
@@ -1834,8 +1948,9 @@ trigger_cansee(trigger) {
 
 cantraceto(target_origin, offsets) {
   for(i = 0; i < offsets.size; i++) {
-    if(SightTracePassed(self getEye(), target_origin + offsets[i], true, self))
+    if(SightTracePassed(self getEye(), target_origin + offsets[i], true, self)) {
       return true;
+    }
   }
   return false;
 }
@@ -1866,8 +1981,9 @@ handle_starts() {
   if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
     return;
   }
-  if(!isDefined(level.start_functions))
+  if(!isDefined(level.start_functions)) {
     level.start_functions = [];
+  }
 
   PrecacheMenu("start");
 
@@ -1877,8 +1993,9 @@ handle_starts() {
 
   dvars = get_start_dvars();
 
-  if(isDefined(level.start_point))
+  if(isDefined(level.start_point)) {
     start = level.start_point;
+  }
 
   start_index = 0;
   for(i = 0; i < dvars.size; i++) {
@@ -1900,13 +2017,15 @@ handle_starts() {
   }
 
   if(!isDefined(level.start_point)) {
-    if(isDefined(level.default_start))
+    if(isDefined(level.default_start)) {
       level.start_point = "default";
-    else
-    if(level_has_start_points())
-      level.start_point = level.start_functions[0]["name"];
-    else
+    } else {
+      if(level_has_start_points()) {
+        level.start_point = level.start_functions[0]["name"];
+      }
+    } else {
       level.start_point = "default";
+    }
   }
 
   waittillframeend;
@@ -1917,10 +2036,11 @@ handle_starts() {
       level thread[[level.default_start]]();
     }
   } else {
-    if(isDefined(level.start_loc_string[level.start_point]))
+    if(isDefined(level.start_loc_string[level.start_point])) {
       thread indicate_start(level.start_loc_string[level.start_point]);
-    else
+    } else {
       thread indicate_start(level.start_point);
+    }
 
     start_array = level.start_arrays[level.start_point];
     thread[[start_array["start_func"]]]();
@@ -1950,8 +2070,9 @@ handle_starts() {
 
 already_ran_function(func, previously_run_logic_functions) {
   foreach(logic_function in previously_run_logic_functions) {
-    if(logic_function == func)
+    if(logic_function == func) {
       return true;
+    }
   }
   return false;
 }
@@ -2062,8 +2183,9 @@ display_starts() {
         selected++;
       }
     } else {
-      if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP"))
+      if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP")) {
         up_pressed = false;
+      }
     }
 
     if(!down_pressed) {
@@ -2072,15 +2194,18 @@ display_starts() {
         selected--;
       }
     } else {
-      if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN"))
+      if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN")) {
         down_pressed = false;
+      }
     }
 
-    if(selected < 0)
+    if(selected < 0) {
       selected = dvars.size - 1;
+    }
 
-    if(selected >= dvars.size)
+    if(selected >= dvars.size) {
       selected = 0;
+    }
 
     if(level.player buttonPressed("kp_enter") || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("enter")) {
       if(dvars[selected] == "cancel") {
@@ -2099,19 +2224,23 @@ display_starts() {
 }
 
 start_button_combo() {
-  if(!(level.player buttonPressed("BUTTON_RSTICK")))
+  if(!(level.player buttonPressed("BUTTON_RSTICK"))) {
     return false;
+  }
 
-  if(!(level.player buttonPressed("BUTTON_RSHLDR")))
+  if(!(level.player buttonPressed("BUTTON_RSHLDR"))) {
     return false;
+  }
 
   return true;
 }
 
 devhelp_hudElements(hudarray, alpha) {
-  for(i = 0; i < hudarray.size; i++)
-    for(p = 0; p < 5; p++)
+  for(i = 0; i < hudarray.size; i++) {
+    for(p = 0; p < 5; p++) {
       hudarray[i][p].alpha = alpha;
+    }
+  }
 }
 
 devhelp() {
@@ -2166,8 +2295,9 @@ devhelp() {
       newStr.x = 54 + strOffsetX[p];
       newStr.y = 80 + strOffsetY[p] + i * 15;
       newstr SetText(helptext[i]);
-      if(p > 0)
+      if(p > 0) {
         newStr.color = (0, 0, 0);
+      }
 
       newStrArray[newStrArray.size] = newStr;
     }
@@ -2180,8 +2310,9 @@ devhelp() {
     update = false;
     if(level.player buttonPressed("F1")) {
       devhelp_hudElements(hudarray, 1);
-      while(level.player buttonPressed("F1"))
+      while(level.player buttonPressed("F1")) {
         wait .05;
+      }
     }
     devhelp_hudElements(hudarray, 0);
     wait .05;
@@ -2202,8 +2333,9 @@ flag_set_player_trigger(trigger) {
 
   for(;;) {
     trigger waittill("trigger", other);
-    if(!isPlayer(other))
+    if(!isPlayer(other)) {
       continue;
+    }
     trigger script_delay();
     flag_set(flag);
   }
@@ -2285,10 +2417,12 @@ trigger_damage_player_flag_set(trigger) {
 
   for(;;) {
     trigger waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
-    if(!isPlayer(other))
+    }
+    if(!isPlayer(other)) {
       continue;
+    }
     trigger script_delay();
     flag_set(flag, other);
   }
@@ -2327,8 +2461,9 @@ flag_set_coop_trigger(trigger) {
 flag_unset_trigger(trigger) {
   flag = trigger get_trigger_flag();
 
-  if(!isDefined(level.flag[flag]))
+  if(!isDefined(level.flag[flag])) {
     flag_init(flag);
+  }
   for(;;) {
     trigger waittill("trigger");
     trigger script_delay();
@@ -2346,8 +2481,9 @@ eq_trigger(trigger) {
     for(i = 0; i < ai.size; i++) {
       ai[i][[level.set_eq_func[ai[i] IsTouching(targ)]]]();
     }
-    while(level.player IsTouching(trigger))
+    while(level.player IsTouching(trigger)) {
       wait(0.05);
+    }
 
     ai = GetAIArray("allies");
     for(i = 0; i < ai.size; i++) {
@@ -2396,8 +2532,9 @@ player_touched_eq_trigger(num, trigger) {
     }
   }
 
-  while(self IsTouching(trigger))
+  while(self IsTouching(trigger)) {
     wait(0.05);
+  }
 
   for(r = 0; r < nums.size; r++) {
     self.eq_table[nums[r]] = false;
@@ -2430,8 +2567,9 @@ player_touched_eq_trigger(num, trigger) {
       break;
     }
 
-    if(!shares_trigger)
+    if(!shares_trigger) {
       guy EQOn();
+    }
   }
 }
 
@@ -2454,8 +2592,9 @@ ai_touched_eq_trigger(num, trigger) {
   self.ignoretriggers = true;
   wait(1);
   self.ignoretriggers = false;
-  while(self IsTouching(trigger))
+  while(self IsTouching(trigger)) {
     wait(0.5);
+  }
 
   nums = get_trigger_eq_nums(num);
   for(r = 0; r < nums.size; r++) {
@@ -2485,8 +2624,9 @@ ai_eq() {
     waittillframeend;
     keys = GetArrayKeys(level.ai_array);
     index++;
-    if(index >= keys.size)
+    if(index >= keys.size) {
       index = 0;
+    }
     guy = level.ai_array[keys[index]];
     guy[[level.set_eq_func[SightTracePassed(level.player getEye(), guy getEye(), false, undefined)]]]();
     wait(0.05);
@@ -2560,10 +2700,12 @@ trigger_multiple_physics(trigger) {
     vel = struct.script_parameters;
     damage = struct.script_damage;
 
-    if(!isDefined(radius))
+    if(!isDefined(radius)) {
       radius = 350;
-    if(!isDefined(vel))
+    }
+    if(!isDefined(vel)) {
       vel = 0.25;
+    }
 
     setDvar("tempdvar", vel);
     vel = GetDvarFloat("tempdvar");
@@ -2617,8 +2759,9 @@ trigger_multiple_do_radius_damage(trigger) {
 
 do_radius_damage_from_target() {
   radius = 80;
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     radius = self.radius;
+  }
 
   targs = self get_all_target_ents();
   foreach(targ in targs) {
@@ -2634,8 +2777,9 @@ trigger_damage_do_radius_damage(trigger) {
       continue;
     }
 
-    if(Distance(attacker.origin, trigger.origin) > 940)
+    if(Distance(attacker.origin, trigger.origin) > 940) {
       continue;
+    }
     break;
   }
 
@@ -2663,10 +2807,12 @@ trigger_pacifist(trigger) {
 trigger_runs_function_on_touch(trigger, set_func, get_func) {
   for(;;) {
     trigger waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
-    if(other[[get_func]]())
+    }
+    if(other[[get_func]]()) {
       continue;
+    }
     other thread touched_trigger_runs_func(trigger, set_func);
   }
 }
@@ -2696,8 +2842,9 @@ trigger_turns_off(trigger) {
   }
 
   tokens = StrTok(trigger.script_linkto, " ");
-  for(i = 0; i < tokens.size; i++)
+  for(i = 0; i < tokens.size; i++) {
     array_thread(getEntArray(tokens[i], "script_linkname"), ::trigger_off);
+  }
 }
 
 set_player_viewhand_model(viewhandModel) {
@@ -2722,16 +2869,18 @@ trigger_hint(trigger) {
 
   AssertEx(isPlayer(other), "Tried to do a trigger_hint on a non player entity");
 
-  if(isDefined(level.displayed_hints[hint]))
+  if(isDefined(level.displayed_hints[hint])) {
     return;
+  }
   level.displayed_hints[hint] = true;
 
   other display_hint(hint);
 }
 
 stun_test() {
-  if(getDvar("stuntime") == "")
+  if(getDvar("stuntime") == "") {
     setDvar("stuntime", "1");
+  }
   level.player.AllowAds = true;
 
   for(;;) {
@@ -2748,8 +2897,9 @@ stun_player(ADS_fraction) {
   self endon("stun_player");
 
   if(ADS_fraction > .3) {
-    if(level.player.AllowAds == true)
+    if(level.player.AllowAds == true) {
       level.player playSound("player_hit_while_ads");
+    }
 
     level.player.AllowAds = false;
     level.player AllowAds(false);
@@ -2836,8 +2986,9 @@ flag_set_touching(trigger) {
   for(;;) {
     trigger waittill("trigger", other);
     trigger script_delay();
-    if(IsAlive(other) && other IsTouching(trigger) && isDefined(trigger))
+    if(IsAlive(other) && other IsTouching(trigger) && isDefined(trigger)) {
       flag_set(flag);
+    }
     while(IsAlive(other) && other IsTouching(trigger) && isDefined(trigger)) {
       wait(0.25);
     }
@@ -2977,8 +3128,9 @@ ammo_pickup(sWeaponType) {
     weapons = triggerer GetWeaponsListAll();
     for(i = 0; i < weapons.size; i++) {
       for(j = 0; j < validWeapons.size; j++) {
-        if(weapons[i] == validWeapons[j])
+        if(weapons[i] == validWeapons[j]) {
           weaponToGetAmmo = weapons[i];
+        }
       }
     }
 
@@ -3005,9 +3157,9 @@ ammo_pickup(sWeaponType) {
     break;
   }
 
-  if(isDefined(emptyActionSlotAmmo))
+  if(isDefined(emptyActionSlotAmmo)) {
     triggerer GiveWeapon(weaponToGetAmmo);
-  else {
+  } else {
     rounds = 1;
     if(sWeaponType == "556" || sWeaponType == "762") {
       rounds = 30;
@@ -3029,15 +3181,17 @@ ammo_pickup(sWeaponType) {
 
 get_script_linkto_targets() {
   targets = [];
-  if(!isDefined(self.script_linkTo))
+  if(!isDefined(self.script_linkTo)) {
     return targets;
+  }
 
   tokens = StrTok(self.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
     target = GetEnt(token, "script_linkname");
-    if(isDefined(target))
+    if(isDefined(target)) {
       targets[targets.size] = target;
+    }
   }
   return targets;
 }
@@ -3163,20 +3317,23 @@ trigger_fog(trigger) {
     while(other IsTouching(trigger)) {
       progress = maps\_ambient::get_progress(start, end, dist, other.origin);
 
-      if(progress < 0)
+      if(progress < 0) {
         progress = 0;
+      }
 
-      if(progress > 1)
+      if(progress > 1) {
         progress = 1;
+      }
 
       trigger set_fog_progress(progress);
       wait(0.05);
     }
 
-    if(progress > 0.5)
+    if(progress > 0.5) {
       progress = 1;
-    else
+    } else {
       progress = 0;
+    }
 
     trigger set_fog_progress(progress);
   }
@@ -3190,11 +3347,13 @@ set_fog_progress(progress) {
   start_opacity = self.start_opacity;
   end_opacity = self.end_opacity;
 
-  if(!isDefined(start_opacity))
+  if(!isDefined(start_opacity)) {
     start_opacity = 1;
+  }
 
-  if(!isDefined(end_opacity))
+  if(!isDefined(end_opacity)) {
     end_opacity = 1;
+  }
 
   opacity = start_opacity * anti_progress + end_opacity * progress;
 
@@ -3330,21 +3489,24 @@ check_flag_for_stat_tracking(msg) {
 
 precache_script_models() {
   waittillframeend;
-  if(!isDefined(level.scr_model))
+  if(!isDefined(level.scr_model)) {
     return;
+  }
   models = GetArrayKeys(level.scr_model);
   for(i = 0; i < models.size; i++) {
     if(IsArray(level.scr_model[models[i]])) {
-      for(modelIndex = 0; modelIndex < level.scr_model[models[i]].size; modelIndex++)
+      for(modelIndex = 0; modelIndex < level.scr_model[models[i]].size; modelIndex++) {
         PreCacheModel(level.scr_model[models[i]][modelIndex]);
+      }
     } else
       PreCacheModel(level.scr_model[models[i]]);
   }
 }
 
 filmy() {
-  if(getDvar("grain_test") == "")
+  if(getDvar("grain_test") == "") {
     return;
+  }
   effect = LoadFX("misc/grain_test");
   looper = spawn("script_model", level.player getEye());
   looper setModel("tag_origin");
@@ -3471,8 +3633,9 @@ init_level_players() {
   }
 
   level.player = level.players[0];
-  if(level.players.size > 1)
+  if(level.players.size > 1) {
     level.player2 = level.players[1];
+  }
 
   level notify("level.players initialized");
 }
@@ -3480,11 +3643,13 @@ init_level_players() {
 kill_all_players_trigger() {
   self waittill("trigger", player);
 
-  if(flag_exist("coop_revive"))
+  if(flag_exist("coop_revive")) {
     flag_clear("coop_revive");
+  }
 
-  if(flag_exist("coop_alldowned"))
+  if(flag_exist("coop_alldowned")) {
     flag_set("coop_alldowned");
+  }
 
   if(isDefined(player) && IsAlive(player)) {
     player EnableHealthShield(false);
@@ -3548,12 +3713,14 @@ trigger_glass_break(trigger) {
       }
 
       if(isDefined(direction)) {
-        foreach(glass in glassID)
-        DestroyGlass(glass, direction);
+        foreach(glass in glassID) {
+          DestroyGlass(glass, direction);
+        }
         break;
       } else {
-        foreach(glass in glassID)
-        DestroyGlass(glass);
+        foreach(glass in glassID) {
+          DestroyGlass(glass);
+        }
         break;
       }
     }
@@ -3567,10 +3734,12 @@ trigger_vehicle_getin_spawn(trigger) {
   foreach(spawner in vehicle_spawners) {
     targets = getEntArray(spawner.target, "targetname");
     foreach(target in targets) {
-      if(!IsSubStr(target.code_classname, "actor"))
+      if(!IsSubStr(target.code_classname, "actor")) {
         continue;
-      if(!(target.spawnflags & 1))
+      }
+      if(!(target.spawnflags & 1)) {
         continue;
+      }
       target.dont_auto_ride = true;
     }
   }
@@ -3585,8 +3754,9 @@ vehicle_spawns_targets_and_rides() {
   targets = getEntArray(self.target, "targetname");
   spawners = [];
   foreach(target in targets) {
-    if(target.code_classname == "info_vehicle_node")
+    if(target.code_classname == "info_vehicle_node") {
       continue;
+    }
     spawners[spawners.size] = target;
   }
 
@@ -3613,31 +3783,37 @@ guy_spawns_and_gets_in_vehicle(vehicle, position) {
 }
 
 watchWeaponChange() {
-  if(!isDefined(level.friendly_thermal_Reflector_Effect))
+  if(!isDefined(level.friendly_thermal_Reflector_Effect)) {
     level.friendly_thermal_Reflector_Effect = LoadFX("misc/thermal_tapereflect_inverted");
+  }
   self endon("death");
 
   weap = self GetCurrentWeapon();
-  if(weap_has_thermal(weap))
+  if(weap_has_thermal(weap)) {
     self thread thermal_tracker();
+  }
 
   while(1) {
     self waittill("weapon_change", newWeapon);
 
-    if(weap_has_thermal(newWeapon))
+    if(weap_has_thermal(newWeapon)) {
       self thread thermal_tracker();
-    else
+    } else {
       self notify("acogThermalTracker");
+    }
   }
 }
 
 weap_has_thermal(weap) {
-  if(!isDefined(weap))
+  if(!isDefined(weap)) {
     return false;
-  if(weap == "none")
+  }
+  if(weap == "none") {
     return false;
-  if(WeaponHasThermalScope(weap))
+  }
+  if(WeaponHasThermalScope(weap)) {
     return true;
+  }
 
   return false;
 }
@@ -3666,21 +3842,25 @@ thermal_tracker() {
 }
 
 turn_thermal_on(curADS, lastADS) {
-  if(curADS <= lastADS)
+  if(curADS <= lastADS) {
     return false;
+  }
 
-  if(curADS <= 0.65)
+  if(curADS <= 0.65) {
     return false;
+  }
 
   return !isDefined(self.is_in_thermal_Vision);
 }
 
 turn_thermal_off(curADS, lastADS) {
-  if(curADS >= lastADS)
+  if(curADS >= lastADS) {
     return false;
+  }
 
-  if(curADS >= 0.80)
+  if(curADS >= 0.80) {
     return false;
+  }
 
   return isDefined(self.is_in_thermal_Vision);
 }
@@ -3731,10 +3911,11 @@ loop_friendly_thermal_Reflector_Effect(player_id, onlyForThisPlayer) {
   self endon("death");
 
   for(;;) {
-    if(isDefined(onlyForThisPlayer))
+    if(isDefined(onlyForThisPlayer)) {
       PlayFXOnTagForClients(level.friendly_thermal_Reflector_Effect, self, "J_Spine4", onlyForThisPlayer);
-    else
+    } else {
       playFXOnTag(level.friendly_thermal_Reflector_Effect, self, "J_Spine4");
+    }
   }
 }
 
@@ -3798,8 +3979,9 @@ claymore_pickup_think_global() {
   if(isDefined(self.target)) {
     targets = getEntArray(self.target, "targetname");
 
-    foreach(t in targets)
-    t Delete();
+    foreach(t in targets) {
+      t Delete();
+    }
   }
 
   self MakeUnusable();
@@ -3824,16 +4006,19 @@ ammo_cache_think_global() {
     player DisableWeapons();
     heldweapons = player GetWeaponsListAll();
     foreach(weapon in heldweapons) {
-      if(weapon == "claymore")
+      if(weapon == "claymore") {
         continue;
-      if(weapon == "c4")
+      }
+      if(weapon == "c4") {
         continue;
+      }
       player GiveMaxAmmo(weapon);
 
       clipSize = WeaponClipSize(weapon);
       if(isDefined(clipSize)) {
-        if(player GetWeaponAmmoClip(weapon) < clipSize)
+        if(player GetWeaponAmmoClip(weapon) < clipSize) {
           player SetWeaponAmmoClip(weapon, clipSize);
+        }
       }
     }
     wait 1.5;
@@ -3865,16 +4050,18 @@ ammo_icon_think() {
     while(other IsTouching(trigger)) {
       show = true;
       weapon = other GetCurrentPrimaryWeapon();
-      if(weapon == "none")
+      if(weapon == "none") {
         show = false;
-      else
-      if((other GetFractionMaxAmmo(weapon)) > .9)
-        show = false;
-
-      if(player_looking_at(self.origin, 0.8, true) && show)
+      } else {
+        if((other GetFractionMaxAmmo(weapon)) > .9) {
+          show = false;
+        }
+      }
+      if(player_looking_at(self.origin, 0.8, true) && show) {
         ammo_icon_fade_in(icon);
-      else
+      } else {
         ammo_icon_fade_out(icon);
+      }
       wait 0.25;
     }
     ammo_icon_fade_out(icon);
@@ -3903,8 +4090,9 @@ handle_getviewpos() {
   SetDevDvarIfUninitialized("launcher_viewpos", 0);
   playerviewpos = (0, 0, 0);
   while(1) {
-    while(!GetDebugDvarInt("launcher_viewpos"))
+    while(!GetDebugDvarInt("launcher_viewpos")) {
       wait .05;
+    }
     SetDevDvar("launcher_viewpos", "0");
     playerviewpos = level.player.origin + (0, 0, level.player GetPlayerViewHeight());
     playerviewangle = level.player GetPlayerAngles();
@@ -3926,8 +4114,9 @@ handle_getviewangle() {
   SetDevDvarIfUninitialized("launcher_viewangle", 0);
   playerviewpos = (0, 0, 0);
   while(1) {
-    while(!GetDvarInt("launcher_viewangle", 0))
+    while(!GetDvarInt("launcher_viewangle", 0)) {
       wait .05;
+    }
     SetDevDvar("launcher_viewangle", "0");
     playerviewangle = level.player GetPlayerAngles();
     launcher_write_clipboard(playerviewangle[0] + ", " + playerviewangle[1] + ", " + playerviewangle[2]);
@@ -3956,8 +4145,9 @@ trigger_multiple_compass(trigger) {
   minimap_image = trigger.script_parameters;
   AssertEx(isDefined(minimap_image), "trigger_multiple_compass has no script_parameters for its minimap_image.");
 
-  if(!isDefined(level.minimap_image))
+  if(!isDefined(level.minimap_image)) {
     level.minimap_image = "";
+  }
   for(;;) {
     trigger waittill("trigger");
     if(level.minimap_image != minimap_image) {
@@ -3974,8 +4164,9 @@ weapon_list_debug() {
   ents = getEntArray();
   list = [];
   foreach(ent in ents) {
-    if(!isDefined(ent.code_classname))
+    if(!isDefined(ent.code_classname)) {
       continue;
+    }
     if(IsSubStr(ent.code_classname, "weapon")) {
       list[ent.classname] = true;
     }

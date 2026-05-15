@@ -16,11 +16,13 @@ ride_setup(startnode, players_array) {
 
   getout_rigspawn(getanimatemodel(), 3);
 
-  if(!isDefined(players_array))
+  if(!isDefined(players_array)) {
     players_array = level.players;
+  }
 
-  foreach(player in players_array)
-  thread attach_player(player, 3);
+  foreach(player in players_array) {
+    thread attach_player(player, 3);
+  }
 
   speed = 95;
   if(isDefined(startnode.speed)) {
@@ -35,10 +37,12 @@ ride_setup(startnode, players_array) {
 attach_player(player, position, animfudgetime) {
   player thread player_in_heli(self);
 
-  if(getDvar("fastrope_arms") == "")
+  if(getDvar("fastrope_arms") == "") {
     setDvar("fastrope_arms", "0");
-  if(!isDefined(animfudgetime))
+  }
+  if(!isDefined(animfudgetime)) {
     animfudgetime = 0;
+  }
 
   assert(isDefined(self.riders));
 
@@ -67,10 +71,11 @@ attach_player(player, position, animfudgetime) {
   thread maps\_vehicle_aianim::guy_idle(guy, position);
   wait .1;
 
-  if(isDefined(level.little_bird))
+  if(isDefined(level.little_bird)) {
     player playerlinkto(guy, "tag_player", 0.35, 120, 28, 30, 30, false);
-  else
+  } else {
     player playerlinkto(guy, "tag_player", 0.35, 60, 28, 30, 30, false);
+  }
 
   player freezecontrols(false);
 
@@ -80,8 +85,9 @@ attach_player(player, position, animfudgetime) {
   animtime -= animfudgetime;
   self waittill("unloading");
 
-  if(getDvar("fastrope_arms") != "0")
+  if(getDvar("fastrope_arms") != "0") {
     guy show();
+  }
   player disableweapons();
 
   wait animtime;
@@ -139,8 +145,9 @@ player_in_heli(heli) {
 
 player_heli_ropeanimoverride_idle(guy, tag, animation) {
   self endon("unloading");
-  while(1)
+  while(1) {
     maps\_vehicle_aianim::animontag(guy, tag, animation);
+  }
 }
 
 ride_start(optional_players_array, optional_max_riders) {
@@ -150,15 +157,17 @@ ride_start(optional_players_array, optional_max_riders) {
   if(!pathstart.size) {
     pathstart = getStructArray("heli_ride_in", "targetname");
     assertEx(pathstart.size <= 1, "too many script_structs with targetname \"heli_ride_in\" ");
-    if(!pathstart.size)
+    if(!pathstart.size) {
       assertMSG("no helicopter paths with \"heli_ride_in\", can't start ride");
+    }
   }
 
   pathstart = pathstart[0];
   assertex(isDefined(level.gag_heliride_spawner), "can't find heliride spawner. sure you placed the prefab?");
 
-  if(isDefined(optional_max_riders))
+  if(isDefined(optional_max_riders)) {
     vehicle_spawn_group_limit_riders(level.gag_heliride_spawner.script_vehicleride, optional_max_riders);
+  }
 
   vehicle = vehicle_spawn(level.gag_heliride_spawner);
   vehicle thread ride_setup(pathstart, optional_players_array);

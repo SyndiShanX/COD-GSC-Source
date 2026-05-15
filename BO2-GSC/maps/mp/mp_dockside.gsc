@@ -38,13 +38,14 @@ main() {
   setDvar("sm_sunsamplesizenear", 0.39);
   setDvar("sm_sunshadowsmall", 1);
 
-  if(getgametypesetting("allowMapScripting"))
+  if(getgametypesetting("allowMapScripting")) {
     level maps\mp\mp_dockside_crane::init();
-  else {
+  } else {
     crate_triggers = getEntArray("crate_kill_trigger", "targetname");
 
-    for(i = 0; i < crate_triggers.size; i++)
+    for(i = 0; i < crate_triggers.size; i++) {
       crate_triggers[i] delete();
+    }
   }
 
   setheliheightpatchenabled("war_mode_heli_height_lock", 0);
@@ -84,8 +85,9 @@ water_trigger_think() {
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater())
+  if(self isinwater()) {
     return 0.4;
+  }
 
   return defaulttime;
 }
@@ -101,8 +103,9 @@ isinwater() {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger))
+    if(self istouching(trigger)) {
       return true;
+    }
   }
 
   return false;
@@ -112,8 +115,9 @@ rts_remove() {
   removes = getEntArray("rts_only", "targetname");
 
   foreach(remove in removes) {
-    if(isDefined(remove))
+    if(isDefined(remove)) {
       remove delete();
+    }
   }
 }
 
@@ -134,8 +138,9 @@ devgui_dockside() {
         break;
     }
 
-    if(getDvar(#"devgui_notify") != "")
+    if(getDvar(#"devgui_notify") != "") {
       setDvar("devgui_notify", "");
+    }
   }
 }
 

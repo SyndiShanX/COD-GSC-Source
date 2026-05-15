@@ -8,8 +8,9 @@
 #using_animtree("animated_props");
 
 wait_game_percent_complete(time_percent, score_percent) {
-  if(!isDefined(score_percent))
+  if(!isDefined(score_percent)) {
     score_percent = time_percent;
+  }
 
   gameFlagWait("prematch_done");
 
@@ -65,8 +66,9 @@ get_highest_score() {
   } else {
     if(isDefined(level.players)) {
       foreach(player in level.players) {
-        if(isDefined(player.score) && player.score > highestScore)
+        if(isDefined(player.score) && player.score > highestScore) {
           highestScore = player.score;
+        }
       }
     }
   }

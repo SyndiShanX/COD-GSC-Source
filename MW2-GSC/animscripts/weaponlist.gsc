@@ -51,8 +51,9 @@ RefillClip() {
   }
 
   if(weaponClass(self.weapon) == "rocketlauncher") {
-    if(!self.a.rocketVisible)
+    if(!self.a.rocketVisible) {
       self thread animscripts\combat_utility::showRocketWhenReloadIsDone();
+    }
   }
 
   if(!isDefined(self.bulletsInClip)) {
@@ -63,21 +64,25 @@ RefillClip() {
 
   assertEX(isDefined(self.bulletsInClip), "RefillClip failed");
 
-  if(self.bulletsInClip <= 0)
+  if(self.bulletsInClip <= 0) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 add_weapon(name, type, time, clipsize, anims) {
   assert(isDefined(name));
   assert(isDefined(type));
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 3.0;
-  if(!isDefined(clipsize))
+  }
+  if(!isDefined(clipsize)) {
     time = 1;
-  if(!isDefined(anims))
+  }
+  if(!isDefined(anims)) {
     anims = "rifle";
+  }
 
   name = tolower(name);
   anim.AIWeapon[name]["type"] = type;

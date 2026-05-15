@@ -100,8 +100,9 @@ moderate_ai_moveplaybackrate() {
 
     lowest = 99999999;
     foreach(dist in ai_dist) {
-      if(dist < lowest)
+      if(dist < lowest) {
         lowest = dist;
+      }
     }
 
     ai_speedmod = [];
@@ -111,16 +112,18 @@ moderate_ai_moveplaybackrate() {
 
     highest = 0;
     foreach(dist in ai_dist) {
-      if(dist > highest)
+      if(dist > highest) {
         highest = dist;
+      }
     }
 
     current_speed_dif = highest * max_speed_dif / max_dist_dif;
 
     current_speed_dif *= 0.5;
 
-    if(current_speed_dif > max_speed_dif)
+    if(current_speed_dif > max_speed_dif) {
       current_speed_dif = max_speed_dif;
+    }
 
     half_range = highest * 0.5;
 
@@ -142,33 +145,38 @@ moderate_ai_moveplaybackrate() {
     dist -= min_dist;
     scale = dist / range_dist;
 
-    if(scale < 0)
+    if(scale < 0) {
       scale = 0;
-    else
-    if(scale > 1)
-      scale = 1;
-    scale = 1 - scale;
+    } else {
+      if(scale > 1) {
+        scale = 1;
+      }
+      scale = 1 - scale;
+    }
     ai_playback = min_playback + range_playback * scale;
 
     dist = old_dist - min_sprint_dist;
     scale = dist / range_sprint_dist;
 
-    if(scale < 0)
+    if(scale < 0) {
       scale = 0;
-    else
-    if(scale > 1)
-      scale = 1;
-
+    } else {
+      if(scale > 1) {
+        scale = 1;
+      }
+    }
     sprint_speed = min_sprint + range_sprint * scale;
 
-    if(!flag("exit_collapses"))
+    if(!flag("exit_collapses")) {
       setsaveddvar("player_sprintSpeedScale", sprint_speed);
+    }
 
     if(flag("modify_ai_moveplaybackrate")) {
       foreach(index, guy in ai) {
         guy.moveplaybackrate = ai_playback + ai_speedmod[index];
-        if(guy.moveplaybackrate > 1.15)
+        if(guy.moveplaybackrate > 1.15) {
           guy.moveplaybackrate = 1.15;
+        }
       }
     }
 
@@ -273,8 +281,9 @@ minor_earthquakes() {
     eq = min_eq + scale * dif_eq;
     phys = min_phys + scale * dif_phys;
 
-    if(randomint(100) < 35)
+    if(randomint(100) < 35) {
       player_gets_hit_by_rock();
+    }
 
     quake(eq, 3 + scale * 2, level.player.origin + randomvector(1000), 5000);
     angles = level.player getplayerangles();
@@ -531,16 +540,18 @@ turnaround_trigger_think() {
 
   for(;;) {
     self waittill("trigger", guy);
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       return;
+    }
     if(isDefined(doing_anim[guy.unique_id])) {
       continue;
     }
     doing_anim[guy.unique_id] = true;
     animation = ducks[index];
     index++;
-    if(index >= ducks.size)
+    if(index >= ducks.size) {
       index = 0;
+    }
 
     guy thread guy_animates(animation);
   }
@@ -643,8 +654,9 @@ ptest() {
 
 first_hallway_collapse(pos) {
   wait(10.3);
-  if(distance(level.player.origin, pos) > 700)
+  if(distance(level.player.origin, pos) > 700) {
     exploder("first_hallway_collapse");
+  }
 }
 
 stumble_baddie() {
@@ -814,8 +826,9 @@ player_dies_to_cavein(start_index) {
   fx[fx.size] = "hallway_collapsing_huge";
 
   index = start_index;
-  if(!isDefined(index))
+  if(!isDefined(index)) {
     index = 0;
+  }
 
   counts = [];
   counts[0] = 12;
@@ -844,10 +857,12 @@ player_dies_to_cavein(start_index) {
       last_org = level.player.origin;
 
       if(randomint(100) > 40) {
-        if(index == 1)
+        if(index == 1) {
           level.player DoDamage(5 / level.player.damageMultiplier, randomvector(500));
-        if(index > 1)
+        }
+        if(index > 1) {
           level.player DoDamage(15 / level.player.damageMultiplier, randomvector(500));
+        }
 
         level.player PlayRumbleOnEntity("damage_heavy");
       }
@@ -875,8 +890,9 @@ player_ending_cavein() {
     wait(delay);
     playFX(fx, level.player.origin + (0, 0, 60));
     delay -= 0.75;
-    if(delay <= 0.2)
+    if(delay <= 0.2) {
       delay = 0.2;
+    }
   }
 }
 
@@ -939,12 +955,13 @@ chase_train_chases(dist, starter) {
     dist -= min_dist;
     scale = dist / range_dist;
 
-    if(scale < 0)
+    if(scale < 0) {
       scale = 0;
-    else
-    if(scale > 1)
-      scale = 1;
-
+    } else {
+      if(scale > 1) {
+        scale = 1;
+      }
+    }
     speed = min_speed + range_speed * scale;
 
     level.chasers[starter]["speed"] = speed;
@@ -960,8 +977,9 @@ chase_brush_accellerates_to_max_speed(chase_vehicle, time, max_speed) {
   for(i = 0; i <= frames; i++) {
     scale = i / frames;
     speed = max_speed * scale;
-    if(speed <= 0)
+    if(speed <= 0) {
       speed = 0.1;
+    }
     chase_vehicle Vehicle_SetSpeedImmediate(speed, speed, speed);
     wait(0.05);
   }
@@ -1111,8 +1129,9 @@ set_friendly_endpoint_think() {
 }
 
 ending_run_fx() {
-  if(flag("enter_final_room"))
+  if(flag("enter_final_room")) {
     return;
+  }
   level endon("enter_final_room");
 
   level endon("stop_ending_run_fx");
@@ -1142,11 +1161,13 @@ ending_run_fx() {
       if(!exit_flag && ent.v["fxid"] == "ceiling_collapse_dirt1") {
         continue;
       }
-      if(ent.last_occurred_time > gettime() - 1000)
+      if(ent.last_occurred_time > gettime() - 1000) {
         continue;
+      }
       dist = distance(ent.flat_origin, origin);
-      if(dist < level.ending_fx_min_dist)
+      if(dist < level.ending_fx_min_dist) {
         continue;
+      }
       if(dist < level.ending_fx_max_dist) {
         continue;
       }
@@ -1221,8 +1242,9 @@ playfx_collapse(origin, forward, dist, fx_msg, time) {
     playFX(fx, org);
     wait(wait_time);
     wait_time -= 0.35;
-    if(wait_time < 0.5)
+    if(wait_time < 0.5) {
       wait_time = 0.5;
+    }
   }
 }
 
@@ -1353,10 +1375,11 @@ ambient_flicker_light_think() {
 
   ent.intensity = light getLightIntensity();
 
-  if(!isDefined(self.script_parameters))
+  if(!isDefined(self.script_parameters)) {
     thread flicker_default(ent);
-  else
+  } else {
     thread[[flicker_funcs[self.script_parameters]]](ent);
+  }
 }
 
 flicker_default(ent) {
@@ -1718,8 +1741,9 @@ gulag_glass_shatter() {
 
     wait(delay);
 
-    if(!isDefined(struct.target))
+    if(!isDefined(struct.target)) {
       return;
+    }
     struct = getstruct(struct.target, "targetname");
   }
 }
@@ -1889,8 +1913,9 @@ cafe_lights_explode() {
 }
 
 player_pushes_slab() {
-  if(flag("time_to_evac"))
+  if(flag("time_to_evac")) {
     return;
+  }
   level endon("time_to_evac");
 
   for(;;) {
@@ -1931,8 +1956,9 @@ rubble_think() {
 player_touch_kill() {
   level endon("stop_chase_fx");
   for(;;) {
-    if(level.player istouching(self))
+    if(level.player istouching(self)) {
       RadiusDamage(level.player.origin, 35, 10, 5);
+    }
     wait(0.05);
   }
 }
@@ -2041,8 +2067,9 @@ player_gets_hit_by_rock() {
   }
   vec = randomvector(16);
   vec = set_z(vec, 80);
-  if(level.player.health > 80)
+  if(level.player.health > 80) {
     level.player DoDamage(15 / level.player.damagemultiplier, level.player.origin + vec);
+  }
 }
 
 blend_in_player_movespeed() {

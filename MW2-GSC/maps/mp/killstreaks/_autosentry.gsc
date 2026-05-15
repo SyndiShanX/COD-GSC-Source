@@ -48,16 +48,18 @@ init() {
 
 tryUseAutoSentry(lifeId) {
   result = self giveSentry("sentry_minigun");
-  if(result)
+  if(result) {
     self maps\mp\_matchdata::logKillstreakEvent("sentry", self.origin);
+  }
 
   return (result);
 }
 
 tryUseAutoGlSentry(lifeId) {
   result = self giveSentry("sentry_gun");
-  if(result)
+  if(result) {
     self maps\mp\_matchdata::logKillstreakEvent("sentry_gl", self.origin);
+  }
 
   return (result);
 }
@@ -69,10 +71,11 @@ giveSentry(sentryType) {
 
   self setCarryingSentry(sentryGun, true);
 
-  if(isDefined(sentryGun))
+  if(isDefined(sentryGun)) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 setCarryingSentry(sentryGun, allowCancel) {
@@ -157,11 +160,13 @@ sentry_handleDamage() {
       continue;
     }
 
-    if(isExplosiveDamage(type))
+    if(isExplosiveDamage(type)) {
       self.health -= (amount * 1);
+    }
 
-    if(type == "MOD_MELEE")
+    if(type == "MOD_MELEE") {
       self.health = 0;
+    }
 
     if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("sentry");
@@ -180,8 +185,9 @@ sentry_handleDamage() {
         attacker notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner thread leaderDialogOnPlayer("sentry_destroyed");
+      }
 
       self notify("death");
       return;
@@ -355,10 +361,11 @@ sentry_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced)
+  if(self.canBePlaced) {
     self sentry_setPlaced();
-  else
+  } else {
     self delete();
+  }
 }
 
 sentry_onCarrierDisconnect(carrier) {
@@ -388,26 +395,29 @@ sentry_setActive() {
   self makeUsable();
 
   foreach(player in level.players) {
-    if(player == self.owner)
+    if(player == self.owner) {
       self enablePlayerUse(player);
-    else
+    } else {
       self disablePlayerUse(player);
+    }
   }
 
-  if(level.teamBased)
+  if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-  else
+  } else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, 65));
+  }
 }
 
 sentry_setInactive() {
   self setMode(SENTRY_MODE_OFF);
   self makeUnusable();
 
-  if(level.teamBased)
+  if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
+  }
 }
 
 sentry_makeSolid() {
@@ -419,8 +429,9 @@ sentry_makeNotSolid() {
 }
 
 isFriendlyToSentry(sentryGun) {
-  if(level.teamBased && self.team == sentryGun.team)
+  if(level.teamBased && self.team == sentryGun.team) {
     return true;
+  }
 
   return false;
 }
@@ -465,12 +476,14 @@ sentry_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy))
+    if(!isDefined(self.carriedBy)) {
       lifeSpan = max(0, lifeSpan - 1.0);
+    }
   }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner thread leaderDialogOnPlayer("sentry_gone");
+  }
 
   self notify("death");
 }
@@ -539,10 +552,11 @@ sentry_heatMonitor() {
   lastFxTime = 0;
 
   for(;;) {
-    if(self.heatLevel != lastHeatLevel)
+    if(self.heatLevel != lastHeatLevel) {
       wait(fireTime);
-    else
+    } else {
       self.heatLevel = max(0, self.heatLevel - 0.05);
+    }
 
     if(self.heatLevel > SENTRY_OVERHEAT_TIME) {
       self.overheated = true;
@@ -581,7 +595,8 @@ sentry_beepSounds() {
   for(;;) {
     wait(3.0);
 
-    if(!isDefined(self.carriedBy))
+    if(!isDefined(self.carriedBy)) {
       self playSound("sentry_gun_beep");
+    }
   }
 }

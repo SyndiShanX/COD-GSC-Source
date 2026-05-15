@@ -230,8 +230,9 @@ hiding_door_spawner() {
 
   if(!isDefined(self.script_flag_wait) && !isDefined(start_trigger)) {
     radius = 200;
-    if(isDefined(self.radius))
+    if(isDefined(self.radius)) {
       radius = self.radius;
+    }
 
     start_trigger = spawn("trigger_radius", door_org.origin, 0, radius, 48);
   }

@@ -8,6 +8,7 @@ main() {
   level._effect["cloud_bank_far"] = loadfx("weather/jeepride_cloud_bank_far");
   level._effect["mist_hunted_fav"] = loadfx("weather/mist_hunted_fav");
 
-  if(!getdvarint("clientSideEffects"))
+  if(!getdvarint("clientSideEffects")) {
     maps\createfx\mp_shipment_fx::main();
+  }
 }

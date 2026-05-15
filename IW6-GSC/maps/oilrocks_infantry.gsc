@@ -70,7 +70,8 @@ cleanup_at_landing_zone() {
   maps\_utility::array_delete(getcorpsearray());
 
   foreach(var_1 in getEntArray("script_vehicle_corpse", "classname")) {
-    if(distance(var_1.origin, level.player getEye()) > 10000)
+    if(distance(var_1.origin, level.player getEye()) > 10000) {
       var_1 delete();
+    }
   }
 }

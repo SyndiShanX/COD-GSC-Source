@@ -301,9 +301,9 @@ givebattlepassparticipationxp() {
 }
 
 onplayerspawned() {
-  if(isai(self)) {} else if(!level.playerxpenabled)
+  if(isai(self)) {} else if(!level.playerxpenabled) {
     self.pers["rankxp"] = 0;
-  else if(!scripts\cp\utility::_id_86C9()) {}
+  } else if(!scripts\cp\utility::_id_86C9()) {}
 
   _id_B80A();
   _id_B6E0();

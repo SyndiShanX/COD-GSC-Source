@@ -708,7 +708,7 @@ crateSetupForUse(mode, icons) {
     streakRef = getStreakForCrate(self.dropType, self.crateType);
     if(isSubStr(streakRef, "juggernaut")) {
       foreach(player in level.players) {
-        if(player isJuggernaut())
+        if(player isJuggernaut()) {}
       }
       self thread crateUsePostJuggernautUpdater(player);
     }

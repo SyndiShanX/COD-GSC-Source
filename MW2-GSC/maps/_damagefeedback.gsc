@@ -11,8 +11,9 @@
 init() {
   precacheShader("damage_feedback");
 
-  if(getDvar("scr_damagefeedback") == "")
+  if(getDvar("scr_damagefeedback") == "") {
     setDvar("scr_damagefeedback", "0");
+  }
 
   if(!getDvarInt("scr_damagefeedback", 0)) {
     return;
@@ -41,34 +42,40 @@ monitorDamage() {
 }
 
 damagefeedback_took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isPlayer(attacker))
+  if(!isPlayer(attacker)) {
     return;
+  }
   if(isDefined(self.bullet_resistance)) {
     legal_bullet_types = [];
     legal_bullet_types["MOD_PISTOL_BULLET"] = true;
     legal_bullet_types["MOD_RIFLE_BULLET"] = true;
 
     if(isDefined(legal_bullet_types[type])) {
-      if(damage <= self.bullet_resistance)
+      if(damage <= self.bullet_resistance) {
         return;
+      }
     }
   }
   attacker updateDamageFeedback(self);
 }
 
 updateDamageFeedback(attacked) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return;
-  if(!isDefined(attacked.team))
+  }
+  if(!isDefined(attacked.team)) {
     return;
-  if((attacked.team == self.team) || (attacked.team == "neutral"))
+  }
+  if((attacked.team == self.team) || (attacked.team == "neutral")) {
     return;
+  }
   self playlocalsound("SP_hit_alert");
 
   fadeTime = 1;
 
-  if(isDefined(level.slowmo.speed_slow))
+  if(isDefined(level.slowmo.speed_slow)) {
     fadeTime = level.slowmo.speed_slow;
+  }
 
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeOverTime(fadeTime);

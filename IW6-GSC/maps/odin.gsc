@@ -44,8 +44,9 @@ odin_precache() {
   precachemodel("body_fed_space_assault_a");
   precacheshader("hud_icon_microtar_space");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     precacheshader("space_helmet_glass_01");
+  }
 }
 
 odin_flag_inits() {
@@ -97,8 +98,9 @@ odin_script_setup() {
     setsaveddvar("r_mbModelVelocityScalar", 0.2);
   }
 
-  if(level.start_point == "start_deer" || level.start_point == "start_after_hunt" || level.start_point == "start_woods" || level.start_point == "start_neighborhood" || level.start_point == "start_mansion_ext" || level.start_point == "start_mansion" || level.start_point == "default")
+  if(level.start_point == "start_deer" || level.start_point == "start_after_hunt" || level.start_point == "start_woods" || level.start_point == "start_neighborhood" || level.start_point == "start_mansion_ext" || level.start_point == "start_mansion" || level.start_point == "default") {
     level.start_point = "odin_intro";
+  }
 
   thread maps\odin_fx::lgt_init();
   level.player.ignoreme = 0;
@@ -238,8 +240,9 @@ mission_objective_logic() {
   waittillframeend;
   var_0 = 0;
 
-  if(level.start_point != "default")
+  if(level.start_point != "default") {
     var_0 = 1;
+  }
 
   if(isDefined(level.prologue) && level.prologue == 1) {}
 

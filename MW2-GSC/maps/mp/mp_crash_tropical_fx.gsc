@@ -16,6 +16,7 @@ main() {
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S_tropical");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
 
-  if(common_scripts\utility::shouldRunServerSideEffects())
+  if(common_scripts\utility::shouldRunServerSideEffects()) {
     maps\createfx\mp_crash_tropical_fx::main();
+  }
 }

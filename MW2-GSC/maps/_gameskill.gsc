@@ -9,21 +9,24 @@
 #include maps\_hud_util;
 
 setSkill(reset) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(getDvar("mapname"));
+  }
 
   if(!isDefined(reset) || reset == false) {
     if(isDefined(level.gameSkill)) {
       return;
     }
-    if(!isDefined(level.custom_player_attacker))
+    if(!isDefined(level.custom_player_attacker)) {
       level.custom_player_attacker = ::return_false;
+    }
 
     level.global_damage_func_ads = ::empty_kill_func;
     level.global_damage_func = ::empty_kill_func;
     level.global_kill_func = ::empty_kill_func;
-    if(getDvar("arcademode") == "1")
+    if(getDvar("arcademode") == "1") {
       thread maps\_arcademode::main();
+    }
 
     set_console_status();
 
@@ -49,12 +52,14 @@ setSkill(reset) {
       player.damage_functions = [];
       player maps\_player_stats::init_stats();
       player ent_flag_init("global_hint_in_use");
-      if(is_coop())
+      if(is_coop()) {
         player ent_flag_init("coop_is_dead");
+      }
       player.pers = [];
 
-      if(!isDefined(player.baseIgnoreRandomBulletDamage))
+      if(!isDefined(player.baseIgnoreRandomBulletDamage)) {
         player.baseIgnoreRandomBulletDamage = false;
+      }
 
       player.disabledWeapon = 0;
       player.disabledWeaponSwitch = 0;
@@ -244,8 +249,9 @@ setSkill(reset) {
 
   level.lastPlayerSighted = 0;
 
-  if(isDefined(level.custom_gameskill_func))
+  if(isDefined(level.custom_gameskill_func)) {
     [[level.custom_gameskill_func]]();
+  }
 
   if(coop_with_one_player_downed()) {
     make_remaining_player_a_little_stronger();
@@ -345,19 +351,23 @@ setGlobalDifficulty() {
 }
 
 updateGameSkill() {
-  foreach(player in level.players)
-  player.gameskill = player get_player_gameskill();
+  foreach(player in level.players) {
+    player.gameskill = player get_player_gameskill();
+  }
 
   level.gameskill = level.player.gameskill;
-  if(is_coop() && (level.player2.gameskill > level.gameskill))
+  if(is_coop() && (level.player2.gameskill > level.gameskill)) {
     level.gameskill = level.player2.gameskill;
+  }
 
   level.specops_reward_gameskill = level.player.gameskill;
-  if(is_coop() && (level.player2.gameskill < level.specops_reward_gameskill))
+  if(is_coop() && (level.player2.gameskill < level.specops_reward_gameskill)) {
     level.specops_reward_gameskill = level.player2.gameskill;
+  }
 
-  if(isDefined(level.forcedgameskill))
+  if(isDefined(level.forcedgameskill)) {
     level.gameskill = level.forcedgameskill;
+  }
 
   Assert(level.gameSkill >= 0 && level.gameSkill <= 3);
 
@@ -388,8 +398,9 @@ get_skill_from_index(index) {
 }
 
 aa_should_start_fresh() {
-  if(level.script == "killhouse")
+  if(level.script == "killhouse") {
     return true;
+  }
   return level.gameskill == GetDvarInt("autodifficulty_original_setting");
 }
 
@@ -504,27 +515,33 @@ always_pain() {
 }
 
 pain_protection() {
-  if(!pain_protection_check())
+  if(!pain_protection_check()) {
     return false;
+  }
 
   return (RandomInt(100) > 25);
 }
 
 pain_protection_check() {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return false;
+  }
 
-  if(!isPlayer(self.enemy))
+  if(!isPlayer(self.enemy)) {
     return false;
+  }
 
-  if(!isalive(level.painAI) || level.painAI.script != "pain")
+  if(!isalive(level.painAI) || level.painAI.script != "pain") {
     level.painAI = self;
+  }
 
-  if(self == level.painAI)
+  if(self == level.painAI) {
     return false;
+  }
 
-  if(self.damageWeapon != "none" && WeaponIsBoltAction(self.damageWeapon))
+  if(self.damageWeapon != "none" && WeaponIsBoltAction(self.damageWeapon)) {
     return false;
+  }
 
   return true;
 }
@@ -567,10 +584,12 @@ printHealthDebug() {
 
   for(playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
     player = level.players[playerIndex];
-    if(!isDefined(player.playerInvulTimeEnd))
+    if(!isDefined(player.playerInvulTimeEnd)) {
       player.playerInvulTimeEnd = 0;
-    if(!isDefined(player.deathInvulnerableTimeout))
+    }
+    if(!isDefined(player.deathInvulnerableTimeout)) {
       player.deathInvulnerableTimeout = 0;
+    }
 
     for(i = 0; i < healthBarKeys.size; i++) {
       key = healthBarKeys[i];
@@ -611,12 +630,13 @@ printHealthDebug() {
 
       width = 0;
       type = i % 3;
-      if(type == 0)
+      if(type == 0) {
         width = player.health / player.maxhealth * 300;
-      else if(type == 1)
+      } else if(type == 1) {
         width = (player.playerInvulTimeEnd - GetTime()) / 1000 * 40;
-      else if(type == 2)
+      } else if(type == 2) {
         width = (player.deathInvulnerableTimeout - GetTime()) / 1000 * 40;
+      }
 
       width = Int(max(width, 1));
 
@@ -627,8 +647,9 @@ printHealthDebug() {
 }
 
 destroyHealthDebug() {
-  if(!isDefined(level.healthBarHudElems))
+  if(!isDefined(level.healthBarHudElems)) {
     return;
+  }
   for(i = 0; i < level.healthBarHudElems.size; i++) {
     level.healthBarHudElems[i].bar Destroy();
     level.healthBarHudElems[i] Destroy();
@@ -650,17 +671,19 @@ set_accuracy_based_on_situation() {
   }
 
   if(self.script == "move") {
-    if(self isCQBWalkingOrFacingEnemy())
+    if(self isCQBWalkingOrFacingEnemy()) {
       self.accuracy = anim.walk_accuracy * self.baseAccuracy;
-    else
+    } else {
       self.accuracy = anim.run_accuracy * self.baseAccuracy;
+    }
     return;
   }
 
   self.accuracy = self.baseAccuracy;
 
-  if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult))
+  if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult)) {
     self.accuracy *= self.ramboAccuracyMult;
+  }
 }
 
 setSniperAccuracy() {
@@ -672,14 +695,16 @@ setSniperAccuracy() {
   self.sniperShotCount++;
 
   gameskill = level.gameskill;
-  if(isPlayer(self.enemy))
+  if(isPlayer(self.enemy)) {
     gameskill = self.enemy.gameskill;
+  }
 
   if(shouldForceSniperMissShot()) {
     self.accuracy = 0;
 
-    if(gameskill > 0 || self.sniperShotCount > 1)
+    if(gameskill > 0 || self.sniperShotCount > 1) {
       self.lastMissedEnemy = self.enemy;
+    }
     return;
   }
 
@@ -687,22 +712,27 @@ setSniperAccuracy() {
 
   self.sniperHitCount++;
 
-  if(gameskill < 1 && self.sniperHitCount == 1)
+  if(gameskill < 1 && self.sniperHitCount == 1) {
     self.lastMissedEnemy = undefined;
+  }
 }
 
 shouldForceSniperMissShot() {
-  if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy)
+  if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy) {
     return false;
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     return false;
+  }
 
-  if(isDefined(self.lastMissedEnemy) && (self.enemy == self.lastMissedEnemy))
+  if(isDefined(self.lastMissedEnemy) && (self.enemy == self.lastMissedEnemy)) {
     return false;
+  }
 
-  if(DistanceSquared(self.origin, self.enemy.origin) > (500 * 500))
+  if(DistanceSquared(self.origin, self.enemy.origin) > (500 * 500)) {
     return false;
+  }
 
   return true;
 }
@@ -721,14 +751,17 @@ resetAccuracyAndPause() {
 waitTimeIfPlayerIsHit() {
   waittime = 0;
   waittillframeend;
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return waittime;
+  }
 
-  if(!isPlayer(self.enemy))
+  if(!isPlayer(self.enemy)) {
     return waittime;
+  }
 
-  if(self.enemy ent_flag("player_is_invulnerable"))
+  if(self.enemy ent_flag("player_is_invulnerable")) {
     waittime = (0.3 + RandomFloat(0.4));
+  }
   return waittime;
 }
 
@@ -778,8 +811,9 @@ setMissTime(howLong) {
     return;
   }
 
-  if(howLong > 0)
+  if(howLong > 0) {
     self.accuracy = 0;
+  }
 
   howLong *= 1000;
 
@@ -794,8 +828,9 @@ player_aim_debug() {
 
   for(;;) {
     color = (0, 1, 0);
-    if(self.a.misstime > GetTime())
+    if(self.a.misstime > GetTime()) {
       color = (1, 0, 0);
+    }
     Print3d(self.origin + (0, 0, 32), self.finalaccuracy, color);
     wait(0.05);
   }
@@ -995,8 +1030,9 @@ playerHealthRegen() {
     wait(0.05);
     waittillframeend;
 
-    if(is_coop())
+    if(is_coop()) {
       self thread maps\_coop::player_coop_proc();
+    }
 
     if(self.health == self.maxhealth) {
       if(self ent_flag("player_has_red_flashing_overlay")) {
@@ -1046,23 +1082,27 @@ playerHealthRegen() {
       }
       if(veryHurt) {
         newHealth = ratio;
-        if(GetTime() > hurtTime + self.gs.longRegenTime)
+        if(GetTime() > hurtTime + self.gs.longRegenTime) {
           newHealth += self.gs.regenRate;
-        if(newHealth >= 1)
+        }
+        if(newHealth >= 1) {
           reduceTakeCoverWarnings();
+        }
       } else {
         newHealth = 1;
       }
 
-      if(newHealth > 1.0)
+      if(newHealth > 1.0) {
         newHealth = 1.0;
+      }
 
       if(newHealth <= 0) {
         return;
       }
 
-      if(newHealth > self.health / self.maxhealth)
+      if(newHealth > self.health / self.maxhealth) {
         logRegen(newHealth);
+      }
 
       self SetNormalHealth(newHealth);
       oldRatio = self.health / self.maxHealth;
@@ -1073,8 +1113,9 @@ playerHealthRegen() {
 
     worthyDamageRatio = self.gs.worthyDamageRatio;
 
-    if(self.attackerCount == 1)
+    if(self.attackerCount == 1) {
       worthyDamageRatio *= 3;
+    }
 
     invulWorthyHealthDrop = oldratio - ratio >= worthyDamageRatio;
 
@@ -1082,10 +1123,12 @@ playerHealthRegen() {
       self SetNormalHealth(2 / self.maxhealth);
       invulWorthyHealthDrop = true;
 
-      if(!isDefined(self.deathInvulnerableTimeout))
+      if(!isDefined(self.deathInvulnerableTimeout)) {
         self.deathInvulnerableTimeout = 0;
-      if(self.deathInvulnerableTimeout < GetTime())
+      }
+      if(self.deathInvulnerableTimeout < GetTime()) {
         self.deathInvulnerableTimeout = GetTime() + self.deathInvulnerableTime;
+      }
     }
 
     oldRatio = self.health / self.maxHealth;
@@ -1099,8 +1142,9 @@ playerHealthRegen() {
       logHit(self.health, 0);
       continue;
     }
-    if(self ent_flag("player_is_invulnerable"))
+    if(self ent_flag("player_is_invulnerable")) {
       continue;
+    }
     self ent_flag_set("player_is_invulnerable");
     level notify("player_becoming_invulnerable");
 
@@ -1153,12 +1197,14 @@ showHitLog() {}
 playerInvul(timer) {
   Assert(isPlayer(self));
 
-  if(isDefined(self.flashendtime) && self.flashendtime > GetTime())
+  if(isDefined(self.flashendtime) && self.flashendtime > GetTime()) {
     timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
+  }
 
   if(timer > 0) {
-    if(!isDefined(self.noPlayerInvul))
+    if(!isDefined(self.noPlayerInvul)) {
       self.attackeraccuracy = 0;
+    }
     self.IgnoreRandomBulletDamage = true;
 
     self.playerInvulTimeEnd = GetTime() + timer * 1000;
@@ -1172,8 +1218,9 @@ playerInvul(timer) {
 }
 
 default_door_node_flashbang_frequency() {
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.doorFlashChance = .6;
+  }
 
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
@@ -1192,15 +1239,17 @@ grenadeAwareness() {
 
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
-      if(RandomInt(100) < 33)
+      if(RandomInt(100) < 33) {
         self.grenadeawareness = 0.2;
-      else
+      } else {
         self.grenadeawareness = 0.5;
+      }
     } else {
-      if(RandomInt(100) < 33)
+      if(RandomInt(100) < 33) {
         self.grenadeawareness = 0;
-      else
+      } else {
         self.grenadeawareness = 0.2;
+      }
     }
   }
 }
@@ -1275,11 +1324,13 @@ healthOverlay() {
 
     targetDamageAlpha = 1.0 - self.health / self.maxHealth;
 
-    if(damageAlpha > targetDamageAlpha)
+    if(damageAlpha > targetDamageAlpha) {
       damageAlpha -= (lerpRate * updateTime);
+    }
 
-    if(damageAlpha < targetDamageAlpha)
+    if(damageAlpha < targetDamageAlpha) {
       damageAlpha = targetDamageAlpha;
+    }
 
     overlay.alpha = damageAlpha;
   }
@@ -1294,10 +1345,11 @@ take_cover_warning_loop() {
 }
 
 add_hudelm_position_internal(alignY) {
-  if(level.console)
+  if(level.console) {
     self.fontScale = 2;
-  else
+  } else {
     self.fontScale = 1.6;
+  }
 
   self.x = 0;
   self.y = -36;
@@ -1308,18 +1360,20 @@ add_hudelm_position_internal(alignY) {
   self.horzAlign = "center";
   self.vertAlign = "middle";
 
-  if(!isDefined(self.background))
+  if(!isDefined(self.background)) {
     return;
+  }
   self.background.x = 0;
   self.background.y = -40;
   self.background.alignX = "center";
   self.background.alignY = "middle";
   self.background.horzAlign = "center";
   self.background.vertAlign = "middle";
-  if(level.console)
+  if(level.console) {
     self.background SetShader("popmenu_bg", 650, 52);
-  else
+  } else {
     self.background SetShader("popmenu_bg", 650, 42);
+  }
   self.background.alpha = .5;
 }
 
@@ -1379,10 +1433,12 @@ destroy_warning_elem(fadeout) {
 }
 
 may_change_cover_warning_alpha(coverWarning) {
-  if(!isDefined(coverWarning))
+  if(!isDefined(coverWarning)) {
     return false;
-  if(isDefined(coverWarning.beingDestroyed))
+  }
+  if(isDefined(coverWarning.beingDestroyed)) {
     return false;
+  }
   return true;
 }
 
@@ -1404,8 +1460,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
   fadeOutFullTime = pulseTime * 0.3;
   remainingTime = pulseTime - fadeInTime - stayFullTime - fadeOutHalfTime - fadeOutFullTime;
   Assert(remainingTime >= -.001);
-  if(remainingTime < 0)
+  if(remainingTime < 0) {
     remainingTime = 0;
+  }
 
   halfAlpha = 0.8 + severity * 0.1;
   leastAlpha = 0.5 + severity * 0.3;
@@ -1416,8 +1473,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * 1.0;
     }
   }
-  if(isDefined(coverWarning))
+  if(isDefined(coverWarning)) {
     coverWarning thread fontScaler(1.0, fadeInTime);
+  }
   wait fadeInTime + stayFullTime;
 
   if(may_change_cover_warning_alpha(coverWarning)) {
@@ -1435,8 +1493,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * leastAlpha;
     }
   }
-  if(isDefined(coverWarning))
+  if(isDefined(coverWarning)) {
     coverWarning thread fontScaler(0.9, fadeOutFullTime);
+  }
   wait fadeOutFullTime;
 
   wait remainingTime;
@@ -1450,8 +1509,9 @@ take_cover_warnings_enabled() {
     return false;
   }
 
-  if(isDefined(self.vehicle))
+  if(isDefined(self.vehicle)) {
     return false;
+  }
 
   return true;
 }
@@ -1459,27 +1519,34 @@ take_cover_warnings_enabled() {
 should_show_cover_warning() {
   Assert(isPlayer(self));
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return false;
+  }
 
-  if(self isLinked())
+  if(self isLinked()) {
     return false;
+  }
 
-  if(self.ignoreme)
+  if(self.ignoreme) {
     return false;
+  }
 
-  if(level.MissionFailed)
+  if(level.MissionFailed) {
     return false;
+  }
 
-  if(!self take_cover_warnings_enabled())
+  if(!self take_cover_warnings_enabled()) {
     return false;
+  }
 
-  if(self.gameskill > 1 && !maps\_load::map_is_early_in_the_game())
+  if(self.gameskill > 1 && !maps\_load::map_is_early_in_the_game()) {
     return false;
+  }
 
   takeCoverWarnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
-  if(takeCoverWarnings <= 3)
+  if(takeCoverWarnings <= 3) {
     return false;
+  }
 
   return true;
 }
@@ -1502,11 +1569,13 @@ take_cover_warning() {
   stopFlashingBadlyTime += regen_time;
 
   fadeFunc(coverWarning, 1, 1, false);
-  while(GetTime() < stopFlashingBadlyTime && IsAlive(self))
+  while(GetTime() < stopFlashingBadlyTime && IsAlive(self)) {
     fadeFunc(coverWarning, .9, 1, false);
+  }
 
-  if(IsAlive(self))
+  if(IsAlive(self)) {
     fadeFunc(coverWarning, .65, 0.8, false);
+  }
 
   if(may_change_cover_warning_alpha(coverWarning)) {
     coverWarning FadeOverTime(1.0);
@@ -1575,8 +1644,9 @@ increment_take_cover_warnings_on_death() {
     return;
   }
   warnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
-  if(warnings < 10)
+  if(warnings < 10) {
     self SetLocalPlayerProfileData("takeCoverWarnings", warnings + 1);
+  }
 
   DebugTakeCoverWarnings();
 }
@@ -1587,8 +1657,9 @@ auto_adjust_difficulty_player_positioner() {
   org = self.origin;
 
   wait(5);
-  if(self autospot_is_close_to_player(org))
+  if(self autospot_is_close_to_player(org)) {
     level.autoAdjust_playerSpots[level.autoAdjust_playerSpots.size] = org;
+  }
 }
 
 autospot_is_close_to_player(org) {
@@ -1607,8 +1678,9 @@ auto_adjust_difficulty_player_movement_check() {
     level.player.movedRecently = true;
     newSpots = [];
     start = level.autoAdjust_playerSpots.size - 5;
-    if(start < 0)
+    if(start < 0) {
       start = 0;
+    }
 
     for(i = start; i < level.autoAdjust_playerSpots.size; i++) {
       if(!level.player autospot_is_close_to_player(level.autoAdjust_playerSpots[i])) {
@@ -1634,8 +1706,9 @@ auto_adjust_difficulty_track_player_death() {
 auto_adjust_difficulty_track_player_shots() {
   lastShotTime = GetTime();
   for(;;) {
-    if(level.player attackButtonPressed())
+    if(level.player attackButtonPressed()) {
       lastShotTime = GetTime();
+    }
 
     level.timeBetweenShots = GetTime() - lastShotTime;
     wait(0.05);
@@ -1653,16 +1726,18 @@ hud_debug_add(msg, num) {
 hud_debug_clear() {
   level.hudNum = 0;
   if(isDefined(level.hudDebugNum)) {
-    for(i = 0; i < level.hudDebugNum.size; i++)
+    for(i = 0; i < level.hudDebugNum.size; i++) {
       level.hudDebugNum[i] Destroy();
+    }
   }
 
   level.hudDebugNum = [];
 }
 
 hud_debug_add_message(msg) {
-  if(!isDefined(level.hudMsgShare))
+  if(!isDefined(level.hudMsgShare)) {
     level.hudMsgShare = [];
+  }
   if(!isDefined(level.hudMsgShare[msg])) {
     hud = NewHudElem();
     hud.x = level.debugLeft;
@@ -1692,8 +1767,9 @@ hud_debug_add_display(msg, num, isfloat) {
   hundreds = 0;
   tens = 0;
   ones = 0;
-  while(num >= 10000)
+  while(num >= 10000) {
     num -= 10000;
+  }
 
   while(num >= 1000) {
     num -= 1000;
@@ -1808,8 +1884,9 @@ hud_debug_add_second_string(num, offset) {
 }
 
 aa_init_stats() {
-  if(getDvar("createfx") == "on")
+  if(getDvar("createfx") == "on") {
     return;
+  }
   if(GetDvarInt("noder") || GetDvarInt("painter")) {
     return;
   }
@@ -1858,16 +1935,18 @@ command_used(cmd) {
 }
 
 aa_time_tracking() {
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     return;
+  }
   if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
     return;
   }
   waittillframeend;
   for(;;) {
     if(IsGodMode(level.player) || level.start_point != "default" || getDvar("timescale", 1) != "1") {
-      if(getDvar("player_cheated") != "1")
+      if(getDvar("player_cheated") != "1") {
         setDvar("player_cheated", 1);
+      }
     }
 
     wait(0.2);
@@ -2045,14 +2124,17 @@ return_false(attacker) {
 }
 
 player_attacker(attacker) {
-  if([[level.custom_player_attacker]](attacker))
+  if([[level.custom_player_attacker]](attacker)) {
     return true;
+  }
 
-  if(isPlayer(attacker))
+  if(isPlayer(attacker)) {
     return true;
+  }
 
-  if(!isDefined(attacker.car_damage_owner_recorder))
+  if(!isDefined(attacker.car_damage_owner_recorder)) {
     return false;
+  }
 
   return attacker player_did_most_damage();
 }
@@ -2083,8 +2165,9 @@ auto_adjust_enemy_death_detection(amount, attacker, direction_vec, point, type, 
     return;
   }
 
-  if(!player_attacker(attacker))
+  if(!player_attacker(attacker)) {
     return;
+  }
   aa_player_attacks_enemy_with_ads(amount, type, point);
 }
 
@@ -2108,8 +2191,9 @@ aa_player_attacks_enemy_with_ads(amount, type, point) {
 }
 
 bullet_attack(type) {
-  if(type == "MOD_PISTOL_BULLET")
+  if(type == "MOD_PISTOL_BULLET") {
     return true;
+  }
   return type == "MOD_RIFLE_BULLET";
 }
 
@@ -2128,11 +2212,13 @@ add_fractional_data_point(name, frac, val) {
 }
 
 coop_with_one_player_downed() {
-  if(!is_coop())
+  if(!is_coop()) {
     return false;
+  }
 
-  if(level.players.size != 2)
+  if(level.players.size != 2) {
     return false;
+  }
 
   downed_players = 0;
   foreach(player in level.players) {

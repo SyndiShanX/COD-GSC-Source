@@ -137,15 +137,17 @@ stealth_debug_print(msg) {
 
   println(txt);
 
-  if(getdvarint("stealth_debug_prints") == 1)
+  if(getdvarint("stealth_debug_prints") == 1) {
     self thread debug_message_ai(msg);
+  }
 }
 
 enemy_event_debug_print(type) {
   setDvarIfUninitialized("stealth_debug_prints", "0");
 
-  if(!isDefined(getDvar("stealth_debug_prints")))
+  if(!isDefined(getDvar("stealth_debug_prints"))) {
     setDvar("stealth_debug_prints", "0");
+  }
 
   if(getdvarint("stealth_debug_prints") != 1) {
     return;
@@ -155,48 +157,52 @@ enemy_event_debug_print(type) {
 
   self waittill(type, subtype);
 
-  if(isDefined(subtype))
+  if(isDefined(subtype)) {
     self stealth_debug_print("Received an event: " + type + " " + subtype);
-  else
+  } else {
     self stealth_debug_print("Received an event: " + type);
+  }
 }
 
 stealth_flag_debug_print(_flag) {
   while(1) {
     flag_wait(_flag);
     {
-      if(getdvarint("stealth_debug_prints") == 1)
+      if(getdvarint("stealth_debug_prints") == 1) {
         iprintlnbold(_flag);
-      else
+      } else {
         println(_flag);
+      }
     }
 
     flag_waitopen(_flag);
     {
-      if(getdvarint("stealth_debug_prints") == 1)
+      if(getdvarint("stealth_debug_prints") == 1) {
         iprintlnbold("back to normal: " + _flag);
-      else
+      } else {
         println("back to normal: " + _flag);
+      }
     }
   }
-
 }
 
 group_flag_init(_flag) {
   assertex(issentient(self), "an AI must call this function");
 
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     self.script_stealthgroup = string(self.script_stealthgroup);
-  else
+  } else {
     self.script_stealthgroup = "default";
+  }
 
   name = self group_get_flagname(_flag);
 
   if(!flag_exist(name)) {
     flag_init(name);
 
-    if(!isDefined(level._stealth.group.flags[_flag]))
+    if(!isDefined(level._stealth.group.flags[_flag])) {
       level._stealth.group.flags[_flag] = [];
+    }
 
     size = level._stealth.group.flags[_flag].size;
     level._stealth.group.flags[_flag][size] = name;
@@ -241,8 +247,9 @@ group_return_groups_with_flag_set(_flag) {
   foreach(key, value in array) {
     name = group_get_flagname_from_group(_flag, key);
 
-    if(flag(name))
+    if(flag(name)) {
       return_value[return_value.size] = key;
+    }
   }
 
   return return_value;
@@ -273,8 +280,9 @@ group_flag_clear(_flag, group) {
   clear = true;
 
   foreach(key, value in array) {
-    if(flag(value))
+    if(flag(value)) {
       return;
+    }
   }
 
   flag_clear(_flag);
@@ -286,8 +294,9 @@ group_get_ai_in_group(group_name) {
 }
 
 group_wait_group_spawned(group_name) {
-  if(!isDefined(level._stealth.group.groups[group_name]))
+  if(!isDefined(level._stealth.group.groups[group_name])) {
     level._stealth.group waittill(group_name);
+  }
 }
 
 ai_stealth_pause_handler() {
@@ -327,8 +336,9 @@ enemy_go_back() {
 
   spot = self._stealth.behavior.last_spot;
 
-  if(isDefined(spot) && self.type != "dog" && !isDefined(self.customMoveTransition))
+  if(isDefined(spot) && self.type != "dog" && !isDefined(self.customMoveTransition)) {
     self.customMoveTransition = maps\_patrol::patrol_resume_move_start_func;
+  }
 
   if(isDefined(self.customMoveTransition) && isDefined(self.pathGoalPos)) {
     self setgoalpos(self.origin);
@@ -351,9 +361,9 @@ enemy_go_back() {
     self set_dog_walk_anim();
     self.script_growl = undefined;
   } else if(isDefined(spot)) {
-    if(self.type != "dog")
+    if(self.type != "dog") {
       self set_generic_run_anim("_stealth_patrol_cqb", true);
-    else {
+    } else {
       self set_dog_walk_anim();
       self.script_growl = undefined;
     }
@@ -367,8 +377,9 @@ enemy_go_back() {
   waittillframeend;
   self ent_flag_clear("_stealth_override_goalpos");
 
-  if(isDefined(spot))
+  if(isDefined(spot)) {
     self thread enemy_go_back_clear_lastspot(spot);
+  }
 }
 
 enemy_go_back_clear_lastspot(origin) {
@@ -379,11 +390,13 @@ enemy_go_back_clear_lastspot(origin) {
   self._stealth.behavior.last_spot = undefined;
 }
 enemy_get_nearby_pathnodes(origin, radius, min_radius) {
-  if(!isDefined(min_radius))
+  if(!isDefined(min_radius)) {
     min_radius = 0;
+  }
 
-  if(isDefined(level._stealth.node_search.nodes_array) && distanceSquared(origin, level._stealth.node_search.origin) < 64 * 64 && radius == level._stealth.node_search.radius && min_radius == level._stealth.node_search.min_radius)
+  if(isDefined(level._stealth.node_search.nodes_array) && distanceSquared(origin, level._stealth.node_search.origin) < 64 * 64 && radius == level._stealth.node_search.radius && min_radius == level._stealth.node_search.min_radius) {
     return level._stealth.node_search.nodes_array;
+  }
 
   level._stealth.node_search.origin = origin;
   level._stealth.node_search.radius = radius;
@@ -405,13 +418,15 @@ enemy_alert_level_forget(enemy, delay) {
   self endon("death");
   enemy endon("death");
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 60;
+  }
 
   wait delay;
 
-  if(isDefined(enemy._stealth.logic.spotted_list[self.unique_id]) && enemy._stealth.logic.spotted_list[self.unique_id] > 0)
+  if(isDefined(enemy._stealth.logic.spotted_list[self.unique_id]) && enemy._stealth.logic.spotted_list[self.unique_id] > 0) {
     enemy._stealth.logic.spotted_list[self.unique_id]--;
+  }
 }
 
 enemy_stop_current_behavior() {
@@ -421,8 +436,9 @@ enemy_stop_current_behavior() {
     self notify("stop_loop");
   }
   if(isDefined(self.script_patroller)) {
-    if(isDefined(self.last_patrol_goal))
+    if(isDefined(self.last_patrol_goal)) {
       self.last_patrol_goal.patrol_claimed = undefined;
+    }
 
     self notify("release_node");
     self notify("end_patrol");
@@ -436,14 +452,15 @@ enemy_find_original_goal() {
   if(isDefined(self._stealth.behavior.last_spot)) {
     return;
   }
-  if(isDefined(self.last_set_goalnode))
+  if(isDefined(self.last_set_goalnode)) {
     self._stealth.behavior.last_spot = self.last_set_goalnode.origin;
-  else if(isDefined(self.last_set_goalent))
+  } else if(isDefined(self.last_set_goalent)) {
     self._stealth.behavior.last_spot = self.last_set_goalent.origin;
-  else if(isDefined(self.last_set_goalpos))
+  } else if(isDefined(self.last_set_goalpos)) {
     self._stealth.behavior.last_spot = self.last_set_goalpos;
-  else
+  } else {
     self._stealth.behavior.last_spot = self.origin;
+  }
 }
 
 enemy_set_original_goal(origin) {
@@ -456,8 +473,9 @@ enemy_runto_and_lookaround(node, position) {
 
   self endon("death");
   self endon("_stealth_enemy_alert_level_change");
-  if(self.type != "dog")
+  if(self.type != "dog") {
     self endon("_stealth_saw_corpse");
+  }
 
   spotted_flag = self group_get_flagname("_stealth_spotted");
   level endon(spotted_flag);
@@ -477,8 +495,9 @@ enemy_runto_and_lookaround(node, position) {
 
   self waittill("goal");
 
-  if(self.type != "dog")
+  if(self.type != "dog") {
     self set_generic_idle_anim("_stealth_look_around");
+  }
 }
 
 enemy_find_free_pathnode_near(origin, radius, min_radius) {
@@ -504,8 +523,9 @@ enemy_find_free_pathnode_near(origin, radius, min_radius) {
 }
 
 enemy_announce_wtf() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     return;
+  }
   if(!(self enemy_announce_snd("wtf"))) {
     return;
   }
@@ -513,8 +533,9 @@ enemy_announce_wtf() {
   self playSound(alias);
 }
 enemy_announce_huh() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     return;
+  }
   if(!(self enemy_announce_snd("huh"))) {
     return;
   }
@@ -522,8 +543,9 @@ enemy_announce_huh() {
   self playSound(alias);
 }
 enemy_announce_hmph() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     return;
+  }
   if(!(self enemy_announce_snd("hmph"))) {
     return;
   }
@@ -560,17 +582,19 @@ enemy_announce_spotted(pos) {
     self playSound(alias);
   }
 
-  if(self enemy_announce_snd("acknowledge"))
+  if(self enemy_announce_snd("acknowledge")) {
     self thread enemy_announce_spotted_acknowledge(self.origin);
+  }
 }
 
 enemy_announce_spotted_acknowledge(spotterPos) {
   wait 1.5;
 
-  if(isDefined(self.npcID))
+  if(isDefined(self.npcID)) {
     num = self.npcID;
-  else
+  } else {
     num = randomint(3);
+  }
 
   alias = "RU_" + num + "_stealth_alert_r";
   play_sound_in_space(alias, spotterPos);
@@ -592,8 +616,9 @@ enemy_announce_spotted_bring_group(pos) {
 
 enemy_announce_corpse() {
   self endon("death");
-  if(isDefined(self.found_corpse_wait))
+  if(isDefined(self.found_corpse_wait)) {
     wait(self.found_corpse_wait);
+  }
 
   if(!(self enemy_announce_snd("corpse"))) {
     return;
@@ -610,13 +635,15 @@ enemy_announce_corpse() {
 
 enemy_announce_snd(type) {
   if(type == "spotted") {
-    if(level._stealth.behavior.sound[type][self.script_stealthgroup])
+    if(level._stealth.behavior.sound[type][self.script_stealthgroup]) {
       return false;
+    }
 
     level._stealth.behavior.sound[type][self.script_stealthgroup] = true;
   } else {
-    if(level._stealth.behavior.sound[type])
+    if(level._stealth.behavior.sound[type]) {
       return false;
+    }
 
     level._stealth.behavior.sound[type] = true;
 
@@ -671,10 +698,11 @@ enemy_animation_custom(type) {
     node thread anim_single(self.anim_props, anime);
   }
   if(type != "doFlashBanged") {
-    if(isDefined(tag) || isDefined(self.has_delta))
+    if(isDefined(tag) || isDefined(self.has_delta)) {
       node anim_generic(self, anime, tag);
-    else
+    } else {
       node anim_generic_custom_animmode(self, "gravity", anime);
+    }
   }
 
   self ai_clear_custom_animation_reaction();
@@ -683,13 +711,15 @@ enemy_animation_custom(type) {
 enemy_animation_pre_anim(type) {
   self notify("enemy_awareness_reaction", type);
 
-  if(self ent_flag("_stealth_behavior_first_reaction") || self ent_flag("_stealth_behavior_reaction_anim_in_progress"))
+  if(self ent_flag("_stealth_behavior_first_reaction") || self ent_flag("_stealth_behavior_reaction_anim_in_progress")) {
     return true;
+  }
 
   self enemy_stop_current_behavior();
 
-  if(issubstr(type, "warning"))
+  if(issubstr(type, "warning")) {
     type = "warning";
+  }
 
   switch (type) {
     case "explode":
@@ -722,8 +752,9 @@ enemy_animation_pre_anim_dog_special_first_condition() {
   self endon("death");
 
   flag_wait_or_timeout(spotted_flag, 3);
-  if(flag(spotted_flag))
+  if(flag(spotted_flag)) {
     self ent_flag_set("_stealth_behavior_first_reaction");
+  }
 }
 
 enemy_animation_post_anim(type) {
@@ -747,8 +778,9 @@ ai_clear_custom_animation_reaction_and_idle(waitanimend) {
     return;
   }
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
-  if(!isDefined(waitanimend) || waitanimend == false)
+  if(!isDefined(waitanimend) || waitanimend == false) {
     self stopanimscripted();
+  }
 
   self ai_clear_custom_animation_reaction();
 }
@@ -824,12 +856,14 @@ event_awareness_enders(ender_array) {
 
   if(isDefined(ender_array)) {
     foreach(string in ender_array) {
-      if(flag_exist(string) && flag(string))
+      if(flag_exist(string) && flag(string)) {
         level notify("default_event_awareness_enders");
+      }
     }
 
-    foreach(string in ender_array)
-    add_wait(::waittill_msg, string);
+    foreach(string in ender_array) {
+      add_wait(::waittill_msg, string);
+    }
   }
 
   add_wait(::flag_wait, "_stealth_spotted");
@@ -840,19 +874,23 @@ event_awareness_enders(ender_array) {
 }
 
 _autosave_stealthcheck() {
-  if(!stealth_is_everything_normal())
+  if(!stealth_is_everything_normal()) {
     return false;
+  }
 
-  if(flag("_stealth_player_nade"))
+  if(flag("_stealth_player_nade")) {
     return false;
+  }
   if(flag_exist("_radiation_poisoning")) {
-    if(flag("_radiation_poisoning"))
+    if(flag("_radiation_poisoning")) {
       return false;
+    }
   }
   vehicles = getEntArray("destructible", "classname");
   foreach(vehicle in vehicles) {
-    if(isDefined(vehicle.healthDrain))
+    if(isDefined(vehicle.healthDrain)) {
       return false;
+    }
   }
 
   return true;

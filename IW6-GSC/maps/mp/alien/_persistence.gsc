@@ -94,18 +94,20 @@ get_selected_dpad_down() {
 
 get_selected_dpad_left() {
   defense = self getcoopplayerdata("alienPlayerLoadout", "defense");
-  if(defense == "dpad_placeholder_def_1" && maps\mp\alien\_utility::is_chaos_mode())
+  if(defense == "dpad_placeholder_def_1" && maps\mp\alien\_utility::is_chaos_mode()) {
     return "dpad_minigun_turret";
-  else
+  } else {
     return defense;
+  }
 }
 
 get_selected_dpad_right() {
   offense = self getcoopplayerdata("alienPlayerLoadout", "offense");
-  if(offense == "dpad_placeholder_off_1" && maps\mp\alien\_utility::is_chaos_mode())
+  if(offense == "dpad_placeholder_off_1" && maps\mp\alien\_utility::is_chaos_mode()) {
     return "dpad_ims";
-  else
+  } else {
     return offense;
+  }
 }
 
 get_dpad_up_level() {
@@ -163,10 +165,11 @@ wait_to_set_player_currency(amount) {
   level endon("game_ended");
 
   wait(0.5);
-  if(self is_upgrade_enabled("more_cash_upgrade"))
+  if(self is_upgrade_enabled("more_cash_upgrade")) {
     set_player_currency(CURRENCY_UPGRADE_START);
-  else
+  } else {
     set_player_currency(amount);
+  }
 }
 
 set_player_currency(amount) {
@@ -206,10 +209,11 @@ give_player_currency(amount, font_size, sHitloc, skip_prestige_scalar) {
   new_amount = current_amount + amount;
   new_amount = min(new_amount, max_amount);
 
-  if(!isDefined(self.total_currency_earned))
+  if(!isDefined(self.total_currency_earned)) {
     self.total_currency_earned = amount;
-  else
+  } else {
     self.total_currency_earned += (new_amount - current_amount);
+  }
 
   self eog_player_update_stat("currencytotal", int(self.total_currency_earned), true);
 
@@ -220,8 +224,9 @@ give_player_currency(amount, font_size, sHitloc, skip_prestige_scalar) {
   MAX_CASH_COOL_DOWN_TIME = 30000;
   current_time = getTime();
 
-  if(current_amount == max_amount)
+  if(current_amount == max_amount) {
     self setclientomnvar("ui_alien_cash_overflow", true);
+  }
 
   if(new_amount >= max_amount) {
     if(!isDefined(self.next_maxmoney_hint_time)) {
@@ -248,8 +253,9 @@ take_player_currency(amount, dont_update_challenge, spending_type, weapon_ref) {
 
   self set_player_currency(new_amount);
 
-  if(isDefined(spending_type))
+  if(isDefined(spending_type)) {
     maps\mp\alien\_alien_matchdata::update_spending_type(amount_spent, spending_type);
+  }
 
   if(isDefined(dont_update_challenge) && dont_update_challenge) {
     return;
@@ -356,31 +362,36 @@ player_persistence_init() {
 }
 
 get_starting_currency() {
-  if(isDefined(level.debug_starting_currency))
+  if(isDefined(level.debug_starting_currency)) {
     return level.debug_starting_currency;
+  }
 
   return CURRENCY_START;
 }
 
 get_starting_skill_point() {
-  if(isDefined(level.debug_starting_skill_point))
+  if(isDefined(level.debug_starting_skill_point)) {
     return level.debug_starting_skill_point;
+  }
 
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     return CHAOS_START_SKILL_POINTS;
+  }
 
-  if(self is_upgrade_enabled("free_skill_points_upgrade"))
+  if(self is_upgrade_enabled("free_skill_points_upgrade")) {
     return FREE_SKILL_POINTS;
-  else
+  } else {
     return 0;
+  }
 }
 
 update_loadout_for_everyone() {
   level notify("updating_player_loadout_data");
   level endon("updating_player_loadout_data");
 
-  if(!isDefined(level.players) || level.players.size == 0)
+  if(!isDefined(level.players) || level.players.size == 0) {
     wait 0.5;
+  }
 
   wait 1;
 
@@ -420,8 +431,9 @@ update_loadout_for_everyone() {
       p.bbprint_loadout = true;
 
       playername = "";
-      if(isDefined(self.name))
+      if(isDefined(self.name)) {
         playername = self.name;
+      }
 
       playerrank = self get_player_rank();
       playerxp = self get_player_xp();
@@ -430,8 +442,9 @@ update_loadout_for_everyone() {
       connecttime = gettime();
 
       cyclenum = 0;
-      if(isDefined(level.current_cycle_num))
+      if(isDefined(level.current_cycle_num)) {
         cyclenum = level.current_cycle_num;
+      }
 
       if(GetDvarInt("alien_bbprint_debug") > 0) {
         IPrintLnBold("^8bbprint: alienplayerloadout (1/2)\n" + " playername=" + playername + " playerrank=" + playerrank + " playerxp=" + playerxp + " playerprestige=" + playerprestige + " playerescaped=" + playerescaped + " connecttime=" + connecttime + " cyclenum=" + cyclenum);
@@ -472,8 +485,9 @@ setcoopplayerdata_for_everyone(param0, param1, param2, param3, param4) {
 
 get_token_bonus_flag(bonusNum) {
   flagNum = 4;
-  if(bonusNum < 28)
+  if(bonusNum < 28) {
     flagNum += bonusNum;
+  }
 
   return flagNum;
 }
@@ -576,8 +590,9 @@ award_completion_tokens() {
   if(is_hardcore_mode()) {
     numAwarded = numAwarded + 3;
 
-    if(getDvar("alien_debug_eog") == "1")
+    if(getDvar("alien_debug_eog") == "1") {
       iprintln("Hardcore Bonus Token Awarded!");
+    }
   }
 
   if(level.all_challenge_completed) {
@@ -586,15 +601,17 @@ award_completion_tokens() {
 
   num_active_relics = self maps\mp\alien\_prestige::get_num_nerf_selected();
   if(num_active_relics > 0 && !is_true(self.pers["hotjoined"])) {
-    if(num_active_relics == 1)
+    if(num_active_relics == 1) {
       numAwarded = numAwarded + 1;
-    else if(num_active_relics == 2)
+    } else if(num_active_relics == 2) {
       numAwarded = numAwarded + 2;
-    else if(num_active_relics >= 3)
+    } else if(num_active_relics >= 3) {
       numAwarded = numAwarded + 3;
+    }
 
-    if(getDvar("alien_debug_eog") == "1")
+    if(getDvar("alien_debug_eog") == "1") {
       iprintln("Active Relics Bonus Token Awarded!");
+    }
   }
 
   if(1 < self get_player_escaped()) {
@@ -602,8 +619,9 @@ award_completion_tokens() {
       if(player != self && 1 == player get_player_escaped()) {
         numAwarded++;
 
-        if(getDvar("alien_debug_eog") == "1")
+        if(getDvar("alien_debug_eog") == "1") {
           iprintln("New Player Assist Bonus Token Awarded!");
+        }
       }
     }
   }
@@ -688,20 +706,23 @@ eog_player_tracking_init() {
 
   player_ref = self get_player_ref();
   foreach(player in level.players) {
-    if(getDvar("alien_debug_eog") == "1")
+    if(getDvar("alien_debug_eog") == "1") {
       iprintln("^6[EOG STAT] " + player_ref + " updated for " + " player_" + player GetEntityNumber());
+    }
 
     player reset_EoG_stats(player_ref);
 
     player_name = "unknownPlayer";
-    if(isDefined(self.name))
+    if(isDefined(self.name)) {
       player_name = self.name;
+    }
 
     if(!level.console) {
       player_name = GetSubStr(player_name, 0, 19);
     } else {
-      if(have_clan_tag(player_name))
+      if(have_clan_tag(player_name)) {
         player_name = remove_clan_tag(player_name);
+      }
     }
 
     player setcoopplayerdata(player_ref, "name", player_name);
@@ -717,8 +738,9 @@ eog_player_tracking_init() {
     }
     player_ref = p get_player_ref();
 
-    if(getDvar("alien_debug_eog") == "1")
+    if(getDvar("alien_debug_eog") == "1") {
       iprintln("^6[EOG STAT] player_" + self GetEntityNumber() + " grabbed " + player_ref);
+    }
 
     name = p getcoopplayerdata(player_ref, "name");
     kills = p getcoopplayerdata(player_ref, "kills");
@@ -757,8 +779,9 @@ eog_player_tracking_init() {
 
   foreach(index, result in players_eog_updated) {
     if(!result) {
-      if(getDvar("alien_debug_eog") == "1")
+      if(getDvar("alien_debug_eog") == "1") {
         iprintln("^6[EOG STAT] player_" + self GetEntityNumber() + " reset EoGPlayer" + index);
+      }
 
       self reset_EoG_stats("EoGPlayer" + index);
     }
@@ -857,8 +880,9 @@ get_base_weapon_name(weapon_ref) {
     }
   }
 
-  if(base_weapon == "")
+  if(base_weapon == "") {
     return "none";
+  }
 
   return base_weapon;
 }
@@ -885,14 +909,17 @@ update_weaponstats_hits(weapon_ref, hits, sMeansOfDeath) {
 }
 
 is_valid_weapon_hit(weapon_ref, sMeansOfDeath) {
-  if(weapon_ref == "none")
+  if(weapon_ref == "none") {
     return false;
+  }
 
-  if(sMeansOfDeath == "MOD_MELEE")
+  if(sMeansOfDeath == "MOD_MELEE") {
     return false;
+  }
 
-  if(no_weapon_fired_notify(weapon_ref))
+  if(no_weapon_fired_notify(weapon_ref)) {
     return false;
+  }
 
   return true;
 }
@@ -970,8 +997,9 @@ update_weaponstats(stat_type, weapon_ref, stat, value) {
   if(!isDefined(base_weapon) || !isDefined(self.persistence_weaponstats[base_weapon])) {
     return;
   }
-  if(isDefined(level.weapon_stats_override_name_func))
+  if(isDefined(level.weapon_stats_override_name_func)) {
     base_weapon = [[level.weapon_stats_override_name_func]](base_weapon);
+  }
 
   if(IsSubStr(base_weapon, "dlc")) {
     tokens = StrTok(base_weapon, "d");
@@ -1060,8 +1088,9 @@ TABLE_UNLOCK_STRING = 17;
 TABLE_TOKEN_REWARD = 18;
 
 rank_init() {
-  if(!isDefined(level.alien_ranks_table))
+  if(!isDefined(level.alien_ranks_table)) {
     level.alien_ranks_table = RANK_TABLE;
+  }
 
   level.alien_ranks = [];
 
@@ -1195,8 +1224,9 @@ get_player_session_rankup() {
 }
 
 update_player_session_rankup(ranked_up_times) {
-  if(!isDefined(ranked_up_times))
+  if(!isDefined(ranked_up_times)) {
     ranked_up_times = 1;
+  }
 
   old_ranked_up_times = self get_player_session_rankup();
   new_ranked_up_times = ranked_up_times + old_ranked_up_times;
@@ -1252,8 +1282,9 @@ get_rank_by_xp(xp) {
 }
 
 get_scaled_xp(xp) {
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     xp = int(0.66 * xp);
+  }
   return int(xp * level.xpScale);
 }
 
@@ -1286,8 +1317,9 @@ give_player_xp(xp) {
   new_xp = old_xp + xp;
   new_prestige = 0;
 
-  if(getDvar("alien_debug_xp") == "1")
+  if(getDvar("alien_debug_xp") == "1") {
     IPrintLn("+" + xp + "xp [" + new_xp + "]");
+  }
 
   self set_player_xp(new_xp);
 
@@ -1310,17 +1342,19 @@ give_player_xp(xp) {
     }
 
     if(at_max_rank == false) {
-      if(new_rank == 30)
+      if(new_rank == 30) {
         display_rank = 1;
-      else
+      } else {
         display_rank = new_rank + 1;
+      }
 
       self setclientomnvar("ui_alien_rankup", display_rank);
       self notify("ranked_up", new_rank);
       self update_player_session_rankup();
 
-      if(getDvar("alien_debug_xp") == "1")
+      if(getDvar("alien_debug_xp") == "1") {
         IPrintLnbold("Ranked up: Lv." + new_rank + " [XP: " + new_xp + "]");
+      }
 
       self award_rank_up_tokens(old_rank);
     }
@@ -1371,8 +1405,9 @@ BBData_init() {
 
 deployablebox_used_track(boxEnt) {
   itemname = boxEnt.boxType;
-  if(isDefined(boxEnt.dpadName))
+  if(isDefined(boxEnt.dpadName)) {
     itemname = boxEnt.dpadName;
+  }
 
   self thread maps\mp\alien\_persistence::update_resource_stats("used", itemname, 1);
 
@@ -1382,8 +1417,9 @@ deployablebox_used_track(boxEnt) {
   self eog_player_update_stat("deployablesused", 1);
 
   username = "";
-  if(isDefined(self.name))
+  if(isDefined(self.name)) {
     username = self.name;
+  }
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     IPrintLnBold("^8bbprint: aliendeployableused \n" + " itemname=" + itemname + " itemlevel=" + boxEnt.upgrade_rank + " itemx,y,z=" + boxEnt.origin + " username=" + username);
@@ -1400,8 +1436,9 @@ update_LB_alienSession_challenge(challenge_succeed) {
   foreach(player in level.players) {
     player LB_player_update_stat("challengesAttempted", 1);
 
-    if(challenge_succeed)
+    if(challenge_succeed) {
       player LB_player_update_stat("challengesCompleted", 1);
+    }
   }
 }
 
@@ -1418,8 +1455,9 @@ update_alien_kill_sessionStats(eInflictor, eAttacker) {
   if(!isDefined(eAttacker) || !isPlayer(eAttacker)) {
     return;
   }
-  if(maps\mp\alien\_utility::is_trap(eInflictor))
+  if(maps\mp\alien\_utility::is_trap(eInflictor)) {
     eAttacker LB_player_update_stat("trapKills", 1);
+  }
 }
 
 register_LB_escape_rank(escape_rank_array) {
@@ -1428,8 +1466,9 @@ register_LB_escape_rank(escape_rank_array) {
 
 get_LB_escape_rank(escape_time_remains) {
   for(i = 0; i < level.escape_rank_array.size - 1; i++) {
-    if(escape_time_remains >= level.escape_rank_array[i] && escape_time_remains < level.escape_rank_array[i + 1])
+    if(escape_time_remains >= level.escape_rank_array[i] && escape_time_remains < level.escape_rank_array[i + 1]) {
       return i;
+    }
   }
 }
 

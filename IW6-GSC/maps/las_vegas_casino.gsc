@@ -160,8 +160,9 @@ ambush() {
   level.dog maps\_utility_dogs::kill_dog_fur_effect();
 
   foreach(var_4 in level.heroes) {
-    if(isDefined(var_4.magic_bullet_shield))
+    if(isDefined(var_4.magic_bullet_shield)) {
       var_4 maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_4.allowdeath = 1;
     var_4.a.nodeath = 1;
@@ -175,16 +176,18 @@ ambush() {
     if(!isDefined(var_7)) {
       continue;
     }
-    if(isDefined(var_7.fx))
+    if(isDefined(var_7.fx)) {
       var_7.fx delete();
+    }
 
     var_7 delete();
   }
 
   var_9 = getcorpsearray();
 
-  foreach(var_11 in var_9)
-  var_11 delete();
+  foreach(var_11 in var_9) {
+    var_11 delete();
+  }
 }
 
 disable_player_settings(var_0) {
@@ -288,19 +291,22 @@ pitch_and_roll() {
   var_1 = (0, var_0.angles[1], 0);
   var_2 = 20;
 
-  if(isDefined(var_0.script_max_left_angle))
+  if(isDefined(var_0.script_max_left_angle)) {
     var_2 = var_0.script_max_left_angle;
+  }
 
   var_3 = 1;
 
-  if(var_2 < 0)
+  if(var_2 < 0) {
     var_3 = 4;
+  }
 
   var_4 = var_2 * 0.5 * var_3;
   var_5 = 4;
 
-  if(isDefined(var_0.script_duration))
+  if(isDefined(var_0.script_duration)) {
     var_5 = var_0.script_duration;
+  }
 
   var_6 = var_5 * 0.5;
   var_0 = undefined;
@@ -321,16 +327,18 @@ gas_rorke_shows_up() {
   setblur(10, 1);
   maps\_hud_util::fade_out(1);
 
-  if(isDefined(level.dog))
+  if(isDefined(level.dog)) {
     level.dog hide();
+  }
 
   maps\las_vegas_code::spawn_rorke();
   level.rorke maps\_utility::gun_remove();
   level.rorke setlookatentity(level.player);
   var_0 = maps\_utility::array_spawn_targetname("elite_gas_guys");
 
-  foreach(var_2 in var_0)
-  var_2 thread gas_guys_think();
+  foreach(var_2 in var_0) {
+    var_2 thread gas_guys_think();
+  }
 
   var_4 = common_scripts\utility::get_target_ent("rorke_gas_pos");
   var_4 thread maps\_anim::anim_generic_loop(level.rorke, "NML_vargas_idle");
@@ -356,10 +364,11 @@ gas_guys_think(var_0) {
   self.goalradius = 32;
   self.combatmode = "no_cover";
 
-  if(self.script_index == 0)
+  if(self.script_index == 0) {
     self.moveplaybackrate = 0.5;
-  else
+  } else {
     self.moveplaybackrate = 0.3;
+  }
 
   self setgoalentity(level.player);
 }
@@ -387,8 +396,9 @@ player_drunk() {
     var_4 = cos(gettime() * 0.15) * -3;
     level.player pushplayervector((var_3, var_4, 0));
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_0 = var_0 * -1;
+    }
 
     wait 0.05;
   }
@@ -425,8 +435,9 @@ drag1_audio() {
 }
 
 postspawn_drag_enemies() {
-  if(!isDefined(level.drag_enemies))
+  if(!isDefined(level.drag_enemies)) {
     level.drag_enemies = [];
+  }
 
   level.drag_enemies[level.drag_enemies.size] = self;
   self.ignoreall = 1;
@@ -435,8 +446,9 @@ postspawn_drag_enemies() {
   self.script_forcegoal = 1;
   maps\_utility::disable_arrivals();
 
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     self setgoalpos(self.origin);
+  }
 
   maps\_utility::set_generic_run_anim("active_patrolwalk_gundown");
 }
@@ -445,8 +457,9 @@ blur_fadein(var_0) {
   level notify("stop_any_blur");
   level endon("stop_any_blur");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 30;
+  }
 
   setblur(var_0, 0.1);
   wait 2;
@@ -463,8 +476,9 @@ dof_off(var_0) {
 }
 
 blur_fadeout(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5;
+  }
 
   level notify("stop_any_blur");
   level endon("stop_any_blur");
@@ -513,8 +527,9 @@ merrick_beatup() {
   var_1 = [];
   var_2 = getEntArray("beatup_spawners", "targetname");
 
-  foreach(var_4 in var_2)
-  var_1[var_1.size] = var_4 spawndrone();
+  foreach(var_4 in var_2) {
+    var_1[var_1.size] = var_4 spawndrone();
+  }
 
   var_6 = undefined;
   var_7 = undefined;
@@ -646,8 +661,9 @@ elias_death_start(var_0) {
   var_0 thread maps\_anim::anim_single(var_1, "elias_death_start_b");
   wait(var_2);
 
-  if(common_scripts\utility::flag("elias_death_player_failed"))
+  if(common_scripts\utility::flag("elias_death_player_failed")) {
     level waittill("forever");
+  }
 }
 
 elias_death_visual_tweaks() {
@@ -744,8 +760,9 @@ elias_death_struggle_thread(var_0, var_1) {
   if(var_8) {
     level.rorke.playsound_ents = common_scripts\utility::array_removeundefined(level.rorke.playsound_ents);
 
-    foreach(var_11 in level.rorke.playsound_ents)
-    var_11 scalevolume(0, 0.2);
+    foreach(var_11 in level.rorke.playsound_ents) {
+      var_11 scalevolume(0, 0.2);
+    }
 
     common_scripts\utility::array_thread(var_0, maps\_utility::anim_stopanimscripted);
     var_1 maps\las_vegas_code::struct_stopanimscripted();
@@ -813,17 +830,17 @@ elias_death_blood_pool() {
 intro_struct_realign(var_0, var_1) {
   var_2 = common_scripts\utility::getstruct("elias_death_struct", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2.origin = common_scripts\utility::drop_to_ground(var_0, 10, -200);
-  else if(getDvar("intro_origin") != "") {
+  } else if(getDvar("intro_origin") != "") {
     var_3 = strtok(getDvar("intro_origin"), " ");
     var_2.origin = (float(var_3[0]), float(var_3[1]), float(var_3[2]));
     var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -200);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2.angles = var_1 + (0, 90, 0);
-  else if(getDvar("intro_angles") != "") {
+  } else if(getDvar("intro_angles") != "") {
     var_3 = strtok(getDvar("intro_angles"), " ");
     var_2.angles = (float(var_3[0]), float(var_3[1]) + 90, float(var_3[2]));
   }
@@ -833,8 +850,9 @@ elias_death_end_thread() {
   wait 0.1;
   var_0 = level.elias maps\_utility::getanim("elias_death_end");
 
-  while(level.elias getanimtime(var_0) < 0.992)
+  while(level.elias getanimtime(var_0) < 0.992) {
     wait 0.05;
+  }
 
   maps\_utility::set_vision_set("lv_tunnel_overbloom", 0.1);
   level.player setclienttriggeraudiozone("las_vegas_post_torture_black", 0.1);
@@ -868,13 +886,15 @@ rescue() {
   maps\las_vegas_code::spawn_hero("hesh");
   maps\las_vegas_code::spawn_hero("merrick");
 
-  if(isDefined(level.elias))
+  if(isDefined(level.elias)) {
     level.heroes = common_scripts\utility::array_remove(level.heroes, level.elias);
+  }
 
   level.heroes = common_scripts\utility::array_removeundefined(level.heroes);
 
-  foreach(var_2 in level.heroes)
-  var_2 maps\_utility::gun_remove();
+  foreach(var_2 in level.heroes) {
+    var_2 maps\_utility::gun_remove();
+  }
 
   thread rescue_sniper();
   thread rescue_player_thread();
@@ -995,8 +1015,9 @@ rescue_player_thread() {
   level.player allowsprint(1);
   maps\las_vegas_code::ui_show_stance(1);
 
-  foreach(var_2 in level.heroes)
-  var_2 maps\las_vegas_code::restore_name();
+  foreach(var_2 in level.heroes) {
+    var_2 maps\las_vegas_code::restore_name();
+  }
 
   wait 5;
   level.player setCanDamage(1);
@@ -1012,10 +1033,11 @@ player_threatbias_thread() {
   common_scripts\utility::flag_wait("rescue_unlink_player");
   var_1 = 10;
 
-  if(maps\_utility::getdifficulty() == "hard")
+  if(maps\_utility::getdifficulty() == "hard") {
     var_1 = 15;
-  else if(maps\_utility::getdifficulty() == "fu")
+  } else if(maps\_utility::getdifficulty() == "fu") {
     var_1 = 30;
+  }
 
   var_2 = var_1 * 20;
   var_3 = var_0 / var_2;
@@ -1223,8 +1245,9 @@ sniper_sort_targets() {
       continue;
     }
 
-    if(isDefined(var_3.script_delay))
+    if(isDefined(var_3.script_delay)) {
       var_3.kill_time = var_3.script_delay;
+    }
   }
 
   for(var_5 = 0; var_5 < var_0.size - 1; var_5++) {
@@ -1251,20 +1274,23 @@ sniper_get_target() {
   level.rescue_targets = common_scripts\utility::array_removeundefined(level.rescue_targets);
   level.rescue_targets = maps\_utility::array_removedead_or_dying(level.rescue_targets);
 
-  if(level.rescue_targets.size == 0)
+  if(level.rescue_targets.size == 0) {
     return undefined;
+  }
 
   var_0 = level.rescue_targets[0];
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     return var_0;
+  }
 
   return undefined;
 }
 
 postspawn_rescue_enemy() {
-  if(!isDefined(level.rescue_enemies))
+  if(!isDefined(level.rescue_enemies)) {
     level.rescue_enemies = [];
+  }
 
   level.rescue_enemies[level.rescue_enemies.size] = self;
   self.ignoreme = 1;
@@ -1293,15 +1319,17 @@ postspawn_rescue_extra() {
   self.baseaccuracy = self.baseaccuracy * 0.5;
   var_0 = level.rescue_targets[level.rescue_targets.size - 1];
 
-  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "extra")
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "extra") {
     self.kill_time = 36;
-  else
+  } else {
     self.kill_time = 34;
+  }
 }
 
 postspawn_rescue_stander() {
-  if(!isDefined(level.rescue_standers))
+  if(!isDefined(level.rescue_standers)) {
     level.rescue_standers = [];
+  }
 
   level.rescue_standers[level.rescue_standers.size] = self;
   self.alertlevelint = 0;
@@ -1363,8 +1391,9 @@ bar_dialogue() {
   var_1 = common_scripts\utility::getStructArray("bar_sound_structs", "targetname");
   var_2 = [];
 
-  foreach(var_4 in var_1)
-  var_2[var_2.size] = spawn("script_origin", var_4.origin);
+  foreach(var_4 in var_1) {
+    var_2[var_2.size] = spawn("script_origin", var_4.origin);
+  }
 
   var_6 = undefined;
 
@@ -1374,8 +1403,9 @@ bar_dialogue() {
       break;
     }
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 waittill("walla_stop");
+    }
 
     if(common_scripts\utility::flag("humanshield_start")) {
       break;
@@ -1671,8 +1701,9 @@ init_kitchen_cart(var_0) {
 init_kitchen_cart_plates() {
   var_0 = getEntArray("kitchen_cart2_plates", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_4 = [["a", "b", "c", "d"], ["d", "e"]];
   var_4 = [["tag_plates_level2_1", "small", -1], ["tag_plates_level2_3", "large", 1.0], ["tag_plates_level3_1", "small", -1], ["tag_plates_level4_2", "small", -1], ["tag_plates_level4_3", "large", 1.1], ["tag_plates_level5_2", "small", -1], ["tag_plates_level5_3", "large", -1], ["tag_plates_level6_2", "small", -1], ["tag_plates_level7_1", "large", -1], ["tag_plates_level7_2", "large", 2.75]];
@@ -1681,10 +1712,11 @@ init_kitchen_cart_plates() {
   foreach(var_6 in var_4) {
     var_2 = spawn("script_model", self gettagorigin(var_6[0]));
 
-    if(var_6[1] == "large")
+    if(var_6[1] == "large") {
       var_2 setModel("com_breakable_platestack_large");
-    else
+    } else {
       var_2 setModel("com_breakable_platestack_large");
+    }
 
     var_2 linkto(self, var_6[0]);
     var_2.tagname = var_6[0];
@@ -1729,8 +1761,9 @@ kitchen_hide_merrick(var_0) {
   var_1 = getent("kitchen_cart2", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "kitchen_hide_enter");
 
-  foreach(var_3 in var_1.plates)
-  var_3 thread kitchen_cart_plate_fall(var_1);
+  foreach(var_3 in var_1.plates) {
+    var_3 thread kitchen_cart_plate_fall(var_1);
+  }
 
   common_scripts\utility::flag_set("kitchen_hide_start");
   thread kitchen_hide_dialogue();
@@ -1742,8 +1775,9 @@ kitchen_hide_merrick(var_0) {
   var_5 = common_scripts\utility::array_remove(var_5, var_1);
   common_scripts\utility::array_thread(var_5, ::kitchen_spotted, var_0);
 
-  if(!common_scripts\utility::flag("kitchen_stealth_alert"))
+  if(!common_scripts\utility::flag("kitchen_stealth_alert")) {
     var_0 thread maps\_anim::anim_loop(var_5, "kitchen_hide_loop");
+  }
 
   common_scripts\utility::flag_wait("kitchen_hide_everyone_up");
 
@@ -1865,8 +1899,9 @@ kitchen_hide_keegan_anim(var_0) {
 }
 
 kitchen_ambush_keegan(var_0) {
-  if(!isDefined(level.kitchen_flashlight_enemy))
+  if(!isDefined(level.kitchen_flashlight_enemy)) {
     level waittill("kitchen_flashlight_enemy");
+  }
 
   thread kitchen_ambush_keegan_handler(var_0);
   var_1 = undefined;
@@ -1900,8 +1935,9 @@ kitchen_ambush_keegan(var_0) {
     var_0 maps\_anim::anim_single(var_2, "kitchen_ambush_start");
     maps\_utility::friendlyfire_warnings_on();
 
-    if(maps\_utility::ent_flag("doing_kitchen_ambush"))
+    if(maps\_utility::ent_flag("doing_kitchen_ambush")) {
       var_0 thread maps\_anim::anim_loop(var_2, "kitchen_ambush_loop");
+    }
   }
 
   common_scripts\utility::flag_wait_any("kitchen_enemies_gone", "kitchen_stealth_alert");
@@ -1913,8 +1949,9 @@ kitchen_ambush_keegan(var_0) {
     var_1.dontavoidplayer = 1;
     var_1 common_scripts\utility::delaycall(1, ::kill);
 
-    if(common_scripts\utility::flag("kitchen_stealth_alert"))
+    if(common_scripts\utility::flag("kitchen_stealth_alert")) {
       thread keegan_ambush_end_early(var_0);
+    }
 
     var_0 maps\_anim::anim_single(var_2, "kitchen_ambush_end");
     level thread keegan_knife_off();
@@ -1940,8 +1977,9 @@ keegan_knife_off() {
 }
 
 flag_set_flagcheck(var_0, var_1) {
-  if(!common_scripts\utility::flag(var_1))
+  if(!common_scripts\utility::flag(var_1)) {
     maps\_utility::ent_flag_set("doing_kitchen_ambush");
+  }
 }
 
 keegan_ambush_sounds(var_0) {
@@ -1965,11 +2003,13 @@ keegan_ambush_end_early(var_0) {
 }
 
 kitchen_keegan_cleanup() {
-  if(isDefined(level.keegan.has_knife))
+  if(isDefined(level.keegan.has_knife)) {
     level.keegan detach("weapon_commando_knife_bloody", "tag_inhand");
+  }
 
-  if(isDefined(level.keegan.dropped_gun))
+  if(isDefined(level.keegan.dropped_gun)) {
     maps\las_vegas_anim::attach_gun_custom(level.keegan);
+  }
 }
 
 kitchen_flashlight_alert_radius() {
@@ -2009,13 +2049,15 @@ kitchen_hide_enemy_dialogue() {
 
     var_3 = [];
 
-    if(isDefined(level.kitchen_flashlight_enemy))
+    if(isDefined(level.kitchen_flashlight_enemy)) {
       var_3[var_3.size] = level.kitchen_flashlight_enemy;
+    }
 
     var_4 = maps\_utility::get_closest_ai_exclude(level.player.origin, "axis", var_3);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 maps\_utility::smart_dialogue_generic(var_2);
+    }
   }
 }
 
@@ -2023,8 +2065,9 @@ kitchen_ambush_keegan_handler(var_0) {
   common_scripts\utility::flag_wait("kitchen_stealth_alert");
   var_1 = -1;
 
-  if(isDefined(self.kitchen_ambush_time))
+  if(isDefined(self.kitchen_ambush_time)) {
     var_1 = (gettime() - self.kitchen_ambush_time) * 0.001;
+  }
 
   if(var_1 < 7.1) {
     set_pose("crouch");
@@ -2046,8 +2089,9 @@ kitchen_ambush_keegan_handler(var_0) {
     self.ignoreme = 0;
     self.dontmelee = 1;
 
-    if(isDefined(level.kitchen_flashlight_enemy) && isalive(level.kitchen_flashlight_enemy))
+    if(isDefined(level.kitchen_flashlight_enemy) && isalive(level.kitchen_flashlight_enemy)) {
       level.kitchen_enemies[level.kitchen_enemies.size] = level.kitchen_flashlight_enemy;
+    }
   } else if(var_1 < 7.7) {
     maps\_utility::anim_stopanimscripted();
     kitchen_keegan_cleanup();
@@ -2072,8 +2116,9 @@ kitchen_ambush_keegan_handler(var_0) {
     var_4 allowedstances("stand", "crouch", "prone");
     var_4.forcesuppression = undefined;
 
-    if(isDefined(var_4.og_suppressionthreshold))
+    if(isDefined(var_4.og_suppressionthreshold)) {
       var_4.suppressionthreshold = var_4.og_suppressionthreshold;
+    }
 
     var_4.dontmelee = undefined;
     var_4.dontavoidplayer = 0;
@@ -2111,15 +2156,17 @@ kitchen_spawn_reinforcements() {
   common_scripts\utility::flag_wait("kitchen_stealth_alert");
   common_scripts\utility::flag_wait("kitchen_enemy_doors_open");
 
-  foreach(var_1 in level.kitchen_enemies)
-  var_1 kitchen_attack_player();
+  foreach(var_1 in level.kitchen_enemies) {
+    var_1 kitchen_attack_player();
+  }
 
   level.hesh maps\_utility::smart_dialogue("vegas_hsh_loganno");
 }
 
 postspawn_kitchen_enemy() {
-  if(!isDefined(level.kitchen_enemies))
+  if(!isDefined(level.kitchen_enemies)) {
     level.kitchen_enemies = [];
+  }
 
   level.kitchen_enemies[level.kitchen_enemies.size] = self;
 
@@ -2146,8 +2193,9 @@ postspawn_kitchen_enemy() {
 kitchen_remove_check(var_0) {
   self.removed = 1;
 
-  if(!common_scripts\utility::flag("kitchen_stealth_alert"))
+  if(!common_scripts\utility::flag("kitchen_stealth_alert")) {
     thread kitchen_remove_thread();
+  }
 }
 
 kitchen_remove_thread() {
@@ -2170,8 +2218,9 @@ kitchen_sight_check() {
   self endon("death");
   common_scripts\utility::flag_wait("kitchen_enemy_doors_open");
 
-  if(!common_scripts\utility::flag("kitchen_stealth_alert"))
+  if(!common_scripts\utility::flag("kitchen_stealth_alert")) {
     thread maps\las_vegas_code::sight_stealth_notify("kitchen_stealth_alert", "kitchen_player_hidden");
+  }
 }
 
 kitchen_hold_position() {
@@ -2219,10 +2268,11 @@ kitchen_nade_door() {
   var_4 = [];
 
   for(var_5 = 0; var_5 < 3; var_5++) {
-    if(var_5 == 0)
+    if(var_5 == 0) {
       var_6 = 1000;
-    else
+    } else {
       var_6 = randomfloatrange(800, 900);
+    }
 
     var_4[var_4.size] = magicgrenademanual("fraggrenade", var_0.origin, var_2 * var_6);
     wait(randomfloatrange(0.5, 1));
@@ -2266,8 +2316,9 @@ postspawn_kitchen_flashlight() {
 }
 
 postspawn_kitchen_reinforcement() {
-  if(!isDefined(level.kitchen_enemies))
+  if(!isDefined(level.kitchen_enemies)) {
     level.kitchen_enemies = [];
+  }
 
   level.kitchen_enemies[level.kitchen_enemies.size] = self;
   self.doorflashchance = 1;
@@ -2296,8 +2347,9 @@ kitchen_enemy_pass_count() {
       }
     } else {
       foreach(var_5 in level.kitchen_enemies) {
-        if(isDefined(var_5.removed))
+        if(isDefined(var_5.removed)) {
           var_0++;
+        }
       }
 
       if(var_0 == level.kitchen_enemies.size) {
@@ -2491,12 +2543,14 @@ actor_rappel(var_0, var_1) {
   self.rappeller = 1;
   self.animname = "rappeler";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = maps\_utility::getent_or_struct_or_node(self.script_linkto, "script_linkname");
+  }
 
   if(var_0 == "rail") {
-    if(!isDefined(var_1.rope))
+    if(!isDefined(var_1.rope)) {
       var_1.rope = maps\_utility::spawn_anim_model("rappel_rope_rail", var_1.origin);
+    }
 
     self.goalradius = 16;
     var_2 = var_1.origin + anglesToForward(var_1.angles) * 16;
@@ -2504,8 +2558,9 @@ actor_rappel(var_0, var_1) {
     self setgoalpos(var_2);
     self waittill("goal");
 
-    while(isDefined(var_1.inuse) && var_1.inuse)
+    while(isDefined(var_1.inuse) && var_1.inuse) {
       wait 0.05;
+    }
 
     var_3[0] = self;
     var_3[1] = var_1.rope;
@@ -2566,17 +2621,19 @@ atrium_room_destruction() {
 }
 
 to_casino_floor(var_0) {
-  if(!common_scripts\utility::flag("shops_combat_start"))
+  if(!common_scripts\utility::flag("shops_combat_start")) {
     common_scripts\utility::flag_wait_or_timeout("player_atrium_halfway", randomfloatrange(3, 5));
-  else
+  } else {
     self.goalradius = 200;
+  }
 
   common_scripts\utility::flag_set("player_atrium_halfway");
   var_1 = getnodearray("floor_start_path", "targetname");
   var_0 = maps\las_vegas_code::array_get_noteworthy(var_1, self.script_noteworthy);
 
-  if(!common_scripts\utility::flag("shops_combat_start"))
+  if(!common_scripts\utility::flag("shops_combat_start")) {
     wait(randomfloat(2));
+  }
 
   thread maps\las_vegas_code::scripted_movement(var_0);
 }
@@ -2679,8 +2736,9 @@ casino_battle() {
   thread floor_go_colors();
   thread floor_reinforcements();
 
-  if(level.gameskill > 1)
+  if(level.gameskill > 1) {
     maps\_utility::delaythread(2.5, maps\_utility::array_spawn_targetname, "floor_snipers");
+  }
 
   maps\_utility::delaythread(2, maps\_utility::music_play, "mus_vegas_casino_battle");
   maps\_utility::delaythread(30, maps\_spawner::killspawner, 300);
@@ -2756,8 +2814,9 @@ floor_keegan_shoot() {
   level waittill("keegan_do_it");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2.ignoreme = 0;
+  foreach(var_2 in var_0) {
+    var_2.ignoreme = 0;
+  }
 
   level.keegan.ignoreall = 0;
   level.keegan waittill("shooting");
@@ -2775,8 +2834,9 @@ postspawn_floor_ambush() {
   thread maps\las_vegas_code::waittill_stealth_notify("floor_battle_start");
   level waittill("stealth_event_notify");
 
-  if(!common_scripts\utility::flag("floor_battle_start"))
+  if(!common_scripts\utility::flag("floor_battle_start")) {
     common_scripts\utility::flag_set("floor_battle_start");
+  }
 
   self.ignoreall = 0;
   self.ignoreme = 0;
@@ -2812,10 +2872,11 @@ postspawn_floor_sniper() {
   self.accuracy = 0.3;
 
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "left_side_first")
+    if(self.script_noteworthy == "left_side_first") {
       self allowedstances("crouch");
-    else
+    } else {
       self allowedstances("stand");
+    }
   }
 
   self laserforceon();
@@ -2891,8 +2952,9 @@ radio_conversation() {
   level endon("stop_radio_conversation");
   var_0 = ["conversation_1", "conversation_2", "conversation_3"];
 
-  foreach(var_3, var_2 in var_0)
-  maps\las_vegas_code::enemy_radio_chatter(var_2);
+  foreach(var_3, var_2 in var_0) {
+    maps\las_vegas_code::enemy_radio_chatter(var_2);
+  }
 }
 
 init_gate() {
@@ -2963,8 +3025,9 @@ player_under_gate() {
     var_2 = 0;
 
     foreach(var_4 in var_1) {
-      if(var_4 istouching(var_0))
+      if(var_4 istouching(var_0)) {
         var_2++;
+      }
     }
 
     if(var_2 == var_1.size) {
@@ -2982,14 +3045,16 @@ escalator_birds() {
   var_0 = [];
   var_1 = getEntArray("casino_er_interactive_birds", "targetname");
 
-  foreach(var_3 in var_1)
-  var_0[var_0.size] = var_3 maps\interactive_models\_birds::birds_savetostruct();
+  foreach(var_3 in var_1) {
+    var_0[var_0.size] = var_3 maps\interactive_models\_birds::birds_savetostruct();
+  }
 
   common_scripts\utility::flag_wait("player_in_escalators");
   wait(randomfloatrange(0.2, 1));
 
-  foreach(var_6 in var_0)
-  var_6 maps\interactive_models\_birds::birds_loadfromstruct();
+  foreach(var_6 in var_0) {
+    var_6 maps\interactive_models\_birds::birds_loadfromstruct();
+  }
 
   var_8 = getEntArray("casion_er_pigeons_trigs", "script_noteworthy");
   var_8 = common_scripts\utility::array_randomize(var_8);
@@ -3067,8 +3132,9 @@ add_gas_struct(var_0, var_1) {
   var_2.normal = vectornormalize(var_2.end.origin - var_2.origin);
   level.gas_handler.structs[level.gas_handler.structs.size] = var_2;
 
-  if(var_3)
+  if(var_3) {
     level thread gas_struct_think(var_1);
+  }
 }
 
 gas_struct_think(var_0) {
@@ -3086,20 +3152,23 @@ gas_struct_think(var_0) {
       if(var_8 < 0) {
         var_9 = pointonsegmentnearesttopoint(var_6.origin, var_6.end.origin, level.player.origin);
 
-        if(distancesquared(var_9, level.player.origin) > squared(var_6.radius))
+        if(distancesquared(var_9, level.player.origin) > squared(var_6.radius)) {
           continue;
+        }
       }
 
       var_10 = maps\_utility::get_progress(var_6.origin, var_6.end.origin, level.player.origin);
 
-      if(var_10 > var_4)
+      if(var_10 > var_4) {
         var_4 = var_10;
+      }
     }
 
     var_12 = int(var_4 * 100);
 
-    if(var_4 > 0)
+    if(var_4 > 0) {
       level.player dodamage(var_12 / level.player.damagemultiplier, level.player.origin + (0, 0, 60));
+    }
 
     level.player maps\_utility::player_speed_percent(100 - var_12);
     var_13 = var_2 * var_4;
@@ -3185,8 +3254,9 @@ temp_delayed_run() {
 forever_spawn_targetname(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
 
-  foreach(var_4 in var_2)
-  var_4 thread forever_spawn_thread(var_1);
+  foreach(var_4 in var_2) {
+    var_4 thread forever_spawn_thread(var_1);
+  }
 }
 
 forever_spawn_thread(var_0) {
@@ -3204,8 +3274,9 @@ forever_spawn_thread(var_0) {
 
     var_1 waittill("death");
 
-    if(!maps\_utility::script_delay())
+    if(!maps\_utility::script_delay()) {
       wait(randomfloatrange(1, 3));
+    }
   }
 }
 
@@ -3215,8 +3286,9 @@ postspawn_chase_enemies() {
   self setthreatbiasgroup("chase_wall");
   self.targetname = "chase_enemy_ai";
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "crouch")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "crouch") {
     common_scripts\utility::delaycall(2, ::allowedstances, "crouch");
+  }
 
   self waittill("goal");
   self allowedstances("stand", "crouch", "prone");
@@ -3244,26 +3316,31 @@ chase_enemy_path() {
   var_0 = getnode(self.target, "targetname");
 
   for(;;) {
-    if(isDefined(var_0.radius))
+    if(isDefined(var_0.radius)) {
       self.goalradius = var_0.radius;
+    }
 
     self setgoalnode(var_0);
     self waittill("goal");
 
-    if(isDefined(var_0.script_flag_wait))
+    if(isDefined(var_0.script_flag_wait)) {
       common_scripts\utility::flag_wait(var_0.script_flag_wait);
+    }
 
     var_1 = var_0 maps\_utility::script_delay();
 
     if(var_1) {
-      if(isDefined(var_0.script_delay_min))
+      if(isDefined(var_0.script_delay_min)) {
         var_0.script_delay_min = undefined;
+      }
 
-      if(isDefined(var_0.script_delay_max))
+      if(isDefined(var_0.script_delay_max)) {
         var_0.script_delay_max = undefined;
+      }
 
-      if(isDefined(var_0.script_delay))
+      if(isDefined(var_0.script_delay)) {
         var_0.script_delay = undefined;
+      }
     }
 
     if(!isDefined(var_0.target)) {
@@ -3297,10 +3374,11 @@ nade_room() {
   for(var_9 = 0; var_9 < var_7; var_9++) {
     var_3 = var_1[var_9 % 2];
 
-    if(var_6 == "fraggrenade")
+    if(var_6 == "fraggrenade") {
       magicgrenademanual(var_6, var_3.origin, var_3.dir * randomfloatrange(700, 1000), var_8);
-    else
+    } else {
       magicgrenademanual(var_6, var_3.origin, var_3.dir * randomfloatrange(600, 1000));
+    }
 
     wait(randomfloatrange(0.5, 2));
   }
@@ -3315,38 +3393,43 @@ anim_reach_arrival_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 = var_0.animname;
 
   if(isDefined(level.scr_anim[var_10][var_1])) {
-    if(isarray(level.scr_anim[var_10][var_1]))
+    if(isarray(level.scr_anim[var_10][var_1])) {
       var_11 = level.scr_anim[var_10][var_1][0];
-    else
+    } else {
       var_11 = level.scr_anim[var_10][var_1];
+    }
 
     var_8 = getstartorigin(var_8, var_9, var_11);
     var_9 = getstartorigin(var_8, var_9, var_11);
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_9 = var_5;
+  }
 
   var_12 = spawn("script_origin", var_8);
   var_12.angles = var_9;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_12.type = var_3;
-  else
+  } else {
     var_12.type = self.type;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_12.arrivalstance = var_4;
-  else
+  } else {
     var_12.arrivalstance = self gethighestnodestance();
+  }
 
   var_0.scriptedarrivalent = var_12;
   maps\_anim::anim_reach_and_approach(var_6, var_1, var_2);
   var_0.scriptedarrivalent = undefined;
   var_12 delete();
 
-  while(var_0.a.movement != "stop")
+  while(var_0.a.movement != "stop") {
     wait 0.05;
+  }
 }
 
 casino_jumpout_sequence() {
@@ -3375,8 +3458,9 @@ casino_jumpout_sequence() {
   foreach(var_8 in var_6) {
     var_8 linkto(var_5);
 
-    if(isDefined(var_8.script_noteworthy))
+    if(isDefined(var_8.script_noteworthy)) {
       var_5.breakpiece = var_8;
+    }
   }
 
   thread lerp_threatbias();
@@ -3396,8 +3480,9 @@ casino_jumpout_sequence() {
   level.windspot maps\_utility::delaythread(2, common_scripts\utility::stop_loop_sound_on_entity, "loop_wind_near");
   level.windspot common_scripts\utility::delaycall(3, ::delete);
 
-  foreach(var_1 in level.heroes)
-  var_1 setCanDamage(1);
+  foreach(var_1 in level.heroes) {
+    var_1 setCanDamage(1);
+  }
 
   setsaveddvar("player_sprintUnlimited", 1);
 }
@@ -3512,8 +3597,9 @@ casino_jumpout_code(var_0, var_1) {
     maps\_utility::enable_sprint();
     maps\_utility::disable_cqbwalk();
 
-    if(self == level.merrick)
+    if(self == level.merrick) {
       maps\_utility::delaythread(3, maps\_utility::smart_dialogue, "vegas_mrk_shitshitshit");
+    }
 
     var_2 anim_reach_solo_funcs(self, "vegas_raid_enter_jump2");
     var_2 maps\_anim::anim_single_solo(self, "vegas_raid_enter_jump2");
@@ -3663,8 +3749,9 @@ trenchrun_objdamage(var_0, var_1, var_2) {
     wait 0.05;
   }
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     wait(randomfloatrange(0.1, 0.3));
+  }
 
   switch (var_0) {
     case "radius":
@@ -3682,8 +3769,9 @@ trenchrun_objdamage(var_0, var_1, var_2) {
       break;
   }
 
-  if(isDefined(self.script_fxid))
+  if(isDefined(self.script_fxid)) {
     playFX(common_scripts\utility::getfx(self.script_fxid), var_3);
+  }
 }
 
 trenchrun_objdamage_phys_cancel() {
@@ -3732,8 +3820,9 @@ trenchrun_fake_shooters() {
         if(isDefined(var_2["entity"]) && var_2["entity"] == level.player) {
           continue;
         }
-        if(level.player maps\_utility::player_looking_at(var_0.origin))
+        if(level.player maps\_utility::player_looking_at(var_0.origin)) {
           continue;
+        }
       }
 
       continue;
@@ -3756,8 +3845,9 @@ casino_raid_end_hallway_guys() {
 }
 
 play_nag_lines(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "";
+  }
 
   for(var_3 = ""; !common_scripts\utility::flag(var_2); var_1 = var_3) {
     for(;;) {
@@ -3896,14 +3986,16 @@ slide() {
   var_17 = 0.8;
   var_18 = anglesToForward(level.player.angles);
 
-  if(var_18[0] <= 0 && var_18[1] <= 0 || var_18[0] >= 0 && var_18[1] <= 0)
+  if(var_18[0] <= 0 && var_18[1] <= 0 || var_18[0] >= 0 && var_18[1] <= 0) {
     var_17 = 0.3;
+  }
 
   var_19 = 10;
   maps\_utility::delaythread(1, maps\_utility::music_stop, 2);
 
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     level waittill("forever");
+  }
 
   level.player playerlinktoblend(var_7, "tag_player", var_17);
   wait(var_17);
@@ -3932,8 +4024,9 @@ slide() {
   level notify("delete_interior_sandstorm");
   common_scripts\utility::array_call(level.heroes, ::show);
 
-  if(isDefined(level.baker_glight))
+  if(isDefined(level.baker_glight)) {
     level.baker_glight delete();
+  }
 
   common_scripts\utility::flag_set("FLAG_player_slide_complete");
   level.player playrumbleonentity("grenade_rumble");
@@ -3941,8 +4034,9 @@ slide() {
   if(isDefined(level.jumpout_enemies)) {
     level.jumpout_enemies = maps\_utility::remove_dead_from_array(level.jumpout_enemies);
 
-    foreach(var_21 in level.jumpout_enemies)
-    var_21 delete();
+    foreach(var_21 in level.jumpout_enemies) {
+      var_21 delete();
+    }
   }
 
   var_23 = getaiarray("axis");
@@ -3963,8 +4057,9 @@ slide_hide_heroes() {
     wait 0.05;
 
     foreach(var_2 in level.heroes) {
-      if(var_2.origin[1] > level.player.origin[1] + 10)
+      if(var_2.origin[1] > level.player.origin[1] + 10) {
         var_2 hide();
+      }
     }
   }
 }
@@ -3972,13 +4067,15 @@ slide_hide_heroes() {
 player_slide_fx(var_0, var_1, var_2) {
   var_3 = ["j_ball_le", "j_ball_ri"];
 
-  foreach(var_5 in var_3)
-  thread player_slide_fx_legs(var_5, var_2);
+  foreach(var_5 in var_3) {
+    thread player_slide_fx_legs(var_5, var_2);
+  }
 
   var_3 = ["j_ringpalm_le", "j_ringpalm_ri"];
 
-  foreach(var_5 in var_3)
-  maps\_utility::flagwaitthread("TRACKFLAG_player_fall_grab", ::player_slide_fx_clap, var_1, var_5);
+  foreach(var_5 in var_3) {
+    maps\_utility::flagwaitthread("TRACKFLAG_player_fall_grab", ::player_slide_fx_clap, var_1, var_5);
+  }
 
   var_9 = anglesToForward(var_0.angles);
   var_9 = var_9 * -80;
@@ -4009,10 +4106,11 @@ player_slide_fx_legs(var_0, var_1) {
 player_slide_fx_clap(var_0, var_1) {
   var_2 = anglesToForward((-270, 0, -90));
 
-  if(var_1 == "j_ringpalm_ri")
+  if(var_1 == "j_ringpalm_ri") {
     wait 0.13;
-  else
+  } else {
     wait 0.09;
+  }
 
   var_3 = var_0 gettagorigin(var_1) + (-4, 0, 2);
   var_4 = common_scripts\utility::getfx("vfx_dust_hand_clap");

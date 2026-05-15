@@ -87,8 +87,9 @@ updatefriendicons() {
       for(var_1 = 0; var_1 < var_0.size; var_1++) {
         var_2 = var_0[var_1];
 
-        if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing")
+        if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
           var_2.headicon = "";
+        }
       }
     }
   }

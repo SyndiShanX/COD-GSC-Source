@@ -7,8 +7,9 @@
 #include clientscripts\mp\_utility_code;
 
 setup_point_fx(point, fx_id) {
-  if(isDefined(point.script_fxid))
+  if(isDefined(point.script_fxid)) {
     fx_id = point.script_fxid;
+  }
 
   point.fx_id = fx_id;
 
@@ -21,11 +22,13 @@ setup_point_fx(point, fx_id) {
     point.up = (0, 0, 0);
   }
 
-  if(point.targetname == "flak_fire_fx")
+  if(point.targetname == "flak_fire_fx") {
     level thread ambient_flak_think(point);
+  }
 
-  if(point.targetname == "fake_fire_fx")
+  if(point.targetname == "fake_fire_fx") {
     level thread ambient_fakefire_think(point);
+  }
 }
 
 ambient_flak_think(point) {
@@ -57,10 +60,11 @@ ambient_flak_rotate(point) {
   min_pitch = 30;
   max_pitch = 80;
 
-  if(isDefined(point.angles))
+  if(isDefined(point.angles)) {
     pointangles = point.angles;
-  else
+  } else {
     pointangles = (0, 0, 0);
+  }
 
   for(;;) {
     time = randomfloatrange(0.5, 2);
@@ -86,11 +90,13 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
   min_dist = 5000;
   max_dist = 6500;
 
-  if(isDefined(point.script_mindist))
+  if(isDefined(point.script_mindist)) {
     min_dist = point.script_mindist;
+  }
 
-  if(isDefined(point.script_maxdist))
+  if(isDefined(point.script_maxdist)) {
     max_dist = point.script_maxdist;
+  }
 
   min_burst_time = 0.25;
   max_burst_time = 1;
@@ -105,8 +111,9 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
     fxpos = point.origin + vectorscale(point.forward, randomintrange(min_dist, max_dist));
     playFX(0, level._effect["flak_burst_single"], fxpos);
 
-    if(isDefined(level.timeofday) && (level.timeofday == "evening" || level.timeofday == "night"))
+    if(isDefined(level.timeofday) && (level.timeofday == "evening" || level.timeofday == "night")) {
       playFX(0, level._effect["flak_cloudflash_night"], fxpos);
+    }
 
     wait(randomfloatrange(min_burst_time, max_burst_time));
   }
@@ -123,15 +130,17 @@ ambient_fakefire_think(point) {
   reloadtimemax = undefined;
   soundchance = undefined;
 
-  if(!isDefined(point.weaponinfo))
+  if(!isDefined(point.weaponinfo)) {
     point.weaponinfo = "axis_turret";
+  }
 
   switch (point.weaponinfo) {
     case "allies_assault":
-      if(isDefined(level.allies_team) && level.allies_team == "marines")
+      if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_bar_fire";
-      else
+      } else {
         firesound = "weap_dp28_fire_plr";
+      }
 
       burstmin = 16;
       burstmax = 24;
@@ -143,10 +152,11 @@ ambient_fakefire_think(point) {
       weaptype = "assault";
       break;
     case "axis_assault":
-      if(isDefined(level.axis_team) && level.axis_team == "german")
+      if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp44_fire";
-      else
+      } else {
         firesound = "weap_type99_fire";
+      }
 
       burstmin = 16;
       burstmax = 24;
@@ -158,10 +168,11 @@ ambient_fakefire_think(point) {
       weaptype = "assault";
       break;
     case "allies_rifle":
-      if(isDefined(level.allies_team) && level.allies_team == "marines")
+      if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_m1garand_fire";
-      else
+      } else {
         firesound = "weap_mosinnagant_fire";
+      }
 
       burstmin = 1;
       burstmax = 3;
@@ -173,10 +184,11 @@ ambient_fakefire_think(point) {
       weaptype = "rifle";
       break;
     case "axis_rifle":
-      if(isDefined(level.axis_team) && level.axis_team == "german")
+      if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_kar98k_fire";
-      else
+      } else {
         firesound = "weap_arisaka_fire";
+      }
 
       burstmin = 1;
       burstmax = 3;
@@ -188,10 +200,11 @@ ambient_fakefire_think(point) {
       weaptype = "rifle";
       break;
     case "allies_smg":
-      if(isDefined(level.allies_team) && level.allies_team == "marines")
+      if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_thompson_fire";
-      else
+      } else {
         firesound = "weap_ppsh_fire";
+      }
 
       burstmin = 14;
       burstmax = 28;
@@ -203,10 +216,11 @@ ambient_fakefire_think(point) {
       weaptype = "smg";
       break;
     case "axis_smg":
-      if(isDefined(level.axis_team) && level.axis_team == "german")
+      if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp40_fire";
-      else
+      } else {
         firesound = "weap_type100_fire";
+      }
 
       burstmin = 14;
       burstmax = 28;
@@ -218,10 +232,11 @@ ambient_fakefire_think(point) {
       weaptype = "smg";
       break;
     case "allies_turret":
-      if(isDefined(level.allies_team) && level.allies_team == "marines")
+      if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_30cal_fire";
-      else
+      } else {
         firesound = "weap_dp28_fire_plr";
+      }
 
       burstmin = 60;
       burstmax = 90;
@@ -233,10 +248,11 @@ ambient_fakefire_think(point) {
       weaptype = "turret";
       break;
     case "axis_turret":
-      if(isDefined(level.axis_team) && level.axis_team == "german")
+      if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_bar_fire";
-      else
+      } else {
         firesound = "weap_type92_fire";
+      }
 
       burstmin = 60;
       burstmax = 90;
@@ -259,8 +275,9 @@ ambient_fakefire_think(point) {
       tracedist = 10000;
       target = point.origin + vectorscale(anglesToForward(point.angles + (-3 + randomint(6), -5 + randomint(10), 0)), tracedist);
 
-      if(randomint(100) <= 20)
+      if(randomint(100) <= 20) {
         bullettracer(point.origin, target);
+      }
 
       playFX(0, level._effect[point.fx_id], point.origin, point.forward);
       wait(randomfloatrange(betweenshotsmin, betweenshotsmax));
@@ -320,11 +337,13 @@ clocks_init(clientnum) {
   curr_time = getsystemtime();
   hours = curr_time[0];
 
-  if(hours > 12)
+  if(hours > 12) {
     hours = hours - 12;
+  }
 
-  if(hours == 0)
+  if(hours == 0) {
     hours = 12;
+  }
 
   minutes = curr_time[1];
   seconds = curr_time[2];
@@ -422,11 +441,13 @@ clock_run(time_values) {
         break;
     }
 
-    if(hour < 1)
+    if(hour < 1) {
       hour = hour + 12;
+    }
 
-    if(hour > 12)
+    if(hour > 12) {
       hour = hour - 12;
+    }
 
     time_values["hand_time"] = hour;
   }
@@ -473,10 +494,11 @@ spin_anemometers(clientnum) {
 spoon_spin_func() {
   self endon("entityshutdown");
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     model_speed = self.script_float;
-  else
+  } else {
     model_speed = 2;
+  }
 
   while(true) {
     speed = randomfloatrange(model_speed * 0.6, model_speed);
@@ -488,15 +510,17 @@ spoon_spin_func() {
 arrow_spin_func() {
   self endon("entityshutdown");
 
-  if(isDefined(self.script_int))
+  if(isDefined(self.script_int)) {
     model_direction_change = self.script_int;
-  else
+  } else {
     model_direction_change = 25;
+  }
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     model_speed = self.script_float;
-  else
+  } else {
     model_speed = 0.8;
+  }
 
   while(true) {
     direction_change = model_direction_change + randomintrange(-11, 11);

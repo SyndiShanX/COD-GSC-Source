@@ -206,8 +206,9 @@ handle_heli_scripted_sfx() {
 heli_scripted_sfx(var_0, var_1) {
   self waittill("trigger", var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 waittill(var_1);
+  }
 
   var_2 play_helicopter_scripted_sfx(var_0);
 }
@@ -247,8 +248,9 @@ aud_car_sound_node_spawner() {
 }
 
 aud_car_event_handler(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     soundscripts\_audio_mix_manager::mm_add_submix(var_5);
+  }
 
   thread aud_car_engine_idle_handler(var_0, var_1, var_2, var_3, var_4);
   self scalepitch(var_0, var_1);
@@ -256,8 +258,9 @@ aud_car_event_handler(var_0, var_1, var_2, var_3, var_4, var_5) {
   self scalepitch(var_3, var_4);
   wait(var_4);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     soundscripts\_audio_mix_manager::mm_clear_submix(var_5);
+  }
 }
 
 aud_car_engine_idle_handler(var_0, var_1, var_2, var_3, var_4) {

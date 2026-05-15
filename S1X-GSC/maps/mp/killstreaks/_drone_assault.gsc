@@ -78,7 +78,7 @@ getDroneSpawnPoint(modules) {
 
 tryUseAssaultDrone(lifeId, modules) {
   if(isDefined(level.isHorde) && level.isHorde) {
-    if(isDefined(self.aerialDrone))
+    if(isDefined(self.aerialDrone)) {}
   }
   self.aerialDrone notify("death");
 
@@ -759,7 +759,7 @@ AssaultHudSetup(vehicle) {
   if(!vehicle.hasTurret) {
     self SetClientOmnvar("ui_assaultdrone_weapon", 2);
   } else {
-    if(vehicle.mp_terrace)
+    if(vehicle.mp_terrace) {}
   }
   self SetClientOmnvar("ui_assaultdrone_weapon", 3);
   else if(vehicle.hasMG) {

@@ -122,8 +122,9 @@ player_grenade_check_dieout(grenade) {
 
   waittillframeend;
 
-  if(!level._stealth.logic.player_nades)
+  if(!level._stealth.logic.player_nades) {
     flag_clear("_stealth_player_nade");
+  }
 }
 
 system_init_shadows() {
@@ -152,8 +153,9 @@ stealth_shadow_ai_in_volume(volume) {
 
   self ent_flag_set("_stealth_in_shadow");
 
-  while(self istouching(volume))
+  while(self istouching(volume)) {
     wait .05;
+  }
 
   self ent_flag_clear("_stealth_in_shadow");
 }
@@ -161,8 +163,9 @@ stealth_shadow_ai_in_volume(volume) {
 system_handle_clipbrush() {
   self endon("death");
 
-  if(isDefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait)) {
     flag_wait(self.script_flag_wait);
+  }
 
   waittillframeend;
 
@@ -186,8 +189,9 @@ system_handle_clipbrush() {
   level add_wait(::flag_wait, event_flag);
   do_wait_any();
 
-  if(self.spawnflags & 1)
+  if(self.spawnflags & 1) {
     self connectpaths();
+  }
 
   self delete();
 }

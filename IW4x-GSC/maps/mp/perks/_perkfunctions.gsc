@@ -227,10 +227,11 @@ trackSiegeEnable() {
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
     class = weaponClass(self getCurrentWeapon());
 
-    if(class == "pistol" || class == "smg")
+    if(class == "pistol" || class == "smg") {
       self setSpreadOverride(1);
-    else
+    } else {
       self setSpreadOverride(2);
+    }
 
     self player_recoilScaleOn(0);
     self allowJump(false);
@@ -364,8 +365,9 @@ unsetBackShield() {
 }
 
 setLocalJammer() {
-  if(!self isEMPed())
+  if(!self isEMPed()) {
     self RadarJamOn();
+  }
 }
 
 unsetLocalJammer() {
@@ -480,14 +482,17 @@ oneManArmyWeaponChangeTracker() {
 }
 
 isOneManArmyMenu(menu) {
-  if(menu == game["menu_onemanarmy"])
+  if(menu == game["menu_onemanarmy"]) {
     return true;
+  }
 
-  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"]) {
     return true;
+  }
 
-  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"]) {
     return true;
+  }
 
   return false;
 }
@@ -576,8 +581,9 @@ giveOneManArmyClass(className) {
 
   self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], className, false);
 
-  if(isDefined(self.carryFlag))
+  if(isDefined(self.carryFlag)) {
     self attach(self.carryFlag, "J_spine4", true);
+  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -601,8 +607,9 @@ omaUseBar(duration) {
   useBarText setText(&"MPUI_CHANGING_KIT");
 
   useBar updateBar(0, 1 / duration);
-  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05)
+  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05) {
     wait(0.05);
+  }
 
   useBar destroyElem();
   useBarText destroyElem();
@@ -652,8 +659,9 @@ unsetTacticalInsertion() {
 clearPreviousTISpawnpoint() {
   self waittill_any("disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     self deleteTI(self.setSpawnpoint);
+  }
 }
 
 updateTISpawnPosition() {
@@ -663,18 +671,20 @@ updateTISpawnPosition() {
   self endon("end_monitorTIUse");
 
   while(isReallyAlive(self)) {
-    if(self isValidTISpawnPosition())
+    if(self isValidTISpawnPosition()) {
       self.TISpawnPosition = self.origin;
+    }
 
     wait(0.05);
   }
 }
 
 isValidTISpawnPosition() {
-  if(Canspawn(self.origin) && self IsOnGround())
+  if(Canspawn(self.origin) && self IsOnGround()) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 monitorTIUse() {
@@ -693,8 +703,9 @@ monitorTIUse() {
       continue;
     }
 
-    if(isDefined(self.setSpawnPoint))
+    if(isDefined(self.setSpawnPoint)) {
       self deleteTI(self.setSpawnPoint);
+    }
 
     if(!isDefined(self.TISpawnPosition)) {
       continue;
@@ -720,10 +731,11 @@ monitorTIUse() {
 
 GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
-  if(level.teamBased)
+  if(level.teamBased) {
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  else
+  } else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
+  }
 
   self thread GlowStickDamageListener(owner);
   self thread GlowStickEnemyUseListener(owner);
@@ -777,8 +789,9 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
 
 deleteOnDeath(ent) {
   self waittill("death");
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 GlowStickDamageListener(owner) {
@@ -837,8 +850,9 @@ updateEnemyUse(owner) {
 }
 
 deleteTI(TI) {
-  if(isDefined(TI.enemyTrigger))
+  if(isDefined(TI.enemyTrigger)) {
     TI.enemyTrigger Delete();
+  }
 
   spot = TI.origin;
   spotAngles = TI.angles;
@@ -873,8 +887,9 @@ GlowStickEnemyUseListener(owner) {
     player notify("destroyed_insertion", owner);
     player notify("destroyed_explosive");
 
-    if(isDefined(owner) && player != owner)
+    if(isDefined(owner) && player != owner) {
       owner thread leaderDialogOnPlayer("ti_destroyed");
+    }
 
     player thread deleteTI(self);
   }
@@ -889,8 +904,9 @@ unsetLittlebirdSupport() {
 }
 
 setC4Death() {
-  if(!self _hasperk("specialty_pistoldeath"))
+  if(!self _hasperk("specialty_pistoldeath")) {
     self _setperk("specialty_pistoldeath");
+  }
 }
 
 unsetC4Death() {}

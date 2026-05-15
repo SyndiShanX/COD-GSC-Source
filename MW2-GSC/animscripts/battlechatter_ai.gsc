@@ -19,8 +19,9 @@ addToSystem(squadName) {
   }
   assert(isDefined(self.squad));
 
-  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
+  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized) {
     self.squad init_squadBattleChatter();
+  }
 
   self.enemyClass = "infantry";
   self.calledOut = [];
@@ -47,10 +48,11 @@ addToSystem(squadName) {
   }
 
   if(forceEnglish()) {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       self.script_battlechatter = false;
-    else
+    } else {
       self.voice = "american";
+    }
   }
 
   if(self.voice == "multilingual") {
@@ -90,8 +92,9 @@ addToSystem(squadName) {
 }
 
 forceEnglish() {
-  if(!getDvarInt("bcs_forceEnglish", 0))
+  if(!getDvarInt("bcs_forceEnglish", 0)) {
     return false;
+  }
 
   switch (level.script) {
     case "airlift":
@@ -159,8 +162,9 @@ setNPCID() {
 
   lowestID = startIndex;
   for(index = 0; index <= numIDs; index++) {
-    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
+    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count) {
       lowestID = (startIndex + index) % numIDs;
+    }
   }
 
   self thread npcIDTracker(lowestID);
@@ -470,15 +474,17 @@ squadOfficerWaiter() {
   while(1) {
     officer = undefined;
 
-    if(self.officers.size)
+    if(self.officers.size) {
       members = self.officers;
-    else
+    } else {
       members = self.members;
+    }
 
     officers = [];
     for(index = 0; index < members.size; index++) {
-      if(isalive(members[index]))
+      if(isalive(members[index])) {
         officers[officers.size] = members[index];
+      }
     }
 
     if(officers.size) {
@@ -678,8 +684,9 @@ aiOfficerOrders() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!isDefined(self.squad.chatInitialized))
+  if(!isDefined(self.squad.chatInitialized)) {
     self.squad waittill("squad chat initialized");
+  }
 
   while(1) {
     if(getDvar("bcs_enable", "on") == "off") {
@@ -706,8 +713,9 @@ aiGrenadeDangerWaiter() {
     if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
       continue;
     }
-    if(distance(grenade.origin, level.player.origin) < 512)
+    if(distance(grenade.origin, level.player.origin) < 512) {
       self addInformEvent("incoming", "grenade");
+    }
   }
 }
 
@@ -903,11 +911,13 @@ evaluateMeleeEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return (false);
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return (false);
+  }
 
   return (false);
 }
@@ -1095,13 +1105,15 @@ endCustomEvent(eventDuration, typeOverride) {
     return;
   }
   chatEvent = self createChatEvent("custom", "generic", 1.0);
-  if(isDefined(eventDuration))
+  if(isDefined(eventDuration)) {
     chatEvent.expireTime = gettime() + eventDuration;
+  }
 
-  if(isDefined(typeOverride))
+  if(isDefined(typeOverride)) {
     chatEvent.type = typeOverride;
-  else
+  } else {
     chatEvent.type = "custom";
+  }
 
   self.chatQueue["custom"] = undefined;
   self.chatQueue["custom"] = chatEvent;

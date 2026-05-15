@@ -15,21 +15,24 @@ clear_animation(blend_time) {
 enemy_animation_attack(type) {
   dist = 600;
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     dist = distance(self.enemy.origin, self.origin);
+  }
 
-  if(dist < 512)
+  if(dist < 512) {
     anime = "_stealth_behavior_spotted_short";
-  else
+  } else {
     anime = "_stealth_behavior_spotted_long";
+  }
 
   self.allowdeath = true;
   self thread anim_generic_custom_animmode(self, "gravity", anime);
 
-  if(dist < 200)
+  if(dist < 200) {
     wait .5;
-  else
+  } else {
     self waittill_notify_or_timeout(anime, randomfloatrange(1.5, 3));
+  }
 
   self notify("stop_animmode");
 }
@@ -40,10 +43,11 @@ enemy_animation_generic(type) {
   self.allowdeath = true;
 
   target = level.player;
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     target = self.enemy;
-  else if(isDefined(self.favoriteenemy))
+  } else if(isDefined(self.favoriteenemy)) {
     target = self.favoriteenemy;
+  }
 
   dist = (distance(self.origin, target.origin));
   max = 4;
@@ -68,15 +72,17 @@ dog_animation_generic(type) {
 
   if(isDefined(self.meleeingPlayer)) {
     player = self.meleeingPlayer;
-    if(isDefined(player.player_view) && isDefined(player.player_view.dog) && self == player.player_view.dog)
+    if(isDefined(player.player_view) && isDefined(player.player_view.dog) && self == player.player_view.dog) {
       return;
+    }
   }
 
   if(self ent_flag("_stealth_behavior_asleep")) {
-    if(randomint(100) < 50)
+    if(randomint(100) < 50) {
       anime = "_stealth_dog_wakeup_fast";
-    else
+    } else {
       anime = "_stealth_dog_wakeup_slow";
+    }
   } else
     anime = "_stealth_dog_growl";
 
@@ -88,10 +94,11 @@ dog_animation_wakeup_fast(type) {
 
   anime = undefined;
 
-  if(self ent_flag("_stealth_behavior_asleep"))
+  if(self ent_flag("_stealth_behavior_asleep")) {
     anime = "_stealth_dog_wakeup_fast";
-  else
+  } else {
     anime = "_stealth_dog_growl";
+  }
 
   self anim_generic_custom_animmode(self, "gravity", anime);
 }
@@ -100,10 +107,11 @@ dog_animation_wakeup_slow(type) {
 
   anime = undefined;
 
-  if(self ent_flag("_stealth_behavior_asleep"))
+  if(self ent_flag("_stealth_behavior_asleep")) {
     anime = "_stealth_dog_wakeup_slow";
-  else
+  } else {
     anime = "_stealth_dog_growl";
+  }
 
   self anim_generic_custom_animmode(self, "gravity", anime);
 }
@@ -145,10 +153,11 @@ enemy_animation_foundcorpse(type) {
   }
   self.allowdeath = true;
 
-  if(self.a.movement == "stop")
+  if(self.a.movement == "stop") {
     anime = "_stealth_find_stand";
-  else
+  } else {
     anime = "_stealth_find_jog";
+  }
 
   self anim_generic_custom_animmode(self, "gravity", anime);
 }

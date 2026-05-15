@@ -744,7 +744,7 @@ get_print3d_text() {
       return self.v["soundalias"];
     case "exploder":
       if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
-        if(self.v["fxid"] == "No FX")
+        if(self.v["fxid"] == "No FX") {}
       }
       return "@)) " + self.v["soundalias"];
       else {
@@ -1104,7 +1104,7 @@ rotate_over_time(org, rotater) {
     if(level.selectedRotate_pitch != 0) {
       org AddPitch(level.selectedRotate_pitch);
     } else {
-      if(level.selectedRotate_roll != 0)
+      if(level.selectedRotate_roll != 0) {}
     }
     org AddYaw(level.selectedRotate_roll);
     else {
@@ -1832,7 +1832,7 @@ process_fx_rotater() {
       if(level.selectedRotate_pitch != 0) {
         rotater AddPitch(level.selectedRotate_pitch);
       } else {
-        if(level.selectedRotate_yaw != 0)
+        if(level.selectedRotate_yaw != 0) {}
       }
       rotater AddYaw(level.selectedRotate_yaw);
       else {

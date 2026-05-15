@@ -33,6 +33,7 @@ main() {
 
   maps\createfx\mp_nuked_fx::main();
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_nuked_fx::main();
+  }
 }

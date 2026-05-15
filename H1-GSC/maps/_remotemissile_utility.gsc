@@ -5,21 +5,24 @@
 *******************************************/
 
 setup_remote_missile_target() {
-  if(!isDefined(level.remote_missile_targets))
+  if(!isDefined(level.remote_missile_targets)) {
     level.remote_missile_targets = [];
+  }
 
   level.remote_missile_targets[self.unique_id] = self;
 
   if(isDefined(level.uav_struct.draw_red_boxes) && !isDefined(level.uav_is_destroyed)) {
     level endon("draw_target_end");
 
-    while(isDefined(level.setup_remote_missile_target_last_add_time) && level.setup_remote_missile_target_last_add_time == gettime())
+    while(isDefined(level.setup_remote_missile_target_last_add_time) && level.setup_remote_missile_target_last_add_time == gettime()) {
       wait 0.05;
+    }
 
     level.setup_remote_missile_target_last_add_time = gettime();
 
-    if(isalive(self))
+    if(isalive(self)) {
       maps\_remotemissile::draw_target();
+    }
   }
 
   self waittill("death");
@@ -35,8 +38,9 @@ setup_remote_missile_target() {
 }
 
 player_uav_rig() {
-  if(isDefined(level.uavrig))
+  if(isDefined(level.uavrig)) {
     return level.uavrig;
+  }
 
   var_0 = maps\_remotemissile::get_current_uav_rig();
   return var_0;
@@ -54,8 +58,9 @@ create_uav_rigs(var_0) {
 }
 
 add_player_rig(var_0) {
-  if(!isDefined(self.uav_rigs))
+  if(!isDefined(self.uav_rigs)) {
     self.uav_rigs = [];
+  }
 
   self.uav_rigs[self.uav_rigs.size] = var_0;
 }
@@ -88,8 +93,9 @@ remotemissile_reload() {
     }
     level.uav_user = undefined;
 
-    if(common_scripts\utility::flag("uav_reloading"))
+    if(common_scripts\utility::flag("uav_reloading")) {
       level waittill("uav_reloading");
+    }
 
     if(isDefined(level.uav_is_destroyed)) {
       return;

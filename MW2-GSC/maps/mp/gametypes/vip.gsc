@@ -64,8 +64,9 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -136,8 +137,9 @@ skipWait() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getOtherTeam(spawnteam);
+  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -200,8 +202,9 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update)
+  if(update) {
     maps\mp\gametypes\_spectating::updateSpectateSettings();
+  }
 }
 
 onDeadEvent(team) {
@@ -237,15 +240,17 @@ vipSelection() {
   }
 
   foreach(player in level.players) {
-    if(player.team == game["defenders"])
+    if(player.team == game["defenders"]) {
       potentialVIPs[potentialVIPs.size] = player;
+    }
   }
 
   selectedVIPNum = RandomIntRange(0, potentialVIPs.size);
   selectedPlayer = potentialVIPs[selectedVIPNum];
 
-  if(!isAlive(selectedPlayer) && !isSubStr(selectedPlayer.guid, "bot"))
+  if(!isAlive(selectedPlayer) && !isSubStr(selectedPlayer.guid, "bot")) {
     selectedPlayer forceVIPspawn();
+  }
 
   setupVip(selectedPlayer);
 }
@@ -318,8 +323,9 @@ extractionZone() {
 
 setVIPUse() {
   foreach(player in level.players) {
-    if(!player.isVip)
+    if(!player.isVip) {
       self.trigger disablePlayerUse(player);
+    }
   }
 }
 

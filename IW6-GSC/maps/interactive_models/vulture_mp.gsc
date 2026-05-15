@@ -6,8 +6,9 @@
 #include common_scripts\utility;
 
 vulture_circling(origin, number) {
-  if(!isDefined(number))
+  if(!isDefined(number)) {
     number = 1;
+  }
   if(!isDefined(level._interactive)) {
     level._interactive = [];
   }
@@ -21,8 +22,9 @@ vulture_circling(origin, number) {
   }
   for(i = 0; i < number; i++) {
     newOrigin = origin + ((0, 0, 50) * i);
-    if(i > 0)
+    if(i > 0) {
       newOrigin += (0, 0, RandomIntRange(-20, 20));
+    }
     thread vulture_circling_internal(newOrigin);
   }
 }

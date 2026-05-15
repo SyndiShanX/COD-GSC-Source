@@ -111,8 +111,9 @@ water_trigger_think() {
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater())
+  if(self isinwater()) {
     return 0.4;
+  }
 
   return defaulttime;
 }

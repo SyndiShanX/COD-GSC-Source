@@ -43,8 +43,9 @@ get_closest_sub(pos) {
     new_list = [];
 
     for(i = 0; i < keys.size; i++) {
-      if(isDefined(level._active_subwoofers[keys[i]]))
+      if(isDefined(level._active_subwoofers[keys[i]])) {
         new_list[keys[i]] = level._active_subwoofers[keys[i]];
+      }
     }
 
     level._active_subwoofers = new_list;
@@ -54,8 +55,9 @@ get_closest_sub(pos) {
 }
 
 subwoofer_flings_zombie_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     self thread subwoofer_fling_zombie(localclientnum);
+  }
 }
 
 subwoofer_fling_zombie(localclientnum) {

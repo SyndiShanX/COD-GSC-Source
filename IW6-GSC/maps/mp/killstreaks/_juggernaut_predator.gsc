@@ -292,8 +292,9 @@ disable_level_killstreak() {
 }
 
 customCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -801,10 +802,11 @@ watchForPerkRemoval(targetPlayer) {
 
   targetPlayer waittill("starting_perks_unset");
 
-  if(self isEnemy(targetPlayer))
+  if(self isEnemy(targetPlayer)) {
     self thread outlinePredatorTarget(targetPlayer, CONST_OUTLINE_COLOR_ENEMY);
-  else
+  } else {
     self thread outlinePredatorTarget(targetPlayer, CONST_OUTLINE_COLOR_FRIENDLY);
+  }
 }
 
 outlinePredatorTarget(target, outlineColor) {
@@ -839,8 +841,9 @@ watchPlayersSpawning() {
   while(true) {
     level waittill("player_spawned", player);
 
-    if(player.sessionstate == "playing" && !player _hasPerk("specialty_incog"))
+    if(player.sessionstate == "playing" && !player _hasPerk("specialty_incog")) {
       self thread watchForPerkRemoval(player);
+    }
   }
 }
 
@@ -901,23 +904,26 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
     lastStandParams.attacker = attacker;
     lastStandParams.iDamage = iDamage;
     lastStandParams.attackerPosition = attacker.origin;
-    if(attacker == self)
+    if(attacker == self) {
       lastStandParams.sMeansOfDeath = "MOD_SUICIDE";
-    else
+    } else {
       lastStandParams.sMeansOfDeath = sMeansOfDeath;
+    }
 
     lastStandParams.sWeapon = sWeapon;
-    if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none")
+    if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
       lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-    else
+    } else {
       lastStandParams.sPrimaryWeapon = undefined;
+    }
     lastStandParams.vDir = vDir;
     lastStandParams.sHitLoc = sHitLoc;
     lastStandParams.lastStandStartTime = GetTime() + CONST_LAST_STAND_TIME * 1000;
 
     mayDoLastStand = mayDoLastStand(sWeapon, lastStandParams.sMeansOfDeath, sHitLoc);
-    if(isDefined(self.endGame))
+    if(isDefined(self.endGame)) {
       mayDoLastStand = false;
+    }
 
     if(!mayDoLastStand) {
       lastStandParams.lastStandStartTime = GetTime();
@@ -936,8 +942,9 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
       }
     }
 
-    if(isDefined(level.ac130player) && isDefined(attacker) && level.ac130player == attacker)
+    if(isDefined(level.ac130player) && isDefined(attacker) && level.ac130player == attacker) {
       level notify("ai_crawling", self);
+    }
 
     self.previousPrimary = self.lastdroppableweapon;
     self.lastStandParams = lastStandParams;
@@ -959,11 +966,13 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
 }
 
 mayDoLastStand(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(sMeansOfDeath == "MOD_TRIGGER_HURT")
+  if(sMeansOfDeath == "MOD_TRIGGER_HURT") {
     return false;
+  }
 
-  if(sMeansOfDeath == "MOD_SUICIDE")
+  if(sMeansOfDeath == "MOD_SUICIDE") {
     return false;
+  }
 
   return true;
 }
@@ -1058,8 +1067,9 @@ predatorSuicideNuke() {
   level notify("jugg_predator_killed", self);
   self notify("predator_detonate");
 
-  if(IsAlive(self))
+  if(IsAlive(self)) {
     self _suicide();
+  }
 }
 
 predatorEyeFlashUpdate() {
@@ -1205,8 +1215,9 @@ predatorTensionMusic() {
     level.predatorMusicEnt playSound(tensionMusic[curIndex]);
 
     curIndex++;
-    if(curIndex >= tensionMusic.size)
+    if(curIndex >= tensionMusic.size) {
       curIndex = 0;
+    }
   }
 }
 
@@ -1282,14 +1293,16 @@ predatorExpDeath() {
 
 predatorExpCanKill(player) {
   if(level.teambased) {
-    if(player.team == level.predatorUser.team)
+    if(player.team == level.predatorUser.team) {
       return false;
+    }
   } else {
     isKillstreakPlayer = (player == level.predatorUser);
     ownerIsPlayer = isDefined(player.owner) && (player.owner == level.predatorUser);
 
-    if(isKillstreakPlayer || ownerIsPlayer)
+    if(isKillstreakPlayer || ownerIsPlayer) {
       return false;
+    }
   }
 
   return true;

@@ -52,8 +52,9 @@ friendly_climb_anims() {
 }
 
 price_catches_player(price) {
-  if(isDefined(level.rumble_ent))
+  if(isDefined(level.rumble_ent)) {
     level.rumble_ent delete();
+  }
 
   level.player PlayRumbleOnEntity("damage_light");
   flag_set("player_was_caught");
@@ -129,8 +130,9 @@ pick_right_out(price) {
 }
 
 attach_pick(price) {
-  if(isDefined(price.picks))
+  if(isDefined(price.picks)) {
     return;
+  }
   price.picks = true;
   price anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
@@ -157,8 +159,9 @@ price_gun_recall(price) {
 }
 
 detach_picks() {
-  if(!isDefined(self.picks))
+  if(!isDefined(self.picks)) {
     return;
+  }
   self.picks = undefined;
   self Detach("weapon_ice_picker", "tag_weapon_left");
   self Detach("weapon_ice_picker", "tag_inhand");

@@ -9,8 +9,9 @@
 
 pick_starting_location_so(return_placement) {
   if(isDefined(return_placement) && return_placement) {
-    if(isDefined(level.skip_PlayerSetStreamOrigin) && level.skip_PlayerSetStreamOrigin)
+    if(isDefined(level.skip_PlayerSetStreamOrigin) && level.skip_PlayerSetStreamOrigin) {
       return undefined;
+    }
   }
 
   if(isDefined(level.pmc_match) && level.pmc_match) {
@@ -18,8 +19,9 @@ pick_starting_location_so(return_placement) {
   }
 
   p1_starts = getEntArray("info_player_start_so", "classname");
-  if(p1_starts.size <= 0)
+  if(p1_starts.size <= 0) {
     p1_starts = getEntArray("info_player_start", "classname");
+  }
 
   assertex(p1_starts.size > 0, "Special Ops requires at least 1 player starting position. Place either an info_player_start_so or info_player_start in the level.");
 
@@ -60,10 +62,11 @@ pick_starting_location_pmc(return_placement) {
   excluders = [];
   spawnEnt = undefined;
   foreach(player in level.players) {
-    if(!excluders.size)
+    if(!excluders.size) {
       spawnEnt = random(startingLocations);
-    else
+    } else {
       spawnEnt = get_closest_exclude(spawnEnt.origin, startingLocations, excluders);
+    }
 
     assert(isDefined(spawnEnt));
 
@@ -84,8 +87,9 @@ place_player_at_start_point(player, start_point) {
   assertex(isDefined(start_point), "place_player_at_start_point() requires a valid start_point.");
 
   player SetOrigin(start_point.origin);
-  if(isDefined(start_point.angles))
+  if(isDefined(start_point.angles)) {
     player setPlayerAngles(start_point.angles);
+  }
 }
 
 place_player2_near_player1() {
@@ -101,32 +105,38 @@ place_player2_near_player1() {
 }
 
 specialops_remove_entity_check(special_op_state) {
-  if(specialops_remove_flag_check(special_op_state))
+  if(specialops_remove_flag_check(special_op_state)) {
     return true;
+  }
 
-  if(specialops_remove_name_check(special_op_state))
+  if(specialops_remove_name_check(special_op_state)) {
     return true;
+  }
 
   return false;
 }
 
 specialops_remove_flag_check(special_op_state) {
-  if(!isDefined(self.script_specialops))
+  if(!isDefined(self.script_specialops)) {
     return false;
+  }
 
   assertex(((self.script_specialops == 0) || (self.script_specialops == 1)), "Entities with script_specialops set must use a value of either 0 or 1. Classname " + self.classname + " at Origin " + self.origin);
-  if(self.script_specialops == special_op_state)
+  if(self.script_specialops == special_op_state) {
     return false;
+  }
 
   return true;
 }
 
 specialops_remove_name_check(special_op_state) {
-  if(!isDefined(self.script_specialopsname))
+  if(!isDefined(self.script_specialopsname)) {
     return false;
+  }
 
-  if(special_op_state == 0)
+  if(special_op_state == 0) {
     return true;
+  }
 
   tokens = strtok(self.script_specialopsname, ":;, ");
   delete_ent = true;
@@ -142,8 +152,9 @@ specialops_remove_name_check(special_op_state) {
 
 so_create_hud_item_delay_draw(hudelem) {
   hudelem.alpha = 0;
-  while(!so_hud_can_show())
+  while(!so_hud_can_show()) {
     wait 0.5;
+  }
 
   if(!isDefined(hudelem)) {
     return;
@@ -164,29 +175,35 @@ so_create_hud_item_delay_draw(hudelem) {
     hudelem fade_over_time(1, 0.5);
   }
 
-  if(!self ent_flag("so_hud_can_toggle"))
+  if(!self ent_flag("so_hud_can_toggle")) {
     self ent_flag_set("so_hud_can_toggle");
+  }
 }
 
 so_hud_can_show() {
-  if(isDefined(level.so_waiting_for_players) && level.so_waiting_for_players)
+  if(isDefined(level.so_waiting_for_players) && level.so_waiting_for_players) {
     return false;
+  }
 
-  if(isDefined(level.challenge_time_force_on) && level.challenge_time_force_on)
+  if(isDefined(level.challenge_time_force_on) && level.challenge_time_force_on) {
     return true;
+  }
 
-  if(!isDefined(self.so_hud_show_time))
+  if(!isDefined(self.so_hud_show_time)) {
     return true;
+  }
 
   return (gettime() > self.so_hud_show_time);
 }
 
 so_hud_can_toggle(hudelem) {
-  if(!isDefined(hudelem.so_can_toggle) || !hudelem.so_can_toggle)
+  if(!isDefined(hudelem.so_can_toggle) || !hudelem.so_can_toggle) {
     return false;
+  }
 
-  if(!isDefined(self.so_infohud_toggle_state))
+  if(!isDefined(self.so_infohud_toggle_state)) {
     return false;
+  }
 
   return true;
 }
@@ -222,8 +239,9 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
   thread challenge_timer_wait_passed(self.hud_so_timer_msg, self.hud_so_timer_time, passed_flag);
 }
 challenge_timer_detect_3quarter() {
-  if(!flag_exist("so_challenge_is_3quarter"))
+  if(!flag_exist("so_challenge_is_3quarter")) {
     flag_init("so_challenge_is_3quarter");
+  }
 
   flag_wait("so_challenge_is_3quarter");
 
@@ -231,8 +249,9 @@ challenge_timer_detect_3quarter() {
 }
 
 challenge_timer_detect_halfway() {
-  if(!flag_exist("so_challenge_is_halfway"))
+  if(!flag_exist("so_challenge_is_halfway")) {
     flag_init("so_challenge_is_halfway");
+  }
 
   flag_wait("so_challenge_is_halfway");
 
@@ -240,8 +259,9 @@ challenge_timer_detect_halfway() {
 }
 
 challenge_timer_detect_quarter() {
-  if(!flag_exist("so_challenge_is_quarter"))
+  if(!flag_exist("so_challenge_is_quarter")) {
     flag_init("so_challenge_is_quarter");
+  }
 
   flag_wait("so_challenge_is_quarter");
 
@@ -251,34 +271,40 @@ challenge_timer_detect_quarter() {
 challenge_timer_wait_start(hud_msg, hud_time, start_flag) {
   level endon("special_op_terminated");
 
-  if(isDefined(start_flag))
+  if(isDefined(start_flag)) {
     flag_wait(start_flag);
+  }
 
   foreach(player in level.players) {
-    if(!player so_hud_can_show())
+    if(!player so_hud_can_show()) {
       player.so_hud_show_time = gettime();
+    }
   }
 
   if(!isDefined(level.challenge_start_time)) {
-    if(challenge_timer_should_play_alarm())
+    if(challenge_timer_should_play_alarm()) {
       level.player playSound("arcademode_zerodeaths");
+    }
     level.challenge_start_time = gettime();
   }
 
   hud_time.label = "";
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     hud_time settenthstimer(level.challenge_time_limit);
-  else
+  } else {
     hud_time settenthstimerup(0.00);
+  }
 }
 
 challenge_timer_should_play_alarm() {
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     return true;
+  }
 
   foreach(player in level.players) {
-    if(player.so_infohud_toggle_state != "off")
+    if(player.so_infohud_toggle_state != "off") {
       return true;
+    }
   }
 
   return false;
@@ -298,8 +324,9 @@ challenge_timer_show_nudge(hud_msg, hud_time) {
 
   hud_msg set_hudelem_yellow();
   hud_time set_hudelem_yellow();
-  if(!challenge_timer_be_silent())
+  if(!challenge_timer_be_silent()) {
     thread maps\_specialops::so_dialog_time_low_normal();
+  }
 }
 
 challenge_timer_show_hurry(hud_msg, hud_time) {
@@ -316,16 +343,19 @@ challenge_timer_show_hurry(hud_msg, hud_time) {
 
   hud_msg set_hudelem_red();
   hud_time set_hudelem_red();
-  if(!challenge_timer_be_silent())
+  if(!challenge_timer_be_silent()) {
     thread maps\_specialops::so_dialog_time_low_hurry();
+  }
 }
 
 challenge_timer_be_silent() {
-  if(self != level.player)
+  if(self != level.player) {
     return true;
+  }
 
-  if(!isDefined(level.challenge_time_silent))
+  if(!isDefined(level.challenge_time_silent)) {
     return false;
+  }
 
   return level.challenge_time_silent;
 }
@@ -352,21 +382,24 @@ challenge_timer_give_alert() {
       player.hud_so_timer_time thread maps\_specialops::so_hud_pulse_create();
     }
 
-    if(level.so_challenge_time_beep < 0)
+    if(level.so_challenge_time_beep < 0) {
       level.player playSound("arcademode_kill_streak_lost");
-    else
+    } else {
       level.player playSound("so_countdown_beep");
+    }
   }
 }
 
 challenge_timer_should_pulse() {
-  if(level.so_challenge_time_left > level.so_challenge_time_beep)
+  if(level.so_challenge_time_left > level.so_challenge_time_beep) {
     return false;
+  }
 
   for(i = 0; i <= level.challenge_time_beep_start; i++) {
     if(level.so_challenge_time_left > i) {
-      if(level.so_challenge_time_beep < i)
+      if(level.so_challenge_time_beep < i) {
         level.so_challenge_time_beep = i + 1;
+      }
       continue;
     }
 
@@ -393,33 +426,38 @@ challenge_timer_show_failed(hud_msg, hud_time) {
 
   challenge_timer_destroy(hud_msg, hud_time);
 
-  if(self == level.player)
+  if(self == level.player) {
     thread maps\_specialops::so_dialog_mission_failed_time();
+  }
 
   maps\_specialops::so_force_deadquote("@SPECIAL_OPS_FAILURE_HINT_TIME", "ui_time_failure");
 
-  if(self == level.player)
+  if(self == level.player) {
     MissionFailedWrapper();
+  }
 }
 
 challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
   level endon("challenge_timer_expired");
   level endon("new_challenge_timer");
 
-  if(flag_exist("individual_timers") && flag("individual_timers"))
+  if(flag_exist("individual_timers") && flag("individual_timers")) {
     self ent_flag_wait(passed_flag);
-  else
+  } else {
     flag_wait(passed_flag);
+  }
 
   flag_set("challenge_timer_passed");
   level.challenge_end_time = gettime();
 
   time = (level.challenge_end_time - level.challenge_start_time) * 0.001;
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     time = level.challenge_time_limit - time;
+  }
 
-  if(level.script == "so_snowrace2_cliffhanger")
+  if(level.script == "so_snowrace2_cliffhanger") {
     time = level.challenge_time_limit;
+  }
 
   if(time <= 0) {
     time = 0.1;
@@ -427,8 +465,9 @@ challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
 
   hud_time SetTenthsTimerStatic(time);
 
-  if(!flag_exist("individual_timers"))
+  if(!flag_exist("individual_timers")) {
     return;
+  }
   if(flag("individual_timers")) {
     return;
   }
@@ -441,18 +480,22 @@ challenge_timer_destroy_prematurely(hud_msg, hud_time) {
 }
 
 challenge_timer_destroy(hud_msg, hud_time, destroy_immediately) {
-  if(isDefined(hud_msg))
+  if(isDefined(hud_msg)) {
     hud_msg thread maps\_specialops::so_remove_hud_item(destroy_immediately);
-  if(isDefined(hud_time))
+  }
+  if(isDefined(hud_time)) {
     hud_time thread maps\_specialops::so_remove_hud_item(destroy_immediately);
+  }
 }
 
 validate_timer(timer) {
-  if(!isDefined(timer))
+  if(!isDefined(timer)) {
     return false;
+  }
 
-  if(timer <= 0)
+  if(timer <= 0) {
     return false;
+  }
 
   return true;
 }
@@ -480,29 +523,33 @@ specialops_mission_over_setup(was_success) {
     assertmsg("The special op has somehow tried to end itself more than once. Current Success = " + was_success + " and Previous Success = " + level.special_op_success);
   }
 
-  if(!isDefined(level.challenge_end_time))
+  if(!isDefined(level.challenge_end_time)) {
     level.challenge_end_time = gettime();
+  }
 
   flag_set("special_op_terminated");
   level notify("stop_music");
 
   stream_origin = undefined;
-  if(isDefined(level.pmc_game) && level.pmc_game)
+  if(isDefined(level.pmc_game) && level.pmc_game) {
     stream_origin = pick_starting_location_pmc(true);
-  else
+  } else {
     stream_origin = pick_starting_location_so(true);
+  }
   if(isDefined(stream_origin)) {
-    foreach(player in level.players)
-    player PlayerSetStreamOrigin(stream_origin);
+    foreach(player in level.players) {
+      player PlayerSetStreamOrigin(stream_origin);
+    }
   }
 
   ambientStop(2);
   music_stop(1);
 
-  if(was_success)
+  if(was_success) {
     thread specialops_mission_over_setup_success();
-  else
+  } else {
     thread specialops_mission_over_setup_failure();
+  }
 
   foreach(player in level.players) {
     player AllowJump(false);
@@ -544,8 +591,9 @@ specialops_mission_over_remove_ai() {
   ai_to_delete = getaiarray();
   ai_to_delete = array_merge(ai_to_delete, getaiSpeciesArray("axis", "dog"));
   foreach(ai in ai_to_delete) {
-    if(isDefined(ai.magic_bullet_shield))
+    if(isDefined(ai.magic_bullet_shield)) {
       ai stop_magic_bullet_shield();
+    }
     ai Delete();
   }
 }
@@ -595,12 +643,14 @@ specialops_mission_over_setup_failure() {
 is_current_level_locked() {
   specOpsString = self GetLocalPlayerProfileData("missionSOHighestDifficulty");
 
-  if(!isDefined(specOpsString))
+  if(!isDefined(specOpsString)) {
     return true;
+  }
 
   specOpsSum = 0;
-  for(i = 0; i < specOpsString.size; i++)
+  for(i = 0; i < specOpsString.size; i++) {
     specOpsSum += max(0, int(specOpsString[i]) - 1);
+  }
 
   current_group = tablelookup("sp/specOpsTable.csv", 1, level.script, 13);
 
@@ -618,44 +668,56 @@ can_save_to_profile() {
 specialops_achievement_by_stars(specOpsString) {
   specOpsSum = get_total_stars(specOpsString);
 
-  if(specOpsSum >= 1)
+  if(specOpsSum >= 1) {
     self player_giveachievement_wrapper("GOLD_STAR");
+  }
 
-  if(specOpsSum >= 4)
+  if(specOpsSum >= 4) {
     self player_giveachievement_wrapper("HOTEL_BRAVO");
+  }
 
-  if(specOpsSum >= 8)
+  if(specOpsSum >= 8) {
     self player_giveachievement_wrapper("CHARLIE_ON_OUR_SIX");
+  }
 
-  if(specOpsSum >= 21)
+  if(specOpsSum >= 21) {
     self player_giveachievement_wrapper("BLACKJACK");
+  }
 
-  if(specOpsSum >= 30)
+  if(specOpsSum >= 30) {
     self player_giveachievement_wrapper("SPECIALIST");
+  }
 
-  if(specOpsSum >= 69)
+  if(specOpsSum >= 69) {
     self player_giveachievement_wrapper("STAR_69");
+  }
 
-  if(get_num_of_levels_with_star(specOpsString, 1) >= 11)
+  if(get_num_of_levels_with_star(specOpsString, 1) >= 11) {
     self player_giveachievement_wrapper("IT_GOES_TO_ELEVEN");
+  }
 
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 5)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 5) {
     self player_giveachievement_wrapper("OPERATIONAL_ASSET");
+  }
 
-  if(get_num_of_levels_with_star(specOpsString, 1) >= 23)
+  if(get_num_of_levels_with_star(specOpsString, 1) >= 23) {
     self player_giveachievement_wrapper("HONOR_ROLL");
+  }
 
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 10)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 10) {
     self player_giveachievement_wrapper("OPERATIVE");
+  }
 
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 15)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 15) {
     self player_giveachievement_wrapper("PROFESSIONAL");
+  }
 }
 
 get_total_stars(specOpsString) {
   string_size = specOpsString.size;
-  if(string_size > level.specOpsSettings.levels.size)
+  if(string_size > level.specOpsSettings.levels.size) {
     string_size = level.specOpsSettings.levels.size;
+  }
 
   specOpsSum = 0;
   for(i = 0; i < string_size; i++) {
@@ -666,13 +728,15 @@ get_total_stars(specOpsString) {
 
 get_num_of_levels_with_star(specOpsString, stars) {
   string_size = specOpsString.size;
-  if(string_size > level.specOpsSettings.levels.size)
+  if(string_size > level.specOpsSettings.levels.size) {
     string_size = level.specOpsSettings.levels.size;
+  }
 
   levels = 0;
   for(i = 0; i < string_size; i++) {
-    if(max(0, int(specOpsString[i]) - 1) >= stars)
+    if(max(0, int(specOpsString[i]) - 1) >= stars) {
       levels++;
+    }
   }
   return levels;
 }
@@ -696,8 +760,9 @@ specialops_mission_over_stats(was_success) {
     }
   }
 
-  if(issplitscreen() && level.ps3)
+  if(issplitscreen() && level.ps3) {
     level.player2.eog_noreward = false;
+  }
 
   assert(isDefined(best_time_name));
   assert(isDefined(level.challenge_start_time));
@@ -715,11 +780,13 @@ specialops_mission_over_stats(was_success) {
       continue;
     }
     never_played = current_best_time == 0;
-    if(isDefined(player.finish_time) && isDefined(level.challenge_start_time))
+    if(isDefined(player.finish_time) && isDefined(level.challenge_start_time)) {
       m_seconds = int(min((player.finish_time - level.challenge_start_time), 86400000));
+    }
 
-    if(never_played || m_seconds < current_best_time)
+    if(never_played || m_seconds < current_best_time) {
       player SetLocalPlayerProfileData(best_time_name, m_seconds);
+    }
 
     if(!never_played && m_seconds < current_best_time) {
       player.eog_besttime = true;
@@ -745,8 +812,9 @@ specialops_mission_over_stats(was_success) {
     if(!isDefined(missionSpecOps)) {
       continue;
     }
-    if(missionSpecOps < levelindex + 1)
+    if(missionSpecOps < levelindex + 1) {
       player SetLocalPlayerProfileData("missionSpecOps", levelIndex + 1);
+    }
   }
 
   foreach(player in level.players) {
@@ -760,12 +828,14 @@ specialops_mission_over_stats(was_success) {
     }
     assertex(isDefined(level.specOpsSettings), "Special Op levels are not yet initialized in _endmission.gsc and we are already trying to save level difficulty completed data.");
 
-    if(string_size > level.specOpsSettings.levels.size)
+    if(string_size > level.specOpsSettings.levels.size) {
       string_size = level.specOpsSettings.levels.size;
+    }
 
     specOpsSum = 0;
-    for(i = 0; i < string_size; i++)
+    for(i = 0; i < string_size; i++) {
       specOpsSum += int(max(0, int(specOpsString[i]) - 1));
+    }
 
     assertex(specOpsSum >= 0 && specOpsSum <= (level.specOpsSettings.levels.size * 3), "More stars earned than possible!");
 
@@ -774,10 +844,11 @@ specialops_mission_over_stats(was_success) {
 
     assert(isDefined(completion_fraction));
 
-    if(int(completion_fraction * 100) % 100 >= 0.5)
+    if(int(completion_fraction * 100) % 100 >= 0.5) {
       completion_percentage = int(completion_fraction) + 1;
-    else
+    } else {
       completion_percentage = int(completion_fraction);
+    }
 
     assertex((completion_percentage >= 0 && completion_percentage <= 100), "Special Ops' completion percentage [ " + completion_percentage + "% ] is outside of 0 to 100 range!");
 
@@ -990,8 +1061,9 @@ waiting_message_delete_on_so_end(waiting_hud) {
 
   level waittill("special_op_terminated");
 
-  if(isDefined(waiting_hud))
+  if(isDefined(waiting_hud)) {
     waiting_hud Destroy();
+  }
 }
 
 disable_saving() {
@@ -1058,13 +1130,15 @@ ping_escape_warning() {
 
   self.escape_hint_active = undefined;
 
-  if(isDefined(self.ping_escape_splash))
+  if(isDefined(self.ping_escape_splash)) {
     self.ping_escape_splash Destroy();
+  }
 }
 
 ping_escape_warning_valid() {
-  if(flag("special_op_terminated"))
+  if(flag("special_op_terminated")) {
     return false;
+  }
 
   if(!self is_touching_escape_trigger()) {
     return false;
@@ -1075,11 +1149,13 @@ ping_escape_warning_valid() {
 
 so_dialog_play(dialog, wait_time, force_stop) {
   assertex(isDefined(dialog), "so_dialog_play() requires valid dialog to be passed in.");
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait wait_time;
+  }
 
-  if(isDefined(force_stop) && force_stop)
+  if(isDefined(force_stop) && force_stop) {
     radio_dialogue_stop();
+  }
   radio_dialogue(dialog);
 }
 
@@ -1164,8 +1240,9 @@ so_hud_pulse_loop() {
   self endon("destroying");
   self endon("death");
 
-  if(self.pulse_start_big)
+  if(self.pulse_start_big) {
     so_hud_pulse_single(self.pulse_scale_big, self.pulse_scale_loop_normal, self.pulse_time);
+  }
 
   while(isDefined(self.pulse_loop) && self.pulse_loop) {
     so_hud_pulse_single(self.pulse_scale_loop_normal, self.pulse_scale_loop_big, self.pulse_time_loop);
@@ -1174,32 +1251,41 @@ so_hud_pulse_loop() {
 }
 
 so_hud_pulse_init() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
-  if(!isDefined(self.pulse_time))
+  if(!isDefined(self.pulse_time)) {
     self.pulse_time = 0.5;
+  }
 
-  if(!isDefined(self.pulse_scale_normal))
+  if(!isDefined(self.pulse_scale_normal)) {
     self.pulse_scale_normal = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_big))
+  if(!isDefined(self.pulse_scale_big)) {
     self.pulse_scale_big = 1.6;
+  }
 
-  if(!isDefined(self.pulse_loop))
+  if(!isDefined(self.pulse_loop)) {
     self.pulse_loop = false;
+  }
 
-  if(!isDefined(self.pulse_time_loop))
+  if(!isDefined(self.pulse_time_loop)) {
     self.pulse_time_loop = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_loop_normal))
+  if(!isDefined(self.pulse_scale_loop_normal)) {
     self.pulse_scale_loop_normal = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_loop_big))
+  if(!isDefined(self.pulse_scale_loop_big)) {
     self.pulse_scale_loop_big = 1.15;
+  }
 
-  if(!isDefined(self.pulse_start_big))
+  if(!isDefined(self.pulse_start_big)) {
     self.pulse_start_big = true;
+  }
 
   return true;
 }
@@ -1224,8 +1310,9 @@ specialops_detect_player_death() {
 }
 
 waittill_either_player() {
-  if(!flag_exist("summary_response"))
+  if(!flag_exist("summary_response")) {
     flag_init("summary_response");
+  }
 
   if(level.players.size > 1) {
     flag_clear("summary_response");
@@ -1265,8 +1352,9 @@ so_special_failure_hint_reset_dvars(icon_dvar) {
   setDvar("ui_icon_claymore", 0);
   setDvar("ui_icon_stealth_stance", 0);
 
-  if(isDefined(icon_dvar))
+  if(isDefined(icon_dvar)) {
     setDvar(icon_dvar, 1);
+  }
 }
 
 so_special_failure_hint() {
@@ -1319,8 +1407,9 @@ so_special_death_hint_tracker() {
   if(so_grenade_regular_death(cause)) {
     return;
   }
-  if(so_vehicle_death(attacker, cause))
+  if(so_vehicle_death(attacker, cause)) {
     return;
+  }
 }
 
 so_claymore_death(cause, weapon) {
@@ -1336,40 +1425,48 @@ so_claymore_death(cause, weapon) {
 }
 
 so_friendly_fire_death(attacker) {
-  if(!is_coop())
+  if(!is_coop()) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
   other_player = get_other_player(self);
-  if(other_player != attacker)
+  if(other_player != attacker) {
     return false;
+  }
 
   so_special_failure_hint_set("@DEADQUOTE_SO_FRIENDLY_FIRE_KILL", "ui_ff_death");
   return true;
 }
 
 so_radiation_death(attacker) {
-  if(!isDefined(attacker) || (attacker.classname != "worldspawn"))
+  if(!isDefined(attacker) || (attacker.classname != "worldspawn")) {
     return false;
+  }
 
-  if(!isDefined(self.radiationDeath) || !self.radiationDeath)
+  if(!isDefined(self.radiationDeath) || !self.radiationDeath) {
     return false;
+  }
 
   so_special_failure_hint_set("@SCRIPT_RADIATION_DEATH");
   return true;
 }
 
 so_dog_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.weapon))
+  if(!isDefined(attacker.weapon)) {
     return false;
+  }
 
-  if(attacker.weapon != "dog_bite")
+  if(attacker.weapon != "dog_bite") {
     return false;
+  }
 
   switch (level.dog_death_type) {
     case "soon":
@@ -1387,11 +1484,13 @@ so_dog_death(attacker) {
 }
 
 so_juggernaut_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.juggernaut))
+  if(!isDefined(attacker.juggernaut)) {
     return false;
+  }
 
   deadquotes = [];
 
@@ -1407,17 +1506,21 @@ so_juggernaut_death(attacker) {
 }
 
 so_destructible_death(attacker, cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(cause != "MOD_EXPLOSIVE")
+  if(cause != "MOD_EXPLOSIVE") {
     return false;
+  }
 
-  if(!isDefined(attacker.destructible_type))
+  if(!isDefined(attacker.destructible_type)) {
     return false;
+  }
 
   if(issubstr(attacker.destructible_type, "vehicle")) {
     so_special_failure_hint_set("@SCRIPT_EXPLODING_VEHICLE_DEATH", "ui_vehicle_death");
@@ -1429,21 +1532,26 @@ so_destructible_death(attacker, cause) {
 }
 
 so_exploding_barrel_death(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(cause != "MOD_EXPLOSIVE")
+  if(cause != "MOD_EXPLOSIVE") {
     return false;
+  }
 
-  if(!isDefined(level.lastExplodingBarrel))
+  if(!isDefined(level.lastExplodingBarrel)) {
     return false;
+  }
 
-  if(getTime() != level.lastExplodingBarrel["time"])
+  if(getTime() != level.lastExplodingBarrel["time"]) {
     return false;
+  }
 
   d = distance(self.origin, level.lastExplodingBarrel["origin"]);
-  if(d > level.lastExplodingBarrel["radius"])
+  if(d > level.lastExplodingBarrel["radius"]) {
     return false;
+  }
 
   so_special_failure_hint_set("@SCRIPT_EXPLODING_BARREL_DEATH", "ui_barrel_death");
 
@@ -1451,14 +1559,17 @@ so_exploding_barrel_death(cause) {
 }
 
 so_grenade_suicide_death(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(cause != "MOD_SUICIDE")
+  if(cause != "MOD_SUICIDE") {
     return false;
+  }
 
-  if((self.lastgrenadetime - gettime()) > 3.5 * 1000)
+  if((self.lastgrenadetime - gettime()) > 3.5 * 1000) {
     return false;
+  }
 
   so_special_failure_hint_set("@SCRIPT_GRENADE_SUICIDE_COMBINED");
 
@@ -1480,17 +1591,21 @@ so_grenade_regular_death(cause) {
 }
 
 so_vehicle_death(attacker, cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(cause != "MOD_CRUSH")
+  if(cause != "MOD_CRUSH") {
     return false;
+  }
 
-  if(attacker.code_classname != "script_vehicle")
+  if(attacker.code_classname != "script_vehicle") {
     return false;
+  }
 
   so_special_failure_hint_set("@DEADQUOTE_SO_RUN_OVER_BY_VEHICLE");
   return true;

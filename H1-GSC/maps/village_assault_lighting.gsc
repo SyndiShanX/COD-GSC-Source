@@ -48,8 +48,9 @@ goblack(var_0, var_1, var_2) {
   var_3.sort = 1;
   var_3.alpha = 0;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     var_3 fadeovertime(var_1);
+  }
 
   var_3.alpha = 1.0;
   wait(var_1);
@@ -61,8 +62,9 @@ goblack(var_0, var_1, var_2) {
   level notify("fade_from_black");
   wait 0.1;
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     var_3 fadeovertime(var_2);
+  }
 
   var_3.alpha = 0.0;
   wait(var_2);

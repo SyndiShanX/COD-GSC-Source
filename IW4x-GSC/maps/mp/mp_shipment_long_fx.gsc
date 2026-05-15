@@ -17,6 +17,7 @@ main() {
   level._effect["rain_heavy_mist"] = loadfx("weather/rain_heavy_mist_ex");
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
 
-  if(!getdvarint("clientSideEffects"))
+  if(!getdvarint("clientSideEffects")) {
     maps\createfx\mp_shipment_long_fx::main();
+  }
 }

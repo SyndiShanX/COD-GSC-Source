@@ -49,8 +49,9 @@ setup_sentry_minigun() {
     precacheturret("sentry_minigun_enemy");
   } else if(is_specialop())
     precacheturret("sentry_minigun_so");
-  else
+  else {
     precacheturret("sentry_minigun_mp");
+  }
 
   level.sentry_settings["sentry_minigun"] = spawnStruct();
   sentry_minigun_default_settings("sentry_minigun");
@@ -78,12 +79,13 @@ setup_sentry_grenade_launcher() {
   precachemodel("sentry_grenade_launcher_upgrade_obj_red");
   precachemodel("sentry_grenade_launcher_upgrade_folded_obj");
 
-  if(common_scripts\utility::issp() && !is_specialop())
+  if(common_scripts\utility::issp() && !is_specialop()) {
     precacheturret("sentry_gun");
-  else if(is_specialop())
+  } else if(is_specialop()) {
     precacheturret("sentry_gun_so");
-  else
+  } else {
     precacheturret("sentry_gun_mp");
+  }
 
   level.sentry_settings["sentry_gun"] = spawnStruct();
   sentry_gun_default_settings("sentry_gun");
@@ -121,8 +123,9 @@ setup_sentry_smg() {
 init_placed_sentries(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 sentry_init(undefined, var_0);
+  foreach(var_3 in var_1) {
+    var_3 sentry_init(undefined, var_0);
+  }
 }
 
 sentry_gun_default_settings(var_0) {
@@ -289,16 +292,19 @@ sentry_init(var_0, var_1, var_2) {
     level.sentry_overheating_speed = 1;
     level.sentry_cooling_speed = 1;
 
-    if(!isDefined(level.sentry_fire_time))
+    if(!isDefined(level.sentry_fire_time)) {
       level.sentry_fire_time = 5;
+    }
 
-    if(!isDefined(level.sentry_cooldown_time))
+    if(!isDefined(level.sentry_cooldown_time)) {
       level.sentry_cooldown_time = 2;
+    }
   }
 
   if(!isDefined(var_0)) {
-    if(!isDefined(self.script_team))
+    if(!isDefined(self.script_team)) {
       self.script_team = "axis";
+    }
 
     var_0 = self.script_team;
   }
@@ -310,8 +316,9 @@ sentry_init(var_0, var_1, var_2) {
   self setCanDamage(1);
   self setdefaultdroppitch(-89.0);
 
-  if(common_scripts\utility::issp() || level.teambased || is_survival())
+  if(common_scripts\utility::issp() || level.teambased || is_survival()) {
     self setturretteam(var_0);
+  }
 
   self.sentrytype = var_1;
   self.issentrygun = 1;
@@ -321,23 +328,26 @@ sentry_init(var_0, var_1, var_2) {
   self.sentry_ammo = level.sentry_settings[self.sentrytype].ammo;
 
   if(common_scripts\utility::issp()) {
-    if(isDefined(level.sentry_settings) && isDefined(level.sentry_settings["sentry_minigun"]) && isDefined(level.sentry_settings["sentry_minigun"].bullet_armor))
+    if(isDefined(level.sentry_settings) && isDefined(level.sentry_settings["sentry_minigun"]) && isDefined(level.sentry_settings["sentry_minigun"].bullet_armor)) {
       self.bullet_armor = level.sentry_settings["sentry_minigun"].bullet_armor;
-    else if(self.weaponinfo == "sentry_gun")
+    } else if(self.weaponinfo == "sentry_gun") {
       self.bullet_armor = 2000;
-    else
+    } else {
       self.bullet_armor = 1200;
+    }
   } else if(self.weaponinfo == "sentry_gun")
     self.bullet_armor = 300;
-  else
+  else {
     self.bullet_armor = 300;
+  }
 
   if(common_scripts\utility::issp()) {
     self call[[level.makeentitysentient_func]](var_0);
     common_scripts\utility::self_func("useanimtree", #animtree);
 
-    if(isDefined(self.script_team) && self.script_team == "axis")
+    if(isDefined(self.script_team) && self.script_team == "axis") {
       thread enemy_sentry_difficulty_settings();
+    }
   }
 
   self.health = level.sentry_settings[var_1].health;
@@ -355,15 +365,17 @@ sentry_init(var_0, var_1, var_2) {
   thread sentry_player_use_wait();
 
   if(!isDefined(var_2)) {
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       var_2 = level.player;
+    }
   }
 
   sentry_set_owner(var_2);
   thread sentry_destroy_on_owner_leave(var_2);
 
-  if(!isDefined(self.damage_functions))
+  if(!isDefined(self.damage_functions)) {
     self.damage_functions = [];
+  }
 }
 
 sentry_death_wait() {
@@ -371,8 +383,9 @@ sentry_death_wait() {
   self waittill("death", var_0, var_1, var_2);
   level notify("a_sentry_died");
 
-  if(isDefined(var_0) && isDefined(var_0.team) && self.team != var_0.team && isDefined(level.stat_track_kill_func))
+  if(isDefined(var_0) && isDefined(var_0.team) && self.team != var_0.team && isDefined(level.stat_track_kill_func)) {
     var_0[[level.stat_track_kill_func]](self, var_1, var_2);
+  }
 
   if(!common_scripts\utility::issp()) {
     removefromturretlist();
@@ -384,12 +397,14 @@ sentry_death_wait() {
   self setModel(level.sentry_settings[self.sentrytype].destroyedmodel);
   sentrypoweroff();
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     self call[[level.freeentitysentient_func]]();
+  }
 
   if(!common_scripts\utility::issp() && isDefined(var_0) && isPlayer(var_0)) {
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner thread[[level.leaderdialogonplayer_func]]("destroy_sentry", "sentry_status");
+    }
 
     var_0 thread[[level.onxpevent]]("kill");
   }
@@ -404,8 +419,9 @@ sentry_death_wait() {
   self playSound("sentry_explode");
   playFXOnTag(common_scripts\utility::getfx("sentry_turret_explode"), self, "tag_aim");
 
-  if(common_scripts\utility::issp() && (!isDefined(self.stay_solid_on_death) || !self.stay_solid_on_death))
+  if(common_scripts\utility::issp() && (!isDefined(self.stay_solid_on_death) || !self.stay_solid_on_death)) {
     self setcontents(0);
+  }
 
   wait 1.5;
   self playSound("sentry_explode_smoke");
@@ -423,8 +439,9 @@ sentry_death_wait() {
 
   level.placed_sentry = common_scripts\utility::array_remove(level.placed_sentry, self);
 
-  if(!common_scripts\utility::issp() || getDvar("specialops") == "1")
+  if(!common_scripts\utility::issp() || getDvar("specialops") == "1") {
     thread removedeadsentry();
+  }
 }
 
 handle_sentry_on_carrier_death(var_0) {
@@ -445,8 +462,9 @@ handle_sentry_on_carrier_death(var_0) {
     return;
   }
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     thread place_sentry(var_0);
+  }
 }
 
 kill_sentry_on_carrier_disconnect(var_0) {
@@ -480,10 +498,11 @@ sentry_player_use_wait() {
     if(isDefined(var_0.placingsentry)) {
       continue;
     }
-    if(!common_scripts\utility::issp())
+    if(!common_scripts\utility::issp()) {
       var_0 playlocalsound("sentry_pickup");
-    else
+    } else {
       var_0 playSound("sentry_pickup");
+    }
 
     break;
   }
@@ -496,8 +515,9 @@ sentry_player_use_wait() {
   if(!common_scripts\utility::issp() && !isalive(var_0)) {
     return;
   }
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     sentry_team_hide_icon();
+  }
 
   sentrypoweroff();
   var_0.placingsentry = self;
@@ -506,8 +526,9 @@ sentry_player_use_wait() {
   self.ignoreme = 1;
   self setCanDamage(0);
 
-  if(isDefined(self.carrier) && isPlayer(self.carrier))
+  if(isDefined(self.carrier) && isPlayer(self.carrier)) {
     self.carrier allowlean(0);
+  }
 
   self makeunusable();
   var_0 common_scripts\utility::_disableweapon();
@@ -563,8 +584,9 @@ place_sentry(var_0) {
     level endon("end_game");
   }
 
-  if(isDefined(var_0.carrier) && isPlayer(var_0.carrier))
+  if(isDefined(var_0.carrier) && isPlayer(var_0.carrier)) {
     var_0.carrier allowlean(1);
+  }
 
   self.placingsentry = undefined;
   var_0 setsentrycarrier(undefined);
@@ -582,8 +604,9 @@ place_sentry(var_0) {
   var_0.overheated = 0;
   sentry_placement_hint_hide();
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     var_0 sentry_team_show_icon();
+  }
 
   var_0 sentrypoweron();
   thread common_scripts\utility::play_sound_in_space("sentry_gun_plant", var_0.origin);
@@ -622,8 +645,9 @@ sentry_overheat_monitor() {
   self.overheat = 0;
   self.overheated = 0;
 
-  if(getdvarint("sentry_overheat_debug") == 1)
+  if(getdvarint("sentry_overheat_debug") == 1) {
     thread sentry_overheat_debug();
+  }
 
   for(;;) {
     if(self.overheat >= level.sentry_fire_time * 10) {
@@ -631,10 +655,11 @@ sentry_overheat_monitor() {
       common_scripts\utility::waittill_either("cooled", "sentry_carried");
     }
 
-    if(self isfiringturret())
+    if(self isfiringturret()) {
       self.overheat = self.overheat + 1;
-    else if(self.overheat > 0)
+    } else if(self.overheat > 0) {
       self.overheat = self.overheat - 1;
+    }
 
     wait(0.1 / level.sentry_overheating_speed);
   }
@@ -644,8 +669,9 @@ sentry_cooling() {
   self endon("death");
 
   while(self.overheated) {
-    if(self.overheat > 0)
+    if(self.overheat > 0) {
       self.overheat = self.overheat - 1;
+    }
 
     wait(0.1 / level.sentry_overheating_speed);
   }
@@ -693,8 +719,9 @@ sentry_burst_fire_start() {
   self endon("death");
   level endon("game_ended");
 
-  if(level.sentry_settings[self.sentrytype].fire_only_on_target)
+  if(level.sentry_settings[self.sentrytype].fire_only_on_target) {
     self waittill("turret_on_target");
+  }
 
   if(isDefined(self.overheated) && self.overheated) {
     return;
@@ -709,8 +736,9 @@ sentry_burst_fire_start() {
     var_1 = randomintrange(level.sentry_settings[self.sentrytype].burst_shots_min, level.sentry_settings[self.sentrytype].burst_shots_max);
 
     for(var_2 = 0; var_2 < var_1; var_2++) {
-      if(canfire())
+      if(canfire()) {
         self shootturret();
+      }
 
       self notify("bullet_fired");
       wait(var_0);
@@ -729,14 +757,16 @@ sentry_allowfire(var_0, var_1) {
   if(isDefined(var_1) && !var_0) {
     wait(var_1);
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       thread sentry_allowfire(1);
+    }
   }
 }
 
 canfire() {
-  if(!isDefined(self.taking_damage))
+  if(!isDefined(self.taking_damage)) {
     return 1;
+  }
 
   return self.taking_damage;
 }
@@ -745,8 +775,9 @@ sentry_burst_fire_stop() {
   thread fire_anim_stop();
   self notify("stop_shooting");
 
-  if(isDefined(self.sentry_type) && (!isDefined(level.sentry_settings[self.sentry_type].no_steam) || !level.sentry_settings[self.sentry_type].no_steam))
+  if(isDefined(self.sentry_type) && (!isDefined(level.sentry_settings[self.sentry_type].no_steam) || !level.sentry_settings[self.sentry_type].no_steam)) {
     thread sentry_steam();
+  }
 }
 
 sentry_steam() {
@@ -756,8 +787,9 @@ sentry_steam() {
   var_0 = 6000;
   var_1 = gettime();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self playSound("sentry_steam");
+  }
 
   while(isDefined(self)) {
     playFXOnTag(common_scripts\utility::getfx("sentry_turret_overheat_smoke_sp"), self, "tag_flash");
@@ -770,8 +802,9 @@ sentry_steam() {
 }
 
 turret_start_anim_wait() {
-  if(isDefined(self.allow_fire) && self.allow_fire == 0)
+  if(isDefined(self.allow_fire) && self.allow_fire == 0) {
     self waittill("allow_fire");
+  }
 }
 
 fire_anim_start() {
@@ -787,8 +820,9 @@ fire_anim_start() {
   }
   self.allow_fire = 0;
 
-  if(!isDefined(self.momentum))
+  if(!isDefined(self.momentum)) {
     self.momentum = 0;
+  }
 
   thread fire_sound_spinup();
 
@@ -800,8 +834,9 @@ fire_anim_start() {
     self.momentum = self.momentum + 0.1;
     self.momentum = clamp(self.momentum, 0.0, 1.0);
 
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       common_scripts\utility::self_func("setanim", level.sentry_settings[self.sentrytype].anim_loop, 1.0, 0.2, self.momentum);
+    }
 
     wait 0.2;
   }
@@ -815,11 +850,13 @@ delete_sentry_turret() {
   wait 0.05;
   self notify("death");
 
-  if(isDefined(self.obj_overlay))
+  if(isDefined(self.obj_overlay)) {
     self.obj_overlay delete();
+  }
 
-  if(isDefined(self.cam))
+  if(isDefined(self.cam)) {
     self.cam delete();
+  }
 
   self delete();
 }
@@ -846,8 +883,9 @@ fire_anim_stop() {
     self.momentum = self.momentum - 0.1;
     self.momentum = clamp(self.momentum, 0.0, 1.0);
 
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       common_scripts\utility::self_func("setanim", level.sentry_settings[self.sentrytype].anim_loop, 1.0, 0.2, self.momentum);
+    }
 
     wait 0.2;
   }
@@ -946,21 +984,25 @@ sentry_beep_sounds() {
 spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
 
-  if(isDefined(self.placingsentry))
+  if(isDefined(self.placingsentry)) {
     return undefined;
+  }
 
   common_scripts\utility::_disableweapon();
   self notify("placingSentry");
   self.sentry_placement_failed = undefined;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = self.angles;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_4 = spawnturret("misc_turret", var_1, level.sentry_settings[var_0].weaponinfo);
   var_4 setModel(level.sentry_settings[var_0].placementmodel);
@@ -982,8 +1024,9 @@ spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
   var_4 setCanDamage(0);
   var_4.ignoreme = 1;
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     var_4 addtoturretlist();
+  }
 
   if(!var_3) {
     thread sentry_placement_cancel_monitor(var_4);
@@ -995,10 +1038,11 @@ spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
   if(!var_3) {
     thread updatesentrypositionthread(var_4);
 
-    if(!common_scripts\utility::issp())
+    if(!common_scripts\utility::issp()) {
       common_scripts\utility::waittill_any("sentry_placement_finished", "sentry_placement_canceled", "death");
-    else
+    } else {
       common_scripts\utility::waittill_any("sentry_placement_finished", "sentry_placement_canceled");
+    }
   }
 
   sentry_placement_hint_hide();
@@ -1012,8 +1056,9 @@ spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
   if(is_survival()) {
     waittillframeend;
 
-    if(isDefined(self.sentry_placement_failed) && self.sentry_placement_failed)
+    if(isDefined(self.sentry_placement_failed) && self.sentry_placement_failed) {
       return undefined;
+    }
   }
 
   level.placed_sentry[level.placed_sentry.size] = var_4;
@@ -1024,13 +1069,15 @@ spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
 sentry_placement_cancel_monitor(var_0) {
   self endon("sentry_placement_finished");
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     common_scripts\utility::waittill_any("sentry_placement_canceled", "death", "disconnect");
-  else
+  } else {
     common_scripts\utility::waittill_any("sentry_placement_canceled");
+  }
 
-  if(is_survival())
+  if(is_survival()) {
     self.sentry_placement_failed = 1;
+  }
 
   waittillframeend;
   var_0 delete();
@@ -1070,8 +1117,9 @@ sentry_placement_initial_wait(var_0, var_1) {
   level endon("game_ended");
   self endon("sentry_placement_canceled");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(!common_scripts\utility::issp()) {
     self endon("disconnect");
@@ -1082,8 +1130,9 @@ sentry_placement_initial_wait(var_0, var_1) {
   if(!var_1) {
     var_0 makeunusable();
 
-    while(self useButtonPressed())
+    while(self useButtonPressed()) {
       wait 0.05;
+    }
 
     for(;;) {
       waitactivatebutton(0);
@@ -1096,8 +1145,9 @@ sentry_placement_initial_wait(var_0, var_1) {
     }
   }
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     self notify("restock_reset");
+  }
 
   if(!common_scripts\utility::issp()) {
     var_0.lifeid = self.lifeid;
@@ -1109,14 +1159,17 @@ sentry_placement_initial_wait(var_0, var_1) {
   var_0 sentry_init(self.team, var_0.sentrytype, self);
   self notify("sentry_placement_finished", var_0);
 
-  if(!var_1)
+  if(!var_1) {
     waittillframeend;
+  }
 
-  if(isDefined(level.sentry_ammo_enabled) && level.sentry_ammo_enabled)
+  if(isDefined(level.sentry_ammo_enabled) && level.sentry_ammo_enabled) {
     var_0 thread sentry_die_on_ammoout();
+  }
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     var_0 thread sentry_die_on_batteryout();
+  }
 }
 
 updatesentrypositionthread(var_0) {
@@ -1139,9 +1192,9 @@ updatesentrypositionthread(var_0) {
 }
 
 updatesentryposition(var_0) {
-  if(isDefined(level.custom_sentry_position_func))
+  if(isDefined(level.custom_sentry_position_func)) {
     [[level.custom_sentry_position_func]](var_0);
-  else {
+  } else {
     var_1 = self canplayerplacesentry();
     var_0.origin = var_1["origin"];
     var_0.angles = var_1["angles"];
@@ -1163,10 +1216,11 @@ sentry_placement_hint_show(var_0) {
   }
   self.forced_hint = var_0;
 
-  if(self.forced_hint)
+  if(self.forced_hint) {
     self forceusehinton(&"SENTRY_PLACE");
-  else
+  } else {
     self forceusehinton(&"SENTRY_CANNOT_PLACE");
+  }
 }
 
 sentry_placement_hint_hide() {
@@ -1192,8 +1246,9 @@ folded_sentry_use_wait(var_0) {
       continue;
     }
     if(!common_scripts\utility::issp()) {
-      if(var_1 != self.owner)
+      if(var_1 != self.owner) {
         continue;
+      }
     }
 
     break;
@@ -1226,12 +1281,14 @@ sentry_health_monitor() {
         var_10 = 0;
 
         foreach(var_12 in level.players) {
-          if(distancesquared(var_12.origin, self.origin) <= squared(500))
+          if(distancesquared(var_12.origin, self.origin) <= squared(500)) {
             var_10 = 1;
+          }
         }
 
-        if(!var_10)
+        if(!var_10) {
           level notify("a_sentry_is_underattack");
+        }
 
         var_2 = 0;
         var_3 = 0;
@@ -1248,14 +1305,16 @@ sentry_health_monitor() {
       return;
     }
 
-    if(isDefined(level.stat_track_damage_func) && isDefined(var_0))
+    if(isDefined(level.stat_track_damage_func) && isDefined(var_0)) {
       var_0[[level.stat_track_damage_func]]();
+    }
 
     if(isDefined(var_0) && isPlayer(var_0)) {
-      if(!common_scripts\utility::issp())
+      if(!common_scripts\utility::issp()) {
         var_0[[level.func["damagefeedback"]]]("false");
-      else if(is_specialop())
+      } else if(is_specialop()) {
         var_0[[level.func["damagefeedback"]]](self);
+      }
 
       thread sentry_allowfire(0, 2.0);
     }
@@ -1271,26 +1330,31 @@ sentry_health_monitor() {
     }
   }
 
-  if(!common_scripts\utility::issp() && var_0 sentry_attacker_can_get_xp(self))
+  if(!common_scripts\utility::issp() && var_0 sentry_attacker_can_get_xp(self)) {
     var_0 thread[[level.onxpevent]]("kill");
+  }
 
   self notify("death", var_0, var_1);
 }
 
 sentry_hit_bullet_armor(var_0, var_1) {
-  if(isDefined(var_1) && isai(var_1) && isDefined(var_1.juggernaut) && var_1.juggernaut)
+  if(isDefined(var_1) && isai(var_1) && isDefined(var_1.juggernaut) && var_1.juggernaut) {
     return 0;
+  }
 
-  if(self.bullet_armor <= 0)
+  if(self.bullet_armor <= 0) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!issubstr(var_0, "BULLET"))
+  if(!issubstr(var_0, "BULLET")) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 enemy_sentry_difficulty_settings() {
@@ -1311,11 +1375,13 @@ waitactivatebutton(var_0) {
   }
 
   if(var_0 == 1) {
-    while(!self attackButtonPressed() && !self useButtonPressed())
+    while(!self attackButtonPressed() && !self useButtonPressed()) {
       wait 0.05;
+    }
   } else if(var_0 == 0) {
-    while(self attackButtonPressed() || self useButtonPressed())
+    while(self attackButtonPressed() || self useButtonPressed()) {
       wait 0.05;
+    }
   }
 }
 
@@ -1328,24 +1394,27 @@ makesentrynotsolid() {
 }
 
 sentrypoweron() {
-  if(!issentient(self) && isDefined(self.owner) && isDefined(self.owner.team))
+  if(!issentient(self) && isDefined(self.owner) && isDefined(self.owner.team)) {
     self call[[level.makeentitysentient_func]](self.owner.team);
+  }
 
   self setmode("sentry");
   self.battery_usage = 1;
 }
 
 sentrypoweroff() {
-  if(issentient(self))
+  if(issentient(self)) {
     self call[[level.freeentitysentient_func]]();
+  }
 
   self setmode("sentry_offline");
   self.battery_usage = 0;
 }
 
 sentry_team_setup(var_0) {
-  if(isDefined(self.pers["team"]))
+  if(isDefined(self.pers["team"])) {
     var_0.pers["team"] = self.pers["team"];
+  }
 
   var_0 sentry_team_show_icon();
 }
@@ -1353,8 +1422,9 @@ sentry_team_setup(var_0) {
 sentry_team_show_icon() {
   var_0 = (0, 0, 65);
 
-  if(self.sentrytype == "sentry_gun")
+  if(self.sentrytype == "sentry_gun") {
     var_0 = (0, 0, 75);
+  }
 
   self[[level.func["setTeamHeadIcon"]]](self.pers["team"], var_0);
 }
@@ -1401,8 +1471,9 @@ sentry_die_on_batteryout() {
   self endon("battery_count_started");
 
   while(self.sentry_battery_timer >= 0) {
-    if(self.battery_usage)
+    if(self.battery_usage) {
       self.sentry_battery_timer = self.sentry_battery_timer - 1;
+    }
 
     wait 1;
   }
@@ -1470,45 +1541,57 @@ sentry_reset_on_owner_death() {
 }
 
 sentry_attacker_can_get_xp(var_0) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
-  if(!isDefined(level.onxpevent))
+  if(!isDefined(level.onxpevent)) {
     return 0;
+  }
 
-  if(!isDefined(self.pers["team"]))
+  if(!isDefined(self.pers["team"])) {
     return 0;
+  }
 
-  if(!isDefined(var_0.team))
+  if(!isDefined(var_0.team)) {
     return 0;
+  }
 
-  if(!level.teambased && self == var_0.owner)
+  if(!level.teambased && self == var_0.owner) {
     return 0;
+  }
 
-  if(level.teambased && self.pers["team"] == var_0.team)
+  if(level.teambased && self.pers["team"] == var_0.team) {
     return 0;
+  }
 
   return 1;
 }
 
 sentry_attacker_is_friendly(var_0) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     return 0;
+  }
 
-  if(self == var_0.owner)
+  if(self == var_0.owner) {
     return 0;
+  }
 
-  if(self.team != var_0.team)
+  if(self.team != var_0.team) {
     return 0;
+  }
 
   return 1;
 }

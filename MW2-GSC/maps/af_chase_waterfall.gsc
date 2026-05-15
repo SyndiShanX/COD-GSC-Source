@@ -63,12 +63,14 @@ init_flags_here() {
 rumbly_rocks_bumps() {
   while(1) {
     wait randomfloatrange(.1, .4);
-    if(!flag("rocky_bumps"))
+    if(!flag("rocky_bumps")) {
       continue;
-    if(cointoss())
+    }
+    if(cointoss()) {
       level.player PlayRumbleOnEntity("damage_heavy");
-    else
+    } else {
       level.player PlayRumbleOnEntity("damage_light");
+    }
   }
 }
 
@@ -112,8 +114,9 @@ boatline() {
 }
 
 fail_of_too_long_without_progress() {
-  if(flag("player_brakes_on_waterfall"))
+  if(flag("player_brakes_on_waterfall")) {
     return;
+  }
   level endon("player_brakes_on_waterfall");
   wait 15;
 
@@ -279,8 +282,9 @@ rapids_scene() {
       flag_clear("rocky_bumps");
       rumble_ent.intensity = .225;
 
-      while(player_steadies_boat())
+      while(player_steadies_boat()) {
         wait .05;
+      }
       rumble_ent.intensity = .0001;
       flag_set("rocky_bumps");
 
@@ -406,8 +410,9 @@ water_fall_edge() {
   level thread maps\af_chase_knife_fight_code::eq_blender();
   thread maps\_ambient::use_eq_settings("fadeout_noncritical", level.eq_mix_track);
 
-  while(level.player.origin[2] > height)
+  while(level.player.origin[2] > height) {
     wait .05;
+  }
 
   player_dismount();
 
@@ -446,8 +451,9 @@ water_fall_edge() {
   Earthquake(.3, 3.5, level.player.origin, 1000);
   level.player SetWaterSheeting(3, 3);
 
-  if(isDefined(level.price.function_stack))
+  if(isDefined(level.price.function_stack)) {
     level.price function_stack_clear();
+  }
 
   level.price stop_magic_bullet_shield();
   level.players_boat notify("end_aim");
@@ -524,8 +530,9 @@ player_dismount() {
 }
 
 delete_end_seaknight() {
-  foreach(rider in self.riders)
-  rider stop_magic_bullet_shield();
+  foreach(rider in self.riders) {
+    rider stop_magic_bullet_shield();
+  }
   self Delete();
 }
 
@@ -618,8 +625,9 @@ movetotag_internal(ent, tag, time) {
 setup_enemy_pickup_heli() {
   level.enemy_pickup_heli = self;
   self thread godon();
-  while(!isDefined(level.players_boat))
+  while(!isDefined(level.players_boat)) {
     wait .05;
+  }
   self thread enemy_pickup_boat_spot();
 }
 
@@ -665,11 +673,13 @@ minigun_path() {
   flag_wait("price_steady1");
   self StartFiring();
   while(!flag("price_fired_all_his_shots_at_heli")) {
-    if(!isDefined(minigun_path.target))
+    if(!isDefined(minigun_path.target)) {
       return;
+    }
     minigun_path = getstruct(minigun_path.target, "targetname");
-    if(!isDefined(minigun_path))
+    if(!isDefined(minigun_path)) {
       return;
+    }
     target_ent MoveTo(minigun_path.origin, 1, 0, 0);
     target_ent waittill("movedone");
   }
@@ -763,10 +773,11 @@ match_position_of_animated_boat(animated_boat) {
     if(dot > 0) {
       speed_to_go = speed_of_animatedboat - fall_back_speed;
     } else if(dot < 0) {
-      if(Distance(origin, origin2) < 86)
+      if(Distance(origin, origin2) < 86) {
         speed_to_go = speed_of_animatedboat;
-      else
+      } else {
         speed_to_go = speed_of_animatedboat + catchup_speed;
+      }
     }
     speed_to_go = cap_value(speed_to_go, 5, 60);
     players_boat Vehicle_SetSpeed(speed_to_go, 8, 8);
@@ -777,8 +788,9 @@ minigun_splasher_think() {
   effect = getfx("pavelow_minigunner_splash_add");
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(attacker.code_classname != "misc_turret")
+    if(attacker.code_classname != "misc_turret") {
       continue;
+    }
     ang = attacker GetTagAngles("tag_flash");
     org = attacker GetOrigin("tag_flash");
     vect = anglesToForward(ang) * 3000;

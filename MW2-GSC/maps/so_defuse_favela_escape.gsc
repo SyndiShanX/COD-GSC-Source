@@ -97,8 +97,9 @@ defuse_objectives() {
     obj_id = flag_wait("defuse_update_score");
     flag_clear("defuse_update_score");
 
-    if(isDefined(obj_id))
+    if(isDefined(obj_id)) {
       objective_state(obj_id, "done");
+    }
   }
 
   flag_set("defuse_complete");
@@ -231,8 +232,9 @@ clean_up_volume() {
       }
     }
 
-    if(!player_in_volume)
+    if(!player_in_volume) {
       level notify("clean_up", volume.script_group);
+    }
   }
 }
 
@@ -341,12 +343,15 @@ ai_on_death() {
     return;
   }
   attacker.defuse_kills++;
-  if(self isFlashed())
+  if(self isFlashed()) {
     attacker.defuse_flashed_kills++;
-  if(common_scripts\_destructible::getDamageType(cause) == "splash")
+  }
+  if(common_scripts\_destructible::getDamageType(cause) == "splash") {
     attacker.defuse_frag_kills++;
-  if(common_scripts\_destructible::getDamageType(cause) == "melee")
+  }
+  if(common_scripts\_destructible::getDamageType(cause) == "melee") {
     attacker.defuse_knife_kills++;
+  }
 
   flag_set("defuse_update_score");
 }
@@ -453,8 +458,9 @@ defuse_use_bar(fill_time, briefcase) {
 
 notify_area_clear() {
   if(isDefined(level.area_clear_time)) {
-    if((level.area_clear_time + 5000) > gettime())
+    if((level.area_clear_time + 5000) > gettime()) {
       return;
+    }
   }
 
   level.area_clear_time = gettime();
@@ -462,12 +468,15 @@ notify_area_clear() {
 }
 
 use_active() {
-  if(!self useButtonPressed())
+  if(!self useButtonPressed()) {
     return false;
-  if(flag("special_op_failed"))
+  }
+  if(flag("special_op_failed")) {
     return false;
-  if(self ent_flag_exist("coop_downed") && self ent_flag("coop_downed"))
+  }
+  if(self ent_flag_exist("coop_downed") && self ent_flag("coop_downed")) {
     return false;
+  }
 
   return true;
 }

@@ -8,8 +8,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-  if(isDefined(level.initedEntityHeadIcons))
+  if(isDefined(level.initedEntityHeadIcons)) {
     return;
+  }
   level.initedEntityHeadIcons = true;
 
   game["entity_headicon_allies"] = maps\mp\gametypes\_teams::getTeamHeadIcon("allies");
@@ -18,17 +19,20 @@ init() {
   precacheShader(game["entity_headicon_allies"]);
   precacheShader(game["entity_headicon_axis"]);
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return;
+  }
 }
 setHeadIcon(showTo, icon, offset, width, height) {
-  if(!isDefined(self.entityHeadIcons))
+  if(!isDefined(self.entityHeadIcons)) {
     self.entityHeadIcons = [];
+  }
 
   if(!isPlayer(showTo) && showTo == "none") {
     foreach(key, headIcon in self.entityHeadIcons) {
-      if(isDefined(headIcon))
+      if(isDefined(headIcon)) {
         headIcon destroy();
+      }
 
       self.entityHeadIcons[key] = undefined;
     }
@@ -91,15 +95,17 @@ setHeadIcon(showTo, icon, offset, width, height) {
   headIcon.z = self.origin[2] + offset[2];
   headIcon.alpha = 0.85;
   headIcon setShader(icon, width, height);
-  if(isPlayer(showTo))
+  if(isPlayer(showTo)) {
     headIcon setWaypoint(true, true, false);
-  else
+  } else {
     headIcon setWaypoint(true, true, false);
+  }
 
   headIcon thread keepPositioned(self, offset);
   self thread destroyIconsOnDeath();
-  if(isPlayer(showTo))
+  if(isPlayer(showTo)) {
     headIcon thread destroyOnOwnerDisconnect(showTo);
+  }
 }
 
 destroyOnOwnerDisconnect(owner) {
@@ -117,8 +123,9 @@ destroyIconsOnDeath() {
   self waittill("death");
 
   foreach(key, headIcon in self.entityHeadIcons) {
-    if(!isDefined(headIcon))
+    if(!isDefined(headIcon)) {
       continue;
+    }
   }
   headIcon destroy();
 }
@@ -155,16 +162,18 @@ shader = game["entity_headicon_" + team];
 
 self.entityHeadIconTeam = team;
 
-if(isDefined(offset))
+if(isDefined(offset)) {
   self.entityHeadIconOffset = offset;
-else
+} else {
   self.entityHeadIconOffset = (0, 0, 0);
+}
 
 self notify("kill_entity_headicon_thread");
 
 if(team == "none") {
-  if(isDefined(self.entityHeadIcon))
+  if(isDefined(self.entityHeadIcon)) {
     self.entityHeadIcon destroy();
+  }
   return;
 }
 
@@ -194,18 +203,20 @@ if(!isDefined(self.entityHeadIconTeam)) {
 self notify("kill_entity_headicon_thread");
 
 if(!isDefined(player)) {
-  if(isDefined(self.entityHeadIcon))
+  if(isDefined(self.entityHeadIcon)) {
     self.entityHeadIcon destroy();
+  }
   return;
 }
 
 team = player.team;
 self.entityHeadIconTeam = team;
 
-if(isDefined(offset))
+if(isDefined(offset)) {
   self.entityHeadIconOffset = offset;
-else
+} else {
   self.entityHeadIconOffset = (0, 0, 0);
+}
 
 shader = game["entity_headicon_" + team];
 

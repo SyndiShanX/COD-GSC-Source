@@ -16,29 +16,34 @@ script_print_fx() {
     return;
   }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     org = getent(self.target).origin;
-  else
+  } else {
     org = "undefined";
+  }
 
-  if(self.script_fxcommand == "OneShotfx")
+  if(self.script_fxcommand == "OneShotfx") {
     println("maps\_fx::OneShotfx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 
-  if(self.script_fxcommand == "loopfx")
+  if(self.script_fxcommand == "loopfx") {
     println("maps\_fx::LoopFx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 
-  if(self.script_fxcommand == "loopsound")
+  if(self.script_fxcommand == "loopsound") {
     println("maps\_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 }
 
 script_playFX(id, pos, pos2) {
   if(!id) {
     return;
   }
-  if(isDefined(pos2))
+  if(isDefined(pos2)) {
     playFX(id, pos, pos2);
-  else
+  } else {
     playFX(id, pos);
+  }
 }
 
 script_playFXOnTag(id, ent, tag) {
@@ -57,8 +62,9 @@ soundfx(fxId, fxPos, endonNotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
   org playLoopSound(fxId);
-  if(isDefined(endonNotify))
+  if(isDefined(endonNotify)) {
     org thread soundfxDelete(endonNotify);
+  }
 }
 
 soundfxDelete(endonNotify) {
@@ -153,8 +159,9 @@ blendDelete(blend) {
 
 watersheeting(trigger) {
   duration = 3;
-  if(isDefined(trigger.script_duration))
+  if(isDefined(trigger.script_duration)) {
     duration = trigger.script_duration;
+  }
 
   while(true) {
     trigger waittill("trigger", other);

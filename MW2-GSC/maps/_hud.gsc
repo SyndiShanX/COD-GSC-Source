@@ -15,8 +15,9 @@ init() {
   level.uiParent.height = 0;
   level.uiParent.children = [];
 
-  if(level.console)
+  if(level.console) {
     level.fontHeight = 12;
-  else
+  } else {
     level.fontHeight = 12;
+  }
 }

@@ -77,8 +77,9 @@ create_array_of_origins_from_table() {
     if(isDefined(var_2) && var_2 != "undefined") {
       var_3 = strtok(var_2, ",");
 
-      for(var_4 = 0; var_4 < var_3.size; var_4++)
+      for(var_4 = 0; var_4 < var_3.size; var_4++) {
         var_3[var_4] = int(var_3[var_4]);
+      }
 
       var_0[var_1] = (var_3[0], var_3[1], var_3[2]);
       continue;
@@ -111,8 +112,9 @@ get_nums_from_origins(var_0) {
     if(!isDefined(level.table_origins[var_1])) {
       continue;
     }
-    if(distancesquared(var_0, level.table_origins[var_1]) < 25)
+    if(distancesquared(var_0, level.table_origins[var_1]) < 25) {
       return var_1;
+    }
   }
 }
 
@@ -148,11 +150,13 @@ intel_feedback() {
   var_4 setvalue(intel_found_total());
   var_5 = intel_found_total();
 
-  if(var_5 == 15 || maps\_achievements::platform_tracks_progression())
+  if(var_5 == 15 || maps\_achievements::platform_tracks_progression()) {
     maps\_utility::giveachievement_wrapper("LOOK_SHARP");
+  }
 
-  if(var_5 == 30 || maps\_achievements::platform_tracks_progression())
+  if(var_5 == 30 || maps\_achievements::platform_tracks_progression()) {
     maps\_utility::giveachievement_wrapper("EYES_AND_EARS");
+  }
 
   wait 0.7;
   var_2.alpha = 0.5;
@@ -189,8 +193,9 @@ intel_found_total() {
   var_0 = 0;
 
   for(var_1 = 1; var_1 <= level.intel_items_total; var_1++) {
-    if(level.player getplayerintelisfound(var_1))
+    if(level.player getplayerintelisfound(var_1)) {
       var_0++;
+    }
   }
 
   return var_0;

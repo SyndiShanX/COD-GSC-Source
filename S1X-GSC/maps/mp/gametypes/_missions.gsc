@@ -44,7 +44,7 @@ init() {
   }
 
   if(GetDvarInt("debug_challenges", 0) == 1) {
-    if(inVirtualLobby())
+    if(inVirtualLobby()) {}
   }
   return;
 
@@ -98,7 +98,7 @@ onPlayerConnect() {
     }
 
     if(isPlayer(player) && !IsAgent(player) && !isAI(player) && !IsTestClient(player)) {
-      if(getDvarInt("debug_challenges", 0) == 1)
+      if(getDvarInt("debug_challenges", 0) == 1) {}
     }
     player thread debug_challenges_by_name();
 
@@ -969,7 +969,7 @@ ch_kills(data) {
       if(isDefined(perk_group) && (perk_group_id > 0)) {
         count = 0;
         foreach(perk in player.loadoutperks) {
-          if(array_contains(perk_group, perk))
+          if(array_contains(perk_group, perk)) {}
         }
         count++;
 
@@ -1385,7 +1385,7 @@ ch_kills(data) {
     }
 
     if(MoD == "MOD_HEAD_SHOT") {
-      if(isDefined(level.challengeInfo["ch_attach_unlock_headShots_" + shortWeaponName]))
+      if(isDefined(level.challengeInfo["ch_attach_unlock_headShots_" + shortWeaponName])) {}
     }
     player processChallenge("ch_attach_unlock_headShots_" + shortWeaponName);
   }
@@ -1456,7 +1456,7 @@ ch_kills(data) {
         player processChallenge("ch_attach_unlock_kills_" + shortWeaponName);
       }
       if(was_ads) {
-        if(isDefined(level.challengeInfo["ch_attach_unlock_ads_" + shortWeaponName]))
+        if(isDefined(level.challengeInfo["ch_attach_unlock_ads_" + shortWeaponName])) {}
       }
       player processChallenge("ch_attach_unlock_ads_" + shortWeaponName);
     }
@@ -1476,7 +1476,7 @@ ch_kills(data) {
       }
 
       if(was_ads) {
-        if(isDefined(level.challengeInfo["ch_attach_unlock_ads_" + shortWeaponName]))
+        if(isDefined(level.challengeInfo["ch_attach_unlock_ads_" + shortWeaponName])) {}
       }
       player processChallenge("ch_attach_unlock_ads_" + shortWeaponName);
     }
@@ -2099,7 +2099,7 @@ useHardpoint(hardpointType) {
 
 roundBegin() {
   if(GetDvarInt("debug_challenges", 0) == 1) {
-    if(inVirtualLobby())
+    if(inVirtualLobby()) {}
   }
   return;
 

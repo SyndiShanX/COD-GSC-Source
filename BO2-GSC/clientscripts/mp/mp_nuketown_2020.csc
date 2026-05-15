@@ -24,8 +24,9 @@ main() {
 }
 
 setupclientsideobjects(localclientnum) {
-  while(!clienthassnapshot(localclientnum))
+  while(!clienthassnapshot(localclientnum)) {
     wait 0.1;
+  }
 
   level thread flag_think(localclientnum);
   level thread nuked_energy_sign_think(localclientnum);
@@ -115,7 +116,8 @@ waitfornotetrack(localclientnum) {
       break;
     }
 
-    if(note == "glass_shatter")
+    if(note == "glass_shatter") {
       clientscripts\mp\_fx::exploder(1005);
+    }
   }
 }

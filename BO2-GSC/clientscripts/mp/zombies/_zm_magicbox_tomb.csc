@@ -32,8 +32,9 @@ magicbox_leaving_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
     self.fx_obj setModel("tag_origin");
   }
 
-  if(newval == 1)
+  if(newval == 1) {
     self.fx_obj.curr_leaving_fx = playFXOnTag(localclientnum, level._effect["box_is_leaving"], self.fx_obj, "tag_origin");
+  }
 }
 
 magicbox_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -78,8 +79,9 @@ magicbox_initial_closed_fx(localclientnum, oldval, newval, bnewent, binitialsnap
   } else
     return;
 
-  if(newval == 1)
+  if(newval == 1) {
     self.fx_obj playLoopSound("zmb_hellbox_amb_low");
+  }
 }
 
 magicbox_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -89,11 +91,13 @@ magicbox_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
     self.fx_obj setModel("tag_origin");
   }
 
-  if(isDefined(self.fx_obj.curr_amb_fx))
+  if(isDefined(self.fx_obj.curr_amb_fx)) {
     stopfx(localclientnum, self.fx_obj.curr_amb_fx);
+  }
 
-  if(isDefined(self.fx_obj.curr_amb_fx_power))
+  if(isDefined(self.fx_obj.curr_amb_fx_power)) {
     stopfx(localclientnum, self.fx_obj.curr_amb_fx_power);
+  }
 
   if(newval == 0) {
     self.fx_obj playLoopSound("zmb_hellbox_amb_low");

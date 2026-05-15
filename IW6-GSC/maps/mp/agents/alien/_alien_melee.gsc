@@ -159,8 +159,9 @@ try_leap_melee(enemy) {
 
 try_preliminary_swipes(attack_type, enemy, swipe_offset, max_damage_distance) {
   successfulSwipeCount = 0;
-  if(do_single_swipe(attack_type, 0, enemy, 1.0, swipe_offset, max_damage_distance))
+  if(do_single_swipe(attack_type, 0, enemy, 1.0, swipe_offset, max_damage_distance)) {
     successfulSwipeCount = 1;
+  }
 
   if(cointoss()) {
     result2 = do_single_swipe(attack_type, 1, enemy, 1.0, swipe_offset, max_damage_distance);
@@ -168,8 +169,9 @@ try_preliminary_swipes(attack_type, enemy, swipe_offset, max_damage_distance) {
     result2 = false;
   }
 
-  if(result2)
+  if(result2) {
     successfulSwipeCount++;
+  }
 
   return successfulSwipeCount;
 }
@@ -336,8 +338,9 @@ melee_leap_internal(enemy, melee_type) {
   if(isDefined(leapEndPos)) {
     shouldExplode = maps\mp\alien\_utility::should_explode();
 
-    if(!shouldExplode)
+    if(!shouldExplode) {
       self thread melee_LeapWaitForDamage(enemy, melee_type);
+    }
 
     self.melee_jumping = true;
     self set_alien_emissive(0.2, 1.0);
@@ -345,10 +348,11 @@ melee_leap_internal(enemy, melee_type) {
     self set_alien_emissive_default(0.2);
     self.melee_jumping = false;
 
-    if(shouldExplode)
+    if(shouldExplode) {
       self maps\mp\agents\alien\_alien_minion::explode(self.enemy);
-    else
+    } else {
       self move_back(enemy);
+    }
   } else {
     println("Leap Melee failed");
 
@@ -422,13 +426,15 @@ melee_ChooseJumpArrival(jumpInfo, jumpAnimStates) {
 melee_swipe_static(enemy) {
   self endon("melee_pain_interrupt");
 
-  if(!do_single_swipe("swipe", 2, enemy, 1.0, SWIPE_OFFSET_XY, MAX_SWIPE_DAMAGE_DIST))
+  if(!do_single_swipe("swipe", 2, enemy, 1.0, SWIPE_OFFSET_XY, MAX_SWIPE_DAMAGE_DIST)) {
     wait 0.05;
+  }
 }
 
 melee_synch_attack(enemy) {
-  if(isDefined(self.xyanimscale))
+  if(isDefined(self.xyanimscale)) {
     self ScrAgentSetAnimScale(self.xyanimscale, 1.0);
+  }
 
   self.melee_synch = true;
   attackAnim = self GetAnimEntry(self.synch_anim_state, 0);
@@ -451,8 +457,9 @@ melee_synch_attack(enemy) {
   animLabel = synchList[self.synch_attack_index]["attackerAnimLabel"];
   self play_synch_attack(self.synch_attack_index, self.synch_anim_state, enemy, animLabel, synchList);
 
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     enemy notify("synched_attack_over");
+  }
 
   maps\mp\agents\_scriptedagents::PlayAnimNUntilNotetrack(self.synch_anim_state, 2, animLabel, "end");
   self.melee_synch = false;
@@ -461,8 +468,9 @@ melee_synch_attack(enemy) {
 play_synch_attack(attack_index, anim_state, enemy, anim_label, synch_list) {
   level endon("game_ended");
 
-  foreach(endNotify in enemy.synch_attack_setup.end_notifies)
-  enemy endon(endNotify);
+  foreach(endNotify in enemy.synch_attack_setup.end_notifies) {
+    enemy endon(endNotify);
+  }
 
   endAnim = self GetAnimEntry(anim_state, 2);
   endAnimTime = GetAnimLength(endAnim);
@@ -492,8 +500,9 @@ apply_synch_attack_damage(enemy) {
   enemy endon("synched_attack_over");
   enemy endon("death");
 
-  foreach(endNotify in enemy.synch_attack_setup.end_notifies)
-  enemy endon(endNotify);
+  foreach(endNotify in enemy.synch_attack_setup.end_notifies) {
+    enemy endon(endNotify);
+  }
 
   damage_amount = 1.0;
   if(isDefined(self.alien_type)) {
@@ -522,8 +531,9 @@ synch_attack_anim_lerp(start_anim, begin_pos, begin_angles) {
   startAnimLength = GetAnimLength(start_anim);
   lerp_time = Min(0.2, startAnimLength);
   lerpMoveDelta = GetMoveDelta(start_anim, 0, lerp_time / startAnimLength);
-  if(isDefined(self.xyanimscale))
+  if(isDefined(self.xyanimscale)) {
     lerpMoveDelta *= self.xyanimscale;
+  }
 
   lerpMoveOffset = RotateVector(lerpMoveDelta, begin_angles);
   self ScrAgentDoAnimLerp(self.origin, begin_pos + lerpMoveOffset, lerp_time);
@@ -538,19 +548,22 @@ enemy_process_synch_attack(attacker, attackIndex, endAnimTime, synchList) {
     return;
   }
   animName = undefined;
-  if(shouldPlayExitAnim)
+  if(shouldPlayExitAnim) {
     animName = synchList[attackIndex]["exitAnim"];
+  }
 
   self[[self.synch_attack_setup.end_attack_func]](animName, endAnimTime);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.synch_attack_setup.primary_attacker = undefined;
+  }
 }
 
 enemy_wait_for_synch_attack_end(attacker, attackIndex) {
   self thread enemy_wait_for_synch_invalid_enemy(attacker);
-  foreach(endNotify in self.synch_attack_setup.end_notifies)
-  self thread enemy_wait_for_synch_end_notify(endNotify);
+  foreach(endNotify in self.synch_attack_setup.end_notifies) {
+    self thread enemy_wait_for_synch_end_notify(endNotify);
+  }
 
   msg = self waittill_any_return("enemy_synch_end_notify", "synched_attack_over", "enemy_synch_invalid_enemy");
 
@@ -637,10 +650,11 @@ melee_DoDamage(enemy, melee_type) {
   }
 
   if(isDefined(self.pet) && self.pet) {
-    if(is_true(self.upgraded))
+    if(is_true(self.upgraded)) {
       damage_amount *= 10;
-    else
+    } else {
       damage_amount *= 6;
+    }
   }
 
   if(isPlayer(enemy)) {
@@ -658,8 +672,9 @@ melee_DoDamage(enemy, melee_type) {
     }
   }
 
-  if(enemy.model == "mp_laser_drill" && level.script == "mp_alien_dlc3")
+  if(enemy.model == "mp_laser_drill" && level.script == "mp_alien_dlc3") {
     damage_amount *= MP_ALIEN_DLC3_DRILL_MELEE_SCALAR;
+  }
 
   enemy DoDamage(damage_amount, self.origin, self, self);
 }
@@ -668,17 +683,19 @@ set_damage_viewkick(damage_amount) {
   MAX_VIEWKICK = 10;
   BASE_VIEWKICK = 2;
   DAMAGE_SCALE_BASE = 50;
-  if(self maps\mp\alien\_persistence::is_upgrade_enabled("less_flinch_upgrade"))
+  if(self maps\mp\alien\_persistence::is_upgrade_enabled("less_flinch_upgrade")) {
     MAX_VIEWKICK = 0;
+  }
   additional_viewkick_scale = min(1, damage_amount / DAMAGE_SCALE_BASE);
   additional_viewkick = (MAX_VIEWKICK - BASE_VIEWKICK) * additional_viewkick_scale;
 
   viewkick_scale = BASE_VIEWKICK + additional_viewkick;
   if(is_chaos_mode()) {
-    if(maps\mp\alien\_utility::isPlayingSolo())
+    if(maps\mp\alien\_utility::isPlayingSolo()) {
       viewkick_scale = (viewkick_scale / 1.6);
-    else
+    } else {
       viewkick_scale = (viewkick_scale / 2.2);
+    }
   }
   self SetViewKickScale(viewkick_scale);
 }
@@ -686,8 +703,9 @@ set_damage_viewkick(damage_amount) {
 move_back(enemy, force_posture) {
   self endon("melee_pain_interrupt");
 
-  if(!isDefined(force_posture))
+  if(!isDefined(force_posture)) {
     force_posture = false;
+  }
 
   if(force_posture || self should_move_back(enemy)) {
     move_back_state = self GetMoveBackState();
@@ -807,15 +825,17 @@ GetMoveBackEntry(move_back_state) {
 }
 
 onDamage(eInflictor, eAttacker, iThatDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
-  if(canDoPain(sMeansOfDeath, eAttacker))
+  if(canDoPain(sMeansOfDeath, eAttacker)) {
     self DoPain(iDFlags, iThatDamage, sMeansOfDeath, vDir, sHitLoc);
+  }
 }
 
 canDoPain(sMeansOfDeath, eAttacker) {
   if(isDefined(level.dlc_can_do_pain_override_func)) {
     painAllowed = [[level.dlc_can_do_pain_override_func]]("melee");
-    if(!painAllowed)
+    if(!painAllowed) {
       return false;
+    }
   }
 
   switch (maps\mp\alien\_utility::get_alien_type()) {
@@ -882,17 +902,20 @@ check_for_player_meleeing(player) {
   playerToEnemyVector = VectorNormalize(self.origin - player.origin);
   dotProduct = VectorDot(playerToEnemyVector, playerForwardVector);
 
-  if(player meleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5)
+  if(player meleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 check_for_block(player) {
-  if(!(isPlayer(player)))
+  if(!(isPlayer(player))) {
     return false;
-  if(!player.hasriotshield)
+  }
+  if(!player.hasriotshield) {
     return false;
+  }
 
   enemy_in_front = false;
   enemy_in_back = false;
@@ -901,8 +924,9 @@ check_for_block(player) {
 
   riot_shield = player riotShieldName();
 
-  if(!isDefined(riot_shield))
+  if(!isDefined(riot_shield)) {
     return false;
+  }
 
   shield_weapon_health = player GetWeaponAmmoClip(riot_shield);
 
@@ -924,8 +948,9 @@ check_for_block(player) {
     back_block = true;
     is_fire_back_block = should_catch_fire(player);
 
-    if(is_fire_back_block)
+    if(is_fire_back_block) {
       self thread maps\mp\alien\_damage::catch_alien_on_fire(player, 1, 75);
+    }
   }
 
   if(front_block || back_block) {
@@ -934,8 +959,9 @@ check_for_block(player) {
     player SetClientOmnvar("ui_alien_stowed_riotshield_ammo", shield_weapon_health - 1);
     player playSound("melee_riotshield_impact");
     Earthquake(0.75, 0.5, player.origin, 100);
-    if(self should_snare(player))
+    if(self should_snare(player)) {
       player maps\mp\alien\_damage::applyAlienSnare();
+    }
 
     if(player GetWeaponAmmoClip(riot_shield) == 0) {
       if(player HasWeapon(riot_shield)) {
@@ -971,10 +997,11 @@ check_for_block(player) {
 }
 
 should_catch_fire(player) {
-  if(player maps\mp\alien\_persistence::is_upgrade_enabled("riotshield_back_upgrade") && self.alien_type != "spider" && self.alien_type != "kraken_tentacle" && self.alien_type != "kraken")
+  if(player maps\mp\alien\_persistence::is_upgrade_enabled("riotshield_back_upgrade") && self.alien_type != "spider" && self.alien_type != "kraken_tentacle" && self.alien_type != "kraken") {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 melee_clean_up(attacker) {
@@ -985,8 +1012,9 @@ melee_clean_up(attacker) {
 
   attacker waittill("killanimscript");
 
-  if(attacker_alien_type == "elite" || attacker_alien_type == "mammoth")
+  if(attacker_alien_type == "elite" || attacker_alien_type == "mammoth") {
     self.being_charged = false;
+  }
 }
 
 get_melee_painState_info(iDamage, sMeansOfDeath, is_stun) {

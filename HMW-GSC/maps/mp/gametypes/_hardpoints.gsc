@@ -22,8 +22,9 @@ h2_setCustomKillstreaks() {
     streakName = self.customKillstreaks[i];
     streakCost = level.hardpointitems[streakName];
 
-    for(j = i - 1; j >= 0 && streakCost < level.hardpointitems[self.customKillstreaks[j]]; j--)
+    for(j = i - 1; j >= 0 && streakCost < level.hardpointitems[self.customKillstreaks[j]]; j--) {
       self.customKillstreaks[j + 1] = self.customKillstreaks[j];
+    }
 
     self.customKillstreaks[j + 1] = streakName;
   }
@@ -68,12 +69,13 @@ h2_getStreakNameFromIndex(index, number) {
       return "nuke_mp";
 
     default:
-      if(number == 0)
+      if(number == 0) {
         return "radar_mp";
-      else if(number == 1)
+      } else if(number == 1) {
         return "airdrop_marker_mp";
-      else
+      } else {
         return "predator_mp";
+      }
   }
 }
 
@@ -119,8 +121,9 @@ init() {
   level.maxkillstreakforaward = 0;
 
   foreach(streakName, streakCost in level.hardpointitems) {
-    if(level.maxkillstreakforaward < streakCost)
+    if(level.maxkillstreakforaward < streakCost) {
       level.maxkillstreakforaward = streakCost;
+    }
 
     level.h2_isKillstreakActivator[streakName] = true;
 
@@ -183,15 +186,17 @@ init() {
   thread maps\mp\h2_killstreaks\_uav::init();
   thread maps\mp\h2_killstreaks\_airstrike::init();
 
-  if(getdvarint("sv_cheats"))
+  if(getdvarint("sv_cheats")) {
     thread developer_dvars();
+  }
 }
 
 registerDialog(streakName, string) {
   game["dialog"]["achieve_" + streakName] = "achieve_" + string;
 
-  if(string == "nuke")
+  if(string == "nuke") {
     string = "tnuke";
+  }
 
   game["dialog"]["use_" + streakName] = "use_" + string;
   game["dialog"]["enemy_" + streakName] = "enemy_" + string;
@@ -239,22 +244,27 @@ onplayerconnect() {
     }
     player h2_setCustomKillstreaks();
 
-    if(!level.teambased)
+    if(!level.teambased) {
       level.activeuavs[player.guid] = 0;
+    }
 
-    if(!isDefined(player.pers["killstreaks"]))
+    if(!isDefined(player.pers["killstreaks"])) {
       player.pers["killstreaks"] = [];
+    }
 
-    if(!isDefined(player.pers["kID"]))
+    if(!isDefined(player.pers["kID"])) {
       player.pers["kID"] = 10;
+    }
 
-    if(!isDefined(player.pers["kIDs_valid"]))
+    if(!isDefined(player.pers["kIDs_valid"])) {
       player.pers["kIDs_valid"] = [];
+    }
 
     player.lifeId = 0;
 
-    if(isDefined(player.pers["deaths"]))
+    if(isDefined(player.pers["deaths"])) {
       player.lifeId = player.pers["deaths"];
+    }
   }
 }
 
@@ -270,8 +280,9 @@ waitForChangeTeam() {
     self waittill("joined_team");
 
     if(isDefined(self.pers["killstreaks"])) {
-      foreach(index, streakStruct in self.pers["killstreaks"])
-      self.pers["killstreaks"][index] = undefined;
+      foreach(index, streakStruct in self.pers["killstreaks"]) {
+        self.pers["killstreaks"][index] = undefined;
+      }
     }
   }
 }
@@ -289,8 +300,9 @@ givehardpointitemforstreak() {
     }
     killstreak_cost = level.hardpointitems[hardpoint];
 
-    if(self maps\mp\_utility::_hasPerk("specialty_hardline"))
+    if(self maps\mp\_utility::_hasPerk("specialty_hardline")) {
       killstreak_cost--;
+    }
 
     if(player_streak == killstreak_cost) {
       thread givehardpoint(hardpoint, player_streak);
@@ -318,8 +330,9 @@ givehardpoint(streakName, streakCost) {
     return;
   }
 
-  for(i = self.pers["killstreaks"].size; i >= 0; i--)
+  for(i = self.pers["killstreaks"].size; i >= 0; i--) {
     self.pers["killstreaks"][i + 1] = self.pers["killstreaks"][i];
+  }
 
   self.pers["killstreaks"][0] = spawnStruct();
   self.pers["killstreaks"][0].streakName = streakName;
@@ -329,10 +342,11 @@ givehardpoint(streakName, streakCost) {
 
   self.pers["kID"]++;
 
-  if(!isDefined(streakCost))
+  if(!isDefined(streakCost)) {
     self.pers["killstreaks"][0].lifeId = -1;
-  else
+  } else {
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
+  }
 
   self giveHardpointWeapon(streakName);
   self thread hardpointnotify(streakName, streakCost);
@@ -362,8 +376,9 @@ giveownedhardpointitem(skipDialog) {
   }
   self giveHardpointWeapon(self.pers["killstreaks"][0].streakName);
 
-  if(!isDefined(skipDialog) && !level.inGracePeriod)
+  if(!isDefined(skipDialog) && !level.inGracePeriod) {
     self maps\mp\_utility::leaderDialogOnPlayer("achieve_" + self.pers["killstreaks"][0].streakName, "killstreak_earned", 1);
+  }
 }
 
 hardpointitemwaiter() {
@@ -377,21 +392,25 @@ hardpointitemwaiter() {
   if(maps\mp\_utility::is_true(level.gameended)) {
     return;
   }
-  if(self maps\mp\_utility::isEMPed())
+  if(self maps\mp\_utility::isEMPed()) {
     self maps\mp\h2_killstreaks\_emp::_setEMPJammed(true);
+  }
 
-  if(isDefined(self.h2_radar_jam))
+  if(isDefined(self.h2_radar_jam)) {
     self maps\mp\h2_killstreaks\_uav::h2_jamPlayerRadar(true);
+  }
 
   self maps\mp\gametypes\_class::clearcopycatloadout();
 
   self thread finishDeathWaiter();
 
-  if(!isBot(self) || !DISABLE_BOT_KILLSTREAKS)
+  if(!isBot(self) || !DISABLE_BOT_KILLSTREAKS) {
     self thread waitForChangeTeam();
+  }
 
-  if(isDefined(level.onBotSpawned))
+  if(isDefined(level.onBotSpawned)) {
     self thread[[level.onBotSpawned]]();
+  }
 
   giveownedhardpointitem();
 
@@ -425,22 +444,25 @@ hardpointitemwaiter() {
         common_scripts\utility::waittill_notify_or_timeout_return("weapon_change", 0.75);
         common_scripts\utility::_enableweaponswitch();
 
-        if(!result)
+        if(!result) {
           self giveWeapon(streakName);
+        }
       }
 
       lastWeapon = self common_scripts\utility::getLastWeapon();
       firstPrimary = self maps\mp\h2_killstreaks\_common::getFirstPrimaryWeapon();
 
-      if(self hasWeapon(lastWeapon))
+      if(self hasWeapon(lastWeapon)) {
         self switchToWeapon(lastWeapon);
-      else
+      } else {
         self switchToWeapon(firstPrimary);
+      }
     }
 
     if(self getCurrentWeapon() == "none") {
-      while(self getCurrentWeapon() == "none")
+      while(self getCurrentWeapon() == "none") {
         wait(0.05);
+      }
 
       waittillframeend;
     }
@@ -488,11 +510,12 @@ hardpointnotify(var_0, var_1) {
 }
 
 killstreakearned(var_0) {
-  if(var_0 == "radar_mp")
+  if(var_0 == "radar_mp") {
     self.firstkillstreakearned = gettime();
-  else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
-    if(gettime() - self.firstkillstreakearned < 20000)
+  } else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
+    if(gettime() - self.firstkillstreakearned < 20000) {
       thread maps\mp\gametypes\_missions::genericchallenge("wargasm");
+    }
   }
 }
 shuffleKillStreaksFILO(streakName) {
@@ -525,8 +548,9 @@ shuffleKillStreaksFILO(streakName) {
 }
 
 triggerhardpoint() {
-  if(!maps\mp\_utility::gameFlag("prematch_done"))
+  if(!maps\mp\_utility::gameFlag("prematch_done")) {
     return (false);
+  }
 
   if(self maps\mp\_utility::isEMPed()) {
     self iprintlnbold(&"LUA_KS_UNAVAILABLE_EMP_FOR_N", level.empTimeRemaining);
@@ -540,31 +564,37 @@ triggerhardpoint() {
   if(level.killstreakrounddelay) {
     var_1 = 0;
 
-    if(isDefined(level.prematch_done_time))
+    if(isDefined(level.prematch_done_time)) {
       var_1 = (gettime() - level.prematch_done_time) / 1000;
+    }
 
     if(var_1 < level.killstreakrounddelay) {
       var_2 = int(level.killstreakrounddelay - var_1 + 0.5);
 
-      if(!var_2)
+      if(!var_2) {
         var_2 = 1;
+      }
 
       self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_2);
       return 0;
     }
   }
 
-  if(!isDefined(level.killstreakfuncs[streakName]))
+  if(!isDefined(level.killstreakfuncs[streakName])) {
     return (false);
+  }
 
-  if(!self isOnGround())
+  if(!self isOnGround()) {
     return (false);
+  }
 
-  if(self maps\mp\_utility::isUsingRemote())
+  if(self maps\mp\_utility::isUsingRemote()) {
     return (false);
+  }
 
-  if(isDefined(self.selectingLocation))
+  if(isDefined(self.selectingLocation)) {
     return (false);
+  }
 
   if(self IsUsingTurret()) {
     self iprintlnbold(&"LUA_KS_UNAVAILABLE_TURRET");
@@ -576,16 +606,19 @@ triggerhardpoint() {
     return (false);
   }
 
-  if(!self common_scripts\utility::isWeaponEnabled())
+  if(!self common_scripts\utility::isWeaponEnabled()) {
     return (false);
+  }
 
-  if(isSubStr(streakName, "airdrop"))
+  if(isSubStr(streakName, "airdrop")) {
     result = self[[level.killstreakfuncs[streakName]]](lifeId, kID);
-  else
+  } else {
     result = self[[level.killstreakfuncs[streakName]]](lifeId);
+  }
 
-  if(result)
+  if(result) {
     self killstreakLeaderDialog(streakName);
+  }
 
   return result;
 }
@@ -598,10 +631,11 @@ killstreakLeaderDialog(streakName) {
     if(player.team == "spectator") {
       continue;
     }
-    if((level.teamBased && player.team == self.team) || (!level.teamBased && player == self))
+    if((level.teamBased && player.team == self.team) || (!level.teamBased && player == self)) {
       player maps\mp\_utility::leaderDialogOnPlayer(friendlyDialog);
-    else
+    } else {
       player maps\mp\_utility::leaderDialogOnPlayer(enemyDialog);
+    }
   }
 }
 
@@ -611,8 +645,9 @@ killstreakhit(var_0, var_1, var_2) {
       if(maps\mp\_utility::iskillstreakweapon(var_1)) {
         return;
       }
-      if(!isDefined(var_0.lasthittime[var_1]))
+      if(!isDefined(var_0.lasthittime[var_1])) {
         var_0.lasthittime[var_1] = 0;
+      }
 
       if(var_0.lasthittime[var_1] == gettime()) {
         return;
@@ -634,8 +669,9 @@ killstreakhit(var_0, var_1, var_2) {
 
 playerhasuavactive() {
   if(level.teambased) {
-    if(level.activeuavs[self.team] > 0)
+    if(level.activeuavs[self.team] > 0) {
       return 1;
+    }
   } else if(level.activeuavs[self.guid] > 0)
     return 1;
 

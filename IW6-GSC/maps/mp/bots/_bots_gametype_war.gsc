@@ -76,8 +76,9 @@ bot_tdm_apply_commander_tactics(new_tactic) {
 
   if(reset_all_bots) {
     foreach(player in level.players) {
-      if(!isDefined(player.team))
+      if(!isDefined(player.team)) {
         continue;
+      }
       if(IsBot(player) && player.team == self.team) {
         player BotSetFlag("force_sprint", false);
         if(level.bot_team_tdm_personality == "revert") {
@@ -111,8 +112,9 @@ bot_tdm_apply_commander_tactics(new_tactic) {
         continue;
       }
       if(player.team == self.team) {
-        if(IsBot(player))
+        if(IsBot(player)) {
           player thread bot_fireteam_buddy_search();
+        }
       }
     }
   } else if(was_buddied) {

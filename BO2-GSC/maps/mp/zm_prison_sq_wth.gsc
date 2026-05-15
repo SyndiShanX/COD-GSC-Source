@@ -10,8 +10,9 @@
 #include maps\mp\zombies\_zm_zonemgr;
 
 onplayerconnect_sq_wth() {
-  if(!isDefined(level.wth_lookat_point))
+  if(!isDefined(level.wth_lookat_point)) {
     level.wth_lookat_point = getstruct("struct_gg_look", "targetname");
+  }
 
   self thread track_player_eyes();
   self thread play_scary_lightning();
@@ -58,8 +59,9 @@ sq_is_weapon_sniper(str_weapon) {
   a_snipers = array("dsr50", "barretm82");
 
   foreach(str_sniper in a_snipers) {
-    if(issubstr(str_weapon, str_sniper) && !issubstr(str_weapon, "+is"))
+    if(issubstr(str_weapon, str_sniper) && !issubstr(str_weapon, "+is")) {
       return true;
+    }
   }
 
   return false;
@@ -69,8 +71,9 @@ play_scary_lightning() {
   self endon("disconnect");
 
   while(true) {
-    while(!self maps\mp\zombies\_zm_zonemgr::is_player_in_zone("zone_golden_gate_bridge") || !(isDefined(self.b_lightning) && self.b_lightning) || flag("plane_zapped"))
+    while(!self maps\mp\zombies\_zm_zonemgr::is_player_in_zone("zone_golden_gate_bridge") || !(isDefined(self.b_lightning) && self.b_lightning) || flag("plane_zapped")) {
       wait 0.25;
+    }
 
     if(randomint(100000) == 1337) {
       self.scary_lighting = 1;

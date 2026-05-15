@@ -273,7 +273,7 @@ setup_destructibles() {
         self Attach(attachedModel.model);
       }
       if(self.modeldummyon) {
-        if(isDefined(attachedModel.tag))
+        if(isDefined(attachedModel.tag)) {}
       }
       self.modeldummy Attach(attachedModel.model, attachedModel.tag);
       else {
@@ -431,7 +431,7 @@ destructible_fx(tagName, fxName, useTagAngles, damageType, groupNum, fxCost, spa
 
   fx_size = 0;
   if(isDefined(level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"])) {
-    if(isDefined(level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum]))
+    if(isDefined(level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum])) {}
   }
   fx_size = level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum].size;
 
@@ -3854,7 +3854,7 @@ startDOT_group(dots) {
     }
 
     foreach(tick in ticks) {
-      if(!tick.delay)
+      if(!tick.delay) {}
     }
     tick.enable = 1;
 
@@ -3878,7 +3878,7 @@ startDOT_group(dots) {
   }
 
   foreach(trigger in triggers) {
-    if(trigger.onPlayer)
+    if(trigger.onPlayer) {}
   }
   trigger thread startDOT_player();
 
@@ -3926,12 +3926,12 @@ onEnterDOT_player(trigger) {
   self notify("LISTEN_enter_dot_" + entNum);
 
   foreach(i, tick in trigger.ticks) {
-    if(!tick.enable)
+    if(!tick.enable) {}
   }
   self thread doDOT_delayFunc(i, trigger, tick.delay, tick.onEnterFunc);
 
   foreach(i, tick in trigger.ticks) {
-    if(tick.enable && tick.affected == "player")
+    if(tick.enable && tick.affected == "player") {}
   }
   self thread[[tick.onEnterFunc]](i, trigger);
 }
@@ -3944,7 +3944,7 @@ onExitDOT_player(trigger) {
   self notify("LISTEN_exit_dot_" + entNum);
 
   foreach(i, tick in trigger.ticks) {
-    if(tick.enable && tick.affected == "player")
+    if(tick.enable && tick.affected == "player") {}
   }
   self thread[[tick.onExitFunc]](i, trigger);
 }
@@ -4235,7 +4235,7 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
   doEnterExitFunc = true;
 
   foreach(trig in trigger.DOT_group) {
-    foreach(_trig in self.touchTriggers)
+    foreach(_trig in self.touchTriggers) {}
   }
   if(trig == _trig) {
     doEnterExitFunc = false;

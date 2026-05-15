@@ -35,6 +35,7 @@ include_buildables() {
   include_buildable("dinerhatch");
   include_buildable("busladder");
 
-  if(!isDefined(level.gamedifficulty) || level.gamedifficulty != 0)
+  if(!isDefined(level.gamedifficulty) || level.gamedifficulty != 0) {
     include_buildable("sq_common");
+  }
 }

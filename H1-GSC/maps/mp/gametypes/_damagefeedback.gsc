@@ -14,8 +14,9 @@ updatedamagefeedback(var_0, var_1) {
     case "scavenger":
       self playlocalsound("scavenger_pack_pickup");
 
-      if(!level.hardcoremode)
+      if(!level.hardcoremode) {
         self setclientomnvar("damage_feedback", var_0);
+      }
 
       break;
     case "hitjuggernaut":
@@ -26,8 +27,9 @@ updatedamagefeedback(var_0, var_1) {
       break;
     case "mp_solar":
       if(!isDefined(self.shouldloopdamagefeedback)) {
-        if(isDefined(level.mapkillstreakdamagefeedbacksound))
+        if(isDefined(level.mapkillstreakdamagefeedbacksound)) {
           self thread[[level.mapkillstreakdamagefeedbacksound]]();
+        }
       } else
         self.damagefeedbacktimer = 10;
 
@@ -35,8 +37,9 @@ updatedamagefeedback(var_0, var_1) {
     case "laser":
       if(isDefined(level.sentrygun)) {
         if(!isDefined(self.shouldloopdamagefeedback)) {
-          if(isDefined(level.mapkillstreakdamagefeedbacksound))
+          if(isDefined(level.mapkillstreakdamagefeedbacksound)) {
             self thread[[level.mapkillstreakdamagefeedbacksound]](level.sentrygun);
+          }
         }
       }
 

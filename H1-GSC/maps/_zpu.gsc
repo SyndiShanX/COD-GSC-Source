@@ -8,14 +8,16 @@ main(var_0) {
   var_1 = getEntArray("zpu", "targetname");
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2[var_3] = var_1[var_3].script_flag;
+  }
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_5 = var_2.size - 1;
 
-    for(var_6 = var_4; var_6 < var_5; var_6++)
+    for(var_6 = var_4; var_6 < var_5; var_6++) {
       waittillframeend;
+    }
   }
 
   precacherumble("zpu_rumble");
@@ -55,12 +57,14 @@ per_zpu_init() {
 
     var_1[var_1.size] = var_6;
 
-    if(issubstr(var_6.classname, "trigger_"))
+    if(issubstr(var_6.classname, "trigger_")) {
       var_4 = 1;
+    }
   }
 
-  if(var_4)
+  if(var_4) {
     waittill_trigger_array(var_1);
+  }
 
   for(;;) {
     if(var_2.count > 0) {
@@ -143,8 +147,9 @@ spawn_gunner() {
 }
 
 waittill_trigger_array(var_0) {
-  for(var_1 = 1; var_1 < var_0.size; var_1++)
+  for(var_1 = 1; var_1 < var_0.size; var_1++) {
     var_0[var_1] endon("trigger");
+  }
 
   var_0[0] waittill("trigger");
 }

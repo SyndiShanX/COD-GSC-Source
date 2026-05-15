@@ -511,8 +511,9 @@ so_course_loop_think() {
   foreach(player in level.players) {
     playerPrimaryWeapons = player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
-      foreach(weapon in playerPrimaryWeapons)
-      player givemaxammo(weapon);
+      foreach(weapon in playerPrimaryWeapons) {
+        player givemaxammo(weapon);
+      }
     }
   }
 
@@ -763,13 +764,15 @@ set_failure_quote(type) {
 
 move_spawn_and_go(path_ent) {
   self.origin = path_ent.origin;
-  if(isDefined(path_ent.angles))
+  if(isDefined(path_ent.angles)) {
     self.angles = path_ent.angles;
+  }
 
   other_ents = getEntArray(self.target, "targetname");
   foreach(ent in other_ents) {
-    if(isspawner(ent))
+    if(isspawner(ent)) {
       ent.targetname = path_ent.targetname;
+    }
   }
 
   self.target = path_ent.targetname;

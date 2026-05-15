@@ -23,8 +23,9 @@ setup_names() {
   nationalities[8] = "portuguese";
   nationalities[9] = "shadowcompany";
 
-  for(i = 0; i < nationalities.size; i++)
+  for(i = 0; i < nationalities.size; i++) {
     level.names[nationalities[i]] = [];
+  }
 
   add_name("american", "Abrahamsson");
   add_name("american", "Alavi");
@@ -453,8 +454,9 @@ get_name(override) {
   }
 
   if(isDefined(self.script_friendname)) {
-    if(self.script_friendname == "none")
+    if(self.script_friendname == "none") {
       return;
+    }
     self.name = self.script_friendname;
     getRankFromName(self.name);
     self notify("set name and rank");
@@ -500,8 +502,9 @@ get_name_for_nationality(nationality) {
 }
 
 getRankFromName(name) {
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     self.airank = ("private");
+  }
 
   tokens = strtok(name, " ");
   assert(tokens.size);

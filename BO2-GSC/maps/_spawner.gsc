@@ -1371,7 +1371,7 @@ fallback_ai(num, node_array, ignorewhilefallingback) {
   node = undefined;
 
   while(true) {
-    assert(node_array.size >= level.current_fallbackers[num], "Number of fallbackers exceeds number of fallback nodes for fallback # " + num + ". Add more fallback nodes or reduce possible fallbackers.");
+    assert(node_array.size >= level.current_fallbackers[num], "Number of fallbackers exceeds number of fallback nodes for fallback #" + num + ". Add more fallback nodes or reduce possible fallbackers.");
     node = node_array[randomint(node_array.size)];
 
     if(!isDefined(node.fallback_occupied) || !node.fallback_occupied) {

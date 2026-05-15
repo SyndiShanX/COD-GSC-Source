@@ -7,12 +7,14 @@
 #include common_scripts\utility;
 
 PlayerJavelinAds() {
-  if(self playerads() < 1.0)
+  if(self playerads() < 1.0) {
     return false;
+  }
 
   weap = self getCurrentWeapon();
-  if(!IsSubStr(weap, "javelin"))
+  if(!IsSubStr(weap, "javelin")) {
     return false;
+  }
 
   return true;
 }
@@ -44,14 +46,16 @@ GetBestJavelinTarget() {
   targetsValid = [];
 
   for(idx = 0; idx < targetsAll.size; idx++) {
-    if(self InsideJavelinReticleNoLock(targetsAll[idx]))
+    if(self InsideJavelinReticleNoLock(targetsAll[idx])) {
       targetsValid[targetsValid.size] = targetsAll[idx];
+    }
 
     target_setOffscreenShader(targetsAll[idx], "javelin_hud_target_offscreen");
   }
 
-  if(targetsValid.size == 0)
+  if(targetsValid.size == 0) {
     return undefined;
+  }
 
   chosenEnt = targetsValid[0];
   if(targetsValid.size > 1) {}
@@ -60,12 +64,15 @@ GetBestJavelinTarget() {
 }
 
 IsStillValidTarget(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
-  if(!target_isTarget(ent))
+  }
+  if(!target_isTarget(ent)) {
     return false;
-  if(!self InsideJavelinReticleLocked(ent))
+  }
+  if(!self InsideJavelinReticleLocked(ent)) {
     return false;
+  }
 
   return true;
 }
@@ -73,14 +80,16 @@ IsStillValidTarget(ent) {
 SetTargetTooClose(ent) {
   MINIMUM_JAV_DISTANCE = 1000;
 
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
   dist = Distance2D(self.origin, ent.origin);
 
-  if(dist < MINIMUM_JAV_DISTANCE)
+  if(dist < MINIMUM_JAV_DISTANCE) {
     self WeaponLockTargetTooClose(true);
-  else
+  } else {
     self WeaponLockTargetTooClose(false);
+  }
 }
 
 SetNoClearance() {
@@ -98,10 +107,11 @@ SetNoClearance() {
   checks[3] = (-40, 0, 40);
   checks[4] = (40, 0, 40);
 
-  if(getDvar("missileDebugDraw") == "1")
+  if(getDvar("missileDebugDraw") == "1") {
     debug = true;
-  else
+  } else {
     debug = false;
+  }
 
   playerAngles = self GetPlayerAngles();
   forward = anglesToForward(playerAngles);
@@ -117,13 +127,15 @@ SetNoClearance() {
 
     if(trace["fraction"] < 1) {
       obstructed = true;
-      if(debug)
+      if(debug) {
         line(origin, trace["position"], COLOR_FAILED, 1);
-      else
+      } else {
         break;
+      }
     } else {
-      if(debug)
+      if(debug) {
         line(origin, trace["position"], COLOR_PASSED, 1);
+      }
     }
   }
 
@@ -191,12 +203,14 @@ JavelinToggleLoop() {
   self endon("death");
 
   for(;;) {
-    while(!self PlayerJavelinAds())
+    while(!self PlayerJavelinAds()) {
       wait 0.05;
+    }
     self thread JavelinCLULoop();
 
-    while(self PlayerJavelinAds())
+    while(self PlayerJavelinAds()) {
       wait 0.05;
+    }
     self notify("javelin_clu_off");
     self ClearCLUTarget();
   }

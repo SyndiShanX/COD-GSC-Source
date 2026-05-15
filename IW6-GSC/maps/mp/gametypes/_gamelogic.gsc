@@ -36,10 +36,11 @@ onForfeit(team) {
 
   level.forfeitInProgress = true;
 
-  if(!level.teambased && level.players.size > 1)
+  if(!level.teambased && level.players.size > 1) {
     wait(10);
-  else
+  } else {
     wait(1.05);
+  }
 
   level.forfeit_aborted = false;
   forfeit_delay = 20.0;
@@ -71,10 +72,11 @@ onForfeit(team) {
 
   level.forcedEnd = true;
 
-  if(isPlayer(winner))
+  if(isPlayer(winner)) {
     logString("forfeit, win: " + winner getXuid() + "(" + winner.name + ")");
-  else
+  } else {
     logString("forfeit, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+  }
   thread endGame(winner, endReason);
 }
 
@@ -130,10 +132,11 @@ default_onDeadEvent(team) {
     logString("tie, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
 
     level.finalKillCam_winner = "none";
-    if(level.teamBased)
+    if(level.teamBased) {
       thread endGame("tie", game["end_reason"]["tie"]);
-    else
+    } else {
       thread endGame(undefined, game["end_reason"]["tie"]);
+    }
   }
 }
 
@@ -143,8 +146,9 @@ default_onOneLeftEvent(team) {
 
     lastPlayer = getLastLivingPlayer(team);
 
-    if(isDefined(lastPlayer))
+    if(isDefined(lastPlayer)) {
       lastPlayer thread giveLastOnTeamWarning();
+    }
   } else {
     lastPlayer = getLastLivingPlayer();
 
@@ -161,9 +165,9 @@ default_onTimeLimit() {
   level.finalKillCam_winner = "none";
 
   if(level.teamBased) {
-    if(game["teamScores"]["allies"] == game["teamScores"]["axis"])
+    if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       level.finalKillCam_winner = "axis";
       winner = "axis";
     } else {
@@ -175,10 +179,11 @@ default_onTimeLimit() {
   } else {
     winner = maps\mp\gametypes\_gamescore::getHighestScoringPlayer();
 
-    if(isDefined(winner))
+    if(isDefined(winner)) {
       logString("time limit, win: " + winner.name);
-    else
+    } else {
       logString("time limit, tie");
+    }
   }
 
   thread endGame(winner, game["end_reason"]["time_limit_reached"]);
@@ -213,22 +218,25 @@ forceEnd(reason) {
     logString("host ended game, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   } else {
     winner = maps\mp\gametypes\_gamescore::getHighestScoringPlayer();
-    if(isDefined(winner))
+    if(isDefined(winner)) {
       logString("host ended game, win: " + winner.name);
-    else
+    } else {
       logString("host ended game, tie");
+    }
   }
 
   level.forcedEnd = true;
   level.hostForcedEnd = true;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     endString = game["end_reason"]["ended_game"];
-  else
+  } else {
     endString = game["end_reason"]["host_ended_game"];
+  }
 
-  if(isDefined(reason) && reason == 2)
+  if(isDefined(reason) && reason == 2) {
     endString = game["end_reason"]["allies_forfeited"];
+  }
 
   level notify("force_end");
 
@@ -247,9 +255,9 @@ onScoreLimit() {
       winner = "tie";
     }
   } else if(level.teamBased) {
-    if(game["teamScores"]["allies"] == game["teamScores"]["axis"])
+    if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       winner = "axis";
       level.finalKillCam_winner = "axis";
     } else {
@@ -259,10 +267,11 @@ onScoreLimit() {
     logString("scorelimit, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   } else {
     winner = maps\mp\gametypes\_gamescore::getHighestScoringPlayer();
-    if(isDefined(winner))
+    if(isDefined(winner)) {
       logString("scorelimit, win: " + winner.name);
-    else
+    } else {
       logString("scorelimit, tie");
+    }
   }
 
   thread endGame(winner, scoreText);
@@ -361,8 +370,9 @@ updateGameEvents() {
         level.oneLeftTime["allies"] = getTime();
         ally_return_val = [[level.onOneLeftEvent]]("allies");
         if(isDefined(ally_return_val)) {
-          if(!isDefined(return_val))
+          if(!isDefined(return_val)) {
             return_val = ally_return_val;
+          }
           return_val = return_val || ally_return_val;
         }
       }
@@ -371,8 +381,9 @@ updateGameEvents() {
         level.oneLeftTime["axis"] = getTime();
         axis_return_val = [[level.onOneLeftEvent]]("axis");
         if(isDefined(axis_return_val)) {
-          if(!isDefined(return_val))
+          if(!isDefined(return_val)) {
             return_val = axis_return_val;
+          }
           return_val = return_val || axis_return_val;
         }
       }
@@ -393,8 +404,9 @@ updateGameEvents() {
 }
 
 waittillFinalKillcamDone() {
-  if(!isDefined(level.finalKillCam_winner))
+  if(!isDefined(level.finalKillCam_winner)) {
     return false;
+  }
 
   level waittill("final_killcam_done");
 
@@ -406,8 +418,9 @@ timeLimitClock_Intermission(waitTime) {
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
-  if(waitTime >= 10.0)
+  if(waitTime >= 10.0) {
     wait(waitTime - 10.0);
+  }
 
   for(;;) {
     clockObject playSound("ui_mp_timer_countdown");
@@ -419,10 +432,11 @@ waitForPlayers(maxTime) {
   startTime = gettime();
   endTime = startTime + maxTime * 1000 - 200;
 
-  if(maxTime > 5)
+  if(maxTime > 5) {
     minTime = gettime() + getDvarInt("min_wait_for_players") * 1000;
-  else
+  } else {
     minTime = 0;
+  }
 
   numToWaitFor = (level.connectingPlayers / 3);
 
@@ -469,21 +483,24 @@ prematchPeriod() {
       continue;
     }
     idx = 0;
-    if(game["defenders"] == player_team)
+    if(game["defenders"] == player_team) {
       idx = 1;
+    }
     player SetClientOmnvar("ui_objective_text", idx);
   }
 
-  if(game["state"] != "playing")
+  if(game["state"] != "playing") {
     return;
+  }
 }
 
 gracePeriod() {
   level endon("game_ended");
 
   if(!isDefined(game["clientActive"])) {
-    while(GetActiveClientCount() == 0)
+    while(GetActiveClientCount() == 0) {
       wait 0.05;
+    }
 
     game["clientActive"] = true;
   }
@@ -508,8 +525,9 @@ gracePeriod() {
     for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!player.hasSpawned && player.sessionteam != "spectator" && !isAlive(player))
+      if(!player.hasSpawned && player.sessionteam != "spectator" && !isAlive(player)) {
         player.statusicon = "hud_status_dead";
+      }
     }
   }
 
@@ -548,8 +566,9 @@ updateWinStats(winner) {
     winner maps\mp\gametypes\_persistence::statAdd("currentWinStreak", 1);
 
     cur_win_streak = winner maps\mp\gametypes\_persistence::statGet("currentWinStreak");
-    if(cur_win_streak > winner maps\mp\gametypes\_persistence::statGet("winStreak"))
+    if(cur_win_streak > winner maps\mp\gametypes\_persistence::statGet("winStreak")) {
       winner maps\mp\gametypes\_persistence::statSet("winStreak", cur_win_streak);
+    }
   }
 
   winner maps\mp\gametypes\_persistence::statSetChild("round", "win", true);
@@ -609,8 +628,9 @@ updateWinLossStats(winner) {
         continue;
       }
       if(level.hostForcedEnd && player isHost()) {
-        if(!IsSquadsMode())
+        if(!IsSquadsMode()) {
           player maps\mp\gametypes\_persistence::statSet("currentWinStreak", 0);
+        }
         continue;
       }
 
@@ -618,8 +638,9 @@ updateWinLossStats(winner) {
     }
   } else if(isPlayer(winner)) {
     if(level.hostForcedEnd && winner isHost()) {
-      if(!IsSquadsMode())
+      if(!IsSquadsMode()) {
         winner maps\mp\gametypes\_persistence::statSet("currentWinStreak", 0);
+      }
       return;
     }
 
@@ -630,8 +651,9 @@ updateWinLossStats(winner) {
         continue;
       }
       if(level.hostForcedEnd && player isHost()) {
-        if(!IsSquadsMode())
+        if(!IsSquadsMode()) {
           player maps\mp\gametypes\_persistence::statSet("currentWinStreak", 0);
+        }
         continue;
       }
 
@@ -640,8 +662,9 @@ updateWinLossStats(winner) {
       } else if(player.pers["team"] == winner) {
         updateWinStats(player);
       } else {
-        if(!IsSquadsMode())
+        if(!IsSquadsMode()) {
           player maps\mp\gametypes\_persistence::statSet("currentWinStreak", 0);
+        }
       }
     }
   }
@@ -652,14 +675,15 @@ updatePlayerCombatStatus() {
     return;
   }
   foreach(player in level.players) {
-    if(player.sessionstate == "spectator" && !player.spectatekillcam)
+    if(player.sessionstate == "spectator" && !player.spectatekillcam) {
       continue;
-    else if(isDefined(player.hasDoneAnyCombat) && player.hasDoneAnyCombat)
+    } else if(isDefined(player.hasDoneAnyCombat) && player.hasDoneAnyCombat) {
       continue;
-    else if(player.team == "axis")
+    } else if(player.team == "axis") {
       continue;
-    else
+    } else {
       player setHasDoneCombat(player, true);
+    }
   }
 }
 
@@ -667,8 +691,9 @@ freezePlayerForRoundEnd(delay) {
   self endon("disconnect");
   self clearLowerMessages();
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.05;
+  }
 
   wait(delay);
   self freezeControlsWrapper(true);
@@ -768,8 +793,9 @@ updateMatchBonusScores(winner) {
 
       isWinner = false;
       for(pIdx = 0; pIdx < min(level.placement["all"].size, 3); pIdx++) {
-        if(level.placement["all"][pIdx] != player)
+        if(level.placement["all"][pIdx] != player) {
           continue;
+        }
         isWinner = true;
       }
 
@@ -814,8 +840,9 @@ setXenonRanks(winner) {
       continue;
     }
     spm = player.score;
-    if(getMinutesPassed())
+    if(getMinutesPassed()) {
       spm = player.score / getMinutesPassed();
+    }
 
     println("Score:" + player.score + " Minutes Passed:" + getMinutesPassed() + " SPM:" + spm);
 
@@ -833,10 +860,11 @@ checkTimeLimit(prevTimePassed) {
   }
 
   if(getTimeLimit() <= 0) {
-    if(isDefined(level.startTime))
+    if(isDefined(level.startTime)) {
       setGameEndTime(level.startTime);
-    else
+    } else {
       setGameEndTime(0);
+    }
     return;
   }
 
@@ -848,8 +876,9 @@ checkTimeLimit(prevTimePassed) {
   if(!isDefined(level.startTime)) {
     return;
   }
-  if(getTimePassedPercentage() > level.timePercentageCutOff)
+  if(getTimePassedPercentage() > level.timePercentageCutOff) {
     SetNoJIPTime(true);
+  }
 
   timeLeft = getTimeRemaining();
 
@@ -892,8 +921,9 @@ checkTeamScoreLimitSoon(team) {
   }
   timeLeft = estimatedTimeTillScoreLimit(team);
 
-  if(timeLeft < 2)
+  if(timeLeft < 2) {
     level notify("match_ending_soon", "score");
+  }
 }
 
 checkPlayerScoreLimitSoon() {
@@ -908,22 +938,27 @@ checkPlayerScoreLimitSoon() {
   }
   timeLeft = self estimatedTimeTillScoreLimit();
 
-  if(timeLeft < 2)
+  if(timeLeft < 2) {
     level notify("match_ending_soon", "score");
+  }
 }
 
 checkScoreLimit() {
-  if(isObjectiveBased())
+  if(isObjectiveBased()) {
     return false;
+  }
 
-  if(isDefined(level.scoreLimitOverride) && level.scoreLimitOverride)
+  if(isDefined(level.scoreLimitOverride) && level.scoreLimitOverride) {
     return false;
+  }
 
-  if(game["state"] != "playing")
+  if(game["state"] != "playing") {
     return false;
+  }
 
-  if(getWatchedDvar("scorelimit") <= 0)
+  if(getWatchedDvar("scorelimit") <= 0) {
     return false;
+  }
 
   if(level.teamBased) {
     limitReached = false;
@@ -938,11 +973,13 @@ checkScoreLimit() {
       return false;
     }
   } else {
-    if(!isPlayer(self))
+    if(!isPlayer(self)) {
       return false;
+    }
 
-    if(self.score < getWatchedDvar("scorelimit"))
+    if(self.score < getWatchedDvar("scorelimit")) {
       return false;
+    }
   }
 
   return onScoreLimit();
@@ -970,8 +1007,9 @@ matchStartTimerWaitForPlayers() {
   if(level.prematchPeriodEnd > 0 && !isDefined(level.hostMigrationTimer)) {
     adjusted_time = level.prematchPeriodEnd;
 
-    if(isRoundBased() && !isFirstRound() || isMLGMatch())
+    if(isRoundBased() && !isFirstRound() || isMLGMatch()) {
       adjusted_time = level.prematchPeriod;
+    }
     matchStartTimer("match_starting_in", adjusted_time);
   }
 }
@@ -983,8 +1021,9 @@ matchStartTimer_Internal(countTime) {
   level endon("match_start_timer_beginning");
   while(countTime > 0 && !level.gameEnded) {
     SetOmnvar("ui_match_start_countdown", countTime);
-    if(countTime == 0)
+    if(countTime == 0) {
       visionSetNaked("", 0);
+    }
     countTime--;
     wait(1.0);
   }
@@ -1022,8 +1061,9 @@ matchStartTimerSkip() {
 }
 
 onRoundSwitch() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["roundsWon"]["allies"] == getWatchedDvar("winlimit") - 1 && game["roundsWon"]["axis"] == getWatchedDvar("winlimit") - 1) {
     aheadTeam = getBetterTeam();
@@ -1043,11 +1083,13 @@ onRoundSwitch() {
 }
 
 checkRoundSwitch() {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return false;
+  }
 
-  if(!isDefined(level.roundSwitch) || !level.roundSwitch)
+  if(!isDefined(level.roundSwitch) || !level.roundSwitch) {
     return false;
+  }
 
   assert(game["roundsPlayed"] > 0);
   if(game["roundsPlayed"] % level.roundSwitch == 0) {
@@ -1063,25 +1105,29 @@ timeUntilRoundEnd() {
     timePassed = (getTime() - level.gameEndTime) / 1000;
     timeRemaining = level.postRoundTime - timePassed;
 
-    if(timeRemaining < 0)
+    if(timeRemaining < 0) {
       return 0;
+    }
 
     return timeRemaining;
   }
 
-  if(getTimeLimit() <= 0)
+  if(getTimeLimit() <= 0) {
     return undefined;
+  }
 
-  if(!isDefined(level.startTime))
+  if(!isDefined(level.startTime)) {
     return undefined;
+  }
 
   tl = getTimeLimit();
 
   timePassed = (getTime() - level.startTime) / 1000;
   timeRemaining = (getTimeLimit() * 60) - timePassed;
 
-  if(isDefined(level.timePaused))
+  if(isDefined(level.timePaused)) {
     timeRemaining += level.timePaused;
+  }
 
   return timeRemaining + level.postRoundTime;
 }
@@ -1106,26 +1152,30 @@ freeGameplayHudElems() {
   self.lowerMessage destroyElem();
   self.lowerTimer destroyElem();
 
-  if(isDefined(self.proxBar))
+  if(isDefined(self.proxBar)) {
     self.proxBar destroyElem();
-  if(isDefined(self.proxBarText))
+  }
+  if(isDefined(self.proxBarText)) {
     self.proxBarText destroyElem();
+  }
 }
 
 getHostPlayer() {
   players = getEntArray("player", "classname");
 
   for(index = 0; index < players.size; index++) {
-    if(players[index] isHost())
+    if(players[index] isHost()) {
       return players[index];
+    }
   }
 }
 
 hostIdledOut() {
   hostPlayer = getHostPlayer();
 
-  if(isDefined(hostPlayer) && !hostPlayer.hasSpawned && !isDefined(hostPlayer.selectedClass))
+  if(isDefined(hostPlayer) && !hostPlayer.hasSpawned && !isDefined(hostPlayer.selectedClass)) {
     return true;
+  }
 
   return false;
 }
@@ -1205,10 +1255,11 @@ Callback_StartGameType() {
 
   setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
 
-  if(matchMakingGame())
+  if(matchMakingGame()) {
     setDvar("isMatchMakingGame", 1);
-  else
+  } else {
     setDvar("isMatchMakingGame", 0);
+  }
 
   if(level.multiTeamBased) {
     setDvar("ui_numteams", level.numTeams);
@@ -1218,16 +1269,20 @@ Callback_StartGameType() {
     game["clientid"] = 0;
     game["truncated_killcams"] = 0;
 
-    if(!isDefined(game["attackers"]) || !isDefined(game["defenders"]))
+    if(!isDefined(game["attackers"]) || !isDefined(game["defenders"])) {
       thread error("No attackers or defenders team defined in level .gsc.");
+    }
 
-    if(!isDefined(game["attackers"]))
+    if(!isDefined(game["attackers"])) {
       game["attackers"] = "allies";
-    if(!isDefined(game["defenders"]))
+    }
+    if(!isDefined(game["defenders"])) {
       game["defenders"] = "axis";
+    }
 
-    if(!isDefined(game["state"]))
+    if(!isDefined(game["state"])) {
       game["state"] = "playing";
+    }
 
     game["allies"] = "ghosts";
     game["axis"] = "federation";
@@ -1264,11 +1319,13 @@ Callback_StartGameType() {
     game["icons"]["axis"] = maps\mp\gametypes\_teams::getTeamIcon("axis");
     game["colors"]["axis"] = maps\mp\gametypes\_teams::getTeamColor("axis");
 
-    if(game["colors"]["allies"] == game["colors"]["black"])
+    if(game["colors"]["allies"] == game["colors"]["black"]) {
       game["colors"]["allies"] = game["colors"]["grey"];
+    }
 
-    if(game["colors"]["axis"] == game["colors"]["black"])
+    if(game["colors"]["axis"] == game["colors"]["black"]) {
       game["colors"]["axis"] = game["colors"]["grey"];
+    }
 
     [[level.onPrecacheGameType]]();
 
@@ -1276,18 +1333,20 @@ Callback_StartGameType() {
 
     if(level.console) {
       if(!level.splitscreen) {
-        if(isMLGMatch() || IsDedicatedServer())
+        if(isMLGMatch() || IsDedicatedServer()) {
           level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "graceperiod_comp");
-        else
+        } else {
           level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "graceperiod");
+        }
 
         level.prematchPeriodEnd = maps\mp\gametypes\_tweakables::getTweakableValue("game", "matchstarttime");
       }
     } else {
-      if(isMLGMatch() || IsDedicatedServer())
+      if(isMLGMatch() || IsDedicatedServer()) {
         level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "playerwaittime_comp");
-      else
+      } else {
         level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "playerwaittime");
+      }
 
       level.prematchPeriodEnd = maps\mp\gametypes\_tweakables::getTweakableValue("game", "matchstarttime");
     }
@@ -1312,8 +1371,9 @@ Callback_StartGameType() {
     }
   }
 
-  if(!isDefined(game["status"]))
+  if(!isDefined(game["status"])) {
     game["status"] = "normal";
+  }
 
   setDvar("ui_overtime", (game["status"] == "overtime"));
 
@@ -1330,20 +1390,25 @@ Callback_StartGameType() {
     }
   }
 
-  if(!isDefined(game["timePassed"]))
+  if(!isDefined(game["timePassed"])) {
     game["timePassed"] = 0;
+  }
 
-  if(!isDefined(game["roundsPlayed"]))
+  if(!isDefined(game["roundsPlayed"])) {
     game["roundsPlayed"] = 0;
+  }
 
-  if(!isDefined(game["roundsWon"]))
+  if(!isDefined(game["roundsWon"])) {
     game["roundsWon"] = [];
+  }
 
   if(level.teamBased) {
-    if(!isDefined(game["roundsWon"]["axis"]))
+    if(!isDefined(game["roundsWon"]["axis"])) {
       game["roundsWon"]["axis"] = 0;
-    if(!isDefined(game["roundsWon"]["allies"]))
+    }
+    if(!isDefined(game["roundsWon"]["allies"])) {
       game["roundsWon"]["allies"] = 0;
+    }
 
     if(level.multiTeamBased) {
       for(i = 0; i < level.teamNameList.size; i++) {
@@ -1358,18 +1423,22 @@ Callback_StartGameType() {
   level.forcedEnd = false;
   level.hostForcedEnd = false;
 
-  if(!is_aliens())
+  if(!is_aliens()) {
     level.hardcoreMode = getDvarInt("g_hardcore");
-  if(level.hardcoreMode)
+  }
+  if(level.hardcoreMode) {
     logString("game mode: hardcore");
+  }
 
   level.dieHardMode = getDvarInt("scr_diehard");
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     level.dieHardMode = 0;
+  }
 
-  if(level.dieHardMode)
+  if(level.dieHardMode) {
     logString("game mode: diehard");
+  }
 
   level.killstreakRewards = getDvarInt("scr_game_hardpoints");
 
@@ -1394,10 +1463,11 @@ Callback_StartGameType() {
 
   level.objectivePointsMod = 1;
 
-  if(matchMakingGame())
+  if(matchMakingGame()) {
     level.maxAllowedTeamKills = 2;
-  else
+  } else {
     level.maxAllowedTeamKills = -1;
+  }
 
   if(!is_aliens()) {
     thread maps\mp\gametypes\_healthoverlay::init();
@@ -1432,8 +1502,9 @@ Callback_StartGameType() {
 
   thread maps\mp\_zipline::init();
 
-  if(level.teamBased)
+  if(level.teamBased) {
     thread maps\mp\gametypes\_friendicons::init();
+  }
 
   thread maps\mp\gametypes\_hud_message::init();
 
@@ -1462,10 +1533,11 @@ Callback_StartGameType() {
   setDvar("ui_scorelimit", 0);
   setDvar("ui_allow_teamchange", 1);
 
-  if(getGametypeNumLives())
+  if(getGametypeNumLives()) {
     setDvar("g_deadChat", 0);
-  else
+  } else {
     setDvar("g_deadChat", 1);
+  }
 
   waveDelay = getDvarInt("scr_" + level.gameType + "_waverespawndelay");
   if(waveDelay) {
@@ -1522,8 +1594,9 @@ Callback_StartGameType() {
 
   thread[[level.devInit]]();
 
-  if((!level.console) && ((getDvar("dedicated") == "dedicated LAN server") || (getDvar("dedicated") == "dedicated internet server")))
+  if((!level.console) && ((getDvar("dedicated") == "dedicated LAN server") || (getDvar("dedicated") == "dedicated internet server"))) {
     thread verifyDedicatedConfiguration();
+  }
 
   thread startGame();
 
@@ -1540,20 +1613,24 @@ Callback_StartGameType() {
 Callback_CodeEndGame() {
   endparty();
 
-  if(!level.gameEnded)
+  if(!level.gameEnded) {
     level thread maps\mp\gametypes\_gamelogic::forceEnd();
+  }
 }
 
 verifyDedicatedConfiguration() {
   for(;;) {
-    if(level.rankedMatch)
+    if(level.rankedMatch) {
       ExitLevel(false);
+    }
 
-    if(!getDvarInt("xblive_privatematch"))
+    if(!getDvarInt("xblive_privatematch")) {
       ExitLevel(false);
+    }
 
-    if((getDvar("dedicated") != "dedicated LAN server") && (getDvar("dedicated") != "dedicated internet server"))
+    if((getDvar("dedicated") != "dedicated LAN server") && (getDvar("dedicated") != "dedicated internet server")) {
       ExitLevel(false);
+    }
 
     wait 5;
   }
@@ -1635,8 +1712,9 @@ timeLimitClock() {
       timeLeft = getTimeRemaining() / 1000;
       timeLeftInt = int(timeLeft + 0.5);
 
-      if((timeLeftInt >= 30 && timeLeftInt <= 60))
+      if((timeLeftInt >= 30 && timeLeftInt <= 60)) {
         level notify("match_ending_soon", "time");
+      }
 
       if(timeLeftInt <= 10 || (timeLeftInt <= 30 && timeLeftInt % 2 == 0)) {
         level notify("match_ending_very_soon");
@@ -1648,8 +1726,9 @@ timeLimitClock() {
         clockObject playSound("ui_mp_timer_countdown");
       }
 
-      if(timeLeft - floor(timeLeft) >= .05)
+      if(timeLeft - floor(timeLeft) >= .05) {
         wait timeLeft - floor(timeLeft);
+      }
     }
 
     wait(1.0);
@@ -1682,8 +1761,9 @@ gameTimer() {
 
 UpdateTimerPausedness() {
   shouldBeStopped = level.timerStoppedForGameMode || isDefined(level.hostMigrationTimer);
-  if(!gameFlag("prematch_done"))
+  if(!gameFlag("prematch_done")) {
     shouldBeStopped = false;
+  }
 
   if(!level.timerStopped && shouldBeStopped) {
     level.timerStopped = true;
@@ -1711,10 +1791,11 @@ startGame() {
 
   SetOmnvar("ui_prematch_period", 1);
 
-  if(isDefined(level.customprematchperiod))
+  if(isDefined(level.customprematchperiod)) {
     [[level.customprematchPeriod]]();
-  else
+  } else {
     prematchPeriod();
+  }
 
   gameFlagSet("prematch_done");
   level notify("prematch_over");
@@ -1778,18 +1859,21 @@ getBetterTeam() {
     }
   }
 
-  if(kills["allies"] > kills["axis"])
+  if(kills["allies"] > kills["axis"]) {
     return "allies";
-  else if(kills["axis"] > kills["allies"])
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
+  }
 
-  if(deaths["allies"] < deaths["axis"])
+  if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  else if(deaths["axis"] < deaths["allies"])
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
+  }
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     return "allies";
+  }
   return "axis";
 }
 
@@ -1824,19 +1908,22 @@ displayRoundEnd(winner, endReasonText) {
     if(isDefined(player.connectedPostGame) || (player.pers["team"] == "spectator" && !player IsMLGSpectator())) {
       continue;
     }
-    if(level.teamBased)
+    if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, true, endReasonText);
-    else
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
+    }
   }
 
-  if(!wasLastRound())
+  if(!wasLastRound()) {
     level notify("round_win", winner);
+  }
 
-  if(wasLastRound())
+  if(wasLastRound()) {
     roundEndWait(level.roundEndDelay, false);
-  else
+  } else {
     roundEndWait(level.roundEndDelay, true);
+  }
 }
 
 displayGameEnd(winner, endReasonText) {
@@ -1844,10 +1931,11 @@ displayGameEnd(winner, endReasonText) {
     if(isDefined(player.connectedPostGame) || (player.pers["team"] == "spectator" && !player IsMLGSpectator())) {
       continue;
     }
-    if(level.teamBased)
+    if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-    else
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
+    }
   }
 
   level notify("game_win", winner);
@@ -1859,15 +1947,17 @@ displayRoundSwitch() {
   switchType = level.halftimeType;
   if(switchType == "halftime") {
     if(getWatchedDvar("roundlimit")) {
-      if((game["roundsPlayed"] * 2) == getWatchedDvar("roundlimit"))
+      if((game["roundsPlayed"] * 2) == getWatchedDvar("roundlimit")) {
         switchType = "halftime";
-      else
+      } else {
         switchType = "intermission";
+      }
     } else if(getWatchedDvar("winlimit")) {
-      if(game["roundsPlayed"] == (getWatchedDvar("winlimit") - 1))
+      if(game["roundsPlayed"] == (getWatchedDvar("winlimit") - 1)) {
         switchType = "halftime";
-      else
+      } else {
         switchType = "intermission";
+      }
     } else {
       switchType = "intermission";
     }
@@ -1876,8 +1966,9 @@ displayRoundSwitch() {
   level notify("round_switch", switchType);
 
   endReason = 0;
-  if(isDefined(level.switchedSides))
+  if(isDefined(level.switchedSides)) {
     endReason = game["end_reason"]["switching_sides"];
+  }
 
   foreach(player in level.players) {
     if(isDefined(player.connectedPostGame) || (player.pers["team"] == "spectator" && !player IsMLGSpectator())) {
@@ -1890,8 +1981,9 @@ displayRoundSwitch() {
 }
 
 freezeAllPlayers(delay, additionalClientDvarName1, additionalClientDvarValue1) {
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
 
   foreach(player in level.players) {
     player thread freezePlayerForRoundEnd(delay);
@@ -1923,10 +2015,11 @@ endGameOvertime(winner, endReasonText) {
     if(isDefined(player.connectedPostGame) || (player.pers["team"] == "spectator" && !player IsMLGSpectator())) {
       continue;
     }
-    if(level.teamBased)
+    if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-    else
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
+    }
   }
 
   roundEndWait(level.roundEndDelay, false);
@@ -1934,8 +2027,9 @@ endGameOvertime(winner, endReasonText) {
   if(isDefined(level.finalKillCam_winner)) {
     level.finalKillCam_timeGameEnded[level.finalKillCam_winner] = getSecondsPassed();
 
-    foreach(player in level.players)
-    player notify("reset_outcome");
+    foreach(player in level.players) {
+      player notify("reset_outcome");
+    }
 
     level notify("game_cleanup");
 
@@ -1945,10 +2039,11 @@ endGameOvertime(winner, endReasonText) {
       if(isDefined(player.connectedPostGame) || (player.pers["team"] == "spectator" && !player IsMLGSpectator())) {
         continue;
       }
-      if(level.teamBased)
+      if(level.teamBased) {
         player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-      else
+      } else {
         player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
+      }
     }
   }
 
@@ -1967,8 +2062,9 @@ endGameHalfTime() {
 
   freezeAllPlayers();
 
-  foreach(player in level.players)
-  player.pers["stats"] = player.stats;
+  foreach(player in level.players) {
+    player.pers["stats"] = player.stats;
+  }
 
   level notify("round_switch", "halftime");
 
@@ -1984,8 +2080,9 @@ endGameHalfTime() {
   if(isDefined(level.finalKillCam_winner)) {
     level.finalKillCam_timeGameEnded[level.finalKillCam_winner] = getSecondsPassed();
 
-    foreach(player in level.players)
-    player notify("reset_outcome");
+    foreach(player in level.players) {
+      player notify("reset_outcome");
+    }
 
     level notify("game_cleanup");
 
@@ -2007,15 +2104,17 @@ endGameHalfTime() {
 }
 
 endGame(winner, endReasonText, nukeDetonated) {
-  if(is_Aliens())
+  if(is_Aliens()) {
     [[level.endGame_Alien]](winner, endReasonText);
-  else
+  } else {
     endGame_RegularMP(winner, endReasonText, nukeDetonated);
+  }
 }
 
 endGame_RegularMP(winner, endReasonText, nukeDetonated) {
-  if(!isDefined(nukeDetonated))
+  if(!isDefined(nukeDetonated)) {
     nukeDetonated = false;
+  }
 
   if(game["state"] == "postgame" || level.gameEnded && (!isDefined(level.gtnw) || !level.gtnw)) {
     return;
@@ -2053,20 +2152,23 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
     return;
   }
 
-  if(isDefined(level.finalKillCam_winner))
+  if(isDefined(level.finalKillCam_winner)) {
     level.finalKillCam_timeGameEnded[level.finalKillCam_winner] = getSecondsPassed();
+  }
 
   game["roundsPlayed"]++;
 
   if(level.teamBased) {
-    if(winner == "axis" || winner == "allies")
+    if(winner == "axis" || winner == "allies") {
       game["roundsWon"][winner]++;
+    }
 
     maps\mp\gametypes\_gamescore::updateTeamScore("axis");
     maps\mp\gametypes\_gamescore::updateTeamScore("allies");
   } else {
-    if(isDefined(winner) && isPlayer(winner))
+    if(isDefined(winner) && isPlayer(winner)) {
       game["roundsWon"][winner.guid]++;
+    }
   }
 
   maps\mp\gametypes\_gamescore::updatePlacement();
@@ -2089,15 +2191,17 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 
   sendScriptUsageAnalysisData(1, 1);
 
-  if(!nukeDetonated)
+  if(!nukeDetonated) {
     visionSetNaked("mpOutro", 0.5);
+  }
 
   if(!wasOnlyRound() && !nukeDetonated) {
     displayRoundEnd(winner, endReasonText);
 
     if(isDefined(level.finalKillCam_winner)) {
-      foreach(player in level.players)
-      player notify("reset_outcome");
+      foreach(player in level.players) {
+        player notify("reset_outcome");
+      }
 
       level notify("game_cleanup");
 
@@ -2106,11 +2210,13 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 
     if(!wasLastRound()) {
       levelFlagClear("block_notifies");
-      if(checkRoundSwitch())
+      if(checkRoundSwitch()) {
         displayRoundSwitch();
+      }
 
-      foreach(player in level.players)
-      player.pers["stats"] = player.stats;
+      foreach(player in level.players) {
+        player.pers["stats"] = player.stats;
+      }
 
       level notify("restarting");
       game["state"] = "playing";
@@ -2119,8 +2225,9 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
       return;
     }
 
-    if(!level.forcedEnd)
+    if(!level.forcedEnd) {
       endReasonText = updateRoundEndReasonText(winner);
+    }
   }
 
   if(!isDefined(game["clientMatchDataDef"])) {
@@ -2145,8 +2252,9 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
   displayGameEnd(winner, endReasonText);
 
   if(isDefined(level.finalKillCam_winner) && wasOnlyRound()) {
-    foreach(player in level.players)
-    player notify("reset_outcome");
+    foreach(player in level.players) {
+      player notify("reset_outcome");
+    }
 
     level notify("game_cleanup");
 
@@ -2172,10 +2280,11 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
   checkForPersonalBests();
 
   if(level.teamBased) {
-    if(winner == "axis" || winner == "allies")
+    if(winner == "axis" || winner == "allies") {
       setMatchData("victor", winner);
-    else
+    } else {
       setMatchData("victor", "none");
+    }
 
     setMatchData("alliesScore", getTeamScore("allies"));
     setMatchData("axisScore", getTeamScore("axis"));
@@ -2200,14 +2309,16 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 
   sendMatchData();
 
-  foreach(player in level.players)
-  player.pers["stats"] = player.stats;
+  foreach(player in level.players) {
+    player.pers["stats"] = player.stats;
+  }
 
   if(!nukeDetonated && !level.postGameNotifies) {
-    if(!wasOnlyRound())
+    if(!wasOnlyRound()) {
       wait 6.0;
-    else
+    } else {
       wait(min(10.0, 4.0 + level.postGameNotifies));
+    }
   } else {
     wait(min(10.0, 4.0 + level.postGameNotifies));
   }
@@ -2222,22 +2333,27 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 }
 
 updateRoundEndReasonText(winner) {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
-
-  if(isModdedRoundGame()) {
-    if(hitScoreLimit())
-      return game["end_reason"]["score_limit_reached"];
-
-    if(hitTimeLimit())
-      return game["end_reason"]["time_limit_reached"];
-  } else {
-    if(hitRoundLimit())
-      return game["end_reason"]["round_limit_reached"];
   }
 
-  if(hitWinLimit())
+  if(isModdedRoundGame()) {
+    if(hitScoreLimit()) {
+      return game["end_reason"]["score_limit_reached"];
+    }
+
+    if(hitTimeLimit()) {
+      return game["end_reason"]["time_limit_reached"];
+    }
+  } else {
+    if(hitRoundLimit()) {
+      return game["end_reason"]["round_limit_reached"];
+    }
+  }
+
+  if(hitWinLimit()) {
     return game["end_reason"]["score_limit_reached"];
+  }
 
   return game["end_reason"]["objective_completed"];
 }
@@ -2249,8 +2365,9 @@ estimatedTimeTillScoreLimit(team) {
   scoreRemaining = getScoreRemaining(team);
 
   estimatedTimeLeft = 999999;
-  if(scorePerMinute)
+  if(scorePerMinute) {
     estimatedTimeLeft = scoreRemaining / scorePerMinute;
+  }
 
   return estimatedTimeLeft;
 }
@@ -2262,10 +2379,11 @@ getScorePerMinute(team) {
   timeLimit = getTimeLimit();
   minutesPassed = (getTimePassed() / (60 * 1000)) + 0.0001;
 
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     scorePerMinute = self.score / minutesPassed;
-  else
+  } else {
     scorePerMinute = getTeamScore(team) / minutesPassed;
+  }
 
   return scorePerMinute;
 }
@@ -2275,10 +2393,11 @@ getScoreRemaining(team) {
 
   scoreLimit = getWatchedDvar("scorelimit");
 
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     scoreRemaining = scoreLimit - self.score;
-  else
+  } else {
     scoreRemaining = scoreLimit - getTeamScore(team);
+  }
 
   return scoreRemaining;
 }
@@ -2312,8 +2431,9 @@ processLobbyData() {
 
     if(level.ps3 && (player.name.size > level.MaxNameLength)) {
       playerName = "";
-      for(i = 0; i < level.MaxNameLength - 3; i++)
+      for(i = 0; i < level.MaxNameLength - 3; i++) {
         playerName += player.name[i];
+      }
 
       playerName += "...";
     } else {
@@ -2382,8 +2502,9 @@ setWeaponStat(name, incValue, statName) {
     return;
   }
 
-  if(!isDefined(self.trackingWeaponName))
+  if(!isDefined(self.trackingWeaponName)) {
     self.trackingWeaponName = name;
+  }
 
   if(name != self.trackingWeaponName) {
     self maps\mp\gametypes\_persistence::updateWeaponBufferedStats();
@@ -2440,8 +2561,9 @@ setInflictorStat(eInflictor, eAttacker, sWeapon) {
     return;
   }
 
-  if(!isDefined(eInflictor.playerAffectedArray))
+  if(!isDefined(eInflictor.playerAffectedArray)) {
     eInflictor.playerAffectedArray = [];
+  }
 
   foundNewPlayer = true;
   for(i = 0; i < eInflictor.playerAffectedArray.size; i++) {

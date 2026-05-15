@@ -767,7 +767,7 @@ get_closest_exclude(org, ents, excluders) {
     }
 
     for(i = 0; i < ents.size; i++) {
-      for(p = 0; p < excluders.size; p++)
+      for(p = 0; p < excluders.size; p++) {}
     }
     if(ents[i] == excluders[p]) {
       exclude[i] = true;
@@ -801,7 +801,7 @@ get_closest_exclude(org, ents, excluders) {
     exclude = false;
     if(isDefined(excluders)) {
       for(p = 0; p < excluders.size; p++) {
-        if(ents[i] == excluders[p])
+        if(ents[i] == excluders[p]) {}
       }
       exclude = true;
     }
@@ -1247,7 +1247,7 @@ escape_artist_distance() {
       }
     } else {
       if(!isDefined(player.escape_artist[self.unique_id])) {
-        if(isDefined(self.owner))
+        if(isDefined(self.owner)) {}
       }
       player.escape_artist[self.unique_id] = true;
     }
@@ -1279,7 +1279,7 @@ check_grenade_dmg() {
 
     if(isDefined(msg) && IsArray(msg)) {
       if(msg[5] == "MOD_GRENADE_SPLASH" && !isDefined(level.player.escape_artist_failure)) {
-        if(msg[2].unique_id == self.owner && isDefined(level.player.escape_artist[self.unique_id]))
+        if(msg[2].unique_id == self.owner && isDefined(level.player.escape_artist[self.unique_id])) {}
       }
       level.player.escape_artist_failure = true;
     } else {
@@ -2686,7 +2686,7 @@ array_removeDead_or_dying(array) {
 array_remove_nokeys(ents, remover) {
   newents = [];
   for(i = 0; i < ents.size; i++) {
-    if(ents[i] != remover)
+    if(ents[i] != remover) {}
   }
   newents[newents.size] = ents[i];
   return newents;
@@ -8317,7 +8317,7 @@ _rotateyaw(yaw_angle, time, acc_time, dec_time) {
   if(isDefined(dec_time)) {
     self RotateYaw(yaw_angle, time, acc_time, dec_time);
   } else {
-    if(isDefined(acc_time))
+    if(isDefined(acc_time)) {}
   }
   self RotateYaw(yaw_angle, time, acc_time);
   else {
@@ -8548,17 +8548,16 @@ fog_set_changes(fog_set, transition_time) {
 
       level.fog_transition_ent.fogset = fog_set;
       level.fog_transition_ent.time = transition_time;
-    }
-  else {
-    if(fog_set != "" && self.fog_transition_ent.fogset == fog_set && self.fog_transition_ent.time == transition_time) {
-      return;
-    }
+    } else {
+      if(fog_set != "" && self.fog_transition_ent.fogset == fog_set && self.fog_transition_ent.time == transition_time) {
+        return;
+      }
 
-    self set_fog_to_ent_values(ent, transition_time);
+      self set_fog_to_ent_values(ent, transition_time);
 
-    self.fog_transition_ent.fogset = fog_set;
-    self.fog_transition_ent.time = transition_time;
-  }
+      self.fog_transition_ent.fogset = fog_set;
+      self.fog_transition_ent.time = transition_time;
+    }
 }
 /$
 translateEntTosliders(ent) {
@@ -9953,7 +9952,7 @@ deletestruct_ref(struct) {
     isDefined(level.struct_class_names["script_linkname"]) &&
     isDefined(level.struct_class_names["script_linkname"][value])) {
     foreach(i, _struct in level.struct_class_names["script_linkname"][value]) {
-      if(isDefined(_struct) && struct == _struct)
+      if(isDefined(_struct) && struct == _struct) {}
     }
     level.struct_class_names["script_linkname"][value][i] = undefined;
 
@@ -9968,7 +9967,7 @@ deletestruct_ref(struct) {
     isDefined(level.struct_class_names["script_noteworthy"]) &&
     isDefined(level.struct_class_names["script_noteworthy"][value])) {
     foreach(i, _struct in level.struct_class_names["script_noteworthy"][value]) {
-      if(isDefined(_struct) && struct == _struct)
+      if(isDefined(_struct) && struct == _struct) {}
     }
     level.struct_class_names["script_noteworthy"][value][i] = undefined;
 
@@ -9983,7 +9982,7 @@ deletestruct_ref(struct) {
     isDefined(level.struct_class_names["target"]) &&
     isDefined(level.struct_class_names["target"][value])) {
     foreach(i, _struct in level.struct_class_names["target"][value]) {
-      if(isDefined(_struct) && struct == _struct)
+      if(isDefined(_struct) && struct == _struct) {}
     }
     level.struct_class_names["target"][value][i] = undefined;
 
@@ -9998,7 +9997,7 @@ deletestruct_ref(struct) {
     isDefined(level.struct_class_names["targetname"]) &&
     isDefined(level.struct_class_names["targetname"][value])) {
     foreach(i, _struct in level.struct_class_names["targetname"][value]) {
-      if(isDefined(_struct) && struct == _struct)
+      if(isDefined(_struct) && struct == _struct) {}
     }
     level.struct_class_names["targetname"][value][i] = undefined;
 
@@ -10008,7 +10007,7 @@ deletestruct_ref(struct) {
   }
 
   if(isDefined(level.struct)) {
-    foreach(i, _struct in level.struct)
+    foreach(i, _struct in level.struct) {}
   }
   if(struct == _struct) {
     level.struct[i] = undefined;
@@ -10029,7 +10028,7 @@ deletestructarray_ref(structs, delay) {
       wait delay;
     }
   } else {
-    foreach(struct in structs)
+    foreach(struct in structs) {}
   }
   deletestruct_ref(struct);
 }
@@ -10382,7 +10381,7 @@ deep_array_call(ents, process, args) {
 
   if(!isDefined(args)) {
     foreach(ent in ents) {
-      if(isDefined(ent))
+      if(isDefined(ent)) {}
     }
     if(IsArray(ent)) {
       deep_array_call(ent, process);
@@ -10397,7 +10396,7 @@ deep_array_call(ents, process, args) {
   switch (args.size) {
     case 0:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10407,7 +10406,7 @@ deep_array_call(ents, process, args) {
       break;
     case 1:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10417,7 +10416,7 @@ deep_array_call(ents, process, args) {
       break;
     case 2:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10427,7 +10426,7 @@ deep_array_call(ents, process, args) {
       break;
     case 3:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10437,7 +10436,7 @@ deep_array_call(ents, process, args) {
       break;
     case 4:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10447,7 +10446,7 @@ deep_array_call(ents, process, args) {
       break;
     case 5:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_call(ent, process, args);
@@ -10465,7 +10464,7 @@ deep_array_thread(ents, process, args) {
 
   if(!isDefined(args)) {
     foreach(ent in ents) {
-      if(isDefined(ent))
+      if(isDefined(ent)) {}
     }
     if(IsArray(ent)) {
       deep_array_thread(ent, process, args);
@@ -10480,7 +10479,7 @@ deep_array_thread(ents, process, args) {
   switch (args.size) {
     case 0:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10490,7 +10489,7 @@ deep_array_thread(ents, process, args) {
       break;
     case 1:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10500,7 +10499,7 @@ deep_array_thread(ents, process, args) {
       break;
     case 2:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10510,7 +10509,7 @@ deep_array_thread(ents, process, args) {
       break;
     case 3:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10520,7 +10519,7 @@ deep_array_thread(ents, process, args) {
       break;
     case 4:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10530,7 +10529,7 @@ deep_array_thread(ents, process, args) {
       break;
     case 5:
       foreach(ent in ents) {
-        if(isDefined(ent))
+        if(isDefined(ent)) {}
       }
       if(IsArray(ent)) {
         deep_array_thread(ent, process, args);
@@ -10934,7 +10933,7 @@ ai_unignore_everything(dont_restore_old) {
   }
 
   if(isDefined(dont_restore_old) && dont_restore_old) {
-    if(isDefined(self._ignore_settings_old))
+    if(isDefined(self._ignore_settings_old)) {}
   }
   self._ignore_settings_old = undefined;
 

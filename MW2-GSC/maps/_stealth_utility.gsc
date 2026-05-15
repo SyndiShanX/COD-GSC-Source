@@ -54,8 +54,9 @@ stealth_plugin_basic(custom_state_funcs) {
         break;
     }
   }
-  if(isDefined(custom_state_funcs))
+  if(isDefined(custom_state_funcs)) {
     self stealth_basic_states_custom(custom_state_funcs);
+  }
 
   self._stealth.plugins.basic = true;
 }
@@ -100,11 +101,13 @@ stealth_plugin_threat(custom_behavior_array) {
   assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
-  if(!isDefined(self._stealth.plugins.threat))
+  if(!isDefined(self._stealth.plugins.threat)) {
     self maps\_stealth_threat_enemy::stealth_threat_enemy_main();
+  }
 
-  if(isDefined(custom_behavior_array))
+  if(isDefined(custom_behavior_array)) {
     self stealth_threat_behavior_replace(custom_behavior_array);
+  }
 }
 
 stealth_enable_seek_player_on_spotted() {
@@ -122,10 +125,12 @@ stealth_disable_seek_player_on_spotted() {
 stealth_threat_behavior_custom(threat_array, anim_array) {
   assertex(isDefined(self._stealth.plugins.threat), "call maps\_stealth_utility::stealth_plugin_threat() on the AI first");
 
-  if(isDefined(threat_array))
+  if(isDefined(threat_array)) {
     self maps\_stealth_threat_enemy::enemy_set_threat_behavior(threat_array);
-  if(isDefined(anim_array))
+  }
+  if(isDefined(anim_array)) {
     self maps\_stealth_threat_enemy::enemy_set_threat_anim_behavior(anim_array);
+  }
 }
 
 stealth_threat_behavior_replace(threat_array, anim_array) {
@@ -136,8 +141,9 @@ stealth_threat_behavior_replace(threat_array, anim_array) {
 
   if(isDefined(threat_array)) {
     while(isDefined(self._stealth.behavior.ai_functions[name][key])) {
-      if(!isDefined(threat_array[key]))
+      if(!isDefined(threat_array[key])) {
         threat_array[key] = maps\_stealth_shared_utilities::ai_get_behavior_function(name, key);
+      }
       num++;
       key = string + num;
     }
@@ -166,11 +172,13 @@ stealth_plugin_corpse(custom_corpse_array) {
   assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
-  if(!isDefined(self._stealth.plugins.corpse))
+  if(!isDefined(self._stealth.plugins.corpse)) {
     self maps\_stealth_corpse_enemy::stealth_corpse_enemy_main();
+  }
 
-  if(isDefined(custom_corpse_array))
+  if(isDefined(custom_corpse_array)) {
     self stealth_corpse_behavior_custom(custom_corpse_array);
+  }
 }
 
 stealth_corpse_behavior_custom(corpse_functions) {
@@ -208,16 +216,18 @@ stealth_plugin_event_all(array) {
   self maps\_stealth_event_enemy::stealth_event_mod_all();
 
   if(isDefined(array)) {
-    foreach(key, value in array)
-    self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+    foreach(key, value in array) {
+      self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+    }
   }
 }
 
 stealth_plugin_event_main() {
   assertex(self isBadGuy(), "stealth_plugin_accuracy is a plugin for enemies only");
 
-  if(!isDefined(self._stealth.plugins.event))
+  if(!isDefined(self._stealth.plugins.event)) {
     self maps\_stealth_event_enemy::stealth_event_enemy_main();
+  }
 }
 
 stealth_plugin_event_heard_scream(behavior_function, animation_function) {
@@ -252,11 +262,13 @@ stealth_plugin_aicolor(custom_color_array) {
   assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self.team == "allies", "stealth_plugin_accuracy is a plugin for friendlies only");
 
-  if(!isDefined(self._stealth.plugins.color_system))
+  if(!isDefined(self._stealth.plugins.color_system)) {
     self maps\_stealth_color_friendly::stealth_color_friendly_main();
+  }
 
-  if(isDefined(custom_color_array))
+  if(isDefined(custom_color_array)) {
     self stealth_color_state_custom(custom_color_array);
+  }
 }
 
 stealth_color_state_custom(array) {
@@ -275,11 +287,13 @@ stealth_plugin_accuracy(custom_acc_array) {
   assertex(isDefined(self._stealth.plugins.basic), "call maps\_stealth_utility::stealth_plugin_basic() on the AI first");
   assertex(self.team == "allies", "stealth_plugin_accuracy is a plugin for friendlies only");
 
-  if(!isDefined(self._stealth.plugins.accaracy_mod))
+  if(!isDefined(self._stealth.plugins.accaracy_mod)) {
     self maps\_stealth_accuracy_friendly::stealth_accuracy_friendly_main();
+  }
 
-  if(isDefined(custom_acc_array))
+  if(isDefined(custom_acc_array)) {
     self stealth_accuracy_state_custom(custom_acc_array);
+  }
 }
 
 stealth_accuracy_state_custom(array) {
@@ -326,8 +340,9 @@ stealth_is_everything_normal() {
     ai = maps\_stealth_shared_utilities::group_get_ai_in_group(key);
 
     foreach(actor in ai) {
-      if(!actor ent_flag("_stealth_normal"))
+      if(!actor ent_flag("_stealth_normal")) {
         return false;
+      }
     }
   }
 
@@ -536,8 +551,9 @@ stealth_set_group_default() {
 }
 
 stealth_set_group_proc(var) {
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     level._stealth.group.groups[self.script_stealthgroup] = array_remove(level._stealth.group.groups[self.script_stealthgroup], self);
+  }
 
   self.script_stealthgroup = string(var);
 
@@ -556,11 +572,13 @@ stealth_get_group() {
 enable_stealth_system() {
   flag_set("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
-  foreach(key, value in ai)
-  value enable_stealth_for_ai();
+  foreach(key, value in ai) {
+    value enable_stealth_for_ai();
+  }
 
-  foreach(player in level.players)
-  player maps\_stealth_visibility_friendly::friendly_visibility_logic();
+  foreach(player in level.players) {
+    player maps\_stealth_visibility_friendly::friendly_visibility_logic();
+  }
 
   maps\_stealth_visibility_system::system_event_change("hidden");
 }
@@ -568,30 +586,35 @@ enable_stealth_system() {
 disable_stealth_system() {
   flag_clear("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
-  foreach(key, value in ai)
-  value disable_stealth_for_ai();
+  foreach(key, value in ai) {
+    value disable_stealth_for_ai();
+  }
 
   foreach(player in level.players) {
     player.maxVisibleDist = 8192;
 
-    if(player ent_flag_exist("_stealth_enabled"))
+    if(player ent_flag_exist("_stealth_enabled")) {
       player ent_flag_clear("_stealth_enabled");
+    }
   }
 
   maps\_stealth_visibility_system::system_event_change("spotted");
 }
 
 enable_stealth_for_ai() {
-  if(self ent_flag_exist("_stealth_enabled"))
+  if(self ent_flag_exist("_stealth_enabled")) {
     self ent_flag_set("_stealth_enabled");
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self maps\_stealth_visibility_friendly::friendly_visibility_logic();
+  }
 }
 
 disable_stealth_for_ai() {
-  if(self ent_flag_exist("_stealth_enabled"))
+  if(self ent_flag_exist("_stealth_enabled")) {
     self ent_flag_clear("_stealth_enabled");
+  }
 
   self.maxVisibleDist = 8192;
 }

@@ -115,8 +115,9 @@ getFreeAgent(agent_type) {
 
         freeAgent initAgentScriptVariables();
 
-        if(isDefined(agent_type))
+        if(isDefined(agent_type)) {
           freeAgent.agent_type = agent_type;
+        }
 
         break;
       }
@@ -142,8 +143,9 @@ deactivateAgentDelayed() {
   self notify("deactivateAgentDelayed");
   self endon("deactivateAgentDelayed");
 
-  if(IsGameParticipant(self))
+  if(IsGameParticipant(self)) {
     self maps\mp\gametypes\_spawnlogic::removeFromParticipantsArray();
+  }
 
   self maps\mp\gametypes\_spawnlogic::removeFromCharactersArray();
 
@@ -158,8 +160,9 @@ deactivateAgentDelayed() {
   foreach(character in level.characters) {
     if(isDefined(character.attackers)) {
       foreach(index, attacker in character.attackers) {
-        if(attacker == self)
+        if(attacker == self) {
           character.attackers[index] = undefined;
+        }
       }
     }
   }
@@ -173,8 +176,9 @@ deactivateAgentDelayed() {
 }
 
 getNumActiveAgents(type) {
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "all";
+  }
 
   agents = getActiveAgentsOfType(type);
   return agents.size;
@@ -184,13 +188,15 @@ getActiveAgentsOfType(type) {
   Assert(isDefined(type));
   agents = [];
 
-  if(!isDefined(level.agentArray))
+  if(!isDefined(level.agentArray)) {
     return agents;
+  }
 
   foreach(agent in level.agentArray) {
     if(isDefined(agent.isActive) && agent.isActive) {
-      if(type == "all" || agent.agent_type == type)
+      if(type == "all" || agent.agent_type == type) {
         agents[agents.size] = agent;
+      }
     }
   }
 
@@ -212,8 +218,9 @@ getNumOwnedActiveAgentsByType(player, type) {
   foreach(agent in level.agentArray) {
     if(isDefined(agent.isActive) && agent.isActive) {
       if(isDefined(agent.owner) && (agent.owner == player)) {
-        if((type == "all" && agent.agent_type != "alien") || agent.agent_type == type)
+        if((type == "all" && agent.agent_type != "alien") || agent.agent_type == type) {
           numOwnedActiveAgents++;
+        }
       }
     }
   }
@@ -234,8 +241,9 @@ getValidSpawnPathNodeNearPlayer(bDoPhysicsTraceToPlayer, bDoPhysicsTraceToValida
     nodeArrayOld = nodeArray;
     nodeArray = [];
     foreach(node in nodeArrayOld) {
-      if(node.origin[2] > level.waterDeleteZ || !IsPointInVolume(node.origin, level.trigUnderWater))
+      if(node.origin[2] > level.waterDeleteZ || !IsPointInVolume(node.origin, level.trigUnderWater)) {
         nodeArray[nodeArray.size] = node;
+      }
     }
   }
 
@@ -245,11 +253,13 @@ getValidSpawnPathNodeNearPlayer(bDoPhysicsTraceToPlayer, bDoPhysicsTraceToValida
   playerHeight = maps\mp\gametypes\_spawnlogic::getPlayerTraceHeight(self);
   zOffset = (0, 0, playerHeight);
 
-  if(!isDefined(bDoPhysicsTraceToPlayer))
+  if(!isDefined(bDoPhysicsTraceToPlayer)) {
     bDoPhysicsTraceToPlayer = false;
+  }
 
-  if(!isDefined(bDoPhysicsTraceToValidateNode))
+  if(!isDefined(bDoPhysicsTraceToValidateNode)) {
     bDoPhysicsTraceToValidateNode = false;
+  }
 
   pathNodeSortedByDot = [];
   pathNodeDotValues = [];
@@ -280,36 +290,42 @@ getValidSpawnPathNodeNearPlayer(bDoPhysicsTraceToPlayer, bDoPhysicsTraceToValida
     traceStart = self.origin + zOffset;
     traceEnd = pathNode.origin + zOffset;
 
-    if(i > 0)
+    if(i > 0) {
       wait(0.05);
+    }
 
     if(!SightTracePassed(traceStart, traceEnd, false, self)) {
       continue;
     }
 
     if(bDoPhysicsTraceToValidateNode) {
-      if(i > 0)
+      if(i > 0) {
         wait(0.05);
+      }
 
       hitPos = PlayerPhysicsTrace(pathNode.origin + zOffset, pathNode.origin);
-      if(DistanceSquared(hitPos, pathNode.origin) > 1)
+      if(DistanceSquared(hitPos, pathNode.origin) > 1) {
         continue;
+      }
     }
 
     if(bDoPhysicsTraceToPlayer) {
-      if(i > 0)
+      if(i > 0) {
         wait(0.05);
+      }
 
       hitPos = PhysicsTrace(traceStart, traceEnd);
-      if(DistanceSquared(hitPos, traceEnd) > 1)
+      if(DistanceSquared(hitPos, traceEnd) > 1) {
         continue;
+      }
     }
 
     return pathNode;
   }
 
-  if((pathNodeSortedByDot.size > 0) && isDefined(level.isHorde))
+  if((pathNodeSortedByDot.size > 0) && isDefined(level.isHorde)) {
     return pathNodeSortedByDot[0];
+  }
 }
 
 killAgent(agent) {

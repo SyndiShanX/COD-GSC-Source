@@ -10,8 +10,9 @@
 
 MoveWalk() {
   preferredPose = undefined;
-  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > 64 * 64)
+  if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > 64 * 64) {
     preferredPose = "stand";
+  }
 
   desiredPose = [[self.choosePoseFunc]](preferredPose);
 
@@ -52,10 +53,11 @@ DoWalkAnimOverride(walkAnim) {
   self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
-    if(isDefined(self.walk_override_weights))
+    if(isDefined(self.walk_override_weights)) {
       moveAnim = choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    else
+    } else {
       moveAnim = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
+    }
   } else {
     moveAnim = self.walk_overrideanim;
   }
@@ -65,15 +67,17 @@ DoWalkAnimOverride(walkAnim) {
 }
 
 GetWalkAnim(desiredAnim) {
-  if(self.stairsState == "up")
+  if(self.stairsState == "up") {
     return moveAnim("stairs_up");
-  else if(self.stairsState == "down")
+  } else if(self.stairsState == "down") {
     return moveAnim("stairs_down");
+  }
 
   walkAnim = moveAnim(desiredAnim);
 
-  if(isarray(walkAnim))
+  if(isarray(walkAnim)) {
     walkAnim = walkAnim[randomint(walkAnim.size)];
+  }
 
   return walkAnim;
 }
@@ -83,8 +87,9 @@ DoWalkAnim(walkAnim) {
 
   rate = self.moveplaybackrate;
 
-  if(self.stairsState != "none")
+  if(self.stairsState != "none") {
     rate *= 0.6;
+  }
 
   if(self.a.pose == "stand") {
     if(isDefined(self.enemy)) {

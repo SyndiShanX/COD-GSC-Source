@@ -10,8 +10,9 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("cover_swim_up");
 
-  if(!isDefined(self.approachtype) || self.approachtype != "cover_u")
+  if(!isDefined(self.approachtype) || self.approachtype != "cover_u") {
     self.approachtype = "cover_u";
+  }
 
   animscripts\corner::corner_think("up", 0);
 }

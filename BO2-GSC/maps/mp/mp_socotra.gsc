@@ -79,7 +79,8 @@ rts_remove() {
   rtsfloors = getEntArray("overwatch_floor", "targetname");
 
   foreach(rtsfloor in rtsfloors) {
-    if(isDefined(rtsfloor))
+    if(isDefined(rtsfloor)) {
       rtsfloor delete();
+    }
   }
 }

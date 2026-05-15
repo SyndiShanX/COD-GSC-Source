@@ -48,8 +48,9 @@ stryker_setmode_ai() {
   self.turretMode = "ai";
   self.targetSearchOrigin = undefined;
 
-  if(getDvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - " + self.turretMode + " mode");
+  }
 
   self thread stryker_turret_think();
 }
@@ -67,8 +68,9 @@ stryker_setmode_manual(origin) {
 
   self thread stryker_turret_think();
 
-  if(getDvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - " + self.turretMode + " mode");
+  }
 
   wait STRYKER_MANUAL_AI_DURATION;
 
@@ -109,8 +111,9 @@ stryker_scan_start() {
   assert(!isDefined(self.scanning));
   self.scanning = true;
 
-  if(getDvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - scan start");
+  }
 
   alternate = 0;
 
@@ -136,8 +139,9 @@ stryker_scan_start() {
 }
 
 stryker_scan_stop() {
-  if(getDvar("arcadia_debug_stryker") == "1")
+  if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - scan stop");
+  }
 
   self clearTurretTarget();
   self.scanning = undefined;
@@ -146,8 +150,9 @@ stryker_scan_stop() {
 
 stryker_get_target() {
   SEARCH_ORIGIN = self.origin;
-  if(isDefined(self.targetSearchOrigin))
+  if(isDefined(self.targetSearchOrigin)) {
     SEARCH_ORIGIN = self.targetSearchOrigin;
+  }
 
   SEARCH_RADIUS_MIN = level.stryker_settings[self.turretMode].target_min_range;
   SEARCH_RADIUS_MAX = level.stryker_settings[self.turretMode].target_max_range;
@@ -172,8 +177,9 @@ stryker_get_target() {
 
     ents = getEntArray("destructible_vehicle", "targetname");
     foreach(ent in ents) {
-      if(isDefined(ent.exploded))
+      if(isDefined(ent.exploded)) {
         continue;
+      }
       destructibleTargets[destructibleTargets.size] = ent;
     }
     ents = undefined;
@@ -194,16 +200,18 @@ stryker_get_target() {
   foreach(target in possibleTargets) {
     if(isDefined(self.threatBiasGroup) && IsSentient(target)) {
       bias = getThreatBias(target getThreatBiasGroup(), self.threatBiasGroup);
-      if(bias <= -1000000)
+      if(bias <= -1000000) {
         continue;
+      }
     }
 
     if(isDefined(target.ignoreme) && target.ignoreme == true) {
       continue;
     }
     if(isAI(target)) {
-      if(!sightTracePassed(self getTagOrigin("tag_flash"), target getEye(), false, self))
+      if(!sightTracePassed(self getTagOrigin("tag_flash"), target getEye(), false, self)) {
         continue;
+      }
     }
 
     prof_end("stryker_ai");
@@ -222,13 +230,15 @@ stryker_get_target_offset(target) {
   }
 
   if(isDefined(target.vehicletype)) {
-    if(target isHelicopter())
+    if(target isHelicopter()) {
       return (0, 0, STRYKER_TARGET_OFFSET_HELICOPTER);
+    }
     return (0, 0, STRYKER_TARGET_OFFSET_VEHICLE);
   }
 
-  if(isDefined(target.destuctableinfo))
+  if(isDefined(target.destuctableinfo)) {
     return (0, 0, STRYKER_TARGET_OFFSET_VEHICLE);
+  }
 
   return (0, 0, 0);
 }
@@ -245,15 +255,17 @@ stryker_shoot_target(target) {
 
   if(getDvar("arcadia_debug_stryker") == "1") {
     iprintln("^2stryker - shooting a target");
-    if(self.turretMode == "ai")
+    if(self.turretMode == "ai") {
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 1, 0, 2.0);
-    else
+    } else {
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 0, 0, 2.0);
+    }
   }
 
   self setTurretTargetEnt(target, targetOffset);
-  if(self.lastTarget != target)
+  if(self.lastTarget != target) {
     self waittill_notify_or_timeout("turret_rotate_stopped", 1.0);
+  }
   self.lastTarget = target;
 
   startTime = getTime();
@@ -273,10 +285,11 @@ stryker_fire_shots(target, targetOffset) {
 
   shots = randomintrange(level.stryker_settings[self.turretMode].burst_count_min, level.stryker_settings[self.turretMode].burst_count_max);
   for(i = 0; i < shots; i++) {
-    if(isDefined(target) && isDefined(targetOffset))
+    if(isDefined(target) && isDefined(targetOffset)) {
       self fireWeapon("tag_flash", target, targetOffset, 0.0);
-    else
+    } else {
       self fireWeapon("tag_flash", undefined, (0, 0, 0), 0.0);
+    }
     wait level.stryker_settings[self.turretMode].fire_time;
   }
 }

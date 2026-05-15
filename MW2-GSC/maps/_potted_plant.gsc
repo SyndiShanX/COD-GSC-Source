@@ -21,12 +21,14 @@ potted_plant() {
   pos = self.origin;
 
   trig = undefined;
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     trig = getent(self.target, "targetname");
+  }
 
   self thread potted_plant_damage();
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     self thread potted_plant_triggered(trig);
+  }
 
   self waittill("fall");
 

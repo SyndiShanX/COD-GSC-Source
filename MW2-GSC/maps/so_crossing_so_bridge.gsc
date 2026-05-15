@@ -90,8 +90,9 @@ so_crossing_timed_setup_hardened() {
 so_crossing_timed_setup_veteran() {}
 
 remove_enemies_with_weapons(class, enemies, remove_count) {
-  if(!isDefined(remove_count))
+  if(!isDefined(remove_count)) {
     remove_count = 999;
+  }
 
   foreach(guy in enemies) {
     if((remove_count > 0) && (guy.classname == class)) {

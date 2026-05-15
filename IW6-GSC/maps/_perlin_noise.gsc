@@ -22,11 +22,13 @@ getperlinnoisesample(var_0, var_1, var_2) {
   var_11 = var_11 * var_0.refsc;
   var_11 = var_11 + 127.0;
 
-  if(var_11 < 0.0)
+  if(var_11 < 0.0) {
     var_11 = 0.0;
+  }
 
-  if(var_11 > 255.0)
+  if(var_11 > 255.0) {
     var_11 = 255.0;
+  }
 
   return var_11;
 }

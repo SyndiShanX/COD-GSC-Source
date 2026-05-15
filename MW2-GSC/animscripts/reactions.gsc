@@ -59,10 +59,11 @@ bulletWhizbyReaction() {
 
     reaction = reactAnim[randomint(reactAnim.size)];
 
-    if(enemyNear)
+    if(enemyNear) {
       waitTime = 1 + randomfloat(0.5);
-    else
+    } else {
       waitTime = 0.2 + randomfloat(0.5);
+    }
 
     self setFlaggedAnimKnobRestart("reactanim", reaction, 1, 0.1, 1);
     self animscripts\shared::DoNoteTracksForTime(waitTime, "reactanim");
@@ -90,10 +91,11 @@ bulletWhizbyReaction() {
 
     forward = anglesToForward(self.angles);
 
-    if(isDefined(self.whizbyEnemy))
+    if(isDefined(self.whizbyEnemy)) {
       dirToEnemy = vectorNormalize(self.whizbyEnemy.origin - self.origin);
-    else
+    } else {
       dirToEnemy = forward;
+    }
 
     if(vectordot(dirToEnemy, forward) > 0) {
       twitchAnim = randomAnimOfTwo(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
@@ -168,10 +170,11 @@ getNewEnemyReactionAnim() {
     reactAnimArray[0] = % exposed_backpedal;
     reactAnimArray[1] = % exposed_idle_reactB;
 
-    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256)
+    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256) {
       self orientmode("face enemy");
-    else
+    } else {
       self orientmode("face point", self.reactionTargetPos);
+    }
 
     if(self.a.pose == "crouch") {
       dirToReactionTarget = vectorNormalize(self.reactionTargetPos - self.origin);
@@ -247,6 +250,7 @@ newEnemySurprisedReaction() {
   }
   self animmode("gravity");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     newEnemyReactionAnim();
+  }
 }

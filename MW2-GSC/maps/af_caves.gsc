@@ -1603,10 +1603,12 @@ rappel_player_rappel_setup() {
 
   for(;;) {
     rappel_trigger waittill("trigger");
-    if(level.player isthrowinggrenade())
+    if(level.player isthrowinggrenade()) {
       continue;
-    if(level.player isswitchingweapon())
+    }
+    if(level.player isswitchingweapon()) {
       continue;
+    }
     break;
   }
   rappel_trigger delete();
@@ -1628,8 +1630,9 @@ rappel_prices_rappel_start() {
   level.price.anim_ent anim_reach_solo(level.price, "pri_rappel_setup");
   level.price.anim_ent anim_single_solo(level.price, "pri_rappel_setup");
 
-  if(!flag("player_hooking_up"))
+  if(!flag("player_hooking_up")) {
     level.price.anim_ent thread anim_loop_solo(level.price, "pri_rappel_idle");
+  }
 }
 price_rope_hookup(guy) {
   level.price_rope = spawn_anim_model("rope_price", level.price.anim_ent.origin);

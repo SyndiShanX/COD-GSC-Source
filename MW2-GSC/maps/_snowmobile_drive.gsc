@@ -38,18 +38,21 @@ snowmobile_preLoad(playerHandModel, playerSnowmobileModel) {
   flag_init("player_can_die_on_snowmobile");
   flag_set("player_can_die_on_snowmobile");
 
-  if(!isDefined(playerHandModel))
+  if(!isDefined(playerHandModel)) {
     level.snowmobile_playerHandModel = "viewhands_player_arctic_wind";
-  else
+  } else {
     level.snowmobile_playerHandModel = playerHandModel;
+  }
 
-  if(!isDefined(playerSnowmobileModel))
+  if(!isDefined(playerSnowmobileModel)) {
     level.snowmobile_playerSnowmobileModel = "vehicle_snowmobile_player";
-  else
+  } else {
     level.snowmobile_playerSnowmobileModel = playerSnowmobileModel;
+  }
 
-  if(!isDefined(level.snowmobile_gunModel))
+  if(!isDefined(level.snowmobile_gunModel)) {
     level.snowmobile_gunModel = "viewmodel_glock";
+  }
   level.snowmobile_gun = "snowmobile_glock";
 
   PreCacheModel(level.snowmobile_playerHandModel);
@@ -82,8 +85,9 @@ drive_vehicle() {
   Assert(isDefined(player));
   Assert(player.classname == "player");
 
-  if(!player ent_flag_exist("player_shot_on_snowmobile"))
+  if(!player ent_flag_exist("player_shot_on_snowmobile")) {
     player ent_flag_init("player_shot_on_snowmobile");
+  }
 
   attack_hint_string = "snowmobile_attack_player1";
   drive_hint_string = "snowmobile_drive_player1";
@@ -122,10 +126,12 @@ drive_vehicle() {
   player thread drive_notetrack_sounds(vehicle, "reload_anim");
   player thread drive_notetrack_sounds(vehicle, "putaway_anim");
 
-  if(is_coop())
+  if(is_coop()) {
     player thread make_coop_vehicle(vehicle);
-  if(is_specialop())
+  }
+  if(is_specialop()) {
     vehicle thread handle_riders(player);
+  }
 
   player drive_switch_to_1st_person(vehicle);
   vehicle waittill_either("vehicle_dismount", "death");
@@ -148,8 +154,9 @@ add_rumble_for_notify(message, rumble, player) {
 
 handle_riders(player) {
   wait 0.05;
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   if(!isalive(player)) {
     return;
   }
@@ -171,8 +178,9 @@ handle_riders(player) {
 
 add_snowmobile_autosave_checks() {
   add_extra_autosave_check("snowmobile_speed", ::snowmobile_autosave_check, "^3Player was riding too slow");
-  if(isDefined(level.snowmobile_path))
+  if(isDefined(level.snowmobile_path)) {
     add_extra_autosave_check("snowmobile_fov", ::snowmobile_fov_check, "Player was pointed the wrong way");
+  }
 }
 
 reverse_hint(vehicle) {
@@ -211,35 +219,41 @@ should_stop_snowmobile_reverse_hint_player2() {
 }
 
 should_stop_snowmobile_reverse_hint() {
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     retVal = true;
-  else
-  if(!isDefined(self.vehicle.hint_brake_count))
-    retVal = true;
-  else
-  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
-    retVal = true;
-  else
+  } else {
+    if(!isDefined(self.vehicle.hint_brake_count)) {
+      retVal = true;
+    }
+  } else {
+    if(self ent_flag_exist("finish_line") && self ent_flag("finish_line")) {
+      retVal = true;
+    }
+  } else {
     retVal = self.vehicle.hint_brake_count < 3;
+  }
 
-  if(retVal)
+  if(retVal) {
     self.reverse_hint_string = undefined;
+  }
 
   return retVal;
 }
 
 wait_for_vehicle_to_move() {
   for(;;) {
-    if(self.veh_speed > 10)
+    if(self.veh_speed > 10) {
       return;
+    }
     wait(1);
   }
 }
 
 make_coop_vehicle(vehicle) {
   clientOther = level.player2;
-  if(self != level.player)
+  if(self != level.player) {
     clientOther = level.player;
+  }
 
   self hideOnClient(clientOther);
 }
@@ -302,18 +316,20 @@ drive_crash_detection(vehicle) {
   yaw_velocity *= CONST_MPHCONVERSION;
   velocity = (0, yaw_velocity, 64);
 
-  if(isDefined(level.vehicle_crash_func))
+  if(isDefined(level.vehicle_crash_func)) {
     self thread[[level.vehicle_crash_func]](vehicle);
+  }
 
   self thread drive_crash_slide(vehicle, velocity);
   self player_dismount_vehicle();
 }
 
 waittill_vehicle_crashes() {
-  if(!is_specialop())
+  if(!is_specialop()) {
     level endon("player_crashes");
-  else
+  } else {
     thread waittill_vehicle_falling_so();
+  }
 
   self waittill_any("veh_collision", "veh_falling");
 }
@@ -321,8 +337,9 @@ waittill_vehicle_falling_so() {
   trigger_ent = GetEnt("player_crashes_trigger", "script_noteworthy");
   while(1) {
     trigger_ent waittill("trigger", player);
-    if(!isDefined(player) || !isPlayer(player))
+    if(!isDefined(player) || !isPlayer(player)) {
       continue;
+    }
     if(player.snowmobile == self) {
       self notify("veh_falling");
       return;
@@ -336,8 +353,9 @@ drive_crash_slide(vehicle, velocity) {
   self BeginSliding(velocity);
 
   if(flag("player_can_die_on_snowmobile")) {
-    if(isalive(self))
+    if(isalive(self)) {
       self kill_wrapper();
+    }
   }
 
   wait(1.0);
@@ -447,16 +465,18 @@ drive_turning_anims(vehicle) {
     steerValue = clamp(steerValue, STEER_MIN, STEER_MAX);
 
     if(movementChange < 0) {
-      if(lastDirection != -1)
+      if(lastDirection != -1) {
         newDirection = true;
+      }
       lastDirection = -1;
 
       oldAnim = "turn_left2right_";
       newAnim = "turn_right2left_";
     }
     if(movementChange > 0) {
-      if(lastDirection != 1)
+      if(lastDirection != 1) {
         newDirection = true;
+      }
       lastDirection = 1;
 
       oldAnim = "turn_right2left_";
@@ -472,8 +492,9 @@ drive_turning_anims(vehicle) {
     }
 
     animTimeGoal = abs((steerValue - STEER_MIN) / (STEER_MIN - STEER_MAX));
-    if(newAnim == "turn_right2left_")
+    if(newAnim == "turn_right2left_") {
       animTimeGoal = 1.0 - animTimeGoal;
+    }
     animTimeGoal = cap_value(animTimeGoal, 0.0, 1.0);
 
     if(animTimeGoal < newAnimStartTime["L"]) {
@@ -606,10 +627,11 @@ drive_shooting_update_anims(vehicle) {
 
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);
 
-      if(vehicle.snowmobileAmmoCount == 1)
+      if(vehicle.snowmobileAmmoCount == 1) {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_last_fire"), 1.0, 0.0, 1.0);
-      else
+      } else {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_fire"), 1.0, 0.0, 1.0);
+      }
 
       self drive_magic_bullet(vehicle);
 
@@ -673,8 +695,9 @@ drive_sleeve_anims(vehicle) {
     speed = vehicle Vehicle_GetSpeed();
 
     speedLerp = speed / SLEEVE_FLAP_SPEED;
-    if(speedLerp > 1.0)
+    if(speedLerp > 1.0) {
       speedLerp = 1.0;
+    }
 
     rate = (SLEEVE_FLAP_MAX_RATE - SLEEVE_FLAP_MIN_RATE) * speedLerp + SLEEVE_FLAP_MIN_RATE;
     weight = (SLEEVE_FLAP_MAX_WEIGHT - SLEEVE_FLAP_MIN_WEIGHT) * speedLerp + SLEEVE_FLAP_MIN_WEIGHT;
@@ -691,8 +714,9 @@ drive_speedometer_anims(vehicle) {
     speed = vehicle Vehicle_GetSpeed();
     speedLerp = speed / SPEEDOMETER_MAX_SPEED;
 
-    if(speedLerp > 1.0)
+    if(speedLerp > 1.0) {
       speedLerp = 1.0;
+    }
 
     if(speedLerp < 0.5) {
       weight = speedLerp / 0.5;
@@ -725,10 +749,11 @@ drive_tachometer_anims(vehicle) {
       weight = (throttle - TACH_RAND_DOWN) + RandomFloat(TACH_RAND_DOWN * 2.0);
     }
 
-    if(weight < 0.0)
+    if(weight < 0.0) {
       weight = 0.0;
-    else if(weight > 1.0)
+    } else if(weight > 1.0) {
       weight = 1.0;
+    }
 
     vehicle SetAnim(vehicle getanim("rpm_min"), (1.0 - weight), blend, 1.0);
     vehicle SetAnim(vehicle getanim("rpm_max"), weight, blend, 1.0);
@@ -827,17 +852,21 @@ should_stop_snowmobile_attack_hint_player2() {
 }
 
 should_stop_snowmobile_attack_hint() {
-  if(isDefined(self.reverse_hint_string))
+  if(isDefined(self.reverse_hint_string)) {
     return true;
+  }
 
-  if(isDefined(level.no_snowmobile_attack_hint))
+  if(isDefined(level.no_snowmobile_attack_hint)) {
     return true;
+  }
 
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     return true;
+  }
 
-  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
+  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line")) {
     return true;
+  }
 
   return self ent_flag("player_shot_on_snowmobile");
 }
@@ -851,8 +880,9 @@ should_stop_snowmobile_drive_hint_player2() {
 }
 
 should_stop_snowmobile_drive_hint() {
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     return true;
+  }
 
   return self.vehicle.veh_speed > 10;
 }

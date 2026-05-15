@@ -8,10 +8,11 @@
 
 blizzard_main() {
   blizzard_flags();
-  if(isDefined(level.blizzard_fx_override_thread))
+  if(isDefined(level.blizzard_fx_override_thread)) {
     [[level.blizzard_fx_override_thread]]();
-  else
+  } else {
     fx_init();
+  }
   blizzard_level_set("none");
   thread blizzard_start();
 }
@@ -21,8 +22,9 @@ blizzard_flags() {
 }
 
 blizzard_start() {
-  if(!isDefined(level.players))
+  if(!isDefined(level.players)) {
     level waittill("level.players initialized");
+  }
 
   array_thread(level.players, ::blizzard_start_proc);
   thread pause_blizzard_ground_fx();
@@ -253,14 +255,17 @@ blizzard_level_get_count(type) {
 
 blizzard_overlay_alpha(time, alpha, skipCap) {
   player = self;
-  if(!isPlayer(player))
+  if(!isPlayer(player)) {
     player = level.player;
+  }
 
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 1;
+  }
 
-  if(!isDefined(skipCap))
+  if(!isDefined(skipCap)) {
     level.blizzard_overlay_alpha_cap = alpha;
+  }
 
   overlay = get_frozen_overlay(player);
   overlay.x = 0;
@@ -281,8 +286,9 @@ blizzard_overlay_alpha(time, alpha, skipCap) {
 blizzard_overlay_clear(timer) {
   if(!isDefined(timer) || !timer) {
     player = self;
-    if(!isPlayer(player))
+    if(!isPlayer(player)) {
       player = level.player;
+    }
     overlay = get_frozen_overlay(player);
     overlay Destroy();
     return;
@@ -292,8 +298,9 @@ blizzard_overlay_clear(timer) {
 }
 
 get_frozen_overlay(player) {
-  if(!isDefined(player.overlay_frozen))
+  if(!isDefined(player.overlay_frozen)) {
     player.overlay_frozen = NewClientHudElem(player);
+  }
 
   return player.overlay_frozen;
 }
@@ -310,11 +317,13 @@ pause_blizzard_ground_fx() {
   for(;;) {
     flag_wait("pause_blizzard_ground_fx");
 
-    foreach(oneshot in fx)
-    oneshot pauseEffect();
+    foreach(oneshot in fx) {
+      oneshot pauseEffect();
+    }
     flag_waitopen("pause_blizzard_ground_fx");
-    foreach(oneshot in fx)
-    oneshot restartEffect();
+    foreach(oneshot in fx) {
+      oneshot restartEffect();
+    }
   }
 }
 
@@ -324,8 +333,9 @@ blizzard_set() {
 
 blizzard_ice_overlay_blend(progress, inner, outer) {
   cap = level.blizzard_overlay_alpha_cap;
-  if(!isDefined(cap))
+  if(!isDefined(cap)) {
     cap = 1;
+  }
 
   if(IsSubStr(inner, "exterior")) {
     blizzard_overlay_alpha(1, (1 - progress) * cap, true);

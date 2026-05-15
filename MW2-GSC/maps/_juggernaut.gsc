@@ -14,8 +14,9 @@ main() {
   }
   level.juggernaut_initialized = true;
 
-  if(!isDefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions)) {
     level.subclass_spawn_functions = [];
+  }
 
   level.subclass_spawn_functions["juggernaut"] = ::subclass_juggernaut;
   level.juggernaut_next_alert_time = 0;
@@ -87,10 +88,12 @@ subclass_juggernaut() {
 
   level notify("juggernaut_died");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(!isDefined(attacker))
+  }
+  if(!isDefined(attacker)) {
     return;
+  }
   if(!isPlayer(attacker)) {
     return;
   }

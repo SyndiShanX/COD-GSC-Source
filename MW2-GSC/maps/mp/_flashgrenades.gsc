@@ -44,10 +44,11 @@ monitorFlash() {
     hurtattacker = false;
     hurtvictim = true;
 
-    if(amount_angle < 0.5)
+    if(amount_angle < 0.5) {
       amount_angle = 0.5;
-    else if(amount_angle > 0.8)
+    } else if(amount_angle > 0.8) {
       amount_angle = 1;
+    }
 
     duration = amount_distance * amount_angle * 6;
 
@@ -55,10 +56,11 @@ monitorFlash() {
       continue;
     }
     rumbleduration = undefined;
-    if(duration > 2)
+    if(duration > 2) {
       rumbleduration = 0.75;
-    else
+    } else {
       rumbleduration = 0.25;
+    }
 
     assert(isDefined(self.pers["team"]));
     if(level.teamBased && isDefined(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"] && attacker != self) {
@@ -78,18 +80,22 @@ monitorFlash() {
       attacker notify("flash_hit");
     }
 
-    if(hurtvictim)
+    if(hurtvictim) {
       self thread applyFlash(duration, rumbleduration);
-    if(hurtattacker)
+    }
+    if(hurtattacker) {
       attacker thread applyFlash(duration, rumbleduration);
+    }
   }
 }
 
 applyFlash(duration, rumbleduration) {
-  if(!isDefined(self.flashDuration) || duration > self.flashDuration)
+  if(!isDefined(self.flashDuration) || duration > self.flashDuration) {
     self.flashDuration = duration;
-  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration)
+  }
+  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration) {
     self.flashRumbleDuration = rumbleduration;
+  }
 
   wait .05;
 

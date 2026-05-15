@@ -40,8 +40,9 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   return positions;
 }

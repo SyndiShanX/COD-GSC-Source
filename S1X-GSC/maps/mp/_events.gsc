@@ -599,7 +599,7 @@ airToAirEvent(killId, weapon, meansOfDeath) {
     level thread maps\mp\gametypes\_rank::awardGameEvent("air_to_air_kill", self, weapon, undefined, meansOfDeath);
 
     if(WeaponClass == "weapon_smg" || WeaponClass == "weapon_shotgun") {
-      if(isDefined(level.challengeInfo["ch_dogfight_" + baseWeapon]))
+      if(isDefined(level.challengeInfo["ch_dogfight_" + baseWeapon])) {}
     }
     self maps\mp\gametypes\_missions::processChallenge("ch_dogfight_" + baseWeapon);
   }
@@ -845,7 +845,7 @@ postDeathKillEvent(killId) {
 
   baseWeapon = getBaseWeaponName(self GetCurrentWeapon());
   if(baseWeapon == "iw5_microdronelauncher" || baseWeapon == "iw5_exocrossbow") {
-    if(isDefined(level.challengeInfo["ch_afterlife_" + baseWeapon]))
+    if(isDefined(level.challengeInfo["ch_afterlife_" + baseWeapon])) {}
   }
   self maps\mp\gametypes\_missions::processChallenge("ch_afterlife_" + baseWeapon);
 }
@@ -915,7 +915,7 @@ multiKillEvent(killId, killCount, weapon, was_ads) {
       self maps\mp\gametypes\_missions::processChallenge("ch_" + level.gametype + "_double");
 
       if(weapon_class == "weapon_smg" || weapon_class == "weapon_shotgun" || weapon_class == "weapon_sniper" || baseWeapon == "iw5_microdronelauncher" || baseWeapon == "iw5_exocrossbow") {
-        if(isDefined(level.challengeInfo["ch_double_" + baseWeapon]))
+        if(isDefined(level.challengeInfo["ch_double_" + baseWeapon])) {}
       }
       self maps\mp\gametypes\_missions::processChallenge("ch_double_" + baseWeapon);
 

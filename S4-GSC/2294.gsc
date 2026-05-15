@@ -503,8 +503,9 @@ _id_43DE() {
     return;
   }
   if(isDefined(self)) {
-    if(self._id_04B9 == "c6") {} else if(self._id_04B9 == "c8")
+    if(self._id_04B9 == "c6") {} else if(self._id_04B9 == "c8") {
       _id_2E78();
+    }
   }
 
   _id_06BD::_id_23B1();

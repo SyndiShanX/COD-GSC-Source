@@ -379,7 +379,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
     if(sMeansOfDeath == "MOD_SUICIDE") {
       victim.idFlags = 0;
     } else if(sMeansOfDeath == "MOD_GRENADE") {
-      if((IsSubStr(sWeapon, "frag_grenade") || IsSubStr(sWeapon, "thermobaric_grenade")) && iDamage == 100000)
+      if((IsSubStr(sWeapon, "frag_grenade") || IsSubStr(sWeapon, "thermobaric_grenade")) && iDamage == 100000) {}
     }
     victim.idFlags = 0;
     else if(sWeapon == "nuke_mp") {
@@ -3393,19 +3393,19 @@ processDamageTaken(inflictor, attacker, damage, iDFlags, meansOfDeath, weapon, p
 
       if(isDefined(self.model) && weapon_class == "weapon_launcher") {
         if(isSubStr(self.model, "uav")) {
-          if(isDefined(level.challengeInfo["ch_uav_" + baseWeapon]))
+          if(isDefined(level.challengeInfo["ch_uav_" + baseWeapon])) {}
         }
         attacker maps\mp\gametypes\_missions::processChallenge("ch_uav_" + baseWeapon);
         if(isSubStr(self.model, "warbird")) {
-          if(isDefined(level.challengeInfo["ch_warbird_" + baseWeapon]))
+          if(isDefined(level.challengeInfo["ch_warbird_" + baseWeapon])) {}
         }
         attacker maps\mp\gametypes\_missions::processChallenge("ch_warbird_" + baseWeapon);
         if(isSubStr(self.model, "orbital_platform")) {
-          if(isDefined(level.challengeInfo["ch_paladin_" + baseWeapon]))
+          if(isDefined(level.challengeInfo["ch_paladin_" + baseWeapon])) {}
         }
         attacker maps\mp\gametypes\_missions::processChallenge("ch_paladin_" + baseWeapon);
         if(isSubStr(self.model, "drone") && !isSubStr(self.model, "uav")) {
-          if(isDefined(level.challengeInfo["ch_drone_" + baseWeapon]))
+          if(isDefined(level.challengeInfo["ch_drone_" + baseWeapon])) {}
         }
         attacker maps\mp\gametypes\_missions::processChallenge("ch_drone_" + baseWeapon);
       }

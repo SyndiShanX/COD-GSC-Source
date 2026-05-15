@@ -29,15 +29,17 @@ turret_guy_in_near_humvee() {
 }
 
 player_fails_if_he_kills_me(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isalive(attacker))
+  if(!isalive(attacker)) {
     return;
+  }
   if(attacker != level.player) {
     return;
   }
   vehicle = self.ridingVehicle;
   if(isDefined(vehicle)) {
-    if(vehicle ent_flag("can_shoot_the_baddies"))
+    if(vehicle ent_flag("can_shoot_the_baddies")) {
       return;
+    }
   }
 
   wait(1);
@@ -59,8 +61,9 @@ aim_ahead_until_you_get_enemy() {
   vehicle = self.ridingVehicle;
   add_damage_function(::player_fails_if_he_kills_me);
 
-  if(vehicle.script_index == 0)
+  if(vehicle.script_index == 0) {
     vehicle.target_override = "turret_aim_target_first";
+  }
 
   angles = vehicle.angles;
   angles = (0, angles[1], 0);
@@ -76,8 +79,9 @@ aim_ahead_until_you_get_enemy() {
     if(isDefined(turret)) {
       break;
     }
-    if(!isDefined(self.ridingVehicle))
+    if(!isDefined(self.ridingVehicle)) {
       return;
+    }
     wait(0.05);
   }
 
@@ -119,13 +123,15 @@ gunner_aims_at_targets(default_target, vehicle) {
   self endon("death");
 
   targetname = "turret_aim_target";
-  if(isDefined(vehicle.target_override))
+  if(isDefined(vehicle.target_override)) {
     targetname = vehicle.target_override;
+  }
 
   targets = getEntArray(targetname, "targetname");
   foreach(target in targets) {
-    if(!isDefined(target.script_noteworthy))
+    if(!isDefined(target.script_noteworthy)) {
       target.script_noteworthy = "";
+    }
   }
 
   level.toffset++;
@@ -164,8 +170,9 @@ gunner_aims_at_targets(default_target, vehicle) {
     }
 
     if(vehicle == level.crazy_ride_convoy["detour"]) {
-      if(flag("shot_rings_out"))
+      if(flag("shot_rings_out")) {
         return;
+      }
     }
 
     self SetTargetEntity(next_target);
@@ -201,8 +208,9 @@ hargrove_spawner() {
 protect_player_while_scene_is_active() {
   timeoutEnt = spawnStruct();
   timeout_time = 10;
-  if(getdvarint("newintro"))
+  if(getdvarint("newintro")) {
     timeout_time = 18;
+  }
 
   timeoutEnt thread notify_delay("timeout", timeout_time);
   timeoutEnt endon("timeout");
@@ -265,8 +273,9 @@ roadkill_foley_shepherd_intro() {
 ent_flag_set_trigger() {
   for(;;) {
     self waittill("trigger", other);
-    if(!first_touch(other))
+    if(!first_touch(other)) {
       continue;
+    }
     other ent_flag_set(self.script_flag);
   }
 }
@@ -287,8 +296,9 @@ safe_delete() {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   self Delete();
 }
 
@@ -450,8 +460,9 @@ intro_rundown_friendly_spawner() {
 }
 
 before_bridge_start() {
-  if(level.start_point == "intro")
+  if(level.start_point == "intro") {
     return true;
+  }
   return level.start_point == "riverbank";
 }
 
@@ -600,8 +611,9 @@ slow_down_bridge() {
 }
 
 enemy_bridge_spawner_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isalive(attacker))
+  if(!isalive(attacker)) {
     return;
+  }
   if(attacker != level.player) {
     return;
   }
@@ -699,8 +711,9 @@ bridge_attack_warning_dialogue() {
 
   dunn_line("roadkill_cpd_farside");
 
-  if(flag("player_attacked_bridge_enemy"))
+  if(flag("player_attacked_bridge_enemy")) {
     return;
+  }
   level endon("player_attacked_bridge_enemy");
 
   wait(2.2);
@@ -773,8 +786,9 @@ fluorescentFlicker() {
 
 lights() {
   lights = getEntArray("flickerlight1", "targetname");
-  foreach(light in lights)
-  light thread fluorescentFlicker();
+  foreach(light in lights) {
+    light thread fluorescentFlicker();
+  }
 }
 
 get_orgs_from_ents(ents, dontDelete) {
@@ -784,8 +798,9 @@ get_orgs_from_ents(ents, dontDelete) {
     struct.origin = ent.origin;
     struct.radius = ent.radius;
     orgs[orgs.size] = struct;
-    if(!isDefined(dontDelete))
+    if(!isDefined(dontDelete)) {
       ent Delete();
+    }
   }
   return orgs;
 }
@@ -976,8 +991,9 @@ roadkill_officers_walk_up() {
 }
 
 detach_binocs() {
-  if(isDefined(self.binoc))
+  if(isDefined(self.binoc)) {
     self Detach("weapon_binocular", "tag_inhand");
+  }
   self.binoc = undefined;
 }
 
@@ -1035,8 +1051,9 @@ candy_bar_scene() {
 
   self thread anim_loop(guys, "idle");
   flag_wait("player_gets_in");
-  if(IsAlive(candyMan))
+  if(IsAlive(candyMan)) {
     candyMan Delete();
+  }
 }
 
 cover_scene() {
@@ -1046,8 +1063,9 @@ cover_scene() {
 
   newguys = [];
   foreach(guy in guys) {
-    if(IsSentient(guy))
+    if(IsSentient(guy)) {
       continue;
+    }
     newguys[newguys.size] = guy;
 
     guy magic_bullet_shield();
@@ -1058,8 +1076,9 @@ cover_scene() {
   guys[0].animname = "cover_attack2";
   guys[1].animname = "cover_attack3";
 
-  if(isDefined(guys[2]))
+  if(isDefined(guys[2])) {
     guys[2].animname = "cover_attack1";
+  }
 
   self.g = 5;
   self thread anim_loop(guys, "idle");
@@ -1138,8 +1157,9 @@ radio_scene() {
   }
 
   foreach(guy in non_candy) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
     guy Delete();
   }
@@ -1176,14 +1196,18 @@ guys_film_explosion() {
 
   start_time = GetTime();
   cheer_time = 6.4;
-  if(guy.animname == "film4")
+  if(guy.animname == "film4") {
     cheer_time = 8.5;
-  if(guy.animname == "film3")
+  }
+  if(guy.animname == "film3") {
     cheer_time = 6.2;
-  if(guy.animname == "film2")
+  }
+  if(guy.animname == "film2") {
     cheer_time = 6.9;
-  if(guy.animname == "film1")
+  }
+  if(guy.animname == "film1") {
     cheer_time = 6.4;
+  }
 
   guy.noTeleport = true;
 
@@ -1205,8 +1229,9 @@ guys_film_explosion() {
   guy StopAnimScripted();
   guy notify("killanimscript");
 
-  if(isDefined(guy.magic_bullet_shield))
+  if(isDefined(guy.magic_bullet_shield)) {
     guy stop_magic_bullet_shield();
+  }
 
   guy.fixednode = false;
   node = GetNode("bridge_delete_node", "targetname");
@@ -1239,8 +1264,9 @@ rpgguy() {
 }
 
 riverside_house_manager(spawners) {
-  if(flag("riverbank_baddies_retreat"))
+  if(flag("riverbank_baddies_retreat")) {
     return;
+  }
   level endon("riverbank_baddies_retreat");
 
   for(;;) {
@@ -1261,8 +1287,9 @@ riverside_house_manager(spawners) {
 }
 
 riverside_flood_manager(spawners) {
-  if(flag("riverbank_baddies_retreat"))
+  if(flag("riverbank_baddies_retreat")) {
     return;
+  }
   level endon("riverbank_baddies_retreat");
 
   for(;;) {
@@ -1283,8 +1310,9 @@ riverside_flood_manager(spawners) {
 }
 
 riverside_flood_think(delay_min, delay_max) {
-  if(flag("riverbank_baddies_retreat"))
+  if(flag("riverbank_baddies_retreat")) {
     return;
+  }
   level endon("riverbank_baddies_retreat");
 
   self endon("death");
@@ -1336,15 +1364,17 @@ disable_all_vehicle_mgs() {
   vehicles = getEntArray("script_vehicle", "code_classname");
 
   foreach(vehicle in vehicles) {
-    if(IsSubStr(vehicle.classname, "technical"))
+    if(IsSubStr(vehicle.classname, "technical")) {
       continue;
+    }
     vehicle mgoff();
   }
 }
 
 guy_gets_in_player_humvee() {
-  if(!isDefined(self.magic_bullet_shield))
+  if(!isDefined(self.magic_bullet_shield)) {
     self magic_bullet_shield();
+  }
 
   flag_wait("convoy_moment");
 
@@ -1356,8 +1386,9 @@ guy_gets_in_player_humvee() {
   self waittill("goal");
 
   thread guy_runtovehicle_load(self, level.player_humvee);
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
 
   wait(0.4);
   PrintLn("goalpos " + self.goalpos);
@@ -1391,8 +1422,9 @@ humvee_rider_waver() {
 
   flag_wait("player_gets_in");
   wait(3);
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
 
   self Delete();
 }
@@ -1476,8 +1508,9 @@ chair_waits_for_close() {
   level endon("player_gets_in");
   self endon("death");
   for(;;) {
-    if(Distance(self.origin, level.player.origin) < 80)
+    if(Distance(self.origin, level.player.origin) < 80) {
       self notify("trigger");
+    }
     wait(0.05);
   }
 }
@@ -1552,8 +1585,9 @@ best_friendly_to_run(array) {
 }
 
 allies_leave_riverbank() {
-  if(flag("player_gets_in"))
+  if(flag("player_gets_in")) {
     return;
+  }
   level endon("player_gets_in");
 
   array = [];
@@ -1563,8 +1597,9 @@ allies_leave_riverbank() {
 
   for(;;) {
     foreach(guy in array) {
-      if(!isalive(guy))
+      if(!isalive(guy)) {
         array[guy.unique_id] = undefined;
+      }
     }
 
     guy = best_friendly_to_run(array);
@@ -1662,8 +1697,9 @@ trigger_guy_gets_in_vehicle() {
     }
 
     if(self.index >= level.guy_gets_in_vehicle_targets.size) {
-      if(isDefined(guy.magic_bullet_shield))
+      if(isDefined(guy.magic_bullet_shield)) {
         guy stop_magic_bullet_shield();
+      }
       guy Delete();
       continue;
     }
@@ -1683,8 +1719,9 @@ goalspam() {
 }
 
 trigger_handles_guys_running_up_stairs_to_get_in_vehicles() {
-  if(flag("player_gets_in"))
+  if(flag("player_gets_in")) {
     return;
+  }
   level endon("player_gets_in");
 
   touched = [];
@@ -1709,8 +1746,9 @@ guy_gets_in_convoy(mynode) {
   self.fixednode = true;
   self.gets_in_vehicle = true;
   self.attackeraccuracy = 0;
-  if(!isDefined(self.magic_bullet_shield))
+  if(!isDefined(self.magic_bullet_shield)) {
     self magic_bullet_shield();
+  }
   self SetGoalNode(mynode);
   self.goalradius = 16;
 
@@ -1749,13 +1787,15 @@ guy_gets_in_convoy(mynode) {
 
   self waittill("boarding_vehicle");
   self ent_flag_set("got_in_vehicle");
-  if(self.script_startingposition == 4)
+  if(self.script_startingposition == 4) {
     self thread convoy_gunner_think();
+  }
 }
 
 wait_for_index(index) {
-  if(flag("player_gets_in"))
+  if(flag("player_gets_in")) {
     return;
+  }
   level endon("player_gets_in");
 
   wait(index * 0.35);
@@ -1767,8 +1807,9 @@ friendly_open_humvee() {
   house_node = GetNode("house_node", "targetname");
 
   foreach(guy in self.riders) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
     if(!isai(guy)) {
       continue;
     }
@@ -1779,12 +1820,14 @@ friendly_open_humvee() {
 vehicle_break() {
   touched = [];
   brake_time = self.script_timer;
-  if(!isDefined(brake_time))
+  if(!isDefined(brake_time)) {
     brake_time = 0.3;
+  }
 
   brake_amount = self.script_brake;
-  if(!isDefined(brake_amount))
+  if(!isDefined(brake_amount)) {
     brake_amount = 0.3;
+  }
 
   for(;;) {
     self waittill("trigger", other);
@@ -1843,8 +1886,9 @@ vehicle_spark_trigger() {
     }
     if(technical_only) {
       if(isDefined(level.traffic_jam_truck)) {
-        if(other != level.traffic_jam_truck)
+        if(other != level.traffic_jam_truck) {
           continue;
+        }
       } else
         continue;
     }
@@ -1890,8 +1934,9 @@ vehicle_sparks(org1, org2, preset) {
       }
     }
 
-    if(!no_spark_frame)
+    if(!no_spark_frame) {
       no_spark_frame = get_next_no_spark_frame();
+    }
 
     wait(0.05);
   }
@@ -1921,8 +1966,9 @@ humvee_gunner_idle_until_player_gets_in(owner, turret) {
     wait(2);
     level.anime = anime;
     owner turret_gunner_custom_anim(turret, anime);
-    if(flag("shot_rings_out"))
+    if(flag("shot_rings_out")) {
       return;
+    }
   }
 }
 
@@ -1966,8 +2012,9 @@ detour_vehicle_driver_animates() {
   ent = spawn("script_origin", struct.origin);
   turret SetTargetEntity(ent);
 
-  if(GetDebugDvarInt("showline"))
+  if(GetDebugDvarInt("showline")) {
     turret thread entline(ent);
+  }
 
   count = 0;
 
@@ -2018,8 +2065,9 @@ turret_gunner_cycles_custom_anims(owner, turret) {
     wait(2);
     level.anime = anime;
     owner turret_gunner_custom_anim(turret, anime);
-    if(flag("shot_rings_out"))
+    if(flag("shot_rings_out")) {
       return;
+    }
   }
 }
 turret_preload_animate() {
@@ -2136,8 +2184,9 @@ cant_die_unless_player_sees_me() {
   if(in_danger) {
     self.IgnoreRandomBulletDamage = false;
     self.attackeraccuracy = 1;
-    if(self.health > 100)
+    if(self.health > 100) {
       self.health = 100;
+    }
   } else {
     self.IgnoreRandomBulletDamage = true;
     self.attackeraccuracy = 0;
@@ -2214,8 +2263,9 @@ setup_ride_path_targets(noteworthy) {
       }
       found_node = true;
 
-      if(isDefined(spawner.target))
+      if(isDefined(spawner.target)) {
         remap_targets(spawner.target, node.targetname);
+      }
       spawner.target = node.targetname;
       break;
     }
@@ -2252,11 +2302,13 @@ ride_killer() {
 
   ai = GetAIArray("axis");
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
-    if(!isDefined(guy.dont_ride_kill))
+    if(!isDefined(guy.dont_ride_kill)) {
       guy Kill();
+    }
   }
 }
 
@@ -2335,10 +2387,11 @@ roadkill_ride_kill_drones() {
   flag_wait("kill_drones");
   angry_drones = getEntArray("angry_drone", "script_noteworthy");
   foreach(drone in angry_drones) {
-    if(IsAlive(drone))
+    if(IsAlive(drone)) {
       drone Kill();
-    else
+    } else {
       drone Delete();
+    }
   }
 }
 
@@ -2388,8 +2441,9 @@ crash_physics_explosion() {
 
     model = models[index];
     index++;
-    if(index >= models.size)
+    if(index >= models.size) {
       index = 0;
+    }
 
     ent = spawn("script_model", physics_spawner.origin);
     ent.origin += right * RandomFloatRange(-40, 40);;
@@ -2428,15 +2482,17 @@ run_away_die() {
 player_doesnt_die_in_red_flashing() {
   level endon("ride_ends");
   for(;;) {
-    if(level.player ent_flag("player_has_red_flashing_overlay"))
+    if(level.player ent_flag("player_has_red_flashing_overlay")) {
       level.player.attackeraccuracy = 0;
+    }
     wait(0.05);
   }
 }
 
 school_guy_targets_school() {
-  if(flag("shepherd_moves_out"))
+  if(flag("shepherd_moves_out")) {
     return;
+  }
   level endon("shepherd_moves_out");
 
   targets = getEntArray("school_target", "targetname");
@@ -2469,8 +2525,9 @@ ambush_ally_spawner_think() {
   guy_runtovehicle_load(self, vehicle);
   self stop_magic_bullet_shield();
   level.ambush_allies_outside_vehicle--;
-  if(!level.ambush_allies_outside_vehicle)
+  if(!level.ambush_allies_outside_vehicle) {
     flag_set("shepherd_vehicles_leave");
+  }
 
   flag_wait("the_end");
   safe_delete();
@@ -2491,8 +2548,9 @@ join_school_threatbias_group_and_damage_func() {
 }
 
 remove_player_from_threatbias_group(amt, attacker, force, b, c, d, e) {
-  if(!isalive(attacker))
+  if(!isalive(attacker)) {
     return;
+  }
   if(attacker != level.player) {
     return;
   }
@@ -2516,8 +2574,9 @@ friendlies_traverse_school() {
       }
 
       volume = trigger get_color_volume_from_trigger();
-      if(isDefined(volume))
+      if(isDefined(volume)) {
         volume waittill_volume_dead_or_dying();
+      }
 
       trigger activate_trigger();
     }
@@ -2541,8 +2600,9 @@ dunn_says_clear_on_room_clear() {
 
   touchers = 0;
   foreach(guy in guys) {
-    if(guy istouching(volume))
+    if(guy istouching(volume)) {
       touchers++;
+    }
   }
 
   if(touchers == 2) {
@@ -2567,8 +2627,9 @@ hidden_room_spawner() {
 can_see_player() {
   self endon("death");
   for(;;) {
-    if(self CanSee(level.player))
+    if(self CanSee(level.player)) {
       return;
+    }
     wait(0.05);
   }
 }
@@ -2654,8 +2715,9 @@ player_pushes_truck_down_alley() {
 
   for(;;) {
     self waittill("trigger", other);
-    if(!isDefined(level.traffic_jam_truck))
+    if(!isDefined(level.traffic_jam_truck)) {
       continue;
+    }
     if(other == level.traffic_jam_truck) {
       break;
     }
@@ -2770,8 +2832,9 @@ remind_player_to_switch_to_javelin() {
     timer = 9 + RandomIntRange(2, 5);
     frames = timer * 20;
     for(i = 0; i < frames; i++) {
-      if(level.player GetCurrentWeapon() == "javelin")
+      if(level.player GetCurrentWeapon() == "javelin") {
         return;
+      }
       wait(0.05);
     }
 
@@ -2779,18 +2842,21 @@ remind_player_to_switch_to_javelin() {
     index++;
     index %= lines.size;
 
-    while(level.dialogue_function_stack_struct.function_stack.size)
+    while(level.dialogue_function_stack_struct.function_stack.size) {
       wait(0.05);
+    }
 
-    if(level.player GetCurrentWeapon() == "javelin")
+    if(level.player GetCurrentWeapon() == "javelin") {
       return;
+    }
     foley_line(theLine);
   }
 }
 
 foley_should_talk() {
-  if(GetTime() <= level.last_missile_fire_time + 19000)
+  if(GetTime() <= level.last_missile_fire_time + 19000) {
     return false;
+  }
 
   return !level.dialogue_function_stack_struct.function_stack.size;
 }
@@ -2848,8 +2914,9 @@ put_noteworthy_in_magic_chatter() {
 }
 
 get_convoy_dialogue_guy(name) {
-  if(IsAlive(level.convoy_dialogue_guy[name]))
+  if(IsAlive(level.convoy_dialogue_guy[name])) {
     return level.convoy_dialogue_guy[name];
+  }
 
   index = 0;
   ai = GetAIArray("allies");
@@ -2894,8 +2961,9 @@ south(dist) {
 
 charpos(guy) {
   org = level.player.origin;
-  if(flag("100ton_bomb_goes_off"))
+  if(flag("100ton_bomb_goes_off")) {
     org = level.locked_player_position;
+  }
 
   unit = 128;
   switch (guy) {
@@ -3071,8 +3139,9 @@ convoy_moves_out_dialogue() {
 
   wait(time);
 
-  if(flag("player_gets_in"))
+  if(flag("player_gets_in")) {
     return;
+  }
   level endon("player_gets_in");
 
   thread magic_dialogue_queue("roadkill_fly_movingout", "fly");
@@ -3088,8 +3157,9 @@ random_ai_line(msg) {
   ai = GetAIArray("allies");
   ai = get_array_of_closest(level.player.origin, ai, undefined, 5);
   guy = random(ai);
-  if(!isalive(guy))
+  if(!isalive(guy)) {
     return;
+  }
   guy generic_dialogue_queue(msg);
 }
 
@@ -3124,8 +3194,9 @@ warn_if_player_shoots_prematurely() {
 }
 
 player_shoots_at_non_enemy() {
-  if(!level.player attackButtonPressed())
+  if(!level.player attackButtonPressed()) {
     return false;
+  }
 
   ai = GetAIArray("axis");
   angles = level.player GetPlayerAngles();
@@ -3137,8 +3208,9 @@ player_shoots_at_non_enemy() {
     forward = anglesToForward(angles);
 
     dot = VectorDot(dotforward, forward);
-    if(dot > 0.86)
+    if(dot > 0.86) {
       return false;
+    }
   }
 
   return true;
@@ -3159,8 +3231,9 @@ fail_player_for_excessive_firing() {
     } else {
       count -= 0.25;
     }
-    if(count <= 0)
+    if(count <= 0) {
       count = 0;
+    }
 
     if(count > sustained_firing_frames) {
       break;
@@ -3196,8 +3269,9 @@ fence_rattle() {
   amount = -25;
   for(;;) {
     time = abs(amount) * 0.0475;
-    if(time < 0.75)
+    if(time < 0.75) {
       time = 0.75;
+    }
     pivot RotateTo((0, 90, amount), time, time * 0.5, time * 0.5);
     amount *= -0.65;
     wait(time);
@@ -3333,8 +3407,9 @@ street_walk_guy() {
 }
 
 ps3_hide() {
-  if(!level.console)
+  if(!level.console) {
     return;
+  }
   if(!level.ps3) {
     return;
   }
@@ -3603,8 +3678,9 @@ setup_player_killer_orgs() {
 
 bmp_becomes_javelin_targettable() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delayed_targeting") {
-    if(level.start_point != "move_out")
+    if(level.start_point != "move_out") {
       wait(10);
+    }
   }
   wait(1);
   OFFSET = (0, 0, 60);
@@ -3730,8 +3806,9 @@ ai_invulnerable() {
   if(isDefined(self.script_godmode)) {
     return;
   }
-  if(!isDefined(self.magic_bullet_shield))
+  if(!isDefined(self.magic_bullet_shield)) {
     self magic_bullet_shield();
+  }
 
   self.attackeraccuracy = 0;
   self.IgnoreRandomBulletDamage = true;
@@ -3880,8 +3957,9 @@ shepherd_line_proc(msg) {
   if(IsAlive(level.shepherd)) {
     level.shepherd generic_dialogue_queue(msg);
   } else {
-    if(!isDefined(level.scr_radio[msg]))
+    if(!isDefined(level.scr_radio[msg])) {
       level.scr_radio[msg] = level.scr_sound["generic"][msg];
+    }
     radio_dialogue(msg);
   }
 }
@@ -4037,8 +4115,9 @@ player_shoot_detection_trigger() {
 }
 
 wait_for_player_to_force_flee() {
-  if(flag("roadkill_school_9"))
+  if(flag("roadkill_school_9")) {
     return;
+  }
   level endon("roadkill_school_9");
 
   add_wait(::flag_wait, "player_forces_enemy_to_flee");
@@ -4049,8 +4128,9 @@ wait_for_player_to_force_flee() {
 player_shoots_at_enemies_in_school() {
   for(;;) {
     self waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
+    }
     if(other == level.player) {
       break;
     }
@@ -4132,8 +4212,9 @@ fleeing_baddie_spawner() {
 stop_sprinting_trigger() {
   for(;;) {
     self waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
+    }
     if(first_touch(other)) {
       other delayThread(1.4, ::disable_heat_behavior);
     }
@@ -4173,8 +4254,9 @@ extra_retreat_spawner() {
 wave_right_trigger() {
   for(;;) {
     self waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
+    }
     if(other == level.foley) {
       break;
     }
@@ -4194,8 +4276,9 @@ wave_right_trigger() {
 
   targ = getstruct(self.target, "targetname");
   targ anim_generic_reach(other, "cqb_wave");
-  if(IsAlive(other))
+  if(IsAlive(other)) {
     targ thread anim_generic(other, "cqb_wave");
+  }
   wait(0.9);
   other enable_ai_color();
   flag_set("roadkill_school_11");
@@ -4259,8 +4342,9 @@ rooftop_drone() {
 wobbly_fans() {
   fans = getEntArray("destructible_toy", "targetname");
   foreach(fan in fans) {
-    if(fan.destructible_type == "toy_ceiling_fan")
+    if(fan.destructible_type == "toy_ceiling_fan") {
       fan thread fan_wobbles();
+    }
   }
 }
 
@@ -4291,8 +4375,9 @@ fan_wobbles() {
 friendlies_get_on_exit_convoy_trigger() {
   for(;;) {
     self waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
+    }
     if(!first_touch(other)) {
       continue;
     }
@@ -4311,8 +4396,9 @@ friendly_gets_on_vehicle() {
   foreach(ending_vehicle in level.ending_vehicles) {
     used_positions = 0;
     foreach(pos in ending_vehicle.usedpositions) {
-      if(!pos)
+      if(!pos) {
         used_positions++;
+      }
     }
 
     if(used_positions) {
@@ -4450,8 +4536,9 @@ gunner_becomes_invul() {
   for(;;) {
     gunner = turret GetTurretOwner();
     if(IsAlive(gunner)) {
-      if(!isDefined(gunner.magic_bullet_shield))
+      if(!isDefined(gunner.magic_bullet_shield)) {
         gunner magic_bullet_shield();
+      }
       return;
     }
     wait(0.05);
@@ -4460,12 +4547,15 @@ gunner_becomes_invul() {
 
 get_gunner_from_vehicle() {
   foreach(guy in self.riders) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-    if(!issentient(guy))
+    }
+    if(!issentient(guy)) {
       continue;
-    if(isDefined(guy GetTurret()))
+    }
+    if(isDefined(guy GetTurret())) {
       return guy;
+    }
   }
 }
 
@@ -4525,8 +4615,9 @@ turret_burns_out() {
 }
 
 vehicle_resumespeed_trigger() {
-  if(flag("convoy_slows_down_again"))
+  if(flag("convoy_slows_down_again")) {
     return;
+  }
   level endon("convoy_slows_down_again");
   for(;;) {
     self waittill("trigger", other);
@@ -4588,8 +4679,9 @@ player_convoy_encounters_baddies() {
 
   flag_wait("gunner_dies");
   if(IsAlive(gunner)) {
-    if(isDefined(gunner.magic_bullet_shield))
+    if(isDefined(gunner.magic_bullet_shield)) {
       gunner stop_magic_bullet_shield();
+    }
     eye = gunner getEye();
     MagicBullet("ak47", eye + (0, 0, 35), eye + (0, 0, -35));
   }
@@ -4848,8 +4940,9 @@ player_looks_at_me() {
   self endon("death");
 
   for(;;) {
-    if(within_fov_of_players(self.origin, 0.75))
+    if(within_fov_of_players(self.origin, 0.75)) {
       return;
+    }
     wait(0.05);
   }
 }
@@ -4876,8 +4969,9 @@ corner_hider_spawner() {
   turret SetTargetEntity(self);
   turret.dontshoot = true;
   owner = turret GetTurretOwner();
-  if(IsAlive(owner))
+  if(IsAlive(owner)) {
     owner.ignoreall = true;
+  }
 
   trigger = GetEnt("detour_shoots_alley_guy_trigger", "targetname");
   for(;;) {
@@ -4933,8 +5027,9 @@ jumper_shoots_car_fx() {
     }
     struct = getstruct(struct.target, "targetname");
 
-    if(count > 9)
+    if(count > 9) {
       level.player DoDamage(20 / level.player.damageMultiplier, self.origin, self, self);
+    }
   }
 
   for(;;) {
@@ -5155,8 +5250,9 @@ garage_pull_struct() {
     brush.start_origin = brush.origin;
     brush.origin += (0, 0, start_height);
 
-    if(brush.origin[2] > top_struct.origin[2])
+    if(brush.origin[2] > top_struct.origin[2]) {
       brush hide_notsolid();
+    }
   }
 
   flag_wait("pull_garage");
@@ -5348,8 +5444,9 @@ grenade_barrage_if_you_delay() {
 
   for(;;) {
     if(flag("player_inside_ambush_house")) {
-      if(count > frames - 35)
+      if(count > frames - 35) {
         count = frames - 35;
+      }
     } else {
       count++;
     }
@@ -5446,8 +5543,9 @@ handle_start_points_for_detour_humvee() {
 
   ride_vehicle_spawners = getEntArray("ride_vehicle_spawner", "targetname");
   foreach(spawner in ride_vehicle_spawners) {
-    if(spawner.script_index == 3)
+    if(spawner.script_index == 3) {
       spawner Delete();
+    }
   }
 }
 
@@ -5683,14 +5781,16 @@ stair_wave_spawner() {
 }
 
 wander_battlefield_until_time_to_stop(target) {
-  if(flag("bridgelayer_complete"))
+  if(flag("bridgelayer_complete")) {
     return;
+  }
   level endon("bridgelayer_complete");
 
   first_target = target;
   for(;;) {
-    if(!isDefined(target))
+    if(!isDefined(target)) {
       target = first_target;
+    }
 
     struct = getstruct(target, "targetname");
     if(isDefined(struct.script_delay)) {
@@ -5745,8 +5845,9 @@ ambusher_spawner() {
     self waittill("death");
 
     wait(2);
-    if(isDefined(self))
+    if(isDefined(self)) {
       self.ignoreme = true;
+    }
   }
 }
 
@@ -5799,8 +5900,9 @@ gaz_balcony_think(struct) {
   self.custom_scene = struct.animation;
   self.price_idle = struct.animation == "killhouse_sas_price_idle";
   self.first_scene = "killhouse_gaz_idleB";
-  if(self.price_idle)
+  if(self.price_idle) {
     self.first_scene = "killhouse_sas_price_idle";
+  }
 
   if(self.custom_scene == "killhouse_gaz_idleB") {
     wait(2.5);
@@ -5929,8 +6031,9 @@ shot_fired_trigger() {
   sounds["concrete"] = brick_sounds;
   sounds["metal"] = metal_sounds;
 
-  if(!isDefined(level.magic_sound_index))
+  if(!isDefined(level.magic_sound_index)) {
     level.magic_sound_index = [];
+  }
 
   if(!isDefined(level.magic_sound_index[sound])) {
     level.magic_sound_index[sound] = 0;
@@ -6057,8 +6160,9 @@ trigger_delete_axis_not_in_volume() {
   total = ai.size;
 
   foreach(guy in ai) {
-    if(guy IsTouching(volume))
+    if(guy IsTouching(volume)) {
       continue;
+    }
     guy Delete();
     count++;
   }
@@ -6075,30 +6179,36 @@ balcony_check() {
 }
 
 try_balcony_death() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
-  if(self.a.pose != "stand")
+  if(self.a.pose != "stand") {
     return false;
+  }
 
   if(isDefined(self.prevnode)) {
     angleAI = self.angles[1];
     angleNode = self.prevnode.angles[1];
     angleDiff = abs(angleAI - angleNode);
-    if(angleDiff > 80)
+    if(angleDiff > 80) {
       return false;
+    }
 
     d = Distance(self.origin, self.prevnode.origin);
-    if(d > 92)
+    if(d > 92) {
       return false;
+    }
   }
 
-  if(!isDefined(level.last_balcony_death))
+  if(!isDefined(level.last_balcony_death)) {
     level.last_balcony_death = GetTime();
+  }
   elapsedTime = GetTime() - level.last_balcony_death;
 
-  if(elapsedTime < 3 * 1000)
+  if(elapsedTime < 3 * 1000) {
     return false;
+  }
 
   deathAnims = getGenericAnim("balcony_death");
   self.deathanim = deathAnims[RandomInt(deathAnims.size)];
@@ -6164,8 +6274,9 @@ wait_for_chance_to_charge_school() {
         }
       }
     }
-    if(!too_many)
+    if(!too_many) {
       return;
+    }
     wait(0.05);
   }
 }
@@ -6220,8 +6331,9 @@ civ_hit(amt, attacker, force, b, c, d, e) {
 }
 
 player_get_in_reminder() {
-  if(flag("player_gets_in"))
+  if(flag("player_gets_in")) {
     return;
+  }
   level endon("player_gets_in");
 
   wait(4);
@@ -6323,8 +6435,9 @@ learn_flash() {
 
 player_learned_flash() {
   flash_ammo = level.player GetWeaponAmmoStock("flash_grenade");
-  if(flash_ammo <= 0)
+  if(flash_ammo <= 0) {
     return true;
+  }
 
   return level.player.flash_ammo > flash_ammo;
 }
@@ -6353,8 +6466,9 @@ get_flash_touching() {
     }
 
     foreach(flash in flashes) {
-      if(flash IsTouching(self))
+      if(flash IsTouching(self)) {
         return flash;
+      }
     }
     wait(0.05);
   }
@@ -6399,8 +6513,9 @@ riverbank_player_learns_m203() {
 }
 
 player_learned_m203() {
-  if(flag("leaving_riverbank"))
+  if(flag("leaving_riverbank")) {
     return true;
+  }
 
   return level.player getcurrentweapon() == "m203_m4_eotech";
 }
@@ -6419,8 +6534,9 @@ other_two_guys_say_huah() {
     msg = lines[index];
     guy generic_dialogue_queue(msg);
     index++;
-    if(index >= lines.size)
+    if(index >= lines.size) {
       return;
+    }
   }
 }
 

@@ -350,18 +350,21 @@ check_missing_animation() {
 }
 
 is_breach_anim_loop_setup(anime, index, animation) {
-  if(!isDefined(level.scr_anim["generic"][anime]))
+  if(!isDefined(level.scr_anim["generic"][anime])) {
     return false;
-  if(!isDefined(level.scr_anim["generic"][anime][index]))
+  }
+  if(!isDefined(level.scr_anim["generic"][anime][index])) {
     return false;
+  }
 
   PrintLn("	level.scr_anim[ \"generic\" ][ \"" + anime + "\" ][ " + index + " ] = %" + animation + ";");
   return true;
 }
 
 is_breach_anim_single_setup(anime, animation) {
-  if(!isDefined(level.scr_anim["generic"][anime]))
+  if(!isDefined(level.scr_anim["generic"][anime])) {
     return false;
+  }
 
   PrintLn("	level.scr_anim[ \"generic\" ][ \"" + anime + "\" ] = %" + animation + ";");
   return true;
@@ -387,12 +390,14 @@ dump_missing_anims() {
         if(isDefined(level.scr_stub["generic"][anime])) {
           if(IsArray(level.scr_stub["generic"][anime])) {
             foreach(index, animation in level.scr_stub["generic"][anime]) {
-              if(!is_breach_anim_loop_setup(anime, index, animation))
+              if(!is_breach_anim_loop_setup(anime, index, animation)) {
                 printed = true;
+              }
             }
           } else {
-            if(!is_breach_anim_single_setup(anime, level.scr_stub["generic"][anime]))
+            if(!is_breach_anim_single_setup(anime, level.scr_stub["generic"][anime])) {
               printed = true;
+            }
           }
         }
 
@@ -403,17 +408,20 @@ dump_missing_anims() {
           }
           if(IsArray(level.scr_stub["generic"][check_anime])) {
             foreach(index, animation in level.scr_stub["generic"][check_anime]) {
-              if(!is_breach_anim_loop_setup(check_anime, index, animation))
+              if(!is_breach_anim_loop_setup(check_anime, index, animation)) {
                 printed = true;
+              }
             }
           } else {
-            if(!is_breach_anim_single_setup(check_anime, level.scr_stub["generic"][check_anime]))
+            if(!is_breach_anim_single_setup(check_anime, level.scr_stub["generic"][check_anime])) {
               printed = true;
+            }
           }
         }
 
-        if(printed)
+        if(printed) {
           level.missing_animations[anime] = undefined;
+        }
       }
 
       PrintLn(" ");
@@ -757,8 +765,9 @@ dump_missing_anims() {
         index = trigger.script_slowmo_breach;
         AssertEx(isDefined(index), "Breach trigger at " + trigger.origin + " had no script_slowmo_breach");
         breaches[index].trigger = trigger;
-        if(isDefined(trigger.script_breachgroup))
+        if(isDefined(trigger.script_breachgroup)) {
           trigger thread breach_group_trigger_think();
+        }
       }
 
       foreach(volume in breach_door_volumes) {
@@ -861,8 +870,9 @@ dump_missing_anims() {
       ai = GetAIArray();
       ai = array_merge(ai, level.players);
       foreach(guy in ai) {
-        if(guy IsTouching(self))
+        if(guy IsTouching(self)) {
           return;
+        }
       }
       RadiusDamage(self.origin, self.radius, 500, 500);
       self Delete();
@@ -903,21 +913,24 @@ dump_missing_anims() {
       AssertEx(isDefined(index), "Breach spawner at " + self.origin + " had no script_slowmo_breach");
       group = 0;
       if(isDefined(self.script_slowmo_breach_spawners)) {
-        if((type == "enemy") || (type == "hostage"))
+        if((type == "enemy") || (type == "hostage")) {
           group = self.script_slowmo_breach_spawners;
+        }
       }
 
-      if(!isDefined(breaches[index].spawners[type][group]))
+      if(!isDefined(breaches[index].spawners[type][group])) {
         breaches[index].spawners[type][group] = [];
+      }
 
       array = breaches[index].spawners[type][group];
       array[array.size] = self;
       breaches[index].spawners[type][group] = array;
 
-      if(breaches.size)
+      if(breaches.size) {
         return breaches;
-      else
+      } else {
         return undefined;
+      }
     }
 
     slowmo_breach_think(breach_array, breach_index) {
@@ -975,15 +988,17 @@ dump_missing_anims() {
 
       if(keys.size) {
         random_key = random(keys);
-        if(isDefined(breach_enemy_spawners[random_key]))
+        if(isDefined(breach_enemy_spawners[random_key])) {
           breach_enemy_spawners = breach_enemy_spawners[random_key];
-        else
+        } else {
           breach_enemy_spawners = [];
+        }
 
-        if(isDefined(breach_hostage_spawners[random_key]))
+        if(isDefined(breach_hostage_spawners[random_key])) {
           breach_hostage_spawners = breach_hostage_spawners[random_key];
-        else
+        } else {
           breach_hostage_spawners = [];
+        }
       }
 
       breach_array.spawners["enemy"] = breach_enemy_spawners;
@@ -997,8 +1012,9 @@ dump_missing_anims() {
       array_thread(breach_coophostage_spawners, ::add_spawn_function, ::breach_hostage_spawner_think);
 
       trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
-      if(!isDefined(level.breach_use_triggers))
+      if(!isDefined(level.breach_use_triggers)) {
         level.breach_use_triggers = [];
+      }
       level.breach_use_triggers = array_add(level.breach_use_triggers, trigger);
 
       doorAnimModel = undefined;
@@ -1026,8 +1042,9 @@ dump_missing_anims() {
 
       door = spawn_anim_model(doorAnimModel);
       Assert(isDefined(door));
-      if(breach_array.doorType == "none" || breach_array.doorType == "estate_wood_backwards")
+      if(breach_array.doorType == "none" || breach_array.doorType == "estate_wood_backwards") {
         door Hide();
+      }
 
       level.breach_doors = [];
       level.breach_doors[breach_index] = door;
@@ -1061,32 +1078,41 @@ dump_missing_anims() {
       left_door_post anim_first_frame_solo(door, "breach");
       left_door_post anim_first_frame_solo(charge, "breach");
       left_door_post anim_first_frame_solo(active_breacher_rig, "breach_player_anim");
-      if(is_coop())
+      if(is_coop()) {
         left_door_post anim_first_frame_solo(passive_breacher_rig, "breach_player_anim");
+      }
 
       left_door_post wait_for_breach_or_deletion(breach_array);
 
-      foreach(model in left_door_post.scene_models)
-      model Delete();
+      foreach(model in left_door_post.scene_models) {
+        model Delete();
+      }
 
-      if(isDefined(trigger))
+      if(isDefined(trigger)) {
         trigger Delete();
-      if(isDefined(door))
+      }
+      if(isDefined(door)) {
         door Delete();
-      if(isDefined(charge))
+      }
+      if(isDefined(charge)) {
         charge Delete();
-      if(isDefined(left_door_post))
+      }
+      if(isDefined(left_door_post)) {
         left_door_post Delete();
-      if(isDefined(right_door_post))
+      }
+      if(isDefined(right_door_post)) {
         right_door_post Delete();
+      }
     }
 
     breach_should_be_skipped(script_slowmo_breach) {
-      if(!isDefined(level.skip_breach))
+      if(!isDefined(level.skip_breach)) {
         return false;
+      }
 
-      if(!isDefined(level.skip_breach[script_slowmo_breach]))
+      if(!isDefined(level.skip_breach[script_slowmo_breach])) {
         return false;
+      }
 
       return true;
     }
@@ -1100,8 +1126,9 @@ dump_missing_anims() {
       }
 
       foreach(volume in door_volumes) {
-        if(other_player IsTouching(volume))
+        if(other_player IsTouching(volume)) {
           return true;
+        }
       }
       return false;
     }
@@ -1120,23 +1147,28 @@ dump_missing_anims() {
     breach_participants_ready_to_proceed(player, breach_friendlies, door_volume) {
       if(is_coop()) {
         other_player = get_other_player(player);
-        if(isDefined(other_player.coop_downed) && (other_player.coop_downed))
+        if(isDefined(other_player.coop_downed) && (other_player.coop_downed)) {
           return false;
-        if(coop_player_touching_valid_door_volume(door_volume, other_player))
+        }
+        if(coop_player_touching_valid_door_volume(door_volume, other_player)) {
           return true;
-        else
+        } else {
           return false;
+        }
       }
 
-      if(breach_friendlies.size == 0)
+      if(breach_friendlies.size == 0) {
         return true;
-      if(!room_has_multiple_doors(door_volume))
+      }
+      if(!room_has_multiple_doors(door_volume)) {
         return true;
+      }
 
       if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
         if(getDvar("breach_requires_friendlies_in_position") == "1") {
-          if(!breachfriendlies_can_teleport(breach_friendlies, door_volume))
+          if(!breachfriendlies_can_teleport(breach_friendlies, door_volume)) {
             return false;
+          }
         }
       }
 
@@ -1156,8 +1188,9 @@ dump_missing_anims() {
       for(;;) {
         trigger waittill("trigger", other, passive);
 
-        if(gettime() == level.breach_passive_time)
+        if(gettime() == level.breach_passive_time) {
           passive = level.breach_passive_player;
+        }
 
         is_passive = isDefined(passive);
 
@@ -1165,8 +1198,9 @@ dump_missing_anims() {
           return;
         }
         if(isalive(other) && !is_passive) {
-          if(breach_failed_to_start())
+          if(breach_failed_to_start()) {
             continue;
+          }
         }
 
         if((isDefined(ent.safe_volume)) && (!is_specialop())) {
@@ -1276,8 +1310,9 @@ dump_missing_anims() {
       level endon("breach_hint_cleanup");
 
       hint_offset = 20;
-      if(issplitscreen())
+      if(issplitscreen()) {
         hint_offset = -23;
+      }
 
       thread hint(message, 3, hint_offset);
       thread breach_hint_cleanup();
@@ -1288,22 +1323,25 @@ dump_missing_anims() {
       level endon("breach_hint_cleanup");
 
       foreach(trigger in level.breach_use_triggers) {
-        if(isDefined(trigger))
+        if(isDefined(trigger)) {
           trigger SetHintString("");
+        }
       }
 
       level waittill_notify_or_timeout("breaching", 3);
       hint_fade();
 
       foreach(trigger in level.breach_use_triggers) {
-        if(isDefined(trigger))
+        if(isDefined(trigger)) {
           trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+        }
       }
     }
 
     room_has_multiple_doors(door_volume) {
-      if(isDefined(door_volume.script_breachgroup))
+      if(isDefined(door_volume.script_breachgroup)) {
         return true;
+      }
 
       return false;
     }
@@ -1357,8 +1395,9 @@ dump_missing_anims() {
           }
         }
 
-        if(guy IsTouching(volume_to_check))
+        if(guy IsTouching(volume_to_check)) {
           return true;
+        }
       }
 
       return false;
@@ -1379,8 +1418,9 @@ dump_missing_anims() {
       room_volume.breached = true;
 
       breach_notify = get_breach_notify(trigger.script_breachgroup);
-      if(isDefined(trigger.script_breachgroup))
+      if(isDefined(trigger.script_breachgroup)) {
         level notify(breach_notify);
+      }
 
       room_volume notify("breached");
       trigger trigger_off();
@@ -1409,8 +1449,9 @@ dump_missing_anims() {
         return;
       }
 
-      while(!room_volume.breached)
+      while(!room_volume.breached) {
         wait(0.05);
+      }
 
       breach_enemy_spawners = undefined;
       breach_hostage_spawners = undefined;
@@ -1423,11 +1464,13 @@ dump_missing_anims() {
         breach_hostage_spawners = breach_array.spawners["hostage"];
       }
 
-      if(breach_enemy_spawners.size)
+      if(breach_enemy_spawners.size) {
         array_call(breach_enemy_spawners, ::StalingradSpawn);
+      }
 
-      if(breach_hostage_spawners.size)
+      if(breach_hostage_spawners.size) {
         array_call(breach_hostage_spawners, ::StalingradSpawn);
+      }
     }
 
     friendlies_breach(breach_array, aBreachFriendlies) {
@@ -1476,8 +1519,9 @@ dump_missing_anims() {
         level.breachenemies = array_spawn(breach_friendlyenemy_spawners, true);
       }
 
-      if(breach_friendlyhostage_spawners.size)
+      if(breach_friendlyhostage_spawners.size) {
         array_call(breach_friendlyhostage_spawners, ::StalingradSpawn);
+      }
 
       array_call(solids, ::ConnectPaths);
       array_thread(solids, ::self_delete);
@@ -1640,8 +1684,9 @@ dump_missing_anims() {
       }
 
       breach_players["active"] EnableBreaching();
-      if(also_passive_breaching)
+      if(also_passive_breaching) {
         breach_players["passive"] DisableWeapons();
+      }
 
       foreach(player in breach_players) {
         if(!isDefined(level.slowmo_breach_disable_stancemod)) {
@@ -1655,8 +1700,9 @@ dump_missing_anims() {
         }
         player _disableUsability();
 
-        if(!isDefined(player.prebreachCurrentWeapon))
+        if(!isDefined(player.prebreachCurrentWeapon)) {
           player.prebreachCurrentWeapon = player GetCurrentWeapon();
+        }
       }
 
       level notify("breaching");
@@ -1699,19 +1745,22 @@ dump_missing_anims() {
       array_call(breach_hostage_spawners, ::StalingradSpawn);
 
       breach_players["active"] PlayerLinkToBlend(active_breacher_rig, "tag_player", 0.2, 0.1, 0.1);
-      if(isDefined(breach_players["active"].dont_unlink_after_breach))
+      if(isDefined(breach_players["active"].dont_unlink_after_breach)) {
         thread open_up_fov(0.2, active_breacher_rig, "tag_player", 45, 45, 90, 45);
+      }
 
       if(also_passive_breaching) {
         breach_players["passive"] PlayerLinkToBlend(passive_breacher_rig, "tag_player", 0.2, 0.1, 0.1);
-        if(isDefined(breach_players["passive"].dont_unlink_after_breach))
+        if(isDefined(breach_players["passive"].dont_unlink_after_breach)) {
           thread open_up_fov(0.2, passive_breacher_rig, "tag_player", 45, 45, 90, 45);
+        }
       }
 
       breach_players["active"] thread take_prebreach_weapons();
 
-      if(!is_special_breach)
+      if(!is_special_breach) {
         wait(0.05);
+      }
 
       charge = self.charge;
       self thread anim_single_solo(charge, "breach");
@@ -1793,8 +1842,9 @@ dump_missing_anims() {
       self GiveWeapon("usp_scripted");
       self SwitchToWeaponImmediate("usp_scripted");
 
-      if(isDefined(level.has_special_breach_anim[self.prebreachCurrentWeapon]))
+      if(isDefined(level.has_special_breach_anim[self.prebreachCurrentWeapon])) {
         self SwitchToWeaponImmediate(self.prebreachCurrentWeapon);
+      }
     }
 
     restore_prebreach_weapons() {
@@ -1808,8 +1858,9 @@ dump_missing_anims() {
 
         if(self should_topoff_breach_weapon(weapon)) {
           clipSize = WeaponClipSize(weapon);
-          if(self GetWeaponAmmoClip(weapon) < clipSize)
+          if(self GetWeaponAmmoClip(weapon) < clipSize) {
             self SetWeaponAmmoClip(weapon, clipSize);
+          }
         }
 
         self.prebreachCurrentWeapon = undefined;
@@ -1870,23 +1921,26 @@ dump_missing_anims() {
 
       flag_wait(sFlagName);
 
-      if(!invulnerableBeforeBreach)
+      if(!invulnerableBeforeBreach) {
         self stop_magic_bullet_shield();
+      }
 
       self.breaching = undefined;
     }
 
     friendlies_shoot_while_breaching(stackPosition) {
-      if(stackPosition == 1)
+      if(stackPosition == 1) {
         wait(1);
-      else
+      } else {
         wait(2);
+      }
 
       level endon("friendlies_finished_breach");
       level endon("breach_room_has_been_cleared");
 
-      while(!isDefined(level.breachenemies))
+      while(!isDefined(level.breachenemies)) {
         wait(0.05);
+      }
       while((isDefined(level.breachenemies)) && (level.breachenemies.size)) {
         wait(0.05);
         if(!isDefined(level.breachenemies)) {
@@ -1936,8 +1990,9 @@ dump_missing_anims() {
     }
 
     get_breach_notify(script_breachgroup) {
-      if(!isDefined(script_breachgroup))
+      if(!isDefined(script_breachgroup)) {
         script_breachgroup = "none";
+      }
       return "A door in breach group " + script_breachgroup + " has been activated.";
     }
 
@@ -1952,10 +2007,11 @@ dump_missing_anims() {
     slowmo_player_cleanup() {
       AssertEx(isPlayer(self), "slowmo_player_cleanup() called on a non-player.");
 
-      if(isDefined(level.playerSpeed))
+      if(isDefined(level.playerSpeed)) {
         self SetMoveSpeedScale(level.playerSpeed);
-      else
+      } else {
         self SetMoveSpeedScale(1);
+      }
     }
 
     slowmo_begins(rig) {
@@ -1978,8 +2034,9 @@ dump_missing_anims() {
 
       player = level.player;
       other_player = undefined;
-      if(is_coop())
+      if(is_coop()) {
         other_player = get_other_player(player);
+      }
 
       player thread play_sound_on_entity("slomo_whoosh");
       player thread player_heartbeat();
@@ -1991,30 +2048,35 @@ dump_missing_anims() {
       slowmo_start();
 
       player thread set_breaching_variable();
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player thread set_breaching_variable();
+      }
 
       player AllowMelee(false);
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player AllowMelee(false);
+      }
 
       slowmo_setspeed_slow(0.25);
       slowmo_setlerptime_in(slomoLerpTime_in);
       slowmo_lerp_in();
 
       player SetMoveSpeedScale(slomobreachplayerspeed);
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player SetMoveSpeedScale(slomobreachplayerspeed);
+      }
 
       startTime = GetTime();
       endTime = startTime + (level.slomobreachduration * 1000);
 
-      if(!is_coop())
+      if(!is_coop()) {
         player thread catch_weapon_switch();
+      }
 
       player thread catch_mission_failed();
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player thread catch_mission_failed();
+      }
 
       reloadIgnoreTime = 500;
       switchWeaponIgnoreTime = 1000;
@@ -2022,8 +2084,9 @@ dump_missing_anims() {
       for(;;) {
         if(isDefined(level.forced_slowmo_breach_slowdown)) {
           if(!level.forced_slowmo_breach_slowdown) {
-            if(isDefined(level.forced_slowmo_breach_lerpout))
+            if(isDefined(level.forced_slowmo_breach_lerpout)) {
               slomoLerpTime_out = level.forced_slowmo_breach_lerpout;
+            }
             break;
           }
 
@@ -2070,12 +2133,14 @@ dump_missing_anims() {
       slowmo_lerp_out();
 
       player AllowMelee(true);
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player AllowMelee(true);
+      }
 
       player delaythread(slomoLerpTime_out, ::clear_breaching_variable);
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player delaythread(slomoLerpTime_out, ::clear_breaching_variable);
+      }
 
       slowmo_end();
       flag_set("can_save");
@@ -2083,8 +2148,9 @@ dump_missing_anims() {
       level.player_one_already_breached = undefined;
 
       player slowmo_player_cleanup();
-      if(isDefined(other_player))
+      if(isDefined(other_player)) {
         other_player slowmo_player_cleanup();
+      }
 
       level notify("slomo_breach_over");
       level.breaching = false;
@@ -2210,8 +2276,9 @@ dump_missing_anims() {
         self.threatbias = self.script_threatbias;
       }
 
-      if(isDefined(level.breach_death_anims[self.animation]))
+      if(isDefined(level.breach_death_anims[self.animation])) {
         self.skipDeathAnim = true;
+      }
 
       wait(level.slowmo_breach_start_delay);
 
@@ -2223,10 +2290,12 @@ dump_missing_anims() {
     }
 
     record_last_player_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-      if(!isalive(attacker))
+      if(!isalive(attacker)) {
         return;
-      if(!isPlayer(attacker))
+      }
+      if(!isPlayer(attacker)) {
         return;
+      }
       if(!self IsBadGuy()) {
         return;
       }
@@ -2235,11 +2304,13 @@ dump_missing_anims() {
 
     breach_enemy_ignored_by_friendlies() {
       self endon("death");
-      if(!flag("no_mercy"))
+      if(!flag("no_mercy")) {
         self.ignoreme = true;
+      }
       level waittill_either("slomo_breach_over", "friendlies_finished_breach");
-      if(isDefined(self))
+      if(isDefined(self)) {
         self.ignoreme = false;
+      }
     }
     breach_enemy_ragdoll_on_death() {
       self endon("breach_enemy_cancel_ragdoll_death");
@@ -2288,8 +2359,9 @@ dump_missing_anims() {
       enemy waittill("death");
 
       level.breachEnemies_alive--;
-      if(level.breachEnemies_alive <= 0)
+      if(level.breachEnemies_alive <= 0) {
         breach_friendlies_restore_grenades();
+      }
 
       level notify("breach_all_enemies_dead");
     }
@@ -2337,9 +2409,9 @@ dump_missing_anims() {
       if(isDefined(self.skipEndingIdle)) {
         return;
       }
-      if(anim_exists(self.animation + "_idle"))
+      if(anim_exists(self.animation + "_idle")) {
         thread anim_generic_loop(self, self.animation + "_idle", "stop_idle");
-      else {
+      } else {
         loop = "hostage_knees_loop";
         self thread anim_generic_loop(self, loop, "stop_idle");
       }
@@ -2367,8 +2439,9 @@ dump_missing_anims() {
     }
 
     hostage_mission_fail() {
-      if(is_specialop())
+      if(is_specialop()) {
         level endon("special_op_terminated");
+      }
 
       level endon("mission failed");
       baseHealth = self.health;
@@ -2419,21 +2492,25 @@ dump_missing_anims() {
     breach_set_deadquote(deadquote, so_deadquote) {
       assert(isDefined(deadquote) && isDefined(so_deadquote));
 
-      if(is_specialop())
+      if(is_specialop()) {
         maps\_specialops::so_force_deadquote(so_deadquote);
-      else
+      } else {
         setDvar("ui_deadquote", deadquote);
+      }
     }
 
     coop_breached_from_same_door_in_a_muliti_door_room(room_volume) {
-      if(!is_specialop())
+      if(!is_specialop()) {
         return false;
-      if(!is_coop())
+      }
+      if(!is_coop()) {
         return false;
-      if(isDefined(room_volume.has_passive_breacher))
+      }
+      if(isDefined(room_volume.has_passive_breacher)) {
         return true;
-      else
+      } else {
         return false;
+      }
     }
 
     #using_animtree("script_model");
@@ -2477,8 +2554,9 @@ dump_missing_anims() {
     /using_animtree( "player" );
     #using_animtree("multiplayer");
     player_animations() {
-      if(!isDefined(level.slowmo_viewhands))
+      if(!isDefined(level.slowmo_viewhands)) {
         level.slowmo_viewhands = "viewhands_player_sas_woodland";
+      }
 
       level.scr_animtree["active_breacher_rig"] = #animtree;
       level.scr_model["active_breacher_rig"] = level.slowmo_viewhands;
@@ -2557,8 +2635,9 @@ dump_missing_anims() {
           break;
       }
 
-      if(isDefined(expSound))
+      if(isDefined(expSound)) {
         thread play_sound_in_space(expSound, self.charge.origin);
+      }
       exploder("breach_" + self.breach_index);
       thread breach_rumble(self.charge.origin);
       self.charge Delete();
@@ -2604,8 +2683,9 @@ dump_missing_anims() {
     _slomo_breach_blowback_guy() {
       self endon("death");
 
-      if(!flag("no_mercy"))
+      if(!flag("no_mercy")) {
         self.ignoreme = true;
+      }
       self.forceLongDeath = true;
       self waittill_notetrack_or_damage("bodyfall large");
       self waittill("finished_breach_start_anim");
@@ -2613,11 +2693,13 @@ dump_missing_anims() {
     }
 
     _slomo_breach_executed_guy() {
-      if((self.animation == "execution_knife_hostage") || (self.animation == "execution_knife2_hostage"))
+      if((self.animation == "execution_knife_hostage") || (self.animation == "execution_knife2_hostage")) {
         self thread _slomo_breach_knife_hostage_death();
+      }
 
-      if(self will_be_manhandled())
+      if(self will_be_manhandled()) {
         self thread get_manhandled();
+      }
 
       self.skipEndingIdle = true;
       self endon("death");
@@ -2635,8 +2717,9 @@ dump_missing_anims() {
     }
 
     _slomo_breach_hostage_react() {
-      if(self will_be_manhandled())
+      if(self will_be_manhandled()) {
         self thread get_manhandled();
+      }
 
       self.skipEndingIdle = true;
 
@@ -2645,8 +2728,9 @@ dump_missing_anims() {
       if(isDefined(self.manhandled)) {
         return;
       }
-      if(anim_exists(self.animation + "_idle"))
+      if(anim_exists(self.animation + "_idle")) {
         thread anim_generic_loop(self, self.animation + "_idle", "stop_idle");
+      }
       self.breachfinished = true;
     }
 
@@ -2671,16 +2755,18 @@ dump_missing_anims() {
       self.skipEndingIdle = true;
       self endon("death");
 
-      if(self will_be_manhandled())
+      if(self will_be_manhandled()) {
         self thread get_manhandled();
+      }
 
       self waittillmatch("single anim", "bodyfall large");
       self set_generic_deathanim(self.animation + "_death");
       self waittill("finished_breach_start_anim");
       self anim_generic(self, self.animation + "_survives");
 
-      if(isDefined(self.manhandled))
+      if(isDefined(self.manhandled)) {
         return;
+      }
       self thread anim_generic_loop(self, "hostage_knees_loop", "stop_idle");
       self.breachfinished = true;
     }
@@ -2722,18 +2808,20 @@ dump_missing_anims() {
     knife_guy_cleanup() {
       wait 0.5;
       self waittill_either("damage", "finished_breach_start_anim");
-      if(isDefined(self))
+      if(isDefined(self)) {
         self Detach("weapon_parabolic_knife", "TAG_INHAND");
+      }
     }
 
     _slomo_breach_chair_guy_normal() {
       self endon("death");
       self breach_enemy_cancel_ragdoll();
       iRand = RandomIntRange(1, 3);
-      if(cointoss())
+      if(cointoss()) {
         self set_generic_deathanim(self.animation + "_death");
-      else
+      } else {
         self set_generic_deathanim(self.animation + "_death2");
+      }
     }
 
     _slomo_breach_chair_guy_animated() {
@@ -2784,8 +2872,9 @@ dump_missing_anims() {
 
     breach_near_player(player) {
       foreach(ent in level.breach_groups) {
-        if(player IsTouching(ent.door_volume))
+        if(player IsTouching(ent.door_volume)) {
           return ent;
+        }
       }
     }
 
@@ -2808,13 +2897,15 @@ dump_missing_anims() {
       solids = level.breach_groups[group_num].path_solids;
       array_call(solids, ::ConnectPaths);
       array_thread(solids, ::self_delete);
-      foreach(trigger in level.breach_groups[group_num].lookat_triggers)
-      trigger Delete();
+      foreach(trigger in level.breach_groups[group_num].lookat_triggers) {
+        trigger Delete();
+      }
     }
 
     breach_debug_display_animnames(room_volume) {
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
       org = self.origin;
       wait(0.05);
       if(getDvar("breach_debug") == "0") {
@@ -2825,8 +2916,9 @@ dump_missing_anims() {
       aAI2 = getEntArray("breach_hostage_spawner", "targetname");
       aBreachAI = array_merge(aAI1, aAI2);
       foreach(spawner in aBreachAI) {
-        if(!spawner IsTouching(room_volume))
+        if(!spawner IsTouching(room_volume)) {
           aBreachAI = array_remove(aBreachAI, spawner);
+        }
       }
 
       while(!room_volume.breached) {
@@ -2843,11 +2935,13 @@ dump_missing_anims() {
     }
 
     will_be_manhandled() {
-      if(is_coop())
+      if(is_coop()) {
         return false;
+      }
 
-      if((isDefined(level.hostagemanhandle)) && (level.hostagemanhandle == false))
+      if((isDefined(level.hostagemanhandle)) && (level.hostagemanhandle == false)) {
         return false;
+      }
 
       if(isDefined(self.script_noteworthy)) {
         return self.script_noteworthy == "manhandled" || self.script_noteworthy == "manhandled_guarded";
@@ -2857,11 +2951,13 @@ dump_missing_anims() {
     }
 
     manhandler_hold() {
-      if(level.breachEnemies_alive > 0)
+      if(level.breachEnemies_alive > 0) {
         return true;
+      }
 
-      if(!self.startManhandling)
+      if(!self.startManhandling) {
         return true;
+      }
 
       return false;
     }
@@ -2886,8 +2982,9 @@ dump_missing_anims() {
       sAnimManhandledIdle = undefined;
       sAnimVariationSuffix = "";
 
-      if(isDefined(self.script_parameters))
+      if(isDefined(self.script_parameters)) {
         sAnimVariationSuffix = self.script_parameters;
+      }
 
       switch (self.script_noteworthy) {
         case "manhandled":
@@ -2918,8 +3015,9 @@ dump_missing_anims() {
 
       wait(1);
 
-      if(self.script_noteworthy == "manhandled")
+      if(self.script_noteworthy == "manhandled") {
         friendly_manhandler Show();
+      }
 
       self waittill("finished_breach_start_anim");
 
@@ -2927,16 +3025,18 @@ dump_missing_anims() {
         self.reference anim_generic(self, sAnimManhandledPrepare);
       }
 
-      if(anim_exists(sAnimManhandledPrepareIdle))
+      if(anim_exists(sAnimManhandledPrepareIdle)) {
         self.reference thread anim_generic_loop(self, sAnimManhandledPrepareIdle, "stop_idle");
-      else
+      } else {
         sAnimManhandledPrepareIdle = undefined;
+      }
 
       self.readyToBeManhandled = true;
 
       if(isDefined(sAnimManhandledPrepareIdle)) {
-        while(self manhandler_hold())
+        while(self manhandler_hold()) {
           wait(0.05);
+        }
       }
 
       self.reference notify("stop_idle");
@@ -3018,8 +3118,9 @@ dump_missing_anims() {
         yaw_dif = abs(acos(dot));
 
         rotate = 2;
-        if(rotate > yaw_dif)
+        if(rotate > yaw_dif) {
           rotate = yaw_dif;
+        }
 
         if(dot < 0) {
           ent addyaw(rotate);
@@ -3044,19 +3145,22 @@ dump_missing_anims() {
       }
       self thread magic_bullet_shield();
       self setFlashbangImmunity(true);
-      if(!flag("no_mercy"))
+      if(!flag("no_mercy")) {
         self.ignoreme = true;
+      }
       self.grenadeawareness = 0;
       wait(1);
 
       aHostages = [];
       aAI = GetAISpeciesArray("neutral", "civilian");
       foreach(guy in aAI) {
-        if(!isDefined(guy.readyToBeManhandled))
+        if(!isDefined(guy.readyToBeManhandled)) {
           continue;
+        }
         if((isDefined(guy.script_slowmo_breach)) && (guy.script_slowmo_breach == self.script_slowmo_breach)) {
-          if((isDefined(guy.script_noteworthy)) && (IsSubStr(guy.script_noteworthy, "manhandled")))
+          if((isDefined(guy.script_noteworthy)) && (IsSubStr(guy.script_noteworthy, "manhandled"))) {
             aHostages = array_add(aHostages, guy);
+          }
         }
       }
       AssertEx(aHostages.size > 0, "Manhandler with export " + self.export+" can not find any hostages with script_noteworthy containing 'manhandled*' in its script_slomo_breach number");
@@ -3074,8 +3178,9 @@ dump_missing_anims() {
       }
 
       foreach(guy in aHostages) {
-        if(isDefined(guy))
+        if(isDefined(guy)) {
           guy.startManhandling = true;
+        }
       }
     }
 
@@ -3084,10 +3189,11 @@ dump_missing_anims() {
     }
 
     anim_exists(sAnim) {
-      if(isDefined(level.scr_anim["generic"][sAnim]))
+      if(isDefined(level.scr_anim["generic"][sAnim])) {
         return true;
-      else
+      } else {
         return false;
+      }
     }
 
     add_slowmo_breach_custom_function(animation, function) {
@@ -3096,8 +3202,9 @@ dump_missing_anims() {
     }
 
     add_slowmo_breacher() {
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
       AssertEx(IsAI(self), "add_slomo_breacher() can only be called on a friendly AI");
       if(!isDefined(level.breachfriendlies)) {
         level.breachfriendlies = [];
@@ -3109,11 +3216,13 @@ dump_missing_anims() {
     }
 
     remove_slowmo_breacher() {
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
       AssertEx(IsAI(self), "remove_slomo_breacher() can only be called on a friendly AI");
-      if(!isDefined(level.breachfriendlies))
+      if(!isDefined(level.breachfriendlies)) {
         return;
+      }
       if(is_in_array(level.breachfriendlies, self)) {
         level.breachfriendlies = array_remove(level.breachfriendlies, self);
       }

@@ -276,16 +276,19 @@ intro_main() {
   activate_trigger("lobby_to_stairs_flow", "target");
 
   level notify("stop_explode_targets");
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_by_name("lobby_to_stairs");
+  }
 
   nodes = GetNodeArray("lobby_moveup_nodes", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread lobby_moveout_to_stairs(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread lobby_moveout_to_stairs(node);
+  }
 
   nodes = GetNodeArray("prestairs_nodes", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread lobby_prestairs_nodes_behavior(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread lobby_prestairs_nodes_behavior(node);
+  }
 }
 
 skip_airport_popup() {
@@ -331,8 +334,9 @@ intro_stairs_handle_player_speed() {
 intro_dead_bodies() {
   array = intro_setup_dead_bodies();
 
-  foreach(model in array)
-  model Hide();
+  foreach(model in array) {
+    model Hide();
+  }
 
   flag_wait("lobby_open_fire");
 
@@ -344,8 +348,9 @@ intro_dead_bodies() {
   array["stairs_dead_body"] Show();
 
   flag_wait("player_set_speed_stairs");
-  foreach(model in array)
-  model Show();
+  foreach(model in array) {
+    model Show();
+  }
 }
 
 #using_animtree("generic_human");
@@ -353,8 +358,9 @@ intro_setup_dead_bodies() {
   models = getEntArray("upperdeck_dead_body", "targetname");
 
   array = [];
-  foreach(key, model in models)
-  array["upperdeck_dead_body" + key] = model;
+  foreach(key, model in models) {
+    array["upperdeck_dead_body" + key] = model;
+  }
 
   array["stairs_dead_body"] = GetEnt("stairs_dead_body", "targetname");
   array["stairs_dead_body2"] = GetEnt("stairs_dead_body2", "targetname");
@@ -380,14 +386,16 @@ intro_civilians() {
 
   for(i = 1; i <= 14; i++) {
     node = getstruct("intro_lobby_anim_group_" + i, "targetname");
-    if(isDefined(node))
+    if(isDefined(node)) {
       node thread lobby_people_create(data);
+    }
   }
 
   drones = getEntArray("intro_lobby_crowd_2", "targetname");
 
-  foreach(drone in drones)
-  delayThread(1, ::dronespawn, drone);
+  foreach(drone in drones) {
+    delayThread(1, ::dronespawn, drone);
+  }
 
   array_thread(getEntArray("lobby_people", "targetname"), ::add_spawn_function, ::lobby_ai_logic);
   array_thread(getEntArray("intro_lobby_crowd_2", "targetname"), ::add_spawn_function, ::lobby_drone_logic);
@@ -424,8 +432,9 @@ elevator_scene() {
 
   node = getstruct("intro_elevator_anim_node", "targetname");
   team = [];
-  foreach(member in level.team)
-  member thread elevator_scene_guy(node);
+  foreach(member in level.team) {
+    member thread elevator_scene_guy(node);
+  }
 
   origin = GetEnt("snd_origin_intro_crowd", "targetname");
   origin delayCall(7.5 + 5 + 5.5, ::playsound, "scn_airport_crowd_opening");
@@ -445,13 +454,15 @@ lobby_scene() {
   level endon("friendly_fire_warning");
 
   nodes = GetNodeArray("intro_initial_firing_positions", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread lobby_moveout(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread lobby_moveout(node);
+  }
 
   flag_wait("lobby_open_fire");
 
-  foreach(actor in level.team)
-  actor.ignoreall = false;
+  foreach(actor in level.team) {
+    actor.ignoreall = false;
+  }
 
   origin = GetEnt("snd_origin_intro_crowd", "targetname");
   origin playSound("scn_airport_crowd_opening_terror");
@@ -552,29 +563,34 @@ stairs_main() {
   thread do_wait();
 
   nodes = GetNodeArray("upperdeck_start_nodes", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread stairs_team_at_top(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread stairs_team_at_top(node);
+  }
 
   flag_wait("stairs_upperdeck_civs_dead");
   flag_wait("player_set_speed_stairs");
 
   nodes = getStructArray("upperdeck_team_path", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread upperdeck_team_moveup(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread upperdeck_team_moveup(node);
+  }
 
   flag_wait("upperdeck_save");
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_by_name("upperdeck_flow2");
+  }
 }
 
 stairs_saves() {
   flag_wait("player_set_speed_lobby");
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_by_name("stair_bottom");
+  }
 
   flag_wait("player_set_speed_upperstairs");
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_by_name("stair_top");
+  }
 }
 
 massacre_main() {
@@ -584,8 +600,9 @@ massacre_main() {
   thread massacre_restaurant_destroy();
 
   nodes = getStructArray("massacre_nodes", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread massacre_killers(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread massacre_killers(node);
+  }
 
   trigger = GetEnt("massacre_rentacop_rush_guy", "target");
   trigger.origin += (0, 0, -10000);
@@ -699,8 +716,9 @@ massacre_handle_death_flag(name, _flag) {
 
   ai = get_living_ai_array(name, "script_noteworthy");
 
-  if(ai.size)
+  if(ai.size) {
     waittill_dead_or_dying(ai);
+  }
 
   flag_set(_flag);
 }
@@ -741,8 +759,9 @@ gate_main() {
   thread do_wait();
 
   nodes = GetNodeArray("gate_moveup_nodes", "targetname");
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread gate_moveout(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread gate_moveout(node);
+  }
 
   array_thread(getEntArray("gate_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "gate_canned_deaths");
   array_thread(getEntArray("gate_crawler", "targetname"), ::add_spawn_function, ::gate_crawler);
@@ -795,8 +814,9 @@ basement_main() {
   array_thread(getEntArray("basement_sec_runner", "targetname"), ::add_spawn_function, ::basement_sec_runner);
   array_thread(getEntArray("basement_flicker_light", "targetname"), ::basement_flicker_light);
 
-  foreach(member in level.team)
-  member thread basement_pre_moveout();
+  foreach(member in level.team) {
+    member thread basement_pre_moveout();
+  }
 
   flag_wait("basement_near_entrance");
 
@@ -909,13 +929,15 @@ tarmac_main() {
 
   flag_wait("tarmac_moveout");
 
-  if(!flag("do_not_save"))
+  if(!flag("do_not_save")) {
     thread autosave_by_name("tarmac_moveout");
+  }
 
   nodes = getStructArray("tarmac_moveout_nodes", "targetname");
   nodes = array_merge(nodes, GetNodeArray("tarmac_moveout_nodes", "targetname"));
-  foreach(node in nodes)
-  level.team[node.script_noteworthy] thread tarmac_moveout(node);
+  foreach(node in nodes) {
+    level.team[node.script_noteworthy] thread tarmac_moveout(node);
+  }
 
   thread tarmac_hide_elevator();
   thread handle_threat_bias_stuff();
@@ -952,8 +974,9 @@ handle_flags_to_advance() {
 
     flag_wait(name);
 
-    if(isDefined(trigger.target))
+    if(isDefined(trigger.target)) {
       activate_trigger_with_targetname(trigger.target);
+    }
 
     volume = trigger get_color_volume_from_trigger();
     volume waittill_volume_dead_or_dying();
@@ -974,18 +997,21 @@ handle_chatter() {
 
   flag_wait("tarmac_heat_fight");
 
-  if(!flag("tarmac_open_fire"))
+  if(!flag("tarmac_open_fire")) {
     level.makarov thread dialogue_queue("airport_mkv_forzakhaev");
+  }
 
   flag_wait_or_timeout("tarmac_open_fire", 1);
 
-  if(!flag("tarmac_open_fire"))
+  if(!flag("tarmac_open_fire")) {
     tarmac_retreat_dialogue("airport_fsb2_fsb");
+  }
 
   flag_wait_or_timeout("tarmac_open_fire", 5.0);
 
-  if(!flag("tarmac_open_fire"))
+  if(!flag("tarmac_open_fire")) {
     level.makarov radio_dialogue("airport_mkv_fsb");
+  }
 
   flag_wait("tarmac_open_fire");
 
@@ -1104,8 +1130,9 @@ tarmac_bsc_move3b() {
   makarov dialogue_queue("go2");
   victor dialogue_queue("moving2");
 
-  if(!flag("tarmac_enemies_2ndfloor_dead") && !flag("tarmac_clear_out_2nd_floor"))
+  if(!flag("tarmac_enemies_2ndfloor_dead") && !flag("tarmac_clear_out_2nd_floor")) {
     makarov dialogue_queue("airport_mkv_behindus");
+  }
   flag_clear("tarmac_bcs");
 }
 
@@ -1215,8 +1242,9 @@ handle_kill_advance() {
 
   ai = tarmac_get_enemies();
   num = 3;
-  if(ai.size > 13)
+  if(ai.size > 13) {
     num = ai.size - 10;
+  }
 
   add_wait(::waittill_dead_or_dying, ai, num);
   add_wait(::trigger_wait_targetname, "tarmac_advance6_flag");
@@ -1385,13 +1413,15 @@ escape_main() {
 
   level.makarov waittill("reached_path_end");
 
-  foreach(member in level.survivors)
-  member PushPlayer(true);
+  foreach(member in level.survivors) {
+    member PushPlayer(true);
+  }
 
   node = undefined;
   foreach(part in nodes) {
-    if(part.script_noteworthy != "makarov")
+    if(part.script_noteworthy != "makarov") {
       continue;
+    }
     node = part;
     break;
   }
@@ -1426,19 +1456,21 @@ escape_main() {
 
   wait 10;
 
-  if(is_default_start())
+  if(is_default_start()) {
     nextmission();
-  else
+  } else {
     IPrintLnBold("DEVELOPER: END OF SCRIPTED LEVEL");
+  }
 }
 
 escape_palm_style_door_open(soundalias) {
   wait(1.35);
 
-  if(isDefined(soundalias))
+  if(isDefined(soundalias)) {
     self playSound(soundalias);
-  else
+  } else {
     self playSound("door_wood_slow_open");
+  }
 
   self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self ConnectPaths();
@@ -1501,8 +1533,9 @@ escape_end_sequence() {
 
   level.vanmate thread end_vanmate_dialogue();
 
-  foreach(member in team)
-  member LinkTo(van, "tag_body");
+  foreach(member in team) {
+    member LinkTo(van, "tag_body");
+  }
   team[team.size] = level.vanmate;
 
   van thread anim_single(team, "end_get_in");
@@ -1522,19 +1555,21 @@ escape_end_sequence() {
   thread grab_player_if_he_gets_close();
   flag_wait("end_makarov_in_place");
 
-  if(flag("player_ready_for_proper_ending"))
+  if(flag("player_ready_for_proper_ending")) {
     escape_animate_player_death();
-  else
+  } else {
     escape_animate_player_death2();
+  }
 
   node = GetVehicleNode("escape_van_leave_node", "targetname");
 
   thread escape_van_drive_away(node);
 
-  if(!flag("escape_player_realdeath"))
+  if(!flag("escape_player_realdeath")) {
     level.makarov SetLookAtEntity(level.player);
-  else
+  } else {
     level.makarov SetLookAtEntity();
+  }
 
   delayThread(GetAnimLength(level.makarov getanim("end_drive_away")) - 2.0, ::activate_trigger, "escape_final_guys2", "target");
 
@@ -1586,8 +1621,9 @@ escape_van_drive_away(node) {
 }
 
 escape_kill_player(guy) {
-  if(level.start_point == "grigs")
+  if(level.start_point == "grigs") {
     return;
+  }
   if(flag("escape_player_shot")) {
     return;
   }
@@ -1689,15 +1725,18 @@ escalator_sounds() {
   snds[snds.size] = spawn("script_origin", (4871.84, 1995.85, 195.639));
   snds[snds.size] = spawn("script_origin", (4987.36, 1885.09, 64.9956));
 
-  foreach(snd in snds)
-  snd thread play_loop_sound_on_entity("emt_airport_escalator");
+  foreach(snd in snds) {
+    snd thread play_loop_sound_on_entity("emt_airport_escalator");
+  }
 
   flag_waitopen("_escalator_on");
 
-  foreach(snd in snds)
-  snd stop_loop_sound_on_entity("emt_airport_escalator");
-  foreach(snd in snds)
-  snd thread play_sound_on_entity("emt_airport_escalator_stop");
+  foreach(snd in snds) {
+    snd stop_loop_sound_on_entity("emt_airport_escalator");
+  }
+  foreach(snd in snds) {
+    snd thread play_sound_on_entity("emt_airport_escalator_stop");
+  }
 }
 
 start_massacre() {
@@ -1812,8 +1851,9 @@ start_basement() {
     member.goalradius = 16;
   }
 
-  foreach(node in array)
-  level.team[node.script_noteworthy] thread follow_path(node);
+  foreach(node in array) {
+    level.team[node.script_noteworthy] thread follow_path(node);
+  }
 }
 
 start_tarmac() {
@@ -1949,20 +1989,23 @@ start_common_airport() {
 
   ai = GetAIArray("allies");
   foreach(actor in ai) {
-    if(actor is_hero())
+    if(actor is_hero()) {
       continue;
+    }
     actor Delete();
   }
 
   thread battlechatter_off("axis");
 
   array = getEntArray("massacre_dummy", "targetname");
-  foreach(obj in array)
-  obj Hide();
+  foreach(obj in array) {
+    obj Hide();
+  }
 
   array = getEntArray("gate_canned_deaths", "targetname");
-  foreach(obj in array)
-  obj Hide();
+  foreach(obj in array) {
+    obj Hide();
+  }
 
   array = getEntArray("upperdeck_canned_deaths", "targetname");
   foreach(obj in array) {
@@ -1979,8 +2022,9 @@ start_common_airport() {
   flag_init("trigger_kill_player");
   trigs = getEntArray("kill_player", "targetname");
 
-  foreach(trig in trigs)
-  thread set_flag_on_trigger(trig, "trigger_kill_player");
+  foreach(trig in trigs) {
+    thread set_flag_on_trigger(trig, "trigger_kill_player");
+  }
 
   thread kill_player();
   thread good_save_handler();
@@ -2012,13 +2056,15 @@ objective() {
 
   level.strings["mantle"] = &"SCRIPT_MANTLE";
 
-  foreach(string in level.strings)
-  PreCacheString(string);
+  foreach(string in level.strings) {
+    PreCacheString(string);
+  }
 
-  if(is_default_start())
+  if(is_default_start()) {
     wait 24 + 5.5;
-  else
+  } else {
     wait .05;
+  }
 
   Objective_Add(1, "active", level.strings["OBJ_TRUST_COST"]);
   Objective_Current(1);

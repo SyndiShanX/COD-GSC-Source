@@ -24,8 +24,9 @@ init_riotshield() {
     maps\_specialops::so_include_deadquote_array(quotes);
   }
 
-  if(!isDefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions)) {
     level.subclass_spawn_functions = [];
+  }
 
   level.subclass_spawn_functions["riotshield"] = ::subclass_riotshield;
 
@@ -65,22 +66,25 @@ riotshield_flee() {
 
   node = self FindBestCoverNode();
 
-  if(isDefined(node))
+  if(isDefined(node)) {
     self UseCoverNode(node);
+  }
 }
 
 group_create(ai_array, forward, spacing) {
   newarray = [];
   foreach(member in ai_array) {
-    if(member.combatMode != "no_cover")
+    if(member.combatMode != "no_cover") {
       continue;
+    }
     newarray[newarray.size] = member;
   }
   group = spawnStruct();
 
   foreach(member in newarray) {
-    if(isDefined(member.group) && isDefined(member.group.ai_array))
+    if(isDefined(member.group) && isDefined(member.group.ai_array)) {
       member.group.ai_array = array_remove(member.group.ai_array, member);
+    }
     member.group = group;
   }
 
@@ -99,8 +103,9 @@ group_initialize_formation(forward, spacing) {
 
   self.forward = forward;
 
-  if(isDefined(spacing))
+  if(isDefined(spacing)) {
     self.spacing = spacing;
+  }
 
   foreach(ai in self.ai_array) {
     ai.goalradius = DEFAULT_GOAL_RADIUS;
@@ -124,8 +129,9 @@ group_resort_on_deaths() {
   while(self.ai_array.size) {
     waittill_dead(self.ai_array, 1);
 
-    if(self.group_move_mode != "stopped")
+    if(self.group_move_mode != "stopped") {
       self waittill("goal");
+    }
 
     self.ai_array = array_removedead(self.ai_array);
     self group_sort_by_closest_match();
@@ -138,10 +144,11 @@ group_sort_by_closest_match(dir) {
   if(self.ai_array.size == 0) {
     return;
   }
-  if(isDefined(dir))
+  if(isDefined(dir)) {
     self.forward = dir;
-  else
+  } else {
     dir = self.forward;
+  }
 
   center = group_center();
   right = (self.forward[1], -1 * self.forward[0], 0);
@@ -150,10 +157,11 @@ group_sort_by_closest_match(dir) {
 
   dist_array = [];
   for(i = 0; i < self.ai_array.size; i++) {
-    if(isDefined(self.ai_array[i]))
+    if(isDefined(self.ai_array[i])) {
       dist_array[i] = vectordot(pos - self.ai_array[i].origin, right);
-    else
+    } else {
       dist_array[i] = 0;
+    }
   }
 
   for(i = 1; i < dist_array.size; i++) {
@@ -179,8 +187,9 @@ group_check_deaths() {
       self.ai_array = array_removedead(self.ai_array);
 
       if(self.ai_array.size <= self.fleeThreshold) {
-        foreach(ai in self.ai_array)
-        ai riotshield_flee();
+        foreach(ai in self.ai_array) {
+          ai riotshield_flee();
+        }
 
         self notify("break_group");
         break;
@@ -203,10 +212,11 @@ group_move(group_center, dir) {
   self notify("new_goal_set");
   self.group_move_mode = "moving";
 
-  if(isDefined(dir))
+  if(isDefined(dir)) {
     self.forward = dir;
-  else
+  } else {
     dir = self.forward;
+  }
 
   right = (dir[1], -1 * dir[0], 0);
   offset = right * self.spacing;
@@ -215,8 +225,9 @@ group_move(group_center, dir) {
   for(i = 0; i < self.ai_array.size; i++) {
     ai = self.ai_array[i];
 
-    if(isDefined(ai))
+    if(isDefined(ai)) {
       ai setgoalpos(pos);
+    }
 
     pos = pos + offset;
   }
@@ -233,8 +244,9 @@ check_group_at_goal() {
 
     alive_count = 0;
     foreach(ai in self.ai_array) {
-      if(isDefined(ai) && isalive(ai))
+      if(isDefined(ai) && isalive(ai)) {
         alive_count++;
+      }
     }
 
     at_goal_count = 0;
@@ -243,8 +255,9 @@ check_group_at_goal() {
 
       if(isDefined(ai)) {
         check_radius = max(MIN_AT_GOAL_RADIUS, ai.goalradius);
-        if(distanceSquared(ai.origin, ai.goalpos) < squared(check_radius))
+        if(distanceSquared(ai.origin, ai.goalpos) < squared(check_radius)) {
           at_goal_count++;
+        }
       }
     }
 
@@ -263,8 +276,9 @@ check_group_facing_forward() {
 
     alive_count = 0;
     foreach(ai in self.ai_array) {
-      if(isDefined(ai) && isalive(ai))
+      if(isDefined(ai) && isalive(ai)) {
         alive_count++;
+      }
     }
 
     at_goal_count = 0;
@@ -274,38 +288,48 @@ check_group_facing_forward() {
       ai = self.ai_array[i];
 
       if(isDefined(ai)) {
-        if(abs(ai.angles[1] - group_yaw) < 45)
+        if(abs(ai.angles[1] - group_yaw) < 45) {
           at_goal_count++;
+        }
       }
     }
 
-    if(at_goal_count == alive_count)
+    if(at_goal_count == alive_count) {
       self notify("goal_yaw");
+    }
   }
 }
 
 group_sprint_on() {
-  foreach(ai in self.ai_array)
-  if(isalive(ai))
-    ai riotshield_sprint_on();
+  foreach(ai in self.ai_array) {
+    if(isalive(ai)) {
+      ai riotshield_sprint_on();
+    }
+  }
 }
 
 group_fastwalk_on() {
-  foreach(ai in self.ai_array)
-  if(isalive(ai))
-    ai riotshield_fastwalk_on();
+  foreach(ai in self.ai_array) {
+    if(isalive(ai)) {
+      ai riotshield_fastwalk_on();
+    }
+  }
 }
 
 group_sprint_off() {
-  foreach(ai in self.ai_array)
-  if(isalive(ai))
-    ai riotshield_sprint_off();
+  foreach(ai in self.ai_array) {
+    if(isalive(ai)) {
+      ai riotshield_sprint_off();
+    }
+  }
 }
 
 group_fastwalk_off() {
-  foreach(ai in self.ai_array)
-  if(isalive(ai))
-    ai riotshield_fastwalk_off();
+  foreach(ai in self.ai_array) {
+    if(isalive(ai)) {
+      ai riotshield_fastwalk_off();
+    }
+  }
 }
 
 group_lock_angles(dir) {
@@ -359,8 +383,9 @@ group_center() {
     }
   }
 
-  if(alive_count)
+  if(alive_count) {
     center = (1 / alive_count) * center;
+  }
 
   return center;
 }

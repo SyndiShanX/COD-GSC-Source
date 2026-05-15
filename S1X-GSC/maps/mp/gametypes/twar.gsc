@@ -1618,7 +1618,7 @@ updateMinions() {
     if(hud_version > 1) {
       max_minoins_hud = minion_max_hud();
       foreach(vis_team in teams) {
-        foreach(about_team in teams)
+        foreach(about_team in teams) {}
       }
       minion_count_huds[vis_team][about_team] = minion_count_hud(vis_team, about_team);
     }

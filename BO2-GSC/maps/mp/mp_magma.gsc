@@ -82,8 +82,9 @@ lava_trigger_init() {
   killbrushes = getEntArray("trigger_hurt", "classname");
 
   for(i = 0; i < killbrushes.size; i++) {
-    if(isDefined(killbrushes[i].script_noteworthy) && killbrushes[i].script_noteworthy == "lava")
+    if(isDefined(killbrushes[i].script_noteworthy) && killbrushes[i].script_noteworthy == "lava") {
       level.levelkillbrushes[level.levelkillbrushes.size] = killbrushes[i];
+    }
   }
 }
 
@@ -93,8 +94,9 @@ levelspawndvars(reset_dvars) {
 }
 
 overrideweaponfunc(sweapon, script_noteworthy) {
-  if(isDefined(script_noteworthy) && script_noteworthy == "lava")
+  if(isDefined(script_noteworthy) && script_noteworthy == "lava") {
     sweapon = "lava_mp";
+  }
 
   return sweapon;
 }
@@ -134,18 +136,21 @@ checkcorpseinlava(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, s
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinlava())
+  if(self isinlava()) {
     return getdvarfloatdefault("scr_lavaPlayerDeathWatchTime", 0.5);
+  }
 
   return defaulttime;
 }
 
 isinlava() {
-  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.script_noteworthy))
+  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.script_noteworthy)) {
     return false;
+  }
 
-  if(self.lastattacker.script_noteworthy != "lava")
+  if(self.lastattacker.script_noteworthy != "lava") {
     return false;
+  }
 
   return true;
 }
@@ -170,8 +175,9 @@ testkillbrushonstationary(lavaarray, killbrusharray, player, watcher) {
         break;
       }
 
-      if(isDefined(self))
+      if(isDefined(self)) {
         self delete();
+      }
 
       return;
     }
@@ -216,8 +222,9 @@ deleteonkillbrushoverride(player, watcher) {
           break;
         }
 
-        if(isDefined(self))
+        if(isDefined(self)) {
           self delete();
+        }
 
         return;
       }

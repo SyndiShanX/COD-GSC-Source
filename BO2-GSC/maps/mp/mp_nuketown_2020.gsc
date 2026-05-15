@@ -156,8 +156,9 @@ nuked_mannequin_filter(destructibles) {
   for(i = 0; i < destructibles.size; i++) {
     destructible = destructibles[i];
 
-    if(issubstr(destructible.destructibledef, "male"))
+    if(issubstr(destructible.destructibledef, "male")) {
       mannequins[mannequins.size] = destructible;
+    }
   }
 
   return mannequins;
@@ -167,8 +168,9 @@ mannequin_headless(notifytype, attacker) {
   if(gettime() < level.mannequin_time + getdvarintdefault("vcs_timelimit", 120) * 1000) {
     level.headless_mannequin_count++;
 
-    if(level.headless_mannequin_count == level.mannequin_count)
+    if(level.headless_mannequin_count == level.mannequin_count) {
       level thread do_vcs();
+    }
   }
 }
 
@@ -191,8 +193,9 @@ nuke_detonation() {
   destructibles = getEntArray("destructible", "targetname");
 
   for(i = 0; i < destructibles.size; i++) {
-    if(getsubstr(destructibles[i].destructibledef, 0, 4) == "veh_")
+    if(getsubstr(destructibles[i].destructibledef, 0, 4) == "veh_") {
       destructibles[i] hide();
+    }
   }
 
   displaysign = getent("nuke_display_glass_server", "targetname");
@@ -407,8 +410,9 @@ pin_think() {
     self pin_move(redangle, 2);
   } else if(level.timelimit)
     self pin_move(normalangle, level.timelimit * 60);
-  else
+  else {
     self pin_move(normalangle, 300);
+  }
 
   level waittill("nuke_detonation");
   self pin_check_rotation(0, 0.05);

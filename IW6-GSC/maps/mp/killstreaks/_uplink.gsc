@@ -105,9 +105,9 @@ updateAllUplinkThreads() {
 comExpNotifyWatcher() {
   teamsFinished = [];
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     level waittill("radar_status_change_players");
-  else {
+  } else {
     while(teamsFinished.size < 2) {
       level waittill("radar_status_change", team);
       teamsFinished[teamsFinished.size] = team;
@@ -192,18 +192,21 @@ giveComExpBenefits() {
 
 updateSatcomActiveOmnvar(team) {
   radarStrength = 0;
-  if(isDefined(team))
+  if(isDefined(team)) {
     radarStrength = getRadarStrengthForTeam(team);
-  else
+  } else {
     radarStrength = getRadarStrengthForPlayer(self);
+  }
 
-  if(self _hasPerk("specialty_comexp"))
+  if(self _hasPerk("specialty_comexp")) {
     radarStrength = getRadarStrengthForComExp(self);
+  }
 
-  if(radarStrength > CONST_UPLINK_MIN)
+  if(radarStrength > CONST_UPLINK_MIN) {
     self SetClientOmnvar("ui_satcom_active", true);
-  else
+  } else {
     self SetClientOmnvar("ui_satcom_active", false);
+  }
 }
 
 removeComExpBenefits() {
@@ -354,8 +357,9 @@ getRadarStrengthForTeam(team) {
   currentRadarStrength = 0;
 
   foreach(satellite in level.uplinks) {
-    if(isDefined(satellite) && (satellite.team == team))
+    if(isDefined(satellite) && (satellite.team == team)) {
       currentRadarStrength++;
+    }
   }
 
   if(currentRadarStrength == 0 && isDefined(level.heliSniperEyesOn) && level.heliSniperEyesOn.team == team) {
@@ -371,8 +375,9 @@ getRadarStrengthForPlayer(player) {
   foreach(satellite in level.uplinks) {
     if(isDefined(satellite)) {
       if(isDefined(satellite.owner)) {
-        if(satellite.owner.guid == player.guid)
+        if(satellite.owner.guid == player.guid) {
           currentRadarStrength++;
+        }
       } else {
         entNum = satellite GetEntityNumber();
         level.uplinks[entNum] = undefined;
@@ -380,8 +385,9 @@ getRadarStrengthForPlayer(player) {
     }
   }
 
-  if(!level.teamBased && currentRadarStrength > 0)
+  if(!level.teamBased && currentRadarStrength > 0) {
     currentRadarStrength++;
+  }
 
   return clamp(currentRadarStrength, CONST_UPLINK_MIN, CONST_UPLINK_MAX);
 }
@@ -390,12 +396,14 @@ getRadarStrengthForComExp(player) {
   currentRadarStrength = 0;
 
   foreach(satellite in level.uplinks) {
-    if(isDefined(satellite))
+    if(isDefined(satellite)) {
       currentRadarStrength++;
+    }
   }
 
-  if(!level.teamBased && currentRadarStrength > 0)
+  if(!level.teamBased && currentRadarStrength > 0) {
     currentRadarStrength++;
+  }
 
   return clamp(currentRadarStrength, CONST_UPLINK_MIN, CONST_UPLINK_MAX);
 }

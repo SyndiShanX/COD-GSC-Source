@@ -40,10 +40,11 @@ advancedTraverse2(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animhasnotetrack(traverseAnim, "blend"))
+    if(!animhasnotetrack(traverseAnim, "blend")) {
       wait(0.2);
-    else
+    } else {
       self waittillmatch("traverse", "blend");
+    }
   }
 }
 
@@ -57,10 +58,11 @@ handle_death(note) {
 
   if(self.health == 1) {
     self.a.nodeath = true;
-    if(self.traverseDeath > 1)
+    if(self.traverseDeath > 1) {
       self setFlaggedAnimKnobAll("deathanim", %traverse90_end_death, %body, 1, .2, 1);
-    else
+    } else {
       self setFlaggedAnimKnobAll("deathanim", %traverse90_start_death, %body, 1, .2, 1);
+    }
 
     self animscripts\face::SayGenericDialogue("death");
   }

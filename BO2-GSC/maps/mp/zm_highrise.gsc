@@ -60,8 +60,9 @@ survival_init() {
   vend_trigs = getEntArray("zombie_vending", "targetname");
 
   foreach(ent in vend_trigs) {
-    if(isDefined(ent.clip))
+    if(isDefined(ent.clip)) {
       ent.clip delete();
+    }
   }
 
   flag_wait("start_zombie_round_logic");
@@ -115,8 +116,9 @@ createfx_callback() {
   ents = getEntArray();
 
   for(i = 0; i < ents.size; i++) {
-    if(ents[i].classname != "info_player_start")
+    if(ents[i].classname != "info_player_start") {
       ents[i] delete();
+    }
   }
 }
 
@@ -126,8 +128,9 @@ main() {
   level thread maps\mp\zm_highrise_utility::main_start();
   level.level_createfx_callback_thread = ::createfx_callback;
 
-  if(!isDefined(level.vsmgr_prio_visionset_zm_whos_who))
+  if(!isDefined(level.vsmgr_prio_visionset_zm_whos_who)) {
     level.vsmgr_prio_visionset_zm_whos_who = 123;
+  }
 
   level.default_game_mode = "zclassic";
   level.default_start_location = "rooftop";
@@ -199,10 +202,11 @@ main() {
   level maps\mp\zm_highrise_achievement::init();
   precacheitem("death_throe_zm");
 
-  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2)
+  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
     level.optimise_for_splitscreen = 1;
-  else
+  } else {
     level.optimise_for_splitscreen = 0;
+  }
 
   precache_team_whos_who_characters();
   maps\mp\zombies\_zm_ai_leaper::precache();
@@ -216,8 +220,9 @@ main() {
   level thread maps\mp\zombies\_zm_zonemgr::manage_zones(init_zones);
 
   if(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen) {
-    if(is_classic())
+    if(is_classic()) {
       level.zombie_ai_limit = 20;
+    }
 
     setDvar("fx_marks_draw", 0);
     setDvar("disable_rope", 1);
@@ -419,20 +424,24 @@ choose_a_line_to_play() {
 }
 
 get_custom_zombie_sound_play_frequency() {
-  if(!isDefined(level.custom_zombie_sounds))
+  if(!isDefined(level.custom_zombie_sounds)) {
     return 100;
-
-  if(isDefined(level.last_custom_zombie_sound_time)) {
-    if(gettime() < level.last_custom_zombie_sound_time + level.custom_zombie_sound_played_interval)
-      return 0;
   }
 
-  if(level.round_number >= level.custom_zombie_sound_play_round_numbers[level.custom_zombie_sound_play_round_numbers.size - 1])
+  if(isDefined(level.last_custom_zombie_sound_time)) {
+    if(gettime() < level.last_custom_zombie_sound_time + level.custom_zombie_sound_played_interval) {
+      return 0;
+    }
+  }
+
+  if(level.round_number >= level.custom_zombie_sound_play_round_numbers[level.custom_zombie_sound_play_round_numbers.size - 1]) {
     return 40;
+  }
 
   for(i = 0; i < level.custom_zombie_sound_play_round_numbers.size; i++) {
-    if(level.round_number < level.custom_zombie_sound_play_round_numbers[i])
+    if(level.round_number < level.custom_zombie_sound_play_round_numbers[i]) {
       return level.custom_zombie_sound_play_frequences[i];
+    }
   }
 
   return 0;
@@ -502,10 +511,11 @@ watch_lightpower_devgui() {
     powercmd = getDvar(#"_id_0A84512A");
 
     if(isDefined(powercmd) && powercmd != "") {
-      if(powercmd == "on")
+      if(powercmd == "on") {
         clientnotify("pwr");
-      else
+      } else {
         clientnotify("pwo");
+      }
 
       setDvar("zombie_devgui_hrpowerlighting", "");
     }
@@ -517,10 +527,11 @@ watch_lightpower_devgui() {
 setup_leapers() {
   b_disable_leapers = isDefined(getdvarint(#"_id_60AEA36D")) && getdvarint(#"_id_60AEA36D");
 
-  if(b_disable_leapers)
+  if(b_disable_leapers) {
     flag_init("leaper_round");
-  else
+  } else {
     maps\mp\zombies\_zm_ai_leaper::enable_leaper_rounds();
+  }
 
   level.leapers_per_player = 6;
 }
@@ -529,8 +540,9 @@ setup_zone_monitor() {
   level.player_out_of_playable_area_monitor = 1;
   str_dvar_zone_monitor = getdvarint(#"_id_E9322600");
 
-  if(isDefined(str_dvar_zone_monitor) && str_dvar_zone_monitor)
+  if(isDefined(str_dvar_zone_monitor) && str_dvar_zone_monitor) {
     level.player_out_of_playable_area_monitor = 0;
+  }
 
   str_dvar_zone_test = getdvarint(#"_id_2313B5C5");
 
@@ -545,37 +557,45 @@ setup_zone_monitor() {
 zm_highrise_zone_monitor_callback() {
   b_kill_player = 1;
 
-  if(!self isonground())
+  if(!self isonground()) {
     b_kill_player = 0;
+  }
 
   if(getnumconnectedplayers() == 1) {
     if(isDefined(self.lives) && self.lives > 0) {
-      if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand())
+      if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
         b_kill_player = 0;
+      }
     }
   }
 
-  if(b_kill_player)
+  if(b_kill_player) {
     self thread maps\mp\zm_highrise_classic::insta_kill_player(0, 0);
+  }
 
   return b_kill_player;
 }
 
 ignore_equipment(zombie) {
-  if(!(isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area))
+  if(!(isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area)) {
     return true;
+  }
 
-  if(isDefined(zombie.is_avogadro) && zombie.is_avogadro)
+  if(isDefined(zombie.is_avogadro) && zombie.is_avogadro) {
     return true;
+  }
 
-  if(isDefined(zombie.is_inert) && zombie.is_inert)
+  if(isDefined(zombie.is_inert) && zombie.is_inert) {
     return true;
+  }
 
-  if(isDefined(zombie.inert_delay))
+  if(isDefined(zombie.inert_delay)) {
     return true;
+  }
 
-  if(isDefined(self.is_armed) && self.is_armed)
+  if(isDefined(self.is_armed) && self.is_armed) {
     return true;
+  }
 
   return false;
 }
@@ -584,8 +604,9 @@ highrise_respawn_override(revivee, return_struct) {
   players = get_players();
   spawn_points = maps\mp\gametypes_zm\_zm_gametype::get_player_spawns_for_gametype();
 
-  if(spawn_points.size == 0)
+  if(spawn_points.size == 0) {
     return undefined;
+  }
 
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i], undefined, 1) && players[i] != self) {
@@ -598,8 +619,9 @@ highrise_respawn_override(revivee, return_struct) {
               closest_group = j;
               spawn_location = get_valid_spawn_location(revivee, spawn_points, closest_group, return_struct);
 
-              if(isDefined(spawn_location))
+              if(isDefined(spawn_location)) {
                 return spawn_location;
+              }
             }
           }
         }
@@ -687,8 +709,9 @@ fall_down(vdir, stance) {
 
   self freezecontrols(1);
 
-  if(falling)
+  if(falling) {
     linker waittill("movedone");
+  }
 
   self giveweapon("death_throe_zm");
   self switchtoweapon("death_throe_zm");
@@ -728,8 +751,9 @@ offhand_weapon_overrride() {
   register_equipment_for_level("equip_springpad_zm");
   level.zombie_equipment_player_init = undefined;
 
-  if(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment)
+  if(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment) {
     register_equipment_for_level("slipgun_zm");
+  }
 }
 
 offhand_weapon_give_override(str_weapon) {
@@ -786,8 +810,9 @@ custom_add_weapons() {
   add_zombie_weapon("tazer_knuckles_zm", undefined, &"ZOMBIE_WEAPON_TAZER_KNUCKLES", 100, "tazerknuckles", "", undefined);
   add_zombie_weapon("slipgun_zm", undefined, &"ZOMBIE_WEAPON_SLIPGUN", 10, "slip", "", undefined);
 
-  if(isDefined(level.raygun2_included) && level.raygun2_included)
+  if(isDefined(level.raygun2_included) && level.raygun2_included) {
     add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
+  }
 }
 
 include_weapons() {
@@ -908,8 +933,9 @@ include_equipment_for_level() {
   level.springpad_trigger_radius = 96;
   include_equipment("equip_springpad_zm");
 
-  if(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment)
+  if(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment) {
     include_equipment("slipgun_zm");
+  }
 
   level.equipment_planted = ::equipment_planted;
   level.equipment_safe_to_drop = ::equipment_safe_to_drop;
@@ -929,8 +955,9 @@ zombie_highrise_devgui(cmd) {
 
   switch (cmd_strings[0]) {
     case "leaper_round_skip":
-      if(isDefined(level.next_leaper_round))
+      if(isDefined(level.next_leaper_round)) {
         maps\mp\zombies\_zm_devgui::zombie_devgui_goto_round(level.next_leaper_round);
+      }
 
       break;
     case "pick_up_keys":
@@ -951,8 +978,9 @@ pick_up_keys() {
     candidate_list = [];
 
     foreach(zone in level.zones) {
-      if(isDefined(zone.unitrigger_stubs))
+      if(isDefined(zone.unitrigger_stubs)) {
         candidate_list = arraycombine(candidate_list, zone.unitrigger_stubs, 1, 0);
+      }
     }
 
     foreach(stub in candidate_list) {
@@ -1026,8 +1054,9 @@ electric_switch() {
   master_switch playSound("zmb_switch_flip");
   master_switch playSound("evt_poweron_front");
 
-  if(isDefined(user))
+  if(isDefined(user)) {
     user thread maps\mp\zombies\_zm_audio::create_and_play_dialog("power", "power_on");
+  }
 
   level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
   master_switch waittill("rotatedone");
@@ -1063,15 +1092,17 @@ give_personality_characters() {
   if(!isDefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
 
-    if(self.characterindex == 1 && !isDefined(level.isstuhlingeringame))
+    if(self.characterindex == 1 && !isDefined(level.isstuhlingeringame)) {
       level.isstuhlingeringame = 1;
+    }
   }
 
   self.favorite_wall_weapons_list = [];
   self.talks_in_danger = 0;
 
-  if(getDvar(#"_id_40772CF1") != "")
+  if(getDvar(#"_id_40772CF1") != "") {
     self.characterindex = getdvarint(#"_id_40772CF1");
+  }
 
   switch (self.characterindex) {
     case 2:
@@ -1141,13 +1172,15 @@ assign_lowest_unused_character_index() {
     foreach(player in players) {
       if(isDefined(player.characterindex)) {
         if(player.characterindex == 2 || player.characterindex == 0) {
-          if(randomint(100) > 50)
+          if(randomint(100) > 50) {
             return 1;
+          }
 
           return 3;
         } else if(player.characterindex == 3 || player.characterindex == 1) {
-          if(randomint(100) > 50)
+          if(randomint(100) > 50) {
             return 0;
+          }
 
           return 2;
         }
@@ -1158,12 +1191,14 @@ assign_lowest_unused_character_index() {
     return charindexarray[0];
   } else {
     foreach(player in players) {
-      if(isDefined(player.characterindex))
+      if(isDefined(player.characterindex)) {
         arrayremovevalue(charindexarray, player.characterindex, 0);
+      }
     }
 
-    if(charindexarray.size > 0)
+    if(charindexarray.size > 0) {
       return charindexarray[0];
+    }
   }
 
   return 0;
@@ -1179,8 +1214,9 @@ zombie_init_done() {
     health_bonus = int(self.maxhealth * 0.05);
     self.maxhealth = self.maxhealth + health_bonus;
 
-    if(self.headmodel == "c_zom_zombie_chinese_head3_helmet")
+    if(self.headmodel == "c_zom_zombie_chinese_head3_helmet") {
       self.maxhealth = self.maxhealth + health_bonus;
+    }
 
     self.health = self.maxhealth;
   }
@@ -1254,8 +1290,9 @@ melee_anim_state() {
     melee_dist = distancesquared(self.origin, self.enemy.origin);
     kick_dist = 1024;
 
-    if(melee_dist < kick_dist)
+    if(melee_dist < kick_dist) {
       mas = "zm_jump_melee";
+    }
 
     self.melee_attack = 1;
     return mas;
@@ -1331,8 +1368,9 @@ toggle_zombie_traversals() {
 
 is_touching_instakill() {
   foreach(trigger in level.insta_kill_triggers) {
-    if(self istouching(trigger))
+    if(self istouching(trigger)) {
       return true;
+    }
   }
 
   return false;
@@ -1345,35 +1383,42 @@ player_force_from_prone() {
   while(true) {
     self waittill("trigger", who);
 
-    if(who getstance() == "prone" && isPlayer(who))
+    if(who getstance() == "prone" && isPlayer(who)) {
       who setstance("crouch");
+    }
 
     wait 0.1;
   }
 }
 
 equipment_safe_to_drop(weapon) {
-  if(isDefined(self.origin) && abs(self.origin[2] - weapon.origin[2]) > 120)
+  if(isDefined(self.origin) && abs(self.origin[2] - weapon.origin[2]) > 120) {
     return false;
+  }
 
-  if(!isDefined(weapon.canmove))
+  if(!isDefined(weapon.canmove)) {
     weapon.canmove = weapon maps\mp\zm_highrise_elevators::object_is_on_elevator();
+  }
 
-  if(isDefined(weapon.canmove) && weapon.canmove)
+  if(isDefined(weapon.canmove) && weapon.canmove) {
     return true;
+  }
 
-  if(weapon is_touching_instakill())
+  if(weapon is_touching_instakill()) {
     return false;
+  }
 
   return true;
 }
 
 use_safe_spawn_on_elevator(weapon, origin, angles) {
-  if(!isDefined(weapon.canmove))
+  if(!isDefined(weapon.canmove)) {
     weapon.canmove = weapon maps\mp\zm_highrise_elevators::object_is_on_elevator();
+  }
 
-  if(isDefined(weapon.canmove) && weapon.canmove && (isDefined(weapon.elevator_parent.is_moving) && weapon.elevator_parent.is_moving))
+  if(isDefined(weapon.canmove) && weapon.canmove && (isDefined(weapon.elevator_parent.is_moving) && weapon.elevator_parent.is_moving)) {
     return true;
+  }
 
   return false;
 }
@@ -1412,8 +1457,9 @@ equipment_planted(weapon, equipname, groundfrom) {
 }
 
 safe_place_for_buildable_piece(piece) {
-  if(self is_jumping())
+  if(self is_jumping()) {
     return false;
+  }
 
   return true;
 }
@@ -1434,8 +1480,9 @@ zm_highrise_pandora_fx_func() {
   if(isDefined(self) && isDefined(self.pandora_light)) {
     n_pandora_fx = level._effect["lght_marker"];
 
-    if(is_magic_box_in_inverted_building())
+    if(is_magic_box_in_inverted_building()) {
       n_pandora_fx = level._effect["pandora_box_inverted"];
+    }
 
     playFXOnTag(n_pandora_fx, self.pandora_light, "tag_origin");
   }
@@ -1448,8 +1495,9 @@ is_magic_box_in_inverted_building() {
   assert(isDefined(str_location), "is_magic_box_in_inverted_building() can't find magic box location");
 
   for(i = 0; i < a_boxes_in_inverted_building.size; i++) {
-    if(a_boxes_in_inverted_building[i] == str_location)
+    if(a_boxes_in_inverted_building[i] == str_location) {
       b_is_in_inverted_building = 1;
+    }
   }
 
   return b_is_in_inverted_building;
@@ -1565,8 +1613,9 @@ survivor_vox() {
     end_time = start_time + 5000;
 
     while(player useButtonPressed() && player istouching(trigger) && is_player_valid(player)) {
-      if(gettime() > end_time)
+      if(gettime() > end_time) {
         initiated = 1;
+      }
 
       wait 0.05;
     }
@@ -1581,16 +1630,17 @@ survivor_vox() {
     trigger waittill("trigger", player);
 
     if(is_player_valid(player)) {
-      if(sur_num == 1)
+      if(sur_num == 1) {
         count = 7;
-      else if(sur_num == 2)
+      } else if(sur_num == 2) {
         count = 5;
-      else if(sur_num == 3)
+      } else if(sur_num == 3) {
         count = 6;
-      else if(sur_num == 4)
+      } else if(sur_num == 4) {
         count = 4;
-      else if(sur_num == 5)
+      } else if(sur_num == 5) {
         count = 1;
+      }
 
       for(index = 0; index < count; index++) {
         trigger playsoundwithnotify("vox_sur" + sur_num + "_tv_distress_" + index, "vox_sur" + sur_num + "_tv_distress_" + index + "done");
@@ -1601,8 +1651,9 @@ survivor_vox() {
 
     sur_num++;
 
-    if(sur_num > 5)
+    if(sur_num > 5) {
       sur_num = 1;
+    }
 
     wait 5;
   }
@@ -1613,12 +1664,14 @@ buildable_build_custom_func(stub) {
   counter = 0;
 
   for(i = 0; i < buildable.pieces.size; i++) {
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built) {
       counter++;
+    }
   }
 
-  if(counter == buildable.pieces.size - 1)
+  if(counter == buildable.pieces.size - 1) {
     self thread do_player_general_vox("general", "build_final", 45);
+  }
 }
 
 elevator_traverse_watcher() {
@@ -1633,8 +1686,9 @@ elevator_traverse_watcher() {
           if(is_true(self.elevator_parent.is_moving)) {
             playFX(level._effect["zomb_gib"], self.origin);
 
-            if(!is_true(self.has_been_damaged_by_player))
+            if(!is_true(self.has_been_damaged_by_player)) {
               level.zombie_total++;
+            }
 
             self delete();
             return;
@@ -1650,16 +1704,19 @@ elevator_traverse_watcher() {
 highrise_special_weapon_magicbox_check(weapon) {
   if(isDefined(level.raygun2_included) && level.raygun2_included) {
     if(weapon == "ray_gun_zm") {
-      if(self has_weapon_or_upgrade("raygun_mark2_zm") || maps\mp\zombies\_zm_chugabud::is_weapon_available_in_chugabud_corpse("raygun_mark2_zm", self))
+      if(self has_weapon_or_upgrade("raygun_mark2_zm") || maps\mp\zombies\_zm_chugabud::is_weapon_available_in_chugabud_corpse("raygun_mark2_zm", self)) {
         return false;
+      }
     }
 
     if(weapon == "raygun_mark2_zm") {
-      if(self has_weapon_or_upgrade("ray_gun_zm") || maps\mp\zombies\_zm_chugabud::is_weapon_available_in_chugabud_corpse("ray_gun_zm", self))
+      if(self has_weapon_or_upgrade("ray_gun_zm") || maps\mp\zombies\_zm_chugabud::is_weapon_available_in_chugabud_corpse("ray_gun_zm", self)) {
         return false;
+      }
 
-      if(randomint(100) >= 33)
+      if(randomint(100) >= 33) {
         return false;
+      }
     }
   }
 

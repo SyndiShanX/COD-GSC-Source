@@ -68,11 +68,13 @@ remote_hud(ent, waitfor, text, timer, text2) {
 
   hud[0] destroy();
 
-  if(isDefined(text2))
+  if(isDefined(text2)) {
     hud[2] destroy();
+  }
 
-  if(isDefined(timer))
+  if(isDefined(timer)) {
     hud[1] destroy();
+  }
 }
 
 h2_sound_ent(sound) {
@@ -92,8 +94,9 @@ initRideKillstreak() {
   self _disableUsability();
   result = self initRideKillstreak_internal();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self _enableUsability();
+  }
 
   return result;
 }
@@ -101,18 +104,22 @@ initRideKillstreak() {
 initRideKillstreak_internal() {
   laptopWait = self waittill_any_timeout(1.0, "disconnect", "death", "weapon_switch_started");
 
-  if(laptopWait == "weapon_switch_started")
+  if(laptopWait == "weapon_switch_started") {
     return ("fail");
+  }
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return "fail";
+  }
 
   if(laptopWait == "disconnect" || laptopWait == "death") {
-    if(laptopWait == "disconnect")
+    if(laptopWait == "disconnect") {
       return ("disconnect");
+    }
 
-    if(self.team == "spectator")
+    if(self.team == "spectator") {
       return "fail";
+    }
 
     return ("success");
   }
@@ -127,30 +134,36 @@ initRideKillstreak_internal() {
   if(blackOutWait != "disconnect") {
     self thread clearRideIntro(1.0);
 
-    if(self.team == "spectator")
+    if(self.team == "spectator") {
       return "fail";
+    }
   }
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return "fail";
+  }
 
-  if(self isEMPed() || self isNuked())
+  if(self isEMPed() || self isNuked()) {
     return "fail";
+  }
 
-  if(blackOutWait == "disconnect")
+  if(blackOutWait == "disconnect") {
     return ("disconnect");
-  else
+  } else {
     return ("success");
+  }
 }
 
 clearRideIntro(delay) {
   self endon("disconnect");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
-  if(!isDefined(level.nukeVisionInProgress))
+  if(!isDefined(level.nukeVisionInProgress)) {
     self _visionsetnakedforplayer("", 0);
+  }
 }
 
 takeKillstreakWeapons() {
@@ -185,16 +198,18 @@ takeAllKillstreakWeapons() {
     if(maps\mp\gametypes\_hardpoints::h2_isKillstreakActivator(item)) {
       continue;
     }
-    if(isKillstreakWeapon(item))
+    if(isKillstreakWeapon(item)) {
       self takeWeapon(item);
+    }
   }
 }
 
 getLastWeaponWrapper() {
   lastWeapon = self getLastWeapon();
 
-  if(!self hasWeapon(lastWeapon))
+  if(!self hasWeapon(lastWeapon)) {
     lastWeapon = self getFirstPrimaryWeapon();
+  }
 
   return lastWeapon;
 }

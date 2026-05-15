@@ -2429,8 +2429,9 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   if(getDvar("notimer") == "1") {
     return;
   }
-  if(!isDefined(bUseTick))
+  if(!isDefined(bUseTick)) {
     bUseTick = false;
+  }
 
   killTimer();
   level endon("kill_timer");
@@ -3694,8 +3695,9 @@ window_smash(smashAnime) {
   animref anim_generic_reach(self, smashAnime);
   animref anim_generic(self, smashAnime);
 }
-if(!isDefined(bWaitForPlayer))
+if(!isDefined(bWaitForPlayer)) {
   bWaitForPlayer = false;
+}
 
 assert(isDefined(self.target));
 node = self curtain_pulldown_getnode();
@@ -3757,8 +3759,9 @@ curtain_pulldown_spawnmodel(node) {
 curtain_pulldown_getnode() {
   nodes = getEntArray(self.target, "targetname");
   foreach(node in nodes) {
-    if(node.classname == "script_origin")
+    if(node.classname == "script_origin") {
       return node;
+    }
   }
   assertMsg("curtain pulldown guy doesn't target a script_origin");
 }
@@ -3784,8 +3787,9 @@ dialogue_print(line, timeout) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint))
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
+  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -40);

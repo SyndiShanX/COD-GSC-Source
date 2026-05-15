@@ -21,23 +21,27 @@ main() {
 
   tess_init();
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(getDvar("mapname"));
+  }
 }
 
 initTweaks() {
   SetDevDvar("r_artUseTweaks", true);
 
-  if(isDefined(level.parse_fog_func))
+  if(isDefined(level.parse_fog_func)) {
     [[level.parse_fog_func]]();
+  }
 
-  if(!isDefined(level.buttons))
+  if(!isDefined(level.buttons)) {
     level.buttons = [];
+  }
 
   level._clearalltextafterhudelem = false;
 
-  if(!isDefined(level.vision_set_names))
+  if(!isDefined(level.vision_set_names)) {
     level.vision_set_names = [];
+  }
 
   if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
@@ -53,22 +57,25 @@ initTweaks() {
 
   update_current_vision_set_dvars();
 
-  if(!isDefined(level.current_vision_set))
+  if(!isDefined(level.current_vision_set)) {
     level.current_vision_set = getDvar("r_artTweaksLastVisionSet", "");
+  }
 
   IPrintLnBold("ART TWEAK ENABLED");
   hud_init();
 
   last_vision_set = level.current_vision_set;
-  if(!isDefined(last_vision_set) || last_vision_set == "")
+  if(!isDefined(last_vision_set) || last_vision_set == "") {
     last_vision_set = level.script;
+  }
 
   setcurrentgroup(last_vision_set);
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = false;
+  }
 
   SetDevDvar("scr_fog_fraction", "1.0");
   SetDevDvar("scr_art_dump", "0");
@@ -78,8 +85,9 @@ tweakart() {
   last_vision_set = "";
 
   for(;;) {
-    while(GetDvarInt("scr_art_tweak", 0) == 0)
+    while(GetDvarInt("scr_art_tweak", 0) == 0) {
       wait .05;
+    }
 
     if(!printed) {
       printed = true;
@@ -94,11 +102,11 @@ tweakart() {
 
     updateFogFromScript();
 
-    if(getdvarint("scr_select_art_next") || button_down("dpad_down", "kp_downarrow"))
+    if(getdvarint("scr_select_art_next") || button_down("dpad_down", "kp_downarrow")) {
       setgroup_down();
-    else if(getdvarint("scr_select_art_prev") || button_down("dpad_up", "kp_uparrow"))
+    } else if(getdvarint("scr_select_art_prev") || button_down("dpad_up", "kp_uparrow")) {
       setgroup_up();
-    else if(level.current_vision_set != last_vision_set) {
+    } else if(level.current_vision_set != last_vision_set) {
       last_vision_set = level.current_vision_set;
       setcurrentgroup(last_vision_set);
     }
@@ -244,8 +252,9 @@ updateFogFromScript() {
       ent.skyFogIntensity = 0;
     }
 
-    if(isDefined(level.parse_fog_func))
+    if(isDefined(level.parse_fog_func)) {
       set_fog_to_ent_values(ent, 0);
+    }
   }
 }
 
@@ -266,22 +275,25 @@ vision_set_fog_changes(vision_set, transition_time) {
   fog_ent = get_fog_ent_for_vision_set(vision_set);
   if(isDefined(fog_ent)) {
     translateFogEntTosliders(fog_ent);
-    if(isDefined(level.parse_fog_func))
+    if(isDefined(level.parse_fog_func)) {
       set_fog_to_ent_values(fog_ent, transition_time);
+    }
   }
 }
 
 get_fog_ent_for_vision_set(vision_set) {
   fog_ent = level.vision_set_fog[ToLower(vision_set)];
-  if(using_hdr_fog() && isDefined(fog_ent) && isDefined(fog_ent.HDROverride))
+  if(using_hdr_fog() && isDefined(fog_ent) && isDefined(fog_ent.HDROverride)) {
     fog_ent = level.vision_set_fog[ToLower(fog_ent.HDROverride)];
+  }
 
   return fog_ent;
 }
 
 using_hdr_fog() {
-  if(!isDefined(level.console))
+  if(!isDefined(level.console)) {
     set_console_status();
+  }
   AssertEx(isDefined(level.console) && isDefined(level.xb3) && isDefined(level.ps4), "Expected platform defines to be complete.");
 
   return is_gen4();
@@ -359,17 +371,19 @@ hud_init() {
     hudelems[i].foreground = 1;
     hudelems[i].fontScale = 2;
     hudelems[i].sort = 20;
-    if(i == div)
+    if(i == div) {
       hudelems[i].alpha = 1;
-    else
+    } else {
       hudelems[i].alpha = alpha;
+    }
 
     hudelems[i].x = 20;
     hudelems[i].y = org;
     hudelems[i] _settext(".");
 
-    if(i == div)
+    if(i == div) {
       alphainc *= -1;
+    }
 
     alpha += alphainc;
 
@@ -380,8 +394,9 @@ hud_init() {
 }
 
 _newhudelem() {
-  if(!isDefined(level.scripted_elems))
+  if(!isDefined(level.scripted_elems)) {
     level.scripted_elems = [];
+  }
   elem = newhudelem();
   level.scripted_elems[level.scripted_elems.size] = elem;
   return elem;
@@ -402,8 +417,9 @@ _settext(text) {
 }
 
 _clearalltextafterhudelem() {
-  if(level._clearalltextafterhudelem)
+  if(level._clearalltextafterhudelem) {
     return;
+  }
   level._clearalltextafterhudelem = true;
   self clearalltextafterhudelem();
   wait .05;
@@ -453,8 +469,9 @@ setcurrentgroup(group) {
   level.spam_model_current_group = group;
 
   index = array_find(level.vision_set_names, group);
-  if(!isDefined(index))
+  if(!isDefined(index)) {
     index = -1;
+  }
 
   hud_list_size = level.spam_group_hudelems.size;
   hud_start_index = index - int(hud_list_size / 2);
@@ -470,15 +487,17 @@ setcurrentgroup(group) {
   }
 
   group_name = "";
-  if(index >= 0)
+  if(index >= 0) {
     group_name = level.vision_set_names[index];
+  }
 
   vision_set_fog_changes(group_name, 0);
 }
 
 create_vision_set_fog(fogsetName) {
-  if(!isDefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
+  }
 
   ent = spawnStruct();
   ent.name = fogsetName;

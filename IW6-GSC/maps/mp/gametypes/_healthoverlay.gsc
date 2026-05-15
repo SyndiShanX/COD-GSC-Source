@@ -69,10 +69,11 @@ playerHealthRegen() {
 
     self.regenSpeed = 1;
 
-    if(self _hasPerk("specialty_regenfaster"))
+    if(self _hasPerk("specialty_regenfaster")) {
       self.regenSpeed *= level.regenFasterMod;
-    else if(self _hasPerk("specialty_bloodrush"))
+    } else if(self _hasPerk("specialty_bloodrush")) {
       self.regenSpeed *= self.bloodrushRegenSpeedMod;
+    }
 
     if(healthRatio <= level.healthOverlayCutoff) {
       self.atBrinkOfDeath = true;
@@ -150,24 +151,27 @@ healthRegeneration(hurtTime, healthRatio) {
     } else {
       wait(0.05);
       if(self.health < self.maxHealth) {
-        if(self _hasPerk("specialty_regenfaster"))
+        if(self _hasPerk("specialty_regenfaster")) {
           self.health += level.regenFasterHealthMod;
-        else if(self _hasPerk("specialty_bloodrush"))
+        } else if(self _hasPerk("specialty_bloodrush")) {
           self.health += self.bloodrushRegenHealthMod;
+        }
       } else
         break;
     }
 
-    if(self.health > self.maxHealth)
+    if(self.health > self.maxHealth) {
       self.health = self.maxHealth;
+    }
   }
 
   self notify("healed");
 
   self maps\mp\gametypes\_damage::resetAttackerList();
 
-  if(wasVeryHurt)
+  if(wasVeryHurt) {
     self maps\mp\gametypes\_missions::healthRegenerated();
+  }
 }
 
 wait_for_not_using_remote() {
@@ -207,12 +211,14 @@ playerPainBreathingSound(healthcap) {
     if(healthRegenDisabled && isDefined(self.breathingStopTime) && gettime() > self.breathingStopTime) {
       continue;
     }
-    if(self isUsingRemote())
+    if(self isUsingRemote()) {
       continue;
-    if(self hasFemaleCustomizationModel())
+    }
+    if(self hasFemaleCustomizationModel()) {
       self playLocalSound("Fem_breathing_hurt");
-    else
+    } else {
       self playLocalSound("breathing_hurt");
+    }
 
     wait(.784);
     wait(0.1 + randomfloat(0.8));

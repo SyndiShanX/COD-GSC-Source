@@ -29,8 +29,9 @@ stage_logic() {
   level notify("tomb_sidequest_complete");
 
   foreach(player in get_players()) {
-    if(player is_player_in_chamber())
+    if(player is_player_in_chamber()) {
       player thread fadetoblackforxsec(0, 1, 0.5, 0.5, "white");
+    }
   }
 
   wait 0.5;

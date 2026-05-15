@@ -59,5 +59,5 @@ function skipto_hack_3(a, b) {
 }
 
 function done(a, b, c, d) {
-  iprintln(("######## " + a) + " is completed ########");
+  iprintln(("########" + a) + " is completed ########");
 }

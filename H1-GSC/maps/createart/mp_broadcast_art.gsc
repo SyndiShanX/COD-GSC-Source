@@ -7,8 +7,9 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\mp_broadcast_fog_hdr::setupfog();
+  }
 
   visionsetnaked("mp_broadcast", 0);
 }

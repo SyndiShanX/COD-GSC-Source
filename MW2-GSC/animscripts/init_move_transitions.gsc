@@ -484,10 +484,11 @@ initMoveStartStopTransitions() {
       }
 
       if(isDefined(anim.coverExit[trans]) && isDefined(anim.coverExit[trans][i])) {
-        if(animHasNotetrack(anim.coverExit[trans][i], "code_move"))
+        if(animHasNotetrack(anim.coverExit[trans][i], "code_move")) {
           codeMoveTime = getNotetrackTimes(anim.coverExit[trans][i], "code_move")[0];
-        else
+        } else {
           codeMoveTime = 1;
+        }
 
         anim.coverExitDist[trans][i] = getMoveDelta(anim.coverExit[trans][i], 0, codeMoveTime);
         anim.coverExitAngles[trans][i] = getAngleDelta(anim.coverExit[trans][i], 0, 1);
@@ -505,8 +506,9 @@ initMoveStartStopTransitions() {
         continue;
       }
       lengthSq = lengthSquared(anim.coverTransDist[trans][i]);
-      if(anim.coverTransLongestDist[trans] < lengthSq)
+      if(anim.coverTransLongestDist[trans] < lengthSq) {
         anim.coverTransLongestDist[trans] = lengthSq;
+      }
     }
 
     anim.coverTransLongestDist[trans] = sqrt(anim.coverTransLongestDist[trans]);
@@ -541,8 +543,9 @@ initMoveStartStopTransitions() {
         continue;
       }
       len = length(anim.coverTransDist[trans][i]);
-      if(len > anim.longestExposedApproachDist)
+      if(len > anim.longestExposedApproachDist) {
         anim.longestExposedApproachDist = len;
+      }
     }
   }
 
@@ -691,10 +694,12 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       splitTime = 1.0 * i / (numiter - 1);
 
       delta = getMoveDelta(exitanim, 0, splitTime);
-      if(isapproach)
+      if(isapproach) {
         delta = DeltaRotate(fullDelta - delta, 180 - angleDelta);
-      if(isright)
+      }
+      if(isright) {
         delta = (delta[0], 0 - delta[1], delta[2]);
+      }
 
       val = min(delta[0] - 32, delta[1]);
 
@@ -720,14 +725,17 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     }
 
     AssertIsValidSplitDelta(delta, isRightSide, debugname) {
-      if(isRightSide)
+      if(isRightSide) {
         delta = (delta[0], 0 - delta[1], delta[2]);
+      }
 
-      if(delta[0] < 32)
+      if(delta[0] < 32) {
         println("^0 ^1" + debugname + " doesn't go out from the node far enough in the given split time (delta = " + delta + ")");
+      }
 
-      if(delta[1] < 0)
+      if(delta[1] < 0) {
         println("^0 ^1" + debugname + " goes into the wall during the given split time (delta = " + delta + ")");
+      }
     }
 
     checkApproachAngles(transTypes) {
@@ -747,10 +755,11 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           trans = transTypes[j];
 
           idealAdd = 0;
-          if(trans == "left" || trans == "left_crouch")
+          if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          else if(trans == "right" || trans == "right_crouch")
+          } else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
+          }
 
           if(isDefined(anim.coverTransAngles[trans][i])) {
             correctAngle = AngleClamp180(idealTransAngles[i] + idealAdd);
@@ -767,10 +776,11 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           trans = transTypes[j];
 
           idealAdd = 0;
-          if(trans == "left" || trans == "left_crouch")
+          if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          else if(trans == "right" || trans == "right_crouch")
+          } else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
+          }
 
           if(isDefined(anim.coverExitAngles[trans][i])) {
             correctAngle = AngleClamp180(-1 * (idealTransAngles[i] + idealAdd + 180));

@@ -28,11 +28,11 @@ function handlenotetrack(note, flagname, customfunction, var1) {
       self.allowpain = 1;
       break;
     case #"anim_melee = right":
-    case #"anim_melee = "right"":
+    case #"anim_melee = "right "":
       self.a.meleestate = "right";
       break;
     case #"anim_melee = left":
-    case #"anim_melee = "left"":
+    case #"anim_melee = "left "":
       self.a.meleestate = "left";
       break;
     case #"swap taghelmet to tagleft":

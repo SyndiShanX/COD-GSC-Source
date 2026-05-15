@@ -62,8 +62,9 @@ init_local() {
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
-  for(i = 0; i < positions.size; i++)
+  for(i = 0; i < positions.size; i++) {
     positions[i].vehicle_getoutanim = % bh_idle;
+  }
 
   return positions;
 }
@@ -76,8 +77,9 @@ using_animtree("generic_human");
 
 setanims() {
   positions = [];
-  for(i = 0; i < 8; i++)
+  for(i = 0; i < 8; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;
@@ -206,8 +208,9 @@ player_mount_blackhawk_gun(nolerp, player, hide_hud) {
 
   self.minigunUser = player;
 
-  if(!isDefined(hide_hud))
+  if(!isDefined(hide_hud)) {
     hide_hud = true;
+  }
   thread hud_hide(hide_hud);
   player allowprone(false);
   player allowcrouch(false);

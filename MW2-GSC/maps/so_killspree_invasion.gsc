@@ -94,11 +94,13 @@ so_killspree_init() {
   Objective_Add(1, "current", level.challenge_objective);
 
   sentries = getEntArray("misc_turret", "classname");
-  foreach(sentry in sentries)
-  sentry Delete();
+  foreach(sentry in sentries) {
+    sentry Delete();
+  }
   stingers = getEntArray("weapon_stinger", "classname");
-  foreach(stinger in stingers)
-  stinger Delete();
+  foreach(stinger in stingers) {
+    stinger Delete();
+  }
 
   level.points_p1 = 0;
   level.points_p1_display = level.points_p1;
@@ -108,8 +110,9 @@ so_killspree_init() {
   level.points_counter_display = level.points_counter;
   level.points_base_flash = scale_value(10);
   level.points_combo_base = scale_value(0.25);
-  foreach(player in level.players)
-  player.points_combo_unused = 0;
+  foreach(player in level.players) {
+    player.points_combo_unused = 0;
+  }
 
   level.points_max = level.points_counter;
 
@@ -137,11 +140,13 @@ so_killspree_init() {
   ladder_clip Delete();
 
   ladder_ents = getEntArray("inv_ladders", "script_noteworthy");
-  foreach(ent in ladder_ents)
-  ent Delete();
+  foreach(ent in ladder_ents) {
+    ent Delete();
+  }
   ladder_ents = getEntArray("inv_ladders_pathblocker", "script_noteworthy");
-  foreach(ent in ladder_ents)
-  ent disconnectpaths();
+  foreach(ent in ladder_ents) {
+    ent disconnectpaths();
+  }
 
   ent = GetEnt("predator_drone_control", "targetname");
   ent Delete();
@@ -156,8 +161,9 @@ so_killspree_init() {
     player.total_score = 0;
   }
 
-  if(!is_coop())
+  if(!is_coop()) {
     level.player.total_score = scale_value(level.points_goal);
+  }
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@SO_KILLSPREE_INVASION_DEADQUOTE_HINT1";
@@ -202,8 +208,9 @@ foreach(player in level.players) {
 level.pulse_requests = [];
 level.pulse_requests_p1 = [];
 level.pulse_requests_p2 = [];
-foreach(player in level.players)
-player thread hud_splash_destroy();
+foreach(player in level.players) {
+  player thread hud_splash_destroy();
+}
 
 array_thread(level.players, ::hud_create_kill_counter);
 }

@@ -28,8 +28,9 @@ main(model, type, turret_type) {
   build_unload_groups(::Unload_Groups);
   build_compassicon("automobile", false);
 
-  if(!isDefined(turret_type))
+  if(!isDefined(turret_type)) {
     turret_type = "minigun_hummer";
+  }
   build_turret(turret_type, "tag_turret", "weapon_suburban_minigun_no_doors", undefined, undefined, 0.2, 20, -14);
 }
 

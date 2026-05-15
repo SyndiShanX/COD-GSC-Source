@@ -83,8 +83,9 @@ waterTriggerWaiter() {
     if(!isPlayer(player)) {
       continue;
     }
-    if(!isDefined(player.isTouchingWaterSheetTrigger) || player.isTouchingWaterSheetTrigger == false)
+    if(!isDefined(player.isTouchingWaterSheetTrigger) || player.isTouchingWaterSheetTrigger == false) {
       thread watersheet_playFX(player);
+    }
   }
 }
 
@@ -117,16 +118,18 @@ watersheet_sound_play(trig) {
 
     trig playLoopSound("scn_jungle_under_falls_plr");
 
-    while(trig.sound_end_time > GetTime())
+    while(trig.sound_end_time > GetTime()) {
       wait(trig.sound_end_time - GetTime()) / 1000;
+    }
 
     trig StopLoopSound();
   }
 }
 
 impactCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -191,17 +194,20 @@ impact_breach_init() {
 
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
-    foreach(p in pathnodes)
-    p DisconnectNode();
+    foreach(p in pathnodes) {
+      p DisconnectNode();
+    }
   }
 
   proxy = getStructArray("breach_proxy", "targetname");
   foreach(p in proxy) {
-    if(!isDefined(p.target))
+    if(!isDefined(p.target)) {
       continue;
+    }
     breach = getstruct(p.target, "targetname");
-    if(!isDefined(breach))
+    if(!isDefined(breach)) {
       continue;
+    }
     breaches[breaches.size] = breach;
   }
   array_thread(breaches, ::impact_breach_update);
@@ -215,19 +221,23 @@ impact_breach_update() {
     eq_duration = .5;
     eq_radius = 200;
 
-    if(isDefined(self.script_dot))
+    if(isDefined(self.script_dot)) {
       eq_scale = self.script_dot;
-    if(isDefined(self.script_wait))
+    }
+    if(isDefined(self.script_wait)) {
       eq_duration = self.script_wait;
-    if(isDefined(self.radius))
+    }
+    if(isDefined(self.radius)) {
       eq_radius = self.radius;
+    }
 
     Earthquake(eq_scale, eq_duration, self.origin, eq_radius);
   }
 
   pathnodes = GetNodeArray(self.target, "targetname");
-  foreach(p in pathnodes)
-  p ConnectNode();
+  foreach(p in pathnodes) {
+    p ConnectNode();
+  }
 }
 
 setup_extinguishers() {
@@ -270,8 +280,9 @@ setup_watertanks() {
 
   watertanks = getEntArray("watertank", "targetname");
   if(watertanks.size > 0) {
-    for(i = 0; i < watertanks.size; i++)
+    for(i = 0; i < watertanks.size; i++) {
       watertanks[i] thread update_watertank(i);
+    }
   }
 }
 
@@ -368,15 +379,17 @@ get_watertank_hit_angle(attacker, direction_vec, hit_point) {
   temp_vec = hit_point - E;
 
   trace = bulletTrace(E, E + 1.5 * temp_vec, false, attacker, false);
-  if(isDefined(trace["normal"]) && isDefined(trace["entity"]) && (trace["entity"] == self))
+  if(isDefined(trace["normal"]) && isDefined(trace["entity"]) && (trace["entity"] == self)) {
     return trace["normal"];
+  }
 
   return undefined;
 }
 
 can_allocate_new_tank_crack() {
-  if(GetTime() < level.next_tank_hitfx_time)
+  if(GetTime() < level.next_tank_hitfx_time) {
     return false;
+  }
   return true;
 }
 
@@ -386,8 +399,9 @@ allocate_new_tank_crack() {
 
 setup_phys_hits() {
   phys_objs = getEntArray("shootable_hanger", "targetname");
-  if(phys_objs.size)
+  if(phys_objs.size) {
     array_thread(phys_objs, ::update_phys_hits);
+  }
 }
 
 update_phys_hits() {

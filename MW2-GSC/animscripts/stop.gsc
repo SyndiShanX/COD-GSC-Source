@@ -39,10 +39,11 @@ main() {
 
   transitionedToIdle = isDefined(self.customIdleAnimSet);
   if(!transitionedToIdle) {
-    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
+    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
       transitionedToIdle = true;
-    else if(AngleClamp180(self getMuzzleAngle()[0]) > 20)
+    } else if(AngleClamp180(self getMuzzleAngle()[0]) > 20) {
       transitionedToIdle = true;
+    }
   }
 
   for(;;) {
@@ -122,8 +123,9 @@ getDesiredIdlePose() {
 }
 
 transitionToIdle(pose, idleSet) {
-  if(self isCQBWalking() && self.a.pose == "stand")
+  if(self isCQBWalking() && self.a.pose == "stand") {
     pose = "stand_cqb";
+  }
 
   if(isDefined(anim.idleAnimTransition[pose])) {
     assert(isDefined(anim.idleAnimTransition[pose]["in"]));
@@ -135,8 +137,9 @@ transitionToIdle(pose, idleSet) {
 }
 
 playIdle(pose, idleSet) {
-  if(self isCQBWalking() && self.a.pose == "stand")
+  if(self isCQBWalking() && self.a.pose == "stand") {
     pose = "stand_cqb";
+  }
 
   idleAddAnim = undefined;
 
@@ -144,8 +147,9 @@ playIdle(pose, idleSet) {
     idleAnim = self.customIdleAnimSet[pose];
 
     additive = pose + "_add";
-    if(isDefined(self.customIdleAnimSet[additive]))
+    if(isDefined(self.customIdleAnimSet[additive])) {
       idleAddAnim = self.customIdleAnimSet[additive];
+    }
   } else {
     idleSet = idleSet % anim.idleAnimArray[pose].size;
 
@@ -153,8 +157,9 @@ playIdle(pose, idleSet) {
   }
 
   transTime = 0.2;
-  if(gettime() == self.a.scriptStartTime)
+  if(gettime() == self.a.scriptStartTime) {
     transTime = 0.5;
+  }
 
   if(isDefined(idleAddAnim)) {
     self setAnimKnobAll(idleAnim, %body, 1, transTime, 1);

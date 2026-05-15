@@ -46,10 +46,11 @@ setMeleeAttackDist() {
   self endon("death");
 
   while(1) {
-    if(isDefined(self.enemy) && isPlayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeAttackDist = anim.dogAttackPlayerDist;
-    else
+    } else {
       self.meleeAttackDist = anim.dogAttackAIDist;
+    }
 
     self waittill("enemy");
   }
@@ -74,8 +75,9 @@ initDogAnimations() {
     precachestring(&"NEW_DOG_DEATH_TOO_SOON_ALT");
   }
 
-  if(isDefined(anim.NotFirstTimeDogs))
+  if(isDefined(anim.NotFirstTimeDogs)) {
     return;
+  }
   precacheShader("hud_dog_melee");
   anim.NotFirstTimeDogs = 1;
   anim.dogStoppingDistSq = lengthSquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);

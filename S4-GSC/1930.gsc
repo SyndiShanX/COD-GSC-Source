@@ -580,9 +580,9 @@ _id_2FB2(var_0, var_1) {
   self endon("predictiveCalloutClear_" + var_0);
   _id_0B8D("Watch Entity Death or Enemy Disconnect: " + var_0);
 
-  if(!isDefined(var_1)) {} else if(isPlayer(var_1))
+  if(!isDefined(var_1)) {} else if(isPlayer(var_1)) {
     var_1 waittill("disconnect");
-  else {
+  } else {
     var_1 waittill("death");
   }
 

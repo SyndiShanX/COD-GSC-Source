@@ -74,15 +74,17 @@ hostMigrationTimerThink() {
 
   hostMigrationTimerThink_Internal();
 
-  if(self.hostMigrationControlsFrozen)
+  if(self.hostMigrationControlsFrozen) {
     self freezeControlsWrapper(false);
+  }
 
   self setClientDvar("cg_scoreboardPingGraph", "1");
 }
 
 waitTillHostMigrationDone() {
-  if(!isDefined(level.hostMigrationTimer))
+  if(!isDefined(level.hostMigrationTimer)) {
     return 0;
+  }
 
   starttime = gettime();
   level waittill("host_migration_end");
@@ -98,8 +100,9 @@ waitTillHostMigrationStarts(duration) {
 }
 
 waitLongDurationWithHostMigrationPause(duration) {
-  if(duration == 0)
+  if(duration == 0) {
     return;
+  }
   assert(duration > 0);
 
   starttime = gettime();
@@ -122,8 +125,9 @@ waitLongDurationWithHostMigrationPause(duration) {
 }
 
 waitLongDurationWithGameEndTimeUpdate(duration) {
-  if(duration == 0)
+  if(duration == 0) {
     return;
+  }
   assert(duration > 0);
 
   starttime = gettime();

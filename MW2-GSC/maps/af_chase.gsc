@@ -242,12 +242,14 @@ main() {
 
   thread search_the_scrash_site();
 
-  if(is_default_start() || issubstr(level.start_point, "boat"))
+  if(is_default_start() || issubstr(level.start_point, "boat")) {
     thread maps\af_chase_waterfall::main();
+  }
 
   trigger_out_of_caves = GetEnt("trigger_out_of_caves", "targetname");
-  if(isDefined(trigger_out_of_caves))
+  if(isDefined(trigger_out_of_caves)) {
     trigger_out_of_caves thread trigger_out_of_caves();
+  }
 
   open_area = getEntArray("open_area", "targetname");
   array_thread(open_area, ::trigger_open_area);
@@ -564,18 +566,24 @@ dialog_radio() {
 start_point_catchup_thread() {
   waittillframeend;
   start = level.start_point;
-  if(is_default_start())
+  if(is_default_start()) {
     return;
-  if(start == "boatdrive_nofail")
+  }
+  if(start == "boatdrive_nofail") {
     return;
-  if(start == "boatdrive_begin")
+  }
+  if(start == "boatdrive_begin") {
     return;
-  if(start == "boatdrive_lake")
+  }
+  if(start == "boatdrive_lake") {
     return;
-  if(start == "boatdrive_lake_mid")
+  }
+  if(start == "boatdrive_lake_mid") {
     return;
-  if(start == "boatdrive_rapids")
+  }
+  if(start == "boatdrive_rapids") {
     return;
+  }
   if(start == "boatdrive_below_rapids") {
     return;
   }
@@ -583,8 +591,9 @@ start_point_catchup_thread() {
   remove_global_spawn_function("axis", ::lower_accuracy_behind_player);
 
   flag_set("stop_boat_dialogue");
-  if(start == "boatdrive_end")
+  if(start == "boatdrive_end") {
     return;
+  }
   if(start == "boatdrive_end_test") {
     return;
   }

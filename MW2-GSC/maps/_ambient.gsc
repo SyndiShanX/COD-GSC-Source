@@ -10,8 +10,9 @@
 init() {
   level.ambient_zones = [];
 
-  if(!isDefined(level.global_ambience_blend_func))
+  if(!isDefined(level.global_ambience_blend_func)) {
     level.global_ambience_blend_func = ::empty_amb;
+  }
 
   add_zone("ac130");
   add_zone("alley");
@@ -41,17 +42,21 @@ init() {
 
   create_ambience_hud();
 
-  if(!isDefined(level.ambientEventEnt))
+  if(!isDefined(level.ambientEventEnt)) {
     level.ambientEventEnt = [];
+  }
 
-  if(!isDefined(level.ambient_reverb))
+  if(!isDefined(level.ambient_reverb)) {
     level.ambient_reverb = [];
+  }
 
-  if(!isDefined(level.ambient_eq))
+  if(!isDefined(level.ambient_eq)) {
     level.ambient_eq = [];
+  }
 
-  if(!isDefined(level.fxfireloopmod))
+  if(!isDefined(level.fxfireloopmod)) {
     level.fxfireloopmod = 1;
+  }
 
   level.reverb_track = "";
   level.eq_main_track = 0;
@@ -77,8 +82,9 @@ ambientVolume() {
   for(;;) {
     self waittill("trigger");
     activateAmbient("interior");
-    while(level.player isTouching(self))
+    while(level.player isTouching(self)) {
       wait 0.1;
+    }
     activateAmbient("exterior");
   }
 }
@@ -142,8 +148,9 @@ ambientEvent_no_block(track, name, weight) {
 }
 
 getRemap(track) {
-  if(track == "exterior" && isDefined(level.remap_exterior))
+  if(track == "exterior" && isDefined(level.remap_exterior)) {
     return level.remap_exterior;
+  }
 
   return track;
 }
@@ -246,10 +253,11 @@ use_eq_settings(track, eqIndex) {
       level.player deactivateeq(eqIndex, channel);
     } else {
       for(band = 0; band < 3; band++) {
-        if(isDefined(filter["type"][band]))
+        if(isDefined(filter["type"][band])) {
           level.player seteq(channel, eqIndex, band, filter["type"][band], filter["gain"][band], filter["freq"][band], filter["q"][band]);
-        else
+        } else {
           level.player deactivateeq(eqIndex, channel, band);
+        }
       }
     }
   }
@@ -280,8 +288,9 @@ start_ambient_event(track) {
     level.player.soundEnt = spawn("script_origin", (0, 0, 0));
     level.player.soundEnt.playingSound = false;
   } else {
-    if(level.player.soundEnt.playingSound)
+    if(level.player.soundEnt.playingSound) {
       level.player.soundEnt waittill("sounddone");
+    }
   }
 
   event = level.ambientEventEnt[track];
@@ -340,8 +349,9 @@ start_ambient_event(track) {
       ent playSound(alias);
     }
 
-    if(timer == gettime())
+    if(timer == gettime()) {
       wait(0.05);
+    }
     ent.playingSound = false;
   }
 }
@@ -363,8 +373,9 @@ ambientWeight(array, total_weights) {
   for(i = 0; i < array.size; i++) {
     item = array[i];
     current_total += item["weight"];
-    if(random_weight <= current_total)
+    if(random_weight <= current_total) {
       return item;
+    }
   }
   assertmsg("Impossible!");
 }
@@ -410,8 +421,9 @@ ambient_trigger() {
   check_ambience(outer_ambience);
 
   cap = 0.5;
-  if(isDefined(self.targetname) && self.targetname == "ambient_exit")
+  if(isDefined(self.targetname) && self.targetname == "ambient_exit") {
     cap = 0;
+  }
 
   for(;;) {
     self waittill("trigger", other);
@@ -421,19 +433,22 @@ ambient_trigger() {
     while(other istouching(self)) {
       progress = get_progress(start, end, dist, other.origin);
 
-      if(progress < 0)
+      if(progress < 0) {
         progress = 0;
+      }
 
-      if(progress > 1)
+      if(progress > 1) {
         progress = 1;
+      }
 
       set_ambience_blend(progress, inner_ambience, outer_ambience);
       wait(0.05);
     }
 
     progress = 1;
-    else
+    else {
       progress = 0;
+    }
 
     set_ambience_blend(progress, inner_ambience, outer_ambience);
   }
@@ -481,13 +496,15 @@ ambient_trigger_sets_ambience_levels(start, end, dist, inner_ambience, outer_amb
 }
 
 play_ambience(ambience) {
-  if(!isDefined(level.ambient_track))
+  if(!isDefined(level.ambient_track)) {
     return;
+  }
   if(!isDefined(level.ambient_track[ambience])) {
     return;
   }
-  if(!isDefined(level.ambience_timescale))
+  if(!isDefined(level.ambience_timescale)) {
     level.ambience_timescale = 1;
+  }
 
   ambientPlay(level.ambient_track[ambience], 1, level.ambience_timescale);
 
@@ -504,10 +521,12 @@ set_ambience_blend(progress, inner_ambience, outer_ambience) {
   level.ambient = current_ambient_event;
 
   modified_ambient = current_ambient_event;
-  if(level.ambient == "exterior")
+  if(level.ambient == "exterior") {
     modified_ambient += level.ambient_modifier["exterior"];
-  if(level.ambient == "interior")
+  }
+  if(level.ambient == "interior") {
     modified_ambient += level.ambient_modifier["interior"];
+  }
 
   play_ambience(modified_ambient);
 
@@ -532,11 +551,13 @@ set_ambience_blend(progress, inner_ambience, outer_ambience) {
 
   ambience_hud(progress);
 
-  if(progress == 1 || progress == 0)
+  if(progress == 1 || progress == 0) {
     level.nextmsg = 0;
+  }
 
-  if(!isDefined(level.nextmsg))
+  if(!isDefined(level.nextmsg)) {
     level.nextmsg = 0;
+  }
 
   if(gettime() < level.nextmsg) {
     return;
@@ -707,19 +728,23 @@ ambience_hud(progress) {
   if(debug_hud_disabled()) {
     return;
   }
-  if(level.amb_hud["eq_0"]["track"].enabled)
+  if(level.amb_hud["eq_0"]["track"].enabled) {
     set_hud_progress("eq_0", progress);
+  }
 
   progress = 1 - progress;
-  if(level.amb_hud["eq_1"]["track"].enabled)
+  if(level.amb_hud["eq_1"]["track"].enabled) {
     set_hud_progress("eq_1", progress);
+  }
 }
 
 debug_hud_disabled() {
-  if(getDvar("loc_warnings", 0) == "1")
+  if(getDvar("loc_warnings", 0) == "1") {
     return true;
-  if(getdvarint("debug_hud"))
+  }
+  if(getdvarint("debug_hud")) {
     return true;
+  }
   return !isDefined(level.amb_hud);
 }
 
@@ -733,9 +758,7 @@ set_ambience_blend_over_time(time, inner_ambience, outer_ambience) {
   update_freq = 0.05;
   update_amount = 1 / (time / update_freq);
 
-  for(;;)
-
-  {
+  for(;;) {} {
     progress = progress + update_amount;
 
     if(progress >= 1) {

@@ -13,10 +13,11 @@ matchstarttimerwaitforplayers_stub() {
   visionsetnaked("", 0);
   visionsetpostapply("", 0);
 
-  if(maps\mp\_utility::getmapname() != "trainer" && level.prematchperiodend > 0 && !isDefined(level.hostmigrationtimer))
+  if(maps\mp\_utility::getmapname() != "trainer" && level.prematchperiodend > 0 && !isDefined(level.hostmigrationtimer)) {
     maps\mp\gametypes\_gamelogic::matchstarttimer(level.prematchperiodend);
-  else
+  } else {
     setomnvar("ui_match_countdown_title", 0);
+  }
 
   foreach(player in level.players) {
     player thread toggle_custom_freeze(false);
@@ -148,6 +149,7 @@ prematchperiod_stub() {
     }
   }
 
-  if(game["state"] != "playing")
+  if(game["state"] != "playing") {
     return;
+  }
 }

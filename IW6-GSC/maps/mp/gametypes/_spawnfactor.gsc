@@ -82,8 +82,9 @@ avoidGrenades(spawnPoint) {
 avoidMines(spawnPoint) {
   explosiveArray = array_combine(level.mines, level.placedIMS);
 
-  if(isDefined(level.traps) && level.traps.size > 0)
+  if(isDefined(level.traps) && level.traps.size > 0) {
     explosiveArray = array_combine(explosiveArray, level.traps);
+  }
 
   foreach(explosive in explosiveArray) {
     if(!isDefined(explosive) || !(explosive isExplosiveDangerousToPlayer(spawnPoint))) {
@@ -116,11 +117,13 @@ isExplosiveDangerousToPlayer(player) {
 }
 
 avoidAirStrikeLocations(spawnPoint) {
-  if(!isDefined(level.artilleryDangerCenters))
+  if(!isDefined(level.artilleryDangerCenters)) {
     return CONST_SCORE_FACTOR_MAX;
+  }
 
-  if(!spawnPoint.outside)
+  if(!spawnPoint.outside) {
     return CONST_SCORE_FACTOR_MAX;
+  }
 
   airstrikeDanger = maps\mp\killstreaks\_airstrike::getAirstrikeDanger(spawnPoint.origin);
 
@@ -137,8 +140,9 @@ avoidCornerVisibleEnemies(spawnPoint) {
     enemyTeam = getEnemyTeam(self.team);
   }
 
-  if(spawnPoint.cornerSights[enemyTeam] > 0)
+  if(spawnPoint.cornerSights[enemyTeam] > 0) {
     return CONST_SCORE_FACTOR_MIN;
+  }
 
   return CONST_SCORE_FACTOR_MAX;
 }
@@ -149,8 +153,9 @@ avoidFullVisibleEnemies(spawnPoint) {
     enemyTeam = getEnemyTeam(self.team);
   }
 
-  if(spawnPoint.fullSights[enemyTeam] > 0)
+  if(spawnPoint.fullSights[enemyTeam] > 0) {
     return CONST_SCORE_FACTOR_MIN;
+  }
 
   return CONST_SCORE_FACTOR_MAX;
 }
@@ -187,8 +192,9 @@ avoidCloseEnemies(spawnPoint) {
 }
 
 avoidTelefrag(spawnPoint) {
-  if(isDefined(self.allowTelefrag))
+  if(isDefined(self.allowTelefrag)) {
     return CONST_SCORE_FACTOR_MAX;
+  }
 
   if(PositionWouldTelefrag(spawnPoint.origin)) {
     foreach(alternate in spawnpoint.alternates) {
@@ -228,8 +234,9 @@ avoidRecentlyUsedByEnemies(spawnPoint) {
   if(wasUsedByEnemy && isDefined(spawnpoint.lastspawntime)) {
     timePassed = GetTime() - spawnpoint.lastspawntime;
 
-    if(timePassed > CONST_RECENT_SPAWN_TIME_LIMIT)
+    if(timePassed > CONST_RECENT_SPAWN_TIME_LIMIT) {
       return CONST_SCORE_FACTOR_MAX;
+    }
 
     return (timePassed / CONST_RECENT_SPAWN_TIME_LIMIT) * CONST_SCORE_FACTOR_MAX;
   }
@@ -241,8 +248,9 @@ avoidRecentlyUsedByAnyone(spawnPoint) {
   if(isDefined(spawnpoint.lastspawntime)) {
     timePassed = GetTime() - spawnpoint.lastspawntime;
 
-    if(timePassed > CONST_RECENT_SPAWN_TIME_LIMIT)
+    if(timePassed > CONST_RECENT_SPAWN_TIME_LIMIT) {
       return CONST_SCORE_FACTOR_MAX;
+    }
 
     return (timePassed / CONST_RECENT_SPAWN_TIME_LIMIT) * CONST_SCORE_FACTOR_MAX;
   }
@@ -297,8 +305,9 @@ spawnFrontLineThink() {
   if(!level.teamBased) {
     return;
   }
-  while(!isDefined(level.spawnpoints))
+  while(!isDefined(level.spawnpoints)) {
     wait .05;
+  }
 
   frontLineTeamDiffYaw = undefined;
   frontLineMidpoint = undefined;
@@ -307,8 +316,9 @@ spawnFrontLineThink() {
   useDebugDraw = GetDvarInt("scr_draw_frontline") == 1;
 
   minUsableSpawns = GetDvarInt("scr_frontline_min_spawns", 0);
-  if(minUsableSpawns == 0)
+  if(minUsableSpawns == 0) {
     minUsableSpawns = CONST_FRONTLINE_MIN_SPAWNS;
+  }
 
   checkSpawnRatio = GetDvarInt("scr_frontline_disable_ratio_check", 0) != 1;
 
@@ -325,10 +335,11 @@ spawnFrontLineThink() {
       if(!isReallyAlive(player)) {
         continue;
       }
-      if(player.team == "axis")
+      if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      else
+      } else {
         alliesTeam[alliesTeam.size] = player;
+      }
     }
 
     alliesAverage = getAverageOrigin(alliesTeam);
@@ -348,21 +359,24 @@ spawnFrontLineThink() {
     idealTeamDiff = axisAverage - alliesAverage;
     idealTeamDiffYaw = VectorToYaw(idealTeamDiff);
 
-    if(!isDefined(frontLineTeamDiffYaw))
+    if(!isDefined(frontLineTeamDiffYaw)) {
       frontLineTeamDiffYaw = idealTeamDiffYaw;
+    }
 
     rotSpeed = CONST_FRONTLINE_ROT_SPEED;
     yawDelta = idealTeamDiffYaw - frontLineTeamDiffYaw;
-    if(yawDelta > 180)
+    if(yawDelta > 180) {
       yawDelta = yawDelta - 360;
-    else if(yawDelta < -180)
+    } else if(yawDelta < -180) {
       yawDelta = 360 + yawDelta;
+    }
     rotSpeed = clamp(yawDelta, rotSpeed * -1, rotSpeed);
     frontLineTeamDiffYaw += rotSpeed;
 
     idealMidpoint = alliesAverage + (idealTeamDiff * 0.5);
-    if(!isDefined(frontLineMidpoint))
+    if(!isDefined(frontLineMidpoint)) {
       frontLineMidpoint = idealMidpoint;
+    }
 
     midpointDelta = idealMidpoint - frontLineMidpoint;
     midpointDeltaDist = Length2D(midpointDelta);
@@ -393,8 +407,9 @@ spawnFrontLineThink() {
       }
 
       enemyTeam = getOtherTeam(assignedTeam);
-      if(!isDefined(spawnPoint.fullSights) || !isDefined(spawnPoint.fullSights[enemyTeam]) || spawnPoint.fullSights[enemyTeam] <= 0)
+      if(!isDefined(spawnPoint.fullSights) || !isDefined(spawnPoint.fullSights[enemyTeam]) || spawnPoint.fullSights[enemyTeam] <= 0) {
         usableSpawnCounts[assignedTeam]++;
+      }
     }
 
     lessSpawnsTeam = ter_op(usableSpawnCounts["allies"] < usableSpawnCounts["axis"], "allies", "axis");
@@ -428,8 +443,9 @@ spawnFrontLineThink() {
           Line(bisectLineStart, drawMidpoint, (0, 0.5, 0.5), 0, false, CONST_FRONTLINE_UPDATE_SCALE);
         }
 
-        if(useLog)
+        if(useLog) {
           [[level.matchRecording_logEvent]](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", bisectLineStart[0], bisectLineStart[1], GetTime(), undefined, bisectLineEnd[0], bisectLineEnd[1]);
+        }
 
         drawMidpoint = (idealMidpoint[0], idealMidpoint[1], level.mapCenter[2]);
         idealLine = AnglesToRight((0, idealTeamDiffYaw, 0));
@@ -440,8 +456,9 @@ spawnFrontLineThink() {
           Line(idealLineStart, drawMidpoint, (0, 0.5, 0), 0, false, CONST_FRONTLINE_UPDATE_SCALE);
         }
       } else {
-        if(useLog)
+        if(useLog) {
           [[level.matchRecording_logEvent]](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", 0, 0, GetTime(), undefined, 0, 0);
+        }
       }
 
       if(useLog) {
@@ -473,23 +490,26 @@ correctHomogenization() {
   axisStartSpawns = GetSpawnArray("mp_tdm_spawn_axis_start");
   lastAlliesAnchorOriginHistory = [];
 
-  while(!isDefined(level.spawnpoints))
+  while(!isDefined(level.spawnpoints)) {
     wait .05;
+  }
 
   mapname = ToLower(getDvar("mapname"));
 
   if(mapname == "mp_strikezone") {
     foreach(point in level.spawnpoints) {
-      if(point.origin[2] < 20000)
+      if(point.origin[2] < 20000) {
         zoneOnePoints[zoneOnePoints.size] = point;
-      else
+      } else {
         zoneTwoPoints[zoneTwoPoints.size] = point;
+      }
     }
 
-    if(level.teleport_zone_current == "start")
+    if(level.teleport_zone_current == "start") {
       sortedPoints = SortByDistance(zoneOnePoints, level.mapCenter);
-    else
+    } else {
       sortedPoints = SortByDistance(zoneTwoPoints, level.mapCenter);
+    }
 
     for(i = 0; i < 8; i++) {
       usableEdges[i] = sortedPoints[sortedPoints.size - (i + 1)];
@@ -519,10 +539,11 @@ correctHomogenization() {
       if(!isReallyAlive(player)) {
         continue;
       }
-      if(player.team == "axis")
+      if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      else
+      } else {
         alliesTeam[alliesTeam.size] = player;
+      }
     }
 
     alliesAverage = getAverageOrigin(alliesTeam);
@@ -583,22 +604,25 @@ detectHomogenization() {
       if(!isReallyAlive(player)) {
         continue;
       }
-      if(player.team == "axis")
+      if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      else
+      } else {
         alliesTeam[alliesTeam.size] = player;
+      }
     }
 
     averageAxisLocation = getAverageOrigin(axisTeam);
     averageAlliesLocation = getAverageOrigin(alliesTeam);
 
-    if(!isDefined(averageAlliesLocation) || !isDefined(averageAxisLocation))
+    if(!isDefined(averageAlliesLocation) || !isDefined(averageAxisLocation)) {
       return false;
+    }
 
-    if(distance_2d_squared(averageAlliesLocation, averageAxisLocation) < CONST_DIST_TO_HOMOGENIZATION)
+    if(distance_2d_squared(averageAlliesLocation, averageAxisLocation) < CONST_DIST_TO_HOMOGENIZATION) {
       return true;
-    else
+    } else {
       return false;
+    }
   } else {
     return false;
   }
@@ -712,10 +736,11 @@ scoreDomPoint(domPointNumber) {
   }
 
   claimTeam = domFlag maps\mp\gametypes\_gameobjects::getClaimTeam();
-  if(claimTeam == "none")
+  if(claimTeam == "none") {
     return CONST_SCORE_FACTOR_MAX;
-  else
+  } else {
     return CONST_SCORE_FACTOR_MAX * CONST_DOM_CONTESTED_FLAG_PENALTY;
+  }
 }
 
 preferDomPoints(spawnPoint, perferdDomPointArray) {
@@ -736,8 +761,9 @@ preferDomPoints(spawnPoint, perferdDomPointArray) {
 
 preferClosePoints(spawnPoint, preferdPointArray) {
   foreach(point in preferdPointArray) {
-    if(spawnPoint == point)
+    if(spawnPoint == point) {
       return CONST_SCORE_FACTOR_MAX;
+    }
   }
 
   return CONST_SCORE_FACTOR_MIN;

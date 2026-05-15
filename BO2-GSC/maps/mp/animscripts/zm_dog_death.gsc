@@ -19,8 +19,9 @@ main() {
 
   self unlink();
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
     self.enemy.syncedmeleetarget = undefined;
+  }
 
   death_anim = "death_" + getanimdirection(self.damageyaw);
 

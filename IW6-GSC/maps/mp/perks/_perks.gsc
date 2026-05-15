@@ -492,8 +492,9 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
   assert(isDefined(victim.team));
 
   if(matchMakingGame() && self.maxhealth > 100) {
-    if(isDefined(sWeapon) && weaponClass(sWeapon) == "spread")
+    if(isDefined(sWeapon) && weaponClass(sWeapon) == "spread") {
       damage *= (self.maxhealth / 100);
+    }
   }
 
   damageAdd = 0;
@@ -512,8 +513,9 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
     }
 
     if(isPlayer(attacker) && attacker _hasPerk("specialty_paint_pro") && !isKillstreakWeapon(sWeapon)) {
-      if(!victim isPainted())
+      if(!victim isPainted()) {
         attacker maps\mp\gametypes\_missions::processChallenge("ch_bulletpaint");
+      }
 
       victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
     }
@@ -546,8 +548,9 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
 
     if(isPlayer(attacker)) {
       if(attacker != victim && (attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) && !isKillstreakWeapon(sWeapon)) {
-        if(!victim isPainted())
+        if(!victim isPainted()) {
           attacker maps\mp\gametypes\_missions::processChallenge("ch_paint_pro");
+        }
 
         victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
       }
@@ -593,8 +596,9 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
 
   } else if(sMeansOfDeath == "MOD_FALLING") {
     if(victim _hasPerk("specialty_falldamage")) {
-      if(damage > 0)
+      if(damage > 0) {
         victim maps\mp\gametypes\_missions::processChallenge("ch_falldamage");
+      }
 
       damageAdd = 0;
       damage = 0;
@@ -638,8 +642,9 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
           break;
 
         default:
-          if(damage < 1000)
+          if(damage < 1000) {
             damage = 25;
+          }
           break;
       }
 
@@ -796,24 +801,30 @@ getPerkName(perkName) {
 
 updateActivePerks(eInflictor, attacker, victim, iDamage, sMeansOfDeath) {
   if(isDefined(eInflictor) && isPlayer(eInflictor) && isDefined(attacker) && isPlayer(attacker) && attacker != victim) {
-    if(attacker _hasPerk("specialty_triggerhappy"))
+    if(attacker _hasPerk("specialty_triggerhappy")) {
       attacker thread maps\mp\perks\_perkfunctions::setTriggerHappyInternal();
+    }
 
-    if(attacker _hasPerk("specialty_boom"))
+    if(attacker _hasPerk("specialty_boom")) {
       victim thread maps\mp\perks\_perkfunctions::setBoomInternal(attacker);
+    }
 
-    if(attacker _hasPerk("specialty_bloodrush"))
+    if(attacker _hasPerk("specialty_bloodrush")) {
       attacker thread maps\mp\perks\_perkfunctions::setBloodrushInternal();
+    }
 
-    if(attacker _hasPerk("specialty_deadeye"))
+    if(attacker _hasPerk("specialty_deadeye")) {
       attacker.deadeyeKillCount++;
+    }
 
     attacker_pers_abilityRecharging = attacker.pers["abilityRecharging"];
-    if(isDefined(attacker_pers_abilityRecharging) && attacker_pers_abilityRecharging)
+    if(isDefined(attacker_pers_abilityRecharging) && attacker_pers_abilityRecharging) {
       attacker notify("abilityFastRecharge");
+    }
 
     attacker_pers_abilityOn = attacker.pers["abilityOn"];
-    if(isDefined(attacker_pers_abilityOn) && attacker_pers_abilityOn)
+    if(isDefined(attacker_pers_abilityOn) && attacker_pers_abilityOn) {
       attacker notify("abilityExtraTime");
+    }
   }
 }

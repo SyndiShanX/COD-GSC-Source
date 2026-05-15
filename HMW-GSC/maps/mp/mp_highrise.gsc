@@ -91,8 +91,9 @@ SetupRappel() {
   }
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
-    if(isDefined(org))
+    if(isDefined(org)) {
       org delete();
+    }
   }
 }
 

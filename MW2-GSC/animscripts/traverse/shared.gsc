@@ -38,10 +38,11 @@ advancedTraverse(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animHasNotetrack(traverseAnim, "blend"))
+    if(!animHasNotetrack(traverseAnim, "blend")) {
       wait(gravityToBlendTime);
-    else
+    } else {
       self waittillmatch("traverse", "blend");
+    }
   }
 }
 
@@ -67,21 +68,24 @@ teleportThreadEx(verticalOffset, delay, frames, animRate) {
   if((verticalOffset == 0) || (frames <= 0)) {
     return;
   }
-  if(delay > 0)
+  if(delay > 0) {
     wait delay;
+  }
 
   offset = (0, 0, verticalOffset / frames);
 
-  if(isDefined(animRate) && (animRate < 1.0))
+  if(isDefined(animRate) && (animRate < 1.0)) {
     self setFlaggedAnimKnoball("traverseAnim", self.traverseAnim, self.traverseAnimRoot, 1, .2, animRate);
+  }
 
   for(i = 0; i < frames; i++) {
     self forceTeleport(self.origin + offset);
     wait .05;
   }
 
-  if(isDefined(animRate) && (animRate < 1.0))
+  if(isDefined(animRate) && (animRate < 1.0)) {
     self setFlaggedAnimKnoball("traverseAnim", self.traverseAnim, self.traverseAnimRoot, 1, .2, 1.0);
+  }
 }
 
 DoTraverse(traverseData) {
@@ -160,12 +164,13 @@ DoTraverse(traverseData) {
 }
 
 handleTraverseNotetracks(note) {
-  if(note == "traverse_death")
+  if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
-  else if(note == "traverse_align")
+  } else if(note == "traverse_align") {
     return handleTraverseAlignment();
-  else if(note == "traverse_drop")
+  } else if(note == "traverse_drop") {
     return handleTraverseDrop();
+  }
 }
 
 handleTraverseDeathNotetrack() {
@@ -205,10 +210,11 @@ handleTraverseDrop() {
     thread animscripts\utility::drawStringTime("drop offset: " + dropOffset, endpos, (1, 1, 1), 2);
   }
 
-  if(animDropHeight < realDropHeight)
+  if(animDropHeight < realDropHeight) {
     animRate = animDropHeight / realDropHeight;
-  else
+  } else {
     animRate = 1;
+  }
 
   teleportLength = (traverseAnimLength - traverseAnimPos) / 3.0;
   numFrames = ceil(teleportLength * 20);

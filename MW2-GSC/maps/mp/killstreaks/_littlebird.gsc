@@ -30,8 +30,9 @@ tryUseLbStrike(lifeId) {
 
   result = self selectLbStrikeLocation(lifeId);
 
-  if(!isDefined(result) || !result)
+  if(!isDefined(result) || !result) {
     return false;
+  }
 
   level.lbStrike++;
   return true;
@@ -57,8 +58,9 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team)
+        if(playerteam == team) {
           player iprintln(&"MP_WAR_AIRSTRIKE_INBOUND", owner);
+        }
       }
     }
   }
@@ -75,8 +77,9 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
 }
 
 clearProgress(delay) {
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
 
   wait(delay);
   level.lbStrike = 0;
@@ -143,8 +146,9 @@ spawnAttackLittleBird(owner, pathStart, pathGoal, coord) {
   forward = vectorToAngles(pathGoal - pathStart);
   lb = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
 
-  if(!isDefined(lb))
+  if(!isDefined(lb)) {
     return;
+  }
   lb.speed = 400;
   lb.health = 350;
   lb setCanDamage(true);
@@ -223,16 +227,19 @@ getBestLbDirection(hitpos) {
       bestanglefrac = trace["fraction"];
       bestangle = yaw;
 
-      if(trace["fraction"] >= 1)
+      if(trace["fraction"] >= 1) {
         fullTraceResults[fullTraceResults.size] = yaw;
+      }
     }
 
-    if(i % 3 == 0)
+    if(i % 3 == 0) {
       wait .05;
+    }
   }
 
-  if(fullTraceResults.size > 0)
+  if(fullTraceResults.size > 0) {
     return fullTraceResults[randomint(fullTraceResults.size)];
+  }
 
   return bestangle;
 }
@@ -243,8 +250,9 @@ callStrike(lifeId, owner, coord, yaw) {
   planeFlyHeight = 850;
   planeFlySpeed = 7000;
 
-  if(isDefined(level.airstrikeHeightScale))
+  if(isDefined(level.airstrikeHeightScale)) {
     planeFlyHeight *= level.airstrikeHeightScale;
+  }
 
   startPoint = coord + vector_multiply(anglesToForward(direction), -1 * planeHalfDistance);
   startPoint += (0, 0, planeFlyHeight);
@@ -368,11 +376,13 @@ lbExplode() {
   self playSound("cobra_helicopter_crash");
   self notify("explode");
 
-  if(isDefined(self.mgTurret1))
+  if(isDefined(self.mgTurret1)) {
     self.mgTurret1 delete();
+  }
 
-  if(isDefined(self.mgTurret2))
+  if(isDefined(self.mgTurret2)) {
     self.mgTurret2 delete();
+  }
 
   self clearProgress(0);
 

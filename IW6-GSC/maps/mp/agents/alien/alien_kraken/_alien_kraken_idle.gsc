@@ -49,8 +49,9 @@ play_water_fx_loop() {
     }
   }
 
-  if(common_scripts\utility::flag("fx_kraken_water"))
+  if(common_scripts\utility::flag("fx_kraken_water")) {
     self setscriptablepartstate("body", "normal");
+  }
 }
 
 end_water_fx_loop() {
@@ -62,8 +63,9 @@ end_water_fx_loop() {
 selectidleanimstate() {
   var_0 = "idle_";
 
-  if(isDefined(self.anim_state_modifier))
+  if(isDefined(self.anim_state_modifier)) {
     var_0 = var_0 + (self.anim_state_modifier + "_");
+  }
 
   var_1 = var_0 + level.alien_types["kraken"].attributes[self.stage]["ship_side"];
   return var_1;

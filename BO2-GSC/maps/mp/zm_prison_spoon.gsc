@@ -48,21 +48,25 @@ extra_death_func_to_check_for_splat_death() {
 
   if(self.damagemod == "MOD_GRENADE" || self.damagemod == "MOD_GRENADE_SPLASH") {
     if(self.damageweapon == "blundersplat_explosive_dart_zm") {
-      if(isPlayer(self.attacker))
+      if(isPlayer(self.attacker)) {
         self notify("killed_by_a_blundersplat", self.attacker);
+      }
     } else if(self.damageweapon == "bouncing_tomahawk_zm") {
-      if(isPlayer(self.attacker))
+      if(isPlayer(self.attacker)) {
         self.attacker notify("got_a_tomahawk_kill");
+      }
     }
   }
 
   if(isDefined(self.attacker.killed_with_only_tomahawk)) {
-    if(self.damageweapon != "bouncing_tomahawk_zm" && self.damageweapon != "none")
+    if(self.damageweapon != "bouncing_tomahawk_zm" && self.damageweapon != "none") {
       self.attacker.killed_with_only_tomahawk = 0;
+    }
   }
 
-  if(isDefined(self.attacker.killed_something_thq))
+  if(isDefined(self.attacker.killed_something_thq)) {
     self.attacker.killed_something_thq = 1;
+  }
 
   return false;
 }
@@ -74,10 +78,11 @@ zombie_spoon_func() {
   if(flag("charged_spoon") || !level.b_spoon_in_tub) {
     return;
   }
-  if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone("cellblock_shower"))
+  if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone("cellblock_shower")) {
     level.n_spoon_kill_count++;
-  else
+  } else {
     return;
+  }
 
   if(level.n_spoon_kill_count >= 50) {
     iprintlnbold("Spoon Charged");
@@ -91,8 +96,9 @@ wait_for_initial_conditions() {
   m_spoon_pickup ghost();
   m_spoon_pickup ghostindemo();
 
-  while(!isDefined(level.characters_in_nml) || level.characters_in_nml.size == 0)
+  while(!isDefined(level.characters_in_nml) || level.characters_in_nml.size == 0) {
     wait 1;
+  }
 
   flag_wait("soul_catchers_charged");
   m_poster = getent("poster", "targetname");
@@ -108,8 +114,9 @@ wait_for_initial_conditions() {
       playsoundatposition("zmb_squest_spoon_poster", m_poster.origin);
       m_poster delete();
 
-      if(isDefined(attacker) && isPlayer(attacker))
+      if(isDefined(attacker) && isPlayer(attacker)) {
         attacker do_player_general_vox("quest", "secret_poster", undefined, 100);
+      }
 
       wait 1.0;
       attacker thread do_player_general_vox("quest", "pick_up_easter_egg");
@@ -144,8 +151,9 @@ wait_for_initial_conditions() {
 }
 
 tomahawk_the_spoon(grenade, n_grenade_charge_power) {
-  if(self hasweapon("spoon_zm_alcatraz") || self hasweapon("spork_zm_alcatraz"))
+  if(self hasweapon("spoon_zm_alcatraz") || self hasweapon("spork_zm_alcatraz")) {
     return false;
+  }
 
   m_spoon = getent("pickup_spoon", "targetname");
 
@@ -168,8 +176,9 @@ tomahawk_the_spoon(grenade, n_grenade_charge_power) {
 }
 
 give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon) {
-  while(isDefined(m_tomahawk))
+  while(isDefined(m_tomahawk)) {
     wait 0.05;
+  }
 
   m_player_spoon delete();
 
@@ -180,8 +189,9 @@ give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon) {
     weapons = self getweaponslist();
 
     for(i = 0; i < weapons.size; i++) {
-      if(issubstr(weapons[i], "knife"))
+      if(issubstr(weapons[i], "knife")) {
         self takeweapon(weapons[i]);
+      }
     }
   }
 
@@ -204,8 +214,9 @@ wait_for_bucket_activated(player) {
     while(true) {
       level.t_bathtub waittill("trigger", who);
 
-      if(who == player)
+      if(who == player) {
         return;
+      }
     }
   } else
     level.t_bathtub waittill("trigger", who);

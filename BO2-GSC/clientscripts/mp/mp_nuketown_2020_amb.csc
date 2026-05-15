@@ -59,8 +59,9 @@ pa_think(notifyname, alias) {
   level waittill(notifyname);
   speakers = getEntArray(0, "loudspeaker", "targetname");
 
-  for(i = 0; i < speakers.size; i++)
+  for(i = 0; i < speakers.size; i++) {
     speakers[i] thread pa_play(alias);
+  }
 }
 
 pa_play(alias) {

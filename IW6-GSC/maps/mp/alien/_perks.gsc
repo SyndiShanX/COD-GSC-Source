@@ -18,8 +18,9 @@ init_perks() {
 PERK_TABLE = "mp/alien/perks_tree.csv";
 
 init_perks_from_table() {
-  if(!isDefined(level.alien_perks_table))
+  if(!isDefined(level.alien_perks_table)) {
     level.alien_perks_table = PERK_TABLE;
+  }
 
   level.alien_perks = [];
 
@@ -152,21 +153,25 @@ update_perks_from_table(start_idx, perk_type) {
 is_perk_set(perk_ref, upgrade_ref) {
   assert(isDefined(perk_ref) && isDefined(upgrade_ref));
 
-  if(perk_ref == upgrade_ref)
+  if(perk_ref == upgrade_ref) {
     return false;
+  }
 
-  if(!issubstr(upgrade_ref, perk_ref))
+  if(!issubstr(upgrade_ref, perk_ref)) {
     return false;
+  }
 
   perk_toks = StrTok(perk_ref, "_");
   upgrade_toks = StrTok(upgrade_ref, "_");
 
-  if(upgrade_toks.size - perk_toks.size != 1)
+  if(upgrade_toks.size - perk_toks.size != 1) {
     return false;
+  }
 
   for(i = 0; i < upgrade_toks.size - 1; i++) {
-    if(upgrade_toks[i] != perk_toks[i])
+    if(upgrade_toks[i] != perk_toks[i]) {
       return false;
+    }
   }
 
   return true;

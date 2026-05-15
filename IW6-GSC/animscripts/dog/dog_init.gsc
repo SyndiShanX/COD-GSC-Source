@@ -39,17 +39,19 @@ main() {
   self settalktospecies("dog");
   self.health = int(anim.dog_health * self.health);
 
-  if(!level.console)
+  if(!level.console) {
     thread pc_dogsetup();
+  }
 }
 
 pc_upgradedog() {
   var_0 = issubstr(self.model, "dog");
 
-  if(var_0)
+  if(var_0) {
     var_1 = "dog";
-  else
+  } else {
     var_1 = "wolf";
+  }
 
   var_2 = maps\_utility_dogs::get_dog_model_letter_type(self.model);
 
@@ -70,10 +72,11 @@ pc_downgradedog() {
   var_0 = getsubstr(self.model, 0, self.model.size - 4);
   var_1 = issubstr(self.model, "dog");
 
-  if(var_1)
+  if(var_1) {
     var_2 = "dog";
-  else
+  } else {
     var_2 = "wolf";
+  }
 
   if(isDefined(self.furfx)) {
     killfxontag(self.furfx, self, "tag_origin");
@@ -84,8 +87,9 @@ pc_downgradedog() {
 }
 
 pc_dogsetup() {
-  if(ishairrunning())
+  if(ishairrunning()) {
     pc_upgradedog();
+  }
 
   if(!isDefined(self.pc_furmonitor)) {
     self.pc_furmonitor = 1;
@@ -102,10 +106,11 @@ pc_furmonitor() {
     var_1 = ishairrunning();
 
     if(var_0 != var_1) {
-      if(var_1)
+      if(var_1) {
         pc_upgradedog();
-      else
+      } else {
         pc_downgradedog();
+      }
     }
 
     var_0 = var_1;
@@ -116,10 +121,11 @@ setmeleeattackdist() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.enemy) && isPlayer(self.enemy))
+    if(isDefined(self.enemy) && isPlayer(self.enemy)) {
       self.meleeattackdist = anim.dogattackplayerdist;
-    else
+    } else {
       self.meleeattackdist = anim.dogattackaidist;
+    }
 
     self waittill("enemy");
   }
@@ -170,8 +176,9 @@ initdoganimations() {
   var_1 = 5;
   var_2 = [];
 
-  for(var_3 = 0; var_3 <= var_1; var_3++)
+  for(var_3 = 0; var_3 <= var_1; var_3++) {
     var_2[var_2.size] = var_3 / var_1;
+  }
 
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = common_scripts\utility::array_randomize(var_2);

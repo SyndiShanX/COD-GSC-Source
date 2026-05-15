@@ -461,8 +461,9 @@ if(isDefined(delay)) {
   message = ">>" + message;
 }
 
-if(getDvar("specialops_debug") == "1")
+if(getDvar("specialops_debug") == "1") {
   IPrintLn(message);
+}
 }
 
 distance2d_squared(pos1, pos2) {

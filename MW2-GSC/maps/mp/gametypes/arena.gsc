@@ -36,12 +36,13 @@ main() {
 
   game["dialog"]["gametype"] = "arena";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  else if(getDvarInt("camera_thirdPerson"))
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_diehard"))
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
+  }
 
   game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
@@ -59,8 +60,9 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -172,8 +174,9 @@ arenaFlagWaiter() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getOtherTeam(spawnteam);
+  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -199,8 +202,9 @@ onNormalDeath(victim, attacker, lifeId) {
 
   team = victim.team;
 
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     attacker.finalKill = true;
+  }
 }
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
@@ -233,8 +237,9 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update)
+  if(update) {
     maps\mp\gametypes\_spectating::updateSpectateSettings();
+  }
 }
 
 arenaFlag() {
@@ -386,10 +391,11 @@ onBeginUse(player) {
     return;
   }
 
-  if(ownerTeam == "allies")
+  if(ownerTeam == "allies") {
     otherTeam = "axis";
-  else
+  } else {
     otherTeam = "allies";
+  }
 
   self.objPoints["allies"] thread maps\mp\gametypes\_objpoints::startFlashing();
   self.objPoints["axis"] thread maps\mp\gametypes\_objpoints::startFlashing();

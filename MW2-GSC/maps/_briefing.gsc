@@ -7,8 +7,9 @@ main() {
   setsaveddvar("hud_drawhud", 0);
 
   level.script = tolower(getDvar("mapname"));
-  if(!isDefined(level.tmpmsg))
+  if(!isDefined(level.tmpmsg)) {
     level.tmpmsg = [];
+  }
 
   player = getEntArray("player", "classname")[0];
   setsaveddvar("g_speed", 0);
@@ -28,10 +29,11 @@ main() {
     wait 0.05;
     player gotothelevel(false);
   } else {
-    for(i = 0; i < level.slide.size; i++)
-      if(isDefined(level.slide[i]["image"]))
+    for(i = 0; i < level.slide.size; i++) {
+      if(isDefined(level.slide[i]["image"])) {
         precacheshader(level.slide[i]["image"]);
-
+      }
+    }
     player thread skipthebriefing();
     player dothebriefing();
     player gotothelevel(false);
@@ -42,14 +44,18 @@ start(fFadeTime) {
   level.briefing_ending = false;
   level.PlaceNextImage = "A";
 
-  if(isDefined(level.imageA))
+  if(isDefined(level.imageA)) {
     level.imageA destroy();
-  if(isDefined(level.imageB))
+  }
+  if(isDefined(level.imageB)) {
     level.imageB destroy();
-  if(isDefined(level.blackscreen))
+  }
+  if(isDefined(level.blackscreen)) {
     level.blackscreen destroy();
-  if(isDefined(level.FiretoSkip))
+  }
+  if(isDefined(level.FiretoSkip)) {
     level.FiretoSkip destroy();
+  }
 
   if(!isDefined(fFadeTime) || !fFadeTime) {
     level.briefing_fadeInTime = 0.5;
@@ -119,8 +125,9 @@ start(fFadeTime) {
   for(i = 0; i < level.slide.size; i++) {
     soundplaying = false;
     if(isDefined(level.slide[i]["image"])) {
-      if(level.script[0] != "m")
+      if(level.script[0] != "m") {
         self soundplay("slide_advance");
+      }
       wait .5;
       self thread image(level.slide[i]["image"]);
     }
@@ -211,8 +218,9 @@ imageFadeOut(elem) {
 }
 
 endThread() {
-  if(!level.briefing_running)
+  if(!level.briefing_running) {
     return;
+  }
   if(level.briefing_ending) {
     return;
   }
@@ -236,8 +244,9 @@ end() {
 }
 
 soundplay(dialog, msg) {
-  if(isDefined(level.tmpmsg[dialog]))
+  if(isDefined(level.tmpmsg[dialog])) {
     iprintlnbold(level.tmpmsg[dialog]);
+  }
   if(isDefined(msg)) {
     thread soundplay_flag(dialog, msg);
     self playSound(dialog, msg);
@@ -253,8 +262,9 @@ soundplay_flag(dialog, msg) {
 
 dothebriefing() {
   self start(0.5);
-  if(level.script[0] != "m")
+  if(level.script[0] != "m") {
     self soundplay("slide_advance");
+  }
   wait(0.5);
   end();
 }
@@ -267,8 +277,9 @@ skipthebriefing() {
 gotothelevel(skipMovie) {
   if(!skipMovie) {
     for(i = 0; i < level.slide.size; i++) {
-      if(isDefined(level.slide[i]["movie"]))
+      if(isDefined(level.slide[i]["movie"])) {
         cinematic(level.slide[i]["movie"]);
+      }
     }
   }
 

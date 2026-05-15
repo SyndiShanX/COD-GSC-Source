@@ -158,17 +158,21 @@ restoreWeapons() {
     }
 
     self _giveWeapon(weapon);
-    if(isDefined(self.restoreWeaponClipAmmo[weapon]))
+    if(isDefined(self.restoreWeaponClipAmmo[weapon])) {
       self SetWeaponAmmoClip(weapon, self.restoreWeaponClipAmmo[weapon]);
-    if(isDefined(self.restoreWeaponStockAmmo[weapon]))
+    }
+    if(isDefined(self.restoreWeaponStockAmmo[weapon])) {
       self SetWeaponAmmoStock(weapon, self.restoreWeaponStockAmmo[weapon]);
+    }
   }
 
   foreach(altWeapon in altWeapons) {
-    if(isDefined(self.restoreWeaponClipAmmo[altWeapon]))
+    if(isDefined(self.restoreWeaponClipAmmo[altWeapon])) {
       self SetWeaponAmmoClip(altWeapon, self.restoreWeaponClipAmmo[altWeapon]);
-    if(isDefined(self.restoreWeaponStockAmmo[altWeapon]))
+    }
+    if(isDefined(self.restoreWeaponStockAmmo[altWeapon])) {
       self SetWeaponAmmoStock(altWeapon, self.restoreWeaponStockAmmo[altWeapon]);
+    }
   }
 
   self.restoreWeaponClipAmmo = undefined;
@@ -195,8 +199,9 @@ giveTank(lifeId, tankType) {
   self thread restorePerks();
   self thread restoreWeapons();
 
-  if(!isDefined(result))
+  if(!isDefined(result)) {
     result = false;
+  }
 
   return result;
 }
@@ -316,16 +321,18 @@ updateTankPlacement(tank) {
     if(tank.canBePlaced != lastCanPlaceTank) {
       if(tank.canBePlaced) {
         tank setModel(level.tankSettings[tank.tankType].modelPlacement);
-        if(self.team != "spectator")
+        if(self.team != "spectator") {
           self ForceUseHintOn(level.tankSettings[tank.tankType].stringPlace);
+        }
       } else {
         tank setModel(level.tankSettings[tank.tankType].modelPlacementFailed);
         if(self.team != "spectator") {
-          if(!is_aliens())
+          if(!is_aliens()) {
             self ForceUseHintOn(level.tankSettings[tank.tankType].stringCannotPlace);
-          else {
-            if(!self.inLastStand)
+          } else {
+            if(!self.inLastStand) {
               self ForceUseHintOn(level.tankSettings[tank.tankType].stringCannotPlace);
+            }
           }
         }
       }
@@ -340,9 +347,9 @@ tank_onCarrierDeath(carrier) {
   self endon("placed");
   self endon("death");
 
-  if(!is_aliens())
+  if(!is_aliens()) {
     carrier waittill("death");
-  else {
+  } else {
     carrier waittill_any("death", "last_stand");
     carrier notify("cancel_tank");
   }
@@ -369,14 +376,17 @@ tank_onGameEnded(carrier) {
 }
 
 tank_setCancelled() {
-  if(isDefined(self.carriedBy))
+  if(isDefined(self.carriedBy)) {
     self.carriedBy forceUseHintOff();
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.isCarrying = false;
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 tank_setPlaced() {
@@ -387,16 +397,18 @@ tank_setPlaced() {
   self.carriedBy forceUseHintOff();
   self.carriedBy = undefined;
 
-  if(!isDefined(self.owner))
+  if(!isDefined(self.owner)) {
     return false;
+  }
 
   owner = self.owner;
 
   owner.isCarrying = false;
 
   tank = createTank(self);
-  if(!isDefined(tank))
+  if(!isDefined(tank)) {
     return false;
+  }
 
   tank playSound("sentry_gun_plant");
 
@@ -430,8 +442,9 @@ createTank(tankForPlayer) {
   lifeId = tankForPlayer.lifeId;
 
   remoteTank = SpawnVehicle(level.tankSettings[tankType].modelBase, tankType, level.tankSettings[tankType].vehicleInfo, tankForPlayer.origin, tankForPlayer.angles, owner);
-  if(!isDefined(remoteTank))
+  if(!isDefined(remoteTank)) {
     return undefined;
+  }
 
   turretAttachTagOrigin = remoteTank GetTagOrigin("tag_turret_attach");
 
@@ -533,19 +546,22 @@ startUsingTank() {
     owner ThermalVisionOn();
     owner ThermalVisionFOFOverlayOn();
   }
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     owner setThirdPersonDOF(false);
+  }
 
   owner.restoreAngles = owner.angles;
 
   owner freezeControlsWrapper(true);
   result = owner maps\mp\killstreaks\_killstreaks::initRideKillstreak("remote_tank");
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       owner clearUsingRemote();
+    }
 
-    if(isDefined(owner.disabledWeapon) && owner.disabledWeapon)
+    if(isDefined(owner.disabledWeapon) && owner.disabledWeapon) {
       owner _enableWeapon();
+    }
     self notify("death");
 
     return false;
@@ -606,10 +622,11 @@ tank_blinkyLightCamera() {
 tank_setInactive() {
   self.mgTurret SetMode(level.tankSettings[self.tankType].sentryModeOff);
 
-  if(level.teamBased)
+  if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
+  }
 
   if(!isDefined(self.owner)) {
     return;
@@ -629,14 +646,16 @@ tank_setInactive() {
     owner clearUsingRemote();
     owner setPlayerAngles(owner.restoreAngles);
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       owner setThirdPersonDOF(true);
+    }
     if(is_aliens()) {
       owner VisionSetThermalForPlayer(game["thermal_vision"], 0);
     }
 
-    if(isDefined(owner.disabledUsability) && owner.disabledUsability)
+    if(isDefined(owner.disabledUsability) && owner.disabledUsability) {
       owner _enableUsability();
+    }
 
     owner takeKillstreakWeapons(level.tankSettings[self.tankType].streakName);
 
@@ -661,8 +680,9 @@ tank_handleDisconnect() {
 
   self.owner waittill("disconnect");
 
-  if(isDefined(self.mgTurret))
+  if(isDefined(self.mgTurret)) {
     self.mgTurret notify("death");
+  }
 
   self notify("death");
 }
@@ -735,8 +755,9 @@ tank_handleDeath() {
 Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
   vehicle = self;
 
-  if(isDefined(self.tank))
+  if(isDefined(self.tank)) {
     vehicle = self.tank;
+  }
 
   if(isDefined(vehicle.alreadyDead) && vehicle.alreadyDead) {
     return;
@@ -744,8 +765,9 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
   if(!maps\mp\gametypes\_weapons::friendlyFireCheck(vehicle.owner, attacker)) {
     return;
   }
-  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
     vehicle.wasDamagedFromBulletPenetration = true;
+  }
 
   vehicle.wasDamaged = true;
 
@@ -762,8 +784,9 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
     }
   }
 
-  if(meansOfDeath == "MOD_MELEE")
+  if(meansOfDeath == "MOD_MELEE") {
     damage = vehicle.maxHealth * 0.5;
+  }
 
   modifiedDamage = damage;
 
@@ -771,16 +794,19 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
     attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("remote_tank");
 
     if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
-      if(attacker _hasPerk("specialty_armorpiercing"))
+      if(attacker _hasPerk("specialty_armorpiercing")) {
         modifiedDamage += damage * level.armorPiercingMod;
+      }
     }
 
-    if(IsExplosiveDamageMOD(meansOfDeath))
+    if(IsExplosiveDamageMOD(meansOfDeath)) {
       modifiedDamage += damage;
+    }
   }
 
-  if(IsExplosiveDamageMOD(meansOfDeath) && (isDefined(weapon) && weapon == "destructible_car"))
+  if(IsExplosiveDamageMOD(meansOfDeath) && (isDefined(weapon) && weapon == "destructible_car")) {
     modifiedDamage = vehicle.maxHealth;
+  }
 
   if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
     attacker.owner maps\mp\gametypes\_damagefeedback::updateDamageFeedback("remote_tank");
@@ -914,8 +940,9 @@ tank_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(isDefined(self.specialDamageCallback))
+    if(isDefined(self.specialDamageCallback)) {
       self[[self.specialDamageCallback]](undefined, attacker, damage, iDFlags, meansOfDeath, weapon, point, direction_vec, undefined, undefined, modelName, partName);
+    }
   }
 }
 
@@ -926,8 +953,9 @@ tank_turret_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(isDefined(self.specialDamageCallback) && isDefined(self.tank) && (!IsExplosiveDamageMOD(meansOfDeath) || (isDefined(weapon) && IsExplosiveDamageMOD(meansOfDeath) && (weapon == "stealth_bomb_mp" || weapon == "artillery_mp"))))
+    if(isDefined(self.specialDamageCallback) && isDefined(self.tank) && (!IsExplosiveDamageMOD(meansOfDeath) || (isDefined(weapon) && IsExplosiveDamageMOD(meansOfDeath) && (weapon == "stealth_bomb_mp" || weapon == "artillery_mp")))) {
       self.tank[[self.specialDamageCallback]](undefined, attacker, damage, iDFlags, meansOfDeath, weapon, point, direction_vec, undefined, undefined, modelName, partName);
+    }
   }
 }
 

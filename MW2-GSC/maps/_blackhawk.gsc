@@ -68,8 +68,9 @@ init_local() {
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
-  for(i = 0; i < positions.size; i++)
+  for(i = 0; i < positions.size; i++) {
     positions[i].vehicle_getoutanim = % bh_idle;
+  }
 
   return positions;
 }
@@ -122,8 +123,9 @@ set_coop_player_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 8; i++)
+  for(i = 0; i < 8; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;

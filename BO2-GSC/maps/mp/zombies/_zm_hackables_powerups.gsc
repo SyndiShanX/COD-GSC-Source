@@ -66,8 +66,9 @@ powerup_hack(hacker) {
     }
   } else if(self.powerup.powerup_name == "full_ammo")
     self.powerup maps\mp\zombies\_zm_powerups::powerup_setup("fire_sale");
-  else
+  else {
     self.powerup maps\mp\zombies\_zm_powerups::powerup_setup("full_ammo");
+  }
 
   maps\mp\zombies\_zm_equip_hacker::deregister_hackable_struct(self);
 }

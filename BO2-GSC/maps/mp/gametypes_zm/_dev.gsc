@@ -16,17 +16,19 @@ init() {
 updatedevsettingszm() {
   if(level.players.size > 0) {
     if(getDvar(#"r_streamDumpDistance") == "3") {
-      if(!isDefined(level.streamdumpteamindex))
+      if(!isDefined(level.streamdumpteamindex)) {
         level.streamdumpteamindex = 0;
-      else
+      } else {
         level.streamdumpteamindex++;
+      }
 
       numpoints = 0;
       spawnpoints = [];
       location = level.scr_zm_map_start_location;
 
-      if((location == "default" || location == "") && isDefined(level.default_start_location))
+      if((location == "default" || location == "") && isDefined(level.default_start_location)) {
         location = level.default_start_location;
+      }
 
       match_string = level.scr_zm_ui_gametype + "_" + location;
 
@@ -39,18 +41,21 @@ updatedevsettingszm() {
               tokens = strtok(struct.script_string, " ");
 
               foreach(token in tokens) {
-                if(token == match_string)
+                if(token == match_string) {
                   spawnpoints[spawnpoints.size] = struct;
+                }
               }
             }
           }
         }
 
-        if(!isDefined(spawnpoints) || spawnpoints.size == 0)
+        if(!isDefined(spawnpoints) || spawnpoints.size == 0) {
           spawnpoints = getStructArray("initial_spawn_points", "targetname");
+        }
 
-        if(isDefined(spawnpoints))
+        if(isDefined(spawnpoints)) {
           numpoints = spawnpoints.size;
+        }
       }
 
       if(numpoints == 0) {

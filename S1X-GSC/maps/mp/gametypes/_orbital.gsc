@@ -359,12 +359,12 @@ showPodDroppingFXToPlayer() {
   foreach(player in level.players) {
     if(isDefined(player.drop_pod)) {
       if(player.team == self.team) {
-        if(isDefined(player.drop_pod.trophyFX_friendly))
+        if(isDefined(player.drop_pod.trophyFX_friendly)) {}
       }
       player.drop_pod.trophyFX_friendly ShowToPlayer(self);
 
       if(!(player.team == self.team)) {
-        if(isDefined(player.drop_pod.trophyFX_enemy))
+        if(isDefined(player.drop_pod.trophyFX_enemy)) {}
       }
       player.drop_pod.trophyFX_enemy ShowToPlayer(self);
     }
@@ -375,12 +375,12 @@ showPodGroundFXToPlayer() {
   foreach(player in level.players) {
     if(isDefined(player.drop_pod)) {
       if(player.team == self.team) {
-        if(isDefined(player.drop_pod.trophyFX_ground_friendly))
+        if(isDefined(player.drop_pod.trophyFX_ground_friendly)) {}
       }
       player.drop_pod.trophyFX_ground_friendly ShowToPlayer(self);
 
       if(!(player.team == self.team)) {
-        if(isDefined(player.drop_pod.trophyFX_ground_enemy))
+        if(isDefined(player.drop_pod.trophyFX_ground_enemy)) {}
       }
       player.drop_pod.trophyFX_ground_enemy ShowToPlayer(self);
     }
@@ -1489,7 +1489,7 @@ showDropPodBadSpawnOverlay() {
 
     foreach(player in level.players) {
       if(isDefined(player.isdropping)) {
-        if(player.isdropping)
+        if(player.isdropping) {}
       }
       player showOverlaysToPlayer();
     }

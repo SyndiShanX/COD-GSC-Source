@@ -227,8 +227,9 @@ getPlaneFlyHeight() {
   } else {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
     planeFlyHeight = 950;
-    if(isDefined(level.airstrikeHeightScale))
+    if(isDefined(level.airstrikeHeightScale)) {
       planeFlyHeight *= level.airstrikeHeightScale;
+    }
 
     return planeFlyHeight;
   }
@@ -242,8 +243,9 @@ getPlaneFlightPlan(distFromPlayer) {
   if(isDefined(heightEnt) && isDefined(heightEnt.script_noteworthy) && heightEnt.script_noteworthy == "fixedposition") {
     result.targetPos = heightEnt.origin;
     result.flightDir = anglesToForward(heightEnt.angles);
-    if(RandomInt(2) == 0)
+    if(RandomInt(2) == 0) {
       result.flightDir *= -1;
+    }
   } else {
     forwardVec = anglesToForward(self.angles);
     rightVec = AnglesToRight(self.angles);
@@ -276,8 +278,9 @@ stopTrackingPlane(obj) {
 
 selectAirstrikeLocation(lifeId, streakname, doStrikeFn) {
   targetSize = level.mapSize / 6.46875;
-  if(level.splitscreen)
+  if(level.splitscreen) {
     targetSize *= 1.5;
+  }
 
   config = level.planeConfigs[streakname];
   if(isDefined(config.selectLocationVO)) {

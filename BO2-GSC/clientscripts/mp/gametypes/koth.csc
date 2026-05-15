@@ -20,19 +20,23 @@ hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   if(level.hardpoints.size == 0) {
     hardpoints = getStructArray("koth_zone_center", "targetname");
 
-    foreach(point in hardpoints)
-    level.hardpoints[point.script_index] = point;
+    foreach(point in hardpoints) {
+      level.hardpoints[point.script_index] = point;
+    }
 
-    foreach(point in level.hardpoints)
-    level.visuals[point.script_index] = getStructArray(point.target, "targetname");
+    foreach(point in level.hardpoints) {
+      level.visuals[point.script_index] = getStructArray(point.target, "targetname");
+    }
 
-    if(isDefined(level.overridemapdefinedhardpointsfunc))
+    if(isDefined(level.overridemapdefinedhardpointsfunc)) {
       level[[level.overridemapdefinedhardpointsfunc]]();
+    }
   }
 
   if(isDefined(level.hardpointfx[localclientnum])) {
-    foreach(fx in level.hardpointfx[localclientnum])
-    stopfx(localclientnum, fx);
+    foreach(fx in level.hardpointfx[localclientnum]) {
+      stopfx(localclientnum, fx);
+    }
   }
 
   level.hardpointfx[localclientnum] = [];
@@ -43,10 +47,11 @@ hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
         if(!isDefined(visual.script_fxid)) {
           continue;
         }
-        if(isDefined(visual.angles))
+        if(isDefined(visual.angles)) {
           forward = anglesToForward(visual.angles);
-        else
+        } else {
           forward = (0, 0, 0);
+        }
 
         level.hardpointfx[localclientnum][level.hardpointfx[localclientnum].size] = playFX(localclientnum, level._effect[visual.script_fxid], visual.origin, forward);
       }

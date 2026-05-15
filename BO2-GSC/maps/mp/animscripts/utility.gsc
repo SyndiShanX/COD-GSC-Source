@@ -8,9 +8,9 @@ anim_get_dvar_int(dvar, def) {
 }
 
 anim_get_dvar(dvar, def) {
-  if(getDvar(dvar) != "")
+  if(getDvar(dvar) != "") {
     return getdvarfloat(dvar);
-  else {
+  } else {
     setDvar(dvar, def);
     return def;
   }
@@ -18,24 +18,28 @@ anim_get_dvar(dvar, def) {
 
 set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
-    if(isDefined(val1))
+    if(isDefined(val1)) {
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + gettime());
-    else
+    } else {
       println("DOG:Setting orient mode: " + mode + " " + gettime());
+    }
   }
 
-  if(isDefined(val1))
+  if(isDefined(val1)) {
     self orientmode(mode, val1);
-  else
+  } else {
     self orientmode(mode);
+  }
 }
 
 debug_anim_print(text) {
-  if(level.dog_debug_anims)
+  if(level.dog_debug_anims) {
     println(text + " " + gettime());
+  }
 
-  if(level.dog_debug_anims_ent == self getentnum())
+  if(level.dog_debug_anims_ent == self getentnum()) {
     println(text + " " + gettime());
+  }
 }
 
 debug_turn_print(text, line) {
@@ -72,8 +76,9 @@ current_yaw_line_debug(duration) {
   current_color_index = 0;
   start_time = gettime();
 
-  if(!isDefined(level.lastdebugheight))
+  if(!isDefined(level.lastdebugheight)) {
     level.lastdebugheight = 15;
+  }
 
   while(gettime() - start_time < 1000) {
     pos1 = (self.origin[0], self.origin[1], self.origin[2] + level.lastdebugheight);
@@ -83,21 +88,23 @@ current_yaw_line_debug(duration) {
     wait 0.05;
   }
 
-  if(level.lastdebugheight == 15)
+  if(level.lastdebugheight == 15) {
     level.lastdebugheight = 30;
-  else
+  } else {
     level.lastdebugheight = 15;
+  }
 }
 
 getanimdirection(damageyaw) {
-  if(damageyaw > 135 || damageyaw <= -135)
+  if(damageyaw > 135 || damageyaw <= -135) {
     return "front";
-  else if(damageyaw > 45 && damageyaw <= 135)
+  } else if(damageyaw > 45 && damageyaw <= 135) {
     return "right";
-  else if(damageyaw > -45 && damageyaw <= 45)
+  } else if(damageyaw > -45 && damageyaw <= 45) {
     return "back";
-  else
+  } else {
     return "left";
+  }
 
   return "front";
 }
@@ -106,8 +113,9 @@ setfootstepeffect(name, fx) {
   assert(isDefined(name), "Need to define the footstep surface type.");
   assert(isDefined(fx), "Need to define the mud footstep effect.");
 
-  if(!isDefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
+  }
 
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
   level._effect["step_" + name] = fx;

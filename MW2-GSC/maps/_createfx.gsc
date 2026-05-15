@@ -22,8 +22,9 @@ createfx() {
   level.mp_createfx = false;
 
   ai = getaiarray();
-  for(i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++) {
     ai[i] delete();
+  }
 
   thread createFxLogic();
 

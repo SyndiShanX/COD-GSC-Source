@@ -57,12 +57,13 @@ watch_chamber_wall() {
 }
 
 cap_value(val, min, max) {
-  if(val < min)
+  if(val < min) {
     return min;
-  else if(val > max)
+  } else if(val > max) {
     return max;
-  else
+  } else {
     return val;
+  }
 }
 
 chamber_wall_dust() {
@@ -87,8 +88,9 @@ chamber_change_walls(n_element) {
       continue;
     }
 
-    if(e_wall.script_int == level.n_chamber_wall_active)
+    if(e_wall.script_int == level.n_chamber_wall_active) {
       e_wall thread move_wall_up();
+    }
   }
 
   level.n_chamber_wall_active = n_element;
@@ -98,8 +100,9 @@ is_chamber_occupied() {
   a_players = getplayers();
 
   foreach(e_player in a_players) {
-    if(is_point_in_chamber(e_player.origin))
+    if(is_point_in_chamber(e_player.origin)) {
       return true;
+    }
   }
 
   return false;
@@ -120,8 +123,9 @@ chamber_wall_change_randomly() {
   level endon("stop_random_chamber_walls");
 
   for(n_elem_prev = undefined; 1; n_elem_prev = n_elem) {
-    while(!is_chamber_occupied())
+    while(!is_chamber_occupied()) {
       wait 1.0;
+    }
 
     flag_wait("any_crystal_picked_up");
     n_round = cap_value(level.round_number, 10, 30);
@@ -130,8 +134,9 @@ chamber_wall_change_randomly() {
     n_elem = random(a_element_enums);
     arrayremovevalue(a_element_enums, n_elem, 0);
 
-    if(isDefined(n_elem_prev))
+    if(isDefined(n_elem_prev)) {
       a_element_enums[a_element_enums.size] = n_elem_prev;
+    }
 
     chamber_change_walls(n_elem);
     wait(n_change_wall_time);
@@ -155,14 +160,16 @@ move_wall_down() {
 random_shuffle(a_items, item) {
   b_done_shuffling = undefined;
 
-  if(!isDefined(item))
+  if(!isDefined(item)) {
     item = a_items[a_items.size - 1];
+  }
 
   while(!(isDefined(b_done_shuffling) && b_done_shuffling)) {
     a_items = array_randomize(a_items);
 
-    if(a_items[0] != item)
+    if(a_items[0] != item) {
       b_done_shuffling = 1;
+    }
 
     wait 0.05;
   }
@@ -193,8 +200,9 @@ tomb_chamber_find_exit_point() {
   self notify("stop_find_flesh");
   self notify("zombie_acquire_enemy");
 
-  if(isDefined(locs[dest]))
+  if(isDefined(locs[dest])) {
     self setgoalpos(locs[dest].origin);
+  }
 
   self.b_wandering_in_chamber = 1;
   flag_wait("player_active_in_chamber");
@@ -236,10 +244,11 @@ tomb_is_valid_target_in_chamber() {
 }
 
 is_player_in_chamber() {
-  if(is_point_in_chamber(self.origin))
+  if(is_point_in_chamber(self.origin)) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 tomb_watch_chamber_player_activity() {
@@ -250,9 +259,9 @@ tomb_watch_chamber_player_activity() {
     wait 1.0;
 
     if(is_chamber_occupied()) {
-      if(tomb_is_valid_target_in_chamber())
+      if(tomb_is_valid_target_in_chamber()) {
         flag_set("player_active_in_chamber");
-      else {
+      } else {
         flag_clear("player_active_in_chamber");
         chamber_zombies_find_poi();
       }

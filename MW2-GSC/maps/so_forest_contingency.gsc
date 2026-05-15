@@ -98,8 +98,9 @@ stealth_achievement_end() {
   flag_wait("forest_success");
 
   if(!flag("broke_stealth") && !flag("enemy_killed")) {
-    foreach(player in level.players)
-    player maps\_utility::player_giveachievement_wrapper("SPECTER");
+    foreach(player in level.players) {
+      player maps\_utility::player_giveachievement_wrapper("SPECTER");
+    }
   }
 }
 
@@ -107,16 +108,18 @@ remove_extra_vehicles() {
   remove_ents = getEntArray("cargo1_group2", "targetname");
   remove_ents = array_merge(remove_ents, getEntArray("cargo2_group2", "targetname"));
   remove_ents = array_merge(remove_ents, getEntArray("cargo3_group2", "targetname"));
-  foreach(ent in remove_ents)
-  ent Delete();
+  foreach(ent in remove_ents) {
+    ent Delete();
+  }
 }
 
 remove_dead_trees() {
   dead_trees = getEntArray("destroyable_tree_base", "script_noteworthy");
   foreach(dead_tree in dead_trees) {
     dead_parts = getEntArray(dead_tree.target, "targetname");
-    if(isDefined(dead_parts))
+    if(isDefined(dead_parts)) {
       foreach(part in dead_parts) part delete();
+    }
   }
 }
 
@@ -289,8 +292,9 @@ woods_second_dog_patrol() {
   }
   end_patrol = getEntArray("end_patrol", "targetname");
   foreach(guy in end_patrol) {
-    if(isalive(guy))
+    if(isalive(guy)) {
       guy.threatbias = 10000;
+    }
   }
 }
 
@@ -299,15 +303,17 @@ woods_first_patrol_cqb() {
 
   flag_wait("first_patrol_cqb");
   first_patrol_cqb = getEntArray("first_patrol_cqb", "targetname");
-  foreach(guy in first_patrol_cqb)
-  guy spawn_ai();
+  foreach(guy in first_patrol_cqb) {
+    guy spawn_ai();
+  }
 }
 
 stealth_woods() {
   level endon("special_op_terminated");
 
-  if(!isDefined(level.woods_enemy_count))
+  if(!isDefined(level.woods_enemy_count)) {
     level.woods_enemy_count = 0;
+  }
 
   self stealth_plugin_basic();
 
@@ -377,8 +383,9 @@ Small_Goal_Attack_Behavior() {
   }
 
   player_to_pursue = get_closest_player_healthy(self.origin);
-  if(isDefined(player_to_pursue))
+  if(isDefined(player_to_pursue)) {
     self setgoalpos(player_to_pursue.origin);
+  }
 }
 
 woods_prespotted_func() {
@@ -418,13 +425,15 @@ dialog_player_kill() {
   }
   wait 3;
 
-  if(!stealth_is_everything_normal())
+  if(!stealth_is_everything_normal()) {
     return;
+  }
   if(!isDefined(level.good_kill_dialog_time)) {
     level.good_kill_dialog_time = gettime();
   } else {
-    if(gettime() < (level.good_kill_dialog_time + (15 * 1000)))
+    if(gettime() < (level.good_kill_dialog_time + (15 * 1000))) {
       return;
+    }
   }
   level.good_kill_dialog_time = gettime();
 
@@ -434,8 +443,9 @@ dialog_player_kill() {
 stealth_music_control() {
   level endon("special_op_terminated");
 
-  if(flag("stop_stealth_music"))
+  if(flag("stop_stealth_music")) {
     return;
+  }
   level endon("stop_stealth_music");
 
   while(1) {
@@ -490,8 +500,9 @@ dialog_unsilenced_weapons() {
 
     state = false;
     foreach(weapon in current_weapon_list) {
-      if(!array_contains(old_weapon_list, weapon))
+      if(!array_contains(old_weapon_list, weapon)) {
         state = true;
+      }
     }
 
     if(state) {

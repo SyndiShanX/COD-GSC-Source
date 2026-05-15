@@ -46,8 +46,9 @@ main() {
   setDvar("r_veilStrength", 0.167);
   setDvar("r_veilBackgroundStrength", 0.853);
 
-  if(level.ps3)
+  if(level.ps3) {
     setDvar("sm_sunShadowScale", "0.5");
-  else
+  } else {
     setDvar("sm_sunShadowScale", "0.7");
+  }
 }

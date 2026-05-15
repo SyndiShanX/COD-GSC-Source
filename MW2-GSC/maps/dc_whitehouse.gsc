@@ -195,8 +195,9 @@ tunnels_wave_guy() {
     self generic_dialogue_queue(lines[index]);
     wait randomfloatrange(7, 10);
 
-    if(index == 2)
+    if(index == 2) {
       wait 10;
+    }
     index = (index + 1) % lines.size;
   }
 
@@ -269,16 +270,18 @@ whitehouse_spotlight_main() {
 
   flag_wait("whitehouse_entrance_init");
 
-  if(isDefined(wh_spotlight))
+  if(isDefined(wh_spotlight)) {
     wh_spotlight.damage_ent notify("damage", 1000, level.player);
+  }
 
   ww_spotlight = whitehouse_spotlight_create("westwing_spotlight", 600);
 
   flag_wait("whitehouse_radio_start");
   wait 30;
 
-  if(isDefined(ww_spotlight))
+  if(isDefined(ww_spotlight)) {
     ww_spotlight.damage_ent notify("damage", 1000, level.player);
+  }
 }
 
 whitehouse_spotlight_dunn() {
@@ -993,8 +996,9 @@ whitehouse_interior() {
   flag_wait("whitehouse_path_elevator");
 
   time_left = (level.hammerdown_time - gettime()) / 1000;
-  if(time_left > 70)
+  if(time_left > 70) {
     autosave_by_name("whitehouse_parlor");
+  }
 
   flag_wait("whitehouse_chandelier");
   source_ent = getent("chandelier_grenade_source", "targetname");
@@ -1009,16 +1013,18 @@ whitehouse_interior() {
 whitehouse_drone() {
   self endon("death");
 
-  if(!isDefined(level.whitehouse_drone_array))
+  if(!isDefined(level.whitehouse_drone_array)) {
     level.whitehouse_drone_array = [];
+  }
   level.whitehouse_drone_array[level.whitehouse_drone_array.size] = self;
 
   self.health = 10000;
 
   flag_wait("whitehouse_silhouette_ready");
 
-  if(isDefined(self.script_animation))
+  if(isDefined(self.script_animation)) {
     self.deathanim = level.drone_death_anims[self.script_animation];
+  }
 
   self.health = 200;
 }
@@ -1207,12 +1213,13 @@ flare_spotted_think() {
   level.flare_guy endon("death");
 
   while(true) {
-    if(player_looking_at(level.flare_guy getEye(), 0.75))
+    if(player_looking_at(level.flare_guy getEye(), 0.75)) {
       flag_set("player_looking_at_flareguy");
-    else if(flag("flareguy_force"))
+    } else if(flag("flareguy_force")) {
       flag_set("player_looking_at_flareguy");
-    else
+    } else {
       flag_clear("player_looking_at_flareguy");
+    }
     wait 0.05;
   }
 }

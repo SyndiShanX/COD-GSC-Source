@@ -216,8 +216,9 @@ uaz_steer() {
       goal = goal * difference + straight_to_c130_goal * (1 - difference);
     }
 
-    if(speed >= 60)
+    if(speed >= 60) {
       accel = full_accel;
+    }
 
     speed += accel;
     speed = clamp(speed, 0, goal_speed);
@@ -258,8 +259,9 @@ uaz_steer_viewmodel() {
     input = clamp(input, -1, 1);
 
     steering += input * 0.1;
-    if(abs(steering) > abs(input))
+    if(abs(steering) > abs(input)) {
       steering = input;
+    }
 
     fraction = abs(steering);
 
@@ -297,8 +299,9 @@ ride_uaz_fake_price_fire() {
     burst = randomintrange(5, 15);
     target_origin = axis[0] getEye();
     for(i = 0; i < burst; i++) {
-      if(isalive(axis[0]))
+      if(isalive(axis[0])) {
         target_origin = axis[0] getEye();
+      }
       MagicBullet(self.weapon, level.price getEye() + (0, 0, 16), target_origin);
       wait 0.1;
     }
@@ -396,8 +399,9 @@ ride_rumble() {
   self waittill("trigger");
 
   rumble = "grenade_rumble";
-  if(isDefined(self.script_rumble))
+  if(isDefined(self.script_rumble)) {
     rumble = self.script_rumble;
+  }
 
   level.player PlayRumbleOnEntity(rumble);
 }
@@ -522,8 +526,9 @@ vehicle_frontal_guy(vehicle) {
 
   wait 0.05;
   self unlink();
-  if(isalive(self))
+  if(isalive(self)) {
     self kill(level.player.origin, level.player);
+  }
 }
 
 vehicle_player_induced_death() {
@@ -544,8 +549,9 @@ vehicle_player_induced_death() {
 
   while(total_damage < damage_limit) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
-    if(attacker != level.player)
+    if(attacker != level.player) {
       continue;
+    }
     if(type == "MOD_PROJECTILE") {
       break;
     }
@@ -563,8 +569,9 @@ vehicle_track_frontal() {
   while(true) {
     self waittill("veh_jolt", vector);
     force = abs(vector[0]) + abs(vector[1]) + abs(vector[2]);
-    if(force > crash_limit)
+    if(force > crash_limit) {
       self notify("event", "frontal");
+    }
   }
 }
 
@@ -594,14 +601,16 @@ vehicle_crash_turn(left_turn, wait_time) {
   self VehPhys_EnableCrashing();
   self vehicleDriveTo(goal_origin, self.veh_speed);
 
-  while(abs(self Vehicle_GetSteering()) < 1)
+  while(abs(self Vehicle_GetSteering()) < 1) {
     wait 0.05;
+  }
 
   vector = rotate_vector(vector, self.angles);
   self VehPhys_launch(vector, false);
 
-  if(!isDefined(wait_time))
+  if(!isDefined(wait_time)) {
     wait_time = 4;
+  }
 
   self waittill_still(wait_time, 200);
   self maps\_vehicle::godoff();
@@ -611,8 +620,9 @@ vehicle_crash_turn(left_turn, wait_time) {
 waittill_still(timeout, still_point) {
   mytimeOutEnt(timeout) endon("timeout");
 
-  if(!isDefined(still_point))
+  if(!isDefined(still_point)) {
     still_point = 50;
+  }
 
   velocity = self Vehicle_GetVelocity();
   velocity = abs(velocity[0]) + abs(velocity[1]) + abs(velocity[2]);
@@ -640,8 +650,9 @@ launch_object() {
   force_multiplier_arr["road_barrier_post"] = 4;
 
   foreach(obj in obj_array) {
-    if(vehicle == level.uaz)
+    if(vehicle == level.uaz) {
       level.player PlayRumbleOnEntity("damage_light");
+    }
 
     velocity = vehicle vehicle_getvelocity();
     angles1 = vectortoangles((obj.origin + (0, 0, 6)) - vehicle.origin);
@@ -656,14 +667,17 @@ launch_object() {
     velocity = rotate_vector(velocity, rotation);
 
     force_multiplier = 2;
-    if(isDefined(force_multiplier_arr[obj.model]))
+    if(isDefined(force_multiplier_arr[obj.model])) {
       force_multiplier = force_multiplier_arr[obj.model];
+    }
 
-    if(isDefined(obj.script_accel))
+    if(isDefined(obj.script_accel)) {
       force_multiplier = force_multiplier * obj.script_accel;
+    }
 
-    if(isDefined(obj.script_soundalias))
+    if(isDefined(obj.script_soundalias)) {
       level thread play_sound_in_space(obj.script_soundalias, obj.origin);
+    }
 
     velocity *= force_multiplier;
 
@@ -865,8 +879,9 @@ c130_rotate_hatch(hatch, hinge_origin, rate, stop_time, delay) {
   flag_wait("c130_hatch_open");
   wait(wait_time);
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait delay;
+  }
 
   hinge.animname = "c130_propeller";
   hinge assign_animtree();
@@ -933,35 +948,41 @@ flyby_rumble() {
 
 RUMBLE_FRAMES_PER_SEC = 10;
 screenshake(scale, duration, fade_in, fade_out) {
-  if(!isDefined(fade_in))
+  if(!isDefined(fade_in)) {
     fade_in = 0;
-  if(!isDefined(fade_out))
+  }
+  if(!isDefined(fade_out)) {
     fade_out = 0;
+  }
 
   assert((fade_in + fade_out) <= duration);
 
   frame_count = duration * RUMBLE_FRAMES_PER_SEC;
   fade_in_frame_count = fade_in * RUMBLE_FRAMES_PER_SEC;
-  if(fade_in_frame_count > 0)
+  if(fade_in_frame_count > 0) {
     fade_in_scale_step = scale / fade_in_frame_count;
-  else
+  } else {
     fade_in_scale_step = scale;
+  }
 
   fade_out_frame_count = fade_out * RUMBLE_FRAMES_PER_SEC;
   fade_out_start_frame = frame_count - fade_out_frame_count;
-  if(fade_out_frame_count > 0)
+  if(fade_out_frame_count > 0) {
     fade_out_scale_step = scale / fade_out_frame_count;
-  else
+  } else {
     fade_out_scale_step = scale;
+  }
 
   delay = 1 / RUMBLE_FRAMES_PER_SEC;
   scale = 0;
   for(i = 0; i < frame_count; i++) {
-    if(i <= fade_in_frame_count)
+    if(i <= fade_in_frame_count) {
       scale += fade_in_scale_step;
+    }
 
-    if(i > fade_out_start_frame)
+    if(i > fade_out_start_frame) {
       scale -= fade_out_scale_step;
+    }
 
     earthquake(scale, delay, level.player.origin, 500);
     wait delay;
@@ -980,8 +1001,9 @@ angel_flare_burst(flare_count) {
 }
 
 angel_flare() {
-  if(!isDefined(level.anim_index))
+  if(!isDefined(level.anim_index)) {
     level.anim_index = 0;
+  }
 
   rig = spawn_anim_model("angel_flare_rig");
 
@@ -1028,12 +1050,14 @@ threewayfight_threads() {
     return;
   }
   state = "default";
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     state = self.script_noteworthy;
+  }
 
   difficulty = level.gameskill;
-  if(difficulty == 0)
+  if(difficulty == 0) {
     difficulty = 1;
+  }
 
   waittillframeend;
 
@@ -1077,8 +1101,9 @@ threewayfight_threads_defaults() {
   self thread player_enemy();
   self thread delay_awareness();
 
-  if(self.team == "team3" && randomint(4) == 0)
+  if(self.team == "team3" && randomint(4) == 0) {
     self enable_heat_behavior(true);
+  }
 }
 
 ai_cap_count() {
@@ -1226,8 +1251,9 @@ littlebird_reaction(path_name) {
         continue;
       }
       total_damage += amount;
-      if(total_damage < 400)
+      if(total_damage < 400) {
         continue;
+      }
     }
 
     total_damage = 0;
@@ -1264,9 +1290,7 @@ littlebird_notarget_timeout() {
   timeout = 5000;
   start_time = gettime();
 
-  while(true)
-
-  {
+  while(true) {} {
     wait 0.05;
     if(isDefined(self.mgturret[0] getturrettarget(0)) || isDefined(self.mgturret[1] getturrettarget(0))) {
       start_time = gettime();
@@ -1306,15 +1330,17 @@ rpg_guy() {
     self setgoalpos(goal.origin);
   }
 
-  if(isDefined(goal.radius))
+  if(isDefined(goal.radius)) {
     self.goalradius = goal.radius;
-  else
+  } else {
     self.goalradius = 32;
+  }
 
   timeout = 10;
 
-  if(!isDefined(goal.script_shotcount) || goal.script_shotcount == 0)
+  if(!isDefined(goal.script_shotcount) || goal.script_shotcount == 0) {
     goal.script_shotcount = 1;
+  }
 
   self.a.rockets = goal.script_shotcount;
 
@@ -1330,8 +1356,9 @@ rpg_guy() {
       return;
     }
 
-    if(isDefined(etarget.script_parameters) && etarget.script_parameters == "straight")
+    if(isDefined(etarget.script_parameters) && etarget.script_parameters == "straight") {
       self SetStableMissile(true);
+    }
 
     if(issentient(etarget)) {
       ent = spawn("script_origin", etarget.origin);
@@ -1363,10 +1390,11 @@ spray_guy() {
   self.spray_guy = true;
 
   node = getnode(self.target, "targetname");
-  if(isDefined(node.radius))
+  if(isDefined(node.radius)) {
     self.goalradius = node.radius;
-  else
+  } else {
     self.goalradius = 32;
+  }
   self setgoalnode(node);
 
   self.no_pistol_switch = true;
@@ -1383,10 +1411,11 @@ spray_guy() {
   target_arr = array_randomize(target_arr);
 
   self SetEntityTarget(target_arr[0], 1);
-  if(isDefined(self.script_wait))
+  if(isDefined(self.script_wait)) {
     move_time = self.script_wait;
-  else
+  } else {
     move_time = randomfloatrange(1, 2.5);
+  }
 
   self waittill_notify_or_timeout("goal", 5);
 
@@ -1426,8 +1455,9 @@ delete_excess_trigger() {
   self waittill("trigger");
   level.delete_excess_safe_volume = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     level.delete_excess_safe_volume = getent(self.target, "targetname");
+  }
 
   flag_set("delete_excess");
   waittillframeend;
@@ -1435,12 +1465,15 @@ delete_excess_trigger() {
 }
 
 delete_excess_exeption(guy) {
-  if(isDefined(guy.ridingvehicle))
+  if(isDefined(guy.ridingvehicle)) {
     return true;
-  if(isDefined(guy.spray_guy))
+  }
+  if(isDefined(guy.spray_guy)) {
     return true;
-  if(isDefined(guy.rpg_guy))
+  }
+  if(isDefined(guy.rpg_guy)) {
     return true;
+  }
 
   return false;
 }
@@ -1454,11 +1487,12 @@ delete_excess() {
     dist = 1600 * 1600;
 
     foreach(guy in ai_arr) {
-      if(delete_excess_exeption(guy))
+      if(delete_excess_exeption(guy)) {
         continue;
-      if(isDefined(safe_volume) && guy istouching(safe_volume))
+      }
+      if(isDefined(safe_volume) && guy istouching(safe_volume)) {
         continue;
-      else if(!isDefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist) {
+      } else if(!isDefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist) {
         continue;
       }
       guy thread move_and_delete(true);
@@ -1521,8 +1555,9 @@ littlebird_at_goal() {
 higround_littlebird_aligned(end_msg) {
   self endon("death");
 
-  if(isDefined(end_msg))
+  if(isDefined(end_msg)) {
     level endon(end_msg);
+  }
 
   while(true) {
     flag_wait("littlebird_at_goal");
@@ -1638,10 +1673,11 @@ guy_free_attack(guy, pos) {
 
   fov = level.cosine["20"];
   while(true) {
-    if(within_fov(self.origin, self.angles, level.player.origin, fov))
+    if(within_fov(self.origin, self.angles, level.player.origin, fov)) {
       stance = "stand";
-    else
+    } else {
       stance = "crouch";
+    }
 
     if(stance != old_stance) {
       old_stance = stance;
@@ -1694,8 +1730,9 @@ guy_back_attack(guy, pos) {
   guy endon("death");
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
   assert(isDefined(animpos.back_attack));
-  while(1)
+  while(1) {
     maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.back_attack);
+  }
 }
 
 guy_backtohide_check(guy, pos) {
@@ -1721,8 +1758,9 @@ guy_hide_startingleft(guy, pos) {
   guy endon("death");
 
   animpos = maps\_vehicle_aianim::anim_pos(self, pos);
-  if(!isDefined(animpos.backtohide))
+  if(!isDefined(animpos.backtohide)) {
     return maps\_vehicle_aianim::guy_idle(guy, pos);
+  }
 
   maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.backtohide);
   thread guy_hide_attack_left(guy, pos);
@@ -1787,8 +1825,9 @@ guy_hide_attack_forward(guy, pos) {
 
   assert(isDefined(animpos.hide_attack_forward));
 
-  while(1)
+  while(1) {
     maps\_vehicle_aianim::animontag(guy, animpos.sittag, animpos.hide_attack_forward);
+  }
 }
 
 guy_hide_attack_left_check(guy, pos) {
@@ -1892,8 +1931,9 @@ killer_bird() {
   killer_bird waittill("goal");
 
   fov = level.cosine["20"];
-  while(!within_fov(killer_bird.origin, killer_bird.angles, level.player.origin, fov))
+  while(!within_fov(killer_bird.origin, killer_bird.angles, level.player.origin, fov)) {
     wait 0.05;
+  }
 
   killer_bird notify("killing_player");
 
@@ -1916,8 +1956,9 @@ killer_bird_goal(goal_origin) {
     new_origin = level.player.origin + (dist * vector) + (0, 0, height);
     vector = VectorNormalize(new_origin - level.player.origin);
 
-    if(SightTracePassed(level.player getEye(), new_origin, false, self))
+    if(SightTracePassed(level.player getEye(), new_origin, false, self)) {
       self SetVehGoalPos(new_origin, true);
+    }
 
     wait 2;
   }
@@ -1942,13 +1983,15 @@ makesentient(team) {
   self MakeEntitySentient(team);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self FreeEntitySentient();
+  }
 }
 
 waittill_damage(damage_types, attacker_ent, endon_death, timeout) {
-  if(isDefined(timeout))
+  if(isDefined(timeout)) {
     mytimeOutEnt(timeout) endon("timeout");
+  }
 
   if(isstring(damage_types)) {
     tmp = [];
@@ -1956,17 +1999,20 @@ waittill_damage(damage_types, attacker_ent, endon_death, timeout) {
     damage_types = tmp;
   }
 
-  if(isDefined(endon_death) && endon_death)
+  if(isDefined(endon_death) && endon_death) {
     self endon("death");
+  }
 
   state = false;
   while(!state) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
 
-    if(isDefined(damage_types))
+    if(isDefined(damage_types)) {
       state = isDefined(damage_types[tolower(type)]);
-    if(state && isDefined(attacker_ent))
+    }
+    if(state && isDefined(attacker_ent)) {
       state = (attacker_ent == attacker);
+    }
   }
 }
 
@@ -2054,8 +2100,9 @@ main_turret_think(target_ai) {
       if(issentient(ent) && !isalive(ent)) {
         continue;
       }
-      if(isDefined(ent.ridingvehicle))
+      if(isDefined(ent.ridingvehicle)) {
         continue;
+      }
       if(self Vehicle_CanTurretTargetPoint(ent.origin + (0, 0, 20), 1, ent)) {
         if(isPlayer(ent) || (IsAI(ent) && !self.fire_on_ai)) {
           ent_flag_set("hold_fire");
@@ -2090,21 +2137,25 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
   self notify("clear_turret_target");
   self endon("clear_turret_target");
 
-  if(isalive(target_ent))
+  if(isalive(target_ent)) {
     self thread main_turret_attack_target_death(target_ent);
+  }
 
-  if(!isDefined(target_ent.fake_target))
+  if(!isDefined(target_ent.fake_target)) {
     self SetTurretTargetEnt(target_ent, offset);
-  else
+  } else {
     self SetTurretTargetEnt(target_ent.fake_target, offset);
+  }
 
   self waittill("turret_on_target");
 
-  if(isDefined(timeout))
+  if(isDefined(timeout)) {
     mytimeOutEnt(timeout) endon("timeout");
+  }
 
-  if(!isDefined(no_vis))
+  if(!isDefined(no_vis)) {
     self thread main_turret_target_lost(target_ent, offset);
+  }
 
   starttime = gettime();
   while(true) {
@@ -2117,15 +2168,17 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
 main_turret_attack_target_death(target_ent) {
   self endon("clear_turret_target");
 
-  if(isDefined(target_ent.fake_target))
+  if(isDefined(target_ent.fake_target)) {
     target_ent.fake_target add_wait(::waittill_msg, "death");
+  }
   target_ent add_wait(::waittill_either, "death", "pain_death");
   do_wait_any();
 
   wait randomfloat(1);
 
-  if(is_in_array(self.main_turret_enemies, target_ent) && !isalive(target_ent))
+  if(is_in_array(self.main_turret_enemies, target_ent) && !isalive(target_ent)) {
     self.main_turret_enemies = array_remove(self.main_turret_enemies, target_ent);
+  }
   self notify("clear_turret_target");
 }
 
@@ -2139,10 +2192,12 @@ main_turret_target_lost(target_ent, offset) {
   while(true) {
     msg = self waittill_any_return("turret_no_vis", "turret_on_vistarget");
     if(msg == "turret_no_vis") {
-      if(self Vehicle_CanTurretTargetPoint(target_ent.origin + offset, 1, target_ent))
+      if(self Vehicle_CanTurretTargetPoint(target_ent.origin + offset, 1, target_ent)) {
         continue;
-      if(!isDefined(start_time))
+      }
+      if(!isDefined(start_time)) {
         start_time = gettime();
+      }
       if(start_time + timelimit < gettime()) {
         break;
       }
@@ -2163,8 +2218,9 @@ main_turret_aim_straight() {
   self setTurretTargetEnt(ent);
 
   self waittill_either("turret_on_target", "death");
-  if(isalive(self))
+  if(isalive(self)) {
     self ClearTurretTarget();
+  }
   ent delete();
   self ent_flag_clear("hold_fire");
 }
@@ -2188,12 +2244,13 @@ slowdown_on_target(speedmin, speedmax) {
 get_ai_enemies() {
   enemies = [];
   team = "";
-  if(isDefined(self.team))
+  if(isDefined(self.team)) {
     team = self.team;
-  else if(isDefined(self.script_team))
+  } else if(isDefined(self.script_team)) {
     team = self.script_team;
-  else
+  } else {
     assertmsg("get_ai_enemies used on entity with no team");
+  }
 
   switch (team) {
     case "axis":
@@ -2207,10 +2264,11 @@ get_ai_enemies() {
   }
 
   if(team != "allies") {
-    if(enemies.size > 0)
+    if(enemies.size > 0) {
       enemies = array_insert(enemies, level.player, 0);
-    else
+    } else {
       enemies[0] = level.player;
+    }
   }
 
   return enemies;
@@ -2237,8 +2295,9 @@ magic_rocket(delete_time) {
 
   if(isDefined(delete_time)) {
     wait delete_time;
-    if(isDefined(rocket))
+    if(isDefined(rocket)) {
       rocket delete();
+    }
   }
 }
 
@@ -2269,10 +2328,11 @@ random_delayed_kill(min_delay, max_delay) {
   enemies = SortByDistance(enemies, self.origin);
   guy = enemies[0];
 
-  if(isDefined(guy))
+  if(isDefined(guy)) {
     self Kill(guy getEye(), guy);
-  else
+  } else {
     self Kill(self getEye());
+  }
 }
 
 move_and_delete(add_delay) {
@@ -2305,8 +2365,9 @@ switch_colors() {
           guy set_force_color(colorCodes[0]);
         }
       } else {
-        if(isDefined(guy.old_forcecolor))
+        if(isDefined(guy.old_forcecolor)) {
           guy.old_forcecolor = colorCodes[0];
+        }
       }
     }
     flag_clear("switch_color");
@@ -2314,8 +2375,9 @@ switch_colors() {
 }
 
 waittill_stack_add(msg, ent) {
-  if(!isDefined(self.waittill_stack))
+  if(!isDefined(self.waittill_stack)) {
     self.waittill_stack = spawnStruct();
+  }
 
   self thread waittill_stack_thread(msg, ent);
 }
@@ -2329,23 +2391,30 @@ waittill_stack_thread(msg, ent) {
   self endon("waittill_stack");
   self endon("death");
 
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     ent = self;
+  }
 
   ent waittill(msg, a, b, c, d, e, f);
 
-  if(isDefined(a))
+  if(isDefined(a)) {
     self.waittill_stack.a = a;
-  if(isDefined(b))
+  }
+  if(isDefined(b)) {
     self.waittill_stack.b = b;
-  if(isDefined(c))
+  }
+  if(isDefined(c)) {
     self.waittill_stack.c = c;
-  if(isDefined(d))
+  }
+  if(isDefined(d)) {
     self.waittill_stack.d = d;
-  if(isDefined(e))
+  }
+  if(isDefined(e)) {
     self.waittill_stack.e = e;
-  if(isDefined(f))
+  }
+  if(isDefined(f)) {
     self.waittill_stack.f = f;
+  }
 
   self notify("waittill_stack", msg, ent);
 }
@@ -2369,37 +2438,42 @@ fire_missile(target_arr, number) {
     missile = self FireWeapon(tags[i % tags.size], target_ent);
     missile delaycall(1, ::Missile_ClearTarget);
 
-    if(isDefined(target_ent.script_delay))
+    if(isDefined(target_ent.script_delay)) {
       wait target_ent.script_delay;
-    else
+    } else {
       wait randomfloatrange(0.2, 0.3);
+    }
   }
 }
 
 move_spawn_and_go(path_ent) {
   self.origin = path_ent.origin;
-  if(isDefined(path_ent.angles))
+  if(isDefined(path_ent.angles)) {
     self.angles = path_ent.angles;
+  }
 
   other_ents = getEntArray(self.target, "targetname");
   foreach(ent in other_ents) {
-    if(isspawner(ent))
+    if(isspawner(ent)) {
       ent.targetname = path_ent.targetname;
+    }
   }
 
   self.target = path_ent.targetname;
 
   vehicle = self thread maps\_vehicle::spawn_vehicle_and_gopath();
 
-  if(vehicle maps\_vehicle::ishelicopter())
+  if(vehicle maps\_vehicle::ishelicopter()) {
     level thread mark_heli_path(path_ent);
+  }
 
   return vehicle;
 }
 
 new_vehicle_path(path_start) {
-  if(!self maps\_vehicle::ishelicopter())
+  if(!self maps\_vehicle::ishelicopter()) {
     self StartPath(path_start);
+  }
   self thread maps\_vehicle::vehicle_paths(path_start);
 }
 
@@ -2409,10 +2483,11 @@ turret_fire_control(mg_guy) {
   while(true) {
     mg_guy.ignoreall = !flag("minigun_fire");
 
-    if(flag("minigun_fire"))
+    if(flag("minigun_fire")) {
       flag_waitopen("minigun_fire");
-    else
+    } else {
       flag_wait("minigun_fire");
+    }
   }
 }
 
@@ -2432,8 +2507,9 @@ delete_not_touching_setup() {
 
 delete_not_touching() {
   self waittill("trigger");
-  while(level.player istouching(self))
+  while(level.player istouching(self)) {
     wait 0.5;
+  }
   self trigger_off();
 }
 
@@ -2537,8 +2613,9 @@ cc_move(my_line) {
   self endon("destoyed");
   while(true) {
     level.cc waittill("move", line);
-    if(line > my_line || my_line == 0)
+    if(line > my_line || my_line == 0) {
       continue;
+    }
     self MoveOverTime(.5);
     self.y = self.y - 14;
     my_line--;
@@ -2549,8 +2626,9 @@ draw_vehicle_paths() {
   vnode_arr = GetAllVehicleNodes();
   start_vnodes = [];
   foreach(vnode in vnode_arr) {
-    if(isDefined(vnode.spawnflags) && vnode.spawnflags & 1)
+    if(isDefined(vnode.spawnflags) && vnode.spawnflags & 1) {
       start_vnodes[start_vnodes.size] = vnode;
+    }
   }
 
   foreach(vnode in start_vnodes) {
@@ -2577,10 +2655,11 @@ debug_stance(stance) {
   while(1) {
     wait 0.05;
     if(getdvarint("debug_stance", 0)) {
-      if(stance == "stand")
+      if(stance == "stand") {
         Print3d(self.origin + (0, 0, 80), "S");
-      else
+      } else {
         Print3d(self.origin + (0, 0, 80), "C");
+      }
     }
   }
 }

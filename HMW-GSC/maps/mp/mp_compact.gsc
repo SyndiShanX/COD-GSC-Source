@@ -45,14 +45,16 @@ main() {
 
 doMagnet() {
   strength = 18000;
-  if(getDvar("scr_compact_magnet_strength") != "")
+  if(getDvar("scr_compact_magnet_strength") != "") {
     strength = getdvarfloat("scr_compact_magnet_strength");
+  }
   if(strength == 0) {
     return;
   }
   radius = 250;
-  if(getDvar("scr_compact_magnet_radius") != "")
+  if(getDvar("scr_compact_magnet_radius") != "") {
     radius = getdvarfloat("scr_compact_magnet_radius");
+  }
   if(radius <= 0) {
     return;
   }
@@ -113,8 +115,9 @@ crusherControl() {
 
     wait 2;
 
-    while(gettime() - playerDetector.triggertime <= 2000)
+    while(gettime() - playerDetector.triggertime <= 2000) {
       wait .05;
+    }
   }
 }
 
@@ -140,7 +143,8 @@ crushEmThread() {
   for(;;) {
     self waittill("trigger", player);
 
-    if(player isTouching(crushBottom) && isReallyAlive(player))
+    if(player isTouching(crushBottom) && isReallyAlive(player)) {
       player _suicide();
+    }
   }
 }

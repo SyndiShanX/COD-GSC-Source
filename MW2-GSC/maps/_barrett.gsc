@@ -134,8 +134,9 @@ exchange_player_fires() {
 should_break_zoom_hint() {
   assert(isPlayer(self));
 
-  if(!flag("player_is_on_turret"))
+  if(!flag("player_is_on_turret")) {
     return true;
+  }
 
   return flag("player_used_zoom");
 }

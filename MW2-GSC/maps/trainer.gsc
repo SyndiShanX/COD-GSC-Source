@@ -12,10 +12,11 @@
 main() {
   set_console_status();
 
-  if(level.console)
+  if(level.console) {
     level.hint_text_size = 1.6;
-  else
+  } else {
     level.hint_text_size = 1.2;
+  }
 
   setDvarIfUninitialized("trainer_debug", "0");
   level.objectiveRegroup = 0;
@@ -517,10 +518,11 @@ firing_range_hip_and_ads() {
 
   level.foley thread nag_on_notify_till_flag_set("nag_hip_fire_0", 2, "player_needs_to_fire_from_the_hip", "hip_fire_done");
 
-  if(level.Xenon)
+  if(level.Xenon) {
     thread keyHint("hip_attack", undefined, true);
-  else
+  } else {
     thread keyHint("pc_hip_attack", undefined, true);
+  }
 
   numberOfTagretsToHit = 2;
   mustADS = false;
@@ -534,19 +536,22 @@ firing_range_hip_and_ads() {
 
   setDvar("ui_start_inverted", 0);
   if(level.Console) {
-    if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch"))
+    if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch")) {
       setDvar("ui_start_inverted", 1);
+    }
   } else {
-    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
+    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1") {
       setDvar("ui_start_inverted", 1);
+    }
   }
   wait .1;
 
   setDvar("ui_invert_string", "@TRAINER_AXIS_OPTION_MENU1_ALL");
-  if(level.console)
+  if(level.console) {
     level.player openpopupMenu("invert_axis");
-  else
+  } else {
     level.player openpopupMenu("invert_axis_pc");
+  }
 
   level.player freezecontrols(true);
   setblur(2, .1);
@@ -556,23 +561,27 @@ firing_range_hip_and_ads() {
 
   playerIsInvertedAfterFirstMenu = false;
   if(level.Console) {
-    if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch"))
+    if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch")) {
       playerIsInvertedAfterFirstMenu = true;
+    }
   } else {
-    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
+    if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1") {
       playerIsInvertedAfterFirstMenu = true;
+    }
   }
 
   if(response == "try_invert") {
     level.foley thread dialogue_execute("train_fly_tryafew");
 
-    if(level.Xenon)
+    if(level.Xenon) {
       thread keyHint("hip_attack");
-    else
+    } else {
       thread keyHint("pc_hip_attack");
+    }
 
-    while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
+    while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
       wait 0.05;
+    }
 
     numberOfTagretsToHit = 2;
     mustADS = false;
@@ -584,19 +593,22 @@ firing_range_hip_and_ads() {
 
     playerIsInvertedAfterTryingAgain = false;
     if(level.Console) {
-      if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch"))
+      if(isDefined(level.player GetLocalPlayerProfileData("invertedPitch")) && level.player GetLocalPlayerProfileData("invertedPitch")) {
         playerIsInvertedAfterTryingAgain = true;
+      }
     } else {
-      if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1")
+      if(isDefined(getDvar("ui_mousepitch")) && getDvar("ui_mousepitch") == "1") {
         playerIsInvertedAfterTryingAgain = true;
+      }
     }
 
     if(playerIsInvertedAfterFirstMenu == playerIsInvertedAfterTryingAgain) {
       setDvar("ui_invert_string", "@TRAINER_AXIS_OPTION_MENU2_ALL");
-      if(level.console)
+      if(level.console) {
         level.player openpopupMenu("invert_axis");
-      else
+      } else {
         level.player openpopupMenu("invert_axis_pc");
+      }
 
       level.player freezecontrols(true);
       setblur(2, .1);
@@ -712,8 +724,9 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
     while(newArray.size < targets.size) {
       wait(0.05);
       foreach(target in targets) {
-        if(target.script_group == newArray.size)
+        if(target.script_group == newArray.size) {
           newArray[newArray.size] = target;
+        }
       }
     }
     targets = newArray;
@@ -760,10 +773,11 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
             level.player notify("did_action_ads");
             level.player notify("did_action_ads_360");
           } else {
-            if(level.Xenon)
+            if(level.Xenon) {
               thread keyHint("ads_360");
-            else
+            } else {
               thread keyHint("ads");
+            }
             level notify("player_needs_to_ADS");
           }
         }
@@ -855,10 +869,11 @@ firing_range_timed_ads() {
 
   while(1) {
     if(auto_aim() && numRepeats != 0) {
-      if(level.xenon)
+      if(level.xenon) {
         actionBind = getActionBind("ads_switch");
-      else
+      } else {
         actionBind = getActionBind("ads_switch_shoulder");
+      }
       double_line = true;
       thread killhouse_hint(actionBind.hint, 10, double_line);
       wait 4;
@@ -901,8 +916,9 @@ firing_range_timed_ads() {
 
     if((level.player GetWeaponAmmoClip(level.gunPrimary)) < level.gunPrimaryClipAmmo) {
       thread keyHint("reload");
-      while((level.player GetWeaponAmmoClip(level.gunPrimary)) < level.gunPrimaryClipAmmo)
+      while((level.player GetWeaponAmmoClip(level.gunPrimary)) < level.gunPrimaryClipAmmo) {
         wait .1;
+      }
       clear_hints();
       wait 1;
     }
@@ -951,10 +967,11 @@ timedTargets() {
         break;
       }
 
-      if(level.Xenon)
+      if(level.Xenon) {
         thread keyHint("ads_360");
-      else
+      } else {
         thread keyHint("ads");
+      }
       level notify("player_needs_to_ADS");
     }
 
@@ -1006,8 +1023,9 @@ firing_range_penetration() {
   registerObjective("obj_penetration", &"TRAINER_SHOOT_A_TARGET_THROUGH", getEnt("firing_range", "targetname"));
   setObjectiveState("obj_penetration", "current");
 
-  while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
+  while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
     wait 0.05;
+  }
 
   level.foley thread nag_on_notify_till_flag_set("nag_penetration_fire_0", 2, "player_needs_to_shoot_through_plywood", "firing_range_penetration_done");
 
@@ -1036,10 +1054,12 @@ raisePlywoodWalls() {
   wait .25;
   while(level.plywood.up == true) {
     level.plywood waittill("damage", amount, attacker, direction_vec, point, type);
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-    if(!isDefined(type))
+    }
+    if(!isDefined(type)) {
       continue;
+    }
     if(isPlayer(attacker)) {
       level.lastTimePlywoodWasHit = gettime();
     }
@@ -1084,8 +1104,9 @@ frags_anims() {
 }
 
 firing_range_frags() {
-  if(!flag("frags_have_been_spawned"))
+  if(!flag("frags_have_been_spawned")) {
     thread spawn_frags();
+  }
 
   thread autosave_by_name("frags");
   thread frags_anims();
@@ -1107,8 +1128,9 @@ firing_range_frags() {
     alreadyHadFrags = true;
   }
 
-  while(level.player GetWeaponAmmoStock("fraggrenade") < 3)
+  while(level.player GetWeaponAmmoStock("fraggrenade") < 3) {
     wait(0.05);
+  }
 
   if(alreadyHadFrags) {
     registerObjective("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO", getEnt("firing_range", "targetname"));
@@ -1129,8 +1151,9 @@ firing_range_frags() {
   mustCrouch = undefined;
   mustShootThroughPlywood = true;
 
-  while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
+  while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
     wait 0.05;
+  }
 
   level.translatoranimnode notify("stop_idle");
   level.translatoranimnode thread anim_loop_solo(level.translator, "training_intro_idle", "stop_idle");
@@ -1170,14 +1193,16 @@ frag_nags() {
 
     if(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
       thread killhouse_hint(&"TRAINER_HINT_TURN_AROUND");
-      while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
+      while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"])) {
         wait 0.05;
+      }
       clear_hints();
     } else if(!flag("player_just_threw_a_frag")) {
       level.foley dialogue_execute("frag_nag_0" + nagNumber);
       nagNumber++;
-      if(nagNumber > 2)
+      if(nagNumber > 2) {
         nagNumber = 0;
+      }
     }
   }
 }
@@ -1196,8 +1221,9 @@ set_flag_when_hit_by_grenade(sFlagToSet) {
   level endon(sFlagToSet);
   while(true) {
     self waittill("hit_with_grenade");
-    if(!flag(sFlagToSet))
+    if(!flag(sFlagToSet)) {
       flag_set(sFlagToSet);
+    }
   }
 }
 
@@ -1214,8 +1240,9 @@ frag_triggers_think(sFlagToSetWhenComplete) {
   self enablegrenadetouchdamage();
   while(true) {
     self waittill("trigger");
-    if(!flag(sFlagToSetWhenComplete))
+    if(!flag(sFlagToSetWhenComplete)) {
       flag_set(sFlagToSetWhenComplete);
+    }
     break;
   }
 }
@@ -1251,8 +1278,9 @@ spawn_frags() {
     if(!level.player WorldPointInReticle_Circle(grenade_box.origin, 45, 400)) {
       continue;
     }
-    if(level.player GetWeaponAmmoStock("fraggrenade") > 3)
+    if(level.player GetWeaponAmmoStock("fraggrenade") > 3) {
       continue;
+    }
     if(!flag("player_picked_up_frags")) {
       flag_set("player_picked_up_frags");
       level.player giveWeapon("fraggrenade");
@@ -1273,8 +1301,9 @@ hide_frags_till_player_not_looking(fragsToHide) {
   level endon("firing_range_frags_done");
   validFragsToHide = [];
   foreach(frag in level.fragsPickups) {
-    if(!isDefined(frag.hidden))
+    if(!isDefined(frag.hidden)) {
       validFragsToHide[validFragsToHide.size] = frag;
+    }
   }
 
   if(validFragsToHide.size == 0) {
@@ -1286,8 +1315,9 @@ hide_frags_till_player_not_looking(fragsToHide) {
   while(i < fragsToHide) {
     wait(0.05);
     fragToHide = getclosest(level.player.origin, validFragsToHide);
-    if(!isDefined(fragToHide))
+    if(!isDefined(fragToHide)) {
       continue;
+    }
     validFragsToHide = array_remove(validFragsToHide, fragToHide);
     fragToHide hide();
     fragToHide.hidden = true;
@@ -1302,8 +1332,9 @@ show_me_when_player_not_looking_or_timeout(hiddenFrags, timeout) {
 
   wait(.5);
 
-  while(level.player GetWeaponAmmoStock("fraggrenade") > 0)
+  while(level.player GetWeaponAmmoStock("fraggrenade") > 0) {
     wait(0.05);
+  }
 
   start_time = gettime();
   while(true) {
@@ -1316,8 +1347,9 @@ show_me_when_player_not_looking_or_timeout(hiddenFrags, timeout) {
     }
   }
   array_call(hiddenFrags, ::show);
-  foreach(frag in hiddenFrags)
-  frag.hidden = undefined;
+  foreach(frag in hiddenFrags) {
+    frag.hidden = undefined;
+  }
 }
 
 AA_find_pit_init() {
@@ -1421,8 +1453,9 @@ sideArm_Training() {
 
     level.pitguy dialogue_execute("train_cpd_grabapistol");
     pickup_sidearm = getent("pickup_sidearm", "targetname");
-    if(isDefined(pickup_sidearm))
+    if(isDefined(pickup_sidearm)) {
       pickup_sidearm glow();
+    }
   }
 
   while(!level.player HasWeapon(level.gunSidearm)) {
@@ -1444,8 +1477,9 @@ sideArm_Training() {
     level.pitguy dialogue_execute("train_cpd_switchtorifle");
 
     currentWeapon = level.player getCurrentWeapon();
-    if(currentWeapon != level.gunPrimary)
+    if(currentWeapon != level.gunPrimary) {
       thread keyHint("primary");
+    }
 
     while(level.player getCurrentWeapon() != level.gunPrimary) {
       thread keyHint("primary");
@@ -1594,8 +1628,9 @@ course_loop_think() {
     flag_clear("dunn_finished_with_difficulty_selection_dialogue");
 
     setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
-    if(level.objectiveRegroup != 0)
+    if(level.objectiveRegroup != 0) {
       setObjectiveString("obj_course", &"TRAINER_OBJ_COURSE");
+    }
 
     flag_clear("melee_target_hit");
     level.targets_hit_with_melee = 0;
@@ -1622,22 +1657,25 @@ course_loop_think() {
 
     playerPrimaryWeapons = level.player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
-      foreach(weapon in playerPrimaryWeapons)
-      level.player givemaxammo(weapon);
+      foreach(weapon in playerPrimaryWeapons) {
+        level.player givemaxammo(weapon);
+      }
     }
 
     level.targets_hit = 0;
     level.friendlies_hit = 0;
 
-    if(getdvarint("killhouse_too_slow") >= 1)
+    if(getdvarint("killhouse_too_slow") >= 1) {
       thread startTimer(level.timelimitMax);
-    else
+    } else {
       thread startTimer(level.timelimitMin);
+    }
 
     thread accuracy_bonus();
 
-    if(isDefined(level.IW_deck))
+    if(isDefined(level.IW_deck)) {
       level.IW_deck destroy();
+    }
 
     setObjectiveLocation("obj_course", getEnt("origin_course_02", "targetname"));
 
@@ -1680,9 +1718,9 @@ course_loop_think() {
       notify_on_sprint();
       thread flag_on_notify("sprinted");
 
-      if(level.xenon)
-      else
+      if(level.xenon) {} else {
         thread key_hint_till_flag_set("sprint_pc", "player_course_end");
+      }
 
       if(first_sprint_try) {
         thread radio_dialogue("train_cpd_sprint");
@@ -1694,8 +1732,9 @@ course_loop_think() {
 
         thread radio_dialogue("nag_sprint_0" + iNag_sprint_number);
         iNag_sprint_number++;
-        if(iNag_sprint_number > 3)
+        if(iNag_sprint_number > 3) {
           iNag_sprint_number = 0;
+        }
       }
 
       flag_wait("player_sprint_door_close");
@@ -1709,8 +1748,9 @@ course_loop_think() {
         thread radio_dialogue("nag_didnt_sprint_0" + iNag_didnt_sprint_number);
         thread killhouse_hint(&"TRAINER_TRY_SPRINT_AGAIN", undefined, true);
         iNag_didnt_sprint_number++;
-        if(iNag_didnt_sprint_number > 3)
+        if(iNag_didnt_sprint_number > 3) {
           iNag_didnt_sprint_number = 0;
+        }
       } else {
         break;
       }
@@ -1734,8 +1774,9 @@ course_loop_think() {
 
     final_time = killTimer(level.bestPitTime, false);
 
-    while(!isDefined(level.recommendedDifficulty))
+    while(!isDefined(level.recommendedDifficulty)) {
       wait(.1);
+    }
     selection = dialog_end_of_course(numberOfTimesRun);
 
     if(level.recommendedDifficulty == 1000) {
@@ -1926,13 +1967,15 @@ player_alt_weapon_has_ammo() {
   currentWeapon = level.player getcurrentweapon();
   heldweapons = level.player GetWeaponsListPrimaries();
   foreach(weapon in heldweapons) {
-    if(weapon == currentWeapon)
+    if(weapon == currentWeapon) {
       continue;
+    }
     altWeaponAmmo = level.player GetWeaponAmmoClip(weapon);
-    if(altWeaponAmmo > 5)
+    if(altWeaponAmmo > 5) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
   return false;
 }
@@ -2017,8 +2060,9 @@ melee_nag() {
       radio_dialogue("melee_nag_0" + melee_nag_number);
       flag_set("can_talk");
       melee_nag_number++;
-      if(melee_nag_number > 4)
+      if(melee_nag_number > 4) {
         melee_nag_number = 0;
+      }
       flag_wait_or_timeout("melee_target_hit", nagFrequency);
     } else {
       wait(.5);
@@ -2052,8 +2096,9 @@ dialogue_course_civilian_killed() {
       radio_dialogue(dialogue[iLine]);
       flag_set("can_talk");
       iLine++;
-      if(iLine > 2)
+      if(iLine > 2) {
         iLine = 0;
+      }
       flag_wait_or_timeout("player_course_jumped_down", 5);
     }
   }
@@ -2080,8 +2125,9 @@ dialogue_course_hurry_up() {
       radio_dialogue("nag_hurry_0" + iLine);
       flag_set("can_talk");
       iLine++;
-      if(iLine > 4)
+      if(iLine > 4) {
         iLine = 0;
+      }
       flag_wait_or_timeout("player_course_jumped_down", 5);
     }
   }
@@ -2223,17 +2269,20 @@ dialogue_nag_start_course(firstTimeThroughCourse) {
 
 door_open(sFlagToWaitFor, bFast) {
   if(isDefined(self.moving)) {
-    while(isDefined(self.moving))
+    while(isDefined(self.moving)) {
       wait(0.05);
+    }
   }
 
   self.moving = true;
   angles = 90;
-  if(isDefined(self.openangles))
+  if(isDefined(self.openangles)) {
     angles = self.openangles;
+  }
 
-  if(isDefined(sFlagToWaitFor))
+  if(isDefined(sFlagToWaitFor)) {
     flag_wait(sFlagToWaitFor);
+  }
 
   iTime = 4;
   if(isDefined(bFast)) {
@@ -2243,8 +2292,9 @@ door_open(sFlagToWaitFor, bFast) {
     self rotateto(self.angles + (0, angles, 0), 4, 1.5, 1.5);
   }
 
-  if(isDefined(self.blocker))
+  if(isDefined(self.blocker)) {
     self.blocker hide_entity();
+  }
   self thread play_sound_on_entity("scn_training_fence_open");
   array_call(self.brushes, ::notsolid);
   wait(iTime);
@@ -2253,17 +2303,20 @@ door_open(sFlagToWaitFor, bFast) {
 
 door_close(sFlagToWaitFor, bFast) {
   if(isDefined(self.moving)) {
-    while(isDefined(self.moving))
+    while(isDefined(self.moving)) {
       wait(0.05);
+    }
   }
 
   self.moving = true;
   angles = -90;
-  if(isDefined(self.closeangles))
+  if(isDefined(self.closeangles)) {
     angles = self.closeangles;
+  }
 
-  if(isDefined(sFlagToWaitFor))
+  if(isDefined(sFlagToWaitFor)) {
     flag_wait(sFlagToWaitFor);
+  }
 
   iTime = 2;
   if(isDefined(bFast)) {
@@ -2273,8 +2326,9 @@ door_close(sFlagToWaitFor, bFast) {
     self rotateto(self.angles + (0, angles, 0), 2, .5, .5);
   }
 
-  if(isDefined(self.blocker))
+  if(isDefined(self.blocker)) {
     self.blocker show_entity();
+  }
   self thread play_sound_on_entity("scn_training_fence_close");
   array_call(self.brushes, ::solid);
   wait(iTime);
@@ -2289,14 +2343,16 @@ end_sequence() {
   array = getaiarray();
   guys_to_delete = [];
   foreach(dude in array) {
-    if(!isDefined(dude.script_parameters))
+    if(!isDefined(dude.script_parameters)) {
       guys_to_delete[guys_to_delete.size] = dude;
+    }
   }
   drones_to_delete = array_merge(level.drones["allies"].array, level.drones["axis"].array);
   drones_to_delete = array_merge(drones_to_delete, level.drones["neutral"].array);
   foreach(dude in drones_to_delete) {
-    if(isDefined(dude.script_parameters))
+    if(isDefined(dude.script_parameters)) {
       drones_to_delete = array_remove(drones_to_delete, dude);
+    }
   }
 
   array_thread(guys_to_delete, ::AI_delete);
@@ -2454,8 +2510,9 @@ target_triggers_think() {
   self.targetsFriendly = [];
   self.targetsEnemy = [];
   foreach(ent in linkedTargets) {
-    if(!isDefined(ent.script_noteworthy))
+    if(!isDefined(ent.script_noteworthy)) {
       continue;
+    }
     if((isDefined(ent.code_classname)) && (ent.code_classname == "script_brushmodel")) {
       self.targets[self.targets.size] = ent;
 
@@ -2502,14 +2559,16 @@ target_think(targetType) {
   aim_assist_target hide();
   aim_assist_target notsolid();
 
-  if(!isDefined(self.orgEnt.script_noteworthy))
+  if(!isDefined(self.orgEnt.script_noteworthy)) {
     self.orgEnt.script_noteworthy = "standard";
-  if(self.orgEnt.script_noteworthy == "reverse")
+  }
+  if(self.orgEnt.script_noteworthy == "reverse") {
     self.orgEnt rotatePitch(90, 0.25);
-  else if(self.orgEnt.script_noteworthy == "sideways")
+  } else if(self.orgEnt.script_noteworthy == "sideways") {
     self.orgEnt rotateYaw(-180, 0.5);
-  else
+  } else {
     self.orgEnt rotatePitch(-90, 0.25);
+  }
 
   self.lateralMovementOrgs = undefined;
   self.lateralStartPosition = undefined;
@@ -2559,21 +2618,24 @@ target_think(targetType) {
       melee_clip show_entity();
     }
 
-    if(isDefined(self.script_flag))
+    if(isDefined(self.script_flag)) {
       self thread target_go_back_down_when_flag_is_set(self.script_flag);
+    }
     wait randomfloatrange(0, .2);
 
     self solid();
     self playSound("target_up_metal");
     self setCanDamage(true);
-    if(targetType != "friendly")
+    if(targetType != "friendly") {
       aim_assist_target enableAimAssist();
-    if(self.orgEnt.script_noteworthy == "reverse")
+    }
+    if(self.orgEnt.script_noteworthy == "reverse") {
       self.orgEnt rotatePitch(-90, 0.25);
-    else if(self.orgEnt.script_noteworthy == "sideways")
+    } else if(self.orgEnt.script_noteworthy == "sideways") {
       self.orgEnt rotateYaw(180, 0.5);
-    else
+    } else {
       self.orgEnt rotatePitch(90, 0.25);
+    }
 
     wait .25;
 
@@ -2584,12 +2646,15 @@ target_think(targetType) {
     while(true) {
       self waittill("damage", amount, attacker, direction_vec, point, type);
 
-      if(!isDefined(attacker))
+      if(!isDefined(attacker)) {
         continue;
-      if(!isDefined(type))
+      }
+      if(!isDefined(type)) {
         continue;
-      if(type == "MOD_IMPACT")
+      }
+      if(type == "MOD_IMPACT") {
         continue;
+      }
       if(type == "scripted_target_drop") {
         break;
       }
@@ -2603,8 +2668,9 @@ target_think(targetType) {
 
       if(isPlayer(attacker)) {
         if(isDefined(self.meleeonly)) {
-          if(type != "MOD_MELEE")
+          if(type != "MOD_MELEE") {
             continue;
+          }
         }
 
         self playSound("target_metal_hit");
@@ -2657,8 +2723,9 @@ target_think(targetType) {
       melee_clip thread hide_entity();
       flag_set("melee_target_hit");
     } else if((targetType != "friendly") && (!level.player isADS())) {
-      if((isDefined(type)) && (type != "MOD_MELEE") && (type != "scripted_target_drop"))
+      if((isDefined(type)) && (type != "MOD_MELEE") && (type != "scripted_target_drop")) {
         level notify("pit_target_hit_without_ADS");
+      }
     }
 
     self notify("hit");
@@ -2667,12 +2734,13 @@ target_think(targetType) {
     aim_assist_target disableAimAssist();
     self notsolid();
 
-    if(self.orgEnt.script_noteworthy == "reverse")
+    if(self.orgEnt.script_noteworthy == "reverse") {
       self.orgEnt rotatePitch(90, 0.25);
-    else if(self.orgEnt.script_noteworthy == "sideways")
+    } else if(self.orgEnt.script_noteworthy == "sideways") {
       self.orgEnt rotateYaw(-180, 0.5);
-    else
+    } else {
       self.orgEnt rotatePitch(-90, 0.25);
+    }
     self setCanDamage(false);
     wait .25;
   }
@@ -2794,21 +2862,24 @@ target_reset_manual() {
 }
 
 roundDecimalPlaces(value, places, style) {
-  if(!isDefined(style))
+  if(!isDefined(style)) {
     style = "nearest";
+  }
 
   modifier = 1;
-  for(i = 0; i < places; i++)
+  for(i = 0; i < places; i++) {
     modifier *= 10;
+  }
 
   newValue = value * modifier;
 
-  if(style == "up")
+  if(style == "up") {
     roundedValue = ceil(newValue);
-  else if(style == "down")
+  } else if(style == "down") {
     roundedValue = floor(newValue);
-  else
+  } else {
     roundedValue = newvalue + 0.5;
+  }
 
   newvalue = Int(roundedValue);
   newvalue = newvalue / modifier;
@@ -2817,10 +2888,11 @@ roundDecimalPlaces(value, places, style) {
 }
 
 set_ammo() {
-  if((self.classname == "weapon_fraggrenade") || (self.classname == "weapon_flash_grenade"))
+  if((self.classname == "weapon_fraggrenade") || (self.classname == "weapon_flash_grenade")) {
     self ItemWeaponSetAmmo(1, 0);
-  else
+  } else {
     self ItemWeaponSetAmmo(999, 999);
+  }
 }
 
 init_precache() {
@@ -2872,10 +2944,11 @@ init_precache() {
 
   precacheString(&"TRAINER_AXIS_OPTION_MENU2_ALL");
 
-  if(level.console)
+  if(level.console) {
     precacheMenu("invert_axis");
-  else
+  } else {
     precacheMenu("invert_axis_pc");
+  }
 
   precacheMenu("select_difficulty");
 
@@ -3143,12 +3216,14 @@ init_precache() {
 }
 
 dialogue_execute(sLineToExecute, sFlagToSetWhenDone) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   self dialogue_queue(sLineToExecute);
-  if(isDefined(sFlagToSetWhenDone))
+  if(isDefined(sFlagToSetWhenDone)) {
     flag_set(sFlagToSetWhenDone);
+  }
 }
 
 hint_temp(string, timeOut) {
@@ -3156,8 +3231,9 @@ hint_temp(string, timeOut) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint))
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
+  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -60);
@@ -3170,10 +3246,11 @@ hint_temp(string, timeOut) {
   wait(0.5);
   level.tempHint endon("death");
 
-  if(isDefined(timeOut))
+  if(isDefined(timeOut)) {
     wait(timeOut);
-  else
+  } else {
     return;
+  }
 
   level.tempHint fadeOverTime(hintfade);
   level.tempHint.alpha = 0;
@@ -3212,8 +3289,9 @@ setObjectiveState(objName, objState) {
     objective_state(objective.id, objective.State);
   }
 
-  if(objective.state == "done")
+  if(objective.state == "done") {
     flag_set(objName);
+  }
 }
 
 setObjectiveString(objName, objString) {
@@ -3235,30 +3313,33 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   objective = level.objectives[objName];
 
-  if(!objRemaining)
+  if(!objRemaining) {
     objective_string(objective.id, objString);
-  else
+  } else {
     objective_string(objective.id, objString, objRemaining);
+  }
 }
 
 keyHint(actionName, timeOut, doubleline, alwaysDisplay) {
   clear_hints();
   level endon("clearing_hints");
 
-  if(isDefined(doubleline))
+  if(isDefined(doubleline)) {
     add_hint_background(doubleline);
-  else
+  } else {
     add_hint_background();
+  }
   level.hintElem = createFontString("objective", level.hint_text_size);
   level.hintElem.hidewheninmenu = true;
   level.hintElem setPoint("TOP", undefined, 0, 110);
   level.hintElem.sort = 0.5;
 
   actionBind = getActionBind(actionName);
-  if((actionName == "melee") && (level.xenon) && (actionBind.key == "BUTTON_RSTICK"))
+  if((actionName == "melee") && (level.xenon) && (actionBind.key == "BUTTON_RSTICK")) {
     level.hintElem setText(&"TRAINER_HINT_MELEE_CLICK");
-  else
+  } else {
     level.hintElem setText(actionBind.hint);
+  }
 
   if(!isDefined(alwaysDisplay)) {
     notifyName = "did_action_" + actionName;
@@ -3267,8 +3348,9 @@ keyHint(actionName, timeOut, doubleline, alwaysDisplay) {
       notifyOnCommand(notifyName, actionBind.binding);
     }
 
-    if(isDefined(timeOut))
+    if(isDefined(timeOut)) {
       level.player thread notifyOnTimeout(notifyName, timeOut);
+    }
     level.player waittill(notifyName);
 
     level.hintElem fadeOverTime(0.5);
@@ -3314,10 +3396,11 @@ objective_hints(completion_flag) {
   wait(20);
 
   if(level.Console) {
-    if(level.Xenon)
+    if(level.Xenon) {
       keyHint("objectives", 6.0);
-    else
+    } else {
       killhouse_hint(&"TRAINER_HINT_CHECK_OBJECTIVES_SCORES_PS3", 6);
+    }
   } else {
     keyHint("objectives_pc", 6.0);
   }
@@ -3337,10 +3420,11 @@ objective_hints(completion_flag) {
 }
 
 add_hint_background(double_line) {
-  if(isDefined(double_line))
+  if(isDefined(double_line)) {
     level.hintbackground = createIcon("popmenu_bg", 650, 50);
-  else
+  } else {
     level.hintbackground = createIcon("popmenu_bg", 650, 30);
+  }
   level.hintbackground.hidewheninmenu = true;
   level.hintbackground setPoint("TOP", undefined, 0, 105);
   level.hintbackground.alpha = .5;
@@ -3395,16 +3479,21 @@ compass_reminder() {
 }
 
 clear_hints() {
-  if(isDefined(level.hintElem))
+  if(isDefined(level.hintElem)) {
     level.hintElem destroyElem();
-  if(isDefined(level.iconElem))
+  }
+  if(isDefined(level.iconElem)) {
     level.iconElem destroyElem();
-  if(isDefined(level.iconElem2))
+  }
+  if(isDefined(level.iconElem2)) {
     level.iconElem2 destroyElem();
-  if(isDefined(level.iconElem3))
+  }
+  if(isDefined(level.iconElem3)) {
     level.iconElem3 destroyElem();
-  if(isDefined(level.hintbackground))
+  }
+  if(isDefined(level.hintbackground)) {
     level.hintbackground destroyElem();
+  }
   level notify("clearing_hints");
 }
 
@@ -3420,10 +3509,11 @@ killhouse_hint(text, timeOut, double_line) {
 
   level.hintElem setText(text);
 
-  if(isDefined(timeOut))
+  if(isDefined(timeOut)) {
     wait(timeOut);
-  else
+  } else {
     return;
+  }
 
   level.hintElem fadeOverTime(0.5);
   level.hintElem.alpha = 0;
@@ -3549,8 +3639,9 @@ registerActions() {
 }
 
 registerActionBinding(action, binding, hint) {
-  if(!isDefined(level.actionBinds[action]))
+  if(!isDefined(level.actionBinds[action])) {
     level.actionBinds[action] = [];
+  }
 
   actionBind = spawnStruct();
   actionBind.binding = binding;
@@ -3743,8 +3834,9 @@ make_door_from_prefab(sTargetname) {
   foreach(ent in ents) {
     if(ent.code_classname == "script_brushmodel") {
       door_brushes[door_brushes.size] = ent;
-      if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "blocker"))
+      if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "blocker")) {
         door_blocker = ent;
+      }
       continue;
     }
     if(ent.code_classname == "script_origin") {
@@ -3761,10 +3853,12 @@ make_door_from_prefab(sTargetname) {
     }
   }
 
-  foreach(model in door_models)
-  model linkto(door_org);
-  foreach(brush in door_brushes)
-  brush linkto(door_org);
+  foreach(model in door_models) {
+    model linkto(door_org);
+  }
+  foreach(brush in door_brushes) {
+    brush linkto(door_org);
+  }
 
   door = door_org;
   door.brushes = door_brushes;
@@ -3774,8 +3868,9 @@ make_door_from_prefab(sTargetname) {
     door.blocker = door_blocker;
   }
 
-  if(isDefined(door_trigger))
+  if(isDefined(door_trigger)) {
     door.trigger = door_trigger;
+  }
 
   return door;
 }
@@ -3832,8 +3927,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   sAnimGo = undefined;
   looping = false;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     eGoal = getnode(self.target, "targetname");
+  }
 
   self thread ai_ambient_cleanup();
 
@@ -3849,18 +3945,20 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
 
     self.eAnimEnt thread anim_generic_loop(self, sAnim, "stop_idle");
     sAnimGo = sAnim + "_go";
-    if(anim_exists(sAnimGo))
+    if(anim_exists(sAnimGo)) {
       sAnim = sAnimGo;
-    else
+    } else {
       sAnimGo = undefined;
+    }
   } else
     self.eAnimEnt anim_generic_first_frame(self, sAnim);
 
   if(isDefined(self.script_flag)) {
-    if(isDefined(sFailSafeFlag))
+    if(isDefined(sFailSafeFlag)) {
       flag_wait_either(self.script_flag, sFailSafeFlag);
-    else
+    } else {
       flag_wait(self.script_flag);
+    }
   }
 
   if(isDefined(eGoal)) {
@@ -3868,8 +3966,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.disableexits = true;
   }
 
-  if(!looping)
+  if(!looping) {
     self.eAnimEnt anim_generic(self, sAnim);
+  }
 
   if(isDefined(sAnimGo)) {
     self.eAnimEnt notify("stop_idle");
@@ -3888,29 +3987,33 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.disablearrivals = false;
     self.disableexits = false;
     self waittill("goal");
-    if(isDefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking) {
       self cqb_walk("off");
+    }
   } else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"]))
     self.eAnimEnt thread anim_generic_loop(self, sAnim + "_idle", "stop_idle");
 
   if(anim_exists(sAnim + "_react")) {
-    if(!looping)
+    if(!looping) {
       sAnim = sAnim + "_idle";
+    }
     sAnimReact = sAnim + "_react";
 
-    if(anim_exists(sAnim + "_react2"))
+    if(anim_exists(sAnim + "_react2")) {
       sAnimReact2 = sAnim + "_react2";
-    else
+    } else {
       sAnimReact2 = sAnimReact;
+    }
     while(isDefined(self)) {
       level waittill("mortar_hit");
       self.eAnimEnt notify("stop_idle");
       self notify("stop_idle");
       waittillframeend;
-      if(RandomInt(100) > 50)
+      if(RandomInt(100) > 50) {
         anim_generic(self, sAnimReact);
-      else
+      } else {
         anim_generic(self, sAnimReact2);
+      }
       thread anim_generic_loop(self, sAnim, "stop_idle");
     }
   }
@@ -3918,8 +4021,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
 
 ai_ambient_cleanup() {
   self waittill("death");
-  if((isDefined(self.eAnimEnt)) && (!isspawner(self.eAnimEnt)))
+  if((isDefined(self.eAnimEnt)) && (!isspawner(self.eAnimEnt))) {
     self.eAnimEnt delete();
+  }
 }
 
 AI_patrol_think() {
@@ -3937,8 +4041,9 @@ ai_ambient_noprop_think() {
   assert(isDefined(self.animation));
   sAnim = self.animation;
   bSpecial = false;
-  if(!isDefined(self.eAnimEnt))
+  if(!isDefined(self.eAnimEnt)) {
     self.eAnimEnt = self.spawner;
+  }
 
   sFailSafeFlag = undefined;
 
@@ -4022,8 +4127,9 @@ ai_ambient_noprop_think() {
       eBuddy gun_remove();
       bSpecial = true;
       eEndOrg = getent(self.script_Linkto, "script_linkname");
-      if(isDefined(self.script_flag))
+      if(isDefined(self.script_flag)) {
         flag_wait(self.script_flag);
+      }
 
       while(distance(eEndOrg.origin, self.origin) > 128) {
         thread anim_generic(self, sAnim);
@@ -4085,10 +4191,12 @@ ai_ambient_noprop_think() {
 
 AI_ambient_ignored() {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(self.code_classname)) && (self.code_classname == "script_model"))
+  }
+  if((isDefined(self.code_classname)) && (self.code_classname == "script_model")) {
     return;
+  }
   self setFlashbangImmunity(true);
   self.ignoreme = true;
   self.ignoreall = true;
@@ -4096,12 +4204,14 @@ AI_ambient_ignored() {
 }
 
 anim_exists(sAnim, animname) {
-  if(!isDefined(animname))
+  if(!isDefined(animname)) {
     animname = "generic";
-  if(isDefined(level.scr_anim[animname][sAnim]))
+  }
+  if(isDefined(level.scr_anim[animname][sAnim])) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 mechanic_sound_loop() {
@@ -4150,11 +4260,13 @@ AI_think(guy) {
   guy.ignoreall = true;
   guy thread magic_bullet_shield();
   guy disable_pain();
-  if(guy.team == "axis")
+  if(guy.team == "axis") {
     guy thread AI_axis_think();
+  }
 
-  if(guy.team == "allies")
+  if(guy.team == "allies") {
     guy thread AI_allies_think();
+  }
 }
 
 AI_allies_think() {}
@@ -4165,16 +4277,18 @@ AI_axis_think() {
 }
 
 player_has_primary_weapon() {
-  if(level.player HasWeapon(level.gunPrimary))
+  if(level.player HasWeapon(level.gunPrimary)) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 auto_aim() {
   if(level.console) {
-    if(level.player GetLocalPlayerProfileData("autoAim"))
+    if(level.player GetLocalPlayerProfileData("autoAim")) {
       return true;
+    }
   }
   return false;
 }
@@ -4371,8 +4485,9 @@ killTimer(best_time, deck) {
     level.recommendedDifficulty = 3;
   }
 
-  if(final_time < 30.0)
+  if(final_time < 30.0) {
     maps\_utility::giveachievement_wrapper("PIT_BOSS");
+  }
 
   return final_time;
 }
@@ -4418,34 +4533,48 @@ dialog_end_of_course(numberOfTimesRun) {
 }
 
 clear_timer_elems() {
-  if(isDefined(level.HUDtimer))
+  if(isDefined(level.HUDtimer)) {
     level.HUDtimer destroy();
-  if(isDefined(level.HUDaccuracybonus))
+  }
+  if(isDefined(level.HUDaccuracybonus)) {
     level.HUDaccuracybonus destroy();
-  if(isDefined(level.label))
+  }
+  if(isDefined(level.label)) {
     level.label destroy();
-  if(isDefined(level.IW_best))
+  }
+  if(isDefined(level.IW_best)) {
     level.IW_best destroy();
-  if(isDefined(level.recommended_label))
+  }
+  if(isDefined(level.recommended_label)) {
     level.recommended_label destroy();
-  if(isDefined(level.recommended_label2))
+  }
+  if(isDefined(level.recommended_label2)) {
     level.recommended_label2 destroy();
-  if(isDefined(level.recommended))
+  }
+  if(isDefined(level.recommended)) {
     level.recommended destroy();
-  if(isDefined(level.HUDenemiesKilled))
+  }
+  if(isDefined(level.HUDenemiesKilled)) {
     level.HUDenemiesKilled destroy();
-  if(isDefined(level.HUDcivviesKilled))
+  }
+  if(isDefined(level.HUDcivviesKilled)) {
     level.HUDcivviesKilled destroy();
-  if(isDefined(level.HUDaccuracy))
+  }
+  if(isDefined(level.HUDaccuracy)) {
     level.HUDaccuracy destroy();
-  if(isDefined(level.HUDmissedenemypenalty))
+  }
+  if(isDefined(level.HUDmissedenemypenalty)) {
     level.HUDmissedenemypenalty destroy();
-  if(isDefined(level.HUDkilledcivviespenalty))
+  }
+  if(isDefined(level.HUDkilledcivviespenalty)) {
     level.HUDkilledcivviespenalty destroy();
-  if(isDefined(level.HUDfinaltime))
+  }
+  if(isDefined(level.HUDfinaltime)) {
     level.HUDfinaltime destroy();
-  if(isDefined(level.recommended_label))
+  }
+  if(isDefined(level.recommended_label)) {
     level.recommended_label destroy();
+  }
 }
 
 second_sprint_hint() {
@@ -4492,32 +4621,36 @@ mission_failed_out_of_time() {
   setDvar("killhouse_too_slow", (failures + 1));
 
   level notify("mission failed");
-  if(!flag("player_course_end"))
+  if(!flag("player_course_end")) {
     setDvar("ui_deadquote", &"TRAINER_SHIP_TOO_SLOW");
-  else
+  } else {
     setDvar("ui_deadquote", &"TRAINER_SHIP_DIDNT_SPRINT");
+  }
 
   maps\_utility::missionFailedWrapper();
 }
 
 get_pit_hud(x, y, player) {
   xPos = undefined;
-  if(!level.Console)
+  if(!level.Console) {
     xPos = -250;
-  else if(!isDefined(x))
+  } else if(!isDefined(x)) {
     xPos = -225;
-  else
+  } else {
     xPos = x;
+  }
 
-  if(!isDefined(y))
+  if(!isDefined(y)) {
     yPos = 100;
-  else
+  } else {
     yPos = y;
+  }
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     hudelem = newClientHudElem(player);
-  else
+  } else {
     hudelem = newHudElem();
+  }
 
   hudelem.alignX = "left";
   hudelem.alignY = "middle";
@@ -4565,8 +4698,9 @@ dialogue_ambient() {
       dialogue_ambient_wait();
     }
     iNumber++;
-    if(iNumber > 2)
+    if(iNumber > 2) {
       iNumber = 0;
+    }
   }
 }
 
@@ -4699,14 +4833,17 @@ AI_runners_think() {
 
 AI_delete(excluders) {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(excluders)) && (excluders.size > 0)) {
-    if(is_in_array(excluders, self))
-      return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if((isDefined(excluders)) && (excluders.size > 0)) {
+    if(is_in_array(excluders, self)) {
+      return;
+    }
+  }
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   if(!isSentient(self)) {}
 
   self delete();
@@ -4751,8 +4888,9 @@ basketball_nag() {
     while(flag("player_on_bball_court")) {
       wait(2);
       if(flag("player_on_bball_court")) {
-        if(iDialogueLine > 2)
+        if(iDialogueLine > 2) {
           iDialogueLine = 0;
+        }
         org = getclosest(level.player.origin, conversation_orgs);
         org play_sound_in_space(level.scr_sound["court_nag_0" + iDialogueLine]);
         iDialogueLine++;

@@ -44,8 +44,9 @@ feelgoodapachegundeath() {
     if(maps\_vehicle::is_godmode()) {
       continue;
     }
-    if(var_5 == "MOD_EXPLOSIVE_BULLET")
+    if(var_5 == "MOD_EXPLOSIVE_BULLET") {
       var_0++;
+    }
 
     if(var_2 == level.player) {
       break;
@@ -185,8 +186,9 @@ set_vehicle_anims_turret(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].sittag = "tag_driver";
   var_0[1].sittag = "tag_passenger";

@@ -18,8 +18,9 @@ debug_timer() {
 }
 
 get_debug_timer() {
-  if(isDefined(level.hud_debug_timer))
+  if(isDefined(level.hud_debug_timer)) {
     level.hud_debug_timer destroy();
+  }
 
   level.hud_debug_timer = newhudelem();
   level.hud_debug_timer.alignx = "left";
@@ -58,8 +59,9 @@ turn_on_claw_vision() {
 }
 
 turn_off_claw_vision() {
-  if(!isDefined(level.vision_set_preclaw))
+  if(!isDefined(level.vision_set_preclaw)) {
     level.vision_set_preclaw = "default";
+  }
 
   level.player visionsetnaked(level.vision_set_preclaw, 0);
 }

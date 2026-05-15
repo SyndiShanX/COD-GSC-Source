@@ -239,11 +239,13 @@ player_enter_chopper(chopper, pilot) {
   chopper thread maps\_vehicle::aircraft_dust_kickup();
 
   chopper.gunner_use_turret = false;
-  if(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"] != level.GunnerWeaponPlayerEquiv)
+  if(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"] != level.GunnerWeaponPlayerEquiv) {
     chopper.gunner_use_turret = true;
+  }
 
-  if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0))
+  if((isDefined(level.cobraWeapon)) && (level.cobraWeapon.size > 0)) {
     chopper setVehWeapon(level.cobraWeapon[chopper.pilot.currentWeapon].v["weapon"]);
+  }
 
   chopper notify("nodeath_thread");
   chopper notify("no_regen_health");
@@ -300,8 +302,9 @@ startRotors() {
         rate = 1.0;
         startUp = false;
         self notify("takeoff");
-        if(self.vehicletype == "cobra_player")
+        if(self.vehicletype == "cobra_player") {
           self setModel("vehicle_cobra_helicopter_fly");
+        }
       }
     } else
       self waittillmatch("rotor_anim", "end");
@@ -330,8 +333,9 @@ vehicle_Spawn_Callback_Thread(vehicle) {
     return;
   }
   assert(isDefined(vehicle.script_targettype));
-  if(!isDefined(vehicle.script_targetoffset_z))
+  if(!isDefined(vehicle.script_targetoffset_z)) {
     vehicle.script_targetoffset_z = 0;
+  }
   offset = (0, 0, vehicle.script_targetoffset_z);
 
   cobraTarget_Add(level.player, vehicle, vehicle.script_targettype, offset);
@@ -372,8 +376,9 @@ weaponsSystems_Create_Weapon() {
 }
 
 weaponsSystems_Add_Weapon(weapon) {
-  if(!isDefined(level.cobraWeapon))
+  if(!isDefined(level.cobraWeapon)) {
     level.cobraWeapon = [];
+  }
 
   assert(isDefined(level.cobraWeapon));
   assert(isDefined(weapon.v["weapon"]));
@@ -407,8 +412,9 @@ weaponsSystems_Add_Weapon(weapon) {
 
   precacheItem(level.cobraWeapon[index].v["weapon"]);
 
-  if(isDefined(level.cobraWeapon[index].v["hudShader"]))
+  if(isDefined(level.cobraWeapon[index].v["hudShader"])) {
     precacheShader(level.cobraWeapon[index].v["hudShader"]);
+  }
   precacheShader(level.cobraWeapon[index].v["equipShader"]);
   precacheShader(level.cobraWeapon[index].v["shader_target"]);
   precacheShader(level.cobraWeapon[index].v["shader_target_offscreen"]);
@@ -449,8 +455,9 @@ weaponsSystems() {
   assert(isDefined(self.pilot));
   assert(self.pilot.classname == "player");
 
-  if(!isDefined(level.cobraWeapon))
+  if(!isDefined(level.cobraWeapon)) {
     return;
+  }
   if(level.cobraWeapon.size == 0) {
     return;
   }
@@ -484,8 +491,9 @@ weaponsSystems() {
         level notify("weapon_armed");
 
         if((isDefined(level.cobraTarget)) && (level.cobraTarget.size > 0)) {
-          for(i = 0; i < level.cobraTarget.size; i++)
+          for(i = 0; i < level.cobraTarget.size; i++) {
             self thread cobraTarget_holdWait_missileLock_Sound_Stop(level.cobraTarget[i]);
+          }
         }
 
         if(getDvar("cobrapilot_sounds_enabled") == "1") {
@@ -524,8 +532,9 @@ weaponSystems_EquipLoopSound_Stop() {
   }
   level.weaponEquipLoopSoundPlaying = undefined;
 
-  if(!isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"]))
+  if(!isDefined(level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"])) {
     return;
+  }
   self.pilot notify("stop sound" + level.cobraWeapon[self.pilot.currentWeapon].v["sound_armed_loop"]);
 }
 
@@ -536,16 +545,18 @@ weaponsSystems_buttonRelease_Wait(button) {
   level endon("cobra_death");
 
   prof_begin("cobrapilot_weapons_systems");
-  while(self buttonPressed(button))
+  while(self buttonPressed(button)) {
     wait 0.05;
+  }
   prof_end("cobrapilot_weapons_systems");
 }
 
 weaponsSystems_HUD() {
   assert(isDefined(self));
 
-  if(!isDefined(level.cobraWeapon))
+  if(!isDefined(level.cobraWeapon)) {
     return;
+  }
   if(level.cobraWeapon.size == 0) {
     return;
   }
@@ -618,8 +629,9 @@ weaponsSystems_Fire_Missile() {
     if(isDefined(missileTarget)) {
       eMissile = self fireWeapon(level.cobraWeapon[self.pilot.currentWeapon].v["tags"][level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]], missileTarget.targetEntity);
       missileTarget.targetEntity notify("incomming_missile", eMissile);
-      if(!isDefined(missileTarget.targetEntity.incomming_Missiles))
+      if(!isDefined(missileTarget.targetEntity.incomming_Missiles)) {
         missileTarget.targetEntity.incomming_Missiles = [];
+      }
       missileTarget.targetEntity.incomming_Missiles = array_add(missileTarget.targetEntity.incomming_Missiles, eMissile);
       thread missile_deathWait(eMissile, missileTarget.targetEntity);
     } else
@@ -639,16 +651,18 @@ weaponsSystems_Fire_Missile() {
     }
 
     level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"]++;
-    if(level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] >= level.cobraWeapon[self.pilot.currentWeapon].v["tags"].size)
+    if(level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] >= level.cobraWeapon[self.pilot.currentWeapon].v["tags"].size) {
       level.cobraWeapon[self.pilot.currentWeapon].v["nextTag"] = 0;
+    }
 
     if(getDvar("cobrapilot_unlimited_ammo") == "0") {
       level.cobraWeapon[self.pilot.currentWeapon].v["currentAmmo"]--;
       level.cobraWeapon[self.pilot.currentWeapon].v["ammoCounter"] setValue(level.cobraWeapon[self.pilot.currentWeapon].v["currentAmmo"]);
     }
 
-    if(level.cobraWeapon[self.pilot.currentWeapon].v["singleShot"])
+    if(level.cobraWeapon[self.pilot.currentWeapon].v["singleShot"]) {
       self.pilot weaponsSystems_buttonRelease_Wait("BUTTON_RTRIG");
+    }
   }
 }
 
@@ -659,8 +673,9 @@ weaponsSystems_Detach_Weapon(modelname, tagname) {
 
   attachedModelCount = self getattachsize();
   attachedModels = [];
-  for(i = 0; i < attachedModelCount; i++)
+  for(i = 0; i < attachedModelCount; i++) {
     attachedModels[i] = self getattachmodelname(i);
+  }
 
   qAttached = false;
   for(i = 0; i < attachedModels.size; i++) {
@@ -675,10 +690,11 @@ weaponsSystems_Detach_Weapon(modelname, tagname) {
     break;
   }
 
-  if(qAttached)
+  if(qAttached) {
     self detach(modelname, tagname);
-  else
+  } else {
     println("FAILED TO DETACH MODEL: " + modelname + " from tag: " + tagname);
+  }
 }
 
 weaponsSystems_Attach_Weapon(weapon) {
@@ -688,8 +704,9 @@ weaponsSystems_Attach_Weapon(weapon) {
 
   attachedModelCount = self getattachsize();
 
-  if(!isDefined(level.cobra_missile_models[weapon]))
+  if(!isDefined(level.cobra_missile_models[weapon])) {
     return;
+  }
   missileModel = level.cobra_missile_models[weapon];
   attachToTag = undefined;
   for(i = 0; i < level.cobra_weapon_tags[weapon].size; i++) {
@@ -702,15 +719,17 @@ weaponsSystems_Attach_Weapon(weapon) {
     break;
   }
 
-  if(isDefined(attachToTag))
+  if(isDefined(attachToTag)) {
     self attach(missileModel, attachToTag);
+  }
 }
 
 weaponsSystems_Model_Attached_To_Tag(tagname) {
   attachedModelCount = self getattachsize();
   for(i = 0; i < attachedModelCount; i++) {
-    if(self getattachtagname(i) == tagname)
+    if(self getattachtagname(i) == tagname) {
       return true;
+    }
   }
   return false;
 }
@@ -720,11 +739,13 @@ weaponsSystems_Get_Missile_Target() {
 
   missileTarget = undefined;
 
-  if(!isDefined(level.cobraTarget))
+  if(!isDefined(level.cobraTarget)) {
     return missileTarget;
+  }
 
-  if(!isDefined(level.cobraTarget.size))
+  if(!isDefined(level.cobraTarget.size)) {
     return missileTarget;
+  }
 
   prof_begin("cobrapilot_weapons_systems");
 
@@ -732,17 +753,20 @@ weaponsSystems_Get_Missile_Target() {
     if(!isDefined(level.cobraTarget[i].locked)) {
       continue;
     }
-    if(!isDefined(missileTarget))
+    if(!isDefined(missileTarget)) {
       missileTarget = level.cobraTarget[i];
+    }
 
-    if(level.cobraTarget[i].locked < missileTarget.locked)
+    if(level.cobraTarget[i].locked < missileTarget.locked) {
       missileTarget = level.cobraTarget[i];
+    }
   }
 
   prof_end("cobrapilot_weapons_systems");
 
-  if(isDefined(missileTarget))
+  if(isDefined(missileTarget)) {
     missileTarget.locked = getTime();
+  }
 
   return missileTarget;
 }
@@ -751,8 +775,9 @@ weaponsSystems_noAmmo_Warning() {
   self notify("noammo_warning");
   self endon("noammo_warning");
 
-  if(isDefined(self.hudelems.noammo_warning))
+  if(isDefined(self.hudelems.noammo_warning)) {
     self.hudelems.noammo_warning destroy();
+  }
 
   self.hudelems.noammo_warning = newClientHudElem(self.pilot);
   self.hudelems.noammo_warning.x = 0;
@@ -766,8 +791,9 @@ weaponsSystems_noAmmo_Warning() {
   self.hudelems.noammo_warning setText(&"COBRAPILOT_NO_AMMO");
   self.hudelems.noammo_warning.fontscale = 1.5;
 
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     self.pilot playLocalSound("cobra_no_ammo");
+  }
 
   self.hudelems.noammo_warning.alpha = 1;
   wait 0.5;
@@ -781,8 +807,9 @@ weaponsSystems_noLock_Warning() {
   self notify("nolock_warning");
   self endon("nolock_warning");
 
-  if(isDefined(self.hudelems.nolock_warning))
+  if(isDefined(self.hudelems.nolock_warning)) {
     self.hudelems.nolock_warning destroy();
+  }
 
   self.hudelems.nolock_warning = newClientHudElem(self.pilot);
   self.hudelems.nolock_warning.x = 0;
@@ -796,8 +823,9 @@ weaponsSystems_noLock_Warning() {
   self.hudelems.nolock_warning setText(&"COBRAPILOT_NO_LOCK");
   self.hudelems.nolock_warning.fontscale = 1.5;
 
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     self.pilot playLocalSound("cobra_no_ammo");
+  }
 
   self.hudelems.nolock_warning.alpha = 1;
   wait 0.5;
@@ -820,12 +848,14 @@ weaponsSystems_zoom() {
   self.pilot reset_fov_for_player();
 
   for(;;) {
-    while(!self.pilot buttonPressed("BUTTON_LSTICK"))
+    while(!self.pilot buttonPressed("BUTTON_LSTICK")) {
       wait 0.05;
+    }
     self.pilot change_fov_for_player(level.weaponZoomFOV);
 
-    while(self.pilot buttonPressed("BUTTON_LSTICK"))
+    while(self.pilot buttonPressed("BUTTON_LSTICK")) {
       wait 0.05;
+    }
     self.pilot reset_fov_for_player();
   }
 }
@@ -834,8 +864,9 @@ change_fov_for_player(targetFOV) {
   targetFOV = int(targetFOV);
 
   fov = int(getDvar("cg_fov"));
-  if(isDefined(fov) && fov > 0)
+  if(isDefined(fov) && fov > 0) {
     level.initialFOV = fov;
+  }
 
   fovFraction = targetFOV / level.initialFOV;
   fovFraction = cap_value(fovFraction, 0.2, 2.0);
@@ -847,12 +878,13 @@ reset_fov_for_player() {
 }
 
 change_fov_scale_for_player(scale) {
-  if(self == level.player)
+  if(self == level.player) {
     setsaveddvar("cg_playerFovScale0", scale);
-  else if(self == level.player2)
+  } else if(self == level.player2) {
     setsaveddvar("cg_playerFovScale1", scale);
-  else
+  } else {
     assertMsg("Flyable helicopters currently only supports single player or coop with 2 players. Playing with more than 2 players is not yet supported");
+  }
 }
 
 cobraTarget_Add(player, targetEntity, targetType, targetOffset) {
@@ -864,11 +896,13 @@ cobraTarget_Add(player, targetEntity, targetType, targetOffset) {
 
   prof_begin("cobrapilot_weapons_systems");
 
-  if(!isDefined(targetOffset))
+  if(!isDefined(targetOffset)) {
     targetOffset = (0, 0, 0);
+  }
 
-  if(!isDefined(level.cobraTarget))
+  if(!isDefined(level.cobraTarget)) {
     level.cobraTarget = [];
+  }
 
   index = level.cobraTarget.size;
 
@@ -895,8 +929,9 @@ cobraTarget_Death(targetStruct) {
   targetStruct.targetEntity waittill("death");
   cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
 
-  if(isDefined(targetStruct.sideWinder_targeted))
+  if(isDefined(targetStruct.sideWinder_targeted)) {
     cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct);
+  }
 
   level.stats["enemies_killed"]++;
 
@@ -921,12 +956,15 @@ cobraTarget_UpdateShaders_All(player) {
   if(!isDefined(player.currentWeapon)) {
     return;
   }
-  if(!isDefined(level.cobraTarget))
+  if(!isDefined(level.cobraTarget)) {
     return;
-  if(!isDefined(level.cobraTarget.size))
+  }
+  if(!isDefined(level.cobraTarget.size)) {
     return;
-  if(!isDefined(level.cobraWeapon))
+  }
+  if(!isDefined(level.cobraWeapon)) {
     return;
+  }
   if(level.cobraWeapon.size == 0) {
     return;
   }
@@ -936,12 +974,13 @@ cobraTarget_UpdateShaders_All(player) {
     if(level.cobraTarget[i].playerOwner != player) {
       continue;
     }
-    if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "dummy")
+    if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "dummy") {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"])
+    } else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"]) {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    else
+    } else {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "invalid");
+    }
   }
 
   prof_end("cobrapilot_weapons_systems");
@@ -984,8 +1023,9 @@ cobraTarget_UpdateShader(player, targetStruct, shader) {
 }
 
 cobraTarget_unlockAllTargets() {
-  if(!isDefined(level.cobraTarget))
+  if(!isDefined(level.cobraTarget)) {
     return;
+  }
   if(!isDefined(level.cobraTarget.size)) {
     return;
   }
@@ -1005,10 +1045,12 @@ cobraTarget_check_missileLock_All(player) {
   wait 0.05;
   assert(isDefined(player) && (player.classname == "player"));
 
-  if(!isDefined(level.cobraWeapon))
+  if(!isDefined(level.cobraWeapon)) {
     return;
-  if(level.cobraWeapon.size == 0)
+  }
+  if(level.cobraWeapon.size == 0) {
     return;
+  }
   if(!isDefined(player.currentWeapon)) {
     return;
   }
@@ -1068,11 +1110,13 @@ cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight, circleRadius)
   assert(isDefined(targetStruct));
   assert(isDefined(targetStruct.targetEntity));
 
-  if(isDefined(boxHalfWidth))
+  if(isDefined(boxHalfWidth)) {
     assert(isDefined(boxHalfHeight));
+  }
 
-  if((!isDefined(boxHalfWidth)) && (!isDefined(boxHalfHeight)))
+  if((!isDefined(boxHalfWidth)) && (!isDefined(boxHalfHeight))) {
     assert(isDefined(circleRadius));
+  }
 
   inReticle = false;
   sightTrace = false;
@@ -1080,13 +1124,15 @@ cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight, circleRadius)
   prof_begin("cobrapilot_weapons_systems");
 
   inReticle = target_isinrect(targetStruct.targetEntity, level.player, int(getDvar("cg_fov")), boxHalfWidth, boxHalfHeight);
-  if(inReticle)
+  if(inReticle) {
     sightTrace = sighttracepassed(level.player getEye() + (0, 0, 100), targetStruct.targetEntity.origin + targetStruct.targetOffset + (0, 0, 100), false, undefined);
+  }
 
   prof_end("cobrapilot_weapons_systems");
 
-  if(inReticle && sightTrace)
+  if(inReticle && sightTrace) {
     return true;
+  }
 
   return false;
 }
@@ -1099,10 +1145,11 @@ cobraTarget_check_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight) 
   assert(isDefined(boxHalfWidth));
   assert(isDefined(boxHalfHeight));
 
-  if(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight))
+  if(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
     thread cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight);
-  else
+  } else {
     cobraTarget_UpdateShader(level.player, targetStruct, "target");
+  }
 }
 
 cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight) {
@@ -1116,10 +1163,12 @@ cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeigh
 
   targetStruct.targetEntity endon("death");
 
-  if(isDefined(targetStruct.locking))
+  if(isDefined(targetStruct.locking)) {
     return;
-  if(isDefined(targetStruct.locked))
+  }
+  if(isDefined(targetStruct.locked)) {
     return;
+  }
   targetStruct.locking = getTime();
 
   lockStartTime = getTime();
@@ -1166,11 +1215,13 @@ cobraTarget_holdLock_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeigh
   targetStruct.locking = undefined;
 
   thread cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     level.player playLocalSound("weap_hellfire_lock");
+  }
 
-  while(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight))
+  while(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
     wait 0.05;
+  }
   targetStruct.locked = undefined;
 
   prof_end("cobrapilot_weapons_systems");
@@ -1186,8 +1237,9 @@ cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, alias) {
   assert(isDefined(targetStruct));
   assert(isDefined(alias));
 
-  if(isDefined(targetStruct.locking_sound_playing))
+  if(isDefined(targetStruct.locking_sound_playing)) {
     return;
+  }
   targetStruct.locking_sound_playing = alias;
 
   targetStruct thread playLoopSoundForSeeking(alias);
@@ -1236,10 +1288,12 @@ cobraTarget_holdWait_missileLock_Air(targetStruct, circleRadius) {
 
   targetStruct.targetEntity endon("death");
 
-  if(isDefined(targetStruct.locking))
+  if(isDefined(targetStruct.locking)) {
     return;
-  if(isDefined(targetStruct.locked))
+  }
+  if(isDefined(targetStruct.locked)) {
     return;
+  }
   targetStruct.locking = getTime();
 
   lockStartTime = getTime();
@@ -1291,8 +1345,9 @@ cobraTarget_holdLock_missileLock_Air(targetStruct, circleRadius) {
   thread cobraTarget_holdWait_missileLock_Sound_Stop(targetStruct);
   thread cobraTarget_holdWait_missileLock_Sound_Start(targetStruct, "weap_aim9_lock");
 
-  while(target_isincircle(targetStruct.targetEntity, level.player, int(getDvar("cg_fov")), circleRadius))
+  while(target_isincircle(targetStruct.targetEntity, level.player, int(getDvar("cg_fov")), circleRadius)) {
     wait 0.05;
+  }
 
   cobraTarget_Sidewinder_ReticleLockOn_Stop(targetStruct);
 
@@ -1303,8 +1358,9 @@ cobraTarget_holdLock_missileLock_Air(targetStruct, circleRadius) {
 
 cobraTarget_Sidewinder_Has_Target() {
   for(i = 0; i < level.cobraTarget.size; i++) {
-    if(isDefined(level.cobraTarget[i].sideWinder_targeted))
+    if(isDefined(level.cobraTarget[i].sideWinder_targeted)) {
       return true;
+    }
   }
   return false;
 }
@@ -1335,8 +1391,9 @@ cobraTarget_Sidewinder_ReticleLockOn_Start(targetStruct) {
 
     lastPhaseTime = getTime();
 
-    while((getTime() - lastPhaseTime) < segmentLength)
+    while((getTime() - lastPhaseTime) < segmentLength) {
       wait 0.05;
+    }
   }
 }
 
@@ -1447,12 +1504,14 @@ health_indicator_getColor() {
 health_warningSound_Start() {
   level endon("cobra_death");
 
-  if(isDefined(level.lowhealth_warning_playing))
+  if(isDefined(level.lowhealth_warning_playing)) {
     return;
+  }
   level.lowhealth_warning_playing = true;
 
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     self.pilot thread play_loop_sound_on_entity("alarm_cobra_death_imminent");
+  }
 }
 
 health_warningSound_Stop() {
@@ -1507,8 +1566,9 @@ health_Regen_Station() {
     }
 
     self.health += level.flyablecobra_healthRegenIncrement;
-    if(self.health > level.flyablecobra_starting_health)
+    if(self.health > level.flyablecobra_starting_health) {
       self.health = level.flyablecobra_starting_health;
+    }
 
     if(self.health > level.flyablecobra_healthWarning_value) {
       self thread health_warningSound_Stop();
@@ -1518,8 +1578,9 @@ health_Regen_Station() {
     newColor = health_indicator_getColor();
     self.hudelems.cobra_health_icon.color = (newColor[0], newColor[1], newColor[2]);
 
-    if(getDvar("cobrapilot_sounds_enabled") == "1")
+    if(getDvar("cobrapilot_sounds_enabled") == "1") {
       self.pilot playLocalSound("cobra_health_pickup");
+    }
 
     wait level.flyablecobra_healthRegenRate;
   }
@@ -1541,11 +1602,13 @@ health_think() {
     slideVelocity = (slideVelocity / 2);
 
     impactAmount = impactVelocity;
-    if(slideVelocity > impactVelocity)
+    if(slideVelocity > impactVelocity) {
       impactAmount = slideVelocity;
+    }
 
-    if(impactAmount > fatalImpactRate)
+    if(impactAmount > fatalImpactRate) {
       impactAmount = fatalImpactRate;
+    }
 
     damage = int(impactAmount * (level.flyablecobra_starting_health / fatalImpactRate));
 
@@ -1562,11 +1625,12 @@ health_think() {
     level.stats["damage_taken"] += damage;
 
     bDeath = false;
-    if((self.health - damage) <= 0)
+    if((self.health - damage) <= 0) {
       bDeath = true;
-    else {
-      if(getDvar("cobrapilot_sounds_enabled") == "1")
+    } else {
+      if(getDvar("cobrapilot_sounds_enabled") == "1") {
         self.pilot playLocalSound("helicopter_collide");
+      }
 
       self.health -= damage;
 
@@ -1590,8 +1654,9 @@ health_think() {
 }
 
 cobra_death() {
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     self.pilot playLocalSound("helicopter_crash");
+  }
 
   self.health = 1;
 
@@ -1630,16 +1695,18 @@ incommingMissile_Missile_Death(eMissile) {
 }
 
 incommingMissile_Sound_Start() {
-  if(!isDefined(level.missile_launched_warning_playing))
+  if(!isDefined(level.missile_launched_warning_playing)) {
     level.missile_launched_warning_playing = 0;
+  }
 
   level.missile_launched_warning_playing++;
 
   if(level.missile_launched_warning_playing > 1) {
     return;
   }
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     level.player thread play_loop_sound_on_entity("alarm_cobra_enemy_launch");
+  }
 }
 
 incommingMissile_Sound_Stop() {
@@ -1652,8 +1719,9 @@ incommingMissile_Sound_Stop() {
 }
 
 ammo_Reload_Station() {
-  if(!isDefined(level.cobraWeapon))
+  if(!isDefined(level.cobraWeapon)) {
     return;
+  }
   if(level.cobraWeapon.size == 0) {
     return;
   }
@@ -1669,8 +1737,9 @@ ammo_Reload_Station() {
     level waittill("ammo_reload", regenPoint, trigger);
 
     if(getDvar("cobrapilot_farp_mode") == "0") {
-      for(i = 0; i < level.cobraWeapon.size; i++)
+      for(i = 0; i < level.cobraWeapon.size; i++) {
         thread ammo_Reload_Station_Add_Ammo(level.cobraWeapon[i]);
+      }
       wait 0.05;
     } else if(getDvar("cobrapilot_farp_mode") == "1") {
       thread ammo_Reload_Station_AutoLand_HintPrint(regenPoint, trigger);
@@ -1718,12 +1787,14 @@ ammo_Reload_Station_Get_Viewing_Ent() {
 }
 
 ammo_Reload_Station_AutoLand_HintPrint(hoverPoint, trigger) {
-  if(isDefined(level.playervehicle.farp_autoland_print_on))
+  if(isDefined(level.playervehicle.farp_autoland_print_on)) {
     return;
+  }
   level.playervehicle.farp_autoland_print_on = true;
 
-  while(level.playervehicle isTouching(trigger))
+  while(level.playervehicle isTouching(trigger)) {
     wait 0.05;
+  }
 
   level.playervehicle.farp_autoland_print_on = undefined;
 }
@@ -1747,9 +1818,9 @@ ammo_Reload_Station_Notify(notifyString) {
 
   for(;;) {
     vehicle = undefined;
-    if(getDvar("cobrapilot_farp_mode") == "0")
+    if(getDvar("cobrapilot_farp_mode") == "0") {
       self waittill("trigger", vehicle);
-    else if(getDvar("cobrapilot_farp_mode") == "1") {
+    } else if(getDvar("cobrapilot_farp_mode") == "1") {
       assert(isDefined(trig));
       trig waittill("trigger", vehicle);
     }
@@ -1762,19 +1833,22 @@ ammo_Reload_Station_Notify(notifyString) {
     regenPoint = self.origin;
     if(isDefined(self.target)) {
       ent = getent(self.target, "targetname");
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         regenPoint = ent.origin;
+      }
     }
 
-    if(isDefined(trig))
+    if(isDefined(trig)) {
       level notify(notifyString, regenPoint, trig);
-    else
+    } else {
       level notify(notifyString, regenPoint, self);
+    }
     level notify("health_regen");
 
     if(getDvar("cobrapilot_farp_mode") == "1") {
-      while(vehicle isTouching(trig))
+      while(vehicle isTouching(trig)) {
         wait 0.05;
+      }
     }
   }
 }
@@ -1795,14 +1869,17 @@ ammo_Reload_Station_Add_Ammo(weapon) {
   }
 
   weapon.v["currentAmmo"] += weapon.v["ammoPickupIncrement"];
-  if(weapon.v["currentAmmo"] > weapon.v["maxAmmo"])
+  if(weapon.v["currentAmmo"] > weapon.v["maxAmmo"]) {
     weapon.v["currentAmmo"] = weapon.v["maxAmmo"];
+  }
 
-  for(i = 0; i < weapon.v["ammoPickupIncrement"]; i++)
+  for(i = 0; i < weapon.v["ammoPickupIncrement"]; i++) {
     level.playervehicle weaponsSystems_Attach_Weapon(weapon.v["weapon"]);
+  }
 
-  if(getDvar("cobrapilot_sounds_enabled") == "1")
+  if(getDvar("cobrapilot_sounds_enabled") == "1") {
     level.player playLocalSound("cobra_ammo_reload");
+  }
 
   weapon.v["ammoCounter"] setValue(weapon.v["currentAmmo"]);
 
@@ -1841,8 +1918,9 @@ gunner_think(gunner) {
 
   for(;;) {
     if(self.gunner_use_turret == false) {
-      while(self.gunner_use_turret == false)
+      while(self.gunner_use_turret == false) {
         wait 0.1;
+      }
       wait randomfloatrange(0.5, 1.2);
       continue;
     }
@@ -1865,14 +1943,16 @@ gunner_lookAtTarget(eTarget) {
 
   self notify("stop_looking_at_target");
   self endon("stop_looking_at_target");
-  if(isDefined(eTarget))
+  if(isDefined(eTarget)) {
     eTarget endon("death");
+  }
 
   for(;;) {
-    if(isDefined(self.lookingAtTarget) && isDefined(eTarget))
+    if(isDefined(self.lookingAtTarget) && isDefined(eTarget)) {
       blendTime = 0.1;
-    else
+    } else {
       blendTime = 1.0;
+    }
 
     self.lookingAtTarget = true;
 
@@ -1897,8 +1977,9 @@ gunner_getBlendNumber(eTarget) {
   blendAmount[1] = 1.0;
   blendAmount[2] = 0.0;
 
-  if(!isDefined(eTarget))
+  if(!isDefined(eTarget)) {
     return blendAmount;
+  }
 
   forward = anglesToForward(level.playervehicle.angles);
   right = anglesToRight(level.playervehicle.angles);
@@ -1910,15 +1991,17 @@ gunner_getBlendNumber(eTarget) {
 
   if(value < 0) {
     value = abs(value);
-    if(value > 1.0)
+    if(value > 1.0) {
       value = 1.0;
+    }
     blendAmount[0] = value;
     blendAmount[1] = 1 - value;
     blendAmount[2] = 0.0;
   } else if(value > 0) {
     value = abs(value);
-    if(value > 1.0)
+    if(value > 1.0) {
       value = 1.0;
+    }
     blendAmount[0] = 0.0;
     blendAmount[1] = 1 - value;
     blendAmount[2] = value;
@@ -1998,23 +2081,27 @@ missileIndicator(eMissile) {
 
     missileIndicator.arrowForward.alpha = 0;
     vecdot = vectordot(forwardvec, vecToMissile);
-    if(vecdot > level.cosine["45"])
+    if(vecdot > level.cosine["45"]) {
       missileIndicator.arrowForward.alpha = 1;
+    }
 
     missileIndicator.arrowBack.alpha = 0;
     vecdot = vectordot(backvec, vecToMissile);
-    if(vecdot > level.cosine["45"])
+    if(vecdot > level.cosine["45"]) {
       missileIndicator.arrowBack.alpha = 1;
+    }
 
     missileIndicator.arrowLeft.alpha = 0;
     vecdot = vectordot(leftvec, vecToMissile);
-    if(vecdot > level.cosine["45"])
+    if(vecdot > level.cosine["45"]) {
       missileIndicator.arrowLeft.alpha = 1;
+    }
 
     missileIndicator.arrowRight.alpha = 0;
     vecdot = vectordot(rightvec, vecToMissile);
-    if(vecdot > level.cosine["45"])
+    if(vecdot > level.cosine["45"]) {
       missileIndicator.arrowRight.alpha = 1;
+    }
 
     prof_end("cobrapilot_weapons_systems");
 
@@ -2052,14 +2139,18 @@ missileIndicator_MissileDeath(missileIndicator) {
 
   missileIndicator.eMissile waittill("death");
 
-  if(isDefined(missileIndicator.arrowLeft))
+  if(isDefined(missileIndicator.arrowLeft)) {
     missileIndicator.arrowLeft destroy();
-  if(isDefined(missileIndicator.arrowRight))
+  }
+  if(isDefined(missileIndicator.arrowRight)) {
     missileIndicator.arrowRight destroy();
-  if(isDefined(missileIndicator.arrowForward))
+  }
+  if(isDefined(missileIndicator.arrowForward)) {
     missileIndicator.arrowForward destroy();
-  if(isDefined(missileIndicator.arrowBack))
+  }
+  if(isDefined(missileIndicator.arrowBack)) {
     missileIndicator.arrowBack destroy();
+  }
 }
 
 missileIndicator_MissileFlashNotifies() {

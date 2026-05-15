@@ -12,10 +12,11 @@
 init() {
   level.cymbal_monkey_name = "cymbal_monkey_zm";
 
-  if(is_true(level.legacy_cymbal_monkey))
+  if(is_true(level.legacy_cymbal_monkey)) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
-  else
+  } else {
     level.cymbal_monkey_model = "t6_wpn_zmb_monkey_bomb_world";
+  }
 
   if(getDvar(#"createfx") == "on") {
     return;

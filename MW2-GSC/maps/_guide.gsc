@@ -39,19 +39,22 @@ leadshowstuff() {
 
 leadshowstuff_path(position, arrowtime) {
   level endon("newtrigger");
-  if(isDefined(position.target))
+  if(isDefined(position.target)) {
     targ = getent(position.target, "targetname");
-  else
+  } else {
     targ = undefined;
+  }
   lasttarg = position;
   while(isDefined(targ)) {
     waitforrecentfire();
-    if(isDefined(targ.target))
+    if(isDefined(targ.target)) {
       targ = getent(targ.target, "targetname");
-    else
+    } else {
       return;
-    if(!isDefined(targ))
+    }
+    if(!isDefined(targ)) {
       return;
+    }
     realarrowtime = distance(lasttarg.origin, targ.origin) / 1000;
 
     draw_arrow_time(lasttarg.origin, targ.origin, (0, 0, 1), realarrowtime);
@@ -61,23 +64,26 @@ leadshowstuff_path(position, arrowtime) {
 }
 
 waitforrecentfire() {
-  while(!level.hasfiredrecently)
+  while(!level.hasfiredrecently) {
     wait .05;
+  }
 }
 
 lastshottime() {
   level.hasfiredrecently = true;
   lastshottime = 0;
   while(1) {
-    if(level.player useButtonPressed())
+    if(level.player useButtonPressed()) {
       lastshottime = 0;
-    else
+    } else {
       lastshottime += .05;
+    }
 
-    if(lastshottime > 4)
+    if(lastshottime > 4) {
       level.hasfiredrecently = false;
-    else
+    } else {
       level.hasfiredrecently = true;
+    }
     wait .05;
   }
 }
@@ -85,10 +91,12 @@ lastshottime() {
 brush_guide() {
   while(1) {
     self hide();
-    while(!level.hasfiredrecently)
+    while(!level.hasfiredrecently) {
       wait .05;
+    }
     self show();
-    while(level.hasfiredrecently)
+    while(level.hasfiredrecently) {
       wait .05;
+    }
   }
 }

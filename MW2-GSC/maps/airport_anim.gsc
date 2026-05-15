@@ -702,10 +702,11 @@ makarov_aim_player(guy) {
     leftWeight = 0;
     rightWeight = 0;
 
-    if(angleYaw < 0)
+    if(angleYaw < 0) {
       leftWeight = angleYaw / -60;
-    else if(angleYaw > 0)
+    } else if(angleYaw > 0) {
       rightWeight = angleYaw / 60;
+    }
 
     self setAnimLimited(%airport_ending_aim_left, leftWeight, 0.2);
     self setAnimLimited(%airport_ending_aim_right, rightWeight, 0.2);

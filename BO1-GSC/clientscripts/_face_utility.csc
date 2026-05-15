@@ -99,7 +99,7 @@ waitForFaceEventComplete() {
   self endon("new_face_event");
   level endon("save_restore");
   if(GetDvarInt(#"cg_debugFace") != 0) {
-    PrintLn("Trying to get animation for state " + self.face_curr_event + " # " + self.face_curr_event_idx + " for entity " + self GetEntityNumber());
+    PrintLn("Trying to get animation for state " + self.face_curr_event + " #" + self.face_curr_event_idx + " for entity " + self GetEntityNumber());
   }
   Assert(isDefined(level.faceStates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx]));
   if(isDefined(level.faceStates[self.face_anim_tree][self.face_curr_event]["timer"])) {
@@ -120,7 +120,7 @@ waitForFaceEventComplete() {
   }
   self notify("face_timer_expired");
   if(GetDvarInt(#"cg_debugFace") != 0) {
-    PrintLn("Timing out face state " + self.face_curr_event + " # " + self.face_curr_event_idx + " for entity " + self GetEntityNumber() + " after " + base_time);
+    PrintLn("Timing out face state " + self.face_curr_event + " #" + self.face_curr_event_idx + " for entity " + self GetEntityNumber() + " after " + base_time);
   }
   self.face_curr_event = undefined;
   self.face_curr_event_idx = undefined;
@@ -198,7 +198,7 @@ processFaceEvents(localClientNum) {
         self.face_curr_base = state;
         self.face_curr_base_idx = RandomInt(numAnims);
         if(GetDvarInt(#"cg_debugFace") != 0) {
-          PrintLn("New base face anim state " + self.face_curr_base + " anim # " + self.face_curr_base_idx + "for entity " + self GetEntityNumber());
+          PrintLn("New base face anim state " + self.face_curr_base + " anim #" + self.face_curr_base_idx + "for entity " + self GetEntityNumber());
         }
         if(!isDefined(self.face_curr_event)) {
           if(GetDvarInt(#"cg_debugFace") != 0) {
@@ -212,7 +212,7 @@ processFaceEvents(localClientNum) {
         self.face_curr_event = state;
         self.face_curr_event_idx = RandomInt(numAnims);
         if(GetDvarInt(#"cg_debugFace") != 0) {
-          PrintLn("New face anim event " + self.face_curr_event + " anim # " + self.face_curr_event_idx + " for entity " + self GetEntityNumber());
+          PrintLn("New face anim event " + self.face_curr_event + " anim #" + self.face_curr_event_idx + " for entity " + self GetEntityNumber());
         }
         self SetFlaggedAnimKnob("face_event", level.faceStates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
         self thread waitForFaceEventComplete();

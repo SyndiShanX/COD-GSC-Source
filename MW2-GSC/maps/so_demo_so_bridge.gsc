@@ -105,8 +105,9 @@ so_demoman_init() {
   level.vehicle_list = array_add(level.vehicle_list, vehicle_get_slide_car("slide_car_3"));
   level.vehicle_list = array_add(level.vehicle_list, vehicle_get_slide_car("slide_car_4"));
   foreach(vehicle in level.vehicle_list) {
-    if(vehicle.classname != "script_model")
+    if(vehicle.classname != "script_model") {
       level.vehicle_list = array_remove(level.vehicle_list, vehicle);
+    }
   }
   array_thread(level.vehicle_list, ::vehicle_alive_think);
 
@@ -148,17 +149,20 @@ level.normal_time = max(level.normal_time - 1.0, 0.0);
 total_time = level.normal_time + level.infinite_time;
 
 infinite_percent = 0;
-if(total_time > 0)
+if(total_time > 0) {
   infinite_percent = int((level.infinite_time / total_time) * 100);
-foreach(player in level.players)
-player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_INFINITE_AMMO_PERCENT", infinite_percent + "%");
+}
+foreach(player in level.players) {
+  player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_INFINITE_AMMO_PERCENT", infinite_percent + "%");
+}
 
 if(!is_coop()) {
   return;
 }
 total_damage = 0;
-foreach(player in level.players)
-total_damage += player.vehicle_damage;
+foreach(player in level.players) {
+  total_damage += player.vehicle_damage;
+}
 
 p1_percent = 0;
 p2_percent = 0;
@@ -167,10 +171,11 @@ if(total_damage > 0) {
   p2_percent = int((level.player2.vehicle_damage / total_damage) * 100);
 
   if(p1_percent + p2_percent < 100) {
-    if(p1_percent < p2_percent)
+    if(p1_percent < p2_percent) {
       p1_percent++;
-    else
+    } else {
       p2_percent++;
+    }
   }
 }
 

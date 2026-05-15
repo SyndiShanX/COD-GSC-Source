@@ -144,8 +144,9 @@ play_technical_scripted_sfx_sequence() {
   var_0 = getEntArray("script_vehicle_pickup_technical", "classname");
 
   foreach(var_2 in var_0) {
-    if(var_2.script_vehiclespawngroup == 5)
+    if(var_2.script_vehiclespawngroup == 5) {
       var_2.script_disablevehicleaudio = 1;
+    }
   }
 
   var_4 = getvehiclenode("auto2665", "targetname");

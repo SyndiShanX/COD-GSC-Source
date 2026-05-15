@@ -99,8 +99,9 @@ so_defense_init() {
   level.hunter_dialog_throttle = 20000;
 
   sentries = getEntArray("misc_turret", "classname");
-  foreach(sentry in sentries)
-  sentry Delete();
+  foreach(sentry in sentries) {
+    sentry Delete();
+  }
   common_scripts\_sentry::main();
 
   level.aamod_sentry_kill = 2.0;
@@ -295,8 +296,9 @@ so_defense_announce_wave_start(wave, timer, set_start_time) {
 
   level.so_progress_goal_status = "none";
 
-  if(isDefined(level.hunter_dialog_throttle))
+  if(isDefined(level.hunter_dialog_throttle)) {
     level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
+  }
 
   stringer_dialog_throttle_reset();
 }
@@ -304,10 +306,11 @@ so_defense_announce_wave_start(wave, timer, set_start_time) {
 so_defense_announce_start_music(wave) {
   wait 0.75;
 
-  if(wave == "SO_DEFENSE_INVASION_WAVE_5")
+  if(wave == "SO_DEFENSE_INVASION_WAVE_5") {
     thread music_loop("so_defense_invasion_finalwave_music", 114);
-  else
+  } else {
     thread music_loop("so_defense_invasion_music", 191);
+  }
 }
 
 so_defense_announce_wave_complete() {
@@ -328,8 +331,9 @@ so_defense_challenge_complete() {
 }
 
 so_defense_can_do_wave(skill, force_wave) {
-  if(isDefined(force_wave) && force_wave)
+  if(isDefined(force_wave) && force_wave) {
     return true;
+  }
 
   return level.gameSkill >= skill;
 }

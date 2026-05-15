@@ -42,6 +42,7 @@ set_up_auto_non_ai_turret(var_0, var_1, var_2) {
   var_3 = var_0 gettagorigin(var_2.sittag);
   var_4 = var_0 gettagangles(var_2.sittag);
 
-  for(;;)
+  for(;;) {
     var_0 maps\_vehicle_aianim::animontag(var_1, var_2.sittag, var_2.idle);
+  }
 }

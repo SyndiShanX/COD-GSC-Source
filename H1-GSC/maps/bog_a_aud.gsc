@@ -163,8 +163,9 @@ play_chain_link_fence_sfx() {
     var_0 waittill("trigger", var_1);
     thread common_scripts\utility::play_sound_in_space("scn_chainlink_fence_rattle", var_1.origin);
 
-    while(var_1 istouching(var_0))
+    while(var_1 istouching(var_0)) {
       wait 0.05;
+    }
   }
 }
 

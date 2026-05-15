@@ -207,8 +207,9 @@ hangerpath_main() {
   level.price stop_magic_bullet_shield();
   level.price delete();
 
-  if(level.start_point == "hangerpath")
+  if(level.start_point == "hangerpath") {
     wait(0.05);
+  }
 
   price_hanger_start = getent("price_hanger_start", "targetname");
   level.price_spawner.script_stealth = undefined;
@@ -229,15 +230,18 @@ hangerpath_main() {
   enemies = GetAISpeciesArray("axis", "all");
 
   welder_wing = get_living_ai("welder_wing", "script_noteworthy");
-  if(isalive(welder_wing))
+  if(isalive(welder_wing)) {
     enemies = array_remove(enemies, welder_wing);
+  }
 
   welder_engine = get_living_ai("welder_engine", "script_noteworthy");
-  if(isalive(welder_engine))
+  if(isalive(welder_engine)) {
     enemies = array_remove(enemies, welder_engine);
+  }
 
-  if(isalive(level.truck_patrol))
+  if(isalive(level.truck_patrol)) {
     level.truck_patrol Vehicle_SetSpeed(0, 15);
+  }
 
   flag_set("script_attack_override");
 
@@ -269,8 +273,9 @@ hangerpath_main() {
   disable_stealth_system();
 
   if(surviving_enemies.size > 0) {
-    foreach(mf in surviving_enemies)
-    mf thread setup_stealth_enemy_cleanup();
+    foreach(mf in surviving_enemies) {
+      mf thread setup_stealth_enemy_cleanup();
+    }
 
     while(1) {
       all_dead = true;
@@ -288,8 +293,9 @@ hangerpath_main() {
       if(all_dead) {
         break;
       } else {
-        if(flag("player_on_backdoor_path"))
+        if(flag("player_on_backdoor_path")) {
           flag_set("brought_friends");
+        }
         wait 1;
       }
     }
@@ -410,8 +416,9 @@ player_used_computer() {
   thread guards_run_in();
   thread more_guards();
 
-  if(isDefined(level.price._stealth))
+  if(isDefined(level.price._stealth)) {
     level.price stealth_basic_states_default();
+  }
   disable_stealth_system();
   level.player.ignoreme = true;
   thread check_player_detonate();
@@ -461,8 +468,9 @@ start_ch_tarmac(e3) {
     level.price forceUseWeapon("ak47_arctic", "primary");
   }
 
-  if(isDefined(level.price._stealth))
+  if(isDefined(level.price._stealth)) {
     level.price stealth_basic_states_default();
+  }
   disable_stealth_system();
 
   player_hanger_start = getent("price_capture_node", "targetname");
@@ -510,8 +518,9 @@ start_ch_tarmac(e3) {
 }
 
 cliffhanger_tarmac_main() {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
   level.price endon("death");
 
   setDvar("player_has_witnessed_capture", "");

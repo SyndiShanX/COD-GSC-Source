@@ -16,8 +16,9 @@ init() {
 
   remoteMissileSpawnArray = getEntArray("remoteMissileSpawn", "targetname");
   foreach(startPoint in remoteMissileSpawnArray) {
-    if(isDefined(startPoint.target))
+    if(isDefined(startPoint.target)) {
       startPoint.targetEnt = getEnt(startPoint.target, "targetname");
+    }
   }
   level.lasedStrikeEnts = remoteMissileSpawnArray;
 
@@ -71,8 +72,9 @@ watchSoflamUsage() {
   self endon("disconnect");
   self endon("death");
 
-  while(self isChangingWeapon())
+  while(self isChangingWeapon()) {
     wait(0.05);
+  }
 
   for(;;) {
     if(self attackButtonPressed() && self GetCurrentWeapon() == "iw5_soflam_mp" && self adsButtonPressed()) {
@@ -95,15 +97,18 @@ watchSoflamUsage() {
 
       used = self attackLasedTarget(targPoint);
 
-      if(used)
+      if(used) {
         self.soflamAmmoUsed++;
+      }
 
-      if(self.soflamAmmoUsed >= level.numberOfSoflamAmmo)
+      if(self.soflamAmmoUsed >= level.numberOfSoflamAmmo) {
         return true;
+      }
     }
 
-    if(self isChangingWeapon())
+    if(self isChangingWeapon()) {
       return false;
+    }
 
     wait(0.05);
   }
@@ -318,15 +323,18 @@ getTargetPoint() {
 
   res = bulletTrace(origin, endpoint, false, undefined);
 
-  if(res["surfacetype"] == "none")
+  if(res["surfacetype"] == "none") {
     return undefined;
-  if(res["surfacetype"] == "default")
+  }
+  if(res["surfacetype"] == "default") {
     return undefined;
+  }
 
   ent = res["entity"];
   if(isDefined(ent)) {
-    if(ent == level.ac130.planeModel)
+    if(ent == level.ac130.planeModel) {
       return undefined;
+    }
   }
 
   results = [];
@@ -338,8 +346,9 @@ getTargetPoint() {
 
 spawnRemote(owner) {
   remote = spawnPlane(owner, "script_model", level.UAVRig getTagOrigin("tag_origin"), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
-  if(!isDefined(remote))
+  if(!isDefined(remote)) {
     return undefined;
+  }
 
   remote setModel("vehicle_predator_b");
   remote.team = owner.team;
@@ -442,8 +451,9 @@ handleTimeOut() {
 removeRemote(remote, clearLevelRef) {
   self notify("remote_removed");
 
-  if(isDefined(remote.targetEnt))
+  if(isDefined(remote.targetEnt)) {
     remote.targetEnt delete();
+  }
 
   level.lasedStrikeActive = false;
   level.lasedStrikeCrateActive = false;
@@ -453,8 +463,9 @@ removeRemote(remote, clearLevelRef) {
     remote maps\mp\killstreaks\_uav::removeUAVModel();
   }
 
-  if(!isDefined(clearLevelRef) || clearLevelRef == true)
+  if(!isDefined(clearLevelRef) || clearLevelRef == true) {
     level.remote_mortar = undefined;
+  }
 }
 
 remoteLeave() {
@@ -503,8 +514,9 @@ damageTracker() {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
       self.wasDamagedFromBulletPenetration = true;
+    }
 
     self.wasDamaged = true;
 
@@ -514,8 +526,9 @@ damageTracker() {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
       if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
-        if(attacker _hasPerk("specialty_armorpiercing"))
+        if(attacker _hasPerk("specialty_armorpiercing")) {
           modifiedDamage += damage * level.armorPiercingMod;
+        }
       }
     }
 
@@ -537,8 +550,9 @@ damageTracker() {
 
     self.damageTaken += modifiedDamage;
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner playLocalSound("reaper_damaged");
+    }
 
     if(self.damageTaken >= self.maxHealth) {
       if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
@@ -549,8 +563,9 @@ damageTracker() {
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath, weapon);
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner StopLocalSound("missile_incoming");
+      }
 
       self thread remoteExplode();
 
@@ -579,8 +594,9 @@ stingerProximityDetonate(missileTarget, player) {
   self endon("death");
   missileTarget endon("death");
 
-  if(isDefined(missileTarget.owner))
+  if(isDefined(missileTarget.owner)) {
     missileTarget.owner PlayLocalSound("missile_incoming");
+  }
 
   self Missile_SetTargetEnt(missileTarget);
 
@@ -588,10 +604,11 @@ stingerProximityDetonate(missileTarget, player) {
   lastCenter = missileTarget GetPointInBounds(0, 0, 0);
 
   while(true) {
-    if(!isDefined(missileTarget))
+    if(!isDefined(missileTarget)) {
       center = lastCenter;
-    else
+    } else {
       center = missileTarget GetPointInBounds(0, 0, 0);
+    }
 
     lastCenter = center;
 
@@ -606,14 +623,16 @@ stingerProximityDetonate(missileTarget, player) {
       self Missile_SetTargetEnt(newTarget);
       missileTarget = newTarget;
 
-      if(isDefined(missileTarget.owner))
+      if(isDefined(missileTarget.owner)) {
         missileTarget.owner StopLocalSound("missile_incoming");
+      }
 
       return;
     }
 
-    if(curDist < minDist)
+    if(curDist < minDist) {
       minDist = curDist;
+    }
 
     if(curDist > minDist) {
       if(curDist > 1536) {
@@ -623,8 +642,9 @@ stingerProximityDetonate(missileTarget, player) {
         missileTarget.owner stopLocalSound("missile_incoming");
 
         if(level.teambased) {
-          if(missileTarget.team != player.team)
+          if(missileTarget.team != player.team) {
             RadiusDamage(self.origin, 1000, 1000, 1000, player, "MOD_EXPLOSIVE", "stinger_mp");
+          }
         } else {
           RadiusDamage(self.origin, 1000, 1000, 1000, player, "MOD_EXPLOSIVE", "stinger_mp");
         }
@@ -658,18 +678,20 @@ handleIncomingSAM() {
 samProximityDetonate(missileTarget, player, missileGroup) {
   missileTarget endon("death");
 
-  if(isDefined(missileTarget.owner))
+  if(isDefined(missileTarget.owner)) {
     missileTarget.owner PlayLocalSound("missile_incoming");
+  }
 
   sam_projectile_damage = 150;
   sam_projectile_damage_radius = 1000;
 
   minDist = [];
   for(i = 0; i < missileGroup.size; i++) {
-    if(isDefined(missileGroup[i]))
+    if(isDefined(missileGroup[i])) {
       minDist[i] = Distance(missileGroup[i].origin, missileTarget GetPointInBounds(0, 0, 0));
-    else
+    } else {
       minDist[i] = undefined;
+    }
   }
 
   while(true) {
@@ -677,8 +699,9 @@ samProximityDetonate(missileTarget, player, missileGroup) {
 
     curDist = [];
     for(i = 0; i < missileGroup.size; i++) {
-      if(isDefined(missileGroup[i]))
+      if(isDefined(missileGroup[i])) {
         curDist[i] = Distance(missileGroup[i].origin, center);
+      }
     }
 
     for(i = 0; i < curDist.size; i++) {
@@ -695,14 +718,16 @@ samProximityDetonate(missileTarget, player, missileGroup) {
             }
           }
 
-          if(isDefined(missileTarget.owner))
+          if(isDefined(missileTarget.owner)) {
             missileTarget.owner StopLocalSound("missile_incoming");
+          }
 
           return;
         }
 
-        if(curDist[i] < minDist[i])
+        if(curDist[i] < minDist[i]) {
           minDist[i] = curDist[i];
+        }
 
         if(curDist[i] > minDist[i]) {
           if(curDist[i] > 1536) {
@@ -712,8 +737,9 @@ samProximityDetonate(missileTarget, player, missileGroup) {
             missileTarget.owner StopLocalSound("missile_incoming");
 
             if(level.teambased) {
-              if(missileTarget.team != player.team)
+              if(missileTarget.team != player.team) {
                 RadiusDamage(missileGroup[i].origin, sam_projectile_damage_radius, sam_projectile_damage, sam_projectile_damage, player, "MOD_EXPLOSIVE", "sam_projectile_mp");
+              }
             } else {
               RadiusDamage(missileGroup[i].origin, sam_projectile_damage_radius, sam_projectile_damage, sam_projectile_damage, player, "MOD_EXPLOSIVE", "sam_projectile_mp");
             }

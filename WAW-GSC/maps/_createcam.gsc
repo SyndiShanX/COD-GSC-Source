@@ -1143,7 +1143,7 @@ scene_editor_menu(strings, func) {
       skip = 0;
       for(i = 0; i < huds.size - 1; i++) {
         if(huds[i].value == "---") {
-          println("^3Shot # " + (i + 1) + " is not set properly, Skipping!");
+          println("^3Shot #" + (i + 1) + " is not set properly, Skipping!");
           skip++;
           continue;
         }

@@ -34,30 +34,35 @@ anim_minigun_hands() {
 player_viewhands_minigun_hand(hand) {
   self endon("death");
   checkFunc = undefined;
-  if(hand == "LEFT")
+  if(hand == "LEFT") {
     checkFunc = ::spinButtonPressed;
-  else if(hand == "RIGHT")
+  } else if(hand == "RIGHT") {
     checkFunc = ::fireButtonPressed;
+  }
   assert(isDefined(checkFunc));
 
   for(;;) {
     if(level.player[[checkFunc]]()) {
       thread player_viewhands_minigun_presed(hand);
-      while(level.player[[checkFunc]]())
+      while(level.player[[checkFunc]]()) {
         wait 0.05;
+      }
     } else {
       thread player_viewhands_minigun_idle(hand);
-      while(!level.player[[checkFunc]]())
+      while(!level.player[[checkFunc]]()) {
         wait 0.05;
+      }
     }
   }
 }
 
 spinbuttonPressed() {
-  if(level.player adsButtonPressed())
+  if(level.player adsButtonPressed()) {
     return true;
-  if(level.player attackButtonPressed())
+  }
+  if(level.player attackButtonPressed()) {
     return true;
+  }
   return false;
 }
 
@@ -67,10 +72,11 @@ firebuttonPressed() {
 
 player_viewhands_minigun_idle(hand) {
   animHand = undefined;
-  if(hand == "LEFT")
+  if(hand == "LEFT") {
     animHand = "L";
-  else if(hand == "RIGHT")
+  } else if(hand == "RIGHT") {
     animHand = "R";
+  }
   assert(isDefined(animHand));
 
   self clearAnim(self getanim("idle2fire_" + animHand), 0.2);
@@ -82,10 +88,11 @@ player_viewhands_minigun_idle(hand) {
 
 player_viewhands_minigun_presed(hand) {
   animHand = undefined;
-  if(hand == "LEFT")
+  if(hand == "LEFT") {
     animHand = "L";
-  else if(hand == "RIGHT")
+  } else if(hand == "RIGHT") {
     animHand = "R";
+  }
   assert(isDefined(animHand));
 
   self clearAnim(self getanim("idle_" + animHand), 0.2);

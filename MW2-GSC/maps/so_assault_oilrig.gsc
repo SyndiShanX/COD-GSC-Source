@@ -14,8 +14,9 @@ main() {
   level.so_compass_zoom = "close";
 
   remove_triggers = getEntArray("redshirt_trigger", "targetname");
-  foreach(trigger in remove_triggers)
-  trigger Delete();
+  foreach(trigger in remove_triggers) {
+    trigger Delete();
+  }
 
   add_start("start_map", ::start_map);
   maps\oilrig::main();
@@ -23,8 +24,9 @@ main() {
   thread maps\oilrig::above_water_art_and_ambient_setup();
   thread maps\oilrig::killtrigger_ocean_on();
 
-  if(issplitscreen())
+  if(issplitscreen()) {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
+  }
 }
 
 start_map() {
@@ -144,9 +146,9 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
   for(;;) {
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isDefined(attacker) || !isPlayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
-    else {
+    } else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }
@@ -230,10 +232,12 @@ hostage_evac(eVolume) {
   level endon("missionfailed");
   level endon("player_shot_a_hostage");
   aHostages = eVolume get_ai_touching_volume("neutral");
-  if(flag("oilrig_mission_failed"))
+  if(flag("oilrig_mission_failed")) {
     return;
-  if(flag("missionfailed"))
+  }
+  if(flag("missionfailed")) {
     return;
+  }
   array_thread(aHostages, ::hostage_evac_think);
   thread AI_delete_when_out_of_sight(aHostages, 512);
 }
@@ -242,11 +246,13 @@ hostage_evac_think() {
   level endon("mission failed");
   self endon("death");
 
-  while(!isDefined(self.breachfinished))
+  while(!isDefined(self.breachfinished)) {
     wait(.1);
+  }
 
-  while(self.breachfinished == false)
+  while(self.breachfinished == false) {
     wait(.1);
+  }
 
   wait(randomfloatrange(1, 2));
   eNode = level.hostageNodes[0];

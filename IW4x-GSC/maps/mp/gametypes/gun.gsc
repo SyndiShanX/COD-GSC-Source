@@ -127,10 +127,11 @@ getSpawnPoint() {
     self.class = self.pers["class"];
     self.lastClass = self.pers["lastClass"];
 
-    if(cointoss())
+    if(cointoss()) {
       self maps\mp\gametypes\_menus::addToTeam("axis", true);
-    else
+    } else {
       self maps\mp\gametypes\_menus::addToTeam("allies", true);
+    }
   }
 
   spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
@@ -208,8 +209,9 @@ giveNextGun(doSetSpawnWeapon) {
   self takeAllWeapons();
   _giveWeapon(newWeapon);
 
-  if(isDefined(doSetSpawnWeapon))
+  if(isDefined(doSetSpawnWeapon)) {
     self setSpawnWeapon(newWeapon);
+  }
   weaponTokens = StrTok(newWeapon, "_");
   weaponName = weaponTokens[0];
 
@@ -228,15 +230,17 @@ giveNextGun(doSetSpawnWeapon) {
 }
 
 addAttachments(weaponName) {
-  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach1"]))
+  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach1"])) {
     attach1 = level.gun_attachments[weaponName]["attach1"];
-  else
+  } else {
     attach1 = "none";
+  }
 
-  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach2"]))
+  if(isDefined(level.gun_attachments[weaponName]) && isDefined(level.gun_attachments[weaponName]["attach2"])) {
     attach2 = level.gun_attachments[weaponName]["attach2"];
-  else
+  } else {
     attach2 = "none";
+  }
 
   fullWeaponName = buildWeaponName(weaponName, attach1, attach2);
   return fullWeaponName;
@@ -246,15 +250,16 @@ onTimeLimit() {
   level.finalKillCam_winner = "none";
   winners = getHighestProgressedPlayers();
 
-  if(!isDefined(winners) || !winners.size)
+  if(!isDefined(winners) || !winners.size) {
     thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
-  else if(winners.size == 1)
+  } else if(winners.size == 1) {
     thread maps\mp\gametypes\_gamelogic::endGame(winners[0], game["end_reason"]["time_limit_reached"]);
-  else {
-    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex)
+  } else {
+    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex) {
       thread maps\mp\gametypes\_gamelogic::endGame(winners[winners.size - 1], game["end_reason"]["time_limit_reached"]);
-    else
+    } else {
       thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
+    }
   }
 }
 

@@ -11,6 +11,7 @@ main() {
 
   level._effect["water_spill_fall"] = loadfx("maps/mp_maps/fx_mp_water_spill");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_bloc_sh_fx::main();
+  }
 }

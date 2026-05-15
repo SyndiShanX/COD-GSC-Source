@@ -4,8 +4,9 @@
 *****************************************************/
 
 saveplayerweaponstatepersistent(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level.player endon("death");
 
@@ -35,14 +36,17 @@ saveplayerweaponstatepersistent(var_0, var_1) {
 restoreplayerweaponstatepersistent(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::ter_op(isDefined(var_2) && var_2, ::switchtoweaponimmediate, ::switchtoweapon);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"])) {
     return 0;
+  }
 
-  if(!isDefined(game["weaponstates"][var_0]))
+  if(!isDefined(game["weaponstates"][var_0])) {
     return 0;
+  }
 
   level.player takeallweapons();
 
@@ -82,8 +86,9 @@ init_player() {
 }
 
 get_loadout() {
-  if(isDefined(level.loadout))
+  if(isDefined(level.loadout)) {
     return level.loadout;
+  }
 
   return level.script;
 }
@@ -103,8 +108,9 @@ persist(var_0, var_1, var_2) {
   }
   level._lc_persists = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player setoffhandsecondaryclass(var_2);
+  }
 
   restoreplayerweaponstatepersistent(get_loadout(), 1);
   level.has_loadout = 1;
@@ -114,8 +120,9 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_0)) {
     var_7 = get_loadout();
 
-    if(var_0 != var_7 || isDefined(level._lc_persists))
+    if(var_0 != var_7 || isDefined(level._lc_persists)) {
       return;
+    }
   }
 
   if(isDefined(var_1)) {
@@ -123,22 +130,27 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     level.player giveweapon(var_1);
   }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     level.player setoffhandsecondaryclass(var_6);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player giveweapon(var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.player giveweapon(var_3);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level.player giveweapon(var_4);
+  }
 
   level.player switchtoweapon(var_1);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level.player setviewmodel(var_5);
+  }
 
   level.campaign = level._lc;
   level._lc = undefined;

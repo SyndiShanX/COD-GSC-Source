@@ -35,10 +35,11 @@ friendly_state_spotted() {
 
   self thread set_battlechatter(true);
 
-  if(isDefined(self._stealth.behavior.oldgrenadeammo))
+  if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  else
+  } else {
     self.grenadeammo = 3;
+  }
 
   self.ignoreme = false;
 
@@ -59,8 +60,9 @@ friendly_spotted_getup_from_prone(angles) {
   self ent_flag_set("_stealth_custom_anim");
   anime = "_stealth_prone_2_run_roll";
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     self orientMode("face angle", angles[1] + 20);
+  }
 
   self thread anim_generic_custom_animmode(self, "gravity", anime);
   length = getanimlength(getanim_generic(anime));
@@ -86,8 +88,9 @@ friendly_init() {
 }
 
 friendly_custom_state_behavior(array) {
-  foreach(key, func in array)
-  self ai_create_behavior_function("state", key, func);
+  foreach(key, func in array) {
+    self ai_create_behavior_function("state", key, func);
+  }
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];
   self thread ai_message_handler_hidden(function, "friendly_behavior");

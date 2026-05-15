@@ -96,8 +96,9 @@ fireController_minigun(turret) {
       }
     }
 
-    if(turret.turretstate == "fire")
+    if(turret.turretstate == "fire") {
       turret.fireTime += 0.05;
+    }
 
     if(turret.fireTime > turret.secsOfFiringBeforeReload) {
       turret.doFiring = false;

@@ -41,8 +41,9 @@ tryUsePredatorMissile(lifeId) {
   self setUsingRemote("remotemissile");
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak();
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
     return false;
   }
@@ -93,14 +94,16 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
     foreach(player in spawnPoint.validPlayers) {
       spawnPoint.spawnScore += 1;
 
-      if(bulletTracePassed(player.origin + (0, 0, 32), spawnPoint.origin, false, player))
+      if(bulletTracePassed(player.origin + (0, 0, 32), spawnPoint.origin, false, player)) {
         spawnPoint.spawnScore += 3;
+      }
 
       if(spawnPoint.spawnScore > bestSpawn.spawnScore) {
         bestSpawn = spawnPoint;
       } else if(spawnPoint.spawnScore == bestSpawn.spawnScore) {
-        if(coinToss())
+        if(coinToss()) {
           bestSpawn = spawnPoint;
+        }
       }
     }
   }
@@ -119,14 +122,16 @@ _fire(lifeId, player) {
   remoteMissileSpawnArray = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(spawn in remoteMissileSpawnArray) {
-    if(isDefined(spawn.target))
+    if(isDefined(spawn.target)) {
       spawn.targetEnt = getEnt(spawn.target, "targetname");
+    }
   }
 
-  if(remoteMissileSpawnArray.size > 0)
+  if(remoteMissileSpawnArray.size > 0) {
     remoteMissileSpawn = player getBestSpawnPoint(remoteMissileSpawnArray);
-  else
+  } else {
     remoteMissileSpawn = undefined;
+  }
 
   if(isDefined(remoteMissileSpawn)) {
     startPos = remoteMissileSpawn.origin;
@@ -223,19 +228,22 @@ MissileEyes(player, rocket) {
     player CameraLinkTo(rocket, "tag_origin");
     player ControlsLinkTo(rocket);
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(false);
+    }
 
     rocket waittill("death");
 
-    if(isDefined(rocket))
+    if(isDefined(rocket)) {
       player maps\mp\_matchdata::logKillstreakEvent("predator_missile", rocket.origin);
+    }
 
     player ControlsUnlink();
     player freezeControlsWrapper(true);
 
-    if(!level.gameEnded || isDefined(player.finalKill))
+    if(!level.gameEnded || isDefined(player.finalKill)) {
       player thread staticEffect(0.5);
+    }
 
     wait(0.5);
 
@@ -243,8 +251,9 @@ MissileEyes(player, rocket) {
 
     player CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(true);
+    }
   }
 
   player clearUsingRemote();
@@ -294,8 +303,9 @@ Player_CleanupOnTeamChange(rocket) {
     self ControlsUnlink();
     self CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       self setThirdPersonDOF(true);
+    }
   }
   self clearUsingRemote();
 
@@ -320,6 +330,7 @@ Player_CleanupOnGameEnded(rocket) {
   self ControlsUnlink();
   self CameraUnlink();
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(true);
+  }
 }

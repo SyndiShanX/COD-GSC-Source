@@ -541,8 +541,9 @@ littlebird_init(no_repulsor) {
   waittillframeend;
   self thread makesentient(self.script_team);
 
-  if(!isDefined(no_repulsor))
+  if(!isDefined(no_repulsor)) {
     self thread toggle_repulsor();
+  }
 
   self.fake_target = spawn("script_model", (0, 0, 0));
 
@@ -566,12 +567,15 @@ toggle_repulsor() {
 }
 
 littlebird_alive() {
-  if(!isDefined(level.heli))
+  if(!isDefined(level.heli)) {
     return false;
-  if(!isalive(level.heli))
+  }
+  if(!isalive(level.heli)) {
     return false;
-  if(level.heli.health < level.heli.healthbuffer)
+  }
+  if(level.heli.health < level.heli.healthbuffer) {
     return false;
+  }
   return true;
 }
 
@@ -659,8 +663,9 @@ road() {
   getent("road_hummer", "script_noteworthy") add_spawn_function(::road_hummer);
 
   triggers = getEntArray("middle_road", "targetname");
-  foreach(trigger in triggers)
-  level waittill_stack_add("trigger", trigger);
+  foreach(trigger in triggers) {
+    level waittill_stack_add("trigger", trigger);
+  }
 
   level waittill("waittill_stack", msg, trigger);
 
@@ -688,8 +693,9 @@ road_hummer() {
   turret waittill("turret_ready");
   mg_guy = turret getturretowner();
 
-  if(littlebird_alive())
+  if(littlebird_alive()) {
     self thread turret_track_target(turret, level.heli);
+  }
 
   array_thread(self.riders, ::set_flag_on_player_damage, "road");
   self thread set_flag_on_player_damage("road");
@@ -738,8 +744,9 @@ road_rocket_guys() {
       }
     }
 
-    if(distance(level.player.origin, guy.origin) > 800)
+    if(distance(level.player.origin, guy.origin) > 800) {
       guy.ignoreme = true;
+    }
 
     guy.rocket_target = level.heli;
     guy thread road_rocket_guys_clear();
@@ -900,8 +907,9 @@ higround_ride_force_start(living) {
   flag_wait("higround_2");
   flag_wait_either("btr80_at_end", "btr80_destroyed");
 
-  while(level.higround_guy > living)
+  while(level.higround_guy > living) {
     wait 0.5;
+  }
 
   activate_trigger_with_noteworthy("ride_start_trigger");
 }
@@ -909,8 +917,9 @@ higround_ride_force_start(living) {
 higround_guy() {
   level endon("ride_uaz_arriving");
 
-  if(!isDefined(level.higround_guy))
+  if(!isDefined(level.higround_guy)) {
     level.higround_guy = 0;
+  }
 
   level.higround_guy++;
 
@@ -1083,10 +1092,11 @@ higround_btr80_target_littlebird() {
     }
     level.heli endon("death");
 
-    if(self.main_turret_enemies.size == 0)
+    if(self.main_turret_enemies.size == 0) {
       self.main_turret_enemies = array_add(self.main_turret_enemies, level.heli);
-    else
+    } else {
       self.main_turret_enemies = array_insert(self.main_turret_enemies, level.heli, 0);
+    }
 
     self notify("clear_turret_target");
 
@@ -1176,8 +1186,9 @@ ride() {
   weaponlist = level.player GetWeaponsListPrimaries();
 
   foreach(weapon in weaponlist) {
-    if(IsSubStr(tolower(weapon), "rpg"))
+    if(IsSubStr(tolower(weapon), "rpg")) {
       continue;
+    }
     if(level.player GetFractionMaxAmmo(weapon) > 0.5) {
       continue;
     }
@@ -1322,8 +1333,9 @@ ride_runway_suburban() {
 
 ride_rider() {
   difficulty = level.gameskill;
-  if(difficulty == 0)
+  if(difficulty == 0) {
     difficulty = 1;
+  }
 
   self.health *= difficulty;
 }
@@ -1551,8 +1563,9 @@ ride_uaz_player_crash() {
 
   self thread ride_uaz_player_force_crash();
 
-  if(isDefined(level.use_ent))
+  if(isDefined(level.use_ent)) {
     level.use_ent delete();
+  }
 
   crash_limit = 15000;
 
@@ -1662,8 +1675,9 @@ ride_uaz_driver_attack() {
 
     attractor = Missile_CreateAttractorEnt(level.btr80, 20000, 512);
 
-    if(!flag("uaz_driver_mount"))
+    if(!flag("uaz_driver_mount")) {
       self waittill("missile_fire");
+    }
     self clearentitytarget();
   }
 
@@ -1673,8 +1687,9 @@ ride_uaz_driver_attack() {
 
     self SetEntityTarget(etarget, 1);
 
-    if(!flag("uaz_driver_mount"))
+    if(!flag("uaz_driver_mount")) {
       self waittill("missile_fire");
+    }
     self clearentitytarget();
   }
 
@@ -1713,8 +1728,9 @@ get_tanker(tanker_name, disable_explosion) {
       break;
     }
   }
-  if(isDefined(disable_explosion))
+  if(isDefined(disable_explosion)) {
     tanker destructible_disable_explosion();
+  }
 
   return tanker;
 }

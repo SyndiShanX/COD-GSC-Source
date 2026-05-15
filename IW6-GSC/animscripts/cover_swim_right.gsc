@@ -10,8 +10,9 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("cover_swim_right");
 
-  if(!isDefined(self.approachtype) || self.approachtype != "cover_corner_r")
+  if(!isDefined(self.approachtype) || self.approachtype != "cover_corner_r") {
     self.approachtype = "cover_corner_r";
+  }
 
   var_0 = anim.archetypes["soldier"]["swim"]["arrival_cover_corner_r_angleDelta"][4][4];
   animscripts\corner::corner_think("right", var_0[1]);

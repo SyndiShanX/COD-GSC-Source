@@ -10,8 +10,9 @@ radiation() {
   radiationFields = getEntArray("radiation", "targetname");
 
   if(radiationFields.size > 0) {
-    foreach(trigger in radiationFields)
-    trigger thread common_scripts\_dynamic_world::triggerTouchThink(::playerEnterArea, ::playerLeaveArea);
+    foreach(trigger in radiationFields) {
+      trigger thread common_scripts\_dynamic_world::triggerTouchThink(::playerEnterArea, ::playerLeaveArea);
+    }
 
     thread onPlayerConnect();
   }
@@ -27,8 +28,9 @@ onPlayerConnect() {
 playerEnterArea(trigger) {
   self.numAreas++;
 
-  if(self.numAreas == 1)
+  if(self.numAreas == 1) {
     self radiationEffect();
+  }
 }
 
 playerLeaveArea(trigger) {
@@ -41,8 +43,9 @@ playerLeaveArea(trigger) {
   self.poison = 0;
   self notify("leftTrigger");
 
-  if(isDefined(self.radiationOverlay))
+  if(isDefined(self.radiationOverlay)) {
     self.radiationOverlay fadeoutBlackOut(.10, 0);
+  }
 }
 
 soundWatcher(soundOrg) {
@@ -141,10 +144,11 @@ blackout() {
       percent_range = max_percent - min_percent;
       fraction = (self.poison - min_percent) / percent_range;
 
-      if(fraction < 0)
+      if(fraction < 0) {
         fraction = 0;
-      else if(fraction > 1)
+      } else if(fraction > 1) {
         fraction = 1;
+      }
 
       length_range = max_length - min_length;
       length = min_length + (length_range * (1 - fraction));
@@ -170,8 +174,9 @@ blackout() {
       break;
     }
 
-    if(self.radiationOverlay.alpha != 0)
+    if(self.radiationOverlay.alpha != 0) {
       self.radiationOverlay fadeoutBlackOut(1, 0);
+    }
 
     wait 0.05;
   }

@@ -212,8 +212,9 @@ so_hidden_init() {
 start_so_hidden_gogogo(start_id) {
   start_point = getstruct(start_id, "script_noteworthy");
   maps\_specialops_code::place_player_at_start_point(level.player, start_point);
-  if(is_coop())
+  if(is_coop()) {
     maps\_specialops_code::place_player2_near_player1();
+  }
 
   wait 0.05;
   flag_set("so_hidden_start");
@@ -329,8 +330,9 @@ foreach(player in level.players) {
   player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_STEALTH", player.kills_stealth);
   player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_NOFIRE", player.kills_nofire);
   player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_BASIC", player.kills_basic);
-  if(flag("so_hidden_complete"))
+  if(flag("so_hidden_complete")) {
     player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_SKIPPED", enemies_left);
+  }
 }
 }
 flag_wait("so_hidden_complete");
@@ -339,17 +341,20 @@ if(!stealth_achieved()) {
   return;
 }
 foreach(player in level.players) {
-  if(player.kills_stealth > 0)
+  if(player.kills_stealth > 0) {
     player maps\_utility::player_giveachievement_wrapper("WRAITH");
+  }
 }
 }
 
 stealth_achieved() {
   foreach(player in level.players) {
-    if(player.kills_nofire > 0)
+    if(player.kills_nofire > 0) {
       return false;
-    if(player.kills_basic > 0)
+    }
+    if(player.kills_basic > 0) {
       return false;
+    }
   }
 
   return true;

@@ -37,8 +37,9 @@ tunnels_flags() {
   flag_init("tunnels_door_open");
   flag_init("tunnels_door_open_done");
 
-  if(!flag_exist("dc_emp_bunker"))
+  if(!flag_exist("dc_emp_bunker")) {
     flag_init("dc_emp_bunker");
+  }
 }
 
 tunnels_main() {
@@ -71,8 +72,9 @@ tunnels_main() {
   level.foley set_force_color("y");
   level.dunn set_force_color("o");
 
-  if(!flag("tunnels_indoor"))
+  if(!flag("tunnels_indoor")) {
     activate_trigger_with_targetname("tunnels_color_trigger");
+  }
 
   level thread tunnels_rain();
   level thread tunnels_end();
@@ -176,10 +178,12 @@ tunnels_friendlies_teleport() {
   dunn_dest = getstruct("tunnels_door_dunn", "script_noteworthy");
 
   volume = getent("tunnels_door_volume", "targetname");
-  if(!level.foley IsTouching(volume))
+  if(!level.foley IsTouching(volume)) {
     level.foley ForceTeleport(foley_dest.origin, foley_dest.angles);
-  if(!level.dunn IsTouching(volume))
+  }
+  if(!level.dunn IsTouching(volume)) {
     level.dunn ForceTeleport(dunn_dest.origin, dunn_dest.angles);
+  }
 }
 
 tunnels_dialogues() {
@@ -264,8 +268,9 @@ tunnels_dead_check_clear(drone, animent) {
 
   flag_wait("tunnels_dunn_anim_end");
   level.dunn anim_stopanimscripted();
-  if(flag("tunnels_main"))
+  if(flag("tunnels_main")) {
     level.dunn enable_ai_color();
+  }
 
   drone anim_stopanimscripted();
   animent anim_stopanimscripted();

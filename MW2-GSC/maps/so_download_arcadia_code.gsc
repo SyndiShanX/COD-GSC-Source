@@ -1090,16 +1090,19 @@ waittill_both_players_touch_targetname(tn) {
 }
 any_player_can_see_ai(ai) {
   feetOrigin = ai.origin;
-  if(any_player_can_see_origin(feetOrigin))
+  if(any_player_can_see_origin(feetOrigin)) {
     return true;
+  }
 
   midOrigin = ai GetTagOrigin("J_SpineLower");
-  if(any_player_can_see_origin(midOrigin))
+  if(any_player_can_see_origin(midOrigin)) {
     return true;
+  }
 
   eyeOrigin = ai getEye();
-  if(any_player_can_see_origin(eyeOrigin))
+  if(any_player_can_see_origin(eyeOrigin)) {
     return true;
+  }
 
   return false;
 }

@@ -48,8 +48,9 @@ showTempDamage() {
   setDevDvar("scr_damage_numfades", 5);
 
   for(;;) {
-    while(getDvarFloat("scr_damage_wait") <= 0)
+    while(getDvarFloat("scr_damage_wait") <= 0) {
       wait(1.0);
+    }
 
     wait(getDvarFloat("scr_damage_wait"));
 
@@ -111,8 +112,9 @@ playerHealthRegen() {
     ratio = self.health / self.maxHealth;
 
     if(ratio <= level.healthOverlayCutoff) {
-      if(!veryHurt)
+      if(!veryHurt) {
         hurtTime = curTime;
+      }
 
       veryHurt = true;
       self.atBrinkOfDeath = true;
@@ -132,21 +134,24 @@ playerHealthRegen() {
 
       if(curTime - lastSoundTime_Recover > level.playerHealth_RegularRegenDelay) {
         lastSoundTime_Recover = curTime;
-        if(!level.gameEnded)
+        if(!level.gameEnded) {
           self playLocalSound("breathing_better");
+        }
       }
 
       if(veryHurt) {
         newHealth = ratio;
-        if(curTime > hurtTime + 3000)
+        if(curTime > hurtTime + 3000) {
           newHealth += regenRate;
+        }
       } else {
         newHealth = 1;
       }
 
       if(newHealth >= 1.0) {
-        if(veryHurt)
+        if(veryHurt) {
           self maps\mp\gametypes\_missions::healthRegenerated();
+        }
 
         self maps\mp\gametypes\_damage::resetAttackerList();
         newHealth = 1.0;

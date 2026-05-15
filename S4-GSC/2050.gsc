@@ -1152,9 +1152,9 @@ _id_E337(var_0, var_1) {
 
   scripts\common\utility::_id_157A(0);
 
-  if(istrue(game["inLiveLobby"]) || scripts\mp\utility\game::getgametype() == "br" && !_id_07D1::_id_60BE("prematch_done")) {} else if(!_id_07D1::_id_60BE("prematch_done"))
+  if(istrue(game["inLiveLobby"]) || scripts\mp\utility\game::getgametype() == "br" && !_id_07D1::_id_60BE("prematch_done")) {} else if(!_id_07D1::_id_60BE("prematch_done")) {
     _id_15CB(self);
-  else {
+  } else {
     var_14 = !self._id_75B4;
     scripts\mp\utility\player::_freezecontrols(0, var_14);
     scripts\mp\utility\player::_id_0BEE(0, var_14);

@@ -63,8 +63,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle[0] = % SeaKnight_Pilot_idle;
   positions[0].idle[1] = % SeaKnight_Pilot_switches;

@@ -23,15 +23,17 @@ main_start() {
   level.roof_trig.targetname = "bus_roof_watch";
   old_roof_trig delete();
 
-  if(isDefined(level.use_swipe_protection))
+  if(isDefined(level.use_swipe_protection)) {
     onplayerconnect_callback(::claymore_watch_swipes);
+  }
 
   powerdoors = getEntArray("local_electric_door", "script_noteworthy");
 
   foreach(door in powerdoors) {
     if(isDefined(door.door_hold_trigger) && door.door_hold_trigger == "zombie_door_hold_diner") {
-      if(isDefined(door.script_flag) && door.script_flag == "OnPriDoorYar")
+      if(isDefined(door.script_flag) && door.script_flag == "OnPriDoorYar") {
         door.script_flag = undefined;
+      }
     }
   }
 }
@@ -218,8 +220,9 @@ power_station_exploit() {
 equipment_safe_to_drop_ffotd(weapon) {
   for(i = 0; i < level.equipment_dead_zone_pos.size; i++) {
     if(distancesquared(level.equipment_dead_zone_pos[i], weapon.origin) < level.equipment_dead_zone_rad2[i]) {
-      if(!isDefined(level.equipment_dead_zone_type[i]) || !isDefined(weapon.model) || level.equipment_dead_zone_type[i] == weapon.model)
+      if(!isDefined(level.equipment_dead_zone_type[i]) || !isDefined(weapon.model) || level.equipment_dead_zone_type[i] == weapon.model) {
         return 0;
+      }
     }
   }
 
@@ -261,8 +264,9 @@ watch_melee_swipes(weapname) {
           self setweaponammoclip(weapname, ammo - 1);
           primaryweapons = self getweaponslistprimaries();
 
-          if(isDefined(primaryweapons[0]))
+          if(isDefined(primaryweapons[0])) {
             self switchtoweapon(primaryweapons[0]);
+          }
         }
       } else
         self takeweapon(weapname);

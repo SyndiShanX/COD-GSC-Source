@@ -127,8 +127,9 @@ on_player_killed(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, sh
 }
 
 leveloverridetime(defaulttime) {
-  if(self.body depthinwater() > 0)
+  if(self.body depthinwater() > 0) {
     return 0.4;
+  }
 
   return defaulttime;
 }

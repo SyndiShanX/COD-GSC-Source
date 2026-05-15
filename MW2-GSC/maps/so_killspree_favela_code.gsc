@@ -22,10 +22,11 @@ ambush_to_seek() {
     while(1) {
       wait level.ambush_to_seeker_delay + randomint(level.ambush_to_seeker_delay);
       flag_wait("detailed_enemy_population_info_available");
-      if((level.ambush_to_seeker + level.enemy_seekers) > level.current_enemy_population / 3)
+      if((level.ambush_to_seeker + level.enemy_seekers) > level.current_enemy_population / 3) {
         continue;
-      else
+      } else {
         break;
+      }
     }
 
     self.combatmode = "cover";
@@ -41,16 +42,18 @@ enemy_seek_player(goalradius) {
   level endon("special_op_terminated");
   self endon("death");
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("goal");
+  }
 
   self.goalheight = 80;
   self.goalradius = goalradius;
 
   while(1) {
     closest_player = get_closest_player_healthy(self.origin);
-    if(isDefined(closest_player))
+    if(isDefined(closest_player)) {
       self setgoalpos(closest_player.origin);
+    }
     wait 2;
   }
 }
@@ -62,13 +65,15 @@ release_doggy() {
   array_spawn_function(dog_spawner, ::dog_register_death);
   array_spawn_function(dog_spawner, ::enemy_seek_player, 300);
 
-  if(!isDefined(level.gameskill))
+  if(!isDefined(level.gameskill)) {
     num_of_dogs = max(int(getDvar("g_gameskill")), 1);
-  else
+  } else {
     num_of_dogs = max(level.gameskill, 1);
+  }
 
-  if(is_Coop())
+  if(is_Coop()) {
     num_of_dogs += 1;
+  }
 
   while(1) {
     level waittill("who_let_the_dogs_out");
@@ -109,8 +114,9 @@ hud_create_kill_counter() {
 }
 
 hud_update_kill_counter() {
-  if(self == level.player)
+  if(self == level.player) {
     thread so_dialog_counter_update(level.points_counter, level.points_target);
+  }
 
   if(level.points_counter > 5) {
     self.kill_hudelem_score SetValue(level.points_counter);
@@ -158,8 +164,9 @@ hud_create_civ_counter() {
     level waittill("civilian_died");
 
     kills_remaining = level.civilian_kill_fail - level.civilian_killed;
-    if(kills_remaining >= 1)
+    if(kills_remaining >= 1) {
       thread so_dialog_killing_civilians();
+    }
 
     self.civ_hudelem_score SetValue(level.civilian_killed);
     switch (kills_remaining) {
@@ -210,14 +217,17 @@ while(1) {
   level.enemy_ambushers = 0;
 
   foreach(ai in enemies) {
-    if(isDefined(ai.ambush_to_seeker))
+    if(isDefined(ai.ambush_to_seeker)) {
       level.ambush_to_seeker++;
+    }
 
-    if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player")
+    if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player") {
       level.enemy_seekers++;
+    }
 
-    if(isDefined(ai.combatmode) && ai.combatmode == "ambush")
+    if(isDefined(ai.combatmode) && ai.combatmode == "ambush") {
       level.enemy_ambushers++;
+    }
   }
 
   flag_set("detailed_enemy_population_info_available");

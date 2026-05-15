@@ -232,10 +232,11 @@ doQuickMessage(soundalias, saytext) {
     self playSound(prefix + soundalias);
     self sayAll(saytext);
   } else {
-    if(self.sessionteam == "allies")
+    if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    else if(self.sessionteam == "axis")
+    } else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
+    }
 
     self.headicon = "talkingicon";
 
@@ -246,17 +247,21 @@ doQuickMessage(soundalias, saytext) {
 }
 
 saveHeadIcon() {
-  if(isDefined(self.headicon))
+  if(isDefined(self.headicon)) {
     self.oldheadicon = self.headicon;
+  }
 
-  if(isDefined(self.headiconteam))
+  if(isDefined(self.headiconteam)) {
     self.oldheadiconteam = self.headiconteam;
+  }
 }
 
 restoreHeadIcon() {
-  if(isDefined(self.oldheadicon))
+  if(isDefined(self.oldheadicon)) {
     self.headicon = self.oldheadicon;
+  }
 
-  if(isDefined(self.oldheadiconteam))
+  if(isDefined(self.oldheadiconteam)) {
     self.headiconteam = self.oldheadiconteam;
+  }
 }

@@ -48,11 +48,13 @@ runDroneHive(player, rank, num_missiles, missile_name, altitude, baby_missile_na
   player endon("killstreak_disowned");
   levelendon("game_ended");
 
-  if(!isDefined(missile_name))
+  if(!isDefined(missile_name)) {
     missile_name = "switchblade_rocket_mp";
+  }
 
-  if(!isDefined(num_missiles))
+  if(!isDefined(num_missiles)) {
     num_missiles = 0;
+  }
 
   player notifyOnPlayerCommand("missileTargetSet", "+attack");
   remoteMissileSpawn = getClosest(player.origin, level.droneMissileSpawnArray);
@@ -69,8 +71,9 @@ runDroneHive(player, rank, num_missiles, missile_name, altitude, baby_missile_na
   rocket = MagicBullet(missile_name, startpos, targetPos, player);
   rocket setCanDamage(true);
 
-  if(num_missiles != 0)
+  if(num_missiles != 0) {
     rocket DisableMissileBoosting();
+  }
 
   rocket.team = player.team;
 
@@ -104,8 +107,9 @@ runDroneHive(player, rank, num_missiles, missile_name, altitude, baby_missile_na
       missileCount++;
     }
 
-    if(missileCount == num_missiles)
+    if(missileCount == num_missiles) {
       rocket EnableMissileBoosting();
+    }
   }
 
   player.turn_off_class_skill_activation = undefined;
@@ -133,8 +137,9 @@ spawnSwitchBlade(rocket, spawnOnLeft, baby_missile_name) {
   spawnOffset = (35, 35, 35);
   targetOffset = (15000, 15000, 15000);
 
-  if(spawnOnLeft)
+  if(spawnOnLeft) {
     spawnOffset = spawnOffset * -1;
+  }
 
   result = bulletTrace(rocket.origin, rocket.origin + (forwardDir * targetOffset), false, rocket);
 
@@ -190,8 +195,9 @@ missileEyes(player, rocket, rank) {
 
   player freezeControlsWrapper(true);
 
-  if(rank >= 1)
+  if(rank >= 1) {
     player thread delayedFOFOverlay();
+  }
 
   player CameraLinkTo(rocket, "tag_origin");
   player ControlsLinkTo(rocket);
@@ -262,8 +268,9 @@ returnPlayer(player, rank) {
   player CameraUnlink();
   player SetClientOmnvar("ui_predator_missile", 0);
   player clearUsingRemote();
-  if(isDefined(player.last_weapon))
+  if(isDefined(player.last_weapon)) {
     player SwitchToWeapon(player.last_weapon);
+  }
 }
 
 setExitPredatorVisionSet() {

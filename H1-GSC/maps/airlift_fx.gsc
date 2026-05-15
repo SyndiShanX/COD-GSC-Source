@@ -218,8 +218,9 @@ main() {
   maps\createfx\airlift_sound::main();
   var_0 = getEntArray("oil_well_on_fire", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] spawnoilwellsonfire();
+  }
 }
 
 treadfx_override() {

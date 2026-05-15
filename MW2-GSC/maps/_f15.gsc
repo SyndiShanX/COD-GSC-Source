@@ -56,8 +56,9 @@ landing_gear_up() {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   return positions;
 }
@@ -135,28 +136,31 @@ add_contrail(fx_tag_name, offset) {
 
 playerisclose(other) {
   infront = playerisinfront(other);
-  if(infront)
+  if(infront) {
     dir = 1;
-  else
+  } else {
     dir = -1;
+  }
   a = flat_origin(other.origin);
   b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, level.player.origin);
   dist = distance(a, point);
-  if(dist < 3000)
+  if(dist < 3000) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 playerisinfront(other) {
   forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(level.player.origin) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0)
+  if(dot > 0) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 plane_sound_node() {
@@ -164,8 +168,9 @@ plane_sound_node() {
   other endon("death");
   self thread plane_sound_node();
   other thread play_loop_sound_on_entity("veh_f15_dist_loop");
-  while(playerisinfront(other))
+  while(playerisinfront(other)) {
     wait .05;
+  }
   wait .5;
   other thread play_sound_in_space("veh_f15_sonic_boom");
   other waittill("reached_end_node");
@@ -190,8 +195,9 @@ plane_bomb_node() {
   wait randomfloatrange(.3, .8);
   for(i = 0; i < aBomb_targets.size; i++) {
     iExplosionNumber++;
-    if(iExplosionNumber == 3)
+    if(iExplosionNumber == 3) {
       iExplosionNumber = 1;
+    }
     aBomb_targets[i] thread play_sound_on_entity("airstrike_explosion");
 
     playFX(level._effect["plane_bomb_explosion" + iExplosionNumber], aBomb_targets[i].origin);
@@ -212,8 +218,9 @@ plane_bomb_cluster() {
   vecForward = vector_multiply(anglesToForward(plane.angles), 2);
   vecUp = vector_multiply(anglestoup(plane.angles), -0.2);
   vec = [];
-  for(i = 0; i < 3; i++)
+  for(i = 0; i < 3; i++) {
     vec[i] = (vecForward[i] + vecUp[i]) / 2;
+  }
   vec = (vec[0], vec[1], vec[2]);
   vec = vector_multiply(vec, 7000);
   bomb moveGravity(vec, 2.0);

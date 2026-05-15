@@ -60,8 +60,9 @@ enemy_state_spotted(internal) {
   self.ignoreall = false;
   self.dontattackme = undefined;
   self.dontevershoot = undefined;
-  if(isDefined(self.oldfixednode))
+  if(isDefined(self.oldfixednode)) {
     self.fixednode = self.oldfixednode;
+  }
 
   self thread set_battlechatter(true);
 
@@ -81,8 +82,9 @@ enemy_state_spotted(internal) {
     return;
   }
   enemy = level._stealth.group.spotted_enemy[self.script_stealthgroup];
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     self getEnemyInfo(enemy);
+  }
 }
 
 enemy_init() {
@@ -107,8 +109,9 @@ enemy_init() {
 
   self._stealth.behavior.event = spawnStruct();
 
-  if(self.type == "dog")
+  if(self.type == "dog") {
     self enemy_dog_init();
+  }
 
   self._stealth.plugins = spawnStruct();
 
@@ -116,8 +119,9 @@ enemy_init() {
 }
 
 enemy_dog_init() {
-  if(threatbiasgroupexists("dog"))
+  if(threatbiasgroupexists("dog")) {
     self setthreatbiasgroup("dog");
+  }
 
   if(isDefined(self.enemy) || isDefined(self.favoriteenemy)) {
     return;
@@ -136,8 +140,9 @@ enemy_dog_init() {
 }
 
 enemy_custom_state_behavior(array) {
-  foreach(key, value in array)
-  self ai_create_behavior_function("state", key, value);
+  foreach(key, value in array) {
+    self ai_create_behavior_function("state", key, value);
+  }
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];
   self thread ai_message_handler_hidden(function, "enemy_behavior");

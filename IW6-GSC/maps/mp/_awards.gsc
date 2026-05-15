@@ -18,8 +18,9 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    if(!isDefined(player.pers["stats"]))
+    if(!isDefined(player.pers["stats"])) {
       player.pers["stats"] = [];
+    }
 
     player.stats = player.pers["stats"];
 
@@ -27,10 +28,11 @@ onPlayerConnect() {
       player setCommonPlayerData("round", "awardCount", 0);
 
       foreach(ref, award in level.awards) {
-        if(isDefined(level.awards[ref].defaultvalue))
+        if(isDefined(level.awards[ref].defaultvalue)) {
           player initPlayerStat(ref, level.awards[ref].defaultvalue);
-        else
+        } else {
           player initPlayerStat(ref);
+        }
       }
     }
 
@@ -63,8 +65,9 @@ onPlayerSpawned() {
 }
 
 initAwards() {
-  if(isDefined(level.initGametypeAwards))
+  if(isDefined(level.initGametypeAwards)) {
     [[level.initGametypeAwards]]();
+  }
 
   initAwardFlag("10kills", ::isAtleast, 10, "kills");
   initAwardFlag("1death", ::isAtleast, 1, "deaths");
@@ -183,14 +186,17 @@ initBaseAward(ref) {
 }
 
 initAwardProcess(ref, process, var1, var2) {
-  if(isDefined(process))
+  if(isDefined(process)) {
     level.awards[ref].process = process;
+  }
 
-  if(isDefined(var1))
+  if(isDefined(var1)) {
     level.awards[ref].var1 = var1;
+  }
 
-  if(isDefined(var2))
+  if(isDefined(var2)) {
     level.awards[ref].var2 = var2;
+  }
 }
 
 initStat(ref, defaultvalue) {
@@ -282,8 +288,9 @@ getDecodedRatio(value) {
   loVal = getRatioLoVal(value);
   hiVal = getRatioHiVal(value);
 
-  if(!loVal)
+  if(!loVal) {
     return (hiVal + 0.001);
+  }
 
   return (hiVal / loVal);
 }
@@ -312,13 +319,15 @@ incPlayerRecord(ref) {
   recordValue = self getCommonPlayerData("awards", ref);
   self setCommonPlayerData("awards", ref, recordValue + 1);
 
-  if(!isDefined(self.statprint))
+  if(!isDefined(self.statprint)) {
     self.statprint = [];
+  }
 
-  if(hasDisplayValue(ref))
+  if(hasDisplayValue(ref)) {
     value = self getPlayerStat(ref);
-  else
+  } else {
     value = true;
+  }
 
   stat = spawnStruct();
   stat.ref = ref;
@@ -329,8 +338,9 @@ incPlayerRecord(ref) {
 
 addAwardWinner(ref, clientid) {
   foreach(winner in level.awards[ref].winners) {
-    if(winner == clientid)
+    if(winner == clientid) {
       return;
+    }
   }
 
   level.awards[ref].winners[level.awards[ref].winners.size] = clientid;
@@ -366,8 +376,9 @@ assignAwards() {
     kills = player getPlayerStat("kills");
     deaths = player getPlayerStat("deaths");
 
-    if(deaths == 0)
+    if(deaths == 0) {
       deaths = 1;
+    }
 
     player setPlayerStat("kdratio", (kills / deaths));
 
@@ -385,12 +396,13 @@ assignAwards() {
     var1 = level.awards[ref].var1;
     var2 = level.awards[ref].var2;
 
-    if(isDefined(var1) && isDefined(var2))
+    if(isDefined(var1) && isDefined(var2)) {
       [[process]](ref, var1, var2);
-    else if(isDefined(var1))
+    } else if(isDefined(var1)) {
       [[process]](ref, var1);
-    else
+    } else {
       [[process]](ref);
+    }
   }
 
   foreach(ref, award in level.awards) {
@@ -419,8 +431,9 @@ assignAwards() {
   }
 
   foreach(ref, award in level.awards) {
-    if(!isAwardFlag(ref))
+    if(!isAwardFlag(ref)) {
       assignAward(ref);
+    }
   }
 
   foreach(player in level.players) {
@@ -450,10 +463,11 @@ assignAward(ref) {
 }
 
 getAwardType(ref) {
-  if(isDefined(level.awards[ref].type))
+  if(isDefined(level.awards[ref].type)) {
     return level.awards[ref].type;
-  else
+  } else {
     return "none";
+  }
 }
 
 isMultiAward(ref) {
@@ -473,10 +487,11 @@ isAwardFlag(ref) {
 }
 
 isAwardExclusive(ref) {
-  if(isDefined(level.awards[ref].exclusive))
+  if(isDefined(level.awards[ref].exclusive)) {
     return level.awards[ref].exclusive;
-  else
+  } else {
     return true;
+  }
 }
 
 hasDisplayValue(ref) {
@@ -500,8 +515,9 @@ giveAward(ref) {
   self incPlayerRecord(ref);
 
   if(hasDisplayValue(ref)) {
-    if(isStatAward(ref))
+    if(isStatAward(ref)) {
       assertex(self getPlayerStat(ref) == getAwardRecord(ref), "Ref is: " + ref + ", PlayerStat is: " + self getPlayerStat(ref) + ", MatchRecord is: " + getAwardRecord(ref));
+    }
 
     value = self getPlayerStat(ref);
   } else
@@ -518,8 +534,9 @@ giveAward(ref) {
   self SetCommonPlayerData("round", "awardCount", awardCount);
   self maps\mp\_matchdata::logAward(ref);
 
-  if(awardCount == 1)
+  if(awardCount == 1) {
     maps\mp\_highlights::giveHighlight(ref, value);
+  }
 }
 
 getFormattedValue(ref, value) {
@@ -547,8 +564,9 @@ highestWins(ref, minAwardable) {
   foreach(player in level.players) {
     if(player rankingEnabled() && player statValueChanged(ref) && (!isDefined(minAwardable) || player getPlayerStat(ref) >= minAwardable)) {
       player setMatchRecordIfGreater(ref);
-      if(!isAwardFlag(ref))
+      if(!isAwardFlag(ref)) {
         player setPersonalBestIfGreater(ref);
+      }
     }
   }
 }
@@ -557,8 +575,9 @@ lowestWins(ref, maxAwardable) {
   foreach(player in level.players) {
     if(player rankingEnabled() && player statValueChanged(ref) && (!isDefined(maxAwardable) || player getPlayerStat(ref) <= maxAwardable)) {
       player setMatchRecordIfLower(ref);
-      if(!isAwardFlag(ref))
+      if(!isAwardFlag(ref)) {
         player setPersonalBestIfLower(ref);
+      }
     }
   }
 }
@@ -570,8 +589,9 @@ lowestWithHalfPlayedTime(ref) {
   foreach(player in level.players) {
     if(player.hasSpawned && player.timePlayed["total"] >= halfGameLength) {
       player setMatchRecordIfLower(ref);
-      if(!isAwardFlag(ref))
+      if(!isAwardFlag(ref)) {
         player setPersonalBestIfLower(ref);
+      }
     }
   }
 }
@@ -580,10 +600,11 @@ statValueChanged(ref) {
   playervalue = self getPlayerStat(ref);
   defaultvalue = level.awards[ref].defaultvalue;
 
-  if(playervalue == defaultvalue)
+  if(playervalue == defaultvalue) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 isAtLeast(ref, minimum, checkAwardRef) {
@@ -591,11 +612,13 @@ isAtLeast(ref, minimum, checkAwardRef) {
     playerValue = player getPlayerStat(checkAwardRef);
     checkValue = playerValue;
 
-    if(checkValue >= minimum)
+    if(checkValue >= minimum) {
       addAwardWinner(ref, player.clientid);
+    }
 
-    if(isThresholdAward(ref) || isAwardFlag(ref))
+    if(isThresholdAward(ref) || isAwardFlag(ref)) {
       player setPlayerStat(ref, playerValue);
+    }
   }
 }
 
@@ -603,8 +626,9 @@ isAtMost(ref, maximum, award_ref) {
   foreach(player in level.players) {
     playerValue = player getPlayerStat(award_ref);
 
-    if(playerValue <= maximum)
+    if(playerValue <= maximum) {
       addAwardWinner(ref, player.clientid);
+    }
   }
 }
 
@@ -616,8 +640,9 @@ isAtMostWithHalfPlayedTime(ref, maximum, award_ref) {
     if(player.hasSpawned && player.timePlayed["total"] >= halfGameLength) {
       playerValue = player getPlayerStat(award_ref);
 
-      if(playerValue <= maximum)
+      if(playerValue <= maximum) {
         addAwardWinner(ref, player.clientid);
+      }
     }
   }
 }
@@ -627,9 +652,9 @@ setRatio(ref, award1_ref, award2_ref) {
     playerValue1 = player getPlayerStat(award1_ref);
     playerValue2 = player getPlayerStat(award2_ref);
 
-    if(playerValue2 == 0)
+    if(playerValue2 == 0) {
       player setPlayerStat(ref, playerValue1);
-    else {
+    } else {
       ratio = playerValue1 / playerValue2;
       player setPlayerStat(ref, ratio);
     }
@@ -797,8 +822,9 @@ monitorEnemyDistance() {
   level endon("game_ended");
   self endon("disconnect");
 
-  while(level.players.size < 3)
+  while(level.players.size < 3) {
     wait(1);
+  }
 
   prof_begin("EnemyDistance");
   for(;;) {
@@ -819,8 +845,9 @@ monitorEnemyDistance() {
       }
       sortedPlayersByDistance = SortByDistance(level.players, player.origin);
 
-      if(sortedPlayersByDistance[1].team != player.team)
+      if(sortedPlayersByDistance[1].team != player.team) {
         player incPlayerStat("closertoenemies", 0.05);
+      }
 
       wait(0.05);
     }
@@ -894,10 +921,11 @@ monitorStanceTime() {
   self endon("disconnect");
 
   for(;;) {
-    if(self GetStance() == "crouch")
+    if(self GetStance() == "crouch") {
       self incPlayerStat("crouchtime", 500);
-    else if(self GetStance() == "prone")
+    } else if(self GetStance() == "prone") {
       self incPlayerStat("pronetime", 500);
+    }
 
     wait(0.5);
   }

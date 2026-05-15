@@ -21,8 +21,9 @@ main() {
   var_0 childthread detect_scriptables_death(var_2);
 
   foreach(var_7 in getEntArray("script_model", "code_classname")) {
-    if(common_scripts\utility::array_contains(var_1, var_7.model))
+    if(common_scripts\utility::array_contains(var_1, var_7.model)) {
       var_0 childthread detect_exploder_death(var_7, var_7.model);
+    }
   }
 }
 
@@ -35,8 +36,9 @@ detect_scriptables_death(var_0) {
       var_1++;
       var_1 = var_1 % 5;
 
-      if(var_1 == 0)
+      if(var_1 == 0) {
         wait 0.05;
+      }
 
       if(!isDefined(var_3)) {
         continue;

@@ -330,8 +330,9 @@ bot_mugger_loadout_modify(loadoutValueArray) {
   available_perk_indices = [];
   empty_perk_indices = [];
   desired_perks = [];
-  if(has_throwing_knife)
+  if(has_throwing_knife) {
     desired_perks[desired_perks.size] = "specialty_extra_deadly";
+  }
   desired_perks[desired_perks.size] = "specialty_lightweight";
   desired_perks[desired_perks.size] = "specialty_marathon";
   desired_perks[desired_perks.size] = "specialty_fastsprintrecovery";

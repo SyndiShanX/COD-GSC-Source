@@ -47,8 +47,9 @@ initKillstreakData() {
     game["dialog"][streakRef + "_inbound"] = streakFriendlyUseDialog;
 
     streakWeapon = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 12);
-    if(streakWeapon != "")
+    if(streakWeapon != "") {
       precacheItem(streakWeapon);
+    }
 
     streakPoints = int(tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 13));
     assert(streakPoints != 0);
@@ -124,8 +125,9 @@ checkKillstreakReward(streakCount) {
     return;
   }
   if(!isDefined(self.killStreaks[streak])) {
-    if(streak >= 10 && (streak % 5 == 0))
+    if(streak >= 10 && (streak % 5 == 0)) {
       self streakNotify(streak);
+    }
     return;
   }
 
@@ -163,15 +165,18 @@ rewardNotify(streakName, streakVal) {
 }
 
 tryGiveKillstreak(streakName, streakVal) {
-  if(!isDefined(level.killstreakFuncs[streakName]))
+  if(!isDefined(level.killstreakFuncs[streakName])) {
     return false;
+  }
 
-  if(isDefined(self.selectingLocation))
+  if(isDefined(self.selectingLocation)) {
     return false;
+  }
 
   if(isDefined(self.pers["killstreak"])) {
-    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"]))
+    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"])) {
       return false;
+    }
   }
 
   self thread rewardNotify(streakName, streakVal);
@@ -192,8 +197,9 @@ giveKillstreak(streakName) {
 
   self.pers["killstreak"] = streakName;
 
-  if(isDefined(level.killstreakSetupFuncs[streakName]))
+  if(isDefined(level.killstreakSetupFuncs[streakName])) {
     self[[level.killstreakSetupFuncs[streakName]]]();
+  }
 }
 
 giveKillstreakWeapon(weapon) {
@@ -202,10 +208,11 @@ giveKillstreakWeapon(weapon) {
 }
 
 getStreakCost(streakName) {
-  if(is_coop())
+  if(is_coop()) {
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 5));
-  else
+  } else {
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 4));
+  }
 }
 
 getKillstreakHint(streakName) {
@@ -229,8 +236,9 @@ getKillstreakWeapon(streakName) {
 }
 
 giveOwnedKillstreakItem() {
-  if(isDefined(self.pers["killstreak"]))
+  if(isDefined(self.pers["killstreak"])) {
     self giveKillstreak(self.pers["killstreak"]);
+  }
 }
 
 setKillstreaks(streak1, streak2, streak3) {

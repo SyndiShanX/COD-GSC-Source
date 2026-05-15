@@ -70,10 +70,11 @@ init(map_name) {
   level.a10_active = 0;
   level.curr_a10_index = 0;
 
-  if(map_name == "impact")
+  if(map_name == "impact") {
     buildAllFlightPathsImpact();
-  else
+  } else {
     buildAllFlightPathsDefault();
+  }
 
   level.debug_prints = 0;
 }
@@ -168,8 +169,9 @@ doStrike(lifeId, streakName) {
 
         plane doOneFlyby();
 
-        if(isDefined(plane))
+        if(isDefined(plane)) {
           plane thread endFlyby(streakName);
+        }
 
         self endStrafeSequence(streakName);
       }
@@ -191,8 +193,9 @@ startStrafeSequence(streakName, lifeId) {
   self setUsingRemote(KS_NAME);
   self freezeControlsWrapper(true);
 
-  if(GetDvarInt("camera_thirdPerson"))
+  if(GetDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self.restoreAngles = self.angles;
 
@@ -202,11 +205,13 @@ startStrafeSequence(streakName, lifeId) {
 
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak(KS_NAME);
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
-    if(isDefined(self.disabledWeapon) && self.disabledWeapon)
+    if(isDefined(self.disabledWeapon) && self.disabledWeapon) {
       self _enableWeapon();
+    }
     self notify("death");
 
     return false;
@@ -236,8 +241,9 @@ endStrafeSequence(switch_state) {
 
     self freezeControlsWrapper(false);
 
-    if(self isUsingRemote())
+    if(self isUsingRemote()) {
       self clearUsingRemote();
+    }
 
     self SetClientOmnvar("ui_a10", false);
     self SetClientOmnvar("ui_a10_alt_warn", false);
@@ -292,8 +298,9 @@ spawnAircraft(streakName, lifeId, splineId, numPlane) {
   self endon("disconnect");
 
   self.plane = createPlaneAsHeli(streakName, lifeId, splineId);
-  if(!isDefined(self.plane))
+  if(!isDefined(self.plane)) {
     return undefined;
+  }
 
   self.plane.streakName = streakName;
 
@@ -382,21 +389,23 @@ getPathIndex() {
 debug_print_movement(movement) {
   println(movement);
   outString = "";
-  if(movement[0] > 0)
+  if(movement[0] > 0) {
     outString += "forward";
-  else if(movement[0] == 0)
+  } else if(movement[0] == 0) {
     outString += "-";
-  else if(movement[0] < 0)
+  } else if(movement[0] < 0) {
     outString += "backward";
+  }
 
   outString += ", ";
 
-  if(movement[1] > 0)
+  if(movement[1] > 0) {
     outString += "right";
-  else if(movement[1] == 0)
+  } else if(movement[1] == 0) {
     outString += "-";
-  else if(movement[1] < 0)
+  } else if(movement[1] < 0) {
     outString += "left";
+  }
 
   println(outString);
 }
@@ -406,12 +415,15 @@ handle_anim(state) {
   self endon("a10_end_strafe");
   self endon("disconnect");
 
-  if(state == "left")
+  if(state == "left") {
     self.animated_flaps ScriptModelPlayAnim("veh_ca_a10_roll_left");
-  if(state == "right")
+  }
+  if(state == "right") {
     self.animated_flaps ScriptModelPlayAnim("veh_ca_a10_roll_right");
-  if(state == "level")
+  }
+  if(state == "level") {
     self.animated_flaps ScriptModelPlayAnim("veh_ca_a10_roll_level");
+  }
 }
 
 player_input_monitor() {
@@ -468,10 +480,11 @@ endFlyby(streakName) {
 
   self notify("end_remote");
 
-  if(!(isDefined(self.forceClean)))
+  if(!(isDefined(self.forceClean))) {
     wait(5);
-  else
+  } else {
     self StopSounds();
+  }
 
   if(isDefined(self)) {
     self cleanupAircraft();
@@ -487,8 +500,9 @@ createPlaneAsHeli(streakName, lifeId, splineId) {
   startAngles = VectorToAngles(startTangent);
 
   plane = SpawnHelicopter(self, startPos, startAngles, config.vehicle, config.modelNames[self.team]);
-  if(!isDefined(plane))
+  if(!isDefined(plane)) {
     return undefined;
+  }
 
   plane MakeVehicleSolidCapsule(18, -9, 18);
 
@@ -732,8 +746,9 @@ a10_missile_set_target(target, offset) {
 
   wait 0.2;
 
-  if(isDefined(self) && IsAlive(self))
+  if(isDefined(self) && IsAlive(self)) {
     self Missile_SetTargetEnt(target, offset);
+  }
 }
 
 a10_missile_cleanup() {
@@ -808,11 +823,13 @@ update_gatling_sound_ent() {
     wait 0.01;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self thread update_gatling_sound_release_ent();
+  }
 
-  if(isDefined(self) && isDefined(self.owner))
+  if(isDefined(self) && isDefined(self.owner)) {
     self.owner StopLocalSound("a10_plr_fire_gatling_lp");
+  }
 
   if(isDefined(moving_gatling_ent)) {
     moving_gatling_ent StopLoopSound();
@@ -839,8 +856,9 @@ update_gatling_sound_release_ent() {
 
   wait 2.5;
 
-  if(isDefined(moving_gatling_release_ent))
+  if(isDefined(moving_gatling_release_ent)) {
     moving_gatling_release_ent Delete();
+  }
 
   self notify("end_gatling");
 }
@@ -859,10 +877,9 @@ monitorWeaponFire(streakName, plane) {
 
   self SetClientOmnvar("ui_a10_cannon", plane.ammoCount);
 
-  if(isBot(self))
+  if(isBot(self)) {
     self thread bot_fire_controller(plane, config);
-
-  else {
+  } else {
     self thread monitor_attack_button(plane);
 
     while(plane.ammoCount > 0) {
@@ -892,10 +909,11 @@ monitor_attack_button(plane) {
 
   self.is_attacking = 0;
   while(isDefined(plane)) {
-    if(self attackButtonPressed())
+    if(self attackButtonPressed()) {
       self.is_attacking = 1;
-    else
+    } else {
       self.is_attacking = 0;
+    }
     wait 0.1;
   }
 }
@@ -921,9 +939,11 @@ updateCannonShake(streakName) {
     wait(0.1);
   }
 
-  if(isDefined(self))
-    if(isDefined(self.turret))
+  if(isDefined(self)) {
+    if(isDefined(self.turret)) {
       self.turret TurretFireDisable();
+    }
+  }
 }
 
 ALTITUDE_WARNING_LIMIT = 10;
@@ -975,8 +995,9 @@ watchDisconnect() {
     self.plane.forceClean = true;
     self.plane thread endFlyby(KS_NAME);
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self endStrafeSequence("team_switch");
+  }
 }
 
 watchGameEnd() {
@@ -991,8 +1012,9 @@ watchGameEnd() {
     self.plane.forceClean = true;
     self.plane thread endFlyby(KS_NAME);
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self endStrafeSequence("team_switch");
+  }
 }
 
 watchTeamSwitchPre() {

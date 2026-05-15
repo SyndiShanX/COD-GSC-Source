@@ -276,8 +276,9 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
 
   self.no_ai = true;
   animation = % humvee_passenger_2_turret;
-  if(!isDefined(animation))
+  if(!isDefined(animation)) {
     animation = self.passenger_2_turret_anim;
+  }
 
   animpos = maps\_vehicle_aianim::anim_pos(vehicle, pos);
   org = vehicle GetTagOrigin(animpos.sittag);

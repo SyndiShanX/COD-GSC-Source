@@ -7,8 +7,9 @@
 #include maps\_vehicle;
 
 main(model, type) {
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "humvee50cal";
+  }
   maps\_humvee::main(model, type);
   level.vehicle_aianims[type] = setanims(type);
   build_turret("humvee_50cal_mg", "tag_turret", "vehicle_humvee_camo_50cal_mg", undefined, undefined, 2.9);

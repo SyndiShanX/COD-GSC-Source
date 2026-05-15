@@ -10,13 +10,15 @@ main() {
   var_0 = getEntArray("shutter_left", "targetname");
   var_1 = getEntArray("shutter_right_open", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_2];
+  }
 
   var_1 = getEntArray("shutter_left_closed", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_2];
+  }
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
@@ -25,22 +27,26 @@ main() {
 
   wait 0.2;
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_0[var_2].startyaw = var_0[var_2].angles[1];
+  }
 
   var_4 = getEntArray("shutter_right", "targetname");
   var_1 = getEntArray("shutter_left_open", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_4[var_4.size] = var_1[var_2];
+  }
 
   var_1 = getEntArray("shutter_right_closed", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_4[var_4.size] = var_1[var_2];
+  }
 
-  for(var_2 = 0; var_2 < var_4.size; var_2++)
+  for(var_2 = 0; var_2 < var_4.size; var_2++) {
     var_4[var_2].startyaw = var_4[var_2].angles[1];
+  }
 
   var_1 = undefined;
   var_5 = "left";
@@ -56,8 +62,9 @@ windcontroller() {
   for(;;) {
     var_0 = "left";
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_0 = "right";
+    }
 
     level notify("wind blows", var_0);
     wait(2 + randomfloat(10));
@@ -69,8 +76,9 @@ shutterwanderleft(var_0, var_1) {
   level endon("wind blows");
   var_2 = var_0.startyaw;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_2 = var_2 + 179.9;
+  }
 
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
@@ -79,20 +87,23 @@ shutterwanderleft(var_0, var_1) {
   for(;;) {
     var_4 = randomint(80);
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_4 = var_4 * -1;
+    }
 
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179)
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
+    }
 
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
-    if(var_3 < 0.3)
+    if(var_3 < 0.3) {
       var_3 = 0.3;
+    }
 
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
@@ -104,8 +115,9 @@ shutterwanderright(var_0, var_1) {
   level endon("wind blows");
   var_2 = var_0.startyaw;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_2 = var_2 + 179.9;
+  }
 
   var_3 = 0.2;
   var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
@@ -114,20 +126,23 @@ shutterwanderright(var_0, var_1) {
   for(;;) {
     var_4 = randomint(80);
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_4 = var_4 * -1;
+    }
 
     var_2 = var_0.angles[1] + var_4;
     var_5 = var_0.angles[1] + var_4 * -1;
 
-    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179)
+    if(var_2 < var_0.startyaw || var_2 > var_0.startyaw + 179) {
       var_2 = var_5;
+    }
 
     var_6 = abs(var_0.angles[1] - var_2);
     var_3 = var_6 * 0.02 + randomfloat(2);
 
-    if(var_3 < 0.3)
+    if(var_3 < 0.3) {
       var_3 = 0.3;
+    }
 
     var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);

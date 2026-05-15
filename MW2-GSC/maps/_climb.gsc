@@ -13,8 +13,9 @@
 CONST_min_stick_move = 0.5;
 
 climb_init() {
-  if(level.script == "climb")
+  if(level.script == "climb") {
     level.friendly_init_cliffhanger = ::empty;
+  }
   player_jumpdown_block = GetEnt("player_jumpdown_block", "targetname");
   player_jumpdown_block NotSolid();
 
@@ -116,10 +117,11 @@ climb_init() {
   flag_init("slam_zoom_started");
   flag_init("climbing_dof");
 
-  if(GetDvarInt("climb_preview"))
+  if(GetDvarInt("climb_preview")) {
     run_thread_on_targetname("climb_model", ::climb_preview_anim);
-  else
+  } else {
     run_thread_on_targetname("climb_model", ::self_delete);
+  }
 
   battlechatter_off("allies");
   battlechatter_off("axis");
@@ -164,8 +166,9 @@ player_stops_moving() {
   for(;;) {
     vel = level.player GetVelocity();
     velocity = Distance((vel[0], vel[1], 0), (0, 0, 0));
-    if(velocity < 75)
+    if(velocity < 75) {
       return;
+    }
     wait(0.05);
   }
 }
@@ -210,8 +213,9 @@ earthquake_flyover() {
 }
 
 give_player_icepicker_ammo() {
-  if(flag("reached_top"))
+  if(flag("reached_top")) {
     return;
+  }
   level endon("reached_top");
 
   for(;;) {
@@ -285,8 +289,9 @@ old_crazy_fly_in() {
   level.player PlayerLinkToDelta(vehicle, "tag_origin", 1, 0, 0, 0, 0);
 
   wait(16);
-  foreach(heli in helis)
-  heli Delete();
+  foreach(heli in helis) {
+    heli Delete();
+  }
 
   thread maps\_introscreen::introscreen_generic_white_fade_in(0.5, 1, 2);
   slowmo_setlerptime_out(0.5);
@@ -310,8 +315,9 @@ get_dof_from_distance_to_price(climb_cam) {
 
   dof["nearStart"] = 1;
   dof["nearEnd"] = dist - 4000;
-  if(dof["nearEnd"] < 100)
+  if(dof["nearEnd"] < 100) {
     dof["nearEnd"] = 100;
+  }
 
   dof["nearBlur"] = 5;
   dof["farStart"] = dist + 1000;
@@ -531,8 +537,9 @@ wait_until_player_climbs() {
       display_hint("how_to_climb");
     }
 
-    if(!flag("player_in_position_to_climb"))
+    if(!flag("player_in_position_to_climb")) {
       level.player AllowFire(true);
+    }
 
     flag_wait("player_in_position_to_climb");
     if(level.player GetStance() != "stand") {
@@ -560,8 +567,9 @@ wait_until_player_climbs() {
     level.player AllowFire(false);
 
     level.player SwitchToWeapon(level.ice_pick_viewweapon);
-    if(!autosaved)
+    if(!autosaved) {
       thread autosave_now_silent();
+    }
     autosaved = true;
 
     if(level.player rightSwingPressed()) {
@@ -659,8 +667,9 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   arm_globals.start_climb_time = 0;
 
   relink_time = 0;
-  if(level.gameskill <= 1)
+  if(level.gameskill <= 1) {
     relink_time = 10000;
+  }
 
   foreach(arm in arms) {
     struct = spawn("script_origin", (0, 0, 0));
@@ -668,10 +677,11 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
     key = keys[arm];
     struct.key = key;
     struct.arm = arm;
-    if(isDefined(no_relink))
+    if(isDefined(no_relink)) {
       struct.last_button_press = GetTime() + relink_time;
-    else
+    } else {
       struct.last_button_press = 0;
+    }
 
     struct.stabbed = true;
     struct.viewmodel = model;
@@ -715,10 +725,11 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
 
     player_relinks_to_tag(ent);
   } else {
-    if(level.gameSkill < 2)
+    if(level.gameSkill < 2) {
       flag_clear("we_care_about_right_icepick");
-    else
+    } else {
       flag_set("we_care_about_right_icepick");
+    }
 
     thread player_gets_back_into_climbing(ent);
     arm_globals.start_climb_time = GetTime();
@@ -801,14 +812,16 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
       ent = arm_ents[arm_globals.current_arm];
       player_gets_back_on_wall(ent);
 
-      while(icepick_button_pressed(ent))
+      while(icepick_button_pressed(ent)) {
         wait(0.05);
+      }
     }
   }
 
   tag_origin Delete();
-  if(isDefined(model))
+  if(isDefined(model)) {
     model Delete();
+  }
 
   if(stop_climbing) {
     level.player AllowFire(true);
@@ -901,19 +914,23 @@ fall_to_your_death(ent) {
 }
 
 should_fall(stabbed, fall_time, ent) {
-  if(is_e3_start())
+  if(is_e3_start()) {
     return false;
+  }
 
-  if(!stabbed)
+  if(!stabbed) {
     return false;
+  }
 
-  if(GetTime() > fall_time)
+  if(GetTime() > fall_time) {
     return true;
+  }
 
   ent = get_other_arm_ent(ent);
 
-  if(GetTimeSinceLastPaused() < 10000)
+  if(GetTimeSinceLastPaused() < 10000) {
     return false;
+  }
 
   return !icepick_button_pressed(ent);
 }
@@ -1023,8 +1040,9 @@ right_add_test(ent) {
     for(i = 0; i < steps; i++) {
       index = i;
       weight = index / steps;
-      if(add == "additive_in")
+      if(add == "additive_in") {
         weight = 1 - weight;
+      }
       weight = 1 - weight;
       weight *= extra_boost;
 
@@ -1157,8 +1175,9 @@ blend_out_additive_and_in_wrist(ent, fake_model, lerp_time) {
   wait(0.05);
 
   ent.viewModel ClearAnim(anims["additive"], lerp_time);
-  if(isDefined(anims["vertical_corrector"]))
+  if(isDefined(anims["vertical_corrector"])) {
     ent.viewModel ClearAnim(anims["vertical_corrector"], lerp_time);
+  }
 
   ent.viewModel SetAnimKnob(anims[wrist_additive], 1, 0, 1);
   ent.viewModel SetAnimLimited(anims["wrist"], 0, 0, 1);
@@ -1175,23 +1194,28 @@ move_forward(dist) {
 }
 
 arm_completes_stab(ent, skipRelink) {
-  if(GetTime() < ent.globals.start_climb_time + 500)
+  if(GetTime() < ent.globals.start_climb_time + 500) {
     return false;
+  }
 
-  if(ent.button_press_num == ent.button_press_num_last)
+  if(ent.button_press_num == ent.button_press_num_last) {
     return false;
+  }
 
   ent.viewModel notify("stop_crack");
 
-  if(!icepick_button_pressed(ent))
+  if(!icepick_button_pressed(ent)) {
     return false;
+  }
 
   stab_success = arm_stabs(ent, skipRelink);
-  if(!stab_success)
+  if(!stab_success) {
     flag_set("finished_climbing");
+  }
 
-  if(GetDvarInt("climb_automove"))
+  if(GetDvarInt("climb_automove")) {
     wait(0.5);
+  }
 
   return stab_success;
 }
@@ -1203,10 +1227,12 @@ delay_for_reaching_top() {
   range = max_height - min_height;
 
   height = level.player.origin[2] - min_height;
-  if(height <= 0)
+  if(height <= 0) {
     return;
-  if(height > range)
+  }
+  if(height > range) {
     height = range;
+  }
 
   wait_time = max_wait * height / range;
   wait(wait_time);
@@ -1215,12 +1241,15 @@ delay_for_reaching_top() {
 GetStick(ent) {
   movement = self GetNormalizedMovement();
   if(GetDvarInt("climb_automove")) {
-    if(ent.climb_dir == "up")
+    if(ent.climb_dir == "up") {
       movement = (1, 0, 0);
-    if(ent.climb_dir == "right")
+    }
+    if(ent.climb_dir == "right") {
       movement = (0, 1, 0);
-    if(ent.climb_dir == "left")
+    }
+    if(ent.climb_dir == "left") {
       movement = (0, -1, 0);
+    }
     return movement;
   }
 
@@ -1252,8 +1281,9 @@ player_relinks_to_tag(ent) {
     }
 
     prefix = "start";
-    if(GetTime() < level.price_climb_time + 22000)
+    if(GetTime() < level.price_climb_time + 22000) {
       prefix = "early";
+    }
 
     start_climb = prefix + "_climb_left";
     ent.globals.current_arm = "right";
@@ -1311,15 +1341,17 @@ player_relinks_to_tag(ent) {
   player_forward = anglesToForward(player_angles);
   dot = VectorDot(tag_forward, player_forward);
   level.dot = dot;
-  if(dot < 0.85)
+  if(dot < 0.85) {
     wait(0.2);
+  }
 }
 
 playerlinktodeltaWide(ent, tag) {
-  if(ent.arm == "right")
+  if(ent.arm == "right") {
     ent.player PlayerLinkToDelta(ent.viewModel, tag, 1, 22, 60, 40, 40, true);
-  else
+  } else {
     ent.player PlayerLinkToDelta(ent.viewModel, tag, 1, 70, 28, 40, 40, true);
+  }
 }
 
 start_climb_sfx(ent) {
@@ -1343,8 +1375,9 @@ player_relinks_to_tag_threaded(ent) {
 }
 
 arm_stabs(ent, skipRelink) {
-  if(!isDefined(skipRelink))
+  if(!isDefined(skipRelink)) {
     player_relinks_to_tag(ent);
+  }
 
   directions = [];
   directions[0] = "left";
@@ -1380,8 +1413,9 @@ arm_stabs(ent, skipRelink) {
     flag_set("price_climb_continues");
   }
 
-  if(reached_drop_down_spot(ent))
+  if(reached_drop_down_spot(ent)) {
     return false;
+  }
 
   if(stab_success) {
     level.player PlayRumbleOnEntity("icepick_climb");
@@ -1414,8 +1448,9 @@ arm_stabs(ent, skipRelink) {
 
     if(ent.climb_dir == "up" || ent.climb_dir != ent.arm) {
       random_wait = get_random_wait(ent);
-      if(random_wait > 0)
+      if(random_wait > 0) {
         wait(random_wait);
+      }
     }
   } else {
     fail = "fail";
@@ -1465,20 +1500,25 @@ player_gets_back_on_wall(ent) {
 }
 
 player_got_off_cliff(ent) {
-  if(flag("climb_pullup"))
+  if(flag("climb_pullup")) {
     return true;
+  }
 
-  if(ent.player.jumped)
+  if(ent.player.jumped) {
     return true;
+  }
 
-  if(!flag("climb_drop_down"))
+  if(!flag("climb_drop_down")) {
     return false;
+  }
 
-  if(ent.arm != "right")
+  if(ent.arm != "right") {
     return false;
+  }
 
-  if(ent.climb_dir != "right")
+  if(ent.climb_dir != "right") {
     return false;
+  }
 
   return true;
 }
@@ -1503,8 +1543,9 @@ free_ground_ref(timer) {
 }
 
 reached_drop_down_spot(ent) {
-  if(!player_got_off_cliff(ent))
+  if(!player_got_off_cliff(ent)) {
     return false;
+  }
 
   if(flag("final_climb") && flag("climb_pullup")) {
     ent.viewModel notify("stop_crack");
@@ -1684,8 +1725,9 @@ catch_stab_notetrack(ent) {
 }
 
 blend_in_corrector(ent, additive_mod) {
-  if(ent.corrector_weight <= 0)
+  if(ent.corrector_weight <= 0) {
     return;
+  }
   anims = ent.anims;
 
   if(additive_mod != 0) {
@@ -1788,8 +1830,9 @@ calculate_additive(ent) {
 }
 
 try_to_do_vertical_correction(ent) {
-  if(ent.climb_dir == "up")
+  if(ent.climb_dir == "up") {
     return;
+  }
   if(ent.arm != ent.climb_dir) {
     return;
   }
@@ -1876,10 +1919,12 @@ try_to_do_vertical_correction(ent) {
 }
 
 legal_hit_depth(hit_depth) {
-  if(hit_depth <= 0.9)
+  if(hit_depth <= 0.9) {
     return false;
-  if(hit_depth >= 0.98)
+  }
+  if(hit_depth >= 0.98) {
     return false;
+  }
   return true;
 }
 
@@ -1930,8 +1975,9 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
   }
 
   fake_model = optional_model;
-  if(!isDefined(optional_model))
+  if(!isDefined(optional_model)) {
     fake_model = spawn_anim_model("player_rig");
+  }
 
   fake_model Hide();
   fake_model.origin = ent.viewModel.origin;
@@ -1972,10 +2018,12 @@ trace_test() {
 }
 
 get_time_for_notetrack(ent, anim_type, notetrack) {
-  if(!isDefined(ent.notetrack_times[anim_type]))
+  if(!isDefined(ent.notetrack_times[anim_type])) {
     return 1;
-  if(!isDefined(ent.notetrack_times[anim_type][notetrack]))
+  }
+  if(!isDefined(ent.notetrack_times[anim_type][notetrack])) {
     return 1;
+  }
   return ent.notetrack_times[anim_type][notetrack];
 }
 
@@ -2043,10 +2091,11 @@ apply_additive_mod(arm, overrides, additive_mod) {
     return;
   }
   overrides.additive_weight[arm] *= -1;
-  if(overrides.additive_type[arm] == "additive_in")
+  if(overrides.additive_type[arm] == "additive_in") {
     overrides.additive_type[arm] = "additive_out";
-  else
+  } else {
     overrides.additive_type[arm] = "additive_in";
+  }
 }
 
 apply_additive_mod_to_ent(ent, additive_mod) {
@@ -2055,10 +2104,11 @@ apply_additive_mod_to_ent(ent, additive_mod) {
     return;
   }
   ent.additive_weight *= -1;
-  if(ent.additive_type == "additive_in")
+  if(ent.additive_type == "additive_in") {
     ent.additive_type = "additive_out";
-  else
+  } else {
     ent.additive_type = "additive_in";
+  }
 }
 
 calculate_add_vertical_correction(ent, index, additive_weight, additive_type, additive_mod) {
@@ -2098,9 +2148,7 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
 
   wait(0.05);
 
-  if(GetDvarInt("climb_add"))
-
-  {
+  if(GetDvarInt("climb_add")) {} {
     fake_model Show();
     line_time = 50;
     depthTest = false;
@@ -2128,16 +2176,18 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
 arm_transitioning(ent) {
   anims = ent.anims;
 
-  if(ent.viewModel GetAnimTime(anims["stab"]) > 0)
+  if(ent.viewModel GetAnimTime(anims["stab"]) > 0) {
     return true;
+  }
 
   return false;
 }
 
 movement_stick_pressed(ent) {
   movement = ent.player GetStick(ent);
-  if(abs(movement[0]) > CONST_min_stick_move)
+  if(abs(movement[0]) > CONST_min_stick_move) {
     return true;
+  }
   return abs(movement[1]) > CONST_min_stick_move;
 }
 
@@ -2182,22 +2232,25 @@ track_trigger_pulls(globals) {
 
     if(flag("we_care_about_right_icepick")) {
       ent = globals.arm_ents["right"];
-      if(ent.player[[ent.buttonCheck]]())
+      if(ent.player[[ent.buttonCheck]]()) {
         ent.last_button_press = GetTime();
+      }
     }
     wait(0.05);
   }
 }
 
 icepick_button_pressed(ent) {
-  if(ent.player buttonPressed(ent.key))
+  if(ent.player buttonPressed(ent.key)) {
     return true;
+  }
   return ent.last_button_press + 750 > GetTime();
 }
 
 icepick_button_pressed_instant(ent) {
-  if(ent.player buttonPressed(ent.key))
+  if(ent.player buttonPressed(ent.key)) {
     return true;
+  }
   return ent.player[[ent.buttonCheck]]();
 }
 
@@ -2214,8 +2267,9 @@ link_model(model) {
     yaw = angles[1];
     self.angles = (0, yaw, 0);
     self.origin = model GetTagOrigin("tag_player");
-    if(1)
+    if(1) {
       return;
+    }
     wait(0.05);
   }
 }
@@ -2265,8 +2319,9 @@ test_player_angle(global) {
 
 penetrable_surface(ent, override_surface) {
   surface = ent.surface_type;
-  if(isDefined(override_surface))
+  if(isDefined(override_surface)) {
     surface = override_surface;
+  }
 
   if((ent.climb_dir == "right" || ent.climb_dir == "left") && ent.climb_dir != ent.arm) {
     return true;
@@ -2440,8 +2495,9 @@ generate_notetrack_times_for_anim(ent, anim_type) {
 }
 
 draw_ent_num(offset) {
-  if(!isDefined(offset))
+  if(!isDefined(offset)) {
     offset = -30;
+  }
   self endon("death");
   self notify("draw_ent_num");
   self endon("draw_ent_num");
@@ -2527,12 +2583,15 @@ climbing_cracks_fx(ent, hit_pos, normal) {
 }
 
 safe_price_delete(price) {
-  if(!isalive(price))
+  if(!isalive(price)) {
     return;
-  if(isDefined(price.magic_bullet_shield))
+  }
+  if(isDefined(price.magic_bullet_shield)) {
     price stop_magic_bullet_shield();
-  if(isDefined(price.fakegun))
+  }
+  if(isDefined(price.fakegun)) {
     price.fakegun Delete();
+  }
   price Delete();
 }
 
@@ -2568,8 +2627,9 @@ get_me_captain_price() {
 cliff_scene_with_price() {
   do_flyin = false;
 
-  if(level.start_point == "cave")
+  if(level.start_point == "cave") {
     do_flyin = false;
+  }
   if(level.start_point == "climb") {
     do_flyin = false;
     player_recover = GetEnt("player_recover", "targetname");
@@ -2616,8 +2676,9 @@ cliff_scene_with_price() {
   node = GetEnt("cliffhanger_cliff", "targetname");
 
   thread autosave_now_silent();
-  if(do_flyin)
+  if(do_flyin) {
     flag_wait("slam_zoom_started");
+  }
 
   delayThread(6, ::spawn_vehicles_from_targetname_and_drive, "climb_mig_distant_spawner");
 
@@ -2681,14 +2742,16 @@ delete_player_climb_blocker_and_set_time() {
   }
   flag_set("player_gets_on_wall");
   flag_wait("player_begins_to_climb");
-  if(flag("price_climbs_past_start"))
+  if(flag("price_climbs_past_start")) {
     return;
+  }
   if(self GetAnimTime(animation) < 0.75) {
     self SetAnimTime(animation, 0.75);
   }
   flag_wait("player_climbed_3_steps");
-  if(flag("price_climbs_past_start"))
+  if(flag("price_climbs_past_start")) {
     return;
+  }
   if(self GetAnimTime(animation) < 0.99) {
     self SetAnimTime(animation, 0.99);
   }
@@ -2810,10 +2873,12 @@ player_leaps(jump_forward) {
 
     level waittill("foreverever");
   }
-  if(!flag("climb_big_jump"))
+  if(!flag("climb_big_jump")) {
     return false;
-  if(level.player GetStance() != "stand")
+  }
+  if(level.player GetStance() != "stand") {
     return false;
+  }
 
   player_angles = level.player GetPlayerAngles();
   player_angles = (0, player_angles[1], 0);
@@ -2986,10 +3051,12 @@ player_big_jump() {
 
   exploder(5);
 
-  if(player_arms.left_looping)
+  if(player_arms.left_looping) {
     player_arms StopLoopSound("scn_cliffhanger_icepick_scrape_left");
-  if(player_arms.right_looping)
+  }
+  if(player_arms.right_looping) {
     player_arms StopLoopSound("scn_cliffhanger_icepick_scrape_right");
+  }
   level.player.impacted = false;
 
   player_arms notify("stop_weights");
@@ -3024,8 +3091,9 @@ player_big_jump() {
     wait(0.05);
   }
 
-  if(isDefined(level.rumble_ent))
+  if(isDefined(level.rumble_ent)) {
     level.rumble_ent Delete();
+  }
 
   player_arms notify("stop_weights");
 
@@ -3135,8 +3203,9 @@ wait_and_then_transition_to_next_part() {
   level.price thread stop_complaining_about_goal();
 
   if(IsAlive(level.price)) {
-    if(isDefined(level.price.magic_bullet_shield))
+    if(isDefined(level.price.magic_bullet_shield)) {
       level.price stop_magic_bullet_shield();
+    }
     level.price Delete();
   }
 
@@ -3185,8 +3254,9 @@ track_player_button_presses_for_holding_on() {
     left_pressed = level.player leftSwingPressed();
     right_pressed = level.player rightSwingPressed();
 
-    if(left_pressed || right_pressed)
+    if(left_pressed || right_pressed) {
       level.player.last_button_pressed_time = GetTime();
+    }
     wait(0.05);
   }
 }
@@ -3258,38 +3328,45 @@ arms_animated_relative_to_input() {
 
     if(level.player.impacted) {
       if(left_pressed) {
-        if(!self.left_looping)
+        if(!self.left_looping) {
           self playLoopSound("scn_cliffhanger_icepick_scrape_left");
+        }
         self.left_looping = true;
       } else {
-        if(self.left_looping)
+        if(self.left_looping) {
           self StopLoopSound("scn_cliffhanger_icepick_scrape_left");
+        }
         self.left_looping = false;
       }
 
       if(right_pressed) {
-        if(!self.right_looping)
+        if(!self.right_looping) {
           self playLoopSound("scn_cliffhanger_icepick_scrape_right");
+        }
         self.right_looping = true;
       } else {
-        if(self.right_looping)
+        if(self.right_looping) {
           self StopLoopSound("scn_cliffhanger_icepick_scrape_right");
+        }
         self.right_looping = false;
       }
     }
 
-    if(left_pressed)
+    if(left_pressed) {
       pressed++;
-    if(right_pressed)
+    }
+    if(right_pressed) {
       pressed++;
+    }
 
     slide_rumble(pressed, anim_both_in);
 
     animation = anims[left_pressed][right_pressed];
 
     foreach(other_animation in all_anims) {
-      if(other_animation == animation)
+      if(other_animation == animation) {
         continue;
+      }
       self SetAnimLimited(other_animation, 0.001, 0.1, 1);
     }
 
@@ -3331,12 +3408,15 @@ sliding_fx(ent) {
 }
 
 slide_rumble(pressed, anim_both_in, player_arms) {
-  if(self GetAnimTime(anim_both_in) >= 0.90)
+  if(self GetAnimTime(anim_both_in) >= 0.90) {
     return;
-  if(pressed == 0)
+  }
+  if(pressed == 0) {
     return;
-  if(!level.player.impacted)
+  }
+  if(!level.player.impacted) {
     return;
+  }
   level.player PlayRumbleOnEntity("icepick_slide");
 }
 
@@ -3358,8 +3438,9 @@ should_stop_hanging_right_icepick_hint() {
 
 stop_hanging_arm_hint(arm) {
   other_arm = get_other_arm(arm);
-  if(!level.player[[level.arm_ent_globals.arm_ents[other_arm].buttonCheck]]())
+  if(!level.player[[level.arm_ent_globals.arm_ents[other_arm].buttonCheck]]()) {
     return true;
+  }
 
   return level.player[[level.arm_ent_globals.arm_ents[arm].buttonCheck]]();
 }
@@ -3404,10 +3485,12 @@ delay_then_blend_dof(start, end, time) {
 
 set_far_dof_dist_to_price() {
   for(;;) {
-    if(!flag("climbing_dof"))
+    if(!flag("climbing_dof")) {
       return;
-    if(!isalive(level.price))
+    }
+    if(!isalive(level.price)) {
       return;
+    }
     dist = distance(level.player.origin, level.price.origin);
 
     level.dofDefault["farStart"] = dist - 50;

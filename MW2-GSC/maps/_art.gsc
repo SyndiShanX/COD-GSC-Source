@@ -8,20 +8,25 @@
 #include common_scripts\_artCommon;
 
 main() {
-  if(getDvar("scr_art_tweak") == "" || getDvar("scr_art_tweak") == "0")
+  if(getDvar("scr_art_tweak") == "" || getDvar("scr_art_tweak") == "0") {
     setDvar("scr_art_tweak", 0);
+  }
 
-  if(getDvar("scr_cmd_plr_sun") == "")
+  if(getDvar("scr_cmd_plr_sun") == "") {
     SetDevDvar("scr_cmd_plr_sun", "0");
+  }
 
-  if(getDvar("scr_dof_enable") == "")
+  if(getDvar("scr_dof_enable") == "") {
     SetSavedDvar("scr_dof_enable", "1");
+  }
 
-  if(getDvar("scr_cinematic_autofocus") == "")
+  if(getDvar("scr_cinematic_autofocus") == "") {
     setDvar("scr_cinematic_autofocus", "1");
+  }
 
-  if(getDvar("scr_art_visionfile") == "")
+  if(getDvar("scr_art_visionfile") == "") {
     setDvar("scr_art_visionfile", level.script);
+  }
 
   level.dofDefault["nearStart"] = 1;
   level.dofDefault["nearEnd"] = 1;
@@ -39,19 +44,22 @@ main() {
 
     player.curDoF = (level.dofDefault["farStart"] - level.dofDefault["nearEnd"]) / 2;
 
-    if(useDof)
+    if(useDof) {
       player thread adsDoF();
+    }
   }
 
   thread tweakart();
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(getDvar("mapname"));
+  }
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = false;
+  }
 
   setDvar("scr_fog_fraction", "1.0");
   setDvar("scr_art_dump", "0");
@@ -75,8 +83,9 @@ tweakart() {
   for(;;) {
     while(GetDvarInt("scr_art_tweak") == 0) {
       wait .05;
-      if(!GetDvarInt("scr_art_tweak") == 0)
+      if(!GetDvarInt("scr_art_tweak") == 0) {
         common_scripts\_artCommon::setfogsliders();
+      }
     }
 
     if(!printed) {
@@ -134,8 +143,9 @@ fovslidercheck() {
 }
 
 dumpsettings() {
-  if(getDvar("scr_art_dump") == "0")
+  if(getDvar("scr_art_dump") == "0") {
     return false;
+  }
 
   filename = "createart/" + getDvar("scr_art_visionfile") + "_art.gsc";
 
@@ -157,8 +167,9 @@ dumpsettings() {
   fileprint_launcher("");
   fileprint_launcher("}");
 
-  if(!artEndFogFileExport())
+  if(!artEndFogFileExport()) {
     return false;
+  }
 
   visionFilename = "vision/" + getDvar("scr_art_visionfile") + ".vision";
 
@@ -186,8 +197,9 @@ dumpsettings() {
   fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + getDvar("r_primaryLightTweakDiffuseStrength") + "\"");
   fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + getDvar("r_primaryLightTweakSpecularStrength") + "\"");
 
-  if(!artEndVisionFileExport())
+  if(!artEndVisionFileExport()) {
     return false;
+  }
 
   PrintLn("CREATE ART DUMP SUCCESS!");
 
@@ -209,13 +221,15 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
     jitter = scale(1 + RandomInt(21));
 
     flip = RandomInt(2);
-    if(flip)
+    if(flip) {
       jitter = jitter * -1;
+    }
 
-    if(direction == "up")
+    if(direction == "up") {
       next_target = sunlight + scale(30) + jitter;
-    else
+    } else {
       next_target = sunlight - scale(30) + jitter;
+    }
 
     if(next_target >= level.sunlight_bright) {
       next_target = level.sunlight_bright;
@@ -227,10 +241,11 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
       direction = "up";
     }
 
-    if(next_target > sunlight)
+    if(next_target > sunlight) {
       brighten(next_target, (3 + RandomInt(3)), .05);
-    else
+    } else {
       darken(next_target, (3 + RandomInt(3)), .05);
+    }
   }
 }
 
@@ -399,40 +414,48 @@ updateDoF() {
     }
     distFrom = Distance(playerEye, enemies[index].origin);
 
-    if(distFrom - 30 < nearEnd)
+    if(distFrom - 30 < nearEnd) {
       nearEnd = distFrom - 30;
+    }
 
-    if(distFrom + 30 > farStart)
+    if(distFrom + 30 > farStart) {
       farStart = distFrom + 30;
+    }
   }
 
   if(nearEnd > farStart) {
     nearEnd = 256;
     farStart = 2500;
   } else {
-    if(nearEnd < 50)
+    if(nearEnd < 50) {
       nearEnd = 50;
-    else
-    if(nearEnd > 512)
-      nearEnd = 512;
-
-    if(farStart > 2500)
+    } else {
+      if(nearEnd > 512) {
+        nearEnd = 512;
+      }
+    }
+    if(farStart > 2500) {
       farStart = 2500;
-    else
-    if(farStart < 1000)
-      farStart = 1000;
+    } else {
+      if(farStart < 1000) {
+        farStart = 1000;
+      }
+    }
   }
 
   traceDist = Distance(playerEye, trace["position"]);
 
-  if(nearEnd > traceDist)
+  if(nearEnd > traceDist) {
     nearEnd = traceDist - 30;
+  }
 
-  if(nearEnd < 1)
+  if(nearEnd < 1) {
     nearEnd = 1;
+  }
 
-  if(farStart < traceDist)
+  if(farStart < traceDist) {
     farSTart = traceDist;
+  }
 
   self setDoFTarget(adsFrac, 1, nearEnd, farStart, farStart * 4, 6, 1.8);
 }
@@ -456,45 +479,56 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
       continue;
     }
     distFrom = Distance(playerEye, enemies[index].origin);
-    if(distFrom < 2500)
+    if(distFrom < 2500) {
       distFrom = 2500;
+    }
 
-    if(distFrom - 30 < nearEnd)
+    if(distFrom - 30 < nearEnd) {
       nearEnd = distFrom - 30;
+    }
 
-    if(distFrom + 30 > farStart)
+    if(distFrom + 30 > farStart) {
       farStart = distFrom + 30;
+    }
   }
 
   if(nearEnd > farStart) {
     nearEnd = 2400;
     farStart = 3000;
   } else {
-    if(nearEnd < 50)
+    if(nearEnd < 50) {
       nearEnd = 50;
+    }
 
-    if(farStart > 2500)
+    if(farStart > 2500) {
       farStart = 2500;
-    else
-    if(farStart < 1000)
-      farStart = 1000;
+    } else {
+      if(farStart < 1000) {
+        farStart = 1000;
+      }
+    }
   }
 
   traceDist = Distance(playerEye, trace["position"]);
-  if(traceDist < 2500)
+  if(traceDist < 2500) {
     traceDist = 2500;
+  }
 
-  if(nearEnd > traceDist)
+  if(nearEnd > traceDist) {
     nearEnd = traceDist - 30;
+  }
 
-  if(nearEnd < 1)
+  if(nearEnd < 1) {
     nearEnd = 1;
+  }
 
-  if(farStart < traceDist)
+  if(farStart < traceDist) {
     farSTart = traceDist;
+  }
 
-  if(nearStart >= nearEnd)
+  if(nearStart >= nearEnd) {
     nearStart = nearEnd - 1;
+  }
 
   self setDoFTarget(adsFrac, nearStart, nearEnd, farStart, farStart * 4, 4, 1.8);
 }
@@ -526,26 +560,30 @@ changeDoFValue(valueName, targetValue, maxChange) {
 
   if(self.dof[valueName] > targetValue) {
     changeVal = (self.dof[valueName] - targetValue) * 0.5;
-    if(changeVal > maxChange)
+    if(changeVal > maxChange) {
       changeVal = maxChange;
-    else if(changeVal < 1)
+    } else if(changeVal < 1) {
       changeVal = 1;
+    }
 
-    if(self.dof[valueName] - changeVal < targetValue)
+    if(self.dof[valueName] - changeVal < targetValue) {
       self.dof[valueName] = targetValue;
-    else
+    } else {
       self.dof[valueName] -= changeVal;
+    }
   } else if(self.dof[valueName] < targetValue) {
     changeVal = (targetValue - self.dof[valueName]) * 0.5;
-    if(changeVal > maxChange)
+    if(changeVal > maxChange) {
       changeVal = maxChange;
-    else if(changeVal < 1)
+    } else if(changeVal < 1) {
       changeVal = 1;
+    }
 
-    if(self.dof[valueName] + changeVal > targetValue)
+    if(self.dof[valueName] + changeVal > targetValue) {
       self.dof[valueName] = targetValue;
-    else
+    } else {
       self.dof[valueName] += changeVal;
+    }
   }
 }
 
@@ -575,23 +613,29 @@ setdefaultdepthoffield() {
 }
 
 isDoFDefault() {
-  if(level.dofDefault["nearStart"] != GetDvarInt("scr_dof_nearStart"))
+  if(level.dofDefault["nearStart"] != GetDvarInt("scr_dof_nearStart")) {
     return false;
+  }
 
-  if(level.dofDefault["nearEnd"] != GetDvarInt("scr_dof_nearEnd"))
+  if(level.dofDefault["nearEnd"] != GetDvarInt("scr_dof_nearEnd")) {
     return false;
+  }
 
-  if(level.dofDefault["farStart"] != GetDvarInt("scr_dof_farStart"))
+  if(level.dofDefault["farStart"] != GetDvarInt("scr_dof_farStart")) {
     return false;
+  }
 
-  if(level.dofDefault["farEnd"] != GetDvarInt("scr_dof_farEnd"))
+  if(level.dofDefault["farEnd"] != GetDvarInt("scr_dof_farEnd")) {
     return false;
+  }
 
-  if(level.dofDefault["nearBlur"] != GetDvarInt("scr_dof_nearBlur"))
+  if(level.dofDefault["nearBlur"] != GetDvarInt("scr_dof_nearBlur")) {
     return false;
+  }
 
-  if(level.dofDefault["farBlur"] != GetDvarInt("scr_dof_farBlur"))
+  if(level.dofDefault["farBlur"] != GetDvarInt("scr_dof_farBlur")) {
     return false;
+  }
 
   return true;
 }

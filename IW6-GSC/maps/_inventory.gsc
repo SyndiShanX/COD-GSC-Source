@@ -8,11 +8,13 @@ main() {
 }
 
 inventory_create(var_0, var_1) {
-  if(1)
+  if(1) {
     return spawnStruct();
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = newhudelem();
   var_2.alignx = "right";
@@ -60,8 +62,9 @@ inventroy_update() {
       if(var_5 != level.inventory[var_4].y) {
         level.inventory[var_4].x = var_0;
 
-        if(level.inventory[var_4].alpha != 0)
+        if(level.inventory[var_4].alpha != 0) {
           level.inventory[var_4] moveovertime(0.3);
+        }
 
         level.inventory[var_4].y = var_5;
       }
@@ -90,8 +93,9 @@ inventory_destroy() {
   level.inventory = [];
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isDefined(var_1[var_2]))
+    if(isDefined(var_1[var_2])) {
       level.inventory[level.inventory.size] = var_1[var_2];
+    }
   }
 
   inventroy_update();

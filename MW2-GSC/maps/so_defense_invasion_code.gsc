@@ -23,8 +23,9 @@ while(1) {
 }
 }
 if(isDefined(level.smoke_throttle)) {
-  if(!isDefined(level.smoke_wave_time))
+  if(!isDefined(level.smoke_wave_time)) {
     level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
+  }
 
   time_since = gettime() - level.smoke_wave_time;
   if(time_since <= level.smoke_throttle) {
@@ -35,8 +36,9 @@ if(isDefined(level.smoke_throttle)) {
 
 magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
 array_thread(magic_smoke_grenades, ::smoke_wave_play);
-if(isDefined(dialog_wait))
+if(isDefined(dialog_wait)) {
   thread dialog_smoke_wave_alert(dialog_wait);
+}
 }
 
 smoke_wave_play() {
@@ -60,17 +62,21 @@ level.btr80_init = true;
 level.btr80_count = 0;
 level.btr80_death_time = gettime();
 
-if(!isDefined(level.btr_kill_value))
+if(!isDefined(level.btr_kill_value)) {
   level.btr_kill_value = 400;
+}
 
-if(!isDefined(level.btr_min_fighting_range))
+if(!isDefined(level.btr_min_fighting_range)) {
   level.btr_min_fighting_range = 400;
+}
 
-if(!isDefined(level.btr_max_fighting_range))
+if(!isDefined(level.btr_max_fighting_range)) {
   level.btr_max_fighting_range = 2400;
+}
 
-if(!isDefined(level.btr_target_fov))
+if(!isDefined(level.btr_target_fov)) {
   level.btr_target_fov = cos(50);
+}
 
 level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
 
@@ -191,37 +197,45 @@ btr80_find_available_player() {
   p1_ok = btr80_check_player_available(level.player) && btr80_check_player_in_range(level.player);
   p2_ok = btr80_check_player_available(level.player2) && btr80_check_player_in_range(level.player2);
 
-  if(p1_ok && p2_ok)
+  if(p1_ok && p2_ok) {
     return getclosest(self.origin, level.players);
+  }
 
-  if(p1_ok)
+  if(p1_ok) {
     return level.player;
+  }
 
-  if(p2_ok)
+  if(p2_ok) {
     return level.player2;
+  }
 
   return undefined;
 }
 
 btr80_check_player_available(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
-  if(isDefined(player.btr80_attacker_id))
+  if(isDefined(player.btr80_attacker_id)) {
     return false;
+  }
 
   return true;
 }
 
 btr80_check_player_in_range(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
-  if(distance(self.origin, player.origin) > level.btr_max_fighting_range)
+  if(distance(self.origin, player.origin) > level.btr_max_fighting_range) {
     return false;
+  }
 
-  if(distance(self.origin, player.origin) < level.btr_min_fighting_range)
+  if(distance(self.origin, player.origin) < level.btr_min_fighting_range) {
     return false;
+  }
 
   return true;
 }
@@ -231,25 +245,29 @@ btr80_check_player_in_building(player) {
     return;
   }
   foreach(building in level.btr80_building_checks) {
-    if(player istouching(building))
+    if(player istouching(building)) {
       return true;
+    }
   }
 
   return false;
 }
 
 btr80_can_see_player(player) {
-  if(btr80_check_player_in_building(player))
+  if(btr80_check_player_in_building(player)) {
     return false;
+  }
 
-  if(!btr80_check_player_in_range(player))
+  if(!btr80_check_player_in_range(player)) {
     return false;
+  }
 
   tag_flash_loc = self getTagOrigin("tag_flash");
   player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
-    if(isDefined(level.debug))
+    if(isDefined(level.debug)) {
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
+    }
     return true;
   } else {
     return false;
@@ -264,8 +282,9 @@ btr80_new_target_think() {
   while(1) {
     self waittill("trigger", vehicle);
 
-    if(!isalive(vehicle))
+    if(!isalive(vehicle)) {
       return;
+    }
     if(vehicle.turret_busy) {
       continue;
     }
@@ -304,8 +323,9 @@ btr80_register_death() {
 
   if(self ent_flag("spotted_player")) {
     foreach(player in level.players) {
-      if(isDefined(player.btr80_attacker_id) && (my_id == player.btr80_attacker_id))
+      if(isDefined(player.btr80_attacker_id) && (my_id == player.btr80_attacker_id)) {
         player.btr80_attacker_id = undefined;
+      }
     }
   }
 
@@ -318,8 +338,9 @@ btr80_register_death() {
   assertex((level.btr80_count >= 0), "Somehow the BTR80 population counter dropped below 0. This should never happen.");
 
   level notify("btr80_death");
-  if(level.btr80_count <= 0)
+  if(level.btr80_count <= 0) {
     level notify("btr80s_all_down");
+  }
 }
 
 dialog_btr80_spotted_you() {
@@ -347,8 +368,9 @@ dialog_btr80_spotted_you_action() {
   }
 
   if(isDefined(level.btr80_alert_throttle)) {
-    if(!isDefined(level.btr80_alert_time))
+    if(!isDefined(level.btr80_alert_time)) {
       level.btr80_alert_time = gettime() - level.btr80_alert_throttle - 1;
+    }
 
     time_since = gettime() - level.btr80_alert_time;
     if(time_since <= level.btr80_alert_throttle) {
@@ -367,8 +389,9 @@ if(isDefined(level.hunters_init)) {
 level.hunters_init = true;
 
 level.hunters_active = 0;
-if(!isDefined(level.hunters_all_in))
+if(!isDefined(level.hunters_all_in)) {
   level.hunters_all_in = 5;
+}
 dialog_hunter_enemies_setup();
 
 level.difficultySettings["accuracyDistScale"]["easy"] = 0.8;
@@ -389,8 +412,9 @@ create_hunter_enemy_group(enemy_tag, enemy_count) {
   current_enemies = getEntArray(enemy_tag, "targetname");
   array_thread(current_enemies, ::add_spawn_function, ::create_hunter_enemy);
 
-  if(!isDefined(enemy_count) || (enemy_count > current_enemies.size))
+  if(!isDefined(enemy_count) || (enemy_count > current_enemies.size)) {
     enemy_count = current_enemies.size;
+  }
 
   current_enemies = array_randomize(current_enemies);
   enemies_spawned = 0;
@@ -398,16 +422,18 @@ create_hunter_enemy_group(enemy_tag, enemy_count) {
     current_enemies[i].count = 1;
     guy = current_enemies[i] spawn_ai();
 
-    if(isDefined(guy))
+    if(isDefined(guy)) {
       enemies_spawned++;
+    }
 
     if(enemies_spawned >= enemy_count) {
       break;
     }
   }
 
-  if(enemies_spawned >= 10)
+  if(enemies_spawned >= 10) {
     thread dialog_hunter_enemies(enemy_tag, 2.5);
+  }
 
   return enemies_spawned;
 }
@@ -431,8 +457,9 @@ create_hunter_enemy(wait_for_unload) {
 
   thread hunter_register_death();
 
-  if(isDefined(wait_for_unload) && wait_for_unload)
+  if(isDefined(wait_for_unload) && wait_for_unload) {
     self waittill("jumpedout");
+  }
 
   thread hunter_enemy_maintain_closest_goal();
 }
@@ -502,20 +529,25 @@ hunter_check_become_bored(bored_time) {
   bored_guys = 0;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
-    if(isDefined(guy.hunter_is_bored) && guy.hunter_is_bored)
+    if(isDefined(guy.hunter_is_bored) && guy.hunter_is_bored) {
       bored_guys++;
+    }
   }
-  if(bored_guys >= level.hunters_all_in)
+  if(bored_guys >= level.hunters_all_in) {
     return false;
+  }
 
-  if(gettime() >= bored_time)
+  if(gettime() >= bored_time) {
     return true;
+  }
 
-  if(!isDefined(level.hunter_refill_active) && (level.hunters_active <= level.hunters_all_in))
+  if(!isDefined(level.hunter_refill_active) && (level.hunters_active <= level.hunters_all_in)) {
     return true;
+  }
 
-  if(isDefined(level.bored_hunter))
+  if(isDefined(level.bored_hunter)) {
     return false;
+  }
 
   level.bored_hunter = self.unique_id;
   return true;
@@ -530,16 +562,20 @@ hunter_enemies_refill(refill_at, min_fill, max_fill, refill_max) {
   level.hunter_refill_active = true;
   level.hunter_refill_used_smoke = false;
 
-  if(!isDefined(refill_at) || (refill_at < 0))
+  if(!isDefined(refill_at) || (refill_at < 0)) {
     refill_at = 0;
-  if(!isDefined(min_fill) || (min_fill < 1))
+  }
+  if(!isDefined(min_fill) || (min_fill < 1)) {
     min_fill = 1;
-  if(!isDefined(max_fill) || (max_fill <= min_fill))
+  }
+  if(!isDefined(max_fill) || (max_fill <= min_fill)) {
     max_fill = min_fill + 1;
+  }
 
   if(isDefined(refill_max)) {
-    if(isDefined(level.hunters_active) && (level.hunters_active > 0))
+    if(isDefined(level.hunters_active) && (level.hunters_active > 0)) {
       refill_max -= level.hunters_active;
+    }
   }
 
   refill_current = 0;
@@ -568,13 +604,15 @@ hunter_enemies_refill(refill_at, min_fill, max_fill, refill_max) {
 
       if(isDefined(refill_max)) {
         refill_current += respawn_amount;
-        if(refill_current >= refill_max)
+        if(refill_current >= refill_max) {
           level.hunter_refill_active = undefined;
+        }
       }
     }
 
-    if(isDefined(level.hunter_refill_active) && level.hunter_refill_active)
+    if(isDefined(level.hunter_refill_active) && level.hunter_refill_active) {
       wait 1;
+    }
   }
 
   level notify("hunter_refill_complete");
@@ -583,27 +621,33 @@ hunter_enemies_refill(refill_at, min_fill, max_fill, refill_max) {
 hunter_enemies_get_spawn_amount(min_fill, max_fill, refill_max, refill_current) {
   respawn_amount = randomintrange(min_fill, max_fill);
   if(isDefined(refill_max)) {
-    if((refill_current + respawn_amount) > refill_max)
+    if((refill_current + respawn_amount) > refill_max) {
       respawn_amount = (refill_max - refill_current);
+    }
   }
 
   return respawn_amount;
 }
 
 hunter_enemies_get_spawn_option(last_spawn) {
-  if(!isDefined(last_spawn))
+  if(!isDefined(last_spawn)) {
     last_spawn = "";
+  }
 
   spawn_options = [];
 
-  if(!flag("so_player_near_bank"))
+  if(!flag("so_player_near_bank")) {
     spawn_options[spawn_options.size] = "bank";
-  if(!flag("so_player_near_gas_station"))
+  }
+  if(!flag("so_player_near_gas_station")) {
     spawn_options[spawn_options.size] = "gas";
-  if(!flag("so_player_near_taco"))
+  }
+  if(!flag("so_player_near_taco")) {
     spawn_options[spawn_options.size] = "taco";
-  if(!flag("so_player_near_burgertown"))
+  }
+  if(!flag("so_player_near_burgertown")) {
     spawn_options[spawn_options.size] = "burger";
+  }
 
   if(spawn_options.size <= 0) {
     spawn_options[spawn_options.size] = "bank";
@@ -617,8 +661,9 @@ hunter_enemies_get_spawn_option(last_spawn) {
     i = randomint(spawn_options.size);
     if(spawn_options[i] == last_spawn) {
       i--;
-      if(i < 0)
+      if(i < 0) {
         i = spawn_options.size - 1;
+      }
     }
   }
 
@@ -656,16 +701,18 @@ hunter_register_death() {
   self waittill_any("death", "pain_death");
 
   if(isDefined(level.bored_hunter)) {
-    if(level.bored_hunter == my_id)
+    if(level.bored_hunter == my_id) {
       level.bored_hunter = undefined;
+    }
   }
 
   level.hunters_active--;
   assertex((level.hunters_active >= 0), "Somehow the hunter population counter dropped below 0. This should never happen.");
 
   level notify("hunter_death");
-  if(hunter_check_wave_complete())
+  if(hunter_check_wave_complete()) {
     level notify("hunters_all_down");
+  }
 }
 
 hunter_register_turret_death() {
@@ -682,20 +729,25 @@ hunter_register_turret_death() {
 }
 
 hunter_attacker_is_player_turret(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.targetname))
+  if(!isDefined(attacker.targetname)) {
     return false;
+  }
 
-  if(attacker.targetname != "sentry_minigun")
+  if(attacker.targetname != "sentry_minigun") {
     return false;
+  }
 
-  if(!isDefined(attacker.owner))
+  if(!isDefined(attacker.owner)) {
     return false;
+  }
 
-  if(!isPlayer(attacker.owner))
+  if(!isPlayer(attacker.owner)) {
     return false;
+  }
 
   return true;
 }
@@ -719,19 +771,22 @@ update_sentry_attackeraccuracy(adjust_amount) {
 }
 
 hunter_check_wave_complete() {
-  if(level.hunters_active > 0)
+  if(level.hunters_active > 0) {
     return false;
+  }
 
-  if(isDefined(level.hunter_refill_active) && level.hunter_refill_active)
+  if(isDefined(level.hunter_refill_active) && level.hunter_refill_active) {
     return false;
+  }
 
   return true;
 }
 
 dialog_hunter_enemies(enemy_tag, wait_time) {
   if(isDefined(level.hunter_dialog_throttle)) {
-    if(!isDefined(level.hunter_dialog_time))
+    if(!isDefined(level.hunter_dialog_time)) {
       level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
+    }
 
     time_since = gettime() - level.hunter_dialog_time;
     if(time_since <= level.hunter_dialog_throttle) {
@@ -740,8 +795,9 @@ dialog_hunter_enemies(enemy_tag, wait_time) {
     level.hunter_dialog_time = gettime();
   }
 
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait wait_time;
+  }
 
   assertex(isDefined(level.dialog), "dialog_hunter_enemies requires level.dialog to be defined before it can play anything.");
 
@@ -750,8 +806,9 @@ dialog_hunter_enemies(enemy_tag, wait_time) {
 }
 
 dialog_hunter_enemies_setup(enemy_tag, wait_time) {
-  if(!isDefined(level.dialog))
+  if(!isDefined(level.dialog)) {
     level.dialog = [];
+  }
 
   level.dialog["bank_enemies"][0] = "inv_hqr_enemynorth";
 
@@ -809,8 +866,9 @@ create_attack_heli(heli_id, heli_points_id, wait_time) {
   assertex(isDefined(heli_id), "create_attack_heli() requires a valid heli_id.");
   assertex(isDefined(heli_points_id), "create_attack_heli() requires a valid heli_points_id.");
 
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait wait_time;
+  }
 
   attack_heli_init();
 
@@ -839,8 +897,9 @@ attack_heli_register_death() {
   }
 
   level notify("attack_heli_death");
-  if(level.attack_heli_count == 0)
+  if(level.attack_heli_count == 0) {
     level notify("attack_helis_all_down");
+  }
 }
 
 dialog_attack_heli() {
@@ -892,8 +951,9 @@ dialog_get_stinger() {
       p2_stinger = getClosest(level.player2.origin, level.stingers);
       p2_distance = distance(level.player2.origin, p2_stinger.origin);
 
-      if(p2_distance < p1_distance)
+      if(p2_distance < p1_distance) {
         alert_stinger = p2_stinger;
+      }
     }
 
     if(isDefined(level.stingers["diner"]) && (alert_stinger == level.stingers["diner"])) {
@@ -901,15 +961,17 @@ dialog_get_stinger() {
       radio_dialogue(selected_line);
 
       diner_dialog_current++;
-      if(diner_dialog_current >= level.diner_dialog.size)
+      if(diner_dialog_current >= level.diner_dialog.size) {
         diner_dialog_current = 0;
+      }
     } else if(isDefined(level.stingers["nates_stinger"])) {
       selected_line = level.nates_dialog[nates_dialog_current];
       radio_dialogue(selected_line);
 
       nates_dialog_current++;
-      if(nates_dialog_current >= level.nates_dialog.size)
+      if(nates_dialog_current >= level.nates_dialog.size) {
         nates_dialog_current = 0;
+      }
     } else {
       assertex(false, "dialog_get_stinger() tried to play an alert for a stinger, but no stingers are defined.");
       continue;
@@ -924,32 +986,37 @@ stringer_dialog_throttle_reset() {
 }
 
 stinger_player_has(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
   weapons = player GetWeaponsListAll();
   foreach(weapon in weapons) {
-    if(weapon == "at4")
+    if(weapon == "at4") {
       return true;
+    }
   }
 
   return false;
 }
 
 stinger_enemy_available() {
-  if(level.stinger_missile_throttle > gettime())
+  if(level.stinger_missile_throttle > gettime()) {
     return false;
+  }
 
   death_remind_delay = 30000;
 
   if(isDefined(level.attack_heli_count) && (level.attack_heli_count > 0)) {
-    if(level.attack_heli_death_time + death_remind_delay < gettime())
+    if(level.attack_heli_death_time + death_remind_delay < gettime()) {
       return true;
+    }
   }
 
   if(isDefined(level.btr80_count) && (level.btr80_count > 0)) {
-    if(level.btr80_death_time + death_remind_delay < gettime())
+    if(level.btr80_death_time + death_remind_delay < gettime()) {
       return true;
+    }
   }
 
   return false;
@@ -984,8 +1051,9 @@ level.stingers[stinger_id] = stinger;
 
 stinger_player_can_see(stinger_origin) {
   foreach(player in level.players) {
-    if(player can_see_origin(stinger_origin))
+    if(player can_see_origin(stinger_origin)) {
       return true;
+    }
   }
 
   return false;
@@ -1013,8 +1081,9 @@ semtex_maintain_self() {
   while(1) {
     semtex waittill("trigger", player, old_weapon);
 
-    while(semtex_player_is_close(semtex_origin))
+    while(semtex_player_is_close(semtex_origin)) {
       wait 1;
+    }
 
     semtex = spawn("weapon_semtex_grenade", semtex_origin, 1);
     semtex.angles = semtex_angles;
@@ -1032,11 +1101,13 @@ if(isDefined(level.hellfire_active)) {
 level.hellfire_active = true;
 level.hellfire_paused = false;
 
-if(!isDefined(level.hellfire_time_search))
+if(!isDefined(level.hellfire_time_search)) {
   hellfire_set_time_search(20, 40);
+}
 
-if(!isDefined(level.hellfire_time_breather))
+if(!isDefined(level.hellfire_time_breather)) {
   hellfire_set_time_breather(5, 8);
+}
 
 thread hellfire_spawn_player1_uav();
 thread hellfire_spawn_player2_uav();
@@ -1057,15 +1128,17 @@ hellfire_spawn_uav(player, delay) {
   level endon("special_op_terminated");
   level endon("hellfire_attack_stop");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait delay;
+  }
 
   hellfire_uav = getent("uav", "targetname");
   hellfire_uav.target = "so_uav_start";
   hellfire_uav = spawn_vehicle_from_targetname_and_drive("uav");
   hellfire_uav playLoopSound("uav_engine_loop");
-  if(!level.hellfire_paused)
+  if(!level.hellfire_paused) {
     hellfire_uav thread hellfire_monitor_player(player);
+  }
 
   return hellfire_uav;
 }
@@ -1084,8 +1157,9 @@ hellfire_attack_unpause() {
   }
   level.hellfire_paused = false;
   level.hellfire_uav thread hellfire_monitor_player(level.player);
-  if(is_coop() && isDefined(level.hellfire_uav_p2))
+  if(is_coop() && isDefined(level.hellfire_uav_p2)) {
     level.hellfire_uav_p2 thread hellfire_monitor_player(level.player2);
+  }
 }
 
 hellfire_attack_stop() {
@@ -1094,8 +1168,9 @@ hellfire_attack_stop() {
   level.hellfire_active = undefined;
   level.hellfire_paused = undefined;
   level.hellfire_uav Delete();
-  if(is_coop())
+  if(is_coop()) {
     level.hellfire_uav_p2 Delete();
+  }
 }
 
 hellfire_monitor_player(player) {
@@ -1109,8 +1184,9 @@ hellfire_monitor_player(player) {
 
   while(1) {
     wait RandomIntRange(level.hellfire_time_search["min"], level.hellfire_time_search["max"]);
-    while(!hellfire_check_player_available(player))
+    while(!hellfire_check_player_available(player)) {
       wait 1;
+    }
 
     hud_warning = hud_display_uav_spotted(player, self.unique_id);
     dialog_hellfire_warn_player("drone_spotted");
@@ -1139,8 +1215,9 @@ hellfire_monitor_player(player) {
 
 dialog_hellfire_warn_player(alias) {
   if(isDefined(level.hellfire_warn_time)) {
-    if(level.hellfire_warn_time + 10000 > gettime())
+    if(level.hellfire_warn_time + 10000 > gettime()) {
       return;
+    }
   }
 
   level.hellfire_warn_time = gettime();
@@ -1150,11 +1227,13 @@ dialog_hellfire_warn_player(alias) {
 }
 
 hellfire_check_player_available(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
+  }
 
-  if(is_coop() && is_player_down_and_out(player))
+  if(is_coop() && is_player_down_and_out(player)) {
     return false;
+  }
 
   return SightTracePassed(self.origin, player getEye(), false, self);
 }
@@ -1165,8 +1244,9 @@ hellfire_attack_player(player, num_shots) {
   level endon("hellfire_attack_stop");
   level endon("hellfire_attack_pause");
 
-  if(!isDefined(num_shots))
+  if(!isDefined(num_shots)) {
     num_shots = 2;
+  }
 
   hellfire_shots = RandomIntrange(1, num_shots);
   for(i = 0; i < num_shots; i++) {
@@ -1175,8 +1255,9 @@ hellfire_attack_player(player, num_shots) {
     attack_range_z = 0;
     attack_spot = player.origin;
 
-    if(i > 0)
+    if(i > 0) {
       attack_spot += (attack_range_x, attack_range_y, attack_range_z);
+    }
     hellfire_fire_missile(attack_spot);
     wait(randomfloatrange(0.33, 0.66));
   }
@@ -1196,8 +1277,9 @@ hellfire_threaten_player(player, max_shots) {
     targets = get_outside_range(other_player.origin, targets, 600);
   }
 
-  if(!isDefined(max_shots))
+  if(!isDefined(max_shots)) {
     max_shots = 4;
+  }
 
   hellfire_shots = RandomIntRange(1, max_shots);
   for(i = 0; i < hellfire_shots; i++) {
@@ -1214,8 +1296,9 @@ hellfire_attack_target(player, targets, remove_target) {
   hellfire_target = targets[hellfire_index];
   hellfire_fire_missile(hellfire_target.origin);
 
-  if(isDefined(remove_target) && remove_target)
+  if(isDefined(remove_target) && remove_target) {
     return array_remove_index(targets, hellfire_index);
+  }
 }
 
 hellfire_fire_missile(target_origin) {
@@ -1230,8 +1313,9 @@ hellfire_set_time_search(time_min, time_max) {
   assertex(isDefined(time_max), "hellfire_set_time_search() requires a valid time_max");
   assertex((time_min < time_max), "hellfire_set_time_search() requires time_min to be less than time_max");
 
-  if(!isDefined(level.hellfire_time_search))
+  if(!isDefined(level.hellfire_time_search)) {
     level.hellfire_time_search = [];
+  }
 
   level.hellfire_time_search["min"] = time_min;
   level.hellfire_time_search["max"] = time_max;
@@ -1242,8 +1326,9 @@ hellfire_set_time_breather(time_min, time_max) {
   assertex(isDefined(time_max), "hellfire_set_time_breather() requires a valid time_max");
   assertex((time_min < time_max), "hellfire_set_time_breather() requires time_min to be less than time_max");
 
-  if(!isDefined(level.hellfire_time_breather))
+  if(!isDefined(level.hellfire_time_breather)) {
     level.hellfire_time_breather = [];
+  }
 
   level.hellfire_time_breather["min"] = time_min;
   level.hellfire_time_breather["max"] = time_max;
@@ -1311,8 +1396,9 @@ hud_display_wave(title_text, timer) {
 
   wait timer - (list.size * 1);
 
-  foreach(hudelem in hudelems)
-  hudelem Destroy();
+  foreach(hudelem in hudelems) {
+    hudelem Destroy();
+  }
 }
 
 hud_create_wave_splash_default(yLine, message) {
@@ -1324,13 +1410,15 @@ hud_create_wave_splash_default(yLine, message) {
 }
 
 hud_display_enemies_active(enemy_title, enemy_total, enemy_death) {
-  if(!isDefined(level.hud_display_enemies))
+  if(!isDefined(level.hud_display_enemies)) {
     level.hud_display_enemies = 0;
+  }
 
   level.hud_display_enemies++;
 
-  foreach(player in level.players)
-  player thread hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death);
+  foreach(player in level.players) {
+    player thread hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death);
+  }
 }
 
 hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death) {
@@ -1412,17 +1500,20 @@ door_bt_locker_open() {
 }
 convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
 convert_enemies = array_merge(convert_enemies, getEntArray("diner_enemy_counter_attack", "targetname"));
-for(i = 0; i < convert_enemies.size; i++)
+for(i = 0; i < convert_enemies.size; i++) {
   convert_enemies[i].targetname = "gas_station_enemies";
+}
 convert_enemies = getEntArray("burger_town_nates_attackers", "targetname");
 convert_enemies = array_merge(convert_enemies, getEntArray("burger_town_enemy_defenders", "targetname"));
-for(i = 0; i < convert_enemies.size; i++)
+for(i = 0; i < convert_enemies.size; i++) {
   convert_enemies[i].targetname = "burger_town_enemies";
+}
 convert_enemies = getEntArray("burger_town_enemies", "targetname");
 burger_town_include = getent("so_burger_town_enemy_include", "script_noteworthy");
 for(i = convert_enemies.size - 1; i >= 0; i--) {
-  if(!(convert_enemies[i] istouching(burger_town_include)))
+  if(!(convert_enemies[i] istouching(burger_town_include))) {
     convert_enemies[i].targetname = "ignoreme";
+  }
 }
 }
 
@@ -1432,17 +1523,20 @@ so_defense_set_enemy_spawner_flags() {
   convert_enemies = array_merge(convert_enemies, getEntArray("taco_enemies", "targetname"));
   convert_enemies = array_merge(convert_enemies, getEntArray("burger_town_enemies", "targetname"));
   foreach(guy in convert_enemies) {
-    if(isDefined(guy.script_goalvolume))
+    if(isDefined(guy.script_goalvolume)) {
       guy.script_goalvolume = undefined;
-    if(isDefined(guy.script_forcespawn))
+    }
+    if(isDefined(guy.script_forcespawn)) {
       guy.script_forcespawn = undefined;
+    }
   }
 }
 
 hud_get_wave_list(title_text) {
   list = [];
-  if(!isDefined(title_text))
+  if(!isDefined(title_text)) {
     return list;
+  }
 
   switch (title_text) {
     case "SO_DEFENSE_INVASION_WAVE_1":

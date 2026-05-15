@@ -34,14 +34,16 @@ init_mgTurretsettings() {
 }
 
 main() {
-  if(getDvar("mg42") == "")
+  if(getDvar("mg42") == "") {
     setDvar("mgTurret", "off");
+  }
 
   level.magic_distance = 24;
 
   turretInfos = getEntArray("turretInfo", "targetname");
-  for(index = 0; index < turretInfos.size; index++)
+  for(index = 0; index < turretInfos.size; index++) {
     turretInfos[index] delete();
+  }
 }
 
 portable_mg_behavior() {
@@ -52,8 +54,9 @@ portable_mg_behavior() {
   if(isDefined(self.target)) {
     node = getnode(self.target, "targetname");
     if(isDefined(node)) {
-      if(isDefined(node.radius))
+      if(isDefined(node.radius)) {
         self.goalradius = node.radius;
+      }
 
       self setgoalnode(node);
     }
@@ -123,11 +126,11 @@ mgTurret_auto(trigger) {
   }
 
   spawners = getspawnerarray();
-  for(i = 0; i < spawners.size; i++)
-    if((isDefined(spawners[i].script_mg42auto)) && (trigger.script_mg42auto == spawners[i].script_mg42auto)) {
-      spawners[i].ai_mode = "auto_ai";
-      println("^aspawner ", i, " set to auto");
-    }
+  for(i = 0; i < spawners.size; i++) {
+    if((isDefined(spawners[i].script_mg42auto)) && (trigger.script_mg42auto == spawners[i].script_mg42auto)) {}
+    spawners[i].ai_mode = "auto_ai";
+    println("^aspawner ", i, " set to auto");
+  }
 
   maps\_spawner::kill_trigger(trigger);
 }
@@ -135,8 +138,9 @@ mgTurret_auto(trigger) {
 mg42_suppressionFire(targets) {
   self endon("death");
   self endon("stop_suppressionFire");
-  if(!isDefined(self.suppresionFire))
+  if(!isDefined(self.suppresionFire)) {
     self.suppresionFire = true;
+  }
 
   for(;;) {
     while(self.suppresionFire) {
@@ -145,8 +149,9 @@ mg42_suppressionFire(targets) {
     }
 
     self cleartargetentity();
-    while(!self.suppresionFire)
+    while(!self.suppresionFire) {
       wait 1;
+    }
   }
 }
 
@@ -159,42 +164,47 @@ manual_think(mg42) {
 }
 
 burst_fire_settings(setting) {
-  if(setting == "delay")
+  if(setting == "delay") {
     return 0.2;
-  else
-  if(setting == "delay_range")
-    return 0.5;
-  else
-  if(setting == "burst")
-    return 0.5;
-  else
-
-    return 1.5;
+  } else {
+    if(setting == "delay_range") {
+      return 0.5;
+    }
+  } else {
+    if(setting == "burst") {
+      return 0.5;
+    }
+  } else {}
+  return 1.5;
 }
 
 burst_fire_unmanned() {
   self endon("death");
   self endon("stop_burst_fire_unmanned");
 
-  if(isDefined(self.script_delay_min))
+  if(isDefined(self.script_delay_min)) {
     mg42_delay = self.script_delay_min;
-  else
+  } else {
     mg42_delay = burst_fire_settings("delay");
+  }
 
-  if(isDefined(self.script_delay_max))
+  if(isDefined(self.script_delay_max)) {
     mg42_delay_range = self.script_delay_max - mg42_delay;
-  else
+  } else {
     mg42_delay_range = burst_fire_settings("delay_range");
+  }
 
-  if(isDefined(self.script_burst_min))
+  if(isDefined(self.script_burst_min)) {
     mg42_burst = self.script_burst_min;
-  else
+  } else {
     mg42_burst = burst_fire_settings("burst");
+  }
 
-  if(isDefined(self.script_burst_max))
+  if(isDefined(self.script_burst_max)) {
     mg42_burst_range = self.script_burst_max - mg42_burst;
-  else
+  } else {
     mg42_burst_range = burst_fire_settings("burst_range");
+  }
 
   pauseUntilTime = gettime();
   turretState = "start";
@@ -246,8 +256,9 @@ TurretTimer(duration) {
   self endon("turretstatechange");
 
   wait duration;
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("turretstatechange");
+  }
 }
 
 random_spread(ent) {
@@ -260,10 +271,11 @@ random_spread(ent) {
   self settargetentity(ent);
 
   while(1) {
-    if(isPlayer(ent))
+    if(isPlayer(ent)) {
       ent.origin = self.manual_target getorigin();
-    else
+    } else {
       ent.origin = self.manual_target.origin;
+    }
 
     ent.origin += (20 - randomfloat(40), 20 - randomfloat(40), 20 - randomfloat(60));
     wait(0.2);
@@ -290,31 +302,36 @@ burst_fire(mg42, manual_target) {
   mg42 endon("stopfiring");
   self endon("stop_using_built_in_burst_fire");
 
-  if(isDefined(mg42.script_delay_min))
+  if(isDefined(mg42.script_delay_min)) {
     mg42_delay = mg42.script_delay_min;
-  else
+  } else {
     mg42_delay = maps\_mgturret::burst_fire_settings("delay");
+  }
 
-  if(isDefined(mg42.script_delay_max))
+  if(isDefined(mg42.script_delay_max)) {
     mg42_delay_range = mg42.script_delay_max - mg42_delay;
-  else
+  } else {
     mg42_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
+  }
 
-  if(isDefined(mg42.script_burst_min))
+  if(isDefined(mg42.script_burst_min)) {
     mg42_burst = mg42.script_burst_min;
-  else
+  } else {
     mg42_burst = maps\_mgturret::burst_fire_settings("burst");
+  }
 
-  if(isDefined(mg42.script_burst_max))
+  if(isDefined(mg42.script_burst_max)) {
     mg42_burst_range = mg42.script_burst_max - mg42_burst;
-  else
+  } else {
     mg42_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
+  }
 
   while(1) {
     mg42 startfiring();
 
-    if(isDefined(manual_target))
+    if(isDefined(manual_target)) {
       mg42 thread random_spread(manual_target);
+    }
 
     wait(mg42_burst + randomfloat(mg42_burst_range));
 
@@ -325,8 +342,9 @@ burst_fire(mg42, manual_target) {
 }
 
 _spawner_mg42_think() {
-  if(!isDefined(self.flagged_for_use))
+  if(!isDefined(self.flagged_for_use)) {
     self.flagged_for_use = false;
+  }
 
   if(!isDefined(self.targetname)) {
     return;
@@ -338,8 +356,9 @@ _spawner_mg42_think() {
   if(!isDefined(node.script_mg42)) {
     return;
   }
-  if(!isDefined(node.mg42_enabled))
+  if(!isDefined(node.mg42_enabled)) {
     node.mg42_enabled = true;
+  }
 
   self.script_mg42 = node.script_mg42;
 
@@ -348,8 +367,9 @@ _spawner_mg42_think() {
     if(first_run) {
       first_run = false;
 
-      if((isDefined(node.targetname)) || (self.flagged_for_use))
+      if((isDefined(node.targetname)) || (self.flagged_for_use)) {
         self waittill("get new user");
+      }
     }
 
     if(!node.mg42_enabled) {
@@ -361,20 +381,24 @@ _spawner_mg42_think() {
     ai = getaiarray();
     for(i = 0; i < ai.size; i++) {
       excluded = true;
-      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42))
+      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42)) {
         excluded = false;
+      }
 
-      if(isDefined(ai[i].used_an_mg42))
+      if(isDefined(ai[i].used_an_mg42)) {
         excluded = true;
+      }
 
-      if(excluded)
+      if(excluded) {
         excluders[excluders.size] = ai[i];
+      }
     }
 
-    if(excluders.size)
+    if(excluders.size) {
       ai = maps\_utility::get_closest_ai_exclude(node.origin, undefined, excluders);
-    else
+    } else {
       ai = maps\_utility::get_closest_ai(node.origin, undefined);
+    }
     excluders = undefined;
 
     if(isDefined(ai)) {
@@ -387,8 +411,9 @@ _spawner_mg42_think() {
 }
 
 mg42_think() {
-  if(!isDefined(self.ai_mode))
+  if(!isDefined(self.ai_mode)) {
     self.ai_mode = "manual_ai";
+  }
 
   node = getnode(self.target, "targetname");
   if(!isDefined(node)) {
@@ -422,23 +447,27 @@ mg42_think() {
 
     mg42_gunner waittill("death");
 
-    if(isDefined(self.script_delay))
+    if(isDefined(self.script_delay)) {
       wait(self.script_delay);
-    else
-    if((isDefined(self.script_delay_min)) && (isDefined(self.script_delay_max)))
-      wait(self.script_delay_min + randomfloat(self.script_delay_max - self.script_delay_min));
-    else
+    } else {
+      if((isDefined(self.script_delay_min)) && (isDefined(self.script_delay_max))) {
+        wait(self.script_delay_min + randomfloat(self.script_delay_max - self.script_delay_min));
+      }
+    } else {
       wait(1);
+    }
   }
 }
 
 kill_objects(owner, msg, temp1, temp2) {
   owner waittill(msg);
-  if(isDefined(temp1))
+  if(isDefined(temp1)) {
     temp1 delete();
+  }
 
-  if(isDefined(temp2))
+  if(isDefined(temp2)) {
     temp2 delete();
+  }
 }
 
 mg42_gunner_think(mg42, trigger, ai_mode) {
@@ -462,25 +491,29 @@ mg42_gunner_think(mg42, trigger, ai_mode) {
 }
 
 player_safe() {
-  if(!isDefined(level.player_covertrigger))
+  if(!isDefined(level.player_covertrigger)) {
     return false;
+  }
 
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     return true;
+  }
 
-  if((level.player_covertype == "cow") && (level.player getstance() == "crouch"))
+  if((level.player_covertype == "cow") && (level.player getstance() == "crouch")) {
     return true;
+  }
 
   return false;
 }
 
 stance_num() {
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     return (0, 0, 5);
-  else
-  if(level.player getstance() == "crouch")
-    return (0, 0, 25);
-
+  } else {
+    if(level.player getstance() == "crouch") {
+      return (0, 0, 25);
+    }
+  }
   return (0, 0, 50);
 }
 
@@ -494,8 +527,9 @@ mg42_gunner_manual_think(mg42, trigger) {
   self waittill("goal");
 
   if(trigger) {
-    if(!level.mg42_trigger[mg42.target])
+    if(!level.mg42_trigger[mg42.target]) {
       level waittill(mg42.target);
+    }
   }
 
   self.pacifist = false;
@@ -506,8 +540,9 @@ mg42_gunner_manual_think(mg42, trigger) {
 
   tempmodel = spawn("script_model", (0, 0, 0));
   tempmodel.scale = 3;
-  if(getDvar("mg42") != "off")
+  if(getDvar("mg42") != "off") {
     tempmodel setModel("temp");
+  }
   tempmodel thread temp_think(mg42, targ_org);
   level thread kill_objects(self, "death", targ_org, tempmodel);
   level thread kill_objects(self, "auto_ai", targ_org, tempmodel);
@@ -553,8 +588,9 @@ mg42_gunner_manual_think(mg42, trigger) {
       for(i = 0; i < 1; i += dif) {
         targ_org.origin = vector_multiply(current_org, 1.0 - i) + vector_multiply(level.player getorigin() + stance_num(), i);
 
-        if(player_safe())
+        if(player_safe()) {
           i = 2;
+        }
 
         wait(wait_time);
       }
@@ -633,8 +669,9 @@ mg42_gunner_manual_think(mg42, trigger) {
         tempmodel.origin = (0, 0, 0);
       }
 
-      while(isDefined(level.player_covertrigger))
+      while(isDefined(level.player_covertrigger)) {
         wait(0.2);
+      }
 
       wait(.750 + randomfloat(.200));
     }
@@ -645,16 +682,18 @@ shoot_mg42_script_targets(targets) {
   self endon("death");
   while(1) {
     targ_filled = [];
-    for(i = 0; i < targets.size; i++)
+    for(i = 0; i < targets.size; i++) {
       targ_filled[i] = false;
+    }
 
     for(i = 0; i < targets.size; i++) {
       self.gun_targ = randomint(targets.size);
       self waittill("next_target");
       while(targ_filled[self.gun_targ]) {
         self.gun_targ++;
-        if(self.gun_targ >= targets.size)
+        if(self.gun_targ >= targets.size) {
           self.gun_targ = 0;
+        }
       }
 
       targ_filled[self.gun_targ] = true;
@@ -668,10 +707,11 @@ move_use_turret(mg42, aitype, target) {
   self waittill("goal");
   if(isDefined(aitype) && aitype == "auto_ai") {
     mg42 setmode("auto_ai");
-    if(isDefined(target))
+    if(isDefined(target)) {
       mg42 settargetentity(target);
-    else
+    } else {
       mg42 cleartargetentity();
+    }
   }
   self useturret(mg42);
 }
@@ -690,11 +730,13 @@ temp_think(mg42, targ) {
 turret_think(node) {
   turret = getent(node.auto_mg42_target, "targetname");
   mintime = 0.5;
-  if(isDefined(turret.script_turret_reuse_min))
+  if(isDefined(turret.script_turret_reuse_min)) {
     mintime = turret.script_turret_reuse_min;
+  }
   maxtime = 2;
-  if(isDefined(turret.script_turret_reuse_max))
+  if(isDefined(turret.script_turret_reuse_max)) {
     mintime = turret.script_turret_reuse_max;
+  }
   assert(maxtime >= mintime);
   for(;;) {
     turret waittill("turret_deactivate");
@@ -758,35 +800,43 @@ mg42_setdifficulty(mg42, difficulty) {
 }
 
 mg42_target_drones(nonai, team, fakeowner) {
-  if(!isDefined(fakeowner))
+  if(!isDefined(fakeowner)) {
     fakeowner = false;
+  }
   self endon("death");
   self.dronefailed = false;
-  if(!isDefined(self.script_fireondrones))
+  if(!isDefined(self.script_fireondrones)) {
     self.script_fireondrones = false;
-  if(!isDefined(nonai))
+  }
+  if(!isDefined(nonai)) {
     nonai = false;
+  }
   self setmode("manual_ai");
   difficulty = getdifficulty();
-  if(!isDefined(level.drones))
+  if(!isDefined(level.drones)) {
     waitfornewdrone = true;
-  else
+  } else {
     waitfornewdrone = false;
+  }
   while(1) {
     if(fakeowner && !isDefined(self.fakeowner)) {
       self setmode("manual");
-      while(!isDefined(self.fakeowner))
+      while(!isDefined(self.fakeowner)) {
         wait .2;
+      }
     } else if(nonai)
       self setmode("auto_nonai");
-    else
+    else {
       self setmode("auto_ai");
+    }
 
-    if(waitfornewdrone)
+    if(waitfornewdrone) {
       level waittill("new_drone");
+    }
 
-    if(!isDefined(self.oldconvergencetime))
+    if(!isDefined(self.oldconvergencetime)) {
       self.oldconvergencetime = self.convergencetime;
+    }
     self.convergencetime = 2;
 
     if(!nonai) {
@@ -804,10 +854,11 @@ mg42_target_drones(nonai, team, fakeowner) {
       assert(isDefined(team));
       turretowner = undefined;
     }
-    if(team == "allies")
+    if(team == "allies") {
       targetteam = "axis";
-    else
+    } else {
       targetteam = "allies";
+    }
 
     while(level.drones[targetteam].lastindex) {
       target = get_bestdrone(targetteam);
@@ -819,10 +870,11 @@ mg42_target_drones(nonai, team, fakeowner) {
         wait .2;
         break;
       }
-      if(nonai)
+      if(nonai) {
         self setmode("manual");
-      else
+      } else {
         self setmode("manual_ai");
+      }
 
       thread drone_fail(target, 3);
       if(!self.dronefailed) {
@@ -844,10 +896,11 @@ mg42_target_drones(nonai, team, fakeowner) {
     self.oldconvergencetime = undefined;
     self cleartargetentity();
     self stopfiring();
-    if(level.drones[targetteam].lastindex)
+    if(level.drones[targetteam].lastindex) {
       waitfornewdrone = false;
-    else
+    } else {
       waitfornewdrone = true;
+    }
   }
 }
 
@@ -875,8 +928,9 @@ drone_fail(drone, time) {
 }
 
 get_bestdrone(team) {
-  if(level.drones[team].lastindex < 1)
+  if(level.drones[team].lastindex < 1) {
     return;
+  }
   ent = undefined;
   dotforward = anglesToForward(self.angles);
   for(i = 0; i < level.drones[team].lastindex; i++) {
@@ -890,8 +944,9 @@ get_bestdrone(team) {
     break;
   }
   aitarget = self getturrettarget(true);
-  if(isDefined(ent) && isDefined(aitarget) && distance(self.origin, aitarget.origin) < distance(self.origin, ent.origin))
+  if(isDefined(ent) && isDefined(aitarget) && distance(self.origin, aitarget.origin) < distance(self.origin, ent.origin)) {
     ent = undefined;
+  }
 
   return ent;
 }
@@ -916,10 +971,12 @@ saw_mgTurretLink(nodes) {
   }
   for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
-    if(node.type == "Path")
+    if(node.type == "Path") {
       continue;
-    if(node.type == "Begin")
+    }
+    if(node.type == "Begin") {
       continue;
+    }
     if(node.type == "End") {
       continue;
     }
@@ -944,17 +1001,21 @@ saw_mgTurretLink(nodes) {
       node.turretInfo.topArc = 15;
       node.turretInfo.bottomArc = 15;
 
-      if(isDefined(turret.leftArc))
+      if(isDefined(turret.leftArc)) {
         node.turretInfo.leftArc = min(turret.leftArc, 45);
+      }
 
-      if(isDefined(turret.rightArc))
+      if(isDefined(turret.rightArc)) {
         node.turretInfo.rightArc = min(turret.rightArc, 45);
+      }
 
-      if(isDefined(turret.topArc))
+      if(isDefined(turret.topArc)) {
         node.turretInfo.topArc = min(turret.topArc, 15);
+      }
 
-      if(isDefined(turret.bottomArc))
+      if(isDefined(turret.bottomArc)) {
         node.turretInfo.bottomArc = min(turret.bottomArc, 15);
+      }
 
       turrets[index] = undefined;
       turret delete();
@@ -973,10 +1034,12 @@ auto_mgTurretLink(nodes) {
     if(!isDefined(possible_turrets[i].targetname) || tolower(possible_turrets[i].targetname) != "auto_mgturret") {
       continue;
     }
-    if(!isDefined(possible_turrets[i].export))
+    if(!isDefined(possible_turrets[i].export)) {
       continue;
-    if(!isDefined(possible_turrets[i].script_dont_link_turret))
+    }
+    if(!isDefined(possible_turrets[i].script_dont_link_turret)) {
       turrets[possible_turrets[i].origin + ""] = possible_turrets[i];
+    }
   }
 
   if(!turrets.size) {
@@ -984,10 +1047,12 @@ auto_mgTurretLink(nodes) {
   }
   for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
-    if(node.type == "Path")
+    if(node.type == "Path") {
       continue;
-    if(node.type == "Begin")
+    }
+    if(node.type == "Begin") {
       continue;
+    }
     if(node.type == "End") {
       continue;
     }
@@ -1088,8 +1153,9 @@ turretDeathDetacher() {
   self endon("kill_turret_detach_thread");
   self endon("dropped_gun");
   self waittill("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   dropTurret();
 }
 
@@ -1267,8 +1333,9 @@ run_to_new_spot_and_setup_gun(spot) {
 
   self notify("kill_get_gun_back_on_killanimscript_thread");
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
-  if(self isBadGuy())
+  if(self isBadGuy()) {
     self.health = 1;
+  }
 
   self.run_overrideanim = % saw_gunner_run_fast;
   self.crouchrun_combatanim = % saw_gunner_run_fast;
@@ -1292,11 +1359,13 @@ run_to_new_spot_and_setup_gun(spot) {
 
   self notify("kill_turret_detach_thread");
 
-  if(self isBadGuy())
+  if(self isBadGuy()) {
     self.health = oldhealth;
+  }
 
-  if(soundexists("weapon_setup"))
+  if(soundexists("weapon_setup")) {
     thread play_sound_in_space("weapon_setup");
+  }
 
   self animscripted("setup_done", spot.origin, spot.angles, setup_anim);
 
@@ -1325,8 +1394,9 @@ hold_indefintely() {
 }
 
 using_a_turret() {
-  if(!isDefined(self.turret))
+  if(!isDefined(self.turret)) {
     return false;
+  }
 
   return self.turret.owner == self;
 }
@@ -1352,8 +1422,9 @@ turret_user_moves() {
     for(i = 0; i < new_spots.size; i++) {
       turret_node = random(new_spots);
 
-      if(isDefined(taken_nodes[turret_node.origin + ""]))
+      if(isDefined(taken_nodes[turret_node.origin + ""])) {
         return;
+      }
     }
   }
 
@@ -1505,8 +1576,9 @@ portable_mg_spot() {
   self.isSetup = true;
   assert(!isDefined(self.reserved));
   self.reserved = undefined;
-  if(isDefined(self.isvehicleattached))
+  if(isDefined(self.isvehicleattached)) {
     return;
+  }
   if(self.spawnflags &turret_preplaced) {
     return;
   }
@@ -1538,14 +1610,16 @@ stop_mg_behavior_if_flanked() {
   self endon("stop_checking_for_flanking");
 
   self waittill("turret_deactivate");
-  if(isalive(self.owner))
+  if(isalive(self.owner)) {
     self.owner notify("end_mg_behavior");
+  }
 }
 
 turret_is_mine(turret) {
   owner = turret getTurretOwner();
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return false;
+  }
 
   return owner == self;
 }

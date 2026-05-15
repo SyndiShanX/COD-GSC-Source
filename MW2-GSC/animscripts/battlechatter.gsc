@@ -323,8 +323,9 @@ init_battleChatter() {
 
   anim.bcs_threatResetTime = 3000;
 
-  if(getDvar("debug_bcdrawobjects") == "on")
+  if(getDvar("debug_bcdrawobjects") == "on") {
     thread bcDrawObjects();
+  }
 
   anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
   anim.squadCreateStrings[anim.squadCreateStrings.size] = "::init_squadBattleChatter";
@@ -468,8 +469,9 @@ init_battleChatter() {
 
     anim thread lockAction(self, "threat");
 
-    if(getDvar("debug_bcinteraction") == "on")
+    if(getDvar("debug_bcinteraction") == "on") {
       animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
+    }
 
     success = false;
 
@@ -1108,8 +1110,9 @@ init_battleChatter() {
 
     anim thread lockAction(self, "response");
 
-    if(getDvar("debug_bcinteraction") == "on")
+    if(getDvar("debug_bcinteraction") == "on") {
       animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
+    }
 
     switch (self.chatQueue["response"].eventType) {
       case "exposed":
@@ -1236,8 +1239,9 @@ init_battleChatter() {
 
     chatPhrase = self createChatPhrase();
 
-    if(getDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
+    if(getDvar("debug_bcinteraction") == "on" && isDefined(orderTo)) {
       animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
+    }
 
     self tryOrderTo(chatPhrase, orderTo);
 
@@ -1331,8 +1335,9 @@ init_battleChatter() {
     self endon("removed from battleChatter");
 
     chatPhrase = self createChatPhrase();
-    if(modifier == "grenade")
+    if(modifier == "grenade") {
       chatPhrase.master = true;
+    }
 
     chatPhrase addInformAlias("incoming", modifier);
 
@@ -1382,8 +1387,9 @@ init_battleChatter() {
     }
 
     if(isDefined(level._stealth) && (self voice_is_british_based())) {
-      for(i = 0; i < chatPhrase.soundAliases.size; i++)
+      for(i = 0; i < chatPhrase.soundAliases.size; i++) {
         chatPhrase.soundAliases[i] = chatPhrase.soundAliases[i] + "_s";
+      }
     }
 
     if(self battleChatter_canPrint() || self battleChatter_canPrintDump()) {
@@ -1520,8 +1526,9 @@ init_battleChatter() {
     if(GetTime() - self.squadList[squadName].lastContact > 10000) {
       isInContact = false;
       for(i = 0; i < self.members.size; i++) {
-        if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName)
+        if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName) {
           isInContact = true;
+        }
       }
 
       if(!isInContact) {
@@ -1545,57 +1552,70 @@ init_battleChatter() {
       return false;
     }
 
-    if(!isDefined(self.battlechatter) || !self.battlechatter)
+    if(!isDefined(self.battlechatter) || !self.battlechatter) {
       return (false);
+    }
 
-    if(isDefined(priority) && priority >= 1)
+    if(isDefined(priority) && priority >= 1) {
       return (true);
+    }
 
-    if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction])
+    if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction]) {
       return (false);
+    }
 
-    if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction])
+    if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction]) {
       return (false);
+    }
 
-    if(isDefined(eventType) && typeLimited(eventAction, eventType))
+    if(isDefined(eventType) && typeLimited(eventAction, eventType)) {
       return (false);
+    }
 
-    if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority)
+    if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority) {
       return (false);
+    }
 
-    if(self voice_is_british_based())
+    if(self voice_is_british_based()) {
       return quietFilter(eventAction, eventType, modifier);
+    }
 
     return (true);
   }
 
   quietFilter(action, type, modifier) {
-    if(!isDefined(modifier))
+    if(!isDefined(modifier)) {
       modifier = "";
+    }
 
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       return false;
+    }
 
     switch (action) {
       case "order":
-        if(type == "action" && modifier == "coverme")
+        if(type == "action" && modifier == "coverme") {
           return true;
+        }
         break;
       case "threat":
-        if(type == "infantry" || type == "dog" || type == "rpg")
+        if(type == "infantry" || type == "dog" || type == "rpg") {
           return true;
+        }
         break;
       case "inform":
-        if(type == "attack" && modifier == "grenade")
+        if(type == "attack" && modifier == "grenade") {
           return true;
-        else if(type == "incoming" && modifier == "grenade")
+        } else if(type == "incoming" && modifier == "grenade") {
           return true;
-        else if(type == "reloading" && modifier == "generic")
+        } else if(type == "reloading" && modifier == "generic") {
           return true;
+        }
         break;
       case "reaction":
-        if(type == "casualty" && modifier == "generic")
+        if(type == "casualty" && modifier == "generic") {
           return true;
+        }
         break;
       default:
         return false;
@@ -1650,17 +1670,20 @@ init_battleChatter() {
     squad = self.squad;
     targettingAI = [];
     for(index = 0; index < squad.members.size; index++) {
-      if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat)
+      if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat) {
         targettingAI[targettingAI.size] = squad.members[index];
+      }
     }
 
-    if(!isDefined(targettingAI[0]))
+    if(!isDefined(targettingAI[0])) {
       return (undefined);
+    }
 
     targettingSpeaker = undefined;
     for(index = 0; index < targettingAI.size; index++) {
-      if(targettingAI[index] canSay("response"))
+      if(targettingAI[index] canSay("response")) {
         return (targettingSpeaker);
+      }
     }
     return (getClosest(self.origin, targettingAI));
   }
@@ -1695,10 +1718,11 @@ init_battleChatter() {
       } else if(eventState == " valid") {
         queueEventStates[i] = "y " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
       } else {
-        if(self.chatQueue[queueEvents[i]].expireTime == 0)
+        if(self.chatQueue[queueEvents[i]].expireTime == 0) {
           queueEventStates[i] = "b " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-        else
+        } else {
           queueEventStates[i] = "r " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+        }
       }
     }
 
@@ -1707,44 +1731,53 @@ init_battleChatter() {
 
   getEventState(strAction) {
     strState = "";
-    if(self.squad.isMemberSaying[strAction])
+    if(self.squad.isMemberSaying[strAction]) {
       strState += " playing";
-    if(GetTime() > self.chatQueue[strAction].expireTime)
+    }
+    if(GetTime() > self.chatQueue[strAction].expireTime) {
       strState += " expired";
-    if(GetTime() < self.squad.nextSayTimes[strAction])
+    }
+    if(GetTime() < self.squad.nextSayTimes[strAction]) {
       strState += " cantspeak";
+    }
 
-    if(strState == "")
+    if(strState == "") {
       strState = " valid";
+    }
 
     return (strState);
   }
 
   isFiltered(strAction) {
-    if(getDvar("bcs_filter" + strAction, "off") == "on" || getDvar("bcs_filter" + strAction, "off") == "1")
+    if(getDvar("bcs_filter" + strAction, "off") == "on" || getDvar("bcs_filter" + strAction, "off") == "1") {
       return (true);
+    }
 
     return (false);
   }
 
   isValidEvent(strAction) {
     if(!self.squad.isMemberSaying[strAction] && !anim.isTeamSaying[self.team][strAction] && GetTime() < self.chatQueue[strAction].expireTime && GetTime() > self.squad.nextSayTimes[strAction]) {
-      if(!typeLimited(strAction, self.chatQueue[strAction].eventType))
+      if(!typeLimited(strAction, self.chatQueue[strAction].eventType)) {
         return (true);
+      }
     }
 
     return (false);
   }
 
   typeLimited(strAction, strType) {
-    if(!isDefined(anim.eventTypeMinWait[strAction][strType]))
+    if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
       return (false);
+    }
 
-    if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType]))
+    if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType])) {
       return (false);
+    }
 
-    if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType])
+    if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType]) {
       return (false);
+    }
 
     return (true);
   }
@@ -1757,11 +1790,13 @@ init_battleChatter() {
   }
 
   bcIsSniper() {
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       return false;
+    }
 
-    if(self isExposed())
+    if(self isExposed()) {
       return false;
+    }
 
     return IsSniperRifle(self.weapon);
   }
@@ -1813,8 +1848,9 @@ init_battleChatter() {
   isOfficer() {
     fullRank = self getRank();
 
-    if(!isDefined(fullRank))
+    if(!isDefined(fullRank)) {
       return false;
+    }
 
     if(fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant") {
       return true;
@@ -1824,17 +1860,19 @@ init_battleChatter() {
   }
 
   bcGetClaimedNode() {
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       return self.node;
-    else
+    } else {
       return self GetClaimedNode();
+    }
   }
 
   enemy_team_name() {
-    if(self IsBadGuy())
+    if(self IsBadGuy()) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   getName() {
@@ -2029,14 +2067,15 @@ init_battleChatter() {
     angle += 360;
     angle = Int(angle) % 360;
 
-    if(angle > 315 || angle < 45)
+    if(angle > 315 || angle < 45) {
       direction = "front";
-    else if(angle < 135)
+    } else if(angle < 135) {
       direction = "right";
-    else if(angle < 225)
+    } else if(angle < 225) {
       direction = "rear";
-    else
+    } else {
       direction = "left";
+    }
 
     return (direction);
   }
@@ -2090,29 +2129,31 @@ init_battleChatter() {
     northYaw = GetNorthYaw();
     angle -= northYaw;
 
-    if(angle < 0)
+    if(angle < 0) {
       angle += 360;
-    else if(angle > 360)
+    } else if(angle > 360) {
       angle -= 360;
+    }
 
-    if(angle < 22.5 || angle > 337.5)
+    if(angle < 22.5 || angle > 337.5) {
       direction = "north";
-    else if(angle < 67.5)
+    } else if(angle < 67.5) {
       direction = "northwest";
-    else if(angle < 112.5)
+    } else if(angle < 112.5) {
       direction = "west";
-    else if(angle < 157.5)
+    } else if(angle < 157.5) {
       direction = "southwest";
-    else if(angle < 202.5)
+    } else if(angle < 202.5) {
       direction = "south";
-    else if(angle < 247.5)
+    } else if(angle < 247.5) {
       direction = "southeast";
-    else if(angle < 292.5)
+    } else if(angle < 292.5) {
       direction = "east";
-    else if(angle < 337.5)
+    } else if(angle < 337.5) {
       direction = "northeast";
-    else
+    } else {
       direction = "impossible";
+    }
 
     return (direction);
   }
@@ -2176,8 +2217,9 @@ getVectorRightAngle(vDir) {
 getVectorArrayAverage(avAngles) {
   vDominantDir = (0, 0, 0);
 
-  for(i = 0; i < avAngles.size; i++)
+  for(i = 0; i < avAngles.size; i++) {
     vDominantDir += avAngles[i];
+  }
 
   return (vDominantDir[0] / avAngles.size, vDominantDir[1] / avAngles.size, vDominantDir[2] / avAngles.size);
 }
@@ -2545,14 +2587,17 @@ addOrderAlias(type, modifier) {
 }
 
 initContact(squadName) {
-  if(!isDefined(self.squadList[squadName].calledOut))
+  if(!isDefined(self.squadList[squadName].calledOut)) {
     self.squadList[squadName].calledOut = false;
+  }
 
-  if(!isDefined(self.squadList[squadName].firstContact))
+  if(!isDefined(self.squadList[squadName].firstContact)) {
     self.squadList[squadName].firstContact = 2000000000;
+  }
 
-  if(!isDefined(self.squadList[squadName].lastContact))
+  if(!isDefined(self.squadList[squadName].lastContact)) {
     self.squadList[squadName].lastContact = 0;
+  }
 }
 
 shutdownContact(squadName) {
@@ -2567,10 +2612,11 @@ createChatEvent(eventAction, eventType, priority) {
   chatEvent.eventType = eventType;
   chatEvent.eventAction = eventAction;
 
-  if(isDefined(priority))
+  if(isDefined(priority)) {
     chatEvent.priority = priority;
-  else
+  } else {
     chatEvent.priority = anim.eventPriority[eventAction][eventType];
+  }
 
   chatEvent.expireTime = GetTime() + anim.eventDuration[eventAction][eventType];
 
@@ -2814,8 +2860,9 @@ playFlavorBurstLine(burster, alias) {
 
   soundOrg Delete();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("burst_line_done");
+  }
 }
 
 flavorBurstLineDebug(burster, alias) {
@@ -2828,8 +2875,9 @@ flavorBurstLineDebug(burster, alias) {
 }
 
 battleChatter_canPrint() {
-  if(GetDebugDvar("debug_bcprint") == self.team || GetDebugDvar("debug_bcprint") == "all")
+  if(GetDebugDvar("debug_bcprint") == self.team || GetDebugDvar("debug_bcprint") == "all") {
     return (true);
+  }
 
   return (false);
 }
@@ -3019,10 +3067,11 @@ resetNextSayTimes(team, action) {
 
 voice_is_british_based() {
   self endon("death");
-  if(self.voice == "british" || self.voice == "spanish" || self.voice == "italian" || self.voice == "german")
+  if(self.voice == "british" || self.voice == "spanish" || self.voice == "italian" || self.voice == "german") {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 friendlyfire_warning() {

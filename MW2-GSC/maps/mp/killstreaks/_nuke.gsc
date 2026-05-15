@@ -38,11 +38,13 @@ tryUseNuke(lifeId, allowCancel) {
     return false;
   }
 
-  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw))
+  if(self isUsingRemote() && (!isDefined(level.gtnw) || !level.gtnw)) {
     return false;
+  }
 
-  if(!isDefined(allowCancel))
+  if(!isDefined(allowCancel)) {
     allowCancel = true;
+  }
 
   self thread doNuke(allowCancel);
   self notify("used_nuke");
@@ -75,8 +77,9 @@ doNuke(allowCancel) {
   if(level.teambased) {
     thread teamPlayerCardSplash("used_nuke", self, self.team);
   } else {
-    if(!level.hardcoreMode)
+    if(!level.hardcoreMode) {
       self iprintlnbold(&"MP_FRIENDLY_TACTICAL_NUKE");
+    }
   }
 
   level thread delaythread_nuke((level.nukeTimer - 3.3), ::nukeSoundIncoming);
@@ -88,8 +91,9 @@ doNuke(allowCancel) {
   level thread delaythread_nuke((level.nukeTimer + 1.5), ::nukeEarthquake);
   level thread nukeAftermathEffect();
 
-  if(level.cancelMode && allowCancel)
+  if(level.cancelMode && allowCancel) {
     level thread cancelNukeOnDeath(self);
+  }
 
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
@@ -103,8 +107,9 @@ doNuke(allowCancel) {
 cancelNukeOnDeath(player) {
   player waittill_any("death", "disconnect");
 
-  if(isDefined(player) && level.cancelMode == 2)
+  if(isDefined(player) && level.cancelMode == 2) {
     player thread maps\mp\killstreaks\_emp::EMP_Use(0, 0);
+  }
 
   maps\mp\gametypes\_gamelogic::resumeTimer();
   level.timeLimitOverride = false;
@@ -117,8 +122,9 @@ cancelNukeOnDeath(player) {
 nukeSoundIncoming() {
   level endon("nuke_cancelled");
 
-  foreach(player in level.players)
-  player playlocalsound("nuke_incoming");
+  foreach(player in level.players) {
+    player playlocalsound("nuke_incoming");
+  }
 }
 
 nukeSoundExplosion() {
@@ -214,21 +220,23 @@ nukeDeath() {
   AmbientStop(1);
 
   foreach(player in level.players) {
-    if(isAlive(player))
+    if(isAlive(player)) {
       player thread maps\mp\gametypes\_damage::finishPlayerDamageWrapper(level.nukeInfo.player, level.nukeInfo.player, 999999, 0, "MOD_EXPLOSIVE", "nuke_mp", player.origin, player.origin, "none", 0, 0);
+    }
   }
 
   level.postRoundTime = 10;
 
   nukeEndsGame = true;
 
-  if(level.teamBased)
+  if(level.teamBased) {
     thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.team, game["strings"]["nuclear_strike"], true);
-  else {
-    if(isDefined(level.nukeInfo.player))
+  } else {
+    if(isDefined(level.nukeInfo.player)) {
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.player, game["strings"]["nuclear_strike"], true);
-    else
+    } else {
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo, game["strings"]["nuclear_strike"], true);
+    }
   }
 }
 

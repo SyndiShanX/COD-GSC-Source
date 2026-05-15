@@ -53,15 +53,17 @@ thundergun_fx_power_cell(localclientnum) {
   for(;;) {
     waitrealtime(0.1);
 
-    while(!clienthassnapshot(0))
+    while(!clienthassnapshot(0)) {
       wait 0.05;
+    }
 
     weaponname = undefined;
     currentweapon = getcurrentweapon(localclientnum);
 
     if(!level.thundergun_play_fx_power_cell[localclientnum] || isthrowinggrenade(localclientnum) || ismeleeing(localclientnum) || isonturret(localclientnum) || currentweapon != "thundergun_zm" && currentweapon != "thundergun_upgraded_zm") {
-      if(oldammo != -1)
+      if(oldammo != -1) {
         thundergun_play_power_cell_fx(localclientnum, 0);
+      }
 
       oldammo = -1;
       oldcount = -1;
@@ -70,16 +72,19 @@ thundergun_fx_power_cell(localclientnum) {
 
     ammo = getweaponammoclip(localclientnum, currentweapon);
 
-    if(oldammo > 0 && oldammo != ammo)
+    if(oldammo > 0 && oldammo != ammo) {
       thundergun_fx_fire(localclientnum);
+    }
 
     oldammo = ammo;
 
-    if(ammo > level.thundergun_power_cell_fx_handles.size)
+    if(ammo > level.thundergun_power_cell_fx_handles.size) {
       ammo = level.thundergun_power_cell_fx_handles.size;
+    }
 
-    if(oldcount == -1 || oldcount != ammo)
+    if(oldcount == -1 || oldcount != ammo) {
       level thread thundergun_play_power_cell_fx(localclientnum, ammo);
+    }
 
     oldcount = ammo;
   }
@@ -111,8 +116,9 @@ thundergun_play_power_cell_fx(localclientnum, count) {
     for(i = count; i > 0; i--) {
       fx = level._effect["thundergun_viewmodel_power_cell" + i];
 
-      if(currentweapon == "thundergun_upgraded_zm")
+      if(currentweapon == "thundergun_upgraded_zm") {
         fx = level._effect["thundergun_viewmodel_power_cell_upgraded" + i];
+      }
 
       level.thundergun_power_cell_fx_handles[i - 1] = playviewmodelfx(localclientnum, fx, "tag_bulb" + i);
     }
@@ -125,11 +131,13 @@ thundergun_fx_fire(localclientnum) {
   currentweapon = getcurrentweapon(localclientnum);
   fx = level._effect["thundergun_viewmodel_steam"];
 
-  if(currentweapon == "thundergun_upgraded_zm")
+  if(currentweapon == "thundergun_upgraded_zm") {
     fx = level._effect["thundergun_viewmodel_steam_upgraded"];
+  }
 
-  for(i = level.thundergun_steam_vents; i > 0; i--)
+  for(i = level.thundergun_steam_vents; i > 0; i--) {
     playviewmodelfx(localclientnum, fx, "tag_steam" + i);
+  }
 
   playSound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
 }

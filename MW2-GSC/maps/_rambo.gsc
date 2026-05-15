@@ -11,8 +11,9 @@ main() {
   if(isDefined(anim.ramboAnims)) {
     return;
   }
-  if(!isDefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions)) {
     level.subclass_spawn_functions = [];
+  }
   level.subclass_spawn_functions["militia"] = ::enable_militia_behavior;
 
   anim.ramboAnims = spawnStruct();
@@ -50,8 +51,9 @@ enable_militia_behavior() {
   self.neverEnableCQB = true;
   self.maxfaceenemydist = 256;
 
-  if(animscripts\combat_utility::isLongRangeAI())
+  if(animscripts\combat_utility::isLongRangeAI()) {
     return;
+  }
   if(isShotgun(self.weapon)) {
     return;
   }

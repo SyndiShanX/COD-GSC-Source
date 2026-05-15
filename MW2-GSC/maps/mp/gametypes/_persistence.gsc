@@ -133,17 +133,20 @@ updateBufferedStats() {
   nextToUpdate = 0;
   while(!level.gameEnded) {
     nextToUpdate++;
-    if(nextToUpdate >= level.players.size)
+    if(nextToUpdate >= level.players.size) {
       nextToUpdate = 0;
+    }
 
-    if(isDefined(level.players[nextToUpdate]))
+    if(isDefined(level.players[nextToUpdate])) {
       level.players[nextToUpdate] writeBufferedStats();
+    }
 
     wait(2.0);
   }
 
-  foreach(player in level.players)
-  player writeBufferedStats();
+  foreach(player in level.players) {
+    player writeBufferedStats();
+  }
 }
 
 writeBufferedStats() {
@@ -152,7 +155,8 @@ writeBufferedStats() {
   }
 
   foreach(statName, statVal in self.bufferedChildStats) {
-    foreach(childStatName, childStatVal in statVal)
-    self setPlayerData(statName, childStatName, childStatVal);
+    foreach(childStatName, childStatVal in statVal) {
+      self setPlayerData(statName, childStatName, childStatVal);
+    }
   }
 }

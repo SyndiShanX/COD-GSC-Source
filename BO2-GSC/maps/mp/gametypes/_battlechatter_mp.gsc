@@ -142,8 +142,9 @@ onjoinedteam() {
 onjoinedspectators() {
   self endon("disconnect");
 
-  for(;;)
+  for(;;) {
     self waittill("joined_spectators");
+  }
 }
 
 onplayerspawned() {
@@ -192,8 +193,9 @@ breathinghurtvox() {
     if(randomintrange(0, 100) >= level.bcmp_breathing_probability) {
       wait 0.5;
 
-      if(isalive(self))
+      if(isalive(self)) {
         level thread mpsaylocalsound(self, "breathing", "hurt", 0, 1);
+      }
     }
 
     wait(level.bcmp_breathing_delay);
@@ -210,8 +212,9 @@ onfirescream() {
     if(randomintrange(0, 100) >= level.bcmp_breathing_probability) {
       wait 0.5;
 
-      if(isalive(self))
+      if(isalive(self)) {
         level thread mpsaylocalsound(self, "fire", "scream");
+      }
     }
 
     wait(level.bcmp_breathing_delay);
@@ -226,8 +229,9 @@ breathingbettervox() {
   for(;;) {
     self waittill("snd_breathing_better");
 
-    if(isalive(self))
+    if(isalive(self)) {
       level thread mpsaylocalsound(self, "breathing", "better", 0, 1);
+    }
   }
 }
 
@@ -239,8 +243,9 @@ laststandvox() {
   for(;;) {
     self waittill("weapon_fired");
 
-    if(isalive(self))
+    if(isalive(self)) {
       level thread mpsaylocalsound(self, "perk", "laststand");
+    }
 
     wait(level.bclaststanddelay);
   }
@@ -253,8 +258,9 @@ allyrevive() {
   for(;;) {
     self waittill("snd_ally_revive");
 
-    if(isalive(self))
+    if(isalive(self)) {
       level thread mpsaylocalsound(self, "inform_attack", "revive");
+    }
 
     wait(level.bclaststanddelay);
   }
@@ -296,11 +302,13 @@ stickygrenadetracking() {
   for(;;) {
     self waittill("grenade_stuck", grenade);
 
-    if(isDefined(grenade))
+    if(isDefined(grenade)) {
       grenade.stucktoplayer = self;
+    }
 
-    if(isalive(self))
+    if(isalive(self)) {
       level thread mpsaylocalsound(self, "grenade_incoming", "sticky");
+    }
 
     self notify("sticky_explode");
   }
@@ -325,8 +333,9 @@ onplayersuicideorteamkill(player, type) {
       if(isDefined(index)) {
         wait 1.0;
 
-        if(isalive(level.aliveplayers[myteam][index]))
+        if(isalive(level.aliveplayers[myteam][index])) {
           level thread mpsaylocalsound(level.aliveplayers[myteam][index], "teammate", type);
+        }
       }
     }
   }
@@ -351,8 +360,9 @@ shoeboxtracking() {
     self waittill("begin_firing");
     weaponname = self getcurrentweapon();
 
-    if(weaponname == "mine_shoebox_mp")
+    if(weaponname == "mine_shoebox_mp") {
       level thread mpsaylocalsound(self, "satchel_plant", "shoebox");
+    }
   }
 }
 
@@ -380,8 +390,9 @@ reloadtracking() {
       weaponname = self getcurrentweapon();
       weaponshouldreload = checkweaponreload(weaponname);
 
-      if(weaponshouldreload)
+      if(weaponshouldreload) {
         level thread mpsaylocalsound(self, "reload", "gen");
+      }
     }
   }
 }
@@ -476,8 +487,9 @@ killedbysniper(sniper) {
     victimteam = self.team;
     index = checkdistancetoevent(victim, 1000000);
 
-    if(isDefined(index))
+    if(isDefined(index)) {
       level thread mpsaylocalsound(level.aliveplayers[victimteam][index], "enemy", "sniper", 0);
+    }
   }
 }
 
@@ -504,8 +516,9 @@ playerkilled(attacker) {
     area = 1000000;
 
     if(isDefined(closest_ally)) {
-      if(distancesquared(closest_ally.origin, self.origin) < area)
+      if(distancesquared(closest_ally.origin, self.origin) < area) {
         level thread mpsaylocalsound(closest_ally, "inform_attack", "revive", 0);
+      }
     }
   }
 }
@@ -518,107 +531,122 @@ grenadetracking() {
     self waittill("grenade_fire", grenade, weaponname);
 
     if(weaponname == "frag_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "grenade");
+      }
 
       level thread incominggrenadetracking(self, grenade, "grenade");
       continue;
     }
 
     if(weaponname == "satchel_charge_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "c4");
+      }
 
       continue;
     }
 
     if(weaponname == "emp_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "emp");
+      }
 
       continue;
     }
 
     if(weaponname == "claymore_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "claymore");
+      }
 
       continue;
     }
 
     if(weaponname == "flash_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "flash");
+      }
 
       continue;
     }
 
     if(weaponname == "sticky_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "sticky");
+      }
 
       continue;
     }
 
     if(weaponname == "tabun_gas_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "gas");
+      }
 
       continue;
     }
 
     if(weaponname == "willy_pete_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "smoke");
+      }
 
       continue;
     }
 
     if(weaponname == "hatchet_mp" || weaponname == "proximity_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "hatchet");
+      }
 
       continue;
     }
 
     if(weaponname == "concussion_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "concussion");
+      }
 
       continue;
     }
 
     if(weaponname == "scrambler_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "scrambler");
+      }
 
       continue;
     }
 
     if(weaponname == "tactical_insertion_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "tactical");
+      }
 
       continue;
     }
 
     if(weaponname == "bouncingbetty_mp") {
-      if(randomintrange(0, 100) >= level.bctosstrophyprobability)
+      if(randomintrange(0, 100) >= level.bctosstrophyprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "c4");
+      }
 
       continue;
     }
 
     if(weaponname == "sensor_grenade_mp") {
-      if(randomintrange(0, 100) >= level.bctossgrenadeprobability)
+      if(randomintrange(0, 100) >= level.bctossgrenadeprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "hatchet");
+      }
 
       continue;
     }
 
     if(weaponname == "trophy_system_mp") {
-      if(randomintrange(0, 100) >= level.bctosstrophyprobability)
+      if(randomintrange(0, 100) >= level.bctosstrophyprobability) {
         level thread mpsaylocalsound(self, "inform_attack", "scrambler");
+      }
     }
   }
 }
@@ -642,8 +670,9 @@ watchmissileusage() {
 
 incominggrenadetracking(thrower, grenade, type, waittime) {
   if(randomintrange(0, 100) >= level.bcincominggrenadeprobability) {
-    if(!isDefined(waittime))
+    if(!isDefined(waittime)) {
       waittime = 1.0;
+    }
 
     wait(waittime);
 
@@ -658,8 +687,9 @@ incominggrenadetracking(thrower, grenade, type, waittime) {
     if(level.players.size) {
       player = checkdistancetoobject(250000, grenade, enemyteam, thrower);
 
-      if(isDefined(player))
+      if(isDefined(player)) {
         level thread mpsaylocalsound(player, "grenade_incoming", type);
+      }
     }
   }
 }
@@ -723,8 +753,9 @@ saykillbattlechatter(attacker, sweapon, victim) {
     level thread saylocalsounddelayed(attacker, "kill", "sniper", 0.75);
     victim.issniperspotted = 0;
   } else if(isDefined(level.bckillinformprobability) && randomintrange(0, 100) >= level.bckillinformprobability) {
-    if(!maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sweapon))
+    if(!maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sweapon)) {
       level thread saylocalsounddelayed(attacker, "kill", "infantry", 0.75);
+    }
   }
 }
 
@@ -746,8 +777,9 @@ saylocalsound(player, soundtype) {
   if(isspeakerinrange(player)) {
     return;
   }
-  if(player.team != "spectator")
+  if(player.team != "spectator") {
     soundalias = level.teamprefix[player.team] + player.bcvoicenumber + "_" + level.bcsounds[soundtype];
+  }
 }
 
 mpsaylocalsound(player, partone, parttwo, checkspeakers, is2d) {
@@ -758,8 +790,9 @@ mpsaylocalsound(player, partone, parttwo, checkspeakers, is2d) {
     return;
   }
   if(!isDefined(checkspeakers)) {
-    if(isspeakerinrange(player))
+    if(isspeakerinrange(player)) {
       return;
+    }
   }
 
   if(player hasperk("specialty_quieter")) {
@@ -768,10 +801,11 @@ mpsaylocalsound(player, partone, parttwo, checkspeakers, is2d) {
   if(player.team != "spectator") {
     soundalias = level.teamprefix[player.team] + player.bcvoicenumber + "_" + level.bcsounds[partone] + "_" + parttwo;
 
-    if(isDefined(is2d))
+    if(isDefined(is2d)) {
       player thread dosound(soundalias, is2d);
-    else
+    } else {
       player thread dosound(soundalias);
+    }
   }
 }
 
@@ -796,10 +830,11 @@ dosound(soundalias, is2d) {
   team = self.team;
   level addspeaker(self, team);
 
-  if(isDefined(is2d))
+  if(isDefined(is2d)) {
     self playlocalsound(soundalias);
-  else if(level.allowbattlechatter && level.teambased)
+  } else if(level.allowbattlechatter && level.teambased) {
     self playsoundontag(soundalias, "J_Head");
+  }
 
   self thread waitplaybacktime(soundalias);
   self waittill_any(soundalias, "death", "disconnect");
@@ -810,8 +845,9 @@ dolocationalsound(soundalias1, soundalias2) {
   team = self.team;
   level addspeaker(self, team);
 
-  if(level.allowbattlechatter && level.teambased)
+  if(level.allowbattlechatter && level.teambased) {
     self playbattlechattertoteam(soundalias1, soundalias2, team, self);
+  }
 
   self thread waitplaybacktime(soundalias1);
   self waittill_any(soundalias1, "death", "disconnect");
@@ -841,11 +877,13 @@ isspeakerinrange(player) {
     for(index = 0; index < level.speakers[player.team].size; index++) {
       teammate = level.speakers[player.team][index];
 
-      if(teammate == player)
+      if(teammate == player) {
         return true;
+      }
 
-      if(distancesquared(teammate.origin, player.origin) < distsq)
+      if(distancesquared(teammate.origin, player.origin) < distsq) {
         return true;
+      }
     }
   }
 
@@ -873,16 +911,18 @@ getlandmark() {
   landmarks = level.landmarks;
 
   for(i = 0; i < landmarks.size; i++) {
-    if(self istouching(landmarks[i]) && isDefined(landmarks[i].script_landmark))
+    if(self istouching(landmarks[i]) && isDefined(landmarks[i].script_landmark)) {
       return landmarks[i];
+    }
   }
 
   return undefined;
 }
 
 checkdistancetoevent(player, area) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return undefined;
+  }
 
   for(index = 0; index < level.aliveplayers[player.team].size; index++) {
     teammate = level.aliveplayers[player.team][index];
@@ -893,20 +933,23 @@ checkdistancetoevent(player, area) {
     if(teammate == player) {
       continue;
     }
-    if(distancesquared(teammate.origin, player.origin) < area)
+    if(distancesquared(teammate.origin, player.origin) < area) {
       return index;
+    }
   }
 }
 
 checkdistancetoenemy(enemy, area, team) {
-  if(!isDefined(enemy))
+  if(!isDefined(enemy)) {
     return undefined;
+  }
 
   for(index = 0; index < level.aliveplayers[team].size; index++) {
     player = level.aliveplayers[team][index];
 
-    if(distancesquared(enemy.origin, player.origin) < area)
+    if(distancesquared(enemy.origin, player.origin) < area) {
       return index;
+    }
   }
 }
 
@@ -919,8 +962,9 @@ checkdistancetoobject(area, object, ignoreteam, ignoreent) {
         if(isDefined(ignoreent) && player == ignoreent) {
           continue;
         }
-        if(isDefined(object) && distancesquared(player.origin, object.origin) < area)
+        if(isDefined(object) && distancesquared(player.origin, object.origin) < area) {
           return player;
+        }
       }
     }
   } else {
@@ -931,8 +975,9 @@ checkdistancetoobject(area, object, ignoreteam, ignoreent) {
         continue;
       }
       if(isalive(player)) {
-        if(isDefined(object) && distancesquared(player.origin, object.origin) < area)
+        if(isDefined(object) && distancesquared(player.origin, object.origin) < area) {
           return player;
+        }
       }
     }
   }
@@ -962,8 +1007,9 @@ get_closest_player_enemy() {
 }
 
 get_closest_player_ally() {
-  if(!level.teambased)
+  if(!level.teambased) {
     return undefined;
+  }
 
   players = getplayers(self.team);
   players = arraysort(players, self.origin);

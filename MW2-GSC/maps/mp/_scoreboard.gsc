@@ -7,41 +7,46 @@
 #include common_scripts\utility;
 
 processLobbyScoreboards() {
-  foreach(player in level.placement["all"])
-  player setPlayerScoreboardInfo();
+  foreach(player in level.placement["all"]) {
+    player setPlayerScoreboardInfo();
+  }
 
   if(level.teamBased) {
     alliesScore = getTeamScore("allies");
     axisScore = getTeamScore("axis");
 
-    if(alliesScore == axisScore)
+    if(alliesScore == axisScore) {
       winner = "tied";
-    else if(alliesScore > axisScore)
+    } else if(alliesScore > axisScore) {
       winner = "allies";
-    else
+    } else {
       winner = "axis";
+    }
 
     if(winner == "tied") {
       buildScoreboardType("allies");
       buildScoreboardType("axis");
 
       foreach(player in level.players) {
-        if(player.pers["team"] == "spectator")
+        if(player.pers["team"] == "spectator") {
           player setPlayerData("round", "scoreboardType", "allies");
-        else
+        } else {
           player setPlayerData("round", "scoreboardType", player.pers["team"]);
+        }
       }
     } else {
       buildScoreboardType(winner);
 
-      foreach(player in level.players)
-      player setPlayerData("round", "scoreboardType", winner);
+      foreach(player in level.players) {
+        player setPlayerData("round", "scoreboardType", winner);
+      }
     }
   } else {
     buildScoreboardType("neutral");
 
-    foreach(player in level.players)
-    player setPlayerData("round", "scoreboardType", "neutral");
+    foreach(player in level.players) {
+      player setPlayerData("round", "scoreboardType", "neutral");
+    }
   }
 
   foreach(player in level.players) {

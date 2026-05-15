@@ -49,8 +49,9 @@ similar_deaths(var_0, var_1) {
   maps\_anim::note_track_start_sound("start", "apache_helicopter_spin", 1, "tag_apache_rotor_main_lod0");
   maps\_anim::note_track_start_fx_on_tag("start", "tag_fx_expl_missile", "vfx/gameplay/explosions/vehicle/heli/vfx_exp_heli_pr_apa");
 
-  if(animhasnotetrack(var_0, "apache_explode_fuel"))
+  if(animhasnotetrack(var_0, "apache_explode_fuel")) {
     maps\_anim::note_track_start_fx_on_tag("apache_explode_fuel", "tag_fx_expl_fuel", "vfx/gameplay/explosions/vehicle/heli/vfx_exp_heli_secondary");
+  }
 
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_apache_body_lod0", "vfx/gameplay/vehicles/apache/apache_body_1s", "vfx/gameplay/vehicles/apache/apache_body_1s");
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_apache_bodypiece01_lod0", "vfx/gameplay/vehicles/apache/apache_bodypiece01_1s", "vfx/gameplay/vehicles/apache/apache_bodypiece01_1s");

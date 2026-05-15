@@ -364,10 +364,9 @@ artfxprintlnfog() {
 
     if(isusinghdr()) {
       common_scripts\utility:: fileprint_launcher( "\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog_hdr::main;" );
+    } else {
+      common_scripts\utility:: fileprint_launcher( "\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;" );
     }
-  else {
-    common_scripts\utility:: fileprint_launcher( "\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;" );
-  }
 
   common_scripts\utility:: fileprint_launcher( "\t$/" );
 }

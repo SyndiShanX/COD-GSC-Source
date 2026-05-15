@@ -12,8 +12,9 @@ businit() {
 }
 
 setbusstate(state) {
-  if(level.busstate != state)
+  if(level.busstate != state) {
     setclientsysstate("busCmd", state);
+  }
 
   level.busstate = state;
 }

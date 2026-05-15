@@ -117,19 +117,22 @@ doStrike(lifeId, streakName) {
 startStrafeSequence(streakName, lifeId) {
   self setUsingRemote(KS_NAME);
 
-  if(GetDvarInt("camera_thirdPerson"))
+  if(GetDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self.restoreAngles = self.angles;
 
   self freezeControlsWrapper(true);
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak(KS_NAME);
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
-    if(isDefined(self.disabledWeapon) && self.disabledWeapon)
+    if(isDefined(self.disabledWeapon) && self.disabledWeapon) {
       self _enableWeapon();
+    }
     self notify("death");
 
     return false;
@@ -183,8 +186,9 @@ switchAircraft(plane, streakName) {
 
 spawnAircraft(streakName, lifeId, splineId) {
   plane = createPlaneAsHeli(streakName, lifeId, splineId);
-  if(!isDefined(plane))
+  if(!isDefined(plane)) {
     return undefined;
+  }
 
   plane.streakName = streakName;
 
@@ -293,8 +297,9 @@ createPlaneAsHeli(streakName, lifeId, splineId) {
   startAngles = VectorToAngles(startTangent);
 
   plane = SpawnHelicopter(self, startPos, startAngles, config.vehicle, config.modelNames[self.team]);
-  if(!isDefined(plane))
+  if(!isDefined(plane)) {
     return undefined;
+  }
 
   plane MakeVehicleSolidCapsule(18, -9, 18);
 

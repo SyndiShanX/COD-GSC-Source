@@ -548,7 +548,7 @@ activate_individual_exploder_proc() {
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
   } else {
-    if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
+    if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {}
   }
   self thread sound_effect();
 
@@ -571,7 +571,7 @@ activate_individual_exploder_proc() {
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
   } else {
-    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
+    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible")) {}
   }
   self thread brush_throw();
   else {
@@ -594,7 +594,7 @@ brush_delete() {
   Assert(isDefined(self.model));
 
   if(isDefined(self.model.classname)) {
-    if(isSP() && (self.model.spawnflags & 1))
+    if(isSP() && (self.model.spawnflags & 1)) {}
   }
   self.model call[[level.connectPathsFunction]]();
 

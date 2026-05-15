@@ -4,8 +4,9 @@
 ********************************************************/
 
 CodeCallback_StartGameType() {
-  if(getDvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
     [[level.callbackStartGameType]]();
@@ -15,8 +16,9 @@ CodeCallback_StartGameType() {
 }
 
 CodeCallback_PlayerConnect() {
-  if(getDvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   self endon("disconnect");
   [[level.callbackPlayerConnect]]();
@@ -38,10 +40,11 @@ CodeCallback_PlayerKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon
 }
 
 CodeCallback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if(isDefined(self.damageCallback))
+  if(isDefined(self.damageCallback)) {
     self[[self.damageCallback]](inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
-  else
+  } else {
     self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
+  }
 }
 
 CodeCallback_CodeEndGame() {

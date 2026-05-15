@@ -14,6 +14,7 @@ planemortar_contrail(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   self endon("death");
   self endon("entityshutdown");
 
-  if(newval)
+  if(newval) {
     self.fx = playFXOnTag(localclientnum, level.planemortarexhaustfx, self, "tag_origin");
+  }
 }

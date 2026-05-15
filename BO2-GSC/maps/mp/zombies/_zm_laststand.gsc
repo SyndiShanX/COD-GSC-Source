@@ -47,17 +47,19 @@ init() {
   level.primaryprogressbarwidth = 120;
   level.primaryprogressbary_ss = 280;
 
-  if(getDvar(#"_id_A17166B0") == "")
+  if(getDvar(#"_id_A17166B0") == "") {
     setDvar("revive_trigger_radius", "40");
+  }
 
   level.laststandgetupallowed = 0;
 }
 
 player_is_in_laststand() {
-  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger))
+  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
     return isDefined(self.revivetrigger);
-  else
+  } else {
     return isDefined(self.laststand) && self.laststand;
+  }
 }
 
 player_num_in_laststand() {
@@ -65,8 +67,9 @@ player_num_in_laststand() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i] player_is_in_laststand())
+    if(players[i] player_is_in_laststand()) {
       num++;
+    }
   }
 
   return num;
@@ -82,14 +85,16 @@ player_any_player_in_laststand() {
 
 player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
-    if("zcleansed" == level.gametype)
+    if("zcleansed" == level.gametype) {
       maps\mp\_demo::bookmark("kill", gettime(), self, attacker, 0, einflictor);
+    }
 
     if("zcleansed" == level.gametype) {
-      if(isDefined(attacker.is_zombie) && !attacker.is_zombie)
+      if(isDefined(attacker.is_zombie) && !attacker.is_zombie) {
         attacker.kills++;
-      else
+      } else {
         attacker.downs++;
+      }
     } else
       attacker.kills++;
 
@@ -99,8 +104,9 @@ player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, v
     if(isDefined(sweapon)) {
       dmgweapon = sweapon;
 
-      if(is_alt_weapon(dmgweapon))
+      if(is_alt_weapon(dmgweapon)) {
         dmgweapon = weaponaltweaponname(dmgweapon);
+      }
 
       attacker addweaponstat(dmgweapon, "kills", 1);
     }
@@ -123,16 +129,18 @@ player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, v
 }
 
 increment_downed_stat() {
-  if("zcleansed" != level.gametype)
+  if("zcleansed" != level.gametype) {
     self.downs++;
+  }
 
   self maps\mp\zombies\_zm_stats::increment_client_stat("downs");
   self add_weighted_down();
   self maps\mp\zombies\_zm_stats::increment_player_stat("downs");
   zonename = self get_current_zone();
 
-  if(!isDefined(zonename))
+  if(!isDefined(zonename)) {
     zonename = "";
+  }
 
   self recordplayerdownzombies(zonename);
 }
@@ -140,8 +148,9 @@ increment_downed_stat() {
 playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
   self notify("entering_last_stand");
 
-  if(isDefined(level._game_module_player_laststand_callback))
+  if(isDefined(level._game_module_player_laststand_callback)) {
     self[[level._game_module_player_laststand_callback]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
+  }
 
   if(self player_is_in_laststand()) {
     return;
@@ -151,8 +160,9 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
   }
   self thread player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
 
-  if(isDefined(level.playerlaststand_func))
+  if(isDefined(level.playerlaststand_func)) {
     [[level.playerlaststand_func]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
+  }
 
   self.health = 1;
   self.laststand = 1;
@@ -160,38 +170,43 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
   self thread maps\mp\gametypes_zm\_gameobjects::onplayerlaststand();
   self thread maps\mp\zombies\_zm_buildables::onplayerlaststand();
 
-  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger))
+  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
     self revive_trigger_spawn();
-  else
+  } else {
     self undolaststand();
+  }
 
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self takeallweapons();
 
-    if(isDefined(attacker) && isPlayer(attacker) && attacker != self)
+    if(isDefined(attacker) && isPlayer(attacker) && attacker != self) {
       attacker notify("killed_a_zombie_player", einflictor, self, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
+    }
   } else {
     self laststand_disable_player_weapons();
     self laststand_give_pistol();
   }
 
   if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && get_players().size > 1) {
-    if(!isDefined(level.canplayersuicide) || self[[level.canplayersuicide]]())
+    if(!isDefined(level.canplayersuicide) || self[[level.canplayersuicide]]()) {
       self thread suicide_trigger_spawn();
+    }
   }
 
-  if(isDefined(self.disabled_perks))
+  if(isDefined(self.disabled_perks)) {
     self.disabled_perks = [];
+  }
 
-  if(level.laststandgetupallowed)
+  if(level.laststandgetupallowed) {
     self thread laststand_getup();
-  else {
+  } else {
     bleedout_time = getdvarfloat(#"player_lastStandBleedoutTime");
     self thread laststand_bleedout(bleedout_time);
   }
 
-  if("zcleansed" != level.gametype)
+  if("zcleansed" != level.gametype) {
     maps\mp\_demo::bookmark("zm_player_downed", gettime(), self);
+  }
 
   self notify("player_downed");
   self thread refire_player_downed();
@@ -204,13 +219,15 @@ refire_player_downed() {
   self endon("disconnect");
   wait 1.0;
 
-  if(self.num_perks)
+  if(self.num_perks) {
     self notify("player_downed");
+  }
 }
 
 laststand_allowed(sweapon, smeansofdeath, shitloc) {
-  if(level.laststandpistol == "none")
+  if(level.laststandpistol == "none") {
     return false;
+  }
 
   return true;
 }
@@ -241,8 +258,9 @@ laststand_disable_player_weapons() {
     weapon = weaponinventory[i];
     class = weaponclass(weapon);
 
-    if(issubstr(weapon, "knife_ballistic_"))
+    if(issubstr(weapon, "knife_ballistic_")) {
       class = "knife";
+    }
 
     if((class == "pistol" || class == "pistol spread" || class == "pistolspread") && !isDefined(self.laststandpistol)) {
       self.laststandpistol = weapon;
@@ -267,33 +285,38 @@ laststand_disable_player_weapons() {
     }
   }
 
-  if(isDefined(self.hadpistol) && self.hadpistol == 1 && isDefined(level.zombie_last_stand_pistol_memory))
+  if(isDefined(self.hadpistol) && self.hadpistol == 1 && isDefined(level.zombie_last_stand_pistol_memory)) {
     self[[level.zombie_last_stand_pistol_memory]]();
+  }
 
-  if(!isDefined(self.laststandpistol))
+  if(!isDefined(self.laststandpistol)) {
     self.laststandpistol = level.laststandpistol;
+  }
 
   self disableweaponcycling();
   self notify("weapons_taken_for_last_stand");
 }
 
 laststand_enable_player_weapons() {
-  if(isDefined(self.hadpistol) && !self.hadpistol && isDefined(self.laststandpistol))
+  if(isDefined(self.hadpistol) && !self.hadpistol && isDefined(self.laststandpistol)) {
     self takeweapon(self.laststandpistol);
+  }
 
-  if(isDefined(self.hadpistol) && self.hadpistol == 1 && isDefined(level.zombie_last_stand_ammo_return))
+  if(isDefined(self.hadpistol) && self.hadpistol == 1 && isDefined(level.zombie_last_stand_ammo_return)) {
     [[level.zombie_last_stand_ammo_return]]();
+  }
 
   self enableweaponcycling();
   self enableoffhandweapons();
 
-  if(isDefined(self.lastactiveweapon) && self.lastactiveweapon != "none" && self hasweapon(self.lastactiveweapon) && !is_placeable_mine(self.lastactiveweapon) && !is_equipment(self.lastactiveweapon))
+  if(isDefined(self.lastactiveweapon) && self.lastactiveweapon != "none" && self hasweapon(self.lastactiveweapon) && !is_placeable_mine(self.lastactiveweapon) && !is_equipment(self.lastactiveweapon)) {
     self switchtoweapon(self.lastactiveweapon);
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
-    if(isDefined(primaryweapons) && primaryweapons.size > 0)
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
+    }
   }
 }
 
@@ -302,16 +325,19 @@ laststand_clean_up_on_disconnect(playerbeingrevived, revivergun) {
   revivetrigger = playerbeingrevived.revivetrigger;
   playerbeingrevived waittill("disconnect");
 
-  if(isDefined(revivetrigger))
+  if(isDefined(revivetrigger)) {
     revivetrigger delete();
+  }
 
   self cleanup_suicide_hud();
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 
   self revive_give_back_weapons(revivergun);
 }
@@ -321,17 +347,18 @@ laststand_clean_up_reviving_any(playerbeingrevived) {
   playerbeingrevived waittill_any("disconnect", "zombified", "stop_revive_trigger");
   self.is_reviving_any--;
 
-  if(0 > self.is_reviving_any)
+  if(0 > self.is_reviving_any) {
     self.is_reviving_any = 0;
+  }
 }
 
 laststand_give_pistol() {
   assert(isDefined(self.laststandpistol));
   assert(self.laststandpistol != "none");
 
-  if(isDefined(level.zombie_last_stand))
+  if(isDefined(level.zombie_last_stand)) {
     [[level.zombie_last_stand]]();
-  else {
+  } else {
     self giveweapon(self.laststandpistol);
     self givemaxammo(self.laststandpistol);
     self switchtoweapon(self.laststandpistol);
@@ -366,8 +393,9 @@ laststand_bleedout(delay) {
     wait 1;
   }
 
-  while(isDefined(self.revivetrigger) && isDefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived == 1)
+  while(isDefined(self.revivetrigger) && isDefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived == 1) {
     wait 0.1;
+  }
 
   self notify("bled_out");
   wait_network_frame();
@@ -377,8 +405,9 @@ laststand_bleedout(delay) {
 bleed_out() {
   self cleanup_suicide_hud();
 
-  if(isDefined(self.revivetrigger))
+  if(isDefined(self.revivetrigger)) {
     self.revivetrigger delete();
+  }
 
   self.revivetrigger = undefined;
   setclientsysstate("lsm", "0", self);
@@ -388,23 +417,26 @@ bleed_out() {
   self recordplayerdeathzombies();
   self maps\mp\zombies\_zm_equipment::equipment_take();
 
-  if("zcleansed" != level.gametype)
+  if("zcleansed" != level.gametype) {
     maps\mp\_demo::bookmark("zm_player_bledout", gettime(), self, undefined, 1);
+  }
 
   level notify("bleed_out", self.characterindex);
   self undolaststand();
 
-  if(isDefined(level.is_zombie_level) && level.is_zombie_level)
+  if(isDefined(level.is_zombie_level) && level.is_zombie_level) {
     self thread[[level.player_becomes_zombie]]();
-  else if(isDefined(level.is_specops_level) && level.is_specops_level)
+  } else if(isDefined(level.is_specops_level) && level.is_specops_level) {
     self thread[[level.spawnspectator]]();
-  else
+  } else {
     self.ignoreme = 0;
+  }
 }
 
 cleanup_suicide_hud() {
-  if(isDefined(self.suicideprompt))
+  if(isDefined(self.suicideprompt)) {
     self.suicideprompt destroy();
+  }
 
   self.suicideprompt = undefined;
 }
@@ -418,11 +450,13 @@ clean_up_suicide_hud_on_end_game() {
   level waittill_any("end_game", "stop_suicide_trigger");
   self cleanup_suicide_hud();
 
-  if(isDefined(self.suicidetexthud))
+  if(isDefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
+  }
 
-  if(isDefined(self.suicideprogressbar))
+  if(isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar destroyelem();
+  }
 }
 
 clean_up_suicide_hud_on_bled_out() {
@@ -432,11 +466,13 @@ clean_up_suicide_hud_on_bled_out() {
   self waittill_any("bled_out", "player_revived", "fake_death");
   self cleanup_suicide_hud();
 
-  if(isDefined(self.suicideprogressbar))
+  if(isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar destroyelem();
+  }
 
-  if(isDefined(self.suicidetexthud))
+  if(isDefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
+  }
 }
 
 suicide_trigger_spawn() {
@@ -448,8 +484,9 @@ suicide_trigger_spawn() {
   self.suicideprompt.vertalign = "bottom";
   self.suicideprompt.y = -170;
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.suicideprompt.y = -132;
+  }
 
   self.suicideprompt.foreground = 1;
   self.suicideprompt.font = "default";
@@ -472,8 +509,9 @@ suicide_trigger_think() {
   self thread clean_up_suicide_hud_on_end_game();
   self thread clean_up_suicide_hud_on_bled_out();
 
-  while(self useButtonPressed())
+  while(self useButtonPressed()) {
     wait 1;
+  }
 
   if(!isDefined(self.suicideprompt)) {
     return;
@@ -518,11 +556,13 @@ suicide_do_suicide(duration) {
   suicided = 0;
   self.suicideprompt settext("");
 
-  if(!isDefined(self.suicideprogressbar))
+  if(!isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar = self createprimaryprogressbar();
+  }
 
-  if(!isDefined(self.suicidetexthud))
+  if(!isDefined(self.suicidetexthud)) {
     self.suicidetexthud = newclienthudelem(self);
+  }
 
   self.suicideprogressbar updatebar(0.01, 1 / suicidetime);
   self.suicidetexthud.alignx = "center";
@@ -531,8 +571,9 @@ suicide_do_suicide(duration) {
   self.suicidetexthud.vertalign = "bottom";
   self.suicidetexthud.y = -173;
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.suicidetexthud.y = -147;
+  }
 
   self.suicidetexthud.foreground = 1;
   self.suicidetexthud.font = "default";
@@ -552,33 +593,41 @@ suicide_do_suicide(duration) {
     }
   }
 
-  if(isDefined(self.suicideprogressbar))
+  if(isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar destroyelem();
+  }
 
-  if(isDefined(self.suicidetexthud))
+  if(isDefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
+  }
 
-  if(isDefined(self.suicideprompt))
+  if(isDefined(self.suicideprompt)) {
     self.suicideprompt settext(&"ZOMBIE_BUTTON_TO_SUICIDE");
+  }
 
   return suicided;
 }
 
 can_suicide() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
-  if(!self player_is_in_laststand())
+  if(!self player_is_in_laststand()) {
     return false;
+  }
 
-  if(!isDefined(self.suicideprompt))
+  if(!isDefined(self.suicideprompt)) {
     return false;
+  }
 
-  if(isDefined(self.is_zombie) && self.is_zombie)
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     return false;
+  }
 
-  if(isDefined(level.intermission) && level.intermission)
+  if(isDefined(level.intermission) && level.intermission) {
     return false;
+  }
 
   return true;
 }
@@ -588,9 +637,9 @@ is_suiciding(revivee) {
 }
 
 revive_trigger_spawn() {
-  if(isDefined(level.revive_trigger_spawn_override_link))
+  if(isDefined(level.revive_trigger_spawn_override_link)) {
     [[level.revive_trigger_spawn_override_link]](self);
-  else {
+  } else {
     radius = getdvarint(#"_id_A17166B0");
     self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
     self.revivetrigger sethintstring("");
@@ -646,14 +695,16 @@ revive_trigger_think() {
       revive_success = reviver revive_do_revive(self, gun);
       reviver revive_give_back_weapons(gun);
 
-      if(isPlayer(self))
+      if(isPlayer(self)) {
         self allowjump(1);
+      }
 
       self.laststand = undefined;
 
       if(revive_success) {
-        if(isPlayer(self))
+        if(isPlayer(self)) {
           maps\mp\zombies\_zm_chugabud::player_revived_cleanup_chugabud_corpse();
+        }
 
         self thread revive_success(reviver);
         self cleanup_suicide_hud();
@@ -669,43 +720,53 @@ revive_give_back_weapons(gun) {
   if(self player_is_in_laststand()) {
     return;
   }
-  if(gun != "none" && !is_placeable_mine(gun) && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun))
+  if(gun != "none" && !is_placeable_mine(gun) && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun)) {
     self switchtoweapon(gun);
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
-    if(isDefined(primaryweapons) && primaryweapons.size > 0)
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
+    }
   }
 }
 
 can_revive(revivee) {
-  if(!isDefined(revivee.revivetrigger))
+  if(!isDefined(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
-  if(self player_is_in_laststand())
+  if(self player_is_in_laststand()) {
     return false;
+  }
 
-  if(self.team != revivee.team)
+  if(self.team != revivee.team) {
     return false;
+  }
 
-  if(isDefined(self.is_zombie) && self.is_zombie)
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     return false;
+  }
 
-  if(self has_powerup_weapon())
+  if(self has_powerup_weapon()) {
     return false;
+  }
 
-  if(isDefined(level.can_revive_use_depthinwater_test) && level.can_revive_use_depthinwater_test && revivee depthinwater() > 10)
+  if(isDefined(level.can_revive_use_depthinwater_test) && level.can_revive_use_depthinwater_test && revivee depthinwater() > 10) {
     return true;
+  }
 
-  if(isDefined(level.can_revive) && ![[level.can_revive]](revivee))
+  if(isDefined(level.can_revive) && ![[level.can_revive]](revivee)) {
     return false;
+  }
 
-  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](revivee))
+  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](revivee)) {
     return false;
+  }
 
   ignore_sight_checks = 0;
   ignore_touch_checks = 0;
@@ -713,24 +774,29 @@ can_revive(revivee) {
   if(isDefined(level.revive_trigger_should_ignore_sight_checks)) {
     ignore_sight_checks = [[level.revive_trigger_should_ignore_sight_checks]](self);
 
-    if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1)
+    if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1) {
       ignore_touch_checks = 1;
+    }
   }
 
   if(!ignore_touch_checks) {
-    if(!self istouching(revivee.revivetrigger))
+    if(!self istouching(revivee.revivetrigger)) {
       return false;
+    }
   }
 
   if(!ignore_sight_checks) {
-    if(!self is_facing(revivee))
+    if(!self is_facing(revivee)) {
       return false;
+    }
 
-    if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined))
+    if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined)) {
       return false;
+    }
 
-    if(!bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined))
+    if(!bullettracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined)) {
       return false;
+    }
   }
 
   return true;
@@ -760,11 +826,13 @@ revive_do_revive(playerbeingrevived, revivergun) {
   assert(self is_reviving(playerbeingrevived));
   revivetime = 3;
 
-  if(self hasperk("specialty_quickrevive"))
+  if(self hasperk("specialty_quickrevive")) {
     revivetime = revivetime / 2;
+  }
 
-  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active())
+  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active()) {
     revivetime = revivetime * 0.5;
+  }
 
   timer = 0;
   revived = 0;
@@ -773,19 +841,23 @@ revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived revive_hud_show_n_fade(3.0);
   playerbeingrevived.revivetrigger sethintstring("");
 
-  if(isPlayer(playerbeingrevived))
+  if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
+  }
 
-  if(!isDefined(self.reviveprogressbar))
+  if(!isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar = self createprimaryprogressbar();
+  }
 
-  if(!isDefined(self.revivetexthud))
+  if(!isDefined(self.revivetexthud)) {
     self.revivetexthud = newclienthudelem(self);
+  }
 
   self thread laststand_clean_up_on_disconnect(playerbeingrevived, revivergun);
 
-  if(!isDefined(self.is_reviving_any))
+  if(!isDefined(self.is_reviving_any)) {
     self.is_reviving_any = 0;
+  }
 
   self.is_reviving_any++;
   self thread laststand_clean_up_reviving_any(playerbeingrevived);
@@ -796,8 +868,9 @@ revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud.vertalign = "bottom";
   self.revivetexthud.y = -113;
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.revivetexthud.y = -347;
+  }
 
   self.revivetexthud.foreground = 1;
   self.revivetexthud.font = "default";
@@ -806,8 +879,9 @@ revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud.color = (1, 1, 1);
   self.revivetexthud.hidewheninmenu = 1;
 
-  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active())
+  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active()) {
     self.revivetexthud.color = (0.5, 0.5, 1.0);
+  }
 
   self.revivetexthud settext(&"ZOMBIE_REVIVING");
   self thread check_for_failed_revive(playerbeingrevived);
@@ -830,15 +904,18 @@ revive_do_revive(playerbeingrevived, revivergun) {
     }
   }
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 
   if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
-    if(isPlayer(playerbeingrevived))
+    if(isPlayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
+    }
   }
 
   playerbeingrevived.revivetrigger sethintstring(&"ZOMBIE_BUTTON_TO_REVIVE_PLAYER");
@@ -846,8 +923,9 @@ revive_do_revive(playerbeingrevived, revivergun) {
   self notify("do_revive_ended_normally");
   self.is_reviving_any--;
 
-  if(!revived)
+  if(!revived) {
     playerbeingrevived thread checkforbleedout(self);
+  }
 
   return revived;
 }
@@ -893,8 +971,9 @@ auto_revive(reviver, dont_enable_weapons) {
 
   self cleanup_suicide_hud();
 
-  if(!isDefined(dont_enable_weapons) || dont_enable_weapons == 0)
+  if(!isDefined(dont_enable_weapons) || dont_enable_weapons == 0) {
     self laststand_enable_player_weapons();
+  }
 
   self allowjump(1);
   self.ignoreme = 0;
@@ -919,23 +998,26 @@ remote_revive(reviver) {
 }
 
 revive_success(reviver, b_track_stats) {
-  if(!isDefined(b_track_stats))
+  if(!isDefined(b_track_stats)) {
     b_track_stats = 1;
+  }
 
   if(!isPlayer(self)) {
     self notify("player_revived", reviver);
     return;
   }
 
-  if(isDefined(b_track_stats) && b_track_stats)
+  if(isDefined(b_track_stats) && b_track_stats) {
     maps\mp\_demo::bookmark("zm_player_revived", gettime(), self, reviver);
+  }
 
   self notify("player_revived", reviver);
   self reviveplayer();
   self maps\mp\zombies\_zm_perks::perk_set_max_health_if_jugg("health_reboot", 1, 0);
 
-  if(isDefined(self.pers_upgrades_awarded["perk_lose"]) && self.pers_upgrades_awarded["perk_lose"])
+  if(isDefined(self.pers_upgrades_awarded["perk_lose"]) && self.pers_upgrades_awarded["perk_lose"]) {
     self thread maps\mp\zombies\_zm_pers_upgrades_functions::pers_upgrade_perk_lose_restore();
+  }
 
   if(!(isDefined(level.isresetting_grief) && level.isresetting_grief) && (isDefined(b_track_stats) && b_track_stats)) {
     reviver.revives++;
@@ -945,11 +1027,13 @@ revive_success(reviver, b_track_stats) {
     reviver.upgrade_fx_origin = self.origin;
   }
 
-  if(is_classic() && (isDefined(b_track_stats) && b_track_stats))
+  if(is_classic() && (isDefined(b_track_stats) && b_track_stats)) {
     maps\mp\zombies\_zm_pers_upgrades_functions::pers_increment_revive_stat(reviver);
+  }
 
-  if(isDefined(b_track_stats) && b_track_stats)
+  if(isDefined(b_track_stats) && b_track_stats) {
     reviver thread check_for_sacrifice();
+  }
 
   if(isDefined(level.missioncallbacks)) {}
 
@@ -1000,8 +1084,9 @@ revive_hud_think() {
       if(!isDefined(players[i].revivetrigger) || !isDefined(players[i].revivetrigger.createtime)) {
         continue;
       }
-      if(!isDefined(playertorevive) || playertorevive.revivetrigger.createtime > players[i].revivetrigger.createtime)
+      if(!isDefined(playertorevive) || playertorevive.revivetrigger.createtime > players[i].revivetrigger.createtime) {
         playertorevive = players[i];
+      }
     }
 
     if(isDefined(playertorevive)) {
@@ -1010,16 +1095,18 @@ revive_hud_think() {
           continue;
         }
         if(getDvar(#"g_gametype") == "vs") {
-          if(players[i].team != playertorevive.team)
+          if(players[i].team != playertorevive.team) {
             continue;
+          }
         }
 
         if(is_encounter()) {
           if(players[i].sessionteam != playertorevive.sessionteam) {
             continue;
           }
-          if(isDefined(level.hide_revive_message) && level.hide_revive_message)
+          if(isDefined(level.hide_revive_message) && level.hide_revive_message) {
             continue;
+          }
         }
 
         players[i] thread faderevivemessageover(playertorevive, 3.0);
@@ -1066,8 +1153,9 @@ drawcylinder(pos, rad, height) {
 get_lives_remaining() {
   assert(level.laststandgetupallowed, "Lives only exist in the Laststand type GETUP.");
 
-  if(level.laststandgetupallowed && isDefined(self.laststand_info) && isDefined(self.laststand_info.type_getup_lives))
+  if(level.laststandgetupallowed && isDefined(self.laststand_info) && isDefined(self.laststand_info.type_getup_lives)) {
     return max(0, self.laststand_info.type_getup_lives);
+  }
 
   return 0;
 }
@@ -1116,8 +1204,9 @@ laststand_getup_damage_watcher() {
     self waittill("damage");
     self.laststand_info.getup_bar_value = self.laststand_info.getup_bar_value - level.const_laststand_getup_bar_damage;
 
-    if(self.laststand_info.getup_bar_value < 0)
+    if(self.laststand_info.getup_bar_value < 0) {
       self.laststand_info.getup_bar_value = 0;
+    }
   }
 }
 
@@ -1177,8 +1266,9 @@ add_weighted_down() {
   }
   weighted_down = 1000;
 
-  if(level.round_number > 0)
+  if(level.round_number > 0) {
     weighted_down = int(1000.0 / ceil(level.round_number / 5.0));
+  }
 
   self addplayerstat("weighted_downs", weighted_down);
 }
@@ -1190,6 +1280,7 @@ cleanup_laststand_on_disconnect() {
   trig = self.revivetrigger;
   self waittill("disconnect");
 
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     trig delete();
+  }
 }

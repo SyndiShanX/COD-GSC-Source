@@ -13,11 +13,13 @@
 UI_SEARCHING = 1;
 
 build_pillageitem_arrays(category) {
-  if(!isDefined(level.pillageitems))
+  if(!isDefined(level.pillageitems)) {
     level.pillageitems = [];
+  }
 
-  if(!isDefined(level.pillageitems[category]))
+  if(!isDefined(level.pillageitems[category])) {
     level.pillageitems[category] = [];
+  }
 
   switch (category) {
     case "easy":
@@ -63,8 +65,9 @@ build_pillageitem_arrays(category) {
 }
 
 build_pillageitem_array(category, item_ref, item_chance) {
-  if(!isDefined(item_chance))
+  if(!isDefined(item_chance)) {
     return;
+  }
   item_info = spawnStruct();
   item_info.ref = item_ref;
   item_info.chance = item_chance;
@@ -100,13 +103,15 @@ pillage_init() {
   }
 
   level.alien_crafting_items = undefined;
-  if(isDefined(level.crafting_item_table))
+  if(isDefined(level.crafting_item_table)) {
     level.alien_crafting_items = level.crafting_item_table;
+  }
 
   pillage_areas = getStructArray("pillage_area", "targetname");
   foreach(index, area in pillage_areas) {
-    if(!isDefined(level.pillage_areas[index]))
+    if(!isDefined(level.pillage_areas[index])) {
       level.pillage_areas[index] = [];
+    }
     level.pillage_areas[index]["easy"] = [];
     level.pillage_areas[index]["medium"] = [];
     level.pillage_areas[index]["hard"] = [];
@@ -345,8 +350,9 @@ create_pillage_spots(pillage_spot_array) {
     spot thread pillage_spot_think();
     spot.enabled = true;
 
-    if(index % 2 == 0)
+    if(index % 2 == 0) {
       wait(.05);
+    }
   }
 }
 
@@ -376,8 +382,9 @@ pillage_spot_think() {
 
     if(!isDefined(self.searched)) {
       if(isDefined(level.locker_key_check_func)) {
-        if([[level.locker_key_check_func]](user))
+        if([[level.locker_key_check_func]](user)) {
           continue;
+        }
       }
 
       self.pillage_trigger makeUnusable();
@@ -407,8 +414,9 @@ pillage_spot_think() {
             }
             string = get_hintstring_for_pillaged_item(pillaged_item.count);
             user thread show_pillage_text(string);
-            if(pillaged_item.count == 500)
+            if(pillaged_item.count == 500) {
               level thread maps\mp\alien\_music_and_dialog::playVOForPillage(user);
+            }
 
             break;
 
@@ -474,10 +482,11 @@ pillage_spot_think() {
               SetDevDvar("scr_force_pillageitem", "");
             }
 
-            if(attach_found == "alienmuzzlebrake")
+            if(attach_found == "alienmuzzlebrake") {
               self.pillage_trigger setModel(level.pillageInfo.alienattachment_model);
-            else
+            } else {
               self.pillage_trigger setModel(level.pillageInfo.attachment_model);
+            }
 
             string = get_hintstring_for_item_pickup(attach_found);
             self.pillage_trigger SetHintString(string);
@@ -568,20 +577,23 @@ pillage_spot_think() {
             break;
 
           case "intel":
-            if(isDefined(level.intel_pillage_show_func))
+            if(isDefined(level.intel_pillage_show_func)) {
               self[[level.intel_pillage_show_func]]();
+            }
             break;
 
           default:
-            if(isDefined(level.level_specific_pillage_show_func))
+            if(isDefined(level.level_specific_pillage_show_func)) {
               self[[level.level_specific_pillage_show_func]](user, "searched", pillaged_item);
+            }
             break;
         }
         if(isDefined(self.drop_override_func)) {
           self[[self.drop_override_func]](user);
         } else {
-          if(isDefined(self.pillage_trigger))
+          if(isDefined(self.pillage_trigger)) {
             self.pillage_trigger drop_pillage_item_on_ground();
+          }
         }
       } else {
         self.pillage_trigger makeUsable();
@@ -695,8 +707,9 @@ pillage_spot_think() {
             break;
 
           default:
-            if(isDefined(level.level_specific_pillage_show_func))
+            if(isDefined(level.level_specific_pillage_show_func)) {
               self[[level.level_specific_pillage_show_func]](user, "pick_up");
+            }
             break;
         }
       }
@@ -805,14 +818,17 @@ get_pillaged_item(pillage_spot, player) {
 
   exclusion_list = [];
 
-  if(check_for_existing_pet_bombs() > 1)
+  if(check_for_existing_pet_bombs() > 1) {
     exclusion_list[exclusion_list.size] = "pet_leash";
+  }
 
-  if(!(player can_use_attachment()))
+  if(!(player can_use_attachment())) {
     exclusion_list[exclusion_list.size] = "attachment";
+  }
 
-  if(isDefined(level.intel_pillage_allowed_func) && !(player[[level.intel_pillage_allowed_func]]()))
+  if(isDefined(level.intel_pillage_allowed_func) && !(player[[level.intel_pillage_allowed_func]]())) {
     exclusion_list[exclusion_list.size] = "intel";
+  }
 
   if(!player should_find_crafting_items()) {
     exclusion_list[exclusion_list.size] = "crafting";
@@ -884,11 +900,13 @@ get_pillaged_item(pillage_spot, player) {
     case "money":
       money_to_give = 50 + (randomint(2) * 50);
 
-      if(pillage_spot.pillage_type == "medium")
+      if(pillage_spot.pillage_type == "medium") {
         money_to_give = 200 + (randomint(2) * 50);
+      }
 
-      if(pillage_spot.pillage_type == "hard")
+      if(pillage_spot.pillage_type == "hard") {
         money_to_give = 500;
+      }
 
       pillaged_item.type = "money";
       pillaged_item.count = money_to_give;
@@ -954,8 +972,9 @@ get_random_pillage_item(item_list, exclusion_list) {
   foreach(item_info in temp_item_list) {
     running_total += item_info.chance;
 
-    if(random_index <= running_total)
+    if(random_index <= running_total) {
       return item_info.ref;
+    }
   }
 }
 
@@ -991,8 +1010,9 @@ try_to_give_player_explosives(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_explosive_override)) {
-    if(![[level.try_to_give_player_explosive_override]]())
+    if(![[level.try_to_give_player_explosive_override]]()) {
       return;
+    }
   }
 
   if(self hasweapon(explosive_type) && self GetAmmoCount(explosive_type) > 0) {
@@ -1041,8 +1061,9 @@ try_to_give_player_flares(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_flare_override)) {
-    if(![[level.try_to_give_player_flare_override]]())
+    if(![[level.try_to_give_player_flare_override]]()) {
       return;
+    }
   }
 
   if(self hasweapon(flare) && self GetAmmoCount(flare) > 0) {
@@ -1102,8 +1123,9 @@ try_to_give_player_trophy(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_trophy_override)) {
-    if(![[level.try_to_give_player_trophy_override]]())
+    if(![[level.try_to_give_player_trophy_override]]()) {
       return;
+    }
   }
 
   if(self hasweapon(trophy) && self GetAmmoCount(trophy) > 0) {
@@ -1155,8 +1177,9 @@ try_to_give_player_the_leash(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_leash_override)) {
-    if(![[level.try_to_give_player_leash_override]]())
+    if(![[level.try_to_give_player_leash_override]]()) {
       return;
+    }
   }
 
   if(self hasweapon(leash) && self GetAmmoCount(leash) > 0) {
@@ -1230,8 +1253,9 @@ should_swap_weapon(weapons_array) {
       }
     }
   }
-  if(isDefined(weapon_to_swap))
+  if(isDefined(weapon_to_swap)) {
     self.swapped_weapon_ammocount = swapped_weapon_ammocount;
+  }
 
   return weapon_to_swap;
 }
@@ -1325,14 +1349,16 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
   reticle = 0;
   weaponclass = getWeaponClass(baseweapon);
 
-  if(weaponHasAttachment(fullweaponname, "xmags"))
+  if(weaponHasAttachment(fullweaponname, "xmags")) {
     player_has_xmags = true;
+  }
 
   attachments = get_possible_attachments_by_weaponclass(weaponclass, baseweapon);
   can_use = false;
   foreach(piece in attachments) {
-    if(new_attachment == piece)
+    if(new_attachment == piece) {
       can_use = true;
+    }
   }
 
   if(!can_use) {
@@ -1344,14 +1370,18 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
 
   if(current_attachments.size > 0 && current_attachments.size < 5) {
     for(i = 0; i < current_attachments.size; i++) {
-      if(i == 0)
+      if(i == 0) {
         attachment1 = current_attachments[i];
-      if(i == 1)
+      }
+      if(i == 1) {
         attachment2 = current_attachments[i];
-      if(i == 2)
+      }
+      if(i == 2) {
         attachment3 = current_attachments[i];
-      if(i == 3)
+      }
+      if(i == 3) {
         attachment4 = current_attachments[i];
+      }
     }
 
     if(attachment1 != "none" && getAttachmentType(attachment1) == getAttachmentType(new_attachment)) {
@@ -1378,15 +1408,15 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
       swap = true;
     }
     if(swap == false) {
-      if(attachment1 == "none")
+      if(attachment1 == "none") {
         attachment1 = new_attachment;
-      else if(attachment2 == "none" && new_attachment != attachment1)
+      } else if(attachment2 == "none" && new_attachment != attachment1) {
         attachment2 = new_attachment;
-      else if(attachment3 == "none" && new_attachment != attachment1 && new_attachment != attachment2)
+      } else if(attachment3 == "none" && new_attachment != attachment1 && new_attachment != attachment2) {
         attachment3 = new_attachment;
-      else if(attachment4 == "none" && new_attachment != attachment1 && new_attachment != attachment2 && new_attachment != attachment3)
+      } else if(attachment4 == "none" && new_attachment != attachment1 && new_attachment != attachment2 && new_attachment != attachment3) {
         attachment4 = new_attachment;
-      else {
+      } else {
         self setLowerMessage("cant_attach", &"ALIEN_COLLECTIBLES_CANT_USE", 3);
         return false;
       }
@@ -1400,13 +1430,15 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
 
   reticle = RandomIntRange(1, 7);
 
-  if(IsSubStr(baseweapon, "aliendlc23"))
+  if(IsSubStr(baseweapon, "aliendlc23")) {
     reticle = 0;
+  }
 
-  if(attachment1 != "thermal" && attachment1 != "thermalsmg" && attachment2 != "thermal" && attachment2 != "thermalsmg" && attachment3 != "thermal" && attachment3 != "thermalsmg" && attachment4 != "thermal" && attachment4 != "thermalsmg")
+  if(attachment1 != "thermal" && attachment1 != "thermalsmg" && attachment2 != "thermal" && attachment2 != "thermalsmg" && attachment3 != "thermal" && attachment3 != "thermalsmg" && attachment4 != "thermal" && attachment4 != "thermalsmg") {
     newweapon = buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo, reticle);
-  else
+  } else {
     newweapon = buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo);
+  }
 
   clipammo = self GetWeaponAmmoClip(fullweaponname);
   stockammo = self GetWeaponAmmoStock(fullweaponname);
@@ -1414,8 +1446,9 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
   self TakeWeapon(fullweaponname);
   self GiveWeapon(newweapon);
 
-  if(weaponHasAttachment(newweapon, "xmags") && !player_has_xmags)
+  if(weaponHasAttachment(newweapon, "xmags") && !player_has_xmags) {
     clipammo = WeaponClipSize(newweapon);
+  }
 
   self SetWeaponAmmoClip(newweapon, clipammo);
   self SetWeaponAmmoStock(newweapon, stockammo);
@@ -1423,17 +1456,19 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
   self PlayLocalSound("weap_raise_large_plr");
   self SwitchToWeapon(newweapon);
 
-  if(swap == false)
+  if(swap == false) {
     return true;
-  else
+  } else {
     return false;
+  }
 }
 
 get_weapon_camo(baseweapon) {
-  if(IsSubStr(baseweapon, "alienfp6") || IsSubStr(baseweapon, "alienmts255") || IsSubStr(baseweapon, "aliendlc12") || IsSubStr(baseweapon, "aliendlc13") || IsSubStr(baseweapon, "aliendlc14") || IsSubStr(baseweapon, "aliendlc15") || IsSubStr(baseweapon, "alienameli") || IsSubStr(baseweapon, "alienk7") || IsSubStr(baseweapon, "alienmk14") || IsSubStr(baseweapon, "alienr5rgp") || IsSubStr(baseweapon, "alienusr") || IsSubStr(baseweapon, "alienuts15") || IsSubStr(baseweapon, "arkalienameli") || IsSubStr(baseweapon, "arkaliendlc15") || IsSubStr(baseweapon, "arkaliendlc23") || IsSubStr(baseweapon, "arkalienimbel") || IsSubStr(baseweapon, "arkalienk7") || IsSubStr(baseweapon, "arkalienkac") || IsSubStr(baseweapon, "arkalienmaul") || IsSubStr(baseweapon, "arkalienmk14") || IsSubStr(baseweapon, "arkalienr5rgp") || IsSubStr(baseweapon, "arkalienusr") || IsSubStr(baseweapon, "arkalienuts15") || IsSubStr(baseweapon, "arkalienvks") || IsSubStr(baseweapon, "aliendlc23"))
+  if(IsSubStr(baseweapon, "alienfp6") || IsSubStr(baseweapon, "alienmts255") || IsSubStr(baseweapon, "aliendlc12") || IsSubStr(baseweapon, "aliendlc13") || IsSubStr(baseweapon, "aliendlc14") || IsSubStr(baseweapon, "aliendlc15") || IsSubStr(baseweapon, "alienameli") || IsSubStr(baseweapon, "alienk7") || IsSubStr(baseweapon, "alienmk14") || IsSubStr(baseweapon, "alienr5rgp") || IsSubStr(baseweapon, "alienusr") || IsSubStr(baseweapon, "alienuts15") || IsSubStr(baseweapon, "arkalienameli") || IsSubStr(baseweapon, "arkaliendlc15") || IsSubStr(baseweapon, "arkaliendlc23") || IsSubStr(baseweapon, "arkalienimbel") || IsSubStr(baseweapon, "arkalienk7") || IsSubStr(baseweapon, "arkalienkac") || IsSubStr(baseweapon, "arkalienmaul") || IsSubStr(baseweapon, "arkalienmk14") || IsSubStr(baseweapon, "arkalienr5rgp") || IsSubStr(baseweapon, "arkalienusr") || IsSubStr(baseweapon, "arkalienuts15") || IsSubStr(baseweapon, "arkalienvks") || IsSubStr(baseweapon, "aliendlc23")) {
     return 0;
-  else
+  } else {
     return RandomIntRange(1, 10);
+  }
 }
 
 swap_attachment(attachment, pillage_spot) {
@@ -1501,8 +1536,9 @@ swap_attachment(attachment, pillage_spot) {
   self thread show_pillage_text(info_string);
 
   attach_model = level.pillageInfo.attachment_model;
-  if(attachment == "alienmuzzlebrake")
+  if(attachment == "alienmuzzlebrake") {
     attach_model = level.pillageInfo.alienattachment_model;
+  }
 
   pillage_spot.pillage_trigger setModel(attach_model);
   pillage_spot.pillageinfo.type = "attachment";
@@ -1525,8 +1561,9 @@ useHoldThink(player, useTime) {
     player.pillage_spot.useTime = level.pillageinfo.default_use_time;
   }
 
-  if(isPlayer(player))
+  if(isPlayer(player)) {
     player thread personalUseBar(self);
+  }
 
   player.hasprogressbar = true;
   result = useHoldThinkLoop(player, self, PILLAGE_USE_DISTANCE);
@@ -1534,8 +1571,9 @@ useHoldThink(player, useTime) {
 
   player.hasprogressbar = false;
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   player.pillage_spot.inUse = false;
   player.pillage_spot.curProgress = 0;
@@ -1570,8 +1608,9 @@ useHoldThinkLoop(player, ent, dist_check) {
 
     player.pillage_spot.useRate = 1;
 
-    if(player.pillage_spot.curProgress >= player.pillage_spot.useTime)
+    if(player.pillage_spot.curProgress >= player.pillage_spot.useTime) {
       return (isReallyAlive(player));
+    }
 
     wait 0.05;
   }
@@ -1595,9 +1634,9 @@ debug_pillage_spots() {
           text = "easy";
           color = (1, 1, 1);
         }
-        if(Distance(level.players[0].origin, spot.origin) < 1500)
-
-          Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
+        if(Distance(level.players[0].origin, spot.origin) < 1500) {
+        }
+        Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
       }
 
       foreach(spot in area["medium"]) {
@@ -1609,8 +1648,9 @@ debug_pillage_spots() {
           color = (1, 1, 1);
         }
 
-        if(Distance(level.players[0].origin, spot.origin) < 1500)
+        if(Distance(level.players[0].origin, spot.origin) < 1500) {
           Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
+        }
       }
 
       foreach(spot in area["hard"]) {
@@ -1622,8 +1662,9 @@ debug_pillage_spots() {
           color = (1, 1, 1);
         }
 
-        if(Distance(level.players[0].origin, spot.origin) < 1500)
+        if(Distance(level.players[0].origin, spot.origin) < 1500) {
           Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
+        }
       }
     }
 
@@ -1814,8 +1855,9 @@ cangive_maxammo() {
     if(self player_has_specialized_ammo(base_weapon)) {
       if(isDefined(self.stored_ammo[base_weapon])) {
         amount = WeaponMaxAmmo(weapon);
-        if(self maps\mp\alien\_prestige::prestige_getMinAmmo() != 1)
+        if(self maps\mp\alien\_prestige::prestige_getMinAmmo() != 1) {
           amount = maps\mp\alien\_prestige::prestige_getMinAmmo() * WeaponMaxAmmo(weapon);
+        }
 
         if(self.stored_ammo[base_weapon].ammoStock < amount) {
           return true;
@@ -1824,8 +1866,9 @@ cangive_maxammo() {
 
     } else {
       amount = WeaponMaxAmmo(weapon);
-      if(self maps\mp\alien\_prestige::prestige_getMinAmmo() != 1)
+      if(self maps\mp\alien\_prestige::prestige_getMinAmmo() != 1) {
         amount = maps\mp\alien\_prestige::prestige_getMinAmmo() * WeaponMaxAmmo(weapon);
+      }
 
       max_stock = amount;
       player_stock = self getweaponammostock(weapon);
@@ -1965,8 +2008,9 @@ remove_used_pillage_spots(pillage_spot_array) {
 
         foreach(player in level.players) {
           player_near = false;
-          if(!IsAlive(player))
+          if(!IsAlive(player)) {
             continue;
+          }
           if(Distance2DSquared(player.origin, pillage_spot_array[i].origin) < near_distance_check) {
             player_near = true;
           }
@@ -1974,8 +2018,9 @@ remove_used_pillage_spots(pillage_spot_array) {
             player_near = within_fov(player getEye(), player.angles, pillage_spot_array[i].origin + (0, 0, 5), cosine);
           }
 
-          if(player_near)
+          if(player_near) {
             any_player_near = true;
+          }
         }
         if(any_player_near) {
           continue;
@@ -1988,8 +2033,9 @@ remove_used_pillage_spots(pillage_spot_array) {
       }
     }
 
-    if(i % 2 == 0)
+    if(i % 2 == 0) {
       wait(.05);
+    }
   }
 
   return newarray;
@@ -2004,8 +2050,9 @@ can_use_attachment() {
     if(gunclass == "weapon_pistol") {
       continue;
     }
-    if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon))
+    if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon)) {
       return true;
+    }
   }
   return false;
 }
@@ -2016,30 +2063,35 @@ check_for_existing_pet_bombs() {
   foreach(player in level.players) {
     items = player GetWeaponsListAll();
     foreach(item in items) {
-      if(item == "alienthrowingknife_mp" && (player GetWeaponAmmoClip("alienthrowingknife_mp") > 0 || player GetWeaponAmmoStock("alienthrowingknife_mp") > 0))
+      if(item == "alienthrowingknife_mp" && (player GetWeaponAmmoClip("alienthrowingknife_mp") > 0 || player GetWeaponAmmoStock("alienthrowingknife_mp") > 0)) {
         petbomb_count++;
+      }
     }
   }
 
   foreach(index, area in level.pillage_areas) {
     foreach(pillage_area in level.pillage_areas[index]["easy"]) {
-      if(pillage_area_has_petbomb(pillage_area))
+      if(pillage_area_has_petbomb(pillage_area)) {
         petbomb_count++;
+      }
     }
     foreach(pillage_area in level.pillage_areas[index]["medium"]) {
-      if(pillage_area_has_petbomb(pillage_area))
+      if(pillage_area_has_petbomb(pillage_area)) {
         petbomb_count++;
+      }
     }
     foreach(pillage_area in level.pillage_areas[index]["hard"]) {
-      if(pillage_area_has_petbomb(pillage_area))
+      if(pillage_area_has_petbomb(pillage_area)) {
         petbomb_count++;
+      }
     }
   }
 
   aliens = getActiveAgentsOfType("alien");
   foreach(alien in aliens) {
-    if(isDefined(alien.pet) && alien.pet)
+    if(isDefined(alien.pet) && alien.pet) {
       petbomb_count++;
+    }
   }
 
   if(isDefined(level.custom_pet_bomb_check)) {
@@ -2058,9 +2110,9 @@ get_crafting_ingredient() {
   if(self.craftingItems.size < 1 || self.crafting_ingredient_list.size > 0) {
     return (random(self.crafting_ingredient_list));
   } else {
-    if(self.craftingItems.size < 3)
+    if(self.craftingItems.size < 3) {
       return (random(self.swappable_crafting_ingredient_list));
-    else {
+    } else {
       foreach(player in level.players) {
         if(!isDefined(player.current_crafting_recipe)) {
           continue;
@@ -2077,13 +2129,15 @@ get_crafting_ingredient() {
     }
   }
 
-  if(ingredient_list.size > 0)
+  if(ingredient_list.size > 0) {
     return random(ingredient_list);
-  else
-  if(isDefined(level.random_crafting_list))
-    return random(level.random_crafting_list);
-  else
+  } else {
+    if(isDefined(level.random_crafting_list)) {
+      return random(level.random_crafting_list);
+    }
+  } else {
     return random(["venomx", "nucleicbattery", "bluebiolum", "biolum", "orangebiolum", "amethystbiolum", "fuse", "tnt", "pipe", "resin", "biolum", "cellbattery"]);
+  }
 }
 
 get_crafting_model(crafting_ingredient) {
@@ -2092,15 +2146,17 @@ get_crafting_model(crafting_ingredient) {
 
   craftingModel = TableLookup(level.alien_crafting_items, COL_ITEM_REF, crafting_ingredient, COL_WORLD_MODEL);
 
-  if(isDefined(craftingModel))
+  if(isDefined(craftingModel)) {
     return craftingModel;
-  else
+  } else {
     return level.crafting_model;
+  }
 }
 
 give_crafting_item(crafting_item) {
-  if(isDefined(self.current_crafting_recipe))
+  if(isDefined(self.current_crafting_recipe)) {
     self notify("dlc_vo_notify", self.current_crafting_recipe, self);
+  }
 
   slot_num = get_crafting_item_slot(crafting_item);
 
@@ -2122,12 +2178,14 @@ give_crafting_item(crafting_item) {
     item_to_remove = undefined;
 
     foreach(helditem in self.craftingItems) {
-      if(array_contains(self.swappable_crafting_ingredient_list, helditem))
+      if(array_contains(self.swappable_crafting_ingredient_list, helditem)) {
         item_to_remove = heldItem;
+      }
     }
 
-    if(isDefined(item_to_remove))
+    if(isDefined(item_to_remove)) {
       self.craftingItems = array_remove(self.craftingItems, item_to_remove);
+    }
   } else
     self.crafting_ingredient_list = array_remove(self.crafting_ingredient_list, crafting_item);
 
@@ -2136,8 +2194,9 @@ give_crafting_item(crafting_item) {
     index = get_crafting_item_table_index();
 
     self SetClientOmnvar("ui_alien_hudcraftinginfo", index);
-    if(isAlive(self) && !self is_in_laststand())
+    if(isAlive(self) && !self is_in_laststand()) {
       self IPrintLnBold(&"ALIEN_CRAFTING_OPEN_MENU");
+    }
   }
 }
 
@@ -2162,8 +2221,9 @@ get_crafting_item_slot(crafting_item) {
       recipename = TableLookupByRow(level.crafting_item_table, index, ALT_ALT_RECIPE_TYPE);
       slot = int(TableLookupByRow(level.crafting_item_table, index, ALT_ALT_SLOTNUM));
 
-      if(self.current_crafting_recipe != recipename)
+      if(self.current_crafting_recipe != recipename) {
         AssertEx(self.current_crafting_recipe == recipename, "Could not find the material slot");
+      }
     } else
       slot = int(TableLookupByRow(level.crafting_item_table, index, ALT_SLOTNUM));
   }
@@ -2182,8 +2242,9 @@ get_crafting_item_table_index() {
     matching_items = 0;
 
     foreach(item in self.craftingItems) {
-      if(array_contains(level.crafting_ingredient_lists[recipe_name], item))
+      if(array_contains(level.crafting_ingredient_lists[recipe_name], item)) {
         matching_items++;
+      }
     }
 
     if(matching_items == required_for_match) {
@@ -2194,10 +2255,11 @@ get_crafting_item_table_index() {
 }
 
 should_find_crafting_items() {
-  if(isDefined(self.craftingItems) && isDefined(level.max_crafting_items) && self.craftingItems.size >= level.max_crafting_items)
+  if(isDefined(self.craftingItems) && isDefined(level.max_crafting_items) && self.craftingItems.size >= level.max_crafting_items) {
     return false;
-  else if(!isDefined(self.current_crafting_recipe))
+  } else if(!isDefined(self.current_crafting_recipe)) {
     return false;
+  }
 
   return true;
 }

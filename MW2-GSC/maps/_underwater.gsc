@@ -27,11 +27,12 @@ friendly_bubbles_cleanup() {
 }
 
 player_scuba() {
-  if(!isSplitscreen())
+  if(!isSplitscreen()) {
     self thread player_scuba_breathe_sound();
-  else {
-    if(self == level.player)
+  } else {
+    if(self == level.player) {
       self thread player_scuba_breathe_sound();
+    }
   }
   self thread player_scuba_bubbles();
 }

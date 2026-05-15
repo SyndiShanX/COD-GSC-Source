@@ -65,66 +65,66 @@ func_4DC1(param_00) {
 }
 
 func_5320() {
-    if((level.var_910F || self issplitscreenplayer()) && !function_03BA()) {
-      var_00 = 1.5;
-      var_01 = 1.25;
-      var_02 = 24;
-      var_03 = "hudsmall";
-      var_04 = "TOP";
-      var_05 = "BOTTOM";
-      var_06 = 0;
-      var_07 = 0;
-    } else {
-      var_00 = 2.5;
-      var_01 = 1.75;
-      var_02 = 30;
-      var_03 = "hudsmall";
-      var_04 = "TOP";
-      var_05 = "BOTTOM";
-      var_06 = 50;
-      var_07 = 0;
-    }
-
-    self.var_6813 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_00);
-    self.var_6813 maps\mp\gametypes\_hud_util::func_8707(var_04, undefined, var_07, var_06);
-    self.var_6813.var_00C2 = 1;
-    self.var_6813.var_001F = 0;
-    self.var_6813.var_0018 = 0;
-    self.var_6811 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_01);
-    self.var_6811 maps\mp\gametypes\_hud_util::func_86EF(self.var_6813);
-    self.var_6811 maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
-    self.var_6811.var_00C2 = 1;
-    self.var_6811.var_001F = 0;
-    self.var_6811.var_0018 = 0;
-    self.var_6812 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_01);
-    self.var_6812 maps\mp\gametypes\_hud_util::func_86EF(self.var_6813);
-    self.var_6812 maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
-    self.var_6812.var_00C2 = 1;
-    self.var_6812.var_001F = 0;
-    self.var_6812.var_0018 = 0;
-    self.var_680A = maps\mp\gametypes\_hud_util::func_280B("white", var_02, var_02);
-    self.var_680A maps\mp\gametypes\_hud_util::func_86EF(self.var_6812);
-    self.var_680A maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
-    self.var_680A.var_00C2 = 1;
-    self.var_680A.var_001F = 0;
-    self.var_680A.var_0018 = 0;
-    self.var_680F = maps\mp\gametypes\_hud_util::func_280B("white", var_02, var_02);
-    self.var_680F maps\mp\gametypes\_hud_util::func_86EF(self.var_680A);
-    self.var_680F maps\mp\gametypes\_hud_util::func_8707("CENTER", "CENTER", 0, 0);
-    self.var_680F.var_00C2 = 1;
-    self.var_680F.var_001F = 0;
-    self.var_680F.var_0018 = 0;
-    self.var_3202 = [];
-    self.var_3202[0] = undefined;
-    self.var_3202[1] = undefined;
-    self.var_3202[2] = undefined;
-    self.var_3202[3] = undefined;
-    self.var_9106 = [];
-    self.var_9106[0] = [];
-    self.var_9106[1] = [];
-    self.var_9106[2] = [];
-    self.var_9106[3] = [];
+  if((level.var_910F || self issplitscreenplayer()) && !function_03BA()) {
+    var_00 = 1.5;
+    var_01 = 1.25;
+    var_02 = 24;
+    var_03 = "hudsmall";
+    var_04 = "TOP";
+    var_05 = "BOTTOM";
+    var_06 = 0;
+    var_07 = 0;
+  } else {
+    var_00 = 2.5;
+    var_01 = 1.75;
+    var_02 = 30;
+    var_03 = "hudsmall";
+    var_04 = "TOP";
+    var_05 = "BOTTOM";
+    var_06 = 50;
+    var_07 = 0;
   }
+
+  self.var_6813 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_00);
+  self.var_6813 maps\mp\gametypes\_hud_util::func_8707(var_04, undefined, var_07, var_06);
+  self.var_6813.var_00C2 = 1;
+  self.var_6813.var_001F = 0;
+  self.var_6813.var_0018 = 0;
+  self.var_6811 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_01);
+  self.var_6811 maps\mp\gametypes\_hud_util::func_86EF(self.var_6813);
+  self.var_6811 maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
+  self.var_6811.var_00C2 = 1;
+  self.var_6811.var_001F = 0;
+  self.var_6811.var_0018 = 0;
+  self.var_6812 = maps\mp\gametypes\_hud_util::func_27ED(var_03, var_01);
+  self.var_6812 maps\mp\gametypes\_hud_util::func_86EF(self.var_6813);
+  self.var_6812 maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
+  self.var_6812.var_00C2 = 1;
+  self.var_6812.var_001F = 0;
+  self.var_6812.var_0018 = 0;
+  self.var_680A = maps\mp\gametypes\_hud_util::func_280B("white", var_02, var_02);
+  self.var_680A maps\mp\gametypes\_hud_util::func_86EF(self.var_6812);
+  self.var_680A maps\mp\gametypes\_hud_util::func_8707(var_04, var_05, 0, 0);
+  self.var_680A.var_00C2 = 1;
+  self.var_680A.var_001F = 0;
+  self.var_680A.var_0018 = 0;
+  self.var_680F = maps\mp\gametypes\_hud_util::func_280B("white", var_02, var_02);
+  self.var_680F maps\mp\gametypes\_hud_util::func_86EF(self.var_680A);
+  self.var_680F maps\mp\gametypes\_hud_util::func_8707("CENTER", "CENTER", 0, 0);
+  self.var_680F.var_00C2 = 1;
+  self.var_680F.var_001F = 0;
+  self.var_680F.var_0018 = 0;
+  self.var_3202 = [];
+  self.var_3202[0] = undefined;
+  self.var_3202[1] = undefined;
+  self.var_3202[2] = undefined;
+  self.var_3202[3] = undefined;
+  self.var_9106 = [];
+  self.var_9106[0] = [];
+  self.var_9106[1] = [];
+  self.var_9106[2] = [];
+  self.var_9106[3] = [];
+}
 
 func_6A64(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = spawnStruct();

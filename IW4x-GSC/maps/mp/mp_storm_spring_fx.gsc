@@ -12,6 +12,7 @@ main() {
 
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_storm_spring_fx::main();
+  }
 }

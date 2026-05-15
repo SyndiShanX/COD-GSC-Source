@@ -58,8 +58,9 @@ magic_box_locks() {
   self setclientfield("magicbox_amb_fx", 2);
   self setzbarrierpiecestate(5, "closing");
 
-  while(self getzbarrierpiecestate(5) == "closing")
+  while(self getzbarrierpiecestate(5) == "closing") {
     wait 0.5;
+  }
 
   self notify("locked");
 }
@@ -69,8 +70,9 @@ magic_box_unlocks() {
   self playSound("zmb_hellbox_unlock");
   self setzbarrierpiecestate(5, "opening");
 
-  while(self getzbarrierpiecestate(5) == "opening")
+  while(self getzbarrierpiecestate(5) == "opening") {
     wait 0.5;
+  }
 
   self setzbarrierpiecestate(2, "closed");
   self showzbarrierpiece(2);

@@ -92,10 +92,12 @@ crawling_guy_crawls() {
 }
 
 crawler_deathsound(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(!isalive(attacker))
+  }
+  if(!isalive(attacker)) {
     return;
+  }
   if(attacker != level.player) {
     return;
   }
@@ -105,8 +107,9 @@ crawler_deathsound(damage, attacker, direction_vec, point, type, modelName, tagN
 crawler_sound_notetracks() {
   for(;;) {
     self waittill("crawling", notetrack);
-    if(notetrack == "scn_afchase_dying_crawl")
+    if(notetrack == "scn_afchase_dying_crawl") {
       self playSound("scn_afchase_dying_crawl");
+    }
   }
 }
 
@@ -162,35 +165,40 @@ pain_smear_for_time(fx_rate) {
 
 fade_out(fade_out_time) {
   black_overlay = get_black_overlay();
-  if(fade_out_time)
+  if(fade_out_time) {
     black_overlay FadeOverTime(fade_out_time);
+  }
 
   black_overlay.alpha = 1;
   thread eq_changes(0.5, fade_out_time);
 }
 
 eq_changes(val, fade_time) {
-  if(isDefined(level.override_eq))
+  if(isDefined(level.override_eq)) {
     return;
+  }
   if(!isDefined(level.eq_ent)) {
     waittillframeend;
     waittillframeend;
   }
 
-  if(fade_time)
+  if(fade_time) {
     level.eq_ent MoveTo((val, 0, 0), fade_time);
-  else
+  } else {
     level.eq_ent.origin = (val, 0, 0);
+  }
 }
 
 fade_in(fade_time) {
-  if(level.MissionFailed)
+  if(level.MissionFailed) {
     return;
+  }
   level notify("now_fade_in");
 
   black_overlay = get_black_overlay();
-  if(fade_time)
+  if(fade_time) {
     black_overlay FadeOverTime(fade_time);
+  }
 
   black_overlay.alpha = 0;
 
@@ -249,12 +257,14 @@ blend_player_to_turn_buckle() {
   player_rig = get_player_rig();
 
   last_melee_difference = GetTime() - level.melee_button_pressed_last;
-  if(last_melee_difference > 0)
+  if(last_melee_difference > 0) {
     last_melee_difference = last_melee_difference / 1000;
+  }
   stab_time = .4 - last_melee_difference;
 
-  if(flag("player_touched_shepherd"))
+  if(flag("player_touched_shepherd")) {
     stab_time = .4;
+  }
 
   level.player PlayerLinkToBlend(player_rig, "tag_player", stab_time, 0, 0);
   thread kill_shepherds_melee_sounds_for_time(stab_time + .4);
@@ -325,8 +335,9 @@ spawn_fake_wrestlers() {
   foreach(name, spawner in spawners) {
     spawner.count = 1;
     guy = spawner Stalingradspawn();
-    if(spawn_failed(guy))
+    if(spawn_failed(guy)) {
       return;
+    }
     guys[name] = guy;
   }
 
@@ -425,24 +436,28 @@ spawn_shepherd() {
 }
 
 get_player_rig() {
-  if(!isDefined(level.player_rig))
+  if(!isDefined(level.player_rig)) {
     level.player_rig = spawn_anim_model("player_rig");
+  }
 
-  if(flag("bloody_player_rig"))
+  if(flag("bloody_player_rig")) {
     level.player_rig setModel("viewhands_player_tf141_bloody");
+  }
 
   return level.player_rig;
 }
 
 get_player_body() {
-  if(!isDefined(level.player_body))
+  if(!isDefined(level.player_body)) {
     level.player_body = spawn_anim_model("player_body");
+  }
   return level.player_body;
 }
 
 get_gun_model() {
-  if(!isDefined(level.gun_model))
+  if(!isDefined(level.gun_model)) {
     level.gun_model = spawn_anim_model("gun_model");
+  }
 
   return level.gun_model;
 }
@@ -470,10 +485,12 @@ shep_trace_passed() {
     end = self getEye() + (0, 0, offset);
     offset += 16;
     trace = bulletTrace(start, end, false, undefined);
-    if(trace["fraction"] >= 1)
+    if(trace["fraction"] >= 1) {
       return true;
-    if(trace["surfacetype"] == "none")
+    }
+    if(trace["surfacetype"] == "none") {
       return true;
+    }
   }
   return false;
 }
@@ -680,21 +697,24 @@ make_clouds() {
   SetHalfResParticles(true);
 
   for(;;) {
-    if(IsAlive(self))
+    if(IsAlive(self)) {
       org = self.origin;
+    }
 
     playFX(level._effect["sand_storm_player"], org + (0, 0, 100));
 
-    if(IsAlive(self))
+    if(IsAlive(self)) {
       count = count - 0.3;
-    else
+    } else {
       count = count + 0.6;
+    }
     if(count >= 6) {
       break;
     }
 
-    if(count <= 1.75)
+    if(count <= 1.75) {
       count = 1.75;
+    }
 
     timer = count * 0.05;
     timer = clamp(timer, min_timer, 100);
@@ -721,24 +741,27 @@ more_dust_as_shepherd_nears() {
 }
 
 get_black_overlay() {
-  if(!isDefined(level.black_overlay))
+  if(!isDefined(level.black_overlay)) {
     level.black_overlay = create_client_overlay("black", 0, level.player);
+  }
   level.black_overlay.sort = -1;
   level.black_overlay.foreground = false;
   return level.black_overlay;
 }
 
 get_white_overlay() {
-  if(!isDefined(level.white_overlay))
+  if(!isDefined(level.white_overlay)) {
     level.white_overlay = create_client_overlay("white", 0, level.player);
+  }
 
   level.white_overlay.sort = -1;
   return level.white_overlay;
 }
 
 player_touches_shepherd(dist_to_shepherd) {
-  if(dist_to_shepherd >= 40)
+  if(dist_to_shepherd >= 40) {
     return false;
+  }
 
   flag_set("player_touched_shepherd");
 
@@ -746,20 +769,23 @@ player_touches_shepherd(dist_to_shepherd) {
 }
 
 player_melees_shepherd(dist_to_shepherd) {
-  if(dist_to_shepherd >= 100)
+  if(dist_to_shepherd >= 100) {
     return false;
+  }
 
   angles = level.player GetPlayerAngles();
   eyepos = level.shepherd GetTagOrigin("tag_eye");
   fov = 0.6428;
 
   player_looking_at_shepherd = within_fov_2d(level.player.origin, angles, eyepos, fov);
-  if(!player_looking_at_shepherd)
+  if(!player_looking_at_shepherd) {
     return false;
+  }
 
   dot = get_dot(level.shepherd.origin, level.shepherd.angles, level.player.origin);
-  if(dot < -0.173648)
+  if(dot < -0.173648) {
     return false;
+  }
 
   meleepressed = GetTime() - level.melee_button_pressed_last <= 50;
 
@@ -777,15 +803,17 @@ knife_in_player(guy) {
 }
 
 get_knife() {
-  if(!isDefined(level.knife))
+  if(!isDefined(level.knife)) {
     level.knife = spawn_anim_model("knife");
+  }
 
   return level.knife;
 }
 
 get_dof_targetEnt() {
-  if(!isDefined(level.dof_targetent))
+  if(!isDefined(level.dof_targetent)) {
     level.dof_targetent = create_dof_targetent();
+  }
 
   level.dof_targetent Unlink();
   return level.dof_targetent;
@@ -817,8 +845,9 @@ dof_target_manager(ent) {
     distance_to_target = Distance(level.player getEye(), ent.origin);
 
     level.dofDefault["nearStart"] = distance_to_target - ent.near_range;
-    if(level.dofDefault["nearStart"] <= 0)
+    if(level.dofDefault["nearStart"] <= 0) {
       level.dofDefault["nearStart"] = 1;
+    }
     level.dofDefault["nearEnd"] = distance_to_target;
     level.dofDefault["farStart"] = distance_to_target;
     level.dofDefault["farEnd"] = distance_to_target + ent.far_range;
@@ -831,13 +860,15 @@ dof_target_manager(ent) {
 
 restore_dof() {
   level notify("kill_dof_management");
-  foreach(index, value in level.dof_normal)
-  level.dofdefault[index] = value;
+  foreach(index, value in level.dof_normal) {
+    level.dofdefault[index] = value;
+  }
 }
 
 standby() {
-  if(!isDefined(level.standby_node))
+  if(!isDefined(level.standby_node)) {
     level.standby_node = spawn("script_origin", (29142.2, 36233.9, -9973.2));
+  }
   node = level.standby_node;
   node thread anim_generic_first_frame(self, "standby");
 }
@@ -954,8 +985,9 @@ blend_to_price_healing_dof(time) {
 }
 
 knife_hint_visible() {
-  if(!isDefined(level.knife_hint))
+  if(!isDefined(level.knife_hint)) {
     return false;
+  }
 
   foreach(elem in level.knife_hint) {
     return elem.alpha > 0.8;
@@ -965,11 +997,13 @@ knife_hint_visible() {
 }
 
 fade_in_knife_hint(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 1.5;
+  }
 
-  if(!isDefined(level.knife_hint))
+  if(!isDefined(level.knife_hint)) {
     draw_knife_hint();
+  }
 
   foreach(elem in level.knife_hint) {
     elem FadeOverTime(time);
@@ -1019,8 +1053,9 @@ knife_hint_blinks() {
   level notify("fade_out_knife_hint");
   level endon("fade_out_knife_hint");
 
-  if(!isDefined(level.knife_hint))
+  if(!isDefined(level.knife_hint)) {
     draw_knife_hint();
+  }
 
   fade_time = 0.10;
   hold_time = 0.20;
@@ -1068,11 +1103,13 @@ knife_hint_blinks() {
 
 fade_out_knife_hint(time) {
   level notify("fade_out_knife_hint");
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 1.5;
+  }
 
-  if(!isDefined(level.knife_hint))
+  if(!isDefined(level.knife_hint)) {
     draw_knife_hint();
+  }
 
   foreach(elem in level.knife_hint) {
     elem FadeOverTime(time);
@@ -1149,10 +1186,12 @@ impaled_spawner() {
 }
 
 impaled_guy_deathsound(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(!isalive(attacker))
+  }
+  if(!isalive(attacker)) {
     return;
+  }
   if(attacker != level.player) {
     return;
   }
@@ -1160,8 +1199,9 @@ impaled_guy_deathsound(damage, attacker, direction_vec, point, type, modelName, 
 }
 
 wait_until_time_to_twitch() {
-  if(flag("impaled_guy_twitches"))
+  if(flag("impaled_guy_twitches")) {
     return;
+  }
   level endon("impaled_guy_twitches");
   level endon("run_shep_run");
   for(;;) {
@@ -1240,8 +1280,9 @@ wait_until_player_looks_at_knife() {
     if(dot > 0.991) {
       count += 2;
     } else {
-      if(GetDvarInt("x"))
+      if(GetDvarInt("x")) {
         Print3d(pos + (0, 0, 32), "x", (1, 0, 0));
+      }
       count -= 1;
     }
 
@@ -1270,8 +1311,9 @@ flag_if_player_aims_at_shepherd(player_rig) {
     if(level.player WorldPointInReticle_Circle(pos, 45, 120)) {
       flag_set("player_aims_knife_at_shepherd");
     } else {
-      if(GetDvarInt("x"))
+      if(GetDvarInt("x")) {
         Print3d(pos, "x", (1, 0, 0));
+      }
       flag_clear("player_aims_knife_at_shepherd");
     }
     wait(0.05);
@@ -1279,21 +1321,24 @@ flag_if_player_aims_at_shepherd(player_rig) {
 }
 
 hurt_player(num, anim_time) {
-  if(!isDefined(anim_time))
+  if(!isDefined(anim_time)) {
     anim_time = 0.5;
+  }
 
   fx = getfx("no_effect");
 
-  if(isDefined(self.hurt_player_fx))
+  if(isDefined(self.hurt_player_fx)) {
     fx = getfx(self.hurt_player_fx);
+  }
 
   knife = maps\af_chase_knife_fight_code::get_knife();
   playFXOnTag(fx, knife, "TAG_FX");
 
   level notify("new_hurt");
   level endon("new_hurt");
-  if(isDefined(self.override_anim_time))
+  if(isDefined(self.override_anim_time)) {
     anim_time = self.override_anim_time;
+  }
 
   pos = level.player.origin + randomvector(1000);
 
@@ -1320,8 +1365,9 @@ hurt_player(num, anim_time) {
   recover_time = RandomFloatRange(0.2, 0.6);
 
   vision_set = "aftermath_hurt";
-  if(halt_time > 1.35)
+  if(halt_time > 1.35) {
     vision_set = "aftermath_dying";
+  }
   set_vision_set(vision_set, vision_blend_time);
 
   if(RandomInt(100) > 70) {
@@ -1334,8 +1380,9 @@ hurt_player(num, anim_time) {
 }
 
 new_pull_earthquake(anim_time) {
-  if(isDefined(self.override_anim_time))
+  if(isDefined(self.override_anim_time)) {
     anim_time = self.override_anim_time;
+  }
 
   eq = anim_time + 0.37;
   eq *= 0.22;
@@ -1368,10 +1415,11 @@ player_fails_if_does_not_occumulate() {
 
   for(;;) {
     pressed_enough = level.occumulator.presses.size >= 2;
-    if(pressed_enough)
+    if(pressed_enough) {
       fail_count += 2;
-    else
+    } else {
       fail_count -= 1;
+    }
 
     if(fail_count <= deathcount) {
       break;
@@ -1470,8 +1518,9 @@ player_pulls_out_knife(animation_name) {
           amount = clamp(amount, 1, 50);
           damage_min *= 1.15;
           damage_max *= 1.15;
-          if(isDefined(self.override_damage))
+          if(isDefined(self.override_damage)) {
             amount = self.override_damage;
+          }
 
           thread hurt_player(amount, anim_time);
         }
@@ -1493,8 +1542,9 @@ player_pulls_out_knife(animation_name) {
       animation = guy getanim(animation_name);
       guy SetAnim(animation, 1, 0, rate);
       anim_time = guy GetAnimTime(animation);
-      if(anim_time >= 0.95)
+      if(anim_time >= 0.95) {
         anim_finished = true;
+      }
     }
 
     if(isDefined(self.set_pull_weight)) {
@@ -1589,8 +1639,9 @@ track_melee() {
   while(1) {
     if(level.player IsMeleeing()) {
       level.melee_button_pressed_last = GetTime();
-      while(level.player IsMeleeing())
+      while(level.player IsMeleeing()) {
         wait .05;
+      }
     } else {
       wait .05;
     }
@@ -1674,14 +1725,18 @@ wait_for_player_to_melee_shepherd() {
 }
 
 should_cough(dist_to_shepherd, cough_timer) {
-  if(dist_to_shepherd < 400)
+  if(dist_to_shepherd < 400) {
     return false;
-  if(dist_to_shepherd > 700)
+  }
+  if(dist_to_shepherd > 700) {
     return false;
-  if(GetTime() < cough_timer)
+  }
+  if(GetTime() < cough_timer) {
     return false;
-  if(IsAlive(level.shepherd_stumble))
+  }
+  if(IsAlive(level.shepherd_stumble)) {
     return false;
+  }
   return true;
 }
 
@@ -1703,8 +1758,9 @@ get_stick_deflection() {
   move_x = abs(movement[0]);
   move_y = abs(movement[1]);
 
-  if(move_x > move_y)
+  if(move_x > move_y) {
     return move_x;
+  }
   return move_y;
 }
 
@@ -1818,8 +1874,9 @@ gun_crawl_fight_idle() {
     move_out_time = 1;
     wait(b_totaltime - move_out_time);
 
-    if(!flag("fade_away_idle_crawl_fight"))
+    if(!flag("fade_away_idle_crawl_fight")) {
       new_anim_node MoveTo(out_of_sight_offset, move_out_time, 0, 0);
+    }
 
     wait(move_out_time);
   }
@@ -1920,15 +1977,17 @@ button_needs_to_release(button_track, index) {
 
 track_buttons(button_track, button_alt, button_hints) {
   buttons = [];
-  for(i = 0; i < button_alt.size; i++)
+  for(i = 0; i < button_alt.size; i++) {
     buttons[i] = GetTime();
+  }
   button_track.button_last_release = buttons;
   button_track.button_hints = button_hints;
 
   while(1) {
     foreach(index, button_func in button_alt) {
-      if(!level.player[[button_func]]())
+      if(!level.player[[button_func]]()) {
         button_track.button_last_release[index] = GetTime();
+      }
     }
     wait .05;
   }
@@ -1990,8 +2049,9 @@ dof_shifts_to_knife() {
 }
 
 player_fails_if_he_doesnt_use_knife() {
-  if(flag("player_uses_knife"))
+  if(flag("player_uses_knife")) {
     return;
+  }
   level endon("player_uses_knife");
 
   scene = "fight_C";
@@ -2022,8 +2082,9 @@ hide_end_of_fight_C() {
 }
 
 player_tries_to_throw() {
-  if(flag("missionfailed"))
+  if(flag("missionfailed")) {
     return;
+  }
   level endon("missionfailed");
 
   level endon("player_throws_knife");
@@ -2298,8 +2359,9 @@ pullout_player_view(player_rig) {
 }
 
 force_player_to_look_at_knife_if_he_doesnt() {
-  if(flag("player_looks_at_knife"))
+  if(flag("player_looks_at_knife")) {
     return;
+  }
   level endon("player_looks_at_knife");
   wait 6;
   force_player_to_look_at_knife(8);
@@ -2307,8 +2369,9 @@ force_player_to_look_at_knife_if_he_doesnt() {
 
 kill_player_view(player_rig) {
   time = 1.5;
-  if(level.start_point == "kill")
+  if(level.start_point == "kill") {
     time = 0;
+  }
 
   level.player PlayerLinkToBlend(player_rig, "tag_player", time, time * 0.3, time * 0.5);
 
@@ -2349,8 +2412,9 @@ wait_for_player_to_start_pulling_knife() {
 
   thread player_fails_if_he_doesnt_use_knife();
 
-  if(!knife_hint_visible())
+  if(!knife_hint_visible()) {
     fade_in_knife_hint();
+  }
 
   thread fade_to_death_if_no_use();
 
@@ -2477,8 +2541,9 @@ convert_shepherd_to_drone() {
     return;
   }
   animname = level.shepherd.animname;
-  if(isDefined(level.shepherd.magic_bullet_shield))
+  if(isDefined(level.shepherd.magic_bullet_shield)) {
     level.shepherd stop_magic_bullet_shield();
+  }
 
   level.shepherd = maps\_vehicle_aianim::convert_guy_to_drone(level.shepherd);
   Objective_OnEntity(obj("get_shepherd"), level.shepherd);
@@ -2667,8 +2732,9 @@ kill_all_the_ai_and_fx_from_boatride() {
 eq_blender() {
   setsaveddvar("g_enteqdist", 1);
 
-  if(isDefined(level.eq_ent))
+  if(isDefined(level.eq_ent)) {
     return;
+  }
   ent = spawn_tag_origin();
   level.eq_ent = ent;
 
@@ -2685,11 +2751,13 @@ set_water_sheating_time(bump_small, bump_big) {
 }
 
 stop_melee_hint() {
-  if(!isalive(level.crawler))
+  if(!isalive(level.crawler)) {
     return true;
+  }
 
-  if(!close_enough_for_melee_hint())
+  if(!close_enough_for_melee_hint()) {
     return true;
+  }
 
   return flag("player_learned_melee");
 }
@@ -2705,8 +2773,9 @@ player_melee_hint() {
 }
 
 close_enough_for_melee_hint() {
-  if(!isalive(level.crawler))
+  if(!isalive(level.crawler)) {
     return false;
+  }
 
   dist = distance(level.crawler.origin, level.player.origin);
 
@@ -2723,8 +2792,9 @@ hint_melee() {
   for(;;) {
     close_enough = close_enough_for_melee_hint();
     if(close_enough) {
-      if(!was_close_enough)
+      if(!was_close_enough) {
         close_enough_time = gettime();
+      }
     } else {
       close_enough_time = 0;
     }
@@ -2733,8 +2803,9 @@ hint_melee() {
 
     attack_pressed = level.player attackButtonPressed();
 
-    if(hint_time_up || attack_pressed)
+    if(hint_time_up || attack_pressed) {
       display_hint("hint_melee");
+    }
 
     was_close_enough = close_enough;
     wait 0.05;

@@ -33,7 +33,7 @@ main() {
 
   gametype = level.gametype;
   if(!isDefined(level.isHorde)) {
-    if(!(gametype == "twar" || gametype == "sd" || gametype == "sr"))
+    if(!(gametype == "twar" || gametype == "sd" || gametype == "sr")) {}
   }
   level thread DynamicEvent(::recovery_dynamic_event);
 

@@ -119,7 +119,8 @@ giveBackWeapon() {
     self switchToWeapon(self.lastUsedWeapon);
   } else {
     weaponList = self GetWeaponsListPrimaries();
-    if(isDefined(weaponList[0]))
+    if(isDefined(weaponList[0])) {
       self switchToWeapon(weaponList[0]);
+    }
   }
 }

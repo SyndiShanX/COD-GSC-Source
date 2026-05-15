@@ -67,8 +67,9 @@ get_guy_from_spawner() {
 #using_animtree("generic_human");
 orient_dir(yaw) {
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     self OrientMode("face angle", yaw);
     wait(0.05);
   }
@@ -80,8 +81,9 @@ process_path() {
 
   add_collision_to_path(path);
 
-  if(getdebugdvarint("vehicle_spline_debug"))
+  if(getdebugdvarint("vehicle_spline_debug")) {
     thread draw_path(path);
+  }
 
   return path;
 }
@@ -174,11 +176,13 @@ create_path() {
   prev_targ = targ;
   for(;;) {
     next_targ = targ;
-    if(isDefined(targ.target))
+    if(isDefined(targ.target)) {
       next_targ = getstruct(targ.target, "targetname");
+    }
 
-    if(!isDefined(next_targ.z))
+    if(!isDefined(next_targ.z)) {
       next_targ.z = next_targ.origin[2];
+    }
 
     next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
 
@@ -212,11 +216,13 @@ create_path() {
   new_count = 0;
   for(;;) {
     next_targ = targ;
-    if(isDefined(targ.target))
+    if(isDefined(targ.target)) {
       next_targ = getstruct(targ.target, "targetname");
+    }
 
-    if(!isDefined(next_targ.z))
+    if(!isDefined(next_targ.z)) {
       next_targ.z = next_targ.origin[2];
+    }
 
     next_targ.origin = (next_targ.origin[0], next_targ.origin[1], 0);
 
@@ -332,8 +338,9 @@ add_collision_to_path_ent(targ, col_org) {
     return;
   }
   max_dist = targ.road_width;
-  if(targ.dist_to_next_targ > max_dist)
+  if(targ.dist_to_next_targ > max_dist) {
     max_dist = targ.dist_to_next_targ;
+  }
 
   if(distance(col_org.origin, targ.next_node.midpoint) > max_dist * 1.5) {
     return;
@@ -346,8 +353,9 @@ add_collision_to_path_ent(targ, col_org) {
   prog2 = get_progression_between_points(next_org.origin, targ.midpoint, targ.next_node.midpoint);
   progress2 = prog2["progress"];
 
-  if(progress1 < 0 || progress2 < 0)
+  if(progress1 < 0 || progress2 < 0) {
     return;
+  }
   if(progress1 > targ.dist_to_next_targ && progress2 > targ.dist_to_next_targ) {
     return;
   }
@@ -438,12 +446,14 @@ add_collision_offsets_to_path_ent(targ, close_org, far_org) {
 add_vol_to_node(targ, max_col_progress, min_col_progress, right_offset, left_offset, right_offset_percent, left_offset_percent) {
   colvol = [];
   colvol["max"] = max_col_progress;
-  if(colvol["max"] > targ.dist_to_next_targ)
+  if(colvol["max"] > targ.dist_to_next_targ) {
     colvol["max"] = targ.dist_to_next_targ;
+  }
 
   colvol["min"] = min_col_progress;
-  if(colvol["min"] < 0)
+  if(colvol["min"] < 0) {
     colvol["min"] = 0;
+  }
 
   assert(colvol["min"] < colvol["max"]);
 
@@ -486,8 +496,9 @@ get_progression_between_points(start, first_point, second_point) {
   difference = vectornormalize(offset_org - start);
   dot = vectordot(right, difference);
   prog["dot"] = dot;
-  if(dot > 0)
+  if(dot > 0) {
     prog["offset"] *= -1;
+  }
 
   return prog;
 }
@@ -496,12 +507,14 @@ wipe_out(bike) {
   foreach(col_radius in self.targ.col_radiuses) {
     crashPoint = (self.origin[0], self.origin[1], 0);
 
-    if(distance((col_radius.origin[0], col_radius.origin[1], 0), crashPoint) < col_radius.radius)
+    if(distance((col_radius.origin[0], col_radius.origin[1], 0), crashPoint) < col_radius.radius) {
       return true;
+    }
   }
 
-  if(bike.health >= 100)
+  if(bike.health >= 100) {
     return false;
+  }
 
   level.bike_score++;
 
@@ -519,11 +532,13 @@ vehicle_line(bike) {
 
 spawner_random_team() {
   waittillframeend;
-  if(!isDefined(self.riders))
+  if(!isDefined(self.riders)) {
     return;
+  }
   team = "axis";
-  if(cointoss())
+  if(cointoss()) {
     team = "allies";
+  }
   foreach(guy in self.riders) {
     guy.team = team;
   }
@@ -538,16 +553,18 @@ get_spawn_position(player_targ, my_progress) {
   offset = undefined;
   if(isDefined(level.player.offset)) {
     random_offset = 500;
-    if(cointoss())
+    if(cointoss()) {
       random_offset *= -1;
+    }
     offset = level.player.offset + random_offset;
   } else {
     offset = randomfloatrange(half_road_width * -1, half_road_width);
   }
 
   obstacle_array = get_obstacle_dodge_amount(targ, progress, offset);
-  if(isDefined(obstacle_array["dodge"]))
+  if(isDefined(obstacle_array["dodge"])) {
     offset = obstacle_array["dodge"];
+  }
 
   spawn_pos = get_position_from_spline_unlimited(targ, progress, offset);
   array = [];
@@ -644,8 +661,9 @@ rider_death_detection(bike) {
 
 wipeout(msg) {
   if(!self.wipeout) {
-    if(getdebugdvarint("vehicle_spline_debug"))
+    if(getdebugdvarint("vehicle_spline_debug")) {
       Print3d(self.origin, msg, (1, 0.25, 0), 1, 1.5, 400);
+    }
   }
 
   self.wipeout = true;
@@ -686,19 +704,22 @@ update_bike_player_avoidance(my_bike) {
 }
 
 bike_drives_path(bike) {
-  if(!isDefined(bike.left_spline_path_time))
+  if(!isDefined(bike.left_spline_path_time)) {
     bike.left_spline_path_time = gettime();
+  }
 
   bike.wipeout = false;
   update_bike_player_avoidance(bike);
 
-  if(!isDefined(bike.player_offset))
+  if(!isDefined(bike.player_offset)) {
     bike.player_offset = 250;
+  }
 
   bike.steering = 0;
   offset = randomfloatrange(0, 1);
-  if(!isDefined(bike.offset_percent))
+  if(!isDefined(bike.offset_percent)) {
     bike.offset_percent = offset * 2 - 1;
+  }
 
   targ = self;
   ent = spawnStruct();
@@ -732,8 +753,9 @@ bike_drives_path(bike) {
   bike.old_pos = bike.origin;
 
   for(;;) {
-    if(getdebugdvarint("vehicle_spline_debug"))
+    if(getdebugdvarint("vehicle_spline_debug")) {
       bike debug_bike_line();
+    }
 
     if(!isalive(bike)) {
       break;
@@ -777,8 +799,9 @@ bike_drives_path(bike) {
 
   ent notify("stop_bike");
   level notify("biker_dies");
-  if(bike.wipeout && !flag("race_complete"))
+  if(bike.wipeout && !flag("race_complete")) {
     wait(5);
+  }
 
   ent ent_flag_clear("biker_reaches_path_end");
 }
@@ -786,22 +809,26 @@ bike_drives_path(bike) {
 get_obstacle_dodge_amount(targ, progress, offset) {
   array["near_obstacle"] = false;
   foreach(vol in targ.col_volumes) {
-    if(progress < vol["min"])
+    if(progress < vol["min"]) {
       continue;
-    if(progress > vol["max"])
+    }
+    if(progress > vol["max"]) {
       continue;
+    }
     array["near_obstacle"] = true;
-    if(offset < vol["left_offset"])
+    if(offset < vol["left_offset"]) {
       continue;
+    }
     if(offset > vol["right_offset"]) {
       continue;
     }
     org = (targ.midpoint + targ.next_node.midpoint) * 0.5;
 
-    if(offset > vol["mid_offset"])
+    if(offset > vol["mid_offset"]) {
       array["dodge"] = vol["right_offset"];
-    else
+    } else {
       array["dodge"] = vol["left_offset"];
+    }
     break;
   }
   return array;
@@ -810,10 +837,12 @@ get_obstacle_dodge_amount(targ, progress, offset) {
 sweep_tells_vehicles_to_get_off_path() {
   for(;;) {
     self waittill("trigger", other);
-    if(!isDefined(other.script_noteworthy))
+    if(!isDefined(other.script_noteworthy)) {
       continue;
-    if(other.script_noteworthy != "sweepable")
+    }
+    if(other.script_noteworthy != "sweepable") {
       continue;
+    }
     timer = randomfloatrange(0, 1);
     other thread notify_delay("enable_spline_path", timer);
   }
@@ -841,8 +870,9 @@ priceliner() {
     }
     forward = anglesToForward(level.player.vehicle.angles);
     forward *= -150;
-    if(getdebugdvarint("price_line"))
+    if(getdebugdvarint("price_line")) {
       Line(level.player.origin + forward, self.origin, (1, 0, 0));
+    }
     wait(0.05);
   }
 }
@@ -895,15 +925,18 @@ modulate_speed_based_on_progress() {
       dif += 750;
       speed = level.player.vehicle.veh_speed + dif * 0.05;
       max_speed = level.player.vehicle.veh_speed;
-      if(max_speed < 100)
+      if(max_speed < 100) {
         max_speed = 100;
+      }
 
-      if(speed > max_speed)
+      if(speed > max_speed) {
         speed = max_speed;
-      else
-      if(speed < self.min_speed)
-        speed = self.min_speed;
-      level.desired_speed = speed;
+      } else {
+        if(speed < self.min_speed) {
+          speed = self.min_speed;
+        }
+        level.desired_speed = speed;
+      }
 
       self Vehicle_SetSpeed(speed, 90, 20);
     } else {
@@ -920,17 +953,18 @@ price_match_player_speed(maxaccell, maxdecel) {
   array = get_progression_between_points(level.player.vehicle.origin, self.origin + forward * 1, self.origin - forward * 1);
   progress = array["progress"];
 
-  if(progress > 4000)
+  if(progress > 4000) {
     self Vehicle_SetSpeed(0, 90, 20);
-  else {
+  } else {
     dot = get_dot(self.origin, self.angles, level.player.origin);
     multiplier = 1;
 
     if(progress > 0) {
       multiplier = 1;
     } else {
-      if(progress > -500)
+      if(progress > -500) {
         multiplier = 1.25;
+      }
 
       if(multiplier > 0.95 && dot > 0.97) {
         multiplier = 0.95;
@@ -938,10 +972,12 @@ price_match_player_speed(maxaccell, maxdecel) {
     }
 
     my_speed = 70 * multiplier;
-    if(my_speed < self.min_speed)
+    if(my_speed < self.min_speed) {
       my_speed = self.min_speed;
-    if(my_speed < 25)
+    }
+    if(my_speed < 25) {
       my_speed = 25;
+    }
 
     level.price_desired_speed = my_speed;
     self Vehicle_SetSpeed(my_speed, maxaccell, maxdecel);
@@ -956,9 +992,9 @@ match_player_speed(maxaccell, maxdecel) {
   array = get_progression_between_points(level.player.vehicle.origin, self.origin + forward * 1, self.origin - forward * 1);
   progress = array["progress"];
 
-  if(progress > 4000)
+  if(progress > 4000) {
     self Vehicle_SetSpeed(0, 90, 20);
-  else {
+  } else {
     if(progress < level.SPLINE_MIN_PROGRESS && gettime() > self.left_spline_path_time + 4000) {
       self wipeout("low progress!");
     }
@@ -968,22 +1004,25 @@ match_player_speed(maxaccell, maxdecel) {
 
     multiplier = 1;
 
-    if(progress > 150)
+    if(progress > 150) {
       multiplier = 0.6;
-    else
-    if(progress > 100)
-      multiplier = 1.0;
-    else
-    if(progress < -100)
-      multiplier = 1.5;
-
+    } else {
+      if(progress > 100) {
+        multiplier = 1.0;
+      }
+    } else {
+      if(progress < -100) {
+        multiplier = 1.5;
+      }
+    }
     if(isDefined(level.player.offset)) {
       if(progress > 250) {}
     }
 
     my_speed = level.player.vehicle.veh_speed * multiplier;
-    if(my_speed < 25)
+    if(my_speed < 25) {
       my_speed = 25;
+    }
 
     self Vehicle_SetSpeed(my_speed, maxaccell, maxdecel);
   }
@@ -997,8 +1036,9 @@ track_player_progress(org) {
   self.progress = 0;
   player_sweep_trigger = getent("player_sweep_trigger", "targetname");
   sweep_trigger = isDefined(player_sweep_trigger);
-  if(sweep_trigger)
+  if(sweep_trigger) {
     player_sweep_trigger thread sweep_tells_vehicles_to_get_off_path();
+  }
 
   for(;;) {
     if(self.targ == self.targ.next_node) {
@@ -1152,26 +1192,29 @@ set_bike_position(ent) {
   offset_limit = 0.95;
   road_half_width = targ.road_width * 0.5;
   road_half_width -= 50;
-  if(offset > road_half_width)
+  if(offset > road_half_width) {
     offset = road_half_width;
-  else
-  if(offset < -1 * road_half_width)
-    offset = -1 * road_half_width;
-
+  } else {
+    if(offset < -1 * road_half_width) {
+      offset = -1 * road_half_width;
+    }
+  }
   if(targ != targ.next_node) {
     endpos = bike get_bike_pos_from_spline(targ, progress, offset, bike.origin[2]);
 
     dot = get_dot(bike.origin, bike.angles, endpos);
 
-    if(dot < 0.97)
+    if(dot < 0.97) {
       speed = 50;
-    else
-    if(dot < 0.96)
-      speed = 25;
-    else
-    if(dot < 0.95)
-      speed = 15;
-
+    } else {
+      if(dot < 0.96) {
+        speed = 25;
+      }
+    } else {
+      if(dot < 0.95) {
+        speed = 15;
+      }
+    }
     bike vehicleDriveTo(endpos, speed);
     if(!isDefined(level.player.vehicle)) {
       bike Vehicle_SetSpeed(65, 1, 1);
@@ -1180,12 +1223,12 @@ set_bike_position(ent) {
       bike match_player_speed(45, 30);
     }
 
-    if(getdebugdvarint("vehicle_spline_debug") && isDefined(level.player.vehicle))
-
-      if(bike.veh_speed > level.player.vehicle.veh_speed)
-        thread Linedraw(bike.origin, endpos, (0.9, 0.1, 0.3), 1, 0, timer);
-      else
-        thread Linedraw(bike.origin, endpos, (0.3, 0.1, 0.9), 1, 0, timer);
+    if(getdebugdvarint("vehicle_spline_debug") && isDefined(level.player.vehicle)) {}
+    if(bike.veh_speed > level.player.vehicle.veh_speed) {
+      thread Linedraw(bike.origin, endpos, (0.9, 0.1, 0.3), 1, 0, timer);
+    } else {
+      thread Linedraw(bike.origin, endpos, (0.3, 0.1, 0.9), 1, 0, timer);
+    }
   }
 
   bike.progress_targ = targ;
@@ -1316,30 +1359,36 @@ bike_randomly_changes_lanes() {
   self endon("end_path");
   for(;;) {
     if(self.targ.col_volumes.size == 0 && self.dodge_dir == 0) {
-      if(cointoss())
+      if(cointoss()) {
         self.goal_dir++;
-      else
+      } else {
         self.goal_dir--;
+      }
 
-      if(self.goal_dir > 1)
+      if(self.goal_dir > 1) {
         self.goal_dir -= 3;
-      else
-      if(self.goal_dir < -1)
-        self.goal_dir += 3;
+      } else {
+        if(self.goal_dir < -1) {
+          self.goal_dir += 3;
+        }
+      }
     }
     wait(randomfloatrange(1, 3));
   }
 }
 
 should_stabilize() {
-  if(self.goal_dir == 0)
+  if(self.goal_dir == 0) {
     return true;
+  }
 
-  if(self.goal_dir == 1 && self.offset > self.safe_offset)
+  if(self.goal_dir == 1 && self.offset > self.safe_offset) {
     return true;
+  }
 
-  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1)
+  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1) {
     return true;
+  }
 
   return false;
 }
@@ -1393,8 +1442,9 @@ stabalize(max_turn_speed, tilt_rate) {
     self.tilt += tilt_rate;
   }
 
-  if(abs(self.tilt) < tilt_rate)
+  if(abs(self.tilt) < tilt_rate) {
     self.tilt = tilt_rate;
+  }
 }
 
 tilt_right(max_turn_speed, tilt_rate) {
@@ -1404,8 +1454,9 @@ tilt_right(max_turn_speed, tilt_rate) {
   }
 
   self.tilt += tilt_rate;
-  if(self.tilt >= max_turn_speed)
+  if(self.tilt >= max_turn_speed) {
     self.tilt = max_turn_speed;
+  }
 }
 
 tilt_left(max_turn_speed, tilt_rate) {
@@ -1415,8 +1466,9 @@ tilt_left(max_turn_speed, tilt_rate) {
   }
 
   self.tilt -= tilt_rate;
-  if(self.tilt < max_turn_speed * -1)
+  if(self.tilt < max_turn_speed * -1) {
     self.tilt = max_turn_speed * -1;
+  }
 }
 
 get_player_progress() {
@@ -1428,15 +1480,17 @@ get_player_progress() {
 }
 
 get_player_targ() {
-  if(isDefined(level.player.targ))
+  if(isDefined(level.player.targ)) {
     return level.player.targ;
+  }
   return level.snowmobile_path[0];
 }
 
 debug_bike_line() {
   color = (0.2, 0.2, 1.0);
-  if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed)
+  if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed) {
     color = (1.0, 0.2, 0.2);
+  }
 
   Line(self.old_pos, self.origin, color, 1, 0, 50000);
   self.old_pos = self.origin;

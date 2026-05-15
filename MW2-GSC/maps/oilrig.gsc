@@ -13,8 +13,9 @@
 #include maps\_slowmo_breach;
 
 main() {
-  if(getDvar("r_reflectionProbeGenerate") == "1")
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
+  }
   setDvar("breach_debug", "0");
   setDvar("breach_weapons", "1");
 
@@ -48,8 +49,9 @@ main() {
   level.stealthDistanceSquared = 512 * 512;
   trigs = getEntArray("trigger_multiple", "classname");
   foreach(trigger in trigs) {
-    if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes"))
+    if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes")) {
       level.aColornodeTriggers = array_add(level.aColornodeTriggers, trigger);
+    }
   }
 
   add_start("debug", ::start_debug, "debug");
@@ -314,8 +316,9 @@ start_surface_notifies() {
   aArray = array_merge(level.sdvSquad01, level.sdvSquad02);
   while(1 < 100) {
     wait(0.05);
-    foreach(guy in aArray)
-    guy notify("finished_swim_animation");
+    foreach(guy in aArray) {
+      guy notify("finished_swim_animation");
+    }
     i++;
   }
 }
@@ -528,8 +531,9 @@ underwater_sequence() {
   eSub_01.DDS delete();
   eSub_01.DoorDDS delete();
   eSub_01.DoorDDS.eDoorSeal delete();
-  foreach(part in eSub_01.aDDSparts)
-  part delete();
+  foreach(part in eSub_01.aDDSparts) {
+    part delete();
+  }
   eSub_01 delete();
 
   eSub_02.body delete();
@@ -607,8 +611,9 @@ grate_enemies_setup() {
 delete_on_flag(flag) {
   self endon("death");
   flag_wait(flag);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 grate_enemies_wait_to_be_killed() {
@@ -827,10 +832,12 @@ water_movement(org_view_bob) {
     self.angles = (level.player.angles[0], level.player.angles[1], org_view_bob.angles[2]);
     self moveto(newLocation, updateTime, 0, 0);
   }
-  if(isDefined(org_view_bob))
+  if(isDefined(org_view_bob)) {
     org_view_bob delete();
-  if(isDefined(self))
+  }
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 underwater_player_flags() {
@@ -878,10 +885,11 @@ water_monitor() {
   while(true) {
     wait(0.05);
     playerEye = level.player getEye();
-    if(playerEye[2] < water_level)
+    if(playerEye[2] < water_level) {
       level notify("player_is_below_water");
-    else
+    } else {
       level notify("player_is_above_water");
+    }
   }
 }
 
@@ -971,10 +979,11 @@ grate_enemy_think() {
   self waittillmatch("single anim", "grab");
   self stopSounds();
   wait(0.05);
-  if(self.animname == "hostile_stealthkill_player")
+  if(self.animname == "hostile_stealthkill_player") {
     self thread play_sound_on_entity("grate_enemy_grabbed_grunt_01");
-  else
+  } else {
     self thread play_sound_on_entity("grate_enemy_grabbed_grunt_02");
+  }
 
   self waittillmatch("single anim", "end");
   self delete();
@@ -1063,10 +1072,11 @@ player_looking_at_grate_guard_logic() {
     wait(0.05);
     if(flag("player_near_grate_guard")) {
       bInFOV = within_fov(level.player getEye(), level.player getPlayerAngles(), org.origin, level.cosine["25"]);
-      if(bInFOV)
+      if(bInFOV) {
         flag_set("player_looking_at_grate_guard");
-      else
+      } else {
         flag_clear("player_looking_at_grate_guard");
+      }
     } else
       flag_clear("player_looking_at_grate_guard");
   }
@@ -1081,8 +1091,9 @@ grate_enemy_hint() {
     thread hint(sHint);
     flag_set("player_in_position_for_stealth_kill");
 
-    while(flag("player_looking_at_grate_guard"))
+    while(flag("player_looking_at_grate_guard")) {
       wait(0.05);
+    }
 
     flag_clear("player_in_position_for_stealth_kill");
     thread hint_fade();
@@ -1130,8 +1141,9 @@ player_in_water_monitor() {
 
   trig_in_water = getent("trig_in_water", "targetname");
   assert(isDefined(trig_in_water));
-  while(level.player isTouching(trig_in_water))
+  while(level.player isTouching(trig_in_water)) {
     wait(0.05);
+  }
   thread player_out_of_water_monitor();
 }
 
@@ -1167,10 +1179,9 @@ friendly_surface_think() {
   } else
     eNodeIntro thread anim_loop_solo(self, "surface_idle", "stop_idle");
 
-  if(self.animname == "sdv02_pilot")
+  if(self.animname == "sdv02_pilot") {
     self thread underwater_stealth_kill();
-
-  else {
+  } else {
     flag_wait("player_looking_at_floating_body");
     self delete();
   }
@@ -1245,8 +1256,9 @@ player_looking_at_gear_friendlies(eGearNode) {
   while(true) {
     wait(0.05);
     bInFOV = within_fov(level.player getEye(), level.player getPlayerAngles(), eGearNode.origin, level.cosine["25"]);
-    if(bInFOV)
+    if(bInFOV) {
       flag_set("player_looking_at_gear_friendlies");
+    }
   }
 }
 
@@ -1262,8 +1274,9 @@ underwater_stealth_kill() {
   level.eNodeIntroDuplicate anim_single(aStealthKillActors, "stealth_kill");
 
   self waittillmatch("single anim", "end");
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   self delete();
 
   fin_remove_guy = undefined;
@@ -1335,8 +1348,9 @@ door_to_deck1_think() {
 teleport_when_out_of_sight(eNode) {
   while(true) {
     wait(0.05);
-    while(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["45"]))
+    while(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["45"])) {
       wait(0.1);
+    }
     if(distance(self.origin, level.player.origin) > 512) {
       break;
     }
@@ -1369,20 +1383,23 @@ dialogue_get_amped_on_stairway() {
   level endon("player_at_lower_breach");
 
   wait(randomfloatrange(4, 6));
-  while(flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail")) {
     wait(.5);
+  }
 
   radio_dialogue("oilrig_nsl_keepittight");
 
   wait(randomfloatrange(6, 8));
-  while(flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail")) {
     wait(.5);
+  }
 
   radio_dialogue("oilrig_nsl_readyweapons");
 
   wait(randomfloatrange(6, 8));
-  while(flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail")) {
     wait(.5);
+  }
 
   radio_dialogue("oilrig_nsl_moveup2");
 }
@@ -1429,8 +1446,9 @@ dialogue_nag_to_deck1() {
 
   volume_first_room = getent("volume_first_room", "script_noteworthy");
   while(!flag("upper_room_breached")) {
-    if(level.player istouching(volume_first_room))
+    if(level.player istouching(volume_first_room)) {
       dialogue_random_manhandler_nag_to_deck1();
+    }
     wait(randomfloatrange(8, 14));
   }
 }
@@ -1473,8 +1491,9 @@ is_player_looking_at_railing() {
     wait(.25);
     if(self adsButtonPressed()) {
       playerEye = self getEye();
-      if(within_fov(playerEye, self getPlayerAngles(), railing_org.origin, level.cosine["25"]))
+      if(within_fov(playerEye, self getPlayerAngles(), railing_org.origin, level.cosine["25"])) {
         flag_set("player_looking_at_railing");
+      }
     }
   }
 }
@@ -1532,8 +1551,9 @@ move_breach_safe_volumes() {
 }
 
 railing_patroller_react(eNode) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   level endon("railing_patroller_dead");
   level waittill("stealth_broken");
   eNode notify("stop_idle");
@@ -1672,8 +1692,9 @@ delete_first_breach_room_ai() {
   aAI_to_delete = volume_first_room get_ai_touching_volume();
   if(aAI_to_delete.size) {
     foreach(guy in aAI_to_delete) {
-      if(isDefined(guy.magic_bullet_shield))
+      if(isDefined(guy.magic_bullet_shield)) {
         guy stop_magic_bullet_shield();
+      }
       guy delete();
     }
   }
@@ -1852,8 +1873,9 @@ ambush_sequence() {
 
   flag_wait_or_timeout("obj_c4_ambush_plant_complete", 6);
 
-  if(!flag("obj_c4_ambush_plant_complete"))
+  if(!flag("obj_c4_ambush_plant_complete")) {
     flag_set("obj_c4_ambush_plant_complete");
+  }
 
   thread switch_player_weapons_to_loud_versions();
 
@@ -1944,16 +1966,19 @@ hostage_manhandle_sequence() {
 
   flag_wait("player_has_started_planting_c4");
 
-  while(within_fov(level.player getEye(), level.player getPlayerAngles(), aHostagesForSequence[0].origin, level.cosine["45"]))
+  while(within_fov(level.player getEye(), level.player getPlayerAngles(), aHostagesForSequence[0].origin, level.cosine["45"])) {
     wait(.1);
+  }
 
-  foreach(hostage in aHostagesForSequence)
-  hostage hide();
+  foreach(hostage in aHostagesForSequence) {
+    hostage hide();
+  }
 
   if(isDefined(level.manhandler)) {
     if(level.manhandler istouching(volume_ambush_room)) {
-      if(isDefined(level.manhandler.magic_bullet_shield))
+      if(isDefined(level.manhandler.magic_bullet_shield)) {
         level.manhandler stop_magic_bullet_shield();
+      }
       level.manhandler delete();
     }
   }
@@ -1961,8 +1986,9 @@ hostage_manhandle_sequence() {
   walkReference anim_first_frame(aWalkActors, "prisoner_manhandle_walk");
   runReference anim_first_frame(aRunActors, "prisoner_manhandle_run");
 
-  foreach(hostage in aHostagesForSequence)
-  hostage show();
+  foreach(hostage in aHostagesForSequence) {
+    hostage show();
+  }
 
   player_looking_at_prisoner_sequence = getent("player_looking_at_prisoner_sequence", "targetname");
   player_looking_at_prisoner_sequence trigger_on();
@@ -1975,12 +2001,14 @@ hostage_manhandle_sequence() {
 }
 
 play_anim_and_delete(eAnimNode, sAnim) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
   self endon("death");
   eAnimNode anim_single_solo(self, sAnim);
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   self delete();
 }
 
@@ -2011,8 +2039,9 @@ friendly_plant_c4(eAnimOrg, eNode) {
 
   eAnimOrg anim_generic_reach(self, "C4_plant_start");
   self setgoalpos(self.origin);
-  while(level.player isTouching(safeVolume))
+  while(level.player isTouching(safeVolume)) {
     wait(0.05);
+  }
 
   eAnimOrg thread anim_generic(self, "C4_plant");
 
@@ -2097,8 +2126,9 @@ teamleader_ambush_think() {
   eTrig = getent("ambush_area", "targetname");
   eTrig waittill("trigger");
 
-  if((flag("player_in_ambush_position")) || (flag("player_on_ladder")))
+  if((flag("player_in_ambush_position")) || (flag("player_on_ladder"))) {
     eNode = getnode("node_guard_scaffolding", "targetname");
+  }
   self.goalradius = 182;
   self setgoalnode(eNode);
 }
@@ -2165,8 +2195,9 @@ c4_think(org_c4) {
   org_c4 thread obj_c4_ambush_think();
   org_c4 thread c4_delete_unplanted(c4_model);
   org_c4 waittill("c4_detonation");
-  if(!flag("ambush_c4_triggered"))
+  if(!flag("ambush_c4_triggered")) {
     flag_set("ambush_c4_triggered");
+  }
 }
 
 c4_delete_unplanted(c4_model) {
@@ -2202,8 +2233,9 @@ ambush_c4_triggered() {
 
   aAi = volume_ambush_room get_ai_touching_volume();
   foreach(guy in aAi) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
     if(guy is_in_array(level.squad, guy)) {
       level thread maps\_friendlyfire::missionfail();
@@ -2247,10 +2279,12 @@ ambush_room_aftermath() {
 }
 
 cause_damage_in_radius_trigger() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(level.player istouching(self))
+  }
+  if(level.player istouching(self)) {
     return;
+  }
   RadiusDamage(self.origin, self.radius, 500, 500);
   self delete();
 }
@@ -2336,8 +2370,9 @@ enemy_breach_dialogue(org, iRoomNumber) {
   sSound = "oilrig_mrc_killhostages_room_" + iRoomNumber + "_0" + iDialogueNumber;
   wait(.5);
   eEnemy = get_closest_ai(level.player.origin, "axis");
-  if(isDefined(eEnemy))
+  if(isDefined(eEnemy)) {
     eEnemy thread play_sound_on_tag_endon_death(level.scr_sound[sSound], "tag_origin");
+  }
 }
 
 enemies_alerted() {
@@ -2458,8 +2493,9 @@ heli_kill_nag(eHeli, sEndFlag) {
     wait(randomfloatrange(15, 25));
 
     if((isDefined(eHeli)) && (isDefined(eHeli.firingguns)) && (eHeli.firingguns == true)) {
-      while((isDefined(eHeli.firingguns)) && (eHeli.firingguns == true))
+      while((isDefined(eHeli.firingguns)) && (eHeli.firingguns == true)) {
         wait(.5);
+      }
     }
 
     if(!level.player player_using_missile()) {
@@ -2525,8 +2561,9 @@ dialogue_deck2() {
   radio_dialogue("oilrig_nsl_rescuethemselves");
 
   wait(2);
-  if(!flag("player_on_right_top_deck"))
+  if(!flag("player_on_right_top_deck")) {
     radio_dialogue("oilrig_nsl_moveup");
+  }
 }
 
 zodiacs_evac() {
@@ -2611,8 +2648,9 @@ heli_kill_failsafe(eHeli) {
   level endon("heli_deck2_shot_down");
   flag_wait("top_deck_room_breached");
   flag_set("heli_not_killed_in_time");
-  if(isDefined(eHeli))
+  if(isDefined(eHeli)) {
     eHeli delete();
+  }
   wait(.5);
   flag_set("heli_deck2_shot_down");
 }
@@ -2628,9 +2666,9 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
   for(;;) {
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isDefined(attacker) || !isPlayer(attacker))
+    if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
-    else {
+    } else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }
@@ -2786,8 +2824,9 @@ deck3_firefight() {
 
   if(!is_specialop()) {
     foreach(dude in level.squad) {
-      if(!isDefined(dude))
+      if(!isDefined(dude)) {
         continue;
+      }
       dude.disableDamageShieldPain = true;
     }
   }
@@ -2805,8 +2844,9 @@ deck3_firefight() {
 
   if(!is_specialop()) {
     foreach(dude in level.squad) {
-      if(!isDefined(dude))
+      if(!isDefined(dude)) {
         continue;
+      }
       dude.disableDamageShieldPain = undefined;
     }
   }
@@ -2820,14 +2860,16 @@ deck3_firefight() {
   flag_wait_or_timeout("player_approaching_topdeck_building", 28);
   if(!flag("player_approaching_topdeck_building")) {
     if(!is_specialop()) {
-      if(!flag("player_approaching_topdeck_building"))
+      if(!flag("player_approaching_topdeck_building")) {
         thread dialogue_random_thermal_hint();
+      }
     }
   }
 
   flag_wait_or_timeout("player_approaching_topdeck_building", 28);
-  if(!flag("player_approaching_topdeck_building"))
+  if(!flag("player_approaching_topdeck_building")) {
     thread spawn_smoke_flankers();
+  }
 
   flag_wait_either("player_near_breach_topdeck_right", "player_near_breach_topdeck_left");
 
@@ -2841,8 +2883,9 @@ deck3_firefight() {
 
   battlechatter_off("allies");
 
-  if(!flag("stop_smoke"))
+  if(!flag("stop_smoke")) {
     flag_set("stop_smoke");
+  }
   array_thread(level.effects_mid_decks, ::pauseEffect);
   array_thread(level.effects_underwater, ::pauseEffect);
   array_thread(level.effects_lower_rig, ::pauseEffect);
@@ -2884,13 +2927,15 @@ delete_ai_if_alive() {
     return;
   }
   if(!is_specialop()) {
-    if(is_in_array(level.squad, self))
+    if(is_in_array(level.squad, self)) {
       return;
+    }
   }
 
   if(isDefined(self)) {
-    if(isDefined(self.magic_bullet_shield))
+    if(isDefined(self.magic_bullet_shield)) {
       self stop_magic_bullet_shield();
+    }
     self delete();
   }
 }
@@ -2957,8 +3002,9 @@ c4_barrels_think() {
         break;
       }
 
-      if(eDamageTrigger.hitpoints > 0)
+      if(eDamageTrigger.hitpoints > 0) {
         eDamageTrigger.hitpoints -= 1;
+      }
 
       if(eDamageTrigger.hitpoints == 0) {
         break;
@@ -2976,10 +3022,11 @@ c4_barrel_explode() {
   level.player playLocalSound("oilrig_ambush_explosion");
   playFX(getfx("player_death_explosion"), level.player.origin);
   earthquake(1, 1, level.player.origin, 100);
-  if(is_specialop())
+  if(is_specialop()) {
     maps\_specialops::so_force_deadquote("@OILRIG_MISSIONFAIL_EXPLOSIVES");
-  else
+  } else {
     setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES");
+  }
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -3104,8 +3151,9 @@ escape_sequence() {
 
   foreach(guy in aRiders) {
     guy disable_ai_color();
-    if(!isDefined(guy.magic_bullet_shield))
+    if(!isDefined(guy.magic_bullet_shield)) {
       guy thread magic_bullet_shield();
+    }
     guy setFlashbangImmunity(true);
     guy.ignoreme = true;
     guy.grenadeawareness = 0;
@@ -3126,8 +3174,9 @@ escape_sequence() {
   level.littlebird_escape thread load_side("left", aRoof_riders_left);
   level.littlebird_escape thread load_side("right", aRoof_riders_right);
 
-  while(level.littlebird_escape.riders.size < 8)
+  while(level.littlebird_escape.riders.size < 8) {
     wait(.1);
+  }
 
   wait(1);
   level.littlebird_escape vehicle_ai_event("idle_alert_to_casual");
@@ -3203,10 +3252,11 @@ sub_through_ice() {
   eProp = undefined;
   aSubmarineParts = getEntArray("submarine_03", "targetname");
   foreach(part in aSubmarineParts) {
-    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub"))
+    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub")) {
       eSub = part;
-    else
+    } else {
       eProp = part;
+    }
   }
 
   level.subDummy = spawn("script_origin", eSub.origin);
@@ -3399,8 +3449,9 @@ obj_c4_ambush_think() {
   Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 
   self waittill("c4_planted");
-  if(!flag("player_has_started_planting_c4"))
+  if(!flag("player_has_started_planting_c4")) {
     flag_set("player_has_started_planting_c4");
+  }
   level.C4locations = array_remove(level.C4locations, self);
   waittillframeend;
   objective_additionalposition(3, index, (0, 0, 0));
@@ -3579,11 +3630,13 @@ AI_army_think() {
 }
 
 AI_think(guy) {
-  if(guy.team == "axis")
+  if(guy.team == "axis") {
     guy thread AI_axis_think();
+  }
 
-  if(guy.team == "allies")
+  if(guy.team == "allies") {
     guy thread AI_allies_think();
+  }
 }
 
 AI_allies_think() {
@@ -3593,10 +3646,12 @@ AI_allies_think() {
 
 AI_axis_think() {
   self endon("death");
-  if(self has_shotgun())
+  if(self has_shotgun()) {
     self cqb_walk("on");
-  if(level.oilrigStealth == true)
+  }
+  if(level.oilrigStealth == true) {
     self thread AI_stealth_monitor();
+  }
 
   doorFlashChanceFactor = undefined;
   baseaccuracyFactor = undefined;
@@ -3622,19 +3677,22 @@ AI_axis_think() {
 
   self.baseaccuracy = self.baseaccuracy * baseaccuracyFactor;
 
-  while(!isDefined(self.doorFlashChance))
+  while(!isDefined(self.doorFlashChance)) {
     wait(0.05);
+  }
 
   self.doorFlashChance = self.doorFlashChance * doorFlashChanceFactor;
 
-  if((flag("need_to_check_axis_death")) && (level.gameskill < 2))
+  if((flag("need_to_check_axis_death")) && (level.gameskill < 2)) {
     self thread AI_axis_death_think();
+  }
 }
 
 AI_axis_death_think() {
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isPlayer(attacker)))
+  if((isDefined(attacker)) && (isPlayer(attacker))) {
     level notify("player_killed_an_enemy");
+  }
 }
 
 ai_rappel_think() {
@@ -3687,16 +3745,19 @@ ai_rappel_think() {
 rope_anim(eRope, sRopeAnim) {
   self anim_single_solo(eRope, sRopeAnim);
   flag_wait("player_at_stairs_to_top_deck");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
-  if(isDefined(eRope))
+  }
+  if(isDefined(eRope)) {
     eRope delete();
+  }
 }
 
 ai_rappel_death() {
   self endon("over_solid_ground");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self set_deathanim("fastrope_fall");
   self waittill("death");
   self thread play_sound_in_space("generic_death_falling");
@@ -3734,8 +3795,9 @@ heli_patrol_think() {
 }
 
 vehicle_heli_setup(aTargetnames) {
-  foreach(sTargetname in aTargetnames)
-  thread vehicle_heli_think(sTargetname);
+  foreach(sTargetname in aTargetnames) {
+    thread vehicle_heli_think(sTargetname);
+  }
 }
 
 vehicle_heli_think(sTargetname) {
@@ -3788,11 +3850,13 @@ player_stealth_monitor() {
 hostage_evac_think() {
   level endon("mission failed");
 
-  while(!isDefined(self.breachfinished))
+  while(!isDefined(self.breachfinished)) {
     wait(.1);
+  }
 
-  while(self.breachfinished == false)
+  while(self.breachfinished == false) {
     wait(.1);
+  }
 
   wait(randomfloatrange(1, 2));
   eNode = level.hostageNodes[0];
@@ -3807,10 +3871,11 @@ hostage_evac_think() {
 
 dialogue_random_pmc(org) {
   iRand = randomint(21);
-  if(iRand < 10)
+  if(iRand < 10) {
     sLine = "oilrig_merc_chatter_0" + iRand;
-  else
+  } else {
     sLine = "oilrig_merc_chatter_" + iRand;
+  }
   thread play_sound_in_space(level.scr_sound[sLine], org);
 }
 
@@ -3861,8 +3926,9 @@ waittill_using_thermal_scope_or_timeout_func(time) {
   thread timeout_func(time);
   while(true) {
     wait(0.1);
-    while(!level.player player_has_thermal())
+    while(!level.player player_has_thermal()) {
       wait(.5);
+    }
     if(level.player adsButtonPressed()) {
       break;
     }
@@ -3898,8 +3964,9 @@ volumes_clear_of_enemies(aVolumes) {
   array = undefined;
   foreach(volume in aVolumes) {
     array = volume get_ai_touching_volume("axis");
-    if(array.size)
+    if(array.size) {
       return false;
+    }
   }
   return true;
 }
@@ -3928,8 +3995,9 @@ dialogue_breach_nag(iBreachGroup) {
     }
 
     iNagNumber++;
-    if(iNagNumber > 3)
+    if(iNagNumber > 3) {
       iNagNumber = 0;
+    }
   }
 }
 
@@ -3978,11 +4046,12 @@ open_gate(bImmediately, bDontWaitForFlags) {
   assert(isDefined(eGate));
   eGate connectpaths();
 
-  if(isDefined(bImmediately))
+  if(isDefined(bImmediately)) {
     eGate moveto((eGate.origin - (0, -170, 0)), 1);
-  else {
-    if(!isDefined(bDontWaitForFlags))
+  } else {
+    if(!isDefined(bDontWaitForFlags)) {
       flag_wait_either("ambush_enemies_approaching", "ambush_enemies_alerted_prematurely");
+    }
     eGate thread play_sound_on_entity("scn_oilrig_fence_open");
     eGate moveto((eGate.origin - (0, -170, 0)), 8, 3, 3);
     wait(8);
@@ -4056,11 +4125,13 @@ initPrecache() {
 }
 
 initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
-  if(!isDefined(bWarpPlayer))
+  if(!isDefined(bWarpPlayer)) {
     bWarpPlayer = true;
+  }
 
-  if(!isDefined(bDontSpawnFriendlies))
+  if(!isDefined(bDontSpawnFriendlies)) {
     bDontSpawnFriendlies = false;
+  }
 
   waittillframeend;
   assert(isDefined(sStartPoint));
@@ -4155,8 +4226,9 @@ first_breach(breach_rig) {
 ambush_patroller_think() {
   self endon("death");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "body_discover")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "body_discover") {
     self.usechokepoints = false;
+  }
 
   self.ignoreme = true;
   old_movepalybackrate = self.moveplaybackrate;
@@ -4205,12 +4277,14 @@ mission_fail_generic(soundOrg) {
 
   wait(.5);
   thread premature_hostage_death_fx();
-  if(isDefined(soundOrg))
+  if(isDefined(soundOrg)) {
     soundOrg thread play_sound_in_space("weap_deserteagle_fire_npc");
+  }
   wait(.25);
   level.player thread play_loop_sound_on_entity("emt_oilrig_alarm_alert");
-  if(isDefined(soundOrg))
+  if(isDefined(soundOrg)) {
     soundOrg thread play_sound_in_space("weap_deserteagle_fire_npc");
+  }
   wait(.5);
   thread mission_fail_hostage_executed();
 }
@@ -4293,8 +4367,9 @@ close_door_deck1_opposite() {
 }
 
 ai_cleanup(dist) {
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 1024;
+  }
   aAI_to_delete = getaiarray("axis");
   thread AI_delete_when_out_of_sight(aAI_to_delete, dist);
 }
@@ -4309,10 +4384,11 @@ submarine_spawn(sSubNumber, eNode) {
   eSub.prop = undefined;
   aSubmarineParts = getEntArray("submarine_" + sSubNumber, "targetname");
   foreach(part in aSubmarineParts) {
-    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub"))
+    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub")) {
       eSub.body = part;
-    else
+    } else {
       eSub.prop = part;
+    }
   }
 
   eSub.DDS = undefined;
@@ -4347,10 +4423,11 @@ submarine_spawn(sSubNumber, eNode) {
   eSub.body.origin = eSub.origin;
   eSub.body.angles = eSub.angles;
   eSub.animname = "submarine_" + sSubNumber;
-  if(eSub.animname == "submarine_01")
+  if(eSub.animname == "submarine_01") {
     eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -324), (0, 0, 0));
-  else
+  } else {
     eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -348), (0, 0, 0));
+  }
 
   eSub.body show();
 
@@ -4452,12 +4529,14 @@ get_AI_with_script_noteworthy(sTeam, sNoteworthy) {
   aTeamArray = getaiarray("allies");
   aAI = [];
   foreach(guy in aTeamArray) {
-    if((isDefined(guy.script_noteworthy)) && (guy.script_noteworthy == sNoteworthy))
+    if((isDefined(guy.script_noteworthy)) && (guy.script_noteworthy == sNoteworthy)) {
       aAI = array_add(aAI, guy);
+    }
   }
   assertex(aAI.size < 2, "There is more than one AI with script_noteworthy of + " + sNoteworthy);
-  if(aAI.size == 0)
+  if(aAI.size == 0) {
     assertmsg("there are no AI in team " + sTeam + " with script_noteworthy: " + sNoteworthy);
+  }
 
   return aAI[0];
 }
@@ -4488,9 +4567,9 @@ friendlies_shoot_heli_with_rockets(eHeli) {
           continue;
         }
         playerEye = level.player getEye();
-        if(within_fov(playerEye, level.player getPlayerAngles(), guy.origin, level.cosine["45"]))
+        if(within_fov(playerEye, level.player getPlayerAngles(), guy.origin, level.cosine["45"])) {
           continue;
-        else {
+        } else {
           eHeliTarget = spawn("script_origin", eHeli.origin + (0, 0, -200));
           eHeli thread delete_on_death(eHeliTarget);
           eHeliTarget linkto(eHeli);
@@ -4506,14 +4585,16 @@ friendlies_shoot_heli_with_rockets(eHeli) {
     }
 
     if((isDefined(eHeliTarget)) && (bullettracepassed(eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin, true, eFriendly))) {
-      if(!isDefined(eFriendly))
+      if(!isDefined(eFriendly)) {
         continue;
+      }
       MagicBullet("rpg_nodamage", eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin);
       eHeliTarget delete();
       playerSawRocket = within_fov(level.player getEye(), level.player getPlayerAngles(), eHeli.origin, level.cosine["45"]);
       wait(.5);
-      if(playerSawRocket)
+      if(playerSawRocket) {
         dialogue_random_friendly_rocket_miss_heli();
+      }
     }
   }
 }
@@ -4528,14 +4609,16 @@ oilrig_stealth_monitor_on(bMissionFail) {
 
   level waittill("stealth_broken");
 
-  if(isDefined(bMissionFail))
+  if(isDefined(bMissionFail)) {
     thread mission_fail_generic();
+  }
 }
 
 AI_stealth_monitor() {
   self endon("death");
-  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "not_alerted"))
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "not_alerted")) {
     return;
+  }
   self notify("running_stealth_monitor_on_me");
   self endon("running_stealth_monitor_on_me");
   level endon("oilrig_stealth_monitor_off");
@@ -4555,8 +4638,9 @@ AI_stealth_monitor() {
     }
   }
   wait(1);
-  if(isalive(self))
+  if(isalive(self)) {
     self thread AI_become_alerted();
+  }
 }
 
 AI_become_alerted() {
@@ -4580,10 +4664,12 @@ AI_player_distance_monitor() {
 
   while(isDefined(self)) {
     wait(1);
-    if(!within_fov(self.origin, self.angles, level.player.origin + (0, 0, 32), level.cosine["45"]))
+    if(!within_fov(self.origin, self.angles, level.player.origin + (0, 0, 32), level.cosine["45"])) {
       continue;
-    if(!sighttracepassed(self.origin + (0, 0, 32), level.player.origin + (0, 0, 32), false, self))
+    }
+    if(!sighttracepassed(self.origin + (0, 0, 32), level.player.origin + (0, 0, 32), false, self)) {
       continue;
+    }
     if(distancesquared(self.origin, level.player.origin) < level.stealthDistanceSquared) {
       break;
     }
@@ -4600,8 +4686,9 @@ oilrig_destructible_monitor() {
 ignoreme_on_squad_and_player() {
   level.player.ignoreme = true;
   foreach(guy in level.squad) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.ignoreme = true;
     guy setthreatbiasgroup("oblivious");
   }
@@ -4610,8 +4697,9 @@ ignoreme_on_squad_and_player() {
 ignoreme_off_squad_and_player() {
   level.player.ignoreme = false;
   foreach(guy in level.squad) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.ignoreme = false;
     guy setthreatbiasgroup("allies");
   }
@@ -4639,15 +4727,18 @@ init_air_vehicle_flags() {
 }
 
 air_nodes_think() {
-  if(!isDefined(self.script_flag))
+  if(!isDefined(self.script_flag)) {
     return;
+  }
   flag_init(self.script_flag);
-  if(getDvar("oilrig_debug") == "1")
+  if(getDvar("oilrig_debug") == "1") {
     self thread debug_message(self.script_flag, self.origin, 9999);
+  }
   self waittill("trigger");
   flag_set(self.script_flag);
-  if(getDvar("oilrig_debug") == "1")
+  if(getDvar("oilrig_debug") == "1") {
     iPrintlnbold("flag: " + self.script_flag + " has been set");
+  }
 }
 
 friendly_speed_adjustment_on() {
@@ -4656,16 +4747,18 @@ friendly_speed_adjustment_on() {
 
 friendly_speed_adjustment_off() {
   foreach(guy in level.squad) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy notify("stop_adjust_movement_speed");
     guy.moveplaybackrate = 1.0;
   }
 }
 
 friendly_adjust_movement_speed() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self notify("stop_adjust_movement_speed");
   self endon("death");
   self endon("stop_adjust_movement_speed");
@@ -4683,8 +4776,9 @@ friendly_adjust_movement_speed() {
 }
 
 friendly_should_speed_up() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
 
   prof_begin("friendly_movement_rate_math");
@@ -4807,23 +4901,28 @@ friendly_redshirt_think() {
 }
 
 destructible_cleanup() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self common_scripts\_destructible::cleanupVars();
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 AI_delete(excluders) {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(excluders)) && (excluders.size > 0)) {
-    if(is_in_array(excluders, self))
-      return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if((isDefined(excluders)) && (excluders.size > 0)) {
+    if(is_in_array(excluders, self)) {
+      return;
+    }
+  }
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   if(!isSentient(self)) {}
 
   self delete();
@@ -4833,18 +4932,21 @@ all_ai_dead_in_volumes(aVolumes) {
   aAI = [];
   foreach(volume in aVolumes) {
     array = volume get_ai_touching_volume();
-    if(array.size)
+    if(array.size) {
       aAI = array_merge(aAI, array);
+    }
   }
-  if(aAI.size)
+  if(aAI.size) {
     return false;
-  else
+  } else {
     return true;
+  }
 }
 
 force_weapon_when_player_not_looking(weaponName) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   while(within_fov(level.player.origin, level.player getplayerangles(), self.origin, level.cosine["45"])) {
     wait 1;
@@ -4853,13 +4955,15 @@ force_weapon_when_player_not_looking(weaponName) {
 }
 
 AI_left_deck3_dudes_think() {
-  if(!flag("left_deck3_dudes_spawned"))
+  if(!flag("left_deck3_dudes_spawned")) {
     flag_set("left_deck3_dudes_spawned");
+  }
 }
 
 AI_turret_guys_think() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   waittillframeend;
   if(level.gameskill == 0) {

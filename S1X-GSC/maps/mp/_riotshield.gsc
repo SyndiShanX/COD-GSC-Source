@@ -314,8 +314,9 @@ isValidNonShieldWeapon(weapon) {
     return false;
   }
 
-  if(maps\mp\gametypes\_class::isValidEquipment(weapon, true) || maps\mp\gametypes\_class::isValidEquipment(weapon, false))
+  if(maps\mp\gametypes\_class::isValidEquipment(weapon, true) || maps\mp\gametypes\_class::isValidEquipment(weapon, false)) {
     return false;
+  }
 
   if(weaponIsRiotShield(weapon)) {
     return false;

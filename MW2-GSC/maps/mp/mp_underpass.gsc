@@ -23,6 +23,7 @@ main() {
   setDvar("r_lightGridIntensity", 1.3);
   setDvar("r_lightGridContrast", .5);
 
-  if(level.ps3)
+  if(level.ps3) {
     setDvar("sm_sunShadowScale", "0.5");
+  }
 }

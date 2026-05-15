@@ -1694,8 +1694,9 @@ ending_moments() {
 
     level.player takeallweapons();
 
-    if(!flag("test_ending_body_toss"))
+    if(!flag("test_ending_body_toss")) {
       level.ghost.attackeraccuracy = 0;
+    }
 
     level.player.attackeraccuracy = 0;
     level.player.ignorerandombulletdamage = 1;
@@ -1740,11 +1741,13 @@ ending_moments() {
 
     level.player thread ending_drag_damagecheck();
 
-    if(!flag("test_ending_body_toss") && !flag("test_ending"))
+    if(!flag("test_ending_body_toss") && !flag("test_ending")) {
       level.ghost stop_magic_bullet_shield();
+    }
 
-    if(!flag("test_ending_body_toss"))
+    if(!flag("test_ending_body_toss")) {
       level.ghost delete();
+    }
 
     playerview waittillmatch("single anim", "mortarhit");
     thread ending_mortarhit("ending_mortarhit_1");
@@ -2119,20 +2122,24 @@ ending_shadow_fader() {
 }
 
 ending_shadow_fader_mover(setting, fadeTime, accelTime, decelTime) {
-  if(!isDefined(setting))
+  if(!isDefined(setting)) {
     setting = 0.25;
+  }
 
   assertEX(setting <= 0.25, "Specified value for sm_sunSampleSizeNear is out of range.");
   assertEX(setting >= 0.015625, "Specified value for sm_sunSampleSizeNear is out of range.");
 
-  if(!isDefined(fadeTime))
+  if(!isDefined(fadeTime)) {
     fadeTime = 1;
+  }
 
-  if(!isDefined(accelTime))
+  if(!isDefined(accelTime)) {
     accelTime = 1;
+  }
 
-  if(!isDefined(decelTime))
+  if(!isDefined(decelTime)) {
     decelTime = 1;
+  }
 
   level.shadowfader MoveTo((setting, 0, 0), fadeTime, accelTime, decelTime);
 }
@@ -2427,8 +2434,9 @@ ending_slowmo(duration, speed) {
 }
 
 ending_actors_think() {
-  if(!isDefined(level.ending_actors))
+  if(!isDefined(level.ending_actors)) {
     level.ending_actors = [];
+  }
 
   self.animname = self.script_noteworthy;
   self.team = "allies";

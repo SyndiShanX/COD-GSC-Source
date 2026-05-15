@@ -25,6 +25,7 @@ wake_fx() {
   playFXOnTag(common_scripts\utility::getfx("gunboat_wake"), self, "j_bodymid");
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     stopFXOnTag(common_scripts\utility::getfx("gunboat_wake"), self, "j_bodymid");
+  }
 }

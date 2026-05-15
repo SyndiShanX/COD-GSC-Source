@@ -40,8 +40,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   return positions;
 }
@@ -69,6 +70,7 @@ fire_missile_node() {
   other fireWeapon(other.missileTags[other.nextMissileTag], eTarget, (0, 0, 0));
 
   other.nextMissileTag++;
-  if(other.nextMissileTag >= other.missileTags.size)
+  if(other.nextMissileTag >= other.missileTags.size) {
     other.nextMissileTag = 0;
+  }
 }

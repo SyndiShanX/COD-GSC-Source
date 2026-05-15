@@ -41,8 +41,9 @@ Callback_PlayerLastStandHorde(eInflictor, attacker, iDamage, sMeansOfDeath, sWea
 }
 
 gameShouldEnd(player) {
-  if(CONST_FORCE_LAST_STAND)
+  if(CONST_FORCE_LAST_STAND) {
     return false;
+  }
 
   isAnyPlayerStillActive = false;
 
@@ -72,11 +73,13 @@ hordeEndGame() {
 }
 
 mayDoLastStandHorde(player) {
-  if(CONST_FORCE_LAST_STAND)
+  if(CONST_FORCE_LAST_STAND) {
     return true;
+  }
 
-  if(player touchingBadTrigger())
+  if(player touchingBadTrigger()) {
     return false;
+  }
 
   return true;
 }
@@ -93,10 +96,11 @@ registerLastStandParameter(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon
   lastStandParams.sHitLoc = sHitLoc;
   lastStandParams.lastStandStartTime = getTime();
 
-  if(isDefined(attacker) && isPlayer(attacker) && (attacker getCurrentPrimaryWeapon() != "none"))
+  if(isDefined(attacker) && isPlayer(attacker) && (attacker getCurrentPrimaryWeapon() != "none")) {
     lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-  else
+  } else {
     lastStandParams.sPrimaryWeapon = undefined;
+  }
 
   self.lastStandParams = lastStandParams;
 }
@@ -220,8 +224,9 @@ lastStandWaittillLifeRecived() {
 
   player waittill("revive_trigger", reviver);
 
-  if(isDefined(reviver) && isPlayer(reviver) && reviver != player)
+  if(isDefined(reviver) && isPlayer(reviver) && reviver != player) {
     player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("revived", reviver);
+  }
 
   player lastStandRespawnPlayerHorde(self);
 }
@@ -294,16 +299,18 @@ lastStandUpdateReviveIconColorHorde(reviveEnt, reviveIcon, bleedOutTime) {
   wait bleedOutTime / 3;
   reviveIcon.color = (1.0, 0.64, 0.0);
 
-  while(reviveEnt.inUse)
+  while(reviveEnt.inUse) {
     wait(0.05);
+  }
 
   self playDeathSound();
 
   wait bleedOutTime / 3;
   reviveIcon.color = (1.0, 0.0, 0.0);
 
-  while(reviveEnt.inUse)
+  while(reviveEnt.inUse) {
     wait(0.05);
+  }
 
   self playDeathSound();
 }
@@ -312,8 +319,9 @@ lastStandTimerHorde(bleedOutTime, reviveEnt) {
   self endon("disconnect");
 
   timer_offset = 90;
-  if(!issplitscreen())
+  if(!issplitscreen()) {
     timer_offset = 135;
+  }
 
   timer = self maps\mp\gametypes\_hud_util::createTimer("hudsmall", 1.0);
   timer maps\mp\gametypes\_hud_util::setPoint("CENTER", undefined, 0, timer_offset);
@@ -349,8 +357,9 @@ lastStandAmmoWacher() {
     ammoStock = self GetWeaponAmmoStock(currentWeapon);
     clipSize = WeaponClipSize(currentWeapon);
 
-    if(ammoStock < clipSize)
+    if(ammoStock < clipSize) {
       self setWeaponAmmoStock(currentWeapon, clipSize);
+    }
   }
 }
 
@@ -396,8 +405,9 @@ array_remove_perk(perkArray, perkName) {
   newPerkArray = [];
 
   foreach(subArray in perkArray) {
-    if(subArray["name"] != perkName)
+    if(subArray["name"] != perkName) {
       newPerkArray[newPerkArray.size] = subArray;
+    }
   }
 
   return newPerkArray;

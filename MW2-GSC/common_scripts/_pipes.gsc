@@ -11,8 +11,9 @@ level_pipe_fx_chance = 33;
 main() {
   level._pipe_fx_time = 25;
   pipes = getEntArray("pipe_shootable", "targetname");
-  if(!pipes.size)
+  if(!pipes.size) {
     return;
+  }
   level._pipes = spawnStruct();
   level._pipes.num_pipe_fx = 0;
 
@@ -57,14 +58,16 @@ pipe_wait_loop() {
     self waittill("damage", damage, other, direction_vec, P, type);
 
     if(hasTakenDamage) {
-      if(randomint(100) <= level_pipe_fx_chance)
+      if(randomint(100) <= level_pipe_fx_chance) {
         continue;
+      }
     }
     hasTakenDamage = true;
 
     result = self pipe_logic(direction_vec, P, type, other);
-    if(result)
+    if(result) {
       remaining--;
+    }
 
     if(remaining <= 0) {
       break;
@@ -75,23 +78,28 @@ pipe_wait_loop() {
 }
 
 pipe_logic(direction_vec, P, type, damageOwner) {
-  if(level._pipes.num_pipe_fx > level_limit_pipe_fx)
+  if(level._pipes.num_pipe_fx > level_limit_pipe_fx) {
     return false;
+  }
 
-  if(!isDefined(level._pipes._pipe_methods[type]))
+  if(!isDefined(level._pipes._pipe_methods[type])) {
     P = self pipe_calc_nofx(P, type);
-  else
+  } else {
     P = self[[level._pipes._pipe_methods[type]]](P, type);
+  }
 
-  if(!isDefined(P))
+  if(!isDefined(P)) {
     return false;
+  }
 
-  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
+  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn") {
     return false;
+  }
 
   foreach(value in self.pipe_fx_array) {
-    if(DistanceSquared(P, value.origin) < 25)
+    if(DistanceSquared(P, value.origin) < 25) {
       return false;
+    }
   }
 
   vec = VectorFromLineToPoint(self.A, self.B, P);
@@ -114,8 +122,9 @@ pipefx(P, vec, damageOwner) {
 
   level._pipes.num_pipe_fx++;
 
-  if(isSP() || self.script_noteworthy != "steam")
+  if(isSP() || self.script_noteworthy != "steam") {
     self thread pipe_damage(P, vec, damageOwner, snd);
+  }
 
   playFX(level._pipes._effect[self.script_noteworthy], P, vec);
   wait time;
@@ -156,11 +165,13 @@ pipe_damage(P, vec, damageOwner, fx) {
 }
 
 allow_pipe_damage() {
-  if(!isSP())
+  if(!isSP()) {
     return false;
+  }
 
-  if(!isDefined(level.pipesDamage))
+  if(!isDefined(level.pipesDamage)) {
     return true;
+  }
 
   return (level.pipesDamage);
 }
@@ -197,8 +208,9 @@ precacheFX() {
   steam = false;
   fire = false;
   foreach(value in self) {
-    if(value.script_noteworthy == "water")
+    if(value.script_noteworthy == "water") {
       value.script_noteworthy = "steam";
+    }
 
     if(value.script_noteworthy == "steam") {
       value willNeverChange();

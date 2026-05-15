@@ -10,6 +10,7 @@ main() {
   level._effect["light_shaft_dust_large"] = loadfx("dust/light_shaft_dust_large");
   level._effect["light_shaft_dust_med"] = loadfx("dust/light_shaft_dust_med");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_killhouse_fx::main();
+  }
 }

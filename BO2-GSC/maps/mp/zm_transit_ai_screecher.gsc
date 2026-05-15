@@ -48,8 +48,9 @@ screecher_should_burrow() {
     self animscripted(ground_pos, self.angles, "zm_burrow");
     self playSound("zmb_screecher_dig");
 
-    if(!(isDefined(green_light.burrow_active) && green_light.burrow_active) && (isDefined(green_light.power_on) && green_light.power_on))
+    if(!(isDefined(green_light.burrow_active) && green_light.burrow_active) && (isDefined(green_light.power_on) && green_light.power_on)) {
       green_light thread create_portal();
+    }
 
     maps\mp\animscripts\zm_shared::donotetracks("burrow_anim");
     green_light notify("burrow_done");
@@ -96,8 +97,9 @@ portal_player_watcher() {
   self endon("disconnect");
 
   while(true) {
-    if(!self isonground())
+    if(!self isonground()) {
       self player_wait_land();
+    }
 
     wait 0.1;
   }
@@ -106,8 +108,9 @@ portal_player_watcher() {
 player_wait_land() {
   self endon("disconnect");
 
-  while(!self isonground())
+  while(!self isonground()) {
     wait 0.1;
+  }
 
   if(level.portals.size > 0) {
     remove_portal = undefined;
@@ -173,8 +176,9 @@ other_players_close_to_light(ignore_player) {
       }
       dist_sq = distance2dsquared(player.origin, self.origin);
 
-      if(dist_sq < 14400)
+      if(dist_sq < 14400) {
         return true;
+      }
     }
   }
 
@@ -185,8 +189,9 @@ screecher_should_runaway(player) {
   if(maps\mp\zm_transit::player_entered_safety_light(player)) {
     screecher_print("runaway: green light");
 
-    if(!isDefined(player.screecher))
+    if(!isDefined(player.screecher)) {
       player thread do_player_general_vox("general", "screecher_flee_green");
+    }
 
     return true;
   }
@@ -194,8 +199,9 @@ screecher_should_runaway(player) {
   if(maps\mp\zm_transit::player_entered_safety_zone(player)) {
     screecher_print("runaway: safety zone");
 
-    if(!isDefined(player.screecher))
+    if(!isDefined(player.screecher)) {
       player thread do_player_general_vox("general", "screecher_flee");
+    }
 
     return true;
   }
@@ -205,8 +211,9 @@ screecher_should_runaway(player) {
   if(bus_dist_sq < 62500) {
     screecher_print("runaway: bus");
 
-    if(!isDefined(player.screecher))
+    if(!isDefined(player.screecher)) {
       player thread do_player_general_vox("general", "screecher_flee");
+    }
 
     return true;
   }
@@ -218,8 +225,9 @@ transit_screecher_cleanup() {
   green_light = self.green_light;
 
   if(isDefined(green_light)) {
-    if(isDefined(green_light.claimed))
+    if(isDefined(green_light.claimed)) {
       green_light.claimed = undefined;
+    }
 
     if(self.state == "burrow_started") {
       screecher_print("clean up portal");
@@ -228,8 +236,9 @@ transit_screecher_cleanup() {
       green_light.hole moveto(green_light.hole.start_origin, 1.0);
       green_light.burrow_active = 0;
 
-      if(isDefined(green_light.hole_fx))
+      if(isDefined(green_light.hole_fx)) {
         green_light.hole_fx delete();
+      }
     }
   }
 }

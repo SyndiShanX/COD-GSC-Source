@@ -33,30 +33,33 @@ idle() {
   }
   node = undefined;
 
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     node = self;
-  else {
+  } else {
     node = getnode(self.target, "targetname");
     ent = getent(self.target, "targetname");
     struct = getstruct(self.target, "targetname");
     getfunc = undefined;
 
-    if(isDefined(node))
+    if(isDefined(node)) {
       getfunc = ::get_node;
-    else if(isDefined(ent))
+    } else if(isDefined(ent)) {
       getfunc = ::get_ent;
-    else if(isDefined(struct))
+    } else if(isDefined(struct)) {
       getfunc = ::getstruct;
+    }
 
     node = [[getfunc]](self.target, "targetname");
 
-    while(isDefined(node.target))
+    while(isDefined(node.target)) {
       node = [[getfunc]](node.target, "targetname");
+    }
   }
 
   anime = node.script_animation;
-  if(!isDefined(anime))
+  if(!isDefined(anime)) {
     anime = "random";
+  }
 
   if(!check_animation(anime, node)) {
     return;
@@ -87,10 +90,11 @@ idle_reach_node(node, idle_anim) {
   self add_func(::send_notify, "stop_idle_proc");
   self thread do_wait_any();
 
-  if(isDefined(self.script_patroller))
+  if(isDefined(self.script_patroller)) {
     self waittill("_patrol_reached_path_end");
-  else
+  } else {
     node anim_generic_reach(self, idle_anim);
+  }
 }
 
 idle_proc(node, idle_anim, react_anim) {
@@ -115,8 +119,9 @@ idle_proc(node, idle_anim, react_anim) {
     node thread anim_first_frame_solo(chair, "sit_load_ak_react");
   }
 
-  if(node.script_animation == "lean_smoke")
+  if(node.script_animation == "lean_smoke") {
     self thread attach_cig_self();
+  }
 
   if(node.script_animation == "sleep") {
     chair = spawn_anim_model("chair");
@@ -172,12 +177,14 @@ reaction_sleep_wait_wakeup_dist(guy, dist) {
   distsqrd = dist * dist;
 
   while(1) {
-    while(distancesquared(self.origin, guy.origin) > distsqrd)
+    while(distancesquared(self.origin, guy.origin) > distsqrd) {
       wait .1;
+    }
     guy.ignoreall = false;
 
-    while(distancesquared(self.origin, guy.origin) <= distsqrd)
+    while(distancesquared(self.origin, guy.origin) <= distsqrd) {
       wait .1;
+    }
     guy.ignoreall = true;
   }
 }
@@ -207,10 +214,11 @@ reaction_proc(node, ender, react_anim, tag) {
   }
 
   if(type != "doFlashBanged") {
-    if(isDefined(tag) || isDefined(self.has_delta))
+    if(isDefined(tag) || isDefined(self.has_delta)) {
       node anim_generic(self, react_anim, tag);
-    else
+    } else {
       node anim_generic_custom_animmode(self, "gravity", react_anim);
+    }
   }
 }
 
@@ -245,18 +253,21 @@ check_animation(anime, node) {
   if(anime == "random") {
     array2 = [];
     for(i = 0; i < array.size; i++) {
-      if(!isDefined(level.scr_anim["generic"][array[i] + "_react"]))
+      if(!isDefined(level.scr_anim["generic"][array[i] + "_react"])) {
         array2[array2.size] = array[i];
+      }
     }
 
-    if(!array2.size)
+    if(!array2.size) {
       return true;
+    }
 
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- - add these lines to your level script AFTER maps\\\_load::main(); -- -- -- -- -- -- - ");
-    for(i = 0; i < array2.size; i++)
+    for(i = 0; i < array2.size; i++) {
       println("maps\\\_idle_" + array2[i] + "::main();");
+    }
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- - hint copy paste them from console.log -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
@@ -285,8 +296,9 @@ check_animation(anime, node) {
   }
 
   msg = "";
-  for(i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++) {
     msg = msg + array[i] + ", ";
+  }
   msg = msg + "and random.";
 
   assertmsg("node at (" + node.origin[0] + ", " + node.origin[1] + ", " + node.origin[2] + ") using the maps\_idle:: system with script_animation set to " + anime + ", which isn't valid. Valid names are " + msg);

@@ -385,8 +385,9 @@ init_animset_custom_stand(fireAnim, aimStraight, idleAnim, reloadAnim) {
 
   anim.initAnimSet = anim.animsets.defaultStand;
 
-  if(isDefined(aimStraight))
+  if(isDefined(aimStraight)) {
     anim.initAnimSet["straight_level"] = aimStraight;
+  }
 
   if(isDefined(fireAnim)) {
     anim.initAnimSet["fire"] = fireAnim;
@@ -394,8 +395,9 @@ init_animset_custom_stand(fireAnim, aimStraight, idleAnim, reloadAnim) {
     set_animarray_custom_burst_and_semi_fire_stand(fireAnim);
   }
 
-  if(isDefined(idleAnim))
+  if(isDefined(idleAnim)) {
     anim.initAnimSet["exposed_idle"] = array(idleAnim);
+  }
 
   if(isDefined(reloadAnim)) {
     anim.initAnimSet["reload"] = array(reloadAnim);
@@ -420,11 +422,13 @@ init_animset_custom_crouch(fireAnim, idleAnim, reloadAnim) {
     set_animarray_custom_burst_and_semi_fire_crouch(fireAnim);
   }
 
-  if(isDefined(idleAnim))
+  if(isDefined(idleAnim)) {
     anim.initAnimSet["exposed_idle"] = array(idleAnim);
+  }
 
-  if(isDefined(reloadAnim))
+  if(isDefined(reloadAnim)) {
     anim.initAnimSet["reload"] = array(reloadAnim);
+  }
 
   self.combatCrouchAnims = anim.initAnimSet;
 }
@@ -565,8 +569,9 @@ set_animarray_standing() {
 }
 
 set_animarray_crouching() {
-  if(usingSidearm())
+  if(usingSidearm()) {
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
+  }
 
   if(isDefined(self.combatCrouchAnims)) {
     assert(isArray(self.combatCrouchAnims));
@@ -581,8 +586,9 @@ set_animarray_crouching() {
 }
 
 set_animarray_prone() {
-  if(usingSidearm())
+  if(usingSidearm()) {
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
+  }
 
   self.a.array = anim.animsets.defaultProne;
 }
@@ -629,16 +635,18 @@ set_ambush_sidestep_anims() {
 }
 
 heat_reload_anim() {
-  if(self.weapon != self.primaryweapon)
+  if(self.weapon != self.primaryweapon) {
     return animArrayPickRandom("reload");
+  }
 
   if(isDefined(self.node)) {
     if(self nearClaimNodeAndAngle()) {
       coverReloadAnim = undefined;
-      if(self.node.type == "Cover Left")
+      if(self.node.type == "Cover Left") {
         coverReloadAnim = % heat_cover_reload_R;
-      else if(self.node.type == "Cover Right")
+      } else if(self.node.type == "Cover Right") {
         coverReloadAnim = % heat_cover_reload_L;
+      }
 
       if(isDefined(coverReloadAnim)) {
         return coverReloadAnim;

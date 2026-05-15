@@ -13,6 +13,7 @@ main() {
   level._effect["light_shaft_motes_airport"] = loadfx("dust/light_shaft_motes_airport");
   level._effect["light_glow_white_bulb"] = loadfx("misc/light_glow_white_bulb");
 
-  if(getDvar("clientSideEffects") != "1")
+  if(getDvar("clientSideEffects") != "1") {
     maps\createfx\mp_afghan_fx::main();
+  }
 }

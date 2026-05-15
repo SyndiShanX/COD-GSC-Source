@@ -63,8 +63,9 @@ main() {
   level.physics_drop_models[6] = "trash_can2";
   level.physics_drop_models[7] = "trash_can3";
   level.physics_drop_models[8] = "trash_can4";
-  foreach(model in level.physics_drop_models)
-  precacheModel(model);
+  foreach(model in level.physics_drop_models) {
+    precacheModel(model);
+  }
 
   precacheString(&"FAVELA_OBJ_CATCH_RUNNER");
   precacheString(&"FAVELA_OBJ_REACH_TOP");
@@ -100,8 +101,9 @@ main() {
   all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
-    if(!isDefined(spawner.script_parameters))
+    if(!isDefined(spawner.script_parameters)) {
       continue;
+    }
     script_parameter_spawners[script_parameter_spawners.size] = spawner;
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
@@ -234,8 +236,9 @@ startFavela() {
 
   thread delete_ai_during_blackscreen();
   array_call(getCorpseArray(), ::delete);
-  if(isDefined(level.runner))
+  if(isDefined(level.runner)) {
     level.runner delete();
+  }
 
   flag_set("visionset_torture");
 
@@ -330,8 +333,9 @@ spawn_talkers(targetname) {
     guy set_ignoreall(true);
     guy.goalradius = 16;
     guy setGoalPos(guy.origin);
-    if(!isDefined(spawner.animation))
+    if(!isDefined(spawner.animation)) {
       continue;
+    }
     guy.animname = "trailer";
     guy thread anim_loop_solo(guy, spawner.animation);
   }
@@ -364,8 +368,9 @@ torture_sequence() {
   door = getent("torture_door", "targetname");
 
   torture_enemy_spawner_targetname = "torture_enemy_spawner";
-  if(getdvarint("favela_trailer") > 0)
+  if(getdvarint("favela_trailer") > 0) {
     torture_enemy_spawner_targetname = "torture_enemy_spawner_trailer";
+  }
 
   guys[0] = spawn_targetname(torture_enemy_spawner_targetname);
   guys[0].animname = "torture_enemy";
@@ -816,8 +821,9 @@ makarov_alley_fall() {
   for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
+    }
     if(attacker != level.player && attacker != level.soap) {
       continue;
     }
@@ -826,8 +832,9 @@ makarov_alley_fall() {
       continue;
     }
 
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
+    }
     if(issubstr(type, "GRENADE")) {
       self thread makarov_alley_killed(point);
       return;
@@ -845,16 +852,19 @@ makarov_alley_fall() {
 was_shot_in_lethal_area() {
   assert(isDefined(self));
 
-  if(isDefined(self.disableLethalCheck))
+  if(isDefined(self.disableLethalCheck)) {
     return false;
+  }
 
-  if(!isDefined(self.damagelocation))
+  if(!isDefined(self.damagelocation)) {
     return true;
+  }
 
   switch (self.damagelocation) {
     case "none":
-      if(flag("makarov_alley_wounded"))
+      if(flag("makarov_alley_wounded")) {
         return false;
+      }
       return true;
     case "helmet":
     case "head":
@@ -870,8 +880,9 @@ was_shot_in_lethal_area() {
 makarov_alley_wounded() {
   level notify("runner_shot");
 
-  if(flag("makarov_alley_wounded"))
+  if(flag("makarov_alley_wounded")) {
     return;
+  }
   flag_set("makarov_alley_wounded");
 
   self thread makarov_alley_wounded_and_crawl();
@@ -890,8 +901,9 @@ makarov_alley_wounded_and_crawl() {
   self endon("deleted");
   self endon("death");
 
-  if(flag("runner_disable_crawl"))
+  if(flag("runner_disable_crawl")) {
     self clear_deathanim();
+  }
 
   self stop_magic_bullet_shield();
   level.runner = self;
@@ -938,8 +950,9 @@ stop_sounds_during_black() {
     if(ent.origin[0] < X_LINE) {
       continue;
     }
-    if(!isDefined(ent.code_classname))
+    if(!isDefined(ent.code_classname)) {
       continue;
+    }
     switch (ent.classname) {
       case "script_vehicle":
       case "script_origin":
@@ -971,8 +984,9 @@ fade_to_black_alley(fadeInTime, fadeOutTime, duration) {
   overlay.vertAlign = "fullscreen";
 
   overlay.alpha = 0;
-  if(fadeInTime > 0)
+  if(fadeInTime > 0) {
     overlay fadeOverTime(fadeInTime);
+  }
   overlay.alpha = 1;
 
   wait fadeInTime;
@@ -986,8 +1000,9 @@ fade_to_black_alley(fadeInTime, fadeOutTime, duration) {
   level.player freezeControls(false);
   level notify("black_screen_finish");
 
-  if(fadeOutTime > 0)
+  if(fadeOutTime > 0) {
     overlay fadeOverTime(fadeOutTime);
+  }
   overlay.alpha = 0;
 
   wait fadeOutTime;
@@ -1114,8 +1129,9 @@ makarov_shoot_player(vehicle) {
     playFX(getfx("glass_exit"), fxOrigin, forward);
 
     if(i >= shot_kill_start && i <= shot_kill_stop) {
-      if(!flag("player_is_ducking"))
+      if(!flag("player_is_ducking")) {
         self thread kill_player();
+      }
     }
 
     self setAnimKnobRestart(fireAnim, 1, .2, 1.0);
@@ -1133,8 +1149,9 @@ kill_player() {
   level.player disableInvulnerability();
   level.player doDamage(level.player.health + 50000, level.player getEye(), self);
   wait 0.05;
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player kill();
+  }
   assert(!isAlive(level.player));
 }
 
@@ -1177,8 +1194,9 @@ favela_opening_civilians_think() {
   civilian = self spawn_ai(true);
   civilian endon("death");
 
-  if(!isDefined(level.favelaCivilians))
+  if(!isDefined(level.favelaCivilians)) {
     level.favelaCivilians = [];
+  }
   level.favelaCivilians[level.favelaCivilians.size] = civilian;
 
   wait 0.05;
@@ -1526,8 +1544,9 @@ alert_favela_civilians() {
   wait 1.5;
 
   foreach(civilian in level.favelaCivilians) {
-    if(isDefined(civilian))
+    if(isDefined(civilian)) {
       civilian.alertlevel = "alert";
+    }
   }
 }
 
@@ -1615,11 +1634,13 @@ royce_dies_dialog() {
   self waittill("death");
 
   withinView = false;
-  if(isDefined(self) && isDefined(self.origin))
+  if(isDefined(self) && isDefined(self.origin)) {
     withinView = level.player player_looking_at(self.origin, cos(45));
+  }
 
-  if(!withinView)
+  if(!withinView) {
     radio_dialogue("favela_ryc_imhit");
+  }
 }
 
 upper_village_triggered_dialog() {
@@ -1720,8 +1741,9 @@ final_bend_dialog() {
 final_staircase_dialog() {
   flag_wait("player_approaching_final_stairs");
 
-  if(flag("ending_sequence_dialog"))
+  if(flag("ending_sequence_dialog")) {
     return;
+  }
   level endon("ending_sequence_dialog");
 
   radio_dialogue("favela_cmt_farright");

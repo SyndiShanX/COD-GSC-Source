@@ -29,8 +29,9 @@ ai_generic_main() {
 }
 
 ai_special_parameters() {
-  if(isDefined(self.target) && isDefined(self.script_forcecolor))
+  if(isDefined(self.target) && isDefined(self.script_forcecolor)) {
     thread ai_nodebeforecolor_think();
+  }
 
   if(!isDefined(self.script_parameters)) {
     return;
@@ -116,8 +117,9 @@ ai_special_parameters() {
       continue;
     }
 
-    if(tolower(var_0[var_1]) == "nobackup")
+    if(tolower(var_0[var_1]) == "nobackup") {
       self.no_check_wave = 1;
+    }
   }
 }
 
@@ -141,8 +143,9 @@ ai_nodebeforecolor_think() {
   wait 0.05;
   var_1 setgoalnode(var_0);
 
-  if(isDefined(var_0.radius))
+  if(isDefined(var_0.radius)) {
     var_1.goalradius = var_0.radius;
+  }
 }
 
 ai_floodspawn_think() {
@@ -163,15 +166,17 @@ ai_floodspawn_think() {
     self.count = 1;
 
     if(isDefined(var_0)) {
-      if(!maps\_utility::script_wait())
+      if(!maps\_utility::script_wait()) {
         wait(randomfloatrange(5, 9));
+      }
     }
 
     for(;;) {
-      if(isDefined(self.forcespawn))
+      if(isDefined(self.forcespawn)) {
         var_0 = self stalingradspawn();
-      else
+      } else {
         var_0 = self dospawn();
+      }
 
       if(!maps\_utility::spawn_failed(var_0)) {
         self.floodspawncount--;
@@ -195,9 +200,9 @@ ai_magicbulletshield_think() {
     if(maps\_utility::spawn_failed(var_0)) {
       continue;
     }
-    if(isDefined(self.stopbulletshieldtime))
+    if(isDefined(self.stopbulletshieldtime)) {
       var_0.stopbulletshieldtime = self.stopbulletshieldtime;
-    else if(isDefined(self.stopbulletshieldnotifymsg)) {
+    } else if(isDefined(self.stopbulletshieldnotifymsg)) {
       var_0.stopbulletshieldnotifyent = self.stopbulletshieldnotifyent;
       var_0.stopbulletshieldnotifymsg = self.stopbulletshieldnotifymsg;
     } else {}
@@ -211,14 +216,14 @@ ai_magicbulletshield_think2() {
   self endon("internal_stop_magic_bullet_shield");
   thread maps\_utility::magic_bullet_shield();
 
-  if(isDefined(self.stopforcegoaltime))
+  if(isDefined(self.stopforcegoaltime)) {
     wait(self.stopforcegoaltime);
-  else if(isDefined(self.stopforcegoalnotifymsg)) {
-    if(tolower(self.stopforcegoalnotifyent) == "self")
+  } else if(isDefined(self.stopforcegoalnotifymsg)) {
+    if(tolower(self.stopforcegoalnotifyent) == "self") {
       self waittill(self.stopforcegoalnotifymsg);
-    else if(tolower(self.stopforcegoalnotifyent) == "level")
+    } else if(tolower(self.stopforcegoalnotifyent) == "level") {
       level waittill(self.stopforcegoalnotifymsg);
-    else {}
+    } else {}
   } else
     return;
 
@@ -236,9 +241,9 @@ ai_setforcecolor_think() {
     }
     var_0.setforcecolorvalue = self.setforcecolorvalue;
 
-    if(isDefined(self.setforcecolortime))
+    if(isDefined(self.setforcecolortime)) {
       var_0.setforcecolortime = self.setforcecolortime;
-    else if(isDefined(self.setforcecolornotifymsg)) {
+    } else if(isDefined(self.setforcecolornotifymsg)) {
       var_0.setforcecolornotifyent = self.setforcecolornotifyent;
       var_0.setforcecolornotifymsg = self.setforcecolornotifymsg;
     } else {}
@@ -250,14 +255,14 @@ ai_setforcecolor_think() {
 ai_setforcecolor_think2() {
   self endon("death");
 
-  if(isDefined(self.setforcecolortime))
+  if(isDefined(self.setforcecolortime)) {
     wait(self.setforcecolortime);
-  else if(isDefined(self.setforcecolornotifymsg)) {
-    if(tolower(self.setforcecolornotifyent) == "self")
+  } else if(isDefined(self.setforcecolornotifymsg)) {
+    if(tolower(self.setforcecolornotifyent) == "self") {
       self waittill(self.setforcecolornotifymsg);
-    else if(tolower(self.setforcecolornotifyent) == "level")
+    } else if(tolower(self.setforcecolornotifyent) == "level") {
       level waittill(self.setforcecolornotifymsg);
-    else {}
+    } else {}
   }
 
   maps\_utility::set_force_color(self.setforcecolorvalue);
@@ -272,9 +277,9 @@ ai_setforcegoal_think() {
     if(maps\_utility::spawn_failed(var_0)) {
       continue;
     }
-    if(isDefined(self.stopforcegoaltime))
+    if(isDefined(self.stopforcegoaltime)) {
       var_0.stopforcegoaltime = self.stopforcegoaltime;
-    else if(isDefined(self.stopforcegoalnotifymsg)) {
+    } else if(isDefined(self.stopforcegoalnotifymsg)) {
       var_0.stopforcegoalnotifyent = self.stopforcegoalnotifyent;
       var_0.stopforcegoalnotifymsg = self.stopforcegoalnotifymsg;
     } else {}
@@ -287,14 +292,14 @@ ai_setforcegoal_think2() {
   self endon("death");
   maps\_utility::set_forcegoal();
 
-  if(isDefined(self.stopforcegoaltime))
+  if(isDefined(self.stopforcegoaltime)) {
     wait(self.stopforcegoaltime);
-  else if(isDefined(self.stopforcegoalnotifymsg)) {
-    if(tolower(self.stopforcegoalnotifyent) == "self")
+  } else if(isDefined(self.stopforcegoalnotifymsg)) {
+    if(tolower(self.stopforcegoalnotifyent) == "self") {
       self waittill(self.stopforcegoalnotifymsg);
-    else if(tolower(self.stopforcegoalnotifyent) == "level")
+    } else if(tolower(self.stopforcegoalnotifyent) == "level") {
       level waittill(self.stopforcegoalnotifymsg);
-    else {}
+    } else {}
   }
 
   maps\_utility::unset_forcegoal();
@@ -309,9 +314,9 @@ ai_ignoreme_think() {
     if(maps\_utility::spawn_failed(var_0)) {
       continue;
     }
-    if(isDefined(self.stopignoretime))
+    if(isDefined(self.stopignoretime)) {
       var_0.stopignoretime = self.stopignoretime;
-    else if(isDefined(self.stopignorenotifymsg)) {
+    } else if(isDefined(self.stopignorenotifymsg)) {
       var_0.stopignorenotifyent = self.stopignorenotifyent;
       var_0.stopignorenotifymsg = self.stopignorenotifymsg;
     } else {}
@@ -324,14 +329,14 @@ ai_ignoreme_think2() {
   self endon("death");
   self.ignoreme = 1;
 
-  if(isDefined(self.stopignoretime))
+  if(isDefined(self.stopignoretime)) {
     wait(self.stopignoretime);
-  else if(isDefined(self.stopignorenotifymsg)) {
-    if(tolower(self.stopignorenotifyent) == "self")
+  } else if(isDefined(self.stopignorenotifymsg)) {
+    if(tolower(self.stopignorenotifyent) == "self") {
       self waittill(self.stopignorenotifymsg);
-    else if(tolower(self.stopignorenotifyent) == "level")
+    } else if(tolower(self.stopignorenotifyent) == "level") {
       level waittill(self.stopignorenotifymsg);
-    else {}
+    } else {}
   }
 
   self.ignoreme = 0;
@@ -369,8 +374,9 @@ friendly_cycle_spawner() {
   for(;;) {
     self.spawner_index++;
 
-    if(self.spawner_array.size == self.spawner_index)
+    if(self.spawner_array.size == self.spawner_index) {
       self.spawner_index = 0;
+    }
 
     if(!level.friendly_globals.force_this_color.size) {
       break;
@@ -384,8 +390,9 @@ friendly_cycle_spawner() {
     if(var_0 == self.spawner_index) {
       self.spawner_index++;
 
-      if(self.spawner_array.size == self.spawner_index)
+      if(self.spawner_array.size == self.spawner_index) {
         self.spawner_index = 0;
+      }
 
       break;
     }
@@ -419,8 +426,9 @@ friendly_spawner_death(var_0) {
   self endon("death");
   var_0 common_scripts\utility::waittill_any("death", "get_off_friendly_logic");
 
-  if(isDefined(self.force_this_color))
+  if(isDefined(self.force_this_color)) {
     level.friendly_globals.force_this_color[level.friendly_globals.force_this_color.size] = self.force_this_color;
+  }
 
   level.friendly_globals.cur_num--;
 
@@ -466,8 +474,9 @@ friendly_trigger_think() {
       var_1 = strtok(self.spawner_array[var_0].script_parameters, ":;, ");
 
       for(var_2 = 0; var_2 < var_1.size; var_2++) {
-        if(tolower(var_1[var_2]) == "force_friendlies")
+        if(tolower(var_1[var_2]) == "force_friendlies") {
           self.spawner_array[var_0] thread friendly_force_spawner_think(self);
+        }
 
         if(tolower(var_1[var_2]) == "force_this_color") {
           var_2++;
@@ -476,8 +485,9 @@ friendly_trigger_think() {
       }
     }
 
-    if(isDefined(self.spawner_array[var_0].script_noteworthy) && self.spawner_array[var_0].script_noteworthy == "repel_friendlies")
+    if(isDefined(self.spawner_array[var_0].script_noteworthy) && self.spawner_array[var_0].script_noteworthy == "repel_friendlies") {
       friendly_repel_animload();
+    }
   }
 
   self.max_num = self.spawner_array.size;
@@ -497,16 +507,19 @@ friendly_trigger_think() {
   for(;;) {
     self waittill("trigger");
 
-    if(isDefined(level.friendly_globals.curr_trigger))
+    if(isDefined(level.friendly_globals.curr_trigger)) {
       level.friendly_globals.curr_trigger common_scripts\utility::trigger_on();
+    }
 
     level.friendly_globals.curr_trigger = self;
 
-    if(self.max_num > 0)
+    if(self.max_num > 0) {
       level.friendly_globals.max_num = self.max_num;
+    }
 
-    if(self.wav_num > 0)
+    if(self.wav_num > 0) {
       level.friendly_globals.wav_num = self.wav_num;
+    }
 
     level notify("friendly_globals_check_wave");
     common_scripts\utility::trigger_off();
@@ -574,9 +587,9 @@ interactive_wallthink() {
       var_2 = self getorigin();
       var_3 = undefined;
 
-      if(distance(var_2, var_1.origin) < var_1.radius)
+      if(distance(var_2, var_1.origin) < var_1.radius) {
         var_3 = var_1.origin;
-      else {
+      } else {
         var_0 = anglesToForward(var_1.angles);
         var_4 = maps\_utility::vector_multiply(var_0, 88);
         var_3 = var_1.origin + var_4;
@@ -594,9 +607,9 @@ interactive_wallthink() {
       var_2 = self getorigin();
       var_3 = undefined;
 
-      if(distance(var_2, var_1.origin) < var_1.radius)
+      if(distance(var_2, var_1.origin) < var_1.radius) {
         var_3 = var_1.origin;
-      else {
+      } else {
         var_0 = anglesToForward(var_1.angles);
         var_4 = maps\_utility::vector_multiply(var_0, 72);
         var_3 = var_1.origin + var_4;
@@ -620,16 +633,18 @@ interactive_wallthink() {
 
   wait 0.1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
   self waittill("damage", var_7, var_8, var_9, var_2);
   self delete();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     playFX(level._effect["exp_wall"], var_2, var_0);
-  else
+  } else {
     playFX(level._effect["exp_wall"], var_2);
+  }
 
   thread common_scripts\utility::play_sound_in_space("stone_wall_impact_med", var_2);
 }
@@ -666,15 +681,17 @@ interactive_cratethink() {
 
   self waittill("damage", var_0, var_1);
 
-  if(isDefined(self.debri))
+  if(isDefined(self.debri)) {
     self.debri show();
+  }
 
   var_2 = randomint(5);
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     playFX(level._effect["exp_crate1"], self.origin);
-  else
+  } else {
     playFX(level._effect["exp_crate2"], self.origin);
+  }
 
   thread common_scripts\utility::play_sound_in_space("wood_crate_break_med", self.origin);
   var_3 = getEntArray("crate_breakable", "targetname");
@@ -687,8 +704,9 @@ interactive_cratethink() {
     if(var_6 <= 20 && var_7 <= 20) {
       var_8 = self.origin[2] - var_5.origin[2];
 
-      if(var_8 <= 0)
+      if(var_8 <= 0) {
         var_5 notify("damage", var_0, var_1);
+      }
     }
   }
 
@@ -714,10 +732,11 @@ misc_main() {
 auto_save_think() {
   self waittill("trigger");
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     maps\_utility::autosave_by_name(self.script_noteworthy);
-  else
+  } else {
     maps\_utility::autosave_by_name("default");
+  }
 }
 
 wall_breach_think() {
@@ -730,8 +749,9 @@ wall_breach_think() {
   var_0.whole = getent(var_0.use_trig[0].target, "targetname");
   var_0.broken = getent(var_0.whole.target, "targetname");
 
-  if(isDefined(var_0.broken.target))
+  if(isDefined(var_0.broken.target)) {
     var_0.chain = getent(var_0.broken.target, "targetname");
+  }
 
   var_0.obj_glow[0] hide();
   var_0.obj_glow[1] hide();
@@ -771,8 +791,9 @@ wall_breach_think2() {
     self.whole delete();
     self.broken show();
 
-    if(self.broken.spawnflags & 1)
+    if(self.broken.spawnflags & 1) {
       self.broken disconnectpaths();
+    }
 
     return;
   }
@@ -793,8 +814,9 @@ wall_breach_think2() {
   self.obj_mdl[1] delete();
   self.broken show();
 
-  if(self.broken.spawnflags & 1)
+  if(self.broken.spawnflags & 1) {
     self.broken disconnectpaths();
+  }
 
   self.on delete();
   self.off delete();
