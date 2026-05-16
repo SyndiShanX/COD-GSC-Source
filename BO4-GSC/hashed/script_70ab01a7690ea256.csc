@@ -21,9 +21,9 @@ __init__() {
     return;
   }
 
-  clientfield::register("toplayer", "" + #"hash_b905d796914b710", 14000, 1, "int", &function_1e14a14e, 0, 0);
+  clientfield::register("toplayer", "" + #"zm_trial_silent_film", 14000, 1, "int", &function_1e14a14e, 0, 0);
   clientfield::register("toplayer", "" + #"hash_1b9477ddcf30191f", 16000, 1, "int", &function_b5ea67f1, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_52347bec3f1339fd", 16000, 4, "int", &function_cc4c5d4b, 0, 0);
+  clientfield::register("toplayer", "" + #"zm_trial_perk_drunk", 16000, 4, "int", &function_cc4c5d4b, 0, 0);
   zm_trial::register_challenge(#"hash_6c768f3c15d55377", &on_begin, &on_end);
 }
 

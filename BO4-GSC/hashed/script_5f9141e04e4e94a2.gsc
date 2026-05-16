@@ -460,11 +460,11 @@ start_step_4() {
 
 function_cba90c3c() {
   self endon(#"death");
-  self waittill(#"hash_13f3f231b45420ef");
+  self waittill(#"mk2_modded");
 
   if(zm_utility::is_classic()) {
     if(!zm_white_main_quest::function_6cebbce1()) {
-      level.var_23674b8f.e_player zm_white_util::function_491673da(#"hash_4b04746b2f367ca3");
+      level.var_23674b8f.e_player zm_white_util::function_491673da(#"vox_ww_y_craft_rush_1");
     }
 
     level.var_23674b8f.e_player zm_hms_util::function_51b752a9("vox_ww_y_craft", 0);

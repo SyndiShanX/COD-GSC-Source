@@ -29,7 +29,7 @@ __main__() {}
 
 enable_slider_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_phdflopper", #"perk_slider", 4000, #"hash_1434e75516b9654c", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), #"zmperksphdslider");
+    zm_perks::register_perk_basic_info(#"specialty_phdflopper", #"perk_slider", 4000, #"zombie/perk_slider_keyboard", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), #"zmperksphdslider");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_phdflopper", #"perk_slider", 4000, #"zombie/perk_slider", getweapon("zombie_perk_bottle_slider"), getweapon("zombie_perk_totem_slider"), #"zmperksphdslider");
   }

@@ -80,12 +80,12 @@ function_66d5d485(func, obj) {
   remove_callback(#"hash_1863ba8e81df2a64", func, obj);
 }
 
-function_74872db6(func, obj) {
-  add_callback(#"hash_6df5348c2fb9a509", func, obj);
+on_round_begin(func, obj) {
+  add_callback(#"on_round_begin", func, obj);
 }
 
 function_50fdac80(func, obj) {
-  remove_callback(#"hash_6df5348c2fb9a509", func, obj);
+  remove_callback(#"on_round_begin", func, obj);
 }
 
 on_round_end(func, obj) {

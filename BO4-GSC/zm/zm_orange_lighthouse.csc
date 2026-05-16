@@ -23,7 +23,7 @@ __init__() {
 init_clientfields() {
   clientfield::register("scriptmover", "lighthouse_on", 24000, 3, "int", &function_6a10478, 0, 0);
   clientfield::register("vehicle", "" + #"lighthouse_beam_fx", 24000, 1, "int", &function_c7fb0e97, 0, 0);
-  clientfield::register("actor", "" + #"hash_5af1cd27f90895ae", 24000, 1, "counter", &function_a177b2da, 0, 0);
+  clientfield::register("actor", "" + #"lighthouse_beam_hit_fx", 24000, 1, "counter", &function_a177b2da, 0, 0);
 }
 
 init_fx() {

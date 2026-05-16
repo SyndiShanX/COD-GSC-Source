@@ -743,7 +743,7 @@ function_e5f2ff53(elephant, var_a4946e52, targetname) {
 
   rider.ai.var_6fe5490e = rider animmappingsearch(#"hash_3cfb620b1f6d2192");
   assert(isDefined(rider.ai.var_6fe5490e));
-  rider.ai.var_9ca71a12 = rider animmappingsearch(#"hash_52c3d7bee8eabebc");
+  rider.ai.var_9ca71a12 = rider animmappingsearch(#"anim_rider_attack");
   assert(isDefined(rider.ai.var_9ca71a12));
   rider.ai.var_182e3181 = rider animmappingsearch(#"hash_4950e0c9a2675981");
   assert(isDefined(rider.ai.var_182e3181));
@@ -1300,7 +1300,7 @@ function_4d479d22(elephant) {
   namespace_81245006::function_6c64ebd3(var_dd54fdb1, 1);
   var_dd54fdb1 = namespace_81245006::function_37e3f011(elephant, "tag_head_ws");
   namespace_81245006::function_6c64ebd3(var_dd54fdb1, 1);
-  function_2e4487f6(elephant, #"hash_8e170ae91588f20");
+  function_2e4487f6(elephant, #"elephant_stage_2");
 }
 
 function_f51431a9(elephant) {
@@ -1312,7 +1312,7 @@ function_f51431a9(elephant) {
     currentstate = elephant.ai.var_112ec817;
 
     switch (currentstate) {
-      case #"hash_8e170ae91588f20":
+      case #"elephant_stage_2":
         if(function_16096ca1(elephant) || var_e8e6826f) {
           level thread elephantstartdeath(elephant);
           return;
@@ -1332,13 +1332,13 @@ function_f51431a9(elephant) {
 }
 
 function_2e4487f6(elephant, stage) {
-  assert(stage == #"elephant_stage_1" || stage == #"hash_8e170ae91588f20");
+  assert(stage == #"elephant_stage_1" || stage == #"elephant_stage_2");
   elephant.ai.var_112ec817 = stage;
 
   switch (stage) {
     case #"elephant_stage_1":
       break;
-    case #"hash_8e170ae91588f20":
+    case #"elephant_stage_2":
       break;
     default:
       break;
@@ -1348,7 +1348,7 @@ function_2e4487f6(elephant, stage) {
 function_cd472d5(entity) {
   stage = entity.ai.var_112ec817;
 
-  if(stage != #"hash_8e170ae91588f20") {
+  if(stage != #"elephant_stage_2") {
     return false;
   }
 
@@ -1451,7 +1451,7 @@ function_ce8fe2b0(entity, splitorigin) {
 function_69faa74(entity) {
   stage = entity.ai.var_112ec817;
 
-  if(stage != #"hash_8e170ae91588f20") {
+  if(stage != #"elephant_stage_2") {
     return false;
   }
 
@@ -1613,7 +1613,7 @@ function_f2c697c7(entity) {
       entity.ai.var_a504b9a3.var_190509f3 = 250 * 250;
       entity.ai.var_a504b9a3.var_f84fafb2 = 400 * 400;
       break;
-    case #"hash_8e170ae91588f20":
+    case #"elephant_stage_2":
       entity.ai.var_a504b9a3.var_6392c3a2 = gettime() + randomintrange(3500, 4000);
       entity.ai.var_a504b9a3.var_190509f3 = 250 * 250;
       entity.ai.var_a504b9a3.var_f84fafb2 = 400 * 400;
@@ -1703,7 +1703,7 @@ function_d3d560e9(entity) {
     case #"elephant_stage_1":
       entity.ai.var_5c1cc6e9 = gettime() + randomintrange(8000, 10000);
       break;
-    case #"hash_8e170ae91588f20":
+    case #"elephant_stage_2":
       entity.ai.var_5c1cc6e9 = gettime() + randomintrange(6500, 7500);
       break;
     default:
@@ -1802,7 +1802,7 @@ function_2c58bc39(entity) {
   stage = self.ai.var_112ec817;
 
   switch (stage) {
-    case #"hash_8e170ae91588f20":
+    case #"elephant_stage_2":
     case #"elephant_stage_1":
       function_ab5aea01(entity);
       break;

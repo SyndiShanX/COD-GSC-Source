@@ -20,7 +20,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_4043192ca121b4d4", &on_begin, &on_end);
+  zm_trial::register_challenge(#"no_missed_shots", &on_begin, &on_end);
 }
 
 on_begin(var_59803fa8) {
@@ -102,10 +102,10 @@ on_weapon_fired(params) {
   }
 
   if(params.weapon.firetype === "Auto Burst" || params.weapon.firetype === "Burst" || params.weapon.firetype === "Full Auto") {
-    self notify(#"hash_593afdd4317784a0");
+    self notify(#"end_on_rapid_fire");
   }
 
-  self endon(#"disconnect", #"hash_593afdd4317784a0");
+  self endon(#"disconnect", #"end_on_rapid_fire");
   level endon(#"trial_round_end");
 
   if(!isDefined(self.var_9979ffd6)) {
@@ -130,7 +130,7 @@ function_b33ed7bd() {
 }
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_4043192ca121b4d4");
+  challenge = zm_trial::function_a36e8c38(#"no_missed_shots");
   return isDefined(challenge);
 }
 

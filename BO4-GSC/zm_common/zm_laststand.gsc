@@ -1124,7 +1124,7 @@ function_8fd9d8b9(e_reviver) {
     zm_audio::create_and_play_dialog(#"revive", self.var_ff5f8752);
   }
 
-  self notify(#"hash_1fe68a6b935c321d", {
+  self notify(#"revive_success_vo_start", {
     #reviver: e_reviver
   });
 

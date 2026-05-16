@@ -418,7 +418,7 @@ function_dde2edd8() {
     }
 
     self function_3ef2d2c6();
-    self notify(#"hash_57de930eb121052f");
+    self notify(#"shockbox_turned_off");
   }
 }
 

@@ -19,7 +19,7 @@ autoexec __init__system__() {
 
 __init__() {
   spawner::add_archetype_spawn_function(#"zod_companion", &function_10c92445);
-  zm::function_84d343d(#"hash_680d9169c5e72bdc", &function_f1be5640);
+  zm::function_84d343d(#"ar_accurate_t8_mannequin_ally", &function_f1be5640);
   level.var_af29d768 = &function_80bc397d;
 }
 

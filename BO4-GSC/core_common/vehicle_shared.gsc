@@ -3126,7 +3126,7 @@ function_93844822(e_player, b_skip_scene, b_enter = 1) {
         util::wait_network_frame();
       }
 
-      self notify(#"hash_376d57a458a131df");
+      self notify(#"vehicle_scene_start");
       a_ents = array(e_player);
 
       if(isalive(e_player.companion) && scene::function_d1dd6e60(str_scene) > 0) {

@@ -33,7 +33,7 @@ __init__() {
 
 enable_widows_wine_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_widowswine", #"perk_widows_wine", 3000, #"hash_618fdb0398552569", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), #"zmperkswidowswail");
+    zm_perks::register_perk_basic_info(#"specialty_widowswine", #"perk_widows_wine", 3000, #"zombie/perk_widowswine_keyboard", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), #"zmperkswidowswail");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_widowswine", #"perk_widows_wine", 3000, #"zombie/perk_widowswine", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), #"zmperkswidowswail");
   }

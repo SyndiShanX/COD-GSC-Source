@@ -451,7 +451,7 @@ function_1dc9b29a() {
 }
 
 function_e435077() {
-  self endon(#"hash_276524e7f5657e50");
+  self endon(#"dumbwaiter_interact_started");
   s_info = self.var_cb3ed98f[self.var_df3d62aa];
   var_a3992d9c = 0;
 
@@ -529,7 +529,7 @@ function_d7e79438() {
     level.var_d1206a2b thread zm_orange_util::function_51b752a9(s_info.var_fcab5f41, -1, 1, 0);
   }
 
-  level.pablo_npc notify(#"hash_276524e7f5657e50");
+  level.pablo_npc notify(#"dumbwaiter_interact_started");
   playsoundatposition(#"hash_512bec1d554e89f1", self.origin);
   level.pablo_npc thread function_39614d4b();
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);

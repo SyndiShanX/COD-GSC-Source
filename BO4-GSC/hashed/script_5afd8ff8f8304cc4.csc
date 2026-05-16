@@ -5,10 +5,10 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-#namespace namespace_a476311c;
+#namespace zm_trial_kill_enemies_for_health;
 
 autoexec __init__system__() {
-  system::register(#"hash_7ceb08aa364e4596", &__init__, undefined, undefined);
+  system::register(#"zm_trial_kill_enemies_for_health", &__init__, undefined, undefined);
 }
 
 __init__() {

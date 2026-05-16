@@ -48,7 +48,7 @@ init_level_vars() {
   function_ac904e5e();
   level thread init_pack_a_punch();
   level.fn_custom_round_ai_spawn = undefined;
-  level callback::function_74872db6(&function_74872db6);
+  level callback::on_round_begin(&on_round_begin);
   level.var_3f86fd35 = 13;
   level.var_d7853f35 = 23;
   level.var_ecdf38f = 15;
@@ -106,7 +106,7 @@ init_pack_a_punch() {
   level.var_fea7bdae = 1;
 }
 
-function_74872db6() {
+on_round_begin() {
   if(level.round_number <= 7) {
     level.var_18d20774 = 250000;
     level.registertheater_fxanim_kill_trigger_centerterminatetraverse = 250000;

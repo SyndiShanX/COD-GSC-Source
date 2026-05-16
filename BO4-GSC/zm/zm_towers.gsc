@@ -138,7 +138,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"fertilizer_smell", 1, 1, "int");
   clientfield::register("world", "" + #"fertilizer_smell_bowl", 1, 1, "int");
   clientfield::register("world", "" + #"hash_73088ea3053b96f1", 1, 1, "int");
-  clientfield::register("actor", "" + #"hash_233e31d0c2b47b1b", 1, 1, "int");
+  clientfield::register("actor", "" + #"ra_destroyer_head_glow", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_12dfb8249f8212d2", 1, 1, "int");
   clientfield::register("actor", "" + #"hash_17e3041649954b9f", 1, 1, "int");
   clientfield::register("scriptmover", "ra_eyes_beam_fire", 1, 1, "int");
@@ -559,7 +559,7 @@ init_announcer() {
   zm_audio::sndannouncervoxadd(#"pap_quest_completed", #"hash_20930393d4b597bd");
   zm_audio::sndannouncervoxadd(#"hash_28dbb5b91d8a954e", #"hash_2b2a7c0ea867948e");
   zm_audio::sndannouncervoxadd(#"hash_3d5fccf222ba3ab6", #"hash_2b150384d50cde7c");
-  zm_audio::sndannouncervoxadd(#"hash_5719edb294612f4c", #"hash_e36933881b70a00");
+  zm_audio::sndannouncervoxadd(#"main_quest_puzzle_complete", #"hash_e36933881b70a00");
   zm_audio::sndannouncervoxadd(#"hash_42bbe4989b9a4cbe", #"hash_7ce238dcabc6916d");
   zm_audio::sndannouncervoxadd(#"main_quest_defend_complete", #"hash_21f31b9d98f1e332");
   zm_audio::sndannouncervoxadd(#"hash_bc10546af7f7b09", #"hash_2c87f4c5bf8b38f4");

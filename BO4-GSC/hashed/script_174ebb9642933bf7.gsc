@@ -18,10 +18,10 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_df88241c;
+#namespace nova_crawler_util;
 
 autoexec __init__system__() {
-  system::register(#"hash_18c69cd2b0bf61b9", &__init__, undefined, undefined);
+  system::register(#"nova_crawler_util", &__init__, undefined, undefined);
 }
 
 __init__() {

@@ -1109,7 +1109,7 @@ function_9693e041(player) {
       str = self.blueprint.repairprompt;
       str_pc = function_c9163c5d(str);
       hint_str = zm_utility::function_d6046228(str, str_pc);
-      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", #"hash_197687e8f04962c9");
+      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", #"zombie/repair_shield_keyboard");
       self.hint_string = isDefined(hint_str) ? hint_str : backup_str;
       _shad_turret_debug_server = 1;
     } else {

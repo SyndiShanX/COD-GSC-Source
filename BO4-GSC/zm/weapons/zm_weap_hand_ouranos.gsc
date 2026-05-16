@@ -703,7 +703,7 @@ function_c7732ae7(w_curr) {
 
       if(isDefined(e_target) && isDefined(e_target.var_6cec0263) && e_target.var_6cec0263 && isalive(e_target) && !self util::is_player_looking_at(e_target getcentroid(), 0.9, 0, self)) {
         e_target.var_6cec0263 = undefined;
-        e_target notify(#"hash_62a477d53a6bbad");
+        e_target notify(#"end_slowdown_ai");
       }
     }
 

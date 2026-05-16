@@ -115,7 +115,7 @@ init_clientfield() {
   clientfield::register("toplayer", "" + #"hash_7f85dc0ce20a6f2c", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_4e3e66f200f76f34", 16000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_565ca9982285f23e", 16000, 1, "int");
-  clientfield::register("actor", "" + #"hash_415416bf220de94", 16000, 1, "int");
+  clientfield::register("actor", "" + #"play_death_uncharged", 16000, 1, "int");
   clientfield::register("actor", "" + #"play_death_charged", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_24b5302c2f39ebc2", 16000, 1, "int");
   clientfield::register("actor", "" + #"hash_6a8479b5a5b359a7", 16000, 1, "int");
@@ -3202,7 +3202,7 @@ function_d45f304f() {
     self.var_de9eef5a = 1;
 
     while(true) {
-      self waittill(#"hash_488d86d3e6f92c");
+      self waittill(#"light_left_hemera_beam");
 
       if(self.var_6e4f26e5 <= 0) {
         break;
@@ -3239,7 +3239,7 @@ function_c2d50fdc(t_beam) {
     }
 
     self.var_6e4f26e5--;
-    self notify(#"hash_488d86d3e6f92c");
+    self notify(#"light_left_hemera_beam");
   }
 }
 
@@ -5146,7 +5146,7 @@ function_790e49a5(str_ww, b_uncharged) {
   switch (str_ww) {
     case #"death":
       if(b_uncharged) {
-        var_84c10792 = "" + #"hash_415416bf220de94";
+        var_84c10792 = "" + #"play_death_uncharged";
       } else {
         var_84c10792 = "" + #"play_death_charged";
       }

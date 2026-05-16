@@ -101,7 +101,7 @@ electric_switch() {
       switch (master_switch.script_noteworthy) {
         case #"elec_switch":
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_5c4125d53451e888");
+            self sethintstring(#"zombie/electric_switch_keyboard");
           } else {
             self sethintstring(#"zombie/electric_switch");
           }
@@ -109,7 +109,7 @@ electric_switch() {
           break;
         case #"hash_47bde376753a03c9":
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_5c4125d53451e888");
+            self sethintstring(#"zombie/electric_switch_keyboard");
           } else {
             self sethintstring(#"zombie/electric_switch");
           }

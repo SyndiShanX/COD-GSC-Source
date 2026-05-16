@@ -1142,7 +1142,7 @@ function_c7bb6e59() {
   self thread function_f868e3e2();
   level flag::wait_till("fin2_enemy_chopper_destroyed");
   level notify(#"surround_spawn_end");
-  level notify(#"hash_73522d92576b145b");
+  level notify(#"enemy_chopper_setup_end");
   level notify(#"hash_60e26e14a51c5211");
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_score_hit"));
   a_e_enemies = self ct_bots::function_dde6edbd();
@@ -1474,8 +1474,8 @@ function_58c62280(b_keyline, var_2f3964e3) {
 }
 
 function_f868e3e2() {
-  level notify(#"hash_73522d92576b145b");
-  level endon(#"combattraining_logic_finished", #"hash_73522d92576b145b", #"fin2_enemy_chopper_destroyed");
+  level notify(#"enemy_chopper_setup_end");
+  level endon(#"combattraining_logic_finished", #"enemy_chopper_setup_end", #"fin2_enemy_chopper_destroyed");
   s_spawn = struct::get("s_chopper_spawn", "targetname");
   level.vh_enemy_chopper = spawnvehicle(#"veh_t8_helicopter_gunship_mp", s_spawn.origin, s_spawn.angles, "vh_enemy_chopper");
   level.vh_enemy_chopper setteam(#"axis");

@@ -235,7 +235,7 @@ water_ragdolls(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       waitframe(1);
     }
 
-    s_loc = struct::get(#"hash_1f307b5cf6d83aff");
+    s_loc = struct::get(#"physics_jolter");
     n_z_offset = 400;
 
     while(level flag::get(#"hash_13dc8f128d50bada")) {

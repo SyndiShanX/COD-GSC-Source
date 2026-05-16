@@ -29,7 +29,7 @@ __init__() {
 function_624de77b() {
   if(!level.var_30c7dc14) {
     var_3382b1fd = getdynentarray(#"hash_65a897c4ba6cd264");
-    var_dee87f84 = getdynentarray(#"hash_1418b0814d35f392");
+    var_dee87f84 = getdynentarray(#"buried_jail_door");
     item_world::function_1b11e73c();
 
     foreach(var_24f3a953 in var_3382b1fd) {
@@ -111,7 +111,7 @@ function_63f86aa3() {
 }
 
 function_a9f512c2() {
-  var_dee87f84 = getdynentarray(#"hash_1418b0814d35f392");
+  var_dee87f84 = getdynentarray(#"buried_jail_door");
 
   foreach(var_8f38aad5 in var_dee87f84) {
     setdynentstate(var_8f38aad5, 1);

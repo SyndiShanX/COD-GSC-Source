@@ -90,7 +90,7 @@ function_f415e4d5() {
   }
 
   if(zm_custom::function_901b751c(#"zmpapenabled") == 2) {
-    callback::function_74872db6(&function_88228c58);
+    callback::on_round_begin(&function_88228c58);
   }
 }
 

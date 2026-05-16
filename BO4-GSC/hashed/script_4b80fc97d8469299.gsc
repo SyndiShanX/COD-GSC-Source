@@ -36,8 +36,8 @@ preload() {
   zm_sq_modules::function_d8383812(#"sc_pap_ship", 24000, "sc_pap_ship", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_lagoon", 24000, "sc_pap_lagoon", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_island", 24000, "sc_pap_island", &is_soul_capture, &soul_captured, 1);
-  clientfield::register("scriptmover", "" + #"hash_411947cf11cffb69", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_249c83f6060ea7ba", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"mq_pap_explosion", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"mq_pap_fire", 24000, 1, "int");
 }
 
 main() {
@@ -352,8 +352,8 @@ function_dc380897() {
   self.e_fire = spawn("script_model", pos);
   self.e_fire.angles = var_deb6871b.angles + (0, 90, 0);
   self.e_fire setModel("tag_origin");
-  self.e_fire clientfield::set("" + #"hash_249c83f6060ea7ba", 1);
-  self.vessel clientfield::set("" + #"hash_411947cf11cffb69", 1);
+  self.e_fire clientfield::set("" + #"mq_pap_fire", 1);
+  self.vessel clientfield::set("" + #"mq_pap_explosion", 1);
   self.e_fire playSound(#"hash_49156c17a247721c");
   arrayremovevalue(level.var_4d8e32c8, self);
 

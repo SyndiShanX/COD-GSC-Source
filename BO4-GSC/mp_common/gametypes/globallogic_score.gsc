@@ -1843,7 +1843,7 @@ processkillstreakassists(attacker, inflictor, weapon) {
     params.players[params.players.size] = player;
   }
 
-  callback::callback(#"hash_425352b435722271", params);
+  callback::callback(#"killstreak_process_assist", params);
 }
 
 updateteamscorebyroundswon() {

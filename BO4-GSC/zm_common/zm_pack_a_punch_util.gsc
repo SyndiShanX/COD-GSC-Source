@@ -184,7 +184,7 @@ update_hint_string(player) {
       self sethintstring(#"zombie/perk_packapunch_free");
     }
   } else if(function_8b1a219a()) {
-    self sethintstring(#"hash_4b18cdd522ca58f7", current_cost);
+    self sethintstring(#"zombie/perk_packapunch_keyboard", current_cost);
   } else {
     self sethintstring(#"zombie/perk_packapunch", current_cost);
   }

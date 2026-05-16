@@ -1209,13 +1209,13 @@ devgui_ct_torque() {
     e_player = ct_utils::get_player();
 
     switch (cmd) {
-      case #"hash_1ce8d5f5a390a03e":
+      case #"vip_ignoreall_on":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::set("<dev string:x9fd>", "<dev string:xa0f>", 1);
         }
 
         break;
-      case #"hash_3028b864eea95c40":
+      case #"vip_ignoreall_off":
         if(isalive(level.ai_vip)) {
           level.ai_vip.magic_bullet_shield val::reset("<dev string:x9fd>", "<dev string:xa0f>");
         }

@@ -21,14 +21,14 @@ __init__() {
   zm_perks::register_perk_init_thread(#"specialty_etherealrazor", &function_32981481);
   zm_perks::function_b60f4a9f(#"specialty_etherealrazor", #"p8_zm_vapor_altar_icon_01_etherealrazor", "zombie/fx8_perk_altar_symbol_ambient_ethereal_razor", #"zmperksetherealrazor");
   zm_perks::function_f3c80d73("zombie_perk_bottle_ethereal_razor", "zombie_perk_totem_ethereal_razor");
-  clientfield::register("actor", "" + #"hash_29c26fb019da89f3", 13000, 1, "counter", &function_f041176c, 0, 0);
+  clientfield::register("actor", "" + #"ethereal_melee_impact", 13000, 1, "counter", &function_f041176c, 0, 0);
   clientfield::register("allplayers", "" + #"hash_450d9f824068dcc2", 13000, 1, "counter", &function_8f9318d5, 0, 0);
   clientfield::register("allplayers", "" + #"hash_4de2dbcd551f1fb7", 13000, 1, "counter", &function_680538e2, 0, 0);
   level._effect[#"hash_450693824062a9b0"] = #"hash_2e1db0f023ce973f";
   level._effect[#"hash_450d9f824068dcc2"] = #"hash_2e16c4f023c89a8d";
   level._effect[#"hash_5200740c0a0b2719"] = #"hash_2a3552f078e23d4e";
   level._effect[#"hash_4de2dbcd551f1fb7"] = #"hash_4741ce659d06a390";
-  level._effect[#"hash_29c26fb019da89f3"] = #"hash_6e2b2bcea07134d1";
+  level._effect[#"ethereal_melee_impact"] = #"hash_6e2b2bcea07134d1";
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
@@ -47,7 +47,7 @@ function_e4d3a447() {}
 function_82460430() {}
 
 function_f041176c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_29c26fb019da89f3"], self, "tag_weapon_chest");
+  util::playFXOnTag(localclientnum, level._effect[#"ethereal_melee_impact"], self, "tag_weapon_chest");
 }
 
 function_8f9318d5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

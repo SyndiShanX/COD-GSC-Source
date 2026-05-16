@@ -318,7 +318,7 @@ start_drummers() {
   level endon(#"end_game");
 
   while(true) {
-    level waittill(#"hash_37b8eeaed85f1b4c");
+    level waittill(#"special_round_music_start");
     wait 0.06;
     level scene::play("special_round_drummers", "targetname");
   }

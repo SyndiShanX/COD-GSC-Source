@@ -55,7 +55,7 @@ __init__() {
   callback::on_joined_team(&onplayerjoinedteam);
   callback::on_finalize_initialization(&function_3675de8b);
   callback::on_connect(&onplayerconnect);
-  callback::add_callback(#"hash_425352b435722271", &fx_flesh_hit_neck_fatal);
+  callback::add_callback(#"killstreak_process_assist", &fx_flesh_hit_neck_fatal);
 
   if(getdvarint(#"scr_cuav_offset_debug", 0)) {
     level thread waitanddebugdrawoffsetlist();

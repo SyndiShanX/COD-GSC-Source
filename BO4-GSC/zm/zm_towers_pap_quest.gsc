@@ -779,7 +779,7 @@ function_499b080d(str_tower, str_encounter) {
     e_player zm_score::add_to_player_score(500 * n_scalar);
   }
 
-  playsoundatposition(#"hash_f35db774de79d2", self.origin);
+  playsoundatposition(#"evt_head_pickup", self.origin);
 
   if(isDefined(level.var_9ca6160c) && isinarray(level.var_9ca6160c, self)) {
     arrayremovevalue(level.var_9ca6160c, self);

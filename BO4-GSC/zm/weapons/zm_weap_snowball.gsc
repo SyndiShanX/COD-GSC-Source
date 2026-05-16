@@ -34,7 +34,7 @@ __init__() {
   zm_loadout::register_lethal_grenade_for_level(#"snowball_upgraded");
   zm_loadout::register_lethal_grenade_for_level(#"snowball_yellow");
   zm_loadout::register_lethal_grenade_for_level(#"snowball_yellow_upgraded");
-  clientfield::register("toplayer", "" + #"hash_78aa1dc141a3e27", 24000, 1, "int");
+  clientfield::register("toplayer", "" + #"snowball_impact_player_postfx", 24000, 1, "int");
   clientfield::register("toplayer", "" + #"hash_2fafddfa9f85b8aa", 24000, 1, "int");
 }
 
@@ -82,9 +82,9 @@ on_grenade_fired(s_params) {
 
 function_6e2124f7() {
   self endon(#"disconnect");
-  clientfield::set_to_player("" + #"hash_78aa1dc141a3e27", 1);
+  clientfield::set_to_player("" + #"snowball_impact_player_postfx", 1);
   wait 0.5;
-  clientfield::set_to_player("" + #"hash_78aa1dc141a3e27", 0);
+  clientfield::set_to_player("" + #"snowball_impact_player_postfx", 0);
 }
 
 function_2291fc03() {

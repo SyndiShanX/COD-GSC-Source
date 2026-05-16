@@ -48,7 +48,7 @@ __init__() {
   callback::on_spawned(&onplayerspawned);
   callback::on_joined_team(&onplayerjoinedteam);
   callback::on_finalize_initialization(&function_3675de8b);
-  callback::add_callback(#"hash_425352b435722271", &fx_flesh_hit_neck_fatal);
+  callback::add_callback(#"killstreak_process_assist", &fx_flesh_hit_neck_fatal);
   callback::on_finalize_initialization(&function_1c601b99);
   setmatchflag("radar_allies", 0);
   setmatchflag("radar_axis", 0);

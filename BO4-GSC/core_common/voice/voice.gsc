@@ -230,8 +230,8 @@ play_next() {
 
 function_9b502d8d(str_line, n_wait_time) {
   self endon(#"disconnect");
-  self notify(#"hash_3a2cea55af16657f");
-  self endon(#"hash_3a2cea55af16657f");
+  self notify(#"print_temp_vo");
+  self endon(#"print_temp_vo");
 
   if(!isDefined(self getluimenu("TempDialog"))) {
     self openluimenu("TempDialog");

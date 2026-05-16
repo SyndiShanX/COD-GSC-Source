@@ -46,7 +46,7 @@ init_level_vars() {
   function_ac904e5e();
   level thread init_pack_a_punch();
   level.fn_custom_round_ai_spawn = undefined;
-  level callback::function_74872db6(&function_74872db6);
+  level callback::on_round_begin(&on_round_begin);
   level.var_3f86fd35 = 15;
   level.var_d7853f35 = 25;
   level.var_ecdf38f = 13;
@@ -121,7 +121,7 @@ init_pack_a_punch() {
   }
 }
 
-function_74872db6() {}
+on_round_begin() {}
 
 function_ba269c78(n_round) {
   level endon(#"end_game");
@@ -373,7 +373,7 @@ function_84139b27() {
   zm_utility::function_c492c4d6(#"michigan_avenue", #"s_defend_area_obj_michigan_avenue", array(#"zone_cellblock_west_barber", #"zone_cellblock_west_warden"), array(#"warden_house", #"showers", #"infirmary", #"cafeteria"), #"hash_705c102d1924f0dd", #"hash_6837df2367ad7713");
   zm_utility::function_c492c4d6(#"times_square", #"s_defend_area_obj_cell_block_east", array(#"zone_cellblock_east"), array(#"citadel", #"roof", #"warden_house", #"infirmary"), #"hash_3f444c87fe7834fc", #"hash_3f7e50e6a57f764c");
   zm_utility::function_c492c4d6(#"cafeteria", #"hash_7e27b77c809a76a", array(#"zone_cafeteria", #"zone_cafeteria_end"), array(#"roof", #"michigan_avenue", #"cd_street", #"warden_house"), #"hash_492da84cdf727cb8", #"hash_694e547781b620d8");
-  zm_utility::function_c492c4d6(#"roof", #"hash_218cfbef3166e972", array(#"zone_roof", #"zone_roof_infirmary"), array(#"cafeteria", #"times_square", #"infirmary", #"michigan_avenue"), #"hash_5e20d087e1e88e10", #"hash_606e86c2e28d9fa0");
+  zm_utility::function_c492c4d6(#"roof", #"s_defend_area_obj_roof", array(#"zone_roof", #"zone_roof_infirmary"), array(#"cafeteria", #"times_square", #"infirmary", #"michigan_avenue"), #"hash_5e20d087e1e88e10", #"hash_606e86c2e28d9fa0");
   zm_utility::function_c492c4d6(#"showers", #"hash_56095721b91ef81f", array(#"cellblock_shower"), array(#"citadel", #"cd_street", #"roof", #"times_square"), #"hash_c1918d583361503", #"hash_3f95fb31de34752d");
   zm_utility::function_c492c4d6(#"building_64", #"s_defend_area_obj_building_64", array(#"zone_studio"), undefined, #"hash_1feef237a0bc79f", #"hash_69300f7b6a0380f9");
   zm_utility::function_c492c4d6(#"docks", #"s_defend_area_obj_dock", array(#"zone_dock", #"zone_dock_gondola"), undefined, #"hash_63491ae91f2492a6", #"hash_59ffc5ba5f91082");

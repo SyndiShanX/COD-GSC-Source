@@ -1972,7 +1972,7 @@ function_b80277f7() {
 
 function_1c06c249(plane) {
   if(isPlayer(self) && isDefined(plane)) {
-    self match_record::function_ded5f5b6(#"hash_1657e02fb5073e4a", plane.origin);
+    self match_record::function_ded5f5b6(#"deployment_jump_pos", plane.origin);
     self match_record::set_player_stat(#"deployment_jump_time", gettime());
     self match_record::set_player_stat(#"hash_63b95d780b2bd355", self flagsys::get(#"hash_224cb97b8f682317"));
   }
@@ -2085,7 +2085,7 @@ start_freefall(velocity, parachute) {
 
 function_4630bf0a() {
   if(isPlayer(self)) {
-    self match_record::function_ded5f5b6(#"hash_7d9d379ecba10793", self.origin);
+    self match_record::function_ded5f5b6(#"deployment_land_pos", self.origin);
     self match_record::set_player_stat(#"deployment_land_time", gettime());
     self.deployment_land_time = gettime();
   }

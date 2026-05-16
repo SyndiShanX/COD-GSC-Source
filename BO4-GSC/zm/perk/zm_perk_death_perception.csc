@@ -67,7 +67,7 @@ perk_death_perception_visuals(localclientnum, oldval, newval, bnewent, binitials
     ai stoprenderoverridebundle(#"hash_30651f363ef055e9");
   }
 
-  self notify(#"hash_45ed6efeef67b773");
+  self notify(#"stop_zombie_indicators");
 }
 
 function_731d83de(localclientnum) {
@@ -77,7 +77,7 @@ function_731d83de(localclientnum) {
 }
 
 function_fff5377e(localclientnum) {
-  self endon(#"death", #"hash_45ed6efeef67b773");
+  self endon(#"death", #"stop_zombie_indicators");
 
   while(true) {
     if(!(isDefined(level.var_dc60105c) && level.var_dc60105c) && !isigcactive(localclientnum)) {

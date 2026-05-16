@@ -34,7 +34,7 @@ __init__() {
 finalize_init() {
   if(can_process_contracts()) {
     callback::on_connect(&on_player_connect);
-    callback::function_74872db6(&function_74872db6);
+    callback::on_round_begin(&on_round_begin);
     callback::on_round_end(&on_round_end);
     zm_player::function_a827358a(&function_8968a076);
     level.var_79a93566 = &function_902ef0de;
@@ -73,7 +73,7 @@ function_8968a076(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   }
 }
 
-function_74872db6() {
+on_round_begin() {
   if(level.round_number == 20) {
     foreach(e_player in getplayers()) {
       if(!(isDefined(e_player.var_bd1368a8) && e_player.var_bd1368a8)) {
@@ -89,7 +89,7 @@ function_74872db6() {
       e_player increment_zm_contract(#"contract_zm_rounds", 1, #"zstandard");
     }
 
-    callback::function_50fdac80(&function_74872db6);
+    callback::function_50fdac80(&on_round_begin);
   }
 }
 

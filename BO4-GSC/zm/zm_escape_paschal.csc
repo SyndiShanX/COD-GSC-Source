@@ -25,7 +25,7 @@ init() {
   clientfield::register("scriptmover", "" + #"seagull_blast_fx", 1, 1, "int", &seagull_blast_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"seagull_disappear_fx", 1, 1, "int", &seagull_disappear_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"summoning_key_glow", 1, 1, "int", &summoning_key_glow, 0, 0);
-  clientfield::register("actor", "" + #"hash_2b6e463a7a482630", 1, 1, "counter", &function_de16ce8a, 0, 0);
+  clientfield::register("actor", "" + #"brutus_spawn_lightning_fx", 1, 1, "counter", &function_de16ce8a, 0, 0);
   clientfield::register("actor", "" + #"hash_29d283d7f747d358", 1, 1, "counter", &function_9c59bce1, 0, 0);
   clientfield::register("actor", "" + #"hash_df589cc30f4c7dd", 1, 1, "int", &function_e482b6b8, 0, 0);
   clientfield::register("allplayers", "" + #"hash_4f58771e117ee3ee", 1, 1, "int", &function_a596ea8d, 0, 0);
@@ -39,7 +39,7 @@ init() {
   clientfield::register("allplayers", "" + #"hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
   clientfield::register("scriptmover", "" + #"setup_outro_ghosts", 1, 1, "int", &setup_outro_ghosts, 0, 0);
   clientfield::register("toplayer", "" + #"hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_506164c22c4c7ca8", 1, 1, "counter", &function_42693309, 0, 0);
+  clientfield::register("toplayer", "" + #"map_interact_rumble", 1, 1, "counter", &map_interact_rumble, 0, 0);
   level._effect[#"brutus_energy"] = #"hash_aced2664257a0ca";
   level._effect[#"energy_blue"] = #"hash_5a51f6c91ceb37a5";
   level._effect[#"energy_green"] = #"hash_24e8d0b53e783e64";
@@ -507,6 +507,6 @@ function_d663c13e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self playrumbleonentity(localclientnum, #"hash_738338790dfa1ece");
 }
 
-function_42693309(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+map_interact_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self playrumbleonentity(localclientnum, #"zm_escape_map_interact");
 }

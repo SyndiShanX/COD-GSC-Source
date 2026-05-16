@@ -36,10 +36,10 @@ init() {
   level.var_2a66053e hide();
   level.var_3830a0d3.angles += (20, 0, 0);
   level flag::init(#"hash_7b1fd4fc459e497c");
-  zm_sq::register(#"hash_6039fc2dd130edf5", #"step_1", #"hash_5873576264199a27", &function_4ac6cf37, &function_cb27a665);
-  zm_sq::start(#"hash_6039fc2dd130edf5");
-  zm_sq::register(#"hash_6039fc2dd130edf5", #"step_2", #"hash_5873586264199bda", &function_955fffb1, &function_fabb1fba);
-  zm_sq::start(#"hash_6039fc2dd130edf5");
+  zm_sq::register(#"ee_oscars", #"step_1", #"hash_5873576264199a27", &function_4ac6cf37, &function_cb27a665);
+  zm_sq::start(#"ee_oscars");
+  zm_sq::register(#"ee_oscars", #"step_2", #"hash_5873586264199bda", &function_955fffb1, &function_fabb1fba);
+  zm_sq::start(#"ee_oscars");
 }
 
 function_4ac6cf37(var_5ea5c94d) {

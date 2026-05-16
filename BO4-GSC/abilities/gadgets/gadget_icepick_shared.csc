@@ -52,7 +52,7 @@ function_b2755499(weapon, entity) {
     case #"gun_ultimate_turret":
       returnweapon = getweapon("ultimate_turret");
       break;
-    case #"hash_17df39d53492b0bf":
+    case #"ac130_main_cannon":
       returnweapon = getweapon("ac130");
       break;
     case #"straferun_gun":

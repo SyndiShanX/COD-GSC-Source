@@ -73,7 +73,7 @@ init_flags() {
   level flag::init(#"stick_drag");
   level flag::init(#"stick_rise");
   level flag::init(#"stick_hide");
-  level flag::init(#"hash_7ffc33bb45377f5e");
+  level flag::init(#"stick_man_transformed");
   level flag::init(#"stone_visible");
   level flag::init(#"cemetery_defend");
   level flag::init(#"hash_684b700932f4018f");
@@ -237,7 +237,7 @@ function_1ca135cf(n_int) {
 }
 
 function_4b15ba35(a_ents) {
-  level endon(#"hash_7ffc33bb45377f5e");
+  level endon(#"stick_man_transformed");
   level waittill(#"hash_68c10418963ac1fc", #"skip_step_1");
 
   if(isDefined(a_ents[#"prop 1"])) {
@@ -439,8 +439,8 @@ sacrifice_player_reset() {
     mdl_stone.origin = mdl_stone.v_start_org;
   }
 
-  if(level flag::get(#"hash_7ffc33bb45377f5e")) {
-    level flag::clear(#"hash_7ffc33bb45377f5e");
+  if(level flag::get(#"stick_man_transformed")) {
+    level flag::clear(#"stick_man_transformed");
   }
 
   if(isDefined(level.var_d2ff3b06)) {
@@ -524,7 +524,7 @@ function_8a51807c() {
 function_d8ca90b7() {
   level endon(#"stick_drag");
   level.stick_player endon(#"disconnect", #"sacrifice_player_reset");
-  level flag::wait_till(#"hash_7ffc33bb45377f5e");
+  level flag::wait_till(#"stick_man_transformed");
 
   while(true) {
     level flag::wait_till(#"stick_ready");
@@ -769,7 +769,7 @@ function_c5c7d880() {
   self.var_54cb40e6 = 1;
 
   while(true) {
-    s_notify = self waittill(#"hash_1fe68a6b935c321d");
+    s_notify = self waittill(#"revive_success_vo_start");
 
     if(zm_utility::is_player_valid(s_notify.reviver)) {
       s_notify.reviver zm_audio::create_and_play_dialog(#"plr_ghost", #"revive", undefined, 1);
@@ -975,7 +975,7 @@ function_50955e48() {
   scene::add_scene_func(#"p8_fxanim_zm_man_wm_01_bundle", &function_599edfb8, "Shot 2");
   s_scene scene::play("Shot 2");
   self thread function_79ad31a0();
-  level flag::set(#"hash_7ffc33bb45377f5e");
+  level flag::set(#"stick_man_transformed");
   self thread zm_vo::function_a2bd5a0c("vox_wicker_comp_react", 0, 1, 9999, 1, 0, 0);
 }
 

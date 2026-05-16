@@ -363,7 +363,7 @@ start_step_4() {
 
 function_cba90c3c() {
   self endon(#"death");
-  self waittill(#"hash_13f3f231b45420ef");
+  self waittill(#"mk2_modded");
   self thread function_62ac32b9();
   complete_quest();
 }

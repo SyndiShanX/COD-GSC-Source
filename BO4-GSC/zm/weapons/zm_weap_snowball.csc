@@ -13,11 +13,11 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + #"hash_78aa1dc141a3e27", 24000, 1, "int", &function_25101093, 0, 0);
+  clientfield::register("toplayer", "" + #"snowball_impact_player_postfx", 24000, 1, "int", &snowball_impact_player_postfx, 0, 0);
   clientfield::register("toplayer", "" + #"hash_2fafddfa9f85b8aa", 24000, 1, "int", &function_43d8c5f8, 0, 0);
 }
 
-function_25101093(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+snowball_impact_player_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self postfx::stoppostfxbundle("pstfx_wz_snowball_hit");
     self postfx::playpostfxbundle("pstfx_wz_snowball_hit");

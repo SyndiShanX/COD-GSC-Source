@@ -1449,7 +1449,7 @@ function_3c07c22e() {
       continue;
     }
 
-    mansion_util::function_2057ddc1(self.origin, "knight_trap", "kill", array(1), #"hash_59600b8c9675d446", var_1ef7b21, 1, 1);
+    mansion_util::function_2057ddc1(self.origin, "knight_trap", "kill", array(1), #"knight_trap_kill1", var_1ef7b21, 1, 1);
   }
 }
 

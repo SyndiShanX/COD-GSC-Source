@@ -653,7 +653,7 @@ function_11101458(str_next_defend, var_6cc77d4e = #"hash_3a35084ee8c333b2", hide
 }
 
 function_428cfaae(var_679cd7a8, var_6cc77d4e, hide_notify, n_obj_id, var_e1feb2f6) {
-  level endon(#"end_game", #"hash_1dabaf25a56177a1");
+  level endon(#"end_game", #"dynamic_objective_ended");
   self endon(#"disconnect");
   self thread zm_equipment::show_hint_text(var_679cd7a8.var_16a34df0, 10, 1.75, 120);
 
@@ -673,7 +673,7 @@ function_428cfaae(var_679cd7a8, var_6cc77d4e, hide_notify, n_obj_id, var_e1feb2f
 function_9704c82e(s_defend, var_e1feb2f6) {
   level endon(#"end_game");
   level waittill(#"end_defend_area");
-  level notify(#"hash_1dabaf25a56177a1");
+  level notify(#"dynamic_objective_ended");
   wait 0.1;
   gameobjects::release_obj_id(var_e1feb2f6);
 }

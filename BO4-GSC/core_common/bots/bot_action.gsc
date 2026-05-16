@@ -26,7 +26,7 @@ register_actions() {
   register_action(#"revive_player", &rank_priority, &revive_player_weight, &revive_player);
   register_action(#"use_gameobject", &rank_priority, &function_3cb4c00e, &use_gameobject);
   register_action(#"switch_to_weapon", &best_stowed_primary_weapon_rank, &switch_to_weapon_weight, &switch_to_weapon);
-  register_action(#"hash_78881ac649c38041", &rank_priority, &function_5647e838, &function_40aa6f87);
+  register_action(#"look_traversal_end", &rank_priority, &function_5647e838, &look_traversal_end);
   register_action(#"melee_glass", &current_melee_weapon_rank, &function_abf40e98, &melee_glass);
   register_action(#"melee_enemy", &current_melee_weapon_rank, &melee_enemy_weight, &melee_enemy);
   register_action(#"reload_weapon", &current_weapon_rank, &reload_weapon_weight, &reload_weapon);
@@ -1309,7 +1309,7 @@ function_5647e838(actionparams) {
   return 100;
 }
 
-function_40aa6f87(actionparams) {
+look_traversal_end(actionparams) {
   while(isDefined(self.bot.traversal)) {
     self botsetlookpoint(self.bot.traversal.endpos);
     self waittill(#"bot_action_update");

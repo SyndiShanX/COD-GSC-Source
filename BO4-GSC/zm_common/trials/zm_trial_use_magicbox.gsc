@@ -73,7 +73,7 @@ function_1685cc9b() {
   self zm_trial_util::function_c2cd0cba(level.var_519131bc);
 
   while(true) {
-    self waittill(#"hash_b0cc77b1ab98c08");
+    self waittill(#"acquired_magic_box_weapon");
 
     if(self.var_8f30dd57 == level.var_519131bc) {
       self zm_trial_util::function_63060af4(1);
@@ -88,7 +88,7 @@ function_1685cc9b() {
 
 function_b3c9adb7(weapon) {
   self.var_8f30dd57++;
-  self notify(#"hash_b0cc77b1ab98c08", {
+  self notify(#"acquired_magic_box_weapon", {
     #weapon: weapon
   });
 }

@@ -225,24 +225,24 @@ devgui() {
         break;
       case #"player_4_tn1":
       case #"player_4_fl1":
-      case #"hash_138c6bb93906947e":
-      case #"hash_15ba4b3713a7633c":
+      case #"player_3_helmets1":
+      case #"player_1_helmets1":
       case #"player_4_bf1":
       case #"player_2_fl1":
       case #"player_2_tn1":
-      case #"hash_410061a21976fb0d":
+      case #"player_4_helmets1":
       case #"player_1_bf1":
-      case #"hash_41e44f4b44ea8a50":
+      case #"player_4_season1":
       case #"player_3_fl1":
       case #"player_1_tn1":
-      case #"hash_478329f218767aab":
+      case #"player_2_helmets1":
       case #"player_2_db1":
       case #"player_3_tn1":
-      case #"hash_4ebf4bdbdeca4671":
+      case #"player_3_season1":
       case #"player_1_db1":
       case #"player_3_db1":
-      case #"hash_546d41eb20e9ed47":
-      case #"hash_5642f90448974736":
+      case #"player_1_season1":
+      case #"player_2_season1":
       case #"player_2_bf1":
       case #"player_1_fl1":
       case #"player_3_bf1":

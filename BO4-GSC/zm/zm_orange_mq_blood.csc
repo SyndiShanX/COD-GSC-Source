@@ -16,8 +16,8 @@ preload() {
   clientfield::register("scriptmover", "" + #"hash_10906b9ce905bda8", 24000, 3, "int", &function_80d2bf71, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_5dd642a0bd6e6cb9", 24000, 2, "int", &function_aae8819, 0, 0);
   level._effect[#"vessel_stage_1"] = #"hash_45c853fb6ff73c34";
-  level._effect[#"hash_2aea3f60746fdfc7"] = #"hash_3b65f2e4019b78eb";
-  level._effect[#"hash_2aea3e60746fde14"] = #"hash_8c5d404ef012ce";
+  level._effect[#"vessel_stage_2"] = #"hash_3b65f2e4019b78eb";
+  level._effect[#"vessel_stage_3"] = #"hash_8c5d404ef012ce";
   clientfield::register("scriptmover", "" + #"hash_1b72c208f2964e24", 24000, 3, "int", &function_3a0ab08b, 0, 0);
 }
 
@@ -109,7 +109,7 @@ function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.stage_fx);
     }
 
-    self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_2aea3f60746fdfc7"], self, str_tag);
+    self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"vessel_stage_2"], self, str_tag);
     self.var_3177d514 = self playLoopSound(#"hash_218e414cfa2bebd");
     return;
   }
@@ -119,7 +119,7 @@ function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.stage_fx);
     }
 
-    self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_2aea3e60746fde14"], self, str_tag);
+    self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"vessel_stage_3"], self, str_tag);
     self.var_3177d514 = self playLoopSound(#"hash_218e314cfa2bd0a");
     return;
   }

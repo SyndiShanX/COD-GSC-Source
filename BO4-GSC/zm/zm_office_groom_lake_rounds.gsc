@@ -162,7 +162,7 @@ spawn_archetype(str_archetype) {
       ai = zombie_dog_util::function_62db7b1c();
       break;
     case #"nova_crawler":
-      ai = namespace_df88241c::spawn_nova_crawler();
+      ai = nova_crawler_util::spawn_nova_crawler();
       break;
     default:
       assertmsg("<dev string:x60>");

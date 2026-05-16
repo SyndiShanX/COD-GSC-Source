@@ -46,7 +46,7 @@ init() {
     level flag::init(#"stoker_key_obtained");
     level flag::init(#"hash_635fa9d7a8be6607");
     level flag::init(#"hash_2889330d50a4cc38");
-    level flag::init(#"hash_35ab49975b4cc894");
+    level flag::init(#"wonder_weapon_quest_complete");
     level flag::init(#"hash_477e8ec5d0789334");
     callback::on_spawned(&function_58269323);
     level.w_tricannon_base = getweapon(#"ww_tricannon_t8");
@@ -160,7 +160,7 @@ function_f7b0a02a() {
 }
 
 function_a20e6e5d() {
-  level endon(#"hash_503e8bfd27a38f08", #"stoker_key_obtained", #"end_game");
+  level endon(#"stoker_key_timed_out", #"stoker_key_obtained", #"end_game");
   waitresult = level.var_85a8dbba waittill(#"trigger");
   player = waitresult.activator;
 
@@ -182,7 +182,7 @@ function_ca409b53() {
   level.var_86d6efbf playSound(#"hash_5a2daa895f64b2e2");
   level.var_85a8dbba delete();
   level.var_86d6efbf delete();
-  level notify(#"hash_503e8bfd27a38f08");
+  level notify(#"stoker_key_timed_out");
 }
 
 step_2_setup(var_a276c861) {
@@ -350,7 +350,7 @@ step_4_cleanup(var_a276c861, var_19e802fa) {
   scene::add_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &function_d3351bf7, "done");
   level scene::play(level.var_f3abf34a.target, "targetname");
   scene::remove_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &spawn_tricannon);
-  level flag::set(#"hash_35ab49975b4cc894");
+  level flag::set(#"wonder_weapon_quest_complete");
   array::run_all(util::get_active_players(), &function_66b6e720, #"p8_fxanim_zm_zod_tentacle_bundle");
 }
 

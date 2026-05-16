@@ -102,8 +102,8 @@ function_68b149a2(var_64e17761) {
 
 function_7d81b8c1() {
   level endon(#"end_game");
-  self endon(#"death", #"hash_2580a60476ec7393");
-  self notify(#"hash_56f565b20fbc0db");
+  self endon(#"death", #"player_entered_safe_zone");
+  self notify(#"player_exited_safe_zone");
 
   if(!isDefined(self.var_8b5609a4)) {
     self.var_8b5609a4 = 0;
@@ -187,8 +187,8 @@ function_202ee8fa() {
 
 function_d2dd1f2b() {
   level endon(#"end_game");
-  self endon(#"death", #"hash_56f565b20fbc0db");
-  self notify(#"hash_2580a60476ec7393");
+  self endon(#"death", #"player_exited_safe_zone");
+  self notify(#"player_entered_safe_zone");
 
   if(!isDefined(self.var_36a93d1) || self.var_36a93d1 == 0) {
     return;

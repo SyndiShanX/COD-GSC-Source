@@ -82,14 +82,14 @@ initscoreinfo() {
       is_objective = tablelookupcolumnforrow(scoreinfotablename, row, 8);
       medalname = tablelookupcolumnforrow(scoreinfotablename, row, 11);
       job_type = tablelookupcolumnforrow(scoreinfotablename, row, 16);
-      var_b6593614 = tablelookupcolumnforrow(scoreinfotablename, row, 17);
+      job_sub_type = tablelookupcolumnforrow(scoreinfotablename, row, 17);
       var_1a39d14 = tablelookupcolumnforrow(scoreinfotablename, row, 18);
       var_bdbfb0e = tablelookupcolumnforrow(scoreinfotablename, row, 19);
       var_a434fd2d = tablelookupcolumnforrow(scoreinfotablename, row, 20);
       is_deprecated = tablelookupcolumnforrow(scoreinfotablename, row, 21);
       bounty_reward = tablelookupcolumnforrow(scoreinfotablename, row, 22);
       mark2_bonus_xp = int(isDefined(tablelookupcolumnforrow(scoreinfotablename, row, 24)) ? tablelookupcolumnforrow(scoreinfotablename, row, 24) : 0);
-      registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_objective, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp);
+      registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_objective, label, medalname, job_type, job_sub_type, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp);
 
       if(!isDefined(game.scoreinfoinitialized)) {
         setddlstat = tablelookupcolumnforrow(scoreinfotablename, row, 12);
@@ -123,7 +123,7 @@ getrankxpcapped(inrankxp) {
   return inrankxp;
 }
 
-registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_obj, label, medalname, job_type, var_b6593614, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp) {
+registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_obj, label, medalname, job_type, job_sub_type, var_1a39d14, var_bdbfb0e, var_a434fd2d, is_deprecated, bounty_reward, mark2_bonus_xp) {
   overridedvar = "scr_" + level.gametype + "_score_" + type;
 
   if(getdvarstring(overridedvar) != "") {
@@ -191,8 +191,8 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, job_defining, dp, is_obj, labe
       level.scoreinfo[type][#"job_type"] = job_type;
     }
 
-    if(var_b6593614 != "") {
-      level.scoreinfo[type][#"hash_401b1493e5188252"] = var_b6593614;
+    if(job_sub_type != "") {
+      level.scoreinfo[type][#"job_sub_type"] = job_sub_type;
     }
 
     if(var_1a39d14 != "") {

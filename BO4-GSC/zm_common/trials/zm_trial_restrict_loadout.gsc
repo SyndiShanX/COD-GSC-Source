@@ -88,7 +88,7 @@ is_melee_allowed(weapon) {
     return true;
   }
 
-  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == #"hash_7416cabf26f52c5f") && isDefined(weapon.isriotshield) && weapon.isriotshield && weapon.weapclass == "pistol") {
+  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == #"any_pistol_no_upgrades") && isDefined(weapon.isriotshield) && weapon.isriotshield && weapon.weapclass == "pistol") {
     return false;
   }
 
@@ -246,18 +246,18 @@ on_begin(var_e097dc07, var_f5300808) {
       var_fda63ae3 = function_f1dd7bf8(array("pistol_standard_t8", "pistol_burst_t8", "pistol_revolver_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case #"hash_7416cabf26f52c5f":
+    case #"any_pistol_no_upgrades":
       allowed_weapons = zm_weapons::function_ed29dde5("pistol", 0, 1);
       allowed_weapons = arraycombine(allowed_weapons, array(#"ww_random_ray_gun1", #"ww_random_ray_gun2", #"ww_random_ray_gun2_charged", #"ww_random_ray_gun3", #"ww_random_ray_gun3_charged", #"ray_gun"), 0, 0);
       var_fda63ae3 = function_f1dd7bf8(array("pistol_standard_t8", "pistol_burst_t8", "pistol_revolver_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case #"hash_14468aadde60f9e1":
+    case #"any_smg_no_upgrades":
       allowed_weapons = zm_weapons::function_ed29dde5("smg", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("smg_fastfire_t8", "smg_handling_t8", "smg_drum_pistol_t8", "smg_standard_t8", "smg_accurate_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case #"hash_2d7ec445ba288abf":
+    case #"any_ar_no_upgrades":
       allowed_weapons = zm_weapons::function_ed29dde5("ar", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("ar_accurate_t8", "ar_damage_t8", "ar_fastfire_t8", "ar_galil_t8", "ar_mg1909_t8", "ar_modular_t8", "ar_standard_t8", "ar_stealth_t8"));
       level zm_trial::function_25ee130(1);
@@ -273,7 +273,7 @@ on_begin(var_e097dc07, var_f5300808) {
       var_fda63ae3 = function_f1dd7bf8(array("sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_powerbolt_t8", "sniper_powersemi_t8"));
       level zm_trial::function_25ee130(1);
       break;
-    case #"hash_54d4bc51239254b8":
+    case #"any_lmg_no_upgrades":
       allowed_weapons = zm_weapons::function_ed29dde5("lmg", 0, 1);
       var_fda63ae3 = function_f1dd7bf8(array("lmg_double_t8", "lmg_heavy_t8", "lmg_spray_t8", "lmg_standard_t8"));
       level zm_trial::function_25ee130(1);

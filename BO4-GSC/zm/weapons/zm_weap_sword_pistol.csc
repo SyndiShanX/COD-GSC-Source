@@ -26,8 +26,8 @@ __init__() {
   clientfield::register("vehicle", "" + #"viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
   clientfield::register("actor", "" + #"viper_bite_bitten_fx", 1, 1, "int", &viper_bite_bitten_fx, 1, 0);
   clientfield::register("toplayer", "" + #"swordpistol_rumble", 1, 3, "counter", &swordpistol_rumble, 0, 0);
-  level._effect[#"hash_25626300bbf56aa7"] = #"hash_6a8080a7153541f6";
-  level._effect[#"hash_67085795f324f6b5"] = #"hash_6a8080a7153541f6";
+  level._effect[#"viper_sword_bloodswipe_r_1p"] = #"hash_6a8080a7153541f6";
+  level._effect[#"viper_sword_bloodswipe_l_1p"] = #"hash_6a8080a7153541f6";
   level._effect[#"hash_72dcd3be23419b87"] = #"hash_597abd90e7ff80e0";
   level._effect[#"hash_2cce5c832c2c19be"] = #"hash_358368e2fa3ca4f1";
   level._effect[#"hash_6890c4ba9ae61d0b"] = #"hash_28918c31efbce546";
@@ -40,12 +40,12 @@ __init__() {
 }
 
 function_8e1552b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_25626300bbf56aa7"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"viper_sword_bloodswipe_r_1p"], self, "j_spine4");
   self playrumbleonentity(localclientnum, "damage_heavy");
 }
 
 function_6831ee4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"hash_67085795f324f6b5"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"viper_sword_bloodswipe_l_1p"], self, "j_spine4");
   self playrumbleonentity(localclientnum, "damage_heavy");
 }
 

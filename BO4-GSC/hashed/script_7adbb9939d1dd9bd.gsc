@@ -7,14 +7,14 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-#namespace namespace_8eb9bc0a;
+#namespace zm_bot_soak_test;
 
 autoexec __init__system__() {
-  system::register(#"hash_6d3c5317001d4fc6", &__init__, undefined, undefined);
+  system::register(#"zm_bot_soak_test", &__init__, undefined, undefined);
 }
 
 __init__() {
-  setDvar(#"hash_6d3c5317001d4fc6", 0);
+  setDvar(#"zm_bot_soak_test", 0);
 
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x7d>");
@@ -86,10 +86,10 @@ zombie_open_sesame() {
 }
 
 function_97346595() {
-  var_2e0b8925 = getdvarint(#"hash_6d3c5317001d4fc6", 0);
+  var_2e0b8925 = getdvarint(#"zm_bot_soak_test", 0);
 
   while(true) {
-    new_value = getdvarint(#"hash_6d3c5317001d4fc6", 0);
+    new_value = getdvarint(#"zm_bot_soak_test", 0);
     players = getplayers();
 
     if(new_value) {

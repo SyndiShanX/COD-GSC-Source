@@ -61,7 +61,7 @@ update_targets() {
 
       if(isalive(player)) {
         player playsoundtoplayer(#"evt_wz_bounty_success", player);
-        player luinotifyevent(#"hash_6b67aa04e378d681", 1, 12);
+        player luinotifyevent(#"game_update_notification", 1, 12);
         item_supply_drop::drop_supply_drop(player.origin);
       }
 
@@ -88,7 +88,7 @@ update_targets() {
       player = topplayers[randomindex];
       player clientfield::set("ishighvaluetarget", 1);
       player playsoundtoplayer(#"hash_6d40de6f3e747fb1", player);
-      player luinotifyevent(#"hash_6b67aa04e378d681", 1, 10);
+      player luinotifyevent(#"game_update_notification", 1, 10);
       indicatorarray[#"clientnum"] = player getentitynumber();
 
       foreach(other_player in getplayers()) {
@@ -127,7 +127,7 @@ update_targets() {
     if(player function_fbb8f1d1()) {
       foreach(target in targetplayers) {
         if(target.team != player.team) {
-          player luinotifyevent(#"hash_6b67aa04e378d681", 1, 9);
+          player luinotifyevent(#"game_update_notification", 1, 9);
           break;
         }
       }
@@ -198,7 +198,7 @@ function_3f8e4156(params) {
   }
 
   attacker playsoundtoplayer(#"hash_619bf069e410b863", attacker);
-  attacker luinotifyevent(#"hash_6b67aa04e378d681", 1, 11);
+  attacker luinotifyevent(#"game_update_notification", 1, 11);
   item_supply_drop::drop_supply_drop(attacker.origin);
 }
 

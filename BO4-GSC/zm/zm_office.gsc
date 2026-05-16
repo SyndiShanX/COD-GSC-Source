@@ -184,7 +184,7 @@ main_quest_step1_setup(var_5ea5c94d) {
     scene::add_scene_func("cin_zm_office_outro", &function_a8b0b884, "play");
     scene::add_scene_func("cin_zm_office_outro", &function_335eca01, "done");
     scene::add_scene_func("cin_zm_office_outro", &function_335eca01, "stop");
-    callback::function_74872db6(&outro_watcher);
+    callback::on_round_begin(&outro_watcher);
     level waittill(#"main_quest_complete");
   }
 }

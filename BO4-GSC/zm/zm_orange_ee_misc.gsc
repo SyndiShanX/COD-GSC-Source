@@ -54,7 +54,7 @@ main() {
   level flag::init(#"edge_of_the_world_complete");
   zm_sq::register(#"jump_scare_lighthouse", #"step_1", #"hash_5986bb2ab1879d84", &jump_scare_lighthouse, &function_960f84d7);
   zm_sq::register(#"jump_scare_note", #"step_1", #"hash_2572fbc6efde23a8", &jump_scare_note, &function_ee63b8a7);
-  zm_sq::register(#"hash_729a1e4eb041be9b", #"step_1", #"trinket_quest", &trinket_quest, &trinket_quest_cleanup);
+  zm_sq::register(#"trinket_tincture", #"step_1", #"trinket_quest", &trinket_quest, &trinket_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_1", #"edge_quest", &edge_quest, &edge_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_2", #"edge_quest", &function_8bc27fd3, &security_balcony_time_);
   level.var_4ac8ef63 = getent("edge_flinger_spot", "targetname");
@@ -78,7 +78,7 @@ main() {
   if(zm_utility::is_ee_enabled()) {
     zm_sq::start(#"jump_scare_lighthouse");
     zm_sq::start(#"jump_scare_note");
-    zm_sq::start(#"hash_729a1e4eb041be9b");
+    zm_sq::start(#"trinket_tincture");
     level thread function_716974ba();
     level thread sq_glasses();
     level thread hidden_song_2();

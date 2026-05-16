@@ -69,7 +69,7 @@ function_f37ba127() {
   self endon(#"disconnect");
 
   while(true) {
-    waitresult = self waittill(#"hash_13f3f231b45420ef");
+    waitresult = self waittill(#"mk2_modded");
 
     if(waitresult.e_player === self) {
       iprintlnbold("<dev string:x38>" + "<dev string:x70>");
@@ -86,7 +86,7 @@ function_9785ebce() {
   level endon(#"game_ended", #"shard_step_complete");
 
   for(i = 0; i < 4; i++) {
-    level waittill(#"hash_13f3f231b45420ef");
+    level waittill(#"mk2_modded");
   }
 
   iprintlnbold("<dev string:x38>" + "<dev string:x82>");

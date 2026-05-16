@@ -96,7 +96,7 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + #"fertilizer_smell", 1, 1, "int", &fertilizer_smell, 0, 0);
   clientfield::register("world", "" + #"fertilizer_smell_bowl", 1, 1, "int", &fertilizer_smell_bowl, 0, 0);
   clientfield::register("world", "" + #"hash_73088ea3053b96f1", 1, 1, "int", &function_70e21be0, 0, 0);
-  clientfield::register("actor", "" + #"hash_233e31d0c2b47b1b", 1, 1, "int", &function_9cb4a774, 0, 0);
+  clientfield::register("actor", "" + #"ra_destroyer_head_glow", 1, 1, "int", &function_9cb4a774, 0, 0);
   clientfield::register("actor", "" + #"hash_12dfb8249f8212d2", 1, 1, "int", &function_eba8a203, 0, 0);
   clientfield::register("actor", "" + #"hash_17e3041649954b9f", 1, 1, "int", &function_1467cfe7, 0, 0);
   clientfield::register("scriptmover", "ra_eyes_beam_fire", 1, 1, "int", &ra_eyes_beam_fire, 0, 0);
@@ -147,7 +147,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_3a51c9895d4afcf7"] = #"hash_393af938c98cf4d0";
   level._effect[#"hash_1add6939914df65a"] = #"hash_24d0d45080034da";
   level._effect[#"hash_5dc6f97e5850e1d1"] = #"hash_14d7c3ad478543a";
-  level._effect[#"hash_56c34d8ec9a098c2"] = #"hash_266633b36a852fd5";
+  level._effect[#"bull_shield_hit"] = #"hash_266633b36a852fd5";
   level._effect[#"brazier_fire_blue"] = #"hash_6d3f50f00db41676";
   level._effect[#"brazier_fire_green"] = #"hash_1839d27856f4aed9";
   level._effect[#"brazier_fire_red"] = #"hash_4d95d8d2f3b07ca5";
@@ -161,7 +161,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"energy_soul_target"] = #"hash_6f5f4eb9267613e3";
   level._effect[#"banner_soul_burst"] = #"hash_38a043ca24c928f5";
   level._effect[#"acid_death"] = #"hash_78c487ac760f594c";
-  level._effect[#"hash_233e31d0c2b47b1b"] = #"hash_4d11f0ab46451330";
+  level._effect[#"ra_destroyer_head_glow"] = #"hash_4d11f0ab46451330";
   level._effect[#"chaos_ball"] = #"hash_2fa6e69cbbe0de1";
   level._effect[#"hash_4eddc2f547bc55f6"] = #"hash_246ba1502485a840";
   level._effect[#"hash_7bd75ae600e0a590"] = "maps/zm_towers/fx8_crowd_reward_flower_exp";
@@ -182,8 +182,8 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_59efc8cf7ca0f9cb"] = #"hash_361dea887ab98078";
   level._effect[#"hash_416145285a01faa3"] = #"hash_28ad85abec3ad058";
   level._effect[#"hash_416143285a01f73d"] = #"hash_28479dabebe445ee";
-  level._effect[#"hash_df4673638509cab"] = #"hash_2543453edaf343d4";
-  level._effect[#"hash_df475363850b475"] = #"hash_259b253edb3d834a";
+  level._effect[#"maelstrom_conduct_knee_l"] = #"hash_2543453edaf343d4";
+  level._effect[#"maelstrom_conduct_knee_r"] = #"hash_259b253edb3d834a";
   level._effect[#"maelstrom_conduct"] = #"zm_ai/fx8_elec_bolt";
   level._effect[#"hash_1814d4cc1867739c"] = #"hash_13f09e4051884309";
   level._effect[#"hash_314d3a2e542805c0"] = #"zombie/fx_powerup_on_red_zmb";
@@ -481,7 +481,7 @@ function_b675c8b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_9cb4a774(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"hash_233e31d0c2b47b1b"], self, "j_neck");
+    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"ra_destroyer_head_glow"], self, "j_neck");
     return;
   }
 
@@ -1927,8 +1927,8 @@ narrative_brazier_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 function_e63747a9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval && !isDefined(self.var_2ec44947)) {
-    self.var_2ec44947 = util::playFXOnTag(localclientnum, level._effect[#"hash_56c34d8ec9a098c2"], self, "tag_fx_eye_01");
-    self.var_e1812ec2 = util::playFXOnTag(localclientnum, level._effect[#"hash_56c34d8ec9a098c2"], self, "tag_fx_eye_02");
+    self.var_2ec44947 = util::playFXOnTag(localclientnum, level._effect[#"bull_shield_hit"], self, "tag_fx_eye_01");
+    self.var_e1812ec2 = util::playFXOnTag(localclientnum, level._effect[#"bull_shield_hit"], self, "tag_fx_eye_02");
   }
 }
 

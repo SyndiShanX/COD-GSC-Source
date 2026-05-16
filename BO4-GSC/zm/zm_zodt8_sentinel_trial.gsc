@@ -1795,7 +1795,7 @@ function_c6f820b8(params) {
 }
 
 function_e81d23de() {
-  a_s_pipes = struct::get_array(#"hash_bf15c9f5060cda0");
+  a_s_pipes = struct::get_array(#"seawater_intake");
   var_250390bc = [];
 
   foreach(s_pipe in a_s_pipes) {

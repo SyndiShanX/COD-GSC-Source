@@ -285,7 +285,7 @@ function_86c058b() {
   level.var_32ae304 = level.temp_disable;
   e_player = getplayers()[0];
   e_player ct_bots::function_26d45f32(1, 1, 1);
-  level notify(#"hash_15f7db94fb4253cf");
+  level notify(#"vision_pulse_objective_complete");
   level notify(#"stop_execution_collision");
   level notify(#"stop_execution_exit_collision");
   wait 0.1;

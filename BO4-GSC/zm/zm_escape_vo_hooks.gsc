@@ -285,7 +285,7 @@ function_22101968() {
     s_info = var_d756a0b4 waittill(#"trigger");
     e_player = s_info.activator;
 
-    if(isPlayer(e_player) && e_player flag::get(#"hash_30ae3926b2d211db")) {
+    if(isPlayer(e_player) && e_player flag::get(#"roof_battle_step_completed")) {
       break;
     }
   }

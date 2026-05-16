@@ -1,7 +1,7 @@
-/***********************************************
+/*****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_7b843bf90a032750.gsc
-***********************************************/
+ * Script: zm_common\trials\zm_trial_kill_enemies_for_health.gsc
+*****************************************************************/
 
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\math_shared;
@@ -11,10 +11,10 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_a476311c;
+#namespace zm_trial_kill_enemies_for_health;
 
 autoexec __init__system__() {
-  system::register(#"hash_7ceb08aa364e4596", &__init__, undefined, undefined);
+  system::register(#"zm_trial_kill_enemies_for_health", &__init__, undefined, undefined);
 }
 
 __init__() {

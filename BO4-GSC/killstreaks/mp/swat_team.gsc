@@ -2623,7 +2623,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
     attacker.var_6c0553ea.kills++;
 
     if(attacker.var_6c0553ea.kills == 3) {
-      scoreevents::processscoreevent(#"hash_7caba8ab83b5373f", attacker, victim, getweapon(#"swat_team"));
+      scoreevents::processscoreevent(#"swat_team_killstreak_3", attacker, victim, getweapon(#"swat_team"));
     }
 
     if(einflictor isatgoal()) {

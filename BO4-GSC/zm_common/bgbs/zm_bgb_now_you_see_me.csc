@@ -21,7 +21,7 @@ __init__() {
 
   bgb::register(#"zm_bgb_now_you_see_me", "activated");
   visionset_mgr::register_visionset_info("zm_bgb_now_you_see_me", 1, 31, undefined, "zm_bgb_in_plain_sight");
-  clientfield::register("toplayer", "" + #"hash_18be2b4b3936ee1f", 1, 1, "int", &function_387d8f36, 0, 0);
+  clientfield::register("toplayer", "" + #"zm_bgb_now_you_see_me_postfx", 1, 1, "int", &function_387d8f36, 0, 0);
 }
 
 function_387d8f36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

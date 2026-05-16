@@ -32,7 +32,7 @@ __init__() {
 
 function_27473e44() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_death_dash", #"perk_death_dash", 2000, #"hash_2f712a7c17494226", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), #"zmperksdeathdash");
+    zm_perks::register_perk_basic_info(#"specialty_death_dash", #"perk_death_dash", 2000, #"zombie/perk_death_dash_keyboard", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), #"zmperksdeathdash");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_death_dash", #"perk_death_dash", 2000, #"zombie/perk_death_dash", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), #"zmperksdeathdash");
   }

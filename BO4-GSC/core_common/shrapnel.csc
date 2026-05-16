@@ -167,9 +167,9 @@ function_4e9cfc19(localclientnum, playerhealth, priorplayerhealth, basehealth = 
   }
 
   var_89524e53 = self function_e31d7cf9(playerhealth, priorplayerhealth, basehealth);
-  stage2_threshold = getdvarint(#"hash_213e56922285900c", 69) / basehealth;
-  stage3_threshold = getdvarint(#"hash_213e5792228591bf", 29) / basehealth;
-  stage4_threshold = getdvarint(#"hash_213e549222858ca6", 1) / basehealth;
+  stage2_threshold = getdvarint(#"shrapnel_stage_2", 69) / basehealth;
+  stage3_threshold = getdvarint(#"shrapnel_stage_3", 29) / basehealth;
+  stage4_threshold = getdvarint(#"shrapnel_stage_4", 1) / basehealth;
   var_5142946f = self.var_996ceac2;
   var_387f8be9 = self function_a6fe4166();
 

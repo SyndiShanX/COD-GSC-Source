@@ -2132,7 +2132,7 @@ function_9c14ee08() {
           killedby = 0;
         }
 
-        player luinotifyevent(#"hash_9ab42b593c66ed", 5, playerclientnum, enemyindex, var_13947986, killed, killedby);
+        player luinotifyevent(#"track_kill_stats", 5, playerclientnum, enemyindex, var_13947986, killed, killedby);
         enemyindex++;
       }
     }

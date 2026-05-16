@@ -4040,7 +4040,7 @@ function_f5a222a8(var_6cc77d4e, v_origin_or_ent, var_b96be97f = undefined) {
 }
 
 function_71071944(n_obj_id, var_b96be97f) {
-  level endon(#"game_ended", #"hash_1dabaf25a56177a1");
+  level endon(#"game_ended", #"dynamic_objective_ended");
   self endon(#"disconnect");
   self.var_fbb52104 = n_obj_id;
   self.var_d4778e21 = var_b96be97f;

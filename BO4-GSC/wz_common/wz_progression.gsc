@@ -224,19 +224,19 @@ player_disconnected() {
 function_fb20ad56() {
   player = self;
   assert(isPlayer(player));
-  player stats::function_d40764f3(#"hash_6d5e162204f447f4", 1);
+  player stats::function_d40764f3(#"top_25_placement_player", 1);
 }
 
 function_d61fdbef() {
   player = self;
   assert(isPlayer(player));
-  player stats::function_d40764f3(#"hash_25f4611fc9d40aa8", 1);
+  player stats::function_d40764f3(#"top_10_placement_player", 1);
 }
 
 function_67949803() {
   player = self;
   assert(isPlayer(player));
-  player stats::function_d40764f3(#"hash_63307a0460c698ac", 1);
+  player stats::function_d40764f3(#"top_5_placement_player", 1);
 }
 
 function_51cae91b(placement) {
@@ -296,7 +296,7 @@ function_a0fea1a9() {
 function_3217b0d2() {
   player = self;
   assert(isPlayer(player));
-  player stats::function_d40764f3(#"hash_7b8d2c77874a1c24", 1);
+  player stats::function_d40764f3(#"top_10_placement_team", 1);
 
   if(player function_ec3a8858()) {
     player stats::function_d40764f3(#"hash_337e05385393e3a6", 1);
@@ -310,7 +310,7 @@ function_3217b0d2() {
 function_6a7970fe() {
   player = self;
   assert(isPlayer(player));
-  player stats::function_d40764f3(#"hash_5e9a745460a10f80", 1);
+  player stats::function_d40764f3(#"top_5_placement_team", 1);
 
   if(isDefined(player.avenger) && player.avenger) {
     player stats::function_d40764f3(#"top_5_avenger", 1);

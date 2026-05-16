@@ -67,7 +67,7 @@ function_fbb4cc60() {
 main() {
   function_edd5bb1a();
   function_ac904e5e();
-  callback::function_74872db6(&function_74872db6);
+  callback::on_round_begin(&on_round_begin);
   level.fn_custom_round_ai_spawn = undefined;
   level.var_ef785c4c = 1;
   level.var_81c681aa = 1;
@@ -87,7 +87,7 @@ main() {
   level thread defend_areas();
 }
 
-function_74872db6() {
+on_round_begin() {
   level.var_2e3a6cbe = undefined;
   level.var_d614a8b4 = undefined;
   level.var_11f7a9af = undefined;

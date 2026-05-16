@@ -26,7 +26,7 @@ __main__() {}
 
 enable_dying_wish_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_berserker", #"perk_dying_wish", 4000, #"hash_4f7614bf7bd645c8", getweapon("zombie_perk_bottle_dying_wish"), getweapon("zombie_perk_totem_dying_wish"), #"zmperksdyingwish");
+    zm_perks::register_perk_basic_info(#"specialty_berserker", #"perk_dying_wish", 4000, #"zombie/perk_dying_wish_keyboard", getweapon("zombie_perk_bottle_dying_wish"), getweapon("zombie_perk_totem_dying_wish"), #"zmperksdyingwish");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_berserker", #"perk_dying_wish", 4000, #"zombie/perk_dying_wish", getweapon("zombie_perk_bottle_dying_wish"), getweapon("zombie_perk_totem_dying_wish"), #"zmperksdyingwish");
   }

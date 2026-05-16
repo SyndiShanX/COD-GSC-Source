@@ -191,7 +191,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_681c28c9();
   level thread function_486119ea();
   level thread function_30829a12();
-  callback::function_74872db6(&play_avalanche);
+  callback::on_round_begin(&play_avalanche);
 
   if(!zm_utility::is_ee_enabled()) {
     e_ind = getent("ee_ind", "targetname");

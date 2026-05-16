@@ -44,7 +44,7 @@ function_4da8230b(var_736940b3) {
 
   if(level.var_50f7dbd5.size == 1) {
     level flag::set(#"hash_670ec83e1acfadff");
-    level notify(#"hash_239ebc19aab5a60b");
+    level notify(#"transformation_spawning_paused");
   }
 }
 
@@ -595,7 +595,7 @@ update() {
     level flag::wait_till_clear(#"hash_670ec83e1acfadff");
 
     if(function_c3a1379e()) {
-      level notify(#"hash_239ebc19aab5a60b");
+      level notify(#"transformation_spawning_paused");
       function_e95ec8df();
       level waittill(#"start_of_round", #"force_transformations");
     }

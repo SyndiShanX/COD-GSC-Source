@@ -22,7 +22,7 @@ __init__() {
 
 enable_ethereal_razor_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"hash_1e8ce5bc6963fb34", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
+    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"zombie/perk_ethereal_razor_keyboard", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"zombie/perk_ethereal_razor", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
   }
@@ -57,7 +57,7 @@ function_ee114cab() {
 }
 
 function_f20b4260() {
-  clientfield::register("actor", "" + #"hash_29c26fb019da89f3", 13000, 1, "counter");
+  clientfield::register("actor", "" + #"ethereal_melee_impact", 13000, 1, "counter");
   clientfield::register("allplayers", "" + #"hash_450d9f824068dcc2", 13000, 1, "counter");
   clientfield::register("allplayers", "" + #"hash_4de2dbcd551f1fb7", 13000, 1, "counter");
 }
@@ -167,7 +167,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     e_target playSound(#"hash_444f738bd1d3fd8");
 
     if(isactor(e_target)) {
-      e_target clientfield::increment("" + #"hash_29c26fb019da89f3");
+      e_target clientfield::increment("" + #"ethereal_melee_impact");
     }
 
     var_5f96a3db++;

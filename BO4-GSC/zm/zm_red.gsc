@@ -1576,21 +1576,21 @@ function_acb5b0ec() {
 
 function_76dc48b8(cmd) {
   switch (cmd) {
-    case #"hash_6eb30455e9df06a1":
+    case #"play_part_1":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24be>", &function_5b984671, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24be>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24be>");
       return 1;
-    case #"hash_6eb30155e9df0188":
+    case #"play_part_2":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x24e6>", &function_75ef7b1f, "<dev string:x24d8>");
       scene::add_scene_func("<dev string:x24e6>", &function_ea8d45ef, "<dev string:x24df>");
       scene::play("<dev string:x24e6>");
       return 1;
-    case #"hash_6eb30255e9df033b":
+    case #"play_part_3":
       level thread super_open_sesame();
       function_eeb6a1e7();
       scene::add_scene_func("<dev string:x2506>", &function_883a1fb8, "<dev string:x24d8>");
@@ -1898,7 +1898,7 @@ function_76dc48b8(cmd) {
       }
 
       break;
-    case #"hash_7bf7f5b60c83cf1f":
+    case #"oracle_boon_reset_door":
       foreach(player in getplayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;

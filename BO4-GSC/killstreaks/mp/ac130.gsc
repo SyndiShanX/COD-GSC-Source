@@ -41,7 +41,7 @@ __init__() {
   profilestart();
   killstreaks::register_killstreak("killstreak_ac130", &activatemaingunner);
   killstreaks::register_alt_weapon("ac130", getweapon(#"killstreak_remote"));
-  killstreaks::register_alt_weapon("ac130", getweapon(#"hash_17df39d53492b0bf"));
+  killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_main_cannon"));
   killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_autocannon"));
   killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_chaingun"));
   killstreaks::set_team_kill_penalty_scale("ac130", level.teamkillreducedpenalty);
@@ -1170,8 +1170,8 @@ function_d45a1f8d(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(einflictor.owner == attacker && (weapon == getweapon(#"hash_17df39d53492b0bf") || weapon == getweapon(#"ac130_autocannon"))) {
-    isprimaryweapon = weapon == getweapon(#"hash_17df39d53492b0bf") ? 1 : 0;
+  if(einflictor.owner == attacker && (weapon == getweapon(#"ac130_main_cannon") || weapon == getweapon(#"ac130_autocannon"))) {
+    isprimaryweapon = weapon == getweapon(#"ac130_main_cannon") ? 1 : 0;
     level.ac130 function_631f02c5(isprimaryweapon);
   }
 }

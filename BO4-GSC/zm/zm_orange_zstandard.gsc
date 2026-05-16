@@ -232,7 +232,7 @@ function_ae7c2601(n_max) {
   return getplayers().size;
 }
 
-function_74872db6() {
+on_round_begin() {
   if(level.round_number <= 7) {
     level.var_11f7a9af = 1;
     level.var_18d20774 = 62500;

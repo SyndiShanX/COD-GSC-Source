@@ -11,10 +11,10 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\weapons\zm_weap_spectral_shield;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_a9aa9d72;
+#namespace zm_escape_paschal_s3;
 
 autoexec __init__system__() {
-  system::register(#"hash_3478ed13fc9440e6", &__init__, undefined, undefined);
+  system::register(#"zm_escape_paschal_s3", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -29,8 +29,8 @@ __init__() {
   clientfield::register("toplayer", "" + #"hash_49fecafe0b5d6da4", 1, 2, "counter", &function_e3248f02, 0, 0);
   clientfield::register("vehicle", "" + #"tugboat_surround_fx", 1, 1, "int", &tugboat_surround_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"tugboat_surround_fx", 1, 1, "int", &tugboat_surround_fx, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_22ffb9cf999f16c0", 1, 1, "counter", &function_28de769f, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_22ffb9cf999f16c0", 1, 1, "counter", &function_28de769f, 0, 0);
+  clientfield::register("vehicle", "" + #"tugboat_spawn_fx", 1, 1, "counter", &tugboat_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"tugboat_spawn_fx", 1, 1, "counter", &tugboat_spawn_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_a51ae59006ab41b", 1, getminbitcountfornum(4), "int", &function_126253d1, 0, 0);
   clientfield::register("scriptmover", "" + #"generator_spark_fx", 1, 1, "int", &generator_spark_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_119729072e708651", 1, 1, "int", &function_da095cb3, 0, 0);
@@ -56,13 +56,13 @@ __init__() {
   level._effect[#"hash_1e033a5d335f9c80"] = #"hash_23bccae9728cc69";
   level._effect[#"tugboat_surround"] = #"hash_263ef2a7714f7e0";
   level._effect[#"tugboat_fx"] = #"hash_2ab0dbe0ca737540";
-  level._effect[#"hash_22ffb9cf999f16c0"] = #"hash_584c98e347b6f907";
+  level._effect[#"tugboat_spawn_fx"] = #"hash_584c98e347b6f907";
   level._effect[#"shower_circle_80"] = #"hash_1a2cfde50dc2ab2f";
   level._effect[#"shower_circle_98"] = #"hash_1a297fe50dbf9f3e";
   level._effect[#"shower_circle_112"] = #"hash_7a9e103684dcd9e9";
   level._effect[#"shower_circle_128"] = #"hash_7a93943684d3b2b0";
   level._effect[#"generator_sparks"] = #"hash_274f915858a5ba54";
-  level._effect[#"hash_45f8b28452411669"] = #"light/fx_light_headlight_generic";
+  level._effect[#"simon_light_fx"] = #"light/fx_light_headlight_generic";
   level._effect[#"ghost_death_fx"] = #"hash_680b356c3283464f";
   level._effect[#"ghost_spawn_fx"] = #"hash_7c6c9fc790a994bb";
   level._effect[#"ghost_despawn_fx"] = #"hash_652d04bb8b685664";
@@ -188,9 +188,9 @@ tugboat_surround_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
   }
 }
 
-function_28de769f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+tugboat_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon(#"death");
-  util::playFXOnTag(localclientnum, level._effect[#"hash_22ffb9cf999f16c0"], self, "tag_body");
+  util::playFXOnTag(localclientnum, level._effect[#"tugboat_spawn_fx"], self, "tag_body");
 }
 
 function_a2368263(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -466,7 +466,7 @@ function_da095cb3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_25af2af1 = self playLoopSound(#"hash_39ff4d3373413768");
     }
 
-    self.var_19e6dc6f = util::playFXOnTag(localclientnum, level._effect[#"hash_45f8b28452411669"], self, "tag_origin");
+    self.var_19e6dc6f = util::playFXOnTag(localclientnum, level._effect[#"simon_light_fx"], self, "tag_origin");
     return;
   }
 

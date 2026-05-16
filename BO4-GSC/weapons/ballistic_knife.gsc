@@ -14,16 +14,16 @@ init_shared() {
   weaponobjects::function_e6400478(#"special_ballisticknife_t8_dw_dw", &createballisticknifewatcher, 0);
   weaponobjects::function_e6400478(#"hash_4646a4e86c781e84", &createballisticknifewatcher, 0);
   weaponobjects::function_e6400478(#"special_crossbow_t8", &createballisticknifewatcher, 0);
-  weaponobjects::function_dcc8b5d5(#"special_crossbow_t8", "pistolscope", #"hash_6c40a7a156b05224");
-  weaponobjects::function_e6400478(#"hash_6c40a7a156b05224", &createballisticknifewatcher, 0);
+  weaponobjects::function_dcc8b5d5(#"special_crossbow_t8", "pistolscope", #"pistolscope_special_crossbow_t8");
+  weaponobjects::function_e6400478(#"pistolscope_special_crossbow_t8", &createballisticknifewatcher, 0);
 
   if(isDefined(level.var_b68902c4) && level.var_b68902c4) {
     weaponobjects::function_e6400478(#"special_ballisticknife_t8_dw_upgraded", &createballisticknifewatcher, 0);
     weaponobjects::function_e6400478(#"special_ballisticknife_t8_dw_upgraded_dw", &createballisticknifewatcher, 0);
     weaponobjects::function_e6400478(#"hash_176b8e0e47a43cb9", &createballisticknifewatcher, 0);
     weaponobjects::function_e6400478(#"special_crossbow_t8_upgraded", &createballisticknifewatcher, 0);
-    weaponobjects::function_dcc8b5d5(#"special_crossbow_t8_upgraded", "pistolscope", #"hash_73258bb36ebe26d");
-    weaponobjects::function_e6400478(#"hash_73258bb36ebe26d", &createballisticknifewatcher, 0);
+    weaponobjects::function_dcc8b5d5(#"special_crossbow_t8_upgraded", "pistolscope", #"pistolscope_special_crossbow_t8_upgraded");
+    weaponobjects::function_e6400478(#"pistolscope_special_crossbow_t8_upgraded", &createballisticknifewatcher, 0);
   }
 }
 

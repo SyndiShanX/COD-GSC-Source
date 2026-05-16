@@ -559,7 +559,7 @@ function_6ae10cf1(cmd) {
     case #"hash_3889ece40febdc1e":
       function_2d69eef6("<dev string:x36b>");
       break;
-    case #"hash_1d61c627e61ca434":
+    case #"skeleton_speed_run":
       function_2d69eef6("<dev string:x372>");
       break;
     case #"hash_2a2ceb9249805ca7":

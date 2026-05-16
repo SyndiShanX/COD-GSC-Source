@@ -243,14 +243,14 @@ function_96d38b95(result) {
   end_match_loadout.loadout_secondary_weapon = secondaryweaponname;
   end_match_loadout.loadout_primary_attachments = primaryweaponattachstr;
   end_match_loadout.loadout_secondary_attachments = secondaryweaponattachstr;
-  var_b65d83f5 = spawnStruct();
-  var_b65d83f5.best_score = bestscore;
-  var_b65d83f5.best_kills = bestkills;
-  var_b65d83f5.best_kd = bestkdratio;
-  var_b65d83f5.total_kills = totalkills;
-  var_b65d83f5.total_deaths = totaldeaths;
-  var_b65d83f5.total_wins = totalwins;
-  var_b65d83f5.total_xp = totalxp;
+  end_match_totals = spawnStruct();
+  end_match_totals.best_score = bestscore;
+  end_match_totals.best_kills = bestkills;
+  end_match_totals.best_kd = bestkdratio;
+  end_match_totals.total_kills = totalkills;
+  end_match_totals.total_deaths = totaldeaths;
+  end_match_totals.total_wins = totalwins;
+  end_match_totals.total_xp = totalxp;
   end_match_contracts = spawnStruct();
   end_match_contracts.daily_contract_id = dailycontractid;
   end_match_contracts.daily_contract_target = dailycontracttarget;
@@ -274,7 +274,7 @@ function_96d38b95(result) {
   end_match_specialist.specialist_legs = player function_cde23658();
   end_match_specialist.specialist_torso = player function_92ea4100();
   end_match_specialist.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"hash_43cb38816354c3aa", var_b65d83f5, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
+  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"end_match_totals", end_match_totals, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
 }
 
 record_special_move_data_for_life(killer) {

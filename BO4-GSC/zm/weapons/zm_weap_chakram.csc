@@ -33,7 +33,7 @@ __init__() {
   level._effect[#"sword_bloodswipe_l_1p"] = #"zombie/fx_sword_slash_left_1p_zod_zmb";
   level._effect[#"hash_720f204e4406ddbf"] = #"hash_59cdb0226e644934";
   level._effect[#"hash_15593b3f860346f5"] = #"hash_1e957556dba822e6";
-  level._effect[#"hash_5f9bb382a47d637d"] = #"hash_68100f653a5baf2f";
+  level._effect[#"chakram_head_pop"] = #"hash_68100f653a5baf2f";
   level._effect[#"chakram_throw_trail"] = #"hash_1ff88e4b147015b2";
   level._effect[#"chakram_throw_impact"] = #"hash_656272f0184ae1fc";
   level._effect[#"hash_5c2ba805602ea484"] = #"hash_3904517ed3636935";
@@ -70,7 +70,7 @@ chakram_melee_hit(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 chakram_head_pop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[#"hash_5f9bb382a47d637d"], self, "j_head");
+    util::playFXOnTag(localclientnum, level._effect[#"chakram_head_pop"], self, "j_head");
   }
 }
 

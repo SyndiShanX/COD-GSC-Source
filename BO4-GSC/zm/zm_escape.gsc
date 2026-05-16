@@ -992,7 +992,7 @@ function_91d91b76(cmd) {
     case #"super_open_sesame":
       level thread super_open_sesame();
       return 1;
-    case #"hash_19614ce604c9ce92":
+    case #"test_player_respawn_points":
       level thread function_2b57b5d6();
       return 1;
     case #"hash_be933dada1170a":

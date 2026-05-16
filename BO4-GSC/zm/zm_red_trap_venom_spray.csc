@@ -8,10 +8,10 @@
 #namespace zm_red_trap_venom_spray;
 
 init() {
-  clientfield::register("toplayer", "" + #"hash_686e5c0d7af86361", 16000, 1, "int", &function_be33348b, 0, 0);
+  clientfield::register("toplayer", "" + #"venom_spray_postfx", 16000, 1, "int", &venom_spray_postfx, 0, 0);
 }
 
-function_be33348b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+venom_spray_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self postfx::playpostfxbundle(#"pstfx_blood_wash");
     self postfx::playpostfxbundle(#"pstfx_zm_acid_dmg");

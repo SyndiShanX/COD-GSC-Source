@@ -841,7 +841,7 @@ function_9e7129d2(e_player, s_stone, var_6cf4ded4, str_hint) {
     e_player clientfield::set_to_player("" + #"vision_stone_wormhole_sfx", 1);
     e_player clientfield::set_to_player("" + #"vision_stone_wormhole_fov", 1);
     e_player util::delay(2.5, "disconnect", &util::create_streamer_hint, e_player.origin, e_player.angles, 1);
-    e_player playrumblelooponentity(#"hash_5d8a1a68b12dfb24");
+    e_player playrumblelooponentity(#"zm_fasttravel_vortex_rumble");
 
     if(var_6cf4ded4 == 17) {
       n_time = gettime();
@@ -860,7 +860,7 @@ function_9e7129d2(e_player, s_stone, var_6cf4ded4, str_hint) {
 
   if(isPlayer(e_player)) {
     e_player notify(#"hash_30795d8b5cd79089");
-    e_player stoprumble(#"hash_5d8a1a68b12dfb24");
+    e_player stoprumble(#"zm_fasttravel_vortex_rumble");
     e_player util::streamer_wait(undefined, 0, 0.5);
 
     if(isPlayer(e_player)) {
@@ -2294,8 +2294,8 @@ function_900b7dca(var_878f0f0a, var_5a365909 = 0, e_player, var_a797e723 = 0) {
     }
 
     if(self.var_aa273e8b >= self.var_f2831f45 - 1) {
-      level notify(#"hash_73c2d56d8912635b");
-      self.var_c176969a notify(#"hash_73c2d56d8912635b");
+      level notify(#"ghost_path_near_end");
+      self.var_c176969a notify(#"ghost_path_near_end");
     }
 
     if(isDefined(var_49e93815) && isDefined(var_49e93815.radius)) {
@@ -2425,7 +2425,7 @@ function_b5697137() {
       return;
     }
 
-    var_c176969a waittill(#"hash_73c2d56d8912635b", #"reached_end_node", #"death");
+    var_c176969a waittill(#"ghost_path_near_end", #"reached_end_node", #"death");
 
     if(isvehicle(var_c176969a)) {
       var_c176969a function_58cb08ba();

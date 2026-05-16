@@ -45,14 +45,14 @@
 #namespace zm_mansion_zstandard;
 
 function_84139b27() {
-  zm_utility::function_c492c4d6(#"cellar", #"hash_1b5f923615231b33", array(#"zone_cellar"), array(#"billiards_room", #"library", #"greenhouse", #"cemetery"), #"hash_d991d688c218647", #"hash_2b2357a02d83b291");
-  zm_utility::function_c492c4d6(#"main_hall", #"hash_7a9b6ecf9efe213d", array(#"zone_main_hall"), array(#"library", #"dining_room", #"grand_staircase"), #"hash_23e3f0727cf654e1", #"hash_56ee5965eeb986f7");
-  zm_utility::function_c492c4d6(#"grand_staircase", #"hash_385f3c24f5a215a0", array(#"zone_grand_staircase", #"zone_entrance_hall"), array(#"billiards_room", #"greenhouse", #"dining_room", #"library"), #"hash_17eb32ca84395d46", #"hash_63182288b2fa8fe2");
-  zm_utility::function_c492c4d6(#"library", #"hash_1ed56b51775c6337", array(#"zone_library"), array(#"grand_staircase", #"main_hall", #"cemetery"), #"hash_18ccedb519d08fdb", #"hash_3d3024b021773e75");
-  zm_utility::function_c492c4d6(#"greenhouse", #"hash_6ca6299c59dc3611", array(#"zone_greenhouse_lab"), array(#"main_hall", #"cellar", #"grand_staircase", #"dining_room"), #"hash_1eab9450a8098785", #"hash_11659cb4f681fe2b");
-  zm_utility::function_c492c4d6(#"dining_room", #"hash_630110b8f5ec36d9", array(#"zone_dining_room"), array(#"greenhouse", #"cellar", #"cemetery"), #"hash_59f4621f89897419", #"hash_9374fbb3272c53f");
-  zm_utility::function_c492c4d6(#"billiards_room", #"hash_1d07f6440958f050", array(#"zone_library_hallway_upper", #"zone_foyer_westend"), array(#"cemetery", #"grand_staircase", #"greenhouse"), #"hash_3d69c72a393f3836", #"hash_3d83f27f0bfd3a72");
-  zm_utility::function_c492c4d6(#"cemetery", #"hash_551b339e17319aa0", array(#"zone_cemetery_mausoleum"), array(#"library", #"billiards_room", #"main_hall", #"cellar"), #"hash_2b4478e34d38202", #"hash_a3797801599641e");
+  zm_utility::function_c492c4d6(#"cellar", #"s_defend_area_obj_cellar", array(#"zone_cellar"), array(#"billiards_room", #"library", #"greenhouse", #"cemetery"), #"hash_d991d688c218647", #"hash_2b2357a02d83b291");
+  zm_utility::function_c492c4d6(#"main_hall", #"s_defend_area_obj_main_hall", array(#"zone_main_hall"), array(#"library", #"dining_room", #"grand_staircase"), #"hash_23e3f0727cf654e1", #"hash_56ee5965eeb986f7");
+  zm_utility::function_c492c4d6(#"grand_staircase", #"s_defend_area_obj_grand_staircase", array(#"zone_grand_staircase", #"zone_entrance_hall"), array(#"billiards_room", #"greenhouse", #"dining_room", #"library"), #"hash_17eb32ca84395d46", #"hash_63182288b2fa8fe2");
+  zm_utility::function_c492c4d6(#"library", #"s_defend_area_obj_library", array(#"zone_library"), array(#"grand_staircase", #"main_hall", #"cemetery"), #"hash_18ccedb519d08fdb", #"hash_3d3024b021773e75");
+  zm_utility::function_c492c4d6(#"greenhouse", #"s_defend_area_obj_greenhouse", array(#"zone_greenhouse_lab"), array(#"main_hall", #"cellar", #"grand_staircase", #"dining_room"), #"hash_1eab9450a8098785", #"hash_11659cb4f681fe2b");
+  zm_utility::function_c492c4d6(#"dining_room", #"s_defend_area_obj_dining_room", array(#"zone_dining_room"), array(#"greenhouse", #"cellar", #"cemetery"), #"hash_59f4621f89897419", #"hash_9374fbb3272c53f");
+  zm_utility::function_c492c4d6(#"billiards_room", #"s_defend_area_obj_billiards_room", array(#"zone_library_hallway_upper", #"zone_foyer_westend"), array(#"cemetery", #"grand_staircase", #"greenhouse"), #"hash_3d69c72a393f3836", #"hash_3d83f27f0bfd3a72");
+  zm_utility::function_c492c4d6(#"cemetery", #"s_defend_area_obj_cemetery", array(#"zone_cemetery_mausoleum"), array(#"library", #"billiards_room", #"main_hall", #"cellar"), #"hash_2b4478e34d38202", #"hash_a3797801599641e");
 
   zm_utility::function_1e856719();
 }
@@ -61,7 +61,7 @@ main() {
   level thread function_fe69176c();
   function_edd5bb1a();
   function_ac904e5e();
-  callback::function_74872db6(&function_74872db6);
+  callback::on_round_begin(&on_round_begin);
   level.fn_custom_round_ai_spawn = undefined;
   level.var_3f86fd35 = 8;
   level.var_d7853f35 = 14;
@@ -102,7 +102,7 @@ function_5f03f689() {
   }
 }
 
-function_74872db6() {
+on_round_begin() {
   level.var_2e3a6cbe = undefined;
   level.var_d614a8b4 = undefined;
   level.var_11f7a9af = undefined;

@@ -119,7 +119,7 @@ function_7b1ec82e(s_result) {
 
 function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade endoncallback(&function_5e056d93, #"death");
-  e_grenade flag::init(#"hash_5e780b1a8f2d1e3b");
+  e_grenade flag::init(#"stop_following_homunculus");
 
   if(self laststand::player_is_in_laststand()) {
     if(isDefined(e_grenade.damagearea)) {
@@ -234,7 +234,7 @@ function_5e056d93(str_notify) {
 function_60b99c5a(grenade) {
   mdl_anchor = grenade.mdl_anchor;
 
-  while(!grenade flag::get(#"hash_5e780b1a8f2d1e3b")) {
+  while(!grenade flag::get(#"stop_following_homunculus")) {
     a_zombies = zombie_utility::get_zombie_array();
 
     foreach(zombie in a_zombies) {
@@ -603,7 +603,7 @@ function_e383ca2f() {
   self.var_69e642c7 scene::play(#"aib_t8_zm_zod_homunculus_dth_01", self.mdl_anchor);
   mdl_anchor = self.mdl_anchor;
   mdl_anchor clientfield::set("" + #"hash_2d49d2cf3d339e18", 1);
-  self flag::set(#"hash_5e780b1a8f2d1e3b");
+  self flag::set(#"stop_following_homunculus");
   wait 0.2;
   mdl_anchor delete();
 

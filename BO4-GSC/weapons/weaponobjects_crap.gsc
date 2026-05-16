@@ -15,7 +15,7 @@ function_b455d5d8() {
   function_e6400478(#"qrdrone", &createqrdronewatcher, 1);
   function_e6400478(#"helicopter_player", &createplayerhelicopterwatcher, 1);
   function_e6400478(#"tr_flechette_t8", &function_1eaa3e20);
-  function_e6400478(#"hash_17ac9a2101b6ff2d", &function_1eaa3e20);
+  function_e6400478(#"dualoptic_tr_flechette_t8", &function_1eaa3e20);
 
   if(isDefined(level.var_b68902c4) && level.var_b68902c4) {
     function_e6400478(#"tr_flechette_t8_upgraded", &function_1eaa3e20);

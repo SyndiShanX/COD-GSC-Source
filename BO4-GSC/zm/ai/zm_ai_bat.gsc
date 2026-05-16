@@ -257,7 +257,7 @@ function_607df9c6(ai) {
   }
 
   ai.var_e21c1964 = 1;
-  var_cd1cfeed = ai animmappingsearch(#"hash_605e435c80f0d33b");
+  var_cd1cfeed = ai animmappingsearch(#"anim_transform_spawn");
   pos = physicstrace(ai.origin, ai.origin + (0, 0, -10000), (-2, -2, -2), (2, 2, 2), ai, 1);
   pos = pos[#"position"];
 

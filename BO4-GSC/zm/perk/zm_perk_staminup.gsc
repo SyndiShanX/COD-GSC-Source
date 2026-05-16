@@ -25,7 +25,7 @@ __init__() {
 
 enable_staminup_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_staminup", #"perk_staminup", 2000, #"hash_26af21c3b4413875", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), #"zmperksstaminup");
+    zm_perks::register_perk_basic_info(#"specialty_staminup", #"perk_staminup", 2000, #"zombie/perk_marathon_keyboard", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), #"zmperksstaminup");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_staminup", #"perk_staminup", 2000, #"zombie/perk_marathon", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), #"zmperksstaminup");
   }

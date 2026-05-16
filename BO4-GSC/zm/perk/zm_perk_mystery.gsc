@@ -18,7 +18,7 @@ __init__() {
 
 function_27473e44() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_mystery", #"perk_mystery", 1500, #"hash_7db4db936bc2abe6", getweapon("zombie_perk_bottle_mystery"), getweapon("zombie_perk_vapor_juggernaut"), #"zmperkssecretsauce");
+    zm_perks::register_perk_basic_info(#"specialty_mystery", #"perk_mystery", 1500, #"zombie/perk_mystery_keyboard", getweapon("zombie_perk_bottle_mystery"), getweapon("zombie_perk_vapor_juggernaut"), #"zmperkssecretsauce");
   } else {
     zm_perks::register_perk_basic_info(#"specialty_mystery", #"perk_mystery", 1500, #"zombie/perk_mystery", getweapon("zombie_perk_bottle_mystery"), getweapon("zombie_perk_vapor_juggernaut"), #"zmperkssecretsauce");
   }

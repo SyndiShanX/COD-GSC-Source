@@ -1946,7 +1946,7 @@ function_46aa5dda() {
 }
 
 function_a409c2a7(e_target) {
-  if(namespace_df88241c::function_4748fb49() >= namespace_df88241c::function_59257d57()) {
+  if(nova_crawler_util::function_4748fb49() >= nova_crawler_util::function_59257d57()) {
     return undefined;
   }
 
@@ -2085,7 +2085,7 @@ function_45bb11e4(spot) {
 }
 
 function_ff73da7f(e_target) {
-  if(namespace_df88241c::function_4748fb49() >= namespace_df88241c::function_59257d57()) {
+  if(nova_crawler_util::function_4748fb49() >= nova_crawler_util::function_59257d57()) {
     return undefined;
   }
 
@@ -2211,7 +2211,7 @@ function_13f107c4(ai, ent) {
 }
 
 function_dd836251() {
-  e_target = namespace_df88241c::function_a5abd591();
+  e_target = nova_crawler_util::function_a5abd591();
 
   if(!isDefined(e_target)) {
     return undefined;
@@ -2249,7 +2249,7 @@ crawler_round_spawn() {
 
 function_75309b09() {
   ai = undefined;
-  e_target = namespace_df88241c::function_a5abd591();
+  e_target = nova_crawler_util::function_a5abd591();
   sniper_location = zm_ai_white_nova_crawler::function_51e81aba(level.white_nova_crawler_sniper_locations);
 
   if(math::cointoss(33) && isDefined(sniper_location)) {

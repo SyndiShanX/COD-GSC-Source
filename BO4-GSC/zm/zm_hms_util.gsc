@@ -38,7 +38,7 @@ __init__() {
     level.var_df9f1a00 = [];
     callback::on_ai_spawned(&function_df54cbcd);
     callback::on_ai_killed(&function_86b062a6);
-    callback::function_74872db6(&function_acd2ba83);
+    callback::on_round_begin(&function_acd2ba83);
     level thread function_84b292b4();
   }
 

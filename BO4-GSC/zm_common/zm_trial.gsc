@@ -560,7 +560,7 @@ function_17b04fd7() {
   }
 }
 
-function_74872db6() {
+on_round_begin() {
   if(!is_trial_mode()) {
     return;
   }

@@ -18,8 +18,8 @@ init() {
   callback::on_ai_killed(&function_60f79e9c);
   level.n_electric_trap_kills = 0;
   callback::on_ai_killed(&function_7fe4eb1d);
-  callback::function_74872db6(&function_60193f7d);
-  callback::function_74872db6(&function_dab4588);
+  callback::on_round_begin(&function_60193f7d);
+  callback::on_round_begin(&function_dab4588);
   callback::on_round_end(&function_d62a70b4);
 }
 

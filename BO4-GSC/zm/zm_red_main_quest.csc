@@ -60,7 +60,7 @@ init() {
   clientfield::register("toplayer", "" + #"hash_7f85dc0ce20a6f2c", 16000, 1, "int", &function_40cc4833, 0, 0);
   clientfield::register("toplayer", "" + #"hash_4e3e66f200f76f34", 16000, 1, "int", &function_83c7dece, 0, 0);
   clientfield::register("toplayer", "" + #"hash_565ca9982285f23e", 16000, 1, "int", &function_530c191c, 0, 0);
-  clientfield::register("actor", "" + #"hash_415416bf220de94", 16000, 1, "int", &function_cb766634, 0, 0);
+  clientfield::register("actor", "" + #"play_death_uncharged", 16000, 1, "int", &play_death_uncharged, 0, 0);
   clientfield::register("actor", "" + #"play_death_charged", 16000, 1, "int", &play_death_charged, 0, 0);
   clientfield::register("actor", "" + #"hash_24b5302c2f39ebc2", 16000, 1, "int", &function_fac1b5c7, 0, 0);
   clientfield::register("actor", "" + #"hash_6a8479b5a5b359a7", 16000, 1, "int", &function_106dc737, 0, 0);
@@ -106,7 +106,7 @@ init() {
   level._effect[#"hash_4d77ba61cd7f3eb7"] = #"hash_25c4a39b373bfc67";
   level._effect[#"hash_7fc7f7b5958831d4"] = #"hash_520fd2427c5fcea3";
   level._effect[#"hash_431f319e4b8fe9db"] = #"hash_37bc7da216893b77";
-  level._effect[#"hash_415416bf220de94"] = #"hash_7b7ba0ac0755a064";
+  level._effect[#"play_death_uncharged"] = #"hash_7b7ba0ac0755a064";
   level._effect[#"play_death_charged"] = #"hash_318aaa12f9dc7fd4";
   level._effect[#"hash_24b5302c2f39ebc2"] = #"hash_569b6effe4db6f54";
   level._effect[#"hash_6a8479b5a5b359a7"] = #"hash_513bda1b67490064";
@@ -856,8 +856,8 @@ function_530c191c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_cb766634(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  str_fx = level._effect[#"hash_415416bf220de94"];
+play_death_uncharged(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  str_fx = level._effect[#"play_death_uncharged"];
   self function_95d76b40(localclientnum, newval, str_fx);
 }
 

@@ -74,7 +74,7 @@ init_clientfields() {
   clientfield::register("world", "" + #"engineer_spark_fx", 1, 1, "int");
   clientfield::register("world", "" + #"fireworks_fx", 1, 2, "counter");
   clientfield::register("world", "" + #"crash_fx", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_4f672a8a7ae530e5", 1, 1, "int");
+  clientfield::register("world", "" + #"hero_weapons_in_box", 1, 1, "int");
 }
 
 init_flags() {
@@ -1540,7 +1540,7 @@ function_9693e041(player) {
 
   if(player hasweapon(w_frost_shield)) {
     if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
-      self.hint_string = zm_utility::function_d6046228(#"hash_5c35bbb6c39ba19a", #"hash_3bf7b3dc87b1015e");
+      self.hint_string = zm_utility::function_d6046228(#"zombie/repair_shield_upg", #"hash_3bf7b3dc87b1015e");
       _shad_turret_debug_server = 1;
     }
   }
@@ -2427,7 +2427,7 @@ function_d684005e(a_keys) {
   var_9fd301cd = getweapon(var_8e4297a8);
   zm_weapons::include_zombie_weapon(var_8e4297a8, 1);
   zm_weapons::add_zombie_weapon(var_8e4297a8, "", 0, 0, undefined, undefined, 0, "", "special", 0, undefined, 1);
-  level clientfield::set("" + #"hash_4f672a8a7ae530e5", 1);
+  level clientfield::set("" + #"hero_weapons_in_box", 1);
   level thread function_3fa7aef2(var_9fd301cd, self);
   arrayinsert(a_keys, var_9fd301cd, 0);
   return a_keys;
@@ -2473,7 +2473,7 @@ function_3fa7aef2(var_8352fb8a, e_player) {
   }
 
   zm_weapons::function_f1114209(var_8352fb8a);
-  level clientfield::set("" + #"hash_4f672a8a7ae530e5", 0);
+  level clientfield::set("" + #"hero_weapons_in_box", 0);
 
   if(isalive(e_player) && e_player.var_fd05e363 === var_8352fb8a) {
     e_player zm_audio::create_and_play_dialog(#"generic", #"response_positive");

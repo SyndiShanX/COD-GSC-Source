@@ -401,7 +401,7 @@ menuclass(response, forcedclass, updatecharacterindex, closemenus) {
       self loadout::give_loadout(self.pers[#"team"], self.pers[#"class"]);
       self killstreaks::give_owned();
     } else if(!var_8d7a946 && self.pers[#"changed_class"] && !(isDefined(level.var_f46d16f0) && level.var_f46d16f0)) {
-      self luinotifyevent(#"hash_6b67aa04e378d681", 1, 6);
+      self luinotifyevent(#"game_update_notification", 1, 6);
     }
   }
 
